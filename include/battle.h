@@ -2,179 +2,21 @@
 #define GUARD_BATTLE_H
 
 #include "sprite.h"
+#include "constants/battle_constants.h"
 
-#define BATTLE_TYPE_DOUBLE          0x0001
-#define BATTLE_TYPE_LINK            0x0002
-#define BATTLE_TYPE_WILD            0x0004
-#define BATTLE_TYPE_TRAINER         0x0008
-#define BATTLE_TYPE_FIRST_BATTLE    0x0010
-#define BATTLE_TYPE_20              0x0020
-#define BATTLE_TYPE_MULTI           0x0040
-#define BATTLE_TYPE_SAFARI          0x0080
-#define BATTLE_TYPE_BATTLE_TOWER    0x0100
-#define BATTLE_TYPE_WALLY_TUTORIAL  0x0200
-#define BATTLE_TYPE_ROAMER          0x0400
-#define BATTLE_TYPE_EREADER_TRAINER 0x0800
-#define BATTLE_TYPE_KYOGRE_GROUDON  0x1000
-#define BATTLE_TYPE_LEGENDARY       0x2000
-#define BATTLE_TYPE_REGI            0x4000
-
-#define BATTLE_WON                  0x1
-#define BATTLE_LOST                 0x2
-#define BATTLE_DREW                 0x3
-#define BATTLE_RAN                  0x4
-#define BATTLE_PLAYER_TELEPORTED    0x5
-#define BATTLE_POKE_FLED            0x6
-#define BATTLE_CAUGHT               0x7
-#define BATTLE_OPPONENT_TELEPORTED  0xA
-
-#define AI_ACTION_DONE          0x0001
-#define AI_ACTION_FLEE          0x0002
-#define AI_ACTION_WATCH         0x0004
-#define AI_ACTION_DO_NOT_ATTACK 0x0008
-#define AI_ACTION_UNK5          0x0010
-#define AI_ACTION_UNK6          0x0020
-#define AI_ACTION_UNK7          0x0040
-#define AI_ACTION_UNK8          0x0080
-
-#define STATUS_SLEEP            0x7
-#define STATUS_POISON           0x8
-#define STATUS_BURN             0x10
-#define STATUS_FREEZE           0x20
-#define STATUS_PARALYSIS        0x40
-#define STATUS_TOXIC_POISON     0x80
-#define STATUS_TOXIC_COUNTER    0xF00
-
-#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
-#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
-
-#define STATUS2_CONFUSION           0x00000007
-#define STATUS2_FLINCHED            0x00000008
-#define STATUS2_UPROAR              0x00000070
-#define STATUS2_BIDE                0x00000300  //two bits 0x100 0x200
-#define STATUS2_LOCK_CONFUSE        0x00000C00
-#define STATUS2_MULTIPLETURNS       0x00001000
-#define STATUS2_WRAPPED             0x0000E000
-#define STATUS2_INFATUATION         0x000F0000
-#define STATUS2_FOCUS_ENERGY        0x00100000
-#define STATUS2_TRANSFORMED         0x00200000
-#define STATUS2_RECHARGE            0x00400000
-#define STATUS2_RAGE                0x00800000
-#define STATUS2_SUBSTITUTE          0x01000000
-#define STATUS2_DESTINY_BOND        0x02000000
-#define STATUS2_ESCAPE_PREVENTION   0x04000000
-#define STATUS2_NIGHTMARE           0x08000000
-#define STATUS2_CURSED              0x10000000
-#define STATUS2_FORESIGHT           0x20000000
-#define STATUS2_DEFENSE_CURL        0x40000000
-#define STATUS2_TORMENT             0x80000000
-
-#define STATUS3_LEECHSEED_BANK          0x3
-#define STATUS3_LEECHSEED               0x4
-#define STATUS3_ALWAYS_HITS             0x18    //two bits
-#define STATUS3_PERISH_SONG             0x20
-#define STATUS3_ON_AIR                  0x40
-#define STATUS3_UNDERGROUND             0x80
-#define STATUS3_MINIMIZED               0x100
-#define STATUS3_ROOTED                  0x400
-#define STATUS3_CHARGED_UP              0x200
-#define STATUS3_YAWN                    0x1800  //two bits
-#define STATUS3_IMPRISIONED             0x2000
-#define STATUS3_GRUDGE                  0x4000
-#define STATUS3_CANT_SCORE_A_CRIT       0x8000
-#define STATUS3_MUDSPORT                0x10000
-#define STATUS3_WATERSPORT              0x20000
-#define STATUS3_UNDERWATER              0x40000
-#define STATUS3_INTIMIDATE_POKES        0x80000
-#define STATUS3_TRACE                   0x100000
-
-#define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
-
-#define HITMARKER_x20                   0x00000020
-#define HITMARKER_DESTINYBOND           0x00000040
-#define HITMARKER_NO_ANIMATIONS         0x00000080
-#define HITMARKER_IGNORE_SUBSTITUTE     0x00000100
-#define HITMARKER_NO_ATTACKSTRING       0x00000200
-#define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
-#define HITMARKER_NO_PPDEDUCT           0x00000800
-#define HITMARKER_PURSUIT_TRAP          0x00001000
-#define HITMARKER_IGNORE_SAFEGUARD      0x00002000
-#define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
-#define HITMARKER_IGNORE_ON_AIR         0x00010000
-#define HITMARKER_IGNORE_UNDERGROUND    0x00020000
-#define HITMARKER_IGNORE_UNDERWATER     0x00040000
-#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
-#define HITMARKER_x100000               0x00100000
-#define HITMARKER_x200000               0x00200000
-#define HITMARKER_x400000               0x00400000
-#define HITMARKER_x800000               0x00800000
-#define HITMARKER_GRUDGE                0x01000000
-#define HITMARKER_OBEYS                 0x02000000
-#define HITMARKER_x8000000              0x08000000
-#define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
-#define HITMARKER_UNK(bank)             ((0x10000000 << bank))
-
-#define SIDE_STATUS_REFLECT          (1 << 0)
-#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
-#define SIDE_STATUS_X4               (1 << 2)
-#define SIDE_STATUS_SPIKES           (1 << 4)
-#define SIDE_STATUS_SAFEGUARD        (1 << 5)
-#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
-#define SIDE_STATUS_MIST             (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
-
-#define ABILITYEFFECT_ON_SWITCHIN         0x0
-#define ABILITYEFFECT_ENDTURN             0x1
-#define ABILITYEFFECT_MOVES_BLOCK         0x2
-#define ABILITYEFFECT_ABSORBING           0x3
-#define ABILITYEFFECT_CONTACT             0x4
-#define ABILITYEFFECT_IMMUNITY            0x5
-#define ABILITYEFFECT_FORECAST            0x6
-#define ABILITYEFFECT_SYNCHRONIZE         0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
-#define ABILITYEFFECT_INTIMIDATE1         0x9
-#define ABILITYEFFECT_INTIMIDATE2         0xA
-#define ABILITYEFFECT_TRACE               0xB
-#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
-#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
-#define ABILITYEFFECT_FIELD_SPORT         0xE
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
-#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
-#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
-#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
-#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
-
-#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
-
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
-
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
-
-#define MAX_TRAINER_ITEMS 4
-#define MAX_MON_MOVES 4
-#define MAX_BANKS_BATTLE 4
-
-#define WEATHER_RAIN_TEMPORARY      (1 << 0)
-#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
-#define WEATHER_RAIN_PERMANENT      (1 << 2)
-#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
-#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
-#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
-#define WEATHER_SUN_TEMPORARY       (1 << 5)
-#define WEATHER_SUN_PERMANENT       (1 << 6)
-#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
-#define WEATHER_HAIL                (1 << 7)
-
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
+enum
+{
+    BATTLE_TERRAIN_GRASS,
+    BATTLE_TERRAIN_LONG_GRASS,
+    BATTLE_TERRAIN_SAND,
+    BATTLE_TERRAIN_UNDERWATER,
+    BATTLE_TERRAIN_WATER,
+    BATTLE_TERRAIN_POND,
+    BATTLE_TERRAIN_MOUNTAIN,
+    BATTLE_TERRAIN_CAVE,
+    BATTLE_TERRAIN_BUILDING,
+    BATTLE_TERRAIN_PLAIN,
+};
 
 struct Trainer
 {
@@ -221,7 +63,11 @@ struct AI_ThinkingStruct /* 0x2016800 */
 
 struct BattleStruct /* 0x2000000 */
 {
-    u8 filler0[0x15DDE];
+    /*0x00000*/ u8 unk0;
+    /*0x00001*/ bool8 unk1;
+    /*0x00002*/ u8 unk2;
+    /*0x00003*/ bool8 unk3;
+    u8 filler4[0x15DDA];
     /*0x15DDE*/ u8 unk15DDE;
     /*0x15DDF*/ u8 unk15DDF;
     /*0x15DE0*/ u8 filler15DE0[0x220];
@@ -229,12 +75,11 @@ struct BattleStruct /* 0x2000000 */
     /*0x16001*/ u8 turnEffectsBank;
     /*0x16002*/ u8 animTurn;
     /*0x16003*/ u8 scriptingActive;
-    /*0x16004*/ u8 wrappedMove1[4];
-    /*0x16008*/ u8 wrappedMove2[4];
+    /*0x16004*/ u8 wrappedMove[8];
     /*0x1600C*/ u8 cmd49StateTracker;
     /*0x1600D*/ u8 unk1600D;
     /*0x1600E*/ u8 turncountersTracker;
-    /*0x1600F*/ u8 cmd23StateTracker;
+    /*0x1600F*/ u8 getexpStateTracker;
     /*0x16010*/ u8 moveTarget[4];
     /*0x16014*/ u8 unk16014;
     /*0x16015*/ u8 unk16015;
@@ -382,10 +227,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x160D5*/ u8 unk160D5;
     /*0x160D6*/ u8 unk160D6;
     /*0x160D7*/ u8 unk160D7;
-    /*0x160D8*/ u8 unk160D8;
-    /*0x160D9*/ u8 unk160D9;
-    /*0x160DA*/ u8 unk160DA;
-    /*0x160DB*/ u8 unk160DB;
+    /*0x160D8*/ u8 unk160D8[2];
+    /*0x160DA*/ u8 unk160DA[2];
     /*0x160DC*/ u8 unk160DC;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
@@ -461,7 +304,7 @@ struct BattleStruct /* 0x2000000 */
 
 struct DisableStruct
 {
-    /*0x00*/ u32 unk0;
+    /*0x00*/ u32 transformedMonPersonality;
     /*0x04*/ u16 disabledMove;
     /*0x06*/ u16 encoredMove;
     /*0x08*/ u8 protectUses;
@@ -518,6 +361,11 @@ struct BattleResults
     u8 unk36[10];  // usedBalls?
 };
 
+struct Struct2017100
+{
+    u32 arr[4];
+};
+
 struct Struct2017800
 {
     u8 invisible:1;
@@ -530,25 +378,25 @@ struct Struct2017800
 
 struct Struct2017810
 {
-    u8 unk0_0:1;
-    u8 unk0_1:1;
-    u8 unk0_2:1;
-    u8 unk0_3:1;
-    u8 unk0_4:1;
-    u8 unk0_5:1;
-    u8 unk0_6:1;
-    u8 unk0_7:1;
-    u8 unk1_0:1;
-    u8 unk1_1:5;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[2];
+ /*0x00*/ u8 unk0_0:1;
+ /*0x00*/ u8 unk0_1:1;
+ /*0x00*/ u8 unk0_2:1;
+ /*0x00*/ u8 unk0_3:1;
+ /*0x00*/ u8 unk0_4:1;
+ /*0x00*/ u8 unk0_5:1;
+ /*0x00*/ u8 unk0_6:1;
+ /*0x00*/ u8 unk0_7:1;
+ /*0x01*/ u8 unk1_0:1;
+ /*0x01*/ u8 unk1_1:5;
+ /*0x02*/ u8 unk2;
+ /*0x03*/ u8 unk3;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5;
+ /*0x06*/ u8 unk6;
+ /*0x07*/ u8 unk7;
+ /*0x08*/ u8 unk8;
+ /*0x09*/ u8 unk9;
+ /*0x0A*/ u8 fillerA[2];
 };
 
 struct Struct2017840
@@ -651,25 +499,36 @@ extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
 extern struct BattleResults gBattleResults;
 extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
 extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
-extern struct sideTimer gSideTimer[2];
+extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
 
-// TODO: move ewram to global.h
-extern u8 ewram[];
+// used in many battle files, it seems as though Hisashi Sogabe wrote
+// some sort of macro to replace the use of actually calling memset.
+// Perhaps it was thought calling memset was much slower?
 
-#define BATTLE_STRUCT           ((struct BattleStruct *)     (ewram + 0x00000))
-#define AI_THINKING_STRUCT      ((struct AI_ThinkingStruct *)(ewram + 0x16800))
-#define UNK_2016A00_STRUCT      ((struct UnkBattleStruct1 *) (ewram + 0x16A00))
-#define AI_STACK                ((struct AI_Stack *)         (ewram + 0x16C00))
-#define AI_ARRAY_160CC          ((struct SmallItemStruct *)  (ewram + 0x160CC))
-#define B_BATTLESCRIPTS_STACK   ((struct scriptsStack *)     (ewram + 0x17110))
-#define B_FUNCTION_STACK        ((struct funcStack *)        (ewram + 0x17140))
-#define ewram17800              ((struct Struct2017800 *)    (ewram + 0x17800))
-#define ewram17810              ((struct Struct2017810 *)    (ewram + 0x17810))
-#define ewram17840              (*(struct Struct2017840 *)   (ewram + 0x17840))
-#define ewram17000              ((u32 *)                     (ewram + 0x17100))
+// The compiler wont allow us to locally declare ptr in this macro; some
+// functions that invoke this macro will not match without this egregeous
+// assumption about the variable names, so in order to avoid this assumption,
+// we opt to pass the variables themselves, even though it is likely that
+// Sogabe assumed the variables were named src and dest. Trust me: I tried to
+// avoid assuming variable names, but the ROM just will not match without the
+// assumptions. Therefore, these macros are bad practice, but I'm putting them
+// here anyway.
+#define MEMSET_ALT(data, c, size, var, dest)    \
+{    \
+    dest = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = c;    \
+}    \
+
+#define MEMCPY_ALT(data, dest, size, var, src)    \
+{    \
+    src = (u8 *)data;    \
+    for(var = 0; var < (u32)size; var++)    \
+        dest[var] = src[var];    \
+}    \
 
 typedef void (*BattleCmdFunc)(void);
 
@@ -690,7 +549,7 @@ extern u8 gBattleTextBuff1[];
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
 void Emitcmd1(u8 a, u8 b, u8 c); //0x1
-void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
+void EmitSetMonData(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
 void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
@@ -710,7 +569,6 @@ void EmitEffectivenessSound(u8 a, u16 sound); //0x2B
 void Emitcmd44(u8 a, u16 sound);    //0x2C
 void EmitFaintingCry(u8 a); //0x2D
 void EmitIntroSlide(u8 a, u8 b); //0x2E
-void Emitcmd48(u8 a, u8 *b, u8 c); //0x30
 void Emitcmd49(u8 a);  //0x31
 void EmitSpriteInvisibility(u8 a, u8 b); //0x33
 void EmitBattleAnimation(u8 a, u8 b, u16 c); //0x34
@@ -735,7 +593,7 @@ extern u8 gBattleTextBuff1[];
 // asm/battle_1.o
 void sub_800D6D4();
 void sub_800D74C();
-void sub_800D7B8(void);
+void DrawMainBattleBackground(void);
 void sub_800DAB8();
 void sub_800DE30(u8);
 void sub_800E23C();
@@ -746,7 +604,7 @@ void InitBattle(void);
 void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
-void sub_800F808(void);
+void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
@@ -778,32 +636,28 @@ void sub_8011970(void);
 void sub_80119B4(void);
 void BattleBeginFirstTurn(void);
 void BattleTurnPassed(void);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
+bool8 TryRunFromBattle(u8 bank);
 
 // asm/battle_2.o
 void sub_8012324(void);
-void sub_8012FBC(u8, u8);
-u8 b_first_side(u8, u8, u8);
-void TurnValuesCleanUp(u8);
-void SpecialStatusesClear(void);
-void sub_80138F0(void);
-void sub_80155A4();
-void CancelMultiTurnMoves(u8 bank);
-void PrepareStringBattle();
-void sub_80156DC();
-void sub_80157C4(u8 index);
+void SwapTurnOrder(u8, u8);
+u8 GetWhoStrikesFirst(u8, u8, u8);
 
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
-u8 sub_80170DC();
-u8 sub_80173A4();
+u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
 u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
+u8 BankGetTurnOrder(u8 bank);
 
 // asm/battle_5.o
 void nullsub_91(void);
@@ -826,6 +680,7 @@ void sub_80324F8(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
+void BattleMusicStop(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

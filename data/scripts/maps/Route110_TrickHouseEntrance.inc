@@ -5,20 +5,20 @@ Route110_TrickHouseEntrance_MapScripts:: @ 8160F2B
 	.byte 0
 
 Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
-	setflag 2114
-	compare 0x40b5, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_160FCE
-	compare 0x40c1, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_160FB2
-	compare 0x40a6, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_16108E
-	compare 0x40a7, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
-	compare 0x40a7, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
-	compare 0x40a7, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
-	switch 0x40a7
+	setflag FLAG_LANDMARK_TRICK_HOUSE
+	compare VAR_TRICK_HOUSE_STATE, 1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FCE
+	compare VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FB2
+	compare VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_16108E
+	compare VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_160FDE
+	compare VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3
+	call_if_eq Route110_TrickHouseEntrance_EventScript_160FDE
+	compare VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 0
+	call_if_eq Route110_TrickHouseEntrance_EventScript_160FDE
+	switch VAR_TRICK_HOUSE_ENTRANCE_STATE_3
 	case 0, Route110_TrickHouseEntrance_EventScript_16109A
 	case 1, Route110_TrickHouseEntrance_EventScript_1610A0
 	case 3, Route110_TrickHouseEntrance_EventScript_1610A6
@@ -26,128 +26,121 @@ Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
 	end
 
 Route110_TrickHouseEntrance_EventScript_160FB2:: @ 8160FB2
-	setvar 0x40a5, 1
-	compare 0x4044, 8
-	jumpeq Route110_TrickHouseEntrance_EventScript_160FC8
-	setvar 0x40a7, 2
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 8
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_160FC8
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 2
 	end
 
 Route110_TrickHouseEntrance_EventScript_160FC8:: @ 8160FC8
-	setvar 0x40a7, 6
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 6
 	end
 
 Route110_TrickHouseEntrance_EventScript_160FCE:: @ 8160FCE
-	setvar 0x40b5, 0
-	setvar 0x40a7, 5
-	setvar 0x40a5, 1
+	setvar VAR_TRICK_HOUSE_STATE, 0
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 5
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
-	setvar 0x40a7, 0
-	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_16103C
-	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_161046
-	compare 0x4044, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_161050
-	compare 0x4044, 4
-	callif 1, Route110_TrickHouseEntrance_EventScript_16105A
-	compare 0x4044, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_161064
-	compare 0x4044, 6
-	callif 1, Route110_TrickHouseEntrance_EventScript_16106E
-	compare 0x4044, 7
-	callif 1, Route110_TrickHouseEntrance_EventScript_161078
-	compare 0x4044, 8
-	callif 1, Route110_TrickHouseEntrance_EventScript_161082
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 0
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
+	call_if_eq Route110_TrickHouseEntrance_EventScript_16103C
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 2
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161046
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 3
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161050
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 4
+	call_if_eq Route110_TrickHouseEntrance_EventScript_16105A
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161064
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 6
+	call_if_eq Route110_TrickHouseEntrance_EventScript_16106E
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 7
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161078
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 8
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161082
 	return
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
-	checkflag 2057
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE03_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161046:: @ 8161046
-	checkflag 2058
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE04_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161050:: @ 8161050
-	checkflag 2059
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE05_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16105A:: @ 816105A
-	checkflag 2060
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE06_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161064:: @ 8161064
-	checkflag 2061
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE07_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16106E:: @ 816106E
-	checkflag 2062
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_BADGE08_GET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161078:: @ 8161078
-	checkflag 2052
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	call_if_unset FLAG_SYS_GAME_CLEAR, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161082:: @ 8161082
-	setvar 0x40a7, 4
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 4
 	return
 
 Route110_TrickHouseEntrance_EventScript_161088:: @ 8161088
-	setvar 0x40a7, 3
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3
 	return
 
 Route110_TrickHouseEntrance_EventScript_16108E:: @ 816108E
-	movespriteperm 1, 5, 2
-	spritebehave 1, 4
+	setobjectxyperm 1, 5, 2
+	setobjectmovementtype 1, 4
 	end
 
 Route110_TrickHouseEntrance_EventScript_16109A:: @ 816109A
-	setvar 0x40a5, 0
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 0
 	end
 
 Route110_TrickHouseEntrance_EventScript_1610A0:: @ 81610A0
-	setvar 0x40a5, 1
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1610A6:: @ 81610A6
-	setvar 0x40a5, 1
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1610AC:: @ 81610AC
-	setvar 0x40a5, 1
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
 	end
 
 Route110_TrickHouseEntrance_MapScript2_1610B2:: @ 81610B2
-	map_script_2 0x40a6, 1, Route110_TrickHouseEntrance_EventScript_1610F4
-	map_script_2 0x40a7, 0, Route110_TrickHouseEntrance_EventScript_161105
-	map_script_2 0x40a7, 1, Route110_TrickHouseEntrance_EventScript_1611AB
-	map_script_2 0x40a7, 2, Route110_TrickHouseEntrance_EventScript_1611AF
-	map_script_2 0x40a7, 3, Route110_TrickHouseEntrance_EventScript_1611AF
-	map_script_2 0x40a7, 4, Route110_TrickHouseEntrance_EventScript_1611AB
-	map_script_2 0x40a7, 5, Route110_TrickHouseEntrance_EventScript_1611AB
-	map_script_2 0x40a7, 6, Route110_TrickHouseEntrance_EventScript_1611BE
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 1, Route110_TrickHouseEntrance_EventScript_1610F4
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 0, Route110_TrickHouseEntrance_EventScript_161105
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 1, Route110_TrickHouseEntrance_EventScript_1611AB
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 2, Route110_TrickHouseEntrance_EventScript_1611AF
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3, Route110_TrickHouseEntrance_EventScript_1611AF
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 4, Route110_TrickHouseEntrance_EventScript_1611AB
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 5, Route110_TrickHouseEntrance_EventScript_1611AB
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 6, Route110_TrickHouseEntrance_EventScript_1611BE
 	.2byte 0
 
 Route110_TrickHouseEntrance_EventScript_1610F4:: @ 81610F4
-	reappear 1
-	spritevisible 1, 29, 0
-	spriteface 1, 4
-	spriteface 255, 3
+	addobject 1
+	showobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	turnobject 1, 4
+	turnobject 255, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_161105:: @ 8161105
-	reappear 1
-	spriteinvisible 1, 29, 0
-	switch 0x4044
+	addobject 1
+	hideobjectat 1, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE
+	switch VAR_TRICK_HOUSE_ROOMS_COMPLETED
 	case 0, Route110_TrickHouseEntrance_EventScript_16116B
 	case 1, Route110_TrickHouseEntrance_EventScript_161173
 	case 2, Route110_TrickHouseEntrance_EventScript_161193
@@ -159,73 +152,73 @@ Route110_TrickHouseEntrance_EventScript_161105:: @ 8161105
 	end
 
 Route110_TrickHouseEntrance_EventScript_16116B:: @ 816116B
-	movesprite 1, 6, 3
+	setobjectxy 1, 6, 3
 	end
 
 Route110_TrickHouseEntrance_EventScript_161173:: @ 8161173
-	movesprite 1, 11, 5
+	setobjectxy 1, 11, 5
 	end
 
 Route110_TrickHouseEntrance_EventScript_16117B:: @ 816117B
-	movesprite 1, 11, 1
+	setobjectxy 1, 11, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_161183:: @ 8161183
-	movesprite 1, 3, 1
+	setobjectxy 1, 3, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_16118B:: @ 816118B
-	movesprite 1, 0, 5
+	setobjectxy 1, 0, 5
 	end
 
 Route110_TrickHouseEntrance_EventScript_161193:: @ 8161193
-	movesprite 1, 9, 1
+	setobjectxy 1, 9, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_16119B:: @ 816119B
-	movesprite 1, 8, 1
+	setobjectxy 1, 8, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611A3:: @ 81611A3
-	movesprite 1, 4, 4
+	setobjectxy 1, 4, 4
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611AB:: @ 81611AB
-	disappear 1
+	removeobject 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611AF:: @ 81611AF
-	reappear 1
-	movesprite 1, 5, 2
-	spriteface 1, 2
+	addobject 1
+	setobjectxy 1, 5, 2
+	turnobject 1, 2
 	end
 
 Route110_TrickHouseEntrance_EventScript_1611BE:: @ 81611BE
-	reappear 1
-	movesprite 1, 5, 2
-	spriteface 1, 1
+	addobject 1
+	setobjectxy 1, 5, 2
+	turnobject 1, 1
 	end
 
 Route110_TrickHouseEntrance_MapScript2_1611CD:: @ 81611CD
-	map_script_2 0x40a6, 1, Route110_TrickHouseEntrance_EventScript_1611D7
+	map_script_2 VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 1, Route110_TrickHouseEntrance_EventScript_1611D7
 	.2byte 0
 
 Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	lockall
-	pause 20
-	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_161327
+	delay 20
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 0
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161327
 	msgbox Route110_TrickHouseEntrance_Text_19BD82, 4
-	closebutton
-	pause 20
-	move 1, Route110_TrickHouseEntrance_Movement_161315
-	waitmove 0
-	playsfx 178
-	move 1, Route110_TrickHouseEntrance_Movement_16131E
-	waitmove 0
-	disappear 1
-	setvar 0x40a7, 1
-	setvar 0x40a6, 0
+	closemessage
+	delay 20
+	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
+	waitmovement 0
+	playse SE_W153
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
+	waitmovement 0
+	removeobject 1
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 1
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 0
 	releaseall
 	end
 
@@ -235,7 +228,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 
 Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	lockall
-	switch 0x40a7
+	switch VAR_TRICK_HOUSE_ENTRANCE_STATE_3
 	case 0, Route110_TrickHouseEntrance_EventScript_16124D
 	case 2, Route110_TrickHouseEntrance_EventScript_16136E
 	case 3, Route110_TrickHouseEntrance_EventScript_161330
@@ -243,30 +236,30 @@ Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	end
 
 Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
-	playsfx 21
-	move 255, Route110_TrickHouseEntrance_Movement_1A0833
-	waitmove 0
-	move 255, Route110_TrickHouseEntrance_Movement_1A0835
-	waitmove 0
-	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612CD
-	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612D6
-	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612DF
-	compare 0x4044, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612E8
-	compare 0x4044, 4
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612F1
-	compare 0x4044, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612FA
-	compare 0x4044, 6
-	callif 1, Route110_TrickHouseEntrance_EventScript_161303
-	compare 0x4044, 7
-	callif 1, Route110_TrickHouseEntrance_EventScript_16130C
-	closebutton
-	setvar 0x40a6, 1
-	warp Route110_TrickHouseEntrance, 255, 6, 2
+	playse SE_PIN
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0833
+	waitmovement 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0835
+	waitmovement 0
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 0
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612CD
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612D6
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 2
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612DF
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 3
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612E8
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 4
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612F1
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1612FA
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 6
+	call_if_eq Route110_TrickHouseEntrance_EventScript_161303
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 7
+	call_if_eq Route110_TrickHouseEntrance_EventScript_16130C
+	closemessage
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_2, 1
+	warp MAP_ROUTE110_TRICK_HOUSE_ENTRANCE, 255, 6, 2
 	waitstate
 	releaseall
 	end
@@ -333,154 +326,154 @@ Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
 
 Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
 	msgbox Route110_TrickHouseEntrance_Text_19BF19, 4
-	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
-	playsfx 21
-	move 1, Route110_TrickHouseEntrance_Movement_1A0833
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_1A0835
-	waitmove 0
+	closemessage
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
+	playse SE_PIN
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0833
+	waitmovement 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0835
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19BFAB, 4
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C07E, 4
-	compare 0x4044, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_1613CE
-	compare 0x4044, 2
-	jumpeq Route110_TrickHouseEntrance_EventScript_1613FA
-	compare 0x4044, 3
-	jumpeq Route110_TrickHouseEntrance_EventScript_161426
-	compare 0x4044, 4
-	jumpeq Route110_TrickHouseEntrance_EventScript_161452
-	compare 0x4044, 5
-	jumpeq Route110_TrickHouseEntrance_EventScript_16147E
-	compare 0x4044, 6
-	jumpeq Route110_TrickHouseEntrance_EventScript_1614AA
-	compare 0x4044, 7
-	jumpeq Route110_TrickHouseEntrance_EventScript_1614D6
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1613CE
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 2
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1613FA
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 3
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161426
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 4
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161452
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 5
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_16147E
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 6
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1614AA
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 7
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1614D6
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
-	giveitem ITEM_RARE_CANDY
+	giveitem_std ITEM_RARE_CANDY
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
-	giveitem ITEM_TIMER_BALL
+	giveitem_std ITEM_TIMER_BALL
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
-	giveitem ITEM_HARD_STONE
+	giveitem_std ITEM_HARD_STONE
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
-	giveitem ITEM_SMOKE_BALL
+	giveitem_std ITEM_SMOKE_BALL
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
-	giveitem ITEM_TM12
+	giveitem_std ITEM_TM12
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
-	giveitem ITEM_MAGNET
+	giveitem_std ITEM_MAGNET
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
-	giveitem ITEM_PP_MAX
+	giveitem_std ITEM_PP_MAX
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161502:: @ 8161502
-	setvar 0x40c1, 0
-	setvar 0x40a7, 3
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 3
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0841
+	waitmovement 0
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_1A0839
+	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
 	.ifdef SAPPHIRE
-	givedecoration 32
+	givedecoration_std DECOR_BLUE_TENT
 	.else
-	givedecoration 31
+	givedecoration_std DECOR_RED_TENT
 	.endif
 	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161551
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161551
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02B8
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1A02B8
 	msgbox Route110_TrickHouseEntrance_Text_19C18D, 4
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
 	msgbox Route110_TrickHouseEntrance_Text_19C17E, 4
-	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_16309F
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_161315
-	waitmove 0
-	playsfx 178
-	move 1, Route110_TrickHouseEntrance_Movement_16131E
-	waitmove 0
-	disappear 1
-	setvar 0x40c1, 0
-	setvar 0x40a7, 5
+	closemessage
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16309F
+	waitmovement 0
+	applymovement 1, Route110_TrickHouseEntrance_Movement_161315
+	waitmovement 0
+	playse SE_W153
+	applymovement 1, Route110_TrickHouseEntrance_Movement_16131E
+	waitmovement 0
+	removeobject 1
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE_3, 5
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16158A:: @ 816158A
 	lockall
-	switch 0x40a7
+	switch VAR_TRICK_HOUSE_ENTRANCE_STATE_3
 	case 0, Route110_TrickHouseEntrance_EventScript_1615BD
 	case 1, Route110_TrickHouseEntrance_EventScript_1615C7
 	case 4, Route110_TrickHouseEntrance_EventScript_1616B8
@@ -493,22 +486,22 @@ Route110_TrickHouseEntrance_EventScript_1615BD:: @ 81615BD
 	end
 
 Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
-	msgbox Route110_TrickHouseEntrance_Text_19BE7D, 5
-	closebutton
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_1615DD
+	msgbox Route110_TrickHouseEntrance_Text_19BE7D, MSGBOX_YESNO
+	closemessage
+	compare RESULT, YES
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1615DD
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
-	setmaptile 5, 1, 537, 0
+	setmetatile 5, 1, 537, 0
 	special DrawWholeMapView
-	pause 20
-	move 255, Route110_TrickHouseEntrance_Movement_1A0856
-	waitmove 0
-	move 255, Route110_TrickHouseEntrance_Movement_16165E
-	waitmove 0
-	switch 0x4044
+	delay 20
+	applymovement 255, Route110_TrickHouseEntrance_Movement_1A0856
+	waitmovement 0
+	applymovement 255, Route110_TrickHouseEntrance_Movement_16165E
+	waitmovement 0
+	switch VAR_TRICK_HOUSE_ROOMS_COMPLETED
 	case 0, Route110_TrickHouseEntrance_EventScript_161660
 	case 1, Route110_TrickHouseEntrance_EventScript_16166B
 	case 2, Route110_TrickHouseEntrance_EventScript_161676
@@ -524,49 +517,49 @@ Route110_TrickHouseEntrance_Movement_16165E:: @ 816165E
 	step_end
 
 Route110_TrickHouseEntrance_EventScript_161660:: @ 8161660
-	warp Route110_TrickHousePuzzle1, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16166B:: @ 816166B
-	warp Route110_TrickHousePuzzle2, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161676:: @ 8161676
-	warp Route110_TrickHousePuzzle3, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE3, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161681:: @ 8161681
-	warp Route110_TrickHousePuzzle4, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE4, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16168C:: @ 816168C
-	warp Route110_TrickHousePuzzle5, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE5, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161697:: @ 8161697
-	warp Route110_TrickHousePuzzle6, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE6, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1616A2:: @ 81616A2
-	warp Route110_TrickHousePuzzle7, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 255, 0, 21
 	waitstate
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1616AD:: @ 81616AD
-	warp Route110_TrickHousePuzzle8, 255, 0, 21
+	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE8, 255, 0, 21
 	waitstate
 	releaseall
 	end
@@ -577,8 +570,8 @@ Route110_TrickHouseEntrance_EventScript_1616B8:: @ 81616B8
 	end
 
 Route110_TrickHouseEntrance_EventScript_1616C2:: @ 81616C2
-	compare 0x4044, 8
-	jumpeq Route110_TrickHouseEntrance_EventScript_1616D7
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 8
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_1616D7
 	msgbox Route110_TrickHouseEntrance_Text_19BE6E, 4
 	releaseall
 	end
@@ -590,7 +583,7 @@ Route110_TrickHouseEntrance_EventScript_1616D7:: @ 81616D7
 
 gUnknown_081616E1:: @ 81616E1
 	lockall
-	switch 0x4044
+	switch VAR_TRICK_HOUSE_ROOMS_COMPLETED
 	case 0, Route110_TrickHouseEntrance_EventScript_161740
 	case 1, Route110_TrickHouseEntrance_EventScript_161769
 	case 2, Route110_TrickHouseEntrance_EventScript_161792
@@ -602,89 +595,89 @@ gUnknown_081616E1:: @ 81616E1
 	end
 
 Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
-	compare 0x40AB, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CAD1, 4
-	playsfx SE_PIN
-	setvar 0x40AB, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161769:: @ 8161769
-	compare 0x40AC, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CCCB, 4
-	playsfx SE_PIN
-	setvar 0x40AC, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_2_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161792:: @ 8161792
-	compare 0x40AD, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_3_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819CEF9, 4
-	playsfx SE_PIN
-	setvar 0x40AD, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_3_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1617BB:: @ 81617BB
-	compare 0x40AE, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_4_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819D164, 4
-	playsfx SE_PIN
-	setvar 0x40AE, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_4_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_1617E4:: @ 81617E4
-	compare 0x40AF, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_5_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819D3A5, 4
-	playsfx SE_PIN
-	setvar 0x40AF, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_5_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16180D:: @ 816180D
-	compare 0x40B0, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819DC0A, 4
-	playsfx SE_PIN
-	setvar 0x40B0, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_161836:: @ 8161836
-	compare 0x40B1, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_7_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819DE8D, 4
-	playsfx SE_PIN
-	setvar 0x40B1, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_7_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_16185F:: @ 816185F
-	compare 0x40B2, 0
-	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	compare VAR_TRICK_HOUSE_PUZZLE_8_STATE, 0
+	goto_if_eq Route110_TrickHouseEntrance_EventScript_161888
 	msgbox UnknownString_819E0FF, 4
-	playsfx SE_PIN
-	setvar 0x40B2, 2
-	setmaptile 13, 1, 523, 0
+	playse SE_PIN
+	setvar VAR_TRICK_HOUSE_PUZZLE_8_STATE, 2
+	setmetatile 13, 1, 523, 0
 	special DrawWholeMapView
 	releaseall
 	end
@@ -714,10 +707,10 @@ Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	fanfare 370
+	playfanfare BGM_FANFA4
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox Route110_TrickHousePuzzle1_Text_19C1CB, 4
 	releaseall
 	end
@@ -726,41 +719,41 @@ Route110_TrickHouseEntrance_EventScript_1618B0:: @ 81618B0
 	lockall
 	msgbox Route110_TrickHouseEntrance_Text_19BA56, 4
 	releaseall
-	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618E1
-	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618F6
-	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_16190B
-	setvar 0x40a5, 1
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 0
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1618E1
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 1
+	call_if_eq Route110_TrickHouseEntrance_EventScript_1618F6
+	compare VAR_TRICK_HOUSE_ROOMS_COMPLETED, 2
+	call_if_eq Route110_TrickHouseEntrance_EventScript_16190B
+	setvar VAR_TRICK_HOUSE_ENTRANCE_STATE, 1
 	end
 
 Route110_TrickHouseEntrance_EventScript_1618E1:: @ 81618E1
-	setvar 0x8004, 6
-	setvar 0x8005, 3
-	setvar 0x8006, 0
+	setvar VAR_SPECIAL_4, 6
+	setvar VAR_SPECIAL_5, 3
+	setvar VAR_SPECIAL_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 
 Route110_TrickHouseEntrance_EventScript_1618F6:: @ 81618F6
-	setvar 0x8004, 11
-	setvar 0x8005, 5
-	setvar 0x8006, 0
+	setvar VAR_SPECIAL_4, 11
+	setvar VAR_SPECIAL_5, 5
+	setvar VAR_SPECIAL_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 
 Route110_TrickHouseEntrance_EventScript_16190B:: @ 816190B
-	setvar 0x8004, 9
-	setvar 0x8005, 2
-	setvar 0x8006, 0
+	setvar VAR_SPECIAL_4, 9
+	setvar VAR_SPECIAL_5, 2
+	setvar VAR_SPECIAL_6, 0
 	call Route110_TrickHouseEntrance_EventScript_161920
 	return
 
 Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
-	setanimation 0, 32772
-	setanimation 1, 32773
-	setanimation 2, 32774
-	doanimation 54
-	checkanimation 54
-	pause 10
+	setfieldeffectargument 0, 32772
+	setfieldeffectargument 1, 32773
+	setfieldeffectargument 2, 32774
+	dofieldeffect 54
+	waitfieldeffect 54
+	delay 10
 	return

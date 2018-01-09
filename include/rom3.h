@@ -1,6 +1,12 @@
 #ifndef GUARD_ROM3_H
 #define GUARD_ROM3_H
 
+struct HpAndStatus
+{
+    u16 hp;
+    u32 status;
+};
+
 struct DisableStruct;
 
 void sub_800B858(void);
@@ -55,7 +61,7 @@ void Emitcmd44(u8 a, u16 b);
 void EmitFaintingCry(u8 a);
 void EmitIntroSlide(u8 a, u8 b);
 void EmitTrainerBallThrow(u8 a);
-void Emitcmd48(u8 a, u8 *b, u8 c);
+void EmitDrawPartyStatusSummary(u8 a, struct HpAndStatus *hpAndStatus, u8 c); //0x30
 void Emitcmd49(u8 a);
 void Emitcmd50(u8 a);
 void EmitSpriteInvisibility(u8 a, u8 b);

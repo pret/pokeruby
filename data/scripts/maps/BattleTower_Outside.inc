@@ -3,9 +3,9 @@ BattleTower_Outside_MapScripts:: @ 8160156
 	.byte 0
 
 BattleTower_Outside_MapScript1_16015C:: @ 816015C
-	setflag 2120
-	setvar 0x40bc, 0
-	setflag 918
+	setflag FLAG_LANDMARK_BATTLE_TOWER
+	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
+	setflag FLAG_HIDE_REPORTER_BATTLE_TOWER
 	end
 
 BattleTower_Outside_EventScript_160168:: @ 8160168
@@ -14,14 +14,14 @@ BattleTower_Outside_EventScript_160168:: @ 8160168
 	msgbox BattleTower_Outside_Text_199D06, 4
 	checkitem ITEM_SS_TICKET, 1
 	compare RESULT, 0
-	jumpeq BattleTower_Outside_EventScript_1601C6
+	goto_if_eq BattleTower_Outside_EventScript_1601C6
 	message BattleTower_Outside_Text_199D9D
-	waittext
-	jump BattleTower_Outside_EventScript_16018E
+	waitmessage
+	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_16018E:: @ 816018E
-	multichoicedef 21, 6, 53, 2, 0
+	multichoicedefault 21, 6, 53, 2, 0
 	switch RESULT
 	case 0, BattleTower_Outside_EventScript_1601D0
 	case 1, BattleTower_Outside_EventScript_1601FB
@@ -35,40 +35,40 @@ BattleTower_Outside_EventScript_1601C6:: @ 81601C6
 	end
 
 BattleTower_Outside_EventScript_1601D0:: @ 81601D0
-	msgbox BattleTower_Outside_Text_199DF2, 5
-	compare RESULT, 0
-	jumpeq BattleTower_Outside_EventScript_160226
+	msgbox BattleTower_Outside_Text_199DF2, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp SlateportCity_Harbor, 255, 8, 11
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
 
 BattleTower_Outside_EventScript_1601FB:: @ 81601FB
-	msgbox BattleTower_Outside_Text_199E0E, 5
-	compare RESULT, 0
-	jumpeq BattleTower_Outside_EventScript_160226
+	msgbox BattleTower_Outside_Text_199E0E, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq BattleTower_Outside_EventScript_160226
 	msgbox BattleTower_Outside_Text_199E4B, 4
 	call BattleTower_Outside_EventScript_160232
-	warp LilycoveCity_Harbor, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
 
 BattleTower_Outside_EventScript_160226:: @ 8160226
 	message BattleTower_Outside_Text_199E7A
-	waittext
-	jump BattleTower_Outside_EventScript_16018E
+	waitmessage
+	goto BattleTower_Outside_EventScript_16018E
 	end
 
 BattleTower_Outside_EventScript_160232:: @ 8160232
-	closebutton
-	move LAST_TALKED, BattleTower_Outside_Movement_1A0845
-	waitmove 0
-	pause 30
-	spriteinvisible 5, 26, 4
-	setvar 0x8004, 4
+	closemessage
+	applymovement LAST_TALKED, BattleTower_Outside_Movement_1A0845
+	waitmovement 0
+	delay 30
+	hideobjectat 5, MAP_BATTLE_TOWER_OUTSIDE
+	setvar VAR_SPECIAL_4, 4
 	call BattleTower_Outside_EventScript_1A047C
 	return
 

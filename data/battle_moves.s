@@ -1,3 +1,5 @@
+#include "constants/battle_constants.h"
+#include "constants/battle_move_effects.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -155,7 +157,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -166,7 +168,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -419,7 +421,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 100 @ secondary effect chance
-	.byte F_TARGET_RANDOM
+	.byte TARGET_RANDOM
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT | F_MAKES_CONTACT @ misc. flags
 
@@ -441,7 +443,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_MAGIC_COAT | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -485,7 +487,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_MAGIC_COAT | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -507,7 +509,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_MAGIC_COAT | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -573,7 +575,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 10 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -606,7 +608,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -639,7 +641,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -661,7 +663,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 70 @ accuracy
 	.byte 5 @ PP
 	.byte 10 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -760,7 +762,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte -5 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_MAKES_CONTACT @ misc. flags
 
@@ -826,7 +828,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -837,7 +839,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 95 @ accuracy
 	.byte 25 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -892,7 +894,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 100 @ secondary effect chance
-	.byte F_TARGET_RANDOM
+	.byte TARGET_RANDOM
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT | F_MAKES_CONTACT @ misc. flags
 
@@ -903,7 +905,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 95 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_MAGIC_COAT | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -991,7 +993,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ALL_EXCEPT_USER
+	.byte TARGET_ALL_EXCEPT_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1068,7 +1070,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1079,7 +1081,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1112,7 +1114,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -1156,7 +1158,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1167,7 +1169,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1178,7 +1180,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1189,7 +1191,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1222,7 +1224,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1233,7 +1235,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1244,7 +1246,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1255,7 +1257,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1266,7 +1268,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1277,7 +1279,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1288,7 +1290,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1299,7 +1301,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_AFFECTED_BY_PROTECT | F_MAKES_CONTACT @ misc. flags
 
@@ -1310,7 +1312,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -1321,7 +1323,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -1332,7 +1334,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ALL_EXCEPT_USER
+	.byte TARGET_ALL_EXCEPT_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1431,7 +1433,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1475,7 +1477,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1497,7 +1499,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1607,7 +1609,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 10 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1662,7 +1664,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -1673,7 +1675,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1695,7 +1697,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ALL_EXCEPT_USER
+	.byte TARGET_ALL_EXCEPT_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1728,7 +1730,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1739,7 +1741,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 90 @ accuracy
 	.byte 10 @ PP
 	.byte 30 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -1761,7 +1763,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1772,7 +1774,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -1816,7 +1818,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -1948,7 +1950,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2003,7 +2005,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 25 @ PP
 	.byte 10 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2014,7 +2016,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 3 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2069,7 +2071,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2113,7 +2115,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ENEMY_SIDE
+	.byte TARGET_ENEMY_SIDE
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2146,7 +2148,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2157,7 +2159,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2168,7 +2170,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 95 @ accuracy
 	.byte 15 @ PP
 	.byte 100 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2179,7 +2181,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 3 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2212,7 +2214,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 15 @ PP
 	.byte 100 @ secondary effect chance
-	.byte F_TARGET_RANDOM
+	.byte TARGET_RANDOM
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT | F_MAKES_CONTACT @ misc. flags
 
@@ -2223,7 +2225,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2245,7 +2247,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 3 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2300,7 +2302,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2366,7 +2368,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2377,7 +2379,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2421,7 +2423,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 25 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2454,7 +2456,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 30 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ALL_EXCEPT_USER
+	.byte TARGET_ALL_EXCEPT_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2498,7 +2500,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2542,7 +2544,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_MAGIC_COAT | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2586,7 +2588,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2597,7 +2599,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2608,7 +2610,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2641,7 +2643,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 20 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2652,7 +2654,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2663,7 +2665,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2685,7 +2687,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte -5 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE @ misc. flags
 
@@ -2795,7 +2797,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 100 @ secondary effect chance
-	.byte F_TARGET_RANDOM
+	.byte TARGET_RANDOM
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2806,7 +2808,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2828,7 +2830,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2839,7 +2841,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 90 @ accuracy
 	.byte 10 @ PP
 	.byte 10 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2850,7 +2852,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -2938,7 +2940,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 3 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2949,7 +2951,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 95 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -2960,7 +2962,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -2982,7 +2984,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 5 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3015,7 +3017,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3026,7 +3028,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3037,7 +3039,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3059,7 +3061,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 4 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3070,7 +3072,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3136,7 +3138,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3158,7 +3160,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3169,7 +3171,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3180,7 +3182,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3191,7 +3193,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_SPECIAL
+	.byte TARGET_SPECIAL
 	.byte 4 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE @ misc. flags
 
@@ -3235,7 +3237,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3246,7 +3248,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3290,7 +3292,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_ALL_EXCEPT_USER
+	.byte TARGET_ALL_EXCEPT_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3312,7 +3314,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3345,7 +3347,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3356,7 +3358,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3444,7 +3446,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3466,7 +3468,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 95 @ accuracy
 	.byte 25 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3554,7 +3556,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3565,7 +3567,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 5 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3642,7 +3644,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 85 @ accuracy
 	.byte 10 @ PP
 	.byte 30 @ secondary effect chance
-	.byte F_TARGET_BOTH_ENEMIES
+	.byte TARGET_BOTH_ENEMIES
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_KINGS_ROCK | F_MIRROR_MOVE_COMPATIBLE | F_AFFECTED_BY_PROTECT @ misc. flags
 
@@ -3686,7 +3688,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3708,7 +3710,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 40 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3741,7 +3743,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3818,7 +3820,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 100 @ accuracy
 	.byte 15 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte 0 @ misc. flags
 
@@ -3829,7 +3831,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 
@@ -3851,7 +3853,7 @@ gBattleMoves:: @ 81FB12C
 	.byte 0 @ accuracy
 	.byte 20 @ PP
 	.byte 0 @ secondary effect chance
-	.byte F_TARGET_USER
+	.byte TARGET_USER
 	.byte 0 @ priority
 	.4byte F_AFFECTED_BY_SNATCH @ misc. flags
 

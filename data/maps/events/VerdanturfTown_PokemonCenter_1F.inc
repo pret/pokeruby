@@ -4,9 +4,9 @@ VerdanturfTown_PokemonCenter_1F_MapObjects:: @ 8386BF4
 	object_event 3, MAP_OBJ_GFX_OLD_MAN_1, 0, 12, 0, 2, 0, 3, 7, 0, 0, 0, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F2F, 0, 0, 0
 
 VerdanturfTown_PokemonCenter_1F_MapWarps:: @ 8386C3C
-	warp_def 7, 8, 3, 2, VerdanturfTown
-	warp_def 6, 8, 3, 2, VerdanturfTown
-	warp_def 1, 6, 4, 0, VerdanturfTown_PokemonCenter_2F
+	warp_def 7, 8, 3, 2, MAP_VERDANTURF_TOWN
+	warp_def 6, 8, 3, 2, MAP_VERDANTURF_TOWN
+	warp_def 1, 6, 4, 0, MAP_VERDANTURF_TOWN_POKEMON_CENTER_2F
 
 VerdanturfTown_PokemonCenter_1F_MapEvents:: @ 8386C54
 	map_events VerdanturfTown_PokemonCenter_1F_MapObjects, VerdanturfTown_PokemonCenter_1F_MapWarps, 0x0, 0x0

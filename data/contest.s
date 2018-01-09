@@ -1,3 +1,5 @@
+#include "constants/moves.h"
+#include "constants/species.h"
 	.include "asm/macros.inc"
 	.include "constants/constants.inc"
 
@@ -297,10 +299,10 @@ gUnknown_083CC4B4:: @ 83CC4B4
 
 	.align 2
 gUnknown_083CC4D4:: @ 83CC4D4
-	obj_pal 0x20180A4, 33000
-	obj_pal 0x20180C4, 33001
-	obj_pal 0x20180E4, 33002
-	obj_pal 0x2018104, 33003
+	obj_pal gSharedMem + 0x180A4, 33000
+	obj_pal gSharedMem + 0x180C4, 33001
+	obj_pal gSharedMem + 0x180E4, 33002
+	obj_pal gSharedMem + 0x18104, 33003
 
 	.align 2
 gOamData_83CC4F4:: @ 83CC4F4

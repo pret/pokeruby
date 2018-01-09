@@ -3,15 +3,15 @@ DewfordTown_PokemonCenter_1F_MapScripts:: @ 8153014
 	.byte 0
 
 DewfordTown_PokemonCenter_1F_MapScript1_15301A:: @ 815301A
-	sethealplace 15
+	setrespawn 15
 	call DewfordTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
 DewfordTown_PokemonCenter_1F_EventScript_153023:: @ 8153023
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call DewfordTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 

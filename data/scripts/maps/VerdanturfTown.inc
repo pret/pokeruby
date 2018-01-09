@@ -3,26 +3,25 @@ VerdanturfTown_MapScripts:: @ 814E854
 	.byte 0
 
 VerdanturfTown_MapScript1_14E85A:: @ 814E85A
-	setflag 2068
-	setvar 0x4086, 0
-	setflag 801
+	setflag FLAG_VISITED_VERDANTURF_TOWN
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
+	setflag FLAG_HIDE_CONTEST_REPORTER_VERDANTURF
 	end
 
 VerdanturfTown_EventScript_14E866:: @ 814E866
 	lock
 	faceplayer
-	checkflag 199
-	jumpeq VerdanturfTown_EventScript_14E885
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_14E885
 	msgbox VerdanturfTown_Text_16CAEB, 4
-	move 2, VerdanturfTown_Movement_1A083D
-	waitmove 0
+	applymovement 2, VerdanturfTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 VerdanturfTown_EventScript_14E885:: @ 814E885
 	msgbox VerdanturfTown_Text_16CBCE, 4
-	move 2, VerdanturfTown_Movement_1A083D
-	waitmove 0
+	applymovement 2, VerdanturfTown_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -37,8 +36,7 @@ VerdanturfTown_EventScript_14E8A2:: @ 814E8A2
 VerdanturfTown_EventScript_14E8AB:: @ 814E8AB
 	lock
 	faceplayer
-	checkflag 199
-	jumpeq VerdanturfTown_EventScript_14E8C0
+	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_EventScript_14E8C0
 	msgbox VerdanturfTown_Text_16CD4D, 4
 	release
 	end

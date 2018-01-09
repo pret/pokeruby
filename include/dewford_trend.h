@@ -1,10 +1,8 @@
 #ifndef GUARD_DEWFORDTREND_H
 #define GUARD_DEWFORDTREND_H
 
-#define ARRAY_2007800 ((struct EasyChatPair *)(unk_2000000 + 0x7800))
-#define ARRAY_2007900 ((struct EasyChatPair *)(unk_2000000 + 0x7900))
-
 void InitDewfordTrend(void);
+bool8 sub_80FA364(u16 *a);
 void sub_80FA4E4(void *, u32, u8);
 void UpdateDewfordTrendPerDay(u16);
 

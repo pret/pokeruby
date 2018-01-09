@@ -4,14 +4,13 @@ MossdeepCity_House3_MapScripts:: @ 815A971
 MossdeepCity_House3_EventScript_15A972:: @ 815A972
 	lock
 	faceplayer
-	checkflag 152
-	jumpeq MossdeepCity_House3_EventScript_15A9B1
-	msgbox MossdeepCity_House3_Text_18D909, 5
-	compare RESULT, 0
-	jumpeq MossdeepCity_House3_EventScript_15A9BB
+	goto_if_set FLAG_RECEIVED_SUPER_ROD, MossdeepCity_House3_EventScript_15A9B1
+	msgbox MossdeepCity_House3_Text_18D909, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq MossdeepCity_House3_EventScript_15A9BB
 	msgbox MossdeepCity_House3_Text_18D9A9, 4
-	giveitem ITEM_SUPER_ROD
-	setflag 152
+	giveitem_std ITEM_SUPER_ROD
+	setflag FLAG_RECEIVED_SUPER_ROD
 	msgbox MossdeepCity_House3_Text_18D9E3, 4
 	release
 	end

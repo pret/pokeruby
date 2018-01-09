@@ -4,13 +4,12 @@ LilycoveCity_House2_MapScripts:: @ 8159BA2
 LilycoveCity_House2_EventScript_159BA3:: @ 8159BA3
 	lock
 	faceplayer
-	checkflag 234
-	jumpeq LilycoveCity_House2_EventScript_159BDA
+	goto_if_set FLAG_RECEIVED_TM44, LilycoveCity_House2_EventScript_159BDA
 	msgbox LilycoveCity_House2_Text_18B83C, 4
-	giveitem ITEM_TM44
+	giveitem_std ITEM_TM44
 	compare RESULT, 0
-	jumpeq LilycoveCity_House2_EventScript_1A029B
-	setflag 234
+	goto_if_eq LilycoveCity_House2_EventScript_1A029B
+	setflag FLAG_RECEIVED_TM44
 	msgbox LilycoveCity_House2_Text_18B883, 4
 	release
 	end

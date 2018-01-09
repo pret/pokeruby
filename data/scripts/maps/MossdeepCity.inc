@@ -3,12 +3,11 @@ MossdeepCity_MapScripts:: @ 814CF92
 	.byte 0
 
 MossdeepCity_MapScript1_14CF98:: @ 814CF98
-	clearflag 100
-	clearflag 101
-	clearflag 102
-	clearflag 103
-	checkflag 2090
-	callif 1, MossdeepCity_EventScript_1A02C1
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_1
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_2
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_3
+	clearflag FLAG_MOSSDEEP_GYM_SWITCH_4
+	call_if_set FLAG_SYS_WEATHER_CTRL, MossdeepCity_EventScript_1A02C1
 	end
 
 MossdeepCity_EventScript_14CFAE:: @ 814CFAE
@@ -52,32 +51,31 @@ MossdeepCity_EventScript_14CFFF:: @ 814CFFF
 	end
 
 MossdeepCity_EventScript_14D008:: @ 814D008
-	setflag 2076
-	setvar 0x4001, 1
+	setflag FLAG_VISITED_MOSSDEEP_CITY
+	setvar VAR_TEMP_1, 1
 	end
 
 MossdeepCity_EventScript_14D011:: @ 814D011
 	lock
 	faceplayer
 	msgbox MossdeepCity_Text_16944E, 4
-	move LAST_TALKED, MossdeepCity_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, MossdeepCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
 MossdeepCity_EventScript_14D027:: @ 814D027
 	lock
 	faceplayer
-	checkflag 276
-	jumpeq MossdeepCity_EventScript_14D069
-	msgbox MossdeepCity_Text_1690A9, 5
-	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_14D073
+	goto_if_set FLAG_RECEIVED_KINGS_ROCK, MossdeepCity_EventScript_14D069
+	msgbox MossdeepCity_Text_1690A9, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq MossdeepCity_EventScript_14D073
 	msgbox MossdeepCity_Text_169117, 4
-	giveitem ITEM_KINGS_ROCK
+	giveitem_std ITEM_KINGS_ROCK
 	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_1A029B
-	setflag 276
+	goto_if_eq MossdeepCity_EventScript_1A029B
+	setflag FLAG_RECEIVED_KINGS_ROCK
 	release
 	end
 

@@ -28,7 +28,37 @@ extern const u8 gInterfaceGfx_PremierBall[];
 extern const u8 gInterfacePal_PremierBall[];
 extern const u8 gUnknown_08D030D0[];
 
+extern const u8 gUnknown_08D17144[];
+extern const u8 gUnknown_08D1725C[];
+extern const u8 gUnknown_08D17424[];
+extern const u8 gUnknown_08D17C3C[];
+extern const u8 gContestMiscGfx[];
+extern const u8 gContestAudienceGfx[];
+extern const u8 gContestJudgeSymbolsGfx[];
+extern const u8 gContest3Pal[];
+extern const u8 gTiles_8D1975C[];
+extern const u8 gUnknown_08D1977C[];
+extern const u8 gUnknown_08D1A250[];
+extern const u8 gUnknown_08D1A364[];
+extern const u8 gUnknown_08D1A490[];
+extern const u8 gUnknown_08D1A618[];
+
+extern const u8 gContestJudgeGfx[];
+extern const u8 gContest2Pal[];
+
 extern const u8 gMonFootprint_QuestionMark[];
+
+extern const u8 gContestNextTurnGfx[];
+extern const u8 gContestNextTurnNumbersGfx[];
+extern const u8 gContestNextTurnRandomGfx[];
+extern const u8 gBattleAnimSpriteSheet_264[];
+extern const u8 gBattleAnimSpritePalette_264[];
+extern const u8 gBattleAnimSpritePalette_265[];
+extern const u8 gBattleAnimSpritePalette_067[];
+extern const u8 gBattleAnimSpritePalette_068[];
+extern const u8 gContestApplauseGfx[];
+extern const u8 gContestApplauseMeterGfx[];
+extern const u16 gContestPal[];
 
 // data/graphics/pokemon/graphics.inc
 extern const u8 gMonFrontPic_Bulbasaur[];
@@ -2551,6 +2581,44 @@ extern const u8 gBerryPalette_Lansat[];
 extern const u8 gBerryPalette_Starf[];
 extern const u8 gBerryPalette_Enigma[];
 
+// data/graphics.s
+extern const u16 gMailPalette_Orange[];
+extern const u16 gMailPalette_Harbor[];
+extern const u16 gMailPalette_Glitter[];
+extern const u16 gMailPalette_Mech[];
+extern const u16 gMailPalette_Wood[];
+extern const u16 gMailPalette_Wave[];
+extern const u16 gMailPalette_Bead[];
+extern const u16 gMailPalette_Shadow[];
+extern const u16 gMailPalette_Tropic[];
+extern const u16 gMailPalette_Dream[];
+extern const u16 gMailPalette_Fab[];
+extern const u16 gMailPalette_Retro[];
+extern const u8 gMailTiles_Orange[];
+extern const u8 gMailTiles_Harbor[];
+extern const u8 gMailTiles_Glitter[];
+extern const u8 gMailTiles_Mech[];
+extern const u8 gMailTiles_Wood[];
+extern const u8 gMailTiles_Wave[];
+extern const u8 gMailTiles_Bead[];
+extern const u8 gMailTiles_Shadow[];
+extern const u8 gMailTiles_Tropic[];
+extern const u8 gMailTiles_Dream[];
+extern const u8 gMailTiles_Fab[];
+extern const u8 gMailTiles_Retro[];
+extern const u8 gMailTilemap_Orange[];
+extern const u8 gMailTilemap_Harbor[];
+extern const u8 gMailTilemap_Glitter[];
+extern const u8 gMailTilemap_Mech[];
+extern const u8 gMailTilemap_Wood[];
+extern const u8 gMailTilemap_Wave[];
+extern const u8 gMailTilemap_Bead[];
+extern const u8 gMailTilemap_Shadow[];
+extern const u8 gMailTilemap_Tropic[];
+extern const u8 gMailTilemap_Dream[];
+extern const u8 gMailTilemap_Fab[];
+extern const u8 gMailTilemap_Retro[];
+
 extern const u8 gUnknown_08E96EC8[];
 
 extern const u8 gMenuTrainerCard_Gfx[];
@@ -2563,5 +2631,116 @@ extern const u8 gUnknown_08E8CAC0[];
 extern const u8 gUnknown_08E8CFC0[];
 extern const u8 gUnknown_08E8D4C0[];
 extern const u8 gUnknown_08E8D9C0[];
+
+extern const u8 gUnknown_08EA1DEC[];
+extern const u16 gUnknown_08EA0328[];
+extern const u16 gUnknown_08EA02C8[];
+extern const u16 gUnknown_08EA0348[];
+extern const u16 gUnknown_08EA15C8[];
+extern const u16 gTradeMonBoxTilemap[];
+extern const u8 gUnknown_08D00000[];
+extern const u16 gUnknown_08D00524[];
+extern const u8 gUnknown_08D004E0[];
+
+extern const u8 gNamingScreenBackButtonTiles[];
+extern const u8 gNamingScreenOKButtonTiles[];
+extern const u8 gNamingScreenChangeKeyboardBoxTiles[];
+extern const u8 gNamingScreenChangeKeyboardButtonTiles[];
+extern const u8 gNamingScreenLowerTextTiles[];
+extern const u8 gNamingScreenUpperTextTiles[];
+extern const u8 gNamingScreenOthersTextTiles[];
+extern const u8 gNamingScreenCursorTiles[];
+extern const u8 gNamingScreenActiveCursorSmallTiles[];
+extern const u8 gNamingScreenActiveCursorBigTiles[];
+extern const u8 gNamingScreenRightPointingTriangleTiles[];
+extern const u8 gNamingScreenUnderscoreTiles[];
+extern const u16 gNamingScreenPalettes[][16];
+
+extern const u8 gMenuWordGroupIndicator_Gfx[];
+extern const u8 gMenuWordGroupFrame_Gfx[];
+extern const u16 gMenuWordGroupIndicator_Pal[];
+extern const u16 gMenuWordGroupFrame1_Pal[];
+extern const u16 gMenuWordGroupFrame2_Pal[];
+
+extern const u8 gUnknown_08E94510[];
+extern const u8 gUnknown_08E94550[];
+extern const u8 gUnknown_08E94590[];
+extern const u8 gUnknown_08E945D0[];
+extern const u8 gUnknown_08E94AD0[];
+extern const u8 gUnknown_08E953D0[];
+extern const u8 gUnknown_08E954B0[];
+extern const u8 gUnknown_08E95774[];
+extern const u16 gUnknown_08E95A18[];
+extern const u16 gUnknown_08E95AB8[];
+extern const u16 gUnknown_08E95FB8[];
+
+extern const u16 gSlotMachineSpritePalette0[];
+extern const u16 gSlotMachineSpritePalette1[];
+extern const u16 gSlotMachineSpritePalette2[];
+extern const u16 gSlotMachineSpritePalette3[];
+extern const u16 gSlotMachineSpritePalette4[];
+extern const u16 gSlotMachineSpritePalette5[];
+extern const u16 gSlotMachineSpritePalette6[];
+extern const u8 gSlotMachine_Gfx[];
+
+extern const u8 gSlotMachineReelSymbol1Tiles[];
+extern const u8 gSlotMachineReelSymbol2Tiles[];
+extern const u8 gSlotMachineReelSymbol3Tiles[];
+extern const u8 gSlotMachineReelSymbol4Tiles[];
+extern const u8 gSlotMachineReelSymbol5Tiles[];
+extern const u8 gSlotMachineReelSymbol6Tiles[];
+extern const u8 gSlotMachineReelSymbol7Tiles[];
+extern const u8 gSlotMachineNumber0Tiles[];
+extern const u8 gSlotMachineNumber1Tiles[];
+extern const u8 gSlotMachineNumber2Tiles[];
+extern const u8 gSlotMachineNumber3Tiles[];
+extern const u8 gSlotMachineNumber4Tiles[];
+extern const u8 gSlotMachineNumber5Tiles[];
+extern const u8 gSlotMachineNumber6Tiles[];
+extern const u8 gSlotMachineNumber7Tiles[];
+extern const u8 gSlotMachineNumber8Tiles[];
+extern const u8 gSlotMachineNumber9Tiles[];
+extern const u8 gSpriteImage_8E98828[];
+extern const u8 gSpriteImage_8E98848[];
+extern const u8 gSpriteImage_8E98868[];
+extern const u8 gSpriteImage_8E988E8[];
+extern const u8 gSpriteImage_8E98968[];
+extern const u8 gSpriteImage_8E989E8[];
+extern const u8 gSpriteImage_8E98A68[];
+extern const u8 gSpriteImage_8E98AE8[];
+extern const u8 gSpriteImage_8E98B68[];
+extern const u8 gSpriteImage_8E98BE8[];
+extern const u8 gSpriteImage_8E98CE8[];
+extern const u8 gSpriteImage_8E98DE8[];
+extern const u8 gSpriteImage_8E98FE8[];
+extern const u8 gSpriteImage_8E991E8[];
+extern const u8 gSpriteImage_8E993E8[];
+extern const u8 gUnknownPalette_08E997E8[];
+extern const u8 gSpriteImage_8E99808[];
+extern const u8 gSlotMachineReelTimeLights_Gfx[];
+extern const u8 gUnknown_08E99FB0[];
+extern const u8 gUnknown_08E9A100[];
+extern const u8 gUnknown_08E9A300[];
+extern const u8 gUnknown_08E9AB00[];
+extern const u8 gUnknown_08E9AB40[];
+extern const u8 gUnknown_08E9AB60[];
+extern const u8 gUnknown_08E9ABB4[];
+extern const u8 gUnknown_08E9AC2C[];
+extern const u8 gUnknown_08E9AC4C[];
+
+extern const u8 gInterviewOutlineCursorTiles[];
+extern const u8 gTitleScreenPressStart_Gfx[];
+extern const u16 gTitleScreenLogoShinePalette[];
+extern const u8 gUnknown_08E9D8CC[];
+extern const u8 gVersionTiles[];
+extern const u16 gUnknown_08E9F624[];
+extern const u8 gUnknown_08E9F7E4[];
+
+extern const u8 gCableCar_Gfx[];
+extern const u8 gCableCarDoor_Gfx[];
+extern const u8 gCableCarCord_Gfx[];
+extern const u16 gCableCar_Pal[];
+extern const u16 gCableCarBG_Pal[];
+extern const u8 gCableCarBG_Gfx[];
 
 #endif  // GUARD_GRAPHICS_H

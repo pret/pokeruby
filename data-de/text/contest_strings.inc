@@ -148,7 +148,7 @@ ContestString_DescStopExcitement: @ 83CADA1
 	.string "terung des Publikums.$"
 
 	.align 2
-gUnknown_083CADD4:: @ 83CADD4
+gContestEffectStrings:: @ 83CADD4
 	.4byte ContestString_DescHighlyAppealing
 	.4byte ContestString_DescStartled1
 	.4byte ContestString_DescGreatLock
@@ -260,11 +260,11 @@ gUnknown_083CAF70:: @ 83CAF70
 	.4byte ContestString_Smart
 	.4byte ContestString_Tough
 
-gUnknown_083CAF84:: @ 83CAF84
+gText_Contest_WhichMoveWillBePlayed:: @ 83CAF84
 	.string "Ausdruck {NAME_END}! Welche\n"
 	.string "Attacke wird gezeigt?$"
 
-gUnknown_083CAFAE:: @ 83CAFAE
+gText_Contest_ButItCantParticipate:: @ 83CAFAE
 	.string "Ausdruck {NAME_END}! Aber es\n"
 	.string "kann nicht teilnehmen!$"
 
@@ -361,7 +361,7 @@ ContestString_StandOutDidnt:
 	.string "keinen Ausdruck zeigen.{PAUSE_UNTIL_PRESS}$"
 
 	.align 2
-gUnknown_083CB2F0:: @ 83CB2F0
+gContestStandOutStrings:: @ 83CB2F0
 	.4byte ContestString_StandOutNone
 	.4byte ContestString_StandOutNotMuch
 	.4byte ContestString_StandOutLittle
@@ -596,22 +596,22 @@ ContestString_ScrambleOrder:
 	.string "durcheinander.{PAUSE 60}$"
 
 gUnknown_083CBD52:: @ 83CBD52
-ContestString_JudgeExpectantly2:
+ContestString_JudgeExpectantly2::
 	.string "Der JUROR betrachtet\n"
 	.string "{STR_VAR_1} interessiert.{PAUSE 60}$"
 
 gUnknown_083CBD79:: @ 83CBD79
-ContestString_WentOverWell:
+ContestString_WentOverWell::
 	.string "Die Combo der Ausdrücke\n"
 	.string "kam gut an.{PAUSE 60}$"
 
 gUnknown_083CBD9D:: @ 83CBD9D
-ContestString_WentOverVeryWell:
+ContestString_WentOverVeryWell::
 	.string "Die Combo der Ausdrücke\n"
 	.string "kam sehr gut an.{PAUSE 60}$"
 
 gUnknown_083CBDC6:: @ 83CBDC6
-ContestString_AppealComboExcellently:
+ContestString_AppealComboExcellently::
 	.string "Die Combo der Ausdrücke\n"
 	.string "kam exzellent an.{PAUSE 60}$"
 ContestString_AvertGaze:
@@ -670,40 +670,40 @@ ContestString_Unaffected:
 	.string "unbeeindruckt.{PAUSE 60}$"
 
 gUnknown_083CC075:: @ 83CC075
-ContestString_DissapointedRepeat:
+ContestString_DissapointedRepeat::
 	.string "{STR_VAR_1} enttäuscht\n"
 	.string "durch Wiederholung.{PAUSE 60}$"
 
 gUnknown_083CC0A0:: @ 83CC0A0
-ContestString_WentOverGreat:
+ContestString_WentOverGreat::
 	.string "Die {STR_VAR_3} von\n"
 	.string "{STR_VAR_1} war sehr gut.{PAUSE 60}$"
 
 gUnknown_083CC0BC:: @ 83CC0BC
-ContestString_DidntGoWell:
+ContestString_DidntGoWell::
 	.string "Die {STR_VAR_3} von\n"
 	.string "{STR_VAR_1} war nicht gut.{PAUSE 60}$"
 
 gUnknown_083CC0E3:: @ 83CC0E3
-ContestString_GotCrowdGoing:
+ContestString_GotCrowdGoing::
 	.string "{STR_VAR_1} begeistert\n"
 	.string "Publikum mit {STR_VAR_3}.{PAUSE 60}$"
 
 gUnknown_083CC103:: @ 83CC103
-ContestString_CantAppealNextTurn:
+ContestString_CantAppealNextTurn::
 	.string "{STR_VAR_1} setzt in der \n"
 	.string "folgenden Runde aus.{PAUSE 60}$"
-ContestString_AttractedAttention:
+ContestString_AttractedAttention::
 	.string "Die Aufmerksamkeit des\n"
 	.string "Publikums liegt auf ihm.{PAUSE 60}$"
 
 gUnknown_083CC14A:: @ 83CC14A
-ContestString_CrowdWatches:
+ContestString_CrowdWatches::
 	.string "Das Publikum beobachtet\n"
 	.string "weiterhin {STR_VAR_3}.{PAUSE 60}$"
 
 gUnknown_083CC16E:: @ 83CC16E
-ContestString_Ignored2:
+ContestString_Ignored2::
 	.string "{STR_VAR_2} von\n"
 	.string "{STR_VAR_1} ist ignoriert.{PAUSE 60}$"
 
@@ -772,19 +772,19 @@ gUnknown_083CC188:: @ 83CC188
 	.4byte ContestString_Unaffected
 	.4byte ContestString_AttractedAttention
 
-gUnknown_083CC280:: @ 83CC280
+gText_Contest_Shyness:: @ 83CC280
 	.string "Scheu$"
 
-gUnknown_083CC288:: @ 83CC288
+gText_Contest_Anxiety:: @ 83CC288
 	.string "Besorgnis$"
 
-gUnknown_083CC290:: @ 83CC290
+gText_Contest_Laziness:: @ 83CC290
 	.string "Faulheit$"
 
-gUnknown_083CC299:: @ 83CC299
+gText_Contest_Hesitancy:: @ 83CC299
 	.string "Zögern$"
 
-gUnknown_083CC2A3:: @ 83CC2A3
+gText_Contest_Fear:: @ 83CC2A3
 	.string "Furcht$"
 
 ContestString_Coolness:
@@ -799,7 +799,7 @@ ContestString_Toughness:
 	.string "Stärke$"
 
 	.align 2
-gUnknown_083CC2D8:: @ 83CC2D8
+gContestCategoryStrings:: @ 83CC2D8
 	.4byte ContestString_Coolness
 	.4byte ContestString_Beauty2
 	.4byte ContestString_Cuteness

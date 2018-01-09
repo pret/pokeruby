@@ -4,12 +4,12 @@ Route104_MapScripts:: @ 814EE8C
 	.byte 0
 
 Route104_MapScript2_14EE97:: @ 814EE97
-	map_script_2 0x408e, 1, Route104_EventScript_14EEA1
+	map_script_2 VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1, Route104_EventScript_14EEA1
 	.2byte 0
 
 Route104_EventScript_14EEA1:: @ 814EEA1
 	lockall
-	jump Route104_EventScript_14EFD5
+	goto Route104_EventScript_14EFD5
 	end
 
 Route104_MapScript1_14EEA8:: @ 814EEA8
@@ -17,27 +17,24 @@ Route104_MapScript1_14EEA8:: @ 814EEA8
 	end
 
 Route104_EventScript_14EEAE:: @ 814EEAE
-	checkflag 127
-	jumpif 0, Route104_EventScript_14EEC4
-	checkflag 2057
-	jumpif 0, Route104_EventScript_14EEC4
-	clearflag 906
+	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_14EEC4
+	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_14EEC4
+	clearflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC4:: @ 814EEC4
-	setflag 906
+	setflag FLAG_HIDE_FLOWER_SHOP_WORKER_OUTSIDE
 	return
 
 Route104_EventScript_14EEC8:: @ 814EEC8
 	lock
 	faceplayer
-	checkflag 246
-	jumpeq Route104_EventScript_14EEFF
+	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE104, Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
-	giveitem ITEM_CHESTO_BERRY
+	giveitem_std ITEM_CHESTO_BERRY
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
-	setflag 246
+	goto_if_eq Route104_EventScript_1A029B
+	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE104
 	msgbox Route104_Text_1C5665, 4
 	release
 	end
@@ -50,13 +47,12 @@ Route104_EventScript_14EEFF:: @ 814EEFF
 Route104_EventScript_14EF09:: @ 814EF09
 	lock
 	faceplayer
-	checkflag 279
-	jumpeq Route104_EventScript_14EF38
+	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
-	giveitem ITEM_WHITE_HERB
+	giveitem_std ITEM_WHITE_HERB
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
-	setflag 279
+	goto_if_eq Route104_EventScript_1A029B
+	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
 
@@ -104,13 +100,12 @@ Route104_EventScript_14EF8A:: @ 814EF8A
 Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
-	checkflag 262
-	jumpeq Route104_EventScript_14EFC2
+	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
-	giveitem ITEM_TM09
+	giveitem_std ITEM_TM09
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
-	setflag 262
+	goto_if_eq Route104_EventScript_1A029B
+	setflag FLAG_RECEIVED_TM09
 	release
 	end
 
@@ -124,44 +119,42 @@ Route104_EventScript_14EFCC:: @ 814EFCC
 	end
 
 Route104_EventScript_14EFD5:: @ 814EFD5
-	spritelevelup 8, 0, 19, 0
-	spritelevelup 255, 0, 19, 0
-	move 8, Route104_Movement_14F16C
-	waitmove 0
-	disappear 8
-	move 255, Route104_Movement_14F162
-	waitmove 0
-	spriteinvisible 255, 0, 19
+	setobjectpriority 8, MAP_ROUTE104, 0
+	setobjectpriority 255, MAP_ROUTE104, 0
+	applymovement 8, Route104_Movement_14F16C
+	waitmovement 0
+	removeobject 8
+	applymovement 255, Route104_Movement_14F162
+	waitmovement 0
+	hideobjectat 255, MAP_ROUTE104
 	call Route104_EventScript_1A02E7
-	move 7, Route104_Movement_14F09F
-	move 255, Route104_Movement_14F09F
-	waitmove 0
-	move 255, Route104_Movement_14F166
-	waitmove 0
+	applymovement 7, Route104_Movement_14F09F
+	applymovement 255, Route104_Movement_14F09F
+	waitmovement 0
+	applymovement 255, Route104_Movement_14F166
+	waitmovement 0
 	call Route104_EventScript_1A02EF
-	spritevisible 255, 0, 11
-	move 255, Route104_Movement_14F168
-	waitmove 0
-	movespriteperm 2, 12, 8
-	reappear 2
-	spritelevelup 2, 0, 11, 0
-	clearflag 740
-	move 2, Route104_Movement_14F16F
-	waitmove 0
-	reappear 4
-	clearflag 743
+	showobjectat 255, MAP_DEWFORD_TOWN
+	applymovement 255, Route104_Movement_14F168
+	waitmovement 0
+	setobjectxyperm 2, 12, 8
+	addobject 2
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	applymovement 2, Route104_Movement_14F16F
+	waitmovement 0
+	addobject 4
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	call Route104_EventScript_1A02EF
-	setflag 742
-	spriteinvisible 7, 0, 19
-	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 19
-	restorespritelevel 2, 0, 11
-	moveoffscreen 2
-	setvar 0x408e, 0
-	checkflag 189
-	jumpif 0, Route104_EventScript_14F08B
-	checkflag 189
-	jumpeq Route104_EventScript_14F095
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	hideobjectat 7, MAP_ROUTE104
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	resetobjectpriority 255, MAP_ROUTE104
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
+	moveobjectoffscreen 2
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 0
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_14F08B
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_14F095
 	end
 
 Route104_EventScript_14F08B:: @ 814F08B
@@ -409,9 +402,9 @@ Route104_EventScript_14F189:: @ 814F189
 
 Route104_EventScript_14F1A0:: @ 814F1A0
 	trainerbattle 0, OPPONENT_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F1C7
+	goto_if_eq Route104_EventScript_14F1C7
 	msgbox Route104_Text_1B87C3, 6
 	end
 
@@ -422,9 +415,9 @@ Route104_EventScript_14F1C7:: @ 814F1C7
 
 Route104_EventScript_14F1DE:: @ 814F1DE
 	trainerbattle 0, OPPONENT_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F205
+	goto_if_eq Route104_EventScript_14F205
 	msgbox Route104_Text_1B8925, 6
 	end
 
@@ -435,9 +428,9 @@ Route104_EventScript_14F205:: @ 814F205
 
 Route104_EventScript_14F21C:: @ 814F21C
 	trainerbattle 0, OPPONENT_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F243
+	goto_if_eq Route104_EventScript_14F243
 	msgbox Route104_Text_1B8A69, 6
 	end
 

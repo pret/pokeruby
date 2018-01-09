@@ -3,14 +3,14 @@ MossdeepCity_PokemonCenter_1F_MapScripts:: @ 815A8D0
 	.byte 0
 
 MossdeepCity_PokemonCenter_1F_MapScript1_15A8D6:: @ 815A8D6
-	sethealplace 9
+	setrespawn 9
 	end
 
 MossdeepCity_PokemonCenter_1F_EventScript_15A8DA:: @ 815A8DA
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call MossdeepCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 

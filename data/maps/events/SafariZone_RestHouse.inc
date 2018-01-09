@@ -4,8 +4,8 @@ SafariZone_RestHouse_MapObjects:: @ 8391EC0
 	object_event 3, MAP_OBJ_GFX_FAT_MAN, 0, 2, 0, 5, 0, 3, 10, 17, 0, 0, 0, 0, 0, SafariZone_RestHouse_EventScript_160C41, 0, 0, 0
 
 SafariZone_RestHouse_MapWarps:: @ 8391F08
-	warp_def 3, 8, 0, 0, SafariZone_Southwest
-	warp_def 4, 8, 0, 0, SafariZone_Southwest
+	warp_def 3, 8, 0, 0, MAP_SAFARI_ZONE_SOUTHWEST
+	warp_def 4, 8, 0, 0, MAP_SAFARI_ZONE_SOUTHWEST
 
 SafariZone_RestHouse_MapEvents:: @ 8391F18
 	map_events SafariZone_RestHouse_MapObjects, SafariZone_RestHouse_MapWarps, 0x0, 0x0

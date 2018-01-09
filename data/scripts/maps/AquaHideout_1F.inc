@@ -10,8 +10,7 @@ AquaHideout_1F_EventScript_15D7CE:: @ 815D7CE
 MagmaHideout_1F_EventScript_15D7CE:: @ 815D7CE
 	lock
 	faceplayer
-	checkflag 111
-	jumpeq AquaHideout_1F_EventScript_15D7E3
+	goto_if_set FLAG_MT_PYRE_ORB_STOLEN, AquaHideout_1F_EventScript_15D7E3
 	msgbox AquaHideout_1F_Text_196AFD, 4
 	release
 	end
@@ -25,8 +24,7 @@ AquaHideout_1F_EventScript_15D7ED:: @ 815D7ED
 MagmaHideout_1F_EventScript_15D7ED:: @ 815D7ED
 	lock
 	faceplayer
-	checkflag 111
-	jumpeq AquaHideout_1F_EventScript_15D802
+	goto_if_set FLAG_MT_PYRE_ORB_STOLEN, AquaHideout_1F_EventScript_15D802
 	msgbox AquaHideout_1F_Text_196C83, 4
 	release
 	end

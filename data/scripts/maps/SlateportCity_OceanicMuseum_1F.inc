@@ -4,11 +4,11 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 8155ACA
 
 SlateportCity_OceanicMuseum_1F_MapScript1_155AD0:: @ 8155AD0
 	.ifdef SAPPHIRE
-	setvar 0x4010, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar 0x4010, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	end
 
@@ -18,59 +18,58 @@ SlateportCity_OceanicMuseum_1F_EventScript_155ADB:: @ 8155ADB
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AE4:: @ 8155AE4
 	lockall
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
-	waitmove 0
-	jump SlateportCity_OceanicMuseum_1F_EventScript_155B06
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A083F
+	waitmovement 0
+	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 	lockall
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
-	waitmove 0
-	jump SlateportCity_OceanicMuseum_1F_EventScript_155B06
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_1A0843
+	waitmovement 0
+	goto SlateportCity_OceanicMuseum_1F_EventScript_155B06
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
-	showmoney 0, 0
-	snop
-	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
-	compare RESULT, 1
-	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
-	closebutton
-	hidemoney 0, 0
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
-	waitmove 0
+	showmoneybox 0, 0
+	nop
+	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
+	closemessage
+	hidemoneybox 0, 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	waitmovement 0
 	releaseall
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	checkmoney 0x32, 0
 	compare RESULT, 0
-	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
-	paymoney 0x32, 0
-	updatemoney 0, 0
-	snop
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B5A
+	takemoney 0x32, 0
+	updatemoneybox 0, 0
+	nop
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1DE, 4
-	setvar 0x40aa, 1
-	hidemoney 0, 0
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
+	hidemoneybox 0, 0
 	releaseall
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
-	checkflag 149
-	jumpif 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
-	closebutton
-	hidemoney 0, 0
-	move 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
-	waitmove 0
+	closemessage
+	hidemoneybox 0, 0
+	applymovement 255, SlateportCity_OceanicMuseum_1F_Movement_155B8D
+	waitmovement 0
 	releaseall
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E22D, 4
-	setvar 0x40aa, 1
-	hidemoney 0, 0
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 1
+	hidemoneybox 0, 0
 	releaseall
 	end
 
@@ -157,40 +156,40 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C31:: @ 8155C31
 SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	lock
 	faceplayer
-	pause 8
-	playsfx 21
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
-	waitmove 0
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
-	waitmove 0
+	delay 8
+	playse SE_PIN
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
+	waitmovement 0
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
+	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
-	giveitem ITEM_TM46
+	giveitem_std ITEM_TM46
 	compare RESULT, 0
-	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
-	setflag 269
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
+	setflag FLAG_RECEIVED_TM46
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E606, 4
-	closebutton
+	closemessage
 	compare FACING, 2
-	jumpeq SlateportCity_OceanicMuseum_1F_EventScript_155C98
+	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155C98
 	compare FACING, 2
-	jumpif 5, SlateportCity_OceanicMuseum_1F_EventScript_155CAD
+	goto_if_ne SlateportCity_OceanicMuseum_1F_EventScript_155CAD
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
-	waitmove 0
-	setflag 965
-	playsfx 9
-	disappear 13
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
+	waitmovement 0
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
+	playse SE_KAIDAN
+	removeobject 13
 	release
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
-	move 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
-	waitmove 0
-	setflag 965
-	playsfx 9
-	disappear 13
+	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
+	waitmovement 0
+	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
+	playse SE_KAIDAN
+	removeobject 13
 	release
 	end
 

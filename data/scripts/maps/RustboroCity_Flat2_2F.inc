@@ -8,13 +8,12 @@ RustboroCity_Flat2_2F_EventScript_157D97:: @ 8157D97
 RustboroCity_Flat2_2F_EventScript_157DA0:: @ 8157DA0
 	lock
 	faceplayer
-	checkflag 213
-	jumpeq RustboroCity_Flat2_2F_EventScript_157DCF
+	goto_if_set FLAG_RECEIVED_PREMIER_BALL_RUSTBORO, RustboroCity_Flat2_2F_EventScript_157DCF
 	msgbox RustboroCity_Flat2_2F_Text_185461, 4
-	giveitem ITEM_PREMIER_BALL
+	giveitem_std ITEM_PREMIER_BALL
 	compare RESULT, 0
-	jumpeq RustboroCity_Flat2_2F_EventScript_1A029B
-	setflag 213
+	goto_if_eq RustboroCity_Flat2_2F_EventScript_1A029B
+	setflag FLAG_RECEIVED_PREMIER_BALL_RUSTBORO
 	release
 	end
 

@@ -4,21 +4,21 @@ SlateportCity_House1_MapScripts:: @ 815567A
 SlateportCity_House1_EventScript_15567B:: @ 815567B
 	lock
 	faceplayer
-	msgbox SlateportCity_House1_Text_17D46A, 5
-	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_15569C
-	compare RESULT, 0
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	msgbox SlateportCity_House1_Text_17D46A, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq SlateportCity_House1_EventScript_15569C
+	compare RESULT, NO
+	goto_if_eq SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_15569C:: @ 815569C
 	msgbox SlateportCity_House1_Text_17D4DB, 4
-	special sub_80F9A0C
+	special SelectMonForNPCTrade
 	waitstate
-	compare 0x8004, 255
-	jumpif 5, SlateportCity_House1_EventScript_1556C9
-	compare 0x8004, 255
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	compare VAR_SPECIAL_4, 255
+	goto_if_ne SlateportCity_House1_EventScript_1556C9
+	compare VAR_SPECIAL_4, 255
+	goto_if_eq SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_1556BF:: @ 81556BF
@@ -27,22 +27,22 @@ SlateportCity_House1_EventScript_1556BF:: @ 81556BF
 	end
 
 SlateportCity_House1_EventScript_1556C9:: @ 81556C9
-	specialval RESULT, ScriptGetPartyMonSpecies
+	specialvar RESULT, ScriptGetPartyMonSpecies
 	compare RESULT, SPECIES_EGG
-	jumpeq SlateportCity_House1_EventScript_15571C
-	special sub_80BFAE0
-	special sub_80BFB10
+	goto_if_eq SlateportCity_House1_EventScript_15571C
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
+	special TV_CheckMonOTIDEqualsPlayerID
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155726
-	specialval RESULT, sub_810F96C
-	special sub_80BFAE0
+	goto_if_eq SlateportCity_House1_EventScript_155726
+	specialvar RESULT, MonOTNameMatchesPlayer
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155726
-	msgbox SlateportCity_House1_Text_17D505, 5
-	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155730
-	compare RESULT, 0
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	goto_if_eq SlateportCity_House1_EventScript_155726
+	msgbox SlateportCity_House1_Text_17D505, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq SlateportCity_House1_EventScript_155730
+	compare RESULT, NO
+	goto_if_eq SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_15571C:: @ 815571C
@@ -58,10 +58,10 @@ SlateportCity_House1_EventScript_155726:: @ 8155726
 SlateportCity_House1_EventScript_155730:: @ 8155730
 	msgbox SlateportCity_House1_Text_17D580, 4
 	call SlateportCity_House1_EventScript_1A0678
-	specialval RESULT, sub_80BF9B4
-	special sub_80BFAE0
+	specialvar RESULT, TV_PutNameRaterShowOnTheAirIfNicnkameChanged
+	special TV_CopyNicknameToStringVar1AndEnsureTerminated
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_15575A
+	goto_if_eq SlateportCity_House1_EventScript_15575A
 	msgbox SlateportCity_House1_Text_17D63A, 4
 	release
 	end

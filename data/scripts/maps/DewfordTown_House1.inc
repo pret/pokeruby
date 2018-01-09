@@ -12,9 +12,9 @@ DewfordTown_House1_EventScript_152FF8:: @ 8152FF8
 DewfordTown_House1_EventScript_153001:: @ 8153001
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_ZIGZAGOON, 0
+	waitse
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox DewfordTown_House1_Text_174CC8, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

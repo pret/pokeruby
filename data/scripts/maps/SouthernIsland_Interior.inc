@@ -4,72 +4,69 @@ SouthernIsland_Interior_MapScripts:: @ 8160B53
 	.byte 0
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
-	checkflag 2145
-	callif 1, SouthernIsland_Interior_EventScript_160B68
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, SouthernIsland_Interior_EventScript_160B68
 	end
 
 SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
-	disappear 2
+	removeobject 2
 	return
 
 SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 	.ifdef SAPPHIRE
-	setvar 0x4011, 188
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_LATIOS
 	.else
-	setvar 0x4011, 187
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_LATIAS
 	.endif
 	call SouthernIsland_Interior_EventScript_160B77
 	end
 
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq SouthernIsland_Interior_EventScript_160B8F
+	goto_if_eq SouthernIsland_Interior_EventScript_160B8F
 	compare RESULT, 1
-	jumpeq SouthernIsland_Interior_EventScript_160B95
+	goto_if_eq SouthernIsland_Interior_EventScript_160B95
 	end
 
 SouthernIsland_Interior_EventScript_160B8F:: @ 8160B8F
-	setvar 0x4010, 100
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_160B95:: @ 8160B95
-	setvar 0x4010, 105
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_RIVAL_MAY_NORMAL
 	return
 
 SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 	lockall
-	setvar 0x8008, 12
-	jump SouthernIsland_Interior_EventScript_160BA7
+	setvar VAR_SPECIAL_8, 12
+	goto SouthernIsland_Interior_EventScript_160BA7
 	end
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
-	checkflag 206
-	jumpeq SouthernIsland_Interior_EventScript_160C08
-	checkflag 2131
-	jumpif 0, SouthernIsland_Interior_EventScript_160C08
-	setflag 206
+	goto_if_set FLAG_ECOUNTERED_LATIAS_OR_LATIOS, SouthernIsland_Interior_EventScript_160C08
+	goto_if_unset FLAG_SYS_HAS_EON_TICKET, SouthernIsland_Interior_EventScript_160C08
+	setflag FLAG_ECOUNTERED_LATIAS_OR_LATIOS
 	special SpawnCameraDummy
-	move 127, SouthernIsland_Interior_Movement_160C12
-	waitmove 0
-	pause 50
-	checksound
-	pokecry SPECIES_LATIAS_OR_LATIOS, 0
-	pause 30
-	waitpokecry
-	reappear 2
-	pause 30
-	move 127, SouthernIsland_Interior_Movement_160C16
-	move 2, SouthernIsland_Interior_Movement_160C22
-	waitmove 0
-	pause 50
+	applymovement 127, SouthernIsland_Interior_Movement_160C12
+	waitmovement 0
+	delay 50
+	waitse
+	playmoncry SPECIES_LATIAS_OR_LATIOS, 0
+	delay 30
+	waitmoncry
+	addobject 2
+	delay 30
+	applymovement 127, SouthernIsland_Interior_Movement_160C16
+	applymovement 2, SouthernIsland_Interior_Movement_160C22
+	waitmovement 0
+	delay 50
 	special RemoveCameraDummy
 	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
-	setflag 911
-	setflag 2145
-	special StartBattle_SouthernIsland
+	setflag FLAG_HIDE_LATIOS_OR_LATIAS_STATIONARY
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special ScrSpecial_StartSouthernIslandBattle
 	waitstate
-	clearflag 2145
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	releaseall
 	end
 

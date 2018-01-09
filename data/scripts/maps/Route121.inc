@@ -21,15 +21,15 @@ Route121_EventScript_151B1C:: @ 8151B1C
 Route121_EventScript_151B25:: @ 8151B25
 	lockall
 	msgbox Route121_Text_171C8F, 4
-	closebutton
-	move 12, Route121_Movement_151B57
-	move 13, Route121_Movement_151B60
-	move 14, Route121_Movement_151B69
-	waitmove 0
-	disappear 12
-	disappear 13
-	disappear 14
-	setvar 0x4074, 1
+	closemessage
+	applymovement 12, Route121_Movement_151B57
+	applymovement 13, Route121_Movement_151B60
+	applymovement 14, Route121_Movement_151B69
+	waitmovement 0
+	removeobject 12
+	removeobject 13
+	removeobject 14
+	setvar VAR_ROUTE121_STATE, 1
 	releaseall
 	end
 
@@ -73,9 +73,9 @@ Route121_EventScript_151B72:: @ 8151B72
 
 Route121_EventScript_151B89:: @ 8151B89
 	trainerbattle 0, OPPONENT_WALTER_1, 0, Route121_Text_1BFA1B, Route121_Text_1BFA8C
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route121_EventScript_151BB0
+	goto_if_eq Route121_EventScript_151BB0
 	msgbox Route121_Text_1BFA9D, 6
 	end
 
@@ -101,9 +101,9 @@ Route121_EventScript_151BF9:: @ 8151BF9
 
 Route121_EventScript_151C14:: @ 8151C14
 	trainerbattle 0, OPPONENT_JESSICA_1, 0, Route121_Text_1BFE51, Route121_Text_1BFE80
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route121_EventScript_151C3B
+	goto_if_eq Route121_EventScript_151C3B
 	msgbox Route121_Text_1BFEAE, 6
 	end
 

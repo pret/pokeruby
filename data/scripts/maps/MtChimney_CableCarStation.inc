@@ -4,51 +4,51 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 	.byte 0
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
-	compare 0x40a3, 1
-	callif 1, MtChimney_CableCarStation_EventScript_15C111
+	compare VAR_CABLE_CAR_STATION_STATE, 1
+	call_if_eq MtChimney_CableCarStation_EventScript_15C111
 	end
 
 MtChimney_CableCarStation_EventScript_15C111:: @ 815C111
-	movespriteperm 1, 5, 4
-	spritebehave 1, 10
+	setobjectxyperm 1, 5, 4
+	setobjectmovementtype 1, 10
 	return
 
 MtChimney_CableCarStation_MapScript2_15C11D:: @ 815C11D
-	map_script_2 0x40a3, 1, MtChimney_CableCarStation_EventScript_15C127
+	map_script_2 VAR_CABLE_CAR_STATION_STATE, 1, MtChimney_CableCarStation_EventScript_15C127
 	.2byte 0
 
 MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 	lockall
-	move 255, MtChimney_CableCarStation_Movement_15C1B4
-	move 1, MtChimney_CableCarStation_Movement_15C1AA
-	waitmove 0
-	setvar 0x40a3, 0
-	movespriteperm 1, 6, 7
-	spritebehave 1, 8
+	applymovement 255, MtChimney_CableCarStation_Movement_15C1B4
+	applymovement 1, MtChimney_CableCarStation_Movement_15C1AA
+	waitmovement 0
+	setvar VAR_CABLE_CAR_STATION_STATE, 0
+	setobjectxyperm 1, 6, 7
+	setobjectmovementtype 1, 8
 	releaseall
 	end
 
 MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	lock
 	faceplayer
-	msgbox MtChimney_CableCarStation_Text_19256A, 5
-	compare RESULT, 1
-	jumpeq MtChimney_CableCarStation_EventScript_15C16C
-	compare RESULT, 0
-	jumpeq MtChimney_CableCarStation_EventScript_15C19B
+	msgbox MtChimney_CableCarStation_Text_19256A, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
+	compare RESULT, NO
+	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	msgbox MtChimney_CableCarStation_Text_1925A9, 4
-	closebutton
-	move 1, MtChimney_CableCarStation_Movement_15C1A5
-	move 255, MtChimney_CableCarStation_Movement_15C1AF
-	waitmove 0
-	setvar 0x8004, 1
-	setvar 0x40a3, 2
-	inccounter GAME_STAT_RODE_CABLE_CAR
+	closemessage
+	applymovement 1, MtChimney_CableCarStation_Movement_15C1A5
+	applymovement 255, MtChimney_CableCarStation_Movement_15C1AF
+	waitmovement 0
+	setvar VAR_SPECIAL_4, 1
+	setvar VAR_CABLE_CAR_STATION_STATE, 2
+	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
-	special sub_8123218
+	special CableCar
 	waitstate
 	release
 	end

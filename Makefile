@@ -7,13 +7,14 @@ CC1             := tools/agbcc/bin/agbcc
 override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
 LIBGCC := tools/agbcc/lib/libgcc.a
+LIBC   := tools/agbcc/lib/libc.a
 
 SHA1 := sha1sum -c
 
@@ -40,9 +41,9 @@ VERSIONS := ruby sapphire ruby_rev1 sapphire_rev1 ruby_rev2 sapphire_rev2 ruby_d
 $(VERSIONS) $(VERSIONS:%=compare_%)
 
 
-$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,src,asm,data}))
+$(shell mkdir -p build/ $(VERSIONS:%=build/%/{,asm,data,src{,/battle{,/anim},/field,/debug,/scene,/pokemon,/engine,/libs}}))
 
-C_SRCS := $(wildcard src/*.c)
+C_SRCS := $(shell find src -iname "*.c")
 ASM_SRCS := $(wildcard asm/*.s)
 DATA_ASM_SRCS := $(wildcard data/*.s)
 
@@ -83,6 +84,7 @@ include override.mk
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
+%.gbapal: %.png ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
@@ -90,17 +92,14 @@ sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(A
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
-%src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libc.o: CFLAGS := -O2
+%src/libs/siirtc.o: CFLAGS := -mthumb-interwork
 
-%src/siirtc.o: CFLAGS := -mthumb-interwork
+%src/libs/agb_flash.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+%src/libs/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-%src/agb_flash.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-%src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
-
-%src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
@@ -113,7 +112,8 @@ $1_ASM_OBJS := $$(ASM_SRCS:%.s=build/$1/%.o)
 $1_DATA_ASM_OBJS := $$(DATA_ASM_SRCS:%.s=build/$1/%.o)
 
 ifeq ($$(NODEP),)
-build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) src/$$(*F).c)
+build/$1/src/%.o: c_path = $$(*D)/$$(*F).c
+build/$1/src/%.o: c_dep = $$(shell $$(SCANINC) -I include $$(wildcard $$(c_path:build/$1/=)))
 build/$1/asm/%.o: asm_dep = $$(shell $$(SCANINC) asm/$$(*F).s)
 build/$1/data/%.o: asm_dep = $$(shell $$(SCANINC) data/$$(*F).s)
 endif
@@ -141,7 +141,7 @@ $$($1_DATA_ASM_OBJS): VERSION := $2
 $$($1_DATA_ASM_OBJS): REVISION := $3
 $$($1_DATA_ASM_OBJS): LANGUAGE := $4
 build/$1/data/%.o: data/%.s $$$$(asm_dep)
-	$$(PREPROC) $$< charmap.txt | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
+	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include | $$(AS) $$(ASFLAGS) --defsym $$(VERSION)=1 --defsym REVISION=$$(REVISION) --defsym $$(LANGUAGE)=1 -o $$@
 
 build/$1/sym_bss.ld: LANGUAGE := $4
 build/$1/sym_bss.ld: sym_bss.txt
@@ -159,7 +159,7 @@ build/$1/ld_script.ld: ld_script.txt build/$1/sym_bss.ld build/$1/sym_common.ld 
 	cd build/$1 && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" | sed "s#sound/#../../sound/#g" >ld_script.ld
 
 poke$1.elf: build/$1/ld_script.ld $$($1_OBJS)
-	cd build/$1 && $$(LD) -T ld_script.ld -T ../../shared_syms.txt -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC)
+	cd build/$1 && $$(LD) -T ld_script.ld -Map ../../poke$1.map -o ../../$$@ $$($1_OBJS_REL) ../../$$(LIBGCC) ../../$$(LIBC)
 
 poke$1.gba: %.gba: %.elf
 	$$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $$< $$@

@@ -1,33 +1,31 @@
 Event_TV:: @ 81A6E72
 	lockall
-	inccounter GAME_STAT_WATCHED_TV
-	special sub_80C2014
-	specialval RESULT, CheckForBigMovieOrEmergencyNewsOnTV
+	incrementgamestat GAME_STAT_WATCHED_TV
+	special ResetTVShowState
+	specialvar RESULT, CheckForBigMovieOrEmergencyNewsOnTV
 	compare RESULT, 2
-	jumpeq EventScript_1A6F01
+	goto_if_eq EventScript_1A6F01
 	compare RESULT, 1
-	jumpeq EventScript_1A6F0B
-	checkflag 2098
-	jumpif 0, EventScript_1A6EF1
-	checkflag 2097
-	jumpeq EventScript_1A6EF1
-	specialval RESULT, IsTVShowInSearchOfTrainersAiring
+	goto_if_eq EventScript_1A6F0B
+	goto_if_unset FLAG_SYS_TV_START, EventScript_1A6EF1
+	goto_if_set FLAG_SYS_TV_WATCH, EventScript_1A6EF1
+	specialvar RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
-	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F50
+	goto_if_eq EventScript_1A6F66
+	goto EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
-	specialval 0x8004, special_0x44
-	compare 0x8004, 255
-	jumpeq EventScript_1A6F3F
-	specialval RESULT, special_0x4a
+	specialvar VAR_SPECIAL_4, special_0x44
+	compare VAR_SPECIAL_4, 255
+	goto_if_eq EventScript_1A6F3F
+	specialvar RESULT, GetNonMassOutbreakActiveTVShow
 	compare RESULT, 255
-	jumpeq EventScript_1A6F3F
-	copyvar 0x8004, RESULT
-	specialval RESULT, sub_80BDA0C
+	goto_if_eq EventScript_1A6F3F
+	copyvar VAR_SPECIAL_4, RESULT
+	specialvar RESULT, GetTVShowType
 	compare RESULT, 0
-	jumpif 5, EventScript_1A6F21
+	goto_if_ne EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -49,47 +47,47 @@ EventScript_1A6F0B:
 	msgbox UnknownString_8172C50, 4
 	.endif
 	special InitRoamer
-	clearflag 2141
-	setflag 255
+	clearflag FLAG_SYS_TV_LATI
+	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
 	special TurnOffTVScreen
 	releaseall
 	end
 
 EventScript_1A6F21:
 	special DoTVShow
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	compare RESULT, 1
-	jumpif 5, EventScript_1A6F21
-	jump EventScript_1A6F37
+	goto_if_ne EventScript_1A6F21
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F37:
 	special TurnOffTVScreen
-	setflag 2097
+	setflag FLAG_SYS_TV_WATCH
 	releaseall
 	end
 
 EventScript_1A6F3F:
 	special GetMomOrDadStringForTVMessage
 	msgbox UnknownString_81A0E68, 4
-	jump EventScript_1A6F37
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F50:
-	special sub_80BECE8
+	special DoPokeNews
 	compare RESULT, 0
-	jumpeq EventScript_1A6EBB
-	waittext
-	waitbutton
-	jump EventScript_1A6F37
+	goto_if_eq EventScript_1A6EBB
+	waitmessage
+	waitbuttonpress
+	goto EventScript_1A6F37
 	end
 
 EventScript_1A6F66:
 	special DoTVShowInSearchOfTrainers
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	compare RESULT, 0
-	jumpeq EventScript_1A6F66
-	jump EventScript_1A6F37
+	goto_if_eq EventScript_1A6F66
+	goto EventScript_1A6F37
 	end

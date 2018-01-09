@@ -3,22 +3,21 @@ EverGrandeCity_PokemonLeague_MapScripts:: @ 815BA75
 	.byte 0
 
 EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
-	sethealplace 20
-	setflag 2132
-	checkflag 263
-	callif 0, EverGrandeCity_PokemonLeague_EventScript_15BA8B
+	setrespawn 20
+	setflag FLAG_SYS_POKEMON_LEAGUE_FLY
+	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_EventScript_15BA8B
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BA8B:: @ 815BA8B
-	movespriteperm 3, 9, 2
-	movespriteperm 4, 10, 2
+	setobjectxyperm 3, 9, 2
+	setobjectxyperm 4, 10, 2
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BA9A:: @ 815BA9A
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call EverGrandeCity_PokemonLeague_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 
@@ -26,7 +25,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAA8:: @ 815BAA8
 	lock
 	faceplayer
 	message EverGrandeCity_PokemonLeague_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart EverGrandeCity_PokemonLeague_Items
 	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, 4
 	release
@@ -47,57 +46,55 @@ EverGrandeCity_PokemonLeague_Items:: @ 815BAC0
 
 EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	lockall
-	checkflag 263
-	jumpeq EverGrandeCity_PokemonLeague_EventScript_15BB57
-	getplayerxy 0x4000, 0x4001
-	compare 0x4000, 11
-	callif 4, EverGrandeCity_PokemonLeague_EventScript_15BB34
-	compare 0x4000, 8
-	callif 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
+	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_EventScript_15BB57
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	compare VAR_TEMP_0, 11
+	call_if_ge EverGrandeCity_PokemonLeague_EventScript_15BB34
+	compare VAR_TEMP_0, 8
+	call_if_le EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
-	waittext
-	pause 75
-	checkflag 2060
-	jumpif 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
-	closebutton
-	move 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
-	move 4, EverGrandeCity_PokemonLeague_Movement_15BB81
-	waitmove 0
-	pause 10
-	fanfare 369
+	waitmessage
+	delay 75
+	goto_if_unset FLAG_BADGE06_GET, EverGrandeCity_PokemonLeague_EventScript_15BB4A
+	closemessage
+	applymovement 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
+	applymovement 4, EverGrandeCity_PokemonLeague_Movement_15BB81
+	waitmovement 0
+	delay 10
+	playfanfare BGM_ME_BACHI
 	message EverGrandeCity_PokemonLeague_Text_191804
-	waittext
+	waitmessage
 	waitfanfare
-	closebutton
-	moveoffscreen 3
-	moveoffscreen 4
-	setflag 263
+	closemessage
+	moveobjectoffscreen 3
+	moveobjectoffscreen 4
+	setflag FLAG_ENTERED_ELITE_FOUR
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB34:: @ 815BB34
-	move 255, EverGrandeCity_PokemonLeague_Movement_15BB76
-	waitmove 0
+	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB76
+	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB3F:: @ 815BB3F
-	move 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
-	waitmove 0
+	applymovement 255, EverGrandeCity_PokemonLeague_Movement_15BB7A
+	waitmovement 0
 	return
 
 EverGrandeCity_PokemonLeague_EventScript_15BB4A:: @ 815BB4A
-	playsfx 32
+	playse SE_HAZURE
 	msgbox EverGrandeCity_PokemonLeague_Text_19179C, 4
 	releaseall
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
-	move LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
-	waitmove 0
+	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A0839
+	waitmovement 0
 	msgbox EverGrandeCity_PokemonLeague_Text_191804, 4
-	closebutton
-	move LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement LAST_TALKED, EverGrandeCity_PokemonLeague_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 

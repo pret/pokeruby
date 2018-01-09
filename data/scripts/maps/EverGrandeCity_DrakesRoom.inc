@@ -5,29 +5,28 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	.byte 0
 
 @ 815B71D
-	map_script_2 0x4001, 0, EverGrandeCity_DrakesRoom_EventScript_15B727
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_DrakesRoom_EventScript_15B727
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
-	map_script_2 0x409c, 3, EverGrandeCity_DrakesRoom_EventScript_15B736
+	map_script_2 VAR_ELITE_4_STATE, 3, EverGrandeCity_DrakesRoom_EventScript_15B736
 	.2byte 0
 
 EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 	lockall
 	call EverGrandeCity_DrakesRoom_EventScript_1A0710
-	setvar 0x409c, 4
+	setvar VAR_ELITE_4_STATE, 4
 	releaseall
 	end
 
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
-	checkflag 1248
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B758
-	compare 0x409c, 4
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
+	call_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B758
+	compare VAR_ELITE_4_STATE, 4
+	call_if_eq EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758
@@ -41,12 +40,11 @@ EverGrandeCity_DrakesRoom_EventScript_15B75E:: @ 815B75E
 EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
-	checkflag 1248
-	jumpeq EverGrandeCity_DrakesRoom_EventScript_15B78B
-	playmusic 450, 0
+	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B78B
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
-	jump EverGrandeCity_DrakesRoom_EventScript_15B795
+	goto EverGrandeCity_DrakesRoom_EventScript_15B795
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
@@ -55,9 +53,9 @@ EverGrandeCity_DrakesRoom_EventScript_15B78B:: @ 815B78B
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	special sub_810FF60
-	setflag 1248
+	setflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call EverGrandeCity_DrakesRoom_EventScript_1A0693
 	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
 	release

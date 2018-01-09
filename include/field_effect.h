@@ -67,7 +67,7 @@ enum FieldEffectScriptIdx
     FLDEFF_CUT_GRASS,
     FLDEFF_FIELD_MOVE_SHOW_MON_INIT,
     FLDEFF_USE_FLY_ANCIENT_TOMB,
-    FLDEFF_PCTURN_ON,
+    FLDEFF_SECRET_BASE_PC_TURN_ON,
     FLDEFF_HALL_OF_FAME_RECORD,
     FLDEFF_USE_TELEPORT
 };
@@ -252,7 +252,8 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 
-extern u32 gUnknown_0202FF84[8];
+extern s32 gFieldEffectArguments[8];
 
 #endif // GUARD_FIELD_EFFECT_H

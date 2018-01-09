@@ -3,7 +3,7 @@ AbandonedShip_Rooms_B1F_MapScripts:: @ 815EA35
 	.byte 0
 
 AbandonedShip_Rooms_B1F_MapScript1_15EA3B:: @ 815EA3B
-	warp4 AbandonedShip_Underwater2, 255, 17, 4
+	setdivewarp MAP_ABANDONED_SHIP_UNDERWATER2, 255, 17, 4
 	end
 
 AbandonedShip_Rooms_B1F_EventScript_15EA44:: @ 815EA44

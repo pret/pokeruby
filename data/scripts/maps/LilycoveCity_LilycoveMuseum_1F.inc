@@ -7,14 +7,14 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15841C:: @ 815841C
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158425:: @ 8158425
 	lockall
-	move 2, LilycoveCity_LilycoveMuseum_1F_Movement_1A0839
+	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_1A0839
 	message LilycoveCity_LilycoveMuseum_1F_Text_1873B9
-	waittext
+	waitmessage
 	multichoice 20, 8, 16, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_LilycoveMuseum_1F_EventScript_158458
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158458
 	compare RESULT, 1
-	jumpeq LilycoveCity_LilycoveMuseum_1F_EventScript_15844F
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_15844F
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_15844F:: @ 815844F
@@ -22,11 +22,11 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15844F:: @ 815844F
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158458:: @ 8158458
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187495, 5
-	compare RESULT, 0
-	jumpeq LilycoveCity_LilycoveMuseum_1F_EventScript_158477
-	compare RESULT, 1
-	jumpeq LilycoveCity_LilycoveMuseum_1F_EventScript_158481
+	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187495, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158477
+	compare RESULT, YES
+	goto_if_eq LilycoveCity_LilycoveMuseum_1F_EventScript_158481
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158477:: @ 8158477
@@ -36,9 +36,9 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158477:: @ 8158477
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_158481:: @ 8158481
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187534, 3
-	move 2, LilycoveCity_LilycoveMuseum_1F_Movement_1584FC
-	waitmove 0
-	disappear 2
+	applymovement 2, LilycoveCity_LilycoveMuseum_1F_Movement_1584FC
+	waitmovement 0
+	removeobject 2
 	switch FACING
 	case 2, LilycoveCity_LilycoveMuseum_1F_EventScript_1584BD
 	case 3, LilycoveCity_LilycoveMuseum_1F_EventScript_1584D2
@@ -47,25 +47,25 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158481:: @ 8158481
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_1584BD:: @ 81584BD
 	lockall
-	move 255, LilycoveCity_LilycoveMuseum_1F_Movement_158504
-	waitmove 0
-	warp LilycoveCity_LilycoveMuseum_2F, 255, 11, 8
+	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_158504
+	waitmovement 0
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_1584D2:: @ 81584D2
 	lockall
-	move 255, LilycoveCity_LilycoveMuseum_1F_Movement_1584FE
-	waitmove 0
-	warp LilycoveCity_LilycoveMuseum_2F, 255, 11, 8
+	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_1584FE
+	waitmovement 0
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_1584E7:: @ 81584E7
 	lockall
-	move 255, LilycoveCity_LilycoveMuseum_1F_Movement_158501
-	waitmove 0
-	warp LilycoveCity_LilycoveMuseum_2F, 255, 11, 8
+	applymovement 255, LilycoveCity_LilycoveMuseum_1F_Movement_158501
+	waitmovement 0
+	warp MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 255, 11, 8
 	waitstate
 	end
 
@@ -152,8 +152,8 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_158585:: @ 8158585
 LilycoveCity_LilycoveMuseum_1F_EventScript_15858E:: @ 815858E
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187B04, 2
 	lockall
-	move 8, LilycoveCity_LilycoveMuseum_1F_Movement_1A083D
-	waitmove 0
+	applymovement 8, LilycoveCity_LilycoveMuseum_1F_Movement_1A083D
+	waitmovement 0
 	releaseall
 	end
 

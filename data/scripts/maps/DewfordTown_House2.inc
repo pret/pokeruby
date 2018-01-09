@@ -4,13 +4,12 @@ DewfordTown_House2_MapScripts:: @ 81535DB
 DewfordTown_House2_EventScript_1535DC:: @ 81535DC
 	lock
 	faceplayer
-	checkflag 289
-	jumpeq DewfordTown_House2_EventScript_153615
+	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_153615
 	msgbox DewfordTown_House2_Text_175EFE, 4
-	giveitem ITEM_SILK_SCARF
+	giveitem_std ITEM_SILK_SCARF
 	compare RESULT, 0
-	jumpeq DewfordTown_House2_EventScript_15360B
-	setflag 289
+	goto_if_eq DewfordTown_House2_EventScript_15360B
+	setflag FLAG_RECEIVED_SILK_SCARF
 	release
 	end
 

@@ -3,14 +3,14 @@ FortreeCity_PokemonCenter_1F_MapScripts:: @ 8158011
 	.byte 0
 
 FortreeCity_PokemonCenter_1F_MapScript1_158017:: @ 8158017
-	sethealplace 7
+	setrespawn 7
 	end
 
 FortreeCity_PokemonCenter_1F_EventScript_15801B:: @ 815801B
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call FortreeCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 

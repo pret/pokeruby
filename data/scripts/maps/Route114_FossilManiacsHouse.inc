@@ -3,19 +3,18 @@ Route114_FossilManiacsHouse_MapScripts:: @ 815C1B9
 	.byte 0
 
 Route114_FossilManiacsHouse_MapScript1_15C1BF:: @ 815C1BF
-	setflag 2135
+	setflag FLAG_LANDMARK_FOSSIL_MANIACS_HOUSE
 	end
 
 Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	lock
 	faceplayer
-	checkflag 261
-	jumpeq Route114_FossilManiacsHouse_EventScript_15C1F2
+	goto_if_set FLAG_RECEIVED_TM28, Route114_FossilManiacsHouse_EventScript_15C1F2
 	msgbox Route114_FossilManiacsHouse_Text_1925E1, 4
-	giveitem ITEM_TM28
+	giveitem_std ITEM_TM28
 	compare RESULT, 0
-	jumpeq Route114_FossilManiacsHouse_EventScript_1A029B
-	setflag 261
+	goto_if_eq Route114_FossilManiacsHouse_EventScript_1A029B
+	setflag FLAG_RECEIVED_TM28
 	release
 	end
 

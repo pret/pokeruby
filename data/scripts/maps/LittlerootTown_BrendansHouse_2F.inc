@@ -4,36 +4,35 @@ LittlerootTown_BrendansHouse_2F_MapScripts:: @ 81527A4
 	.byte 0
 
 LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
-	checkflag 130
-	callif 0, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
-	compare 0x4092, 4
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6950
+	call_if_unset FLAG_DEFEATED_RIVAL_ROUTE103, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
+	compare VAR_LITTLEROOT_INTRO_STATE, 4
+	call_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1B6950
 	call LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D
-	setvar 0x4089, 0
+	setvar VAR_0x4089, 0
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527CE:: @ 81527CE
-	movespriteperm 1, 1, 2
-	spritebehave 1, 7
+	setobjectxyperm 1, 1, 2
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
-	map_script_2 0x4089, 0, LittlerootTown_BrendansHouse_2F_EventScript_1527E4
+	map_script_2 VAR_0x4089, 0, LittlerootTown_BrendansHouse_2F_EventScript_1527E4
 	.2byte 0
 
 LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
 	end
 
 @ 81527F1
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_15280A
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15280A
 	compare RESULT, 1
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152814
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152814
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_15280A:: @ 815280A
@@ -50,17 +49,17 @@ gUnknown_0815281E:: @ 815281E
 
 LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152837
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_152837
 	compare RESULT, 1
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_15285D
+	goto_if_eq LittlerootTown_BrendansHouse_2F_EventScript_15285D
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
-	setvar 0x8004, 1
+	setvar VAR_SPECIAL_4, 1
 	special DoPCTurnOnEffect
-	playsfx SE_PC_ON
+	playse SE_PC_ON
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
 	special BedroomPC
 	waitstate
@@ -68,8 +67,8 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	end
 
 gBrendanHouse_TurnPCOff:: @ 8152850
-	setvar 0x8004, 1
-	playsfx SE_PC_OFF
+	setvar VAR_SPECIAL_4, 1
+	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall
 	end

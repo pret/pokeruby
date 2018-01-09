@@ -3,21 +3,18 @@ Route116_MapScripts:: @ 8150A31
 	.byte 0
 
 Route116_MapScript1_150A37:: @ 8150A37
-	checkflag 143
-	callif 1, Route116_EventScript_150A41
+	call_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_150A41
 	end
 
 Route116_EventScript_150A41:: @ 8150A41
-	movespriteperm 21, 41, 10
+	setobjectxyperm 21, 41, 10
 	return
 
 Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
-	checkflag 143
-	jumpeq Route116_EventScript_150A67
-	checkflag 142
-	jumpeq Route116_EventScript_150A71
+	goto_if_set FLAG_RECOVERED_DEVON_GOODS, Route116_EventScript_150A67
+	goto_if_set FLAG_DEVON_GOODS_STOLEN, Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release
 	end
@@ -35,46 +32,45 @@ Route116_EventScript_150A71:: @ 8150A71
 Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
-	checkflag 287
-	jumpeq Route116_EventScript_150B04
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
-	jump Route116_EventScript_150A94
+	goto Route116_EventScript_150A94
 	end
 
 Route116_EventScript_150A94:: @ 8150A94
-	setflag 287
-	giveitem ITEM_REPEAT_BALL
+	setflag FLAG_MET_DEVON_EMPLOYEE
+	giveitem_std ITEM_REPEAT_BALL
 	compare RESULT, 0
-	jumpeq Route116_EventScript_150B12
+	goto_if_eq Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
-	closebutton
+	closemessage
 	compare FACING, 2
-	callif 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 1
-	callif 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 3
-	callif 1, Route116_EventScript_150AEE
+	call_if_eq Route116_EventScript_150AEE
 	compare FACING, 4
-	callif 1, Route116_EventScript_150AF9
-	disappear LAST_TALKED
-	clearflag 949
-	setflag 256
+	call_if_eq Route116_EventScript_150AF9
+	removeobject LAST_TALKED
+	clearflag FLAG_HIDE_EMPLOYEE_DEVON_CORP_3F
+	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
 
 Route116_EventScript_150AEE:: @ 8150AEE
-	move LAST_TALKED, Route116_Movement_150B1C
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150B1C
+	waitmovement 0
 	return
 
 Route116_EventScript_150AF9:: @ 8150AF9
-	move LAST_TALKED, Route116_Movement_150B25
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150B25
+	waitmovement 0
 	return
 
 Route116_EventScript_150B04:: @ 8150B04
 	msgbox Route116_Text_170865, 4
-	jump Route116_EventScript_150A94
+	goto Route116_EventScript_150A94
 	end
 
 Route116_EventScript_150B12:: @ 8150B12
@@ -130,17 +126,17 @@ Route116_EventScript_150B5D:: @ 8150B5D
 	lock
 	faceplayer
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	release
 	end
 
 Route116_EventScript_150B6E:: @ 8150B6E
 	lockall
-	move 11, Route116_Movement_1A0843
-	move 255, Route116_Movement_1A083F
-	waitmove 0
+	applymovement 11, Route116_Movement_1A0843
+	applymovement 255, Route116_Movement_1A083F
+	waitmovement 0
 	msgbox Route116_Text_17032A, 4
-	setvar 0x406f, 2
+	setvar VAR_ROUTE116_STATE, 2
 	releaseall
 	end
 
@@ -149,58 +145,58 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BCA
-	specialval RESULT, sub_810F828
+	goto_if_eq Route116_EventScript_150BCA
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BBB
+	goto_if_eq Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
 	release
 	end
 
 Route116_EventScript_150BBB:: @ 8150BBB
 	msgbox Route116_Text_1709B7, 4
-	closebutton
-	jump Route116_EventScript_150C03
+	closemessage
+	goto Route116_EventScript_150C03
 	end
 
 Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_1708EE, 4
 	msgbox Route116_Text_170921, 4
-	specialval RESULT, sub_810F828
+	specialvar RESULT, FoundBlackGlasses
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BF4
+	goto_if_eq Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
 	release
 	end
 
 Route116_EventScript_150BF4:: @ 8150BF4
 	msgbox Route116_Text_17094D, 4
-	closebutton
-	jump Route116_EventScript_150C03
+	closemessage
+	goto Route116_EventScript_150C03
 	end
 
 Route116_EventScript_150C03:: @ 8150C03
-	pause 20
+	delay 20
 	compare FACING, 2
-	callif 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 1
-	callif 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 3
-	callif 1, Route116_EventScript_150C37
+	call_if_eq Route116_EventScript_150C37
 	compare FACING, 4
-	callif 1, Route116_EventScript_150C42
-	disappear LAST_TALKED
+	call_if_eq Route116_EventScript_150C42
+	removeobject LAST_TALKED
 	release
 	end
 
 Route116_EventScript_150C37:: @ 8150C37
-	move LAST_TALKED, Route116_Movement_150C4D
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150C4D
+	waitmovement 0
 	return
 
 Route116_EventScript_150C42:: @ 8150C42
-	move LAST_TALKED, Route116_Movement_150C57
-	waitmove 0
+	applymovement LAST_TALKED, Route116_Movement_150C57
+	waitmovement 0
 	return
 
 Route116_Movement_150C4D:: @ 8150C4D
@@ -240,9 +236,9 @@ Route116_EventScript_150C79:: @ 8150C79
 
 Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150CB7
+	goto_if_eq Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
 	end
 
@@ -263,9 +259,9 @@ Route116_EventScript_150CE5:: @ 8150CE5
 
 Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150D23
+	goto_if_eq Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6
 	end
 

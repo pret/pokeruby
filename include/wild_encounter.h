@@ -18,22 +18,22 @@ struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
-    struct WildPokemonInfo *landMonsInfo;
-    struct WildPokemonInfo *waterMonsInfo;
-    struct WildPokemonInfo *rockSmashMonsInfo;
-    struct WildPokemonInfo *fishingMonsInfo;
+    const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *waterMonsInfo;
+    const struct WildPokemonInfo *rockSmashMonsInfo;
+    const struct WildPokemonInfo *fishingMonsInfo;
 };
 
-extern struct WildPokemonHeader gWildMonHeaders[];
+extern const struct WildPokemonHeader gWildMonHeaders[];
 
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 a, u16 b);
-void RockSmashWildEncounter(void);
+void ScrSpecial_RockSmashWildEncounter(void);
 bool8 SweetScentWildEncounter(void);
-bool8 GetFishingWildMonListHeader(void);
+bool8 DoesCurrentMapHaveFishingMons(void);
 void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
-u16 GetMirageIslandMon(void);
+u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

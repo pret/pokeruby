@@ -5,7 +5,7 @@ SootopolisCity_Mart_EventScript_15B21B:: @ 815B21B
 	lock
 	faceplayer
 	message SootopolisCity_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart SootopolisCity_Mart_Items
 	msgbox SootopolisCity_Mart_Text_1A0C02, 4
 	release
@@ -29,10 +29,8 @@ SootopolisCity_Mart_Items:: @ 815B234
 SootopolisCity_Mart_EventScript_15B24A:: @ 815B24A
 	lock
 	faceplayer
-	checkflag 113
-	jumpeq SootopolisCity_Mart_EventScript_15B268
-	checkflag 129
-	jumpif 0, SootopolisCity_Mart_EventScript_15B268
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_15B268
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_15B268
 	msgbox SootopolisCity_Mart_Text_18F8D7, 4
 	release
 	end
@@ -45,10 +43,8 @@ SootopolisCity_Mart_EventScript_15B268:: @ 815B268
 SootopolisCity_Mart_EventScript_15B272:: @ 815B272
 	lock
 	faceplayer
-	checkflag 113
-	jumpeq SootopolisCity_Mart_EventScript_15B290
-	checkflag 129
-	jumpif 0, SootopolisCity_Mart_EventScript_15B290
+	goto_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, SootopolisCity_Mart_EventScript_15B290
+	goto_if_unset FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_Mart_EventScript_15B290
 	msgbox SootopolisCity_Mart_Text_18F96B, 4
 	release
 	end

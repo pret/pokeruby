@@ -4,80 +4,78 @@ CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
 	.byte 0
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
-	checkflag 2145
-	callif 1, CaveOfOrigin_B4F_EventScript_15DDC1
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, CaveOfOrigin_B4F_EventScript_15DDC1
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
-	disappear 1
+	removeobject 1
 	return
 
 CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	.ifdef SAPPHIRE
-	setmapfooter 163
+	setmaplayoutindex 163
 	.else
-	setmapfooter 313
+	setmaplayoutindex 313
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
-	checkflag 113
-	callif 1, CaveOfOrigin_B4F_EventScript_1A04E3
+	call_if_set FLAG_LEGENDARY_BATTLE_COMPLETED, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	lockall
-	move 255, CaveOfOrigin_B4F_Movement_1A0841
-	waitmove 0
+	applymovement 255, CaveOfOrigin_B4F_Movement_1A0841
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B4F03, 4
 	.else
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
 	.endif
-	closebutton
-	setweather 0
+	closemessage
+	setweather WEATHER_NONE
 	doweather
 	special WaitWeather
 	waitstate
-	playsfx 209
-	setanimation 0, 9
-	setanimation 1, 13
-	setanimation 2, 0
-	doanimation 54
-	checkanimation 54
+	playse SE_W197
+	setfieldeffectargument 0, 9
+	setfieldeffectargument 1, 13
+	setfieldeffectargument 2, 0
+	dofieldeffect 54
+	waitfieldeffect 54
 	.ifdef SAPPHIRE
 	setvar RESULT, 3
 	.else
 	setvar RESULT, 2
 	.endif
-	playsfx 107
+	playse SE_TAMA
 	special sub_80818A4
 	waitstate
 	special sub_80818FC
 	waitstate
-	move 1, CaveOfOrigin_B4F_Movement_15DE7D
-	waitmove 0
-	pause 60
+	applymovement 1, CaveOfOrigin_B4F_Movement_15DE7D
+	waitmovement 0
+	delay 60
 	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
-	checksound
-	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
-	pause 40
-	waitpokecry
-	setflag 2145
-	special StartBattle_GroudonKyogre
+	waitse
+	playmoncry SPECIES_GROUDON_OR_KYOGRE, 2
+	delay 40
+	waitmoncry
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special ScrSpecial_StartGroudonKyogreBattle
 	waitstate
-	clearflag 2145
-	specialval RESULT, sub_810E300
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar RESULT, GetBattleOutcome
 	compare RESULT, 1
-	callif 1, CaveOfOrigin_B4F_EventScript_15DE73
-	setflag 816
-	setflag 855
-	setflag 856
-	clearflag 815
-	setvar 0x409b, 1
-	setflag 113
-	clearflag 854
-	clearflag 2090
-	setvar 0x40b9, 2
-	clearflag 916
+	call_if_eq CaveOfOrigin_B4F_EventScript_15DE73
+	setflag FLAG_HIDE_WALLACE_SOOTOPOLIS
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_1
+	setflag FLAG_HIDE_CAVE_OF_ORIGIN_ENTRANCE_WOMAN_2
+	clearflag FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM
+	setvar VAR_CAVE_OF_ORIGIN_B4F_STATE, 1
+	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
+	clearflag FLAG_HIDE_SOOTOPOLIS_RESIDENTS
+	clearflag FLAG_SYS_WEATHER_CTRL
+	setvar VAR_MT_PYRE_STATE, 2
+	clearflag FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
 	releaseall
 	end
 
@@ -87,7 +85,7 @@ CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
 	.else
 	msgbox CaveOfOrigin_B4F_Text_1B5009, 4
 	.endif
-	closebutton
+	closemessage
 	return
 
 CaveOfOrigin_B4F_Movement_15DE7D:: @ 815DE7D

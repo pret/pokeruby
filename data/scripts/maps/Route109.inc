@@ -3,11 +3,11 @@ Route109_MapScripts:: @ 814F4D2
 
 Route109_EventScript_14F4D3:: @ 814F4D3
 	call Route109_EventScript_1A010C
-	spritelevelup 2, 0, 24, 0
-	spritelevelup 255, 0, 24, 0
-	move 2, Route109_Movement_14F67B
-	waitmove 0
-	disappear 2
+	setobjectpriority 2, MAP_ROUTE109, 0
+	setobjectpriority 255, MAP_ROUTE109, 0
+	applymovement 2, Route109_Movement_14F67B
+	waitmovement 0
+	removeobject 2
 	switch FACING
 	case 1, Route109_EventScript_14F518
 	case 3, Route109_EventScript_14F538
@@ -15,49 +15,49 @@ Route109_EventScript_14F4D3:: @ 814F4D3
 	end
 
 Route109_EventScript_14F518:: @ 814F518
-	move 255, Route109_Movement_14F66D
-	waitmove 0
-	jump Route109_EventScript_14F548
+	applymovement 255, Route109_Movement_14F66D
+	waitmovement 0
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F528:: @ 814F528
-	move 255, Route109_Movement_14F675
-	waitmove 0
-	jump Route109_EventScript_14F548
+	applymovement 255, Route109_Movement_14F675
+	waitmovement 0
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F538:: @ 814F538
-	move 255, Route109_Movement_14F678
-	waitmove 0
-	jump Route109_EventScript_14F548
+	applymovement 255, Route109_Movement_14F678
+	waitmovement 0
+	goto Route109_EventScript_14F548
 	end
 
 Route109_EventScript_14F548:: @ 814F548
-	spriteinvisible 255, 0, 24
+	hideobjectat 255, MAP_ROUTE109
 	call Route109_EventScript_1A02E7
-	move 1, Route109_Movement_14F5BF
-	move 255, Route109_Movement_14F5BF
-	waitmove 0
+	applymovement 1, Route109_Movement_14F5BF
+	applymovement 255, Route109_Movement_14F5BF
+	waitmovement 0
 	call Route109_EventScript_1A02EF
-	spritevisible 255, 0, 11
-	move 255, Route109_Movement_14F670
-	waitmove 0
-	reappear 4
-	clearflag 743
-	movespriteperm 2, 12, 8
-	reappear 2
-	spritelevelup 2, 0, 11, 0
-	move 2, Route109_Movement_14F67D
-	waitmove 0
-	clearflag 740
-	setflag 744
-	spriteinvisible 1, 0, 24
+	showobjectat 255, MAP_DEWFORD_TOWN
+	applymovement 255, Route109_Movement_14F670
+	waitmovement 0
+	addobject 4
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	setobjectxyperm 2, 12, 8
+	addobject 2
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	applymovement 2, Route109_Movement_14F67D
+	waitmovement 0
+	clearflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	hideobjectat 1, MAP_ROUTE109
 	msgbox Route109_Text_16B4B5, 4
-	closebutton
-	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 24
-	restorespritelevel 2, 0, 11
-	moveoffscreen 2
+	closemessage
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	resetobjectpriority 255, MAP_ROUTE109
+	resetobjectpriority 2, MAP_DEWFORD_TOWN
+	moveobjectoffscreen 2
 	release
 	end
 
@@ -271,23 +271,22 @@ Route109_Movement_14F67D:: @ 814F67D
 Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
-	checkflag 149
-	jumpif 0, Route109_EventScript_14F691
-	jump Route109_EventScript_14F6AF
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, Route109_EventScript_14F691
+	goto Route109_EventScript_14F6AF
 	end
 
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
-	msgbox Route109_Text_16E0F9, 5
-	compare RESULT, 0
-	jumpeq Route109_EventScript_14F6F1
-	jump Route109_EventScript_14F6E2
+	msgbox Route109_Text_16E0F9, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Route109_EventScript_14F6F1
+	goto Route109_EventScript_14F6E2
 	end
 
 Route109_EventScript_14F6AF:: @ 814F6AF
 	message Route109_Text_16E26A
-	waittext
-	multichoicedef 21, 8, 14, 1, 0
+	waitmessage
+	multichoicedefault 21, 8, 14, 1, 0
 	switch RESULT
 	case 0, Route109_EventScript_14F6E2
 	case 1, Route109_EventScript_14F6FB
@@ -296,8 +295,8 @@ Route109_EventScript_14F6AF:: @ 814F6AF
 
 Route109_EventScript_14F6E2:: @ 814F6E2
 	msgbox Route109_Text_16E159, 4
-	closebutton
-	jump Route109_EventScript_14F4D3
+	closemessage
+	goto Route109_EventScript_14F4D3
 	end
 
 Route109_EventScript_14F6F1:: @ 814F6F1
@@ -318,9 +317,9 @@ Route109_EventScript_14F70E:: @ 814F70E
 	lock
 	faceplayer
 	msgbox Route109_Text_16E405, 4
-	closebutton
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -328,23 +327,22 @@ Route109_EventScript_14F725:: @ 814F725
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag 280
-	jumpeq Route109_EventScript_14F762
+	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
-	giveitem ITEM_SOFT_SAND
+	giveitem_std ITEM_SOFT_SAND
 	compare RESULT, 0
-	jumpeq Route109_EventScript_1A029B
-	closebutton
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
-	setflag 280
+	goto_if_eq Route109_EventScript_1A029B
+	closemessage
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
+	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 
 Route109_EventScript_14F762:: @ 814F762
 	msgbox Route109_Text_16E446, 4
-	move LAST_TALKED, Route109_Movement_1A083D
-	waitmove 0
+	applymovement LAST_TALKED, Route109_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -359,10 +357,10 @@ Route109_EventScript_14F77F:: @ 814F77F
 Route109_EventScript_14F788:: @ 814F788
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_ZIGZAGOON, 0
+	waitse
+	playmoncry SPECIES_ZIGZAGOON, 0
 	msgbox Route109_Text_16E5CA, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -396,9 +394,9 @@ Route109_EventScript_14F7F2:: @ 814F7F2
 
 Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route109_EventScript_14F830
+	goto_if_eq Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
 	end
 
@@ -409,9 +407,9 @@ Route109_EventScript_14F830:: @ 814F830
 
 Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route109_EventScript_14F86E
+	goto_if_eq Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6
 	end
 

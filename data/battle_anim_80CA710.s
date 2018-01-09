@@ -1000,7 +1000,7 @@ gSpriteAnimTable_83D6E94:: @ 83D6E94
 	.4byte gSpriteAnim_83D6E80
 
 	.align 2
-gBattleAnimSpriteTemplate_83D6E98:: @ 83D6E98
+gBattleAnimSpriteTemplate_EndureFlame:: @ 83D6E98
 	spr_template 10184, 10184, gOamData_837DF74, gSpriteAnimTable_83D6E94, NULL, gDummySpriteAffineAnimTable, sub_80CDF0C
 
 	.align 2
@@ -2091,7 +2091,7 @@ gSpriteAnimTable_83D912C:: @ 83D912C
 
 	.align 2
 gSpriteTemplate_83D9130:: @ 83D9130
-	spr_template 10115, 10115, gOamData_837DF74, gSpriteAnimTable_83D912C, NULL, gDummySpriteAffineAnimTable, sub_80D3184
+	spr_template 10115, 10115, gOamData_837DF74, gSpriteAnimTable_83D912C, NULL, gDummySpriteAffineAnimTable, SetAnimRaindropCallback
 
 	.align 2
 gSpriteAffineAnim_83D9148:: @ 83D9148
@@ -2505,7 +2505,7 @@ gSpriteTemplate_83D96C4:: @ 83D96C4
 	spr_template 10201, 10201, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80D58FC
 
 	.align 1
-gUnknown_083D96DC:: @ 83D96DC
+gHeatedRockCoords:: @ 83D96DC
 	.2byte -2, -5
 	.2byte -1, -1
 	.2byte  3, -6

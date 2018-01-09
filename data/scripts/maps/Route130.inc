@@ -3,30 +3,30 @@ Route130_MapScripts:: @ 81523C2
 	.byte 0
 
 Route130_MapScript1_1523C8:: @ 81523C8
-	specialval RESULT, IsMirageIslandPresent
+	specialvar RESULT, IsMirageIslandPresent
 	compare RESULT, 1
-	jumpeq Route130_EventScript_15240C
-	setflag 17
-	setflag 18
-	setflag 19
-	setflag 20
-	setflag 21
-	setflag 22
-	setflag 23
-	setflag 24
-	setflag 25
-	setflag 26
-	setflag 27
-	setflag 28
-	setflag 29
-	setflag 30
-	setflag 31
-	setflag 32
-	setmapfooter 264
+	goto_if_eq Route130_EventScript_15240C
+	setflag FLAG_TEMP_11
+	setflag FLAG_TEMP_12
+	setflag FLAG_TEMP_13
+	setflag FLAG_TEMP_14
+	setflag FLAG_TEMP_15
+	setflag FLAG_TEMP_16
+	setflag FLAG_TEMP_17
+	setflag FLAG_TEMP_18
+	setflag FLAG_TEMP_19
+	setflag FLAG_TEMP_1A
+	setflag FLAG_TEMP_1B
+	setflag FLAG_TEMP_1C
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
+	setflag FLAG_TEMP_1F
+	setflag FLAG_TEMP_20
+	setmaplayoutindex 264
 	end
 
 Route130_EventScript_15240C:: @ 815240C
-	setmapfooter 46
+	setmaplayoutindex 46
 	end
 
 Route130_EventScript_152410:: @ 8152410

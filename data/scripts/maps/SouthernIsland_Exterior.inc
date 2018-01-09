@@ -3,24 +3,24 @@ SouthernIsland_Exterior_MapScripts:: @ 8160AD6
 	.byte 0
 
 SouthernIsland_Exterior_MapScript1_160ADC:: @ 8160ADC
-	setflag 2121
+	setflag FLAG_LANDMARK_SOUTHERN_ISLAND
 	end
 
 SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	lock
 	faceplayer
-	msgbox SouthernIsland_Exterior_Text_1C5215, 5
-	compare RESULT, 0
-	jumpeq SouthernIsland_Exterior_EventScript_160B25
+	msgbox SouthernIsland_Exterior_Text_1C5215, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, 4
-	closebutton
-	move LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
-	waitmove 0
-	pause 30
-	spriteinvisible 1, 26, 9
-	setvar 0x8004, 2
+	closemessage
+	applymovement LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845
+	waitmovement 0
+	delay 30
+	hideobjectat 1, MAP_SOUTHERN_ISLAND_EXTERIOR
+	setvar VAR_SPECIAL_4, 2
 	call SouthernIsland_Exterior_EventScript_1A047C
-	warp LilycoveCity_Harbor, 255, 8, 11
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
@@ -31,13 +31,13 @@ SouthernIsland_Exterior_EventScript_160B25:: @ 8160B25
 	end
 
 BattleTower_Outside_EventScript_160B2F:: @ 8160B2F
-	move 255, BattleTower_Outside_Movement_160B45
-	waitmove 0
+	applymovement 255, BattleTower_Outside_Movement_160B45
+	waitmovement 0
 	return
 
 BattleTower_Outside_EventScript_160B3A:: @ 8160B3A
-	move 255, BattleTower_Outside_Movement_160B47
-	waitmove 0
+	applymovement 255, BattleTower_Outside_Movement_160B47
+	waitmovement 0
 	return
 
 BattleTower_Outside_Movement_160B45:: @ 8160B45

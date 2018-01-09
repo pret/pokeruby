@@ -3,15 +3,15 @@ EverGrandeCity_PokemonCenter_1F_MapScripts:: @ 815BC66
 	.byte 0
 
 EverGrandeCity_PokemonCenter_1F_MapScript1_15BC6C:: @ 815BC6C
-	sethealplace 11
+	setrespawn 11
 	end
 
 EverGrandeCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
 SootopolisCity_PokemonCenter_1F_EventScript_15BC70:: @ 815BC70
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call SootopolisCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 

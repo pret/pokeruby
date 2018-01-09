@@ -3,77 +3,77 @@ SSTidalCorridor_MapScripts:: @ 815FC94
 	.byte 0
 
 SSTidalCorridor_MapScript2_15FC9A:: @ 815FC9A
-	map_script_2 0x40b4, 1, SSTidalCorridor_EventScript_15FCBC
-	map_script_2 0x40b4, 5, SSTidalCorridor_EventScript_15FCD2
-	map_script_2 0x40b4, 9, SSTidalCorridor_EventScript_15FD24
-	map_script_2 0x40b4, 10, SSTidalCorridor_EventScript_15FD3A
+	map_script_2 VAR_PORTHOLE_STATE, 1, SSTidalCorridor_EventScript_15FCBC
+	map_script_2 VAR_PORTHOLE_STATE, 5, SSTidalCorridor_EventScript_15FCD2
+	map_script_2 VAR_PORTHOLE_STATE, 9, SSTidalCorridor_EventScript_15FD24
+	map_script_2 VAR_PORTHOLE_STATE, 10, SSTidalCorridor_EventScript_15FD3A
 	.2byte 0
 
 SSTidalCorridor_EventScript_15FCBC:: @ 815FCBC
 	special SetSSTidalFlag
-	setvar 0x40b4, 2
+	setvar VAR_PORTHOLE_STATE, 2
 	lockall
-	playsfx 73
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199007, 4
 	releaseall
 	end
 
 SSTidalCorridor_EventScript_15FCD2:: @ 815FCD2
-	setvar 0x40b4, 6
+	setvar VAR_PORTHOLE_STATE, 6
 	lockall
-	playsfx 73
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199088, 4
 	releaseall
 	end
 
 SSTidalRooms_EventScript_15FCE5:: @ 815FCE5
 	special SetSSTidalFlag
-	setvar 0x40b4, 7
-	playsfx 73
+	setvar VAR_PORTHOLE_STATE, 7
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_199007, 4
 	return
 
 SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
 	special ResetSSTidalFlag
-	setvar 0x40b4, 4
-	playsfx 73
+	setvar VAR_PORTHOLE_STATE, 4
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_1990F8, 4
 	return
 
 gUnknown_0815FD0D:: @ 815FD0D
-	compare 0x40B4, 2
-	jumpeq SSTidalCorridor_EventScript_15FD24
-	compare 0x40B4, 7
-	jumpeq SSTidalCorridor_EventScript_15FD3A
+	compare VAR_PORTHOLE_STATE, 2
+	goto_if_eq SSTidalCorridor_EventScript_15FD24
+	compare VAR_PORTHOLE_STATE, 7
+	goto_if_eq SSTidalCorridor_EventScript_15FD3A
 	end
 
 SSTidalCorridor_EventScript_15FD24:: @ 815FD24
 	special ResetSSTidalFlag
-	setvar 0x40b4, 3
+	setvar VAR_PORTHOLE_STATE, 3
 	lockall
-	playsfx 73
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_199088, 4
 	releaseall
 	end
 
 SSTidalCorridor_EventScript_15FD3A:: @ 815FD3A
 	special ResetSSTidalFlag
-	setvar 0x40b4, 8
+	setvar VAR_PORTHOLE_STATE, 8
 	lockall
-	playsfx 73
+	playse SE_PINPON
 	msgbox SSTidalCorridor_Text_1990B4, 4
 	releaseall
 	end
 
 SSTidalRooms_EventScript_15FD50:: @ 815FD50
 	special ResetSSTidalFlag
-	setvar 0x40b4, 8
-	playsfx 73
+	setvar VAR_PORTHOLE_STATE, 8
+	playse SE_PINPON
 	msgbox SSTidalRooms_Text_1990B4, 4
 	return
 
 SSTidalRooms_EventScript_15FD64:: @ 815FD64
-	switch 0x40b4
+	switch VAR_PORTHOLE_STATE
 	case 2, SSTidalRooms_EventScript_15FCF9
 	case 3, SSTidalRooms_EventScript_15FCF9
 	case 6, SSTidalRooms_EventScript_15FCE5
@@ -87,10 +87,10 @@ SSTidalCorridor_EventScript_15FD96:: @ 815FD96
 SSTidalCorridor_EventScript_15FD9F:: @ 815FD9F
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_WINGULL, 0
+	waitse
+	playmoncry SPECIES_WINGULL, 0
 	msgbox SSTidalCorridor_Text_199388, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 
@@ -113,44 +113,42 @@ SSTidalCorridor_EventScript_15FDCD:: @ 815FDCD
 SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 	lock
 	faceplayer
-	compare 0x40b4, 4
-	jumpeq SSTidalCorridor_EventScript_15FDF8
-	compare 0x40b4, 8
-	jumpeq SSTidalCorridor_EventScript_15FE17
+	compare VAR_PORTHOLE_STATE, 4
+	goto_if_eq SSTidalCorridor_EventScript_15FDF8
+	compare VAR_PORTHOLE_STATE, 8
+	goto_if_eq SSTidalCorridor_EventScript_15FE17
 	msgbox SSTidalCorridor_Text_19913B, 4
 	release
 	end
 
 SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
-	sethealplace 8
+	setrespawn 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
-	warp LilycoveCity_Harbor, 255, 8, 11
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
+	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
 
 SSTidalCorridor_EventScript_15FE17:: @ 815FE17
-	sethealplace 4
+	setrespawn 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
-	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
-	warp SlateportCity_Harbor, 255, 8, 11
+	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11
 	waitstate
 	release
 	end
 
 SSTidalCorridor_EventScript_15FE36:: @ 815FE36
-	setflag 951
+	setflag FLAG_HIDE_TM_49_GIVER_SS_TIDAL
 	return
 
 SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A
 	lockall
-	compare 0x40b4, 2
-	jumpeq SSTidalCorridor_EventScript_15FE5B
-	compare 0x40b4, 7
-	jumpeq SSTidalCorridor_EventScript_15FE5B
+	compare VAR_PORTHOLE_STATE, 2
+	goto_if_eq SSTidalCorridor_EventScript_15FE5B
+	compare VAR_PORTHOLE_STATE, 7
+	goto_if_eq SSTidalCorridor_EventScript_15FE5B
 	msgbox SSTidalCorridor_Text_199268, 4
 	releaseall
 	end
@@ -163,8 +161,7 @@ SSTidalCorridor_EventScript_15FE5B:: @ 815FE5B
 SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
-	checkflag 247
-	jumpeq SSTidalCorridor_EventScript_15FE7A
+	goto_if_set FLAG_DEFEATED_SS_TIDAL_TRAINERS, SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
 	release
@@ -176,24 +173,16 @@ SSTidalCorridor_EventScript_15FE7A:: @ 815FE7A
 	end
 
 SSTidalCorridor_EventScript_15FE84:: @ 815FE84
-	checktrainerflag OPPONENT_PHILLIP
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_LEONARD
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_COLTON
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_TUCKER
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_THOMAS
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_LEA_AND_JED
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_GARRET
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag OPPONENT_ANETTE
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	setflag 247
-	jump SSTidalCorridor_EventScript_15FE7A
+	goto_if_trainer_not_defeated OPPONENT_PHILLIP, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_LEONARD, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_COLTON, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_TUCKER, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_THOMAS, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_LEA_AND_JED, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_GARRET, SSTidalCorridor_EventScript_15FED5
+	goto_if_trainer_not_defeated OPPONENT_ANETTE, SSTidalCorridor_EventScript_15FED5
+	setflag FLAG_DEFEATED_SS_TIDAL_TRAINERS
+	goto SSTidalCorridor_EventScript_15FE7A
 	return
 
 SSTidalCorridor_EventScript_15FED5:: @ 815FED5

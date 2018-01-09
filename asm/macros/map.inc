@@ -1,37 +1,7 @@
-	.macro new_map_group
-	inc cur_map_group
-	.set cur_map_num, 0
+	.macro map map_id
+	.byte \map_id >> 8    @ map group
+	.byte \map_id & 0xFF  @ map num
 	.endm
-
-	.macro map_group map_name
-	.set GROUP_\map_name, cur_map_group
-	.set MAP_\map_name, cur_map_num
-	inc cur_map_num
-	.endm
-
-	.macro map map_name
-	.byte GROUP_\map_name
-	.byte MAP_\map_name
-	.endm
-
-	.macro warp_map map_name
-	.byte MAP_\map_name
-	.byte GROUP_\map_name
-	.endm
-
-	.macro heal_location map_name, x, y
-	.byte GROUP_\map_name
-	.byte MAP_\map_name
-	.2byte \x
-	.2byte \y
-	.space 2
-	.endm
-
-	.equiv GROUP_NONE, 0x7f
-	.equiv MAP_NONE, 0x7f
-
-	.equiv GROUP_UNDEFINED, 0xff
-	.equiv MAP_UNDEFINED, 0xff
 
 	.macro map_script type, address
 	.byte \type
@@ -54,10 +24,11 @@
 	inc _num_npcs
 	.endm
 
-	.macro warp_def x, y, byte, warp, map
+	.macro warp_def x, y, byte, warp, map_id
 	.2byte \x, \y
 	.byte \byte, \warp
-	warp_map \map
+	.byte \map_id & 0xFF  @ map num
+	.byte \map_id >> 8    @ map group
 	inc _num_warps
 	.endm
 
@@ -67,6 +38,10 @@
 	.2byte \word1, \word2, \word3
 	.4byte \script
 	inc _num_traps
+	.endm
+
+	.macro coord_weather_event x, y, height, weather
+	coord_event \x, \y, \height, 0, \weather, 0, 0, 0x0
 	.endm
 
 	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
@@ -81,6 +56,14 @@
 	.endif
 	inc _num_signs
 	.endm
+
+	.macro bg_hidden_item_event x, y, height, item, flag
+	bg_event \x, \y, \height, 7, 0, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
+	.endm
+
+	.macro bg_secret_base_event x, y, height, secret_base_id
+	bg_event \x, \y, \height, 8, 0, \secret_base_id, 0, 0
+	.endm	
 
 	.macro map_events npcs, warps, traps, signs
 	.byte _num_npcs, _num_warps, _num_traps, _num_signs

@@ -1,56 +1,35 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_tower.h"
+#include "ewram.h"
+#include "trainer.h"
 
 #if GERMAN
-
-enum {
-    TRAINER_CLASS_NAME_LEADER = 25,
-    TRAINER_CLASS_NAME_SCHOOL_KID = 26,
-    TRAINER_CLASS_NAME_EXPERT = 30,
-    TRAINER_CLASS_NAME_POKEMON_TRAINER_3 = 46,
-};
-
-enum {
-    TRAINER_CLASS_LEADER_F = 26,
-    TRAINER_CLASS_ELITE_FOUR_F = 25,
-    TRAINER_CLASS_SCHOOL_KID_F = 30,
-    TRAINER_CLASS_BIRD_KEEPER = 46,
-    TRAINER_CLASS_MAY_1 = 61,
-    TRAINER_CLASS_MAY_2 = 62,
-    TRAINER_CLASS_MAY_3 = 63,
-};
-
-extern struct SecretBaseRecord gSecretBaseRecord;
 
 extern u8 gTrainerClassNames[][13];
 extern struct Trainer gTrainers[];
 
-u8 *de_sub_8040FE0(u8 gender) {
+u8 *de_sub_8040FE0(u8 gender)
+{
     if (gender)
-    {
         gender++;
-
-    }
-
-    gender = TRAINER_CLASS_NAME_SCHOOL_KID;
+    gender = TRAINER_CLASS_SCHOOL_KID;
     return gTrainerClassNames[gender];
 }
 
-u8 *de_sub_8040FF4(u8 gender) {
-    if (gender) {
+u8 *de_sub_8040FF4(u8 gender)
+{
+    if (gender)
         gender++;
-    }
-
-    gender = TRAINER_CLASS_NAME_POKEMON_TRAINER_3;
+    gender = TRAINER_CLASS_POKEMON_TRAINER_3;
     return gTrainerClassNames[gender];
 }
 
-u8 *de_sub_804100C(u8 gender) {
-    if (gender) {
+u8 *de_sub_804100C(u8 gender)
+{
+    if (gender)
         gender++;
-    }
-
-    gender = TRAINER_CLASS_NAME_LEADER;
+    gender = TRAINER_CLASS_LEADER;
     return gTrainerClassNames[gender];
 }
 
@@ -59,9 +38,9 @@ u8 *de_sub_804100C(u8 gender) {
 u8 de_sub_81364AC(void);
 u8 get_trainer_class_name_index(void);
 u8 de_sub_81364F8(void);
-u8 sub_8135FD8(void);
 
-u8 *de_sub_8041024(s32 arg0, u32 arg1) {
+u8 *de_sub_8041024(s32 arg0, u32 arg1)
+{
     u8 nameIndex, trainerClass, gender;
     struct Trainer *trainer;
     u8 local2;
@@ -70,70 +49,41 @@ u8 *de_sub_8041024(s32 arg0, u32 arg1) {
     {
     case 0x400:
         nameIndex = GetSecretBaseTrainerNameIndex();
-        gender = gSecretBaseRecord.gender;
-        if (nameIndex == TRAINER_CLASS_NAME_SCHOOL_KID)
-        {
+        gender = eSecretBaseRecord.gender;
+        if (nameIndex == TRAINER_CLASS_SCHOOL_KID)
             return de_sub_8040FE0(gender);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     case 0x100:
         trainerClass = de_sub_81364AC();
         nameIndex = get_trainer_class_name_index();
-        if (trainerClass == TRAINER_CLASS_SCHOOL_KID_F)
-        {
+        if (trainerClass == FACILITY_CLASS_SCHOOL_KID_F)
             return de_sub_8040FE0(FEMALE);
-        }
-        if (trainerClass == TRAINER_CLASS_MAY_1 || trainerClass == TRAINER_CLASS_MAY_2 || trainerClass == TRAINER_CLASS_MAY_3)
-        {
+        if (trainerClass == FACILITY_CLASS_MAY_1 || trainerClass == FACILITY_CLASS_MAY_2 || trainerClass == FACILITY_CLASS_MAY_3)
             return de_sub_8040FF4(FEMALE);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     case 0x800:
         trainerClass = de_sub_81364F8();
-        nameIndex = sub_8135FD8();
-        if (trainerClass == TRAINER_CLASS_SCHOOL_KID_F)
-        {
+        nameIndex = GetEReaderTrainerClassNameIndex();
+        if (trainerClass == FACILITY_CLASS_SCHOOL_KID_F)
             return de_sub_8040FE0(FEMALE);
-        }
-        if (trainerClass == TRAINER_CLASS_MAY_1 || trainerClass == TRAINER_CLASS_MAY_2 || trainerClass == TRAINER_CLASS_MAY_3)
-        {
+        if (trainerClass == FACILITY_CLASS_MAY_1 || trainerClass == FACILITY_CLASS_MAY_2 || trainerClass == FACILITY_CLASS_MAY_3)
             return de_sub_8040FF4(FEMALE);
-        }
-
         return gTrainerClassNames[nameIndex];
-
     default:
         trainer = &gTrainers[arg1];
         trainerClass = trainer->trainerClass;
         local2 = sub_803FC58(arg1);
-
-        if (trainerClass == TRAINER_CLASS_LEADER_F)
-        {
+        if (trainerClass == FACILITY_CLASS_LEADER_F)
             return de_sub_8040FE0(local2);
-        }
-
-        if (trainerClass == TRAINER_CLASS_BIRD_KEEPER && local2 == FEMALE)
-        {
+        if (trainerClass == FACILITY_CLASS_BIRD_KEEPER && local2 == FEMALE)
             return de_sub_8040FF4(FEMALE);
-        }
-
-        if (trainerClass == TRAINER_CLASS_ELITE_FOUR_F)
+        if (trainerClass == FACILITY_CLASS_ELITE_FOUR_F)
         {
             if (gTrainers[arg1].doubleBattle == TRUE)
-            {
                 return de_sub_804100C(FEMALE);
-            }
             else
-            {
                 return de_sub_804100C(MALE);
-            }
         }
-
-
         return gTrainerClassNames[trainerClass];
     }
 }
@@ -166,7 +116,7 @@ _0804104A:\n\
     bl GetSecretBaseTrainerNameIndex\n\
     lsls r0, 24\n\
     lsrs r5, r0, 24\n\
-    ldr r0, _08041060 @ =0x02017000\n\
+    ldr r0, _08041060 @ =gSharedMem + 0x17000\n\
     ldrb r0, [r0, 0x1]\n\
     lsls r0, 27\n\
     lsrs r2, r0, 31\n\
@@ -174,7 +124,7 @@ _0804104A:\n\
     beq _080410B8\n\
     b _080410F8\n\
     .align 2, 0\n\
-_08041060: .4byte 0x02017000\n\
+_08041060: .4byte gSharedMem + 0x17000\n\
 _08041064:\n\
     bl de_sub_81364AC\n\
     lsls r0, 24\n\
@@ -196,7 +146,7 @@ _08041086:\n\
     bl de_sub_81364F8\n\
     lsls r0, 24\n\
     lsrs r4, r0, 24\n\
-    bl sub_8135FD8\n\
+    bl GetEReaderTrainerClassNameIndex\n\
     b _08041070\n\
 _08041094:\n\
     movs r0, 0x1\n\
@@ -265,7 +215,8 @@ _08041108: .4byte gTrainerClassNames\n\
 }
 #endif
 
-u32 de_sub_804110C(u32 arg0, u32 arg1) {
+u32 de_sub_804110C(u32 arg0, u32 arg1)
+{
     return arg1;
 }
 

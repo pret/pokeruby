@@ -2,45 +2,25 @@
 #include "data2.h"
 #include "task.h"
 #include "trig.h"
-
-struct UnknownStruct1
-{
-    void *src[2];
-    void *dest;
-    u32 unkC;
-    void (*unk10)(void);
-    u8 srcBank;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 taskId;
-    u8 filler19[0x7];
-};
-
-struct UnknownStruct2
-{
-    void *dest;
-    u32 control;
-    u8 unk8;
-    u8 unk9;
-};
+#include "unknown_task.h"
 
 static void sub_80896F4(void);
 static void sub_8089714(void);
 
 extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B4;
+extern u16 gBattle_BG1_Y;
 extern u16 gUnknown_030041B8;
-extern u16 gUnknown_03004280;
-extern u16 gUnknown_03004288;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
-extern u16 gUnknown_030042C0;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG1_X;
 
 extern u8 gUnknown_0202FFA4;
 
-extern struct UnknownStruct1 gUnknown_03004DC0;
+extern struct UnknownTaskStruct2 gUnknown_03004DC0;
 
+// Is this a struct?
 extern u16 gUnknown_03004DE0[][0x3C0];
 
 void remove_some_task(void)
@@ -68,7 +48,7 @@ void dp12_8087EA4(void)
     gUnknown_03004DC0.taskId = 0xFF;
 }
 
-void sub_80895F8(struct UnknownStruct2 unk)
+void sub_80895F8(struct UnknownTaskStruct unk)
 {
     if (unk.control == (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1))
     {
@@ -140,22 +120,22 @@ static void task00_for_dp12(u8 taskId)
             switch (gTasks[taskId].data[6])
             {
             case 0x0:
-                value = gUnknown_030042A4;
+                value = gBattle_BG0_X;
                 break;
             case 0x2:
-                value = gUnknown_030042A0;
+                value = gBattle_BG0_Y;
                 break;
             case 0x4:
-                value = gUnknown_030042C0;
+                value = gBattle_BG1_X;
                 break;
             case 0x6:
-                value = gUnknown_030041B4;
+                value = gBattle_BG1_Y;
                 break;
             case 0x8:
-                value = gUnknown_03004288;
+                value = gBattle_BG2_X;
                 break;
             case 0xA:
-                value = gUnknown_03004280;
+                value = gBattle_BG2_Y;
                 break;
             case 0xC:
                 value = gUnknown_030041B0;
@@ -214,7 +194,7 @@ u8 sub_8089944(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7)
 {
     int i;
     int offset;
-    struct UnknownStruct2 unk;
+    struct UnknownTaskStruct unk;
     u8 taskId;
 
     dp12_8087EA4();

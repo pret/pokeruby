@@ -4,131 +4,130 @@ LittlerootTown_MapScripts:: @ 814D509
 	.byte 0
 
 LittlerootTown_MapScript1_14D514:: @ 814D514
-	setflag 2063
-	compare 0x4092, 2
-	callif 1, LittlerootTown_EventScript_14D57B
-	checkflag 82
-	callif 0, LittlerootTown_EventScript_14D583
-	compare 0x4050, 3
-	callif 1, LittlerootTown_EventScript_14D5A6
-	compare 0x4082, 4
-	callif 1, LittlerootTown_EventScript_14D570
-	compare 0x408c, 4
-	callif 1, LittlerootTown_EventScript_14D570
-	compare 0x40c7, 1
-	callif 1, LittlerootTown_EventScript_14D567
-	compare 0x408d, 3
-	callif 1, LittlerootTown_EventScript_14D563
+	setflag FLAG_VISITED_LITTLEROOT_TOWN
+	compare VAR_LITTLEROOT_INTRO_STATE, 2
+	call_if_eq LittlerootTown_EventScript_14D57B
+	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_14D583
+	compare VAR_LITTLEROOT_STATE, 3
+	call_if_eq LittlerootTown_EventScript_14D5A6
+	compare VAR_LITTLEROOT_HOUSES_STATE, 4
+	call_if_eq LittlerootTown_EventScript_14D570
+	compare VAR_LITTLEROOT_HOUSES_STATE_2, 4
+	call_if_eq LittlerootTown_EventScript_14D570
+	compare VAR_OLDALE_STATE, 1
+	call_if_eq LittlerootTown_EventScript_14D567
+	compare VAR_LITTLEROOT_RIVAL_STATE, 3
+	call_if_eq LittlerootTown_EventScript_14D563
 	end
 
 LittlerootTown_EventScript_14D563:: @ 814D563
-	setflag 301
+	setflag FLAG_RIVAL_LEFT_FOR_ROUTE103
 	return
 
 LittlerootTown_EventScript_14D567:: @ 814D567
-	setvar 0x40c7, 2
-	setflag 979
+	setvar VAR_OLDALE_STATE, 2
+	setflag FLAG_HIDE_RIVAL_OLDALE_TOWN
 	return
 
 LittlerootTown_EventScript_14D570:: @ 814D570
-	setvar 0x4082, 5
-	setvar 0x408c, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE, 5
+	setvar VAR_LITTLEROOT_HOUSES_STATE_2, 5
 	return
 
 LittlerootTown_EventScript_14D57B:: @ 814D57B
-	movespriteperm 4, 14, 8
+	setobjectxyperm 4, 14, 8
 	return
 
 LittlerootTown_EventScript_14D583:: @ 814D583
-	compare 0x4050, 0
-	jumpeq LittlerootTown_EventScript_14D59A
-	movespriteperm 1, 10, 1
-	spritebehave 1, 7
+	compare VAR_LITTLEROOT_STATE, 0
+	goto_if_eq LittlerootTown_EventScript_14D59A
+	setobjectxyperm 1, 10, 1
+	setobjectmovementtype 1, 7
 	return
 
 LittlerootTown_EventScript_14D59A:: @ 814D59A
-	movespriteperm 1, 7, 2
-	spritebehave 1, 8
+	setobjectxyperm 1, 7, 2
+	setobjectmovementtype 1, 8
 	return
 
 LittlerootTown_EventScript_14D5A6:: @ 814D5A6
-	clearflag 752
-	spritebehave 4, 8
-	checkgender
+	clearflag FLAG_HIDE_MOM_LITTLEROOT
+	setobjectmovementtype 4, 8
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D5C5
+	call_if_eq LittlerootTown_EventScript_14D5C5
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D5CD
+	call_if_eq LittlerootTown_EventScript_14D5CD
 	return
 
 LittlerootTown_EventScript_14D5C5:: @ 814D5C5
-	movespriteperm 4, 5, 9
+	setobjectxyperm 4, 5, 9
 	return
 
 LittlerootTown_EventScript_14D5CD:: @ 814D5CD
-	movespriteperm 4, 14, 9
+	setobjectxyperm 4, 14, 9
 	return
 
 LittlerootTown_MapScript2_14D5D5:: @ 814D5D5
-	map_script_2 0x4092, 1, LittlerootTown_EventScript_14D5EF
-	map_script_2 0x4092, 2, LittlerootTown_EventScript_14D60D
-	map_script_2 0x4092, 7, LittlerootTown_EventScript_14D6C5
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_14D5EF
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_14D60D
+	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 7, LittlerootTown_EventScript_14D6C5
 	.2byte 0
 
 LittlerootTown_EventScript_14D5EF:: @ 814D5EF
 	lockall
-	setvar 0x8004, 5
-	setvar 0x8005, 8
+	setvar VAR_SPECIAL_4, 5
+	setvar VAR_SPECIAL_5, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 761
-	warpmuted LittlerootTown_BrendansHouse_1F, 255, 8, 8
+	setflag FLAG_HIDE_MOVING_TRUCK_BRENDAN
+	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F, 255, 8, 8
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D60D:: @ 814D60D
 	lockall
-	setvar 0x8004, 14
-	setvar 0x8005, 8
+	setvar VAR_SPECIAL_4, 14
+	setvar VAR_SPECIAL_5, 8
 	call LittlerootTown_EventScript_14D62B
-	setflag 762
-	warpmuted LittlerootTown_MaysHouse_1F, 255, 2, 8
+	setflag FLAG_HIDE_MOVING_TRUCK_MAY
+	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F, 255, 2, 8
 	waitstate
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D62B:: @ 814D62B
-	pause 15
-	playsfx 10
-	move 255, LittlerootTown_Movement_14D6C0
-	waitmove 0
-	setdooropened 0x8004, 0x8005
-	doorchange
-	reappear 4
-	move 4, LittlerootTown_Movement_14D6AC
-	waitmove 0
-	setdoorclosed 0x8004, 0x8005
-	doorchange
-	pause 10
-	move 4, LittlerootTown_Movement_14D6AE
-	waitmove 0
+	delay 15
+	playse SE_DANSA
+	applymovement 255, LittlerootTown_Movement_14D6C0
+	waitmovement 0
+	opendoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	waitdooranim
+	addobject 4
+	applymovement 4, LittlerootTown_Movement_14D6AC
+	waitmovement 0
+	closedoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	waitdooranim
+	delay 10
+	applymovement 4, LittlerootTown_Movement_14D6AE
+	waitmovement 0
 	msgbox LittlerootTown_Text_16A7C9, 4
-	closebutton
-	move 4, LittlerootTown_Movement_14D6B1
-	move 255, LittlerootTown_Movement_14D6B8
-	waitmove 0
-	setdooropened 0x8004, 0x8005
-	doorchange
-	move 4, LittlerootTown_Movement_14D6B5
-	move 255, LittlerootTown_Movement_14D6BD
-	waitmove 0
-	setflag 752
-	setvar 0x4092, 3
-	spriteinvisible 255, 0, 0
-	setdoorclosed 0x8004, 0x8005
-	doorchange
-	clearflag 868
-	clearflag 0x4000
+	closemessage
+	applymovement 4, LittlerootTown_Movement_14D6B1
+	applymovement 255, LittlerootTown_Movement_14D6B8
+	waitmovement 0
+	opendoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14D6B5
+	applymovement 255, LittlerootTown_Movement_14D6BD
+	waitmovement 0
+	setflag FLAG_HIDE_MOM_LITTLEROOT
+	setvar VAR_LITTLEROOT_INTRO_STATE, 3
+	hideobjectat 255, MAP_PETALBURG_CITY
+	closedoor VAR_SPECIAL_4, VAR_SPECIAL_5
+	waitdooranim
+	clearflag FLAG_HIDE_FAT_MAN_LITTLEROOT
+	clearflag FLAG_SPECIAL_FLAG_0
 	return
 
 LittlerootTown_Movement_14D6AC:: @ 814D6AC
@@ -172,7 +171,7 @@ LittlerootTown_Movement_14D6C0:: @ 814D6C0
 
 LittlerootTown_EventScript_14D6C5:: @ 814D6C5
 	lockall
-	setvar 0x4092, 8
+	setvar VAR_LITTLEROOT_INTRO_STATE, 8
 	releaseall
 	end
 
@@ -187,22 +186,20 @@ LittlerootTown_EventScript_14D6D6:: @ 814D6D6
 LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
-	checkflag 116
-	jumpeq LittlerootTown_EventScript_14D72F
-	checkflag 82
-	jumpeq LittlerootTown_EventScript_14D722
-	compare 0x4050, 0
-	jumpif 5, LittlerootTown_EventScript_14D708
+	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_14D72F
+	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_14D722
+	compare VAR_LITTLEROOT_STATE, 0
+	goto_if_ne LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4
 	release
 	end
 
 LittlerootTown_EventScript_14D708:: @ 814D708
 	msgbox LittlerootTown_Text_16AD82, 4
-	closebutton
-	move 1, LittlerootTown_Movement_1A083D
-	waitmove 0
-	setvar 0x4050, 2
+	closemessage
+	applymovement 1, LittlerootTown_Movement_1A083D
+	waitmovement 0
+	setvar VAR_LITTLEROOT_STATE, 2
 	release
 	end
 
@@ -219,22 +216,22 @@ LittlerootTown_EventScript_14D72F:: @ 814D72F
 
 LittlerootTown_EventScript_14D739:: @ 814D739
 	lockall
-	move 1, LittlerootTown_Movement_14D779
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D779
+	waitmovement 0
 	call LittlerootTown_EventScript_14D755
-	move 1, LittlerootTown_Movement_14D789
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D789
+	waitmovement 0
 	releaseall
 	end
 
 LittlerootTown_EventScript_14D755:: @ 814D755
 	msgbox LittlerootTown_Text_16ACEB, 4
-	closebutton
-	move 1, LittlerootTown_Movement_14D787
-	move 255, LittlerootTown_Movement_14D793
-	waitmove 0
+	closemessage
+	applymovement 1, LittlerootTown_Movement_14D787
+	applymovement 255, LittlerootTown_Movement_14D793
+	waitmovement 0
 	msgbox LittlerootTown_Text_16AD3C, 4
-	closebutton
+	closemessage
 	return
 
 LittlerootTown_Movement_14D779:: @ 814D779
@@ -277,11 +274,11 @@ LittlerootTown_Movement_14D793:: @ 814D793
 
 LittlerootTown_EventScript_14D797:: @ 814D797
 	lockall
-	move 1, LittlerootTown_Movement_14D7B3
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D7B3
+	waitmovement 0
 	call LittlerootTown_EventScript_14D755
-	move 1, LittlerootTown_Movement_14D7C0
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_14D7C0
+	waitmovement 0
 	releaseall
 	end
 
@@ -311,15 +308,15 @@ LittlerootTown_Movement_14D7C0:: @ 814D7C0
 
 LittlerootTown_EventScript_14D7C7:: @ 814D7C7
 	lockall
-	move 1, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
+	applymovement 1, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
 	msgbox LittlerootTown_Text_16AD82, 4
-	closebutton
-	move 1, LittlerootTown_Movement_1A083D
-	waitmove 0
-	setvar 0x4050, 2
+	closemessage
+	applymovement 1, LittlerootTown_Movement_1A083D
+	waitmovement 0
+	setvar VAR_LITTLEROOT_STATE, 2
 	releaseall
 	end
 
@@ -333,11 +330,11 @@ LittlerootTown_EventScript_14D7FF:: @ 814D7FF
 
 LittlerootTown_EventScript_14D808:: @ 814D808
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D822
+	call_if_eq LittlerootTown_EventScript_14D822
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D82B
+	call_if_eq LittlerootTown_EventScript_14D82B
 	releaseall
 	end
 
@@ -351,11 +348,11 @@ LittlerootTown_EventScript_14D82B:: @ 814D82B
 
 LittlerootTown_EventScript_14D834:: @ 814D834
 	lockall
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D84E
+	call_if_eq LittlerootTown_EventScript_14D84E
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D857
+	call_if_eq LittlerootTown_EventScript_14D857
 	releaseall
 	end
 
@@ -369,323 +366,323 @@ LittlerootTown_EventScript_14D857:: @ 814D857
 
 LittlerootTown_EventScript_14D860:: @ 814D860
 	lockall
-	setvar 0x8008, 0
-	movesprite 4, 10, 9
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 0
+	setobjectxy 4, 10, 9
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D873:: @ 814D873
 	lockall
-	setvar 0x8008, 1
-	movesprite 4, 11, 9
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 1
+	setobjectxy 4, 11, 9
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D886:: @ 814D886
 	lockall
-	setvar 0x8008, 2
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 2
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D892:: @ 814D892
 	lockall
-	setvar 0x8008, 3
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 3
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D89E:: @ 814D89E
 	lockall
-	setvar 0x8008, 4
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 4
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8AA:: @ 814D8AA
 	lockall
-	setvar 0x8008, 5
-	jump LittlerootTown_EventScript_14D8B6
+	setvar VAR_SPECIAL_8, 5
+	goto LittlerootTown_EventScript_14D8B6
 	end
 
 LittlerootTown_EventScript_14D8B6:: @ 814D8B6
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D93C
+	call_if_eq LittlerootTown_EventScript_14D93C
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D947
-	checkgender
+	call_if_eq LittlerootTown_EventScript_14D947
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D926
+	call_if_eq LittlerootTown_EventScript_14D926
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D931
+	call_if_eq LittlerootTown_EventScript_14D931
 	msgbox LittlerootTown_Text_16A8EE, 4
-	closebutton
-	checkgender
+	closemessage
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D952
+	call_if_eq LittlerootTown_EventScript_14D952
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D995
+	call_if_eq LittlerootTown_EventScript_14D995
 	call LittlerootTown_EventScript_14DD38
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14DAAA
+	call_if_eq LittlerootTown_EventScript_14DAAA
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14DAED
-	jump LittlerootTown_EventScript_14DD2B
+	call_if_eq LittlerootTown_EventScript_14DAED
+	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14D926:: @ 814D926
-	setvar 0x8009, 5
-	setvar 0x800a, 8
+	setvar VAR_SPECIAL_9, 5
+	setvar VAR_SPECIAL_A, 8
 	return
 
 LittlerootTown_EventScript_14D931:: @ 814D931
-	setvar 0x8009, 14
-	setvar 0x800a, 8
+	setvar VAR_SPECIAL_9, 14
+	setvar VAR_SPECIAL_A, 8
 	return
 
 LittlerootTown_EventScript_14D93C:: @ 814D93C
-	move 4, LittlerootTown_Movement_1A0843
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_1A0843
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D947:: @ 814D947
-	move 4, LittlerootTown_Movement_1A083F
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_1A083F
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D952:: @ 814D952
-	compare 0x8008, 0
-	callif 1, LittlerootTown_EventScript_14D9D8
-	compare 0x8008, 1
-	callif 1, LittlerootTown_EventScript_14D9ED
-	compare 0x8008, 2
-	callif 1, LittlerootTown_EventScript_14DA02
-	compare 0x8008, 3
-	callif 1, LittlerootTown_EventScript_14DA17
-	compare 0x8008, 4
-	callif 1, LittlerootTown_EventScript_14DA2C
-	compare 0x8008, 5
-	callif 1, LittlerootTown_EventScript_14DA41
+	compare VAR_SPECIAL_8, 0
+	call_if_eq LittlerootTown_EventScript_14D9D8
+	compare VAR_SPECIAL_8, 1
+	call_if_eq LittlerootTown_EventScript_14D9ED
+	compare VAR_SPECIAL_8, 2
+	call_if_eq LittlerootTown_EventScript_14DA02
+	compare VAR_SPECIAL_8, 3
+	call_if_eq LittlerootTown_EventScript_14DA17
+	compare VAR_SPECIAL_8, 4
+	call_if_eq LittlerootTown_EventScript_14DA2C
+	compare VAR_SPECIAL_8, 5
+	call_if_eq LittlerootTown_EventScript_14DA41
 	return
 
 LittlerootTown_EventScript_14D995:: @ 814D995
-	compare 0x8008, 0
-	callif 1, LittlerootTown_EventScript_14D9D8
-	compare 0x8008, 1
-	callif 1, LittlerootTown_EventScript_14D9ED
-	compare 0x8008, 2
-	callif 1, LittlerootTown_EventScript_14DA56
-	compare 0x8008, 3
-	callif 1, LittlerootTown_EventScript_14DA6B
-	compare 0x8008, 4
-	callif 1, LittlerootTown_EventScript_14DA80
-	compare 0x8008, 5
-	callif 1, LittlerootTown_EventScript_14DA95
+	compare VAR_SPECIAL_8, 0
+	call_if_eq LittlerootTown_EventScript_14D9D8
+	compare VAR_SPECIAL_8, 1
+	call_if_eq LittlerootTown_EventScript_14D9ED
+	compare VAR_SPECIAL_8, 2
+	call_if_eq LittlerootTown_EventScript_14DA56
+	compare VAR_SPECIAL_8, 3
+	call_if_eq LittlerootTown_EventScript_14DA6B
+	compare VAR_SPECIAL_8, 4
+	call_if_eq LittlerootTown_EventScript_14DA80
+	compare VAR_SPECIAL_8, 5
+	call_if_eq LittlerootTown_EventScript_14DA95
 	return
 
 LittlerootTown_EventScript_14D9D8:: @ 814D9D8
-	move 255, LittlerootTown_Movement_1A0845
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC76
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0845
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC76
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14D9ED:: @ 814D9ED
-	move 255, LittlerootTown_Movement_1A0845
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC7D
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0845
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC7D
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA02:: @ 814DA02
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC84
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC84
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA17:: @ 814DA17
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC89
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC89
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA2C:: @ 814DA2C
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC8F
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC8F
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA41:: @ 814DA41
-	move 255, LittlerootTown_Movement_1A083F
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC92
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A083F
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC92
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA56:: @ 814DA56
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC96
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC96
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA6B:: @ 814DA6B
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC9A
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC9A
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA80:: @ 814DA80
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DC9D
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DC9D
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DA95:: @ 814DA95
-	move 255, LittlerootTown_Movement_1A0843
-	waitmove 0
-	move 4, LittlerootTown_Movement_14DCA3
-	waitmove 0
+	applymovement 255, LittlerootTown_Movement_1A0843
+	waitmovement 0
+	applymovement 4, LittlerootTown_Movement_14DCA3
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DAAA:: @ 814DAAA
-	compare 0x8008, 0
-	callif 1, LittlerootTown_EventScript_14DB30
-	compare 0x8008, 1
-	callif 1, LittlerootTown_EventScript_14DB3B
-	compare 0x8008, 2
-	callif 1, LittlerootTown_EventScript_14DB46
-	compare 0x8008, 3
-	callif 1, LittlerootTown_EventScript_14DB6C
-	compare 0x8008, 4
-	callif 1, LittlerootTown_EventScript_14DB92
-	compare 0x8008, 5
-	callif 1, LittlerootTown_EventScript_14DBB8
+	compare VAR_SPECIAL_8, 0
+	call_if_eq LittlerootTown_EventScript_14DB30
+	compare VAR_SPECIAL_8, 1
+	call_if_eq LittlerootTown_EventScript_14DB3B
+	compare VAR_SPECIAL_8, 2
+	call_if_eq LittlerootTown_EventScript_14DB46
+	compare VAR_SPECIAL_8, 3
+	call_if_eq LittlerootTown_EventScript_14DB6C
+	compare VAR_SPECIAL_8, 4
+	call_if_eq LittlerootTown_EventScript_14DB92
+	compare VAR_SPECIAL_8, 5
+	call_if_eq LittlerootTown_EventScript_14DBB8
 	return
 
 LittlerootTown_EventScript_14DAED:: @ 814DAED
-	compare 0x8008, 0
-	callif 1, LittlerootTown_EventScript_14DB30
-	compare 0x8008, 1
-	callif 1, LittlerootTown_EventScript_14DB3B
-	compare 0x8008, 2
-	callif 1, LittlerootTown_EventScript_14DBDE
-	compare 0x8008, 3
-	callif 1, LittlerootTown_EventScript_14DC04
-	compare 0x8008, 4
-	callif 1, LittlerootTown_EventScript_14DC2A
-	compare 0x8008, 5
-	callif 1, LittlerootTown_EventScript_14DC50
+	compare VAR_SPECIAL_8, 0
+	call_if_eq LittlerootTown_EventScript_14DB30
+	compare VAR_SPECIAL_8, 1
+	call_if_eq LittlerootTown_EventScript_14DB3B
+	compare VAR_SPECIAL_8, 2
+	call_if_eq LittlerootTown_EventScript_14DBDE
+	compare VAR_SPECIAL_8, 3
+	call_if_eq LittlerootTown_EventScript_14DC04
+	compare VAR_SPECIAL_8, 4
+	call_if_eq LittlerootTown_EventScript_14DC2A
+	compare VAR_SPECIAL_8, 5
+	call_if_eq LittlerootTown_EventScript_14DC50
 	return
 
 LittlerootTown_EventScript_14DB30:: @ 814DB30
-	move 4, LittlerootTown_Movement_14DCA8
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCA8
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DB3B:: @ 814DB3B
-	move 4, LittlerootTown_Movement_14DCAE
-	waitmove 0
+	applymovement 4, LittlerootTown_Movement_14DCAE
+	waitmovement 0
 	return
 
 LittlerootTown_EventScript_14DB46:: @ 814DB46
-	move 4, LittlerootTown_Movement_14DCB4
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCB4
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB6C:: @ 814DB6C
-	move 4, LittlerootTown_Movement_14DCBA
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCBA
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DB92:: @ 814DB92
-	move 4, LittlerootTown_Movement_14DCC1
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCC1
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBB8:: @ 814DBB8
-	move 4, LittlerootTown_Movement_14DCC5
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCC5
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DBDE:: @ 814DBDE
-	move 4, LittlerootTown_Movement_14DCCA
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCCA
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC04:: @ 814DC04
-	move 4, LittlerootTown_Movement_14DCCF
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCCF
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC2A:: @ 814DC2A
-	move 4, LittlerootTown_Movement_14DCD3
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCD3
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_EventScript_14DC50:: @ 814DC50
-	move 4, LittlerootTown_Movement_14DCDA
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
+	applymovement 4, LittlerootTown_Movement_14DCDA
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
 	return
 
 LittlerootTown_Movement_14DC76:: @ 814DC76
@@ -841,40 +838,40 @@ LittlerootTown_Movement_14DCE0:: @ 814DCE0
 LittlerootTown_EventScript_14DCE2:: @ 814DCE2
 	lock
 	faceplayer
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, LittlerootTown_EventScript_14D926
+	call_if_eq LittlerootTown_EventScript_14D926
 	compare RESULT, 1
-	callif 1, LittlerootTown_EventScript_14D931
+	call_if_eq LittlerootTown_EventScript_14D931
 	call LittlerootTown_EventScript_14DD38
-	move 4, LittlerootTown_Movement_1A0841
-	waitmove 0
-	setdooropened 0x8009, 0x800a
-	doorchange
-	move 4, LittlerootTown_Movement_14DCE0
-	waitmove 0
-	spriteinvisible 4, 0, 9
-	setdoorclosed 0x8009, 0x800a
-	doorchange
-	jump LittlerootTown_EventScript_14DD2B
+	applymovement 4, LittlerootTown_Movement_1A0841
+	waitmovement 0
+	opendoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	applymovement 4, LittlerootTown_Movement_14DCE0
+	waitmovement 0
+	hideobjectat 4, MAP_LITTLEROOT_TOWN
+	closedoor VAR_SPECIAL_9, VAR_SPECIAL_A
+	waitdooranim
+	goto LittlerootTown_EventScript_14DD2B
 	end
 
 LittlerootTown_EventScript_14DD2B:: @ 814DD2B
-	disappear 4
-	setflag 2144
-	setvar 0x4050, 4
+	removeobject 4
+	setflag FLAG_SYS_B_DASH
+	setvar VAR_LITTLEROOT_STATE, 4
 	release
 	end
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
 	msgbox LittlerootTown_Text_16A8FD, 4
-	fanfare 370
+	playfanfare BGM_FANFA4
 	message LittlerootTown_Text_16AA32
 	waitfanfare
-	waittext
-	setflag 274
+	waitmessage
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox LittlerootTown_Text_16AA5C, 4
 	msgbox LittlerootTown_Text_16AB10, 4
-	closebutton
-	pause 30
+	closemessage
+	delay 30
 	return

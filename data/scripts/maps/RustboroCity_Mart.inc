@@ -5,11 +5,9 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	lock
 	faceplayer
 	message RustboroCity_Mart_Text_1A0BE4
-	waittext
-	checkflag 287
-	jumpif 0, RustboroCity_Mart_EventScript_157BEF
-	checkflag 287
-	jumpeq RustboroCity_Mart_EventScript_157C18
+	waitmessage
+	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_157BEF
+	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_157C18
 	end
 
 RustboroCity_Mart_EventScript_157BEF:: @ 8157BEF

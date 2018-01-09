@@ -3,49 +3,45 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 	.byte 0
 
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
-	setflag 2109
-	compare 0x4090, 1
-	callif 1, Route104_MrBrineysHouse_EventScript_15BCD4
-	checkflag 188
-	callif 1, Route104_MrBrineysHouse_EventScript_15BCD0
+	setflag FLAG_LANDMARK_MR_BRINEY_HOUSE
+	compare VAR_BRINEY_HOUSE_STATE, 1
+	call_if_eq Route104_MrBrineysHouse_EventScript_15BCD4
+	call_if_set FLAG_RECEIVED_POKENAV, Route104_MrBrineysHouse_EventScript_15BCD0
 	end
 
 Route104_MrBrineysHouse_EventScript_15BCD0:: @ 815BCD0
-	setflag 814
+	setflag FLAG_HIDE_RIVAL_RUSTBORO
 	return
 
 Route104_MrBrineysHouse_EventScript_15BCD4:: @ 815BCD4
-	movespriteperm 1, 9, 3
-	spritebehave 1, 50
-	movespriteperm 2, 9, 6
-	spritebehave 2, 51
+	setobjectxyperm 1, 9, 3
+	setobjectmovementtype 1, 50
+	setobjectxyperm 2, 9, 6
+	setobjectmovementtype 2, 51
 	return
 
 Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 	lock
 	faceplayer
-	checkflag 147
-	callif 0, Route104_MrBrineysHouse_EventScript_15BD0E
-	checkflag 189
-	jumpif 0, Route104_MrBrineysHouse_EventScript_15BD65
-	checkflag 149
-	jumpif 0, Route104_MrBrineysHouse_EventScript_15BD7E
-	jump Route104_MrBrineysHouse_EventScript_15BD32
+	call_if_unset FLAG_MR_BRINEY_SAILING_INTRO, Route104_MrBrineysHouse_EventScript_15BD0E
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, Route104_MrBrineysHouse_EventScript_15BD65
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, Route104_MrBrineysHouse_EventScript_15BD7E
+	goto Route104_MrBrineysHouse_EventScript_15BD32
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
-	setflag 147
+	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
-	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
-	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
-	jump Route104_MrBrineysHouse_EventScript_15BDAB
+	msgbox Route104_MrBrineysHouse_Text_191AAD, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
+	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	message Route104_MrBrineysHouse_Text_191E80
-	waittext
-	multichoicedef 21, 8, 14, 1, 0
+	waitmessage
+	multichoicedefault 21, 8, 14, 1, 0
 	switch RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_15BDAB
 	case 1, Route104_MrBrineysHouse_EventScript_15BDA1
@@ -53,17 +49,17 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
-	msgbox Route104_MrBrineysHouse_Text_191CC3, 5
-	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
-	jump Route104_MrBrineysHouse_EventScript_15BDAB
+	msgbox Route104_MrBrineysHouse_Text_191CC3, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
+	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
-	msgbox Route104_MrBrineysHouse_Text_191DA6, 5
-	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
-	jump Route104_MrBrineysHouse_EventScript_15BDAB
+	msgbox Route104_MrBrineysHouse_Text_191DA6, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Route104_MrBrineysHouse_EventScript_15BD97
+	goto Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD97:: @ 815BD97
@@ -79,11 +75,11 @@ Route104_MrBrineysHouse_EventScript_15BDA1:: @ 815BDA1
 Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 	msgbox Route104_MrBrineysHouse_Text_191BFD, 4
 	call Route104_MrBrineysHouse_EventScript_1A010C
-	setvar 0x408e, 1
-	clearflag 738
-	setflag 739
-	setflag 881
-	warp Route104, 255, 13, 51
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 1
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	setflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	warp MAP_ROUTE104, 255, 13, 51
 	waitstate
 	releaseall
 	end
@@ -91,9 +87,9 @@ Route104_MrBrineysHouse_EventScript_15BDAB:: @ 815BDAB
 Route104_MrBrineysHouse_EventScript_15BDD1:: @ 815BDD1
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_WINGULL, 0
+	waitse
+	playmoncry SPECIES_WINGULL, 0
 	msgbox Route104_MrBrineysHouse_Text_191FB9, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

@@ -4,85 +4,84 @@ Route128_MapScripts:: @ 815211B
 	.byte 0
 
 Route128_MapScript1_152126:: @ 8152126
-	checkflag 2090
-	callif 1, Route128_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, Route128_EventScript_1A02C1
 	call Route128_EventScript_1A0196
 	end
 
 Route128_MapScript2_152135:: @ 8152135
-	map_script_2 0x407b, 1, Route128_EventScript_15213F
+	map_script_2 VAR_ROUTE128_STATE, 1, Route128_EventScript_15213F
 	.2byte 0
 
 Route128_EventScript_15213F:: @ 815213F
 	lockall
-	pause 20
+	delay 20
 	.ifndef SAPPHIRE
 	special sub_807E25C
 	waitstate
 	.endif
-	move 4, Route128_Movement_152271
-	waitmove 0
+	applymovement 4, Route128_Movement_152271
+	waitmovement 0
 	msgbox Route128_Text_171EE0, 4
-	move 4, Route128_Movement_152279
-	waitmove 0
+	applymovement 4, Route128_Movement_152279
+	waitmovement 0
 	msgbox Route128_Text_171F35, 4
-	closebutton
-	move 5, Route128_Movement_152293
-	waitmove 0
-	move 4, Route128_Movement_1A0841
-	waitmove 0
+	closemessage
+	applymovement 5, Route128_Movement_152293
+	waitmovement 0
+	applymovement 4, Route128_Movement_1A0841
+	waitmovement 0
 	msgbox Route128_Text_171F4B, 4
-	closebutton
-	move 5, Route128_Movement_1522A1
-	waitmove 0
-	move 255, Route128_Movement_1A0841
-	waitmove 0
+	closemessage
+	applymovement 5, Route128_Movement_1522A1
+	waitmovement 0
+	applymovement 255, Route128_Movement_1A0841
+	waitmovement 0
 	msgbox Route128_Text_172008, 4
-	closebutton
-	move 4, Route128_Movement_15227E
-	move 255, Route128_Movement_1A083F
-	move 5, Route128_Movement_152290
-	waitmove 0
+	closemessage
+	applymovement 4, Route128_Movement_15227E
+	applymovement 255, Route128_Movement_1A083F
+	applymovement 5, Route128_Movement_152290
+	waitmovement 0
 	msgbox Route128_Text_17210B, 4
-	closebutton
-	pause 40
-	move 5, Route128_Movement_152296
-	move 4, Route128_Movement_152283
-	waitmove 0
-	disappear 5
-	disappear 4
-	pause 100
-	setanimation 0, 1
-	doanimation 30
-	checkanimation 30
-	reappear 3
-	move 3, Route128_Movement_15226F
-	waitmove 0
-	move 255, Route128_Movement_1A0843
-	waitmove 0
+	closemessage
+	delay 40
+	applymovement 5, Route128_Movement_152296
+	applymovement 4, Route128_Movement_152283
+	waitmovement 0
+	removeobject 5
+	removeobject 4
+	delay 100
+	setfieldeffectargument 0, 1
+	dofieldeffect 30
+	waitfieldeffect 30
+	addobject 3
+	applymovement 3, Route128_Movement_15226F
+	waitmovement 0
+	applymovement 255, Route128_Movement_1A0843
+	waitmovement 0
 	msgbox Route128_Text_172181, 4
-	closebutton
-	move 3, Route128_Movement_15226D
-	move 255, Route128_Movement_1A0841
-	waitmove 0
+	closemessage
+	applymovement 3, Route128_Movement_15226D
+	applymovement 255, Route128_Movement_1A0841
+	waitmovement 0
 	.ifdef SAPPHIRE
 	msgbox Route128_Text_1721A2, 4
 	.else
 	msgbox Route128_Text_1722A1, 4
 	.endif
-	move 3, Route128_Movement_1A0845
-	waitmove 0
+	applymovement 3, Route128_Movement_1A0845
+	waitmovement 0
 	msgbox Route128_Text_1723BE, 4
-	closebutton
-	move 3, Route128_Movement_1A0845
-	waitmove 0
-	pause 50
-	setanimation 0, 1
-	doanimation 30
-	pause 15
-	disappear 3
-	checkanimation 30
-	setvar 0x407b, 2
+	closemessage
+	applymovement 3, Route128_Movement_1A0845
+	waitmovement 0
+	delay 50
+	setfieldeffectargument 0, 1
+	dofieldeffect 30
+	delay 15
+	removeobject 3
+	waitfieldeffect 30
+	setvar VAR_ROUTE128_STATE, 2
 	releaseall
 	end
 
@@ -182,9 +181,9 @@ Route128_Movement_1522A1:: @ 81522A1
 
 Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route128_EventScript_1522CB
+	goto_if_eq Route128_EventScript_1522CB
 	msgbox Route128_Text_1C1CC3, 6
 	end
 
@@ -195,9 +194,9 @@ Route128_EventScript_1522CB:: @ 81522CB
 
 Route128_EventScript_1522E2:: @ 81522E2
 	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
-	specialval RESULT, sub_8082C68
+	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
-	jumpeq Route128_EventScript_152309
+	goto_if_eq Route128_EventScript_152309
 	msgbox Route128_Text_1C1E4A, 6
 	end
 

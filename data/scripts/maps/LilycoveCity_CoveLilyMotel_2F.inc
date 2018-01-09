@@ -4,13 +4,11 @@ LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 81583A0
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	lock
 	faceplayer
-	checkflag 2
-	callif 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
-	checkflag 2
-	callif 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
-	specialval RESULT, sub_8090FC0
+	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
+	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
+	specialvar RESULT, CompletedHoennPokedex
 	compare RESULT, 1
-	jumpeq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
+	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
 	release
 	end
 
@@ -19,17 +17,17 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7:: @ 81583C7
 	return
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
-	setflag 2
-	fanfare 370
+	setflag FLAG_TEMP_2
+	playfanfare BGM_FANFA4
 	waitfanfare
-	jump LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
+	goto LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	end
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD:: @ 81583DD
 	message LilycoveCity_CoveLilyMotel_2F_Text_18708F
-	waittext
+	waitmessage
 	call LilycoveCity_CoveLilyMotel_2F_EventScript_1A02C5
-	special sub_810D6A4
+	special ScrSpecial_ShowDiploma
 	waitstate
 	release
 	end

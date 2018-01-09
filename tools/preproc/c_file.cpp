@@ -139,6 +139,7 @@ bool CFile::ConsumeNewline()
     {
         m_pos += 2;
         m_lineNum++;
+        std::putchar('\n');
         return true;
     }
 
@@ -146,6 +147,7 @@ bool CFile::ConsumeNewline()
     {
         m_pos++;
         m_lineNum++;
+        std::putchar('\n');
         return true;
     }
 

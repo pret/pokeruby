@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -530,7 +529,7 @@ _0803E59C:
 	adds r6, r2, 0
 	cmp r0, 0
 	beq _0803E5E4
-	ldr r5, _0803E758 @ =gSideTimer
+	ldr r5, _0803E758 @ =gSideTimers
 	ldr r4, _0803E75C @ =gActiveBank
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -739,7 +738,7 @@ _0803E74E:
 	str r5, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E758: .4byte gSideTimer
+_0803E758: .4byte gSideTimers
 _0803E75C: .4byte gActiveBank
 _0803E760: .4byte gExperienceTables
 _0803E764: .4byte gBaseStats
@@ -1099,7 +1098,7 @@ _0803EA4C:
 	movs r0, 0x1
 	b _0803EA6A
 _0803EA62:
-	ldr r0, _0803EB24 @ =0x02000000
+	ldr r0, _0803EB24 @ =gSharedMem
 	ldr r5, _0803EB28 @ =0x000160fa
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1192,7 +1191,7 @@ _0803EB08:
 	strb r5, [r4]
 	b _0803EB48
 	.align 2, 0
-_0803EB24: .4byte 0x02000000
+_0803EB24: .4byte gSharedMem
 _0803EB28: .4byte 0x000160fa
 _0803EB2C: .4byte gMain
 _0803EB30: .4byte 0x0000043d

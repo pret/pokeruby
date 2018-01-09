@@ -3,15 +3,15 @@ PetalburgCity_PokemonCenter_1F_MapScripts:: @ 8155204
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_15520A:: @ 815520A
-	sethealplace 3
+	setrespawn 3
 	call PetalburgCity_PokemonCenter_1F_EventScript_19FD1B
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_155213:: @ 8155213
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call PetalburgCity_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 
@@ -27,19 +27,19 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	lock
 	faceplayer
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
-	specialval RESULT, IsStarterInParty
+	specialvar RESULT, IsStarterInParty
 	compare RESULT, 1
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_15524F
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15524F
 	release
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
-	compare 0x4023, 0
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
-	compare 0x4023, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
-	compare 0x4023, 2
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
+	compare VAR_STARTER_MON, 0
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_155272
+	compare VAR_STARTER_MON, 1
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_15527B
+	compare VAR_STARTER_MON, 2
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_155284
 	release
 	end
 

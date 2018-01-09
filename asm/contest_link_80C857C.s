@@ -1,5 +1,4 @@
 	.include "constants/gba_constants.inc"
-	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -12,7 +11,7 @@ sub_80C857C: @ 80C857C
 	adds r2, r0, 0
 	lsls r4, r1, 16
 	lsrs r4, 16
-	ldr r5, _080C85A8 @ =0x0201e000
+	ldr r5, _080C85A8 @ =gSharedMem + 0x1E000
 	adds r0, r5, 0
 	adds r1, r2, 0
 	adds r2, r4, 0
@@ -27,7 +26,7 @@ sub_80C857C: @ 80C857C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C85A8: .4byte 0x0201e000
+_080C85A8: .4byte gSharedMem + 0x1E000
 	thumb_func_end sub_80C857C
 
 	thumb_func_start sub_80C85AC
@@ -83,6 +82,7 @@ _080C85FE:
 	bx r1
 	thumb_func_end sub_80C85D8
 
+.ifdef ENGLISH
 	thumb_func_start sub_80C8604
 sub_80C8604: @ 80C8604
 	push {r4-r6,lr}
@@ -117,6 +117,26 @@ _080C8638: .4byte gTasks
 _080C863C: .4byte sub_80C8644
 _080C8640: .4byte gBlockRecvBuffer
 	thumb_func_end sub_80C8604
+.else
+	thumb_func_start sub_80C8604
+sub_80C8604: @ 80C8604
+	lsls r0, 24
+	lsrs r0, 24
+	ldr r2, _080C861C @ =gTasks
+	lsls r1, r0, 2
+	adds r1, r0
+	lsls r1, 3
+	adds r1, r2
+	movs r0, 0
+	strh r0, [r1, 0x8]
+	ldr r0, _080C8620 @ =sub_80C8644
+	str r0, [r1]
+	bx lr
+	.align 2, 0
+_080C861C: .4byte gTasks
+_080C8620: .4byte sub_80C8644
+	thumb_func_end sub_80C8604
+.endif
 
 	thumb_func_start sub_80C8644
 sub_80C8644: @ 80C8644
@@ -171,14 +191,22 @@ _080C869C: .4byte gIsLinkContest
 sub_80C86A0: @ 80C86A0
 	push {r4,r5,lr}
 	adds r4, r0, 0
+.ifdef ENGLISH
 	movs r5, 0x2
+.else
+	movs r5, 0x5
+.endif
 	ldrb r0, [r4]
 	cmp r0, 0xFC
 	bne _080C86B6
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x15
 	bne _080C86B6
+.ifdef ENGLISH
 	movs r0, 0x2
+.else
+	movs r0, 0x5
+.endif
 	b _080C872C
 _080C86B6:
 	adds r0, r4, 0
@@ -249,6 +277,7 @@ _080C872C:
 	bx r1
 	thumb_func_end sub_80C86A0
 
+.ifdef ENGLISH
 	thumb_func_start sub_80C8734
 sub_80C8734: @ 80C8734
 	push {r4-r7,lr}
@@ -430,6 +459,232 @@ _080C8896:
 	.align 2, 0
 _080C88A8: .4byte gTasks
 	thumb_func_end sub_80C8734
+.else
+	thumb_func_start sub_80C8734
+sub_80C8734: @ 80C8734
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x4
+	lsls r0, 24
+	lsrs r5, r0, 24
+	ldr r1, _080C8760 @ =gTasks
+	lsls r4, r5, 2
+	adds r0, r4, r5
+	lsls r0, 3
+	adds r2, r0, r1
+	movs r3, 0x8
+	ldrsh r0, [r2, r3]
+	cmp r0, 0x1
+	beq _080C8800
+	cmp r0, 0x1
+	bgt _080C8764
+	cmp r0, 0
+	beq _080C8770
+	b _080C88E0
+	.align 2, 0
+_080C8760: .4byte gTasks
+_080C8764:
+	cmp r0, 0x2
+	bne _080C876A
+	b _080C88D4_B
+_080C876A:
+	cmp r0, 0x8
+	beq _080C8770
+	b _080C88E0
+_080C8770:
+	bl GetMultiplayerId
+	lsls r0, 24
+	cmp r0, 0
+	bne _080C87D4
+	bl sub_8007ECC
+	lsls r0, 24
+	cmp r0, 0
+	bne _080C8786
+	b _080C88EE
+_080C8786:
+	ldr r0, _080C87A0 @ =gTasks
+	lsls r1, r5, 2
+	adds r1, r5
+	lsls r1, 3
+	adds r4, r1, r0
+	movs r1, 0x8
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080C87A4
+	movs r0, 0x3
+	strh r0, [r4, 0x8]
+	b _080C88EE
+	.align 2, 0
+_080C87A0: .4byte gTasks
+_080C87A4:
+	ldr r0, _080C87C8 @ =gBlockSendBuffer
+	ldr r1, _080C87CC @ =gContestPlayerMonIndex
+	ldrb r1, [r1]
+	lsls r1, 6
+	ldr r2, _080C87D0 @ =gContestMons
+	adds r1, r2
+	movs r2, 0x40
+	bl memcpy
+	movs r0, 0
+	bl de_sub_80C9274
+	movs r0, 0x2
+	bl sub_8007E9C
+	movs r0, 0x1
+	strh r0, [r4, 0x8]
+	b _080C88EE
+	.align 2, 0
+_080C87C8: .4byte gBlockSendBuffer
+_080C87CC: .4byte gContestPlayerMonIndex
+_080C87D0: .4byte gContestMons
+_080C87D4:
+	ldr r0, _080C87F0 @ =gBlockSendBuffer
+	ldr r1, _080C87F4 @ =gContestPlayerMonIndex
+	ldrb r1, [r1]
+	lsls r1, 6
+	ldr r2, _080C87F8 @ =gContestMons
+	adds r1, r2
+	movs r2, 0x40
+	bl memcpy
+	movs r0, 0
+	bl de_sub_80C9294
+	ldr r1, _080C87FC @ =gTasks
+	b _080C88E0
+	.align 2, 0
+_080C87F0: .4byte gBlockSendBuffer
+_080C87F4: .4byte gContestPlayerMonIndex
+_080C87F8: .4byte gContestMons
+_080C87FC: .4byte gTasks
+_080C8800:
+	bl sub_80C85D8
+	lsls r0, 24
+	cmp r0, 0
+	beq _080C88EE
+	movs r2, 0
+	mov r8, r2
+	str r4, [sp]
+	ldr r0, _080C884C @ =gContestMons
+	ldr r7, _080C8850 @ =gLinkPlayers
+	movs r6, 0
+	mov r10, r0
+	movs r3, 0xFF
+	mov r9, r3
+_080C881C:
+	mov r0, r8
+	lsls r1, r0, 8
+	ldr r0, _080C8854 @ =gBlockRecvBuffer
+	adds r1, r0
+	mov r0, r10
+	movs r2, 0x40
+	bl memcpy
+	ldr r1, _080C8858 @ =gContestMons + 0x2
+	adds r4, r6, r1
+	ldrh r0, [r7, 0x1A]
+	cmp r0, 0x1
+	bne _080C885C
+	adds r0, r4, 0
+	bl sub_80C86A0
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	adds r0, r4, 0
+	bl ConvertInternationalString
+	b _080C8872
+	.align 2, 0
+_080C884C: .4byte gContestMons
+_080C8850: .4byte gLinkPlayers
+_080C8854: .4byte gBlockRecvBuffer
+_080C8858: .4byte gContestMons + 0x2
+_080C885C:
+	ldrb r0, [r4, 0xA]
+	cmp r0, 0xFC
+	bne _080C886C
+	adds r0, r4, 0
+	movs r1, 0x1
+	bl ConvertInternationalString
+	b _080C8872
+_080C886C:
+	strb r0, [r4, 0x5]
+	mov r2, r9
+	strb r2, [r4, 0xA]
+_080C8872:
+	ldr r0, _080C88A0 @ =gUnknown_0203857D
+	adds r4, r6, r0
+	ldrh r0, [r7, 0x1A]
+	cmp r0, 0x1
+	bne _080C88A4
+	mov r3, r9
+	strb r3, [r4, 0x7]
+	ldrb r0, [r4, 0x4]
+	strb r0, [r4, 0x6]
+	ldrb r0, [r4, 0x3]
+	strb r0, [r4, 0x5]
+	ldrb r0, [r4, 0x2]
+	strb r0, [r4, 0x4]
+	ldrb r0, [r4, 0x1]
+	strb r0, [r4, 0x3]
+	ldrb r0, [r4]
+	strb r0, [r4, 0x2]
+	movs r0, 0x15
+	strb r0, [r4, 0x1]
+	movs r0, 0xFC
+	strb r0, [r4]
+	b _080C88AC
+	.align 2, 0
+_080C88A0: .4byte gUnknown_0203857D
+_080C88A4:
+	ldrb r0, [r4, 0x7]
+	strb r0, [r4, 0x5]
+	mov r0, r9
+	strb r0, [r4, 0x7]
+_080C88AC:
+	adds r7, 0x1C
+	adds r6, 0x40
+	movs r1, 0x40
+	add r10, r1
+	movs r2, 0x1
+	add r8, r2
+	mov r3, r8
+	cmp r3, 0x3
+	ble _080C881C
+	ldr r0, _080C88D0 @ =gTasks
+	ldr r2, [sp]
+	adds r1, r2, r5
+	lsls r1, 3
+	adds r1, r0
+	ldrh r0, [r1, 0x8]
+	adds r0, 0x1
+	strh r0, [r1, 0x8]
+	b _080C88EE
+	.align 2, 0
+_080C88D0: .4byte gTasks
+_080C88D4_B:
+	movs r0, 0
+	strh r0, [r2, 0x8]
+	adds r0, r5, 0
+	bl SwitchTaskToFollowupFunc
+	b _080C88EE
+_080C88E0:
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	adds r0, r1
+	ldrh r1, [r0, 0x8]
+	adds r1, 0x1
+	strh r1, [r0, 0x8]
+_080C88EE:
+	add sp, 0x4
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80C8734
+.endif
 
 	thumb_func_start sub_80C88AC
 sub_80C88AC: @ 80C88AC
@@ -498,6 +753,7 @@ _080C8930: .4byte gBlockRecvBuffer
 _080C8934: .4byte gUnknown_03005D28
 	thumb_func_end sub_80C88AC
 
+.ifdef ENGLISH
 	thumb_func_start sub_80C8938
 sub_80C8938: @ 80C8938
 	push {r4-r7,lr}
@@ -583,6 +839,129 @@ _080C89CE:
 	.align 2, 0
 _080C89D8: .4byte gBlockRecvBuffer
 	thumb_func_end sub_80C8938
+.else
+	thumb_func_start sub_80C8938
+sub_80C8938: @ 80C8938
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	lsls r0, 24
+	lsrs r4, r0, 24
+	ldr r1, _080C8960 @ =gTasks
+	lsls r5, r4, 2
+	adds r0, r5, r4
+	lsls r6, r0, 3
+	adds r2, r6, r1
+	movs r3, 0x8
+	ldrsh r0, [r2, r3]
+	mov r8, r1
+	cmp r0, 0x1
+	beq _080C89C4
+	cmp r0, 0x1
+	bgt _080C8964
+	cmp r0, 0
+	beq _080C896C
+	b _080C8A0C
+	.align 2, 0
+_080C8960: .4byte gTasks
+_080C8964:
+	cmp r0, 0x2
+	beq _080C8A00
+	cmp r0, 0x8
+	bne _080C8A0C
+_080C896C:
+	ldr r1, _080C89A0 @ =gBlockSendBuffer
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	mov r2, r8
+	adds r4, r0, r2
+	ldrh r0, [r4, 0x1A]
+	strb r0, [r1]
+	bl GetMultiplayerId
+	lsls r0, 24
+	cmp r0, 0
+	bne _080C89B6
+	bl sub_8007ECC
+	lsls r0, 24
+	cmp r0, 0
+	beq _080C8A1A
+	movs r3, 0x8
+	ldrsh r0, [r4, r3]
+	cmp r0, 0
+	bne _080C89A4
+	movs r0, 0x3
+	strh r0, [r4, 0x8]
+	b _080C8A1A
+	.align 2, 0
+_080C89A0: .4byte gBlockSendBuffer
+_080C89A4:
+	movs r0, 0x1
+	bl de_sub_80C9274
+	movs r0, 0x2
+	bl sub_8007E9C
+	movs r0, 0x1
+	strh r0, [r4, 0x8]
+	b _080C8A1A
+_080C89B6:
+	movs r0, 0x1
+	bl de_sub_80C9294
+	ldrh r0, [r4, 0x8]
+	adds r0, 0x1
+	strh r0, [r4, 0x8]
+	b _080C8A1A
+_080C89C4:
+	bl sub_80C85D8
+	lsls r0, 24
+	cmp r0, 0
+	beq _080C8A1A
+	movs r3, 0
+	adds r7, r5, 0
+	ldr r1, _080C89FC @ =gBlockRecvBuffer
+	mov r0, r8
+	adds r0, 0xA
+	adds r2, r6, r0
+	movs r5, 0x80
+	lsls r5, 1
+_080C89DE:
+	ldrh r0, [r1]
+	strh r0, [r2]
+	adds r1, r5
+	adds r2, 0x2
+	adds r3, 0x1
+	cmp r3, 0x3
+	ble _080C89DE
+	adds r1, r7, r4
+	lsls r1, 3
+	add r1, r8
+	ldrh r0, [r1, 0x8]
+	adds r0, 0x1
+	strh r0, [r1, 0x8]
+	b _080C8A1A
+	.align 2, 0
+_080C89FC: .4byte gBlockRecvBuffer
+_080C8A00:
+	movs r0, 0
+	strh r0, [r2, 0x8]
+	adds r0, r4, 0
+	bl SwitchTaskToFollowupFunc
+	b _080C8A1A
+_080C8A0C:
+	lsls r0, r4, 2
+	adds r0, r4
+	lsls r0, 3
+	add r0, r8
+	ldrh r1, [r0, 0x8]
+	adds r1, 0x1
+	strh r1, [r0, 0x8]
+_080C8A1A:
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80C8938
+.endif
 
 	thumb_func_start sub_80C89DC
 sub_80C89DC: @ 80C89DC
@@ -666,7 +1045,7 @@ _080C8A64:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, _080C8A90 @ =0x02019266
+	ldr r1, _080C8A90 @ =gSharedMem + 0x19266
 	adds r0, r1
 	movs r1, 0x2
 	bl sub_80C857C
@@ -676,14 +1055,14 @@ _080C8A64:
 	b _080C8AC2
 	.align 2, 0
 _080C8A8C: .4byte gContestPlayerMonIndex
-_080C8A90: .4byte 0x02019266
+_080C8A90: .4byte gSharedMem + 0x19266
 _080C8A94:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8AC2
 	ldr r1, _080C8AC8 @ =gBlockRecvBuffer
-	ldr r3, _080C8ACC @ =0x02019266
+	ldr r3, _080C8ACC @ =gSharedMem + 0x19266
 	movs r4, 0x80
 	lsls r4, 1
 	movs r2, 0x3
@@ -707,7 +1086,7 @@ _080C8AC2:
 	bx r0
 	.align 2, 0
 _080C8AC8: .4byte gBlockRecvBuffer
-_080C8ACC: .4byte 0x02019266
+_080C8ACC: .4byte gSharedMem + 0x19266
 	thumb_func_end sub_80C8A38
 
 	thumb_func_start sub_80C8AD0
@@ -862,18 +1241,18 @@ _080C8C18:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8C7A
-	ldr r0, _080C8C2C @ =gUnknown_02038690
+	ldr r0, _080C8C2C @ =gContestFinalStandings
 	movs r1, 0x4
 	bl sub_80C857C
 	b _080C8C4C
 	.align 2, 0
-_080C8C2C: .4byte gUnknown_02038690
+_080C8C2C: .4byte gContestFinalStandings
 _080C8C30:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8C7A
-	ldr r0, _080C8C60 @ =gUnknown_02038690
+	ldr r0, _080C8C60 @ =gContestFinalStandings
 	ldr r1, _080C8C64 @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -893,7 +1272,7 @@ _080C8C4C:
 	strh r1, [r0, 0x8]
 	b _080C8C7A
 	.align 2, 0
-_080C8C60: .4byte gUnknown_02038690
+_080C8C60: .4byte gContestFinalStandings
 _080C8C64: .4byte gUnknown_0203869B
 _080C8C68: .4byte gBlockRecvBuffer
 _080C8C6C: .4byte gTasks
@@ -954,12 +1333,12 @@ _080C8CE0:
 	bne _080C8CEC
 	b _080C8E16
 _080C8CEC:
-	ldr r0, _080C8CF8 @ =0x02019260
+	ldr r0, _080C8CF8 @ =gSharedMem + 0x19260
 	movs r1, 0x70
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8CF8: .4byte 0x02019260
+_080C8CF8: .4byte gSharedMem + 0x19260
 _080C8CFC:
 	bl sub_80C85D8
 	lsls r0, 24
@@ -967,7 +1346,7 @@ _080C8CFC:
 	bne _080C8D08
 	b _080C8E16
 _080C8D08:
-	ldr r0, _080C8D18 @ =0x02019260
+	ldr r0, _080C8D18 @ =gSharedMem + 0x19260
 	ldr r1, _080C8D1C @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -976,7 +1355,7 @@ _080C8D08:
 	movs r2, 0x70
 	b _080C8DE4
 	.align 2, 0
-_080C8D18: .4byte 0x02019260
+_080C8D18: .4byte gSharedMem + 0x19260
 _080C8D1C: .4byte gUnknown_0203869B
 _080C8D20: .4byte gBlockRecvBuffer
 _080C8D24:
@@ -1002,18 +1381,18 @@ _080C8D46:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D5C @ =0x020192d0
+	ldr r0, _080C8D5C @ =gSharedMem + 0x192D0
 	movs r1, 0x14
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8D5C: .4byte 0x020192d0
+_080C8D5C: .4byte gSharedMem + 0x192D0
 _080C8D60:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D7C @ =0x020192d0
+	ldr r0, _080C8D7C @ =gSharedMem + 0x192D0
 	ldr r1, _080C8D80 @ =gUnknown_0203869B
 	ldrb r1, [r1]
 	lsls r1, 8
@@ -1022,7 +1401,7 @@ _080C8D60:
 	movs r2, 0x14
 	b _080C8DE4
 	.align 2, 0
-_080C8D7C: .4byte 0x020192d0
+_080C8D7C: .4byte gSharedMem + 0x192D0
 _080C8D80: .4byte gUnknown_0203869B
 _080C8D84: .4byte gBlockRecvBuffer
 _080C8D88:
@@ -1030,21 +1409,21 @@ _080C8D88:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8D9C @ =0x02019328
+	ldr r0, _080C8D9C @ =gSharedMem + 0x19328
 	movs r1, 0x4
 	bl sub_80C857C
 	b _080C8DE8
 	.align 2, 0
-_080C8D9C: .4byte 0x02019328
+_080C8D9C: .4byte gSharedMem + 0x19328
 _080C8DA0:
 	bl sub_80C85D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8E16
-	ldr r0, _080C8DB0 @ =0x02019328
+	ldr r0, _080C8DB0 @ =gSharedMem + 0x19328
 	b _080C8DD8
 	.align 2, 0
-_080C8DB0: .4byte 0x02019328
+_080C8DB0: .4byte gSharedMem + 0x19328
 _080C8DB4:
 	bl sub_8007ECC
 	lsls r0, 24
@@ -1097,6 +1476,7 @@ _080C8E16:
 	bx r0
 	thumb_func_end sub_80C8C80
 
+.ifdef ENGLISH
 	thumb_func_start sub_80C8E1C
 sub_80C8E1C: @ 80C8E1C
 	push {r4-r7,lr}
@@ -1180,6 +1560,131 @@ _080C8EAE:
 	.align 2, 0
 _080C8EB8: .4byte gBlockRecvBuffer
 	thumb_func_end sub_80C8E1C
+.else
+	thumb_func_start sub_80C8E1C
+sub_80C8E1C: @ 80C8E1C
+	push {r4-r7,lr}
+	lsls r0, 24
+	lsrs r5, r0, 24
+	ldr r1, _080C8E40 @ =gTasks
+	lsls r4, r5, 2
+	adds r0, r4, r5
+	lsls r6, r0, 3
+	adds r2, r6, r1
+	movs r3, 0x8
+	ldrsh r0, [r2, r3]
+	adds r7, r1, 0
+	cmp r0, 0x1
+	beq _080C8EB0
+	cmp r0, 0x1
+	bgt _080C8E44
+	cmp r0, 0
+	beq _080C8E4C
+	b _080C8EF8
+	.align 2, 0
+_080C8E40: .4byte gTasks
+_080C8E44:
+	cmp r0, 0x2
+	beq _080C8EEC
+	cmp r0, 0x8
+	bne _080C8EF8
+_080C8E4C:
+	ldr r1, _080C8E80 @ =gBlockSendBuffer
+	movs r0, 0x64
+	strb r0, [r1]
+	bl GetMultiplayerId
+	lsls r0, 24
+	cmp r0, 0
+	bne _080C8E9A
+	bl sub_8007ECC
+	lsls r0, 24
+	cmp r0, 0
+	beq _080C8F06
+	ldr r0, _080C8E84 @ =gTasks
+	lsls r1, r5, 2
+	adds r1, r5
+	lsls r1, 3
+	adds r4, r1, r0
+	movs r1, 0x8
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	bne _080C8E88
+	movs r0, 0x3
+	strh r0, [r4, 0x8]
+	b _080C8F06
+	.align 2, 0
+_080C8E80: .4byte gBlockSendBuffer
+_080C8E84: .4byte gTasks
+_080C8E88:
+	movs r0, 0
+	bl de_sub_80C9274
+	movs r0, 0x2
+	bl sub_8007E9C
+	movs r0, 0x1
+	strh r0, [r4, 0x8]
+	b _080C8F06
+_080C8E9A:
+	movs r0, 0
+	bl de_sub_80C9294
+	ldr r0, _080C8EAC @ =gTasks
+	lsls r1, r5, 2
+	adds r1, r5
+	lsls r1, 3
+	adds r1, r0
+	b _080C8EDE
+	.align 2, 0
+_080C8EAC: .4byte gTasks
+_080C8EB0:
+	bl sub_80C85D8
+	lsls r0, 24
+	cmp r0, 0
+	beq _080C8F06
+	adds r1, r4, 0
+	ldr r4, _080C8EE8 @ =gBlockRecvBuffer
+	adds r0, r7, 0
+	adds r0, 0x12
+	adds r2, r6, r0
+	movs r6, 0x80
+	lsls r6, 1
+	movs r3, 0x3
+_080C8ECA:
+	ldrh r0, [r4]
+	strh r0, [r2]
+	adds r4, r6
+	adds r2, 0x2
+	subs r3, 0x1
+	cmp r3, 0
+	bge _080C8ECA
+	adds r1, r5
+	lsls r1, 3
+	adds r1, r7
+_080C8EDE:
+	ldrh r0, [r1, 0x8]
+	adds r0, 0x1
+	strh r0, [r1, 0x8]
+	b _080C8F06
+	.align 2, 0
+_080C8EE8: .4byte gBlockRecvBuffer
+_080C8EEC:
+	movs r0, 0
+	strh r0, [r2, 0x8]
+	adds r0, r5, 0
+	bl SwitchTaskToFollowupFunc
+	b _080C8F06
+_080C8EF8:
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	adds r0, r7
+	ldrh r1, [r0, 0x8]
+	adds r1, 0x1
+	strh r1, [r0, 0x8]
+_080C8F06:
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_80C8E1C
+.endif
 
 	thumb_func_start sub_80C8EBC
 sub_80C8EBC: @ 80C8EBC
@@ -1194,7 +1699,7 @@ sub_80C8EBC: @ 80C8EBC
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq _080C8EE8
+	beq _080C8EE8_B
 	cmp r0, 0x1
 	beq _080C8F00
 	movs r0, 0
@@ -1204,7 +1709,7 @@ sub_80C8EBC: @ 80C8EBC
 	b _080C8F22
 	.align 2, 0
 _080C8EE4: .4byte gTasks
-_080C8EE8:
+_080C8EE8_B:
 	bl sub_8007ECC
 	lsls r0, 24
 	cmp r0, 0

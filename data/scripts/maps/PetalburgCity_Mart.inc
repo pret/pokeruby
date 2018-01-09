@@ -5,9 +5,8 @@ PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
 	lock
 	faceplayer
 	message PetalburgCity_Mart_Text_1A0BE4
-	waittext
-	checkflag 296
-	jumpeq PetalburgCity_Mart_EventScript_1552EA
+	waitmessage
+	goto_if_set FLAG_PETALBURG_MART_EXPANDED_ITEMS, PetalburgCity_Mart_EventScript_1552EA
 	pokemart PetalburgCity_Mart_Items1
 	msgbox PetalburgCity_Mart_Text_1A0C02, 4
 	release

@@ -3,22 +3,24 @@
 
 #include "sprite.h"
 
+extern const u8 gUnknown_0830FD14[];
+
 #define fieldmap_object_cb(setup, callback, table) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
-    return table[sprite->data1](mapObject, sprite);\
+    return table[sprite->data[1]](mapObject, sprite);\
 }
 
 #define fieldmap_object_null_cb(setup, callback) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data0], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
 }\
 static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
@@ -35,6 +37,9 @@ extern const u16 gMapObjectPalette19[];
 
 extern const u32 gMapObjectPic_MovingBox[32];
 extern const struct SpriteFrameImage gMapObjectPicTable_PechaBerryTree[];
+
+extern const u8 gFieldEffectPic_CutGrass[];
+extern const u16 gFieldEffectObjectPalette6[];
 
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
 void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
@@ -54,17 +59,15 @@ u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3);
 u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3);
 u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3);
 
-u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F3F0(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F438(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F4F0(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F5A8(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F660(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 cph_IM_DIFFERENT(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F760(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 oac_hopping(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
-u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8 (*const)(u8));
+u8 sub_805F3EC(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F3F0(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F438(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F4F0(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F5A8(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F660(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 cph_IM_DIFFERENT(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 sub_805F760(struct MapObject *, struct Sprite *, u8, bool8(u8));
+u8 oac_hopping(struct MapObject *, struct Sprite *, u8, bool8(u8));
 
 extern struct CameraSomething gUnknown_03004880;
 extern u16 gUnknown_03004898;
@@ -318,7 +321,7 @@ u8 get_go_fast_image_anim_num(u8);
 u8 get_go_faster_image_anim_num(u8);
 u8 sub_805FD78(u8);
 
-int state_to_direction(u8, u8, u8);
+u32 state_to_direction(u8, u32, u32);
 
 void sub_805AA98();
 void sub_805AAB0(void);
@@ -334,7 +337,7 @@ void RemoveFieldObjectInternal(struct MapObject *);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 u8 show_sprite(u8, u8, u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
-u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 c, s16 d, u8 subpriority);
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
 void sub_805B55C(s16 a, s16 b);
 void sub_805B710(u16 i, u16 i1);
@@ -344,7 +347,7 @@ void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
-void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
+void FieldObjectGetLocalIdAndMap(struct MapObject *, void *, void *, void *);
 void sub_805BCC0(s16 x, s16 y);
 void sub_805BCF0(u8, u8, u8, u8);
 void sub_805BD48(u8, u8, u8);
@@ -379,14 +382,14 @@ u8 sub_805FDF8(u8);
 u8 sub_805FE08(u8);
 void npc_set_running_behaviour_etc(struct MapObject *, u8);
 u8 npc_running_behaviour_by_direction(u8);
-u8 npc_block_way(struct MapObject *, s16, s16, u8);
+u8 npc_block_way(struct MapObject *, s16, s16, u32);
 u8 sub_8060024(struct MapObject *, s16, s16, u8);
-u8 sub_8060234(u8, u8, u8);
+bool8 IsBerryTreeSparkling(u8, u8, u8);
 void sub_8060288(u8, u8, u8);
 void sub_8060388(s16, s16, s16 *, s16 *);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);
 void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
-void FieldObjectMoveDestCoords(struct MapObject *pObject, u8 unk_19, s16 *pInt, s16 *pInt1);
+void FieldObjectMoveDestCoords(struct MapObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
 bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
@@ -396,21 +399,23 @@ void FieldObjectClearAnim(struct MapObject *);
 bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
 u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 u8 FieldObjectGetSpecialAnim(struct MapObject *);
-u8 GetFaceDirectionAnimId(u8);
-u8 GetSimpleGoAnimId(u8);
-u8 GetGoSpeed0AnimId(u8 a);
-u8 sub_8060744(u8 a);
-u8 d2s_08064034(u8 a);
-u8 sub_806079C(u8 a);
-u8 sub_80607F4(u8 a);
-u8 GetJumpLedgeAnimId(u8 a);
-u8 sub_806084C(u8);
-u8 sub_8060878(u8);
-u8 sub_80608D0(u8);
-u8 GetStepInPlaceDelay32AnimId(u8 a);
-u8 GetStepInPlaceDelay16AnimId(u8);
-u8 GetStepInPlaceDelay8AnimId(u8 a);
-u8 GetStepInPlaceDelay4AnimId(u8 a);
+u8 GetFaceDirectionAnimId(u32);
+u8 GetSimpleGoAnimId(u32);
+u8 GetGoSpeed0AnimId(u32);
+u8 sub_8060744(u32);
+u8 d2s_08064034(u32);
+u8 sub_806079C(u32);
+u8 sub_80607C8(u32);
+u8 sub_80607F4(u32);
+u8 GetJumpLedgeAnimId(u32);
+u8 sub_806084C(u32);
+u8 sub_8060878(u32);
+u8 sub_80608A4(u32);
+u8 sub_80608D0(u32);
+u8 GetStepInPlaceDelay32AnimId(u32);
+u8 GetStepInPlaceDelay16AnimId(u32);
+u8 GetStepInPlaceDelay8AnimId(u32);
+u8 GetStepInPlaceDelay4AnimId(u32);
 u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
 u8 sub_80609D8(u8);
 u8 sub_8060A04(u8);
@@ -427,5 +432,9 @@ void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
 u8 sub_805ADDC(u8);
+void sub_8060320(u32, s16 *, s16 *, s16, s16);
+u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
+u16 npc_paltag_by_palslot(u8);
+void sub_8060470(s16 *, s16 *, s16, s16);
 
 #endif // GUARD_FIELD_MAP_OBJ_H

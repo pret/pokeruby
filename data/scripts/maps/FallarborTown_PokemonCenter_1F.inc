@@ -3,15 +3,15 @@ FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
-	sethealplace 17
+	setrespawn 17
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B02:: @ 8153B02
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 
@@ -27,28 +27,28 @@ FallarborTown_PokemonCenter_1F_EventScript_153B22:: @ 8153B22
 	lock
 	faceplayer
 	msgbox FallarborTown_PokemonCenter_1F_Text_1774D4, 4
-	closebutton
+	closemessage
 	switch FACING
 	case 2, FallarborTown_PokemonCenter_1F_EventScript_153B49
 	case 3, FallarborTown_PokemonCenter_1F_EventScript_153B59
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B49:: @ 8153B49
-	move 4, FallarborTown_PokemonCenter_1F_Movement_153B74
-	waitmove 0
-	jump FallarborTown_PokemonCenter_1F_EventScript_153B69
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_153B74
+	waitmovement 0
+	goto FallarborTown_PokemonCenter_1F_EventScript_153B69
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B59:: @ 8153B59
-	move 4, FallarborTown_PokemonCenter_1F_Movement_153B81
-	waitmove 0
-	jump FallarborTown_PokemonCenter_1F_EventScript_153B69
+	applymovement 4, FallarborTown_PokemonCenter_1F_Movement_153B81
+	waitmovement 0
+	goto FallarborTown_PokemonCenter_1F_EventScript_153B69
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
-	playsfx 18
-	disappear 4
-	clearflag 870
+	playse SE_JIDO_DOA
+	removeobject 4
+	clearflag FLAG_HIDE_LANETTE
 	release
 	end
 

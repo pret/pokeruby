@@ -3,14 +3,14 @@ PacifidlogTown_PokemonCenter_1F_MapScripts:: @ 81540FF
 	.byte 0
 
 PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
-	sethealplace 19
+	setrespawn 19
 	end
 
 @ 8154109
-	setvar 0x800b, 1
+	setvar VAR_SPECIAL_B, 1
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
-	waittext
-	waitbutton
+	waitmessage
+	waitbuttonpress
 	release
 	end
 

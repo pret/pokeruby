@@ -5,49 +5,48 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 	.byte 0
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
-	checkflag 2052
-	callif 0, MossdeepCity_StevensHouse_EventScript_15A9DF
+	call_if_unset FLAG_SYS_GAME_CLEAR, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
-	setmaptile 6, 4, 753, 1
+	setmetatile 6, 4, 753, 1
 	return
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
-	compare 0x40c6, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_15A9F5
+	compare VAR_STEVENS_HOUSE_STATE, 1
+	call_if_eq MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
-	movespriteperm 1, 6, 5
-	spritebehave 1, 7
+	setobjectxyperm 1, 6, 5
+	setobjectmovementtype 1, 7
 	return
 
 MossdeepCity_StevensHouse_MapScript2_15AA01:: @ 815AA01
-	map_script_2 0x40c6, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
+	map_script_2 VAR_STEVENS_HOUSE_STATE, 0, MossdeepCity_StevensHouse_EventScript_15AA0B
 	.2byte 0
 
 MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	lockall
-	move 1, MossdeepCity_StevensHouse_Movement_1A083F
-	waitmove 0
-	playsfx 21
-	move 1, MossdeepCity_StevensHouse_Movement_1A0833
-	waitmove 0
-	move 1, MossdeepCity_StevensHouse_Movement_1A0835
-	waitmove 0
-	move 1, MossdeepCity_StevensHouse_Movement_15AA6E
-	waitmove 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A083F
+	waitmovement 0
+	playse SE_PIN
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0833
+	waitmovement 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_1A0835
+	waitmovement 0
+	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA6E
+	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_18DA77, 4
-	giveitem ITEM_HM08
-	setflag 123
-	setflag 302
+	giveitem_std ITEM_HM08
+	setflag FLAG_RECEIVED_HM08
+	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_18DB22, 4
-	closebutton
-	pause 20
-	move 1, MossdeepCity_StevensHouse_Movement_15AA76
-	waitmove 0
-	setvar 0x40c6, 1
+	closemessage
+	delay 20
+	applymovement 1, MossdeepCity_StevensHouse_Movement_15AA76
+	waitmovement 0
+	setvar VAR_STEVENS_HOUSE_STATE, 1
 	releaseall
 	end
 
@@ -71,25 +70,25 @@ MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
 
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
-	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
-	compare RESULT, 0
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AAE6
-	countpokemon
+	msgbox MossdeepCity_StevensHouse_Text_18DD12, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AAE6
+	getpartysize
 	compare RESULT, 6
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AADC
-	copyvar 0x8004, RESULT
-	disappear 2
-	fanfare 370
+	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
+	copyvar VAR_SPECIAL_4, RESULT
+	removeobject 2
+	playfanfare BGM_FANFA4
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
-	waittext
-	givepokemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
-	bufferpoke 1, SPECIES_BELDUM
-	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
-	compare RESULT, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_1A0678
-	setflag 968
-	setflag 298
+	waitmessage
+	givemon SPECIES_BELDUM, 5, ITEM_NONE, 0x0, 0x0, 0
+	bufferspeciesname 1, SPECIES_BELDUM
+	msgbox MossdeepCity_StevensHouse_Text_1A1102, MSGBOX_YESNO
+	compare RESULT, YES
+	call_if_eq MossdeepCity_StevensHouse_EventScript_1A0678
+	setflag FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
+	setflag FLAG_RECEIVED_BELDUM
 	releaseall
 	end
 
@@ -113,8 +112,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
-	checkflag 302
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AB16
+	goto_if_set FLAG_OMIT_DIVE_FROM_STEVEN_LETTER, MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
 	end
@@ -125,6 +123,6 @@ MossdeepCity_StevensHouse_EventScript_15AB16:: @ 815AB16
 	end
 
 MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
-	giveitem ITEM_HM08, 1, 1
-	setflag 123
+	giveitem_std ITEM_HM08, 1, 1
+	setflag FLAG_RECEIVED_HM08
 	end

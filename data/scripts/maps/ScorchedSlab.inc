@@ -3,5 +3,5 @@ ScorchedSlab_MapScripts:: @ 815F29D
 	.byte 0
 
 ScorchedSlab_MapScript1_15F2A3:: @ 815F2A3
-	setflag 2136
+	setflag FLAG_LANDMARK_SCORCHED_SLAB
 	end

@@ -4,12 +4,11 @@ AquaHideout_B1F_MapScripts:: @ 815D831
 	.byte 0
 
 AquaHideout_B1F_MapScript1_15D83C:: @ 815D83C
-	checkflag 2145
-	callif 1, AquaHideout_B1F_EventScript_15D846
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AquaHideout_B1F_EventScript_15D846
 	end
 
 AquaHideout_B1F_EventScript_15D846:: @ 815D846
-	disappear LAST_TALKED
+	removeobject LAST_TALKED
 	return
 
 AquaHideout_B1F_MapScript1_15D84A:: @ 815D84A

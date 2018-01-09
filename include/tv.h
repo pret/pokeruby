@@ -18,8 +18,6 @@ enum
     TVSHOW_MASS_OUTBREAK = 41,
 };
 
-extern u8 *const gUnknown_083D1464[3];
-
 void ClearTVShowData(void);
 u8 sub_80BDEAC(u8 *);
 void sub_80BE028(void);
@@ -28,6 +26,7 @@ void sub_80BE138(TVShow *show);
 void sub_80BE160(TVShow *show);
 void sub_80BE160(TVShow *);
 void sub_80BE188(void);
+void sub_80BE23C(u16);
 void sub_80BE320(void);
 void StartMassOutbreak(void);
 void sub_80BE5FC(void);
@@ -44,7 +43,7 @@ void sub_80BEA5C(u16);
 void sub_80BEA88(void);
 void sub_80BEA88(void);
 void sub_80BEB20(void);
-int sub_80BEBC8(struct UnknownSaveStruct2ABC *arg0);
+int sub_80BEBC8(struct PokeNews *arg0);
 extern void sub_80BEBF4(void);
 void sub_80BEC10(u8);
 bool8 GetPriceReduction(u8);
@@ -81,7 +80,7 @@ void sub_80C01D4(void);
 void sub_80C03A8(u8 showidx);
 void sub_80C03C8(u16 species, u8 showidx);
 void sub_80C0408(void);
-bool8 sub_80C06E8(struct UnknownSaveStruct2ABC *arg0, struct UnknownSaveStruct2ABC *arg1, s8 arg2);
+bool8 sub_80C06E8(struct PokeNews *arg0, struct PokeNews *arg1, s8 arg2);
 void TVShowConvertInternationalString(u8 *, u8 *, u8);
 void DoTVShowTheNameRaterShow(void);
 void DoTVShowPokemonTodaySuccessfulCapture(void);
@@ -107,5 +106,7 @@ void sub_80BE3BC(void);
 void UpdateTVShowsPerDay(u16);
 void sub_80C045C();
 void sub_80BF088(u8, s32);
+void sub_80BFD20(void);
+void PutPokemonTodayCaughtOnAir(void);
 
 #endif // GUARD_TV_H

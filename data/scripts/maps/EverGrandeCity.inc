@@ -3,8 +3,7 @@ EverGrandeCity_MapScripts:: @ 814D4D5
 	.byte 0
 
 EverGrandeCity_MapScript1_14D4DB:: @ 814D4DB
-	checkflag 2090
-	callif 1, EverGrandeCity_EventScript_1A02C1
+	call_if_set FLAG_SYS_WEATHER_CTRL, EverGrandeCity_EventScript_1A02C1
 	end
 
 EverGrandeCity_EventScript_14D4E5:: @ 814D4E5
@@ -20,6 +19,6 @@ EverGrandeCity_EventScript_14D4F7:: @ 814D4F7
 	end
 
 EverGrandeCity_EventScript_14D500:: @ 814D500
-	setflag 2078
-	setvar 0x4001, 1
+	setflag FLAG_VISITED_EVER_GRANDE_CITY
+	setvar VAR_TEMP_1, 1
 	end

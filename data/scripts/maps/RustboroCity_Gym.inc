@@ -3,33 +3,32 @@ RustboroCity_Gym_MapScripts:: @ 81578D8
 
 RustboroCity_Gym_EventScript_1578D9:: @ 81578D9
 	trainerbattle 1, OPPONENT_ROXANNE, 0, RustboroCity_Gym_Text_183EE5, RustboroCity_Gym_Text_183FC4, RustboroCity_Gym_EventScript_1578FE
-	checkflag 165
-	jumpif 0, RustboroCity_Gym_EventScript_15793C
+	goto_if_unset FLAG_RECEIVED_TM39, RustboroCity_Gym_EventScript_15793C
 	msgbox RustboroCity_Gym_Text_184252, 4
 	release
 	end
 
 RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	message RustboroCity_Gym_Text_1840AB
-	waittext
+	waitmessage
 	call RustboroCity_Gym_EventScript_1A02C5
 	msgbox RustboroCity_Gym_Text_1840D5, 4
-	setflag 1201
-	setflag 2055
-	setvar 0x405a, 1
-	addvar 0x4085, 1
-	setvar 0x8008, 1
+	setflag FLAG_DEFEATED_RUSTBORO_GYM
+	setflag FLAG_BADGE01_GET
+	setvar VAR_RUSTBORO_STATE, 1
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	setvar VAR_SPECIAL_8, 1
 	call RustboroCity_Gym_EventScript_1A01C0
-	compare 0x4085, 6
-	callif 1, RustboroCity_Gym_EventScript_1A00FB
-	jump RustboroCity_Gym_EventScript_15793C
+	compare VAR_PETALBURG_GYM_STATE, 6
+	call_if_eq RustboroCity_Gym_EventScript_1A00FB
+	goto RustboroCity_Gym_EventScript_15793C
 	end
 
 RustboroCity_Gym_EventScript_15793C:: @ 815793C
-	giveitem ITEM_TM39
+	giveitem_std ITEM_TM39
 	compare RESULT, 0
-	jumpeq RustboroCity_Gym_EventScript_1A029B
-	setflag 165
+	goto_if_eq RustboroCity_Gym_EventScript_1A029B
+	setflag FLAG_RECEIVED_TM39
 	msgbox RustboroCity_Gym_Text_184170, 4
 	release
 	end
@@ -47,8 +46,7 @@ RustboroCity_Gym_EventScript_157977:: @ 8157977
 RustboroCity_Gym_EventScript_15798E:: @ 815798E
 	lock
 	faceplayer
-	checkflag 1201
-	jumpeq RustboroCity_Gym_EventScript_1579A3
+	goto_if_set FLAG_DEFEATED_RUSTBORO_GYM, RustboroCity_Gym_EventScript_1579A3
 	msgbox RustboroCity_Gym_Text_183A4B, 4
 	release
 	end
@@ -60,16 +58,14 @@ RustboroCity_Gym_EventScript_1579A3:: @ 81579A3
 
 RustboroCity_Gym_EventScript_1579AD:: @ 81579AD
 	lockall
-	checkflag 2055
-	jumpeq RustboroCity_Gym_EventScript_1579CD
-	jump RustboroCity_Gym_EventScript_1579D7
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_Gym_EventScript_1579CD
+	goto RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579BD:: @ 81579BD
 	lockall
-	checkflag 2055
-	jumpeq RustboroCity_Gym_EventScript_1579CD
-	jump RustboroCity_Gym_EventScript_1579D7
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_Gym_EventScript_1579CD
+	goto RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579CD:: @ 81579CD

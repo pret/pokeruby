@@ -4,46 +4,46 @@ SlateportCity_MapScripts:: @ 814BA36
 
 SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	.ifdef SAPPHIRE
-	setvar 0x4010, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar 0x4010, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar 0x4011, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
-	setvar 0x40aa, 0
+	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_14BA5C
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BA68
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BA68
 	end
 
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
-	setflag 2071
-	setvar 0x4086, 0
-	setflag 803
+	setflag FLAG_VISITED_SLATEPORT_CITY
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
+	setflag FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
 	return
 
 SlateportCity_EventScript_14BA68:: @ 814BA68
-	movespriteperm 11, 28, 13
-	movespriteperm 7, 25, 13
-	movespriteperm 3, 25, 14
-	movespriteperm 6, 27, 16
-	movespriteperm 8, 28, 16
-	movespriteperm 1, 29, 16
-	movespriteperm 2, 31, 14
-	spritebehave 11, 8
-	spritebehave 7, 18
-	spritebehave 3, 16
-	spritebehave 6, 7
-	spritebehave 8, 7
-	spritebehave 1, 7
-	spritebehave 2, 9
+	setobjectxyperm 11, 28, 13
+	setobjectxyperm 7, 25, 13
+	setobjectxyperm 3, 25, 14
+	setobjectxyperm 6, 27, 16
+	setobjectxyperm 8, 28, 16
+	setobjectxyperm 1, 29, 16
+	setobjectxyperm 2, 31, 14
+	setobjectmovementtype 11, 8
+	setobjectmovementtype 7, 18
+	setobjectmovementtype 3, 16
+	setobjectmovementtype 6, 7
+	setobjectmovementtype 8, 7
+	setobjectmovementtype 1, 7
+	setobjectmovementtype 2, 9
 	return
 
 SlateportCity_EventScript_14BAB6:: @ 814BAB6
 	lock
 	faceplayer
 	message SlateportCity_Text_164642
-	waittext
+	waitmessage
 	pokemart SlateportCity_Items1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -64,19 +64,19 @@ SlateportCity_Items1:: @ 814BAD0
 SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	lock
 	faceplayer
-	bufferfirstpoke 0
+	bufferleadmonspeciesname 0
 	msgbox SlateportCity_Text_164682, 4
-	specialval RESULT, LeadMonHasEffortRibbon
+	specialvar RESULT, LeadMonHasEffortRibbon
 	compare RESULT, 1
-	callif 1, SlateportCity_EventScript_14BB35
-	specialval RESULT, GetLeadMonEVCount
+	call_if_eq SlateportCity_EventScript_14BB35
+	specialvar RESULT, ScrSpecial_AreLeadMonEVsMaxedOut
 	compare RESULT, 0
-	callif 1, SlateportCity_EventScript_14BB2B
+	call_if_eq SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
-	fanfare 370
+	playfanfare BGM_FANFA4
 	message SlateportCity_Text_1646DD
 	waitfanfare
-	waittext
+	waitmessage
 	msgbox SlateportCity_Text_1646FC, 4
 	special GivLeadMonEffortRibbon
 	release
@@ -95,8 +95,8 @@ SlateportCity_EventScript_14BB35:: @ 814BB35
 SlateportCity_EventScript_14BB3F:: @ 814BB3F
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BB56
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BB56
 	msgbox SlateportCity_Text_164814, 4
 	release
 	end
@@ -109,8 +109,8 @@ SlateportCity_EventScript_14BB56:: @ 814BB56
 SlateportCity_EventScript_14BB60:: @ 814BB60
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BB77
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BB77
 	msgbox SlateportCity_Text_1648A0, 4
 	release
 	end
@@ -123,10 +123,9 @@ SlateportCity_EventScript_14BB77:: @ 814BB77
 SlateportCity_EventScript_14BB81:: @ 814BB81
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BBA1
-	checkflag 96
-	jumpeq SlateportCity_EventScript_14BBAB
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BBA1
+	goto_if_set FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
 	end
@@ -144,8 +143,8 @@ SlateportCity_EventScript_14BBAB:: @ 814BBAB
 SlateportCity_EventScript_14BBB5:: @ 814BBB5
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BBCC
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BBCC
 	msgbox SlateportCity_Text_164A30, 4
 	release
 	end
@@ -156,8 +155,8 @@ SlateportCity_EventScript_14BBCC:: @ 814BBCC
 	end
 
 SlateportCity_EventScript_14BBD6:: @ 814BBD6
-	compare 0x4058, 1
-	jumpeq SlateportCity_EventScript_14BBEA
+	compare VAR_SLATEPORT_STATE, 1
+	goto_if_eq SlateportCity_EventScript_14BBEA
 	msgbox SlateportCity_Text_164AA9, 2
 	end
 
@@ -168,8 +167,8 @@ SlateportCity_EventScript_14BBEA:: @ 814BBEA
 SlateportCity_EventScript_14BBF3:: @ 814BBF3
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BC0A
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BC0A
 	msgbox SlateportCity_Text_164B34, 4
 	release
 	end
@@ -182,8 +181,7 @@ SlateportCity_EventScript_14BC0A:: @ 814BC0A
 SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
-	checkflag 148
-	jumpeq SlateportCity_EventScript_14BC29
+	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release
 	end
@@ -199,10 +197,8 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
-	checkflag 2052
-	jumpeq SlateportCity_EventScript_14BC63
-	checkflag 2061
-	jumpeq SlateportCity_EventScript_14BC59
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_14BC63
+	goto_if_set FLAG_BADGE07_GET, SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
 	end
@@ -235,8 +231,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
-	checkflag 2052
-	jumpeq SlateportCity_EventScript_14BCA5
+	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall
 	end
@@ -253,8 +248,8 @@ SlateportCity_EventScript_14BCAF:: @ 814BCAF
 SlateportCity_EventScript_14BCB8:: @ 814BCB8
 	lock
 	faceplayer
-	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BCCF
+	compare VAR_SLATEPORT_STATE, 1
+	call_if_eq SlateportCity_EventScript_14BCCF
 	msgbox SlateportCity_Text_164F9E, 4
 	release
 	end
@@ -287,11 +282,11 @@ SlateportCity_EventScript_14BCFD:: @ 814BCFD
 SlateportCity_EventScript_14BD06:: @ 814BD06
 	lock
 	faceplayer
-	msgbox SlateportCity_Text_1650F1, 5
-	compare RESULT, 1
-	callif 1, SlateportCity_EventScript_14BD28
-	compare RESULT, 0
-	callif 1, SlateportCity_EventScript_14BD31
+	msgbox SlateportCity_Text_1650F1, MSGBOX_YESNO
+	compare RESULT, YES
+	call_if_eq SlateportCity_EventScript_14BD28
+	compare RESULT, NO
+	call_if_eq SlateportCity_EventScript_14BD31
 	release
 	end
 
@@ -307,9 +302,9 @@ SlateportCity_EventScript_14BD3A:: @ 814BD3A
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164C64, 4
-	closebutton
-	move 5, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 5, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -317,9 +312,9 @@ SlateportCity_EventScript_14BD51:: @ 814BD51
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164C9F, 4
-	closebutton
-	move 19, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 19, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -327,9 +322,9 @@ SlateportCity_EventScript_14BD68:: @ 814BD68
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164CE8, 4
-	closebutton
-	move 20, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 20, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -337,9 +332,9 @@ SlateportCity_EventScript_14BD7F:: @ 814BD7F
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164D2B, 4
-	closebutton
-	move 27, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 27, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -347,9 +342,9 @@ SlateportCity_EventScript_14BD96:: @ 814BD96
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164D92, 4
-	closebutton
-	move 28, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 28, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -357,9 +352,9 @@ SlateportCity_EventScript_14BDAD:: @ 814BDAD
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164DD5, 4
-	closebutton
-	move 29, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 29, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -367,9 +362,9 @@ SlateportCity_EventScript_14BDC4:: @ 814BDC4
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164DF4, 4
-	closebutton
-	move 30, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 30, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -377,9 +372,9 @@ SlateportCity_EventScript_14BDDB:: @ 814BDDB
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_164E46, 4
-	closebutton
-	move 31, SlateportCity_Movement_1A083D
-	waitmove 0
+	closemessage
+	applymovement 31, SlateportCity_Movement_1A083D
+	waitmovement 0
 	release
 	end
 
@@ -387,8 +382,8 @@ SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	lock
 	faceplayer
 	message SlateportCity_Text_1A0BE4
-	waittext
-	pokemartdecor SlateportCity_Decorations1
+	waitmessage
+	pokemartdecoration SlateportCity_Decorations1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
@@ -410,11 +405,10 @@ SlateportCity_EventScript_14BE16:: @ 814BE16
 SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
-	checkflag 96
-	jumpif 0, SlateportCity_EventScript_14BE16
+	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
-	waittext
-	pokemartdecor SlateportCity_Decorations2
+	waitmessage
+	pokemartdecoration SlateportCity_Decorations2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
@@ -442,11 +436,10 @@ SlateportCity_Decorations2:: @ 814BE40
 @ 814BE60
 	lock
 	faceplayer
-	checkflag 96
-	jumpif 0, SlateportCity_EventScript_14BE16
+	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
-	waittext
-	pokemartdecor SlateportCity_Decorations3
+	waitmessage
+	pokemartdecoration SlateportCity_Decorations3
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
@@ -472,7 +465,7 @@ SlateportCity_EventScript_14BE9A:: @ 814BE9A
 	lock
 	faceplayer
 	message SlateportCity_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart SlateportCity_Items2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
@@ -490,55 +483,55 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	lockall
 	msgbox SlateportCity_Text_165498, 4
 	msgbox SlateportCity_Text_1654E0, 4
-	closebutton
-	move 10, SlateportCity_Movement_1A0843
-	waitmove 0
-	pause 10
-	move 9, SlateportCity_Movement_1A0845
-	waitmove 0
-	pause 25
-	move 11, SlateportCity_Movement_14C000
-	move 255, SlateportCity_Movement_14C00E
-	move 10, SlateportCity_Movement_14BFDD
-	move 9, SlateportCity_Movement_14BFEA
-	waitmove 0
-	disappear 10
-	disappear 9
+	closemessage
+	applymovement 10, SlateportCity_Movement_1A0843
+	waitmovement 0
+	delay 10
+	applymovement 9, SlateportCity_Movement_1A0845
+	waitmovement 0
+	delay 25
+	applymovement 11, SlateportCity_Movement_14C000
+	applymovement 255, SlateportCity_Movement_14C00E
+	applymovement 10, SlateportCity_Movement_14BFDD
+	applymovement 9, SlateportCity_Movement_14BFEA
+	waitmovement 0
+	removeobject 10
+	removeobject 9
 	msgbox SlateportCity_Text_16558D, 4
-	move 11, SlateportCity_Movement_1A0841
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_1A0841
+	waitmovement 0
 	msgbox SlateportCity_Text_1655E7, 4
-	playmusic BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	msgbox SlateportCity_Text_1656BC, 4
-	move 6, SlateportCity_Movement_1A083F
-	move 1, SlateportCity_Movement_1A083F
-	move 7, SlateportCity_Movement_14BFCD
-	move 3, SlateportCity_Movement_1A0831
-	move 2, SlateportCity_Movement_14BFD5
-	waitmove 0
-	move 11, SlateportCity_Movement_1A0845
-	waitmove 0
+	applymovement 6, SlateportCity_Movement_1A083F
+	applymovement 1, SlateportCity_Movement_1A083F
+	applymovement 7, SlateportCity_Movement_14BFCD
+	applymovement 3, SlateportCity_Movement_1A0831
+	applymovement 2, SlateportCity_Movement_14BFD5
+	waitmovement 0
+	applymovement 11, SlateportCity_Movement_1A0845
+	waitmovement 0
 	msgbox SlateportCity_Text_16578F, 4
-	playsfx 21
-	move 11, SlateportCity_Movement_1A0833
-	waitmove 0
-	move 11, SlateportCity_Movement_1A0835
-	waitmove 0
+	playse SE_PIN
+	applymovement 11, SlateportCity_Movement_1A0833
+	waitmovement 0
+	applymovement 11, SlateportCity_Movement_1A0835
+	waitmovement 0
 	msgbox SlateportCity_Text_1657FA, 4
-	move 11, SlateportCity_Movement_1A0839
-	waitmove 0
+	applymovement 11, SlateportCity_Movement_1A0839
+	waitmovement 0
 	msgbox SlateportCity_Text_16583A, 4
-	closebutton
-	move 11, SlateportCity_Movement_14BFFB
-	move 255, SlateportCity_Movement_14C008
-	waitmove 0
-	disappear 11
-	clearflag 841
-	clearflag 848
-	clearflag 845
-	clearflag 846
-	setvar 0x4058, 2
-	warp SlateportCity_Harbor, 255, 11, 14
+	closemessage
+	applymovement 11, SlateportCity_Movement_14BFFB
+	applymovement 255, SlateportCity_Movement_14C008
+	waitmovement 0
+	removeobject 11
+	clearflag FLAG_HIDE_STERN_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_SUBMARINE_SHADOW_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_1_SLATEPORT_HARBOR
+	clearflag FLAG_HIDE_GRUNT_2_SLATEPORT_HARBOR
+	setvar VAR_SLATEPORT_STATE, 2
+	warp MAP_SLATEPORT_CITY_HARBOR, 255, 11, 14
 	waitstate
 	releaseall
 	end

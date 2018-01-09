@@ -3,28 +3,18 @@
 
 #include "sprite.h"
 
-#define SCRIPT_READ_8(ptr)  ((ptr)[0])
-#define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
-#define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
-
-#define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+#define REG_BGnCNT_BITFIELD(n) (*(vBgCnt *)REG_ADDR_BG##n##CNT)
+#define REG_BG0CNT_BITFIELD REG_BGnCNT_BITFIELD(0)
 #define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
+#define REG_BG3CNT_BITFIELD REG_BGnCNT_BITFIELD(3)
 
-#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
-#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
-#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
-#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
-#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
-
-struct BGCntrlBitfield
+enum
 {
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
+    ANIM_BANK_ATTACKER,
+    ANIM_BANK_TARGET,
+    ANIM_BANK_ATK_PARTNER,
+    ANIM_BANK_DEF_PARTNER,
 };
 
 struct BattleAnimBackground
@@ -52,16 +42,26 @@ struct UnknownStruct3
     u8 filler1[0xB];
 };
 
-void DoMoveAnim(const u8 *const moveAnims[], u16 b, u8 c);
-bool8 b_side_obj__get_some_boolean(u8 a);
+extern void (*gAnimScriptCallback)(void);
+extern u8 gAnimScriptActive;
+extern u8 gAnimFriendship;
+extern u8 gAnimMoveTurn;
+extern struct DisableStruct *gAnimDisableStructPtr;
+
+void DoMoveAnim(u16 move);
+void LaunchBattleAnimation(const u8 *const moveAnims[], u16 b, u8 c);
+bool8 IsAnimBankSpriteVisible(u8 a);
 void sub_8076034(u8, u8);
 bool8 IsContest(void);
-void battle_anim_clear_some_data(void);
-void move_anim_8072740(struct Sprite *sprite);
+void ClearBattleAnimationVars(void);
+void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 task);
 void DestroyAnimVisualTask(u8 task);
-bool8 b_side_obj__get_some_boolean(u8);
-u8 IsContest();
-
+bool8 IsAnimBankSpriteVisible(u8);
+s8 BattleAnimAdjustPanning(s8 a);
+void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
+s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
+s16 sub_8077104(s16 newPan, int oldPan);
+void DestroyAnimSoundTask(u8 taskId);
 
 #endif

@@ -3,17 +3,16 @@ FallarborTown_MapScripts:: @ 814E7E0
 	.byte 0
 
 FallarborTown_MapScript1_14E7E6:: @ 814E7E6
-	setflag 2067
-	setvar 0x4086, 0
-	setflag 800
-	clearflag 270
+	setflag FLAG_VISITED_FALLARBOR_TOWN
+	setvar VAR_LINK_CONTEST_ROOM_STATE, 0
+	setflag FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
+	clearflag FLAG_CONTEST_SKETCH_CREATED
 	end
 
 FallarborTown_EventScript_14E7F5:: @ 814E7F5
 	lock
 	faceplayer
-	checkflag 139
-	jumpeq FallarborTown_EventScript_14E80A
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, FallarborTown_EventScript_14E80A
 	msgbox FallarborTown_Text_16C7FF, 4
 	release
 	end
@@ -34,10 +33,10 @@ FallarborTown_EventScript_14E81D:: @ 814E81D
 FallarborTown_EventScript_14E826:: @ 814E826
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_AZURILL, 0
+	waitse
+	playmoncry SPECIES_AZURILL, 0
 	msgbox FallarborTown_Text_16C92C, 4
-	waitpokecry
+	waitmoncry
 	release
 	end
 

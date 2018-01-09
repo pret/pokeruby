@@ -4,9 +4,9 @@ RustboroCity_DevonCorp_1F_MapObjects:: @ 838880C
 	object_event 3, MAP_OBJ_GFX_WOMAN_4, 0, 5, 0, 3, 0, 3, 8, 0, 0, 0, 0, 0, 0, RustboroCity_DevonCorp_1F_EventScript_15748F, 0, 0, 0
 
 RustboroCity_DevonCorp_1F_MapWarps:: @ 8388854
-	warp_def 5, 8, 0, 5, RustboroCity
-	warp_def 6, 8, 0, 6, RustboroCity
-	warp_def 14, 1, 0, 0, RustboroCity_DevonCorp_2F
+	warp_def 5, 8, 0, 5, MAP_RUSTBORO_CITY
+	warp_def 6, 8, 0, 6, MAP_RUSTBORO_CITY
+	warp_def 14, 1, 0, 0, MAP_RUSTBORO_CITY_DEVON_CORP_2F
 
 RustboroCity_DevonCorp_1F_MapEvents:: @ 838886C
 	map_events RustboroCity_DevonCorp_1F_MapObjects, RustboroCity_DevonCorp_1F_MapWarps, 0x0, 0x0

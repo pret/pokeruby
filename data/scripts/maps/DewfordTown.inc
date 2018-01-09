@@ -3,17 +3,16 @@ DewfordTown_MapScripts:: @ 814DFF8
 	.byte 0
 
 DewfordTown_MapScript1_14DFFE:: @ 814DFFE
-	setflag 2065
+	setflag FLAG_VISITED_DEWFORD_TOWN
 	end
 
 DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
-	checkflag 189
-	jumpif 0, DewfordTown_EventScript_14E076
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
-	waittext
-	multichoicedef 21, 6, 0, 2, 0
+	waitmessage
+	multichoicedefault 21, 6, 0, 2, 0
 	switch RESULT
 	case 0, DewfordTown_EventScript_14E04B
 	case 1, DewfordTown_EventScript_14E05B
@@ -23,36 +22,36 @@ DewfordTown_EventScript_14E002:: @ 814E002
 
 DewfordTown_EventScript_14E04B:: @ 814E04B
 	msgbox DewfordTown_Text_16B57D, 4
-	closebutton
-	jump DewfordTown_EventScript_14E151
+	closemessage
+	goto DewfordTown_EventScript_14E151
 	release
 	end
 
 DewfordTown_EventScript_14E05B:: @ 814E05B
 	msgbox DewfordTown_Text_16B5D2, 4
-	closebutton
-	jump DewfordTown_EventScript_14E1D8
+	closemessage
+	goto DewfordTown_EventScript_14E1D8
 	release
 	end
 
 DewfordTown_EventScript_14E06B:: @ 814E06B
 	msgbox DewfordTown_Text_16B627, 4
-	closebutton
+	closemessage
 	release
 	end
 
 DewfordTown_EventScript_14E076:: @ 814E076
-	msgbox DewfordTown_Text_16B3BC, 5
-	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E093
+	msgbox DewfordTown_Text_16B3BC, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
 	end
 
 DewfordTown_EventScript_14E093:: @ 814E093
 	msgbox DewfordTown_Text_16B417, 4
-	closebutton
-	jump DewfordTown_EventScript_14E151
+	closemessage
+	goto DewfordTown_EventScript_14E151
 	end
 
 DewfordTown_EventScript_14E0A2:: @ 814E0A2
@@ -74,19 +73,18 @@ DewfordTown_EventScript_14E0BD:: @ 814E0BD
 DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
-	checkflag 257
-	jumpeq DewfordTown_EventScript_14E11B
-	msgbox DewfordTown_Text_16B665, 5
-	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E0F0
-	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E111
+	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_14E11B
+	msgbox DewfordTown_Text_16B665, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq DewfordTown_EventScript_14E0F0
+	compare RESULT, NO
+	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
 	msgbox DewfordTown_Text_16B6A8, 4
-	giveitem ITEM_OLD_ROD
-	setflag 257
+	giveitem_std ITEM_OLD_ROD
+	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_16B6F9, 4
 	release
 	end
@@ -98,12 +96,12 @@ DewfordTown_EventScript_14E111:: @ 814E111
 
 DewfordTown_EventScript_14E11B:: @ 814E11B
 	message DewfordTown_Text_16B84E
-	waittext
+	waitmessage
 	multichoice 20, 8, 50, 1
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E13D
+	goto_if_eq DewfordTown_EventScript_14E13D
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E147
+	goto_if_eq DewfordTown_EventScript_14E147
 	end
 
 DewfordTown_EventScript_14E13D:: @ 814E13D
@@ -118,73 +116,71 @@ DewfordTown_EventScript_14E147:: @ 814E147
 
 DewfordTown_EventScript_14E151:: @ 814E151
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 0
-	move 2, DewfordTown_Movement_14E40E
-	waitmove 0
-	disappear 2
-	move 255, DewfordTown_Movement_14E402
-	waitmove 0
-	spriteinvisible 255, 0, 11
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 0
+	applymovement 2, DewfordTown_Movement_14E40E
+	waitmovement 0
+	removeobject 2
+	applymovement 255, DewfordTown_Movement_14E402
+	waitmovement 0
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_1A02E7
-	move 4, DewfordTown_Movement_14E293
-	move 255, DewfordTown_Movement_14E293
-	waitmove 0
-	spritevisible 255, 0, 19
+	applymovement 4, DewfordTown_Movement_14E293
+	applymovement 255, DewfordTown_Movement_14E293
+	waitmovement 0
+	showobjectat 255, MAP_ROUTE104
 	call DewfordTown_EventScript_1A02EF
-	move 255, DewfordTown_Movement_14E405
-	waitmove 0
-	spritevisible 255, 0, 19
-	clearflag 739
-	clearflag 881
-	clearflag 742
-	setflag 743
-	spriteinvisible 4, 0, 11
-	setvar 0x408e, 2
-	restorespritelevel 255, 0, 11
-	warp Route104_MrBrineysHouse, 255, 5, 4
-	copyvar 0x4096, 0x8008
+	applymovement 255, DewfordTown_Movement_14E405
+	waitmovement 0
+	showobjectat 255, MAP_ROUTE104
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE
+	clearflag FLAG_HIDE_PEEKO_BRINEY_HOUSE
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE104
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	hideobjectat 4, MAP_DEWFORD_TOWN
+	setvar VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, 2
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 255, 5, 4
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	waitstate
 	release
 	end
 
 DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	call DewfordTown_EventScript_1A010C
-	spritelevelup 2, 0, 11, 0
-	spritelevelup 255, 0, 11, 1
-	move 2, DewfordTown_Movement_14E40E
-	waitmove 0
-	disappear 2
-	move 255, DewfordTown_Movement_14E402
-	waitmove 0
-	spriteinvisible 255, 0, 11
+	setobjectpriority 2, MAP_DEWFORD_TOWN, 0
+	setobjectpriority 255, MAP_DEWFORD_TOWN, 1
+	applymovement 2, DewfordTown_Movement_14E40E
+	waitmovement 0
+	removeobject 2
+	applymovement 255, DewfordTown_Movement_14E402
+	waitmovement 0
+	hideobjectat 255, MAP_DEWFORD_TOWN
 	call DewfordTown_EventScript_1A02E7
-	move 4, DewfordTown_Movement_14E356
-	move 255, DewfordTown_Movement_14E356
-	waitmove 0
+	applymovement 4, DewfordTown_Movement_14E356
+	applymovement 255, DewfordTown_Movement_14E356
+	waitmovement 0
 	call DewfordTown_EventScript_1A02EF
-	spritevisible 255, 0, 24
-	move 255, DewfordTown_Movement_14E409
-	waitmove 0
-	movespriteperm 2, 21, 26
-	reappear 2
-	spritelevelup 2, 0, 24, 0
-	move 2, DewfordTown_Movement_14E410
-	waitmove 0
-	clearflag 741
-	reappear 1
-	clearflag 744
-	setflag 743
-	spriteinvisible 4, 0, 11
-	checkflag 149
-	callif 0, DewfordTown_EventScript_14E281
-	checkflag 149
-	callif 1, DewfordTown_EventScript_14E28A
-	closebutton
-	copyvar 0x4096, 0x8008
-	restorespritelevel 255, 0, 11
-	restorespritelevel 2, 0, 24
-	moveoffscreen 2
+	showobjectat 255, MAP_ROUTE109
+	applymovement 255, DewfordTown_Movement_14E409
+	waitmovement 0
+	setobjectxyperm 2, 21, 26
+	addobject 2
+	setobjectpriority 2, MAP_ROUTE109, 0
+	applymovement 2, DewfordTown_Movement_14E410
+	waitmovement 0
+	clearflag FLAG_HIDE_MR_BRINEY_ROUTE109
+	addobject 1
+	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	hideobjectat 4, MAP_DEWFORD_TOWN
+	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E281
+	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E28A
+	closemessage
+	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
+	resetobjectpriority 255, MAP_DEWFORD_TOWN
+	resetobjectpriority 2, MAP_ROUTE109
+	moveobjectoffscreen 2
 	release
 	end
 
@@ -598,11 +594,11 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	lock
 	faceplayer
 	call DewfordTown_EventScript_1A0102
-	msgbox DewfordTown_Text_16B9CE, 5
-	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E439
-	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E443
+	msgbox DewfordTown_Text_16B9CE, MSGBOX_YESNO
+	compare RESULT, YES
+	goto_if_eq DewfordTown_EventScript_14E439
+	compare RESULT, NO
+	goto_if_eq DewfordTown_EventScript_14E443
 	end
 
 DewfordTown_EventScript_14E439:: @ 814E439
@@ -612,20 +608,20 @@ DewfordTown_EventScript_14E439:: @ 814E439
 
 DewfordTown_EventScript_14E443:: @ 814E443
 	msgbox DewfordTown_Text_16BADC, 4
-	setvar 0x8004, 9
+	setvar VAR_SPECIAL_4, 9
 	call DewfordTown_EventScript_1A00F3
 	lock
 	faceplayer
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E46E
+	goto_if_eq DewfordTown_EventScript_14E46E
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E485
+	goto_if_eq DewfordTown_EventScript_14E485
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
-	inccounter GAME_STAT_STARTED_TRENDS
-	compare 0x8004, 0
-	jumpeq DewfordTown_EventScript_14E48F
+	incrementgamestat GAME_STAT_STARTED_TRENDS
+	compare VAR_SPECIAL_4, 0
+	goto_if_eq DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release
 	end

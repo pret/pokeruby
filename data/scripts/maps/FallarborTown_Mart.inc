@@ -5,7 +5,7 @@ FallarborTown_Mart_EventScript_153967:: @ 8153967
 	lock
 	faceplayer
 	message FallarborTown_Mart_Text_1A0BE4
-	waittext
+	waitmessage
 	pokemart FallarborTown_Mart_Items
 	msgbox FallarborTown_Mart_Text_1A0C02, 4
 	release
@@ -40,9 +40,9 @@ FallarborTown_Mart_EventScript_1539A5:: @ 81539A5
 FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_SKITTY, 0
+	waitse
+	playmoncry SPECIES_SKITTY, 0
 	msgbox FallarborTown_Mart_Text_1770D3, 4
-	waitpokecry
+	waitmoncry
 	release
 	end

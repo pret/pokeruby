@@ -9,26 +9,26 @@ EverGrandeCity_ChampionsRoom_MapScript1_15B7BF:: @ 815B7BF
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7C5:: @ 815B7C5
-	map_script_2 0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7CF
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7CF
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7CF:: @ 815B7CF
-	spriteface 255, 2
+	turnobject 255, 2
 	end
 
 EverGrandeCity_ChampionsRoom_MapScript2_15B7D4:: @ 815B7D4
-	map_script_2 0x4001, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7DE
+	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_ChampionsRoom_EventScript_15B7DE
 	.2byte 0
 
 EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	lockall
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
-	waitmove 0
-	pause 40
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B802
-	waitmove 0
-	setvar 0x4001, 1
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B805
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A084E
+	waitmovement 0
+	delay 40
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B802
+	waitmovement 0
+	setvar VAR_TEMP_1, 1
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B805
 	releaseall
 	end
 
@@ -38,106 +38,106 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 	step_end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
-	playmusic 454, 0
+	playbgm BGM_DAIGO, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
 	trainerbattle 3, OPPONENT_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B821
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
-	playsfx 8
-	setmaptile 6, 1, 838, 0
-	setmaptile 6, 2, 839, 0
+	playse SE_DOOR
+	setmetatile 6, 1, 838, 0
+	setmetatile 6, 2, 839, 0
 	special DrawWholeMapView
 	msgbox EverGrandeCity_ChampionsRoom_Text_1910FE, 4
-	closebutton
-	playsfx 8
-	checkgender
+	closemessage
+	playse SE_DOOR
+	checkplayergender
 	compare RESULT, 0
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B87C
 	compare RESULT, 1
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
-	reappear 2
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B881
+	addobject 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	jumpeq EverGrandeCity_ChampionsRoom_EventScript_15B886
+	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B886
 	compare RESULT, 1
-	jumpeq EverGrandeCity_ChampionsRoom_EventScript_15B8BB
+	goto_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B8BB
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B87C:: @ 815B87C
-	playmusic 415, 0
+	playbgm BGM_GIRL_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B881:: @ 815B881
-	playmusic 421, 0
+	playbgm BGM_BOY_SUP, FALSE
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B886:: @ 815B886
 	msgbox EverGrandeCity_ChampionsRoom_Text_191225, 4
-	pause 40
-	playsfx 21
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
-	waitmove 0
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
-	waitmove 0
+	delay 40
+	playse SE_PIN
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191268, 4
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B8F0
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8BB:: @ 815B8BB
 	msgbox EverGrandeCity_ChampionsRoom_Text_1912B3, 4
-	pause 40
-	playsfx 21
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
-	waitmove 0
-	move 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
-	waitmove 0
+	delay 40
+	playse SE_PIN
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0833
+	waitmovement 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_1A0835
+	waitmovement 0
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9D2
 	msgbox EverGrandeCity_ChampionsRoom_Text_191305, 4
-	jump EverGrandeCity_ChampionsRoom_EventScript_15B8F0
+	goto EverGrandeCity_ChampionsRoom_EventScript_15B8F0
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
-	closebutton
-	reappear 3
-	move 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
-	waitmove 0
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
-	waitmove 0
+	closemessage
+	addobject 3
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_15BA03
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0843
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_19134D, 4
 	call EverGrandeCity_ChampionsRoom_EventScript_1A03B0
 	msgbox EverGrandeCity_ChampionsRoom_Text_1914C6, 4
-	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
-	waitmove 0
-	pause 20
-	move 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
-	waitmove 0
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	waitmovement 0
+	delay 20
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191512, 4
-	closebutton
-	pause 30
-	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
-	move 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
-	waitmove 0
-	pause 20
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
-	waitmove 0
+	closemessage
+	delay 30
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FB
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9DD
+	applymovement 3, EverGrandeCity_ChampionsRoom_Movement_1A0841
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9F8
+	waitmovement 0
+	delay 20
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A0845
+	waitmovement 0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
-	checkgender
+	checkplayergender
 	compare RESULT, 0
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9AB
 	compare RESULT, 1
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
-	closebutton
-	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
-	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
-	waitmove 0
-	setflag 781
-	warp EverGrandeCity_HallOfFame, 255, 7, 16
+	call_if_eq EverGrandeCity_ChampionsRoom_EventScript_15B9B4
+	closemessage
+	applymovement 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0
+	waitmovement 0
+	setflag FLAG_HIDE_PETALBURG_GYM_GUIDE
+	warp MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 255, 7, 16
 	waitstate
 	releaseall
 	end
@@ -151,15 +151,15 @@ EverGrandeCity_ChampionsRoom_EventScript_15B9B4:: @ 815B9B4
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9BD:: @ 815B9BD
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
-	waitmove 0
-	move 255, EverGrandeCity_ChampionsRoom_Movement_1A083F
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9E6
+	waitmovement 0
+	applymovement 255, EverGrandeCity_ChampionsRoom_Movement_1A083F
+	waitmovement 0
 	return
 
 EverGrandeCity_ChampionsRoom_EventScript_15B9D2:: @ 815B9D2
-	move 2, EverGrandeCity_ChampionsRoom_Movement_15B9EF
-	waitmove 0
+	applymovement 2, EverGrandeCity_ChampionsRoom_Movement_15B9EF
+	waitmovement 0
 	return
 
 EverGrandeCity_ChampionsRoom_Movement_15B9DD:: @ 815B9DD

@@ -4,30 +4,26 @@ PacifidlogTown_House2_MapScripts:: @ 8154167
 PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	lock
 	faceplayer
-	checkdailyflags
+	dodailyevents
 	call PacifidlogTown_House2_EventScript_1541B4
-	checkflag 299
-	jumpeq PacifidlogTown_House2_EventScript_154254
-	checkflag 300
-	callif 1, PacifidlogTown_House2_EventScript_1541CE
-	checkflag 300
-	callif 0, PacifidlogTown_House2_EventScript_1541D7
-	setflag 300
-	specialval RESULT, GetLeadMonFriendshipScore
+	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_154254
+	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_1541CE
+	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_1541D7
+	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
+	specialvar RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 4
-	jumpif 4, PacifidlogTown_House2_EventScript_1541EC
-	specialval RESULT, GetLeadMonFriendshipScore
+	goto_if_ge PacifidlogTown_House2_EventScript_1541EC
+	specialvar RESULT, GetLeadMonFriendshipScore
 	compare RESULT, 2
-	jumpif 4, PacifidlogTown_House2_EventScript_15421B
-	jump PacifidlogTown_House2_EventScript_154225
+	goto_if_ge PacifidlogTown_House2_EventScript_15421B
+	goto PacifidlogTown_House2_EventScript_154225
 	end
 
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
-	checkflag 299
-	jumpif 0, PacifidlogTown_House2_EventScript_1A14DC
-	specialval RESULT, sub_810F908
+	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_1A14DC
+	specialvar RESULT, GetDaysUntilPacifidlogTMAvailable
 	compare RESULT, 0
-	callif 1, PacifidlogTown_House2_EventScript_1541E8
+	call_if_eq PacifidlogTown_House2_EventScript_1541E8
 	return
 
 PacifidlogTown_House2_EventScript_1541CE:: @ 81541CE
@@ -40,16 +36,16 @@ PacifidlogTown_House2_EventScript_1541D7:: @ 81541D7
 	return
 
 PacifidlogTown_House2_EventScript_1541E8:: @ 81541E8
-	clearflag 299
+	clearflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	return
 
 PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	msgbox PacifidlogTown_House2_Text_179169, 4
-	giveitem ITEM_TM27
+	giveitem_std ITEM_TM27
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
-	setflag 299
-	special sub_810F950
+	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
@@ -61,18 +57,18 @@ PacifidlogTown_House2_EventScript_15421B:: @ 815421B
 
 PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	msgbox PacifidlogTown_House2_Text_17922D, 4
-	giveitem ITEM_TM21
+	giveitem_std ITEM_TM21
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
-	setflag 299
-	special sub_810F950
+	goto_if_eq PacifidlogTown_House2_EventScript_1A029B
+	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
+	special SetPacifidlogTMReceivedDay
 	msgbox PacifidlogTown_House2_Text_179283, 4
 	release
 	end
 
 PacifidlogTown_House2_EventScript_154254:: @ 8154254
-	specialval RESULT, sub_810F908
-	buffernum 0, RESULT
+	specialvar RESULT, GetDaysUntilPacifidlogTMAvailable
+	buffernumberstring 0, RESULT
 	msgbox PacifidlogTown_House2_Text_1792F2, 4
 	release
 	end
@@ -80,10 +76,10 @@ PacifidlogTown_House2_EventScript_154254:: @ 8154254
 PacifidlogTown_House2_EventScript_154267:: @ 8154267
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_AZURILL, 0
+	waitse
+	playmoncry SPECIES_AZURILL, 0
 	msgbox PacifidlogTown_House2_Text_17938B, 4
-	waitpokecry
+	waitmoncry
 	msgbox PacifidlogTown_House2_Text_17939B, 4
 	release
 	end
@@ -91,10 +87,10 @@ PacifidlogTown_House2_EventScript_154267:: @ 8154267
 PacifidlogTown_House2_EventScript_154282:: @ 8154282
 	lock
 	faceplayer
-	checksound
-	pokecry SPECIES_AZURILL, 2
+	waitse
+	playmoncry SPECIES_AZURILL, 2
 	msgbox PacifidlogTown_House2_Text_1793CC, 4
-	waitpokecry
+	waitmoncry
 	msgbox PacifidlogTown_House2_Text_1793DD, 4
 	release
 	end

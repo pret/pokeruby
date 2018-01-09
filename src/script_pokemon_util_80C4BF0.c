@@ -10,18 +10,22 @@
 #include "debug.h"
 #include "decompress.h"
 #include "event_data.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
-#include "rng.h"
-#include "rom4.h"
+#include "random.h"
+#include "overworld.h"
 #include "script_pokemon_80C4.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
+#include "ewram.h"
+
+extern void sub_80C4674();
+extern void sub_80C4698(u8 *, u8);
 
 #define CONTEST_ENTRY_PIC_LEFT 10
 #define CONTEST_ENTRY_PIC_TOP 3
@@ -37,22 +41,23 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 
-extern u16 gScriptContestCategory;
-extern u16 gScriptContestRank;
-extern u16 gScriptResult;
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
+extern u16 gSpecialVar_Result;
 
 extern u32 gUnknown_03005D28;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern u8 gUnknown_02038690[];
-extern u16 gUnknown_02038678[];
+extern u8 gContestFinalStandings[];
+extern s16 gUnknown_02038670[];
+extern s16 gUnknown_02038678[];
 
-void sub_80C4BF0(void)
+void SetContestTrainerGfxIds(void)
 {
-    gSaveBlock1.vars[0x10] = gContestMons[0].unk16;
-    gSaveBlock1.vars[0x11] = gContestMons[1].unk16;
-    gSaveBlock1.vars[0x12] = gContestMons[2].unk16;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_0 - VARS_START] = gContestMons[0].trainerGfxId;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_1 - VARS_START] = gContestMons[1].trainerGfxId;
+    gSaveBlock1.vars[VAR_OBJ_GFX_ID_2 - VARS_START] = gContestMons[2].trainerGfxId;
 }
 
 void sub_80C4C28(void)
@@ -90,7 +95,7 @@ void sub_80C4C78(void)
     u16 var;
     u16 returnVar;
 
-    switch(gScriptContestCategory)
+    switch(gSpecialVar_ContestCategory)
     {
     case 0:
         var = 8;
@@ -110,7 +115,7 @@ void sub_80C4C78(void)
         break;
     }
 
-    returnVar = gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[var].var;
+    returnVar = gSaveBlock1.contestWinners[var].species;
 
     if(returnVar == 0)
         gSpecialVar_0x8004 = returnVar;
@@ -120,14 +125,14 @@ void sub_80C4C78(void)
 
 void sub_80C4CEC(void)
 {
-    sub_80B2A7C(0xFF);
+    Contest_SaveWinner(0xFF);
 }
 
 void sub_80C4CF8(void)
 {
-    if(!gUnknown_02038690[gContestPlayerMonIndex]
-    && gScriptContestRank == 3
-    && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
+    if(!gContestFinalStandings[gContestPlayerMonIndex]
+    && gSpecialVar_ContestRank == 3
+    && gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = 1;
     }
@@ -143,215 +148,84 @@ u8 sub_80C4D50(void)
     int i;
 
     for (i = 0; i < 5; i++)
-        if (gSaveBlock1.sbStruct.unkSB2.sb1_2EFC_struct2[i + 8].var)
+        if (gSaveBlock1.museumPortraits[i].species != 0)
             retVar++;
 
     return retVar;
 }
 
-// nope. too hard
-__attribute__((naked))
 void sub_80C4D80(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    ldr r0, _080C4EA0 @ =gUnknown_02038670\n\
-    mov r12, r0\n\
-    ldr r1, _080C4EA4 @ =gSpecialVar_0x8006\n\
-    mov r8, r1\n\
-    ldr r2, _080C4EA8 @ =gStringVar1\n\
-    mov r9, r2\n\
-    mov r2, r12\n\
-    mov r1, sp\n\
-    movs r6, 0x3\n\
-_080C4D9E:\n\
-    ldrh r0, [r2]\n\
-    strh r0, [r1]\n\
-    adds r2, 0x2\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080C4D9E\n\
-    movs r6, 0\n\
-_080C4DAE:\n\
-    movs r1, 0x3\n\
-    cmp r1, r6\n\
-    ble _080C4DD8\n\
-_080C4DB4:\n\
-    subs r4, r1, 0x1\n\
-    lsls r0, r4, 1\n\
-    mov r5, sp\n\
-    adds r3, r5, r0\n\
-    lsls r0, r1, 1\n\
-    adds r2, r5, r0\n\
-    ldrh r5, [r3]\n\
-    movs r7, 0\n\
-    ldrsh r1, [r3, r7]\n\
-    movs r7, 0\n\
-    ldrsh r0, [r2, r7]\n\
-    cmp r1, r0\n\
-    bge _080C4DD2\n\
-    strh r5, [r2]\n\
-    strh r0, [r3]\n\
-_080C4DD2:\n\
-    adds r1, r4, 0\n\
-    cmp r1, r6\n\
-    bgt _080C4DB4\n\
-_080C4DD8:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x2\n\
-    ble _080C4DAE\n\
-    mov r2, r8\n\
-    ldrh r0, [r2]\n\
-    lsls r0, 1\n\
-    add r0, sp\n\
-    ldrh r0, [r0]\n\
-    movs r2, 0\n\
-    movs r7, 0\n\
-    movs r6, 0\n\
-    lsls r0, 16\n\
-    asrs r4, r0, 16\n\
-    adds r3, r0, 0\n\
-    mov r1, sp\n\
-_080C4DF6:\n\
-    movs r5, 0\n\
-    ldrsh r0, [r1, r5]\n\
-    cmp r0, r4\n\
-    bne _080C4E12\n\
-    lsls r0, r2, 24\n\
-    movs r2, 0x80\n\
-    lsls r2, 17\n\
-    adds r0, r2\n\
-    lsrs r2, r0, 24\n\
-    mov r5, r8\n\
-    ldrh r5, [r5]\n\
-    cmp r6, r5\n\
-    bne _080C4E12\n\
-    adds r7, r2, 0\n\
-_080C4E12:\n\
-    adds r1, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    ble _080C4DF6\n\
-    movs r6, 0\n\
-    mov r0, sp\n\
-    movs r1, 0\n\
-    ldrsh r0, [r0, r1]\n\
-    asrs r1, r3, 16\n\
-    lsls r2, 24\n\
-    mov r10, r2\n\
-    cmp r0, r1\n\
-    beq _080C4E40\n\
-    adds r2, r1, 0\n\
-    mov r1, sp\n\
-_080C4E30:\n\
-    adds r1, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _080C4E40\n\
-    movs r4, 0\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, r2\n\
-    bne _080C4E30\n\
-_080C4E40:\n\
-    lsls r0, r6, 24\n\
-    lsrs r4, r0, 24\n\
-    adds r2, r7, 0\n\
-    movs r6, 0\n\
-    asrs r5, r3, 16\n\
-    mov r8, r5\n\
-    mov r1, r12\n\
-    movs r5, 0\n\
-    ldrsh r0, [r1, r5]\n\
-    cmp r8, r0\n\
-    bne _080C4E60\n\
-    cmp r7, 0x1\n\
-    beq _080C4E78\n\
-_080C4E5A:\n\
-    subs r0, r2, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-_080C4E60:\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x3\n\
-    bgt _080C4E78\n\
-    lsls r0, r6, 1\n\
-    add r0, r12\n\
-    asrs r1, r3, 16\n\
-    movs r5, 0\n\
-    ldrsh r0, [r0, r5]\n\
-    cmp r1, r0\n\
-    bne _080C4E60\n\
-    cmp r2, 0x1\n\
-    bne _080C4E5A\n\
-_080C4E78:\n\
-    lsls r1, r6, 24\n\
-    lsrs r1, 24\n\
-    mov r0, r9\n\
-    bl sub_80C4698\n\
-    ldr r0, _080C4EAC @ =gIsLinkContest\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _080C4EB8\n\
-    ldr r0, _080C4EB0 @ =gStringVar2\n\
-    lsls r1, r6, 3\n\
-    subs r1, r6\n\
-    lsls r1, 2\n\
-    ldr r2, _080C4EB4 @ =gLinkPlayers + 0x8\n\
-    adds r1, r2\n\
-    bl sub_80C4674\n\
-    b _080C4EC4\n\
-    .align 2, 0\n\
-_080C4EA0: .4byte gUnknown_02038670\n\
-_080C4EA4: .4byte gSpecialVar_0x8006\n\
-_080C4EA8: .4byte gStringVar1\n\
-_080C4EAC: .4byte gIsLinkContest\n\
-_080C4EB0: .4byte gStringVar2\n\
-_080C4EB4: .4byte gLinkPlayers + 0x8\n\
-_080C4EB8:\n\
-    ldr r0, _080C4ED8 @ =gStringVar2\n\
-    lsls r1, r6, 6\n\
-    ldr r2, _080C4EDC @ =gUnknown_0203857D\n\
-    adds r1, r2\n\
-    bl sub_80C4674\n\
-_080C4EC4:\n\
-    mov r1, r10\n\
-    asrs r0, r1, 24\n\
-    cmp r0, 0x1\n\
-    beq _080C4ED0\n\
-    cmp r7, r0\n\
-    bne _080C4EE4\n\
-_080C4ED0:\n\
-    ldr r0, _080C4EE0 @ =gSpecialVar_0x8006\n\
-    strh r4, [r0]\n\
-    b _080C4EEA\n\
-    .align 2, 0\n\
-_080C4ED8: .4byte gStringVar2\n\
-_080C4EDC: .4byte gUnknown_0203857D\n\
-_080C4EE0: .4byte gSpecialVar_0x8006\n\
-_080C4EE4:\n\
-    ldr r1, _080C4EFC @ =gSpecialVar_0x8006\n\
-    adds r0, r4, 0x4\n\
-    strh r0, [r1]\n\
-_080C4EEA:\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080C4EFC: .4byte gSpecialVar_0x8006\n\
-    .syntax divided");
+    s16 sp0[4];
+    s32 i;
+    s32 j;
+    s16 r4;
+    u8 r2;
+    u8 r7;
+    s8 r10;
+    u8 r4_;
+
+    for (i = 0; i < 4; i++)
+        sp0[i] = gUnknown_02038670[i];
+
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 3; j > i; j--)
+        {
+            if (sp0[j - 1] < sp0[j])
+            {
+                s32 temp = sp0[j];
+
+                sp0[j] = sp0[j - 1];
+                sp0[j - 1] = temp;
+            }
+        }
+    }
+
+    r4 = sp0[gSpecialVar_0x8006];
+    r10 = 0;
+    r7 = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp0[i] == r4)
+        {
+            r10++;
+            if (i == gSpecialVar_0x8006)
+                r7 = r10;
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp0[i] == r4)
+            break;
+    }
+
+    r4_ = i;
+    r2 = r7;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (r4 == gUnknown_02038670[i])
+        {
+            if (r2 == 1)
+                break;
+            r2--;
+        }
+    }
+
+    sub_80C4698(gStringVar1, i);
+
+    if (gIsLinkContest & 1)
+        sub_80C4674(gStringVar2, gLinkPlayers[i].name);
+    else
+        sub_80C4674(gStringVar2, gContestMons[i].trainerName);
+
+    if (r10 == 1 || r7 == r10)
+        gSpecialVar_0x8006 = r4_;
+    else
+        gSpecialVar_0x8006 = r4_ + 4;
 }
 
 void ShowContestWinnerCleanup(void)
@@ -366,7 +240,7 @@ void ShowContestWinner(void)
         sub_80AAF30();
         BATTLE_STRUCT->unk15DDF = 1;
         BATTLE_STRUCT->unk15DDE = sub_80B2C4C(254, 0);
-        sub_80B2A7C(3);
+        Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
     SetMainCallback2(CB2_ContestPainting);
@@ -375,10 +249,10 @@ void ShowContestWinner(void)
 
 void sub_80C4F70(void)
 {
-    VarSet(0x4010, gContestMons[0].unk16);
-    VarSet(0x4011, gContestMons[1].unk16);
-    VarSet(0x4012, gContestMons[2].unk16);
-    VarSet(0x4013, gContestMons[3].unk16);
+    VarSet(VAR_OBJ_GFX_ID_0, gContestMons[0].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_1, gContestMons[1].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_2, gContestMons[2].trainerGfxId);
+    VarSet(VAR_OBJ_GFX_ID_3, gContestMons[3].trainerGfxId);
 }
 
 bool8 GiveMonArtistRibbon(void)
@@ -386,9 +260,9 @@ bool8 GiveMonArtistRibbon(void)
     u8 ribbon = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON);
 
     if(ribbon == FALSE
-    && gUnknown_02038690[gContestPlayerMonIndex] == 0
-    && gScriptContestRank == 3
-    && (s16)gUnknown_02038678[gContestPlayerMonIndex] >= 800)
+    && gContestFinalStandings[gContestPlayerMonIndex] == 0
+    && gSpecialVar_ContestRank == 3
+    && gUnknown_02038678[gContestPlayerMonIndex] >= 800)
     {
         ribbon = TRUE;
         SetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_ARTIST_RIBBON, &ribbon);
@@ -420,8 +294,8 @@ void ShowContestEntryMonPic(void)
 
         MenuDrawTextWindow(left, top, 19, 13);
         species = gContestMons[gSpecialVar_0x8006].species;
-        var1 = gContestMons[gSpecialVar_0x8006].unk38; // v2
-        var2 = gContestMons[gSpecialVar_0x8006].unk3C; // v3
+        var1 = gContestMons[gSpecialVar_0x8006].personality;
+        var2 = gContestMons[gSpecialVar_0x8006].otId;
         taskId = CreateTask(sub_80C5190, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
@@ -433,7 +307,7 @@ void ShowContestEntryMonPic(void)
           gUnknown_081FAF4C[1],
           species,
           var1);
-        palette = sub_80409C8(species, var2, var1);
+        palette = GetMonSpritePalStructFromOtIdPersonality(species, var2, var1);
         LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(species, 1);
         gUnknown_02024E8C.paletteTag = palette->tag;
@@ -487,9 +361,9 @@ void sub_80C5190(u8 taskId)
 void ScriptGetMultiplayerId(void)
 {
     if(gIsLinkContest & 1)
-        gScriptResult = GetMultiplayerId();
+        gSpecialVar_Result = GetMultiplayerId();
     else
-        gScriptResult = 4;
+        gSpecialVar_Result = 4;
 }
 
 void ScriptRandom(void)
@@ -501,17 +375,17 @@ void ScriptRandom(void)
     {
         gUnknown_03005D28 = 1103515245 * gUnknown_03005D28 + 24691;
         random = gUnknown_03005D28 >> 16;
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
     }
     else
     {
-        scriptPtr = &gScriptResult;
+        scriptPtr = &gSpecialVar_Result;
         random = Random();
     }
     *scriptPtr = random % *scriptPtr;
 }
 
-void HealPlayerParty(void)
+void ScrSpecial_HealPlayerParty(void)
 {
     u8 i, j;
     u8 ppBonuses;
@@ -542,41 +416,39 @@ void HealPlayerParty(void)
     }
 }
 
-u8 ScriptGiveMon(u16 species, u8 var, u16 item, u32 var3, u32 var4, u8 var5)
+u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
 {
-    u16 nationalSpecies;
+    u16 nationalDexNum;
     int sentToPc;
-    u8 array[2];
+    u8 heldItem[2];
     struct Pokemon mon;
 
-    CreateMon(&mon, species, var, 32, 0, 0, 0, 0);
-    array[0] = item;
-    array[1] = item >> 8;
-    SetMonData(&mon, MON_DATA_HELD_ITEM, array);
+    CreateMon(&mon, species, level, 32, 0, 0, 0, 0);
+    heldItem[0] = item;
+    heldItem[1] = item >> 8;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
     sentToPc = GiveMonToPlayer(&mon);
-    nationalSpecies = SpeciesToNationalPokedexNum(species);
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
 
-    // nested if check to fool compiler
     switch(sentToPc)
     {
-        case 0:
-        case 1:
-            GetNationalPokedexFlag(nationalSpecies, 2);
-            GetNationalPokedexFlag(nationalSpecies, 3);
-            return sentToPc;
-        default:
-            return sentToPc;
+    case 0:
+    case 1:
+        GetSetPokedexFlag(nationalDexNum, 2);
+        GetSetPokedexFlag(nationalDexNum, 3);
+        break;
     }
+    return sentToPc;
 }
 
-u8 ScriptGiveEgg(u16 value)
+u8 ScriptGiveEgg(u16 species)
 {
     struct Pokemon mon;
-    u8 data;
+    u8 isEgg;
 
-    sub_8042044(&mon, value, 1);
-    data = 1;
-    SetMonData(&mon, MON_DATA_IS_EGG, &data);
+    CreateEgg(&mon, species, TRUE);
+    isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
     return GiveMonToPlayer(&mon);
 }
@@ -588,13 +460,13 @@ void CheckForAlivePartyMons(void)
     switch(var)
     {
     case 1:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 0:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     case 2:
-        gScriptResult = var;
+        gSpecialVar_Result = var;
         break;
     }
 }
@@ -622,18 +494,18 @@ bool8 GetNameOfEnigmaBerryInPlayerParty(void)
     return hasItem;
 }
 
-void ScriptWildBattle(u16 species, u8 level, u16 item)
+void CreateScriptedWildMon(u16 species, u8 level, u16 item)
 {
-    u8 data[2];
+    u8 heldItem[2];
 
     ZeroEnemyPartyMons();
     CreateMon(&gEnemyParty[0], species, level, 0x20, 0, 0, 0, 0);
 
     if(item)
     {
-        data[0] = item;
-        data[1] = item >> 8;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, data);
+        heldItem[0] = item;
+        heldItem[1] = item >> 8;
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
 }
 
@@ -658,10 +530,10 @@ void sub_80C5580(void)
     switch(var)
     {
     case 0:
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default:
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 
@@ -682,11 +554,11 @@ void SetBattleTowerPlayerParty(void)
     {
     case 0: // player quit battle tower?
         LoadPlayerParty();
-        gScriptResult = 0;
+        gSpecialVar_Result = 0;
         break;
     default: // load battle tower.
         ReducePlayerPartyToThree();
-        gScriptResult = 1;
+        gSpecialVar_Result = 1;
         break;
     }
 

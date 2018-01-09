@@ -1,10 +1,9 @@
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 	lock
 	faceplayer
-	checkflag 2053
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
+	goto_if_set FLAG_SYS_CHAT_USED, PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1C97, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D:: @ 81B1B2D
@@ -19,22 +18,22 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D:: @ 81B1B2D
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B6C:: @ 81B1B6C
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1D3A, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1B2D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1F7B, 4
-	closebutton
-	setvar 0x8004, 0
+	closemessage
+	setvar VAR_SPECIAL_4, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare 0x8004, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	compare VAR_SPECIAL_4, 1
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1:: @ 81B1BB1
@@ -43,10 +42,10 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1:: @ 81B1BB1
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB:: @ 81B1BBB
-	setvar 0x8004, 0
+	setvar VAR_SPECIAL_4, 0
 	special sub_80EB7C4
-	waittext
-	pause 80
+	waitmessage
+	delay 80
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B2137, 4
 	release
 	end
@@ -58,7 +57,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BD1:: @ 81B1BD1
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BDB:: @ 81B1BDB
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B202F, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9:: @ 81B1BE9
@@ -73,22 +72,22 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9:: @ 81B1BE9
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C28:: @ 81B1C28
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B1D3A, 4
-	jump PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
+	goto PetalburgCity_PokemonCenter_1F_EventScript_1B1BE9
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B207F, 4
-	closebutton
-	setvar 0x8004, 0
+	closemessage
+	setvar VAR_SPECIAL_4, 0
 	call PetalburgCity_PokemonCenter_1F_EventScript_1A00F3
 	lock
 	faceplayer
-	compare 0x8004, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	compare VAR_SPECIAL_4, 1
+	call_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
+	goto_if_eq PetalburgCity_PokemonCenter_1F_EventScript_1B1BBB
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C6D:: @ 81B1C6D
@@ -97,11 +96,9 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C6D:: @ 81B1C6D
 	end
 
 PetalburgCity_PokemonCenter_1F_EventScript_1B1C77:: @ 81B1C77
-	checkflag 2059
-	jumpif 0, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
-	checkflag 2124
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
-	setflag 2124
+	goto_if_unset FLAG_BADGE05_GET, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
+	goto_if_set FLAG_SYS_EXDATA_ENABLE, PetalburgCity_PokemonCenter_1F_EventScript_1B1C96
+	setflag FLAG_SYS_EXDATA_ENABLE
 	msgbox PetalburgCity_PokemonCenter_1F_Text_1B21CC, 3
 	release
 	end

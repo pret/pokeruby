@@ -1,34 +1,33 @@
-CuttableTreeScript:: @ 81B0DCC
+S_CuttableTree:: @ 81B0DCC
 	lockall
-	checkflag 2055
-	jumpif 0, CannotUseCut
-	checkattack MOVE_CUT
+	goto_if_unset FLAG_BADGE01_GET, CannotUseCut
+	checkpartymove MOVE_CUT
 	compare RESULT, 6
-	jumpeq CannotUseCut
-	setanimation 0, RESULT
-	bufferpartypoke 0, RESULT
-	bufferattack 1, MOVE_CUT
-	msgbox UseCutPromptText, 5
-	compare RESULT, 0
-	jumpeq Cut_ChoseNo
+	goto_if_eq CannotUseCut
+	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, RESULT
+	buffermovename 1, MOVE_CUT
+	msgbox UseCutPromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
-	closebutton
-	doanimation 2
+	closemessage
+	dofieldeffect 2
 	waitstate
-	jump DoTreeCutMovement
+	goto DoTreeCutMovement
 	end
 
-UseCutScript:: @ 81B0E16
+S_UseCut:: @ 81B0E16
 	lockall
-	doanimation 2
+	dofieldeffect 2
 	waitstate
-	jump DoTreeCutMovement
+	goto DoTreeCutMovement
 	end
 
 DoTreeCutMovement: @ 81B0E21
-	move LAST_TALKED, TreeCutMovement @ tree cut animation
-	waitmove 0
-	disappear LAST_TALKED @ tree disappears
+	applymovement LAST_TALKED, TreeCutMovement @ tree cut animation
+	waitmovement 0
+	removeobject LAST_TALKED @ tree disappears
 	releaseall
 	end
 
@@ -42,7 +41,7 @@ CannotUseCut: @ 81B0E32
 	end
 
 Cut_ChoseNo: @ 81B0E3C
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -59,43 +58,42 @@ CannotUseCutText: @ 81B0E8E
 	.string "Der ZERSCHNEIDER kann hier eingesetzt\n"
 	.string "werden.$"
 
-BreakableRockScript:: @ 81B0EB7
+S_BreakableRock:: @ 81B0EB7
 	lockall
-	checkflag 2057
-	jumpif 0, CannotUseRockSmash
-	checkattack MOVE_ROCK_SMASH
+	goto_if_unset FLAG_BADGE03_GET, CannotUseRockSmash
+	checkpartymove MOVE_ROCK_SMASH
 	compare RESULT, 6
-	jumpeq CannotUseRockSmash
-	setanimation 0, RESULT
-	bufferpartypoke 0, RESULT
-	bufferattack 1, MOVE_ROCK_SMASH
-	msgbox UseRockSmashPromptText, 5
-	compare RESULT, 0
-	jumpeq RockSmash_ChoseNo
+	goto_if_eq CannotUseRockSmash
+	setfieldeffectargument 0, RESULT
+	bufferpartymonnick 0, RESULT
+	buffermovename 1, MOVE_ROCK_SMASH
+	msgbox UseRockSmashPromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
-	closebutton
-	doanimation 37
+	closemessage
+	dofieldeffect 37
 	waitstate
-	jump DoRockSmashMovement
+	goto DoRockSmashMovement
 	end
 
-UseRockSmashScript:: @ 81B0F01
+S_UseRockSmash:: @ 81B0F01
 	lockall
-	doanimation 37
+	dofieldeffect 37
 	waitstate
-	jump DoRockSmashMovement
+	goto DoRockSmashMovement
 	end
 
 DoRockSmashMovement: @ 81B0F0C
-	move LAST_TALKED, RockSmashMovement
-	waitmove 0
-	disappear LAST_TALKED
-	specialval RESULT, sub_810F5BC
+	applymovement LAST_TALKED, RockSmashMovement
+	waitmovement 0
+	removeobject LAST_TALKED
+	specialvar RESULT, TryUpdateRusturfTunnelState
 	compare RESULT, 1
-	jumpeq DoRockSmashMovement_Done
-	special RockSmashWildEncounter
+	goto_if_eq DoRockSmashMovement_Done
+	special ScrSpecial_RockSmashWildEncounter
 	compare RESULT, 0
-	jumpeq DoRockSmashMovement_Done
+	goto_if_eq DoRockSmashMovement_Done
 	waitstate
 	releaseall
 	end
@@ -114,7 +112,7 @@ CannotUseRockSmash: @ 81B0F3E
 	end
 
 RockSmash_ChoseNo: @ 81B0F48
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -126,34 +124,32 @@ CannotUseRockSmashText: @ 81B0F90
 	.string "Ein großer Felsen. Ein POKéMON könnte\n"
 	.string "ihn vielleicht zertrümmern.$"
 
-PushableBoulderScript:: @ 81B0FCB
+S_PushableBoulder:: @ 81B0FCB
 	lockall
-	checkflag 2058
-	jumpif 0, CannotUseStrength
-	checkflag 2089
-	jumpeq AlreadyUsedStrength
-	checkattack 70
+	goto_if_unset FLAG_BADGE04_GET, CannotUseStrength
+	goto_if_set FLAG_SYS_USE_STRENGTH, AlreadyUsedStrength
+	checkpartymove 70
 	compare RESULT, 6
-	jumpeq CannotUseStrength
-	setanimation 0, RESULT
-	msgbox UseStrengthPromptText, 5
-	compare RESULT, 0
-	jumpeq Strength_ChoseNo
-	closebutton
-	doanimation 40
+	goto_if_eq CannotUseStrength
+	setfieldeffectargument 0, RESULT
+	msgbox UseStrengthPromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Strength_ChoseNo
+	closemessage
+	dofieldeffect 40
 	waitstate
-	jump UsedStrength
+	goto UsedStrength
 	end
 
-UseStrengthScript:: @ 81B100E
+S_UseStrength:: @ 81B100E
 	lockall
-	doanimation 40
+	dofieldeffect 40
 	waitstate
-	jump UsedStrength
+	goto UsedStrength
 	end
 
 UsedStrength: @ 81B1019
-	setflag 2089
+	setflag FLAG_SYS_USE_STRENGTH
 	msgbox UsedStrengthText, 3
 	releaseall
 	end
@@ -169,7 +165,7 @@ AlreadyUsedStrength: @ 81B1030
 	end
 
 Strength_ChoseNo: @ 81B103A
-	closebutton
+	closemessage
 	releaseall
 	end
 
@@ -191,21 +187,21 @@ AlreadyUsedStrengthText: @ 81B1127
 	.string "STÄRKE ermöglicht es, Felsen zu\n"
 	.string "bewegen.$"
 
-UseWaterfallScript:: @ 81B115A
+S_UseWaterfall:: @ 81B115A
 	lockall
-	checkattack MOVE_WATERFALL
+	checkpartymove MOVE_WATERFALL
 	compare RESULT, 6
-	jumpeq Waterfall_NoMonKnows
-	bufferpartypoke 0, RESULT
-	setanimation 0, RESULT
-	msgbox UseWaterfallPromptText, 5
-	compare RESULT, 0
-	jumpeq Waterfall_Done
+	goto_if_eq Waterfall_NoMonKnows
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
+	msgbox UseWaterfallPromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
-	doanimation 43
-	jump Waterfall_Done
+	dofieldeffect 43
+	goto Waterfall_Done
 
-CannotUseWaterfallScript:: @ 81B1194
+S_CannotUseWaterfall:: @ 81B1194
 	lockall
 Waterfall_NoMonKnows: @ 81B1195
 	msgbox CannotUseWaterfallText, 4
@@ -226,18 +222,18 @@ UsedWaterfallText: @ 81B120D
 
 UseDiveScript:: @ 81B1220
 	lockall
-	checkattack MOVE_DIVE
+	checkpartymove MOVE_DIVE
 	compare RESULT, 6
-	jumpeq CannotUseDive
-	bufferpartypoke 0, RESULT
-	setanimation 0, RESULT
-	setanimation 1, 1
-	msgbox UseDivePromptText, 5
-	compare RESULT, 0
-	jumpeq Dive_Done
+	goto_if_eq CannotUseDive
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 1, 1
+	msgbox UseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
-	doanimation 44
-	jump Dive_Done
+	dofieldeffect 44
+	goto Dive_Done
 	lockall
 
 CannotUseDive: @ 81B125F
@@ -247,25 +243,25 @@ Dive_Done: @ 81B1267
 	releaseall
 	end
 
-UnderwaterUseDiveScript:: @ 81B1269
+S_UseDiveUnderwater:: @ 81B1269
 	lockall
-	checkattack MOVE_DIVE
+	checkpartymove MOVE_DIVE
 	compare RESULT, 6
-	jumpeq UnderwaterCannotUseDive
-	bufferpartypoke 0, RESULT
-	setanimation 0, RESULT
-	setanimation 1, 1
-	msgbox UnderwaterUseDivePromptText, 5
-	compare RESULT, 0
-	jumpeq UnderwaterDive_Done
+	goto_if_eq UnderwaterCannotUseDive
+	bufferpartymonnick 0, RESULT
+	setfieldeffectargument 0, RESULT
+	setfieldeffectargument 1, 1
+	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
+	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
-	doanimation 44
-	jump UnderwaterDive_Done
+	dofieldeffect 44
+	goto UnderwaterDive_Done
 
 UnderwaterCannotUseDive: @ 81B12A7
 	lockall
 	msgbox UnderwaterCannotUseDiveText, 4
-	jump UnderwaterDive_Done
+	goto UnderwaterDive_Done
 
 @ not used
 SurfacingBlocked: @ 81B12B5

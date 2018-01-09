@@ -5,22 +5,19 @@
 #include "battle_anim.h"
 #include "battle_anim_81258BC.h"
 #include "battle_anim_8137220.h"
+#include "battle_util.h"
 #include "cable_club.h"
-#include "items.h"
+#include "constants/items.h"
 #include "link.h"
 #include "pokemon.h"
 #include "rom3.h"
 #include "rom_8094928.h"
-#include "species.h"
+#include "constants/species.h"
 #include "task.h"
 #include "util.h"
 #include "battle_message.h"
 #include "data2.h"
-
-extern u8 unk_2000000[];
-
-#define EWRAM_14000 ((u8 *)(unk_2000000 + 0x14000))
-#define EWRAM_15000 ((u8 *)(unk_2000000 + 0x15000))
+#include "ewram.h"
 
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
@@ -39,7 +36,7 @@ extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gBanksBySide[];
 extern u16 gCurrentMove;
-extern u16 gUnknown_02024BE8;
+extern u16 gChosenMove;
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
 extern u8 gBankAttacker;
@@ -84,7 +81,7 @@ void setup_poochyena_battle(void)
     }
     sub_800B858();
     gBattleExecBuffer = 0;
-    battle_anim_clear_some_data();
+    ClearBattleAnimationVars();
     ClearBattleMonForms();
     BattleAI_HandleItemUseBeforeAISetup();
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
@@ -92,7 +89,7 @@ void setup_poochyena_battle(void)
         ZeroEnemyPartyMons();
         CreateMon(&gEnemyParty[0], SPECIES_POOCHYENA, 2, 32, 0, 0, 0, 0);
         i = ITEM_NONE;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, (u8 *)&i);
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
@@ -403,16 +400,18 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
         gTasks[gUnknown_020238C4].data[12] = gTasks[gUnknown_020238C4].data[14];
         gTasks[gUnknown_020238C4].data[14] = 0;
     }
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14000] = a;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14001] = gActiveBank;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14002] = gBankAttacker;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14003] = gBankTarget;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14004] = r9;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14005] = (r9 & 0x0000FF00) >> 8;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14006] = gAbsentBankFlags;
-    unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14007] = gEffectBank;
+
+    ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
+    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBank;
+    ewram14000arr(2, gTasks[gUnknown_020238C4].data[14]) = gBankAttacker;
+    ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
+    ewram14000arr(4, gTasks[gUnknown_020238C4].data[14]) = r9;
+    ewram14000arr(5, gTasks[gUnknown_020238C4].data[14]) = (r9 & 0x0000FF00) >> 8;
+    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBankFlags;
+    ewram14000arr(7, gTasks[gUnknown_020238C4].data[14]) = gEffectBank;
+
     for (i = 0; i < size; i++)
-        unk_2000000[gTasks[gUnknown_020238C4].data[14] + 0x14008 + i] = data[i];
+        ewram14008arr(i, gTasks[gUnknown_020238C4].data[14]) = data[i];
     gTasks[gUnknown_020238C4].data[14] = gTasks[gUnknown_020238C4].data[14] + r9 + 8;
 }
 
@@ -452,8 +451,8 @@ void sub_800C1A8(u8 taskId)
                     gTasks[taskId].data[12] = 0;
                     gTasks[taskId].data[15] = 0;
                 }
-                var = (unk_2000000[gTasks[taskId].data[15] + 0x14004] | (unk_2000000[gTasks[taskId].data[15] + 0x14005] << 8)) + 8;
-                SendBlock(bitmask_all_link_players_but_self(), &unk_2000000[gTasks[taskId].data[15] + 0x14000], var);
+                var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8)) + 8;
+                SendBlock(bitmask_all_link_players_but_self(), &ewram14000arr(0, gTasks[taskId].data[15]), var);
                 gTasks[taskId].data[11]++;
             }
             else
@@ -466,7 +465,7 @@ void sub_800C1A8(u8 taskId)
     case 4:
         if (sub_8007ECC())
         {
-            var = unk_2000000[gTasks[taskId].data[15] + 0x14004] | (unk_2000000[gTasks[taskId].data[15] + 0x14005] << 8);
+            var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
             gTasks[taskId].data[13] = 1;
             gTasks[taskId].data[15] = gTasks[taskId].data[15] + var + 8;
             gTasks[taskId].data[11] = 3;
@@ -489,7 +488,7 @@ void sub_800C35C(void)
     u8 i;  //r4
     s32 j;  //r2
     u16 r6;  //r6
-    u8 *recvBuffer;  //r3
+    u16 *recvBuffer;  //r3
     u8 *dest;  //r5
     u8 *src;  //r4
 
@@ -500,10 +499,10 @@ void sub_800C35C(void)
             if (GetBlockReceivedStatus() & gBitTable[i])
             {
                 ResetBlockReceivedFlag(i);
-                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+                recvBuffer = gBlockRecvBuffer[i];
 #ifndef NONMATCHING
                 asm("");
-                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+                recvBuffer = gBlockRecvBuffer[i];
 #endif
                 r6 = gBlockRecvBuffer[i][2];
                 if (gTasks[gUnknown_020238C5].data[14] + 9 + r6 > 0x1000)
@@ -513,7 +512,7 @@ void sub_800C35C(void)
                 }
                 //_0800C402
                 dest = EWRAM_15000 + gTasks[gUnknown_020238C5].data[14];
-                src = recvBuffer;
+                src = (u8 *)recvBuffer;
                 for (j = 0; j < r6 + 8; j++)
                     dest[j] = src[j];
                 gTasks[gUnknown_020238C5].data[14] = gTasks[gUnknown_020238C5].data[14] + r6 + 8;
@@ -537,28 +536,28 @@ void sub_800C47C(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        r4 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 1];
-        r7 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 4] | (unk_2000000[0x15000 + gTasks[taskId].data[15] + 5] << 8);
-        switch (unk_2000000[0x15000 + gTasks[taskId].data[15] + 0])
+        r4 = ewram15000arr(1, gTasks[taskId].data[15]);
+        r7 = ewram15000arr(4, gTasks[taskId].data[15]) | (ewram15000arr(5, gTasks[taskId].data[15]) << 8);
+        switch (ewram15000arr(0, gTasks[taskId].data[15]))
         {
         case 0:
             if (gBattleExecBuffer & gBitTable[r4])
                 return;
-            memcpy(gBattleBufferA[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferA[r4], &ewram15000arr(8, gTasks[taskId].data[15]), r7);
             sub_80155A4(r4);
             if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
             {
-                gBankAttacker = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
-                gBankTarget = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
-                gAbsentBankFlags = unk_2000000[0x15000 + gTasks[taskId].data[15] + 6];
-                gEffectBank = unk_2000000[0x15000 + gTasks[taskId].data[15] + 7];
+                gBankAttacker = ewram15000arr(2, gTasks[taskId].data[15]);
+                gBankTarget = ewram15000arr(3, gTasks[taskId].data[15]);
+                gAbsentBankFlags = ewram15000arr(6, gTasks[taskId].data[15]);
+                gEffectBank = ewram15000arr(7, gTasks[taskId].data[15]);
             }
             break;
         case 1:
-            memcpy(gBattleBufferB[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            memcpy(gBattleBufferB[r4], &ewram15000arr(8, gTasks[taskId].data[15]), r7);
             break;
         case 2:
-            r2 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 8];
+            r2 = ewram15000arr(8, gTasks[taskId].data[15]);
             gBattleExecBuffer &= ~(gBitTable[r4] << (r2 * 4));
             break;
         }
@@ -584,7 +583,7 @@ void Emitcmd1(u8 a, u8 b, u8 c)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
+void EmitSetMonData(u8 a, u8 b, u8 c, u8 d, void *e)
 {
     int i;
 
@@ -747,7 +746,7 @@ void EmitPrintString(u8 a, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gUnknown_02024BE8;
+    stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
@@ -779,7 +778,7 @@ void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
 
     stringInfo = (struct StringInfoBattle*)(&gBattleBuffersTransferData[4]);
     stringInfo->currentMove = gCurrentMove;
-    stringInfo->lastMove = gUnknown_02024BE8;
+    stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
     stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
@@ -1081,10 +1080,10 @@ void EmitFaintingCry(u8 a)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitIntroSlide(u8 a, u8 b)
+void EmitIntroSlide(u8 a, u8 battleTerrain)
 {
     gBattleBuffersTransferData[0] = 46;
-    gBattleBuffersTransferData[1] = b;
+    gBattleBuffersTransferData[1] = battleTerrain;
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 2);
 }
 
@@ -1097,7 +1096,7 @@ void EmitTrainerBallThrow(u8 a)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void Emitcmd48(u8 a, u8 *b, u8 c)
+void EmitDrawPartyStatusSummary(u8 a, struct HpAndStatus *hpAndStatus, u8 c)
 {
     int i;
 
@@ -1106,7 +1105,7 @@ void Emitcmd48(u8 a, u8 *b, u8 c)
     gBattleBuffersTransferData[2] = (c & 0x80) >> 7;
     gBattleBuffersTransferData[3] = 48;
     for (i = 0; i < 48; i++)
-        gBattleBuffersTransferData[4 + i] = b[i];
+        gBattleBuffersTransferData[4 + i] = *(i + (u8*)(hpAndStatus));
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 52);
 }
 

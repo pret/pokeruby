@@ -4,21 +4,21 @@ Route119_WeatherInstitute_1F_MapScripts:: @ 8163C2A
 
 Route119_WeatherInstitute_1F_MapScript1_163C30:: @ 8163C30
 	call Route119_WeatherInstitute_1F_EventScript_1A0196
-	compare 0x40b3, 0
-	callif 1, Route119_WeatherInstitute_1F_EventScript_163C41
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
+	call_if_eq Route119_WeatherInstitute_1F_EventScript_163C41
 	end
 
 Route119_WeatherInstitute_1F_EventScript_163C41:: @ 8163C41
-	movespriteperm 5, 0, 5
-	spritebehave 5, 10
+	setobjectxyperm 5, 0, 5
+	setobjectmovementtype 5, 10
 	return
 
 Route119_WeatherInstitute_1F_EventScript_163C4D:: @ 8163C4D
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	compare 0x40b3, 0
-	jumpeq Route119_WeatherInstitute_1F_EventScript_163C67
+	compare VAR_WEATHER_INSTITUTE_STATE, 0
+	goto_if_eq Route119_WeatherInstitute_1F_EventScript_163C67
 	msgbox Route119_WeatherInstitute_1F_Text_19ED22, 4
 	release
 	end
@@ -39,7 +39,7 @@ Route119_WeatherInstitute_1F_EventScript_163C7A:: @ 8163C7A
 Route119_WeatherInstitute_1F_EventScript_163C83:: @ 8163C83
 	lockall
 	msgbox Route119_WeatherInstitute_1F_Text_19EE8B, 4
-	closebutton
+	closemessage
 	call Route119_WeatherInstitute_1F_EventScript_1A02CA
 	releaseall
 	end
