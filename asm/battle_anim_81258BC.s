@@ -49,11 +49,11 @@ sub_812AF10: @ 812AF10
 	movs r1, 0xE
 	movs r2, 0x1B
 	movs r3, 0x13
-	bl MenuDrawTextWindow
+	bl Menu_DrawStdWindowFrame
 	ldr r0, _0812AF2C @ =gStringVar4
 	movs r1, 0x3
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r0}
 	bx r0
 	.align 2, 0

@@ -318,19 +318,19 @@ static void sub_812238C(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & 0x40)
         {
-            if (GetMenuCursorPos() != 0)
+            if (Menu_GetCursorPos() != 0)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(-1);
+                Menu_MoveCursor(-1);
             }
             return;
         }
         if (gMain.newAndRepeatedKeys & 0x80)
         {
-            if (GetMenuCursorPos() != 3)
+            if (Menu_GetCursorPos() != 3)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(1);
+                Menu_MoveCursor(1);
             }
             return;
         }
@@ -343,7 +343,7 @@ static void sub_812238C(u8 taskId)
               gTasks[taskId].data[4],
               sBattleTowerEntryMenu,
               sBattleTowerEntryMenuItems,
-              GetMenuCursorPos());
+              Menu_GetCursorPos());
             popupMenuFunc(taskId);
             return;
         }
@@ -461,7 +461,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
         }
     }
     PlaySE(SE_HAZURE);
-    MenuZeroFillWindowRect(20, 10, 29, 19);
+    Menu_EraseWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
     sub_806D5A4();
     sub_806E834(gOtherText_NoMoreThreePoke, 1);
@@ -475,7 +475,7 @@ static void sub_8122728(u8 taskId)
 
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         HandleDestroyMenuCursors();
         BattleTowerEntryMenuCallback_Exit(taskId);
     }
@@ -515,7 +515,7 @@ static void BattleTowerEntryMenuCallback_NoEntry(u8 taskId)
 
 static void sub_81227FC(u8 taskId)
 {
-    MenuZeroFillWindowRect(20, 10, 29, 19);
+    Menu_EraseWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
     PrintPartyMenuPromptText(0, 0);
     gTasks[taskId].func = HandleBattleTowerPartyMenu;
@@ -806,19 +806,19 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & 0x40)
         {
-            if (GetMenuCursorPos() != 0)
+            if (Menu_GetCursorPos() != 0)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(-1);
+                Menu_MoveCursor(-1);
             }
             return;
         }
         if (gMain.newAndRepeatedKeys & 0x80)
         {
-            if (GetMenuCursorPos() != 3)
+            if (Menu_GetCursorPos() != 3)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(1);
+                Menu_MoveCursor(1);
             }
             return;
         }
@@ -831,7 +831,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
               gTasks[taskId].data[4],
               sDaycareStorageMenus,
               sDaycareStorageMenuItems,
-              GetMenuCursorPos());
+              Menu_GetCursorPos());
             popupMenuFunc(taskId);
             return;
         }
@@ -896,7 +896,7 @@ static void DaycareStorageMenuCallback_Summary(u8 taskId)
 static void DaycareStorageMenuCallback_Exit(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    MenuZeroFillWindowRect(20, 10, 29, 19);
+    Menu_EraseWindowRect(20, 10, 29, 19);
     HandleDestroyMenuCursors();
     PrintPartyMenuPromptText(15, 0);
     gTasks[taskId].func = HandleDaycarePartyMenu;

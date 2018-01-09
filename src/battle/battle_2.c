@@ -245,9 +245,9 @@ void InitBattle(void)
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
     gBattleTerrain = BattleSetup_GetTerrain();
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowConfig_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowConfig_81E71EC);
     sub_800D6D4();
     sub_800DAB8();
     ResetSpriteData();
@@ -898,7 +898,7 @@ void BattleMainCB2(void)
 {
     AnimateSprites();
     BuildOamBuffer();
-    sub_800374C(&gUnknown_03004210);
+    Text_UpdateWindowInBattle(&gUnknown_03004210);
     UpdatePaletteFade();
     RunTasks();
 }
@@ -1221,9 +1221,9 @@ void c2_8011A1C(void)
     gUnknown_030041B0 = 0;
     gUnknown_030041B8 = 0;
 
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowConfig_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowConfig_81E71EC);
     sub_800D6D4();
     LoadCompressedPalette(gUnknown_08D004E0, 0, 64);
     sub_800D74C();

@@ -237,7 +237,7 @@ _080F07F4:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x6
-	bl MenuPrint
+	bl Menu_PrintText
 _080F080A:
 	pop {r0}
 	bx r0
@@ -348,7 +348,7 @@ sub_80F08E4: @ 80F08E4
 	movs r1, 0x9
 	movs r2, 0xB
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -376,7 +376,7 @@ sub_80F0900: @ 80F0900
 	movs r1, 0x1
 	movs r2, 0x1F
 	movs r3, 0xF
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _080F092A:
 	ldrh r0, [r5]
 	lsrs r2, r4, 16
@@ -533,7 +533,7 @@ _080F0A40:
 	lsrs r2, 24
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -694,7 +694,7 @@ _080F0B60:
 	adds r3, r1, 0x1
 	movs r0, 0xC
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _080F0BAA:
 	ldrh r0, [r6]
 	cmp r0, 0
@@ -726,7 +726,7 @@ _080F0BE2:
 	movs r0, 0xC
 	adds r1, r4, 0
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	adds r4, 0x2
 	movs r0, 0x1F
 	ands r4, r0
@@ -1147,7 +1147,7 @@ _080F0F10:
 	movs r0, 0xC
 	adds r1, r4, 0
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
@@ -1274,7 +1274,7 @@ sub_80F0FFC: @ 80F0FFC
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x5
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1376,7 +1376,7 @@ _080F111C:
 _080F1126:
 	b _080F1226
 _080F1128:
-	bl MenuZeroFillScreen
+	bl Menu_EraseScreen
 	b _080F1218
 _080F112E:
 	bl sub_80F1614
@@ -1761,7 +1761,7 @@ sub_80F1438: @ 80F1438
 	adds r0, r4, r1
 	movs r1, 0xD
 	movs r2, 0x1
-	bl MenuPrint
+	bl Menu_PrintText
 	ldr r0, _080F1478 @ =0x00008788
 	adds r5, r4, r0
 	ldr r1, _080F147C @ =0x0000876e
@@ -1775,7 +1775,7 @@ sub_80F1438: @ 80F1438
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0x5
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1793,7 +1793,7 @@ sub_80F1480: @ 80F1480
 	movs r1, 0xD
 	movs r2, 0x1B
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F1480
@@ -1914,11 +1914,11 @@ _080F158A:
 	adds r0, r6, 0
 	movs r1, 0xC
 	movs r2, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	adds r0, r7, 0
 	movs r1, 0xC
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1933,7 +1933,7 @@ sub_80F15A8: @ 80F15A8
 	movs r1, 0xD
 	movs r2, 0x1B
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	ldr r0, _080F1600 @ =gUnknown_083DFEC4
 	ldr r4, [r0]
 	ldr r0, _080F1604 @ =0x00008788
@@ -1964,7 +1964,7 @@ sub_80F15A8: @ 80F15A8
 	adds r0, r5, 0
 	movs r1, 0xC
 	movs r2, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2502,7 +2502,7 @@ _080F1A46:
 	movs r0, 0xE
 	movs r2, 0x1C
 	movs r3, 0xF
-	bl MenuFillWindowRectWithBlankTile
+	bl Menu_BlankWindowRect
 	movs r0, 0
 	strb r0, [r5]
 _080F1A60:

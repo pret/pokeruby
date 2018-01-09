@@ -857,7 +857,7 @@ static void task_b_81441B8(u8 taskIdB)
     case 5:
         if (!gPaletteFade.active)
         {
-            MenuZeroFillWindowRect(0, 9, 29, 19);
+            Menu_EraseWindowRect(0, 9, 29, 19);
             gTasks[taskIdB].data[TDB_0] = 2;
         }
         return;

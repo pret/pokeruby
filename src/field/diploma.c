@@ -135,5 +135,5 @@ static void DisplayDiplomaText(void)
         REG_BG3HOFS = 0;
         StringCopy(gStringVar1, gOtherText_HoennDex);
     }
-    MenuPrint(gOtherText_DiplomaCertificationGameFreak, 6, 2);
+    Menu_PrintText(gOtherText_DiplomaCertificationGameFreak, 6, 2);
 }

@@ -12,14 +12,29 @@ enum
     WIN_STATE_END,
     WIN_STATE_BEGIN,
     WIN_STATE_NORMAL,
-    WIN_STATE_INTERRUPTIBLE_PAUSE,
+    WIN_STATE_CHAR_DELAY,
     WIN_STATE_PAUSE,
     WIN_STATE_WAIT_BUTTON,
     WIN_STATE_NEWLINE,
     WIN_STATE_PLACEHOLDER,
-    WIN_STATE_PARAGRAPH,
-    WIN_STATE_NEWLINE_WAIT,
+    WIN_STATE_WAIT_CLEAR,
+    WIN_STATE_WAIT_SCROLL,
     WIN_STATE_WAIT_SOUND,
+};
+
+enum
+{
+    TEXT_MODE_UNKNOWN0,
+    TEXT_MODE_MONOSPACE,
+    TEXT_MODE_UNKNOWN2,  // variable width?
+};
+
+enum
+{
+    WAIT_TYPE_NORMAL,      // allows the player to interrupt the text delay with A or B
+    WAIT_TYPE_BATTLE,      // disables interrupting the text delay if in a link battle
+    WAIT_TYPE_AUTOSCROLL,  // disables interrupting the text delay
+    WAIT_TYPE_CONTEST,     // disables interrupting the text delay if in a link contest
 };
 
 struct Font
@@ -66,7 +81,7 @@ static u16 LoadFixedWidthFont_Font4Latin(struct Window *, u16);
 static u16 LoadFixedWidthFont_Braille(struct Window *, u16);
 static void MultistepLoadFont_LoadGlyph(struct Window *, u16, u8);
 static u8 sub_8002FA0(struct Window *, const u8 *);
-static u8 InterpretText(struct Window *);
+static u8 PrintNextChar(struct Window *);
 static u8 HandleExtCtrlCode(struct Window *);
 static u8 UpdateWindowText(struct Window *);
 static u8 DrawGlyph_TextMode0(struct Window *, u32);
@@ -83,26 +98,26 @@ static void AddToCursorY(struct Window *, u8);
 static void ClipLeft(struct Window *);
 static void ClipRight(struct Window *);
 static void InitColors(struct Window *);
-static void SetBackgroundColor(struct Window *, u8);
-static void SetShadowColor(struct Window *, u8);
-static void SetForegroundColor(struct Window *, u8);
+static void SetWindowBackgroundColor(struct Window *, u8);
+static void SetWindowShadowColor(struct Window *, u8);
+static void SetWindowForegroundColor(struct Window *, u8);
 static u8 GetTextDelay(struct Window *);
-static bool8 PlayerCanInterruptWait(struct Window *);
+static bool8 PlayerCanInterruptDelay(struct Window *);
 static void ScrollWindowTextLines(struct Window *);
 static void ScrollWindowTextLines_TextMode0(struct Window *);
 static void DoScroll_TextMode0(struct Window *, u16);
-static void ScrollWindowTextLines_TextMode1(struct Window *);
-static void DoScroll_TextMode1(struct Window *, u16);
+static void ScrollWindowTextLines_TextModeMonospace(struct Window *);
+static void DoScroll_TextModeMonospace(struct Window *, u16);
 static void ScrollWindowTextLines_TextMode2(struct Window *);
 static void DoScroll_TextMode2(struct Window *, u8);
-void ClearWindowTextLines(struct Window *);
+void Text_ClearWindow(struct Window *);
 static void ClearWindowTextLines_TextMode0_TextMode1(struct Window *, u8);
 static void ClearWindowTextLines_TextMode2(struct Window *, u8);
 static void TryEraseDownArrow(struct Window *);
 static u16 GetBlankTileNum(struct Window *);
 static u8 WaitWithDownArrow(struct Window *);
 static void DrawInitialDownArrow(struct Window *);
-static void DrawMovingDownArrow(struct Window *);
+static void UpdateDownArrowAnimation(struct Window *);
 static u16 GetCursorTileNum(struct Window *, u32, u32);
 static s32 DrawGlyphTiles(struct Window *, u32, u32);
 static void UpdateTilemap(struct Window *, u32);
@@ -477,7 +492,7 @@ static const ShiftGlyphTileShadowedFunc sShiftGlyphTileShadowedFuncs[] =
     ShiftGlyphTile_ShadowedFont_Width8,
 };
 
-const struct WindowConfig gWindowConfig_81E6C3C =
+const struct WindowTemplate gWindowConfig_81E6C3C =
 {
     0, // BG number
     2, // BG character base block
@@ -498,7 +513,7 @@ const struct WindowConfig gWindowConfig_81E6C3C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C58 =
+const struct WindowTemplate gWindowConfig_81E6C58 =
 {
     0, // BG number
     0, // BG character base block
@@ -519,7 +534,7 @@ const struct WindowConfig gWindowConfig_81E6C58 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C74 =
+const struct WindowTemplate gWindowConfig_81E6C74 =
 {
     0, // BG number
     0, // BG character base block
@@ -540,7 +555,7 @@ const struct WindowConfig gWindowConfig_81E6C74 =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6C90 =
+const struct WindowTemplate gWindowConfig_81E6C90 =
 {
     0, // BG number
     1, // BG character base block
@@ -561,7 +576,7 @@ const struct WindowConfig gWindowConfig_81E6C90 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CAC =
+const struct WindowTemplate gWindowConfig_81E6CAC =
 {
     0, // BG number
     0, // BG character base block
@@ -582,7 +597,7 @@ const struct WindowConfig gWindowConfig_81E6CAC =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CC8 =
+const struct WindowTemplate gWindowConfig_81E6CC8 =
 {
     2, // BG number
     2, // BG character base block
@@ -603,7 +618,7 @@ const struct WindowConfig gWindowConfig_81E6CC8 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6CE4 =
+const struct WindowTemplate gWindowConfig_81E6CE4 =
 {
     0, // BG number
     2, // BG character base block
@@ -624,7 +639,7 @@ const struct WindowConfig gWindowConfig_81E6CE4 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D00 =
+const struct WindowTemplate gWindowConfig_81E6D00 =
 {
     0, // BG number
     0, // BG character base block
@@ -645,7 +660,7 @@ const struct WindowConfig gWindowConfig_81E6D00 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D1C =
+const struct WindowTemplate gWindowConfig_81E6D1C =
 {
     1, // BG number
     0, // BG character base block
@@ -666,7 +681,7 @@ const struct WindowConfig gWindowConfig_81E6D1C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D38 =
+const struct WindowTemplate gWindowConfig_81E6D38 =
 {
     0, // BG number
     0, // BG character base block
@@ -687,7 +702,7 @@ const struct WindowConfig gWindowConfig_81E6D38 =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D54 =
+const struct WindowTemplate gWindowConfig_81E6D54 =
 {
     3, // BG number
     3, // BG character base block
@@ -708,7 +723,7 @@ const struct WindowConfig gWindowConfig_81E6D54 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D70 =
+const struct WindowTemplate gWindowConfig_81E6D70 =
 {
     3, // BG number
     3, // BG character base block
@@ -729,7 +744,7 @@ const struct WindowConfig gWindowConfig_81E6D70 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6D8C =
+const struct WindowTemplate gWindowConfig_81E6D8C =
 {
     1, // BG number
     0, // BG character base block
@@ -750,7 +765,7 @@ const struct WindowConfig gWindowConfig_81E6D8C =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DA8 =
+const struct WindowTemplate gWindowConfig_81E6DA8 =
 {
     0, // BG number
     0, // BG character base block
@@ -771,7 +786,7 @@ const struct WindowConfig gWindowConfig_81E6DA8 =
     BG_SCREEN_ADDR(11), // tilemap
 };
 
-const struct WindowConfig WindowConfig_TrainerCard_Back_Values =
+const struct WindowTemplate WindowConfig_TrainerCard_Back_Values =
 {
     0, // BG number
     2, // BG character base block
@@ -792,7 +807,7 @@ const struct WindowConfig WindowConfig_TrainerCard_Back_Values =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig WindowConfig_TrainerCard_Back_Labels =
+const struct WindowTemplate WindowConfig_TrainerCard_Back_Labels =
 {
     0, // BG number
     2, // BG character base block
@@ -813,7 +828,7 @@ const struct WindowConfig WindowConfig_TrainerCard_Back_Labels =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DFC =
+const struct WindowTemplate gWindowConfig_81E6DFC =
 {
     0, // BG number
     2, // BG character base block
@@ -834,7 +849,7 @@ const struct WindowConfig gWindowConfig_81E6DFC =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E18 =
+const struct WindowTemplate gWindowConfig_81E6E18 =
 {
     0, // BG number
     2, // BG character base block
@@ -855,7 +870,7 @@ const struct WindowConfig gWindowConfig_81E6E18 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E34 =
+const struct WindowTemplate gWindowConfig_81E6E34 =
 {
     1, // BG number
     0, // BG character base block
@@ -876,7 +891,7 @@ const struct WindowConfig gWindowConfig_81E6E34 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E50 =
+const struct WindowTemplate gWindowConfig_81E6E50 =
 {
     0, // BG number
     2, // BG character base block
@@ -897,7 +912,7 @@ const struct WindowConfig gWindowConfig_81E6E50 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E6C =
+const struct WindowTemplate gWindowConfig_81E6E6C =
 {
     0, // BG number
     2, // BG character base block
@@ -918,7 +933,7 @@ const struct WindowConfig gWindowConfig_81E6E6C =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6E88 =
+const struct WindowTemplate gWindowConfig_81E6E88 =
 {
     0, // BG number
     0, // BG character base block
@@ -939,7 +954,7 @@ const struct WindowConfig gWindowConfig_81E6E88 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EA4 =
+const struct WindowTemplate gWindowConfig_81E6EA4 =
 {
     1, // BG number
     0, // BG character base block
@@ -960,7 +975,7 @@ const struct WindowConfig gWindowConfig_81E6EA4 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EC0 =
+const struct WindowTemplate gWindowConfig_81E6EC0 =
 {
     2, // BG number
     2, // BG character base block
@@ -981,7 +996,7 @@ const struct WindowConfig gWindowConfig_81E6EC0 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EDC =
+const struct WindowTemplate gWindowConfig_81E6EDC =
 {
     1, // BG number
     0, // BG character base block
@@ -1002,7 +1017,7 @@ const struct WindowConfig gWindowConfig_81E6EDC =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6EF8 =
+const struct WindowTemplate gWindowConfig_81E6EF8 =
 {
     2, // BG number
     2, // BG character base block
@@ -1023,7 +1038,7 @@ const struct WindowConfig gWindowConfig_81E6EF8 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F14 =
+const struct WindowTemplate gWindowConfig_81E6F14 =
 {
     1, // BG number
     0, // BG character base block
@@ -1044,7 +1059,7 @@ const struct WindowConfig gWindowConfig_81E6F14 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F30 =
+const struct WindowTemplate gWindowConfig_81E6F30 =
 {
     2, // BG number
     2, // BG character base block
@@ -1065,7 +1080,7 @@ const struct WindowConfig gWindowConfig_81E6F30 =
     BG_SCREEN_ADDR(29), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F4C =
+const struct WindowTemplate gWindowConfig_81E6F4C =
 {
     3, // BG number
     0, // BG character base block
@@ -1086,7 +1101,7 @@ const struct WindowConfig gWindowConfig_81E6F4C =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F68 =
+const struct WindowTemplate gWindowConfig_81E6F68 =
 {
     0, // BG number
     2, // BG character base block
@@ -1107,7 +1122,7 @@ const struct WindowConfig gWindowConfig_81E6F68 =
     BG_SCREEN_ADDR(13), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6F84 =
+const struct WindowTemplate gWindowConfig_81E6F84 =
 {
     0, // BG number
     2, // BG character base block
@@ -1128,7 +1143,7 @@ const struct WindowConfig gWindowConfig_81E6F84 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FA0 =
+const struct WindowTemplate gWindowConfig_81E6FA0 =
 {
     1, // BG number
     0, // BG character base block
@@ -1149,7 +1164,7 @@ const struct WindowConfig gWindowConfig_81E6FA0 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FBC =
+const struct WindowTemplate gWindowConfig_81E6FBC =
 {
     0, // BG number
     0, // BG character base block
@@ -1170,7 +1185,7 @@ const struct WindowConfig gWindowConfig_81E6FBC =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FD8 =
+const struct WindowTemplate gWindowConfig_81E6FD8 =
 {
     0, // BG number
     0, // BG character base block
@@ -1191,7 +1206,7 @@ const struct WindowConfig gWindowConfig_81E6FD8 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6FF4 =
+const struct WindowTemplate gWindowConfig_81E6FF4 =
 {
     0, // BG number
     0, // BG character base block
@@ -1212,7 +1227,7 @@ const struct WindowConfig gWindowConfig_81E6FF4 =
     BG_SCREEN_ADDR(24), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7010 =
+const struct WindowTemplate gWindowConfig_81E7010 =
 {
     0, // BG number
     0, // BG character base block
@@ -1233,7 +1248,7 @@ const struct WindowConfig gWindowConfig_81E7010 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E702C =
+const struct WindowTemplate gWindowConfig_81E702C =
 {
     3, // BG number
     2, // BG character base block
@@ -1254,7 +1269,7 @@ const struct WindowConfig gWindowConfig_81E702C =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7048 =
+const struct WindowTemplate gWindowConfig_81E7048 =
 {
     2, // BG number
     2, // BG character base block
@@ -1275,7 +1290,7 @@ const struct WindowConfig gWindowConfig_81E7048 =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7064 =
+const struct WindowTemplate gWindowConfig_81E7064 =
 {
     2, // BG number
     2, // BG character base block
@@ -1296,7 +1311,7 @@ const struct WindowConfig gWindowConfig_81E7064 =
     BG_SCREEN_ADDR(14), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7080 =
+const struct WindowTemplate gWindowConfig_81E7080 =
 {
     3, // BG number
     0, // BG character base block
@@ -1317,7 +1332,7 @@ const struct WindowConfig gWindowConfig_81E7080 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E709C =
+const struct WindowTemplate gWindowConfig_81E709C =
 {
     0, // BG number
     0, // BG character base block
@@ -1338,7 +1353,7 @@ const struct WindowConfig gWindowConfig_81E709C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70B8 =
+const struct WindowTemplate gWindowConfig_81E70B8 =
 {
     2, // BG number
     0, // BG character base block
@@ -1359,7 +1374,7 @@ const struct WindowConfig gWindowConfig_81E70B8 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70D4 =
+const struct WindowTemplate gWindowConfig_81E70D4 =
 {
     3, // BG number
     0, // BG character base block
@@ -1380,7 +1395,7 @@ const struct WindowConfig gWindowConfig_81E70D4 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E70F0 =
+const struct WindowTemplate gWindowConfig_81E70F0 =
 {
     0, // BG number
     0, // BG character base block
@@ -1401,7 +1416,7 @@ const struct WindowConfig gWindowConfig_81E70F0 =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E710C =
+const struct WindowTemplate gWindowConfig_81E710C =
 {
     0, // BG number
     0, // BG character base block
@@ -1422,7 +1437,7 @@ const struct WindowConfig gWindowConfig_81E710C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7128 =
+const struct WindowTemplate gWindowConfig_81E7128 =
 {
     0, // BG number
     2, // BG character base block
@@ -1443,7 +1458,7 @@ const struct WindowConfig gWindowConfig_81E7128 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7144 =
+const struct WindowTemplate gWindowConfig_81E7144 =
 {
     0, // BG number
     2, // BG character base block
@@ -1464,7 +1479,7 @@ const struct WindowConfig gWindowConfig_81E7144 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7160 =
+const struct WindowTemplate gWindowConfig_81E7160 =
 {
     1, // BG number
     1, // BG character base block
@@ -1485,7 +1500,7 @@ const struct WindowConfig gWindowConfig_81E7160 =
     BG_SCREEN_ADDR(10), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E717C =
+const struct WindowTemplate gWindowConfig_81E717C =
 {
     0, // BG number
     3, // BG character base block
@@ -1506,7 +1521,7 @@ const struct WindowConfig gWindowConfig_81E717C =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7198 =
+const struct WindowTemplate gWindowConfig_81E7198 =
 {
     0, // BG number
     2, // BG character base block
@@ -1527,7 +1542,7 @@ const struct WindowConfig gWindowConfig_81E7198 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71B4 =
+const struct WindowTemplate gWindowConfig_81E71B4 =
 {
     0, // BG number
     2, // BG character base block
@@ -1548,7 +1563,7 @@ const struct WindowConfig gWindowConfig_81E71B4 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71D0 =
+const struct WindowTemplate gWindowConfig_81E71D0 =
 {
     1, // BG number
     1, // BG character base block
@@ -1569,7 +1584,7 @@ const struct WindowConfig gWindowConfig_81E71D0 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E71EC =
+const struct WindowTemplate gWindowConfig_81E71EC =
 {
     2, // BG number
     1, // BG character base block
@@ -1590,7 +1605,7 @@ const struct WindowConfig gWindowConfig_81E71EC =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7208 =
+const struct WindowTemplate gWindowConfig_81E7208 =
 {
     0, // BG number
     2, // BG character base block
@@ -1611,7 +1626,7 @@ const struct WindowConfig gWindowConfig_81E7208 =
     BG_SCREEN_ADDR(28), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7224 =
+const struct WindowTemplate gWindowConfig_81E7224 =
 {
     0, // BG number
     0, // BG character base block
@@ -1632,7 +1647,7 @@ const struct WindowConfig gWindowConfig_81E7224 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7240 =
+const struct WindowTemplate gWindowConfig_81E7240 =
 {
     1, // BG number
     2, // BG character base block
@@ -1653,7 +1668,7 @@ const struct WindowConfig gWindowConfig_81E7240 =
     BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E725C =
+const struct WindowTemplate gWindowConfig_81E725C =
 {
     0, // BG number
     0, // BG character base block
@@ -1674,7 +1689,7 @@ const struct WindowConfig gWindowConfig_81E725C =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7278 =
+const struct WindowTemplate gWindowConfig_81E7278 =
 {
     0, // BG number
     0, // BG character base block
@@ -1695,7 +1710,7 @@ const struct WindowConfig gWindowConfig_81E7278 =
     NULL, // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E7294 =
+const struct WindowTemplate gWindowConfig_81E7294 =
 {
     0, // BG number
     0, // BG character base block
@@ -1716,32 +1731,32 @@ const struct WindowConfig gWindowConfig_81E7294 =
     NULL, // tilemap
 };
 
-static void UpdateBGRegs(const struct WindowConfig *winConfig)
+static void UpdateBGRegs(const struct WindowTemplate *winTemplate)
 {
-    u8 bgNum = winConfig->bgNum;
+    u8 bgNum = winTemplate->bgNum;
     *gBGHOffsetRegs[bgNum] = 0;
     *gBGVOffsetRegs[bgNum] = 0;
-    *gBGControlRegs[bgNum] = winConfig->priority | (winConfig->screenBaseBlock << 8) | (winConfig->charBaseBlock << 2);
+    *gBGControlRegs[bgNum] = winTemplate->priority | (winTemplate->screenBaseBlock << 8) | (winTemplate->charBaseBlock << 2);
 }
 
-static void ClearBGMem(const struct WindowConfig *winConfig)
+static void ClearBGMem(const struct WindowTemplate *winTemplate)
 {
-    CpuFastFill(0, winConfig->tileData, 32);
+    CpuFastFill(0, winTemplate->tileData, 32);
 
-    if (winConfig->tilemap)
-        CpuFastFill(0, winConfig->tilemap, 0x800);
+    if (winTemplate->tilemap)
+        CpuFastFill(0, winTemplate->tilemap, 0x800);
 }
 
-void LoadFontDefaultPalette(const struct WindowConfig *winConfig)
+void LoadFontDefaultPalette(const struct WindowTemplate *winTemplate)
 {
-    LoadPalette(gFontDefaultPalette, 16 * winConfig->paletteNum, 32);
+    LoadPalette(gFontDefaultPalette, 16 * winTemplate->paletteNum, 32);
 }
 
-void SetUpWindowConfig(const struct WindowConfig *winConfig)
+void SetUpWindowConfig(const struct WindowTemplate *winTemplate)
 {
-    UpdateBGRegs(winConfig);
-    ClearBGMem(winConfig);
-    LoadFontDefaultPalette(winConfig);
+    UpdateBGRegs(winTemplate);
+    ClearBGMem(winTemplate);
+    LoadFontDefaultPalette(winTemplate);
 }
 
 u16 InitWindowTileData(struct Window *win, u16 startOffset)
@@ -1751,13 +1766,13 @@ u16 InitWindowTileData(struct Window *win, u16 startOffset)
     win->tileDataStartOffset = startOffset;
     retVal = 0;
 
-    switch (win->config->textMode)
+    switch (win->template->textMode)
     {
-    case 2:
+    case TEXT_MODE_UNKNOWN2:
         retVal = InitVariableWidthFontTileData(win, startOffset);
         break;
-    case 1:
-        switch (win->config->fontNum)
+    case TEXT_MODE_MONOSPACE:
+        switch (win->template->fontNum)
         {
         case 0:
         case 3:
@@ -1789,7 +1804,7 @@ static u16 InitVariableWidthFontTileData(struct Window *win, u16 startOffset)
     win->tileDataOffset = 2;
     buffer =  win->tileData + 32 * win->tileDataStartOffset;
     CpuFastFill(0, buffer, 32);
-    ApplyColors_UnshadowedFont(sBlankTile, (u32 *)(buffer + 32), win->config->foregroundColor, win->config->backgroundColor);
+    ApplyColors_UnshadowedFont(sBlankTile, (u32 *)(buffer + 32), win->template->foregroundColor, win->template->backgroundColor);
     return win->tileDataStartOffset + win->tileDataOffset + win->width * win->height;
 }
 
@@ -1850,15 +1865,15 @@ u32 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
     win->tileDataStartOffset = startOffset;
     retVal = 0;
 
-    switch (win->config->textMode)
+    switch (win->template->textMode)
     {
-    case 2:
+    case TEXT_MODE_UNKNOWN2:
         retVal = InitVariableWidthFontTileData(win, startOffset);
         break;
-    case 1:
+    case TEXT_MODE_MONOSPACE:
         retVal = 256;
-        if (win->config->fontNum == 0
-         || win->config->fontNum == 3)
+        if (win->template->fontNum == 0
+         || win->template->fontNum == 3)
             retVal *= 2;
         break;
     }
@@ -1870,7 +1885,7 @@ bool32 MultistepLoadFont(void)
 {
     bool32 retVal = TRUE;
 
-    if (sMultistepLoadFont_Window->config->textMode == 1)
+    if (sMultistepLoadFont_Window->template->textMode == TEXT_MODE_MONOSPACE)
     {
         s32 i;
 
@@ -1890,7 +1905,7 @@ static void MultistepLoadFont_LoadGlyph(struct Window *win, u16 startOffset, u8 
 {
     u8 *buffer;
 
-    switch (win->config->fontNum)
+    switch (win->template->fontNum)
     {
     case 0:
     case 3:
@@ -1923,42 +1938,42 @@ void EmptyFunc(void)
 {
 }
 
-void InitWindowFromConfig(struct Window *win, const struct WindowConfig *winConfig)
+void Text_InitWindowWithTemplate(struct Window *win, const struct WindowTemplate *winTemplate)
 {
     *win = sDefaultWindow;
-    win->config = (struct WindowConfig *)winConfig;
-    win->textMode = winConfig->textMode;
-    win->spacing = winConfig->spacing;
-    win->fontNum = winConfig->fontNum;
-    win->paletteNum = winConfig->paletteNum;
-    win->tilemapLeft = winConfig->tilemapLeft;
-    win->tilemapTop = winConfig->tilemapTop;
-    win->width = winConfig->width;
-    win->height = winConfig->height;
-    win->tileData = winConfig->tileData;
-    win->tilemap = winConfig->tilemap;
+    win->template = (struct WindowTemplate *)winTemplate;
+    win->textMode = winTemplate->textMode;
+    win->spacing = winTemplate->spacing;
+    win->fontNum = winTemplate->fontNum;
+    win->paletteNum = winTemplate->paletteNum;
+    win->tilemapLeft = winTemplate->tilemapLeft;
+    win->tilemapTop = winTemplate->tilemapTop;
+    win->width = winTemplate->width;
+    win->height = winTemplate->height;
+    win->tileData = winTemplate->tileData;
+    win->tilemap = winTemplate->tilemap;
     InitColors(win);
-    SetBackgroundColor(win, winConfig->backgroundColor);
-    SetShadowColor(win, winConfig->shadowColor);
-    SetForegroundColor(win, winConfig->foregroundColor);
+    SetWindowBackgroundColor(win, winTemplate->backgroundColor);
+    SetWindowShadowColor(win, winTemplate->shadowColor);
+    SetWindowForegroundColor(win, winTemplate->foregroundColor);
 }
 
-void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+void Text_InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
-    const struct WindowConfig *winConfig = win->config;
-    win->textMode = winConfig->textMode;
-    win->fontNum = winConfig->fontNum;
+    const struct WindowTemplate *winTemplate = win->template;
+    win->textMode = winTemplate->textMode;
+    win->fontNum = winTemplate->fontNum;
     win->language = GAME_LANGUAGE;
-    win->paletteNum = winConfig->paletteNum;
+    win->paletteNum = winTemplate->paletteNum;
     win->win_field_B = 0;
     win->win_field_C = 0;
     win->delayCounter = 0;
-    win->spacing = winConfig->spacing;
+    win->spacing = winTemplate->spacing;
     win->win_field_F = 0;
-    win->tilemapLeft = winConfig->tilemapLeft;
-    win->tilemapTop = winConfig->tilemapTop;
-    win->width = winConfig->width;
-    win->height = winConfig->height;
+    win->tilemapLeft = winTemplate->tilemapLeft;
+    win->tilemapTop = winTemplate->tilemapTop;
+    win->width = winTemplate->width;
+    win->height = winTemplate->height;
     win->text = text;
     win->textIndex = 0;
     win->tileDataStartOffset = tileDataStartOffset;
@@ -1969,19 +1984,19 @@ void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 
     win->cursorY = 0;
     win->state = WIN_STATE_BEGIN;
     win->downArrowCounter = 0;
-    win->tileData = winConfig->tileData;
-    win->tilemap = winConfig->tilemap;
+    win->tileData = winTemplate->tileData;
+    win->tilemap = winTemplate->tilemap;
     InitColors(win);
-    SetBackgroundColor(win, winConfig->backgroundColor);
-    SetShadowColor(win, winConfig->shadowColor);
-    SetForegroundColor(win, winConfig->foregroundColor);
+    SetWindowBackgroundColor(win, winTemplate->backgroundColor);
+    SetWindowShadowColor(win, winTemplate->shadowColor);
+    SetWindowForegroundColor(win, winTemplate->foregroundColor);
 }
 
-void sub_8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
+void Text_InitWindow8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
 {
     u8 val;
 
-    InitWindow(win, text, tileDataStartOffset, 0, 0);
+    Text_InitWindow(win, text, tileDataStartOffset, 0, 0);
     win->left = left;
     win->top = top;
     val = 0;
@@ -2003,15 +2018,15 @@ void sub_8002E90(struct Window *win, const u8 *text)
     win->delayCounter = 0;
 }
 
-void sub_8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+void Text_InitWindow8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     gMain.watchedKeysMask = A_BUTTON | B_BUTTON;
     gMain.watchedKeysPressed = 0;
-    sWaitType = 0;
+    sWaitType = WAIT_TYPE_NORMAL;
     sLineLength = 26;
-    InitWindow(win, text, tileDataStartOffset, left, top);
+    Text_InitWindow(win, text, tileDataStartOffset, left, top);
     win->win_field_B = -1;
-    if (win->textMode == 0)
+    if (win->textMode == TEXT_MODE_UNKNOWN0)
     {
         u16 val = GetCursorTileNum(win, 0, 0);
         u8 *buffer = win->tileData + 32 * val;
@@ -2021,9 +2036,9 @@ void sub_8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8
     }
 }
 
-u8 sub_8002F44(struct Window *win)
+u8 Text_PrintWindow8002F44(struct Window *win)
 {
-    while (win->state)
+    while (win->state != WIN_STATE_END)
     {
         if (win->state == WIN_STATE_NEWLINE)
         {
@@ -2038,7 +2053,7 @@ u8 sub_8002F44(struct Window *win)
             sub_8002FA0(win, GetExpandedPlaceholder(win->text[win->textIndex++]));
         }
 
-        InterpretText(win);
+        PrintNextChar(win);
     }
     return 1;
 }
@@ -2048,11 +2063,12 @@ static u8 sub_8002FA0(struct Window *win, const u8 *text)
     u8 retVal;
     u8 savedLanguage = win->language;
     const u8 *savedText = win->text;
+
     u16 savedTextIndex = win->textIndex;
     win->text = text;
     win->textIndex = 0;
     win->state = WIN_STATE_NORMAL;
-    retVal = sub_8002F44(win);
+    retVal = Text_PrintWindow8002F44(win);
     win->text = savedText;
     win->textIndex = savedTextIndex;
     win->state = WIN_STATE_NORMAL;
@@ -2060,38 +2076,41 @@ static u8 sub_8002FA0(struct Window *win, const u8 *text)
     return retVal;
 }
 
-static u8 InterpretText(struct Window *win)
+static u8 PrintNextChar(struct Window *win)
 {
     u8 c = win->text[win->textIndex++];
 
+    // Handle special control characters
     switch (c)
     {
-    case 0xFF:
+    case EOS:
         ClipRight(win);
         win->state = WIN_STATE_END;
         return 0;
-    case 0xFD:
+    case PLACEHOLDER_BEGIN:
         win->state = WIN_STATE_PLACEHOLDER;
         return 2;
-    case 0xFE:
+    case CHAR_NEWLINE:
         ClipRight(win);
         win->state = WIN_STATE_NEWLINE;
         return 2;
-    case 0xFB:
+    case CHAR_PROMPT_CLEAR:
         DrawInitialDownArrow(win);
-        win->state = WIN_STATE_PARAGRAPH;
+        win->state = WIN_STATE_WAIT_CLEAR;
         return 2;
-    case 0xFA:
+    case CHAR_PROMPT_SCROLL:
         DrawInitialDownArrow(win);
-        win->state = WIN_STATE_NEWLINE_WAIT;
+        win->state = WIN_STATE_WAIT_SCROLL;
         return 2;
-    case 0xFC:
+    case EXT_CTRL_CODE_BEGIN:
         return HandleExtCtrlCode(win);
     }
 
     sPrintGlyphFuncs[win->textMode](win, c);
     return 1;
 }
+
+// Extended 0xFC control functions
 
 static u8 HandleExtCtrlCode(struct Window *win)
 {
@@ -2105,27 +2124,27 @@ static u8 ExtCtrlCode_Nop(struct Window *win)
 
 static u8 ExtCtrlCode_ForegroundColor(struct Window *win)
 {
-    SetForegroundColor(win, win->text[win->textIndex++]);
+    SetWindowForegroundColor(win, win->text[win->textIndex++]);
     return 2;
 }
 
 static u8 ExtCtrlCode_BackgroundColor(struct Window *win)
 {
-    SetBackgroundColor(win, win->text[win->textIndex++]);
+    SetWindowBackgroundColor(win, win->text[win->textIndex++]);
     return 2;
 }
 
 static u8 ExtCtrlCode_ShadowColor(struct Window *win)
 {
-    SetShadowColor(win, win->text[win->textIndex++]);
+    SetWindowShadowColor(win, win->text[win->textIndex++]);
     return 2;
 }
 
 static u8 ExtCtrlCode_AllColors(struct Window *win)
 {
-    SetForegroundColor(win, win->text[win->textIndex++]);
-    SetBackgroundColor(win, win->text[win->textIndex++]);
-    SetShadowColor(win, win->text[win->textIndex++]);
+    SetWindowForegroundColor(win, win->text[win->textIndex++]);
+    SetWindowBackgroundColor(win, win->text[win->textIndex++]);
+    SetWindowShadowColor(win, win->text[win->textIndex++]);
     return 2;
 }
 
@@ -2143,7 +2162,7 @@ static u8 ExtCtrlCode_Font(struct Window *win)
 
 static u8 ExtCtrlCode_DefaultFont(struct Window *win)
 {
-    win->fontNum = win->config->fontNum;
+    win->fontNum = win->template->fontNum;
     return 2;
 }
 
@@ -2197,7 +2216,7 @@ static u8 ExtCtrlCode_SetCursorY(struct Window *win)
 
 static u8 ExtCtrlCode_ClearWindowTextLines(struct Window *win)
 {
-    ClearWindowTextLines(win);
+    Text_ClearWindow(win);
     return 2;
 }
 
@@ -2211,7 +2230,7 @@ static u8 ExtCtrlCode_PlaySE(struct Window *win)
 
 static void DrawSpace(struct Window *win)
 {
-    if (win->textMode == 1 || (win->left + win->cursorX) & 7 || win->spacing <= 7)
+    if (win->textMode == TEXT_MODE_MONOSPACE || (win->left + win->cursorX) & 7 || win->spacing <= 7)
     {
         sPrintGlyphFuncs[win->textMode](win, 0);
     }
@@ -2302,10 +2321,11 @@ static u8 ExtCtrlCode_Latin(struct Window *win)
     return 2;
 }
 
-u8 sub_8003418(struct Window *win)
+// Prints the window text without expanding any placeholders
+u8 Text_PrintWindowSimple(struct Window *win)
 {
     u8 retVal = 1;
-    while (win->state)
+    while (win->state != WIN_STATE_END)
     {
         if (win->state == WIN_STATE_NEWLINE)
         {
@@ -2315,7 +2335,7 @@ u8 sub_8003418(struct Window *win)
                 ClipLeft(win);
             win->state = WIN_STATE_NORMAL;
         }
-        if (InterpretText(win) == 1)
+        if (PrintNextChar(win) == 1)
         {
             retVal = 0;
             break;
@@ -2324,10 +2344,10 @@ u8 sub_8003418(struct Window *win)
     return retVal;
 }
 
-u8 sub_8003460(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+u8 Text_InitWindowAndPrintText(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
-    InitWindow(win, text, tileDataStartOffset, left, top);
-    return sub_8002F44(win);
+    Text_InitWindow(win, text, tileDataStartOffset, left, top);
+    return Text_PrintWindow8002F44(win);
 }
 
 u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 top)
@@ -2336,8 +2356,8 @@ u8 sub_8003490(struct Window *win, u8 c, u16 tileDataStartOffset, u8 left, u8 to
     u8 text[2];
     text[0] = c;
     text[1] = EOS;
-    InitWindow(win, text, tileDataStartOffset, left, top);
-    retVal = InterpretText(win);
+    Text_InitWindow(win, text, tileDataStartOffset, left, top);
+    retVal = PrintNextChar(win);
     ClipRight(win);
     return retVal;
 }
@@ -2349,35 +2369,38 @@ void sub_80034D4(u8 *tileData, const u8 *text)
 
 u8 sub_80034EC(u8 *str)
 {
-    return GetStringWidthGivenWindowConfig((struct WindowConfig *)&gWindowConfig_81E6C74, str);
+    return Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowConfig_81E6C74, str);
 }
 
 u8 *sub_8003504(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    sTempWindow.config = (struct WindowConfig *)&gWindowConfig_81E6C74;
-    InitWindow(&sTempWindow, 0, 0, 0, 0);
+    sTempWindow.template = (struct WindowTemplate *)&gWindowConfig_81E6C74;
+    Text_InitWindow(&sTempWindow, 0, 0, 0, 0);
     return AlignInt2(&sTempWindow, dest, value, alignAmount, alignType);
 }
 
 u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
-    sTempWindow.config = (struct WindowConfig *)&gWindowConfig_81E6C74;
-    InitWindow(&sTempWindow, src, 0, 0, 0);
+    sTempWindow.template = (struct WindowTemplate *)&gWindowConfig_81E6C74;
+    Text_InitWindow(&sTempWindow, src, 0, 0, 0);
     return AlignString(&sTempWindow, dest, src, alignAmount, alignType);
 }
 
-u8 sub_80035AC(struct Window *win)
+// Updates the window text
+// The text delay can be accelerated by holding the A button
+u8 Text_UpdateWindow(struct Window *win)
 {
-    sWaitType = 0;
+    sWaitType = WAIT_TYPE_NORMAL;
     return UpdateWindowText(win);
 }
 
+// Returns TRUE when all of the text has been printed.
 static u8 UpdateWindowText(struct Window *win)
 {
     switch (win->state)
     {
     case WIN_STATE_WAIT_BUTTON:
-        if (PlayerCanInterruptWait(win))
+        if (PlayerCanInterruptDelay(win))
         {
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
@@ -2385,48 +2408,56 @@ static u8 UpdateWindowText(struct Window *win)
             }
             else
             {
-                return 0;
+                return FALSE;
             }
         }
         else
         {
             win->delayCounter--;
             if (win->delayCounter)
-                return 0;
+                return FALSE;
         }
         win->state = WIN_STATE_NORMAL;
-        return 0;
-    case WIN_STATE_INTERRUPTIBLE_PAUSE:
-        if (PlayerCanInterruptWait(win) && (gMain.heldKeys & (A_BUTTON | B_BUTTON)) && gMain.watchedKeysPressed == TRUE)
+        return FALSE;
+    case WIN_STATE_CHAR_DELAY:
+        // Allow the player to speed up text by holding a button
+        if (PlayerCanInterruptDelay(win)
+         && (gMain.heldKeys & (A_BUTTON | B_BUTTON))
+         && gMain.watchedKeysPressed == TRUE)
         {
             win->delayCounter = 0;
             win->state = WIN_STATE_NORMAL;
             break;
         }
+        // fall through
     case WIN_STATE_PAUSE:
+        // Wait for timer to expire, then continue printing
         if (win->delayCounter)
         {
             win->delayCounter--;
             if (win->delayCounter)
-                return 0;
+                return FALSE;
         }
-
         win->state = WIN_STATE_NORMAL;
         break;
-    case WIN_STATE_PARAGRAPH:
-        if (!WaitWithDownArrow(win))
-            return 0;
-        ClearWindowTextLines(win);
-        win->state = WIN_STATE_NORMAL;
-        BLOCK_CROSS_JUMP
-        return 0;
-    case WIN_STATE_NEWLINE_WAIT:
-        if (!WaitWithDownArrow(win))
-            return 0;
-        ScrollWindowTextLines(win);
-        win->state = WIN_STATE_NORMAL;
-        BLOCK_CROSS_JUMP
-        return 0;
+    case WIN_STATE_WAIT_CLEAR:
+        // Erase the text once a button is pressed
+        if (WaitWithDownArrow(win))
+        {
+            Text_ClearWindow(win);
+            win->state = WIN_STATE_NORMAL;
+            asm("");
+        }
+        return FALSE;
+    case WIN_STATE_WAIT_SCROLL:
+        // Scroll the text once a button is pressed
+        if (WaitWithDownArrow(win))
+        {
+            ScrollWindowTextLines(win);
+            win->state = WIN_STATE_NORMAL;
+            asm("");
+        }
+        return FALSE;
     case WIN_STATE_PLACEHOLDER:
         win->textIndex++;
         win->state = WIN_STATE_NORMAL;
@@ -2434,35 +2465,35 @@ static u8 UpdateWindowText(struct Window *win)
     case WIN_STATE_NEWLINE:
         ScrollWindowTextLines(win);
         win->state = WIN_STATE_NORMAL;
-        BLOCK_CROSS_JUMP
-        return 0;
+        asm("");
+        return FALSE;
     case WIN_STATE_BEGIN:
-        ClearWindowTextLines(win);
+        Text_ClearWindow(win);
         break;
     case WIN_STATE_WAIT_SOUND:
         if (IsSEPlaying())
-            return 0;
+            return FALSE;
         win->state = WIN_STATE_NORMAL;
         break;
     case WIN_STATE_END:
-        return 1;
+        return TRUE;  // done printing text
     case WIN_STATE_NORMAL:
         break;
     default:
         win->state = WIN_STATE_END;
-        return 1;
+        return TRUE;
     }
 
-    InterpretText(win);
+    PrintNextChar(win);
 
     switch (win->state)
     {
     case WIN_STATE_END:
-        return 1;
+        return TRUE;  // done printing text
     case WIN_STATE_WAIT_BUTTON:
-    case WIN_STATE_PARAGRAPH:
-    case WIN_STATE_NEWLINE_WAIT:
-        if (PlayerCanInterruptWait(win))
+    case WIN_STATE_WAIT_CLEAR:
+    case WIN_STATE_WAIT_SCROLL:
+        if (PlayerCanInterruptDelay(win))
             return 0;
         win->delayCounter = 60;
         break;
@@ -2471,8 +2502,9 @@ static u8 UpdateWindowText(struct Window *win)
     case WIN_STATE_WAIT_SOUND:
         break;
     default:
-        win->state = WIN_STATE_INTERRUPTIBLE_PAUSE;
+        win->state = WIN_STATE_CHAR_DELAY;
         win->delayCounter = GetTextDelay(win);
+        break;
     }
 
     return 0;
@@ -2484,45 +2516,45 @@ static u8 UpdateWindowText(struct Window *win)
 #define SUB_800374C_LINE_LENGTH 27
 #endif
 
-u8 sub_800374C(struct Window *win)
+u8 Text_UpdateWindowInBattle(struct Window *win)
 {
     u8 retVal;
 
-    sWaitType = 1;
+    sWaitType = WAIT_TYPE_BATTLE;
     sLineLength = SUB_800374C_LINE_LENGTH;
     retVal = UpdateWindowText(win);
     sLineLength = 26;
-    sWaitType = 0;
+    sWaitType = WAIT_TYPE_NORMAL;
     return retVal;
 }
 
-u8 sub_8003778(struct Window *win)
+u8 Text_UpdateWindowAutoscroll(struct Window *win)
 {
     u8 retVal;
 
-    sWaitType = 2;
+    sWaitType = WAIT_TYPE_AUTOSCROLL;
     sLineLength = 26;
     retVal = UpdateWindowText(win);
-    sWaitType = 0;
+    sWaitType = WAIT_TYPE_NORMAL;
     return retVal;
 }
 
-u8 sub_80037A0(struct Window *win)
+u8 Text_UpdateWindowInContest(struct Window *win)
 {
     u8 retVal;
 
-    sWaitType = 3;
+    sWaitType = WAIT_TYPE_CONTEST;
     sLineLength = 17;
     retVal = UpdateWindowText(win);
     sLineLength = 26;
     return retVal;
 }
 
-u32 sub_80037C8(struct Window *win, u8 lineLength)
+u32 Text_UpdateWindowOverrideLineLength(struct Window *win, u8 lineLength)
 {
     u8 retVal;
 
-    sWaitType = 0;
+    sWaitType = WAIT_TYPE_NORMAL;
     sLineLength = lineLength;
     retVal = UpdateWindowText(win);
     sLineLength = 26;
@@ -2757,14 +2789,14 @@ static void ApplyColors_ShadowedFont(const void *src, void *dest, u8 foreground,
 
 static void SetCursorX(struct Window *win, u8 x)
 {
-    if (win->textMode == 0 && ((win->left + win->cursorX) & 7))
+    if (win->textMode == TEXT_MODE_UNKNOWN0 && ((win->left + win->cursorX) & 7))
         win->tileDataOffset += 2;
     win->cursorX = x;
 }
 
 static void AddToCursorX(struct Window *win, u8 deltaX)
 {
-    if (win->textMode == 0)
+    if (win->textMode == TEXT_MODE_UNKNOWN0)
     {
         u8 x = win->cursorX;
         win->cursorX += deltaX;
@@ -2779,7 +2811,7 @@ static void AddToCursorX(struct Window *win, u8 deltaX)
 
 static void AddToCursorY(struct Window *win, u8 deltaY)
 {
-    if (win->textMode == 0 && ((win->left + win->cursorX) & 7))
+    if (win->textMode == TEXT_MODE_UNKNOWN0 && ((win->left + win->cursorX) & 7))
         win->tileDataOffset += 2;
     win->cursorY += deltaY;
 }
@@ -2788,11 +2820,11 @@ static void EraseAtCursor(struct Window *win)
 {
     switch (win->textMode)
     {
-    case 0:
-    case 2:
+    case TEXT_MODE_UNKNOWN0:
+    case TEXT_MODE_UNKNOWN2:
         DrawGlyphTiles(win, 0, 8);
         break;
-    case 1:
+    case TEXT_MODE_MONOSPACE:
         sWriteGlyphTilemapFuncs[win->fontNum](win, 0);
         break;
     }
@@ -2801,7 +2833,8 @@ static void EraseAtCursor(struct Window *win)
 static void ClipLeft(struct Window *win)
 {
     u32 pixel = win->left & 7;
-    if (win->textMode != 1 && pixel)
+
+    if (win->textMode != TEXT_MODE_MONOSPACE && pixel)
     {
         const u32 *masks = sGlyphMasks[8][pixel];
         u32 outsideMask = masks[0];
@@ -2834,32 +2867,40 @@ static void ClipRight(struct Window *win)
 {
     register u8 cursorX asm("r0") = win->cursorX;
     u8 left = win->left;
-    u32 pixel = (cursorX + left) & 7;
-    if (win->textMode != 1 && pixel)
+    u32 pixelX = (cursorX + left) & 7;
+
+    if (win->textMode != TEXT_MODE_MONOSPACE && pixelX != 0)
     {
-        const u32 *masks = sGlyphMasks[8 - pixel][pixel];
+        const u32 *masks = sGlyphMasks[8 - pixelX][pixelX];
         u32 insideMask = masks[0];
         u32 outside = (sGlyphBuffer.background & ~insideMask);
-        u16 tileNum = GetCursorTileNum(win, 0, 0);
-        u32 *buffer = (u32 *)(win->tileData + 32 * tileNum);
-        buffer[0] = (buffer[0] & insideMask) | outside;
-        buffer[1] = (buffer[1] & insideMask) | outside;
-        buffer[2] = (buffer[2] & insideMask) | outside;
-        buffer[3] = (buffer[3] & insideMask) | outside;
-        buffer[4] = (buffer[4] & insideMask) | outside;
-        buffer[5] = (buffer[5] & insideMask) | outside;
-        buffer[6] = (buffer[6] & insideMask) | outside;
-        buffer[7] = (buffer[7] & insideMask) | outside;
+        u16 tileNum; 
+        u32 *tileData;
+
+        tileNum = GetCursorTileNum(win, 0, 0);
+        tileData = (u32 *)(win->tileData + 32 * tileNum);
+
+        tileData[0] = (tileData[0] & insideMask) | outside;
+        tileData[1] = (tileData[1] & insideMask) | outside;
+        tileData[2] = (tileData[2] & insideMask) | outside;
+        tileData[3] = (tileData[3] & insideMask) | outside;
+        tileData[4] = (tileData[4] & insideMask) | outside;
+        tileData[5] = (tileData[5] & insideMask) | outside;
+        tileData[6] = (tileData[6] & insideMask) | outside;
+        tileData[7] = (tileData[7] & insideMask) | outside;
+
         tileNum = GetCursorTileNum(win, 0, 1);
-        buffer = (u32 *)(win->tileData + 32 * tileNum);
-        buffer[0] = (buffer[0] & insideMask) | outside;
-        buffer[1] = (buffer[1] & insideMask) | outside;
-        buffer[2] = (buffer[2] & insideMask) | outside;
-        buffer[3] = (buffer[3] & insideMask) | outside;
-        buffer[4] = (buffer[4] & insideMask) | outside;
-        buffer[5] = (buffer[5] & insideMask) | outside;
-        buffer[6] = (buffer[6] & insideMask) | outside;
-        buffer[7] = (buffer[7] & insideMask) | outside;
+        tileData = (u32 *)(win->tileData + 32 * tileNum);
+
+        tileData[0] = (tileData[0] & insideMask) | outside;
+        tileData[1] = (tileData[1] & insideMask) | outside;
+        tileData[2] = (tileData[2] & insideMask) | outside;
+        tileData[3] = (tileData[3] & insideMask) | outside;
+        tileData[4] = (tileData[4] & insideMask) | outside;
+        tileData[5] = (tileData[5] & insideMask) | outside;
+        tileData[6] = (tileData[6] & insideMask) | outside;
+        tileData[7] = (tileData[7] & insideMask) | outside;
+
         UpdateTilemap(win, 1);
     }
 }
@@ -2876,7 +2917,7 @@ static void InitColors(struct Window *win)
         sGlyphBuffer.colors[i] = i;
 }
 
-static void SetBackgroundColor(struct Window *win, u8 color)
+static void SetWindowBackgroundColor(struct Window *win, u8 color)
 {
     u32 val1;
     u32 val2;
@@ -2889,13 +2930,13 @@ static void SetBackgroundColor(struct Window *win, u8 color)
     sGlyphBuffer.background = val3;
 }
 
-static void SetShadowColor(struct Window *win, u8 color)
+static void SetWindowShadowColor(struct Window *win, u8 color)
 {
     win->shadowColor = color;
     sGlyphBuffer.colors[14] = color;
 }
 
-static void SetForegroundColor(struct Window *win, u8 color)
+static void SetWindowForegroundColor(struct Window *win, u8 color)
 {
     win->foregroundColor = color;
     sGlyphBuffer.colors[15] = color;
@@ -2903,25 +2944,25 @@ static void SetForegroundColor(struct Window *win, u8 color)
 
 static u8 GetTextDelay(struct Window *win)
 {
-    if (!PlayerCanInterruptWait(win))
+    if (!PlayerCanInterruptDelay(win))
         return 3;
 
     return sTextSpeedDelays[gSaveBlock2.optionsTextSpeed];
 }
 
-static bool8 PlayerCanInterruptWait(struct Window *win)
+static bool8 PlayerCanInterruptDelay(struct Window *win)
 {
     bool8 retVal = TRUE;
 
     switch (sWaitType)
     {
-    case 2:
+    case WAIT_TYPE_AUTOSCROLL:
         retVal = FALSE;
         break;
-    case 3:
+    case WAIT_TYPE_CONTEST:
         retVal = gIsLinkContest ? FALSE : TRUE;
         break;
-    case 1:
+    case WAIT_TYPE_BATTLE:
         retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
         break;
     }
@@ -2933,13 +2974,13 @@ static void ScrollWindowTextLines(struct Window *win)
 {
     switch (win->textMode)
     {
-    case 0:
+    case TEXT_MODE_UNKNOWN0:
         ScrollWindowTextLines_TextMode0(win);
         break;
-    case 1:
-        ScrollWindowTextLines_TextMode1(win);
+    case TEXT_MODE_MONOSPACE:
+        ScrollWindowTextLines_TextModeMonospace(win);
         break;
-    case 2:
+    case TEXT_MODE_UNKNOWN2:
         ScrollWindowTextLines_TextMode2(win);
         break;
     }
@@ -2949,6 +2990,7 @@ static void ScrollWindowTextLines_TextMode0(struct Window *win)
 {
     if (win->cursorY == 0)
     {
+        // Advance to the next line
         win->tileDataOffset = 2 * sLineLength + 2;
         win->cursorX = 0;
         win->cursorY += 16;
@@ -2959,7 +3001,7 @@ static void ScrollWindowTextLines_TextMode0(struct Window *win)
             win->tileDataOffset = 2 * sLineLength + 2;
         else
             win->tileDataOffset = 2;
-        win->win_field_C = win->win_field_C ^ 2;
+        win->win_field_C ^= 2;
         win->cursorX = 0;
         DoScroll_TextMode0(win, sLineLength);
     }
@@ -2973,16 +3015,21 @@ static void DoScroll_TextMode0(struct Window *win, u16 lineLength)
     u16 fill;
     buffer += val1 + val2;
     fill = (win->paletteNum << 12) | GetBlankTileNum(win);
+    
+    // Move the bottom line up
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
     CpuCopy16(buffer + 96, buffer + 32, lineLength * 2);
+    
+    // Clear the bottom line
     CpuFill16(fill, buffer + 64, lineLength * 2);
     CpuFill16(fill, buffer + 96, lineLength * 2);
 }
 
-static void ScrollWindowTextLines_TextMode1(struct Window *win)
+static void ScrollWindowTextLines_TextModeMonospace(struct Window *win)
 {
     if (win->cursorY == 0)
     {
+        // Advance to the next line
         win->cursorX = 0;
         win->cursorY += 16;
     }
@@ -2990,17 +3037,21 @@ static void ScrollWindowTextLines_TextMode1(struct Window *win)
     {
         win->win_field_C ^= 2;
         win->cursorX = 0;
-        DoScroll_TextMode1(win, sLineLength);
+        DoScroll_TextModeMonospace(win, sLineLength);
     }
 }
 
-static void DoScroll_TextMode1(struct Window *win, u16 lineLength)
+static void DoScroll_TextModeMonospace(struct Window *win, u16 lineLength)
 {
     u16 *buffer = GetCursorTilemapPointer(win);
     u16 *dest = buffer - 32;
     u16 fill = (win->paletteNum << 12) | GetBlankTileNum(win);
+    
+    // Move the bottom line up
     CpuCopy16(buffer + 32, dest, lineLength * 2);
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
+    
+    // Clear the bottom line
     CpuFill16(fill, buffer + 32, lineLength * 2);
     CpuFill16(fill, buffer + 64, lineLength * 2);
 }
@@ -3009,6 +3060,7 @@ static void ScrollWindowTextLines_TextMode2(struct Window *win)
 {
     if (win->cursorY == 0)
     {
+        // Advance to the next line
         win->cursorX = 0;
         win->cursorY += 16;
     }
@@ -3055,18 +3107,18 @@ static void DoScroll_TextMode2(struct Window *win, u8 lineLength)
     }
 }
 
-void ClearWindowTextLines(struct Window *win)
+void Text_ClearWindow(struct Window *win)
 {
     switch (win->textMode)
     {
-    case 0:
+    case TEXT_MODE_UNKNOWN0:
         ClearWindowTextLines_TextMode0_TextMode1(win, sLineLength);
         win->tileDataOffset = 2;
         break;
-    case 1:
+    case TEXT_MODE_MONOSPACE:
         ClearWindowTextLines_TextMode0_TextMode1(win, sLineLength);
         break;
-    case 2:
+    case TEXT_MODE_UNKNOWN2:
         ClearWindowTextLines_TextMode2(win, sLineLength);
         break;
     }
@@ -3074,7 +3126,7 @@ void ClearWindowTextLines(struct Window *win)
 
 static void ClearWindowTextLines_TextMode0_TextMode1(struct Window *win, u8 lineLength)
 {
-    u8 i;
+    u8 x, y;
     u16 *buffer;
     u16 fill;
 
@@ -3085,11 +3137,10 @@ static void ClearWindowTextLines_TextMode0_TextMode1(struct Window *win, u8 line
     buffer = GetCursorTilemapPointer(win);
     fill = GetBlankTileNum(win) | (win->paletteNum << 12);
 
-    for (i = 0; i < 4; i++)
+    for (y = 0; y < 4; y++)
     {
-        u8 j;
-        for (j = 0; j < lineLength; j++)
-            buffer[j] = fill;
+        for (x = 0; x < lineLength; x++)
+            buffer[x] = fill;
         buffer += 32;
     }
 }
@@ -3114,13 +3165,13 @@ static void ClearWindowTextLines_TextMode2(struct Window *win, u8 lineLength)
 
 static void DrawDownArrow(struct Window *win)
 {
-    if (PlayerCanInterruptWait(win))
+    if (PlayerCanInterruptDelay(win))
     {
         const u32 *downArrowTiles = &sDownArrowTiles[((win->downArrowCounter & 0x0F00) >> 8) * 16];
 
         switch (win->textMode)
         {
-        case 1:
+        case TEXT_MODE_MONOSPACE:
         {
             u8 *buffer;
             u16 tileNum = win->tileDataStartOffset + 254;
@@ -3132,8 +3183,8 @@ static void DrawDownArrow(struct Window *win)
             WriteGlyphTilemap(win, tileNum, tileNum + 1);
             break;
         }
-        case 0:
-        case 2:
+        case TEXT_MODE_UNKNOWN0:
+        case TEXT_MODE_UNKNOWN2:
         {
             struct GlyphTileInfo glyphTileInfo;
             glyphTileInfo.textMode = win->textMode;
@@ -3172,9 +3223,9 @@ static void DrawDownArrow(struct Window *win)
 
 static u8 WaitWithDownArrow(struct Window *win)
 {
-    u8 retVal = 1;
+    u8 retVal = TRUE;
 
-    if (!PlayerCanInterruptWait(win))
+    if (!PlayerCanInterruptDelay(win))
     {
         win->delayCounter--;
         if (!win->delayCounter)
@@ -3183,8 +3234,8 @@ static u8 WaitWithDownArrow(struct Window *win)
         }
         else
         {
-            DrawMovingDownArrow(win);
-            retVal = 0;
+            UpdateDownArrowAnimation(win);
+            retVal = FALSE;
         }
     }
     else
@@ -3196,8 +3247,8 @@ static u8 WaitWithDownArrow(struct Window *win)
         }
         else
         {
-            DrawMovingDownArrow(win);
-            retVal = 0;
+            UpdateDownArrowAnimation(win);
+            retVal = FALSE;
         }
     }
 
@@ -3210,7 +3261,7 @@ static void DrawInitialDownArrow(struct Window *win)
     DrawDownArrow(win);
 }
 
-static void DrawMovingDownArrow(struct Window *win)
+static void UpdateDownArrowAnimation(struct Window *win)
 {
     u16 downArrowPos = (win->downArrowCounter & 0x0F00) >> 8;
     u16 wait = win->downArrowCounter & 0x000F;
@@ -3237,31 +3288,37 @@ static void DrawMovingDownArrow(struct Window *win)
 static void TryEraseDownArrow(struct Window *win)
 {
     win->downArrowCounter = 0;
-    if (PlayerCanInterruptWait(win) == TRUE)
+    if (PlayerCanInterruptDelay(win) == TRUE)
         EraseAtCursor(win);
 }
 
-u16 GetWindowTilemapEntry(struct Window *win, u8 x, u8 y)
+// unused
+u16 Text_GetWindowTilemapEntry(struct Window *win, u8 x, u8 y)
 {
     u16 *tilemap = win->tilemap;
     return tilemap[32 * y + x];
 }
 
-void DrawWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom)
+// unused
+void Text_FillWindowBorder(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom)
 {
     u8 i;
     u16 *buffer = &win->tilemap[top * 32];
 
+    // Fill top border
     for (i = left; i <= right; i++)
         buffer[i] = tilemapEntry;
 
     for (i = top + 1; i < bottom - 1; i++)
     {
         buffer += 32;
+        // left border
         buffer[left] = tilemapEntry;
+        // right border
         buffer[right] = tilemapEntry;
     }
 
+    // Fill bottom border
     if (top != bottom)
     {
         buffer += 32;
@@ -3270,19 +3327,21 @@ void DrawWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 ri
     }
 }
 
+// unused
 void DrawWindowRect_DefaultPalette(struct Window *win, u16 tileNum, u8 left, u8 top, u8 right, u8 bottom)
 {
-    DrawWindowRect(win, (win->paletteNum << 12) | tileNum, left, top, right, bottom);
+    Text_FillWindowBorder(win, (win->paletteNum << 12) | tileNum, left, top, right, bottom);
 }
 
+// Fills the whole window area with tilemapEntry
 void FillWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom)
 {
     u16 *buffer = &win->tilemap[top * 32];
     while (top++ <= bottom)
     {
-        u8 j;
-        for (j = left; j <= right; j++)
-            buffer[j] = tilemapEntry;
+        u8 x;
+        for (x = left; x <= right; x++)
+            buffer[x] = tilemapEntry;
         buffer += 32;
     }
 }
@@ -3297,7 +3356,7 @@ void ZeroFillWindowRect(struct Window *win, u8 left, u8 top, u8 right, u8 bottom
     FillWindowRect_DefaultPalette(win, 0, left, top, right, bottom);
 }
 
-void FillWindowRectWithBlankTile(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
+void Text_BlankWindowRect(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
 {
     u16 tileNum = GetBlankTileNum(win);
     FillWindowRect_DefaultPalette(win, tileNum, left, top, right, bottom);
@@ -3309,12 +3368,12 @@ static u16 GetBlankTileNum(struct Window *win)
 
     switch (win->textMode)
     {
-    case 0:
+    case TEXT_MODE_UNKNOWN0:
         break;
-    case 2:
+    case TEXT_MODE_UNKNOWN2:
         retVal++;
         break;
-    case 1:
+    case TEXT_MODE_MONOSPACE:
         switch (win->fontNum)
         {
         case 1:
@@ -3451,7 +3510,7 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         ConvertIntToDecimalString(temp, value);
         width = GetStringWidth(win, temp);
         dest = StringCopy(dest, temp);
-        dest[0] = 0xFC;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
         dest[1] = 17;
         dest[2] = alignAmount - width;
         dest += 3;
@@ -3462,7 +3521,7 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         width = GetStringWidth(win, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 17;
             dest[2] = alignAmount - width;
             dest += 3;
@@ -3474,7 +3533,7 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         width = GetStringWidth(win, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 17;
             dest[2] = (alignAmount - width) / 2;
             dest += 3;
@@ -3482,7 +3541,7 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         dest = StringCopy(dest, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 17;
             dest[2] = (alignAmount - width) / 2;
             dest += 3;
@@ -3500,7 +3559,7 @@ u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 
     {
     case 0:
         dest = StringCopy(dest, src);
-        dest[0] = 0xFC;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
         dest[1] = 19;
         dest[2] = alignAmount;
         dest += 3;
@@ -3510,7 +3569,7 @@ u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 
         width = GetStringWidth(win, src);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = alignAmount - width;
             dest += 3;
@@ -3521,7 +3580,7 @@ u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 
         width = GetStringWidth(win, src);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = (alignAmount - width) / 2;
             dest += 3;
@@ -3529,7 +3588,7 @@ u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 
         dest = StringCopy(dest, src);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = alignAmount;
             dest += 3;
@@ -3544,16 +3603,16 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
 {
     u8 width = 0;
     u8 savedFontNum = win->fontNum;
-    u8 savedCharset = win->language;
+    u8 savedLanguage = win->language;
     u8 savedSpacing = win->spacing;
     s32 i = 0;
 
-    while (s[i] != 0xFF)
+    while (s[i] != EOS)
     {
         u8 c = s[i];
         switch (c)
         {
-        case 0xFD:
+        case PLACEHOLDER_BEGIN:
         {
             u8 temp;
             i++;
@@ -3563,7 +3622,7 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
             i++;
             break;
         }
-        case 0xFC:
+        case EXT_CTRL_CODE_BEGIN:
             i++;
             switch (s[i])
             {
@@ -3571,7 +3630,7 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
                 win->fontNum = s[i + 1];
                 break;
             case 7:
-                win->fontNum = win->config->fontNum;
+                win->fontNum = win->template->fontNum;
                 break;
             case 0x11:
                 width += s[i + 1];
@@ -3601,7 +3660,7 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
     }
 
     win->spacing = savedSpacing;
-    win->language = savedCharset;
+    win->language = savedLanguage;
     win->fontNum = savedFontNum;
 
     return width;
@@ -3609,30 +3668,30 @@ u8 GetStringWidth(struct Window *win, const u8 *s)
 
 u8 sub_8004D04(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
 {
-    sub_8002E4C(win, text, tileDataStartOffset, left, top, a6);
-    return sub_8002F44(win);
+    Text_InitWindow8002E4C(win, text, tileDataStartOffset, left, top, a6);
+    return Text_PrintWindow8002F44(win);
 }
 
 u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     u8 width = GetStringWidth(win, text);
-    InitWindow(win, text, tileDataStartOffset, left - ((u32)(width + 7) >> 3), top);
+    Text_InitWindow(win, text, tileDataStartOffset, left - ((u32)(width + 7) >> 3), top);
     EraseAtCursor(win);
     width &= 7;
     if (width)
         width = 8 - width;
     sub_80048D8(win, width, 0);
-    return sub_8002F44(win);
+    return Text_PrintWindow8002F44(win);
 }
 
 u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6)
 {
     register u32 val asm("r5") = (u8)((a6 >> 1) - (GetStringWidth(win, text) >> 1));
     left += (val >> 3);
-    InitWindow(win, text, tileDataStartOffset, left, top);
+    Text_InitWindow(win, text, tileDataStartOffset, left, top);
     EraseAtCursor(win);
     sub_80048D8(win, val & 7, 0);
-    return sub_8002F44(win);
+    return Text_PrintWindow8002F44(win);
 }
 
 u8 sub_8004E24(struct Window *win)
@@ -3640,25 +3699,25 @@ u8 sub_8004E24(struct Window *win)
     return win->paletteNum;
 }
 
-void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow)
+void Text_GetTextColors(struct Window *win, u8 *foreground, u8 *background, u8 *shadow)
 {
     *foreground = win->foregroundColor;
     *background = win->backgroundColor;
     *shadow = win->shadowColor;
 }
 
-void sub_8004E3C(const struct WindowConfig *winConfig, u8 *tileData, const u8 *text)
+void sub_8004E3C(const struct WindowTemplate *winTemplate, u8 *tileData, const u8 *text)
 {
-    sTempWindow.config = winConfig;
-    InitWindow(&sTempWindow, text, 0, 0, 0);
+    sTempWindow.template = winTemplate;
+    Text_InitWindow(&sTempWindow, text, 0, 0, 0);
     sTempWindow.tileData = tileData;
-    sub_8002F44(&sTempWindow);
+    Text_PrintWindow8002F44(&sTempWindow);
 }
 
-u8 GetStringWidthGivenWindowConfig(const struct WindowConfig *winConfig, const u8 *s)
+u8 Text_GetStringWidthFromWindowTemplate(const struct WindowTemplate *winTemplate, const u8 *s)
 {
-    sTempWindow.config = winConfig;
-    InitWindow(&sTempWindow, s, 0, 0, 0);
+    sTempWindow.template = winTemplate;
+    Text_InitWindow(&sTempWindow, s, 0, 0, 0);
     return GetStringWidth(&sTempWindow, s);
 }
 
@@ -3801,8 +3860,8 @@ u8 sub_8004FD0(struct Window *win, u8 *dest, const u8 *src, u16 tileDataStartOff
     if (endsWithoutNewline)
         newlineCount++;
 
-    sub_8002E4C(win, start, tileDataStartOffset, left, top, a8);
-    sub_8002F44(win);
+    Text_InitWindow8002E4C(win, start, tileDataStartOffset, left, top, a8);
+    Text_PrintWindow8002F44(win);
 
     return newlineCount;
 }
@@ -3827,7 +3886,7 @@ static s32 DrawGlyphTile_UnshadowedFont(struct GlyphTileInfo *glyphTileInfo)
     if (glyphTileInfo->startPixel + glyphTileInfo->width > 8)
     {
         u32 mask2 = masks[1];
-        if (glyphTileInfo->textMode == 2)
+        if (glyphTileInfo->textMode == TEXT_MODE_UNKNOWN2)
         {
             glyphBuffer->pixelRows[8] = buffer[8] & mask2;
             glyphBuffer->pixelRows[9] = buffer[9] & mask2;
@@ -3867,7 +3926,7 @@ static s32 DrawGlyphTile_UnshadowedFont(struct GlyphTileInfo *glyphTileInfo)
 
     if (glyphTileInfo->startPixel + glyphTileInfo->width > 8)
     {
-        if (glyphTileInfo->textMode != 2)
+        if (glyphTileInfo->textMode != TEXT_MODE_UNKNOWN2)
             buffer += 8;
         buffer[8] = glyphBuffer->pixelRows[8];
         buffer[9] = glyphBuffer->pixelRows[9];
@@ -4039,7 +4098,7 @@ static s32 DrawGlyphTile_ShadowedFont(struct GlyphTileInfo *glyphTileInfo)
     if (glyphTileInfo->startPixel + glyphTileInfo->width > 8)
     {
         u32 mask2 = masks[1];
-        if (glyphTileInfo->textMode == 2)
+        if (glyphTileInfo->textMode == TEXT_MODE_UNKNOWN2)
         {
             glyphBuffer->pixelRows[8] = buffer[8] & mask2;
             glyphBuffer->pixelRows[9] = buffer[9] & mask2;
@@ -4076,7 +4135,7 @@ static s32 DrawGlyphTile_ShadowedFont(struct GlyphTileInfo *glyphTileInfo)
 
     if (glyphTileInfo->startPixel + glyphTileInfo->width > 8)
     {
-        if (glyphTileInfo->textMode != 2)
+        if (glyphTileInfo->textMode != TEXT_MODE_UNKNOWN2)
             buffer += 8;
         buffer[8] = glyphBuffer->pixelRows[8];
         buffer[9] = glyphBuffer->pixelRows[9];
@@ -4314,7 +4373,7 @@ static u16 GetCursorTileNum(struct Window *win, u32 xOffset, u32 yOffset)
 {
     u16 index;
 
-    if (win->textMode == 2)
+    if (win->textMode == TEXT_MODE_UNKNOWN2)
         index = win->tileDataStartOffset
               + win->tileDataOffset
               + (((win->top + win->cursorY) >> 3) + yOffset) * win->width

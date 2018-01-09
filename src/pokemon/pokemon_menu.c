@@ -229,7 +229,7 @@ static void sub_8089A8C(void)
 static void sub_8089BDC(u8 arg0, u8 arg1, u8 arg2, u8 noOfOptions, const struct MenuAction2 *menuActions, const u8 *order, u8 arg6)
 {
     PrintPartyMenuPromptText(5, arg6);
-    MenuDrawTextWindow(arg0, arg1, arg0 + arg2, (noOfOptions * 2) + arg1 + 1);
+    Menu_DrawStdWindowFrame(arg0, arg1, arg0 + arg2, (noOfOptions * 2) + arg1 + 1);
     PrintMenuItemsReordered(arg0 + 1, arg1 + 1, noOfOptions, menuActions, order);
 }
 
@@ -279,13 +279,13 @@ static void sub_8089D94(u8 taskID)
         if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_UP)
         {
             PlaySE(SE_SELECT);
-            sPokeMenuCursorPos = MoveMenuCursor(-1);
+            sPokeMenuCursorPos = Menu_MoveCursor(-1);
             sub_808B5B4(taskID);
         }
         else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
-            sPokeMenuCursorPos = MoveMenuCursor(1);
+            sPokeMenuCursorPos = Menu_MoveCursor(1);
             sub_808B5B4(taskID);
         }
         else if (gMain.newKeys & A_BUTTON)
@@ -363,7 +363,7 @@ static void PokemonMenu_Summary(u8 taskID)
 void DoPokemonMenu_Switch(u8 taskID)
 {
     SetTaskFuncWithFollowupFunc(taskID, SetupDefaultPartyMenuSwitchPokemon, HandleDefaultPartyMenu);
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
 }
 
 static void PokemonMenu_Switch(u8 taskID)
@@ -378,12 +378,12 @@ static void sub_808A060(u8 taskID)
 {
     if (gMain.newKeys == DPAD_UP && sPokeMenuCursorPos != 0)
     {
-        sPokeMenuCursorPos = MoveMenuCursor(-1);
+        sPokeMenuCursorPos = Menu_MoveCursor(-1);
         PlaySE(SE_SELECT);
     }
     if (gMain.newKeys == DPAD_DOWN && sPokeMenuCursorPos != 2)
     {
-        sPokeMenuCursorPos = MoveMenuCursor(1);
+        sPokeMenuCursorPos = Menu_MoveCursor(1);
         PlaySE(SE_SELECT);
     }
     if (gMain.newKeys & A_BUTTON)
@@ -409,7 +409,7 @@ static void PokemonMenu_Item(u8 taskID)
 {
     HandleDestroyMenuCursors();
     sPokeMenuCursorPos = 0;
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     gTasks[taskID].func = sub_808A100;
 }
 
@@ -442,7 +442,7 @@ static void sub_808A228(u8 taskID)
     }
     else
     {
-        MenuZeroFillWindowRect(0, 0, 29, 19);
+        Menu_EraseWindowRect(0, 0, 29, 19);
         PrintPartyMenuPromptText(0, 0);
         gTasks[taskID].func = HandleDefaultPartyMenu;
     }
@@ -601,7 +601,7 @@ static void sub_808A678(u8 taskID)
 static void PokemonMenu_TakeItem(u8 taskID)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     sub_806D5A4();
     PartyMenuTryGiveMonHeldItem_806ECE8(taskID, sub_808A678);
 }
@@ -609,7 +609,7 @@ static void PokemonMenu_TakeItem(u8 taskID)
 static void PokemonMenu_TakeMail(u8 taskID)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     sub_806D5A4();
     DoTakeMail(taskID, sub_808A678);
 }
@@ -618,7 +618,7 @@ static void PokemonMenu_Mail(u8 taskID)
 {
     HandleDestroyMenuCursors();
     sPokeMenuCursorPos = 0;
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     ShowPartyPopupMenu(0, &sUnknown_0839F584, (void*) sPokemonMenuActions, 0);
     gTasks[taskID].func = sub_808A73C;
 }
@@ -629,17 +629,17 @@ static void sub_808A73C(u8 taskID)
     {
         PlaySE(SE_SELECT);
         if (sPokeMenuCursorPos == 0)
-            sPokeMenuCursorPos = MoveMenuCursor(sUnknown_0839F584.numChoices - 1);
+            sPokeMenuCursorPos = Menu_MoveCursor(sUnknown_0839F584.numChoices - 1);
         else
-            sPokeMenuCursorPos = MoveMenuCursor(-1);
+            sPokeMenuCursorPos = Menu_MoveCursor(-1);
     }
     if (gMain.newAndRepeatedKeys == DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
         if (sPokeMenuCursorPos == sUnknown_0839F584.numChoices - 1)
-            sPokeMenuCursorPos = MoveMenuCursor(1 - sUnknown_0839F584.numChoices);
+            sPokeMenuCursorPos = Menu_MoveCursor(1 - sUnknown_0839F584.numChoices);
         else
-            sPokeMenuCursorPos = MoveMenuCursor(1);
+            sPokeMenuCursorPos = Menu_MoveCursor(1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
@@ -679,7 +679,7 @@ static void sub_808A8A8(void)
 static void sub_808A8D4(u8 taskID)
 {
     sPokeMenuCursorPos = 0;
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     PrintPartyMenuPromptText(0, 0);
     gTasks[taskID].func = HandleDefaultPartyMenu;
 }
@@ -695,7 +695,7 @@ static void PokemonMenu_CancelSubmenu(u8 taskID)
 {
     HandleDestroyMenuCursors();
     PlaySE(SE_SELECT);
-    MenuZeroFillWindowRect(19, 0, 29, 19);
+    Menu_EraseWindowRect(19, 0, 29, 19);
     sub_806D5A4();
     sub_8089C7C(sPokeMenuCursorPos);
     gTasks[taskID].func = sub_8089D94;
@@ -715,7 +715,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
     tFieldMoveId = sPokeMenuOptionsOrder[sPokeMenuCursorPos] - POKEMENU_FIRST_FIELD_MOVE_ID;
     if (sub_80F9344() == TRUE)
     {
-        MenuZeroFillWindowRect(19, 0, 29, 19);
+        Menu_EraseWindowRect(19, 0, 29, 19);
         if (IS_SOFTBOILED_MILKDRINK(tFieldMoveId))
             PrintPartyMenuPromptText(9, 0);
         else
@@ -725,7 +725,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
     else if (tFieldMoveId <= 7 && FlagGet(FLAG_BADGE01_GET + tFieldMoveId) != TRUE)
     {
         // can't use a field HM move without a proper badge
-        MenuZeroFillWindowRect(19, 0, 29, 19);
+        Menu_EraseWindowRect(19, 0, 29, 19);
         sub_806D5A4();
         sub_806E834(gOtherText_CantBeUsedBadge, 1);
         gTasks[taskID].func = sub_808AAF0;
@@ -745,7 +745,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
         }
         else
         {
-            MenuZeroFillWindowRect(19, 0, 29, 19);
+            Menu_EraseWindowRect(19, 0, 29, 19);
             if (IS_SURF(tFieldMoveId) && TestPlayerAvatarFlags(8))
                 PrintPartyMenuPromptText(8, 0);
             else
@@ -759,7 +759,7 @@ static void sub_808AAF0(u8 taskID)
 {
     if (gUnknown_0202E8F6 != 1 && (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON))
     {
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         PokemonMenu_Cancel(taskID);
     }
 }
@@ -798,7 +798,7 @@ static void sub_808ABF4(u8 taskID)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
-        MenuZeroFillWindowRect(1, 17, 28, 18);
+        Menu_EraseWindowRect(1, 17, 28, 18);
         PokemonMenu_Cancel(taskID);
     }
 }

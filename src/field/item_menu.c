@@ -1062,7 +1062,7 @@ void sub_80A4164(u8 *dest, u16 value, enum StringConvertMode mode, u8 digits)
 void sub_80A418C(u16 value, enum StringConvertMode mode, u8 c, u8 d, u8 digits)
 {
     sub_80A4164(gStringVar1, value, mode, digits);
-    MenuPrint(gStringVar1, c, d);
+    Menu_PrintText(gStringVar1, c, d);
 }
 
 static void sub_80A41D4(u8 taskId)
@@ -1112,7 +1112,7 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
             return TRUE;
         r5 = itemPos * 2 + 2;
         sub_8072C74(gStringVar1, gOtherText_CloseBag, 0x78, 0);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
         ptr = gBGTilemapBuffers[2] + 14 + r5 * 32;
         ptr[0] = 0x4F;
         ptr[1] = 0x4F;
@@ -1121,9 +1121,9 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
         if (itemPos == 7)
             return TRUE;
         if ((b == 1 && r8->unk2 != 0) || b == 2)
-            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 13);
+            Menu_BlankWindowRect(14, r5 + 2, 29, 13);
         else
-            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 17);
+            Menu_BlankWindowRect(14, r5 + 2, 29, 17);
         return TRUE;
     }
     return FALSE;
@@ -1148,7 +1148,7 @@ static void sub_80A4380(u16 a, int b, int c, int d)
         text = sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x66, 0);
         *text++ = CHAR_MULT_SIGN;
         sub_8072C14(text, gCurrentBagPocketItemSlots[r4].quantity, 0x78, 1);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
     }
 }
 
@@ -1173,7 +1173,7 @@ static void sub_80A444C(u16 a, int b, int c, int d)
 #else
         sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x63, 0);
 #endif
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
         if (gUnknown_02038558 != 0)
         {
             if (gCurrentBagPocketItemSlots[r4].itemId == gSaveBlock1.registeredItem)
@@ -1240,7 +1240,7 @@ static void sub_80A4548(u16 a, int b, int c, int d)
             moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[r4].itemId)];
             sub_8072C74(text, moveName, 0x78, 0);
         }
-        MenuPrint(gStringVar1, 14, sp10);
+        Menu_PrintText(gStringVar1, 14, sp10);
     }
 }
 #else
@@ -1421,7 +1421,7 @@ _080A46AE:\n\
     ldr r0, _080A46F8 @ =gStringVar1\n\
     movs r1, 0xE\n\
     ldr r2, [sp, 0x10]\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     mov r0, r8\n\
     adds r0, 0x1\n\
     lsls r0, 24\n\
@@ -1482,7 +1482,7 @@ static void sub_80A46FC(u16 a, int b, int c, int d)
         text = sub_80A425C(a, text, i);
         CopyItemName(gCurrentBagPocketItemSlots[r4].itemId, gStringVar2);
         sub_80A41E0(text, gCurrentBagPocketItemSlots[r4].itemId - 0x84, gStringVar2, gCurrentBagPocketItemSlots[r4].quantity, 3);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
     }
 }
 
@@ -1540,7 +1540,7 @@ static void ItemListMenu_InitDescription(s16 itemId)
     }
 
     if (r5 < 3)
-        MenuZeroFillWindowRect(0, 13 + r5 * 2, 13, 20);
+        Menu_EraseWindowRect(0, 13 + r5 * 2, 13, 20);
 }
 
 static void ItemListMenu_ChangeDescription(s16 itemId, int b)
@@ -1551,7 +1551,7 @@ static void ItemListMenu_ChangeDescription(s16 itemId, int b)
     {
         if (b == 0)
         {
-            MenuZeroFillWindowRect(0, 13, 13, 20);
+            Menu_EraseWindowRect(0, 13, 13, 20);
             MenuPrint_PixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
         }
         else if (b == 1)
@@ -1562,7 +1562,7 @@ static void ItemListMenu_ChangeDescription(s16 itemId, int b)
     else
     {
         if (b == 0)
-            MenuZeroFillWindowRect(0, 13, 13, 20);
+            Menu_EraseWindowRect(0, 13, 13, 20);
         if (ItemId_CopyDescription(description, itemId, b))
             MenuPrint_PixelCoords(description, 4, 104 + b * 16, 0);
     }
@@ -1602,7 +1602,7 @@ static void sub_80A4A98(const u8 *text, u32 line)
     u8 buffer[100];
 
     if (line == 0)
-        MenuZeroFillWindowRect(0, 13, 13, 20);
+        Menu_EraseWindowRect(0, 13, 13, 20);
     if (CopyTextLine(buffer, text, line))
         MenuPrint_PixelCoords(buffer, 4, 104 + line * 16, 0);
 }
@@ -1618,7 +1618,7 @@ static void sub_80A4ADC(u8 taskId)
 static void sub_80A4B14(s8 a, u8 b)
 {
     gBagPocketScrollStates[sCurrentBagPocket].scrollTop += a;
-    MoveMenuCursor(0);
+    Menu_MoveCursor(0);
     sub_80A73C0();
     sub_80A763C();
     sub_80A4ADC(b);
@@ -1626,7 +1626,7 @@ static void sub_80A4B14(s8 a, u8 b)
 
 static void sub_80A4B58(s8 delta, u8 b)
 {
-    gBagPocketScrollStates[sCurrentBagPocket].cursorPos = MoveMenuCursor(delta);
+    gBagPocketScrollStates[sCurrentBagPocket].cursorPos = Menu_MoveCursor(delta);
     sub_80A73C0();
     sub_80A4ADC(b);
 }
@@ -1649,7 +1649,7 @@ static void sub_80A4BF0(u16 *a)
 
     if (gUnknown_02038564 == 4)
     {
-        MenuDrawTextWindow(0, 7, 13, 12);
+        Menu_DrawStdWindowFrame(0, 7, 13, 12);
         sub_80A4008(a, 1, 8, 12, 4);
         if (sub_80F9344() == TRUE && sReturnLocation == RETURN_TO_FIELD_5)
         {
@@ -1665,7 +1665,7 @@ static void sub_80A4BF0(u16 *a)
                     text = sub_80A4B90(gSpecialVar_ItemId);
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[i]].text;
-                MenuPrint(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
+                Menu_PrintText(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
             }
         }
         if (sReturnLocation == RETURN_TO_FIELD_5)
@@ -1676,10 +1676,10 @@ static void sub_80A4BF0(u16 *a)
     }
     else
     {
-        MenuDrawTextWindow(0, 5, 13, 12);
+        Menu_DrawStdWindowFrame(0, 5, 13, 12);
         sub_80A4008(a, 1, 6, 12, 6);
         for (i = 0; i < gUnknown_02038564; i++)
-            MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[i]].text, 1 + (i / 3) * 6, 6 + (i % 3) * 2);
+            Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[i]].text, 1 + (i / 3) * 6, 6 + (i % 3) * 2);
         InitMenu(0, 1, 6, gUnknown_02038564, 0, 1);
         sub_8072DCC(0x2F);
     }
@@ -1690,7 +1690,7 @@ static void sub_80A4DA4(u16 *a)
 {
     sub_80A73FC();
     sub_80A36B8(a, 0, 6, 13, 6);
-    MenuZeroFillWindowRect(0, 5, 13, 12);
+    Menu_EraseWindowRect(0, 5, 13, 12);
     sub_80A7590();
 }
 
@@ -1699,7 +1699,7 @@ static void sub_80A4DD8(u8 taskId, u8 b, u8 c, u8 d, u8 e, u8 digits)
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = b + 2;
     gTasks[taskId].data[3] = c + 1;
-    MenuDrawTextWindow(b, c, b + d, c + e);
+    Menu_DrawStdWindowFrame(b, c, b + d, c + e);
     sub_80A4008(gBGTilemapBuffers[1], b + 1, c + 1, d - 1, e - 1);
     sub_80A418C(1, 1, b + 2, c + 1, digits);
 }
@@ -2539,7 +2539,7 @@ static void sub_80A57C4(void)
         r5 = 7;
     }
     sub_80A4008(gBGTilemapBuffers[1], 7, r5 + 1, 6, gUnknown_02038564 * 2);
-    MenuDrawTextWindow(6, r5, 13, gUnknown_02038564 * 2 + 1 + r5);
+    Menu_DrawStdWindowFrame(6, r5, 13, gUnknown_02038564 * 2 + 1 + r5);
     sub_80A7834(0, r5);
     InitMenu(0, 7, r5 + 1, gUnknown_02038564, 0, 6);
 }
@@ -2553,7 +2553,7 @@ static void sub_80A5888(u8 taskId)
             if (sPopupMenuSelection != 0)
             {
                 PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor(-1);
+                sPopupMenuSelection = Menu_MoveCursor(-1);
             }
         }
         else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
@@ -2561,7 +2561,7 @@ static void sub_80A5888(u8 taskId)
             if (sPopupMenuSelection != gUnknown_02038564 - 1)
             {
                 PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor(1);
+                sPopupMenuSelection = Menu_MoveCursor(1);
             }
         }
         else if (gMain.newKeys & A_BUTTON)
@@ -2690,14 +2690,14 @@ static void sub_80A5C24(u8 taskId)
 void CleanUpItemMenuMessage(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    MenuZeroFillWindowRect(7, 7, 13, 12);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(7, 7, 13, 12);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A5C24;
 }
 
 void CleanUpOverworldMessage(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 13, 29, 19);
+    Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
     sub_8064E2C();
     ScriptContext2_Disable();
@@ -2760,7 +2760,7 @@ static void sub_80A5DA0(u16 itemId, u16 quantity)
 static void sub_80A5DF8(void)
 {
     sub_80A4DA4(gBGTilemapBuffers[1]);
-    MenuZeroFillWindowRect(7, 6, 11, 13);
+    Menu_EraseWindowRect(7, 6, 11, 13);
     sub_80A7528(4);
 }
 
@@ -2857,7 +2857,7 @@ static void sub_80A6024(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskId].func = sub_80A6000;
     }
 }
@@ -3008,7 +3008,7 @@ static void sub_80A640C(u8 taskId)
 static void sub_80A6444(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A640C;
 }
 
@@ -3016,7 +3016,7 @@ static void sub_80A648C(u8 taskId)
 {
     gTasks[taskId].func = Task_BuyHowManyDialogueHandleInput;
     sub_80A4008(gBGTilemapBuffers[1], 1, 11, 12, 2);
-    MenuDrawTextWindow(0, 10, 13, 13);
+    Menu_DrawStdWindowFrame(0, 10, 13, 13);
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = 1;
     gTasks[taskId].data[3] = 11;
@@ -3053,7 +3053,7 @@ static void sub_80A6574(u8 taskId)
 
 static void sub_80A65AC(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 12);
+    Menu_EraseWindowRect(7, 6, 13, 12);
     sub_80A36B8(gBGTilemapBuffers[1], 7, 6, 6, 6);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gOtherText_SoldItem);
@@ -3063,7 +3063,7 @@ static void sub_80A65AC(u8 taskId)
 
 static void sub_80A6618(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 12);
+    Menu_EraseWindowRect(7, 6, 13, 12);
     sub_80A36B8(gBGTilemapBuffers[1], 7, 6, 6, 6);
     BuyMenuPrintItemQuantityAndPrice(taskId);
 }
@@ -3078,13 +3078,13 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 {
     if (sub_80A5350(taskId) == TRUE)
     {
-        MenuZeroFillWindowRect(6, 11, 12, 11);
+        Menu_EraseWindowRect(6, 11, 12, 11);
         BuyMenuDisplayMessage(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(0, 10, 13, 13);
+        Menu_EraseWindowRect(0, 10, 13, 13);
         sub_80A36B8(gBGTilemapBuffers[1], 0, 10, 13, 3);
         ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(gSpecialVar_ItemId) / 2 * gTasks[taskId].data[1], STR_CONV_MODE_LEFT_ALIGN, 6);
         StringExpandPlaceholders(gStringVar4, gOtherText_CanPay);
@@ -3110,8 +3110,8 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
     CloseMoneyWindow(0, 0);
-    MenuZeroFillWindowRect(0, 4, 13, 13);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 4, 13, 13);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A6760;
 }
 
@@ -3229,7 +3229,7 @@ static void sub_80A6A84(u8 taskId)
     sub_80A4DA4(gBGTilemapBuffers[1]);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, taskData[1], STR_CONV_MODE_LEFT_ALIGN, 3);
-    MenuZeroFillWindowRect(7, 6, 11, 13);
+    Menu_EraseWindowRect(7, 6, 11, 13);
     sub_80A7528(7);
     sub_80A3D5C(taskId);
     gTasks[taskId].func = sub_80A5E1C;
@@ -3361,16 +3361,16 @@ static void sub_80A6DF0(u16 *a)
 {
     u8 r6 = (gUnknown_02038564 - 1) * 2;
 
-    MenuDrawTextWindow(7, 9 - r6, 13, 12);
+    Menu_DrawStdWindowFrame(7, 9 - r6, 13, 12);
     sub_80A4008(a, 8, 10 - r6, 5, r6 + 2);
     if (gUnknown_02038564 == 1)
     {
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 10);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 10);
     }
     else
     {
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 8);
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[1]].text, 8, 10);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 8);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[1]].text, 8, 10);
     }
     InitMenu(0, 8, 10 - r6, gUnknown_02038564, 0, 5);
     sub_80A7528(2);
@@ -3383,7 +3383,7 @@ static void sub_80A6EB8(u8 taskId)
         if (sPopupMenuSelection == 1)
         {
             PlaySE(SE_SELECT);
-            sPopupMenuSelection = MoveMenuCursor(-1);
+            sPopupMenuSelection = Menu_MoveCursor(-1);
         }
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
@@ -3391,7 +3391,7 @@ static void sub_80A6EB8(u8 taskId)
         if (sPopupMenuSelection + 1 < gUnknown_02038564)
         {
             PlaySE(SE_SELECT);
-            sPopupMenuSelection = MoveMenuCursor(1);
+            sPopupMenuSelection = Menu_MoveCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
@@ -3669,7 +3669,7 @@ static void sub_80A756C(void)
 
 static void sub_80A7590(void)
 {
-    MenuZeroFillWindowRect(0, 13, 13, 20);
+    Menu_EraseWindowRect(0, 13, 13, 20);
     sub_80A756C();
 }
 
@@ -3748,7 +3748,7 @@ static void sub_80A7694(void)
 
 static void sub_80A76A0(void)
 {
-    MenuZeroFillWindowRect(14, 2, 29, 18);
+    Menu_EraseWindowRect(14, 2, 29, 18);
     sub_80A7678();
 }
 
@@ -3816,7 +3816,7 @@ static void sub_80A7768(void)
                 const u8 *text = sItemPopupMenuActions[sPopupMenuActionList[r4->unk1 - 1]].text;
                 int var = r4->unk1 - 1;
 
-                MenuPrint(text, 7, var * 2 + 1 + r4->unk3);
+                Menu_PrintText(text, 7, var * 2 + 1 + r4->unk3);
             }
             else
             {
@@ -3828,7 +3828,7 @@ static void sub_80A7768(void)
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[r4->unk1 - 1]].text;
                 var = r4->unk1 - 1;
-                MenuPrint(text, (var >> 1) * 6 + 1, (var & 1) * 2 + 8);
+                Menu_PrintText(text, (var >> 1) * 6 + 1, (var & 1) * 2 + 8);
             }
             if (r4->unk1 == gUnknown_02038564)
             {

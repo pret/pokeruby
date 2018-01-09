@@ -122,9 +122,9 @@ static void CB2_SaveFailedScreen(void)
         LoadPalette(&gSaveFailedClockPal, 0x100, sizeof(gSaveFailedClockPal));
         SetUpWindowConfig(&gWindowConfig_81E6C3C);
         InitMenuWindow(&gWindowConfig_81E6CE4);
-        MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19); // message window
-        MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
+        Menu_DrawStdWindowFrame(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
+        Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19); // message window
+        Menu_PrintText(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
         ime = REG_IME;
         REG_IME = 0;
@@ -158,22 +158,22 @@ static void CB2_WipeSave(void)
     {
         if (WipeSectors(gDamagedSaveSectors) != FALSE)
         {
-            MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-            MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
+            Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
+            Menu_PrintText(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
             SetMainCallback2(CB2_GameplayCannotBeContinued);
             return;
         }
 
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-        MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
+        Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
+        Menu_PrintText(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
         HandleSavingData(gSaveFailedType);
 
         if (gDamagedSaveSectors != 0)
         {
 #ifdef BUGFIX_SAVEFAILEDSCREEN2
-            MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+            Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
 #endif
-            MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
+            Menu_PrintText(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
         }
 
         wipeTries++;
@@ -181,19 +181,19 @@ static void CB2_WipeSave(void)
 
     if (wipeTries == 3)
     {
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-        MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
+        Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
+        Menu_PrintText(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
         SetMainCallback2(CB2_FadeAndReturnToTitleScreen); // called again below
     }
     else
     {
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+        Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
 
         // no callback exists, so the game cannot continue.
         if (gGameContinueCallback == 0)
-            MenuPrint(gSystemText_SaveCompletedGameEnd, 2, MSG_WIN_TOP + 1);
+            Menu_PrintText(gSystemText_SaveCompletedGameEnd, 2, MSG_WIN_TOP + 1);
         else // callback exists, so continue
-            MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
+            Menu_PrintText(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
     }
 
     SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
@@ -205,8 +205,8 @@ static void CB2_GameplayCannotBeContinued(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-        MenuPrint(gSystemText_GameplayEnded, 2, MSG_WIN_TOP + 1);
+        Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
+        Menu_PrintText(gSystemText_GameplayEnded, 2, MSG_WIN_TOP + 1);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
     }

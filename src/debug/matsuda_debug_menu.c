@@ -247,8 +247,8 @@ static const struct OamData gUnknown_083C9400 =
 
 u8 unref_sub_80A9B28(void)
 {
-    MenuZeroFillScreen();
-    MenuDrawTextWindow(0, 0, 17, 18);
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 17, 18);
     PrintMenuItems(1, 1, 7, gMatsudaDebugMenuActions);
     InitMenu(0, 1, 1, 7, 0, 16);
     gCallback_03004AE8 = sub_80A9B78;
@@ -257,7 +257,7 @@ u8 unref_sub_80A9B28(void)
 
 static bool8 sub_80A9B78(void)
 {
-    s8 choice = ProcessMenuInput();
+    s8 choice = Menu_ProcessInput();
 
     switch (choice)
     {
@@ -450,7 +450,7 @@ static void sub_80A9F50(void)
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP;
     REG_DISPCNT |= DISPCNT_OBJ_ON | DISPCNT_BG0_ON;
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitWindowFromConfig(&gMenuWindow, &gWindowConfig_81E6C3C);
+    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowConfig_81E6C3C);
     REG_MOSAIC = 0;
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
@@ -546,7 +546,7 @@ static void sub_80AA10C(void)
 
     for (i = 0; i < 6; i++)
     {
-        sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i],
+        Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenuTextList1[i],
             (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0],
             gMatsudaDebugMenuContestTopLeft[i][1]);
     }
@@ -555,8 +555,8 @@ static void sub_80AA10C(void)
     zero = 0; // it's possible this was some assignment that matsuda used to quickly edit and test things without changing whats passed to the later functions.
     sub_80AA5BC(zero);
     sub_80AA5E8(gSpecialVar_ContestRank);
-    sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
-    sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
     LoadSpriteSheet(gUnknown_083C92B4);
     LoadSpritePalette(gUnknown_083C92BC);
     sub_80AA280(3);
@@ -580,64 +580,64 @@ void sub_80AA280(u8 var) // no?
     for (i = 0; i < 4; i++)
     {
         if (var == i)
-            sub_8003460(&gMenuWindow, gSharedMem, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+            Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
         else
-            sub_8003460(&gMenuWindow, gContestMons[i].trainerName, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+            Text_InitWindowAndPrintText(&gMenuWindow, gContestMons[i].trainerName, 10 * i + 2, gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
     }
 }
 
 static void sub_80AA340(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
 }
 
 static void sub_80AA388(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
 }
 
 static void sub_80AA3D0(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
 }
 
 static void sub_80AA418(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
 }
 
 static void sub_80AA460(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
 }
 
 static void sub_80AA4A8(u8 var)
 {
     ConvertIntToDecimalStringN(gSharedMem, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
 }
 
 static void sub_80AA4F0(u8 var1, u8 var2)
 {
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1], gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1] + 1);
-    sub_8003460(&gMenuWindow, gMoveNames[gContestMons[var1].moves[var2]], 0x8A + var2 * 14, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMoveNames[gContestMons[var1].moves[var2]], 0x8A + var2 * 14, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1]);
     ConvertIntToDecimalStringN(gStringVar1, gContestMons[var1].moves[var2], STR_CONV_MODE_LEADING_ZEROS, 3);
-    sub_8003460(&gMenuWindow, gStringVar1, 0xFA + var2 * 6, gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1]);
+    Text_InitWindowAndPrintText(&gMenuWindow, gStringVar1, 0xFA + var2 * 6, gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1]);
 }
 
 static void sub_80AA5BC(u8 var)
 {
-    sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList2[var], 0xC2, 3, 0x12);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenuTextList2[var], 0xC2, 3, 0x12);
 }
 
 void sub_80AA5E8(u8 var)
 {
-    sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList3[var], 0xE8, 3, 4);
+    Text_InitWindowAndPrintText(&gMenuWindow, gMatsudaDebugMenuTextList3[var], 0xE8, 3, 4);
 }
 
 static void sub_80AA614(u8 var1, u8 var2)
@@ -645,7 +645,7 @@ static void sub_80AA614(u8 var1, u8 var2)
     u16 var = sub_80AE770(var1, var2);
 
     ConvertIntToDecimalStringN(gSharedMem, var, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    sub_8003460(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
+    Text_InitWindowAndPrintText(&gMenuWindow, gSharedMem, 0xE2, 3, 0xC);
 }
 
 void sub_80AA658(u8 var)
@@ -1076,9 +1076,9 @@ void unref_sub_80AB084(u8 *text)
         }
     }
     SetUpWindowConfig(&gWindowConfig_81E6FD8);
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6FD8);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowConfig_81E6FD8);
     LoadFontDefaultPalette(&gWindowConfig_81E6FD8);
-    sub_8003460(&gUnknown_03004210, text, 1, 9, 7);
+    Text_InitWindowAndPrintText(&gUnknown_03004210, text, 1, 9, 7);
 }
 
 void sub_80AB184(void)

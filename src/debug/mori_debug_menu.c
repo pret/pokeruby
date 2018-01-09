@@ -95,9 +95,9 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
     StringAppend(localPtr, gUnknown_0839B24D);
     StringAppend(localPtr, gSpeciesNames[eggSpecies]);
     StringAppend(localPtr, gUnknown_0839B255);
-    MenuZeroFillScreen();
-    MenuDrawTextWindow(0, 14, 30, 19);
-    MenuPrint(localPtr, 1, 15);
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 14, 30, 19);
+    Menu_PrintText(localPtr, 1, 15);
     gCallback_03004AE8 = sub_8083D4C;
     return 0;
 }
@@ -179,7 +179,7 @@ u8 MoriDebugMenu_PokeblockCase(void)
 
 bool8 MoriDebugMenuProcessInput(void)
 {
-    s8 choice = ProcessMenuInput();
+    s8 choice = Menu_ProcessInput();
 
     switch (choice)
     {
@@ -196,8 +196,8 @@ bool8 MoriDebugMenuProcessInput(void)
 
 s8 InitMoriDebugMenu(void)
 {
-    MenuZeroFillScreen();
-    MenuDrawTextWindow(0, 0, 10, 19);
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 10, 19);
     PrintMenuItems(1, 1, 9, gMoriDebugMenuActions);
     InitMenu(0, 1, 1, 9, 0, 9);
     gCallback_03004AE8 = MoriDebugMenuProcessInput;

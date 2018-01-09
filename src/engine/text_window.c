@@ -4,19 +4,22 @@
 #include "palette.h"
 #include "text.h"
 
-#define STD_MSG_BOX_LEFT    0
-#define STD_MSG_BOX_TOP    14
-#define STD_MSG_BOX_WIDTH  26
-#define STD_MSG_BOX_HEIGHT  4
+#define STD_WINDOW_PALETTE_NUM 14
+
+// Dimensions (in tiles) of a field dialogue frame
+#define STD_DLG_FRAME_LEFT    0
+#define STD_DLG_FRAME_TOP    14
+#define STD_DLG_FRAME_WIDTH  26
+#define STD_DLG_FRAME_HEIGHT  4
 
 static void LoadTextWindowTiles(u8, void *);
 static void LoadTextWindowPalette(u8, u8);
-static void DrawTextWindowInternal(u16 *dest, u16 baseTileNum, u8 left, u8 top, u8 right, u8 bottom);
-static u16 GetMessageBoxTilemapEntry(u16 tilemapEntry, u8 x, u8 y, u8 width, u8 height);
-static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 height);
+static void DrawStandardFrame(u16 *dest, u16 baseTileNum, u8 left, u8 top, u8 right, u8 bottom);
+static u16 GetDialogueFrameTilemapEntry(u16 tilemapEntry, u8 x, u8 y, u8 width, u8 height);
+static void DrawDialogueFrame(struct Window *win, u8 left, u8 top, u8 width, u8 height);
 
 static u16 sTextWindowBaseTileNum;
-static u16 sMessageBoxBaseTileNum;
+static u16 sDialogueFrameBaseTileNum;
 
 extern const u8 gTextWindowFrame1_Gfx[];
 extern const u8 gTextWindowFrame2_Gfx[];
@@ -60,9 +63,9 @@ extern const u16 gTextWindowFrame18_Pal[];
 extern const u16 gTextWindowFrame19_Pal[];
 extern const u16 gTextWindowFrame20_Pal[];
 
-extern const u8 gMessageBox_Gfx[];
+extern const u8 gDialogueFrame_Gfx[];
 
-static const struct FrameGraphics gUnknown_083761F0[20] =
+static const struct FrameGraphics sTextWindowFrameGraphics[20] =
 {
     {gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal},
     {gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal},
@@ -86,7 +89,7 @@ static const struct FrameGraphics gUnknown_083761F0[20] =
     {gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal},
 };
 
-static const u16 gMessageBoxTilemap[5][7] =
+static const u16 sDialogueFrameTilemap[5][7] =
 {
     {1,      3,      4,      4,      5,      6,      9},
     {11,     9,      9,      9,      9,      0x040B, 9},
@@ -95,113 +98,124 @@ static const u16 gMessageBoxTilemap[5][7] =
     {0x0801, 0x0803, 0x0804, 0x0804, 0x0805, 0x0806, 9},
 };
 
-u16 SetTextWindowBaseTileNum(u16 baseTileNum)
+u16 TextWindow_SetBaseTileNum(u16 baseTileNum)
 {
     sTextWindowBaseTileNum = baseTileNum;
     return baseTileNum + 9;
 }
 
-void LoadTextWindowGraphics(struct Window *win)
+// Loads the tiles and palette of the window frame into VRAM using the selected frame type
+void TextWindow_LoadStdFrameGraphics(struct Window *win)
 {
-    u8 *tileData = win->config->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
+    u8 *tileData = win->template->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
     LoadTextWindowTiles(gSaveBlock2.optionsWindowFrameType, tileData);
-    LoadTextWindowPalette(gSaveBlock2.optionsWindowFrameType, 0xE);
+    LoadTextWindowPalette(gSaveBlock2.optionsWindowFrameType, STD_WINDOW_PALETTE_NUM);
 }
 
-void LoadTextWindowGraphics_OverridePalSlot(struct Window *win, u8 palSlot)
+// Loads the tiles and palette of the window frame into VRAM with an alternate palette
+void TextWindow_LoadStdFrameGraphicsOverridePal(struct Window *win, u8 palSlot)
 {
-    u8 *tileData = win->config->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
+    u8 *tileData = win->template->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
     LoadTextWindowTiles(gSaveBlock2.optionsWindowFrameType, tileData);
     LoadTextWindowPalette(gSaveBlock2.optionsWindowFrameType, palSlot);
 }
 
-void LoadTextWindowGraphics_OverrideFrameType(struct Window *win, u8 frameType)
+// Loads the tiles and palette of the window frame into VRAM with an alternate frame type
+void TextWindow_LoadStdFrameGraphicsOverrideStyle(struct Window *win, u8 frameType)
 {
-    u8 *tileData = win->config->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
+    u8 *tileData = win->template->tileData + TILE_SIZE_4BPP * sTextWindowBaseTileNum;
     LoadTextWindowTiles(frameType, tileData);
-    LoadTextWindowPalette(frameType, 0xE);
+    LoadTextWindowPalette(frameType, STD_WINDOW_PALETTE_NUM);
 }
 
-void DrawTextWindow(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
+void TextWindow_DrawStdFrame(struct Window *win, u8 left, u8 top, u8 right, u8 bottom)
 {
-    DrawTextWindowInternal(win->config->tilemap, sTextWindowBaseTileNum, left, top, right, bottom);
+    DrawStandardFrame(win->template->tilemap, sTextWindowBaseTileNum, left, top, right, bottom);
 }
 
-const struct FrameGraphics *GetTextWindowFrameGraphics(u8 frameType)
+// Returns the tile data and palette for the specified frame type
+const struct FrameGraphics *TextWindow_GetFrameGraphics(u8 frameType)
 {
     if (frameType > 19)
-        return &gUnknown_083761F0[0];
+        return &sTextWindowFrameGraphics[0];
     else
-        return &gUnknown_083761F0[frameType];
+        return &sTextWindowFrameGraphics[frameType];
 }
 
 static void LoadTextWindowTiles(u8 frameType, void *dest)
 {
-    const struct FrameGraphics *frameGraphics = GetTextWindowFrameGraphics(frameType);
+    const struct FrameGraphics *frameGraphics = TextWindow_GetFrameGraphics(frameType);
     CpuFastCopy(frameGraphics->tiles, dest, 9 * TILE_SIZE_4BPP);
 }
 
 static void LoadTextWindowPalette(u8 frameType, u8 palSlot)
 {
-    const struct FrameGraphics *frameGraphics = GetTextWindowFrameGraphics(frameType);
+    const struct FrameGraphics *frameGraphics = TextWindow_GetFrameGraphics(frameType);
     LoadPalette(frameGraphics->palette, 16 * palSlot, 0x20);
 }
 
-static void DrawTextWindowInternal(u16 *dest, u16 baseTileNum, u8 left, u8 top, u8 right, u8 bottom)
+// Draws a standard window frame
+static void DrawStandardFrame(u16 *tilemap, u16 baseTileNum, u8 left, u8 top, u8 right, u8 bottom)
 {
+    u8 startX = min(left, right);
+    u8 endX = max(left, right);
+    u8 startY = min(top, bottom);
+    u8 endY = max(top, bottom);
     u8 x, y;
-    u8 startX, endX;
-    u8 startY, endY;
 
-    startX = (left < right) ? left : right;
-    endX = (right > left) ? right : left;
+    // top left corner
+    tilemap[32 * startY + startX] = baseTileNum | (STD_WINDOW_PALETTE_NUM << 12);
 
-    startY = (top < bottom) ? top : bottom;
-    endY = (bottom > top) ? bottom : top;
-
-    dest[32 * startY + startX] = baseTileNum | 0xE000;
-
+    // top border
     for (x = startX + 1; x < endX; x++)
-        dest[32 * startY + x] = (baseTileNum + 1) | 0xE000;
+        tilemap[32 * startY + x] = (baseTileNum + 1) | (STD_WINDOW_PALETTE_NUM << 12);
 
-    dest[32 * startY + endX] = (baseTileNum + 2) | 0xE000;
+    // top right corner
+    tilemap[32 * startY + endX] = (baseTileNum + 2) | (STD_WINDOW_PALETTE_NUM << 12);
 
     for (y = startY + 1; y < endY; y++)
     {
-        dest[32 * y + startX] = (baseTileNum + 3) | 0xE000;
+        // left border
+        tilemap[32 * y + startX] = (baseTileNum + 3) | (STD_WINDOW_PALETTE_NUM << 12);
 
+        // middle
         for (x = startX + 1; x < endX; x++)
-            dest[32 * y + x] = (baseTileNum + 4) | 0xE000;
+            tilemap[32 * y + x] = (baseTileNum + 4) | (STD_WINDOW_PALETTE_NUM << 12);
 
-        dest[32 * y + endX] = (baseTileNum + 5) | 0xE000;
+        // right border
+        tilemap[32 * y + endX] = (baseTileNum + 5) | (STD_WINDOW_PALETTE_NUM << 12);
     }
 
-    dest[32 * endY + startX] = (baseTileNum + 6) | 0xE000;
+    // bottom left corner
+    tilemap[32 * endY + startX] = (baseTileNum + 6) | (STD_WINDOW_PALETTE_NUM << 12);
 
+    // bottom border
     for (x = startX + 1; x < endX; x++)
-        dest[32 * endY + x] = (baseTileNum + 7) | 0xE000;
+        tilemap[32 * endY + x] = (baseTileNum + 7) | (STD_WINDOW_PALETTE_NUM << 12);
 
-    dest[32 * endY + endX] = (baseTileNum + 8) | 0xE000;
+    // bottom right corner
+    tilemap[32 * endY + endX] = (baseTileNum + 8) | (STD_WINDOW_PALETTE_NUM << 12);
 }
 
-u16 SetMessageBoxBaseTileNum(u16 baseTileNum)
+u16 TextWindow_SetDlgFrameBaseTileNum(u16 baseTileNum)
 {
-    sMessageBoxBaseTileNum = baseTileNum;
+    sDialogueFrameBaseTileNum = baseTileNum;
     return baseTileNum + 14;
 }
 
 void unref_sub_80651DC(struct Window *win, u8 *text)
 {
-    sub_8002EB0(win, text, sMessageBoxBaseTileNum + 14, 2, 15);
+    Text_InitWindow8002EB0(win, text, sDialogueFrameBaseTileNum + 14, 2, 15);
 }
 
-void DisplayMessageBox(struct Window *win)
+// Loads and draws a dialogue window frame
+void TextWindow_DisplayDialogueFrame(struct Window *win)
 {
-    LoadMessageBoxTiles(win);
-    DrawStandardMessageBox(win);
+    TextWindow_LoadDialogueFrameTiles(win);
+    TextWindow_DrawDialogueFrame(win);
 }
 
-static u16 GetMessageBoxTilemapEntry(u16 baseTilemapEntry, u8 x, u8 y, u8 width, u8 height)
+static u16 GetDialogueFrameTilemapEntry(u16 baseTilemapEntry, u8 x, u8 y, u8 width, u8 height)
 {
     u16 tilemapEntry = 9;
 
@@ -215,42 +229,47 @@ static u16 GetMessageBoxTilemapEntry(u16 baseTilemapEntry, u8 x, u8 y, u8 width,
     else if (x > 2)
         x = 3;
 
-    if (x <= 6 && y <= 4)
-        tilemapEntry = gMessageBoxTilemap[y][x];
+    if (x < 7 && y < 5)
+        tilemapEntry = sDialogueFrameTilemap[y][x];
 
     tilemapEntry += baseTilemapEntry;
 
     return tilemapEntry;
 }
 
-static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 height)
+static void DrawDialogueFrame(struct Window *win, u8 left, u8 top, u8 width, u8 height)
 {
-    u8 i, j;
-    u16 tilemapEntry = (win->paletteNum << 12) | sMessageBoxBaseTileNum;
-    u16 *tilemap = win->config->tilemap;
+    u8 x, y;
+    u16 baseTilemapEntry = (win->paletteNum << 12) | sDialogueFrameBaseTileNum;
+    u16 *tilemap = win->template->tilemap;
 
-    for (i = 0; i < height + 2; i++)
-        for (j = 0; j < width + 6; j++)
-            tilemap[(left + j) + 32 * (top + i)] = (win->paletteNum << 12) | GetMessageBoxTilemapEntry(tilemapEntry, j, i, width, height);
+    for (y = 0; y < height + 2; y++)
+    {
+        for (x = 0; x < width + 6; x++)
+            tilemap[(left + x) + 32 * (top + y)] = (win->paletteNum << 12) | GetDialogueFrameTilemapEntry(baseTilemapEntry, x, y, width, height);
+    }
 }
 
-void DrawStandardMessageBox(struct Window *win)
+// Draws an alternate styled frame used for dialogue windows that appear on the overworld
+void TextWindow_DrawDialogueFrame(struct Window *win)
 {
-    DrawMessageBox(win, STD_MSG_BOX_LEFT, STD_MSG_BOX_TOP, STD_MSG_BOX_WIDTH, STD_MSG_BOX_HEIGHT);
+    DrawDialogueFrame(win, STD_DLG_FRAME_LEFT, STD_DLG_FRAME_TOP, STD_DLG_FRAME_WIDTH, STD_DLG_FRAME_HEIGHT);
 }
 
-void LoadMessageBoxTiles(struct Window *win)
+// Loads the dialogue window frame tiles into VRAM
+void TextWindow_LoadDialogueFrameTiles(struct Window *win)
 {
-    u8 *tileData = win->config->tileData;
-    CpuFastCopy(gMessageBox_Gfx, tileData + 32 * sMessageBoxBaseTileNum, 14 * TILE_SIZE_4BPP);
+    u8 *tileData = win->template->tileData;
+    CpuFastCopy(gDialogueFrame_Gfx, tileData + 32 * sDialogueFrameBaseTileNum, 14 * TILE_SIZE_4BPP);
 }
 
-void ClearStandardMessageBox(struct Window *win)
+// Erases a dialogue window frame
+void TextWindow_EraseDialogueFrame(struct Window *win)
 {
     u8 i;
-    u16 *tilemap = win->config->tilemap + (STD_MSG_BOX_TOP * 32);
+    u16 *tilemap = win->template->tilemap + (STD_DLG_FRAME_TOP * 32);
     u16 tilemapEntry = win->paletteNum << 12;
 
-    for (i = 0; i < ((STD_MSG_BOX_HEIGHT + 2) * 32); i++)
+    for (i = 0; i < ((STD_DLG_FRAME_HEIGHT + 2) * 32); i++)
         tilemap[i] = tilemapEntry;
 }

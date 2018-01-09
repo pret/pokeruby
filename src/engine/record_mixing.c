@@ -146,8 +146,8 @@ void Task_RecordMixing_Main(u8 taskId)
         {
             tState = 4;
             data[10] = sub_8083664();
-            sub_80720B0();
-            MenuPrint(gOtherText_MixingComplete, 2, 15);
+            Menu_ClearWindowText();
+            Menu_PrintText(gOtherText_MixingComplete, 2, 15);
             data[8] = 0;
         }
         break;
@@ -160,7 +160,7 @@ void Task_RecordMixing_Main(u8 taskId)
         if (!gTasks[data[10]].isActive)
         {
             sub_8055588();
-            MenuZeroFillScreen();
+            Menu_EraseScreen();
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }
@@ -176,8 +176,8 @@ void sub_80B95F0(u8 taskId)
     {
     case 0:
         sub_80B9A78();
-        MenuDisplayMessageBox();
-        MenuPrint(gOtherText_MixingRecordsWithFriend, 2, 15);
+        Menu_DisplayDialogueFrame();
+        Menu_PrintText(gOtherText_MixingRecordsWithFriend, 2, 15);
         task->data[8] = 0x708;
         task->tState = 400;
         ClearLinkCallback_2();

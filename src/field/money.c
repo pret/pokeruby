@@ -143,7 +143,7 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
 
     if (stringWidth >= (size + 1) * 8)
     {
-        MenuPrint(buffer, x, y);
+        Menu_PrintText(buffer, x, y);
     }
     else
     {
@@ -275,7 +275,7 @@ void UpdateMoneyWindow(u32 amount, u8 x, u8 y)
 
 void OpenMoneyWindow(u32 amount, u8 x, u8 y)
 {
-    MenuDrawTextWindow(x, y, x + 13, y + 3);
+    Menu_DrawStdWindowFrame(x, y, x + 13, y + 3);
     UpdateMoneyWindow(amount, x, y);
 
     LoadCompressedObjectPic(gUnknown_083CF584);
@@ -288,7 +288,7 @@ void CloseMoneyWindow(u8 x, u8 y)
 {
     DestroySpriteAndFreeResources(&gSprites[gUnknown_02038734]);
     FreeSpritePaletteByTag(SPRITE_TAG_MONEY);
-    MenuZeroFillWindowRect(x, y, x + 13, y + 3);
+    Menu_EraseWindowRect(x, y, x + 13, y + 3);
 }
 
 bool8 HasEnoughMoneyFor(void)

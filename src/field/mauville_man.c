@@ -345,7 +345,7 @@ void PrepareSongText(void)
 void ScrSpecial_PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     ScriptContext1_Stop();
 }
 
@@ -858,8 +858,8 @@ static void Task_BardSong(u8 taskId)
     {
     case 0:  // Initialize song
         PrepareSongText();
-        InitWindowFromConfig(gMenuWindowPtr, &gWindowConfig_81E6CE4);
-        sub_8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
+        Text_InitWindowWithTemplate(gMenuWindowPtr, &gWindowConfig_81E6CE4);
+        Text_InitWindow8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;
         task->tCharIndex = 0;
@@ -921,7 +921,7 @@ static void Task_BardSong(u8 taskId)
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
         {
-            sub_8003418(gMenuWindowPtr);
+            Text_PrintWindowSimple(gMenuWindowPtr);
             task->tCharIndex++;
             task->tState = 2;
             task->data[2] = 0;
@@ -941,7 +941,7 @@ static void Task_BardSong(u8 taskId)
         else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
         {
             gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
-            sub_8003418(gMenuWindowPtr);
+            Text_PrintWindowSimple(gMenuWindowPtr);
             task->tCharIndex++;
             task->data[2] = 0;
         }
@@ -950,7 +950,7 @@ static void Task_BardSong(u8 taskId)
             switch (task->data[1])
             {
             case 0:
-                sub_8003418(gMenuWindowPtr);
+                Text_PrintWindowSimple(gMenuWindowPtr);
                 task->data[1]++;
                 break;
             case 1:
@@ -1219,7 +1219,7 @@ static void PrintStoryList(void)
 {
     s32 i;
 
-    MenuDrawTextWindow(0, 0, 25, 4 + GetFreeStorySlot() * 2);
+    Menu_DrawStdWindowFrame(0, 0, 25, 4 + GetFreeStorySlot() * 2);
     for (i = 0; i < 4; i++)
     {
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
@@ -1227,9 +1227,9 @@ static void PrintStoryList(void)
 
         if (stat == 0)
             break;
-        MenuPrint(GetStoryTitleByStat(stat), 1, 2 + i * 2);
+        Menu_PrintText(GetStoryTitleByStat(stat), 1, 2 + i * 2);
     }
-    MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
+    Menu_PrintText(gPCText_Cancel, 1, 2 + i * 2);
 }
 
 static u8 gUnknown_03000748;
@@ -1247,7 +1247,7 @@ static void Task_StoryListMenu(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        selection = ProcessMenuInput();
+        selection = Menu_ProcessInput();
         if (selection == -2)
             break;
         if (selection == -1 || selection == GetFreeStorySlot())
@@ -1260,7 +1260,7 @@ static void Task_StoryListMenu(u8 taskId)
             gUnknown_03000748 = selection;
         }
         HandleDestroyMenuCursors();
-        MenuZeroFillWindowRect(0, 0, 25, 12);
+        Menu_EraseWindowRect(0, 0, 25, 12);
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;

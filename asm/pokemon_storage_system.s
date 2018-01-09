@@ -539,7 +539,7 @@ StorageSystemClearMessageWindow: @ 8095EA0
 	movs r1, 0xF
 	movs r2, 0x1B
 	movs r3, 0x12
-	bl MenuFillWindowRectWithBlankTile
+	bl Menu_BlankWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end StorageSystemClearMessageWindow
@@ -578,7 +578,7 @@ _08095EE0:
 _08095EF4:
 	ldrb r0, [r4, 0xA]
 	bl StorageSystemCreatePrimaryMenu
-	bl MenuDisplayMessageBox
+	bl Menu_DisplayDialogueFrame
 	ldr r1, _08095F18 @ =gUnknown_083B600C
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
@@ -588,7 +588,7 @@ _08095EF4:
 	ldr r0, [r0]
 	movs r1, 0x2
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	b _08095F28
 	.align 2, 0
 _08095F18: .4byte gUnknown_083B600C
@@ -604,7 +604,7 @@ _08095F28:
 	strh r0, [r4, 0x8]
 	b _080960F4
 _08095F30:
-	bl ProcessMenuInput
+	bl Menu_ProcessInput
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0xC]
@@ -676,7 +676,7 @@ _08095FA2:
 	ldr r0, [r1]
 	movs r1, 0x2
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	b _080960F4
 	.align 2, 0
 _08095FC0: .4byte gMain
@@ -687,7 +687,7 @@ _08095FC8:
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0x9
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	bl ScriptContext2_Disable
 	bl EnableBothScriptContexts
 	adds r0, r5, 0
@@ -723,7 +723,7 @@ _08096008:
 _08096022:
 	movs r1, 0x2
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	movs r0, 0x3
 	strh r0, [r4, 0x8]
 	b _080960F4
@@ -760,8 +760,8 @@ _08096042:
 _0809606A:
 	movs r0, 0x1
 	negs r0, r0
-	bl MoveMenuCursor
-	bl GetMenuCursorPos
+	bl Menu_MoveCursor
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
@@ -788,8 +788,8 @@ _08096090:
 	strh r2, [r4, 0xA]
 _080960A8:
 	movs r0, 0x1
-	bl MoveMenuCursor
-	bl GetMenuCursorPos
+	bl Menu_MoveCursor
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
@@ -805,7 +805,7 @@ _080960C2:
 	ldr r0, [r0]
 	movs r1, 0x2
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	movs r0, 0x2
 	strh r0, [r4, 0x8]
 	b _080960F4
@@ -892,7 +892,7 @@ StorageSystemCreatePrimaryMenu: @ 8096168
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0x9
-	bl MenuDrawTextWindow
+	bl Menu_DrawStdWindowFrame
 	ldr r3, _080961A4 @ =gUnknown_083B600C
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1854,7 +1854,7 @@ _080968F0: .4byte gWindowConfig_81E6D00
 _080968F4:
 	ldr r0, _08096900 @ =gWindowConfig_81E6D00
 	bl InitMenuWindow
-	bl MenuZeroFillScreen
+	bl Menu_EraseScreen
 	b _0809697A
 	.align 2, 0
 _08096900: .4byte gWindowConfig_81E6D00
@@ -1993,7 +1993,7 @@ _08096A3C: .4byte gWindowConfig_81E6D00
 _08096A40:
 	ldr r0, _08096A4C @ =gWindowConfig_81E6D00
 	bl InitMenuWindow
-	bl MenuZeroFillScreen
+	bl Menu_EraseScreen
 	b _08096AD8
 	.align 2, 0
 _08096A4C: .4byte gWindowConfig_81E6D00
@@ -3370,7 +3370,7 @@ _080975EC:
 	adds r0, 0x1
 	strb r0, [r1, 0x4]
 _08097600:
-	bl ProcessMenuInputNoWrap
+	bl Menu_ProcessInputNoWrap
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4113,7 +4113,7 @@ _08097C18:
 	.align 2, 0
 _08097C28: .4byte gMain
 _08097C2C:
-	bl ProcessMenuInputNoWrap
+	bl Menu_ProcessInputNoWrap
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4247,7 +4247,7 @@ _08097D38:
 	.align 2, 0
 _08097D48: .4byte gMain
 _08097D4C:
-	bl ProcessMenuInputNoWrap
+	bl Menu_ProcessInputNoWrap
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -4940,27 +4940,27 @@ _08098302:
 	movs r1, 0xB
 	movs r2, 0x9
 	movs r3, 0x11
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	ldr r4, _0809834C @ =gSharedMem + 0x127A
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0x10
-	bl MenuPrint
+	bl Menu_PrintText
 	adds r0, r4, 0
 	subs r0, 0x6B
 	movs r1, 0x1
 	movs r2, 0xB
-	bl MenuPrint
+	bl Menu_PrintText
 	adds r0, r4, 0
 	subs r0, 0x46
 	movs r1, 0
 	movs r2, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	subs r4, 0x21
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5657,7 +5657,7 @@ sub_8098A38: @ 8098A38
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5671,12 +5671,12 @@ sub_8098A5C: @ 8098A5C
 	movs r1, 0x10
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	movs r0, 0x17
 	movs r1, 0xA
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8098A5C
@@ -14483,7 +14483,7 @@ sub_809CE84: @ 809CE84
 	ldrb r1, [r6]
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl MenuDrawTextWindow
+	bl Menu_DrawStdWindowFrame
 	ldrb r0, [r5]
 	adds r0, 0x1
 	lsls r0, 24
@@ -14559,7 +14559,7 @@ _0809CF52:
 	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0809CF8E
 	.align 2, 0
 _0809CF6C: .4byte gMain
@@ -14571,10 +14571,10 @@ _0809CF70:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0809CF8E
 _0809CF86:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r5, r0, 24
 _0809CF8E:
@@ -14593,7 +14593,7 @@ _0809CF8E:
 	ldrb r1, [r1]
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _0809CFB2:
 	cmp r5, 0
 	blt _0809CFC4

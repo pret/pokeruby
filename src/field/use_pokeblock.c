@@ -611,18 +611,18 @@ static void sub_8136BB8(void)
     StringGetEnd10(gUnknown_02039304->stringBuffer);
     StringAppend(gUnknown_02039304->stringBuffer, gOtherText_GetsAPokeBlock);
     BasicInitMenuWindow(&gWindowConfig_81E709C);
-    MenuDrawTextWindow(0, 16, 29, 19);
-    MenuPrint(gUnknown_02039304->stringBuffer, 1, 17);
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
+    Menu_PrintText(gUnknown_02039304->stringBuffer, 1, 17);
     DisplayYesNoMenu(23, 10, 1);
-    MoveMenuCursor(0);
+    Menu_MoveCursor(0);
 }
 
 static s8 sub_8136C40(void)
 {
-    s8 retval = ProcessMenuInputNoWrap();
+    s8 retval = Menu_ProcessInputNoWrap();
     if ((u8)(retval + 1) < 3)
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         BasicInitMenuWindow(&gWindowConfig_81E7080);
     }
     return retval;
@@ -631,7 +631,7 @@ static s8 sub_8136C40(void)
 static void sub_8136C6C(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E709C);
-    MenuDrawTextWindow(0, 16, 29, 19);
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
     for (gUnknown_02039304->unk53 = 0; gUnknown_02039304->unk53 < 5 && gUnknown_02039304->unk61[gUnknown_02039304->unk53] == 0; gUnknown_02039304->unk53++);
     if (gUnknown_02039304->unk53 < 5)
     {
@@ -668,20 +668,20 @@ static bool8 sub_8136D00(void)
 static void sub_8136D60(void)
 {
     BasicInitMenuWindow(&gWindowConfig_81E709C);
-    MenuDrawTextWindow(0, 16, 29, 19);
-    MenuPrint(gOtherText_WontEat, 1, 17);
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
+    Menu_PrintText(gOtherText_WontEat, 1, 17);
 }
 
 static void sub_8136D8C(void)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     BasicInitMenuWindow(&gWindowConfig_81E7080);
 }
 
 static void Pokeblock_MenuWindowTextPrint(const u8 *message)
 {
-    MenuDrawTextWindow(0, 16, 29, 19);
-    MenuPrint(message, 1, 17);
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
+    Menu_PrintText(message, 1, 17);
 }
 
 #ifdef NONMATCHING

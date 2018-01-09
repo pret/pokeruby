@@ -584,8 +584,8 @@ static bool8 sub_8101E3C(struct Task *task)
 
 static void sub_8101F2C(const u8 *str)
 {
-    MenuDisplayMessageBox();
-    MenuPrint(str, 2, 15);
+    Menu_DisplayDialogueFrame();
+    Menu_PrintText(str, 2, 15);
 }
 
 static bool8 sub_8101F44(struct Task *task)
@@ -599,7 +599,7 @@ static bool8 sub_8101F60(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -853,7 +853,7 @@ static bool8 sub_8102344(struct Task *task)
     s8 input = ProcessMenuInputNoWrap_();
     if (input == 0)
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         sub_8103D8C(0);
         sub_8103D8C(1);
         sub_8103D8C(2);
@@ -862,7 +862,7 @@ static bool8 sub_8102344(struct Task *task)
     }
     else if (input == 1 || input == -1)
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -879,7 +879,7 @@ static bool8 sub_81023B8(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 5;
     }
     return FALSE;
@@ -896,7 +896,7 @@ static bool8 sub_81023FC(struct Task *task)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         eSlotMachine->state = 27;
     }
     return FALSE;
@@ -2824,7 +2824,7 @@ static void sub_8104BC8(struct Task *task)
 
 static void sub_8104BFC(struct Task *task)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     BasicInitMenuWindow(&gWindowConfig_81E7128);
     sub_81064B8();
     sub_8104CAC(task->data[1]);

@@ -4522,7 +4522,7 @@ gPokenavRibbonPokeView_Gfx:: @ 8EA0028
 	.incbin "graphics/pokenav/ribbon_pokeview.4bpp"
 
 	.align 2
-gMessageBox_Gfx:: @ 8EA0108
+gDialogueFrame_Gfx:: @ 8EA0108
 	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2

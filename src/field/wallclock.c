@@ -414,9 +414,9 @@ static void Task_SetClock2(u8 taskId)
 //Ask player "Is this the correct time?"
 static void Task_SetClock3(u8 taskId)
 {
-    MenuDrawTextWindow(2, 16, 27, 19);
-    MenuPrint(gOtherText_CorrectTimePrompt, 3, 17);
-    MenuDrawTextWindow(23, 8, 29, 13);
+    Menu_DrawStdWindowFrame(2, 16, 27, 19);
+    Menu_PrintText(gOtherText_CorrectTimePrompt, 3, 17);
+    Menu_DrawStdWindowFrame(23, 8, 29, 13);
     PrintMenuItems(24, 9, 2, gMenuYesNoItems);
     InitMenu(0, 24, 9, 2, 1, 5);
     gTasks[taskId].func = Task_SetClock4;
@@ -435,8 +435,8 @@ static void Task_SetClock4(u8 taskId)
     case 1:     //NO
         HandleDestroyMenuCursors();
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(23, 8, 29, 13);
-        MenuZeroFillWindowRect(2, 16, 27, 19);
+        Menu_EraseWindowRect(23, 8, 29, 13);
+        Menu_EraseWindowRect(2, 16, 27, 19);
         gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock
     }
 }

@@ -47,7 +47,7 @@ void CB2_InitMysteryEventMenu(void)
     SetVBlankCallback(VBlankCB);
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
     InitMenuWindow(&gWindowConfig_81E6CE4);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     REG_BLDCNT = 0;
     CreateTask(Task_DestroySelf, 0);
@@ -86,7 +86,7 @@ static void CB2_MysteryEventMenu(void)
     switch (gMain.state)
     {
     case 0:
-        MenuDrawTextWindow(0, 14, 29, 19);
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
         gMain.state++;
         break;
@@ -97,7 +97,7 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 2:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             gMain.state++;
             gLinkType = 21761;
@@ -119,7 +119,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 4:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             gMain.state++;
         break;
 #ifdef NONMATCHING
@@ -135,8 +135,8 @@ static void CB2_MysteryEventMenu(void)
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();
-            MenuDrawTextWindow(6, 5, 23, 8);
-            MenuPrint(gSystemText_LoadingEvent, 7, 6);
+            Menu_DrawStdWindowFrame(6, 5, 23, 8);
+            Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
             gMain.state++;
         }
         else if (gMain.newKeys & B_BUTTON)
@@ -155,7 +155,7 @@ static void CB2_MysteryEventMenu(void)
             if (GetLinkPlayerDataExchangeStatusTimed() == 3)
             {
                 sub_800832C();
-                MenuZeroFillWindowRect(6, 5, 23, 8);
+                Menu_EraseWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
                 MenuPrintMessageDefaultCoords(gStringVar4);
                 gMain.state = 13;
@@ -170,7 +170,7 @@ static void CB2_MysteryEventMenu(void)
             else
             {
                 CloseLink();
-                MenuZeroFillWindowRect(6, 5, 23, 8);
+                Menu_EraseWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
                 MenuPrintMessageDefaultCoords(gStringVar4);
                 gMain.state = 13;
@@ -195,8 +195,8 @@ static void CB2_MysteryEventMenu(void)
         {
             PlaySE(SE_SELECT);
             sub_8007F4C();
-            MenuDrawTextWindow(6, 5, 23, 8);
-            MenuPrint(gSystemText_LoadingEvent, 7, 6);
+            Menu_DrawStdWindowFrame(6, 5, 23, 8);
+            Menu_PrintText(gSystemText_LoadingEvent, 7, 6);
             gMain.state++;
         }
         else if (gMain.newKeys & B_BUTTON)
@@ -219,7 +219,7 @@ static void CB2_MysteryEventMenu(void)
             if (GetLinkPlayerDataExchangeStatusTimed() == 3)
             {
                 sub_800832C();
-                MenuZeroFillWindowRect(6, 5, 23, 8);
+                Menu_EraseWindowRect(6, 5, 23, 8);
                 GetEventLoadMessage(gStringVar4, 1);
                 MenuPrintMessageDefaultCoords(gStringVar4);
                 ptr = (u8 *)&gMain;
@@ -245,7 +245,7 @@ static void CB2_MysteryEventMenu(void)
             else
             {
                 CloseLink();
-                MenuZeroFillWindowRect(6, 5, 23, 8);
+                Menu_EraseWindowRect(6, 5, 23, 8);
             label:
                 GetEventLoadMessage(gStringVar4, 1);
                 MenuPrintMessageDefaultCoords(gStringVar4);
@@ -266,7 +266,7 @@ static void CB2_MysteryEventMenu(void)
         break;
 #endif
     case 7:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             gMain.state++;
         break;
     case 8:
@@ -297,8 +297,8 @@ static void CB2_MysteryEventMenu(void)
         gMain.state++;
         break;
     case 13:
-        MenuZeroFillWindowRect(6, 5, 23, 8);
-        if (MenuUpdateWindowText())
+        Menu_EraseWindowRect(6, 5, 23, 8);
+        if (Menu_UpdateWindowText())
         {
             gMain.state++;
             gUnknown_02039338 = 0;
@@ -326,7 +326,7 @@ static void CB2_MysteryEventMenu(void)
         if (!IsLinkMaster())
         {
             CloseLink();
-            MenuZeroFillWindowRect(6, 5, 23, 8);
+            Menu_EraseWindowRect(6, 5, 23, 8);
             GetEventLoadMessage(gStringVar4, 1);
             MenuPrintMessageDefaultCoords(gStringVar4);
             gMain.state = 13;

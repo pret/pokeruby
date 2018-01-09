@@ -1058,7 +1058,7 @@ static void sub_810E874(void)
     ScriptContext2_Enable();
     if (gUnknown_0203925A > 5)
     {
-        MenuDrawTextWindow(0, 0, 8, 11);
+        Menu_DrawStdWindowFrame(0, 0, 8, 11);
         InitMenu(0, 1, 1, 5, 0, 7);
         gUnknown_0203925C = 0;
         sub_80F944C();
@@ -1067,12 +1067,12 @@ static void sub_810E874(void)
     }
     else
     {
-        MenuDrawTextWindow(0, 0, 8, 2 * gUnknown_0203925A + 1);
+        Menu_DrawStdWindowFrame(0, 0, 8, 2 * gUnknown_0203925A + 1);
         InitMenu(0, 1, 1, gUnknown_0203925A, 0, 7);
     }
     for (i = 0; i < 5 && gUnknown_03000760[i].var0 != 16; i ++)
     {
-        MenuPrint(gUnknown_083F8380[gUnknown_03000760[i].var0], 1, 2 * i + 1);
+        Menu_PrintText(gUnknown_083F8380[gUnknown_03000760[i].var0], 1, 2 * i + 1);
     }
     DisplayCurrentElevatorFloor();
     CreateTask(sub_810E984, 8);
@@ -1080,7 +1080,7 @@ static void sub_810E874(void)
 
 void DisplayCurrentElevatorFloor(void)
 {
-    MenuDrawTextWindow(20, 0, 29, 5);
+    Menu_DrawStdWindowFrame(20, 0, 29, 5);
     sub_8072BD8(gOtherText_NowOn, 21, 1, 64);
     sub_8072BD8(gUnknown_083F8380[gSpecialVar_0x8005], 21, 3, 64);
 }
@@ -1091,15 +1091,15 @@ void sub_810E984(u8 taskId)
     if (gMain.newKeys == DPAD_UP && gUnknown_0203925B != 0)
     {
         gUnknown_0203925B--;
-        curMenuPos = GetMenuCursorPos();
-        MoveMenuCursorNoWrap(-1);
+        curMenuPos = Menu_GetCursorPos();
+        Menu_MoveCursorNoWrap(-1);
         sub_810EAC8(curMenuPos, DPAD_UP);
     }
     if (gMain.newKeys == DPAD_DOWN && gUnknown_0203925B != gUnknown_0203925A - 1)
     {
         gUnknown_0203925B++;
-        curMenuPos = GetMenuCursorPos();
-        MoveMenuCursorNoWrap(+1);
+        curMenuPos = Menu_GetCursorPos();
+        Menu_MoveCursorNoWrap(+1);
         sub_810EAC8(curMenuPos, DPAD_DOWN);
     }
     if (gMain.newKeys & A_BUTTON)
@@ -1109,7 +1109,7 @@ void sub_810E984(u8 taskId)
         {
             gSpecialVar_Result = 0;
             PlaySE(SE_SELECT);
-            MenuZeroFillWindowRect(0, 0, 29, 12);
+            Menu_EraseWindowRect(0, 0, 29, 12);
             sub_810EC9C(taskId);
         }
         else
@@ -1119,7 +1119,7 @@ void sub_810E984(u8 taskId)
             ShakeScreenInElevator();
             FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
-            MenuZeroFillScreen();
+            Menu_EraseScreen();
             DestroyTask(taskId);
         }
     }
@@ -1128,7 +1128,7 @@ void sub_810E984(u8 taskId)
         gSpecialVar_Result = 0;
         PlaySE(SE_SELECT);
         sub_810EEDC();
-        MenuZeroFillWindowRect(0, 0, 29, 12);
+        Menu_EraseWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
 }
@@ -1163,10 +1163,10 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
     if (flag)
     {
         sub_810EB90(newPos, 5);
-        MenuFillWindowRectWithBlankTile(2, 1, 7, 10);
+        Menu_BlankWindowRect(2, 1, 7, 10);
         for (i=0; i<5 && gUnknown_03000760[newPos].var0 != 16; newPos++, i++)
         {
-            MenuPrint(gUnknown_083F8380[gUnknown_03000760[newPos].var0], 1, i * 2 + 1);
+            Menu_PrintText(gUnknown_083F8380[gUnknown_03000760[newPos].var0], 1, i * 2 + 1);
         }
     }
     return flag;
@@ -1227,7 +1227,7 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
                     "\tmovs r1, 0x1\n"
                     "\tmovs r2, 0x7\n"
                     "\tmovs r3, 0xA\n"
-                    "\tbl MenuFillWindowRectWithBlankTile\n"
+                    "\tbl Menu_BlankWindowRect\n"
                     "\tmovs r5, 0\n"
                     "\tldr r2, _0810EB88 @ =gUnknown_03000760\n"
                     "\tlsls r1, r4, 2\n"
@@ -1249,7 +1249,7 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
                     "\tlsls r2, 24\n"
                     "\tlsrs r2, 24\n"
                     "\tmovs r1, 0x1\n"
-                    "\tbl MenuPrint\n"
+                    "\tbl Menu_PrintText\n"
                     "\tadds r0, r4, 0x1\n"
                     "\tlsls r0, 24\n"
                     "\tlsrs r4, r0, 24\n"
@@ -1539,7 +1539,7 @@ void ShowGlassWorkshopMenu(void)
 {
     u8 i;
     ScriptContext2_Enable();
-    MenuDrawTextWindow(0, 0, 10, 11);
+    Menu_DrawStdWindowFrame(0, 0, 10, 11);
     InitMenu(0, 1, 1, 5, 0, 9);
     gUnknown_0203925C = 0;
     sub_80F944C();
@@ -1547,7 +1547,7 @@ void ShowGlassWorkshopMenu(void)
     sub_810F2B4();
     for (i=0; i<5; i++)
     {
-        MenuPrint(gUnknown_083F83C0[i], 1, 2 * i + 1);
+        Menu_PrintText(gUnknown_083F83C0[i], 1, 2 * i + 1);
     }
     gUnknown_0203925B = 0;
     gUnknown_0203925A = ARRAY_COUNT(gUnknown_083F83C0);
@@ -1560,15 +1560,15 @@ void sub_810F118(u8 taskId)
     if (gMain.newKeys == DPAD_UP && gUnknown_0203925B != 0)
     {
         gUnknown_0203925B--;
-        prevCursorPos = GetMenuCursorPos();
-        MoveMenuCursorNoWrap(-1);
+        prevCursorPos = Menu_GetCursorPos();
+        Menu_MoveCursorNoWrap(-1);
         sub_810F1F4(prevCursorPos, DPAD_UP);
     }
     if (gMain.newKeys == DPAD_DOWN && gUnknown_0203925B != gUnknown_0203925A - 1)
     {
         gUnknown_0203925B++;
-        prevCursorPos = GetMenuCursorPos();
-        MoveMenuCursorNoWrap(1);
+        prevCursorPos = Menu_GetCursorPos();
+        Menu_MoveCursorNoWrap(1);
         sub_810F1F4(prevCursorPos, DPAD_DOWN);
     }
     if (gMain.newKeys & A_BUTTON)
@@ -1577,7 +1577,7 @@ void sub_810F118(u8 taskId)
         gSpecialVar_Result = gUnknown_0203925B;
         PlaySE(SE_SELECT);
         sub_810EEDC();
-        MenuZeroFillWindowRect(0, 0, 29, 12);
+        Menu_EraseWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
     if (gMain.newKeys & B_BUTTON)
@@ -1586,7 +1586,7 @@ void sub_810F118(u8 taskId)
         gSpecialVar_Result = 0x7f;
         PlaySE(SE_SELECT);
         sub_810EEDC();
-        MenuZeroFillWindowRect(0, 0, 29, 12);
+        Menu_EraseWindowRect(0, 0, 29, 12);
         sub_810EC9C(taskId);
     }
 }
@@ -1621,10 +1621,10 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
     if (flag)
     {
         GlassWorkshopUpdateScrollIndicators(newPos, 5);
-        MenuFillWindowRectWithBlankTile(2, 1, 9, 10);
+        Menu_BlankWindowRect(2, 1, 9, 10);
         for (i=0; i<5; newPos++, i++)
         {
-            MenuPrint(gUnknown_083F83C0[newPos], 1, 2 * i + 1);
+            Menu_PrintText(gUnknown_083F83C0[newPos], 1, 2 * i + 1);
         }
     }
     return flag;
@@ -1683,7 +1683,7 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
                     "\tmovs r1, 0x1\n"
                     "\tmovs r2, 0x9\n"
                     "\tmovs r3, 0xA\n"
-                    "\tbl MenuFillWindowRectWithBlankTile\n"
+                    "\tbl Menu_BlankWindowRect\n"
                     "\tmovs r5, 0\n"
                     "\tldr r7, _0810F28C @ =gUnknown_083F83C0\n"
                     "_0810F25C:\n"
@@ -1695,7 +1695,7 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
                     "\tlsls r2, 24\n"
                     "\tlsrs r2, 24\n"
                     "\tmovs r1, 0x1\n"
-                    "\tbl MenuPrint\n"
+                    "\tbl Menu_PrintText\n"
                     "\tadds r0, r4, 0x1\n"
                     "\tlsls r0, 24\n"
                     "\tlsrs r4, r0, 24\n"

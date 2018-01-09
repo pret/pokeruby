@@ -453,7 +453,7 @@ void SafariHandlePrintString(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
-    sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_812B694;
 }
 
@@ -476,8 +476,8 @@ void SafariHandlecmd18(void)
     FillWindowRect_DefaultPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
     gBattleBankFunc[gActiveBank] = bx_battle_menu_t6_2;
 
-    InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
-    sub_8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 12, 11679, 0);
 
     for (i = 0; i < 4; i++)
@@ -486,8 +486,8 @@ void SafariHandlecmd18(void)
     sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
     StrCpyDecodeToDisplayedStringBattle(BattleText_PlayerMenu);
 
-    InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
-    sub_8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
 }
 
 void SafariHandlecmd19(void)

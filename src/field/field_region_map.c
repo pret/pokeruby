@@ -52,11 +52,11 @@ void CB2_FieldInitRegionMap(void)
     CreateRegionMapCursor(1, 1);
     SetUpWindowConfig(&gWindowConfig_81E709C);
     InitMenuWindow(&gWindowConfig_81E709C);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
-    MenuDrawTextWindow(21, 0, 29, 3);
+    Menu_DrawStdWindowFrame(21, 0, 29, 3);
     sub_8072BD8(gOtherText_Hoenn, 0x16, 1, 0x38);
-    MenuDrawTextWindow(16, 16, 29, 19);
+    Menu_DrawStdWindowFrame(16, 16, 29, 19);
     sub_813F0C8();
     SetMainCallback2(CB2_FieldRegionMap);
     SetVBlankCallback(VBlankCB_FieldRegionMap);
@@ -117,7 +117,7 @@ void sub_813EFDC(void)
 
 void sub_813F0C8(void)
 {
-    MenuFillWindowRectWithBlankTile(17, 17, 28, 18);
+    Menu_BlankWindowRect(17, 17, 28, 18);
     if (ewram0_5.unk8.unk16)
-        MenuPrint(ewram0_5.unk8.str, 17, 17);
+        Menu_PrintText(ewram0_5.unk8.str, 17, 17);
 }

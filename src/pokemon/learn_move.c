@@ -25,8 +25,8 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gTileBuffer[];
 
-extern const struct WindowConfig gWindowConfig_81E6CE4;
-extern const struct WindowConfig gWindowConfig_81E7240;
+extern const struct WindowTemplate gWindowConfig_81E6CE4;
+extern const struct WindowTemplate gWindowConfig_81E7240;
 extern const u8 *const gContestEffectStrings[];
 extern const u8 *const gMoveDescriptions[];
 extern const u8 gTypeNames[][7];
@@ -270,11 +270,11 @@ void CB2_InitLearnMove(void)
 
     SetUpWindowConfig(&gWindowConfig_81E7240);
     InitMenuWindow(&gWindowConfig_81E7240);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
     InitMenuWindow(&gWindowConfig_81E6CE4);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 
     REG_BG0VOFS = 0;
     REG_BG0VOFS = 0;  // huh?
@@ -304,11 +304,11 @@ void sub_81327A4(void)
 
     SetUpWindowConfig(&gWindowConfig_81E7240);
     InitMenuWindow(&gWindowConfig_81E7240);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
     InitMenuWindow(&gWindowConfig_81E6CE4);
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 
     REG_DISPCNT = 0x1340;
     REG_BG0VOFS = 0;
@@ -401,7 +401,7 @@ void LearnMoveMain(void)
             sub_813362C();
         break;
     case 8:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
             sLearnMoveStruct->state++;
@@ -436,7 +436,7 @@ void LearnMoveMain(void)
         }
         break;
     case 12:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
             sLearnMoveStruct->state++;
@@ -467,7 +467,7 @@ void LearnMoveMain(void)
         sLearnMoveStruct->state++;
         break;
     case 17:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             DisplayYesNoMenu(21, 7, 1);
             sLearnMoveStruct->state = 18;
@@ -495,7 +495,7 @@ void LearnMoveMain(void)
         sLearnMoveStruct->state++;
         break;
     case 25:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             sLearnMoveStruct->state = 26;
             DisplayYesNoMenu(21, 7, 1);
@@ -524,7 +524,7 @@ void LearnMoveMain(void)
         }
         break;
     case 27:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             if (sLearnMoveStruct->showContestInfo == FALSE)
                 sLearnMoveStruct->state = 3;
@@ -533,7 +533,7 @@ void LearnMoveMain(void)
         }
         break;
     case 19:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             sLearnMoveStruct->state = 20;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
@@ -547,7 +547,7 @@ void LearnMoveMain(void)
         }
         break;
     case 21:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             sLearnMoveStruct->state = 14;
         break;
     case 22:
@@ -597,7 +597,7 @@ void LearnMoveMain(void)
         }
         break;
     case 30:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
 #ifdef ENGLISH
             sub_81328E8(gOtherText_ForgotOrDidNotLearnMove);
@@ -609,7 +609,7 @@ void LearnMoveMain(void)
         }
         break;
     case 31:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             PlayFanfare(BGM_FANFA1);
             sLearnMoveStruct->state = 32;
@@ -636,7 +636,7 @@ void DrawLearnMoveMenuWindow(void)
     BasicInitMenuWindow(&gWindowConfig_81E7240);
     for (i = 0; i < 4; i++)
     {
-        MenuDrawTextWindow(
+        Menu_DrawStdWindowFrame(
           gUnknown_08402CF8[i][0],
           gUnknown_08402CF8[i][1],
           gUnknown_08402CF8[i][2],
@@ -658,7 +658,7 @@ void sub_8133030(bool8 a)
     for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
     {
         sub_8072C74(gTileBuffer, gUnknown_08402D08[0][i].unk0, 64, 2);
-        MenuPrint(gTileBuffer, gUnknown_08402D08[0][i].unk4, gUnknown_08402D08[0][i].unk5);
+        Menu_PrintText(gTileBuffer, gUnknown_08402D08[0][i].unk4, gUnknown_08402D08[0][i].unk5);
     }
 
     if (!a)
@@ -696,10 +696,10 @@ void sub_8133140(bool8 a)
     for (i = 0; gUnknown_08402D08[0][i].unk0 != NULL; i++)
     {
         sub_8072C74(gTileBuffer, gUnknown_08402D08[1][i].unk0, 64, 2);
-        MenuPrint(gTileBuffer, gUnknown_08402D08[1][i].unk4, gUnknown_08402D08[1][i].unk5);
+        Menu_PrintText(gTileBuffer, gUnknown_08402D08[1][i].unk4, gUnknown_08402D08[1][i].unk5);
         if (i != 0)
         {
-            MenuZeroFillWindowRect(
+            Menu_EraseWindowRect(
               gUnknown_08402D08[1][i].unk4,
               gUnknown_08402D08[1][i].unk5 + 2,
               gUnknown_08402D08[1][i].unk4 + 7,
@@ -938,7 +938,7 @@ void sub_8133800(void)
         r6++;
     }
     *str = EOS;
-    MenuPrint(gTileBuffer, 11, 1);
+    Menu_PrintText(gTileBuffer, 11, 1);
     sub_813360C(0);
 }
 
@@ -972,17 +972,17 @@ void PrintMoveInfo(u16 moveId, const u8 *b)
             sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
         else
             sub_8072C14(str, gBattleMoves[moveId].power, 32, 2);
-        MenuPrint(str, b[0], b[1]);
+        Menu_PrintText(str, b[0], b[1]);
         break;
     case 4:
         if (gBattleMoves[moveId].accuracy == 0)
             sub_8072C74(str, gOtherText_ThreeDashes2, 32, 2);
         else
             sub_8072C14(str, gBattleMoves[moveId].accuracy, 32, 2);
-        MenuPrint(str, b[0], b[1]);
+        Menu_PrintText(str, b[0], b[1]);
         break;
     case 6:
-        MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
+        Menu_EraseWindowRect(b[0], b[1], b[0], b[1] + 1);
         numHearts = gContestEffects[gContestMoves[moveId].effect].appeal / 10;
         if (numHearts == 255)
             numHearts = 0;
@@ -995,7 +995,7 @@ void PrintMoveInfo(u16 moveId, const u8 *b)
         }
         break;
     case 7:
-        MenuZeroFillWindowRect(b[0], b[1], b[0], b[1] + 1);
+        Menu_EraseWindowRect(b[0], b[1], b[0], b[1] + 1);
         numHearts = gContestEffects[gContestMoves[moveId].effect].jam / 10;
         if (numHearts == 255)
             numHearts = 0;
@@ -1037,7 +1037,7 @@ void sub_8133AEC(bool8 contestInfo, int unused)
             {
                 u8 r1 = var * 2 + 9;
 
-                MenuFillWindowRectWithBlankTile(11, r1, 28, 12);
+                Menu_BlankWindowRect(11, r1, 28, 12);
             }
         }
     }
@@ -1045,22 +1045,22 @@ void sub_8133AEC(bool8 contestInfo, int unused)
     {
         if (contestInfo)
         {
-            MenuZeroFillWindowRect(gUnknown_08402E24[5][0], gUnknown_08402E24[5][1], gUnknown_08402E24[5][0], gUnknown_08402E24[5][1] + 1);
-            MenuZeroFillWindowRect(gUnknown_08402E24[6][0], gUnknown_08402E24[6][1], gUnknown_08402E24[6][0], gUnknown_08402E24[6][1] + 1);
+            Menu_EraseWindowRect(gUnknown_08402E24[5][0], gUnknown_08402E24[5][1], gUnknown_08402E24[5][0], gUnknown_08402E24[5][1] + 1);
+            Menu_EraseWindowRect(gUnknown_08402E24[6][0], gUnknown_08402E24[6][1], gUnknown_08402E24[6][0], gUnknown_08402E24[6][1] + 1);
             for (i = 0; i < 16; i++)
                 gSprites[sLearnMoveStruct->spriteIDs[i + 4]].invisible = TRUE;
         }
         else
         {
-            MenuZeroFillWindowRect(gUnknown_08402E24[1][0], gUnknown_08402E24[1][1], gUnknown_08402E24[1][0] + 3, gUnknown_08402E24[1][1] + 1);
-            MenuZeroFillWindowRect(gUnknown_08402E24[3][0], gUnknown_08402E24[3][1], gUnknown_08402E24[3][0] + 3, gUnknown_08402E24[3][1] + 1);
+            Menu_EraseWindowRect(gUnknown_08402E24[1][0], gUnknown_08402E24[1][1], gUnknown_08402E24[1][0] + 3, gUnknown_08402E24[1][1] + 1);
+            Menu_EraseWindowRect(gUnknown_08402E24[3][0], gUnknown_08402E24[3][1], gUnknown_08402E24[3][0] + 3, gUnknown_08402E24[3][1] + 1);
         }
-        MenuZeroFillWindowRect(11, 9, 28, 12);
+        Menu_EraseWindowRect(11, 9, 28, 12);
     }
 }
 
 void sub_8133CA4(void)
 {
-    MenuZeroFillWindowRect(21, 7, 27, 12);
+    Menu_EraseWindowRect(21, 7, 27, 12);
     sub_8133AEC(sLearnMoveStruct->showContestInfo, 0);
 }

@@ -1068,13 +1068,13 @@ void sub_80E91D4(u8 a)
 
     if (a == 10)
     {
-        MenuZeroFillWindowRect(3, 14, 26, 19);
+        Menu_EraseWindowRect(3, 14, 26, 19);
         sub_80E9198(10);
         return;
     }
 
     if (sub_80E91A4() == 10)
-        MenuDrawTextWindow(3, 14, 26, 19);
+        Menu_DrawStdWindowFrame(3, 14, 26, 19);
 
     sub_80E9198(a);
     switch (a)
@@ -1175,7 +1175,7 @@ void sub_80E9368(u8 a)
     if (r4 != NULL)
     {
         sub_8072C74(gEasyChatStruct->unk9F8E + 3, r4, 240, 2);
-        MenuPrint(gEasyChatStruct->unk9F8E, 0, 0);
+        Menu_PrintText(gEasyChatStruct->unk9F8E, 0, 0);
     }
     else
     {
@@ -1186,8 +1186,8 @@ void sub_80E9368(u8 a)
         str[2] = 0x10;
         str[3] = EOS;
 
-        MenuPrint(gEasyChatStruct->unk9F8E, 0, 0);
-        MenuPrint(gEasyChatStruct->unk9F8E, 28, 0);
+        Menu_PrintText(gEasyChatStruct->unk9F8E, 0, 0);
+        Menu_PrintText(gEasyChatStruct->unk9F8E, 28, 0);
     }
     BasicInitMenuWindow(&gWindowConfig_81E6DA8);
 }
@@ -1259,7 +1259,7 @@ void sub_80E9620(u16 a, u16 b)
         {
             if (r10 >= gEasyChatStruct->unkA)
             {
-                MenuPrint(gUnknown_083DBEA8, r6, r7);
+                Menu_PrintText(gUnknown_083DBEA8, r6, r7);
                 break;
             }
             if (gEasyChatStruct->unkC[r10] == 0xFFFF)
@@ -1270,7 +1270,7 @@ void sub_80E9620(u16 a, u16 b)
             else
             {
                 sub_80EB218(gEasyChatStruct->unk9E14, gEasyChatStruct->unkC[r10], 11);
-                MenuPrint(gEasyChatStruct->unk9E14, r6, r7);
+                Menu_PrintText(gEasyChatStruct->unk9E14, r6, r7);
                 r6 += gEasyChatStruct->unk8C[i][j] + 11;
             }
             r10++;
@@ -1337,7 +1337,7 @@ void sub_80E97C0(u16 a, u16 b)
         r2[2] = r1 * 8;
         r2[3] = EOS;
 
-        MenuPrint(gEasyChatStruct->unk9E6E, b, a);
+        Menu_PrintText(gEasyChatStruct->unk9E6E, b, a);
 
         a += 2;
     }
@@ -1378,7 +1378,7 @@ void sub_80E98C4(void)
     default:
         return;
     }
-    MenuFillWindowRectWithBlankTile(2, r1, 27, r3 * 2 + r1 - 1);
+    Menu_BlankWindowRect(2, r1, 27, r3 * 2 + r1 - 1);
     BasicInitMenuWindow(&gWindowConfig_81E6DA8);
 }
 
@@ -1386,7 +1386,7 @@ void sub_80E9940(u8 *a, u8 b)
 {
     u8 r4 = (b & 7);
 
-    MenuFillWindowRectWithBlankTile(2, r4 * 2, 31, r4 * 2 + 1);
+    Menu_BlankWindowRect(2, r4 * 2, 31, r4 * 2 + 1);
     sub_80E9A7C(a, b);
     sub_80E9A60(a, 2, r4 * 2);
 }
@@ -1453,7 +1453,7 @@ void sub_80E9A4C(void)
 void sub_80E9A60(const u8 *a, u16 b, u16 c)
 {
     c &= 0xF;
-    MenuPrint(a, b, c);
+    Menu_PrintText(a, b, c);
 }
 
 void sub_80E9A7C(u8 *dest, u16 b)
@@ -1523,7 +1523,7 @@ void sub_80E9AF8(u16 a)
 void sub_80E9C74(u16 a)
 {
     a &= 7;
-    MenuFillWindowRectWithBlankTile(0, a * 2, 29, a * 2 + 1);
+    Menu_BlankWindowRect(0, a * 2, 29, a * 2 + 1);
 }
 
 void sub_80E9C94(void)

@@ -1433,7 +1433,7 @@ extern u8 gUnknown_0815F399[];
 void sub_80FE1DC(void)
 {
     sub_80FE2B4();
-    MenuDrawTextWindow(0, 0, 10, 9);
+    Menu_DrawStdWindowFrame(0, 0, 10, 9);
     PrintMenuItems(1, 1, 4, (const struct MenuAction *)gUnknown_083EC604);
     InitMenu(0, 1, 1, 4, gUnknown_020388D4, 9);
 }
@@ -1487,13 +1487,13 @@ void Task_DecorationPCProcessMenuInput(u8 taskId)
         if (gMain.newKeys & DPAD_UP)
         {
             PlaySE(SE_SELECT);
-            gUnknown_020388D4 = MoveMenuCursor(-1);
+            gUnknown_020388D4 = Menu_MoveCursor(-1);
             sub_80FE394();
         }
         if (gMain.newKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
-            gUnknown_020388D4 = MoveMenuCursor(1);
+            gUnknown_020388D4 = Menu_MoveCursor(1);
             sub_80FE394();
         }
         if (gMain.newKeys & A_BUTTON)
@@ -1510,15 +1510,15 @@ void Task_DecorationPCProcessMenuInput(u8 taskId)
 
 void sub_80FE394(void)
 {
-    MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
-    MenuPrint(gUnknown_083EC624[gUnknown_020388D4], 2, 15);
+    Menu_BlankWindowRect(2, 15, 27, 18);
+    Menu_PrintText(gUnknown_083EC624[gUnknown_020388D4], 2, 15);
 }
 
 void gpu_pal_decompress_alloc_tag_and_upload(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 10, 9);
-    MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
+    Menu_EraseWindowRect(0, 0, 10, 9);
+    Menu_BlankWindowRect(2, 15, 27, 18);
     FreeSpritePaletteByTag(6);
     if (ewram_1f000.isPlayerRoom == 0)
     {
@@ -1561,13 +1561,13 @@ void sub_80FE470(u8 decoCat, u8 left, u8 top, u8 palIdx) // PrintDecorationCateg
     strptr[1] = 5;
     strptr[2] = v0;
     strptr[3] = EOS;
-    MenuPrint(gStringVar4, left, top);
+    Menu_PrintText(gStringVar4, left, top);
 }
 
 void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
 {
     u8 decoCat;
-    MenuDrawTextWindow(0, 0, 14, 19);
+    Menu_DrawStdWindowFrame(0, 0, 14, 19);
     for (decoCat=0; decoCat<8; decoCat++)
     {
         if (ewram_1f000.isPlayerRoom == 1 && gTasks[taskId].data[11] == 0 && decoCat != DECORCAT_DOLL && decoCat != DECORCAT_CUSHION)
@@ -1578,13 +1578,13 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
             sub_80FE470(decoCat, 1, 2 * decoCat + 1, 255); // Unselectable
         }
     }
-    MenuPrint(gUnknownText_Exit, 1, 17);
+    Menu_PrintText(gUnknownText_Exit, 1, 17);
 }
 
 void sub_80FE5AC(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     sub_80FE528(taskId);
     InitMenu(0, 1, 1, 9, gUnknown_020388F6, 13);
     gTasks[taskId].func = sub_80FE604;
@@ -1597,15 +1597,15 @@ void sub_80FE604(u8 taskId)
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
         } else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
         } else if (gMain.newKeys & A_BUTTON)
         {
             PlaySE(SE_SELECT);
-            gUnknown_020388F6 = GetMenuCursorPos();
+            gUnknown_020388F6 = Menu_GetCursorPos();
             if (gUnknown_020388F6 != 8)
             {
                 gUnknown_020388D5 = sub_8134194(gUnknown_020388F6);
@@ -1621,7 +1621,7 @@ void sub_80FE604(u8 taskId)
                 } else
                 {
                     HandleDestroyMenuCursors();
-                    MenuZeroFillWindowRect(0, 0, 14, 19);
+                    Menu_EraseWindowRect(0, 0, 14, 19);
                     DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE418, 0);
                 }
             } else
@@ -1650,11 +1650,11 @@ void sub_80FE728(u8 taskId)
 void sub_80FE758(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 14, 19);
+    Menu_EraseWindowRect(0, 0, 14, 19);
     if (gTasks[taskId].data[11] != 2)
     {
         sub_80FE1DC();
-        MenuDisplayMessageBox();
+        Menu_DisplayDialogueFrame();
         sub_80FE394();
         gTasks[taskId].func = Task_DecorationPCProcessMenuInput;
     } else
@@ -1678,17 +1678,17 @@ void sub_80FE7D4(u8 *dest, u8 decClass)
 void sub_80FE7EC(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
 
     sub_80FEC94(taskId);
     sub_80FECB8(gUnknown_020388F6);
 
 #if ENGLISH
-    MenuDrawTextWindow(15, 12, 29, 19);
+    Menu_DrawStdWindowFrame(15, 12, 29, 19);
 #elif GERMAN
     if ((gUnknown_020388F2 + gUnknown_020388F4) != gUnknown_020388D5)
     {
-        MenuDrawTextWindow(15, 12, 29, 19);
+        Menu_DrawStdWindowFrame(15, 12, 29, 19);
     }
 #endif
 
@@ -1710,7 +1710,7 @@ void sub_80FE894(u8 taskId /*r8*/, s8 cursorVector /*r5*/, s8 bgVector /*r7*/)
     PlaySE(SE_SELECT);
     if (cursorVector != 0)
     {
-        gUnknown_020388F2 = MoveMenuCursor(cursorVector);
+        gUnknown_020388F2 = Menu_MoveCursor(cursorVector);
     }
     if (bgVector != 0)
     {
@@ -1722,12 +1722,12 @@ void sub_80FE894(u8 taskId /*r8*/, s8 cursorVector /*r5*/, s8 bgVector /*r7*/)
     {
         if (v0)
         {
-            MenuDrawTextWindow(15, 12, 29, 19);
+            Menu_DrawStdWindowFrame(15, 12, 29, 19);
         }
         sub_80FECE0(gUnknown_020388F2 + gUnknown_020388F4);
     } else
     {
-        MenuZeroFillWindowRect(15, 12, 29, 19);
+        Menu_EraseWindowRect(15, 12, 29, 19);
     }
 }
 
@@ -1839,13 +1839,13 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
 
 void sub_80FEC94(u8 taskId)
 {
-    MenuDrawTextWindow(0, 0, 14, 19);
+    Menu_DrawStdWindowFrame(0, 0, 14, 19);
     sub_80FEABC(taskId, 0);
 }
 
 void sub_80FECB8(u8 decoCat)
 {
-    MenuDrawTextWindow(15, 0, 29, 3);
+    Menu_DrawStdWindowFrame(15, 0, 29, 3);
     sub_80FE470(decoCat, 16, 1, 0xff);
 }
 
@@ -1902,8 +1902,8 @@ _080FED26:\n\
 
 void sub_80FED1C(void)
 {
-    MenuZeroFillWindowRect(15, 0, 29, 3);
-    MenuZeroFillWindowRect(15, 12, 29, 19);
+    Menu_EraseWindowRect(15, 0, 29, 3);
+    Menu_EraseWindowRect(15, 12, 29, 19);
 }
 
 void sub_80FED3C(u8 taskId)
@@ -2006,7 +2006,7 @@ void sub_80FEF74(void)
     DestroyVerticalScrollIndicator(0);
     DestroyVerticalScrollIndicator(1);
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 14, 19);
+    Menu_EraseWindowRect(0, 0, 14, 19);
 }
 
 bool8 sub_80FEFA4(void)
@@ -2036,7 +2036,7 @@ void sub_80FEFF4(u8 taskId)
 void sub_80FF034(u8 taskId)
 {
     HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(0, 0, 14, 19);
+    Menu_EraseWindowRect(0, 0, 14, 19);
     sub_80FE5AC(taskId);
 }
 
@@ -3128,7 +3128,7 @@ void sub_81000A0(u8 taskId)
 
 void sub_81000C4(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     sub_8100174(taskId);
     if (gDecorations[gUnknown_020388D0[gUnknown_020388F5]].permission != DECORPERM_SOLID_MAT)
     {
@@ -3186,7 +3186,7 @@ void sub_8100248(u8 taskId)
 
 void sub_810026C(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     sub_810028C(taskId);
 }
 
@@ -3341,7 +3341,7 @@ void sub_8100494(u8 taskId)
 
 void sub_810065C(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     gSprites[gUnknown_020391A8].data[7] = 0;
     gTasks[taskId].data[10] = 0;
     gTasks[taskId].func = sub_8100494;
@@ -3723,7 +3723,7 @@ void sub_8100C88(u8 taskId)
             {
                 DrawWholeMapView();
                 ScriptContext1_SetupScript(gUnknown_081A2F8A);
-                MenuZeroFillWindowRect(0, 0, 29, 19);
+                Menu_EraseWindowRect(0, 0, 29, 19);
                 gTasks[taskId].data[2] = 2;
             }
             break;
@@ -3760,7 +3760,7 @@ bool8 sub_8100D38(u8 taskId)
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
     player_get_direction_lower_nybble();
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
     sub_81016C8();
     gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
@@ -3810,7 +3810,7 @@ void sub_8100E70(u8 taskId)
 
 void sub_8100EEC(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     gSprites[gUnknown_020391A8].data[7] = 0;
     gSprites[gUnknown_020391A8].invisible = 0;
     gSprites[gUnknown_020391A8].callback = sub_8101698;
@@ -4150,7 +4150,7 @@ void sub_810156C(u8 taskId)
 
 void sub_8101590(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0, 29, 19);
+    Menu_EraseWindowRect(0, 0, 29, 19);
     sub_81015B0(taskId);
 }
 
@@ -4192,7 +4192,7 @@ void sub_8101648(u8 taskId)
 void sub_8101678(void)
 {
     pal_fill_black();
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     sub_80FE220();
     CreateTask(sub_8101648, 8);
 }
@@ -4274,7 +4274,7 @@ void sub_8101824(u8 taskId)
 
 void sub_8101848(u8 taskId)
 {
-    MenuZeroFillWindowRect(20, 8, 26, 14);
+    Menu_EraseWindowRect(20, 8, 26, 14);
     sub_8109A30(gUnknown_020388D0[gUnknown_020388F5]);
     gUnknown_020388D0[gUnknown_020388F5] = DECOR_NONE;
     sub_80FF098(taskId);

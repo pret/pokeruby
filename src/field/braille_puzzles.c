@@ -161,7 +161,7 @@ void Task_BrailleWait(u8 taskId)
     case 1:
         if (BrailleWait_CheckButtonPress() != FALSE)
         {
-            MenuZeroFillScreen();
+            Menu_EraseScreen();
             PlaySE(SE_SELECT);
             data[0] = 2;
         }
@@ -170,7 +170,7 @@ void Task_BrailleWait(u8 taskId)
             data[1] = data[1] - 1;
             if (data[1] == 0)
             {
-                MenuZeroFillScreen();
+                Menu_EraseScreen();
                 data[0] = 3;
                 data[1] = 30;
             }

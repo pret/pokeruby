@@ -2241,7 +2241,7 @@ static void sub_808DEB0(u16 a, u8 b, u8 c, u16 d)
     text[3] = EOS;
     *(u16 *)(VRAM + d * 0x800 + c * 0x40 + b * 2) = unk[0];
     *(u16 *)(VRAM + d * 0x800 + (c + 1) * 0x40 + b * 2) = unk[1];
-    MenuPrint(text, b - 15, c);
+    Menu_PrintText(text, b - 15, c);
 }
 
 static void sub_808DF88(u16 a, u8 b, u8 c, u16 d)
@@ -2961,20 +2961,20 @@ static void Task_InitPageScreenMultistep(u8 taskId)
         else
             sub_8091154(gUnknown_0202FFBC->dexNum, 0xD, 3);
         sub_80911C8(gUnknown_0202FFBC->dexNum, 0x10, 3);
-        MenuPrint(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
-        MenuPrint(gDexText_UnknownHeight, 16, 7);
-        MenuPrint(gDexText_UnknownWeight, 16, 9);
+        Menu_PrintText(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
+        Menu_PrintText(gDexText_UnknownHeight, 16, 7);
+        Menu_PrintText(gDexText_UnknownWeight, 16, 9);
         if (gUnknown_0202FFBC->owned)
         {
             sub_8091304(gPokedexEntries[gUnknown_0202FFBC->dexNum].categoryName, CATEGORY_LEFT, 5);
             sub_8091458(gPokedexEntries[gUnknown_0202FFBC->dexNum].height, 16, 7);
             sub_8091564(gPokedexEntries[gUnknown_0202FFBC->dexNum].weight, 16, 9);
-            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
+            Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             sub_80917CC(14, 0x3FC);
         }
         else
         {
-            MenuPrint(gUnknown_083A05F8, 2, 13);
+            Menu_PrintText(gUnknown_083A05F8, 2, 13);
             LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
         }
         gMain.state++;
@@ -3211,7 +3211,7 @@ static void Task_InitCryScreenMultistep(u8 taskId)
         gMain.state++;
         break;
     case 4:
-        MenuPrint(gDexText_CryOf, 10, 4);
+        Menu_PrintText(gDexText_CryOf, 10, 4);
         sub_8091260(gUnknown_0202FFBC->dexNum, 10, 6, 2);
         gMain.state++;
         break;
@@ -3853,13 +3853,13 @@ static void sub_8090750(u8 taskId)
         else
             sub_8091154(dexNum, 13, 3);
         sub_80911C8(dexNum, 16, 3);
-        MenuPrint(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
-        MenuPrint(gDexText_UnknownHeight, 16, 7);
-        MenuPrint(gDexText_UnknownWeight, 16, 9);
+        Menu_PrintText(gDexText_UnknownPoke, CATEGORY_LEFT, 5);
+        Menu_PrintText(gDexText_UnknownHeight, 16, 7);
+        Menu_PrintText(gDexText_UnknownWeight, 16, 9);
         sub_8091304(gPokedexEntries[dexNum].categoryName, CATEGORY_LEFT, 5);
         sub_8091458(gPokedexEntries[dexNum].height, 16, 7);
         sub_8091564(gPokedexEntries[dexNum].weight, 16, 9);
-        MenuPrint(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
+        Menu_PrintText(gPokedexEntries[dexNum].descriptionPage1, 2, 13);
         sub_80917CC(14, 0x3FC);
         gTasks[taskId].data[0]++;
         break;
@@ -3906,8 +3906,8 @@ static void sub_8090A3C(u8 taskId)
         {
             u16 r4 = gTasks[taskId].data[1];
 
-            MenuZeroFillWindowRect(2, 13, 27, 19);
-            MenuPrint(gPokedexEntries[r4].descriptionPage2, 2, 13);
+            Menu_EraseWindowRect(2, 13, 27, 19);
+            Menu_PrintText(gPokedexEntries[r4].descriptionPage2, 2, 13);
             (*(u16 *)(VRAM + 0x7ACA))++;
             (*(u16 *)(VRAM + 0x7B0A))++;
             gTasks[taskId].data[4] = 1;
@@ -3970,8 +3970,8 @@ static void sub_8090C68(void)
     {
         if (gPokedexView->descriptionPageNum == 0)
         {
-            MenuZeroFillWindowRect(2, 13, 27, 19);
-            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
+            Menu_EraseWindowRect(2, 13, 27, 19);
+            Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage2, 2, 13);
             gPokedexView->descriptionPageNum = 1;
             (*(u16 *)(VRAM + 0x7ACA))++;
             (*(u16 *)(VRAM + 0x7B0A))++;
@@ -3979,8 +3979,8 @@ static void sub_8090C68(void)
         }
         else
         {
-            MenuZeroFillWindowRect(2, 13, 27, 19);
-            MenuPrint(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
+            Menu_EraseWindowRect(2, 13, 27, 19);
+            Menu_PrintText(gPokedexEntries[gUnknown_0202FFBC->dexNum].descriptionPage1, 2, 13);
             gPokedexView->descriptionPageNum = 0;
             (*(u16 *)(VRAM + 0x7ACA))--;
             (*(u16 *)(VRAM + 0x7B0A))--;
@@ -4190,7 +4190,7 @@ static void sub_8091154(u16 order, u8 b, u8 c)
     str[1] = CHAR_0 + (order % 100) / 10;
     str[2] = CHAR_0 + (order % 100) % 10;
     str[3] = EOS;
-    MenuPrint(str, b, c);
+    Menu_PrintText(str, b, c);
 }
 
 static u8 sub_80911C8(u16 num, u8 b, u8 c)
@@ -4212,7 +4212,7 @@ static u8 sub_80911C8(u16 num, u8 b, u8 c)
             str[i] = 0xAE;
         break;
     }
-    MenuPrint(str, b, c);
+    Menu_PrintText(str, b, c);
     return i;
 }
 
@@ -4237,7 +4237,7 @@ static u8 sub_8091260(u16 num, u8 b, u8 c, u8 d)
         break;
     }
     end[i] = EOS;
-    MenuPrint(str, b, c);
+    Menu_PrintText(str, b, c);
     return i;
 }
 
@@ -4297,7 +4297,7 @@ void unref_sub_80913A4(u16 a, u8 left, u8 top)
     str[3] = CHAR_PERIOD;
     str[4] = CHAR_0 + ((a % 1000) % 100) % 10;
     str[5] = EOS;
-    MenuPrint(str, left, top);
+    Menu_PrintText(str, left, top);
 }
 #elif GERMAN
 void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
@@ -4341,7 +4341,7 @@ void unref_sub_80913A4(u16 arg0, u8 left, u8 top) {
 
     buffer[r6++] = EOS;
     buffer[2] = offset;
-    MenuPrint(buffer, left, top);
+    Menu_PrintText(buffer, left, top);
 }
 #endif
 
@@ -4378,7 +4378,7 @@ static void sub_8091458(u16 height, u8 left, u8 top)
     buffer[i++] = (inches % 10) + CHAR_0;
     buffer[i++] = CHAR_DOUBLE_PRIME;
     buffer[i++] = EOS;
-    MenuPrint(buffer, left, top);
+    Menu_PrintText(buffer, left, top);
 }
 #else
 static void sub_8091458(u16 height, u8 left, u8 top)
@@ -4448,7 +4448,7 @@ static void sub_8091564(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_s;
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
-    MenuPrint(buffer, left, top);
+    Menu_PrintText(buffer, left, top);
 }
 #else
 static void sub_8091564(u16 arg0, u8 left, u8 top)
@@ -5036,7 +5036,7 @@ static void sub_8092644(u8 taskId)
     {
         sub_814ADC8();
         PlaySE(SE_PIN);
-        MenuZeroFillWindowRect(18, 1, 28, 12);
+        Menu_EraseWindowRect(18, 1, 28, 12);
         sub_8092C8C(1);
         gTasks[taskId].func = sub_809217C;
         return;
@@ -5045,7 +5045,7 @@ static void sub_8092644(u8 taskId)
     {
         sub_814ADC8();
         PlaySE(SE_BOWA);
-        MenuZeroFillWindowRect(18, 1, 28, 12);
+        Menu_EraseWindowRect(18, 1, 28, 12);
         sub_8092C8C(1);
         *p1 = gTasks[taskId].data[14];
         *p2 = gTasks[taskId].data[15];
@@ -5374,13 +5374,13 @@ static void sub_8092D78(u8 taskId)
     u16 i;
     u16 j;
 
-    MenuZeroFillWindowRect(18, 1, 28, 12);
+    Menu_EraseWindowRect(18, 1, 28, 12);
     for (i = 0, j = *r7; i < 6 && r6[j].text2 != NULL; i++, j++)
     {
 #ifndef NONMATCHING
         j += 0;  // Useless statement needed to match
 #endif
-        MenuPrint(r6[j].text2, 18, i * 2 + 1);
+        Menu_PrintText(r6[j].text2, 18, i * 2 + 1);
     }
     sub_8091E20(r6[*r8 + *r7].text1);
 }

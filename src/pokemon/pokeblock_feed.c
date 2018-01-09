@@ -559,7 +559,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 10:
-        MenuDrawTextWindow(0, 14, 29, 19);
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
         gMain.state++;
         break;
     case 11:
@@ -715,7 +715,7 @@ static void LaunchPokeblockFeedTask(u8 a0)
 
 static void Task_WaitForAtePokeblockText(u8 taskID)
 {
-    if (MenuUpdateWindowText() == 1)
+    if (Menu_UpdateWindowText() == 1)
         gTasks[taskID].func = Task_PaletteFadeToReturn;
 }
 

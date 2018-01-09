@@ -558,8 +558,8 @@ static void sub_814217C(u8 taskID)
         lastSavedTeam--;
     }
     *lastSavedTeam = *fameMons;
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gMenuText_HOFSaving, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gMenuText_HOFSaving, 3, 15);
     gTasks[taskID].func = sub_8142274;
 }
 
@@ -617,7 +617,7 @@ static void sub_8142320(u8 taskID)
     gSprites[spriteID].data[0] = 0;
     gSprites[spriteID].callback = sub_81435DC;
     gTasks[taskID].tMonSpriteID(currPokeID) = spriteID;
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskID].func = sub_8142404;
 }
 
@@ -670,7 +670,7 @@ static void sub_8142570(u8 taskID)
         if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
             gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 0;
     }
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     sub_8143068(0, 15);
     PlaySE(SE_DENDOU);
     gTasks[taskID].tFrameCount = 400;
@@ -694,7 +694,7 @@ static void sub_8142618(u8 taskID)
                 gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskID].tFrameCount = 7;
         gTasks[taskID].func = sub_81426F8;
     }
@@ -732,10 +732,10 @@ static void sub_8142794(u8 taskID)
             gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x++;
         else
         {
-            MenuDrawTextWindow(1, 2, 15, 9);
+            Menu_DrawStdWindowFrame(1, 2, 15, 9);
             HallOfFame_PrintPlayerInfo(1, 2);
-            MenuDrawTextWindow(2, 14, 27, 19);
-            MenuPrint(gMenuText_HOFCongratulations, 4, 15);
+            Menu_DrawStdWindowFrame(2, 14, 27, 19);
+            Menu_PrintText(gMenuText_HOFCongratulations, 4, 15);
             gTasks[taskID].func = sub_8142818;
         }
     }
@@ -930,7 +930,7 @@ static void sub_8142B04(u8 taskID)
     stringPtr[1] = 0x13;
     stringPtr[2] = 0xF0;
     stringPtr[3] = EOS;
-    MenuPrint(gStringVar1, 0, 0);
+    Menu_PrintText(gStringVar1, 0, 0);
 
     gTasks[taskID].func = sub_8142CC8;
 }
@@ -1042,14 +1042,14 @@ static void sub_8142FCC(u8 taskID)
 
 static void sub_8142FEC(u8 taskID)
 {
-    MenuDrawTextWindow(2, 14, 27, 19);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
     MenuPrintMessage(gMenuText_HOFCorrupt, 3, 15);
     gTasks[taskID].func = sub_814302C;
 }
 
 static void sub_814302C(u8 taskID)
 {
-    if (MenuUpdateWindowText() && gMain.newKeys & A_BUTTON)
+    if (Menu_UpdateWindowText() && gMain.newKeys & A_BUTTON)
         gTasks[taskID].func = sub_8142F78;
 }
 
@@ -1086,7 +1086,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         }
     }
 
-    MenuPrint(gStringVar1, a1 + 4, a2 + 1);
+    Menu_PrintText(gStringVar1, a1 + 4, a2 + 1);
     stringPtr = gStringVar1;
 
     for (i = 0; i < 10 && currMon->nick[i] != EOS; stringPtr[i] = currMon->nick[i], i++) {}
@@ -1099,8 +1099,8 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[1] = 0x13;
         stringPtr[2] = 0xA0;
         stringPtr[3] = EOS;
-        MenuPrint(gStringVar1, a1 + 9, a2 + 1);
-        MenuZeroFillWindowRect(0, a2 + 3, 29, a2 + 4);
+        Menu_PrintText(gStringVar1, a1 + 9, a2 + 1);
+        Menu_EraseWindowRect(0, a2 + 3, 29, a2 + 4);
     }
     else
     {
@@ -1139,7 +1139,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[2] = 0xA0;
         stringPtr[3] = EOS;
 
-        MenuPrint(gStringVar1, a1 + 9, a2 + 1);
+        Menu_PrintText(gStringVar1, a1 + 9, a2 + 1);
 
         monData = currMon->lvl;
 
@@ -1157,14 +1157,14 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[2] = 0x30;
         stringPtr[3] = EOS;
 
-        MenuPrint(gStringVar1, a1 + 7, a2 + 3);
+        Menu_PrintText(gStringVar1, a1 + 7, a2 + 3);
 
         monData = currMon->tid;
 
         stringPtr = StringCopy(gStringVar1, gOtherText_IDNumber);
         ConvertIntToDecimalStringN(stringPtr, monData, 2, 5);
 
-        MenuPrint(gStringVar1, a1 + 13, a2 + 3);
+        Menu_PrintText(gStringVar1, a1 + 13, a2 + 3);
     }
 }
 
@@ -1175,15 +1175,15 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
     u8* stringPtr;
     u16 visibleTid;
 
-    MenuPrint(gOtherText_Name, a0 + 1, a1 + 1);
+    Menu_PrintText(gOtherText_Name, a0 + 1, a1 + 1);
     MenuPrint_RightAligned(gSaveBlock2.playerName, a0 + 14, a1 + 1);
 
-    MenuPrint(gOtherText_IDNumber2, a0 + 1, a1 + 3);
+    Menu_PrintText(gOtherText_IDNumber2, a0 + 1, a1 + 3);
     visibleTid = ByteRead16(gSaveBlock2.playerTrainerId);
     ConvertIntToDecimalStringN(gStringVar1, visibleTid, 2, 5);
 
     MenuPrint_RightAligned(gStringVar1, a0 + 14, a1 + 3);
-    MenuPrint(gMainMenuString_Time, a0 + 1, a1 + 5);
+    Menu_PrintText(gMainMenuString_Time, a0 + 1, a1 + 5);
 
     stringPtr = ConvertIntToDecimalString(gStringVar1, gSaveBlock2.playTimeHours);
     stringPtr[0] = CHAR_SPACE;

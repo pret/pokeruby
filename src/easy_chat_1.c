@@ -16,8 +16,8 @@
 #include "strings.h"
 #include "unknown_task.h"
 
-extern const struct WindowConfig gWindowConfig_81E6D54;
-extern const struct WindowConfig gWindowConfig_81E6DA8;
+extern const struct WindowTemplate gWindowConfig_81E6D54;
+extern const struct WindowTemplate gWindowConfig_81E6DA8;
 
 extern void sub_80546B8(void);
 
@@ -310,7 +310,7 @@ void sub_80E62F8(void)
     case 2:
         InitMenuWindow(&gWindowConfig_81E6D54);
         InitMenuWindow(&gWindowConfig_81E6DA8);
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         break;
     case 3:
         sub_80E6424();
@@ -732,7 +732,7 @@ void sub_80E6BC0(void)
         {
             sub_80E91D4(2);
             DisplayYesNoMenu(23, 8, 1);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             gEasyChatStruct->unk24++;
         }
         break;
@@ -770,7 +770,7 @@ void sub_80E6C84(void)
         sub_80E8398(2);
         sub_80E91D4(3);
         DisplayYesNoMenu(23, 8, 0);
-        MoveMenuCursor(1);
+        Menu_MoveCursor(1);
         if (gEasyChatStruct->unk8 == 9
          || gEasyChatStruct->unk8 == 4
          || gEasyChatStruct->unk8 == 7
@@ -790,7 +790,7 @@ void sub_80E6C84(void)
         case 0:
             sub_80E91D4(4);
             DisplayYesNoMenu(23, 8, 0);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             gEasyChatStruct->unk24++;
             break;
         case -1:
@@ -856,7 +856,7 @@ void sub_80E6D7C(void)
             sub_80E91D4(1);
             sub_80E9744();
             DisplayYesNoMenu(23, 8, 0);
-            MoveMenuCursor(0);
+            Menu_MoveCursor(0);
             gEasyChatStruct->unk24++;
         }
         break;
@@ -1738,5 +1738,5 @@ void sub_80E81FC(void)
 {
     PlaySE(SE_SELECT);
     sub_80E95A4();
-    MenuZeroFillWindowRect(0, 0, 29, 13);
+    Menu_EraseWindowRect(0, 0, 29, 13);
 }

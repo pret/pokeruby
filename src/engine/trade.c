@@ -141,7 +141,7 @@ struct TradeEwramStruct {
 };
 
 static void sub_8047EC0(void);
-static void sub_804AFB8(const struct WindowConfig *, u8 *, const u8 *, u8);
+static void sub_804AFB8(const struct WindowTemplate *, u8 *, const u8 *, u8);
 static void sub_804ACD8(const u8 *, u8 *, u8);
 static void nullsub_5(u8, u8);
 static void sub_804AA88(void);
@@ -1089,10 +1089,10 @@ static void sub_8047EC0(void)
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowConfig_81E6CE4);
             SetUpWindowConfig(&gWindowConfig_81E6F84);
-            InitWindowFromConfig(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
-            gUnknown_03004824->unk_007a = SetTextWindowBaseTileNum(20);
-            LoadTextWindowGraphics(&gUnknown_03004824->window);
-            MenuZeroFillScreen();
+            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
+            TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
+            Menu_EraseScreen();
             sub_809D51C();
             gUnknown_03004824->unk_0075 = 0;
             gUnknown_03004824->unk_007b = 0;
@@ -1269,10 +1269,10 @@ static void sub_80484F4(void)
             SetVBlankCallback(sub_80489F4);
             InitMenuWindow(&gWindowConfig_81E6CE4);
             SetUpWindowConfig(&gWindowConfig_81E6F84);
-            InitWindowFromConfig(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
-            gUnknown_03004824->unk_007a = SetTextWindowBaseTileNum(20);
-            LoadTextWindowGraphics(&gUnknown_03004824->window);
-            MenuZeroFillScreen();
+            Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowConfig_81E6F84);
+            gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
+            TextWindow_LoadStdFrameGraphics(&gUnknown_03004824->window);
+            Menu_EraseScreen();
             sub_809D51C();
             gUnknown_03004824->unk_0075 = 0;
             gUnknown_03004824->unk_007b = 0;
@@ -2096,7 +2096,7 @@ static void sub_8049680(void)
         PlaySE(SE_SELECT);
         if (gUnknown_03004824->tradeMenuCursorPosition < PARTY_SIZE)
         {
-            DrawTextWindow(&gUnknown_03004824->window, 18, 14, 28, 19);
+            TextWindow_DrawStdFrame(&gUnknown_03004824->window, 18, 14, 28, 19);
             PrintMenuItems(19, 15, 2, (const struct MenuAction *)gUnknown_0820C320);
             InitMenu(0, 19, 15, 2, 0, 9);
             gUnknown_03004824->unk_007b = 1;
@@ -2108,7 +2108,7 @@ static void sub_8049680(void)
         }
         else if (gUnknown_03004824->tradeMenuCursorPosition == 2 * PARTY_SIZE)
         {
-            DrawTextWindow(&gUnknown_03004824->window, 24, 14, 29, 19);
+            TextWindow_DrawStdFrame(&gUnknown_03004824->window, 24, 14, 29, 19);
             InitYesNoMenu(24, 14, 4);
             gUnknown_03004824->unk_007b = 4;
             sub_804ACD8(gUnknown_0820C14C[4], BG_CHAR_ADDR(4) + 32 * gUnknown_03004824->unk_007e, 20);
@@ -2138,17 +2138,17 @@ static void sub_8049860(void)
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (GetMenuCursorPos() == 0)
+        if (Menu_GetCursorPos() == 0)
         {
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
             gUnknown_03004824->unk_007b = 2;
@@ -2239,17 +2239,17 @@ static void sub_8049AC0(void)
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (GetMenuCursorPos() == 0)
+        if (Menu_GetCursorPos() == 0)
         {
             sub_8049A20();
         }
@@ -2267,9 +2267,9 @@ static void sub_8049AC0(void)
     else if (gMain.newKeys & B_BUTTON)
     {
         sub_804AADC(3, 1);
-        if (GetMenuCursorPos() == 0)
+        if (Menu_GetCursorPos() == 0)
         {
-            gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+            gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
         }
         gUnknown_03004824->linkData[0] = 0xbbcc;
         Trade_SendData(gUnknown_03004824);
@@ -2282,17 +2282,17 @@ static void sub_8049BC0(void)
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(-1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(-1);
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        gUnknown_03004824->unk_007c = MoveMenuCursor(+1);
+        gUnknown_03004824->unk_007c = Menu_MoveCursor(+1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (GetMenuCursorPos() == 0)
+        if (Menu_GetCursorPos() == 0)
         {
             sub_804AA0C(4);
             gUnknown_03004824->linkData[0] = 0xeeaa;
@@ -2337,7 +2337,7 @@ static void DisplayMessageAndContinueTask(void)
     gUnknown_03004824->unk_00b4++;
     if (gUnknown_03004824->unk_00b4 > 120)
     {
-        DrawTextWindow(&gUnknown_03004824->window, 24, 14, 29, 19);
+        TextWindow_DrawStdFrame(&gUnknown_03004824->window, 24, 14, 29, 19);
         InitYesNoMenu(24, 14, 4);
         gUnknown_03004824->unk_00b4 = 0;
         gUnknown_03004824->unk_007b = 3;
@@ -2491,10 +2491,10 @@ static void sub_8049ED4(u8 a0)
             string1[3] = 0xFC;
             string1[4] = 0x11;
             string1[5] = (64 - stringLength) / 2;
-            sub_8003460(&gUnknown_03004824->window, string1, gUnknown_03004824->unk_007a + whichParty * 6 * 32, gUnknown_0820C334[whichParty][0], gUnknown_0820C334[whichParty][1]);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string1, gUnknown_03004824->unk_007a + whichParty * 6 * 32, gUnknown_0820C334[whichParty][0], gUnknown_0820C334[whichParty][1]);
             sub_804A33C(string2, whichParty, whichPokemon);
-            sub_8003460(&gUnknown_03004824->window, gOtherText_Terminator2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 32, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
-            sub_8003460(&gUnknown_03004824->window, string2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 38, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, gOtherText_Terminator2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 32, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
+            Text_InitWindowAndPrintText(&gUnknown_03004824->window, string2, gUnknown_03004824->unk_007a + whichParty * 6 * 32 + 38, gUnknown_0820C334[whichParty + 1][0], gUnknown_0820C334[whichParty + 1][1] + 1);
             gUnknown_03004824->unk_0080[a0] ++;
             break;
         case 4:
@@ -2884,7 +2884,7 @@ static void sub_8049ED4(u8 a0)
                     "\tldrb r1, [r1]\n"
                     "\tstr r1, [sp]\n"
                     "\tadd r1, sp, 0xC\n"
-                    "\tbl sub_8003460\n"
+                    "\tbl Text_InitWindowAndPrintText\n"
                     "\tadd r7, sp, 0x34\n"
                     "\tadds r0, r7, 0\n"
                     "\tldr r1, [sp, 0x6C]\n"
@@ -2910,7 +2910,7 @@ static void sub_8049ED4(u8 a0)
                     "\tlsrs r4, 24\n"
                     "\tstr r4, [sp]\n"
                     "\tadds r3, r5, 0\n"
-                    "\tbl sub_8003460\n"
+                    "\tbl Text_InitWindowAndPrintText\n"
                     "\tldr r0, _0804A22C @ =gUnknown_03004824\n"
                     "\tldr r1, [r0]\n"
                     "\tadds r0, r1, 0x4\n"
@@ -2921,7 +2921,7 @@ static void sub_8049ED4(u8 a0)
                     "\tstr r4, [sp]\n"
                     "\tadds r1, r7, 0\n"
                     "\tadds r3, r5, 0\n"
-                    "\tbl sub_8003460\n"
+                    "\tbl Text_InitWindowAndPrintText\n"
                     "\tldr r2, _0804A22C @ =gUnknown_03004824\n"
                     "\tldr r1, [r2]\n"
                     "\tb _0804A28A\n"
@@ -3010,7 +3010,7 @@ u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
         GetMonGender(&gEnemyParty[whichPokemon]);
         GetMonData(&gEnemyParty[whichPokemon], MON_DATA_LEVEL);
     }
-    return GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, a0);
+    return Text_GetStringWidthFromWindowTemplate(&gWindowConfig_81E7294, a0);
 }
 
 #ifdef NONMATCHING
@@ -3067,8 +3067,8 @@ static void sub_804A41C(u8 whichParty)
         GetMonData(pokemon, MON_DATA_NICKNAME, nickname);
         StringCopy10(string + 6, nickname);
         GetMonGender(pokemon);
-        string[5] = (50 - GetStringWidthGivenWindowConfig(&gWindowConfig_81E7294, string + 6)) / 2;
-        sub_8003460(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * 6 * whichParty + 22 * i, gTradeMonSpriteCoords[i + 6 * whichParty][0], gTradeMonSpriteCoords[i + 6 * whichParty][1]);
+        string[5] = (50 - Text_GetStringWidthFromWindowTemplate(&gWindowConfig_81E7294, string + 6)) / 2;
+        Text_InitWindowAndPrintText(&gUnknown_03004824->window, string, gUnknown_03004824->unk_007a + 22 * 6 * whichParty + 22 * i, gTradeMonSpriteCoords[i + 6 * whichParty][0], gTradeMonSpriteCoords[i + 6 * whichParty][1]);
     }
 }
 #else
@@ -3142,7 +3142,7 @@ static void sub_804A41C(u8 whichParty)
                     "\tmov r1, sp\n"
                     "\tadds r1, 0x22\n"
                     "\tldr r0, _0804A518 @ =gWindowConfig_81E7294\n"
-                    "\tbl GetStringWidthGivenWindowConfig\n"
+                    "\tbl Text_GetStringWidthFromWindowTemplate\n"
                     "\tlsls r0, 24\n"
                     "\tlsrs r0, 24\n"
                     "\tmovs r1, 0x32\n"
@@ -3177,7 +3177,7 @@ static void sub_804A41C(u8 whichParty)
                     "\tldrb r1, [r1]\n"
                     "\tstr r1, [sp]\n"
                     "\tmov r1, r8\n"
-                    "\tbl sub_8003460\n"
+                    "\tbl Text_InitWindowAndPrintText\n"
                     "\tadds r0, r6, 0x1\n"
                     "\tlsls r0, 24\n"
                     "\tlsrs r6, r0, 24\n"
@@ -3413,18 +3413,18 @@ static void sub_804A96C_alt(struct UnkStructD *arg0, u8 left, u8 top, const u16 
 
 static void sub_804A9F4(u8 unused)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 }
 
 static void sub_804AA00(u8 unused)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
 }
 
 static void sub_804AA0C(u8 a0)
 {
-    DrawTextWindow(&gUnknown_03004824->window, gTradeMessageWindowRects[a0][0], gTradeMessageWindowRects[a0][1], gTradeMessageWindowRects[a0][2], gTradeMessageWindowRects[a0][3]);
-    sub_8003460(&gUnknown_03004824->window, gUnknown_0820C2F0[a0], 0x180 + gUnknown_03004824->unk_007a, gTradeMessageWindowRects[a0][0] + 1, gTradeMessageWindowRects[a0][1] + 1);
+    TextWindow_DrawStdFrame(&gUnknown_03004824->window, gTradeMessageWindowRects[a0][0], gTradeMessageWindowRects[a0][1], gTradeMessageWindowRects[a0][2], gTradeMessageWindowRects[a0][3]);
+    Text_InitWindowAndPrintText(&gUnknown_03004824->window, gUnknown_0820C2F0[a0], 0x180 + gUnknown_03004824->unk_007a, gTradeMessageWindowRects[a0][0] + 1, gTradeMessageWindowRects[a0][1] + 1);
 }
 
 static void sub_804AA88(void)
@@ -3798,7 +3798,7 @@ static void sub_804AF84(void)
             gSaveBlock1.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
 }
 
-static void sub_804AFB8(const struct WindowConfig *windowConfig, u8 *dest, const u8 *src, u8 size)
+static void sub_804AFB8(const struct WindowTemplate *windowConfig, u8 *dest, const u8 *src, u8 size)
 {
     u8 i;
     u8 *tileBuffer;
@@ -4029,10 +4029,10 @@ static void sub_804B41C(void)
             SetVBlankCallback(sub_804B210);
             sub_804B228();
             SetUpWindowConfig(&gWindowConfig_81E6F84);
-            InitWindowFromConfig(&gUnknown_03004828->window, &gWindowConfig_81E6F84);
-            gUnknown_03004828->textWindowBaseTileNum = SetTextWindowBaseTileNum(2);
-            LoadTextWindowGraphics(&gUnknown_03004828->window);
-            MenuZeroFillScreen();
+            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowConfig_81E6F84);
+            gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
+            TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
+            Menu_EraseScreen();
             gLinkType = 0x1144;
             gMain.state ++;
             LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
@@ -4188,16 +4188,16 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldr r0, [r6]\n"
                     "\tadds r0, 0x4\n"
                     "\tadds r1, r4, 0\n"
-                    "\tbl InitWindowFromConfig\n"
+                    "\tbl Text_InitWindowWithTemplate\n"
                     "\tmovs r0, 0x2\n"
-                    "\tbl SetTextWindowBaseTileNum\n"
+                    "\tbl TextWindow_SetBaseTileNum\n"
                     "\tldr r1, [r6]\n"
                     "\tadds r1, 0x34\n"
                     "\tstrb r0, [r1]\n"
                     "\tldr r0, [r6]\n"
                     "\tadds r0, 0x4\n"
-                    "\tbl LoadTextWindowGraphics\n"
-                    "\tbl MenuZeroFillScreen\n"
+                    "\tbl TextWindow_LoadStdFrameGraphics\n"
+                    "\tbl Menu_EraseScreen\n"
                     "\tldr r1, _0804B580 @ =gLinkType\n"
                     "\tldr r4, _0804B584 @ =0x00001144\n"
                     "\tadds r0, r4, 0\n"
@@ -4532,10 +4532,10 @@ static void sub_804B790(void)
             SetVBlankCallback(sub_804B210);
             sub_804B228();
             SetUpWindowConfig(&gWindowConfig_81E717C);
-            InitWindowFromConfig(&gUnknown_03004828->window, &gWindowConfig_81E717C);
-            gUnknown_03004828->textWindowBaseTileNum = SetTextWindowBaseTileNum(2);
-            LoadTextWindowGraphics(&gUnknown_03004828->window);
-            MenuZeroFillScreen();
+            Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowConfig_81E717C);
+            gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
+            TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
+            Menu_EraseScreen();
             gLinkType = 0x1144;
             gUnknown_03004828->isLinkTrade = FALSE;
             gUnknown_03004828->unk_00b6 = 0;
@@ -4733,7 +4733,7 @@ static void sub_804BBE8(u8 a0)
             for (i = 0; i < 0x280; i ++)
                 buffer[i] |= 0x7000;
             DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
-            MenuZeroFillWindowRect(2, 15, 27, 18);
+            Menu_EraseWindowRect(2, 15, 27, 18);
             break;
         case 6:
             REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
@@ -4843,7 +4843,7 @@ static bool8 sub_804C29C(void)
 
         case 10:
             StringExpandPlaceholders(gStringVar4, gTradeText_WillBeSent);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gUnknown_03004828->unk_00c4 = 11;
             gUnknown_03004828->unk_00c0 = 0;
             break;
@@ -4854,11 +4854,11 @@ static bool8 sub_804C29C(void)
                 gUnknown_03004828->unk_00c4 ++;
                 ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_ByeBye);
-                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             }
             break;
         case 12:
-            if (gSprites[gUnknown_03004828->unk_0102].callback == SpriteCallbackDummy && sub_80035AC(&gUnknown_03004828->window) == TRUE)
+            if (gSprites[gUnknown_03004828->unk_0102].callback == SpriteCallbackDummy && Text_UpdateWindow(&gUnknown_03004828->window) == TRUE)
             {
                 gUnknown_03004828->unk_0103 = CreateSprite(&gSpriteTemplate_821595C, 0x78, 0x20, 0);
                 gSprites[gUnknown_03004828->unk_0103].callback = sub_804D738;
@@ -5201,7 +5201,7 @@ static bool8 sub_804C29C(void)
             REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gTradeText_SentOverPoke);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_00c0 = 0;
             break;
@@ -5215,7 +5215,7 @@ static bool8 sub_804C29C(void)
                 gUnknown_03004828->unk_00c4 ++;
                 ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
                 StringExpandPlaceholders(gStringVar4, gTradeText_TakeGoodCare);
-                sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+                Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
                 gUnknown_03004828->unk_00c0 = 0;
             }
             break;
@@ -5538,7 +5538,7 @@ static void sub_804DC88(void)
             gMain.state ++;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
             StringExpandPlaceholders(gStringVar4, gOtherText_LinkStandby2);
-            sub_8003460(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Text_InitWindowAndPrintText(&gUnknown_03004828->window, gStringVar4, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
         case 1:
             sub_80084A4();
@@ -5565,7 +5565,7 @@ static void sub_804DC88(void)
         case 2:
             gMain.state = 50;
             ZeroFillWindowRect(&gUnknown_03004828->window, 0, 0, 29, 19);
-            sub_8003460(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
+            Text_InitWindowAndPrintText(&gUnknown_03004828->window, gSystemText_Saving, gUnknown_03004828->textWindowBaseTileNum, 2, 15);
             break;
         case 50:
             SetSecretBase2Field_9_AndHideBG();

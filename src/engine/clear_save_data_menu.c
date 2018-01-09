@@ -41,10 +41,10 @@ static void Task_InitMenu(u8 taskId)
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
     SetVBlankCallback(VBlankCB_ClearSaveDataScreen);
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gSystemText_ClearAllSaveDataPrompt, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gSystemText_ClearAllSaveDataPrompt, 3, 15);
 
-    MenuDrawTextWindow(2, 1, 8, 6);
+    Menu_DrawStdWindowFrame(2, 1, 8, 6);
     PrintMenuItems(3, 2, 2, gMenuYesNoItems);
     InitMenu(0, 3, 2, 2, 1, 5);
 

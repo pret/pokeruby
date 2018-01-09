@@ -17,7 +17,7 @@ sub_80C2020: @ 80C2020
 	bl SetUpWindowConfig
 	ldr r0, _080C20F4 @ =gMenuWindow
 	adds r1, r4, 0
-	bl InitWindowFromConfig
+	bl Text_InitWindowWithTemplate
 	ldr r1, _080C20F8 @ =REG_BG0CNT
 	movs r2, 0xF8
 	lsls r2, 6
@@ -357,7 +357,7 @@ _080C230A:
 	lsrs r3, 24
 	str r3, [sp]
 	movs r3, 0x7
-	bl sub_8003460
+	bl Text_InitWindowAndPrintText
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -2194,7 +2194,7 @@ _080C31CE:
 	bge _080C31CE
 	mov r0, r8
 	mov r1, r9
-	bl GetStringWidthGivenWindowConfig
+	bl Text_GetStringWidthFromWindowTemplate
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r2, _080C32D4 @ =gDisplayedStringBattle

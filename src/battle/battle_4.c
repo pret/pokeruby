@@ -10767,8 +10767,8 @@ void atk59_handlelearnnewmove(void)
 void sub_8023A80(void)
 {
     sub_802BBD4(0x18, 8, 0x1D, 0xD, 0);
-    InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
-    sub_8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
     sub_814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
 }
 
@@ -11714,9 +11714,9 @@ _08024AC4:\n\
     str r0, [sp]\n\
     adds r0, r4, 0\n\
     movs r3, 0xC\n\
-    bl InitWindow\n\
+    bl Text_InitWindow\n\
     adds r0, r4, 0\n\
-    bl sub_8002F44\n\
+    bl Text_PrintWindow8002F44\n\
     ldr r1, _08024AEC @ =gSharedMem\n\
     ldr r2, _08024AF0 @ =0x0001609c\n\
     adds r1, r2\n\
@@ -11835,9 +11835,9 @@ _08024BC0:\n\
     str r0, [sp]\n\
     adds r0, r4, 0\n\
     movs r3, 0xC\n\
-    bl InitWindow\n\
+    bl Text_InitWindow\n\
     adds r0, r4, 0\n\
-    bl sub_8002F44\n\
+    bl Text_PrintWindow8002F44\n\
     ldr r1, _08024BFC @ =gSharedMem\n\
     ldr r0, _08024C00 @ =0x0001609c\n\
     adds r1, r0\n\
