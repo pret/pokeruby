@@ -147,7 +147,7 @@ static void ShowContestPainting(void)
     switch (gMain.state)
     {
     case 0:
-        remove_some_task();
+        ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
         gUnknown_03005E8C = &ewram15DE0;
         ContestPaintingInitVars(TRUE);

@@ -598,7 +598,7 @@ static void StartPokemonLogoShine(bool8 flashBackground)
 
 static void VBlankCB(void)
 {
-    sub_8089668();
+    ScanlineEffect_TransferDma();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -644,7 +644,7 @@ void CB2_InitTitleScreen(void)
         LZ77UnCompVram(sLegendaryMonTilemap, (void *)(VRAM + 0xC000));
         LZ77UnCompVram(sBackdropTilemap, (void *)(VRAM + 0xC800));
         LoadPalette(sLegendaryMonPalettes, 0xE0, sizeof(sLegendaryMonPalettes));
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -711,7 +711,7 @@ void CB2_InitTitleScreen(void)
         if (!UpdatePaletteFade())
         {
             StartPokemonLogoShine(FALSE);
-            sub_8089944(0, 0xA0, 4, 4, 0, 4, 1);
+            ScanlineEffect_InitWave(0, 0xA0, 4, 4, 0, 4, 1);
             SetMainCallback2(MainCB2);
         }
         break;

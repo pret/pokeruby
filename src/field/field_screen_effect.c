@@ -64,18 +64,18 @@ static void sub_8081424(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(&gUnknown_03004DE0[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
         data[0] = 1;
         break;
     case 1:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(&gUnknown_03004DE0[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
         data[0] = 0;
         data[3] += data[5];
         if (data[3] > data[4])
         {
             if (data[6] == 1)
             {
-                remove_some_task();
+                ScanlineEffect_Stop();
                 data[0] = 2;
             }
             else

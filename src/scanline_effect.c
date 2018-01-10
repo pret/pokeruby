@@ -4,6 +4,9 @@
 #include "trig.h"
 #include "scanline_effect.h"
 
+// Control value to ransfer a single 16-bit value at HBlank
+#define HBLANK_DMA_CONTROL_16BIT (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1)
+
 static void sub_80896F4(void);
 static void sub_8089714(void);
 
@@ -18,89 +21,89 @@ extern u16 gBattle_BG1_X;
 
 extern u8 gUnknown_0202FFA4;
 
-extern struct UnknownTaskStruct2 gUnknown_03004DC0;
+extern struct ScanlineEffect gScanlineEffect;
 
 // Is this a struct?
 extern u16 gUnknown_03004DE0[][0x3C0];
 
-void remove_some_task(void)
+void ScanlineEffect_Stop(void)
 {
-    gUnknown_03004DC0.unk15 = 0;
+    gScanlineEffect.unk15 = 0;
     DmaStop(0);
-    if (gUnknown_03004DC0.taskId != 0xFF)
+    if (gScanlineEffect.taskId != 0xFF)
     {
-        DestroyTask(gUnknown_03004DC0.taskId);
-        gUnknown_03004DC0.taskId = 0xFF;
+        DestroyTask(gScanlineEffect.taskId);
+        gScanlineEffect.taskId = 0xFF;
     }
 }
 
 void dp12_8087EA4(void)
 {
     CpuFill16(0, gUnknown_03004DE0, 0x780 * 2);
-    gUnknown_03004DC0.src[0] = 0;
-    gUnknown_03004DC0.src[1] = 0;
-    gUnknown_03004DC0.dest = 0;
-    gUnknown_03004DC0.unkC = 0;
-    gUnknown_03004DC0.srcBank = 0;
-    gUnknown_03004DC0.unk15 = 0;
-    gUnknown_03004DC0.unk16 = 0;
-    gUnknown_03004DC0.unk17 = 0;
-    gUnknown_03004DC0.taskId = 0xFF;
+    gScanlineEffect.src[0] = 0;
+    gScanlineEffect.src[1] = 0;
+    gScanlineEffect.dest = 0;
+    gScanlineEffect.unkC = 0;
+    gScanlineEffect.srcBank = 0;
+    gScanlineEffect.unk15 = 0;
+    gScanlineEffect.unk16 = 0;
+    gScanlineEffect.unk17 = 0;
+    gScanlineEffect.taskId = 0xFF;
 }
 
 void sub_80895F8(struct UnknownTaskStruct unk)
 {
-    if (unk.control == (((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1))
+    if (unk.control == HBLANK_DMA_CONTROL_16BIT)  // 16 bit
     {
-        gUnknown_03004DC0.src[0] = &gUnknown_03004DE0[0][1];
-        gUnknown_03004DC0.src[1] = &gUnknown_03004DE0[1][1];
-        gUnknown_03004DC0.unk10 = sub_80896F4;
+        gScanlineEffect.src[0] = &gUnknown_03004DE0[0][1];
+        gScanlineEffect.src[1] = &gUnknown_03004DE0[1][1];
+        gScanlineEffect.unk10 = sub_80896F4;
     }
-    else
+    else  // assume 32-bit
     {
-        gUnknown_03004DC0.src[0] = &gUnknown_03004DE0[0][2];
-        gUnknown_03004DC0.src[1] = &gUnknown_03004DE0[1][2];
-        gUnknown_03004DC0.unk10 = sub_8089714;
+        gScanlineEffect.src[0] = &gUnknown_03004DE0[0][2];
+        gScanlineEffect.src[1] = &gUnknown_03004DE0[1][2];
+        gScanlineEffect.unk10 = sub_8089714;
     }
 
-    gUnknown_03004DC0.unkC = unk.control;
-    gUnknown_03004DC0.dest = unk.dest;
-    gUnknown_03004DC0.unk15 = unk.unk8;
-    gUnknown_03004DC0.unk16 = unk.unk9;
-    gUnknown_03004DC0.unk17 = unk.unk9;
+    gScanlineEffect.unkC = unk.control;
+    gScanlineEffect.dest = unk.dest;
+    gScanlineEffect.unk15 = unk.unk8;
+    gScanlineEffect.unk16 = unk.unk9;
+    gScanlineEffect.unk17 = unk.unk9;
 }
 
-void sub_8089668(void)
+void ScanlineEffect_TransferDma(void)
 {
-    if (gUnknown_03004DC0.unk15)
+    if (gScanlineEffect.unk15)
     {
-        if (gUnknown_03004DC0.unk15 == 3)
+        if (gScanlineEffect.unk15 == 3)
         {
-            gUnknown_03004DC0.unk15 = 0;
+            gScanlineEffect.unk15 = 0;
             DmaStop(0);
             gUnknown_0202FFA4 = 1;
         }
         else
         {
             DmaStop(0);
-            DmaSet(0, gUnknown_03004DC0.src[gUnknown_03004DC0.srcBank], gUnknown_03004DC0.dest, gUnknown_03004DC0.unkC);
-            gUnknown_03004DC0.unk10();
-            gUnknown_03004DC0.srcBank ^= 1;
+            DmaSet(0, gScanlineEffect.src[gScanlineEffect.srcBank], gScanlineEffect.dest, gScanlineEffect.unkC);
+            gScanlineEffect.unk10();
+            gScanlineEffect.srcBank ^= 1;
         }
     }
 }
 
 static void sub_80896F4(void)
 {
-    u16 *dest = (u16 *)gUnknown_03004DC0.dest;
-    u16 *src = (u16 *)&gUnknown_03004DE0[gUnknown_03004DC0.srcBank];
+    u16 *dest = (u16 *)gScanlineEffect.dest;
+    u16 *src = (u16 *)&gUnknown_03004DE0[gScanlineEffect.srcBank];
     *dest = *src;
 }
 
 static void sub_8089714(void)
 {
-    u32 *dest = (u32 *)gUnknown_03004DC0.dest;
-    u32 *src = (u32 *)&gUnknown_03004DE0[gUnknown_03004DC0.srcBank];
+    u32 *dest = (u32 *)gScanlineEffect.dest;
+    u32 *src = (u32 *)&gUnknown_03004DE0[gScanlineEffect.srcBank];
     *dest = *src;
 }
 
@@ -111,7 +114,7 @@ static void task00_for_dp12(u8 taskId)
     if (gUnknown_0202FFA4)
     {
         DestroyTask(taskId);
-        gUnknown_03004DC0.taskId = 0xFF;
+        gScanlineEffect.taskId = 0xFF;
     }
     else
     {
@@ -153,7 +156,7 @@ static void task00_for_dp12(u8 taskId)
             offset = gTasks[taskId].data[3] + 320;
             for (i = gTasks[taskId].data[0]; i < gTasks[taskId].data[1]; i++)
             {
-                gUnknown_03004DE0[gUnknown_03004DC0.srcBank][i] = gUnknown_03004DE0[0][offset] + value;
+                gUnknown_03004DE0[gScanlineEffect.srcBank][i] = gUnknown_03004DE0[0][offset] + value;
                 offset++;
             }
         }
@@ -165,7 +168,7 @@ static void task00_for_dp12(u8 taskId)
             offset = gTasks[taskId].data[3] + 320;
             for (i = gTasks[taskId].data[0]; i < gTasks[taskId].data[1]; i++)
             {
-                gUnknown_03004DE0[gUnknown_03004DC0.srcBank][i] = gUnknown_03004DE0[0][offset] + value;
+                gUnknown_03004DE0[gScanlineEffect.srcBank][i] = gUnknown_03004DE0[0][offset] + value;
                 offset++;
             }
             gTasks[taskId].data[3]++;
@@ -177,20 +180,20 @@ static void task00_for_dp12(u8 taskId)
     }
 }
 
-static void sub_80898FC(u16 *a1, u8 a2, u8 a3, u8 a4)
+static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
 {
     u16 i = 0;
-    u8 offset = 0;
+    u8 theta = 0;
 
-    while (i < 0x100)
+    while (i < 256)
     {
-        a1[i] = (gSineTable[offset] * a3) / 256;
-        offset += a2;
+        buffer[i] = (gSineTable[theta] * amplitude) / 256;
+        theta += frequency;
         i++;
     }
 }
 
-u8 sub_8089944(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7)
+u8 ScanlineEffect_InitWave(u8 a1, u8 a2, u8 frequency, u8 amplitude, u8 a5, u8 a6, u8 a7)
 {
     int i;
     int offset;
@@ -200,7 +203,7 @@ u8 sub_8089944(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7)
     dp12_8087EA4();
 
     unk.dest = (void *)(REG_ADDR_BG0HOFS + a6);
-    unk.control = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1;
+    unk.control = HBLANK_DMA_CONTROL_16BIT;
     unk.unk8 = 1;
     unk.unk9 = 0;
 
@@ -210,17 +213,17 @@ u8 sub_8089944(u8 a1, u8 a2, u8 a3, u8 a4, u8 a5, u8 a6, u8 a7)
 
     gTasks[taskId].data[0] = a1;
     gTasks[taskId].data[1] = a2;
-    gTasks[taskId].data[2] = 256 / a3;
+    gTasks[taskId].data[2] = 256 / frequency;
     gTasks[taskId].data[3] = 0;
     gTasks[taskId].data[4] = a5;
     gTasks[taskId].data[5] = a5;
     gTasks[taskId].data[6] = a6;
     gTasks[taskId].data[7] = a7;
 
-    gUnknown_03004DC0.taskId = taskId;
+    gScanlineEffect.taskId = taskId;
     gUnknown_0202FFA4 = 0;
 
-    sub_80898FC(&gUnknown_03004DE0[0][320], a3, a4, a2 - a1);
+    GenerateWave(&gUnknown_03004DE0[0][320], frequency, amplitude, a2 - a1);
 
     offset = 320;
 

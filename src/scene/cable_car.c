@@ -208,7 +208,7 @@ static void CableCarMainCallback_Setup(void)
         case 0:
         default:
             SetVBlankCallback(NULL);
-            remove_some_task();
+            ScanlineEffect_Stop();
             DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
             DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);

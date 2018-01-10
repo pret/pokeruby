@@ -11013,14 +11013,14 @@ _080F5BD8: .4byte gUnknown_083E4990
 	thumb_func_start sub_80F5BDC
 sub_80F5BDC: @ 80F5BDC
 	push {lr}
-	ldr r1, _080F5BEC @ =gUnknown_03004DC0
+	ldr r1, _080F5BEC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
-	bl sub_8089668
+	bl ScanlineEffect_TransferDma
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5BEC: .4byte gUnknown_03004DC0
+_080F5BEC: .4byte gScanlineEffect
 	thumb_func_end sub_80F5BDC
 
 	thumb_func_start sub_80F5BF0

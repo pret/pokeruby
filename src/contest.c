@@ -635,7 +635,7 @@ void ContestVBlankCallback(void)
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 void sub_80ABB70(u8 taskId)

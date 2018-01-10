@@ -516,7 +516,7 @@ static void sub_80AA090(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 static void sub_80AA10C(void)

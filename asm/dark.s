@@ -575,7 +575,7 @@ _080E0380:
 	.align 2, 0
 _080E0398: .4byte gBattle_WIN0H
 _080E039C:
-	ldr r1, _080E03AC @ =gUnknown_03004DC0
+	ldr r1, _080E03AC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E03A2:
@@ -584,7 +584,7 @@ _080E03A2:
 	strh r0, [r4, 0x8]
 	b _080E03B6
 	.align 2, 0
-_080E03AC: .4byte gUnknown_03004DC0
+_080E03AC: .4byte gScanlineEffect
 _080E03B0:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -1043,7 +1043,7 @@ _080E0732:
 	.align 2, 0
 _080E0750: .4byte REG_BLDALPHA
 _080E0754:
-	ldr r1, _080E0764 @ =gUnknown_03004DC0
+	ldr r1, _080E0764 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E075A:
@@ -1052,7 +1052,7 @@ _080E075A:
 	strh r0, [r4, 0x8]
 	b _080E0784
 	.align 2, 0
-_080E0764: .4byte gUnknown_03004DC0
+_080E0764: .4byte gScanlineEffect
 _080E0768:
 	ldr r0, _080E078C @ =gBattle_WIN0H
 	movs r1, 0
@@ -1104,7 +1104,7 @@ sub_80E079C: @ 80E079C
 	ble _080E07FC
 	ldr r0, _080E0888 @ =gUnknown_03004DE0
 	mov r12, r0
-	ldr r7, _080E088C @ =gUnknown_03004DC0
+	ldr r7, _080E088C @ =gScanlineEffect
 _080E07D0:
 	lsls r2, r4, 16
 	asrs r2, 16
@@ -1138,7 +1138,7 @@ _080E07FC:
 	bgt _080E0846
 	ldr r0, _080E0888 @ =gUnknown_03004DE0
 	mov r12, r0
-	ldr r7, _080E088C @ =gUnknown_03004DC0
+	ldr r7, _080E088C @ =gScanlineEffect
 _080E0810:
 	asrs r4, r3, 16
 	cmp r4, 0
@@ -1180,7 +1180,7 @@ _080E0846:
 	cmp r1, r0
 	bge _080E08BE
 	ldr r7, _080E0888 @ =gUnknown_03004DE0
-	ldr r4, _080E088C @ =gUnknown_03004DC0
+	ldr r4, _080E088C @ =gScanlineEffect
 _080E085E:
 	asrs r3, r2, 16
 	cmp r3, 0
@@ -1205,7 +1205,7 @@ _080E0876:
 	b _080E08BE
 	.align 2, 0
 _080E0888: .4byte gUnknown_03004DE0
-_080E088C: .4byte gUnknown_03004DC0
+_080E088C: .4byte gScanlineEffect
 _080E0890:
 	movs r1, 0x1C
 	ldrsh r0, [r6, r1]

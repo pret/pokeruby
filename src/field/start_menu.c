@@ -750,7 +750,7 @@ static bool32 sub_80719FC(u8 *step)
 
         REG_DISPCNT = 0;
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
         addr = (void *)VRAM;
         size = 0x18000;

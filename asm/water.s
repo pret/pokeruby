@@ -476,7 +476,7 @@ _080D3EE8:
 	cmp r3, r0
 	bge _080D3F1C
 	ldr r6, _080D3F80 @ =gUnknown_03004DE0
-	ldr r5, _080D3F84 @ =gUnknown_03004DC0
+	ldr r5, _080D3F84 @ =gScanlineEffect
 _080D3EF6:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -506,7 +506,7 @@ _080D3F1C:
 	cmp r1, r0
 	bge _080D3F50
 	ldr r6, _080D3F80 @ =gUnknown_03004DE0
-	ldr r5, _080D3F84 @ =gUnknown_03004DC0
+	ldr r5, _080D3F84 @ =gScanlineEffect
 _080D3F2E:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -532,7 +532,7 @@ _080D3F50:
 	cmp r0, 0x9F
 	bgt _080D4032
 	ldr r6, _080D3F80 @ =gUnknown_03004DE0
-	ldr r5, _080D3F84 @ =gUnknown_03004DC0
+	ldr r5, _080D3F84 @ =gScanlineEffect
 _080D3F5E:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -552,7 +552,7 @@ _080D3F5E:
 	b _080D4032
 	.align 2, 0
 _080D3F80: .4byte gUnknown_03004DE0
-_080D3F84: .4byte gUnknown_03004DC0
+_080D3F84: .4byte gScanlineEffect
 _080D3F88:
 	movs r3, 0
 	movs r1, 0x10
@@ -560,7 +560,7 @@ _080D3F88:
 	cmp r3, r0
 	bge _080D3FBC
 	ldr r6, _080D403C @ =gUnknown_03004DE0
-	ldr r5, _080D4040 @ =gUnknown_03004DC0
+	ldr r5, _080D4040 @ =gScanlineEffect
 _080D3F96:
 	lsls r1, r3, 16
 	asrs r1, 16
@@ -590,7 +590,7 @@ _080D3FBC:
 	cmp r1, r0
 	bge _080D3FF0
 	ldr r6, _080D403C @ =gUnknown_03004DE0
-	ldr r5, _080D4040 @ =gUnknown_03004DC0
+	ldr r5, _080D4040 @ =gScanlineEffect
 _080D3FCE:
 	asrs r3, r2, 16
 	lsls r2, r3, 1
@@ -616,7 +616,7 @@ _080D3FF0:
 	cmp r0, 0x9F
 	bgt _080D401C
 	ldr r6, _080D403C @ =gUnknown_03004DE0
-	ldr r5, _080D4040 @ =gUnknown_03004DC0
+	ldr r5, _080D4040 @ =gScanlineEffect
 _080D3FFE:
 	asrs r3, r1, 16
 	lsls r2, r3, 1
@@ -640,7 +640,7 @@ _080D401C:
 	negs r0, r0
 	cmp r1, r0
 	bne _080D4032
-	bl remove_some_task
+	bl ScanlineEffect_Stop
 	adds r0, r7, 0
 	bl DestroyTask
 _080D4032:
@@ -650,7 +650,7 @@ _080D4032:
 	bx r0
 	.align 2, 0
 _080D403C: .4byte gUnknown_03004DE0
-_080D4040: .4byte gUnknown_03004DC0
+_080D4040: .4byte gScanlineEffect
 	thumb_func_end sub_80D3D68
 
 	thumb_func_start sub_80D4044

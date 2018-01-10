@@ -1753,7 +1753,7 @@ _080DC4BE:
 	ble _080DC4E6
 	b _080DC4D4
 _080DC4CE:
-	ldr r1, _080DC4DC @ =gUnknown_03004DC0
+	ldr r1, _080DC4DC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080DC4D4:
@@ -1762,7 +1762,7 @@ _080DC4D4:
 	strh r0, [r5, 0x8]
 	b _080DC4E6
 	.align 2, 0
-_080DC4DC: .4byte gUnknown_03004DC0
+_080DC4DC: .4byte gScanlineEffect
 _080DC4E0:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask

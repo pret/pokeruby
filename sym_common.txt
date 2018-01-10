@@ -139,7 +139,7 @@ gUnknown_03004AE4: @ 3004AE4
 @ unknown_task
 
 	.align 4
-gUnknown_03004DC0: @ 3004DC0
+gScanlineEffect: @ 3004DC0
 	.space 0x20
 
 gUnknown_03004DE0: @ 3004DE0

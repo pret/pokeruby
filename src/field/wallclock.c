@@ -229,7 +229,7 @@ static void LoadWallClockGraphics(void)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
     else
         LoadPalette(gMiscClockFemale_Pal, 0, 32);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

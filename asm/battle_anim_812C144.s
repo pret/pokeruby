@@ -1946,7 +1946,7 @@ _0812CFDC:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _0812CFF2
-	ldr r1, _0812D004 @ =gUnknown_03004DC0
+	ldr r1, _0812D004 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0812CFF2:
@@ -1958,7 +1958,7 @@ _0812CFF8:
 	bx r0
 	.align 2, 0
 _0812D000: .4byte gUnknown_03004DE0
-_0812D004: .4byte gUnknown_03004DC0
+_0812D004: .4byte gScanlineEffect
 	thumb_func_end sub_812CEF0
 
 	thumb_func_start sub_812D008
@@ -6711,7 +6711,7 @@ _0812F4EA:
 	ldrsh r0, [r6, r3]
 	cmp r1, r0
 	ble _0812F60A
-	ldr r0, _0812F660 @ =gUnknown_03004DC0
+	ldr r0, _0812F660 @ =gScanlineEffect
 	mov r10, r0
 	ldr r1, [sp, 0x4]
 	lsls r0, r1, 16
@@ -6856,7 +6856,7 @@ _0812F636:
 	strh r0, [r6, 0xE]
 	b _0812F676
 	.align 2, 0
-_0812F660: .4byte gUnknown_03004DC0
+_0812F660: .4byte gScanlineEffect
 _0812F664: .4byte gUnknown_03004DE0
 _0812F668: .4byte gSineTable
 _0812F66C: .4byte 0xffff0000
@@ -6898,14 +6898,14 @@ _0812F6A6:
 	asrs r0, 16
 	cmp r0, 0xC
 	ble _0812F712
-	ldr r1, _0812F6C0 @ =gUnknown_03004DC0
+	ldr r1, _0812F6C0 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0
 	strh r0, [r6, 0xC]
 	b _0812F700
 	.align 2, 0
-_0812F6C0: .4byte gUnknown_03004DC0
+_0812F6C0: .4byte gScanlineEffect
 _0812F6C4:
 	ldrh r0, [r6, 0xC]
 	adds r0, 0x1

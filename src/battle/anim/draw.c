@@ -97,7 +97,7 @@ void sub_80D0D68(u8 taskId)
 
             if (++task->data[3] >= task->data[15])
             {
-                gUnknown_03004DC0.unk15 = 3;
+                gScanlineEffect.unk15 = 3;
                 DestroyAnimVisualTask(taskId);
             }
         }
@@ -202,7 +202,7 @@ _080D0E04:\n\
 	ldrsh r1, [r3, r2]\n\
 	cmp r0, r1\n\
 	blt _080D0E22\n\
-	ldr r1, _080D0E2C @ =gUnknown_03004DC0\n\
+	ldr r1, _080D0E2C @ =gScanlineEffect\n\
 	movs r0, 0x3\n\
 	strb r0, [r1, 0x15]\n\
 	adds r0, r4, 0\n\
@@ -213,7 +213,7 @@ _080D0E22:\n\
 	bx r0\n\
 	.align 2, 0\n\
 _080D0E28: .4byte gUnknown_03004DE0\n\
-_080D0E2C: .4byte gUnknown_03004DC0\n\
+_080D0E2C: .4byte gScanlineEffect\n\
 .syntax divided\n");
 }
 #endif

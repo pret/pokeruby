@@ -117,7 +117,7 @@ static void sub_81365A0(void);
 static void sub_81365C8(void);
 static void sub_8136638(void);
 static void sub_81368A4(void);
-void sub_8089668(void);
+void ScanlineEffect_TransferDma(void);
 static void sub_8136B44(void);
 static u8 sub_81370E4(u8);
 static void sub_8136BB8(void);
@@ -194,7 +194,7 @@ static void sub_8136264(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     sub_80F5CDC(6);
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 static void launch_c3_walk_stairs_and_run_once(void (*const func)(void))

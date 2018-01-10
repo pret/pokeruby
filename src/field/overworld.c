@@ -1410,7 +1410,7 @@ void VBlankCB_Field(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
     sub_8057A58();
     TransferPlttBuffer();
     sub_8072E74();
@@ -1669,7 +1669,7 @@ void sub_8054BA8(void)
 
     REG_DISPCNT = 0;
 
-    remove_some_task();
+    ScanlineEffect_Stop();
 
     DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
 

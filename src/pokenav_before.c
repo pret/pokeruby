@@ -329,7 +329,7 @@ void sub_80EBA5C()
         ResetTasks();
         break;
     case 6:
-        remove_some_task();
+        ScanlineEffect_Stop();
         break;
     case 7:
         sub_80F1A90();
@@ -436,7 +436,7 @@ void sub_80EBD4C()
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     sub_80F5BF0();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 void sub_80EBD68()

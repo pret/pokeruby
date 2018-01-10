@@ -95,7 +95,7 @@ bool8 sub_80C5DCC(void);
 bool8 sub_80C5F98(void);
 void ReturnFromHallOfFamePC(void);
 u16 SpeciesToPokedexNum(u16 species);
-void remove_some_task(void);
+void ScanlineEffect_Stop(void);
 
 // data and gfx
 
@@ -1278,7 +1278,7 @@ static void sub_81433E0(void)
 
 static void sub_8143570(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();

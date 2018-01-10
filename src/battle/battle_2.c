@@ -1073,7 +1073,7 @@ void sub_800FCFC(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 void nullsub_36(struct Sprite *sprite)

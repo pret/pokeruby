@@ -255,7 +255,7 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case  1:
-            remove_some_task();
+            ScanlineEffect_Stop();
             gMain.state++;
             break;
         case  2:

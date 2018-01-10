@@ -320,7 +320,7 @@ static u8 sub_80F8A28(void)
     {
     case 0:
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         REG_DISPCNT = 0;
         RETURN_UP_STATE;
 

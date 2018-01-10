@@ -631,7 +631,7 @@ _080E13D6:
 _080E13F8: .4byte gBattle_BG2_Y
 _080E13FC: .4byte gSprites
 _080E1400:
-	ldr r1, _080E1410 @ =gUnknown_03004DC0
+	ldr r1, _080E1410 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E1406:
@@ -640,7 +640,7 @@ _080E1406:
 	strh r0, [r4, 0x8]
 	b _080E1432
 	.align 2, 0
-_080E1410: .4byte gUnknown_03004DC0
+_080E1410: .4byte gScanlineEffect
 _080E1414:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -925,7 +925,7 @@ _080E161C:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _080E1662
-	ldr r1, _080E1658 @ =gUnknown_03004DC0
+	ldr r1, _080E1658 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E164A:
@@ -935,7 +935,7 @@ _080E164A:
 	b _080E1662
 	.align 2, 0
 _080E1654: .4byte gSprites
-_080E1658: .4byte gUnknown_03004DC0
+_080E1658: .4byte gScanlineEffect
 _080E165C:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask

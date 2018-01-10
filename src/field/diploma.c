@@ -62,7 +62,7 @@ void CB2_ShowDiploma(void)
     LZ77UnCompVram(gDiplomaTiles, (void *)VRAM);
     LZ77UnCompVram(gDiplomaTilemap, (void *)(VRAM + 0x3000));
 
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

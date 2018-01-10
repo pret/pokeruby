@@ -285,7 +285,7 @@ void CB2_ChooseStarter(void)
     LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
     LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
     LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

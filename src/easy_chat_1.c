@@ -298,7 +298,7 @@ void sub_80E62F8(void)
         ResetPaletteFade();
         ResetSpriteData();
         dp12_8087EA4();
-        remove_some_task();
+        ScanlineEffect_Stop();
         sub_80EAD08();
         sub_80895F8(gUnknown_083DB698);
         FreeSpriteTileRanges();
@@ -655,7 +655,7 @@ void sub_80E6A6C(void)
     ProcessSpriteCopyRequests();
     sub_80EAC5C();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 void sub_80E6A88(void)

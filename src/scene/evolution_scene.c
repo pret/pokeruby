@@ -215,7 +215,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sub_800D6D4();
     sub_800DAB8();
     ResetSpriteData();
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     FreeAllSpritePalettes();
 
@@ -3934,7 +3934,7 @@ static void VBlankCB_EvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 static void VBlankCB_TradeEvolutionScene(void)
@@ -3950,7 +3950,7 @@ static void VBlankCB_TradeEvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_TransferDma();
 }
 
 static void sub_81150D8(void)
