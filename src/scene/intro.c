@@ -19,7 +19,7 @@
 #include "task.h"
 #include "title_screen.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;

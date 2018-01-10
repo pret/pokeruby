@@ -28,7 +28,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 //Menu actions
 enum {

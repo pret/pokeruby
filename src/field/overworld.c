@@ -47,7 +47,7 @@
 #include "tileset_anim.h"
 #include "time_events.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "wild_encounter.h"
 
 #ifdef SAPPHIRE

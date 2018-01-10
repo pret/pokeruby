@@ -18,7 +18,7 @@
 #include "sound.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern u8 ewram[];
 

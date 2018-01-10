@@ -13,7 +13,7 @@
 #include "trainer.h"
 #include "field_camera.h"
 #include "ewram.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 void sub_807DE10(void);
 void dp12_8087EA4(void);

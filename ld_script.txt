@@ -119,7 +119,7 @@ SECTIONS {
         src/field/trainer_see.o(.text);
         src/field/wild_encounter.o(.text);
         src/field/field_effect.o(.text);
-        src/unknown_task.o(.text);
+        src/scanline_effect.o(.text);
         src/pokemon/pokemon_menu.o(.text);
         src/engine/option_menu.o(.text);
         src/pokemon/pokedex.o(.text);

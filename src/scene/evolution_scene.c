@@ -9,7 +9,7 @@
 #include "pokemon.h"
 #include "string_util.h"
 #include "battle.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "data2.h"
 #include "decompress.h"
 #include "m4a.h"

@@ -8,7 +8,7 @@
 #include "script.h"
 #include "strings.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "main.h"
 #include "menu.h"

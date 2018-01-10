@@ -15,7 +15,7 @@
 #include "strings.h"
 #include "task.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"

@@ -3,7 +3,7 @@
 #include "trig.h"
 #include "battle_anim.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;

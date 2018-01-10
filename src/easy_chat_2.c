@@ -17,7 +17,7 @@
 #include "strings.h"
 #include "strings2.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern void sub_8095C8C();
 extern void sub_809D104(void *, u16, u16, const void *, u16, u16, u16, u16);

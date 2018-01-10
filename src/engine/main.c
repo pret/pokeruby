@@ -13,7 +13,7 @@
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 IntrMain[];

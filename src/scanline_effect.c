@@ -2,7 +2,7 @@
 #include "data2.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void sub_80896F4(void);
 static void sub_8089714(void);

@@ -23,7 +23,7 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 asm(".include \"constants/gba_constants.inc\"");
 

@@ -29,7 +29,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void sub_809FC0C(void);
 static void sub_809FEB8(void);

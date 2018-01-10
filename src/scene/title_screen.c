@@ -13,7 +13,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 #if ENGLISH
 #define VERSION_BANNER_SHAPE 1

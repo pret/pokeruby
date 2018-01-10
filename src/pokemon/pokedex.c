@@ -23,7 +23,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 #define NATIONAL_DEX_COUNT 386

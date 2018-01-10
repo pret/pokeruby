@@ -14,7 +14,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern u16 gSpecialVar_Result;
 extern struct SpriteTemplate gUnknown_02024E8C;

@@ -3,7 +3,7 @@
 #include "battle_anim.h"
 #include "palette.h"
 #include "main.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "rom_8077ABC.h"
 #include "data2.h"

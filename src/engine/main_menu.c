@@ -21,7 +21,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))

@@ -29,7 +29,7 @@
 #include "task.h"
 #include "text.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool

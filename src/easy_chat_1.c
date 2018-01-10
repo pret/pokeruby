@@ -14,7 +14,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern const struct WindowTemplate gWindowTemplate_81E6D54;
 extern const struct WindowTemplate gWindowTemplate_81E6DA8;

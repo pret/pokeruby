@@ -10,7 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void VBlankCB(void);
 static void MainCB2(void);

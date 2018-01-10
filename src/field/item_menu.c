@@ -33,7 +33,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 // External stuff

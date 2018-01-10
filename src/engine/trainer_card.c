@@ -18,7 +18,7 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 #include "ewram.h"
 

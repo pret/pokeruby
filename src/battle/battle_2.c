@@ -34,7 +34,7 @@
 #include "trainer.h"
 #include "trig.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
