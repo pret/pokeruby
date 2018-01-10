@@ -10956,7 +10956,7 @@ sub_80F5B50: @ 80F5B50
 _080F5B68: .4byte gUnknown_083DFEC4
 _080F5B6C: .4byte 0x00009345
 _080F5B70:
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	ldr r0, _080F5BA8 @ =gScanlineEffectRegBuffers
 	movs r2, 0xEF
 	movs r3, 0xF4

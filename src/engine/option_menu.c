@@ -3,12 +3,12 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "scanline_effect.h"
 #include "sprite.h"
 #include "strings2.h"
 #include "task.h"
 
 extern void SetPokemonCryStereo(u32 val);
-extern void ScanlineEffect_Stop(void);
 
 //Task data
 enum {

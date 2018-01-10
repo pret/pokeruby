@@ -108,9 +108,9 @@ extern u16 gUnknown_02024DE8;
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gUnknown_02038470[];
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG1_Y;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern struct Window gUnknown_030041D0;
 extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
@@ -219,7 +219,7 @@ void InitBattle(void)
     REG_WINOUT = 0;
     gBattle_WIN0H = 0xF0;
     gBattle_WIN0V = 0x5051;
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 80; i++)
     {
@@ -242,8 +242,8 @@ void InitBattle(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
     gBattleTerrain = BattleSetup_GetTerrain();
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
@@ -1064,8 +1064,8 @@ void sub_800FCFC(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     REG_WIN0H = gBattle_WIN0H;
     REG_WIN0V = gBattle_WIN0V;
     REG_WIN1H = gBattle_WIN1H;
@@ -1197,7 +1197,7 @@ void c2_8011A1C(void)
     REG_WINOUT = 0;
     gBattle_WIN0H = 0xF0;
     gBattle_WIN0V = 0x5051;
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 80; i++)
     {
@@ -1218,8 +1218,8 @@ void c2_8011A1C(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
 
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);

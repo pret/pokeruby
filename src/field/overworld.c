@@ -1731,7 +1731,7 @@ void sub_8054D4C(u32 a1)
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
     sub_805C7C4(0);

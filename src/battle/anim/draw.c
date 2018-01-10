@@ -53,8 +53,8 @@ void sub_80D0C88(u8 taskId)
     }
 
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    params.unk8 = 1;
-    params.unk9 = 0;
+    params.initState = 1;
+    params.unused9 = 0;
     ScanlineEffect_SetParams(params);
     task->func = sub_80D0D68;
 }

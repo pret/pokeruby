@@ -16,7 +16,7 @@
 #include "scanline_effect.h"
 
 void sub_807DE10(void);
-void dp12_8087EA4(void);
+void ScanlineEffect_Clear(void);
 
 extern const struct OamData gFieldOamData_32x32;
 
@@ -670,7 +670,7 @@ static bool8 Phase2_Transition_Swirl_Func1(struct Task* task)
     u16 savedIME;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
     sub_811D6E8(gScanlineEffectRegBuffers[1], TRANSITION_STRUCT.field_14, 0, 2, 0, 160);
 
@@ -730,7 +730,7 @@ static bool8 Phase2_Transition_Shuffle_Func1(struct Task* task)
     u16 savedIME;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
     memset(gScanlineEffectRegBuffers[1], TRANSITION_STRUCT.field_16, 0x140);
@@ -798,7 +798,7 @@ static bool8 Phase2_Transition_BigPokeball_Func1(struct Task* task)
     u16 *dst1, *dst2;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     task->data[1] = 16;
     task->data[2] = 0;
@@ -1076,7 +1076,7 @@ static bool8 Phase2_Transition_Clockwise_BlackFade_Func1(struct Task* task)
     u16 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     TRANSITION_STRUCT.WININ = 0;
     TRANSITION_STRUCT.WINOUT = 63;
@@ -1269,7 +1269,7 @@ static bool8 Phase2_Transition_Ripple_Func1(struct Task* task)
     u8 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 160; i++)
     {
@@ -1348,7 +1348,7 @@ static bool8 Phase2_Transition_Wave_Func1(struct Task* task)
     u8 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     TRANSITION_STRUCT.WININ = 63;
     TRANSITION_STRUCT.WINOUT = 0;
@@ -1460,7 +1460,7 @@ static bool8 Phase2_Mugshot_Func1(struct Task* task)
     u8 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     Mugshots_CreateOpponentPlayerSprites(task);
 
     task->data[1] = 0;
@@ -1844,7 +1844,7 @@ static bool8 Phase2_Transition_Slice_Func1(struct Task* task)
     u16 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     task->data[2] = 256;
     task->data[3] = 1;
@@ -1943,7 +1943,7 @@ static bool8 Phase2_Transition_WhiteFade_Func1(struct Task* task)
     u16 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     TRANSITION_STRUCT.BLDCNT = 0xBF;
     TRANSITION_STRUCT.BLDY = 0;
@@ -2158,7 +2158,7 @@ static bool8 Phase2_Transition_Shards_Func1(struct Task* task)
     u16 i;
 
     sub_811D658();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     TRANSITION_STRUCT.WININ = 0x3F;
     TRANSITION_STRUCT.WINOUT = 0;

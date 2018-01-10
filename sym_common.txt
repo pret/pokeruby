@@ -8,13 +8,13 @@
 @ battle
 
 	.align 2
-gUnknown_030041B0: @ 30041B0
+gBattle_BG3_X: @ 30041B0
 	.space 0x4
 
 gBattle_BG1_Y: @ 30041B4
 	.space 0x4
 
-gUnknown_030041B8: @ 30041B8
+gBattle_BG3_Y: @ 30041B8
 	.space 0x8
 
 gBattleTextBuff1: @ 30041C0

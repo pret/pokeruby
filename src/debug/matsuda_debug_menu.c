@@ -35,8 +35,8 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
 extern struct Window gUnknown_03004210;
 extern u8 (*gCallback_03004AE8)(void);
 
@@ -463,8 +463,8 @@ static void sub_80A9F50(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
 }
 
 static void sub_80A9FE4(void)
@@ -511,8 +511,8 @@ static void sub_80AA090(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -528,7 +528,7 @@ static void sub_80AA10C(void)
     gPaletteFade.bufferTransferDisabled = 1;
     SetVBlankCallback(0);
     sub_80A9F50();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     ResetPaletteFade();
     ResetSpriteData();
     ResetTasks();

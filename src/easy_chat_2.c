@@ -2053,7 +2053,7 @@ void sub_80EAD08(void)
     u16 r2;
     u16 i;
 
-    r4 = gScanlineEffectRegBuffers[gScanlineEffect.srcBank];
+    r4 = gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
     r4 += 88;
     r2 = (gEasyChatStruct->unk1BA - 88) & 0xFF;
 

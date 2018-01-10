@@ -730,7 +730,7 @@ bool8 sub_8093AA0(struct Task *task)
     u32 i;
 
     ewram0_2.var_4 = FALSE;
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     for (i = 0; i < 0xA0; i++)
         gScanlineEffectRegBuffers[1][i] = -4;
     SetHBlankCallback(sub_8093D7C);

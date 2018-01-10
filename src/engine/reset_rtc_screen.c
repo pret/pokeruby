@@ -439,7 +439,7 @@ void CB2_InitResetRtcScreen(void)
     ResetOamRange(0, 128);
     LoadOam();
     ScanlineEffect_Stop();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     ResetSpriteData();
     ResetTasks();
     ResetPaletteFade();

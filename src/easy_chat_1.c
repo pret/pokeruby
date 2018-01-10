@@ -297,7 +297,7 @@ void sub_80E62F8(void)
         SetVBlankCallback(0);
         ResetPaletteFade();
         ResetSpriteData();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         ScanlineEffect_Stop();
         sub_80EAD08();
         ScanlineEffect_SetParams(gUnknown_083DB698);

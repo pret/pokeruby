@@ -771,7 +771,7 @@ static bool32 sub_80719FC(u8 *step)
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         break;
     case 2:
         Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);

@@ -1103,15 +1103,15 @@ _080E24F0:
 	beq _080E2508
 	b _080E2518
 _080E24F6:
-	ldr r1, _080E24FC @ =gUnknown_030041B0
+	ldr r1, _080E24FC @ =gBattle_BG3_X
 	b _080E250A
 	.align 2, 0
-_080E24FC: .4byte gUnknown_030041B0
+_080E24FC: .4byte gBattle_BG3_X
 _080E2500:
-	ldr r1, _080E2504 @ =gUnknown_030041B8
+	ldr r1, _080E2504 @ =gBattle_BG3_Y
 	b _080E250A
 	.align 2, 0
-_080E2504: .4byte gUnknown_030041B8
+_080E2504: .4byte gBattle_BG3_Y
 _080E2508:
 	ldr r1, _080E2514 @ =gSpriteCoordOffsetX
 _080E250A:
@@ -1359,10 +1359,10 @@ sub_80E26BC: @ 80E26BC
 	strh r1, [r2, 0xE]
 	ldrh r1, [r3, 0x6]
 	strh r1, [r2, 0x18]
-	ldr r4, _080E2704 @ =gUnknown_030041B0
+	ldr r4, _080E2704 @ =gBattle_BG3_X
 	ldrh r1, [r3]
 	strh r1, [r4]
-	ldr r4, _080E2708 @ =gUnknown_030041B8
+	ldr r4, _080E2708 @ =gBattle_BG3_Y
 	ldrh r1, [r3, 0x2]
 	strh r1, [r4]
 	ldr r1, _080E270C @ =sub_80E2710
@@ -1374,8 +1374,8 @@ sub_80E26BC: @ 80E26BC
 	.align 2, 0
 _080E26FC: .4byte gTasks
 _080E2700: .4byte gBattleAnimArgs
-_080E2704: .4byte gUnknown_030041B0
-_080E2708: .4byte gUnknown_030041B8
+_080E2704: .4byte gBattle_BG3_X
+_080E2708: .4byte gBattle_BG3_Y
 _080E270C: .4byte sub_80E2710
 	thumb_func_end sub_80E26BC
 
@@ -1395,7 +1395,7 @@ sub_80E2710: @ 80E2710
 	mov r12, r1
 	cmp r0, 0
 	bne _080E2796
-	ldr r0, _080E2744 @ =gUnknown_030041B0
+	ldr r0, _080E2744 @ =gBattle_BG3_X
 	ldrh r2, [r0]
 	movs r7, 0x8
 	ldrsh r1, [r3, r7]
@@ -1407,12 +1407,12 @@ sub_80E2710: @ 80E2710
 	b _080E274A
 	.align 2, 0
 _080E2740: .4byte gTasks
-_080E2744: .4byte gUnknown_030041B0
+_080E2744: .4byte gBattle_BG3_X
 _080E2748:
 	ldrh r0, [r3, 0x8]
 _080E274A:
 	strh r0, [r6]
-	ldr r2, _080E2768 @ =gUnknown_030041B8
+	ldr r2, _080E2768 @ =gBattle_BG3_Y
 	ldrh r3, [r2]
 	lsls r1, r5, 2
 	adds r0, r1, r5
@@ -1426,7 +1426,7 @@ _080E274A:
 	movs r0, 0
 	b _080E2770
 	.align 2, 0
-_080E2768: .4byte gUnknown_030041B8
+_080E2768: .4byte gBattle_BG3_Y
 _080E276C:
 	ldrh r0, [r4, 0xA]
 	negs r0, r0
@@ -3905,13 +3905,13 @@ sub_80E3AD0: @ 80E3AD0
 	ldrh r7, [r1, 0x1E]
 	adds r2, r7
 	strh r2, [r1, 0x1E]
-	ldr r6, _080E3B40 @ =gUnknown_030041B0
+	ldr r6, _080E3B40 @ =gBattle_BG3_X
 	lsls r0, r3, 16
 	asrs r0, 24
 	ldrh r4, [r6]
 	adds r0, r4
 	strh r0, [r6]
-	ldr r4, _080E3B44 @ =gUnknown_030041B8
+	ldr r4, _080E3B44 @ =gBattle_BG3_Y
 	lsls r0, r2, 16
 	asrs r0, 24
 	ldrh r7, [r4]
@@ -3942,8 +3942,8 @@ _080E3B36:
 	bx r0
 	.align 2, 0
 _080E3B3C: .4byte gTasks
-_080E3B40: .4byte gUnknown_030041B0
-_080E3B44: .4byte gUnknown_030041B8
+_080E3B40: .4byte gBattle_BG3_X
+_080E3B44: .4byte gBattle_BG3_Y
 _080E3B48: .4byte gBattleAnimArgs
 	thumb_func_end sub_80E3AD0
 

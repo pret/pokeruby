@@ -711,7 +711,7 @@ void CB2_InitTitleScreen(void)
         if (!UpdatePaletteFade())
         {
             StartPokemonLogoShine(FALSE);
-            ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, 4, 1);
+            ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
             SetMainCallback2(MainCB2);
         }
         break;

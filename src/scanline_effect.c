@@ -13,10 +13,10 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
 
-EWRAM_DATA static u8 gUnknown_0202FFA4 = 0;
+EWRAM_DATA static u8 sShouldStopWaveTask = FALSE;
 
 struct ScanlineEffect gScanlineEffect;
 
@@ -27,27 +27,27 @@ u16 gScanlineEffectRegBuffers[2][0x3C0];
 
 void ScanlineEffect_Stop(void)
 {
-    gScanlineEffect.unk15 = 0;
+    gScanlineEffect.state = 0;
     DmaStop(0);
-    if (gScanlineEffect.taskId != 0xFF)
+    if (gScanlineEffect.waveTaskId != 0xFF)
     {
-        DestroyTask(gScanlineEffect.taskId);
-        gScanlineEffect.taskId = 0xFF;
+        DestroyTask(gScanlineEffect.waveTaskId);
+        gScanlineEffect.waveTaskId = 0xFF;
     }
 }
 
-void dp12_8087EA4(void)
+void ScanlineEffect_Clear(void)
 {
     CpuFill16(0, gScanlineEffectRegBuffers, sizeof(gScanlineEffectRegBuffers));
-    gScanlineEffect.src[0] = NULL;
-    gScanlineEffect.src[1] = NULL;
+    gScanlineEffect.dmaSrcBuffers[0] = NULL;
+    gScanlineEffect.dmaSrcBuffers[1] = NULL;
     gScanlineEffect.dmaDest = NULL;
     gScanlineEffect.dmaControl = 0;
-    gScanlineEffect.srcBank = 0;
-    gScanlineEffect.unk15 = 0;
-    gScanlineEffect.unk16 = 0;
-    gScanlineEffect.unk17 = 0;
-    gScanlineEffect.taskId = 0xFF;
+    gScanlineEffect.srcBuffer = 0;
+    gScanlineEffect.state = 0;
+    gScanlineEffect.unused16 = 0;
+    gScanlineEffect.unused17 = 0;
+    gScanlineEffect.waveTaskId = 0xFF;
 }
 
 void ScanlineEffect_SetParams(struct ScanlineEffectParams params)
@@ -56,48 +56,49 @@ void ScanlineEffect_SetParams(struct ScanlineEffectParams params)
     {
         // Set the DMA src to the value for the second scanline because the
         // first DMA transfer occurs in HBlank *after* the first scanline is drawn
-        gScanlineEffect.src[0] = (u16 *)gScanlineEffectRegBuffers[0] + 1;
-        gScanlineEffect.src[1] = (u16 *)gScanlineEffectRegBuffers[1] + 1;
+        gScanlineEffect.dmaSrcBuffers[0] = (u16 *)gScanlineEffectRegBuffers[0] + 1;
+        gScanlineEffect.dmaSrcBuffers[1] = (u16 *)gScanlineEffectRegBuffers[1] + 1;
         gScanlineEffect.setFirstScanlineReg = CopyValue16Bit;
     }
     else  // assume 32-bit
     {
         // Set the DMA src to the value for the second scanline because the
         // first DMA transfer occurs in HBlank *after* the first scanline is drawn
-        gScanlineEffect.src[0] = (u32 *)gScanlineEffectRegBuffers[0] + 1;
-        gScanlineEffect.src[1] = (u32 *)gScanlineEffectRegBuffers[1] + 1;
+        gScanlineEffect.dmaSrcBuffers[0] = (u32 *)gScanlineEffectRegBuffers[0] + 1;
+        gScanlineEffect.dmaSrcBuffers[1] = (u32 *)gScanlineEffectRegBuffers[1] + 1;
         gScanlineEffect.setFirstScanlineReg = CopyValue32Bit;
     }
 
     gScanlineEffect.dmaControl = params.dmaControl;
-    gScanlineEffect.dmaDest = params.dmaDest;
-    gScanlineEffect.unk15 = params.unk8;
-    gScanlineEffect.unk16 = params.unk9;
-    gScanlineEffect.unk17 = params.unk9;
+    gScanlineEffect.dmaDest    = params.dmaDest;
+    gScanlineEffect.state      = params.initState;
+    gScanlineEffect.unused16   = params.unused9;
+    gScanlineEffect.unused17   = params.unused9;
 }
 
 void ScanlineEffect_InitHBlankDmaTransfer(void)
 {
-    if (gScanlineEffect.unk15 != 0)
+    if (gScanlineEffect.state == 0)
     {
-        if (gScanlineEffect.unk15 == 3)
-        {
-            gScanlineEffect.unk15 = 0;
-            DmaStop(0);
-            gUnknown_0202FFA4 = 1;
-        }
-        else
-        {
-            DmaStop(0);
-            // Set DMA to copy to dest register on each HBlank for the next frame.
-            // The HBlank DMA transfers do not occurr during VBlank, so the transfer
-            // will begin on the HBlank after the first scanline
-            DmaSet(0, gScanlineEffect.src[gScanlineEffect.srcBank], gScanlineEffect.dmaDest, gScanlineEffect.dmaControl);
-            // Manually set the reg for the first scanline
-            gScanlineEffect.setFirstScanlineReg();
-            // Swap current buffer
-            gScanlineEffect.srcBank ^= 1;
-        }
+        return;
+    }
+    else if (gScanlineEffect.state == 3)
+    {
+        gScanlineEffect.state = 0;
+        DmaStop(0);
+        sShouldStopWaveTask = TRUE;
+    }
+    else
+    {
+        DmaStop(0);
+        // Set DMA to copy to dest register on each HBlank for the next frame.
+        // The HBlank DMA transfers do not occurr during VBlank, so the transfer
+        // will begin on the HBlank after the first scanline
+        DmaSet(0, gScanlineEffect.dmaSrcBuffers[gScanlineEffect.srcBuffer], gScanlineEffect.dmaDest, gScanlineEffect.dmaControl);
+        // Manually set the reg for the first scanline
+        gScanlineEffect.setFirstScanlineReg();
+        // Swap current buffer
+        gScanlineEffect.srcBuffer ^= 1;
     }
 }
 
@@ -107,7 +108,7 @@ void ScanlineEffect_InitHBlankDmaTransfer(void)
 static void CopyValue16Bit(void)
 {
     u16 *dest = (u16 *)gScanlineEffect.dmaDest;
-    u16 *src = (u16 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBank];
+    u16 *src = (u16 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
 
     *dest = *src;
 }
@@ -115,86 +116,87 @@ static void CopyValue16Bit(void)
 static void CopyValue32Bit(void)
 {
     u32 *dest = (u32 *)gScanlineEffect.dmaDest;
-    u32 *src = (u32 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBank];
+    u32 *src = (u32 *)&gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
 
     *dest = *src;
 }
 
-#define tStartLine      data[0]
-#define tEndLine        data[1]
-#define framesUntilMove data[4]
-#define tDelayInterval  data[5]
-#define tRegOffset      data[6]
+#define tStartLine            data[0]
+#define tEndLine              data[1]
+#define tWaveLength           data[2]
+#define tSrcBufferOffset      data[3]
+#define tFramesUntilMove      data[4]
+#define tDelayInterval        data[5]
+#define tRegOffset            data[6]
+#define tApplyBattleBgOffsets data[7]
 
 static void TaskFunc_UpdateWavePerFrame(u8 taskId)
 {
     int value = 0;
+    int i;
+    int offset;
 
-    if (gUnknown_0202FFA4)
+    if (sShouldStopWaveTask)
     {
         DestroyTask(taskId);
-        gScanlineEffect.taskId = 0xFF;
+        gScanlineEffect.waveTaskId = 0xFF;
     }
     else
     {
-        if (gTasks[taskId].data[7])
+        if (gTasks[taskId].tApplyBattleBgOffsets)
         {
             switch (gTasks[taskId].tRegOffset)
             {
-            case 0x0:
+            case SCANLINE_EFFECT_REG_BG0HOFS:
                 value = gBattle_BG0_X;
                 break;
-            case 0x2:
+            case SCANLINE_EFFECT_REG_BG0VOFS:
                 value = gBattle_BG0_Y;
                 break;
-            case 0x4:
+            case SCANLINE_EFFECT_REG_BG1HOFS:
                 value = gBattle_BG1_X;
                 break;
-            case 0x6:
+            case SCANLINE_EFFECT_REG_BG1VOFS:
                 value = gBattle_BG1_Y;
                 break;
-            case 0x8:
+            case SCANLINE_EFFECT_REG_BG2HOFS:
                 value = gBattle_BG2_X;
                 break;
-            case 0xA:
+            case SCANLINE_EFFECT_REG_BG2VOFS:
                 value = gBattle_BG2_Y;
                 break;
-            case 0xC:
-                value = gUnknown_030041B0;
+            case SCANLINE_EFFECT_REG_BG3HOFS:
+                value = gBattle_BG3_X;
                 break;
-            case 0xE:
-                value = gUnknown_030041B8;
+            case SCANLINE_EFFECT_REG_BG3VOFS:
+                value = gBattle_BG3_Y;
                 break;
             }
         }
-        if (gTasks[taskId].framesUntilMove != 0)
+        if (gTasks[taskId].tFramesUntilMove != 0)
         {
-            int i;
-            int offset;
-
-            gTasks[taskId].framesUntilMove--;
-            offset = gTasks[taskId].data[3] + 320;
+            gTasks[taskId].tFramesUntilMove--;
+            offset = gTasks[taskId].tSrcBufferOffset + 320;
             for (i = gTasks[taskId].tStartLine; i < gTasks[taskId].tEndLine; i++)
             {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBank][i] = gScanlineEffectRegBuffers[0][offset] + value;
+                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gScanlineEffectRegBuffers[0][offset] + value;
                 offset++;
             }
         }
         else
         {
-            int i;
-            int offset;
-
-            gTasks[taskId].framesUntilMove = gTasks[taskId].tDelayInterval;
-            offset = gTasks[taskId].data[3] + 320;
+            gTasks[taskId].tFramesUntilMove = gTasks[taskId].tDelayInterval;
+            offset = gTasks[taskId].tSrcBufferOffset + 320;
             for (i = gTasks[taskId].tStartLine; i < gTasks[taskId].tEndLine; i++)
             {
-                gScanlineEffectRegBuffers[gScanlineEffect.srcBank][i] = gScanlineEffectRegBuffers[0][offset] + value;
+                gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gScanlineEffectRegBuffers[0][offset] + value;
                 offset++;
             }
-            gTasks[taskId].data[3]++;
-            if (gTasks[taskId].data[3] == gTasks[taskId].data[2])
-                gTasks[taskId].data[3] = 0;
+
+            // increment src buffer offset
+            gTasks[taskId].tSrcBufferOffset++;
+            if (gTasks[taskId].tSrcBufferOffset == gTasks[taskId].tWaveLength)
+                gTasks[taskId].tSrcBufferOffset = 0;
         }
     }
 }
@@ -216,39 +218,38 @@ static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
 // 'frequency' and 'amplitude' control the frequency and amplitude of the wave.
 // 'delayInterval' controls how fast the wave travels up the screen. The wave will shift upwards one scanline every 'delayInterval'+1 frames.
 // 'regOffset' is the offset of the video register to modify.
-u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude, u8 delayInterval, u8 regOffset, bool8 a7)
+u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude, u8 delayInterval, u8 regOffset, bool8 applyBattleBgOffsets)
 {
     int i;
     int offset;
     struct ScanlineEffectParams params;
     u8 taskId;
 
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     params.dmaDest = (void *)(REG_ADDR_BG0HOFS + regOffset);
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    params.unk8 = 1;
-    params.unk9 = 0;
+    params.initState = 1;
+    params.unused9 = 0;
     ScanlineEffect_SetParams(params);
 
     taskId = CreateTask(TaskFunc_UpdateWavePerFrame, 0);
 
-    gTasks[taskId].tStartLine      = startLine;
-    gTasks[taskId].tEndLine        = endLine;
-    gTasks[taskId].data[2]         = 256 / frequency;
-    gTasks[taskId].data[3]         = 0;
-    gTasks[taskId].framesUntilMove = delayInterval;
-    gTasks[taskId].tDelayInterval  = delayInterval;
-    gTasks[taskId].tRegOffset      = regOffset;
-    gTasks[taskId].data[7]         = a7;
+    gTasks[taskId].tStartLine            = startLine;
+    gTasks[taskId].tEndLine              = endLine;
+    gTasks[taskId].tWaveLength           = 256 / frequency;
+    gTasks[taskId].tSrcBufferOffset      = 0;
+    gTasks[taskId].tFramesUntilMove      = delayInterval;
+    gTasks[taskId].tDelayInterval        = delayInterval;
+    gTasks[taskId].tRegOffset            = regOffset;
+    gTasks[taskId].tApplyBattleBgOffsets = applyBattleBgOffsets;
 
-    gScanlineEffect.taskId = taskId;
-    gUnknown_0202FFA4 = 0;
+    gScanlineEffect.waveTaskId = taskId;
+    sShouldStopWaveTask = FALSE;
 
     GenerateWave(&gScanlineEffectRegBuffers[0][320], frequency, amplitude, endLine - startLine);
 
     offset = 320;
-
     for (i = startLine; i < endLine; i++)
     {
         gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[0][offset];
