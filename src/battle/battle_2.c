@@ -34,7 +34,7 @@
 #include "trainer.h"
 #include "trig.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
@@ -108,9 +108,9 @@ extern u16 gUnknown_02024DE8;
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gUnknown_02038470[];
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG1_Y;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern struct Window gUnknown_030041D0;
 extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
@@ -219,22 +219,22 @@ void InitBattle(void)
     REG_WINOUT = 0;
     gBattle_WIN0H = 0xF0;
     gBattle_WIN0V = 0x5051;
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0[0][i] = 0xF0;
-        gUnknown_03004DE0[1][i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0[0][i] = 0xFF10;
-        gUnknown_03004DE0[1][i] = 0xFF10;
+        gScanlineEffectRegBuffers[0][i] = 0xFF10;
+        gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }
-    //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
-    sub_80895F8(gUnknown_081F9674);
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    //ScanlineEffect_SetParams(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
+    ScanlineEffect_SetParams(gUnknown_081F9674);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -242,12 +242,12 @@ void InitBattle(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
     gBattleTerrain = BattleSetup_GetTerrain();
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
     sub_800DAB8();
     ResetSpriteData();
@@ -553,7 +553,7 @@ void sub_800F02C(void)
         gUnknown_02023A00[i].status      = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
         gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
         gUnknown_02023A00[i].gender      = GetMonGender(&gPlayerParty[i]);
-        StripExtCtrlCodes(nickname);
+        Text_StripExtCtrlCodes(nickname);
         gUnknown_02023A00[i].language    = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
         if (gUnknown_02023A00[i].language != 1)
             PadNameString(nickname, 0);
@@ -898,7 +898,7 @@ void BattleMainCB2(void)
 {
     AnimateSprites();
     BuildOamBuffer();
-    sub_800374C(&gUnknown_03004210);
+    Text_UpdateWindowInBattle(&gUnknown_03004210);
     UpdatePaletteFade();
     RunTasks();
 }
@@ -1064,8 +1064,8 @@ void sub_800FCFC(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     REG_WIN0H = gBattle_WIN0H;
     REG_WIN0V = gBattle_WIN0V;
     REG_WIN1H = gBattle_WIN1H;
@@ -1073,7 +1073,7 @@ void sub_800FCFC(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void nullsub_36(struct Sprite *sprite)
@@ -1197,20 +1197,20 @@ void c2_8011A1C(void)
     REG_WINOUT = 0;
     gBattle_WIN0H = 0xF0;
     gBattle_WIN0V = 0x5051;
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0[0][i] = 0xF0;
-        gUnknown_03004DE0[1][i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0[0][i] = 0xFF10;
-        gUnknown_03004DE0[1][i] = 0xFF10;
+        gScanlineEffectRegBuffers[0][i] = 0xFF10;
+        gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }
-    SetUpWindowConfig(&gWindowConfig_81E6C58);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
@@ -1218,12 +1218,12 @@ void c2_8011A1C(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
 
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6C58);
-    InitWindowFromConfig(&gUnknown_030041D0, &gWindowConfig_81E71D0);
-    InitWindowFromConfig(&gUnknown_03004250, &gWindowConfig_81E71EC);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+    Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
+    Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
     LoadCompressedPalette(gUnknown_08D004E0, 0, 64);
     sub_800D74C();

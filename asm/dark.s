@@ -386,7 +386,7 @@ _080E01F4:
 	movs r0, 0x3
 	bl sub_80E08CC
 	movs r3, 0
-	ldr r4, _080E0290 @ =gUnknown_03004DE0
+	ldr r4, _080E0290 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r4, r0
@@ -406,7 +406,7 @@ _080E0220:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldr r1, _080E0294 @ =REG_WINOUT
 	movs r0, 0x3F
 	eors r7, r0
@@ -441,7 +441,7 @@ _080E0280: .4byte 0x00003f44
 _080E0284: .4byte REG_BG2VOFS
 _080E0288: .4byte gBattle_BG1_X
 _080E028C: .4byte 0xa2600001
-_080E0290: .4byte gUnknown_03004DE0
+_080E0290: .4byte gScanlineEffectRegBuffers
 _080E0294: .4byte REG_WINOUT
 _080E0298: .4byte gBattle_WIN0H
 _080E029C: .4byte gBattle_WIN0V
@@ -575,7 +575,7 @@ _080E0380:
 	.align 2, 0
 _080E0398: .4byte gBattle_WIN0H
 _080E039C:
-	ldr r1, _080E03AC @ =gUnknown_03004DC0
+	ldr r1, _080E03AC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E03A2:
@@ -584,7 +584,7 @@ _080E03A2:
 	strh r0, [r4, 0x8]
 	b _080E03B6
 	.align 2, 0
-_080E03AC: .4byte gUnknown_03004DC0
+_080E03AC: .4byte gScanlineEffect
 _080E03B0:
 	adds r0, r2, 0
 	bl DestroyAnimVisualTask
@@ -786,7 +786,7 @@ _080E054E:
 	str r0, [sp, 0xC]
 	movs r3, 0
 	add r4, sp, 0xC
-	ldr r6, _080E059C @ =gUnknown_03004DE0
+	ldr r6, _080E059C @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r7, r6, r0
@@ -815,7 +815,7 @@ _080E055C:
 	strb r2, [r4, 0x9]
 	ldr r0, [sp, 0xC]
 	ldr r2, [r4, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 _080E0590:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -823,7 +823,7 @@ _080E0590:
 	b _080E05F2
 	.align 2, 0
 _080E0598: .4byte REG_BG2VOFS
-_080E059C: .4byte gUnknown_03004DE0
+_080E059C: .4byte gScanlineEffectRegBuffers
 _080E05A0: .4byte 0xa2600001
 _080E05A4:
 	movs r1, 0xE
@@ -1043,7 +1043,7 @@ _080E0732:
 	.align 2, 0
 _080E0750: .4byte REG_BLDALPHA
 _080E0754:
-	ldr r1, _080E0764 @ =gUnknown_03004DC0
+	ldr r1, _080E0764 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _080E075A:
@@ -1052,7 +1052,7 @@ _080E075A:
 	strh r0, [r4, 0x8]
 	b _080E0784
 	.align 2, 0
-_080E0764: .4byte gUnknown_03004DC0
+_080E0764: .4byte gScanlineEffect
 _080E0768:
 	ldr r0, _080E078C @ =gBattle_WIN0H
 	movs r1, 0
@@ -1102,9 +1102,9 @@ sub_80E079C: @ 80E079C
 	movs r4, 0
 	cmp r0, 0
 	ble _080E07FC
-	ldr r0, _080E0888 @ =gUnknown_03004DE0
+	ldr r0, _080E0888 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _080E088C @ =gUnknown_03004DC0
+	ldr r7, _080E088C @ =gScanlineEffect
 _080E07D0:
 	lsls r2, r4, 16
 	asrs r2, 16
@@ -1136,9 +1136,9 @@ _080E07FC:
 	ldrsh r0, [r6, r2]
 	cmp r1, r0
 	bgt _080E0846
-	ldr r0, _080E0888 @ =gUnknown_03004DE0
+	ldr r0, _080E0888 @ =gScanlineEffectRegBuffers
 	mov r12, r0
-	ldr r7, _080E088C @ =gUnknown_03004DC0
+	ldr r7, _080E088C @ =gScanlineEffect
 _080E0810:
 	asrs r4, r3, 16
 	cmp r4, 0
@@ -1179,8 +1179,8 @@ _080E0846:
 	ldrsh r0, [r6, r3]
 	cmp r1, r0
 	bge _080E08BE
-	ldr r7, _080E0888 @ =gUnknown_03004DE0
-	ldr r4, _080E088C @ =gUnknown_03004DC0
+	ldr r7, _080E0888 @ =gScanlineEffectRegBuffers
+	ldr r4, _080E088C @ =gScanlineEffect
 _080E085E:
 	asrs r3, r2, 16
 	cmp r3, 0
@@ -1204,15 +1204,15 @@ _080E0876:
 	blt _080E085E
 	b _080E08BE
 	.align 2, 0
-_080E0888: .4byte gUnknown_03004DE0
-_080E088C: .4byte gUnknown_03004DC0
+_080E0888: .4byte gScanlineEffectRegBuffers
+_080E088C: .4byte gScanlineEffect
 _080E0890:
 	movs r1, 0x1C
 	ldrsh r0, [r6, r1]
 	adds r5, r0, 0
 	adds r5, 0x9F
 	movs r4, 0
-	ldr r3, _080E08C8 @ =gUnknown_03004DE0
+	ldr r3, _080E08C8 @ =gScanlineEffectRegBuffers
 	movs r2, 0xF0
 	lsls r2, 3
 	adds r6, r3, r2
@@ -1238,7 +1238,7 @@ _080E08BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E08C8: .4byte gUnknown_03004DE0
+_080E08C8: .4byte gScanlineEffectRegBuffers
 	thumb_func_end sub_80E079C
 
 	thumb_func_start sub_80E08CC

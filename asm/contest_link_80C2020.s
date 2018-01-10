@@ -12,12 +12,12 @@ sub_80C2020: @ 80C2020
 	lsls r5, 19
 	movs r0, 0x40
 	strh r0, [r5]
-	ldr r4, _080C20F0 @ =gWindowConfig_81E6FA0
+	ldr r4, _080C20F0 @ =gWindowTemplate_81E6FA0
 	adds r0, r4, 0
-	bl SetUpWindowConfig
+	bl Text_LoadWindowTemplate
 	ldr r0, _080C20F4 @ =gMenuWindow
 	adds r1, r4, 0
-	bl InitWindowFromConfig
+	bl Text_InitWindowWithTemplate
 	ldr r1, _080C20F8 @ =REG_BG0CNT
 	movs r2, 0xF8
 	lsls r2, 6
@@ -94,9 +94,9 @@ sub_80C2020: @ 80C2020
 	strh r2, [r0]
 	ldr r0, _080C2128 @ =gBattle_BG2_Y
 	strh r2, [r0]
-	ldr r0, _080C212C @ =gUnknown_030041B0
+	ldr r0, _080C212C @ =gBattle_BG3_X
 	strh r2, [r0]
-	ldr r0, _080C2130 @ =gUnknown_030041B8
+	ldr r0, _080C2130 @ =gBattle_BG3_Y
 	strh r2, [r0]
 	ldr r0, _080C2134 @ =gBattle_WIN0H
 	strh r2, [r0]
@@ -110,7 +110,7 @@ sub_80C2020: @ 80C2020
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C20F0: .4byte gWindowConfig_81E6FA0
+_080C20F0: .4byte gWindowTemplate_81E6FA0
 _080C20F4: .4byte gMenuWindow
 _080C20F8: .4byte REG_BG0CNT
 _080C20FC: .4byte 0x00001803
@@ -125,8 +125,8 @@ _080C211C: .4byte gBattle_BG1_X
 _080C2120: .4byte gBattle_BG1_Y
 _080C2124: .4byte gBattle_BG2_X
 _080C2128: .4byte gBattle_BG2_Y
-_080C212C: .4byte gUnknown_030041B0
-_080C2130: .4byte gUnknown_030041B8
+_080C212C: .4byte gBattle_BG3_X
+_080C2130: .4byte gBattle_BG3_Y
 _080C2134: .4byte gBattle_WIN0H
 _080C2138: .4byte gBattle_WIN0V
 _080C213C: .4byte gBattle_WIN1H
@@ -188,7 +188,7 @@ _080C2162:
 	lsls r2, 2
 	movs r1, 0
 	bl LoadCompressedPalette
-	ldr r0, _080C2234 @ =gWindowConfig_81E6FA0
+	ldr r0, _080C2234 @ =gWindowTemplate_81E6FA0
 	bl LoadFontDefaultPalette
 	movs r6, 0
 _080C21C0:
@@ -242,7 +242,7 @@ _080C2224: .4byte 0x0600e000
 _080C2228: .4byte gUnknown_08D1A250
 _080C222C: .4byte 0x0600f000
 _080C2230: .4byte gUnknown_08D1A618
-_080C2234: .4byte gWindowConfig_81E6FA0
+_080C2234: .4byte gWindowTemplate_81E6FA0
 _080C2238: .4byte 0x000060b2
 _080C223C: .4byte 0x000060a4
 _080C2240:
@@ -357,7 +357,7 @@ _080C230A:
 	lsrs r3, 24
 	str r3, [sp]
 	movs r3, 0x7
-	bl sub_8003460
+	bl Text_InitWindowAndPrintText
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -396,7 +396,7 @@ sub_80C2358: @ 80C2358
 	movs r0, 0
 	bl SetVBlankCallback
 	bl sub_80C2020
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -506,11 +506,11 @@ sub_80C2448: @ 80C2448
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24DC @ =gUnknown_030041B0
+	ldr r0, _080C24DC @ =gBattle_BG3_X
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24E0 @ =gUnknown_030041B8
+	ldr r0, _080C24E0 @ =gBattle_BG3_Y
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x22
@@ -532,7 +532,7 @@ sub_80C2448: @ 80C2448
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8089668
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -543,8 +543,8 @@ _080C24CC: .4byte gBattle_BG1_X
 _080C24D0: .4byte gBattle_BG1_Y
 _080C24D4: .4byte gBattle_BG2_X
 _080C24D8: .4byte gBattle_BG2_Y
-_080C24DC: .4byte gUnknown_030041B0
-_080C24E0: .4byte gUnknown_030041B8
+_080C24DC: .4byte gBattle_BG3_X
+_080C24E0: .4byte gBattle_BG3_Y
 _080C24E4: .4byte gBattle_WIN0H
 _080C24E8: .4byte gBattle_WIN0V
 _080C24EC: .4byte gBattle_WIN1H
@@ -1826,11 +1826,11 @@ _080C2F24: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start sub_80C2F28
 sub_80C2F28: @ 80C2F28
 	push {r4,r5,lr}
-	ldr r2, _080C2F5C @ =gUnknown_030041B0
+	ldr r2, _080C2F5C @ =gBattle_BG3_X
 	ldrh r3, [r2]
 	adds r0, r3, 0x2
 	strh r0, [r2]
-	ldr r4, _080C2F60 @ =gUnknown_030041B8
+	ldr r4, _080C2F60 @ =gBattle_BG3_Y
 	ldrh r5, [r4]
 	adds r1, r5, 0x1
 	strh r1, [r4]
@@ -1854,8 +1854,8 @@ _080C2F56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C2F5C: .4byte gUnknown_030041B0
-_080C2F60: .4byte gUnknown_030041B8
+_080C2F5C: .4byte gBattle_BG3_X
+_080C2F60: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80C2F28
 
 	thumb_func_start sub_80C2F64
@@ -2170,7 +2170,7 @@ sub_80C3158: @ 80C3158
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r4, 0x6]
-	ldr r1, _080C32C4 @ =gWindowConfig_81E7278
+	ldr r1, _080C32C4 @ =gWindowTemplate_81E7278
 	mov r8, r1
 	ldr r7, _080C32C8 @ =0x06010000
 	ldr r2, _080C32CC @ =0x040000d4
@@ -2194,7 +2194,7 @@ _080C31CE:
 	bge _080C31CE
 	mov r0, r8
 	mov r1, r9
-	bl GetStringWidthGivenWindowConfig
+	bl Text_GetStringWidthFromWindowTemplate
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r2, _080C32D4 @ =gDisplayedStringBattle
@@ -2296,7 +2296,7 @@ _080C32B2:
 	b _080C3322
 	.align 2, 0
 _080C32C0: .4byte gSprites
-_080C32C4: .4byte gWindowConfig_81E7278
+_080C32C4: .4byte gWindowTemplate_81E7278
 _080C32C8: .4byte 0x06010000
 _080C32CC: .4byte 0x040000d4
 _080C32D0: .4byte 0x85000100

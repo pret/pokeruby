@@ -3,12 +3,12 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "scanline_effect.h"
 #include "sprite.h"
 #include "strings2.h"
 #include "task.h"
 
 extern void SetPokemonCryStereo(u32 val);
-extern void remove_some_task(void);
 
 //Task data
 enum {
@@ -110,17 +110,17 @@ void CB2_InitOptionMenu(void)
     }
     case 1:
         ResetPaletteFade();
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         gMain.state++;
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E71B4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E71B4);
         gMain.state++;
         break;
     case 3:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E71B4);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E71B4);
         gMain.state++;
         break;
     case 4:
@@ -173,17 +173,17 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].data[TD_BUTTONMODE] = gSaveBlock2.optionsButtonMode;
         gTasks[taskId].data[TD_FRAMETYPE] = gSaveBlock2.optionsWindowFrameType;
 
-        MenuDrawTextWindow(2, 0, 27, 3);
-        MenuDrawTextWindow(2, 4, 27, 19);
+        Menu_DrawStdWindowFrame(2, 0, 27, 3);
+        Menu_DrawStdWindowFrame(2, 4, 27, 19);
 
-        MenuPrint(gSystemText_OptionMenu, 4, 1);
-        MenuPrint(gSystemText_TextSpeed, 4, 5);
-        MenuPrint(gSystemText_BattleScene, 4, 7);
-        MenuPrint(gSystemText_BattleStyle, 4, 9);
-        MenuPrint(gSystemText_Sound, 4, 11);
-        MenuPrint(gSystemText_ButtonMode, 4, 13);
-        MenuPrint(gSystemText_Frame, 4, 15);
-        MenuPrint(gSystemText_Cancel, 4, 17);
+        Menu_PrintText(gSystemText_OptionMenu, 4, 1);
+        Menu_PrintText(gSystemText_TextSpeed, 4, 5);
+        Menu_PrintText(gSystemText_BattleScene, 4, 7);
+        Menu_PrintText(gSystemText_BattleStyle, 4, 9);
+        Menu_PrintText(gSystemText_Sound, 4, 11);
+        Menu_PrintText(gSystemText_ButtonMode, 4, 13);
+        Menu_PrintText(gSystemText_Frame, 4, 15);
+        Menu_PrintText(gSystemText_Cancel, 4, 17);
 
         TextSpeed_DrawChoices(gTasks[taskId].data[TD_TEXTSPEED]);
         BattleScene_DrawChoices(gTasks[taskId].data[TD_BATTLESCENE]);
@@ -313,7 +313,7 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
     dst[2] = style;
     dst[i] = EOS;
-    MenuPrint_PixelCoords(dst, x, y, 1);
+    Menu_PrintTextPixelCoords(dst, x, y, 1);
 }
 
 static u8 TextSpeed_ProcessInput(u8 selection)
@@ -432,11 +432,11 @@ static u8 FrameType_ProcessInput(u8 selection)
 {
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (selection <= 18)
+        if (selection < 19)
             selection++;
         else
             selection = 0;
-        MenuLoadTextWindowGraphics_OverrideFrameType(selection);
+        Menu_LoadStdFrameGraphicsOverrideStyle(selection);
     }
     if (gMain.newKeys & DPAD_LEFT)
     {
@@ -444,7 +444,7 @@ static u8 FrameType_ProcessInput(u8 selection)
             selection--;
         else
             selection = 19;
-        MenuLoadTextWindowGraphics_OverrideFrameType(selection);
+        Menu_LoadStdFrameGraphicsOverrideStyle(selection);
     }
     return selection;
 }
@@ -478,8 +478,8 @@ static void FrameType_DrawChoices(u8 selection)
     }
 
     text[i] = EOS;
-    MenuPrint(gSystemText_Type, 15, 15);
-    MenuPrint(text, 18, 15);
+    Menu_PrintText(gSystemText_Type, 15, 15);
+    Menu_PrintText(text, 18, 15);
 }
 #elif GERMAN
 __attribute__((naked))
@@ -536,7 +536,7 @@ _0808C380:\n\
     mov r0, sp\n\
     movs r1, 0xF\n\
     movs r2, 0xF\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     add sp, 0x10\n\
     pop {r4-r6}\n\
     pop {r0}\n\

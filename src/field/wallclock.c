@@ -10,7 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];
@@ -229,15 +229,15 @@ static void LoadWallClockGraphics(void)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
     else
         LoadPalette(gMiscClockFemale_Pal, 0, 32);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
     LoadCompressedObjectPic(&gUnknown_083F7A90[0]);
     LoadSpritePalettes(gUnknown_083F7AA0);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
 }
 
 static void WallClockInit(void)
@@ -414,10 +414,10 @@ static void Task_SetClock2(u8 taskId)
 //Ask player "Is this the correct time?"
 static void Task_SetClock3(u8 taskId)
 {
-    MenuDrawTextWindow(2, 16, 27, 19);
-    MenuPrint(gOtherText_CorrectTimePrompt, 3, 17);
-    MenuDrawTextWindow(23, 8, 29, 13);
-    PrintMenuItems(24, 9, 2, gMenuYesNoItems);
+    Menu_DrawStdWindowFrame(2, 16, 27, 19);
+    Menu_PrintText(gOtherText_CorrectTimePrompt, 3, 17);
+    Menu_DrawStdWindowFrame(23, 8, 29, 13);
+    Menu_PrintItems(24, 9, 2, gMenuYesNoItems);
     InitMenu(0, 24, 9, 2, 1, 5);
     gTasks[taskId].func = Task_SetClock4;
 }
@@ -425,7 +425,7 @@ static void Task_SetClock3(u8 taskId)
 //Get menu selection
 static void Task_SetClock4(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         PlaySE(SE_SELECT);
@@ -433,10 +433,10 @@ static void Task_SetClock4(u8 taskId)
         return;
     case -1:    //B button
     case 1:     //NO
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(23, 8, 29, 13);
-        MenuZeroFillWindowRect(2, 16, 27, 19);
+        Menu_EraseWindowRect(23, 8, 29, 13);
+        Menu_EraseWindowRect(2, 16, 27, 19);
         gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock
     }
 }

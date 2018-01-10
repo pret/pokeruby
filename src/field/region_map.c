@@ -1540,11 +1540,11 @@ void CB2_InitFlyRegionMap(void)
         FreeAllSpritePalettes();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
-        InitMenuWindow(&gWindowConfig_81E7224);
-        MenuZeroFillScreen();
+        InitMenuWindow(&gWindowTemplate_81E7224);
+        Menu_EraseScreen();
         break;
     case 3:
         InitRegionMap(&ewram0_3.regionMap, 0);
@@ -1562,7 +1562,7 @@ void CB2_InitFlyRegionMap(void)
         break;
     case 6:
         LoadPalette(sFlyRegionMapFrame_Pal, 16, 32);
-        MenuPrint_PixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
+        Menu_PrintTextPixelCoords(gOtherText_FlyToWhere, 1, 0x90, 1);
         break;
     case 7:
         CreateFlyTargetGraphics();
@@ -1619,8 +1619,8 @@ static void PrintFlyTargetName(void)
             {
                 if (FlagGet(r4->flag))
                 {
-                    MenuDrawTextWindow(16, 14, 29, 19);
-                    MenuPrint(ewram0_3.regionMap.mapSectionName, 17, 15);
+                    Menu_DrawStdWindowFrame(16, 14, 29, 19);
+                    Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 15);
                     MenuPrint_RightAligned(r4->unk0[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
                     return;
                 }
@@ -1631,16 +1631,16 @@ static void PrintFlyTargetName(void)
         asm("mov %0, #0\n":"=r"(zero));  // zero = 0
         if (zero == 0)
         {
-            MenuDrawTextWindow(16, 16, 29, 19);
-            MenuPrint(ewram0_3.regionMap.mapSectionName, 17, 17);
-            MenuZeroFillWindowRect(16, 14, 29, 15);
+            Menu_DrawStdWindowFrame(16, 16, 29, 19);
+            Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 17);
+            Menu_EraseWindowRect(16, 14, 29, 15);
         }
     }
     else
     {
-        MenuDrawTextWindow(16, 16, 29, 19);
-        MenuPrint(ewramBlankMapName, 17, 17);
-        MenuZeroFillWindowRect(16, 14, 29, 15);
+        Menu_DrawStdWindowFrame(16, 16, 29, 19);
+        Menu_PrintText(ewramBlankMapName, 17, 17);
+        Menu_EraseWindowRect(16, 14, 29, 15);
     }
 }
 

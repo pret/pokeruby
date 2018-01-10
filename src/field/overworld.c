@@ -47,7 +47,7 @@
 #include "tileset_anim.h"
 #include "time_events.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "wild_encounter.h"
 
 #ifdef SAPPHIRE
@@ -142,7 +142,7 @@ const struct UCoords32 gUnknown_0821664C[] =
     { 1, -1},
 };
 
-const struct UnknownTaskStruct gUnknown_08216694 =
+const struct ScanlineEffectParams gUnknown_08216694 =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -1410,7 +1410,7 @@ void VBlankCB_Field(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
     sub_8057A58();
     TransferPlttBuffer();
     sub_8072E74();
@@ -1422,7 +1422,7 @@ void sub_8054814(void)
     if (val)
     {
         sub_80815E0(val);
-        sub_80895F8(gUnknown_08216694);
+        ScanlineEffect_SetParams(gUnknown_08216694);
     }
 }
 
@@ -1456,8 +1456,8 @@ bool32 sub_805483C(u8 *a1)
     case 4:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 5:
@@ -1522,8 +1522,8 @@ bool32 sub_805493C(u8 *a1, u32 a2)
     case 4:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 5:
@@ -1612,8 +1612,8 @@ bool32 sub_8054A9C(u8 *a1)
     case 3:
         sub_8054814();
         sub_8054C54();
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         (*a1)++;
         break;
     case 4:
@@ -1669,7 +1669,7 @@ void sub_8054BA8(void)
 
     REG_DISPCNT = 0;
 
-    remove_some_task();
+    ScanlineEffect_Stop();
 
     DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
 
@@ -1695,8 +1695,8 @@ void sub_8054C2C(void)
 {
     sub_8054814();
     sub_8054C54();
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     mapdata_load_assets_to_gpu_and_full_redraw();
 }
 
@@ -1731,7 +1731,7 @@ void sub_8054D4C(u32 a1)
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
-    dp12_8087EA4();
+    ScanlineEffect_Clear();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
     sub_805C7C4(0);

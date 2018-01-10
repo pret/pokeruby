@@ -16,7 +16,7 @@ EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 void sub_8098898(u8 index) {
     u8 *ptr;
 
-    MenuDrawTextWindow(10, 16, 29, 19);
+    Menu_DrawStdWindowFrame(10, 16, 29, 19);
 
     switch (gUnknown_083B6DF4[index].format)
     {
@@ -89,5 +89,5 @@ void sub_8098898(u8 index) {
     }
 
     ptr[0] = EOS;
-    MenuPrint(gUnk2002694, 11, 17);
+    Menu_PrintText(gUnk2002694, 11, 17);
 }

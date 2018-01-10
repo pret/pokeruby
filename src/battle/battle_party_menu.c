@@ -583,13 +583,13 @@ static void Task_HandlePopupMenuInput(u8 taskId)
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
             return;
         }
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             return;
         }
         if (gMain.newKeys & A_BUTTON)
@@ -598,7 +598,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
                                sBattlePartyPopupMenus,
                                sBattlePartyMenuActions,
-                               GetMenuCursorPos());
+                               Menu_GetCursorPos());
             func(taskId);
             return;
         }
@@ -723,7 +723,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
 
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
     PrintPartyMenuPromptText(0, 0);

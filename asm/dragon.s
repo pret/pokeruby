@@ -6,7 +6,7 @@
 	.text
 
 	@ dragon
-
+    
 	thumb_func_start sub_80DFC24
 sub_80DFC24: @ 80DFC24
 	push {r4,lr}

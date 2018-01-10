@@ -7,13 +7,13 @@
 #include "script.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
 
 const s32 gMaxFlashLevel = 4;
 
-const static struct UnknownTaskStruct gUnknown_0839ACEC =
+const static struct ScanlineEffectParams gUnknown_0839ACEC =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -64,18 +64,18 @@ static void sub_8081424(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], data[1], data[2], data[3]);
         data[0] = 1;
         break;
     case 1:
-        sub_8081398(&gUnknown_03004DE0[gUnknown_03004DC0.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], data[1], data[2], data[3]);
         data[0] = 0;
         data[3] += data[5];
         if (data[3] > data[4])
         {
             if (data[6] == 1)
             {
-                remove_some_task();
+                ScanlineEffect_Stop();
                 data[0] = 2;
             }
             else
@@ -85,7 +85,7 @@ static void sub_8081424(u8 taskId)
         }
         break;
     case 2:
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         DestroyTask(taskId);
         break;
     }
@@ -140,8 +140,8 @@ void sub_80815E0(u8 a1)
 {
     if (a1)
     {
-        sub_8081398(&gUnknown_03004DE0[0][0], 120, 80, gUnknown_0839ACDC[a1]);
-        CpuFastSet(&gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 480);
+        sub_8081398(&gScanlineEffectRegBuffers[0][0], 120, 80, gUnknown_0839ACDC[a1]);
+        CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
     }
 }
 
@@ -208,14 +208,14 @@ static void sub_80816A8(u8 taskId)
         REG_BLDALPHA = 1804;
         REG_WININ = 63;
         REG_WINOUT = 30;
-        sub_8081398(&gUnknown_03004DE0[0][0], data[2], data[3], 1);
-        CpuFastSet(&gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 480);
-        //sub_80895F8(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
-        sub_80895F8(gUnknown_0839ACEC);
+        sub_8081398(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);
+        CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
+        //ScanlineEffect_SetParams(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
+        ScanlineEffect_SetParams(gUnknown_0839ACEC);
         data[0] = 1;
         break;
     case 1:
-        MenuFillWindowRectWithBlankTile(0, 0, 29, 19);
+        Menu_BlankWindowRect(0, 0, 29, 19);
         sub_808161C(data[1]);
         sub_8081534(data[2], data[3], 1, 160, 1, 2);
         data[0] = 2;
@@ -264,8 +264,8 @@ static void sub_80816A8(u8 taskId)
         }
         break;
     case 5:
-        MenuZeroFillWindowRect(0, 0, 29, 19);
-        LoadFontDefaultPalette(&gWindowConfig_81E6CE4);
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        LoadFontDefaultPalette(&gWindowTemplate_81E6CE4);
         REG_WIN0H = 255;
         REG_DISPCNT = data[6];
         REG_BLDCNT = data[7];

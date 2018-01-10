@@ -10,7 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void VBlankCB(void);
 static void MainCB2(void);
@@ -62,14 +62,14 @@ void CB2_ShowDiploma(void)
     LZ77UnCompVram(gDiplomaTiles, (void *)VRAM);
     LZ77UnCompVram(gDiplomaTilemap, (void *)(VRAM + 0x3000));
 
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
     LoadPalette(gDiplomaPalettes, 0, 64);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     DisplayDiplomaText();
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
 
@@ -135,5 +135,5 @@ static void DisplayDiplomaText(void)
         REG_BG3HOFS = 0;
         StringCopy(gStringVar1, gOtherText_HoennDex);
     }
-    MenuPrint(gOtherText_DiplomaCertificationGameFreak, 6, 2);
+    Menu_PrintText(gOtherText_DiplomaCertificationGameFreak, 6, 2);
 }

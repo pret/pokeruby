@@ -13,7 +13,7 @@
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 IntrMain[];
@@ -350,7 +350,7 @@ void DoSoftReset(void)
 {
     REG_IME = 0;
     m4aSoundVSyncOff();
-    remove_some_task();
+    ScanlineEffect_Stop();
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);

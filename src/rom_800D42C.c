@@ -28,8 +28,8 @@ extern u8 BattleText_Tie[];
 
 #define PRINT_MESSAGE(text, tileDataStartOffset, x)                             \
 {                                                                               \
-    InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
-    sub_8002F44(&gUnknown_03004210);                                            \
+    Text_InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
+    Text_PrintWindow8002F44(&gUnknown_03004210);                                            \
 }
 
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)

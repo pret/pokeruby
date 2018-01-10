@@ -312,7 +312,7 @@ void sub_80F727C(struct PokemonMarkMenu *ptr)
 
 void sub_80F728C(void)
 {
-    const struct FrameGraphics *frame = GetTextWindowFrameGraphics(gSaveBlock2.optionsWindowFrameType);
+    const struct FrameGraphics *frame = TextWindow_GetFrameGraphics(gSaveBlock2.optionsWindowFrameType);
     sMenu->frameTiles = frame->tiles;
     sMenu->framePalette = frame->palette;
     sMenu->tileLoadState = 0;
@@ -566,8 +566,8 @@ void sub_80F761C(s16 x, s16 y, u16 baseTileTag, u16 basePaletteTag)
     }
 
     sMenu->cursorBaseY = y + 8;
-    sub_814A5C0(0, basePaletteTag + 1, 15, 0, 0x30);
-    sub_814A880(x + 8, sMenu->cursorBaseY);
+    MenuCursor_Create814A5C0(0, basePaletteTag + 1, 15, 0, 0x30);
+    MenuCursor_SetPos814A880(x + 8, sMenu->cursorBaseY);
     sub_814AABC(sub_80F7908);
 }
 
