@@ -39,7 +39,7 @@ void sub_80DC824(struct Sprite *sprite)
 
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    
+
     sprite->callback = sub_8078B34;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
@@ -64,7 +64,7 @@ void sub_80DC8F4(struct Sprite *sprite)
 
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
-    
+
     sprite->callback = sub_8078B34;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
@@ -247,157 +247,42 @@ void sub_80DCCFC(struct Sprite *sprite)
     sprite->invisible = TRUE;
 }
 
-#ifdef NONMATCHING
 void sub_80DCD78(struct Sprite *sprite)
 {
-    int i;
-    s16 x1, x2, y1, y2;
-    // s16 scale;
-    // u16 *data;
-    u16 tempData[8];
-    s16 rot;
-
     sprite->invisible = FALSE;
 
     if (sub_8078718(sprite))
     {
         DestroyAnimSprite(sprite);
-        return;
     }
-
-    // data = &sprite->data[7];
-    x1 = sprite->pos1.x;
-    x2 = sprite->pos2.x;
-    y1 = sprite->pos1.y;
-    y2 = sprite->pos2.y;
-    for (i = 0; i < 8; i++)
+    else
     {
-        tempData[i] = sprite->data[i];
-    }
-    x2 += x1;
-    y2 += y1;
-
-    if (!sub_8078718(sprite))
-    {
-        rot = sub_80790F0(sprite->pos1.x + sprite->pos2.x - x2,
-                        sprite->pos1.y + sprite->pos2.y - y2);
-        rot += 0xC000;
-        // scale = 0x100
-        sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
+        s16 tempData[8];
+        u16 *data = sprite->data;
+        u16 x1 = sprite->pos1.x;
+        s16 x2 = sprite->pos2.x;
+        u16 y1 = sprite->pos1.y;
+        s16 y2 = sprite->pos2.y;
+        int i;
 
         for (i = 0; i < 8; i++)
+            tempData[i] = data[i];
+
+        x2 += x1;
+        y2 += y1;
+
+        if (!sub_8078718(sprite))
         {
-            sprite->data[i] = tempData[i];
+            u16 rot = sub_80790F0(sprite->pos1.x + sprite->pos2.x - x2,
+                                  sprite->pos1.y + sprite->pos2.y - y2);
+            rot += 0xC000;
+            sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
+
+            for (i = 0; i < 8; i++)
+                data[i] = tempData[i];
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_80DCD78(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0x14\n\
-    adds r4, r0, 0\n\
-    adds r2, r4, 0\n\
-    adds r2, 0x3E\n\
-    ldrb r0, [r2]\n\
-    movs r1, 0x5\n\
-    negs r1, r1\n\
-    ands r1, r0\n\
-    strb r1, [r2]\n\
-    adds r0, r4, 0\n\
-    bl sub_8078718\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _080DCDA4\n\
-    adds r0, r4, 0\n\
-    bl DestroyAnimSprite\n\
-    b _080DCE34\n\
-_080DCDA4:\n\
-    movs r0, 0x2E\n\
-    adds r0, r4\n\
-    mov r8, r0\n\
-    ldrh r7, [r4, 0x20]\n\
-    ldrh r5, [r4, 0x24]\n\
-    ldrh r1, [r4, 0x22]\n\
-    mov r12, r1\n\
-    ldrh r6, [r4, 0x26]\n\
-    mov r2, r8\n\
-    add r1, sp, 0x4\n\
-    movs r3, 0x7\n\
-_080DCDBA:\n\
-    ldrh r0, [r2]\n\
-    strh r0, [r1]\n\
-    adds r2, 0x2\n\
-    adds r1, 0x2\n\
-    subs r3, 0x1\n\
-    cmp r3, 0\n\
-    bge _080DCDBA\n\
-    adds r0, r7, r5\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    mov r2, r12\n\
-    adds r0, r2, r6\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-    adds r0, r4, 0\n\
-    bl sub_8078718\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    bne _080DCE34\n\
-    ldrh r0, [r4, 0x24]\n\
-    ldrh r1, [r4, 0x20]\n\
-    adds r0, r1\n\
-    lsls r1, r5, 16\n\
-    asrs r1, 16\n\
-    subs r0, r1\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    ldrh r1, [r4, 0x26]\n\
-    ldrh r2, [r4, 0x22]\n\
-    adds r1, r2\n\
-    lsls r2, r6, 16\n\
-    asrs r2, 16\n\
-    subs r1, r2\n\
-    lsls r1, 16\n\
-    asrs r1, 16\n\
-    bl sub_80790F0\n\
-    lsls r0, 16\n\
-    movs r1, 0xC0\n\
-    lsls r1, 24\n\
-    adds r0, r1\n\
-    lsrs r0, 16\n\
-    movs r3, 0x80\n\
-    lsls r3, 1\n\
-    str r0, [sp]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-    adds r2, r3, 0\n\
-    bl sub_8078FDC\n\
-    add r2, sp, 0x4\n\
-    mov r1, r8\n\
-    movs r3, 0x7\n\
-_080DCE26:\n\
-    ldrh r0, [r2]\n\
-    strh r0, [r1]\n\
-    adds r2, 0x2\n\
-    adds r1, 0x2\n\
-    subs r3, 0x1\n\
-    cmp r3, 0\n\
-    bge _080DCE26\n\
-_080DCE34:\n\
-    add sp, 0x14\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void sub_80DCE40(struct Sprite *sprite)
 {
