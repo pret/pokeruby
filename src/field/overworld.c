@@ -142,7 +142,7 @@ const struct UCoords32 gUnknown_0821664C[] =
     { 1, -1},
 };
 
-const struct UnknownTaskStruct gUnknown_08216694 =
+const struct ScanlineEffectParams gUnknown_08216694 =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -1410,7 +1410,7 @@ void VBlankCB_Field(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
     sub_8057A58();
     TransferPlttBuffer();
     sub_8072E74();
@@ -1422,7 +1422,7 @@ void sub_8054814(void)
     if (val)
     {
         sub_80815E0(val);
-        sub_80895F8(gUnknown_08216694);
+        ScanlineEffect_SetParams(gUnknown_08216694);
     }
 }
 

@@ -980,7 +980,7 @@ _080E169C:
 	asrs r4, r0, 16
 	cmp r2, r0
 	bge _080E16C8
-	ldr r5, _080E1720 @ =gUnknown_03004DE0
+	ldr r5, _080E1720 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1003,7 +1003,7 @@ _080E16C8:
 	asrs r0, r1, 16
 	cmp r0, 0x9F
 	bgt _080E16F6
-	ldr r4, _080E1720 @ =gUnknown_03004DE0
+	ldr r4, _080E1720 @ =gScanlineEffectRegBuffers
 	lsls r0, r3, 16
 	asrs r0, 16
 	adds r3, r0, 0
@@ -1035,7 +1035,7 @@ _080E16F6:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -1043,7 +1043,7 @@ _080E16F6:
 	.align 2, 0
 _080E1718: .4byte gBattle_BG2_X
 _080E171C: .4byte REG_BG2HOFS
-_080E1720: .4byte gUnknown_03004DE0
+_080E1720: .4byte gScanlineEffectRegBuffers
 _080E1724: .4byte 0xa2600001
 	thumb_func_end sub_80E1668
 

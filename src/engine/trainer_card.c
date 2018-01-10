@@ -256,7 +256,7 @@ static void sub_8093254(void)
         ewram0_2.var_5 ^= 1;
     }
     if (ewram0_2.var_4)
-        DmaCopy16(3, &gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 0x140);
+        DmaCopy16(3, &gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 0x140);
 }
 
 static void sub_80932AC(Callback callBack)
@@ -732,7 +732,7 @@ bool8 sub_8093AA0(struct Task *task)
     ewram0_2.var_4 = FALSE;
     dp12_8087EA4();
     for (i = 0; i < 0xA0; i++)
-        gUnknown_03004DE0[1][i] = -4;
+        gScanlineEffectRegBuffers[1][i] = -4;
     SetHBlankCallback(sub_8093D7C);
     ewram0_2.var_4 = TRUE;
     task->data[0]++;
@@ -768,7 +768,7 @@ bool8 sub_8093AF0(struct Task *task)
 
     for (i = 0; i < r7; i++)
     {
-        gUnknown_03004DE0.filler0[i] = -4 - (u32)i;
+        gScanlineEffectRegBuffers.filler0[i] = -4 - (u32)i;
     }
     //_08093B74
     for (; i < r9; i++)
@@ -776,10 +776,10 @@ bool8 sub_8093AF0(struct Task *task)
         u16 var = r6 >> 16;
         r6 += r5;
         r5 -= sp0;
-        gUnknown_03004DE0.filler0[i] = -4 + var;
+        gScanlineEffectRegBuffers.filler0[i] = -4 + var;
     }
     for (; i < 160; i++)
-        gUnknown_03004DE0.filler0[i] = -4 + (u16)(r10 >> 16);
+        gScanlineEffectRegBuffers.filler0[i] = -4 + (u16)(r10 >> 16);
     ewram0_2.var_4 = 1;
     if (task->data[1] > 0x4A)
         task->data[0]++;
@@ -840,7 +840,7 @@ _08093B18:\n\
     movs r3, 0\n\
     cmp r3, r7\n\
     bcs _08093B74\n\
-    ldr r2, _08093C04 @ =gUnknown_03004DE0\n\
+    ldr r2, _08093C04 @ =gScanlineEffectRegBuffers\n\
     mov r12, r2\n\
     ldr r0, _08093C08 @ =0x0000fffc\n\
     adds r4, r0, 0\n\
@@ -866,7 +866,7 @@ _08093B74:\n\
     lsrs r7, r4, 16\n\
     cmp r2, r0\n\
     bge _08093BAE\n\
-    ldr r0, _08093C04 @ =gUnknown_03004DE0\n\
+    ldr r0, _08093C04 @ =gScanlineEffectRegBuffers\n\
     mov r9, r0\n\
     ldr r4, _08093C08 @ =0x0000fffc\n\
     mov r12, r4\n\
@@ -894,7 +894,7 @@ _08093BAE:\n\
     asrs r0, 16\n\
     cmp r0, 0x9F\n\
     bgt _08093BD4\n\
-    ldr r4, _08093C04 @ =gUnknown_03004DE0\n\
+    ldr r4, _08093C04 @ =gScanlineEffectRegBuffers\n\
     ldr r0, _08093C08 @ =0x0000fffc\n\
     adds r2, r1, r0\n\
 _08093BBE:\n\
@@ -934,7 +934,7 @@ _08093BEA:\n\
     .align 2, 0\n\
 _08093BFC: .4byte gSharedMem\n\
 _08093C00: .4byte 0xffff0000\n\
-_08093C04: .4byte gUnknown_03004DE0\n\
+_08093C04: .4byte gScanlineEffectRegBuffers\n\
 _08093C08: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
@@ -1000,7 +1000,7 @@ _08093C5C:\n\
     movs r3, 0\n\
     cmp r3, r7\n\
     bcs _08093CB8\n\
-    ldr r2, _08093D48 @ =gUnknown_03004DE0\n\
+    ldr r2, _08093D48 @ =gScanlineEffectRegBuffers\n\
     mov r12, r2\n\
     ldr r0, _08093D4C @ =0x0000fffc\n\
     adds r4, r0, 0\n\
@@ -1026,7 +1026,7 @@ _08093CB8:\n\
     lsrs r7, r4, 16\n\
     cmp r2, r0\n\
     bge _08093CF2\n\
-    ldr r0, _08093D48 @ =gUnknown_03004DE0\n\
+    ldr r0, _08093D48 @ =gScanlineEffectRegBuffers\n\
     mov r9, r0\n\
     ldr r3, _08093D4C @ =0x0000fffc\n\
     mov r12, r3\n\
@@ -1054,7 +1054,7 @@ _08093CF2:\n\
     asrs r0, 16\n\
     cmp r0, 0x9F\n\
     bgt _08093D18\n\
-    ldr r4, _08093D48 @ =gUnknown_03004DE0\n\
+    ldr r4, _08093D48 @ =gScanlineEffectRegBuffers\n\
     ldr r0, _08093D4C @ =0x0000fffc\n\
     adds r2, r1, r0\n\
 _08093D02:\n\
@@ -1094,7 +1094,7 @@ _08093D2E:\n\
     .align 2, 0\n\
 _08093D40: .4byte gSharedMem\n\
 _08093D44: .4byte 0xffff0000\n\
-_08093D48: .4byte gUnknown_03004DE0\n\
+_08093D48: .4byte gScanlineEffectRegBuffers\n\
 _08093D4C: .4byte 0x0000fffc\n\
     .syntax divided\n");
 }
@@ -1113,7 +1113,7 @@ bool8 sub_8093D50(struct Task *task)
 
 void sub_8093D7C(void)
 {
-    u16 bgVOffset = gUnknown_03004DE0[1][REG_VCOUNT & 0xFF];
+    u16 bgVOffset = gScanlineEffectRegBuffers[1][REG_VCOUNT & 0xFF];
 
     REG_BG0VOFS = bgVOffset;
     REG_BG1VOFS = bgVOffset;

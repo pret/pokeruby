@@ -1588,7 +1588,7 @@ _080DC380:
 	adds r0, 0x40
 	cmp r1, r0
 	bgt _080DC3BA
-	ldr r5, _080DC3E8 @ =gUnknown_03004DE0
+	ldr r5, _080DC3E8 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1621,7 +1621,7 @@ _080DC3BA:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldr r0, _080DC3F0 @ =sub_80DC3F4
 	str r0, [r4]
 	add sp, 0xC
@@ -1631,7 +1631,7 @@ _080DC3BA:
 	.align 2, 0
 _080DC3E0: .4byte gBattle_BG2_X
 _080DC3E4: .4byte REG_BG2HOFS
-_080DC3E8: .4byte gUnknown_03004DE0
+_080DC3E8: .4byte gScanlineEffectRegBuffers
 _080DC3EC: .4byte 0xa2600001
 _080DC3F0: .4byte sub_80DC3F4
 	thumb_func_end sub_80DC2D4
@@ -1676,7 +1676,7 @@ _080DC426:
 	ldr r0, _080DC470 @ =gSineTable
 	mov r9, r0
 	movs r7, 0x3
-	ldr r1, _080DC474 @ =gUnknown_03004DE0
+	ldr r1, _080DC474 @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r2, 0xF0
 	lsls r2, 3
@@ -1704,7 +1704,7 @@ _080DC448:
 	b _080DC484
 	.align 2, 0
 _080DC470: .4byte gSineTable
-_080DC474: .4byte gUnknown_03004DE0
+_080DC474: .4byte gScanlineEffectRegBuffers
 _080DC478:
 	cmp r3, 0
 	bge _080DC488

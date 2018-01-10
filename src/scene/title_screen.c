@@ -598,7 +598,7 @@ static void StartPokemonLogoShine(bool8 flashBackground)
 
 static void VBlankCB(void)
 {
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -711,7 +711,7 @@ void CB2_InitTitleScreen(void)
         if (!UpdatePaletteFade())
         {
             StartPokemonLogoShine(FALSE);
-            ScanlineEffect_InitWave(0, 0xA0, 4, 4, 0, 4, 1);
+            ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, 4, 1);
             SetMainCallback2(MainCB2);
         }
         break;

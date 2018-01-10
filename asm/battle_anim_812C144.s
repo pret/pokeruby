@@ -1752,7 +1752,7 @@ _0812CE70:
 	ldrsh r0, [r5, r6]
 	cmp r1, r0
 	bgt _0812CEA6
-	ldr r4, _0812CEB0 @ =gUnknown_03004DE0
+	ldr r4, _0812CEB0 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r0, r4
@@ -1777,7 +1777,7 @@ _0812CEA6:
 	ldr r0, _0812CEB4 @ =REG_BG1HOFS
 	b _0812CEBA
 	.align 2, 0
-_0812CEB0: .4byte gUnknown_03004DE0
+_0812CEB0: .4byte gScanlineEffectRegBuffers
 _0812CEB4: .4byte REG_BG1HOFS
 _0812CEB8:
 	ldr r0, _0812CEE4 @ =REG_BG2HOFS
@@ -1794,7 +1794,7 @@ _0812CEBA:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldr r0, _0812CEEC @ =sub_812CEF0
 	str r0, [r5]
 	add sp, 0xC
@@ -1889,7 +1889,7 @@ _0812CF74:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bge _0812CFA8
-	ldr r5, _0812D000 @ =gUnknown_03004DE0
+	ldr r5, _0812D000 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1917,7 +1917,7 @@ _0812CFA8:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bgt _0812CFDC
-	ldr r5, _0812D000 @ =gUnknown_03004DE0
+	ldr r5, _0812D000 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -1957,7 +1957,7 @@ _0812CFF8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812D000: .4byte gUnknown_03004DE0
+_0812D000: .4byte gScanlineEffectRegBuffers
 _0812D004: .4byte gScanlineEffect
 	thumb_func_end sub_812CEF0
 
@@ -6545,7 +6545,7 @@ _0812F3EE:
 	ldrh r3, [r0]
 	movs r7, 0
 	movs r2, 0
-	ldr r6, _0812F468 @ =gUnknown_03004DE0
+	ldr r6, _0812F468 @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r0, r6
@@ -6586,7 +6586,7 @@ _0812F3FE:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldr r0, _0812F470 @ =sub_812F474
 	str r0, [r4]
 	add sp, 0xC
@@ -6599,7 +6599,7 @@ _0812F458: .4byte REG_BLDCNT
 _0812F45C: .4byte 0x00003f44
 _0812F460: .4byte gBattle_BG2_X
 _0812F464: .4byte gBattle_BG2_Y
-_0812F468: .4byte gUnknown_03004DE0
+_0812F468: .4byte gScanlineEffectRegBuffers
 _0812F46C: .4byte 0xa6600001
 _0812F470: .4byte sub_812F474
 	thumb_func_end sub_812F314
@@ -6732,7 +6732,7 @@ _0812F55A:
 	subs r0, r1
 	lsls r0, 7
 	adds r2, r0
-	ldr r0, _0812F664 @ =gUnknown_03004DE0
+	ldr r0, _0812F664 @ =gScanlineEffectRegBuffers
 	adds r2, r0
 	lsls r4, 16
 	asrs r4, 16
@@ -6750,7 +6750,7 @@ _0812F55A:
 	subs r0, r1
 	lsls r0, 7
 	adds r3, r0
-	ldr r1, _0812F664 @ =gUnknown_03004DE0
+	ldr r1, _0812F664 @ =gScanlineEffectRegBuffers
 	adds r3, r1
 	lsls r1, r7, 16
 	asrs r1, 16
@@ -6814,7 +6814,7 @@ _0812F60A:
 	lsls r1, r2, 17
 	cmp r1, 0
 	blt _0812F636
-	ldr r4, _0812F664 @ =gUnknown_03004DE0
+	ldr r4, _0812F664 @ =gScanlineEffectRegBuffers
 	ldr r7, [sp, 0x4]
 	lsls r0, r7, 16
 	asrs r0, 16
@@ -6857,7 +6857,7 @@ _0812F636:
 	b _0812F676
 	.align 2, 0
 _0812F660: .4byte gScanlineEffect
-_0812F664: .4byte gUnknown_03004DE0
+_0812F664: .4byte gScanlineEffectRegBuffers
 _0812F668: .4byte gSineTable
 _0812F66C: .4byte 0xffff0000
 _0812F670:

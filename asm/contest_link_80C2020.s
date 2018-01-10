@@ -532,7 +532,7 @@ sub_80C2448: @ 80C2448
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl ScanlineEffect_TransferDma
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0

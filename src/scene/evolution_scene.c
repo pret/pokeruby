@@ -3934,7 +3934,7 @@ static void VBlankCB_EvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void VBlankCB_TradeEvolutionScene(void)
@@ -3950,7 +3950,7 @@ static void VBlankCB_TradeEvolutionScene(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void sub_81150D8(void)

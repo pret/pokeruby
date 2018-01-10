@@ -436,7 +436,7 @@ void sub_80EBD4C()
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
     sub_80F5BF0();
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void sub_80EBD68()

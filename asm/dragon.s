@@ -510,7 +510,7 @@ _080DF996:
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
 	bgt _080DF9C4
-	ldr r5, _080DF9EC @ =gUnknown_03004DE0
+	ldr r5, _080DF9EC @ =gScanlineEffectRegBuffers
 	movs r0, 0xF0
 	lsls r0, 3
 	adds r6, r5, r0
@@ -533,7 +533,7 @@ _080DF9C4:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldr r0, _080DF9F0 @ =sub_80DF9F4
 	str r0, [r4]
 	add sp, 0xC
@@ -545,7 +545,7 @@ _080DF9DC: .4byte REG_BG2HOFS
 _080DF9E0: .4byte gBattle_BG2_X
 _080DF9E4: .4byte 0xa2600001
 _080DF9E8: .4byte gAnimBankAttacker
-_080DF9EC: .4byte gUnknown_03004DE0
+_080DF9EC: .4byte gScanlineEffectRegBuffers
 _080DF9F0: .4byte sub_80DF9F4
 	thumb_func_end sub_80DF924
 
@@ -659,7 +659,7 @@ sub_80DFAB0: @ 80DFAB0
 	ldrsh r0, [r5, r1]
 	cmp r4, r0
 	bgt _080DFB06
-	ldr r7, _080DFB1C @ =gUnknown_03004DE0
+	ldr r7, _080DFB1C @ =gScanlineEffectRegBuffers
 	mov r12, r7
 	ldr r0, _080DFB20 @ =gSineTable
 	mov r8, r0
@@ -705,7 +705,7 @@ _080DFB06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080DFB1C: .4byte gUnknown_03004DE0
+_080DFB1C: .4byte gScanlineEffectRegBuffers
 _080DFB20: .4byte gSineTable
 _080DFB24: .4byte gScanlineEffect
 	thumb_func_end sub_80DFAB0

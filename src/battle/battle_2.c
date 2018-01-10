@@ -223,17 +223,17 @@ void InitBattle(void)
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0[0][i] = 0xF0;
-        gUnknown_03004DE0[1][i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0[0][i] = 0xFF10;
-        gUnknown_03004DE0[1][i] = 0xFF10;
+        gScanlineEffectRegBuffers[0][i] = 0xFF10;
+        gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }
-    //sub_80895F8(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
-    sub_80895F8(gUnknown_081F9674);
+    //ScanlineEffect_SetParams(gUnknown_081F9674.unk0, gUnknown_081F9674.unk4, gUnknown_081F9674.unk8);
+    ScanlineEffect_SetParams(gUnknown_081F9674);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();
     gBattle_BG0_X = 0;
@@ -1073,7 +1073,7 @@ void sub_800FCFC(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ScanlineEffect_TransferDma();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void nullsub_36(struct Sprite *sprite)
@@ -1201,14 +1201,14 @@ void c2_8011A1C(void)
 
     for (i = 0; i < 80; i++)
     {
-        gUnknown_03004DE0[0][i] = 0xF0;
-        gUnknown_03004DE0[1][i] = 0xF0;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
     for (i = 80; i < 160; i++)
     {
         asm(""::"r"(i));  // Needed to stop the compiler from optimizing out the loop counter
-        gUnknown_03004DE0[0][i] = 0xFF10;
-        gUnknown_03004DE0[1][i] = 0xFF10;
+        gScanlineEffectRegBuffers[0][i] = 0xFF10;
+        gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
     ResetPaletteFade();

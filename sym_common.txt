@@ -137,29 +137,7 @@ gUnknown_03004AE4: @ 3004AE4
 	.include "debug/mori_debug_menu.o"
 
 @ unknown_task
-
-	.align 4
-gScanlineEffect: @ 3004DC0
-	.space 0x20
-
-gUnknown_03004DE0: @ 3004DE0
-	.space 0x2
-
-gUnknown_03004DE2: @ 3004DE2
-	.space 0x2
-
-gUnknown_03004DE4: @ 3004DE4
-	.space 0x27C
-
-gUnknown_03005060: @ 3005060
-	.space 0x500
-
-gUnknown_03005560: @ 3005560
-	.space 0x140
-
-gUnknown_030056A0: @ 30056A0
-	.space 0x640
-
+	.include "scanline_effect.o"
 	.include "pokemon/pokemon_menu.o"
 	.include "pokemon/pokedex.o"
 

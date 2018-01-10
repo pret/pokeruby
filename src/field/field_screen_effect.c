@@ -13,7 +13,7 @@ const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
 
 const s32 gMaxFlashLevel = 4;
 
-const static struct UnknownTaskStruct gUnknown_0839ACEC =
+const static struct ScanlineEffectParams gUnknown_0839ACEC =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -64,11 +64,11 @@ static void sub_8081424(u8 taskId)
     switch (data[0])
     {
     case 0:
-        sub_8081398(&gUnknown_03004DE0[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(&gScanlineEffectRegBuffers[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
         data[0] = 1;
         break;
     case 1:
-        sub_8081398(&gUnknown_03004DE0[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
+        sub_8081398(&gScanlineEffectRegBuffers[gScanlineEffect.srcBank][0], data[1], data[2], data[3]);
         data[0] = 0;
         data[3] += data[5];
         if (data[3] > data[4])
@@ -140,8 +140,8 @@ void sub_80815E0(u8 a1)
 {
     if (a1)
     {
-        sub_8081398(&gUnknown_03004DE0[0][0], 120, 80, gUnknown_0839ACDC[a1]);
-        CpuFastSet(&gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 480);
+        sub_8081398(&gScanlineEffectRegBuffers[0][0], 120, 80, gUnknown_0839ACDC[a1]);
+        CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
     }
 }
 
@@ -208,10 +208,10 @@ static void sub_80816A8(u8 taskId)
         REG_BLDALPHA = 1804;
         REG_WININ = 63;
         REG_WINOUT = 30;
-        sub_8081398(&gUnknown_03004DE0[0][0], data[2], data[3], 1);
-        CpuFastSet(&gUnknown_03004DE0[0], &gUnknown_03004DE0[1], 480);
-        //sub_80895F8(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
-        sub_80895F8(gUnknown_0839ACEC);
+        sub_8081398(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);
+        CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
+        //ScanlineEffect_SetParams(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
+        ScanlineEffect_SetParams(gUnknown_0839ACEC);
         data[0] = 1;
         break;
     case 1:

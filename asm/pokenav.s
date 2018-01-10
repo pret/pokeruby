@@ -10957,7 +10957,7 @@ _080F5B68: .4byte gUnknown_083DFEC4
 _080F5B6C: .4byte 0x00009345
 _080F5B70:
 	bl dp12_8087EA4
-	ldr r0, _080F5BA8 @ =gUnknown_03004DE0
+	ldr r0, _080F5BA8 @ =gScanlineEffectRegBuffers
 	movs r2, 0xEF
 	movs r3, 0xF4
 	lsls r3, 3
@@ -10984,7 +10984,7 @@ _080F5B82:
 	movs r0, 0x1
 	b _080F5BCE
 	.align 2, 0
-_080F5BA8: .4byte gUnknown_03004DE0
+_080F5BA8: .4byte gScanlineEffectRegBuffers
 _080F5BAC: .4byte gUnknown_083DFEC4
 _080F5BB0: .4byte 0x00009345
 _080F5BB4:
@@ -10995,7 +10995,7 @@ _080F5BB4:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -11016,7 +11016,7 @@ sub_80F5BDC: @ 80F5BDC
 	ldr r1, _080F5BEC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
-	bl ScanlineEffect_TransferDma
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -11045,7 +11045,7 @@ sub_80F5BF0: @ 80F5BF0
 	adds r0, r4, 0
 	bl sub_80F5A1C
 	movs r6, 0
-	ldr r1, _080F5CC4 @ =gUnknown_03004DE0
+	ldr r1, _080F5CC4 @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r0, 0xF0
 	lsls r0, 3
@@ -11128,7 +11128,7 @@ _080F5CA6:
 _080F5CB8: .4byte gUnknown_083DFEC4
 _080F5CBC: .4byte 0x00009344
 _080F5CC0: .4byte 0x0000911c
-_080F5CC4: .4byte gUnknown_03004DE0
+_080F5CC4: .4byte gScanlineEffectRegBuffers
 _080F5CC8: .4byte 0x0000ffff
 _080F5CCC: .4byte 0x00009130
 _080F5CD0: .4byte 0x00009132
@@ -11164,7 +11164,7 @@ sub_80F5CDC: @ 80F5CDC
 	lsls r0, 17
 	lsrs r5, r0, 16
 	movs r7, 0
-	ldr r1, _080F5DBC @ =gUnknown_03004DE0
+	ldr r1, _080F5DBC @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r4, 0xF0
 	lsls r4, 3
@@ -11248,7 +11248,7 @@ _080F5DA0:
 _080F5DB0: .4byte gUnknown_083DFEC4
 _080F5DB4: .4byte 0x00009344
 _080F5DB8: .4byte 0x0000911c
-_080F5DBC: .4byte gUnknown_03004DE0
+_080F5DBC: .4byte gScanlineEffectRegBuffers
 _080F5DC0: .4byte 0x0000ffff
 _080F5DC4: .4byte 0x00009130
 _080F5DC8: .4byte 0x00009132
