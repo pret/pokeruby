@@ -287,7 +287,7 @@ void sub_80DCD78(struct Sprite *sprite)
 
         for (i = 0; i < 8; i++)
         {
-            sprite->data[i] = tempData[1];
+            sprite->data[i] = tempData[i];
         }
     }
 }
