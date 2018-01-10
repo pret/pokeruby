@@ -4,63 +4,6 @@
 	.section .rodata
 
 	.align 2
-gOamData_83B6EAC:: @ 83B6EAC
-	.2byte 0x0000
-	.2byte 0xC000
-	.2byte 0x0000
-
-	.align 2
-gOamData_83B6EB4:: @ 83B6EB4
-	.2byte 0x4000
-	.2byte 0x0000
-	.2byte 0x0000
-
-	.align 2
-gSpriteAnim_83B6EBC:: @ 83B6EBC
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83B6EC4:: @ 83B6EC4
-	obj_image_anim_frame 2, 8
-	obj_image_anim_frame 4, 8
-	obj_image_anim_frame 6, 8
-	obj_image_anim_jump 0
-
-	.align 2
-gSpriteAnim_83B6ED4:: @ 83B6ED4
-	obj_image_anim_frame 8, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83B6EDC:: @ 83B6EDC
-	obj_image_anim_frame 10, 8
-	obj_image_anim_frame 4, 8
-	obj_image_anim_frame 12, 8
-	obj_image_anim_jump 0
-
-	.align 2
-gSpriteAnimTable_83B6EEC:: @ 83B6EEC
-	.4byte gSpriteAnim_83B6EBC
-	.4byte gSpriteAnim_83B6EC4
-	.4byte gSpriteAnim_83B6ED4
-	.4byte gSpriteAnim_83B6EDC
-
-	.align 2
-gSpriteTemplate_83B6EFC:: @ 83B6EFC
-	spr_template 5, 56013, gOamData_83B6EB4, gSpriteAnimTable_83B6EEC, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gSpriteTemplate_83B6F14:: @ 83B6F14
-	spr_template 15, 56000, gOamData_83B6F2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-gOamData_83B6F2C:: @ 83B6F2C
-	.2byte 0x0000
-	.2byte 0x8000
-	.2byte 0x0000
-
-	.align 2
 gSpriteAffineAnim_83B6F34:: @ 83B6F34
 	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 120
 	obj_rot_scal_anim_end

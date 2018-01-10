@@ -78,8 +78,16 @@ struct PokemonStorageSystemData {
     u16 unk_0008;
     u16 unk_000a;
     struct PCScreenEffectStruct unk_000c;
-    struct UnkStruct_2000020 unk_0020[274]; // refine size later
-    u8 filler_08b0[2];
+    struct UnkStruct_2000020 unk_0020[17]; // refine size later
+    u16 unk_00a8[0x400];
+    u16 unk_08a8;
+    u16 unk_08aa;
+    u8 unk_08ac;
+    u8 unk_08ad;
+    u8 unk_08ae;
+    u8 unk_08af;
+    u8 unk_08b0;
+    bool8 unk_08b1;
     s16 unk_08b2;
     u16 unk_08b4;
     u8 filler_08b6[0x4a8];

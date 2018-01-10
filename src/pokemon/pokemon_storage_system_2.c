@@ -78,6 +78,9 @@ void sub_80982B4(void);
 void sub_8098350(void);
 void sub_8098400(void);
 void add_to_c3_somehow(void);
+void sub_8098780(void);
+void sub_8098690(bool8 flag);
+void sub_8099200(u8 a0);
 bool8 sub_80985CC(void);
 void sub_80986E8(void);
 void sub_8098710(void);
@@ -93,6 +96,8 @@ void sub_8098AA8(u8 a0);
 void sub_8098B48(void);
 void sub_8099310(void);
 bool8 sub_8099374(void);
+void sub_80994A8(s16 a0);
+void sub_809954C(void);
 void sub_8099958(void);
 bool8 sub_8099990(void);
 void sub_809BB90(void);
@@ -109,6 +114,7 @@ void sub_809B0C0(u8 a0);
 void sub_809B0D4(void);
 void sub_809B0E0(void);
 u8 sub_809B0F4(void);
+void sub_809B068(void);
 void sub_809B100(u8 a0);
 bool8 sub_809B130(void);
 void sub_809B440(void);
@@ -134,6 +140,8 @@ s16 sub_809CF30(void);
 void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 *a1, u8 a2);
 void sub_809CFF0(void);
 void sub_809D034(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
+void sub_809D104(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
+void sub_809D16C(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height);
 
 // .rodata
 
@@ -1743,9 +1751,192 @@ void sub_8098350(void)
     }
 }
 
-extern const struct StorageAction gPCStorageActionTexts[];
+void sub_8098400(void)
+{
+    REG_BG1CNT = BGCNT_PRIORITY(1) | BGCNT_SCREENBASE(15);
+    LZ77UnCompVram(gPSSMenuMisc_Gfx, BG_SCREEN_ADDR(13));
+    LZ77UnCompWram(gPSSMenuMisc_Tilemap, gPokemonStorageSystemPtr->unk_00a8);
+    LoadPalette(gPSSMenu3_Pal, 0x20, 0x20);
+    LoadPalette(gPSSMenu4_Pal, 0x30, 0x20);
+    DmaClear16(3, BG_SCREEN_ADDR(15), 0x800);
+    sub_8098780();
+    if (gUnknown_0203847C)
+    {
+        sub_8098690(TRUE);
+        sub_8099200(1);
+        sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
+    }
+    else
+    {
+        sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 20, 12, 2);
+        sub_8098690(TRUE);
+    }
+    gPokemonStorageSystemPtr->unk_08af = 0;
+}
 
-asm(".section .text.8098898");
+void sub_80984E8(void)
+{
+    gPokemonStorageSystemPtr->unk_08a8 = 20;
+    gPokemonStorageSystemPtr->unk_08aa = 2;
+    gPokemonStorageSystemPtr->unk_08ad = 0;
+    sub_8099200(0);
+}
+
+bool8 sub_8098520(void)
+{
+    if (gPokemonStorageSystemPtr->unk_08ad == 20)
+        return FALSE;
+    gPokemonStorageSystemPtr->unk_08a8--;
+    gPokemonStorageSystemPtr->unk_08aa++;
+    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
+    sub_80994A8(8);
+    if (++gPokemonStorageSystemPtr->unk_08ad == 20)
+    {
+        gUnknown_0203847C = 1;
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void add_to_c3_somehow(void)
+{
+    gPokemonStorageSystemPtr->unk_08a8 = 0;
+    gPokemonStorageSystemPtr->unk_08aa = 22;
+    gPokemonStorageSystemPtr->unk_08ad = 0;
+}
+
+bool8 sub_80985CC(void)
+{
+    if (gPokemonStorageSystemPtr->unk_08ad == 20)
+        return FALSE;
+    gPokemonStorageSystemPtr->unk_08a8++;
+    gPokemonStorageSystemPtr->unk_08aa--;
+    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, gPokemonStorageSystemPtr->unk_08a8, 12, gPokemonStorageSystemPtr->unk_08aa);
+    sub_809D16C(BG_SCREEN_ADDR(15), 10, gPokemonStorageSystemPtr->unk_08aa, 12, 1);
+    sub_80994A8(-8);
+    if (++gPokemonStorageSystemPtr->unk_08ad == 20)
+    {
+        gUnknown_0203847C = 0;
+        sub_809954C();
+        party_compaction();
+        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 1, 2);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_8098690(bool8 flag)
+{
+    if (flag)
+        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 0, 9, 2);
+    else
+        sub_809D034(BG_SCREEN_ADDR(15), 21, 0, gPokemonStorageSystemPtr->unk_00a8, 12, 2, 9, 2);
+}
+
+void sub_80986E8(void)
+{
+    gPokemonStorageSystemPtr->unk_08af = 1;
+    gPokemonStorageSystemPtr->unk_08b0 = 30;
+    gPokemonStorageSystemPtr->unk_08b1 = 1;
+}
+
+void sub_8098710(void)
+{
+    if (gPokemonStorageSystemPtr->unk_08af)
+    {
+        gPokemonStorageSystemPtr->unk_08af = 0;
+        sub_8098690(TRUE);
+    }
+}
+
+void sub_8098734(void)
+{
+    if (gPokemonStorageSystemPtr->unk_08af && ++gPokemonStorageSystemPtr->unk_08b0 > 30)
+    {
+        gPokemonStorageSystemPtr->unk_08b0 = 0;
+        gPokemonStorageSystemPtr->unk_08b1 = gPokemonStorageSystemPtr->unk_08b1 ? FALSE : TRUE;
+        sub_8098690(gPokemonStorageSystemPtr->unk_08b1);
+    }
+}
+
+void sub_8098780(void)
+{
+    int i;
+
+    for (i = 1; i < PARTY_SIZE; i++)
+    {
+        u16 r1;
+        bool32 r0 = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        if (r0)
+            r0 = TRUE;
+        r1 = r0 ? 12 : 16;
+        sub_809D104(gPokemonStorageSystemPtr->unk_00a8, 7, (i - 1) * 3 + 1, gPokemonStorageSystemPtr->unk_00a8, r1, 4, 4, 3);
+    }
+}
+
+void sub_80987DC(void)
+{
+    sub_8098780();
+    sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
+}
+
+void sub_809880C(void)
+{
+    gPokemonStorageSystemPtr->unk_08ae = 0;
+    PlaySE(SE_WIN_OPEN);
+    sub_80984E8();
+}
+
+bool8 sub_8098830(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_08ae)
+    {
+        case 0:
+            if (!sub_8098520())
+            {
+                sub_809B068();
+                gPokemonStorageSystemPtr->unk_08ae++;
+            }
+            break;
+        case 1:
+            if (!sub_809AC00())
+            {
+                if (gPokemonStorageSystemPtr->unk_11f6)
+                    BoxSetMosaic();
+                gPokemonStorageSystemPtr->unk_08ae++;
+            }
+            break;
+        case 2:
+            return FALSE;
+    }
+    return TRUE;
+}
+
+const struct StorageAction gPCStorageActionTexts[] = {
+    {PCText_ExitBox, 0},
+    {PCText_WhatYouDo, 0},
+    {PCText_PickATheme, 0},
+    {PCText_PickAWallpaper, 0},
+    {PCText_IsSelected, 1},
+    {PCText_JumpToWhichBox, 0},
+    {PCText_DepositInWhichBox, 0},
+    {PCText_WasDeposited, 1},
+    {PCText_BoxIsFull, 0},
+    {PCText_ReleasePoke, 0},
+    {PCText_WasReleased, 4},
+    {PCText_ByeBye, 6},
+    {PCText_MarkPoke, 0},
+    {PCText_LastPoke, 0},
+    {PCText_PartyFull, 0},
+    {PCText_HoldingPoke, 0},
+    {PCText_WhichOneWillTake, 0},
+    {PCText_CantReleaseEgg, 0},
+    {PCText_ContinueBox, 0},
+    {PCText_CameBack, 1},
+    {PCText_Worried, 0},
+    {PCText_Surprise, 0},
+    {PCText_PleaseRemoveMail, 0}
+};
 
 void PrintStorageActionText(u8 index) {
     u8 *ptr;
@@ -1826,30 +2017,67 @@ void PrintStorageActionText(u8 index) {
     MenuPrint(gPokemonStorageSystemPtr->unk_2694, 11, 17);
 }
 
-// FIXME: move this back
+const struct OamData gOamData_83B6EAC = {
+    .size = 3
+};
 
-const struct StorageAction gPCStorageActionTexts[] = {
-    {PCText_ExitBox, 0},
-    {PCText_WhatYouDo, 0},
-    {PCText_PickATheme, 0},
-    {PCText_PickAWallpaper, 0},
-    {PCText_IsSelected, 1},
-    {PCText_JumpToWhichBox, 0},
-    {PCText_DepositInWhichBox, 0},
-    {PCText_WasDeposited, 1},
-    {PCText_BoxIsFull, 0},
-    {PCText_ReleasePoke, 0},
-    {PCText_WasReleased, 4},
-    {PCText_ByeBye, 6},
-    {PCText_MarkPoke, 0},
-    {PCText_LastPoke, 0},
-    {PCText_PartyFull, 0},
-    {PCText_HoldingPoke, 0},
-    {PCText_WhichOneWillTake, 0},
-    {PCText_CantReleaseEgg, 0},
-    {PCText_ContinueBox, 0},
-    {PCText_CameBack, 1},
-    {PCText_Worried, 0},
-    {PCText_Surprise, 0},
-    {PCText_PleaseRemoveMail, 0}
+const struct OamData gOamData_83B6EB4 = {
+    .shape = ST_OAM_H_RECTANGLE
+};
+
+const union AnimCmd gSpriteAnim_83B6EBC[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83B6EC4[] = {
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(6, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd gSpriteAnim_83B6ED4[] = {
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83B6EDC[] = {
+    ANIMCMD_FRAME(10, 8),
+    ANIMCMD_FRAME( 4, 8),
+    ANIMCMD_FRAME(12, 8),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *const gSpriteAnimTable_83B6EEC[] = {
+    gSpriteAnim_83B6EBC,
+    gSpriteAnim_83B6EC4,
+    gSpriteAnim_83B6ED4,
+    gSpriteAnim_83B6EDC
+};
+
+const struct SpriteTemplate gSpriteTemplate_83B6EFC = {
+    0x0005,
+    0xdacd,
+    &gOamData_83B6EB4,
+    gSpriteAnimTable_83B6EEC,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct OamData gOamData_83B6F2C;
+
+const struct SpriteTemplate gSpriteTemplate_83B6F14 = {
+    0x000f,
+    0xdac0,
+    &gOamData_83B6F2C,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct OamData gOamData_83B6F2C = {
+    .size = 2
 };

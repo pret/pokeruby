@@ -2747,5 +2747,9 @@ extern const u8 gPSSMenuHeader_Gfx[];
 extern const u8 gPSSMenuHeader_Tilemap[];
 extern const u16 gPSSMenu1_Pal[];
 extern const u16 gPSSMenu2_Pal[];
+extern const u8 gPSSMenuMisc_Gfx[];
+extern const u8 gPSSMenuMisc_Tilemap[];
+extern const u16 gPSSMenu3_Pal[];
+extern const u16 gPSSMenu4_Pal[];
 
 #endif  // GUARD_GRAPHICS_H
