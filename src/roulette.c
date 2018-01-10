@@ -23,7 +23,7 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 asm(".include \"constants/gba_constants.inc\"");
 
@@ -578,7 +578,7 @@ void sub_8115384(void)
     {
     case 0x0:
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         sub_80F9438();
         sub_80F9368();
         REG_BG2CNT   = 0x4686;

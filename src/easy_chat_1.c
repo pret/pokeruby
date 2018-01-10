@@ -14,7 +14,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern const struct WindowTemplate gWindowTemplate_81E6D54;
 extern const struct WindowTemplate gWindowTemplate_81E6DA8;
@@ -43,7 +43,7 @@ const u16 gBerryMasterWifePhrases[][2] =
 // const pointer to gEasyChatStruct-> easy_chat might be two separate files.
 struct Shared1000 *const gEasyChatStruct = (struct Shared1000 *)(gSharedMem + 0x1000);
 
-const struct UnknownTaskStruct gUnknown_083DB698 =
+const struct ScanlineEffectParams gUnknown_083DB698 =
 {
     &REG_BG3VOFS,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
@@ -297,10 +297,10 @@ void sub_80E62F8(void)
         SetVBlankCallback(0);
         ResetPaletteFade();
         ResetSpriteData();
-        dp12_8087EA4();
-        remove_some_task();
+        ScanlineEffect_Clear();
+        ScanlineEffect_Stop();
         sub_80EAD08();
-        sub_80895F8(gUnknown_083DB698);
+        ScanlineEffect_SetParams(gUnknown_083DB698);
         FreeSpriteTileRanges();
         FreeAllSpritePalettes();
         break;
@@ -655,7 +655,7 @@ void sub_80E6A6C(void)
     ProcessSpriteCopyRequests();
     sub_80EAC5C();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void sub_80E6A88(void)

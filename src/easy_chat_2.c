@@ -17,7 +17,7 @@
 #include "strings.h"
 #include "strings2.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern void sub_8095C8C();
 extern void sub_809D104(void *, u16, u16, const void *, u16, u16, u16, u16);
@@ -2053,7 +2053,7 @@ void sub_80EAD08(void)
     u16 r2;
     u16 i;
 
-    r4 = gUnknown_03004DE0[gUnknown_03004DC0.srcBank];
+    r4 = gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
     r4 += 88;
     r2 = (gEasyChatStruct->unk1BA - 88) & 0xFF;
 

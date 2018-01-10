@@ -368,12 +368,7 @@ gUnknown_0202FF58: @ 202FF58
 	.include "src/battle/battle_setup.o"
 	.include "src/field/wild_encounter.o"
 	.include "src/field/field_effect.o"
-
-@ unknown_task
-
-gUnknown_0202FFA4: @ 202FFA4
-	.space 0x4
-
+	.include "src/scanline_effect.o"
 	.include "src/pokemon/pokemon_menu.o"
 	.include "src/pokemon/pokedex.o"
 	.include "src/engine/trainer_card.o"

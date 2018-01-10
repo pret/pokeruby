@@ -3,7 +3,7 @@
 #include "battle_anim.h"
 #include "palette.h"
 #include "main.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "rom_8077ABC.h"
 #include "data2.h"
@@ -15,9 +15,9 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG1_Y;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern u16 gBattle_BG0_Y;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
@@ -77,7 +77,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
     switch (gReshowState)
     {
     case 0:
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
         ResetPaletteFade();
         Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
@@ -87,8 +87,8 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         gBattle_BG1_Y = 0;
         gBattle_BG2_X = 0;
         gBattle_BG2_Y = 0;
-        gUnknown_030041B0 = 0;
-        gUnknown_030041B8 = 0;
+        gBattle_BG3_X = 0;
+        gBattle_BG3_Y = 0;
         break;
     case 1:
         {

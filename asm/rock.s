@@ -1549,7 +1549,7 @@ sub_80DDA8C: @ 80DDA8C
 	movs r0, 0xC8
 	strh r0, [r5, 0xA]
 _080DDAAE:
-	ldr r4, _080DDAEC @ =gUnknown_030041B8
+	ldr r4, _080DDAEC @ =gBattle_BG3_Y
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	movs r1, 0xA
@@ -1577,7 +1577,7 @@ _080DDADA:
 	bx r0
 	.align 2, 0
 _080DDAE8: .4byte gTasks
-_080DDAEC: .4byte gUnknown_030041B8
+_080DDAEC: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80DDA8C
 
 	thumb_func_start sub_80DDAF0
@@ -1600,7 +1600,7 @@ sub_80DDAF0: @ 80DDAF0
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r0, _080DDB60 @ =gUnknown_030041B8
+	ldr r0, _080DDB60 @ =gBattle_BG3_Y
 	ldrh r0, [r0]
 	strh r0, [r4, 0xC]
 _080DDB1C:
@@ -1609,7 +1609,7 @@ _080DDB1C:
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0xA]
-	ldr r6, _080DDB60 @ =gUnknown_030041B8
+	ldr r6, _080DDB60 @ =gBattle_BG3_Y
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
 	movs r0, 0x4
@@ -1635,7 +1635,7 @@ _080DDB54:
 	bx r0
 	.align 2, 0
 _080DDB5C: .4byte gTasks
-_080DDB60: .4byte gUnknown_030041B8
+_080DDB60: .4byte gBattle_BG3_Y
 _080DDB64: .4byte gBattleAnimArgs
 _080DDB68: .4byte 0x00000fff
 	thumb_func_end sub_80DDAF0

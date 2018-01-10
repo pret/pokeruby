@@ -9,7 +9,7 @@
 #include "pokemon.h"
 #include "string_util.h"
 #include "battle.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "data2.h"
 #include "decompress.h"
 #include "m4a.h"
@@ -71,8 +71,8 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern u16 gUnknown_030041B0;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
 extern u8 gBattleTerrain;
 extern u8 gReservedSpritePaletteCount;
 extern u16 gMoveToLearn;
@@ -206,8 +206,8 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 256;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 256;
+    gBattle_BG3_Y = 0;
 
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
@@ -215,7 +215,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     sub_800D6D4();
     sub_800DAB8();
     ResetSpriteData();
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     FreeAllSpritePalettes();
 
@@ -314,8 +314,8 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 256;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 256;
+    gBattle_BG3_Y = 0;
 
     Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
@@ -368,8 +368,8 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         gBattle_BG1_Y = 0;
         gBattle_BG2_X = 0;
         gBattle_BG2_Y = 0;
-        gUnknown_030041B0 = 256;
-        gUnknown_030041B8 = 0;
+        gBattle_BG3_X = 256;
+        gBattle_BG3_Y = 0;
         gMain.state++;
         break;
     case 1:
@@ -3929,12 +3929,12 @@ static void VBlankCB_EvolutionScene(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void VBlankCB_TradeEvolutionScene(void)
@@ -3945,12 +3945,12 @@ static void VBlankCB_TradeEvolutionScene(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 static void sub_81150D8(void)

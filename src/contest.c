@@ -29,7 +29,7 @@
 #include "task.h"
 #include "text.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
@@ -51,9 +51,9 @@ extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
 extern u8 gIsLinkContest;
 extern u8 gContestPlayerMonIndex;
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern s16 gBattle_BG1_Y;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
 extern u16 gBattle_WIN0V;
@@ -330,8 +330,8 @@ void ResetContestGpuRegs(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
     gBattle_WIN1H = 0;
@@ -412,7 +412,7 @@ void CB2_StartContest(void)
         SetVBlankCallback(NULL);
         SetUpContestWindow();
         ResetContestGpuRegs();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         ResetPaletteFade();
         gPaletteFade.bufferTransferDisabled = TRUE;
         DmaClearLarge32(3, (void *)VRAM, VRAM_SIZE, 0x1000);
@@ -626,8 +626,8 @@ void ContestVBlankCallback(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     REG_WIN0H = gBattle_WIN0H;
     REG_WIN0V = gBattle_WIN0V;
     REG_WIN1H = gBattle_WIN1H;
@@ -635,7 +635,7 @@ void ContestVBlankCallback(void)
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void sub_80ABB70(u8 taskId)

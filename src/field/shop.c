@@ -15,7 +15,7 @@
 #include "strings.h"
 #include "task.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "field_map_obj.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
@@ -266,7 +266,7 @@ void BuyMenuDrawGraphics(void)
     register u16 zero2 asm("r5");
 
     sub_80F9438();
-    remove_some_task();
+    ScanlineEffect_Stop();
     REG_BG1HOFS = (zero2 = 0);
     REG_BG1VOFS = zero2;
     REG_BG2HOFS = zero2;

@@ -19,7 +19,7 @@
 #include "task.h"
 #include "title_screen.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -873,7 +873,7 @@ static u8 SetUpCopyrightScreen(void)
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
         LoadCopyrightGraphics(0, 0x3800, 0);
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();

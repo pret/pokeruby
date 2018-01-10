@@ -93,7 +93,7 @@ extern u16 gChosenMove; //last used move in battle
 extern u8 gBankInMenu;
 extern u8 gActionForBanks[4];
 extern u16 gUnknown_02024C2C[4]; //last used moves 2, used by sketch
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern u16 gUnknown_02024C4C[4]; //last used moves by banks, another one
 extern u8 gCurrentTurnActionNumber;
 extern u16 gTrappingMoves[];
@@ -17229,7 +17229,7 @@ static void atkF2_displaydexinfo(void)
             LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(0x0600d000));
             LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
             REG_BG3CNT = 0x5a0b;
-            gUnknown_030041B0 = 0x100;
+            gBattle_BG3_X = 0x100;
             BeginNormalPaletteFade(0xfffc, 0, 0x10, 0, 0);
             gBattleCommunication[0]++;
         }

@@ -28,7 +28,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 //Menu actions
 enum {
@@ -750,7 +750,7 @@ static bool32 sub_80719FC(u8 *step)
 
         REG_DISPCNT = 0;
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
         addr = (void *)VRAM;
         size = 0x18000;
@@ -771,7 +771,7 @@ static bool32 sub_80719FC(u8 *step)
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         break;
     case 2:
         Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
