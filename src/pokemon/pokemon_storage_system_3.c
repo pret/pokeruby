@@ -193,3 +193,19 @@ u8 sub_8098EE0(u8 a0, u16 a1, s16 a2)
     }
     return count;
 }
+
+void sub_809900C(u8 a0, s8 a1)
+{
+    gPokemonStorageSystemPtr->unk_117c = 0;
+    gPokemonStorageSystemPtr->unk_117d = a0;
+    gPokemonStorageSystemPtr->unk_117b = a1;
+    gPokemonStorageSystemPtr->unk_1172 = 32;
+    gPokemonStorageSystemPtr->unk_1176 = -6 * a1;
+    gPokemonStorageSystemPtr->unk_1178 = 0;
+    if (a1 > 0)
+        gPokemonStorageSystemPtr->unk_117a = 0;
+    else
+        gPokemonStorageSystemPtr->unk_117a = 5;
+    gPokemonStorageSystemPtr->unk_1174 = 24 * gPokemonStorageSystemPtr->unk_117a + 0x64;
+    sub_8098DE0(gPokemonStorageSystemPtr->unk_1176);
+}

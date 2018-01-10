@@ -101,9 +101,14 @@ struct PokemonStorageSystemData {
     u8 filler_10c8[8];
     u16 unk_10d0[40];
     u16 unk_1120[40];
-    u8 filler_1170[8];
+    u8 filler_1170[2];
+    u16 unk_1172;
+    u16 unk_1174;
+    s16 unk_1176;
     u16 unk_1178;
-    u8 filler_117a[3];
+    u8 unk_117a;
+    u8 unk_117b;
+    u8 unk_117c;
     u8 unk_117d;
     u8 filler_117e[0x6a];
     u8 *unk_11e8;
