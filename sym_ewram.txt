@@ -379,6 +379,9 @@ gUnknown_0202FFA4: @ 202FFA4
 	.include "src/engine/trainer_card.o"
 	.include "src/pokemon/pokemon_storage_system.o"
 	.include "src/pokemon/pokemon_storage_system_2.o"
+	.include "src/pokemon/pokemon_storage_system_3.o"
+	.include "src/pokemon/pokemon_storage_system_4.o"
+	.include "src/pokemon/pokemon_storage_system_5.o"
 
 @ pokemon_summary_screen
 
@@ -561,5 +564,7 @@ gTileBuffer: @ 2039360
 gUnknown_02039460: @ 2039460
 	.space 0x300
 
-	.include "src/pokemon/pokemon_storage_system_3.o"
+gUnknown_02039760: @ 2039760
+	.space 0xc00
+
 	.include "src/engine/menu_cursor.o"

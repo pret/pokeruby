@@ -90,10 +90,18 @@ struct PokemonStorageSystemData {
     bool8 unk_08b1;
     s16 unk_08b2;
     u16 unk_08b4;
-    u8 filler_08b6[0x4a8];
+    u8 filler_08b6[0x4a6];
+    u16 unk_0d5c;
     s16 unk_0d5e;
     s16 unk_0d60;
-    u8 filler_0d62[0x486];
+    u8 filler_0d62[0x2d2];
+    struct Sprite *unk_1034;
+    u32 unk_1038[6];
+    u32 unk_1050[30];
+    u8 filler_10c8[8];
+    u16 unk_10d0[40];
+    u16 unk_1120[40];
+    u8 filler_1170[0x78];
     u8 *unk_11e8;
     u32 unk_11ec;
     u16 unk_11f0;
@@ -113,7 +121,8 @@ struct PokemonStorageSystemData {
     u16 *unk_12b8;
     struct PokemonMarkMenu unk_12bc;
     struct UnkPSSStruct_2002370 unk_2370;
-    u8 filler_25b4[0xd8];
+    struct Pokemon unk_25b4;
+    u8 filler_2618[0x74];
     u8 unk_268c;
     u8 unk_268d;
     u8 unk_268e;
@@ -131,11 +140,12 @@ struct PokemonStorageSystemData {
     u8 unk_4784[0x800];
 };
 
-extern EWRAM_DATA u16 gUnknown_02039760[0x600];
-
+extern u16 gUnknown_02039760[0x600];
+extern struct UnkPSSStruct_2002370 *gUnknown_02038478;
 extern struct PokemonStorageSystemData *const gPokemonStorageSystemPtr;
 extern u8 *const gUnknown_083B6DB8;
 
+u8 CountPokemonInBoxN(u8 boxId);
 void sub_8096264(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3);
 void sub_809634C(u8 curBox);
 u8 sub_8096368(void);
@@ -145,6 +155,7 @@ void sub_80961A8(void);
 void task_intro_29(u8 whichMenu);
 void ResetPokemonStorageSystem(void);
 void sub_8098B48(void);
+void sub_8099200(u8 a0);
 void sub_8099310(void);
 bool8 sub_8099374(void);
 void sub_80994A8(s16 a0);

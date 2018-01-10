@@ -22,6 +22,12 @@ void sub_809665C(void);
 void sub_80966F4(const u8 *sourceString, u16 x, u16 y);
 void sub_8096784(struct Sprite *sprite);
 
+EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
+EWRAM_DATA u8 gUnknown_02038470[3] = {};
+EWRAM_DATA u8 gUnknown_02038473 = 0;
+EWRAM_DATA u8 gUnknown_02038474 = 0;
+EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478 = NULL;
+
 const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_WithdrawPoke, PCText_MovePokeToParty},
     {PCText_DepositPoke,  PCText_StorePokeInBox},
@@ -71,13 +77,7 @@ const u8 gBoxSelectionPopupCenterTiles[] = INCBIN_U8("graphics/pokemon_storage/b
 
 const u8 gBoxSelectionPopupSidesTiles[] = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
 
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gUnknown_02038470[3] = {};
-EWRAM_DATA u8 gUnknown_02038473 = 0;
-EWRAM_DATA u8 gUnknown_02038474 = 0;
-EWRAM_DATA struct UnkPSSStruct_2002370 *gUnknown_02038478 = NULL;
-
-static u8 CountPokemonInBoxN(u8 boxId)
+u8 CountPokemonInBoxN(u8 boxId)
 {
     u16 i;
     u16 count;

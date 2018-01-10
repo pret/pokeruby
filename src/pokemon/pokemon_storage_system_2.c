@@ -27,15 +27,6 @@ EWRAM_DATA u8 gUnknown_0203847C = 0;
 EWRAM_DATA u8 gUnknown_0203847D = 0;
 EWRAM_DATA u8 gUnknown_0203847E = 0;
 EWRAM_DATA u8 gUnknown_0203847F = 0;
-EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
-EWRAM_DATA u8 gUnknown_020384E4 = 0;
-EWRAM_DATA u8 gUnknown_020384E5 = 0;
-EWRAM_DATA u8 gUnknown_020384E6 = 0;
-EWRAM_DATA u8 gUnknown_020384E7 = 0;
-EWRAM_DATA u8 gUnknown_020384E8 = 0;
-EWRAM_DATA u8 gUnknown_020384E9 = 0;
-EWRAM_DATA u16 gUnknown_020384EA = 0;
-EWRAM_DATA u32 gUnknown_020384EC = 0;
 
 // Static ROM declarations
 
@@ -80,7 +71,6 @@ void sub_8098400(void);
 void add_to_c3_somehow(void);
 void sub_8098780(void);
 void sub_8098690(bool8 flag);
-void sub_8099200(u8 a0);
 bool8 sub_80985CC(void);
 void sub_80986E8(void);
 void sub_8098710(void);
@@ -158,7 +148,6 @@ const struct SpritePalette gWaveformSpritePalette = {
 };
 
 // .text
-
 
 void task_intro_29(u8 whichMenu)
 {
@@ -2015,22 +2004,6 @@ const struct SpriteTemplate gSpriteTemplate_83B6EFC = {
     NULL,
     gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
-};
-
-const struct OamData gOamData_83B6F2C;
-
-const struct SpriteTemplate gSpriteTemplate_83B6F14 = {
-    0x000f,
-    0xdac0,
-    &gOamData_83B6F2C,
-    gDummySpriteAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
-};
-
-const struct OamData gOamData_83B6F2C = {
-    .size = 2
 };
 
 void sub_8098A38(s8 a0)
