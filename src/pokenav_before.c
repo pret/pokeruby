@@ -3268,10 +3268,10 @@ bool8 sub_80EF284(u8 a)
         sub_80EEDE8();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E7224);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E7224);
         break;
     case 3:
         if (!MultistepInitMenuWindowContinue())
@@ -3337,7 +3337,7 @@ void sub_80EF428(u8 a, u8 b)
 
     tileBuffer = gUnknown_083DFEC8;
     sub_8072C74(&tileBuffer[0x800], pcText, 0xC0, 2);
-    MenuPrint(&tileBuffer[0x800], 3, 17);
+    Menu_PrintText(&tileBuffer[0x800], 3, 17);
 }
 
 void sub_80EF490(u8 a)
@@ -3660,17 +3660,17 @@ bool8 sub_80EF874(void)
         sub_80EEDE8();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7224);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
         break;
     case 2:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E7224);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E7224);
         break;
     case 3:
         if (!MultistepInitMenuWindowContinue())
             return TRUE;
         break;
     case 4:
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         break;
     case 5:
         sub_80FA904(&gUnknown_083DFEC4->regionMap, gSaveBlock2.regionMapZoom ? TRUE : FALSE);
@@ -3691,7 +3691,7 @@ bool8 sub_80EF874(void)
             return TRUE;
         break;
     case 10:
-        MenuDrawTextWindow(13, 3, 29, 17);
+        Menu_DrawStdWindowFrame(13, 3, 29, 17);
         sub_80EF9F8();
         break;
     case 11:
@@ -3765,8 +3765,8 @@ void sub_80EF9F8(void)
         b = gUnknown_083DFEC4->regionMap.everGrandeCityArea;
         if (gUnknown_083DFEC4->unkCDCC[mapSectionId][b] != NULL)
         {
-            MenuFillWindowRectWithBlankTile(14, top, 15, 15);
-            MenuFillWindowRectWithBlankTile(26, top, 28, 15);
+            Menu_BlankWindowRect(14, top, 15, 15);
+            Menu_BlankWindowRect(26, top, 28, 15);
             sub_8095C8C((void *)(VRAM + 0xF800), 16, 6, gUnknown_083DFEC4->unkCDCC[mapSectionId][b], 0, 0, 10, 10, 10);
             top += 11;
         }
@@ -3779,7 +3779,7 @@ void sub_80EF9F8(void)
 
     // Epic fail by the compiler at optimizing this.
     if (!someBool && top < 16)
-        MenuFillWindowRectWithBlankTile(14, top, 28, 15);
+        Menu_BlankWindowRect(14, top, 28, 15);
 
     if (gUnknown_083DFEC4->regionMap.unk16 == 2)
         sub_80EFD74();
@@ -3972,17 +3972,17 @@ bool8 sub_80EFF68(void)
         gUnknown_083DFEC4->unkD162[0] = 11;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E7080);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7080);
         break;
     case 2:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E7080);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E7080);
         break;
     case 3:
         if (!MultistepInitMenuWindowContinue())
             return TRUE;
         break;
     case 4:
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         break;
     case 5:
         sub_80F1614();
@@ -4050,13 +4050,13 @@ void sub_80F01A4(void)
 
 void sub_80F01E0(u16 a)
 {
-    MenuPrint(gUnknown_083DFEC4->unk8829[a], 13, 1);
+    Menu_PrintText(gUnknown_083DFEC4->unk8829[a], 13, 1);
 
     if (gUnknown_083DFEC4->unk76AA == 1)
     {
-        MenuPrint(gUnknown_083DFEC4->unk88E9[a], 13, 3);
+        Menu_PrintText(gUnknown_083DFEC4->unk88E9[a], 13, 3);
         sub_80F443C(gUnknown_083DFEC4->unk8788, gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk2);
-        MenuPrint(gUnknown_083DFEC4->unk8788, 1, 6);
+        Menu_PrintText(gUnknown_083DFEC4->unk8788, 1, 6);
     }
 }
 
@@ -4086,10 +4086,10 @@ bool8 sub_80F02A0(void)
         gUnknown_083DFEC4->unkD162[0] = 11;
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E70D4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E70D4);
         break;
     case 2:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E70D4);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E70D4);
         break;
     case 3:
         if (!MultistepInitMenuWindowContinue())
@@ -4098,7 +4098,7 @@ bool8 sub_80F02A0(void)
         }
         break;
     case 4:
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         break;
     case 5:
         LZ77UnCompVram(gUnknown_08E9FC64, (void *)VRAM + 0xE800);
@@ -4268,17 +4268,17 @@ _080F0338: .4byte 0x000087ca\n\
 _080F033C: .4byte 0x000087c8\n\
 _080F0340: .4byte 0x0000d162\n\
 _080F0344:\n\
-    ldr r0, _080F034C @ =gWindowConfig_81E70D4\n\
-    bl SetUpWindowConfig\n\
+    ldr r0, _080F034C @ =gWindowTemplate_81E70D4\n\
+    bl Text_LoadWindowTemplate\n\
     b _080F0618\n\
     .align 2, 0\n\
-_080F034C: .4byte gWindowConfig_81E70D4\n\
+_080F034C: .4byte gWindowTemplate_81E70D4\n\
 _080F0350:\n\
-    ldr r0, _080F0358 @ =gWindowConfig_81E70D4\n\
+    ldr r0, _080F0358 @ =gWindowTemplate_81E70D4\n\
     bl MultistepInitMenuWindowBegin\n\
     b _080F0618\n\
     .align 2, 0\n\
-_080F0358: .4byte gWindowConfig_81E70D4\n\
+_080F0358: .4byte gWindowTemplate_81E70D4\n\
 _080F035C:\n\
     bl MultistepInitMenuWindowContinue\n\
     cmp r0, 0\n\
@@ -4287,7 +4287,7 @@ _080F035C:\n\
 _080F0366:\n\
     b _080F0626\n\
 _080F0368:\n\
-    bl MenuZeroFillScreen\n\
+    bl Menu_EraseScreen\n\
     b _080F0618\n\
 _080F036E:\n\
     ldr r0, _080F0378 @ =gUnknown_08E9FC64\n\

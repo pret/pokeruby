@@ -31,6 +31,6 @@ bool8 unref_sub_812AECC(u8 *script)
 
 void sub_812AF10(void)
 {
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gStringVar4, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gStringVar4, 3, 15);
 }

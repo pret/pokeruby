@@ -136,7 +136,7 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
 void IncrementGameStat(u8 index);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u16 GetPokedexHeightWeight(u16 national_num, u8 heightweight);
-u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
+u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 void DestroyMenuCursor(void);
 void sub_802BC6C(void);
 u8 sub_809FA30(void);
@@ -155,7 +155,7 @@ u8 Overworld_GetMapTypeOfSaveblockLocation(void);
 u8 CalculatePlayerPartyCount(void);
 u16 Sqrt(u32 num);
 u8 sub_809070C(u16 nationalNum, u32 TiD, u32 PiD); //task prepare poke dex display
-void sub_814A880(u8 a1, u8 a2);
+void MenuCursor_SetPos814A880(u8 a1, u8 a2);
 u8 CheckMoveLimitations(u8 bank, u8 unusable_moves, u8 flags);
 bool8 IsLinkDoubleBattle(void);
 void sub_8094B6C(u8 bank, u8 partyID, u8 r2);
@@ -10767,9 +10767,9 @@ void atk59_handlelearnnewmove(void)
 void sub_8023A80(void)
 {
     sub_802BBD4(0x18, 8, 0x1D, 0xD, 0);
-    InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
-    sub_8002F44(&gUnknown_03004210);
-    sub_814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
+    Text_InitWindow(&gUnknown_03004210, BattleText_YesNo, 0x100, 0x19, 0x9);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 0xC, 0x2D9F, 0x20);
 }
 
 void sub_8023AD8(void)
@@ -11714,9 +11714,9 @@ _08024AC4:\n\
     str r0, [sp]\n\
     adds r0, r4, 0\n\
     movs r3, 0xC\n\
-    bl InitWindow\n\
+    bl Text_InitWindow\n\
     adds r0, r4, 0\n\
-    bl sub_8002F44\n\
+    bl Text_PrintWindow8002F44\n\
     ldr r1, _08024AEC @ =gSharedMem\n\
     ldr r2, _08024AF0 @ =0x0001609c\n\
     adds r1, r2\n\
@@ -11835,9 +11835,9 @@ _08024BC0:\n\
     str r0, [sp]\n\
     adds r0, r4, 0\n\
     movs r3, 0xC\n\
-    bl InitWindow\n\
+    bl Text_InitWindow\n\
     adds r0, r4, 0\n\
-    bl sub_8002F44\n\
+    bl Text_PrintWindow8002F44\n\
     ldr r1, _08024BFC @ =gSharedMem\n\
     ldr r0, _08024C00 @ =0x0001609c\n\
     adds r1, r0\n\
@@ -17333,7 +17333,7 @@ _0802BC68: .4byte 0x00001025\n\
 
 void sub_802BC6C(void)
 {
-    sub_814A880(0xC8, ((gBattleCommunication[1] << 28) + 1207959552) >> 24); //what could that be?
+    MenuCursor_SetPos814A880(0xC8, ((gBattleCommunication[1] << 28) + 1207959552) >> 24); //what could that be?
 }
 
 void nullsub_6(void)

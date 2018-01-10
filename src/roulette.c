@@ -596,8 +596,8 @@ void sub_8115384(void)
         gMain.state++;
         break;
     case 0x2:
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         LoadPalette(&gUnknown_083F86BC, 0x0, 0x1C0);
         gMain.state++;
         break;
@@ -625,8 +625,8 @@ void sub_8115384(void)
         sub_81182F8(0x6);
         sub_811829C(0x0);
         sub_8117158(0x0);
-        MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-        MenuPrint(&gUnknown_081C4157[0], 0x1, 0xF);
+        Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+        Menu_PrintText(&gUnknown_081C4157[0], 0x1, 0xF);
         gSpriteCoordOffsetX = -0x3C;
         gSpriteCoordOffsetY = 0x0;
         gMain.state++;
@@ -693,14 +693,14 @@ void sub_8115734(u8 taskid)
 {
     DisplayYesNoMenu(0x14, 0x8, 0x1);
     sub_814AAF8(0x2D9E);
-    MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-    MenuPrint(&gUnknown_081C41E3, 0x1, 0xF);
+    Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+    Menu_PrintText(&gUnknown_081C41E3, 0x1, 0xF);
     DoYesNoFuncWithChoice(taskid, &gUnknown_083F8EBC);
 }
 
 void sub_811577C(u8 taskid)
 {
-    MenuZeroFillWindowRect(0x14, 0x8, 0x1A, 0xD);
+    Menu_EraseWindowRect(0x14, 0x8, 0x1A, 0xD);
     gTasks[taskid].func = &sub_81159BC;
 }
 
@@ -1446,21 +1446,21 @@ void sub_8116638(u8 taskid)
         if (gTasks[taskid].data[0x2] == 0xC)
         {
             PlayFanfare(BGM_ME_B_BIG);
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(&gUnknown_081C41A5, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(&gUnknown_081C41A5, 0x1, 0xF);
         }
         else
         {
             PlayFanfare(BGM_ME_B_SMALL);
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(&gUnknown_081C4199, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(&gUnknown_081C4199, 0x1, 0xF);
         }
         break;
     case 0:
     default:
         m4aSongNumStart(SE_HAZURE);
-        MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-        MenuPrint(&gUnknown_081C41AE, 0x1, 0xF);
+        Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+        Menu_PrintText(&gUnknown_081C41AE, 0x1, 0xF);
     }
     gTasks[taskid].data[0x1] = 0x0;
     gTasks[taskid].func = &sub_811659C;
@@ -1500,8 +1500,8 @@ void sub_811677C(u8 taskid)
 {
     ConvertIntToDecimalStringN((u8 *)&gStringVar1, (eRoulette->var19 * gTasks[taskid].data[0x2]), STR_CONV_MODE_LEFT_ALIGN, 0x2);
     StringExpandPlaceholders((u8 *)&gStringVar4, &gUnknown_081C41BD);
-    MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-    MenuPrint((u8 *)&gStringVar4, 0x1, 0xF);
+    Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+    Menu_PrintText((u8 *)&gStringVar4, 0x1, 0xF);
     gTasks[taskid].data[0x1] = (eRoulette->var19 * gTasks[taskid].data[0x2]);
     gTasks[taskid].data[0x7] = 0x0;
     gTasks[taskid].func = &sub_81166E8;
@@ -1534,14 +1534,14 @@ void sub_8116880(u8 taskid)
     {
         if (gTasks[taskid].data[0x6] == 0x6)
         {
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(&gUnknown_081C41F1, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(&gUnknown_081C41F1, 0x1, 0xF);
             sub_8116C34(taskid, &dp01t_12_3_battle_menu, 0xFFFF, 0x3);
         }
         else if (gTasks[taskid].data[0xD] == 0x270F)
         {
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(&gUnknown_081C4231, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(&gUnknown_081C4231, 0x1, 0xF);
             sub_8116C34(taskid, &sub_8115734, 0xFFFF, 0x3);
         }
         else
@@ -1551,8 +1551,8 @@ void sub_8116880(u8 taskid)
     }
     else
     {
-        MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-        MenuPrint(&gUnknown_081C41D2, 0x1, 0xF);
+        Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+        Menu_PrintText(&gUnknown_081C41D2, 0x1, 0xF);
         sub_8116C34(taskid, &sub_81157AC, 0x3C, 0x3);
     }
 }
@@ -1570,8 +1570,8 @@ void dp01t_12_3_battle_menu(u8 taskid)
         gSprites[eRoulette->var3C[i + 0x7]].invisible = FALSE;
     if (gTasks[taskid].data[0xD] == 0x270F)
     {
-        MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-        MenuPrint(&gUnknown_081C4231, 0x1, 0xF);
+        Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+        Menu_PrintText(&gUnknown_081C4231, 0x1, 0xF);
         sub_8116C34(taskid, &sub_8115734, 0xFFFF, 0x3);
     }
     else
@@ -2619,8 +2619,8 @@ void sub_8117528(u8 taskid)
 
 void sub_811755C(u8 taskid)
 {
-    MenuZeroFillWindowRect(0x14, 0x8, 0x1A, 0xD);
-    MenuZeroFillScreen();
+    Menu_EraseWindowRect(0x14, 0x8, 0x1A, 0xD);
+    Menu_EraseScreen();
     BeginNormalPaletteFade(-0x1, 0x0, 0x0, 0x10, 0x0);
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
@@ -2629,7 +2629,7 @@ void sub_811755C(u8 taskid)
 
 void sub_81175C0(u8 taskid)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     ScriptContext2_Disable();
     DestroyTask(taskid);
 }
@@ -2640,7 +2640,7 @@ void sub_81175DC(u8 taskid)
     if (!(gMain.newKeys & (A_BUTTON | B_BUTTON)) && gTasks[taskid].data[0] < 0x3D)
         return;
     gSpecialVar_0x8004 = 0x1;
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     ScriptContext2_Disable();
     DestroyTask(taskid);
 }
@@ -2650,8 +2650,8 @@ void sub_8117630(u8 taskid)
     u32 temp = gUnknown_083F8DF0[(gSpecialVar_0x8004 & 0x1) + (gSpecialVar_0x8004 >> 0x7 << 0x1)];
     ConvertIntToDecimalStringN(gStringVar1, temp, 0x2, 0x1);
     StringExpandPlaceholders(gStringVar4, &gUnknown_081C40DF);
-    MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-    MenuPrint(gStringVar4, 0x1, 0xF);
+    Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+    Menu_PrintText(gStringVar4, 0x1, 0xF);
     gTasks[taskid].func = &sub_81174F8;
 }
 
@@ -2660,7 +2660,7 @@ void Task_Roulette_0(u8 taskid)
     s32 temp;
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskid].data[0xD], 0x1, 0x4);
     StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
-    MenuDrawTextWindow(0x0, 0x0, 0x9, 0x3);
+    Menu_DrawStdWindowFrame(0x0, 0x0, 0x9, 0x3);
     MenuPrint_RightAligned(gStringVar4, 0x9, 0x1);
     temp = gUnknown_083F8DF0[(gSpecialVar_0x8004 & 0x1) + (gSpecialVar_0x8004 >> 0x7 << 0x1)];
     ConvertIntToDecimalStringN(gStringVar1, temp, 0x2, 0x1);
@@ -2668,23 +2668,23 @@ void Task_Roulette_0(u8 taskid)
     {
         if ((gSpecialVar_0x8004 & 0x80) && (gSpecialVar_0x8004 & 0x1))
         {
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(&gUnknown_081C4139, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(&gUnknown_081C4139, 0x1, 0xF);
             sub_8116C34(taskid , &sub_8117630, 0xFFFF, 0x3);
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, &gUnknown_081C40DF);
-            MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-            MenuPrint(gStringVar4, 0x1, 0xF);
+            Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+            Menu_PrintText(gStringVar4, 0x1, 0xF);
             gTasks[taskid].func = &sub_81174F8;
         }
     }
     else
     {
         StringExpandPlaceholders(gStringVar4, &gUnknown_081C411C);
-        MenuDrawTextWindow(0x0, 0xE, 0x1D, 0x13);
-        MenuPrint(gStringVar4, 0x1, 0xF);
+        Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
+        Menu_PrintText(gStringVar4, 0x1, 0xF);
         gTasks[taskid].func = &sub_81175DC;
         gTasks[taskid].data[0xD] = 0x0;
         gTasks[taskid].data[0x0] = 0x0;

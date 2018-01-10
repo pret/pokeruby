@@ -109,13 +109,13 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
 static void sub_8082D18(u32 value)
 {
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 1);
-    MenuDrawTextWindow(18, 10, 28, 13);
+    Menu_DrawStdWindowFrame(18, 10, 28, 13);
     sub_8072BD8(gOtherText_PLink, 19, 11, 72);
 }
 
 static void sub_8082D4C()
 {
-    MenuZeroFillWindowRect(18, 10, 28, 13);
+    Menu_EraseWindowRect(18, 10, 28, 13);
 }
 
 static void sub_8082D60(u8 taskId, u8 arg1)
@@ -790,7 +790,7 @@ static void sub_80839DC(u8 taskId)
     case 3:
         sub_8055588();
         HideFieldMessageBox();
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;

@@ -3,13 +3,13 @@
 #include "palette.h"
 #include "sprite.h"
 
-EWRAM_DATA u16 gUnknown_0203A360[0x10] = {};
-EWRAM_DATA struct Subsprite gMenuCursorSubsprites[10] = {0};
-EWRAM_DATA u8 gUnknown_0203A3D0 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D1 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D2 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D3 = 0;
-EWRAM_DATA u8 gUnknown_0203A3D4 = 0;
+EWRAM_DATA static u16 gUnknown_0203A360[0x10] = {};
+EWRAM_DATA static struct Subsprite gMenuCursorSubsprites[10] = {0};
+EWRAM_DATA static u8 gUnknown_0203A3D0 = 0;
+EWRAM_DATA static u8 gUnknown_0203A3D1 = 0;
+EWRAM_DATA static u8 gUnknown_0203A3D2 = 0;
+EWRAM_DATA static u8 gUnknown_0203A3D3 = 0;
+EWRAM_DATA static u8 gUnknown_0203A3D4 = 0;
 
 #if ENGLISH
 #include "../src/data/menu_cursor_en.h"
@@ -26,7 +26,7 @@ void sub_814A590(void)
     gUnknown_0203A3D4 = 0;
 }
 
-u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
+u8 MenuCursor_Create814A5C0(u8 subpriority, u16 paletteTag, u8 a3, u16 a4, u8 a5)
 {
     int v9;
     struct Sprite *v10;
@@ -35,34 +35,34 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
         DestroyMenuCursor();
 
     v9 = 1;
-    if (a2 == 0xFFFF)
+    if (paletteTag == 0xFFFF)
     {
         gUnknown_0203A360[a3 & 0xF] = a4;
         if (LoadSpritePalette(&gUnknown_0842F240) != 0xFF)
         {
-            a2 = 0xFFF0;
+            paletteTag = 0xFFF0;
             v9 = 0;
         }
     }
 
     LoadSpriteSheetDeferred(&gUnknown_0842F140[a3 & 0xF]);
-    gUnknown_0203A3D0 = CreateSprite(&gSpriteTemplate_842F250[v9], 0, 0xA0, a1);
-    gUnknown_0203A3D1 = CreateSprite(&gSpriteTemplate_842F250[2], 0, 0xA0, a1);
+    gUnknown_0203A3D0 = CreateSprite(&gSpriteTemplate_842F250[v9], 0, 160, subpriority);
+    gUnknown_0203A3D1 = CreateSprite(&gSpriteTemplate_842F250[2], 0, 160, subpriority);
     if (gUnknown_0203A3D0 != 0x40)
     {
         v10 = &gSprites[gUnknown_0203A3D0];
-        if (a2 == 0xFFFF)
+        if (paletteTag == 0xFFFF)
             v10->oam.paletteNum = 0;
         else
-            v10->oam.paletteNum = IndexOfSpritePaletteTag(a2);
+            v10->oam.paletteNum = IndexOfSpritePaletteTag(paletteTag);
     }
     if (gUnknown_0203A3D1 != 0x40)
     {
         v10 = &gSprites[gUnknown_0203A3D1];
-        if (a2 == 0xFFFF)
+        if (paletteTag == 0xFFFF)
             v10->oam.paletteNum = 0;
         else
-            v10->oam.paletteNum = IndexOfSpritePaletteTag(a2);
+            v10->oam.paletteNum = IndexOfSpritePaletteTag(paletteTag);
 
         if (!(REG_DISPCNT & (DISPCNT_WIN0_ON | DISPCNT_WIN1_ON)))
             *(u8 *)(REG_ADDR_WINOUT) |= 0x1F;
@@ -75,12 +75,13 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
     return gUnknown_0203A3D0;
 }
 
-u8 sub_814A758(u8 a1, u8 a2, u8 a3, u8 a4)
+// unused
+u8 sub_814A758(u8 subpriority, u8 a2, u8 a3, u8 a4)
 {
     u8 result;
     struct Sprite *spr;
 
-    result = sub_814A5C0(a1, 0, a3, 0, a4);
+    result = MenuCursor_Create814A5C0(subpriority, 0, a3, 0, a4);
     if (result != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
@@ -128,7 +129,7 @@ void DestroyMenuCursor(void)
     return;
 }
 
-void sub_814A880(u8 a1, u8 a2)
+void MenuCursor_SetPos814A880(u8 a1, u8 a2)
 {
     struct Sprite *spr;
 
@@ -685,49 +686,48 @@ void unref_sub_814ABE4(int a1)
     return;
 }
 
-u8 CreateBlendedOutlineCursor(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
+u8 CreateBlendedOutlineCursor(u8 subpriority, u16 paletteTag, u8 a3, u16 a4, u8 a5)
 {
     int v8;
     struct Sprite *spr;
-    u8 var1 = gUnknown_0203A3D2;
 
-    if (var1 != 0x40)
-        sub_814AD44();
+    if (gUnknown_0203A3D2 != 0x40)
+        MenuCursor_Destroy814AD44();
 
     v8 = 1;
 
-    if (a2 == 0xFFFF)
+    if (paletteTag == 0xFFFF)
     {
         gUnknown_0203A360[a3 & 0xF] = a4;
         if (LoadSpritePalette(&gUnknown_0842F248) != 0xFF )
         {
-            a2 = 0xFFF1;
+            paletteTag = 0xFFF1;
             v8 = 0;
         }
     }
 
     LoadSpriteSheetDeferred(&gUnknown_0842F1C0[a3 & 0xF]);
 #if ENGLISH
-    gUnknown_0203A3D2 = CreateSprite(&gSpriteTemplate_842F298[v8], 0, 160, a1);
+    gUnknown_0203A3D2 = CreateSprite(&gSpriteTemplate_842F298[v8], 0, 160, subpriority);
 #elif GERMAN
-    gUnknown_0203A3D2 = CreateSprite(&gSpriteTemplate_842F298[v8], 0, 161, a1);
+    gUnknown_0203A3D2 = CreateSprite(&gSpriteTemplate_842F298[v8], 0, 161, subpriority);
 #endif
 
     if (gUnknown_0203A3D2 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D2];
 
-        if (a2 == 0xFFFF)
+        if (paletteTag == 0xFFFF)
             spr->oam.paletteNum = 0;
         else
-            spr->oam.paletteNum = IndexOfSpritePaletteTag(a2);
+            spr->oam.paletteNum = IndexOfSpritePaletteTag(paletteTag);
     }
     sub_814ADF4(a5);
 
     return gUnknown_0203A3D2;
 }
 
-void sub_814AD44(void)
+void MenuCursor_Destroy814AD44(void)
 {
     if (gUnknown_0203A3D2 != 0x40)
     {
@@ -738,7 +738,7 @@ void sub_814AD44(void)
     return;
 }
 
-void sub_814AD7C(u8 a1, u8 a2)
+void MenuCursor_SetPos814AD7C(u8 a1, u8 a2)
 {
     struct Sprite *spr;
     if (gUnknown_0203A3D2 != 0x40)

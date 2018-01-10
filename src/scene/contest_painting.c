@@ -243,8 +243,8 @@ static void HoldContestPainting(void)
 
 static void ContestPaintingInitWindow(u8 arg0)
 {
-    InitMenuWindow(&gWindowConfig_81E7160);
-    SetUpWindowConfig(&gWindowConfig_81E7160);
+    InitMenuWindow(&gWindowTemplate_81E7160);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7160);
 }
 
 static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
@@ -291,7 +291,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
         xPos = 3;
         yPos = 14;
     }
-    MenuPrint_PixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
+    Menu_PrintTextPixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
 }
 
 static void ContestPaintingInitBG(void)

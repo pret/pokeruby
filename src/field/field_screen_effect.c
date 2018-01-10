@@ -215,7 +215,7 @@ static void sub_80816A8(u8 taskId)
         data[0] = 1;
         break;
     case 1:
-        MenuFillWindowRectWithBlankTile(0, 0, 29, 19);
+        Menu_BlankWindowRect(0, 0, 29, 19);
         sub_808161C(data[1]);
         sub_8081534(data[2], data[3], 1, 160, 1, 2);
         data[0] = 2;
@@ -264,8 +264,8 @@ static void sub_80816A8(u8 taskId)
         }
         break;
     case 5:
-        MenuZeroFillWindowRect(0, 0, 29, 19);
-        LoadFontDefaultPalette(&gWindowConfig_81E6CE4);
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        LoadFontDefaultPalette(&gWindowTemplate_81E6CE4);
         REG_WIN0H = 255;
         REG_DISPCNT = data[6];
         REG_BLDCNT = data[7];

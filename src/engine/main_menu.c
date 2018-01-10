@@ -24,7 +24,7 @@
 #include "unknown_task.h"
 #include "ewram.h"
 
-#define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
+#define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))
 
 extern struct PaletteFadeControl gPaletteFade;
 
@@ -233,8 +233,8 @@ u32 InitMainMenu(u8 a1)
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (a1)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
@@ -293,7 +293,7 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].func = Task_MainMenuCheckRtc;
         break;
     case 2:
-        MenuDrawTextWindow(2, 14, 27, 19);
+        Menu_DrawStdWindowFrame(2, 14, 27, 19);
         MenuPrintMessage(gSaveFileDeletedMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
@@ -301,7 +301,7 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].func = Task_MainMenuWaitForSaveErrorAck;
         break;
     case 255:
-        MenuDrawTextWindow(2, 14, 27, 19);
+        Menu_DrawStdWindowFrame(2, 14, 27, 19);
         MenuPrintMessage(gSaveFileCorruptMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
@@ -319,7 +319,7 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].func = Task_MainMenuCheckRtc;
         break;
     case 4:
-        MenuDrawTextWindow(2, 14, 27, 19);
+        Menu_DrawStdWindowFrame(2, 14, 27, 19);
         MenuPrintMessage(gBoardNotInstalledMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
@@ -331,11 +331,11 @@ void Task_MainMenuCheckSave(u8 taskId)
 
 void Task_MainMenuWaitForSaveErrorAck(u8 taskId)
 {
-    if (MenuUpdateWindowText())
+    if (Menu_UpdateWindowText())
     {
         if (gMain.newKeys & A_BUTTON)
         {
-            MenuZeroFillWindowRect(2, 14, 27, 19);
+            Menu_EraseWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_MainMenuCheckRtc;
         }
     }
@@ -359,7 +359,7 @@ void Task_MainMenuCheckRtc(u8 taskId)
         }
         else
         {
-            MenuDrawTextWindow(2, 14, 27, 19);
+            Menu_DrawStdWindowFrame(2, 14, 27, 19);
             MenuPrintMessage(gBatteryDryMessage, 3, 15);
             REG_WIN0H = WIN_RANGE(17, 223);
             REG_WIN0V = WIN_RANGE(113, 159);
@@ -370,11 +370,11 @@ void Task_MainMenuCheckRtc(u8 taskId)
 
 void Task_MainMenuWaitForRtcErrorAck(u8 taskId)
 {
-    if (MenuUpdateWindowText())
+    if (Menu_UpdateWindowText())
     {
         if ( gMain.newKeys & 1 )
         {
-            MenuZeroFillWindowRect(2, 14, 27, 19);
+            Menu_EraseWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_MainMenuDraw;
         }
     }
@@ -412,28 +412,28 @@ void Task_MainMenuDraw(u8 taskId)
         {
         case HAS_NO_SAVED_GAME:
         default:
-            MenuDrawTextWindow(1, 0, 28, 3);
+            Menu_DrawStdWindowFrame(1, 0, 28, 3);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 1);
-            MenuDrawTextWindow(1, 4, 28, 7);
+            Menu_DrawStdWindowFrame(1, 4, 28, 7);
             PrintMainMenuItem(gMainMenuString_Option, 2, 5);
             break;
         case HAS_SAVED_GAME:
-            MenuDrawTextWindow(1, 0, 28, 7);
+            Menu_DrawStdWindowFrame(1, 0, 28, 7);
             PrintMainMenuItem(gMainMenuString_Continue, 2, 1);
-            MenuDrawTextWindow(1, 8, 28, 11);
+            Menu_DrawStdWindowFrame(1, 8, 28, 11);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 9);
-            MenuDrawTextWindow(1, 12, 28, 15);
+            Menu_DrawStdWindowFrame(1, 12, 28, 15);
             PrintMainMenuItem(gMainMenuString_Option, 2, 13);
             PrintSaveFileInfo();
             break;
         case HAS_MYSTERY_GIFT:
-            MenuDrawTextWindow(1, 0, 28, 7);
+            Menu_DrawStdWindowFrame(1, 0, 28, 7);
             PrintMainMenuItem(gMainMenuString_Continue, 2, 1);
-            MenuDrawTextWindow(1, 8, 28, 11);
+            Menu_DrawStdWindowFrame(1, 8, 28, 11);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 9);
-            MenuDrawTextWindow(1, 12, 28, 15);
+            Menu_DrawStdWindowFrame(1, 12, 28, 15);
             PrintMainMenuItem(gMainMenuString_MysteryEvents, 2, 13);
-            MenuDrawTextWindow(1, 16, 28, 19);
+            Menu_DrawStdWindowFrame(1, 16, 28, 19);
             PrintMainMenuItem(gMainMenuString_Option, 2, 0x11);
             PrintSaveFileInfo();
             break;
@@ -681,7 +681,7 @@ void PrintMainMenuItem(const u8 *text, u8 left, u8 top)
 
     buffer[29] = EOS;
 
-    MenuPrint(buffer, left, top);
+    Menu_PrintText(buffer, left, top);
 }
 
 void PrintSaveFileInfo(void)
@@ -694,8 +694,8 @@ void PrintSaveFileInfo(void)
 
 void PrintPlayerName(void)
 {
-    MenuPrint(gMainMenuString_Player, 2, 3);
-    MenuPrint(gSaveBlock2.playerName, 9, 3);
+    Menu_PrintText(gMainMenuString_Player, 2, 3);
+    Menu_PrintText(gSaveBlock2.playerName, 9, 3);
 }
 
 void PrintPlayTime(void)
@@ -704,15 +704,15 @@ void PrintPlayTime(void)
     u8 alignedPlayTime[32];
 
 #if defined(ENGLISH)
-    MenuPrint(gMainMenuString_Time, 16, 3);
+    Menu_PrintText(gMainMenuString_Time, 16, 3);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
     sub_8072C74(alignedPlayTime, playTime, 48, 1);
-    MenuPrint(alignedPlayTime, 22, 3);
+    Menu_PrintText(alignedPlayTime, 22, 3);
 #elif defined(GERMAN)
-    MenuPrint_PixelCoords(gMainMenuString_Time, 124, 24, TRUE);
+    Menu_PrintTextPixelCoords(gMainMenuString_Time, 124, 24, TRUE);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
     sub_8072C74(alignedPlayTime, playTime, 40, 1);
-    MenuPrint(alignedPlayTime, 23, 3);
+    Menu_PrintText(alignedPlayTime, 23, 3);
 #endif
 }
 
@@ -720,9 +720,9 @@ void PrintPokedexCount(void)
 {
     u8 buffer[16];
 
-    MenuPrint(gMainMenuString_Pokedex, 2, 5);
+    Menu_PrintText(gMainMenuString_Pokedex, 2, 5);
     sub_8072C14(buffer, GetPokedexSeenCount(), 18, 0);
-    MenuPrint(buffer, 9, 5);
+    Menu_PrintText(buffer, 9, 5);
 }
 
 void PrintBadgeCount(void)
@@ -730,12 +730,12 @@ void PrintBadgeCount(void)
     u8 buffer[16];
 
 #if defined(ENGLISH)
-    MenuPrint(gMainMenuString_Badges, 16, 5);
+    Menu_PrintText(gMainMenuString_Badges, 16, 5);
 #elif defined(GERMAN)
-    MenuPrint_PixelCoords(gMainMenuString_Badges, 124, 40, TRUE);
+    Menu_PrintTextPixelCoords(gMainMenuString_Badges, 124, 40, TRUE);
 #endif
     ConvertIntToDecimalString(buffer, GetBadgeCount());
-    MenuPrint_PixelCoords(buffer, 205, 40, 1);
+    Menu_PrintTextPixelCoords(buffer, 205, 40, 1);
 }
 
 #define tTrainerSpriteId data[2]
@@ -750,8 +750,8 @@ void PrintBadgeCount(void)
 
 static void Task_NewGameSpeech1(u8 taskId)
 {
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -812,7 +812,7 @@ static void Task_NewGameSpeech3(u8 taskId)
         }
         else
         {
-            MenuDrawTextWindow(2, 13, 27, 18);
+            Menu_DrawStdWindowFrame(2, 13, 27, 18);
             //"Hi! Sorry to keep you waiting...
             //...But everyone calls me the POKEMON PROFESSOR."
             MenuPrintMessage(gBirchSpeech_Welcome, 3, 14);
@@ -857,7 +857,7 @@ static void Task_NewGameSpeech7(u8 taskId)
         //Go on to next sentence after frame 95
         if (gTasks[taskId].tFrameCounter > 95)
         {
-            MenuSetText(gSystemText_NewPara);
+            Menu_SetText(gSystemText_NewPara);
             gTasks[taskId].func = Task_NewGameSpeech8;
         }
     }
@@ -886,7 +886,7 @@ static void Task_NewGameSpeech9(u8 taskId)
 {
     if (BirchSpeechUpdateWindowText())
     {
-        MenuDrawTextWindow(2, 13, 27, 18);
+        Menu_DrawStdWindowFrame(2, 13, 27, 18);
         //"And you are?"
         MenuPrintMessage(gBirchSpeech_AndYouAre, 3, 14);
         gTasks[taskId].func = Task_NewGameSpeech10;
@@ -962,7 +962,7 @@ static void Task_NewGameSpeech13(u8 taskId)
 
 static void Task_NewGameSpeech14(u8 taskId)
 {
-    MenuDrawTextWindow(2, 13, 27, 18);
+    Menu_DrawStdWindowFrame(2, 13, 27, 18);
     //"Are you a boy? Or are you a girl?"
     MenuPrintMessage(gBirchSpeech_AreYouBoyOrGirl, 3, 14);
     gTasks[taskId].func = Task_NewGameSpeech15;
@@ -985,22 +985,22 @@ static void Task_NewGameSpeech16(u8 taskId)
     switch (GenderMenuProcessInput())
     {
     case MALE:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
-        MenuZeroFillWindowRect(2, 4, 8, 9);
+        Menu_EraseWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     case FEMALE:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
-        MenuZeroFillWindowRect(2, 4, 8, 9);
+        Menu_EraseWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = Task_NewGameSpeech19;
         break;
     }
 
-    cursorPos = GetMenuCursorPos();
+    cursorPos = Menu_GetCursorPos();
 
     if (cursorPos != gTasks[taskId].tGenderSelection)
     {
@@ -1062,7 +1062,7 @@ static void Task_NewGameSpeech18(u8 taskId)
 
 static void Task_NewGameSpeech19(u8 taskId)
 {
-    MenuDrawTextWindow(2, 13, 27, 18);
+    Menu_DrawStdWindowFrame(2, 13, 27, 18);
     //"All right. What's your name?"
     MenuPrintMessage(gBirchSpeech_WhatsYourName, 3, 14);
     gTasks[taskId].func = Task_NewGameSpeech20;
@@ -1088,9 +1088,9 @@ static void Task_NewGameSpeech21(u8 taskId)
     case 2:
     case 3:
     case 4:
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(2, 1, 22, 12);
+        Menu_EraseWindowRect(2, 1, 22, 12);
         SetPresetPlayerName(selection);
         gTasks[taskId].func = Task_NewGameSpeech23;
         break;
@@ -1100,9 +1100,9 @@ static void Task_NewGameSpeech21(u8 taskId)
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(2, 1, 22, 12);
+        Menu_EraseWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
         break;
     }
@@ -1120,7 +1120,7 @@ static void Task_NewGameSpeech22(u8 taskId)
 
 static void Task_NewGameSpeech23(u8 taskId)
 {
-    MenuDrawTextWindow(2, 13, 27, 18);
+    Menu_DrawStdWindowFrame(2, 13, 27, 18);
     //"So it's (PLAYER)?"
     StringExpandPlaceholders(gStringVar4, gBirchSpeech_SoItsPlayer);
     MenuPrintMessage(gStringVar4, 3, 14);
@@ -1139,11 +1139,11 @@ static void Task_NewGameSpeech24(u8 taskId)
 //Handle yes/no menu selection
 static void Task_NewGameSpeech25(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(2, 1, 8, 7);
+        Menu_EraseWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].tTrainerSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         StartSpriteFadeOut(taskId, 2);
         StartBackgroundFadeOut(taskId, 1);
@@ -1152,7 +1152,7 @@ static void Task_NewGameSpeech25(u8 taskId)
     case -1:    //B button
     case 1:     //NO
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(2, 1, 8, 7);
+        Menu_EraseWindowRect(2, 1, 8, 7);
         gTasks[taskId].func = Task_NewGameSpeech14;     //Go back to gender menu
         break;
     }
@@ -1197,7 +1197,7 @@ static void Task_NewGameSpeech27(u8 taskId)
 
         StartSpriteFadeIn(taskId, 2);
         StartBackgroundFadeIn(taskId, 1);
-        MenuDrawTextWindow(2, 13, 27, 18);
+        Menu_DrawStdWindowFrame(2, 13, 27, 18);
         StringExpandPlaceholders(gStringVar4, gBirchSpeech_AhOkayYouArePlayer);
         //"Ah, okay! You're (PLAYER) who's moving...
         //...I get it now!"
@@ -1267,7 +1267,7 @@ static void Task_NewGameSpeech29(u8 taskId)
 
             StartSpriteFadeIn(taskId, 2);
             StartBackgroundFadeIn(taskId, 1);
-            MenuDrawTextWindow(2, 13, 27, 18);
+            Menu_DrawStdWindowFrame(2, 13, 27, 18);
             MenuPrintMessage(gBirchSpeech_AreYouReady, 3, 14);
             gTasks[taskId].func = Task_NewGameSpeech30;
         }
@@ -1373,8 +1373,8 @@ void CB_ContinueNewGameSpeechPart2()
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
 
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
     {
@@ -1661,33 +1661,33 @@ static void StartBackgroundFadeIn(u8 taskId, u8 interval)
 static void CreateGenderMenu(u8 left, u8 top)
 {
     u8 menuLeft, menuTop;
-    MenuDrawTextWindow(left, top, left + 6, top + 5);
+    Menu_DrawStdWindowFrame(left, top, left + 6, top + 5);
     menuLeft = left + 1;
     menuTop = top + 1;
-    PrintMenuItems(menuLeft, menuTop, 2, gUnknown_081E79B0);
+    Menu_PrintItems(menuLeft, menuTop, 2, gUnknown_081E79B0);
     InitMenu(0, menuLeft, menuTop, 2, 0, 5);
 }
 
 static s8 GenderMenuProcessInput(void)
 {
-    return ProcessMenuInputNoWrap();
+    return Menu_ProcessInputNoWrap();
 }
 
 static void CreateNameMenu(u8 left, u8 top)
 {
-    MenuDrawTextWindow(left, top, left + 10, top + 11);
+    Menu_DrawStdWindowFrame(left, top, left + 10, top + 11);
 
     if (gSaveBlock2.playerGender == MALE)
-        PrintMenuItems(left + 1, top + 1, 5, gMalePresetNames);
+        Menu_PrintItems(left + 1, top + 1, 5, gMalePresetNames);
     else
-        PrintMenuItems(left + 1, top + 1, 5, gFemalePresetNames);
+        Menu_PrintItems(left + 1, top + 1, 5, gFemalePresetNames);
 
     InitMenu(0, left + 1, top + 1, 5, 0, 9);
 }
 
 static s8 NameMenuProcessInput(void)
 {
-    return ProcessMenuInput();
+    return Menu_ProcessInput();
 }
 
 static void SetPresetPlayerName(u8 index)

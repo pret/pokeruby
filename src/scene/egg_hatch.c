@@ -471,10 +471,10 @@ static void CB2_EggHatch_0(void)
         gSpecialVar_0x8005 = GetCurrentMapMusic();
         break;
     case 1:
-        SetUpWindowConfig(&gWindowConfig_81E6F84);
-        InitWindowFromConfig(&gEggHatchData->window, &gWindowConfig_81E6F84);
-        gEggHatchData->tileDataStartOffset = SetTextWindowBaseTileNum(20);
-        LoadTextWindowGraphics(&gEggHatchData->window);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
+        Text_InitWindowWithTemplate(&gEggHatchData->window, &gWindowTemplate_81E6F84);
+        gEggHatchData->tileDataStartOffset = TextWindow_SetBaseTileNum(20);
+        TextWindow_LoadStdFrameGraphics(&gEggHatchData->window);
         gMain.state++;
         break;
     case 2:
@@ -625,7 +625,7 @@ static void CB2_EggHatch_1(void)
     case 8:
         if (EggHatchUpdateWindowText())
         {
-            MenuDrawTextWindow(22, 8, 27, 13);
+            Menu_DrawStdWindowFrame(22, 8, 27, 13);
             InitYesNoMenu(22, 8, 4);
             gEggHatchData->CB2_state++;
         }
@@ -633,7 +633,7 @@ static void CB2_EggHatch_1(void)
     case 9:
         {
             s8 menuInput;
-            if ((menuInput = ProcessMenuInputNoWrap_()) != -2)
+            if ((menuInput = Menu_ProcessInputNoWrap_()) != -2)
             {
                 if (menuInput != -1 && menuInput != 1)
                 {
@@ -848,15 +848,15 @@ static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8
 
 static void EggHatchPrintMessage1(u8* src)
 {
-    sub_8002EB0(&gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
+    Text_InitWindow8002EB0(&gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
 }
 
 static void EggHatchPrintMessage2(u8* src)
 {
-    sub_8003460(&gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
+    Text_InitWindowAndPrintText(&gEggHatchData->window, src, gEggHatchData->tileDataStartOffset, 3, 15);
 }
 
 static bool8 EggHatchUpdateWindowText(void)
 {
-    return sub_80035AC(&gEggHatchData->window);
+    return Text_UpdateWindow(&gEggHatchData->window);
 }
