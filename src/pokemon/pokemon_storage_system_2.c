@@ -89,59 +89,10 @@ void sub_80987DC(void);
 void sub_809880C(void);
 bool8 sub_8098830(void);
 void PrintStorageActionText(u8 index);
-void sub_8098A38(u8);
+void sub_8098A38(s8);
 void sub_8098A5C(void);
 void sub_8098A80(void);
 void sub_8098AA8(u8 a0);
-void sub_8098B48(void);
-void sub_8099310(void);
-bool8 sub_8099374(void);
-void sub_80994A8(s16 a0);
-void sub_809954C(void);
-void sub_8099958(void);
-bool8 sub_8099990(void);
-void sub_809BB90(void);
-void sub_8099BF8(u8 a0);
-void sub_8099C70(u8 whichBox);
-bool8 sub_8099D34(void);
-void sub_8099DCC(u8 a0);
-bool8 sub_8099E08(void);
-void sub_809A860(u8 a0);
-void sub_809AA24(void);
-void sub_809AA98(void);
-bool8 sub_809AC00(void);
-void sub_809B0C0(u8 a0);
-void sub_809B0D4(void);
-void sub_809B0E0(void);
-u8 sub_809B0F4(void);
-void sub_809B068(void);
-void sub_809B100(u8 a0);
-bool8 sub_809B130(void);
-void sub_809B440(void);
-bool8 sub_809B62C(u8);
-void sub_809B6BC(void);
-void sub_809B6DC(void);
-bool8 sub_809B734(void);
-void sub_809B760(void);
-void sub_809B7AC(void);
-void sub_809B7D4(void);
-s8 sub_809B960(void);
-void sub_809BBC0(void);
-void sub_809BC18(void);
-void sub_809BD14(void);
-void sub_809BDD8(u8 markings);
-bool8 sub_809BE80(void);
-bool8 sub_809BEBC(void);
-bool8 sub_809BF20(void);
-bool8 sub_809BF48(void);
-u8 sub_809CA40(void);
-void sub_809CE84(void);
-s16 sub_809CF30(void);
-void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 *a1, u8 a2);
-void sub_809CFF0(void);
-void sub_809D034(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
-void sub_809D104(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
-void sub_809D16C(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height);
 
 // .rodata
 
@@ -2081,3 +2032,59 @@ const struct SpriteTemplate gSpriteTemplate_83B6F14 = {
 const struct OamData gOamData_83B6F2C = {
     .size = 2
 };
+
+void sub_8098A38(s8 a0)
+{
+    DisplayYesNoMenu(23, 10, 0);
+    MoveMenuCursor(a0);
+}
+
+void sub_8098A5C(void)
+{
+    HandleDestroyMenuCursors();
+    MenuZeroFillWindowRect(10, 16, 29, 19);
+    MenuZeroFillWindowRect(23, 10, 29, 15);
+}
+
+void sub_8098A80(void)
+{
+    sub_809CDCC();
+    sub_809CDEC(12);
+    sub_809CDEC(13);
+    sub_809CDEC(14);
+    sub_809CDEC(15);
+    sub_809CE84();
+}
+
+void sub_8098AA8(u8 a0)
+{
+    sub_809CDCC();
+    switch (a0)
+    {
+        case 0:
+            sub_809CDEC(16);
+            sub_809CDEC(17);
+            sub_809CDEC(18);
+            sub_809CDEC(19);
+            break;
+        case 1:
+            sub_809CDEC(20);
+            sub_809CDEC(21);
+            sub_809CDEC(22);
+            sub_809CDEC(23);
+            break;
+        case 2:
+            sub_809CDEC(24);
+            sub_809CDEC(25);
+            sub_809CDEC(26);
+            sub_809CDEC(27);
+            break;
+        case 3:
+            sub_809CDEC(28);
+            sub_809CDEC(29);
+            sub_809CDEC(30);
+            sub_809CDEC(31);
+            break;
+    }
+    sub_809CE84();
+}

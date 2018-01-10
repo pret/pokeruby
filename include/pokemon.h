@@ -627,6 +627,6 @@ void RandomlyGivePartyPokerus(struct Pokemon *party);
 void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
-
+void BoxMonRestorePP(struct BoxPokemon *);
 
 #endif // GUARD_POKEMON_H
