@@ -15,6 +15,7 @@
 void sub_8098E68(struct Sprite *sprite);
 void sub_80999C4(struct Sprite *sprite);
 struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 a2, s16 a3, u8 a4, u8 a5);
+void sub_8099BE0(struct Sprite *sprite);
 
 // .rodata
 
@@ -140,4 +141,55 @@ void sub_8098E68(struct Sprite *sprite)
         if (sprite->data[5] < 0x45 || sprite->data[5] > 0xfb)
             sprite->callback = SpriteCallbackDummy;
     }
+}
+
+void sub_8098EA0(u8 col)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1050[col])
+        {
+            sub_8099BE0(gPokemonStorageSystemPtr->unk_1050[col]);
+            gPokemonStorageSystemPtr->unk_1050[col] = NULL;
+        }
+        col += 6;
+    }
+}
+
+u8 sub_8098EE0(u8 a0, u16 a1, s16 a2)
+{
+    u16 i;
+    u16 x;
+    u16 y;
+    u8 count;
+    u8 x1;
+    u16 sp1c;
+
+    y = 0x2c;
+    x = 24 * a0 + 0x64;
+    sp1c = x - (a1 + 1) * a2;
+    x1 = 18 - a0;
+    count = 0;
+
+    for (i = 0; i < 5; i++)
+    {
+        u16 species = GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + a0, MON_DATA_SPECIES2);
+        if (species != SPECIES_NONE)
+        {
+            gPokemonStorageSystemPtr->unk_1050[a0] = PSS_SpawnMonIconSprite(species, GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + a0, MON_DATA_PERSONALITY), sp1c, y, 2, x1);
+            if (gPokemonStorageSystemPtr->unk_1050[a0])
+            {
+                gPokemonStorageSystemPtr->unk_1050[a0]->data[1] = a1;
+                gPokemonStorageSystemPtr->unk_1050[a0]->data[2] = a2;
+                gPokemonStorageSystemPtr->unk_1050[a0]->data[3] = x;
+                gPokemonStorageSystemPtr->unk_1050[a0]->callback = sub_8098E24;
+                count++;
+            }
+        }
+        a0 += 6;
+        y += 24;
+    }
+    return count;
 }
