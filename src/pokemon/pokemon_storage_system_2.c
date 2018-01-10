@@ -217,7 +217,7 @@ void sub_8096884(void)
             gMain.state++;
             break;
         case 4:
-            sub_8098B48();
+            ResetPSSMonIconSprites();
             sub_809AA24();
             gMain.state++;
             break;
@@ -280,7 +280,7 @@ void sub_80969A0(void)
             gMain.state++;
             break;
         case 4:
-            sub_8098B48();
+            ResetPSSMonIconSprites();
             sub_809AA98();
             gMain.state++;
             break;
