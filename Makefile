@@ -134,7 +134,7 @@ ruby_rev1:     ; @$(MAKE) --no-print-directory VERSION=RUBY REVISION=1
 ruby_rev2:     ; @$(MAKE) --no-print-directory VERSION=RUBY REVISION=2
 sapphire:      ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE
 sapphire_rev1: ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE REVISION=1
-sapphire_rev2: ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE REVISION=1
+sapphire_rev2: ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE REVISION=2
 ruby_de:       ; @$(MAKE) --no-print-directory VERSION=RUBY LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE LANGUAGE=GERMAN
 
