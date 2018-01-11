@@ -1,7 +1,7 @@
 	.section .rodata
 
-	.include "asm/macros/m4a.inc"
-	.include "asm/macros/music_voice.inc"
+	.include "include/macros/m4a.inc"
+	.include "include/macros/music_voice.inc"
 
 	.include "sound/voice_groups.inc"
 	.include "sound/keysplit_tables.inc"

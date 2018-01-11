@@ -34,7 +34,7 @@
 	.include "src/field/field_specials.o"
 	.include "src/pokemon/learn_move.o"
 	.include "src/field/player_pc.o"
-	.include "asm/m4a_1.o"
+	.include "src/libs/m4a_1.o"
 	.include "src/libs/agb_flash.o"
 	.include "src/libs/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
