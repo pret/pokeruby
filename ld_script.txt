@@ -36,7 +36,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/crt0.o(.text);
         src/engine/main.o(.text);
         src/engine/sprite.o(.text);
         src/engine/text.o(.text);
@@ -406,8 +406,8 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        asm/libgcnmultiboot.o(.text);
-        asm/m4a_1.o(.text);
+        src/libs/libgcnmultiboot.o(.text);
+        src/libs/m4a_1.o(.text);
         src/libs/m4a_2.o(.text);
         asm/m4a_3.o(.text);
         src/libs/m4a_4.o(.text);
@@ -415,7 +415,7 @@ SECTIONS {
         src/libs/agb_flash_1m.o(.text);
         src/libs/agb_flash_mx.o(.text);
         src/libs/siirtc.o(.text);
-        asm/libagbsyscall.o(.text);
+        src/libs/libagbsyscall.o(.text);
         tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
         tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
         tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
