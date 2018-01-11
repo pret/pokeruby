@@ -3,7 +3,7 @@
 #include "trig.h"
 #include "battle_anim.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 void sub_80DF81C(struct Sprite *sprite);
 void sub_80DFBD8(struct Sprite *sprite);
@@ -19,9 +19,10 @@ extern u8 gBankAttacker;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u16 gUnknown_03000730[];
-
+extern u8 gObjectBankIDs[];
 
 // Outrage
+
 void sub_80DF5A0(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
@@ -43,6 +44,8 @@ void sub_80DF5A0(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
     sprite->callback = sub_8078504;
 }
+
+// part of Dragon Breath
 
 void sub_80DF63C(struct Sprite *sprite)
 {
@@ -69,6 +72,8 @@ void sub_80DF63C(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 
+// Dragon Rage
+
 void sub_80DF6F0(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
@@ -87,12 +92,16 @@ void sub_80DF6F0(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 
+// Dragon Breath init
+
 void sub_80DF760(struct Sprite *sprite)
 {
     if (GetBankSide(gAnimBankAttacker))
         StartSpriteAffineAnim(sprite, 1);
     sub_80DF63C(sprite);
 }
+
+//next 2 tasks might be Dragon Dance orbs?
 
 void sub_80DF78C(struct Sprite *sprite)
 {
@@ -152,25 +161,27 @@ void sub_80DF81C(struct Sprite *sprite)
     }
 }
 
+// Dragon Dance scanline eff
+
 void sub_80DF924(u8 taskId)
 {
-    struct UnknownTaskStruct sp;
+    struct ScanlineEffectParams sp;
     struct Task *task = &gTasks[taskId];
     u16 i;
     u8 r1;
     if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
     {
-        sp.dest = &REG_BG1HOFS;
+        sp.dmaDest = &REG_BG1HOFS;
         task->data[2] = gBattle_BG1_X;
     }
     else
     {
-        sp.dest = &REG_BG2HOFS;
+        sp.dmaDest = &REG_BG2HOFS;
         task->data[2] = gBattle_BG2_X;
     }
-    sp.control = 0xA2600001;
-    sp.unk8 = 1;
-    sp.unk9 = 0;
+    sp.dmaControl = 0xA2600001;
+    sp.initState = 1;
+    sp.unused9 = 0;
     r1 = sub_8077FC0(gAnimBankAttacker);
     task->data[3] = r1 - 32;
     task->data[4] = r1 + 32;
@@ -178,10 +189,10 @@ void sub_80DF924(u8 taskId)
         task->data[3] = 0;
     for(i = task->data[3];i <= task->data[4];i++)
     {
-        gUnknown_03004DE0[0][i] = task->data[2];
-        gUnknown_03004DE0[1][i] = task->data[2];
+        gScanlineEffectRegBuffers[0][i] = task->data[2];
+        gScanlineEffectRegBuffers[1][i] = task->data[2];
     }
-    sub_80895F8(sp);
+    ScanlineEffect_SetParams(sp);
     task->func = sub_80DF9F4;
 }
 
@@ -214,7 +225,7 @@ void sub_80DF9F4(u8 taskId)
         sub_80DFAB0(task);
         break;
         case 3:
-        gUnknown_03004DC0.unk15 = 3;
+        gScanlineEffect.state = 3;
         task->data[0]++;
         break;
         case 4:
@@ -229,11 +240,13 @@ void sub_80DFAB0(struct Task *task)
     u16 i;
     for (i = task->data[3]; i <= task->data[4]; i++)
     {
-        gUnknown_03004DE0[gUnknown_03004DC0.srcBank][i] = ((gSineTable[r3] * task->data[6]) >> 7) + task->data[2];
+        gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = ((gSineTable[r3] * task->data[6]) >> 7) + task->data[2];
         r3 = (r3 + 8) & 0xFF;
     }
     task->data[5] = (task->data[5] + 9) & 0xFF;
 }
+
+// Overheat
 
 void sub_80DFB28(struct Sprite *sprite)
 {
@@ -260,3 +273,4 @@ void sub_80DFBD8(struct Sprite *sprite)
     if (++sprite->data[0] > sprite->data[3])
         DestroyAnimSprite(sprite);
 }
+

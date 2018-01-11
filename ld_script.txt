@@ -296,7 +296,7 @@ SECTIONS {
         asm/rock.o(.text);
         asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
-        asm/dragon.o(.text);
+        src/battle/anim/dark.o(.text);
         asm/dark.o(.text);
         asm/ground.o(.text);
         asm/normal.o(.text);
