@@ -98,7 +98,8 @@ struct PokemonStorageSystemData {
     struct Sprite *unk_1034;
     struct Sprite *unk_1038[6]; // party
     struct Sprite *unk_1050[30]; // box
-    u8 filler_10c8[8];
+    struct Sprite **unk_10c8;
+    u8 filler_10cc[4];
     u16 unk_10d0[40];
     u16 unk_1120[40];
     u8 unk_1170;

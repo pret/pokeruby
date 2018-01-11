@@ -3,6 +3,7 @@
 #include "global.h"
 #include "constants/species.h"
 #include "sprite.h"
+#include "trig.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 
@@ -452,4 +453,44 @@ void sub_809960C(u8 a0, u8 a1)
     }
     gPokemonStorageSystemPtr->unk_1034->callback = SpriteCallbackDummy;
     gPokemonStorageSystemPtr->unk_1034 = NULL;
+}
+
+void sub_80996B0(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+        gPokemonStorageSystemPtr->unk_10c8 = gPokemonStorageSystemPtr->unk_1038 + a1;
+    else
+        gPokemonStorageSystemPtr->unk_10c8 = gPokemonStorageSystemPtr->unk_1050 + a1;
+    gPokemonStorageSystemPtr->unk_1034->callback = SpriteCallbackDummy;
+    gPokemonStorageSystemPtr->unk_1170 = 0;
+}
+
+bool8 sub_809971C(void)
+{
+    if (gPokemonStorageSystemPtr->unk_1170 == 16)
+        return FALSE;
+    gPokemonStorageSystemPtr->unk_1170++;
+    if (gPokemonStorageSystemPtr->unk_1170 & 1)
+    {
+        (*gPokemonStorageSystemPtr->unk_10c8)->pos1.y--;
+        gPokemonStorageSystemPtr->unk_1034->pos1.y++;
+    }
+    (*gPokemonStorageSystemPtr->unk_10c8)->pos2.x = gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16;
+    gPokemonStorageSystemPtr->unk_1034->pos2.x = -(gSineTable[gPokemonStorageSystemPtr->unk_1170 * 8] / 16);
+    if (gPokemonStorageSystemPtr->unk_1170 == 8)
+    {
+        gPokemonStorageSystemPtr->unk_1034->oam.priority = (*gPokemonStorageSystemPtr->unk_10c8)->oam.priority;
+        gPokemonStorageSystemPtr->unk_1034->subpriority = (*gPokemonStorageSystemPtr->unk_10c8)->subpriority;
+        (*gPokemonStorageSystemPtr->unk_10c8)->oam.priority = 1;
+        (*gPokemonStorageSystemPtr->unk_10c8)->subpriority = 7;
+    }
+    if (gPokemonStorageSystemPtr->unk_1170 == 16)
+    {
+        struct Sprite *sprite = gPokemonStorageSystemPtr->unk_1034;
+        gPokemonStorageSystemPtr->unk_1034 = *(gPokemonStorageSystemPtr->unk_10c8);
+        (*gPokemonStorageSystemPtr->unk_10c8) = sprite;
+        gPokemonStorageSystemPtr->unk_1034->callback = sub_80999C4;
+        (*gPokemonStorageSystemPtr->unk_10c8)->callback = SpriteCallbackDummy;
+    }
+    return TRUE;
 }
