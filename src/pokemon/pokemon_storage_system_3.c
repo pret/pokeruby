@@ -13,7 +13,8 @@
 // Static ROM declarations
 
 void sub_8098E68(struct Sprite *sprite);
-void sub_8099388(struct Sprite *sprite, u16 a0);
+void sub_8099388(struct Sprite *sprite, u16 a1);
+void sub_80993F4(struct Sprite *sprite);
 void sub_80999C4(struct Sprite *sprite);
 struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 a2, s16 a3, u8 a4, u8 a5);
 void sub_8099BE0(struct Sprite *sprite);
@@ -309,4 +310,146 @@ void sub_8099310(void)
 u8 sub_8099374(void)
 {
     return gPokemonStorageSystemPtr->unk_1171;
+}
+
+void sub_8099388(struct Sprite *sprite, u16 a1)
+{
+    s16 r3;
+    s16 r4;
+
+    sprite->data[1] = a1;
+    if (a1 == 0)
+    {
+        r3 = 0x68;
+        r4 = 0x40;
+    }
+    else
+    {
+        r3 = 0x98;
+        r4 = 24 * (a1 - 1) + 0x10;
+    }
+    sprite->data[2] = sprite->pos1.x << 3;
+    sprite->data[3] = sprite->pos1.y << 3;
+    sprite->data[4] = (r3 * 8 - sprite->data[2]) / 8;
+    sprite->data[5] = (r4 * 8 - sprite->data[3]) / 8;
+    sprite->data[6] = 8;
+    sprite->callback = sub_80993F4;
+}
+
+void sub_80993F4(struct Sprite *sprite)
+{
+    if (sprite->data[6])
+    {
+        sprite->data[2] += sprite->data[4];
+        sprite->data[3] += sprite->data[5];
+        sprite->pos1.x = sprite->data[2] >> 3;
+        sprite->pos1.y = sprite->data[3] >> 3;
+        sprite->data[6]--;
+    }
+    else
+    {
+        if (sprite->data[1] == 0)
+        {
+            sprite->pos1.x = 0x68;
+            sprite->pos1.y = 0x40;
+        }
+        else
+        {
+            sprite->pos1.x = 0x98;
+            sprite->pos1.y = (sprite->data[1] - 1) * 24 + 0x10;
+        }
+        sprite->callback = SpriteCallbackDummy;
+        gPokemonStorageSystemPtr->unk_1038[sprite->data[1]] = sprite;
+        gPokemonStorageSystemPtr->unk_1171--;
+    }
+}
+
+void sub_8099480(void)
+{
+    if (gPokemonStorageSystemPtr->unk_1034)
+    {
+        sub_8099BE0(gPokemonStorageSystemPtr->unk_1034);
+        gPokemonStorageSystemPtr->unk_1034 = NULL;
+    }
+}
+
+void sub_80994A8(s16 y)
+{
+    u16 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1038[i])
+        {
+            s16 yy;
+            gPokemonStorageSystemPtr->unk_1038[i]->pos1.y += y;
+            yy = gPokemonStorageSystemPtr->unk_1038[i]->pos1.y + gPokemonStorageSystemPtr->unk_1038[i]->pos2.y + gPokemonStorageSystemPtr->unk_1038[i]->centerToCornerVecY;
+            if (yy < -0x10 || yy > 0xb0)
+                gPokemonStorageSystemPtr->unk_1038[i]->invisible = TRUE;
+            else
+                gPokemonStorageSystemPtr->unk_1038[i]->invisible = FALSE;
+        }
+    }
+}
+
+void sub_8099520(u8 a0)
+{
+    if (gPokemonStorageSystemPtr->unk_1038[a0])
+    {
+        sub_8099BE0(gPokemonStorageSystemPtr->unk_1038[a0]);
+        gPokemonStorageSystemPtr->unk_1038[a0] = NULL;
+    }
+}
+
+void sub_809954C(void)
+{
+    u16 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1038[i])
+        {
+            sub_8099BE0(gPokemonStorageSystemPtr->unk_1038[i]);
+            gPokemonStorageSystemPtr->unk_1038[i] = NULL;
+        }
+    }
+}
+
+void sub_8099584(u8 a0, u8 a1)
+{
+    if (a0 == 0)
+    {
+        gPokemonStorageSystemPtr->unk_1034 = gPokemonStorageSystemPtr->unk_1038[a1];
+        gPokemonStorageSystemPtr->unk_1038[a1] = NULL;
+    }
+    else if (a0 == 1)
+    {
+        gPokemonStorageSystemPtr->unk_1034 = gPokemonStorageSystemPtr->unk_1050[a1];
+        gPokemonStorageSystemPtr->unk_1050[a1] = NULL;
+    }
+    else
+    {
+        return;
+    }
+    gPokemonStorageSystemPtr->unk_1034->callback = sub_80999C4;
+    gPokemonStorageSystemPtr->unk_1034->oam.priority = 1;
+    gPokemonStorageSystemPtr->unk_1034->subpriority = 7;
+}
+
+void sub_809960C(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+    {
+        gPokemonStorageSystemPtr->unk_1038[a1] = gPokemonStorageSystemPtr->unk_1034;
+        gPokemonStorageSystemPtr->unk_1038[a1]->oam.priority = 1;
+        gPokemonStorageSystemPtr->unk_1038[a1]->subpriority = 11;
+    }
+    else
+    {
+        gPokemonStorageSystemPtr->unk_1050[a1] = gPokemonStorageSystemPtr->unk_1034;
+        gPokemonStorageSystemPtr->unk_1050[a1]->oam.priority = 2;
+        gPokemonStorageSystemPtr->unk_1050[a1]->subpriority = 18 - (a1 % 6);
+    }
+    gPokemonStorageSystemPtr->unk_1034->callback = SpriteCallbackDummy;
+    gPokemonStorageSystemPtr->unk_1034 = NULL;
 }
