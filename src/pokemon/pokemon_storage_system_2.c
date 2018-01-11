@@ -1703,7 +1703,7 @@ void sub_8098400(void)
     if (gUnknown_0203847C)
     {
         sub_8098690(TRUE);
-        sub_8099200(1);
+        sub_8099200(TRUE);
         sub_809D034(BG_SCREEN_ADDR(15), 10, 0, gPokemonStorageSystemPtr->unk_00a8, 0, 0, 12, 22);
     }
     else
@@ -1719,7 +1719,7 @@ void sub_80984E8(void)
     gPokemonStorageSystemPtr->unk_08a8 = 20;
     gPokemonStorageSystemPtr->unk_08aa = 2;
     gPokemonStorageSystemPtr->unk_08ad = 0;
-    sub_8099200(0);
+    sub_8099200(FALSE);
 }
 
 bool8 sub_8098520(void)

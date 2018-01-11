@@ -96,18 +96,19 @@ struct PokemonStorageSystemData {
     s16 unk_0d60;
     u8 filler_0d62[0x2d2];
     struct Sprite *unk_1034;
-    struct Sprite *unk_1038[6];
-    struct Sprite *unk_1050[30];
+    struct Sprite *unk_1038[6]; // party
+    struct Sprite *unk_1050[30]; // box
     u8 filler_10c8[8];
     u16 unk_10d0[40];
     u16 unk_1120[40];
-    u8 filler_1170[2];
+    u8 unk_1170;
+    u8 unk_1171;
     u16 unk_1172;
-    u16 unk_1174;
+    s16 unk_1174;
     s16 unk_1176;
     u16 unk_1178;
     u8 unk_117a;
-    u8 unk_117b;
+    s8 unk_117b;
     u8 unk_117c;
     u8 unk_117d;
     u8 filler_117e[0x6a];
@@ -164,7 +165,7 @@ void sub_80961A8(void);
 void task_intro_29(u8 whichMenu);
 void ResetPokemonStorageSystem(void);
 void ResetPSSMonIconSprites(void);
-void sub_8099200(u8 a0);
+void sub_8099200(bool8 a0);
 void sub_8099310(void);
 bool8 sub_8099374(void);
 void sub_80994A8(s16 a0);

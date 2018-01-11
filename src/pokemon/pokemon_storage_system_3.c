@@ -13,6 +13,7 @@
 // Static ROM declarations
 
 void sub_8098E68(struct Sprite *sprite);
+void sub_8099388(struct Sprite *sprite, u16 a0);
 void sub_80999C4(struct Sprite *sprite);
 struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 a2, s16 a3, u8 a4, u8 a5);
 void sub_8099BE0(struct Sprite *sprite);
@@ -208,4 +209,104 @@ void sub_809900C(u8 a0, s8 a1)
         gPokemonStorageSystemPtr->unk_117a = 5;
     gPokemonStorageSystemPtr->unk_1174 = 24 * gPokemonStorageSystemPtr->unk_117a + 0x64;
     sub_8098DE0(gPokemonStorageSystemPtr->unk_1176);
+}
+
+bool8 sub_80990AC(void)
+{
+    if (gPokemonStorageSystemPtr->unk_1172)
+        gPokemonStorageSystemPtr->unk_1172--;
+    switch (gPokemonStorageSystemPtr->unk_117c)
+    {
+        case 0:
+            gPokemonStorageSystemPtr->unk_1174 += gPokemonStorageSystemPtr->unk_1176;
+            if (gPokemonStorageSystemPtr->unk_1174 < 0x41 || gPokemonStorageSystemPtr->unk_1174 > 0xfb)
+            {
+                sub_8098EA0(gPokemonStorageSystemPtr->unk_117a);
+                gPokemonStorageSystemPtr->unk_1174 += 24 * gPokemonStorageSystemPtr->unk_117b;
+                gPokemonStorageSystemPtr->unk_117c++;
+            }
+            break;
+        case 1:
+            gPokemonStorageSystemPtr->unk_1174 += gPokemonStorageSystemPtr->unk_1176;
+            gPokemonStorageSystemPtr->unk_1178 += sub_8098EE0(gPokemonStorageSystemPtr->unk_117a, gPokemonStorageSystemPtr->unk_1172, gPokemonStorageSystemPtr->unk_1176);
+            if ((gPokemonStorageSystemPtr->unk_117b > 0 && gPokemonStorageSystemPtr->unk_117a == 5) || (gPokemonStorageSystemPtr->unk_117b < 0 && gPokemonStorageSystemPtr->unk_117a == 0))
+            {
+                gPokemonStorageSystemPtr->unk_117c++;
+            }
+            else
+            {
+                gPokemonStorageSystemPtr->unk_117a += gPokemonStorageSystemPtr->unk_117b;
+                gPokemonStorageSystemPtr->unk_117c = 0;
+            }
+            break;
+        case 2:
+            if (gPokemonStorageSystemPtr->unk_1178 == 0)
+            {
+                gPokemonStorageSystemPtr->unk_1172++;
+                return FALSE;
+            }
+            break;
+        default:
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_8099200(bool8 a0)
+{
+    u16 count;
+    u16 i;
+    u16 species = GetMonData(gPlayerParty + 0, MON_DATA_SPECIES2);
+    u32 personality = GetMonData(gPlayerParty + 0, MON_DATA_PERSONALITY);
+    gPokemonStorageSystemPtr->unk_1038[0] = PSS_SpawnMonIconSprite(species, personality, 0x68, 0x40, 1, 11);
+    count = 1;
+    for (i = 1; i < PARTY_SIZE; i++)
+    {
+        species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES2);
+        if (species != SPECIES_NONE)
+        {
+            personality = GetMonData(gPlayerParty + i, MON_DATA_PERSONALITY);
+            gPokemonStorageSystemPtr->unk_1038[i] = PSS_SpawnMonIconSprite(species, personality, 0x98, (i - 1) * 24 + 0x10, 1, 11);
+            count++;
+        }
+        else
+        {
+            gPokemonStorageSystemPtr->unk_1038[i] = NULL;
+        }
+    }
+    if (!a0)
+    {
+        for (i = 0; i < count; i++)
+        {
+            // this routine assumes party_compaction has been called
+            gPokemonStorageSystemPtr->unk_1038[i]->pos1.y -= 0xa0;
+            gPokemonStorageSystemPtr->unk_1038[i]->invisible = TRUE;
+        }
+    }
+}
+
+void sub_8099310(void)
+{
+    u16 i;
+    u16 count;
+
+    gPokemonStorageSystemPtr->unk_1171 = 0;
+    for (i = 0, count = 0; i < PARTY_SIZE; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1038[i])
+        {
+            if (i != count)
+            {
+                sub_8099388(gPokemonStorageSystemPtr->unk_1038[i], count);
+                gPokemonStorageSystemPtr->unk_1038[i] = NULL;
+                gPokemonStorageSystemPtr->unk_1171++;
+            }
+            count++;
+        }
+    }
+}
+
+u8 sub_8099374(void)
+{
+    return gPokemonStorageSystemPtr->unk_1171;
 }
