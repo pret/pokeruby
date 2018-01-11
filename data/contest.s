@@ -1,6 +1,6 @@
 #include "constants/moves.h"
 #include "constants/species.h"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata

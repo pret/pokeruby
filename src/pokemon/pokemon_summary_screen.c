@@ -29,7 +29,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void sub_809FC0C(void);
 static void sub_809FEB8(void);
@@ -123,12 +123,12 @@ extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_08208238[];
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern TaskFunc gUnknown_03005CF0;
 extern struct Sprite *gUnknown_020384F4;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -586,8 +586,8 @@ void sub_809D85C(void)
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
 
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -701,7 +701,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:
@@ -813,11 +813,11 @@ bool8 sub_809DA84(void)
     case 20:
         if (GetMonData(&pssData.loadedMon, MON_DATA_IS_EGG))
         {
-            gUnknown_030041B0 = 256;
+            gBattle_BG3_X = 256;
         }
         else
         {
-            gUnknown_030041B0 = 0;
+            gBattle_BG3_X = 0;
         }
 
         gMain.state++;
@@ -872,8 +872,8 @@ static void sub_809DE64(void)
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
 
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
@@ -2176,11 +2176,11 @@ void sub_809F43C(u8 taskId)
             pssData.loadGfxState = 0;
             if (GetMonData(&pssData.loadedMon, MON_DATA_IS_EGG))
             {
-                gUnknown_030041B0 = 256;
+                gBattle_BG3_X = 256;
             }
             else
             {
-                gUnknown_030041B0 = 0;
+                gBattle_BG3_X = 0;
             }
 
             gMain.state++;

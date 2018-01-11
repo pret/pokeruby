@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -1334,7 +1334,7 @@ _080DE584:
 _080DE59C:
 	movs r2, 0x2
 	movs r3, 0x6
-	bl sub_8089944
+	bl ScanlineEffect_InitWave
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x1C]
@@ -1507,7 +1507,7 @@ _080DE6E8:
 	beq _080DE740
 	b _080DE7AA
 _080DE6EE:
-	ldr r1, _080DE710 @ =gUnknown_03004DC0
+	ldr r1, _080DE710 @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
@@ -1523,7 +1523,7 @@ _080DE6EE:
 	ldr r0, _080DE714 @ =0x0000fdff
 	b _080DE720
 	.align 2, 0
-_080DE710: .4byte gUnknown_03004DC0
+_080DE710: .4byte gScanlineEffect
 _080DE714: .4byte 0x0000fdff
 _080DE718:
 	movs r2, 0x80

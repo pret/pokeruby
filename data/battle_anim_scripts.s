@@ -1,6 +1,6 @@
 #include "constants/songs.h"
-	.include "asm/macros.inc"
-	.include "asm/macros/battle_anim.inc"
+	.include "include/macros.inc"
+	.include "include/macros/battle_anim.inc"
 	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits

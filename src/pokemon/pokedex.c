@@ -23,7 +23,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 #define NATIONAL_DEX_COUNT 386
@@ -1419,7 +1419,7 @@ void CB2_InitPokedex(void)
         }
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         ResetPaletteFade();
@@ -1494,7 +1494,7 @@ u8 unref_sub_808C540(void (*func)(u8))
 
     SetVBlankCallback(NULL);
     sub_8091060(0x200);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetPaletteFade();
     savedIme = REG_IME;

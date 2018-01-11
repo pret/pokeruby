@@ -10,7 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 static void VBlankCB(void);
 static void MainCB2(void);
@@ -62,7 +62,7 @@ void CB2_ShowDiploma(void)
     LZ77UnCompVram(gDiplomaTiles, (void *)VRAM);
     LZ77UnCompVram(gDiplomaTilemap, (void *)(VRAM + 0x3000));
 
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

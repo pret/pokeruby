@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -94,9 +94,9 @@ sub_80C2020: @ 80C2020
 	strh r2, [r0]
 	ldr r0, _080C2128 @ =gBattle_BG2_Y
 	strh r2, [r0]
-	ldr r0, _080C212C @ =gUnknown_030041B0
+	ldr r0, _080C212C @ =gBattle_BG3_X
 	strh r2, [r0]
-	ldr r0, _080C2130 @ =gUnknown_030041B8
+	ldr r0, _080C2130 @ =gBattle_BG3_Y
 	strh r2, [r0]
 	ldr r0, _080C2134 @ =gBattle_WIN0H
 	strh r2, [r0]
@@ -125,8 +125,8 @@ _080C211C: .4byte gBattle_BG1_X
 _080C2120: .4byte gBattle_BG1_Y
 _080C2124: .4byte gBattle_BG2_X
 _080C2128: .4byte gBattle_BG2_Y
-_080C212C: .4byte gUnknown_030041B0
-_080C2130: .4byte gUnknown_030041B8
+_080C212C: .4byte gBattle_BG3_X
+_080C2130: .4byte gBattle_BG3_Y
 _080C2134: .4byte gBattle_WIN0H
 _080C2138: .4byte gBattle_WIN0V
 _080C213C: .4byte gBattle_WIN1H
@@ -396,7 +396,7 @@ sub_80C2358: @ 80C2358
 	movs r0, 0
 	bl SetVBlankCallback
 	bl sub_80C2020
-	bl dp12_8087EA4
+	bl ScanlineEffect_Clear
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -506,11 +506,11 @@ sub_80C2448: @ 80C2448
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24DC @ =gUnknown_030041B0
+	ldr r0, _080C24DC @ =gBattle_BG3_X
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x2
-	ldr r0, _080C24E0 @ =gUnknown_030041B8
+	ldr r0, _080C24E0 @ =gBattle_BG3_Y
 	ldrh r0, [r0]
 	strh r0, [r1]
 	adds r1, 0x22
@@ -532,7 +532,7 @@ sub_80C2448: @ 80C2448
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	bl sub_8089668
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -543,8 +543,8 @@ _080C24CC: .4byte gBattle_BG1_X
 _080C24D0: .4byte gBattle_BG1_Y
 _080C24D4: .4byte gBattle_BG2_X
 _080C24D8: .4byte gBattle_BG2_Y
-_080C24DC: .4byte gUnknown_030041B0
-_080C24E0: .4byte gUnknown_030041B8
+_080C24DC: .4byte gBattle_BG3_X
+_080C24E0: .4byte gBattle_BG3_Y
 _080C24E4: .4byte gBattle_WIN0H
 _080C24E8: .4byte gBattle_WIN0V
 _080C24EC: .4byte gBattle_WIN1H
@@ -1826,11 +1826,11 @@ _080C2F24: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start sub_80C2F28
 sub_80C2F28: @ 80C2F28
 	push {r4,r5,lr}
-	ldr r2, _080C2F5C @ =gUnknown_030041B0
+	ldr r2, _080C2F5C @ =gBattle_BG3_X
 	ldrh r3, [r2]
 	adds r0, r3, 0x2
 	strh r0, [r2]
-	ldr r4, _080C2F60 @ =gUnknown_030041B8
+	ldr r4, _080C2F60 @ =gBattle_BG3_Y
 	ldrh r5, [r4]
 	adds r1, r5, 0x1
 	strh r1, [r4]
@@ -1854,8 +1854,8 @@ _080C2F56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C2F5C: .4byte gUnknown_030041B0
-_080C2F60: .4byte gUnknown_030041B8
+_080C2F5C: .4byte gBattle_BG3_X
+_080C2F60: .4byte gBattle_BG3_Y
 	thumb_func_end sub_80C2F28
 
 	thumb_func_start sub_80C2F64

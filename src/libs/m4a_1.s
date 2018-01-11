@@ -1,4 +1,4 @@
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/gba_constants.inc"
 	.include "constants/m4a_constants.inc"
 

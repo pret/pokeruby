@@ -33,7 +33,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 // External stuff
@@ -397,7 +397,7 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:

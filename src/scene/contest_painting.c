@@ -11,7 +11,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 static u8 gUnknown_03000750;
@@ -147,7 +147,7 @@ static void ShowContestPainting(void)
     switch (gMain.state)
     {
     case 0:
-        remove_some_task();
+        ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
         gUnknown_03005E8C = &ewram15DE0;
         ContestPaintingInitVars(TRUE);

@@ -13,7 +13,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 struct ResetRtcStruct
 {
@@ -438,8 +438,8 @@ void CB2_InitResetRtcScreen(void)
 
     ResetOamRange(0, 128);
     LoadOam();
-    remove_some_task();
-    dp12_8087EA4();
+    ScanlineEffect_Stop();
+    ScanlineEffect_Clear();
     ResetSpriteData();
     ResetTasks();
     ResetPaletteFade();

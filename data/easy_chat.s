@@ -1,7 +1,7 @@
 #include "constants/easy_chat.h"
 #include "constants/moves.h"
 #include "constants/species.h"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 #define EC_DUPLICATES(count) (0xFF00 + (count))

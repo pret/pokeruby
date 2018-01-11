@@ -14,7 +14,7 @@
 #include "decompress.h"
 #include "field_weather.h"
 #include "field_map_obj.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "event_data.h"
 #include "cable_car_util.h"
 #include "constants/map_objects.h"
@@ -208,7 +208,7 @@ static void CableCarMainCallback_Setup(void)
         case 0:
         default:
             SetVBlankCallback(NULL);
-            remove_some_task();
+            ScanlineEffect_Stop();
             DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
             DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
             DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);

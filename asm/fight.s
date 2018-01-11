@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -1688,7 +1688,7 @@ _080D9CDE:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D9D14
-	ldr r1, _080D9D10 @ =gUnknown_030041B0
+	ldr r1, _080D9D10 @ =gBattle_BG3_X
 	ldrh r0, [r4, 0x1A]
 	lsls r0, 16
 	asrs r0, 24
@@ -1699,9 +1699,9 @@ _080D9CDE:
 	b _080D9D24
 	.align 2, 0
 _080D9D0C: .4byte gAnimBankTarget
-_080D9D10: .4byte gUnknown_030041B0
+_080D9D10: .4byte gBattle_BG3_X
 _080D9D14:
-	ldr r2, _080D9D64 @ =gUnknown_030041B0
+	ldr r2, _080D9D64 @ =gBattle_BG3_X
 	ldrh r1, [r4, 0x1A]
 	lsls r1, 16
 	asrs r1, 24
@@ -1710,7 +1710,7 @@ _080D9D14:
 	strh r0, [r2]
 	adds r7, r2, 0
 _080D9D24:
-	ldr r3, _080D9D68 @ =gUnknown_030041B8
+	ldr r3, _080D9D68 @ =gBattle_BG3_Y
 	ldrh r2, [r4, 0x1C]
 	lsls r0, r2, 16
 	asrs r0, 24
@@ -1741,8 +1741,8 @@ _080D9D5C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080D9D64: .4byte gUnknown_030041B0
-_080D9D68: .4byte gUnknown_030041B8
+_080D9D64: .4byte gBattle_BG3_X
+_080D9D68: .4byte gBattle_BG3_Y
 _080D9D6C: .4byte gBattleAnimArgs
 	thumb_func_end sub_80D9C80
 	

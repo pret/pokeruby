@@ -3,12 +3,12 @@
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "scanline_effect.h"
 #include "sprite.h"
 #include "strings2.h"
 #include "task.h"
 
 extern void SetPokemonCryStereo(u32 val);
-extern void remove_some_task(void);
 
 //Task data
 enum {
@@ -110,7 +110,7 @@ void CB2_InitOptionMenu(void)
     }
     case 1:
         ResetPaletteFade();
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         gMain.state++;

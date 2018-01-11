@@ -21,7 +21,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))
@@ -229,7 +229,7 @@ u32 InitMainMenu(u8 a1)
 
     ResetPaletteFade();
     LoadPalette(gMainMenuPalette, 0, 32);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -763,7 +763,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     LZ77UnCompVram(gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
     LoadPalette(gUnknown_081E764C, 0, 0x40);
     LoadPalette(gUnknown_081E796C, 1, 0x10);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
@@ -1368,7 +1368,7 @@ void CB_ContinueNewGameSpeechPart2()
 
     gTasks[taskId].tBGhofs = -60;
 
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);

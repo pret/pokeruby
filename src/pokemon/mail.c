@@ -15,7 +15,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 struct UnkMailStruct
@@ -320,7 +320,7 @@ static u8 sub_80F8A28(void)
     {
     case 0:
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         REG_DISPCNT = 0;
         RETURN_UP_STATE;
 
