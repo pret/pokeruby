@@ -176,7 +176,7 @@ void sub_8096804(void)
     FreeAllSpritePalettes();
     ResetTasks();
     gReservedSpriteTileCount = 0x280;
-    sub_809CFDC(gPokemonStorageSystemPtr->unk_0020, gPokemonStorageSystemPtr->unk_0020 + 1, 8);
+    sub_809CFDC(&gPokemonStorageSystemPtr->unk_0020, gPokemonStorageSystemPtr->unk_0028, 8);
     gKeyRepeatStartDelay = 20;
 }
 

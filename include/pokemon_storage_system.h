@@ -50,8 +50,16 @@ struct PSS_MenuStringPtrs {
     const u8 *desc;
 };
 
+struct UnkStruct_2000028 {
+    void *unk_00;
+    void *unk_04;
+    u16 unk_08;
+    u16 unk_0a;
+    void (*unk_0c)(struct UnkStruct_2000028 *data);
+};
+
 struct UnkStruct_2000020 {
-    struct UnkStruct_2000020 *unk_00;
+    struct UnkStruct_2000028 *unk_00;
     u8 unk_04;
     u8 unk_05;
 };
@@ -78,7 +86,8 @@ struct PokemonStorageSystemData {
     u16 unk_0008;
     u16 unk_000a;
     struct PCScreenEffectStruct unk_000c;
-    struct UnkStruct_2000020 unk_0020[17]; // refine size later
+    struct UnkStruct_2000020 unk_0020;
+    struct UnkStruct_2000028 unk_0028[8];
     u16 unk_00a8[0x400];
     u16 unk_08a8;
     u16 unk_08aa;
@@ -99,7 +108,7 @@ struct PokemonStorageSystemData {
     struct Sprite *unk_1038[6]; // party
     struct Sprite *unk_1050[30]; // box
     struct Sprite **unk_10c8;
-    u8 filler_10cc[4];
+    struct Sprite **unk_10cc;
     u16 unk_10d0[40];
     u16 unk_1120[40];
     u8 unk_1170;
@@ -214,7 +223,7 @@ void sub_809CDCC(void);
 void sub_809CDEC(u8 a0);
 void sub_809CE84(void);
 s16 sub_809CF30(void);
-void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000020 *a1, u8 a2);
+void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000028 *a1, u8 a2);
 void sub_809CFF0(void);
 void sub_809D034(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
 void sub_809D104(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);

@@ -7,7 +7,7 @@
 
 // Static RAM declarations
 
-EWRAM_DATA u32 gUnknown_020384EC = 0;
+EWRAM_DATA struct UnkStruct_2000020 *gUnknown_020384EC = NULL;
 
 // Static ROM declarations
 
