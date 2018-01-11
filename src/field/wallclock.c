@@ -10,7 +10,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u8 gMiscClock_Gfx[];
@@ -229,7 +229,7 @@ static void LoadWallClockGraphics(void)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
     else
         LoadPalette(gMiscClockFemale_Pal, 0, 32);
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();

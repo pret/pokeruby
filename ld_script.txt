@@ -37,7 +37,7 @@ SECTIONS {
     .text :
     ALIGN(4)
     {
-        asm/crt0.o(.text);
+        src/crt0.o(.text);
         src/engine/main.o(.text);
         src/engine/sprite.o(.text);
         src/engine/text.o(.text);
@@ -120,7 +120,7 @@ SECTIONS {
         src/field/trainer_see.o(.text);
         src/field/wild_encounter.o(.text);
         src/field/field_effect.o(.text);
-        src/unknown_task.o(.text);
+        src/scanline_effect.o(.text);
         src/pokemon/pokemon_menu.o(.text);
         src/engine/option_menu.o(.text);
         src/pokemon/pokedex.o(.text);
@@ -283,20 +283,21 @@ SECTIONS {
         src/battle/anim/fire_2.o(.text);
         src/battle/anim/heated_rock.o(.text);
         src/battle/anim/wisp_orb.o(.text);
-        asm/wisp_fire.o(.text);
+        src/battle/anim/wisp_fire.o(.text);
         src/battle/anim/thunder.o(.text);
         src/battle/anim/beta_beat_up.o(.text);
         src/battle/anim/shock.o(.text);
         asm/current.o(.text);
         asm/ice.o(.text);
         asm/fight.o(.text);
-        asm/poison.o(.text);
+        src/battle/anim/poison.o(.text);
         asm/flying.o(.text);
         asm/psychic.o(.text);
-        asm/bug.o(.text);
+        src/battle/anim/bug.o(.text);
         asm/rock.o(.text);
         asm/ghost.o(.text);
-        asm/dragon.o(.text);
+        src/battle/anim/dragon.o(.text);
+        src/battle/anim/dark.o(.text);
         asm/dark.o(.text);
         asm/ground.o(.text);
         asm/normal.o(.text);
@@ -407,8 +408,8 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        asm/libgcnmultiboot.o(.text);
-        asm/m4a_1.o(.text);
+        src/libs/libgcnmultiboot.o(.text);
+        src/libs/m4a_1.o(.text);
         src/libs/m4a_2.o(.text);
         asm/m4a_3.o(.text);
         src/libs/m4a_4.o(.text);
@@ -416,7 +417,7 @@ SECTIONS {
         src/libs/agb_flash_1m.o(.text);
         src/libs/agb_flash_mx.o(.text);
         src/libs/siirtc.o(.text);
-        asm/libagbsyscall.o(.text);
+        src/libs/libagbsyscall.o(.text);
         tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
         tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
         tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);

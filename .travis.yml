@@ -25,12 +25,12 @@ matrix:
       env: _="Build"
       script:
         - ./build_tools.sh
-        - make -j2 compare_ruby
-        - make -j2 compare_ruby_rev1
-        - make -j2 compare_ruby_rev2
-        - make -j2 compare_sapphire
-        - make -j2 compare_sapphire_rev1
-        - make -j2 compare_sapphire_rev2
+        - make -j2 ruby
+        - make -j2 ruby_rev1
+        - make -j2 ruby_rev2
+        - make -j2 sapphire
+        - make -j2 sapphire_rev1
+        - make -j2 sapphire_rev2
     - os: linux
       env: _="Formatting"
       addons:
@@ -53,7 +53,7 @@ matrix:
         - rsync -avhI graphics-de/ graphics/
       script:
         - ./build_tools.sh
-        - make -j2 compare_ruby_de
-        - make -j2 compare_sapphire_de
+        - make -j2 ruby_de
+        - make -j2 sapphire_de
   allow_failures:
     - env: _="Formatting"

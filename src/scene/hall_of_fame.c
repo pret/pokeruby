@@ -16,6 +16,7 @@
 #include "data2.h"
 #include "decompress.h"
 #include "random.h"
+#include "scanline_effect.h"
 #include "trig.h"
 #include "ewram.h"
 
@@ -95,7 +96,6 @@ bool8 sub_80C5DCC(void);
 bool8 sub_80C5F98(void);
 void ReturnFromHallOfFamePC(void);
 u16 SpeciesToPokedexNum(u16 species);
-void remove_some_task(void);
 
 // data and gfx
 
@@ -1278,7 +1278,7 @@ static void sub_81433E0(void)
 
 static void sub_8143570(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();

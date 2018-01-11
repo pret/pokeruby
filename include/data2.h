@@ -3,7 +3,7 @@
 
 #include "sprite.h"
 
-struct UnknownTaskStruct;
+struct ScanlineEffectParams;
 
 struct MonCoords
 {
@@ -42,7 +42,7 @@ extern u8 gSpeciesNames[][11];
 extern const u8 gMoveNames[][13];
 extern const u8 gAbilityNames[][13];
 extern const u8 gTypeNames[][7];
-extern const struct UnknownTaskStruct gUnknown_081F9674;
+extern const struct ScanlineEffectParams gUnknown_081F9674;
 extern const u8 gUnknown_081F96C8[];
 extern struct CompressedSpriteSheet gUnknown_081FAEA4;
 extern struct CompressedSpritePalette gUnknown_081FAEAC;

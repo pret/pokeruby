@@ -32,7 +32,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
 #include "script_pokemon_80F9.h"
 #include "ewram.h"
@@ -648,7 +648,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:

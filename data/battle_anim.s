@@ -1,4 +1,4 @@
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
