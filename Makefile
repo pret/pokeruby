@@ -160,12 +160,8 @@ include override.mk
 %.lz:     %     ; $(GBAGFX) $< $@ $(GFX_OPTS)
 %.rl:     %     ; $(GBAGFX) $< $@ $(GFX_OPTS)
 
-<<<<<<< HEAD
-=======
-
 #### Sound Rules ####
 
->>>>>>> 62042c1cbf95b3f26fba3baa4f0a339f0b663462
 sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif
 	$(AIF2PCM) $< $@ --compress
 
