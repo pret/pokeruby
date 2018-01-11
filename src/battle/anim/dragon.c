@@ -127,7 +127,7 @@ void sub_80DF81C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
+    case 0:
         sprite->data[6] = (sprite->data[6] - sprite->data[5]) & 0xFF;
         sprite->pos2.x = Cos(sprite->data[6], sprite->data[7]);
         sprite->pos2.y = Sin(sprite->data[6], sprite->data[7]);
@@ -143,7 +143,7 @@ void sub_80DF81C(struct Sprite *sprite)
             sprite->data[0]++;
         }
         break;
-        case 1:
+    case 1:
         sprite->data[6] = (sprite->data[6] - sprite->data[5]) & 0xFF;
         if (sprite->data[7] <= 0x95 && (sprite->data[7] += 8) > 0x95)
             sprite->data[7] = 0x96;
@@ -201,7 +201,7 @@ void sub_80DF9F4(u8 taskId)
     struct Task *task = &gTasks[taskId];
     switch (task->data[0])
     {
-        case 0:
+    case 0:
         if (++task->data[7] > 1)
         {
             task->data[7] = 0;
@@ -210,12 +210,12 @@ void sub_80DF9F4(u8 taskId)
         }
         sub_80DFAB0(task);
         break;
-        case 1:
+    case 1:
         if (++task->data[1] > 0x3C)
             task->data[0]++;
         sub_80DFAB0(task);
         break;
-        case 2:
+    case 2:
         if (++task->data[7] > 1)
         {
             task->data[7] = 0;
@@ -224,11 +224,11 @@ void sub_80DF9F4(u8 taskId)
         }
         sub_80DFAB0(task);
         break;
-        case 3:
+    case 3:
         gScanlineEffect.state = 3;
         task->data[0]++;
         break;
-        case 4:
+    case 4:
         DestroyAnimVisualTask(taskId);
         break;
     }
@@ -273,4 +273,3 @@ void sub_80DFBD8(struct Sprite *sprite)
     if (++sprite->data[0] > sprite->data[3])
         DestroyAnimSprite(sprite);
 }
-
