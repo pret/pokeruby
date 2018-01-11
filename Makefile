@@ -78,12 +78,10 @@ endif
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
-
 # Clear the default suffixes
 .SUFFIXES:
-
 # Don't delete intermediate files
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin sound/direct_sound_samples/cry_%.bin
+.SECONDARY:
 
 # Create build subdirectories
 $(shell mkdir -p $(addprefix $(BUILD_DIR)/, $(SUBDIRS)))
