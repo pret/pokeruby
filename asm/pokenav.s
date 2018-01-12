@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -229,7 +229,7 @@ _080F07E0:
 	lsrs r1, 16
 	bl sub_80F445C
 _080F07F4:
-	ldr r0, _080F0814 @ =gWindowConfig_81E710C
+	ldr r0, _080F0814 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	ldr r0, _080F0818 @ =gUnknown_083DFEC4
 	ldr r0, [r0]
@@ -237,13 +237,13 @@ _080F07F4:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x6
-	bl MenuPrint
+	bl Menu_PrintText
 _080F080A:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080F0810: .4byte 0x00008788
-_080F0814: .4byte gWindowConfig_81E710C
+_080F0814: .4byte gWindowTemplate_81E710C
 _080F0818: .4byte gUnknown_083DFEC4
 	thumb_func_end ShowMapNamePopUpWindow
 
@@ -252,7 +252,7 @@ sub_80F081C: @ 80F081C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _080F0838 @ =gWindowConfig_81E710C
+	ldr r0, _080F0838 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	cmp r5, 0x4
 	bhi _080F08C6
@@ -262,7 +262,7 @@ sub_80F081C: @ 80F081C
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080F0838: .4byte gWindowConfig_81E710C
+_080F0838: .4byte gWindowTemplate_81E710C
 _080F083C: .4byte _080F0840
 	.align 2, 0
 _080F0840:
@@ -342,17 +342,17 @@ _080F08E0: .4byte 0x0001869f
 	thumb_func_start sub_80F08E4
 sub_80F08E4: @ 80F08E4
 	push {lr}
-	ldr r0, _080F08FC @ =gWindowConfig_81E710C
+	ldr r0, _080F08FC @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	movs r0, 0
 	movs r1, 0x9
 	movs r2, 0xB
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F08FC: .4byte gWindowConfig_81E710C
+_080F08FC: .4byte gWindowTemplate_81E710C
 	thumb_func_end sub_80F08E4
 
 	thumb_func_start sub_80F0900
@@ -376,7 +376,7 @@ sub_80F0900: @ 80F0900
 	movs r1, 0x1
 	movs r2, 0x1F
 	movs r3, 0xF
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _080F092A:
 	ldrh r0, [r5]
 	lsrs r2, r4, 16
@@ -527,13 +527,13 @@ _080F0A40:
 	adds r0, r4, 0
 	adds r1, r3, 0
 	bl sub_80F4428
-	ldr r0, _080F0A70 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0A70 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	lsls r2, r5, 24
 	lsrs r2, 24
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -541,7 +541,7 @@ _080F0A40:
 _080F0A64: .4byte gUnknown_083DFEC4
 _080F0A68: .4byte 0x000087c8
 _080F0A6C: .4byte 0x00008788
-_080F0A70: .4byte gWindowConfig_81E70D4
+_080F0A70: .4byte gWindowTemplate_81E70D4
 	thumb_func_end sub_80F0A24
 
 	thumb_func_start sub_80F0A74
@@ -561,13 +561,13 @@ sub_80F0A74: @ 80F0A74
 	bl sub_80F700C
 	movs r0, 0x1F
 	ands r7, r0
-	ldr r0, _080F0AE4 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0AE4 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	lsls r2, r7, 3
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	ldr r1, _080F0AE8 @ =0x0000d158
 	adds r0, r5, r1
 	ldrh r0, [r0]
@@ -597,7 +597,7 @@ sub_80F0A74: @ 80F0A74
 	.align 2, 0
 _080F0ADC: .4byte gUnknown_083DFEC4
 _080F0AE0: .4byte 0x00008788
-_080F0AE4: .4byte gWindowConfig_81E70D4
+_080F0AE4: .4byte gWindowTemplate_81E70D4
 _080F0AE8: .4byte 0x0000d158
 _080F0AEC: .4byte 0x0000ceed
 _080F0AF0: .4byte 0x0600f000
@@ -688,13 +688,13 @@ _080F0B60:
 	ldrsh r0, [r0, r1]
 	cmp r2, r0
 	beq _080F0BAA
-	ldr r0, _080F0BC8 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0BC8 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	adds r1, r4, 0
 	adds r3, r1, 0x1
 	movs r0, 0xC
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _080F0BAA:
 	ldrh r0, [r6]
 	cmp r0, 0
@@ -709,9 +709,9 @@ _080F0BB4:
 _080F0BBC: .4byte 0x00000306
 _080F0BC0: .4byte 0x00008778
 _080F0BC4: .4byte 0x0000876c
-_080F0BC8: .4byte gWindowConfig_81E70D4
+_080F0BC8: .4byte gWindowTemplate_81E70D4
 _080F0BCC:
-	ldr r0, _080F0C10 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0C10 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r1, _080F0C14 @ =0x00008778
 	adds r0, r5, r1
@@ -726,7 +726,7 @@ _080F0BE2:
 	movs r0, 0xC
 	adds r1, r4, 0
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	adds r4, 0x2
 	movs r0, 0x1F
 	ands r4, r0
@@ -745,7 +745,7 @@ _080F0BE2:
 	movs r0, 0
 	b _080F0C22
 	.align 2, 0
-_080F0C10: .4byte gWindowConfig_81E70D4
+_080F0C10: .4byte gWindowTemplate_81E70D4
 _080F0C14: .4byte 0x00008778
 _080F0C18: .4byte gUnknown_083DFEC4
 _080F0C1C: .4byte 0x0000d15c
@@ -804,7 +804,7 @@ _080F0C64:
 	bls _080F0CD0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _080F0CC4 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0CC4 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r0, _080F0CC8 @ =0x00008770
 	adds r1, r4, r0
@@ -835,7 +835,7 @@ _080F0C64:
 	.align 2, 0
 _080F0CBC: .4byte 0x00000306
 _080F0CC0: .4byte 0x0000ffff
-_080F0CC4: .4byte gWindowConfig_81E70D4
+_080F0CC4: .4byte gWindowTemplate_81E70D4
 _080F0CC8: .4byte 0x00008770
 _080F0CCC: .4byte 0x00008778
 _080F0CD0:
@@ -942,7 +942,7 @@ _080F0D78:
 _080F0D8C:
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, _080F0DBC @ =gWindowConfig_81E70D4
+	ldr r0, _080F0DBC @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	ldr r0, _080F0DC0 @ =0x00008778
 	adds r1, r4, r0
@@ -962,7 +962,7 @@ _080F0D8C:
 	mov pc, r0
 	.align 2, 0
 _080F0DB8: .4byte 0x00000306
-_080F0DBC: .4byte gWindowConfig_81E70D4
+_080F0DBC: .4byte gWindowTemplate_81E70D4
 _080F0DC0: .4byte 0x00008778
 _080F0DC4: .4byte _080F0DC8
 	.align 2, 0
@@ -1032,7 +1032,7 @@ _080F0E42:
 _080F0E54:
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	b _080F0EA0
 	.align 2, 0
 _080F0E60: .4byte gUnknown_083DFEC4
@@ -1054,7 +1054,7 @@ _080F0E6C:
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	b _080F0D6C
 	.align 2, 0
 _080F0E94: .4byte gUnknown_083DFEC4
@@ -1141,13 +1141,13 @@ _080F0F10:
 	adds r4, r0
 	movs r0, 0x1F
 	ands r4, r0
-	ldr r0, _080F0F60 @ =gWindowConfig_81E70D4
+	ldr r0, _080F0F60 @ =gWindowTemplate_81E70D4
 	bl BasicInitMenuWindow
 	adds r3, r4, 0x1
 	movs r0, 0xC
 	adds r1, r4, 0
 	movs r2, 0x1F
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
@@ -1160,7 +1160,7 @@ _080F0F52:
 	.align 2, 0
 _080F0F58: .4byte 0x00000306
 _080F0F5C: .4byte 0x00008778
-_080F0F60: .4byte gWindowConfig_81E70D4
+_080F0F60: .4byte gWindowTemplate_81E70D4
 	thumb_func_end sub_80F0EF4
 
 	thumb_func_start sub_80F0F64
@@ -1260,7 +1260,7 @@ sub_80F0FFC: @ 80F0FFC
 	adds r0, r5, 0
 	movs r2, 0
 	bl GetMapSectionName
-	ldr r0, _080F1054 @ =gWindowConfig_81E710C
+	ldr r0, _080F1054 @ =gWindowTemplate_81E710C
 	bl BasicInitMenuWindow
 	adds r0, r5, 0
 	bl sub_80F19DC
@@ -1274,7 +1274,7 @@ sub_80F0FFC: @ 80F0FFC
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x5
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1282,7 +1282,7 @@ sub_80F0FFC: @ 80F0FFC
 _080F1048: .4byte gUnknown_083DFEC4
 _080F104C: .4byte 0x00008788
 _080F1050: .4byte 0x0000ceea
-_080F1054: .4byte gWindowConfig_81E710C
+_080F1054: .4byte gWindowTemplate_81E710C
 _080F1058: .4byte 0x0000d138
 	thumb_func_end sub_80F0FFC
 
@@ -1357,17 +1357,17 @@ _080F10E8:
 _080F10FC: .4byte gUnknown_083DFEC4
 _080F1100: .4byte 0x0000d162
 _080F1104:
-	ldr r0, _080F110C @ =gWindowConfig_81E70B8
-	bl SetUpWindowConfig
+	ldr r0, _080F110C @ =gWindowTemplate_81E70B8
+	bl Text_LoadWindowTemplate
 	b _080F1218
 	.align 2, 0
-_080F110C: .4byte gWindowConfig_81E70B8
+_080F110C: .4byte gWindowTemplate_81E70B8
 _080F1110:
-	ldr r0, _080F1118 @ =gWindowConfig_81E70B8
+	ldr r0, _080F1118 @ =gWindowTemplate_81E70B8
 	bl MultistepInitMenuWindowBegin
 	b _080F1218
 	.align 2, 0
-_080F1118: .4byte gWindowConfig_81E70B8
+_080F1118: .4byte gWindowTemplate_81E70B8
 _080F111C:
 	bl MultistepInitMenuWindowContinue
 	cmp r0, 0
@@ -1376,7 +1376,7 @@ _080F111C:
 _080F1126:
 	b _080F1226
 _080F1128:
-	bl MenuZeroFillScreen
+	bl Menu_EraseScreen
 	b _080F1218
 _080F112E:
 	bl sub_80F1614
@@ -1761,7 +1761,7 @@ sub_80F1438: @ 80F1438
 	adds r0, r4, r1
 	movs r1, 0xD
 	movs r2, 0x1
-	bl MenuPrint
+	bl Menu_PrintText
 	ldr r0, _080F1478 @ =0x00008788
 	adds r5, r4, r0
 	ldr r1, _080F147C @ =0x0000876e
@@ -1775,7 +1775,7 @@ sub_80F1438: @ 80F1438
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0x5
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1793,7 +1793,7 @@ sub_80F1480: @ 80F1480
 	movs r1, 0xD
 	movs r2, 0x1B
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80F1480
@@ -1914,11 +1914,11 @@ _080F158A:
 	adds r0, r6, 0
 	movs r1, 0xC
 	movs r2, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	adds r0, r7, 0
 	movs r1, 0xC
 	movs r2, 0xF
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1933,7 +1933,7 @@ sub_80F15A8: @ 80F15A8
 	movs r1, 0xD
 	movs r2, 0x1B
 	movs r3, 0x10
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 	ldr r0, _080F1600 @ =gUnknown_083DFEC4
 	ldr r4, [r0]
 	ldr r0, _080F1604 @ =0x00008788
@@ -1964,7 +1964,7 @@ sub_80F15A8: @ 80F15A8
 	adds r0, r5, 0
 	movs r1, 0xC
 	movs r2, 0xD
-	bl MenuPrint
+	bl Menu_PrintText
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2422,7 +2422,7 @@ _080F19B8:
 	movs r1, 0x1
 	movs r2, 0x70
 	movs r3, 0x1
-	bl MenuPrint_PixelCoords
+	bl Menu_PrintTextPixelCoords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2502,7 +2502,7 @@ _080F1A46:
 	movs r0, 0xE
 	movs r2, 0x1C
 	movs r3, 0xF
-	bl MenuFillWindowRectWithBlankTile
+	bl Menu_BlankWindowRect
 	movs r0, 0
 	strb r0, [r5]
 _080F1A60:
@@ -7663,9 +7663,9 @@ sub_80F4194: @ 80F4194
 	str r1, [r4, 0x4]
 	str r3, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, _080F42B4 @ =gWindowConfig_81E70F0
+	ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0
 	adds r1, r6, 0
-	bl sub_8004E3C
+	bl Text_InitWindow8004E3C
 	movs r3, 0x88
 	lsls r3, 2
 	adds r1, r6, r3
@@ -7779,7 +7779,7 @@ _080F42A4: .4byte gUnknown_083DFEC8
 _080F42A8: .4byte 0x00001111
 _080F42AC: .4byte 0x040000d4
 _080F42B0: .4byte 0x81000140
-_080F42B4: .4byte gWindowConfig_81E70F0
+_080F42B4: .4byte gWindowTemplate_81E70F0
 _080F42B8: .4byte 0x81000030
 _080F42BC: .4byte 0x0fffffff
 _080F42C0: .4byte 0x80000040
@@ -10956,8 +10956,8 @@ sub_80F5B50: @ 80F5B50
 _080F5B68: .4byte gUnknown_083DFEC4
 _080F5B6C: .4byte 0x00009345
 _080F5B70:
-	bl dp12_8087EA4
-	ldr r0, _080F5BA8 @ =gUnknown_03004DE0
+	bl ScanlineEffect_Clear
+	ldr r0, _080F5BA8 @ =gScanlineEffectRegBuffers
 	movs r2, 0xEF
 	movs r3, 0xF4
 	lsls r3, 3
@@ -10984,7 +10984,7 @@ _080F5B82:
 	movs r0, 0x1
 	b _080F5BCE
 	.align 2, 0
-_080F5BA8: .4byte gUnknown_03004DE0
+_080F5BA8: .4byte gScanlineEffectRegBuffers
 _080F5BAC: .4byte gUnknown_083DFEC4
 _080F5BB0: .4byte 0x00009345
 _080F5BB4:
@@ -10995,7 +10995,7 @@ _080F5BB4:
 	ldr r0, [sp]
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
-	bl sub_80895F8
+	bl ScanlineEffect_SetParams
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -11013,14 +11013,14 @@ _080F5BD8: .4byte gUnknown_083E4990
 	thumb_func_start sub_80F5BDC
 sub_80F5BDC: @ 80F5BDC
 	push {lr}
-	ldr r1, _080F5BEC @ =gUnknown_03004DC0
+	ldr r1, _080F5BEC @ =gScanlineEffect
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
-	bl sub_8089668
+	bl ScanlineEffect_InitHBlankDmaTransfer
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F5BEC: .4byte gUnknown_03004DC0
+_080F5BEC: .4byte gScanlineEffect
 	thumb_func_end sub_80F5BDC
 
 	thumb_func_start sub_80F5BF0
@@ -11045,7 +11045,7 @@ sub_80F5BF0: @ 80F5BF0
 	adds r0, r4, 0
 	bl sub_80F5A1C
 	movs r6, 0
-	ldr r1, _080F5CC4 @ =gUnknown_03004DE0
+	ldr r1, _080F5CC4 @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r0, 0xF0
 	lsls r0, 3
@@ -11128,7 +11128,7 @@ _080F5CA6:
 _080F5CB8: .4byte gUnknown_083DFEC4
 _080F5CBC: .4byte 0x00009344
 _080F5CC0: .4byte 0x0000911c
-_080F5CC4: .4byte gUnknown_03004DE0
+_080F5CC4: .4byte gScanlineEffectRegBuffers
 _080F5CC8: .4byte 0x0000ffff
 _080F5CCC: .4byte 0x00009130
 _080F5CD0: .4byte 0x00009132
@@ -11164,7 +11164,7 @@ sub_80F5CDC: @ 80F5CDC
 	lsls r0, 17
 	lsrs r5, r0, 16
 	movs r7, 0
-	ldr r1, _080F5DBC @ =gUnknown_03004DE0
+	ldr r1, _080F5DBC @ =gScanlineEffectRegBuffers
 	mov r12, r1
 	movs r4, 0xF0
 	lsls r4, 3
@@ -11248,7 +11248,7 @@ _080F5DA0:
 _080F5DB0: .4byte gUnknown_083DFEC4
 _080F5DB4: .4byte 0x00009344
 _080F5DB8: .4byte 0x0000911c
-_080F5DBC: .4byte gUnknown_03004DE0
+_080F5DBC: .4byte gScanlineEffectRegBuffers
 _080F5DC0: .4byte 0x0000ffff
 _080F5DC4: .4byte 0x00009130
 _080F5DC8: .4byte 0x00009132

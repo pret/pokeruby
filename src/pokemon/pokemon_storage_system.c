@@ -346,7 +346,7 @@ s16 StorageSystemGetNextMonIndex(struct BoxPokemon *box, s8 startIdx, u8 stopIdx
 
 void StorageSystemClearMessageWindow(void)
 {
-    MenuFillWindowRectWithBlankTile(2, 15, 27, 18);
+    Menu_BlankWindowRect(2, 15, 27, 18);
 }
 
 void Task_PokemonStorageSystem(u8 taskId)
@@ -356,8 +356,8 @@ void Task_PokemonStorageSystem(u8 taskId)
     {
         case 0:
             StorageSystemCreatePrimaryMenu(task->data[1]);
-            MenuDisplayMessageBox();
-            MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
+            Menu_DisplayDialogueFrame();
+            Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
             task->data[0]++;
             break;
         case 1:
@@ -367,7 +367,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             }
             break;
         case 2:
-            task->data[2] = ProcessMenuInput();
+            task->data[2] = Menu_ProcessInput();
             switch(task->data[2])
             {
                 case -2:
@@ -381,13 +381,13 @@ void Task_PokemonStorageSystem(u8 taskId)
                     {
                         task->data[1] = task->data[3];
                         StorageSystemClearMessageWindow();
-                        MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
+                        Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                     }
                     break;
                 case -1:
                 case  3:
-                    HandleDestroyMenuCursors();
-                    MenuZeroFillWindowRect(0, 0, 13, 9);
+                    Menu_DestroyCursor();
+                    Menu_EraseWindowRect(0, 0, 13, 9);
                     ScriptContext2_Disable();
                     EnableBothScriptContexts();
                     DestroyTask(taskId);
@@ -396,13 +396,13 @@ void Task_PokemonStorageSystem(u8 taskId)
                     if (task->data[2] == 0 && StorageSystemGetPartySize() == PARTY_SIZE)
                     {
                         StorageSystemClearMessageWindow();
-                        MenuPrint(gPCText_PartyFull2, 2, 15);
+                        Menu_PrintText(gPCText_PartyFull2, 2, 15);
                         task->data[0] = 3;
                     }
                     else if (task->data[2] == 1 && StorageSystemGetPartySize() == 1)
                     {
                         StorageSystemClearMessageWindow();
-                        MenuPrint(gPCText_OnlyOne, 2, 15);
+                        Menu_PrintText(gPCText_OnlyOne, 2, 15);
                         task->data[0] = 3;
                     }
                     else
@@ -417,27 +417,27 @@ void Task_PokemonStorageSystem(u8 taskId)
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
+                Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             else if (gMain.newKeys & DPAD_UP)
             {
                 if (--task->data[1] < 0)
                     task->data[1] = 3;
-                MoveMenuCursor(-1);
-                task->data[1] = GetMenuCursorPos();
+                Menu_MoveCursor(-1);
+                task->data[1] = Menu_GetCursorPos();
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
+                Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             else if (gMain.newKeys & DPAD_DOWN)
             {
                 if (++task->data[1] > 3)
                     task->data[1] = 0;
-                MoveMenuCursor(1);
-                task->data[1] = GetMenuCursorPos();
+                Menu_MoveCursor(1);
+                task->data[1] = Menu_GetCursorPos();
                 StorageSystemClearMessageWindow();
-                MenuPrint(gUnknown_083B600C[task->data[1]].desc, 2, 15);
+                Menu_PrintText(gUnknown_083B600C[task->data[1]].desc, 2, 15);
                 task->data[0] = 2;
             }
             break;
@@ -469,8 +469,8 @@ void FieldCB_ReturnToOverworld(void)
 
 void StorageSystemCreatePrimaryMenu(u8 whichMenu)
 {
-    MenuDrawTextWindow(0, 0, 13, 9);
-    PrintMenuItems(1, 1, 4, (const struct MenuAction *)gUnknown_083B600C);
+    Menu_DrawStdWindowFrame(0, 0, 13, 9);
+    Menu_PrintItems(1, 1, 4, (const struct MenuAction *)gUnknown_083B600C);
     InitMenu(0, 1, 1, 4, whichMenu, 12);
 }
 
@@ -692,7 +692,7 @@ void sub_80966F4(const u8 *sourceString, u16 x, u16 y)
     u16 *vdest = (u16 *)(BG_CHAR_ADDR(4) + (GetSpriteTileStartByTag(gUnknown_02038478->unk_0240) * 32) + y * 256 + x * 32);
     u8 *tileBuff = gUnknown_083B6DB8;
     DmaFill16(3, 0x1111, tileBuff, 0x400);
-    sub_8004E3C(&gWindowConfig_81E6D38, tileBuff, sourceString);
+    Text_InitWindow8004E3C(&gWindowTemplate_81E6D38, tileBuff, sourceString);
     DmaCopy16(3, tileBuff, vdest, 0x400);
 }
 

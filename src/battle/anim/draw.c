@@ -3,7 +3,7 @@
 #include "trig.h"
 #include "battle_anim.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
@@ -21,7 +21,8 @@ static void sub_80D0E8C(struct Sprite* sprite);
 void sub_80D0C88(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    struct UnknownTaskStruct sp;
+    struct ScanlineEffectParams params;
+
     s16 i;
     task->data[0] = sub_8077FC0(gAnimBankTarget) + 32;
     task->data[1] = 4;
@@ -30,30 +31,31 @@ void sub_80D0C88(u8 taskId)
     task->data[4] = 0;
     task->data[5] = 0;
     task->data[15] = sub_807A100(gAnimBankTarget, 0);
+
     if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
-        sp.dest = (u16 *)REG_ADDR_BG1HOFS;
+        params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;
     }
     else
     {
         task->data[6] = gBattle_BG2_X;
-        sp.dest = (u16 *)REG_ADDR_BG2HOFS;
+        params.dmaDest = (u16 *)REG_ADDR_BG2HOFS;
     }
 
     for (i = task->data[0] - 0x40; i <= task->data[0];i++)
     {
         if (i >= 0)
         {
-            gUnknown_03004DE0[0][i] = task->data[6] + 0xF0;
-            gUnknown_03004DE0[1][i] = task->data[6] + 0xF0;
+            gScanlineEffectRegBuffers[0][i] = task->data[6] + 0xF0;
+            gScanlineEffectRegBuffers[1][i] = task->data[6] + 0xF0;
         }
     }
 
-    sp.control = 0xa2600001;
-    sp.unk8 = 1;
-    sp.unk9 = 0;
-    sub_80895F8(sp);
+    params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
+    params.initState = 1;
+    params.unused9 = 0;
+    ScanlineEffect_SetParams(params);
     task->func = sub_80D0D68;
 }
 
@@ -91,13 +93,13 @@ void sub_80D0D68(u8 taskId)
 
             if (task->data[5] >= 0)
             {
-                gUnknown_03004DE0[0][task->data[5]] = task->data[6];
-                gUnknown_03004DE0[1][task->data[5]] = task->data[6];
+                gScanlineEffectRegBuffers[0][task->data[5]] = task->data[6];
+                gScanlineEffectRegBuffers[1][task->data[5]] = task->data[6];
             }
 
             if (++task->data[3] >= task->data[15])
             {
-                gUnknown_03004DC0.unk15 = 3;
+                gScanlineEffect.unk15 = 3;
                 DestroyAnimVisualTask(taskId);
             }
         }
@@ -178,7 +180,7 @@ _080D0DE0:\n\
 	ldrsh r0, [r3, r1]\n\
 	cmp r0, 0\n\
 	blt _080D0E04\n\
-	ldr r2, _080D0E28 @ =gUnknown_03004DE0\n\
+	ldr r2, _080D0E28 @ =gScanlineEffectRegBuffers\n\
 	lsls r0, 1\n\
 	adds r0, r2\n\
 	ldrh r1, [r3, 0x14]\n\
@@ -202,7 +204,7 @@ _080D0E04:\n\
 	ldrsh r1, [r3, r2]\n\
 	cmp r0, r1\n\
 	blt _080D0E22\n\
-	ldr r1, _080D0E2C @ =gUnknown_03004DC0\n\
+	ldr r1, _080D0E2C @ =gScanlineEffect\n\
 	movs r0, 0x3\n\
 	strb r0, [r1, 0x15]\n\
 	adds r0, r4, 0\n\
@@ -212,8 +214,8 @@ _080D0E22:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_080D0E28: .4byte gUnknown_03004DE0\n\
-_080D0E2C: .4byte gUnknown_03004DC0\n\
+_080D0E28: .4byte gScanlineEffectRegBuffers\n\
+_080D0E2C: .4byte gScanlineEffect\n\
 .syntax divided\n");
 }
 #endif

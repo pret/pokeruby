@@ -203,12 +203,12 @@ void sub_8096884(void)
             gMain.state++;
             break;
         case 1:
-            SetUpWindowConfig(&gWindowConfig_81E6D00);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6D00);
             gMain.state++;
             break;
         case 2:
-            InitMenuWindow(&gWindowConfig_81E6D00);
-            MenuZeroFillScreen();
+            InitMenuWindow(&gWindowTemplate_81E6D00);
+            Menu_EraseScreen();
             gMain.state++;
             break;
         case 3:
@@ -267,12 +267,12 @@ void sub_80969A0(void)
             gMain.state++;
             break;
         case 1:
-            SetUpWindowConfig(&gWindowConfig_81E6D00);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6D00);
             gMain.state++;
             break;
         case 2:
-            InitMenuWindow(&gWindowConfig_81E6D00);
-            MenuZeroFillScreen();
+            InitMenuWindow(&gWindowTemplate_81E6D00);
+            Menu_EraseScreen();
             gMain.state++;
             break;
         case 3:
@@ -900,7 +900,7 @@ void sub_8097594(void)
             gPokemonStorageSystemPtr->unk_0004++;
             // fallthrough
         case 1:
-            switch (ProcessMenuInputNoWrap())
+            switch (Menu_ProcessInputNoWrap())
             {
                 case -1:
                 case  1:
@@ -1268,7 +1268,7 @@ void sub_8097BA0(void)
             }
             break;
         case 2:
-            switch (ProcessMenuInputNoWrap())
+            switch (Menu_ProcessInputNoWrap())
             {
                 case 1:
                 case -1:
@@ -1322,7 +1322,7 @@ void sub_8097CC0(void) {
             }
             break;
         case 2:
-            switch (ProcessMenuInputNoWrap()) {
+            switch (Menu_ProcessInputNoWrap()) {
                 case 0:
                     sub_8098A5C();
                     SetPSSCallback(sub_8096C84);
@@ -1666,11 +1666,11 @@ void sub_80982B4(void)
     {
         gPokemonStorageSystemPtr->unk_12ac->invisible = TRUE;
     }
-    MenuZeroFillWindowRect(0, 11, 9, 17);
-    MenuPrint(gPokemonStorageSystemPtr->unk_127a, 1, 16);
-    MenuPrint(gPokemonStorageSystemPtr->unk_120f, 1, 11);
-    MenuPrint(gPokemonStorageSystemPtr->unk_1234, 0, 13);
-    MenuPrint(gPokemonStorageSystemPtr->unk_1259, 1, 15);
+    Menu_EraseWindowRect(0, 11, 9, 17);
+    Menu_PrintText(gPokemonStorageSystemPtr->unk_127a, 1, 16);
+    Menu_PrintText(gPokemonStorageSystemPtr->unk_120f, 1, 11);
+    Menu_PrintText(gPokemonStorageSystemPtr->unk_1234, 0, 13);
+    Menu_PrintText(gPokemonStorageSystemPtr->unk_1259, 1, 15);
 }
 
 void sub_8098350(void)
@@ -1881,7 +1881,7 @@ const struct StorageAction gPCStorageActionTexts[] = {
 void PrintStorageActionText(u8 index) {
     u8 *ptr;
 
-    MenuDrawTextWindow(10, 16, 29, 19);
+    Menu_DrawStdWindowFrame(10, 16, 29, 19);
 
     switch (gPCStorageActionTexts[index].format)
     {
@@ -1954,7 +1954,7 @@ void PrintStorageActionText(u8 index) {
     }
 
     ptr[0] = EOS;
-    MenuPrint(gPokemonStorageSystemPtr->unk_2694, 11, 17);
+    Menu_PrintText(gPokemonStorageSystemPtr->unk_2694, 11, 17);
 }
 
 const struct OamData gOamData_83B6EAC = {
@@ -2009,14 +2009,14 @@ const struct SpriteTemplate gSpriteTemplate_83B6EFC = {
 void sub_8098A38(s8 a0)
 {
     DisplayYesNoMenu(23, 10, 0);
-    MoveMenuCursor(a0);
+    Menu_MoveCursor(a0);
 }
 
 void sub_8098A5C(void)
 {
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(10, 16, 29, 19);
-    MenuZeroFillWindowRect(23, 10, 29, 15);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(10, 16, 29, 19);
+    Menu_EraseWindowRect(23, 10, 29, 15);
 }
 
 void sub_8098A80(void)

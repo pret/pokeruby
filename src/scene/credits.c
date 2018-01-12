@@ -474,8 +474,8 @@ void sub_81439D0(void)
     taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
     gTasks[taskIdC].data[TDC_0] = 40;
 
-    SetUpWindowConfig(&gWindowConfig_81E7208);
-    InitMenuWindow(&gWindowConfig_81E7208);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7208);
+    InitMenuWindow(&gWindowTemplate_81E7208);
     LoadPalette(&gUnknown_0840B7BC, 0x80, sizeof(gUnknown_0840B7BC));
 
     CpuCopy16(&gUnknown_0840B7FC, (void *)(VRAM + 0xBEE0), sizeof(gUnknown_0840B7FC));
@@ -857,7 +857,7 @@ static void task_b_81441B8(u8 taskIdB)
     case 5:
         if (!gPaletteFade.active)
         {
-            MenuZeroFillWindowRect(0, 9, 29, 19);
+            Menu_EraseWindowRect(0, 9, 29, 19);
             gTasks[taskIdB].data[TDB_0] = 2;
         }
         return;

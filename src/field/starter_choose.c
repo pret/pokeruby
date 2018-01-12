@@ -14,7 +14,7 @@
 #include "strings.h"
 #include "task.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern u16 gSpecialVar_Result;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -285,7 +285,7 @@ void CB2_ChooseStarter(void)
     LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
     LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
     LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
@@ -294,8 +294,8 @@ void CB2_ChooseStarter(void)
     LoadCompressedObjectPic(&gUnknown_083F7794[0]);
     LoadCompressedObjectPic(&gUnknown_083F77A4[0]);
     LoadSpritePalettes(gUnknown_083F77B4);
-    SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
 
     savedIme = REG_IME;
@@ -355,8 +355,8 @@ static void MainCallback2(void)
 static void Task_StarterChoose1(u8 taskId)
 {
     CreateStarterPokemonLabel(0xFF, gTasks[taskId].tStarterSelection);
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gOtherText_BirchInTrouble, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gOtherText_BirchInTrouble, 3, 15);
     gTasks[taskId].func = Task_StarterChoose2;
 }
 
@@ -368,7 +368,7 @@ static void Task_StarterChoose2(u8 taskId)
     {
         u8 spriteId;
 
-        MenuZeroFillWindowRect(
+        Menu_EraseWindowRect(
           gStarterChoose_LabelCoords[selection][0],
           gStarterChoose_LabelCoords[selection][1],
           gStarterChoose_LabelCoords[selection][0] + 13,
@@ -424,9 +424,9 @@ static void Task_StarterChoose3(u8 taskId)
 static void Task_StarterChoose4(u8 taskId)
 {
     PlayCry1(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
-    MenuDrawTextWindow(2, 14, 27, 19);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
     //"Do you choose this POKEMON?"
-    MenuPrint(gOtherText_DoYouChoosePoke, 3, 15);
+    Menu_PrintText(gOtherText_DoYouChoosePoke, 3, 15);
     DisplayYesNoMenu(21, 7, 1);
     gTasks[taskId].func = Task_StarterChoose5;
 }
@@ -435,7 +435,7 @@ static void Task_StarterChoose5(u8 taskId)
 {
     u8 spriteId;
 
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:  // YES
         //Return the starter choice and exit.
@@ -445,7 +445,7 @@ static void Task_StarterChoose5(u8 taskId)
     case 1:  // NO
     case -1: // B button
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(21, 7, 27, 12);
+        Menu_EraseWindowRect(21, 7, 27, 12);
 
         spriteId = gTasks[taskId].tPkmnSpriteId;
         FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
@@ -498,7 +498,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     if (prevSelection != 0xFF)
     {
         //Remove the old Pokemon label
-        MenuZeroFillWindowRect(
+        Menu_EraseWindowRect(
           gStarterChoose_LabelCoords[prevSelection][0],
           gStarterChoose_LabelCoords[prevSelection][1],
           gStarterChoose_LabelCoords[prevSelection][0] + 13,
@@ -527,7 +527,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 
     //Copy POKEMON string to label
     StringCopy(labelText + dstIndex, gOtherText_Poke);
-    MenuPrint(
+    Menu_PrintText(
       labelText,
       gStarterChoose_LabelCoords[selection][0],
       gStarterChoose_LabelCoords[selection][1]);
@@ -535,7 +535,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 
     //Copy Pokemon name to label
     sub_8072C74(labelText + 5, gSpeciesNames[species], 0x6B, 1);
-    MenuPrint(
+    Menu_PrintText(
       labelText,
       gStarterChoose_LabelCoords[selection][0],
       gStarterChoose_LabelCoords[selection][1] + 2);
@@ -574,7 +574,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     adds r3, r1, 0x3\n\
     lsls r3, 24\n\
     lsrs r3, 24\n\
-    bl MenuZeroFillWindowRect\n\
+    bl Menu_EraseWindowRect\n\
     ldr r0, _0810A964 @ =0x04000040\n\
     movs r1, 0\n\
     strh r1, [r0]\n\
@@ -649,7 +649,7 @@ _0810A8CA:\n\
     mov r0, sp\n\
     adds r1, r4, 0\n\
     adds r2, r5, 0\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     mov r0, sp\n\
     movs r1, 0\n\
     movs r2, 0xF\n\
@@ -669,7 +669,7 @@ _0810A8CA:\n\
     lsrs r2, 24\n\
     mov r0, sp\n\
     adds r1, r4, 0\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     lsls r0, r4, 3\n\
     adds r0, 0x4\n\
     lsls r0, 24\n\

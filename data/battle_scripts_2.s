@@ -1,8 +1,8 @@
 #include "constants/battle_constants.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-	.include "asm/macros.inc"
-	.include "asm/macros/battle_script.inc"
+	.include "include/macros.inc"
+	.include "include/macros/battle_script.inc"
 	.include "constants/constants.inc"
 	.include "constants/battle_script_constants.inc"
 

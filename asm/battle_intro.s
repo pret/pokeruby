@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -299,9 +299,9 @@ _080E45E6:
 	strh r0, [r1, 0xC]
 _080E45FE:
 	movs r3, 0
-	ldr r5, _080E46A0 @ =gUnknown_03004DC0
+	ldr r5, _080E46A0 @ =gScanlineEffect
 	mov r9, r5
-	ldr r7, _080E46A4 @ =gUnknown_03004DE0
+	ldr r7, _080E46A4 @ =gScanlineEffectRegBuffers
 	mov r6, r9
 	adds r5, r1, 0
 _080E460A:
@@ -319,8 +319,8 @@ _080E460A:
 	ble _080E460A
 	cmp r3, 0x9F
 	bgt _080E464E
-	ldr r7, _080E46A4 @ =gUnknown_03004DE0
-	ldr r6, _080E46A0 @ =gUnknown_03004DC0
+	ldr r7, _080E46A4 @ =gScanlineEffectRegBuffers
+	ldr r6, _080E46A0 @ =gScanlineEffect
 	ldr r1, _080E46A8 @ =gTasks
 	mov r2, r12
 	adds r0, r2, r4
@@ -377,8 +377,8 @@ _080E4690: .4byte gBattle_BG1_Y
 _080E4694: .4byte 0x0000ffc8
 _080E4698: .4byte gBattle_WIN0V
 _080E469C: .4byte 0xfffffc04
-_080E46A0: .4byte gUnknown_03004DC0
-_080E46A4: .4byte gUnknown_03004DE0
+_080E46A0: .4byte gScanlineEffect
+_080E46A4: .4byte gScanlineEffectRegBuffers
 _080E46A8: .4byte gTasks
 _080E46AC: .4byte 0x0600e000
 _080E46B0: .4byte 0x05000200
@@ -669,9 +669,9 @@ _080E48CC:
 	strh r0, [r1, 0xC]
 _080E48E0:
 	movs r3, 0
-	ldr r4, _080E4978 @ =gUnknown_03004DC0
+	ldr r4, _080E4978 @ =gScanlineEffect
 	mov r8, r4
-	ldr r0, _080E497C @ =gUnknown_03004DE0
+	ldr r0, _080E497C @ =gScanlineEffectRegBuffers
 	mov r12, r0
 	mov r7, r8
 	adds r4, r1, 0
@@ -690,9 +690,9 @@ _080E48EE:
 	ble _080E48EE
 	cmp r3, 0x9F
 	bgt _080E4932
-	ldr r1, _080E497C @ =gUnknown_03004DE0
+	ldr r1, _080E497C @ =gScanlineEffectRegBuffers
 	mov r12, r1
-	ldr r7, _080E4978 @ =gUnknown_03004DC0
+	ldr r7, _080E4978 @ =gScanlineEffect
 	ldr r1, _080E4980 @ =gTasks
 	adds r0, r6, r5
 	lsls r0, 3
@@ -745,8 +745,8 @@ _080E4932:
 	.align 2, 0
 _080E4970: .4byte gBattle_WIN0V
 _080E4974: .4byte 0xfffffc04
-_080E4978: .4byte gUnknown_03004DC0
-_080E497C: .4byte gUnknown_03004DE0
+_080E4978: .4byte gScanlineEffect
+_080E497C: .4byte gScanlineEffectRegBuffers
 _080E4980: .4byte gTasks
 _080E4984: .4byte 0x0600e000
 _080E4988: .4byte 0x05000200
@@ -978,9 +978,9 @@ _080E4B3A:
 	strh r0, [r1, 0xC]
 _080E4B50:
 	movs r3, 0
-	ldr r6, _080E4BE8 @ =gUnknown_03004DC0
+	ldr r6, _080E4BE8 @ =gScanlineEffect
 	mov r8, r6
-	ldr r7, _080E4BEC @ =gUnknown_03004DE0
+	ldr r7, _080E4BEC @ =gScanlineEffectRegBuffers
 	adds r5, r1, 0
 _080E4B5A:
 	lsls r2, r3, 1
@@ -997,8 +997,8 @@ _080E4B5A:
 	ble _080E4B5A
 	cmp r3, 0x9F
 	bgt _080E4B9E
-	ldr r7, _080E4BEC @ =gUnknown_03004DE0
-	ldr r6, _080E4BE8 @ =gUnknown_03004DC0
+	ldr r7, _080E4BEC @ =gScanlineEffectRegBuffers
+	ldr r6, _080E4BE8 @ =gScanlineEffect
 	ldr r1, _080E4BF0 @ =gTasks
 	mov r2, r12
 	adds r0, r2, r4
@@ -1053,8 +1053,8 @@ _080E4B9E:
 	.align 2, 0
 _080E4BE0: .4byte gBattle_WIN0V
 _080E4BE4: .4byte 0xfffffc04
-_080E4BE8: .4byte gUnknown_03004DC0
-_080E4BEC: .4byte gUnknown_03004DE0
+_080E4BE8: .4byte gScanlineEffect
+_080E4BEC: .4byte gScanlineEffectRegBuffers
 _080E4BF0: .4byte gTasks
 _080E4BF4: .4byte 0x0600e000
 _080E4BF8: .4byte 0x05000200
@@ -1323,9 +1323,9 @@ _080E4E00:
 	strh r0, [r1, 0xC]
 _080E4E16:
 	movs r3, 0
-	ldr r0, _080E4EA4 @ =gUnknown_03004DC0
+	ldr r0, _080E4EA4 @ =gScanlineEffect
 	mov r9, r0
-	ldr r2, _080E4EA8 @ =gUnknown_03004DE0
+	ldr r2, _080E4EA8 @ =gScanlineEffectRegBuffers
 	mov r8, r2
 	mov r7, r9
 	adds r4, r1, 0
@@ -1344,9 +1344,9 @@ _080E4E24:
 	ble _080E4E24
 	cmp r3, 0x9F
 	bgt _080E4E68
-	ldr r0, _080E4EA8 @ =gUnknown_03004DE0
+	ldr r0, _080E4EA8 @ =gScanlineEffectRegBuffers
 	mov r8, r0
-	ldr r7, _080E4EA4 @ =gUnknown_03004DC0
+	ldr r7, _080E4EA4 @ =gScanlineEffect
 	ldr r1, _080E4EAC @ =gTasks
 	adds r0, r5, r6
 	lsls r0, 3
@@ -1395,8 +1395,8 @@ _080E4E94:
 	.align 2, 0
 _080E4E9C: .4byte gBattle_WIN0V
 _080E4EA0: .4byte 0xfffffc04
-_080E4EA4: .4byte gUnknown_03004DC0
-_080E4EA8: .4byte gUnknown_03004DE0
+_080E4EA4: .4byte gScanlineEffect
+_080E4EA8: .4byte gScanlineEffectRegBuffers
 _080E4EAC: .4byte gTasks
 _080E4EB0: .4byte REG_BG1CNT
 _080E4EB4:

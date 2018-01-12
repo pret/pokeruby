@@ -135,7 +135,7 @@ void sub_80F9020(void)
 // display message box, fill box with tile if tile is not zero, print string
 static void PrintMessage(const u8 *str, u16 tile)
 {
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     if (tile)
     {
         sub_80A3FA0(&gBGTilemapBuffers[1][0], 2, 15, 26, 4, tile);
@@ -145,7 +145,7 @@ static void PrintMessage(const u8 *str, u16 tile)
 
 static void sub_80F9090(u8 taskId)
 {
-    if (MenuUpdateWindowText() == TRUE)
+    if (Menu_UpdateWindowText() == TRUE)
     {
         gUnknown_0300074C(taskId);
     }
@@ -160,7 +160,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *str, TaskFunc callback, u16 
 
 static void Task_CallYesOrNoCallback(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);
@@ -196,7 +196,7 @@ static void PrintStringWithPalette(const u8 *str, u8 paletteNum, u8 left, u8 top
         StringCopy(gStringVar4, str);
     }
 
-    MenuPrint(gStringVar4, left, top);
+    Menu_PrintText(gStringVar4, left, top);
 }
 
 // unused
@@ -209,7 +209,7 @@ void PrintNumberWithPalette(s32 value, u8 paletteNum, u8 n, u8 mode, u8 left, u8
     }
     else
     {
-        MenuPrint(gStringVar1, left, top);
+        Menu_PrintText(gStringVar1, left, top);
     }
 }
 

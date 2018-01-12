@@ -1,11 +1,9 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
 	.text
-
-// file boundary?
 
 	thumb_func_start sub_8099BF8
 sub_8099BF8: @ 8099BF8
@@ -777,10 +775,10 @@ sub_809A1BC: @ 809A1BC
 	ldr r0, _0809A230 @ =0x81000100
 	str r0, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	ldr r0, _0809A234 @ =gWindowConfig_81E6D38
+	ldr r0, _0809A234 @ =gWindowTemplate_81E6D38
 	adds r1, r5, 0
 	str r3, [sp, 0x4]
-	bl sub_8004E3C
+	bl Text_InitWindow8004E3C
 	str r5, [r4]
 	ldr r3, [sp, 0x4]
 	str r3, [r4, 0x4]
@@ -817,7 +815,7 @@ sub_809A1BC: @ 809A1BC
 _0809A228: .4byte gUnknown_083B6DB8
 _0809A22C: .4byte 0x040000d4
 _0809A230: .4byte 0x81000100
-_0809A234: .4byte gWindowConfig_81E6D38
+_0809A234: .4byte gWindowTemplate_81E6D38
 _0809A238: .4byte 0x80000040
 	thumb_func_end sub_809A1BC
 
@@ -6519,7 +6517,7 @@ sub_809CE84: @ 809CE84
 	ldrb r1, [r6]
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl MenuDrawTextWindow
+	bl Menu_DrawStdWindowFrame
 	ldrb r0, [r5]
 	adds r0, 0x1
 	lsls r0, 24
@@ -6534,7 +6532,7 @@ sub_809CE84: @ 809CE84
 	lsls r3, 5
 	adds r4, r3
 	adds r3, r4, 0
-	bl PrintMenuItems
+	bl Menu_PrintItems
 	ldrb r1, [r5]
 	adds r1, 0x1
 	lsls r1, 24
@@ -6595,7 +6593,7 @@ _0809CF52:
 	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0809CF8E
 	.align 2, 0
 _0809CF6C: .4byte gMain
@@ -6607,10 +6605,10 @@ _0809CF70:
 	movs r0, 0x5
 	bl PlaySE
 	movs r0, 0x1
-	bl MoveMenuCursor
+	bl Menu_MoveCursor
 	b _0809CF8E
 _0809CF86:
-	bl GetMenuCursorPos
+	bl Menu_GetCursorPos
 	lsls r0, 24
 	lsrs r5, r0, 24
 _0809CF8E:
@@ -6618,7 +6616,7 @@ _0809CF8E:
 	negs r0, r0
 	cmp r5, r0
 	beq _0809CFB2
-	bl HandleDestroyMenuCursors
+	bl Menu_DestroyCursor
 	ldr r0, _0809CFD0 @ =gPokemonStorageSystemPtr
 	ldr r1, [r0]
 	ldr r2, _0809CFD4 @ =0x000011ba
@@ -6629,7 +6627,7 @@ _0809CF8E:
 	ldrb r1, [r1]
 	movs r2, 0x1D
 	movs r3, 0xF
-	bl MenuZeroFillWindowRect
+	bl Menu_EraseWindowRect
 _0809CFB2:
 	cmp r5, 0
 	blt _0809CFC4

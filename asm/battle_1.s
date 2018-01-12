@@ -1,6 +1,6 @@
 	.include "constants/gba_constants.inc"
 
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -448,16 +448,16 @@ _0800D748: .4byte 0x0000bf40
 sub_800D74C: @ 800D74C
 	push {r4,lr}
 	movs r0, 0x12
-	bl SetTextWindowBaseTileNum
+	bl TextWindow_SetBaseTileNum
 	ldr r4, _0800D79C @ =gUnknown_03004210
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl LoadTextWindowGraphics_OverridePalSlot
+	bl TextWindow_LoadStdFrameGraphicsOverridePal
 	movs r0, 0x22
-	bl SetTextWindowBaseTileNum
+	bl TextWindow_SetBaseTileNum
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl LoadTextWindowGraphics_OverridePalSlot
+	bl TextWindow_LoadStdFrameGraphicsOverridePal
 	ldr r3, _0800D7A0 @ =gPlttBufferUnfaded
 	adds r0, r3, 0
 	adds r0, 0xB8
@@ -1055,9 +1055,9 @@ _0800DE88:
 	str r0, [sp, 0x4]
 	adds r0, r1, 0
 	adds r1, r7, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	ldr r0, [sp, 0xC]
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	ldr r2, _0800DEDC @ =gUnknown_081F9680 + 0x8
 	adds r4, r2
 	ldr r2, [r4]
@@ -1111,9 +1111,9 @@ _0800DF04:
 	movs r5, 0x1
 	str r5, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	adds r0, r4, 0
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	mov r0, r8
 	ldr r2, [r0, 0x38]
 	mov r0, r9
@@ -1134,9 +1134,9 @@ _0800DF04:
 	str r0, [sp]
 	str r5, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	adds r0, r4, 0
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	mov r5, r8
 	ldr r2, [r5, 0x44]
 	mov r0, r9

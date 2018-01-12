@@ -1,5 +1,3 @@
-RSFONT := tools/rsfont/rsfont
-
 graphics/fonts/font0_jpn.1bpp: graphics/fonts/font0_jpn.png
 	$(RSFONT) $< $@ 240 1
 

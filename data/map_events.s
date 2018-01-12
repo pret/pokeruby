@@ -5,7 +5,7 @@
 #include "constants/secret_bases.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata

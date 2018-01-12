@@ -89,8 +89,8 @@ void HideMapNamePopup(void)
 {
     if (FuncIsActiveTask(Task_MapNamePopup))
     {
-        MenuLoadTextWindowGraphics();
-        MenuZeroFillWindowRect(0, 0, 13, 3);
+        Menu_LoadStdFrameGraphics();
+        Menu_EraseWindowRect(0, 0, 13, 3);
         REG_BG0VOFS = 0;
         DestroyTask(sTaskId);
     }
@@ -100,8 +100,8 @@ void DrawMapNamePopup(void)
 {
     u8 name[20];
 
-    MenuLoadTextWindowGraphics_OverrideFrameType(0);
+    Menu_LoadStdFrameGraphicsOverrideStyle(0);
     GetMapSectionName(name, gMapHeader.regionMapSectionId, 0);
-    MenuDrawTextWindow(0, 0, 13, 3);
+    Menu_DrawStdWindowFrame(0, 0, 13, 3);
     sub_8072BD8(name, 1, 1, 0x60);
 }
