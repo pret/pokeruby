@@ -1,44 +1,44 @@
 ### Build Configuration ###
 
 # Default variables
-VERSION  ?= RUBY
-REVISION ?= 0
-LANGUAGE ?= ENGLISH
+GAME_VERSION  ?= RUBY
+GAME_REVISION ?= 0
+GAME_LANGUAGE ?= ENGLISH
 COMPARE  ?= 1
 
 # Version
-ifeq ($(VERSION), RUBY)
+ifeq ($(GAME_VERSION), RUBY)
   BUILD_NAME := ruby
 else
-ifeq ($(VERSION), SAPPHIRE)
+ifeq ($(GAME_VERSION), SAPPHIRE)
   BUILD_NAME := sapphire
 else
-  $(error unknown version $(VERSION))
+  $(error unknown version $(GAME_VERSION))
 endif
 endif
 
 # Revision
-ifeq ($(REVISION), 0)
+ifeq ($(GAME_REVISION), 0)
   BUILD_NAME := $(BUILD_NAME)
 else
-ifeq ($(REVISION), 1)
+ifeq ($(GAME_REVISION), 1)
   BUILD_NAME := $(BUILD_NAME)_rev1
 else
-ifeq ($(REVISION), 2)
+ifeq ($(GAME_REVISION), 2)
   BUILD_NAME := $(BUILD_NAME)_rev2
 else
-  $(error unknown revision $(REVISION))
+  $(error unknown revision $(GAME_REVISION))
 endif
 endif
 endif
 
 # Language
-ifeq ($(LANGUAGE), ENGLISH)
+ifeq ($(GAME_LANGUAGE), ENGLISH)
   BUILD_NAME := $(BUILD_NAME)
 else
-ifeq ($(LANGUAGE), GERMAN)
+ifeq ($(GAME_LANGUAGE), GERMAN)
   BUILD_NAME := $(BUILD_NAME)_de
 else
-  $(error unknown language $(LANGUAGE))
+  $(error unknown language $(GAME_LANGUAGE))
 endif
 endif
