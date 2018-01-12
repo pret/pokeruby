@@ -24,20 +24,6 @@ void sub_8099BE0(struct Sprite *sprite);
 
 const struct OamData gOamData_83B6F2C;
 
-const struct SpriteTemplate gSpriteTemplate_83B6F14 = {
-    0x000f,
-    0xdac0,
-    &gOamData_83B6F2C,
-    gDummySpriteAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
-};
-
-const struct OamData gOamData_83B6F2C = {
-    .size = 2
-};
-
 // .text
 
 u8 get_preferred_box(void)
@@ -495,21 +481,7 @@ bool8 sub_809971C(void)
     return TRUE;
 }
 
-const union AffineAnimCmd gSpriteAffineAnim_83B6F34[] = {
-    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd gSpriteAffineAnim_83B6F44[] = {
-    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
-    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[] = {
-    gSpriteAffineAnim_83B6F34,
-    gSpriteAffineAnim_83B6F44
-};
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[];
 
 void sub_809981C(u8 mode, u8 idx)
 {
@@ -580,3 +552,104 @@ void sub_80999C4(struct Sprite *sprite)
     sprite->pos1.x = gPokemonStorageSystemPtr->unk_11c0->pos1.x;
     sprite->pos1.y = gPokemonStorageSystemPtr->unk_11c0->pos1.y + gPokemonStorageSystemPtr->unk_11c0->pos2.y + 4;
 }
+
+u16 sub_80999E8(u16 a0)
+{
+    u16 i;
+    u16 retval;
+
+    for (i = 0; i < 40; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1120[i] == a0)
+            break;
+    }
+    if (i == 40)
+    {
+        for (i = 0; i < 40; i++)
+        {
+            if (gPokemonStorageSystemPtr->unk_1120[i] == 0)
+                break;
+        }
+    }
+    if (i != 40)
+    {
+        gPokemonStorageSystemPtr->unk_1120[i] = a0;
+        gPokemonStorageSystemPtr->unk_10d0[i]++;
+        retval = i * 16;
+        CpuCopy32(gMonIconTable[a0], BG_CHAR_ADDR(4) + 32 * retval, 0x200);
+        return retval;
+    }
+    return -1;
+}
+
+void sub_8099AAC(u16 a0)
+{
+    u16 i;
+
+    for (i = 0; i < 40; i++)
+    {
+        if (gPokemonStorageSystemPtr->unk_1120[i] == a0)
+        {
+            if (--gPokemonStorageSystemPtr->unk_10d0[i] == 0)
+                gPokemonStorageSystemPtr->unk_1120[i] = 0;
+            break;
+        }
+    }
+}
+
+struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 priority, u8 subpriority)
+{
+    struct SpriteTemplate template = {
+        0x000f,
+        0xdac0,
+        &gOamData_83B6F2C,
+        gDummySpriteAnimTable,
+        NULL,
+        gDummySpriteAffineAnimTable,
+        SpriteCallbackDummy
+    };
+    u16 tileNum;
+    u8 spriteId;
+
+    species = mon_icon_convert_unown_species_id(species, personality);
+    template.paletteTag = 0xdac0 + gMonIconPaletteIndices[species];
+    tileNum = sub_80999E8(species);
+    if (tileNum == 0xFFFF)
+        return NULL;
+    spriteId = CreateSprite(&template, x, y, subpriority);
+    if (spriteId == MAX_SPRITES)
+    {
+        sub_8099AAC(species);
+        return NULL;
+    }
+    gSprites[spriteId].oam.tileNum = tileNum;
+    gSprites[spriteId].oam.priority = priority;
+    gSprites[spriteId].data[0] = species;
+    return gSprites + spriteId;
+}
+
+void sub_8099BE0(struct Sprite *sprite)
+{
+    sub_8099AAC(sprite->data[0]);
+    DestroySprite(sprite);
+}
+
+const struct OamData gOamData_83B6F2C = {
+    .size = 2
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F34[] = {
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F44[] = {
+    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[] = {
+    gSpriteAffineAnim_83B6F34,
+    gSpriteAffineAnim_83B6F44
+};
