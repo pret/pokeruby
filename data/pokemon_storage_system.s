@@ -4,22 +4,6 @@
 	.section .rodata
 
 	.align 2
-gSpriteAffineAnim_83B6F34:: @ 83B6F34
-	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 120
-	obj_rot_scal_anim_end
-
-	.align 2
-gSpriteAffineAnim_83B6F44:: @ 83B6F44
-	obj_rot_scal_anim_frame 0x10, 0x10, 0, 0
-	obj_rot_scal_anim_frame 0x10, 0x10, 0, 15
-	obj_rot_scal_anim_end
-
-	.align 2
-gSpriteAffineAnimTable_83B6F5C:: @ 83B6F5C
-	.4byte gSpriteAffineAnim_83B6F34
-	.4byte gSpriteAffineAnim_83B6F44
-
-	.align 2
 gWallpaperPalettes_Forest: @ 83B6F64
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/forest_frame.gbapal"

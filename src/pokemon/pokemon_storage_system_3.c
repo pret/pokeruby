@@ -494,3 +494,89 @@ bool8 sub_809971C(void)
     }
     return TRUE;
 }
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F34[] = {
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F44[] = {
+    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[] = {
+    gSpriteAffineAnim_83B6F34,
+    gSpriteAffineAnim_83B6F44
+};
+
+void sub_809981C(u8 mode, u8 idx)
+{
+    switch (mode)
+    {
+        case 0:
+            gPokemonStorageSystemPtr->unk_10cc = gPokemonStorageSystemPtr->unk_1038 + idx;
+            break;
+        case 1:
+            gPokemonStorageSystemPtr->unk_10cc = gPokemonStorageSystemPtr->unk_1050 + idx;
+            break;
+        case 2:
+            gPokemonStorageSystemPtr->unk_10cc = &gPokemonStorageSystemPtr->unk_1034;
+            break;
+        default:
+            return;
+    }
+    if (*gPokemonStorageSystemPtr->unk_10cc)
+    {
+        InitSpriteAffineAnim(*gPokemonStorageSystemPtr->unk_10cc);
+        (*gPokemonStorageSystemPtr->unk_10cc)->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+        (*gPokemonStorageSystemPtr->unk_10cc)->affineAnims = gSpriteAffineAnimTable_83B6F5C;
+        StartSpriteAffineAnim(*gPokemonStorageSystemPtr->unk_10cc, 0);
+    }
+}
+
+bool8 sub_80998D8(void)
+{
+    if (*gPokemonStorageSystemPtr->unk_10cc == NULL || (*gPokemonStorageSystemPtr->unk_10cc)->invisible)
+        return FALSE;
+    if ((*gPokemonStorageSystemPtr->unk_10cc)->affineAnimEnded)
+    {
+        (*gPokemonStorageSystemPtr->unk_10cc)->invisible = TRUE;
+    }
+    return TRUE;
+}
+
+void sub_8099920(void)
+{
+    if (*gPokemonStorageSystemPtr->unk_10cc)
+    {
+        FreeOamMatrix((*gPokemonStorageSystemPtr->unk_10cc)->oam.matrixNum);
+        sub_8099BE0(*gPokemonStorageSystemPtr->unk_10cc);
+        *gPokemonStorageSystemPtr->unk_10cc = NULL;
+    }
+}
+
+void sub_8099958(void)
+{
+    if (*gPokemonStorageSystemPtr->unk_10cc)
+    {
+        (*gPokemonStorageSystemPtr->unk_10cc)->invisible = FALSE;
+        StartSpriteAffineAnim(*gPokemonStorageSystemPtr->unk_10cc, 1);
+    }
+}
+
+bool8 sub_8099990(void)
+{
+    if (gPokemonStorageSystemPtr->unk_10cc == NULL)
+        return FALSE;
+    if ((*gPokemonStorageSystemPtr->unk_10cc)->affineAnimEnded)
+        gPokemonStorageSystemPtr->unk_10cc = NULL;
+    return TRUE;
+}
+
+void sub_80999C4(struct Sprite *sprite)
+{
+    sprite->pos1.x = gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+    sprite->pos1.y = gPokemonStorageSystemPtr->unk_11c0->pos1.y + gPokemonStorageSystemPtr->unk_11c0->pos2.y + 4;
+}
