@@ -67,6 +67,23 @@ struct ContestPokemon
     /*0x3C*/ u32 otId;  // otId
 }; // wow
 
+struct ContestAIInfo {
+ /*0x00*/ u8 aiState;
+ /*0x01*/ u8 filler1[1]; // padding?
+ /*0x02*/ u16 unk2;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5[4];
+ /*0x09*/ u8 aiAction;
+ /*0x0A*/ u8 fillerA[0x6];
+ /*0x10*/ u8 unk10;
+ /*0x11*/ u8 filler11[0x3]; // padding?
+ /*0x14*/ u32 flags;
+ /*0x18*/ u8 filler18[0x28];
+ /*0x40*/ u8 unk40;
+ /*0x41*/ u8 unk41;
+ /*0x42*/ u8 filler42[0x2]; // padding?
+};
+
 extern struct ContestPokemon gContestMons[];
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
@@ -248,7 +265,6 @@ struct UnknownContestStruct6
 #define shared18004 ((u16 *)(gSharedMem + 0x18004))
 #define sContest (*(struct Contest *)(gSharedMem + 0x19204))
 #define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
-#define shared192D0 (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
 #define shared192E4 (gSharedMem + 0x192E4)
 #define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))

@@ -36,8 +36,8 @@ extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
-extern void sub_81288F4();
-extern u8 sub_8128944(void);
+extern void ContestAI_ResetAI();
+extern u8 ContestAI_GetActionToUse(void);
 
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern u16 gSpecialVar_ContestCategory;
@@ -391,7 +391,7 @@ void ClearContestVars(void)
     }
 
     memset(&shared192D0, 0, sizeof(shared192D0));
-    memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
+    memset(eContestAI, 0, sizeof(struct ContestAIInfo));
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
     if (!(gIsLinkContest & 1))
@@ -2629,8 +2629,8 @@ u16 GetChosenMove(u8 a)
     {
         u8 moveChoice;
 
-        sub_81288F4(a);
-        moveChoice = sub_8128944();
+        ContestAI_ResetAI(a);
+        moveChoice = ContestAI_GetActionToUse();
         return gContestMons[a].moves[moveChoice];
     }
 }
