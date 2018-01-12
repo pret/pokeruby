@@ -550,6 +550,7 @@ SECTIONS {
         src/pokemon/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_storage_system_2.o(.rodata);
         src/pokemon/pokemon_storage_system_3.o(.rodata);
+        src/pokemon/pokemon_storage_system_4.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);

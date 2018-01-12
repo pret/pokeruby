@@ -101,7 +101,7 @@ struct PokemonStorageSystemData {
     u16 unk_08b4;
     u16 unk_08b6;
     u16 unk_08b8;
-    u8 unk_08ba;
+    bool8 unk_08ba;
     u8 unk_08bb;
     u16 unk_08bc;
     u16 unk_08be;
@@ -112,12 +112,13 @@ struct PokemonStorageSystemData {
     u16 unk_08c8;
     u8 unk_08ca[0x400];
     u8 unk_0cca;
-    u16 unk_0ccc[0x20];
+    u16 unk_0ccc[0x1e];
+    u32 unk_0d08;
     u8 filler_0d0c[0x50];
     u16 unk_0d5c;
     s16 unk_0d5e;
     s16 unk_0d60;
-    u8 unk_0d62[0x2d0];
+    u16 unk_0d62[360];
     u8 unk_1032;
     struct Sprite *unk_1034;
     struct Sprite *unk_1038[6]; // party
