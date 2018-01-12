@@ -19,9 +19,9 @@ PREPROC   := tools/preproc/preproc
 SCANINC   := tools/scaninc/scaninc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
-ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) --defsym $(LANGUAGE)=1
+ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(VERSION) -D REVISION=$(REVISION) -D $(LANGUAGE)
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE)
 
 
 #### Files ####
@@ -48,7 +48,7 @@ BUILD_DIR := build/$(BUILD_NAME)
 C_SOURCES    := $(foreach dir, $(SUBDIRS), $(wildcard $(dir)/*.c))
 ASM_SOURCES  := $(foreach dir, $(SUBDIRS), $(wildcard $(dir)/*.s))
 
-C_OBECTS     := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
+C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
@@ -73,7 +73,7 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_FILE = $(*D)/$(*F).c
-  $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(wildcard $(C_FILE:$(BUILD_DIR)/=)))
+  $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(C_FILE:$(BUILD_DIR)/=))
   $(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
   $(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
 endif
@@ -109,16 +109,16 @@ tidy:
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ ../../$(LIBGCC) ../../$(LIBC)
 
-$(LD_SCRIPT): $(BUILD_DIR)/sym_bss.ld $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld
+$(LD_SCRIPT): $(BUILD_DIR)/sym_bss.ld $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld ld_script.txt
 	cd $(BUILD_DIR) && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" >ld_script.ld
 $(BUILD_DIR)/sym_bss.ld: sym_bss.txt
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) .bss ../../sym_bss.txt $(LANGUAGE) >sym_bss.ld
-$(BUILD_DIR)/sym_common.ld: sym_common.txt $(C_OBECTS) $(wildcard common_syms/*.txt)
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) COMMON ../../sym_common.txt $(LANGUAGE) -c src,../../common_syms >sym_common.ld
+	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) .bss ../../sym_bss.txt $(GAME_LANGUAGE) >sym_bss.ld
+$(BUILD_DIR)/sym_common.ld: sym_common.txt $(C_OBJECTS) $(wildcard common_syms/*.txt)
+	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) COMMON ../../sym_common.txt $(GAME_LANGUAGE) -c src,../../common_syms >sym_common.ld
 $(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $(LANGUAGE) >sym_ewram.ld
+	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $(GAME_LANGUAGE) >sym_ewram.ld
 
-$(BUILD_DIR)/%.o: %.c $$(C_DEP)
+$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
 	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
@@ -132,14 +132,14 @@ $(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
 	$(AS) $(ASFLAGS) $< -o $@
 
 # "friendly" target names for convenience sake
-ruby:          ; @$(MAKE) --no-print-directory VERSION=RUBY
-ruby_rev1:     ; @$(MAKE) --no-print-directory VERSION=RUBY REVISION=1
-ruby_rev2:     ; @$(MAKE) --no-print-directory VERSION=RUBY REVISION=2
-sapphire:      ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE
-sapphire_rev1: ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE REVISION=1
-sapphire_rev2: ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE REVISION=2
-ruby_de:       ; @$(MAKE) --no-print-directory VERSION=RUBY LANGUAGE=GERMAN
-sapphire_de:   ; @$(MAKE) --no-print-directory VERSION=SAPPHIRE LANGUAGE=GERMAN
+ruby:          ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY
+ruby_rev1:     ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY GAME_REVISION=1
+ruby_rev2:     ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY GAME_REVISION=2
+sapphire:      ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE
+sapphire_rev1: ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_REVISION=1
+sapphire_rev2: ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_REVISION=2
+ruby_de:       ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
+sapphire_de:   ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 
 
 #### Graphics Rules ####
