@@ -99,11 +99,26 @@ struct PokemonStorageSystemData {
     bool8 unk_08b1;
     s16 unk_08b2;
     u16 unk_08b4;
-    u8 filler_08b6[0x4a6];
+    u16 unk_08b6;
+    u16 unk_08b8;
+    u8 unk_08ba;
+    u8 unk_08bb;
+    u16 unk_08bc;
+    u16 unk_08be;
+    u16 unk_08c0;
+    u16 unk_08c2;
+    u16 unk_08c4;
+    u16 unk_08c6;
+    u16 unk_08c8;
+    u8 unk_08ca[0x400];
+    u8 unk_0cca;
+    u16 unk_0ccc[0x20];
+    u8 filler_0d0c[0x50];
     u16 unk_0d5c;
     s16 unk_0d5e;
     s16 unk_0d60;
-    u8 filler_0d62[0x2d2];
+    u8 unk_0d62[0x2d0];
+    u8 unk_1032;
     struct Sprite *unk_1034;
     struct Sprite *unk_1038[6]; // party
     struct Sprite *unk_1050[30]; // box
@@ -177,6 +192,9 @@ void sub_80961A8(void);
 void task_intro_29(u8 whichMenu);
 void ResetPokemonStorageSystem(void);
 void ResetPSSMonIconSprites(void);
+void SpawnBoxIconSprites(u8 boxId);
+u8 get_preferred_box(void);
+bool8 sub_80990AC(void);
 void sub_8099200(bool8 a0);
 void sub_8099310(void);
 bool8 sub_8099374(void);
