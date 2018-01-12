@@ -28,9 +28,9 @@ struct TrainerCard {
     /*0x30*/ u8 playerName[8];
 };
 
-void sub_8093110(void (*)(void));
-void sub_8093130(u8, void (*)(void));
-void sub_8093390(struct TrainerCard *);
+void TrainerCard_ShowPlayerCard(void (*)(void));
+void TrainerCard_ShowLinkCard(u8, void (*)(void));
+void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
 u8 sub_80934C4(u8 id);
 
 extern struct TrainerCard gTrainerCards[4];
