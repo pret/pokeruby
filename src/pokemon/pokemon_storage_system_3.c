@@ -13,12 +13,12 @@
 
 // Static ROM declarations
 
-void sub_8098E68(struct Sprite *sprite);
-void sub_8099388(struct Sprite *sprite, u16 a1);
-void sub_80993F4(struct Sprite *sprite);
-void sub_80999C4(struct Sprite *sprite);
-struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 a2, s16 a3, u8 a4, u8 a5);
-void sub_8099BE0(struct Sprite *sprite);
+static void sub_8098E68(struct Sprite *sprite);
+static void sub_8099388(struct Sprite *sprite, u16 a1);
+static void sub_80993F4(struct Sprite *sprite);
+static void sub_80999C4(struct Sprite *sprite);
+static struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 priority, u8 subpriority);
+static void PSS_DestroyMonIconSprite(struct Sprite *sprite);
 
 // .rodata
 
@@ -88,7 +88,7 @@ void sub_8098D20(u8 monId)
     }
 }
 
-void sub_8098DE0(s16 a0)
+static void sub_8098DE0(s16 a0)
 {
     u16 monId;
     for (monId = 0; monId < 30; monId++)
@@ -102,7 +102,7 @@ void sub_8098DE0(s16 a0)
     }
 }
 
-void sub_8098E24(struct Sprite *sprite)
+static void sub_8098E24(struct Sprite *sprite)
 {
     if (sprite->data[1] != 0)
     {
@@ -117,7 +117,7 @@ void sub_8098E24(struct Sprite *sprite)
     }
 }
 
-void sub_8098E68(struct Sprite *sprite)
+static void sub_8098E68(struct Sprite *sprite)
 {
     if (sprite->data[4] != 0)
     {
@@ -132,7 +132,7 @@ void sub_8098E68(struct Sprite *sprite)
     }
 }
 
-void sub_8098EA0(u8 col)
+static void sub_8098EA0(u8 col)
 {
     u16 i;
 
@@ -140,44 +140,44 @@ void sub_8098EA0(u8 col)
     {
         if (gPokemonStorageSystemPtr->unk_1050[col])
         {
-            sub_8099BE0(gPokemonStorageSystemPtr->unk_1050[col]);
+            PSS_DestroyMonIconSprite(gPokemonStorageSystemPtr->unk_1050[col]);
             gPokemonStorageSystemPtr->unk_1050[col] = NULL;
         }
         col += 6;
     }
 }
 
-u8 sub_8098EE0(u8 a0, u16 a1, s16 a2)
+static u8 sub_8098EE0(u8 col, u16 a1, s16 a2)
 {
     u16 i;
     u16 x;
     u16 y;
     u8 count;
     u8 x1;
-    u16 sp1c;
+    u16 curX;
 
     y = 0x2c;
-    x = 24 * a0 + 0x64;
-    sp1c = x - (a1 + 1) * a2;
-    x1 = 18 - a0;
+    x = 24 * col + 0x64;
+    curX = x - (a1 + 1) * a2;
+    x1 = 18 - col;
     count = 0;
 
     for (i = 0; i < 5; i++)
     {
-        u16 species = GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + a0, MON_DATA_SPECIES2);
+        u16 species = GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + col, MON_DATA_SPECIES2);
         if (species != SPECIES_NONE)
         {
-            gPokemonStorageSystemPtr->unk_1050[a0] = PSS_SpawnMonIconSprite(species, GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + a0, MON_DATA_PERSONALITY), sp1c, y, 2, x1);
-            if (gPokemonStorageSystemPtr->unk_1050[a0])
+            gPokemonStorageSystemPtr->unk_1050[col] = PSS_SpawnMonIconSprite(species, GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_117d] + col, MON_DATA_PERSONALITY), curX, y, 2, x1);
+            if (gPokemonStorageSystemPtr->unk_1050[col])
             {
-                gPokemonStorageSystemPtr->unk_1050[a0]->data[1] = a1;
-                gPokemonStorageSystemPtr->unk_1050[a0]->data[2] = a2;
-                gPokemonStorageSystemPtr->unk_1050[a0]->data[3] = x;
-                gPokemonStorageSystemPtr->unk_1050[a0]->callback = sub_8098E24;
+                gPokemonStorageSystemPtr->unk_1050[col]->data[1] = a1;
+                gPokemonStorageSystemPtr->unk_1050[col]->data[2] = a2;
+                gPokemonStorageSystemPtr->unk_1050[col]->data[3] = x;
+                gPokemonStorageSystemPtr->unk_1050[col]->callback = sub_8098E24;
                 count++;
             }
         }
-        a0 += 6;
+        col += 6;
         y += 24;
     }
     return count;
@@ -299,7 +299,7 @@ u8 sub_8099374(void)
     return gPokemonStorageSystemPtr->unk_1171;
 }
 
-void sub_8099388(struct Sprite *sprite, u16 a1)
+static void sub_8099388(struct Sprite *sprite, u16 a1)
 {
     s16 r3;
     s16 r4;
@@ -323,7 +323,7 @@ void sub_8099388(struct Sprite *sprite, u16 a1)
     sprite->callback = sub_80993F4;
 }
 
-void sub_80993F4(struct Sprite *sprite)
+static void sub_80993F4(struct Sprite *sprite)
 {
     if (sprite->data[6])
     {
@@ -355,7 +355,7 @@ void sub_8099480(void)
 {
     if (gPokemonStorageSystemPtr->unk_1034)
     {
-        sub_8099BE0(gPokemonStorageSystemPtr->unk_1034);
+        PSS_DestroyMonIconSprite(gPokemonStorageSystemPtr->unk_1034);
         gPokemonStorageSystemPtr->unk_1034 = NULL;
     }
 }
@@ -383,7 +383,7 @@ void sub_8099520(u8 a0)
 {
     if (gPokemonStorageSystemPtr->unk_1038[a0])
     {
-        sub_8099BE0(gPokemonStorageSystemPtr->unk_1038[a0]);
+        PSS_DestroyMonIconSprite(gPokemonStorageSystemPtr->unk_1038[a0]);
         gPokemonStorageSystemPtr->unk_1038[a0] = NULL;
     }
 }
@@ -396,7 +396,7 @@ void sub_809954C(void)
     {
         if (gPokemonStorageSystemPtr->unk_1038[i])
         {
-            sub_8099BE0(gPokemonStorageSystemPtr->unk_1038[i]);
+            PSS_DestroyMonIconSprite(gPokemonStorageSystemPtr->unk_1038[i]);
             gPokemonStorageSystemPtr->unk_1038[i] = NULL;
         }
     }
@@ -524,7 +524,7 @@ void sub_8099920(void)
     if (*gPokemonStorageSystemPtr->unk_10cc)
     {
         FreeOamMatrix((*gPokemonStorageSystemPtr->unk_10cc)->oam.matrixNum);
-        sub_8099BE0(*gPokemonStorageSystemPtr->unk_10cc);
+        PSS_DestroyMonIconSprite(*gPokemonStorageSystemPtr->unk_10cc);
         *gPokemonStorageSystemPtr->unk_10cc = NULL;
     }
 }
@@ -547,13 +547,13 @@ bool8 sub_8099990(void)
     return TRUE;
 }
 
-void sub_80999C4(struct Sprite *sprite)
+static void sub_80999C4(struct Sprite *sprite)
 {
     sprite->pos1.x = gPokemonStorageSystemPtr->unk_11c0->pos1.x;
     sprite->pos1.y = gPokemonStorageSystemPtr->unk_11c0->pos1.y + gPokemonStorageSystemPtr->unk_11c0->pos2.y + 4;
 }
 
-u16 sub_80999E8(u16 a0)
+static u16 PSS_LoadSpeciesIconGfx(u16 a0)
 {
     u16 i;
     u16 retval;
@@ -579,10 +579,10 @@ u16 sub_80999E8(u16 a0)
         CpuCopy32(gMonIconTable[a0], BG_CHAR_ADDR(4) + 32 * retval, 0x200);
         return retval;
     }
-    return -1;
+    return 0xFFFF;
 }
 
-void sub_8099AAC(u16 a0)
+static void PSS_ForgetSpeciesIcon(u16 a0)
 {
     u16 i;
 
@@ -597,7 +597,7 @@ void sub_8099AAC(u16 a0)
     }
 }
 
-struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 priority, u8 subpriority)
+static struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 priority, u8 subpriority)
 {
     struct SpriteTemplate template = {
         0x000f,
@@ -613,13 +613,13 @@ struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y
 
     species = mon_icon_convert_unown_species_id(species, personality);
     template.paletteTag = 0xdac0 + gMonIconPaletteIndices[species];
-    tileNum = sub_80999E8(species);
+    tileNum = PSS_LoadSpeciesIconGfx(species);
     if (tileNum == 0xFFFF)
         return NULL;
     spriteId = CreateSprite(&template, x, y, subpriority);
     if (spriteId == MAX_SPRITES)
     {
-        sub_8099AAC(species);
+        PSS_ForgetSpeciesIcon(species);
         return NULL;
     }
     gSprites[spriteId].oam.tileNum = tileNum;
@@ -628,9 +628,9 @@ struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y
     return gSprites + spriteId;
 }
 
-void sub_8099BE0(struct Sprite *sprite)
+static void PSS_DestroyMonIconSprite(struct Sprite *sprite)
 {
-    sub_8099AAC(sprite->data[0]);
+    PSS_ForgetSpeciesIcon(sprite->data[0]);
     DestroySprite(sprite);
 }
 

@@ -872,7 +872,7 @@ void sub_809746C(void)
             gPokemonStorageSystemPtr->unk_0004++;
             break;
         case 3:
-            if (!sub_8099374())
+            if (sub_8099374() == 0)
             {
                 sub_809B6BC();
                 BoxSetMosaic();
@@ -965,7 +965,7 @@ void sub_8097594(void)
             }
             break;
         case 6:
-            if (!sub_8099374())
+            if (sub_8099374() == 0)
             {
                 sub_809B440();
                 BoxSetMosaic();
@@ -1073,7 +1073,7 @@ void sub_8097858(void)
             gPokemonStorageSystemPtr->unk_0004++;
             break;
         case 1:
-            if (!sub_8099374())
+            if (sub_8099374() == 0)
             {
                 sub_80987DC();
                 SetPSSCallback(sub_8096C84);
