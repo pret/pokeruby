@@ -39,3 +39,4 @@
 	.include "src/libs/siirtc.o"
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
+	.include "tools/agbcc/lib/libc.a:syscalls.o"
