@@ -88,8 +88,7 @@ extern u8 gBattleCommunication[];
 extern const u8 BattleText_StartEvo[];
 extern const u8 BattleText_FinishEvo[];
 extern const u8 BattleText_StopEvo[];
-extern void * const gUnknown_081FAF4C[];
-extern const u8* const gBattleStringsTable[];
+extern const u8 *const gBattleStringsTable[];
 
 // this file's functions
 static void Task_EvolutionScene(u8 taskID);
