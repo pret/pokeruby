@@ -47,7 +47,7 @@ extern u8 sub_8079E90();
 extern void sub_80313A0(struct Sprite *);
 extern void sub_810BADC(void);
 extern void sub_8045A5C();
-extern void sub_80E43C0();
+extern void StartBattleIntroAnim();
 extern void sub_804777C();
 extern void sub_8043DFC();
 extern bool8 move_anim_start_t3();
@@ -641,7 +641,7 @@ void SafariHandleFaintingCry(void)
 
 void SafariHandleIntroSlide(void)
 {
-    sub_80E43C0(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     SafariBufferExecCompleted();
 }

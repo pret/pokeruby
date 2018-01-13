@@ -98,7 +98,7 @@ extern void move_anim_start_t2_for_situation();
 extern void bx_blink_t1(void);
 extern void sub_8047858();
 extern u8 GetBankSide(u8);
-extern void sub_80E43C0();
+extern void StartBattleIntroAnim();
 extern void oamt_add_pos2_onto_pos1();
 extern void sub_8078B34(struct Sprite *);
 extern void StoreSpriteCallbackInData();
@@ -2875,7 +2875,7 @@ void PlayerHandleFaintingCry(void)
 
 void PlayerHandleIntroSlide(void)
 {
-    sub_80E43C0(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     PlayerBufferExecCompleted();
 }

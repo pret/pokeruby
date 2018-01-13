@@ -22,53 +22,57 @@ extern u8 gBattleMonForms[];
 
 extern void sub_800FE20(struct Sprite *);
 
-static void task_battle_intro_80BC47C(u8);
-static void task00_battle_intro_80BC6C8(u8);
-static void task_battle_intro_anim(u8);
-static void sub_80E4C34(u8);
+static void BattleIntroTask_ScrollScenery(u8);
+static void BattleIntroTask_FadeScenery(u8);
+static void BattleIntroTask_ScrollAndFadeScenery(u8);
+static void BattleIntroTask_80E4C34(u8);
 
-static const TaskFunc gUnknown_083DB56C[] =
+static const TaskFunc sBattleIntroTaskFuncs[] =
 {
-    task_battle_intro_80BC47C,
-    task_battle_intro_80BC47C,
-    task00_battle_intro_80BC6C8,
-    task00_battle_intro_80BC6C8,
-    task00_battle_intro_80BC6C8,
-    task_battle_intro_80BC47C,
-    task_battle_intro_80BC47C,
-    task_battle_intro_80BC47C,
-    task_battle_intro_anim,
-    task_battle_intro_anim,
+    BattleIntroTask_ScrollScenery,
+    BattleIntroTask_ScrollScenery,
+    BattleIntroTask_FadeScenery,
+    BattleIntroTask_FadeScenery,
+    BattleIntroTask_FadeScenery,
+    BattleIntroTask_ScrollScenery,
+    BattleIntroTask_ScrollScenery,
+    BattleIntroTask_ScrollScenery,
+    BattleIntroTask_ScrollAndFadeScenery,
+    BattleIntroTask_ScrollAndFadeScenery,
 };
 
-void sub_80E43C0(u8 a)
+#define tState data[0]
+#define tBgXOffset data[2]
+#define tFramesUntilBg1Slide data[3]
+
+void StartBattleIntroAnim(u8 a)
 {
     u8 taskId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        taskId = CreateTask(sub_80E4C34, 0);
+        taskId = CreateTask(BattleIntroTask_80E4C34, 0);
     }
     else if ((gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON) && gGameVersion != VERSION_RUBY)
     {
         a = 3;
-        taskId = CreateTask(task00_battle_intro_80BC6C8, 0);
+        taskId = CreateTask(BattleIntroTask_FadeScenery, 0);
     }
     else
     {
-        taskId = CreateTask(gUnknown_083DB56C[a], 0);
+        taskId = CreateTask(sBattleIntroTaskFuncs[a], 0);
     }
 
-    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].tState = 0;
     gTasks[taskId].data[1] = a;
-    gTasks[taskId].data[2] = 0;
-    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].tBgXOffset = 0;
+    gTasks[taskId].tFramesUntilBg1Slide = 0;
     gTasks[taskId].data[4] = 0;
     gTasks[taskId].data[5] = 0;
     gTasks[taskId].data[6] = 0;
 }
 
-static void sub_80E443C(u8 taskId)
+static void EndBattleIntroTask(u8 taskId)
 {
     DestroyTask(taskId);
     gBattle_BG1_X = 0;
@@ -78,93 +82,98 @@ static void sub_80E443C(u8 taskId)
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
     REG_BLDY = 0;
-    REG_WININ = WIN_RANGE(63, 63);
-    REG_WINOUT = WIN_RANGE(63, 63);
+    REG_WININ = 0x3F3F;
+    REG_WINOUT = 0x3F3F;
 }
 
-static void task_battle_intro_80BC47C(u8 taskId)
+static void BattleIntroTask_ScrollScenery(u8 taskId)
 {
     s32 i;
 
     gBattle_BG1_X += 6;
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 16;
+            gTasks[taskId].tState++;
         }
         else
         {
-            gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 1;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
-        gTasks[taskId].data[2]--;
-        if (gTasks[taskId].data[2] == 0)
+        gTasks[taskId].tBgXOffset--;
+        if (gTasks[taskId].tBgXOffset == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             REG_WININ = 0x3F;
         }
         break;
     case 2:
-        gBattle_WIN0V -= 255;
+        // Open up the window
+        gBattle_WIN0V -= WIN_RANGE(1, 0);  // decrement min Y
+        gBattle_WIN0V += WIN_RANGE(0, 1);  // increment max Y
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
-            gTasks[taskId].data[2] = DISPLAY_WIDTH;
-            gTasks[taskId].data[3] = 32;
+            gTasks[taskId].tState++;
+            gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
+            gTasks[taskId].tFramesUntilBg1Slide = 32;
             gUnknown_02024DE8 &= ~1;
         }
         break;
     case 3:
-        if (gTasks[taskId].data[3] != 0)
+        if (gTasks[taskId].tFramesUntilBg1Slide != 0)
         {
-            gTasks[taskId].data[3]--;
-        }
-        else if (gTasks[taskId].data[1] == 1)
-        {
-            if (gBattle_BG1_Y != 0xFFB0)
-                gBattle_BG1_Y -= 2;
+            gTasks[taskId].tFramesUntilBg1Slide--;
         }
         else
         {
-            if (gBattle_BG1_Y != 0xFFC8)
-                gBattle_BG1_Y -= 1;
+            if (gTasks[taskId].data[1] == 1)
+            {
+                if (gBattle_BG1_Y != 0xFFB0)
+                    gBattle_BG1_Y -= 2;
+            }
+            else
+            {
+                if (gBattle_BG1_Y != 0xFFC8)
+                    gBattle_BG1_Y -= 1;
+            }
         }
 
         if ((gBattle_WIN0V & 0xFF00) != 0)
             gBattle_WIN0V -= 1020;
 
-        if (gTasks[taskId].data[2] != 0)
-            gTasks[taskId].data[2] -= 2;
+        if (gTasks[taskId].tBgXOffset != 0)
+            gTasks[taskId].tBgXOffset -= 2;
 
-        // Set the x offset for the the top half of the screen.
+        // Slide in the top half of the BG from the left
         for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-        // Set the x offset for the bottom half of the screen.
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].tBgXOffset;
+        // Slide in the bottom half of the BG from the right
         for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].tBgXOffset;
 
-        if (gTasks[taskId].data[2] == 0)
+        if (gTasks[taskId].tBgXOffset == 0)
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)(VRAM + 0xE000), 0x800);
             REG_BG1CNT = 0x9C00;
             REG_BG2CNT = 0x5E00;
         }
         break;
     case 4:
-        sub_80E443C(taskId);
+        EndBattleIntroTask(taskId);
         break;
     }
 }
 
-static void task00_battle_intro_80BC6C8(u8 taskId)
+static void BattleIntroTask_FadeScenery(u8 taskId)
 {
     s32 i;
 
@@ -190,45 +199,47 @@ static void task00_battle_intro_80BC6C8(u8 taskId)
             gTasks[taskId].data[6] = 0;
     }
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         gTasks[taskId].data[4] = 16;
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 16;
+            gTasks[taskId].tState++;
         }
         else
         {
-            gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 1;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
-        gTasks[taskId].data[2]--;
-        if (gTasks[taskId].data[2] == 0)
+        gTasks[taskId].tBgXOffset--;
+        if (gTasks[taskId].tBgXOffset == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             REG_WININ = 0x3F;
         }
         break;
     case 2:
-        gBattle_WIN0V -= 255;
+        // Open up window
+        gBattle_WIN0V -= WIN_RANGE(1, 0);  // decrement min Y
+        gBattle_WIN0V += WIN_RANGE(0, 1);  // increment max Y
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
-            gTasks[taskId].data[2] = 240;
-            gTasks[taskId].data[3] = 32;
+            gTasks[taskId].tState++;
+            gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
+            gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
             gUnknown_02024DE8 &= ~1;
         }
         break;
     case 3:
-        if (gTasks[taskId].data[3] != 0)
+        if (gTasks[taskId].tFramesUntilBg1Slide != 0)
         {
-            gTasks[taskId].data[3]--;
-            if (gTasks[taskId].data[3] == 0)
+            gTasks[taskId].tFramesUntilBg1Slide--;
+            if (gTasks[taskId].tFramesUntilBg1Slide == 0)
             {
                 REG_BLDCNT = 0x1842;
                 REG_BLDALPHA = 0xF;
@@ -247,41 +258,41 @@ static void task00_battle_intro_80BC6C8(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) != 0)
             gBattle_WIN0V -= 1020;
 
-        if (gTasks[taskId].data[2] != 0)
-            gTasks[taskId].data[2] -= 2;
+        if (gTasks[taskId].tBgXOffset != 0)
+            gTasks[taskId].tBgXOffset -= 2;
 
-        // Set the x offset for the the top half of the screen.
+        // Slide in the top half of the BG from the left
         for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-        // Set the x offset for the bottom half of the screen.
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].tBgXOffset;
+        // Slide in the bottom half of the BG from the right
         for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].tBgXOffset;
 
-        if (gTasks[taskId].data[2] == 0)
+        if (gTasks[taskId].tBgXOffset == 0)
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)(VRAM + 0xE000), 0x800);
             REG_BG1CNT = 0x9C00;
             REG_BG2CNT = 0x5E00;
         }
         break;
     case 4:
-        sub_80E443C(taskId);
+        EndBattleIntroTask(taskId);
         break;
     }
 
-    if (gTasks[taskId].data[0] != 4)
+    if (gTasks[taskId].tState != 4)
         REG_BLDALPHA = gTasks[taskId].data[4];
 }
 
-static void task_battle_intro_anim(u8 taskId)
+static void BattleIntroTask_ScrollAndFadeScenery(u8 taskId)
 {
     s32 i;
 
     gBattle_BG1_X += 8;
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
         REG_BLDCNT = 0x1842;
@@ -290,81 +301,87 @@ static void task_battle_intro_anim(u8 taskId)
         gTasks[taskId].data[4] = 0x0808;
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            gTasks[taskId].data[2] = 16;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 16;
+            gTasks[taskId].tState++;
         }
         else
         {
-            gTasks[taskId].data[2] = 1;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tBgXOffset = 1;
+            gTasks[taskId].tState++;
         }
         break;
     case 1:
-        gTasks[taskId].data[2]--;
-        if (gTasks[taskId].data[2] == 0)
+        gTasks[taskId].tBgXOffset--;
+        if (gTasks[taskId].tBgXOffset == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             REG_WININ = 0x3F;
         }
         break;
     case 2:
-        gBattle_WIN0V -= 255;
+        // Open up window
+        gBattle_WIN0V -= WIN_RANGE(1, 0);  // decrement min Y
+        gBattle_WIN0V += WIN_RANGE(0, 1);  // increment max Y
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
-            gTasks[taskId].data[2] = 240;
-            gTasks[taskId].data[3] = 32;
+            gTasks[taskId].tState++;
+            gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
+            gTasks[taskId].tFramesUntilBg1Slide = 32;
             gTasks[taskId].data[5] = 1;
             gUnknown_02024DE8 &= ~1;
         }
         break;
     case 3:
-       if (gTasks[taskId].data[3] != 0)
+        if (gTasks[taskId].tFramesUntilBg1Slide != 0)
         {
-            gTasks[taskId].data[3]--;
+            gTasks[taskId].tFramesUntilBg1Slide--;
         }
-        else if ((gTasks[taskId].data[4] & 0xF) && --gTasks[taskId].data[5] == 0)
+        else
         {
-            gTasks[taskId].data[4] += 255;
-            gTasks[taskId].data[5] = 6;
+            if ((gTasks[taskId].data[4] & 0xF) && --gTasks[taskId].data[5] == 0)
+            {
+                gTasks[taskId].data[4] += 255;
+                gTasks[taskId].data[5] = 6;
+            }
         }
 
         if ((gBattle_WIN0V & 0xFF00) != 0)
             gBattle_WIN0V -= 1020;
 
-        if (gTasks[taskId].data[2] != 0)
-            gTasks[taskId].data[2] -= 2;
+        if (gTasks[taskId].tBgXOffset != 0)
+            gTasks[taskId].tBgXOffset -= 2;
 
-        // Set the x offset for the the top half of the screen.
+        // Slide in the top half of the BG from the left
         for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-        // Set the x offset for the bottom half of the screen.
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].tBgXOffset;
+        // Slide in the bottom half of the BG from the right
         for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].tBgXOffset;
 
-        if (gTasks[taskId].data[2] == 0)
+        if (gTasks[taskId].tBgXOffset == 0)
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             CpuFill32(0, (void *)(VRAM + 0xE000), 0x800);
             REG_BG1CNT = 0x9C00;
             REG_BG2CNT = 0x5E00;
         }
         break;
     case 4:
-        sub_80E443C(taskId);
+        EndBattleIntroTask(taskId);
         break;
     }
 
-    if (gTasks[taskId].data[0] != 4)
+    if (gTasks[taskId].tState != 4)
         REG_BLDALPHA = gTasks[taskId].data[4];
 }
 
-static void sub_80E4C34(u8 taskId)
+// Seems to only be used for link battles. 
+static void BattleIntroTask_80E4C34(u8 taskId)
 {
     s32 i;
 
-    if (gTasks[taskId].data[0] > 1 && gTasks[taskId].data[4] == 0)
+    if (gTasks[taskId].tState > 1 && gTasks[taskId].data[4] == 0)
     {
         if ((gBattle_BG1_X & 0x8000) || gBattle_BG1_X < 80)  // hmm...
         {
@@ -379,17 +396,17 @@ static void sub_80E4C34(u8 taskId)
         }
     }
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskId].tState)
     {
     case 0:
-        gTasks[taskId].data[2] = 16;
-        gTasks[taskId].data[0]++;
+        gTasks[taskId].tBgXOffset = 16;
+        gTasks[taskId].tState++;
         break;
     case 1:
-        gTasks[taskId].data[2]--;
-        if (gTasks[taskId].data[2] == 0)
+        gTasks[taskId].tBgXOffset--;
+        if (gTasks[taskId].tBgXOffset == 0)
         {
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             gSprites[ewram1608A].oam.objMode = 2;
             gSprites[ewram1608A].callback = sub_800FE20;
             gSprites[ewram1608B].oam.objMode = 2;
@@ -399,12 +416,14 @@ static void sub_80E4C34(u8 taskId)
         }
         break;
     case 2:
-        gBattle_WIN0V -= 255;
+        // Open up window
+        gBattle_WIN0V -= WIN_RANGE(1, 0);  // decrement min Y
+        gBattle_WIN0V += WIN_RANGE(0, 1);  // increment max Y
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
-            gTasks[taskId].data[0]++;
-            gTasks[taskId].data[2] = 240;
-            gTasks[taskId].data[3] = 32;
+            gTasks[taskId].tState++;
+            gTasks[taskId].tBgXOffset = DISPLAY_WIDTH;
+            gTasks[taskId].tFramesUntilBg1Slide = 32;
             gUnknown_02024DE8 &= ~1;
         }
         break;
@@ -412,26 +431,26 @@ static void sub_80E4C34(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) != 0)
             gBattle_WIN0V -= 1020;
 
-        if (gTasks[taskId].data[2] != 0)
-            gTasks[taskId].data[2] -= 2;
+        if (gTasks[taskId].tBgXOffset != 0)
+            gTasks[taskId].tBgXOffset -= 2;
 
-        // Set the x offset for the the top half of the screen.
+        // Slide in the top half of the BG from the left
         for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-        // Set the x offset for the bottom half of the screen.
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].tBgXOffset;
+        // Slide in the bottom half of the BG from the right
         for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].tBgXOffset;
 
-        if (gTasks[taskId].data[2] == 0)
+        if (gTasks[taskId].tBgXOffset == 0)
         {
             gScanlineEffect.state = 3;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].tState++;
             REG_BG1CNT = 0x9C00;
             REG_BG2CNT = 0x5E00;
         }
         break;
     case 4:
-        sub_80E443C(taskId);
+        EndBattleIntroTask(taskId);
         break;
     }
 }
