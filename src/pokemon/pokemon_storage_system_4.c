@@ -323,3 +323,353 @@ void sub_8099EB0(u8 boxId, s8 a1)
     sub_8099F58(BG_SCREEN_ADDR(26), gPokemonStorageSystemPtr->unk_0d62, a1, gPokemonStorageSystemPtr->unk_08ba);
     LZ77UnCompVram(wallpaperTable->tiles, BG_CHAR_ADDR(2) + (gPokemonStorageSystemPtr->unk_08ba << 13));
 }
+
+#ifdef NONMATCHING
+void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
+{
+    s16 r6;
+    s16 r3;
+    u16 sp0 = a3 << 8;
+    u16 sp4 = (a3 * 3 + 4) << 12;
+    u16 *r4;
+    u16 *r7;
+    u16 i;
+    u16 j;
+    s16 sp8 = ((gPokemonStorageSystemPtr->unk_08b4 >> 3) + 10 + a2 * 24) & 0x3f;
+    if (sp8 < 13)
+    {
+        r6 = 20;
+        r3 = 0;
+        r4 = vdest + sp8 + 0x40;
+        r7 = NULL;
+    }
+    else if (sp8 < 32)
+    {
+        r6 = 32 - sp8;
+        r3 = 20 - r6;
+        r4 = vdest + sp8 + 0x40;
+        r7 = vdest + 0x440;
+    }
+    else if (sp8 < 45)
+    {
+        r6 = 20;
+        r3 = 0;
+        r4 = vdest + sp8 + 0x420;
+        r7 = NULL;
+    }
+    else
+    {
+        r6 = 64 - sp8;
+        r3 = 20 - r6;
+        r4 = vdest + sp8 + 0x420;
+        r7 = vdest + 0x40;
+    }
+    for (i = 0; i < 18; i++)
+    {
+        for (j = 0; j < r6; j++)
+        {
+            u16 tile = ((*src & 0xfff) + sp0) | ((*src & 0xf000) + sp4);
+            r4[j] = tile;
+            src++;
+        }
+        for (j = 0; j < r3; j++)
+        {
+            u16 tile = ((*src & 0xfff) + sp0) | ((*src & 0xf000) + sp4);
+            r7[j] = tile;
+            src++;
+        }
+        r4 += 0x20;
+        r7 += 0x20;
+    }
+    if (a2)
+    {
+        s16 r4_2;
+        u16 *r2;
+        if (a2 > 0)
+            r4_2 = (sp8 + 20) & 0x3f;
+        else
+            r4_2 = (sp8 - 4) & 0x3f;
+        r2 = r4_2 < 0x20 ? vdest + r4_2 + 0x40 : vdest + r4_2 + 0x420;
+        for (i = 0; i < 4; i++)
+        {
+            for (j = 0; j < 18; j++)
+            {
+                *r2 = 0;
+                r2 += 0x20;
+            }
+            r4_2++;
+            r4_2 &= 0x3f;
+            r2 = r4_2 < 0x20 ? vdest + r4_2 + 0x40 : vdest + r4_2 + 0x420;
+        }
+    }
+}
+#else
+__attribute__((naked)) void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                    "\tmov r7, r10\n"
+                    "\tmov r6, r9\n"
+                    "\tmov r5, r8\n"
+                    "\tpush {r5-r7}\n"
+                    "\tsub sp, 0x20\n"
+                    "\tmov r9, r0\n"
+                    "\tadds r5, r1, 0\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsls r3, 24\n"
+                    "\tlsrs r3, 24\n"
+                    "\tlsls r0, r3, 8\n"
+                    "\tstr r0, [sp]\n"
+                    "\tlsls r0, r3, 1\n"
+                    "\tadds r0, r3\n"
+                    "\tadds r0, 0x4\n"
+                    "\tlsls r0, 28\n"
+                    "\tlsrs r0, 16\n"
+                    "\tstr r0, [sp, 0x4]\n"
+                    "\tldr r0, _08099FB8 @ =gPokemonStorageSystemPtr\n"
+                    "\tldr r0, [r0]\n"
+                    "\tldr r1, _08099FBC @ =0x000008b4\n"
+                    "\tadds r0, r1\n"
+                    "\tldrh r1, [r0]\n"
+                    "\tlsrs r1, 3\n"
+                    "\tadds r1, 0xA\n"
+                    "\tlsrs r0, r2, 24\n"
+                    "\tmov r8, r0\n"
+                    "\tasrs r2, 24\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tadds r0, r2\n"
+                    "\tlsls r0, 3\n"
+                    "\tadds r1, r0\n"
+                    "\tmovs r0, 0x3F\n"
+                    "\tands r1, r0\n"
+                    "\tstr r1, [sp, 0x8]\n"
+                    "\tadds r2, r1, 0\n"
+                    "\tcmp r2, 0xC\n"
+                    "\tbgt _08099FC0\n"
+                    "\tmovs r6, 0x14\n"
+                    "\tmovs r3, 0\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tmov r1, r9\n"
+                    "\tadds r4, r1, r0\n"
+                    "\tmovs r7, 0\n"
+                    "\tb _0809A020\n"
+                    "\t.align 2, 0\n"
+                    "_08099FB8: .4byte gPokemonStorageSystemPtr\n"
+                    "_08099FBC: .4byte 0x000008b4\n"
+                    "_08099FC0:\n"
+                    "\tcmp r2, 0x1F\n"
+                    "\tbgt _08099FE6\n"
+                    "\tmovs r0, 0x20\n"
+                    "\tsubs r0, r2\n"
+                    "\tlsls r0, 16\n"
+                    "\tmovs r1, 0x14\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tsubs r1, r0\n"
+                    "\tlsls r1, 16\n"
+                    "\tlsrs r3, r1, 16\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tmov r2, r9\n"
+                    "\tadds r4, r2, r0\n"
+                    "\tmovs r7, 0x88\n"
+                    "\tlsls r7, 4\n"
+                    "\tadd r7, r9\n"
+                    "\tb _0809A020\n"
+                    "_08099FE6:\n"
+                    "\tcmp r2, 0x2C\n"
+                    "\tbgt _08099FFE\n"
+                    "\tmovs r6, 0x14\n"
+                    "\tmovs r3, 0\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tmovs r1, 0x84\n"
+                    "\tlsls r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tmov r2, r9\n"
+                    "\tadds r4, r2, r0\n"
+                    "\tmovs r7, 0\n"
+                    "\tb _0809A020\n"
+                    "_08099FFE:\n"
+                    "\tmovs r0, 0x40\n"
+                    "\tsubs r0, r2\n"
+                    "\tlsls r0, 16\n"
+                    "\tmovs r1, 0x14\n"
+                    "\tlsrs r6, r0, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tsubs r1, r0\n"
+                    "\tlsls r1, 16\n"
+                    "\tlsrs r3, r1, 16\n"
+                    "\tlsls r0, r2, 1\n"
+                    "\tmovs r1, 0x84\n"
+                    "\tlsls r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "\tmov r2, r9\n"
+                    "\tadds r4, r2, r0\n"
+                    "\tmov r7, r9\n"
+                    "\tadds r7, 0x80\n"
+                    "_0809A020:\n"
+                    "\tmovs r1, 0\n"
+                    "\tmov r0, r8\n"
+                    "\tlsls r0, 24\n"
+                    "\tstr r0, [sp, 0x14]\n"
+                    "\tlsls r0, r6, 16\n"
+                    "\tasrs r0, 16\n"
+                    "\tmov r8, r0\n"
+                    "\tlsls r3, 16\n"
+                    "\tstr r3, [sp, 0xC]\n"
+                    "\tasrs r2, r3, 16\n"
+                    "\tstr r2, [sp, 0x10]\n"
+                    "_0809A036:\n"
+                    "\tmovs r3, 0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tadds r0, 0x40\n"
+                    "\tstr r0, [sp, 0x18]\n"
+                    "\tadds r2, r7, 0\n"
+                    "\tadds r2, 0x40\n"
+                    "\tstr r2, [sp, 0x1C]\n"
+                    "\tadds r1, 0x1\n"
+                    "\tmov r10, r1\n"
+                    "\tcmp r3, r8\n"
+                    "\tbge _0809A07A\n"
+                    "\tldr r0, _0809A0D4 @ =0x00000fff\n"
+                    "\tmov r12, r0\n"
+                    "\tmovs r6, 0xF0\n"
+                    "\tlsls r6, 8\n"
+                    "_0809A054:\n"
+                    "\tldrh r2, [r5]\n"
+                    "\tmov r0, r12\n"
+                    "\tands r0, r2\n"
+                    "\tldr r1, [sp]\n"
+                    "\tadds r0, r1, r0\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tands r1, r2\n"
+                    "\tldr r2, [sp, 0x4]\n"
+                    "\tadds r1, r2, r1\n"
+                    "\torrs r1, r0\n"
+                    "\tlsls r0, r3, 1\n"
+                    "\tadds r0, r4\n"
+                    "\tstrh r1, [r0]\n"
+                    "\tadds r5, 0x2\n"
+                    "\tadds r0, r3, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r3, r0, 16\n"
+                    "\tcmp r3, r8\n"
+                    "\tblt _0809A054\n"
+                    "_0809A07A:\n"
+                    "\tmovs r3, 0\n"
+                    "\tldr r0, [sp, 0x10]\n"
+                    "\tcmp r3, r0\n"
+                    "\tbge _0809A0B4\n"
+                    "\tldr r1, _0809A0D4 @ =0x00000fff\n"
+                    "\tmov r12, r1\n"
+                    "\tmovs r6, 0xF0\n"
+                    "\tlsls r6, 8\n"
+                    "\tldr r2, [sp, 0xC]\n"
+                    "\tasrs r4, r2, 16\n"
+                    "_0809A08E:\n"
+                    "\tldrh r2, [r5]\n"
+                    "\tmov r0, r12\n"
+                    "\tands r0, r2\n"
+                    "\tldr r1, [sp]\n"
+                    "\tadds r0, r1, r0\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tands r1, r2\n"
+                    "\tldr r2, [sp, 0x4]\n"
+                    "\tadds r1, r2, r1\n"
+                    "\torrs r1, r0\n"
+                    "\tlsls r0, r3, 1\n"
+                    "\tadds r0, r7\n"
+                    "\tstrh r1, [r0]\n"
+                    "\tadds r5, 0x2\n"
+                    "\tadds r0, r3, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r3, r0, 16\n"
+                    "\tcmp r3, r4\n"
+                    "\tblt _0809A08E\n"
+                    "_0809A0B4:\n"
+                    "\tldr r4, [sp, 0x18]\n"
+                    "\tldr r7, [sp, 0x1C]\n"
+                    "\tmov r1, r10\n"
+                    "\tlsls r0, r1, 16\n"
+                    "\tlsrs r1, r0, 16\n"
+                    "\tcmp r1, 0x11\n"
+                    "\tbls _0809A036\n"
+                    "\tldr r0, [sp, 0x14]\n"
+                    "\tasrs r2, r0, 24\n"
+                    "\tcmp r2, 0\n"
+                    "\tbeq _0809A13A\n"
+                    "\tcmp r2, 0\n"
+                    "\tble _0809A0D8\n"
+                    "\tldr r1, [sp, 0x8]\n"
+                    "\tadds r1, 0x14\n"
+                    "\tb _0809A0DC\n"
+                    "\t.align 2, 0\n"
+                    "_0809A0D4: .4byte 0x00000fff\n"
+                    "_0809A0D8:\n"
+                    "\tldr r1, [sp, 0x8]\n"
+                    "\tsubs r1, 0x4\n"
+                    "_0809A0DC:\n"
+                    "\tmovs r0, 0x3F\n"
+                    "\tands r1, r0\n"
+                    "\tadds r4, r1, 0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tcmp r0, 0x1F\n"
+                    "\tbgt _0809A0EE\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tb _0809A0F6\n"
+                    "_0809A0EE:\n"
+                    "\tlsls r0, 1\n"
+                    "\tmovs r2, 0x84\n"
+                    "\tlsls r2, 4\n"
+                    "\tadds r0, r2\n"
+                    "_0809A0F6:\n"
+                    "\tmov r1, r9\n"
+                    "\tadds r2, r1, r0\n"
+                    "\tmovs r3, 0\n"
+                    "\tmovs r6, 0\n"
+                    "_0809A0FE:\n"
+                    "\tmovs r1, 0\n"
+                    "\tadds r5, r3, 0x1\n"
+                    "\tlsls r3, r4, 16\n"
+                    "_0809A104:\n"
+                    "\tstrh r6, [r2]\n"
+                    "\tadds r2, 0x40\n"
+                    "\tadds r0, r1, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r1, r0, 16\n"
+                    "\tcmp r1, 0x11\n"
+                    "\tbls _0809A104\n"
+                    "\tasrs r0, r3, 16\n"
+                    "\tadds r4, r0, 0x1\n"
+                    "\tmovs r0, 0x3F\n"
+                    "\tands r4, r0\n"
+                    "\tadds r0, r4, 0\n"
+                    "\tcmp r0, 0x1F\n"
+                    "\tbgt _0809A126\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tb _0809A12E\n"
+                    "_0809A126:\n"
+                    "\tlsls r0, 1\n"
+                    "\tmovs r2, 0x84\n"
+                    "\tlsls r2, 4\n"
+                    "\tadds r0, r2\n"
+                    "_0809A12E:\n"
+                    "\tmov r1, r9\n"
+                    "\tadds r2, r1, r0\n"
+                    "\tlsls r0, r5, 16\n"
+                    "\tlsrs r3, r0, 16\n"
+                    "\tcmp r3, 0x3\n"
+                    "\tbls _0809A0FE\n"
+                    "_0809A13A:\n"
+                    "\tadd sp, 0x20\n"
+                    "\tpop {r3-r5}\n"
+                    "\tmov r8, r3\n"
+                    "\tmov r9, r4\n"
+                    "\tmov r10, r5\n"
+                    "\tpop {r4-r7}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0");
+}
+#endif
