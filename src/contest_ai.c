@@ -744,3 +744,97 @@ void ContestAICmd_unk_3F(void)
     else
         gAIScriptPtr += 5;
 }
+
+extern u8 AreMovesContestCombo(u16, u16);
+
+/*
+void ContestAICmd_check_combo_starter(void)
+{
+    u8 result = 0;
+    int i;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    for(i = 0; i < 4; i++)
+    {
+        u16 newMove = gContestMons[eContestAI->unk41].moves[i];
+        u16 isCombo = AreMovesContestCombo(move, gContestMons[eContestAI->unk41].moves[i]);
+        if(newMove && isCombo)
+        {
+            result = 1;
+            break;
+        }
+        if(isCombo) // dumb double r5 check?
+        {
+            result = 1;
+            break;
+        }
+    }
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 1;
+}*/
+
+/*
+    thumb_func_start ContestAICmd_check_combo_starter
+ContestAICmd_check_combo_starter: @ 8129B44
+    push {r4-r7,lr}
+    mov r7, r8
+    push {r7}
+    movs r5, 0
+    ldr r3, _08129BAC @ =gContestMons
+    ldr r2, _08129BB0 @ =gSharedMem + 0x192E4
+    ldrb r1, [r2, 0x4]
+    lsls r1, 1
+    adds r2, 0x41
+    ldrb r0, [r2]
+    lsls r0, 6
+    adds r1, r0
+    adds r3, 0x1E
+    adds r1, r3
+    ldrh r6, [r1]
+    movs r4, 0
+    mov r8, r2
+    adds r7, r3, 0
+_08129B68:
+    lsls r0, r4, 1
+    mov r2, r8
+    ldrb r1, [r2]
+    lsls r1, 6
+    adds r0, r1
+    adds r1, r0, r7
+    ldrh r0, [r1]
+    cmp r0, 0
+    beq _08129B8A
+    adds r1, r0, 0
+    adds r0, r6, 0
+    bl AreMovesContestCombo
+    lsls r0, 24
+    lsrs r5, r0, 24
+    cmp r5, 0
+    bne _08129B94
+_08129B8A:
+    adds r4, 0x1
+    cmp r4, 0x3
+    ble _08129B68
+    cmp r5, 0
+    beq _08129B96
+_08129B94:
+    movs r5, 0x1
+_08129B96:
+    ldr r0, _08129BB0 @ =gSharedMem + 0x192E4
+    strh r5, [r0, 0x18]
+    ldr r1, _08129BB4 @ =gAIScriptPtr
+    ldr r0, [r1]
+    adds r0, 0x1
+    str r0, [r1]
+    pop {r3}
+    mov r8, r3
+    pop {r4-r7}
+    pop {r0}
+    bx r0
+    .align 2, 0
+_08129BAC: .4byte gContestMons
+_08129BB0: .4byte gSharedMem + 0x192E4
+_08129BB4: .4byte gAIScriptPtr
+    thumb_func_end ContestAICmd_check_combo_starter
+*/
