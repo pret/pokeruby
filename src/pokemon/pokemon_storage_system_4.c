@@ -673,3 +673,87 @@ __attribute__((naked)) void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3
                     "\tbx r0");
 }
 #endif
+
+#ifdef NONMATCHING
+void sub_809A14C(u16 *vdest)
+{
+    u16 *r2;
+    u16 i;
+    int r3 = ((gPokemonStorageSystemPtr->unk_08b4 >> 3) + 30) & 0x3f;
+    r2 = vdest + (r3 < 0x20 ? r3 + 0x260 : r3 + 0x640);
+    for (i = 0; i < 0x2b; i++)
+    {
+        *r2++ = 0;
+        r3++;
+        r3 &= 0x3f;
+        if (r3 == 0)
+            r2 -= 0x420;
+        if (r3 == 0x20)
+            r2 += 0x3e0;
+    }
+}
+#else
+__attribute__((naked)) void sub_809A14C(u16 *vdest)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                    "\tadds r2, r0, 0\n"
+                    "\tldr r0, _0809A174 @ =gPokemonStorageSystemPtr\n"
+                    "\tldr r0, [r0]\n"
+                    "\tldr r1, _0809A178 @ =0x000008b4\n"
+                    "\tadds r0, r1\n"
+                    "\tldrh r0, [r0]\n"
+                    "\tlsrs r0, 3\n"
+                    "\tadds r3, r0, 0\n"
+                    "\tadds r3, 0x1E\n"
+                    "\tmovs r0, 0x3F\n"
+                    "\tands r3, r0\n"
+                    "\tadds r0, r3, 0\n"
+                    "\tcmp r0, 0x1F\n"
+                    "\tbgt _0809A17C\n"
+                    "\tlsls r0, 1\n"
+                    "\tmovs r6, 0x98\n"
+                    "\tlsls r6, 3\n"
+                    "\tadds r0, r6\n"
+                    "\tb _0809A184\n"
+                    "\t.align 2, 0\n"
+                    "_0809A174: .4byte gPokemonStorageSystemPtr\n"
+                    "_0809A178: .4byte 0x000008b4\n"
+                    "_0809A17C:\n"
+                    "\tlsls r0, 1\n"
+                    "\tmovs r1, 0xC8\n"
+                    "\tlsls r1, 4\n"
+                    "\tadds r0, r1\n"
+                    "_0809A184:\n"
+                    "\tadds r2, r0\n"
+                    "\tmovs r0, 0\n"
+                    "\tmovs r5, 0\n"
+                    "\tmovs r4, 0x3F\n"
+                    "_0809A18C:\n"
+                    "\tstrh r5, [r2]\n"
+                    "\tadds r2, 0x2\n"
+                    "\tadds r3, 0x1\n"
+                    "\tands r3, r4\n"
+                    "\tadds r1, r3, 0\n"
+                    "\tcmp r1, 0\n"
+                    "\tbne _0809A19E\n"
+                    "\tldr r6, _0809A1B8 @ =0xfffff7c0\n"
+                    "\tadds r2, r6\n"
+                    "_0809A19E:\n"
+                    "\tcmp r1, 0x20\n"
+                    "\tbne _0809A1A8\n"
+                    "\tmovs r1, 0xF8\n"
+                    "\tlsls r1, 3\n"
+                    "\tadds r2, r1\n"
+                    "_0809A1A8:\n"
+                    "\tadds r0, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tcmp r0, 0x2B\n"
+                    "\tbls _0809A18C\n"
+                    "\tpop {r4-r6}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_0809A1B8: .4byte 0xfffff7c0");
+}
+#endif
