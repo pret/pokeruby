@@ -104,6 +104,7 @@ void sub_80B0F28(u8);
 bool8 Contest_SaveWinner(u8);
 u8 sub_80B2C4C(u8, u8);
 void Contest_ResetWinners(void);
+s8 Contest_GetMoveExcitement(u16);
 
 // Contest Shared EWRAM
 
