@@ -532,3 +532,215 @@ void ContestAICmd_unk_2C(void)
     else
         gAIScriptPtr += 5;
 }
+
+void ContestAICmd_check_move_has_highest_appeal(void)
+{
+    int i;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+    u8 appeal = gContestEffects[gContestMoves[move].effect].appeal;
+
+    for(i = 0; i < 4; i++)
+    {
+        u16 newMove = gContestMons[eContestAI->unk41].moves[i];
+        if(newMove != 0 && appeal < gContestEffects[gContestMoves[newMove].effect].appeal)
+            break;
+    }
+
+    if(i == 4)
+        eContestAI->scriptResult = TRUE;
+    else
+        eContestAI->scriptResult = FALSE;
+
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_2E(void)
+{
+    ContestAICmd_check_move_has_highest_appeal();
+
+    if((s16)eContestAI->scriptResult != FALSE)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_2F(void)
+{
+    int i;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+    u8 jam = gContestEffects[gContestMoves[move].effect].jam;
+
+    for(i = 0; i < 4; i++)
+    {
+        u16 newMove = gContestMons[eContestAI->unk41].moves[i];
+        if(newMove != 0 && jam < gContestEffects[gContestMoves[newMove].effect].jam)
+            break;
+    }
+
+    if(i == 4)
+        eContestAI->scriptResult = TRUE;
+    else
+        eContestAI->scriptResult = FALSE;
+
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_30(void)
+{
+    ContestAICmd_unk_2F();
+
+    if((s16)eContestAI->scriptResult != FALSE)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_31(void)
+{
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    eContestAI->scriptResult = gContestEffects[gContestMoves[move].effect].appeal / 10;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_32(void)
+{
+    ContestAICmd_unk_31();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_33(void)
+{
+    ContestAICmd_unk_31();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_34(void)
+{
+    ContestAICmd_unk_31();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_35(void)
+{
+    ContestAICmd_unk_31();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_36(void)
+{
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    eContestAI->scriptResult = gContestEffects[gContestMoves[move].effect].jam / 10;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_37(void)
+{
+    ContestAICmd_unk_36();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_38(void)
+{
+    ContestAICmd_unk_36();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_39(void)
+{
+    ContestAICmd_unk_36();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_3A(void)
+{
+    ContestAICmd_unk_36();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_get_move_used_count(void)
+{
+    s16 result;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    if(move != sContestantStatus[eContestAI->unk41].prevMove)
+        result = 0; // move is unique and not reused.
+    else
+        result = sContestantStatus[eContestAI->unk41].moveRepeatCount + 1;
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_3C(void)
+{
+    ContestAICmd_get_move_used_count();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_3D(void)
+{
+    ContestAICmd_get_move_used_count();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_3E(void)
+{
+    ContestAICmd_get_move_used_count();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_3F(void)
+{
+    ContestAICmd_get_move_used_count();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
