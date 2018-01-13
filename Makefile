@@ -84,6 +84,8 @@ endif
 .SUFFIXES:
 # Don't delete intermediate files
 .SECONDARY:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
 
 # Create build subdirectories
 $(shell mkdir -p $(addprefix $(BUILD_DIR)/, $(SUBDIRS)))
