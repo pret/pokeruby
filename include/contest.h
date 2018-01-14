@@ -77,7 +77,7 @@ struct ContestAIInfo {
  /*0x10*/ u8 unk10;
  /*0x14*/ u32 flags;
  /*0x18*/ u16 scriptResult;
- /*0x1A*/ u16 scriptArr[3]; // TODO: are there more variables after the array?
+ /*0x1A*/ u16 scriptArr[3];
  /*0x20*/ u32 stack[8];
  /*0x40*/ u8 unk40;
  /*0x41*/ u8 unk41;
