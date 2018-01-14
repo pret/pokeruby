@@ -891,3 +891,49 @@ const struct SpriteTemplate gSpriteTemplate_83BB2B8 = {
     gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
 };
+
+void sub_809A598(void)
+{
+    if (gPokemonStorageSystemPtr->unk_0cca == 0)
+        FreeSpriteTilesByTag(4);
+    else
+        FreeSpriteTilesByTag(3);
+    gPokemonStorageSystemPtr->unk_0cf0[0] = gPokemonStorageSystemPtr->unk_0cf8[0];
+    gPokemonStorageSystemPtr->unk_0cf0[1] = gPokemonStorageSystemPtr->unk_0cf8[1];
+}
+
+void sub_809A5E8(struct Sprite *sprite)
+{
+    if (sprite->data[2])
+        sprite->data[2]--;
+    else if ((sprite->pos1.x += sprite->data[0]) == sprite->data[1])
+        sprite->callback = SpriteCallbackDummy;
+}
+
+void sub_809A61C(struct Sprite *sprite)
+{
+    if (sprite->data[1])
+        sprite->data[1]--;
+    else
+    {
+        sprite->pos1.x += sprite->data[0];
+        sprite->data[2] = sprite->pos1.x + sprite->pos2.x;
+        if (sprite->data[2] < 0x40 || sprite->data[2] > 0x100)
+            DestroySprite(sprite);
+    }
+}
+
+void sub_809A654(void)
+{
+    u8 boxId = get_preferred_box();
+    u8 wallpaperId = gPokemonStorage.wallpaper[boxId];
+    if (gPokemonStorageSystemPtr->unk_0cca == 0)
+        CpuCopy16(gUnknown_083BB0A8[wallpaperId], gPlttBufferUnfaded + gPokemonStorageSystemPtr->unk_0cec, 4);
+    else
+        CpuCopy16(gUnknown_083BB0A8[wallpaperId], gPlttBufferUnfaded + gPokemonStorageSystemPtr->unk_0cee, 4);
+}
+
+s16 sub_809A6D0(u8 width)
+{
+    return 0xb0 - width / 2;
+}
