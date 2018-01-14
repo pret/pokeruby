@@ -13,6 +13,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "ewram.h"
+#include "../data/battle_anim.h"
 
 // sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
@@ -64,8 +65,7 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 extern const u16 gUnknown_081C7160[];
 extern const u8 *const gBattleAnims_Moves[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
-extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
+// extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 
 static void RunAnimScriptCommand(void);
 static void ScriptCmd_loadspritegfx(void);
