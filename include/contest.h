@@ -67,6 +67,22 @@ struct ContestPokemon
     /*0x3C*/ u32 otId;  // otId
 }; // wow
 
+struct ContestAIInfo {
+ /*0x00*/ u8 aiState;
+ /*0x02*/ u16 unk2;
+ /*0x04*/ u8 unk4;
+ /*0x05*/ u8 unk5[4];
+ /*0x09*/ u8 aiAction;
+ /*0x0A*/ u8 fillerA[0x6]; // TODO: don't know what's here
+ /*0x10*/ u8 unk10;
+ /*0x14*/ u32 flags;
+ /*0x18*/ s16 scriptResult;
+ /*0x1A*/ s16 scriptArr[3];
+ /*0x20*/ u32 stack[8];
+ /*0x40*/ u8 unk40;
+ /*0x41*/ u8 unk41;
+};
+
 extern struct ContestPokemon gContestMons[];
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
@@ -86,6 +102,7 @@ void sub_80B0F28(u8);
 bool8 Contest_SaveWinner(u8);
 u8 sub_80B2C4C(u8, u8);
 void Contest_ResetWinners(void);
+s8 Contest_GetMoveExcitement(u16);
 
 // Contest Shared EWRAM
 
@@ -135,48 +152,48 @@ struct Contest
 
 struct ContestantStatus
 {
-    s16 appeal1;  // move appeal?
-    s16 appeal2;  // final appeal after end of turn, maybe?
-    s16 unk4;
-    u16 currMove;
-    u16 prevMove;
-    u8 moveCategory;
-    u8 unkB_0:2;
-    u8 unkB_2:2;
-    u8 moveRepeatCount:3;
-    u8 unkB_7:1;  // used a one-time move?
-    u8 unkC_0:1;
-    u8 unkC_1:2;
-    s8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10_0:1;
-    u8 unk10_1:1;
-    u8 unk10_2:1;
-    u8 unk10_3:1;
-    u8 unk10_4:2;
-    u8 unk10_6:2;
-    u8 unk11_0:2;
-    u8 unk11_2:1;
-    u8 unk11_3:1;
-    u8 unk11_4:1;
-    u8 unk11_5:1;
-    u8 unk12;
-    u8 unk13;   // status action?
-    u8 unk14;
-    u8 disappointedRepeat:1;
-    u8 unk15_1:1;
-    u8 unk15_2:1;
-    u8 unk15_3:1;
-    u8 unk15_4:1;
-    u8 unk15_5:1;
-    u8 unk15_6:1;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;  // turn position
-    u8 attentionLevel;  // How much the Pokemon "stood out"
-    u8 unk1B;
+ /*0x00*/ s16 appeal1;  // move appeal?
+ /*0x02*/ s16 appeal2;  // final appeal after end of turn, maybe?
+ /*0x04*/ s16 unk4;
+ /*0x06*/ u16 currMove;
+ /*0x08*/ u16 prevMove;
+ /*0x0A*/ u8 moveCategory;
+ /*0x0B*/ u8 unkB_0:2;
+          u8 unkB_2:2;
+          u8 moveRepeatCount:3;
+          u8 unkB_7:1;  // used a one-time move?
+ /*0x0C*/ u8 unkC_0:1;
+          u8 unkC_1:2;
+ /*0x0D*/ s8 unkD;
+ /*0x0E*/ u8 unkE;
+ /*0x0F*/ u8 unkF;
+ /*0x10*/ u8 unk10_0:1;
+          u8 unk10_1:1;
+          u8 unk10_2:1;
+          u8 unk10_3:1;
+          u8 unk10_4:2;
+          u8 unk10_6:2;
+ /*0x11*/ u8 unk11_0:2;
+          u8 unk11_2:1;
+          u8 unk11_3:1;
+          u8 unk11_4:1;
+          u8 unk11_5:1;
+ /*0x12*/ u8 unk12;
+ /*0x13*/ u8 unk13;   // status action?
+ /*0x14*/ u8 unk14;
+ /*0x15*/ u8 disappointedRepeat:1;
+          u8 unk15_1:1;
+          u8 unk15_2:1;
+          u8 unk15_3:1;
+          u8 unk15_4:1;
+          u8 unk15_5:1;
+          u8 unk15_6:1;
+ /*0x16*/ u8 unk16;
+ /*0x17*/ u8 unk17;
+ /*0x18*/ u8 unk18;
+ /*0x19*/ u8 unk19;  // turn position
+ /*0x1A*/ u8 attentionLevel;  // How much the Pokemon "stood out"
+ /*0x1B*/ u8 unk1B;
 };
 
 struct UnknownContestStruct3
@@ -241,6 +258,7 @@ struct UnknownContestStruct6
     s32 unkC;
 };
 
+// TODO: Please move these to ewram.h once the defines are settled down and figured out completely.
 #define shared15800 (gSharedMem + 0x15800)
 #define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
 #define shared16800 (gSharedMem + 0x16800)
@@ -248,7 +266,6 @@ struct UnknownContestStruct6
 #define shared18004 ((u16 *)(gSharedMem + 0x18004))
 #define sContest (*(struct Contest *)(gSharedMem + 0x19204))
 #define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
-#define shared192D0 (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
 #define shared192E4 (gSharedMem + 0x192E4)
 #define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))

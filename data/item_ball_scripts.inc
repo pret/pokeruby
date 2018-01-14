@@ -43,7 +43,7 @@ Route110_EventScript_1B14BB:: @ 81B14BB
 	end
 
 Route111_EventScript_1B14C8:: @ 81B14C8
-	giveitem_std ITEM_TM37, 1, 1
+	giveitem_std ITEM_TM37_SANDSTORM, 1, 1
 	end
 
 Route111_EventScript_1B14D5:: @ 81B14D5
@@ -79,7 +79,7 @@ Route115_EventScript_1B1530:: @ 81B1530
 	end
 
 Route115_EventScript_1B153D:: @ 81B153D
-	giveitem_std ITEM_TM01, 1, 1
+	giveitem_std ITEM_TM01_FOCUS_PUNCH, 1, 1
 	end
 
 Route115_EventScript_1B154A:: @ 81B154A
@@ -291,11 +291,11 @@ FieryPath_EventScript_1B17E1:: @ 81B17E1
 	end
 
 FieryPath_EventScript_1B17EE:: @ 81B17EE
-	giveitem_std ITEM_TM06, 1, 1
+	giveitem_std ITEM_TM06_TOXIC, 1, 1
 	end
 
 MeteorFalls_1F_1R_EventScript_1B17FB:: @ 81B17FB
-	giveitem_std ITEM_TM23, 1, 1
+	giveitem_std ITEM_TM23_IRON_TAIL, 1, 1
 	end
 
 MeteorFalls_1F_1R_EventScript_1B1808:: @ 81B1808
@@ -311,7 +311,7 @@ MeteorFalls_1F_1R_EventScript_1B1822:: @ 81B1822
 	end
 
 MeteorFalls_B1F_2R_EventScript_1B182F:: @ 81B182F
-	giveitem_std ITEM_TM02, 1, 1
+	giveitem_std ITEM_TM02_DRAGON_CLAW, 1, 1
 	end
 
 NewMauville_Inside_EventScript_1B183C:: @ 81B183C
@@ -347,7 +347,7 @@ AbandonedShip_Rooms2_B1F_EventScript_1B1897:: @ 81B1897
 	end
 
 AbandonedShip_Room_B1F_EventScript_1B18A4:: @ 81B18A4
-	giveitem_std ITEM_TM13, 1, 1
+	giveitem_std ITEM_TM13_ICE_BEAM, 1, 1
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_1B18B1:: @ 81B18B1
@@ -371,15 +371,15 @@ AbandonedShip_HiddenFloorRooms_EventScript_1B18E5:: @ 81B18E5
 	end
 
 AbandonedShip_HiddenFloorRooms_EventScript_1B18F2:: @ 81B18F2
-	giveitem_std ITEM_TM18, 1, 1
+	giveitem_std ITEM_TM18_RAIN_DANCE, 1, 1
 	end
 
 ScorchedSlab_EventScript_1B18FF:: @ 81B18FF
-	giveitem_std ITEM_TM11, 1, 1
+	giveitem_std ITEM_TM11_SUNNY_DAY, 1, 1
 	end
 
 SafariZone_Northwest_EventScript_1B190C:: @ 81B190C
-	giveitem_std ITEM_TM22, 1, 1
+	giveitem_std ITEM_TM22_SOLARBEAM, 1, 1
 	end
 
 SafariZone_Northeast_EventScript_1B1919:: @ 81B1919
@@ -407,7 +407,7 @@ MtPyre_5F_EventScript_1B195A:: @ 81B195A
 	end
 
 MtPyre_6F_EventScript_1B1967:: @ 81B1967
-	giveitem_std ITEM_TM30, 1, 1
+	giveitem_std ITEM_TM30_SHADOW_BALL, 1, 1
 	end
 
 MtPyre_Exterior_EventScript_1B1974:: @ 81B1974
@@ -415,7 +415,7 @@ MtPyre_Exterior_EventScript_1B1974:: @ 81B1974
 	end
 
 MtPyre_Exterior_EventScript_1B1981:: @ 81B1981
-	giveitem_std ITEM_TM48, 1, 1
+	giveitem_std ITEM_TM48_SKILL_SWAP, 1, 1
 	end
 
 AquaHideout_B1F_EventScript_1B198E:: @ 81B198E
@@ -463,7 +463,7 @@ ShoalCave_LowTideStairsRoom_EventScript_1B1A10:: @ 81B1A10
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_1B1A1D:: @ 81B1A1D
-	giveitem_std ITEM_TM07, 1, 1
+	giveitem_std ITEM_TM07_HAIL, 1, 1
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_1B1A2A:: @ 81B1A2A
@@ -471,11 +471,11 @@ ShoalCave_LowTideIceRoom_EventScript_1B1A2A:: @ 81B1A2A
 	end
 
 SeafloorCavern_Room9_EventScript_1B1A37:: @ 81B1A37
-	giveitem_std ITEM_TM26, 1, 1
+	giveitem_std ITEM_TM26_EARTHQUAKE, 1, 1
 	end
 
 CaveOfOrigin_B3F_EventScript_1B1A44:: @ 81B1A44
-	giveitem_std ITEM_HM07, 1, 1
+	giveitem_std ITEM_HM07_WATERFALL, 1, 1
 	end
 
 Route110_TrickHousePuzzle1_EventScript_1B1A51:: @ 81B1A51
@@ -523,7 +523,7 @@ VictoryRoad_1F_EventScript_1B1AD3:: @ 81B1AD3
 	end
 
 VictoryRoad_B1F_EventScript_1B1AE0:: @ 81B1AE0
-	giveitem_std ITEM_TM29, 1, 1
+	giveitem_std ITEM_TM29_PSYCHIC, 1, 1
 	end
 
 VictoryRoad_B1F_EventScript_1B1AED:: @ 81B1AED
@@ -535,5 +535,5 @@ VictoryRoad_B2F_EventScript_1B1AFA:: @ 81B1AFA
 	end
 
 @ 81B1B07
-	giveitem_std ITEM_HM08, 1, 1
+	giveitem_std ITEM_HM08_DIVE, 1, 1
 	end
