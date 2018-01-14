@@ -128,6 +128,11 @@ extern u8 gSharedMem[];
 #define ewram16088_2                    (*(u8 *)(gSharedMem + 0x16088))
 #define ewram16089                      (gSharedMem[0x16089])
 #define ewram16089_2                    (*(u8 *)(gSharedMem + 0x16089))
+
+// src/battle/anim/battle_intro.c
+#define ewram1608A                      gSharedMem[0x1608A]
+#define ewram1608B                      gSharedMem[0x1608B]
+
 #define ewram1608Carr(bank)             (gSharedMem[0x1608C + bank])
 #define EWRAM_1609D                     (gSharedMem[0x1609D])
 #define ewram160A1                      (gSharedMem[0x160A1])

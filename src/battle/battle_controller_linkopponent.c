@@ -93,7 +93,7 @@ extern void move_anim_start_t2_for_situation();
 extern void dp01t_0F_4_move_anim(void);
 extern void sub_8047858();
 extern u8 GetBankSide(u8);
-extern void sub_80E43C0();
+extern void StartBattleIntroAnim();
 extern void sub_803A3A8(struct Sprite *);
 extern void sub_8044CA0(u8);
 extern void nullsub_47(void);
@@ -1620,7 +1620,7 @@ void LinkOpponentHandleFaintingCry(void)
 
 void LinkOpponentHandleIntroSlide(void)
 {
-    sub_80E43C0(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     LinkOpponentBufferExecCompleted();
 }

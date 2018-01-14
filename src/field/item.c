@@ -571,7 +571,7 @@ void SwapRegisteredBike(void)
 
 static u16 SanitizeItemId(u16 itemId)
 {
-    if (itemId > 0x15C)
+    if (itemId >= ARRAY_COUNT(gItems))
         return 0;
     else
         return itemId;

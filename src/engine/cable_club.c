@@ -374,7 +374,7 @@ void sub_80831F8(u8 taskId)
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
+        TrainerCard_GenerateCardForPlayer((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
     }
 }
@@ -395,7 +395,7 @@ static void sub_8083288(u8 taskId)
         gFieldLinkPlayerCount = GetLinkPlayerCount_2();
         gUnknown_03004860 = GetMultiplayerId();
         sub_80081C8(gFieldLinkPlayerCount);
-        sub_8093390((struct TrainerCard *)gBlockSendBuffer);
+        TrainerCard_GenerateCardForPlayer((struct TrainerCard *)gBlockSendBuffer);
         gTasks[taskId].func = sub_8083314;
         sub_8007E9C(2);
     }
@@ -874,7 +874,7 @@ void unref_sub_8083BB0(void)
 
 void sub_8083BDC(void)
 {
-    sub_8093130(gSpecialVar_0x8006, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    TrainerCard_ShowLinkCard(gSpecialVar_0x8006, c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
 bool32 sub_8083BF4(u8 linkPlayerIndex)

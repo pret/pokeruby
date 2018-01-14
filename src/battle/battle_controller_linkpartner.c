@@ -62,7 +62,7 @@ extern u8 move_anim_start_t3();
 extern u8 IsBankSpritePresent();
 extern void sub_8044CA0(u8);
 extern void sub_8030E38(struct Sprite *);
-extern void sub_80E43C0();
+extern void StartBattleIntroAnim();
 extern void sub_8047858();
 extern void move_anim_start_t2_for_situation();
 extern void load_gfxc_health_bar();
@@ -1565,7 +1565,7 @@ void LinkPartnerHandleFaintingCry(void)
 
 void LinkPartnerHandleIntroSlide(void)
 {
-    sub_80E43C0(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     LinkPartnerBufferExecCompleted();
 }
