@@ -1,19 +1,12 @@
 #include "global.h"
 #include "contest.h"
 #include "random.h"
+#include "contest_ai.h"
 #include "ewram.h"
 
 extern u8 AreMovesContestCombo(u16, u16);
 extern bool8 sub_80B214C(u8);
 extern bool8 Contest_IsMonsTurnDisabled(u8);
-
-enum
-{
-    ContestAI_SettingUp,
-    ContestAI_Processing,
-    ContestAI_FinishedProcessing,
-    ContestAI_DoNotProcess
-};
 
 extern s16 gUnknown_02038670[];
 extern u16 gSpecialVar_ContestCategory;
@@ -162,142 +155,142 @@ typedef void (* ContestAICmdFunc)(void);
 
 static const ContestAICmdFunc sContestAICmdTable[] =
 {
-    ContestAICmd_unk_00,
-    ContestAICmd_get_turn,
-    ContestAICmd_unk_02,
-    ContestAICmd_unk_03,
-    ContestAICmd_unk_04,
-    ContestAICmd_unk_05,
-    ContestAICmd_get_excitement,
-    ContestAICmd_unk_07,
-    ContestAICmd_unk_08,
-    ContestAICmd_unk_09,
-    ContestAICmd_unk_0A,
-    ContestAICmd_get_user_order,
-    ContestAICmd_unk_0C,
-    ContestAICmd_unk_0D,
-    ContestAICmd_unk_0E,
-    ContestAICmd_unk_0F,
-    ContestAICmd_get_user_condition_maybe,
-    ContestAICmd_unk_11,
-    ContestAICmd_unk_12,
-    ContestAICmd_unk_13,
-    ContestAICmd_unk_14,
-    ContestAICmd_unk_15,
-    ContestAICmd_unk_16,
-    ContestAICmd_unk_17,
-    ContestAICmd_unk_18,
-    ContestAICmd_unk_19,
-    ContestAICmd_unk_1A,
-    ContestAICmd_unk_1B,
-    ContestAICmd_unk_1C,
-    ContestAICmd_unk_1D,
-    ContestAICmd_unk_1E,
-    ContestAICmd_get_contest_type,
-    ContestAICmd_unk_20,
-    ContestAICmd_unk_21,
-    ContestAICmd_get_move_excitement,
-    ContestAICmd_unk_23,
-    ContestAICmd_unk_24,
-    ContestAICmd_unk_25,
-    ContestAICmd_unk_26,
-    ContestAICmd_get_move_effect,
-    ContestAICmd_unk_28,
-    ContestAICmd_unk_29,
-    ContestAICmd_get_move_effect_type,
-    ContestAICmd_unk_2B,
-    ContestAICmd_unk_2C,
-    ContestAICmd_check_move_has_highest_appeal,
-    ContestAICmd_unk_2E,
-    ContestAICmd_unk_2F,
-    ContestAICmd_unk_30,
-    ContestAICmd_unk_31,
-    ContestAICmd_unk_32,
-    ContestAICmd_unk_33,
-    ContestAICmd_unk_34,
-    ContestAICmd_unk_35,
-    ContestAICmd_unk_36,
-    ContestAICmd_unk_37,
-    ContestAICmd_unk_38,
-    ContestAICmd_unk_39,
-    ContestAICmd_unk_3A,
-    ContestAICmd_get_move_used_count,
-    ContestAICmd_unk_3C,
-    ContestAICmd_unk_3D,
-    ContestAICmd_unk_3E,
-    ContestAICmd_unk_3F,
-    ContestAICmd_check_combo_starter,
-    ContestAICmd_unk_41,
-    ContestAICmd_unk_42,
-    ContestAICmd_check_combo_finisher,
-    ContestAICmd_unk_44,
-    ContestAICmd_unk_45,
-    ContestAICmd_check_would_finish_combo,
-    ContestAICmd_unk_47,
-    ContestAICmd_unk_48,
-    ContestAICmd_get_condition,
-    ContestAICmd_unk_4A,
-    ContestAICmd_unk_4B,
-    ContestAICmd_unk_4C,
-    ContestAICmd_unk_4D,
-    ContestAICmd_get_used_combo_starter,
-    ContestAICmd_unk_4F,
-    ContestAICmd_unk_50,
-    ContestAICmd_unk_51,
-    ContestAICmd_unk_52,
-    ContestAICmd_check_can_participate,
-    ContestAICmd_unk_54,
-    ContestAICmd_unk_55,
-    ContestAICmd_get_val_812A188,
-    ContestAICmd_unk_57,
-    ContestAICmd_unk_58,
-    ContestAICmd_unk_59,
-    ContestAICmd_unk_5A,
-    ContestAICmd_unk_5B,
-    ContestAICmd_unk_5C,
-    ContestAICmd_unk_5D,
-    ContestAICmd_unk_5E,
-    ContestAICmd_unk_5F,
-    ContestAICmd_unk_60,
-    ContestAICmd_unk_61,
-    ContestAICmd_unk_62,
-    ContestAICmd_unk_63,
-    ContestAICmd_unk_64,
-    ContestAICmd_unk_65,
-    ContestAICmd_unk_66,
-    ContestAICmd_unk_67,
-    ContestAICmd_unk_68,
-    ContestAICmd_unk_69,
-    ContestAICmd_unk_6A,
-    ContestAICmd_unk_6B,
-    ContestAICmd_unk_6C,
-    ContestAICmd_unk_6D,
-    ContestAICmd_unk_6E,
-    ContestAICmd_unk_6F,
-    ContestAICmd_unk_70,
-    ContestAICmd_unk_71,
-    ContestAICmd_unk_72,
-    ContestAICmd_unk_73,
-    ContestAICmd_unk_74,
-    ContestAICmd_unk_75,
-    ContestAICmd_unk_76,
-    ContestAICmd_unk_77,
-    ContestAICmd_unk_78,
-    ContestAICmd_unk_79,
-    ContestAICmd_unk_7A,
-    ContestAICmd_unk_7B,
-    ContestAICmd_unk_7C,
-    ContestAICmd_unk_7D,
-    ContestAICmd_unk_7E,
-    ContestAICmd_unk_7F,
-    ContestAICmd_unk_80,
-    ContestAICmd_unk_81,
-    ContestAICmd_check_for_exciting_move,
-    ContestAICmd_unk_83,
-    ContestAICmd_unk_84,
-    ContestAICmd_unk_85,
-    ContestAICmd_unk_86,
-    ContestAICmd_unk_87,
+    ContestAICmd_unk_00,                          // 0x00
+    ContestAICmd_get_turn,                        // 0x01
+    ContestAICmd_unk_02,                          // 0x02
+    ContestAICmd_unk_03,                          // 0x03
+    ContestAICmd_unk_04,                          // 0x04
+    ContestAICmd_unk_05,                          // 0x05
+    ContestAICmd_get_excitement,                  // 0x06
+    ContestAICmd_unk_07,                          // 0x07
+    ContestAICmd_unk_08,                          // 0x08
+    ContestAICmd_unk_09,                          // 0x09
+    ContestAICmd_unk_0A,                          // 0x0A
+    ContestAICmd_get_user_order,                  // 0x0B
+    ContestAICmd_unk_0C,                          // 0x0C
+    ContestAICmd_unk_0D,                          // 0x0D
+    ContestAICmd_unk_0E,                          // 0x0E
+    ContestAICmd_unk_0F,                          // 0x0F
+    ContestAICmd_get_user_condition_maybe,        // 0x10
+    ContestAICmd_unk_11,                          // 0x11
+    ContestAICmd_unk_12,                          // 0x12
+    ContestAICmd_unk_13,                          // 0x13
+    ContestAICmd_unk_14,                          // 0x14
+    ContestAICmd_unk_15,                          // 0x15
+    ContestAICmd_unk_16,                          // 0x16
+    ContestAICmd_unk_17,                          // 0x17
+    ContestAICmd_unk_18,                          // 0x18
+    ContestAICmd_unk_19,                          // 0x19
+    ContestAICmd_unk_1A,                          // 0x1A
+    ContestAICmd_unk_1B,                          // 0x1B
+    ContestAICmd_unk_1C,                          // 0x1C
+    ContestAICmd_unk_1D,                          // 0x1D
+    ContestAICmd_unk_1E,                          // 0x1E
+    ContestAICmd_get_contest_type,                // 0x1F
+    ContestAICmd_unk_20,                          // 0x20
+    ContestAICmd_unk_21,                          // 0x21
+    ContestAICmd_get_move_excitement,             // 0x22
+    ContestAICmd_unk_23,                          // 0x23
+    ContestAICmd_unk_24,                          // 0x24
+    ContestAICmd_unk_25,                          // 0x25
+    ContestAICmd_unk_26,                          // 0x26
+    ContestAICmd_get_move_effect,                 // 0x27
+    ContestAICmd_unk_28,                          // 0x28
+    ContestAICmd_unk_29,                          // 0x29
+    ContestAICmd_get_move_effect_type,            // 0x2A
+    ContestAICmd_unk_2B,                          // 0x2B
+    ContestAICmd_unk_2C,                          // 0x2C
+    ContestAICmd_check_move_has_highest_appeal,   // 0x2D
+    ContestAICmd_unk_2E,                          // 0x2E
+    ContestAICmd_unk_2F,                          // 0x2F
+    ContestAICmd_unk_30,                          // 0x30
+    ContestAICmd_unk_31,                          // 0x31
+    ContestAICmd_unk_32,                          // 0x32
+    ContestAICmd_unk_33,                          // 0x33
+    ContestAICmd_unk_34,                          // 0x34
+    ContestAICmd_unk_35,                          // 0x35
+    ContestAICmd_unk_36,                          // 0x36
+    ContestAICmd_unk_37,                          // 0x37
+    ContestAICmd_unk_38,                          // 0x38
+    ContestAICmd_unk_39,                          // 0x39
+    ContestAICmd_unk_3A,                          // 0x3A
+    ContestAICmd_get_move_used_count,             // 0x3B
+    ContestAICmd_unk_3C,                          // 0x3C
+    ContestAICmd_unk_3D,                          // 0x3D
+    ContestAICmd_unk_3E,                          // 0x3E
+    ContestAICmd_unk_3F,                          // 0x3F
+    ContestAICmd_check_combo_starter,             // 0x40
+    ContestAICmd_unk_41,                          // 0x41
+    ContestAICmd_unk_42,                          // 0x42
+    ContestAICmd_check_combo_finisher,            // 0x43
+    ContestAICmd_unk_44,                          // 0x44
+    ContestAICmd_unk_45,                          // 0x45
+    ContestAICmd_check_would_finish_combo,        // 0x46
+    ContestAICmd_unk_47,                          // 0x47
+    ContestAICmd_unk_48,                          // 0x48
+    ContestAICmd_get_condition,                   // 0x49
+    ContestAICmd_unk_4A,                          // 0x4A
+    ContestAICmd_unk_4B,                          // 0x4B
+    ContestAICmd_unk_4C,                          // 0x4C
+    ContestAICmd_unk_4D,                          // 0x4D
+    ContestAICmd_get_used_combo_starter,          // 0x4E
+    ContestAICmd_unk_4F,                          // 0x4F
+    ContestAICmd_unk_50,                          // 0x50
+    ContestAICmd_unk_51,                          // 0x51
+    ContestAICmd_unk_52,                          // 0x52
+    ContestAICmd_check_can_participate,           // 0x53
+    ContestAICmd_unk_54,                          // 0x54
+    ContestAICmd_unk_55,                          // 0x55
+    ContestAICmd_get_val_812A188,                 // 0x56
+    ContestAICmd_unk_57,                          // 0x57
+    ContestAICmd_unk_58,                          // 0x58
+    ContestAICmd_unk_59,                          // 0x59
+    ContestAICmd_unk_5A,                          // 0x5A
+    ContestAICmd_unk_5B,                          // 0x5B
+    ContestAICmd_unk_5C,                          // 0x5C
+    ContestAICmd_unk_5D,                          // 0x5D
+    ContestAICmd_unk_5E,                          // 0x5E
+    ContestAICmd_unk_5F,                          // 0x5F
+    ContestAICmd_unk_60,                          // 0x60
+    ContestAICmd_unk_61,                          // 0x61
+    ContestAICmd_unk_62,                          // 0x62
+    ContestAICmd_unk_63,                          // 0x63
+    ContestAICmd_unk_64,                          // 0x64
+    ContestAICmd_unk_65,                          // 0x65
+    ContestAICmd_unk_66,                          // 0x66
+    ContestAICmd_unk_67,                          // 0x67
+    ContestAICmd_unk_68,                          // 0x68
+    ContestAICmd_unk_69,                          // 0x69
+    ContestAICmd_unk_6A,                          // 0x6A
+    ContestAICmd_unk_6B,                          // 0x6B
+    ContestAICmd_unk_6C,                          // 0x6C
+    ContestAICmd_unk_6D,                          // 0x6D
+    ContestAICmd_unk_6E,                          // 0x6E
+    ContestAICmd_unk_6F,                          // 0x6F
+    ContestAICmd_unk_70,                          // 0x70
+    ContestAICmd_unk_71,                          // 0x71
+    ContestAICmd_unk_72,                          // 0x72
+    ContestAICmd_unk_73,                          // 0x73
+    ContestAICmd_unk_74,                          // 0x74
+    ContestAICmd_unk_75,                          // 0x75
+    ContestAICmd_unk_76,                          // 0x76
+    ContestAICmd_unk_77,                          // 0x77
+    ContestAICmd_unk_78,                          // 0x78
+    ContestAICmd_unk_79,                          // 0x79
+    ContestAICmd_unk_7A,                          // 0x7A
+    ContestAICmd_unk_7B,                          // 0x7B
+    ContestAICmd_unk_7C,                          // 0x7C
+    ContestAICmd_unk_7D,                          // 0x7D
+    ContestAICmd_unk_7E,                          // 0x7E
+    ContestAICmd_unk_7F,                          // 0x7F
+    ContestAICmd_unk_80,                          // 0x80
+    ContestAICmd_unk_81,                          // 0x81
+    ContestAICmd_check_for_exciting_move,         // 0x82
+    ContestAICmd_unk_83,                          // 0x83
+    ContestAICmd_unk_84,                          // 0x84
+    ContestAICmd_unk_85,                          // 0x85
+    ContestAICmd_unk_86,                          // 0x86
+    ContestAICmd_unk_87,                          // 0x87
 };
 
 static void ContestAI_DoAIProcessing(void);
@@ -349,13 +342,13 @@ u8 ContestAI_GetActionToUse(void)
 
 static void ContestAI_DoAIProcessing(void)
 {
-    while(eContestAI->aiState != ContestAI_FinishedProcessing)
+    while(eContestAI->aiState != CONTESTAI_FINISHED)
     {
         switch(eContestAI->aiState)
         {
-            case ContestAI_DoNotProcess:
+            case CONTESTAI_DO_NOT_PROCESS:
                 break;
-            case ContestAI_SettingUp:
+            case CONTESTAI_SETTING_UP:
                 gAIScriptPtr = gContestAIs[eContestAI->unk10];
 
                 if(gContestMons[eContestAI->unk41].moves[eContestAI->unk4] == 0)
@@ -364,7 +357,7 @@ static void ContestAI_DoAIProcessing(void)
                     eContestAI->unk2 = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
                 eContestAI->aiState++;
                 break;
-            case ContestAI_Processing:
+            case CONTESTAI_PROCESSING:
                 if(eContestAI->unk2 != 0)
                     sContestAICmdTable[*gAIScriptPtr](); // run the command.
                 else
@@ -421,7 +414,7 @@ static void ContestAICmd_unk_02(void)
 {
     ContestAICmd_get_turn();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -431,7 +424,7 @@ static void ContestAICmd_unk_03(void)
 {
     ContestAICmd_get_turn();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -441,7 +434,7 @@ static void ContestAICmd_unk_04(void)
 {
     ContestAICmd_get_turn();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -451,7 +444,7 @@ static void ContestAICmd_unk_05(void)
 {
     ContestAICmd_get_turn();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -467,7 +460,7 @@ static void ContestAICmd_unk_07(void)
 {
     ContestAICmd_get_excitement();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -477,7 +470,7 @@ static void ContestAICmd_unk_08(void)
 {
     ContestAICmd_get_excitement();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -487,7 +480,7 @@ static void ContestAICmd_unk_09(void)
 {
     ContestAICmd_get_excitement();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -497,7 +490,7 @@ static void ContestAICmd_unk_0A(void)
 {
     ContestAICmd_get_excitement();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -513,7 +506,7 @@ static void ContestAICmd_unk_0C(void)
 {
     ContestAICmd_get_user_order();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -523,7 +516,7 @@ static void ContestAICmd_unk_0D(void)
 {
     ContestAICmd_get_user_order();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -533,7 +526,7 @@ static void ContestAICmd_unk_0E(void)
 {
     ContestAICmd_get_user_order();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -543,7 +536,7 @@ static void ContestAICmd_unk_0F(void)
 {
     ContestAICmd_get_user_order();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -559,7 +552,7 @@ static void ContestAICmd_unk_11(void)
 {
     ContestAICmd_get_user_condition_maybe();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -569,7 +562,7 @@ static void ContestAICmd_unk_12(void)
 {
     ContestAICmd_get_user_condition_maybe();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -579,7 +572,7 @@ static void ContestAICmd_unk_13(void)
 {
     ContestAICmd_get_user_condition_maybe();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -589,7 +582,7 @@ static void ContestAICmd_unk_14(void)
 {
     ContestAICmd_get_user_condition_maybe();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -605,7 +598,7 @@ static void ContestAICmd_unk_16(void)
 {
     ContestAICmd_unk_15();
 
-    if((s16)eContestAI->scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -615,7 +608,7 @@ static void ContestAICmd_unk_17(void)
 {
     ContestAICmd_unk_15();
 
-    if((s16)eContestAI->scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -625,7 +618,7 @@ static void ContestAICmd_unk_18(void)
 {
     ContestAICmd_unk_15();
 
-    if((s16)eContestAI->scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -635,7 +628,7 @@ static void ContestAICmd_unk_19(void)
 {
     ContestAICmd_unk_15();
 
-    if((s16)eContestAI->scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -651,7 +644,7 @@ static void ContestAICmd_unk_1B(void)
 {
     ContestAICmd_unk_1A();
 
-    if((s16)eContestAI->scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult < (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -661,7 +654,7 @@ static void ContestAICmd_unk_1C(void)
 {
     ContestAICmd_unk_1A();
 
-    if((s16)eContestAI->scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult > (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -671,7 +664,7 @@ static void ContestAICmd_unk_1D(void)
 {
     ContestAICmd_unk_1A();
 
-    if((s16)eContestAI->scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult == (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -681,7 +674,7 @@ static void ContestAICmd_unk_1E(void)
 {
     ContestAICmd_unk_1A();
 
-    if((s16)eContestAI->scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
+    if(eContestAI->scriptResult != (s16)T1_READ_16(gAIScriptPtr + 0))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -697,7 +690,7 @@ static void ContestAICmd_unk_20(void)
 {
     ContestAICmd_get_contest_type();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -707,7 +700,7 @@ static void ContestAICmd_unk_21(void)
 {
     ContestAICmd_get_contest_type();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -723,7 +716,7 @@ static void ContestAICmd_unk_23(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if((s16)eContestAI->scriptResult < (s8)gAIScriptPtr[0])
+    if(eContestAI->scriptResult < (s8)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -733,7 +726,7 @@ static void ContestAICmd_unk_24(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if((s16)eContestAI->scriptResult > (s8)gAIScriptPtr[0])
+    if(eContestAI->scriptResult > (s8)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -743,7 +736,7 @@ static void ContestAICmd_unk_25(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if((s16)eContestAI->scriptResult == (s8)gAIScriptPtr[0])
+    if(eContestAI->scriptResult == (s8)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -753,7 +746,7 @@ static void ContestAICmd_unk_26(void)
 {
     ContestAICmd_get_move_excitement();
 
-    if((s16)eContestAI->scriptResult != (s8)gAIScriptPtr[0])
+    if(eContestAI->scriptResult != (s8)gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -771,7 +764,7 @@ static void ContestAICmd_unk_28(void)
 {
     ContestAICmd_get_move_effect();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -781,7 +774,7 @@ static void ContestAICmd_unk_29(void)
 {
     ContestAICmd_get_move_effect();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -799,7 +792,7 @@ static void ContestAICmd_unk_2B(void)
 {
     ContestAICmd_get_move_effect_type();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -809,7 +802,7 @@ static void ContestAICmd_unk_2C(void)
 {
     ContestAICmd_get_move_effect_type();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -840,7 +833,7 @@ static void ContestAICmd_unk_2E(void)
 {
     ContestAICmd_check_move_has_highest_appeal();
 
-    if((s16)eContestAI->scriptResult != FALSE)
+    if(eContestAI->scriptResult != FALSE)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -871,7 +864,7 @@ static void ContestAICmd_unk_30(void)
 {
     ContestAICmd_unk_2F();
 
-    if((s16)eContestAI->scriptResult != FALSE)
+    if(eContestAI->scriptResult != FALSE)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -889,7 +882,7 @@ static void ContestAICmd_unk_32(void)
 {
     ContestAICmd_unk_31();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -899,7 +892,7 @@ static void ContestAICmd_unk_33(void)
 {
     ContestAICmd_unk_31();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -909,7 +902,7 @@ static void ContestAICmd_unk_34(void)
 {
     ContestAICmd_unk_31();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -919,7 +912,7 @@ static void ContestAICmd_unk_35(void)
 {
     ContestAICmd_unk_31();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -937,7 +930,7 @@ static void ContestAICmd_unk_37(void)
 {
     ContestAICmd_unk_36();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -947,7 +940,7 @@ static void ContestAICmd_unk_38(void)
 {
     ContestAICmd_unk_36();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -957,7 +950,7 @@ static void ContestAICmd_unk_39(void)
 {
     ContestAICmd_unk_36();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -967,7 +960,7 @@ static void ContestAICmd_unk_3A(void)
 {
     ContestAICmd_unk_36();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -991,7 +984,7 @@ static void ContestAICmd_unk_3C(void)
 {
     ContestAICmd_get_move_used_count();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1001,7 +994,7 @@ static void ContestAICmd_unk_3D(void)
 {
     ContestAICmd_get_move_used_count();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1011,7 +1004,7 @@ static void ContestAICmd_unk_3E(void)
 {
     ContestAICmd_get_move_used_count();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1021,7 +1014,7 @@ static void ContestAICmd_unk_3F(void)
 {
     ContestAICmd_get_move_used_count();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1057,7 +1050,7 @@ static void ContestAICmd_unk_41(void)
 {
     ContestAICmd_check_combo_starter();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1067,7 +1060,7 @@ static void ContestAICmd_unk_42(void)
 {
     ContestAICmd_check_combo_starter();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1103,7 +1096,7 @@ static void ContestAICmd_unk_44(void)
 {
     ContestAICmd_check_combo_finisher();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1113,7 +1106,7 @@ static void ContestAICmd_unk_45(void)
 {
     ContestAICmd_check_combo_finisher();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1138,7 +1131,7 @@ static void ContestAICmd_unk_47(void)
 {
     ContestAICmd_check_would_finish_combo();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1148,7 +1141,7 @@ static void ContestAICmd_unk_48(void)
 {
     ContestAICmd_check_would_finish_combo();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1166,7 +1159,7 @@ static void ContestAICmd_unk_4A(void)
 {
     ContestAICmd_get_condition();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1176,7 +1169,7 @@ static void ContestAICmd_unk_4B(void)
 {
     ContestAICmd_get_condition();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1186,7 +1179,7 @@ static void ContestAICmd_unk_4C(void)
 {
     ContestAICmd_get_condition();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1196,7 +1189,7 @@ static void ContestAICmd_unk_4D(void)
 {
     ContestAICmd_get_condition();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1218,7 +1211,7 @@ static void ContestAICmd_unk_4F(void)
 {
     ContestAICmd_get_used_combo_starter();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1228,7 +1221,7 @@ static void ContestAICmd_unk_50(void)
 {
     ContestAICmd_get_used_combo_starter();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1238,7 +1231,7 @@ static void ContestAICmd_unk_51(void)
 {
     ContestAICmd_get_used_combo_starter();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1248,7 +1241,7 @@ static void ContestAICmd_unk_52(void)
 {
     ContestAICmd_get_used_combo_starter();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1268,7 +1261,7 @@ static void ContestAICmd_unk_54(void)
 {
     ContestAICmd_check_can_participate();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1278,7 +1271,7 @@ static void ContestAICmd_unk_55(void)
 {
     ContestAICmd_check_can_participate();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1296,7 +1289,7 @@ static void ContestAICmd_unk_57(void)
 {
     ContestAICmd_get_val_812A188();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1306,7 +1299,7 @@ static void ContestAICmd_unk_58(void)
 {
     ContestAICmd_get_val_812A188();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1324,7 +1317,7 @@ static void ContestAICmd_unk_5A(void)
 {
     ContestAICmd_unk_59();
 
-    if((s16)eContestAI->scriptResult < 0)
+    if(eContestAI->scriptResult < 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1334,7 +1327,7 @@ static void ContestAICmd_unk_5B(void)
 {
     ContestAICmd_unk_59();
 
-    if((s16)eContestAI->scriptResult > 0)
+    if(eContestAI->scriptResult > 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1344,7 +1337,7 @@ static void ContestAICmd_unk_5C(void)
 {
     ContestAICmd_unk_59();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1354,7 +1347,7 @@ static void ContestAICmd_unk_5D(void)
 {
     ContestAICmd_unk_59();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1372,7 +1365,7 @@ static void ContestAICmd_unk_5F(void)
 {
     ContestAICmd_unk_5E();
 
-    if((s16)eContestAI->scriptResult < 0)
+    if(eContestAI->scriptResult < 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1382,7 +1375,7 @@ static void ContestAICmd_unk_60(void)
 {
     ContestAICmd_unk_5E();
 
-    if((s16)eContestAI->scriptResult > 0)
+    if(eContestAI->scriptResult > 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1392,7 +1385,7 @@ static void ContestAICmd_unk_61(void)
 {
     ContestAICmd_unk_5E();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1402,7 +1395,7 @@ static void ContestAICmd_unk_62(void)
 {
     ContestAICmd_unk_5E();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1422,7 +1415,7 @@ static void ContestAICmd_unk_64(void)
 {
     ContestAICmd_unk_63();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1432,7 +1425,7 @@ static void ContestAICmd_unk_65(void)
 {
     ContestAICmd_unk_63();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1442,7 +1435,7 @@ static void ContestAICmd_unk_66(void)
 {
     ContestAICmd_unk_63();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1452,7 +1445,7 @@ static void ContestAICmd_unk_67(void)
 {
     ContestAICmd_unk_63();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1472,7 +1465,7 @@ static void ContestAICmd_unk_69(void)
 {
     ContestAICmd_unk_68();
 
-    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+    if(eContestAI->scriptResult < gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1482,7 +1475,7 @@ static void ContestAICmd_unk_6A(void)
 {
     ContestAICmd_unk_68();
 
-    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+    if(eContestAI->scriptResult > gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1492,7 +1485,7 @@ static void ContestAICmd_unk_6B(void)
 {
     ContestAICmd_unk_68();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1502,7 +1495,7 @@ static void ContestAICmd_unk_6C(void)
 {
     ContestAICmd_unk_68();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1522,7 +1515,7 @@ static void ContestAICmd_unk_6E(void)
 {
     ContestAICmd_unk_6D();
 
-    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+    if(eContestAI->scriptResult == gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1532,7 +1525,7 @@ static void ContestAICmd_unk_6F(void)
 {
     ContestAICmd_unk_6D();
 
-    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+    if(eContestAI->scriptResult != gAIScriptPtr[0])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1713,7 +1706,7 @@ static void ContestAICmd_unk_83(void)
 {
     ContestAICmd_check_for_exciting_move();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1723,7 +1716,7 @@ static void ContestAICmd_unk_84(void)
 {
     ContestAICmd_check_for_exciting_move();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1753,7 +1746,7 @@ static void ContestAICmd_unk_86(void)
 {
     ContestAICmd_unk_85();
 
-    if((s16)eContestAI->scriptResult != 0)
+    if(eContestAI->scriptResult != 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;
@@ -1763,7 +1756,7 @@ static void ContestAICmd_unk_87(void)
 {
     ContestAICmd_unk_85();
 
-    if((s16)eContestAI->scriptResult == 0)
+    if(eContestAI->scriptResult == 0)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
     else
         gAIScriptPtr += 4;

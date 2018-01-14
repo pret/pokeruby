@@ -31,13 +31,12 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
+#include "contest_ai.h"
 
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
-extern void ContestAI_ResetAI();
-extern u8 ContestAI_GetActionToUse(void);
 
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern u16 gSpecialVar_ContestCategory;
