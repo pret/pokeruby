@@ -488,7 +488,12 @@ SECTIONS {
         src/battle/battle_controller_linkopponent.o(.rodata);
         data/battle_moves.o(.rodata);
         src/battle/battle_util.o(.rodata);
-        src/pokemon/pokemon_data.o(.rodata);
+        src/pokemon/pokemon_1.o(.rodata);
+        src/pokemon/pokemon_1.o(.data); /* gEvolutionTable needs to be non-const to match */
+        src/battle/calculate_base_damage.o(.rodata);
+        src/pokemon/pokemon_2.o(.rodata);
+        src/pokemon/pokemon_item_effect.o(.rodata);
+        src/pokemon/pokemon_3.o(.rodata);
         . = ALIGN(4);
         src/engine/trig.o(.rodata);
         src/engine/util.o(.rodata);

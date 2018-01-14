@@ -341,7 +341,7 @@ u16 GetEggSpecies(u16 species)
         {
             for (k = 0; k < 5; k++)
             {
-                if (gEvolutionTable[j].evolutions[k].targetSpecies == species)
+                if (gEvolutionTable[j][k].targetSpecies == species)
                 {
                     species = j;
                     found = TRUE;
