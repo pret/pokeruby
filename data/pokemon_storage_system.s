@@ -3,44 +3,6 @@
 
 	.section .rodata
 
-PCPal_Arrow:
-	.incbin "graphics/pokemon_storage/arrow.gbapal"
-PCGfx_Arrow:
-	.incbin "graphics/pokemon_storage/arrow.4bpp"
-
-	.align 2
-gUnknown_083BB288:: @ 83BB288
-	obj_tiles PCGfx_Arrow, 128, 0x0006
-
-	.align 2
-gUnknown_083BB290:: @ 83BB290
-	obj_pal PCPal_Arrow, 0xDACF
-
-	.align 2
-gOamData_83BB298:: @ 83BB298
-	.2byte 0x4000
-	.2byte 0x8000
-	.2byte 0x0800
-
-	.align 2
-gSpriteAnim_83BB2A0:: @ 83BB2A0
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83BB2A8:: @ 83BB2A8
-	obj_image_anim_frame 8, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83BB2B0:: @ 83BB2B0
-	.4byte gSpriteAnim_83BB2A0
-	.4byte gSpriteAnim_83BB2A8
-
-	.align 2
-gSpriteTemplate_83BB2B8:: @ 83BB2B8
-	spr_template 3, 56008, gOamData_83BB298, gSpriteAnimTable_83BB2B0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
 	.align 2
 gOamData_83BB2D0:: @ 83BB2D0
 	.2byte 0x8000

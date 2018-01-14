@@ -2,6 +2,8 @@
 // Includes
 #include "global.h"
 #include "palette.h"
+#include "text.h"
+#include "menu.h"
 #include "pokemon_storage_system.h"
 
 // Static type declarations
@@ -35,6 +37,7 @@ void sub_809A23C(u8 boxId);
 void sub_809A3D0(u8 boxId, s8 a1);
 void sub_809A598(void);
 void sub_809A654(void);
+s16 sub_809A6D0(u8 width);
 void sub_809A6DC(void);
 void sub_809A774(s8 a0);
 void sub_809A810(void);
@@ -757,3 +760,90 @@ __attribute__((naked)) void sub_809A14C(u16 *vdest)
                     "_0809A1B8: .4byte 0xfffff7c0");
 }
 #endif
+
+void sub_809A1BC(const u8 *a0, const u8 *text)
+{
+    u8 *r5 = gUnknown_083B6DB8;
+    DmaClear16(3, r5, 0x200);
+    Text_InitWindow8004E3C(&gWindowTemplate_81E6D38, r5, text);
+    DmaCopy16(3, r5 + 0x000, a0 + 0x000, 0x80);
+    DmaCopy16(3, r5 + 0x100, a0 + 0x080, 0x80);
+    DmaCopy16(3, r5 + 0x080, a0 + 0x100, 0x80);
+    DmaCopy16(3, r5 + 0x180, a0 + 0x180, 0x80);
+}
+
+const struct SpriteTemplate gSpriteTemplate_83BB2B8;
+
+void sub_809A23C(u8 boxId)
+{
+    u8 tagIdx;
+    s16 r6;
+    u16 i;
+
+    struct SpriteSheet spriteSheet = {gPokemonStorageSystemPtr->unk_08ca, 0x200, 3};
+    struct SpritePalette palettes[] = {
+        {gPokemonStorageSystemPtr->unk_0ccc, 0xdac8},
+        {gPokemonStorageSystemPtr->unk_0ccc, 0xdac9},
+        {}
+    };
+
+    u16 wallpaper = gPokemonStorage.wallpaper[boxId];
+    gPokemonStorageSystemPtr->unk_0ccc[14] = gUnknown_083BB0A8[wallpaper][0];
+    gPokemonStorageSystemPtr->unk_0ccc[15] = gUnknown_083BB0A8[wallpaper][1];
+    LoadSpritePalettes(palettes);
+    gPokemonStorageSystemPtr->unk_0d08 = 0x3f0;
+    tagIdx = IndexOfSpritePaletteTag(0xdac8);
+    gPokemonStorageSystemPtr->unk_0cec = 0x10e + 16 * tagIdx;
+    gPokemonStorageSystemPtr->unk_0d08 |= 0x10000 << tagIdx;
+    tagIdx = IndexOfSpritePaletteTag(0xdac9);
+    gPokemonStorageSystemPtr->unk_0cee = 0x10e + 16 * tagIdx;
+    gPokemonStorageSystemPtr->unk_0d08 |= 0x10000 << tagIdx;
+    sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
+    LoadSpriteSheet(&spriteSheet);
+    r6 = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    for (i = 0; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83BB2B8, r6 + i * 32, 0x1c, 23);
+        gPokemonStorageSystemPtr->unk_0cf0[i] = gSprites + spriteId;
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_0cf0[i], i);
+    }
+    gPokemonStorageSystemPtr->unk_0cca = 0;
+}
+
+
+const u16 PCPal_Arrow[] = INCBIN_U16("graphics/pokemon_storage/arrow.gbapal");
+const u8 PCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
+
+const struct SpriteSheet gUnknown_083BB288 = {PCGfx_Arrow, 0x80, 6};
+const struct SpritePalette gUnknown_083BB290 = {PCPal_Arrow, 0xdacf};
+
+const struct OamData gOamData_83BB298 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gSpriteAnim_83BB2A0[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83BB2A8[] = {
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83BB2B0[] = {
+    gSpriteAnim_83BB2A0,
+    gSpriteAnim_83BB2A8
+};
+
+const struct SpriteTemplate gSpriteTemplate_83BB2B8 = {
+    3,
+    0xdac8,
+    &gOamData_83BB298,
+    gSpriteAnimTable_83BB2B0,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
