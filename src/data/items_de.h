@@ -5426,7 +5426,7 @@ const struct Item gItems[] =
     },
     {
         .name = _("VM01"),
-        .itemId = ITEM_HM01,
+        .itemId = ITEM_HM01_CUT,
         .price = 0,
         .holdEffect = HOLD_EFFECT_NONE,
         .holdEffectParam = 0,
