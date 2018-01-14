@@ -79,7 +79,7 @@ struct ContestAIInfo {
  /*0x11*/ u8 filler11[0x3]; // padding?
  /*0x14*/ u32 flags;
  /*0x18*/ u16 scriptResult;
- /*0x1A*/ u8 filler1A[0x26];
+ /*0x1A*/ u16 scriptArr[19]; // TODO: are there more variables after the array?
  /*0x40*/ u8 unk40;
  /*0x41*/ u8 unk41;
  /*0x42*/ u8 filler42[0x2]; // padding?

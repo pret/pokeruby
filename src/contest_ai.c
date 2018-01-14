@@ -1180,3 +1180,194 @@ void ContestAICmd_unk_67(void)
     else
         gAIScriptPtr += 5;
 }
+
+void ContestAICmd_unk_68(void)
+{
+    u8 var = sub_8128A7C(gAIScriptPtr[1]);
+    u8 var2 = gAIScriptPtr[2];
+    s8 result = sContest.unk19248[var2][var];
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 3;
+}
+
+void ContestAICmd_unk_69(void)
+{
+    ContestAICmd_unk_68();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_6A(void)
+{
+    ContestAICmd_unk_68();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_6B(void)
+{
+    ContestAICmd_unk_68();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_6C(void)
+{
+    ContestAICmd_unk_68();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_6D(void)
+{
+    u8 var = sub_8128A7C(gAIScriptPtr[1]);
+    u8 var2 = gAIScriptPtr[2];
+    u16 move = sContest.unk19220[var2][var];
+
+    eContestAI->scriptResult = gContestEffects[gContestMoves[move].effect].effectType;
+    gAIScriptPtr += 3;
+}
+
+void ContestAICmd_unk_6E(void)
+{
+    ContestAICmd_unk_6D();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_6F(void)
+{
+    ContestAICmd_unk_6D();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_70(void)
+{
+    eContestAI->scriptArr[gAIScriptPtr[1]] = eContestAI->scriptResult;
+    gAIScriptPtr += 2;
+}
+
+void ContestAICmd_unk_71(void)
+{
+    eContestAI->scriptArr[gAIScriptPtr[1]] = T1_READ_16(gAIScriptPtr + 2);
+    gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_72(void)
+{
+    // wtf? shouldn't T1_READ_16 work here? why the signed 8 load by gAIScriptPtr[2]?
+    eContestAI->scriptArr[gAIScriptPtr[1]] += ((s8)gAIScriptPtr[2] | gAIScriptPtr[3] << 8);
+    gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_73(void)
+{
+    eContestAI->scriptArr[gAIScriptPtr[1]] += eContestAI->scriptArr[gAIScriptPtr[2]];
+    gAIScriptPtr += 3;
+}
+
+void ContestAICmd_unk_74(void)
+{
+    eContestAI->scriptArr[gAIScriptPtr[1]] += eContestAI->scriptArr[gAIScriptPtr[2]];
+    gAIScriptPtr += 3;
+}
+
+void ContestAICmd_unk_75(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] < T1_READ_16(gAIScriptPtr + 2))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void ContestAICmd_unk_76(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] > T1_READ_16(gAIScriptPtr + 2))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void ContestAICmd_unk_77(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] == T1_READ_16(gAIScriptPtr + 2))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void ContestAICmd_unk_78(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] != T1_READ_16(gAIScriptPtr + 2))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void ContestAICmd_unk_79(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] < ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+void ContestAICmd_unk_7A(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] > ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+void ContestAICmd_unk_7B(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] == ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+void ContestAICmd_unk_7C(void)
+{
+    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] != ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
+    else
+        gAIScriptPtr += 7;
+}
+
+void ContestAICmd_unk_7D(void)
+{
+    if((Random() & 0xFF) < (s16)eContestAI->scriptArr[gAIScriptPtr[1]])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+void ContestAICmd_unk_7E(void)
+{
+    if((Random() & 0xFF) > (s16)eContestAI->scriptArr[gAIScriptPtr[1]])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
