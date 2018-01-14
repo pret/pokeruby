@@ -3,6 +3,10 @@
 #include "random.h"
 #include "ewram.h"
 
+extern u8 AreMovesContestCombo(u16, u16);
+extern bool8 sub_8128A7C(u8);
+extern bool8 sub_80B214C(u8);
+
 enum
 {
     ContestAI_SettingUp,
@@ -745,9 +749,6 @@ void ContestAICmd_unk_3F(void)
         gAIScriptPtr += 5;
 }
 
-extern u8 AreMovesContestCombo(u16, u16);
-
-/*
 void ContestAICmd_check_combo_starter(void)
 {
     u8 result = 0;
@@ -756,85 +757,221 @@ void ContestAICmd_check_combo_starter(void)
 
     for(i = 0; i < 4; i++)
     {
-        u16 newMove = gContestMons[eContestAI->unk41].moves[i];
-        u16 isCombo = AreMovesContestCombo(move, gContestMons[eContestAI->unk41].moves[i]);
-        if(newMove && isCombo)
+        if (gContestMons[eContestAI->unk41].moves[i])
         {
-            result = 1;
-            break;
-        }
-        if(isCombo) // dumb double r5 check?
-        {
-            result = 1;
-            break;
+            result = AreMovesContestCombo(move, gContestMons[eContestAI->unk41].moves[i]);
+            if (result)
+            {
+                result = 1;
+                break;
+            }
         }
     }
 
+    if (result)
+        result = 1;
+
     eContestAI->scriptResult = result;
     gAIScriptPtr += 1;
-}*/
+}
 
-/*
-    thumb_func_start ContestAICmd_check_combo_starter
-ContestAICmd_check_combo_starter: @ 8129B44
-    push {r4-r7,lr}
-    mov r7, r8
-    push {r7}
-    movs r5, 0
-    ldr r3, _08129BAC @ =gContestMons
-    ldr r2, _08129BB0 @ =gSharedMem + 0x192E4
-    ldrb r1, [r2, 0x4]
-    lsls r1, 1
-    adds r2, 0x41
-    ldrb r0, [r2]
-    lsls r0, 6
-    adds r1, r0
-    adds r3, 0x1E
-    adds r1, r3
-    ldrh r6, [r1]
-    movs r4, 0
-    mov r8, r2
-    adds r7, r3, 0
-_08129B68:
-    lsls r0, r4, 1
-    mov r2, r8
-    ldrb r1, [r2]
-    lsls r1, 6
-    adds r0, r1
-    adds r1, r0, r7
-    ldrh r0, [r1]
-    cmp r0, 0
-    beq _08129B8A
-    adds r1, r0, 0
-    adds r0, r6, 0
-    bl AreMovesContestCombo
-    lsls r0, 24
-    lsrs r5, r0, 24
-    cmp r5, 0
-    bne _08129B94
-_08129B8A:
-    adds r4, 0x1
-    cmp r4, 0x3
-    ble _08129B68
-    cmp r5, 0
-    beq _08129B96
-_08129B94:
-    movs r5, 0x1
-_08129B96:
-    ldr r0, _08129BB0 @ =gSharedMem + 0x192E4
-    strh r5, [r0, 0x18]
-    ldr r1, _08129BB4 @ =gAIScriptPtr
-    ldr r0, [r1]
-    adds r0, 0x1
-    str r0, [r1]
-    pop {r3}
-    mov r8, r3
-    pop {r4-r7}
-    pop {r0}
-    bx r0
-    .align 2, 0
-_08129BAC: .4byte gContestMons
-_08129BB0: .4byte gSharedMem + 0x192E4
-_08129BB4: .4byte gAIScriptPtr
-    thumb_func_end ContestAICmd_check_combo_starter
-*/
+void ContestAICmd_unk_41(void)
+{
+    ContestAICmd_check_combo_starter();
+
+    if((s16)eContestAI->scriptResult != 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_42(void)
+{
+    ContestAICmd_check_combo_starter();
+
+    if((s16)eContestAI->scriptResult == 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_check_combo_finisher(void)
+{
+    u8 result = 0;
+    int i;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    for(i = 0; i < 4; i++)
+    {
+        if (gContestMons[eContestAI->unk41].moves[i])
+        {
+            result = AreMovesContestCombo(gContestMons[eContestAI->unk41].moves[i], move);
+            if (result)
+            {
+                result = 1;
+                break;
+            }
+        }
+    }
+
+    if (result)
+        result = 1;
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_44(void)
+{
+    ContestAICmd_check_combo_finisher();
+
+    if((s16)eContestAI->scriptResult != 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_45(void)
+{
+    ContestAICmd_check_combo_finisher();
+
+    if((s16)eContestAI->scriptResult == 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_check_would_finish_combo(void)
+{
+    u8 result = 0;
+    u16 move = gContestMons[eContestAI->unk41].moves[eContestAI->unk4];
+
+    if(sContestantStatus[eContestAI->unk41].prevMove)
+        result = AreMovesContestCombo(sContestantStatus[eContestAI->unk41].prevMove, move);
+    
+    if(result)
+        result = 1;
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_47(void)
+{
+    ContestAICmd_check_would_finish_combo();
+
+    if((s16)eContestAI->scriptResult != 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_48(void)
+{
+    ContestAICmd_check_would_finish_combo();
+
+    if((s16)eContestAI->scriptResult == 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_get_condition(void)
+{
+    int var = sub_8128A7C(gAIScriptPtr[1]);
+
+    eContestAI->scriptResult = sContestantStatus[var].unkD / 10;
+    gAIScriptPtr += 2;
+}
+
+void ContestAICmd_unk_4A(void)
+{
+    ContestAICmd_get_condition();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_4B(void)
+{
+    ContestAICmd_get_condition();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_4C(void)
+{
+    ContestAICmd_get_condition();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_4D(void)
+{
+    ContestAICmd_get_condition();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_get_used_combo_starter(void)
+{
+    u16 result = 0;
+    u8 var = sub_8128A7C(gAIScriptPtr[1]);
+
+    if(sub_80B214C(var))
+        result = gContestMoves[sContestantStatus[var].prevMove].comboStarterId ? 1 : 0;
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 2;
+}
+
+void ContestAICmd_unk_4F(void)
+{
+    ContestAICmd_get_used_combo_starter();
+
+    if((s16)eContestAI->scriptResult < gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_50(void)
+{
+    ContestAICmd_get_used_combo_starter();
+
+    if((s16)eContestAI->scriptResult > gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_51(void)
+{
+    ContestAICmd_get_used_combo_starter();
+
+    if((s16)eContestAI->scriptResult == gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void ContestAICmd_unk_52(void)
+{
+    ContestAICmd_get_used_combo_starter();
+
+    if((s16)eContestAI->scriptResult != gAIScriptPtr[0])
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
