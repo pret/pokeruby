@@ -93,7 +93,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	end
 
 MauvilleCity_Gym_EventScript_15661D:: @ 815661D
-	giveitem_std ITEM_TM34
+	giveitem_std ITEM_TM34_SHOCK_WAVE
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_Gym_EventScript_1A029B
 	msgbox MauvilleCity_Gym_Text_180E76, 4

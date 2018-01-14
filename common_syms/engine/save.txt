@@ -1,5 +1,5 @@
-gLastWrittenSector
-gLastSaveCounter
+gFirstSaveSector
+gPrevSaveCounter
 gLastKnownGoodSector
 gDamagedSaveSectors
 gSaveCounter

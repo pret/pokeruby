@@ -35,7 +35,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	end
 
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
-	giveitem_std ITEM_TM40
+	giveitem_std ITEM_TM40_AERIAL_ACE
 	compare RESULT, 0
 	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4

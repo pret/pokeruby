@@ -9,7 +9,7 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	call GraniteCave_StevensRoom_EventScript_1A067F
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	msgbox GraniteCave_StevensRoom_Text_194BDD, 4
-	giveitem_std ITEM_TM47
+	giveitem_std ITEM_TM47_STEEL_WING
 	compare RESULT, 0
 	call_if_eq GraniteCave_StevensRoom_EventScript_15CC83
 	msgbox GraniteCave_StevensRoom_Text_194C8D, 4

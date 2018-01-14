@@ -497,35 +497,31 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 {
     u32 data = 0;
-    if (gEvolutionTable[preEvoSpecies].evolutions[0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < 6)
+
+    if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < 6)
     {
         s32 i;
         struct Pokemon* Shedinja = &gPlayerParty[gPlayerPartyCount];
-        const struct EvolutionData* EvoTable;
-        const struct EvolutionData* Evos;
 
         CopyMon(Shedinja, mon, sizeof(struct Pokemon));
-        SetMonData(Shedinja, MON_DATA_SPECIES, (void*)(&gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies));
-        SetMonData(Shedinja, MON_DATA_NICKNAME, (void*)(gSpeciesNames[gEvolutionTable[preEvoSpecies].evolutions[1].targetSpecies]));
-        SetMonData(Shedinja, MON_DATA_HELD_ITEM, (void*)(&data));
-        SetMonData(Shedinja, MON_DATA_MARKINGS, (void*)(&data));
-        SetMonData(Shedinja, MON_DATA_10, (void*)(&data));
+        SetMonData(Shedinja, MON_DATA_SPECIES, (void*)&gEvolutionTable[preEvoSpecies][1].targetSpecies);
+        SetMonData(Shedinja, MON_DATA_NICKNAME, (void*)gSpeciesNames[gEvolutionTable[preEvoSpecies][1].targetSpecies]);
+        SetMonData(Shedinja, MON_DATA_HELD_ITEM, (void*)&data);
+        SetMonData(Shedinja, MON_DATA_MARKINGS, (void*)&data);
+        SetMonData(Shedinja, MON_DATA_10, (void*)&data);
         for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + 5; i++)
-            SetMonData(Shedinja, i, (void*)(&data));
+            SetMonData(Shedinja, i, (void*)&data);
         for (i = MON_DATA_CHAMPION_RIBBON; i <= MON_DATA_FATEFUL_ENCOUNTER; i++)
-            SetMonData(Shedinja, i, (void*)(&data));
-        SetMonData(Shedinja, MON_DATA_STATUS, (void*)(&data));
+            SetMonData(Shedinja, i, (void*)&data);
+        SetMonData(Shedinja, MON_DATA_STATUS, (void*)&data);
         data = 0xFF;
-        SetMonData(Shedinja, MON_DATA_MAIL, (void*)(&data));
+        SetMonData(Shedinja, MON_DATA_MAIL, (void*)&data);
 
         CalculateMonStats(Shedinja);
         CalculatePlayerPartyCount();
 
-        // can't match it otherwise, ehh
-        EvoTable = gEvolutionTable;
-        Evos = EvoTable + preEvoSpecies;
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 2);
-        GetSetPokedexFlag(SpeciesToNationalPokedexNum(Evos->evolutions[1].targetSpecies), 3);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), 2);
+        GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), 3);
 
         if (GetMonData(Shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
             && GetMonData(Shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE

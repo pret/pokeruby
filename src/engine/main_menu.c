@@ -1,4 +1,6 @@
 #include "global.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 #include "main_menu.h"
 #include "data2.h"
 #include "decompress.h"
@@ -13,9 +15,8 @@
 #include "overworld.h"
 #include "rtc.h"
 #include "save_menu_util.h"
-#include "constants/songs.h"
+#include "save.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -27,8 +28,6 @@
 #define BirchSpeechUpdateWindowText() ((u8)Menu_UpdateWindowTextOverrideLineLength(24))
 
 extern struct PaletteFadeControl gPaletteFade;
-
-extern u16 gSaveFileStatus;
 
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
@@ -284,12 +283,11 @@ void Task_MainMenuCheckSave(u8 taskId)
 
     switch (gSaveFileStatus)
     {
-    case 1:
+    case SAVE_STATUS_OK:
         if (IsMysteryGiftEnabled() == TRUE)
             gTasks[taskId].tMenuLayout = HAS_MYSTERY_GIFT;
         else
             gTasks[taskId].tMenuLayout = HAS_SAVED_GAME;
-
         gTasks[taskId].func = Task_MainMenuCheckRtc;
         break;
     case 2:
@@ -300,7 +298,7 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].tMenuLayout = HAS_NO_SAVED_GAME;
         gTasks[taskId].func = Task_MainMenuWaitForSaveErrorAck;
         break;
-    case 255:
+    case SAVE_STATUS_ERROR:
         Menu_DrawStdWindowFrame(2, 14, 27, 19);
         MenuPrintMessage(gSaveFileCorruptMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
@@ -313,12 +311,12 @@ void Task_MainMenuCheckSave(u8 taskId)
         else
             gTasks[taskId].tMenuLayout = HAS_SAVED_GAME;
         break;
-    case 0:
+    case SAVE_STATUS_EMPTY:
     default:
         gTasks[taskId].tMenuLayout = HAS_NO_SAVED_GAME;
         gTasks[taskId].func = Task_MainMenuCheckRtc;
         break;
-    case 4:
+    case SAVE_STATUS_NO_FLASH:
         Menu_DrawStdWindowFrame(2, 14, 27, 19);
         MenuPrintMessage(gBoardNotInstalledMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);

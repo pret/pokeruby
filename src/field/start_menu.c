@@ -664,20 +664,20 @@ static u8 SaveDialogCB_DisplaySavingMessage(void)
 
 static u8 SaveDialogCB_DoSave(void)
 {
-    bool8 saveSucceeded;
+    u8 saveStatus;
 
     IncrementGameStat(0);
     if (gDifferentSaveFile == TRUE)
     {
-        saveSucceeded = TrySavingData(DIFFERENT_FILE_SAVE);
+        saveStatus = Save_WriteData(SAVE_OVERWRITE_DIFFERENT_FILE);
         gDifferentSaveFile = FALSE;
     }
     else
     {
-        saveSucceeded = TrySavingData(NORMAL_SAVE);
+        saveStatus = Save_WriteData(SAVE_NORMAL);
     }
 
-    if (saveSucceeded == TRUE)
+    if (saveStatus == SAVE_STATUS_OK)
     {
         //"(Player) saved the game."
         DisplaySaveMessageWithCallback(gSaveText_PlayerSavedTheGame, SaveDialogCB_SaveSuccess);

@@ -20,7 +20,7 @@ PetalburgCity_WallysHouse_EventScript_1543F7:: @ 81543F7
 
 PetalburgCity_WallysHouse_EventScript_154406:: @ 8154406
 	msgbox PetalburgCity_WallysHouse_Text_179996, 4
-	giveitem_std ITEM_HM03
+	giveitem_std ITEM_HM03_SURF
 	setflag FLAG_RECEIVED_HM03
 	msgbox PetalburgCity_WallysHouse_Text_179B14, 4
 	release

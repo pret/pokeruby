@@ -473,8 +473,8 @@ SlateportCity_EventScript_14BE9A:: @ 814BE9A
 
 	.align 2
 SlateportCity_Items2:: @ 814BEB4
-	.2byte ITEM_TM10
-	.2byte ITEM_TM43
+	.2byte ITEM_TM10_HIDDEN_POWER
+	.2byte ITEM_TM43_SECRET_POWER
 	.2byte ITEM_NONE
 	release
 	end

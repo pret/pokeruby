@@ -402,7 +402,7 @@ _080C8838:
 	mov r1, r8
 	strb r1, [r4, 0xA]
 _080C883E:
-	ldr r0, _080C886C @ =gUnknown_0203857D
+	ldr r0, _080C886C @ =gContestMons + 0xD
 	adds r4, r5, r0
 	ldrh r0, [r6, 0x1A]
 	cmp r0, 0x1
@@ -425,7 +425,7 @@ _080C883E:
 	strb r0, [r4]
 	b _080C8878
 	.align 2, 0
-_080C886C: .4byte gUnknown_0203857D
+_080C886C: .4byte gContestMons + 0xD
 _080C8870:
 	ldrb r0, [r4, 0x7]
 	strb r0, [r4, 0x5]
@@ -610,7 +610,7 @@ _080C886C:
 	mov r2, r9
 	strb r2, [r4, 0xA]
 _080C8872:
-	ldr r0, _080C88A0 @ =gUnknown_0203857D
+	ldr r0, _080C88A0 @ =gContestMons + 0xD
 	adds r4, r6, r0
 	ldrh r0, [r7, 0x1A]
 	cmp r0, 0x1
@@ -633,7 +633,7 @@ _080C8872:
 	strb r0, [r4]
 	b _080C88AC
 	.align 2, 0
-_080C88A0: .4byte gUnknown_0203857D
+_080C88A0: .4byte gContestMons + 0xD
 _080C88A4:
 	ldrb r0, [r4, 0x7]
 	strb r0, [r4, 0x5]

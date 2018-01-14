@@ -397,17 +397,7 @@ gUnknown_0203856C: @ 203856C
 	.space 0x4
 
 gContestMons: @ 2038570
-	.space 0xD
-
-gUnknown_0203857D: @ 203857D
-	.space 0x11
-
-	@ contest move space
-gUnknown_0203858E: @ 203858E
-	.space 0x8
-
-gUnknown_02038596: @ 2038596
-	.space 0xDA
+	.space 0x100
 
 gUnknown_02038670: @ 2038670
 	.space 0x8
