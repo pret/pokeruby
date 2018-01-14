@@ -27,6 +27,8 @@ typedef void (* ContestAICmdFunc)(void);
 extern const ContestAICmdFunc sContestAICmdTable[]; // TODO: Move table to C file
 
 void ContestAI_DoAIProcessing(void);
+void sub_812ACA4(u8 *);
+u8 sub_812ACC8(void);
 
 void ContestAI_ResetAI(u8 var)
 {
@@ -1370,4 +1372,124 @@ void ContestAICmd_unk_7E(void)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
+}
+
+// jump
+void ContestAICmd_unk_7F(void)
+{
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+}
+
+void ContestAICmd_unk_80(void)
+{
+    sub_812ACA4(gAIScriptPtr + 5);
+    gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
+}
+
+void ContestAICmd_unk_81(void)
+{
+    if(!sub_812ACC8())
+        eContestAI->aiAction |= 1;
+}
+
+// push stack?
+void sub_812ACA4(u8 *ptr)
+{
+    u8 unk40 = eContestAI->unk40++;
+    eContestAI->stack[unk40] = (u32)ptr;
+}
+
+// pop stack?
+bool8 sub_812ACC8(void)
+{
+    if(eContestAI->unk40 != 0)
+    {
+        --eContestAI->unk40;
+        gAIScriptPtr = (u8 *)eContestAI->stack[eContestAI->unk40];
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
+void ContestAICmd_check_for_exciting_move(void)
+{
+    int result = 0;
+    int i;
+
+    for(i = 0; i < 4; i++)
+    {
+        if(gContestMons[eContestAI->unk41].moves[i])
+        {
+            // why is it using gSharedMem + 0x19325? that does not exist...
+            if(Contest_GetMoveExcitement(gContestMons[eContestAI->unk41].moves[i]) == 1)
+            {
+                result = 1;
+                break;
+            }
+        }
+    }
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 1;
+}
+
+void ContestAICmd_unk_83(void)
+{
+    ContestAICmd_check_for_exciting_move();
+
+    if((s16)eContestAI->scriptResult != 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_84(void)
+{
+    ContestAICmd_check_for_exciting_move();
+
+    if((s16)eContestAI->scriptResult == 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_85(void)
+{
+    int result = 0;
+    int i;
+    u16 arg = T1_READ_16(gAIScriptPtr + 1);
+    
+    for(i = 0; i < 4; i++)
+    {
+        u16 move = gContestMons[eContestAI->unk41].moves[i];
+        if(move == arg)
+        {
+            result = 1;
+            break;
+        }
+    }
+
+    eContestAI->scriptResult = result;
+    gAIScriptPtr += 3;
+}
+
+void ContestAICmd_unk_86(void)
+{
+    ContestAICmd_unk_85();
+
+    if((s16)eContestAI->scriptResult != 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
+}
+
+void ContestAICmd_unk_87(void)
+{
+    ContestAICmd_unk_85();
+
+    if((s16)eContestAI->scriptResult == 0)
+        gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 0);
+    else
+        gAIScriptPtr += 4;
 }
