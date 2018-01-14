@@ -1609,7 +1609,7 @@ static void PrintFlyTargetName(void)
     if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
     {
         u16 i;
-		bool32 drawFrameDisabled = FALSE;
+        bool32 drawFrameDisabled = FALSE;
 
         for (i = 0; i < ARRAY_COUNT(sUnknown_083E79C0); i++)
         {
