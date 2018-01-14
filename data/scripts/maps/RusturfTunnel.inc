@@ -63,7 +63,7 @@ RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	call_if_eq RusturfTunnel_EventScript_15C8EB
 	compare VAR_TEMP_1, 3
 	call_if_eq RusturfTunnel_EventScript_15C8EB
-	giveitem_std ITEM_HM04
+	giveitem_std ITEM_HM04_STRENGTH
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage

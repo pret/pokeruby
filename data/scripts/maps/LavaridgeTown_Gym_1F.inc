@@ -83,7 +83,7 @@ LavaridgeTown_Gym_1F_EventScript_153766:: @ 8153766
 	end
 
 LavaridgeTown_Gym_1F_EventScript_1537A7:: @ 81537A7
-	giveitem_std ITEM_TM50
+	giveitem_std ITEM_TM50_OVERHEAT
 	compare RESULT, 0
 	goto_if_eq LavaridgeTown_Gym_1F_EventScript_1A029B
 	msgbox LavaridgeTown_Gym_1F_Text_176B8F, 4
