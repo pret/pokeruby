@@ -69,21 +69,18 @@ struct ContestPokemon
 
 struct ContestAIInfo {
  /*0x00*/ u8 aiState;
- /*0x01*/ u8 filler1[1]; // padding?
  /*0x02*/ u16 unk2;
  /*0x04*/ u8 unk4;
  /*0x05*/ u8 unk5[4];
  /*0x09*/ u8 aiAction;
- /*0x0A*/ u8 fillerA[0x6];
+ /*0x0A*/ u8 fillerA[0x6]; // TODO: don't know what's here
  /*0x10*/ u8 unk10;
- /*0x11*/ u8 filler11[0x3]; // padding?
  /*0x14*/ u32 flags;
  /*0x18*/ u16 scriptResult;
  /*0x1A*/ u16 scriptArr[3]; // TODO: are there more variables after the array?
  /*0x20*/ u32 stack[8];
  /*0x40*/ u8 unk40;
  /*0x41*/ u8 unk41;
- /*0x42*/ u8 filler42[0x2]; // padding?
 };
 
 extern struct ContestPokemon gContestMons[];
@@ -261,6 +258,7 @@ struct UnknownContestStruct6
     s32 unkC;
 };
 
+// TODO: Please move these to ewram.h once the defines are settled down and figured out completely.
 #define shared15800 (gSharedMem + 0x15800)
 #define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
 #define shared16800 (gSharedMem + 0x16800)
