@@ -355,7 +355,7 @@ u8 BattleAI_GetAIActionToUse(void)
     {
         if (AI_THINKING_STRUCT->aiFlags & 1)
         {
-            AI_THINKING_STRUCT->aiState = AIState_SettingUp;
+            AI_THINKING_STRUCT->aiState = BATTLEAI_SETTING_UP;
             BattleAI_DoAIProcessing();
         }
         AI_THINKING_STRUCT->aiFlags >>= 1;
@@ -393,13 +393,13 @@ u8 BattleAI_GetAIActionToUse(void)
 
 void BattleAI_DoAIProcessing(void)
 {
-    while (AI_THINKING_STRUCT->aiState != AIState_FinishedProcessing)
+    while (AI_THINKING_STRUCT->aiState != BATTLEAI_FINISHED)
     {
         switch (AI_THINKING_STRUCT->aiState)
         {
-        case AIState_DoNotProcess: //Needed to match.
+        case BATTLEAI_DO_NOT_PROCESS: //Needed to match.
             break;
-        case AIState_SettingUp:
+        case BATTLEAI_SETTING_UP:
             gAIScriptPtr = BattleAIs[AI_THINKING_STRUCT->aiLogicId]; // set the AI ptr.
             if (gBattleMons[gBankAttacker].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
             {
@@ -411,7 +411,7 @@ void BattleAI_DoAIProcessing(void)
             }
             AI_THINKING_STRUCT->aiState++;
             break;
-        case AIState_Processing:
+        case BATTLEAI_PROCESSING:
             if (AI_THINKING_STRUCT->moveConsidered != MOVE_NONE)
                 sBattleAICmdTable[*gAIScriptPtr](); // run AI command.
             else
@@ -423,7 +423,7 @@ void BattleAI_DoAIProcessing(void)
             {
                 AI_THINKING_STRUCT->movesetIndex++;
                 if (AI_THINKING_STRUCT->movesetIndex < MAX_MON_MOVES && (AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK) == 0)
-                    AI_THINKING_STRUCT->aiState = AIState_SettingUp; // as long as their are more moves to process, keep setting this to setup state.
+                    AI_THINKING_STRUCT->aiState = BATTLEAI_SETTING_UP; // as long as their are more moves to process, keep setting this to setup state.
                 else
                     AI_THINKING_STRUCT->aiState++; // done processing.
                 AI_THINKING_STRUCT->aiAction &= (AI_ACTION_FLEE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK |
