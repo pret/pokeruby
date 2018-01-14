@@ -402,7 +402,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 	end
 
 PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
-	giveitem_std ITEM_TM42
+	giveitem_std ITEM_TM42_FACADE
 	compare RESULT, 0
 	goto_if_eq PetalburgCity_Gym_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM42

@@ -118,7 +118,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	end
 
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
-	giveitem_std ITEM_TM08
+	giveitem_std ITEM_TM08_BULK_UP
 	compare RESULT, 0
 	goto_if_eq DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
