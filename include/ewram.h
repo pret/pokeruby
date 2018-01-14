@@ -20,7 +20,7 @@ extern u8 gSharedMem[];
 #define eBrendanSprite                  (gSharedMem + 0x0)
 #define ewram0_6                        (u32)(&gSharedMem[0])
 #define ewram0_7                        (&gSharedMem[0])
-#define eSaveSection                    (struct SaveSection *)(gSharedMem + 0x0)
+#define eSaveSection                    (struct SaveSector *)(gSharedMem + 0x0)
 #define ewram0arr                       ((u8 (*)[32])gSharedMem)
 #define eVoidSharedArr                  (void *)(ewram_addr + 0x0)
 #define eVoidSharedArr2                 (u32)(ewram_addr) // ew(ram)
