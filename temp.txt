@@ -1,0 +1,55 @@
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FB0 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8530,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FC8 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A85C8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FE0 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8638,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FF8 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8764,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C2010 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8818,
+};
+
