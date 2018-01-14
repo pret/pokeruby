@@ -236,48 +236,41 @@ void sub_80B3094(void)
 
 void sub_80B30AC(void)
 {
-    void *addr;
-    void *addr2;
-    void *addr3;
-    u16 *tempArr;
-    u16 *tempArr2;
-    u16 *tempArr3;
-
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-
-    // temp vars needed to match for some dumb reason
-    tempArr = gBGTilemapBuffers[1];
-    addr = (void *)(VRAM + 0xE800);
-    DmaCopy16(3,  tempArr, addr, 0x800);
-    tempArr2 = gBGTilemapBuffers[2];
-    addr2 = (void *)(VRAM + 0xE000);
-    DmaCopy16(3,  tempArr2, addr2, 0x800);
-    tempArr3 = gBGTilemapBuffers[3];
-    addr3 = (void *)(VRAM + 0xF000);
-    DmaCopy16(3,  tempArr3, addr3, 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[1], (void *)(VRAM + 0xE800), 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0xE000), 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[3], (void *)(VRAM + 0xF000), 0x800);
 }
 
-// this function is fugly. pls fix
 void BuyMenuDrawGraphics(void)
 {
-    void *addr;
-    register u16 zero2 asm("r5");
-
     sub_80F9438();
     ScanlineEffect_Stop();
-    REG_BG1HOFS = (zero2 = 0);
-    REG_BG1VOFS = zero2;
-    REG_BG2HOFS = zero2;
-    REG_BG2VOFS = zero2;
-    REG_BG3HOFS = zero2;
-    REG_BG3VOFS = zero2;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
     gPaletteFade.bufferTransferDisabled = 1;
-    addr = (void*)OAM;
-    {
-    register const u32 zero asm("r6") = 0;
-    DmaFill32(3, zero, addr, OAM_SIZE);
+
+    /*
+        THEORY: This seemingly useless loop is required in order to match this
+        function without hacks. The reason is because it alters the 0 optimization
+        of a later assignment into using 2 different 0s instead of the same register.
+        It is speculated that at some point Game Freak insert an artificial
+        breakpoint here in order to look at the contents of OAM before it is cleared,
+        possibly because a programmer made a mistake in shop.c which corrupted its
+        contents. There may have been a macro here which at one point idled on the
+        while(1) but was changed to 0 for release due to a define somewhere. A
+        while(0) also matches, but it is more correct to use do {} while(0) as it
+        was a fix to prevent compiler warnings on older compilers.
+    */
+    do {} while(0);
+
+    DmaFill32Defvars(3, 0, (void*)OAM, OAM_SIZE);
     LZDecompressVram(gBuyMenuFrame_Gfx, (void*)(VRAM + 0x7C00));
     LZDecompressWram(gBuyMenuFrame_Tilemap, ewram18000_2);
     LoadCompressedPalette(gMenuMoneyPal, 0xC0, sizeof(gMenuMoneyPal));
@@ -288,8 +281,8 @@ void BuyMenuDrawGraphics(void)
     Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
     InitMenuWindow(&gWindowTemplate_81E6DFC);
     BuyMenuDrawMapGraphics();
-    gMartInfo.cursor = zero;
-    gMartInfo.choicesAbove = zero2;
+    gMartInfo.cursor = 0;
+    gMartInfo.choicesAbove = 0;
     Menu_EraseWindowRect(0, 0, 0x20, 0x20);
     OpenMoneyWindow(gSaveBlock1.money, 0, 0);
     sub_80B3764(0, 7);
@@ -297,12 +290,10 @@ void BuyMenuDrawGraphics(void)
     sub_80B3270();
     CreateTask(sub_80B40E8, 0x8);
     sub_80B3240();
-    asm("":::"r4"); // what??
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, zero);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
     gPaletteFade.bufferTransferDisabled = 0;
     SetVBlankCallback(sub_80B30AC);
     SetMainCallback2(sub_80B3094);
-    }
 }
 
 void sub_80B3240(void)
