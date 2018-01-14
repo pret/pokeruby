@@ -566,7 +566,7 @@ static void sub_814217C(u8 taskID)
 static void sub_8142274(u8 taskID)
 {
     gGameContinueCallback = sub_8141FC4;
-    TrySavingData(3);
+    Save_WriteData(3);
     PlaySE(SE_SAVE);
     gTasks[taskID].func = sub_81422B8;
     gTasks[taskID].tFrameCount = 32;

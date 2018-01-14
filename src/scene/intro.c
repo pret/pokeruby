@@ -930,7 +930,7 @@ void CB2_InitCopyrightScreenAfterBootup(void)
     if (!SetUpCopyrightScreen())
     {
         sub_8052E4C();
-        ResetSaveCounters();
+        Save_ResetSaveCounters();
         sub_8125EC8(0);
         if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
             ClearSav2();
