@@ -36,11 +36,14 @@ void sub_809A14C(u16 *vdest);
 void sub_809A23C(u8 boxId);
 void sub_809A3D0(u8 boxId, s8 a1);
 void sub_809A598(void);
+void sub_809A5E8(struct Sprite *sprite);
+void sub_809A61C(struct Sprite *sprite);
 void sub_809A654(void);
 s16 sub_809A6D0(u8 width);
 void sub_809A6DC(void);
 void sub_809A774(s8 a0);
 void sub_809A810(void);
+void sub_809A8C8(struct Sprite *sprite);
 
 // .rodata
 
@@ -810,6 +813,47 @@ void sub_809A23C(u8 boxId)
     gPokemonStorageSystemPtr->unk_0cca = 0;
 }
 
+void sub_809A3D0(u8 boxId, s8 a1)
+{
+    u16 r8;
+    s16 x;
+    s16 x2;
+    u16 i;
+    struct SpriteSheet spriteSheet = {gPokemonStorageSystemPtr->unk_08ca, 0x200, 3};
+    struct SpriteTemplate template = gSpriteTemplate_83BB2B8;
+
+    gPokemonStorageSystemPtr->unk_0cca = gPokemonStorageSystemPtr->unk_0cca ? FALSE : TRUE;
+    if (gPokemonStorageSystemPtr->unk_0cca == 0)
+    {
+        spriteSheet.tag = 3;
+        r8 = gPokemonStorageSystemPtr->unk_0cec;
+    }
+    else
+    {
+        spriteSheet.tag = 4;
+        r8 = gPokemonStorageSystemPtr->unk_0cec;
+        template.tileTag = 4;
+        template.paletteTag = 0xdac9;
+    }
+    sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
+    LoadSpriteSheet(&spriteSheet);
+    LoadPalette(gUnknown_083BB0A8[gPokemonStorage.wallpaper[boxId]], r8, 0x04);
+    x = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    x2 = x + a1 * 192;
+    for (i = 0; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(&template, i * 32 + x2, 0x1c, 23);
+        gPokemonStorageSystemPtr->unk_0cf8[i] = gSprites + spriteId;
+        gPokemonStorageSystemPtr->unk_0cf8[i]->data[0] = (-a1) * 6;
+        gPokemonStorageSystemPtr->unk_0cf8[i]->data[1] = i * 32 + x;
+        gPokemonStorageSystemPtr->unk_0cf8[i]->data[2] = 1;
+        gPokemonStorageSystemPtr->unk_0cf8[i]->callback = sub_809A5E8;
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_0cf8[i], i);
+        gPokemonStorageSystemPtr->unk_0cf0[i]->data[0] = (-a1) * 6;
+        gPokemonStorageSystemPtr->unk_0cf0[i]->data[1] = 1;
+        gPokemonStorageSystemPtr->unk_0cf0[i]->callback = sub_809A61C;
+    }
+}
 
 const u16 PCPal_Arrow[] = INCBIN_U16("graphics/pokemon_storage/arrow.gbapal");
 const u8 PCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
