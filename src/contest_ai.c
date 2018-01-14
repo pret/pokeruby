@@ -1564,7 +1564,7 @@ static void ContestAICmd_unk_74(void)
 
 static void ContestAICmd_unk_75(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] < T1_READ_16(gAIScriptPtr + 2))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] < T1_READ_16(gAIScriptPtr + 2))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1572,7 +1572,7 @@ static void ContestAICmd_unk_75(void)
 
 static void ContestAICmd_unk_76(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] > T1_READ_16(gAIScriptPtr + 2))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] > T1_READ_16(gAIScriptPtr + 2))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1580,7 +1580,7 @@ static void ContestAICmd_unk_76(void)
 
 static void ContestAICmd_unk_77(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] == T1_READ_16(gAIScriptPtr + 2))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] == T1_READ_16(gAIScriptPtr + 2))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1588,7 +1588,7 @@ static void ContestAICmd_unk_77(void)
 
 static void ContestAICmd_unk_78(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] != T1_READ_16(gAIScriptPtr + 2))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] != T1_READ_16(gAIScriptPtr + 2))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
@@ -1596,7 +1596,7 @@ static void ContestAICmd_unk_78(void)
 
 static void ContestAICmd_unk_79(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] < ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] < (eContestAI->scriptArr[gAIScriptPtr[2]]))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -1604,7 +1604,7 @@ static void ContestAICmd_unk_79(void)
 
 static void ContestAICmd_unk_7A(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] > ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] > (eContestAI->scriptArr[gAIScriptPtr[2]]))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -1612,7 +1612,7 @@ static void ContestAICmd_unk_7A(void)
 
 static void ContestAICmd_unk_7B(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] == ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] == (eContestAI->scriptArr[gAIScriptPtr[2]]))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -1620,7 +1620,7 @@ static void ContestAICmd_unk_7B(void)
 
 static void ContestAICmd_unk_7C(void)
 {
-    if((s16)eContestAI->scriptArr[gAIScriptPtr[1]] != ((s16)eContestAI->scriptArr[gAIScriptPtr[2]]))
+    if(eContestAI->scriptArr[gAIScriptPtr[1]] != (eContestAI->scriptArr[gAIScriptPtr[2]]))
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
     else
         gAIScriptPtr += 7;
@@ -1628,7 +1628,7 @@ static void ContestAICmd_unk_7C(void)
 
 static void ContestAICmd_unk_7D(void)
 {
-    if((Random() & 0xFF) < (s16)eContestAI->scriptArr[gAIScriptPtr[1]])
+    if((Random() & 0xFF) < eContestAI->scriptArr[gAIScriptPtr[1]])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1636,7 +1636,7 @@ static void ContestAICmd_unk_7D(void)
 
 static void ContestAICmd_unk_7E(void)
 {
-    if((Random() & 0xFF) > (s16)eContestAI->scriptArr[gAIScriptPtr[1]])
+    if((Random() & 0xFF) > eContestAI->scriptArr[gAIScriptPtr[1]])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
