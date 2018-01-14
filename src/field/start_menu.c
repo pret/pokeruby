@@ -395,7 +395,7 @@ static u8 StartMenu_PlayerCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        sub_8093110(sub_805469C);
+        TrainerCard_ShowPlayerCard(sub_805469C);
         return 1;
     }
     return 0;
@@ -443,7 +443,7 @@ static u8 StartMenu_PlayerLinkCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        sub_8093130(gUnknown_03004860, sub_805469C);
+        TrainerCard_ShowLinkCard(gUnknown_03004860, sub_805469C);
         return 1;
     }
     return 0;

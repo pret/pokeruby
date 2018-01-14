@@ -125,9 +125,9 @@ u16 GetPokedexSeenCount()
     return pokedexSeenCount;
 }
 
-void FormatPlayTime(char *playtime, u16 hours, u16 minutes, u16 unk)
+void FormatPlayTime(char *playtime, u16 hours, u16 minutes, u16 colon)
 {
-    s16 colon = unk;
+    s16 _colon = colon;
     playtime = ConvertIntToDecimalString(playtime, hours);
 
     // playtime[0] is hours.
@@ -136,7 +136,7 @@ void FormatPlayTime(char *playtime, u16 hours, u16 minutes, u16 unk)
 
     playtime[0] = 0;
 
-    if (colon)
+    if (_colon)
         playtime[1] = 0xF0; // set middle character to ":"
     else
         playtime[1] = 0;

@@ -301,7 +301,7 @@ SECTIONS {
         asm/dark.o(.text);
         asm/ground.o(.text);
         asm/normal.o(.text);
-        asm/battle_intro.o(.text);
+        src/battle/anim/battle_intro.o(.text);
         src/field/bike.o(.text);
         src/easy_chat_1.o(.text);
         src/easy_chat_2.o(.text);
@@ -574,6 +574,7 @@ SECTIONS {
         src/field/rotating_gate.o(.rodata);
         src/field/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
+        src/battle/anim/battle_intro.o(.rodata);
         src/field/bike.o(.rodata);
         src/easy_chat_1.o(.rodata);
         src/easy_chat_2.o(.rodata);
