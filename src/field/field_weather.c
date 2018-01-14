@@ -843,7 +843,7 @@ void fade_screen(u8 a, u8 delay)
 
 bool8 sub_807D770(void)
 {
-    return gWeatherPtr->unknown_6C6 ^ 1 ? TRUE : FALSE;
+    return (gWeatherPtr->unknown_6C6 != 1);
 }
 
 void sub_807D78C(u8 a)
