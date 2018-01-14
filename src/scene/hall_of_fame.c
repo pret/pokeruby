@@ -539,7 +539,7 @@ static void sub_814217C(u8 taskID)
             ewram1E000(i) = 0;
     }
     else
-        sub_8125EC8(3);
+        Save_LoadGameData(SAVE_HALL_OF_FAME);
 
     for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, lastSavedTeam++)
     {
@@ -840,7 +840,7 @@ void sub_81428CC(void)
 
 static void sub_8142A28(u8 taskID)
 {
-    if (sub_8125EC8(3) != 1)
+    if (Save_LoadGameData(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
         gTasks[taskID].func = sub_8142FEC;
     else
     {

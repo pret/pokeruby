@@ -33,6 +33,6 @@ u8 sub_8125DDC(void);
 u8 sub_8125E04(void);
 u8 sub_8125E2C(void);
 bool8 sub_8125E6C(void);
-u8 sub_8125EC8(u8 a1);
+u8 Save_LoadGameData(u8 a1);
 
 #endif // GUARD_SAVE_H

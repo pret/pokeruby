@@ -931,7 +931,7 @@ void CB2_InitCopyrightScreenAfterBootup(void)
     {
         sub_8052E4C();
         Save_ResetSaveCounters();
-        sub_8125EC8(0);
+        Save_LoadGameData(SAVE_NORMAL);
         if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
             ClearSav2();
         SetPokemonCryStereo(gSaveBlock2.optionsSound);
