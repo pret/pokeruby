@@ -23,1226 +23,650 @@
 
 const struct OamData gOamData_837DF24 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF2C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF34 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF3C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF44 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF4C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF54 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF5C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF64 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF6C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF74 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF7C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF84 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF8C =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF94 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DF9C =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFA4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFAC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFB4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFBC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFC4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFCC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFD4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFDC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFE4 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFEC =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFF4 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837DFFC =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837D004 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837D00C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E014 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E01C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E024 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E02C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E034 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E03C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E044 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E04C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E054 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E05C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E064 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E06C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E074 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E07C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E084 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E08C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E094 =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E09C =
 {
-    .y = 0,
     .affineMode = 0,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0A4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0AC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0B4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0BC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0C4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0CC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0D4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0DC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0E4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0EC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0F4 =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E0FC =
 {
-    .y = 0,
     .affineMode = 1,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E104 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E10C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E114 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E11C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E124 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E12C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E134 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E13C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E144 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 0,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E14C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 1,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E154 =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 2,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct OamData gOamData_837E15C =
 {
-    .y = 0,
     .affineMode = 3,
     .objMode = 1,
-    .mosaic = 0,
-    .bpp = 0,
     .shape = 2,
-    .x = 0,
-    .matrixNum = 0,
     .size = 3,
-    .tileNum = 0,
     .priority = 2,
-    .paletteNum = 0,
-    .affineParam = 0,
 };
 
 const struct CompressedSpriteSheet gBattleAnimPicTable[] =
