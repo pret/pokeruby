@@ -526,7 +526,6 @@ SECTIONS {
         src/engine/tileset_anim.o(.rodata);
         src/engine/palette.o(.rodata);
         src/engine/sound.o(.rodata);
-        data/battle_anim.o(.rodata);
         src/battle/battle_anim.o(.rodata);
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
@@ -553,7 +552,7 @@ SECTIONS {
         src/pokemon/pokemon_summary_screen.o(.rodata);
         src/field/fldeff_cut.o(.rodata);
         src/field/item_menu.o(.rodata);
-        data/battle_anim_80A7E7C.o(.rodata);
+        src/battle/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
         src/debug/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
