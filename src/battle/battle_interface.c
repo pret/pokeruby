@@ -29,6 +29,11 @@ struct UnknownStruct7
     u8 filler0[0x180];
 };
 
+struct TileData
+{
+    u32 data[8];
+};
+
 extern u8 gDisplayedStringBattle[];
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
@@ -59,9 +64,9 @@ extern void *const gUnknown_0820A854[];
 extern void *const gUnknown_0820A85C[];
 extern void *const gUnknown_0820A87C[];
 extern void *const gUnknown_0820A894[];
-extern void *const gUnknown_0820A8B4[];
-extern void *const gUnknown_0820A8DC[];
-extern void *const gUnknown_0820A904[];
+extern struct TileData *const gUnknown_0820A8B4[];
+extern struct TileData *const gUnknown_0820A8DC[];
+extern struct TileData *const gUnknown_0820A904[];
 extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
@@ -93,6 +98,8 @@ static u8 GetScaledExpFraction(int, int, int, u8);
 static void sub_8045D58(u8, u8);
 static u8 sub_804602C(int, int, int, int *, u8 *, u8);
 static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c);
+
+
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
@@ -2368,7 +2375,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     u8 *ptr;
     s32 i;
     s32 _7;
-    u8 *const *r1;
+    struct TileData *const *r1;
 
     StringCopy(gDisplayedStringBattle, gUnknown_0820A8B0);
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
@@ -2448,29 +2455,34 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
 
     if (GetBankSide(gSprites[a].data[6]) == 0 && !IsDoubleBattle())
     {
-        r1 = (u8 *const *)gUnknown_0820A8B4;
+        r1 = gUnknown_0820A8B4;
         for (i = 0; i < _7; i++)
         {
-            u8 *r4 = r1[i];
+            // u8 *r4 = (u8 *) r1[i];
+            struct TileData *r4 = r1[i];
 
-            r4 += gSprites[a].oam.tileNum * 32;
+            // r4 += gSprites[a].oam.tileNum * 32;
+            r4 += gSprites[a].oam.tileNum;
             CpuCopy32(ptr, r4, 32);
+            // CpuCopy32(ptr, &(r4->data[gSprites[a].oam.tileNum]), 32);
             ptr += 32;
 
-            r4 += 0x100;
+            // r4 += 0x100;
+            r4 += 8;
             CpuCopy32(ptr, r4, 32);
+            // CpuCopy32(ptr, &((r4+8)->data[gSprites[a].oam.tileNum]), 32);
             ptr += 32;
         }
     }
     else
     {
         if (GetBankSide(gSprites[a].data[6]) == 0)
-            r1 = (u8 *const *)gUnknown_0820A904;
+            r1 = gUnknown_0820A904;
         else
-            r1 = (u8 *const *)gUnknown_0820A8DC;
+            r1 = gUnknown_0820A8DC;
         for (i = 0; i < _7; i++)
         {
-            u8 *r4 = r1[i];
+            u8 *r4 = (u8 *) r1[i];
 
             r4 += gSprites[a].oam.tileNum * 32;
             CpuCopy32(ptr, r4, 32);
