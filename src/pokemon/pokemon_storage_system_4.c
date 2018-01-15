@@ -1,6 +1,7 @@
 
 // Includes
 #include "global.h"
+#include "constants/species.h"
 #include "palette.h"
 #include "text.h"
 #include "menu.h"
@@ -18,8 +19,8 @@ struct WallpaperTable {
 // Static RAM declarations
 
 EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
-EWRAM_DATA u8 gUnknown_020384E4 = 0;
-EWRAM_DATA u8 gUnknown_020384E5 = 0;
+EWRAM_DATA s8 gUnknown_020384E4 = 0;
+EWRAM_DATA s8 gUnknown_020384E5 = 0;
 EWRAM_DATA u8 gUnknown_020384E6 = 0;
 EWRAM_DATA u8 gUnknown_020384E7 = 0;
 EWRAM_DATA u8 gUnknown_020384E8 = 0;
@@ -1130,4 +1131,57 @@ void sub_809AA98(void)
     gPokemonStorageSystemPtr->unk_11e2 = 1;
     if (gUnknown_020384E6)
         sub_8098BF0();
+}
+
+void sub_809AACC(u8 a0, u8 a1, u16 *a2, u16 *a3)
+{
+    switch (a0)
+    {
+        case 0:
+            *a2 = (a1 % 6) * 24 + 100;
+            *a3 = (a1 / 6) * 24 +  32;
+            break;
+        case 1:
+            if (a1 == 0)
+            {
+                *a2 = 0x68;
+                *a3 = 0x34;
+            }
+            else if (a1 == 6)
+            {
+                *a2 = 0x98;
+                *a3 = 0x84;
+            }
+            else
+            {
+                *a2 = 0x98;
+                *a3 = (a1 - 1) * 24 + 4;
+            }
+            break;
+        case 2:
+            *a2 = 0xa2;
+            *a3 = 0x0c;
+            break;
+        case 3:
+            *a3 = gUnknown_020384E6 ? 8 : 14;
+            *a2 = a1 * 0x58 + 0x78;
+            break;
+        case 4:
+            *a2 = 0xa0;
+            *a3 = 0x60;
+            break;
+    }
+}
+
+u16 sub_809AB8C(void)
+{
+    switch (gUnknown_020384E4)
+    {
+        case 1:
+            return GetMonData(gPlayerParty + gUnknown_020384E5, MON_DATA_SPECIES);
+        case 0:
+            return GetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, MON_DATA_SPECIES);
+        default:
+            return SPECIES_NONE;
+    }
 }
