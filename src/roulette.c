@@ -579,7 +579,7 @@ void sub_8115384(void)
     case 0x0:
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80F9368();
         REG_BG2CNT   = 0x4686;
         REG_BG1CNT   = 0x4401;
@@ -603,7 +603,7 @@ void sub_8115384(void)
         break;
     case 0x3:
         sub_8115238();
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         LZ77UnCompWram(&gUnknown_083F88BC, (void *)(ewram18800));
         LZ77UnCompVram(&gUnknown_083F8A60, (void *)(VRAM + 0x3000));
         gMain.state++;
@@ -1604,7 +1604,7 @@ void sub_8116B40(u8 taskid) // end oulette ?
         FreeAllSpritePalettes();
         ResetPaletteFade();
         ResetSpriteData();
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         REG_BLDCNT = 0x0;
         REG_BLDALPHA = 0x0;
         REG_BLDY = 0x0;

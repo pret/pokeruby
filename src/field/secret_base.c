@@ -895,7 +895,7 @@ void Task_SecretBasePC_Registry(u8 taskId)
     s16 *taskData;
 
     ScriptContext2_Enable();
-    sub_80F944C();
+    ClearVerticalScrollIndicatorPalettes();
     LoadScrollIndicatorPalette();
     
     taskData = gTasks[taskId].data;
@@ -959,17 +959,17 @@ void sub_80BC6B0(u8 taskId)
     {
         Menu_BlankWindowRect(18, 2 * n + 2, 28, 2 * n + 3);
         Menu_PrintText(gUnknownText_Exit, 18, 2 * n + 2);
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
         if (n != 7)
             Menu_BlankWindowRect(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // the shifts are needed to match
     }
     else
-        CreateVerticalScrollIndicators(1, 0xbc, 0x98);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 0xbc, 0x98);
 
     if (taskData[2] == 0)
-        DestroyVerticalScrollIndicator(0);
+        DestroyVerticalScrollIndicator(TOP_ARROW);
     else
-        CreateVerticalScrollIndicators(0, 0xbc, 0x08);
+        CreateVerticalScrollIndicators(TOP_ARROW, 0xbc, 0x08);
 }
 
 void sub_80BC7D8(u8 taskId)
@@ -1064,8 +1064,8 @@ u8 sub_80BC948(u8 a)
 
 void sub_80BC980(u8 taskId)
 {
-    PauseVerticalScrollIndicator(0);
-    PauseVerticalScrollIndicator(1);
+    PauseVerticalScrollIndicator(TOP_ARROW);
+    PauseVerticalScrollIndicator(BOTTOM_ARROW);
     Menu_DrawStdWindowFrame(1, 0, 12, 5);
     Menu_PrintItems(2, 1, 2, (const struct MenuAction *)gUnknown_083D13D4);
     InitMenu(0, 2, 1, 2, 0, 10);
@@ -1106,8 +1106,8 @@ void sub_80BCA84(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
 
@@ -1165,8 +1165,8 @@ void sub_80BCBF8(u8 taskId)
 
     InitMenu(0, 18, 2, taskData[3] + 1, taskData[1], 11);
     Menu_EraseWindowRect(1, 0, 12, 5);
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
 
     gTasks[taskId].func = sub_80BC824;
 }
@@ -1176,8 +1176,8 @@ void sub_80BCC54(u8 taskId)
     u16 curBaseIndex = VarGet(VAR_CURRENT_SECRET_BASE);
 
     BuyMenuFreeMemory();
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
 
     if (curBaseIndex == 0)
     {

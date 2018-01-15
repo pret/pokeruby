@@ -64,7 +64,7 @@ struct TVSaleItem {
 
 extern u8 gUnknown_02038694;
 
-extern struct TVSaleItem gUnknown_02038724[3];
+extern struct TVSaleItem gMartPurchaseHistory[3];
 
 struct UnkTvStruct gUnknown_03005D38;
 
@@ -1032,7 +1032,7 @@ void sub_80BE3BC(void)
         if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_SMART_SHOPPER) != 1)
         {
             sub_80BF20C();
-            if (gUnknown_02038724[0].item_amount >= 20)
+            if (gMartPurchaseHistory[0].item_amount >= 20)
             {
                 struct TVShowSmartShopper *smartShopper = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].smartshopperShow;
 
@@ -1041,8 +1041,8 @@ void sub_80BE3BC(void)
                 smartShopper->shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++)
                 {
-                    smartShopper->itemIds[i] = gUnknown_02038724[i].item_id;
-                    smartShopper->itemAmounts[i] = gUnknown_02038724[i].item_amount;
+                    smartShopper->itemIds[i] = gMartPurchaseHistory[i].item_id;
+                    smartShopper->itemAmounts[i] = gMartPurchaseHistory[i].item_amount;
                 }
                 smartShopper->priceReduced = GetPriceReduction(1);
                 StringCopy(smartShopper->playerName, gSaveBlock2.playerName);
@@ -1646,14 +1646,14 @@ void sub_80BF20C(void)
     {
         for (j = i + 1; j < 3; j++)
         {
-            if (gUnknown_02038724[i].item_amount < gUnknown_02038724[j].item_amount)
+            if (gMartPurchaseHistory[i].item_amount < gMartPurchaseHistory[j].item_amount)
             {
-                tmpId = gUnknown_02038724[i].item_id;
-                tmpAmount = gUnknown_02038724[i].item_amount;
-                gUnknown_02038724[i].item_id = gUnknown_02038724[j].item_id;
-                gUnknown_02038724[i].item_amount = gUnknown_02038724[j].item_amount;
-                gUnknown_02038724[j].item_id = tmpId;
-                gUnknown_02038724[j].item_amount = tmpAmount;
+                tmpId = gMartPurchaseHistory[i].item_id;
+                tmpAmount = gMartPurchaseHistory[i].item_amount;
+                gMartPurchaseHistory[i].item_id = gMartPurchaseHistory[j].item_id;
+                gMartPurchaseHistory[i].item_amount = gMartPurchaseHistory[j].item_amount;
+                gMartPurchaseHistory[j].item_id = tmpId;
+                gMartPurchaseHistory[j].item_amount = tmpAmount;
             }
         }
     }

@@ -93,7 +93,7 @@ static bool8 sub_8146058(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80F9368();
         sub_8146288();
         REG_BLDCNT = 0;

@@ -17,6 +17,14 @@ enum
     ANIM_NUM
 };
 
+// shop options
+enum
+{
+    BUY,
+    SELL,
+    EXIT
+};
+
 struct MartInfo
 {
     /* 0x0 */ void (* callback) (void);
@@ -31,18 +39,18 @@ struct MartInfo
 
 void sub_80B2E38(u8);
 void HandleShopMenuQuit(u8);
-void sub_80B2FA0(u8);
+void Shop_FadeAndRunBuySellCallback(u8);
 void BuyMenuDrawGraphics(void);
 void sub_80B3240(void);
 void sub_80B3270(void);
-void BuyMenuDrawMapGraphics(void);
+void Shop_DrawViewport(void);
 void sub_80B3764(int, int);
-void sub_80B37EC(void);
+void Shop_PrintItemDesc(void);
 void sub_80B40E8(u8);
 void CreatePokemartMenu(u16 *);
 void CreateDecorationShop1Menu(u16 *);
 void CreateDecorationShop2Menu(u16 *);
-void sub_80B356C(void);
-void sub_80B368C(void);
+void Shop_LoadViewportObjects(void);
+void Shop_AnimViewportObjects(void);
 
 #endif // GUARD_SHOP_H
