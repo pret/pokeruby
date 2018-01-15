@@ -237,13 +237,13 @@ const struct CompressedSpriteSheet gUnknown_0820A754[] =
     { gBattleGfx_BallStatusBar, 512, 0xd70d },
 };
 
-const struct CompressedSpritePalette gUnknown_0820A764[] =
+const struct SpritePalette gUnknown_0820A764[] =
 {
     { gUnknown_08D1212C, 0xd710 },
     { gUnknown_08D1212C, 0xd711 },
 };
 
-const struct CompressedSpritePalette gUnknown_0820A774[] =
+const struct SpritePalette gUnknown_0820A774[] =
 {
     { gUnknown_08D1214C, 0xd712 },
     { gUnknown_08D1214C, 0xd713 },

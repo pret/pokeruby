@@ -499,7 +499,7 @@ SECTIONS {
         src/engine/util.o(.rodata);
         src/field/daycare.o(.rodata);
         src/scene/egg_hatch.o(.rodata);
-        data/battle_interface.o(.rodata);
+        src/battle/battle_7.o(.rodata);
         src/battle/battle_interface.o(.rodata);
         src/battle/pokeball.o(.rodata);
         src/engine/trade.o(.rodata);

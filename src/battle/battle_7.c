@@ -20,6 +20,7 @@
 #include "text.h"
 #include "gba/m4a_internal.h"
 #include "ewram.h"
+#include "graphics.h"
 
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
@@ -49,19 +50,53 @@ extern const u8 *const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const u8 gSubstituteDollTilemap[];
-extern const u8 gSubstituteDollGfx[];
-extern const u8 gSubstituteDollPal[];
 extern const struct CompressedSpriteSheet gUnknown_081FAF24;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF34;
-extern const struct CompressedSpriteSheet gUnknown_0820A47C;
-extern const struct CompressedSpriteSheet gUnknown_0820A484;
-extern const struct CompressedSpriteSheet gUnknown_0820A48C[];
-extern const struct CompressedSpriteSheet gUnknown_0820A49C[];
-extern const struct CompressedSpriteSheet gUnknown_0820A4AC;
-extern const struct CompressedSpriteSheet gUnknown_0820A4B4[];
-extern const struct SpritePalette gUnknown_0820A4D4[];
-extern const u8 gUnknown_08D09C48[];
+extern const u8 gSubstituteDollTilemap[]; // graphics.s
+extern const u8 gSubstituteDollGfx[]; // graphics.s
+extern const u8 gSubstituteDollPal[]; // graphics.s
+extern const u8 gUnknown_08D09C48[]; // graphics.s
+
+const struct CompressedSpriteSheet gUnknown_0820A47C =
+{ gBattleWindowLargeGfx, 4096, 0xd6ff };
+
+const struct CompressedSpriteSheet gUnknown_0820A484 =
+{ gBattleWindowSmallGfx, 4096, 0xd701 };
+
+const struct CompressedSpriteSheet gUnknown_0820A48C[] =
+{
+    { gBattleWindowSmall2Gfx, 2048, 0xd6ff },
+    { gBattleWindowSmall2Gfx, 2048, 0xd700 },
+};
+
+const struct CompressedSpriteSheet gUnknown_0820A49C[] =
+{
+    { gBattleWindowSmall3Gfx, 2048, 0xd701 },
+    { gBattleWindowSmall3Gfx, 2048, 0xd702 },
+};
+
+const struct CompressedSpriteSheet gUnknown_0820A4AC =
+{ gBattleWindowLarge2Gfx, 4096, 0xd70b };
+
+const struct CompressedSpriteSheet gUnknown_0820A4B4[] =
+{
+    { gBlankGfxCompressed, 256, 0xd704 },
+    { gBlankGfxCompressed, 288, 0xd705 },
+    { gBlankGfxCompressed, 256, 0xd706 },
+    { gBlankGfxCompressed, 288, 0xd707 },
+};
+
+const struct SpritePalette gUnknown_0820A4D4[] =
+{
+    { gUnknown_08D1212C, 0xD6FF },
+    { gUnknown_08D1214C, 0xD704 },
+};
+
+// const struct CompressedSpriteSheet gUnknown_0820A784[] =
+// {
+//     { Tiles_D129AC, 0x80, 0xd714 },
+//     { Tiles_D129AC, 0x80, 0xd715 },
+// };
 
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
