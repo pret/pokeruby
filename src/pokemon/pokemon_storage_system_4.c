@@ -44,6 +44,7 @@ s16 sub_809A6D0(u8 width);
 void sub_809A6DC(void);
 void sub_809A774(s8 a0);
 void sub_809A810(void);
+void sub_809AFB8(void);
 void sub_809A8C8(struct Sprite *sprite);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
@@ -1183,5 +1184,125 @@ u16 sub_809AB8C(void)
             return GetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, MON_DATA_SPECIES);
         default:
             return SPECIES_NONE;
+    }
+}
+
+bool8 sub_809AC00(void)
+{
+    s16 tmp;
+    if (gPokemonStorageSystemPtr->unk_11dc == 0)
+        return FALSE;
+    if (--gPokemonStorageSystemPtr->unk_11dc)
+    {
+        gPokemonStorageSystemPtr->unk_11c8 += gPokemonStorageSystemPtr->unk_11d0;
+        gPokemonStorageSystemPtr->unk_11cc += gPokemonStorageSystemPtr->unk_11d4;
+        gPokemonStorageSystemPtr->unk_11c0->pos1.x = gPokemonStorageSystemPtr->unk_11c8 >> 8;
+        gPokemonStorageSystemPtr->unk_11c0->pos1.y = gPokemonStorageSystemPtr->unk_11cc >> 8;
+        if (gPokemonStorageSystemPtr->unk_11c0->pos1.x > 0x100)
+        {
+            tmp = gPokemonStorageSystemPtr->unk_11c0->pos1.x - 0x100;
+            gPokemonStorageSystemPtr->unk_11c0->pos1.x = tmp + 0x40;
+        }
+        if (gPokemonStorageSystemPtr->unk_11c0->pos1.x < 0x40)
+        {
+            tmp = 0x40 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            gPokemonStorageSystemPtr->unk_11c0->pos1.x = 0x100 - tmp;
+        }
+        if (gPokemonStorageSystemPtr->unk_11c0->pos1.y > 0xb0)
+        {
+            tmp = gPokemonStorageSystemPtr->unk_11c0->pos1.y - 0xb0;
+            gPokemonStorageSystemPtr->unk_11c0->pos1.y = tmp - 0x10;
+        }
+        if (gPokemonStorageSystemPtr->unk_11c0->pos1.y < -0x10)
+        {
+            tmp = -0x10 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            gPokemonStorageSystemPtr->unk_11c0->pos1.y = 0xb0 - tmp;
+        }
+        if (gPokemonStorageSystemPtr->unk_11e3 && --gPokemonStorageSystemPtr->unk_11e3 == 0)
+            gPokemonStorageSystemPtr->unk_11c0->vFlip = gPokemonStorageSystemPtr->unk_11c0->vFlip ? FALSE : TRUE;
+    }
+    else
+    {
+        gPokemonStorageSystemPtr->unk_11c0->pos1.x = gPokemonStorageSystemPtr->unk_11d8;
+        gPokemonStorageSystemPtr->unk_11c0->pos1.y = gPokemonStorageSystemPtr->unk_11da;
+        sub_809AFB8();
+    }
+    return TRUE;
+}
+
+void sub_809AD3C(u8 a0, u8 a1)
+{
+    u16 x;
+    u16 y;
+
+    sub_809AACC(a0, a1, &x, &y);
+    gPokemonStorageSystemPtr->unk_11e0 = a0;
+    gPokemonStorageSystemPtr->unk_11e1 = a1;
+    gPokemonStorageSystemPtr->unk_11d8 = x;
+    gPokemonStorageSystemPtr->unk_11da = y;
+}
+
+void sub_809AD94(void)
+{
+    int r7;
+    int r0;
+
+    if (gPokemonStorageSystemPtr->unk_11de || gPokemonStorageSystemPtr->unk_11df)
+        gPokemonStorageSystemPtr->unk_11dc = 12;
+    else
+        gPokemonStorageSystemPtr->unk_11dc = 6;
+    if (gPokemonStorageSystemPtr->unk_11e3)
+        gPokemonStorageSystemPtr->unk_11e3 = gPokemonStorageSystemPtr->unk_11dc >> 1;
+    switch (gPokemonStorageSystemPtr->unk_11de)
+    {
+        default:
+            r7 = gPokemonStorageSystemPtr->unk_11da - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            break;
+        case -1:
+            r7 = gPokemonStorageSystemPtr->unk_11da - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            break;
+        case 1:
+            r7 = gPokemonStorageSystemPtr->unk_11da + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.y;
+            break;
+    }
+    switch (gPokemonStorageSystemPtr->unk_11df)
+    {
+        default:
+            r0 = gPokemonStorageSystemPtr->unk_11d8 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            break;
+        case -1:
+            r0 = gPokemonStorageSystemPtr->unk_11d8 - 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            break;
+        case 1:
+            r0 = gPokemonStorageSystemPtr->unk_11d8 + 0xc0 - gPokemonStorageSystemPtr->unk_11c0->pos1.x;
+            break;
+    }
+    r7 <<= 8;
+    r0 <<= 8;
+    gPokemonStorageSystemPtr->unk_11d0 = r0 / gPokemonStorageSystemPtr->unk_11dc;
+    gPokemonStorageSystemPtr->unk_11d4 = r7 / gPokemonStorageSystemPtr->unk_11dc;
+    gPokemonStorageSystemPtr->unk_11c8 = gPokemonStorageSystemPtr->unk_11c0->pos1.x << 8;
+    gPokemonStorageSystemPtr->unk_11cc = gPokemonStorageSystemPtr->unk_11c0->pos1.y << 8;
+}
+
+void sub_809AF18(u8 a0, u8 a1)
+{
+    sub_809AD3C(a0, a1);
+    sub_809AD94();
+    if (gUnknown_020384E6 == 0)
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 1);
+    if (a0 == 1 && gUnknown_020384E4 != 1)
+    {
+        gPokemonStorageSystemPtr->unk_11e2 = a0;
+        gPokemonStorageSystemPtr->unk_11c4->invisible = TRUE;
+    }
+    switch (a0)
+    {
+        case 0:
+            break;
+        case 1 ... 3:
+            gPokemonStorageSystemPtr->unk_11c4->invisible = TRUE;
+            gPokemonStorageSystemPtr->unk_11c4->oam.priority = 1;
+            break;
     }
 }
