@@ -147,7 +147,7 @@ void ReshowBattleScreenAfterMenu(void);
 void BattleMainCB2(void);
 void AddMoney(u32* moneySaveblock, u32 to_give);
 u8 CountAliveMons(u8 caseID);
-void sub_803E1B0(struct Pokemon*, u16 item, u8 partyID, u8 r3, u8 sp);
+void PokemonUseItemEffects(struct Pokemon*, u16 item, u8 partyID, u8 r3, u8 sp);
 u8 CanRunFromBattle(void);
 u8 GetMoveTarget(u16 move, u8 targetbyte); //get target of move
 u8 CastformDataTypeChange(u8 bank);
@@ -11996,7 +11996,7 @@ static void atk74_hpthresholds2(void)
 static void atk75_useitemonopponent(void)
 {
     gBankInMenu = gBankAttacker;
-    sub_803E1B0(&gEnemyParty[gBattlePartyID[gBankAttacker]], gLastUsedItem, gBattlePartyID[gBankAttacker], 0, 1);
+    PokemonUseItemEffects(&gEnemyParty[gBattlePartyID[gBankAttacker]], gLastUsedItem, gBattlePartyID[gBankAttacker], 0, 1);
     gBattlescriptCurrInstr += 1;
 }
 
