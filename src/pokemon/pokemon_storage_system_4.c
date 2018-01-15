@@ -53,6 +53,9 @@ bool8 sub_809B324(void);
 bool8 sub_809B358(void);
 void sub_809B384(void);
 void sub_809B3E0(void);
+void sub_809B44C(u8 a0, u8 a1);
+void diegohint2(u8 a0, u8 a1);
+void sub_809B548(u8 a0, u8 a1);
 void diegohint1(u8 a0, u8 a1);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
@@ -1480,4 +1483,87 @@ bool8 sub_809B24C(void)
             return FALSE;
     }
     return TRUE;
+}
+
+bool8 sub_809B324(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_11c0->pos2.y)
+    {
+        default:
+            gPokemonStorageSystemPtr->unk_11c0->pos2.y++;
+            break;
+        case 0:
+            gPokemonStorageSystemPtr->unk_11c0->pos2.y++;
+            break;
+        case 8:
+            return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_809B358(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_11c0->pos2.y)
+    {
+        case 0:
+            return FALSE;
+        default:
+            gPokemonStorageSystemPtr->unk_11c0->pos2.y--;
+            break;
+    }
+    return TRUE;
+}
+
+void sub_809B384(void)
+{
+    switch (gUnknown_020384E4)
+    {
+        case 1:
+            sub_809B44C(14, gUnknown_020384E5);
+            sub_8099584(0, gUnknown_020384E5);
+            break;
+        case 0:
+            sub_809B44C(get_preferred_box(), gUnknown_020384E5);
+            sub_8099584(1, gUnknown_020384E5);
+            break;
+        default:
+            return;
+    }
+    gUnknown_020384E6 = 1;
+}
+
+void sub_809B3E0(void)
+{
+    u8 boxId;
+    switch (gUnknown_020384E4)
+    {
+        case 1:
+            diegohint2(14, gUnknown_020384E5);
+            sub_809960C(14, gUnknown_020384E5);
+            break;
+        case 0:
+            boxId = get_preferred_box();
+            diegohint2(boxId, gUnknown_020384E5);
+            sub_809960C(boxId, gUnknown_020384E5);
+            break;
+        default:
+            return;
+    }
+    gUnknown_020384E6 = 0;
+}
+
+void sub_809B440(void)
+{
+    sub_809BF74();
+}
+
+void sub_809B44C(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+        gPokemonStorageSystemPtr->unk_25b4 = gPlayerParty[gUnknown_020384E5];
+    else
+        sub_803B4B4(gPokemonStorage.boxes[a0], &gPokemonStorageSystemPtr->unk_25b4);
+    sub_809B548(a0, a1);
+    gUnknown_020384E7 = a0;
+    gUnknown_020384E8 = a1;
 }

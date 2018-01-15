@@ -224,6 +224,8 @@ void sub_8099310(void);
 bool8 sub_8099374(void);
 void sub_80994A8(s16 a0);
 void sub_809954C(void);
+void sub_8099584(u8 a0, u8 a1);
+void sub_809960C(u8 a0, u8 a1);
 void sub_80996B0(u8 a0, u8 a1);
 bool8 sub_809971C(void);
 void sub_8099958(void);
