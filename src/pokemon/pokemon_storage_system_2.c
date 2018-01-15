@@ -1096,7 +1096,7 @@ void sub_809789C(void)
             {
                 case -1:
                 case  0:
-                    sub_809A860(1);
+                    sub_809A860(TRUE);
                     sub_8098A5C();
                     SetPSSCallback(sub_8096C84);
                     break;
@@ -1133,7 +1133,7 @@ void sub_8097974(void)
             switch (gPokemonStorageSystemPtr->unk_0d5e)
             {
                 case -1:
-                    sub_809A860(1);
+                    sub_809A860(TRUE);
                     sub_8098A5C();
                     SetPSSCallback(sub_8096C84);
                     break;
@@ -1168,7 +1168,7 @@ void sub_8097974(void)
         case 3:
             if (!sub_8099E08())
             {
-                sub_809A860(1);
+                sub_809A860(TRUE);
                 SetPSSCallback(sub_8096C84);
             }
             break;
@@ -1197,7 +1197,7 @@ void sub_8097A64(void)
                     sub_8096310();
                     if (gPokemonStorageSystemPtr->unk_08b2 == 201 || gPokemonStorageSystemPtr->unk_08b2 == gPokemonStorage.currentBox)
                     {
-                        sub_809A860(1);
+                        sub_809A860(TRUE);
                         SetPSSCallback(sub_8096C84);
                     }
                     else

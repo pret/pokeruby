@@ -44,106 +44,9 @@ void sub_809A6DC(void);
 void sub_809A774(s8 a0);
 void sub_809A810(void);
 void sub_809A8C8(struct Sprite *sprite);
+bool8 sub_809BF2C(void);
 
 // .rodata
-
-// .text
-
-void sub_8099BF8(u8 boxId)
-{
-    gPokemonStorageSystemPtr->unk_08ba = FALSE;
-    gPokemonStorageSystemPtr->unk_08b4 = 0;
-    DmaFill32(3, 0, BG_SCREEN_ADDR(26), 0x1000);
-    sub_8099EB0(boxId, 0);
-    sub_809A23C(boxId);
-    sub_809A6DC();
-    SpawnBoxIconSprites(boxId);
-    REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(26) | BGCNT_TXT512x256;
-}
-
-void sub_8099C70(u8 whichBox)
-{
-    s8 r4 = sub_8099D90(whichBox);
-    sub_8099EB0(whichBox, r4);
-    gPokemonStorageSystemPtr->unk_08b6 = r4 * 6;
-    gPokemonStorageSystemPtr->unk_08b8 = 0x20;
-    gPokemonStorageSystemPtr->unk_08bb = whichBox;
-    gPokemonStorageSystemPtr->unk_08bc = r4 > 0 ? 0 : 5;
-    gPokemonStorageSystemPtr->unk_08be = r4;
-    gPokemonStorageSystemPtr->unk_08c0 = r4 > 0 ? 0x108 : 0x38;
-    gPokemonStorageSystemPtr->unk_08c2 = r4 > 0 ? 0 : 5;
-    gPokemonStorageSystemPtr->unk_08c4 = r4;
-    gPokemonStorageSystemPtr->unk_08c6 = 0;
-    gPokemonStorageSystemPtr->unk_08c8 = 2;
-    sub_809900C(whichBox, r4);
-    sub_809A3D0(whichBox, r4);
-    sub_809A774(r4);
-}
-
-bool8 sub_8099D34(void)
-{
-    bool8 retVal = sub_80990AC();
-    if (gPokemonStorageSystemPtr->unk_08b8 != 0)
-    {
-        gPokemonStorageSystemPtr->unk_08b4 += gPokemonStorageSystemPtr->unk_08b6;
-        gPokemonStorageSystemPtr->unk_08b4 &= 0x1ff;
-        if (--gPokemonStorageSystemPtr->unk_08b8 == 0)
-        {
-            sub_809A598();
-            sub_809A810();
-        }
-        return TRUE;
-    }
-    return retVal;
-}
-
-s8 sub_8099D90(u8 boxId)
-{
-    u8 curBox = get_preferred_box();
-    u8 i;
-
-    for (i = 0; curBox != boxId; i++)
-    {
-        if (++curBox >= 14)
-            curBox = 0;
-    }
-    return i <= 6 ? 1 : -1;
-}
-
-void sub_8099DCC(u8 wallpaperId)
-{
-    u8 curBox = get_preferred_box();
-    gPokemonStorage.wallpaper[curBox] = wallpaperId;
-    gPokemonStorageSystemPtr->unk_1032 = 0;
-}
-
-bool8 sub_8099E08(void)
-{
-    switch (gPokemonStorageSystemPtr->unk_1032)
-    {
-        case 0:
-            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 0x10, 0xffff);
-            gPokemonStorageSystemPtr->unk_1032++;
-            break;
-        case 1:
-            if (!UpdatePaletteFade())
-            {
-                u8 curBox = get_preferred_box();
-                sub_8099EB0(curBox, 0);
-                sub_809A654();
-                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0x10, 0, 0xffff);
-                gPokemonStorageSystemPtr->unk_1032++;
-            }
-            break;
-        case 2:
-            if (!UpdatePaletteFade())
-                gPokemonStorageSystemPtr->unk_1032++;
-            break;
-        case 3:
-            return FALSE;
-    }
-    return TRUE;
-}
 
 const u16 gWallpaperPalettes_Forest[] = INCBIN_U16("graphics/pokemon_storage/box_bg1.gbapal");
 const u16 gWallpaperPalettes_Forest_2[] = INCBIN_U16("graphics/pokemon_storage/forest_frame.gbapal");
@@ -313,6 +216,171 @@ const struct WallpaperTable gWallpaperTable[] = {
     {gWallpaperTiles_Machine, 0x2F0, gWallpaperTilemap_Machine, gWallpaperPalettes_Machine}, // Machine
     {gWallpaperTiles_Plain, 0xFC, gWallpaperTilemap_Plain, gWallpaperPalettes_Plain} // Plain
 };
+
+const u16 PCPal_Arrow[] = INCBIN_U16("graphics/pokemon_storage/arrow.gbapal");
+const u8 PCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
+
+const struct SpriteSheet gUnknown_083BB288 = {PCGfx_Arrow, 0x80, 6};
+const struct SpritePalette gUnknown_083BB290 = {PCPal_Arrow, 0xdacf};
+
+const struct OamData gOamData_83BB298 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 2,
+    .priority = 2
+};
+
+const union AnimCmd gSpriteAnim_83BB2A0[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83BB2A8[] = {
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83BB2B0[] = {
+    gSpriteAnim_83BB2A0,
+    gSpriteAnim_83BB2A8
+};
+
+const struct SpriteTemplate gSpriteTemplate_83BB2B8 = {
+    3,
+    0xdac8,
+    &gOamData_83BB298,
+    gSpriteAnimTable_83BB2B0,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct OamData gOamData_83BB2D0 = {
+    .shape = ST_OAM_V_RECTANGLE,
+    .priority = 2
+};
+
+const union AnimCmd gSpriteAnim_83BB2D8[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd gSpriteAnim_83BB2E0[] = {
+    ANIMCMD_FRAME(2, 5),
+    ANIMCMD_END
+};
+
+const union AnimCmd *const gSpriteAnimTable_83BB2E8[] = {
+    gSpriteAnim_83BB2D8,
+    gSpriteAnim_83BB2E0
+};
+
+const struct SpriteTemplate gSpriteTemplate_83BB2F0 = {
+    6,
+    0xdacf,
+    &gOamData_83BB2D0,
+    gSpriteAnimTable_83BB2E8,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_809A8C8
+};
+
+// .text
+
+void sub_8099BF8(u8 boxId)
+{
+    gPokemonStorageSystemPtr->unk_08ba = FALSE;
+    gPokemonStorageSystemPtr->unk_08b4 = 0;
+    DmaFill32(3, 0, BG_SCREEN_ADDR(26), 0x1000);
+    sub_8099EB0(boxId, 0);
+    sub_809A23C(boxId);
+    sub_809A6DC();
+    SpawnBoxIconSprites(boxId);
+    REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(26) | BGCNT_TXT512x256;
+}
+
+void sub_8099C70(u8 whichBox)
+{
+    s8 r4 = sub_8099D90(whichBox);
+    sub_8099EB0(whichBox, r4);
+    gPokemonStorageSystemPtr->unk_08b6 = r4 * 6;
+    gPokemonStorageSystemPtr->unk_08b8 = 0x20;
+    gPokemonStorageSystemPtr->unk_08bb = whichBox;
+    gPokemonStorageSystemPtr->unk_08bc = r4 > 0 ? 0 : 5;
+    gPokemonStorageSystemPtr->unk_08be = r4;
+    gPokemonStorageSystemPtr->unk_08c0 = r4 > 0 ? 0x108 : 0x38;
+    gPokemonStorageSystemPtr->unk_08c2 = r4 > 0 ? 0 : 5;
+    gPokemonStorageSystemPtr->unk_08c4 = r4;
+    gPokemonStorageSystemPtr->unk_08c6 = 0;
+    gPokemonStorageSystemPtr->unk_08c8 = 2;
+    sub_809900C(whichBox, r4);
+    sub_809A3D0(whichBox, r4);
+    sub_809A774(r4);
+}
+
+bool8 sub_8099D34(void)
+{
+    bool8 retVal = sub_80990AC();
+    if (gPokemonStorageSystemPtr->unk_08b8 != 0)
+    {
+        gPokemonStorageSystemPtr->unk_08b4 += gPokemonStorageSystemPtr->unk_08b6;
+        gPokemonStorageSystemPtr->unk_08b4 &= 0x1ff;
+        if (--gPokemonStorageSystemPtr->unk_08b8 == 0)
+        {
+            sub_809A598();
+            sub_809A810();
+        }
+        return TRUE;
+    }
+    return retVal;
+}
+
+s8 sub_8099D90(u8 boxId)
+{
+    u8 curBox = get_preferred_box();
+    u8 i;
+
+    for (i = 0; curBox != boxId; i++)
+    {
+        if (++curBox >= 14)
+            curBox = 0;
+    }
+    return i <= 6 ? 1 : -1;
+}
+
+void sub_8099DCC(u8 wallpaperId)
+{
+    u8 curBox = get_preferred_box();
+    gPokemonStorage.wallpaper[curBox] = wallpaperId;
+    gPokemonStorageSystemPtr->unk_1032 = 0;
+}
+
+bool8 sub_8099E08(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_1032)
+    {
+        case 0:
+            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 0x10, 0xffff);
+            gPokemonStorageSystemPtr->unk_1032++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                u8 curBox = get_preferred_box();
+                sub_8099EB0(curBox, 0);
+                sub_809A654();
+                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0x10, 0, 0xffff);
+                gPokemonStorageSystemPtr->unk_1032++;
+            }
+            break;
+        case 2:
+            if (!UpdatePaletteFade())
+                gPokemonStorageSystemPtr->unk_1032++;
+            break;
+        case 3:
+            return FALSE;
+    }
+    return TRUE;
+}
 
 void sub_8099EB0(u8 boxId, s8 a1)
 {
@@ -855,43 +923,6 @@ void sub_809A3D0(u8 boxId, s8 a1)
     }
 }
 
-const u16 PCPal_Arrow[] = INCBIN_U16("graphics/pokemon_storage/arrow.gbapal");
-const u8 PCGfx_Arrow[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
-
-const struct SpriteSheet gUnknown_083BB288 = {PCGfx_Arrow, 0x80, 6};
-const struct SpritePalette gUnknown_083BB290 = {PCPal_Arrow, 0xdacf};
-
-const struct OamData gOamData_83BB298 = {
-    .shape = ST_OAM_H_RECTANGLE,
-    .size = 2,
-    .priority = 2
-};
-
-const union AnimCmd gSpriteAnim_83BB2A0[] = {
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END
-};
-
-const union AnimCmd gSpriteAnim_83BB2A8[] = {
-    ANIMCMD_FRAME(8, 5),
-    ANIMCMD_END
-};
-
-const union AnimCmd *const gSpriteAnimTable_83BB2B0[] = {
-    gSpriteAnim_83BB2A0,
-    gSpriteAnim_83BB2A8
-};
-
-const struct SpriteTemplate gSpriteTemplate_83BB2B8 = {
-    3,
-    0xdac8,
-    &gOamData_83BB298,
-    gSpriteAnimTable_83BB2B0,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SpriteCallbackDummy
-};
-
 void sub_809A598(void)
 {
     if (gPokemonStorageSystemPtr->unk_0cca == 0)
@@ -936,4 +967,87 @@ void sub_809A654(void)
 s16 sub_809A6D0(u8 width)
 {
     return 0xb0 - width / 2;
+}
+
+void sub_809A6DC(void)
+{
+    u16 i;
+
+    LoadSpriteSheet(&gUnknown_083BB288);
+    LoadSpritePalette(&gUnknown_083BB290);
+    for (i = 0; i < 2; i++)
+    {
+        u8 spriteId = CreateSprite(&gSpriteTemplate_83BB2F0, 0x5c + i * 0x88, 0x1c, 21);
+        if (spriteId != MAX_SPRITES)
+        {
+            struct Sprite *sprite = gSprites + spriteId;
+            StartSpriteAnim(sprite, i);
+            sprite->data[3] = (i == 0) ? -1 : 1;
+            gPokemonStorageSystemPtr->unk_0d00[i] = sprite;
+        }
+    }
+    if (sub_809BF2C())
+        sub_809A860(TRUE);
+}
+
+void sub_809A774(s8 a0)
+{
+    u16 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        gPokemonStorageSystemPtr->unk_0d00[i]->pos2.x = 0;
+        gPokemonStorageSystemPtr->unk_0d00[i]->data[0] = 2;
+    }
+    if (a0 < 0)
+    {
+        gPokemonStorageSystemPtr->unk_0d00[0]->data[1] = 29;
+        gPokemonStorageSystemPtr->unk_0d00[1]->data[1] = 5;
+        gPokemonStorageSystemPtr->unk_0d00[0]->data[2] = 0x48;
+        gPokemonStorageSystemPtr->unk_0d00[1]->data[2] = 0x48;
+    }
+    else
+    {
+        gPokemonStorageSystemPtr->unk_0d00[0]->data[1] = 5;
+        gPokemonStorageSystemPtr->unk_0d00[1]->data[1] = 29;
+        gPokemonStorageSystemPtr->unk_0d00[0]->data[2] = 0xF8;
+        gPokemonStorageSystemPtr->unk_0d00[1]->data[2] = 0xF8;
+    }
+    gPokemonStorageSystemPtr->unk_0d00[0]->data[7] = 0;
+    gPokemonStorageSystemPtr->unk_0d00[1]->data[7] = 1;
+}
+
+void sub_809A810(void)
+{
+    u16 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        gPokemonStorageSystemPtr->unk_0d00[i]->pos1.x = 0x88 * i + 0x5c;
+        gPokemonStorageSystemPtr->unk_0d00[i]->pos2.x = 0;
+        gPokemonStorageSystemPtr->unk_0d00[i]->invisible = FALSE;
+    }
+    sub_809A860(TRUE);
+}
+
+void sub_809A860(bool8 a0)
+{
+    u16 i;
+    if (a0)
+    {
+        for (i = 0; i < 2; i++)
+        {
+            gPokemonStorageSystemPtr->unk_0d00[i]->data[0] = 1;
+            gPokemonStorageSystemPtr->unk_0d00[i]->data[1] = 0;
+            gPokemonStorageSystemPtr->unk_0d00[i]->data[2] = 0;
+            gPokemonStorageSystemPtr->unk_0d00[i]->data[4] = 0;
+        }
+    }
+        else
+    {
+        for (i = 0; i < 2; i++)
+        {
+            gPokemonStorageSystemPtr->unk_0d00[i]->data[0] = 0;
+        }
+    }
 }

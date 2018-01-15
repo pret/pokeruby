@@ -4,31 +4,6 @@
 	.section .rodata
 
 	.align 2
-gOamData_83BB2D0:: @ 83BB2D0
-	.2byte 0x8000
-	.2byte 0x0000
-	.2byte 0x0800
-
-	.align 2
-gSpriteAnim_83BB2D8:: @ 83BB2D8
-	obj_image_anim_frame 0, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnim_83BB2E0:: @ 83BB2E0
-	obj_image_anim_frame 2, 5
-	obj_image_anim_end
-
-	.align 2
-gSpriteAnimTable_83BB2E8:: @ 83BB2E8
-	.4byte gSpriteAnim_83BB2D8
-	.4byte gSpriteAnim_83BB2E0
-
-	.align 2
-gSpriteTemplate_83BB2F0:: @ 83BB2F0
-	spr_template 6, 56015, gOamData_83BB2D0, gSpriteAnimTable_83BB2E8, NULL, gDummySpriteAffineAnimTable, sub_809A8C8
-
-	.align 2
 HandCursorPalette: @ 83BB308
 	.incbin "graphics/pokemon_storage/hand_cursor_pal.bin"
 

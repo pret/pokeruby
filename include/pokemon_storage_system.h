@@ -117,7 +117,7 @@ struct PokemonStorageSystemData {
     u16 unk_0cee;
     struct Sprite *unk_0cf0[2];
     struct Sprite *unk_0cf8[2];
-    u8 filler_0cd0[8];
+    struct Sprite *unk_0d00[2];
     u32 unk_0d08;
     u8 filler_0d0c[0x50];
     u16 unk_0d5c;
@@ -215,7 +215,7 @@ void sub_8099C70(u8 whichBox);
 bool8 sub_8099D34(void);
 void sub_8099DCC(u8 a0);
 bool8 sub_8099E08(void);
-void sub_809A860(u8 a0);
+void sub_809A860(bool8 a0);
 void sub_809AA24(void);
 void sub_809AA98(void);
 bool8 sub_809AC00(void);
