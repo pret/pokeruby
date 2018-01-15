@@ -67,7 +67,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 	end
 
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
-	giveitem_std ITEM_TM04
+	giveitem_std ITEM_TM04_CALM_MIND
 	compare RESULT, 0
 	goto_if_eq MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4

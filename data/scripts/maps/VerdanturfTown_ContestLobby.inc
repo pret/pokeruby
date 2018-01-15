@@ -103,7 +103,7 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
-	giveitem_std ITEM_TM45
+	giveitem_std ITEM_TM45_ATTRACT
 	compare RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM45

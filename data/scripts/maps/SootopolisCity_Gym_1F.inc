@@ -106,7 +106,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
-	giveitem_std ITEM_TM03
+	giveitem_std ITEM_TM03_WATER_PULSE
 	compare RESULT, 0
 	goto_if_eq SootopolisCity_Gym_1F_EventScript_1A029B
 	msgbox SootopolisCity_Gym_1F_Text_18F466, 4

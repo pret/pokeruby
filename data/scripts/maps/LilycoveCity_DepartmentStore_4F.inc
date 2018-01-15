@@ -25,10 +25,10 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A019:: @ 815A019
 
 	.align 2
 LilycoveCity_DepartmentStore_4F_Items1:: @ 815A030
-	.2byte ITEM_TM38
-	.2byte ITEM_TM25
-	.2byte ITEM_TM14
-	.2byte ITEM_TM15
+	.2byte ITEM_TM38_FIRE_BLAST
+	.2byte ITEM_TM25_THUNDER
+	.2byte ITEM_TM14_BLIZZARD
+	.2byte ITEM_TM15_HYPER_BEAM
 	.2byte ITEM_NONE
 	release
 	end
@@ -45,10 +45,10 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A03C:: @ 815A03C
 
 	.align 2
 LilycoveCity_DepartmentStore_4F_Items2:: @ 815A054
-	.2byte ITEM_TM17
-	.2byte ITEM_TM20
-	.2byte ITEM_TM33
-	.2byte ITEM_TM16
+	.2byte ITEM_TM17_PROTECT
+	.2byte ITEM_TM20_SAFEGUARD
+	.2byte ITEM_TM33_REFLECT
+	.2byte ITEM_TM16_LIGHT_SCREEN
 	.2byte ITEM_NONE
 	release
 	end

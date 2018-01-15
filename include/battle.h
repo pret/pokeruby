@@ -473,7 +473,7 @@ struct sideTimer
     u8 lightscreenTimer;    //0x1
     u8 mistTimer;           //0x2
     u8 field3;              //0x3
-    u16 field4;              //0x4
+    u16 field4;             //0x4
     u8 spikesAmount;        //0x6
     u8 safeguardTimer;      //0x7
     u8 followmeTimer;       //0x8

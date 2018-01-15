@@ -298,7 +298,7 @@ MauvilleCity_EventScript_14C332:: @ 814C332
 
 MauvilleCity_EventScript_14C33C:: @ 814C33C
 	msgbox MauvilleCity_Text_1663EB, 4
-	giveitem_std ITEM_TM24
+	giveitem_std ITEM_TM24_THUNDERBOLT
 	compare RESULT, 0
 	goto_if_eq MauvilleCity_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM24
