@@ -57,10 +57,9 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
     u8 sp30;
     u8 sp34 = 4;
     u16 item;
-    u16 r4;
-    u32 r10;
+    u8 r10;
 
-    item = GetMonData(pkmn, MON_DATA_HELD_ITEM);
+    item = GetMonData(pkmn, MON_DATA_HELD_ITEM, NULL);
     if (item == 0xAF)
     {
         if (gMain.inBattle)
@@ -80,7 +79,6 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
     {
         gActiveBank = gBankInMenu;
         sp18 = (GetBankSide(gActiveBank) != 0);
-        //r4 = b - 13;
         while (sp18 < gNoOfAllBanks)
         {
             if (gBattlePartyID[sp18] == c)
@@ -90,22 +88,20 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             }
             sp18 += 2;
         }
-        r4 = b - 13;
     }
     //_0803E2E8
     else
     {
         gActiveBank = 0;
         sp34 = 4;
-        r4 = b - 13;
     }
     //_0803E2F4
-
-    if (r4 > 0xA5)
+    
+    if (b < 13 || b > 0xB2)
+        return 1;
+    if (gItemEffectTable[b - 13] == NULL && b != 0xAF)
         return 1;
 
-    if (gItemEffectTable[r4] == NULL && b != 0xAF)
-        return 1;
     if (b == 0xAF)
     {
         //_0803E31E
@@ -117,7 +113,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
     //_0803E372
     else
     {
-        sp20 = gItemEffectTable[r4];
+        sp20 = gItemEffectTable[b - 13];
     }
 
     // Now, the HUGE loop!
@@ -127,10 +123,11 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
         {
         case 0:
         //_0803E3A8
+            // TODO: stop re-loading sp34
             if ((sp20[sp18] & 0x80) && gMain.inBattle
              && sp34 != 4 && (gBattleMons[sp34].status2 & 0xF0000))
             {
-                gBattleMons[sp34].status2 &= 0xFFF0FFFF;
+                gBattleMons[sp34].status2 &= ~0xF0000;
                 sp1C = 0;
             }
             //_0803E3F0
@@ -236,7 +233,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             {
                 //u16 r4;
 
-                r10 &= 0xDF;
+                r10 &= ~0x20;
 
                 sp0 = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_08208238[d]) << (d * 2);
                 //r4 = GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL);
@@ -287,6 +284,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             CalculateMonStats(pkmn);
                             sp24++;
                             sp1C = 0;
+                            //asm("");
                         }
                         break;
                     case 2:
