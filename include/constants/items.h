@@ -2,6 +2,8 @@
 #define GUARD_CONSTANTS_ITEMS_H
 
 #define ITEM_NONE 0
+
+// Balls
 #define ITEM_MASTER_BALL 1
 #define ITEM_ULTRA_BALL 2
 #define ITEM_GREAT_BALL 3
@@ -14,6 +16,8 @@
 #define ITEM_TIMER_BALL 10
 #define ITEM_LUXURY_BALL 11
 #define ITEM_PREMIER_BALL 12
+
+// Pokemon Items
 #define ITEM_POTION 13
 #define ITEM_ANTIDOTE 14
 #define ITEM_BURN_HEAL 15
@@ -180,6 +184,8 @@
 #define ITEM_0B0 176
 #define ITEM_0B1 177
 #define ITEM_0B2 178
+
+// hold items
 #define ITEM_BRIGHT_POWDER 179
 #define ITEM_WHITE_HERB 180
 #define ITEM_MACHO_BRACE 181
@@ -260,6 +266,8 @@
 #define ITEM_PINK_SCARF 256
 #define ITEM_GREEN_SCARF 257
 #define ITEM_YELLOW_SCARF 258
+
+// Key Items
 #define ITEM_MACH_BIKE 259
 #define ITEM_COIN_CASE 260
 #define ITEM_ITEMFINDER 261
@@ -290,6 +298,8 @@
 #define ITEM_ROOT_FOSSIL 286
 #define ITEM_CLAW_FOSSIL 287
 #define ITEM_DEVON_SCOPE 288
+
+// TMs/HMs
 #define ITEM_TM01_FOCUS_PUNCH 289
 #define ITEM_TM02_DRAGON_CLAW 290
 #define ITEM_TM03_WATER_PULSE 291
@@ -348,6 +358,8 @@
 #define ITEM_HM06_ROCK_SMASH 344
 #define ITEM_HM07_WATERFALL 345
 #define ITEM_HM08_DIVE 346
+
+// Unknown
 #define ITEM_15B 347
 #define ITEM_15C 348
 
@@ -385,5 +397,8 @@
 
 #define NUM_TECHNICAL_MACHINES 50
 #define NUM_HIDDEN_MACHINES     8
+
+// Check if the item is one that can be used on a Pokemon.
+#define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
 
 #endif  // GUARD_CONSTANTS_ITEMS_H

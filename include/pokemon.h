@@ -351,6 +351,8 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
+// Shouldn't these be the same enum?
+
 enum
 {
     STAT_STAGE_HP,       // 0
