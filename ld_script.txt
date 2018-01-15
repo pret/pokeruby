@@ -61,6 +61,7 @@ SECTIONS {
         src/pokemon/pokemon_1.o(.text);
         src/battle/calculate_base_damage.o(.text);
         src/pokemon/pokemon_2.o(.text);
+        src/pokemon/pokemon_item_effect.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon/pokemon_3.o(.text);
         src/de_rom_8040FE0.o(.text);

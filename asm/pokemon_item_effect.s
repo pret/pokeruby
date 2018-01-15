@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start ExecuteTableBasedItemEffect_
-ExecuteTableBasedItemEffect_: @ 803E18C
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	movs r4, 0
-	str r4, [sp]
-	bl sub_803E1B0
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end ExecuteTableBasedItemEffect_
-
 	thumb_func_start sub_803E1B0
 sub_803E1B0: @ 803E1B0
 	push {r4-r7,lr}

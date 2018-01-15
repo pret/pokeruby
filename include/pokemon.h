@@ -628,5 +628,8 @@ void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
 
+bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+
+
 
 #endif // GUARD_POKEMON_H
