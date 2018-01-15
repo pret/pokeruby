@@ -78,7 +78,7 @@
 #define SE_FUUSEN1 74           // Red Balloon
 #define SE_FUUSEN2 75           // Blue Balloon
 #define SE_FUUSEN3 76           // Yellow Balloon
-#define SE_TOY_KABE 77          // Brealable Door
+#define SE_TOY_KABE 77          // Breakable Door
 #define SE_TOY_DANGO 78         // Mud Ball
 #define SE_DOKU 79              // Overworld Poison Damage
 #define SE_ESUKA 80             // Escalator
@@ -124,7 +124,7 @@
 #define SE_W231 120             // Harden
 #define SE_W171 121             // Nightmare
 #define SE_W233 122             // Vital Throw
-#define SE_W233B 123            // Vital Throw
+#define SE_W233B 123            // Vital Throw 2
 #define SE_W145 124             // Bubble
 #define SE_W145B 125            // Bubble 2
 #define SE_W145C 126            // Bubble 3
