@@ -86,18 +86,20 @@ void map_copy_with_padding(u16 *map, u16 width, u16 height)
 
 void sub_80560AC(struct MapHeader *mapHeader)
 {
+    // BUG: This results in a null pointer dereference when mapHeader->connections
+    // is NULL, causing count to be assigned a garbage value. This garbage value
+    // just so happens to have the most significant bit set, so it is treated as
+    // negative and the loop below thankfully never executes in this scenario.
+    int count = mapHeader->connections->count;
+    struct MapConnection *connection = mapHeader->connections->connections;
     int i;
-    struct MapConnection *connection;
-    struct MapHeader *cMap;
-    u32 offset;
-    int count;
-    count = mapHeader->connections->count;
-    connection = mapHeader->connections->connections;
+
     gUnknown_0202E850 = sDummyConnectionFlags;
     for (i = 0; i < count; i++, connection++)
     {
-        cMap = mapconnection_get_mapheader(connection);
-        offset = connection->offset;
+        struct MapHeader *cMap = mapconnection_get_mapheader(connection);
+        u32 offset = connection->offset;
+
         switch (connection->direction)
         {
         case CONNECTION_SOUTH:

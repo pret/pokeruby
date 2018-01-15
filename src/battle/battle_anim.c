@@ -13,12 +13,1278 @@
 #include "sprite.h"
 #include "task.h"
 #include "ewram.h"
+#include "graphics.h"
 
 // sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 #define ANIM_ARGS_COUNT 8
+
+const struct OamData gOamData_837DF24 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF2C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF34 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF3C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF44 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF4C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF54 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF5C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF64 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF6C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF74 =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF7C =
+{
+    .affineMode = 0,
+    .objMode = 0,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF84 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF8C =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF94 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DF9C =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFA4 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFAC =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFB4 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFBC =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFC4 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFCC =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFD4 =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFDC =
+{
+    .affineMode = 1,
+    .objMode = 0,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFE4 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFEC =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFF4 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837DFFC =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837D004 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837D00C =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E014 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E01C =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E024 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E02C =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E034 =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E03C =
+{
+    .affineMode = 3,
+    .objMode = 0,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E044 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E04C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E054 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E05C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E064 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E06C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E074 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E07C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E084 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E08C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E094 =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E09C =
+{
+    .affineMode = 0,
+    .objMode = 1,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0A4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0AC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0B4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0BC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0C4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0CC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0D4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0DC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0E4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0EC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0F4 =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E0FC =
+{
+    .affineMode = 1,
+    .objMode = 1,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E104 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 0,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E10C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 0,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E114 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 0,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E11C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 0,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E124 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 1,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E12C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 1,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E134 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 1,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E13C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 1,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E144 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 2,
+    .size = 0,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E14C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 2,
+    .size = 1,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E154 =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 2,
+    .size = 2,
+    .priority = 2,
+};
+
+const struct OamData gOamData_837E15C =
+{
+    .affineMode = 3,
+    .objMode = 1,
+    .shape = 2,
+    .size = 3,
+    .priority = 2,
+};
+
+const struct CompressedSpriteSheet gBattleAnimPicTable[] =
+{
+    { (u8 *) &gBattleAnimSpriteSheet_000,  0x200, 10000 },
+    { (u8 *) &gBattleAnimSpriteSheet_001,  0x300, 10001 },
+    { (u8 *) &gBattleAnimSpriteSheet_002,  0x200, 10002 },
+    { (u8 *) &gBattleAnimSpriteSheet_003,  0x100, 10003 },
+    { (u8 *) &gBattleAnimSpriteSheet_004,  0x200, 10004 },
+    { (u8 *) &gBattleAnimSpriteSheet_005,  0x400, 10005 },
+    { (u8 *) &gBattleAnimSpriteSheet_006,  0x180, 10006 },
+    { (u8 *) &gBattleAnimSpriteSheet_007,  0x800, 10007 },
+    { (u8 *) &gBattleAnimSpriteSheet_008,   0x20, 10008 },
+    { (u8 *) &gBattleAnimSpriteSheet_009,  0x400, 10009 },
+    { (u8 *) &gBattleAnimSpriteSheet_010, 0x1200, 10010 },
+    { (u8 *) &gBattleAnimSpriteSheet_011,  0x180, 10011 },
+    { (u8 *) &gBattleAnimSpriteSheet_012,   0x80, 10012 },
+    { (u8 *) &gBattleAnimSpriteSheet_013,   0x80, 10013 },
+    { (u8 *) &gBattleAnimSpriteSheet_014,  0x280, 10014 },
+    { (u8 *) &gBattleAnimSpriteSheet_015,   0x80, 10015 },
+    { (u8 *) &gBattleAnimSpriteSheet_016,  0x100, 10016 },
+    { (u8 *) &gBattleAnimSpriteSheet_017,   0x20, 10017 },
+    { (u8 *) &gBattleAnimSpriteSheet_018,   0x80, 10018 },
+    { (u8 *) &gBattleAnimSpriteSheet_019,  0x400, 10019 },
+    { (u8 *) &gBattleAnimSpriteSheet_020,  0x200, 10020 },
+    { (u8 *) &gBattleAnimSpriteSheet_021,  0xA00, 10021 },
+    { (u8 *) &gBattleAnimSpriteSheet_021,  0xA00, 10022 },
+    { (u8 *) &gBattleAnimSpriteSheet_023,  0x380, 10023 },
+    { (u8 *) &gBattleAnimSpriteSheet_024,  0x300, 10024 },
+    { (u8 *) &gBattleAnimSpriteSheet_025,  0xA00, 10025 },
+    { (u8 *) &gBattleAnimSpriteSheet_026,  0xA00, 10026 },
+    { (u8 *) &gBattleAnimSpriteSheet_027,  0xA00, 10027 },
+    { (u8 *) &gBattleAnimSpriteSheet_028,  0xA00, 10028 },
+    { (u8 *) &gBattleAnimSpriteSheet_029,  0xA00, 10029 },
+    { (u8 *) &gBattleAnimSpriteSheet_030,  0xA00, 10030 },
+    { (u8 *) &gBattleAnimSpriteSheet_031,  0xE00, 10031 },
+    { (u8 *) &gBattleAnimSpriteSheet_032,  0x380, 10032 },
+    { (u8 *) &gBattleAnimSpriteSheet_033, 0x1000, 10033 },
+    { (u8 *) &gBattleAnimSpriteSheet_034,  0x800, 10034 },
+    { (u8 *) &gBattleAnimSpriteSheet_035,  0xA00, 10035 },
+    { (u8 *) &gBattleAnimSpriteSheet_036,  0x800, 10036 },
+    { (u8 *) &gBattleAnimSpriteSheet_037,  0xA00, 10037 },
+    { (u8 *) &gBattleAnimSpriteSheet_038,  0xA00, 10038 },
+    { (u8 *) &gBattleAnimSpriteSheet_039,  0xA00, 10039 },
+    { (u8 *) &gBattleAnimSpriteSheet_040,  0xA00, 10040 },
+    { (u8 *) &gBattleAnimSpriteSheet_041,  0xA00, 10041 },
+    { (u8 *) &gBattleAnimSpriteSheet_042,  0xA00, 10042 },
+    { (u8 *) &gBattleAnimSpriteSheet_043,  0xA00, 10043 },
+    { (u8 *) &gBattleAnimSpriteSheet_044,  0xA00, 10044 },
+    { (u8 *) &gBattleAnimSpriteSheet_045,  0xA00, 10045 },
+    { (u8 *) &gBattleAnimSpriteSheet_046, 0x1000, 10046 },
+    { (u8 *) &gBattleAnimSpriteSheet_046, 0x1000, 10047 },
+    { (u8 *) &gBattleAnimSpriteSheet_048, 0x1000, 10048 },
+    { (u8 *) &gBattleAnimSpriteSheet_048, 0x1000, 10049 },
+    { (u8 *) &gBattleAnimSpriteSheet_050,  0x200, 10050 },
+    { (u8 *) &gBattleAnimSpriteSheet_051,  0x200, 10051 },
+    { (u8 *) &gBattleAnimSpriteSheet_052,  0x200, 10052 },
+    { (u8 *) &gBattleAnimSpriteSheet_053,  0x800, 10053 },
+    { (u8 *) &gBattleAnimSpriteSheet_054,   0x80, 10054 },
+    { (u8 *) &gBattleAnimSpriteSheet_055,  0x200, 10055 },
+    { (u8 *) &gBattleAnimSpriteSheet_056, 0x1000, 10056 },
+    { (u8 *) &gBattleAnimSpriteSheet_057,  0x180, 10057 },
+    { (u8 *) &gBattleAnimSpriteSheet_058,  0xC00, 10058 },
+    { (u8 *) &gBattleAnimSpriteSheet_059,  0x100, 10059 },
+    { (u8 *) &gBattleAnimSpriteSheet_060,   0x40, 10060 },
+    { (u8 *) &gBattleAnimSpriteSheet_061,  0x180, 10061 },
+    { (u8 *) &gBattleAnimSpriteSheet_062,  0x800, 10062 },
+    { (u8 *) &gBattleAnimSpriteSheet_063,  0x480, 10063 },
+    { (u8 *) &gBattleAnimSpriteSheet_064,  0x200, 10064 },
+    { (u8 *) &gBattleAnimSpriteSheet_065,  0x200, 10065 },
+    { (u8 *) &gBattleAnimSpriteSheet_066,  0x100, 10066 },
+    { (u8 *) &gBattleAnimSpriteSheet_065,  0x200, 10067 },
+    { (u8 *) &gBattleAnimSpriteSheet_065,  0x200, 10068 },
+    { (u8 *) &gBattleAnimSpriteSheet_065,  0x200, 10069 },
+    { (u8 *) &gBattleAnimSpriteSheet_070,  0x200, 10070 },
+    { (u8 *) &gBattleAnimSpriteSheet_071,  0xA00, 10071 },
+    { (u8 *) &gBattleAnimSpriteSheet_072,  0x300, 10072 },
+    { (u8 *) &gBattleAnimSpriteSheet_073,  0x180, 10073 },
+    { (u8 *) &gBattleAnimSpriteSheet_074,   0xA0, 10074 },
+    { (u8 *) &gBattleAnimSpriteSheet_075,  0x700, 10075 },
+    { (u8 *) &gBattleAnimSpriteSheet_076,  0x400, 10076 },
+    { (u8 *) &gBattleAnimSpriteSheet_077,  0x200, 10077 },
+    { (u8 *) &gBattleAnimSpriteSheet_078,  0x300, 10078 },
+    { (u8 *) &gBattleAnimSpriteSheet_079,  0xC00, 10079 },
+    { (u8 *) &gBattleAnimSpriteSheet_080,  0xA00, 10080 },
+    { (u8 *) &gBattleAnimSpriteSheet_081,   0x80, 10081 },
+    { (u8 *) &gBattleAnimSpriteSheet_082,   0x40, 10082 },
+    { (u8 *) &gBattleAnimSpriteSheet_083,  0xE00, 10083 },
+    { (u8 *) &gBattleAnimSpriteSheet_084,  0xE00, 10084 },
+    { (u8 *) &gBattleAnimSpriteSheet_085,  0x280, 10085 },
+    { (u8 *) &gBattleAnimSpriteSheet_086,  0x200, 10086 },
+    { (u8 *) &gBattleAnimSpriteSheet_087,   0x80, 10087 },
+    { (u8 *) &gBattleAnimSpriteSheet_088,   0xC0, 10088 },
+    { (u8 *) &gBattleAnimSpriteSheet_089,  0xA00, 10089 },
+    { (u8 *) &gBattleAnimSpriteSheet_090,  0x200, 10090 },
+    { (u8 *) &gBattleAnimSpriteSheet_091,  0x180, 10091 },
+    { (u8 *) &gBattleAnimSpriteSheet_092,   0x80, 10092 },
+    { (u8 *) &gBattleAnimSpriteSheet_093, 0x1000, 10093 },
+    { (u8 *) &gBattleAnimSpriteSheet_094,  0xA00, 10094 },
+    { (u8 *) &gBattleAnimSpriteSheet_095,  0x180, 10095 },
+    { (u8 *) &gBattleAnimSpriteSheet_096,  0x380, 10096 },
+    { (u8 *) &gBattleAnimSpriteSheet_097,  0xC00, 10097 },
+    { (u8 *) &gBattleAnimSpriteSheet_098,  0x200, 10098 },
+    { (u8 *) &gBattleAnimSpriteSheet_099,  0x200, 10099 },
+    { (u8 *) &gBattleAnimSpriteSheet_100,  0x200, 10100 },
+    { (u8 *) &gBattleAnimSpriteSheet_101,  0x200, 10101 },
+    { (u8 *) &gBattleAnimSpriteSheet_102,  0x400, 10102 },
+    { (u8 *) &gBattleAnimSpriteSheet_103,   0x80, 10103 },
+    { (u8 *) &gBattleAnimSpriteSheet_104,  0x400, 10104 },
+    { (u8 *) &gBattleAnimSpriteSheet_105,  0xC00, 10105 },
+    { (u8 *) &gBattleAnimSpriteSheet_106,  0x200, 10106 },
+    { (u8 *) &gBattleAnimSpriteSheet_107, 0x1000, 10107 },
+    { (u8 *) &gBattleAnimSpriteSheet_108,  0xA00, 10108 },
+    { (u8 *) &gBattleAnimSpriteSheet_109,   0x20, 10109 },
+    { (u8 *) &gBattleAnimSpriteSheet_110,  0xE00, 10110 },
+    { (u8 *) &gBattleAnimSpriteSheet_111,   0x80, 10111 },
+    { (u8 *) &gBattleAnimSpriteSheet_112,  0xA00, 10112 },
+    { (u8 *) &gBattleAnimSpriteSheet_113,  0x400, 10113 },
+    { (u8 *) &gBattleAnimSpriteSheet_114,  0x200, 10114 },
+    { (u8 *) &gBattleAnimSpriteSheet_115,  0x700, 10115 },
+    { (u8 *) &gBattleAnimSpriteSheet_116,  0x800, 10116 },
+    { (u8 *) &gBattleAnimSpriteSheet_117,  0xA00, 10117 },
+    { (u8 *) &gBattleAnimSpriteSheet_118,  0x600, 10118 },
+    { (u8 *) &gBattleAnimSpriteSheet_119,  0x800, 10119 },
+    { (u8 *) &gBattleAnimSpriteSheet_120,  0x200, 10120 },
+    { (u8 *) &gBattleAnimSpriteSheet_121,   0x40, 10121 },
+    { (u8 *) &gBattleAnimSpriteSheet_122,  0x180, 10122 },
+    { (u8 *) &gBattleAnimSpriteSheet_123,  0x600, 10123 },
+    { (u8 *) &gBattleAnimSpriteSheet_124,  0x600, 10124 },
+    { (u8 *) &gBattleAnimSpriteSheet_125,  0x200, 10125 },
+    { (u8 *) &gBattleAnimSpriteSheet_126,   0x80, 10126 },
+    { (u8 *) &gBattleAnimSpriteSheet_127,  0x200, 10127 },
+    { (u8 *) &gBattleAnimSpriteSheet_128,  0x800, 10128 },
+    { (u8 *) &gBattleAnimSpriteSheet_129,   0x80, 10129 },
+    { (u8 *) &gBattleAnimSpriteSheet_130,  0xA00, 10130 },
+    { (u8 *) &gBattleAnimSpriteSheet_131,  0x280, 10131 },
+    { (u8 *) &gBattleAnimSpriteSheet_132,  0x280, 10132 },
+    { (u8 *) &gBattleAnimSpriteSheet_133,  0x100, 10133 },
+    { (u8 *) &gBattleAnimSpriteSheet_134,  0x200, 10134 },
+    { (u8 *) &gBattleAnimSpriteSheet_135,  0x200, 10135 },
+    { (u8 *) &gBattleAnimSpriteSheet_136,   0x20, 10136 },
+    { (u8 *) &gBattleAnimSpriteSheet_137,  0xA00, 10137 },
+    { (u8 *) &gBattleAnimSpriteSheet_138,  0x800, 10138 },
+    { (u8 *) &gBattleAnimSpriteSheet_139,  0x800, 10139 },
+    { (u8 *) &gBattleAnimSpriteSheet_140,   0xC0, 10140 },
+    { (u8 *) &gBattleAnimSpriteSheet_141,  0x1C0, 10141 },
+    { (u8 *) &gBattleAnimSpriteSheet_142,  0x100, 10142 },
+    { (u8 *) &gBattleAnimSpriteSheet_143,  0x800, 10143 },
+    { (u8 *) &gBattleAnimSpriteSheet_144,  0x200, 10144 },
+    { (u8 *) &gBattleAnimSpriteSheet_145,  0x800, 10145 },
+    { (u8 *) &gBattleAnimSpriteSheet_146,  0x180, 10146 },
+    { (u8 *) &gBattleAnimSpriteSheet_147,  0x180, 10147 },
+    { (u8 *) &gBattleAnimSpriteSheet_148,  0x200, 10148 },
+    { (u8 *) &gBattleAnimSpriteSheet_149,  0x200, 10149 },
+    { (u8 *) &gBattleAnimSpriteSheet_150,  0x180, 10150 },
+    { (u8 *) &gBattleAnimSpriteSheet_151,  0x400, 10151 },
+    { (u8 *) &gBattleAnimSpriteSheet_152,   0x80, 10152 },
+    { (u8 *) &gBattleAnimSpriteSheet_153,  0x100, 10153 },
+    { (u8 *) &gBattleAnimSpriteSheet_154,  0x100, 10154 },
+    { (u8 *) &gBattleAnimSpriteSheet_155,  0x140, 10155 },
+    { (u8 *) &gBattleAnimSpriteSheet_156,  0x800, 10156 },
+    { (u8 *) &gBattleAnimSpriteSheet_157,  0x200, 10157 },
+    { (u8 *) &gBattleAnimSpriteSheet_158,  0x100, 10158 },
+    { (u8 *) &gBattleAnimSpriteSheet_159,   0xA0, 10159 },
+    { (u8 *) &gBattleAnimSpriteSheet_160,  0x100, 10160 },
+    { (u8 *) &gBattleAnimSpriteSheet_161,   0x80, 10161 },
+    { (u8 *) &gBattleAnimSpriteSheet_162,  0x300, 10162 },
+    { (u8 *) &gBattleAnimSpriteSheet_163,  0x100, 10163 },
+    { (u8 *) &gBattleAnimSpriteSheet_163,  0x100, 10164 },
+    { (u8 *) &gBattleAnimSpriteSheet_163,  0x100, 10165 },
+    { (u8 *) &gBattleAnimSpriteSheet_166,  0x800, 10166 },
+    { (u8 *) &gBattleAnimSpriteSheet_166,  0x800, 10167 },
+    { (u8 *) &gBattleAnimSpriteSheet_166,  0x800, 10168 },
+    { (u8 *) &gBattleAnimSpriteSheet_166,  0x800, 10169 },
+    { (u8 *) &gBattleAnimSpriteSheet_166,  0x800, 10170 },
+    { (u8 *) &gBattleAnimSpriteSheet_171,   0x80, 10171 },
+    { (u8 *) &gBattleAnimSpriteSheet_144,  0x200, 10172 },
+    { (u8 *) &gBattleAnimSpriteSheet_173,  0x200, 10173 },
+    { (u8 *) &gBattleAnimSpriteSheet_174,  0x200, 10174 },
+    { (u8 *) &gBattleAnimSpriteSheet_175,   0x80, 10175 },
+    { (u8 *) &gBattleAnimSpriteSheet_176,  0x200, 10176 },
+    { (u8 *) &gBattleAnimSpriteSheet_177,  0x500, 10177 },
+    { (u8 *) &gBattleAnimSpriteSheet_178,  0x800, 10178 },
+    { (u8 *) &gBattleAnimSpriteSheet_179,  0x400, 10179 },
+    { (u8 *) &gBattleAnimSpriteSheet_180,   0x20, 10180 },
+    { (u8 *) &gBattleAnimSpriteSheet_181,  0x800, 10181 },
+    { (u8 *) &gBattleAnimSpriteSheet_182,  0x100, 10182 },
+    { (u8 *) &gBattleAnimSpriteSheet_183,  0x800, 10183 },
+    { (u8 *) &gBattleAnimSpriteSheet_184,  0x400, 10184 },
+    { (u8 *) &gBattleAnimSpriteSheet_185,  0xA00, 10185 },
+    { (u8 *) &gBattleAnimSpriteSheet_186, 0x1000, 10186 },
+    { (u8 *) &gBattleAnimSpriteSheet_187,  0x800, 10187 },
+    { (u8 *) &gBattleAnimSpriteSheet_188,  0x400, 10188 },
+    { (u8 *) &gBattleAnimSpriteSheet_189,  0x200, 10189 },
+    { (u8 *) &gBattleAnimSpriteSheet_190,  0x800, 10190 },
+    { (u8 *) &gBattleAnimSpriteSheet_191,  0x800, 10191 },
+    { (u8 *) &gBattleAnimSpriteSheet_192,  0x800, 10192 },
+    { (u8 *) &gBattleAnimSpriteSheet_193,  0x200, 10193 },
+    { (u8 *) &gBattleAnimSpriteSheet_194,  0x800, 10194 },
+    { (u8 *) &gBattleAnimSpriteSheet_195,  0x200, 10195 },
+    { (u8 *) &gBattleAnimSpriteSheet_196,  0x800, 10196 },
+    { (u8 *) &gBattleAnimSpriteSheet_197,  0x200, 10197 },
+    { (u8 *) &gBattleAnimSpriteSheet_198,  0x800, 10198 },
+    { (u8 *) &gBattleAnimSpriteSheet_199,  0x400, 10199 },
+    { (u8 *) &gBattleAnimSpriteSheet_200,  0x200, 10200 },
+    { (u8 *) &gBattleAnimSpriteSheet_201,  0xA80, 10201 },
+    { (u8 *) &gBattleAnimSpriteSheet_202,  0x600, 10202 },
+    { (u8 *) &gBattleAnimSpriteSheet_203,  0x800, 10203 },
+    { (u8 *) &gBattleAnimSpriteSheet_204,  0x200, 10204 },
+    { (u8 *) &gBattleAnimSpriteSheet_205,  0x600, 10205 },
+    { (u8 *) &gBattleAnimSpriteSheet_206,  0x800, 10206 },
+    { (u8 *) &gBattleAnimSpriteSheet_207,  0x180, 10207 },
+    { (u8 *) &gBattleAnimSpriteSheet_208,  0x800, 10208 },
+    { (u8 *) &gBattleAnimSpriteSheet_209,  0x800, 10209 },
+    { (u8 *) &gBattleAnimSpriteSheet_210,   0x80, 10210 },
+    { (u8 *) &gBattleAnimSpriteSheet_211,   0x80, 10211 },
+    { (u8 *) &gBattleAnimSpriteSheet_212,  0x800, 10212 },
+    { (u8 *) &gBattleAnimSpriteSheet_213,  0x800, 10213 },
+    { (u8 *) &gBattleAnimSpriteSheet_214,  0x600, 10214 },
+    { (u8 *) &gBattleAnimSpriteSheet_215,  0x600, 10215 },
+    { (u8 *) &gBattleAnimSpriteSheet_210,   0x80, 10216 },
+    { (u8 *) &gBattleAnimSpriteSheet_217,   0x80, 10217 },
+    { (u8 *) &gBattleAnimSpriteSheet_218,  0x180, 10218 },
+    { (u8 *) &gBattleAnimSpriteSheet_210,   0x80, 10219 },
+    { (u8 *) &gBattleAnimSpriteSheet_220,  0x200, 10220 },
+    { (u8 *) &gBattleAnimSpriteSheet_221,  0x400, 10221 },
+    { (u8 *) &gBattleAnimSpriteSheet_222,  0xA00, 10222 },
+    { (u8 *) &gBattleAnimSpriteSheet_223,  0x800, 10223 },
+    { (u8 *) &gBattleAnimSpriteSheet_224,  0x200, 10224 },
+    { (u8 *) &gBattleAnimSpriteSheet_225,  0x400, 10225 },
+    { (u8 *) &gBattleAnimSpriteSheet_226,   0x80, 10226 },
+    { (u8 *) &gBattleAnimSpriteSheet_227,  0x800, 10227 },
+    { (u8 *) &gBattleAnimSpriteSheet_228,  0x200, 10228 },
+    { (u8 *) &gBattleAnimSpriteSheet_229,  0x300, 10229 },
+    { (u8 *) &gBattleAnimSpriteSheet_230,  0x800, 10230 },
+    { (u8 *) &gBattleAnimSpriteSheet_231,  0x380, 10231 },
+    { (u8 *) &gBattleAnimSpriteSheet_232,  0x800, 10232 },
+    { (u8 *) &gBattleAnimSpriteSheet_233,   0xC0, 10233 },
+    { (u8 *) &gBattleAnimSpriteSheet_234,  0x800, 10234 },
+    { (u8 *) &gBattleAnimSpriteSheet_235,   0x60, 10235 },
+    { (u8 *) &gBattleAnimSpriteSheet_235,   0x60, 10236 },
+    { (u8 *) &gBattleAnimSpriteSheet_235,   0x60, 10237 },
+    { (u8 *) &gBattleAnimSpriteSheet_238,   0x80, 10238 },
+    { (u8 *) &gBattleAnimSpriteSheet_239,  0x180, 10239 },
+    { (u8 *) &gBattleAnimSpriteSheet_240,  0x180, 10240 },
+    { (u8 *) &gBattleAnimSpriteSheet_241,  0x200, 10241 },
+    { (u8 *) &gBattleAnimSpriteSheet_242,  0x200, 10242 },
+    { (u8 *) &gBattleAnimSpriteSheet_243,   0x20, 10243 },
+    { (u8 *) &gBattleAnimSpriteSheet_244,  0x400, 10244 },
+    { (u8 *) &gBattleAnimSpriteSheet_245,  0x600, 10245 },
+    { (u8 *) &gBattleAnimSpriteSheet_246, 0x1000, 10246 },
+    { (u8 *) &gBattleAnimSpriteSheet_247,  0x400, 10247 },
+    { (u8 *) &gBattleAnimSpriteSheet_248,   0x20, 10248 },
+    { (u8 *) &gBattleAnimSpriteSheet_249,   0x80, 10249 },
+    { (u8 *) &gBattleAnimSpriteSheet_250,  0x800, 10250 },
+    { (u8 *) &gBattleAnimSpriteSheet_251,   0x80, 10251 },
+    { (u8 *) &gBattleAnimSpriteSheet_252,  0x200, 10252 },
+    { (u8 *) &gBattleAnimSpriteSheet_253,  0x400, 10253 },
+    { (u8 *) &gBattleAnimSpriteSheet_254,  0x200, 10254 },
+    { (u8 *) &gBattleAnimSpriteSheet_255,  0x200, 10255 },
+    { (u8 *) &gBattleAnimSpriteSheet_256,  0x800, 10256 },
+    { (u8 *) &gBattleAnimSpriteSheet_257,  0x280, 10257 },
+    { (u8 *) &gBattleAnimSpriteSheet_258,  0x200, 10258 },
+    { (u8 *) &gBattleAnimSpriteSheet_149,  0x200, 10259 },
+    { (u8 *) &gBattleAnimSpriteSheet_260,  0x400, 10260 },
+    { (u8 *) &gBattleAnimSpriteSheet_261,  0x200, 10261 },
+    { (u8 *) &gBattleAnimSpriteSheet_262,  0x200, 10262 },
+    { (u8 *) &gBattleAnimSpriteSheet_263,   0x80, 10263 },
+    { (u8 *) &gBattleAnimSpriteSheet_264,   0x20, 10264 },
+    { (u8 *) &gBattleAnimSpriteSheet_264,   0x20, 10265 },
+    { (u8 *) &gBattleAnimSpriteSheet_266,   0x80, 10266 },
+    { (u8 *) &gBattleAnimSpriteSheet_212,  0x800, 10267 },
+    { (u8 *) &gBattleAnimSpriteSheet_264,   0x20, 10268 },
+    { (u8 *) &gBattleAnimSpriteSheet_269,   0x80, 10269 },
+    { (u8 *) &gBattleAnimSpriteSheet_270,  0x400, 10270 },
+    { (u8 *) &gBattleAnimSpriteSheet_271,   0x80, 10271 },
+    { (u8 *) &gBattleAnimSpriteSheet_272,  0x800, 10272 },
+    { (u8 *) &gBattleAnimSpriteSheet_273,   0x20, 10273 },
+    { (u8 *) &gBattleAnimSpriteSheet_274,  0x800, 10274 },
+    { (u8 *) &gBattleAnimSpriteSheet_275,  0x800, 10275 },
+    { (u8 *) &gBattleAnimSpriteSheet_276,  0x800, 10276 },
+    { (u8 *) &gBattleAnimSpriteSheet_277, 0x1000, 10277 },
+    { (u8 *) &gBattleAnimSpriteSheet_278,  0x800, 10278 },
+    { (u8 *) &gBattleAnimSpriteSheet_279,   0xA0, 10279 },
+    { (u8 *) &gBattleAnimSpriteSheet_280,  0x800, 10280 },
+    { (u8 *) &gBattleAnimSpriteSheet_281,  0x200, 10281 },
+    { (u8 *) &gBattleAnimSpriteSheet_282,  0x600, 10282 },
+    { (u8 *) &gBattleAnimSpriteSheet_283,  0x200, 10283 },
+    { (u8 *) &gBattleAnimSpriteSheet_284,  0x800, 10284 },
+    { (u8 *) &gBattleAnimSpriteSheet_285,  0x200, 10285 },
+    { (u8 *) &gBattleAnimSpriteSheet_183,  0x800, 10286 },
+    { (u8 *) &gBattleAnimSpriteSheet_056, 0x1000, 10287 },
+    { (u8 *) &gBattleAnimSpriteSheet_163,  0x100, 10288 },
+};
+
+const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
+{
+    { (u8 *) &gBattleAnimSpritePalette_000, 10000 },
+    { (u8 *) &gBattleAnimSpritePalette_001, 10001 },
+    { (u8 *) &gBattleAnimSpritePalette_002, 10002 },
+    { (u8 *) &gBattleAnimSpritePalette_003, 10003 },
+    { (u8 *) &gBattleAnimSpritePalette_004, 10004 },
+    { (u8 *) &gBattleAnimSpritePalette_005, 10005 },
+    { (u8 *) &gBattleAnimSpritePalette_006, 10006 },
+    { (u8 *) &gBattleAnimSpritePalette_007, 10007 },
+    { (u8 *) &gBattleAnimSpritePalette_008, 10008 },
+    { (u8 *) &gBattleAnimSpritePalette_009, 10009 },
+    { (u8 *) &gBattleAnimSpritePalette_010, 10010 },
+    { (u8 *) &gBattleAnimSpritePalette_011, 10011 },
+    { (u8 *) &gBattleAnimSpritePalette_012, 10012 },
+    { (u8 *) &gBattleAnimSpritePalette_013, 10013 },
+    { (u8 *) &gBattleAnimSpritePalette_014, 10014 },
+    { (u8 *) &gBattleAnimSpritePalette_015, 10015 },
+    { (u8 *) &gBattleAnimSpritePalette_016, 10016 },
+    { (u8 *) &gBattleAnimSpritePalette_016, 10017 },
+    { (u8 *) &gBattleAnimSpritePalette_018, 10018 },
+    { (u8 *) &gBattleAnimSpritePalette_019, 10019 },
+    { (u8 *) &gBattleAnimSpritePalette_020, 10020 },
+    { (u8 *) &gBattleAnimSpritePalette_021, 10021 },
+    { (u8 *) &gBattleAnimSpritePalette_022, 10022 },
+    { (u8 *) &gBattleAnimSpritePalette_023, 10023 },
+    { (u8 *) &gBattleAnimSpritePalette_024, 10024 },
+    { (u8 *) &gBattleAnimSpritePalette_025, 10025 },
+    { (u8 *) &gBattleAnimSpritePalette_026, 10026 },
+    { (u8 *) &gBattleAnimSpritePalette_027, 10027 },
+    { (u8 *) &gBattleAnimSpritePalette_028, 10028 },
+    { (u8 *) &gBattleAnimSpritePalette_029, 10029 },
+    { (u8 *) &gBattleAnimSpritePalette_030, 10030 },
+    { (u8 *) &gBattleAnimSpritePalette_031, 10031 },
+    { (u8 *) &gBattleAnimSpritePalette_032, 10032 },
+    { (u8 *) &gBattleAnimSpritePalette_033, 10033 },
+    { (u8 *) &gBattleAnimSpritePalette_033, 10034 },
+    { (u8 *) &gBattleAnimSpritePalette_033, 10035 },
+    { (u8 *) &gBattleAnimSpritePalette_036, 10036 },
+    { (u8 *) &gBattleAnimSpritePalette_036, 10037 },
+    { (u8 *) &gBattleAnimSpritePalette_038, 10038 },
+    { (u8 *) &gBattleAnimSpritePalette_039, 10039 },
+    { (u8 *) &gBattleAnimSpritePalette_038, 10040 },
+    { (u8 *) &gBattleAnimSpritePalette_038, 10041 },
+    { (u8 *) &gBattleAnimSpritePalette_042, 10042 },
+    { (u8 *) &gBattleAnimSpritePalette_043, 10043 },
+    { (u8 *) &gBattleAnimSpritePalette_044, 10044 },
+    { (u8 *) &gBattleAnimSpritePalette_045, 10045 },
+    { (u8 *) &gBattleAnimSpritePalette_046, 10046 },
+    { (u8 *) &gBattleAnimSpritePalette_047, 10046 },
+    { (u8 *) &gBattleAnimSpritePalette_048, 10048 },
+    { (u8 *) &gBattleAnimSpritePalette_049, 10049 },
+    { (u8 *) &gBattleAnimSpritePalette_050, 10050 },
+    { (u8 *) &gBattleAnimSpritePalette_050, 10051 },
+    { (u8 *) &gBattleAnimSpritePalette_050, 10052 },
+    { (u8 *) &gBattleAnimSpritePalette_026, 10053 },
+    { (u8 *) &gBattleAnimSpritePalette_054, 10054 },
+    { (u8 *) &gBattleAnimSpritePalette_050, 10055 },
+    { (u8 *) &gBattleAnimSpritePalette_056, 10056 },
+    { (u8 *) &gBattleAnimSpritePalette_057, 10057 },
+    { (u8 *) &gBattleAnimSpritePalette_058, 10058 },
+    { (u8 *) &gBattleAnimSpritePalette_059, 10059 },
+    { (u8 *) &gBattleAnimSpritePalette_060, 10060 },
+    { (u8 *) &gBattleAnimSpritePalette_061, 10061 },
+    { (u8 *) &gBattleAnimSpritePalette_062, 10062 },
+    { (u8 *) &gBattleAnimSpritePalette_063, 10063 },
+    { (u8 *) &gBattleAnimSpritePalette_064, 10064 },
+    { (u8 *) &gBattleAnimSpritePalette_065, 10065 },
+    { (u8 *) &gBattleAnimSpritePalette_066, 10066 },
+    { (u8 *) &gBattleAnimSpritePalette_067, 10067 },
+    { (u8 *) &gBattleAnimSpritePalette_068, 10068 },
+    { (u8 *) &gBattleAnimSpritePalette_065, 10069 },
+    { (u8 *) &gBattleAnimSpritePalette_070, 10070 },
+    { (u8 *) &gBattleAnimSpritePalette_070, 10071 },
+    { (u8 *) &gBattleAnimSpritePalette_072, 10072 },
+    { (u8 *) &gBattleAnimSpritePalette_073, 10073 },
+    { (u8 *) &gBattleAnimSpritePalette_074, 10074 },
+    { (u8 *) &gBattleAnimSpritePalette_075, 10075 },
+    { (u8 *) &gBattleAnimSpritePalette_076, 10076 },
+    { (u8 *) &gBattleAnimSpritePalette_076, 10077 },
+    { (u8 *) &gBattleAnimSpritePalette_078, 10078 },
+    { (u8 *) &gBattleAnimSpritePalette_078, 10079 },
+    { (u8 *) &gBattleAnimSpritePalette_080, 10080 },
+    { (u8 *) &gBattleAnimSpritePalette_081, 10081 },
+    { (u8 *) &gBattleAnimSpritePalette_082, 10082 },
+    { (u8 *) &gBattleAnimSpritePalette_083, 10083 },
+    { (u8 *) &gBattleAnimSpritePalette_084, 10084 },
+    { (u8 *) &gBattleAnimSpritePalette_085, 10085 },
+    { (u8 *) &gBattleAnimSpritePalette_086, 10086 },
+    { (u8 *) &gBattleAnimSpritePalette_087, 10087 },
+    { (u8 *) &gBattleAnimSpritePalette_088, 10088 },
+    { (u8 *) &gBattleAnimSpritePalette_089, 10089 },
+    { (u8 *) &gBattleAnimSpritePalette_090, 10090 },
+    { (u8 *) &gBattleAnimSpritePalette_091, 10091 },
+    { (u8 *) &gBattleAnimSpritePalette_092, 10092 },
+    { (u8 *) &gBattleAnimSpritePalette_093, 10093 },
+    { (u8 *) &gBattleAnimSpritePalette_094, 10094 },
+    { (u8 *) &gBattleAnimSpritePalette_095, 10095 },
+    { (u8 *) &gBattleAnimSpritePalette_096, 10096 },
+    { (u8 *) &gBattleAnimSpritePalette_097, 10097 },
+    { (u8 *) &gBattleAnimSpritePalette_094, 10098 },
+    { (u8 *) &gBattleAnimSpritePalette_099, 10099 },
+    { (u8 *) &gBattleAnimSpritePalette_100, 10100 },
+    { (u8 *) &gBattleAnimSpritePalette_101, 10101 },
+    { (u8 *) &gBattleAnimSpritePalette_101, 10102 },
+    { (u8 *) &gBattleAnimSpritePalette_103, 10103 },
+    { (u8 *) &gBattleAnimSpritePalette_104, 10104 },
+    { (u8 *) &gBattleAnimSpritePalette_105, 10105 },
+    { (u8 *) &gBattleAnimSpritePalette_105, 10106 },
+    { (u8 *) &gBattleAnimSpritePalette_107, 10107 },
+    { (u8 *) &gBattleAnimSpritePalette_107, 10108 },
+    { (u8 *) &gBattleAnimSpritePalette_109, 10109 },
+    { (u8 *) &gBattleAnimSpritePalette_109, 10110 },
+    { (u8 *) &gBattleAnimSpritePalette_111, 10111 },
+    { (u8 *) &gBattleAnimSpritePalette_112, 10112 },
+    { (u8 *) &gBattleAnimSpritePalette_113, 10113 },
+    { (u8 *) &gBattleAnimSpritePalette_114, 10114 },
+    { (u8 *) &gBattleAnimSpritePalette_115, 10115 },
+    { (u8 *) &gBattleAnimSpritePalette_116, 10116 },
+    { (u8 *) &gBattleAnimSpritePalette_117, 10117 },
+    { (u8 *) &gBattleAnimSpritePalette_118, 10118 },
+    { (u8 *) &gBattleAnimSpritePalette_119, 10119 },
+    { (u8 *) &gBattleAnimSpritePalette_120, 10120 },
+    { (u8 *) &gBattleAnimSpritePalette_121, 10121 },
+    { (u8 *) &gBattleAnimSpritePalette_122, 10122 },
+    { (u8 *) &gBattleAnimSpritePalette_122, 10123 },
+    { (u8 *) &gBattleAnimSpritePalette_124, 10124 },
+    { (u8 *) &gBattleAnimSpritePalette_125, 10125 },
+    { (u8 *) &gBattleAnimSpritePalette_126, 10126 },
+    { (u8 *) &gBattleAnimSpritePalette_127, 10127 },
+    { (u8 *) &gBattleAnimSpritePalette_128, 10128 },
+    { (u8 *) &gBattleAnimSpritePalette_128, 10129 },
+    { (u8 *) &gBattleAnimSpritePalette_130, 10130 },
+    { (u8 *) &gBattleAnimSpritePalette_130, 10131 },
+    { (u8 *) &gBattleAnimSpritePalette_132, 10132 },
+    { (u8 *) &gBattleAnimSpritePalette_133, 10133 },
+    { (u8 *) &gBattleAnimSpritePalette_133, 10134 },
+    { (u8 *) &gBattleAnimSpritePalette_135, 10135 },
+    { (u8 *) &gBattleAnimSpritePalette_136, 10136 },
+    { (u8 *) &gBattleAnimSpritePalette_135, 10137 },
+    { (u8 *) &gBattleAnimSpritePalette_135, 10138 },
+    { (u8 *) &gBattleAnimSpritePalette_139, 10139 },
+    { (u8 *) &gBattleAnimSpritePalette_140, 10140 },
+    { (u8 *) &gBattleAnimSpritePalette_141, 10141 },
+    { (u8 *) &gBattleAnimSpritePalette_141, 10142 },
+    { (u8 *) &gBattleAnimSpritePalette_143, 10143 },
+    { (u8 *) &gBattleAnimSpritePalette_144, 10144 },
+    { (u8 *) &gBattleAnimSpritePalette_139, 10145 },
+    { (u8 *) &gBattleAnimSpritePalette_115, 10146 },
+    { (u8 *) &gBattleAnimSpritePalette_147, 10147 },
+    { (u8 *) &gBattleAnimSpritePalette_148, 10148 },
+    { (u8 *) &gBattleAnimSpritePalette_148, 10149 },
+    { (u8 *) &gBattleAnimSpritePalette_150, 10150 },
+    { (u8 *) &gBattleAnimSpritePalette_150, 10151 },
+    { (u8 *) &gBattleAnimSpritePalette_152, 10152 },
+    { (u8 *) &gBattleAnimSpritePalette_153, 10153 },
+    { (u8 *) &gBattleAnimSpritePalette_154, 10154 },
+    { (u8 *) &gBattleAnimSpritePalette_155, 10155 },
+    { (u8 *) &gBattleAnimSpritePalette_156, 10156 },
+    { (u8 *) &gBattleAnimSpritePalette_157, 10157 },
+    { (u8 *) &gBattleAnimSpritePalette_158, 10158 },
+    { (u8 *) &gBattleAnimSpritePalette_159, 10159 },
+    { (u8 *) &gBattleAnimSpritePalette_160, 10160 },
+    { (u8 *) &gBattleAnimSpritePalette_161, 10161 },
+    { (u8 *) &gBattleAnimSpritePalette_162, 10162 },
+    { (u8 *) &gBattleAnimSpritePalette_163, 10163 },
+    { (u8 *) &gBattleAnimSpritePalette_164, 10164 },
+    { (u8 *) &gBattleAnimSpritePalette_165, 10165 },
+    { (u8 *) &gBattleAnimSpritePalette_166, 10166 },
+    { (u8 *) &gBattleAnimSpritePalette_167, 10167 },
+    { (u8 *) &gBattleAnimSpritePalette_168, 10168 },
+    { (u8 *) &gBattleAnimSpritePalette_169, 10169 },
+    { (u8 *) &gBattleAnimSpritePalette_170, 10170 },
+    { (u8 *) &gBattleAnimSpritePalette_171, 10171 },
+    { (u8 *) &gBattleAnimSpritePalette_172, 10172 },
+    { (u8 *) &gBattleAnimSpritePalette_001, 10173 },
+    { (u8 *) &gBattleAnimSpritePalette_174, 10174 },
+    { (u8 *) &gBattleAnimSpritePalette_175, 10175 },
+    { (u8 *) &gBattleAnimSpritePalette_176, 10176 },
+    { (u8 *) &gBattleAnimSpritePalette_177, 10177 },
+    { (u8 *) &gBattleAnimSpritePalette_178, 10178 },
+    { (u8 *) &gBattleAnimSpritePalette_179, 10179 },
+    { (u8 *) &gBattleAnimSpritePalette_179, 10180 },
+    { (u8 *) &gBattleAnimSpritePalette_179, 10181 },
+    { (u8 *) &gBattleAnimSpritePalette_182, 10182 },
+    { (u8 *) &gBattleAnimSpritePalette_183, 10183 },
+    { (u8 *) &gBattleAnimSpritePalette_184, 10184 },
+    { (u8 *) &gBattleAnimSpritePalette_185, 10185 },
+    { (u8 *) &gBattleAnimSpritePalette_186, 10186 },
+    { (u8 *) &gBattleAnimSpritePalette_187, 10187 },
+    { (u8 *) &gBattleAnimSpritePalette_188, 10188 },
+    { (u8 *) &gBattleAnimSpritePalette_189, 10189 },
+    { (u8 *) &gBattleAnimSpritePalette_190, 10190 },
+    { (u8 *) &gBattleAnimSpritePalette_191, 10191 },
+    { (u8 *) &gBattleAnimSpritePalette_192, 10192 },
+    { (u8 *) &gBattleAnimSpritePalette_193, 10193 },
+    { (u8 *) &gBattleAnimSpritePalette_194, 10194 },
+    { (u8 *) &gBattleAnimSpritePalette_195, 10195 },
+    { (u8 *) &gBattleAnimSpritePalette_196, 10196 },
+    { (u8 *) &gBattleAnimSpritePalette_197, 10197 },
+    { (u8 *) &gBattleAnimSpritePalette_198, 10198 },
+    { (u8 *) &gBattleAnimSpritePalette_199, 10199 },
+    { (u8 *) &gBattleAnimSpritePalette_200, 10200 },
+    { (u8 *) &gBattleAnimSpritePalette_201, 10201 },
+    { (u8 *) &gBattleAnimSpritePalette_202, 10202 },
+    { (u8 *) &gBattleAnimSpritePalette_203, 10203 },
+    { (u8 *) &gBattleAnimSpritePalette_204, 10204 },
+    { (u8 *) &gBattleAnimSpritePalette_205, 10205 },
+    { (u8 *) &gBattleAnimSpritePalette_206, 10206 },
+    { (u8 *) &gBattleAnimSpritePalette_207, 10207 },
+    { (u8 *) &gBattleAnimSpritePalette_167, 10208 },
+    { (u8 *) &gBattleAnimSpritePalette_209, 10209 },
+    { (u8 *) &gBattleAnimSpritePalette_210, 10210 },
+    { (u8 *) &gBattleAnimSpritePalette_211, 10211 },
+    { (u8 *) &gBattleAnimSpritePalette_211, 10212 },
+    { (u8 *) &gBattleAnimSpritePalette_211, 10213 },
+    { (u8 *) &gBattleAnimSpritePalette_064, 10214 },
+    { (u8 *) &gBattleAnimSpritePalette_215, 10215 },
+    { (u8 *) &gBattleAnimSpritePalette_216, 10216 },
+    { (u8 *) &gBattleAnimSpritePalette_217, 10217 },
+    { (u8 *) &gBattleAnimSpritePalette_218, 10218 },
+    { (u8 *) &gBattleAnimSpritePalette_219, 10219 },
+    { (u8 *) &gBattleAnimSpritePalette_220, 10220 },
+    { (u8 *) &gBattleAnimSpritePalette_221, 10221 },
+    { (u8 *) &gBattleAnimSpritePalette_222, 10222 },
+    { (u8 *) &gBattleAnimSpritePalette_223, 10223 },
+    { (u8 *) &gBattleAnimSpritePalette_224, 10224 },
+    { (u8 *) &gBattleAnimSpritePalette_225, 10225 },
+    { (u8 *) &gBattleAnimSpritePalette_226, 10226 },
+    { (u8 *) &gBattleAnimSpritePalette_226, 10227 },
+    { (u8 *) &gBattleAnimSpritePalette_228, 10228 },
+    { (u8 *) &gBattleAnimSpritePalette_229, 10229 },
+    { (u8 *) &gBattleAnimSpritePalette_230, 10230 },
+    { (u8 *) &gBattleAnimSpritePalette_231, 10231 },
+    { (u8 *) &gBattleAnimSpritePalette_231, 10232 },
+    { (u8 *) &gBattleAnimSpritePalette_233, 10233 },
+    { (u8 *) &gBattleAnimSpritePalette_234, 10234 },
+    { (u8 *) &gBattleAnimSpritePalette_235, 10235 },
+    { (u8 *) &gBattleAnimSpritePalette_236, 10236 },
+    { (u8 *) &gBattleAnimSpritePalette_237, 10237 },
+    { (u8 *) &gBattleAnimSpritePalette_238, 10238 },
+    { (u8 *) &gBattleAnimSpritePalette_239, 10239 },
+    { (u8 *) &gBattleAnimSpritePalette_240, 10240 },
+    { (u8 *) &gBattleAnimSpritePalette_241, 10241 },
+    { (u8 *) &gBattleAnimSpritePalette_242, 10242 },
+    { (u8 *) &gBattleAnimSpritePalette_243, 10243 },
+    { (u8 *) &gBattleAnimSpritePalette_244, 10244 },
+    { (u8 *) &gBattleAnimSpritePalette_245, 10245 },
+    { (u8 *) &gBattleAnimSpritePalette_245, 10246 },
+    { (u8 *) &gBattleAnimSpritePalette_064, 10247 },
+    { (u8 *) &gBattleAnimSpritePalette_248, 10248 },
+    { (u8 *) &gBattleAnimSpritePalette_249, 10249 },
+    { (u8 *) &gBattleAnimSpritePalette_249, 10250 },
+    { (u8 *) &gBattleAnimSpritePalette_251, 10251 },
+    { (u8 *) &gBattleAnimSpritePalette_252, 10252 },
+    { (u8 *) &gBattleAnimSpritePalette_253, 10253 },
+    { (u8 *) &gBattleAnimSpritePalette_254, 10254 },
+    { (u8 *) &gBattleAnimSpritePalette_255, 10255 },
+    { (u8 *) &gBattleAnimSpritePalette_256, 10256 },
+    { (u8 *) &gBattleAnimSpritePalette_257, 10257 },
+    { (u8 *) &gBattleAnimSpritePalette_258, 10258 },
+    { (u8 *) &gBattleAnimSpritePalette_259, 10259 },
+    { (u8 *) &gBattleAnimSpritePalette_260, 10260 },
+    { (u8 *) &gBattleAnimSpritePalette_261, 10261 },
+    { (u8 *) &gBattleAnimSpritePalette_262, 10262 },
+    { (u8 *) &gBattleAnimSpritePalette_263, 10263 },
+    { (u8 *) &gBattleAnimSpritePalette_264, 10264 },
+    { (u8 *) &gBattleAnimSpritePalette_265, 10265 },
+    { (u8 *) &gBattleAnimSpritePalette_266, 10266 },
+    { (u8 *) &gBattleAnimSpritePalette_267, 10267 },
+    { (u8 *) &gBattleAnimSpritePalette_268, 10268 },
+    { (u8 *) &gBattleAnimSpritePalette_269, 10269 },
+    { (u8 *) &gBattleAnimSpritePalette_270, 10270 },
+    { (u8 *) &gBattleAnimSpritePalette_271, 10271 },
+    { (u8 *) &gBattleAnimSpritePalette_272, 10272 },
+    { (u8 *) &gBattleAnimSpritePalette_272, 10273 },
+    { (u8 *) &gBattleAnimSpritePalette_274, 10274 },
+    { (u8 *) &gBattleAnimSpritePalette_274, 10275 },
+    { (u8 *) &gBattleAnimSpritePalette_274, 10276 },
+    { (u8 *) &gBattleAnimSpritePalette_277, 10277 },
+    { (u8 *) &gBattleAnimSpritePalette_278, 10278 },
+    { (u8 *) &gBattleAnimSpritePalette_279, 10279 },
+    { (u8 *) &gBattleAnimSpritePalette_280, 10280 },
+    { (u8 *) &gBattleAnimSpritePalette_281, 10281 },
+    { (u8 *) &gBattleAnimSpritePalette_282, 10282 },
+    { (u8 *) &gBattleAnimSpritePalette_283, 10283 },
+    { (u8 *) &gBattleAnimSpritePalette_284, 10284 },
+    { (u8 *) &gBattleAnimSpritePalette_285, 10285 },
+    { (u8 *) &gBattleAnimSpritePalette_286, 10286 },
+    { (u8 *) &gBattleAnimSpritePalette_287, 10287 },
+    { (u8 *) &gBattleAnimSpritePalette_288, 10288 },
+};
+
+const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
+{
+    &gBattleAnimBackgroundImage_00, &gBattleAnimBackgroundPalette_00, &gBattleAnimBackgroundTilemap_00,
+    &gBattleAnimBackgroundImage_00, &gBattleAnimBackgroundPalette_00, &gBattleAnimBackgroundTilemap_00,
+    &gBattleAnimBackgroundImage_02, &gBattleAnimBackgroundPalette_02, &gBattleAnimBackgroundTilemap_02,
+    &gBattleAnimBackgroundImage_03, &gBattleAnimBackgroundPalette_03, &gBattleAnimBackgroundTilemap_03,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_04,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_05,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_04, &gBattleAnimBackgroundTilemap_06,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_07, &gBattleAnimBackgroundTilemap_07,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_07, &gBattleAnimBackgroundTilemap_08,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_09, &gBattleAnimBackgroundTilemap_09,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_09, &gBattleAnimBackgroundTilemap_10,
+    &gBattleAnimBackgroundImage_11, &gBattleAnimBackgroundPalette_11, &gBattleAnimBackgroundTilemap_11,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_12,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_13,
+    &gBattleAnimBackgroundImage_12, &gBattleAnimBackgroundPalette_12, &gBattleAnimBackgroundTilemap_14,
+    &gBattleAnimBackgroundImage_15, &gBattleAnimBackgroundPalette_15, &gBattleAnimBackgroundTilemap_15,
+    &gBattleAnimBackgroundImage_16, &gBattleAnimBackgroundPalette_16, &gBattleAnimBackgroundTilemap_16,
+    &gBattleAnimBackgroundImage_17, &gBattleAnimBackgroundPalette_17, &gBattleAnimBackgroundTilemap_17,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_18, &gBattleAnimBackgroundTilemap_07,
+    &gBattleAnimBackgroundImage_07, &gBattleAnimBackgroundPalette_18, &gBattleAnimBackgroundTilemap_08,
+    &gBattleAnimBackgroundImage_20, &gBattleAnimBackgroundPalette_20, &gBattleAnimBackgroundTilemap_20,
+    &gBattleAnimBackgroundImage_21, &gBattleAnimBackgroundPalette_21, &gBattleAnimBackgroundTilemap_21,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_22, &gBattleAnimBackgroundTilemap_09,
+    &gBattleAnimBackgroundImage_09, &gBattleAnimBackgroundPalette_22, &gBattleAnimBackgroundTilemap_10,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_04,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_05,
+    &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_06,
+};
 
 extern u16 gBattlePartyID[4];
 extern u8 gObjectBankIDs[];
@@ -63,9 +1329,6 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 
 extern const u16 gUnknown_081C7160[];
 extern const u8 *const gBattleAnims_Moves[];
-extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
-extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
 
 static void RunAnimScriptCommand(void);
 static void ScriptCmd_loadspritegfx(void);

@@ -401,7 +401,7 @@ Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
 	end
 
 Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
-	giveitem_std ITEM_TM12
+	giveitem_std ITEM_TM12_TAUNT
 	compare RESULT, 1
 	goto_if_eq Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0

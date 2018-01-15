@@ -5,7 +5,7 @@
 #ifndef POKERUBY_LEVEL_UP_LEARNSET_POINTERS_H
 #define POKERUBY_LEVEL_UP_LEARNSET_POINTERS_H
 
-const u16 *const gLevelUpLearnsets[] = {
+const u16 *gLevelUpLearnsets[] = {
     gBulbasaurLevelUpLearnset,
     gBulbasaurLevelUpLearnset,
     gIvysaurLevelUpLearnset,

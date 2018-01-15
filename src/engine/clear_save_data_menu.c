@@ -73,7 +73,7 @@ static void Task_ProcessMenuInput(u8 taskId)
 
 static void Task_ClearSaveData(u8 taskId)
 {
-    ClearSaveData();
+    Save_EraseAllData();
     DestroyTask(taskId);
     SetMainCallback2(CB2_SoftReset);
 }

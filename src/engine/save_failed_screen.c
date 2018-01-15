@@ -166,7 +166,7 @@ static void CB2_WipeSave(void)
 
         Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19);
         Menu_PrintText(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
-        HandleSavingData(gSaveFailedType);
+        Save_WriteDataInternal(gSaveFailedType);
 
         if (gDamagedSaveSectors != 0)
         {

@@ -112,7 +112,7 @@ Route110_TrickHouseEnd_EventScript_161AFB:: @ 8161AFB
 	msgbox Route110_TrickHouseEnd_Text_19C491, 4
 	msgbox Route110_TrickHouseEnd_Text_19C90B, 4
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem_std ITEM_TM12
+	giveitem_std ITEM_TM12_TAUNT
 	compare RESULT, 0
 	call_if_eq Route110_TrickHouseEnd_EventScript_161C4E
 	msgbox Route110_TrickHouseEnd_Text_19C9BD, 4

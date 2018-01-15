@@ -28,7 +28,7 @@ Route114_EventScript_150782:: @ 8150782
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
-	giveitem_std ITEM_TM05
+	giveitem_std ITEM_TM05_ROAR
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM05
