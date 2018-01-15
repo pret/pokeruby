@@ -29,6 +29,360 @@ struct UnknownStruct7
     u8 filler0[0x180];
 };
 
+void sub_8043CEC(struct Sprite *sprite);
+extern const u8 gBattleGfx_BallStatusBar[];
+extern const u8 gUnknown_08D1212C[];
+extern const u8 gUnknown_08D1214C[];
+extern const u8 Tiles_D129AC[];
+static void sub_8045030(struct Sprite *sprite);
+static void sub_804507C(struct Sprite *sprite);
+
+const struct OamData gOamData_820A4E4 =
+{
+    .shape = 1,
+    .size = 3,
+    .priority = 1,
+};
+
+const struct SpriteTemplate gSpriteTemplates_820A4EC[] =
+{
+    {
+        .tileTag = 55039,
+        .paletteTag = 55039,
+        .oam = &gOamData_820A4E4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 55040,
+        .paletteTag = 55039,
+        .oam = &gOamData_820A4E4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+};
+
+const struct SpriteTemplate gSpriteTemplates_820A51C[] =
+{
+    {
+        .tileTag = 55041,
+        .paletteTag = 55039,
+        .oam = &gOamData_820A4E4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+    {
+        .tileTag = 55042,
+        .paletteTag = 55039,
+        .oam = &gOamData_820A4E4,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    },
+};
+
+const struct SpriteTemplate gSpriteTemplate_820A54C =
+{
+    .tileTag = 55051,
+    .paletteTag = 55039,
+    .oam = &gOamData_820A4E4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct OamData gOamData_820A564 =
+{
+    .shape = 1,
+    .size = 1,
+    .priority = 1,
+};
+
+const struct SpriteTemplate gSpriteTemplates_820A56C[] =
+{
+    {
+        .tileTag = 55044,
+        .paletteTag = 55044,
+        .oam = &gOamData_820A564,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8043CEC,
+    },
+    {
+        .tileTag = 55045,
+        .paletteTag = 55044,
+        .oam = &gOamData_820A564,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8043CEC,
+    },
+    {
+        .tileTag = 55046,
+        .paletteTag = 55044,
+        .oam = &gOamData_820A564,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8043CEC,
+    },
+    {
+        .tileTag = 55047,
+        .paletteTag = 55044,
+        .oam = &gOamData_820A564,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8043CEC,
+    },
+};
+
+const struct Subsprite gSubspriteTable_820A5CC[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 3 }, // size := 64x32
+    { .x =  48, .y =  0, .shape =      ST_OAM_SQUARE, .priority = 1, .tileOffset = 32, .size = 2 }, // size := 32x32
+    { .x = -16, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 48, .size = 1 }, // size := 32x8
+    { .x =  16, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 52, .size = 1 }, // size := 32x8
+    { .x =  48, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 56, .size = 1 }, // size := 32x8
+};
+
+const struct Subsprite gSubspriteTable_820A5F4[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 64, .size = 3 }, // size := 64x32
+    { .x =  48, .y =  0, .shape =      ST_OAM_SQUARE, .priority = 1, .tileOffset = 96, .size = 2 }, // size := 32x32
+    { .x = -16, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =112, .size = 1 }, // size := 32x8
+    { .x =  16, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =116, .size = 1 }, // size := 32x8
+    { .x =  48, .y = 32, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =120, .size = 1 }, // size := 32x8
+};
+
+const struct Subsprite gSubspriteTable_820A61C[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 3 }, // size := 64x32
+    { .x =  48, .y =  0, .shape =      ST_OAM_SQUARE, .priority = 1, .tileOffset = 32, .size = 2 }, // size := 32x32
+};
+
+const struct Subsprite gSubspriteTable_820A62C[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 3 }, // size := 64x32
+    { .x =  48, .y =  0, .shape =      ST_OAM_SQUARE, .priority = 1, .tileOffset = 32, .size = 2 }, // size := 32x32
+};
+
+const struct Subsprite gSubspriteTable_820A63C[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 1 }, // size := 32x8
+    { .x =  16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  4, .size = 1 }, // size := 32x8
+};
+
+const struct Subsprite gSubspriteTable_820A64C[] =
+{
+    { .x = -16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 1 }, // size := 32x8
+    { .x =  16, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  4, .size = 1 }, // size := 32x8
+    { .x = -32, .y =  0, .shape =      ST_OAM_SQUARE, .priority = 1, .tileOffset =  8, .size = 0 }, // size := 8x8
+};
+
+const struct SubspriteTable gSubspriteTables_unreferenced[] =
+{
+    { ARRAY_COUNT(gSubspriteTable_820A5CC), gSubspriteTable_820A5CC },
+    { ARRAY_COUNT(gSubspriteTable_820A61C), gSubspriteTable_820A61C },
+    { ARRAY_COUNT(gSubspriteTable_820A5F4), gSubspriteTable_820A5F4 },
+    { ARRAY_COUNT(gSubspriteTable_820A62C), gSubspriteTable_820A62C },
+};
+
+const struct SubspriteTable gSubspriteTables_820A684[] =
+{
+    { ARRAY_COUNT(gSubspriteTable_820A63C), gSubspriteTable_820A63C },
+    { ARRAY_COUNT(gSubspriteTable_820A64C), gSubspriteTable_820A64C },
+};
+
+const struct Subsprite gSubspriteTable_820A694[] =
+{
+    { .x = -96, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 1 }, // size := 32x8
+    { .x = -64, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  4, .size = 1 }, // size := 32x8
+    { .x = -32, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  8, .size = 1 }, // size := 32x8
+    { .x =   0, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 12, .size = 1 }, // size := 32x8
+};
+
+const struct Subsprite gSubspriteTable_820A6B4[] =
+{
+    { .x = -96, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  0, .size = 1 }, // size := 32x8
+    { .x = -64, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  4, .size = 1 }, // size := 32x8
+    { .x = -32, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  8, .size = 1 }, // size := 32x8
+    { .x =   0, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  8, .size = 1 }, // size := 32x8
+    { .x =  32, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset =  8, .size = 1 }, // size := 32x8
+    { .x =  64, .y =  0, .shape = ST_OAM_H_RECTANGLE, .priority = 1, .tileOffset = 12, .size = 1 }, // size := 32x8
+};
+
+const struct SubspriteTable gSubspriteTables_820A6E4[] =
+{
+    { ARRAY_COUNT(gSubspriteTable_820A694), gSubspriteTable_820A694 },
+};
+
+const struct SubspriteTable gSubspriteTables_820A6EC[] =
+{
+    { ARRAY_COUNT(gSubspriteTable_820A6B4), gSubspriteTable_820A6B4 },
+};
+
+// unused dakuten/handakuten tiles
+const u8 gUnusedDakuten[] = INCBIN_U8("graphics/unused/dakuten.4bpp");
+
+const struct CompressedSpriteSheet gUnknown_0820A754[] =
+{
+    { gBattleGfx_BallStatusBar, 512, 0xd70c },
+    { gBattleGfx_BallStatusBar, 512, 0xd70d },
+};
+
+const struct CompressedSpritePalette gUnknown_0820A764[] =
+{
+    { gUnknown_08D1212C, 0xd710 },
+    { gUnknown_08D1212C, 0xd711 },
+};
+
+const struct CompressedSpritePalette gUnknown_0820A774[] =
+{
+    { gUnknown_08D1214C, 0xd712 },
+    { gUnknown_08D1214C, 0xd713 },
+};
+
+const struct CompressedSpriteSheet gUnknown_0820A784[] =
+{
+    { Tiles_D129AC, 0x80, 0xd714 },
+    { Tiles_D129AC, 0x80, 0xd715 },
+};
+
+const struct OamData gOamData_820A794 =
+{
+    .shape = 1,
+    .size = 3,
+    .priority = 1,
+};
+
+const struct OamData gOamData_820A79C =
+{
+    .shape = 0,
+    .size = 0,
+    .priority = 1,
+};
+
+const struct SpriteTemplate gSpriteTemplate_820A7A4 =
+{
+    .tileTag = 55052,
+    .paletteTag = 55056,
+    .oam = &gOamData_820A4E4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8045030,
+};
+
+const struct SpriteTemplate gSpriteTemplate_820A7BC =
+{
+    .tileTag = 55053,
+    .paletteTag = 55057,
+    .oam = &gOamData_820A4E4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_8045030,
+};
+
+const struct SpriteTemplate gSpriteTemplate_820A7D4 =
+{
+    .tileTag = 55060,
+    .paletteTag = 55058,
+    .oam = &gOamData_820A79C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_804507C,
+};
+
+const struct SpriteTemplate gSpriteTemplate_820A7EC =
+{
+    .tileTag = 55061,
+    .paletteTag = 55059,
+    .oam = &gOamData_820A79C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_804507C,
+};
+
+TileData4bpp *const gUnknown_0820A804[2] =
+{
+    &OBJ_VRAM0_TEMP[74],
+    &OBJ_VRAM0_TEMP[75],
+};
+
+TileData4bpp *const gUnknown_0820A80C[2] =
+{
+    &OBJ_VRAM0_TEMP[41],
+    &OBJ_VRAM0_TEMP[42],
+};
+
+TileData4bpp *const gUnknown_0820A814[2] =
+{
+    &OBJ_VRAM0_TEMP[42],
+    &OBJ_VRAM0_TEMP[43],
+};
+
+const u8 gUnknown_0820A81C[] = __("{COLOR DARK_GREY}{HIGHLIGHT RED}                        ");
+
+TileData4bpp *const gUnknown_0820A83C[3] =
+{
+    &OBJ_VRAM0_TEMP[31],
+    &OBJ_VRAM0_TEMP[88],
+    &OBJ_VRAM0_TEMP[89],
+};
+
+TileData4bpp *const gUnknown_0820A848[3] =
+{
+    &OBJ_VRAM0_TEMP[22],
+    &OBJ_VRAM0_TEMP[23],
+    &OBJ_VRAM0_TEMP[48],
+};
+
+TileData4bpp *const gUnknown_0820A854[2] =
+{
+    &OBJ_VRAM0_TEMP[90],
+    &OBJ_VRAM0_TEMP[91],
+};
+
+TileData4bpp *const gUnknown_0820A85C[2] =
+{
+    &OBJ_VRAM0_TEMP[49],
+    &OBJ_VRAM0_TEMP[50],
+};
+
+const u8 gUnknown_0820A864[] = _("{COLOR DARK_GREY}{HIGHLIGHT RED}              /");
+
+TileData4bpp *const gUnknown_0820A87C[6] =
+{
+    &OBJ_VRAM0_TEMP[0],
+    &OBJ_VRAM0_TEMP[1],
+    &OBJ_VRAM0_TEMP[2],
+    &OBJ_VRAM0_TEMP[3],
+    &OBJ_VRAM0_TEMP[4],
+    &OBJ_VRAM0_TEMP[5],
+};
+
+TileData4bpp *const gUnknown_0820A894[2] =
+{
+    &OBJ_VRAM0_TEMP[6],
+    &OBJ_VRAM0_TEMP[7],
+};
+
+const u8 gUnknown_0820A89C[] = __("{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}              ");
+const u8 gUnknown_0820A8B0[] = _("{HIGHLIGHT RED}");
+
 TileData4bpp *const gUnknown_0820A8B4[10] =
 {
     &OBJ_VRAM0_TEMP[ 2],
@@ -79,35 +433,6 @@ extern u8 gHealthboxIDs[];
 
 extern u16 gBattleTypeFlags;
 
-extern const struct SpriteTemplate gSpriteTemplate_820A4EC[];
-extern const struct SpriteTemplate gSpriteTemplate_820A51C[];
-extern const struct SpriteTemplate gSpriteTemplate_820A54C;
-extern const struct SpriteTemplate gSpriteTemplate_820A56C[];
-extern const struct SubspriteTable gSubspriteTables_820A684[];
-extern const struct SubspriteTable gSubspriteTables_820A6E4[];
-extern const struct SubspriteTable gSubspriteTables_820A6EC[];
-extern const struct SpriteSheet gUnknown_0820A754[];
-extern const struct SpritePalette gUnknown_0820A764[];
-extern const struct SpritePalette gUnknown_0820A774[];
-extern const struct SpriteSheet gUnknown_0820A784[];
-extern const struct SpriteTemplate gSpriteTemplate_820A7A4[];
-extern const struct SpriteTemplate gSpriteTemplate_820A7D4[];
-extern void *const gUnknown_0820A804[];
-extern void *const gUnknown_0820A80C[];
-extern void *const gUnknown_0820A814[];
-extern void *const gUnknown_0820A83C[];
-extern void *const gUnknown_0820A848[];
-extern void *const gUnknown_0820A854[];
-extern void *const gUnknown_0820A85C[];
-extern TileData4bpp *const gUnknown_0820A87C[];
-extern TileData4bpp *const gUnknown_0820A894[];
-// extern TileData4bpp *const gUnknown_0820A8B4[];
-// extern TileData4bpp *const gUnknown_0820A8DC[];
-// extern TileData4bpp *const gUnknown_0820A904[];
-extern const u8 gUnknown_0820A81C[];
-extern const u8 gUnknown_0820A864[];
-extern const u8 gUnknown_0820A89C[];
-extern const u8 gUnknown_0820A8B0[];
 extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
@@ -463,8 +788,8 @@ u8 battle_make_oam_normal_battle(u8 a)
     {
         if (GetBankSide(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[0], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A4EC[0], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A4EC[0], 240, 160, 1);
 
             gSprites[spriteId1].oam.shape = 0;
             gSprites[spriteId2].oam.shape = 0;
@@ -472,8 +797,8 @@ u8 battle_make_oam_normal_battle(u8 a)
         }
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[0], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[0], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A51C[0], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A51C[0], 240, 160, 1);
 
             gSprites[spriteId2].oam.tileNum += 32;
             sp0 = 2;
@@ -489,8 +814,8 @@ u8 battle_make_oam_normal_battle(u8 a)
     {
         if (GetBankSide(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data[5] = spriteId1;
@@ -501,8 +826,8 @@ u8 battle_make_oam_normal_battle(u8 a)
         //_08043ACC
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplate_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplate_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data[5] = spriteId1;
@@ -514,7 +839,7 @@ u8 battle_make_oam_normal_battle(u8 a)
     }
     //_08043B50
 
-    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplate_820A56C[gBanksBySide[a]], 140, 60, 0);
+    spriteId3 = CreateSpriteAtEnd(&gSpriteTemplates_820A56C[gBanksBySide[a]], 140, 60, 0);
     sprite = &gSprites[spriteId3];
     SetSubspriteTables(sprite, &gSubspriteTables_820A684[GetBankSide(a)]);
     sprite->subspriteMode = 2;
@@ -696,7 +1021,8 @@ void sub_8043F44(u8 a)
 static void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
-    void *const *r7;
+    // void *const *r7;
+    TileData4bpp *const *r7;
     u8 *ptr;
     s32 i;
     s32 two;
@@ -746,7 +1072,7 @@ static void sub_8043FC0(u8 a, u8 b)
 
     two = 2;
     for (i = 0; i < two; i++)
-        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
+        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum, 32);
 }
 
 #ifdef NONMATCHING
