@@ -29,10 +29,12 @@ struct UnknownStruct7
     u8 filler0[0x180];
 };
 
-struct TileData
-{
-    u32 data[8];
-};
+// struct TileData4bpp
+// {
+//     u8 data[32];
+// };
+
+typedef u8 TileData4bpp[32];
 
 extern u8 gDisplayedStringBattle[];
 extern u8 gNoOfAllBanks;
@@ -62,11 +64,11 @@ extern void *const gUnknown_0820A83C[];
 extern void *const gUnknown_0820A848[];
 extern void *const gUnknown_0820A854[];
 extern void *const gUnknown_0820A85C[];
-extern void *const gUnknown_0820A87C[];
-extern void *const gUnknown_0820A894[];
-extern struct TileData *const gUnknown_0820A8B4[];
-extern struct TileData *const gUnknown_0820A8DC[];
-extern struct TileData *const gUnknown_0820A904[];
+extern TileData4bpp *const gUnknown_0820A87C[];
+extern TileData4bpp *const gUnknown_0820A894[];
+extern TileData4bpp *const gUnknown_0820A8B4[];
+extern TileData4bpp *const gUnknown_0820A8DC[];
+extern TileData4bpp *const gUnknown_0820A904[];
 extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
@@ -99,7 +101,19 @@ static void sub_8045D58(u8, u8);
 static u8 sub_804602C(int, int, int, int *, u8 *, u8);
 static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c);
 
-
+// TileData4bpp *const gUnknown_0820A904[10] =
+// {
+//     &OBJ_VRAM0_TEST[2], // 0x40
+//     &OBJ_VRAM0_TEST[3], // 0x60
+//     &OBJ_VRAM0_TEST[4], // 0x80
+//     &OBJ_VRAM0_TEST[5], // 0xA0
+//     &OBJ_VRAM0_TEST[6], // 0xC0
+//     &OBJ_VRAM0_TEST[7], // 0xE0
+//     &OBJ_VRAM0_TEST[32], // 0x400
+//     &OBJ_VRAM0_TEST[33], // 0x420
+//     &OBJ_VRAM0_TEST[34], // 0x440
+//     &OBJ_VRAM0_TEST[35], // 0x460
+// };
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
@@ -916,7 +930,8 @@ static void sub_8044210(u8 a, s16 b, u8 c)
 {
     u8 str[0x14];
     u8 *ptr;
-    void *const *r7;
+    // void *const *r7;
+    TileData4bpp *const *r7;
     int r10;
     int r4;
     int i;
@@ -942,6 +957,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
         sub_8003504(ptr, b, 0xF, 1);
         if (GetBankSide(r4) == 0)
         {
+            // CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
             CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
         }
     }
@@ -949,7 +965,8 @@ static void sub_8044210(u8 a, s16 b, u8 c)
     sub_80034D4(ewram0_9(0), str);
     for (i = 0; i < r10; i++)
     {
-        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 0x20);
+        // CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 0x20);
+        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum, 0x20);
     }
 }
 
@@ -2375,7 +2392,8 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     u8 *ptr;
     s32 i;
     s32 _7;
-    struct TileData *const *r1;
+    TileData4bpp *const *r1;
+    TileData4bpp *tileDataSrc;
 
     StringCopy(gDisplayedStringBattle, gUnknown_0820A8B0);
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
@@ -2450,28 +2468,25 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
         }
     }
 
+    tileDataSrc = (TileData4bpp *) ptr;
+
     for (; i < _7; i++)
-        CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
+        CpuCopy32(sub_8043CDC(0x2B), tileDataSrc + 2 * i, 32);
 
     if (GetBankSide(gSprites[a].data[6]) == 0 && !IsDoubleBattle())
     {
         r1 = gUnknown_0820A8B4;
         for (i = 0; i < _7; i++)
         {
-            // u8 *r4 = (u8 *) r1[i];
-            struct TileData *r4 = r1[i];
+            TileData4bpp *tileDataDest = r1[i];
 
-            // r4 += gSprites[a].oam.tileNum * 32;
-            r4 += gSprites[a].oam.tileNum;
-            CpuCopy32(ptr, r4, 32);
-            // CpuCopy32(ptr, &(r4->data[gSprites[a].oam.tileNum]), 32);
-            ptr += 32;
+            tileDataDest += gSprites[a].oam.tileNum;
+            CpuCopy32(tileDataSrc, tileDataDest, 32);
+            tileDataSrc++;
 
-            // r4 += 0x100;
-            r4 += 8;
-            CpuCopy32(ptr, r4, 32);
-            // CpuCopy32(ptr, &((r4+8)->data[gSprites[a].oam.tileNum]), 32);
-            ptr += 32;
+            tileDataDest += 8;
+            CpuCopy32(tileDataSrc, tileDataDest, 32);
+            tileDataSrc++;
         }
     }
     else
@@ -2482,15 +2497,15 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
             r1 = gUnknown_0820A8DC;
         for (i = 0; i < _7; i++)
         {
-            u8 *r4 = (u8 *) r1[i];
+            TileData4bpp *tileDataDest = r1[i];
 
-            r4 += gSprites[a].oam.tileNum * 32;
-            CpuCopy32(ptr, r4, 32);
-            ptr += 32;
+            tileDataDest += gSprites[a].oam.tileNum;
+            CpuCopy32(tileDataSrc, tileDataDest, 32);
+            tileDataSrc++;
 
-            r4 += 0x100;
-            CpuCopy32(ptr, r4, 32);
-            ptr += 32;
+            tileDataDest += 8;
+            CpuCopy32(tileDataSrc, tileDataDest, 32);
+            tileDataSrc++;
         }
     }
 }
