@@ -35,7 +35,7 @@
 
 // text-mode BG
 #define OBJ_VRAM0      (void *)(VRAM + 0x10000)
-#define OBJ_VRAM0_TEST (TileData4bpp *)(VRAM + 0x10000)
+#define OBJ_VRAM0_TEMP ((TileData4bpp *)(VRAM + 0x10000))
 #define OBJ_VRAM0_SIZE 0x8000
 
 // bitmap-mode BG

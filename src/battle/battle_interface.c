@@ -29,12 +29,47 @@ struct UnknownStruct7
     u8 filler0[0x180];
 };
 
-// struct TileData4bpp
-// {
-//     u8 data[32];
-// };
+TileData4bpp *const gUnknown_0820A8B4[10] =
+{
+    &OBJ_VRAM0_TEMP[ 2],
+    &OBJ_VRAM0_TEMP[ 3],
+    &OBJ_VRAM0_TEMP[ 4],
+    &OBJ_VRAM0_TEMP[ 5],
+    &OBJ_VRAM0_TEMP[ 6],
+    &OBJ_VRAM0_TEMP[ 7],
+    &OBJ_VRAM0_TEMP[64],
+    &OBJ_VRAM0_TEMP[65],
+    &OBJ_VRAM0_TEMP[66],
+    &OBJ_VRAM0_TEMP[67],
+};
 
-typedef u8 TileData4bpp[32];
+TileData4bpp *const gUnknown_0820A8DC[10] =
+{
+    &OBJ_VRAM0_TEMP[ 1],
+    &OBJ_VRAM0_TEMP[ 2],
+    &OBJ_VRAM0_TEMP[ 3],
+    &OBJ_VRAM0_TEMP[ 4],
+    &OBJ_VRAM0_TEMP[ 5],
+    &OBJ_VRAM0_TEMP[ 6],
+    &OBJ_VRAM0_TEMP[ 7],
+    &OBJ_VRAM0_TEMP[32],
+    &OBJ_VRAM0_TEMP[33],
+    &OBJ_VRAM0_TEMP[34],
+};
+
+TileData4bpp *const gUnknown_0820A904[10] =
+{
+    &OBJ_VRAM0_TEMP[ 2],
+    &OBJ_VRAM0_TEMP[ 3],
+    &OBJ_VRAM0_TEMP[ 4],
+    &OBJ_VRAM0_TEMP[ 5],
+    &OBJ_VRAM0_TEMP[ 6],
+    &OBJ_VRAM0_TEMP[ 7],
+    &OBJ_VRAM0_TEMP[32],
+    &OBJ_VRAM0_TEMP[33],
+    &OBJ_VRAM0_TEMP[34],
+    &OBJ_VRAM0_TEMP[35],
+};
 
 extern u8 gDisplayedStringBattle[];
 extern u8 gNoOfAllBanks;
@@ -66,9 +101,9 @@ extern void *const gUnknown_0820A854[];
 extern void *const gUnknown_0820A85C[];
 extern TileData4bpp *const gUnknown_0820A87C[];
 extern TileData4bpp *const gUnknown_0820A894[];
-extern TileData4bpp *const gUnknown_0820A8B4[];
-extern TileData4bpp *const gUnknown_0820A8DC[];
-extern TileData4bpp *const gUnknown_0820A904[];
+// extern TileData4bpp *const gUnknown_0820A8B4[];
+// extern TileData4bpp *const gUnknown_0820A8DC[];
+// extern TileData4bpp *const gUnknown_0820A904[];
 extern const u8 gUnknown_0820A81C[];
 extern const u8 gUnknown_0820A864[];
 extern const u8 gUnknown_0820A89C[];
@@ -100,20 +135,6 @@ static u8 GetScaledExpFraction(int, int, int, u8);
 static void sub_8045D58(u8, u8);
 static u8 sub_804602C(int, int, int, int *, u8 *, u8);
 static void sub_8046128(struct BattleInterfaceStruct1 *a, int *b, u16 *c);
-
-// TileData4bpp *const gUnknown_0820A904[10] =
-// {
-//     &OBJ_VRAM0_TEST[2], // 0x40
-//     &OBJ_VRAM0_TEST[3], // 0x60
-//     &OBJ_VRAM0_TEST[4], // 0x80
-//     &OBJ_VRAM0_TEST[5], // 0xA0
-//     &OBJ_VRAM0_TEST[6], // 0xC0
-//     &OBJ_VRAM0_TEST[7], // 0xE0
-//     &OBJ_VRAM0_TEST[32], // 0x400
-//     &OBJ_VRAM0_TEST[33], // 0x420
-//     &OBJ_VRAM0_TEST[34], // 0x440
-//     &OBJ_VRAM0_TEST[35], // 0x460
-// };
 
 static int do_nothing(s16 unused1, s16 unused2, int unused3)
 {
