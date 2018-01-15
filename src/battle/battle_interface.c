@@ -14,6 +14,7 @@
 #include "task.h"
 #include "text.h"
 #include "ewram.h"
+#include "graphics.h"
 
 struct UnknownStruct5
 {
@@ -29,11 +30,7 @@ struct UnknownStruct7
     u8 filler0[0x180];
 };
 
-void sub_8043CEC(struct Sprite *sprite);
-extern const u8 gBattleGfx_BallStatusBar[];
-extern const u8 gUnknown_08D1212C[];
-extern const u8 gUnknown_08D1214C[];
-extern const u8 Tiles_D129AC[];
+static void sub_8043CEC(struct Sprite *sprite);
 static void sub_8045030(struct Sprite *sprite);
 static void sub_804507C(struct Sprite *sprite);
 
@@ -876,7 +873,7 @@ static const void *sub_8043CDC(u8 a)
     return gUnknown_08D1216C[a];
 }
 
-void sub_8043CEC(struct Sprite *sprite)
+static void sub_8043CEC(struct Sprite *sprite)
 {
     u8 r5 = sprite->data[5];
 
@@ -2640,7 +2637,7 @@ static void sub_8044F70(u8 taskId)
     }
 }
 
-void sub_8045030(struct Sprite *sprite)
+static void sub_8045030(struct Sprite *sprite)
 {
     if (sprite->pos2.x != 0)
         sprite->pos2.x += sprite->data[0];
@@ -2656,7 +2653,7 @@ static void sub_8045048(struct Sprite *sprite)
     sprite->data[1] &= 0xF;
 }
 
-void sub_804507C(struct Sprite *sprite)
+static void sub_804507C(struct Sprite *sprite)
 {
     u8 r3;
     u16 r2;

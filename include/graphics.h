@@ -3337,4 +3337,9 @@ extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_17;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_20;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_21;
 
+extern const u8 gBattleGfx_BallStatusBar[];
+extern const u8 gUnknown_08D1212C[];
+extern const u8 gUnknown_08D1214C[];
+extern const u8 Tiles_D129AC[];
+
 #endif  // GUARD_GRAPHICS_H
