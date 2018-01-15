@@ -6,6 +6,7 @@
 #include "ewram.h"
 #include "item.h"
 #include "main.h"
+#include "overworld.h"
 #include "pokemon.h"
 #include "pokemon_item_effect.h"
 #include "rom_8077ABC.h"
@@ -40,18 +41,20 @@ bool8 ExecuteTableBasedItemEffect_(struct Pokemon *pkmn, u16 b, u8 c, u8 d)
 }
 
 extern u8 gUnknown_08208238[];
+extern u8 gUnknown_0820823C[];
 extern u8 gUnknown_08208240[];
 
 bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
 {
     int r10;
-    int r5;
+    u32 sp0;
+    u32 sp4;
     u8 sp18;
     int sp1C = 1;
     const u8 *sp20;
     u8 sp24 = 6;
     u32 sp28;
-    int sp2C = 0;
+    s8 sp2C = 0;
     u8 sp30;
     int sp34 = 4;
     u16 item;
@@ -229,7 +232,6 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             r10 = sp20[sp18] & 0x20;
             if (r10 != 0)
             {
-                u32 sp0;
                 u16 r4;
 
                 r10 &= 0xDF;
@@ -256,7 +258,6 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                 {
                     u16 r5;
                     u32 r4;
-                    u32 sp0;
                     u32 r1;
 
                     switch (sp28)
@@ -454,6 +455,178 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                     }
                 }
                 //_0803EE0A
+            }
+            break;
+        case 5:
+        //_0803EE1E
+            r10 = sp20[sp18];
+            sp28 = 0;
+            while (r10 != 0)
+            {
+                //_0803EE32
+                if (r10 & 1)
+                {
+                    u16 r5;
+                    u32 r4;
+                    u32 r1;
+                    
+                    switch (sp28)
+                    {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    //_0803EE74
+                        r5 = GetMonEVCount(pkmn);
+                        if (r5 >= 510)
+                            return 1;
+                        r1 = GetMonData(pkmn, gUnknown_082082F2[sp28], NULL);
+                        sp0 = r1;
+                        if (r1 < 100)
+                        {
+                            r1 += sp20[sp24];
+                            if (r1 > 100)
+                                r4 = 100 - r1;
+                            else
+                                r4 = sp20[sp24];
+                            //_0803EEC6
+                            if (r5 + r4 > 510)
+                                r4 = (r4 + 510) - (r5 + r4);
+                            sp0 += r4;
+                            SetMonData(pkmn, gUnknown_082082F2[sp28], &sp0);
+                            CalculateMonStats(pkmn);
+                            sp1C = 0;
+                            sp24++;
+                        }
+                        break;
+                    case 4:
+                    //_0803EEF8
+                        sp0 = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_08208238[d]) << (d * 2);
+                        if (sp0 < 3)
+                        {
+                            //_0803EF18
+                            u8 r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), d);
+                            sp0 = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
+                            sp0 &= gUnknown_0820823C[d];
+                            sp0 += gUnknown_08208240[d] * 3;
+                            
+                            SetMonData(pkmn, MON_DATA_PP_BONUSES, &sp0);
+                            sp0 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL), sp0, d) - r4;
+                            sp0 += GetMonData(pkmn, MON_DATA_PP1 + b, NULL);
+                            SetMonData(pkmn, MON_DATA_PP1 + b, &sp0);
+                            sp1C = 0;
+                        }
+                        break;
+                    case 5:
+                    //_0803EFCC
+                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 100 && sp1C == 0 && sp2C == 0)
+                        {
+                            //_0803EFEC
+                            sp2C = sp20[sp24];
+                            sp4 = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            if (sp2C > 0 && sp30 == 0x1B)
+                            {
+                                sp4 = 0x96 * sp2C / 100;
+                            }
+                            //to _0803F0D0 hmm...
+                            else
+                            {
+                                sp4 += sp2C;
+                            }
+                            //_0803F0DC (tail merged)
+                            
+                            if (sp2C > 0)
+                            {
+                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                    sp4++;
+                                //_0803F0F4
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                    sp4++;
+                            }
+                            //_0803F112
+                            if (sp4 < 0)
+                                sp4 = 0;
+                            if (sp4 > 255)
+                                sp4 = 255;
+                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &sp4);
+                        }
+                        //to _0803F130 hmm...
+                        sp24++;
+                        break;
+                    case 6:
+                    //_0803F026
+                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 100 && GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) < 200
+                         && sp1C == 0 && sp2C == 0)
+                        {
+                            sp2C = sp20[sp24];
+                            sp4 = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            if (sp2C > 0 && sp30 == 0x1B)
+                            {
+                                //to _0803F0BE
+                                sp4 = 0x96 * sp2C / 100;
+                            }
+                            else
+                            {
+                                sp4 += sp2C;
+                            }
+                            //_0803F0DC (tail merged)
+                            
+                            if (sp2C > 0)
+                            {
+                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                    sp4++;
+                                //_0803F0F4
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                    sp4++;
+                            }
+                            //_0803F112
+                            if (sp4 < 0)
+                                sp4 = 0;
+                            if (sp4 > 255)
+                                sp4 = 255;
+                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &sp4);
+                        }
+                        //to _0803F130 hmm...
+                        sp24++;
+                        break;
+                    case 7:
+                    //_0803F07C
+                        if (GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL) >= 200 && sp1C == 0 && sp2C == 0)
+                        {
+                            sp2C = sp20[sp24];
+                            sp4 = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
+                            if (sp2C > 0 && sp30 == 0x1B)
+                            {
+                                //_0803F0BE
+                                sp4 = 0x96 * sp2C / 100;
+                            }
+                            //_0803F0D0
+                            else
+                            {
+                                sp4 += sp2C;
+                            }
+                            //_0803F0DC
+                            
+                            if (sp2C > 0)
+                            {
+                                if (GetMonData(pkmn, MON_DATA_POKEBALL, NULL) == 11)
+                                    sp4++;
+                                //_0803F0F4
+                                if (GetMonData(pkmn, MON_DATA_MET_LOCATION, NULL) == sav1_map_get_name())
+                                    sp4++;
+                            }
+                            //_0803F112
+                            if (sp4 < 0)
+                                sp4 = 0;
+                            if (sp4 > 255)
+                                sp4 = 255;
+                            SetMonData(pkmn, MON_DATA_FRIENDSHIP, &sp4);
+                        }
+                        //to _0803F130
+                        sp24++;
+                        break;
+                    }
+                }
             }
             break;
         }
