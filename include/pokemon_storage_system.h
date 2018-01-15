@@ -182,7 +182,8 @@ struct PokemonStorageSystemData {
     struct PokemonMarkMenu unk_12bc;
     struct UnkPSSStruct_2002370 unk_2370;
     struct Pokemon unk_25b4;
-    u8 filler_2618[0x74];
+    struct Pokemon unk_2618;
+    u8 filler_267c[0x10];
     u8 unk_268c;
     u8 unk_268d;
     u8 unk_268e;

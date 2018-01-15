@@ -2253,7 +2253,7 @@ static void sub_809F678(struct Pokemon *mon)
     else
     {
         struct BoxPokemon *mons = pssData.monList.boxMons;
-        sub_803B4B4(&mons[pssData.monIndex], mon);
+        ExpandBoxMon(&mons[pssData.monIndex], mon);
     }
 }
 

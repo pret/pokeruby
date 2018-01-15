@@ -60,6 +60,7 @@ void diegohint1(u8 a0, u8 a1);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
 void sub_809C028(void);
+void sub_809C04C(struct Pokemon *pokemon, u8 a1);
 void sub_809CC04(void);
 
 // .rodata
@@ -1562,8 +1563,42 @@ void sub_809B44C(u8 a0, u8 a1)
     if (a0 == 14)
         gPokemonStorageSystemPtr->unk_25b4 = gPlayerParty[gUnknown_020384E5];
     else
-        sub_803B4B4(gPokemonStorage.boxes[a0], &gPokemonStorageSystemPtr->unk_25b4);
+        ExpandBoxMon(gPokemonStorage.boxes[a0] + a1, &gPokemonStorageSystemPtr->unk_25b4);
     sub_809B548(a0, a1);
+    gUnknown_020384E7 = a0;
+    gUnknown_020384E8 = a1;
+}
+
+void diegohint2(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+    {
+        gPlayerParty[a1] = gPokemonStorageSystemPtr->unk_25b4;
+    }
+    else
+    {
+        BoxMonRestorePP(&gPokemonStorageSystemPtr->unk_25b4.box);
+        gPokemonStorage.boxes[a0][a1] = gPokemonStorageSystemPtr->unk_25b4.box;
+    }
+}
+
+void sub_809B548(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+        ZeroMonData(gPlayerParty + a1);
+    else
+        ZeroBoxMonData(gPokemonStorage.boxes[a0] + a1);
+}
+
+void diegohint1(u8 a0, u8 a1)
+{
+    if (a0 == 14)
+        gPokemonStorageSystemPtr->unk_2618 = gPlayerParty[a1];
+    else
+        ExpandBoxMon(gPokemonStorage.boxes[a0] + a1, &gPokemonStorageSystemPtr->unk_2618);
+    diegohint2(a0, a1);
+    gPokemonStorageSystemPtr->unk_25b4 = gPokemonStorageSystemPtr->unk_2618;
+    sub_809C04C(&gPokemonStorageSystemPtr->unk_25b4, 0);
     gUnknown_020384E7 = a0;
     gUnknown_020384E8 = a1;
 }
