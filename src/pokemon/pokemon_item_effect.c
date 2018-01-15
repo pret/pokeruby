@@ -46,19 +46,19 @@ extern u8 gUnknown_08208240[];
 
 bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
 {
-    int r10;
     u32 sp0;
-    u32 sp4;
-    u8 sp18;
-    int sp1C = 1;
+    s32 sp4;
+    s32 sp18;
+    bool8 sp1C = TRUE;
     const u8 *sp20;
     u8 sp24 = 6;
     u32 sp28;
     s8 sp2C = 0;
     u8 sp30;
-    int sp34 = 4;
+    u8 sp34 = 4;
     u16 item;
     u16 r4;
+    u32 r10;
 
     item = GetMonData(pkmn, MON_DATA_HELD_ITEM);
     if (item == 0xAF)
@@ -80,7 +80,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
     {
         gActiveBank = gBankInMenu;
         sp18 = (GetBankSide(gActiveBank) != 0);
-        r4 = b - 13;
+        //r4 = b - 13;
         while (sp18 < gNoOfAllBanks)
         {
             if (gBattlePartyID[sp18] == c)
@@ -90,6 +90,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             }
             sp18 += 2;
         }
+        r4 = b - 13;
     }
     //_0803E2E8
     else
@@ -141,10 +142,10 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             //_0803E41E
             if ((sp20[sp18] & 0xF) && gBattleMons[gActiveBank].statStages[1] < 12)
             {
+                gBattleMons[gActiveBank].statStages[1] += sp20[sp18] & 0xF;
                 if (gBattleMons[gActiveBank].statStages[1] > 12)
                     gBattleMons[gActiveBank].statStages[1] = 12;
                 sp1C = 0;
-                break;
             }
             break;
         case 1:
@@ -152,7 +153,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             // r3 might be a temporary variable
             if ((sp20[sp18] & 0xF0) && gBattleMons[gActiveBank].statStages[2] < 12)
             {
-                gBattleMons[gActiveBank].statStages[2] += sp20[sp18] & 0xF0;
+                gBattleMons[gActiveBank].statStages[2] += (sp20[sp18] & 0xF0) >> 4;
                 if (gBattleMons[gActiveBank].statStages[2] > 12)
                     gBattleMons[gActiveBank].statStages[2] = 12;
                 sp1C = 0;
@@ -164,23 +165,25 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                 if (gBattleMons[gActiveBank].statStages[3] > 12)
                     gBattleMons[gActiveBank].statStages[3] = 12;
                 sp1C = 0;
+                //asm("");
             }
             break;
         case 2:
         //_0803E508
-            if ((sp20[sp18] & 0xF0) && gBattleMons[gActiveBank].statStages[4] < 12)
+            //asm_comment("case2");
+            if ((sp20[sp18] & 0xF0) && gBattleMons[gActiveBank].statStages[6] < 12)
             {
-                gBattleMons[gActiveBank].statStages[4] += sp20[sp18] & 0xF0;
-                if (gBattleMons[gActiveBank].statStages[4] > 12)
-                    gBattleMons[gActiveBank].statStages[4] = 12;
+                gBattleMons[gActiveBank].statStages[6] += (sp20[sp18] & 0xF0) >> 4;
+                if (gBattleMons[gActiveBank].statStages[6] > 12)
+                    gBattleMons[gActiveBank].statStages[6] = 12;
                 sp1C = 0;
             }
             //_0803E54E
-            if ((sp20[sp18] & 0xF) && gBattleMons[gActiveBank].statStages[6] < 12)
+            if ((sp20[sp18] & 0xF) && gBattleMons[gActiveBank].statStages[4] < 12)
             {
-                gBattleMons[gActiveBank].statStages[6] += sp20[sp18] & 0xF;
-                if (gBattleMons[gActiveBank].statStages[6] > 12)
-                    gBattleMons[gActiveBank].statStages[6] = 12;
+                gBattleMons[gActiveBank].statStages[4] += sp20[sp18] & 0xF;
+                if (gBattleMons[gActiveBank].statStages[4] > 12)
+                    gBattleMons[gActiveBank].statStages[4] = 12;
                 sp1C = 0;
             }
             break;
@@ -192,11 +195,10 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                 sp1C = 0;
             }
             //_0803E5E4
-            if ((sp20[sp18] & 0x40) && GetMonData(pkmn, MON_DATA_LEVEL) != 100)
+            if ((sp20[sp18] & 0x40) && GetMonData(pkmn, MON_DATA_LEVEL, NULL) != 100)
             {
-                u32 exp = gExperienceTables[gBaseStats[GetMonData(pkmn, MON_DATA_SPECIES)].growthRate][GetMonData(pkmn, MON_DATA_LEVEL) + 1];
-
-                SetMonData(pkmn, MON_DATA_EXP, &exp);
+                sp0 = gExperienceTables[gBaseStats[GetMonData(pkmn, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(pkmn, MON_DATA_LEVEL, NULL) + 1];
+                SetMonData(pkmn, MON_DATA_EXP, &sp0);
                 CalculateMonStats(pkmn);
                 sp1C = 0;
             }
@@ -229,22 +231,22 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             break;
         case 4:
         //_0803E77C
-            r10 = sp20[sp18] & 0x20;
-            if (r10 != 0)
+            r10 = sp20[sp18];
+            if (r10 & 0x20)
             {
-                u16 r4;
+                //u16 r4;
 
                 r10 &= 0xDF;
 
                 sp0 = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_08208238[d]) << (d * 2);
-                r4 = GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL);
-                sp28 = CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), d);
+                //r4 = GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL);
+                sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), d);
                 if (sp0 <= 2 && sp28 > 4)
                 {
                     sp0 = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gUnknown_08208240[d];
                     SetMonData(pkmn, MON_DATA_PP_BONUSES, &sp0);
 
-                    sp0 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + d), sp0, d) - sp28;
+                    sp0 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL), sp0, d) - sp28;
                     sp0 += GetMonData(pkmn, MON_DATA_PP1 + d, NULL);
                     SetMonData(pkmn, MON_DATA_PP1 + d, &sp0);
                     sp1C = 0;
@@ -256,7 +258,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
             {
                 if (r10 & 1)
                 {
-                    u16 r5;
+                    s32 r5;
                     u32 r4;
                     u32 r1;
 
@@ -303,15 +305,17 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                                     gAbsentBankFlags &= ~gBitTable[sp34];
                                     CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlePartyID[sp34]));
                                     // tail merge, possibly?
+                                    if (GetBankSide(gActiveBank) == 0 && gBattleResults.unk4 < 255)
+                                        gBattleResults.unk4++;
                                 }
                                 //_0803E9B4
                                 else
                                 {
                                     gAbsentBankFlags &= ~gBitTable[gActiveBank ^ 2];
+                                    if (GetBankSide(gActiveBank) == 0 && gBattleResults.unk4 < 255)
+                                        gBattleResults.unk4++;
                                 }
                                 //_0803E9CC
-                                if (GetBankSide(gActiveBank) == 0 && gBattleResults.unk4 < 255)
-                                    gBattleResults.unk4++;
                             }
                             //to _0803EA0A
                         }
@@ -343,13 +347,13 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             break;
                         }
                         //_0803EA6C
-                        if (GetMonData(pkmn, MON_DATA_MAX_HP) != GetMonData(pkmn, MON_DATA_HP))
+                        if (GetMonData(pkmn, MON_DATA_MAX_HP, NULL) != GetMonData(pkmn, MON_DATA_HP, NULL))
                         {
                             if (e == 0)
                             {
                                 sp0 += GetMonData(pkmn, MON_DATA_HP, NULL);
                                 if (sp0 > GetMonData(pkmn, MON_DATA_MAX_HP, NULL))
-                                    sp0 = GetMonData(pkmn, MON_DATA_MAX_HP);
+                                    sp0 = GetMonData(pkmn, MON_DATA_MAX_HP, NULL);
                                 //_0803EAB8
                                 SetMonData(pkmn, MON_DATA_HP, &sp0);
                                 if (gMain.inBattle && sp34 != 4)
@@ -373,7 +377,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             //_0803EB40
                             else
                             {
-                                gBattleMoveDamage *= -1;
+                                gBattleMoveDamage = -sp0;
                             }
                             //_0803EB48
                             sp1C = 0;
@@ -392,6 +396,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                                 r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
                                 if (sp0 != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
                                 {
+                                    sp0 += sp20[sp24];
                                     r4 = GetMonData(pkmn, MON_DATA_MOVE1 + r5, NULL);
                                     if (sp0 > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), r5))
                                     {
@@ -422,7 +427,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             if (sp0 != CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), d))
                             {
                                 //_0803ED00
-                                sp0 = sp20[sp24++];
+                                sp0 += sp20[sp24++];
                                 r4 = GetMonData(pkmn, MON_DATA_MOVE1 + d, NULL);
                                 if (sp0 > CalculatePPWithBonus(r4, GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), d))
                                 {
@@ -455,6 +460,8 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                     }
                 }
                 //_0803EE0A
+                sp28++;
+                r10 >>= 1;
             }
             break;
         case 5:
@@ -480,7 +487,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                         r5 = GetMonEVCount(pkmn);
                         if (r5 >= 510)
                             return 1;
-                        r1 = GetMonData(pkmn, gUnknown_082082F2[sp28], NULL);
+                        r1 = GetMonData(pkmn, gUnknown_082082F2[sp28 + 2], NULL);
                         sp0 = r1;
                         if (r1 < 100)
                         {
@@ -493,7 +500,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             if (r5 + r4 > 510)
                                 r4 = (r4 + 510) - (r5 + r4);
                             sp0 += r4;
-                            SetMonData(pkmn, gUnknown_082082F2[sp28], &sp0);
+                            SetMonData(pkmn, gUnknown_082082F2[sp28 + 2], &sp0);
                             CalculateMonStats(pkmn);
                             sp1C = 0;
                             sp24++;
@@ -526,7 +533,7 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                             sp4 = GetMonData(pkmn, MON_DATA_FRIENDSHIP, NULL);
                             if (sp2C > 0 && sp30 == 0x1B)
                             {
-                                sp4 = 0x96 * sp2C / 100;
+                                sp4 += 0x96 * sp2C / 100;
                             }
                             //to _0803F0D0 hmm...
                             else
@@ -627,6 +634,8 @@ bool8 sub_803E1B0(struct Pokemon *pkmn, u16 b, u8 c, u8 d, u8 e)
                         break;
                     }
                 }
+                sp28++;
+                r10 >>= 1;
             }
             break;
         }
