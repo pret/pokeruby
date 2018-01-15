@@ -49,6 +49,11 @@ void sub_809A8C8(struct Sprite *sprite);
 bool8 sub_809B150(void);
 bool8 sub_809B1D8(void);
 bool8 sub_809B24C(void);
+bool8 sub_809B324(void);
+bool8 sub_809B358(void);
+void sub_809B384(void);
+void sub_809B3E0(void);
+void diegohint1(u8 a0, u8 a1);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
 void sub_809C028(void);
@@ -1388,4 +1393,91 @@ void sub_809B100(u8 a0)
 bool8 sub_809B130(void)
 {
     return gPokemonStorageSystemPtr->unk_12a4();
+}
+
+bool8 sub_809B150(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_12a8)
+    {
+        case 0:
+            if (gUnknown_020384E6)
+                return FALSE;
+            StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 2);
+            gPokemonStorageSystemPtr->unk_12a8++;
+            break;
+        case 1:
+            if (!sub_809B324())
+            {
+                StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 3);
+                sub_809B384();
+                gPokemonStorageSystemPtr->unk_12a8++;
+            }
+            break;
+        case 2:
+            if (!sub_809B358())
+                gPokemonStorageSystemPtr->unk_12a8++;
+            break;
+        case 3:
+            return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_809B1D8(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_12a8)
+    {
+        case 0:
+            if (!sub_809B324())
+            {
+                StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 2);
+                sub_809B3E0();
+                gPokemonStorageSystemPtr->unk_12a8++;
+            }
+            break;
+        case 1:
+            if (!sub_809B358())
+            {
+                StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
+                gPokemonStorageSystemPtr->unk_12a8++;
+            }
+            break;
+        case 2:
+            return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 sub_809B24C(void)
+{
+    switch (gPokemonStorageSystemPtr->unk_12a8)
+    {
+        case 0:
+            switch (gUnknown_020384E4)
+            {
+                case 1:
+                    gPokemonStorageSystemPtr->unk_12a9 = 14;
+                    break;
+                case 0:
+                    gPokemonStorageSystemPtr->unk_12a9 = get_preferred_box();
+                    break;
+                default:
+                    return FALSE;
+            }
+            StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 2);
+            sub_80996B0(gPokemonStorageSystemPtr->unk_12a9, gUnknown_020384E5);
+            gPokemonStorageSystemPtr->unk_12a8++;
+            break;
+        case 1:
+            if (!sub_809971C())
+            {
+                StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 3);
+                diegohint1(gPokemonStorageSystemPtr->unk_12a9, gUnknown_020384E5);
+                gPokemonStorageSystemPtr->unk_12a8++;
+            }
+            break;
+        case 2:
+            return FALSE;
+    }
+    return TRUE;
 }
