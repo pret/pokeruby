@@ -8,6 +8,13 @@
 
 // Static type declarations
 
+struct WallpaperTable {
+    const u8 *tiles;
+    u32 size;
+    const u8 *tileMap;
+    const u16 *palettes;
+};
+
 // Static RAM declarations
 
 EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
@@ -18,13 +25,6 @@ EWRAM_DATA u8 gUnknown_020384E7 = 0;
 EWRAM_DATA u8 gUnknown_020384E8 = 0;
 EWRAM_DATA u8 gUnknown_020384E9 = 0;
 EWRAM_DATA u16 gUnknown_020384EA = 0;
-
-struct WallpaperTable {
-    const u8 *tiles;
-    u32 size;
-    const u8 *tileMap;
-    const u16 *palettes;
-};
 
 // Static ROM declarations
 
@@ -45,6 +45,9 @@ void sub_809A774(s8 a0);
 void sub_809A810(void);
 void sub_809A8C8(struct Sprite *sprite);
 bool8 sub_809BF2C(void);
+void sub_809BF74(void);
+void sub_809C028(void);
+void sub_809CC04(void);
 
 // .rodata
 
@@ -1050,4 +1053,81 @@ void sub_809A860(bool8 a0)
             gPokemonStorageSystemPtr->unk_0d00[i]->data[0] = 0;
         }
     }
+}
+
+void sub_809A8C8(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+        case 0:
+            sprite->pos2.x = 0;
+            break;
+        case 1:
+            if (++sprite->data[1] > 3)
+            {
+                sprite->data[1] = 0;
+                sprite->pos2.x += sprite->data[3];
+                if (++sprite->data[2] > 5)
+                {
+                    sprite->data[2] = 0;
+                    sprite->pos2.x = 0;
+                }
+            }
+            break;
+        case 2:
+            sprite->data[0] = 3;
+            break;
+        case 3:
+            sprite->pos1.x -= gPokemonStorageSystemPtr->unk_08b6;
+            if (sprite->pos1.x < 0x49 || sprite->pos1.x > 0xf7)
+                sprite->invisible = TRUE;
+            if (--sprite->data[1] == 0)
+            {
+                sprite->pos1.x = sprite->data[2];
+                sprite->invisible = FALSE;
+                sprite->data[0] = 4;
+            }
+            break;
+        case 4:
+            sprite->pos1.x -= gPokemonStorageSystemPtr->unk_08b6;
+            break;
+    }
+}
+
+struct Sprite *sub_809A9A0(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
+{
+    u8 spriteId = CreateSprite(&gSpriteTemplate_83BB2F0, x, y, subpriority);
+    if (spriteId == MAX_SPRITES)
+        return NULL;
+    animId %= 2;
+    StartSpriteAnim(gSprites + spriteId, animId);
+    gSprites[spriteId].oam.priority = priority;
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    return gSprites + spriteId;
+}
+
+void sub_809AA24(void)
+{
+    if (gPokemonStorageSystemPtr->unk_0005 != 1)
+        gUnknown_020384E4 = 0;
+    else
+        gUnknown_020384E4 = 1;
+    gUnknown_020384E5 = 0;
+    gUnknown_020384E6 = 0;
+    gUnknown_020384E7 = 0;
+    gUnknown_020384E8 = 0;
+    gUnknown_020384E9 = 0;
+    sub_809B0D4();
+    sub_809CC04();
+    gPokemonStorageSystemPtr->unk_11e2 = 1;
+    sub_809BF74();
+}
+
+void sub_809AA98(void)
+{
+    sub_809CC04();
+    sub_809C028();
+    gPokemonStorageSystemPtr->unk_11e2 = 1;
+    if (gUnknown_020384E6)
+        sub_8098BF0();
 }
