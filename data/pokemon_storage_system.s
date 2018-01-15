@@ -4,28 +4,6 @@
 	.section .rodata
 
 	.align 2
-HandCursorPalette: @ 83BB308
-	.incbin "graphics/pokemon_storage/hand_cursor_pal.bin"
-
-	.align 2
-HandCursorAltPalette: @ 83BB328
-	.incbin "graphics/pokemon_storage/hand_cursor_alt_pal.bin"
-
-	.align 2
-HandCursorTiles: @ 83BB348
-	.incbin "graphics/pokemon_storage/hand_cursor.4bpp"
-
-	.align 2
-HandCursorShadowTiles: @ 83BBB48
-	.incbin "graphics/pokemon_storage/hand_cursor_shadow.4bpp"
-
-	.align 2
-gUnknown_083BBBC8:: @ 83BBBC8
-	.4byte sub_809B150
-	.4byte sub_809B1D8
-	.4byte sub_809B24C
-
-	.align 2
 gUnknown_083BBBD4:: @ 83BBBD4
 	.4byte sub_809C464, 0
 	.4byte sub_809C664, 1

@@ -133,7 +133,6 @@ SECTIONS {
         src/pokemon/pokemon_storage_system_3.o(.text);
         src/pokemon/pokemon_storage_system_4.o(.text);
         src/pokemon/pokemon_storage_system_5.o(.text);
-        src/pokemon/pokemon_storage_system_6.o(.text);
         asm/pokemon_storage_system.o(.text);
         src/pokemon/pokemon_icon.o(.text);
         src/pokemon/pokemon_summary_screen.o(.text);
@@ -555,6 +554,7 @@ SECTIONS {
         src/pokemon/pokemon_storage_system_2.o(.rodata);
         src/pokemon/pokemon_storage_system_3.o(.rodata);
         src/pokemon/pokemon_storage_system_4.o(.rodata);
+        src/pokemon/pokemon_storage_system_5.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);

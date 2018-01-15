@@ -25,7 +25,7 @@ EWRAM_DATA u8 gUnknown_020384E6 = 0;
 EWRAM_DATA u8 gUnknown_020384E7 = 0;
 EWRAM_DATA u8 gUnknown_020384E8 = 0;
 EWRAM_DATA u8 gUnknown_020384E9 = 0;
-EWRAM_DATA u16 gUnknown_020384EA = 0;
+EWRAM_DATA u8 gUnknown_020384EA = 0;
 
 // Static ROM declarations
 
@@ -46,6 +46,9 @@ void sub_809A774(s8 a0);
 void sub_809A810(void);
 void sub_809AFB8(void);
 void sub_809A8C8(struct Sprite *sprite);
+bool8 sub_809B150(void);
+bool8 sub_809B1D8(void);
+bool8 sub_809B24C(void);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
 void sub_809C028(void);
@@ -289,6 +292,16 @@ const struct SpriteTemplate gSpriteTemplate_83BB2F0 = {
     sub_809A8C8
 };
 
+const u16 HandCursorPalette[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_pal.bin");
+const u16 HandCursorAltPalette[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_alt_pal.bin");
+const u8 HandCursorTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor.4bpp");
+const u8 HandCursorShadowTiles[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
+
+bool8 (*const gUnknown_083BBBC8[])(void) = {
+    sub_809B150,
+    sub_809B1D8,
+    sub_809B24C
+};
 // .text
 
 void sub_8099BF8(u8 boxId)
@@ -1305,4 +1318,74 @@ void sub_809AF18(u8 a0, u8 a1)
             gPokemonStorageSystemPtr->unk_11c4->oam.priority = 1;
             break;
     }
+}
+
+void sub_809AFB8(void)
+{
+    gUnknown_020384E4 = gPokemonStorageSystemPtr->unk_11e0;
+    gUnknown_020384E5 = gPokemonStorageSystemPtr->unk_11e1;
+    if (gUnknown_020384E6 == 0)
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
+    sub_809BF74();
+    switch (gUnknown_020384E4)
+    {
+        case 2:
+            sub_809A860(TRUE);
+            break;
+        case 1:
+            gPokemonStorageSystemPtr->unk_11c4->subpriority = 12;
+            break;
+        case 0:
+            gPokemonStorageSystemPtr->unk_11c4->oam.priority = 2;
+            gPokemonStorageSystemPtr->unk_11c4->subpriority = 20;
+            gPokemonStorageSystemPtr->unk_11c4->invisible = FALSE;
+            break;
+    }
+}
+
+void sub_809B068(void)
+{
+    u8 partyCount;
+    if (gUnknown_020384E6 == 0)
+        partyCount = 0;
+    else
+    {
+        partyCount = CalculatePlayerPartyCount();
+        if (partyCount > PARTY_SIZE - 1)
+            partyCount = PARTY_SIZE - 1;
+    }
+    if (gPokemonStorageSystemPtr->unk_11c0->vFlip)
+        gPokemonStorageSystemPtr->unk_11e3 = 1;
+    sub_809AF18(1, partyCount);
+}
+
+void sub_809B0C0(u8 a0)
+{
+    sub_809AF18(0, a0);
+}
+
+void sub_809B0D4(void)
+{
+    gUnknown_020384EA = 0;
+}
+
+void sub_809B0E0(void)
+{
+    gUnknown_020384EA = gUnknown_020384E5;
+}
+
+u8 sub_809B0F4(void)
+{
+    return gUnknown_020384EA;
+}
+
+void sub_809B100(u8 a0)
+{
+    gPokemonStorageSystemPtr->unk_12a4 = gUnknown_083BBBC8[a0];
+    gPokemonStorageSystemPtr->unk_12a8 = 0;
+}
+
+bool8 sub_809B130(void)
+{
+    return gPokemonStorageSystemPtr->unk_12a4();
 }
