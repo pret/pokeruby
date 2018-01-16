@@ -2589,12 +2589,12 @@ BattleScript_EffectEndeavor: @ 81D8852
 	attackstring
 	ppreduce
 	setdamagetohealthdifference BattleScript_ButItFailed
-	copyword gHP_dealt, gBattleMoveDamage
+	copyword gHpDealt, gBattleMoveDamage
 	accuracycheck BattleScript_MoveMissed, ACC_CURR_MOVE
 	typecalc
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	copyword gBattleMoveDamage, gHP_dealt
+	copyword gBattleMoveDamage, gHpDealt
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
 
@@ -3314,7 +3314,7 @@ BattleScript_LeechSeedTurnDrain:: @ 81D904B
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate USER
 	datahpupdate USER
-	copyword gBattleMoveDamage, gHP_dealt
+	copyword gBattleMoveDamage, gHpDealt
 	jumpifability USER, ABILITY_LIQUID_OOZE, BattleScript_LeechSeedTurnPrintLiquidOoze
 	manipulatedamage 0
 	setbyte cMULTISTRING_CHOOSER, 3

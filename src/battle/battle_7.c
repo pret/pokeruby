@@ -792,7 +792,7 @@ void sub_80324E0(u8 a)
     ewram17800[a].substituteSprite = 0;
 }
 
-void sub_80324F8(struct Pokemon *pkmn, u8 b)
+void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
 {
     u16 hp = GetMonData(pkmn, MON_DATA_HP);
     u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
@@ -822,7 +822,7 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
     }
 }
 
-void BattleMusicStop(void)
+void BattleStopLowHpSound(void)
 {
     u8 r4 = GetBankByIdentity(0);
 
@@ -850,11 +850,11 @@ void sub_8032638(void)
         u8 r5 = pokemon_order_func(gBattlePartyID[r9]);
 
         if (GetMonData(&gPlayerParty[r4], MON_DATA_HP) != 0)
-            sub_80324F8(&gPlayerParty[r4], r8);
+            HandleLowHpMusicChange(&gPlayerParty[r4], r8);
         if (IsDoubleBattle())
         {
             if (GetMonData(&gPlayerParty[r5], MON_DATA_HP) != 0)
-                sub_80324F8(&gPlayerParty[r5], r9);
+                HandleLowHpMusicChange(&gPlayerParty[r5], r9);
         }
     }
 }
