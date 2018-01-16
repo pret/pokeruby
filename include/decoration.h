@@ -151,7 +151,6 @@ extern const struct YesNoFuncTable gUnknown_083EC634[];
 extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
-extern void Shop_RunExitSellMenuTask(u8); // src/shop
 extern const struct YesNoFuncTable gUnknown_083EC95C;
 extern const struct YesNoFuncTable gUnknown_083EC964;
 extern const struct YesNoFuncTable gUnknown_083EC9CC;
