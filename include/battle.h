@@ -73,16 +73,16 @@ struct AI_Stack
 
 struct AI_ThinkingStruct /* 0x2016800 */
 {
-/* 0x00 */ u8 aiState;
-/* 0x01 */ u8 movesetIndex;
-/* 0x02 */ u16 moveConsidered;
-/* 0x04 */ s8 score[4]; // score?
-/* 0x08 */ u32 funcResult;
-/* 0x0C */ u32 aiFlags;
-/* 0x10 */ u8 aiAction;
-/* 0x11 */ u8 aiLogicId;
-/* 0x12 */ u8 filler12[6];
-/* 0x18 */ u8 simulatedRNG[4];
+    /*0x00*/ u8 aiState;
+    /*0x01*/ u8 movesetIndex;
+    /*0x02*/ u16 moveConsidered;
+    /*0x04*/ s8 score[4]; // score?
+    /*0x08*/ u32 funcResult;
+    /*0x0C*/ u32 aiFlags;
+    /*0x10*/ u8 aiAction;
+    /*0x11*/ u8 aiLogicId;
+    /*0x12*/ u8 filler12[6];
+    /*0x18*/ u8 simulatedRNG[4];
 };
 
 struct BattleStruct /* 0x2000000 */
@@ -527,7 +527,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BANKS_BATTLE];
     u8 wishUserID[MAX_BANKS_BATTLE];
     u8 weatherDuration;
-    u16 knockedOffPokes;
+    u8 knockedOffPokes[2];
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;

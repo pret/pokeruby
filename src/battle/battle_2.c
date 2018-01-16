@@ -1664,7 +1664,7 @@ void sub_8010874(void)
     }
 }
 
-void SwitchInClearStructs(void)
+void SwitchInClearSetData(void)
 {
     struct DisableStruct sp0 = gDisableStructs[gActiveBank];
     s32 i;
