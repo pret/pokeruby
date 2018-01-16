@@ -214,11 +214,11 @@ void BufferStringBattle(u16 stringID)
     gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBank][4]);
     gLastUsedItem = gStringInfo->lastItem;
     gLastUsedAbility = gStringInfo->lastAbility;
-    BATTLE_STRUCT->scriptingActive = gStringInfo->scrActive;
-    BATTLE_STRUCT->unk1605E = gStringInfo->unk1605E;
-    BATTLE_STRUCT->hpScale = gStringInfo->hpScale;
+    gBattleStruct->scriptingActive = gStringInfo->scrActive;
+    gBattleStruct->unk1605E = gStringInfo->unk1605E;
+    gBattleStruct->hpScale = gStringInfo->hpScale;
     gStringBank = gStringInfo->StringBank;
-    BATTLE_STRUCT->stringMoveType = gStringInfo->moveType;
+    gBattleStruct->stringMoveType = gStringInfo->moveType;
     for (i = 0; i < 4; i++)
     {
         gAbilitiesPerBank[i] = gStringInfo->abilities[i];
@@ -304,11 +304,11 @@ void BufferStringBattle(u16 stringID)
     case 2: // sending poke to ball msg
         if (GetBankSide(gActiveBank) == 0)
         {
-            if (BATTLE_STRUCT->hpScale == 0)
+            if (gBattleStruct->hpScale == 0)
                 stringPtr = BattleText_ComeBackSingle1;
-            else if (BATTLE_STRUCT->hpScale == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            else if (gBattleStruct->hpScale == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 stringPtr = BattleText_ComeBackSingle2;
-            else if (BATTLE_STRUCT->hpScale == 2)
+            else if (gBattleStruct->hpScale == 2)
                 stringPtr = BattleText_ComeBackSingle3;
             else
                 stringPtr = BattleText_ComeBackSingle4;
@@ -332,13 +332,13 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case 3: // switch-in msg
-        if (GetBankSide(BATTLE_STRUCT->scriptingActive) == 0)
+        if (GetBankSide(gBattleStruct->scriptingActive) == 0)
         {
-            if (BATTLE_STRUCT->hpScale == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleStruct->hpScale == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 stringPtr = BattleText_SentOutSingle7;
-            else if (BATTLE_STRUCT->hpScale == 1)
+            else if (gBattleStruct->hpScale == 1)
                 stringPtr = BattleText_SentOutSingle8;
-            else if (BATTLE_STRUCT->hpScale == 2)
+            else if (gBattleStruct->hpScale == 2)
                 stringPtr = BattleText_SentOutSingle9;
             else
                 stringPtr = BattleText_SentOutSingle10;
@@ -364,7 +364,7 @@ void BufferStringBattle(u16 stringID)
     case 4: // pokemon used a move msg
         sub_8121D1C(gBattleTextBuff1);
         if (gStringInfo->currentMove > 0x162)
-            StringCopy(gBattleTextBuff2, gUnknown_08401674[BATTLE_STRUCT->stringMoveType]);
+            StringCopy(gBattleTextBuff2, gUnknown_08401674[gBattleStruct->stringMoveType]);
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
         sub_8121D74(gBattleTextBuff2);
@@ -636,17 +636,17 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gActiveBank, gBattlePartyID[gActiveBank])
                 break;
             case 16: // scripting active bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, gBattlePartyID[BATTLE_STRUCT->scriptingActive])
+                HANDLE_NICKNAME_STRING_CASE(gBattleStruct->scriptingActive, gBattlePartyID[gBattleStruct->scriptingActive])
                 break;
             case 17: // current move name
                 if (gStringInfo->currentMove > 0x162)
-                    toCpy = (void*) &gUnknown_08401674[BATTLE_STRUCT->stringMoveType];
+                    toCpy = (void*) &gUnknown_08401674[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gStringInfo->currentMove];
                 break;
             case 18: // last used move name
                 if (gStringInfo->lastMove > 0x162)
-                    toCpy = (void*) &gUnknown_08401674[BATTLE_STRUCT->stringMoveType];
+                    toCpy = (void*) &gUnknown_08401674[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gStringInfo->lastMove];
                 break;
@@ -655,7 +655,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 {
                     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(text, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH
@@ -690,7 +690,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gAbilitiesPerBank[gBankTarget]];
                 break;
             case 23: // scripting active ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[BATTLE_STRUCT->scriptingActive]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleStruct->scriptingActive]];
                 break;
             case 24: // effect bank ability
                 toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBank]];
@@ -750,7 +750,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gLinkPlayers[sub_803FC34(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case 31: // link scripting active name
-                toCpy = gLinkPlayers[sub_803FC34(BATTLE_STRUCT->scriptingActive)].name;
+                toCpy = gLinkPlayers[sub_803FC34(gBattleStruct->scriptingActive)].name;
                 break;
             case 32: // player name
                 toCpy = gSaveBlock2.playerName;
@@ -759,7 +759,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = GetTrainerLoseText();
                 break;
             case 34: // ?
-                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
+                HANDLE_NICKNAME_STRING_CASE(gBattleStruct->scriptingActive, gBattleStruct->unk1605E)
                 break;
             case 35: // lanette pc
                 if (FlagGet(FLAG_SYS_PC_LANETTE))
@@ -946,7 +946,7 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
                 {
                     if (hword == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(dst, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH

@@ -94,7 +94,7 @@ extern void sub_804777C();
 extern void sub_8043DFC();
 //extern s16 sub_8045C78();
 extern void sub_80440EC();
-extern void sub_80324F8();
+extern void HandleLowHpMusicChange();
 extern void nullsub_9(u16);
 extern void sub_8043DB0();
 extern void move_anim_start_t4();
@@ -355,7 +355,7 @@ void bx_t3_healthbar_update(void)
     }
     else
     {
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         LinkPartnerBufferExecCompleted();
     }
 }
@@ -434,7 +434,7 @@ void sub_811E0CC(void)
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 0);
         sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 0);
         sub_804777C(gActiveBank);
@@ -1084,7 +1084,7 @@ void sub_811EC68(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
         break;
     }
-    sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 void LinkPartnerHandlecmd3(void)
@@ -1243,7 +1243,7 @@ void LinkPartnerHandlecmd10(void)
     else if (!ewram17810[gActiveBank].unk0_6)
     {
         ewram17810[gActiveBank].unk4 = 0;
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlaySE12WithPanning(SE_POKE_DEAD, -64);
         gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
