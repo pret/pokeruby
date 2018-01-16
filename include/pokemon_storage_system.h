@@ -159,7 +159,7 @@ struct PokemonStorageSystemData {
     u8 unk_11e2;
     u8 unk_11e3;
     u8 filler_11e4[4];
-    u8 *unk_11e8;
+    const u8 *unk_11e8;
     u32 unk_11ec;
     u16 unk_11f0;
     u16 unk_11f2;
