@@ -64,7 +64,7 @@ void diegohint1(u8 a0, u8 a1);
 bool8 sub_809BF2C(void);
 void sub_809BF74(void);
 void sub_809C028(void);
-void sub_809C04C(struct Pokemon *pokemon, u8 a1);
+void sub_809C04C(struct BoxPokemon *pokemon, u8 a1);
 void sub_809CC04(void);
 
 // .rodata
@@ -1602,7 +1602,7 @@ void diegohint1(u8 a0, u8 a1)
         ExpandBoxMon(gPokemonStorage.boxes[a0] + a1, &gPokemonStorageSystemPtr->unk_2618);
     diegohint2(a0, a1);
     gPokemonStorageSystemPtr->unk_25b4 = gPokemonStorageSystemPtr->unk_2618;
-    sub_809C04C(&gPokemonStorageSystemPtr->unk_25b4, 0);
+    sub_809C04C(&gPokemonStorageSystemPtr->unk_25b4.box, 0);
     gUnknown_020384E7 = a0;
     gUnknown_020384E8 = a1;
 }
@@ -1910,4 +1910,37 @@ bool8 sub_809BF2C(void)
 bool8 sub_809BF48(void)
 {
     return (gUnknown_020384E4 == 3 && gUnknown_020384E5 == 1) ? TRUE : FALSE;
+}
+
+void sub_809BF74(void)
+{
+    gPokemonStorageSystemPtr->unk_11f6 = gUnknown_020384E6 ? 0 : 1;
+    if (!gUnknown_020384E6)
+    {
+        switch (gUnknown_020384E4)
+        {
+            case 1:
+                if (gUnknown_020384E5 < PARTY_SIZE)
+                {
+                    sub_809C04C(&gPlayerParty[gUnknown_020384E5].box, 0);
+                    break;
+                }
+                // fallthrough
+            case 2:
+            case 3:
+                sub_809C04C(NULL, 2);
+                break;
+            case 0:
+                sub_809C04C(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, 1);
+                break;
+        }
+    }
+}
+
+void sub_809C028(void)
+{
+    if (gUnknown_020384E6)
+        sub_809C04C(&gUnknown_02038480.box, 0);
+    else
+        sub_809BF74();
 }
