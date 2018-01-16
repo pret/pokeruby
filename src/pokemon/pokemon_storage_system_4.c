@@ -1,12 +1,14 @@
 
 // Includes
 #include "global.h"
+#include "ewram.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "palette.h"
 #include "string_util.h"
 #include "text.h"
 #include "menu.h"
+#include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 
 // Static type declarations
@@ -1785,4 +1787,77 @@ s8 sub_809B960(void)
             break;
     }
     return -1;
+}
+
+void sub_809BB90(void)
+{
+    if (gUnknown_020384E6)
+        gUnknown_02038480 = gPokemonStorageSystemPtr->unk_25b4;
+}
+
+void sub_809BBC0(void)
+{
+    if (gUnknown_020384E6)
+    {
+        if (gUnknown_020384E7 == 14)
+            gPokemonStorageSystemPtr->unk_25b4 = gUnknown_02038480;
+        else
+            gPokemonStorageSystemPtr->unk_25b4.box = gUnknown_02038480.box;
+    }
+}
+
+void sub_809BC18(void)
+{
+    if (gUnknown_020384E6)
+    {
+        sub_809BB90();
+        gPokemonStorageSystemPtr->unk_2690.pokemon = &gUnknown_02038480;
+        gPokemonStorageSystemPtr->unk_268d = 0;
+        gPokemonStorageSystemPtr->unk_268c = 0;
+        gPokemonStorageSystemPtr->unk_268e = 0;
+    }
+    else if (gUnknown_020384E4 == 1)
+    {
+        gPokemonStorageSystemPtr->unk_2690.pokemon = gPlayerParty;
+        gPokemonStorageSystemPtr->unk_268d = gUnknown_020384E5;
+        gPokemonStorageSystemPtr->unk_268c = StorageSystemGetPartySize() - 1;
+        gPokemonStorageSystemPtr->unk_268e = 0;
+    }
+    else
+    {
+        gPokemonStorageSystemPtr->unk_2690.box = gPokemonStorage.boxes[gPokemonStorage.currentBox];
+        gPokemonStorageSystemPtr->unk_268d = gUnknown_020384E5;
+        gPokemonStorageSystemPtr->unk_268c = 30 - 1;
+        gPokemonStorageSystemPtr->unk_268e = 5;
+    }
+}
+
+void sub_809BD14(void)
+{
+    if (gUnknown_020384E6)
+        sub_809BBC0();
+    else
+        gUnknown_020384E5 = pssData.monIndex;
+}
+
+s16 party_compaction(void)
+{
+    s16 retVal = -1;
+    u16 i;
+    u16 last;
+
+    for (i = 0, last = 0; i < PARTY_SIZE; i++)
+    {
+        if ((u16)GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            if (i != last)
+                gPlayerParty[last] = gPlayerParty[i];
+            last++;
+        }
+        else if (retVal == -1)
+            retVal = i;
+    }
+    for (; last < PARTY_SIZE; last++)
+        ZeroMonData(gPlayerParty + last);
+    return retVal;
 }

@@ -196,7 +196,10 @@ struct PokemonStorageSystemData {
     u8 unk_268c;
     u8 unk_268d;
     u8 unk_268e;
-    struct Pokemon *unk_2690;
+    union {
+        struct Pokemon *pokemon;
+        struct BoxPokemon *box;
+    } unk_2690;
     u8 unk_2694[18];
     u8 unk_26a6[62];
     u8 unk_26e4[0x16];
@@ -215,6 +218,7 @@ extern struct UnkPSSStruct_2002370 *gUnknown_02038478;
 extern struct PokemonStorageSystemData *const gPokemonStorageSystemPtr;
 extern u8 *const gUnknown_083B6DB8;
 
+u8 StorageSystemGetPartySize(void);
 s16 GetIndexOfFirstEmptySpaceInBoxN(u8 boxId);
 u8 CountPokemonInBoxN(u8 boxId);
 void sub_8096264(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3);
@@ -277,7 +281,7 @@ void sub_809BB90(void);
 void sub_809BBC0(void);
 void sub_809BC18(void);
 void sub_809BD14(void);
-void party_compaction(void);
+s16 party_compaction(void);
 void sub_809BDD8(u8 markings);
 bool8 sub_809BE80(void);
 bool8 sub_809BEBC(void);

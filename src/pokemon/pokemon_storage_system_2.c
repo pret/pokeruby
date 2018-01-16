@@ -343,7 +343,7 @@ void sub_8096B5C(void)
     switch (gPokemonStorageSystemPtr->unk_0006)
     {
         case 0:
-            ShowPokemonSummaryScreen(gPokemonStorageSystemPtr->unk_2690, gPokemonStorageSystemPtr->unk_268d, gPokemonStorageSystemPtr->unk_268c, sub_80969A0, gPokemonStorageSystemPtr->unk_268e);
+            ShowPokemonSummaryScreen(gPokemonStorageSystemPtr->unk_2690.pokemon, gPokemonStorageSystemPtr->unk_268d, gPokemonStorageSystemPtr->unk_268c, sub_80969A0, gPokemonStorageSystemPtr->unk_268e);
             break;
         case 1:
             DoNamingScreen(1, gPokemonStorage.boxNames[gPokemonStorage.currentBox], 0, 0, 0, sub_80969A0);
