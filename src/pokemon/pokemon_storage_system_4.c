@@ -25,7 +25,7 @@ struct WallpaperTable {
 EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
 EWRAM_DATA s8 gUnknown_020384E4 = 0;
 EWRAM_DATA s8 gUnknown_020384E5 = 0;
-EWRAM_DATA u8 gUnknown_020384E6 = 0;
+EWRAM_DATA bool8 gUnknown_020384E6 = FALSE;
 EWRAM_DATA u8 gUnknown_020384E7 = 0;
 EWRAM_DATA u8 gUnknown_020384E8 = 0;
 EWRAM_DATA u8 gUnknown_020384E9 = 0;
@@ -1141,7 +1141,7 @@ void sub_809AA24(void)
     else
         gUnknown_020384E4 = 1;
     gUnknown_020384E5 = 0;
-    gUnknown_020384E6 = 0;
+    gUnknown_020384E6 = FALSE;
     gUnknown_020384E7 = 0;
     gUnknown_020384E8 = 0;
     gUnknown_020384E9 = 0;
@@ -1315,7 +1315,7 @@ void sub_809AF18(u8 a0, u8 a1)
 {
     sub_809AD3C(a0, a1);
     sub_809AD94();
-    if (gUnknown_020384E6 == 0)
+    if (!gUnknown_020384E6)
         StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 1);
     if (a0 == 1 && gUnknown_020384E4 != 1)
     {
@@ -1337,7 +1337,7 @@ void sub_809AFB8(void)
 {
     gUnknown_020384E4 = gPokemonStorageSystemPtr->unk_11e0;
     gUnknown_020384E5 = gPokemonStorageSystemPtr->unk_11e1;
-    if (gUnknown_020384E6 == 0)
+    if (!gUnknown_020384E6)
         StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
     sub_809BF74();
     switch (gUnknown_020384E4)
@@ -1359,7 +1359,7 @@ void sub_809AFB8(void)
 void sub_809B068(void)
 {
     u8 partyCount;
-    if (gUnknown_020384E6 == 0)
+    if (!gUnknown_020384E6)
         partyCount = 0;
     else
     {
@@ -1534,7 +1534,7 @@ void sub_809B384(void)
         default:
             return;
     }
-    gUnknown_020384E6 = 1;
+    gUnknown_020384E6 = TRUE;
 }
 
 void sub_809B3E0(void)
@@ -1554,7 +1554,7 @@ void sub_809B3E0(void)
         default:
             return;
     }
-    gUnknown_020384E6 = 0;
+    gUnknown_020384E6 = FALSE;
 }
 
 void sub_809B440(void)
@@ -1616,7 +1616,7 @@ bool8 sub_809B62C(u8 boxId)
     {
         diegohint2(boxId, monIdx);
         sub_8099480();
-        gUnknown_020384E6 = 0;
+        gUnknown_020384E6 = FALSE;
     }
     else
     {
@@ -1664,7 +1664,7 @@ void sub_809B760(void)
 {
     sub_8099920();
     if (gUnknown_020384E6)
-        gUnknown_020384E6 = 0;
+        gUnknown_020384E6 = FALSE;
     else
     {
         u8 boxId;
@@ -1860,4 +1860,54 @@ s16 party_compaction(void)
     for (; last < PARTY_SIZE; last++)
         ZeroMonData(gPlayerParty + last);
     return retVal;
+}
+
+void sub_809BDD8(u8 markings)
+{
+    gPokemonStorageSystemPtr->unk_11f7 = markings;
+    if (gUnknown_020384E6)
+        SetMonData(&gPokemonStorageSystemPtr->unk_25b4, MON_DATA_MARKINGS, &markings);
+    else
+    {
+        if (gUnknown_020384E4 == 1)
+            SetMonData(gPlayerParty + gUnknown_020384E5, MON_DATA_MARKINGS, &markings);
+        if (gUnknown_020384E4 == 0)
+            SetBoxMonData(gPokemonStorage.boxes[get_preferred_box()] + gUnknown_020384E5, MON_DATA_MARKINGS, &markings);
+    }
+}
+
+bool8 sub_809BE80(void)
+{
+    if (gUnknown_020384E4 == 1 && !gUnknown_020384E6 && CountAlivePartyMonsExceptOne(gUnknown_020384E5) == 0)
+        return TRUE;
+    return FALSE;
+}
+
+bool8 sub_809BEBC(void)
+{
+    if (gUnknown_020384E6)
+    {
+        if (gUnknown_020384E4 == 1 && CountAlivePartyMonsExceptOne(gUnknown_020384E5) == 0)
+        {
+            if (gPokemonStorageSystemPtr->unk_11f9 || GetMonData(&gPokemonStorageSystemPtr->unk_25b4, MON_DATA_HP) == 0)
+                return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_809BF20(void)
+{
+    return gUnknown_020384E6;
+}
+
+bool8 sub_809BF2C(void)
+{
+    return gUnknown_020384E4 == 2 ? TRUE : FALSE;
+}
+
+bool8 sub_809BF48(void)
+{
+    return (gUnknown_020384E4 == 3 && gUnknown_020384E5 == 1) ? TRUE : FALSE;
 }
