@@ -143,6 +143,7 @@ SECTIONS {
         src/debug/matsuda_debug_menu.o(.text);
         src/contest.o(.text);
         src/field/shop.o(.text);
+        src/field/fldeff_escalator.o(.text);
         src/field/berry.o(.text);
         src/field/script_menu.o(.text);
         src/engine/naming_screen.o(.text);
@@ -557,6 +558,7 @@ SECTIONS {
         src/debug/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
         src/field/shop.o(.rodata);
+        src/field/fldeff_escalator.o(.rodata);
         src/field/berry.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);

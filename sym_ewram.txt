@@ -486,6 +486,7 @@ gSpecialVar_ContestRank: @ 203869E
 	.space 0x2
 
 	.include "src/field/shop.o"
+    .include "src/field/fldeff_escalator.o"
 	.include "src/field/money.o"
 
 @ record_mixing

@@ -37,16 +37,16 @@ struct MartInfo
     /* 0xD */ u8 curItemCount; // if you are selling an item, this is the count of the current item stack you have.
 };
 
-void sub_80B2E38(u8);
-void HandleShopMenuQuit(u8);
+void Task_DoBuySellMenu(u8);
+void Task_HandleShopMenuQuit(u8);
 void Shop_FadeAndRunBuySellCallback(u8);
 void BuyMenuDrawGraphics(void);
 void sub_80B3240(void);
-void sub_80B3270(void);
+void DrawFirstMartScrollIndicators(void);
 void Shop_DrawViewport(void);
-void sub_80B3764(int, int);
+void Shop_InitMenus(int, int);
 void Shop_PrintItemDesc(void);
-void sub_80B40E8(u8);
+void Shop_DoCursorAction(u8);
 void CreatePokemartMenu(u16 *);
 void CreateDecorationShop1Menu(u16 *);
 void CreateDecorationShop2Menu(u16 *);

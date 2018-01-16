@@ -50,7 +50,7 @@ extern void pal_fill_black(void);
 extern bool8 sub_807D770(void);
 extern u8 sub_80F931C();
 extern void sub_808A3F8(u8);
-extern void Shop_InitExitSellMenu(void);
+extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
 extern void sub_802E424(u8);
@@ -1901,7 +1901,7 @@ static void sub_80A50C8(u8 taskId)
     }
 }
 
-bool8 sub_80A52C4(u8 taskId, u16 b)
+bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
 {
     s16 *taskData = gTasks[taskId].data;
 
@@ -1948,7 +1948,7 @@ static bool8 sub_80A5350(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (sub_80A52C4(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
+    if (SellMenu_QuantityRoller(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
     {
         // if (sCurrentBagPocket == BAG_POCKET_BERRIES)  Can't get it to match this way
         if (sCurrentBagPocket + 1 == BAG_POCKET_BERRIES + 1)
@@ -2971,7 +2971,7 @@ void ItemMenu_LoadSellMenu(void)
 
 static void OnBagClose_Shop(u8 taskId)
 {
-    gFieldCallback = Shop_InitExitSellMenu;
+    gFieldCallback = Shop_FadeReturnToMartMenu;
     gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
     gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
     sub_80A5AE4(taskId);
