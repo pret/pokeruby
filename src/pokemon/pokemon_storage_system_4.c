@@ -1,8 +1,10 @@
 
 // Includes
 #include "global.h"
+#include "constants/moves.h"
 #include "constants/species.h"
 #include "palette.h"
+#include "string_util.h"
 #include "text.h"
 #include "menu.h"
 #include "pokemon_storage_system.h"
@@ -1601,4 +1603,121 @@ void diegohint1(u8 a0, u8 a1)
     sub_809C04C(&gPokemonStorageSystemPtr->unk_25b4, 0);
     gUnknown_020384E7 = a0;
     gUnknown_020384E8 = a1;
+}
+
+bool8 sub_809B62C(u8 boxId)
+{
+    s16 monIdx = GetIndexOfFirstEmptySpaceInBoxN(boxId);
+    if (monIdx == -1)
+        return FALSE;
+    if (gUnknown_020384E6)
+    {
+        diegohint2(boxId, monIdx);
+        sub_8099480();
+        gUnknown_020384E6 = 0;
+    }
+    else
+    {
+        sub_809B44C(14, gUnknown_020384E5);
+        diegohint2(boxId, monIdx);
+        sub_8099520(gUnknown_020384E5);
+    }
+    if (boxId == get_preferred_box())
+        sub_8098D20(monIdx);
+    StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 1);
+    return TRUE;
+}
+
+void sub_809B6BC(void)
+{
+    StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
+    sub_809BF74();
+}
+
+void sub_809B6DC(void)
+{
+    u8 mode;
+
+    if (gUnknown_020384E6)
+        mode = 2;
+    else if (gUnknown_020384E4 == 1)
+        mode = 0;
+    else
+        mode = 1;
+    sub_809981C(mode, gUnknown_020384E5);
+    StringCopy(gPokemonStorageSystemPtr->unk_26e4, gPokemonStorageSystemPtr->unk_11fa);
+}
+
+bool8 sub_809B734(void)
+{
+    if (!sub_80998D8())
+    {
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 0);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+void sub_809B760(void)
+{
+    sub_8099920();
+    if (gUnknown_020384E6)
+        gUnknown_020384E6 = 0;
+    else
+    {
+        u8 boxId;
+        if (gUnknown_020384E4 == 1)
+            boxId = 14;
+        else
+            boxId = get_preferred_box();
+        sub_809B548(boxId, gUnknown_020384E5);
+    }
+    sub_809BF74();
+}
+
+void sub_809B7AC(void)
+{
+    if (gUnknown_020384E6)
+        StartSpriteAnim(gPokemonStorageSystemPtr->unk_11c0, 3);
+}
+
+void sub_809B7D4(void)
+{
+    u16 knownMoves;
+    if (gUnknown_020384E6)
+    {
+        gPokemonStorageSystemPtr->unk_2618 = gPokemonStorageSystemPtr->unk_25b4;
+        gPokemonStorageSystemPtr->unk_2682 = -1;
+        gPokemonStorageSystemPtr->unk_2683 = -1;
+    }
+    else
+    {
+        if (gUnknown_020384E4 == 1)
+        {
+            gPokemonStorageSystemPtr->unk_2618 = gPlayerParty[gUnknown_020384E5];
+            gPokemonStorageSystemPtr->unk_2682 = 14;
+        }
+        else
+        {
+            ExpandBoxMon(gPokemonStorage.boxes[gPokemonStorage.currentBox] + gUnknown_020384E5, &gPokemonStorageSystemPtr->unk_2618);
+            gPokemonStorageSystemPtr->unk_2682 = gPokemonStorage.currentBox;
+        }
+        gPokemonStorageSystemPtr->unk_2683 = gUnknown_020384E5;
+    }
+    gPokemonStorageSystemPtr->unk_267e = 0;
+    gPokemonStorageSystemPtr->unk_267f = 0;
+    gPokemonStorageSystemPtr->unk_2686[0] = MOVE_SURF;
+    gPokemonStorageSystemPtr->unk_2686[1] = MOVE_DIVE;
+    gPokemonStorageSystemPtr->unk_2686[2] = NUM_MOVES;
+    knownMoves = GetMonData(&gPokemonStorageSystemPtr->unk_2618, MON_DATA_KNOWN_MOVES, gPokemonStorageSystemPtr->unk_2686);
+    gPokemonStorageSystemPtr->unk_267e = knownMoves & 1;
+    gPokemonStorageSystemPtr->unk_267f = (knownMoves >> 1) & 1;
+    if (gPokemonStorageSystemPtr->unk_267e || gPokemonStorageSystemPtr->unk_267f)
+        gPokemonStorageSystemPtr->unk_267d = 0;
+    else
+    {
+        gPokemonStorageSystemPtr->unk_267d = 1;
+        gPokemonStorageSystemPtr->unk_267c = 1;
+    }
+    gPokemonStorageSystemPtr->unk_2684 = 0;
 }
