@@ -532,7 +532,12 @@ SECTIONS {
         src/battle/battle_anim.o(.rodata);
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
-        data/data_8393054.o(.rodata);
+        data/unused_orb.o(.rodata); /* these files are clearly the rodata for latter part of rom_8077ABC, but the linker linked map_events before these objects for some reason. perhaps it was compiling and linking 2 folders at the same time? */
+        data/gray_sun.o(.rodata);
+        data/sparkle.o(.rodata);
+        data/unused_paw.o(.rodata);
+        data/unused_hit.o(.rodata);
+        data/unused_orb2.o(.rodata);
         src/engine/task.o(.rodata);
         src/battle/battle_anim_807B69C.o(.rodata);
         src/scene/title_screen.o(.rodata);
