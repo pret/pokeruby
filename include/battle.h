@@ -4,6 +4,30 @@
 #include "sprite.h"
 #include "constants/battle_constants.h"
 
+/*
+    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
+    Each bank has a value consisting of two bits.
+    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
+    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
+*/
+
+#define BATTLE_BANKS_COUNT  4
+
+#define IDENTITY_PLAYER_MON1        0
+#define IDENTITY_OPPONENT_MON1      1
+#define IDENTITY_PLAYER_MON2        2
+#define IDENTITY_OPPONENT_MON2      3
+
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
+
+#define BIT_SIDE        0x1
+#define BIT_MON         0x2
+
+#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
+#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+
 enum
 {
     BATTLE_TERRAIN_GRASS,
@@ -302,6 +326,18 @@ struct BattleStruct /* 0x2000000 */
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
+struct StatsArray
+{
+    u16 hp;
+    u16 atk;
+    u16 def;
+    u16 spd;
+    u16 spAtk;
+    u16 spDef;
+};
+
+#define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
+
 struct DisableStruct
 {
     /*0x00*/ u32 transformedMonPersonality;
@@ -504,6 +540,88 @@ extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
 
+#define GET_MOVE_TYPE(move, typeArg)                        \
+{                                                           \
+    if (gBattleStruct->dynamicMoveType)                     \
+        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
+    else                                                    \
+        typeArg = gBattleMoves[move].type;                  \
+}
+
+#define MOVE_EFFECT_SLEEP               0x1
+#define MOVE_EFFECT_POISON              0x2
+#define MOVE_EFFECT_BURN                0x3
+#define MOVE_EFFECT_FREEZE              0x4
+#define MOVE_EFFECT_PARALYSIS           0x5
+#define MOVE_EFFECT_TOXIC               0x6
+#define MOVE_EFFECT_CONFUSION           0x7
+#define MOVE_EFFECT_FLINCH              0x8
+#define MOVE_EFFECT_TRI_ATTACK          0x9
+#define MOVE_EFFECT_UPROAR              0xA
+#define MOVE_EFFECT_PAYDAY              0xB
+#define MOVE_EFFECT_CHARGING            0xC
+#define MOVE_EFFECT_WRAP                0xD
+#define MOVE_EFFECT_RECOIL_25           0xE
+#define MOVE_EFFECT_ATK_PLUS_1          0xF
+#define MOVE_EFFECT_DEF_PLUS_1          0x10
+#define MOVE_EFFECT_SPD_PLUS_1          0x11
+#define MOVE_EFFECT_SP_ATK_PLUS_1       0x12
+#define MOVE_EFFECT_SP_DEF_PLUS_1       0x13
+#define MOVE_EFFECT_ACC_PLUS_1          0x14
+#define MOVE_EFFECT_EVS_PLUS_1          0x15
+#define MOVE_EFFECT_ATK_MINUS_1         0x16
+#define MOVE_EFFECT_DEF_MINUS_1         0x17
+#define MOVE_EFFECT_SPD_MINUS_1         0x18
+#define MOVE_EFFECT_SP_ATK_MINUS_1      0x19
+#define MOVE_EFFECT_SP_DEF_MINUS_1      0x1A
+#define MOVE_EFFECT_ACC_MINUS_1         0x1B
+#define MOVE_EFFECT_EVS_MINUS_1         0x1C
+#define MOVE_EFFECT_RECHARGE            0x1D
+#define MOVE_EFFECT_RAGE                0x1E
+#define MOVE_EFFECT_STEAL_ITEM          0x1F
+#define MOVE_EFFECT_PREVENT_ESCAPE      0x20
+#define MOVE_EFFECT_NIGHTMARE           0x21
+#define MOVE_EFFECT_ALL_STATS_UP        0x22
+#define MOVE_EFFECT_RAPIDSPIN           0x23
+#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
+#define MOVE_EFFECT_ATK_DEF_DOWN        0x25
+#define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
+#define MOVE_EFFECT_ATK_PLUS_2          0x27
+#define MOVE_EFFECT_DEF_PLUS_2          0x28
+#define MOVE_EFFECT_SPD_PLUS_2          0x29
+#define MOVE_EFFECT_SP_ATK_PLUS_2       0x2A
+#define MOVE_EFFECT_SP_DEF_PLUS_2       0x2B
+#define MOVE_EFFECT_ACC_PLUS_2          0x2C
+#define MOVE_EFFECT_EVS_PLUS_2          0x2D
+#define MOVE_EFFECT_ATK_MINUS_2         0x2E
+#define MOVE_EFFECT_DEF_MINUS_2         0x2F
+#define MOVE_EFFECT_SPD_MINUS_2         0x30
+#define MOVE_EFFECT_SP_ATK_MINUS_2      0x31
+#define MOVE_EFFECT_SP_DEF_MINUS_2      0x32
+#define MOVE_EFFECT_ACC_MINUS_2         0x33
+#define MOVE_EFFECT_EVS_MINUS_2         0x34
+#define MOVE_EFFECT_THRASH              0x35
+#define MOVE_EFFECT_KNOCK_OFF           0x36
+#define MOVE_EFFECT_NOTHING_37          0x37
+#define MOVE_EFFECT_NOTHING_38          0x38
+#define MOVE_EFFECT_NOTHING_39          0x39
+#define MOVE_EFFECT_NOTHING_3A          0x3A
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
+#define MOVE_EFFECT_NOTHING_3C          0x3C
+#define MOVE_EFFECT_NOTHING_3D          0x3D
+#define MOVE_EFFECT_NOTHING_3E          0x3E
+#define MOVE_EFFECT_NOTHING_3F          0x3F
+#define MOVE_EFFECT_AFFECTS_USER        0x40
+#define MOVE_EFFECT_CERTAIN             0x80
+
+#define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
+#define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
+#define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
+
+#define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
+
+#define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
+
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.
 // Perhaps it was thought calling memset was much slower?
@@ -540,7 +658,7 @@ struct funcStack
 
 struct scriptsStack
 {
-    u8* ptr[8];
+    const u8 *ptr[8];
     u8 size;
 };
 
@@ -676,11 +794,11 @@ void nullsub_10(int);
 void load_gfxc_health_bar();
 u8 battle_load_something();
 void sub_8031F88(u8);
-void sub_80324F8(struct Pokemon *, u8);
+void HandleLowHpMusicChange(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
-void BattleMusicStop(void);
+void BattleStopLowHpSound(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

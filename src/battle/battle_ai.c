@@ -1422,8 +1422,8 @@ static void BattleAICmd_get_highest_possible_damage(void)
     s32 i;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1462,8 +1462,8 @@ static void BattleAICmd_if_damage_bonus(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
@@ -1669,8 +1669,8 @@ static void BattleAICmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1698,8 +1698,8 @@ static void BattleAICmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1907,7 +1907,7 @@ static void BattleAICmd_flee(void)
 
 static void BattleAICmd_if_random_100(void)
 {
-    u8 safariFleeRate = BATTLE_STRUCT->safariFleeRate * 5; // safari flee rate, from 0-20
+    u8 safariFleeRate = gBattleStruct->safariFleeRate * 5; // safari flee rate, from 0-20
 
     if ((u8)(Random() % 100) < safariFleeRate)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
