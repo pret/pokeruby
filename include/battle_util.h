@@ -11,7 +11,7 @@
 #define BS_GET_OPPONENT2                14
 
 void TryClearRageStatuses(void);
-void BattleScriptPush(u8* BS_ptr);
+void BattleScriptPush(const u8* BS_ptr);
 void PressurePPLoseOnUsingImprision(u8 bankAtk);
 void PressurePPLoseOnUsingPerishSong(u8 bankAtk);
 void sub_80155A4(u8);
@@ -22,7 +22,7 @@ void ResetSentPokesToOpponentValue(void);
 void sub_8015740(u8 bank);
 void sub_80157C4(u8 bank);
 bool8 HandleWishPerishSongOnTurnEnd(void);
-void BattleScriptExecute(u8* BS_ptr);
+void BattleScriptExecute(const u8* BS_ptr);
 void BattleScriptPushCursorAndCallback(u8* BS_ptr);
 u8 IsMonDisobedient(void);
 

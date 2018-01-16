@@ -412,7 +412,7 @@ void sub_81376B8(void)
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         WallyBufferExecCompleted();
     }
 }
@@ -429,7 +429,7 @@ void sub_81377B0(void)
     }
     else
     {
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         WallyBufferExecCompleted();
     }
 }
@@ -1066,7 +1066,7 @@ void sub_8138294(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
         break;
     }
-    sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 void WallyHandlecmd3(void)

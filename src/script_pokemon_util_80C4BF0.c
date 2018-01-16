@@ -238,8 +238,8 @@ void ShowContestWinner(void)
     if(gUnknown_0203856C)
     {
         sub_80AAF30();
-        BATTLE_STRUCT->unk15DDF = 1;
-        BATTLE_STRUCT->unk15DDE = sub_80B2C4C(254, 0);
+        gBattleStruct->unk15DDF = 1;
+        gBattleStruct->unk15DDE = sub_80B2C4C(254, 0);
         Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }

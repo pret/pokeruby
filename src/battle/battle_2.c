@@ -87,8 +87,8 @@ extern u8 gMultiHitCounter;
 extern u8 gActionForBanks[];
 extern u16 gUnknown_02024C2C[];
 extern u16 gLastUsedMove[];
-extern u16 gMoveHitWith[];
-extern u16 gUnknown_02024C44[];
+extern u16 gLastLandedMoves[];
+extern u16 gLastHitByType[];
 extern u16 gUnknown_02024C4C[];
 extern u16 gLockedMoves[];
 extern u8 gUnknown_02024C5C[];
@@ -301,8 +301,8 @@ void sub_800E9EC(void)
         if (species != SPECIES_EGG && hp == 0)
             r6 |= 3 << i * 2;
     }
-    BATTLE_STRUCT->unk2 = r6;
-    BATTLE_STRUCT->unk3 = r6 >> 8;
+    gBattleStruct->unk2 = r6;
+    gBattleStruct->unk3 = r6 >> 8;
 }
 
 void sub_800EAAC(void)
@@ -398,11 +398,11 @@ void sub_800EC9C(void)
         {
             if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
             {
-                BATTLE_STRUCT->unk0 = 1;
-                BATTLE_STRUCT->unk1 = 1;
+                gBattleStruct->unk0 = 1;
+                gBattleStruct->unk1 = 1;
                 sub_800E9EC();
                 sub_800EAAC();
-                SendBlock(bitmask_all_link_players_but_self(), BATTLE_STRUCT, 32);
+                SendBlock(bitmask_all_link_players_but_self(), gBattleStruct, 32);
                 gBattleCommunication[0] = 1;
             }
         }
@@ -458,7 +458,7 @@ void sub_800EC9C(void)
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
-            gTasks[taskId].data[3] = BATTLE_STRUCT->unk2 | (BATTLE_STRUCT->unk3 << 8);
+            gTasks[taskId].data[3] = gBattleStruct->unk2 | (gBattleStruct->unk3 << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyId][1];
             gBattleCommunication[0]++;
         }
@@ -641,8 +641,8 @@ void sub_800F298(void)
     case 0:
         if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
         {
-            BATTLE_STRUCT->unk0 = 1;
-            BATTLE_STRUCT->unk1 = 1;
+            gBattleStruct->unk0 = 1;
+            gBattleStruct->unk1 = 1;
             sub_800E9EC();
             sub_800EAAC();
             SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x20);
@@ -1579,8 +1579,8 @@ void sub_8010874(void)
         gDisableStructs[i].isFirstTurn= 2;
         gUnknown_02024C70[i] = 0;
         gLastUsedMove[i] = 0;
-        gMoveHitWith[i] = 0;
-        gUnknown_02024C44[i] = 0;
+        gLastLandedMoves[i] = 0;
+        gLastHitByType[i] = 0;
         gUnknown_02024C4C[i] = 0;
         gUnknown_02024C5C[i] = 0xFF;
         gLockedMoves[i] = 0;
@@ -1664,7 +1664,7 @@ void sub_8010874(void)
     }
 }
 
-void SwitchInClearStructs(void)
+void SwitchInClearSetData(void)
 {
     struct DisableStruct sp0 = gDisableStructs[gActiveBank];
     s32 i;
@@ -1732,8 +1732,8 @@ void SwitchInClearStructs(void)
 
     gDisableStructs[gActiveBank].isFirstTurn= 2;
     gLastUsedMove[gActiveBank] = 0;
-    gMoveHitWith[gActiveBank] = 0;
-    gUnknown_02024C44[gActiveBank] = 0;
+    gLastLandedMoves[gActiveBank] = 0;
+    gLastHitByType[gActiveBank] = 0;
     gUnknown_02024C4C[gActiveBank] = 0;
     gUnknown_02024C2C[gActiveBank] = 0;
     gUnknown_02024C5C[gActiveBank] = 0xFF;
@@ -1796,8 +1796,8 @@ void UndoEffectsAfterFainting(void)
 
     gDisableStructs[gActiveBank].isFirstTurn= 2;
     gLastUsedMove[gActiveBank] = 0;
-    gMoveHitWith[gActiveBank] = 0;
-    gUnknown_02024C44[gActiveBank] = 0;
+    gLastLandedMoves[gActiveBank] = 0;
+    gLastHitByType[gActiveBank] = 0;
     gUnknown_02024C4C[gActiveBank] = 0;
     gUnknown_02024C2C[gActiveBank] = 0;
     gUnknown_02024C5C[gActiveBank] = 0xFF;
@@ -4222,7 +4222,7 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
+    gBattleStruct->dynamicMoveType = 0;
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
@@ -4235,7 +4235,7 @@ static void RunTurnActionsFunctions(void)
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = 12;
 
-    BATTLE_STRUCT->unk16057 = gCurrentTurnActionNumber;
+    gBattleStruct->unk16057 = gCurrentTurnActionNumber;
     gUnknown_081FA640[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
@@ -4245,7 +4245,7 @@ static void RunTurnActionsFunctions(void)
     }
     else
     {
-        if (BATTLE_STRUCT->unk16057 != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
+        if (gBattleStruct->unk16057 != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another bank
         {
             gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
             gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
@@ -4270,7 +4270,7 @@ void HandleEndTurn_BattleWon(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        BattleMusicStop();
+        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
 
         switch (gTrainers[gTrainerBattleOpponent].trainerClass)
@@ -5378,8 +5378,8 @@ void HandleAction_ActionFinished(void)
     gBattleMoveDamage = 0;
     ewram16002 = 0;
     ewram160A1 = 0;
-    gMoveHitWith[gBankAttacker] = 0;
-    gUnknown_02024C44[gBankAttacker] = 0;
+    gLastLandedMoves[gBankAttacker] = 0;
+    gLastHitByType[gBankAttacker] = 0;
     eDynamicMoveType = 0;
     gDynamicBasePower = 0;
     ewram1600C = 0;

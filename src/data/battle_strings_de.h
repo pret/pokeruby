@@ -1218,7 +1218,7 @@ const u8 *const gBattleStringsTable[] =
 };
 
 // below are lists of battle string enums and NOT pointers to the strings.
-const u16 gMissStrings[] =
+const u16 gMissStringIds[] =
 {
     BATTLE_TEXT_AttackMissed,
     BATTLE_TEXT_ProtectedItself,
