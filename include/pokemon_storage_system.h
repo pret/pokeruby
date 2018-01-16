@@ -183,12 +183,12 @@ struct PokemonStorageSystemData {
     struct UnkPSSStruct_2002370 unk_2370;
     struct Pokemon unk_25b4;
     struct Pokemon unk_2618;
-    s8 unk_267c;
+    u8 unk_267c;
     u8 unk_267d;
     u8 unk_267e;
     u8 unk_267f;
-    u8 unk_2680;
-    u8 unk_2681;
+    s8 unk_2680;
+    s8 unk_2681;
     s8 unk_2682;
     s8 unk_2683;
     u16 unk_2684;

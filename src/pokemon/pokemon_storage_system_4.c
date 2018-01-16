@@ -1721,3 +1721,68 @@ void sub_809B7D4(void)
     }
     gPokemonStorageSystemPtr->unk_2684 = 0;
 }
+
+s8 sub_809B960(void)
+{
+    u16 i;
+    u16 knownMoves;
+
+    if (gPokemonStorageSystemPtr->unk_267d)
+        return gPokemonStorageSystemPtr->unk_267c;
+    switch (gPokemonStorageSystemPtr->unk_2684)
+    {
+        case 0:
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                if (gPokemonStorageSystemPtr->unk_2682 != 14 || gPokemonStorageSystemPtr->unk_2683 != i)
+                {
+                    knownMoves = GetMonData(gPlayerParty + i, MON_DATA_KNOWN_MOVES, gPokemonStorageSystemPtr->unk_2686);
+                    if (knownMoves & 1)
+                        gPokemonStorageSystemPtr->unk_267e = 0;
+                    if (knownMoves & 2)
+                        gPokemonStorageSystemPtr->unk_267f = 0;
+                }
+            }
+            if (gPokemonStorageSystemPtr->unk_267e == 0 && gPokemonStorageSystemPtr->unk_267f == 0)
+            {
+                gPokemonStorageSystemPtr->unk_267d = 1;
+                gPokemonStorageSystemPtr->unk_267c = 1;
+            }
+            else
+            {
+                gPokemonStorageSystemPtr->unk_2680 = 0;
+                gPokemonStorageSystemPtr->unk_2681 = 0;
+                gPokemonStorageSystemPtr->unk_2684++;
+            }
+            break;
+        case 1:
+            for (i = 0; i < 5; i++)
+            {
+                knownMoves = GetBoxMonData(gPokemonStorage.boxes[gPokemonStorageSystemPtr->unk_2680] + gPokemonStorageSystemPtr->unk_2681, MON_DATA_KNOWN_MOVES, gPokemonStorageSystemPtr->unk_2686);
+                if (knownMoves && (gPokemonStorageSystemPtr->unk_2682 != gPokemonStorageSystemPtr->unk_2680 || gPokemonStorageSystemPtr->unk_2683 != gPokemonStorageSystemPtr->unk_2681))
+                {
+                    if (knownMoves & 1)
+                        gPokemonStorageSystemPtr->unk_267e = 0;
+                    if (knownMoves & 2)
+                        gPokemonStorageSystemPtr->unk_267f = 0;
+                }
+                if (++gPokemonStorageSystemPtr->unk_2681 >= 30)
+                {
+                    gPokemonStorageSystemPtr->unk_2681 = 0;
+                    if (++gPokemonStorageSystemPtr->unk_2680 >= 14)
+                    {
+                        gPokemonStorageSystemPtr->unk_267d = 1;
+                        gPokemonStorageSystemPtr->unk_267c = 0;
+                        break;
+                    }
+                }
+            }
+            if (gPokemonStorageSystemPtr->unk_267e == 0 && gPokemonStorageSystemPtr->unk_267f == 0)
+            {
+                gPokemonStorageSystemPtr->unk_267d = 1;
+                gPokemonStorageSystemPtr->unk_267c = 1;
+            }
+            break;
+    }
+    return -1;
+}
