@@ -552,6 +552,7 @@ const struct WindowTemplate gWindowTemplate_81E6C74 =
     30, // width
     20, // height
     OBJ_VRAM0, // tile data
+    // OBJ_VRAM0_TEMP, // tile data
     NULL, // tilemap
 };
 
@@ -1686,6 +1687,7 @@ const struct WindowTemplate gWindowTemplate_81E725C =
     30, // width
     20, // height
     OBJ_VRAM0, // tile data
+    // OBJ_VRAM0_TEMP, // tile data
     NULL, // tilemap
 };
 

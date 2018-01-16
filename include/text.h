@@ -91,7 +91,7 @@ struct WindowTemplate
     u8 tilemapTop;
     u8 width;
     u8 height;
-    u8 *tileData;
+    u8 *tileData; // to TileData4bpp *?
     u16 *tilemap;
     u32 maybeUnused;
 };

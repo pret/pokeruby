@@ -92,12 +92,6 @@ const struct SpritePalette gUnknown_0820A4D4[] =
     { gUnknown_08D1214C, 0xD704 },
 };
 
-// const struct CompressedSpriteSheet gUnknown_0820A784[] =
-// {
-//     { Tiles_D129AC, 0x80, 0xd714 },
-//     { Tiles_D129AC, 0x80, 0xd715 },
-// };
-
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
 extern void sub_804777C();

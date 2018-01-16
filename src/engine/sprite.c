@@ -29,7 +29,7 @@
 struct SpriteCopyRequest
 {
     const u8 *src;
-    u8 *dest;
+    u8 *dest; // to TileData4bpp *?
     u16 size;
 };
 
@@ -818,7 +818,8 @@ static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct Spr
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
         gSpriteCopyRequests[gSpriteCopyRequestCount].src = images[index].data;
-        gSpriteCopyRequests[gSpriteCopyRequestCount].dest = OBJ_VRAM0 + TILE_SIZE_4BPP * tileNum;
+        // gSpriteCopyRequests[gSpriteCopyRequestCount].dest = OBJ_VRAM0 + TILE_SIZE_4BPP * tileNum;
+        gSpriteCopyRequests[gSpriteCopyRequestCount].dest = OBJ_VRAM0_TEMP[tileNum];
         gSpriteCopyRequests[gSpriteCopyRequestCount].size = images[index].size;
         gSpriteCopyRequestCount++;
     }
@@ -1465,7 +1466,8 @@ u16 LoadSpriteSheet(const struct SpriteSheet *sheet)
     else
     {
         AllocSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
-        CpuCopy16(sheet->data, OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
+        // CpuCopy16(sheet->data, OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
+        CpuCopy16(sheet->data, &OBJ_VRAM0_TEMP[tileStart], sheet->size);
         return (u16)tileStart;
     }
 }
@@ -1503,7 +1505,8 @@ void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet)
 {
     const u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
-    CpuCopy16(data, OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
+    // CpuCopy16(data, OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
+    CpuCopy16(data, OBJ_VRAM0_TEMP[tileStart], sheet->size);
 }
 
 void LoadTilesForSpriteSheets(struct SpriteSheet *sheets)
@@ -1589,7 +1592,8 @@ void RequestSpriteSheetCopy(const struct SpriteSheet *sheet)
 {
     const u8 *data = sheet->data;
     u16 tileStart = GetSpriteTileStartByTag(sheet->tag);
-    RequestSpriteCopy(data, OBJ_VRAM0 + tileStart * TILE_SIZE_4BPP, sheet->size);
+    // RequestSpriteCopy(data, OBJ_VRAM0 + tileStart * TILE_SIZE_4BPP, sheet->size);
+    RequestSpriteCopy(data, OBJ_VRAM0_TEMP[tileStart], sheet->size);
 }
 
 u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet)
