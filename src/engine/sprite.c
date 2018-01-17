@@ -815,7 +815,7 @@ void ProcessSpriteCopyRequests(void)
     }
 }
 
-static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
+/*static*/ void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
@@ -824,7 +824,7 @@ static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct Spr
         gSpriteCopyRequests[gSpriteCopyRequestCount].size = images[index].size;
         gSpriteCopyRequestCount++;
     }
-#ifdef DEBUG
+#if DEBUG
     else
     {
         unref_sub_80AB084(sDmaOverErrorMsg);

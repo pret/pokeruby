@@ -100,6 +100,7 @@ SECTIONS {
         src/engine/reset_rtc_screen.o(.text);
         src/field/party_menu.o(.text);
         src/field/start_menu.o(.text);
+        src/debug/start_menu_debug.o(.text);
         src/engine/menu.o(.text);
         src/engine/tileset_anim.o(.text);
         src/engine/palette.o(.text);
@@ -354,6 +355,7 @@ SECTIONS {
         src/unused_8124F94.o(.text);
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
+        src/debug/unk_debug_menu_3.o(.text);
         src/field/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/unused_81258BC.o(.text);
@@ -522,6 +524,7 @@ SECTIONS {
         src/engine/reset_rtc_screen.o(.rodata);
         src/field/party_menu.o(.rodata);
         src/field/start_menu.o(.rodata);
+        data/start_menu_debug.o(.rodata);
         src/engine/menu.o(.rodata);
         src/engine/tileset_anim.o(.rodata);
         src/engine/palette.o(.rodata);
@@ -575,6 +578,7 @@ SECTIONS {
         src/field/fldeff_decoration.o(.rodata);
         src/field/fldeff_recordmixing.o(.rodata);
         src/field/field_special_scene.o(.rodata);
+        src/battle/battle_records.o(.rodata);
         src/field/rotating_gate.o(.rodata);
         src/field/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
@@ -632,6 +636,7 @@ SECTIONS {
         src/field/diploma.o(.rodata);
         src/strings.o(.rodata);
         src/field/berry_tag_screen.o(.rodata);
+        data/debug_mystery_event_menu.o(.rodata);
         src/engine/save_failed_screen.o(.rodata);
         src/pokemon/pokeblock_feed.o(.rodata);
         src/scene/intro_credits_graphics.o(.rodata);
@@ -641,6 +646,7 @@ SECTIONS {
         data/strings2.o(.rodata);
         src/engine/menu_cursor.o(.rodata);
         src/engine/mystery_event_msg.o(.rodata);
+        data/debug_menu_3.o(.rodata);
         src/libs/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
