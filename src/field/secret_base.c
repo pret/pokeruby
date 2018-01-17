@@ -51,7 +51,7 @@ static void Task_SecretBasePC_Registry(u8 taskId);
 
 extern u8 gUnknown_0815F399[];
 extern u8 gUnknown_0815F49A[];
-extern u8 gUnknown_020387DC;
+EWRAM_DATA u8 gUnknown_020387DC = 0;
 
 const struct
 {

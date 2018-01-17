@@ -101,7 +101,14 @@ static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
 static void sub_806BBEC(u8 a);
 
-const u16 TMHMMoves[] = {
+EWRAM_DATA u8 gUnknown_0202E8F4 = 0;
+EWRAM_DATA u8 gUnknown_0202E8F5 = 0;
+EWRAM_DATA u8 gUnknown_0202E8F6 = 0;
+EWRAM_DATA u16 gUnknown_0202E8F8 = 0;
+EWRAM_DATA u8 gPartyMenuType = 0;
+
+const u16 TMHMMoves[] =
+{
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,
     MOVE_WATER_PULSE,
@@ -458,10 +465,6 @@ struct Unk201FE00
 
 extern u16 gBattleTypeFlags;
 extern u8 gTileBuffer[];
-extern u8 gUnknown_0202E8F4;
-extern u8 gUnknown_0202E8F6;
-extern u16 gUnknown_0202E8F8;
-extern u8 gPartyMenuType;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;

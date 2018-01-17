@@ -158,7 +158,6 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gStringBank;
 extern u8 gEffectBank;
-extern u8 gAbilitiesPerBank[4];
 extern u8 gBattleTextBuff1[];
 extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
@@ -174,6 +173,8 @@ extern u8 gStringVar3[];
 extern u16 gBattlePartyID[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gBattleBufferA[4][0x200];
+
+EWRAM_DATA u8 gAbilitiesPerBank[4] = {0};
 
 extern const u8* const gUnknown_08401674[]; // table of pointers to 'a -TYPE' strings
 extern const u8* const gUnknown_08400F58[]; // table of pointers to stat strings
