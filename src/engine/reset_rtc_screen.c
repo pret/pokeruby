@@ -789,7 +789,7 @@ void debug_sub_806F9E4()
 	mov	r1, #0x9\n\
 	mov	r2, #0x1d\n\
 	mov	r3, #0x13\n\
-	bl	MenuDrawTextWindow\n\
+	bl	Menu_DrawStdWindowFrame\n\
 	add	r4, r6, #0\n\
 	add	r4, r4, #0x50\n\
 	bl	RtcGetErrorStatus\n\
@@ -803,23 +803,23 @@ void debug_sub_806F9E4()
 	add	r0, r4, #0\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0xa\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	ldr	r0, ._158\n\
 	mov	r1, #0xc\n\
 	mov	r2, #0xc\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	ldr	r0, ._158 + 4\n\
 	mov	r1, #0x14\n\
 	mov	r2, #0xc\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	ldr	r0, ._158 + 8\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0xe\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	ldr	r0, ._158 + 12\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0x10\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 ._151:\n\
 	ldrh	r0, [r5]\n\
 	add	r0, r0, #0x1\n\
@@ -868,19 +868,19 @@ void debug_sub_806F9E4()
 	add	r0, r6, #0\n\
 	mov	r1, #0x14\n\
 	mov	r2, #0xe\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	mov	r0, r9\n\
 	mov	r1, #0xc\n\
 	mov	r2, #0xe\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	mov	r0, sl\n\
 	mov	r1, #0x14\n\
 	mov	r2, #0x10\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	mov	r0, r8\n\
 	mov	r1, #0xc\n\
 	mov	r2, #0x10\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 ._160:\n\
 	ldrh	r1, [r5, #0x2]\n\
 	mov	r2, #0x2\n\

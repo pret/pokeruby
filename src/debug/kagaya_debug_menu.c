@@ -319,7 +319,7 @@ void debug_sub_80B0770()
         "	.align	2, 0\n"
         "._30:\n"
         "	.word	gPlayerAvatar\n"
-        "	.word	gUnknown_0202FF84\n"
+        "	.word	gFieldEffectArguments\n"
         "._27:\n"
         "	bl	CloseMenu\n"
         "._29:\n"
@@ -382,7 +382,7 @@ void debug_sub_80B07DC()
         "._37:\n"
         "	.align	2, 0\n"
         "._36:\n"
-        "	.word	sub_80FC074+1\n"
+        "	.word	CB2_InitFlyRegionMap+1\n"
         "\n"
     );
 }
@@ -412,7 +412,7 @@ void debug_sub_80B0800()
         "._40:\n"
         "	.align	2, 0\n"
         "._39:\n"
-        "	.word	gUnknown_0202FF84\n"
+        "	.word	gFieldEffectArguments\n"
         "\n"
     );
 }

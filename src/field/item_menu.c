@@ -483,7 +483,7 @@ static bool8 SetupBagMultistep(void)
 	bl	ResetSpriteData\n\
 	b	._61\n\
 ._14:\n\
-	bl	sub_80A3520\n\
+	bl	LoadBagGraphicsMultistep\n\
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._37	@cond_branch\n\
@@ -500,12 +500,12 @@ static bool8 SetupBagMultistep(void)
 	.word	0x43c\n\
 ._15:\n\
 	ldr	r0, ._43\n\
-	bl	SetUpWindowConfig\n\
+	bl	Text_LoadWindowTemplate\n\
 	b	._61\n\
 ._44:\n\
 	.align	2, 0\n\
 ._43:\n\
-	.word	gWindowConfig_81E6DFC\n\
+	.word	gWindowTemplate_81E6DFC\n\
 ._16:\n\
 	ldr	r0, ._46\n\
 	bl	MultistepInitMenuWindowBegin\n\
@@ -516,7 +516,7 @@ static bool8 SetupBagMultistep(void)
 ._47:\n\
 	.align	2, 0\n\
 ._46:\n\
-	.word	gWindowConfig_81E6DFC\n\
+	.word	gWindowTemplate_81E6DFC\n\
 	.word	gMain\n\
 	.word	0x43c\n\
 ._17:\n\
@@ -578,7 +578,7 @@ static bool8 SetupBagMultistep(void)
 ._54:\n\
 	.align	2, 0\n\
 ._53:\n\
-	.word	gUnknown_03000701\n\
+	.word	sReturnLocation\n\
 	.word	gMain\n\
 	.word	0x43c\n\
 ._19:\n\
@@ -595,15 +595,15 @@ static bool8 SetupBagMultistep(void)
 	bl	sub_80A39B8\n\
 	ldrb	r1, [r5]\n\
 	add	r0, r4, #0\n\
-	bl	sub_80A3AC0\n\
-	bl	sub_80A3D08\n\
+	bl	DrawPocketIndicatorDots\n\
+	bl	UpdateAllBagPockets\n\
 	ldr	r4, ._56 + 12\n\
 	ldr	r0, [r4, #0x10]\n\
 	ldr	r1, [r4, #0x14]\n\
-	bl	sub_80A3C34\n\
+	bl	SortItemSlots\n\
 	ldr	r0, [r4, #0x18]\n\
 	ldr	r1, [r4, #0x1c]\n\
-	bl	sub_80A3C34\n\
+	bl	SortItemSlots\n\
 	bl	sub_80A3D40\n\
 	ldr	r1, ._56 + 16\n\
 	mov	r0, #0x0\n\
@@ -619,9 +619,9 @@ static bool8 SetupBagMultistep(void)
 ._56:\n\
 	.word	gUnknown_0203855A\n\
 	.word	gBGTilemapBuffers+0x1000\n\
-	.word	gUnknown_02038559\n\
+	.word	sCurrentBagPocket\n\
 	.word	gBagPockets\n\
-	.word	gUnknown_03005D24\n\
+	.word	gCurrentBagPocketItemSlots\n\
 ._20:\n\
 	ldr	r0, ._59\n\
 	mov	r1, #0x0\n\
@@ -659,9 +659,9 @@ static bool8 SetupBagMultistep(void)
 	.align	2, 0\n\
 ._59:\n\
 	.word	0xffff\n\
-	.word	gUnknown_03005D10\n\
-	.word	gUnknown_02038559\n\
-	.word	gUnknown_03005D24\n\
+	.word	gBagPocketScrollStates\n\
+	.word	sCurrentBagPocket\n\
+	.word	gCurrentBagPocketItemSlots\n\
 	.word	gUnknown_0203855B\n\
 	.word	gUnknown_0203855C\n\
 	.word	gMain\n\

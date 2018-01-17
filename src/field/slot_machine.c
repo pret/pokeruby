@@ -64,7 +64,7 @@ static bool8 sub_8102008(struct Task *task);
 static bool8 sub_8102034(struct Task *task);
 static bool8 sub_8102058(struct Task *task);
 static bool8 sub_8102090(struct Task *task);
-static bool8 sub_81020C8(struct Task *task);
+bool8 sub_81020C8(struct Task *task);
 static bool8 sub_81021E0(struct Task *task);
 static bool8 sub_81021FC(struct Task *task);
 static bool8 sub_8102264(struct Task *task);
@@ -244,7 +244,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 	ldr	r3, ._1\n\
 	mov	r2, #0x0\n\
 	strb	r2, [r3]\n\
-	bl	sub_81019B0\n\
+	bl	PlaySlotMachine_Internal\n\
 	ldr	r0, ._1 + 4\n\
 	bl	SetMainCallback2\n\
 	pop	{r0}\n\
@@ -253,7 +253,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 	.align	2, 0\n\
 ._1:\n\
 	.word	unk_debug_bss_1+0x1\n\
-	.word	sub_81018B8+1");
+	.word	CB2_SlotMachineSetup+1");
 }
 #else
 void PlaySlotMachine(u8 arg0, MainCallback cb)
@@ -274,7 +274,7 @@ void debug_sub_811609C()
 	ldr	r3, ._3\n\
 	mov	r2, #0x1\n\
 	strb	r2, [r3]\n\
-	bl	sub_81019B0\n\
+	bl	PlaySlotMachine_Internal\n\
 	ldr	r0, ._3 + 4\n\
 	bl	SetMainCallback2\n\
 	pop	{r0}\n\
@@ -283,7 +283,7 @@ void debug_sub_811609C()
 	.align	2, 0\n\
 ._3:\n\
 	.word	unk_debug_bss_1+0x1\n\
-	.word	sub_81018B8+1");
+	.word	CB2_SlotMachineSetup+1");
 }
 #endif
 
@@ -1412,7 +1412,7 @@ static bool8 sub_8102090(struct Task *task)
 
 #if DEBUG
 __attribute__((naked))
-static bool8 sub_81020C8(struct Task *task)
+bool8 sub_81020C8(struct Task *task)
 {
     asm("\
 	push	{r4, lr}\n\
@@ -1421,7 +1421,7 @@ static bool8 sub_81020C8(struct Task *task)
 	mov	r0, #0xc0\n\
 	and	r0, r0, r1\n\
 	strb	r0, [r4, #0x4]\n\
-	bl	sub_81027A0\n\
+	bl	CheckMatch\n\
 	ldrb	r0, [r4, #0xa]\n\
 	cmp	r0, #0\n\
 	beq	._163	@cond_branch\n\
@@ -1570,7 +1570,7 @@ static bool8 sub_81020C8(struct Task *task)
 	.word	0x270f");
 }
 #else
-static bool8 sub_81020C8(struct Task *task)
+bool8 sub_81020C8(struct Task *task)
 {
     eSlotMachine->unk04 &= 0xc0;
     CheckMatch();

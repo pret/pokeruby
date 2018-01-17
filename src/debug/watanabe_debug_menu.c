@@ -142,8 +142,8 @@ void debug_80C35DC()
         "	.word	0x81000800\n"
         "	.word	stru_83F8828\n"
         "	.word	stru_83F8838\n"
-        "	.word	gWindowConfig_81E6C3C\n"
-        "	.word	gWindowConfig_81E6CE4\n"
+        "	.word	gWindowTemplate_81E6C3C\n"
+        "	.word	gWindowTemplate_81E6CE4\n"
         "\n"
     );
 }

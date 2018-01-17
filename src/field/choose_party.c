@@ -601,7 +601,7 @@ void debug_sub_81381B4()
         "	add	r2, r4, #0\n"
         "	bl	GetMonData\n"
         "	add	r0, r4, #0\n"
-        "	bl	StripExtCtrlCodes\n"
+        "	bl	Text_StripExtCtrlCodes\n"
         "	add	r0, r5, #0\n"
         "	mov	r1, #0x3\n"
         "	bl	GetMonData\n"

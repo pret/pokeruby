@@ -1256,7 +1256,7 @@ u8 debug_sub_8085564(void)
 	mov	r1, #0x1\n\
 	mov	r2, #0x1c\n\
 	mov	r3, #0x2\n\
-	bl	MenuFillWindowRectWithBlankTile\n\
+	bl	Menu_BlankWindowRect\n\
 	ldr	r1, ._380\n\
 	ldr	r0, ._380 + 4\n\
 	ldrb	r0, [r0]\n\
@@ -1265,7 +1265,7 @@ u8 debug_sub_8085564(void)
 	ldr	r0, [r0]\n\
 	mov	r1, #0x17\n\
 	mov	r2, #0x1\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 ._377:\n\
 	ldr	r0, ._380 + 8\n\
 	ldrh	r1, [r0, #0x2e]\n\
@@ -1313,7 +1313,7 @@ u8 debug_sub_808560C(void)
 	mov	r1, #0x1\n\
 	mov	r2, #0x1c\n\
 	mov	r3, #0x2\n\
-	bl	MenuFillWindowRectWithBlankTile\n\
+	bl	Menu_BlankWindowRect\n\
 	ldr	r1, ._384 + 8\n\
 	ldrb	r0, [r4]\n\
 	lsl	r0, r0, #0x2\n\
@@ -1321,7 +1321,7 @@ u8 debug_sub_808560C(void)
 	ldr	r0, [r0]\n\
 	mov	r1, #0x17\n\
 	mov	r2, #0x1\n\
-	bl	MenuPrint\n\
+	bl	Menu_PrintText\n\
 	ldr	r1, ._384 + 12\n\
 	ldr	r0, ._384 + 16\n\
 	str	r0, [r1]\n\
@@ -1333,7 +1333,7 @@ u8 debug_sub_808560C(void)
 	.align	2, 0\n\
 ._384:\n\
 	.word	gUnknown_0202FF58+0x2\n\
-	.word	gUnknown_0202F7E8\n\
+	.word	gWeather\n\
 	.word	gDebugText_Weather\n\
 	.word	gCallback_03004AE8\n\
 	.word	debug_sub_8085564+1");

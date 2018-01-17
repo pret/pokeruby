@@ -731,7 +731,7 @@ void sub_813B79C()
         "	.align	2, 0\n"
         "._163:\n"
         "	.word	+0x2000000\n"
-        "	.word	gSaveSectionLocations\n"
+        "	.word	sSaveBlockChunks\n"
         "	.word	0xff4\n"
         "	.word	0xff6\n"
         "	.word	gHallOfFameSaveSectionLocations\n"
@@ -892,7 +892,7 @@ u8 Save_LoadGameData(u8 saveType)
     return result;
 }
 
-static const u8 sUnusedFlashSectors[] = { 30, 31 };
+const u8 sUnusedFlashSectors[] = { 30, 31 };
 
 bool8 unref_sub_8125F4C(struct UnkSaveSection *a1)
 {

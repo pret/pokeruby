@@ -46,12 +46,12 @@ debug_sub_8110CCC:
 	mov	r1, #0xe
 	mov	r2, #0x1d
 	mov	r3, #0x13
-	bl	MenuDrawTextWindow
+	bl	Menu_DrawStdWindowFrame
 	add	r0, r6, #0
 	add	r0, r0, #0x8
 	mov	r1, #0x11
 	mov	r2, #0xf
-	bl	MenuPrint
+	bl	Menu_PrintText
 	ldrb	r0, [r6, #0x1f]
 	ldr	r1, [r4]
 	lsl	r0, r0, #0x2
@@ -62,7 +62,7 @@ debug_sub_8110CCC:
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
 	mov	r2, #0x11
-	bl	MenuPrint
+	bl	Menu_PrintText
 	b	._4
 ._6:
 	.align	2, 0
@@ -82,16 +82,16 @@ debug_sub_8110CCC:
 	mov	r1, #0x10
 	mov	r2, #0x1d
 	mov	r3, #0x13
-	bl	MenuDrawTextWindow
+	bl	Menu_DrawStdWindowFrame
 	ldr	r0, ._9
 	mov	r1, #0x11
 	mov	r2, #0x11
-	bl	MenuPrint
+	bl	Menu_PrintText
 	mov	r0, #0x10
 	mov	r1, #0xe
 	mov	r2, #0x1d
 	mov	r3, #0xf
-	bl	MenuZeroFillWindowRect
+	bl	Menu_EraseWindowRect
 ._8:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
@@ -264,7 +264,7 @@ debug_sub_8110D84:
 	bne	._65	@cond_branch
 	mov	r0, #0x0
 	mov	r1, #0x0
-	bl	sub_80FBB3C
+	bl	CreateRegionMapCursor
 	ldr	r1, ._58
 	ldrh	r0, [r1, #0x4]
 	add	r0, r0, #0x1
@@ -304,7 +304,7 @@ debug_sub_8110D84:
 	bne	._65	@cond_branch
 	mov	r0, #0x0
 	mov	r1, #0x0
-	bl	sub_80FBB3C
+	bl	CreateRegionMapCursor
 	ldr	r1, ._66
 	mov	r0, #0x3
 ._62:
@@ -325,7 +325,7 @@ debug_sub_8110D84:
 debug_sub_8110F28:
 .syntax divided
 	push	{lr}
-	bl	sub_80FC074
+	bl	CB2_InitFlyRegionMap
 	ldr	r0, ._69
 	ldr	r1, [r0, #0x4]
 	ldr	r0, ._69 + 4
@@ -342,7 +342,7 @@ debug_sub_8110F28:
 	.align	2, 0
 ._69:
 	.word	gMain
-	.word	sub_80FC228+1
+	.word	CB2_FlyRegionMap+1
 	.word	debug_sub_8110D84+1
 .syntax unified
 	thumb_func_end debug_sub_8110F28

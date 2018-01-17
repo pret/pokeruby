@@ -255,7 +255,7 @@ void debug_sub_8075C40()
         "	.word	0x4000108\n"
         "	.word	0xc34f\n"
         "	.word	0x40000b0\n"
-        "	.word	gUnknown_03004DE0\n"
+        "	.word	gScanlineEffectRegBuffers\n"
         "	.word	0xc5ff\n"
         "	.word	0x7fff\n"
         "	.word	0x4000040\n"

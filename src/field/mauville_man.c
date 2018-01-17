@@ -293,7 +293,7 @@ void debug_sub_810B32C()
         "	lsr	r2, r0, #0x18\n"
         "	cmp	r2, #0x7\n"
         "	bls	._31	@cond_branch\n"
-        "	bl	sub_80F7A6C\n"
+        "	bl	SetupHipster\n"
         "	mov	r2, #0x0\n"
         "	ldr	r3, ._34\n"
         "._32:\n"
@@ -313,13 +313,13 @@ void debug_sub_810B32C()
         "._34:\n"
         "	.word	gSaveBlock1+0x2d8c\n"
         "._27:\n"
-        "	bl	sub_80F7A98\n"
+        "	bl	SetupTrader\n"
         "	b	._37\n"
         "._28:\n"
-        "	bl	sub_80F7A7C\n"
+        "	bl	SetupStoryteller\n"
         "	b	._37\n"
         "._29:\n"
-        "	bl	sub_80F7A88\n"
+        "	bl	SetupGiddy\n"
         "._37:\n"
         "	bl	sub_80F83D0\n"
         "	add	sp, sp, #0x8\n"
@@ -1313,7 +1313,7 @@ static void PrintStoryList(void)
     Menu_PrintText(gPCText_Cancel, 1, 2 + i * 2);
 }
 
-static u8 gUnknown_03000748;
+u8 gUnknown_03000748;
 
 static void Task_StoryListMenu(u8 taskId)
 {
