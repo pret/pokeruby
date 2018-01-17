@@ -4121,27 +4121,100 @@ bool8 CompletedHoennPokedex(void)
     return TRUE;
 }
 
-u16 sub_8090FF4(void)
+bool16 CompletedNationalPokedex(void)
 {
     u16 i;
 
+    // BUG: This function indexes pokemon checks by 0, but adds
+    // 1 before passing to GetSetPokedexFlag. Normally, this is
+    // fine, because GetSetPokedexFlag subtracts by 1 to get the
+    // array index value, but since the array is 0 indexed
+    // starting with Bulbasaur, values passed actually means that
+    // dex entries 152 (Chikorita) and 252 (Treecko) are skipped.
+    // Because an earlier Hoenn Dex check prevented Treecko from
+    // being skippable, it means that Chikorita is not required
+    // to obtain the National Diploma. This was fixed in Emerald.
     for (i = 0; i < 150; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
     for (i = 152; i < 250; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
     for (i = 252; i < 384; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
-    return 1;
+    return TRUE;
 }
+
+/*
+CompletedNationalPokedex:
+	push	{r4, r5, lr}
+	mov	r0, #0x0
+.L1236:
+	add	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	lsr	r4, r0, #0x10
+	add	r0, r4, #0
+	mov	r1, #0x1
+	bl	GetSetPokedexFlag
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	.L1252	@cond_branch
+	add	r0, r4, #0
+	cmp	r0, #0x95
+	bls	.L1236	@cond_branch
+	mov	r0, #0x98
+.L1242:
+	add	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	lsr	r4, r0, #0x10
+	add	r0, r4, #0
+	mov	r1, #0x1
+	bl	GetSetPokedexFlag
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	.L1252	@cond_branch
+	add	r0, r4, #0
+	cmp	r0, #0xf9
+	bls	.L1242	@cond_branch
+	mov	r0, #0xfc
+	ldr	r5, .L1253
+.L1248:
+	add	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	lsr	r4, r0, #0x10
+	add	r0, r4, #0
+	mov	r1, #0x1
+	bl	GetSetPokedexFlag
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	.L1247	@cond_branch
+.L1252:
+	mov	r0, #0x0
+	b	.L1251
+.L1254:
+	.align	2, 0
+.L1253:
+	.word	0x17f
+.L1247:
+	add	r0, r4, #0
+	cmp	r0, r5
+	bls	.L1248	@cond_branch
+	mov	r0, #0x1
+.L1251:
+	pop	{r4, r5}
+	pop	{r1}
+	bx	r1
+.Lfe84:
+	.size	 CompletedNationalPokedex,.Lfe84-CompletedNationalPokedex
+	.align	2, 0
+*/
 
 static void sub_8091060(u16 a)
 {

@@ -100,6 +100,8 @@ void GetMoneyAmountText(u8 *buffer, u32 amount, u8 arg2)
         width = 7;
     else if (amount > 99999)
         width = 6;
+    // A special sprite is used for 10000 in the decoration
+    // shop, so be sure to account for this.
     else if (amount > 10000)
         width = 5;
     else if (amount > 999)

@@ -40,7 +40,7 @@
 extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_0300485C)(void);
-extern void (*gUnknown_03004AE4)(u8, u16, TaskFunc);
+extern void (*gPokemonItemUseCallback)(u8, u16, TaskFunc);
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
@@ -832,7 +832,7 @@ void sub_80C9D98(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gUnknown_03004AE4 = UseMedicine;
+    gPokemonItemUseCallback = UseMedicine;
     sub_80C9D98(taskId);
 }
 
@@ -850,26 +850,26 @@ void ItemUseOutOfBattle_SacredAsh(u8 taskId)
             break;
         }
     }
-    gUnknown_03004AE4 = sub_8070048;
+    gPokemonItemUseCallback = sub_8070048;
     gUnknown_02038561 = 4;
     ItemMenu_ConfirmNormalFade(taskId);
 }
 
 void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    gPokemonItemUseCallback = DoPPRecoveryItemEffect;
     sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_PPUp(u8 taskId)
 {
-    gUnknown_03004AE4 = DoPPUpItemEffect;
+    gPokemonItemUseCallback = DoPPUpItemEffect;
     sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
-    gUnknown_03004AE4 = DoRareCandyItemEffect;
+    gPokemonItemUseCallback = DoRareCandyItemEffect;
     sub_80C9D98(taskId);
 }
 
@@ -908,7 +908,7 @@ void sub_80C9F80(u8 var)
 
 void sub_80C9FC0(u8 var)
 {
-    gUnknown_03004AE4 = TeachMonTMMove;
+    gPokemonItemUseCallback = TeachMonTMMove;
     sub_80C9D98(var);
 }
 
@@ -1009,7 +1009,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 
 void ItemUseOutOfBattle_EvolutionStone(u8 var)
 {
-    gUnknown_03004AE4 = DoEvolutionStoneItemEffect;
+    gPokemonItemUseCallback = DoEvolutionStoneItemEffect;
     sub_80C9D98(var);
 }
 
@@ -1078,19 +1078,19 @@ void sub_80CA3C0(u8 taskId)
 
 void ItemUseInBattle_Medicine(u8 var)
 {
-    gUnknown_03004AE4 = UseMedicine;
+    gPokemonItemUseCallback = UseMedicine;
     sub_80CA3C0(var);
 }
 
 void unref_sub_80CA410(u8 var)
 {
-    gUnknown_03004AE4 = sub_8070048;
+    gPokemonItemUseCallback = sub_8070048;
     sub_80CA3C0(var);
 }
 
 void ItemUseInBattle_PPRecovery(u8 var)
 {
-    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    gPokemonItemUseCallback = DoPPRecoveryItemEffect;
     sub_80CA3C0(var);
 }
 
