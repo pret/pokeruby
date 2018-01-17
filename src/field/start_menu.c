@@ -345,7 +345,7 @@ static u8 StartMenu_PokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
-        IncrementGameStat(0x29);
+        IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
@@ -666,7 +666,7 @@ static u8 SaveDialogCB_DoSave(void)
 {
     u8 saveStatus;
 
-    IncrementGameStat(0);
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
     if (gDifferentSaveFile == TRUE)
     {
         saveStatus = Save_WriteData(SAVE_OVERWRITE_DIFFERENT_FILE);

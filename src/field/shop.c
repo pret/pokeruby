@@ -657,7 +657,7 @@ static void Shop_DoPremierBallCheck(u8 taskId)
 
 static void Shop_DoItemTransaction(u8 taskId)
 {
-    IncrementGameStat(0x26);
+    IncrementGameStat(GAME_STAT_SHOPPED);
     RemoveMoney(&gSaveBlock1.money, gMartTotalCost);
     PlaySE(SE_REGI);
     UpdateMoneyWindow(gSaveBlock1.money, 0, 0);

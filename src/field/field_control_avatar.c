@@ -181,7 +181,7 @@ int sub_8068024(struct FieldInput *input)
         return TRUE;
     if (input->input_field_0_6)
     {
-        IncrementGameStat(5);
+        IncrementGameStat(GAME_STAT_STEPS);
         if (sub_80687E4(&position, r4, r6) == 1)
             return TRUE;
     }

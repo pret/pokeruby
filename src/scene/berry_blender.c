@@ -2567,9 +2567,9 @@ static void sub_8050954(void)
         if (Blender_PrintBlendingResults())
         {
             if (gInGameOpponentsNo == 0)
-                IncrementGameStat(34);
+                IncrementGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS);
             else
-                IncrementGameStat(33);
+                IncrementGameStat(GAME_STAT_POKEBLOCKS);
             gBerryBlenderData->field_6F++;
         }
         break;

@@ -259,7 +259,7 @@ void ItemUseOnFieldCB_Rod(u8 taskId)
 
 void ItemUseOutOfBattle_Itemfinder(u8 var)
 {
-    IncrementGameStat(0x27);
+    IncrementGameStat(GAME_STAT_USED_ITEMFINDER);
     gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Itemfinder;
     SetUpItemUseOnFieldCallback(var);
 }

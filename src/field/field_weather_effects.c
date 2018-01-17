@@ -2380,5 +2380,5 @@ void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
      && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
-        IncrementGameStat(0x28);
+        IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
 }
