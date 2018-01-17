@@ -61,7 +61,7 @@ SECTIONS {
         src/pokemon/pokemon_1.o(.text);
         src/battle/calculate_base_damage.o(.text);
         src/pokemon/pokemon_2.o(.text);
-        asm/pokemon_item_effect.o(.text);
+        src/pokemon/pokemon_item_effect.o(.text);
         src/pokemon/pokemon_3.o(.text);
         src/de_rom_8040FE0.o(.text);
         src/engine/trig.o(.text);
@@ -355,7 +355,7 @@ SECTIONS {
         src/engine/save.o(.text);
         src/engine/mystery_event_script.o(.text);
         src/field/field_effect_helpers.o(.text);
-        asm/contest_ai.o(.text);
+        src/contest_ai.o(.text);
         src/unused_81258BC.o(.text);
         src/battle/anim/sfx.o(.text);
         src/battle/battle_controller_safari.o(.text);
@@ -526,7 +526,6 @@ SECTIONS {
         src/engine/tileset_anim.o(.rodata);
         src/engine/palette.o(.rodata);
         src/engine/sound.o(.rodata);
-        data/battle_anim.o(.rodata);
         src/battle/battle_anim.o(.rodata);
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
@@ -553,7 +552,7 @@ SECTIONS {
         src/pokemon/pokemon_summary_screen.o(.rodata);
         src/field/fldeff_cut.o(.rodata);
         src/field/item_menu.o(.rodata);
-        data/battle_anim_80A7E7C.o(.rodata);
+        src/battle/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
         src/debug/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
@@ -615,7 +614,7 @@ SECTIONS {
         src/scene/cable_car.o(.rodata);
         src/engine/save.o(.rodata);
         src/field/field_effect_helpers.o(.rodata);
-        data/contest_ai.o(.rodata);
+        src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
         src/pokemon/learn_move.o(.rodata);

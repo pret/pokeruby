@@ -213,12 +213,14 @@ static
 #endif
 void sub_804DB84(void);
 
-extern u8 gUnknown_020297D8[2];
-extern u8 *gUnknown_020296CC[13];
-extern struct TradeEwramSubstruct *gUnknown_03004824;
-extern struct MailStruct gUnknown_02029700[16];
+EWRAM_DATA u8 *gUnknown_020296CC[13] = {0};
+EWRAM_DATA struct MailStruct gUnknown_02029700[6] = {0};
+EWRAM_DATA u8 gUnknown_020297D8[2] = {0};
 
-const u32 unref_data_820ABD4[] = {
+extern struct TradeEwramSubstruct *gUnknown_03004824;
+
+const u32 unref_data_820ABD4[] =
+{
     0x00000890,
     0x00003AC0,
     0x0000001C,

@@ -10,10 +10,10 @@ enum
 // AI states
 enum
 {
-    AIState_SettingUp,
-    AIState_Processing,
-    AIState_FinishedProcessing,
-    AIState_DoNotProcess
+    BATTLEAI_SETTING_UP,
+    BATTLEAI_PROCESSING,
+    BATTLEAI_FINISHED,
+    BATTLEAI_DO_NOT_PROCESS
 };
 
 // battle_ai

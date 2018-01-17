@@ -31,17 +31,14 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
+#include "contest_ai.h"
 
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
-extern void sub_81288F4();
-extern u8 sub_8128944(void);
 
 extern struct MusicPlayerInfo gMPlay_SE1;
-extern u16 gSpecialVar_ContestCategory;
-extern u16 gSpecialVar_ContestRank;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -49,8 +46,6 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
-extern u8 gIsLinkContest;
-extern u8 gContestPlayerMonIndex;
 extern u16 gBattle_BG3_X;
 extern s16 gBattle_BG1_Y;
 extern u16 gBattle_BG3_Y;
@@ -66,14 +61,6 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
 extern u32 gUnknown_03005D28;  // saved RNG value
 
-extern s16 gUnknown_02038680[];
-extern u16 gUnknown_02038688[];
-extern u8 gUnknown_02038694;
-extern u8 gUnknown_02038696[];
-extern u8 gUnknown_0203869B;
-extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
-extern u8 gContestFinalStandings[];  // What "place" each participant came in.
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 
@@ -293,6 +280,20 @@ void sub_80B292C(void);
 void sub_80B2968(void);
 void SelectContestMoveBankTarget(u16);
 
+EWRAM_DATA u8 gUnknown_0203856C = 0;
+EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
+EWRAM_DATA s16 gUnknown_02038670[4] = {0};
+EWRAM_DATA s16 gUnknown_02038678[4] = {0};
+EWRAM_DATA s16 gUnknown_02038680[4] = {0};
+EWRAM_DATA u16 gUnknown_02038688[4] = {0};
+EWRAM_DATA u8 gContestFinalStandings[4] = {0};  // What "place" each participant came in.
+EWRAM_DATA u8 gUnknown_02038694 = 0;
+EWRAM_DATA u8 gContestPlayerMonIndex = 0;
+EWRAM_DATA u8 gUnknown_02038696[4] = {0};
+EWRAM_DATA u8 gIsLinkContest = 0;
+EWRAM_DATA u8 gUnknown_0203869B = 0;
+EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
+EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 
 void nullsub_89(u8 taskId)
 {
@@ -391,7 +392,7 @@ void ClearContestVars(void)
     }
 
     memset(&shared192D0, 0, sizeof(shared192D0));
-    memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
+    memset(eContestAI, 0, sizeof(struct ContestAIInfo));
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
     if (!(gIsLinkContest & 1))
@@ -2629,8 +2630,8 @@ u16 GetChosenMove(u8 a)
     {
         u8 moveChoice;
 
-        sub_81288F4(a);
-        moveChoice = sub_8128944();
+        ContestAI_ResetAI(a);
+        moveChoice = ContestAI_GetActionToUse();
         return gContestMons[a].moves[moveChoice];
     }
 }

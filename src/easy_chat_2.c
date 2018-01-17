@@ -70,6 +70,8 @@ static u16 sub_80EB960(void);
 u8 sub_80EB9C8(void);
 static u16 sub_80EB9D8(void);
 
+EWRAM_DATA u8 gUnknown_020388AC = 0;
+
 static u8 gUnknown_03000740;
 
 const u16 InterviewPalette_0[] = INCBIN_U16("graphics/misc/interview_pal0.gbapal");
