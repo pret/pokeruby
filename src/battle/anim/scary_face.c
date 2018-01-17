@@ -98,21 +98,7 @@ void sub_80D24E0(u8 taskId)
         break;
     case 3:
         sub_8078914(&subStruct);
-        {
-            u8 *addr = subStruct.field_0;
-            u32 size = 0x2000;
-            while (1)
-            {
-                DmaFill32(3, 0, addr, 0x1000);
-                addr += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaFill32(3, 0, addr, size);
-                    break;
-                }
-            }
-        }
+        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
         DmaClear32(3, subStruct.field_4, 0x800);
         if (!IsContest())
             REG_BG1CNT_BITFIELD.charBaseBlock = 0;

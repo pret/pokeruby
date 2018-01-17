@@ -38,7 +38,7 @@ extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 
-extern u8 (*gCallback_03004AE8)(void);
+extern u8 (*gMenuCallback)(void);
 
 extern bool8 gReceivedRemoteLinkPlayers;
 
@@ -251,7 +251,7 @@ u8 unref_sub_80A9B28(void)
     Menu_DrawStdWindowFrame(0, 0, 17, 18);
     Menu_PrintItems(1, 1, 7, gMatsudaDebugMenuActions);
     InitMenu(0, 1, 1, 7, 0, 16);
-    gCallback_03004AE8 = sub_80A9B78;
+    gMenuCallback = sub_80A9B78;
     return 0;
 }
 
@@ -264,7 +264,7 @@ static bool8 sub_80A9B78(void)
     case -2:
         return FALSE;
     default:
-        gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
+        gMenuCallback = gMatsudaDebugMenuActions[choice].func;
         return FALSE;
     case -1:
         CloseMenu();
@@ -469,26 +469,10 @@ static void sub_80A9F50(void)
 
 static void sub_80A9FE4(void)
 {
-    u8 *addr;
-    u32 i;
     u8 ptr[5];
 
     memcpy(ptr, gMatsudaDebugMenu_UnknownByteArray, 5);
-
-    addr = (void *)VRAM;
-    i = VRAM_SIZE;
-
-    while (1)
-    {
-        DmaFill32(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        i -= 0x1000;
-        if (i <= 0x1000)
-        {
-            DmaFill32(3, 0, addr, i);
-            break;
-        }
-    }
+    DmaFill32Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     sub_80034D4((void *)VRAM, ptr);
     LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }
