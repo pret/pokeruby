@@ -912,6 +912,48 @@ static bool8 SetUpFieldMove_Waterfall(void)
         return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80986AC()
+{
+    asm("\
+	push	{r4, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	mov	r4, sp\n\
+	add	r4, r4, #0x2\n\
+	mov	r0, sp\n\
+	add	r1, r4, #0\n\
+	bl	GetXYCoordsOneStepInFrontOfPlayer\n\
+	mov	r0, sp\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r0, r1]\n\
+	mov	r2, #0x0\n\
+	ldsh	r1, [r4, r2]\n\
+	bl	MapGridGetMetatileBehaviorAt\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	bl	MetatileBehavior_IsWaterfall\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._274	@cond_branch\n\
+	bl	IsPlayerSurfingNorth\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._274	@cond_branch\n\
+	bl	sub_808AE08\n\
+	b	._275\n\
+._274:\n\
+	bl	ScriptContext2_Disable\n\
+._275:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0");
+}
+#endif
+
 static void sub_808AE8C(void)
 {
     u8 i;

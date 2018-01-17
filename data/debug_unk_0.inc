@@ -1,6 +1,6 @@
 debug_unk_0::
 @ 0x821F3B8
-    .incbin "baserom-debug.gba", 0x21F3B8, 620
+    .incbin "baserom_de_debug.gba", 0x21F3B8, 620
 
 Str_821F624:: @ 0x821F624
 	.string "ーーーーーーーーーーーー$"
@@ -36,7 +36,7 @@ debug_unk_0b::
 @ 0x821F66D
 	.string "せつぞくエラー$"
 
-.incbin "baserom-debug.gba", 0x21F675, 323
+.incbin "baserom_de_debug.gba", 0x21F675, 323
 
 Str_821F7B8:: @ 0x821F7B8
 	.string "たかさ　$"
