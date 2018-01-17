@@ -243,6 +243,102 @@ void sub_80C6280(void)
     }
 }
 
+#if DEBUG
+
+__attribute__((naked))
+void debug_sub_80D93F4()
+{
+    asm("\
+	push	{r4, lr}\n\
+	bl	sub_80BB63C\n\
+	ldr	r0, ._98\n\
+	ldrh	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	beq	._95	@cond_branch\n\
+	bl	player_get_direction_lower_nybble\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x2\n\
+	beq	._96	@cond_branch\n\
+._95:\n\
+	bl	ScriptContext2_Disable\n\
+	b	._109\n\
+._99:\n\
+	.align	2, 0\n\
+._98:\n\
+	.word	gScriptResult\n\
+._96:\n\
+	ldr	r4, ._102\n\
+	add	r1, r4, #2\n\
+	add	r0, r4, #0\n\
+	bl	GetXYCoordsOneStepInFrontOfPlayer\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r4, r1]\n\
+	mov	r2, #0x2\n\
+	ldsh	r1, [r4, r2]\n\
+	bl	MapGridGetMetatileBehaviorAt\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r4, r0, #0x18\n\
+	add	r0, r4, #0\n\
+	bl	MetatileBehavior_IsSecretBaseCave\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._100	@cond_branch\n\
+	bl	sub_80C6264\n\
+	ldr	r1, ._102 + 4\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	bl	sub_80C639C\n\
+	b	._109\n\
+._103:\n\
+	.align	2, 0\n\
+._102:\n\
+	.word	gUnknown_0203923C\n\
+	.word	gLastFieldPokeMenuOpened\n\
+._100:\n\
+	add	r0, r4, #0\n\
+	bl	MetatileBehavior_IsSecretBaseTree\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._104	@cond_branch\n\
+	bl	sub_80C6264\n\
+	ldr	r1, ._106\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	bl	sub_80C64A8\n\
+	b	._109\n\
+._107:\n\
+	.align	2, 0\n\
+._106:\n\
+	.word	gLastFieldPokeMenuOpened\n\
+._104:\n\
+	add	r0, r4, #0\n\
+	bl	MetatileBehavior_IsSecretBaseShrub\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._108	@cond_branch\n\
+	bl	sub_80C6264\n\
+	ldr	r1, ._110\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	bl	sub_80C660C\n\
+	b	._109\n\
+._111:\n\
+	.align	2, 0\n\
+._110:\n\
+	.word	gLastFieldPokeMenuOpened\n\
+._108:\n\
+	bl	ScriptContext2_Disable\n\
+._109:\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0");
+}
+#endif
+
 bool8 SetUpFieldMove_SecretPower(void)
 {
     u8 behavior;

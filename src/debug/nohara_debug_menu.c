@@ -2177,7 +2177,7 @@ void NoharaDebugMenu_SootopolisCity()
         "	mov	r0, #0x71\n"
         "	bl	FlagSet\n"
         "	ldr	r0, ._227\n"
-        "	bl	FlagReset\n"
+        "	bl	FlagClear\n"
         "	bl	CloseMenu\n"
         "	mov	r0, #0x1\n"
         "	pop	{r1}\n"
@@ -2196,7 +2196,7 @@ void NoharaDebugMenu_Embark()
     asm(
         "	push	{lr}\n"
         "	ldr	r0, ._229\n"
-        "	bl	FlagReset\n"
+        "	bl	FlagClear\n"
         "	ldr	r0, ._229 + 4\n"
         "	mov	r1, #0x1\n"
         "	bl	VarSet\n"

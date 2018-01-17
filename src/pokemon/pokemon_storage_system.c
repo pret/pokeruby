@@ -13,7 +13,8 @@ extern const struct StorageAction gUnknown_083B6DF4[];
 
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
 
-void sub_8098898(u8 index) {
+void sub_8098898(u8 index)
+{
     u8 *ptr;
 
     Menu_DrawStdWindowFrame(10, 16, 29, 19);

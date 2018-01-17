@@ -277,7 +277,7 @@ void debug_sub_810B32C()
         "	.word	._28\n"
         "	.word	._29\n"
         "._25:\n"
-        "	bl	sub_80F7A34\n"
+        "	bl	SetupBard\n"
         "	b	._37\n"
         "._26:\n"
         "	mov	r2, #0x0\n"

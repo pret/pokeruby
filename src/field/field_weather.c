@@ -188,6 +188,45 @@ const u8 gUnknown_083970C8[] =
     1,
 };
 
+#if DEBUG
+
+const u8 gDebugText_Weather_0[] = _("なし　　　");
+const u8 gDebugText_Weather_1[] = _("はれ　　　");
+const u8 gDebugText_Weather_2[] = _("はれ2　　");
+const u8 gDebugText_Weather_3[] = _("あめ　　　");
+const u8 gDebugText_Weather_4[] = _("ゆき　　　");
+const u8 gDebugText_Weather_5[] = _("かみなり　");
+const u8 gDebugText_Weather_6[] = _("きり　　　");
+const u8 gDebugText_Weather_7[] = _("かざんばい");
+const u8 gDebugText_Weather_8[] = _("すなあらし");
+const u8 gDebugText_Weather_9[] = _("きり2　　");
+const u8 gDebugText_Weather_10[] = _("かいてい　");
+const u8 gDebugText_Weather_11[] = _("くもり　　");
+const u8 gDebugText_Weather_12[] = _("はれ3　　");
+const u8 gDebugText_Weather_13[] = _("おおあめ");
+const u8 gDebugText_Weather_14[] = _("かいてい2");
+
+const u8 *const gDebugText_Weather[] =
+{
+    gDebugText_Weather_0,
+    gDebugText_Weather_1,
+    gDebugText_Weather_2,
+    gDebugText_Weather_3,
+    gDebugText_Weather_4,
+    gDebugText_Weather_5,
+    gDebugText_Weather_6,
+    gDebugText_Weather_7,
+    gDebugText_Weather_8,
+    gDebugText_Weather_9,
+    gDebugText_Weather_10,
+    gDebugText_Weather_11,
+    gDebugText_Weather_12,
+    gDebugText_Weather_13,
+    gDebugText_Weather_14,
+};
+
+#endif
+
 const u16 gUnknown_083970E8[] = INCBIN_U16("graphics/weather/0.gbapal");
 
 void StartWeather(void)
@@ -1159,3 +1198,145 @@ void sub_807DE68(void)
 {
     gUnknown_030006DC = gUnknown_083970C8;
 }
+
+#if DEBUG
+
+__attribute__((naked))
+u8 debug_sub_8085564(void)
+{
+    asm("\
+	push	{lr}\n\
+	mov	r2, #0x0\n\
+	ldr	r0, ._375\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._370	@cond_branch\n\
+	ldr	r1, ._375 + 4\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0xf\n\
+	bne	._371	@cond_branch\n\
+	strb	r2, [r1]\n\
+._371:\n\
+	mov	r2, #0x1\n\
+._370:\n\
+	ldr	r0, ._375\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._372	@cond_branch\n\
+	ldr	r1, ._375 + 4\n\
+	ldrb	r0, [r1]\n\
+	cmp	r0, #0\n\
+	beq	._373	@cond_branch\n\
+	sub	r0, r0, #0x1\n\
+	b	._374\n\
+._376:\n\
+	.align	2, 0\n\
+._375:\n\
+	.word	gMain\n\
+	.word	gUnknown_0202FF58+0x2\n\
+._373:\n\
+	mov	r0, #0xe\n\
+._374:\n\
+	strb	r0, [r1]\n\
+	mov	r2, #0x1\n\
+._372:\n\
+	cmp	r2, #0\n\
+	beq	._377	@cond_branch\n\
+	mov	r0, #0x16\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x1c\n\
+	mov	r3, #0x2\n\
+	bl	MenuFillWindowRectWithBlankTile\n\
+	ldr	r1, ._380\n\
+	ldr	r0, ._380 + 4\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	r1, #0x17\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint\n\
+._377:\n\
+	ldr	r0, ._380 + 8\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._378	@cond_branch\n\
+	mov	r0, #0x0\n\
+	b	._379\n\
+._381:\n\
+	.align	2, 0\n\
+._380:\n\
+	.word	gDebugText_Weather\n\
+	.word	gUnknown_0202FF58+0x2\n\
+	.word	gMain\n\
+._378:\n\
+	ldr	r0, ._382\n\
+	ldrb	r0, [r0]\n\
+	bl	DoWeatherEffect\n\
+	bl	CloseMenu\n\
+	mov	r0, #0x1\n\
+._379:\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._383:\n\
+	.align	2, 0\n\
+._382:\n\
+	.word	gUnknown_0202FF58+0x2");
+}
+
+__attribute__((naked))
+u8 debug_sub_808560C(void)
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldr	r4, ._384\n\
+	ldr	r0, ._384 + 4\n\
+	mov	r1, #0xda\n\
+	lsl	r1, r1, #0x3\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	strb	r0, [r4]\n\
+	bl	MenuZeroFillScreen\n\
+	mov	r0, #0x16\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x1c\n\
+	mov	r3, #0x2\n\
+	bl	MenuFillWindowRectWithBlankTile\n\
+	ldr	r1, ._384 + 8\n\
+	ldrb	r0, [r4]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	r1, #0x17\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint\n\
+	ldr	r1, ._384 + 12\n\
+	ldr	r0, ._384 + 16\n\
+	str	r0, [r1]\n\
+	mov	r0, #0x0\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._385:\n\
+	.align	2, 0\n\
+._384:\n\
+	.word	gUnknown_0202FF58+0x2\n\
+	.word	gUnknown_0202F7E8\n\
+	.word	gDebugText_Weather\n\
+	.word	gCallback_03004AE8\n\
+	.word	debug_sub_8085564+1");
+}
+
+#endif

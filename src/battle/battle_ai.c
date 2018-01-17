@@ -318,7 +318,7 @@ void BattleAI_SetupAIData()
         "	ldrb	r0, [r3]\n"
         "	mov	r1, #0x0\n"
         "	mov	r2, #0xff\n"
-        "	bl	sub_8015A98\n"
+        "	bl	CheckMoveLimitations\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r7, r0, #0x18\n"
         "	mov	r4, #0x0\n"

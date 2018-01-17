@@ -280,7 +280,7 @@ static u16 sub_80FB9C0(u16);
 static void sub_80FBA18(void);
 static bool8 sub_80FBAA0(u16);
 void CreateRegionMapCursor(u16, u16);
-static void sub_80FBCA0(void);
+void sub_80FBCA0(void);
 static void sub_80FBDF8(void);
 static void sub_80FBE24(void);
 static void SpriteCB_PlayerIconZoomedOut(struct Sprite *);
@@ -1127,7 +1127,7 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     }
 }
 
-static void sub_80FBCA0(void)
+void sub_80FBCA0(void)
 {
     if (gRegionMap->cursorSprite != NULL)
     {

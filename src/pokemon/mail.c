@@ -234,8 +234,83 @@ const struct MailLayout gUnknown_083E57A4[] =
     {5, 15, 15, 4, 3, Unknown_3E5790},
 };
 
+#if DEBUG
+
+const u8 Str_8411540[] = _("レイアウトを　にほんごで　ひょうじ？");  // Display using Japanese layout?
+const u8 Str_8411553[] = _("にほんご　");  // Japanese
+const u8 Str_8411559[] = _("かいがい　");  // Overseas
+
+const u8 *const _8411560[] =
+{
+    Str_8411553,
+    Str_8411559,
+};
+
+const u8 Str_8411568[] = _("イメージ　タイプを　えらんでね");  // Choose an image type
+const u8 Str_8411578[] = _("{STR_VAR_1}");
+const u8 Str_841157B[] = _("オレンジ　");  // Orange
+const u8 Str_8411581[] = _("ハーバー　");  // Harbor
+const u8 Str_8411587[] = _("キラキラ　");  // Glitter
+const u8 Str_841158D[] = _("メカニカル");  // Mech
+const u8 Str_8411593[] = _("ウッディー");  // Wood
+const u8 Str_8411599[] = _("クロス　　");  // Wave
+const u8 Str_841159F[] = _("トレジャー");  // Bead
+const u8 Str_84115A5[] = _("シャドウ　");  // Shadow
+const u8 Str_84115AB[] = _("トロピカル");  // Tropic
+const u8 Str_84115B1[] = _("ドリーム　");  // Dream
+const u8 Str_84115B7[] = _("ミラクル　");  // Fab
+const u8 Str_84115BD[] = _("レトロ　　");  // Retro
+
+const u8 *const _84115C4[] =
+{
+    Str_841157B,
+    Str_8411581,
+    Str_8411587,
+    Str_841158D,
+    Str_8411593,
+    Str_8411599,
+    Str_841159F,
+    Str_84115A5,
+    Str_84115AB,
+    Str_84115B1,
+    Str_84115B7,
+    Str_84115BD,
+};
+
+const u8 Str_84115F4[] = _("メールをみる");  // View Mail
+const u8 Str_84115FB[] = _("メールとうろく");  // Register Mail
+const u8 Str_8411603[] = _("もたせる");  // Give to Pokémon
+const u8 Str_8411608[] = _("メールをけす");  // Delete Mail
+
+#endif
+
 // XXX: what is this?
 static u8 *const sSharedMemPtr = gSharedMem;
+
+#if DEBUG
+
+const u8 Str_841160F[] = _("{STR_VAR_1}　{STR_VAR_2}");
+const u8 Str_841161A[] = _("メール{STR_VAR_1}　{STR_VAR_2}");
+const u8 Str_8411623[] = _("メール{STR_VAR_1}を　だれに　もたせる？");
+const u8 Str_8411634[] = _("000　{STR_VAR_1}");
+const u8 Str_841163B[] = _("せいきの　データが　とうろくずみ　です\n");
+const u8 Str_841163B_after[] = _("しんき　とうろく　できません");
+const u8 Str_841165E[] = _("せいきに　とうろくされたメールデータは\n");
+const u8 Str_841165E_after[] = _("へんこう　できません");
+const u8 Str_841167D[] = _("メール{STR_VAR_1}　とうろく　かいじょ");
+const u8 Str_841168D[] = _("デバッグメニューから　とうろくした\n");
+const u8 Str_841168D_after[] = _("メール　いがいは　けせません");
+const u8 Str_84116AE[] = _("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}");
+
+const struct MenuAction _84116BC[] =
+{
+    {Str_84115F4, NULL},
+    {Str_84115FB, NULL},
+    {Str_8411603, NULL},
+    {Str_8411608, NULL},
+};
+
+#endif
 
 static u8 sub_80F8A28(void);
 /*static*/ void sub_80F8D50(void);

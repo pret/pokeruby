@@ -30,6 +30,8 @@ struct UnkStruct1
 #define SLOTMACHINE_GFX_TILES 236
 #endif
 
+// TODO: figure out which functions are static and which are not.
+#define static
 
 static void CB2_SlotMachineSetup(void);
 static void CB2_SlotMachineLoop(void);
@@ -77,6 +79,7 @@ static bool8 sub_81023E0(struct Task *task);
 static bool8 sub_81023FC(struct Task *task);
 static bool8 sub_8102424(struct Task *task);
 static bool8 sub_8102460(struct Task *task);
+static bool8 debug_sub_8116E74(struct Task *);
 static void sub_8102484(void);
 static void sub_81024F0(void);
 static bool8 sub_8102540(void);
@@ -230,11 +233,59 @@ static const u8 gUnknown_083ECE3A[];
 static const u16 gUnknown_083ECE42[];
 static const u16 gUnknown_083ECE48[];
 
+#if DEBUG
+__attribute__((naked))
+void PlaySlotMachine(u8 arg0, MainCallback cb)
+{
+    asm("\
+ 	push	{lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r3, ._1\n\
+	mov	r2, #0x0\n\
+	strb	r2, [r3]\n\
+	bl	sub_81019B0\n\
+	ldr	r0, ._1 + 4\n\
+	bl	SetMainCallback2\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._2:\n\
+	.align	2, 0\n\
+._1:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	sub_81018B8+1");
+}
+#else
 void PlaySlotMachine(u8 arg0, MainCallback cb)
 {
     PlaySlotMachine_Internal(arg0, cb);
     SetMainCallback2(CB2_SlotMachineSetup);
 }
+#endif
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_811609C()
+{
+    asm("\
+	push	{lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r3, ._3\n\
+	mov	r2, #0x1\n\
+	strb	r2, [r3]\n\
+	bl	sub_81019B0\n\
+	ldr	r0, ._3 + 4\n\
+	bl	SetMainCallback2\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._4:\n\
+	.align	2, 0\n\
+._3:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	sub_81018B8+1");
+}
+#endif
 
 static void CB2_SlotMachineSetup(void)
 {
@@ -367,6 +418,135 @@ static void SlotMachineSetup_2_1(void)
 
 static const s16 gUnknown_083ECCF8[][2];
 
+#if DEBUG
+__attribute__((naked))
+static void SlotMachineSetup_0_1(void)
+{
+    asm("\
+    push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, sl\n\
+	mov	r6, r9\n\
+	mov	r5, r8\n\
+	push	{r5, r6, r7}\n\
+	bl	sub_81019EC\n\
+	ldr	r5, ._43\n\
+	mov	r4, #0x0\n\
+	strb	r4, [r5]\n\
+	strb	r4, [r5, #0x2]\n\
+	bl	Random\n\
+	mov	r1, #0x1\n\
+	and	r1, r1, r0\n\
+	strb	r1, [r5, #0x3]\n\
+	strb	r4, [r5, #0x4]\n\
+	mov	r0, #0x0\n\
+	strh	r4, [r5, #0x8]\n\
+	strb	r0, [r5, #0xa]\n\
+	strb	r0, [r5, #0xb]\n\
+	ldr	r0, ._43 + 4\n\
+	ldr	r1, ._43 + 8\n\
+	add	r0, r0, r1\n\
+	ldrh	r0, [r0]\n\
+	strh	r0, [r5, #0xc]\n\
+	strh	r4, [r5, #0xe]\n\
+	strh	r4, [r5, #0x10]\n\
+	strh	r4, [r5, #0x12]\n\
+	strh	r4, [r5, #0x18]\n\
+	mov	r0, #0x8\n\
+	strh	r0, [r5, #0x1a]\n\
+	add	r1, r5, #0\n\
+	add	r1, r1, #0x58\n\
+	mov	r0, #0xf0\n\
+	strh	r0, [r1]\n\
+	add	r1, r1, #0x2\n\
+	mov	r0, #0xa0\n\
+	strh	r0, [r1]\n\
+	add	r0, r5, #0\n\
+	add	r0, r0, #0x5c\n\
+	mov	r1, #0x3f\n\
+	strh	r1, [r0]\n\
+	add	r0, r0, #0x2\n\
+	strh	r1, [r0]\n\
+	bl	GetCurrentMapMusic\n\
+	add	r1, r5, #0\n\
+	add	r1, r1, #0x60\n\
+	strh	r0, [r1]\n\
+	mov	r7, #0x0\n\
+	add	r6, r5, #0\n\
+	ldr	r2, ._43 + 12\n\
+	mov	sl, r2\n\
+	mov	r0, #0x1c\n\
+	add	r0, r0, r6\n\
+	mov	r9, r0\n\
+._41:\n\
+	lsl	r5, r7, #0x1\n\
+	mov	r1, #0x22\n\
+	add	r1, r1, r6\n\
+	mov	r8, r1\n\
+	add	r1, r5, r1\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r1]\n\
+	add	r4, r6, #0\n\
+	add	r4, r4, #0x28\n\
+	add	r4, r5, r4\n\
+	ldrb	r0, [r6, #0x3]\n\
+	lsl	r0, r0, #0x1\n\
+	lsl	r1, r7, #0x2\n\
+	add	r0, r0, r1\n\
+	add r0, r0, sl\n\
+	mov	r2, #0x0\n\
+	ldsh	r0, [r0, r2]\n\
+	mov	r1, #0x15\n\
+	bl	__modsi3\n\
+	strh	r0, [r4]\n\
+	add r5, r5, r9\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r4, r1]\n\
+	lsl	r1, r0, #0x1\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	mov	r2, #0xfc\n\
+	lsl	r2, r2, #0x1\n\
+	add	r0, r2, #0\n\
+	sub	r0, r0, r1\n\
+	strh	r0, [r5]\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r5, r1]\n\
+	add	r1, r2, #0\n\
+	bl	__modsi3\n\
+	strh	r0, [r5]\n\
+	add	r0, r7, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	cmp	r7, #0x2\n\
+	bls	._41	@cond_branch\n\
+	bl	debug_sub_811B5D0\n\
+	ldr	r0, ._43 + 16\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._42	@cond_branch\n\
+	mov	r1, r8\n\
+	sub	r1, r1, #0x22\n\
+	mov	r0, #0xfa\n\
+	lsl	r0, r0, #0x2\n\
+	strh	r0, [r1, #0xc]\n\
+._42:\n\
+	pop	{r3, r4, r5}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	mov	sl, r5\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._44:\n\
+	.align	2, 0\n\
+._43:\n\
+	.word	+0x2000000\n\
+	.word	gSaveBlock1\n\
+	.word	0x494\n\
+	.word	gUnknown_083ECCF8\n\
+	.word	unk_debug_bss_1+0x1");
+}
+#else
 static void SlotMachineSetup_0_1(void)
 {
     u8 i;
@@ -398,6 +578,7 @@ static void SlotMachineSetup_0_1(void)
         eSlotMachine->unk1C[i] %= 0x1f8;
     }
 }
+#endif
 
 static void SlotMachineSetup_3_0(void)
 {
@@ -442,7 +623,8 @@ static void sub_8101D04(void)
     sub_8101D24(CreateTask(sub_8101D24, 0));
 }
 
-static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
+static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) =
+{
     sub_8101D5C,
     sub_8101D8C,
     sub_8101DB0,
@@ -471,7 +653,10 @@ static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) = {
     sub_81023E0,
     sub_81023FC,
     sub_8102424,
-    sub_8102460
+    sub_8102460,
+#if DEBUG
+    debug_sub_8116E74,
+#endif
 };
 
 static void sub_8101D24(u8 taskId)
@@ -524,6 +709,46 @@ static bool8 sub_8101DF4(struct Task *task)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8101E10(struct Task *task)
+{
+    asm("\
+    push	{lr}\n\
+	mov	r0, #0x0\n\
+	bl	sub_8104CAC\n\
+	ldr	r2, ._70\n\
+	mov	r0, #0x5\n\
+	strb	r0, [r2]\n\
+	ldr	r0, ._70 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._67	@cond_branch\n\
+	ldr	r0, ._70 + 8\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._69	@cond_branch\n\
+._67:\n\
+	mov	r0, #0xc\n\
+	ldsh	r1, [r2, r0]\n\
+	ldr	r0, ._70 + 12\n\
+	cmp	r1, r0\n\
+	ble	._69	@cond_branch\n\
+	mov	r0, #0x17\n\
+	strb	r0, [r2]\n\
+._69:\n\
+	mov	r0, #0x1\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._71:\n\
+	.align	2, 0\n\
+._70:\n\
+	.word	+0x2000000\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1+0x4\n\
+	.word	0x270e");
+}
+#else
 static bool8 sub_8101E10(struct Task *task)
 {
     sub_8104CAC(0);
@@ -534,7 +759,205 @@ static bool8 sub_8101E10(struct Task *task)
     }
     return TRUE;
 }
+#endif
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8101E3C(struct Task *task)
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	ldr	r0, ._77\n\
+	ldrb	r1, [r0]\n\
+	add	r3, r0, #0\n\
+	ldr	r5, ._77 + 4\n\
+	cmp	r1, #0\n\
+	beq	._76	@cond_branch\n\
+	ldr	r2, ._77 + 8\n\
+	ldrb	r0, [r2]\n\
+	cmp	r0, #0\n\
+	beq	._76	@cond_branch\n\
+	ldr	r4, ._77 + 12\n\
+	mov	r1, #0xc\n\
+	ldsh	r0, [r4, r1]\n\
+	cmp	r0, #0x3\n\
+	ble	._74	@cond_branch\n\
+	ldrh	r1, [r5, #0x2c]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._75	@cond_branch\n\
+._74:\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r2]\n\
+	b	._76\n\
+._78:\n\
+	.align	2, 0\n\
+._77:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	gMain\n\
+	.word	unk_debug_bss_1+0x4\n\
+	.word	+0x2000000\n\
+._75:\n\
+	mov	r0, #0x0\n\
+	bl	sub_8103D50\n\
+	mov	r0, #0x1\n\
+	bl	sub_8103D50\n\
+	mov	r0, #0x2\n\
+	bl	sub_8103D50\n\
+	ldrh	r0, [r4, #0xc]\n\
+	sub	r0, r0, #0x3\n\
+	strh	r0, [r4, #0xc]\n\
+	mov	r0, #0x3\n\
+	strh	r0, [r4, #0x12]\n\
+	mov	r0, #0x9\n\
+	strb	r0, [r4]\n\
+	b	._102\n\
+._76:\n\
+	ldrb	r0, [r3]\n\
+	cmp	r0, #0\n\
+	beq	._81	@cond_branch\n\
+	ldrh	r1, [r5, #0x2e]\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._81	@cond_branch\n\
+	bl	debug_sub_811B620\n\
+	ldr	r1, ._83\n\
+	mov	r0, #0x1d\n\
+	strb	r0, [r1]\n\
+	b	._102\n\
+._84:\n\
+	.align	2, 0\n\
+._83:\n\
+	.word	+0x2000000\n\
+._81:\n\
+	ldrh	r1, [r5, #0x2e]\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._85	@cond_branch\n\
+	mov	r0, #0x0\n\
+	bl	sub_8104AB8\n\
+	ldr	r1, ._87\n\
+	mov	r0, #0x8\n\
+	strb	r0, [r1]\n\
+	b	._102\n\
+._88:\n\
+	.align	2, 0\n\
+._87:\n\
+	.word	+0x2000000\n\
+._85:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._89	@cond_branch\n\
+	ldr	r2, ._94\n\
+	mov	r3, #0xc\n\
+	ldsh	r0, [r2, r3]\n\
+	sub	r0, r0, #0x3\n\
+	mov	r3, #0x12\n\
+	ldsh	r1, [r2, r3]\n\
+	add	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	blt	._90	@cond_branch\n\
+	ldrh	r4, [r2, #0x12]\n\
+	add	r0, r1, #0\n\
+	cmp	r0, #0x2\n\
+	bgt	._91	@cond_branch\n\
+._92:\n\
+	lsl	r0, r4, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	bl	sub_8103D50\n\
+	lsl	r0, r4, #0x10\n\
+	mov	r2, #0x80\n\
+	lsl	r2, r2, #0x9\n\
+	add	r0, r0, r2\n\
+	lsr	r4, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x2\n\
+	ble	._92	@cond_branch\n\
+._91:\n\
+	ldr	r1, ._94\n\
+	ldrh	r0, [r1, #0xc]\n\
+	sub	r0, r0, #0x3\n\
+	ldrh	r3, [r1, #0x12]\n\
+	add	r0, r0, r3\n\
+	strh	r0, [r1, #0xc]\n\
+	mov	r0, #0x3\n\
+	strh	r0, [r1, #0x12]\n\
+	mov	r0, #0x9\n\
+	strb	r0, [r1]\n\
+	mov	r0, #0x5f\n\
+	bl	PlaySE\n\
+	b	._102\n\
+._95:\n\
+	.align	2, 0\n\
+._94:\n\
+	.word	+0x2000000\n\
+._90:\n\
+	mov	r0, #0x6\n\
+	b	._96\n\
+._89:\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._98	@cond_branch\n\
+	ldr	r4, ._103\n\
+	mov	r1, #0xc\n\
+	ldsh	r0, [r4, r1]\n\
+	cmp	r0, #0\n\
+	beq	._98	@cond_branch\n\
+	mov	r0, #0x5f\n\
+	bl	PlaySE\n\
+	ldrb	r0, [r4, #0x12]\n\
+	bl	sub_8103D50\n\
+	ldrh	r0, [r4, #0xc]\n\
+	sub	r0, r0, #0x1\n\
+	strh	r0, [r4, #0xc]\n\
+	ldrh	r0, [r4, #0x12]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4, #0x12]\n\
+._98:\n\
+	ldr	r0, ._103\n\
+	mov	r2, #0x12\n\
+	ldsh	r1, [r0, r2]\n\
+	add	r2, r0, #0\n\
+	ldr	r5, ._103 + 4\n\
+	cmp	r1, #0x2\n\
+	bgt	._99	@cond_branch\n\
+	cmp	r1, #0\n\
+	beq	._101	@cond_branch\n\
+	ldrh	r1, [r5, #0x2e]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._101	@cond_branch\n\
+._99:\n\
+	mov	r0, #0x9\n\
+	strb	r0, [r2]\n\
+._101:\n\
+	ldrh	r1, [r5, #0x2e]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._102	@cond_branch\n\
+	mov	r0, #0x15\n\
+._96:\n\
+	strb	r0, [r2]\n\
+._102:\n\
+	mov	r0, #0x0\n\
+	pop	{r4, r5}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._104:\n\
+	.align	2, 0\n\
+._103:\n\
+	.word	+0x2000000\n\
+	.word	gMain");
+}
+#else
 static bool8 sub_8101E3C(struct Task *task)
 {
     s16 i;
@@ -582,6 +1005,7 @@ static bool8 sub_8101E3C(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
 static void sub_8101F2C(const u8 *str)
 {
@@ -615,6 +1039,71 @@ static bool8 sub_8101F88(struct Task *task)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8101FA4(struct Task *task)
+{
+    asm("\
+	push	{r4, lr}\n\
+	add	r4, r0, #0\n\
+	bl	sub_8102484\n\
+	bl	sub_8104DA4\n\
+	mov	r0, #0x0\n\
+	bl	sub_8102DEC\n\
+	mov	r0, #0x1\n\
+	bl	sub_8102DEC\n\
+	mov	r0, #0x2\n\
+	bl	sub_8102DEC\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r4, #0x8]\n\
+	ldr	r4, ._115\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x20\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._113	@cond_branch\n\
+	bl	sub_810430C\n\
+	mov	r0, #0xa\n\
+	b	._114\n\
+._116:\n\
+	.align	2, 0\n\
+._115:\n\
+	.word	+0x2000000\n\
+._113:\n\
+	mov	r0, #0x1\n\
+	bl	sub_8104CAC\n\
+	mov	r0, #0xb\n\
+._114:\n\
+	strb	r0, [r4]\n\
+	ldr	r4, ._119\n\
+	mov	r0, #0x8\n\
+	strh	r0, [r4, #0x1a]\n\
+	ldrb	r0, [r4, #0xa]\n\
+	cmp	r0, #0\n\
+	beq	._117	@cond_branch\n\
+	bl	dp15_jump_random_unknown\n\
+	strh	r0, [r4, #0x1a]\n\
+._117:\n\
+	ldr	r0, ._119 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._118	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x68\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._118:\n\
+	mov	r0, #0x0\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._120:\n\
+	.align	2, 0\n\
+._119:\n\
+	.word	+0x2000000\n\
+	.word	unk_debug_bss_1+0x1");
+}
+#else
 static bool8 sub_8101FA4(struct Task *task)
 {
     sub_8102484();
@@ -640,6 +1129,7 @@ static bool8 sub_8101FA4(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
 static bool8 sub_8102008(struct Task *task)
 {
@@ -652,6 +1142,52 @@ static bool8 sub_8102008(struct Task *task)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8102034(struct Task *task)
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldrh	r1, [r0, #0x8]\n\
+	add	r1, r1, #0x1\n\
+	strh	r1, [r0, #0x8]\n\
+	lsl	r1, r1, #0x10\n\
+	asr	r1, r1, #0x10\n\
+	cmp	r1, #0x1d\n\
+	ble	._124	@cond_branch\n\
+	ldr	r0, ._127\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._126	@cond_branch\n\
+	ldr	r0, ._127 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._126	@cond_branch\n\
+	ldr	r4, ._127 + 8\n\
+	bl	Random\n\
+	mov	r1, #0x1f\n\
+	and	r1, r1, r0\n\
+	add	r1, r1, #0x1\n\
+	str	r1, [r4]\n\
+._126:\n\
+	bl	sub_81024F0\n\
+	ldr	r1, ._127 + 12\n\
+	mov	r0, #0xc\n\
+	strb	r0, [r1]\n\
+._124:\n\
+	mov	r0, #0x0\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._128:\n\
+	.align	2, 0\n\
+._127:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1+0x4\n\
+	.word	unk_debug_bss_1+0x8\n\
+	.word	+0x2000000");
+}
+#else
 static bool8 sub_8102034(struct Task *task)
 {
     if (++task->data[0] >= 30)
@@ -661,7 +1197,77 @@ static bool8 sub_8102034(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8102058(struct Task *task)
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	ldr	r0, ._133\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._130	@cond_branch\n\
+	ldr	r0, ._133 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._130	@cond_branch\n\
+	ldr	r5, ._133 + 8\n\
+	ldr	r0, [r5]\n\
+	sub	r0, r0, #0x1\n\
+	str	r0, [r5]\n\
+	cmp	r0, #0\n\
+	bne	._135	@cond_branch\n\
+	mov	r0, #0x18\n\
+	bl	PlaySE\n\
+	ldr	r4, ._133 + 12\n\
+	ldrb	r0, [r4, #0x18]\n\
+	bl	sub_8102E1C\n\
+	ldrb	r0, [r4, #0x18]\n\
+	bl	sub_8103C14\n\
+	bl	Random\n\
+	mov	r1, #0x1f\n\
+	and	r1, r1, r0\n\
+	add	r1, r1, #0x1\n\
+	str	r1, [r5]\n\
+	b	._132\n\
+._134:\n\
+	.align	2, 0\n\
+._133:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1+0x4\n\
+	.word	unk_debug_bss_1+0x8\n\
+	.word	+0x2000000\n\
+._130:\n\
+	ldr	r0, ._136\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._135	@cond_branch\n\
+	mov	r0, #0x18\n\
+	bl	PlaySE\n\
+	ldr	r4, ._136 + 4\n\
+	ldrb	r0, [r4, #0x18]\n\
+	bl	sub_8102E1C\n\
+	ldrb	r0, [r4, #0x18]\n\
+	bl	sub_8103C14\n\
+._132:\n\
+	mov	r0, #0xd\n\
+	strb	r0, [r4]\n\
+._135:\n\
+	mov	r0, #0x0\n\
+	pop	{r4, r5}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._137:\n\
+	.align	2, 0\n\
+._136:\n\
+	.word	gMain\n\
+	.word	+0x2000000");
+}
+#else
 static bool8 sub_8102058(struct Task *task)
 {
     if (gMain.newKeys & A_BUTTON)
@@ -673,7 +1279,121 @@ static bool8 sub_8102058(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8102090(struct Task *task)
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldr	r4, ._146\n\
+	ldrb	r0, [r4, #0x18]\n\
+	bl	sub_8102E40\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r2, r0, #0x18\n\
+	cmp	r2, #0\n\
+	bne	._138	@cond_branch\n\
+	ldrh	r0, [r4, #0x18]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4, #0x18]\n\
+	mov	r1, #0xc\n\
+	strb	r1, [r4]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x2\n\
+	ble	._161	@cond_branch\n\
+	mov	r0, #0xe\n\
+	strb	r0, [r4]\n\
+	ldr	r0, ._146 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x8\n\
+	beq	._140	@cond_branch\n\
+	cmp	r0, #0x8\n\
+	bgt	._141	@cond_branch\n\
+	cmp	r0, #0x2\n\
+	beq	._142	@cond_branch\n\
+	cmp	r0, #0x2\n\
+	bgt	._143	@cond_branch\n\
+	cmp	r0, #0x1\n\
+	beq	._144	@cond_branch\n\
+	b	._161\n\
+._147:\n\
+	.align	2, 0\n\
+._146:\n\
+	.word	+0x2000000\n\
+	.word	unk_debug_bss_1\n\
+._143:\n\
+	cmp	r0, #0x4\n\
+	beq	._148	@cond_branch\n\
+	b	._161\n\
+._141:\n\
+	cmp	r0, #0x40\n\
+	beq	._150	@cond_branch\n\
+	cmp	r0, #0x40\n\
+	bgt	._151	@cond_branch\n\
+	cmp	r0, #0x10\n\
+	beq	._152	@cond_branch\n\
+	b	._161\n\
+._151:\n\
+	cmp	r0, #0x80\n\
+	beq	._154	@cond_branch\n\
+	b	._161\n\
+._142:\n\
+	mov	r0, #0x14\n\
+	strh	r0, [r4, #0x28]\n\
+	strh	r0, [r4, #0x2a]\n\
+	mov	r0, #0x12\n\
+	b	._160\n\
+._144:\n\
+	mov	r0, #0x14\n\
+	strh	r0, [r4, #0x28]\n\
+	strh	r0, [r4, #0x2a]\n\
+	mov	r0, #0x12\n\
+	b	._160\n\
+._148:\n\
+	mov	r0, #0x3\n\
+	strh	r0, [r4, #0x28]\n\
+	mov	r0, #0x1\n\
+	strh	r0, [r4, #0x2a]\n\
+	mov	r0, #0x2\n\
+	b	._160\n\
+._140:\n\
+	strh	r2, [r4, #0x28]\n\
+	mov	r0, #0x2\n\
+	strh	r0, [r4, #0x2a]\n\
+	mov	r0, #0x3\n\
+	b	._160\n\
+._152:\n\
+	mov	r0, #0x2\n\
+	strh	r0, [r4, #0x28]\n\
+	mov	r0, #0x5\n\
+	strh	r0, [r4, #0x2a]\n\
+	mov	r0, #0x14\n\
+	b	._160\n\
+._150:\n\
+	mov	r0, #0x13\n\
+	strh	r0, [r4, #0x28]\n\
+	strh	r0, [r4, #0x2a]\n\
+	strh	r2, [r4, #0x2c]\n\
+	b	._161\n\
+._154:\n\
+	mov	r0, #0x13\n\
+	strh	r0, [r4, #0x28]\n\
+	strh	r0, [r4, #0x2a]\n\
+._160:\n\
+	strh	r0, [r4, #0x2c]\n\
+._161:\n\
+	mov	r0, #0x1\n\
+	b	._162\n\
+._138:\n\
+	mov	r0, #0x0\n\
+._162:\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+#else
 static bool8 sub_8102090(struct Task *task)
 {
     if (!sub_8102E40(eSlotMachine->unk18))
@@ -688,7 +1408,168 @@ static bool8 sub_8102090(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_81020C8(struct Task *task)
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldr	r4, ._165\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0xc0\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r4, #0x4]\n\
+	bl	sub_81027A0\n\
+	ldrb	r0, [r4, #0xa]\n\
+	cmp	r0, #0\n\
+	beq	._163	@cond_branch\n\
+	sub	r0, r0, #0x1\n\
+	strb	r0, [r4, #0xa]\n\
+	ldrb	r0, [r4, #0xb]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r4, #0xb]\n\
+	b	._164\n\
+._166:\n\
+	.align	2, 0\n\
+._165:\n\
+	.word	+0x2000000\n\
+._163:\n\
+	bl	debug_sub_811B894\n\
+._164:\n\
+	ldr	r4, ._171\n\
+	ldrh	r0, [r4, #0x8]\n\
+	cmp	r0, #0\n\
+	beq	._167	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x6c\n\
+	mov	r2, #0xe\n\
+	ldsh	r1, [r4, r2]\n\
+	bl	debug_sub_811B5B4\n\
+	mov	r0, #0xf\n\
+	strb	r0, [r4]\n\
+	bl	sub_8102A24\n\
+	bl	sub_8103F70\n\
+	ldrh	r0, [r4, #0x10]\n\
+	ldrh	r1, [r4, #0xe]\n\
+	sub	r0, r0, r1\n\
+	strh	r0, [r4, #0x10]\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bge	._168	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r4, #0x10]\n\
+._168:\n\
+	ldrh	r1, [r4, #0x8]\n\
+	mov	r0, #0xc0\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._169	@cond_branch\n\
+	ldr	r0, ._171 + 4\n\
+	bl	PlayFanfare\n\
+	mov	r0, #0x6\n\
+	bl	sub_8104CAC\n\
+	b	._174\n\
+._172:\n\
+	.align	2, 0\n\
+._171:\n\
+	.word	+0x2000000\n\
+	.word	0x185\n\
+._169:\n\
+	mov	r0, #0x40\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._173	@cond_branch\n\
+	ldr	r0, ._175\n\
+	bl	PlayFanfare\n\
+	mov	r0, #0x5\n\
+	bl	sub_8104CAC\n\
+	b	._174\n\
+._176:\n\
+	.align	2, 0\n\
+._175:\n\
+	.word	0x185\n\
+._173:\n\
+	mov	r0, #0xc3\n\
+	lsl	r0, r0, #0x1\n\
+	bl	PlayFanfare\n\
+	mov	r0, #0x2\n\
+	bl	sub_8104CAC\n\
+._174:\n\
+	ldr	r1, ._183\n\
+	ldrh	r3, [r1, #0x8]\n\
+	mov	r0, #0xe0\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r3\n\
+	add	r2, r1, #0\n\
+	cmp	r0, #0\n\
+	beq	._179	@cond_branch\n\
+	ldrb	r1, [r2, #0x4]\n\
+	mov	r0, #0x3f\n\
+	and	r0, r0, r1\n\
+	mov	r1, #0x0\n\
+	strb	r0, [r2, #0x4]\n\
+	mov	r0, #0xc0\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r3\n\
+	cmp	r0, #0\n\
+	beq	._179	@cond_branch\n\
+	strb	r1, [r2, #0xa]\n\
+	strb	r1, [r2, #0xb]\n\
+	strb	r1, [r2, #0x3]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r3\n\
+	cmp	r0, #0\n\
+	beq	._179	@cond_branch\n\
+	mov	r0, #0x1\n\
+	strb	r0, [r2, #0x3]\n\
+._179:\n\
+	ldrh	r1, [r2, #0x8]\n\
+	mov	r0, #0x20\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._185	@cond_branch\n\
+	ldrb	r0, [r2, #0x2]\n\
+	cmp	r0, #0xf\n\
+	bhi	._185	@cond_branch\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r2, #0x2]\n\
+	ldrb	r0, [r2, #0x2]\n\
+	bl	sub_8104064\n\
+	b	._185\n\
+._184:\n\
+	.align	2, 0\n\
+._183:\n\
+	.word	+0x2000000\n\
+._167:\n\
+	mov	r0, #0x3\n\
+	bl	sub_8104CAC\n\
+	mov	r0, #0x14\n\
+	strb	r0, [r4]\n\
+	ldrh	r0, [r4, #0x12]\n\
+	ldrh	r1, [r4, #0x10]\n\
+	add	r0, r0, r1\n\
+	strh	r0, [r4, #0x10]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	ldr	r1, ._186\n\
+	cmp	r0, r1\n\
+	ble	._185	@cond_branch\n\
+	strh	r1, [r4, #0x10]\n\
+._185:\n\
+	mov	r0, #0x0\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._187:\n\
+	.align	2, 0\n\
+._186:\n\
+	.word	0x270f");
+}
+#else
 static bool8 sub_81020C8(struct Task *task)
 {
     eSlotMachine->unk04 &= 0xc0;
@@ -753,6 +1634,7 @@ static bool8 sub_81020C8(struct Task *task)
     }
     return FALSE;
 }
+#endif
 
 static bool8 sub_81021E0(struct Task *task)
 {
@@ -903,6 +1785,48 @@ static bool8 sub_81023FC(struct Task *task)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 sub_8102424(struct Task *task)
+{
+    asm("\
+	push	{lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r0, ._234\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._233	@cond_branch\n\
+	ldr	r0, ._234 + 4\n\
+	ldr	r1, ._234 + 8\n\
+	ldrh	r1, [r1, #0xc]\n\
+	ldr	r2, ._234 + 12\n\
+	add	r0, r0, r2\n\
+	strh	r1, [r0]\n\
+._233:\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x10\n\
+	bl	BeginNormalPaletteFade\n\
+	ldr	r1, ._234 + 8\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	mov	r0, #0x0\n\
+	add	sp, sp, #0x4\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._235:\n\
+	.align	2, 0\n\
+._234:\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	gSaveBlock1\n\
+	.word	+0x2000000\n\
+	.word	0x494");
+}
+#else
 static bool8 sub_8102424(struct Task *task)
 {
     gSaveBlock1.coins = eSlotMachine->coins;
@@ -910,6 +1834,7 @@ static bool8 sub_8102424(struct Task *task)
     eSlotMachine->state++;
     return FALSE;
 }
+#endif
 
 static bool8 sub_8102460(struct Task *task)
 {
@@ -920,6 +1845,272 @@ static bool8 sub_8102460(struct Task *task)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 debug_sub_8116E74(struct Task *task)
+{
+    asm("\
+	push	{lr}\n\
+	bl	debug_sub_811B634\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._239	@cond_branch\n\
+	ldr	r1, ._240\n\
+	mov	r0, #0x5\n\
+	strb	r0, [r1]\n\
+._239:\n\
+	mov	r0, #0x0\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._241:\n\
+	.align	2, 0\n\
+._240:\n\
+	.word	+0x2000000");
+}
+#endif
+
+#if DEBUG
+__attribute__((naked))
+static void sub_8102484(void)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	ldr	r0, ._256\n\
+	ldrb	r2, [r0, #0xa]\n\
+	add	r4, r0, #0\n\
+	cmp	r2, #0\n\
+	beq	._242	@cond_branch\n\
+	b	._270\n\
+._242:\n\
+	ldr	r0, ._256 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._245	@cond_branch\n\
+	ldr	r3, ._256 + 8\n\
+	ldrb	r0, [r3]\n\
+	cmp	r0, #0\n\
+	beq	._245	@cond_branch\n\
+	ldr	r0, ._256 + 12\n\
+	ldrb	r1, [r0]\n\
+	strb	r1, [r4, #0x4]\n\
+	strb	r2, [r3]\n\
+	strb	r2, [r0]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._246	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x88\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._246:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x40\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._247	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x84\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._247:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x20\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._248	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x8c\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._248:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x10\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._249	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x80\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._249:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._250	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x7c\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._250:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._251	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x78\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._251:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._252	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x74\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._252:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._253	@cond_branch\n\
+	b	._270\n\
+._253:\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x70\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+	b	._270\n\
+._257:\n\
+	.align	2, 0\n\
+._256:\n\
+	.word	+0x2000000\n\
+	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1+0x2\n\
+	.word	unk_debug_bss_1+0x3\n\
+._245:\n\
+	add	r5, r4, #0\n\
+	ldrb	r1, [r5, #0x4]\n\
+	mov	r0, #0xc0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._270	@cond_branch\n\
+	bl	sub_8102540\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._260	@cond_branch\n\
+	bl	sub_8102578\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+	cmp	r6, #0x3\n\
+	beq	._260	@cond_branch\n\
+	ldr	r1, ._271\n\
+	lsl	r0, r6, #0x1\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0]\n\
+	ldrb	r0, [r5, #0x4]\n\
+	orr	r0, r0, r1\n\
+	strb	r0, [r5, #0x4]\n\
+	mov	r1, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._261	@cond_branch\n\
+	add	r0, r5, #0\n\
+	add	r0, r0, #0x88\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._261:\n\
+	ldrb	r1, [r5, #0x4]\n\
+	mov	r0, #0x40\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._262	@cond_branch\n\
+	add	r0, r5, #0\n\
+	add	r0, r0, #0x84\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._262:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x20\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._263	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x8c\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._263:\n\
+	cmp	r6, #0x1\n\
+	bne	._270	@cond_branch\n\
+._260:\n\
+	bl	sub_81025BC\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+	cmp	r6, #0x5\n\
+	beq	._270	@cond_branch\n\
+	ldr	r4, ._271 + 4\n\
+	ldr	r1, ._271 + 8\n\
+	lsl	r0, r6, #0x1\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0]\n\
+	ldrb	r0, [r4, #0x4]\n\
+	orr	r0, r0, r1\n\
+	strb	r0, [r4, #0x4]\n\
+	mov	r1, #0x10\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._266	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x80\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._266:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._267	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x7c\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._267:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._268	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x78\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._268:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._269	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x74\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._269:\n\
+	ldrb	r1, [r4, #0x4]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._270	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x70\n\
+	mov	r1, #0x1\n\
+	bl	debug_sub_811B5B4\n\
+._270:\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._272:\n\
+	.align	2, 0\n\
+._271:\n\
+	.word	gUnknown_083ECE42\n\
+	.word	+0x2000000\n\
+	.word	gUnknown_083ECE48");
+}
+#else
 static void sub_8102484(void)
 {
     u8 r3;
@@ -945,6 +2136,7 @@ static void sub_8102484(void)
         }
     }
 }
+#endif
 
 static void sub_81024F0(void)
 {
@@ -3993,12 +5185,12 @@ __attribute__((naked))
 void debug_sub_811B1C4()
 {
     asm(
-        "	ldr	r1, ._1\n"
+        "	ldr	r1, .__1_\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x2\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._1 + 4\n"
+        "	ldr	r2, .__1_ + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x2\n"
         "	eor	r1, r1, r0\n"
@@ -4008,9 +5200,9 @@ void debug_sub_811B1C4()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._2:\n"
+        ".__2_:\n"
         "	.align	2, 0\n"
-        "._1:\n"
+        ".__1_:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4021,12 +5213,12 @@ __attribute__((naked))
 void debug_sub_811B1EC()
 {
     asm(
-        "	ldr	r2, ._3\n"
+        "	ldr	r2, .__3\n"
         "	ldrb	r0, [r2]\n"
         "	mov	r1, #0x1\n"
         "	orr	r0, r0, r1\n"
         "	strb	r0, [r2]\n"
-        "	ldr	r2, ._3 + 4\n"
+        "	ldr	r2, .__3 + 4\n"
         "	ldrb	r0, [r2]\n"
         "	mov	r1, #0x1\n"
         "	eor	r0, r0, r1\n"
@@ -4034,9 +5226,9 @@ void debug_sub_811B1EC()
         "	lsr	r0, r0, #0x1f\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._4:\n"
+        ".__4:\n"
         "	.align	2, 0\n"
-        "._3:\n"
+        ".__3:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4047,12 +5239,12 @@ __attribute__((naked))
 void debug_sub_811B210()
 {
     asm(
-        "	ldr	r1, ._5\n"
+        "	ldr	r1, .__5\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x4\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._5 + 4\n"
+        "	ldr	r2, .__5 + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x4\n"
         "	eor	r1, r1, r0\n"
@@ -4062,9 +5254,9 @@ void debug_sub_811B210()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._6:\n"
+        ".__6:\n"
         "	.align	2, 0\n"
-        "._5:\n"
+        ".__5:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4075,12 +5267,12 @@ __attribute__((naked))
 void debug_sub_811B238()
 {
     asm(
-        "	ldr	r1, ._7\n"
+        "	ldr	r1, .__7\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x8\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._7 + 4\n"
+        "	ldr	r2, .__7 + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x8\n"
         "	eor	r1, r1, r0\n"
@@ -4090,9 +5282,9 @@ void debug_sub_811B238()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._8:\n"
+        ".__8:\n"
         "	.align	2, 0\n"
-        "._7:\n"
+        ".__7:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4103,12 +5295,12 @@ __attribute__((naked))
 void debug_sub_811B260()
 {
     asm(
-        "	ldr	r1, ._9\n"
+        "	ldr	r1, .__9\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x10\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._9 + 4\n"
+        "	ldr	r2, .__9 + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x10\n"
         "	eor	r1, r1, r0\n"
@@ -4118,9 +5310,9 @@ void debug_sub_811B260()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._10:\n"
+        ".__10:\n"
         "	.align	2, 0\n"
-        "._9:\n"
+        ".__9:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4131,12 +5323,12 @@ __attribute__((naked))
 void debug_sub_811B288()
 {
     asm(
-        "	ldr	r1, ._11\n"
+        "	ldr	r1, .__11\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x40\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._11 + 4\n"
+        "	ldr	r2, .__11 + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x40\n"
         "	eor	r1, r1, r0\n"
@@ -4146,9 +5338,9 @@ void debug_sub_811B288()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._12:\n"
+        ".__12:\n"
         "	.align	2, 0\n"
-        "._11:\n"
+        ".__11:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4159,12 +5351,12 @@ __attribute__((naked))
 void debug_sub_811B2B0()
 {
     asm(
-        "	ldr	r1, ._13\n"
+        "	ldr	r1, .__13\n"
         "	ldrb	r0, [r1]\n"
         "	mov	r3, #0x80\n"
         "	orr	r0, r0, r3\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r2, ._13 + 4\n"
+        "	ldr	r2, .__13 + 4\n"
         "	ldrb	r1, [r2]\n"
         "	mov	r0, #0x80\n"
         "	eor	r1, r1, r0\n"
@@ -4174,9 +5366,9 @@ void debug_sub_811B2B0()
         "	and	r0, r0, r3\n"
         "	strb	r0, [r2]\n"
         "	bx	lr\n"
-        "._14:\n"
+        ".__14:\n"
         "	.align	2, 0\n"
-        "._13:\n"
+        ".__13:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	unk_debug_bss_1\n"
         "\n"
@@ -4187,15 +5379,15 @@ __attribute__((naked))
 void debug_sub_811B2D8()
 {
     asm(
-        "	ldr	r0, ._15\n"
+        "	ldr	r0, .__15\n"
         "	ldrb	r1, [r0]\n"
         "	mov	r2, #0x20\n"
         "	orr	r1, r1, r2\n"
         "	strb	r1, [r0]\n"
         "	bx	lr\n"
-        "._16:\n"
+        ".__16:\n"
         "	.align	2, 0\n"
-        "._15:\n"
+        ".__15:\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "\n"
     );
@@ -4207,7 +5399,7 @@ void debug_sub_811B2E8()
     asm(
         "	push	{lr}\n"
         "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r0, ._17\n"
+        "	ldr	r0, .__17\n"
         "	ldrb	r1, [r0, #0x1]\n"
         "	add	r1, r1, #0x1\n"
         "	mov	r0, sp\n"
@@ -4221,9 +5413,9 @@ void debug_sub_811B2E8()
         "	add	sp, sp, #0x4\n"
         "	pop	{r0}\n"
         "	bx	r0\n"
-        "._18:\n"
+        ".__18:\n"
         "	.align	2, 0\n"
-        "._17:\n"
+        ".__17:\n"
         "	.word	+0x2000000\n"
         "\n"
     );
@@ -4235,90 +5427,90 @@ void debug_sub_811B310()
     asm(
         "	push	{r4, lr}\n"
         "	add	sp, sp, #0xfffffff8\n"
-        "	ldr	r0, ._21\n"
+        "	ldr	r0, .__21\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x1\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 4\n"
+        "	ldr	r0, .__21 + 4\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x3\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 8\n"
+        "	ldr	r0, .__21 + 8\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x5\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 12\n"
+        "	ldr	r0, .__21 + 12\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x7\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 16\n"
+        "	ldr	r0, .__21 + 16\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x9\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 20\n"
+        "	ldr	r0, .__21 + 20\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0xb\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 24\n"
+        "	ldr	r0, .__21 + 24\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0xd\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 28\n"
+        "	ldr	r0, .__21 + 28\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0xf\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 32\n"
+        "	ldr	r0, .__21 + 32\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x11\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 36\n"
+        "	ldr	r0, .__21 + 36\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x1\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 40\n"
+        "	ldr	r0, .__21 + 40\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x3\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 44\n"
+        "	ldr	r0, .__21 + 44\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x5\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 48\n"
+        "	ldr	r0, .__21 + 48\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x7\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 52\n"
+        "	ldr	r0, .__21 + 52\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x9\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 56\n"
+        "	ldr	r0, .__21 + 56\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0xb\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 60\n"
+        "	ldr	r0, .__21 + 60\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0xd\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 64\n"
+        "	ldr	r0, .__21 + 64\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0xf\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 68\n"
+        "	ldr	r0, .__21 + 68\n"
         "	mov	r1, #0xf\n"
         "	mov	r2, #0x11\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._21 + 72\n"
+        "	ldr	r0, .__21 + 72\n"
         "	ldrb	r0, [r0, #0x3]\n"
         "	cmp	r0, #0\n"
-        "	bne	._19	@cond_branch\n"
-        "	ldr	r0, ._21 + 76\n"
+        "	bne	.__19	@cond_branch\n"
+        "	ldr	r0, .__21 + 76\n"
         "	mov	r1, #0xa\n"
         "	mov	r2, #0x9\n"
         "	bl	Menu_PrintText\n"
-        "	b	._20\n"
-        "._22:\n"
+        "	b	.__20\n"
+        ".__22:\n"
         "	.align	2, 0\n"
-        "._21:\n"
+        ".__21:\n"
         "	.word	Str_841B1C4\n"
         "	.word	Str_841B1CB\n"
         "	.word	Str_841B1D4\n"
@@ -4339,13 +5531,13 @@ void debug_sub_811B310()
         "	.word	Str_841B243\n"
         "	.word	+0x2000000\n"
         "	.word	Str_841B246\n"
-        "._19:\n"
-        "	ldr	r0, ._30\n"
+        ".__19:\n"
+        "	ldr	r0, .__30\n"
         "	mov	r1, #0xa\n"
         "	mov	r2, #0x9\n"
         "	bl	Menu_PrintText\n"
-        "._20:\n"
-        "	ldr	r4, ._30 + 4\n"
+        ".__20:\n"
+        "	ldr	r4, .__30 + 4\n"
         "	ldr	r1, [r4, #0x68]\n"
         "	mov	r0, sp\n"
         "	mov	r2, #0x2\n"
@@ -4454,77 +5646,77 @@ void debug_sub_811B310()
         "	mov	r1, #0x14\n"
         "	mov	r2, #0x11\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r1, ._30 + 8\n"
+        "	ldr	r1, .__30 + 8\n"
         "	ldrb	r0, [r1]\n"
         "	cmp	r0, #0\n"
-        "	beq	._23	@cond_branch\n"
+        "	beq	.__23	@cond_branch\n"
         "	mov	r2, #0x0\n"
         "	cmp	r0, #0x8\n"
-        "	beq	._24	@cond_branch\n"
+        "	beq	.__24	@cond_branch\n"
         "	cmp	r0, #0x8\n"
-        "	bgt	._25	@cond_branch\n"
+        "	bgt	.__25	@cond_branch\n"
         "	cmp	r0, #0x2\n"
-        "	beq	._26	@cond_branch\n"
+        "	beq	.__26	@cond_branch\n"
         "	cmp	r0, #0x2\n"
-        "	bgt	._27	@cond_branch\n"
+        "	bgt	.__27	@cond_branch\n"
         "	cmp	r0, #0x1\n"
-        "	beq	._28	@cond_branch\n"
-        "	b	._45\n"
-        "._31:\n"
+        "	beq	.__28	@cond_branch\n"
+        "	b	.__45\n"
+        ".__31:\n"
         "	.align	2, 0\n"
-        "._30:\n"
+        ".__30:\n"
         "	.word	Str_841B249\n"
         "	.word	+0x2000000\n"
         "	.word	unk_debug_bss_1\n"
-        "._27:\n"
+        ".__27:\n"
         "	cmp	r0, #0x4\n"
-        "	beq	._32	@cond_branch\n"
-        "	b	._45\n"
-        "._25:\n"
+        "	beq	.__32	@cond_branch\n"
+        "	b	.__45\n"
+        ".__25:\n"
         "	cmp	r0, #0x40\n"
-        "	beq	._34	@cond_branch\n"
+        "	beq	.__34	@cond_branch\n"
         "	cmp	r0, #0x40\n"
-        "	bgt	._35	@cond_branch\n"
+        "	bgt	.__35	@cond_branch\n"
         "	cmp	r0, #0x10\n"
-        "	beq	._36	@cond_branch\n"
-        "	b	._45\n"
-        "._35:\n"
+        "	beq	.__36	@cond_branch\n"
+        "	b	.__45\n"
+        ".__35:\n"
         "	cmp	r0, #0x80\n"
-        "	beq	._38	@cond_branch\n"
-        "	b	._45\n"
-        "._26:\n"
+        "	beq	.__38	@cond_branch\n"
+        "	b	.__45\n"
+        ".__26:\n"
         "	mov	r2, #0x3\n"
-        "	b	._45\n"
-        "._28:\n"
+        "	b	.__45\n"
+        ".__28:\n"
         "	mov	r2, #0x5\n"
-        "	b	._45\n"
-        "._32:\n"
+        "	b	.__45\n"
+        ".__32:\n"
         "	mov	r2, #0x7\n"
-        "	b	._45\n"
-        "._24:\n"
+        "	b	.__45\n"
+        ".__24:\n"
         "	mov	r2, #0x9\n"
-        "	b	._45\n"
-        "._36:\n"
+        "	b	.__45\n"
+        ".__36:\n"
         "	mov	r2, #0xb\n"
-        "	b	._45\n"
-        "._34:\n"
+        "	b	.__45\n"
+        ".__34:\n"
         "	mov	r2, #0xd\n"
-        "	b	._45\n"
-        "._38:\n"
+        "	b	.__45\n"
+        ".__38:\n"
         "	mov	r2, #0xf\n"
-        "._45:\n"
-        "	ldr	r0, ._46\n"
+        ".__45:\n"
+        "	ldr	r0, .__46\n"
         "	mov	r1, #0x17\n"
         "	bl	Menu_PrintText\n"
-        "._23:\n"
+        ".__23:\n"
         "	bl	debug_sub_811B2E8\n"
         "	add	sp, sp, #0x8\n"
         "	pop	{r4}\n"
         "	pop	{r0}\n"
         "	bx	r0\n"
-        "._47:\n"
+        ".__47:\n"
         "	.align	2, 0\n"
-        "._46:\n"
+        ".__46:\n"
         "	.word	Str_841B26D\n"
         "\n"
     );
@@ -4539,16 +5731,16 @@ void debug_sub_811B5B4()
         "	ldr	r0, [r2]\n"
         "	add	r0, r0, r1\n"
         "	str	r0, [r2]\n"
-        "	ldr	r1, ._49\n"
+        "	ldr	r1, .__49\n"
         "	cmp	r0, r1\n"
-        "	ble	._48	@cond_branch\n"
+        "	ble	.__48	@cond_branch\n"
         "	str	r1, [r2]\n"
-        "._48:\n"
+        ".__48:\n"
         "	pop	{r0}\n"
         "	bx	r0\n"
-        "._50:\n"
+        ".__50:\n"
         "	.align	2, 0\n"
-        "._49:\n"
+        ".__49:\n"
         "	.word	0x270f\n"
         "\n"
     );
@@ -4558,16 +5750,16 @@ __attribute__((naked))
 void debug_sub_811B5D0()
 {
     asm(
-        "	ldr	r0, ._51\n"
+        "	ldr	r0, .__51\n"
         "	mov	r1, #0x0\n"
         "	strb	r1, [r0]\n"
-        "	ldr	r0, ._51 + 4\n"
+        "	ldr	r0, .__51 + 4\n"
         "	strb	r1, [r0]\n"
-        "	ldr	r0, ._51 + 8\n"
+        "	ldr	r0, .__51 + 8\n"
         "	strb	r1, [r0]\n"
-        "	ldr	r0, ._51 + 12\n"
+        "	ldr	r0, .__51 + 12\n"
         "	strb	r1, [r0]\n"
-        "	ldr	r2, ._51 + 16\n"
+        "	ldr	r2, .__51 + 16\n"
         "	mov	r0, #0x0\n"
         "	str	r0, [r2, #0x68]\n"
         "	str	r0, [r2, #0x6c]\n"
@@ -4587,9 +5779,9 @@ void debug_sub_811B5D0()
         "	add	r1, r1, #0x4\n"
         "	str	r0, [r1]\n"
         "	bx	lr\n"
-        "._52:\n"
+        ".__52:\n"
         "	.align	2, 0\n"
-        "._51:\n"
+        ".__51:\n"
         "	.word	unk_debug_bss_1\n"
         "	.word	unk_debug_bss_1+0x2\n"
         "	.word	unk_debug_bss_1+0x3\n"
@@ -4604,14 +5796,14 @@ void debug_sub_811B620()
 {
     asm(
         "	push	{lr}\n"
-        "	ldr	r0, ._53\n"
+        "	ldr	r0, .__53\n"
         "	mov	r1, #0x0\n"
         "	bl	CreateTask\n"
         "	pop	{r0}\n"
         "	bx	r0\n"
-        "._54:\n"
+        ".__54:\n"
         "	.align	2, 0\n"
-        "._53:\n"
+        ".__53:\n"
         "	.word	debug_sub_811B654+1\n"
         "\n"
     );
@@ -4622,21 +5814,21 @@ void debug_sub_811B634()
 {
     asm(
         "	push	{lr}\n"
-        "	ldr	r0, ._57\n"
+        "	ldr	r0, .__57\n"
         "	bl	FindTaskIdByFunc\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	cmp	r0, #0xff\n"
-        "	beq	._55	@cond_branch\n"
+        "	beq	.__55	@cond_branch\n"
         "	mov	r0, #0x0\n"
-        "	b	._56\n"
-        "._58:\n"
+        "	b	.__56\n"
+        ".__58:\n"
         "	.align	2, 0\n"
-        "._57:\n"
+        ".__57:\n"
         "	.word	debug_sub_811B654+1\n"
-        "._55:\n"
+        ".__55:\n"
         "	mov	r0, #0x1\n"
-        "._56:\n"
+        ".__56:\n"
         "	pop	{r1}\n"
         "	bx	r1\n"
         "\n"
@@ -4654,32 +5846,32 @@ void debug_sub_811B654()
         "	lsl	r0, r6, #0x2\n"
         "	add	r0, r0, r6\n"
         "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._63\n"
+        "	ldr	r1, .__63\n"
         "	add	r5, r0, r1\n"
         "	mov	r0, #0x8\n"
         "	ldsh	r1, [r5, r0]\n"
         "	cmp	r1, #0x1\n"
-        "	beq	._59	@cond_branch\n"
+        "	beq	.__59	@cond_branch\n"
         "	cmp	r1, #0x1\n"
-        "	bgt	._60	@cond_branch\n"
+        "	bgt	.__60	@cond_branch\n"
         "	cmp	r1, #0\n"
-        "	beq	._61	@cond_branch\n"
-        "	b	._116\n"
-        "._64:\n"
+        "	beq	.__61	@cond_branch\n"
+        "	b	.__116\n"
+        ".__64:\n"
         "	.align	2, 0\n"
-        "._63:\n"
+        ".__63:\n"
         "	.word	gTasks\n"
-        "._60:\n"
+        ".__60:\n"
         "	cmp	r1, #0x2\n"
-        "	bne	._65	@cond_branch\n"
-        "	b	._66\n"
-        "._65:\n"
+        "	bne	.__65	@cond_branch\n"
+        "	b	.__66\n"
+        ".__65:\n"
         "	cmp	r1, #0x3\n"
-        "	bne	._67	@cond_branch\n"
-        "	b	._68\n"
-        "._67:\n"
-        "	b	._116\n"
-        "._61:\n"
+        "	bne	.__67	@cond_branch\n"
+        "	b	.__68\n"
+        ".__67:\n"
+        "	b	.__116\n"
+        ".__61:\n"
         "	mov	r0, #0x0\n"
         "	mov	r1, #0x0\n"
         "	mov	r2, #0x18\n"
@@ -4689,64 +5881,64 @@ void debug_sub_811B654()
         "	ldrh	r0, [r5, #0x8]\n"
         "	add	r0, r0, #0x1\n"
         "	strh	r0, [r5, #0x8]\n"
-        "	b	._116\n"
-        "._59:\n"
-        "	ldr	r7, ._76\n"
+        "	b	.__116\n"
+        ".__59:\n"
+        "	ldr	r7, .__76\n"
         "	ldrh	r2, [r7, #0x2e]\n"
         "	mov	r0, #0x2\n"
         "	and	r0, r0, r2\n"
         "	cmp	r0, #0\n"
-        "	beq	._71	@cond_branch\n"
-        "	b	._94\n"
-        "._71:\n"
+        "	beq	.__71	@cond_branch\n"
+        "	b	.__94\n"
+        ".__71:\n"
         "	mov	r0, #0x20\n"
         "	and	r0, r0, r2\n"
         "	lsl	r0, r0, #0x10\n"
         "	lsr	r3, r0, #0x10\n"
         "	cmp	r3, #0\n"
-        "	beq	._73	@cond_branch\n"
-        "	ldr	r1, ._76 + 4\n"
+        "	beq	.__73	@cond_branch\n"
+        "	ldr	r1, .__76 + 4\n"
         "	ldrb	r0, [r1, #0x1]\n"
         "	sub	r0, r0, #0x1\n"
         "	strb	r0, [r1, #0x1]\n"
         "	lsl	r0, r0, #0x18\n"
         "	cmp	r0, #0\n"
-        "	bge	._79	@cond_branch\n"
+        "	bge	.__79	@cond_branch\n"
         "	mov	r0, #0x5\n"
         "	strb	r0, [r1, #0x1]\n"
-        "	b	._79\n"
-        "._77:\n"
+        "	b	.__79\n"
+        ".__77:\n"
         "	.align	2, 0\n"
-        "._76:\n"
+        ".__76:\n"
         "	.word	gMain\n"
         "	.word	+0x2000000\n"
-        "._73:\n"
+        ".__73:\n"
         "	mov	r0, #0x10\n"
         "	and	r0, r0, r2\n"
         "	cmp	r0, #0\n"
-        "	beq	._78	@cond_branch\n"
-        "	ldr	r1, ._81\n"
+        "	beq	.__78	@cond_branch\n"
+        "	ldr	r1, .__81\n"
         "	ldrb	r0, [r1, #0x1]\n"
         "	add	r0, r0, #0x1\n"
         "	strb	r0, [r1, #0x1]\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	cmp	r0, #0x5\n"
-        "	bls	._79	@cond_branch\n"
+        "	bls	.__79	@cond_branch\n"
         "	strb	r3, [r1, #0x1]\n"
-        "._79:\n"
+        ".__79:\n"
         "	bl	debug_sub_811B2E8\n"
-        "	b	._116\n"
-        "._82:\n"
+        "	b	.__116\n"
+        ".__82:\n"
         "	.align	2, 0\n"
-        "._81:\n"
+        ".__81:\n"
         "	.word	+0x2000000\n"
-        "._78:\n"
+        ".__78:\n"
         "	and	r1, r1, r2\n"
         "	lsl	r0, r1, #0x10\n"
         "	lsr	r4, r0, #0x10\n"
         "	cmp	r4, #0\n"
-        "	beq	._83	@cond_branch\n"
+        "	beq	.__83	@cond_branch\n"
         "	mov	r0, #0x3\n"
         "	strh	r0, [r5, #0x8]\n"
         "	bl	Menu_EraseScreen\n"
@@ -4755,28 +5947,28 @@ void debug_sub_811B654()
         "	mov	r2, #0x9\n"
         "	mov	r3, #0x5\n"
         "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._85\n"
+        "	ldr	r0, .__85\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x1\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._85 + 4\n"
+        "	ldr	r0, .__85 + 4\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x3\n"
         "	bl	Menu_PrintText\n"
-        "	b	._116\n"
-        "._86:\n"
+        "	b	.__116\n"
+        ".__86:\n"
         "	.align	2, 0\n"
-        "._85:\n"
+        ".__85:\n"
         "	.word	Str_841B25C\n"
         "	.word	Str_841B264\n"
-        "._83:\n"
+        ".__83:\n"
         "	mov	r0, #0x4\n"
         "	and	r0, r0, r2\n"
         "	cmp	r0, #0\n"
-        "	beq	._87	@cond_branch\n"
-        "	ldr	r0, ._91\n"
+        "	beq	.__87	@cond_branch\n"
+        "	ldr	r0, .__91\n"
         "	strb	r4, [r0]\n"
-        "	ldr	r0, ._91 + 4\n"
+        "	ldr	r0, .__91 + 4\n"
         "	strb	r4, [r0]\n"
         "	bl	Menu_EraseScreen\n"
         "	mov	r0, #0x0\n"
@@ -4784,11 +5976,11 @@ void debug_sub_811B654()
         "	mov	r2, #0xa\n"
         "	mov	r3, #0x13\n"
         "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._91 + 8\n"
+        "	ldr	r0, .__91 + 8\n"
         "	mov	r1, #0x1\n"
         "	mov	r2, #0x1\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r3, ._91 + 12\n"
+        "	ldr	r3, .__91 + 12\n"
         "	mov	r0, #0x2\n"
         "	mov	r1, #0x3\n"
         "	mov	r2, #0x8\n"
@@ -4804,144 +5996,144 @@ void debug_sub_811B654()
         "	ldrh	r0, [r5, #0x8]\n"
         "	add	r0, r0, #0x1\n"
         "	strh	r0, [r5, #0x8]\n"
-        "._87:\n"
+        ".__87:\n"
         "	ldrh	r1, [r7, #0x2e]\n"
         "	mov	r0, #0x8\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	bne	._88	@cond_branch\n"
-        "	b	._116\n"
-        "._88:\n"
-        "	ldr	r1, ._91 + 16\n"
+        "	bne	.__88	@cond_branch\n"
+        "	b	.__116\n"
+        ".__88:\n"
+        "	ldr	r1, .__91 + 16\n"
         "	mov	r0, #0x1\n"
         "	strb	r0, [r1]\n"
-        "	b	._94\n"
-        "._92:\n"
+        "	b	.__94\n"
+        ".__92:\n"
         "	.align	2, 0\n"
-        "._91:\n"
+        ".__91:\n"
         "	.word	unk_debug_bss_1+0x2\n"
         "	.word	unk_debug_bss_1+0x3\n"
         "	.word	Str_841B254\n"
         "	.word	_841B270\n"
         "	.word	unk_debug_bss_1+0x4\n"
-        "._66:\n"
+        ".__66:\n"
         "	bl	Menu_ProcessInput\n"
         "	lsl	r0, r0, #0x18\n"
         "	asr	r2, r0, #0x18\n"
         "	mov	r0, #0x2\n"
         "	neg	r0, r0\n"
         "	cmp	r2, r0\n"
-        "	beq	._116	@cond_branch\n"
+        "	beq	.__116	@cond_branch\n"
         "	add	r0, r0, #0x1\n"
         "	cmp	r2, r0\n"
-        "	beq	._94	@cond_branch\n"
-        "	ldr	r1, ._96\n"
+        "	beq	.__94	@cond_branch\n"
+        "	ldr	r1, .__96\n"
         "	mov	r0, #0x1\n"
         "	strb	r0, [r1]\n"
-        "	ldr	r0, ._96 + 4\n"
+        "	ldr	r0, .__96 + 4\n"
         "	lsl	r1, r2, #0x3\n"
         "	add	r0, r0, #0x4\n"
         "	add	r1, r1, r0\n"
         "	ldr	r0, [r1]\n"
         "	bl	_call_via_r0\n"
-        "._94:\n"
+        ".__94:\n"
         "	bl	Menu_EraseScreen\n"
         "	add	r0, r6, #0\n"
         "	bl	DestroyTask\n"
-        "	b	._116\n"
-        "._97:\n"
+        "	b	.__116\n"
+        ".__97:\n"
         "	.align	2, 0\n"
-        "._96:\n"
+        ".__96:\n"
         "	.word	unk_debug_bss_1+0x2\n"
         "	.word	_841B270\n"
-        "._68:\n"
-        "	ldr	r2, ._100\n"
+        ".__68:\n"
+        "	ldr	r2, .__100\n"
         "	ldrh	r1, [r2, #0x30]\n"
         "	mov	r0, #0x80\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._98	@cond_branch\n"
-        "	ldr	r2, ._100 + 4\n"
+        "	beq	.__98	@cond_branch\n"
+        "	ldr	r2, .__100 + 4\n"
         "	ldrh	r0, [r2, #0xc]\n"
         "	add	r0, r0, #0x64\n"
-        "	b	._99\n"
-        "._101:\n"
+        "	b	.__99\n"
+        ".__101:\n"
         "	.align	2, 0\n"
-        "._100:\n"
+        ".__100:\n"
         "	.word	gMain\n"
         "	.word	+0x2000000\n"
-        "._98:\n"
+        ".__98:\n"
         "	mov	r0, #0x40\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._102	@cond_branch\n"
-        "	ldr	r1, ._104\n"
+        "	beq	.__102	@cond_branch\n"
+        "	ldr	r1, .__104\n"
         "	ldrh	r0, [r1, #0xc]\n"
         "	sub	r0, r0, #0x64\n"
-        "	b	._103\n"
-        "._105:\n"
+        "	b	.__103\n"
+        ".__105:\n"
         "	.align	2, 0\n"
-        "._104:\n"
+        ".__104:\n"
         "	.word	+0x2000000\n"
-        "._102:\n"
+        ".__102:\n"
         "	mov	r0, #0x20\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._106	@cond_branch\n"
-        "	ldr	r1, ._109\n"
-        "	ldr	r2, ._109 + 4\n"
+        "	beq	.__106	@cond_branch\n"
+        "	ldr	r1, .__109\n"
+        "	ldr	r2, .__109 + 4\n"
         "	add	r0, r2, #0\n"
         "	ldrh	r2, [r1, #0xc]\n"
         "	add	r0, r0, r2\n"
-        "._103:\n"
+        ".__103:\n"
         "	strh	r0, [r1, #0xc]\n"
         "	lsl	r0, r0, #0x10\n"
         "	cmp	r0, #0\n"
-        "	bgt	._116	@cond_branch\n"
-        "	ldr	r0, ._109 + 8\n"
+        "	bgt	.__116	@cond_branch\n"
+        "	ldr	r0, .__109 + 8\n"
         "	strh	r0, [r1, #0xc]\n"
-        "	b	._116\n"
-        "._110:\n"
+        "	b	.__116\n"
+        ".__110:\n"
         "	.align	2, 0\n"
-        "._109:\n"
+        ".__109:\n"
         "	.word	+0x2000000\n"
         "	.word	0xfffffc18\n"
         "	.word	0x270f\n"
-        "._106:\n"
+        ".__106:\n"
         "	mov	r0, #0x10\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._111	@cond_branch\n"
-        "	ldr	r2, ._114\n"
+        "	beq	.__111	@cond_branch\n"
+        "	ldr	r2, .__114\n"
         "	mov	r1, #0xfa\n"
         "	lsl	r1, r1, #0x2\n"
         "	add	r0, r1, #0\n"
         "	ldrh	r1, [r2, #0xc]\n"
         "	add	r0, r0, r1\n"
-        "._99:\n"
+        ".__99:\n"
         "	strh	r0, [r2, #0xc]\n"
         "	lsl	r0, r0, #0x10\n"
         "	asr	r0, r0, #0x10\n"
-        "	ldr	r1, ._114 + 4\n"
+        "	ldr	r1, .__114 + 4\n"
         "	cmp	r0, r1\n"
-        "	ble	._116	@cond_branch\n"
+        "	ble	.__116	@cond_branch\n"
         "	strh	r1, [r2, #0xc]\n"
-        "	b	._116\n"
-        "._115:\n"
+        "	b	.__116\n"
+        ".__115:\n"
         "	.align	2, 0\n"
-        "._114:\n"
+        ".__114:\n"
         "	.word	+0x2000000\n"
         "	.word	0x270f\n"
-        "._111:\n"
+        ".__111:\n"
         "	ldrh	r1, [r2, #0x2e]\n"
         "	mov	r0, #0x2\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._116	@cond_branch\n"
+        "	beq	.__116	@cond_branch\n"
         "	bl	Menu_EraseScreen\n"
         "	add	r0, r6, #0\n"
         "	bl	DestroyTask\n"
-        "._116:\n"
+        ".__116:\n"
         "	add	sp, sp, #0x8\n"
         "	pop	{r4, r5, r6, r7}\n"
         "	pop	{r0}\n"
@@ -4960,232 +6152,232 @@ void debug_sub_811B894()
         "	mov	r5, r8\n"
         "	push	{r5, r6, r7}\n"
         "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r1, ._122\n"
+        "	ldr	r1, .__122\n"
         "	ldrh	r2, [r1, #0x8]\n"
         "	mov	r0, #0xc0\n"
         "	lsl	r0, r0, #0x1\n"
         "	and	r0, r0, r2\n"
         "	add	r4, r1, #0\n"
         "	cmp	r0, #0\n"
-        "	beq	._117	@cond_branch\n"
+        "	beq	.__117	@cond_branch\n"
         "	add	r1, r1, #0x90\n"
         "	ldr	r0, [r1]\n"
         "	add	r0, r0, #0x1\n"
         "	str	r0, [r1]\n"
-        "	ldr	r2, ._122 + 4\n"
+        "	ldr	r2, .__122 + 4\n"
         "	cmp	r0, r2\n"
-        "	ble	._118	@cond_branch\n"
+        "	ble	.__118	@cond_branch\n"
         "	str	r2, [r1]\n"
-        "._118:\n"
+        ".__118:\n"
         "	add	r0, r4, #0\n"
         "	add	r0, r0, #0x88\n"
         "	ldr	r1, [r1]\n"
         "	ldr	r0, [r0]\n"
         "	cmp	r1, r0\n"
-        "	beq	._119	@cond_branch\n"
-        "	ldr	r0, ._122 + 8\n"
+        "	beq	.__119	@cond_branch\n"
+        "	ldr	r0, .__122 + 8\n"
         "	mov	r1, #0x4\n"
         "	mov	r2, #0xf\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r1, ._122 + 12\n"
+        "	ldr	r1, .__122 + 12\n"
         "	mov	r0, #0x0\n"
         "	strb	r0, [r1]\n"
-        "._119:\n"
+        ".__119:\n"
         "	ldrb	r1, [r4, #0x4]\n"
         "	mov	r0, #0x80\n"
         "	and	r0, r0, r1\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r4, r0, #0x18\n"
         "	cmp	r4, #0\n"
-        "	bne	._126	@cond_branch\n"
-        "	ldr	r0, ._122 + 16\n"
+        "	bne	.__126	@cond_branch\n"
+        "	ldr	r0, .__122 + 16\n"
         "	mov	r1, #0x4\n"
         "	mov	r2, #0x11\n"
-        "	b	._121\n"
-        "._123:\n"
+        "	b	.__121\n"
+        ".__123:\n"
         "	.align	2, 0\n"
-        "._122:\n"
+        ".__122:\n"
         "	.word	+0x2000000\n"
         "	.word	0x270f\n"
         "	.word	Str_841B2B0\n"
         "	.word	unk_debug_bss_1+0x4\n"
         "	.word	Str_841B2D3\n"
-        "._117:\n"
+        ".__117:\n"
         "	lsl	r0, r2, #0x10\n"
         "	cmp	r0, #0\n"
-        "	beq	._127	@cond_branch\n"
+        "	beq	.__127	@cond_branch\n"
         "	ldrb	r1, [r4, #0x4]\n"
         "	mov	r0, #0x80\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._126	@cond_branch\n"
+        "	beq	.__126	@cond_branch\n"
         "	mov	r4, #0x3\n"
         "	and	r4, r4, r2\n"
         "	cmp	r4, #0\n"
-        "	bne	._126	@cond_branch\n"
-        "	ldr	r0, ._163\n"
+        "	bne	.__126	@cond_branch\n"
+        "	ldr	r0, .__163\n"
         "	mov	r1, #0x4\n"
         "	mov	r2, #0x2\n"
-        "._121:\n"
+        ".__121:\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._163 + 4\n"
+        "	ldr	r0, .__163 + 4\n"
         "	strb	r4, [r0]\n"
-        "._126:\n"
-        "	ldr	r0, ._163 + 8\n"
+        ".__126:\n"
+        "	ldr	r0, .__163 + 8\n"
         "	ldrh	r1, [r0, #0x8]\n"
         "	add	r4, r0, #0\n"
         "	cmp	r1, #0\n"
-        "	beq	._127	@cond_branch\n"
-        "	b	._162\n"
-        "._127:\n"
+        "	beq	.__127	@cond_branch\n"
+        "	b	.__162\n"
+        ".__127:\n"
         "	mov	r1, #0x12\n"
         "	ldsh	r0, [r4, r1]\n"
         "	cmp	r0, #0x3\n"
-        "	beq	._129	@cond_branch\n"
-        "	b	._162\n"
-        "._129:\n"
+        "	beq	.__129	@cond_branch\n"
+        "	b	.__162\n"
+        ".__129:\n"
         "	ldrb	r1, [r4, #0x4]\n"
         "	mov	r0, #0x80\n"
         "	and	r0, r0, r1\n"
         "	cmp	r0, #0\n"
-        "	beq	._131	@cond_branch\n"
-        "	b	._162\n"
-        "._131:\n"
+        "	beq	.__131	@cond_branch\n"
+        "	b	.__162\n"
+        ".__131:\n"
         "	mov	r0, #0x0\n"
         "	mov	r1, #0x1\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r7, r0, #0x18\n"
         "	mov	r0, #0x0\n"
         "	mov	r1, #0x2\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	str	r0, [sp]\n"
         "	mov	r0, #0x0\n"
         "	mov	r1, #0x3\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r6, r0, #0x18\n"
         "	mov	r0, #0x1\n"
         "	mov	r1, #0x1\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	mov	r9, r0\n"
         "	mov	r0, #0x1\n"
         "	mov	r1, #0x2\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r4, r0, #0x18\n"
         "	mov	r0, #0x1\n"
         "	mov	r1, #0x3\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	mov	sl, r0\n"
         "	mov	r0, #0x2\n"
         "	mov	r1, #0x1\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r5, r0, #0x18\n"
         "	mov	r0, #0x2\n"
         "	mov	r1, #0x2\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	mov	r8, r0\n"
         "	mov	r0, #0x2\n"
         "	mov	r1, #0x3\n"
-        "	bl	sub_8102BA4\n"
+        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
         "	lsl	r0, r0, #0x18\n"
         "	lsr	r0, r0, #0x18\n"
         "	cmp	r7, #0\n"
-        "	bne	._134	@cond_branch\n"
+        "	bne	.__134	@cond_branch\n"
         "	mov	r1, r9\n"
         "	cmp	r1, #0x1\n"
-        "	bne	._134	@cond_branch\n"
+        "	bne	.__134	@cond_branch\n"
         "	cmp	r5, #0\n"
-        "	beq	._159	@cond_branch\n"
-        "._134:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__134:\n"
         "	ldr	r1, [sp]\n"
         "	cmp	r1, #0\n"
-        "	bne	._137	@cond_branch\n"
+        "	bne	.__137	@cond_branch\n"
         "	cmp	r4, #0x1\n"
-        "	bne	._137	@cond_branch\n"
+        "	bne	.__137	@cond_branch\n"
         "	mov	r1, r8\n"
         "	cmp	r1, #0\n"
-        "	beq	._159	@cond_branch\n"
-        "._137:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__137:\n"
         "	cmp	r6, #0\n"
-        "	bne	._140	@cond_branch\n"
+        "	bne	.__140	@cond_branch\n"
         "	mov	r1, sl\n"
         "	cmp	r1, #0x1\n"
-        "	bne	._140	@cond_branch\n"
+        "	bne	.__140	@cond_branch\n"
         "	cmp	r0, #0\n"
-        "	beq	._159	@cond_branch\n"
-        "._140:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__140:\n"
         "	cmp	r7, #0\n"
-        "	bne	._143	@cond_branch\n"
+        "	bne	.__143	@cond_branch\n"
         "	cmp	r4, #0x1\n"
-        "	bne	._143	@cond_branch\n"
+        "	bne	.__143	@cond_branch\n"
         "	cmp	r0, #0\n"
-        "	beq	._159	@cond_branch\n"
-        "._143:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__143:\n"
         "	cmp	r6, #0\n"
-        "	bne	._146	@cond_branch\n"
+        "	bne	.__146	@cond_branch\n"
         "	cmp	r4, #0x1\n"
-        "	bne	._146	@cond_branch\n"
+        "	bne	.__146	@cond_branch\n"
         "	cmp	r5, #0\n"
-        "	beq	._159	@cond_branch\n"
-        "._146:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__146:\n"
         "	cmp	r7, #0x1\n"
-        "	bne	._149	@cond_branch\n"
+        "	bne	.__149	@cond_branch\n"
         "	mov	r1, r9\n"
         "	cmp	r1, #0\n"
-        "	bne	._149	@cond_branch\n"
+        "	bne	.__149	@cond_branch\n"
         "	cmp	r5, #0x1\n"
-        "	beq	._159	@cond_branch\n"
-        "._149:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__149:\n"
         "	ldr	r1, [sp]\n"
         "	cmp	r1, #0x1\n"
-        "	bne	._152	@cond_branch\n"
+        "	bne	.__152	@cond_branch\n"
         "	cmp	r4, #0\n"
-        "	bne	._152	@cond_branch\n"
+        "	bne	.__152	@cond_branch\n"
         "	mov	r1, r8\n"
         "	cmp	r1, #0x1\n"
-        "	beq	._159	@cond_branch\n"
-        "._152:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__152:\n"
         "	cmp	r6, #0x1\n"
-        "	bne	._155	@cond_branch\n"
+        "	bne	.__155	@cond_branch\n"
         "	mov	r1, sl\n"
         "	cmp	r1, #0\n"
-        "	bne	._155	@cond_branch\n"
+        "	bne	.__155	@cond_branch\n"
         "	cmp	r0, #0x1\n"
-        "	beq	._159	@cond_branch\n"
-        "._155:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__155:\n"
         "	cmp	r7, #0x1\n"
-        "	bne	._158	@cond_branch\n"
+        "	bne	.__158	@cond_branch\n"
         "	cmp	r4, #0\n"
-        "	bne	._158	@cond_branch\n"
+        "	bne	.__158	@cond_branch\n"
         "	cmp	r0, #0x1\n"
-        "	beq	._159	@cond_branch\n"
-        "._158:\n"
+        "	beq	.__159	@cond_branch\n"
+        ".__158:\n"
         "	cmp	r6, #0x1\n"
-        "	bne	._162	@cond_branch\n"
+        "	bne	.__162	@cond_branch\n"
         "	cmp	r4, #0\n"
-        "	bne	._162	@cond_branch\n"
+        "	bne	.__162	@cond_branch\n"
         "	cmp	r5, #0x1\n"
-        "	bne	._162	@cond_branch\n"
-        "._159:\n"
-        "	ldr	r0, ._163 + 12\n"
+        "	bne	.__162	@cond_branch\n"
+        ".__159:\n"
+        "	ldr	r0, .__163 + 12\n"
         "	mov	r1, #0x4\n"
         "	mov	r2, #0x0\n"
         "	bl	Menu_PrintText\n"
-        "	ldr	r1, ._163 + 4\n"
+        "	ldr	r1, .__163 + 4\n"
         "	mov	r0, #0x0\n"
         "	strb	r0, [r1]\n"
-        "._162:\n"
+        ".__162:\n"
         "	add	sp, sp, #0x4\n"
         "	pop	{r3, r4, r5}\n"
         "	mov	r8, r3\n"
@@ -5194,9 +6386,9 @@ void debug_sub_811B894()
         "	pop	{r4, r5, r6, r7}\n"
         "	pop	{r0}\n"
         "	bx	r0\n"
-        "._164:\n"
+        ".__164:\n"
         "	.align	2, 0\n"
-        "._163:\n"
+        ".__163:\n"
         "	.word	Str_841B2E4\n"
         "	.word	unk_debug_bss_1+0x4\n"
         "	.word	+0x2000000\n"
@@ -6636,3 +7828,50 @@ static const struct SpritePalette gSlotMachineSpritePalettes[] = {
 static const u8 sReelTimeGfx[] = INCBIN_U8("graphics/slot_machine/reel_time.4bpp.lz");
 
 static const u16 sReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/reel_time_window_map.bin");
+
+#if DEBUG
+
+const u8 Str_841B1C4[] = _("SETTEI");
+const u8 Str_841B1CB[] = _("MAWASITA");
+const u8 Str_841B1D4[] = _("MODOSI");
+const u8 Str_841B1DB[] = _("NOMARE");
+const u8 Str_841B1E2[] = _("MAE　7");
+const u8 Str_841B1E8[] = _("LR　　HENKOU");
+const u8 Str_841B1F3[] = _("START　　JIDOUSU");
+const u8 Str_841B202[] = _("SELECT　　SETTEI");
+const u8 Str_841B211[] = _("TYUHSEN");
+const u8 Str_841B219[] = _("CHERRY");
+const u8 Str_841B220[] = _("REPLAY");
+const u8 Str_841B227[] = _("HASUBO");
+const u8 Str_841B22E[] = _("RURIRI");
+const u8 Str_841B235[] = _("INAZU");
+const u8 Str_841B23B[] = _("REG");
+const u8 Str_841B23F[] = _("BIG");
+const u8 Str_841B243[] = _("BD");
+const u8 Str_841B246[] = _("R7");
+const u8 Str_841B249[] = _("B7");
+const u8 Str_841B24C[] = _("A　　COIN");
+const u8 Str_841B254[] = _("TYUHSEN");
+const u8 Str_841B25C[] = _("UD　　100");
+const u8 Str_841B264[] = _("LR　　1000");
+const u8 Str_841B26D[] = _("×");
+
+// Is this MenuAction2? I'm not sure.
+const struct {const u8 *text; void (*func)();} _841B270[] =
+{
+    {Str_841B219, debug_sub_811B1C4},
+    {Str_841B220, debug_sub_811B1EC},
+    {Str_841B227, debug_sub_811B210},
+    {Str_841B22E, debug_sub_811B238},
+    {Str_841B235, debug_sub_811B260},
+    {Str_841B23B, debug_sub_811B288},
+    {Str_841B23F, debug_sub_811B2B0},
+    {Str_841B243, debug_sub_811B2D8},
+};
+
+const u8 Str_841B2B0[] = _("·カウントエラーがおきました");
+const u8 Str_841B2BF[] = _("·リールそうさで　エラーが　おきました");
+const u8 Str_841B2D3[] = _("·フラグオフエラーが　おきました");
+const u8 Str_841B2E4[] = _("·ボーナスこやくの　エラーが　おきました");
+
+#endif

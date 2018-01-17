@@ -4777,7 +4777,8 @@ void DoPPUpItemEffect(u8 taskId, u16 b, TaskFunc c)
     gMain.newKeys = 0;
 }
 
-static const u8 *const StatNames[] = {
+static const u8 *const StatNames[] =
+{
     gOtherText_HP,
     gOtherText_Attack,
     gOtherText_Defense,
@@ -4786,7 +4787,8 @@ static const u8 *const StatNames[] = {
     gOtherText_Speed,
 };
 
-static const u8 StatDataTypes[] = {
+static const u8 StatDataTypes[] =
+{
     MON_DATA_MAX_HP,
     MON_DATA_ATK,
     MON_DATA_DEF,
@@ -4794,6 +4796,17 @@ static const u8 StatDataTypes[] = {
     MON_DATA_SPDEF,
     MON_DATA_SPEED,
 };
+
+#if DEBUG
+
+const u8 gUnknown_Debug_839B6CE[] = {0x40, 0, 0, 0, 0x44, 0, 0xFF, 0, 0, 0};
+
+const u8 gUnknown_Debug_839B6D8[] = _(
+    "{STR_VAR_1}かい　じっこう\n"
+    "{STR_VAR_2}たんいじかん　しょうひ");
+
+#endif
+
 void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
 {
     u8 i;

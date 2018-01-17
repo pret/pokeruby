@@ -1009,6 +1009,180 @@ _0809625C: .4byte gPokemonStorage + 0x8344
 _08096260: .4byte gPCText_BOX
 	thumb_func_end ResetPokemonStorageSystem
 
+.ifdef DEBUG
+	thumb_func_start debug_sub_80A3904
+debug_sub_80A3904:
+.syntax divided
+	push	{r4, r5, r6, r7, lr}
+	mov	r7, sl
+	mov	r6, r9
+	mov	r5, r8
+	push	{r5, r6, r7}
+	add	sp, sp, #0xffffffe4
+	mov	r0, #0x0
+	mov	r8, r0
+	mov	r7, r8
+	mov	r1, #0x14
+	str	r1, [sp, #0x18]
+	mov	r2, #0xff
+	mov	r9, r2
+._162:
+	mov	r5, #0x0
+	cmp	r7, #0
+	beq	._160	@cond_branch
+	mov	r0, #0xe
+	mov	r8, r0
+	b	._158
+._160:
+	bl	Random
+	lsl	r0, r0, #0x10
+	lsr	r0, r0, #0x10
+	str	r0, [sp, #0x14]
+	mov	r2, r8
+	lsl	r1, r2, #0x2
+	add r1, r1, r8
+	lsl	r3, r1, #0x4
+	sub	r3, r3, r1
+	lsl	r3, r3, #0x5
+	lsl	r1, r5, #0x2
+	add	r1, r1, r5
+	lsl	r1, r1, #0x4
+	ldr	r2, ._163
+	add	r1, r1, r2
+	add	r6, r3, r1
+	ldr	r2, ._163 + 4
+	lsl	r1, r7, #0x1
+	add	r1, r1, r2
+	ldrh	r4, [r1]
+	add	r5, r5, #0x1
+	lsl	r2, r5, #0x18
+	lsr	r2, r2, #0x18
+	mov	r1, #0x0
+	str	r1, [sp]
+	str	r1, [sp, #0x4]
+	mov	r1, #0x1
+	mov	sl, r1
+	str	r1, [sp, #0x8]
+	str	r0, [sp, #0xc]
+	add	r0, r6, #0
+	add	r1, r4, #0
+	mov	r3, #0x20
+	bl	CreateBoxMon
+	cmp	r4, #0
+	beq	._157	@cond_branch
+	cmp	r4, #0xac
+	bne	._156	@cond_branch
+	add	r0, sp, #0x10
+	mov	r2, sl
+	strb	r2, [r0]
+	add	r0, r6, #0
+	mov	r1, #0x2d
+	add	r2, sp, #0x10
+	bl	SetBoxMonData
+._156:
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r4, sp, #0x14
+	add	r0, r6, #0
+	mov	r1, #0x16
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x17
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x18
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x21
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x2f
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	bl	Random
+	mov	r1, r9
+	and	r1, r1, r0
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x30
+	add	r2, r4, #0
+	bl	SetBoxMonData
+	ldr	r0, [sp, #0x18]
+	cmp	r0, #0
+	beq	._157	@cond_branch
+	sub	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	lsr	r0, r0, #0x10
+	str	r0, [sp, #0x18]
+	mov	r1, sl
+	str	r1, [sp, #0x14]
+	add	r0, r6, #0
+	mov	r1, #0x32
+	add	r2, r4, #0
+	bl	SetBoxMonData
+._157:
+	add	r0, r7, #1
+	lsl	r0, r0, #0x10
+	lsr	r7, r0, #0x10
+	lsl	r0, r5, #0x10
+	lsr	r5, r0, #0x10
+	cmp	r5, #0x1d
+	bhi	._158	@cond_branch
+	cmp	r7, #0
+	bne	._159	@cond_branch
+	b	._160
+._159:
+	mov	r2, #0xe
+	mov	r8, r2
+._158:
+	mov	r0, r8
+	add	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	lsr	r0, r0, #0x10
+	mov	r8, r0
+	cmp	r0, #0xd
+	bhi	._161	@cond_branch
+	b	._162
+._161:
+	add	sp, sp, #0x1c
+	pop	{r3, r4, r5}
+	mov	r8, r3
+	mov	r9, r4
+	mov	sl, r5
+	pop	{r4, r5, r6, r7}
+	pop	{r0}
+	bx	r0
+._164:
+	.align	2, 0
+._163:
+	.word	gPokemonStorage+0x4
+	.word	gUnknown_Debug_083E05F0
+.syntax unified
+	thumb_func_end debug_sub_80A3904
+.endif
+
 	thumb_func_start sub_8096264
 sub_8096264: @ 8096264
 	push {r4-r6,lr}
@@ -2072,6 +2246,119 @@ _08096AF0: .4byte sub_8096B38
 _08096AF4: .4byte gMain
 _08096AF8: .4byte 0x0000043c
 	thumb_func_end sub_80969A0
+
+.ifdef DEBUG
+
+	thumb_func_start debug_sub_80A4300
+debug_sub_80A4300:
+.syntax divided
+	push	{lr}
+	ldr	r1, ._296
+	mov	r0, #0x0
+	strb	r0, [r1]
+	ldr	r1, ._296 + 4
+	mov	r0, #0x0
+	strb	r0, [r1, #0x5]
+	bl	sub_8096884
+	ldr	r0, ._296 + 8
+	ldr	r1, [r0, #0x4]
+	ldr	r0, ._296 + 12
+	cmp	r1, r0
+	bne	._295	@cond_branch
+	ldr	r1, ._296 + 16
+	mov	r0, #0x1
+	strb	r0, [r1]
+._295:
+	pop	{r0}
+	bx	r0
+._297:
+	.align	2, 0
+._296:
+	.word	gUnknown_0203847D
+	.word	+0x2000000
+	.word	gMain
+	.word	sub_8096B38+1
+	.word	unk_2038790
+.syntax unified
+	thumb_func_end debug_sub_80A4300
+
+	thumb_func_start debug_sub_80A433C
+debug_sub_80A433C:
+.syntax divided
+	push	{lr}
+	ldr	r2, ._298
+	str	r1, [r2]
+	ldr	r1, ._298 + 4
+	str	r0, [r1]
+	ldr	r0, ._298 + 8
+	bl	SetMainCallback2
+	pop	{r0}
+	bx	r0
+._299:
+	.align	2, 0
+._298:
+	.word	unk_2038794
+	.word	unk_2038798
+	.word	debug_sub_80A4300+1
+.syntax unified
+	thumb_func_end debug_sub_80A433C
+
+	thumb_func_start debug_sub_80A435C
+debug_sub_80A435C:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r5, ._303
+	ldrb	r4, [r5, #0x4]
+	cmp	r4, #0
+	beq	._300	@cond_branch
+	cmp	r4, #0x1
+	beq	._301	@cond_branch
+	b	._308
+._304:
+	.align	2, 0
+._303:
+	.word	+0x2000000
+._300:
+	ldr	r0, ._306
+	ldr	r0, [r0]
+	bl	unref_sub_809CB94
+	mov	r0, #0x1
+	neg	r0, r0
+	str	r4, [sp]
+	mov	r1, #0x0
+	mov	r2, #0x0
+	mov	r3, #0x10
+	bl	BeginNormalPaletteFade
+	ldrb	r0, [r5, #0x4]
+	add	r0, r0, #0x1
+	strb	r0, [r5, #0x4]
+	b	._308
+._307:
+	.align	2, 0
+._306:
+	.word	unk_2038798
+._301:
+	bl	UpdatePaletteFade
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._308	@cond_branch
+	ldr	r0, ._309
+	ldr	r0, [r0]
+	bl	_call_via_r0
+._308:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._310:
+	.align	2, 0
+._309:
+	.word	unk_2038794
+.syntax unified
+	thumb_func_end debug_sub_80A435C
+
+.endif
 
 	thumb_func_start sub_8096AFC
 sub_8096AFC: @ 8096AFC
@@ -13963,6 +14250,149 @@ sub_809CA8C: @ 809CA8C
 	bx r0
 	thumb_func_end sub_809CA8C
 
+.ifdef DEBUG
+	thumb_func_start debug_sub_80AA40C
+debug_sub_80AA40C:
+.syntax divided
+	push	{lr}
+	bl	sub_809AB8C
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	beq	._2084	@cond_branch
+	bl	sub_809CDCC
+	mov	r0, #0x20
+	bl	sub_809CDEC
+	mov	r0, #0x6
+	bl	sub_809CDEC
+	mov	r0, #0x1
+	b	._2085
+._2084:
+	mov	r0, #0x0
+._2085:
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end debug_sub_80AA40C
+.endif
+
+.if DEBUG
+	thumb_func_start sub_809CAB0
+sub_809CAB0:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._2088
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._2086	@cond_branch
+	bl	debug_sub_80AA40C
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	b	._2110
+._2089:
+	.align	2, 0
+._2088:
+	.word	unk_2038790
+._2086:
+	bl	sub_809CDCC
+	bl	sub_809AB8C
+	lsl	r0, r0, #0x10
+	lsr	r1, r0, #0x10
+	ldr	r0, ._2094
+	ldr	r0, [r0]
+	ldrb	r0, [r0, #0x5]
+	cmp	r0, #0x1
+	beq	._2090	@cond_branch
+	cmp	r0, #0x1
+	bgt	._2091	@cond_branch
+	cmp	r0, #0
+	beq	._2092	@cond_branch
+	b	._2108
+._2095:
+	.align	2, 0
+._2094:
+	.word	gUnknown_083B6DB4
+._2091:
+	cmp	r0, #0x2
+	beq	._2096	@cond_branch
+	b	._2108
+._2090:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x1
+	bl	sub_809CDEC
+	b	._2109
+._2092:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x2
+	bl	sub_809CDEC
+	b	._2109
+._2096:
+	ldr	r0, ._2105
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._2102	@cond_branch
+	cmp	r1, #0
+	beq	._2103	@cond_branch
+	mov	r0, #0x4
+	bl	sub_809CDEC
+	b	._2109
+._2106:
+	.align	2, 0
+._2105:
+	.word	gUnknown_020384E6
+._2103:
+	mov	r0, #0x5
+	bl	sub_809CDEC
+	b	._2109
+._2102:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x3
+	bl	sub_809CDEC
+	b	._2109
+._2108:
+	mov	r0, #0x0
+	b	._2110
+._2109:
+	mov	r0, #0x6
+	bl	sub_809CDEC
+	ldr	r0, ._2114
+	ldr	r0, [r0]
+	ldrb	r0, [r0, #0x5]
+	cmp	r0, #0x2
+	bne	._2113	@cond_branch
+	ldr	r0, ._2114 + 4
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x18
+	asr	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._2112	@cond_branch
+	mov	r0, #0x2
+	bl	sub_809CDEC
+	b	._2113
+._2115:
+	.align	2, 0
+._2114:
+	.word	gUnknown_083B6DB4
+	.word	gUnknown_020384E4
+._2112:
+	mov	r0, #0x1
+	bl	sub_809CDEC
+._2113:
+	mov	r0, #0x8
+	bl	sub_809CDEC
+	mov	r0, #0x7
+	bl	sub_809CDEC
+	mov	r0, #0x0
+	bl	sub_809CDEC
+	mov	r0, #0x1
+._2110:
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end sub_809CAB0
+.else
 	thumb_func_start sub_809CAB0
 sub_809CAB0: @ 809CAB0
 	push {lr}
@@ -14058,6 +14488,7 @@ _0809CB6E:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_809CAB0
+.endif
 
 	thumb_func_start sub_809CB74
 sub_809CB74: @ 809CB74
