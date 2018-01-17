@@ -3901,26 +3901,9 @@ static void sub_8106404(void)
 }
 
 static void sub_8106448(void) {
-    u32 offsetRead, offsetWrite;
-    u32 size;
-
     LZDecompressWram(gSlotMachine_Gfx, eSlotMachineGfxBuffer);
 
-    offsetRead = (u32)eSlotMachineGfxBuffer;
-    offsetWrite = BG_VRAM;
-    size = SLOTMACHINE_GFX_TILES * 32;
-    while (TRUE)
-    {
-        DmaCopy16(3, offsetRead, (void *) (offsetWrite), 0x1000);
-        offsetRead += 0x1000;
-        offsetWrite += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaCopy16(3, offsetRead, (void *) (offsetWrite), size);
-            break;
-        }
-    }
+    DmaCopyLarge16(3, eSlotMachineGfxBuffer, BG_VRAM, SLOTMACHINE_GFX_TILES * 32, 0x1000);
 
     LoadPalette(gUnknown_08E95A18, 0, 160);
     LoadPalette(gPalette_83EDE24, 208, 32);

@@ -842,24 +842,8 @@ static bool8 sub_804E2EC(void)
         }
         break;
     case 2:
-        {
-            void* offsetRead = ewram10000;
-            void* offsetWrite = (void*)(VRAM);
-            u32 size = 0x2000;
-            while (TRUE)
-            {
-                DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-                offsetRead += 0x1000;
-                offsetWrite += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaCopy16(3, offsetRead, offsetWrite, size);
-                    break;
-                }
-            }
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopyLarge16(3, ewram10000, (void *)(VRAM + 0x0), 0x2000, 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 3:
         LZDecompressWram(gUnknown_08E6C920, ewram10000);

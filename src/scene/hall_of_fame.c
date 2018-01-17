@@ -1199,8 +1199,8 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
 
 static void sub_81433E0(void)
 {
-    u32 offsetWrite, offsetWrite2, offsetWrite3, offsetWrite4;
-    u32 size, size2, size3, size4;
+    u32 offsetWrite2, offsetWrite3;
+    u32 size2, size3;
     u16 i;
 
     REG_DISPCNT = 0;
@@ -1221,19 +1221,7 @@ static void sub_81433E0(void)
     REG_BG3HOFS = 0;
     REG_BG3VOFS = 0;
 
-    offsetWrite = (VRAM);
-    size = 0x18000;
-    while (TRUE)
-    {
-        DmaFill16(3, 0, offsetWrite, 0x1000);
-        offsetWrite += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, offsetWrite, size);
-            break;
-        }
-    }
+    DmaFill16Large(3, 0, VRAM, 0x18000, 0x1000);
 
     offsetWrite2 = OAM;
     size2 = OAM_SIZE;
@@ -1258,20 +1246,7 @@ static void sub_81433E0(void)
         *((u16*)(VRAM + 0x3000) + i) = 2;
     }
 
-    offsetWrite4 = ewram0_6;
-    size4 = 0x4000;
-    while (TRUE)
-    {
-        DmaFill16(3, 0, offsetWrite4, 0x1000);
-        offsetWrite4 += 0x1000;
-        size4 -= 0x1000;
-        if (size4 <= 0x1000)
-        {
-            DmaFill16(3, 0, offsetWrite4, size4);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, ewram0_6, 0x4000, 0x1000);
     ResetPaletteFade();
     LoadPalette(gHallOfFame_Pal, 0, 0x20);
 }

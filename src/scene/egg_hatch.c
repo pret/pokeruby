@@ -505,28 +505,11 @@ static void CB2_EggHatch_0(void)
         break;
     case 7:
         {
-            u32 offsetRead, offsetWrite;
             u32 offsetRead2, offsetWrite2;
-            u32 size;
 
             REG_BG2CNT = 0x4C06;
             LoadPalette(gUnknown_0820C9F8, 0x10, 0xA0);
-
-            offsetRead = (u32)(&gUnknown_0820CA98);
-            offsetWrite = (VRAM + 0x4000);
-            size = 0x1300;
-            while (TRUE)
-            {
-                DmaCopy16(3, offsetRead, (void *) (offsetWrite), 0x1000);
-                offsetRead += 0x1000;
-                offsetWrite += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaCopy16(3, offsetRead, (void *) (offsetWrite), size);
-                    break;
-                }
-            }
+            DmaCopyLarge16(3, gUnknown_0820CA98, (void *)(VRAM + 0x4000), 0x1300, 0x1000);
 
             offsetRead2 = (u32)(&gUnknown_0820F798);
             offsetWrite2 = (u32)(VRAM + 0x6000);
