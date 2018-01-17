@@ -67,6 +67,10 @@ void sub_800B858(void)
     }
 }
 
+#ifdef DEBUG
+extern u8 gUnknown_02023A14_50;
+#endif
+
 void setup_poochyena_battle(void)
 {
     s32 i;
@@ -93,6 +97,16 @@ void setup_poochyena_battle(void)
     }
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
+
+#ifdef DEBUG
+    if (gUnknown_02023A14_50 & 0x80)
+    {
+        ewram[0x160fd] = 0;
+        ewram[0x160fe] = 0;
+        ewram[0x160ff] = 0;
+        ((u32 *) gBattleBuffersTransferData)[64]++;
+    }
+#endif
 }
 
 void sub_800B950(void)

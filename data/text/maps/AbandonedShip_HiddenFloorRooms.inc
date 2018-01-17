@@ -1,35 +1,35 @@
 AbandonedShip_HiddenFloorCorridors_Text_198DC0:: @ 8198DC0
-	.string "The door is locked.\p"
-	.string "“RM. 1” is painted on the door.$"
+	.string "Die Tür ist verschlossen.\p"
+	.string "“K. 1” steht auf der Tür.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_198DF4:: @ 8198DF4
-	.string "The door is locked.\p"
-	.string "“RM. 2” is painted on the door.$"
+	.string "Die Tür ist verschlossen.\p"
+	.string "“K. 2” steht auf der Tür.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_198E28:: @ 8198E28
-	.string "The door is locked.\p"
-	.string "“RM. 4” is painted on the door.$"
+	.string "Die Tür ist verschlossen.\p"
+	.string "“K. 4” steht auf der Tür.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_198E5C:: @ 8198E5C
-	.string "The door is locked.\p"
-	.string "“RM. 6” is painted on the door.$"
+	.string "Die Tür ist verschlossen.\p"
+	.string "“K. 6” steht auf der Tür.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_198E90:: @ 8198E90
-	.string "{PLAYER} inserted and turned the\n"
-	.string "KEY.\p"
-	.string "The inserted KEY stuck fast, but the\n"
-	.string "door opened.$"
+	.string "{PLAYER} steckt den SCHLÜSSEL ins\n"
+	.string "Schloss und dreht ihn um.\p"
+	.string "Der SCHLÜSSEL ist schwergängig, aber\n"
+	.string "die Tür öffnet sich.$"
 
 AbandonedShip_HiddenFloorRooms_Text_198EE2:: @ 8198EE2
-	.string "It’s bright and shiny!\n"
-	.string "But it’s just trash...$"
+	.string "Es ist hell und glänzend!\n"
+	.string "Aber es ist trotzdem nur Müll...$"
 
 UnknownString_8198F10: @ 8198F10
-	.string "There’s a small indent in the wall.$"
+	.string "In der Wand ist eine kleine Einkerbung.$"
 
 UnknownString_8198F34: @ 8198F34
-	.string "There’s a small indent in the wall.\p"
-	.string "Use the SECRET POWER?$"
+	.string "In der Wand ist eine kleine Einkerbung.\p"
+	.string "Möchtest du GEHEIMPOWER einsetzen?$"
 
 UnknownString_8198F6E: @ 8198F6E
-	.string "Discovered a small cavern!$"
+	.string "Eine kleine Höhle wird sichtbar.$"

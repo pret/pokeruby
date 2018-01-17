@@ -1,34 +1,34 @@
 Route110_TrickHousePuzzle8_Text_19E178:: @ 819E178
-	.string "Not many TRAINERS have made it\n"
-	.string "this far.$"
+	.string "Nicht viele TRAINER haben es bis\n"
+	.string "hierher geschafft.$"
 
 Route110_TrickHousePuzzle8_Text_19E1A1:: @ 819E1A1
-	.string "That must mean you’re tough, too...$"
+	.string "Das bedeutet, dass du sehr stark bist...$"
 
 Route110_TrickHousePuzzle8_Text_19E1C5:: @ 819E1C5
-	.string "You’ve beaten the POKéMON LEAGUE\n"
-	.string "CHAMPION? That’s too much!$"
+	.string "Du hast den CHAMP der POKéMON LIGA\n"
+	.string "besiegt? Das ist zu viel für mich!$"
 
 Route110_TrickHousePuzzle8_Text_19E201:: @ 819E201
-	.string "Consider yourself lucky to be\n"
-	.string "battling me!$"
+	.string "Sieh es als Glücksfall an, dass du gegen\n"
+	.string "mich antreten darfst.$"
 
 Route110_TrickHousePuzzle8_Text_19E22C:: @ 819E22C
-	.string "This isn’t right!\n"
-	.string "I can’t lose!$"
+	.string "Das ist nicht korrekt!\n"
+	.string "Ich darf nicht verlieren!$"
 
 Route110_TrickHousePuzzle8_Text_19E24C:: @ 819E24C
-	.string "It’s a miracle that you beat me.\n"
-	.string "You can brag about it.$"
+	.string "Nur ein Wunder hat dir zu diesem Sieg\n"
+	.string "verholfen. Prahl doch damit...$"
 
 Route110_TrickHousePuzzle8_Text_19E284:: @ 819E284
-	.string "You’ve been slugging through the TRICK\n"
-	.string "HOUSE challenge, too.$"
+	.string "Du schleichst hier auch durch das\n"
+	.string "RÄTSELHAUS?$"
 
 Route110_TrickHousePuzzle8_Text_19E2C1:: @ 819E2C1
-	.string "I see...\n"
-	.string "You possess an extraordinary style.$"
+	.string "Ich verstehe...\n"
+	.string "Du hast einen außergewöhnlichen Stil.$"
 
 Route110_TrickHousePuzzle8_Text_19E2EE:: @ 819E2EE
-	.string "Seeing someone like you should please\n"
-	.string "the TRICK MASTER.$"
+	.string "Dein Anblick wird den RÄTSELMEISTER\n"
+	.string "bestimmt erfreuen.$"

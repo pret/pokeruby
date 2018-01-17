@@ -1,116 +1,122 @@
 MauvilleCity_Gym_Text_180815:: @ 8180815
-	.string "Hey, how’s it going, the CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "WATTSON, the LEADER of MAUVILLE\n"
-	.string "GYM, uses ELECTRIC-type POKéMON.\p"
-	.string "If you challenge him with WATER-type\n"
-	.string "POKéMON, he’ll zap them! Bzzt!\p"
-	.string "And, he’s put in switch-controlled doors\n"
-	.string "all over his GYM! Eccentric!\p"
-	.string "Hey, go for it!$"
+	.string "Hey, wie sieht es aus, auf dem Weg zum\n"
+	.string "CHAMP, {PLAYER}?\p"
+	.string "WALTER, der ARENALEITER von\n"
+	.string "MALVENFROH CITY, setzt\l"
+	.string "ELEKTRO-POKéMON ein.\p"
+	.string "Wenn du ihn mit WASSER-POKéMON\n"
+	.string "angreifst, macht er sie fertig! Britzel!\p"
+	.string "Und die Türen lassen sich nur mit\n"
+	.string "Schaltern öffnen! Wahnsinn!\p"
+	.string "Nun, dann mal los!$"
 
 MauvilleCity_Gym_Text_18091D:: @ 818091D
-	.string "Whoa, you’re electrifying!\n"
-	.string "You’ve powered the door open!$"
+	.string "Aah, du bist elektrifizierend!\n"
+	.string "Du hast die Tür offen gezwungen!$"
 
 MauvilleCity_Gym_Text_180956:: @ 8180956
-	.string "My electric soul, it’ll shatter your\n"
-	.string "dreams whole, whoah-yeahah!$"
+	.string "Die Spannung meiner Seele, sie setzt\n"
+	.string "alle deine Träume unter Strom! Ja-haha!$"
 
 MauvilleCity_Gym_Text_180997:: @ 8180997
-	.string "That was plugged in, amped up,\n"
-	.string "over-driven electric, man!$"
+	.string "Da wurde der Stromkreis geschlossen\n"
+	.string "und bis zum Kurzschluss belastet!$"
 
 MauvilleCity_Gym_Text_1809D1:: @ 81809D1
-	.string "POKéMON and rock, it’s all about heart,\n"
-	.string "whoah yeah!$"
+	.string "POKéMON und Rock... Alles, was ins Herz\n"
+	.string "trifft, boh yeah!$"
 
 MauvilleCity_Gym_Text_180A05:: @ 8180A05
-	.string "I trained under WATTSON!\n"
-	.string "There ain’t no way I’d lose easily!$"
+	.string "Ich habe unter WALTER trainiert!\n"
+	.string "So einfach verliere ich nicht.$"
 
 MauvilleCity_Gym_Text_180A42:: @ 8180A42
-	.string "Unplugged and turned off...$"
+	.string "Stecker raus und ausgeschaltet...$"
 
 MauvilleCity_Gym_Text_180A5E:: @ 8180A5E
-	.string "WATTSON, our GYM LEADER, has been\n"
-	.string "around for a long, long time.\p"
-	.string "He was battling even before your\n"
-	.string "daddy was born, that tough coot.$"
+	.string "WALTER, unser ARENALEITER, ist schon\n"
+	.string "sehr sehr lange hier ansässig.\p"
+	.string "Er kämpfte schon, da war dein Vater\n"
+	.string "noch nicht geboren.$"
 
 MauvilleCity_Gym_Text_180AE0:: @ 8180AE0
-	.string "This GYM’s got puzzles!\n"
-	.string "Isn’t it fun?$"
+	.string "Diese ARENA stellt dir eine Knobel-\n"
+	.string "aufgabe. Ist das nicht lustig?$"
 
 MauvilleCity_Gym_Text_180B06:: @ 8180B06
-	.string "It’s no fun to lose...$"
+	.string "Verlieren ist gar nicht lustig...$"
 
 MauvilleCity_Gym_Text_180B1D:: @ 8180B1D
-	.string "WATTSON says he likes setting up\n"
-	.string "little traps with switches.$"
+	.string "WALTER sagt, er liebt es, Fallen mit\n"
+	.string "Schaltern zu installieren.$"
 
 MauvilleCity_Gym_Text_180B5A:: @ 8180B5A
-	.string "With my charm and my POKéMON’s moves,\n"
-	.string "you’ll be shocked!$"
+	.string "Mein Charme und die Attacken meiner\n"
+	.string "POKéMON werden dich schocken!$"
 
 MauvilleCity_Gym_Text_180B93:: @ 8180B93
-	.string "I’m shocked by your power!$"
+	.string "Ich bin geschockt von deiner Stärke!$"
 
 MauvilleCity_Gym_Text_180BAE:: @ 8180BAE
-	.string "I’ve heard that MAUVILLE was founded\n"
-	.string "by WATTSON.\p"
-	.string "He was a TRAINER long before we\n"
-	.string "became TRAINERS.\l"
-	.string "He must know all sorts of things!$"
+	.string "Ich habe gehört, dass MALVENFROH CITY\n"
+	.string "von WALTER gegründet wurde.\p"
+	.string "Er war TRAINER, lange bevor wir geboren\n"
+	.string "wurden. Er muss ein umfangreiches\l"
+	.string "Wissen besitzen.$"
 
 MauvilleCity_Gym_Text_180C32:: @ 8180C32
-	.string "I’ve given up on my plans to convert\n"
-	.string "the city, I have.\p"
-	.string "And so, I put my time into making\n"
-	.string "door traps in my GYM.\p"
-	.string "Oh? Now, what are you doing here?\p"
-	.string "What’s that? You say you’ve gotten\n"
-	.string "past all my rigged doors?\p"
-	.string "Wahahahah!\n"
-	.string "Now, that is amusing!\p"
-	.string "Then, I, WATTSON, the LEADER of\n"
-	.string "MAUVILLE GYM, shall electrify you!$"
+	.string "Ich habe es aufgegeben, die Stadt\n"
+	.string "umpolen zu wollen.\p"
+	.string "Stattdessen verwende ich meine Energie\n"
+	.string "lieber auf das Installieren von Fallen in\l"
+	.string "meiner Arena.\p"
+	.string "Oh? Was machst du denn hier?\p"
+	.string "Was ist das? Du hast es geschafft, alle\n"
+	.string "meine Schalter zu finden?\p"
+	.string "Uahahahaha!\n"
+	.string "Das ist wirklich amüsant!\p"
+	.string "Dann ist es nun an mir - dem\n"
+	.string "ARENALEITER von MALVENFROH CITY\l"
+	.string "- dich unter Spannung zu setzen!$"
 
 MauvilleCity_Gym_Text_180D64:: @ 8180D64
-	.string "Wahahahah!\n"
-	.string "Fine, I lost!\p"
-	.string "You ended up giving me a thrill!\n"
-	.string "Take this BADGE!$"
+	.string "Uahahahaha!\n"
+	.string "Schön, ich habe verloren!\p"
+	.string "Du hast es geschafft, meinen Strom-\n"
+	.string "kreis zu unterbrechen! Nimm diesen\l"
+	.string "ORDEN!$"
 
 MauvilleCity_Gym_Text_180DAF:: @ 8180DAF
-	.string "{PLAYER} received the DYNAMO BADGE\n"
-	.string "from WATTSON.$"
+	.string "{PLAYER} hat den DYNAMO-ORDEN von\n"
+	.string "WALTER erhalten.$"
 
 MauvilleCity_Gym_Text_180DDA:: @ 8180DDA
-	.string "With the DYNAMO BADGE, POKéMON can\n"
-	.string "use ROCK SMASH out of battle.\p"
-	.string "And, it will make your POKéMON a little\n"
-	.string "bit faster, too.\p"
+	.string "Mit dem DYNAMO-ORDEN können POKéMON\n"
+	.string "ZERTRÜMMERER auch außerhalb eines\l"
+	.string "Kampfes einsetzen.\p"
+	.string "Und außerdem werden deine POKéMON ein\n"
+	.string "kleines bisschen schneller.\p"
 	.string "Hmm...\n"
-	.string "You should take this, too!$"
+	.string "Dies hier solltest du auch nehmen!$"
 
 MauvilleCity_Gym_Text_180E76:: @ 8180E76
-	.string "That TM34 there contains SHOCK WAVE.\p"
-	.string "It’s a trustworthy move that never\n"
-	.string "misses! You can count on it!$"
+	.string "Dies ist TM34 - SCHOCKWELLE.\p"
+	.string "Eine verlässliche Attacke, die niemals\n"
+	.string "daneben geht! Verlass dich drauf!$"
 
 MauvilleCity_Gym_Text_180EDB:: @ 8180EDB
-	.string "I swell with optimism, seeing a promising\n"
-	.string "young TRAINER like you!$"
+	.string "Optimismus erfüllt mich, wenn ich einen\n"
+	.string "so viel versprechenden TRAINER wie dich\l"
+	.string "sehe!$"
 
 MauvilleCity_Gym_Text_180F1D:: @ 8180F1D
-	.string "Wahahahah!\n"
-	.string "Go forth and endeavor, youngster!$"
+	.string "Ahahahaha!\n"
+	.string "Mach weiter so, streng dich an, Kind!$"
 
 MauvilleCity_Gym_Text_180F4A:: @ 8180F4A
-	.string "MAUVILLE CITY POKéMON GYM$"
+	.string "POKéMON ARENA von MALVENFROH CITY$"
 
 MauvilleCity_Gym_Text_180F64:: @ 8180F64
-	.string "MAUVILLE CITY POKéMON GYM\p"
-	.string "WATTSON’S CERTIFIED TRAINERS:\n"
+	.string "POKéMON ARENA von MALVENFROH CITY\p"
+	.string "WALTERS ANERKANNTE TRAINER:\n"
 	.string "{PLAYER}$"

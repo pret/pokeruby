@@ -360,6 +360,10 @@ void sub_80831F8(u8 taskId)
      || sub_8082DF4(taskId) == TRUE)
         return;
 
+#ifdef DEBUG
+    sub_8082D60(taskId, GetLinkPlayerCount_2());
+#endif
+
     gSpecialVar_Result = sub_8082D9C(local1, local2);
     if (gSpecialVar_Result == 0)
         return;

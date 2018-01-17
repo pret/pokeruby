@@ -1,236 +1,236 @@
 gAbilityDescription_None: @ 81F99CC
-	.string "No special ability.$"
+	.string "Keine Spezial-Fähigkeit.$"
 
 gAbilityDescription_Stench: @ 81F99E0
-	.string "Helps repel wild POKéMON.$"
+	.string "Wehrt wilde POKéMON ab.$"
 
 gAbilityDescription_Drizzle: @ 81F99FA
-	.string "Summons rain in battle.$"
+	.string "Ruft im Kampf Regen herbei.$"
 
 gAbilityDescription_SpeedBoost: @ 81F9A12
-	.string "Gradually boosts SPEED.$"
+	.string "Erhöht INIT. nach und nach.$"
 
 gAbilityDescription_BattleArmor: @ 81F9A2A
-	.string "Blocks critical hits.$"
+	.string "Wehrt Volltreffer ab.$"
 
 gAbilityDescription_Sturdy: @ 81F9A40
-	.string "Negates 1-hit KO attacks.$"
+	.string "Keine 1-Treffer-K.O.-Att.$"
 
 gAbilityDescription_Damp: @ 81F9A5A
-	.string "Prevents self-destruction.$"
+	.string "Gegen Selbstzerstörung.$"
 
 gAbilityDescription_Limber: @ 81F9A75
-	.string "Prevents paralysis.$"
+	.string "Verhindert Paralyse.$"
 
 gAbilityDescription_SandVeil: @ 81F9A89
-	.string "Ups evasion in a sandstorm.$"
+	.string "Erh. Fluchtw. i. Sandsturm.$"
 
 gAbilityDescription_Static: @ 81F9AA5
-	.string "Paralyzes on contact.$"
+	.string "Paralysiert bei Berührung.$"
 
 gAbilityDescription_VoltAbsorb: @ 81F9ABB
-	.string "Turns electricity into HP.$"
+	.string "Wandelt Elektriz. in KP um.$"
 
 gAbilityDescription_WaterAbsorb: @ 81F9AD6
-	.string "Changes water into HP.$"
+	.string "Wandelt Wasser in KP um.$"
 
 gAbilityDescription_Oblivious: @ 81F9AED
-	.string "Prevents attraction.$"
+	.string "Verhindert Anziehung.$"
 
 gAbilityDescription_CloudNine: @ 81F9B02
-	.string "Negates weather effects.$"
+	.string "Keine Wetter-Effekte.$"
 
 gAbilityDescription_CompoundEyes: @ 81F9B1B
-	.string "Raises accuracy.$"
+	.string "Steigert Genauigkeit.$"
 
 gAbilityDescription_Insomnia: @ 81F9B2C
-	.string "Prevents sleep.$"
+	.string "Verhindert Einschlafen.$"
 
 gAbilityDescription_ColorChange: @ 81F9B3C
-	.string "Changes type to foe’s move.$"
+	.string "Ändert Att.-Typ d. Gegners.$"
 
 gAbilityDescription_Immunity: @ 81F9B58
-	.string "Prevents poisoning.$"
+	.string "Verhindert Vergiftungen.$"
 
 gAbilityDescription_FlashFire: @ 81F9B6C
-	.string "Powers up if hit by fire.$"
+	.string "Steigt, wenn v. Feuer getr.$"
 
 gAbilityDescription_ShieldDust: @ 81F9B86
-	.string "Prevents added effects.$"
+	.string "Gegen Zusatz-Effekte.$"
 
 gAbilityDescription_OwnTempo: @ 81F9B9E
-	.string "Prevents confusion.$"
+	.string "Verhindert Verwirrung.$"
 
 gAbilityDescription_SuctionCups: @ 81F9BB2
-	.string "Firmly anchors the body.$"
+	.string "Verankert den Körper.$"
 
 gAbilityDescription_Intimidate: @ 81F9BCB
-	.string "Lowers the foe’s ATTACK.$"
+	.string "Senkt ANGR. des Gegners.$"
 
 gAbilityDescription_ShadowTag: @ 81F9BE4
-	.string "Prevents the foe’s escape.$"
+	.string "Hindert Gegner an Flucht.$"
 
 gAbilityDescription_RoughSkin: @ 81F9BFF
-	.string "Hurts to touch.$"
+	.string "Verletzt bei Berührung.$"
 
 gAbilityDescription_WonderGuard: @ 81F9C0F
-	.string "“Super effective” hits.$"
+	.string "Nur sehr eff. Treff. schad.$"
 
 gAbilityDescription_Levitate: @ 81F9C27
-	.string "Not hit by GROUND attacks.$"
+	.string "Kein Treffer b. BODEN-Att.$"
 
 gAbilityDescription_EffectSpore: @ 81F9C42
-	.string "Leaves spores on contact.$"
+	.string "Gibt bei Kontakt Sporen ab.$"
 
 gAbilityDescription_Synchronize: @ 81F9C5C
-	.string "Passes on status problems.$"
+	.string "Gibt Stat.-Probleme weiter.$"
 
 gAbilityDescription_ClearBody: @ 81F9C77
-	.string "Prevents ability reduction.$"
+	.string "Verhindert Fähigk.-Reduk.$"
 
 gAbilityDescription_NaturalCure: @ 81F9C93
-	.string "Heals upon switching out.$"
+	.string "Heilt bei Austausch.$"
 
 gAbilityDescription_LightningRod: @ 81F9CAD
-	.string "Draws electrical moves.$"
+	.string "Zieht Elektro-Attacken an.$"
 
 gAbilityDescription_SereneGrace: @ 81F9CC5
-	.string "Promotes added effects.$"
+	.string "Verstärkt Zusatz-Effekte.$"
 
 gAbilityDescription_SwiftSwim: @ 81F9CDD
-	.string "Raises SPEED in rain.$"
+	.string "Steigert INIT. bei Regen.$"
 
 gAbilityDescription_Chlorophyll: @ 81F9CF3
-	.string "Raises SPEED in sunshine.$"
+	.string "INIT. + bei Sonnenschein.$"
 
 gAbilityDescription_Illuminate: @ 81F9D0D
-	.string "Encounter rate increases.$"
+	.string "Mehr PKMN-Begegnungen.$"
 
 gAbilityDescription_Trace: @ 81F9D27
-	.string "Copies special ability.$"
+	.string "Kopiert Spezial-Attacke.$"
 
 gAbilityDescription_HugePower: @ 81F9D3F
-	.string "Raises ATTACK.$"
+	.string "Steigert ANGR.$"
 
 gAbilityDescription_PoisonPoint: @ 81F9D4E
-	.string "Poisons foe on contact.$"
+	.string "Vergiftet bei Berührung.$"
 
 gAbilityDescription_InnerFocus: @ 81F9D66
-	.string "Prevents flinching.$"
+	.string "Verhindert Zurückschreck.$"
 
 gAbilityDescription_MagmaArmor: @ 81F9D7A
-	.string "Prevents freezing.$"
+	.string "Verhindert Einfrieren.$"
 
 gAbilityDescription_WaterVeil: @ 81F9D8D
-	.string "Prevents burns.$"
+	.string "Verhindert Verbrennungen.$"
 
 gAbilityDescription_MagnetPull: @ 81F9D9D
-	.string "Traps STEEL-type POKéMON.$"
+	.string "Fängt STAHL-POKéMON.$"
 
 gAbilityDescription_Soundproof: @ 81F9DB7
-	.string "Avoids sound-based moves.$"
+	.string "Immun gg. Lärm-Attacken.$"
 
 gAbilityDescription_RainDish: @ 81F9DD1
-	.string "Slight HP recovery in rain.$"
+	.string "KP-Anstieg bei Regen.$"
 
 gAbilityDescription_SandStream: @ 81F9DED
-	.string "Summons a sandstorm.$"
+	.string "Erzeugt einen Sandsturm.$"
 
 gAbilityDescription_Pressure: @ 81F9E02
-	.string "Raises foe’s PP usage.$"
+	.string "Steigert AP des Gegners.$"
 
 gAbilityDescription_ThickFat: @ 81F9E19
-	.string "Heat-and-cold protection.$"
+	.string "Schutz vor Hitze und Kälte.$"
 
 gAbilityDescription_EarlyBird: @ 81F9E33
-	.string "Awakens quickly from sleep.$"
+	.string "Schnelles Aufwachen.$"
 
 gAbilityDescription_FlameBody: @ 81F9E4F
-	.string "Burns the foe on contact.$"
+	.string "Verbrennt bei Berührung.$"
 
 gAbilityDescription_RunAway: @ 81F9E69
-	.string "Makes escaping easier.$"
+	.string "Erleichtert das Entkommen.$"
 
 gAbilityDescription_KeenEye: @ 81F9E80
-	.string "Prevents loss of accuracy.$"
+	.string "Verhindert Verl. d. Genauig.$"
 
 gAbilityDescription_HyperCutter: @ 81F9E9B
-	.string "Prevents ATTACK reduction.$"
+	.string "Verhindert ANGR.-Reduz.$"
 
 gAbilityDescription_Pickup: @ 81F9EB6
-	.string "May pick up items.$"
+	.string "Kann Objekte aufnehmen.$"
 
 gAbilityDescription_Truant: @ 81F9EC9
-	.string "Moves only every two turns.$"
+	.string "Greift in jedem 2. Zug an.$"
 
 gAbilityDescription_Hustle: @ 81F9EE5
-	.string "Trades accuracy for power.$"
+	.string "Tauscht Genauigk. u. Kraft.$"
 
 gAbilityDescription_CuteCharm: @ 81F9F00
-	.string "Infatuates on contact.$"
+	.string "Wirkt bei Kontakt betörend.$"
 
 gAbilityDescription_Plus: @ 81F9F17
-	.string "Powers up with MINUS.$"
+	.string "Bildet ein Team mit MINUN.$"
 
 gAbilityDescription_Minus: @ 81F9F2D
-	.string "Powers up with PLUS.$"
+	.string "Bildet ein Team mit PLUSLE.$"
 
 gAbilityDescription_Forecast: @ 81F9F42
-	.string "Changes with the weather.$"
+	.string "Ist vom Wetter abhängig.$"
 
 gAbilityDescription_StickyHold: @ 81F9F5C
-	.string "Prevents item theft.$"
+	.string "Verhindert ITEM-Diebstahl.$"
 
 gAbilityDescription_ShedSkin: @ 81F9F71
-	.string "Heals the body by shedding.$"
+	.string "Heilt durch Häutung.$"
 
 gAbilityDescription_Guts: @ 81F9F8D
-	.string "Ups ATTACK if suffering.$"
+	.string "Steigert ANGR. bei Leiden.$"
 
 gAbilityDescription_MarvelScale: @ 81F9FA6
-	.string "Ups DEFENSE if suffering.$"
+	.string "Steigert VERT. bei Leiden.$"
 
 gAbilityDescription_LiquidOoze: @ 81F9FC0
-	.string "Draining causes injury.$"
+	.string "Saug-Attacken schädigen.$"
 
 gAbilityDescription_Overgrow: @ 81F9FD8
-	.string "Ups GRASS moves in a pinch.$"
+	.string "Erhöht PFL.-Att. i. d. Not.$"
 
 gAbilityDescription_Blaze: @ 81F9FF4
-	.string "Ups FIRE moves in a pinch.$"
+	.string "Erhöht FEUER-Att. in Not.$"
 
 gAbilityDescription_Torrent: @ 81FA00F
-	.string "Ups WATER moves in a pinch.$"
+	.string "Erhöht WASSER-Att. in Not.$"
 
 gAbilityDescription_Swarm: @ 81FA02B
-	.string "Ups BUG moves in a pinch.$"
+	.string "Erhöht KÄFER-Att. in Not.$"
 
 gAbilityDescription_RockHead: @ 81FA045
-	.string "Prevents recoil damage.$"
+	.string "Verh. Rückstoß-Schaden.$"
 
 gAbilityDescription_Drought: @ 81FA05D
-	.string "Summons sunlight in battle.$"
+	.string "Erzeugt Sonne im Kampf.$"
 
 gAbilityDescription_ArenaTrap: @ 81FA079
-	.string "Prevents fleeing.$"
+	.string "Verhindert Flucht.$"
 
 gAbilityDescription_VitalSpirit: @ 81FA08B
-	.string "Prevents sleep.$"
+	.string "Verhindert Einschlafen.$"
 
 gAbilityDescription_WhiteSmoke: @ 81FA09B
-	.string "Prevents ability reduction.$"
+	.string "Verhindert Fähigk.-Reduz.$"
 
 gAbilityDescription_PurePower: @ 81FA0B7
-	.string "Raises ATTACK.$"
+	.string "Steigert ANGR.$"
 
 gAbilityDescription_ShellArmor: @ 81FA0C6
-	.string "Blocks critical hits.$"
+	.string "Wehrt Volltreffer ab.$"
 
 gAbilityDescription_Cacophony: @ 81FA0DC
-	.string "Avoids sound-based moves.$"
+	.string "Immun gg. Lärm-Attacken.$"
 
 gAbilityDescription_AirLock: @ 81FA0F6
-	.string "Negates weather effects.$"
+	.string "Kehrt Wetter-Effekte um.$"
 
 	.align 2
 gAbilityDescriptions:: @ 81FA110

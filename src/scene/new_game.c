@@ -1,4 +1,7 @@
 #include "global.h"
+#include "constants/maps.h"
+#include "constants/species.h"
+#include "clock.h"
 #include "new_game.h"
 #include "battle_records.h"
 #include "berry.h"
@@ -20,12 +23,17 @@
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "roamer.h"
+#include "script_pokemon_80C4.h"
 #include "overworld.h"
 #include "rtc.h"
 #include "script.h"
 #include "secret_base.h"
 #include "text.h"
 #include "tv.h"
+
+#ifdef DEBUG
+extern u8 gUnknown_020297ED;
+#endif
 
 EWRAM_DATA u8 gDifferentSaveFile = 0;
 EWRAM_DATA u8 gUnknown_020297ED = 0;
@@ -41,6 +49,18 @@ static const struct ContestWinner sEmptyMuseumPortrait =
     .nickname = {EOS},
     .trainerName = {EOS},
 };
+
+#ifdef DEBUG
+const s8 gUnknown_Debug_0823C788[][2] =
+{
+    { MAP_GROUP(INSIDE_OF_TRUCK),                   MAP_NUM(INSIDE_OF_TRUCK) },
+    { MAP_GROUP(OLDALE_TOWN_POKEMON_CENTER_2F),     MAP_NUM(OLDALE_TOWN_POKEMON_CENTER_2F) },
+    { MAP_GROUP(LITTLEROOT_TOWN),                   MAP_NUM(LITTLEROOT_TOWN) },
+    { MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F) }
+};
+
+const u8 gUnknown_Debug_0823C790[] = _("KRÖTE");
+#endif
 
 void write_word_to_mem(u32 var, u8 *dataPtr)
 {
@@ -94,6 +114,30 @@ void ZeroBattleTowerData(void)
     CpuFill32(0, &gSaveBlock2.battleTower, sizeof(gSaveBlock2.battleTower));
 }
 
+#ifdef DEBUG
+void debug_sub_8052E04()
+{
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_Debug_0823C788[i][0] == gSaveBlock1.location.mapGroup &&
+            gUnknown_Debug_0823C788[i][1] == gSaveBlock1.location.mapNum)
+        {
+            break;
+        }
+    }
+
+    i++;
+    if (i >= 4)
+    {
+        i = 0;
+    }
+
+    Overworld_SetWarpDestination(gUnknown_Debug_0823C788[i][0], gUnknown_Debug_0823C788[i][1], -1, -1, -1);
+}
+#endif
+
 void WarpToTruck(void)
 {
     Overworld_SetWarpDestination(25, 40, -1, -1, -1); // inside of truck
@@ -109,6 +153,9 @@ void ClearSav2(void)
 void sub_8052E4C(void)
 {
     gDifferentSaveFile = 0;
+#ifdef DEBUG
+    gUnknown_020297ED = 0;
+#endif
     sub_808C0A0();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
@@ -161,3 +208,33 @@ void NewGameInitData(void)
     WarpToTruck();
     ScriptContext2_RunNewScript(gUnknown_0819FA81);
 }
+
+#ifdef DEBUG
+extern void debug_sub_80A3904(void);
+extern void debug_sub_80A3714(void);
+extern void debug_sub_8120F98(void);
+extern void unref_sub_8070F90(void);
+
+void debug_sub_8057508(bool32 arg0)
+{
+    gUnknown_020297ED = 1;
+    NewGameInitData();
+    gSaveBlock1.money = 999999;
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
+    FlagSet(FLAG_SYS_B_DASH);
+    ScriptGiveMon(SPECIES_TREECKO, 99, 0, 0, 0, 0);
+
+    if (arg0 == TRUE)
+        SetMonData(&gPlayerParty[0], MON_DATA_NICKNAME, gUnknown_Debug_0823C790);
+
+    debug_sub_80A3904();
+    debug_sub_80A3714();
+    debug_sub_8120F98();
+    FlagSet(FLAG_SYS_HIPSTER_MEET);
+    sub_80EB8EC();
+    unref_sub_8070F90();
+    InitTimeBasedEvents();
+}
+#endif

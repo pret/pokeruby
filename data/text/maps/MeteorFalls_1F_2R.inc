@@ -1,113 +1,121 @@
 MeteorFalls_1F_2R_Text_1939C5:: @ 81939C5
-	.string "This is where we DRAGON users do our\n"
-	.string "training.\p"
-	.string "The CHAMPION even visits.\n"
-	.string "Now do you see how special it is here?$"
+	.string "Dort trainieren wir DRACHEN-Besitzer...\p"
+	.string "Auch der CHAMP kommt manchmal vorbei.\n"
+	.string "Verstehst du nun, dass dies ein\l"
+	.string "besonderer Ort ist?$"
 
 MeteorFalls_1F_2R_Text_193A35:: @ 8193A35
-	.string "Urgh!\n"
-	.string "I didn’t expect you to be so strong!$"
+	.string "Argh!\n"
+	.string "Ich hätte nicht gedacht, dass du so\l"
+	.string "stark bist!$"
 
 MeteorFalls_1F_2R_Text_193A60:: @ 8193A60
-	.string "The road ahead remains long and harsh.\p"
-	.string "When will my POKéMON and I become the\n"
-	.string "best?$"
+	.string "Der Weg vor mir ist lang und\n"
+	.string "beschwerlich.\p"
+	.string "Wann werden meine POKéMON und ich\n"
+	.string "zu den Besten gehören?$"
 
 MeteorFalls_1F_2R_Text_193AB3:: @ 8193AB3
-	.string "Since we met, we have trained hard\n"
-	.string "with our sights on number one.\p"
-	.string "Help us see how much stronger we’ve\n"
-	.string "become!$"
+	.string "Seit wir uns das letzte Mal gesehen\n"
+	.string "haben, haben wir hart trainiert ver-\l"
+	.string "glichen mit unserem ersten Kampf.\p"
+	.string "Hilf uns, herauszufinden, wie stark wir\n"
+	.string "wirklich sind.$"
 
 MeteorFalls_1F_2R_Text_193B21:: @ 8193B21
-	.string "Urgh!\n"
-	.string "I didn’t expect you to be so strong!$"
+	.string "Argh!\n"
+	.string "Wie kannst du nur so stark sein?$"
 
 MeteorFalls_1F_2R_Text_193B4C:: @ 8193B4C
-	.string "You’ve obviously kept up your\n"
-	.string "POKéMON training.\p"
-	.string "So long as you remain strong, I, too,\n"
-	.string "can become stronger!$"
+	.string "Du hast uns bei unserem Training\n"
+	.string "wirklich sehr geholfen.\p"
+	.string "Solange du stärker wirst, kann auch\n"
+	.string "ich stärker werden.$"
 
 MeteorFalls_1F_2R_Text_193BB7:: @ 8193BB7
-	.string "JOHN: We’ve always battled POKéMON\n"
-	.string "together as a twosome.\l"
-	.string "We’ve confidence in ourselves.$"
+	.string "URS: Wir haben immer in trauter Zwei-\n"
+	.string "samkeit mit unseren POKéMON gegen\l"
+	.string "andere gekämpft. Wir werden siegen!$"
 
 MeteorFalls_1F_2R_Text_193C10:: @ 8193C10
-	.string "JOHN: Oh, my.\n"
-	.string "We’ve lost, dear wife.$"
+	.string "URS: O weh.\n"
+	.string "Wir haben verloren, liebstes Weib.$"
 
 MeteorFalls_1F_2R_Text_193C35:: @ 8193C35
-	.string "JOHN: We’ve been married for\n"
-	.string "fifty years.\p"
-	.string "Come to think of it, I’ve yet to beat\n"
-	.string "my dear wife in a battle.$"
+	.string "URS: Wir sind seit 50 Jahren glücklich\n"
+	.string "verheiratet.\p"
+	.string "Und denk mal, ich habe es noch nie ge-\n"
+	.string "schafft, meine Frau zu besiegen.$"
 
 MeteorFalls_1F_2R_Text_193C9F:: @ 8193C9F
-	.string "JOHN: Well, well, what a young TRAINER!\p"
-	.string "Will you battle with us? If so, you’ll\n"
-	.string "have to return with more POKéMON.$"
+	.string "URS: Nun, was für ein junger TRAINER!\p"
+	.string "Möchtest du mit uns kämpfen? Wenn ja,\n"
+	.string "dann musst du dir noch mehr POKéMON\l"
+	.string "besorgen.$"
 
 MeteorFalls_1F_2R_Text_193D10:: @ 8193D10
-	.string "JAY: We’ve been married for\n"
-	.string "fifty years.\p"
-	.string "The bond we share as a couple could\n"
-	.string "never be broken.$"
+	.string "EVI: Wir sind seit 50 Jahren glücklich\n"
+	.string "verheiratet.\p"
+	.string "Das Band, das uns verbindet, kann\n"
+	.string "niemand durchtrennen.$"
 
 MeteorFalls_1F_2R_Text_193D6E:: @ 8193D6E
-	.string "JAY: Oh, dear.\n"
-	.string "We’ve lost, my dear husband.$"
+	.string "EVI: O weh.\n"
+	.string "Wir haben verloren, mein Lieber.$"
 
 MeteorFalls_1F_2R_Text_193D9A:: @ 8193D9A
-	.string "JAY: Fifty years of marriage...\p"
-	.string "If we ever argued, we always settled\n"
-	.string "it with a POKéMON battle...$"
+	.string "EVI: 50 Jahre verheiratet...\p"
+	.string "Immer wenn wir uneinig sind, ent-\n"
+	.string "scheiden wir es mit einem POKéMON-\l"
+	.string "Kampf.$"
 
 MeteorFalls_1F_2R_Text_193DFB:: @ 8193DFB
-	.string "JAY: Well, well, aren’t you a young\n"
-	.string "TRAINER?\p"
-	.string "If you’d care to battle with us, you’ll\n"
-	.string "have to come back with more POKéMON.$"
+	.string "EVI: Hmm... Bist du nicht ein bisschen zu\n"
+	.string "klein für einen TRAINER?\p"
+	.string "Möchtest du mit uns kämpfen? Dann\n"
+	.string "musst du dir noch mehr POKéMON\l"
+	.string "besorgen.$"
 
 MeteorFalls_1F_2R_Text_193E75:: @ 8193E75
-	.string "JOHN: We’ve always battled POKéMON\n"
-	.string "together as a twosome.\l"
-	.string "We’ve confidence in ourselves.$"
+	.string "URS: Wir haben immer in trauter Zwei-\n"
+	.string "samkeit mit unseren POKéMON gegen\l"
+	.string "andere gekämpft. Wir werden siegen!$"
 
 MeteorFalls_1F_2R_Text_193ECE:: @ 8193ECE
-	.string "JOHN: Oh, my.\n"
-	.string "We’ve lost, dear wife.$"
+	.string "URS: O weh.\n"
+	.string "Wir haben verloren, liebstes Weib.$"
 
 MeteorFalls_1F_2R_Text_193EF3:: @ 8193EF3
-	.string "JOHN: Married for fifty years...\p"
-	.string "On reflection, the dear wife and I,\n"
-	.string "we battled day in and day out...$"
+	.string "URS: 50 Jahre verheiratet...\p"
+	.string "Rückblickend kann man sagen: Meine Frau\n"
+	.string "und ich haben Tag für Tag miteinander\l"
+	.string "gekämpft...$"
 
 MeteorFalls_1F_2R_Text_193F59:: @ 8193F59
-	.string "JOHN: Well, well, what a young\n"
-	.string "TRAINER!\p"
-	.string "Will you battle with us? If so, you’ll\n"
-	.string "have to return with more POKéMON.$"
+	.string "URS: Nun, was für ein junger TRAINER!\p"
+	.string "Möchtest du mit uns kämpfen? Wenn ja,\n"
+	.string "dann musst du dir noch mehr POKéMON\l"
+	.string "besorgen.$"
 
 MeteorFalls_1F_2R_Text_193FCA:: @ 8193FCA
-	.string "JAY: We’ve been married for\n"
-	.string "fifty years.\p"
-	.string "We’ve supported each other all that\n"
-	.string "time. We’ve made ourselves strong.$"
+	.string "EVI: Wir sind seit 50 Jahren\n"
+	.string "verheiratet.\p"
+	.string "Wir haben uns immer gegenseitig unter-\n"
+	.string "stützt. Das hat uns stark gemacht.$"
 
 MeteorFalls_1F_2R_Text_19403A:: @ 819403A
-	.string "JAY: Oh, dear.\n"
-	.string "We’ve lost, my dear husband.$"
+	.string "EVI: O weh.\n"
+	.string "Wir haben verloren, mein Lieber.$"
 
 MeteorFalls_1F_2R_Text_194066:: @ 8194066
-	.string "JAY: Fifty years of marriage...\n"
-	.string "Many things have happened.\p"
-	.string "I hope that we will continue to make\n"
-	.string "happy memories together.$"
+	.string "EVI: 50 Jahre verheiratet...\n"
+	.string "Vieles ist in dieser Zeit passiert.\p"
+	.string "Ich hoffe, wir werden noch lange unsere\n"
+	.string "Erinnerungen miteinander teilen können.$"
 
 MeteorFalls_1F_2R_Text_1940DF:: @ 81940DF
-	.string "JAY: Well, well, aren’t you a young\n"
-	.string "TRAINER?\p"
-	.string "If you’d care to battle with us, you’ll\n"
-	.string "have to come back with more POKéMON.$"
+	.string "EVI: Hmm... Bist du nicht ein bisschen zu\n"
+	.string "klein für einen TRAINER?\p"
+	.string "Möchtest du gegen uns kämpfen? Dann\n"
+	.string "musst du dir noch mehr POKéMON\l"
+	.string "besorgen.$"

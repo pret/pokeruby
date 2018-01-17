@@ -1,11 +1,11 @@
 SlateportCity_Mart_Text_180730:: @ 8180730
-	.string "The MARKET does have some interesting\n"
-	.string "merchandise.\p"
-	.string "But there are some items you can only\n"
-	.string "get at a POKé MART.$"
+	.string "Der MARKT bietet einige interessante\n"
+	.string "Merchandising-Artikel an.\p"
+	.string "Aber einige Sachen wirst du nur in einem\n"
+	.string "POKéMON-SUPERMARKT finden.$"
 
 SlateportCity_Mart_Text_18079D:: @ 818079D
-	.string "A GREAT BALL is better than a POKé BALL\n"
-	.string "at catching POKéMON.\p"
-	.string "With this, I should be able to get that\n"
-	.string "elusive POKéMON...$"
+	.string "Ein SUPERBALL eignet sich besser zum\n"
+	.string "Fangen von POKéMON als ein POKéBALL.\p"
+	.string "Hiermit sollte ich in der Lage sein, das\n"
+	.string "begehrte POKéMON zu überlisten.$"

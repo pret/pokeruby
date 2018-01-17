@@ -1,8 +1,10 @@
 #include "global.h"
+#include "debug.h"
 #include "sprite.h"
 #include "main.h"
 #include "menu_cursor.h"
 #include "palette.h"
+#include "sprite.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -822,6 +824,12 @@ static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct Spr
         gSpriteCopyRequests[gSpriteCopyRequestCount].size = images[index].size;
         gSpriteCopyRequestCount++;
     }
+#ifdef DEBUG
+    else
+    {
+        unref_sub_80AB084(sDmaOverErrorMsg);
+    }
+#endif
 }
 
 void RequestSpriteCopy(const void *src, u8 *dest, u16 size)
@@ -833,6 +841,12 @@ void RequestSpriteCopy(const void *src, u8 *dest, u16 size)
         gSpriteCopyRequests[gSpriteCopyRequestCount].size = size;
         gSpriteCopyRequestCount++;
     }
+#ifdef DEBUG
+    else
+    {
+        unref_sub_80AB084(sDmaOverErrorMsg);
+    }
+#endif
 }
 
 // these two functions are unused.

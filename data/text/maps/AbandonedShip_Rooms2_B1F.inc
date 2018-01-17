@@ -1,5 +1,5 @@
 AbandonedShip_Rooms2_B1F_Text_198759:: @ 8198759
-	.string "This is a perfect place to go exploring!\n"
-	.string "It’s exciting here!\p"
-	.string "I bet there’re amazing treasures on\n"
-	.string "board.$"
+	.string "Ein perfekter Ort, auf Erkundungstour\n"
+	.string "zu gehen. Es ist aufregend hier!\p"
+	.string "Ich wette, hier sind wertvolle Schätze\n"
+	.string "versteckt...$"

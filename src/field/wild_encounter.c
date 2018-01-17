@@ -3802,6 +3802,19 @@ static void FeebasSeedRng(u16 seed)
     sFeebasRngValue = seed;
 }
 
+#if DEBUG
+u16 debug_sub_8092344(u8 arg0)
+{
+    if (arg0 == 0)
+        return 131;
+    if (arg0 == 1)
+        return 167;
+    if (arg0 == 2)
+        return 149;
+    return 0;
+}
+#endif
+
 static u8 ChooseWildMonIndex_Land(void)
 {
     u8 rand = Random() % 100;
@@ -4041,6 +4054,24 @@ static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
     else
         return FALSE;
 }
+
+#if DEBUG
+u16 debug_sub_809283C(u16 attempts)
+{
+    u16 retval = 0;
+    u16 i = 0;
+
+    while (i < attempts)
+    {
+        if (DoWildEncounterRateDiceRoll(320) == TRUE)
+            retval++;
+
+        i++;
+    }
+
+    return retval;
+}
+#endif
 
 static bool8 DoWildEncounterTest(u32 encounterRate, bool8 ignoreAbility)
 {

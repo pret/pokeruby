@@ -1,41 +1,43 @@
 Route110_TrickHousePuzzle3_Text_19CF76:: @ 819CF76
-	.string "I keep coming back to this same place!$"
+	.string "Ich laufe und laufe und lande immer\n"
+	.string "wieder hier.$"
 
 Route110_TrickHousePuzzle3_Text_19CF9D:: @ 819CF9D
-	.string "I’m already having trouble, and then\n"
-	.string "you have to beat me? It’s not fair!$"
+	.string "Ich habe eh schon Probleme und dann\n"
+	.string "musst du mich auch noch besiegen? Pfui.$"
 
 Route110_TrickHousePuzzle3_Text_19CFE6:: @ 819CFE6
-	.string "It’s full of doors here!\n"
-	.string "It’s too small and dark in here! Help!$"
+	.string "Hier sieht man vor lauter Türen den Aus-\n"
+	.string "gang nicht! Ich bin total verwirrt...$"
 
 Route110_TrickHousePuzzle3_Text_19D026:: @ 819D026
-	.string "I don’t know what’s going on here.\n"
-	.string "I’m starting to feel sad...$"
+	.string "Ich weiß nicht, was hier vorgeht.\n"
+	.string "Ich habe ein ganz schlechtes Gefühl...$"
 
 Route110_TrickHousePuzzle3_Text_19D065:: @ 819D065
-	.string "You... You’re awful!$"
+	.string "Du... Du bist furchtbar!$"
 
 Route110_TrickHousePuzzle3_Text_19D07A:: @ 819D07A
-	.string "I know I’m weak!\n"
-	.string "And, I have no sense of direction!$"
+	.string "Ich weiß, ich bin schwach! Ich weiß\n"
+	.string "nicht, in welche Richtung es weitergeht.$"
 
 Route110_TrickHousePuzzle3_Text_19D0AE:: @ 819D0AE
-	.string "I don’t get it. What would anyone want\n"
-	.string "with a house this bizarre?$"
+	.string "Ich verstehe es nicht. Was macht einer\n"
+	.string "mit so einem bizarren Haus???$"
 
 Route110_TrickHousePuzzle3_Text_19D0F0:: @ 819D0F0
-	.string "I don’t get it.\n"
-	.string "How did I lose?$"
+	.string "Ich verstehe es wieder nicht.\n"
+	.string "Wie konnte ich jetzt verlieren?$"
 
 Route110_TrickHousePuzzle3_Text_19D110:: @ 819D110
-	.string "I don’t get it.\n"
-	.string "How many traps are in this house?\p"
-	.string "You may be the one to solve that.$"
+	.string "Ich habe absolut keine Ahnung...\n"
+	.string "Wie viele Fallen gibt es in diesem Haus?\p"
+	.string "Du kannst mir das bestimmt\n"
+	.string "beantworten!$"
 
 UnknownString_819D164: @ 819D164
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is cool.”\n"
+	.string "{PLAYER} hat den geheimen Code auf die\n"
+	.string "Tür geschrieben.\p"
+	.string "“RÄTSELMEISTER ist cool.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
+	.string "Das Schloss geht klickend auf.$"

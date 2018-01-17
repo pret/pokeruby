@@ -569,6 +569,8 @@ gUnknown_02039268: @ 2039268
 gUnknown_0203926A: @ 203926A
 	.space 0x2
 
+	.include "src/roulette.o"
+
 @ battle_message
 
 gAbilitiesPerBank: @ 203926C

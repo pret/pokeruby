@@ -8,8 +8,34 @@
 #include "strings2.h"
 #include "trainer_card.h"
 
+struct DebugStruct1
+{
+    u16 var0;
+    u8 var1[10];
+};
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern u8 gBattleOutcome;
+
+#ifdef DEBUG
+const struct DebugStruct1 gUnknown_Debug_4245CC[] =
+{
+    { 1, _("NUMBER1") },
+    { 2, _("ナンバー2") },
+    { 3, _("ナンバー3") },
+    { 4, _("ナンバー4") },
+    { 5, _("ナンバー5") },
+    { 6, _("ナンバー6") },
+    { 7, _("ナンバー7") },
+};
+
+const u8 gUnknown_Debug_8424620[][4] =
+{
+    { 1, 1, 0, 0 },
+    { 2, 1, 0, 0 },
+    { 3, 1, 0, 0 },
+};
+#endif
 
 static void InitLinkBattleRecord(struct LinkBattleRecord *record)
 {
@@ -240,7 +266,8 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y)
     }
 }
 
-void ShowLinkBattleRecords(void) {
+void ShowLinkBattleRecords(void)
+{
     s32 i;
     Menu_DrawStdWindowFrame(1, 0, 28, 18);
     sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);

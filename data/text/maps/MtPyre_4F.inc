@@ -1,11 +1,11 @@
 MtPyre_4F_Text_1968A6:: @ 81968A6
-	.string "Teacher...\n"
-	.string "Please watch over my progress!$"
+	.string "Mein Lehrer...\n"
+	.string "Bitte achtet auf meine Fortschritte!$"
 
 MtPyre_4F_Text_1968D0:: @ 81968D0
-	.string "Teacher...\n"
-	.string "Please forgive me!$"
+	.string "Mein Lehrer...\n"
+	.string "Bitte verzeiht mir!$"
 
 MtPyre_4F_Text_1968EE:: @ 81968EE
-	.string "Until I improve, my teacher, who rests\n"
-	.string "here, will never find true peace...$"
+	.string "Wenn ich nicht besser werde, wird mein\n"
+	.string "Lehrer, der hier ruht, keine Ruhe finden.$"

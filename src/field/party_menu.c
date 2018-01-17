@@ -4022,6 +4022,10 @@ void TeachMonTMMove(u8 taskId, u16 move, TaskFunc func)
     CreateTask(Task_TeamMonTMMove, 5);
 }
 
+#ifdef DEBUG
+extern u8 gUnknown_020297ED;
+#endif
+
 void Task_TeamMonTMMove(u8 taskId)
 {
     GetMonNickname(ewram1C000.pokemon, gStringVar1);
@@ -4036,7 +4040,11 @@ void Task_TeamMonTMMove(u8 taskId)
     }
     else
     {
-        if (!CanMonLearnTMHM(ewram1C000.pokemon, ewram1C000.unk6 - 33))
+        if (
+#ifdef DEBUG
+         !gUnknown_020297ED &&
+#endif
+         !CanMonLearnTMHM(ewram1C000.pokemon, ewram1C000.unk6 - 33))
         {
             StringExpandPlaceholders(gStringVar4, gOtherText_NotCompatible);
             sub_806E834(gStringVar4, 1);
@@ -5514,9 +5522,13 @@ _08070F8A:\n\
 }
 #endif // NONMATCHING
 
+
+// Maybe this goes in start_menu.c
+#if !DEBUG
 void unref_sub_8070F90(void)
 {
     FlagSet(FLAG_SYS_POKEDEX_GET);
     FlagSet(FLAG_SYS_POKEMON_GET);
     FlagSet(FLAG_SYS_POKENAV_GET);
 }
+#endif

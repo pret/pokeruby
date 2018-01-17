@@ -1,15 +1,15 @@
 EverGrandeCity_PokemonLeague_Text_1916FD:: @ 81916FD
-	.string "Beyond this point, only those TRAINERS\n"
-	.string "who have collected all the GYM BADGES\l"
-	.string "are permitted to enter.\p"
-	.string "TRAINER, let us confirm that you have\n"
-	.string "all the GYM BADGES.$"
+	.string "Ab hier haben nur die TRAINER, die alle\n"
+	.string "ORDEN der ARENEN erhalten haben,\l"
+	.string "Zutritt.\p"
+	.string "TRAINER, lass uns sicherstellen, dass\n"
+	.string "du auch alle ORDEN hast.$"
 
 EverGrandeCity_PokemonLeague_Text_19179C:: @ 819179C
-	.string "You haven’t obtained all the BADGES.\p"
-	.string "If you’re bound for the POKéMON\n"
-	.string "LEAGUE, you must return with them.$"
+	.string "Du hast noch nicht alle ORDEN erhalten.\p"
+	.string "Wenn du zur POKéMON LIGA willst,\n"
+	.string "musst du alle ORDEN vorweisen können.$"
 
 EverGrandeCity_PokemonLeague_Text_191804:: @ 8191804
-	.string "TRAINER! Believe in yourself and your\n"
-	.string "POKéMON, and go forth!$"
+	.string "TRAINER! Glaube an dich und deine\n"
+	.string "POKéMON und gehe weiter!$"

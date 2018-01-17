@@ -1,29 +1,28 @@
 AbandonedShip_Corridors_B1F_Text_19856F:: @ 819856F
-	.string "When we go out to sea, we SAILORS\n"
-	.string "always bring our POKéMON.\l"
-	.string "How about a quick battle?$"
+	.string "Wenn wir zur See fahren, nehmen wir\n"
+	.string "MATROSEN immer unsere POKéMON mit.\l"
+	.string "Wie wäre es mit einem schnellen Kampf?$"
 
 AbandonedShip_Corridors_B1F_Text_1985C5:: @ 81985C5
-	.string "Whoops, I’m sunk!$"
+	.string "Huups, da bin ich abgesoffen.$"
 
 AbandonedShip_Corridors_B1F_Text_1985D7:: @ 81985D7
-	.string "The ship’s bottom has sunk into the\n"
-	.string "depths.\p"
-	.string "If a POKéMON knew how to go underwater,\n"
-	.string "we might make some progress...$"
+	.string "Der Schiffsrumpf liegt tief unter der\n"
+	.string "Wasserlinie.\p"
+	.string "Wenn ein POKéMON wissen würde, wie\n"
+	.string "man taucht, würden wir Fortschritte\l"
+	.string "machen.$"
 
 AbandonedShip_Corridors_B1F_Text_19864A:: @ 819864A
-	.string "Yay!\n"
-	.string "It’s a ship!$"
+	.string "Jahaa!\n"
+	.string "Ein Schiff!$"
 
 AbandonedShip_Corridors_B1F_Text_19865C:: @ 819865C
-	.string "The door is locked.\p"
-	.string "“STORAGE” is painted on the door.$"
+	.string "Die Tür ist verschlossen.\p"
+	.string "“LAGER” steht auf dem Schild.$"
 
 AbandonedShip_Corridors_B1F_Text_198692:: @ 8198692
-	.string "{PLAYER} inserted and turned the\n"
-	.string "STORAGE KEY.\p"
-	.string "The inserted KEY stuck fast, but the\n"
-	.string "door opened.$"
-
-AbandonedShip_Corridors_B1F_Text_1986EC:: @ 81986EC
+	.string "{PLAYER} steckt den SCHLÜSSEL zum\n"
+	.string "LAGER ins Schlüsselloch und dreht ihn.\p"
+	.string "Der SCHLÜSSEL ist schwergängig, aber\n"
+	.string "das Schloss lässt sich öffnen.$"

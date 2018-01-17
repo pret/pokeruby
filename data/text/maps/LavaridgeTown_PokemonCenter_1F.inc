@@ -1,17 +1,18 @@
 LavaridgeTown_PokemonCenter_1F_Text_176E92:: @ 8176E92
-	.string "I think POKéMON get closer to their\n"
-	.string "TRAINERS if they spend time together.\p"
-	.string "The longer the better.\n"
-	.string "That’s what I think.$"
+	.string "Ich denke, die POKéMON fühlen sich\n"
+	.string "ihrem TRAINER mehr verbunden, wenn sie\l"
+	.string "viel Zeit miteinander verbringen.\p"
+	.string "Je länger, desto besser.\n"
+	.string "Das ist meine Meinung.$"
 
 LavaridgeTown_PokemonCenter_1F_Text_176F08:: @ 8176F08
-	.string "I gave a RED {POKEBLOCK} to my POKéMON.\n"
-	.string "It looks a lot cooler all of a sudden.\p"
-	.string "Hmm...\n"
-	.string "Maybe I ought to eat a RED {POKEBLOCK}.$"
+	.string "Ich habe meinem POKéMON einen {POKEBLOCK}\n"
+	.string "ROT gegeben. Seitdem ist es cooler.\p"
+	.string "Hmm... Vielleicht sollte ich auch einen\n"
+	.string "{POKEBLOCK} ROT essen...$"
 
 LavaridgeTown_PokemonCenter_1F_Text_176F7A:: @ 8176F7A
-	.string "Hohoho! Hey, kid, you can reach\n"
-	.string "the hot springs from here.\p"
-	.string "If POKéMON are getting rest, so too\n"
-	.string "should their TRAINERS.$"
+	.string "Hohoho! Hey, Kindchen, du kannst von\n"
+	.string "hier die Heißen Quellen erreichen.\p"
+	.string "Wenn POKéMON ausruhen, sollten sich\n"
+	.string "ihre TRAINER auch ausruhen.$"

@@ -5,6 +5,7 @@
 #include "field_effect.h"
 #include "graphics.h"
 #include "link.h"
+#include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "money.h"
@@ -52,7 +53,6 @@ extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 
-extern const u8 gBadgesTiles[];
 extern const u16 gUnknown_083B5F0C[];
 extern const u16 gBadgesPalette[];
 extern const u16 gUnknown_083B5F4C[];
@@ -62,6 +62,34 @@ extern const u16 gTrainerCardBadgesMap[][4];
 const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
 // XXX: what is this?
 u8 *const ewram_ = gSharedMem;
+
+#ifdef DEBUG
+const struct TrainerCard gUnknown_Debug_083E0448 =
+{
+    .gender = FEMALE,
+    .stars = 4,
+    .hasPokedex = TRUE,
+    .var_3 = TRUE,
+    .var_4 = TRUE,
+    .firstHallOfFameA = 999,
+    .firstHallOfFameB = 99,
+    .firstHallOfFameC = 99,
+    .pokedexSeen = 411,
+    .trainerId = 12345,
+    .playTimeHours = 99,
+    .playTimeMinutes = 99,
+    .linkBattleWins = 9999,
+    .linkBattleLosses = 9999,
+    .battleTowerWins = 9999,
+    .battleTowerLosses = 9999,
+    .contestsWithFriends = 999,
+    .pokeblocksWithFriends = 0xFFFF,
+    .pokemonTrades = 0xFFFF,
+    .money = 99999,
+    .var_28 = {1, 2, 3, 4},
+    .playerName = _("てすと"),
+};
+#endif
 
 bool8 TrainerCard_Init(struct Task *);
 bool8 TrainerCard_WaitForFadeInToFinish(struct Task *);
@@ -176,8 +204,15 @@ static void TrainerCard_Back_PrintPokemonTrades_Label(void);
 static void TrainerCard_Back_PrintPokemonTrades(void);
 void unref_sub_8094588(u16 left, u16 top);
 
+#ifdef DEBUG
+static u8 gDebug_03000748;
+#endif
+
 void TrainerCard_ShowPlayerCard(Callback arg1)
 {
+#ifdef DEBUG
+    gDebug_03000748 = 0;
+#endif
     TrainerCard_InitScreenForPlayer(arg1);
     SetMainCallback2(sub_8093174);
     ewram0_2.language = GAME_LANGUAGE;
@@ -185,10 +220,40 @@ void TrainerCard_ShowPlayerCard(Callback arg1)
 
 void TrainerCard_ShowLinkCard(u8 playerIndex, Callback arg2)
 {
+#ifdef DEBUG
+    gDebug_03000748 = 0;
+#endif
     TrainerCard_InitScreenForLinkPlayer(playerIndex, arg2);
     SetMainCallback2(sub_8093174);
     ewram0_2.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
 }
+
+#ifdef DEBUG
+void debug_sub_80A0710(Callback callback)
+{
+    gDebug_03000748 = TRUE;
+    TrainerCard_InitScreenForPlayer(callback);
+    SetMainCallback2(sub_8093174);
+    ewram0_2.language = GAME_LANGUAGE;
+}
+
+void debug_sub_80A073C(Callback callback)
+{
+    memcpy(&gTrainerCards[0], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+    gDebug_03000748=TRUE;
+    TrainerCard_InitScreenForLinkPlayer(0, callback);
+    SetMainCallback2(sub_8093174);
+    ewram0_2.language = GAME_LANGUAGE;
+}
+
+void debug_sub_80A0780()
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+        memcpy(&gTrainerCards[i], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+}
+#endif
 
 static void sub_8093174(void)
 {
@@ -553,6 +618,19 @@ static void TrainerCard_FillFlags(void)
             }
         }
     }
+
+#ifdef DEBUG
+    if (gDebug_03000748 != 0)
+    {
+        ewram0_2.showHallOfFame = TRUE;
+        ewram0_2.showLinkBattleStatus = TRUE;
+        ewram0_2.showBattleTowerStatus = TRUE;
+        ewram0_2.showContestRecord = TRUE;
+        ewram0_2.showMixingRecord = TRUE;
+        ewram0_2.showTradingRecord = TRUE;
+        memset(ewram0_2.ownedBadges, TRUE, sizeof(ewram0_2.ownedBadges));
+    }
+#endif
 }
 
 void sub_80937A4()
@@ -645,6 +723,17 @@ bool8 TrainerCard_WaitForKeys(struct Task *task)
         }
         return TRUE;
     }
+#ifdef DEBUG
+    else if (gDebug_03000748 && gMain.newKeys & R_BUTTON)
+    {
+        ewram0_2.starCount++;
+        ewram0_2.starCount %= 5;
+        TrainerCard_LoadPalettes();
+        if (ewram0_2.backSideShown == 0)
+            TrainerCard_DrawStars();
+    }
+#endif
+
     return FALSE;
 }
 
@@ -1372,7 +1461,11 @@ static void TrainerCard_Front_PrintPokedexCount(void)
 {
     u8 buffer[16];
 
-    if (!ewram0_2.showPokedexCount)
+    if (
+#ifdef DEBUG
+     gDebug_03000748 == 0 &&
+#endif
+     !ewram0_2.showPokedexCount)
     {
         TrainerCard_ClearPokedexLabel();
     }

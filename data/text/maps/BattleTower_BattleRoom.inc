@@ -1,15 +1,15 @@
 BattleTower_BattleRoom_Text_19ACDC:: @ 819ACDC
-	.string "We will restore your POKéMON to\n"
-	.string "full health.$"
+	.string "Wir heilen deine POKéMON und machen\n"
+	.string "sie wieder fit!$"
 
 BattleTower_BattleRoom_Text_19AD09:: @ 819AD09
-	.string "You will be facing opponent no. {STR_VAR_1}.\n"
-	.string "Are you ready?$"
+	.string "Nun wirst du dich Gegner Nr. {STR_VAR_1} stellen\n"
+	.string "müssen. Bist du bereit?$"
 
 BattleTower_BattleRoom_Text_19AD3C:: @ 819AD3C
-	.string "Would you like to save and\n"
-	.string "quit the game?$"
+	.string "Möchtest du das Spiel speichern und\n"
+	.string "beenden?$"
 
 BattleTower_BattleRoom_Text_19AD66:: @ 819AD66
-	.string "Would you like to cancel your BATTLE\n"
-	.string "ROOM challenge?$"
+	.string "Möchtest du die Herausforderung im\n"
+	.string "KAMPFRAUM abbrechen?$"

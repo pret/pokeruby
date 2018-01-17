@@ -308,7 +308,10 @@ extern const u16 gUnknown_083FA632[];
 extern const s8 gUnknown_083FA64A[0x2];
 extern const s8 gUnknown_083FA64C[0x8][0x2];
 
-
+#if DEBUG
+EWRAM_DATA u8 unk_203955C[4] = { 0 };
+EWRAM_DATA u8 unk_2039560[4] = { 0 };
+#endif
 
 
 void sub_81150FC(void)

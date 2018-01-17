@@ -1,27 +1,29 @@
 SlateportCity_ContestLobby_Text_17C937:: @ 817C937
-	.string "I want to raise a POKéMON that’s\n"
-	.string "the ultimate in “great” for both\l"
-	.string "battles and CONTESTS.\p"
-	.string "It’s vexing, trying to figure out\n"
-	.string "which moves I should make it learn.$"
+	.string "Ich möchte ein POKéMON aufziehen, das\n"
+	.string "im Kampf und im WETTBEWERB\l"
+	.string "“unbesiegbar” ist.\p"
+	.string "Es ist schon verwirrend, herauszu-\n"
+	.string "finden, welche Attacken es lernen soll.$"
 
 SlateportCity_ContestLobby_Text_17C9D5:: @ 817C9D5
-	.string "Do any of your friends have any\n"
-	.string "BERRIES?\p"
-	.string "You can use that BERRY BLENDER and\n"
-	.string "make {POKEBLOCK}S with your friends!\p"
-	.string "You should try it - it’s a lot of fun!$"
+	.string "Haben einige deiner Freunde BEEREN?\p"
+	.string "Du kannst den BEERENMIXER benutzen\n"
+	.string "und zusammen mit ihnen {POKEBLOCK}\l"
+	.string "herstellen.\p"
+	.string "Das macht sehr viel Spaß!$"
 
 SlateportCity_ContestLobby_Text_17CA67:: @ 817CA67
-	.string "I have two, so you can have one!$"
+	.string "Ich habe zwei. Du kannst eine haben.$"
 
 SlateportCity_ContestLobby_Text_17CA88:: @ 817CA88
-	.string "Make {POKEBLOCK}S and put them in there.\p"
-	.string "When you make a {POKEBLOCK}, everyone\n"
-	.string "has to put in a different BERRY.$"
+	.string "Stelle {POKEBLOCK} her und verstaue sie\n"
+	.string "darin.\p"
+	.string "Wenn ihr einen {POKEBLOCK} herstellt, muss\n"
+	.string "jeder eine andere BEERE einsetzen.$"
 
 SlateportCity_ContestLobby_Text_17CAEC:: @ 817CAEC
-	.string "If you win a CONTEST, they put up a\n"
-	.string "poster of your POKéMON on the wall.\p"
-	.string "It will have a portrait of your\n"
-	.string "POKéMON and both your names.$"
+	.string "Wenn du einen WETTBEWERB gewinnst,\n"
+	.string "wird ein Bild deines POKéMON an die\l"
+	.string "Wand gehängt.\p"
+	.string "Das Porträt deines POKéMON wird\n"
+	.string "außerdem mit deinem Namen versehen.$"

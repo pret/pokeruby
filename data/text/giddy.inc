@@ -1,16 +1,16 @@
 gTextGiddy_Introduction:: @ 81B092A
-	.string "I’m GIDDY!\n"
-	.string "I have a scintillating story for you!\p"
-	.string "Would you like to hear my story?$"
+	.string "Ich bin MÄRCHEN-MAN! Ich habe eine sehr\n"
+	.string "geistreiche Geschichte für dich!\p"
+	.string "Soll ich sie dir erzählen?$"
 
 gTextGiddy_YouveDeflatedMe:: @ 81B097C
 	.string "Oh...\n"
-	.string "You’ve deflated me...$"
+	.string "Du hast mir die Luft rausgelassen...$"
 
 gTextGiddy_AlsoIWasThinking:: @ 81B0998
-	.string "Also, I was thinking...$"
+	.string "Und ich war in Gedanken vertieft...$"
 
 gTextGiddy_ByeBye:: @ 81B09B0
-	.string "That’s about it, I think...\p"
-	.string "We should chat again!\n"
-	.string "Bye-bye!$"
+	.string "Das wäre alles, glaube ich...\p"
+	.string "Wir sollten bald wieder ein Schwätzchen\n"
+	.string "halten! Tschüss!$"
