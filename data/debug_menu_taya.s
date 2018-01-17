@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-	.ifdef DEBUG
+	.if DEBUG
 
 gUnknown_Debug_083C4E54:: @ 0x83C4E54
 	.string "Profile$"

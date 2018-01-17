@@ -2,7 +2,7 @@
 	.include "constants/constants.inc"
 
 	.section .rodata
-	.ifdef DEBUG
+	.if DEBUG
 gUnknown_Debug_083C0C54:: @ 0x83C0C54
 	.string "Contest graphics$"
 

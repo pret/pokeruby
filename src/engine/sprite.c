@@ -841,7 +841,7 @@ void RequestSpriteCopy(const void *src, u8 *dest, u16 size)
         gSpriteCopyRequests[gSpriteCopyRequestCount].size = size;
         gSpriteCopyRequestCount++;
     }
-#ifdef DEBUG
+#if DEBUG
     else
     {
         unref_sub_80AB084(sDmaOverErrorMsg);

@@ -44,7 +44,7 @@ enum {
     MENU_ACTION_PLAYER_LINK
 };
 
-#ifdef DEBUG
+#if DEBUG
 static u32 _debugStartMenu_0  __attribute__((unused));
 static u32 _debugStartMenu_1 __attribute__((unused));
 #endif
@@ -137,7 +137,7 @@ static bool32 sub_80719FC(u8 *ptr);
 static void sub_8071B54(void);
 static void Task_8071B64(u8 taskId);
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void debug_sub_8075C30()
 {

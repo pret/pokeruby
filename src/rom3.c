@@ -67,7 +67,7 @@ void sub_800B858(void)
     }
 }
 
-#ifdef DEBUG
+#if DEBUG
 extern u8 gUnknown_02023A14_50;
 #endif
 
@@ -98,7 +98,7 @@ void setup_poochyena_battle(void)
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
 
-#ifdef DEBUG
+#if DEBUG
     if (gUnknown_02023A14_50 & 0x80)
     {
         ewram[0x160fd] = 0;

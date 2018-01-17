@@ -17,7 +17,7 @@ struct DebugStruct1
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern u8 gBattleOutcome;
 
-#ifdef DEBUG
+#if DEBUG
 const struct DebugStruct1 gUnknown_Debug_4245CC[] =
 {
     { 1, _("NUMBER1") },

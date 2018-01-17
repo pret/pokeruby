@@ -51,7 +51,7 @@ u8 CreateTask(TaskFunc func, u8 priority)
         }
     }
 
-#ifdef DEBUG
+#if DEBUG
     unref_sub_80AB084(gError_NoTasksLeft);
 #endif
 

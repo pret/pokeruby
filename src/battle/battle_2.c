@@ -1258,7 +1258,7 @@ void sub_800F02C(void)
     memcpy(gSharedMem, gUnknown_02023A00, 0x60);
 }
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void sub_800F104()
 {
@@ -1554,7 +1554,7 @@ void sub_800F104(void)
 }
 #endif
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void sub_800F298()
 {

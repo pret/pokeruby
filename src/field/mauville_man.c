@@ -250,7 +250,7 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void debug_sub_810B32C()
 {

@@ -14,7 +14,7 @@ extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 extern u8 gUnusedBikeCameraAheadPanback;
 
-#ifdef DEBUG
+#if DEBUG
 extern u8 gUnknown_020297ED;
 u8 debug_sub_805F2B0(u8);
 #endif
@@ -131,7 +131,7 @@ static const struct BikeHistoryInputInfo gAcroBikeTricksList[] =
 
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
-#ifdef DEBUG
+#if DEBUG
     if (gUnknown_020297ED && debug_sub_805F2B0(direction))
     {
         Bike_SetBikeStill();
@@ -284,7 +284,7 @@ static void MachBikeTransition_TrySlowDown(u8 var)
 // the acro bike requires the input handler to be executed before the transition can.
 static void MovePlayerOnAcroBike(u8 newDirection, u16 newKeys, u16 heldKeys)
 {
-#ifdef DEBUG
+#if DEBUG
     if (gUnknown_020297ED && debug_sub_805F2B0(newDirection))
     {
         Bike_SetBikeStill();

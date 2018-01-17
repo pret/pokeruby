@@ -663,7 +663,7 @@ static u16 CalculateChecksum(void *data, u16 size)
     return ((checksum >> 16) + checksum);
 }
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void sub_813B79C()
 {

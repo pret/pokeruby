@@ -3045,7 +3045,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     }
 }
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
 {

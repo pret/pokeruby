@@ -544,7 +544,7 @@ static void ProcessRecvCmds(u8 unusedParam)
                 else
                 {
                     SetBlockReceivedFlag(i);
-#ifdef DEBUG
+#if DEBUG
                     debug_sub_808B838(i);
 #endif
                 }
@@ -979,7 +979,7 @@ static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
     }
 }
 
-#ifdef DEBUG
+#if DEBUG
 
 EWRAM_DATA u16 *debugCharacterBase = NULL;
 EWRAM_DATA void *unk_20238C8 = NULL;

@@ -117,7 +117,7 @@ static void sub_810B4CC(u8 taskId)
     DestroyTask(taskId);
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_8120968(void)
 {
     if (npc_before_player_of_type(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)

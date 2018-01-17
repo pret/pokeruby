@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-	.ifdef DEBUG
+	.if DEBUG
 
 	.align 2
 gUnknown_Debug_083C48C4:: @ 0x83C48C4

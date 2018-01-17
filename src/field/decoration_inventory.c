@@ -166,7 +166,7 @@ u8 sub_81341D4(void)
 }
 
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_814A3A8(void)
 {
     u8 decor;

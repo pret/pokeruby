@@ -1,4 +1,4 @@
-#ifdef DEBUG
+#if DEBUG
 #include "global.h"
 
 EWRAM_DATA u8 unk_debug_ewram_0[56] = { 0 };

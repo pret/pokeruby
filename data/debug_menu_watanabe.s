@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-	.ifdef DEBUG
+	.if DEBUG
 
 gUnknown_Debug_083F7FD4:: @ 0x83F7FD4
 	.string "▶$"

@@ -31,7 +31,7 @@
 #include "text.h"
 #include "tv.h"
 
-#ifdef DEBUG
+#if DEBUG
 extern u8 gUnknown_020297ED;
 #endif
 
@@ -50,7 +50,7 @@ static const struct ContestWinner sEmptyMuseumPortrait =
     .trainerName = {EOS},
 };
 
-#ifdef DEBUG
+#if DEBUG
 const s8 gUnknown_Debug_0823C788[][2] =
 {
     { MAP_GROUP(INSIDE_OF_TRUCK),                   MAP_NUM(INSIDE_OF_TRUCK) },
@@ -114,7 +114,7 @@ void ZeroBattleTowerData(void)
     CpuFill32(0, &gSaveBlock2.battleTower, sizeof(gSaveBlock2.battleTower));
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_8052E04()
 {
     u8 i;
@@ -153,7 +153,7 @@ void ClearSav2(void)
 void sub_8052E4C(void)
 {
     gDifferentSaveFile = 0;
-#ifdef DEBUG
+#if DEBUG
     gUnknown_020297ED = 0;
 #endif
     sub_808C0A0();
@@ -209,7 +209,7 @@ void NewGameInitData(void)
     ScriptContext2_RunNewScript(gUnknown_0819FA81);
 }
 
-#ifdef DEBUG
+#if DEBUG
 extern void debug_sub_80A3904(void);
 extern void debug_sub_80A3714(void);
 extern void debug_sub_8120F98(void);

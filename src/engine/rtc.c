@@ -268,7 +268,7 @@ void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
     *dest = EOS;
 }
 
-#ifdef DEBUG
+#if DEBUG
 
 void debug_sub_800987C(u8 *dest)
 {
@@ -370,7 +370,7 @@ u32 RtcGetMinuteCount()
     return (24 * 60) * RtcGetDayCount(&sRtc) + 60 * sRtc.hour + sRtc.minute;
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_8009A60()
 {
     RtcGetRawInfo(&sRtc);

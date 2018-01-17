@@ -1,4 +1,4 @@
-#ifdef DEBUG
+#if DEBUG
 #include "global.h"
 
 #define BSS_DATA __attribute__((section(".bss")))

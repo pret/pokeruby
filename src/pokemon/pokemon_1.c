@@ -524,7 +524,7 @@ void CalculateMonStats(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }
 
-#ifdef DEBUG
+#if DEBUG
 __attribute__((naked))
 void debug_sub_803F55C()
 {

@@ -360,7 +360,7 @@ void sub_80831F8(u8 taskId)
      || sub_8082DF4(taskId) == TRUE)
         return;
 
-#ifdef DEBUG
+#if DEBUG
     sub_8082D60(taskId, GetLinkPlayerCount_2());
 #endif
 

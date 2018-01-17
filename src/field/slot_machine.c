@@ -2855,7 +2855,7 @@ static void sub_8104C5C(void)
 
 static void LoadSlotMachineWheelOverlay(void);
 
-#ifdef DEBUG
+#if DEBUG
 // should be static
 __attribute__((section(".bss"))) u8 unk_debug_bss_1[0xC] = { 0 };
 #endif

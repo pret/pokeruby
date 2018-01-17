@@ -831,7 +831,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             SetMainCallback2(CB2_GoToResetRtcScreen);
         }
-#ifdef DEBUG
+#if DEBUG
         else if (gMain.heldKeys == SELECT_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 16, 0);
@@ -864,7 +864,7 @@ static void CB2_GoToMainMenu(void)
         SetMainCallback2(CB2_InitMainMenu);
 }
 
-#ifdef DEBUG
+#if DEBUG
 static void CB2_GoToTestMenu(void)
 {
     if (!UpdatePaletteFade())

@@ -227,7 +227,7 @@ void GetRoamerLocation(u8 *mapGroup, u8 *mapNum)
     *mapNum = sRoamerLocation[MAP_NUM];
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_814A714(void)
 {
     if (gSaveBlock1.location.mapGroup == 0)

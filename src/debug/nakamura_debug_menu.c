@@ -1,4 +1,4 @@
-#ifdef DEBUG
+#if DEBUG
 #include "global.h"
 #include "menu.h"
 

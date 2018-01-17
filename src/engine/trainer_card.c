@@ -63,7 +63,7 @@ const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
 // XXX: what is this?
 u8 *const ewram_ = gSharedMem;
 
-#ifdef DEBUG
+#if DEBUG
 const struct TrainerCard gUnknown_Debug_083E0448 =
 {
     .gender = FEMALE,
@@ -204,13 +204,13 @@ static void TrainerCard_Back_PrintPokemonTrades_Label(void);
 static void TrainerCard_Back_PrintPokemonTrades(void);
 void unref_sub_8094588(u16 left, u16 top);
 
-#ifdef DEBUG
+#if DEBUG
 static u8 gDebug_03000748;
 #endif
 
 void TrainerCard_ShowPlayerCard(Callback arg1)
 {
-#ifdef DEBUG
+#if DEBUG
     gDebug_03000748 = 0;
 #endif
     TrainerCard_InitScreenForPlayer(arg1);
@@ -220,7 +220,7 @@ void TrainerCard_ShowPlayerCard(Callback arg1)
 
 void TrainerCard_ShowLinkCard(u8 playerIndex, Callback arg2)
 {
-#ifdef DEBUG
+#if DEBUG
     gDebug_03000748 = 0;
 #endif
     TrainerCard_InitScreenForLinkPlayer(playerIndex, arg2);
@@ -228,7 +228,7 @@ void TrainerCard_ShowLinkCard(u8 playerIndex, Callback arg2)
     ewram0_2.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_80A0710(Callback callback)
 {
     gDebug_03000748 = TRUE;
@@ -619,7 +619,7 @@ static void TrainerCard_FillFlags(void)
         }
     }
 
-#ifdef DEBUG
+#if DEBUG
     if (gDebug_03000748 != 0)
     {
         ewram0_2.showHallOfFame = TRUE;
@@ -723,7 +723,7 @@ bool8 TrainerCard_WaitForKeys(struct Task *task)
         }
         return TRUE;
     }
-#ifdef DEBUG
+#if DEBUG
     else if (gDebug_03000748 && gMain.newKeys & R_BUTTON)
     {
         ewram0_2.starCount++;
@@ -1462,7 +1462,7 @@ static void TrainerCard_Front_PrintPokedexCount(void)
     u8 buffer[16];
 
     if (
-#ifdef DEBUG
+#if DEBUG
      gDebug_03000748 == 0 &&
 #endif
      !ewram0_2.showPokedexCount)
