@@ -296,9 +296,6 @@ bool8 sub_80F9344(void)
 
 void sub_80F9368(void)
 {
-    u8 *addr;
-    u32 size;
-
     REG_DISPCNT = 0;
     REG_BG3CNT = 0;
     REG_BG2CNT = 0;
@@ -312,21 +309,7 @@ void sub_80F9368(void)
     REG_BG1VOFS = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-
-    addr = (u8 *)VRAM;
-    size = 0x18000;
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, (u8 *)VRAM, 0x18000, 0x1000);
     DmaClear32(3, OAM, OAM_SIZE);
     DmaClear16(3, PLTT, PLTT_SIZE);
 }

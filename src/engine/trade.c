@@ -1453,9 +1453,7 @@ static void sub_8048AB4(void)
 static void sub_8048B0C(u8 a0)
 {
     int i;
-    u16 *dest;
-    const u16 *src;
-    u32 size;
+
     switch (a0)
     {
         case 0:
@@ -1464,21 +1462,7 @@ static void sub_8048B0C(u8 a0)
                 gPlttBufferUnfaded[i] = *(gUnknown_08EA02C8 + i);
                 gPlttBufferFaded[i] = *(gUnknown_08EA02C8 + i);
             }
-            src = gUnknown_08EA0348;
-            dest = (u16 *)BG_VRAM;
-            size = 0x1280;
-            while (1)
-            {
-                DmaCopy16(3, src, dest, BLOCKSIZE * sizeof(u16));
-                src += BLOCKSIZE;
-                dest += BLOCKSIZE;
-                size -= BLOCKSIZE * sizeof(u16);
-                if (size <= BLOCKSIZE * sizeof(u16))
-                {
-                    DmaCopy16(3, src, dest, size);
-                    break;
-                }
-            }
+			DmaCopyLarge16(3, gUnknown_08EA0348, (void *)BG_VRAM, 0x1280, 0x1000);
             for (i = 0; i < 0x400; i ++)
                 gUnknown_03004824->unk_00c8.unk_12[i] = gUnknown_08EA15C8[i];
             dest = BG_SCREEN_ADDR(6);

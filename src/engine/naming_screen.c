@@ -258,20 +258,7 @@ static void NamingScreen_InitDisplayMode(void)
 
 static void NamingScreen_ClearVram(void)
 {
-    u8 *addr = (void *)VRAM;
-    u32 size = 0x10000;
-
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
+    DmaFill16Large(3, 0, (void *)VRAM, 0x10000, 0x1000);
 }
 
 static void NamingScreen_ClearOam(void)
