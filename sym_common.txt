@@ -68,6 +68,25 @@ gBattle_BG1_X: @ 30042C0
 gBattle_WIN0H: @ 30042C4
 	.space 0xC
 
+@ debug
+
+gUnknown_Debug_03004360:
+	.space 0x10
+
+gUnknown_Debug_03004370:
+	.space 0x30
+
+gUnknown_Debug_030043A0:
+	.space 4
+
+gUnknown_Debug_030043A4:
+	.space 4
+
+gUnknown_Debug_030043A8:
+	.space 8
+
+@ end debug
+
 gPreBattleCallback1: @ 30042D0
 	.space 0x4
 

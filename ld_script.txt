@@ -117,7 +117,10 @@ SECTIONS {
         src/field/field_screen_effect.o(.text);
         src/battle/battle_setup.o(.text);
         src/engine/cable_club.o(.text);
+        src/debug/tomomichi_debug_menu.o(.text);
+        src/debug/nohara_debug_menu.o(.text);
         src/debug/mori_debug_menu.o(.text);
+        src/debug/taya_debug_window.o(.text);
         src/field/trainer_see.o(.text);
         src/field/wild_encounter.o(.text);
         src/field/field_effect.o(.text);
@@ -136,6 +139,7 @@ SECTIONS {
         src/pokemon/pokemon_summary_screen.o(.text);
         src/field/script_movement.o(.text);
         src/field/fldeff_cut.o(.text);
+        src/debug/kagaya_debug_menu.o(.text);
         src/pokemon/mail_data.o(.text);
         src/field/map_name_popup.o(.text);
         src/field/item_menu.o(.text);
@@ -145,6 +149,7 @@ SECTIONS {
         src/contest.o(.text);
         src/field/shop.o(.text);
         src/field/berry.o(.text);
+        src/debug/watanabe_debug_menu.o(.text);
         src/field/script_menu.o(.text);
         src/engine/naming_screen.o(.text);
         src/field/money.o(.text);
@@ -384,6 +389,7 @@ SECTIONS {
         src/field/braille_puzzles.o(.text);
         src/pokemon/pokeblock_feed.o(.text);
         src/engine/clear_save_data_menu.o(.text);
+        src/debug/nakamura_debug_menu.o(.text);
         src/scene/intro_credits_graphics.o(.text);
         src/scene/evolution_graphics.o(.text);
         src/field/bard_music.o(.text);
@@ -541,7 +547,10 @@ SECTIONS {
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
         src/engine/cable_club.o(.rodata);
+        data/debug_menu_tomomichi.o(.rodata);
+        data/debug_menu_nohara.o(.rodata);
         src/debug/mori_debug_menu.o(.rodata);
+        data/debug_menu_taya.o(.rodata);
         src/field/trainer_see.o(.rodata);
         src/field/wild_encounter.o(.rodata);
         src/field/field_effect.o(.rodata);
@@ -554,6 +563,7 @@ SECTIONS {
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);
         src/field/fldeff_cut.o(.rodata);
+        src/debug/kagaya_debug_menu.o(.rodata);
         src/field/item_menu.o(.rodata);
         src/battle/battle_anim_80A7E7C.o(.rodata);
         src/field/item.o(.rodata);
@@ -561,6 +571,7 @@ SECTIONS {
         data/contest.o(.rodata);
         src/field/shop.o(.rodata);
         src/field/berry.o(.rodata);
+        data/debug_menu_watanabe.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);
         src/field/money.o(.rodata);
@@ -639,6 +650,7 @@ SECTIONS {
         data/debug_mystery_event_menu.o(.rodata);
         src/engine/save_failed_screen.o(.rodata);
         src/pokemon/pokeblock_feed.o(.rodata);
+        src/debug/nakamura_debug_menu.o(.rodata);
         src/scene/intro_credits_graphics.o(.rodata);
         src/scene/evolution_graphics.o(.rodata);
         src/field/bard_music.o(.rodata);

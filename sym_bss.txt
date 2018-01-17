@@ -19,8 +19,16 @@
 	.include "src/engine/tileset_anim.o"
 	.include "src/engine/sound.o"
 	.include "src/field/field_weather.o"
+	.include "src/debug/tomomichi_debug_menu.o"
+	.include "src/debug/nohara_debug_menu.o"
 	.include "src/field/field_effect.o"
+	.include "src/engine/trainer_card.o"
 	.include "src/field/item_menu.o"
+
+@ debug
+unk_debug_bss_3:
+	.space 0x4
+
 	.include "src/field/shop.o"
 	.include "src/engine/record_mixing.o"
 	.include "src/field/tv.o"
@@ -29,11 +37,13 @@
 	.include "src/pokenav_before.o"
 	.include "src/field/mauville_man.o"
 	.include "src/field/menu_helpers.o"
+	.include "src/field/slot_machine.o"
 	.include "src/scene/contest_painting.o"
 	.include "src/field/pokeblock.o"
 	.include "src/field/field_specials.o"
 	.include "src/pokemon/learn_move.o"
 	.include "src/field/player_pc.o"
+	.include "src/debug/nakamura_debug_menu.o"
 	.include "src/libs/m4a_1.o"
 	.include "src/libs/agb_flash.o"
 	.include "src/libs/siirtc.o"
