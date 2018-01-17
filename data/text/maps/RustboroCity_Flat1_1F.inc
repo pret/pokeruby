@@ -1,6 +1,6 @@
 RustboroCity_Flat1_1F_Text_184DB4:: @ 8184DB4
-	.string "Jedes POKéMON besitzt eine spezielle\n"
-	.string "Begabung, die es einsetzen kann.$"
+	.string "Every POKéMON has a special ability\n"
+	.string "that it can use.$"
 
 RustboroCity_Flat1_1F_Text_184DE9:: @ 8184DE9
-	.string "POKéMON sind sehr seltsame Geschöpfe.$"
+	.string "POKéMON are such strange creatures.$"

@@ -1,33 +1,33 @@
 LilycoveCity_DepartmentStoreRooftop_Text_18C61F:: @ 818C61F
-	.string "Haben sie noch nicht bekannt gegeben,\n"
-	.string "wann sie den Ausverkauf starten?\p"
-	.string "Ich achte immer auf die Werbung im\n"
-	.string "Fernsehen, aber bisher war da nichts.$"
+	.string "Don’t they have set dates for their\n"
+	.string "clear-out sales?\p"
+	.string "I watch TV, but they never show any\n"
+	.string "commercials.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C685:: @ 818C685
-	.string "Ja! Ich habe schon lange auf diesen\n"
-	.string "Ausverkauf gewartet.\p"
-	.string "Hier gibt es Items, die findest du sonst\n"
-	.string "nirgends. Ich decke mich damit ein!$"
+	.string "Yes! I’ve been waiting a long time for\n"
+	.string "this clear-out sale.\p"
+	.string "They have items that you can only get\n"
+	.string "here. I’m going to load up, that I am!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C70E:: @ 818C70E
-	.string "Ooh... Ich bin am Verdursten!$"
+	.string "Ohh... I’m bone-dry thirsty!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C72B:: @ 818C72B
-	.string "Das ist ein GETRÄNKEAUTOMAT.\n"
-	.string "Möchtest du etwas trinken?$"
+	.string "It’s a VENDING MACHINE.\n"
+	.string "Which drink would you like?$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C75F:: @ 818C75F
-	.string "Deng!\p"
-	.string "Eine Dose {STR_VAR_1} fällt heraus.$"
+	.string "Clang!\p"
+	.string "A can of {STR_VAR_1} dropped down.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C780:: @ 818C780
-	.string "Deng!\p"
-	.string "Treffer! Eine weitere Dose\n"
-	.string "{STR_VAR_1} fällt heraus!$"
+	.string "Clang!\p"
+	.string "Score! An extra can of {STR_VAR_1}\n"
+	.string "dropped down!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C7AF:: @ 818C7AF
-	.string "Nicht genug Geld...$"
+	.string "Not enough money...$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C7C3:: @ 818C7C3
-	.string "Es wird kein Getränk gekauft.$"
+	.string "Decided against buying a drink.$"

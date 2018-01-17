@@ -1,46 +1,41 @@
 FallarborTown_Text_16C7FF:: @ 816C7FF
-	.string "Was ist los? Was ist los?\p"
-	.string "Ich habe eine zwielichtige Gestalt aus\n"
-	.string "dem LABOR von PROF. KOSMO flitzen\l"
-	.string "sehen.$"
+	.string "What’s up, what’s up?\p"
+	.string "I saw a shady fellow scuttling in and\n"
+	.string "out of PROF. COZMO’s LAB.$"
 
 FallarborTown_Text_16C855:: @ 816C855
-	.string "Diese Region ist schon seit Urzeiten\n"
-	.string "für ihre Meteoritenschauer bekannt.\p"
-	.string "Man sagt, METEORFÄLLE sei durch\n"
-	.string "den Aufprall eines METEORITEN\l"
-	.string "entstanden.$"
+	.string "This region’s been known for meteors\n"
+	.string "since the olden days.\p"
+	.string "They say METEOR FALLS was gouged out\n"
+	.string "by a falling meteorite long ago.$"
 
 FallarborTown_Text_16C8D6:: @ 816C8D6
-	.string "Schau mal! Guck doch mal!\n"
-	.string "Das ist mein süßes AZURILL!\p"
-	.string "Es ist glatt, weich und plüschig!$"
+	.string "See! Take a look!\n"
+	.string "This is my precious AZURILL!\p"
+	.string "It’s slick and smooth and plushy, too!$"
 
 FallarborTown_Text_16C92C:: @ 816C92C
 	.string "AZURILL: Rooreelooo.$"
 
 FallarborTown_Text_16C941:: @ 816C941
-	.string "Hast du schon FLAVIA, die LEITERIN\n"
-	.string "der ARENA von BAD LAVASTADT,\l"
-	.string "herausgefordert?\p"
-	.string "Ihr Großvater ist sehr berühmt.\n"
-	.string "Er war einer der TOP VIER in der\l"
-	.string "POKéMON LIGA.\p"
-	.string "Es würde mich gar nicht wundern, wenn\n"
-	.string "FLAVIA ebenfalls ein großer TRAINER\l"
-	.string "wird.$"
+	.string "Have you already challenged FLANNERY,\n"
+	.string "the LEADER of LAVARIDGE GYM?\p"
+	.string "The girl’s grandfather was famous.\n"
+	.string "He was one of the ELITE FOUR in the\l"
+	.string "POKéMON LEAGUE at one point.\p"
+	.string "It wouldn’t surprise me to see FLANNERY\n"
+	.string "become a great TRAINER in her own\l"
+	.string "right.$"
 
 FallarborTown_Text_16CA39:: @ 816CA39
-	.string "POKéMON WETTBEWERBE\n"
-	.string "SUPER-KLASSE REGISTRIERUNGEN\p"
-	.string "“Brecht in die POKéMON-Szene\n"
-	.string "ein!”$"
+	.string "POKéMON CONTESTS\n"
+	.string "SUPER RANK REGISTRATION\p"
+	.string "“Burst on to the POKéMON scene!”$"
 
 FallarborTown_Text_16CA83:: @ 816CA83
-	.string "LAUBWECHSELFELD\n"
-	.string "“Eine Gemeinschaft von Farmern mit\l"
-	.string "kleinen Gärten.”$"
+	.string "FALLARBOR TOWN\n"
+	.string "“A farm community with small gardens.”$"
 
 FallarborTown_Text_16CAB9:: @ 816CAB9
-	.string "HAUS des ATTACKEN-HELFERS\n"
-	.string "“Neue Attacken für deine POKéMON.”$"
+	.string "MOVE TUTOR’S HOUSE\n"
+	.string "“New moves taught to POKéMON.”$"

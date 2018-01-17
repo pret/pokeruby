@@ -1,136 +1,132 @@
 Route117_Text_1B25CB:: @ 81B25CB
-	.string "Ich bin der PENSIONSLEITER.\p"
-	.string "Ich kümmere mich um die wertvollen\n"
-	.string "POKéMON der TRAINER.\p"
-	.string "Wenn ich eines deiner POKéMON auf-\n"
-	.string "ziehen soll, sprich mit meiner Frau.$"
+	.string "I’m the DAY-CARE MAN.\p"
+	.string "I help take care of the precious\n"
+	.string "POKéMON of TRAINERS.\p"
+	.string "If you’d like me to raise your POKéMON,\n"
+	.string "have a word with my wife.$"
 
 Route117_Text_1B2659:: @ 81B2659
-	.string "Ach, du bist es!\p"
-	.string "Wir haben deine POKéMON aufgezogen\n"
-	.string "und wurden überrascht!\p"
-	.string "Deine POKéMON haben nun ein EI!\p"
-	.string "Wir wissen nicht, wie das passiert ist,\n"
-	.string "aber deine POKéMON haben es.\p"
-	.string "Möchtest du es haben?$"
+	.string "Ah, it’s you!\p"
+	.string "We were raising your POKéMON, and my\n"
+	.string "goodness, were we surprised!\p"
+	.string "Your POKéMON had an EGG!\p"
+	.string "We don’t know how it got there,\n"
+	.string "but your POKéMON had it.\p"
+	.string "You do want it, yes?$"
 
 Route117_Text_1B2710:: @ 81B2710
-	.string "Ach, du bist es! Schön, dich zu sehen.\n"
-	.string "Deinem {STR_VAR_1} geht es sehr gut.$"
+	.string "Ah, it’s you! Good to see you.\n"
+	.string "Your {STR_VAR_1}’s doing fine.$"
 
 Route117_Text_1B2745:: @ 81B2745
-	.string "Ich werde es behalten.$"
+	.string "Well then, I’ll keep it.\n"
+	.string "Thanks!$"
 
 Route117_Text_1B2766:: @ 81B2766
-	.string "Du hast keinen Platz dafür... Komm\n"
-	.string "wieder, wenn du Platz geschaffen hast.$"
+	.string "You have no room for it...\n"
+	.string "Come back when you’ve made room.$"
 
 Route117_Text_1B27A2:: @ 81B27A2
-	.string "{PLAYER} erhält das EI vom\n"
-	.string "PENSIONSLEITER.$"
+	.string "{PLAYER} received the EGG from\n"
+	.string "the DAY-CARE MAN.$"
 
 Route117_Text_1B27CD:: @ 81B27CD
-	.string "Kümmere dich gut darum.$"
+	.string "Take good care of it.$"
 
 Route117_Text_1B27E3:: @ 81B27E3
-	.string "Übrigens, dein {STR_VAR_1} scheint sich\n"
-	.string "gut mit dem {STR_VAR_3} von {STR_VAR_2} \l"
-	.string "zu verstehen.\p"
-	.string "Ich habe gesehen, wie sie einen BRIEF\n"
-	.string "ausgetauscht haben...$"
+	.string "By the way, about your {STR_VAR_1},\n"
+	.string "it seemed to be friendly with\l"
+	.string "{STR_VAR_2}’s {STR_VAR_3}.\p"
+	.string "I may even have seen it receiving\n"
+	.string "a piece of MAIL.$"
 
 UnknownString_81B2858: @ 81B2858
-	.string "Wenn du deine POKéMON zurückhaben\n"
-	.string "möchtest, sprich doch mit meiner Frau.$"
+	.string "If you want to pick up your POKéMON,\n"
+	.string "have a word with my wife.$"
 
 Route117_Text_1B2897:: @ 81B2897
-	.string "Ah, du bist es! Deine POKéMON\n"
-	.string "{STR_VAR_1} und {STR_VAR_2} entwickeln\l"
-	.string "sich prächtig.$"
+	.string "Ah, it’s you! Your {STR_VAR_1} and\n"
+	.string "{STR_VAR_2} are doing fine.$"
 
 Route117_Text_1B28C4:: @ 81B28C4
-	.string "Ich werde es behalten.\n"
-	.string "Oder möchtest du es haben?$"
+	.string "I really will keep it.\n"
+	.string "You do want this, yes?$"
 
 Route117_PokemonDayCare_Text_1B28F2:: @ 81B28F2
-	.string "Ich bin die PENSIONSLEITERIN.\p"
-	.string "Wir ziehen POKéMON für dich auf.\p"
-	.string "Sollen wir eins für dich aufziehen?$"
+	.string "I’m the DAY-CARE LADY.\p"
+	.string "We can raise POKéMON for you.\p"
+	.string "Would you like us to raise one?$"
 
 Route117_PokemonDayCare_Text_1B2947:: @ 81B2947
-	.string "Welches POKéMON sollen wir für dich\n"
-	.string "aufziehen?$"
+	.string "Which POKéMON should we raise for you?$"
 
 Route117_PokemonDayCare_Text_1B296E:: @ 81B296E
-	.string "Fein, dann nehmen wir dein {STR_VAR_1}\n"
-	.string "für eine Weile in Pflege.\p"
-	.string "Schau später mal nach ihm.$"
+	.string "Fine, we’ll raise your {STR_VAR_1} for\n"
+	.string "a while.\p"
+	.string "Come back for it later.$"
 
 Route117_PokemonDayCare_Text_1B29AD:: @ 81B29AD
-	.string "Wir können zwei deiner POKéMON nehmen.\n"
-	.string "Möchtest du noch eins in Pflege geben?$"
+	.string "We can raise two of your POKéMON.\n"
+	.string "Would you like us to raise one more?$"
 
 Route117_PokemonDayCare_Text_1B29F4:: @ 81B29F4
-	.string "Mein Mann hat dich schon gesucht.$"
+	.string "My husband was looking for you.$"
 
 Route117_PokemonDayCare_Text_1B2A14:: @ 81B2A14
-	.string "Oh, gut.\n"
-	.string "Komm bald wieder.$"
+	.string "Oh, fine, then.\n"
+	.string "Come again.$"
 
 Route117_PokemonDayCare_Text_1B2A30:: @ 81B2A30
-	.string "Du hast nicht genug Geld...$"
+	.string "You don’t have enough money...$"
 
 Route117_PokemonDayCare_Text_1B2A4F:: @ 81B2A4F
-	.string "Möchtest du das andere auch wieder\n"
-	.string "mitnehmen?$"
+	.string "Will you take back the other one, too?$"
 
 Route117_PokemonDayCare_Text_1B2A76:: @ 81B2A76
-	.string "Gut.\n"
-	.string "Komm bald wieder.$"
+	.string "Fine.\n"
+	.string "Come again.$"
 
 Route117_PokemonDayCare_Text_1B2A88:: @ 81B2A88
-	.string "Ach, du bist es! Schön dich zu sehen.\n"
-	.string "Deinen POKéMON kann es einfach\l"
-	.string "nur gut gehen!$"
+	.string "Ah, it’s you! Good to see you.\n"
+	.string "Your POKéMON can only be doing good!$"
 
 Route117_PokemonDayCare_Text_1B2ACC:: @ 81B2ACC
-	.string "Dein {STR_VAR_1} ist um {STR_VAR_2} Level\n"
-	.string "gewachsen.$"
+	.string "By level, your {STR_VAR_1} has grown\n"
+	.string "by {STR_VAR_2}.$"
 
 Route117_PokemonDayCare_Text_1B2AEF:: @ 81B2AEF
-	.string "Dein POKéMON-Team ist vollzählig.\n"
-	.string "Schaffe Platz und komm dann wieder.$"
+	.string "Your POKéMON team is full.\n"
+	.string "Make room, then come see me.$"
 
 UnknownString_81B2B27: @ 81B2B27
-	.string "Welches POKéMON nimmst du wieder mit?$"
+	.string "Which POKéMON will you take back?$"
 
 Route117_PokemonDayCare_Text_1B2B49:: @ 81B2B49
-	.string "Wenn du dein {STR_VAR_1}\n"
-	.string "mitnehmen willst, kostet das ¥{STR_VAR_2}.$"
+	.string "If you want your {STR_VAR_1} back,\n"
+	.string "it will cost ¥{STR_VAR_2}.$"
 
 Route117_PokemonDayCare_Text_1B2B75:: @ 81B2B75
-	.string "Sehr schön!\n"
-	.string "Hier ist dein POKéMON!$"
+	.string "Perfect!\n"
+	.string "Here’s your POKéMON.$"
 
 Route117_PokemonDayCare_Text_1B2B93:: @ 81B2B93
-	.string "{PLAYER} hat {STR_VAR_1} von der\n"
-	.string "PENSIONSLEITERIN zurückerhalten.$"
+	.string "{PLAYER} took back {STR_VAR_1} from\n"
+	.string "the DAY-CARE LADY.$"
 
 Route117_PokemonDayCare_Text_1B2BBB:: @ 81B2BBB
-	.string "Oh! Du hast aber nur ein POKéMON.\p"
-	.string "Komm einfach später wieder.$"
+	.string "Oh? But you have just one POKéMON.\p"
+	.string "Come back another time.$"
 
 Route117_PokemonDayCare_Text_1B2BF6:: @ 81B2BF6
-	.string "Möchtest du dein POKéMON wieder\n"
-	.string "mitnehmen?$"
+	.string "Will you take your POKéMON back?$"
 
 Route117_PokemonDayCare_Text_1B2C17:: @ 81B2C17
-	.string "Wenn du das POKéMON hier lässt, womit\n"
-	.string "willst du denn dann kämpfen?\p"
-	.string "Komm einfach später wieder.$"
+	.string "If you leave me that POKéMON,\n"
+	.string "what will you battle with?\p"
+	.string "Come back another time.$"
 
 UnknownString_81B2C68: @ 81B2C68
-	.string "Wie?$"
+	.string "Huh?$"
 
 @ XXX JP
 	.string "\p"

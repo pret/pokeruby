@@ -1,115 +1,115 @@
 Route104_Prototype_Text_19AD9B:: @ 819AD9B
-	.string "Oh! Du siehst wie ein guter TRAINER aus.\n"
-	.string "Schaust du dir mal meine POKéMON an?$"
+	.string "Oh? You look like a good TRAINER.\n"
+	.string "Will you look at my POKéMON?$"
 
 Route104_Prototype_Text_19ADDA:: @ 819ADDA
-	.string "Ich bin nicht gut genug für dich.$"
+	.string "I’m not good enough for you.$"
 
 Route104_Prototype_Text_19ADF7:: @ 819ADF7
-	.string "Ich habe den Kampf richtig genossen.\n"
-	.string "Bitte kämpfe bald wieder mit mir.$"
+	.string "I enjoyed our battle very much.\n"
+	.string "Please battle with me some other time.$"
 
 Route104_Prototype_Text_19AE3E:: @ 819AE3E
-	.string "Los!\n"
-	.string "Los, POKéMON!$"
+	.string "Go!\n"
+	.string "Go, our POKéMON!$"
 
 Route104_Prototype_Text_19AE53:: @ 819AE53
-	.string "Oh... Wir hatten keine Chance.$"
+	.string "Oh... We couldn’t win.$"
 
 Route104_Prototype_Text_19AE6A:: @ 819AE6A
-	.string "Überrascht es dich, dass zwei POKéMON\n"
-	.string "zur gleichen Zeit kämpften?$"
+	.string "Did it surprise you that two POKéMON\n"
+	.string "battled at the same time?$"
 
 Route104_Prototype_Text_19AEA9:: @ 819AEA9
-	.string "Du kannst nicht mit uns kämpfen, wenn\n"
-	.string "du nur ein POKéMON hast. Warum nicht?\l"
-	.string "Nun, weil wir stark sind!$"
+	.string "You can’t battle with us if you have\n"
+	.string "only one POKéMON.\l"
+	.string "Why? Because we’re strong!$"
 
 Route104_Prototype_Text_19AEFB:: @ 819AEFB
-	.string "Hey, hey! Das ist seit langer Zeit mein\n"
-	.string "erster Kampf. Ich gebe mein Bestes!$"
+	.string "Hey, hey! This is my first battle in\n"
+	.string "a while. I’ll give it my all!$"
 
 Route104_Prototype_Text_19AF3E:: @ 819AF3E
-	.string "Ich habe doch mein Bestes gegeben...$"
+	.string "But I gave it my all...$"
 
 Route104_Prototype_Text_19AF56:: @ 819AF56
-	.string "Du bist viel zu stark!\n"
-	.string "Du musst ein großer TRAINER sein!$"
+	.string "You’re far too strong!\n"
+	.string "You must be a great TRAINER!$"
 
 Route104_Prototype_Text_19AF8A:: @ 819AF8A
-	.string "Meine POKéMON sind sehr niedlich und\n"
-	.string "sehr stark.\l"
-	.string "Das möchte ich dir gerne zeigen.$"
+	.string "My POKéMON are extremely cute and\n"
+	.string "extremely strong.\l"
+	.string "Please allow me to show you.$"
 
 Route104_Prototype_Text_19AFDB:: @ 819AFDB
-	.string "Ich gebe mich geschlagen.\n"
-	.string "Du bist wirklich stark.$"
+	.string "I must concede defeat.\n"
+	.string "After all, you are strong.$"
 
 Route104_Prototype_Text_19B00D:: @ 819B00D
-	.string "Wenn wir uns das nächste Mal treffen, \n"
-	.string "werden meine POKéMON stärker sein!\p"
-	.string "Und erwarte dann keine Gnade!$"
+	.string "The next time we meet, I will have raised\n"
+	.string "my POKéMON much more.\p"
+	.string "Don’t expect mercy then!$"
 
 Route104_Prototype_Text_19B066:: @ 819B066
-	.string "Wir WANDERER sind stets voller Energie!\n"
-	.string "Auch meine POKéMON sind voller Energie!\l"
-	.string "Wir sind stets auf einen Kampf aus!$"
+	.string "We HIKERS are always full of energy!\n"
+	.string "My POKéMON are also full of energy, too.\l"
+	.string "We’re always itching for a battle!$"
 
 Route104_Prototype_Text_19B0D7:: @ 819B0D7
-	.string "Uns ist die Energie ausgegangen...$"
+	.string "We ran out of energy...$"
 
 Route104_Prototype_Text_19B0EF:: @ 819B0EF
-	.string "Hahahaha! Natürlich, wir haben verloren.\n"
-	.string "Aber es war ein toller Kampf, oder?\l"
-	.string "Wir sind jedenfalls zufrieden damit!$"
+	.string "Wahahah! Sure, we lost!\n"
+	.string "But we had a great battle, didn’t we?\l"
+	.string "We’re satisfied with that!$"
 
 Route104_Prototype_Text_19B148:: @ 819B148
-	.string "Du siehst wie ein starker TRAINER aus,\n"
-	.string "aber kannst du uns auch schlagen?$"
+	.string "You look like a strong TRAINER,\n"
+	.string "but can you beat us?$"
 
 Route104_Prototype_Text_19B17D:: @ 819B17D
 	.string "Waaah!\n"
-	.string "Wir haben verloren!$"
+	.string "We lost!$"
 
 Route104_Prototype_Text_19B18D:: @ 819B18D
-	.string "Wenn zwei POKéMON zur gleichen Zeit\n"
-	.string "kämpfen können, ist alles möglich.$"
+	.string "If two POKéMON can battle at the same\n"
+	.string "time, all sorts of new things can happen.$"
 
 Route104_Prototype_Text_19B1DD:: @ 819B1DD
-	.string "Hast du nur ein POKéMON, das\n"
-	.string "kämpfen kann?\p"
-	.string "Dann können wir nicht mit dir kämpfen.$"
+	.string "Do you only have one POKéMON that can\n"
+	.string "battle?\p"
+	.string "Then we can’t battle with you yet.$"
 
 Route104_Prototype_Text_19B22E:: @ 819B22E
-	.string "Hast du versucht, alle anderen TRAINER\n"
-	.string "im Kampf zu besiegen?$"
+	.string "Have you tried beating all the other\n"
+	.string "TRAINERS in battle?$"
 
 Route104_Prototype_Text_19B267:: @ 819B267
-	.string "Danke, dass du heute gekommen bist!\p"
-	.string "Ich hoffe, du freust dich auch auf das\n"
-	.string "Erscheinen dieses Spiels!$"
+	.string "Thanks for coming today!\p"
+	.string "I hope you’re looking forward to this\n"
+	.string "game’s release!$"
 
 Route104_Prototype_Text_19B2B6:: @ 819B2B6
-	.string "Was? Du bist schon gegen alle TRAINER\n"
-	.string "angetreten?$"
+	.string "Huh? Did you battle with all the\n"
+	.string "TRAINERS already?$"
 
 Route104_Prototype_Text_19B2E9:: @ 819B2E9
-	.string "Danke, dass du heute gekommen bist!\p"
-	.string "Ich hoffe, du freust dich auch auf das\n"
-	.string "Erscheinen dieses Spiels!$"
+	.string "Thank you for coming today!\p"
+	.string "I hope you’re looking forward to this\n"
+	.string "game’s release!$"
 
 Route104_Prototype_Text_19B33B:: @ 819B33B
-	.string "POKéMON, wie du sie hast, habe ich noch\n"
-	.string "nie gesehen. Ich bin richtig neidisch!$"
+	.string "I’ve never seen the POKéMON you have.\n"
+	.string "It makes me envious a little.$"
 
 Route104_Prototype_Text_19B37F:: @ 819B37F
-	.string "Schau dir all diese TRAINER an! Sie\n"
-	.string "haben alle die unterschiedlichsten\l"
-	.string "POKéMON. Und sie warten alle auf dich!$"
+	.string "Look at all those TRAINERS!\n"
+	.string "They have different POKéMON, too.\l"
+	.string "And they’re all waiting for you!$"
 
 Route104_Prototype_Text_19B3DE:: @ 819B3DE
-	.string "Willkommen in der Welt der POKéMON!$"
+	.string "Welcome to the World of POKéMON!$"
 
 Route104_Prototype_Text_19B3FF:: @ 819B3FF
-	.string "Mögen alle POKéMON-Kämpfe strahlend,\n"
-	.string "unterhaltsam und wild sein!$"
+	.string "May all POKéMON battles be bright,\n"
+	.string "fun, and ferocious!$"

@@ -1,46 +1,44 @@
 PetalburgCity_Text_16433E:: @ 816433E
-	.string "Wohin ist unser HEIKO nur gegangen?\p"
-	.string "Wir müssen doch bald nach WIESENFLUR\n"
-	.string "aufbrechen...$"
+	.string "Where has our WALLY gone?\p"
+	.string "We have to leave for VERDANTURF TOWN\n"
+	.string "very soon...$"
 
 PetalburgCity_Text_16438A:: @ 816438A
-	.string "He da! Bist du vielleicht...\n"
-	.string "Ein Anfänger unter den TRAINERN?\p"
-	.string "Weißt du, was POKéMON-TRAINER machen,\n"
-	.string "wenn sie in einen neuen Ort kommen?\p"
-	.string "Sie sehen sich als Erstes die ARENA\n"
-	.string "im Ort an.$"
+	.string "Hiya! Are you maybe...\n"
+	.string "A rookie TRAINER?\p"
+	.string "Do you know what POKéMON TRAINERS\n"
+	.string "do when they reach a new town?\p"
+	.string "They first check what kind of GYM\n"
+	.string "is in the town.$"
 
 PetalburgCity_Text_164426:: @ 8164426
-	.string "Schau. Das ist die ARENA von\n"
-	.string "BLÜTENBURG CITY.$"
+	.string "See? This is PETALBURG CITY’s GYM.$"
 
 PetalburgCity_Text_164449:: @ 8164449
-	.string "Das ist das Logo der ARENA. Daran\n"
-	.string "kannst du immer eine ARENA erkennen.$"
+	.string "This is the GYM’s sign. Look for it\n"
+	.string "whenever you’re looking for a GYM.$"
 
 PetalburgCity_Text_164490:: @ 8164490
-	.string "Mein Gesicht spiegelt sich im Wasser...\p"
-	.string "Ein schimmerndes Lächeln der Hoffnung.\p"
-	.string "Oder ist es der Ausdruck düsterer\n"
-	.string "Stille, an der die Angst nagt...\p"
-	.string "Was siehst du in deinem Spiegelbild?$"
+	.string "My face is reflected in the water.\p"
+	.string "It’s a shining grin full of hope...\p"
+	.string "Or it could be a look of somber silence\n"
+	.string "struggling with fear...\p"
+	.string "What do you see reflected in your face?$"
 
 PetalburgCity_Text_16453F:: @ 816453F
-	.string "Nehmen wir an, du hättest 6 POKéMON.\n"
-	.string "Wenn du jetzt ein weiteres fängst...\p"
-	.string "wird es automatisch in das POKéMON-\n"
-	.string "LAGERUNGS-SYSTEM gesendet.$"
+	.string "Let’s say you have six POKéMON.\n"
+	.string "If you catch another one...\p"
+	.string "It is automatically sent to a STORAGE\n"
+	.string "BOX over a PC connection.$"
 
 PetalburgCity_Text_1645BB:: @ 81645BB
-	.string "POKéMON ARENA von BLÜTENBURG CITY\n"
-	.string "LEITER: NORMAN\l"
-	.string "“Ein Mann, der nach Stärke strebt!”$"
+	.string "PETALBURG CITY POKéMON GYM\n"
+	.string "LEADER: NORMAN\l"
+	.string "“A man in pursuit of power!”$"
 
 PetalburgCity_Text_164602:: @ 8164602
-	.string "BLÜTENBURG CITY\n"
-	.string "“Wo Menschen Hand in Hand\l"
-	.string "mit der Natur gehen.”$"
+	.string "PETALBURG CITY\n"
+	.string "“Where people mingle with nature.”$"
 
 PetalburgCity_Text_164634:: @ 8164634
-	.string "HEIKOS HAUS$"
+	.string "WALLY’S HOUSE$"

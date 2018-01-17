@@ -1,38 +1,38 @@
 gTextBard_BardTesting: @ 81B0A83
-	.string "BARDEN Test.$"
+	.string "BARD testing!$"
 
 gTextBard_HiImTheBard:: @ 81B0A91
-	.string "Hallo, ich bin der BARDE.\n"
-	.string "Möchtest du meinem Lied lauschen?$"
+	.string "Hi, I’m the BARD.\n"
+	.string "Would you like to hear my song?$"
 
 gTextBard_OhYouveLeftMe:: @ 81B0AC3
 	.string "Oh...\n"
-	.string "Du überlässt mich meinem Blues?$"
+	.string "You’ve left me feeling the blues...$"
 
 gTextBard_OhWhatAMovingSong:: @ 81B0AED
-	.string "Hach, was für ein bewegendes Lied...\n"
-	.string "Ich wünschte, ich könnte es für\l"
-	.string "andere spielen...$"
+	.string "Oh, what a moving song...\n"
+	.string "I wish I could play it for others...$"
 
 gTextBard_SoHowDoYouLikeMySong:: @ 81B0B2C
 	.string "So?\n"
-	.string "Wie fandest du mein Lied?\p"
-	.string "Ich bin noch nicht ganz zufrieden mit\n"
-	.string "dem Text.\p"
-	.string "Hast du nicht Lust, den Text für mich\n"
-	.string "neu zu schreiben?$"
+	.string "How do you like my song?\p"
+	.string "But I’m none too happy about the\n"
+	.string "lyrics.\p"
+	.string "How would you like to write some new\n"
+	.string "lyrics for me?$"
 
 gTextBard_OhYouveLeftMe2:: @ 81B0BA6
-	.string "Oh... Und wieder werde ich meinem\n"
-	.string "Blues überlassen.$"
+	.string "Oh...\n"
+	.string "You’ve left me feeling the blues...$"
 
 gTextBard_ThankYouKindly:: @ 81B0BD0
-	.string "Vielen herzlichen Dank!\n"
-	.string "Ich möchte für dich singen.$"
+	.string "Thank you kindly!\n"
+	.string "Let me sing it for you.$"
 
 gTextBard_WasThatHowYouWanted:: @ 81B0BFA
-	.string "Hast du dir dein Lied so vorgestellt?$"
+	.string "Was that how you wanted your song\n"
+	.string "to go?$"
 
 gTextBard_OkayThatsIt:: @ 81B0C23
-	.string "Okay! Das ist es! Dieses Lied werde\n"
-	.string "ich nun für eine Weile singen.$"
+	.string "Okay! That’s it, then.\n"
+	.string "I’ll sing this song for a while.$"

@@ -1,178 +1,176 @@
 OldaleTown_PokemonCenter_2F_Text_1A4510:: @ 81A4510
-	.string "Willkommen im POKéMON KABEL-CLUB-\n"
-	.string "KOLOSSEUM.\p"
-	.string "Hier kannst du mit deinen Freunden\n"
-	.string "kämpfen.\p"
-	.string "Möchtest du jetzt kämpfen?$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "COLOSSEUM.\p"
+	.string "You may battle with your friends here.\p"
+	.string "Would you like to battle?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A457E:: @ 81A457E
-	.string "Willkommen im POKéMON KABEL-CLUB-\n"
-	.string "HANDELSCENTER.\p"
-	.string "Hier kannst du mit deinen Freunden\n"
-	.string "POKéMON tauschen.\p"
-	.string "Möchtest du jetzt POKéMON tauschen?$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "TRADE CENTER.\p"
+	.string "You may trade your POKéMON here\n"
+	.string "with a friend.\p"
+	.string "Would you like to trade POKéMON?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A45FE:: @ 81A45FE
-	.string "Willkommen beim POKéMON KABEL-CLUB-\n"
-	.string "STATISTIKTAUSCH.\p"
-	.string "Hier kannst du mit deinen Freunden\n"
-	.string "die Rekorde als TRAINER austauschen.\p"
-	.string "Möchtest du Rekorde austauschen?$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.if REVISION >= 1
+	.string "RECORD CORNER.\p"
+	.else
+	.string "RECORD CENTER.\p"
+	.endif
+	.string "You may mix your records as a TRAINER\n"
+	.string "with the records of your friends.\p"
+	.string "Would you like to mix records?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4696:: @ 81A4696
-	.string "Es gibt drei Arten des Kampfes\n"
-	.string "via Verbindungskabel.\p"
-	.string "EINZELKAMPF ist für zwei TRAINER, die\n"
-	.string "jeder ein oder mehrere POKéMON\l"
-	.string "besitzen.\p"
-	.string "Jeder TRAINER schickt pro Runde\n"
-	.string "ein POKéMON in den Kampf.\p"
-	.string "DOPPELKAMPF ist für zwei TRAINER mit\n"
-	.string "zwei oder mehr POKéMON.\p"
-	.string "Jeder TRAINER schickt pro Runde zwei\n"
-	.string "POKéMON in den Kampf.\p"
-	.string "MULTIKÄMPFE sind für vier TRAINER mit\n"
-	.string "einem oder mehr POKéMON.\p"
-	.string "Jeder TRAINER schickt pro Runde ein\n"
-	.string "POKéMON in den Kampf.$"
+	.string "There are three link battle modes.\p"
+	.string "SINGLE BATTLE is for two TRAINERS\n"
+	.string "with one or more POKéMON each.\p"
+	.string "Each TRAINER can have one POKéMON\n"
+	.string "in battle at a time.\p"
+	.string "DOUBLE BATTLE is for two TRAINERS\n"
+	.string "with two or more POKéMON each.\p"
+	.string "Each TRAINER will send out two\n"
+	.string "POKéMON in battle at a time.\p"
+	.string "MULTI BATTLE is for four TRAINERS\n"
+	.string "with one or more POKéMON each.\p"
+	.string "Each TRAINER can have one POKéMON\n"
+	.string "in battle at a time.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4826:: @ 81A4826
-	.string "Möchtest du kämpfen?$"
+	.string "Would you like to battle?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4840:: @ 81A4840
-	.string "Welche Art des Kampfes?$"
+	.string "Which Battle Mode would you like\n"
+	.string "to play?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A486A:: @ 81A486A
-	.string "Für einen DOPPELKAMPF brauchst du\n"
-	.string "mindestens zwei POKéMON.$"
+	.string "For a DOUBLE BATTLE, you must have\n"
+	.string "at least two POKéMON.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A48A3:: @ 81A48A3
-	.string "Für einen Tausch musst du mindestens\n"
-	.string "zwei POKéMON bei dir haben.$"
+	.string "For trading, you must have at least\n"
+	.string "two POKéMON with you.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A48DD:: @ 81A48DD
-	.string "Dein POKéMON trägt eine {STR_VAR_1}-\n"
-	.string "BEERE und kann nicht getauscht werden.$"
+	.string "Your {STR_VAR_1} BERRY-holding POKéMON\n"
+	.string "can’t be traded.$"
 
-OldaleTown_PokemonCenter_2F_Text_1A490C:: @ 81A490C
 gUnknown_081A490C:: @ 81A490C
-	.string "Bitte warten.\n"
-	.string "... ... B-Knopf: Abbruch$"
+OldaleTown_PokemonCenter_2F_Text_1A490C:: @ 81A490C
+	.string "Please wait.\n"
+	.string "... ... B Button: Cancel$"
 
-UnknownString_81A4932: @ 81A4932
 gUnknown_081A4932:: @ 81A4932
-	.string "Wenn die Spieler bereit sind...\n"
-	.string "A-Knopf: Bestätigen  B-Knopf: Abbruch$"
+UnknownString_81A4932: @ 81A4932
+	.string "When all players are ready...\n"
+	.string "A Button: Confirm   B Button: Cancel$"
 
-UnknownString_81A4975: @ 81A4975
 gUnknown_081A4975:: @ 81A4975
-	.string "Verbindung für {STR_VAR_1} Spieler aufbauen.\n"
-	.string "A-Knopf: Bestätigen  B-Knopf: Abbruch$"
+UnknownString_81A4975: @ 81A4975
+	.string "Start link with {STR_VAR_1} players.\n"
+	.string "A Button: Confirm   B Button: Cancel$"
 
-UnknownString_81A49B6: @ 81A49B6
 gUnknown_081A49B6:: @ 81A49B6
-	.string "Verbindungsaufbau...\n"
-	.string "... ... B-Knopf: Abbruch$"
+UnknownString_81A49B6: @ 81A49B6
+	.string "Awaiting linkup...\n"
+	.string "... ... B Button: Cancel$"
 
 UnknownString_81A49E2: @ 81A49E2
-	.string "Dein Spiel muss vor Verbindungsaufbau\n"
-	.string "gespeichert werden. Speichern?$"
+	.string "Your progress must be saved before\n"
+	.string "linking. Is it okay to save?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4A22:: @ 81A4A22
-	.string "Bitte eintreten.$"
+	.string "Please enter.$"
 
 FallarborTown_ContestLobby_Text_1A4A30:: @ 81A4A30
 OldaleTown_PokemonCenter_2F_Text_1A4A30:: @ 81A4A30
-	.string "Ein Spieler ist noch nicht bereit\n"
-	.string "für den Link.\p"
-	.string "Bitte kommt wieder, wenn jeder seine\n"
-	.string "Vorbereitungen getroffen hat.$"
+	.string "Someone is not ready to link.\p"
+	.string "Please come back after everyone has\n"
+	.string "made preparations.$"
 
 FallarborTown_ContestLobby_Text_1A4A85:: @ 81A4A85
 OldaleTown_PokemonCenter_2F_Text_1A4A85:: @ 81A4A85
-	.string "Verbindungsfehler...\n"
-	.string "Die Kabelverbindungen überprüfen und\l"
-	.string "die Geräte aus- und wieder einschalten.$"
+	.string "Sorry, we have a transmission error...\n"
+	.string "Please reset and try again.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4AC8:: @ 81A4AC8
-	.string "Tut uns Leid. Hier liegt ein Über-\n"
-	.string "tragungsfehler vor. Rekorde können\l"
-	.string "nicht in unterschiedlichen Sprachen\l"
-	.string "ausgetauscht werden.$"
+	.string "Sorry, we have a transmission error.\n"
+	.string "You may not mix records in different\l"
+	.string "languages.$"
 
 FallarborTown_ContestLobby_Text_1A4B1D:: @ 81A4B1D
 OldaleTown_PokemonCenter_2F_Text_1A4B1D:: @ 81A4B1D
-	.string "Die Link-Partner haben eine unter-\n"
-	.string "schiedliche Auswahl getroffen.$"
+	.string "The link partners appear to have made\n"
+	.string "different selections.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4B59:: @ 81A4B59
-	.string "Bitte komm bald wieder.$"
+	.string "Please come again.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4B6C:: @ 81A4B6C
-	.string "Die Anzahl der Teilnehmer ist nicht\n"
-	.string "korrekt.$"
+	.string "The number of participants is\n"
+	.string "incorrect.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4B95:: @ 81A4B95
-	.string "Ein EINZELKAMPF kann nicht von\n"
-	.string "{STR_VAR_1} Spielern geführt werden.$"
+	.string "The SINGLE Battle Mode cannot be\n"
+	.string "played by {STR_VAR_1} players.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4BCC:: @ 81A4BCC
-	.string "Ein DOPPELKAMPF kann nicht von\n"
-	.string "{STR_VAR_1} Spielern geführt werden.$"
+	.string "The DOUBLE Battle Mode cannot be\n"
+	.string "played by {STR_VAR_1} players.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4C03:: @ 81A4C03
-	.string "Für diesen Kampfmodus werden vier\n"
-	.string "Spieler benötigt.$"
+	.string "There must be four players to play\n"
+	.string "this Battle Mode.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4C38:: @ 81A4C38
-	.string "Bitte überprüfe die Anzahl der Spieler\n"
-	.string "und fange noch einmal an.$"
+	.string "Please confirm the number of players\n"
+	.string "and start again.$"
 
 TradeRoom_WillLinkBeTerminated: @ 81A4C6E
-	.string "Wenn du den Raum verlässt, wird die Ver-\n"
-	.string "bindung abgebrochen. Einverstanden?$"
+	.string "The link will be terminated if you\n"
+	.string "leave the room. Is that okay?$"
 
 TradeRoom_TerminatingLink: @ 81A4CAF
-	.string "Verbindung wird abgebrochen... Du wirst\n"
-	.string "aus dem Raum begleitet. Bitte warten.$"
+	.string "Terminating link... You will be\n"
+	.string "escorted out of the room. Please wait.$"
 
 CableClub_TooBusyToNotice: @ 81A4CF6
-	.string "Dieser TRAINER ist zu beschäftigt...$"
+	.string "This TRAINER is too busy to notice...$"
 
 CableClub_LookAtTrainerCard1: @ 81A4D1C
-	.string "Hey! Schau dir mal den TRAINERPASS\n"
-	.string "von {STR_VAR_1} an!$"
+	.string "Score! Got to look at {STR_VAR_1}’s\n"
+	.string "TRAINER CARD!$"
 
 CableClub_LookAtTrainerCard2: @ 81A4D45
-	.string "Hey! Schau dir mal den TRAINERPASS\n"
-	.string "von {STR_VAR_1} an! Es ist ein\l"
-	.string "{STR_VAR_2}PASS.$"
+	.string "Score! Got to look at {STR_VAR_1}’s\n"
+	.string "TRAINER CARD! It’s a {STR_VAR_2} card!$"
 
 SingleBattleColosseum_Text_1A4D7E:: @ 81A4D7E
-	.string "Bitte geh in Position und beginne mit\n"
-	.string "dem Kampf.$"
+	.string "Please take your seat and start\n"
+	.string "your battle.$"
 
 TradeCenter_Text_1A4DAB:: @ 81A4DAB
-	.string "Bitte geh in Position und beginne mit\n"
-	.string "dem Tausch.$"
+	.string "Please take your seat and start\n"
+	.string "your trade.$"
 
 RecordCorner_Text_1A4DD7:: @ 81A4DD7
-	.string "Bitte geh in Position und warte.$"
+	.string "Please take your seat and wait.$"
 
 RecordCorner_Text_1A4DF7:: @ 81A4DF7
-	.string "Danke für den Besuch!$"
+	.string "Thanks for coming.$"
 
 UnknownString_81A4E0A: @ 81A4E0A
-	.string "Bitte wähle die POKéMON für den\n"
-	.string "MULTIKAMPF.$"
+	.string "Please choose your POKéMON for the\n"
+	.string "MULTI BATTLE.$"
 
 RecordCorner_Text_1A4E3B:: @ 81A4E3B
-	.string "{STR_VAR_1} hat ein {STR_VAR_2}\n"
-	.string "versendet.$"
+	.string "{STR_VAR_1} sent over one\n"
+	.string "{STR_VAR_2}.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4E50:: @ 81A4E50
-	.string "Der Eintrag auf dem TRAINERPASS wird\n"
-	.string "geändert.$"
+	.string "The TRAINER CARD data will\n"
+	.string "be rewritten.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4E79:: @ 81A4E79
-	.string "Ich hoffe, du kommst bald wieder vorbei.$"
+	.string "I hope to see you again!$"

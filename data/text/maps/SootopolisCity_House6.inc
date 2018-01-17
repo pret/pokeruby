@@ -1,20 +1,19 @@
 SootopolisCity_House6_Text_18FEA1:: @ 818FEA1
-	.string "Hallo! Du bist nach langer Zeit der erste\n"
-	.string "Gast, den ich begrüße.\p"
-	.string "Du hast mir den Tag gerettet, daher\n"
-	.string "möchte ich dir diese WAILMER-PUPPE\l"
-	.string "schenken.$"
+	.string "Hello! You’re our first guest in a\n"
+	.string "good while.\p"
+	.string "You’ve brightened up my day, so I’ll\n"
+	.string "give you a big WAILMER DOLL.$"
 
 SootopolisCity_House6_Text_18FF12:: @ 818FF12
-	.string "Pass gut auf sie auf!$"
+	.string "Take good care of it!$"
 
 SootopolisCity_House6_Text_18FF28:: @ 818FF28
-	.string "Oh, du möchtest sie zwar haben, aber\n"
-	.string "nicht sofort? Dann hebe ich sie dir auf.$"
+	.string "Oh, you want it, but not right now?\n"
+	.string "Okay, then I’ll hold it for you.$"
 
 SootopolisCity_House6_Text_18FF6D:: @ 818FF6D
-	.string "Bist du sicher?\n"
-	.string "Du möchtest diese PUPPE wirklich nicht?$"
+	.string "Are you sure?\n"
+	.string "You don’t want this DOLL?$"
 
 SootopolisCity_House6_Text_18FF95:: @ 818FF95
-	.string "Ich liiiiebe Plüsch-PUPPEN!$"
+	.string "I love plush DOLLS!$"

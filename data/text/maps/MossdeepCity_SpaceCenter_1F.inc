@@ -1,35 +1,33 @@
 MossdeepCity_SpaceCenter_1F_Text_18E1F3:: @ 818E1F3
-	.string "Die Rakete wird in Kürze starten.$"
+	.string "The rocket’s launch is imminent!$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E214:: @ 818E214
-	.string "Die Rakete ist sicher gestartet!\n"
-	.string "Das war der erfolgreiche Start Nr. {STR_VAR_1}!$"
+	.string "The rocket launched safely!\n"
+	.string "That’s successful launch no. {STR_VAR_1}!$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E251:: @ 818E251
-	.string "Jeder Raketenstart verlangt\n"
-	.string "sorgfältige Vorbereitungen. Die Fehler-\l"
-	.string "quote darf nicht einmal 1% betragen.\p"
-	.string "Selbst wenn 99% perfekt sind, kann 1%\n"
-	.string "schon für ein Misslingen sorgen.\p"
-	.string "Trotzdem versuchen wir es immer wieder.\n"
-	.string "Warum? Weil es ein ewiger Traum ist.$"
+	.string "A rocket launch demands perfection.\n"
+	.string "Not even a 1% margin of error is allowed.\p"
+	.string "Even if it’s 99% okay, the whole thing\n"
+	.string "is useless if 1% happens to be no good.\p"
+	.string "Despite that, we never stop trying.\n"
+	.string "Why? It’s a dream that never ends.$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E335:: @ 818E335
-	.string "Ich schlenderte am Strand entlang, da\n"
-	.string "habe ich dieses hier gefunden.\p"
-	.string "Ich kann damit nichts anfangen, daher\n"
-	.string "kannst du es haben.$"
+	.string "I was taking a stroll down the beach\n"
+	.string "when I found this.\p"
+	.string "It’s not anything I need, so you can\n"
+	.string "have it.$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E39B:: @ 818E39B
-	.string "Die HOENN-Region ist bekannt für die\n"
-	.string "Häufigkeit der Meteoriteneinschläge.$"
+	.string "The HOENN region has been famous for \n"
+	.string "its meteor showers for a long time.$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E3E5:: @ 818E3E5
-	.string "Einige Menschen nehmen an, dass die\n"
-	.string "POKéMON aus dem Weltall kommen. Ob das\l"
-	.string "stimmt?$"
+	.string "Some people claim that POKéMON came\n"
+	.string "from space. Could it be true?$"
 
 MossdeepCity_SpaceCenter_1F_Text_18E427:: @ 818E427
-	.string "Ein gigantischer Brocken Metall durch-\n"
-	.string "bricht den Himmel und fliegt ins All...\p"
-	.string "Das übersteigt jede Vorstellungskraft.$"
+	.string "A giant chunk of metal bursts through\n"
+	.string "the skies and flies into space...\p"
+	.string "It boggles my mind!$"

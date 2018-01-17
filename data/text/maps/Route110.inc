@@ -1,251 +1,236 @@
 Route110_Text_16E6C0:: @ 816E6C0
-	.string "TEAM {EVIL_TEAM}S Aktivitäten müssen im\n"
-	.string "Moment geheim bleiben!$"
+	.string "TEAM {EVIL_TEAM}’s activities must be kept\n"
+	.string "secret for now.$"
 
 Route110_Text_16E6F2:: @ 816E6F2
-	.string "Ich würde liebend gerne nach\n"
-	.string "GRAPHITPORT CITY gehen und ein\l"
-	.string "bisschen Krawall machen.$"
+	.string "I want to get going to SLATEPORT and\n"
+	.string "kick up a ruckus!$"
 
 Route110_Text_16E729:: @ 816E729
-	.string "Das ist mein erster Job, seit ich dem\n"
-	.string "TEAM {EVIL_TEAM} beigetreten bin. Ich bin\l"
-	.string "ganz tatterig.$"
+	.string "This is my first job after joining\n"
+	.string "TEAM {EVIL_TEAM}. I’ve got the shakes!$"
 
 Route110_Text_16E76A:: @ 816E76A
-	.string "TEAM {EVIL_TEAM}S Aktionen zaubern ein\n"
-	.string "Lächeln auf jedes Gesicht!$"
+	.string "TEAM {EVIL_TEAM}’s actions will put a smile\n"
+	.string "on everyone’s face!$"
 
 Route110_Text_16E7A1:: @ 816E7A1
-	.string "MAIKE: Hi, {PLAYER}{KUN}, wir haben uns ja\n"
-	.string "lange nicht gesehen!\p"
-	.string "Während ich auf der Suche nach\n"
-	.string "weiteren POKéMON war, sind meine\l"
-	.string "POKéMON stärker geworden.\p"
-	.string "Daher...\n"
-	.string "Wie wäre es mit einem kleinen Kampf?$"
+	.string "MAY: Hi, {PLAYER}{KUN}, long time no see!\p"
+	.string "While I was searching for other\n"
+	.string "POKéMON, my POKéMON grew stronger.\p"
+	.string "So...\n"
+	.string "How about a little battle?$"
 
 Route110_Text_16E826:: @ 816E826
-	.string "AchDuSchande!\n"
-	.string "Du bist besser als ich gedacht habe.$"
+	.string "Yikes!\n"
+	.string "You’re better than I expected!$"
 
 Route110_Text_16E84C:: @ 816E84C
-	.string "MAIKE: {PLAYER}{KUN}, du hast auch fleißig\n"
-	.string "trainiert, nicht wahr?\p"
-	.string "Ich denke, du verdienst eine Belohnung!\n"
-	.string "Hier, dies ist von mir für dich!$"
+	.string "MAY: {PLAYER}{KUN}, you’ve been busy\n"
+	.string "training, too, haven’t you?\p"
+	.string "I think you deserve a reward!\n"
+	.string "This is from me!$"
 
 Route110_Text_16E8B3:: @ 816E8B3
-	.string "MAIKE: Das ist ein DETEKTOR.\p"
-	.string "Probier ihn mal aus. Wenn irgendwo ein\n"
-	.string "Item versteckt ist, gibt er ein\l"
-	.string "Geräusch von sich.\p"
-	.string "Bis zum nächsten Mal, {PLAYER}{KUN}.\p"
-	.string "Es hört sich aus meinem Munde zwar blöd\n"
-	.string "an, aber bis dahin solltest du viel mehr\l"
-	.string "trainiert haben.$"
+	.string "MAY: That’s an ITEMFINDER.\p"
+	.string "Try it out. If there is an item that’s\n"
+	.string "not visible, it emits a sound.\p"
+	.string "Okay, {PLAYER}{KUN}, let’s meet again!\p"
+	.string "I know it’s a little silly coming from\n"
+	.string "me, but I think you should train a lot\l"
+	.string "harder for the next time.$"
 
 Route110_Text_16E99A:: @ 816E99A
-	.string "BRIX: Hey, {PLAYER}.\n"
-	.string "Hier treibst du dich also herum.\l"
-	.string "Wie geht es?\p"
-	.string "Hast du deine POKéMON gut aufgezogen?\n"
-	.string "Ich werde das für dich überprüfen.$"
+	.string "BRENDAN: Hey, {PLAYER}.\n"
+	.string "So this is where you were.\l"
+	.string "How’s it going?\p"
+	.string "Have you been raising your POKéMON?\n"
+	.string "I’ll check for you.$"
 
 Route110_Text_16EA0F:: @ 816EA0F
 	.string "Hmm...\n"
-	.string "Du bist sehr gut.$"
+	.string "You’re pretty good.$"
 
 Route110_Text_16EA2A:: @ 816EA2A
-	.string "BRIX: {PLAYER}, du hast trainiert,\n"
-	.string "ohne dass ich etwas davon\l"
-	.string "mitbekommen habe...\p"
-	.string "Aber genug!\n"
-	.string "Hier, das ist für dich!$"
+	.string "BRENDAN: {PLAYER}, you’ve trained\n"
+	.string "without me noticing...\p"
+	.string "Good enough!\n"
+	.string "Here, take this.$"
 
 Route110_Text_16EA7B:: @ 816EA7B
-	.string "BRIX: Das ist ein DETEKTOR.\p"
-	.string "Probier ihn mal aus. \p"
-	.string "Ist irgendwo ein Item versteckt, gibt\n"
-	.string "er ein Geräusch von sich.\p"
-	.string "Wie auch immer, ich suche jetzt weiter\n"
-	.string "nach POKéMON.$"
+	.string "BRENDAN: That’s an ITEMFINDER.\p"
+	.string "Use it to root around for items that\n"
+	.string "aren’t visible.\p"
+	.string "If it senses something, it emits a\n"
+	.string "sound.\p"
+	.string "Anyway, I’m off to look for new\n"
+	.string "POKéMON.$"
 
 Route110_Text_16EB22:: @ 816EB22
-	.string "Wäre das nicht ein Spaß, mit einem FAHR-\n"
-	.string "RAD volle Pulle den RADWEG\l"
-	.string "entlangzudüsen?$"
+	.string "Wouldn’t it be great to ride a BIKE\n"
+	.string "at full speed on CYCLING ROAD?$"
 
 Route110_Text_16EB65:: @ 816EB65
-	.string "Gefällt es dir, wie mein raben-\n"
-	.string "schwarzes Haar im Wind weht?\p"
-	.string "Ich habe nur deshalb die Haare wachsen\n"
-	.string "lassen!$"
+	.string "How do you like the way my raven-\n"
+	.string "colored hair streams behind me?\p"
+	.string "I grew my hair out just for that.$"
 
 Route110_Text_16EBC9:: @ 816EBC9
-	.string "Oh, hey, du hast ein RAD von RADLA!\p"
-	.string "Oh, das ist mehr als offensichtlich.\n"
-	.string "Es steht ja dort geschrieben...\p"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\n"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\p"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\n"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\p"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\n"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\p"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\n"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA,\p"
-	.string "RADLA, RADLA, RADLA, RADLA, RADLA...\n"
-	.string "Der Name steht überall.\p"
-	.string "Du solltest damit überall herumfahren,\n"
-	.string "eine bessere Werbung gibt es nicht!$"
+	.string "Oh, hey, you got that BIKE from RYDEL!\p"
+	.string "Oh, it’s glaringly obvious.\n"
+	.string "It says right on your bike...\p"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL...\n"
+	.string "That name’s everywhere.\p"
+	.string "You should ride it around all over\n"
+	.string "the place - it’s good advertising!$"
 
 Route110_Text_16EDC5:: @ 816EDC5
-	.string "Zwei Straßen, eine oben, eine unten...\p"
-	.string "Eine Straße für Menschen und eine für\n"
-	.string "POKéMON. Das ist nur recht und billig.$"
+	.string "The two roads, one above, one below...\p"
+	.string "A road each for people and POKéMON.\n"
+	.string "Perhaps that is right and fair.$"
 
 Route110_Text_16EE30:: @ 816EE30
-	.string "Ich habe kein RAD, ich werde gemüt-\n"
-	.string "lich über die untere Straße schlendern.$"
+	.string "I don’t have a BIKE, so I’ll take a\n"
+	.string "leisurely walk on the low road.$"
 
 Route110_Text_16EE74:: @ 816EE74
-	.string "Neue Techniken zu lernen, geben dem\n"
-	.string "Radfahren erst die richtige Würze.\p"
-	.string "Einige Orte kannst du nur erreichen,\n"
-	.string "wenn du die richtige Technik anwendest.$"
+	.string "Learning techniques will make BIKE\n"
+	.string "riding even more fun.\p"
+	.string "There are some places that you can\n"
+	.string "reach only by using a BIKE technique.$"
 
 Route110_Text_16EEF6:: @ 816EEF6
-	.string "Was soll ich tun?\p"
-	.string "Schnurstracks über den RADWEG nach\n"
-	.string "MALVENFROH CITY fahren oder die untere\p"
-	.string "Straße nehmen und nach POKéMON\n"
-	.string "suchen?$"
+	.string "Which should I choose?\p"
+	.string "Make a beeline for MAUVILLE on\n"
+	.string "CYCLING ROAD, or take the low road\l"
+	.string "and look for POKéMON?$"
 
 Route110_Text_16EF65:: @ 816EF65
-	.string "Anzahl der Zusammenstöße:\n"
+	.string "Number of collisions:\n"
 	.string "... ... {STR_VAR_1}!\p"
-	.string "Zeit:\n"
+	.string "Total time:\n"
 	.string "... ... {STR_VAR_2}!$"
 
 Route110_Text_16EF9F:: @ 816EF9F
-	.string "Bravo! Eine hervorragende Leistung!\p"
-	.string "Ich glaube, dein Talent zum Radfahren\n"
-	.string "kommt tief aus deinem innersten Herzen.\l"
-	.string "Du hast mich bis in die Seele getroffen!$"
+	.string "Bravo! Splendid showing!\p"
+	.string "Your love of cycling comes from deep\n"
+	.string "within your heart.\l"
+	.string "You’ve shaken me to my very soul!$"
 
 Route110_Text_16F012:: @ 816F012
-	.string "Deine Technik ist bemerkenswert.\p"
-	.string "Achte stets darauf, dass du nicht zu\n"
-	.string "schnell fährst und mit niemandem zu-\l"
-	.string "sammenstößt.$"
+	.string "Your technique is remarkable.\p"
+	.string "I suggest you slow down just enough\n"
+	.string "to avoid collisions.$"
 
 Route110_Text_16F069:: @ 816F069
-	.string "Ich rate dir, weiter zu üben.\p"
-	.string "Und ich wünsche dir, dass du das Ver-\n"
-	.string "gnügen des Radfahrens nie vergisst.$"
+	.string "I would consider you a work in\n"
+	.string "progress.\p"
+	.string "Still, I hope you don’t forget the\n"
+	.string "sheer pleasure of cycling.$"
 
 Route110_Text_16F0D0:: @ 816F0D0
-	.string "Ich sage... Dein Talent zum Radfahren\n"
-	.string "ist einfach miserabel.\p"
-	.string "Du brauchst wirklich noch viel mehr\n"
-	.string "Übung im Radfahren.$"
+	.string "My word... Your cycling skills border\n"
+	.string "on terrifying.\p"
+	.string "Most certainly, you need much more\n"
+	.string "practice riding.$"
 
 Route110_Text_16F139:: @ 816F139
-	.string "...Ich bin entgeistert...\p"
-	.string "Du hast wirklich kein Talent zum\n"
-	.string "Radfahren.\p"
-	.string "Du solltest ernsthaft darüber nach-\n"
-	.string "denken, dein RAD bei RADLA\l"
-	.string "zurückzugeben.$"
+	.string "...I am aghast...\p"
+	.string "You’re perhaps not cut out for this\n"
+	.string "unfortunate cycling business.\p"
+	.string "You ought to give serious thought to\n"
+	.string "returning that BIKE to RYDEL.$"
 
 Route110_Text_16F1D0:: @ 816F1D0
-	.string "Dies ist der RADWEG.\p"
-	.string "Wenn du mit einem EILRAD von MALVEN-\n"
-	.string "FROH CITY nach GRAPHITPORT CITY\p"
-	.string "fährst, wirst du nach der Anzahl der\n"
-	.string "Zusammenstöße und deiner Zeit\l"
-	.string "bewertet.$"
+	.string "This is CYCLING ROAD.\p"
+	.string "If you were to ride from MAUVILLE to\n"
+	.string "SLATEPORT on a MACH BIKE, you would\l"
+	.string "be rated for the number of collisions\l"
+	.string "and your total time.$"
 
 Route110_Text_16F26A:: @ 816F26A
-	.string "Unabhängig von den Resultaten möchte\n"
-	.string "ich mehr Herausforderungen von dir\l"
-	.string "sehen. Immer das höchste Ziel im Auge\l"
-	.string "behalten!$"
+	.string "Regardless of the results, I count on\n"
+	.string "seeing more challenges from you.\l"
+	.string "Always aim higher!$"
 
 Route110_Text_16F2C4:: @ 816F2C4
-	.string "Auf diesem RADWEG werden die, die\n"
-	.string "EILRÄDER fahren, nach ihren Zu-\l"
-	.string "sammenstößen und ihrer Zeit bewertet.\p"
-	.string "KUNSTRÄDER nehmen nicht an der\n"
-	.string "Qualifikation teil. Sie sind zu einfach\l"
-	.string "zu lenken.$"
+	.string "On this CYCLING ROAD, those riding\n"
+	.string "MACH BIKES are rated for their number\l"
+	.string "of collisions and their total times.\p"
+	.string "ACRO BIKES do not qualify for rating.\n"
+	.string "They are easy to turn, so it’s not fair.$"
 
 Route110_Text_16F381:: @ 816F381
 	.string "ROUTE 110\n"
-	.string "{DOWN_ARROW} GRAPHITPORT CITY$"
+	.string "{0x7A} SLATEPORT CITY$"
 
 Route110_Text_16F39C:: @ 816F39C
-	.string "KÜSTENRADWEG$"
+	.string "SEASIDE CYCLING ROAD$"
 
 Route110_Text_16F3B1:: @ 816F3B1
-	.string "“TEAM {EVIL_TEAM} HÄRRSCHD!”\p"
-	.string "Das hat jemand auf das Schild\n"
-	.string "gekritzelt...$"
+	.string "“TEAM {EVIL_TEAM} RULEZ!”\p"
+	.string "Somebody scribbled that on the sign...$"
 
 Route110_Text_16F3E9:: @ 816F3E9
 	.string "ROUTE 110\n"
-	.string "{LEFT_ARROW} ROUTE 103$"
+	.string "{0x7B} ROUTE 103$"
 
 Route110_Text_16F3FF:: @ 816F3FF
-	.string "KÜSTENPARKPLATZ$"
+	.string "SEASIDE PARKING$"
 
 Route110_Text_16F40F:: @ 816F40F
 	.string "ROUTE 110\n"
-	.string "{UP_ARROW} MALVENFROH CITY$"
+	.string "{0x79} MAUVILLE CITY$"
 
 Route110_Text_16F429:: @ 816F429
-	.string "TIPPS für TRAINER\p"
-	.string "Der Gegner kann paralysiert oder\n"
-	.string "in Schlaf versetzt werden und ist damit\l"
-	.string "wehrlos.\p"
-	.string "Das sind wichtige Techniken in einem\n"
-	.string "POKéMON-Kampf.$"
+	.string "TRAINER TIPS\p"
+	.string "The foe can be made helpless by\n"
+	.string "paralyzing it or causing it to sleep.\p"
+	.string "It is an important technique for\n"
+	.string "POKéMON battles.$"
 
 Route110_Text_16F4AE:: @ 816F4AE
-	.string "TIPPS für TRAINER\p"
-	.string "Die Items in dem BEUTEL können mit\n"
-	.string "SELECT neu geordnet werden.$"
+	.string "TRAINER TIPS\p"
+	.string "The items in the BAG can be reorganized\n"
+	.string "by pressing SELECT.$"
 
 Route110_Text_16F4F7:: @ 816F4F7
-	.string "“Drei Schritte {RIGHT_ARROW} und zwei Schritte {UP_ARROW}\n"
-	.string "und du erreichst das wundersame\l"
-	.string "RÄTSELHAUS.”$"
+	.string "“Three steps {0x7C} and two steps {0x79}\n"
+	.string "to reach the wondrous TRICK HOUSE.”$"
 
 Route110_Text_16F53A:: @ 816F53A
-	.string "DAS BESTE ERGEBNIS...\p"
-	.string "Anzahl der Zusammenstöße: {STR_VAR_1}\p"
-	.string "Zeit: {STR_VAR_2}$"
+	.string "THE BEST RECORD TO DATE...\p"
+	.string "No. of collisions: {STR_VAR_1}\p"
+	.string "Elapsed time: {STR_VAR_2}$"
 
 Route110_Text_16F57C:: @ 816F57C
-	.string "DAS BESTE ERGEBNIS...\p"
-	.string "Niemand scheint sich bis jetzt der He-\n"
-	.string "rausforderung gestellt zu haben...$"
+	.string "THE BEST RECORD TO DATE...\p"
+	.string "No one seems to have taken the\n"
+	.string "challenge. There is no record...$"
 
 UnknownString_816F5D7: @ 816F5D7
-	.string "Ich gieße die Pflanzen jeden Tag.\n"
-	.string "Dann bekommen sie viele Blüten.\p"
-	.string "Und daraus werden dann viele BEEREN.\p"
-	.string "Hier, die ist für dich.\n"
-	.string "Du kannst sie haben.$"
+	.string "I watered the plants every day.\n"
+	.string "They grew lots of flowers.\p"
+	.string "And they gave me lots of BERRIES, too.\p"
+	.string "Here you go!\n"
+	.string "You can have it!$"
 
 UnknownString_816F657: @ 816F657
-	.string "Ich versuche {POKEBLOCK} ROT zu machen!\n"
-	.string "Ich hoffe, das versuchst du auch!$"
+	.string "I’m trying to make RED {POKEBLOCK}S!\n"
+	.string "I hope you do, too!$"
 
 UnknownString_816F68A: @ 816F68A
-	.string "Deine BEEREN-TASCHE ist voll.\p"
-	.string "Ich gebe sie dir ein anderes Mal.$"
+	.string "Your BAG’s BERRIES POCKET is full.\p"
+	.string "I’ll give it to you another time.$"
 
 UnknownString_816F6CF: @ 816F6CF
-	.string "Ich suche nach roten BEEREN, um\n"
-	.string "{POKEBLOCK} ROT herzustellen.$"
+	.string "I’m going to look for red BERRIES to\n"
+	.string "make RED {POKEBLOCK}S.$"

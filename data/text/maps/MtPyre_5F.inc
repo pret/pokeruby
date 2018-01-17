@@ -1,14 +1,14 @@
 MtPyre_5F_Text_196939:: @ 8196939
-	.string "Ich mag gruselige Horrordinge...\n"
-	.string "Es ist wie eine Sucht...\p"
-	.string "Sobald ich hier bin...\n"
-	.string "Stehen mir die Haare zu Berge.$"
+	.string "I love all things horrifying...\n"
+	.string "It’s like a disease...\p"
+	.string "When I’m here...\n"
+	.string "I shiver with fear...$"
 
 MtPyre_5F_Text_196997:: @ 8196997
-	.string "Ich hasse Niederlagen...$"
+	.string "Losing, I dislike...$"
 
 MtPyre_5F_Text_1969AC:: @ 81969AC
-	.string "Ich will unheimliche Dinge sehen...\n"
-	.string "Ich kann nicht weggehen...\p"
-	.string "Muss bleiben...\n"
-	.string "Willst du nicht bei mir bleiben?$"
+	.string "I want to see dreadful things...\n"
+	.string "I can’t leave...\p"
+	.string "Stay...\n"
+	.string "Won’t you stay with me?$"

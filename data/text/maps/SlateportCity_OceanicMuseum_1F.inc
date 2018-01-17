@@ -1,164 +1,157 @@
 SlateportCity_OceanicMuseum_1F_Text_17E18D:: @ 817E18D
-	.string "Willkommen im OZEANMUSEUM.\p"
-	.string "Der Eintritt kostet ¥50.\n"
-	.string "Hast du Interesse?$"
+	.string "Welcome to the OCEANIC MUSEUM.\p"
+	.string "The entrance fee is ¥50.\n"
+	.string "Would you like to enter?$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E1DE:: @ 817E1DE
-	.string "Viel Vergnügen!$"
+	.string "Please enjoy yourself.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E1F5:: @ 817E1F5
-	.string "Oh. Tut mir Leid, aber du hast\n"
-	.string "anscheinend nicht genug Geld bei dir.$"
+	.string "Oh? I’m sorry, but you don’t seem to\n"
+	.string "have enough money.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E22D:: @ 817E22D
-	.string "Oh. Du gehörst zu der Gruppe, die gerade\n"
-	.string "hineingegangen ist?\p"
-	.string "Sie sind alle schon drin. Beeil dich,\n"
-	.string "sonst verlierst du die Gruppe.$"
+	.string "Oh? You’re with that group that\n"
+	.string "went in earlier?\p"
+	.string "You’re the only one who’s late.\n"
+	.string "You’d better go catch up to them!$"
 
 UnknownString_817E2A0: @ 817E2A0
-	.string "Bitte komm ein anderes Mal wieder!$"
+	.string "Please visit another time!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E2BB:: @ 817E2BB
-	.string "Wir, TEAM {EVIL_TEAM}, bestehen zum Besten\n"
-	.string "für alle!$"
+	.string "We, TEAM {EVIL_TEAM}, exist for the good\n"
+	.string "of all!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E2E3:: @ 817E2E3
-	.string "Uns wurde befohlen, uns hier zu\n"
-	.string "versammeln. Das taten wir, aber...\p"
-	.string "Unser BOSS, der Galgenvogel, ist nicht\n"
-	.string "hier.$"
+	.string "We were told to assemble here, so\n"
+	.string "we did, but...\p"
+	.string "Our BOSS, the lynchpin, isn’t here.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E338:: @ 817E338
-	.string "Wenn ich diese ganzen Sachen an mich\n"
-	.string "reißen würde, wäre ich dann reich?$"
+	.string "If I ripped off the stuff here,\n"
+	.string "would it make me rich?$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E36F:: @ 817E36F
-	.string "Was ich hier lerne, kann ich für meine\n"
-	.string "ruchlosen Taten gut gebrauchen...$"
+	.string "What I learn here, I can put to use on\n"
+	.string "nefarious deeds...$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E3A9:: @ 817E3A9
-	.string "Wenn dieser Idiot die Sache in\n"
-	.string "METAROST CITY nicht vermasselt hätte,\l"
-	.string "wären wir jetzt nicht hier.$"
+	.string "If our goons didn’t bungle things\n"
+	.string "in RUSTBORO, we wouldn’t be here!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E3ED:: @ 817E3ED
-	.string "Ich hatte keine ¥50, daher habe ich\n"
-	.string "Ewigkeiten gebraucht, an der Rezeption\l"
-	.string "vorbeizukommen.$"
+	.string "I didn’t have ¥50, so it took a long\n"
+	.string "time getting by the receptionist.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E434:: @ 817E434
-	.string "Ich möchte etwas über das Meer lernen\n"
-	.string "und dieses Wissen in Kämpfen einsetzen.$"
+	.string "I want to learn about the sea and\n"
+	.string "use that knowledge for battling.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E477:: @ 817E477
-	.string "Mir wird ganz schwindelig und rühr-\n"
-	.string "selig, wenn ich das Meer erblicke!\p"
-	.string "Für mich ist KAPT. BRIGG das absolute\n"
-	.string "Vorbild!$"
+	.string "I get all giddy and gooey when I\n"
+	.string "see the sea!\p"
+	.string "For me, CAPT. STERN is the number\n"
+	.string "one role model!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E4D7:: @ 817E4D7
-	.string "Das Meer ist erbarmungslos rau und\n"
-	.string "unendlich tief...\p"
-	.string "In ihm müssen viele POKéMON leben, die\n"
-	.string "wir bisher noch nicht kennen.$"
+	.string "The sea is vast without end, and\n"
+	.string "infinitely deep...\p"
+	.string "There must be many POKéMON that we\n"
+	.string "don’t know about.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E540:: @ 817E540
-	.string "Ich möchte ein POKéMON aus dem Meer\n"
-	.string "haben.\p"
-	.string "Wenn man das umarmt, ist es bestimmt\n"
-	.string "schön kalt und wunderbar glitschig.$"
+	.string "I want a sea POKéMON.\p"
+	.string "I think it would feel cool and nice\n"
+	.string "to hug.$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E582:: @ 817E582
-	.string "Aiyeeh!\n"
-	.string "Was machst du hier?\p"
-	.string "Ich? Ich bin vom TEAM {EVIL_TEAM}. Du hast\n"
-	.string "mich in den Boden gestampft. Erinnerst\l"
-	.string "du dich?\p"
-	.string "Hier, das ist für dich!\n"
-	.string "Vergeben und vergessen!$"
+	.string "Aiyeeeh!\n"
+	.string "What are you doing here?\p"
+	.string "Me? I’m the TEAM {EVIL_TEAM} member you\n"
+	.string "thumped before, remember?\p"
+	.string "Here, take this!\n"
+	.string "You have to forgive me!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E606:: @ 817E606
-	.string "Au, verdammt!\n"
-	.string "Du hast unsere Pläne zunichte gemacht!\p"
-	.string "Ich wollte als Ausgleich etwas mitgehen\n"
-	.string "lassen, aber...\p"
-	.string "Warte!\n"
-	.string "Du bekommst deine Belohnung auch noch!$"
+	.string "Aww, darn it!\n"
+	.string "You so screwed up our plans!\p"
+	.string "I was going to rip off something\n"
+	.string "to make up for it, but...\p"
+	.string "Just you wait!\n"
+	.string "You’ll get yours one day!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E695:: @ 817E695
-	.string "Oooch, komm schon!\n"
-	.string "Nimm es und lass mich gehen!$"
+	.string "Awww, come on!\n"
+	.string "You have to take this and let me go!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E6C9:: @ 817E6C9
-	.string "Eine blaue Flüssigkeit bewegt sich\n"
-	.string "spiralförmig in einem Glasgefäß.\p"
-	.string "“Dies ist ein Experiment, das einen\n"
-	.string "künstlichen WHIRLPOOL mit Hilfe von\l"
-	.string "Wind erzeugt.”$"
+	.string "A blue fluid is spiraling inside a\n"
+	.string "glass vessel.\p"
+	.string "“This is an experiment to create a\n"
+	.string "WHIRLPOOL artificially using wind.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E741:: @ 817E741
-	.string "Ein roter Ball hüpft in dem Glasgefäß\n"
-	.string "auf und ab.\p"
-	.string "“Dies ist ein Experiment, das eine\n"
-	.string "künstliche KASKADE mit Hilfe des\l"
-	.string "Ballauftriebs erzeugt.”$"
+	.string "A red ball is bobbing up and down\n"
+	.string "inside a glass vessel.\p"
+	.string "“This is an experiment simulating a\n"
+	.string "WATERFALL using the ball’s buoyancy.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E7C4:: @ 817E7C4
-	.string "Dies ist eine Probe vom Meeresboden.\p"
-	.string "“Über viele Jahre haben sich die Spuren\n"
-	.string "allen Lebens als Sedimente auf dem\l"
-	.string "Grund des Meeres abgelagert.\p"
-	.string "Analysen dieser Proben geben einen\n"
-	.string "Einblick in längst vergangenes Leben.”$"
+	.string "It’s a sample of soil from the ocean\n"
+	.string "floor.\p"
+	.string "“Over many years, the remains of\n"
+	.string "life-forms settle at the bottom of\l"
+	.string "the sea making sedimentary layers.\p"
+	.string "“By analyzing these layers, the\n"
+	.string "ancient past is revealed.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E892:: @ 817E892
-	.string "Dies ist eine Probe vom Sand der Küste.\p"
-	.string "“Die Gesteinsschichten der Berge\n"
-	.string "wurden im Laufe der Jahre durch Wasser\l"
-	.string "abgetragen und am Boden abgelagert.\p"
-	.string "Nun sind sie nur noch kleine Körnchen,\n"
-	.string "die den Sand an der Küste bilden.”$"
+	.string "It’s a sample of beach sand.\p"
+	.string "“Stones from mountains are washed\n"
+	.string "down by rivers where they are\l"
+	.string "chipped and ground down.\p"
+	.string "“They are reduced to grains and end\n"
+	.string "up as sand on beaches.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E944:: @ 817E944
-	.string "“MEERESKUNDE FAKT 1”\n"
-	.string "Warum ist das Wasser im Meer blau?\p"
-	.string "“Licht setzt sich aus vielen\n"
-	.string "Farben zusammen.\p"
-	.string "Scheint das Licht durch Wasser, so\n"
-	.string "gehen einige Farben verloren.\p"
-	.string "Der Blauanteil des Lichts bleibt aber\n"
-	.string "erhalten, das Wasser erscheint blau.”$"
+	.string "“OCEANIC MINI FACT 1\n"
+	.string "Why is seawater blue?\p"
+	.string "“Light is composed of many colors.\p"
+	.string "“When light passes through water,\n"
+	.string "most kinds of light lose color.\p"
+	.string "“However, blue light retains its\n"
+	.string "color, making the sea appear blue.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17EA19:: @ 817EA19
-	.string "“MEERESKUNDE FAKT 2”\n"
-	.string "Warum ist das Meer salzig?\p"
-	.string "“Meerwasser enthält gelöste Salzionen\n"
-	.string "in Form von Natrium und Chlorid.\p"
-	.string "Diese Ionen wurden durch den Regen\n"
-	.string "aus Gesteinsschichten herausgespült.\p"
-	.string "Die Konzentration des aufgelösten\n"
-	.string "Salzes macht das Meer salzig.”$"
+	.string "“OCEANIC MINI FACT 2\n"
+	.string "Why is the sea salty?\p"
+	.string "“Seawater contains dissolved salt in\n"
+	.string "the form of sodium and chlorine ions.\p"
+	.string "“These ions leach out of rocks and are\n"
+	.string "carried out to sea by rain.\p"
+	.string "“The concentration of dissolved salt\n"
+	.string "makes the sea salty.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17EB0D:: @ 817EB0D
-	.string "“MEERESKUNDE FAKT 3”\n"
-	.string "Was ist größer? Das Meer oder das Land?\p"
-	.string "“Die Erde ist zu 70% von Wasser\n"
-	.string "bedeckt, der Rest ist Land.\p"
-	.string "Das Meer ist also mehr als doppelt\n"
-	.string "so groß wie das Land.”$"
+	.string "“OCEANIC MINI FACT 3\n"
+	.string "Which is bigger? The sea or land?\p"
+	.string "“The sea covers about 70% of the\n"
+	.string "planet, and the rest is land.\p"
+	.string "“The sea is therefore more than twice\n"
+	.string "the size of land.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17EBBC:: @ 817EBBC
-	.string "Das ist ein Fossil mit vielen Furchen.\p"
-	.string "“Das Erdreich des Meeresbodens wird\n"
-	.string "durch die Gezeiten abgetragen.\p"
-	.string "Die Bewegungen des Wassers zeichnen\n"
-	.string "Rillen und Wellen in den Meeresboden.\p"
-	.string "Wenn der Meeresboden versteinert, wird\n"
-	.string "ein Bodenrelief sichtbar.”$"
+	.string "It’s a fossil with wavy ridges on it.\p"
+	.string "“Soil on the ocean floor gets scoured\n"
+	.string "by the tide.\p"
+	.string "“The flowing seawater marks the soil\n"
+	.string "with small ridges and valleys.\p"
+	.string "“If this soil becomes fossilized, it is\n"
+	.string "called a ripple mark.”$"
 
 SlateportCity_OceanicMuseum_1F_Text_17EC98:: @ 817EC98
-	.string "Eine seltsame Vorrichtung rotiert unter\n"
-	.string "einer Glaskuppel.\p"
-	.string "Vielleicht misst sie die Tiefe von\n"
-	.string "irgendetwas...$"
+	.string "A strange machine is rotating under\n"
+	.string "a glass dome.\p"
+	.string "Maybe it’s for measuring the depth\n"
+	.string "of something...$"

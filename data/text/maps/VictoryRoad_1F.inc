@@ -1,75 +1,72 @@
 VictoryRoad_1F_Text_19782B:: @ 819782B
-	.string "HEIKO: Hallo, {PLAYER}!\p"
-	.string "Du bist bestimmt überrascht, mich hier\n"
-	.string "zu treffen!\p"
-	.string "Ich habe es bis hierher geschafft und\n"
-	.string "das verdanke ich dir!\p"
-	.string "{PLAYER}, meine Niederlage gegen dich\n"
-	.string "hat mich viel stärker gemacht!\p"
-	.string "Ich werde nie wieder verlieren!\p"
-	.string "Ich werde gewinnen! Für die POKéMON,\n"
-	.string "die mir Mut und Kraft gegeben haben!\p"
-	.string "Okay... Jetzt komme ich!$"
+	.string "WALLY: Hi! {PLAYER}!\p"
+	.string "I bet you’re surprised to see me here!\p"
+	.string "I made it all the way here, and it’s\n"
+	.string "all thanks to you!\p"
+	.string "{PLAYER}, losing to you that time\n"
+	.string "made me stronger!\p"
+	.string "But I’m not going to lose anymore!\p"
+	.string "I’m going to win! For the POKéMON who\n"
+	.string "gave me courage and strength!\p"
+	.string "Okay... Here I come!$"
 
 VictoryRoad_1F_Text_197943:: @ 8197943
 	.string "Wow!\n"
-	.string "{PLAYER}, du wirst immer stärker!$"
+	.string "{PLAYER}, you are strong, after all!$"
 
 VictoryRoad_1F_Text_197967:: @ 8197967
-	.string "HEIKO: Ich konnte dich heute nicht be-\n"
-	.string "siegen, aber eines Tages werde ich es\l"
-	.string "mit dir aufnehmen!$"
+	.string "WALLY: I couldn’t beat you today,\n"
+	.string "{PLAYER}, but one of these days, I’ll\l"
+	.string "catch up to you!$"
 
 VictoryRoad_1F_Text_1979BA:: @ 81979BA
-	.string "HEIKO: Hallo, {PLAYER}!\p"
-	.string "Ich bin viel stärker geworden! Das\n"
-	.string "möchte ich dir zeigen, {PLAYER}!\p"
-	.string "Okay... Jetzt komme ich!$"
+	.string "WALLY: Hi! {PLAYER}!\p"
+	.string "I’ve gotten stronger since that last\n"
+	.string "time! I wanted to show you, {PLAYER}!\p"
+	.string "Okay... Here I come!$"
 
 VictoryRoad_1F_Text_197A23:: @ 8197A23
 	.string "Wow!\n"
-	.string "{PLAYER}, du bist immer noch zu stark!$"
+	.string "{PLAYER}, you are strong, after all!$"
 
 VictoryRoad_1F_Text_197A47:: @ 8197A47
-	.string "HEIKO: Ich konnte dich wieder nicht\n"
-	.string "besiegen... Aber eines Tages, {PLAYER},\l"
-	.string "eines Tages...\p"
-	.string "Da werde ich sogar die POKéMON LIGA\n"
-	.string "herausfordern!$"
+	.string "WALLY: I couldn’t beat you this time,\n"
+	.string "too... But one of these days, {PLAYER},\l"
+	.string "I’m going to catch up to you...\p"
+	.string "And challenge the POKéMON LEAGUE!$"
 
 VictoryRoad_1F_Text_197AD1:: @ 8197AD1
-	.string "Ich habe es innerhalb kürzester Zeit\n"
-	.string "bis hierher geschafft, aber das letzte\l"
-	.string "Stück zieht sich wie Kaugummi...$"
+	.string "I’ve made it this far a couple times,\n"
+	.string "but the last stretch is so long...$"
 
 VictoryRoad_1F_Text_197B1A:: @ 8197B1A
-	.string "Hier enden meine Träume...$"
+	.string "My dream ends here again...$"
 
 VictoryRoad_1F_Text_197B36:: @ 8197B36
-	.string "Du bist weit gekommen. Lasse nicht nach\n"
-	.string "und versuche, der CHAMP zu werden!\l"
-	.string "Wenn einer das kann, dann du!$"
+	.string "You’ve made it this far. Keep the\n"
+	.string "momentum going and become the\l"
+	.string "CHAMPION! If anyone can, it’s you!$"
 
 VictoryRoad_1F_Text_197B99:: @ 8197B99
-	.string "Ich bin nicht hierher gekommen, um zu\n"
-	.string "verlieren. Diese Option existiert nicht!$"
+	.string "I didn’t come all this way to lose now.\n"
+	.string "That possibility doesn’t exist!$"
 
 VictoryRoad_1F_Text_197BE1:: @ 8197BE1
-	.string "Unmöglich...\n"
-	.string "Ich habe verloren???$"
+	.string "Impossible...\n"
+	.string "I lost?$"
 
 VictoryRoad_1F_Text_197BF7:: @ 8197BF7
-	.string "Ich habe hier verloren...\p"
-	.string "Das heißt, mir fehlt noch eine Menge,\n"
-	.string "um CHAMP werden zu können.$"
+	.string "I lost here...\p"
+	.string "That means I lack the qualifications\n"
+	.string "to become the CHAMPION...$"
 
 VictoryRoad_1F_Text_197C45:: @ 8197C45
-	.string "Diese unendliche, raue Straße wird\n"
-	.string "ihrem Namen - SIEG - gerecht.$"
+	.string "This seemingly infinite and harsh road\n"
+	.string "lives up to its name of VICTORY.$"
 
 VictoryRoad_1F_Text_197C8D:: @ 8197C8D
-	.string "Dein Kampfstil ist fantastisch...$"
+	.string "Your battle style is fantastic...$"
 
 VictoryRoad_1F_Text_197CAF:: @ 8197CAF
-	.string "Du hast wirklich das Potential, der\n"
-	.string "CHAMP zu werden.$"
+	.string "You seem to have the potential for\n"
+	.string "becoming the CHAMPION.$"

@@ -1,10 +1,10 @@
 MtChimney_CableCarStation_Text_19256A:: @ 819256A
-	.string "Die SEILBAHN fährt gleich hinab.\n"
-	.string "Möchtest du mit?$"
+	.string "The CABLE CAR is ready to go down.\n"
+	.string "Would you like to be on it?$"
 
 MtChimney_CableCarStation_Text_1925A9:: @ 81925A9
 Route112_CableCarStation_Text_1925A9:: @ 81925A9
-	.string "Bitte hier entlang.$"
+	.string "Please step this way.$"
 
 MtChimney_CableCarStation_Text_1925BF:: @ 81925BF
-	.string "Dann fahre bitte später mit uns.$"
+	.string "Please ride with us another time.$"

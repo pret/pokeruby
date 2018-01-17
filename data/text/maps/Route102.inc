@@ -1,43 +1,43 @@
 PetalburgCity_Text_16D361:: @ 816D361
-	.string "HEIKO: {PLAYER}...\n"
-	.string "POKéMON verstecken sich in hohem Gras\l"
-	.string "wie diesem hier, oder?\p"
-	.string "Bitte bleib hier und schau, ob ich sie\n"
-	.string "auch richtig fange.\p"
+	.string "WALLY: {PLAYER}...\n"
+	.string "POKéMON hide in tall grass like this,\l"
+	.string "don’t they?\p"
+	.string "Please watch me and see if I can\n"
+	.string "catch one properly.\p"
 	.string "...Whoa!$"
 
 PetalburgCity_Text_16D3DE:: @ 816D3DE
-	.string "HEIKO: Ich habe es geschafft... Es\n"
-	.string "gehört mir... Mein POKéMON!!!$"
+	.string "WALLY: I did it... It’s my...\n"
+	.string "My POKéMON!$"
 
 PetalburgCity_Text_16D408:: @ 816D408
-	.string "{PLAYER}, danke schön!\n"
-	.string "Lass uns zurück zur ARENA gehen!$"
+	.string "{PLAYER}, thank you!\n"
+	.string "Let’s go back to the GYM!$"
 
 Route102_Text_16D431:: @ 816D431
-	.string "Ich... bin nicht groß, ich versinke im\n"
-	.string "hohen Gras.\p"
-	.string "Das Gras erreicht meine Nase und...\n"
-	.string "Hahahaha...\p"
-	.string "Haaatschiiii!$"
+	.string "I’m...not very tall, so I sink right\n"
+	.string "into tall grass.\p"
+	.string "The grass goes up my nose and...\n"
+	.string "Fwafwafwafwafwa...\p"
+	.string "Fwatchoo!$"
 
 UnknownString_816D4A5: @ 816D4A5
-	.string "Hähähä...\n"
-	.string "Beobachte mich gut.$"
+	.string "Fufufufu...\n"
+	.string "Watch me.$"
 
 UnknownString_816D4BB: @ 816D4BB
-	.string "Ta-daaaaah! Unglaublich, oder?\p"
-	.string "Es gibt einige Absätze, die man nicht\n"
-	.string "hochklettern, aber von denen man\l"
-	.string "herunterspringen kann.$"
+	.string "Ta-daaaah! Awesome, huh?\p"
+	.string "There are some ledges that you can’t\n"
+	.string "climb up, but you can jump down.$"
 
 Route102_Text_16D51A:: @ 816D51A
-	.string "Ich werde jede Menge POKéMON fangen!$"
+	.string "I’m going to catch a whole bunch of\n"
+	.string "POKéMON!$"
 
 Route102_Text_16D547:: @ 816D547
 	.string "ROUTE 102\n"
-	.string "{RIGHT_ARROW} ROSALTSTADT$"
+	.string "{0x7C} OLDALE TOWN$"
 
 Route102_Text_16D55F:: @ 816D55F
 	.string "ROUTE 102\n"
-	.string "{LEFT_ARROW} BLÜTENBURG CITY$"
+	.string "{0x7B} PETALBURG CITY$"

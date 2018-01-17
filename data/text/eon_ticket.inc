@@ -1,45 +1,44 @@
 UnknownString_81C5033: @ 81C5033
-	.string "VATER: {PLAYER}! Schön, dich zu sehen!\n"
-	.string "Hier habe ich einen Brief für dich.$"
+	.string "DAD: {PLAYER}! Good to see you!\n"
+	.string "There’s a letter here for you, {PLAYER}.$"
 
 UnknownString_81C5070: @ 81C5070
-	.string "VATER: Das muss ein FAHRSCHEIN\n"
-	.string "für ein Schiff sein. Aber für welches?\p"
-	.string "In SEEGRASULB CITY kann dir bestimmt\n"
-	.string "jemand mehr dazu sagen.$"
+	.string "DAD: I guess this is a PASS for a ship.\n"
+	.string "But I’ve never seen this ship before.\p"
+	.string "You should find out what this is about\n"
+	.string "in LILYCOVE.$"
 
 LilycoveCity_Harbor_Text_1C50F2:: @ 81C50F2
-	.string "Die Fähre nach GRAPHITPORT CITY ist...\p"
-	.string "Oh!\n"
-	.string "Der FAHRSCHEIN...$"
+	.string "The ferry to SLATEPORT is...\p"
+	.string "Oh?\n"
+	.string "That PASS...$"
 
 LilycoveCity_Harbor_Text_1C5120:: @ 81C5120
-	.string "Aye, Maat, hast du den alten FAHRSCHEIN\n"
-	.string "mitgebracht?\p"
-	.string "Ich sage dir, du bist auf dem Weg zu\n"
-	.string "einer briefmarkengroßen Insel im Süden.\p"
-	.string "Niemand kann sagen, was uns dort er-\n"
-	.string "warten wird, aye. Und das erschüttert\l"
-	.string "meine alten Knochen!\p"
-	.string "Alle Mann an Bord!$"
+	.string "Aye, mate, are you the one who brought\n"
+	.string "that mighty odd PASS?\p"
+	.string "I’ll tell you, you’re trying to reach a\n"
+	.string "tiny spit of an island far in the south.\p"
+	.string "There’s no telling what we’ll encounter\n"
+	.string "once we reach there, aye.\l"
+	.string "That shivers my timbers!\p"
+	.string "All aboard!$"
 
 SouthernIsland_Exterior_Text_1C5215:: @ 81C5215
-	.string "Aye, Maat, auf dieser gottverlassenen\n"
-	.string "Insel gibt’s nichts zu sehen und zu tun.\p"
-	.string "Sollen wir nicht nach SEEGRASULB CITY\n"
-	.string "zurücksegeln?$"
+	.string "Aye, mate, there’s nothing here to\n"
+	.string "see or do on this forgettable island.\p"
+	.string "What say we sail back to LILYCOVE?$"
 
 SouthernIsland_Exterior_Text_1C5281:: @ 81C5281
-	.string "Aye, alles klar!\n"
-	.string "Segeln wir nach Hause!$"
+	.string "Aye, right, then!\n"
+	.string "Sail home we will!$"
 
 SouthernIsland_Exterior_Text_1C52A6:: @ 81C52A6
-	.string "Aye, ganz wie du willst.$"
+	.string "Aye, right, as you like, then.$"
 
 SouthernIsland_Interior_Text_1C52C5:: @ 81C52C5
-	.string "“Alle Träume sind nur eine andere\n"
-	.string "Realität. Vergiss das nicht...”$"
+	.string "“All dreams are but another reality.\n"
+	.string "Never forget...”$"
 
 SouthernIsland_Exterior_Text_1C52FB:: @ 81C52FB
-	.string "“Die, denen die Erinnerung verblasst,\n"
-	.string "versuchen sie im Herzen zu halten.”$"
+	.string "“Those whose memories fade seek to\n"
+	.string "carve them in their hearts...”$"

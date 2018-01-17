@@ -1,26 +1,27 @@
 MtPyre_3F_Text_19672B:: @ 819672B
-	.string "Die unglaubliche Atmosphäre der Berge\n"
-	.string "hat meine psychischen Kräfte gestärkt!\p"
-	.string "Ein kleines Kind wie du...\n"
-	.string "Du willst gewinnen? Träum weiter!$"
+	.string "The rich atmosphere of the mountain\n"
+	.string "has elevated my psychic power!\p"
+	.string "A mere child like you...\n"
+	.string "You dream of winning?$"
 
 MtPyre_3F_Text_19679D:: @ 819679D
-	.string "Ich vertiefe mich in Selbstmitleid.$"
+	.string "I drown in self-pity...$"
 
 MtPyre_3F_Text_1967B5:: @ 81967B5
-	.string "Meine psychischen Kräfte sind mit\n"
-	.string "Sicherheit stärker geworden, aber...$"
+	.string "My psychic powers have surely\n"
+	.string "grown several times, but...$"
 
 MtPyre_3F_Text_1967EF:: @ 81967EF
-	.string "Ahahahahaha!!!!!\p"
-	.string "Dies ist kein Platz für einen kleinen\n"
-	.string "Hosenscheißer wie dich!$"
+	.string "Ahahahaha!\p"
+	.string "This is no place for children, least\n"
+	.string "of all you!$"
 
 MtPyre_3F_Text_19682B:: @ 819682B
-	.string "Oh, ich habe mir in die Hose gemacht.$"
+	.string "I lost that cleanly...$"
 
 MtPyre_3F_Text_196842:: @ 8196842
-	.string "Mein Training reicht also nicht aus...\p"
-	.string "Ich muss mein Training auf die Spitze\n"
-	.string "treiben...\p"
-	.string "Ich darf keine Zeit verlieren!$"
+	.string "This means my training is still not\n"
+	.string "enough...\p"
+	.string "I’ve got to keep working toward the\n"
+	.string "summit...\p"
+	.string "Go, me!$"

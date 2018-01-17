@@ -1,19 +1,19 @@
 gTypeNames:: @ 81F9870
 	.string "NORMAL$", 7
-	.string "KAMPF$", 7
-	.string "FLUG$", 7
-	.string "GIFT$", 7
-	.string "BODEN$", 7
-	.string "GEST.$", 7
-	.string "KÄFER$", 7
-	.string "GEIST$", 7
-	.string "STAHL$", 7
+	.string "FIGHT$", 7
+	.string "FLYING$", 7
+	.string "POISON$", 7
+	.string "GROUND$", 7
+	.string "ROCK$", 7
+	.string "BUG$", 7
+	.string "GHOST$", 7
+	.string "STEEL$", 7
 	.string "???$", 7
-	.string "FEUER$", 7
-	.string "WASSER$", 7
-	.string "PFLAN.$", 7
-	.string "ELEK.$", 7
-	.string "PSYCHO$", 7
-	.string "EIS$", 7
-	.string "DRA.$", 7
-	.string "UNL.$", 7
+	.string "FIRE$", 7
+	.string "WATER$", 7
+	.string "GRASS$", 7
+	.string "ELECTR$", 7
+	.string "PSYCHC$", 7
+	.string "ICE$", 7
+	.string "DRAGON$", 7
+	.string "DARK$", 7

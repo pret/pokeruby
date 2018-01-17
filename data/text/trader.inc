@@ -1,60 +1,58 @@
 gTextTrader_Introduction:: @ 81AE88F
-	.string "Hallo! Ich bin der HÄNDLER. Möchtest\n"
-	.string "du Dekorationen mit mir tauschen?$"
+	.string "Hi, I’m the TRADER.\n"
+	.string "Want to trade decorations with me?$"
 
 gTextTrader_FeelUnwanted1:: @ 81AE8C6
 	.string "Oh...\n"
-	.string "Ich fühle mich überflüssig...$"
+	.string "I feel unwanted...$"
 
 gTextTrader_TradedAlready:: @ 81AE8DF
-	.string "Aber wir beide haben doch bereits\n"
-	.string "Dekorationen ausgetauscht.$"
+	.string "But we’ve traded decorations already,\n"
+	.string "you and I.$"
 
 gTextTrader_MenuPrompt:: @ 81AE910
-	.string "Wenn du etwas Dekoratives siehst, das\n"
-	.string "du haben möchtest, lass es mich wissen.$"
+	.string "If you see any decorative item that\n"
+	.string "you want of mine, speak up.$"
 
 gTextTrader_DontWantAnything:: @ 81AE950
-	.string "Du möchtest nichts haben?\n"
-	.string "Ich fühle mich so überflüssig...$"
+	.string "You don’t want anything?\n"
+	.string "I feel unwanted...$"
 
 gTextTrader_ItemOnceBelongedTo:: @ 81AE97C
-	.string "Das dekorative Item gehörte einst\n"
-	.string "{STR_VAR_1}.\p"
-	.string "Möchtest du es haben?$"
+	.string "That decorative item once belonged\n"
+	.string "to {STR_VAR_1}.\p"
+	.string "Do you want it?$"
 
 gTextTrader_YouDontHaveDecorations:: @ 81AE9B6
-	.string "Äh... Warte eine Sekunde. Du hast über-\n"
-	.string "haupt kein dekoratives Item!$"
+	.string "Uh... Wait a second. You don’t have a\n"
+	.string "single piece of decoration!$"
 
 gTextTrader_PickDecorationYoullTrade:: @ 81AE9F8
-	.string "Okay, wähle die Dekoration aus, die du\n"
-	.string "mit mir tauschen willst.$"
+	.string "Okay, pick the decoration that you’ll\n"
+	.string "trade to me.$"
 
 gTextTrader_FeelUnwanted2:: @ 81AEA2B
-	.string "Du willst nicht mit mir tauschen?\n"
-	.string "Ich fühle mich überflüssig...$"
+	.string "You won’t trade with me?\n"
+	.string "I feel unwanted...$"
 
 gTextTrader_NoRoomForThis:: @ 81AEA57
-	.string "Du hast keinen Platz mehr für eine/n\n"
-	.string "{STR_VAR_2}.$"
+	.string "You’ve got all the {STR_VAR_2}S that can\n"
+	.string "be stored. You’ve no room for this.$"
 
 gTextTrader_SoWellTrade:: @ 81AEA9B
-	.string "Okay, dann lass uns tauschen:\n"
-	.string "{STR_VAR_3} gegen\l"
-	.string "{STR_VAR_2}!$"
+	.string "Okay, so we’ll trade my {STR_VAR_3}\n"
+	.string "for your {STR_VAR_2}?$"
 
 gTextTrader_InUseYouCantTradeIt:: @ 81AEAC3
-	.string "Dieses Dekorationsstück ist im Ge-\n"
-	.string "brauch. Das kannst du nicht tauschen.$"
+	.string "That piece of decoration is in use.\n"
+	.string "You can’t trade it.$"
 
 gTextTrader_ThenWellTrade:: @ 81AEAFB
-	.string "Dann lass uns tauschen! Ich werde meine\n"
-	.string "Dekorationen auf deinen PC senden.$"
+	.string "Then we’ll trade!\n"
+	.string "I’ll send my decoration to your PC.$"
 
 gTextTrader_ICantTradeThatOneAway:: @ 81AEB31
-	.string "Huups! Tut mir Leid!\n"
-	.string "Das ist ein ganz seltenes Stück!\l"
-	.string "Das kann ich nicht tauschen!\p"
-	.string "Kann ich dich für etwas anderes\n"
-	.string "begeistern?$"
+	.string "Oops! Sorry!\n"
+	.string "That’s a really rare piece of decoration.\l"
+	.string "I can’t trade that one away!\p"
+	.string "Can I interest you in something else?$"

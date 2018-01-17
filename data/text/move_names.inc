@@ -1,356 +1,356 @@
 gMoveNames:: @ 81F8320
 	.string "-$$$$$$$", 13
-	.string "PFUND$", 13
-	.string "KARATESCHLAG$", 13
-	.string "DUPLEXHIEB$", 13
-	.string "KOMETENHIEB$", 13
-	.string "MEGAHIEB$", 13
-	.string "ZAHLTAG$", 13
-	.string "FEUERSCHLAG$", 13
-	.string "EISHIEB$", 13
-	.string "DONNERSCHLAG$", 13
-	.string "KRATZER$", 13
-	.string "KLAMMER$", 13
+	.string "POUND$", 13
+	.string "KARATE CHOP$", 13
+	.string "DOUBLESLAP$", 13
+	.string "COMET PUNCH$", 13
+	.string "MEGA PUNCH$", 13
+	.string "PAY DAY$", 13
+	.string "FIRE PUNCH$", 13
+	.string "ICE PUNCH$", 13
+	.string "THUNDERPUNCH$", 13
+	.string "SCRATCH$", 13
+	.string "VICEGRIP$", 13
 	.string "GUILLOTINE$", 13
-	.string "KLINGENSTURM$", 13
-	.string "SCHWERTTANZ$", 13
-	.string "ZERSCHNEIDER$", 13
-	.string "WINDSTOSS$", 13
-	.string "FLÜGELSCHLAG$", 13
-	.string "WIRBELWIND$", 13
-	.string "FLIEGEN$", 13
-	.string "KLAMMERGRIFF$", 13
+	.string "RAZOR WIND$", 13
+	.string "SWORDS DANCE$", 13
+	.string "CUT$", 13
+	.string "GUST$", 13
+	.string "WING ATTACK$", 13
+	.string "WHIRLWIND$", 13
+	.string "FLY$", 13
+	.string "BIND$", 13
 	.string "SLAM$", 13
-	.string "RANKENHIEB$", 13
-	.string "STAMPFER$", 13
-	.string "DOPPELKICK$", 13
-	.string "MEGAKICK$", 13
-	.string "SPRUNGKICK$", 13
-	.string "FEGEKICK$", 13
-	.string "SANDWIRBEL$", 13
-	.string "KOPFNUSS$", 13
-	.string "HORNATTACKE$", 13
-	.string "FURIENSCHLAG$", 13
-	.string "HORNBOHRER$", 13
+	.string "VINE WHIP$", 13
+	.string "STOMP$", 13
+	.string "DOUBLE KICK$", 13
+	.string "MEGA KICK$", 13
+	.string "JUMP KICK$", 13
+	.string "ROLLING KICK$", 13
+	.string "SAND-ATTACK$", 13
+	.string "HEADBUTT$", 13
+	.string "HORN ATTACK$", 13
+	.string "FURY ATTACK$", 13
+	.string "HORN DRILL$", 13
 	.string "TACKLE$", 13
-	.string "BODYSLAM$", 13
-	.string "WICKEL$", 13
-	.string "BODYCHECK$", 13
-	.string "FUCHTLER$", 13
-	.string "RISIKOTACKLE$", 13
-	.string "RUTENSCHLAG$", 13
-	.string "GIFTSTACHEL$", 13
-	.string "DUONADEL$", 13
-	.string "NADELRAKETE$", 13
-	.string "SILBERBLICK$", 13
-	.string "BISS$", 13
-	.string "HEULER$", 13
-	.string "BRÜLLER$", 13
-	.string "GESANG$", 13
-	.string "SUPERSCHALL$", 13
-	.string "ULTRASCHALL$", 13
-	.string "AUSSETZER$", 13
-	.string "SÄURE$", 13
-	.string "GLUT$", 13
-	.string "FLAMMENWURF$", 13
-	.string "WEISSNEBEL$", 13
-	.string "AQUAKNARRE$", 13
-	.string "HYDROPUMPE$", 13
-	.string "SURFER$", 13
-	.string "EISSTRAHL$", 13
+	.string "BODY SLAM$", 13
+	.string "WRAP$", 13
+	.string "TAKE DOWN$", 13
+	.string "THRASH$", 13
+	.string "DOUBLE-EDGE$", 13
+	.string "TAIL WHIP$", 13
+	.string "POISON STING$", 13
+	.string "TWINEEDLE$", 13
+	.string "PIN MISSILE$", 13
+	.string "LEER$", 13
+	.string "BITE$", 13
+	.string "GROWL$", 13
+	.string "ROAR$", 13
+	.string "SING$", 13
+	.string "SUPERSONIC$", 13
+	.string "SONICBOOM$", 13
+	.string "DISABLE$", 13
+	.string "ACID$", 13
+	.string "EMBER$", 13
+	.string "FLAMETHROWER$", 13
+	.string "MIST$", 13
+	.string "WATER GUN$", 13
+	.string "HYDRO PUMP$", 13
+	.string "SURF$", 13
+	.string "ICE BEAM$", 13
 	.string "BLIZZARD$", 13
-	.string "PSYSTRAHL$", 13
-	.string "BLUBBSTRAHL$", 13
-	.string "AURORASTRAHL$", 13
-	.string "HYPERSTRAHL$", 13
-	.string "SCHNABEL$", 13
-	.string "BOHRSCHNABEL$", 13
-	.string "ÜBERROLLER$", 13
-	.string "FUSSKICK$", 13
-	.string "KONTER$", 13
-	.string "GEOWURF$", 13
-	.string "STÄRKE$", 13
-	.string "ABSORBER$", 13
-	.string "MEGASAUGER$", 13
-	.string "EGELSAMEN$", 13
-	.string "WACHSTUM$", 13
-	.string "RASIERBLATT$", 13
-	.string "SOLARSTRAHL$", 13
-	.string "GIFTPUDER$", 13
-	.string "STACHELSPORE$", 13
-	.string "SCHLAFPUDER$", 13
-	.string "BLÄTTERTANZ$", 13
-	.string "FADENSCHUSS$", 13
-	.string "DRACHENWUT$", 13
-	.string "FEUERWIRBEL$", 13
-	.string "DONNERSCHOCK$", 13
-	.string "DONNERBLITZ$", 13
-	.string "DONNERWELLE$", 13
-	.string "DONNER$", 13
-	.string "STEINWURF$", 13
-	.string "ERDBEBEN$", 13
-	.string "GEOFISSUR$", 13
-	.string "SCHAUFLER$", 13
-	.string "TOXIN$", 13
-	.string "KONFUSION$", 13
-	.string "PSYCHOKINESE$", 13
-	.string "HYPNOSE$", 13
-	.string "MEDITATION$", 13
-	.string "AGILITÄT$", 13
-	.string "RUCKZUCKHIEB$", 13
-	.string "RASEREI$", 13
+	.string "PSYBEAM$", 13
+	.string "BUBBLEBEAM$", 13
+	.string "AURORA BEAM$", 13
+	.string "HYPER BEAM$", 13
+	.string "PECK$", 13
+	.string "DRILL PECK$", 13
+	.string "SUBMISSION$", 13
+	.string "LOW KICK$", 13
+	.string "COUNTER$", 13
+	.string "SEISMIC TOSS$", 13
+	.string "STRENGTH$", 13
+	.string "ABSORB$", 13
+	.string "MEGA DRAIN$", 13
+	.string "LEECH SEED$", 13
+	.string "GROWTH$", 13
+	.string "RAZOR LEAF$", 13
+	.string "SOLARBEAM$", 13
+	.string "POISONPOWDER$", 13
+	.string "STUN SPORE$", 13
+	.string "SLEEP POWDER$", 13
+	.string "PETAL DANCE$", 13
+	.string "STRING SHOT$", 13
+	.string "DRAGON RAGE$", 13
+	.string "FIRE SPIN$", 13
+	.string "THUNDERSHOCK$", 13
+	.string "THUNDERBOLT$", 13
+	.string "THUNDER WAVE$", 13
+	.string "THUNDER$", 13
+	.string "ROCK THROW$", 13
+	.string "EARTHQUAKE$", 13
+	.string "FISSURE$", 13
+	.string "DIG$", 13
+	.string "TOXIC$", 13
+	.string "CONFUSION$", 13
+	.string "PSYCHIC$", 13
+	.string "HYPNOSIS$", 13
+	.string "MEDITATE$", 13
+	.string "AGILITY$", 13
+	.string "QUICK ATTACK$", 13
+	.string "RAGE$", 13
 	.string "TELEPORT$", 13
-	.string "NACHTNEBEL$", 13
-	.string "MIMIKRY$", 13
-	.string "KREIDESCHREI$", 13
-	.string "DOPPELTEAM$", 13
-	.string "GENESUNG$", 13
-	.string "HÄRTNER$", 13
-	.string "KOMPRIMATOR$", 13
-	.string "RAUCHWOLKE$", 13
-	.string "KONFUSTRAHL$", 13
-	.string "PANZERSCHUTZ$", 13
-	.string "EINIGLER$", 13
-	.string "BARRIERE$", 13
-	.string "LICHTSCHILD$", 13
-	.string "DUNKELNEBEL$", 13
-	.string "REFLEKTOR$", 13
-	.string "ENERGIEFOKUS$", 13
-	.string "GEDULD$", 13
-	.string "METRONOM$", 13
-	.string "SPIEGELTRICK$", 13
-	.string "FINALE$", 13
-	.string "EIERBOMBE$", 13
-	.string "SCHLECKER$", 13
+	.string "NIGHT SHADE$", 13
+	.string "MIMIC$", 13
+	.string "SCREECH$", 13
+	.string "DOUBLE TEAM$", 13
+	.string "RECOVER$", 13
+	.string "HARDEN$", 13
+	.string "MINIMIZE$", 13
+	.string "SMOKESCREEN$", 13
+	.string "CONFUSE RAY$", 13
+	.string "WITHDRAW$", 13
+	.string "DEFENSE CURL$", 13
+	.string "BARRIER$", 13
+	.string "LIGHT SCREEN$", 13
+	.string "HAZE$", 13
+	.string "REFLECT$", 13
+	.string "FOCUS ENERGY$", 13
+	.string "BIDE$", 13
+	.string "METRONOME$", 13
+	.string "MIRROR MOVE$", 13
+	.string "SELFDESTRUCT$", 13
+	.string "EGG BOMB$", 13
+	.string "LICK$", 13
 	.string "SMOG$", 13
-	.string "SCHLAMMBAD$", 13
-	.string "KNOCHENKEULE$", 13
-	.string "FEUERSTURM$", 13
-	.string "KASKADE$", 13
-	.string "SCHNAPPER$", 13
-	.string "STERNSCHAUER$", 13
-	.string "SCHÄDELWUMME$", 13
-	.string "DORNKANONE$", 13
-	.string "UMKLAMMERUNG$", 13
-	.string "AMNESIE$", 13
-	.string "PSYKRAFT$", 13
-	.string "WEICHEI$", 13
-	.string "TURMKICK$", 13
-	.string "GIFTBLICK$", 13
-	.string "TRAUMFRESSER$", 13
-	.string "GIFTWOLKE$", 13
-	.string "STAKKATO$", 13
-	.string "BLUTSAUGER$", 13
-	.string "TODESKUSS$", 13
-	.string "HIMMELSFEGER$", 13
-	.string "WANDLER$", 13
-	.string "BLUBBER$", 13
-	.string "IRRSCHLAG$", 13
-	.string "PILZSPORE$", 13
-	.string "BLITZ$", 13
-	.string "PSYWELLE$", 13
-	.string "PLATSCHER$", 13
-	.string "SÄUREPANZER$", 13
-	.string "KRABBHAMMER$", 13
+	.string "SLUDGE$", 13
+	.string "BONE CLUB$", 13
+	.string "FIRE BLAST$", 13
+	.string "WATERFALL$", 13
+	.string "CLAMP$", 13
+	.string "SWIFT$", 13
+	.string "SKULL BASH$", 13
+	.string "SPIKE CANNON$", 13
+	.string "CONSTRICT$", 13
+	.string "AMNESIA$", 13
+	.string "KINESIS$", 13
+	.string "SOFTBOILED$", 13
+	.string "HI JUMP KICK$", 13
+	.string "GLARE$", 13
+	.string "DREAM EATER$", 13
+	.string "POISON GAS$", 13
+	.string "BARRAGE$", 13
+	.string "LEECH LIFE$", 13
+	.string "LOVELY KISS$", 13
+	.string "SKY ATTACK$", 13
+	.string "TRANSFORM$", 13
+	.string "BUBBLE$", 13
+	.string "DIZZY PUNCH$", 13
+	.string "SPORE$", 13
+	.string "FLASH$", 13
+	.string "PSYWAVE$", 13
+	.string "SPLASH$", 13
+	.string "ACID ARMOR$", 13
+	.string "CRABHAMMER$", 13
 	.string "EXPLOSION$", 13
-	.string "KRATZFURIE$", 13
-	.string "KNOCHMERANG$", 13
-	.string "ERHOLUNG$", 13
-	.string "STEINHAGEL$", 13
-	.string "HYPERZAHN$", 13
-	.string "SCHÄRFER$", 13
-	.string "UMWANDLUNG$", 13
-	.string "TRIPLETTE$", 13
-	.string "SUPERZAHN$", 13
-	.string "SCHLITZER$", 13
-	.string "DELEGATOR$", 13
-	.string "VERZWEIFLER$", 13
-	.string "NACHAHMER$", 13
-	.string "DREIFACHKICK$", 13
-	.string "RAUB$", 13
-	.string "SPINNENNETZ$", 13
-	.string "WILLENSLESER$", 13
-	.string "NACHTMAHR$", 13
-	.string "FLAMMENRAD$", 13
-	.string "SCHNARCHER$", 13
-	.string "FLUCH$", 13
-	.string "DRESCHFLEGEL$", 13
-	.string "UMWANDLUNG2$", 13
-	.string "LUFTSTOSS$", 13
-	.string "BAUMWOLLSAAT$", 13
-	.string "GEGENSCHLAG$", 13
-	.string "GROLL$", 13
-	.string "PULVERSCHNEE$", 13
-	.string "SCHUTZSCHILD$", 13
-	.string "TEMPOHIEB$", 13
-	.string "GRIMASSE$", 13
-	.string "FINTE$", 13
-	.string "BITTERKUSS$", 13
-	.string "BAUCHTROMMEL$", 13
-	.string "MATSCHBOMBE$", 13
-	.string "LEHMSCHELLE$", 13
+	.string "FURY SWIPES$", 13
+	.string "BONEMERANG$", 13
+	.string "REST$", 13
+	.string "ROCK SLIDE$", 13
+	.string "HYPER FANG$", 13
+	.string "SHARPEN$", 13
+	.string "CONVERSION$", 13
+	.string "TRI ATTACK$", 13
+	.string "SUPER FANG$", 13
+	.string "SLASH$", 13
+	.string "SUBSTITUTE$", 13
+	.string "STRUGGLE$", 13
+	.string "SKETCH$", 13
+	.string "TRIPLE KICK$", 13
+	.string "THIEF$", 13
+	.string "SPIDER WEB$", 13
+	.string "MIND READER$", 13
+	.string "NIGHTMARE$", 13
+	.string "FLAME WHEEL$", 13
+	.string "SNORE$", 13
+	.string "CURSE$", 13
+	.string "FLAIL$", 13
+	.string "CONVERSION 2$", 13
+	.string "AEROBLAST$", 13
+	.string "COTTON SPORE$", 13
+	.string "REVERSAL$", 13
+	.string "SPITE$", 13
+	.string "POWDER SNOW$", 13
+	.string "PROTECT$", 13
+	.string "MACH PUNCH$", 13
+	.string "SCARY FACE$", 13
+	.string "FAINT ATTACK$", 13
+	.string "SWEET KISS$", 13
+	.string "BELLY DRUM$", 13
+	.string "SLUDGE BOMB$", 13
+	.string "MUD-SLAP$", 13
 	.string "OCTAZOOKA$", 13
-	.string "STACHLER$", 13
-	.string "BLITZKANONE$", 13
-	.string "GESICHTE$", 13
-	.string "ABGANGSBUND$", 13
-	.string "ABGESANG$", 13
-	.string "EISSTURM$", 13
-	.string "SCANNER$", 13
-	.string "KNOCHENHATZ$", 13
-	.string "ZIELSCHUSS$", 13
-	.string "WUTANFALL$", 13
-	.string "SANDSTURM$", 13
-	.string "GIGASAUGER$", 13
-	.string "AUSDAUER$", 13
-	.string "CHARME$", 13
-	.string "WALZER$", 13
-	.string "TRUGSCHLAG$", 13
-	.string "ANGEBEREI$", 13
-	.string "MILCHGETRÄNK$", 13
-	.string "FUNKENSPRUNG$", 13
-	.string "ZORNKLINGE$", 13
-	.string "STAHLFLÜGEL$", 13
-	.string "HORRORBLICK$", 13
-	.string "ANZIEHUNG$", 13
-	.string "SCHLAFREDE$", 13
-	.string "VITALGLOCKE$", 13
-	.string "RÜCKKEHR$", 13
-	.string "GESCHENK$", 13
+	.string "SPIKES$", 13
+	.string "ZAP CANNON$", 13
+	.string "FORESIGHT$", 13
+	.string "DESTINY BOND$", 13
+	.string "PERISH SONG$", 13
+	.string "ICY WIND$", 13
+	.string "DETECT$", 13
+	.string "BONE RUSH$", 13
+	.string "LOCK-ON$", 13
+	.string "OUTRAGE$", 13
+	.string "SANDSTORM$", 13
+	.string "GIGA DRAIN$", 13
+	.string "ENDURE$", 13
+	.string "CHARM$", 13
+	.string "ROLLOUT$", 13
+	.string "FALSE SWIPE$", 13
+	.string "SWAGGER$", 13
+	.string "MILK DRINK$", 13
+	.string "SPARK$", 13
+	.string "FURY CUTTER$", 13
+	.string "STEEL WING$", 13
+	.string "MEAN LOOK$", 13
+	.string "ATTRACT$", 13
+	.string "SLEEP TALK$", 13
+	.string "HEAL BELL$", 13
+	.string "RETURN$", 13
+	.string "PRESENT$", 13
 	.string "FRUSTRATION$", 13
-	.string "BODYGUARD$", 13
-	.string "LEIDTEILER$", 13
-	.string "LÄUTERFEUER$", 13
-	.string "INTENSITÄT$", 13
-	.string "WUCHTSCHLAG$", 13
-	.string "VIELENDER$", 13
-	.string "FEUERODEM$", 13
-	.string "STAFFETTE$", 13
-	.string "ZUGABE$", 13
-	.string "VERFOLGUNG$", 13
-	.string "TURBODREHER$", 13
-	.string "LOCKDUFT$", 13
-	.string "EISENSCHWEIF$", 13
-	.string "METALLKLAUE$", 13
-	.string "ÜBERWURF$", 13
-	.string "MORGENGRAUEN$", 13
-	.string "SYNTHESE$", 13
-	.string "MONDSCHEIN$", 13
-	.string "KRAFTRESERVE$", 13
-	.string "KREUZHIEB$", 13
-	.string "WINDHOSE$", 13
-	.string "REGENTANZ$", 13
-	.string "SONNENTAG$", 13
-	.string "KNIRSCHER$", 13
-	.string "SPIEGELCAPE$", 13
-	.string "PSYCHO-PLUS$", 13
-	.string "TURBOTEMPO$", 13
-	.string "ANTIK-KRAFT$", 13
-	.string "SPUKBALL$", 13
-	.string "SEHER$", 13
-	.string "ZERTRÜMMERER$", 13
+	.string "SAFEGUARD$", 13
+	.string "PAIN SPLIT$", 13
+	.string "SACRED FIRE$", 13
+	.string "MAGNITUDE$", 13
+	.string "DYNAMICPUNCH$", 13
+	.string "MEGAHORN$", 13
+	.string "DRAGONBREATH$", 13
+	.string "BATON PASS$", 13
+	.string "ENCORE$", 13
+	.string "PURSUIT$", 13
+	.string "RAPID SPIN$", 13
+	.string "SWEET SCENT$", 13
+	.string "IRON TAIL$", 13
+	.string "METAL CLAW$", 13
+	.string "VITAL THROW$", 13
+	.string "MORNING SUN$", 13
+	.string "SYNTHESIS$", 13
+	.string "MOONLIGHT$", 13
+	.string "HIDDEN POWER$", 13
+	.string "CROSS CHOP$", 13
+	.string "TWISTER$", 13
+	.string "RAIN DANCE$", 13
+	.string "SUNNY DAY$", 13
+	.string "CRUNCH$", 13
+	.string "MIRROR COAT$", 13
+	.string "PSYCH UP$", 13
+	.string "EXTREMESPEED$", 13
+	.string "ANCIENTPOWER$", 13
+	.string "SHADOW BALL$", 13
+	.string "FUTURE SIGHT$", 13
+	.string "ROCK SMASH$", 13
 	.string "WHIRLPOOL$", 13
-	.string "PRÜGLER$", 13
-	.string "MOGELHIEB$", 13
-	.string "AUFRUHR$", 13
-	.string "HORTER$", 13
-	.string "ENTFESSLER$", 13
-	.string "VERZEHRER$", 13
-	.string "HITZEWELLE$", 13
-	.string "HAGELSTURM$", 13
-	.string "FOLTERKNECHT$", 13
-	.string "SCHMEICHLER$", 13
-	.string "IRRLICHT$", 13
-	.string "MEMENTO-MORI$", 13
-	.string "FASSADE$", 13
-	.string "POWER-PUNCH$", 13
-	.string "RIECHSALZ$", 13
-	.string "SPOTLIGHT$", 13
-	.string "NATUR-KRAFT$", 13
-	.string "LADEVORGANG$", 13
-	.string "VERHÖHNER$", 13
-	.string "RECHTE HAND$", 13
-	.string "TRICKBETRUG$", 13
-	.string "ROLLENTAUSCH$", 13
-	.string "WUNSCHTRAUM$", 13
-	.string "ZUSCHUSS$", 13
-	.string "VERWURZLER$", 13
-	.string "KRAFTKOLOSS$", 13
-	.string "MAGIEMANTEL$", 13
-	.string "AUFBEREITUNG$", 13
-	.string "VERGELTUNG$", 13
-	.string "DURCHBRUCH$", 13
-	.string "GÄHNER$", 13
-	.string "ABSCHLAG$", 13
-	.string "NOTSITUATION$", 13
+	.string "BEAT UP$", 13
+	.string "FAKE OUT$", 13
+	.string "UPROAR$", 13
+	.string "STOCKPILE$", 13
+	.string "SPIT UP$", 13
+	.string "SWALLOW$", 13
+	.string "HEAT WAVE$", 13
+	.string "HAIL$", 13
+	.string "TORMENT$", 13
+	.string "FLATTER$", 13
+	.string "WILL-O-WISP$", 13
+	.string "MEMENTO$", 13
+	.string "FACADE$", 13
+	.string "FOCUS PUNCH$", 13
+	.string "SMELLINGSALT$", 13
+	.string "FOLLOW ME$", 13
+	.string "NATURE POWER$", 13
+	.string "CHARGE$", 13
+	.string "TAUNT$", 13
+	.string "HELPING HAND$", 13
+	.string "TRICK$", 13
+	.string "ROLE PLAY$", 13
+	.string "WISH$", 13
+	.string "ASSIST$", 13
+	.string "INGRAIN$", 13
+	.string "SUPERPOWER$", 13
+	.string "MAGIC COAT$", 13
+	.string "RECYCLE$", 13
+	.string "REVENGE$", 13
+	.string "BRICK BREAK$", 13
+	.string "YAWN$", 13
+	.string "KNOCK OFF$", 13
+	.string "ENDEAVOR$", 13
 	.string "ERUPTION$", 13
-	.string "WERTEWECHSEL$", 13
-	.string "BEGRENZER$", 13
-	.string "HEILUNG$", 13
-	.string "NACHSPIEL$", 13
-	.string "ÜBERNAHME$", 13
-	.string "GEHEIMPOWER$", 13
-	.string "TAUCHER$", 13
-	.string "ARMSTOSS$", 13
-	.string "TARNUNG$", 13
-	.string "SCHWEIFGLANZ$", 13
-	.string "SCHEINWERFER$", 13
-	.string "NEBELBALL$", 13
-	.string "DAUNENREIGEN$", 13
-	.string "TAUMELTANZ$", 13
-	.string "FEUERFEGER$", 13
-	.string "LEHMSUHLER$", 13
-	.string "FROSTBEULE$", 13
-	.string "NIETENRANKE$", 13
-	.string "TAGEDIEB$", 13
-	.string "SCHALLWELLE$", 13
-	.string "GIFTZAHN$", 13
-	.string "ZERMALMKLAUE$", 13
-	.string "LOHEKANONADE$", 13
-	.string "AQUAHAUBITZE$", 13
-	.string "STERNENHIEB$", 13
-	.string "ERSTAUNER$", 13
-	.string "METEOROLOGE$", 13
-	.string "AROMAKUR$", 13
-	.string "TRUGTRÄNE$", 13
-	.string "WINDSCHNITT$", 13
-	.string "HITZEKOLLER$", 13
-	.string "SCHNÜFFLER$", 13
-	.string "FELSGRAB$", 13
-	.string "SILBERHAUCH$", 13
-	.string "METALLSOUND$", 13
-	.string "GRASFLÖTE$", 13
-	.string "SPASSKANONE$", 13
-	.string "KOSMIK-KRAFT$", 13
-	.string "FONTRÄNEN$", 13
-	.string "AMPELLEUCHTE$", 13
-	.string "FINSTERFAUST$", 13
-	.string "SONDERSENSOR$", 13
-	.string "HIMMELHIEB$", 13
-	.string "SANDGRAB$", 13
-	.string "EISESKÄLTE$", 13
-	.string "LEHMBRÜHE$", 13
-	.string "KUGELSAAT$", 13
-	.string "AERO-ASS$", 13
-	.string "EISSPEER$", 13
-	.string "EISENABWEHR$", 13
-	.string "RÜCKENTZUG$", 13
-	.string "JAULER$", 13
-	.string "DRACHENKLAUE$", 13
-	.string "FAUNA-STATUE$", 13
-	.string "PROTZER$", 13
-	.string "SPRUNGFEDER$", 13
-	.string "LEHMSCHUSS$", 13
-	.string "GIFTSCHWEIF$", 13
-	.string "BEZIRZER$", 13
-	.string "VOLTTACKLE$", 13
-	.string "ZAUBERBLATT$", 13
-	.string "NASSMACHER$", 13
-	.string "GEDANKENGUT$", 13
-	.string "LAUBKLINGE$", 13
-	.string "DRACHENTANZ$", 13
-	.string "FELSWURF$", 13
-	.string "SCHOCKWELLE$", 13
-	.string "AQUAWELLE$", 13
-	.string "KISMETWUNSCH$", 13
-	.string "PSYSCHUB$", 13
+	.string "SKILL SWAP$", 13
+	.string "IMPRISON$", 13
+	.string "REFRESH$", 13
+	.string "GRUDGE$", 13
+	.string "SNATCH$", 13
+	.string "SECRET POWER$", 13
+	.string "DIVE$", 13
+	.string "ARM THRUST$", 13
+	.string "CAMOUFLAGE$", 13
+	.string "TAIL GLOW$", 13
+	.string "LUSTER PURGE$", 13
+	.string "MIST BALL$", 13
+	.string "FEATHERDANCE$", 13
+	.string "TEETER DANCE$", 13
+	.string "BLAZE KICK$", 13
+	.string "MUD SPORT$", 13
+	.string "ICE BALL$", 13
+	.string "NEEDLE ARM$", 13
+	.string "SLACK OFF$", 13
+	.string "HYPER VOICE$", 13
+	.string "POISON FANG$", 13
+	.string "CRUSH CLAW$", 13
+	.string "BLAST BURN$", 13
+	.string "HYDRO CANNON$", 13
+	.string "METEOR MASH$", 13
+	.string "ASTONISH$", 13
+	.string "WEATHER BALL$", 13
+	.string "AROMATHERAPY$", 13
+	.string "FAKE TEARS$", 13
+	.string "AIR CUTTER$", 13
+	.string "OVERHEAT$", 13
+	.string "ODOR SLEUTH$", 13
+	.string "ROCK TOMB$", 13
+	.string "SILVER WIND$", 13
+	.string "METAL SOUND$", 13
+	.string "GRASSWHISTLE$", 13
+	.string "TICKLE$", 13
+	.string "COSMIC POWER$", 13
+	.string "WATER SPOUT$", 13
+	.string "SIGNAL BEAM$", 13
+	.string "SHADOW PUNCH$", 13
+	.string "EXTRASENSORY$", 13
+	.string "SKY UPPERCUT$", 13
+	.string "SAND TOMB$", 13
+	.string "SHEER COLD$", 13
+	.string "MUDDY WATER$", 13
+	.string "BULLET SEED$", 13
+	.string "AERIAL ACE$", 13
+	.string "ICICLE SPEAR$", 13
+	.string "IRON DEFENSE$", 13
+	.string "BLOCK$", 13
+	.string "HOWL$", 13
+	.string "DRAGON CLAW$", 13
+	.string "FRENZY PLANT$", 13
+	.string "BULK UP$", 13
+	.string "BOUNCE$", 13
+	.string "MUD SHOT$", 13
+	.string "POISON TAIL$", 13
+	.string "COVET$", 13
+	.string "VOLT TACKLE$", 13
+	.string "MAGICAL LEAF$", 13
+	.string "WATER SPORT$", 13
+	.string "CALM MIND$", 13
+	.string "LEAF BLADE$", 13
+	.string "DRAGON DANCE$", 13
+	.string "ROCK BLAST$", 13
+	.string "SHOCK WAVE$", 13
+	.string "WATER PULSE$", 13
+	.string "DOOM DESIRE$", 13
+	.string "PSYCHO BOOST$", 13

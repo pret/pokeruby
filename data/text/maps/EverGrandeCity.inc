@@ -1,11 +1,11 @@
 EverGrandeCity_Text_16A74D:: @ 816A74D
-	.string "SIE BETRETEN DIE SIEGESSTRASSE$"
+	.string "ENTERING VICTORY ROAD$"
 
 EverGrandeCity_Text_16A763:: @ 816A763
-	.string "SIE ERREICHEN DEN EINGANG ZUR\n"
-	.string "POKéMON LIGA$"
+	.string "ENTERING POKéMON LEAGUE\n"
+	.string "CENTER GATE$"
 
 EverGrandeCity_Text_16A787:: @ 816A787
-	.string "PRACHTPOLIS CITY\p"
-	.string "“Das Paradies der Blumen, des Meeres\n"
-	.string "und der POKéMON.”$"
+	.string "EVER GRANDE CITY\p"
+	.string "“The paradise of flowers, the sea,\n"
+	.string "and POKéMON.”$"

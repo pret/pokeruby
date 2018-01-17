@@ -1,16 +1,17 @@
 PacifidlogTown_PokemonCenter_1F_Text_178E47:: @ 8178E47
-	.string "Welche Farbe hat dein TRAINERPASS?\n"
-	.string "Meiner ist kupferrot.$"
+	.string "What color is your TRAINER’S CARD?\n"
+	.string "Mine’s copper!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_178E79:: @ 8178E79
-	.string "FLOSSBRUNN schwimmt auf einer\n"
-	.string "Kolonie von CORASONN.\p"
-	.string "Glaubst du mir das?$"
+	.string "PACIFIDLOG TOWN floats on top of\n"
+	.string "a colony of CORSOLA.\p"
+	.string "If I told you that, would you believe me?$"
 
 PacifidlogTown_PokemonCenter_1F_Text_178ED9:: @ 8178ED9
-	.string "Man sagt, die Vorfahren der Menschen in\n"
-	.string "FLOSSBRUNN wurden an Bord von\l"
-	.string "Schiffen geboren, lebten und starben\l"
-	.string "auch dort.\p"
-	.string "Diese Lebensart ist verständlich, denn\n"
-	.string "sie waren auf der Suche nach etwas.$"
+	.string "The ancestors of the people in\n"
+	.string "PACIFIDLOG were said to have been\l"
+	.string "born on boats and then lived and died \l"
+	.string "aboard them.\p"
+	.string "I understand that they lived that way\n"
+	.string "because they were searching for\l"
+	.string "something.$"

@@ -1,88 +1,86 @@
 DewfordTown_Text_16E080:: @ 816E080
-	.string "MR. BRACK: Ahoi!\n"
-	.string "Wir haben in GRAPHITPORT CITY angelegt.\p"
-	.string "Ich vermute, du gehst jetzt zu KAPT.\n"
-	.string "BRIGG und bringst ihm die DEVON-\l"
-	.string "WAREN?$"
+	.string "MR. BRINEY: Ahoy!\n"
+	.string "We’ve made land in SLATEPORT!\p"
+	.string "I suppose you’re going to visit CAPT.\n"
+	.string "STERN and deliver the DEVON GOODS?$"
 
 Route109_Text_16E0F9:: @ 816E0F9
-	.string "MR. BRACK: Überbringst du nicht die\n"
-	.string "DEVON-WAREN?\p"
-	.string "Heißt das, du willst nach FAUSTAUHAVEN\n"
-	.string "zurücksegeln?$"
+	.string "MR. BRINEY: Aren’t you delivering the\n"
+	.string "DEVON GOODS?\p"
+	.string "Or were you meaning to sail back to\n"
+	.string "DEWFORD?$"
 
 Route109_Text_16E159:: @ 816E159
-	.string "MR. BRACK: Also, auf nach FAUSTAUHAVEN!\p"
-	.string "Anker gelichtet!\n"
-	.string "PECKO, wir setzen Segel, mein Liebling!$"
+	.string "MR. BRINEY: DEWFORD it is, then!\p"
+	.string "Anchors aweigh!\n"
+	.string "PEEKO, we’re setting sail, my darling!$"
 
 Route109_Text_16E1B1:: @ 816E1B1
-	.string "MR. BRACK: Dann geh und überbringe die\n"
-	.string "DEVON-WAREN. Ich warte hier.$"
+	.string "MR. BRINEY: Then you go on and deliver\n"
+	.string "the DEVON GOODS. I’ll be waiting.$"
 
 DewfordTown_Text_16E1FA:: @ 816E1FA
-	.string "MR. BRACK: Ahoi! Wir haben in\n"
-	.string "GRAPHITPORT CITY angelegt!\p"
-	.string "Wann immer du magst, können wir wieder\n"
-	.string "die Segel setzen.$"
+	.string "MR. BRINEY: Ahoy! We’ve made land in\n"
+	.string "SLATEPORT!\p"
+	.string "You just go on and tell me whenever\n"
+	.string "you want to set sail again!$"
 
 Route109_Text_16E26A:: @ 816E26A
-	.string "MR. BRACK: Ahoi! Für dich fahre ich\n"
-	.string "jederzeit wieder raus!\p"
-	.string "Nun, wo soll es hingehen?$"
+	.string "MR. BRINEY: Ahoy!\n"
+	.string "For you, I’ll go out to sea anytime!\p"
+	.string "Now, my friend, where are we bound?$"
 
 Route109_Text_16E2C5:: @ 816E2C5
-	.string "MR. BRACK: Sag mir einfach Bescheid,\n"
-	.string "wenn wir wieder Segel setzen sollen.$"
+	.string "MR. BRINEY: You just tell me whenever\n"
+	.string "you need to set sail again!$"
 
 Route109_Text_16E307:: @ 816E307
-	.string "Yo, TRAINER!\n"
-	.string "Seid ihr in Eile,\l"
-	.string "müsst wieder fort,\l"
-	.string "erfrischt euch doch an Papas Ort!$"
+	.string "Yo, TRAINERS!\n"
+	.string "Whether you’re hot to trot,\l"
+	.string "or cool cat not,\l"
+	.string "chill at my papa’s spot!$"
 
 Route109_Text_16E35B:: @ 816E35B
-	.string "Kleine Kinder sind blitzschnell und flink.\p"
-	.string "Du darfst sie nicht eine Sekunde aus\n"
-	.string "den Augen lassen. Das strengt an.\p"
-	.string "Meine Kinder sind mit meinen POKéMON\n"
-	.string "zusammen, da sind sie gut aufgehoben.$"
+	.string "Little kids can dart around so quickly...\p"
+	.string "You don’t dare take your eyes off them\n"
+	.string "for an instant. It’s very taxing.\p"
+	.string "Mine’s with my POKéMON, so they should\n"
+	.string "be okay, but...$"
 
 Route109_Text_16E405:: @ 816E405
-	.string "Wir brauchen ganz lange, um unsere\n"
-	.string "Sandburg zu bauen.$"
+	.string "Our sand castle’s taking a long time\n"
+	.string "to make.$"
 
 Route109_Text_16E433:: @ 816E433
-	.string "Das schenk ich dir!$"
+	.string "You can have this!$"
 
 Route109_Text_16E446:: @ 816E446
-	.string "Wir nehmen allen Sand vom Strand\n"
-	.string "und bauen damit eine gaaanz große Burg.\p"
-	.string "Und dann sind wir Königin und König!\p"
-	.string "Und du darfst unser Diener sein.$"
+	.string "We’re going to get all the sand from\n"
+	.string "the beach and make a big castle!\p"
+	.string "And then we’re going to be a king and\n"
+	.string "queen.\p"
+	.string "We’ll let you be a servant.$"
 
 Route109_Text_16E4D5:: @ 816E4D5
-	.string "Das Wasser in diesen Breiten ist sauber.\p"
-	.string "Aber ich sammle zusammen mit meinem\n"
-	.string "ZIGZACHS den Müll am Ufer auf.\p"
-	.string "Verschmutztes Wasser wird zu Regen und\n"
-	.string "gelangt in die Flüsse, aus denen wir\l"
-	.string "unser Trinkwasser gewinnen...\p"
-	.string "Verschmutzen wir das Meer, bekommen\n"
-	.string "wir den Schmutz wieder zurück.$"
+	.string "The water around these parts is clean.\p"
+	.string "But, I get my ZIGZAGOON to pick up\n"
+	.string "litter from the shoreline at times.\p"
+	.string "Dirty water becomes rain and joins our\n"
+	.string "rivers, which we drink from...\p"
+	.string "If we pollute the sea, it all comes\n"
+	.string "back to haunt us eventually.$"
 
 Route109_Text_16E5CA:: @ 816E5CA
-	.string "ZIGZACHS: Guguu?$"
+	.string "ZIGZAGOON: Guguu?$"
 
 Route109_Text_16E5DC:: @ 816E5DC
-	.string "STRANDHAUS\p"
-	.string "“Mögen heiße Kämpfe im heißen Sand\n"
-	.string "stattfinden! Heiße TRAINER willkommen!”$"
+	.string "SEASHORE HOUSE\p"
+	.string "“May hot battles rage on hot sands!\n"
+	.string "The place for hot TRAINERS!”$"
 
 Route109_Text_16E62C:: @ 816E62C
-	.string "TIPPS für TRAINER\p"
-	.string "POKéMON mit gleichem Level haben nicht\n"
-	.string "unbedingt identische Statuswerte.\p"
-	.string "POKéMON, die von TRAINERN aufgezogen\n"
-	.string "werden, wachsen schneller als wilde\l"
-	.string "POKéMON.$"
+	.string "TRAINER TIPS\p"
+	.string "POKéMON at the same level may not\n"
+	.string "always have identical stats.\p"
+	.string "POKéMON raised by TRAINERS are said\n"
+	.string "to grow stronger than wild POKéMON.$"

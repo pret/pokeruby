@@ -1,13 +1,13 @@
 SootopolisCity_House2_Text_18FA66:: @ 818FA66
-	.string "PYROBERG...\p"
-	.string "Auf seiner Spitze sind 2 Kugeln neben-\n"
-	.string "einander angebracht. Wusstest du das?$"
+	.string "MT. PYRE...\p"
+	.string "At its peak are two orbs placed side\n"
+	.string "by side. Did you know?$"
 
 SootopolisCity_House2_Text_18FAAE:: @ 818FAAE
-	.string "Ja, genau. 2 Kugeln nebeneinander...\p"
-	.string "Der Anblick dieser beiden...\n"
-	.string "Irgendwie wirkt er beruhigend...$"
+	.string "Yes, two orbs side by side...\p"
+	.string "The sight of them together...\n"
+	.string "It is somehow soothing...$"
 
 SootopolisCity_House2_Text_18FB04:: @ 818FB04
-	.string "Ehrlich?\n"
-	.string "Du solltest dir das mal selber ansehen...$"
+	.string "Is that so?\n"
+	.string "Perhaps you ought to visit and see...$"

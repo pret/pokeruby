@@ -1,120 +1,119 @@
 Route111_Text_16F705:: @ 816F705
-	.string "Hallo! Ich hab’s, du bist ein Reisender.\p"
-	.string "Was hältst du davon? Du trittst mit\n"
-	.string "deinen POKéMON gegen alle vier Familien-\l"
-	.string "mitglieder hintereinander an?$"
+	.string "Hello! I take it you’re a traveler.\p"
+	.string "How’s this? What do you say to taking\n"
+	.string "on our family of four in a series of\l"
+	.string "POKéMON battles?$"
 
 Route111_Text_16F785:: @ 816F785
-	.string "Ach, wirklich? Nun, wenn du deine\n"
-	.string "Meinung änderst, komm einfach wieder.$"
+	.string "Is that so?\n"
+	.string "Drop in, if you change your mind!$"
 
 Route111_Text_16F7B3:: @ 816F7B3
-	.string "Das nenne ich Kampfgeist! Ich mag dich!$"
+	.string "That’s the spirit! I like you!$"
 
 Route111_Text_16F7D2:: @ 816F7D2
 	.string "Aiyah!\n"
-	.string "Du bist stärker, als ich dachte.$"
+	.string "You’re a lot tougher than I expected!$"
 
 Route111_Text_16F7FF:: @ 816F7FF
-	.string "Hey, ihr! Ich habe einen starken\n"
-	.string "TRAINER gefunden!$"
+	.string "Hey, all!\n"
+	.string "I’ve found a pretty strong TRAINER!$"
 
 Route111_Text_16F82D:: @ 816F82D
-	.string "Oh, du meine Güte! Bist du jung!\p"
-	.string "Du musst ein sehr guter TRAINER sein,\n"
-	.string "wenn du meinen Mann besiegen konntest.\p"
-	.string "Nun bin ich an der Reihe.$"
+	.string "Oh, my goodness! Aren’t you young?\p"
+	.string "You must be quite the TRAINER to beat\n"
+	.string "my husband, though.\p"
+	.string "It’s my turn to battle now!$"
 
 Route111_Text_16F8A6:: @ 816F8A6
-	.string "Ach, nein! Ich komme nicht darüber\n"
-	.string "hinweg, wie stark du bist!$"
+	.string "Oh, gosh!\n"
+	.string "I can’t get over how strong you are!$"
 
 Route111_Text_16F8D5:: @ 816F8D5
-	.string "Hier draußen ist ein starker TRAINER!\n"
-	.string "Ein wirklich starker, sage ich euch!$"
+	.string "There’s a strong TRAINER here!\n"
+	.string "This one’s really strong!$"
 
 Route111_Text_16F90E:: @ 816F90E
-	.string "Du bist stärker als Mami? Wow!\p"
-	.string "Aber ich bin auch stark!\n"
-	.string "Wirklich! Ganz ehrlich!$"
+	.string "You’re stronger than Mommy? Wow!\p"
+	.string "But I’m strong, too!\n"
+	.string "Really! Honestly!$"
 
 Route111_Text_16F956:: @ 816F956
-	.string "Was? Habe ich verloren?$"
+	.string "Huh? Did I just lose?$"
 
 Route111_Text_16F96C:: @ 816F96C
-	.string "Das ist gemein...\p"
-	.string "...Schluchz... Heul... Omaaaaa... Schluchz...$"
+	.string "This stinks...\p"
+	.string "...Snivel... Grandma!$"
 
 Route111_Text_16F991:: @ 816F991
-	.string "Wie konntest du nur meine Enkelin zum\n"
-	.string "Weinen bringen? Schäm dich!\p"
-	.string "Dafür werde ich dich in Grund und Boden\n"
-	.string "stampfen. Mach dich auf was gefasst!$"
+	.string "How dare you make my granddaughter\n"
+	.string "cry!\p"
+	.string "For that, I’m going to smack you!\n"
+	.string "Prepare to lose!$"
 
 Route111_Text_16F9EC:: @ 816F9EC
-	.string "Uaah! Du bist stark...\n"
-	.string "Meine Enkelin hatte Recht...$"
+	.string "Kwah! You are strong...\n"
+	.string "My granddaughter was right...$"
 
 Route111_Text_16FA22:: @ 816FA22
-	.string "Wenn du es nicht allzu eilig hast,\n"
-	.string "besuche uns doch mal wieder!$"
+	.string "If you’re not in any hurry, visit with\n"
+	.string "us awhile.$"
 
 Route111_Text_16FA54:: @ 816FA54
-	.string "Du hast das WURZELFOSSIL gefunden.\p"
-	.string "Wenn du dieses FOSSIL nimmst,\n"
-	.string "versinkt das andere im Sand...\p"
-	.string "Willst du das WURZELFOSSIL nehmen?$"
+	.string "You found the ROOT FOSSIL.\p"
+	.string "If this FOSSIL is taken, the other\n"
+	.string "one will sink into the sand...\p"
+	.string "Take the ROOT FOSSIL anyway?$"
 
 Route111_Text_16FACE:: @ 816FACE
-	.string "{PLAYER} lässt das WURZELFOSSIL liegen.$"
+	.string "{PLAYER} left the ROOT FOSSIL alone.$"
 
 Route111_Text_16FAED:: @ 816FAED
-	.string "Du hast das KLAUENFOSSIL gefunden.\p"
-	.string "Wenn du dieses FOSSIL nimmst,\n"
-	.string "versinkt das andere im Sand...\p"
-	.string "Willst du das KLAUENFOSSIL nehmen?$"
+	.string "You found the CLAW FOSSIL.\p"
+	.string "If this FOSSIL is taken, the other\n"
+	.string "one will sink into the sand...\p"
+	.string "Take the CLAW FOSSIL anyway?$"
 
 Route111_Text_16FB67:: @ 816FB67
-	.string "{PLAYER} lässt das KLAUENFOSSIL liegen.$"
+	.string "{PLAYER} left the CLAW FOSSIL alone.$"
 
 Route111_Text_16FB86:: @ 816FB86
-	.string "Wenn du deine POKéMON nicht ein\n"
-	.string "bisschen besser trainierst, wird es\l"
-	.string "schwer, sich hier durchzukämpfen.\p"
-	.string "Ich habe gehört, dass die TOP VIER der\n"
-	.string "POKéMON LIGA um einiges schwerer zu\l"
-	.string "besiegen sind als die ARENALEITER.$"
+	.string "If you don’t raise your POKéMON some\n"
+	.string "more, it could be tough to keep winning\l"
+	.string "up through the ranks.\p"
+	.string "I’ve heard the POKéMON LEAGUE’s\n"
+	.string "ELITE FOUR are far stronger than\l"
+	.string "any GYM LEADER.$"
 
 Route111_Text_16FC3A:: @ 816FC3A
-	.string "Ich habe die Familie SIHGERS heraus-\n"
-	.string "gefordert und viermal hintereinander\l"
-	.string "gekämpft... Hinterher war ich kaputt...$"
+	.string "I challenged the WINSTRATE family,\n"
+	.string "but four matches in a row is tough\l"
+	.string "going... They destroyed me.$"
 
 Route111_Text_16FC9C:: @ 816FC9C
 	.string "ROUTE 111\n"
-	.string "{DOWN_ARROW} MALVENFROH CITY$"
+	.string "{0x7A} MAUVILLE CITY$"
 
 Route111_Text_16FCB6:: @ 816FCB6
-	.string "“Die Herzen unserer Familie schlagen im\n"
-	.string "Einklang!”\l"
-	.string "DAS HAUS DER SIHGERS$"
+	.string "“Our family’s hearts beat as one!”\n"
+	.string "THE WINSTRATE’S HOUSE$"
 
 Route111_Text_16FCEF:: @ 816FCEF
 	.string "ROUTE 111\n"
-	.string "{LEFT_ARROW} ROUTE 112$"
+	.string "{0x7B} ROUTE 112$"
 
 Route111_Text_16FD05:: @ 816FD05
 	.string "ROUTE 111\n"
-	.string "{LEFT_ARROW} ROUTE 113$"
+	.string "{0x7B} ROUTE 113$"
 
 Route111_Text_16FD1B:: @ 816FD1B
-	.string "HOTEL DER ALTEN DAME\n"
-	.string "“Komm, ruh deine müden Knochen aus.”$"
+	.string "OLD LADY’S REST STOP\n"
+	.string "“Come in and rest your tired bones.”$"
 
 Route111_Text_16FD55:: @ 816FD55
-	.string "TIPPS für TRAINER\p"
-	.string "Ein Indikator für die Stärke eines\n"
-	.string "POKéMON ist der SP. ANG. Das steht\l"
-	.string "für “SPEZIAL ANGRIFF”.\p"
-	.string "SP. VER. steht für “SPEZIAL\n"
-	.string "VERTEIDIGUNG”.$"
+	.string "TRAINER TIPS\p"
+	.string "One of the indicators of a POKéMON’s\n"
+	.string "powerfulness is SP. ATK. It stands for\l"
+	.string "“SPECIAL ATTACK.”\p"
+	.string "Likewise, SP. DEF stands for “SPECIAL\n"
+	.string "DEFENSE.”$"

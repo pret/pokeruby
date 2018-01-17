@@ -1,11 +1,9 @@
 ShoalCave_LowTideLowerRoom_Text_198200:: @ 8198200
-	.string "Die eisige Kälte in dieser Gegend ist\n"
-	.string "ein gewaltiges Hindernis beim Training.\p"
-	.string "Aber wenn man sich konzentriert, kann\n"
-	.string "man doch gewinnen!\p"
-	.string "Mit diesem FOKUS-BAND kannst du dich\n"
-	.string "besser konzentrieren und der Kälte\l"
-	.string "widerstehen.$"
+	.string "The penetrating cold around these\n"
+	.string "parts is an impediment to training.\p"
+	.string "But with focus, one can overcome!\p"
+	.string "With this FOCUS BAND, buckle down and\n"
+	.string "withstand the cold!$"
 
 ShoalCave_LowTideLowerRoom_Text_1982A2:: @ 81982A2
-	.string "Alles hängt von der Konzentration ab!$"
+	.string "Everything starts with focus!$"

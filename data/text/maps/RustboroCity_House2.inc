@@ -1,9 +1,9 @@
 RustboroCity_House2_Text_18532D:: @ 818532D
-	.string "Die TRAINERSCHULE ist hervorragend.\p"
-	.string "Wenn du dort lernst, kannst du später\n"
-	.string "sogar ARENALEITER werden.$"
+	.string "The TRAINER’S SCHOOL is excellent.\p"
+	.string "If you study there, you could even\n"
+	.string "become a GYM LEADER.$"
 
 RustboroCity_House2_Text_185388:: @ 8185388
-	.string "FELIZIA, die ARENALEITERIN, weiß\n"
-	.string "wirklich eine Menge über POKéMON.\p"
-	.string "Und sie ist sehr stark!$"
+	.string "ROXANNE, the GYM LEADER, really knows\n"
+	.string "a lot about POKéMON.\p"
+	.string "She’s really strong, too!$"

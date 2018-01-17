@@ -1,7 +1,7 @@
 	.align 2
 gContestOpponents:: @ 83C9408
 	.2byte 286 @ SPECIES_ID
-	.string "FIFFI$", 11 @ POKE_NICKNAME
+	.string "POOCHY$", 11 @ POKE_NICKNAME
 	.string "JIMMY$", 8 @ TRAINER_NAME
 	.byte 7 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -12,8 +12,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 288 @ SPECIES_ID
-	.string "ZIGGY$", 11 @ POKE_NICKNAME
-	.string "KLARA$", 8 @ TRAINER_NAME
+	.string "ZIGOON$", 11 @ POKE_NICKNAME
+	.string "EDITH$", 8 @ TRAINER_NAME
 	.byte 8 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x82000fff @ FLAGS
@@ -23,8 +23,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 294 @ SPECIES_ID
-	.string "DOXU$", 11 @ POKE_NICKNAME
-	.string "KARLO$", 8 @ TRAINER_NAME
+	.string "DUSTER$", 11 @ POKE_NICKNAME
+	.string "EVAN$", 8 @ TRAINER_NAME
 	.byte 11 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x21000fff @ FLAGS
@@ -34,8 +34,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 298 @ SPECIES_ID
-	.string "SAMINI$", 11 @ POKE_NICKNAME
-	.string "TRUDI$", 8 @ TRAINER_NAME
+	.string "DOTS$", 11 @ POKE_NICKNAME
+	.string "KELSEY$", 8 @ TRAINER_NAME
 	.byte 16 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x20800fff @ FLAGS
@@ -45,8 +45,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 304 @ SPECIES_ID
-	.string "SCHWALBI$", 11 @ POKE_NICKNAME
-	.string "HELENA$", 8 @ TRAINER_NAME
+	.string "TATAY$", 11 @ POKE_NICKNAME
+	.string "MADISON$", 8 @ TRAINER_NAME
 	.byte 18 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80400fff @ FLAGS
@@ -56,8 +56,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 301 @ SPECIES_ID
-	.string "CADINJA$", 11 @ POKE_NICKNAME
-	.string "WILLI$", 8 @ TRAINER_NAME
+	.string "NINDA$", 11 @ POKE_NICKNAME
+	.string "RAYMOND$", 8 @ TRAINER_NAME
 	.byte 44 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x10200fff @ FLAGS
@@ -67,8 +67,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 306 @ SPECIES_ID
-	.string "KNILZLI$", 11 @ POKE_NICKNAME
-	.string "HARTMUT$", 8 @ TRAINER_NAME
+	.string "SMISH$", 11 @ POKE_NICKNAME
+	.string "GRANT$", 8 @ TRAINER_NAME
 	.byte 35 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x20100fff @ FLAGS
@@ -78,8 +78,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 309 @ SPECIES_ID
-	.string "WINGI$", 11 @ POKE_NICKNAME
-	.string "CLAUDIA$", 8 @ TRAINER_NAME
+	.string "GULWEE$", 11 @ POKE_NICKNAME
+	.string "PAIGE$", 8 @ TRAINER_NAME
 	.byte 26 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08080fff @ FLAGS
@@ -89,7 +89,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 364 @ SPECIES_ID
-	.string "BLUMPI$", 11 @ POKE_NICKNAME
+	.string "SLOKTH$", 11 @ POKE_NICKNAME
 	.string "ALEC$", 8 @ TRAINER_NAME
 	.byte 31 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -100,8 +100,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 370 @ SPECIES_ID
-	.string "FLURMI$", 11 @ POKE_NICKNAME
-	.string "SILKE$", 8 @ TRAINER_NAME
+	.string "WHIRIS$", 11 @ POKE_NICKNAME
+	.string "SYDNEY$", 8 @ TRAINER_NAME
 	.byte 47 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80020fff @ FLAGS
@@ -112,7 +112,7 @@ gContestOpponents:: @ 83C9408
 
 	.2byte 335 @ SPECIES_ID
 	.string "MAHITA$", 11 @ POKE_NICKNAME
-	.string "PEER$", 8 @ TRAINER_NAME
+	.string "MORRIS$", 8 @ TRAINER_NAME
 	.byte 38 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08010fff @ FLAGS
@@ -122,8 +122,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 382 @ SPECIES_ID
-	.string "STOLLI$", 11 @ POKE_NICKNAME
-	.string "MARIA$", 8 @ TRAINER_NAME
+	.string "RONAR$", 11 @ POKE_NICKNAME
+	.string "MARIAH$", 8 @ TRAINER_NAME
 	.byte 10 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08008fff @ FLAGS
@@ -133,8 +133,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 41 @ SPECIES_ID
-	.string "BLUTBAT$", 11 @ POKE_NICKNAME
-	.string "RUDOLF$", 8 @ TRAINER_NAME
+	.string "ZUTZU$", 11 @ POKE_NICKNAME
+	.string "RUSSELL$", 8 @ TRAINER_NAME
 	.byte 33 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x90004fff @ FLAGS
@@ -144,7 +144,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 367 @ SPECIES_ID
-	.string "SCHLUPPI$", 11 @ POKE_NICKNAME
+	.string "GULIN$", 11 @ POKE_NICKNAME
 	.string "MELANIE$", 8 @ TRAINER_NAME
 	.byte 6 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -155,8 +155,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 337 @ SPECIES_ID
-	.string "FRIZZZEL$", 11 @ POKE_NICKNAME
-	.string "BERTRAM$", 8 @ TRAINER_NAME
+	.string "RIKELEC$", 11 @ POKE_NICKNAME
+	.string "CHANCE$", 8 @ TRAINER_NAME
 	.byte 15 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80001fff @ FLAGS
@@ -166,7 +166,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 363 @ SPECIES_ID
-	.string "ROSALI$", 11 @ POKE_NICKNAME
+	.string "RELIA$", 11 @ POKE_NICKNAME
 	.string "KARINA$", 8 @ TRAINER_NAME
 	.byte 32 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -177,7 +177,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 84 @ SPECIES_ID
-	.string "DOLDI$", 11 @ POKE_NICKNAME
+	.string "DUODO$", 11 @ POKE_NICKNAME
 	.string "BOBBY$", 8 @ TRAINER_NAME
 	.byte 51 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -188,8 +188,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 332 @ SPECIES_ID
-	.string "KNACKI$", 11 @ POKE_NICKNAME
-	.string "JUDITH$", 8 @ TRAINER_NAME
+	.string "PINCHIN$", 11 @ POKE_NICKNAME
+	.string "CLAIRE$", 8 @ TRAINER_NAME
 	.byte 8 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x81000fff @ FLAGS
@@ -199,8 +199,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 344 @ SPECIES_ID
-	.string "KOTUS$", 11 @ POKE_NICKNAME
-	.string "HELMUT$", 8 @ TRAINER_NAME
+	.string "NACAC$", 11 @ POKE_NICKNAME
+	.string "WILLIE$", 8 @ TRAINER_NAME
 	.byte 11 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80800fff @ FLAGS
@@ -210,8 +210,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 27 @ SPECIES_ID
-	.string "SADAN$", 11 @ POKE_NICKNAME
-	.string "BRITTA$", 8 @ TRAINER_NAME
+	.string "SHRAND$", 11 @ POKE_NICKNAME
+	.string "CASSIDY$", 8 @ TRAINER_NAME
 	.byte 18 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x10400fff @ FLAGS
@@ -221,8 +221,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 318 @ SPECIES_ID
-	.string "PUPPIBAL$", 11 @ POKE_NICKNAME
-	.string "TORBEN$", 8 @ TRAINER_NAME
+	.string "TOYBAL$", 11 @ POKE_NICKNAME
+	.string "MORGAN$", 8 @ TRAINER_NAME
 	.byte 44 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08200fff @ FLAGS
@@ -232,8 +232,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 339 @ SPECIES_ID
-	.string "CLAMAUK$", 11 @ POKE_NICKNAME
-	.string "BIANKA$", 8 @ TRAINER_NAME
+	.string "LENUM$", 11 @ POKE_NICKNAME
+	.string "SUMMER$", 8 @ TRAINER_NAME
 	.byte 26 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x10100fff @ FLAGS
@@ -243,8 +243,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 308 @ SPECIES_ID
-	.string "SPIRRWIRR$", 11 @ POKE_NICKNAME
-	.string "ALEX$", 8 @ TRAINER_NAME
+	.string "SPININ$", 11 @ POKE_NICKNAME
+	.string "MILES$", 8 @ TRAINER_NAME
 	.byte 31 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80080fff @ FLAGS
@@ -254,8 +254,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 358 @ SPECIES_ID
-	.string "BLUPPF$", 11 @ POKE_NICKNAME
-	.string "SABINE$", 8 @ TRAINER_NAME
+	.string "SWABY$", 11 @ POKE_NICKNAME
+	.string "AUDREY$", 8 @ TRAINER_NAME
 	.byte 47 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0xa0040fff @ FLAGS
@@ -265,8 +265,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 289 @ SPECIES_ID
-	.string "DAKSIRAD$", 11 @ POKE_NICKNAME
-	.string "AUGUST$", 8 @ TRAINER_NAME
+	.string "NOONE$", 11 @ POKE_NICKNAME
+	.string "AVERY$", 8 @ TRAINER_NAME
 	.byte 38 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80020fff @ FLAGS
@@ -276,7 +276,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 317 @ SPECIES_ID
-	.string "KECLI$", 11 @ POKE_NICKNAME
+	.string "KECON$", 11 @ POKE_NICKNAME
 	.string "ARIANA$", 8 @ TRAINER_NAME
 	.byte 10 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -287,8 +287,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 118 @ SPECIES_ID
-	.string "GOLDINCHEN$", 11 @ POKE_NICKNAME
-	.string "TONI$", 8 @ TRAINER_NAME
+	.string "GOLDEN$", 11 @ POKE_NICKNAME
+	.string "ASHTON$", 8 @ TRAINER_NAME
 	.byte 33 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80008fff @ FLAGS
@@ -298,8 +298,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 323 @ SPECIES_ID
-	.string "SCHMERBSE$", 11 @ POKE_NICKNAME
-	.string "SUSI$", 8 @ TRAINER_NAME
+	.string "BOBOACH$", 11 @ POKE_NICKNAME
+	.string "SANDRA$", 8 @ TRAINER_NAME
 	.byte 6 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80004fff @ FLAGS
@@ -309,8 +309,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 227 @ SPECIES_ID
-	.string "KREBSILI$", 11 @ POKE_NICKNAME
-	.string "CLEMENS$", 8 @ TRAINER_NAME
+	.string "CORPY$", 11 @ POKE_NICKNAME
+	.string "CARSON$", 8 @ TRAINER_NAME
 	.byte 35 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08002fff @ FLAGS
@@ -320,8 +320,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 295 @ SPECIES_ID
-	.string "URLOTZO$", 11 @ POKE_NICKNAME
-	.string "KATRIN$", 8 @ TRAINER_NAME
+	.string "TADO$", 11 @ POKE_NICKNAME
+	.string "KATRINA$", 8 @ TRAINER_NAME
 	.byte 16 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x08001fff @ FLAGS
@@ -331,8 +331,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 383 @ SPECIES_ID
-	.string "STROLLAK$", 11 @ POKE_NICKNAME
-	.string "ACHIM$", 8 @ TRAINER_NAME
+	.string "LAIRN$", 11 @ POKE_NICKNAME
+	.string "RONNIE$", 8 @ TRAINER_NAME
 	.byte 55 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x84000fff @ FLAGS
@@ -342,8 +342,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 299 @ SPECIES_ID
-	.string "BLASNI$", 11 @ POKE_NICKNAME
-	.string "GABI$", 8 @ TRAINER_NAME
+	.string "NUZLE$", 11 @ POKE_NICKNAME
+	.string "CLAUDIA$", 8 @ TRAINER_NAME
 	.byte 8 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x82000fff @ FLAGS
@@ -353,8 +353,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 302 @ SPECIES_ID
-	.string "ASKINJA$", 11 @ POKE_NICKNAME
-	.string "ROLF$", 8 @ TRAINER_NAME
+	.string "NINAS$", 11 @ POKE_NICKNAME
+	.string "ELIAS$", 8 @ TRAINER_NAME
 	.byte 11 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x81000fff @ FLAGS
@@ -364,8 +364,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 305 @ SPECIES_ID
-	.string "SCHWALLO$", 11 @ POKE_NICKNAME
-	.string "ELSE$", 8 @ TRAINER_NAME
+	.string "WELOW$", 11 @ POKE_NICKNAME
+	.string "JADE$", 8 @ TRAINER_NAME
 	.byte 18 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80800fff @ FLAGS
@@ -375,8 +375,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 287 @ SPECIES_ID
-	.string "JÄNAGI$", 11 @ POKE_NICKNAME
-	.string "FRANK$", 8 @ TRAINER_NAME
+	.string "YENA$", 11 @ POKE_NICKNAME
+	.string "FRANCIS$", 8 @ TRAINER_NAME
 	.byte 44 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80400fff @ FLAGS
@@ -386,8 +386,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 292 @ SPECIES_ID
-	.string "PAPINILLI$", 11 @ POKE_NICKNAME
-	.string "ANNA$", 8 @ TRAINER_NAME
+	.string "TIFLY$", 11 @ POKE_NICKNAME
+	.string "ALISHA$", 8 @ TRAINER_NAME
 	.byte 26 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80200fff @ FLAGS
@@ -397,8 +397,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 119 @ SPECIES_ID
-	.string "KINGOLA$", 11 @ POKE_NICKNAME
-	.string "KONRAD$", 8 @ TRAINER_NAME
+	.string "KINGSEA$", 11 @ POKE_NICKNAME
+	.string "SAUL$", 8 @ TRAINER_NAME
 	.byte 31 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80100fff @ FLAGS
@@ -408,8 +408,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 340 @ SPECIES_ID
-	.string "ERUPTAM$", 11 @ POKE_NICKNAME
-	.string "LUISE$", 8 @ TRAINER_NAME
+	.string "ERUPAM$", 11 @ POKE_NICKNAME
+	.string "FELICIA$", 8 @ TRAINER_NAME
 	.byte 47 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80080fff @ FLAGS
@@ -419,8 +419,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 66 @ SPECIES_ID
-	.string "OLLOMA$", 11 @ POKE_NICKNAME
-	.string "MICHAEL$", 8 @ TRAINER_NAME
+	.string "CHOPAM$", 11 @ POKE_NICKNAME
+	.string "EMILIO$", 8 @ TRAINER_NAME
 	.byte 38 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80040fff @ FLAGS
@@ -430,8 +430,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 296 @ SPECIES_ID
-	.string "OMBRE$", 11 @ POKE_NICKNAME
-	.string "ANIKA$", 8 @ TRAINER_NAME
+	.string "LOMBE$", 11 @ POKE_NICKNAME
+	.string "KARLA$", 8 @ TRAINER_NAME
 	.byte 10 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80020fff @ FLAGS
@@ -441,8 +441,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 379 @ SPECIES_ID
-	.string "PITISVI$", 11 @ POKE_NICKNAME
-	.string "DETLEF$", 8 @ TRAINER_NAME
+	.string "VIPES$", 11 @ POKE_NICKNAME
+	.string "DARRYL$", 8 @ TRAINER_NAME
 	.byte 33 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80010fff @ FLAGS
@@ -452,8 +452,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 313 @ SPECIES_ID
-	.string "WAILA$", 11 @ POKE_NICKNAME
-	.string "XENIA$", 8 @ TRAINER_NAME
+	.string "MERAIL$", 11 @ POKE_NICKNAME
+	.string "SELENA$", 8 @ TRAINER_NAME
 	.byte 22 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80008fff @ FLAGS
@@ -463,8 +463,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 129 @ SPECIES_ID
-	.string "KARDORPA$", 11 @ POKE_NICKNAME
-	.string "FLORIAN$", 8 @ TRAINER_NAME
+	.string "KARPAG$", 11 @ POKE_NICKNAME
+	.string "NOEL$", 8 @ TRAINER_NAME
 	.byte 35 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80004fff @ FLAGS
@@ -474,8 +474,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 348 @ SPECIES_ID
-	.string "LUNA$", 11 @ POKE_NICKNAME
-	.string "DIANA$", 8 @ TRAINER_NAME
+	.string "LUNONE$", 11 @ POKE_NICKNAME
+	.string "LACEY$", 8 @ TRAINER_NAME
 	.byte 16 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80002fff @ FLAGS
@@ -485,8 +485,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 310 @ SPECIES_ID
-	.string "PEPE$", 11 @ POKE_NICKNAME
-	.string "LUTZ$", 8 @ TRAINER_NAME
+	.string "PELIPE$", 11 @ POKE_NICKNAME
+	.string "CORBIN$", 8 @ TRAINER_NAME
 	.byte 39 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80001fff @ FLAGS
@@ -496,8 +496,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 130 @ SPECIES_ID
-	.string "GARADI$", 11 @ POKE_NICKNAME
-	.string "JASMIN$", 8 @ TRAINER_NAME
+	.string "RADOS$", 11 @ POKE_NICKNAME
+	.string "JUSTINA$", 8 @ TRAINER_NAME
 	.byte 32 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x84000fff @ FLAGS
@@ -507,8 +507,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 371 @ SPECIES_ID
-	.string "KRAKEEL$", 11 @ POKE_NICKNAME
-	.string "GERT$", 8 @ TRAINER_NAME
+	.string "LOUDERD$", 11 @ POKE_NICKNAME
+	.string "RALPH$", 8 @ TRAINER_NAME
 	.byte 21 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x82000fff @ FLAGS
@@ -518,7 +518,7 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 316 @ SPECIES_ID
-	.string "ENEKOTO$", 11 @ POKE_NICKNAME
+	.string "CATTED$", 11 @ POKE_NICKNAME
 	.string "ROSA$", 8 @ TRAINER_NAME
 	.byte 8 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
@@ -529,8 +529,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 366 @ SPECIES_ID
-	.string "ASSIMAX$", 11 @ POKE_NICKNAME
-	.string "KURT$", 8 @ TRAINER_NAME
+	.string "SLING$", 11 @ POKE_NICKNAME
+	.string "KEATON$", 8 @ TRAINER_NAME
 	.byte 11 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80800fff @ FLAGS
@@ -540,8 +540,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 359 @ SPECIES_ID
-	.string "RIA$", 11 @ POKE_NICKNAME
-	.string "SONJA$", 8 @ TRAINER_NAME
+	.string "TARIA$", 11 @ POKE_NICKNAME
+	.string "MAYRA$", 8 @ TRAINER_NAME
 	.byte 18 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80400fff @ FLAGS
@@ -551,8 +551,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 393 @ SPECIES_ID
-	.string "EXUVINJA$", 11 @ POKE_NICKNAME
-	.string "SÖNKE$", 8 @ TRAINER_NAME
+	.string "SHEDJA$", 11 @ POKE_NICKNAME
+	.string "LAMAR$", 8 @ TRAINER_NAME
 	.byte 15 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80200fff @ FLAGS
@@ -562,8 +562,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 45 @ SPECIES_ID
-	.string "BLUMIEFT$", 11 @ POKE_NICKNAME
-	.string "MAGDA$", 8 @ TRAINER_NAME
+	.string "PLUMILE$", 11 @ POKE_NICKNAME
+	.string "AUBREY$", 8 @ TRAINER_NAME
 	.byte 26 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80100fff @ FLAGS
@@ -573,8 +573,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 361 @ SPECIES_ID
-	.string "WANDELBOLD$", 11 @ POKE_NICKNAME
-	.string "SASCHA$", 8 @ TRAINER_NAME
+	.string "KULLUSK$", 11 @ POKE_NICKNAME
+	.string "NIGEL$", 8 @ TRAINER_NAME
 	.byte 31 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80080fff @ FLAGS
@@ -584,8 +584,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 178 @ SPECIES_ID
-	.string "TUMANI$", 11 @ POKE_NICKNAME
-	.string "MILA$", 8 @ TRAINER_NAME
+	.string "UTAN$", 11 @ POKE_NICKNAME
+	.string "CAMILLE$", 8 @ TRAINER_NAME
 	.byte 47 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80040fff @ FLAGS
@@ -595,8 +595,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 331 @ SPECIES_ID
-	.string "HAITODO$", 11 @ POKE_NICKNAME
-	.string "KNUT$", 8 @ TRAINER_NAME
+	.string "PEDOS$", 11 @ POKE_NICKNAME
+	.string "DEON$", 8 @ TRAINER_NAME
 	.byte 38 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80020fff @ FLAGS
@@ -606,8 +606,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 325 @ SPECIES_ID
-	.string "KUSSLIEB$", 11 @ POKE_NICKNAME
-	.string "INCA$", 8 @ TRAINER_NAME
+	.string "LUVIS$", 11 @ POKE_NICKNAME
+	.string "JANELLE$", 8 @ TRAINER_NAME
 	.byte 10 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80010fff @ FLAGS
@@ -617,8 +617,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 214 @ SPECIES_ID
-	.string "SKARAB$", 11 @ POKE_NICKNAME
-	.string "FELIX$", 8 @ TRAINER_NAME
+	.string "HEROSS$", 11 @ POKE_NICKNAME
+	.string "HEATH$", 8 @ TRAINER_NAME
 	.byte 33 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80008fff @ FLAGS
@@ -628,8 +628,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 101 @ SPECIES_ID
-	.string "LEKBAL$", 11 @ POKE_NICKNAME
-	.string "DEBORA$", 8 @ TRAINER_NAME
+	.string "RODLECT$", 11 @ POKE_NICKNAME
+	.string "SASHA$", 8 @ TRAINER_NAME
 	.byte 6 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80004fff @ FLAGS
@@ -639,8 +639,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 172 @ SPECIES_ID
-	.string "DEIBEL$", 11 @ POKE_NICKNAME
-	.string "BORIS$", 8 @ TRAINER_NAME
+	.string "CHUPY$", 11 @ POKE_NICKNAME
+	.string "FRANKIE$", 8 @ TRAINER_NAME
 	.byte 35 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80002fff @ FLAGS
@@ -650,8 +650,8 @@ gContestOpponents:: @ 83C9408
 	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x0000ffff @ RESERVED
 
 	.2byte 202 @ SPECIES_ID
-	.string "WOHINGENAU$", 11 @ POKE_NICKNAME
-	.string "DELIA$", 8 @ TRAINER_NAME
+	.string "WOBET$", 11 @ POKE_NICKNAME
+	.string "HELEN$", 8 @ TRAINER_NAME
 	.byte 16 @ TRAINER_SPRITE
 	.2byte 0x0000 @padding
 	.4byte 0x80001fff @ FLAGS

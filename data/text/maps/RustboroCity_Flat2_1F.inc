@@ -1,6 +1,6 @@
 RustboroCity_Flat2_1F_Text_1853DD:: @ 81853DD
-	.string "Die Angestellten der DEVON CORPORATION\n"
-	.string "leben in diesem Haus.$"
+	.string "DEVON CORPORATION’s workers live in\n"
+	.string "this building.$"
 
 RustboroCity_Flat2_1F_Text_185410:: @ 8185410
-	.string "ENECO: Gyaaaah!$"
+	.string "SKITTY: Gyaaaah!$"

@@ -1,28 +1,27 @@
 Route112_Text_16FDF0:: @ 816FDF0
-	.string "Grummel...\p"
-	.string "Wo bleiben nur die anderen, die in LAUB-\n"
-	.string "WECHSELFELD waren? Sie sind spät dran.$"
+	.string "Grumble...\p"
+	.string "What happened to the others who went\n"
+	.string "to FALLARBOR? They’re late...$"
 
 Route112_Text_16FE3E:: @ 816FE3E
-	.string "Grummel...\p"
-	.string "Ich möchte auch mit der SEILBAHN nach\n"
-	.string "oben auf den Gipfel fahren...$"
+	.string "Grumble...\p"
+	.string "I’d like to ride the CABLE CAR to the\n"
+	.string "top, too..$"
 
 Route112_Text_16FE7A:: @ 816FE7A
-	.string "Ich würde gerne nach MALVENFROH CITY,\n"
-	.string "aber wenn ich diese Stufen hinunter-\p"
-	.string "gehe, komme ich kaum wieder nach\n"
-	.string "BAD LAVASTADT.$"
+	.string "Eh, I’d like to get to MAUVILLE, but if\n"
+	.string "I went down these ledges, it’d be no\l"
+	.string "easy matter to get back to LAVARIDGE.$"
 
 Route112_Text_16FEED:: @ 816FEED
-	.string "SEILBAHN ZUM SCHLOTBERG\n"
-	.string "“Ein kurzer Weg nach {UP_ARROW}!”$"
+	.string "MT. CHIMNEY CABLE CAR\n"
+	.string "“A short walk {0x79} way!”$"
 
 Route112_Text_16FF19:: @ 816FF19
-	.string "SCHLOTBERG\p"
-	.string "“BAD LAVASTADT oder den Gipfel\n"
-	.string "erreichen Sie mit der SEILBAHN.”$"
+	.string "MT. CHIMNEY\p"
+	.string "“For LAVARIDGE TOWN or the summit,\n"
+	.string "please take the CABLE CAR.”$"
 
 Route112_Text_16FF64:: @ 816FF64
 	.string "ROUTE 112\n"
-	.string "{LEFT_ARROW} BAD LAVASTADT$"
+	.string "{0x7B} LAVARIDGE TOWN$"

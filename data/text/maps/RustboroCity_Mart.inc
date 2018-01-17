@@ -1,18 +1,17 @@
 RustboroCity_Mart_Text_184C76:: @ 8184C76
-	.string "Ich habe einige PARA-HEILER und\n"
-	.string "etwas GEGENGIFT gekauft.\p"
-	.string "Nur für den Fall, dass mir ein\n"
-	.string "KNILZ im BLÜTENBURGWALD\l"
-	.string "über den Weg läuft.$"
+	.string "I’m buying some PARLYZ HEALS and\n"
+	.string "ANTIDOTES.\p"
+	.string "Just in case I run into SHROOMISH\n"
+	.string "in PETALBURG WOODS.$"
 
 RustboroCity_Mart_Text_184CD8:: @ 8184CD8
-	.string "Mein POKéMON hat sich entwickelt.\n"
-	.string "Es hat jetzt sehr viele KP.\p"
-	.string "Ich sollte nun einige SUPERTRÄNKE\n"
-	.string "anstelle der normalen TRÄNKE kaufen.$"
+	.string "My POKéMON evolved.\n"
+	.string "It has a lot of HP now.\p"
+	.string "I should buy SUPER POTIONS for it\n"
+	.string "instead of ordinary POTIONS.$"
 
 RustboroCity_Mart_Text_184D43:: @ 8184D43
-	.string "Ich habe ein FLUCHTSEIL besorgt, falls\n"
-	.string "ich mich mal in einer Höhle verlaufe.\p"
-	.string "Damit kann ich zurück zum Eingang der\n"
-	.string "Höhle gelangen.$"
+	.string "I’m getting an ESCAPE ROPE just in\n"
+	.string "case I get lost in a cave.\p"
+	.string "I just need to use it to get back to the\n"
+	.string "entrance.$"

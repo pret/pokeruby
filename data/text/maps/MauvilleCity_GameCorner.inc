@@ -1,152 +1,147 @@
 MauvilleCity_GameCorner_Text_181C35:: @ 8181C35
-	.string "Willkommen in unserer SPIELHALLE.$"
+	.string "This is MAUVILLE GAME CORNER.$"
 
 MauvilleCity_GameCorner_Text_181C53:: @ 8181C53
-	.string "Okay, du möchtest MÜNZEN für die\n"
-	.string "Spiele haben?\p"
-	.string "Aber du hast keinen MÜNZKORB für die\n"
-	.string "MÜNZEN.$"
+	.string "Okay, you wanted some COINS for\n"
+	.string "the games?\p"
+	.string "But you don’t have a COIN CASE for\n"
+	.string "stowing the COINS.$"
 
 MauvilleCity_GameCorner_Text_181CB4:: @ 8181CB4
-	.string "Suchst du nach MÜNZEN?\p"
-	.string "Das macht ¥1000 für 50 MÜNZEN.\n"
-	.string "Möchtest du welche haben?$"
+	.string "Were you looking for COINS?\p"
+	.string "It’s ¥1000 for 50 COINS.\n"
+	.string "Would you like some?$"
 
 MauvilleCity_GameCorner_Text_181CFE:: @ 8181CFE
-	.string "Vielen Dank!\n"
-	.string "Hier sind deine MÜNZEN!$"
+	.string "Thank you very much!\n"
+	.string "Here are your COINS!$"
 
 MauvilleCity_GameCorner_Text_181D28:: @ 8181D28
-	.string "Ähm... Es scheint, du hast nicht\n"
-	.string "genügend Geld dabei...$"
+	.string "Um... You don’t appear to have\n"
+	.string "enough money...$"
 
 MauvilleCity_GameCorner_Text_181D57:: @ 8181D57
 	.string "Oh?\n"
-	.string "Dein MÜNZKORB ist voll.$"
+	.string "Your COIN CASE is full.$"
 
 MauvilleCity_GameCorner_Text_181D73:: @ 8181D73
-	.string "Oh... Dann brauchst du keine MÜNZEN?\n"
-	.string "Viel Glück bei deinem Abenteuer!$"
+	.string "Oh... You don’t need COINS, then?\n"
+	.string "Good luck on your adventure!$"
 
 UnknownString_8181DB2: @ 8181DB2
-	.string "Das macht ¥1000 für 50 MÜNZEN.\n"
-	.string "Möchtest du welche haben?$"
+	.string "It’s ¥1,000 for 50 COINS.\n"
+	.string "Would you like some?$"
 
 MauvilleCity_GameCorner_Text_181DE1:: @ 8181DE1
-	.string "Willkommen.\p"
-	.string "Hier kannst du deine MÜNZEN gegen\n"
-	.string "Preise eintauschen.$"
+	.string "Welcome.\p"
+	.string "You can exchange your COINS for\n"
+	.string "prizes here.$"
 
 MauvilleCity_GameCorner_Text_181E17:: @ 8181E17
-	.string "Welchen Preis hättest du gerne?$"
+	.string "Which prize would you like?$"
 
 MauvilleCity_GameCorner_Text_181E33:: @ 8181E33
-	.string "Du möchtest also {STR_VAR_1}?$"
+	.string "So your choice is {STR_VAR_1}?$"
 
 MauvilleCity_GameCorner_Text_181E49:: @ 8181E49
-	.string "Danke!\n"
-	.string "Wir senden das auf deinen PC.$"
+	.string "Thank you!\n"
+	.string "We’ll send it to your PC at home.$"
 
 MauvilleCity_GameCorner_Text_181E76:: @ 8181E76
-	.string "Du hast nicht genügend MÜNZEN.$"
+	.string "You don’t have enough COINS.$"
 
 UnknownString_8181E93: @ 8181E93
-	.string "Du hast nicht genügend Platz, um\n"
-	.string "{STR_VAR_1} zu lagern.$"
+	.string "There isn’t any room available for\n"
+	.string "placing {STR_VAR_1}.$"
 
 MauvilleCity_GameCorner_Text_181EC2:: @ 8181EC2
-	.string "Oh, wirklich?\n"
-	.string "Du musst einige MÜNZEN sparen, bevor\l"
-	.string "du wiederkommst.$"
+	.string "Oh, is that so? \n"
+	.string "You need to save some COINS before\l"
+	.string "coming back here.$"
 
 MauvilleCity_GameCorner_Text_181F08:: @ 8181F08
-	.string "Bitte schön!$"
+	.string "Here you go!$"
 
 UnknownString_8181F15: @ 8181F15
-	.string "Oh, du kannst nicht mehr tragen.$"
+	.string "Oh, you can’t carry any more than that.$"
 
 MauvilleCity_GameCorner_Text_181F3D:: @ 8181F3D
-	.string "Ich habe mich vertan und zweimal die\n"
-	.string "gleiche PUPPE genommen.\p"
-	.string "Möchtest du eine davon haben?$"
+	.string "I made a mistake and got two of the\n"
+	.string "same DOLLS.\p"
+	.string "Would you like one of them?$"
 
 MauvilleCity_GameCorner_Text_181F89:: @ 8181F89
-	.string "Bitte schön!$"
+	.string "There you go!$"
 
 MauvilleCity_GameCorner_Text_181F97:: @ 8181F97
-	.string "Bitte?\n"
-	.string "Du möchtest sie, aber nicht jetzt???$"
+	.string "Huh?\n"
+	.string "You want it, but not right now?$"
 
 MauvilleCity_GameCorner_Text_181FBC:: @ 8181FBC
-	.string "Oh, sei doch nicht so negativ drauf!\n"
-	.string "Du kannst sie wirklich gerne haben!$"
+	.string "Oh, don’t be so negative!\n"
+	.string "You can have this!$"
 
 MauvilleCity_GameCorner_Text_181FE9:: @ 8181FE9
-	.string "Es gibt einen Preis, den ich haben\n"
-	.string "möchte, aber ich kann den Jackpot\l"
-	.string "nicht knacken.$"
+	.string "There’s a prize I want, but I can’t win\n"
+	.string "the jackpot.$"
 
 MauvilleCity_GameCorner_Text_18201E:: @ 818201E
-	.string "Hey, Kindchen, wenn du hier spielen\n"
-	.string "willst, brauchst du einen MÜNZKORB.\p"
-	.string "Ich glaube, die junge Dame nebenan hat\n"
-	.string "einen. Besuche sie mal!$"
+	.string "Hey, kid, if you want to play here,\n"
+	.string "you need a COIN CASE.\p"
+	.string "I think the young lady next door\n"
+	.string "had one. Go see her!$"
 
 MauvilleCity_GameCorner_Text_18208E:: @ 818208E
-	.string "Mein Glück wird nicht immer anhalten.\n"
-	.string "Das ist zu viel für mich.\l"
-	.string "Hier, nimm die MÜNZEN!$"
+	.string "My luck can only last so long.\n"
+	.string "This is too much for me.\l"
+	.string "Here, take some COINS!$"
 
 MauvilleCity_GameCorner_Text_1820DD:: @ 81820DD
-	.string "Immer wenn ich in MALVENFROH CITY bin,\n"
-	.string "gehe ich in die SPIELHALLE.\p"
-	.string "MALVENFROH CITY bringt mir einfach\n"
-	.string "Glück.$"
+	.string "MAUVILLE has something for\n"
+	.string "everyone.\p"
+	.string "For me, it’s the GAME CORNER.$"
 
 MauvilleCity_GameCorner_Text_182120:: @ 8182120
-	.string "Beim ROULETTE gibt es verschiedene\n"
-	.string "Einsatzhöhen.\p"
-	.string "Überprüf deine MÜNZEN, bevor du dich\n"
-	.string "für einen Tisch entscheidest.$"
+	.string "The ROULETTE tables have different\n"
+	.string "rates.\p"
+	.string "Check your COINS if you’re going to\n"
+	.string "pick a table.$"
 
 MauvilleCity_GameCorner_Text_18217C:: @ 818217C
-	.string "Hier kann man leicht die Zeit vergessen.\n"
-	.string "Ich sollte wieder an die Arbeit gehen.$"
+	.string "It’s easy to lose track of time in here. \n"
+	.string "I should get back to work.$"
 
 MauvilleCity_GameCorner_Text_1821C1:: @ 81821C1
-	.string "MÜNZEN werden gebraucht, um hier in der\n"
-	.string "SPIELHALLE spielen zu können.$"
+	.string "COINS are needed to play here in the\n"
+	.string "GAME CORNER.$"
 
 MauvilleCity_GameCorner_Text_1821F3:: @ 81821F3
-	.string "Dieses ROULETTE-Dingens...\n"
-	.string "Es ist ziemlich anstrengend.\p"
-	.string "Ich versuche, zu gewinnen. Aber ich\n"
-	.string "verliere immer. Doch ich gebe nicht auf.$"
+	.string "This ROULETTE thing...\n"
+	.string "It’s rather demanding.\p"
+	.string "Win or lose, it’s only by luck.$"
 
 MauvilleCity_GameCorner_Text_182241:: @ 8182241
-	.string "Bis zu drei MÜNZEN können an den EIN-\n"
-	.string "ARMIGEN BANDITEN eingesetzt werden.\p"
-	.string "Je mehr Münzen du einsetzt, desto\n"
-	.string "höher ist deine Chance auf den Jackpot.$"
+	.string "Up to three COINS can be used to play\n"
+	.string "the SLOTS.$"
 
 MauvilleCity_GameCorner_Text_182272:: @ 8182272
-	.string "Kannst du es genau bei “7” stoppen?\p"
-	.string "Wenn es bei “7” stoppt,\n"
-	.string "während ein REEL TIME gespielt wird,\l"
-	.string "erhältst du Extra-MÜNZEN.$"
+	.string "It’s very difficult to make it stop\n"
+	.string "right on “7.”\p"
+	.string "If it stops on “7” during the REEL TIME\n"
+	.string "bonus game, you’ll receive extra COINS.$"
 
 MauvilleCity_GameCorner_Text_1822F4:: @ 81822F4
-	.string "Ich kann dir einige nützliche Tipps zu\n"
-	.string "den EINARMIGEN BANDITEN geben.\p"
-	.string "Je mehr Blitze du anhältst, desto größer\n"
-	.string "die Chance auf ein REEL TIME, eine\l"
-	.string "Glücksrunde!\p"
-	.string "In einem Spiel mit fünf möglichen\n"
-	.string "Glücksrunden...\p"
-	.string "Ist es möglich, vier reguläre Boni und\n"
-	.string "dann einen Big Bonus zu gewinnen.\p"
-	.string "Der Big Bonus bringt 660 MÜNZEN,\n"
-	.string "aber der ist sehr schwer zu gewinnen.$"
+	.string "Here’s some information for you\n"
+	.string "about the SLOTS.\p"
+	.string "The more lightning bolts you stock, the\n"
+	.string "more REEL TIME chances you get.\p"
+	.string "In a game with the maximum five REEL\n"
+	.string "TIME chances...\p"
+	.string "It is possible to receive four regular\n"
+	.string "bonuses, then a big bonus.\p"
+	.string "The big bonus is 660 COINS, but it’s\n"
+	.string "very difficult to get.$"
 
 MauvilleCity_GameCorner_Text_182420:: @ 8182420
-	.string "Du kannst ohne MÜNZKORB nicht spielen.$"
+	.string "You can’t play if you don’t have a\n"
+	.string "COIN CASE.$"

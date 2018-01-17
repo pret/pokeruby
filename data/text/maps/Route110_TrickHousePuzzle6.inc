@@ -1,43 +1,42 @@
 Route110_TrickHousePuzzle6_Text_19DC87:: @ 819DC87
-	.string "Als ich von dem seltsamen Haus hörte,\n"
-	.string "musste ich mir das sofort ansehen.$"
+	.string "When I heard there was a strange\n"
+	.string "house, I had to check it out.$"
 
 Route110_TrickHousePuzzle6_Text_19DCC6:: @ 819DCC6
-	.string "Ich habe einen starken TRAINER\n"
-	.string "entdeckt!$"
+	.string "I’ve discovered a tough TRAINER!$"
 
 Route110_TrickHousePuzzle6_Text_19DCE7:: @ 819DCE7
-	.string "Es hat viel Spaß gemacht, diesen Ort zu\n"
-	.string "erforschen.\p"
-	.string "Eine Herausforderung, die ich gerne\n"
-	.string "wiederholen möchte!$"
+	.string "I’m sure having a good time checking\n"
+	.string "this place out.\p"
+	.string "It’s a challenge I’ve found worth\n"
+	.string "repeating!$"
 
 Route110_TrickHousePuzzle6_Text_19DD49:: @ 819DD49
-	.string "Vielleicht kann mein VOGEL-POKéMON\n"
-	.string "über die Mauer fliegen...$"
+	.string "Maybe I could get my BIRD POKéMON\n"
+	.string "to fly over the wall...$"
 
 Route110_TrickHousePuzzle6_Text_19DD83:: @ 819DD83
-	.string "Uaah! Ich hab’s vermasselt!$"
+	.string "Gwaaah! I blew it!$"
 
 Route110_TrickHousePuzzle6_Text_19DD96:: @ 819DD96
-	.string "Hihihihi... Ich habe doch nur verloren,\n"
-	.string "weil ich bescheißen wollte.$"
+	.string "Ehehehe... I guess I lost because I\n"
+	.string "was trying to cheat.$"
 
 Route110_TrickHousePuzzle6_Text_19DDCF:: @ 819DDCF
-	.string "Mir wird ganz schwindelig von diesen\n"
-	.string "rotierenden Türen... Huuh...$"
+	.string "I’m getting dizzy from these rotating\n"
+	.string "doors...$"
 
 Route110_TrickHousePuzzle6_Text_19DDFE:: @ 819DDFE
-	.string "Bei mir dreht sich alles. Mir wird übel.\n"
-	.string "Ich kann nicht mehr...$"
+	.string "Everything’s spinning around and\n"
+	.string "around. I can’t take this anymore...$"
 
 Route110_TrickHousePuzzle6_Text_19DE44:: @ 819DE44
-	.string "Dir scheint das gar nichts auszumachen.\n"
-	.string "Oder ist das nur Show?$"
+	.string "You don’t seem to be affected at all.\n"
+	.string "Or do you have your poker face on?$"
 
 UnknownString_819DE8D: @ 819DE8D
-	.string "{PLAYER} hat den geheimen Code auf die\n"
-	.string "Tür geschrieben.\p"
-	.string "“RÄTSELMEISTER ist riesig.”\n"
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is huggable.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "Das Schloss geht klickend auf.$"
+	.string "The lock clicked open!$"

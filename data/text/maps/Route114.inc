@@ -1,24 +1,23 @@
 Route114_Text_170154:: @ 8170154
-	.string "Alles was mein POKéMON von sich gibt, ist\n"
-	.string "BRÜLLER... Niemand wagt sich nah heran...\p"
-	.string "Seufz... Wenn du magst, dann nimm mir\n"
-	.string "diese Bürde... äh, diese TM ab...$"
+	.string "All my POKéMON does is ROAR...\n"
+	.string "No one dares to come near me...\p"
+	.string "Sigh... If you would, please take\n"
+	.string "this TM away...$"
 
 Route114_Text_1701C5:: @ 81701C5
-	.string "TM05 enthält BRÜLLER.\n"
-	.string "Ein BRÜLLER schlägt POKéMON in\l"
-	.string "die Flucht.$"
+	.string "TM05 contains ROAR.\n"
+	.string "A ROAR sends POKéMON scurrying.$"
 
 Route114_Text_1701F9:: @ 81701F9
 	.string "Bow! Bowwow!$"
 
 Route114_Text_170206:: @ 8170206
-	.string "METEORFÄLLE\n"
-	.string "HIER ENTLANG NACH METAROST CITY$"
+	.string "METEOR FALLS\n"
+	.string "RUSTBORO CITY THROUGH HERE$"
 
 Route114_Text_17022E:: @ 817022E
-	.string "FOSSILMANIAC\n"
-	.string "“Fossilien gesucht!”$"
+	.string "FOSSIL MANIAC’S HOUSE\n"
+	.string "“Fossils gratefully accepted!”$"
 
 Route114_Text_170263:: @ 8170263
-	.string "LANETTES HAUS$"
+	.string "LANETTE’S HOUSE$"

@@ -1,11 +1,10 @@
 Route110_SeasideCyclingRoadNorthEntrance_Text_19E406:: @ 819E406
-	.string "Auf dem RADWEG kannst du so\n"
-	.string "schnell fahren, wie du willst.\p"
-	.string "Schnell fahren macht Spaß, pass aber\n"
-	.string "auf, dass du mit niemandem\l"
-	.string "zusammenstößt.$"
+	.string "On CYCLING ROAD, you can go all out\n"
+	.string "and cycle as fast as you’d like.\p"
+	.string "It feels great to go that fast, but try\n"
+	.string "not to crash into anyone!$"
 
 UnknownString_819E48D: @ 819E48D
-	.string "Tut mir Leid, aber auf dem RADWEG\n"
-	.string "sind Fußgänger nicht gestattet.\p"
-	.string "Das ist gefährlich. Bring dein RAD mit...$"
+	.string "Sorry, you can’t walk on CYCLING\n"
+	.string "ROAD. It’s too dangerous.\p"
+	.string "Please come back with a BIKE.$"

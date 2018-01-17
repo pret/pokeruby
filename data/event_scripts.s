@@ -863,20 +863,19 @@ EventScript_15F573:
 	.include "data/text/maps/Route110_TrickHouseEntrance.inc"
 
 Route110_TrickHousePuzzle1_Text_19C1B8:: @ 819C1B8
-	.string "{PLAYER} findet eine Schriftrolle.$"
+	.string "{PLAYER} found a scroll.$"
 
 Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
-	.string "{PLAYER} lernt den geheimen Code, der\n"
-	.string "auf der Schriftrolle steht, auswendig.$"
+	.string "{PLAYER} memorized the secret code\n"
+	.string "written on the scroll.$"
 
 Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
-	.string "Dort steht ein geheimer Code.$"
+	.string "A secret code is written on it.$"
 
 UnknownString_819C21F: @ 819C21F
-	.string "Die Tür ist verschlossen.\p"
-	.string "Bei näherer Betrachtung findet sich\n"
-	.string "ein Hinweis. “Schreibe hier den\l"
-	.string "geheimen Code auf.”$"
+	.string "The door is locked.\p"
+	.string "...On closer inspection, this is written\n"
+	.string "on it: “Write the secret code here.”$"
 
 	.include "data/text/maps/Route110_TrickHouseEnd.inc"
 	.include "data/text/maps/Route110_TrickHousePuzzle1.inc"
@@ -929,11 +928,6 @@ Std_5:
 @ 819F805
 	return
 
-S_DoSaveDialog:: @ 819F806
-S_DoSaveDialog:: @ 819F806
-S_DoSaveDialog:: @ 819F806
-S_DoSaveDialog:: @ 819F806
-S_DoSaveDialog:: @ 819F806
 S_DoSaveDialog:: @ 819F806
 	special ScrSpecial_DoSaveDialog
 	waitstate
@@ -1439,12 +1433,12 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	faceplayer
 	msgbox gText_NurseJoy_Welcome, MSGBOX_YESNO
 	compare RESULT, YES
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FD7C
+	goto_if_eq do_heal_party
 	compare RESULT, NO
-	goto_if_eq OldaleTown_PokemonCenter_1F_EventScript_19FDC7
+	goto_if_eq dont_heal_party
 	end
 
-OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
+do_heal_party:: @ 819FD7C
 	incrementgamestat GAME_STAT_USED_POKECENTER
 	message gText_NurseJoy_OkayIllTakeYourPokemon
 	waitmessage
@@ -1468,7 +1462,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FDB0:: @ 819FDB0
 	waitmessage
 	return
 
-OldaleTown_PokemonCenter_1F_EventScript_19FDC7:: @ 819FDC7
+dont_heal_party:: @ 819FDC7
 	message gText_NurseJoy_WeHopeToSeeYouAgain
 	waitmessage
 	return
@@ -2939,72 +2933,74 @@ BlueprintScript:: @ 81A0891
 	end
 
 SampleMessage1:: @ 81A089A
-	.string "Dies ist Beispiel 1.\p"
-	.string "Willkommen in der Welt von\n"
+	.string "This is sample message 1.\p"
+	.string "Welcome to the world of\n"
 	.string "POKéMON AGB!\l"
-	.string "Wir hoffen, dir gefällt es hier!$"
+	.string "We hope you enjoy this!$"
 
 SampleMessage2:: @ 81A08F1
-	.string "Dies ist Beispiel 2.\p"
-	.string "Willkommen in der Welt von\n"
+	.string "This is sample message 2.\p"
+	.string "Welcome to the world of\n"
 	.string "POKéMON AGB!\l"
-	.string "Wir hoffen, dir gefällt es hier!$"
+	.string "We hope you enjoy this!$"
 
 SampleMessage3:: @ 81A0948
-	.string "Dies ist Beispiel 3.\p"
-	.string "Willkommen in der Welt von\n"
+	.string "This is sample message 3.\p"
+	.string "Welcome to the world of\n"
 	.string "POKéMON AGB!\l"
-	.string "Wir hoffen, dir gefällt es hier!$"
+	.string "We hope you enjoy this!$"
 
 UnusedMixRecordsPromptText: @ 81A099F
-	.string "Möchtest du deine Rekorde mit\n"
-	.string "anderen TRAINERN austauschen?$"
+	.string "Would you like to mix records with other\n"
+	.string "TRAINERS?$"
 
 UnusedMixRecordsSeeYouAgainText: @ 81A09D2
-	.string "Komm bald wieder!$"
+	.string "We hope to see you again!$"
 
 UnknownString_81A09EC: @ 81A09EC
-	.string "{PLAYER} schaltet den PC ein.$"
+	.string "{PLAYER} booted up the PC.$"
 
 gPCText_WhichPCShouldBeAccessed:: @ 81A0A01
-	.string "Zugriff auf wessen PC?$"
+	.string "Which PC should be accessed?$"
 
 UnknownString_81A0A1E: @ 81A0A1E
-	.string "Verbindung zu jemandes PC hergestellt.$"
+	.string "Accessed someone’s PC.$"
 
 UnknownString_81A0A35: @ 81A0A35
-	.string "POKéMON-Lagerungs-System geöffnet.$"
+	.string "POKéMON Storage System opened.$"
 
 UnknownString_81A0A54: @ 81A0A54
-	.string "Verbindung mit PC von {PLAYER}.$"
+	.string "Accessed {PLAYER}’s PC.$"
 
 UnknownString_81A0A66: @ 81A0A66
-	.string "Verbindung zu LANETTES PC hergestellt.$"
+	.string "Accessed LANETTE’s PC.$"
 
 gText_NurseJoy_Welcome:: @ 81A0A7D
-	.string "Willkommen im POKéMON-CENTER!\p"
-	.string "Wir heilen deine POKéMON und\n"
-	.string "machen sie wieder fit.\p"
-	.string "O.K. Wir benötigen deine POKéMON.$"
+	.string "Hello, and welcome to the POKéMON\n"
+	.string "CENTER.\p"
+	.string "We restore your tired POKéMON to\n"
+	.string "full health.\p"
+	.string "Would you like to rest your POKéMON?$"
 
 gText_NurseJoy_WeHopeToSeeYouAgain:: @ 81A0AFA
-	.string "Komm jederzeit wieder vorbei!$"
+	.string "We hope to see you again!$"
 
 gText_NurseJoy_ThankYouForWaiting:: @ 81A0B14
-	.string "Danke!\p"
-	.string "Deine POKéMON sind wieder topfit!$"
+	.string "Thank you for waiting.\p"
+	.string "We’ve restored your POKéMON to\n"
+	.string "full health.$"
 
 UnknownString_81A0B57: @ 81A0B57
-	.string "Willkommen im POKéMON KABEL-CLUB-\n"
-	.string "HANDELSCENTER.$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "TRADE CENTER.$"
 
 UnknownString_81A0B87: @ 81A0B87
-	.string "Willkommen im POKéMON KABEL-CLUB-\n"
-	.string "KOLOSSEUM.$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "COLOSSEUM.$"
 
 UnknownString_81A0BB4: @ 81A0BB4
-	.string "Willkommen in der POKéMON KABEL-CLUB-\n"
-	.string "ZEITKAPSEL.$"
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "TIME CAPSULE.$"
 
 EverGrandeCity_PokemonLeague_Text_1A0BE4:: @ 81A0BE4
 FallarborTown_Mart_Text_1A0BE4:: @ 81A0BE4
@@ -3025,8 +3021,8 @@ SlateportCity_Mart_Text_1A0BE4:: @ 81A0BE4
 SlateportCity_Text_1A0BE4:: @ 81A0BE4
 SootopolisCity_Mart_Text_1A0BE4:: @ 81A0BE4
 VerdanturfTown_Mart_Text_1A0BE4:: @ 81A0BE4
-	.string "Willkommen!\p"
-	.string "Kann ich dir helfen?$"
+	.string "Welcome!\p"
+	.string "How may I serve you?$"
 
 EverGrandeCity_PokemonLeague_Text_1A0C02:: @ 81A0C02
 FallarborTown_Mart_Text_1A0C02:: @ 81A0C02
@@ -3049,29 +3045,29 @@ SlateportCity_Mart_Text_1A0C02:: @ 81A0C02
 SlateportCity_Text_1A0C02:: @ 81A0C02
 SootopolisCity_Mart_Text_1A0C02:: @ 81A0C02
 VerdanturfTown_Mart_Text_1A0C02:: @ 81A0C02
-	.string "Bitte komm bald wieder!$"
+	.string "Please come again!$"
 
 UnknownString_81A0C15: @ 81A0C15
-	.string "Willkommen!\p"
-	.string "Wir bieten heute Sonderangebote an!$"
+	.string "Welcome!\p"
+	.string "We’re having a discount sale today!$"
 
 Route104_PrettyPetalFlowerShop_Text_1A0C42:: @ 81A0C42
-	.string "{PLAYER}{KUN}, willkommen!\p"
-	.string "Wie kann ich dir behilflich sein?$"
+	.string "{PLAYER}{KUN}, welcome!\p"
+	.string "What can I do for you?$"
 
 Message_ObtainedItem: @ 81A0C68
-	.string "{STR_VAR_2} erhalten!$"
+	.string "Obtained the {STR_VAR_2}.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_1A0C79:: @ 81A0C79
-	.string "Der BEUTEL ist voll...$"
+	.string "The BAG is full...$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C:: @ 81A0C8C
-Message_PutAwayItem: @ 81A0C8C
-	.string "{PLAYER} packt {STR_VAR_2} in die\n"
-	.string "{STR_VAR_3}-TASCHE.$"
+Message_PutAwayItem:
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the {STR_VAR_3} POCKET.$"
 
-Message_FoundOneItem: @ 81A0CB1
-	.string "{PLAYER} hat {STR_VAR_2} gefunden!$"
+Message_FoundOneItem:
+	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 MauvilleCity_GameCorner_Text_1A0CC2:: @ 81A0CC2
 MauvilleCity_Text_1A0CC2:: @ 81A0CC2
@@ -3079,175 +3075,169 @@ MtChimney_Text_1A0CC2:: @ 81A0CC2
 OldaleTown_Text_1A0CC2:: @ 81A0CC2
 Route109_SeashoreHouse_Text_1A0CC2:: @ 81A0CC2
 Message_BagFull:
-	.string "Zu schade!\n"
-	.string "Der BEUTEL ist voll...$"
+	.string "Too bad!\n"
+	.string "The BAG is full...$"
 
 Message_ObtainedDecoration: @ 81A0CDE
-	.string "{STR_VAR_2} erhalten.$"
+	.string "Obtained the {STR_VAR_2}.$"
 
 BattleTower_Lobby_Text_1A0CEF:: @ 81A0CEF
 MauvilleCity_GameCorner_Text_1A0CEF:: @ 81A0CEF
 Route114_LanettesHouse_Text_1A0CEF:: @ 81A0CEF
 SootopolisCity_House6_Text_1A0CEF:: @ 81A0CEF
-	.string "Zu schade! Es ist kein Platz für\n"
-	.string "{STR_VAR_2}...$"
+	.string "Too bad! There’s no room left for\n"
+	.string "another {STR_VAR_2}...$"
 
 Message_TransferredToPC: @ 81A0D1F
-	.string "{STR_VAR_2} wurde auf den PC\n"
-	.string "übertragen.$"
+	.string "The {STR_VAR_2} was transferred\n"
+	.string "to the PC.$"
 
 PetalburgCity_Text_1A0D41:: @ 81A0D41
-	.string "“Ausgewählte Items für Ihren\n"
-	.string "Gebrauch!”\l"
-	.string "POKéMON-SUPERMARKT$"
+	.string "“Selected items for your convenience!”\n"
+	.string "POKéMON MART$"
 
 PetalburgCity_Text_1A0D75:: @ 81A0D75
-	.string "“Erfrische deine müden Partner!”\n"
-	.string "POKéMON-CENTER$"
+	.string "“Rejuvenate your tired partners!”\n"
+	.string "POKéMON CENTER$"
 
 UnknownString_81A0DA6: @ 81A0DA6
-	.string "Hahaha...$"
+	.string "Fufufu...$"
 
 UnknownString_81A0DB0: @ 81A0DB0
-	.string "Murmel... Murmel...$"
+	.string "Mumble, mumble...$"
 
 UnknownString_81A0DC2: @ 81A0DC2
 	.string "Oh!$"
 
 UnknownString_81A0DC6: @ 81A0DC6
-	.string "Heute geschlossen!$"
+	.string "Closed today!$"
 
 UnknownString_81A0DD4: @ 81A0DD4
-	.string "Magst du {STR_VAR_3}-POKéMON, {STR_VAR_1}?$"
+	.string "You like the {STR_VAR_3}-type POKéMON\n"
+	.string "{STR_VAR_1}?$"
 
 UnknownString_81A0DF5: @ 81A0DF5
-	.string "Er enthält ein POKéMON.$"
+	.string "It contains a POKéMON!$"
 
 UnknownString_81A0E0C: @ 81A0E0C
-	.string "Wir treffen Vorbereitungen.$"
+	.string "We’re making preparations.$"
 
 UnknownString_81A0E27: @ 81A0E27
-	.string "Ich bin ein Pseudo-ARENALEITER für\n"
-	.string "Interviews.$"
+	.string "I’m a pseudo-GYM LEADER for\n"
+	.string "interviews.$"
 
 UnknownString_81A0E4F: @ 81A0E4F
-	.string "Bereit für einen Testkampf.$"
+	.string "Ready for a test battle.$"
 
 UnknownString_81A0E68: @ 81A0E68
-	.string "{STR_VAR_1} würde dieses Programm gefallen.\p"
+	.string "{STR_VAR_1} might like this program.\n"
 	.string "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...\p"
-	.string "Ich beeile mich besser!$"
+	.string "Better get going!$"
 
 UnknownString_81A0ED6: @ 81A0ED6
-	.string "Womit soll ich mir die Zeit vertreiben?$"
+	.string "What should I do for fun today?$"
 
 LilycoveCity_DepartmentStoreElevator_Text_1A0EF6:: @ 81A0EF6
-	.string "Willkommen im SEEGRASULB CITY\n"
-	.string "EINKAUFSZENTRUM.\p"
-	.string "In welches Stockwerk möchtest du?$"
+	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
+	.string "Which floor would you like?$"
 
 UnknownString_81A0F38: @ 81A0F38
-	.string "Zum DUELLTURM warpen.$"
+	.string "Warp to BATTLE TOWER.$"
 
 UnknownString_81A0F4E: @ 81A0F4E
-	.string "Nach SEEGRASULB CITY warpen.$"
+	.string "Warp to LILYCOVE.$"
 
 UnknownString_81A0F60: @ 81A0F60
-	.string "Es ist {STR_VAR_1} Uhr.$"
+	.string "The time is {STR_VAR_1}!$"
 
 UnknownString_81A0F70: @ 81A0F70
-	.string "Zugang zur RUHMESHALLE genehmigt.$"
+	.string "The HALL OF FAME will be accessed.$"
 
 Route111_Text_1A0F93:: @ 81A0F93
-	.string "Der Sandsturm ist zu stark.\n"
-	.string "Dagegen kann man nicht angehen!$"
+	.string "The sandstorm is vicious.\n"
+	.string "It’s impossible to keep going.$"
 
 Text_NoRegisteredItem: @ 81A0FCC
-	.string "Ein Basis-Item aus dem BEUTEL kann auf\n"
-	.string "SELECT gelegt werden. Sehr praktisch!$"
+	.string "An item in the BAG can be registered\n"
+	.string "on SELECT for convenience.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
 LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
-	.string "Da ist eine E-Mail von der POKéMON\n"
-	.string "TRAINERSCHULE.\p"
+	.string "There’s an e-mail from POKéMON TRAINER\n"
+	.string "SCHOOL.\p"
 	.string "... ... ... ... ... ...\p"
-	.string "Ein POKéMON kann bis zu vier Attacken\n"
-	.string "lernen.\p"
-	.string "Die Fähigkeiten eines TRAINERS werden\n"
-	.string "durch die Attacken, die er seinen\l"
-	.string "POKéMON beibringt, erprobt.\p"
+	.string "A POKéMON may learn up to four moves.\p"
+	.string "A TRAINER’s expertise is tested on the\n"
+	.string "move sets chosen for POKéMON.\p"
 	.string "... ... ... ... ... ...$"
 
 LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
 LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
-	.string "{PLAYER} schaltet den PC ein.$"
+	.string "{PLAYER} booted up the PC.$"
 
 FallarborTown_ContestLobby_Text_1A10EB:: @ 81A10EB
-	.string "Die Verbindung wurde abgebrochen.$"
+	.string "The link was canceled.$"
 
 MossdeepCity_StevensHouse_Text_1A1102:: @ 81A1102
 RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
-	.string "Möchtest du {STR_VAR_2} einen\n"
-	.string "Kosenamen geben?$"
+	.string "Want to give a nickname to the\n"
+	.string "{STR_VAR_2} you received?$"
 
 fieldPoisonText_PokemonFainted:: @ 81A1132
-	.string "{STR_VAR_1} wurde besiegt...\p"
-	.string "$"
+	.string "{STR_VAR_1} fainted...\p$"
 
 UnknownString_81A1141: @ 81A1141
-	.string "{PLAYER} hat kein kampffähiges POKéMON\n"
-	.string "mehr!\p"
-	.string "{PLAYER} wird ohnmächtig!$"
+	.string "{PLAYER} is out of useable POKéMON!\p"
+	.string "{PLAYER} whited out!$"
 
 SlateportCity_Text_1A116E:: @ 81A116E
-	.string "Kennst du die TM GEHEIMPOWER?\p"
-	.string "In unserer Gruppe mögen alle die TM\n"
-	.string "GEHEIMPOWER.\p"
-	.string "Eines unserer Mitglieder wird sie dir\n"
-	.string "geben. Sag mir, wenn du sie hast.\p"
-	.string "Wir werden dich dann als Mitglied auf-\n"
-	.string "nehmen und dir unter der Hand tolle\l"
-	.string "Sachen verkaufen.$"
+	.string "Do you know the TM SECRET POWER?\p"
+	.string "Our group, we love the TM SECRET\n"
+	.string "POWER.\p"
+	.string "One of our members will give it to you.\n"
+	.string "Come back and show me if you get it.\p"
+	.string "We’ll accept you as a member and sell\n"
+	.string "you good stuff in secrecy.$"
 
 gText_NurseJoy_OkayIllTakeYourPokemon:: @ 81A1245
-	.string "Okay, ich nehme deine POKéMON für einen\n"
-	.string "Moment in meine Obhut.$"
+	.string "Okay, I’ll take your POKéMON for a\n"
+	.string "few seconds.$"
 
 gText_NurseJoy_Pokerus:: @ 81A1275
-	.string "Dein POKéMON scheint von dem\n"
-	.string "POKéRUS befallen zu sein.\p"
-	.string "Über den POKéRUS ist bisher wenig be-\n"
-	.string "kannt, außer dass es Mikroorganismen\l"
-	.string "sind, die POKéMON befallen.\p"
-	.string "Sind deine POKéMON infiziert, wachsen\n"
-	.string "sie besonders gut.$"
+	.string "Your POKéMON may be infected with\n"
+	.string "POKéRUS.\p"
+	.string "Little is known about the POKéRUS\n"
+	.string "except that they are microscopic life-\l"
+	.string "forms that attach to POKéMON.\p"
+	.string "While infected, POKéMON are said to\n"
+	.string "grow exceptionally well.$"
 
 	.include "data/text/surf.inc"
 
 SealedChamber_InnerRoom_Text_1A138B:: @ 81A138B
-	.string "Das hörte sich an, als würde irgendwo\n"
-	.string "eine Tür geöffnet.$"
+	.string "It sounded as if a door opened\n"
+	.string "somewhere far away.$"
 
 AncientTomb_Text_1A13BE:: @ 81A13BE
 DesertRuins_Text_1A13BE:: @ 81A13BE
 IslandCave_Text_1A13BE:: @ 81A13BE
 SealedChamber_OuterRoom_Text_1A13BE:: @ 81A13BE
-	.string "In der Wand ist ein großes Loch.$"
+	.string "There is a big hole in the wall.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A13DF:: @ 81A13DF
-	.string "Tut mir schrecklich Leid. Das KOLOSSEUM\n"
-	.string "wird gerade renoviert.$"
+	.string "I’m terribly sorry. The COLOSSEUM\n"
+	.string "is undergoing adjustments.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A141C:: @ 81A141C
-	.string "Tut mir schrecklich Leid. Das\n"
-	.string "HANDELSCENTER wird gerade renoviert.$"
+	.string "I’m terribly sorry. The TRADE CENTER\n"
+	.string "is undergoing inspections.$"
 
 OldaleTown_PokemonCenter_2F_Text_1A145C:: @ 81A145C
-	.string "Tut mir schrecklich Leid. Hier wird\n"
-	.string "für den STATISTIKTAUSCH renoviert.$"
+	.string "I’m terribly sorry. The RECORD CORNER\n"
+	.string "is under preparation.$"
 
 FallarborTown_House1_Text_1A1498:: @ 81A1498
-	.string "{PLAYER} übergibt\n"
+	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
 Event_NoRegisteredItem:: @ 81A14AF
@@ -3279,865 +3269,325 @@ PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
 Route101_EventScript_1A14DC:: @ 81A14DC
 	return
 
-.if DEBUG
-
-DebugScript_081C1CFE:: @ 81C1CFE
-	setflag 0x804
-	call 0x81C032D
-	end
-
-DebugScript_081C1D07:: @ 81C1D07
-	checkitem ITEM_COIN_CASE, 1
-	compare 0x800d, 1
-	goto_if_eq DebugScript_081C1D1D
-	giveitem ITEM_COIN_CASE, 1
-	end
-
-DebugScript_081C1D1D:: @ 81C1D1D
-	end
-
-DebugScript_081C1D1E:: @ 81C1D1E
-	goto 0x8167646
-
-DebugScript_081C1D23:: @ 81C1D23
-	end
-
-DebugScript_081C1D24:: @ 81C1D24
-	setvar 0x40ba, 1
-	end
-
-DebugScript_081C1D2A:: @ 81C1D2A
-	giveitem ITEM_SS_TICKET, 1
-	goto DebugScript_081C1CFE
-
-DebugScript_081C1D34:: @ 81C1D34
-	end
-
-DebugScript_081C1D35:: @ 81C1D35
-	getpartysize
-	compare 0x800d, 6
-	goto_if_eq DebugScript_081C1D45
-	giveegg SPECIES_KYOGRE
-	end
-
-DebugScript_081C1D45:: @ 81C1D45
-	end
-
-DebugScript_081C1D46:: @ 81C1D46
-	giveitem ITEM_POTION, 99
-	giveitem ITEM_ANTIDOTE, 99
-	giveitem ITEM_BURN_HEAL, 99
-	giveitem ITEM_ICE_HEAL, 99
-	giveitem ITEM_AWAKENING, 99
-	giveitem ITEM_PARALYZE_HEAL, 99
-	giveitem ITEM_FULL_RESTORE, 99
-	giveitem ITEM_MAX_POTION, 99
-	giveitem ITEM_HYPER_POTION, 99
-	giveitem ITEM_SUPER_POTION, 99
-	giveitem ITEM_FULL_HEAL, 99
-	giveitem ITEM_REVIVE, 99
-	giveitem ITEM_MAX_REVIVE, 99
-	giveitem ITEM_FRESH_WATER, 99
-	giveitem ITEM_SODA_POP, 99
-	giveitem ITEM_LEMONADE, 99
-	giveitem ITEM_MOOMOO_MILK, 99
-	giveitem ITEM_ENERGY_POWDER, 99
-	giveitem ITEM_ENERGY_ROOT, 99
-	giveitem ITEM_HEAL_POWDER, 99
-	giveitem ITEM_ORANGE_MAIL, 92
-	giveitem ITEM_RETRO_MAIL, 94
-	giveitem ITEM_POTION, 89
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_ULTRA_BALL, 99
-	giveitem ITEM_GREAT_BALL, 99
-	giveitem ITEM_POKE_BALL, 99
-	giveitem ITEM_NET_BALL, 99
-	giveitem ITEM_DIVE_BALL, 99
-	giveitem ITEM_NEST_BALL, 99
-	giveitem ITEM_REPEAT_BALL, 99
-	giveitem ITEM_TIMER_BALL, 99
-	giveitem ITEM_LUXURY_BALL, 99
-	giveitem ITEM_PREMIER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_MASTER_BALL, 99
-	giveitem ITEM_GREAT_BALL, 79
-	giveitem ITEM_ULTRA_BALL, 84
-	giveitem ITEM_POKE_BALL, 89
-	giveitem ITEM_MASTER_BALL, 74
-	giveitem ITEM_TM01, 99
-	giveitem ITEM_TM02, 99
-	giveitem ITEM_TM03, 99
-	giveitem ITEM_TM04, 99
-	giveitem ITEM_TM05, 99
-	giveitem ITEM_TM06, 99
-	giveitem ITEM_TM07, 99
-	giveitem ITEM_TM08, 99
-	giveitem ITEM_TM09, 99
-	giveitem ITEM_TM10, 99
-	giveitem ITEM_TM11, 99
-	giveitem ITEM_TM12, 99
-	giveitem ITEM_TM13, 99
-	giveitem ITEM_TM14, 99
-	giveitem ITEM_TM15, 99
-	giveitem ITEM_TM16, 99
-	giveitem ITEM_TM17, 99
-	giveitem ITEM_TM18, 99
-	giveitem ITEM_TM19, 99
-	giveitem ITEM_TM20, 99
-	giveitem ITEM_TM21, 99
-	giveitem ITEM_TM22, 99
-	giveitem ITEM_TM23, 99
-	giveitem ITEM_TM24, 99
-	giveitem ITEM_TM25, 99
-	giveitem ITEM_TM26, 99
-	giveitem ITEM_TM27, 99
-	giveitem ITEM_TM28, 99
-	giveitem ITEM_TM29, 99
-	giveitem ITEM_TM30, 99
-	giveitem ITEM_TM31, 99
-	giveitem ITEM_TM32, 99
-	giveitem ITEM_TM33, 99
-	giveitem ITEM_TM34, 99
-	giveitem ITEM_TM35, 99
-	giveitem ITEM_TM36, 99
-	giveitem ITEM_TM37, 99
-	giveitem ITEM_TM38, 99
-	giveitem ITEM_TM39, 99
-	giveitem ITEM_TM40, 99
-	giveitem ITEM_TM41, 99
-	giveitem ITEM_TM42, 99
-	giveitem ITEM_TM43, 99
-	giveitem ITEM_TM44, 99
-	giveitem ITEM_TM45, 99
-	giveitem ITEM_TM46, 99
-	giveitem ITEM_TM47, 99
-	giveitem ITEM_TM48, 99
-	giveitem ITEM_TM49, 99
-	giveitem ITEM_TM50, 99
-	giveitem ITEM_CHERI_BERRY, 200
-	giveitem ITEM_CHERI_BERRY, 200
-	giveitem ITEM_CHERI_BERRY, 200
-	giveitem ITEM_CHERI_BERRY, 200
-	giveitem ITEM_CHERI_BERRY, 199
-	giveitem ITEM_CHESTO_BERRY, 200
-	giveitem ITEM_CHESTO_BERRY, 200
-	giveitem ITEM_CHESTO_BERRY, 200
-	giveitem ITEM_CHESTO_BERRY, 200
-	giveitem ITEM_CHESTO_BERRY, 199
-	giveitem ITEM_PECHA_BERRY, 200
-	giveitem ITEM_PECHA_BERRY, 200
-	giveitem ITEM_PECHA_BERRY, 200
-	giveitem ITEM_PECHA_BERRY, 200
-	giveitem ITEM_PECHA_BERRY, 199
-	giveitem ITEM_RAWST_BERRY, 200
-	giveitem ITEM_RAWST_BERRY, 200
-	giveitem ITEM_RAWST_BERRY, 200
-	giveitem ITEM_RAWST_BERRY, 200
-	giveitem ITEM_RAWST_BERRY, 199
-	giveitem ITEM_ASPEAR_BERRY, 200
-	giveitem ITEM_ASPEAR_BERRY, 200
-	giveitem ITEM_ASPEAR_BERRY, 200
-	giveitem ITEM_ASPEAR_BERRY, 200
-	giveitem ITEM_ASPEAR_BERRY, 199
-	giveitem ITEM_LEPPA_BERRY, 200
-	giveitem ITEM_LEPPA_BERRY, 200
-	giveitem ITEM_LEPPA_BERRY, 200
-	giveitem ITEM_LEPPA_BERRY, 200
-	giveitem ITEM_LEPPA_BERRY, 199
-	giveitem ITEM_ORAN_BERRY, 200
-	giveitem ITEM_ORAN_BERRY, 200
-	giveitem ITEM_ORAN_BERRY, 200
-	giveitem ITEM_ORAN_BERRY, 200
-	giveitem ITEM_ORAN_BERRY, 199
-	giveitem ITEM_PERSIM_BERRY, 200
-	giveitem ITEM_PERSIM_BERRY, 200
-	giveitem ITEM_PERSIM_BERRY, 200
-	giveitem ITEM_PERSIM_BERRY, 200
-	giveitem ITEM_PERSIM_BERRY, 199
-	giveitem ITEM_LUM_BERRY, 200
-	giveitem ITEM_LUM_BERRY, 200
-	giveitem ITEM_LUM_BERRY, 200
-	giveitem ITEM_LUM_BERRY, 200
-	giveitem ITEM_LUM_BERRY, 199
-	giveitem ITEM_SITRUS_BERRY, 200
-	giveitem ITEM_SITRUS_BERRY, 200
-	giveitem ITEM_SITRUS_BERRY, 200
-	giveitem ITEM_SITRUS_BERRY, 200
-	giveitem ITEM_SITRUS_BERRY, 199
-	giveitem ITEM_FIGY_BERRY, 200
-	giveitem ITEM_FIGY_BERRY, 200
-	giveitem ITEM_FIGY_BERRY, 200
-	giveitem ITEM_FIGY_BERRY, 200
-	giveitem ITEM_FIGY_BERRY, 199
-	giveitem ITEM_WIKI_BERRY, 200
-	giveitem ITEM_WIKI_BERRY, 200
-	giveitem ITEM_WIKI_BERRY, 200
-	giveitem ITEM_WIKI_BERRY, 200
-	giveitem ITEM_WIKI_BERRY, 199
-	giveitem ITEM_MAGO_BERRY, 200
-	giveitem ITEM_MAGO_BERRY, 200
-	giveitem ITEM_MAGO_BERRY, 200
-	giveitem ITEM_MAGO_BERRY, 200
-	giveitem ITEM_MAGO_BERRY, 199
-	giveitem ITEM_AGUAV_BERRY, 200
-	giveitem ITEM_AGUAV_BERRY, 200
-	giveitem ITEM_AGUAV_BERRY, 200
-	giveitem ITEM_AGUAV_BERRY, 200
-	giveitem ITEM_AGUAV_BERRY, 199
-	giveitem ITEM_IAPAPA_BERRY, 200
-	giveitem ITEM_IAPAPA_BERRY, 200
-	giveitem ITEM_IAPAPA_BERRY, 200
-	giveitem ITEM_IAPAPA_BERRY, 200
-	giveitem ITEM_IAPAPA_BERRY, 199
-	giveitem ITEM_RAZZ_BERRY, 200
-	giveitem ITEM_RAZZ_BERRY, 200
-	giveitem ITEM_RAZZ_BERRY, 200
-	giveitem ITEM_RAZZ_BERRY, 200
-	giveitem ITEM_RAZZ_BERRY, 199
-	giveitem ITEM_BLUK_BERRY, 200
-	giveitem ITEM_BLUK_BERRY, 200
-	giveitem ITEM_BLUK_BERRY, 200
-	giveitem ITEM_BLUK_BERRY, 200
-	giveitem ITEM_BLUK_BERRY, 199
-	giveitem ITEM_NANAB_BERRY, 200
-	giveitem ITEM_NANAB_BERRY, 200
-	giveitem ITEM_NANAB_BERRY, 200
-	giveitem ITEM_NANAB_BERRY, 200
-	giveitem ITEM_NANAB_BERRY, 199
-	giveitem ITEM_WEPEAR_BERRY, 200
-	giveitem ITEM_WEPEAR_BERRY, 200
-	giveitem ITEM_WEPEAR_BERRY, 200
-	giveitem ITEM_WEPEAR_BERRY, 200
-	giveitem ITEM_WEPEAR_BERRY, 199
-	giveitem ITEM_PINAP_BERRY, 200
-	giveitem ITEM_PINAP_BERRY, 200
-	giveitem ITEM_PINAP_BERRY, 200
-	giveitem ITEM_PINAP_BERRY, 200
-	giveitem ITEM_PINAP_BERRY, 199
-	giveitem ITEM_POMEG_BERRY, 200
-	giveitem ITEM_POMEG_BERRY, 200
-	giveitem ITEM_POMEG_BERRY, 200
-	giveitem ITEM_POMEG_BERRY, 200
-	giveitem ITEM_POMEG_BERRY, 199
-	giveitem ITEM_KELPSY_BERRY, 200
-	giveitem ITEM_KELPSY_BERRY, 200
-	giveitem ITEM_KELPSY_BERRY, 200
-	giveitem ITEM_KELPSY_BERRY, 200
-	giveitem ITEM_KELPSY_BERRY, 199
-	giveitem ITEM_QUALOT_BERRY, 200
-	giveitem ITEM_QUALOT_BERRY, 200
-	giveitem ITEM_QUALOT_BERRY, 200
-	giveitem ITEM_QUALOT_BERRY, 200
-	giveitem ITEM_QUALOT_BERRY, 199
-	giveitem ITEM_HONDEW_BERRY, 200
-	giveitem ITEM_HONDEW_BERRY, 200
-	giveitem ITEM_HONDEW_BERRY, 200
-	giveitem ITEM_HONDEW_BERRY, 200
-	giveitem ITEM_HONDEW_BERRY, 199
-	giveitem ITEM_GREPA_BERRY, 200
-	giveitem ITEM_GREPA_BERRY, 200
-	giveitem ITEM_GREPA_BERRY, 200
-	giveitem ITEM_GREPA_BERRY, 200
-	giveitem ITEM_GREPA_BERRY, 199
-	giveitem ITEM_TAMATO_BERRY, 200
-	giveitem ITEM_TAMATO_BERRY, 200
-	giveitem ITEM_TAMATO_BERRY, 200
-	giveitem ITEM_TAMATO_BERRY, 200
-	giveitem ITEM_TAMATO_BERRY, 199
-	giveitem ITEM_CORNN_BERRY, 200
-	giveitem ITEM_CORNN_BERRY, 200
-	giveitem ITEM_CORNN_BERRY, 200
-	giveitem ITEM_CORNN_BERRY, 200
-	giveitem ITEM_CORNN_BERRY, 199
-	giveitem ITEM_MAGOST_BERRY, 999
-	giveitem ITEM_RABUTA_BERRY, 999
-	giveitem ITEM_NOMEL_BERRY, 999
-	giveitem ITEM_SPELON_BERRY, 999
-	giveitem ITEM_PAMTRE_BERRY, 999
-	giveitem ITEM_WATMEL_BERRY, 999
-	giveitem ITEM_DURIN_BERRY, 999
-	giveitem ITEM_BELUE_BERRY, 999
-	giveitem ITEM_LIECHI_BERRY, 999
-	giveitem ITEM_GANLON_BERRY, 999
-	giveitem ITEM_SALAC_BERRY, 999
-	giveitem ITEM_PETAYA_BERRY, 999
-	giveitem ITEM_APICOT_BERRY, 999
-	giveitem ITEM_LANSAT_BERRY, 999
-	giveitem ITEM_STARF_BERRY, 999
-	giveitem ITEM_ENIGMA_BERRY, 999
-	end
-
-DebugScript_081C221F:: @ 81C221F
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_DESK
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_SMALL_CHAIR
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_PLANT
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_RED_BRICK
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_JUMP_MAT
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_BALL_POSTER
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_DUSKULL_DOLL
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	givedecoration DECOR_KISS_CUSHION
-	end
-
-DebugScript_081C23E2:: @ 81C23E2
-	givecoins 9999
-	end
-
-DebugScript_081C23E6:: @ 81C23E6
-	setflag 0x081
-	setflag 0x071
-	warp MAP_SOOTOPOLIS_CITY, 0xFF, 31, 33
-	waitstate
-	end
-
-DebugScript_081C23F6:: @ 81C23F6
-	takemoney 999999, 0x00
-	end
-
-DebugScript_081C23FD:: @ 81C23FD
-	getpartysize
-	compare 0x800d, 1
-	goto_if_eq DebugScript_081C2436
-	compare 0x800d, 2
-	goto_if_eq 0x81C2445
-	compare 0x800d, 3
-	goto_if_eq 0x81C2454
-	compare 0x800d, 4
-	goto_if_eq 0x81C2463
-	compare 0x800d, 5
-	goto_if_eq 0x81C2472
-	end
-
-DebugScript_081C2436:: @ 81C2436
-	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
-	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
-	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
-	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
-	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
-	end
-
-DebugScript_081C2482:: @ 81C2482
-	getpartysize
-	compare 0x800d, 1
-	goto_if_eq 0x81C24BB
-	compare 0x800d, 2
-	goto_if_eq 0x81C24CA
-	compare 0x800d, 3
-	goto_if_eq 0x81C24D9
-	compare 0x800d, 4
-	goto_if_eq 0x81C24E8
-	compare 0x800d, 5
-	goto_if_eq 0x81C24F7
-	end
-
-DebugScript_081C24BB:: @ 81C24BB
-	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
-	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
-	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
-	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
-	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
-	end
-
-DebugScript_081C2507:: @ 81C2507
-	getpartysize
-	compare 0x800d, 6
-	goto_if_eq DebugScript_081C2517
-	giveegg SPECIES_BARBOACH
-	end
-
-DebugScript_081C2517:: @ 81C2517
-	end
-
-DebugScript_081C2518:: @ 81C2518
-	getpartysize
-	compare 0x800d, 6
-	goto_if_eq DebugScript_081C2528
-	giveegg SPECIES_SHROOMISH
-	end
-
-DebugScript_081C2528:: @ 81C2528
-	end
-
-.endif
-
 	.include "data/scripts/berry_tree.inc"
 	.include "data/text/berry_tree.inc"
 
 UnknownString_81A1948: @ 81A1948
-	.string "Wenn einige Äste herunterhängen, kann\n"
-	.string "man auf den Baum klettern.$"
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.$"
 
 UnknownString_81A197B: @ 81A197B
-	.string "Wenn einige Äste herunterhängen, kann\n"
-	.string "man auf den Baum klettern.\p"
-	.string "Möchtest du GEHEIMPOWER einsetzen?$"
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.\p"
+	.string "Use the SECRET POWER?$"
 
 UnknownString_81A19C4: @ 81A19C4
-	.string "Ein dicker Ast fällt herunter!$"
+	.string "A thick vine dropped down!$"
 
 UnknownString_81A19DF: @ 81A19DF
-	.string "Möchtest du hier deine GEHEIMBASIS\n"
-	.string "einrichten?$"
+	.string "Want to make your SECRET BASE here?$"
 
 UnknownString_81A1A03: @ 81A1A03
-	.string "Dieser Busch kann bewegt werden,\n"
-	.string "so dass man hineinklettern kann.$"
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.$"
 
 UnknownString_81A1A4B: @ 81A1A4B
-	.string "Dieser Busch kann bewegt werden,\n"
-	.string "so dass man hineinklettern kann.\p"
-	.string "Möchtest du GEHEIMPOWER einsetzen?$"
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.\p"
+	.string "Use the SECRET POWER?$"
 
 UnknownString_81A1AA9: @ 81A1AA9
-	.string "Ein kleiner Eingang wird sichtbar.$"
+	.string "Discovered a small entrance!$"
 
 UnknownString_81A1AC6: @ 81A1AC6
-	.string "Möchtest du hier deine GEHEIMBASIS\n"
-	.string "einrichten?$"
+	.string "Want to make your SECRET BASE here?$"
 
 SecretBase_RedCave1_Text_1A1AEA:: @ 81A1AEA
-	.string "Hast du dir schon eine GEHEIMBASIS\n"
-	.string "eingerichtet?\p"
-	.string "Ich bin hier und dort, überall hin-\n"
-	.string "gelaufen, bevor ich mich für diesen\l"
-	.string "Ort entschieden habe.\p"
-	.string "Da du schon mal hier bist... Hast du\n"
-	.string "Lust zu kämpfen?$"
+	.string "Have you made a SECRET BASE already?\p"
+	.string "I went here, there, everywhere before\n"
+	.string "choosing this place.\p"
+	.string "Since you’re already here, how would\n"
+	.string "you like to battle?$"
 
 SecretBase_RedCave1_Text_1A1B83:: @ 81A1B83
 	.string "Okay!\n"
-	.string "Jetzt kommen wir!$"
+	.string "Here we come!$"
 
 SecretBase_RedCave1_Text_1A1B97:: @ 81A1B97
-	.string "Wie? Was? Wo?\n"
-	.string "Du kannst doch nicht...$"
+	.string "Hunh?\n"
+	.string "Oh, you can’t now...$"
 
 UnknownString_81A1BB2:: @ 81A1BB2
-	.string "Ahaaargh! Du bist zu stark für mich! Ich\n"
-	.string "habe verloren, aber verrate das nicht!$"
+	.string "Waaargh! You’re too strong!\n"
+	.string "About me losing... Please keep it secret!$"
 
 SecretBase_RedCave1_Text_1A1BF8:: @ 81A1BF8
-	.string "Was hältst du von meiner GEHEIMBASIS?\n"
-	.string "Komm mich doch morgen wieder besuchen!$"
+	.string "What do you think of my SECRET BASE?\n"
+	.string "Come visit me again tomorrow.$"
 
 SecretBase_RedCave1_Text_1A1C3B:: @ 81A1C3B
-	.string "Hast du dir schon eine GEHEIMBASIS\n"
-	.string "eingerichtet?\p"
-	.string "Ich bin hier und dort, überall hin-\n"
-	.string "gelaufen, bevor ich mich für diesen\l"
-	.string "Ort entschieden habe.\p"
-	.string "Schau dich ruhig in aller Ruhe um.$"
+	.string "Have you made a SECRET BASE already?\p"
+	.string "I went here, there, everywhere before\n"
+	.string "choosing this place.\p"
+	.string "Feel free to hang out!$"
 
 SecretBase_RedCave1_Text_1A1CB2:: @ 81A1CB2
-	.string "Es gibt eine Menge Orte, an denen man\n"
-	.string "eine GEHEIMBASIS einrichten kann.\p"
-	.string "Aber dieser hier gefällt mir am besten.\n"
-	.string "Findest du es nicht auch nett hier?\p"
-	.string "Oh, hast du Lust auf einen Kampf?$"
+	.string "There’re a lot of places where you can\n"
+	.string "make a SECRET BASE.\p"
+	.string "But I like this spot best.\n"
+	.string "Don’t you think it’s nice?\p"
+	.string "Oh, would you like to have a battle?$"
 
 SecretBase_RedCave1_Text_1A1D48:: @ 81A1D48
-	.string "Okay, los geht’s!$"
+	.string "Okay, here goes!$"
 
 SecretBase_RedCave1_Text_1A1D59:: @ 81A1D59
 	.string "Oh...\n"
-	.string "Du hast gerade keine Zeit.$"
+	.string "You can’t now, okay.$"
 
 UnknownString_81A1D74:: @ 81A1D74
-	.string "Hmm... Das ist unsere Niederlage...\n"
-	.string "Aber erzähl das bloß nicht weiter!\l"
-	.string "Das ist ein streng geheimes Geheimnis!$"
+	.string "Hmmm... It’s our loss...\n"
+	.string "But don’t tell anyone!\l"
+	.string "It’s a confidential secret!$"
 
 SecretBase_RedCave1_Text_1A1DC0:: @ 81A1DC0
-	.string "Wenn du wieder mal in der Nähe bist,\n"
-	.string "komm mich doch besuchen!$"
+	.string "If you’re in this area again, I hope\n"
+	.string "you’ll visit me.$"
 
 SecretBase_RedCave1_Text_1A1DF6:: @ 81A1DF6
-	.string "Es gibt eine Menge Orte, an denen man\n"
-	.string "eine GEHEIMBASIS einrichten kann.\p"
-	.string "Aber dieser hier gefällt mir am besten.\n"
-	.string "Findest du es nicht auch nett hier?$"
+	.string "There’re a lot of places where you can\n"
+	.string "make a SECRET BASE.\p"
+	.string "But I like this spot best.\n"
+	.string "Don’t you think it’s nice?$"
 
 SecretBase_RedCave1_Text_1A1E67:: @ 81A1E67
-	.string "Dies ist ein beliebter Platz.\n"
-	.string "Er ist eigentlich immer besetzt.\p"
-	.string "Ach, du wolltest dich hier auch\n"
-	.string "häuslich niederlassen?\p"
-	.string "Ich sag dir was: Du kannst den Platz\n"
-	.string "haben, wenn du mich besiegen kannst.$"
+	.string "This is a popular spot.\n"
+	.string "It’s always taken.\p"
+	.string "Oh! Were you thinking about taking this\n"
+	.string "spot, too?\p"
+	.string "I’ll tell you what, you can have this\n"
+	.string "spot if you can beat me.$"
 
 SecretBase_RedCave1_Text_1A1F04:: @ 81A1F04
-	.string "Okay! Ich werde meine\n"
-	.string "GEHEIMBASIS verteidigen!$"
+	.string "Okay!\n"
+	.string "I’m going to defend my SECRET BASE!$"
 
 SecretBase_RedCave1_Text_1A1F2E:: @ 81A1F2E
-	.string "Was? Stimmt das? Du hast gar\n"
-	.string "kein Interesse an diesem Platz?!?$"
+	.string "Hunh? Is that right?\n"
+	.string "You’re not interested in this spot?$"
 
 UnknownString_81A1F67:: @ 81A1F67
-	.string "Ich kann nicht mehr!\n"
-	.string "Ich gebe mich geschlagen!$"
+	.string "I can’t keep going!\n"
+	.string "I surrender!$"
 
 SecretBase_RedCave1_Text_1A1F88:: @ 81A1F88
-	.string "Okay, wenn ich eines Tages von hier\n"
-	.string "fortziehe, kannst du den Platz haben.$"
+	.string "Okay, when I move one day, this place\n"
+	.string "will be yours!$"
 
 SecretBase_RedCave1_Text_1A1FBD:: @ 81A1FBD
-	.string "Dies ist ein beliebter Platz.\n"
-	.string "Er ist eigentlich immer besetzt.\p"
-	.string "Ich habe ewig gewartet, bis er wieder\n"
-	.string "frei wurde. Endlich ist es soweit!$"
+	.string "This is a popular spot.\n"
+	.string "It’s always taken.\p"
+	.string "I waited a long time for it to open.\n"
+	.string "I finally got to use it!$"
 
 SecretBase_RedCave1_Text_1A2026:: @ 81A2026
-	.string "Willkommen in meinem POKéMON-LABOR.\p"
-	.string "Ich forsche, indem ich im Geheimen\n"
-	.string "kämpfe.\p"
-	.string "Möchtest du sehen, wie stark ich bin?$"
+	.string "Welcome to my POKéMON LAB.\p"
+	.string "I carry out research on battling in\n"
+	.string "secrecy.\p"
+	.string "Would you like to see how strong I am?$"
 
 SecretBase_RedCave1_Text_1A2095:: @ 81A2095
-	.string "Das war ja wohl nichts!$"
+	.string "I’m going to go all out!$"
 
 SecretBase_RedCave1_Text_1A20AE:: @ 81A20AE
 	.string "Oh.\n"
-	.string "Ein anderes Mal vielleicht...$"
+	.string "Some other time, then!$"
 
 UnknownString_81A20C9:: @ 81A20C9
-	.string "Hm... Ich muss noch viel lernen.\n"
-	.string "Ich muss fleißiger studieren.$"
+	.string "Hmm... I’ve still got lots to learn.\n"
+	.string "I have to study some more.$"
 
 SecretBase_RedCave1_Text_1A2109:: @ 81A2109
-	.string "Danke, dass du mit mir gekämpft hast.\n"
-	.string "Komm doch bitte morgen wieder.$"
+	.string "Thanks for battling with me.\n"
+	.string "Please come back again tomorrow.$"
 
 SecretBase_RedCave1_Text_1A2147:: @ 81A2147
-	.string "Willkommen in meinem POKéMON-LABOR.\p"
-	.string "Ich forsche, indem ich im Geheimen\n"
-	.string "kämpfe.$"
+	.string "Welcome to my POKéMON LAB.\p"
+	.string "I carry out research on battling in\n"
+	.string "secrecy.$"
 
 SecretBase_RedCave1_Text_1A218F:: @ 81A218F
-	.string "Ein großes Anwesen ist natürlich auch\n"
-	.string "ganz nett, aber hier ist es schöner.\p"
-	.string "Viele Leute kommen mich besuchen.\p"
-	.string "So. Wie wäre es mit einem Kampf?$"
+	.string "A big mansion is nice, but I like this\n"
+	.string "sort of place more.\p"
+	.string "I like it because all kinds of people\n"
+	.string "come visit me.\p"
+	.string "So, how would you like a battle?$"
 
 SecretBase_RedCave1_Text_1A2220:: @ 81A2220
-	.string "Genauso muss es laufen!$"
+	.string "That’s the way!$"
 
 SecretBase_RedCave1_Text_1A2230:: @ 81A2230
-	.string "Wenn du bereit bist, sag Bescheid.$"
+	.string "When you’re ready, give me a shout!$"
 
 UnknownString_81A2254:: @ 81A2254
-	.string "Ooch! Ich hab’s vergeigt!\n"
-	.string "Aber es hat sehr viel Spaß gemacht!$"
+	.string "Aww! Done in!\n"
+	.string "But it’s still fun to battle!$"
 
 SecretBase_RedCave1_Text_1A2280:: @ 81A2280
-	.string "Egal. Ich sollte mir auf jeden Fall einige\n"
-	.string "Dekorationen und Möbel zulegen.\p"
-	.string "Ich möchte, dass sich auch andere in\n"
-	.string "meiner GEHEIMBASIS wohl fühlen.$"
+	.string "Well, anyway, I should go buy some\n"
+	.string "decorations and furniture.\p"
+	.string "I want my SECRET BASE to be a place\n"
+	.string "other people can enjoy.$"
 
 SecretBase_RedCave1_Text_1A22FA:: @ 81A22FA
-	.string "Ein großes Anwesen ist natürlich auch\n"
-	.string "ganz nett, aber hier ist es schöner.\p"
-	.string "Viele Leute kommen mich besuchen.$"
+	.string "A big mansion is nice, but I like this\n"
+	.string "sort of place more.\p"
+	.string "I like it because all kinds of people\n"
+	.string "come visit me.$"
 
 SecretBase_RedCave1_Text_1A236A:: @ 81A236A
-	.string "Ich liebe es, Dekorationen und Möbel\n"
-	.string "zu kaufen!!!\p"
-	.string "Ich liebe es genauso, POKéMON aufzu-\n"
-	.string "ziehen!\p"
-	.string "Wärest du so nett, mit meinen\n"
-	.string "POKéMON zu kämpfen?$"
+	.string "I simply adore shopping for decorations\n"
+	.string "and furniture.\p"
+	.string "I also love raising POKéMON just\n"
+	.string "as much.\p"
+	.string "If you would be so kind, will you battle\n"
+	.string "with my POKéMON?$"
 
 SecretBase_RedCave1_Text_1A2405:: @ 81A2405
-	.string "Danke schön.\n"
-	.string "Bist du bereit?$"
+	.string "Thank you.\n"
+	.string "Shall we begin?$"
 
 SecretBase_RedCave1_Text_1A2420:: @ 81A2420
 	.string "Oh.\n"
-	.string "Was für eine Enttäuschung.$"
+	.string "How disappointing...$"
 
 UnknownString_81A2439:: @ 81A2439
-	.string "Ich kapituliere...$"
+	.string "I concede...$"
 
 SecretBase_RedCave1_Text_1A2446:: @ 81A2446
-	.string "Das war vielleicht ein Spaß! Und nun\n"
-	.string "sollte ich mich dem Einkaufen widmen.$"
+	.string "That was all in good fun!\n"
+	.string "I should go enjoy shopping now.$"
 
 SecretBase_RedCave1_Text_1A2480:: @ 81A2480
-	.string "Ich liebe es, Dekorationen und Möbel\n"
-	.string "zu kaufen!!!\p"
-	.string "Ich liebe es genauso, POKéMON aufzu-\n"
-	.string "ziehen!$"
+	.string "I simply adore shopping for decorations\n"
+	.string "and furniture.\p"
+	.string "I also love raising POKéMON just\n"
+	.string "as much.$"
 
 SecretBase_RedCave1_Text_1A24E1:: @ 81A24E1
-	.string "Einige Leute richten ihre GEHEIMBASIS\n"
-	.string "an gut versteckten Orten ein.\l"
-	.string "Wollen sie sich nicht mehr sehen lassen?\p"
-	.string "Da du mich gefunden hast, lass uns\n"
-	.string "doch gleich mal kämpfen.$"
+	.string "Some people make their SECRET BASES in\n"
+	.string "hard-to-find places.\l"
+	.string "Do they want to just lie low?\p"
+	.string "But since you found me, how about we\n"
+	.string "have a battle?$"
 
 SecretBase_RedCave1_Text_1A256F:: @ 81A256F
-	.string "Ich bin nicht einfach zu besiegen!$"
+	.string "I’m not going down easily!$"
 
 SecretBase_RedCave1_Text_1A258A:: @ 81A258A
-	.string "Oh. Sag bloß, du bist müde von der Suche\n"
-	.string "nach diesem Platz?$"
+	.string "Oh... Are you maybe tired from searching\n"
+	.string "for this place?$"
 
 UnknownString_81A25C3:: @ 81A25C3
-	.string "Ich bin untergegangen...$"
+	.string "I went down...$"
 
 SecretBase_RedCave1_Text_1A25D2:: @ 81A25D2
-	.string "Wo ist deine GEHEIMBASIS?\n"
-	.string "Ich sollte dich dort mal besuchen.$"
+	.string "Where’s your SECRET BASE?\n"
+	.string "I should go visit you there.$"
 
 SecretBase_RedCave1_Text_1A2609:: @ 81A2609
-	.string "Einige Leute richten ihre GEHEIMBASIS\n"
-	.string "an gut versteckten Orten ein.\l"
-	.string "Wollen sie sich nicht mehr sehen lassen?$"
+	.string "Some people make their SECRET BASES in\n"
+	.string "hard-to-find places.\l"
+	.string "Do they want to just lie low?$"
 
 SecretBase_RedCave1_Text_1A2663:: @ 81A2663
-	.string "Einige Leute haben mir erzählt, dass man\n"
-	.string "auf verschiedene Arten an Deko-\l"
-	.string "rationen kommen kann.\p"
-	.string "Wir sollten einen Wettbewerb veran-\n"
-	.string "stalten, wer die schönsten Dinge hat.\p"
-	.string "Aber zuerst lass uns kämpfen.$"
+	.string "People have told me that you can get\n"
+	.string "decorations in several ways.\p"
+	.string "We should have a race to see who can\n"
+	.string "get nicer decorations and furniture!\p"
+	.string "In the meantime, want to battle?$"
 
 SecretBase_RedCave1_Text_1A2710:: @ 81A2710
-	.string "Das ist meine GEHEIMBASIS.\n"
-	.string "Ich kann hier gar nicht verlieren!$"
+	.string "This is my SECRET BASE.\n"
+	.string "I can’t lose!$"
 
 SecretBase_RedCave1_Text_1A2736:: @ 81A2736
-	.string "Ich kämpfe jederzeit mit dir.$"
+	.string "I’ll battle with you anytime.$"
 
 UnknownString_81A2754:: @ 81A2754
-	.string "Wie?\n"
-	.string "Ich habe doch verloren?$"
+	.string "Huh?\n"
+	.string "Did I just lose?$"
 
 SecretBase_RedCave1_Text_1A276A:: @ 81A276A
-	.string "Ich werde den Wettbewerb um die\n"
-	.string "schönsten Dekorationen nicht ver-\l"
-	.string "lieren. Überzeuge dich selbst!$"
+	.string "I won’t lose at collecting decorations.\n"
+	.string "Come visit again!$"
 
 SecretBase_RedCave1_Text_1A27A4:: @ 81A27A4
-	.string "Einige Leute haben mir erzählt, dass man\n"
-	.string "auf verschiedene Arten an Deko-\l"
-	.string "rationen kommen kann.\p"
-	.string "Wir sollten einen Wettbewerb veran-\n"
-	.string "stalten, wer die schönsten Dinge hat.$"
+	.string "People have told me that you can get\n"
+	.string "decorations in several ways.\p"
+	.string "We should have a race to see who can\n"
+	.string "get nicer decorations and furniture!$"
 
 SecretBase_RedCave1_Text_1A2830:: @ 81A2830
-	.string "Ich habe einen Ort gefunden, der mir\n"
-	.string "gefällt und den ich mit meinen Lieblings-\l"
-	.string "dekorationen ausgestattet habe.\p"
-	.string "Dort ziehe ich meine Lieblings-POKéMON\n"
-	.string "auf und werde mit ihnen stärker.\p"
-	.string "Genau das mache ich.\n"
-	.string "Möchtest du mit mir kämpfen?$"
+	.string "I found a spot I liked, and I did it up\n"
+	.string "with my favorite decorations.\p"
+	.string "I raise my favorite POKéMON and grow\n"
+	.string "stronger with it.\p"
+	.string "That’s what I do.\n"
+	.string "Want to battle with me?$"
 
 SecretBase_RedCave1_Text_1A28D7:: @ 81A28D7
-	.string "Zeig mir, aus welchem Holz du\n"
-	.string "geschnitzt bist.$"
+	.string "Show me what you’re made of!$"
 
 SecretBase_RedCave1_Text_1A28F4:: @ 81A28F4
-	.string "Ich glaube, es gibt immer wieder Zeiten,\n"
-	.string "in denen man nicht so gut drauf ist.$"
+	.string "I guess there are times when you’re not\n"
+	.string "into it.$"
 
 UnknownString_81A2925:: @ 81A2925
-	.string "Ich weiß jetzt genau, aus welchem Holz\n"
-	.string "du geschnitzt bist.$"
+	.string "I know exactly what you’re made of now.$"
 
 SecretBase_RedCave1_Text_1A294D:: @ 81A294D
-	.string "Wir können beide noch stärker werden!\n"
-	.string "Das macht doch Mut!$"
+	.string "We can both become stronger.\n"
+	.string "Let’s keep at it!$"
 
 SecretBase_RedCave1_Text_1A297C:: @ 81A297C
-	.string "Ich habe einen Ort gefunden, der mir\n"
-	.string "gefällt und den ich mit meinen Lieblings-\l"
-	.string "dekorationen ausgestattet habe.\p"
-	.string "Dort ziehe ich meine Lieblings-POKéMON\n"
-	.string "auf und werde mit ihnen stärker.\p"
-	.string "Jeder Tag ist mein Lieblingstag.$"
+	.string "I found a spot I liked, and I did it up\n"
+	.string "with my favorite decorations.\p"
+	.string "I raise my favorite POKéMON and grow\n"
+	.string "stronger with it.\p"
+	.string "Every day is a great day.$"
 
 SecretBase_RedCave1_Text_1A2A13:: @ 81A2A13
-	.string "Man lernt viel über den Geschmack und\n"
-	.string "den Stil von Menschen, wenn man sich\l"
-	.string "ihre Dekorationen und den Platz, auf\l"
-	.string "dem sie stehen, anschaut.\p"
-	.string "Wie findest du meinen Geschmack?\n"
-	.string "Bist du sprachlos? Hihihi...\p"
-	.string "Willst du mal meinen Kampfstil sehen?$"
+	.string "You can learn a lot about the taste\n"
+	.string "and sense of people by the kinds of\l"
+	.string "decorations they have, and how they\l"
+	.string "display them.\p"
+	.string "What do you think of my taste?\n"
+	.string "Are you speechless?\p"
+	.string "Want to see my taste in battling?$"
 
 SecretBase_RedCave1_Text_1A2AE2:: @ 81A2AE2
-	.string "Es gibt kein Zurück mehr.$"
+	.string "There’s no holding back!$"
 
 SecretBase_RedCave1_Text_1A2AFB:: @ 81A2AFB
-	.string "Ich zeige dir gerne jederzeit wieder \n"
-	.string "meinen erlesenen Kampfstil!$"
+	.string "I’ll be happy to demonstrate my style\n"
+	.string "anytime.$"
 
 UnknownString_81A2B2A:: @ 81A2B2A
-	.string "Du bist hoch talentiert! Deine Stärke\n"
-	.string "scheint grenzenlos zu sein.$"
+	.string "You’re supremely talented!\n"
+	.string "Your power seems to be limitless...$"
 
 SecretBase_RedCave1_Text_1A2B69:: @ 81A2B69
-	.string "Was hältst du von meinem Stil?\n"
-	.string "Ich muss ihn noch mehr aufpolieren.$"
+	.string "What did you think of my style?\n"
+	.string "I’ll keep on polishing it!$"
 
 SecretBase_RedCave1_Text_1A2BA4:: @ 81A2BA4
-	.string "Man lernt viel über den Geschmack und\n"
-	.string "den Stil von Menschen, wenn man sich\l"
-	.string "ihre Dekorationen und den Platz, auf\l"
-	.string "dem sie stehen, anschaut.\p"
-	.string "Wie findest du meinen Geschmack?\n"
-	.string "Bist du sprachlos? Hihihi...$"
+	.string "You can learn a lot about the taste\n"
+	.string "and sense of people by the kinds of\l"
+	.string "decorations they have, and how they\l"
+	.string "display them.\p"
+	.string "What do you think of my taste?\n"
+	.string "Are you speechless?$"
 
 gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB70C
@@ -4831,80 +4281,69 @@ SecretBase_RedCave1_EventScript_1A350A:: @ 81A350A
 	.include "data/scripts/secret_power_tm.inc"
 
 UnknownString_81A38FB: @ 81A38FB
-	.string "Alle Dekorationsgegenstände und das\n"
-	.string "Mobiliar aus deiner GEHEIMBASIS werden\l"
-	.string "auf deinen PC gesendet.\p"
-	.string "Einverstanden?$"
+	.string "All decorations and furniture in your\n"
+	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Is that okay?$"
 
 UnknownString_81A3958: @ 81A3958
-	.string "Möchtest du GEHEIMBASIS von\n"
-	.string "{STR_VAR_1} eintragen?$"
+	.string "Do you want to register\n"
+	.string "{STR_VAR_1}’s SECRET BASE?$"
 
 UnknownString_81A3982: @ 81A3982
-	.string "Diese Daten wurden bereits\n"
-	.string "eingetragen. Möchtest du sie löschen?$"
+	.string "This data is already registered.\n"
+	.string "Would you like to delete it?$"
 
 UnknownString_81A39C0: @ 81A39C0
-	.string "Bis zu 10 Orte können eingetragen\n"
-	.string "werden.\p"
-	.string "Lösche einen Ort, um einen neuen\n"
-	.string "eintragen zu können.$"
+	.string "Up to 10 locations can be registered.\p"
+	.string "Delete a location if you want to\n"
+	.string "register another location.$"
 
 UnknownString_81A3A22: @ 81A3A22
-	.string "Registrierung abgeschlossen.$"
+	.string "Registration completed.$"
 
 UnknownString_81A3A3A: @ 81A3A3A
-	.string "Daten wurden aus der Registrierung\n"
-	.string "genommen.$"
+	.string "Data has been unregistered.$"
 
 UnknownString_81A3A56: @ 81A3A56
-	.string "Es sind keine Dekorationen vorhanden.$"
+	.string "There are no decorations...$"
 
 UnknownString_81A3A72: @ 81A3A72
-	.string "{PLAYER} schaltet den PC ein.$"
+	.string "{PLAYER} booted up the PC.$"
 
 UnknownString_81A3A87: @ 81A3A87
-	.string "Was möchtest du tun?$"
+	.string "What would you like to do?$"
 
 UnknownString_81A3AA2: @ 81A3AA2
-	.string "Die eingetragene GEHEIMBASIS bleibt\n"
-	.string "erhalten, bis der Eigentümer umzieht.\p"
-	.string "Wird sie aus dem Grundbuch ent-\n"
-	.string "fernt, kann eine andere GEHEIMBASIS\l"
-	.string "diesen Platz einnehmen.\p"
-	.string "Bis zu 10 Orte können eingetragen\n"
-	.string "werden.{0xFC}Ì$"
+	.string "The registered SECRET BASE will remain\n"
+	.string "unless the owner moves away.\p"
+	.string "If it is removed from the registry,\n"
+	.string "another SECRET BASE may take its place.\p"
+	.string "Up to ten locations can be registered.{PAUSE_UNTIL_PRESS}$"
 
 UnknownString_81A3B5B: @ 81A3B5B
-	.string "Ein Schild aus {STR_VAR_2}, welches zeigt,\n"
-	.string "dass {STR_VAR_1}-mal hintereinander im\l"
-	.string "DUELLTURM ein Kampf gewonnen wurde.$"
+	.string "A shield of {STR_VAR_2} that marks winning\n"
+	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
 
 UnknownString_81A3BA4: @ 81A3BA4
-	.string "Ein sehr realistischer Spielzeug-\n"
-	.string "Fernseher. Man könnte ihn glatt mit\l"
-	.string "einem echten Gerät verwechseln.$"
+	.string "A realistic toy TV. It could be easily\n"
+	.string "mistaken for the real thing.$"
 
 UnknownString_81A3BE8: @ 81A3BE8
-	.string "Ein Spielzeug-Fernseher, der aussieht\n"
-	.string "wie ein SAMURZEL. Er scheint von\l"
-	.string "alleine davonrollen zu wollen...$"
+	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "It looks ready to roll away on its own...$"
 
 UnknownString_81A3C31: @ 81A3C31
-	.string "Ein Spielzeug-Fernseher, der aussieht\n"
-	.string "wie ein ENECO. Es scheint, als wolle\l"
-	.string "er sich langsam davonschleichen ...$"
+	.string "A toy TV shaped like a SKITTY.\n"
+	.string "It looks ready to stroll away...$"
 
 UnknownString_81A3C71: @ 81A3C71
-	.string "Du kannst dir nur eine GEHEIMBASIS\n"
-	.string "einrichten.\p"
-	.string "Möchtest du deine GEHEIMBASIS in der\n"
-	.string "Nähe von {STR_VAR_1} hierher\l"
-	.string "verlegen?$"
+	.string "You may only make one SECRET BASE.\p"
+	.string "Would you like to move from the SECRET\n"
+	.string "BASE near {STR_VAR_1}?$"
 
 UnknownString_81A3CC9: @ 81A3CC9
-	.string "Umzug wurde abgeschlossen.\p"
-	.string "Möchtest du GEHEIMPOWER einsetzen?$"
+	.string "Moving completed.\p"
+	.string "Would you like to use the SECRET POWER?$"
 
 	.include "data/scripts/cable_club.inc"
 	.include "data/text/cable_club.inc"
@@ -5326,7 +4765,7 @@ S_RepelWoreOff:: @ 81C33E6
 	end
 
 Text_RepelWoreOff: @ 81C33EF
-	.string "SCHUTZ wirkt nicht mehr...$"
+	.string "REPEL’s effect wore off...$"
 
 	.include "data/scripts/safari_zone.inc"
 	.include "data/text/safari_zone.inc"
@@ -5370,32 +4809,32 @@ MauvilleCity_GameCorner_EventScript_1C40DA:: @ 81C40DA
 	.include "data/text/shoal_cave.inc"
 
 PictureBookShelfText: @ 81C6A69
-	.string "Eine Sammlung von POKéMON-Büchern.$"
+	.string "There’s a set of POKéMON picture books.$"
 
 BookshelfText: @ 81C6A91
-	.string "Hier stehen jede Menge Bücher.$"
+	.string "It’s filled with all sorts of books.$"
 
 PokemonCenterBookshelfText: @ 81C6AB6
-	.string "POKéMON-Magazine!\n"
-	.string "DER POKéMON FREUND...\p"
-	.string "POKéMON HANDBUCH...\n"
-	.string "GELIEBTE POKéMON...$"
+	.string "POKéMON magazines!\n"
+	.string "POKéMON PAL...\p"
+	.string "POKéMON HANDBOOK...\n"
+	.string "ADORABLE POKéMON...$"
 
 VaseText: @ 81C6B00
-	.string "Diese Vase sieht sehr teuer aus...\n"
-	.string "Schauen wir mal hinein...\p"
-	.string "Och, sie ist leer.$"
+	.string "This vase looks expensive...\n"
+	.string "Peered inside...\p"
+	.string "But, it was empty.$"
 
 TrashCanText: @ 81C6B41
-	.string "Leer...$"
+	.string "It’s empty.$"
 
 ShopShelfText: @ 81C6B4D
-	.string "Die Regale biegen sich unter dem\n"
-	.string "Gewicht von POKéMON-Artikeln.$"
+	.string "The shelves brim with all sorts of\n"
+	.string "POKéMON merchandise.$"
 
 BlueprintText: @ 81C6B85
-	.string "Sind das Blaupausen?\n"
-	.string "Die sind zu kompliziert zu lesen.$"
+	.string "A blueprint of some sort?\n"
+	.string "It’s too complicated!$"
 
 GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5

@@ -46,17 +46,14 @@ Cut_ChoseNo: @ 81B0E3C
 	end
 
 UseCutPromptText: @ 81B0E3F
-	.string "Du kannst den ZERSCHNEIDER hier\n"
-	.string "einsetzen!\p"
-	.string "Möchtest du den ZERSCHNEIDER\n"
-	.string "einsetzen?$"
+	.string "This tree looks like it can be CUT down.\p"
+	.string "Would you like to CUT it?$"
 
 UsedCutRockSmashText: @ 81B0E82
-	.string "{STR_VAR_1} setzt {STR_VAR_2} ein.$"
+	.string "{STR_VAR_1} used {STR_VAR_2}.$"
 
 CannotUseCutText: @ 81B0E8E
-	.string "Der ZERSCHNEIDER kann hier eingesetzt\n"
-	.string "werden.$"
+	.string "This tree looks like it can be CUT down.$"
 
 S_BreakableRock:: @ 81B0EB7
 	lockall
@@ -117,12 +114,12 @@ RockSmash_ChoseNo: @ 81B0F48
 	end
 
 UseRockSmashPromptText: @ 81B0F4B
-	.string "Dieser Fels sieht zerbrechlich aus.\n"
-	.string "Soll ZERTRÜMMERER eingesetzt werden?$"
+	.string "This rock appears to be breakable.\n"
+	.string "Would you like to use ROCK SMASH?$"
 
 CannotUseRockSmashText: @ 81B0F90
-	.string "Ein großer Felsen. Ein POKéMON könnte\n"
-	.string "ihn vielleicht zertrümmern.$"
+	.string "It’s a rugged rock, but a POKéMON\n"
+	.string "may be able to smash it.$"
 
 S_PushableBoulder:: @ 81B0FCB
 	lockall
@@ -170,22 +167,22 @@ Strength_ChoseNo: @ 81B103A
 	end
 
 UseStrengthPromptText: @ 81B103D
-	.string "Ein POKéMON kann diesen Felsen\n"
-	.string "vielleicht bewegen.\p"
-	.string "Möchtest du STÄRKE einsetzen?$"
+	.string "It’s a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.\p"
+	.string "Would you like to use STRENGTH?$"
 
 UsedStrengthText: @ 81B109D
-	.string "{STR_VAR_1} setzt STÄRKE ein.\p"
-	.string "STÄRKE von {STR_VAR_1} ermöglicht es,\n"
-	.string "den Felsen zu bewegen.$"
+	.string "{STR_VAR_1} used STRENGTH.\p"
+	.string "{STR_VAR_1}’s STRENGTH made it possible\n"
+	.string "to move boulders around.$"
 
 CannotUseStrengthText: @ 81B10E7
-	.string "Ein POKéMON kann diesen Felsen\n"
-	.string "vielleicht bewegen.$"
+	.string "It’s a big boulder, but a POKéMON\n"
+	.string "may be able to push it aside.$"
 
 AlreadyUsedStrengthText: @ 81B1127
-	.string "STÄRKE ermöglicht es, Felsen zu\n"
-	.string "bewegen.$"
+	.string "STRENGTH made it possible to move\n"
+	.string "boulders around.$"
 
 S_UseWaterfall:: @ 81B115A
 	lockall
@@ -210,15 +207,15 @@ Waterfall_Done:  @ 81B119D
 	end
 
 CannotUseWaterfallText: @ 81B119F
-	.string "Das Wasser fällt steil wie eine Wand\n"
-	.string "brüllend in die Tiefe.$"
+	.string "A wall of water is crashing down with\n"
+	.string "a mighty roar.$"
 
 UseWaterfallPromptText: @ 81B11D4
-	.string "Ein riesiger Wasserfall.\n"
-	.string "Möchtest du KASKADE einsetzen?$"
+	.string "It’s a large waterfall.\n"
+	.string "Would you like to use WATERFALL?$"
 
 UsedWaterfallText: @ 81B120D
-	.string "{STR_VAR_1} setzt KASKADE ein.$"
+	.string "{STR_VAR_1} used WATERFALL.$"
 
 UseDiveScript:: @ 81B1220
 	lockall
@@ -273,32 +270,31 @@ UnderwaterDive_Done: @ 81B12BE
 	end
 
 CannotUseDiveText: @ 81B12C0
-	.string "Das Wasser ist hier tief. Ein POKéMON\n"
-	.string "könnte hier vielleicht tauchen.$"
+	.string "The sea is deep here. A POKéMON may be\n"
+	.string "able to go underwater here.$"
 
 UseDivePromptText: @ 81B1303
-	.string "Das Meer ist an dieser Stelle sehr tief.\n"
-	.string "Möchtest du TAUCHER einsetzen?$"
+	.string "The sea is deep here.\n"
+	.string "Would you like to use DIVE?$"
 
 UsedDiveText: @ 81B1335
-	.string "{STR_VAR_1} setzt TAUCHER ein.$"
+	.string "{STR_VAR_1} used DIVE.$"
 
 UnderwaterCannotUseDiveText: @ 81B1343
-	.string "Licht schimmert von oben herab. Ein\n"
-	.string "POKéMON könnte hier auftauchen.$"
+	.string "Light is filtering down from above.\n"
+	.string "A POKéMON may be able to surface here.$"
 
 UnderwaterUseDivePromptText: @ 81B138E
-	.string "Licht schimmert von oben herab.\n"
-	.string "Möchtest du TAUCHER einsetzen?$"
+	.string "Light is filtering down from above.\n"
+	.string "Would you like to use DIVE?$"
 
 SurfacingBlockedText: @ 81B13CE
-	.string "An der Oberfläche ist irgendetwas im\n"
-	.string "Weg. TAUCHER kann nicht\l"
-	.string "eingesetzt werden.$"
+	.string "There is something in the way above.\n"
+	.string "DIVE can’t be used here.$"
 
 SweetScentNothingHereScript:: @ 81B140C
 	msgbox SweetScentNothingHereText, 3
 	end
 
 SweetScentNothingHereText: @ 81B1415
-	.string "Hier scheint nichts zu sein...$"
+	.string "There appears to be nothing here...$"

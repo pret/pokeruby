@@ -1,29 +1,26 @@
 LilycoveCity_PokemonCenter_1F_Text_189FC9:: @ 8189FC9
-	.string "Ich frage mich, wie viele Arten von\n"
-	.string "POKéMON es in der Welt wohl gibt?\p"
-	.string "Es muss toll sein, die Meere zu über-\n"
-	.string "queren und POKéMON mit Leuten zu\l"
-	.string "tauschen, die weit weg leben.$"
+	.string "I wonder how many kinds of POKéMON\n"
+	.string "there are in the world?\p"
+	.string "It’d be great to cross seas and\n"
+	.string "trade POKéMON with people far away.$"
 
 LilycoveCity_PokemonCenter_1F_Text_18A048:: @ 818A048
-	.string "Ich habe von einigen Schurken gehört,\n"
-	.string "die POKéMON stehlen und METEORITEN\l"
-	.string "klauen.$"
+	.string "I’ve been hearing about some rotten\n"
+	.string "scoundrels who steal POKéMON and rip\l"
+	.string "off METEORITES.$"
 
 LilycoveCity_PokemonCenter_1F_Text_18A0A1:: @ 818A0A1
-	.string "Diese verkommenen Schurken, die\n"
-	.string "POKéMON stehlen und METEORITEN\l"
-	.string "klauen...\p"
-	.string "Ich habe sie in letzter Zeit nicht\n"
-	.string "gesehen.$"
+	.string "Those rotten scoundrels who steal\n"
+	.string "POKéMON and rip off METEORITES...\p"
+	.string "I haven’t seen them around recently.$"
 
 UnknownString_818A10A: @ 818A10A
-	.string "Ich besorge mir X-ANGRIFF, um meine\n"
-	.string "ATTACKEN im Kampf zu verstärken.\p"
-	.string "Auf diese Weise gewinne ich garantiert.$"
+	.string "I’m going to get X ATTACK to raise\n"
+	.string "ATTACK during battle.\p"
+	.string "That way, I’ll be guaranteed to win!$"
 
 UnknownString_818A168: @ 818A168
-	.string "HYPERHEILER ist etwas teuer, aber sehr\n"
-	.string "nützlich.\p"
-	.string "Einer davon kann alle Statusprobleme\n"
-	.string "eines POKéMON heilen.$"
+	.string "FULL HEAL is a little expensive,\n"
+	.string "but it is convenient.\p"
+	.string "Just one of these can cure any\n"
+	.string "POKéMON status problem.$"

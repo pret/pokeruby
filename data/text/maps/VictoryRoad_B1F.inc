@@ -1,37 +1,35 @@
 VictoryRoad_B1F_Text_197CE9:: @ 8197CE9
-	.string "Der Gedanke, dass ich der POKéMON LIGA\n"
-	.string "immer näher komme...\p"
-	.string "Ich bekomme Lampenfieber...$"
+	.string "The thought that I’m getting closer to\n"
+	.string "the POKéMON LEAGUE...\p"
+	.string "I’m getting stage fright...$"
 
 VictoryRoad_B1F_Text_197D42:: @ 8197D42
-	.string "Ich konnte gar nichts machen...$"
+	.string "I couldn’t do a thing...$"
 
 VictoryRoad_B1F_Text_197D5B:: @ 8197D5B
-	.string "Die POKéMON LIGA rückt in weite Ferne...\n"
-	.string "Was für eine Enttäuschung...$"
+	.string "The POKéMON LEAGUE became distant\n"
+	.string "again... What a letdown...$"
 
 VictoryRoad_B1F_Text_197D98:: @ 8197D98
-	.string "Um dich siegreich durch die POKéMON\n"
-	.string "LIGA zu kämpfen, brauchst du das\l"
-	.string "Vertrauen deiner POKéMON.$"
+	.string "To win your way through the POKéMON\n"
+	.string "LEAGUE, you need the trust of your\l"
+	.string "POKéMON.$"
 
 VictoryRoad_B1F_Text_197DE8:: @ 8197DE8
-	.string "Eure Beziehung ist auf solidem\n"
-	.string "Vertrauen aufgebaut.$"
+	.string "Your relationship is based on\n"
+	.string "solid trust.$"
 
 VictoryRoad_B1F_Text_197E13:: @ 8197E13
-	.string "Das Vertrauen zwischen POKéMON und\n"
-	.string "TRAINER wächst beständig, da sie immer\l"
-	.string "zusammen sind.$"
+	.string "By being together all the time, trust\n"
+	.string "grows between POKéMON and TRAINERS.$"
 
 VictoryRoad_B1F_Text_197E5D:: @ 8197E5D
-	.string "Das ist nicht das Ziel. Nur eine\n"
-	.string "Zwischenstation auf dem Weg zur\l"
-	.string "POKéMON LIGA.$"
+	.string "This isn’t the goal. It’s only a place\n"
+	.string "on the way to the POKéMON LEAGUE.$"
 
 VictoryRoad_B1F_Text_197EA6:: @ 8197EA6
-	.string "Das ist der Weg!$"
+	.string "That’s the way!$"
 
 VictoryRoad_B1F_Text_197EB6:: @ 8197EB6
-	.string "Du wirst dich sehr gut schlagen, das ist\n"
-	.string "sicher. Deine POKéMON lieben dich!$"
+	.string "You’ll do fine, for sure!\n"
+	.string "Your POKéMON are all eager to go!$"

@@ -1,17 +1,16 @@
 UnknownString_81B4F03: @ 81B4F03
-	.string "Die BLAUE KUGEL von {PLAYER}\n"
-	.string "beginnt plötzlich von innen\l"
-	.string "heraus zu leuchten!$"
+	.string "{PLAYER}’s BLUE ORB suddenly began\n"
+	.string "glowing!$"
 
 UnknownString_81B4F29: @ 81B4F29
-	.string "KYOGRE wurde offensichtlich\n"
-	.string "wieder in Schlaf versetzt...$"
+	.string "KYOGRE appears to have settled\n"
+	.string "into sleep again...$"
 
 UnknownString_81B4F5C: @ 81B4F5C
-	.string "ADRIAN: Das...$"
+	.string "ARCHIE: This...$"
 
 UnknownString_81B4F6C: @ 81B4F6C
-	.string "ADRIAN: ... ... ... ... ... ...\n"
+	.string "ARCHIE: ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
-	.string "Das heißt wohl Goodbye. Das ist das\n"
-	.string "Letzte, was du von mir siehst.$"
+	.string "This is good-bye.\n"
+	.string "This is the last you’ve seen of me...$"

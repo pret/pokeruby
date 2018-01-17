@@ -1,36 +1,34 @@
 LittlerootTown_BrendansHouse_1F_Text_1730C2:: @ 81730C2
 LittlerootTown_MaysHouse_1F_Text_1730C2:: @ 81730C2
-	.string "Oh, hallo. Wer bist du?\p"
+	.string "Oh, hello. And you are?\p"
 	.string "... ... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ... ...\p"
-	.string "Oh, du bist {PLAYER}{KUN}, unser neuer\n"
-	.string "Nachbar! Hallo!\p"
-	.string "Wir haben ein Kind in deinem Alter.\p"
-	.string "Mein/e {STR_VAR_1} freut sich schon\n"
-	.string "darauf, mit dir Freundschaft zu\l"
-	.string "schließen.\p"
-	.string "Lauf doch mal die Treppe hoch...$"
+	.string "Oh, you’re {PLAYER}{KUN}, our new next-door\n"
+	.string "neighbor! Hi!\p"
+	.string "We have a {STR_VAR_1} about the same\n"
+	.string "age as you.\p"
+	.string "Our {STR_VAR_1} was excited about making\n"
+	.string "a new friend.\p"
+	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1731C6:: @ 81731C6
-	.string "Mein/e {STR_VAR_1} ist oben.$"
+	.string "Our {STR_VAR_1} is upstairs, I think.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1731E3:: @ 81731E3
-	.string "Wo ist denn nur mein Mann? Und gerade\n"
-	.string "jetzt, wo {PLAYER}{KUN} uns besucht...\p"
-	.string "Dieser Mann kann einfach nicht\n"
-	.string "entspannen... Er ist wohl im LABOR.$"
+	.string "Where has my husband gone?\n"
+	.string "Just when {PLAYER}{KUN} is visiting, too...\p"
+	.string "That man can never sit still for long...\n"
+	.string "He might be at his LAB.$"
 
 LittlerootTown_BrendansHouse_1F_Text_173262:: @ 8173262
-	.string "Oh, {RIVAL} ist irgendwohin gegangen.\p"
-	.string "Wie der Vater, so das Kind.\n"
-	.string "{RIVAL} kann einfach nicht stillsitzen\l"
-	.string "oder zu Hause bleiben.$"
+	.string "Oh, {RIVAL} has gone out somewhere.\p"
+	.string "Like father, like child.\n"
+	.string "{RIVAL} can’t stay quietly at home.$"
 
 LittlerootTown_BrendansHouse_1F_Text_1732B9:: @ 81732B9
-	.string "Ich glaube, es ist wunderbar für Leute,\n"
-	.string "mit ihren POKéMON zu reisen.\p"
-	.string "Aber du solltest öfter nach Hause\n"
-	.string "gehen und deiner Mutter zeigen, dass es\l"
-	.string "dir gut geht.\p"
-	.string "Sie lässt es sich nicht anmerken, aber\n"
-	.string "sie macht sich bestimmt Sorgen!$"
+	.string "I think it’s wonderful for people to\n"
+	.string "travel with POKéMON.\p"
+	.string "But you should go home every so often\n"
+	.string "to let your mother know you’re okay.\p"
+	.string "She might not say it, but I’m sure she\n"
+	.string "worries about you, {PLAYER}{KUN}.$"

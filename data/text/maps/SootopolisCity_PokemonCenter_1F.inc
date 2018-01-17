@@ -1,25 +1,24 @@
 SootopolisCity_PokemonCenter_1F_Text_18F6A2:: @ 818F6A2
-	.string "WASSILI, der ARENALEITER dieses Ortes,\n"
-	.string "ist ein mächtiger TRAINER.\p"
-	.string "Man sagt, er sei der beste TRAINER der\n"
-	.string "ganzen HOENN-Region.\p"
-	.string "Aber die TOP VIER...\p"
-	.string "Man sagt, sie seien stärker als WASSILI.\n"
-	.string "Wie stark müssen sie dann erst sein?$"
+	.string "WALLACE, this town’s GYM LEADER, is a\n"
+	.string "powerful TRAINER.\p"
+	.string "He’s rumored to be the best in the\n"
+	.string "whole HOENN region.\p"
+	.string "But the ELITE FOUR...\p"
+	.string "They’re said to be even stronger than\n"
+	.string "WALLACE. How strong could they be?$"
 
 SootopolisCity_PokemonCenter_1F_Text_18F770:: @ 818F770
-	.string "Jeder im Ort hat sich zurückgezogen in\n"
-	.string "sein Haus und bleibt auch dort.\p"
-	.string "Dieses Wetter...\n"
-	.string "Ob dies die Ouvertüre von etwas ist?$"
+	.string "Everyone in town has taken refuge\n"
+	.string "and won’t come out of their homes.\p"
+	.string "This weather..\n"
+	.string "Could it be the prelude to something?$"
 
 SootopolisCity_PokemonCenter_1F_Text_18F7EA:: @ 818F7EA
-	.string "Was auch immer wann oder wo passiert,\n"
-	.string "meine Freundschaft zu den POKéMON\l"
-	.string "leidet darunter bestimmt nicht!\p"
-	.string "Ich liebe es, mit POKéMON zusammen\n"
-	.string "zu sein.$"
+	.string "Whenever, wherever, and whatever\n"
+	.string "happens, I will always be friends with\l"
+	.string "POKéMON.\p"
+	.string "Because it’s fun to be with POKéMON!$"
 
 SootopolisCity_PokemonCenter_1F_Text_18F860:: @ 818F860
-	.string "Ich weiß nicht, warum...\n"
-	.string "Aber... Ich habe richtig Angst...$"
+	.string "I don’t know why...\n"
+	.string "But... I’m really scared...$"

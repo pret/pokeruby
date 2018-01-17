@@ -1,27 +1,27 @@
 PacifidlogTown_House3_Text_17940E:: @ 817940E
-	.string "Hallo, TRAINER. Würdest du POKéMON\n"
-	.string "mit mir tauschen?\p"
-	.string "Da ich in FLOSSBRUNN lebe, kann ich nur\n"
-	.string "bestimmte POKéMON fangen.\p"
-	.string "{STR_VAR_1}? Hast du das POKéMON?\n"
-	.string "Ich gebe dir mein {STR_VAR_2} dafür.$"
+	.string "Hello, TRAINER. Would you do me a favor\n"
+	.string "and trade POKéMON with me?\p"
+	.string "Living in PACIFIDLOG, I can only catch\n"
+	.string "certain kinds of POKéMON.\p"
+	.string "{STR_VAR_1}? Do you have one?\n"
+	.string "I’ll trade you my {STR_VAR_2} for it.$"
 
 PacifidlogTown_House3_Text_1794C4:: @ 81794C4
 	.string "Wow!\n"
-	.string "Das {STR_VAR_1} ist so weich!$"
+	.string "This {STR_VAR_1} is so fluffy!$"
 
 PacifidlogTown_House3_Text_1794DF:: @ 81794DF
-	.string "Das ist kein {STR_VAR_1}.$"
+	.string "That’s no {STR_VAR_1}.$"
 
 PacifidlogTown_House3_Text_1794ED:: @ 81794ED
-	.string "Ich bin ein bisschen enttäuscht.$"
+	.string "I’m a little disappointed...$"
 
 PacifidlogTown_House3_Text_17950A:: @ 817950A
-	.string "Seit wir POKéMON getauscht haben, sind\n"
-	.string "wir Freunde, nicht wahr?$"
+	.string "Since we traded, you and me,\n"
+	.string "we’re friends, aren’t we?$"
 
 PacifidlogTown_House3_Text_179541:: @ 8179541
-	.string "Ist das ein POKéDEX?\p"
-	.string "Hast du schon viele verschiedene\n"
-	.string "POKéMON getroffen?\p"
-	.string "Ich wollte, ich wäre wie du.$"
+	.string "Is that a POKéDEX?\p"
+	.string "Did you get to meet a lot of different\n"
+	.string "POKéMON?\p"
+	.string "I wish I was like you.$"

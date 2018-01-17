@@ -1,10 +1,9 @@
 VerdanturfTown_PokemonCenter_1F_Text_17831D:: @ 817831D
-	.string "Ich wage zu behaupten, ein TRAINER ist\n"
-	.string "nicht qualifiziert, wenn seine POKéMON\p"
-	.string "nicht freundlich sind und sich wohl-\n"
-	.string "fühlen. Hast du ihnen {POKEBLOCK} gegeben?$"
+	.string "I daresay a TRAINER isn’t qualified if\n"
+	.string "POKéMON aren’t settled and friendly.\l"
+	.string "Have you given them any {POKEBLOCK}S?$"
 
 VerdanturfTown_PokemonCenter_1F_Text_178389:: @ 8178389
-	.string "Lass mich raten, warum du in WIESENFLUR\n"
-	.string "bist... Wegen des WETTBEWERBS!\p"
-	.string "Hier ist die Wiege aller WETTBEWERBE.$"
+	.string "Let me hazard a guess why you’re in\n"
+	.string "VERDANTURF. The reason: CONTESTS.\p"
+	.string "All CONTEST challenges originate here.$"

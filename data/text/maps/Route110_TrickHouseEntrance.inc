@@ -1,114 +1,111 @@
 Route110_TrickHouseEntrance_Text_19BA56:: @ 819BA56
-	.string "Du wirst beobachtet...$"
+	.string "You’re being watched...$"
 
 Route110_TrickHouseEntrance_Text_19BA6E:: @ 819BA6E
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich unter\n"
-	.string "dem Tisch versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "beneath this desk? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BAC0:: @ 819BAC0
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich hinter\n"
-	.string "dem Baum versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "behind this tree? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BB11:: @ 819BB11
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich in\n"
-	.string "der Kommode versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "in this dresser? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BB61:: @ 819BB61
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich über\n"
-	.string "dem Fenster versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "beyond this window? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BBB4:: @ 819BBB4
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich in\n"
-	.string "der Pflanze versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "in this planter? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BC04:: @ 819BC04
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich\n"
-	.string "im Schrank versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "in this cupboard? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BC55:: @ 819BC55
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich hinter\n"
-	.string "dem Fenster versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "behind this window? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BCA8:: @ 819BCA8
-	.string "Was? Grrrr...\p"
-	.string "Woher wusstest du, dass ich mich unter\n"
-	.string "dem Kissen versteckt hatte? Clever!$"
+	.string "Hah? Grrr...\p"
+	.string "How did you know I concealed myself\n"
+	.string "beneath this cushion? You’re sharp!$"
 
 Route110_TrickHouseEntrance_Text_19BCFD:: @ 819BCFD
-	.string "Sehe und staune!\p"
-	.string "Ich bin das größte lebende menschliche\n"
-	.string "Mysterium in ganz HOENN!\l"
-	.string "Man nennt mich...\p"
-	.string "RÄTSELMEISTER!\n"
-	.string "Hahaha! Erfreut dich kennen zu lernen!$"
+	.string "Behold!\p"
+	.string "For I am the greatest living mystery\n"
+	.string "of a man in all of HOENN!\l"
+	.string "They call me...\p"
+	.string "The TRICK MASTER!\n"
+	.string "Wahahaha! Glad to meet you!$"
 
 Route110_TrickHouseEntrance_Text_19BD82:: @ 819BD82
-	.string "Du, du bist hier, um mein RÄTSELHAUS\n"
-	.string "herauszufordern, oder?\p"
-	.string "Deshalb bist du doch hier?\n"
-	.string "Ja, ja, so muss es sein!\p"
-	.string "Betrachte deine Herausforderung als\n"
-	.string "angenommen!\p"
-	.string "Trete hinter diese Schriftrolle und\n"
-	.string "die Herausforderung beginnt!\p"
-	.string "Ich warte im hinteren Bereich!$"
+	.string "You, you’ve come to challenge my\n"
+	.string "TRICK HOUSE, haven’t you?\p"
+	.string "That’s why you’re here, isn’t it?\n"
+	.string "Yes, it is!\p"
+	.string "Consider your challenge accepted!\p"
+	.string "Enter through the scroll there,\n"
+	.string "and let your challenge commence!\p"
+	.string "I shall be waiting in the back!$"
 
 Route110_TrickHouseEntrance_Text_19BE6E:: @ 819BE6E
-	.string "Das ist eine Schriftrolle.$"
+	.string "It’s a scroll.$"
 
 Route110_TrickHouseEntrance_Text_19BE7D:: @ 819BE7D
-	.string "Hinter der Schriftrolle ist ein Loch!\p"
-	.string "Möchtest du hindurchgehen?$"
+	.string "There is a big hole behind the scroll!\p"
+	.string "Want to go in?$"
 
 Route110_TrickHouseEntrance_Text_19BEB3:: @ 819BEB3
-	.string "Auf der Schriftrolle steht etwas...\p"
-	.string "“Ich bin auf eine Reise gegangen.\n"
-	.string "Sucht mich nicht. RÄTSELMEISTER”$"
+	.string "There is a note affixed to the scroll...\p"
+	.string "“I am leaving on a journey.\n"
+	.string "Don’t look for me. TRICK MASTER”$"
 
 Route110_TrickHouseEntrance_Text_19BF19:: @ 819BF19
-	.string "Nächstes Mal nehme ich diesen Trick,\n"
-	.string "nach diesem Schema und mit List und...\p"
-	.string "Ähähähä... Ich muss sagen, ich habe mich\n"
-	.string "in meiner Brillanz mal wieder selbst\l"
-	.string "übertroffen!$"
+	.string "For the next time, I’ll use this trick,\n"
+	.string "and that scheme, and those ruses...\p"
+	.string "Mufufufu... If I may say so, it’s\n"
+	.string "brilliantly difficult, even for me!$"
 
 Route110_TrickHouseEntrance_Text_19BFAB:: @ 819BFAB
-	.string "Hah! Was???\n"
-	.string "Ach, du bist das!\p"
-	.string "Ich bin gerade dabei, mir neue Tricks\n"
-	.string "und Herausforderungen auszudenken!\p"
-	.string "Es ist doch nicht zu viel verlangt, mir\n"
-	.string "noch etwas Zeit zum Nachdenken zu\l"
-	.string "geben, oder? Das ist mir doch gegönnt,\l"
-	.string "oder? Danke. Komm später wieder!$"
+	.string "Hah? What?!\n"
+	.string "Oh, it’s you!\p"
+	.string "I’m in the midst of devising new tricky\n"
+	.string "challenges!\p"
+	.string "It’s not too much to ask for a bit more\n"
+	.string "time for me to think, is it now?\l"
+	.string "You wouldn’t begrudge me that?\l"
+	.string "Come back in a little while!$"
 
 Route110_TrickHouseEntrance_Text_19C07E:: @ 819C07E
-	.string "Ah, du bist es! Du willst dir deine\n"
-	.string "Belohnung von eben abholen, habe ich\l"
-	.string "Recht? Natürlich habe ich Recht!\p"
-	.string "Hier!\n"
-	.string "Das ist für dich!$"
+	.string "Ah, it’s you! You’re here to accept the\n"
+	.string "reward from before, isn’t that right?\l"
+	.string "Yes, right I am!\p"
+	.string "Here!\n"
+	.string "I’ll give it to you now!$"
 
 Route110_TrickHouseEntrance_Text_19C0FC:: @ 819C0FC
-	.string "Was? Du kommst nicht, um deine\n"
-	.string "Belohnung abzuholen?$"
+	.string "Hah?\n"
+	.string "Did you not come to claim your reward?$"
 
 Route110_TrickHouseEntrance_Text_19C128:: @ 819C128
-	.string "ROBOPUPPE 5 BIN ICH!\n"
-	.string "HOLST DU DIE BELOHNUNG NICHT AB,\l"
-	.string "DANN KANNST DU RÄTSELMEISTER NICHT\l"
-	.string "FOLGEN!$"
+	.string "MECHADOLL 5 I AM!\n"
+	.string "IF REWARD IS NOT TAKEN BY YOU,\l"
+	.string "THEN TRICK MASTER YOU CANNOT FOLLOW.$"
 
 Route110_TrickHouseEntrance_Text_19C17E:: @ 819C17E
-	.string "DANN LEBE WOHL.$"
+	.string "THEN FAREWELL.$"
 
 Route110_TrickHouseEntrance_Text_19C18D:: @ 819C18D
-	.string "PC-STATUS: WIEDER VOLL.\n"
-	.string "GEMEIN DU BIST.$"
+	.string "YOUR PC STATUS: FULL AGAIN.\n"
+	.string "MEAN, YOU ARE.$"

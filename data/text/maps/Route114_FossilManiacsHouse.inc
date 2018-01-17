@@ -1,23 +1,21 @@
 Route114_FossilManiacsHouse_Text_1925E1:: @ 81925E1
-	.string "Mein großer Bruder ist ein FOSSIL-\n"
-	.string "MANIAC... Er ist ein netter Kerl, der\l"
-	.string "Fossilien liebt...\p"
-	.string "Er liebt es auch, Löcher zu graben...\n"
-	.string "Dieses Loch hat er alleine gegraben!\p"
-	.string "Hier, das kannst du haben. Damit kannst\n"
-	.string "du Löcher graben, wie mein Bruder...$"
+	.string "My big brother’s the FOSSIL MANIAC...\n"
+	.string "He’s a nice guy who loves fossils...\p"
+	.string "He loves digging holes, too...\n"
+	.string "He dug this hole by himself...\p"
+	.string "You can have this, so you can DIG\n"
+	.string "holes just like my big brother...$"
 
 Route114_FossilManiacsHouse_Text_1926AE:: @ 81926AE
-	.string "Wenn ein POKéMON in einer Höhle\n"
-	.string "SCHAUFLER einsetzt, kommst du zum\l"
-	.string "Eingang zurück.$"
+	.string "If you make a POKéMON DIG inside a\n"
+	.string "cave, you’re returned to the entrance...$"
 
 Route114_FossilManiacsHouse_Text_1926FA:: @ 81926FA
-	.string "Steine in den unterschiedlichsten\n"
-	.string "Formen liegen im Glasschaukasten.$"
+	.string "Rocks in peculiar shapes fill the\n"
+	.string "display case$"
 
 Route114_FossilManiacsHouse_Text_192729:: @ 8192729
-	.string "DIE ZUSAMMENSETZUNG DER ERDSCHICHT...\n"
-	.string "WIE REGEN DAS LAND FORMT...\l"
-	.string "STEINE, BODEN UND FELSEN...\p"
-	.string "Gerammelt voll mit Büchern.$"
+	.string "THE COMPOSITION OF STRATA...\n"
+	.string "HOW RAIN SHAPES THE LAND...\l"
+	.string "STONES, SOIL, AND ROCK...\p"
+	.string "It’s crammed with books.$"
