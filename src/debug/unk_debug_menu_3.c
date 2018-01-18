@@ -1,5 +1,10 @@
+#include "global.h"
+#include "menu.h"
+
+#if DEBUG
+
 __attribute__((naked))
-void debug_sub_813C404()
+int debug_sub_813C404()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -27,7 +32,7 @@ void debug_sub_813C404()
 }
 
 __attribute__((naked))
-void debug_sub_813C430()
+int debug_sub_813C430()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -55,7 +60,7 @@ void debug_sub_813C430()
 }
 
 __attribute__((naked))
-void debug_sub_813C45C()
+int debug_sub_813C45C()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -83,7 +88,7 @@ void debug_sub_813C45C()
 }
 
 __attribute__((naked))
-void debug_sub_813C488()
+int debug_sub_813C488()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -111,7 +116,7 @@ void debug_sub_813C488()
 }
 
 __attribute__((naked))
-void debug_sub_813C4B4()
+int debug_sub_813C4B4()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -134,7 +139,7 @@ void debug_sub_813C4B4()
 }
 
 __attribute__((naked))
-void debug_sub_813C4D4()
+int debug_sub_813C4D4()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -162,7 +167,7 @@ void debug_sub_813C4D4()
 }
 
 __attribute__((naked))
-void debug_sub_813C500()
+int debug_sub_813C500()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -237,7 +242,7 @@ void debug_sub_813C52C()
 }
 
 __attribute__((naked))
-void debug_sub_813C580()
+int debug_sub_813C580()
 {
     asm(
         "	push	{lr}\n"
@@ -250,7 +255,7 @@ void debug_sub_813C580()
 }
 
 __attribute__((naked))
-void debug_sub_813C58C()
+int debug_sub_813C58C()
 {
     asm(
         "	push	{lr}\n"
@@ -263,7 +268,7 @@ void debug_sub_813C58C()
 }
 
 __attribute__((naked))
-void debug_sub_813C598()
+int debug_sub_813C598()
 {
     asm(
         "	push	{lr}\n"
@@ -276,7 +281,7 @@ void debug_sub_813C598()
 }
 
 __attribute__((naked))
-void debug_sub_813C5A4()
+int debug_sub_813C5A4()
 {
     asm(
         "	push	{lr}\n"
@@ -293,7 +298,7 @@ void debug_sub_813C5A4()
 }
 
 __attribute__((naked))
-void debug_sub_813C5B4()
+int debug_sub_813C5B4()
 {
     asm(
         "	push	{r4, r5, r6, r7, lr}\n"
@@ -498,7 +503,7 @@ void debug_sub_813C6AC()
 }
 
 __attribute__((naked))
-void debug_sub_813C740()
+int debug_sub_813C740()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -596,7 +601,7 @@ void debug_sub_813C740()
 }
 
 __attribute__((naked))
-void debug_sub_813C810()
+int debug_sub_813C810()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -656,7 +661,7 @@ void debug_sub_813C810()
 }
 
 __attribute__((naked))
-void debug_sub_813C888()
+int debug_sub_813C888()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -752,7 +757,7 @@ void debug_sub_813C904()
 }
 
 __attribute__((naked))
-void debug_sub_813C93C()
+int debug_sub_813C93C()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -794,4 +799,6 @@ void debug_sub_813C93C()
         "\n"
     );
 }
+
+#endif
 

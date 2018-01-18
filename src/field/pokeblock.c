@@ -233,6 +233,11 @@ const struct Pokeblock gUnknown_083F7F9C[] =
     { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
 };
 
+#if DEBUG
+// possibly continuation of gUnknown_083F7F9C?
+asm(".incbin \"baserom_de_debug.gba\", 0x424128, 0x50");
+#endif
+
 // text
 
 static void sub_810B674(void)

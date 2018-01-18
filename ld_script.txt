@@ -589,7 +589,6 @@ SECTIONS {
         src/field/fldeff_decoration.o(.rodata);
         src/field/fldeff_recordmixing.o(.rodata);
         src/field/field_special_scene.o(.rodata);
-        src/battle/battle_records.o(.rodata);
         src/field/rotating_gate.o(.rodata);
         src/field/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);
@@ -617,6 +616,7 @@ SECTIONS {
         src/field/fldeff_flash.o(.rodata);
         src/engine/time_events.o(.rodata);
         src/field/field_specials.o(.rodata);
+        src/battle/battle_records.o(.rodata);
         data/pokedex_area_screen.o(.rodata);
         src/scene/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
@@ -628,6 +628,7 @@ SECTIONS {
         src/field/choose_party.o(.rodata);
         src/scene/cable_car.o(.rodata);
         src/engine/save.o(.rodata);
+        data/unk_debug_menu_3.o(.rodata);
         src/field/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);

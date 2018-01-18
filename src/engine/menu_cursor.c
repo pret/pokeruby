@@ -11,6 +11,15 @@ EWRAM_DATA static u8 gUnknown_0203A3D2 = 0;
 EWRAM_DATA static u8 gUnknown_0203A3D3 = 0;
 EWRAM_DATA static u8 gUnknown_0203A3D4 = 0;
 
+#if DEBUG
+//const u8 gEmptySpace_08459A8C[0x1C0] = {0};
+//const u8 gEmptySpace_08459A8C[0xE300-0xC700] = {0};
+asm(".section .rodata\n\
+    .global gEmptySpace_08459A8C\n\
+gEmptySpace_08459A8C:\n\
+    .incbin \"pokeruby_de_debug.gba\", 0x459A8C, 0x1C00");
+#endif
+
 #if ENGLISH
 #include "../src/data/menu_cursor_en.h"
 #elif GERMAN

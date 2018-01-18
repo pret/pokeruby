@@ -298,13 +298,13 @@ const u8 Str_841160F[] = _("{STR_VAR_1}　{STR_VAR_2}");
 const u8 Str_841161A[] = _("メール{STR_VAR_1}　{STR_VAR_2}");
 const u8 Str_8411623[] = _("メール{STR_VAR_1}を　だれに　もたせる？");
 const u8 Str_8411634[] = _("000　{STR_VAR_1}");
-const u8 Str_841163B[] = _("せいきの　データが　とうろくずみ　です\n");
-const u8 Str_841163B_after[] = _("しんき　とうろく　できません");
-const u8 Str_841165E[] = _("せいきに　とうろくされたメールデータは\n");
-const u8 Str_841165E_after[] = _("へんこう　できません");
+const u8 Str_841163B[] = _("せいきの　データが　とうろくずみ　です\n"
+                           "しんき　とうろく　できません");
+const u8 Str_841165E[] = _("せいきに　とうろくされたメールデータは\n"
+                           "へんこう　できません");
 const u8 Str_841167D[] = _("メール{STR_VAR_1}　とうろく　かいじょ");
-const u8 Str_841168D[] = _("デバッグメニューから　とうろくした\n");
-const u8 Str_841168D_after[] = _("メール　いがいは　けせません");
+const u8 Str_841168D[] = _("デバッグメニューから　とうろくした\n"
+                           "メール　いがいは　けせません");
 const u8 Str_84116AE[] = _("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}");
 
 const struct MenuAction _84116BC[] =

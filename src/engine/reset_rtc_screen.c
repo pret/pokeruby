@@ -147,6 +147,13 @@ const struct SpriteTemplate gSpriteTemplate_83764E8 =
 
 const u8 gUnknown_08376500[] = _(" : ");
 
+#if DEBUG
+const u8 gUnknown_Debug_0839AE94[] = _("にっすう");
+const u8 gUnknown_Debug_0839AE99[] = _("じかん");
+const u8 gUnknown_Debug_0839AE9D[] = _("ゲームない　じかん");
+const u8 gUnknown_Debug_0839AEA7[] = _("RTC　じかん");
+#endif
+
 void SpriteCB_ResetRtcCusor0(struct Sprite *sprite)
 {
     int state = gTasks[sprite->data[0]].data[2];
