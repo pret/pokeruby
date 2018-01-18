@@ -794,6 +794,77 @@ _0800DAB0: .4byte 0x0600d000
 _0800DAB4: .4byte gBattleTerrainPalette_BattleTower
 	thumb_func_end DrawMainBattleBackground
 
+.if DEBUG
+	thumb_func_start sub_800DAB8
+sub_800DAB8:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._113
+	mov	r1, #0xc0
+	lsl	r1, r1, #0x13
+	bl	LZDecompressVram
+	ldr	r0, ._113 + 4
+	ldr	r4, ._113 + 8
+	mov	r2, #0x80
+	lsl	r2, r2, #0x4
+	add	r1, r4, #0
+	bl	gMysteryEventScriptCmdTableEnd+0x3cb4 	@ uh, what?
+	ldr	r0, ._113 + 12
+	mov	r1, #0x0
+	mov	r2, #0x40
+	bl	LoadCompressedPalette
+	bl	sub_800D74C
+	bl	DrawMainBattleBackground
+	ldr	r0, ._113 + 16
+	ldrh	r1, [r0]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._112	@cond_branch
+	ldr	r0, ._113 + 20
+	mov	r1, #0x0
+	add	r2, r4, #0
+	mov	r3, #0x1
+	bl	debug_sub_8008218
+	ldr	r5, ._113 + 24
+	mov	r4, #0x1
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x1
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x15
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x29
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+._112:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._114:
+	.align	2, 0
+._113:
+	.word	gUnknown_08D00000
+	.word	gUnknown_08D00524
+	.word	0x600c000
+	.word	gUnknown_08D004E0
+	.word	gBattleTypeFlags
+	.word	0x6000600
+	.word	0x101
+.syntax unified
+	thumb_func_end sub_800DAB8
+.else
 	thumb_func_start sub_800DAB8
 sub_800DAB8: @ 800DAB8
 	push {lr}
@@ -820,6 +891,7 @@ _0800DAEC: .4byte gUnknown_08D00524
 _0800DAF0: .4byte 0x0600c000
 _0800DAF4: .4byte gUnknown_08D004E0
 	thumb_func_end sub_800DAB8
+.endif
 
 	thumb_func_start sub_800DAF8
 sub_800DAF8: @ 800DAF8

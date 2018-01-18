@@ -105,7 +105,7 @@ tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
 
-%.gba: %.elf
+$(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)

@@ -13,6 +13,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
@@ -1396,12 +1397,31 @@ void CB2_LinkError(void)
 
 static void CB2_PrintErrorMessage(void)
 {
-    u8 array[64] __attribute__((unused)); // unused
+    u8 array[32] __attribute__((unused)); // unused
+    u8 array2[32] __attribute__((unused)); // unused
 
     switch (gMain.state)
     {
     case 0:
         Menu_PrintTextPixelCoords(gMultiText_LinkError, 20, 56, 1);
+#ifdef DEBUG
+        StringCopy(array, sColorCodes);
+
+        ConvertIntToHexStringN(array2, sErrorLinkStatus, STR_CONV_MODE_LEADING_ZEROS, 8);
+        StringAppend(array, array2);
+
+        StringAppend(array, sEmptyString);
+
+        ConvertIntToHexStringN(array2, sErrorLastSendQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringAppend(array, array2);
+
+        StringAppend(array, sEmptyString);
+
+        ConvertIntToHexStringN(array2, sErrorLastRecvQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringAppend(array, array2);
+
+        Menu_PrintText(array, 2, 15);
+#endif
         break;
     case 30:
     case 60:

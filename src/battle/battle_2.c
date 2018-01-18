@@ -9141,17 +9141,7 @@ void debug_sub_80139E4()
         "\n"
     );
 }
-#endif
 
-void sub_8010824(void)
-{
-    gBattleMainFunc();
-
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
-        gBattleBankFunc[gActiveBank]();
-}
-
-#if DEBUG
 __attribute__((naked))
 void sub_8010874()
 {
@@ -9525,6 +9515,15 @@ void sub_8010874()
     );
 }
 #else
+
+void sub_8010824(void)
+{
+    gBattleMainFunc();
+
+    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+        gBattleBankFunc[gActiveBank]();
+}
+
 void sub_8010874(void)
 {
     s32 i;
