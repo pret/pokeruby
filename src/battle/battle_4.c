@@ -1090,7 +1090,7 @@ static const u8 sTerrainToType[] =
     TYPE_NORMAL, // plain
 };
 
-static const u8 sBallCatchBonuses[] =
+const u8 sBallCatchBonuses[] =
 {
     20, 15, 10, 15 // Ultra, Great, Poke, Safari
 };
@@ -5018,7 +5018,156 @@ _0801F610: .4byte BattleScript_SAtkDown2\n\
 }
 #endif // NONMATCHING
 
-
+#if DEBUG
+__attribute__((naked))
+static void atk15_seteffectwithchance(void)
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldr	r2, ._1037\n\
+	ldr	r0, ._1037 + 4\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x58\n\
+	mul	r0, r0, r1\n\
+	add	r0, r0, r2\n\
+	add	r0, r0, #0x20\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x20\n\
+	bne	._1035	@cond_branch\n\
+	ldr	r2, ._1037 + 8\n\
+	ldr	r0, ._1037 + 12\n\
+	ldrh	r1, [r0]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r2\n\
+	ldrb	r0, [r0, #0x5]\n\
+	lsl	r4, r0, #0x1\n\
+	b	._1036\n\
+._1038:\n\
+	.align	2, 0\n\
+._1037:\n\
+	.word	gBattleMons\n\
+	.word	gBankAttacker\n\
+	.word	gBattleMoves\n\
+	.word	gCurrentMove\n\
+._1035:\n\
+	ldr	r2, ._1045\n\
+	ldr	r0, ._1045 + 4\n\
+	ldrh	r1, [r0]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r2\n\
+	ldrb	r4, [r0, #0x5]\n\
+._1036:\n\
+	ldr	r0, ._1045 + 8\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	ldr	r2, ._1045 + 12\n\
+	cmp	r0, #0\n\
+	beq	._1039	@cond_branch\n\
+	ldrb	r1, [r2, #0x3]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._1040	@cond_branch\n\
+	ldr	r0, ._1045 + 16\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x29\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._1050	@cond_branch\n\
+._1039:\n\
+	ldrb	r1, [r2, #0x3]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._1043	@cond_branch\n\
+._1040:\n\
+	ldr	r0, ._1045 + 16\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x29\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._1043	@cond_branch\n\
+	ldr	r2, ._1045 + 12\n\
+	ldrb	r1, [r2, #0x3]\n\
+	mov	r0, #0x7f\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2, #0x3]\n\
+	b	._1044\n\
+._1046:\n\
+	.align	2, 0\n\
+._1045:\n\
+	.word	gBattleMoves\n\
+	.word	gCurrentMove\n\
+	.word	gUnknown_02023A14+0x50\n\
+	.word	gBattleCommunication\n\
+	.word	gBattleMoveFlags\n\
+._1043:\n\
+	bl	Random\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r0, r0, #0x10\n\
+	mov	r1, #0x64\n\
+	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r0, r0, #0x10\n\
+	cmp	r0, r4\n\
+	bhi	._1049	@cond_branch\n\
+	ldr	r0, ._1052\n\
+	ldrb	r0, [r0, #0x3]\n\
+	cmp	r0, #0\n\
+	beq	._1049	@cond_branch\n\
+	ldr	r0, ._1052 + 4\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x29\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._1049	@cond_branch\n\
+	cmp	r4, #0x63\n\
+	bls	._1050	@cond_branch\n\
+._1044:\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x80\n\
+	bl	SetMoveEffect\n\
+	b	._1054\n\
+._1053:\n\
+	.align	2, 0\n\
+._1052:\n\
+	.word	gBattleCommunication\n\
+	.word	gBattleMoveFlags\n\
+._1050:\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x0\n\
+	bl	SetMoveEffect\n\
+	b	._1054\n\
+._1049:\n\
+	ldr	r1, ._1055\n\
+	ldr	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	str	r0, [r1]\n\
+._1054:\n\
+	ldr	r0, ._1055 + 4\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0, #0x3]\n\
+	ldr	r0, ._1055 + 8\n\
+	ldr	r2, ._1055 + 12\n\
+	add	r0, r0, r2\n\
+	strb	r1, [r0]\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._1056:\n\
+	.align	2, 0\n\
+._1055:\n\
+	.word	gBattlescriptCurrInstr\n\
+	.word	gBattleCommunication\n\
+	.word	+0x2000000\n\
+	.word	0x16112");
+}
+#else
 static void atk15_seteffectwithchance(void)
 {
     u32 PercentChance;
@@ -5043,6 +5192,7 @@ static void atk15_seteffectwithchance(void)
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleStruct->unk16112 = 0;
 }
+#endif
 
 static void atk16_seteffectprimary(void)
 {
@@ -12620,6 +12770,193 @@ static void atk9D_mimicattackcopy(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+static void atk9E_metronome(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r8\n\
+	push	{r7}\n\
+	ldr	r6, ._3076\n\
+	ldrb	r2, [r6]\n\
+	lsl	r1, r2, #0x1\n\
+	ldr	r0, ._3076 + 4\n\
+	add	r3, r1, r0\n\
+	ldr	r5, ._3076 + 8\n\
+	mov	r4, #0x58\n\
+	add	r0, r2, #0\n\
+	mul	r0, r0, r4\n\
+	add	r1, r0, r5\n\
+	ldrh	r0, [r1, #0xe]\n\
+	cmp	r0, #0\n\
+	bne	._3071	@cond_branch\n\
+	ldrh	r2, [r1, #0x10]\n\
+	cmp	r2, #0\n\
+	beq	._3071	@cond_branch\n\
+	ldrh	r0, [r1, #0x12]\n\
+	cmp	r0, #0\n\
+	beq	._3071	@cond_branch\n\
+	ldrh	r0, [r3]\n\
+	cmp	r0, #0\n\
+	bne	._3072	@cond_branch\n\
+	strh	r2, [r3]\n\
+._3072:\n\
+	ldr	r1, ._3076 + 12\n\
+	ldrh	r0, [r3]\n\
+	strh	r0, [r1]\n\
+	ldrb	r0, [r6]\n\
+	mul	r0, r0, r4\n\
+	add	r0, r0, r5\n\
+	ldrh	r5, [r0, #0x10]\n\
+	ldrh	r2, [r0, #0x12]\n\
+	add	r7, r1, #0\n\
+	cmp	r5, r2\n\
+	bcs	._3073	@cond_branch\n\
+	ldrh	r0, [r3]\n\
+	cmp	r0, r2\n\
+	beq	._3074	@cond_branch\n\
+	add	r0, r0, #0x1\n\
+	b	._3079\n\
+._3077:\n\
+	.align	2, 0\n\
+._3076:\n\
+	.word	gBankAttacker\n\
+	.word	+0x20160b4\n\
+	.word	gBattleMons\n\
+	.word	gCurrentMove\n\
+._3073:\n\
+	ldrh	r4, [r3]\n\
+	add	r1, r4, #0\n\
+	mov	r0, #0xb1\n\
+	lsl	r0, r0, #0x1\n\
+	cmp	r1, r0\n\
+	bne	._3078	@cond_branch\n\
+	mov	r0, #0x1\n\
+	b	._3079\n\
+._3078:\n\
+	cmp	r1, r2\n\
+	bne	._3080	@cond_branch\n\
+._3074:\n\
+	strh	r5, [r3]\n\
+	b	._3081\n\
+._3080:\n\
+	add	r0, r4, #1\n\
+._3079:\n\
+	strh	r0, [r3]\n\
+._3081:\n\
+	ldr	r4, ._3083\n\
+	ldr	r2, [r4]\n\
+	ldr	r0, ._3083 + 4\n\
+	and	r2, r2, r0\n\
+	str	r2, [r4]\n\
+	ldr	r6, ._3083 + 8\n\
+	ldr	r5, ._3083 + 12\n\
+	ldr	r3, ._3083 + 16\n\
+	ldrh	r1, [r7]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r3\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r5\n\
+	ldr	r0, [r0]\n\
+	str	r0, [r6]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x4\n\
+	orr	r2, r2, r0\n\
+	str	r2, [r4]\n\
+	ldrh	r0, [r7]\n\
+	b	._3082\n\
+._3084:\n\
+	.align	2, 0\n\
+._3083:\n\
+	.word	gHitMarker\n\
+	.word	0xfffffbff\n\
+	.word	gBattlescriptCurrInstr\n\
+	.word	gBattleScriptsForMoveEffects\n\
+	.word	gBattleMoves\n\
+._3071:\n\
+	ldr	r7, ._3090\n\
+	mov	r6, #0xb1\n\
+	lsl	r6, r6, #0x1\n\
+	ldr	r5, ._3090 + 4\n\
+	ldr	r0, ._3090 + 8\n\
+	mov	r8, r0\n\
+._3089:\n\
+	bl	Random\n\
+	ldr	r2, ._3090 + 12\n\
+	add	r1, r2, #0\n\
+	and	r0, r0, r1\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r7]\n\
+	cmp	r0, r6\n\
+	bhi	._3089	@cond_branch\n\
+	mov	r0, #0x3\n\
+._3086:\n\
+	sub	r0, r0, #0x1\n\
+	cmp	r0, #0\n\
+	bge	._3086	@cond_branch\n\
+	ldr	r4, ._3090\n\
+	ldrh	r2, [r4]\n\
+	ldr	r3, ._3090 + 16\n\
+	sub	r0, r5, #2\n\
+._3088:\n\
+	add	r0, r0, #0x2\n\
+	ldrh	r1, [r0]\n\
+	cmp	r1, r2\n\
+	beq	._3087	@cond_branch\n\
+	cmp	r1, r3\n\
+	bne	._3088	@cond_branch\n\
+._3087:\n\
+	ldr	r0, ._3090 + 16\n\
+	cmp	r1, r0\n\
+	bne	._3089	@cond_branch\n\
+	ldr	r2, ._3090 + 20\n\
+	ldr	r0, [r2]\n\
+	ldr	r1, ._3090 + 24\n\
+	and	r0, r0, r1\n\
+	str	r0, [r2]\n\
+	ldr	r3, ._3090 + 28\n\
+	ldr	r2, ._3090 + 32\n\
+	ldrh	r1, [r4]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r2\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r3\n\
+	ldr	r0, [r0]\n\
+	mov	r1, r8\n\
+	str	r0, [r1]\n\
+	ldrh	r0, [r4]\n\
+._3082:\n\
+	mov	r1, #0x0\n\
+	bl	GetMoveTarget\n\
+	ldr	r1, ._3090 + 36\n\
+	strb	r0, [r1]\n\
+	pop	{r3}\n\
+	mov	r8, r3\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._3091:\n\
+	.align	2, 0\n\
+._3090:\n\
+	.word	gCurrentMove\n\
+	.word	sMovesForbiddenToCopy\n\
+	.word	gBattlescriptCurrInstr\n\
+	.word	0x1ff\n\
+	.word	0xffff\n\
+	.word	gHitMarker\n\
+	.word	0xfffffbff\n\
+	.word	gBattleScriptsForMoveEffects\n\
+	.word	gBattleMoves\n\
+	.word	gBankTarget");
+}
+#else
 #ifdef NONMATCHING
 static void atk9E_metronome(void)
 {
@@ -12721,6 +13058,7 @@ _0802795C: .4byte gBankTarget\n\
         .syntax divided");
 }
 #endif // NONMATCHING
+#endif
 
 static void atk9F_dmgtolevel(void)
 {
