@@ -691,7 +691,7 @@ void debug_sub_806F908(u8 a)
 ._142:\n\
 	ldrb	r0, [r4, #0x2]\n\
 	bl	DestroyTask\n\
-	bl	MenuZeroFillScreen\n\
+	bl	Menu_EraseScreen\n\
 	bl	ScriptContext2_Disable\n\
 	add	r0, r5, #0\n\
 	bl	DestroyTask\n\
@@ -902,7 +902,7 @@ void debug_sub_806F9E4()
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._165	@cond_branch\n\
-	bl	MenuZeroFillScreen\n\
+	bl	Menu_EraseScreen\n\
 	add	r0, r7, #0\n\
 	bl	DestroyTask\n\
 	bl	ScriptContext2_Disable\n\

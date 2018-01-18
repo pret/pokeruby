@@ -398,7 +398,7 @@ void debug_sub_8075DB4()
         "	cmp	r4, #0x2\n"
         "	ble	._24	@cond_branch\n"
         "	add	r0, r6, #0\n"
-        "	bl	sub_8136088\n"
+        "	bl	SetEReaderTrainerChecksum\n"
         "	pop	{r4, r5, r6}\n"
         "	pop	{r0}\n"
         "	bx	r0\n"

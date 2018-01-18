@@ -3698,13 +3698,13 @@ const u16 gRoute119WaterTileData[] =
 extern u16 gSpecialVar_Result;
 extern u8 S_RepelWoreOff[];
 
-EWRAM_DATA static u8 sWildEncountersDisabled = 0;
+EWRAM_DATA u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
 
 #define NUM_FEEBAS_SPOTS 6
 
-static u16 FeebasRandom(void);
-static void FeebasSeedRng(u16 seed);
+u16 FeebasRandom(void);
+void FeebasSeedRng(u16 seed);
 
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
@@ -3791,13 +3791,13 @@ static bool8 CheckFeebas(void)
     return FALSE;
 }
 
-static u16 FeebasRandom(void)
+u16 FeebasRandom(void)
 {
     sFeebasRngValue = 12345 + 0x41C64E6D * sFeebasRngValue;
     return sFeebasRngValue >> 16;
 }
 
-static void FeebasSeedRng(u16 seed)
+void FeebasSeedRng(u16 seed)
 {
     sFeebasRngValue = seed;
 }

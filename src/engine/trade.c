@@ -4514,8 +4514,8 @@ static __attribute__((naked)) void sub_804B41C(void)
 }
 #endif
 
-static void sub_804B790(void)
 // In-game trade init
+void sub_804B790(void)
 {
     u8 otName[11];
     switch (gMain.state)

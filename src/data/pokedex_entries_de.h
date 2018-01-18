@@ -6337,7 +6337,8 @@ static const u8 DexDescription_Deoxys_2[] = _(
     "dieses POKéMON ist sein Gehirn.");
 #endif
 
-static const struct PokedexEntry gPokedexEntries[] = {
+const struct PokedexEntry gPokedexEntries[] =
+{
     {
         // Dummy
         .categoryName = _("UNBEKANNT"),

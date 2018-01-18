@@ -734,7 +734,7 @@ void sub_813B79C()
         "	.word	sSaveBlockChunks\n"
         "	.word	0xff4\n"
         "	.word	0xff6\n"
-        "	.word	gHallOfFameSaveSectionLocations\n"
+        "	.word	sHallOfFameChunks\n"
         "\n"
     );
 }

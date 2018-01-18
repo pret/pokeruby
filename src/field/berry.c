@@ -1780,7 +1780,7 @@ u8* DebugOpenBerryInfo(void)
     u8 berryTreeId;
     struct BerryTree *berryTree;
 
-    if (GetFieldObjectScriptPointerForComparison() != &BerryTreeScript)
+    if (GetFieldObjectScriptPointerPlayerFacing() != &S_BerryTree)
         return NULL;
 
     berryTreeId = FieldObjectGetBerryTreeId(gSelectedMapObject);
@@ -1809,7 +1809,7 @@ void DebugOpenBerryInfo()
 {
     asm(
         "	push	{r4, r5, r6, r7, lr}\n"
-        "	bl	GetFieldObjectScriptPointerForComparison\n"
+        "	bl	GetFieldObjectScriptPointerPlayerFacing\n"
         "	ldr	r1, ._138\n"
         "	cmp	r0, r1\n"
         "	beq	._136	@cond_branch\n"
@@ -1818,7 +1818,7 @@ void DebugOpenBerryInfo()
         "._139:\n"
         "	.align	2, 0\n"
         "._138:\n"
-        "	.word	BerryTreeScript\n"
+        "	.word	S_BerryTree\n"
         "._136:\n"
         "	ldr	r0, ._141\n"
         "	ldrb	r0, [r0]\n"

@@ -1308,7 +1308,7 @@ u8 debug_sub_808560C(void)
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	strb	r0, [r4]\n\
-	bl	MenuZeroFillScreen\n\
+	bl	Menu_EraseScreen\n\
 	mov	r0, #0x16\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0x1c\n\

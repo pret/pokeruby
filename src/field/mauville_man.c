@@ -331,7 +331,7 @@ void debug_sub_810B32C()
 }
 #endif
 
-static u8 GetCurrentMauvilleOldMan(void)
+u8 GetCurrentMauvilleOldMan(void)
 {
     struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
 

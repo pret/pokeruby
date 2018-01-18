@@ -436,7 +436,7 @@ static bool8 SetupBagMultistep(void)
 	bl	sub_80A34E8\n\
 	b	._61\n\
 ._9:\n\
-	bl	remove_some_task\n\
+	bl	ScanlineEffect_Stop\n\
 	ldr	r1, ._27\n\
 	ldr	r0, ._27 + 4\n\
 	add	r1, r1, r0\n\

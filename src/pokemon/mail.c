@@ -2369,7 +2369,7 @@ void debug_sub_810D388()
         "	.word	unk_debug_bss_2\n"
         "	.word	0x43c\n"
         "._297:\n"
-        "	bl	remove_some_task\n"
+        "	bl	ScanlineEffect_Stop\n"
         "	bl	ResetPaletteFade\n"
         "	ldr	r0, ._302\n"
         "	bl	SetVBlankCallback\n"

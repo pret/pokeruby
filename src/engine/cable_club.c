@@ -407,7 +407,7 @@ void debug_sub_808A55C()
 	.word	gLinkStatus\n\
 	.word	gLink\n\
 	.word	gReceivedRemoteLinkPlayers\n\
-	.word	gScriptResult\n\
+	.word	gSpecialVar_Result\n\
 	.word	gLinkCallback\n\
 	.word	gLinkPlayers\n\
 	.word	0x4000128");

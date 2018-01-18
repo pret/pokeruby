@@ -288,7 +288,7 @@ static void UpdateIconBlink(struct Sprite *);
 static void SpriteCB_PlayerIconZoomedIn(struct Sprite *);
 const u8 *GetMapSectionName(u8 *, u16, u16);
 static void VBlankCB_FlyRegionMap(void);
-static void CB2_FlyRegionMap(void);
+void CB2_FlyRegionMap(void);
 void sub_80FC244(void (*func)(void));
 static void PrintFlyTargetName(void);
 static void CreateFlyTargetGraphics(void);
@@ -1591,7 +1591,7 @@ static void VBlankCB_FlyRegionMap(void)
     TransferPlttBuffer();
 }
 
-static void CB2_FlyRegionMap(void)
+void CB2_FlyRegionMap(void)
 {
     ewram0_3.unk0();
     AnimateSprites();

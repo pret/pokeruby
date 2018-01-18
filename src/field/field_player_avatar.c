@@ -1940,7 +1940,7 @@ void debug_sub_805F2DC()
         "	.word	gPlayerAvatar\n"
         "._429:\n"
         "	add	r0, r4, #0\n"
-        "	bl	sub_80593F4\n"
+        "	bl	PlayerGoSpeed4\n"
         "._430:\n"
         "	mov	r0, #0x1\n"
         "	pop	{r4}\n"

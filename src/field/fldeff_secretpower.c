@@ -266,7 +266,7 @@ void debug_sub_80D93F4()
 ._99:\n\
 	.align	2, 0\n\
 ._98:\n\
-	.word	gScriptResult\n\
+	.word	gSpecialVar_Result\n\
 ._96:\n\
 	ldr	r4, ._102\n\
 	add	r1, r4, #2\n\

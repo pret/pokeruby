@@ -67,7 +67,7 @@ u32 sub_8007E40(void);
 static void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
-static void PrintHex(u32, u8, u8, u8);
+void PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8);
 bool8 sub_8008224(void);
@@ -961,7 +961,7 @@ static void PrintHexDigit(u8 tileNum, u8 x, u8 y)
     tilemap[(32 * y) + x] = (gLinkTestBGInfo.paletteNum << 12) | (tileNum + 1);
 }
 
-static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
+void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
 {
     u8 buffer[16];
     s32 i;

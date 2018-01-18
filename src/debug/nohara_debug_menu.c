@@ -340,7 +340,7 @@ void debug_sub_808F5D8()
         "._29:\n"
         "	ldr	r5, ._30 + 8\n"
         "	strh	r4, [r5]\n"
-        "	bl	sub_810F424\n"
+        "	bl	GetSlotMachineId\n"
         "	add	r1, r0, #0\n"
         "	lsl	r1, r1, #0x10\n"
         "	lsr	r1, r1, #0x10\n"

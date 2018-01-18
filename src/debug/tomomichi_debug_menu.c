@@ -5001,7 +5001,7 @@ void debug_sub_808DABC()
         "._387:\n"
         "	.align	2, 0\n"
         "._386:\n"
-        "	.word	gScriptResult\n"
+        "	.word	gSpecialVar_Result\n"
         "\n"
     );
 }
@@ -5043,7 +5043,7 @@ void debug_sub_808DAD4()
         "	.align	2, 0\n"
         "._393:\n"
         "	.word	0xffff\n"
-        "	.word	gScriptResult\n"
+        "	.word	gSpecialVar_Result\n"
         "\n"
     );
 }
