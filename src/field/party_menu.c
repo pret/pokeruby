@@ -777,9 +777,7 @@ void ReDrawPartyMonBackgrounds(void)
 {
     if (ewram1B000.unk261)
     {
-        const void *src = gBGTilemapBuffers[2];
-        void *dest = (void *)(BG_VRAM + 0x3000);
-        DmaCopy16(3, src, dest, 0x800);
+        DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(BG_VRAM + 0x3000), 0x800);
 
         if (ewram1B000.unk261 == 2)
         {

@@ -744,29 +744,12 @@ static bool32 sub_80719FC(u8 *step)
     switch (*step)
     {
     case 0:
-    {
-        u8 *addr;
-        u32 size;
-
         REG_DISPCNT = 0;
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        addr = (void *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
-        break;
-    }
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
+		break;
     case 1:
         ResetSpriteData();
         ResetTasks();

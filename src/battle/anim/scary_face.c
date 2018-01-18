@@ -27,7 +27,7 @@ static void sub_80D24E0(u8 taskId);
 void sub_80D23B4(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
-    u8* tempvar;
+
     REG_BLDCNT = 0x3F42;
     REG_BLDALPHA = 0x1000;
     REG_BG1CNT_BITFIELD.priority = 1;
@@ -40,8 +40,7 @@ void sub_80D23B4(u8 taskId)
     REG_BG1HOFS = 0;
     REG_BG1VOFS = 0;
     sub_8078914(&subStruct);
-    tempvar = subStruct.field_4;
-    DmaFill32(3, 0x0, tempvar, 0x1000);
+    DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     if (IsContest())
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceContest, subStruct.field_4);
     else if (GetBankSide(gAnimBankTarget) == 1)

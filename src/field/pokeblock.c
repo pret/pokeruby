@@ -228,14 +228,10 @@ static void sub_810B674(void)
 
 static void sub_810B68C(void)
 {
-    u16 *src;
-    vu16 *dest;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    src = gBGTilemapBuffers[2];
-    dest = (vu16 *)(VRAM + 0x7800);
-    DmaCopy16(3, src, dest, sizeof gBGTilemapBuffers[2]);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x7800), sizeof gBGTilemapBuffers[2]);
 }
 
 static bool8 sub_810B6C0(void)

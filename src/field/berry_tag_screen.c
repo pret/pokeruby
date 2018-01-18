@@ -189,7 +189,6 @@ static void sub_8146288(void)
 bool8 sub_81462B8(void)
 {
     u16 i;
-    void *addr;
 
     switch (gSharedMem.var_1FFFF)
     {
@@ -213,8 +212,7 @@ bool8 sub_81462B8(void)
             else
                 gBGTilemapBuffers[2][i] = 0x5042;
         }
-        addr = (void *)(VRAM + 0x3800);
-        DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
+        DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x3800), 0x800);
         gSharedMem.var_1FFFF += 1;
         break;
     case 4:

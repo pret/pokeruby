@@ -1199,8 +1199,6 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
 
 static void sub_81433E0(void)
 {
-    u32 offsetWrite2, offsetWrite3;
-    u32 size2, size3;
     u16 i;
 
     REG_DISPCNT = 0;
@@ -1222,14 +1220,8 @@ static void sub_81433E0(void)
     REG_BG3VOFS = 0;
 
     DmaFill16Large(3, 0, VRAM, 0x18000, 0x1000);
-
-    offsetWrite2 = OAM;
-    size2 = OAM_SIZE;
-    DmaFill32(3, 0, offsetWrite2, size2);
-
-    offsetWrite3 = PLTT;
-    size3 = PLTT_SIZE;
-    DmaFill16(3, 0, offsetWrite3, size3);
+    DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
+    DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
 
     LZ77UnCompVram(gHallOfFame_Gfx, (void*)(VRAM));
 

@@ -504,18 +504,11 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 7:
-        {
-            u32 offsetRead2, offsetWrite2;
-
-            REG_BG2CNT = 0x4C06;
-            LoadPalette(gUnknown_0820C9F8, 0x10, 0xA0);
-            DmaCopyLarge16(3, gUnknown_0820CA98, (void *)(VRAM + 0x4000), 0x1300, 0x1000);
-
-            offsetRead2 = (u32)(&gUnknown_0820F798);
-            offsetWrite2 = (u32)(VRAM + 0x6000);
-            DmaCopy16(3, offsetRead2, (void*)(offsetWrite2), 0x1000);
-            gMain.state++;
-        }
+        REG_BG2CNT = 0x4C06;
+        LoadPalette(gUnknown_0820C9F8, 0x10, 0xA0);
+        DmaCopyLarge16(3, gUnknown_0820CA98, (void *)(VRAM + 0x4000), 0x1300, 0x1000);
+        DmaCopy16Defvars(3, gUnknown_0820F798, (void *)(VRAM + 0x6000), 0x1000);
+        gMain.state++;
         break;
     case 8:
         REG_BG1CNT = 0x501;

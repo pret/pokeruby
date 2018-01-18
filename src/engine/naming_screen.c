@@ -1616,16 +1616,8 @@ static void sub_80B7558(void)
 
 static void sub_80B7568(void)
 {
-    const void *src;
-    void *dst;
-
-    src = gNamingScreenMenu_Gfx;
-    dst = (void *)(VRAM + gMenuMessageBoxContentTileOffset * 32);
-    DmaCopy16(3, src, dst, 0x800);
-
-    src = gNamingScreenMenu_Gfx;
-    dst = (void *)(VRAM + 0x8000 + gMenuMessageBoxContentTileOffset * 32);
-    DmaCopy16(3, src, dst, 0x800);
+    DmaCopy16Defvars(3, gNamingScreenMenu_Gfx, (void *)(VRAM + gMenuMessageBoxContentTileOffset * 32), 0x800);
+    DmaCopy16Defvars(3, gNamingScreenMenu_Gfx, (void *)(VRAM + 0x8000 + gMenuMessageBoxContentTileOffset * 32), 0x800);
 }
 
 static void sub_80B75B0(void)

@@ -832,14 +832,9 @@ static bool8 sub_804E2EC(void)
         gBerryBlenderData->field_1++;
         break;
     case 1:
-        {
-            const void* offsetRead = sBlenderCenterMap;
-            void* offsetWrite = (void*)(VRAM + 0x4000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x400);
-            LoadPalette(sBlenderCenterPal, 0, 0x100);
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopy16Defvars(3, sBlenderCenterMap, (void *)(VRAM + 0x4000), 0x400);
+        LoadPalette(sBlenderCenterPal, 0, 0x100);
+        gBerryBlenderData->field_1++;
         break;
     case 2:
         DmaCopyLarge16(3, ewram10000, (void *)(VRAM + 0x0), 0x2000, 0x1000);
@@ -854,37 +849,23 @@ static bool8 sub_804E2EC(void)
         gBerryBlenderData->field_1++;
         break;
     case 5:
-        {
-            void* offsetRead = ewram10000;
-            void* offsetWrite = (void*)(VRAM + 0xE000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopy16Defvars(3, ewram10000, (void *)(VRAM + 0xE000), 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 6:
-        {
-            void* offsetRead = ewram11000;
-            void* offsetWrite = (void*)(VRAM + 0xF000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            gBerryBlenderData->field_1++;
-        }
+		DmaCopy16Defvars(3, ewram11000, (void *)(VRAM + 0xF000), 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 7:
         {
             u16 i;
             u16* palStore = (u16*)(ewram13000);
-            void* offsetRead;
-            void* offsetWrite;
 
             for (i = 0; i < 640; i++)
             {
                 *(palStore + i) |= 0x100;
             }
-            offsetRead = ewram13000;
-            offsetWrite = (void*)(VRAM + 0x6000);
-            DmaCopy16(3, offsetRead, offsetWrite, 0x500);
+            DmaCopy16Defvars(3, ewram13000, (void *)(VRAM + 0x6000), 0x500);
             LoadPalette(sBlenderOuterPal, 0x80, 0x20);
             gBerryBlenderData->field_1++;
         }

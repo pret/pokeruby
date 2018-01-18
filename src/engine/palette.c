@@ -827,8 +827,6 @@ void BlendPalettes(u32 selectedPalettes, u8 coeff, u16 color)
 
 void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u16 color)
 {
-    void *src = gPlttBufferUnfaded;
-    void *dest = gPlttBufferFaded;
-    DmaCopy32(3, src, dest, PLTT_SIZE);
+    DmaCopy32Defvars(3, gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
     BlendPalettes(selectedPalettes, coeff, color);
 }

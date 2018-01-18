@@ -368,20 +368,8 @@ static void sub_80A3134(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-
-    {
-        const void *src = gBGTilemapBuffers[1];
-        void *dst = (void *)(VRAM + 0x2000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
-
-    {
-        const void *src = gBGTilemapBuffers[2];
-        void *dst = (void *)(VRAM + 0x6000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
+    DmaCopy16Defvars(3, gBGTilemapBuffers[1], (void *)(VRAM + 0x2000), 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x6000), 0x800);
 }
 
 static bool8 SetupBagMultistep(void)

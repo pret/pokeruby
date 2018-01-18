@@ -2064,25 +2064,15 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 
     if (gTasks[taskId].data[5] == 0)
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256;
-        DmaCopy32(3, src, dst, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256, 32);
     }
     else
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG2_X = x + gTasks[taskId].data[3];
         gBattle_BG2_Y = y + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 - 112;
-        DmaCopy32(3, src, dst, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 - 112, 32);
     }
 }
 
@@ -2426,14 +2416,10 @@ static void LoadMoveBg(u16 bgId)
     if (IsContest())
     {
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
-        void *dmaSrc;
-        void *dmaDest;
 
-        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
+		LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
         sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
-        dmaSrc = IsContest() ? EWRAM_14800 : EWRAM_18000;
-        dmaDest = (void *)(VRAM + 0xD000);
-        DmaCopy32(3, dmaSrc, dmaDest, 0x800);
+        DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : EWRAM_18000, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80789BC() * 16, 32);
     }
