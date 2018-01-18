@@ -108,7 +108,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         {
             if (trader->unk1[i] > DECOR_REGISTEEL_DOLL)
             {
-                Menu_PrintText(gOtherText_FiveQuestionsAndSlash, 1, numDecorations * 2 + 2);
+                Menu_PrintText(gOtherText_FiveQuestions, 1, numDecorations * 2 + 2);
             }
             else
             {

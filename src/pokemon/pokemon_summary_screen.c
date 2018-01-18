@@ -2576,14 +2576,14 @@ static void sub_809FC34(struct Pokemon *mon)
         buffer = gStringVar1;
         buffer = sub_80A1E58(buffer, 13);
         buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
-        buffer = StringCopy(buffer, gOtherText_FiveQuestionsAndSlash);
+        buffer = StringCopy(buffer, gOtherText_FiveQuestions);
         buffer[0] = EXT_CTRL_CODE_BEGIN;
         buffer[1] = 0x13;
         buffer[2] = 0x4E;
         buffer[3] = EOS;
         Menu_PrintText(gStringVar1, 11, 4);
 
-        sub_80A1EF8(gOtherText_FiveQuestionsAndSlash, 13, 193, 32, 1);
+        sub_80A1EF8(gOtherText_FiveQuestions, 13, 193, 32, 1);
         sub_80A198C(9, 120, 48, 0);
 
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);

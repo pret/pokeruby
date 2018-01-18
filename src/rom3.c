@@ -101,9 +101,9 @@ void setup_poochyena_battle(void)
 #if DEBUG
     if (gUnknown_02023A14_50 & 0x80)
     {
-        ewram[0x160fd] = 0;
-        ewram[0x160fe] = 0;
-        ewram[0x160ff] = 0;
+        gSharedMem[0x160fd] = 0;
+        gSharedMem[0x160fe] = 0;
+        gSharedMem[0x160ff] = 0;
         ((u32 *) gBattleBuffersTransferData)[64]++;
     }
 #endif
