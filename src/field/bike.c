@@ -131,14 +131,6 @@ static const struct BikeHistoryInputInfo gAcroBikeTricksList[] =
 
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
-#if DEBUG
-    if (gUnknown_020297ED && debug_sub_805F2B0(direction))
-    {
-        Bike_SetBikeStill();
-        return;
-    }
-#endif
-
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         MovePlayerOnMachBike(direction, newKeys, heldKeys);
     else
@@ -147,6 +139,13 @@ void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 
 static void MovePlayerOnMachBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
+#if DEBUG
+    if (gUnknown_020297ED && debug_sub_805F2B0(direction))
+    {
+        Bike_SetBikeStill();
+        return;
+    }
+#endif
     sMachBikeTransitions[GetMachBikeTransition(&direction)](direction);
 }
 

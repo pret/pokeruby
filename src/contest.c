@@ -611,6 +611,35 @@ void sub_80AB9A0(u8 taskId)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void ContestMainCallback2(void)
+{
+    asm("\
+	push	{lr}\n\
+	ldr	r0, ._122\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._121	@cond_branch\n\
+	ldr	r0, ._122 + 4\n\
+	ldrh	r0, [r0, #0x2e]\n\
+	cmp	r0, #0x4\n\
+	bne	._121	@cond_branch\n\
+	bl	unref_sub_80B0CF4\n\
+._121:\n\
+	bl	AnimateSprites\n\
+	bl	RunTasks\n\
+	bl	BuildOamBuffer\n\
+	bl	UpdatePaletteFade\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._123:\n\
+	.align	2, 0\n\
+._122:\n\
+	.word	gUnknown_020297ED\n\
+	.word	gMain");
+}
+#else
 void ContestMainCallback2(void)
 {
     AnimateSprites();
@@ -618,6 +647,7 @@ void ContestMainCallback2(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+#endif
 
 void ContestVBlankCallback(void)
 {
@@ -733,6 +763,272 @@ void sub_80ABCDC(u8 taskId)
 }
 
 // Handle move selection input
+#if DEBUG
+__attribute__((naked))
+void sub_80ABEA0(u8 taskId)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	add	sp, sp, #0xfffffff8\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	mov	r6, #0x0\n\
+	ldr	r0, ._161\n\
+	mov	ip, r0\n\
+	ldr	r4, ._161 + 4\n\
+	ldr	r3, ._161 + 8\n\
+	ldrb	r0, [r4]\n\
+	lsl	r0, r0, #0x6\n\
+	mov	r1, ip\n\
+	add	r1, r1, #0x1e\n\
+	add	r1, r0, r1\n\
+	mov	r2, #0x3\n\
+._158:\n\
+	ldrh	r0, [r1]\n\
+	cmp	r0, #0\n\
+	beq	._157	@cond_branch\n\
+	add	r0, r6, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+._157:\n\
+	add	r1, r1, #0x2\n\
+	sub	r2, r2, #0x1\n\
+	cmp	r2, #0\n\
+	bge	._158	@cond_branch\n\
+	ldrh	r0, [r3, #0x2e]\n\
+	mov	r5, #0x1\n\
+	and	r5, r5, r0\n\
+	cmp	r5, #0\n\
+	beq	._159	@cond_branch\n\
+	bl	DestroyMenuCursor\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._161 + 12\n\
+	lsl	r1, r7, #0x2\n\
+	add	r1, r1, r7\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	ldr	r0, ._161 + 16\n\
+	b	._160\n\
+._162:\n\
+	.align	2, 0\n\
+._161:\n\
+	.word	gContestMons\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	gMain\n\
+	.word	gTasks\n\
+	.word	sub_80AC0C8+1\n\
+._159:\n\
+	ldrh	r0, [r3, #0x30]\n\
+	cmp	r0, #0x10\n\
+	bne	._163	@cond_branch\n\
+	b	._196\n\
+._163:\n\
+	cmp	r0, #0x10\n\
+	bgt	._165	@cond_branch\n\
+	cmp	r0, #0x2\n\
+	beq	._166	@cond_branch\n\
+	cmp	r0, #0x8\n\
+	bne	._167	@cond_branch\n\
+	b	._168\n\
+._167:\n\
+	b	._196\n\
+._165:\n\
+	cmp	r0, #0x40\n\
+	beq	._170	@cond_branch\n\
+	cmp	r0, #0x40\n\
+	bgt	._171	@cond_branch\n\
+	b	._196\n\
+._171:\n\
+	cmp	r0, #0x80\n\
+	beq	._173	@cond_branch\n\
+	b	._196\n\
+._166:\n\
+	bl	sub_814A904\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	mov	r0, #0x0\n\
+	bl	sub_80AFFE0\n\
+	ldr	r0, ._177\n\
+	ldr	r1, ._177 + 4\n\
+	ldrb	r2, [r1]\n\
+	ldrb	r3, [r1, #0x1]\n\
+	ldrb	r4, [r1, #0x2]\n\
+	str	r4, [sp]\n\
+	ldrb	r1, [r1, #0x3]\n\
+	str	r1, [sp, #0x4]\n\
+	mov	r1, #0x0\n\
+	bl	Text_FillWindowRectDefPalette\n\
+	ldr	r0, ._177 + 8\n\
+	ldrb	r0, [r0]\n\
+	bl	Contest_IsMonsTurnDisabled\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._175	@cond_branch\n\
+	ldr	r0, ._177 + 12\n\
+	ldr	r1, ._177 + 16\n\
+	bl	StringCopy\n\
+	b	._176\n\
+._178:\n\
+	.align	2, 0\n\
+._177:\n\
+	.word	gUnknown_03004210\n\
+	.word	gUnknown_083CA340\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	gDisplayedStringBattle\n\
+	.word	gText_Contest_WhichMoveWillBePlayed\n\
+._175:\n\
+	ldr	r0, ._180\n\
+	ldr	r1, ._180 + 4\n\
+	bl	StringCopy\n\
+._176:\n\
+	ldr	r5, ._180\n\
+	ldr	r0, ._180 + 8\n\
+	ldrb	r1, [r0, #0x1]\n\
+	add	r1, r1, #0x1\n\
+	add	r0, r5, #0\n\
+	bl	InsertStringDigit\n\
+	bl	sub_80AF138\n\
+	ldr	r4, ._180 + 12\n\
+	add	r0, r4, #0\n\
+	add	r1, r5, #0\n\
+	bl	StringExpandPlaceholders\n\
+	ldr	r0, ._180 + 16\n\
+	mov	r2, #0xc2\n\
+	lsl	r2, r2, #0x2\n\
+	mov	r1, #0xf\n\
+	str	r1, [sp]\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0x1\n\
+	bl	Text_InitWindowAndPrintText\n\
+	ldr	r0, ._180 + 20\n\
+	mov	r1, #0x0\n\
+	strh	r1, [r0]\n\
+	ldr	r0, ._180 + 24\n\
+	strh	r1, [r0]\n\
+	ldr	r1, ._180 + 28\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._180 + 32\n\
+	str	r1, [r0]\n\
+	b	._196\n\
+._181:\n\
+	.align	2, 0\n\
+._180:\n\
+	.word	gDisplayedStringBattle\n\
+	.word	gText_Contest_ButItCantParticipate\n\
+	.word	+0x2019204\n\
+	.word	gStringVar4\n\
+	.word	gMenuWindow\n\
+	.word	gBattle_BG0_Y\n\
+	.word	gBattle_BG2_Y\n\
+	.word	gTasks\n\
+	.word	sub_80ABC70+1\n\
+._170:\n\
+	ldr	r4, ._184\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r4, r0]\n\
+	bl	nullsub_17\n\
+	ldrb	r0, [r4]\n\
+	cmp	r0, #0\n\
+	bne	._182	@cond_branch\n\
+	sub	r0, r6, #1\n\
+	b	._186\n\
+._185:\n\
+	.align	2, 0\n\
+._184:\n\
+	.word	+0x2019204\n\
+._182:\n\
+	sub	r0, r0, #0x1\n\
+	b	._186\n\
+._173:\n\
+	ldr	r4, ._189\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r4, r0]\n\
+	bl	nullsub_17\n\
+	ldrb	r1, [r4]\n\
+	sub	r0, r6, #1\n\
+	cmp	r1, r0\n\
+	bne	._187	@cond_branch\n\
+	strb	r5, [r4]\n\
+	b	._188\n\
+._190:\n\
+	.align	2, 0\n\
+._189:\n\
+	.word	+0x2019204\n\
+._187:\n\
+	add	r0, r1, #1\n\
+._186:\n\
+	strb	r0, [r4]\n\
+._188:\n\
+	ldr	r4, ._193\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r4, r0]\n\
+	bl	sub_80AC0AC\n\
+	bl	sub_80AED58\n\
+	ldr	r2, ._193 + 4\n\
+	ldrb	r1, [r4]\n\
+	lsl	r1, r1, #0x1\n\
+	ldr	r0, ._193 + 8\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x6\n\
+	add	r1, r1, r0\n\
+	add	r2, r2, #0x1e\n\
+	add	r1, r1, r2\n\
+	ldrh	r0, [r1]\n\
+	bl	sub_80AEBEC\n\
+	cmp	r6, #0x1\n\
+	bls	._196	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	b	._196\n\
+._194:\n\
+	.align	2, 0\n\
+._193:\n\
+	.word	+0x2019204\n\
+	.word	gContestMons\n\
+	.word	gContestPlayerMonIndex\n\
+._168:\n\
+	ldr	r0, ._197\n\
+	ldrb	r1, [r0]\n\
+	cmp	r1, #0x1\n\
+	bne	._196	@cond_branch\n\
+	ldr	r0, ._197 + 4\n\
+	ldrb	r0, [r0]\n\
+	add	r2, r0, #0\n\
+	and	r2, r2, r1\n\
+	cmp	r2, #0\n\
+	bne	._196	@cond_branch\n\
+	ldr	r0, ._197 + 8\n\
+	lsl	r1, r7, #0x2\n\
+	add	r1, r1, r7\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	strh	r2, [r1, #0x8]\n\
+	ldrb	r0, [r4]\n\
+	lsl	r0, r0, #0x6\n\
+	add r0, r0, ip\n\
+	ldrh	r0, [r0, #0x1e]\n\
+	strh	r0, [r1, #0xa]\n\
+	ldr	r0, ._197 + 12\n\
+._160:\n\
+	str	r0, [r1]\n\
+._196:\n\
+	add	sp, sp, #0x8\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._198:\n\
+	.align	2, 0\n\
+._197:\n\
+	.word	gUnknown_020297ED\n\
+	.word	gIsLinkContest\n\
+	.word	gTasks\n\
+	.word	debug_sub_80B9EBC+1");
+}
+#else
 void sub_80ABEA0(u8 taskId)
 {
     u8 numMoves = 0;
@@ -807,6 +1103,550 @@ void sub_80ABEA0(u8 taskId)
         }
     }
 }
+#endif
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80B9EBC()
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r8\n\
+	push	{r7}\n\
+	add	sp, sp, #0xffffff94\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r4, r0, #0x18\n\
+	ldr	r1, ._202\n\
+	lsl	r0, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	lsl	r0, r0, #0x3\n\
+	add	r7, r0, r1\n\
+	mov	r0, #0x8\n\
+	ldsh	r2, [r7, r0]\n\
+	cmp	r2, #0\n\
+	beq	._199	@cond_branch\n\
+	cmp	r2, #0x1\n\
+	beq	._200	@cond_branch\n\
+	b	._229\n\
+._203:\n\
+	.align	2, 0\n\
+._202:\n\
+	.word	gTasks\n\
+._199:\n\
+	ldr	r5, ._205\n\
+	ldr	r4, ._205 + 4\n\
+	ldrb	r0, [r4]\n\
+	mov	r8, r0\n\
+	ldrb	r6, [r4, #0x1]\n\
+	ldrb	r0, [r4, #0x2]\n\
+	str	r0, [sp]\n\
+	ldrb	r0, [r4, #0x3]\n\
+	str	r0, [sp, #0x4]\n\
+	add	r0, r5, #0\n\
+	mov	r1, #0x0\n\
+	mov	r2, r8\n\
+	add	r3, r6, #0\n\
+	bl	Text_FillWindowRectDefPalette\n\
+	mov	r0, #0xa\n\
+	ldsh	r1, [r7, r0]\n\
+	mov	r0, #0xd\n\
+	mul	r1, r1, r0\n\
+	ldr	r0, ._205 + 8\n\
+	add	r1, r1, r0\n\
+	mov	r2, #0xc2\n\
+	lsl	r2, r2, #0x2\n\
+	str	r6, [sp]\n\
+	add	r0, r5, #0\n\
+	mov	r3, r8\n\
+	bl	Text_InitWindowAndPrintText\n\
+	mov	r0, #0xa\n\
+	ldsh	r1, [r7, r0]\n\
+	add	r0, sp, #0x8\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x3\n\
+	bl	ConvertIntToDecimalStringN\n\
+	mov	r2, #0xc7\n\
+	lsl	r2, r2, #0x2\n\
+	ldrb	r3, [r4, #0x4]\n\
+	ldrb	r0, [r4, #0x5]\n\
+	str	r0, [sp]\n\
+	add	r0, r5, #0\n\
+	add	r1, sp, #0x8\n\
+	bl	Text_InitWindowAndPrintText\n\
+	bl	sub_80AED58\n\
+	ldrh	r0, [r7, #0xa]\n\
+	bl	sub_80AEBEC\n\
+	ldrh	r0, [r7, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r7, #0x8]\n\
+	b	._229\n\
+._206:\n\
+	.align	2, 0\n\
+._205:\n\
+	.word	gUnknown_03004210\n\
+	.word	gUnknown_083CA340\n\
+	.word	gMoveNames\n\
+._200:\n\
+	ldr	r0, ._213\n\
+	ldrh	r1, [r0, #0x30]\n\
+	cmp	r1, #0x10\n\
+	beq	._207	@cond_branch\n\
+	cmp	r1, #0x10\n\
+	bgt	._208	@cond_branch\n\
+	cmp	r1, #0x4\n\
+	beq	._215	@cond_branch\n\
+	cmp	r1, #0x4\n\
+	bgt	._210	@cond_branch\n\
+	cmp	r1, #0x2\n\
+	beq	._211	@cond_branch\n\
+	b	._229\n\
+._214:\n\
+	.align	2, 0\n\
+._213:\n\
+	.word	gMain\n\
+._210:\n\
+	cmp	r1, #0x8\n\
+	beq	._215	@cond_branch\n\
+	b	._229\n\
+._208:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	cmp	r1, r0\n\
+	beq	._217	@cond_branch\n\
+	cmp	r1, r0\n\
+	bgt	._218	@cond_branch\n\
+	cmp	r1, #0x20\n\
+	beq	._219	@cond_branch\n\
+	b	._229\n\
+._218:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x2\n\
+	cmp	r1, r0\n\
+	beq	._221	@cond_branch\n\
+	b	._229\n\
+._219:\n\
+	ldrh	r0, [r7, #0xa]\n\
+	sub	r0, r0, #0x1\n\
+	b	._223\n\
+._221:\n\
+	ldrh	r0, [r7, #0xa]\n\
+	sub	r0, r0, #0xa\n\
+._223:\n\
+	strh	r0, [r7, #0xa]\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bgt	._227	@cond_branch\n\
+	mov	r0, #0xb1\n\
+	lsl	r0, r0, #0x1\n\
+	strh	r0, [r7, #0xa]\n\
+	b	._227\n\
+._207:\n\
+	ldrh	r0, [r7, #0xa]\n\
+	add	r0, r0, #0x1\n\
+	b	._226\n\
+._217:\n\
+	ldrh	r0, [r7, #0xa]\n\
+	add	r0, r0, #0xa\n\
+._226:\n\
+	strh	r0, [r7, #0xa]\n\
+	lsl	r0, r0, #0x10\n\
+	mov	r1, #0xb1\n\
+	lsl	r1, r1, #0x11\n\
+	cmp	r0, r1\n\
+	ble	._227	@cond_branch\n\
+	strh	r2, [r7, #0xa]\n\
+._227:\n\
+	ldrh	r0, [r7, #0x8]\n\
+	sub	r0, r0, #0x1\n\
+	strh	r0, [r7, #0x8]\n\
+	b	._229\n\
+._215:\n\
+	ldr	r0, ._230\n\
+	mov	r1, #0x0\n\
+	strh	r1, [r0]\n\
+	ldr	r0, ._230 + 4\n\
+	strh	r1, [r0]\n\
+	bl	sub_80B1BDC\n\
+	ldr	r1, ._230 + 8\n\
+	lsl	r0, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r1\n\
+	mov	r1, #0x0\n\
+	strh	r1, [r0, #0x8]\n\
+	ldr	r1, ._230 + 12\n\
+	str	r1, [r0]\n\
+	b	._229\n\
+._231:\n\
+	.align	2, 0\n\
+._230:\n\
+	.word	gBattle_BG0_Y\n\
+	.word	gBattle_BG2_Y\n\
+	.word	gTasks\n\
+	.word	debug_sub_80BA054+1\n\
+._211:\n\
+	ldr	r0, ._232\n\
+	mov	r1, #0xa0\n\
+	strh	r1, [r0]\n\
+	ldr	r0, ._232 + 4\n\
+	strh	r1, [r0]\n\
+	ldr	r1, ._232 + 8\n\
+	ldr	r0, ._232 + 12\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x6\n\
+	add	r0, r0, r1\n\
+	ldrh	r2, [r7, #0xa]\n\
+	mov	r1, #0x0\n\
+	strh	r2, [r0, #0x1e]\n\
+	strh	r1, [r7, #0x8]\n\
+	strh	r1, [r7, #0xa]\n\
+	strh	r1, [r7, #0xc]\n\
+	strh	r1, [r7, #0xe]\n\
+	ldr	r0, ._232 + 16\n\
+	str	r0, [r7]\n\
+._229:\n\
+	add	sp, sp, #0x6c\n\
+	pop	{r3}\n\
+	mov	r8, r3\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._233:\n\
+	.align	2, 0\n\
+._232:\n\
+	.word	gBattle_BG0_Y\n\
+	.word	gBattle_BG2_Y\n\
+	.word	gContestMons\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	sub_80ABCDC+1");
+}
+
+__attribute__((naked))
+void debug_sub_80BA054()
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r9\n\
+	mov	r6, r8\n\
+	push	{r6, r7}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	ldr	r1, ._236\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r1\n\
+	mov	r2, #0x8\n\
+	ldsh	r0, [r0, r2]\n\
+	add	r2, r1, #0\n\
+	cmp	r0, #0x14\n\
+	bls	._234	@cond_branch\n\
+	b	._286\n\
+._234:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._236 + 4\n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._237:\n\
+	.align	2, 0\n\
+._236:\n\
+	.word	gTasks\n\
+	.word	._238\n\
+._238:\n\
+	.word	._239\n\
+	.word	._240\n\
+	.word	._241\n\
+	.word	._242\n\
+	.word	._243\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._286\n\
+	.word	._259\n\
+._239:\n\
+	lsl	r0, r7, #0x2\n\
+	mov	r8, r0\n\
+	ldr	r2, ._262\n\
+	mov	r9, r2\n\
+	ldr	r1, ._262 + 4\n\
+	mov	r2, #0x0\n\
+	add	r0, r1, #3\n\
+._260:\n\
+	strb	r2, [r0]\n\
+	sub	r0, r0, #0x1\n\
+	cmp	r0, r1\n\
+	bge	._260	@cond_branch\n\
+	mov	r5, #0x0\n\
+	mov	r0, r9\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x14\n\
+	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	ldr	r4, ._262 + 8\n\
+	ldrb	r0, [r4]\n\
+	bl	sub_80B28F0\n\
+	ldr	r3, ._262 + 12\n\
+	ldrb	r2, [r4]\n\
+	lsl	r2, r2, #0x6\n\
+	add	r0, r2, r3\n\
+	ldrh	r0, [r0]\n\
+	add	r1, r3, #0\n\
+	add	r1, r1, #0x3c\n\
+	add	r1, r2, r1\n\
+	ldr	r1, [r1]\n\
+	add	r3, r3, #0x38\n\
+	add	r2, r2, r3\n\
+	ldr	r2, [r2]\n\
+	bl	sub_80AE9FC\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+	ldr	r2, ._262 + 16\n\
+	lsl	r0, r6, #0x4\n\
+	add	r0, r0, r6\n\
+	lsl	r0, r0, #0x2\n\
+	add	r3, r0, r2\n\
+	mov	r4, #0x0\n\
+	mov	r1, #0x78\n\
+	strh	r1, [r3, #0x24]\n\
+	add	r2, r2, #0x1c\n\
+	add	r0, r0, r2\n\
+	ldr	r1, ._262 + 20\n\
+	str	r1, [r0]\n\
+	ldr	r0, ._262 + 24\n\
+	mov	r2, r8\n\
+	add	r1, r2, r7\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	strh	r6, [r1, #0xc]\n\
+	ldr	r2, ._262 + 28\n\
+	ldr	r0, ._262 + 32\n\
+	ldrb	r0, [r0]\n\
+	add	r0, r0, r2\n\
+	strb	r6, [r0]\n\
+	strh	r5, [r1, #0xe]\n\
+	ldrh	r0, [r1, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r1, #0x8]\n\
+	mov	r0, r9\n\
+	sub	r0, r0, #0xea\n\
+	strb	r4, [r0]\n\
+	b	._286\n\
+._263:\n\
+	.align	2, 0\n\
+._262:\n\
+	.word	+0x2019348\n\
+	.word	gBattleMonForms\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	gContestMons\n\
+	.word	gSprites\n\
+	.word	sub_80AD8FC+1\n\
+	.word	gTasks\n\
+	.word	gObjectBankIDs\n\
+	.word	gBankAttacker\n\
+._240:\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r7, r0, r2\n\
+	ldrb	r6, [r7, #0xc]\n\
+	ldr	r1, ._267\n\
+	lsl	r0, r6, #0x4\n\
+	add	r0, r0, r6\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r1, #0x1c\n\
+	add	r0, r0, r1\n\
+	ldr	r1, [r0]\n\
+	ldr	r0, ._267 + 4\n\
+	cmp	r1, r0\n\
+	beq	._264	@cond_branch\n\
+	b	._286\n\
+._264:\n\
+	ldr	r4, ._267 + 8\n\
+	ldrb	r1, [r4]\n\
+	lsl	r0, r1, #0x3\n\
+	sub	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._267 + 12\n\
+	add	r0, r0, r1\n\
+	ldrh	r1, [r7, #0xa]\n\
+	mov	r5, #0x0\n\
+	strh	r1, [r0, #0x6]\n\
+	ldrb	r0, [r4]\n\
+	bl	sub_80B2790\n\
+	ldrb	r0, [r4]\n\
+	bl	sub_80B28F0\n\
+	ldrh	r0, [r7, #0xa]\n\
+	bl	SelectContestMoveBankTarget\n\
+	ldrh	r0, [r7, #0xa]\n\
+	bl	DoMoveAnim\n\
+	strh	r5, [r7, #0xe]\n\
+	ldrh	r0, [r7, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r7, #0x8]\n\
+	b	._286\n\
+._268:\n\
+	.align	2, 0\n\
+._267:\n\
+	.word	gSprites\n\
+	.word	SpriteCallbackDummy+1\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	+0x2019260\n\
+._241:\n\
+	ldr	r0, ._273\n\
+	ldr	r0, [r0]\n\
+	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	ldr	r0, ._273 + 4\n\
+	ldrb	r4, [r0]\n\
+	cmp	r4, #0\n\
+	beq	._269	@cond_branch\n\
+	b	._286\n\
+._269:\n\
+	ldr	r0, ._273 + 8\n\
+	ldrb	r0, [r0]\n\
+	bl	sub_80B28CC\n\
+	ldr	r0, ._273 + 12\n\
+	add	r0, r0, #0x5a\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._271	@cond_branch\n\
+	ldr	r0, ._273 + 16\n\
+	lsl	r1, r7, #0x2\n\
+	add	r1, r1, r7\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	strh	r4, [r1, #0x1c]\n\
+	mov	r0, #0x14\n\
+	strh	r0, [r1, #0x8]\n\
+	b	._286\n\
+._274:\n\
+	.align	2, 0\n\
+._273:\n\
+	.word	gAnimScriptCallback\n\
+	.word	gAnimScriptActive\n\
+	.word	gContestPlayerMonIndex\n\
+	.word	+0x2019204\n\
+	.word	gTasks\n\
+._271:\n\
+	ldr	r0, ._276\n\
+	lsl	r1, r7, #0x2\n\
+	add	r1, r1, r7\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	ldrh	r0, [r1, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r1, #0x8]\n\
+	b	._286\n\
+._277:\n\
+	.align	2, 0\n\
+._276:\n\
+	.word	gTasks\n\
+._242:\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r4, r0, r2\n\
+	ldrh	r0, [r4, #0xe]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4, #0xe]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x15\n\
+	bne	._286	@cond_branch\n\
+	ldrb	r6, [r4, #0xc]\n\
+	ldr	r1, ._280\n\
+	lsl	r0, r6, #0x4\n\
+	add	r0, r0, r6\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r1, #0x1c\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._280 + 4\n\
+	str	r1, [r0]\n\
+	bl	sub_80B1B14\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r4, #0xe]\n\
+	ldrh	r0, [r4, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4, #0x8]\n\
+	b	._286\n\
+._281:\n\
+	.align	2, 0\n\
+._280:\n\
+	.word	gSprites\n\
+	.word	sub_80AD92C+1\n\
+._243:\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r5, r0, r2\n\
+	ldrb	r6, [r5, #0xc]\n\
+	ldr	r1, ._284\n\
+	lsl	r0, r6, #0x4\n\
+	add	r0, r0, r6\n\
+	lsl	r0, r0, #0x2\n\
+	add	r4, r0, r1\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x3e\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x1d\n\
+	cmp	r0, #0\n\
+	bge	._286	@cond_branch\n\
+	add	r0, r4, #0\n\
+	bl	FreeSpriteOamMatrix\n\
+	add	r0, r4, #0\n\
+	bl	DestroySprite\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r5, #0x8]\n\
+	ldr	r0, ._284 + 4\n\
+	str	r0, [r5]\n\
+	ldr	r0, ._284 + 8\n\
+	mov	r1, #0xa0\n\
+	strh	r1, [r0]\n\
+	ldr	r0, ._284 + 12\n\
+	strh	r1, [r0]\n\
+	b	._286\n\
+._285:\n\
+	.align	2, 0\n\
+._284:\n\
+	.word	gSprites\n\
+	.word	debug_sub_80B9EBC+1\n\
+	.word	gBattle_BG0_Y\n\
+	.word	gBattle_BG2_Y\n\
+._259:\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r2, r0, r2\n\
+	ldrh	r0, [r2, #0x1c]\n\
+	add	r1, r0, #1\n\
+	strh	r1, [r2, #0x1c]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x1e\n\
+	ble	._286	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r2, #0x1c]\n\
+	mov	r0, #0x1\n\
+	strh	r0, [r2, #0x8]\n\
+._286:\n\
+	pop	{r3, r4}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0");
+}
+#endif
 
 void sub_80AC0AC(s8 a)
 {
