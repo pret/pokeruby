@@ -30,7 +30,7 @@ extern const u16 gUnknownPal_083D18EC[16];
 
 extern const u8 gUnknownGfx_083D190C[128];
 
-extern struct UnkStruct *gUnknown_020387EC;
+EWRAM_DATA struct UnkStruct *gUnknown_020387EC = NULL;
 
 const struct SpriteSheet gUnknown_083D1898 = { gUnknownGfx_083D190C, sizeof(gUnknownGfx_083D190C), 0 };
 

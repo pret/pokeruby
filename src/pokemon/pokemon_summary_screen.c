@@ -121,7 +121,6 @@ extern u8 ball_number_to_ball_processing_index(u16);
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 gUnknown_020384F0;
 extern u8 gUnknown_08208238[];
 extern u16 gBattle_BG3_Y;
 extern u16 gBattle_BG2_Y;
@@ -130,7 +129,6 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG3_X;
 extern TaskFunc gUnknown_03005CF0;
-extern struct Sprite *gUnknown_020384F4;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern const u8 gStatusPal_Icons[];
@@ -156,6 +154,9 @@ extern const u16 gUnknown_08E94510[];
 extern const u16 gUnknown_08E94550[];
 extern const u16 gUnknown_08E94590[];
 extern const u8 gUnknown_08E73E88[];
+
+EWRAM_DATA u8 gUnknown_020384F0 = 0;
+EWRAM_DATA struct Sprite *gUnknown_020384F4 = NULL;
 
 #if ENGLISH
 #include "../data/text/move_descriptions_en.h"
