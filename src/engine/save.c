@@ -783,13 +783,21 @@ u8 Save_WriteDataInternal(u8 saveType)
     return 0;
 }
 
+#ifdef DEBUG
+extern u32 gUnknown_Debug_03004BD0;
+#endif
+
 u8 Save_WriteData(u8 saveType) // TrySave
 {
     if (gFlashMemoryPresent != TRUE)
         return SAVE_STATUS_ERROR;
 
     Save_WriteDataInternal(saveType);
-    if (!gDamagedSaveSectors)
+    if (!gDamagedSaveSectors
+#ifdef DEBUG
+        && gUnknown_Debug_03004BD0 == 0
+#endif
+        )
         return SAVE_STATUS_OK;
 
     DoSaveFailedScreen(saveType);

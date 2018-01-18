@@ -249,6 +249,7 @@ gUnknown_03005E0C: @ 3005E0C
 
 	.include "scene/contest_painting.o"
 	.include "scene/evolution_scene.o"
+	.include "roulette.o"
 
 @ pokedex_cry_screen
 
