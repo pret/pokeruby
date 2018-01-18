@@ -150,9 +150,23 @@ gUnknown_03004AE4: @ 3004AE4
 	.space 0x4
 
 	.include "field/start_menu.o"
+	
+@ debug start menu
+gUnknown_Debug_03004BD0:
+	.space 0x4
+
 	.include "engine/sound.o"
 	.include "battle/battle_anim.o"
 	.include "engine/task.o"
+
+@ debug stuff (possibly part of mori_debug_menu?)
+unk_debug_common_1:
+	.space 0x4
+unk_3004E94:
+    .space 0x4
+unk_3004E98:
+	.space 0x8
+
 	.include "debug/mori_debug_menu.o"
 
 @ unknown_task
@@ -183,6 +197,11 @@ gCurrentBagPocketItemSlots: @ 3005D24
 	.align 2
 gUnknown_03005D28: @ 3005D28
 	.space 0x4
+
+@ debug stuff
+unk_debug_common_0:
+    .space 0x4
+	.include "debug/watanabe_debug_menu.o"
 
 	.include "engine/record_mixing.o"
 	.include "debug/sound_check_menu.o"

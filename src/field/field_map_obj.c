@@ -1907,6 +1907,9 @@ static u8 gUnknown_030005A4;
 static u16 gUnknown_030005A6;
 
 struct MapObject gMapObjects[16];
+#if DEBUG
+u8 gUnknown_Debug_03004BC0[4];  // unknown type
+#endif
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
 {

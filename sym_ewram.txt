@@ -32,6 +32,12 @@ gUnknown_02023A04: @ 2023A04
 gUnknown_02023A14: @ 2023A14
 	.space 0x4C
 
+@ debug stuff - probably not correct and should be part of gBattleBufferA
+gUnknown_02023A14_4C:
+    .space 0x4
+gUnknown_02023A14_50:
+	.space 0x290
+
 gBattleBufferA: @ 2023A60
 	.space 0x2
 
@@ -361,6 +367,14 @@ gUnknown_0203847F: @ 203847F
 
 gUnknown_02038480: @ 2038480
 	.space 0x64
+
+@ debug stuff
+unk_2038790:
+	.space 0x4
+unk_2038794:
+	.space 0x4
+unk_2038798:
+	.space 0x4
 
 gUnknown_020384E4: @ 20384E4
 	.space 0x1

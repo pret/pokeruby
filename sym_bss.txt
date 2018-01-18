@@ -36,6 +36,7 @@ unk_debug_bss_3:
 	.include "src/easy_chat_2.o"
 	.include "src/pokenav_before.o"
 	.include "src/field/mauville_man.o"
+	.include "src/pokemon/mail.o"
 	.include "src/field/menu_helpers.o"
 	.include "src/field/slot_machine.o"
 	.include "src/scene/contest_painting.o"

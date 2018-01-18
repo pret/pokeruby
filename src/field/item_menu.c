@@ -289,6 +289,24 @@ static void sub_80A6618(u8);
 
 const struct YesNoFuncTable gUnknown_083C16FC = {sub_80A65AC, sub_80A6618};
 
+#if DEBUG
+const struct {u16 item; u8 unk;} gUnknown_Debug_083EBC68[12+48] =
+{
+    {ITEM_POKE_BALL,      10},
+    {ITEM_ULTRA_BALL,     15},
+    {ITEM_GREAT_BALL,     20},
+    {ITEM_MASTER_BALL,    25},
+    {ITEM_ACRO_BIKE,      1 },
+    {ITEM_OLD_ROD,        1 },
+    {ITEM_GOOD_ROD,       1 },
+    {ITEM_SUPER_ROD,      1 },
+    {ITEM_POKEBLOCK_CASE, 1 },
+    {ITEM_WAILMER_PAIL,   1 },
+    {ITEM_ITEMFINDER,     1 },
+    {ITEM_NONE,           1 },
+};
+#endif
+
 void sub_80A34E8(void);
 static bool8 LoadBagGraphicsMultistep(void);
 static void sub_80A362C(void);
