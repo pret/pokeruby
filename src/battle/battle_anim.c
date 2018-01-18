@@ -2417,7 +2417,7 @@ static void LoadMoveBg(u16 bgId)
     {
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
 
-		LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
+        LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
         sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
         DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : EWRAM_18000, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));

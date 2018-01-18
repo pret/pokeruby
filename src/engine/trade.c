@@ -1462,7 +1462,7 @@ static void sub_8048B0C(u8 a0)
                 gPlttBufferUnfaded[i] = *(gUnknown_08EA02C8 + i);
                 gPlttBufferFaded[i] = *(gUnknown_08EA02C8 + i);
             }
-			DmaCopyLarge16(3, gUnknown_08EA0348, (void *)BG_VRAM, 0x1280, 0x1000);
+            DmaCopyLarge16(3, gUnknown_08EA0348, (void *)BG_VRAM, 0x1280, 0x1000);
             for (i = 0; i < 0x400; i ++)
                 gUnknown_03004824->unk_00c8.unk_12[i] = gUnknown_08EA15C8[i];
             DmaCopy16Defvars(3, gTradeStripesBG2Tilemap, BG_SCREEN_ADDR(6), 0x800);
