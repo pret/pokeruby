@@ -1209,6 +1209,243 @@ void sub_8034B74(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void OpponentHandleTrainerThrow(void)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	mov	r6, r9\n\
+	mov	r5, r8\n\
+	push	{r5, r6}\n\
+	ldr	r0, ._480\n\
+	ldrb	r1, [r0]\n\
+	mov	r0, #0x10\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._478	@cond_branch\n\
+	ldr	r0, ._480 + 4\n\
+	ldr	r1, ._480 + 8\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	b	._491\n\
+._481:\n\
+	.align	2, 0\n\
+._480:\n\
+	.word	gUnknown_02023A14+0x50\n\
+	.word	+0x2000000\n\
+	.word	0x160a3\n\
+._478:\n\
+	ldr	r3, ._484\n\
+	ldrh	r1, [r3]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x3\n\
+	cmp	r1, r0\n\
+	bne	._482	@cond_branch\n\
+	bl	GetSecretBaseTrainerPicIndex\n\
+	b	._487\n\
+._485:\n\
+	.align	2, 0\n\
+._484:\n\
+	.word	gTrainerBattleOpponent\n\
+._482:\n\
+	ldr	r0, ._488\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._486	@cond_branch\n\
+	bl	get_trainer_class_pic_index\n\
+	b	._487\n\
+._489:\n\
+	.align	2, 0\n\
+._488:\n\
+	.word	gBattleTypeFlags\n\
+._486:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x4\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._490	@cond_branch\n\
+	bl	GetEReaderTrainerPicIndex\n\
+._487:\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	b	._491\n\
+._490:\n\
+	ldr	r2, ._492\n\
+	ldrh	r1, [r3]\n\
+	lsl	r0, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r2\n\
+	ldrb	r0, [r0, #0x3]\n\
+._491:\n\
+	mov	r9, r0\n\
+	ldr	r2, ._492 + 4\n\
+	mov	r8, r2\n\
+	ldrb	r1, [r2]\n\
+	bl	sub_8031A6C\n\
+	mov	r1, r8\n\
+	ldrb	r0, [r1]\n\
+	bl	GetBankIdentity\n\
+	add	r1, r0, #0\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	mov	r0, r9\n\
+	bl	GetMonSpriteTemplate_803C5A0\n\
+	ldr	r5, ._492 + 8\n\
+	ldr	r1, ._492 + 12\n\
+	mov	r2, r9\n\
+	lsl	r0, r2, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r4, #0x8\n\
+	sub	r4, r4, r0\n\
+	lsl	r4, r4, #0x12\n\
+	mov	r0, #0xa0\n\
+	lsl	r0, r0, #0xe\n\
+	add	r4, r4, r0\n\
+	asr	r4, r4, #0x10\n\
+	mov	r1, r8\n\
+	ldrb	r0, [r1]\n\
+	bl	sub_8079E90\n\
+	add	r3, r0, #0\n\
+	lsl	r3, r3, #0x18\n\
+	lsr	r3, r3, #0x18\n\
+	add	r0, r5, #0\n\
+	mov	r1, #0xb0\n\
+	add	r2, r4, #0\n\
+	bl	CreateSprite\n\
+	ldr	r5, ._492 + 16\n\
+	mov	r2, r8\n\
+	ldrb	r1, [r2]\n\
+	add	r1, r1, r5\n\
+	strb	r0, [r1]\n\
+	ldr	r4, ._492 + 20\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, r5\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x4\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r4\n\
+	ldr	r1, ._492 + 24\n\
+	strh	r1, [r0, #0x24]\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, r5\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x4\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r4\n\
+	mov	r1, #0x2\n\
+	strh	r1, [r0, #0x2e]\n\
+	ldr	r0, ._492 + 28\n\
+	mov	r1, r9\n\
+	lsl	r6, r1, #0x3\n\
+	add	r0, r6, r0\n\
+	ldrh	r0, [r0, #0x4]\n\
+	bl	IndexOfSpritePaletteTag\n\
+	mov	r2, r8\n\
+	ldrb	r1, [r2]\n\
+	add	r1, r1, r5\n\
+	ldrb	r1, [r1]\n\
+	lsl	r2, r1, #0x4\n\
+	add	r2, r2, r1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r2, r2, r4\n\
+	lsl	r0, r0, #0x4\n\
+	ldrb	r3, [r2, #0x5]\n\
+	mov	r1, #0xf\n\
+	and	r1, r1, r3\n\
+	orr	r1, r1, r0\n\
+	strb	r1, [r2, #0x5]\n\
+	mov	r1, r8\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, r5\n\
+	ldrb	r0, [r0]\n\
+	lsl	r1, r0, #0x4\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r4\n\
+	ldrh	r0, [r1, #0x4]\n\
+	lsl	r0, r0, #0x16\n\
+	lsr	r0, r0, #0x16\n\
+	strh	r0, [r1, #0x38]\n\
+	ldr	r0, ._492 + 32\n\
+	add	r6, r6, r0\n\
+	ldrh	r0, [r6, #0x6]\n\
+	bl	GetSpriteTileStartByTag\n\
+	mov	r2, r8\n\
+	ldrb	r1, [r2]\n\
+	add	r1, r1, r5\n\
+	ldrb	r2, [r1]\n\
+	lsl	r1, r2, #0x4\n\
+	add	r1, r1, r2\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r4\n\
+	ldr	r2, ._492 + 36\n\
+	and	r2, r2, r0\n\
+	ldrh	r3, [r1, #0x4]\n\
+	ldr	r0, ._492 + 40\n\
+	and	r0, r0, r3\n\
+	orr	r0, r0, r2\n\
+	strh	r0, [r1, #0x4]\n\
+	mov	r1, r8\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, r5\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x4\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r4\n\
+	mov	r2, r9\n\
+	strh	r2, [r0, #0x6]\n\
+	mov	r1, r8\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, r5\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x4\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r4, r4, #0x1c\n\
+	add	r0, r0, r4\n\
+	ldr	r1, ._492 + 44\n\
+	str	r1, [r0]\n\
+	ldr	r1, ._492 + 48\n\
+	mov	r2, r8\n\
+	ldrb	r0, [r2]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._492 + 52\n\
+	str	r1, [r0]\n\
+	pop	{r3, r4}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._493:\n\
+	.align	2, 0\n\
+._492:\n\
+	.word	gTrainers\n\
+	.word	gActiveBank\n\
+	.word	gUnknown_02024E8C\n\
+	.word	gTrainerFrontPicCoords\n\
+	.word	gObjectBankIDs\n\
+	.word	gSprites\n\
+	.word	0xff10\n\
+	.word	gTrainerFrontPicPaletteTable\n\
+	.word	gTrainerFrontPicTable\n\
+	.word	0x3ff\n\
+	.word	0xfffffc00\n\
+	.word	sub_80313A0+1\n\
+	.word	gBattleBankFunc\n\
+	.word	sub_8032B4C+1");
+}
+#else
 void OpponentHandleTrainerThrow(void)
 {
     u32 trainerPicIndex;
@@ -1238,6 +1475,7 @@ void OpponentHandleTrainerThrow(void)
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_8032B4C;
 }
+#endif
 
 void OpponentHandleTrainerSlide(void)
 {
@@ -1427,6 +1665,315 @@ void OpponentHandlecmd19(void)
     OpponentBufferExecCompleted();
 }
 
+#if DEBUG
+__attribute__((naked))
+void OpponentHandlecmd20(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, sl\n\
+	mov	r6, r9\n\
+	mov	r5, r8\n\
+	push	{r5, r6, r7}\n\
+	ldr	r6, ._549\n\
+	ldrb	r0, [r6]\n\
+	lsl	r0, r0, #0x9\n\
+	ldr	r1, ._549 + 4\n\
+	add	r5, r0, r1\n\
+	ldr	r2, ._549 + 8\n\
+	ldrb	r1, [r2]\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	mov	sl, r6\n\
+	cmp	r0, #0\n\
+	beq	._546	@cond_branch\n\
+	ldr	r0, ._549 + 12\n\
+	mov	r9, r0\n\
+	ldr	r1, ._549 + 16\n\
+	mov	ip, r1\n\
+	add	r7, r6, #0\n\
+	mov	r0, #0x2\n\
+	mov	r8, r0\n\
+	ldr	r6, ._549 + 20\n\
+._552:\n\
+	ldrb	r1, [r7]\n\
+	mov	r0, r8\n\
+	and	r0, r0, r1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x19\n\
+	add	r0, r0, r6\n\
+	mov	r1, ip\n\
+	add	r3, r0, r1\n\
+	ldrb	r1, [r3]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r5, r0\n\
+	ldrh	r2, [r0]\n\
+	add	r4, r1, #0\n\
+	cmp	r2, #0\n\
+	beq	._547	@cond_branch\n\
+	add	r0, r4, #1\n\
+	strb	r0, [r3]\n\
+	b	._548\n\
+._550:\n\
+	.align	2, 0\n\
+._549:\n\
+	.word	gActiveBank\n\
+	.word	gUnknown_02023A64\n\
+	.word	gUnknown_02023A14+0x50\n\
+	.word	gBattleMoves\n\
+	.word	+0x2000000\n\
+	.word	0x1609e\n\
+._547:\n\
+	strb	r2, [r3]\n\
+._548:\n\
+	ldrb	r0, [r7]\n\
+	mov	r1, r8\n\
+	and	r1, r1, r0\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x19\n\
+	add	r1, r1, r6\n\
+	add r1, r1, ip\n\
+	ldrb	r0, [r1]\n\
+	cmp	r0, #0x3\n\
+	bls	._551	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+._551:\n\
+	cmp	r2, #0\n\
+	beq	._552	@cond_branch\n\
+	lsl	r0, r2, #0x1\n\
+	add	r0, r0, r2\n\
+	lsl	r0, r0, #0x2\n\
+	add r0, r0, r9\n\
+	ldrb	r3, [r0, #0x6]\n\
+	mov	r0, #0x12\n\
+	and	r0, r0, r3\n\
+	cmp	r0, #0\n\
+	beq	._553	@cond_branch\n\
+	mov	r1, sl\n\
+	ldrb	r0, [r1]\n\
+	b	._561\n\
+._553:\n\
+	ldr	r0, ._559\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._557	@cond_branch\n\
+	ldr	r0, ._559 + 4\n\
+	ldrb	r1, [r0]\n\
+	mov	r5, #0x2\n\
+	add	r0, r5, #0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._556	@cond_branch\n\
+	cmp	r3, #0\n\
+	bne	._557	@cond_branch\n\
+	mov	r1, sl\n\
+	ldrb	r0, [r1]\n\
+	bl	GetBankIdentity\n\
+	mov	r1, #0x2\n\
+	eor	r0, r0, r1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	b	._558\n\
+._560:\n\
+	.align	2, 0\n\
+._559:\n\
+	.word	gBattleTypeFlags\n\
+	.word	gUnknown_02023A14+0x50\n\
+._556:\n\
+	bl	Random\n\
+	add	r1, r5, #0\n\
+	and	r1, r1, r0\n\
+	lsl	r1, r1, #0x10\n\
+	lsr	r0, r1, #0x10\n\
+	b	._561\n\
+._557:\n\
+	mov	r0, #0x0\n\
+._558:\n\
+	bl	GetBankByIdentity\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+._561:\n\
+	lsl	r2, r0, #0x8\n\
+	orr	r2, r2, r4\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xa\n\
+._569:\n\
+	bl	Emitcmd33\n\
+._573:\n\
+	bl	OpponentBufferExecCompleted\n\
+	b	._562\n\
+._546:\n\
+	ldr	r0, ._567\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x93\n\
+	lsl	r0, r0, #0x3\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._563	@cond_branch\n\
+	bl	BattleAI_SetupAIData\n\
+	bl	BattleAI_GetAIActionToUse\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r4, r0, #0x18\n\
+	cmp	r4, #0x4\n\
+	beq	._564	@cond_branch\n\
+	cmp	r4, #0x5\n\
+	bne	._565	@cond_branch\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0x4\n\
+	b	._566\n\
+._568:\n\
+	.align	2, 0\n\
+._567:\n\
+	.word	gBattleTypeFlags\n\
+._564:\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0x3\n\
+._566:\n\
+	mov	r2, #0x0\n\
+	b	._569\n\
+._565:\n\
+	ldr	r3, ._574\n\
+	lsl	r0, r4, #0x1\n\
+	add	r2, r5, r0\n\
+	ldrh	r1, [r2]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r3\n\
+	ldrb	r1, [r0, #0x6]\n\
+	mov	r0, #0x12\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._570	@cond_branch\n\
+	ldr	r1, ._574 + 4\n\
+	ldrb	r0, [r6]\n\
+	strb	r0, [r1]\n\
+._570:\n\
+	ldrh	r1, [r2]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r3\n\
+	ldrb	r1, [r0, #0x6]\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._572	@cond_branch\n\
+	mov	r0, #0x0\n\
+	bl	GetBankByIdentity\n\
+	ldr	r5, ._574 + 4\n\
+	strb	r0, [r5]\n\
+	ldr	r0, ._574 + 8\n\
+	ldrb	r1, [r0]\n\
+	ldr	r2, ._574 + 12\n\
+	ldrb	r0, [r5]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r2\n\
+	ldr	r0, [r0]\n\
+	and	r1, r1, r0\n\
+	cmp	r1, #0\n\
+	beq	._572	@cond_branch\n\
+	mov	r0, #0x2\n\
+	bl	GetBankByIdentity\n\
+	strb	r0, [r5]\n\
+._572:\n\
+	ldr	r0, ._574 + 4\n\
+	ldrb	r2, [r0]\n\
+	lsl	r2, r2, #0x8\n\
+	orr	r2, r2, r4\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xa\n\
+	bl	Emitcmd33\n\
+	b	._573\n\
+._575:\n\
+	.align	2, 0\n\
+._574:\n\
+	.word	gBattleMoves\n\
+	.word	gBankTarget\n\
+	.word	gAbsentBankFlags\n\
+	.word	gBitTable\n\
+._563:\n\
+	mov	r6, #0x3\n\
+._576:\n\
+	bl	Random\n\
+	add	r4, r0, #0\n\
+	and	r4, r4, r6\n\
+	lsl	r0, r4, #0x1\n\
+	add	r0, r5, r0\n\
+	ldrh	r2, [r0]\n\
+	cmp	r2, #0\n\
+	beq	._576	@cond_branch\n\
+	ldr	r1, ._579\n\
+	lsl	r0, r2, #0x1\n\
+	add	r0, r0, r2\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0, #0x6]\n\
+	mov	r0, #0x12\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._577	@cond_branch\n\
+	ldr	r0, ._579 + 4\n\
+	ldrb	r2, [r0]\n\
+	lsl	r2, r2, #0x8\n\
+	b	._578\n\
+._580:\n\
+	.align	2, 0\n\
+._579:\n\
+	.word	gBattleMoves\n\
+	.word	gActiveBank\n\
+._577:\n\
+	ldr	r0, ._583\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._581	@cond_branch\n\
+	bl	Random\n\
+	mov	r1, #0x2\n\
+	and	r1, r1, r0\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	add	r0, r1, #0\n\
+	bl	GetBankByIdentity\n\
+	add	r2, r0, #0\n\
+	lsl	r2, r2, #0x18\n\
+	lsr	r2, r2, #0x10\n\
+._578:\n\
+	orr	r2, r2, r4\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xa\n\
+	bl	Emitcmd33\n\
+	b	._582\n\
+._584:\n\
+	.align	2, 0\n\
+._583:\n\
+	.word	gBattleTypeFlags\n\
+._581:\n\
+	mov	r0, #0x0\n\
+	bl	GetBankByIdentity\n\
+	add	r2, r0, #0\n\
+	lsl	r2, r2, #0x18\n\
+	lsr	r2, r2, #0x10\n\
+	orr	r2, r2, r4\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xa\n\
+	bl	Emitcmd33\n\
+._582:\n\
+	bl	OpponentBufferExecCompleted\n\
+._562:\n\
+	pop	{r3, r4, r5}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	mov	sl, r5\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0");
+}
+#else
 #ifdef NONMATCHING
 void OpponentHandlecmd20(void)
 {
@@ -1669,6 +2216,7 @@ _0803558A:\n\
     bx r0\n\
     .syntax divided\n");
 }
+#endif
 #endif
 
 void OpponentHandleOpenBag(void)

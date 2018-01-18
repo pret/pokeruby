@@ -278,8 +278,8 @@ static bool8 Blender_PrintBlendingResults(void);
 static void sub_80510E8(void);
 static void sub_8050E30(void);
 static void sub_805197C(u16 a0, u16 a1);
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
-static void sub_8052BD0(u8 taskID);
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
+/*static*/ void sub_8052BD0(u8 taskID);
 static void sub_8052AF8(void);
 static void sub_804F8C8(u8 taskID);
 static void sub_804F9F4(u8 taskID);
@@ -2446,7 +2446,7 @@ static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct
     Blender_CalculatePokeblock(berries, pokeblock, playersNo, flavours, a4);
 }
 
-static void sub_8050760(void)
+/*static*/ void sub_8050760(void)
 {
     u32 frames = (u16)(gBerryBlenderData->gameFrameTime);
     u16 max_RPM = gBerryBlenderData->max_RPM;
@@ -3305,12 +3305,20 @@ static void sub_8051C04(struct Sprite* sprite)
    sprite->pos2.y = -(gBerryBlenderData->field_146);
 }
 
-static void Blender_TrySettingRecord(void)
+/*static*/ void Blender_TrySettingRecord(void)
 {
     if (gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] < gBerryBlenderData->max_RPM)
         gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] = gBerryBlenderData->max_RPM;
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 Blender_PrintBlendingResults(void)
+{
+    // TODO: disassemble this!
+    asm(".incbin \"baserom_de_debug.gba\", 0x56178, 0x5655C-0x56178");
+}
+#else
 static bool8 Blender_PrintBlendingResults(void)
 {
     u16 i;
@@ -3445,8 +3453,9 @@ static bool8 Blender_PrintBlendingResults(void)
     }
     return FALSE;
 }
+#endif
 
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
 {
     u8 text[12];
     u8 flavourLvl, feel;
@@ -3869,7 +3878,7 @@ void ShowBerryBlenderRecordWindow(void)
     }
 }
 
-static void sub_8052BD0(u8 taskID)
+/*static*/ void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {

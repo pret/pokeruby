@@ -954,6 +954,97 @@ void debug_sub_80986AC()
 }
 #endif
 
+#if DEBUG
+__attribute__((naked))
+static void sub_808AE8C(void)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	ldr	r0, ._281\n\
+	ldrb	r0, [r0]\n\
+	sub	r0, r0, #0x21\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+	mov	r5, #0x0\n\
+._287:\n\
+	mov	r0, #0x64\n\
+	add	r1, r5, #0\n\
+	mul	r1, r1, r0\n\
+	ldr	r0, ._281 + 4\n\
+	add	r4, r1, r0\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0xb\n\
+	bl	GetMonData\n\
+	cmp	r0, #0\n\
+	beq	._284	@cond_branch\n\
+	add	r0, r5, #0\n\
+	bl	sub_806D668\n\
+	ldr	r0, ._281 + 8\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._279	@cond_branch\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x2d\n\
+	bl	GetMonData\n\
+	cmp	r0, #0\n\
+	bne	._278	@cond_branch\n\
+	add	r0, r4, #0\n\
+	add	r1, r6, #0\n\
+	bl	CanMonLearnTMHM\n\
+	cmp	r0, #0\n\
+	bne	._279	@cond_branch\n\
+._278:\n\
+	add	r0, r5, #0\n\
+	mov	r1, #0x9a\n\
+	bl	sub_806BC3C\n\
+	b	._284\n\
+._282:\n\
+	.align	2, 0\n\
+._281:\n\
+	.word	gSpecialVar_ItemId\n\
+	.word	gPlayerParty\n\
+	.word	gUnknown_020297ED\n\
+._279:\n\
+	mov	r0, #0x64\n\
+	add	r4, r5, #0\n\
+	mul	r4, r4, r0\n\
+	ldr	r0, ._285\n\
+	add	r4, r4, r0\n\
+	ldr	r0, ._285 + 4\n\
+	ldrh	r0, [r0]\n\
+	bl	ItemIdToBattleMoveId\n\
+	add	r1, r0, #0\n\
+	lsl	r1, r1, #0x10\n\
+	lsr	r1, r1, #0x10\n\
+	add	r0, r4, #0\n\
+	bl	pokemon_has_move\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._283	@cond_branch\n\
+	add	r0, r5, #0\n\
+	mov	r1, #0xa8\n\
+	bl	sub_806BC3C\n\
+	b	._284\n\
+._286:\n\
+	.align	2, 0\n\
+._285:\n\
+	.word	gPlayerParty\n\
+	.word	gSpecialVar_ItemId\n\
+._283:\n\
+	add	r0, r5, #0\n\
+	mov	r1, #0x8c\n\
+	bl	sub_806BC3C\n\
+._284:\n\
+	add	r0, r5, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r5, r0, #0x18\n\
+	cmp	r5, #0x5\n\
+	bls	._287	@cond_branch\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0");
+}
+#else
 static void sub_808AE8C(void)
 {
     u8 i;
@@ -972,6 +1063,7 @@ static void sub_808AE8C(void)
         }
     }
 }
+#endif
 
 static void sub_808AF20(void)
 {

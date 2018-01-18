@@ -1978,6 +1978,144 @@ sub_8096874: @ 8096874
 	bx lr
 	thumb_func_end sub_8096874
 
+.if DEBUG
+	thumb_func_start sub_8096884
+sub_8096884:
+.syntax divided
+	push	{r4, lr}
+	ldr	r0, ._223
+	ldr	r1, ._223 + 4
+	add	r0, r0, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0x9
+	bls	._221	@cond_branch
+	b	._222
+._221:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._223 + 8
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._224:
+	.align	2, 0
+._223:
+	.word	gMain
+	.word	0x43c
+	.word	._225
+._225:
+	.word	._226
+	.word	._227
+	.word	._228
+	.word	._229
+	.word	._230
+	.word	._231
+	.word	._232
+	.word	._233
+	.word	._234
+	.word	._235
+._226:
+	mov	r0, #0x0
+	bl	SetVBlankCallback
+	mov	r0, #0x80
+	lsl	r0, r0, #0x13
+	mov	r4, #0x0
+	strh	r4, [r0]
+	bl	sub_8096804
+	ldr	r0, ._237
+	strb	r4, [r0]
+	b	._250
+._238:
+	.align	2, 0
+._237:
+	.word	unk_2038790
+._227:
+	ldr	r0, ._240
+	bl	Text_LoadWindowTemplate
+	b	._250
+._241:
+	.align	2, 0
+._240:
+	.word	gWindowTemplate_81E6D00
+._228:
+	ldr	r0, ._243
+	bl	InitMenuWindow
+	bl	Menu_EraseScreen
+	b	._250
+._244:
+	.align	2, 0
+._243:
+	.word	gWindowTemplate_81E6D00
+._229:
+	bl	sub_80967DC
+	bl	sub_8096848
+	b	._250
+._230:
+	bl	sub_8098B48
+	bl	sub_809AA24
+	b	._250
+._231:
+	bl	sub_8097DE0
+	b	._250
+._232:
+	bl	sub_8097E70
+	b	._250
+._233:
+	bl	sub_8098400
+	b	._250
+._234:
+	ldr	r0, ._251
+	ldrb	r0, [r0]
+	bl	sub_8099BF8
+	ldr	r2, ._251 + 4
+	ldr	r1, ._251 + 8
+	add	r0, r2, r1
+	mov	r1, #0xa
+	strh	r1, [r0]
+	ldr	r1, ._251 + 12
+	add	r2, r2, r1
+	ldr	r1, ._251 + 16
+	strh	r1, [r2]
+	bl	sub_80F727C
+	bl	sub_80F7404
+	b	._250
+._252:
+	.align	2, 0
+._251:
+	.word	gPokemonStorage
+	.word	+0x2000000
+	.word	0x12bc
+	.word	0x12be
+	.word	0xdacb
+._235:
+	bl	sub_8096874
+	ldr	r0, ._253
+	bl	sub_8096BE0
+	ldr	r0, ._253 + 4
+	bl	SetMainCallback2
+	ldr	r0, ._253 + 8
+	bl	SetVBlankCallback
+._250:
+	ldr	r1, ._253 + 12
+	ldr	r0, ._253 + 16
+	add	r1, r1, r0
+	ldrb	r0, [r1]
+	add	r0, r0, #0x1
+	strb	r0, [r1]
+._222:
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._254:
+	.align	2, 0
+._253:
+	.word	sub_8096BF0+1
+	.word	sub_8096B38+1
+	.word	sub_8096AFC+1
+	.word	gMain
+	.word	0x43c
+.syntax unified
+	thumb_func_end sub_8096884
+.else
 	thumb_func_start sub_8096884
 sub_8096884: @ 8096884
 	push {lr}
@@ -2096,6 +2234,7 @@ _08096994: .4byte sub_8096AFC
 _08096998: .4byte gMain
 _0809699C: .4byte 0x0000043c
 	thumb_func_end sub_8096884
+.endif
 
 	thumb_func_start sub_80969A0
 sub_80969A0: @ 80969A0
@@ -2556,6 +2695,438 @@ _08096C7A:
 _08096C80: .4byte sub_8096C84
 	thumb_func_end sub_8096C68
 
+.if DEBUG
+	thumb_func_start sub_8096C84
+sub_8096C84:
+.syntax divided
+	push	{r4, lr}
+	ldr	r0, ._347
+	ldrb	r0, [r0, #0x4]
+	cmp	r0, #0x6
+	bls	._345	@cond_branch
+	b	._466
+._345:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._347 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._348:
+	.align	2, 0
+._347:
+	.word	+0x2000000
+	.word	._349
+._349:
+	.word	._350
+	.word	._351
+	.word	._352
+	.word	._353
+	.word	._354
+	.word	._355
+	.word	._356
+._350:
+	bl	sub_809CA40
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	sub	r0, r0, #0x1
+	cmp	r0, #0xf
+	bls	._357	@cond_branch
+	b	._466
+._357:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._360
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._361:
+	.align	2, 0
+._360:
+	.word	._359
+._359:
+	.word	._362
+	.word	._466
+	.word	._466
+	.word	._365
+	.word	._366
+	.word	._367
+	.word	._368
+	.word	._369
+	.word	._370
+	.word	._371
+	.word	._372
+	.word	._373
+	.word	._374
+	.word	._375
+	.word	._376
+	.word	._377
+._362:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r1, ._379
+	mov	r0, #0x1
+	strb	r0, [r1, #0x4]
+	b	._466
+._380:
+	.align	2, 0
+._379:
+	.word	+0x2000000
+._366:
+	ldr	r4, ._383
+	ldrb	r0, [r4, #0x5]
+	cmp	r0, #0x2
+	beq	._381	@cond_branch
+	mov	r0, #0x10
+	bl	sub_8098898
+	mov	r0, #0x3
+	strb	r0, [r4, #0x4]
+	b	._466
+._384:
+	.align	2, 0
+._383:
+	.word	+0x2000000
+._381:
+	bl	sub_809B0D4
+	ldr	r0, ._386
+	bl	sub_8096BE0
+	b	._466
+._387:
+	.align	2, 0
+._386:
+	.word	sub_8096FC8+1
+._367:
+	ldr	r4, ._394
+	ldrb	r0, [r4, #0x5]
+	cmp	r0, #0x2
+	beq	._388	@cond_branch
+	b	._466
+._388:
+	bl	sub_809BF20
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._391	@cond_branch
+	ldr	r1, ._394 + 4
+	add	r0, r4, r1
+	ldrh	r0, [r0]
+	bl	ItemIsMail
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._391	@cond_branch
+	b	._392
+._391:
+	ldr	r0, ._394 + 8
+	bl	sub_8096BE0
+	b	._466
+._395:
+	.align	2, 0
+._394:
+	.word	+0x2000000
+	.word	0x11f2
+	.word	sub_8097004+1
+._365:
+	ldr	r0, ._399
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._396	@cond_branch
+	b	._466
+._396:
+	ldr	r0, ._399 + 4
+	bl	sub_8096BE0
+	b	._466
+._400:
+	.align	2, 0
+._399:
+	.word	unk_2038790
+	.word	sub_8097BA0+1
+._377:
+	ldr	r0, ._404
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._401	@cond_branch
+	b	._466
+._401:
+	ldr	r0, ._404 + 4
+	bl	sub_8096BE0
+	b	._466
+._405:
+	.align	2, 0
+._404:
+	.word	unk_2038790
+	.word	sub_8097CC0+1
+._368:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._407
+	bl	sub_8096BE0
+	b	._466
+._408:
+	.align	2, 0
+._407:
+	.word	sub_809789C+1
+._369:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._410
+	bl	sub_8096BE0
+	b	._466
+._411:
+	.align	2, 0
+._410:
+	.word	sub_8097078+1
+._370:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r4, ._414
+	ldr	r0, ._414 + 4
+	ldrb	r0, [r0]
+	add	r0, r0, #0x1
+	ldr	r2, ._414 + 8
+	add	r1, r4, r2
+	strh	r0, [r1]
+	cmp	r0, #0xd
+	ble	._416	@cond_branch
+	mov	r0, #0x0
+	b	._413
+._415:
+	.align	2, 0
+._414:
+	.word	+0x2000000
+	.word	gPokemonStorage
+	.word	0x8b2
+._371:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r4, ._418
+	ldr	r0, ._418 + 4
+	ldrb	r0, [r0]
+	sub	r0, r0, #0x1
+	ldr	r2, ._418 + 8
+	add	r1, r4, r2
+	strh	r0, [r1]
+	cmp	r0, #0
+	bge	._416	@cond_branch
+	mov	r0, #0xd
+._413:
+	strh	r0, [r1]
+._416:
+	ldrb	r0, [r1]
+	bl	sub_8099C70
+	mov	r0, #0x2
+	strb	r0, [r4, #0x4]
+	b	._466
+._419:
+	.align	2, 0
+._418:
+	.word	+0x2000000
+	.word	gPokemonStorage
+	.word	0x8b2
+._372:
+	bl	sub_809BE80
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._428	@cond_branch
+	ldr	r4, ._423
+	ldr	r1, ._423 + 4
+	add	r0, r4, r1
+	ldrh	r0, [r0]
+	bl	ItemIsMail
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._421	@cond_branch
+._392:
+	mov	r0, #0x5
+	strb	r0, [r4, #0x4]
+	b	._466
+._424:
+	.align	2, 0
+._423:
+	.word	+0x2000000
+	.word	0x11f2
+._421:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._426
+	bl	sub_8096BE0
+	b	._466
+._427:
+	.align	2, 0
+._426:
+	.word	sub_809746C+1
+._374:
+	bl	sub_809BE80
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._428	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._430
+	bl	sub_8096BE0
+	b	._466
+._431:
+	.align	2, 0
+._430:
+	.word	sub_80972A8+1
+._375:
+	bl	sub_809BEBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._432	@cond_branch
+._428:
+	ldr	r1, ._434
+	mov	r0, #0x4
+	strb	r0, [r1, #0x4]
+	b	._466
+._435:
+	.align	2, 0
+._434:
+	.word	+0x2000000
+._432:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._437
+	bl	sub_8096BE0
+	b	._466
+._438:
+	.align	2, 0
+._437:
+	.word	c3_0808DC50+1
+._373:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._440
+	bl	sub_8096BE0
+	b	._466
+._441:
+	.align	2, 0
+._440:
+	.word	sub_8097390+1
+._376:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._443
+	bl	sub_8096BE0
+	b	._466
+._444:
+	.align	2, 0
+._443:
+	.word	sub_80972FC+1
+._351:
+	bl	sub_809AC00
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._466	@cond_branch
+	bl	sub_809BF48
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._446	@cond_branch
+	bl	sub_80986E8
+	b	._447
+._446:
+	bl	sub_8098710
+._447:
+	ldr	r4, ._450
+	ldr	r2, ._450 + 4
+	add	r0, r4, r2
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._448	@cond_branch
+	bl	BoxSetMosaic
+._448:
+	mov	r0, #0x0
+	strb	r0, [r4, #0x4]
+	b	._466
+._451:
+	.align	2, 0
+._450:
+	.word	+0x2000000
+	.word	0x11f6
+._352:
+	bl	sub_8099D34
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._466	@cond_branch
+	ldr	r1, ._456
+	ldr	r0, ._456 + 4
+	ldr	r2, ._456 + 8
+	add	r0, r0, r2
+	ldrh	r0, [r0]
+	strb	r0, [r1]
+	ldr	r0, ._456 + 12
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	bne	._455	@cond_branch
+	bl	sub_809BF20
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._455	@cond_branch
+	bl	sub_809B440
+	bl	BoxSetMosaic
+	b	._455
+._457:
+	.align	2, 0
+._456:
+	.word	gPokemonStorage
+	.word	+0x2000000
+	.word	0x8b2
+	.word	gUnknown_0203847C
+._353:
+	ldr	r0, ._460
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0xf3
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._466	@cond_branch
+	bl	sub_8098A5C
+._455:
+	ldr	r1, ._460 + 4
+	mov	r0, #0x0
+	strb	r0, [r1, #0x4]
+	b	._466
+._461:
+	.align	2, 0
+._460:
+	.word	gMain
+	.word	+0x2000000
+._354:
+	mov	r0, #0x20
+	bl	PlaySE
+	mov	r0, #0xd
+	b	._462
+._355:
+	mov	r0, #0x20
+	bl	PlaySE
+	mov	r0, #0x16
+._462:
+	bl	sub_8098898
+	ldr	r1, ._464
+	mov	r0, #0x6
+	strb	r0, [r1, #0x4]
+	b	._466
+._465:
+	.align	2, 0
+._464:
+	.word	+0x2000000
+._356:
+	ldr	r0, ._467
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0xf3
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._466	@cond_branch
+	bl	sub_8098A5C
+	ldr	r0, ._467 + 4
+	bl	sub_8096BE0
+._466:
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._468:
+	.align	2, 0
+._467:
+	.word	gMain
+	.word	sub_8096C84+1
+.syntax unified
+	thumb_func_end sub_8096C84
+.else
 	thumb_func_start sub_8096C84
 sub_8096C84: @ 8096C84
 	push {r4,lr}
@@ -2923,6 +3494,7 @@ _08096FBA:
 _08096FC0: .4byte gMain
 _08096FC4: .4byte sub_8096C84
 	thumb_func_end sub_8096C84
+.endif
 
 	thumb_func_start sub_8096FC8
 sub_8096FC8: @ 8096FC8
@@ -3017,6 +3589,317 @@ _08097070: .4byte 0x000011f6
 _08097074: .4byte sub_8096C84
 	thumb_func_end sub_8097004
 
+.if DEBUG
+	thumb_func_start sub_8097078
+sub_8097078:
+.syntax divided
+	push	{r4, lr}
+	ldr	r0, ._495
+	ldrb	r0, [r0, #0x4]
+	cmp	r0, #0x5
+	bls	._493	@cond_branch
+	b	._597
+._493:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._495 + 4
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._496:
+	.align	2, 0
+._495:
+	.word	+0x2000000
+	.word	._497
+._497:
+	.word	._498
+	.word	._499
+	.word	._500
+	.word	._501
+	.word	._502
+	.word	._503
+._498:
+	mov	r0, #0x4
+	bl	sub_8098898
+	bl	sub_809CE84
+	ldr	r1, ._505
+	mov	r0, #0x1
+	strb	r0, [r1, #0x4]
+	b	._597
+._506:
+	.align	2, 0
+._505:
+	.word	+0x2000000
+._499:
+	bl	sub_809CF30
+	add	r0, r0, #0x1
+	lsl	r0, r0, #0x10
+	asr	r0, r0, #0x10
+	cmp	r0, #0x21
+	bls	._507	@cond_branch
+	b	._597
+._507:
+	lsl	r0, r0, #0x2
+	ldr	r1, ._510
+	add	r0, r0, r1
+	ldr	r0, [r0]
+	mov	pc, r0
+._511:
+	.align	2, 0
+._510:
+	.word	._509
+._509:
+	.word	._513
+	.word	._513
+	.word	._514
+	.word	._515
+	.word	._516
+	.word	._517
+	.word	._518
+	.word	._519
+	.word	._520
+	.word	._521
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._597
+	.word	._545
+._513:
+	bl	sub_8098A5C
+	ldr	r0, ._547
+	bl	sub_8096BE0
+	b	._597
+._548:
+	.align	2, 0
+._547:
+	.word	sub_8096C84+1
+._516:
+	bl	sub_809BE80
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._563	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._551
+	bl	sub_8096BE0
+	b	._597
+._552:
+	.align	2, 0
+._551:
+	.word	sub_80972A8+1
+._518:
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._554
+	bl	sub_8096BE0
+	b	._597
+._555:
+	.align	2, 0
+._554:
+	.word	sub_80972FC+1
+._517:
+	bl	sub_809BEBC
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._563	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._558
+	bl	sub_8096BE0
+	b	._597
+._559:
+	.align	2, 0
+._558:
+	.word	c3_0808DC50+1
+._515:
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._561
+	bl	sub_8096BE0
+	b	._597
+._562:
+	.align	2, 0
+._561:
+	.word	sub_8097390+1
+._514:
+	bl	sub_809BE80
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._563	@cond_branch
+	ldr	r4, ._566
+	ldr	r1, ._566 + 4
+	add	r0, r4, r1
+	ldrh	r0, [r0]
+	bl	ItemIsMail
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._564	@cond_branch
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._566 + 8
+	bl	sub_8096BE0
+	b	._597
+._567:
+	.align	2, 0
+._566:
+	.word	+0x2000000
+	.word	0x11f2
+	.word	sub_809746C+1
+._520:
+	bl	sub_809BE80
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._568	@cond_branch
+._563:
+	ldr	r1, ._570
+	mov	r0, #0x2
+	strb	r0, [r1, #0x4]
+	b	._597
+._571:
+	.align	2, 0
+._570:
+	.word	+0x2000000
+._568:
+	ldr	r4, ._574
+	ldr	r1, ._574 + 4
+	add	r0, r4, r1
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._572	@cond_branch
+	mov	r0, #0x4
+	strb	r0, [r4, #0x4]
+	b	._597
+._575:
+	.align	2, 0
+._574:
+	.word	+0x2000000
+	.word	0x11f9
+._572:
+	ldr	r1, ._578
+	add	r0, r4, r1
+	ldrh	r0, [r0]
+	bl	ItemIsMail
+	lsl	r0, r0, #0x18
+	cmp	r0, #0
+	beq	._576	@cond_branch
+._564:
+	mov	r0, #0x3
+	strb	r0, [r4, #0x4]
+	b	._597
+._579:
+	.align	2, 0
+._578:
+	.word	0x11f2
+._576:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._581
+	bl	sub_8096BE0
+	b	._597
+._582:
+	.align	2, 0
+._581:
+	.word	sub_8097594+1
+._519:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._584
+	bl	sub_8096BE0
+	b	._597
+._585:
+	.align	2, 0
+._584:
+	.word	sub_8097788+1
+._521:
+	mov	r0, #0x5
+	bl	PlaySE
+	ldr	r0, ._587
+	bl	sub_8096BE0
+	b	._597
+._588:
+	.align	2, 0
+._587:
+	.word	sub_80977E4+1
+._545:
+	mov	r0, #0x5
+	bl	PlaySE
+	bl	sub_8098A5C
+	ldr	r0, ._590
+	bl	sub_8096BE0
+	b	._597
+._591:
+	.align	2, 0
+._590:
+	.word	debug_sub_80A435C+1
+._500:
+	mov	r0, #0x20
+	bl	PlaySE
+	mov	r0, #0xd
+	b	._593
+._502:
+	mov	r0, #0x20
+	bl	PlaySE
+	mov	r0, #0x11
+	b	._593
+._501:
+	mov	r0, #0x20
+	bl	PlaySE
+	mov	r0, #0x16
+._593:
+	bl	sub_8098898
+	ldr	r1, ._595
+	mov	r0, #0x5
+	strb	r0, [r1, #0x4]
+	b	._597
+._596:
+	.align	2, 0
+._595:
+	.word	+0x2000000
+._503:
+	ldr	r0, ._598
+	ldrh	r1, [r0, #0x2e]
+	mov	r0, #0xf3
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._597	@cond_branch
+	bl	sub_8098A5C
+	ldr	r0, ._598 + 4
+	bl	sub_8096BE0
+._597:
+	pop	{r4}
+	pop	{r0}
+	bx	r0
+._599:
+	.align	2, 0
+._598:
+	.word	gMain
+	.word	sub_8096C84+1
+.syntax unified
+	thumb_func_end sub_8097078
+.else
 	thumb_func_start sub_8097078
 sub_8097078: @ 8097078
 	push {r4,lr}
@@ -3257,6 +4140,7 @@ _0809729A:
 _080972A0: .4byte gMain
 _080972A4: .4byte sub_8096C84
 	thumb_func_end sub_8097078
+.endif
 
 	thumb_func_start sub_80972A8
 sub_80972A8: @ 80972A8

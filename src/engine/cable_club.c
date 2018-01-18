@@ -41,7 +41,7 @@ extern struct
     u8 field1;
 } gUnknown_020297D8;
 
-static void sub_8082F20(u8 taskId);
+/*static*/ void sub_8082F20(u8 taskId);
 static void sub_8082F68(u8 taskId);
 static void sub_8082FEC(u8 taskId);
 static void sub_808303C(u8 taskId);
@@ -414,6 +414,63 @@ void debug_sub_808A55C()
 }
 #endif
 
+#if DEBUG
+__attribute__((naked))
+static void sub_8082CD4(u8 arg0, u8 arg1)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r6, r1, #0x18\n\
+	mov	r0, #0xc\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x1f\n\
+	mov	r3, #0x2\n\
+	bl	InitLinkTestBG_Unused\n\
+	ldr	r4, ._40\n\
+	add	r0, r4, #0\n\
+	bl	FindTaskIdByFunc\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0xff\n\
+	bne	._39	@cond_branch\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x50\n\
+	bl	CreateTask\n\
+	add	r4, r0, #0\n\
+	lsl	r4, r4, #0x18\n\
+	lsr	r4, r4, #0x18\n\
+	ldr	r5, ._40 + 4\n\
+	lsl	r0, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r5\n\
+	strh	r7, [r0, #0xa]\n\
+	strh	r6, [r0, #0xc]\n\
+	ldr	r0, ._40 + 8\n\
+	mov	r1, #0x50\n\
+	bl	CreateTask\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r5\n\
+	strh	r4, [r1, #0x8]\n\
+._39:\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._41:\n\
+	.align	2, 0\n\
+._40:\n\
+	.word	sub_8082F20+1\n\
+	.word	gTasks\n\
+	.word	debug_sub_808A55C+1");
+}
+#else
 static void sub_8082CD4(u8 arg0, u8 arg1)
 {
     if (FindTaskIdByFunc(sub_8082F20) == 0xFF)
@@ -424,6 +481,7 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
         gTasks[taskId].data[2] = arg1;
     }
 }
+#endif
 
 static void sub_8082D18(u32 value)
 {
@@ -526,7 +584,7 @@ void unref_sub_8082EEC(u8 taskId)
     }
 }
 
-static void sub_8082F20(u8 taskId)
+/*static*/ void sub_8082F20(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1316,6 +1374,7 @@ void unref_sub_8083CC8(u8 taskId)
 
 #if DEBUG
 
+__attribute__((naked))
 void debug_sub_808B82C()
 {
     asm("\
@@ -1329,6 +1388,7 @@ void debug_sub_808B82C()
 	.word	unk_2030220");
 }
 
+__attribute__((naked))
 void debug_sub_808B838(u8 a)
 {
     asm("\
@@ -1347,6 +1407,7 @@ void debug_sub_808B838(u8 a)
 	.word	unk_2030220");
 }
 
+__attribute__((naked))
 int debug_sub_808B850()
 {
     asm("\

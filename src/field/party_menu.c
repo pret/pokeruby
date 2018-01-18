@@ -94,9 +94,9 @@ static void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
 static void ItemUseMoveMenu_HandleMoveSelection(u8 taskId);
 static void ItemUseMoveMenu_HandleCancel(u8 taskId);
 static bool8 SetupDefaultPartyMenu(void);
-static void sub_806B4A8(void);
-static void VBlankCB_PartyMenu(void);
-static bool8 LoadPartyMenuGraphics(u8 a);
+/*static*/ void sub_806B4A8(void);
+/*static*/ void VBlankCB_PartyMenu(void);
+/*static*/ bool8 LoadPartyMenuGraphics(u8 a);
 static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
 static void sub_806BBEC(u8 a);
@@ -493,6 +493,71 @@ extern const u8 gStatusPal_Icons[];
 #define WINDOW_RIGHT (29)
 #endif
 
+#if DEBUG
+__attribute__((naked))
+void CB2_PartyMenuMain(void)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	bl	AnimateSprites\n\
+	bl	BuildOamBuffer\n\
+	ldr	r0, ._3\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x4\n\
+	ldr	r1, ._3 + 4\n\
+	add	r5, r0, r1\n\
+	mov	r6, #0x0\n\
+._1:\n\
+	ldrb	r0, [r5]\n\
+	lsl	r0, r0, #0x3\n\
+	ldrb	r1, [r5, #0x1]\n\
+	lsl	r1, r1, #0x3\n\
+	ldr	r2, [r5, #0x4]\n\
+	lsl	r3, r6, #0x5\n\
+	mov	r4, #0x80\n\
+	lsl	r4, r4, #0x2\n\
+	orr	r3, r3, r4\n\
+	str	r3, [sp]\n\
+	mov	r3, #0x0\n\
+	bl	DrawPartyMenuMonText\n\
+	add	r5, r5, #0x8\n\
+	add	r6, r6, #0x1\n\
+	cmp	r6, #0x5\n\
+	ble	._1	@cond_branch\n\
+	bl	RunTasks\n\
+	bl	UpdatePaletteFade\n\
+	ldr	r0, ._3 + 8\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._2	@cond_branch\n\
+	ldr	r0, ._3 + 12\n\
+	ldr	r1, ._3 + 16\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x2\n\
+	str	r1, [sp]\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008264\n\
+._2:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._4:\n\
+	.align	2, 0\n\
+._3:\n\
+	.word	gPartyMenuType\n\
+	.word	PartyMonTextSettings\n\
+	.word	gLinkOpen\n\
+	.word	gLink\n\
+	.word	0xfbd");
+}
+#else
 void CB2_PartyMenuMain(void)
 {
     const struct PartyMonTextSettingsStruct *textSettings;
@@ -517,6 +582,7 @@ void CB2_PartyMenuMain(void)
     RunTasks();
     UpdatePaletteFade();
 }
+#endif
 
 void VBlankCB_PartyMenu(void)
 {
@@ -621,6 +687,425 @@ bool8 SetupDefaultPartyMenu(void)
     return FALSE;
 }
 
+#if DEBUG
+__attribute__((naked))
+bool8 InitPartyMenu(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r8\n\
+	push	{r7}\n\
+	add	sp, sp, #0xfffffff4\n\
+	ldr	r0, ._55\n\
+	ldr	r1, ._55 + 4\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x11\n\
+	bls	._53	@cond_branch\n\
+	b	._125\n\
+._53:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._55 + 8\n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._56:\n\
+	.align	2, 0\n\
+._55:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._57\n\
+._57:\n\
+	.word	._58\n\
+	.word	._59\n\
+	.word	._60\n\
+	.word	._61\n\
+	.word	._62\n\
+	.word	._63\n\
+	.word	._64\n\
+	.word	._65\n\
+	.word	._66\n\
+	.word	._67\n\
+	.word	._68\n\
+	.word	._69\n\
+	.word	._70\n\
+	.word	._71\n\
+	.word	._72\n\
+	.word	._73\n\
+	.word	._74\n\
+	.word	._75\n\
+._58:\n\
+	mov	r0, #0x0\n\
+	bl	SetVBlankCallback\n\
+	mov	r3, #0xc0\n\
+	lsl	r3, r3, #0x13\n\
+	mov	r4, #0xc0\n\
+	lsl	r4, r4, #0x9\n\
+	add	r2, sp, #0x8\n\
+	mov	r8, r2\n\
+	add	r2, sp, #0x4\n\
+	mov	r6, #0x0\n\
+	ldr	r1, ._78\n\
+	mov	r5, #0x80\n\
+	lsl	r5, r5, #0x5\n\
+	ldr	r7, ._78 + 4\n\
+	mov	r0, #0x81\n\
+	lsl	r0, r0, #0x18\n\
+	mov	ip, r0\n\
+._76:\n\
+	strh	r6, [r2]\n\
+	add	r0, sp, #0x4\n\
+	str	r0, [r1]\n\
+	str	r3, [r1, #0x4]\n\
+	str	r7, [r1, #0x8]\n\
+	ldr	r0, [r1, #0x8]\n\
+	add	r3, r3, r5\n\
+	sub	r4, r4, r5\n\
+	cmp	r4, r5\n\
+	bhi	._76	@cond_branch\n\
+	strh	r6, [r2]\n\
+	add	r2, sp, #0x4\n\
+	str	r2, [r1]\n\
+	str	r3, [r1, #0x4]\n\
+	lsr	r0, r4, #0x1\n\
+	mov	r3, ip\n\
+	orr	r0, r0, r3\n\
+	str	r0, [r1, #0x8]\n\
+	ldr	r0, [r1, #0x8]\n\
+	mov	r0, #0xe0\n\
+	lsl	r0, r0, #0x13\n\
+	mov	r3, #0x80\n\
+	lsl	r3, r3, #0x3\n\
+	mov	r4, #0x0\n\
+	str	r4, [sp, #0x8]\n\
+	ldr	r2, ._78\n\
+	mov	r1, r8\n\
+	str	r1, [r2]\n\
+	str	r0, [r2, #0x4]\n\
+	lsr	r0, r3, #0x2\n\
+	mov	r1, #0x85\n\
+	lsl	r1, r1, #0x18\n\
+	orr	r0, r0, r1\n\
+	str	r0, [r2, #0x8]\n\
+	ldr	r0, [r2, #0x8]\n\
+	mov	r1, #0xa0\n\
+	lsl	r1, r1, #0x13\n\
+	add	r0, sp, #0x4\n\
+	strh	r4, [r0]\n\
+	str	r0, [r2]\n\
+	str	r1, [r2, #0x4]\n\
+	lsr	r3, r3, #0x1\n\
+	mov	r0, #0x81\n\
+	lsl	r0, r0, #0x18\n\
+	orr	r3, r3, r0\n\
+	str	r3, [r2, #0x8]\n\
+	ldr	r0, [r2, #0x8]\n\
+	ldr	r2, ._78 + 8\n\
+	ldrb	r0, [r2, #0x8]\n\
+	mov	r1, #0x80\n\
+	orr	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r1, ._78 + 12\n\
+	ldr	r2, ._78 + 16\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._79:\n\
+	.align	2, 0\n\
+._78:\n\
+	.word	0x40000d4\n\
+	.word	0x81000800\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._59:\n\
+	bl	ScanlineEffect_Stop\n\
+	b	._115\n\
+._60:\n\
+	bl	sub_806B4A8\n\
+	ldr	r1, ._82\n\
+	mov	r2, #0x99\n\
+	lsl	r2, r2, #0x2\n\
+	add	r0, r1, r2\n\
+	mov	r2, #0x0\n\
+	strh	r2, [r0]\n\
+	ldr	r3, ._82 + 4\n\
+	add	r0, r1, r3\n\
+	strh	r2, [r0]\n\
+	mov	r0, #0x9a\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	strh	r2, [r1]\n\
+	ldr	r1, ._82 + 8\n\
+	ldr	r2, ._82 + 12\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._83:\n\
+	.align	2, 0\n\
+._82:\n\
+	.word	+0x201b000\n\
+	.word	0x266\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._61:\n\
+	bl	ResetSpriteData\n\
+	b	._115\n\
+._62:\n\
+	ldr	r0, ._88\n\
+	mov	r1, #0x96\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	beq	._86	@cond_branch\n\
+	cmp	r0, #0x5\n\
+	beq	._86	@cond_branch\n\
+	bl	ResetTasks\n\
+._86:\n\
+	ldr	r1, ._88 + 4\n\
+	ldr	r2, ._88 + 8\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._89:\n\
+	.align	2, 0\n\
+._88:\n\
+	.word	+0x201b000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._63:\n\
+	bl	FreeAllSpritePalettes\n\
+	b	._115\n\
+._64:\n\
+	ldr	r4, ._92\n\
+	mov	r1, #0x97\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r4, r1\n\
+	ldr	r0, [r0]\n\
+	mov	r1, #0x0\n\
+	bl	CreateTask\n\
+	mov	r2, #0x98\n\
+	lsl	r2, r2, #0x2\n\
+	add	r1, r4, r2\n\
+	strb	r0, [r1]\n\
+	b	._115\n\
+._93:\n\
+	.align	2, 0\n\
+._92:\n\
+	.word	+0x201b000\n\
+._65:\n\
+	ldr	r0, ._95\n\
+	bl	Text_LoadWindowTemplate\n\
+	ldr	r1, ._95 + 4\n\
+	ldr	r0, ._95 + 8\n\
+	add	r1, r1, r0\n\
+	b	._122\n\
+._96:\n\
+	.align	2, 0\n\
+._95:\n\
+	.word	gWindowTemplate_81E6C90\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._66:\n\
+	ldr	r4, ._98\n\
+	ldr	r1, ._98 + 4\n\
+	add	r0, r4, #0\n\
+	bl	Text_InitWindowWithTemplate\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x1\n\
+	bl	MultistepInitWindowTileData\n\
+	ldr	r1, ._98 + 8\n\
+	ldr	r2, ._98 + 12\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._99:\n\
+	.align	2, 0\n\
+._98:\n\
+	.word	gUnknown_03004210\n\
+	.word	gWindowTemplate_81E6C90\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._67:\n\
+	bl	MultistepLoadFont\n\
+	cmp	r0, #0\n\
+	bne	._100	@cond_branch\n\
+	b	._125\n\
+._100:\n\
+	ldr	r0, ._103\n\
+	mov	r3, #0x99\n\
+	lsl	r3, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	mov	r1, #0x1\n\
+	strh	r1, [r0]\n\
+	ldr	r1, ._103 + 4\n\
+	ldr	r0, ._103 + 8\n\
+	add	r1, r1, r0\n\
+	b	._122\n\
+._104:\n\
+	.align	2, 0\n\
+._103:\n\
+	.word	+0x201b000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._68:\n\
+	ldr	r0, ._107\n\
+	mov	r1, #0x99\n\
+	lsl	r1, r1, #0x2\n\
+	add	r4, r0, r1\n\
+	ldrb	r0, [r4]\n\
+	bl	LoadPartyMenuGraphics\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._105	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r4]\n\
+	ldr	r1, ._107 + 4\n\
+	ldr	r2, ._107 + 8\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._108:\n\
+	.align	2, 0\n\
+._107:\n\
+	.word	+0x201b000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._105:\n\
+	ldrh	r0, [r4]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4]\n\
+	b	._125\n\
+._69:\n\
+	bl	sub_809D51C\n\
+	b	._115\n\
+._70:\n\
+	ldr	r2, ._113\n\
+	ldr	r0, ._113 + 4\n\
+	mov	r1, #0x96\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x1\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r2, r2, #0x4\n\
+	add	r0, r0, r2\n\
+	ldr	r0, [r0]\n\
+	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bne	._125	@cond_branch\n\
+	ldr	r1, ._113 + 8\n\
+	ldr	r2, ._113 + 12\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._114:\n\
+	.align	2, 0\n\
+._113:\n\
+	.word	PartyMenuHandlers\n\
+	.word	+0x201b000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._71:\n\
+	ldr	r0, ._116\n\
+	bl	MultistepInitMenuWindowBegin\n\
+	b	._115\n\
+._117:\n\
+	.align	2, 0\n\
+._116:\n\
+	.word	gWindowTemplate_81E6CC8\n\
+._72:\n\
+	bl	MultistepInitMenuWindowContinue\n\
+	cmp	r0, #0\n\
+	beq	._125	@cond_branch\n\
+	ldr	r1, ._120\n\
+	ldr	r0, ._120 + 4\n\
+	add	r1, r1, r0\n\
+	b	._122\n\
+._121:\n\
+	.align	2, 0\n\
+._120:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._73:\n\
+	ldr	r0, ._123\n\
+	ldr	r1, ._123 + 4\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x0\n\
+	bl	PrintPartyMenuPromptText\n\
+	ldr	r1, ._123 + 8\n\
+	ldr	r2, ._123 + 12\n\
+	add	r1, r1, r2\n\
+	b	._122\n\
+._124:\n\
+	.align	2, 0\n\
+._123:\n\
+	.word	+0x201b000\n\
+	.word	0x259\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._74:\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r2, #0x10\n\
+	mov	r3, #0x0\n\
+	bl	BeginNormalPaletteFade\n\
+	ldr	r2, ._126\n\
+	ldrb	r1, [r2, #0x8]\n\
+	mov	r0, #0x7f\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+._115:\n\
+	ldr	r1, ._126 + 4\n\
+	ldr	r3, ._126 + 8\n\
+	add	r1, r1, r3\n\
+._122:\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	b	._125\n\
+._127:\n\
+	.align	2, 0\n\
+._126:\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._75:\n\
+	ldr	r0, ._130\n\
+	bl	SetVBlankCallback\n\
+	ldr	r0, ._130 + 4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._128	@cond_branch\n\
+	ldr	r0, ._130 + 8\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x8\n\
+	ldr	r2, ._130 + 12\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008218\n\
+._128:\n\
+	mov	r0, #0x1\n\
+	b	._129\n\
+._131:\n\
+	.align	2, 0\n\
+._130:\n\
+	.word	VBlankCB_PartyMenu+1\n\
+	.word	gLinkOpen\n\
+	.word	0x600e5e0\n\
+	.word	0x6007800\n\
+._125:\n\
+	mov	r0, #0x0\n\
+._129:\n\
+	add	sp, sp, #0xc\n\
+	pop	{r3}\n\
+	mov	r8, r3\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+#else
 bool8 InitPartyMenu(void)
 {
     u8 *addr;
@@ -744,6 +1229,7 @@ bool8 InitPartyMenu(void)
 
     return FALSE;
 }
+#endif
 
 void CB2_InitPartyMenu(void)
 {
