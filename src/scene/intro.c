@@ -1217,7 +1217,6 @@ static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
 static void Task_IntroLoadPart3Streaks(u8 taskId)
 {
     u16 i;
-    void *vram;
 
     intro_reset_and_hide_bgs();
     for (i = 0; i < 32; i++)
@@ -1226,8 +1225,7 @@ static void Task_IntroLoadPart3Streaks(u8 taskId)
         ewram0arr[1][i] = 17;
         ewram0arr[2][i] = 34;
     }
-    vram = (void *)VRAM;
-    DmaCopy16(3, gSharedMem, vram, 0x60);
+    DmaCopy16Defvars(3, gSharedMem, (void *)(VRAM + 0x0), 0x60);
     for (i = 0; i < 0x280; i++)
         ((u16 *)(VRAM + 0x3000))[i] = 0xF001;
     for (i = 0; i < 0x80; i++)

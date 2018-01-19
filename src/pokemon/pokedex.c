@@ -1394,29 +1394,12 @@ void CB2_InitPokedex(void)
     {
     case 0:
     default:
-        {
-            u8 *addr;
-            u32 size;
-
-            SetVBlankCallback(NULL);
-            sub_8091060(0);
-            addr = (u8 *)VRAM;
-            size = VRAM_SIZE;
-            while (1)
-            {
-                DmaFill16(3, 0, addr, 0x1000);
-                addr += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaFill16(3, 0, addr, size);
-                    break;
-                }
-            }
-            DmaClear32(3, OAM, OAM_SIZE);
-            DmaClear16(3, PLTT, PLTT_SIZE);
-            gMain.state = 1;
-        }
+        SetVBlankCallback(NULL);
+        sub_8091060(0);
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
+        DmaClear32(3, OAM, OAM_SIZE);
+        DmaClear16(3, PLTT, PLTT_SIZE);
+        gMain.state = 1;
         break;
     case 1:
         ScanlineEffect_Stop();
@@ -4121,26 +4104,35 @@ bool8 CompletedHoennPokedex(void)
     return TRUE;
 }
 
-u16 sub_8090FF4(void)
+bool16 CompletedNationalPokedex(void)
 {
     u16 i;
 
+    // BUG: This function indexes pokemon checks by 0, but adds
+    // 1 before passing to GetSetPokedexFlag. Normally, this is
+    // fine, because GetSetPokedexFlag subtracts by 1 to get the
+    // array index value, but since the array is 0 indexed
+    // starting with Bulbasaur, values passed actually means that
+    // dex entries 152 (Chikorita) and 252 (Treecko) are skipped.
+    // Because an earlier Hoenn Dex check prevented Treecko from
+    // being skippable, it means that Chikorita is not required
+    // to obtain the National Diploma. This was fixed in Emerald.
     for (i = 0; i < 150; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
     for (i = 152; i < 250; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
     for (i = 252; i < 384; i++)
     {
         if (GetSetPokedexFlag(i + 1, 1) == 0)
-            return 0;
+            return FALSE;
     }
-    return 1;
+    return TRUE;
 }
 
 static void sub_8091060(u16 a)

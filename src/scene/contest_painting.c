@@ -156,23 +156,8 @@ static void ShowContestPainting(void)
         break;
     case 1:
     {
-        u8 *addr;
-        size_t size;
-
         ResetPaletteFade();
-        addr = (void *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
+        DmaFill32Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
         ResetSpriteData();
         gMain.state++;
         break;

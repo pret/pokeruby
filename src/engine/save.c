@@ -674,8 +674,8 @@ u8 Save_WriteDataInternal(u8 saveType)
             EraseFlashSector(i);
         // fall through
     case SAVE_HALL_OF_FAME: // hall of fame.
-        if (GetGameStat(10) < 999)
-            IncrementGameStat(10);
+        if (GetGameStat(GAME_STAT_ENTERED_HOF) < 999)
+            IncrementGameStat(GAME_STAT_ENTERED_HOF);
         for (i = 0; i < NUM_HALL_OF_FAME_SECTORS; i++)
             HandleWriteSectorNBytes(HALL_OF_FAME_SECTOR + i, sHallOfFameChunks[i].data, sHallOfFameChunks[i].size);
         SaveSerializedGame();

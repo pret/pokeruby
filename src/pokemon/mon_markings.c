@@ -631,6 +631,5 @@ struct Sprite *sub_80F7960(u16 tileTag, u16 paletteTag, const u16 *palette, u16 
 
 void sub_80F7A10(u8 markings, void *dest)
 {
-    const void *src = gUnknown_083E4A14 + markings * 0x80;
-    DmaCopy16(3, src, dest, 0x80);
+    DmaCopy16Defvars(3, gUnknown_083E4A14 + markings * 0x80, dest, 0x80);
 }

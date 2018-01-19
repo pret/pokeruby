@@ -3673,12 +3673,8 @@ void sub_80B0748(u8 taskId)
                     {
                         // What the hell? These aren't pointers.
                         // This code would crash if run.
-                        {
-                            void *src = (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1];
-                            void *dest = (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1];
-                            u32 size = 6;
-                            DmaCopy16(3, src, dest, size);
-                        }
+                        DmaCopy16Defvars(3, (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1],
+                            (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1], 6);
                         gTasks[taskId].data[r1 + 0] = 0;
                     }
                 }
@@ -4048,21 +4044,13 @@ u8 sub_80B09E4(u8 a)
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32), 0x300);
 
     // What is this?
     zero = 0;
     zero = 0;
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), 0x300);
 
     gSprites[r8].data[0] = r6;
     gSprites[r6].data[0] = r8;

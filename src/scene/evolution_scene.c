@@ -649,7 +649,7 @@ static void Task_EvolutionScene(u8 taskID)
             EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
-            IncrementGameStat(14);
+            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
         }
         break;
     case 14: // check if it wants to learn a new move
@@ -991,7 +991,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
             EvolutionRenameMon(mon, gTasks[taskID].tPreEvoSpecies, gTasks[taskID].tPostEvoSpecies);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 2);
             GetSetPokedexFlag(SpeciesToNationalPokedexNum(gTasks[taskID].tPostEvoSpecies), 3);
-            IncrementGameStat(14);
+            IncrementGameStat(GAME_STAT_EVOLVED_POKEMON);
         }
         break;
     case 13:

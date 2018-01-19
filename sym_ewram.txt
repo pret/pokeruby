@@ -387,6 +387,7 @@ gUnknown_020384EC: @ 20384EC
 	.include "src/field/item_menu.o"
 	.include "src/contest.o"
 	.include "src/field/shop.o"
+	.include "src/field/fldeff_escalator.o"
 	.include "src/field/money.o"
 	.include "src/engine/record_mixing.o"
 	.include "src/debug/sound_check_menu.o"

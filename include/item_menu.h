@@ -27,7 +27,7 @@ void CleanUpItemMenuMessage(u8);
 void CleanUpOverworldMessage(u8);
 void ExecuteItemUseFromBlackPalette(void);
 void sub_80A5D04(void);
-void sub_80A6300(void);
+void ItemMenu_LoadSellMenu(void);
 void sub_80A68CC();
 void sub_80A6A30(void);
 bool32 sub_80A6D1C(void);

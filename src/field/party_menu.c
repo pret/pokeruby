@@ -623,27 +623,11 @@ bool8 SetupDefaultPartyMenu(void)
 
 bool8 InitPartyMenu(void)
 {
-    u8 *addr;
-    u32 size;
-
     switch (gMain.state)
     {
     case 0:
         SetVBlankCallback(NULL);
-        addr = (u8 *)VRAM;
-        size = VRAM_SIZE;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
-
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
         DmaClear32(3, OAM, OAM_SIZE);
         DmaClear16(3, PLTT, PLTT_SIZE);
 
@@ -796,9 +780,7 @@ void ReDrawPartyMonBackgrounds(void)
 {
     if (ewram1B000.unk261)
     {
-        const void *src = gBGTilemapBuffers[2];
-        void *dest = (void *)(BG_VRAM + 0x3000);
-        DmaCopy16(3, src, dest, 0x800);
+        DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(BG_VRAM + 0x3000), 0x800);
 
         if (ewram1B000.unk261 == 2)
         {
