@@ -76,8 +76,8 @@ static const struct MenuAction2 sBuySellQuitMenuActions[] =
     { MartText_Quit2, Task_HandleShopMenuQuit },
 };
 
-static const u8 gMartBuySellOptionList[] = {BUY, SELL, EXIT};
-static const u8 gMartBuyNoSellOptionList[] = {BUY, EXIT};
+static const u8 gMartBuySellOptionList[] = {SHOP_BUY, SHOP_SELL, SHOP_EXIT};
+static const u8 gMartBuyNoSellOptionList[] = {SHOP_BUY, SHOP_EXIT};
 
 static const u16 gUnusedMartArray[] = {0x2, 0x3, 0x4, 0xD, 0x121, 0xE, 0xE, 0xE, 0xE, 0xE, 0xE, 0x0, 0x0};
 

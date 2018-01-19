@@ -20,9 +20,9 @@ enum
 // shop options
 enum
 {
-    BUY,
-    SELL,
-    EXIT
+    SHOP_BUY,
+    SHOP_SELL,
+    SHOP_EXIT
 };
 
 struct MartInfo
