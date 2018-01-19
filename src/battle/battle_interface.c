@@ -313,113 +313,113 @@ const struct SpriteTemplate gSpriteTemplate_820A7EC =
     .callback = sub_804507C,
 };
 
-TileData4bpp *const gUnknown_0820A804[2] =
+u8 *const gUnknown_0820A804[2] =
 {
-    &OBJ_VRAM0_TEMP[74],
-    &OBJ_VRAM0_TEMP[75],
+    OBJ_VRAM0 + 32 * 74,
+    OBJ_VRAM0 + 32 * 75,
 };
 
-TileData4bpp *const gUnknown_0820A80C[2] =
+u8 *const gUnknown_0820A80C[2] =
 {
-    &OBJ_VRAM0_TEMP[41],
-    &OBJ_VRAM0_TEMP[42],
+    OBJ_VRAM0 + 32 * 41,
+    OBJ_VRAM0 + 32 * 42,
 };
 
-TileData4bpp *const gUnknown_0820A814[2] =
+u8 *const gUnknown_0820A814[2] =
 {
-    &OBJ_VRAM0_TEMP[42],
-    &OBJ_VRAM0_TEMP[43],
+    OBJ_VRAM0 + 32 * 42,
+    OBJ_VRAM0 + 32 * 43,
 };
 
 const u8 gUnknown_0820A81C[] = __("{COLOR DARK_GREY}{HIGHLIGHT RED}                        ");
 
-TileData4bpp *const gUnknown_0820A83C[3] =
+u8 *const gUnknown_0820A83C[3] =
 {
-    &OBJ_VRAM0_TEMP[31],
-    &OBJ_VRAM0_TEMP[88],
-    &OBJ_VRAM0_TEMP[89],
+    OBJ_VRAM0 + 32 * 31,
+    OBJ_VRAM0 + 32 * 88,
+    OBJ_VRAM0 + 32 * 89,
 };
 
-TileData4bpp *const gUnknown_0820A848[3] =
+u8 *const gUnknown_0820A848[3] =
 {
-    &OBJ_VRAM0_TEMP[22],
-    &OBJ_VRAM0_TEMP[23],
-    &OBJ_VRAM0_TEMP[48],
+    OBJ_VRAM0 + 32 * 22,
+    OBJ_VRAM0 + 32 * 23,
+    OBJ_VRAM0 + 32 * 48,
 };
 
-TileData4bpp *const gUnknown_0820A854[2] =
+u8 *const gUnknown_0820A854[2] =
 {
-    &OBJ_VRAM0_TEMP[90],
-    &OBJ_VRAM0_TEMP[91],
+    OBJ_VRAM0 + 32 * 90,
+    OBJ_VRAM0 + 32 * 91,
 };
 
-TileData4bpp *const gUnknown_0820A85C[2] =
+u8 *const gUnknown_0820A85C[2] =
 {
-    &OBJ_VRAM0_TEMP[49],
-    &OBJ_VRAM0_TEMP[50],
+    OBJ_VRAM0 + 32 * 49,
+    OBJ_VRAM0 + 32 * 50,
 };
 
 const u8 gUnknown_0820A864[] = _("{COLOR DARK_GREY}{HIGHLIGHT RED}              /");
 
-TileData4bpp *const gUnknown_0820A87C[6] =
+u8 *const gUnknown_0820A87C[6] =
 {
-    &OBJ_VRAM0_TEMP[0],
-    &OBJ_VRAM0_TEMP[1],
-    &OBJ_VRAM0_TEMP[2],
-    &OBJ_VRAM0_TEMP[3],
-    &OBJ_VRAM0_TEMP[4],
-    &OBJ_VRAM0_TEMP[5],
+    OBJ_VRAM0 + 32 * 0,
+    OBJ_VRAM0 + 32 * 1,
+    OBJ_VRAM0 + 32 * 2,
+    OBJ_VRAM0 + 32 * 3,
+    OBJ_VRAM0 + 32 * 4,
+    OBJ_VRAM0 + 32 * 5,
 };
 
-TileData4bpp *const gUnknown_0820A894[2] =
+u8 *const gUnknown_0820A894[2] =
 {
-    &OBJ_VRAM0_TEMP[6],
-    &OBJ_VRAM0_TEMP[7],
+    OBJ_VRAM0 + 32 * 6,
+    OBJ_VRAM0 + 32 * 7,
 };
 
 const u8 gUnknown_0820A89C[] = __("{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}              ");
 const u8 gUnknown_0820A8B0[] = _("{HIGHLIGHT RED}");
 
-TileData4bpp *const gUnknown_0820A8B4[10] =
+u8 *const gUnknown_0820A8B4[10] =
 {
-    &OBJ_VRAM0_TEMP[ 2],
-    &OBJ_VRAM0_TEMP[ 3],
-    &OBJ_VRAM0_TEMP[ 4],
-    &OBJ_VRAM0_TEMP[ 5],
-    &OBJ_VRAM0_TEMP[ 6],
-    &OBJ_VRAM0_TEMP[ 7],
-    &OBJ_VRAM0_TEMP[64],
-    &OBJ_VRAM0_TEMP[65],
-    &OBJ_VRAM0_TEMP[66],
-    &OBJ_VRAM0_TEMP[67],
+    OBJ_VRAM0 + 32 *  2,
+    OBJ_VRAM0 + 32 *  3,
+    OBJ_VRAM0 + 32 *  4,
+    OBJ_VRAM0 + 32 *  5,
+    OBJ_VRAM0 + 32 *  6,
+    OBJ_VRAM0 + 32 *  7,
+    OBJ_VRAM0 + 32 * 64,
+    OBJ_VRAM0 + 32 * 65,
+    OBJ_VRAM0 + 32 * 66,
+    OBJ_VRAM0 + 32 * 67,
 };
 
-TileData4bpp *const gUnknown_0820A8DC[10] =
+u8 *const gUnknown_0820A8DC[10] =
 {
-    &OBJ_VRAM0_TEMP[ 1],
-    &OBJ_VRAM0_TEMP[ 2],
-    &OBJ_VRAM0_TEMP[ 3],
-    &OBJ_VRAM0_TEMP[ 4],
-    &OBJ_VRAM0_TEMP[ 5],
-    &OBJ_VRAM0_TEMP[ 6],
-    &OBJ_VRAM0_TEMP[ 7],
-    &OBJ_VRAM0_TEMP[32],
-    &OBJ_VRAM0_TEMP[33],
-    &OBJ_VRAM0_TEMP[34],
+    OBJ_VRAM0 + 32 *  1,
+    OBJ_VRAM0 + 32 *  2,
+    OBJ_VRAM0 + 32 *  3,
+    OBJ_VRAM0 + 32 *  4,
+    OBJ_VRAM0 + 32 *  5,
+    OBJ_VRAM0 + 32 *  6,
+    OBJ_VRAM0 + 32 *  7,
+    OBJ_VRAM0 + 32 * 32,
+    OBJ_VRAM0 + 32 * 33,
+    OBJ_VRAM0 + 32 * 34,
 };
 
-TileData4bpp *const gUnknown_0820A904[10] =
+u8 *const gUnknown_0820A904[10] =
 {
-    &OBJ_VRAM0_TEMP[ 2],
-    &OBJ_VRAM0_TEMP[ 3],
-    &OBJ_VRAM0_TEMP[ 4],
-    &OBJ_VRAM0_TEMP[ 5],
-    &OBJ_VRAM0_TEMP[ 6],
-    &OBJ_VRAM0_TEMP[ 7],
-    &OBJ_VRAM0_TEMP[32],
-    &OBJ_VRAM0_TEMP[33],
-    &OBJ_VRAM0_TEMP[34],
-    &OBJ_VRAM0_TEMP[35],
+    OBJ_VRAM0 + 32 *  2,
+    OBJ_VRAM0 + 32 *  3,
+    OBJ_VRAM0 + 32 *  4,
+    OBJ_VRAM0 + 32 *  5,
+    OBJ_VRAM0 + 32 *  6,
+    OBJ_VRAM0 + 32 *  7,
+    OBJ_VRAM0 + 32 * 32,
+    OBJ_VRAM0 + 32 * 33,
+    OBJ_VRAM0 + 32 * 34,
+    OBJ_VRAM0 + 32 * 35,
 };
 
 extern u8 gDisplayedStringBattle[];
@@ -434,7 +434,6 @@ extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
 extern const u8 gUnknown_08D1216C[][32];
-// extern const TileData4bpp gUnknown_08D1216C[]; // graphics
 
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
@@ -444,7 +443,6 @@ extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);
-// static const TileData4bpp *sub_8043CDC(u8);
 static void sub_8044210(u8, s16, u8);
 static void draw_status_ailment_maybe(u8);
 extern void sub_8045180(struct Sprite *);
@@ -843,8 +841,7 @@ u8 battle_make_oam_normal_battle(u8 a)
     SetSubspriteTables(sprite, &gSubspriteTables_820A684[GetBankSide(a)]);
     sprite->subspriteMode = 2;
     sprite->oam.priority = 1;
-    // CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
-    CpuCopy32(sub_8043CDC(1), &OBJ_VRAM0_TEMP[sprite->oam.tileNum], 64);
+    CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + sprite->oam.tileNum * 32, 64);
 
     gSprites[spriteId1].data[5] = spriteId3;
     gSprites[spriteId1].data[6] = a;
@@ -872,10 +869,8 @@ u8 battle_make_oam_safari_battle(void)
 }
 
 static const void *sub_8043CDC(u8 a)
-// static const TileData4bpp *sub_8043CDC(u8 a)
 {
     return gUnknown_08D1216C[a];
-    // return &gUnknown_08D1216C[a];
 }
 
 static void sub_8043CEC(struct Sprite *sprite)
@@ -1023,8 +1018,7 @@ void sub_8043F44(u8 a)
 static void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
-    // void *const *r7;
-    TileData4bpp *const *r7;
+    u8 *const *r7;
     u8 *ptr;
     s32 i;
     s32 two;
@@ -1074,7 +1068,7 @@ static void sub_8043FC0(u8 a, u8 b)
 
     two = 2;
     for (i = 0; i < two; i++)
-        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum, 32);
+        CpuCopy32((void *)(ewram0_9(1) + i * 64), r7[i] + gSprites[a].oam.tileNum * 32, 32);
 }
 
 #ifdef NONMATCHING
@@ -1083,7 +1077,7 @@ void sub_80440EC(u8 a, s16 b, u8 c)
     u8 str[0x14];
     u8 *ptr;
     s32 foo;
-    void *const *r4;
+    u8 *const *r4;
     s32 i;
 
     // TODO: make this a local variable
@@ -1279,8 +1273,7 @@ static void sub_8044210(u8 a, s16 b, u8 c)
 {
     u8 str[0x14];
     u8 *ptr;
-    // void *const *r7;
-    TileData4bpp *const *r7;
+    u8 *const *r7;
     int r10;
     int r4;
     int i;
@@ -1306,17 +1299,14 @@ static void sub_8044210(u8 a, s16 b, u8 c)
         sub_8003504(ptr, b, 0xF, 1);
         if (GetBankSide(r4) == 0)
         {
-            int r2 = 52;
-            // CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
-            CpuCopy32(sub_8043CDC(0x74), &OBJ_VRAM0_TEMP[gSprites[a].oam.tileNum + r2], 32);
+            CpuCopy32(sub_8043CDC(0x74), OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x34) * 32, 32);
         }
     }
     r4 = gSprites[a].data[5];
     sub_80034D4(ewram0_9(0), str);
     for (i = 0; i < r10; i++)
     {
-        // CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 32);
-        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum, 32);
+        CpuCopy32((void *)(ewram0_9(1) + i * 0x40), r7[i] + gSprites[r4].oam.tileNum * 32, 32);
     }
 }
 
@@ -1678,19 +1668,15 @@ void sub_804454C(void)
                 {
                     spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
-                    // CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                    CpuFill32(0, &OBJ_VRAM0_TEMP[gSprites[spriteId].oam.tileNum], 256);
+                    CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
                     sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), 0);
                     sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
                 }
                 else
                 {
-                    int temp;
                     draw_status_ailment_maybe(gHealthboxIDs[i]);
                     sub_8045A5C(gHealthboxIDs[i], &gPlayerParty[gBattlePartyID[i]], 5);
-                    temp = 52;
-                    // CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxIDs[i]].oam.tileNum * 32, 32);
-                    CpuCopy32(sub_8043CDC(0x75), &OBJ_VRAM0_TEMP[gSprites[gHealthboxIDs[i]].oam.tileNum + temp], 32);
+                    CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxIDs[i]].oam.tileNum * 32, 32);
                 }
             }
             else
@@ -1705,8 +1691,7 @@ void sub_804454C(void)
                     {
                         spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
-                        // CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                        CpuFill32(0, &OBJ_VRAM0_TEMP[gSprites[spriteId].oam.tileNum], 256);
+                        CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
                         sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), 0);
                         sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
                     }
@@ -2747,8 +2732,7 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
     u8 *ptr;
     s32 i;
     s32 _7;
-    TileData4bpp *const *r1;
-    TileData4bpp *tileDataSrc;
+    u8 *const *r1;
 
     StringCopy(gDisplayedStringBattle, gUnknown_0820A8B0);
     GetMonData(pkmn, MON_DATA_NICKNAME, nickname);
@@ -2823,44 +2807,42 @@ static void sub_80451A0(u8 a, struct Pokemon *pkmn)
         }
     }
 
-    tileDataSrc = (TileData4bpp *) ptr;
-
     for (; i < _7; i++)
-        CpuCopy32(sub_8043CDC(0x2B), tileDataSrc + 2 * i, 32);
+        CpuCopy32(sub_8043CDC(0x2B), ptr + 64 * i, 32);
 
     if (GetBankSide(gSprites[a].data[6]) == 0 && !IsDoubleBattle())
     {
-        r1 = gUnknown_0820A8B4;
+        r1 = (u8 *const *)gUnknown_0820A8B4;
         for (i = 0; i < _7; i++)
         {
-            TileData4bpp *tileDataDest = r1[i];
+            u8 *r4 = r1[i];
 
-            tileDataDest += gSprites[a].oam.tileNum;
-            CpuCopy32(tileDataSrc, tileDataDest, 32);
-            tileDataSrc++;
+            r4 += gSprites[a].oam.tileNum * 32;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
 
-            tileDataDest += 8;
-            CpuCopy32(tileDataSrc, tileDataDest, 32);
-            tileDataSrc++;
+            r4 += 0x100;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
         }
     }
     else
     {
         if (GetBankSide(gSprites[a].data[6]) == 0)
-            r1 = gUnknown_0820A904;
+            r1 = (u8 *const *)gUnknown_0820A904;
         else
-            r1 = gUnknown_0820A8DC;
+            r1 = (u8 *const *)gUnknown_0820A8DC;
         for (i = 0; i < _7; i++)
         {
-            TileData4bpp *tileDataDest = r1[i];
+            u8 *r4 = r1[i];
 
-            tileDataDest += gSprites[a].oam.tileNum;
-            CpuCopy32(tileDataSrc, tileDataDest, 32);
-            tileDataSrc++;
+            r4 += gSprites[a].oam.tileNum * 32;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
 
-            tileDataDest += 8;
-            CpuCopy32(tileDataSrc, tileDataDest, 32);
-            tileDataSrc++;
+            r4 += 0x100;
+            CpuCopy32(ptr, r4, 32);
+            ptr += 32;
         }
     }
 }
@@ -2880,14 +2862,11 @@ static void sub_8045458(u8 a, u8 b)
         u16 species = GetMonData(&gEnemyParty[gBattlePartyID[r4]], MON_DATA_SPECIES);
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
-            int temp = 8;
             r4 = gSprites[a].data[5];
             if (b != 0)
-                // CpuCopy32(sub_8043CDC(0x46), OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
-                CpuCopy32(sub_8043CDC(0x46), &OBJ_VRAM0_TEMP[gSprites[r4].oam.tileNum + temp], 32);
+                CpuCopy32(sub_8043CDC(0x46), OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
             else
-                // CpuFill32(0, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
-                CpuFill32(0, &OBJ_VRAM0_TEMP[gSprites[r4].oam.tileNum + temp], 32);
+                CpuFill32(0, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 8) * 32, 32);
         }
     }
 }
@@ -2948,12 +2927,10 @@ static void draw_status_ailment_maybe(u8 a)
         r6 = sub_8043CDC(0x27);
 
         for (i = 0; i < 3; i++)
-            // CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
-            CpuCopy32(r6, &OBJ_VRAM0_TEMP[gSprites[a].oam.tileNum + r8 + i], 32);
+            CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8 + i) * 32, 32);
 
         if (!ewram17800[r7].unk0_4)
-            // CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 64);
-            CpuCopy32(sub_8043CDC(1), &OBJ_VRAM0_TEMP[gSprites[r10].oam.tileNum], 64);
+            CpuCopy32(sub_8043CDC(1), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 64);
 
         sub_8045458(a, 1);
         return;
@@ -2964,17 +2941,13 @@ static void draw_status_ailment_maybe(u8 a)
     // I don't like writing the array index like this, but I can't get it to match otherwise.
     FillPalette(r0[gBattleInterfaceStatusIcons_DynPal], r4_2 + 0x100, 2);
     CpuCopy16(gPlttBufferUnfaded + 0x100 + r4_2, (void *)(OBJ_PLTT + r4_2 * 2), 2);
-    // CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32, 96);
-    CpuCopy32(r6, OBJ_VRAM0_TEMP[gSprites[a].oam.tileNum + r8], 96);
+    CpuCopy32(r6, OBJ_VRAM0 + (gSprites[a].oam.tileNum + r8) * 32, 96);
     if (IsDoubleBattle() == TRUE || GetBankSide(r7) == TRUE)
     {
         if (!ewram17800[r7].unk0_4)
         {
-            // CpuCopy32(sub_8043CDC(0), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 32);
-            // CpuCopy32(sub_8043CDC(0x41), OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
-            int temp = 1;
-            CpuCopy32(sub_8043CDC(0), OBJ_VRAM0_TEMP[gSprites[r10].oam.tileNum], 32);
-            CpuCopy32(sub_8043CDC(0x41), OBJ_VRAM0_TEMP[gSprites[r10].oam.tileNum + temp], 32);
+            CpuCopy32(sub_8043CDC(0), OBJ_VRAM0 + gSprites[r10].oam.tileNum * 32, 32);
+            CpuCopy32(sub_8043CDC(0x41), OBJ_VRAM0 + (gSprites[r10].oam.tileNum + 1) * 32, 32);
         }
     }
     sub_8045458(a, 0);
@@ -3055,13 +3028,11 @@ static void sub_80458B0(u8 a)
         CpuCopy32(sub_8043CDC(0x2B), r6 + i * 64, 32);
     for (r7 = 3; r7 < 3 + r8; r7++)
     {
-        // addr = OBJ_VRAM0 + (gSprites[a].oam.tileNum + MACRO1(r7)) * 32;
-        addr = OBJ_VRAM0_TEMP[gSprites[a].oam.tileNum + MACRO1(r7)];
+        addr = OBJ_VRAM0 + (gSprites[a].oam.tileNum + MACRO1(r7)) * 32;
         CpuCopy32(r6, addr, 32);
         r6 += 32;
 
-        // addr = OBJ_VRAM0 + (8 + gSprites[a].oam.tileNum + MACRO1(r7)) * 32;
-        addr = OBJ_VRAM0_TEMP[8 + gSprites[a].oam.tileNum + MACRO1(r7)];
+        addr = OBJ_VRAM0 + (8 + gSprites[a].oam.tileNum + MACRO1(r7)) * 32;
         CpuCopy32(r6, addr, 32);
         r6 += 32;
     }
@@ -3085,8 +3056,7 @@ static void sub_8045998(u8 a)
     r7 = ewram520_2 + status * 0x180 + 32;
     for (i = 6; i < 6 + r6; i++)
     {
-        // CpuCopy32(r7, OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x18 + MACRO1(i)) * 32, 32);
-        CpuCopy32(r7, OBJ_VRAM0_TEMP[gSprites[a].oam.tileNum + 24 + MACRO1(i)], 32);
+        CpuCopy32(r7, OBJ_VRAM0 + (gSprites[a].oam.tileNum + 0x18 + MACRO1(i)) * 32, 32);
         r7 += 64;
     }
 }
@@ -3210,11 +3180,9 @@ static void sub_8045D58(u8 a, u8 b)
         {
             u8 r4 = gSprites[ewram17850[a].unk0].data[5];
             if (i < 2)
-                // CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0_TEMP[gSprites[r4].oam.tileNum + 2 + i], 32);
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[r4].oam.tileNum + 2 + i) * 32, 32);
             else
-                // CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + 64 + (i + gSprites[r4].oam.tileNum) * 32, 32);
-                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0_TEMP[i + gSprites[r4].oam.tileNum + 2], 32);
+                CpuCopy32(sub_8043CDC(r8) + sp8[i] * 32, OBJ_VRAM0 + 64 + (i + gSprites[r4].oam.tileNum) * 32, 32);
         }
         break;
     case 1:
@@ -3228,11 +3196,9 @@ static void sub_8045D58(u8 a, u8 b)
         for (i = 0; i < 8; i++)
         {
             if (i < 4)
-                // CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32, 32);
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0_TEMP[gSprites[ewram17850[a].unk0].oam.tileNum + 36 + i], 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + (gSprites[ewram17850[a].unk0].oam.tileNum + 0x24 + i) * 32, 32);
             else
-                // CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32, 32);
-                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0_TEMP[i + gSprites[ewram17850[a].unk0].oam.tileNum + 92], 32);
+                CpuCopy32(sub_8043CDC(0xC) + sp8[i] * 32, OBJ_VRAM0 + 0xB80 + (i + gSprites[ewram17850[a].unk0].oam.tileNum) * 32, 32);
         }
         break;
     }

@@ -1219,8 +1219,7 @@ u8 UpdateMonIconFrame(struct Sprite *sprite)
                 // because sprite->images is a struct def, it has to be casted to (u8 *) before any
                 // arithmetic can be performed.
                 (u8 *)sprite->images + (sSpriteImageSizes[sprite->oam.shape][sprite->oam.size] * frame),
-                // OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
-                OBJ_VRAM0_TEMP[sprite->oam.tileNum],
+                OBJ_VRAM0 + sprite->oam.tileNum * TILE_SIZE_4BPP,
                 sSpriteImageSizes[sprite->oam.shape][sprite->oam.size]);
             {
                 register u8 duration asm("r0") = sprite->anims[sprite->animNum][sprite->animCmdIndex].frame.duration;

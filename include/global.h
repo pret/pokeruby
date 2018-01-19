@@ -845,7 +845,4 @@ extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
 extern u8 ewram[];
 
-// used for OBJ_VRAM0 pointers
-typedef u8 TileData4bpp[32];
-
 #endif // GUARD_GLOBAL_H
