@@ -1228,7 +1228,11 @@ gUnknown_08D17C3C:: @ 8D17C3C
 
 	.align 2
 gContestMiscGfx:: @ 8D17D6C
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xD17DDC, 0xD188DC-0xD17DDC
+.else
 	.incbin "graphics/contest/misc.4bpp.lz"
+.endif
 
 	.align 2
 gContestAudienceGfx:: @ 8D18818
@@ -1251,7 +1255,11 @@ gTiles_8D1975C:: @ 8D1975C
 
 	.align 2
 gUnknown_08D1977C:: @ 8D1977C
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xD19840, 0xD1A2E8-0xD19840
+.else
 	.incbin "graphics/contest/misc_2.4bpp.lz"
+.endif
 
 	.align 2
 gUnknown_08D1A250:: @ 8D1A250
@@ -2863,7 +2871,11 @@ gBattleAnimSpritePalette_068:: @ 8E69628
 
 	.align 2
 gContestApplauseGfx::
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xE696E0, 0xE69818-0xE696E0
+.else
 	.incbin "graphics/contest/applause.4bpp.lz"
+.endif
 
 	.align 2
 gContestApplauseMeterGfx:: @ 8E6978C
@@ -2974,7 +2986,11 @@ gUnknown_08E6C100:: @ 8E6C100
 
 	.align 2
 gUnknown_08E6C920:: @ 8E6C920
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xE6C9AC, 0xE6D3E0-0xE6C9AC
+.else
 	.incbin "graphics/berry_blender/outer.4bpp.lz"
+.endif
 
 	.align 2
 gUnknown_08E6D354:: @ 8E6D354
@@ -3134,7 +3150,11 @@ gBattleAnimSpritePalette_188:: @ 8E7133C
 
 	.align 2
 gPartyMenuMisc_Gfx:: @ 8E71354
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xE713E0, 0xE71730-0xE713E0
+.else
 	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
+.endif
 
 	.align 2
 gPartyMenuMisc_Pal:: @ 8E716A0
