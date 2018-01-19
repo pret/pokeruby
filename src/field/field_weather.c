@@ -13,7 +13,7 @@
 #include "trig.h"
 #include "ewram.h"
 
-#define MACRO1(a) ((((a) >> 1) & 0xF) | (((a) >> 2) & 0xF0) | (((a) >> 3) & 0xF00))
+#define MACRO1(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
 struct RGBColor
 {
@@ -108,10 +108,10 @@ void Fog1_InitVars(void);
 void Fog1_Main(void);
 void Fog1_InitAll(void);
 bool8 Fog1_Finish(void);
-void Weather11_InitVars(void);
-void Weather11_Main(void);
-void Weather11_InitAll(void);
-bool8 Weather11_Finish(void);
+void Shade_InitVars(void);
+void Shade_Main(void);
+void Shade_InitAll(void);
+bool8 Shade_Finish(void);
 void Drought_InitVars(void);
 void Drought_Main(void);
 void Drought_InitAll(void);
@@ -138,7 +138,7 @@ static const struct WeatherCallbacks sWeatherFuncs[] =
     {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
     {Fog2_InitVars,      Fog2_Main,      Fog2_InitAll,      Fog2_Finish},
     {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
-    {Weather11_InitVars, Weather11_Main, Weather11_InitAll, Weather11_Finish},
+    {Shade_InitVars,     Shade_Main,     Shade_InitAll,     Shade_Finish},
     {Drought_InitVars,   Drought_Main,   Drought_InitAll,   Drought_Finish},
     {HeavyRain_InitVars, Rain_Main,      HeavyRain_InitAll, Rain_Finish},
     {Bubbles_InitVars,   Bubbles_Main,   Bubbles_InitAll,   Bubbles_Finish},
@@ -152,7 +152,7 @@ void (*const gUnknown_083970B8[])(void) =
     nullsub_39,
 };
 
-const u8 gUnknown_083970C8[] =
+const u8 gUnknown_083970C8[32] =
 {
     1,
     1,
@@ -193,6 +193,7 @@ const u16 gUnknown_083970E8[] = INCBIN_U16("graphics/weather/0.gbapal");
 void StartWeather(void)
 {
     u8 index;
+
     if (!FuncIsActiveTask(Task_WeatherMain))
     {
         index = AllocSpritePalette(0x1200);
@@ -266,7 +267,7 @@ void Task_WeatherMain(u8 taskId)
         if (!sWeatherFuncs[gWeatherPtr->currWeather].finish())
         {
             sWeatherFuncs[gWeatherPtr->nextWeather].initVars();
-            gWeatherPtr->unknown_6C3 = 0;
+            gWeatherPtr->gammaStepFrameCounter = 0;
             gWeatherPtr->unknown_6C6 = 0;
             gWeatherPtr->currWeather = gWeatherPtr->nextWeather;
             gWeatherPtr->unknown_6D3 = 1;
@@ -281,8 +282,8 @@ void Task_WeatherMain(u8 taskId)
 
 void None_Init(void)
 {
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 0;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 0;
 }
 
 void None_Main(void)
@@ -315,7 +316,7 @@ void sub_807CB10(void)
         else
             v1 = gWeatherPtr->unk460;
 
-        for (v2 = 0; (u16)v2 <= 0x1f; v2++)
+        for (v2 = 0; v2 < 32; v2++)
         {
             v4 = v2 << 8;
             if (v0 == 0)
@@ -334,33 +335,27 @@ void sub_807CB10(void)
                 v10 += 0xf;
             }
             v11 = v10 >> 4;
-            if (v2 <= 0xb)
+            if (v2 < 12)
             {
-                for (; v6 <= 0x12; v6++)
+                for (; v6 < 19; v6++)
                 {
                     v4 += v11;
                     dunno = v4 - v9;
                     if (dunno > 0)
-                    {
                         v4 -= (dunno + ((u16)dunno >> 15)) >> 1;
-                    }
                     v1[v6][v2] = v4 >> 8;
                     if (v1[v6][v2] > 0x1f)
-                    {
                         v1[v6][v2] = 0x1f;
-                    }
                 }
             }
             else
             {
-                for (; v6 <= 0x12; v6++)
+                for (; v6 < 19; v6++)
                 {
                     v4 += v11;
                     v1[v6][v2] = v4 >> 8;
                     if (v1[v6][v2] > 0x1f)
-                    {
                         v1[v6][v2] = 0x1f;
-                    }
                 }
             }
         }
@@ -369,20 +364,20 @@ void sub_807CB10(void)
 
 void sub_807CC24(void)
 {
-    if (gWeatherPtr->unknown_6C0 == gWeatherPtr->unknown_6C1)
+    if (gWeatherPtr->gammaIndex == gWeatherPtr->gammaTargetIndex)
     {
         gWeatherPtr->unknown_6C6 = 3;
     }
     else
     {
-        if (++gWeatherPtr->unknown_6C3 >= gWeatherPtr->unknown_6C2)
+        if (++gWeatherPtr->gammaStepFrameCounter >= gWeatherPtr->gammaStepDelay)
         {
-            gWeatherPtr->unknown_6C3 = 0;
-            if (gWeatherPtr->unknown_6C0 < gWeatherPtr->unknown_6C1)
-                gWeatherPtr->unknown_6C0++;
+            gWeatherPtr->gammaStepFrameCounter = 0;
+            if (gWeatherPtr->gammaIndex < gWeatherPtr->gammaTargetIndex)
+                gWeatherPtr->gammaIndex++;
             else
-                gWeatherPtr->unknown_6C0--;
-            sub_807CEBC(0, 0x20, gWeatherPtr->unknown_6C0);
+                gWeatherPtr->gammaIndex--;
+            BlendSomething_807CEBC(0, 0x20, gWeatherPtr->gammaIndex);
         }
     }
 }
@@ -397,24 +392,24 @@ void sub_807CCAC(void)
     case WEATHER_RAIN_MED:
     case WEATHER_RAIN_HEAVY:
     case WEATHER_SNOW:
-    case WEATHER_DARK:
-        if (sub_807CDC4() == 0)
+    case WEATHER_SHADE:
+        if (RainSnowShadeBlend_807CDC4() == 0)
         {
-            gWeatherPtr->unknown_6C0 = 3;
+            gWeatherPtr->gammaIndex = 3;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
     case WEATHER_DROUGHT:
-        if (sub_807CE24() == 0)
+        if (DroughtBlend_807CE24() == 0)
         {
-            gWeatherPtr->unknown_6C0 = -6;
+            gWeatherPtr->gammaIndex = -6;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
     case WEATHER_FOG_1:
-        if (sub_807CE7C() == 0)
+        if (Fog1Blend_807CE7C() == 0)
         {
-            gWeatherPtr->unknown_6C0 = 0;
+            gWeatherPtr->gammaIndex = 0;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
@@ -425,47 +420,47 @@ void sub_807CCAC(void)
     default:
         if (!gPaletteFade.active)
         {
-            gWeatherPtr->unknown_6C0 = gWeatherPtr->unknown_6C1;
+            gWeatherPtr->gammaIndex = gWeatherPtr->gammaTargetIndex;
             gWeatherPtr->unknown_6C6 = 3;
         }
         break;
     }
 }
 
-u8 sub_807CDC4(void)
+u8 RainSnowShadeBlend_807CDC4(void)
 {
     if (gWeatherPtr->unknown_6C7 == 0x10)
         return 0;
     if (++gWeatherPtr->unknown_6C7 >= 0x10)
     {
-        sub_807CEBC(0, 0x20, 3);
+        BlendSomething_807CEBC(0, 0x20, 3);
         gWeatherPtr->unknown_6C7 = 0x10;
         return 0;
     }
-    sub_807D1BC(0, 0x20, 3, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->unknown_6C4);
+    BlendSomething_807D1BC(0, 0x20, 3, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
     return 1;
 }
 
-u8 sub_807CE24(void)
+u8 DroughtBlend_807CE24(void)
 {
     if (gWeatherPtr->unknown_6C7 == 0x10)
         return 0;
     if (++gWeatherPtr->unknown_6C7 >= 0x10)
     {
-        sub_807CEBC(0, 0x20, -6);
+        BlendSomething_807CEBC(0, 0x20, -6);
         gWeatherPtr->unknown_6C7 = 0x10;
         return 0;
     }
-    sub_807D304(-6, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->unknown_6C4);
+    BlendSomething_807D304(-6, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
     return 1;
 }
 
-u8 sub_807CE7C(void)
+u8 Fog1Blend_807CE7C(void)
 {
     if (gWeatherPtr->unknown_6C7 == 0x10)
         return 0;
     ++gWeatherPtr->unknown_6C7;
-    sub_807D424(0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->unknown_6C4);
+    BlendSomething_807D424(0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
     return 1;
 }
 
@@ -473,7 +468,7 @@ void nullsub_39(void)
 {
 }
 
-void sub_807CEBC(u8 a, u8 b, s8 c)
+void BlendSomething_807CEBC(u8 a, u8 b, s8 c)
 {
     u16 r4;
     u16 palOffset;
@@ -578,7 +573,7 @@ void sub_807CEBC(u8 a, u8 b, s8 c)
     }
 }
 
-void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
+void BlendSomething_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
 {
     u16 palOffset;
     u16 r4;
@@ -625,7 +620,7 @@ void sub_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
     }
 }
 
-void sub_807D304(s8 a, u8 coeff, u16 c)
+void BlendSomething_807D304(s8 a, u8 coeff, u16 c)
 {
     struct RGBColor color;
     u8 r_;
@@ -681,31 +676,30 @@ void sub_807D304(s8 a, u8 coeff, u16 c)
 
 bool8 sub_807D574(u8);
 
-void sub_807D424(u8 a, u16 b)
+void BlendSomething_807D424(u8 coeff, u16 blendColor)
 {
     struct RGBColor color;
-    u8 r_;
-    u8 g_;
-    u8 b_;
-    u16 r4;
+    u8 blendR;
+    u8 blendG;
+    u8 blendB;
+    u16 palNum;
 
-    BlendPalette(0, 0x100, a, b);
-    color = *(struct RGBColor *)&b;
-    r_ = color.r;
-    g_ = color.g;
-    b_ = color.b;
+    BlendPalette(0, 0x100, coeff, blendColor);
+    color = *(struct RGBColor *)&blendColor;
+    blendR = color.r;
+    blendG = color.g;
+    blendB = color.b;
 
-    r4 = 16;
-    while (r4 < 32)
+    for (palNum = 16; palNum < 32; palNum++)
     {
-        if (sub_807D574(r4))
+        if (sub_807D574(palNum))
         {
-            u16 r12 = (r4 + 1) * 16;
-            u16 r6 = r4 * 16;
+            u16 palEnd = (palNum + 1) * 16;
+            u16 palOffset = palNum * 16;
 
-            while (r6 < r12)
+            while (palOffset < palEnd)
             {
-                struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[r6];
+                struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
                 u8 r = color.r;
                 u8 g = color.g;
                 u8 b = color.b;
@@ -714,19 +708,18 @@ void sub_807D424(u8 a, u16 b)
                 g += ((31 - g) * 3) >> 2;
                 b += ((28 - b) * 3) >> 2;
 
-                r += ((r_ - r) * a) >> 4;
-                g += ((g_ - g) * a) >> 4;
-                b += ((b_ - b) * a) >> 4;
+                r += ((blendR - r) * coeff) >> 4;
+                g += ((blendG - g) * coeff) >> 4;
+                b += ((blendB - b) * coeff) >> 4;
 
-                gPlttBufferFaded[r6] = (b << 10) | (g << 5) | r;
-                r6++;
+                gPlttBufferFaded[palOffset] = (b << 10) | (g << 5) | r;
+                palOffset++;
             }
         }
         else
         {
-            BlendPalette(r4 * 16, 16, a, b);
+            BlendPalette(palNum * 16, 16, coeff, blendColor);
         }
-        r4++;
     }
 }
 
@@ -755,8 +748,8 @@ void sub_807D5BC(s8 a)
 {
     if (gWeatherPtr->unknown_6C6 == 3)
     {
-        sub_807CEBC(0, 32, a);
-        gWeatherPtr->unknown_6C0 = a;
+        BlendSomething_807CEBC(0, 32, a);
+        gWeatherPtr->gammaIndex = a;
     }
 }
 
@@ -765,37 +758,37 @@ void sub_807D5F0(u8 a, u8 b, u8 c)
     if (gWeatherPtr->unknown_6C6 == 3)
     {
         gWeatherPtr->unknown_6C6 = 0;
-        gWeatherPtr->unknown_6C0 = a;
-        gWeatherPtr->unknown_6C1 = b;
-        gWeatherPtr->unknown_6C3 = 0;
-        gWeatherPtr->unknown_6C2 = c;
+        gWeatherPtr->gammaIndex = a;
+        gWeatherPtr->gammaTargetIndex = b;
+        gWeatherPtr->gammaStepFrameCounter = 0;
+        gWeatherPtr->gammaStepDelay = c;
         sub_807D5BC(a);
     }
 }
 
-void fade_screen(u8 a, u8 delay)
+void fade_screen(u8 mode, u8 delay)
 {
     u32 fadeColor;
-    u32 r1;
-    u32 r2;
+    bool8 fadeTo;
+    bool8 useWeatherPal;
 
-    switch (a)
+    switch (mode)
     {
-    case 0:
+    case FADE_FROM_BLACK:
         fadeColor = 0;
-        r1 = 0;
+        fadeTo = FALSE;
         break;
-    case 2:
+    case FADE_FROM_WHITE:
         fadeColor = 0xFFFF;
-        r1 = 0;
+        fadeTo = FALSE;
         break;
-    case 1:
+    case FADE_TO_BLACK:
         fadeColor = 0;
-        r1 = 1;
+        fadeTo = TRUE;
         break;
-    case 3:
+    case FADE_TO_WHITE:
         fadeColor = 0xFFFF;
-        r1 = 1;
+        fadeTo = TRUE;
         break;
     default:
         return;
@@ -808,26 +801,26 @@ void fade_screen(u8 a, u8 delay)
     case WEATHER_RAIN_HEAVY:
     case WEATHER_SNOW:
     case WEATHER_FOG_1:
-    case WEATHER_DARK:
+    case WEATHER_SHADE:
     case WEATHER_DROUGHT:
-        r2 = 1;
+        useWeatherPal = TRUE;
         break;
     default:
-        r2 = 0;
+        useWeatherPal = FALSE;
         break;
     }
 
-    if (r1 != 0)
+    if (fadeTo)
     {
-        if (r2 != 0)
+        if (useWeatherPal)
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
         BeginNormalPaletteFade(0xFFFFFFFF, delay, 0, 16, fadeColor);
         gWeatherPtr->unknown_6C6 = 2;
     }
     else
     {
-        gWeatherPtr->unknown_6C4 = fadeColor;
-        if (r2 != 0)
+        gWeatherPtr->fadeDestColor = fadeColor;
+        if (useWeatherPal)
             gWeatherPtr->unknown_6C7 = 0;
         else
             BeginNormalPaletteFade(0xFFFFFFFF, delay, 16, 0, fadeColor);
@@ -858,7 +851,7 @@ void sub_807D78C(u8 a)
                 sub_807D540(r4);
             r4 *= 16;
             for (i = 0; i < 16; i++)
-                gPlttBufferFaded[r4 + i] = gWeatherPtr->unknown_6C4;
+                gPlttBufferFaded[r4 + i] = gWeatherPtr->fadeDestColor;
         }
         break;
     case 2:
@@ -869,7 +862,7 @@ void sub_807D78C(u8 a)
     default:
         if (gWeatherPtr->currWeather != WEATHER_FOG_1)
         {
-            sub_807CEBC(r4, 1, gWeatherPtr->unknown_6C0);
+            BlendSomething_807CEBC(r4, 1, gWeatherPtr->gammaIndex);
         }
         else
         {
@@ -882,7 +875,7 @@ void sub_807D78C(u8 a)
 
 void sub_807D874(u8 a)
 {
-    sub_807CEBC(a, 1, gWeatherPtr->unknown_6C0);
+    BlendSomething_807CEBC(a, 1, gWeatherPtr->gammaIndex);
 }
 
 u8 unref_sub_807D894(void)
