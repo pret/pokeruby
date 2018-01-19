@@ -15,13 +15,15 @@ gUnknown_08D00524:: @ 8D00524
 	.incbin "graphics/interface/menu_map.bin"
 
 @ 8D01524
-test_8D01524::
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
-test_8D019E4::
+.if DEBUG
+	.incbin "baserom_de_debug.gba", 0xD019E4, 0xD245E8-0xD019E4
+.else
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
 	.incbin "graphics/unused/old_charmap.bin.lz"
+.endif
 	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2
