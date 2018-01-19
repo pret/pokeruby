@@ -19,6 +19,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "shop.h"
 #include "ewram.h"
 
 EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
@@ -1614,7 +1615,7 @@ void sub_80FE604(u8 taskId)
                     sub_8134104(gUnknown_020388F6);
                     gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
-                    sub_80F944C();
+                    ClearVerticalScrollIndicatorPalettes();
                     sub_80F9480(gUnknown_020388F7, 8);
                     LoadScrollIndicatorPalette();
                     gTasks[taskId].func = sub_80FE868;
@@ -1659,7 +1660,7 @@ void sub_80FE758(u8 taskId)
         gTasks[taskId].func = Task_DecorationPCProcessMenuInput;
     } else
     {
-        sub_80B3068(taskId);
+        Shop_RunExitSellMenuTask(taskId);
     }
 }
 
@@ -1783,17 +1784,17 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
     u16 i;
     u16 j;
     u8 ni;
-    if (gUnknown_020388F4 != 0 || (DestroyVerticalScrollIndicator(0), gUnknown_020388F4 != 0))
+    if (gUnknown_020388F4 != 0 || (DestroyVerticalScrollIndicator(TOP_ARROW), gUnknown_020388F4 != 0))
     {
-        CreateVerticalScrollIndicators(0, 0x3c, 0x08);
+        CreateVerticalScrollIndicators(TOP_ARROW, 0x3c, 0x08);
     }
     if (gUnknown_020388F4 + 7 == gUnknown_020388D5)
     {
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     }
     if (gUnknown_020388F4 + 7 < gUnknown_020388D5)
     {
-        CreateVerticalScrollIndicators(1, 0x3c, 0x98);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 0x3c, 0x98);
     }
     for (i=gUnknown_020388F4; i<gUnknown_020388F4+8; i++)
     {
@@ -2003,8 +2004,8 @@ void sub_80FEF50(u8 taskId)
 void sub_80FEF74(void)
 {
     sub_80F9520(gUnknown_020388F7, 8);
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 14, 19);
 }
@@ -2043,8 +2044,8 @@ void sub_80FF034(u8 taskId)
 void sub_80FF058(u8 taskId)
 {
     sub_80F9520(gUnknown_020388F7, 8);
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     BuyMenuFreeMemory();
     gTasks[taskId].func = sub_80FF034;
 }
@@ -2271,8 +2272,8 @@ void sub_80FF6AC(u8 taskId)
             if (!gPaletteFade.active)
             {
                 sub_80FF0E0(taskId);
-                DestroyVerticalScrollIndicator(0);
-                DestroyVerticalScrollIndicator(1);
+                DestroyVerticalScrollIndicator(TOP_ARROW);
+                DestroyVerticalScrollIndicator(BOTTOM_ARROW);
                 sub_80F9520(gUnknown_020388F7, 8);
                 BuyMenuFreeMemory();
                 gTasks[taskId].data[2] = 1;

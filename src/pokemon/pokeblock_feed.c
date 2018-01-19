@@ -511,7 +511,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80F9368();
         sub_8147B04();
         gMain.state++;

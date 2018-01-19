@@ -121,7 +121,6 @@ extern u8 ball_number_to_ball_processing_index(u16);
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 gUnknown_020384F0;
 extern u8 gUnknown_08208238[];
 extern u16 gBattle_BG3_Y;
 extern u16 gBattle_BG2_Y;
@@ -130,7 +129,6 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG3_X;
 extern TaskFunc gUnknown_03005CF0;
-extern struct Sprite *gUnknown_020384F4;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern const u8 gStatusPal_Icons[];
@@ -156,6 +154,9 @@ extern const u16 gUnknown_08E94510[];
 extern const u16 gUnknown_08E94550[];
 extern const u16 gUnknown_08E94590[];
 extern const u8 gUnknown_08E73E88[];
+
+EWRAM_DATA u8 gUnknown_020384F0 = 0;
+EWRAM_DATA struct Sprite *gUnknown_020384F4 = NULL;
 
 #if ENGLISH
 #include "../data/text/move_descriptions_en.h"
@@ -690,9 +691,6 @@ void sub_809DA1C(void)
 
 bool8 sub_809DA84(void)
 {
-    const u16 *src;
-    void *dest;
-
     switch (gMain.state)
     {
     case 0:
@@ -709,8 +707,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 3:
-        dest = (void *)VRAM;
-        DmaClearLarge(3, dest, 0x10000, 0x1000, 32);
+        DmaClearLarge(3, (void *)(VRAM + 0x0), 0x10000, 0x1000, 32);
         gMain.state++;
         break;
     case 4:
@@ -736,14 +733,8 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 9:
-        src = gSummaryScreenTextTiles;
-        dest = (void *)VRAM + 0xD000;
-        DmaCopy16(3, src, dest, 320);
-
-        src = sSummaryScreenButtonTiles;
-        dest = (void *)VRAM + 0xD140;
-        DmaCopy16(3, src, dest, 256);
-
+        DmaCopy16Defvars(3, gSummaryScreenTextTiles, (void *)(VRAM + 0xD000), 320);
+        DmaCopy16Defvars(3, sSummaryScreenButtonTiles, (void *)(VRAM + 0xD140), 256);
         pssData.loadGfxState = 0;
         gMain.state++;
         break;
@@ -3622,16 +3613,14 @@ static void DrawSummaryScreenNavigationDots(void)
         }
     }
 
-    dest = (void *)(VRAM + 0xE016);
-    DmaCopy16(3, arr, dest, 16);
+    DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE016), 16);
 
     for (i = 0; i < 8; i++)
     {
         arr[i] += 0x10;
     }
 
-    dest = (void *)(VRAM + 0xE056);
-    DmaCopy16(3, arr, dest, 16);
+    DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 #else
 __attribute__((naked))

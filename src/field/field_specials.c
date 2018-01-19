@@ -1061,7 +1061,7 @@ static void sub_810E874(void)
         Menu_DrawStdWindowFrame(0, 0, 8, 11);
         InitMenu(0, 1, 1, 5, 0, 7);
         gUnknown_0203925C = 0;
-        sub_80F944C();
+        ClearVerticalScrollIndicatorPalettes();
         LoadScrollIndicatorPalette();
         sub_810ECD4();
     }
@@ -1283,7 +1283,7 @@ void sub_810EB90(u8 newPos, u8 maxItems)
     if (newPos == 0)
     {
         gUnknown_0203925C ^= 0x02;
-        DestroyVerticalScrollIndicator(0);
+        DestroyVerticalScrollIndicator(TOP_ARROW);
     }
     else
     {
@@ -1296,7 +1296,7 @@ void sub_810EB90(u8 newPos, u8 maxItems)
     else if (newPos + maxItems == gUnknown_0203925A)
     {
         gUnknown_0203925C ^= 0x01;
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     }
 }
 
@@ -1347,7 +1347,7 @@ void sub_810ECB0(void)
     if (gUnknown_0203925C >> 1 != 1)
     {
         gUnknown_0203925C |= 0x2;
-        CreateVerticalScrollIndicators(0, 0x24, 0x08);
+        CreateVerticalScrollIndicators(TOP_ARROW, 0x24, 0x08);
     }
 }
 
@@ -1356,7 +1356,7 @@ void sub_810ECD4(void)
     if ((gUnknown_0203925C & 1) == 0)
     {
         gUnknown_0203925C |= 0x1;
-        CreateVerticalScrollIndicators(1, 0x24, 0x48);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 0x24, 0x48);
     }
 }
 
@@ -1428,11 +1428,11 @@ void sub_810EEDC(void)
 {
     if ((gUnknown_0203925C & 1) != 0)
     {
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     }
     if ((gUnknown_0203925C >> 1) == 1)
     {
-        DestroyVerticalScrollIndicator(0);
+        DestroyVerticalScrollIndicator(TOP_ARROW);
     }
     BuyMenuFreeMemory();
 }
@@ -1542,7 +1542,7 @@ void ShowGlassWorkshopMenu(void)
     Menu_DrawStdWindowFrame(0, 0, 10, 11);
     InitMenu(0, 1, 1, 5, 0, 9);
     gUnknown_0203925C = 0;
-    sub_80F944C();
+    ClearVerticalScrollIndicatorPalettes();
     LoadScrollIndicatorPalette();
     sub_810F2B4();
     for (i=0; i<5; i++)
@@ -1721,7 +1721,7 @@ void sub_810F290(void)
     if (gUnknown_0203925C >> 1 != 1)
     {
         gUnknown_0203925C |= 0x02;
-        CreateVerticalScrollIndicators(0, 0x2c, 0x08);
+        CreateVerticalScrollIndicators(TOP_ARROW, 0x2c, 0x08);
     }
 }
 
@@ -1730,7 +1730,7 @@ void sub_810F2B4(void)
     if (!(gUnknown_0203925C & 0x01))
     {
         gUnknown_0203925C |= 0x01;
-        CreateVerticalScrollIndicators(1, 0x2c, 0x58);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 0x2c, 0x58);
     }
 }
 
@@ -1739,7 +1739,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
     if (newPos == 0)
     {
         gUnknown_0203925C ^= 0x02;
-        DestroyVerticalScrollIndicator(0);
+        DestroyVerticalScrollIndicator(TOP_ARROW);
     }
     else
     {
@@ -1752,7 +1752,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
     else if (newPos + maxItems == gUnknown_0203925A)
     {
         gUnknown_0203925C ^= 0x01;
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     }
 }
 

@@ -35,10 +35,11 @@ struct WeatherCallbacks
     bool8 (*finish)(void);
 };
 
-extern struct Weather gWeather;
-extern u8 gUnknown_0202FF38[];
-extern u16 gUnknown_0202FF58;
-IWRAM_DATA const u8 *gUnknown_030006DC;
+EWRAM_DATA struct Weather gWeather = {0};
+EWRAM_DATA u8 gUnknown_0202FF38[32] = {0};
+EWRAM_DATA u16 gUnknown_0202FF58 = {0};
+
+static const u8 *gUnknown_030006DC;
 
 const u8 DroughtPaletteData_0[] = INCBIN_U8("graphics/weather/drought0.bin.lz");
 const u8 DroughtPaletteData_1[] = INCBIN_U8("graphics/weather/drought1.bin.lz");
@@ -46,9 +47,6 @@ const u8 DroughtPaletteData_2[] = INCBIN_U8("graphics/weather/drought2.bin.lz");
 const u8 DroughtPaletteData_3[] = INCBIN_U8("graphics/weather/drought3.bin.lz");
 const u8 DroughtPaletteData_4[] = INCBIN_U8("graphics/weather/drought4.bin.lz");
 const u8 DroughtPaletteData_5[] = INCBIN_U8("graphics/weather/drought5.bin.lz");
-
-extern u8 (*gUnknown_0202FC48)[32];
-extern u8 gUnknown_0202F9E8[32];
 
 static const u8 *const sCompressedDroughtPalettes[] =
 {

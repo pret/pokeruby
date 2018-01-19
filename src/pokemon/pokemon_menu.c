@@ -51,7 +51,7 @@ extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038561;
 extern u16 gUnknown_0202E8F8;
-extern void (*gUnknown_03004AE4)(u8 taskID, u16 itemID, TaskFunc func);
+extern void (*gPokemonItemUseCallback)(u8 taskID, u16 itemID, TaskFunc func);
 extern TaskFunc gUnknown_03005CF0;
 
 void sub_808A520(void);
@@ -1013,7 +1013,7 @@ void sub_808B0C0(u8 taskID)
             {
                 sub_806D5A4();
                 if (gUnknown_02038561 == 0)
-                    gUnknown_03004AE4(taskID, gSpecialVar_ItemId, sub_808B224);
+                    gPokemonItemUseCallback(taskID, gSpecialVar_ItemId, sub_808B224);
                 if (gUnknown_02038561 == 1)
                 {
                     PlaySE(SE_SELECT);
@@ -1042,7 +1042,7 @@ void sub_808B0C0(u8 taskID)
 static void sub_808B1EC(u8 taskID)
 {
     if (!gPaletteFade.active)
-        gUnknown_03004AE4(taskID, gSpecialVar_ItemId, sub_808B224);
+        gPokemonItemUseCallback(taskID, gSpecialVar_ItemId, sub_808B224);
 }
 
 static void sub_808B224(u8 taskID)

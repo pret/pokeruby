@@ -1755,7 +1755,7 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreatePokemartMenu(ptr);
+    Shop_CreatePokemartMenu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1764,7 +1764,7 @@ bool8 ScrCmd_pokemartdecoration(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop1Menu(ptr);
+    Shop_CreateDecorationShop1Menu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1773,7 +1773,7 @@ bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop2Menu(ptr);
+    Shop_CreateDecorationShop2Menu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }

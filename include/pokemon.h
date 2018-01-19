@@ -258,7 +258,6 @@ struct BoxPokemon
     /*0x13*/ u8 isBadEgg:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 unused:5;
     /*0x14*/ u8 otName[OT_NAME_LENGTH];
     /*0x1B*/ u8 markings;
     /*0x1C*/ u16 checksum;
@@ -419,7 +418,6 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
-    u8 pad[3];
 };
 
 #define FLAG_MAKES_CONTACT       0x1

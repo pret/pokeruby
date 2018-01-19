@@ -151,6 +151,7 @@ const struct SpriteSheet gUnknown_0837F5E0[] =
     { gMiscBlank_Gfx, 0x800, 55126, },
 };
 
+// pkmn_form.c
 
 u8 GetBankPosition(u8 slot, u8 a2)
 {
@@ -2150,6 +2151,8 @@ u8 sub_807A4A0(int a1, u8 sprite, int a3)
     return new_sprite;
 }
 
+// unused_orb
+
 void sub_807A544(struct Sprite *sprite)
 {
     sub_8078650(sprite);
@@ -2193,6 +2196,8 @@ void sub_807A5C4(struct Sprite *sprite)
     sprite->callback = sub_8078504;
 }
 
+// file_2
+
 void sub_807A63C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
@@ -2204,6 +2209,8 @@ void sub_807A63C(struct Sprite *sprite)
     sprite->callback = sub_8078600;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
+
+// file_3 (punch effect?)
 
 void sub_807A69C(u8 taskId)
 {
@@ -2287,6 +2294,8 @@ void sub_807A8D4(struct Sprite *sprite)
         obj_delete_but_dont_free_vram(sprite);
     }
 }
+
+// file_4
 
 void sub_807A908(struct Sprite *sprite) {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);

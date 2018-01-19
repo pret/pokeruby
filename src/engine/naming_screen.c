@@ -258,20 +258,7 @@ static void NamingScreen_InitDisplayMode(void)
 
 static void NamingScreen_ClearVram(void)
 {
-    u8 *addr = (void *)VRAM;
-    u32 size = 0x10000;
-
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
+    DmaFill16Large(3, 0, (void *)VRAM, 0x10000, 0x1000);
 }
 
 static void NamingScreen_ClearOam(void)
@@ -1629,16 +1616,8 @@ static void sub_80B7558(void)
 
 static void sub_80B7568(void)
 {
-    const void *src;
-    void *dst;
-
-    src = gNamingScreenMenu_Gfx;
-    dst = (void *)(VRAM + gMenuMessageBoxContentTileOffset * 32);
-    DmaCopy16(3, src, dst, 0x800);
-
-    src = gNamingScreenMenu_Gfx;
-    dst = (void *)(VRAM + 0x8000 + gMenuMessageBoxContentTileOffset * 32);
-    DmaCopy16(3, src, dst, 0x800);
+    DmaCopy16Defvars(3, gNamingScreenMenu_Gfx, (void *)(VRAM + gMenuMessageBoxContentTileOffset * 32), 0x800);
+    DmaCopy16Defvars(3, gNamingScreenMenu_Gfx, (void *)(VRAM + 0x8000 + gMenuMessageBoxContentTileOffset * 32), 0x800);
 }
 
 static void sub_80B75B0(void)

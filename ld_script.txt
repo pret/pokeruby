@@ -141,8 +141,10 @@ SECTIONS {
         src/battle/battle_anim_80A7E7C.o(.text);
         src/field/item.o(.text);
         src/debug/matsuda_debug_menu.o(.text);
+        src/debug/crash.o(.text);
         src/contest.o(.text);
         src/field/shop.o(.text);
+        src/field/fldeff_escalator.o(.text);
         src/field/berry.o(.text);
         src/field/script_menu.o(.text);
         src/engine/naming_screen.o(.text);
@@ -480,10 +482,12 @@ SECTIONS {
         src/engine/link.o(.rodata);
         src/engine/rtc.o(.rodata);
         src/engine/main_menu.o(.rodata);
-        data/data2a.o(.rodata);
+        data/mon_attrs.o(.rodata);
+        data/btl_attrs.o(.rodata);
         src/battle/battle_4.o(.rodata);
         src/battle/battle_controller_player.o(.rodata);
-        data/data2b.o(.rodata);
+        data/smokescreen.o(.rodata); /* why is smokescreen rodata way up here and not in the correct location? */
+        data/battle_7.o(.rodata);
         src/battle/battle_controller_opponent.o(.rodata);
         src/battle/battle_controller_linkopponent.o(.rodata);
         data/battle_moves.o(.rodata);
@@ -530,7 +534,12 @@ SECTIONS {
         src/battle/battle_anim.o(.rodata);
         src/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
-        data/data_8393054.o(.rodata);
+        data/unused_orb.o(.rodata); /* these files are clearly the rodata for latter part of rom_8077ABC, but the linker linked map_events before these objects for some reason. perhaps it was compiling and linking 2 folders at the same time? */
+        data/gray_sun.o(.rodata);
+        data/sparkle.o(.rodata);
+        data/unused_paw.o(.rodata);
+        data/unused_hit.o(.rodata);
+        data/unused_orb2.o(.rodata);
         src/engine/task.o(.rodata);
         src/battle/battle_anim_807B69C.o(.rodata);
         src/scene/title_screen.o(.rodata);
@@ -558,6 +567,7 @@ SECTIONS {
         src/debug/matsuda_debug_menu.o(.rodata);
         data/contest.o(.rodata);
         src/field/shop.o(.rodata);
+        src/field/fldeff_escalator.o(.rodata);
         src/field/berry.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);

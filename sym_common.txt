@@ -127,7 +127,7 @@ gUnknown_03004828: @ 3004828
 @ party_menu?
 
 	.align 2
-gUnknown_03004AE4: @ 3004AE4
+gPokemonItemUseCallback: @ 3004AE4
 	.space 0x4
 
 	.include "field/start_menu.o"

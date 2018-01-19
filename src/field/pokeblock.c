@@ -1,7 +1,3 @@
-//
-
-//
-
 #include "global.h"
 #include "overworld.h"
 #include "sprite.h"
@@ -232,14 +228,10 @@ static void sub_810B674(void)
 
 static void sub_810B68C(void)
 {
-    u16 *src;
-    vu16 *dest;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    src = gBGTilemapBuffers[2];
-    dest = (vu16 *)(VRAM + 0x7800);
-    DmaCopy16(3, src, dest, sizeof gBGTilemapBuffers[2]);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x7800), sizeof gBGTilemapBuffers[2]);
 }
 
 static bool8 sub_810B6C0(void)
@@ -248,7 +240,7 @@ static bool8 sub_810B6C0(void)
     switch (gMain.state)
     {
         case  0:
-            sub_80F9438();
+            ClearVideoCallbacks();
             sub_80F9368();
             REG_BG2CNT = BGCNT_SCREENBASE(15) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(2);
             REG_BLDCNT = 0;
@@ -310,10 +302,10 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case 12:
-            sub_80F944C();
+            ClearVerticalScrollIndicatorPalettes();
             LoadScrollIndicatorPalette();
-            CreateVerticalScrollIndicators(0, 0xb0, 0x08);
-            CreateVerticalScrollIndicators(1, 0xb0, 0x98);
+            CreateVerticalScrollIndicators(TOP_ARROW, 0xb0, 0x08);
+            CreateVerticalScrollIndicators(BOTTOM_ARROW, 0xb0, 0x98);
             gMain.state++;
             break;
         case 13:
@@ -560,19 +552,19 @@ static void sub_810BDAC(bool8 flag)
     }
     if (gUnknown_02039248.unk1)
     {
-        sub_80F979C(0, 0);
+        SetVerticalScrollIndicators(TOP_ARROW, VISIBLE);
     }
     else
     {
-        sub_80F979C(0, 1);
+        SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
     }
     if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     }
     else
     {
-        sub_80F979C(1, 1);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     }
     for (i=0; i<5; i++)
     {
@@ -776,8 +768,8 @@ static void sub_810C23C(u8 taskId)
 
 static void sub_810C2B0(void)
 {
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     BuyMenuFreeMemory();
 }
 
@@ -810,8 +802,8 @@ static void sub_810C368(u8 taskId)
     int v0 = 0;
     if (gUnknown_02039244 > 1)
         v0 = 2;
-    sub_80F98A4(0);
-    sub_80F98A4(1);
+    StopVerticalScrollIndicators(TOP_ARROW);
+    StopVerticalScrollIndicators(BOTTOM_ARROW);
     BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     Menu_DrawStdWindowFrame(7, v0 + 4, 13, 11);
     Menu_PrintItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
@@ -878,7 +870,7 @@ static void sub_810C540(u8 taskId)
 
 static void sub_810C5C0(u8 taskId)
 {
-    sub_80F979C(1, 1);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     gTasks[taskId].func = sub_810C540;
 }
 
@@ -900,11 +892,11 @@ static void sub_810C610(u8 taskId)
 
 static void sub_810C668(u8 taskId)
 {
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
     if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     }
     BasicInitMenuWindow(&gWindowTemplate_81E6E50);
     Menu_EraseWindowRect(7, 6, 13, 11);
@@ -924,14 +916,14 @@ static void sub_810C704(u8 taskId)
 {
     BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_810BC84(gUnknown_02039248.unk1);
-    sub_80F979C(1, 1);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     gTasks[taskId].func = sub_810C6DC;
 }
 
 static void sub_810C748(u8 taskId)
 {
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
     Menu_DestroyCursor();
     Menu_EraseWindowRect(7, 4, 13, 11);
     gTasks[taskId].func = sub_810BF7C;

@@ -2749,22 +2749,7 @@ void PlayerHandleDMATransfer(void)
             | (gBattleBufferA[gActiveBank][4] << 24);
     u16 val2 = gBattleBufferA[gActiveBank][5] | (gBattleBufferA[gActiveBank][6] << 8);
 
-    const u8 *src = &gBattleBufferA[gActiveBank][7];
-    u8 *dst = (u8 *)val1;
-    u32 size = val2;
-
-    while (1)
-    {
-        if (size <= 0x1000)
-        {
-            DmaCopy16(3, src, dst, size);
-            break;
-        }
-        DmaCopy16(3, src, dst, 0x1000);
-        src += 0x1000;
-        dst += 0x1000;
-        size -= 0x1000;
-    }
+    Dma3CopyLarge16_(&gBattleBufferA[gActiveBank][7], (u8 *)val1, val2);
     PlayerBufferExecCompleted();
 }
 
