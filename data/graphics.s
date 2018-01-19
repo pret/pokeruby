@@ -19,7 +19,7 @@ gUnknown_08D00524:: @ 8D00524
 
 @ 8D019E4
 .if DEBUG
-	.incbin "baserom_de_debug.gba", 0xD019E4, 0xD245E8-0xD019E4
+	.incbin "baserom_de_debug.gba", 0xD019E4, 0xD02458-0xD019E4
 .else
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
 	.incbin "graphics/unused/old_charmap.bin.lz"
