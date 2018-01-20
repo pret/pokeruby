@@ -75,7 +75,6 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
 };
 
 extern void sub_807D5BC(s8 gammaIndex);
-extern void sub_807D8C0(const u16 *palette);
 extern void sub_807DA14(void);
 extern void sub_807DA4C(void);
 extern void Weather_SetTargetBlendCoeffs(u8 a, u8 b, int c);
@@ -182,7 +181,7 @@ void CreateCloudSprites(void)
     if (gWeatherPtr->cloudSpritesCreated == TRUE)
         return;
     LoadSpriteSheet(&sCloudSpriteSheet);
-    sub_807D8C0(gUnknown_08397108);
+    LoadCustomWeatherSpritePalette(gUnknown_08397108);
     for (i = 0; i < 3; i++)
     {
         u8 spriteId = CreateSprite(&sCloudSpriteTemplate, 0, 0, 0xFF);
@@ -252,7 +251,7 @@ void Drought_Main(void)
     switch (gWeatherPtr->initStep)
     {
     case 0:
-        if (gWeatherPtr->unknown_6C6 != 0)
+        if (gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_CHANGING_WEATHER)
             gWeatherPtr->initStep++;
         break;
     case 1:
@@ -1137,7 +1136,7 @@ void Rain_Main(void)
         gWeatherPtr->initStep++;
         break;
     case 3:
-        if (gWeatherPtr->unknown_6C6 == 0)
+        if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_CHANGING_WEATHER)
             break;
         gWeatherPtr->initStep = 6;
         break;
@@ -1211,7 +1210,7 @@ void Rain_Main(void)
         gWeatherPtr->initStep++;
         break;
     case 14:
-        if (gWeatherPtr->unknown_6C6 != 3)
+        if (gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_IDLE)
             break;
         gWeatherPtr->unknown_6EA = 1;
         gWeatherPtr->initStep = 4;
@@ -2013,7 +2012,7 @@ void CreateSandstormSprites_1(void)
     if (!gWeatherPtr->sandstormSprites1Created)
     {
         LoadSpriteSheet(&sSandstormSpriteSheet);
-        sub_807D8C0(gUnknown_08397128);
+        LoadCustomWeatherSpritePalette(gUnknown_08397128);
         for (i = 0; i < 20; i++)
         {
             u8 spriteId = CreateSpriteAtEnd(&sSandstormSpriteTemplate, 0, (i / 5) * 64, 1);

@@ -1,7 +1,15 @@
 #ifndef GUARD_WEATHER_H
 #define GUARD_WEATHER_H
 
-struct Sprite;
+#include "sprite.h"
+
+// Controls how the weather should be changing the screen palettes.
+enum {
+    WEATHER_PAL_STATE_CHANGING_WEATHER,
+    WEATHER_PAL_STATE_SCREEN_FADING_IN,
+    WEATHER_PAL_STATE_SCREEN_FADING_OUT,
+    WEATHER_PAL_STATE_IDLE,
+};
 
 struct Weather
 {
@@ -30,10 +38,10 @@ struct Weather
     u8 gammaStepDelay;
     u8 gammaStepFrameCounter;
     u16 fadeDestColor;
-    u8 unknown_6C6;
-    u8 unknown_6C7;
-    u8 unknown_6C8;
-    u8 unknown_6C9;
+    u8 palProcessingState;
+    u8 fadeScreenCounter;
+    bool8 readyForInit;
+    u8 taskId;
     u8 unknown_6CA;
     u8 unknown_6CB;
     u16 initStep;
@@ -41,8 +49,8 @@ struct Weather
     u8 currWeather;
     u8 nextWeather;
     u8 weatherGfxLoaded;
-    u8 unknown_6D3;
-    u8 unknown_6D4;
+    bool8 weatherChangeComplete;
+    u8 weatherPicSpritePalIndex;
     u8 altGammaSpritePalIndex;
     u16 unknown_6D6;
     u8 unknown_6D8;
@@ -66,8 +74,8 @@ struct Weather
     u16 fog1ScrollPosX;
     u16 unknown_6F0;
     u16 unknown_6F2;
-    u8 unknown_6F4[6];
-    u8 unknown_6FA;
+    u8 lightenedFogSpritePals[6];
+    u8 lightenedFogSpritePalsCount;
     u8 fog1SpritesCreated;
     u16 unknown_6FC;
     u16 unknown_6FE;
@@ -121,17 +129,7 @@ void Task_WeatherInit(u8);
 void Task_WeatherMain(u8);
 void sub_807CAE8(void);
 void nullsub_38(void);
-void sub_807CCAC(void);
-u8 RainSnowShadeBlend_807CDC4(void);
-u8 DroughtBlend_807CE24(void);
-u8 Fog1Blend_807CE7C(void);
-void nullsub_39(void);
-
-// ASM
-void BlendSomething_807CEBC(u8, u8, s8);
-void BlendSomething_807D1BC(u8 a, u8 a2, s8 c, u8 d, u16 e);
-void BlendSomething_807D424(u8, u16);
-// ...
+void SetWeatherScreenFadeOut(void);
 
 enum
 {
@@ -141,10 +139,10 @@ enum
     FADE_TO_WHITE,
 };
 
-void fade_screen(u8, u8);
+void FadeScreen(u8, u8);
 // ...
-void sub_807D78C(u8 tag);
-void sub_807D874(u8);
+void UpdateSpritePaletteWithWeather(u8 tag);
+void ApplyWeatherGammaShiftToPal(u8);
 // ...
 void Weather_SetBlendCoeffs(u8, u8);
 // ...
@@ -157,8 +155,8 @@ void SetSav1WeatherFromCurrMapHeader(void);
 void DoCurrentWeather(void);
 void sub_8080750();
 
-bool8 sub_807D770(void);
-bool8 sub_807DDFC(void);
+bool8 IsWeatherNotFadingIn(void);
+bool8 IsWeatherChangeComplete(void);
 void SetWeather(u32);
 void UpdateWeatherPerDay(u16);
 void PreservePaletteInWeather(u8 index);
@@ -167,6 +165,7 @@ extern void ResetDroughtWeatherPaletteLoading(void);
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 u8 GetCurrentWeather(void);
+void LoadCustomWeatherSpritePalette(const u16 *palette);
 
 
 extern struct Weather gWeather;

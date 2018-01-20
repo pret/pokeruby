@@ -407,7 +407,7 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
-    sub_807D78C(IndexOfSpritePaletteTag(palette->tag));
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
 
@@ -1091,7 +1091,7 @@ void task00_8084310(u8 taskId)
     task = &gTasks[taskId];
     if (!task->data[0])
     {
-        if (!sub_807D770())
+        if (!IsWeatherNotFadingIn())
         {
             return;
         }
@@ -1191,7 +1191,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
 
 bool8 sub_8086854(struct Task *task) // gUnknown_0839F2CC[1]
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
     }
@@ -1813,7 +1813,7 @@ bool8 sub_80874CC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 
 bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         gFieldEffectArguments[0] = mapObject->coords2.x;
         gFieldEffectArguments[1] = mapObject->coords2.y;
@@ -2046,7 +2046,7 @@ void sub_8087A74(u8 taskId)
 
 void sub_8087AA4(struct Task *task)
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
         task->data[15] = player_get_direction_lower_nybble();
@@ -2199,7 +2199,7 @@ void sub_8087E4C(struct Task *task)
 {
     struct Sprite *sprite;
     s16 centerToCornerVecY;
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);

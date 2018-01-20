@@ -593,7 +593,7 @@ _08095EF4:
 	.align 2, 0
 _08095F18: .4byte gUnknown_083B600C
 _08095F1C:
-	bl sub_807D770
+	bl IsWeatherNotFadingIn
 	lsls r0, 24
 	cmp r0, 0
 	bne _08095F28
@@ -732,7 +732,7 @@ _08096030: .4byte gPCText_OnlyOne
 _08096034:
 	movs r0, 0x1
 	movs r1, 0
-	bl fade_screen
+	bl FadeScreen
 	movs r0, 0x4
 	strh r0, [r4, 0x8]
 	b _080960F4

@@ -612,7 +612,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     apply_map_tileset2_palette(gMapHeader.mapData);
 
     for (paletteIndex = 6; paletteIndex < 12; paletteIndex++)
-        sub_807D874(paletteIndex);
+        ApplyWeatherGammaShiftToPal(paletteIndex);
 
     sub_8072ED0();
     UpdateLocationHistoryForRoamer();

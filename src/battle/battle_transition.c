@@ -6,6 +6,7 @@
 #include "palette.h"
 #include "trig.h"
 #include "field_effect.h"
+#include "field_weather.h"
 #include "random.h"
 #include "sprite.h"
 #include "sound.h"
@@ -15,7 +16,6 @@
 #include "ewram.h"
 #include "scanline_effect.h"
 
-void sub_807DE10(void);
 void ScanlineEffect_Clear(void);
 
 extern const struct OamData gFieldOamData_32x32;
@@ -567,7 +567,7 @@ static void Task_BattleTransitionMain(u8 taskID)
 
 static bool8 Transition_Phase1(struct Task* task)
 {
-    sub_807DE10();
+    SetWeatherScreenFadeOut();
     CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, 0x400);
     if (sPhase1_Tasks[task->tTransitionID] != NULL)
     {

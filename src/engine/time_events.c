@@ -93,7 +93,7 @@ void UpdateShoalTideFlag(void)
 
 static void Task_WaitWeather(u8 taskId)
 {
-    if (sub_807DDFC())
+    if (IsWeatherChangeComplete())
     {
         EnableBothScriptContexts();
         DestroyTask(taskId);

@@ -329,7 +329,7 @@ static u8 StartMenu_InputProcessCallback(void)
         if (gMenuCallback != StartMenu_SaveCallback &&
            gMenuCallback != StartMenu_ExitCallback &&
            gMenuCallback != StartMenu_RetireCallback)
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
         return 0;
     }
     if (gMain.newKeys & (START_BUTTON | B_BUTTON))
