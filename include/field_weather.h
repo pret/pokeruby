@@ -23,12 +23,8 @@ struct Weather
             struct Sprite *sandstormSprites2[5];
         } s2;
     } sprites;
-    u8 unknown_200[2][32];
-    u8 filler_240[0x460-0x240];
-    u8 unk460[2][32];
-    u8 filler4A0[0x6B6-0x4A0];
-    s8 unknown_6B6;
-    u8 filler_6B7[0xC0-0xB7];
+    u8 gammaShifts[19][32];
+    u8 altGammaShifts[19][32];
     s8 gammaIndex;
     s8 gammaTargetIndex;
     u8 gammaStepDelay;
@@ -47,7 +43,7 @@ struct Weather
     u8 weatherGfxLoaded;
     u8 unknown_6D3;
     u8 unknown_6D4;
-    u8 unknown_6D5;
+    u8 altGammaSpritePalIndex;
     u16 unknown_6D6;
     u8 unknown_6D8;
     u8 unknown_6D9;
@@ -104,8 +100,8 @@ struct Weather
     u16 currBlendEVB;
     u16 targetBlendEVA;
     u16 targetBlendEVB;
-    u8 unknown_738;
-    u8 unknown_739;
+    u8 blendUpdateCounter;
+    u8 blendFrameCounter;
     u8 blendDelay;
     u8 filler_73B[0x3C-0x3B];
     s16 unknown_73C;
@@ -113,20 +109,18 @@ struct Weather
     s16 unknown_740;
     s16 unknown_742;
     u8 filler_744[0xD-4];
-    s8 unknown_74D;
-    u8 unknown_74E;
+    s8 loadDroughtPalsIndex;
+    u8 loadDroughtPalsOffset;
 };
 
 void StartWeather(void);
-void DoWeatherEffect(u8 effect);
+void ChangeWeather(u8 weather);
 void sub_807C988(u8 effect);
 void sub_807C9B4(u8 effect);
 void Task_WeatherInit(u8);
 void Task_WeatherMain(u8);
 void sub_807CAE8(void);
 void nullsub_38(void);
-void sub_807CB10(void);
-void sub_807CC24(void);
 void sub_807CCAC(void);
 u8 RainSnowShadeBlend_807CDC4(void);
 u8 DroughtBlend_807CE24(void);
@@ -135,9 +129,7 @@ void nullsub_39(void);
 
 // ASM
 void BlendSomething_807CEBC(u8, u8, s8);
-//void BlendSomething_807D1BC(u8, u8, u8, u8, u16);
 void BlendSomething_807D1BC(u8 a, u8 a2, s8 c, u8 d, u16 e);
-void BlendSomething_807D304(s8 a, u8 arg2, u16 c);
 void BlendSomething_807D424(u8, u16);
 // ...
 
@@ -156,8 +148,6 @@ void sub_807D874(u8);
 // ...
 void Weather_SetBlendCoeffs(u8, u8);
 // ...
-void sub_807DE68(void);
-// ...
 void PlayRainSoundEffect(void);
 // ...
 void SetSav1Weather(u32);
@@ -171,6 +161,13 @@ bool8 sub_807D770(void);
 bool8 sub_807DDFC(void);
 void SetWeather(u32);
 void UpdateWeatherPerDay(u16);
+void PreservePaletteInWeather(u8 index);
+void ResetPreservedPalettesInWeather(void);
+extern void ResetDroughtWeatherPaletteLoading(void);
+void ResetDroughtWeatherPaletteLoading(void);
+bool8 LoadDroughtWeatherPalettes(void);
+u8 GetCurrentWeather(void);
+
 
 extern struct Weather gWeather;
 

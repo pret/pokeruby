@@ -2289,7 +2289,7 @@ void sub_80FF6AC(u8 taskId)
             gTasks[taskId].data[2] = 2;
             break;
         case 2:
-            if (sub_807D770() == 1)
+            if (sub_807D770() == TRUE)
             {
                 gTasks[taskId].data[12] = 0;
                 sub_810065C(taskId);
@@ -3222,7 +3222,7 @@ void c1_overworld_prev_quest(u8 taskId)
 
 void sub_8100334(u8 taskId)
 {
-    if (sub_807D770() == 1)
+    if (sub_807D770() == TRUE)
     {
         gTasks[taskId].func = sub_80FE948;
     }
@@ -3735,7 +3735,7 @@ void sub_8100C88(u8 taskId)
             gTasks[taskId].data[2] = 3;
             break;
         case 3:
-            if (sub_807D770() == 1)
+            if (sub_807D770() == TRUE)
             {
                 gTasks[taskId].data[13] = -1;
                 DisplayItemMessageOnField(taskId, gSecretBaseText_DecorReturned, sub_81010F0, 0);

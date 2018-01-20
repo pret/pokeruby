@@ -357,7 +357,7 @@ static void sub_8123878(u8 taskId)
         case 0:
             if (sCableCarPtr->unk_0006 == sCableCarPtr->unk_0004)
             {
-                DoWeatherEffect(sCableCarPtr->unk_0002);
+                ChangeWeather(sCableCarPtr->unk_0002);
                 sCableCarPtr->unk_0001 = 1;
             }
             break;

@@ -15,6 +15,12 @@
 
 #define MACRO1(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
+enum {
+    GAMMA_NONE,
+    GAMMA_NORMAL,
+    GAMMA_ALT,
+};
+
 struct RGBColor
 {
     u16 r:5;
@@ -24,7 +30,7 @@ struct RGBColor
 
 struct WeatherPaletteData
 {
-    u16 data[0][0x1000];  // unknown length
+    u16 gammaShiftColors[8][0x1000]; // 0x1000 is the number of bytes that make up all palettes.
 };
 
 struct WeatherCallbacks
@@ -36,10 +42,10 @@ struct WeatherCallbacks
 };
 
 EWRAM_DATA struct Weather gWeather = {0};
-EWRAM_DATA u8 gUnknown_0202FF38[32] = {0};
+EWRAM_DATA u8 gFieldEffectPaletteGammaTypes[32] = {0};
 EWRAM_DATA u16 gUnknown_0202FF58 = {0};
 
-static const u8 *gUnknown_030006DC;
+static const u8 *sPaletteGammaTypes;
 
 const u8 DroughtPaletteData_0[] = INCBIN_U8("graphics/weather/drought0.bin.lz");
 const u8 DroughtPaletteData_1[] = INCBIN_U8("graphics/weather/drought1.bin.lz");
@@ -56,7 +62,7 @@ static const u8 *const sCompressedDroughtPalettes[] =
     DroughtPaletteData_3,
     DroughtPaletteData_4,
     DroughtPaletteData_5,
-    gSharedMem,
+    (u8*)eDroughtPaletteData.gammaShiftColors,
 };
 
 // This is a pointer to gWeather. All code in this file accesses gWeather directly,
@@ -65,6 +71,10 @@ static const u8 *const sCompressedDroughtPalettes[] =
 // this file produces the same result as accessing gWeather directly.
 struct Weather *const gWeatherPtr = &gWeather;
 
+static bool8 sub_807D574(u8);
+static void DroughtBlendSomething_807D304(s8 gammaIndex, u8 blendCoeff, u16 blendColor);
+static void BuildGammaShiftTables(void);
+static void UpdateGammaShift(void);
 void None_Init(void);
 void None_Main(void);
 bool8 None_Finish(void);
@@ -130,7 +140,7 @@ static const struct WeatherCallbacks sWeatherFuncs[] =
     {None_Init,          None_Main,      None_Init,         None_Finish},
     {Clouds_InitVars,    Clouds_Main,    Clouds_InitAll,    Clouds_Finish},
     {Weather2_InitVars,  Weather2_Main,  Weather2_InitAll,  Weather2_Finish},
-    {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},           // light rain
+    {LightRain_InitVars, LightRain_Main, LightRain_InitAll, LightRain_Finish},
     {Snow_InitVars,      Snow_Main,      Snow_InitAll,      Snow_Finish},
     {MedRain_InitVars,   Rain_Main,      MedRain_InitAll,   Rain_Finish},
     {Fog1_InitVars,      Fog1_Main,      Fog1_InitAll,      Fog1_Finish},
@@ -146,46 +156,50 @@ static const struct WeatherCallbacks sWeatherFuncs[] =
 
 void (*const gUnknown_083970B8[])(void) =
 {
-    sub_807CC24,
+    UpdateGammaShift,
     sub_807CCAC,
     nullsub_39,
     nullsub_39,
 };
 
-const u8 gUnknown_083970C8[32] =
+// This table specifies which of the gamma shift tables should be
+// applied to each of the background and sprite palettes.
+static const u8 sBasePaletteGammaTypes[32] =
 {
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    0,
-    0,
-    2,
-    1,
-    2,
-    2,
-    2,
-    2,
-    1,
-    1,
-    1,
-    1,
-    2,
-    1,
-    1,
-    1,
-    1,
-    1,
+    // background palettes
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NONE,
+    GAMMA_NONE,
+    // sprite palettes
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_ALT,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
+    GAMMA_NORMAL,
 };
 
 const u16 gUnknown_083970E8[] = INCBIN_U16("graphics/weather/0.gbapal");
@@ -198,8 +212,8 @@ void StartWeather(void)
     {
         index = AllocSpritePalette(0x1200);
         CpuCopy32(gUnknown_083970E8, &gPlttBufferUnfaded[0x100 + index * 16], 32);
-        sub_807CB10();
-        gWeatherPtr->unknown_6D5 = index;
+        BuildGammaShiftTables();
+        gWeatherPtr->altGammaSpritePalIndex = index;
         gWeatherPtr->unknown_6D4 = AllocSpritePalette(0x1201);
         gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->unknown_6D8 = 0;
@@ -221,33 +235,35 @@ void StartWeather(void)
     }
 }
 
-void DoWeatherEffect(u8 effect)
+void ChangeWeather(u8 weather)
 {
-    if (effect != WEATHER_RAIN_LIGHT && effect != WEATHER_RAIN_MED && effect != WEATHER_RAIN_HEAVY)
+    if (weather != WEATHER_RAIN_LIGHT && weather != WEATHER_RAIN_MED && weather != WEATHER_RAIN_HEAVY)
     {
         PlayRainSoundEffect();
     }
-    if (gWeatherPtr->nextWeather != effect && gWeatherPtr->currWeather == effect)
+
+    if (gWeatherPtr->nextWeather != weather && gWeatherPtr->currWeather == weather)
     {
-        sWeatherFuncs[effect].initVars();
+        sWeatherFuncs[weather].initVars();
     }
+
     gWeatherPtr->unknown_6D3 = 0;
-    gWeatherPtr->nextWeather = effect;
+    gWeatherPtr->nextWeather = weather;
     gWeatherPtr->finishStep = 0;
 }
 
-void sub_807C988(u8 effect)
+void sub_807C988(u8 weather)
 {
     PlayRainSoundEffect();
-    gWeatherPtr->currWeather = effect;
-    gWeatherPtr->nextWeather = effect;
+    gWeatherPtr->currWeather = weather;
+    gWeatherPtr->nextWeather = weather;
 }
 
-void sub_807C9B4(u8 effect)
+void sub_807C9B4(u8 weather)
 {
     PlayRainSoundEffect();
-    gWeatherPtr->currWeather = effect;
-    gWeatherPtr->nextWeather = effect;
+    gWeatherPtr->currWeather = weather;
+    gWeatherPtr->nextWeather = weather;
     gWeatherPtr->unknown_6C8 = 1;
 }
 
@@ -295,7 +311,10 @@ u8 None_Finish(void)
     return 0;
 }
 
-void sub_807CB10(void)
+// Builds two tables that contain gamma shifts for palette colors.
+// It's unclear why the two tables aren't declared as const arrays, since
+// this function always builds the same two tables.
+static void BuildGammaShiftTables(void)
 {
     u16 v0;
     u8 (*v1)[32];
@@ -308,13 +327,13 @@ void sub_807CB10(void)
     u16 v11;
     s16 dunno;
 
-    gUnknown_030006DC = gUnknown_083970C8;
+    sPaletteGammaTypes = sBasePaletteGammaTypes;
     for (v0 = 0; v0 <= 1; v0++)
     {
         if (v0 == 0)
-            v1 = gWeatherPtr->unknown_200;
+            v1 = gWeatherPtr->gammaShifts;
         else
-            v1 = gWeatherPtr->unk460;
+            v1 = gWeatherPtr->altGammaShifts;
 
         for (v2 = 0; v2 < 32; v2++)
         {
@@ -362,7 +381,9 @@ void sub_807CB10(void)
     }
 }
 
-void sub_807CC24(void)
+// When the weather is changing, it gradually updates the palettes
+// towards the desired gamma shift.
+static void UpdateGammaShift(void)
 {
     if (gWeatherPtr->gammaIndex == gWeatherPtr->gammaTargetIndex)
     {
@@ -377,7 +398,7 @@ void sub_807CC24(void)
                 gWeatherPtr->gammaIndex++;
             else
                 gWeatherPtr->gammaIndex--;
-            BlendSomething_807CEBC(0, 0x20, gWeatherPtr->gammaIndex);
+            BlendSomething_807CEBC(0, 32, gWeatherPtr->gammaIndex);
         }
     }
 }
@@ -433,11 +454,11 @@ u8 RainSnowShadeBlend_807CDC4(void)
         return 0;
     if (++gWeatherPtr->unknown_6C7 >= 0x10)
     {
-        BlendSomething_807CEBC(0, 0x20, 3);
+        BlendSomething_807CEBC(0, 32, 3);
         gWeatherPtr->unknown_6C7 = 0x10;
         return 0;
     }
-    BlendSomething_807D1BC(0, 0x20, 3, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
+    BlendSomething_807D1BC(0, 32, 3, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
     return 1;
 }
 
@@ -447,11 +468,11 @@ u8 DroughtBlend_807CE24(void)
         return 0;
     if (++gWeatherPtr->unknown_6C7 >= 0x10)
     {
-        BlendSomething_807CEBC(0, 0x20, -6);
+        BlendSomething_807CEBC(0, 32, -6);
         gWeatherPtr->unknown_6C7 = 0x10;
         return 0;
     }
-    BlendSomething_807D304(-6, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
+    DroughtBlendSomething_807D304(-6, 0x10 - gWeatherPtr->unknown_6C7, gWeatherPtr->fadeDestColor);
     return 1;
 }
 
@@ -468,23 +489,26 @@ void nullsub_39(void)
 {
 }
 
-void BlendSomething_807CEBC(u8 a, u8 b, s8 c)
+void BlendSomething_807CEBC(u8 startPalIndex, u8 numPalettes, s8 gammaIndex)
 {
-    u16 r4;
+    u16 curPalIndex;
     u16 palOffset;
-    u8 *r6;
+    u8 *gammaTable;
     u16 i;
 
-    if (c > 0)
+    if (gammaIndex > 0)
     {
-        c = c - 1;
-        palOffset = a * 16;
-        b += a;
-        r4 = a;
-        while (r4 < b)
+        gammaIndex--;
+        palOffset = startPalIndex * 16;
+        numPalettes += startPalIndex;
+        curPalIndex = startPalIndex;
+
+        // Loop through the speficied palette range and apply necessary gamma shifts to the colors.
+        while (curPalIndex < numPalettes)
         {
-            if (gUnknown_030006DC[r4] == 0)
+            if (sPaletteGammaTypes[curPalIndex] == GAMMA_NONE)
             {
+                // No palette change.
                 CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, 16 * sizeof(u16));
                 palOffset += 16;
             }
@@ -492,25 +516,27 @@ void BlendSomething_807CEBC(u8 a, u8 b, s8 c)
             {
                 u8 r, g, b;
 
-                if (gUnknown_030006DC[r4] == 2 || r4 - 16 == gWeatherPtr->unknown_6D5)
-                    r6 = gWeatherPtr->unk460[c];
+                if (sPaletteGammaTypes[curPalIndex] == GAMMA_ALT || curPalIndex - 16 == gWeatherPtr->altGammaSpritePalIndex)
+                    gammaTable = gWeatherPtr->altGammaShifts[gammaIndex];
                 else
-                    r6 = gWeatherPtr->unknown_200[c];
-                if (r4 == 16 || r4 > 0x1B)
+                    gammaTable = gWeatherPtr->gammaShifts[gammaIndex];
+
+                if (curPalIndex == 16 || curPalIndex > 27)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        if (gPlttBufferUnfaded[palOffset] == 0x2D9F)
+                        if (gPlttBufferUnfaded[palOffset] == RGB(31, 12, 11))
                         {
+                            // Skip gamma shift for this specific color. (Why?)
                             palOffset++;
                         }
                         else
                         {
-                            struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
-
-                            r = r6[color.r];
-                            g = r6[color.g];
-                            b = r6[color.b];
+                            // Apply gamma shift to the original color.
+                            struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+                            r = gammaTable[baseColor.r];
+                            g = gammaTable[baseColor.g];
+                            b = gammaTable[baseColor.b];
                             gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
                         }
                     }
@@ -519,39 +545,45 @@ void BlendSomething_807CEBC(u8 a, u8 b, s8 c)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
-
-                        r = r6[color.r];
-                        g = r6[color.g];
-                        b = r6[color.b];
+                        // Apply gamma shift to the original color.
+                        struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+                        r = gammaTable[baseColor.r];
+                        g = gammaTable[baseColor.g];
+                        b = gammaTable[baseColor.b];
                         gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
                     }
                 }
             }
-            r4++;
+
+            curPalIndex++;
         }
     }
-    else if (c < 0)
+    else if (gammaIndex < 0)
     {
-        c = -c - 1;
-        palOffset = a * 16;
-        b += a;
-        r4 = a;
-        while (r4 < b)
+        // A negative gammIndex value means that the blending will come from the special Drought weather's palette tables.
+        gammaIndex = -gammaIndex - 1;
+        palOffset = startPalIndex * 16;
+        numPalettes += startPalIndex;
+        curPalIndex = startPalIndex;
+
+        while (curPalIndex < numPalettes)
         {
-            if (gUnknown_030006DC[r4] == 0)
+            if (sPaletteGammaTypes[curPalIndex] == GAMMA_NONE)
             {
+                // No palette change.
                 CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, 16 * sizeof(u16));
                 palOffset += 16;
             }
             else
             {
-                if (r4 == 16 || r4 > 0x1B)
+                if (curPalIndex == 16 || curPalIndex > 27)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        if (gPlttBufferUnfaded[palOffset] != 0x2D9F)
-                            gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        // Skip gamma shift for this specific color. (Why?)
+                        if (gPlttBufferUnfaded[palOffset] != RGB(31, 12, 11))
+                            gPlttBufferFaded[palOffset] = eDroughtPaletteData.gammaShiftColors[gammaIndex][MACRO1(gPlttBufferUnfaded[palOffset])];
+
                         palOffset++;
                     }
                 }
@@ -559,93 +591,100 @@ void BlendSomething_807CEBC(u8 a, u8 b, s8 c)
                 {
                     for (i = 0; i < 16; i++)
                     {
-                        gPlttBufferFaded[palOffset] = eWeatherPaletteData.data[c][MACRO1(gPlttBufferUnfaded[palOffset])];
+                        gPlttBufferFaded[palOffset] = eDroughtPaletteData.gammaShiftColors[gammaIndex][MACRO1(gPlttBufferUnfaded[palOffset])];
                         palOffset++;
                     }
                 }
             }
-            r4++;
+
+            curPalIndex++;
         }
     }
     else
     {
-        CpuFastCopy(gPlttBufferUnfaded + a * 16, gPlttBufferFaded + a * 16, b * 16 * sizeof(u16));
+        // No palette blending.
+        CpuFastCopy(gPlttBufferUnfaded + startPalIndex * 16, gPlttBufferFaded + startPalIndex * 16, numPalettes * 16 * sizeof(u16));
     }
 }
 
-void BlendSomething_807D1BC(u8 a1, u8 a2, s8 c, u8 d, u16 e)
+void BlendSomething_807D1BC(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u16 blendColor)
 {
     u16 palOffset;
-    u16 r4;
+    u16 curPalIndex;
     u16 i;
-    struct RGBColor color = *(struct RGBColor *)&e;
-    u8 r_ = color.r;
-    u8 g_ = color.g;
-    u8 b_ = color.b;
+    struct RGBColor color = *(struct RGBColor *)&blendColor;
+    u8 rBlend = color.r;
+    u8 gBlend = color.g;
+    u8 bBlend = color.b;
 
-    palOffset = a1 * 16;
-    a2 += a1;
-    c = c - 1;
-    r4 = a1;
-    while (r4 < a2)
+    palOffset = startPalIndex * 16;
+    numPalettes += startPalIndex;
+    gammaIndex--;
+    curPalIndex = startPalIndex;
+
+    while (curPalIndex < numPalettes)
     {
-        if (gUnknown_030006DC[r4] == 0)
+        if (sPaletteGammaTypes[curPalIndex] == GAMMA_NONE)
         {
-            BlendPalette(palOffset, 16, d, e);
+            // No gamma shift. Simply blend the colors.
+            BlendPalette(palOffset, 16, blendCoeff, blendColor);
             palOffset += 16;
         }
         else
         {
-            u8 *r5;
+            u8 *gammaTable;
 
-            if (gUnknown_030006DC[r4] == 1)
-                r5 = gWeatherPtr->unknown_200[c];
+            if (sPaletteGammaTypes[curPalIndex] == GAMMA_NORMAL)
+                gammaTable = gWeatherPtr->gammaShifts[gammaIndex];
             else
-                r5 = gWeatherPtr->unk460[c];
+                gammaTable = gWeatherPtr->altGammaShifts[gammaIndex];
 
             for (i = 0; i < 16; i++)
             {
-                struct RGBColor color = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
-                u8 r = r5[color.r];
-                u8 g = r5[color.g];
-                u8 b = r5[color.b];
+                struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+                u8 r = gammaTable[baseColor.r];
+                u8 g = gammaTable[baseColor.g];
+                u8 b = gammaTable[baseColor.b];
 
-                r += ((r_ - r) * d) >> 4;
-                g += ((g_ - g) * d) >> 4;
-                b += ((b_ - b) * d) >> 4;
+                // Apply gamma shift and target blend color to the original color.
+                r += ((rBlend - r) * blendCoeff) >> 4;
+                g += ((gBlend - g) * blendCoeff) >> 4;
+                b += ((bBlend - b) * blendCoeff) >> 4;
                 gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
             }
         }
-        r4++;
+
+        curPalIndex++;
     }
 }
 
-void BlendSomething_807D304(s8 a, u8 coeff, u16 c)
+void DroughtBlendSomething_807D304(s8 gammaIndex, u8 blendCoeff, u16 blendColor)
 {
     struct RGBColor color;
-    u8 r_;
-    u8 g_;
-    u8 b_;
-    u16 r4;
+    u8 rBlend;
+    u8 gBlend;
+    u8 bBlend;
+    u16 curPalIndex;
     u16 palOffset;
-    u16 r12;
+    u16 i;
 
-    a = -a - 1;
-    color = *(struct RGBColor *)&c;
-    r_ = color.r;
-    g_ = color.g;
-    b_ = color.b;
+    gammaIndex = -gammaIndex - 1;
+    color = *(struct RGBColor *)&blendColor;
+    rBlend = color.r;
+    gBlend = color.g;
+    bBlend = color.b;
     palOffset = 0;
-    for (r4 = 0; r4 < 32; r4++)
+    for (curPalIndex = 0; curPalIndex < 32; curPalIndex++)
     {
-        if (gUnknown_030006DC[r4] == 0)
+        if (sPaletteGammaTypes[curPalIndex] == GAMMA_NONE)
         {
-            BlendPalette(palOffset, 16, coeff, c);
+            // No gamma shift. Simply blend the colors.
+            BlendPalette(palOffset, 16, blendCoeff, blendColor);
             palOffset += 16;
         }
         else
         {
-            for (r12 = 0; r12 < 16; r12++)
+            for (i = 0; i < 16; i++)
             {
                 u32 offset;
                 struct RGBColor color1;
@@ -659,14 +698,14 @@ void BlendSomething_807D304(s8 a, u8 coeff, u16 c)
                 b1 = color1.b;
 
                 offset = ((b1 & 0x1E) << 7) | ((g1 & 0x1E) << 3) | ((r1 & 0x1E) >> 1);
-                color2 = *(struct RGBColor *)&eWeatherPaletteData.data[a][offset];
+                color2 = *(struct RGBColor *)&eDroughtPaletteData.gammaShiftColors[gammaIndex][offset];
                 r2 = color2.r;
                 g2 = color2.g;
                 b2 = color2.b;
 
-                r2 += ((r_ - r2) * coeff) >> 4;
-                g2 += ((g_ - g2) * coeff) >> 4;
-                b2 += ((b_ - b2) * coeff) >> 4;
+                r2 += ((rBlend - r2) * blendCoeff) >> 4;
+                g2 += ((gBlend - g2) * blendCoeff) >> 4;
+                b2 += ((bBlend - b2) * blendCoeff) >> 4;
 
                 gPlttBufferFaded[palOffset++] = (b2 << 10) | (g2 << 5) | r2;
             }
@@ -674,28 +713,26 @@ void BlendSomething_807D304(s8 a, u8 coeff, u16 c)
     }
 }
 
-bool8 sub_807D574(u8);
-
-void BlendSomething_807D424(u8 coeff, u16 blendColor)
+void BlendSomething_807D424(u8 blendCoeff, u16 blendColor)
 {
     struct RGBColor color;
-    u8 blendR;
-    u8 blendG;
-    u8 blendB;
-    u16 palNum;
+    u8 rBlend;
+    u8 gBlend;
+    u8 bBlend;
+    u16 curPalIndex;
 
-    BlendPalette(0, 0x100, coeff, blendColor);
+    BlendPalette(0, 0x100, blendCoeff, blendColor);
     color = *(struct RGBColor *)&blendColor;
-    blendR = color.r;
-    blendG = color.g;
-    blendB = color.b;
+    rBlend = color.r;
+    gBlend = color.g;
+    bBlend = color.b;
 
-    for (palNum = 16; palNum < 32; palNum++)
+    for (curPalIndex = 16; curPalIndex < 32; curPalIndex++)
     {
-        if (sub_807D574(palNum))
+        if (sub_807D574(curPalIndex))
         {
-            u16 palEnd = (palNum + 1) * 16;
-            u16 palOffset = palNum * 16;
+            u16 palEnd = (curPalIndex + 1) * 16;
+            u16 palOffset = curPalIndex * 16;
 
             while (palOffset < palEnd)
             {
@@ -708,9 +745,9 @@ void BlendSomething_807D424(u8 coeff, u16 blendColor)
                 g += ((31 - g) * 3) >> 2;
                 b += ((28 - b) * 3) >> 2;
 
-                r += ((blendR - r) * coeff) >> 4;
-                g += ((blendG - g) * coeff) >> 4;
-                b += ((blendB - b) * coeff) >> 4;
+                r += ((rBlend - r) * blendCoeff) >> 4;
+                g += ((gBlend - g) * blendCoeff) >> 4;
+                b += ((bBlend - b) * blendCoeff) >> 4;
 
                 gPlttBufferFaded[palOffset] = (b << 10) | (g << 5) | r;
                 palOffset++;
@@ -718,51 +755,52 @@ void BlendSomething_807D424(u8 coeff, u16 blendColor)
         }
         else
         {
-            BlendPalette(palNum * 16, 16, coeff, blendColor);
+            BlendPalette(curPalIndex * 16, 16, blendCoeff, blendColor);
         }
     }
 }
 
-void sub_807D540(u8 a)
+void sub_807D540(u8 paletteIndex)
 {
     if (gWeatherPtr->unknown_6FA < 6)
     {
-        gWeatherPtr->unknown_6F4[gWeatherPtr->unknown_6FA] = a;
+        gWeatherPtr->unknown_6F4[gWeatherPtr->unknown_6FA] = paletteIndex;
         gWeatherPtr->unknown_6FA++;
     }
 }
 
-bool8 sub_807D574(u8 a)
+bool8 sub_807D574(u8 paletteIndex)
 {
     u16 i;
 
     for (i = 0; i < gWeatherPtr->unknown_6FA; i++)
     {
-        if (gWeatherPtr->unknown_6F4[i] == a)
+        if (gWeatherPtr->unknown_6F4[i] == paletteIndex)
             return TRUE;
     }
+
     return FALSE;
 }
 
-void sub_807D5BC(s8 a)
+void sub_807D5BC(s8 gammaIndex)
 {
     if (gWeatherPtr->unknown_6C6 == 3)
     {
-        BlendSomething_807CEBC(0, 32, a);
-        gWeatherPtr->gammaIndex = a;
+        BlendSomething_807CEBC(0, 32, gammaIndex);
+        gWeatherPtr->gammaIndex = gammaIndex;
     }
 }
 
-void sub_807D5F0(u8 a, u8 b, u8 c)
+void sub_807D5F0(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay)
 {
     if (gWeatherPtr->unknown_6C6 == 3)
     {
         gWeatherPtr->unknown_6C6 = 0;
-        gWeatherPtr->gammaIndex = a;
-        gWeatherPtr->gammaTargetIndex = b;
+        gWeatherPtr->gammaIndex = gammaIndex;
+        gWeatherPtr->gammaTargetIndex = gammaTargetIndex;
         gWeatherPtr->gammaStepFrameCounter = 0;
-        gWeatherPtr->gammaStepDelay = c;
-        sub_807D5BC(a);
+        gWeatherPtr->gammaStepDelay = gammaStepDelay;
+        sub_807D5BC(gammaIndex);
     }
 }
 
@@ -837,9 +875,9 @@ bool8 sub_807D770(void)
     return (gWeatherPtr->unknown_6C6 != 1);
 }
 
-void sub_807D78C(u8 a)
+void sub_807D78C(u8 spritePaletteIndex)
 {
-    u16 r4 = 16 + a;
+    u16 paletteIndex = 16 + spritePaletteIndex;
     u16 i;
 
     switch (gWeatherPtr->unknown_6C6)
@@ -848,34 +886,34 @@ void sub_807D78C(u8 a)
         if (gWeatherPtr->unknown_6CA != 0)
         {
             if (gWeatherPtr->currWeather == WEATHER_FOG_1)
-                sub_807D540(r4);
-            r4 *= 16;
+                sub_807D540(paletteIndex);
+            paletteIndex *= 16;
             for (i = 0; i < 16; i++)
-                gPlttBufferFaded[r4 + i] = gWeatherPtr->fadeDestColor;
+                gPlttBufferFaded[paletteIndex + i] = gWeatherPtr->fadeDestColor;
         }
         break;
     case 2:
-        r4 *= 16;
-        CpuFastCopy(gPlttBufferFaded + r4, gPlttBufferUnfaded + r4, 32);
-        BlendPalette(r4, 16, gPaletteFade.y, gPaletteFade.blendColor);
+        paletteIndex *= 16;
+        CpuFastCopy(gPlttBufferFaded + paletteIndex, gPlttBufferUnfaded + paletteIndex, 32);
+        BlendPalette(paletteIndex, 16, gPaletteFade.y, gPaletteFade.blendColor);
         break;
     default:
         if (gWeatherPtr->currWeather != WEATHER_FOG_1)
         {
-            BlendSomething_807CEBC(r4, 1, gWeatherPtr->gammaIndex);
+            BlendSomething_807CEBC(paletteIndex, 1, gWeatherPtr->gammaIndex);
         }
         else
         {
-            r4 *= 16;
-            BlendPalette(r4, 16, 12, 0x73FC);
+            paletteIndex *= 16;
+            BlendPalette(paletteIndex, 16, 12, 0x73FC);
         }
         break;
     }
 }
 
-void sub_807D874(u8 a)
+void sub_807D874(u8 paletteIndex)
 {
-    BlendSomething_807CEBC(a, 1, gWeatherPtr->gammaIndex);
+    BlendSomething_807CEBC(paletteIndex, 1, gWeatherPtr->gammaIndex);
 }
 
 u8 unref_sub_807D894(void)
@@ -892,54 +930,54 @@ void sub_807D8C0(const u16 *palette)
     sub_807D78C(gWeatherPtr->unknown_6D4);
 }
 
-void sub_807D8F0(u8 *a, u8 *b)
+static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *b)
 {
-    u8 r4 = *a;
+    u8 gammaIndex = *gammaIndexPtr;
     u16 i;
 
-    if (r4 < 7)
+    if (gammaIndex < 7)
     {
-        r4--;
-        LZ77UnCompWram(sCompressedDroughtPalettes[r4], eWeatherPaletteData.data[r4]);
-        if (r4 == 0)
+        gammaIndex--;
+        LZ77UnCompWram(sCompressedDroughtPalettes[gammaIndex], eDroughtPaletteData.gammaShiftColors[gammaIndex]);
+        if (gammaIndex == 0)
         {
-            eWeatherPaletteData.data[r4][0] = 0x421;
+            eDroughtPaletteData.gammaShiftColors[gammaIndex][0] = RGB(1, 1, 1);
             for (i = 1; i < 0x1000; i++)
-                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4][i - 1];
+                eDroughtPaletteData.gammaShiftColors[gammaIndex][i] += eDroughtPaletteData.gammaShiftColors[gammaIndex][i - 1];
         }
         else
         {
             for (i = 0; i < 0x1000; i++)
-                eWeatherPaletteData.data[r4][i] += eWeatherPaletteData.data[r4 - 1][i];
+                eDroughtPaletteData.gammaShiftColors[gammaIndex][i] += eDroughtPaletteData.gammaShiftColors[gammaIndex - 1][i];
         }
-        if (++(*a) == 7)
+        if (++(*gammaIndexPtr) == 7)
         {
-            *a = 32;
+            *gammaIndexPtr = 32;
             *b = 32;
         }
     }
 }
 
-void sub_807D9A8(void)
+void ResetDroughtWeatherPaletteLoading(void)
 {
-    gWeatherPtr->unknown_74D = 1;
-    gWeatherPtr->unknown_74E = 1;
+    gWeatherPtr->loadDroughtPalsIndex = 1;
+    gWeatherPtr->loadDroughtPalsOffset = 1;
 }
 
-bool8 sub_807D9C8(void)
+bool8 LoadDroughtWeatherPalettes(void)
 {
-    if (gWeatherPtr->unknown_74D < 32)
+    if (gWeatherPtr->loadDroughtPalsIndex < 32)
     {
-        sub_807D8F0(&gWeatherPtr->unknown_74D, &gWeatherPtr->unknown_74E);
-        if (gWeatherPtr->unknown_74D < 32)
+        LoadDroughtWeatherPalette(&gWeatherPtr->loadDroughtPalsIndex, &gWeatherPtr->loadDroughtPalsOffset);
+        if (gWeatherPtr->loadDroughtPalsIndex < 32)
             return TRUE;
     }
     return FALSE;
 }
 
-void sub_807DA04(s8 a)
+void sub_807DA04(s8 gammaIndex)
 {
-    sub_807D5BC(-a - 1);
+    sub_807D5BC(-gammaIndex - 1);
 }
 
 void sub_807DA14(void)
@@ -1001,8 +1039,8 @@ void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay)
     gWeatherPtr->targetBlendEVA = eva;
     gWeatherPtr->targetBlendEVB = evb;
     gWeatherPtr->blendDelay = delay;
-    gWeatherPtr->unknown_739 = 0;
-    gWeatherPtr->unknown_738 = 0;
+    gWeatherPtr->blendFrameCounter = 0;
+    gWeatherPtr->blendUpdateCounter = 0;
 }
 
 bool8 Weather_UpdateBlend(void)
@@ -1011,13 +1049,13 @@ bool8 Weather_UpdateBlend(void)
      && gWeatherPtr->currBlendEVB == gWeatherPtr->targetBlendEVB)
         return TRUE;
 
-    if (++gWeatherPtr->unknown_739 > gWeatherPtr->blendDelay)
+    if (++gWeatherPtr->blendFrameCounter > gWeatherPtr->blendDelay)
     {
-        gWeatherPtr->unknown_739 = 0;
-        gWeatherPtr->unknown_738++;
+        gWeatherPtr->blendFrameCounter = 0;
+        gWeatherPtr->blendUpdateCounter++;
 
         // Update currBlendEVA and currBlendEVB on alternate frames
-        if (gWeatherPtr->unknown_738 & 1)
+        if (gWeatherPtr->blendUpdateCounter & 1)
         {
             if (gWeatherPtr->currBlendEVA < gWeatherPtr->targetBlendEVA)
                 gWeatherPtr->currBlendEVA++;
@@ -1079,7 +1117,7 @@ void unref_sub_807DCB4(u8 a)
     }
 }
 
-u8 weather_get_current(void)
+u8 GetCurrentWeather(void)
 {
     return gWeatherPtr->currWeather;
 }
@@ -1141,14 +1179,14 @@ void unref_sub_807DE24(void)
     gWeatherPtr->unknown_6C6 = 3;
 }
 
-void sub_807DE38(u8 a)
+void PreservePaletteInWeather(u8 preservedPalIndex)
 {
-    CpuCopy16(gUnknown_083970C8, gUnknown_0202FF38, 32);
-    gUnknown_0202FF38[a] = 0;
-    gUnknown_030006DC = gUnknown_0202FF38;
+    CpuCopy16(sBasePaletteGammaTypes, gFieldEffectPaletteGammaTypes, 32);
+    gFieldEffectPaletteGammaTypes[preservedPalIndex] = GAMMA_NONE;
+    sPaletteGammaTypes = gFieldEffectPaletteGammaTypes;
 }
 
-void sub_807DE68(void)
+void ResetPreservedPalettesInWeather(void)
 {
-    gUnknown_030006DC = gUnknown_083970C8;
+    sPaletteGammaTypes = sBasePaletteGammaTypes;
 }

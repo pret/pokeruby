@@ -74,10 +74,8 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
     .callback = sub_807E0F4,
 };
 
-extern void sub_807D5BC(s8 a);
+extern void sub_807D5BC(s8 gammaIndex);
 extern void sub_807D8C0(const u16 *palette);
-extern void sub_807D9A8(void);
-extern bool8 sub_807D9C8(void);
 extern void sub_807DA14(void);
 extern void sub_807DA4C(void);
 extern void Weather_SetTargetBlendCoeffs(u8 a, u8 b, int c);
@@ -258,11 +256,11 @@ void Drought_Main(void)
             gWeatherPtr->initStep++;
         break;
     case 1:
-        sub_807D9A8();
+        ResetDroughtWeatherPaletteLoading();
         gWeatherPtr->initStep++;
         break;
     case 2:
-        if (sub_807D9C8() == FALSE)
+        if (LoadDroughtWeatherPalettes() == FALSE)
             gWeatherPtr->initStep++;
         break;
     case 3:
@@ -2322,7 +2320,7 @@ void SetSav1WeatherFromCurrMapHeader(void)
 void SetWeather(u32 weather)
 {
     SetSav1Weather(weather);
-    DoWeatherEffect(GetSav1Weather());
+    ChangeWeather(GetSav1Weather());
 }
 
 void SetWeather_Unused(u32 weather)
@@ -2333,7 +2331,7 @@ void SetWeather_Unused(u32 weather)
 
 void DoCurrentWeather(void)
 {
-    DoWeatherEffect(GetSav1Weather());
+    ChangeWeather(GetSav1Weather());
 }
 
 void sub_8080750(void)

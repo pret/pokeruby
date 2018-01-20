@@ -8,7 +8,7 @@ extern u8 gSharedMem[];
 // regions overlap others but have different definitions. Until some
 // dupes can be determined to be the same, they will be deliberate
 // seperated.
-#define eWeatherPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
+#define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define ewram0_2                        (*(struct Struct2000000 *)(gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))

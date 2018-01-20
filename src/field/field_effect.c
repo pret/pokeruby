@@ -543,7 +543,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 3);
     gUnknown_02024E8C.paletteTag = gMonPaletteTable[0].tag;
-    sub_807DE38(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
     return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
 }
 
@@ -556,13 +556,13 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     LoadCompressedObjectPalette(spritePalette);
     GetMonSpriteTemplate_803C56C(species, 3);
     gUnknown_02024E8C.paletteTag = spritePalette->tag;
-    sub_807DE38(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite)
 {
-    sub_807DE68();
+    ResetPreservedPalettesInWeather();
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
     if (sprite->oam.affineMode != 0)
     {
