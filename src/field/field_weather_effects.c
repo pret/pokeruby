@@ -91,8 +91,8 @@ extern void sub_807D5F0(u8 a, u8 b, u8 c);
 
 void Clouds_InitVars(void)
 {
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->initStep = 0;
     if (gWeatherPtr->cloudSpritesCreated == FALSE)
@@ -159,8 +159,8 @@ bool8 Clouds_Finish(void)
 
 void Weather2_InitVars(void)
 {
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
 }
 
 void Weather2_InitAll(void)
@@ -236,8 +236,8 @@ void Drought_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 0;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 0;
 }
 
 void Drought_Main(void);
@@ -368,8 +368,8 @@ void LightRain_InitVars(void)
     gWeatherPtr->unknown_6DB = 8;
     gWeatherPtr->unknown_6DC = 0;
     gWeatherPtr->unknown_6D9 = 10;
-    gWeatherPtr->unknown_6C1 = 3;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
     SetRainStrengthFromSoundEffect(SE_T_KOAME);
 }
 
@@ -885,8 +885,8 @@ void Snow_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6C1 = 3;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->unknown_6E5 = 16;
     gWeatherPtr->unknown_6E0 = 0;
 }
@@ -1074,8 +1074,8 @@ void MedRain_InitVars(void)
     gWeatherPtr->unknown_6DB = 4;
     gWeatherPtr->unknown_6DC = 0;
     gWeatherPtr->unknown_6D9 = 16;
-    gWeatherPtr->unknown_6C1 = 3;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     gWeatherPtr->unknown_6ED = 0;
     SetRainStrengthFromSoundEffect(SE_T_AME);
@@ -1102,8 +1102,8 @@ void HeavyRain_InitVars(void)
     gWeatherPtr->unknown_6DB = 4;
     gWeatherPtr->unknown_6DC = 1;
     gWeatherPtr->unknown_6D9 = 24;
-    gWeatherPtr->unknown_6C1 = 3;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     SetRainStrengthFromSoundEffect(SE_T_OOAME);
 }
@@ -1296,8 +1296,8 @@ void Fog1_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
     if (gWeatherPtr->fog1SpritesCreated == 0)
     {
         gWeatherPtr->unknown_6F0 = 0;
@@ -1446,8 +1446,8 @@ void Ash_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->unknown_6FE = 20;
     if (!gWeatherPtr->ashSpritesCreated)
     {
@@ -1634,8 +1634,8 @@ void Fog2_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->unknown_6F0 = 0;
     gWeatherPtr->unknown_6F2 = 1;
     if (gWeatherPtr->fog2SpritesCreated == 0)
@@ -1835,8 +1835,8 @@ void Sandstorm_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = 0;
-    gWeatherPtr->unknown_6C1 = 0;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 0;
+    gWeatherPtr->gammaStepDelay = 20;
     if (gWeatherPtr->sandstormSprites1Created == 0)
     {
         gWeatherPtr->unknown_704 = gWeatherPtr->unknown_708 = 0;
@@ -2113,26 +2113,26 @@ void SandstormSpriteCallback3(struct Sprite *sprite)
 }
 
 //------------------------------------------------------------------------------
-// Weather 11
+// Shade
 //------------------------------------------------------------------------------
 
-void Weather11_InitVars(void)
+void Shade_InitVars(void)
 {
     gWeatherPtr->initStep = 0;
-    gWeatherPtr->unknown_6C1 = 3;
-    gWeatherPtr->unknown_6C2 = 20;
+    gWeatherPtr->gammaTargetIndex = 3;
+    gWeatherPtr->gammaStepDelay = 20;
 }
 
-void Weather11_InitAll(void)
+void Shade_InitAll(void)
 {
-    Weather11_InitVars();
+    Shade_InitVars();
 }
 
-void Weather11_Main(void)
+void Shade_Main(void)
 {
 }
 
-bool8 Weather11_Finish(void)
+bool8 Shade_Finish(void)
 {
     return FALSE;
 }
