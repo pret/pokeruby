@@ -1,240 +1,614 @@
-	.include "engine/main.o"
-	.include "engine/sprite.o"
-	.include "engine/string_util.o"
-	.include "engine/link.o"
-	.include "engine/rtc.o"
-	.include "rom3.o"
-
-@ battle
-
-	.align 2
-gBattle_BG3_X: @ 30041B0
-	.space 0x4
-
-gBattle_BG1_Y: @ 30041B4
-	.space 0x4
-
-gBattle_BG3_Y: @ 30041B8
-	.space 0x8
-
-gBattleTextBuff1: @ 30041C0
-	.space 0x10
-
-gUnknown_030041D0: @ 30041D0
-	.space 0x30
-
-gBattle_WIN1H: @ 3004200
-	.space 0x10
-
-gUnknown_03004210: @ 3004210
-	.space 0x30
-
-gBattle_WIN0V: @ 3004240
-	.space 0x4
-
-gBattle_WIN1V: @ 3004244
-	.space 0xC
-
-gUnknown_03004250: @ 3004250
-	.space 0x30
-
-gBattle_BG2_Y: @ 3004280
-	.space 0x4
-
-gUnknown_03004284: @ 3004284
-	.space 0x4
-
-gBattle_BG2_X: @ 3004288
-	.space 0x4
-
-gBattleTerrain: @ 300428C
-	.space 0x4
-
-gBattleTextBuff2: @ 3004290
-	.space 0x10
-
-gBattle_BG0_Y: @ 30042A0
-	.space 0x4
-
-gBattle_BG0_X: @ 30042A4
-	.space 0xC
-
-gBattleTextBuff3: @ 30042B0
-	.space 0x10
-
-gBattle_BG1_X: @ 30042C0
-	.space 0x4
-
-gBattle_WIN0H: @ 30042C4
-	.space 0xC
-
-gPreBattleCallback1: @ 30042D0
-	.space 0x4
-
-gBattleMainFunc: @ 30042D4
-	.space 0xC
-
-gBattleResults: @ 30042E0
-	.space 0x1C
-
-gUnknown_030042FC: @ 30042FC
-	.space 0xE
-
-gUnknown_0300430A: @ 300430A
-	.space 0xC
-
-gUnknown_03004316: @ 3004316
-	.space 0xE
-
-gLeveledUpInBattle: @ 3004324
-	.space 0xC
-
-gBattleBankFunc: @ 3004330
-	.space 0x10
-
-gHealthboxIDs: @ 3004340
-	.space 0x4
-
-gUnknown_03004344: @ 3004344
-	.space 0x4
-
-gUnknown_03004348: @ 3004348
-	.space 0x4
-
-gUnknown_0300434C: @ 300434C
-	.space 0x4
-
-	.include "pokemon/pokemon_1.o"
-	.include "engine/random.o"
-	.include "scene/egg_hatch.o"
-	.include "engine/load_save.o"
-
-@ trade
-
-gUnknown_03004824: @ 3004824
-	.space 0x4
-
-gUnknown_03004828: @ 3004828
-	.space 0x8
-
-	.include "scene/berry_blender.o"
-	.include "field/overworld.o"
-	.include "field/fieldmap.o"
-	.include "field/field_camera.o"
-	.include "field/field_map_obj.o"
-	.include "field/field_control_avatar.o"
-
-@ party_menu?
-
-	.align 2
-gPokemonItemUseCallback: @ 3004AE4
-	.space 0x4
-
-	.include "field/start_menu.o"
-	.include "engine/sound.o"
-	.include "battle/battle_anim.o"
-	.include "engine/task.o"
-	.include "debug/mori_debug_menu.o"
-
-@ unknown_task
-	.include "scanline_effect.o"
-	.include "pokemon/pokemon_menu.o"
-	.include "pokemon/pokedex.o"
-
-@ pokemon_summary_screen
-
-	.align 4
-gUnknown_03005CF0: @ 3005CF0
-	.space 0x10
-
-@ item_menu
-
-	.align 4
-gFieldItemUseCallback: @ 3005D00
-	.space 0x10
-
-gBagPocketScrollStates: @ 3005D10
-	.space 0x14
-
-gCurrentBagPocketItemSlots: @ 3005D24
-	.space 0x4
-
-@ contest
-
-	.align 2
-gUnknown_03005D28: @ 3005D28
-	.space 0x4
-
-	.include "engine/record_mixing.o"
-	.include "debug/sound_check_menu.o"
-	.include "field/tv.o"
-
-	.space 0x64 @ unused variable?
-
-@ mauville_old_man
-
-	.align 4
-gUnknown_03005DA0: @ 3005DA0
-	.space 0x48
-
-@ cute_sketch
-
-gUnknown_03005DE8: @ 3005DE8
-	.space 0x4
-
-gUnknown_03005DEC: @ 3005DEC
-	.space 0x4
-
-gUnknown_03005DF0: @ 3005DF0
-	.space 0x4
-
-gUnknown_03005DF4: @ 3005DF4
-	.space 0x4
-
-gUnknown_03005DF8: @ 3005DF8
-	.space 0x4
-
-gUnknown_03005DFC: @ 3005DFC
-	.space 0x4
-
-gUnknown_03005E00: @ 3005E00
-	.space 0x4
-
-gUnknown_03005E04: @ 3005E04
-	.space 0x4
-
-gUnknown_03005E08: @ 3005E08
-	.space 0x4
-
-gUnknown_03005E0C: @ 3005E0C
-	.space 0x4
-
-	.include "scene/contest_painting.o"
-	.include "scene/evolution_scene.o"
-
-@ pokedex_cry_screen
-
-gUnknown_03005E98: @ 3005E98
-	.space 0x4
-
-	.include "engine/save.o"
-
-	.space 0x10 @ unused variable?
-
-	.include "scene/intro.o"
-
-@ battle_anim_813F0F4
-
-	.align 2
-gUnknown_03005F0C: @ 3005F0C
-	.space 0x4
-
-gUnknown_03005F10: @ 3005F10
-	.space 0x4
-
-gUnknown_03005F14: @ 3005F14
-	.space 0xC
-
-	.include "pokemon/pokeblock_feed.o"
-	.include "libs/m4a_2.o"
-	.include "libs/agb_flash.o"
+. = ALIGN(4);
+. = ALIGN(4);
+gKeyRepeatStartDelay = .;
+. += 0x4;
+. = ALIGN(4);
+gLinkTransferringData = .;
+. += 0x4;
+. = ALIGN(16);
+gMain = .;
+. += 0x440;
+. = ALIGN(4);
+gKeyRepeatContinueDelay = .;
+. += 0x4;
+. = ALIGN(4);
+gSoftResetDisabled = .;
+. += 0x4;
+. = ALIGN(16);
+gIntrTable = .;
+. += 0x38;
+. = ALIGN(4);
+gLinkVSyncDisabled = .;
+. += 0x4;
+. = ALIGN(16);
+IntrMain_Buffer = .;
+. += 0x800;
+. = ALIGN(4);
+gPcmDmaCounter = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(16);
+gSpriteOrder = .;
+. += 0x40;
+. = ALIGN(16);
+gSpriteTileAllocBitmap = .;
+. += 0x80;
+. = ALIGN(4);
+gSpriteCoordOffsetX = .;
+. += 0x4;
+. = ALIGN(4);
+gOamLimit = .;
+. += 0x4;
+. = ALIGN(4);
+gReservedSpriteTileCount = .;
+. += 0x4;
+. = ALIGN(4);
+gSpriteCopyRequestCount = .;
+. += 0x4;
+. = ALIGN(16);
+gSpriteCopyRequests = .;
+. += 0x300;
+. = ALIGN(4);
+gSpriteCoordOffsetY = .;
+. += 0x4;
+. = ALIGN(16);
+gOamMatrices = .;
+. += 0x100;
+. = ALIGN(4);
+gShouldProcessSpriteCopyRequests = .;
+. += 0x4;
+. = ALIGN(4);
+gOamMatrixAllocBitmap = .;
+. += 0x4;
+. = ALIGN(4);
+gReservedSpritePaletteCount = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(16);
+gUnknownStringVar = .;
+. += 0x10;
+. = ALIGN(4);
+. = ALIGN(8);
+word_3002910 = .;
+. += 0x8;
+. = ALIGN(4);
+gLinkDebugValue1 = .;
+. += 0x4;
+. = ALIGN(16);
+localLinkPlayerBlock = .;
+. += 0x3C;
+. = ALIGN(4);
+gLinkErrorOccurred = .;
+. += 0x4;
+. += 0x4;
+. = ALIGN(4);
+gLinkDebugValue2 = .;
+. += 0x4;
+. += 0x4;
+
+#ifdef GERMAN
+. = ALIGN(4);
+deUnkValue1 = .;
+. += 0x4;
+. = ALIGN(4);
+deUnkValue2 = .;
+. += 0x4;
+#endif
+
+. = ALIGN(4);
+gLinkPlayerPending = .;
+. += 0x4;
+. = ALIGN(16);
+gLinkPlayers = .;
+. += 0x70;
+. = ALIGN(4);
+gBlockReceived = .;
+. += 0x4;
+. += 0x4;
+. = ALIGN(4);
+gLinkHeldKeys = .;
+. += 0x4;
+. = ALIGN(4);
+gLinkTimeOutCounter = .;
+. += 0x4;
+. += 0x4;
+. = ALIGN(16);
+localLinkPlayer = .;
+. += 0x1C;
+. = ALIGN(16);
+gRecvCmds = .;
+. += 0x40;
+. = ALIGN(4);
+gLinkStatus = .;
+. += 0x4;
+. = ALIGN(4);
+gLinkDummyBool = .;
+. += 0x4;
+. = ALIGN(4);
+byte_3002A68 = .;
+. += 0x4;
+. = ALIGN(16);
+gBlockSendBuffer = .;
+. += 0x100;
+. = ALIGN(4);
+u8_array_3002B70 = .;
+. += 0x4;
+. = ALIGN(4);
+gLinkType = .;
+. += 0x4;
+. = ALIGN(4);
+u8_array_3002B78 = .;
+. += 0x4;
+. = ALIGN(16);
+gBlockRecvBuffer = .;
+. += 0x400;
+. = ALIGN(4);
+gSuppressLinkErrorMessage = .;
+. += 0x4;
+. = ALIGN(4);
+gSavedLinkPlayerCount = .;
+. += 0x4;
+. = ALIGN(16);
+gSendCmd = .;
+. += 0x10;
+. = ALIGN(4);
+gSavedMultiplayerId = .;
+. += 0x4;
+. = ALIGN(4);
+gReceivedRemoteLinkPlayers = .;
+. += 0x4;
+. = ALIGN(16);
+gLinkTestBGInfo = .;
+. += 0x10;
+. = ALIGN(4);
+gLinkCallback = .;
+. += 0x4;
+. = ALIGN(16);
+gSavedLinkPlayers = .;
+. += 0x70;
+. = ALIGN(4);
+gShouldAdvanceLinkState = .;
+. += 0x4;
+. = ALIGN(8);
+gLinkTestBlockChecksums = .;
+. += 0x8;
+. += 0x4;
+. = ALIGN(4);
+gBlockRequestType = .;
+. += 0x4;
+. += 0x4;
+. += 0x4;
+. = ALIGN(4);
+gLastSendQueueCount = .;
+. += 0x4;
+. = ALIGN(16);
+gLink = .;
+. += 0xFC0;
+. = ALIGN(4);
+gLastRecvQueueCount = .;
+. += 0x4;
+. = ALIGN(4);
+gLinkSavedIme = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(8);
+gLocalTime = .;
+. += 0x8;
+. = ALIGN(4);
+. = ALIGN(16);
+gBattleBuffersTransferData = .;
+. += 0x170;
+. = ALIGN(4);
+gBattle_BG3_X = .;
+. += 0x4;
+gBattle_BG1_Y = .;
+. += 0x4;
+gBattle_BG3_Y = .;
+. += 0x8;
+gBattleTextBuff1 = .;
+. += 0x10;
+gUnknown_030041D0 = .;
+. += 0x30;
+gBattle_WIN1H = .;
+. += 0x10;
+gUnknown_03004210 = .;
+. += 0x30;
+gBattle_WIN0V = .;
+. += 0x4;
+gBattle_WIN1V = .;
+. += 0xC;
+gUnknown_03004250 = .;
+. += 0x30;
+gBattle_BG2_Y = .;
+. += 0x4;
+gUnknown_03004284 = .;
+. += 0x4;
+gBattle_BG2_X = .;
+. += 0x4;
+gBattleTerrain = .;
+. += 0x4;
+gBattleTextBuff2 = .;
+. += 0x10;
+gBattle_BG0_Y = .;
+. += 0x4;
+gBattle_BG0_X = .;
+. += 0xC;
+gBattleTextBuff3 = .;
+. += 0x10;
+gBattle_BG1_X = .;
+. += 0x4;
+gBattle_WIN0H = .;
+. += 0xC;
+gPreBattleCallback1 = .;
+. += 0x4;
+gBattleMainFunc = .;
+. += 0xC;
+gBattleResults = .;
+. += 0x1C;
+gUnknown_030042FC = .;
+. += 0xE;
+gUnknown_0300430A = .;
+. += 0xC;
+gUnknown_03004316 = .;
+. += 0xE;
+gLeveledUpInBattle = .;
+. += 0xC;
+gBattleBankFunc = .;
+. += 0x10;
+gHealthboxIDs = .;
+. += 0x4;
+gUnknown_03004344 = .;
+. += 0x4;
+gUnknown_03004348 = .;
+. += 0x4;
+gUnknown_0300434C = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gPlayerPartyCount = .;
+. += 0x4;
+. = ALIGN(16);
+gPlayerParty = .;
+. += 0x258;
+. = ALIGN(4);
+gEnemyPartyCount = .;
+. += 0x4;
+. = ALIGN(16);
+gEnemyParty = .;
+. += 0x258;
+. = ALIGN(4);
+. = ALIGN(4);
+gRngValue = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gEggHatchData = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gFlashMemoryPresent = .;
+. += 0x4;
+gUnknown_03004824 = .;
+. += 0x4;
+gUnknown_03004828 = .;
+. += 0x8;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03004830 = .;
+. += 0x4;
+. = ALIGN(4);
+gInGameOpponentsNo = .;
+. += 0x4;
+. = ALIGN(16);
+gUnknown_03004840 = .;
+. += 0x14;
+. = ALIGN(4);
+gBerryBlenderData = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+word_3004858 = .;
+. += 0x4;
+. = ALIGN(4);
+gFieldCallback = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03004860 = .;
+. += 0x4;
+. = ALIGN(4);
+gFieldLinkPlayerCount = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(16);
+gUnknown_03004870 = .;
+. += 0xC;
+. = ALIGN(4);
+. = ALIGN(16);
+gUnknown_03004880 = .;
+. += 0x18;
+. = ALIGN(4);
+gUnknown_03004898 = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_0300489C = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(16);
+gMapObjects = .;
+. += 0x240;
+. = ALIGN(4);
+. = ALIGN(4);
+gSelectedMapObject = .;
+. += 0x4;
+. = ALIGN(4);
+gPokemonItemUseCallback = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gMenuCallback = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gDisableMusic = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gSoundAnimFramesToWait = .;
+. += 0x4;
+. = ALIGN(16);
+gBattleAnimArgs = .;
+. += 0x10;
+. = ALIGN(16);
+gAnimSpriteIndexArray = .;
+. += 0x10;
+. = ALIGN(4);
+. = ALIGN(16);
+gTasks = .;
+. += 0x280;
+. = ALIGN(4);
+. = ALIGN(16);
+gUnknown_03004DA0 = .;
+. += 0x20;
+. = ALIGN(4);
+. = ALIGN(16);
+gScanlineEffect = .;
+. += 0x20;
+. = ALIGN(16);
+gScanlineEffectRegBuffers = .;
+. += 0xF00;
+. = ALIGN(4);
+. = ALIGN(4);
+gLastFieldPokeMenuOpened = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005CE4 = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03005CE8 = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005CEC = .;
+. += 0x4;
+. = ALIGN(16);
+gUnknown_03005CF0 = .;
+. += 0x10;
+. = ALIGN(16);
+gFieldItemUseCallback = .;
+. += 0x10;
+gBagPocketScrollStates = .;
+. += 0x14;
+gCurrentBagPocketItemSlots = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005D28 = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03005D2C = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03005D30 = .;
+. += 0x4;
+. = ALIGN(4);
+gSoundTestCryNum = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03005D38 = .;
+. += 0x4;
+. += 0x64;
+. = ALIGN(16);
+gUnknown_03005DA0 = .;
+. += 0x48;
+gUnknown_03005DE8 = .;
+. += 0x4;
+gUnknown_03005DEC = .;
+. += 0x4;
+gUnknown_03005DF0 = .;
+. += 0x4;
+gUnknown_03005DF4 = .;
+. += 0x4;
+gUnknown_03005DF8 = .;
+. += 0x4;
+gUnknown_03005DFC = .;
+. += 0x4;
+gUnknown_03005E00 = .;
+. += 0x4;
+gUnknown_03005E04 = .;
+. += 0x4;
+gUnknown_03005E08 = .;
+. += 0x4;
+gUnknown_03005E0C = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gUnknown_03005E10 = .;
+. += 0x4;
+. = ALIGN(16);
+gUnknown_03005E20 = .;
+. += 0x20;
+. = ALIGN(16);
+gUnknown_03005E40 = .;
+. += 0x4C;
+. = ALIGN(4);
+gUnknown_03005E8C = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005E90 = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gCB2_AfterEvolution = .;
+. += 0x4;
+gUnknown_03005E98 = .;
+. += 0x4;
+. = ALIGN(4);
+. = ALIGN(4);
+gFirstSaveSector = .;
+. += 0x4;
+. = ALIGN(4);
+gPrevSaveCounter = .;
+. += 0x4;
+. = ALIGN(4);
+gLastKnownGoodSector = .;
+. += 0x4;
+. = ALIGN(4);
+gDamagedSaveSectors = .;
+. += 0x4;
+. = ALIGN(4);
+gSaveCounter = .;
+. += 0x4;
+. = ALIGN(4);
+gFastSaveSection = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005EB4 = .;
+. += 0x4;
+. = ALIGN(4);
+gSaveFileStatus = .;
+. += 0x4;
+. = ALIGN(4);
+gGameContinueCallback = .;
+. += 0x4;
+. += 0x10;
+. = ALIGN(4);
+. = ALIGN(4);
+gIntroFrameCounter = .;
+. += 0x4;
+. = ALIGN(16);
+gMultibootProgramStruct = .;
+. += 0x2C;
+. = ALIGN(4);
+gUnknown_03005F0C = .;
+. += 0x4;
+gUnknown_03005F10 = .;
+. += 0x4;
+gUnknown_03005F14 = .;
+. += 0xC;
+. = ALIGN(4);
+. = ALIGN(4);
+gPokeblockFeedPokeSprite = .;
+. += 0x4;
+. = ALIGN(4);
+gPokeblockFeedMonSpecies = .;
+. += 0x4;
+. = ALIGN(4);
+gPokeblockMonNotFlipped = .;
+. += 0x4;
+. = ALIGN(4);
+gPokeblockFeedMonSpriteID = .;
+. += 0x4;
+. = ALIGN(4);
+gPokeblockFeedMonNature = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005F34 = .;
+. += 0x4;
+. = ALIGN(4);
+gPokeblockFeedUnused0 = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005F3C = .;
+. += 0x4;
+. = ALIGN(4);
+gUnknown_03005F40 = .;
+. += 0x4;
+. = ALIGN(16);
+gPokeblockFeedPokeSpriteCopy = .;
+. += 0x44;
+. = ALIGN(4);
+gUnknown_03005F94 = .;
+. += 0x4;
+. = ALIGN(16);
+gUnknown_03005FA0 = .;
+. += 0x30;
+. = ALIGN(4);
+. = ALIGN(16);
+gSoundInfo = .;
+. += 0xFB0;
+. = ALIGN(16);
+gPokemonCrySongs = .;
+. += 0x68;
+. = ALIGN(16);
+gPokemonCryMusicPlayers = .;
+. += 0x80;
+. = ALIGN(16);
+gMPlayJumpTable = .;
+. += 0x90;
+. = ALIGN(16);
+gCgbChans = .;
+. += 0x100;
+. = ALIGN(16);
+gPokemonCryTracks = .;
+. += 0x140;
+. = ALIGN(16);
+gPokemonCrySong = .;
+. += 0x34;
+. = ALIGN(16);
+gMPlay_BGM = .;
+. += 0x40;
+. = ALIGN(16);
+gMPlay_SE1 = .;
+. += 0x40;
+. = ALIGN(16);
+gMPlay_SE2 = .;
+. += 0x40;
+. = ALIGN(16);
+gMPlayMemAccArea = .;
+. += 0x10;
+. = ALIGN(16);
+gMPlay_SE3 = .;
+. += 0x40;
+. = ALIGN(4);
+. = ALIGN(4);
+gFlashTimeoutFlag = .;
+. += 0x4;
+. = ALIGN(4);
+PollFlashStatus = .;
+. += 0x4;
+. = ALIGN(4);
+WaitForFlashWrite = .;
+. += 0x4;
+. = ALIGN(4);
+ProgramFlashSector = .;
+. += 0x4;
+. = ALIGN(4);
+gFlash = .;
+. += 0x4;
+. = ALIGN(4);
+ProgramFlashByte = .;
+. += 0x4;
+. = ALIGN(4);
+gFlashNumRemainingBytes = .;
+. += 0x4;
+. = ALIGN(4);
+EraseFlashChip = .;
+. += 0x4;
+. = ALIGN(4);
+EraseFlashSector = .;
+. += 0x4;
+. = ALIGN(4);
+gFlashMaxTime = .;
+. += 0x4;

@@ -115,8 +115,8 @@ $(LD_SCRIPT): $(BUILD_DIR)/sym_bss.ld $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sy
 	cd $(BUILD_DIR) && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" >ld_script.ld
 $(BUILD_DIR)/sym_bss.ld: sym_bss.txt
 	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) .bss ../../sym_bss.txt $(GAME_LANGUAGE) >sym_bss.ld
-$(BUILD_DIR)/sym_common.ld: sym_common.txt $(C_OBJECTS) $(wildcard common_syms/*.txt)
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) COMMON ../../sym_common.txt $(GAME_LANGUAGE) -c src,../../common_syms >sym_common.ld
+$(BUILD_DIR)/sym_common.ld: sym_common.txt
+	$(CPP) -P $(CPPFLAGS) $< > $@
 $(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
 	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $(GAME_LANGUAGE) >sym_ewram.ld
 
