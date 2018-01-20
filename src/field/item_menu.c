@@ -47,7 +47,7 @@ extern void sub_808B5B4();
 extern u8 sub_80F92F4();
 extern void sub_80C9C7C(u8);
 extern void pal_fill_black(void);
-extern bool8 sub_807D770(void);
+extern bool8 IsWeatherNotFadingIn(void);
 extern u8 sub_80F931C();
 extern void sub_808A3F8(u8);
 extern void Shop_FadeReturnToMartMenu(void);
@@ -2699,7 +2699,7 @@ void ExecuteItemUseFromBlackPalette(void)
 
 static void Task_CallItemUseOnFieldCallback(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gFieldItemUseCallback(taskId);
 }
 

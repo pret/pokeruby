@@ -173,7 +173,7 @@ static void Task_HandleShopMenuBuy(u8 taskId)
     gTasks[taskId].data[8] = (u32)BuyMenuDrawGraphics >> 16;
     gTasks[taskId].data[9] = (u32)BuyMenuDrawGraphics;
     gTasks[taskId].func = Shop_FadeAndRunBuySellCallback;
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void Task_HandleShopMenuSell(u8 taskId)
@@ -181,7 +181,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
     gTasks[taskId].data[8] = (u32)ItemMenu_LoadSellMenu >> 16;
     gTasks[taskId].data[9] = (u32)ItemMenu_LoadSellMenu;
     gTasks[taskId].func = Shop_FadeAndRunBuySellCallback;
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void Task_HandleShopMenuQuit(u8 taskId)
@@ -213,7 +213,7 @@ static void ReturnToShopMenuAfterExitingSellMenu(u8 taskId)
 
 static void Task_ReturnToMartMenu(u8 taskId)
 {
-    if (sub_807D770() == 1)
+    if (IsWeatherNotFadingIn() == 1)
     {
         if (gMartInfo.martType == MART_TYPE_2)
             DisplayItemMessageOnField(taskId, gOtherText_CanIHelpYou, ReturnToShopMenuAfterExitingSellMenu, 0);

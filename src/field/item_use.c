@@ -100,7 +100,7 @@ void ItemMenu_ConfirmNormalFade(u8 var)
 void ItemMenu_ConfirmComplexFade(u8 var)
 {
     ExecuteSwitchToOverworldFromItemUse(var);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 void SetUpItemUseOnFieldCallback(u8 taskId)
