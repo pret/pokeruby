@@ -18,12 +18,8 @@ gUnknown_08D00524:: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xD019E4, 0xD02458-0xD019E4
-.else
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
 	.incbin "graphics/unused/old_charmap.bin.lz"
-.endif
 	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2
@@ -2871,11 +2867,7 @@ gBattleAnimSpritePalette_068:: @ 8E69628
 
 	.align 2
 gContestApplauseGfx::
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xE696E0, 0xE69818-0xE696E0
-.else
 	.incbin "graphics/contest/applause.4bpp.lz"
-.endif
 
 	.align 2
 gContestApplauseMeterGfx:: @ 8E6978C
@@ -2986,11 +2978,7 @@ gUnknown_08E6C100:: @ 8E6C100
 
 	.align 2
 gUnknown_08E6C920:: @ 8E6C920
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xE6C9AC, 0xE6D3E0-0xE6C9AC
-.else
 	.incbin "graphics/berry_blender/outer.4bpp.lz"
-.endif
 
 	.align 2
 gUnknown_08E6D354:: @ 8E6D354
@@ -3150,11 +3138,7 @@ gBattleAnimSpritePalette_188:: @ 8E7133C
 
 	.align 2
 gPartyMenuMisc_Gfx:: @ 8E71354
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xE713E0, 0xE71730-0xE713E0
-.else
 	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
-.endif
 
 	.align 2
 gPartyMenuMisc_Pal:: @ 8E716A0
