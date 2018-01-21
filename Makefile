@@ -114,7 +114,7 @@ tidy:
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
-	$(CPP) -P $(CPPFLAGS) $< > $@
+	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
