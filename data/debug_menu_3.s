@@ -1,3 +1,5 @@
+.if DEBUG
+
 	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
@@ -17,3 +19,5 @@ _845E422::
 	.incbin "baserom_de_debug.gba", 0x45E422, 33
 _845E443::
 	.incbin "baserom_de_debug.gba", 0x45E443, 889
+
+.endif

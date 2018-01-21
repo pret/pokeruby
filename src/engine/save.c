@@ -783,7 +783,7 @@ u8 Save_WriteDataInternal(u8 saveType)
     return 0;
 }
 
-#ifdef DEBUG
+#if DEBUG
 extern u32 gUnknown_Debug_03004BD0;
 #endif
 
@@ -794,7 +794,7 @@ u8 Save_WriteData(u8 saveType) // TrySave
 
     Save_WriteDataInternal(saveType);
     if (!gDamagedSaveSectors
-#ifdef DEBUG
+#if DEBUG
         && gUnknown_Debug_03004BD0 == 0
 #endif
         )

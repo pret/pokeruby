@@ -327,9 +327,11 @@ static void sub_80F8F58(void);
 static void sub_80F8F78(void);
 static void sub_80F8FB4(void);
 
+#if DEBUG
 // some debug variable, I guess.
 // TODO: where exactly is this located?
 __attribute__((section(".bss"))) /*static*/ u8 gUnknown_0300074C = 0;
+#endif
 
 #if DEBUG
 __attribute__((naked))

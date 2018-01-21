@@ -1404,7 +1404,7 @@ static void CB2_PrintErrorMessage(void)
     {
     case 0:
         Menu_PrintTextPixelCoords(gMultiText_LinkError, 20, 56, 1);
-#ifdef DEBUG
+#if DEBUG
         StringCopy(array, sColorCodes);
 
         ConvertIntToHexStringN(array2, sErrorLinkStatus, STR_CONV_MODE_LEADING_ZEROS, 8);

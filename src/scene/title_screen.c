@@ -354,7 +354,9 @@ static void Task_TitleScreenPhase1(u8);
 static void Task_TitleScreenPhase2(u8);
 static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
+#if DEBUG
 static void CB2_GoToTestMenu(void);
+#endif
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToCopyrightScreen(void);

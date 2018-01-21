@@ -1,5 +1,8 @@
     .section .rodata
 
+	.align 2
+
+@ Is this actually sJapaneseEggNickname?
 Str_842E238: @ 0x842E238
 	.string "タマゴ$"
 

@@ -1009,7 +1009,7 @@ _0809625C: .4byte gPokemonStorage + 0x8344
 _08096260: .4byte gPCText_BOX
 	thumb_func_end ResetPokemonStorageSystem
 
-.ifdef DEBUG
+.if DEBUG
 	thumb_func_start debug_sub_80A3904
 debug_sub_80A3904:
 .syntax divided
@@ -2386,7 +2386,7 @@ _08096AF4: .4byte gMain
 _08096AF8: .4byte 0x0000043c
 	thumb_func_end sub_80969A0
 
-.ifdef DEBUG
+.if DEBUG
 
 	thumb_func_start debug_sub_80A4300
 debug_sub_80A4300:
@@ -15134,7 +15134,7 @@ sub_809CA8C: @ 809CA8C
 	bx r0
 	thumb_func_end sub_809CA8C
 
-.ifdef DEBUG
+.if DEBUG
 	thumb_func_start debug_sub_80AA40C
 debug_sub_80AA40C:
 .syntax divided

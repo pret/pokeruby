@@ -1,3 +1,5 @@
+.if DEBUG
+
 	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
@@ -14,3 +16,5 @@ Str_843DA98::
 
 Str_843DAA3::
 	.string "completed。$"
+
+.endif

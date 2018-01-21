@@ -1,3 +1,5 @@
+#if DEBUG
+
 __attribute__((naked))
 void debug_sub_8076AC8()
 {
@@ -6128,3 +6130,4 @@ void DebugMenu_OpenKiwa()
     );
 }
 
+#endif
