@@ -47,8 +47,6 @@ struct UnkTvStruct
     s8 var0;
 };
 
-extern u8 gUnknown_0300430A[11];
-
 struct OutbreakPokemon
 {
     /*0x00*/ u16 species;

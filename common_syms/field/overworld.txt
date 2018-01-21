@@ -1,4 +1,0 @@
-word_3004858
-gFieldCallback
-gUnknown_03004860
-gFieldLinkPlayerCount
