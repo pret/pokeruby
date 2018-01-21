@@ -42,7 +42,7 @@ void InitNoharaDebugMenu()
         "	.align	2, 0\n"
         "._1:\n"
         "	.word	gUnknown_Debug_083C4938\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808F414+1\n"
         "\n"
     );
@@ -76,7 +76,7 @@ void debug_sub_808F414()
         "._7:\n"
         "	.align	2, 0\n"
         "._6:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C4938\n"
         "._4:\n"
         "	bl	CloseMenu\n"
@@ -129,7 +129,7 @@ void NoharaDebugMenu_TV()
         "._8:\n"
         "	.word	gDebug_03000724+0x2\n"
         "	.word	gUnknown_Debug_083C4B8C\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808F4AC+1\n"
         "\n"
     );
@@ -163,7 +163,7 @@ void debug_sub_808F4AC()
         "._14:\n"
         "	.align	2, 0\n"
         "._13:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C4B8C\n"
         "._11:\n"
         "	bl	CloseMenu\n"
@@ -196,7 +196,7 @@ void debug_sub_808F4EC()
         "	.align	2, 0\n"
         "._15:\n"
         "	.word	gUnknown_Debug_083C4980\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808F648+1\n"
         "\n"
     );
@@ -379,7 +379,7 @@ void debug_sub_808F5D8()
         "	.word	gStringVar1\n"
         "	.word	gUnknown_Debug_083C4BD4\n"
         "	.word	gSpecialVar_0x8004\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8090278+1\n"
         "\n"
     );
@@ -779,7 +779,7 @@ void debug_sub_808F8CC()
         "	.word	gUnknown_Debug_083C49CA\n"
         "	.word	gUnknown_Debug_083C4ABD+0xf\n"
         "	.word	gStringVar1\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808F93C+1\n"
         "\n"
     );
@@ -1517,7 +1517,7 @@ void debug_sub_808FECC()
         "	.word	gUnknown_Debug_083C49CA\n"
         "	.word	gUnknown_Debug_083C4B20+0x4\n"
         "	.word	gStringVar1\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808FF3C+1\n"
         "\n"
     );
@@ -1847,7 +1847,7 @@ void NoharaDebugMenu_Fan()
         "	.align	2, 0\n"
         "._204:\n"
         "	.word	gUnknown_Debug_083C4D28\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_80901A4+1\n"
         "\n"
     );
@@ -1881,7 +1881,7 @@ void debug_sub_80901A4()
         "._210:\n"
         "	.align	2, 0\n"
         "._209:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C4D28\n"
         "._207:\n"
         "	bl	CloseMenu\n"
@@ -1938,7 +1938,7 @@ void debug_sub_80901F8()
         "._211:\n"
         "	.word	gUnknown_Debug_083C4CA8\n"
         "	.word	gUnknown_083F8408\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8090278+1\n"
         "\n"
     );
@@ -1974,7 +1974,7 @@ void debug_sub_8090238()
         "._213:\n"
         "	.word	gUnknown_Debug_083C4CA8\n"
         "	.word	gUnknown_083F8410\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8090278+1\n"
         "\n"
     );
@@ -2040,7 +2040,7 @@ void debug_sub_809029C()
         "	.word	gStringVar1\n"
         "	.word	gSaveBlock1\n"
         "	.word	0x13c2\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8090278+1\n"
         "\n"
     );

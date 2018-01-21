@@ -1213,9 +1213,6 @@ bool8 sub_809DA84(void)
 #else
 bool8 sub_809DA84(void)
 {
-    const u16 *src;
-    void *dest;
-
     switch (gMain.state)
     {
     case 0:
@@ -1232,8 +1229,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 3:
-        dest = (void *)VRAM;
-        DmaClearLarge(3, dest, 0x10000, 0x1000, 32);
+        DmaClearLarge(3, (void *)(VRAM + 0x0), 0x10000, 0x1000, 32);
         gMain.state++;
         break;
     case 4:
@@ -1259,14 +1255,8 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 9:
-        src = gSummaryScreenTextTiles;
-        dest = (void *)VRAM + 0xD000;
-        DmaCopy16(3, src, dest, 320);
-
-        src = sSummaryScreenButtonTiles;
-        dest = (void *)VRAM + 0xD140;
-        DmaCopy16(3, src, dest, 256);
-
+        DmaCopy16Defvars(3, gSummaryScreenTextTiles, (void *)(VRAM + 0xD000), 320);
+        DmaCopy16Defvars(3, sSummaryScreenButtonTiles, (void *)(VRAM + 0xD140), 256);
         pssData.loadGfxState = 0;
         gMain.state++;
         break;
@@ -4147,16 +4137,14 @@ static void DrawSummaryScreenNavigationDots(void)
         }
     }
 
-    dest = (void *)(VRAM + 0xE016);
-    DmaCopy16(3, arr, dest, 16);
+    DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE016), 16);
 
     for (i = 0; i < 8; i++)
     {
         arr[i] += 0x10;
     }
 
-    dest = (void *)(VRAM + 0xE056);
-    DmaCopy16(3, arr, dest, 16);
+    DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 #else
 __attribute__((naked))

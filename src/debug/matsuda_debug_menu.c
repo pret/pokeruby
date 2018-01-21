@@ -37,8 +37,8 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
-extern struct Window gUnknown_03004210;
-extern u8 (*gCallback_03004AE8)(void);
+
+extern u8 (*gMenuCallback)(void);
 
 extern bool8 gReceivedRemoteLinkPlayers;
 
@@ -251,7 +251,7 @@ u8 unref_sub_80A9B28(void)
     Menu_DrawStdWindowFrame(0, 0, 17, 18);
     Menu_PrintItems(1, 1, 7, gMatsudaDebugMenuActions);
     InitMenu(0, 1, 1, 7, 0, 16);
-    gCallback_03004AE8 = sub_80A9B78;
+    gMenuCallback = sub_80A9B78;
     return 0;
 }
 
@@ -264,7 +264,7 @@ static bool8 sub_80A9B78(void)
     case -2:
         return FALSE;
     default:
-        gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
+        gMenuCallback = gMatsudaDebugMenuActions[choice].func;
         return FALSE;
     case -1:
         CloseMenu();
@@ -469,26 +469,10 @@ static void sub_80A9F50(void)
 
 static void sub_80A9FE4(void)
 {
-    u8 *addr;
-    u32 i;
     u8 ptr[5];
 
     memcpy(ptr, gMatsudaDebugMenu_UnknownByteArray, 5);
-
-    addr = (void *)VRAM;
-    i = VRAM_SIZE;
-
-    while (1)
-    {
-        DmaFill32(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        i -= 0x1000;
-        if (i <= 0x1000)
-        {
-            DmaFill32(3, 0, addr, i);
-            break;
-        }
-    }
+    DmaFill32Large(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     sub_80034D4((void *)VRAM, ptr);
     LoadFontDefaultPalette(&gWindowTemplate_81E6C3C);
 }
@@ -1031,64 +1015,4 @@ u8 MatsudaDebugMenu_SetArtMuseumItems(void)
         Contest_SaveWinner(0xFF);
     CloseMenu();
     return 1;
-}
-
-void unref_sub_80AB084(u8 *text)
-{
-    u16 savedIme;
-    u8 *addr;
-    size_t size;
-
-    REG_BG0HOFS = 0;
-    REG_BG0VOFS = 0;
-    REG_BG1HOFS = 0;
-    REG_BG1VOFS = 0;
-    REG_BG2HOFS = 0;
-    REG_BG2VOFS = 0;
-    REG_BG3HOFS = 0;
-    REG_BG3VOFS = 0;
-    REG_WIN0H = 0;
-    REG_WIN0V = 0;
-    REG_WIN1H = 0;
-    REG_WIN1V = 0;
-    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
-
-    savedIme = REG_IME;
-    REG_IME = 0;
-    REG_IE |= INTR_FLAG_VBLANK;
-    REG_IME = savedIme;
-    REG_DISPSTAT = 8;
-    ResetTasks();
-    ResetSpriteData();
-    SetMainCallback2(sub_80AB184);
-
-    addr = (void *)VRAM;
-    size = 0x18000;
-    while (1)
-    {
-        DmaFill32(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill32(3, 0, addr, size);
-            break;
-        }
-    }
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
-    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
-    LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
-    Text_InitWindowAndPrintText(&gUnknown_03004210, text, 1, 9, 7);
-}
-
-void sub_80AB184(void)
-{
-    REG_BG0HOFS = 0;
-    REG_BG0VOFS = 0;
-    REG_BG1HOFS = 0;
-    REG_BG1VOFS = 0;
-    REG_BG2HOFS = 0;
-    REG_BG2VOFS = 0;
-    REG_BG3HOFS = 0;
-    REG_BG3VOFS = 0;
 }

@@ -1455,9 +1455,7 @@ static void sub_8048AB4(void)
 static void sub_8048B0C(u8 a0)
 {
     int i;
-    u16 *dest;
-    const u16 *src;
-    u32 size;
+
     switch (a0)
     {
         case 0:
@@ -1466,30 +1464,13 @@ static void sub_8048B0C(u8 a0)
                 gPlttBufferUnfaded[i] = *(gUnknown_08EA02C8 + i);
                 gPlttBufferFaded[i] = *(gUnknown_08EA02C8 + i);
             }
-            src = gUnknown_08EA0348;
-            dest = (u16 *)BG_VRAM;
-            size = 0x1280;
-            while (1)
-            {
-                DmaCopy16(3, src, dest, BLOCKSIZE * sizeof(u16));
-                src += BLOCKSIZE;
-                dest += BLOCKSIZE;
-                size -= BLOCKSIZE * sizeof(u16);
-                if (size <= BLOCKSIZE * sizeof(u16))
-                {
-                    DmaCopy16(3, src, dest, size);
-                    break;
-                }
-            }
+            DmaCopyLarge16(3, gUnknown_08EA0348, (void *)BG_VRAM, 0x1280, 0x1000);
             for (i = 0; i < 0x400; i ++)
                 gUnknown_03004824->unk_00c8.unk_12[i] = gUnknown_08EA15C8[i];
-            dest = BG_SCREEN_ADDR(6);
-            DmaCopy16(3, gTradeStripesBG2Tilemap, dest, 0x800);
+            DmaCopy16Defvars(3, gTradeStripesBG2Tilemap, BG_SCREEN_ADDR(6), 0x800);
             break;
         case 1:
-            src = gTradeStripesBG3Tilemap;
-            dest = BG_SCREEN_ADDR(7);
-            DmaCopy16(3, src, dest, 0x800);
+            DmaCopy16Defvars(3, gTradeStripesBG3Tilemap, BG_SCREEN_ADDR(7), 0x800);
             sub_804A6DC(0);
             sub_804A6DC(1);
             sub_804A938(&gUnknown_03004824->unk_00c8);
@@ -5703,13 +5684,9 @@ static void sub_804E1DC(void)
 
 void sub_804E22C(void)
 {
-    const u16 *src;
-    u16 *dest;
     LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
     CpuCopy16(gUnknown_08D00524, gSharedMem, 0x1000);
-    src = (const u16 *)gSharedMem;
-    dest = BG_SCREEN_ADDR(5);
-    DmaCopy16(3, src, dest, 0x500)
+    DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
     LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
     REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
 }

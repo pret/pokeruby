@@ -4285,7 +4285,7 @@ void FishingWildEncounter(u8 rod)
           gWildMonHeaders[GetCurrentMapWildMonHeader()].fishingMonsInfo,
           rod);
     }
-    IncrementGameStat(12);
+    IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
     sub_80BEA50(species);
     BattleSetup_StartWildBattle();
 }

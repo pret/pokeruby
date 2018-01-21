@@ -626,7 +626,7 @@ bool8 IsPaletteNotActive(void)
 
 bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 {
-    fade_screen(ScriptReadByte(ctx), 0);
+    FadeScreen(ScriptReadByte(ctx), 0);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
@@ -636,7 +636,7 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
     u8 duration = ScriptReadByte(ctx);
     u8 delay = ScriptReadByte(ctx);
 
-    fade_screen(duration, delay);
+    FadeScreen(duration, delay);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
@@ -1755,7 +1755,7 @@ bool8 ScrCmd_pokemart(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreatePokemartMenu(ptr);
+    Shop_CreatePokemartMenu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1764,7 +1764,7 @@ bool8 ScrCmd_pokemartdecoration(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop1Menu(ptr);
+    Shop_CreateDecorationShop1Menu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1773,7 +1773,7 @@ bool8 ScrCmd_pokemartdecoration2(struct ScriptContext *ctx)
 {
     void *ptr = (void *)ScriptReadWord(ctx);
 
-    CreateDecorationShop2Menu(ptr);
+    Shop_CreateDecorationShop2Menu(ptr);
     ScriptContext1_Stop();
     return TRUE;
 }

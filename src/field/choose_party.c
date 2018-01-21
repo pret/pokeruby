@@ -1031,7 +1031,7 @@ void sub_81231AC(void)
 
 static void sub_81231C4(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         DestroyTask(taskId);
         ScriptContext2_Disable();

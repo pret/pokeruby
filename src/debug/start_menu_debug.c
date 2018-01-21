@@ -900,7 +900,7 @@ void DebugMenu_8077020()
         "._110:\n"
         "	.align	2, 0\n"
         "._109:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "\n"
     );
 }
@@ -922,7 +922,7 @@ void DebugMenu_8077048()
         "._112:\n"
         "	.align	2, 0\n"
         "._111:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_807706C+1\n"
         "	.word	DebugMenu_8077020+1\n"
         "\n"
@@ -950,7 +950,7 @@ void DebugMenu_807706C()
         "	.align	2, 0\n"
         "._113:\n"
         "	.word	gWindowTemplate_81E6CE4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_807709C+1\n"
         "\n"
     );
@@ -1639,7 +1639,7 @@ void DebugMenu_SetRamBerry()
         "	.align	2, 0\n"
         "._172:\n"
         "	.word	gUnknown_Debug_0839BBC1+0x263\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_807750C+1\n"
         "\n"
     );
@@ -2154,7 +2154,7 @@ void DebugMenu_SwitchBG()
         "._204:\n"
         "	.align	2, 0\n"
         "._203:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077760+1\n"
         "\n"
     );
@@ -2264,7 +2264,7 @@ void DebugMenu_ControlEncounter()
         "	.align	2, 0\n"
         "._213:\n"
         "	.word	sWildEncountersDisabled\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_80778A8+1\n"
         "\n"
     );
@@ -2282,7 +2282,7 @@ void DebugMenu_UseHM()
         "._216:\n"
         "	.align	2, 0\n"
         "._215:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077C14+1\n"
         "\n"
     );
@@ -2418,7 +2418,7 @@ void DebugMenu_8077974()
         "	.word	gStringVar2\n"
         "	.word	gUnknown_Debug_0839BBC1+0x2cf\n"
         "	.word	gUnknown_Debug_0839BBC1+0x2aa\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077DB4+1\n"
         "\n"
     );
@@ -2509,7 +2509,7 @@ void DebugMenu_RematchTrainers()
         "	.align	2, 0\n"
         "._240:\n"
         "	.word	gUnknown_Debug_0839BBC1+0x323\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077A60+1\n"
         "\n"
     );
@@ -2627,7 +2627,7 @@ void DebugMenu_8077B00()
         "	.align	2, 0\n"
         "._254:\n"
         "	.word	gUnknown_Debug_0839BBC1+0x35e\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077DB4+1\n"
         "\n"
     );
@@ -2686,7 +2686,7 @@ void DebugMenu_Safari()
         "	.word	gStringVar1\n"
         "	.word	gSafariZoneStepCounter\n"
         "	.word	gUnknown_Debug_0839BBC1+0x34b\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077B3C+1\n"
         "._258:\n"
         "	bl	CloseMenu\n"
@@ -2818,7 +2818,7 @@ void DebugMenu_8077C14()
         "	.align	2, 0\n"
         "._264:\n"
         "	.word	gUnknown_Debug_0839BBC1+0x3d3\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077C00+1\n"
         "\n"
     );
@@ -3031,7 +3031,7 @@ void DebugMenu_8077D78()
         "._279:\n"
         "	.align	2, 0\n"
         "._278:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "._276:\n"
         "	bl	CloseMenu\n"
         "	mov	r0, #0x1\n"
@@ -4038,7 +4038,7 @@ void DebugMenu_ToggleClearFlag()
         "	.align	2, 0\n"
         "._390:\n"
         "	.word	0x804\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_80783C8+1\n"
         "\n"
     );
@@ -4120,7 +4120,7 @@ void DebugMenu_OpenWeatherEvents()
         "	.align	2, 0\n"
         "._404:\n"
         "	.word	0x82a\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078464+1\n"
         "\n"
     );
@@ -4188,7 +4188,7 @@ void DebugMenu_OpenMysteryEvent()
         "._417:\n"
         "	.align	2, 0\n"
         "._416:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_80784E8+1\n"
         "\n"
     );
@@ -4604,7 +4604,7 @@ void DebugMenu_OpenLegendsRecord()
         "	.align	2, 0\n"
         "._464:\n"
         "	.word	gDebug0x839C008+0x3f4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_80787B0+1\n"
         "\n"
     );
@@ -4804,7 +4804,7 @@ void DebugMenu_OpenBerryInfo()
         "._488:\n"
         "	.align	2, 0\n"
         "._487:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077DB4+1\n"
         "\n"
     );
@@ -5329,7 +5329,7 @@ void DebugMenu_8078C80()
         "	.align	2, 0\n"
         "._548:\n"
         "	.word	gDebug0x839C574+0x30\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078CA8+1\n"
         "\n"
     );
@@ -5355,7 +5355,7 @@ void DebugMenu_8078CA8()
         "	.align	2, 0\n"
         "._552:\n"
         "	.word	gMain\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078CE4+1\n"
         "._550:\n"
         "	mov	r0, #0x2\n"
@@ -5412,7 +5412,7 @@ void DebugMenu_8078CE4()
         "._560:\n"
         "	.word	gStringVar4\n"
         "	.word	gDebug0x839C574+0x6b\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078D7C+1\n"
         "\n"
     );
@@ -5454,7 +5454,7 @@ void DebugMenu_8078D30()
         "	.word	+0x2000000\n"
         "	.word	gStringVar4\n"
         "	.word	gDebug0x839C574+0x62\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078D7C+1\n"
         "\n"
     );
@@ -5480,7 +5480,7 @@ void DebugMenu_8078D7C()
         "	.align	2, 0\n"
         "._565:\n"
         "	.word	gStringVar4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078DA4+1\n"
         "\n"
     );
@@ -5533,7 +5533,7 @@ void DebugMenu_MeTooBackupMan()
         "	.align	2, 0\n"
         "._571:\n"
         "	.word	gDebug0x839C574+0x20\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078DF0+1\n"
         "\n"
     );

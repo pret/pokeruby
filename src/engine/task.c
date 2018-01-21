@@ -52,7 +52,7 @@ u8 CreateTask(TaskFunc func, u8 priority)
     }
 
 #if DEBUG
-    unref_sub_80AB084(gError_NoTasksLeft);
+    Crash(gError_NoTasksLeft);
 #endif
 
     return 0;

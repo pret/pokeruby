@@ -624,7 +624,7 @@ void sub_8115384(void)
 	mov	r0, #0x0\n\
 	bl	SetVBlankCallback\n\
 	bl	ScanlineEffect_Stop\n\
-	bl	sub_80F9438\n\
+	bl	ClearVideoCallbacks\n\
 	bl	sub_80F9368\n\
 	ldr	r1, ._47\n\
 	ldr	r3, ._47 + 4\n\
@@ -703,7 +703,7 @@ void sub_8115384(void)
 	.word	0x43c\n\
 ._41:\n\
 	bl	sub_8115238\n\
-	bl	sub_80F9020\n\
+	bl	ClearBGTilemapBuffers\n\
 	ldr	r0, ._56\n\
 	ldr	r1, ._56 + 4\n\
 	bl	gMysteryEventScriptCmdTableEnd+0x3cbc\n\
@@ -887,7 +887,7 @@ void sub_8115384(void)
     case 0x0:
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80F9368();
         REG_BG2CNT   = 0x4686;
         REG_BG1CNT   = 0x4401;
@@ -911,7 +911,7 @@ void sub_8115384(void)
         break;
     case 0x3:
         sub_8115238();
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         LZ77UnCompWram(&gUnknown_083F88BC, (void *)(ewram18800));
         LZ77UnCompVram(&gUnknown_083F8A60, (void *)(VRAM + 0x3000));
         gMain.state++;
@@ -2044,7 +2044,7 @@ void sub_8116B40(u8 taskid) // end roulette ?
 	bl	FreeAllSpritePalettes\n\
 	bl	ResetPaletteFade\n\
 	bl	ResetSpriteData\n\
-	bl	sub_80F9020\n\
+	bl	ClearBGTilemapBuffers\n\
 	ldr	r0, ._381 + 12\n\
 	strh	r5, [r0]\n\
 	add	r0, r0, #0x2\n\
@@ -2088,7 +2088,7 @@ void sub_8116B40(u8 taskid) // end roulette ?
         FreeAllSpritePalettes();
         ResetPaletteFade();
         ResetSpriteData();
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         REG_BLDCNT = 0x0;
         REG_BLDALPHA = 0x0;
         REG_BLDY = 0x0;

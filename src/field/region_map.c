@@ -1608,8 +1608,8 @@ static void PrintFlyTargetName(void)
 {
     if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
     {
-        u16 i = 0;
-        int zero;
+        u16 i;
+        bool32 drawFrameDisabled = FALSE;
 
         for (i = 0; i < ARRAY_COUNT(gUnknown_083E79C0); i++)
         {
@@ -1627,9 +1627,8 @@ static void PrintFlyTargetName(void)
                 break;
             }
         }
-        // This check is always true, but somehow the compiler still performed it.
-        asm("mov %0, #0\n":"=r"(zero));  // zero = 0
-        if (zero == 0)
+
+        if (!drawFrameDisabled)
         {
             Menu_DrawStdWindowFrame(16, 16, 29, 19);
             Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 17);

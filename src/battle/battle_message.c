@@ -25,6 +25,8 @@
 #include "../data/battle_strings_en.h"
 #endif
 
+// This is four lists of moves which use a different attack string in Japanese
+// to the default. See the documentation for sub_8121D74 for more detail.
 const u16 gUnknown_084016BC[] =
 {
     MOVE_SWORDS_DANCE,
@@ -69,7 +71,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_MUDDY_WATER,
     MOVE_IRON_DEFENSE,
     MOVE_BOUNCE,
-    MOVE_NONE,
+    0,
     MOVE_TELEPORT,
     MOVE_RECOVER,
     MOVE_BIDE,
@@ -77,7 +79,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_FLAIL,
     MOVE_TAUNT,
     MOVE_BULK_UP,
-    MOVE_NONE,
+    0,
     MOVE_MEDITATE,
     MOVE_AGILITY,
     MOVE_MIMIC,
@@ -96,7 +98,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_FAKE_TEARS,
     MOVE_WATER_SPORT,
     MOVE_CALM_MIND,
-    MOVE_NONE,
+    0,
     MOVE_POUND,
     MOVE_SCRATCH,
     MOVE_VICE_GRIP,
@@ -144,7 +146,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_ENDEAVOR,
     MOVE_TICKLE,
     MOVE_COVET,
-    MOVE_NONE,
+    0,
 };
 
 const u8 gUnknown_084017A8[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // empty flags
@@ -971,6 +973,10 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
     }
 }
 
+// Loads one of two text strings into the provided buffer. This is functionally
+// unused, since the value loaded into the buffer is not read; it loaded one of
+// two particles (either "は" or "の") which works in tandem with sub_8121D74
+// below to effect changes in the meaning of the line.
 void sub_8121D1C(u8* textBuff)
 {
     s32 counter = 0;
@@ -993,6 +999,24 @@ void sub_8121D1C(u8* textBuff)
     }
 }
 
+// Appends "!" to the text buffer `dst`. In the original Japanese this looked
+// into the table of moves at gUnknown_084016BC and varied the line accordingly.
+// 
+// BattleText_Exclamation was a plain "!", used for any attack not on the list.
+// It resulted in the translation "<NAME>'s <ATTACK>!".
+// 
+// BattleText_Exclamation2 was "を つかった！". This resulted in the translation
+// "<NAME> used <ATTACK>!", which was used for all attacks in English.
+// 
+// BattleText_Exclamation3 was "した！". This was used for those moves whose
+// names were verbs, such as Recover, and resulted in translations like "<NAME>
+// recovered itself!".
+// 
+// BattleText_Exclamation4 was "を した！" This resulted in a translation of
+// "<NAME> did an <ATTACK>!".
+// 
+// BattleText_Exclamation5 was " こうげき！" This resulted in a translation of
+// "<NAME>'s <ATTACK> attack!".
 void sub_8121D74(u8* dst)
 {
     s32 counter = 0;

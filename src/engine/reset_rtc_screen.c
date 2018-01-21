@@ -421,28 +421,10 @@ void Task_ResetRtc_0(u8 taskId)
 
 void CB2_InitResetRtcScreen(void)
 {
-    u8 *addr;
-    u32 size;
-
     REG_DISPCNT = 0;
     SetVBlankCallback(NULL);
-
     DmaClear16(3, PLTT, PLTT_SIZE);
-
-    addr = (u8 *)VRAM;
-    size = 0x18000;
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, (u8 *)VRAM, 0x18000, 0x1000);
     ResetOamRange(0, 128);
     LoadOam();
     ScanlineEffect_Stop();

@@ -65,7 +65,7 @@ void InitKagayaDebugMenu_B()
         "	.align	2, 0\n"
         "._1:\n"
         "	.word	_83EBB64\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_80B061C+1\n"
         "\n"
     );
@@ -102,7 +102,7 @@ void debug_sub_80B061C()
         "._8:\n"
         "	.align	2, 0\n"
         "._7:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	_83EBB64\n"
         "._5:\n"
         "	bl	CloseMenu\n"
@@ -137,7 +137,7 @@ u8 KagayaDebugMenu_TrainerCard()
         "._10:\n"
         "	.align	2, 0\n"
         "._9:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_80B068C+1\n"
         "\n"
     );
@@ -194,7 +194,7 @@ u8 KagayaDebugMenu_CardToExchange()
         "._16:\n"
         "	.align	2, 0\n"
         "._15:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_80B06E0+1\n"
         "\n"
     );
@@ -251,7 +251,7 @@ u8 KagayaDebugMenu_SlotMachine()
         "._22:\n"
         "	.align	2, 0\n"
         "._21:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	Kagaya_80B0734+1\n"
         "\n"
     );
@@ -354,7 +354,7 @@ void debug_sub_80B07B0()
         "._33:\n"
         "	.align	2, 0\n"
         "._32:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_80B07DC+1\n"
         "\n"
     );

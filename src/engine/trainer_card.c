@@ -506,27 +506,12 @@ static void sub_8093550(void)
 
 void sub_8093598(void)
 {
-    u8 *addr = (void *)VRAM;
-    u32 size = 0x10000;
-
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
+    DmaFill16Large(3, 0, (void *)VRAM, 0x10000, 0x1000);
 }
 
 void sub_80935EC(void)
 {
-    void *addr = (void *)OAM;
-
-    DmaFill16(3, 0, addr, 0x400);
+    DmaFill16Defvars(3, 0, (void *)OAM, 0x400);
 }
 
 void sub_8093610(void)
@@ -1252,33 +1237,10 @@ static void TrainerCard_ResetOffsetRegisters(void)
 
 static void TrainerCard_CopyGraphics(void)
 {
-    const u8 *src;
-    u8 *dst;
-    u32 size;
-
     TrainerCard_LoadPalettes();
     LoadPalette(gUnknown_083B5F6C, 0xE0, 32);
-    src = gMenuTrainerCard_Gfx;
-    dst = (void *)VRAM;
-    size = 0x1480;
-    while (1)
-    {
-        DmaCopy16(3, src, dst, 0x1000);
-        src += 0x1000;
-        dst += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaCopy16(3, src, dst, size);
-            break;
-        }
-    }
-    {
-        const void *src = gBadgesTiles;
-        void *dst = (void *)(VRAM + 0x1480);
-
-        DmaCopy16(3, src, dst, 0x400);
-    }
+    DmaCopyLarge16(3, gMenuTrainerCard_Gfx, (void *)VRAM, 0x1480, 0x1000);
+    DmaCopy16Defvars(3, gBadgesTiles, (void *)(VRAM + 0x1480), 0x400);
 }
 
 extern const u16 *const gTrainerCardPalettes[];

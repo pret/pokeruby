@@ -12,7 +12,7 @@
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
-extern u8 (*gCallback_03004AE8)(void);
+extern u8 (*gMenuCallback)(void);
 
 u8 gUnknown_03004DA0[0x20];
 
@@ -98,7 +98,7 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 14, 30, 19);
     Menu_PrintText(localPtr, 1, 15);
-    gCallback_03004AE8 = sub_8083D4C;
+    gMenuCallback = sub_8083D4C;
     return 0;
 }
 
@@ -184,7 +184,7 @@ bool8 MoriDebugMenuProcessInput(void)
     switch (choice)
     {
     default:
-        gCallback_03004AE8 = gMoriDebugMenuActions[choice].func;
+        gMenuCallback = gMoriDebugMenuActions[choice].func;
         return FALSE;
     case -2:
         return FALSE;
@@ -200,6 +200,6 @@ s8 InitMoriDebugMenu(void)
     Menu_DrawStdWindowFrame(0, 0, 10, 19);
     Menu_PrintItems(1, 1, 9, gMoriDebugMenuActions);
     InitMenu(0, 1, 1, 9, 0, 9);
-    gCallback_03004AE8 = MoriDebugMenuProcessInput;
+    gMenuCallback = MoriDebugMenuProcessInput;
     return 0;
 }

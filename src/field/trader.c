@@ -217,8 +217,8 @@ void sub_8109D04(u8 taskId)
 {
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 29, 19);
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     sub_80F9520(gUnknown_020388F7, 8);
     BuyMenuFreeMemory();
     if (sub_80FEFA4() == TRUE)

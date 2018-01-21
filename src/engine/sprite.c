@@ -827,7 +827,7 @@ void ProcessSpriteCopyRequests(void)
 #if DEBUG
     else
     {
-        unref_sub_80AB084(sDmaOverErrorMsg);
+        Crash(sDmaOverErrorMsg);
     }
 #endif
 }
@@ -844,7 +844,7 @@ void RequestSpriteCopy(const void *src, u8 *dest, u16 size)
 #if DEBUG
     else
     {
-        unref_sub_80AB084(sDmaOverErrorMsg);
+        Crash(sDmaOverErrorMsg);
     }
 #endif
 }

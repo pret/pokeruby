@@ -34,12 +34,12 @@
 #include "task.h"
 #include "text.h"
 #include "scanline_effect.h"
+#include "menu_helpers.h"
 #include "ewram.h"
 
 // External stuff
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
-extern void sub_80F9020(void);
-extern void sub_80F9988();
+extern void SetVerticalScrollIndicatorPriority();
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void PauseVerticalScrollIndicator();
 extern u8 sub_80F9284(void);
@@ -47,10 +47,10 @@ extern void sub_808B5B4();
 extern u8 sub_80F92F4();
 extern void sub_80C9C7C(u8);
 extern void pal_fill_black(void);
-extern bool8 sub_807D770(void);
+extern bool8 IsWeatherNotFadingIn(void);
 extern u8 sub_80F931C();
 extern void sub_808A3F8(u8);
-extern void sub_80B3050(void);
+extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
 extern void sub_802E424(u8);
@@ -389,20 +389,8 @@ static void sub_80A3134(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-
-    {
-        const void *src = gBGTilemapBuffers[1];
-        void *dst = (void *)(VRAM + 0x2000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
-
-    {
-        const void *src = gBGTilemapBuffers[2];
-        void *dst = (void *)(VRAM + 0x6000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
+    DmaCopy16Defvars(3, gBGTilemapBuffers[1], (void *)(VRAM + 0x2000), 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x6000), 0x800);
 }
 
 #if DEBUG
@@ -450,7 +438,7 @@ static bool8 SetupBagMultistep(void)
 	.word	._23\n\
 	.word	._24\n\
 ._8:\n\
-	bl	sub_80F9438\n\
+	bl	ClearVideoCallbacks\n\
 	bl	sub_80A34E8\n\
 	b	._61\n\
 ._9:\n\
@@ -468,7 +456,7 @@ static bool8 SetupBagMultistep(void)
 	bl	gpu_pal_allocator_reset__manage_upper_four\n\
 	b	._61\n\
 ._11:\n\
-	bl	sub_80F9020\n\
+	bl	ClearBGTilemapBuffers\n\
 	ldr	r0, ._31\n\
 	ldr	r1, ._31 + 4\n\
 	add	r0, r0, r1\n\
@@ -545,7 +533,7 @@ static bool8 SetupBagMultistep(void)
 ._48:\n\
 	b	._61\n\
 ._18:\n\
-	bl	sub_80F944C\n\
+	bl	ClearVerticalScrollIndicatorPalettes\n\
 	bl	LoadScrollIndicatorPalette\n\
 	mov	r0, #0x0\n\
 	mov	r1, #0xac\n\
@@ -565,16 +553,16 @@ static bool8 SetupBagMultistep(void)
 	bl	CreateVerticalScrollIndicators\n\
 	mov	r0, #0x0\n\
 	mov	r1, #0x2\n\
-	bl	sub_80F9988\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
 	mov	r0, #0x1\n\
 	mov	r1, #0x2\n\
-	bl	sub_80F9988\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
 	mov	r0, #0x2\n\
 	mov	r1, #0x2\n\
-	bl	sub_80F9988\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
 	mov	r0, #0x3\n\
 	mov	r1, #0x2\n\
-	bl	sub_80F9988\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
 	ldr	r0, ._53\n\
 	ldrb	r0, [r0]\n\
 	sub	r0, r0, #0x4\n\
@@ -584,10 +572,10 @@ static bool8 SetupBagMultistep(void)
 	bhi	._51	@cond_branch\n\
 	mov	r0, #0x2\n\
 	mov	r1, #0x1\n\
-	bl	sub_80F979C\n\
+	bl	SetVerticalScrollIndicators\n\
 	mov	r0, #0x3\n\
 	mov	r1, #0x1\n\
-	bl	sub_80F979C\n\
+	bl	SetVerticalScrollIndicators\n\
 ._51:\n\
 	ldr	r1, ._53 + 4\n\
 	ldr	r0, ._53 + 8\n\
@@ -797,7 +785,7 @@ static bool8 SetupBagMultistep(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80A34E8();
         gMain.state++;
         break;
@@ -810,7 +798,7 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 3:
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         ewramBagSetupStep = 0;
         gMain.state++;
         break;
@@ -842,20 +830,20 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 10:
-        sub_80F944C();
+        ClearVerticalScrollIndicatorPalettes();
         LoadScrollIndicatorPalette();
-        CreateVerticalScrollIndicators(0, 172, 12);
-        CreateVerticalScrollIndicators(1, 172, 148);
-        CreateVerticalScrollIndicators(2, 28, 88);
-        CreateVerticalScrollIndicators(3, 100, 88);
-        sub_80F9988(0, 2);
-        sub_80F9988(1, 2);
-        sub_80F9988(2, 2);
-        sub_80F9988(3, 2);
+        CreateVerticalScrollIndicators(TOP_ARROW, 172, 12);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 172, 148);
+        CreateVerticalScrollIndicators(LEFT_ARROW, 28, 88);
+        CreateVerticalScrollIndicators(RIGHT_ARROW, 100, 88);
+        SetVerticalScrollIndicatorPriority(TOP_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(BOTTOM_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(LEFT_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(RIGHT_ARROW, 2);
         if (sReturnLocation == RETURN_TO_FIELD_4 || sReturnLocation == RETURN_TO_FIELD_5)
         {
-            sub_80F979C(2, 1);
-            sub_80F979C(3, 1);
+            SetVerticalScrollIndicators(LEFT_ARROW, INVISIBLE);
+            SetVerticalScrollIndicators(RIGHT_ARROW, INVISIBLE);
         }
         gMain.state++;
         break;
@@ -1136,10 +1124,10 @@ static void sub_80A3770(void)
 static void sub_80A37C0(u8 taskId)
 {
     gTasks[taskId].func = sub_80A50C8;
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
-    StartVerticalScrollIndicators(2);
-    StartVerticalScrollIndicators(3);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
+    StartVerticalScrollIndicators(LEFT_ARROW);
+    StartVerticalScrollIndicators(RIGHT_ARROW);
 }
 
 static void sub_80A37F8(u8 taskId)
@@ -1181,8 +1169,8 @@ static void sub_80A37F8(u8 taskId)
         sub_80A37C0(FindTaskIdByFunc(sub_80A4F68));
         DestroyTask(taskId);
         ItemListMenu_InitMenu();
-        sub_80F979C(2, 0);
-        sub_80F979C(3, 0);
+        SetVerticalScrollIndicators(LEFT_ARROW, VISIBLE);
+        SetVerticalScrollIndicators(RIGHT_ARROW, VISIBLE);
     }
 }
 
@@ -1984,14 +1972,14 @@ static void sub_80A47E8(u16 a, int b, int c, int d)
         break;
     }
     if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop != 0)
-        sub_80F979C(0, 0);
+        SetVerticalScrollIndicators(TOP_ARROW, VISIBLE);
     else
-        sub_80F979C(0, 1);
+        SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
     if ((sReturnLocation != RETURN_TO_FIELD_5 && gBagPocketScrollStates[sCurrentBagPocket].scrollTop + 8 < gBagPocketScrollStates[sCurrentBagPocket].numSlots + 1)
      || (sReturnLocation == RETURN_TO_FIELD_5 && gBagPocketScrollStates[sCurrentBagPocket].scrollTop + 8 < gBagPocketScrollStates[sCurrentBagPocket].numSlots))
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     else
-        sub_80F979C(1, 1);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
 }
 
 static void sub_80A48E8(u16 taskId, int b, int c)
@@ -2186,14 +2174,14 @@ static void sub_80A4DD8(u8 taskId, u8 b, u8 c, u8 d, u8 e, u8 digits)
 static void sub_80A4E8C(s8 delta, u8 b)
 {
     PlaySE(SE_SELECT);
-    sub_80F979C(0, 1);
-    sub_80F979C(1, 1);
-    sub_80F979C(2, 1);
-    sub_80F979C(3, 1);
-    PauseVerticalScrollIndicator(0);
-    PauseVerticalScrollIndicator(1);
-    PauseVerticalScrollIndicator(2);
-    PauseVerticalScrollIndicator(3);
+    SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(LEFT_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(RIGHT_ARROW, INVISIBLE);
+    PauseVerticalScrollIndicator(TOP_ARROW);
+    PauseVerticalScrollIndicator(BOTTOM_ARROW);
+    PauseVerticalScrollIndicator(LEFT_ARROW);
+    PauseVerticalScrollIndicator(RIGHT_ARROW);
     ChangePocket(gBGTilemapBuffers[2], delta);
     DrawPocketIndicatorDots(gBGTilemapBuffers[2], sCurrentBagPocket);
     sub_80A3770();
@@ -2345,10 +2333,10 @@ static void sub_80A50C8(u8 taskId)
                     gUnknown_02038560 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos;
                     gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gUnknown_02038560].itemId;
                     gUnknown_083C16BC[sReturnLocation].onItemSelect(taskId);
-                    sub_80F98A4(0);
-                    sub_80F98A4(1);
-                    sub_80F98A4(2);
-                    sub_80F98A4(3);
+                    StopVerticalScrollIndicators(TOP_ARROW);
+                    StopVerticalScrollIndicators(BOTTOM_ARROW);
+                    StopVerticalScrollIndicators(LEFT_ARROW);
+                    StopVerticalScrollIndicators(RIGHT_ARROW);
                     sub_80A797C();
                 }
                 else
@@ -2380,7 +2368,7 @@ static void sub_80A50C8(u8 taskId)
     }
 }
 
-bool8 sub_80A52C4(u8 taskId, u16 b)
+bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
 {
     s16 *taskData = gTasks[taskId].data;
 
@@ -2427,7 +2415,7 @@ static bool8 sub_80A5350(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (sub_80A52C4(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
+    if (SellMenu_QuantityRoller(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
     {
         // if (sCurrentBagPocket == BAG_POCKET_BERRIES)  Can't get it to match this way
         if (sCurrentBagPocket + 1 == BAG_POCKET_BERRIES + 1)
@@ -3190,7 +3178,7 @@ void ExecuteItemUseFromBlackPalette(void)
 
 static void Task_CallItemUseOnFieldCallback(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gFieldItemUseCallback(taskId);
 }
 
@@ -3442,7 +3430,7 @@ static void sub_80A62D8(void)
         gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
 }
 
-void sub_80A6300(void)
+void ItemMenu_LoadSellMenu(void)
 {
     sReturnLocation = RETURN_TO_SHOP;
     SetMainCallback2(sub_80A62D8);
@@ -3450,7 +3438,7 @@ void sub_80A6300(void)
 
 static void OnBagClose_Shop(u8 taskId)
 {
-    gFieldCallback = sub_80B3050;
+    gFieldCallback = Shop_FadeReturnToMartMenu;
     gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
     gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
     sub_80A5AE4(taskId);
@@ -4002,8 +3990,8 @@ static void sub_80A7230(u8 taskId)
         break;
     case 204:
         PlaySE(SE_SELECT);
-        sub_80F98A4(2);
-        sub_80F98A4(3);
+        StopVerticalScrollIndicators(LEFT_ARROW);
+        StopVerticalScrollIndicators(RIGHT_ARROW);
         gSpecialVar_ItemId = ITEM_POKE_BALL;
         sPopupMenuActionList = gUnknown_083C1708;
         gUnknown_02038564 = 2;

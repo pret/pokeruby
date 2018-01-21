@@ -151,7 +151,6 @@ extern const struct YesNoFuncTable gUnknown_083EC634[];
 extern const u8 gUnknown_083EC65A[];
 extern const u8 gUnknown_083EC97C[];
 extern const u8 gUnknown_083EC984[];
-extern void sub_80B3068(u8); // src/shop
 extern const struct YesNoFuncTable gUnknown_083EC95C;
 extern const struct YesNoFuncTable gUnknown_083EC964;
 extern const struct YesNoFuncTable gUnknown_083EC9CC;
@@ -161,7 +160,7 @@ extern const struct YesNoFuncTable gUnknown_083ECAA0;
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
-extern bool8 sub_807D770(void);
+extern bool8 IsWeatherNotFadingIn(void);
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
 void Task_SecretBasePC_Decoration(u8);

@@ -69,7 +69,7 @@ void debug_sub_808B874()
         "._1:\n"
         "	.word	gUnknown_Debug_083C0CBA\n"
         "	.word	gDebug_03000700+0x1d\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808B8C8+1\n"
         "\n"
     );
@@ -201,7 +201,7 @@ void TomomichiDebugMenu_ContestGraphics()
         "._11:\n"
         "	.word	gUnknown_Debug_083C0CF4\n"
         "	.word	gUnknown_Debug_083C0D2C\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BC48+1\n"
         "	.word	gDebug_03000700\n"
         "	.word	gDebug_03000700+0x4\n"
@@ -265,7 +265,7 @@ void TomomichiDebugMenu_ArtMusGraphics()
         "._13:\n"
         "	.word	gUnknown_Debug_083C0D4C\n"
         "	.word	gUnknown_Debug_083C0D83\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BCBC+1\n"
         "	.word	gDebug_03000700\n"
         "	.word	gDebug_03000700+0x4\n"
@@ -329,7 +329,7 @@ void TomomichiDebugMenu_PreviewData()
         "._15:\n"
         "	.word	gUnknown_Debug_083C0DA4\n"
         "	.word	gUnknown_Debug_083C0DD4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BD30+1\n"
         "	.word	gDebug_03000700\n"
         "	.word	gDebug_03000700+0x4\n"
@@ -384,7 +384,7 @@ void TomomichiDebugMenu_TrickHouse()
         "	.word	gUnknown_Debug_083C0DF4\n"
         "	.word	gUnknown_Debug_083C0E15\n"
         "	.word	gDebug_03000700+0x1e\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BDA4+1\n"
         "\n"
     );
@@ -429,7 +429,7 @@ void TomomichiDebugMenu_ControlEvents()
         "._19:\n"
         "	.word	gUnknown_Debug_083C0E32\n"
         "	.word	gDebug_03000700+0x1f\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BE2C+1\n"
         "\n"
     );
@@ -474,7 +474,7 @@ void TomomichiDebugMenu_ControlFlags()
         "._21:\n"
         "	.word	gUnknown_Debug_083C0E7F\n"
         "	.word	gDebug_03000700+0x20\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BEB4+1\n"
         "\n"
     );
@@ -519,7 +519,7 @@ void TomomichiDebugMenu_ControlWorks()
         "._23:\n"
         "	.word	gUnknown_Debug_083C0EF1\n"
         "	.word	gDebug_03000700+0x21\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808BF3C+1\n"
         "\n"
     );
@@ -587,7 +587,7 @@ void debug_sub_808BC48()
         "._38:\n"
         "	.align	2, 0\n"
         "._37:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C0D2C\n"
         "\n"
     );
@@ -655,7 +655,7 @@ void debug_sub_808BCBC()
         "._52:\n"
         "	.align	2, 0\n"
         "._51:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C0D83\n"
         "\n"
     );
@@ -723,7 +723,7 @@ void debug_sub_808BD30()
         "._66:\n"
         "	.align	2, 0\n"
         "._65:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C0DD4\n"
         "\n"
     );
@@ -1058,7 +1058,7 @@ void debug_sub_808BFC4()
         "	.align	2, 0\n"
         "._99:\n"
         "	.word	gUnknown_Debug_083C0F79\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C064+1\n"
         "\n"
     );
@@ -1101,7 +1101,7 @@ void debug_sub_808C014()
         "	.align	2, 0\n"
         "._101:\n"
         "	.word	gUnknown_Debug_083C0FFC\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C0A8+1\n"
         "\n"
     );
@@ -1138,7 +1138,7 @@ void debug_sub_808C064()
         "._108:\n"
         "	.align	2, 0\n"
         "._107:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C0F79\n"
         "._105:\n"
         "	bl	CloseMenu\n"
@@ -1181,7 +1181,7 @@ void debug_sub_808C0A8()
         "._114:\n"
         "	.align	2, 0\n"
         "._113:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C0FFC\n"
         "._111:\n"
         "	bl	CloseMenu\n"
@@ -1501,7 +1501,7 @@ void TomomichiDebugMenu_ContestGraphics_Show()
         "._146:\n"
         "	.align	2, 0\n"
         "._145:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C280+1\n"
         "\n"
     );
@@ -1564,7 +1564,7 @@ void TomomichiDebugMenu_MuseumGraphics_Show()
         "._152:\n"
         "	.align	2, 0\n"
         "._151:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C2E4+1\n"
         "\n"
     );
@@ -1641,7 +1641,7 @@ void debug_sub_808C31C()
         "	.align	2, 0\n"
         "._157:\n"
         "	.word	gUnknown_Debug_083C2828\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C36C+1\n"
         "\n"
     );
@@ -1678,7 +1678,7 @@ void debug_sub_808C36C()
         "._164:\n"
         "	.align	2, 0\n"
         "._163:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C2828\n"
         "._161:\n"
         "	bl	CloseMenu\n"
@@ -1731,7 +1731,7 @@ void debug_sub_808C3B0()
         "._165:\n"
         "	.word	gUnknown_Debug_083C2938\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -1778,7 +1778,7 @@ void debug_sub_808C408()
         "._167:\n"
         "	.word	gUnknown_Debug_083C2A48\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -1825,7 +1825,7 @@ void debug_sub_808C460()
         "._169:\n"
         "	.word	gUnknown_Debug_083C2B4C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -1872,7 +1872,7 @@ void debug_sub_808C4B8()
         "._171:\n"
         "	.word	gUnknown_Debug_083C2C80\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -1919,7 +1919,7 @@ void debug_sub_808C510()
         "._173:\n"
         "	.word	gUnknown_Debug_083C2D8C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -1966,7 +1966,7 @@ void debug_sub_808C568()
         "._175:\n"
         "	.word	gUnknown_Debug_083C2EB0\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -2013,7 +2013,7 @@ void debug_sub_808C5C0()
         "._177:\n"
         "	.word	gUnknown_Debug_083C2FE0\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -2060,7 +2060,7 @@ void debug_sub_808C618()
         "._179:\n"
         "	.word	gUnknown_Debug_083C3100\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -2107,7 +2107,7 @@ void debug_sub_808C670()
         "._181:\n"
         "	.word	gUnknown_Debug_083C3194\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C6C8+1\n"
         "\n"
     );
@@ -2301,7 +2301,7 @@ void debug_sub_808C7C8()
         "	.align	2, 0\n"
         "._197:\n"
         "	.word	gUnknown_Debug_083C1CE8\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808C818+1\n"
         "\n"
     );
@@ -2338,7 +2338,7 @@ void debug_sub_808C818()
         "._204:\n"
         "	.align	2, 0\n"
         "._203:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C1CE8\n"
         "._201:\n"
         "	bl	CloseMenu\n"
@@ -2391,7 +2391,7 @@ void debug_sub_808C85C()
         "._205:\n"
         "	.word	gUnknown_Debug_083C1E0C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2438,7 +2438,7 @@ void debug_sub_808C8B4()
         "._207:\n"
         "	.word	gUnknown_Debug_083C1F38\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2485,7 +2485,7 @@ void debug_sub_808C90C()
         "._209:\n"
         "	.word	gUnknown_Debug_083C206C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2532,7 +2532,7 @@ void debug_sub_808C964()
         "._211:\n"
         "	.word	gUnknown_Debug_083C2190\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2579,7 +2579,7 @@ void debug_sub_808C9BC()
         "._213:\n"
         "	.word	gUnknown_Debug_083C2264\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2626,7 +2626,7 @@ void debug_sub_808CA14()
         "._215:\n"
         "	.word	gUnknown_Debug_083C2370\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2673,7 +2673,7 @@ void debug_sub_808CA6C()
         "._217:\n"
         "	.word	gUnknown_Debug_083C248C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2720,7 +2720,7 @@ void debug_sub_808CAC4()
         "._219:\n"
         "	.word	gUnknown_Debug_083C259C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2767,7 +2767,7 @@ void debug_sub_808CB1C()
         "._221:\n"
         "	.word	gUnknown_Debug_083C26C8\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CB74+1\n"
         "\n"
     );
@@ -2961,7 +2961,7 @@ void debug_sub_808CC74()
         "	.align	2, 0\n"
         "._237:\n"
         "	.word	gUnknown_Debug_083C1ADC\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CCC4+1\n"
         "\n"
     );
@@ -2998,7 +2998,7 @@ void debug_sub_808CCC4()
         "._244:\n"
         "	.align	2, 0\n"
         "._243:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C1ADC\n"
         "._241:\n"
         "	bl	CloseMenu\n"
@@ -3051,7 +3051,7 @@ void debug_sub_808CD08()
         "._245:\n"
         "	.word	gUnknown_Debug_083C1B7C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CE10+1\n"
         "\n"
     );
@@ -3098,7 +3098,7 @@ void debug_sub_808CD60()
         "._247:\n"
         "	.word	gUnknown_Debug_083C1BF0\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CE10+1\n"
         "\n"
     );
@@ -3145,7 +3145,7 @@ void debug_sub_808CDB8()
         "._249:\n"
         "	.word	gUnknown_Debug_083C1C2C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CE10+1\n"
         "\n"
     );
@@ -3339,7 +3339,7 @@ void debug_sub_808CF10()
         "	.align	2, 0\n"
         "._265:\n"
         "	.word	gUnknown_Debug_083C1330\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808CF60+1\n"
         "\n"
     );
@@ -3376,7 +3376,7 @@ void debug_sub_808CF60()
         "._272:\n"
         "	.align	2, 0\n"
         "._271:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C1330\n"
         "._269:\n"
         "	bl	CloseMenu\n"
@@ -3429,7 +3429,7 @@ void debug_sub_808CFA4()
         "._273:\n"
         "	.word	gUnknown_Debug_083C13D8\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3476,7 +3476,7 @@ void debug_sub_808CFFC()
         "._275:\n"
         "	.word	gUnknown_Debug_083C1465\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3523,7 +3523,7 @@ void debug_sub_808D054()
         "._277:\n"
         "	.word	gUnknown_Debug_083C1503\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3570,7 +3570,7 @@ void debug_sub_808D0AC()
         "._279:\n"
         "	.word	gUnknown_Debug_083C158A\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3617,7 +3617,7 @@ void debug_sub_808D104()
         "._281:\n"
         "	.word	gUnknown_Debug_083C1647\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3664,7 +3664,7 @@ void debug_sub_808D15C()
         "._283:\n"
         "	.word	gUnknown_Debug_083C1712\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3711,7 +3711,7 @@ void debug_sub_808D1B4()
         "._285:\n"
         "	.word	gUnknown_Debug_083C17F8\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3758,7 +3758,7 @@ void debug_sub_808D20C()
         "._287:\n"
         "	.word	gUnknown_Debug_083C18B8\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3805,7 +3805,7 @@ void debug_sub_808D264()
         "._289:\n"
         "	.word	gDebug_0x83C1974\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D2BC+1\n"
         "\n"
     );
@@ -3999,7 +3999,7 @@ void debug_sub_808D3BC()
         "	.align	2, 0\n"
         "._305:\n"
         "	.word	gUnknown_Debug_083C105C\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D40C+1\n"
         "\n"
     );
@@ -4036,7 +4036,7 @@ void debug_sub_808D40C()
         "._312:\n"
         "	.align	2, 0\n"
         "._311:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C105C\n"
         "._309:\n"
         "	bl	CloseMenu\n"
@@ -4089,7 +4089,7 @@ void debug_sub_808D450()
         "._313:\n"
         "	.word	gUnknown_Debug_083C10BD\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D500+1\n"
         "\n"
     );
@@ -4136,7 +4136,7 @@ void debug_sub_808D4A8()
         "._315:\n"
         "	.word	gUnknown_Debug_083C1149\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D500+1\n"
         "\n"
     );
@@ -4330,7 +4330,7 @@ void debug_sub_808D600()
         "	.align	2, 0\n"
         "._331:\n"
         "	.word	gUnknown_Debug_083C11CC\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D650+1\n"
         "\n"
     );
@@ -4367,7 +4367,7 @@ void debug_sub_808D650()
         "._338:\n"
         "	.align	2, 0\n"
         "._337:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C11CC\n"
         "._335:\n"
         "	bl	CloseMenu\n"
@@ -4420,7 +4420,7 @@ void debug_sub_808D694()
         "._339:\n"
         "	.word	gUnknown_Debug_083C1212\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D744+1\n"
         "\n"
     );
@@ -4467,7 +4467,7 @@ void debug_sub_808D6EC()
         "._341:\n"
         "	.word	gUnknown_Debug_083C1288\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D744+1\n"
         "\n"
     );
@@ -4661,7 +4661,7 @@ void debug_sub_808D844()
         "	.align	2, 0\n"
         "._357:\n"
         "	.word	gUnknown_Debug_083C1A78\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D894+1\n"
         "\n"
     );
@@ -4697,7 +4697,7 @@ void debug_sub_808D894()
         "._364:\n"
         "	.align	2, 0\n"
         "._363:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C1A78\n"
         "._361:\n"
         "	bl	CloseMenu\n"
@@ -4750,7 +4750,7 @@ void debug_sub_808D8D8()
         "._365:\n"
         "	.word	gUnknown_Debug_083C1A9C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808D930+1\n"
         "\n"
     );
@@ -4944,7 +4944,7 @@ void debug_sub_808DA30()
         "	.align	2, 0\n"
         "._381:\n"
         "	.word	gUnknown_Debug_083C103A\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DA80+1\n"
         "\n"
     );
@@ -5085,7 +5085,7 @@ void debug_sub_808DB0C()
         "	.align	2, 0\n"
         "._395:\n"
         "	.word	gUnknown_Debug_083C3D08\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DB5C+1\n"
         "\n"
     );
@@ -5122,7 +5122,7 @@ void debug_sub_808DB5C()
         "._402:\n"
         "	.align	2, 0\n"
         "._401:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C3D08\n"
         "._399:\n"
         "	bl	CloseMenu\n"
@@ -5175,7 +5175,7 @@ void debug_sub_808DBA0()
         "._403:\n"
         "	.word	gUnknown_Debug_083C432C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5222,7 +5222,7 @@ void debug_sub_808DBF8()
         "._405:\n"
         "	.word	gUnknown_Debug_083C436C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5269,7 +5269,7 @@ void debug_sub_808DC50()
         "._407:\n"
         "	.word	gUnknown_Debug_083C43B4\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5316,7 +5316,7 @@ void debug_sub_808DCA8()
         "._409:\n"
         "	.word	gUnknown_Debug_083C43FC\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5363,7 +5363,7 @@ void debug_sub_808DD00()
         "._411:\n"
         "	.word	gUnknown_Debug_083C4444\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5410,7 +5410,7 @@ void debug_sub_808DD58()
         "._413:\n"
         "	.word	gUnknown_Debug_083C448C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5457,7 +5457,7 @@ void debug_sub_808DDB0()
         "._415:\n"
         "	.word	gUnknown_Debug_83C44C4\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5504,7 +5504,7 @@ void debug_sub_808DE08()
         "._417:\n"
         "	.word	gUnknown_Debug_83C44EC\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5551,7 +5551,7 @@ void debug_sub_808DE60()
         "._419:\n"
         "	.word	gUnknown_Debug_083C4534\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808DEB8+1\n"
         "\n"
     );
@@ -5754,7 +5754,7 @@ void debug_sub_808DFC0()
         "	.align	2, 0\n"
         "._437:\n"
         "	.word	gUnknown_Debug_083C377C\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E010+1\n"
         "\n"
     );
@@ -5791,7 +5791,7 @@ void debug_sub_808E010()
         "._444:\n"
         "	.align	2, 0\n"
         "._443:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C377C\n"
         "._441:\n"
         "	bl	CloseMenu\n"
@@ -5844,7 +5844,7 @@ void debug_sub_808E054()
         "._445:\n"
         "	.word	gUnknown_Debug_083C3AA0\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -5891,7 +5891,7 @@ void debug_sub_808E0AC()
         "._447:\n"
         "	.word	gUnknown_Debug_83C3AE0\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -5938,7 +5938,7 @@ void debug_sub_808E104()
         "._449:\n"
         "	.word	gUnknown_Debug_83C3B28\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -5985,7 +5985,7 @@ void debug_sub_808E15C()
         "._451:\n"
         "	.word	gUnknown_Debug_83C3B70\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -6032,7 +6032,7 @@ void debug_sub_808E1B4()
         "._453:\n"
         "	.word	gUnknown_Debug_83C3BB8\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -6079,7 +6079,7 @@ void debug_sub_808E20C()
         "._455:\n"
         "	.word	gUnknown_Debug_83C3C00\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E264+1\n"
         "\n"
     );
@@ -6282,7 +6282,7 @@ void debug_sub_808E36C()
         "	.align	2, 0\n"
         "._473:\n"
         "	.word	gUnknown_Debug_083C32AC\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E3BC+1\n"
         "\n"
     );
@@ -6319,7 +6319,7 @@ void debug_sub_808E3BC()
         "._480:\n"
         "	.align	2, 0\n"
         "._479:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C32AC\n"
         "._477:\n"
         "	bl	CloseMenu\n"
@@ -6372,7 +6372,7 @@ void debug_sub_808E400()
         "._481:\n"
         "	.word	gUnknown_Debug_083C347C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E5B8+1\n"
         "\n"
     );
@@ -6419,7 +6419,7 @@ void debug_sub_808E458()
         "._483:\n"
         "	.word	gUnknown_Debug_083C3494\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E5B8+1\n"
         "\n"
     );
@@ -6466,7 +6466,7 @@ void debug_sub_808E4B0()
         "._485:\n"
         "	.word	gUnknown_Debug_083C34A4\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E5B8+1\n"
         "\n"
     );
@@ -6513,7 +6513,7 @@ void debug_sub_808E508()
         "._487:\n"
         "	.word	gUnknown_Debug_083C34D4\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E5B8+1\n"
         "\n"
     );
@@ -6560,7 +6560,7 @@ void debug_sub_808E560()
         "._489:\n"
         "	.word	gUnknown_Debug_083C351C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E5B8+1\n"
         "\n"
     );
@@ -6763,7 +6763,7 @@ void debug_sub_808E6C0()
         "	.align	2, 0\n"
         "._507:\n"
         "	.word	gUnknown_Debug_083C4644\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E710+1\n"
         "\n"
     );
@@ -6800,7 +6800,7 @@ void debug_sub_808E710()
         "._514:\n"
         "	.align	2, 0\n"
         "._513:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C4644\n"
         "._511:\n"
         "	bl	CloseMenu\n"
@@ -6853,7 +6853,7 @@ void debug_sub_808E754()
         "._515:\n"
         "	.word	gUnknown_Debug_083C470C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E804+1\n"
         "\n"
     );
@@ -6900,7 +6900,7 @@ void debug_sub_808E7AC()
         "._517:\n"
         "	.word	gUnknown_Debug_083C4754C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E804+1\n"
         "\n"
     );
@@ -7103,7 +7103,7 @@ void debug_sub_808E90C()
         "	.align	2, 0\n"
         "._535:\n"
         "	.word	gUnknown_Debug_083C35C4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808E95C+1\n"
         "\n"
     );
@@ -7140,7 +7140,7 @@ void debug_sub_808E95C()
         "._542:\n"
         "	.align	2, 0\n"
         "._541:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	gUnknown_Debug_083C35C4\n"
         "._539:\n"
         "	bl	CloseMenu\n"
@@ -7193,7 +7193,7 @@ void debug_sub_808E9A0()
         "._543:\n"
         "	.word	gUnknown_Debug_083C369C\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808EA50+1\n"
         "\n"
     );
@@ -7240,7 +7240,7 @@ void debug_sub_808E9F8()
         "._545:\n"
         "	.word	gUnknown_Debug_083C36E4\n"
         "	.word	gDebug_03000700+0xf\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808EA50+1\n"
         "\n"
     );
@@ -7448,7 +7448,7 @@ void debug_sub_808EB58()
         "._563:\n"
         "	.word	gUnknown_Debug_083C47B2\n"
         "	.word	gUnknown_Debug_083C47F0\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808EC10+1\n"
         "\n"
     );
@@ -7496,7 +7496,7 @@ void debug_sub_808EBB4()
         "._565:\n"
         "	.word	gUnknown_Debug_083C4830\n"
         "	.word	gUnknown_Debug_083C4888\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808EC5C+1\n"
         "\n"
     );
@@ -7615,7 +7615,7 @@ void debug_sub_808ECA4()
         "._578:\n"
         "	.align	2, 0\n"
         "._577:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_808ECD0+1\n"
         "\n"
     );

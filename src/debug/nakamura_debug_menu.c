@@ -224,7 +224,7 @@ void InitNakamuraDebugMenu()
         "._4:\n"
         "	.align	2, 0\n"
         "._3:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815F214+1\n"
         "\n"
     );
@@ -825,7 +825,7 @@ u8 debug_sub_815F62C()
         "	.align	2, 0\n"
         "._59:\n"
         "	.word	_nakamuraData\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815F5C4+1\n"
         "\n"
     );
@@ -1367,7 +1367,7 @@ void debug_sub_815F930()
         "._134:\n"
         "	.align	2, 0\n"
         "._133:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815FA38+1\n"
         "._131:\n"
         "	mov	r0, #0x2\n"
@@ -1500,7 +1500,7 @@ void debug_sub_815FA38()
         "	.word	0x1a08\n"
         "	.word	_nakamuraData+0x1\n"
         "	.word	_nakamuraData+0x2\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815F930+1\n"
         "._155:\n"
         "	mov	r0, #0x2\n"
@@ -1560,7 +1560,7 @@ u8 debug_sub_815FB1C()
         "._162:\n"
         "	.word	_nakamuraData\n"
         "	.word	_nakamuraData+0x3\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815FA38+1\n"
         "\n"
     );
@@ -1680,7 +1680,7 @@ u8 debug_sub_815FBE8()
         "._179:\n"
         "	.align	2, 0\n"
         "._178:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815FB78+1\n"
         "	.word	gStringVar1\n"
         "	.word	Str_843E580\n"
@@ -2154,7 +2154,7 @@ u8 debug_sub_815FE1C()
         "	.word	gStringVar1\n"
         "	.word	gSaveBlock1\n"
         "	.word	0x2dd6\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_815FDE4+1\n"
         "\n"
     );
@@ -2250,7 +2250,7 @@ void debug_sub_815FFDC()
         "	.align	2, 0\n"
         "._217:\n"
         "	.word	_nakamuraData+0x4\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8160498+1\n"
         "\n"
     );
@@ -4142,7 +4142,7 @@ u8 debug_sub_8160D98()
         "._486:\n"
         "	.align	2, 0\n"
         "._485:\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_8160CF4+1\n"
         "\n"
     );
@@ -4602,7 +4602,7 @@ void DebugMenu_EffortValues()
         "._519:\n"
         "	.word	_nakamuraData+0x5\n"
         "	.word	gPlayerParty\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_81610BC+1\n"
         "\n"
     );
@@ -5022,7 +5022,7 @@ void DebugMenu_RandomNumberTest()
         "	.word	_nakamuraData+0x8\n"
         "	.word	_nakamuraData+0xc\n"
         "	.word	_nakamuraData+0xa\n"
-        "	.word	gCallback_03004AE8\n"
+        "	.word	gMenuCallback\n"
         "	.word	debug_sub_81612EC+1\n"
         "\n"
     );

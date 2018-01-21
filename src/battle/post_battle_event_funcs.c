@@ -26,8 +26,8 @@ int GameClear(void)
         FlagSet(FLAG_SYS_GAME_CLEAR);
     }
 
-    if (!GetGameStat(1))
-        SetGameStat(1, (gSaveBlock2.playTimeHours << 16) | (gSaveBlock2.playTimeMinutes << 8) | gSaveBlock2.playTimeSeconds);
+    if (!GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME))
+        SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlock2.playTimeHours << 16) | (gSaveBlock2.playTimeMinutes << 8) | gSaveBlock2.playTimeSeconds);
 
     SetSecretBase2Field_9();
 
@@ -54,7 +54,7 @@ int GameClear(void)
 
     if (ribbonGet == TRUE)
     {
-        IncrementGameStat(42);
+        IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
         FlagSet(FLAG_SYS_RIBBON_GET);
     }
 

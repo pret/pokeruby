@@ -1057,7 +1057,7 @@ static void sub_808382C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gLinkType = 0x2211;
         ClearLinkCallback_2();
         task->data[0]++;
@@ -1193,7 +1193,7 @@ static void sub_8083AAC(u8 taskId)
     {
     case 0:
         ScriptContext2_Enable();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         ClearLinkCallback_2();
         task->data[0]++;
         break;

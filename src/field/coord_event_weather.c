@@ -34,7 +34,7 @@ static const struct CoordEventWeather sCoordEventWeatherFuncs[] =
     { COORD_EVENT_WEATHER_FOG_2, CoordEventWeather_DiagonalFog },
     { COORD_EVENT_WEATHER_ASH, CoordEventWeather_Ash },
     { COORD_EVENT_WEATHER_SANDSTORM, CoordEventWeather_Sandstorm },
-    { COORD_EVENT_WEATHER_DARK, CoordEventWeather_Dark },
+    { COORD_EVENT_WEATHER_SHADE, CoordEventWeather_Dark },
     { COORD_EVENT_WEATHER_DROUGHT, CoordEventWeather_Drought },
     { COORD_EVENT_WEATHER_ROUTE119_CYCLE, CoordEventWeather_Route119Cycle },
     { COORD_EVENT_WEATHER_ROUTE123_CYCLE, CoordEventWeather_Route123Cycle },
@@ -87,7 +87,7 @@ static void CoordEventWeather_Sandstorm(void)
 
 static void CoordEventWeather_Dark(void)
 {
-    SetWeather(WEATHER_DARK);
+    SetWeather(WEATHER_SHADE);
 }
 
 static void CoordEventWeather_Drought(void)

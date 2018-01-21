@@ -615,7 +615,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 x, s16 y, u8 direction,
         return 5;
     if (ShouldJumpLedge(x, y, direction))
     {
-        IncrementGameStat(0x2B);
+        IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
         return COLLISION_LEDGE_JUMP;
     }
     if (collision == 4 && sub_8058F6C(x, y, direction))

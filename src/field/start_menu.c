@@ -59,7 +59,7 @@ extern u16 gSpecialVar_Result;
 
 extern u8 gUnknown_03004860;
 
-u8 (*gCallback_03004AE8)(void);
+u8 (*gMenuCallback)(void);
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
@@ -586,11 +586,11 @@ void sub_80712B4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        gMenuCallback = StartMenu_InputProcessCallback;
         task->data[0]++;
         break;
     case 1:
-        if (gCallback_03004AE8() == 1)
+        if (gMenuCallback() == 1)
             DestroyTask(taskId);
         break;
     }
@@ -628,11 +628,11 @@ static u8 StartMenu_InputProcessCallback(void)
             if (GetNationalPokedexCount(0) == 0)
                 return 0;
         }
-        gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
-        if (gCallback_03004AE8 != StartMenu_SaveCallback &&
-           gCallback_03004AE8 != StartMenu_ExitCallback &&
-           gCallback_03004AE8 != StartMenu_RetireCallback)
-            fade_screen(1, 0);
+        gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
+        if (gMenuCallback != StartMenu_SaveCallback &&
+           gMenuCallback != StartMenu_ExitCallback &&
+           gMenuCallback != StartMenu_RetireCallback)
+            FadeScreen(1, 0);
         return 0;
     }
     if (gMain.newKeys & (START_BUTTON | B_BUTTON))
@@ -648,7 +648,7 @@ static u8 StartMenu_PokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
-        IncrementGameStat(0x29);
+        IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
@@ -708,7 +708,7 @@ static u8 StartMenu_PlayerCallback(void)
 static u8 StartMenu_SaveCallback(void)
 {
     Menu_DestroyCursor();
-    gCallback_03004AE8 = SaveCallback1;
+    gMenuCallback = SaveCallback1;
     return 0;
 }
 
@@ -764,7 +764,7 @@ enum
 static u8 SaveCallback1(void)
 {
     sub_807160C();
-    gCallback_03004AE8 = SaveCallback2;
+    gMenuCallback = SaveCallback2;
     return FALSE;
 }
 
@@ -778,7 +778,7 @@ static u8 SaveCallback2(void)
         //Go back to start menu
         Menu_EraseScreen();
         InitStartMenu();
-        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        gMenuCallback = StartMenu_InputProcessCallback;
         return FALSE;
     case SAVE_SUCCESS:
     case SAVE_ERROR:
@@ -969,7 +969,7 @@ static u8 SaveDialogCB_DoSave(void)
 {
     u8 saveStatus;
 
-    IncrementGameStat(0);
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
     if (gDifferentSaveFile == TRUE)
     {
         saveStatus = Save_WriteData(SAVE_OVERWRITE_DIFFERENT_FILE);
@@ -1047,29 +1047,12 @@ static bool32 sub_80719FC(u8 *step)
     switch (*step)
     {
     case 0:
-    {
-        u8 *addr;
-        u32 size;
-
         REG_DISPCNT = 0;
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        addr = (void *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
         break;
-    }
     case 1:
         ResetSpriteData();
         ResetTasks();

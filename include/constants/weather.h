@@ -12,7 +12,7 @@
 #define WEATHER_SANDSTORM      8
 #define WEATHER_FOG_2          9
 #define WEATHER_FOG_3          10
-#define WEATHER_DARK           11
+#define WEATHER_SHADE          11
 #define WEATHER_DROUGHT        12
 #define WEATHER_RAIN_HEAVY     13
 #define WEATHER_BUBBLES        14
@@ -31,7 +31,7 @@
 #define COORD_EVENT_WEATHER_FOG_2          7
 #define COORD_EVENT_WEATHER_ASH            8
 #define COORD_EVENT_WEATHER_SANDSTORM      9
-#define COORD_EVENT_WEATHER_DARK           10
+#define COORD_EVENT_WEATHER_SHADE          10
 #define COORD_EVENT_WEATHER_DROUGHT        11
 #define COORD_EVENT_WEATHER_ROUTE119_CYCLE 20
 #define COORD_EVENT_WEATHER_ROUTE123_CYCLE 21
