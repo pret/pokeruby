@@ -87,8 +87,8 @@ endif
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-# Create build subdirectories
-$(shell mkdir -p $(addprefix $(BUILD_DIR)/, $(SUBDIRS)))
+# Create build subdirectories and setup the Git hook. TODO: better way of doing this
+$(shell mkdir -p $(addprefix $(BUILD_DIR)/, $(SUBDIRS)) ; git config --local core.hooksPath .hooks)
 
 all: $(ROM)
 ifeq ($(COMPARE),1)
