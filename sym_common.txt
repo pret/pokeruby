@@ -4,6 +4,8 @@
     name = .;                                \
     . += size;
 
+
+// main.c
 SYMBOL(gKeyRepeatStartDelay, 4)
 SYMBOL(gLinkTransferringData, 4)
 SYMBOL(gMain, 1088)
@@ -13,6 +15,8 @@ SYMBOL(gIntrTable, 56)
 SYMBOL(gLinkVSyncDisabled, 4)
 SYMBOL(IntrMain_Buffer, 2048)
 SYMBOL(gPcmDmaCounter, 4)
+
+// sprite.c
 SYMBOL(gSpriteOrder, 64)
 SYMBOL(gSpriteTileAllocBitmap, 128)
 SYMBOL(gSpriteCoordOffsetX, 4)
@@ -25,7 +29,11 @@ SYMBOL(gOamMatrices, 256)
 SYMBOL(gShouldProcessSpriteCopyRequests, 4)
 SYMBOL(gOamMatrixAllocBitmap, 4)
 SYMBOL(gReservedSpritePaletteCount, 4)
+
+// string_util.c
 SYMBOL(gUnknownStringVar, 16)
+
+// link.c
 SYMBOL(word_3002910, 8)
 SYMBOL(gLinkDebugValue1, 4)
 SYMBOL(localLinkPlayerBlock, 60)
@@ -71,7 +79,11 @@ SYMBOL(gLastSendQueueCount, 4)
 SYMBOL(gLink, 4032)
 SYMBOL(gLastRecvQueueCount, 4)
 SYMBOL(gLinkSavedIme, 4)
+
+// rtc.c
 SYMBOL(gLocalTime, 8)
+
+// battle
 SYMBOL(gBattleBuffersTransferData, 368)
 SYMBOL(gBattle_BG3_X, 4)
 SYMBOL(gBattle_BG1_Y, 4)
@@ -111,46 +123,88 @@ SYMBOL(gHealthboxIDs, 4)
 SYMBOL(gUnknown_03004344, 4)
 SYMBOL(gUnknown_03004348, 4)
 SYMBOL(gUnknown_0300434C, 4)
+
+// pokemon_1.c
 SYMBOL(gPlayerPartyCount, 4)
 SYMBOL(gPlayerParty, 600)
 SYMBOL(gEnemyPartyCount, 4)
 SYMBOL(gEnemyParty, 600)
+
+// random.c
 SYMBOL(gRngValue, 4)
+
+// egg_hatch.c
 SYMBOL(gEggHatchData, 4)
+
+// load_save.c
 SYMBOL(gFlashMemoryPresent, 4)
+
+// ???
 SYMBOL(gUnknown_03004824, 4)
 SYMBOL(gUnknown_03004828, 4)
 . += 0x4;
+
+// berry_blender.c
 SYMBOL(gUnknown_03004830, 4)
 SYMBOL(gInGameOpponentsNo, 4)
 SYMBOL(gUnknown_03004840, 20)
 SYMBOL(gBerryBlenderData, 4)
+
+// overworld.c
 SYMBOL(word_3004858, 4)
 SYMBOL(gFieldCallback, 4)
 SYMBOL(gUnknown_03004860, 4)
 SYMBOL(gFieldLinkPlayerCount, 4)
+
+// fieldmap.c
 . = ALIGN(16);
 gUnknown_03004870 = .;
 . += 0xC;
+
+// field_camera.c
 SYMBOL(gUnknown_03004880, 24)
 SYMBOL(gUnknown_03004898, 4)
 SYMBOL(gUnknown_0300489C, 4)
+
+// field_map_obj.c
 SYMBOL(gMapObjects, 576)
+
+// field_control_avatar.c
 SYMBOL(gSelectedMapObject, 4)
+
+// ???
 SYMBOL(gPokemonItemUseCallback, 4)
+
+// start_menu.c
 SYMBOL(gMenuCallback, 4)
+
+// sound.c
 SYMBOL(gDisableMusic, 4)
+
+// battle_anim.c
 SYMBOL(gSoundAnimFramesToWait, 4)
 SYMBOL(gBattleAnimArgs, 16)
 SYMBOL(gAnimSpriteIndexArray, 16)
+
+// task.c
 SYMBOL(gTasks, 640)
+
+// mori_debug_menu.c
 SYMBOL(gUnknown_03004DA0, 32)
+
+// scanline_effect.c
 SYMBOL(gScanlineEffect, 32)
 SYMBOL(gScanlineEffectRegBuffers, 3840)
+
+// pokemon_menu.c
 SYMBOL(gLastFieldPokeMenuOpened, 4)
 SYMBOL(gUnknown_03005CE4, 4)
+
+// pokedex.c
 SYMBOL(gUnknown_03005CE8, 4)
 SYMBOL(gUnknown_03005CEC, 4)
+
+// ???
 SYMBOL(gUnknown_03005CF0, 4)
 // huh?
 . = ALIGN(16);
@@ -160,11 +214,19 @@ gBagPocketScrollStates = .;
 . += 0x14;
 SYMBOL(gCurrentBagPocketItemSlots, 4)
 SYMBOL(gUnknown_03005D28, 4)
+
+// record_mixing.c
 SYMBOL(gUnknown_03005D2C, 4)
+
+// sound_check_menu.c
 SYMBOL(gUnknown_03005D30, 4)
 SYMBOL(gSoundTestCryNum, 4)
+
+// tv.c
 SYMBOL(gUnknown_03005D38, 4)
 . += 0x64;  // huge gap?
+
+// ???
 SYMBOL(gUnknown_03005DA0, 0x48)
 SYMBOL(gUnknown_03005DE8, 4)
 SYMBOL(gUnknown_03005DEC, 4)
@@ -176,13 +238,21 @@ SYMBOL(gUnknown_03005E00, 4)
 SYMBOL(gUnknown_03005E04, 4)
 SYMBOL(gUnknown_03005E08, 4)
 SYMBOL(gUnknown_03005E0C, 4)
+
+// contest_painting.c
 SYMBOL(gUnknown_03005E10, 4)
 SYMBOL(gUnknown_03005E20, 32)
 SYMBOL(gUnknown_03005E40, 76)
 SYMBOL(gUnknown_03005E8C, 4)
 SYMBOL(gUnknown_03005E90, 4)
+
+// evolution_scene.c
 SYMBOL(gCB2_AfterEvolution, 4)
+
+// ???
 SYMBOL(gUnknown_03005E98, 4)
+
+// save.c
 SYMBOL(gFirstSaveSector, 4)
 SYMBOL(gPrevSaveCounter, 4)
 SYMBOL(gLastKnownGoodSector, 4)
@@ -193,12 +263,18 @@ SYMBOL(gUnknown_03005EB4, 4)
 SYMBOL(gSaveFileStatus, 4)
 SYMBOL(gGameContinueCallback, 4)
 . += 0x10;
+
+// intro.c
 SYMBOL(gIntroFrameCounter, 4)
 SYMBOL(gMultibootProgramStruct, 44)
+
+// ???
 SYMBOL(gUnknown_03005F0C, 4)
 SYMBOL(gUnknown_03005F10, 4)
 gUnknown_03005F14 = .;
 . += 0xC;
+
+// pokeblock_feed.c
 SYMBOL(gPokeblockFeedPokeSprite, 4)
 SYMBOL(gPokeblockFeedMonSpecies, 4)
 SYMBOL(gPokeblockMonNotFlipped, 4)
@@ -211,6 +287,8 @@ SYMBOL(gUnknown_03005F40, 4)
 SYMBOL(gPokeblockFeedPokeSpriteCopy, 68)
 SYMBOL(gUnknown_03005F94, 4)
 SYMBOL(gUnknown_03005FA0, 48)
+
+// m4a_2.c
 SYMBOL(gSoundInfo, 4016)
 SYMBOL(gPokemonCrySongs, 104)
 SYMBOL(gPokemonCryMusicPlayers, 128)
@@ -223,6 +301,8 @@ SYMBOL(gMPlay_SE1, 64)
 SYMBOL(gMPlay_SE2, 64)
 SYMBOL(gMPlayMemAccArea, 16)
 SYMBOL(gMPlay_SE3, 64)
+
+// agb_flash.c
 SYMBOL(gFlashTimeoutFlag, 4)
 SYMBOL(PollFlashStatus, 4)
 SYMBOL(WaitForFlashWrite, 4)
