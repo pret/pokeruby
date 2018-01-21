@@ -8,7 +8,7 @@ exec 1>&2
 
 # Check if .GERMAN exists in the data or graphics directories, 
 # which implies that they did not run ./de_after.sh
-if [ -f "./data/.GERMAN" ] || [ -f "./graphics/.GERMAN" ]; then
+if [[ -f "./data/.GERMAN" ]] || [[ -f "./graphics/.GERMAN" ]]; then
     echo "It appears that you haven't run ./de_after.sh."
     RET="1"
 fi
@@ -16,8 +16,8 @@ fi
 # Check if any non-.sh files are marked as executable, which usually
 # shouldn't happen.
 # The weird piping is so we can change the RET variable.
-while read -r -d $'\0' i; do 
-    if [ -x "$i" ] && [ ! "$i" = "*.sh" ]; then
+while read -r -d $'\0' i; do
+    if [[ -x "$i" ]] && [[ ! "$i" == *.sh ]] && [[ ! "$i" == ".hooks/pre-commit" ]]; then
         echo "The file $i has executable permissions. Did you mean to do that?"
         RET="1"
     fi
@@ -25,7 +25,7 @@ while read -r -d $'\0' i; do
 done < <(git diff --cached --name-only --diff-filter=ACMR -z)
 
 # Check if the user messed up.
-if [ $RET = "1" ]; then
+if [[ $RET = "1" ]]; then
 # fancy red text
 tput setaf 1
 tput bold
