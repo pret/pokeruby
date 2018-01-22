@@ -12104,6 +12104,12 @@ void SetActionsAndBanksTurnOrder(void)
             }
         }
     }
+    // Debug ROM has a register swap from the retail ROM.
+    // And doing this seems to fix it.
+#if DEBUG
+    asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");
+    asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");
+#endif
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     eFocusPunchBank = 0;
 }

@@ -6,8 +6,14 @@
 
 
 // main.c
+#if DEBUG
+/*. += 0x18;*/
+#endif
 SYMBOL(gKeyRepeatStartDelay, 4)
 SYMBOL(gLinkTransferringData, 4)
+#if DEBUG
+. += 0x8;
+#endif
 SYMBOL(gMain, 1088)
 SYMBOL(gKeyRepeatContinueDelay, 4)
 SYMBOL(gSoftResetDisabled, 4)
@@ -272,7 +278,11 @@ SYMBOL(gSoundTestCryNum, 4)
 
 // tv.c
 SYMBOL(gUnknown_03005D38, 4)
+#if DEBUG
+. += 0x54;
+#else
 . += 0x64;  // huge gap?
+#endif
 
 // ???
 SYMBOL(gUnknown_03005DA0, 0x48)
@@ -315,7 +325,11 @@ SYMBOL(gFastSaveSection, 4)
 SYMBOL(gUnknown_03005EB4, 4)
 SYMBOL(gSaveFileStatus, 4)
 SYMBOL(gGameContinueCallback, 4)
+#if DEBUG
+. += 0xC;
+#else
 . += 0x10;
+#endif
 
 // intro.c
 SYMBOL(gIntroFrameCounter, 4)
@@ -339,9 +353,16 @@ SYMBOL(gUnknown_03005F3C, 4)
 SYMBOL(gUnknown_03005F40, 4)
 SYMBOL(gPokeblockFeedPokeSpriteCopy, 68)
 SYMBOL(gUnknown_03005F94, 4)
+#if DEBUG
+SYMBOL(gUnknown_03005FA0, 32)
+#else
 SYMBOL(gUnknown_03005FA0, 48)
+#endif
 
 // m4a_2.c
+#if DEBUG
+. += 0x10;
+#endif
 SYMBOL(gSoundInfo, 4016)
 SYMBOL(gPokemonCrySongs, 104)
 SYMBOL(gPokemonCryMusicPlayers, 128)

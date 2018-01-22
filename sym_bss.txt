@@ -15,6 +15,9 @@
 . = ALIGN(4); src/engine/text_window.o(.bss);
 . = ALIGN(4); src/engine/script.o(.bss);
 . = ALIGN(4); src/field/start_menu.o(.bss);
+#if DEBUG
+. += 0x18;
+#endif
 . = ALIGN(4); src/engine/menu.o(.bss);
 . = ALIGN(4); src/engine/tileset_anim.o(.bss);
 . = ALIGN(4); src/engine/sound.o(.bss);

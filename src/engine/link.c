@@ -81,7 +81,7 @@ static void sub_80084C8(void);
 static void sub_80084F4(void);
 
 static void CheckErrorStatus(void);
-static void CB2_PrintErrorMessage(void);
+void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);
 static void DisableSerial(void);
 static void EnableSerial(void);
@@ -191,9 +191,19 @@ const struct BlockRequest sBlockRequestLookupTable[5] =
 
 static const u8 sTestString[] = _("テストな");
 
-ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
+// TODO: fix the alignment here
 
-ALIGNED(4) static const u8 sEmptyString[] = _("");
+ALIGNED(4) const u8 sMagic[] = "GameFreak inc.";
+
+#if DEBUG
+const u8 sEmptyString[] = _(" ");
+#else
+ALIGNED(4) const u8 sEmptyString[] = _("");
+#endif
+
+#if DEBUG
+const u8 linkDebugFillerPleaseRemove[2] = {0}; 
+#endif
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -1395,7 +1405,7 @@ void CB2_LinkError(void)
     SetMainCallback2(CB2_PrintErrorMessage);
 }
 
-static void CB2_PrintErrorMessage(void)
+void CB2_PrintErrorMessage(void)
 {
     u8 array[32] __attribute__((unused)); // unused
     u8 array2[32] __attribute__((unused)); // unused

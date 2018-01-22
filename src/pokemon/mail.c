@@ -68,11 +68,6 @@ struct MailGraphics
     u16 color12;
 };
 
-#if DEBUG
-// should be static
-__attribute__((section(".bss"))) u8 unk_debug_bss_2;
-#endif
-
 const u16 gUnknown_083E562C[][2] =
 {
     {0x6ACD, 0x51A5},
@@ -977,7 +972,7 @@ void debug_sub_810C910()
         "	.align	2, 0\n"
         "._143:\n"
         "	.word	gPaletteFade\n"
-        "	.word	unk_debug_bss_2\n"
+        "	.word	gUnknown_0300074C\n"
         "	.word	gSaveBlock1\n"
         "	.word	gSpecialVar_0x8005\n"
         "	.word	0x2b6c\n"
@@ -1529,7 +1524,7 @@ void debug_sub_810CD9C()
         "._192:\n"
         "	.align	2, 0\n"
         "._191:\n"
-        "	.word	unk_debug_bss_2\n"
+        "	.word	gUnknown_0300074C\n"
         "	.word	gSpecialVar_0x8004\n"
         "	.word	gSpecialVar_0x8005\n"
         "	.word	gSpecialVar_0x8006\n"
@@ -2372,7 +2367,7 @@ void debug_sub_810D388()
         "._300:\n"
         "	.align	2, 0\n"
         "._299:\n"
-        "	.word	unk_debug_bss_2\n"
+        "	.word	gUnknown_0300074C\n"
         "	.word	0x43c\n"
         "._297:\n"
         "	bl	ScanlineEffect_Stop\n"

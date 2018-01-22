@@ -490,7 +490,11 @@ gUnknown_0203926A = .; /* 203926A */
 
 /* ??? */
 
+#if DEBUG
+    . = ALIGN(8);
+#else
     . = ALIGN(16);
+#endif
 gTileBuffer = .; /* 2039360 */
     . += 0x100;
 
