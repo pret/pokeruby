@@ -8,18 +8,6 @@
 
 	.section .rodata
 
-@ 81ECAD8
-	.include "data/graphics/trainers/back_pic_coords.inc"
-
-@ 81ECAE4
-	.include "data/graphics/trainers/back_pic_table.inc"
-
-@ 81ECAFC
-	.include "data/graphics/trainers/back_pic_palette_table.inc"
-
-@ 81ECB14
-	.include "data/enemy_mon_elevation.inc"
-
 @ 81ECCB0
 	.include "data/trainer_parties.inc"
 
