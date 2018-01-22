@@ -346,16 +346,7 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/field/rotating_gate.o(ewram_data);
 . = ALIGN(4); src/field/safari_zone.o(ewram_data);
 . = ALIGN(4); src/easy_chat_2.o(ewram_data);
-
-/* pokenav */
-
-    . = ALIGN(4);
-gUnknown_020388B0 = .; /* 20388B0 */
-    . += 0x4;
-
-gUnknown_020388B4 = .; /* 20388B4 */
-    . += 0x4;
-
+. = ALIGN(4); src/field/pokenav.o(ewram_data);
 . = ALIGN(4); src/pokemon/mon_markings.o(ewram_data);
 . = ALIGN(4); src/field/mauville_man.o(ewram_data);
 . = ALIGN(4); src/field/menu_helpers.o(ewram_data);
@@ -365,28 +356,7 @@ gUnknown_020388B4 = .; /* 20388B4 */
 . = ALIGN(4); src/rom6.o(ewram_data);
 . = ALIGN(4); src/field/pokeblock.o(ewram_data);
 . = ALIGN(4); src/field/field_specials.o(ewram_data);
-
-/* pokedex_area_screen */
-
-    . = ALIGN(4);
-gUnknown_02039260 = .; /* 2039260 */
-    . += 0x2;
-
-gUnknown_02039262 = .; /* 2039262 */
-    . += 0x2;
-
-gUnknown_02039264 = .; /* 2039264 */
-    . += 0x2;
-
-gUnknown_02039266 = .; /* 2039266 */
-    . += 0x2;
-
-gUnknown_02039268 = .; /* 2039268 */
-    . += 0x2;
-
-gUnknown_0203926A = .; /* 203926A */
-    . += 0x2;
-
+. = ALIGN(4); src/field/pokedex_area_screen.o(ewram_data);
 . = ALIGN(4); src/battle/battle_message.o(ewram_data);
 . = ALIGN(4); src/field/choose_party.o(ewram_data);
 . = ALIGN(4); src/scene/cable_car.o(ewram_data);
