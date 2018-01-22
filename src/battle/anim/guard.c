@@ -12,7 +12,7 @@ extern u16 gBattleTypeFlags;
 
 void sub_80D3014(struct Sprite *sprite)
 {
-    if ((gBattleTypeFlags & 1) && IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
     {
         sub_807A3FC(gAnimBankAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
         sprite->pos1.y += 40;
