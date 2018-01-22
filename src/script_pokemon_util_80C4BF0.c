@@ -45,7 +45,7 @@ extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 extern u16 gSpecialVar_Result;
 
-extern u32 gUnknown_03005D28;
+extern u32 gContestRngValue;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
@@ -373,8 +373,8 @@ void ScriptRandom(void)
 
     if(gIsLinkContest & 1)
     {
-        gUnknown_03005D28 = 1103515245 * gUnknown_03005D28 + 24691;
-        random = gUnknown_03005D28 >> 16;
+        gContestRngValue = 1103515245 * gContestRngValue + 24691;
+        random = gContestRngValue >> 16;
         scriptPtr = &gSpecialVar_Result;
     }
     else

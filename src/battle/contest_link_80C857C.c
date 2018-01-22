@@ -1,5 +1,6 @@
 #include "global.h"
 #include "ewram.h"
+#include "random.h"
 #include "task.h"
 #include "contest.h"
 #include "text.h"
@@ -296,6 +297,38 @@ void sub_80C8734(u8 taskId)
     }
 }
 
+void sub_80C88AC(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 0:
+            if (GetMultiplayerId() == 0)
+            {
+                if (sub_8007ECC())
+                {
+                    sub_80C857C(&gRngValue, sizeof(u32));
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            else
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85AC(0))
+            {
+                memcpy(&gRngValue, gBlockRecvBuffer[0], sizeof(u32));
+                memcpy(&gContestRngValue, gBlockRecvBuffer[0], sizeof(u32));
+                gTasks[taskId].data[0]++;
+            }
+            break;
+    }
+}
 
 asm(".section .text_de");
 
