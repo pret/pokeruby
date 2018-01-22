@@ -8,6 +8,10 @@
 
 static void sub_80C8644(u8 taskId);
 static void sub_80C8660(u8 taskId);
+#if GERMAN
+void de_sub_80C9274(bool32 arg0);
+void de_sub_80C9294(bool32 arg0);
+#endif
 
 void sub_80C857C(const void *data, u16 size)
 {
@@ -192,6 +196,106 @@ __attribute__((naked)) u8 sub_80C86A0(const u8 *string)
                     "\tbx r1");
 }
 #endif
+
+void sub_80C8734(u8 taskId)
+{
+    int i;
+    u8 *name;
+
+    switch (gTasks[taskId].data[0]) {
+#if ENGLISH
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+#elif GERMAN
+            case 8:
+#endif
+        case 0:
+            if (GetMultiplayerId() == 0) {
+                if (sub_8007ECC()) {
+#if GERMAN
+                    if (gTasks[taskId].data[0] == 0)
+                    {
+                        gTasks[taskId].data[0] = 3;
+                    }
+                    else
+                    {
+#endif
+                    memcpy(gBlockSendBuffer, gContestMons + gContestPlayerMonIndex, sizeof(struct ContestPokemon));
+#if GERMAN
+                    de_sub_80C9274(FALSE);
+#endif
+                    sub_8007E9C(2);
+#if GERMAN
+                    gTasks[taskId].data[0] = 1;
+                    }
+#else
+                    gTasks[taskId].data[0]++;
+#endif
+                }
+            }
+            else
+            {
+                memcpy(gBlockSendBuffer, gContestMons + gContestPlayerMonIndex, sizeof(struct ContestPokemon));
+#if GERMAN
+                de_sub_80C9294(FALSE);
+#endif
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                for (i = 0; i < MAX_LINK_PLAYERS; i++)
+                {
+                    memcpy(gContestMons + i, gBlockRecvBuffer[i], sizeof(struct ContestPokemon));
+                    name = gContestMons[i].nickname;
+                    if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
+                    {
+                        ConvertInternationalString(name, sub_80C86A0(name));
+                    }
+                    else if (name[10] == EXT_CTRL_CODE_BEGIN)
+                    {
+                        ConvertInternationalString(name, LANGUAGE_JAPANESE);
+                    } else
+                    {
+                        name[5] = name[10];
+                        name[10] = EOS;
+                    }
+                    name = gContestMons[i].trainerName;
+                    if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
+                    {
+                        name[7] = EOS;
+                        name[6] = name[4];
+                        name[5] = name[3];
+                        name[4] = name[2];
+                        name[3] = name[1];
+                        name[2] = name[0];
+                        name[1] = 0x15;
+                        name[0] = EXT_CTRL_CODE_BEGIN;
+                    }
+                    else
+                    {
+                        name[5] = name[7];
+                        name[7] = EOS;
+                    }
+                }
+                gTasks[taskId].data[0]++;
+            }
+            break;
+#if GERMAN
+        case 2:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        default:
+            gTasks[taskId].data[0]++;
+            break;
+#endif
+    }
+}
+
 
 asm(".section .text_de");
 
