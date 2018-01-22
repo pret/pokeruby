@@ -40,7 +40,7 @@ extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038470[3];
 extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
-extern void (*gUnknown_03004AE4)();  //don't know types yet
+extern void (*gPokemonItemUseCallback)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
 extern void nullsub_14();
 
@@ -466,7 +466,7 @@ void HandleBattlePartyMenu(u8 taskId)
     {
         if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == 10)
         {
-            gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
+            gPokemonItemUseCallback(taskId, gSpecialVar_ItemId, Task_80952E4);
             return;
         }
 
@@ -480,7 +480,7 @@ void HandleBattlePartyMenu(u8 taskId)
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
+                    gPokemonItemUseCallback(taskId, gSpecialVar_ItemId, Task_80952E4);
                 }
             }
             else

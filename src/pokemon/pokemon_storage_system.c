@@ -256,7 +256,7 @@ void Task_PokemonStorageSystem(u8 taskId)
             task->data[0]++;
             break;
         case 1:
-            if (sub_807D770())
+            if (IsWeatherNotFadingIn())
             {
                 task->data[0]++;
             }
@@ -302,7 +302,7 @@ void Task_PokemonStorageSystem(u8 taskId)
                     }
                     else
                     {
-                        fade_screen(1, 0);
+                        FadeScreen(1, 0);
                         task->data[0] = 4;
                     }
                     break;

@@ -87,7 +87,7 @@ extern void sub_802E220();
 extern void sub_802E2D4();
 extern void sub_802E004(void);
 extern void sub_802DF30(void);
-extern void BattleMusicStop(void);
+extern void BattleStopLowHpSound(void);
 extern void PlayerBufferExecCompleted(void);
 extern void bx_t1_healthbar_update(void);
 extern void nullsub_91(void);
@@ -1019,9 +1019,9 @@ void sub_802D31C(void)
             m4aMPlayContinue(&gMPlay_BGM);
         else
             m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         if (IsDoubleBattle())
-            sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank ^ 2]], gActiveBank ^ 2);
+            HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank ^ 2]], gActiveBank ^ 2);
         ewram17810[gActiveBank].unk9 = 3;
         gBattleBankFunc[gActiveBank] = sub_802D2E0;
     }
@@ -1077,7 +1077,7 @@ void sub_802D730(void)
     if (!ewram17810[gActiveBank].unk0_6 && !IsCryPlayingOrClearCrySongs())
     {
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlayerBufferExecCompleted();
     }
 }
@@ -1118,7 +1118,7 @@ void bx_t1_healthbar_update(void)
     }
     else
     {
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlayerBufferExecCompleted();
     }
 }
@@ -2278,7 +2278,7 @@ void dp01_setattr_by_ch1_for_player_pokemon(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
         break;
     }
-    sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 void PlayerHandlecmd3(void)
@@ -2438,7 +2438,7 @@ void PlayerHandlecmd10(void)
         if (ewram17810[gActiveBank].unk0_6 == 0)
         {
             ewram17810[gActiveBank].unk4 = 0;
-            sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+            HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, -64);
             gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
             gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
@@ -2655,7 +2655,7 @@ void PlayerHandlecmd22(void)
 
 void PlayerHandlecmd23(void)
 {
-    BattleMusicStop();
+    BattleStopLowHpSound();
     BeginNormalPaletteFade(0xFFFFFFFF, 2, 0, 16, 0);
     PlayerBufferExecCompleted();
 }
@@ -2749,22 +2749,7 @@ void PlayerHandleDMATransfer(void)
             | (gBattleBufferA[gActiveBank][4] << 24);
     u16 val2 = gBattleBufferA[gActiveBank][5] | (gBattleBufferA[gActiveBank][6] << 8);
 
-    const u8 *src = &gBattleBufferA[gActiveBank][7];
-    u8 *dst = (u8 *)val1;
-    u32 size = val2;
-
-    while (1)
-    {
-        if (size <= 0x1000)
-        {
-            DmaCopy16(3, src, dst, size);
-            break;
-        }
-        DmaCopy16(3, src, dst, 0x1000);
-        src += 0x1000;
-        dst += 0x1000;
-        size -= 0x1000;
-    }
+    Dma3CopyLarge16_(&gBattleBufferA[gActiveBank][7], (u8 *)val1, val2);
     PlayerBufferExecCompleted();
 }
 

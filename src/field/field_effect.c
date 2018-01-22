@@ -408,7 +408,7 @@ void FieldEffectScript_LoadFadedPalette(u8 **script)
 {
     struct SpritePalette *palette = (struct SpritePalette *)FieldEffectScript_ReadWord(script);
     LoadSpritePalette(palette);
-    sub_807D78C(IndexOfSpritePaletteTag(palette->tag));
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
     (*script) += 4;
 }
 
@@ -544,7 +544,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
     LoadCompressedObjectPalette(&gMonPaletteTable[species]);
     GetMonSpriteTemplate_803C56C(species, 3);
     gUnknown_02024E8C.paletteTag = gMonPaletteTable[0].tag;
-    sub_807DE38(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[0].tag) + 0x10);
     return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
 }
 
@@ -557,13 +557,13 @@ u8 CreateMonSprite_FieldMove(u16 species, u32 d, u32 g, s16 x, s16 y, u8 subprio
     LoadCompressedObjectPalette(spritePalette);
     GetMonSpriteTemplate_803C56C(species, 3);
     gUnknown_02024E8C.paletteTag = spritePalette->tag;
-    sub_807DE38(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     return CreateSprite(&gUnknown_02024E8C, x, y, subpriority);
 }
 
 void FreeResourcesAndDestroySprite(struct Sprite *sprite)
 {
-    sub_807DE68();
+    ResetPreservedPalettesInWeather();
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
     if (sprite->oam.affineMode != 0)
     {
@@ -1092,7 +1092,7 @@ void task00_8084310(u8 taskId)
     task = &gTasks[taskId];
     if (!task->data[0])
     {
-        if (!sub_807D770())
+        if (!IsWeatherNotFadingIn())
         {
             return;
         }
@@ -1192,7 +1192,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
 
 bool8 sub_8086854(struct Task *task) // gUnknown_0839F2CC[1]
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
     }
@@ -1814,7 +1814,7 @@ bool8 sub_80874CC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 
 bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         gFieldEffectArguments[0] = mapObject->coords2.x;
         gFieldEffectArguments[1] = mapObject->coords2.y;
@@ -2047,7 +2047,7 @@ void sub_8087A74(u8 taskId)
 
 void sub_8087AA4(struct Task *task)
 {
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
         task->data[15] = player_get_direction_lower_nybble();
@@ -2200,7 +2200,7 @@ void sub_8087E4C(struct Task *task)
 {
     struct Sprite *sprite;
     s16 centerToCornerVecY;
-    if (sub_807D770())
+    if (IsWeatherNotFadingIn())
     {
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);

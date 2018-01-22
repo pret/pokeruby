@@ -258,7 +258,6 @@ struct BoxPokemon
     /*0x13*/ u8 isBadEgg:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 unused:5;
     /*0x14*/ u8 otName[OT_NAME_LENGTH];
     /*0x1B*/ u8 markings;
     /*0x1C*/ u16 checksum;
@@ -351,6 +350,8 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
+// Shouldn't these be the same enum?
+
 enum
 {
     STAT_STAGE_HP,       // 0
@@ -417,7 +418,6 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
-    u8 pad[3];
 };
 
 #define FLAG_MAKES_CONTACT       0x1
@@ -628,5 +628,7 @@ void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
 void BoxMonRestorePP(struct BoxPokemon *);
+
+bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 
 #endif // GUARD_POKEMON_H

@@ -142,7 +142,7 @@ int FldEff_RockSmash(void)
 
     gTasks[taskId].data[8] = (u32)sub_810B58C >> 16;
     gTasks[taskId].data[9] = (u32)sub_810B58C;
-    IncrementGameStat(0x13);
+    IncrementGameStat(GAME_STAT_USED_ROCK_SMASH);
     return 0;
 }
 

@@ -1910,36 +1910,19 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
 
 void sub_8076034(u8 a, u8 b)
 {
-    volatile u8 pointlessZero;
-    u16 *addr2;
     u8 spriteId;
 
     if (b == 0)
     {
+        volatile u8 pointlessZero;
         struct UnknownStruct2 s;
-        u8 *addr;
-        u32 size;
         u8 r2;
-        u16 *addr3;
 
         sub_8078914(&s);
-        addr = s.unk0;
-        size = 0x2000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
-        pointlessZero = 0;
-        pointlessZero = 0;
-        addr2 = (void *)s.unk4;
-        DmaFill16(3, 0xFF, addr2, 0x1000);
+        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        DmaFill16Defvars(3, 0xFF, (void *)s.unk4, 0x1000);
 
         REG_BG1CNT_BITFIELD.priority = 2;
         REG_BG1CNT_BITFIELD.screenSize = 1;
@@ -1956,8 +1939,7 @@ void sub_8076034(u8 a, u8 b)
         REG_BG1VOFS = gBattle_BG1_Y;
 
         LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, s.unk8 * 16, 32);
-        addr3 = (u16 *)PLTT + s.unk8 * 16;
-        DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + a * 16, (u16 *)PLTT + s.unk8 * 16, 32);
 
         if (IsContest() != 0)
             r2 = 0;
@@ -1969,27 +1951,12 @@ void sub_8076034(u8 a, u8 b)
     }
     else
     {
-        u8 *addr;
-        u32 size;
-        u16 *addr3;
+        volatile u8 pointlessZero;
 
-        addr = (void *)(VRAM + 0x6000);
-        size = 0x2000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
-        pointlessZero = 0;
-        pointlessZero = 0;
-        addr2 = (void *)(VRAM + 0xF000);
-        DmaFill32(3, 0, addr2, 0x800);
+        DmaFill32Large(3, 0, (void *)(VRAM + 0x6000), 0x2000, 0x1000);
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        DmaFill32Defvars(3, 0, (void *)(VRAM + 0xF000), 0x800);
 
         REG_BG2CNT_BITFIELD.priority = 2;
         REG_BG2CNT_BITFIELD.screenSize = 1;
@@ -2004,8 +1971,7 @@ void sub_8076034(u8 a, u8 b)
         REG_BG2VOFS = gBattle_BG2_Y;
 
         LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, 0x90, 32);
-        addr3 = (void *)(PLTT + 0x120);
-        DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + a * 16, (void *)(PLTT + 0x120), 32);
 
         sub_80E4EF8(0, 0, GetBankIdentity(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
@@ -2060,57 +2026,25 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d)
 
 void sub_8076464(u8 a)
 {
-    u8 *addr;
-    u32 size;
     volatile u8 pointlessZero;
     struct UnknownStruct2 s;
 
     sub_8078914(&s);
     if (a == 0 || IsContest() != 0)
     {
-        u16 *addr2;
-
-        addr = s.unk0;
-        size = 0x2000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
-        pointlessZero = 0;
-        pointlessZero = 0;
-        addr2 = s.unk4;
-        DmaFill32(3, 0, addr2, 0x800);
+        DmaFill32Large(3, 0, s.unk0, 0x2000, 0x1000);
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        DmaFill32Defvars(3, 0, s.unk4, 0x800);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
     }
     else
     {
-        u16 *addr2;
-
-        addr = (void *)(VRAM + 0x6000);
-        size = 0x2000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
-        pointlessZero = 0;
-        pointlessZero = 0;
-        addr2 = (void *)(VRAM + 0xF000);
-        DmaFill32(3, 0, addr2, 0x800);
+        DmaFill32Large(3, 0, (void *)(VRAM + 0x6000), 0x2000, 0x1000);
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        pointlessZero = 0; // is there a stubbed out Dma macro here that left the 0 load in?
+        DmaFill32Defvars(3, 0, (void *)(VRAM + 0xF000), 0x800);
         gBattle_BG2_X = 0;
         gBattle_BG2_Y = 0;
     }
@@ -2130,25 +2064,15 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 
     if (gTasks[taskId].data[5] == 0)
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG1_X = x + gTasks[taskId].data[3];
         gBattle_BG1_Y = y + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256;
-        DmaCopy32(3, src, dst, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 + s.unk8 * 16 - 256, 32);
     }
     else
     {
-        u16 *src;
-        u16 *dst;
-
         gBattle_BG2_X = x + gTasks[taskId].data[3];
         gBattle_BG2_Y = y + gTasks[taskId].data[4];
-        src = gPlttBufferFaded + 0x100 + palIndex * 16;
-        dst = gPlttBufferFaded + 0x100 - 112;
-        DmaCopy32(3, src, dst, 32);
+        DmaCopy32Defvars(3, gPlttBufferFaded + 0x100 + palIndex * 16, gPlttBufferFaded + 0x100 - 112, 32);
     }
 }
 
@@ -2492,14 +2416,10 @@ static void LoadMoveBg(u16 bgId)
     if (IsContest())
     {
         void *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
-        void *dmaSrc;
-        void *dmaDest;
 
         LZDecompressWram(tilemap, IsContest() ? EWRAM_14800 : EWRAM_18000);
         sub_80763FC(sub_80789BC(), IsContest() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
-        dmaSrc = IsContest() ? EWRAM_14800 : EWRAM_18000;
-        dmaDest = (void *)(VRAM + 0xD000);
-        DmaCopy32(3, dmaSrc, dmaDest, 0x800);
+        DmaCopy32Defvars(3, IsContest() ? EWRAM_14800 : EWRAM_18000, (void *)(VRAM + 0xD000), 0x800);
         LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(VRAM + 0x2000));
         LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, sub_80789BC() * 16, 32);
     }

@@ -39,8 +39,6 @@ extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
 
 extern struct MusicPlayerInfo gMPlay_SE1;
-extern u16 gSpecialVar_ContestCategory;
-extern u16 gSpecialVar_ContestRank;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -48,8 +46,6 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
-extern u8 gIsLinkContest;
-extern u8 gContestPlayerMonIndex;
 extern u16 gBattle_BG3_X;
 extern s16 gBattle_BG1_Y;
 extern u16 gBattle_BG3_Y;
@@ -65,14 +61,6 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
 extern u32 gUnknown_03005D28;  // saved RNG value
 
-extern s16 gUnknown_02038680[];
-extern u16 gUnknown_02038688[];
-extern u8 gUnknown_02038694;
-extern u8 gUnknown_02038696[];
-extern u8 gUnknown_0203869B;
-extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
-extern u8 gContestFinalStandings[];  // What "place" each participant came in.
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 
@@ -292,6 +280,20 @@ void sub_80B292C(void);
 void sub_80B2968(void);
 void SelectContestMoveBankTarget(u16);
 
+EWRAM_DATA u8 gUnknown_0203856C = 0;
+EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
+EWRAM_DATA s16 gUnknown_02038670[4] = {0};
+EWRAM_DATA s16 gUnknown_02038678[4] = {0};
+EWRAM_DATA s16 gUnknown_02038680[4] = {0};
+EWRAM_DATA u16 gUnknown_02038688[4] = {0};
+EWRAM_DATA u8 gContestFinalStandings[4] = {0};  // What "place" each participant came in.
+EWRAM_DATA u8 gUnknown_02038694 = 0;
+EWRAM_DATA u8 gContestPlayerMonIndex = 0;
+EWRAM_DATA u8 gUnknown_02038696[4] = {0};
+EWRAM_DATA u8 gIsLinkContest = 0;
+EWRAM_DATA u8 gUnknown_0203869B = 0;
+EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
+EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 
 void nullsub_89(u8 taskId)
 {
@@ -3671,12 +3673,8 @@ void sub_80B0748(u8 taskId)
                     {
                         // What the hell? These aren't pointers.
                         // This code would crash if run.
-                        {
-                            void *src = (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1];
-                            void *dest = (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1];
-                            u32 size = 6;
-                            DmaCopy16(3, src, dest, size);
-                        }
+                        DmaCopy16Defvars(3, (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1],
+                            (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1], 6);
                         gTasks[taskId].data[r1 + 0] = 0;
                     }
                 }
@@ -4046,21 +4044,13 @@ u8 sub_80B09E4(u8 a)
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32), 0x300);
 
     // What is this?
     zero = 0;
     zero = 0;
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), 0x300);
 
     gSprites[r8].data[0] = r6;
     gSprites[r6].data[0] = r8;

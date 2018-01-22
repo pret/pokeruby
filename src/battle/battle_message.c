@@ -25,6 +25,8 @@
 #include "../data/battle_strings_en.h"
 #endif
 
+// This is four lists of moves which use a different attack string in Japanese
+// to the default. See the documentation for sub_8121D74 for more detail.
 const u16 gUnknown_084016BC[] =
 {
     MOVE_SWORDS_DANCE,
@@ -69,7 +71,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_MUDDY_WATER,
     MOVE_IRON_DEFENSE,
     MOVE_BOUNCE,
-    MOVE_NONE,
+    0,
     MOVE_TELEPORT,
     MOVE_RECOVER,
     MOVE_BIDE,
@@ -77,7 +79,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_FLAIL,
     MOVE_TAUNT,
     MOVE_BULK_UP,
-    MOVE_NONE,
+    0,
     MOVE_MEDITATE,
     MOVE_AGILITY,
     MOVE_MIMIC,
@@ -96,7 +98,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_FAKE_TEARS,
     MOVE_WATER_SPORT,
     MOVE_CALM_MIND,
-    MOVE_NONE,
+    0,
     MOVE_POUND,
     MOVE_SCRATCH,
     MOVE_VICE_GRIP,
@@ -144,7 +146,7 @@ const u16 gUnknown_084016BC[] =
     MOVE_ENDEAVOR,
     MOVE_TICKLE,
     MOVE_COVET,
-    MOVE_NONE,
+    0,
 };
 
 const u8 gUnknown_084017A8[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // empty flags
@@ -158,7 +160,6 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gStringBank;
 extern u8 gEffectBank;
-extern u8 gAbilitiesPerBank[4];
 extern u8 gBattleTextBuff1[];
 extern u8 gBattleTextBuff2[];
 extern u8 gBattleTextBuff3[];
@@ -174,6 +175,8 @@ extern u8 gStringVar3[];
 extern u16 gBattlePartyID[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
 extern u8 gBattleBufferA[4][0x200];
+
+EWRAM_DATA u8 gAbilitiesPerBank[4] = {0};
 
 extern const u8* const gUnknown_08401674[]; // table of pointers to 'a -TYPE' strings
 extern const u8* const gUnknown_08400F58[]; // table of pointers to stat strings
@@ -214,11 +217,11 @@ void BufferStringBattle(u16 stringID)
     gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBank][4]);
     gLastUsedItem = gStringInfo->lastItem;
     gLastUsedAbility = gStringInfo->lastAbility;
-    BATTLE_STRUCT->scriptingActive = gStringInfo->scrActive;
-    BATTLE_STRUCT->unk1605E = gStringInfo->unk1605E;
-    BATTLE_STRUCT->hpScale = gStringInfo->hpScale;
+    gBattleStruct->scriptingActive = gStringInfo->scrActive;
+    gBattleStruct->unk1605E = gStringInfo->unk1605E;
+    gBattleStruct->hpScale = gStringInfo->hpScale;
     gStringBank = gStringInfo->StringBank;
-    BATTLE_STRUCT->stringMoveType = gStringInfo->moveType;
+    gBattleStruct->stringMoveType = gStringInfo->moveType;
     for (i = 0; i < 4; i++)
     {
         gAbilitiesPerBank[i] = gStringInfo->abilities[i];
@@ -304,11 +307,11 @@ void BufferStringBattle(u16 stringID)
     case 2: // sending poke to ball msg
         if (GetBankSide(gActiveBank) == 0)
         {
-            if (BATTLE_STRUCT->hpScale == 0)
+            if (gBattleStruct->hpScale == 0)
                 stringPtr = BattleText_ComeBackSingle1;
-            else if (BATTLE_STRUCT->hpScale == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            else if (gBattleStruct->hpScale == 1 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 stringPtr = BattleText_ComeBackSingle2;
-            else if (BATTLE_STRUCT->hpScale == 2)
+            else if (gBattleStruct->hpScale == 2)
                 stringPtr = BattleText_ComeBackSingle3;
             else
                 stringPtr = BattleText_ComeBackSingle4;
@@ -332,13 +335,13 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case 3: // switch-in msg
-        if (GetBankSide(BATTLE_STRUCT->scriptingActive) == 0)
+        if (GetBankSide(gBattleStruct->scriptingActive) == 0)
         {
-            if (BATTLE_STRUCT->hpScale == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleStruct->hpScale == 0 || gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                 stringPtr = BattleText_SentOutSingle7;
-            else if (BATTLE_STRUCT->hpScale == 1)
+            else if (gBattleStruct->hpScale == 1)
                 stringPtr = BattleText_SentOutSingle8;
-            else if (BATTLE_STRUCT->hpScale == 2)
+            else if (gBattleStruct->hpScale == 2)
                 stringPtr = BattleText_SentOutSingle9;
             else
                 stringPtr = BattleText_SentOutSingle10;
@@ -364,7 +367,7 @@ void BufferStringBattle(u16 stringID)
     case 4: // pokemon used a move msg
         sub_8121D1C(gBattleTextBuff1);
         if (gStringInfo->currentMove > 0x162)
-            StringCopy(gBattleTextBuff2, gUnknown_08401674[BATTLE_STRUCT->stringMoveType]);
+            StringCopy(gBattleTextBuff2, gUnknown_08401674[gBattleStruct->stringMoveType]);
         else
             StringCopy(gBattleTextBuff2, gMoveNames[gStringInfo->currentMove]);
         sub_8121D74(gBattleTextBuff2);
@@ -636,17 +639,17 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gActiveBank, gBattlePartyID[gActiveBank])
                 break;
             case 16: // scripting active bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, gBattlePartyID[BATTLE_STRUCT->scriptingActive])
+                HANDLE_NICKNAME_STRING_CASE(gBattleStruct->scriptingActive, gBattlePartyID[gBattleStruct->scriptingActive])
                 break;
             case 17: // current move name
                 if (gStringInfo->currentMove > 0x162)
-                    toCpy = (void*) &gUnknown_08401674[BATTLE_STRUCT->stringMoveType];
+                    toCpy = (void*) &gUnknown_08401674[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gStringInfo->currentMove];
                 break;
             case 18: // last used move name
                 if (gStringInfo->lastMove > 0x162)
-                    toCpy = (void*) &gUnknown_08401674[BATTLE_STRUCT->stringMoveType];
+                    toCpy = (void*) &gUnknown_08401674[gBattleStruct->stringMoveType];
                 else
                     toCpy = gMoveNames[gStringInfo->lastMove];
                 break;
@@ -655,7 +658,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 {
                     if (gLastUsedItem == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(text, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH
@@ -690,7 +693,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gAbilityNames[gAbilitiesPerBank[gBankTarget]];
                 break;
             case 23: // scripting active ability
-                toCpy = gAbilityNames[gAbilitiesPerBank[BATTLE_STRUCT->scriptingActive]];
+                toCpy = gAbilityNames[gAbilitiesPerBank[gBattleStruct->scriptingActive]];
                 break;
             case 24: // effect bank ability
                 toCpy = gAbilityNames[gAbilitiesPerBank[gEffectBank]];
@@ -750,7 +753,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = gLinkPlayers[sub_803FC34(3 ^ gLinkPlayers[multiplayerID].lp_field_18)].name;
                 break;
             case 31: // link scripting active name
-                toCpy = gLinkPlayers[sub_803FC34(BATTLE_STRUCT->scriptingActive)].name;
+                toCpy = gLinkPlayers[sub_803FC34(gBattleStruct->scriptingActive)].name;
                 break;
             case 32: // player name
                 toCpy = gSaveBlock2.playerName;
@@ -759,7 +762,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 toCpy = GetTrainerLoseText();
                 break;
             case 34: // ?
-                HANDLE_NICKNAME_STRING_CASE(BATTLE_STRUCT->scriptingActive, BATTLE_STRUCT->unk1605E)
+                HANDLE_NICKNAME_STRING_CASE(gBattleStruct->scriptingActive, gBattleStruct->unk1605E)
                 break;
             case 35: // lanette pc
                 if (FlagGet(FLAG_SYS_PC_LANETTE))
@@ -946,7 +949,7 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
                 {
                     if (hword == ITEM_ENIGMA_BERRY)
                     {
-                        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 == gStringBank)
+                        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 == gStringBank)
                         {
                             StringCopy(dst, gEnigmaBerries[gStringBank].name);
 #ifdef ENGLISH
@@ -970,6 +973,10 @@ void StrCpyDecodeBattleTextBuff(u8* src, u8* dst)
     }
 }
 
+// Loads one of two text strings into the provided buffer. This is functionally
+// unused, since the value loaded into the buffer is not read; it loaded one of
+// two particles (either "は" or "の") which works in tandem with sub_8121D74
+// below to effect changes in the meaning of the line.
 void sub_8121D1C(u8* textBuff)
 {
     s32 counter = 0;
@@ -992,6 +999,24 @@ void sub_8121D1C(u8* textBuff)
     }
 }
 
+// Appends "!" to the text buffer `dst`. In the original Japanese this looked
+// into the table of moves at gUnknown_084016BC and varied the line accordingly.
+// 
+// BattleText_Exclamation was a plain "!", used for any attack not on the list.
+// It resulted in the translation "<NAME>'s <ATTACK>!".
+// 
+// BattleText_Exclamation2 was "を つかった！". This resulted in the translation
+// "<NAME> used <ATTACK>!", which was used for all attacks in English.
+// 
+// BattleText_Exclamation3 was "した！". This was used for those moves whose
+// names were verbs, such as Recover, and resulted in translations like "<NAME>
+// recovered itself!".
+// 
+// BattleText_Exclamation4 was "を した！" This resulted in a translation of
+// "<NAME> did an <ATTACK>!".
+// 
+// BattleText_Exclamation5 was " こうげき！" This resulted in a translation of
+// "<NAME>'s <ATTACK> attack!".
 void sub_8121D74(u8* dst)
 {
     s32 counter = 0;

@@ -749,9 +749,9 @@ void EmitPrintString(u8 a, u16 stringID)
     stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
-    stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
-    stringInfo->unk1605E = BATTLE_STRUCT->unk1605E;
-    stringInfo->hpScale = BATTLE_STRUCT->hpScale;
+    stringInfo->scrActive = gBattleStruct->scriptingActive;
+    stringInfo->unk1605E = gBattleStruct->unk1605E;
+    stringInfo->hpScale = gBattleStruct->hpScale;
     stringInfo->StringBank = gStringBank;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
 
@@ -781,8 +781,8 @@ void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
     stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
-    stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
-    stringInfo->unk1605E = BATTLE_STRUCT->unk1605E;
+    stringInfo->scrActive = gBattleStruct->scriptingActive;
+    stringInfo->unk1605E = gBattleStruct->unk1605E;
 
     for (i = 0; i < 4; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;

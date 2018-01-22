@@ -95,7 +95,7 @@ static void npc_pal_op_B(struct MapObject *mapObject, u8 paletteNum)
         {
             pal_patch_for_npc(npc_paltag_by_palslot(paletteNum), paletteNum);
         }
-        sub_807D78C(paletteNum);
+        UpdateSpritePaletteWithWeather(paletteNum);
     }
 }
 
@@ -107,7 +107,7 @@ static void npc_pal_op_A(struct MapObject *mapObject, u8 paletteNum)
     if (graphicsInfo->paletteTag2 != 0x11ff)
     {
         pal_patch_for_npc(graphicsInfo->paletteTag2, paletteNum);
-        sub_807D78C(paletteNum);
+        UpdateSpritePaletteWithWeather(paletteNum);
     }
 }
 

@@ -109,16 +109,12 @@ tidy:
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) -o ../../$@ ../../$(LIBGCC) ../../$(LIBC)
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
 
-$(LD_SCRIPT): $(BUILD_DIR)/sym_bss.ld $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld ld_script.txt
-	cd $(BUILD_DIR) && sed -f ../../ld_script.sed ../../ld_script.txt | sed "s#tools/#../../tools/#g" >ld_script.ld
-$(BUILD_DIR)/sym_bss.ld: sym_bss.txt
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) .bss ../../sym_bss.txt $(GAME_LANGUAGE) >sym_bss.ld
-$(BUILD_DIR)/sym_common.ld: sym_common.txt $(C_OBJECTS) $(wildcard common_syms/*.txt)
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) COMMON ../../sym_common.txt $(GAME_LANGUAGE) -c src,../../common_syms >sym_common.ld
-$(BUILD_DIR)/sym_ewram.ld: sym_ewram.txt
-	cd $(BUILD_DIR) && ../../$(RAMSCRGEN) ewram_data ../../sym_ewram.txt $(GAME_LANGUAGE) >sym_ewram.ld
+$(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
+	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
+$(BUILD_DIR)/sym_%.ld: sym_%.txt
+	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i

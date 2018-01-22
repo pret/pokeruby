@@ -4,6 +4,7 @@
 #include "data2.h"
 #include "event_data.h"
 #include "ewram.h"
+#include "field_weather.h"
 #include "item.h"
 #include "link.h"
 #include "pokemon.h"
@@ -21,7 +22,7 @@
 #include "constants/species.h"
 #include "constants/weather.h"
 
-extern u8* gBattlescriptCurrInstr;
+extern const u8* gBattlescriptCurrInstr;
 extern u8 gActiveBank;
 extern u8 gBattleBufferB[4][0x200];
 extern u8* gUnknown_02024C1C[4]; //battlescript location when you try to choose a move you're not allowed to
@@ -85,7 +86,6 @@ u8 CountTrailingZeroBits(u32 a);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
-u8 weather_get_current(void);
 void RecordAbilityBattle(u8 bank, u8 ability);
 void RecordItemBattle(u8 bank, u8 holdEffect);
 s8 GetPokeFlavourRelation(u32 pid, u8 flavor);
@@ -454,7 +454,7 @@ void sub_80157C4(u8 bank)
     }
 }
 
-void BattleScriptPush(u8* BS_ptr)
+void BattleScriptPush(const u8* BS_ptr)
 {
     B_BATTLESCRIPTS_STACK->ptr[B_BATTLESCRIPTS_STACK->size++] = BS_ptr;
 }
@@ -477,7 +477,7 @@ u8 TrySetCantSelectMoveBattleScript(void) //msg can't select a move
     u16* choicedMove = CHOICED_MOVE(gActiveBank);
     if (gDisableStructs[gActiveBank].disabledMove == move && move)
     {
-        BATTLE_STRUCT->scriptingActive = gActiveBank;
+        gBattleStruct->scriptingActive = gActiveBank;
         gCurrentMove = move;
         gUnknown_02024C1C[gActiveBank] = BattleScript_MoveSelectionDisabledMove;
         limitations++;
@@ -615,7 +615,7 @@ u8 UpdateTurnCounters(void)
     {
         u8 sideBank;
 
-        switch (BATTLE_STRUCT->turncountersTracker)
+        switch (gBattleStruct->turncountersTracker)
         {
         case 0:
             for (i = 0; i < gNoOfAllBanks; i++)
@@ -631,12 +631,12 @@ u8 UpdateTurnCounters(void)
                         SwapTurnOrder(i, j);
                 }
             }
-            BATTLE_STRUCT->turncountersTracker++;
-            BATTLE_STRUCT->turnSideTracker = 0;
+            gBattleStruct->turncountersTracker++;
+            gBattleStruct->turnSideTracker = 0;
         case 1:
-            while (BATTLE_STRUCT->turnSideTracker < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
+                gActiveBank = gBankAttacker = sideBank = gBattleStruct->turnSideTracker;
 
                 if (gSideAffecting[sideBank] & SIDE_STATUS_REFLECT)
                 {
@@ -653,20 +653,20 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnSideTracker++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
-                BATTLE_STRUCT->turncountersTracker++;
-                BATTLE_STRUCT->turnSideTracker = 0;
+                gBattleStruct->turncountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case 2:
-            while (BATTLE_STRUCT->turnSideTracker < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
+                gActiveBank = gBankAttacker = sideBank = gBattleStruct->turnSideTracker;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_LIGHTSCREEN)
                 {
                     if (--gSideTimers[sideBank].lightscreenTimer == 0)
@@ -682,20 +682,20 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnSideTracker++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
-                BATTLE_STRUCT->turncountersTracker++;
-                BATTLE_STRUCT->turnSideTracker = 0;
+                gBattleStruct->turncountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case 3:
-            while (BATTLE_STRUCT->turnSideTracker < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
+                gActiveBank = gBankAttacker = sideBank = gBattleStruct->turnSideTracker;
                 if (gSideTimers[sideBank].mistTimer && --gSideTimers[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
@@ -708,20 +708,20 @@ u8 UpdateTurnCounters(void)
                     gBattleTextBuff1[4] = EOS;
                     effect++;
                 }
-                BATTLE_STRUCT->turnSideTracker++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
-                BATTLE_STRUCT->turncountersTracker++;
-                BATTLE_STRUCT->turnSideTracker = 0;
+                gBattleStruct->turncountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case 4:
-            while (BATTLE_STRUCT->turnSideTracker < 2)
+            while (gBattleStruct->turnSideTracker < 2)
             {
-                gActiveBank = gBankAttacker = sideBank = BATTLE_STRUCT->turnSideTracker;
+                gActiveBank = gBankAttacker = sideBank = gBattleStruct->turnSideTracker;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_SAFEGUARD)
                 {
                     if (--gSideTimers[sideBank].safeguardTimer == 0)
@@ -731,33 +731,33 @@ u8 UpdateTurnCounters(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnSideTracker++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
-                BATTLE_STRUCT->turncountersTracker++;
-                BATTLE_STRUCT->turnSideTracker = 0;
+                gBattleStruct->turncountersTracker++;
+                gBattleStruct->turnSideTracker = 0;
             }
             break;
         case 5:
-            while (BATTLE_STRUCT->turnSideTracker < gNoOfAllBanks)
+            while (gBattleStruct->turnSideTracker < gNoOfAllBanks)
             {
-                gActiveBank = gBanksByTurnOrder[BATTLE_STRUCT->turnSideTracker];
+                gActiveBank = gBanksByTurnOrder[gBattleStruct->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBank] && --gWishFutureKnock.wishCounter[gActiveBank] == 0 && gBattleMons[gActiveBank].hp)
                 {
                     gBankTarget = gActiveBank;
                     BattleScriptExecute(BattleScript_WishComesTrue);
                     effect++;
                 }
-                BATTLE_STRUCT->turnSideTracker++;
+                gBattleStruct->turnSideTracker++;
                 if (effect)
                     break;
             }
             if (!effect)
             {
-                BATTLE_STRUCT->turncountersTracker++;
+                gBattleStruct->turncountersTracker++;
             }
             break;
         case 6:
@@ -783,7 +783,7 @@ u8 UpdateTurnCounters(void)
                 BattleScriptExecute(BattleScript_RainContinuesOrEnds);
                 effect++;
             }
-            BATTLE_STRUCT->turncountersTracker++;
+            gBattleStruct->turncountersTracker++;
             break;
         case 7:
             if (gBattleWeather & WEATHER_SANDSTORM_ANY)
@@ -796,12 +796,12 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
 
-                BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
+                gBattleStruct->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
-            BATTLE_STRUCT->turncountersTracker++;
+            gBattleStruct->turncountersTracker++;
             break;
         case 8:
             if (gBattleWeather & WEATHER_SUN_ANY)
@@ -817,7 +817,7 @@ u8 UpdateTurnCounters(void)
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
-            BATTLE_STRUCT->turncountersTracker++;
+            gBattleStruct->turncountersTracker++;
             break;
         case 9:
             if (gBattleWeather & WEATHER_HAIL)
@@ -830,12 +830,12 @@ u8 UpdateTurnCounters(void)
                 else
                     gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
 
-                BATTLE_STRUCT->animArg1 = B_ANIM_HAIL_CONTINUES;
+                gBattleStruct->animArg1 = B_ANIM_HAIL_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
             }
-            BATTLE_STRUCT->turncountersTracker++;
+            gBattleStruct->turncountersTracker++;
             break;
         case 10:
             effect++;
@@ -852,16 +852,16 @@ u8 TurnBasedEffects(void)
     u8 effect = 0;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
-    while (BATTLE_STRUCT->turnEffectsBank < gNoOfAllBanks && BATTLE_STRUCT->turnEffectsTracker <= TURNBASED_MAX_CASE)
+    while (gBattleStruct->turnEffectsBank < gNoOfAllBanks && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
-        gActiveBank = gBankAttacker = gBanksByTurnOrder[BATTLE_STRUCT->turnEffectsBank];
+        gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->turnEffectsBank];
         if (gAbsentBankFlags & gBitTable[gActiveBank])
         {
-            BATTLE_STRUCT->turnEffectsBank++;
+            gBattleStruct->turnEffectsBank++;
         }
         else
         {
-            switch (BATTLE_STRUCT->turnEffectsTracker)
+            switch (gBattleStruct->turnEffectsTracker)
             {
             case 0:  // ingrain
                 if ((gStatuses3[gActiveBank] & STATUS3_ROOTED)
@@ -875,22 +875,22 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_IngrainTurnHeal);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 1:  // end turn abilities
                 if (AbilityBattleEffects(ABILITYEFFECT_ENDTURN, gActiveBank, 0, 0, 0))
                     effect++;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 2:  // item effects
                 if (ItemBattleEffects(1, gActiveBank, 0))
                     effect++;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 18:  // item effects again
                 if (ItemBattleEffects(1, gActiveBank, 1))
                     effect++;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 3:  // leech seed
                 if (gStatuses3[gActiveBank] & STATUS3_LEECHSEED && gBattleMons[gStatuses3[gActiveBank] & STATUS3_LEECHSEED_BANK].hp != 0 && gBattleMons[gActiveBank].hp != 0)
@@ -899,12 +899,12 @@ u8 TurnBasedEffects(void)
                     gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
-                    BATTLE_STRUCT->animArg1 = gBankTarget;
-                    BATTLE_STRUCT->animArg2 = gBankAttacker;
+                    gBattleStruct->animArg1 = gBankTarget;
+                    gBattleStruct->animArg2 = gBankAttacker;
                     BattleScriptExecute(BattleScript_LeechSeedTurnDrain);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 4:  // poison
                 if ((gBattleMons[gActiveBank].status1 & STATUS_POISON) && gBattleMons[gActiveBank].hp != 0)
@@ -915,7 +915,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 5:  // toxic poison
                 if ((gBattleMons[gActiveBank].status1 & STATUS_TOXIC_POISON) && gBattleMons[gActiveBank].hp != 0)
@@ -929,7 +929,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 6:  // burn
                 if ((gBattleMons[gActiveBank].status1 & STATUS_BURN) && gBattleMons[gActiveBank].hp != 0)
@@ -940,7 +940,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_BurnTurnDmg);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 7:  // spooky nightmares
                 if ((gBattleMons[gActiveBank].status2 & STATUS2_NIGHTMARE) && gBattleMons[gActiveBank].hp != 0)
@@ -952,7 +952,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_NightmareTurnDmg);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 8:  // curse
                 if ((gBattleMons[gActiveBank].status2 & STATUS2_CURSED) && gBattleMons[gActiveBank].hp != 0)
@@ -963,7 +963,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(BattleScript_CurseTurnDmg);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 9:  // wrap
                 if ((gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED) && gBattleMons[gActiveBank].hp != 0)
@@ -971,8 +971,8 @@ u8 TurnBasedEffects(void)
                     gBattleMons[gActiveBank].status2 -= 0x2000;
                     if (gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED)  // damaged by wrap
                     {
-                        BATTLE_STRUCT->animArg1 = ewram16004arr(0, gActiveBank);
-                        BATTLE_STRUCT->animArg2 = ewram16004arr(1, gActiveBank);
+                        gBattleStruct->animArg1 = ewram16004arr(0, gActiveBank);
+                        gBattleStruct->animArg2 = ewram16004arr(1, gActiveBank);
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 2;
                         gBattleTextBuff1[2] = ewram16004arr(0, gActiveBank);
@@ -995,7 +995,7 @@ u8 TurnBasedEffects(void)
                     BattleScriptExecute(gBattlescriptCurrInstr);
                     effect++;
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 10:  // uproar
                 if (gBattleMons[gActiveBank].status2 & STATUS2_UPROAR)
@@ -1044,7 +1044,7 @@ u8 TurnBasedEffects(void)
                     }
                 }
                 if (effect != 2)
-                    BATTLE_STRUCT->turnEffectsTracker++;
+                    gBattleStruct->turnEffectsTracker++;
                 break;
             case 11:  // thrash
                 if (gBattleMons[gActiveBank].status2 & STATUS2_LOCK_CONFUSE)
@@ -1066,7 +1066,7 @@ u8 TurnBasedEffects(void)
                         }
                     }
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 12:  // disable
                 if (gDisableStructs[gActiveBank].disableTimer1 != 0)
@@ -1089,7 +1089,7 @@ u8 TurnBasedEffects(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 13:  // encore
                 if (gDisableStructs[gActiveBank].encoreTimer1 != 0)
@@ -1108,22 +1108,22 @@ u8 TurnBasedEffects(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 14:  // lock-on decrement
                 if (gStatuses3[gActiveBank] & STATUS3_ALWAYS_HITS)
                     gStatuses3[gActiveBank] -= 0x8;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 15:  // charge
                 if (gDisableStructs[gActiveBank].chargeTimer1 && --gDisableStructs[gActiveBank].chargeTimer1 == 0)
                     gStatuses3[gActiveBank] &= ~STATUS3_CHARGED_UP;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 16:  // taunt
                 if (gDisableStructs[gActiveBank].tauntTimer1)
                     gDisableStructs[gActiveBank].tauntTimer1--;
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 17:  // yawn
                 if (gStatuses3[gActiveBank] & STATUS3_YAWN)
@@ -1142,11 +1142,11 @@ u8 TurnBasedEffects(void)
                         effect++;
                     }
                 }
-                BATTLE_STRUCT->turnEffectsTracker++;
+                gBattleStruct->turnEffectsTracker++;
                 break;
             case 19:  // done
-                BATTLE_STRUCT->turnEffectsTracker = 0;
-                BATTLE_STRUCT->turnEffectsBank++;
+                gBattleStruct->turnEffectsTracker = 0;
+                gBattleStruct->turnEffectsBank++;
                 break;
             }
             if (effect != 0)
@@ -1160,17 +1160,17 @@ u8 TurnBasedEffects(void)
 bool8 HandleWishPerishSongOnTurnEnd(void)
 {
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
-    switch (BATTLE_STRUCT->sub80170DC_Tracker)
+    switch (gBattleStruct->sub80170DC_Tracker)
     {
     case 0: // future sight
-        while (BATTLE_STRUCT->sub80170DC_Bank < gNoOfAllBanks)
+        while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
         {
-            gActiveBank = BATTLE_STRUCT->sub80170DC_Bank;
+            gActiveBank = gBattleStruct->sub80170DC_Bank;
             if (gAbsentBankFlags & gBitTable[gActiveBank])
-                BATTLE_STRUCT->sub80170DC_Bank++;
+                gBattleStruct->sub80170DC_Bank++;
             else
             {
-                BATTLE_STRUCT->sub80170DC_Bank++;
+                gBattleStruct->sub80170DC_Bank++;
                 if (gWishFutureKnock.futureSightCounter[gActiveBank] && --gWishFutureKnock.futureSightCounter[gActiveBank] == 0 && gBattleMons[gActiveBank].hp)
                 {
                     if (gWishFutureKnock.futureSightMove[gActiveBank] == MOVE_FUTURE_SIGHT)
@@ -1191,17 +1191,17 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
                 }
             }
         }
-        BATTLE_STRUCT->sub80170DC_Tracker = 1;
-        BATTLE_STRUCT->sub80170DC_Bank = 0;
+        gBattleStruct->sub80170DC_Tracker = 1;
+        gBattleStruct->sub80170DC_Bank = 0;
     case 1: // perish song
-        while (BATTLE_STRUCT->sub80170DC_Bank < gNoOfAllBanks)
+        while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
         {
-            gActiveBank = gBankAttacker = gBanksByTurnOrder[BATTLE_STRUCT->sub80170DC_Bank];
+            gActiveBank = gBankAttacker = gBanksByTurnOrder[gBattleStruct->sub80170DC_Bank];
             if (gAbsentBankFlags & gBitTable[gActiveBank])
-                BATTLE_STRUCT->sub80170DC_Bank++;
+                gBattleStruct->sub80170DC_Bank++;
             else
             {
-                BATTLE_STRUCT->sub80170DC_Bank++;
+                gBattleStruct->sub80170DC_Bank++;
                 if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG)
                 {
                     gBattleTextBuff1[0] = 0xFD;
@@ -1241,11 +1241,11 @@ bool8 HandleFaintedMonActions(void)
     do
     {
         int i;
-        switch (BATTLE_STRUCT->sub80173A4_Tracker)
+        switch (gBattleStruct->sub80173A4_Tracker)
         {
         case 0:
-            BATTLE_STRUCT->unk1605A = 0;
-            BATTLE_STRUCT->sub80173A4_Tracker++;
+            gBattleStruct->unk1605A = 0;
+            gBattleStruct->sub80173A4_Tracker++;
             for (i = 0; i < gNoOfAllBanks; i++)
             {
                 if (gAbsentBankFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
@@ -1254,54 +1254,54 @@ bool8 HandleFaintedMonActions(void)
         case 1:
             do
             {
-                gBank1 = gBankTarget = BATTLE_STRUCT->unk1605A;
-                if (gBattleMons[BATTLE_STRUCT->unk1605A].hp == 0 && !(BATTLE_STRUCT->unk16113 & gBitTable[gBattlePartyID[BATTLE_STRUCT->unk1605A]]) && !(gAbsentBankFlags & gBitTable[BATTLE_STRUCT->unk1605A]))
+                gBank1 = gBankTarget = gBattleStruct->unk1605A;
+                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->unk16113 & gBitTable[gBattlePartyID[gBattleStruct->unk1605A]]) && !(gAbsentBankFlags & gBitTable[gBattleStruct->unk1605A]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
-                    BATTLE_STRUCT->sub80173A4_Tracker = 2;
+                    gBattleStruct->sub80173A4_Tracker = 2;
                     return 1;
                 }
-            } while (++BATTLE_STRUCT->unk1605A != gNoOfAllBanks);
-            BATTLE_STRUCT->sub80173A4_Tracker = 3;
+            } while (++gBattleStruct->unk1605A != gNoOfAllBanks);
+            gBattleStruct->sub80173A4_Tracker = 3;
             break;
         case 2:
             sub_8015740(gBank1);
-            if (++BATTLE_STRUCT->unk1605A == gNoOfAllBanks)
-                BATTLE_STRUCT->sub80173A4_Tracker = 3;
+            if (++gBattleStruct->unk1605A == gNoOfAllBanks)
+                gBattleStruct->sub80173A4_Tracker = 3;
             else
-                BATTLE_STRUCT->sub80173A4_Tracker = 1;
+                gBattleStruct->sub80173A4_Tracker = 1;
             break;
         case 3:
-            BATTLE_STRUCT->unk1605A = 0;
-            BATTLE_STRUCT->sub80173A4_Tracker++;
+            gBattleStruct->unk1605A = 0;
+            gBattleStruct->sub80173A4_Tracker++;
         case 4:
             do
             {
-                gBank1 = gBankTarget = BATTLE_STRUCT->unk1605A; //or should banks be switched?
-                if (gBattleMons[BATTLE_STRUCT->unk1605A].hp == 0 && !(gAbsentBankFlags & gBitTable[BATTLE_STRUCT->unk1605A]))
+                gBank1 = gBankTarget = gBattleStruct->unk1605A; //or should banks be switched?
+                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gAbsentBankFlags & gBitTable[gBattleStruct->unk1605A]))
                 {
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
-                    BATTLE_STRUCT->sub80173A4_Tracker = 5;
+                    gBattleStruct->sub80173A4_Tracker = 5;
                     return 1;
                 }
-            } while (++BATTLE_STRUCT->unk1605A != gNoOfAllBanks);
-            BATTLE_STRUCT->sub80173A4_Tracker = 6;
+            } while (++gBattleStruct->unk1605A != gNoOfAllBanks);
+            gBattleStruct->sub80173A4_Tracker = 6;
             break;
         case 5:
-            if (++BATTLE_STRUCT->unk1605A == gNoOfAllBanks)
-                BATTLE_STRUCT->sub80173A4_Tracker = 6;
+            if (++gBattleStruct->unk1605A == gNoOfAllBanks)
+                gBattleStruct->sub80173A4_Tracker = 6;
             else
-                BATTLE_STRUCT->sub80173A4_Tracker = 4;
+                gBattleStruct->sub80173A4_Tracker = 4;
             break;
         case 6:
             if (AbilityBattleEffects(9, 0, 0, 0, 0) || AbilityBattleEffects(0xB, 0, 0, 0, 0) || ItemBattleEffects(1, 0, 1) || AbilityBattleEffects(6, 0, 0, 0, 0))
                 return 1;
-            BATTLE_STRUCT->sub80173A4_Tracker++;
+            gBattleStruct->sub80173A4_Tracker++;
             break;
         case 7:
             break;
         }
-    } while (BATTLE_STRUCT->sub80173A4_Tracker != HandleFaintedMonActions_MAX_CASE);
+    } while (gBattleStruct->sub80173A4_Tracker != HandleFaintedMonActions_MAX_CASE);
     return 0;
 }
 
@@ -1320,15 +1320,15 @@ void TryClearRageStatuses(void)
 u8 AtkCanceller_UnableToUseMove(void)
 {
     u8 effect = 0;
-    s32* bideDmg = &BATTLE_STRUCT->bideDmg;
+    s32* bideDmg = &gBattleStruct->bideDmg;
     do
     {
-        switch (BATTLE_STRUCT->atkCancellerTracker)
+        switch (gBattleStruct->atkCancellerTracker)
         {
         case 0: // flags clear
             gBattleMons[gBankAttacker].status2 &= ~(STATUS2_DESTINY_BOND);
             gStatuses3[gBankAttacker] &= ~(STATUS3_GRUDGE);
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 1: // check being asleep
             if (gBattleMons[gBankAttacker].status1 & STATUS_SLEEP)
@@ -1372,7 +1372,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     }
                 }
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 2: // check being frozen
             if (gBattleMons[gBankAttacker].status1 & STATUS_FREEZE)
@@ -1386,7 +1386,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                     }
                     else
                     {
-                        BATTLE_STRUCT->atkCancellerTracker++;
+                        gBattleStruct->atkCancellerTracker++;
                         break;
                     }
                 }
@@ -1399,7 +1399,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 effect = 2;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 3: // truant
             if (gBattleMons[gBankAttacker].ability == ABILITY_TRUANT && gDisableStructs[gBankAttacker].truantCounter)
@@ -1411,7 +1411,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattleMoveFlags |= MOVESTATUS_MISSED;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 4: // recharge
             if (gBattleMons[gBankAttacker].status2 & STATUS2_RECHARGE)
@@ -1423,7 +1423,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 5: // flinch
             if (gBattleMons[gBankAttacker].status2 & STATUS2_FLINCHED)
@@ -1435,19 +1435,19 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 6: // disabled move
             if (gDisableStructs[gBankAttacker].disabledMove == gCurrentMove && gDisableStructs[gBankAttacker].disabledMove != 0)
             {
                 gProtectStructs[gBankAttacker].usedDisabledMove = 1;
-                BATTLE_STRUCT->scriptingActive = gBankAttacker;
+                gBattleStruct->scriptingActive = gBankAttacker;
                 CancelMultiTurnMoves(gBankAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsDisabled;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 7: // taunt
             if (gDisableStructs[gBankAttacker].tauntTimer1 && gBattleMoves[gCurrentMove].power == 0)
@@ -1458,7 +1458,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 8: // imprisoned
             if (IsImprisoned(gBankAttacker, gCurrentMove))
@@ -1469,7 +1469,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 9: // confusion
             if (gBattleMons[gBankAttacker].status2 & STATUS2_CONFUSION)
@@ -1499,7 +1499,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 10: // paralysis
             if (gBattleMons[gBankAttacker].status1 & STATUS_PARALYSIS && (Random() % 4) == 0)
@@ -1510,12 +1510,12 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 11: // infatuation
             if (gBattleMons[gBankAttacker].status2 & STATUS2_INFATUATION)
             {
-                BATTLE_STRUCT->scriptingActive = CountTrailingZeroBits((gBattleMons[gBankAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
+                gBattleStruct->scriptingActive = CountTrailingZeroBits((gBattleMons[gBankAttacker].status2 & STATUS2_INFATUATION) >> 0x10);
                 if (Random() & 1)
                     BattleScriptPushCursor();
                 else
@@ -1528,7 +1528,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsInLove;
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 12: // bide
             if (gBattleMons[gBankAttacker].status2 & STATUS2_BIDE)
@@ -1553,7 +1553,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 effect = 1;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 13: // move thawing
             if (gBattleMons[gBankAttacker].status1 & STATUS_FREEZE)
@@ -1567,13 +1567,13 @@ u8 AtkCanceller_UnableToUseMove(void)
                 }
                 effect = 2;
             }
-            BATTLE_STRUCT->atkCancellerTracker++;
+            gBattleStruct->atkCancellerTracker++;
             break;
         case 14: // last case
             break;
         }
 
-    } while (BATTLE_STRUCT->atkCancellerTracker != ATKCANCELLER_MAX_CASE && effect == 0);
+    } while (gBattleStruct->atkCancellerTracker != ATKCANCELLER_MAX_CASE && effect == 0);
 
     if (effect == 2)
     {
@@ -1731,8 +1731,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         else
             move = gCurrentMove;
 
-        if (BATTLE_STRUCT->dynamicMoveType)
-            moveType = BATTLE_STRUCT->dynamicMoveType & 0x3F;
+        if (gBattleStruct->dynamicMoveType)
+            moveType = gBattleStruct->dynamicMoveType & 0x3F;
         else
             moveType = gBattleMoves[move].type;
 
@@ -1747,7 +1747,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             {
             case 0xFF: //weather from overworld
             //_08018586
-                switch (weather_get_current())
+                switch (GetCurrentWeather())
                 {
                 case WEATHER_RAIN_LIGHT:
                 case WEATHER_RAIN_MED:
@@ -1755,8 +1755,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_RAIN_ANY))
                     {
                         gBattleWeather = (WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_PERMANENT);
-                        BATTLE_STRUCT->animArg1 = B_ANIM_RAIN_CONTINUES;
-                        BATTLE_STRUCT->scriptingActive = bank;
+                        gBattleStruct->animArg1 = B_ANIM_RAIN_CONTINUES;
+                        gBattleStruct->scriptingActive = bank;
                         effect++;
                     }
                     break;
@@ -1764,8 +1764,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SANDSTORM_ANY))
                     {
                         gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
-                        BATTLE_STRUCT->scriptingActive = bank;
+                        gBattleStruct->animArg1 = B_ANIM_SANDSTORM_CONTINUES;
+                        gBattleStruct->scriptingActive = bank;
                         effect++;
                     }
                     break;
@@ -1773,15 +1773,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (!(gBattleWeather & WEATHER_SUN_ANY))
                     {
                         gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
-                        BATTLE_STRUCT->animArg1 = B_ANIM_SUN_CONTINUES;
-                        BATTLE_STRUCT->scriptingActive = bank;
+                        gBattleStruct->animArg1 = B_ANIM_SUN_CONTINUES;
+                        gBattleStruct->scriptingActive = bank;
                         effect++;
                     }
                     break;
                 }
                 if (effect)
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
+                    gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
                     BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;
@@ -1791,7 +1791,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleWeather = (WEATHER_RAIN_PERMANENT | WEATHER_RAIN_TEMPORARY);
                     BattleScriptPushCursorAndCallback(BattleScript_DrizzleActivates);
-                    BATTLE_STRUCT->scriptingActive = bank;
+                    gBattleStruct->scriptingActive = bank;
                     effect++;
                 }
                 break;
@@ -1801,7 +1801,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
                     BattleScriptPushCursorAndCallback(BattleScript_SandstreamActivates);
-                    BATTLE_STRUCT->scriptingActive = bank;
+                    gBattleStruct->scriptingActive = bank;
                     effect++;
                 }
                 break;
@@ -1811,7 +1811,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 {
                     gBattleWeather = (WEATHER_SUN_PERMANENT | WEATHER_SUN_TEMPORARY);
                     BattleScriptPushCursorAndCallback(BattleScript_DroughtActivates);
-                    BATTLE_STRUCT->scriptingActive = bank;
+                    gBattleStruct->scriptingActive = bank;
                     effect++;
                 }
                 break;
@@ -1829,8 +1829,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (effect != 0)
                 {
                     BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                    BATTLE_STRUCT->scriptingActive = bank;
-                    BATTLE_STRUCT->castformToChangeInto = effect - 1;
+                    gBattleStruct->scriptingActive = bank;
+                    gBattleStruct->castformToChangeInto = effect - 1;
                 }
                 break;
             case ABILITY_TRACE:
@@ -1852,8 +1852,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         if (effect != 0)
                         {
                             BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                            BATTLE_STRUCT->scriptingActive = target1;
-                            BATTLE_STRUCT->castformToChangeInto = effect - 1;
+                            gBattleStruct->scriptingActive = target1;
+                            gBattleStruct->castformToChangeInto = effect - 1;
                             break;
                         }
                     }
@@ -1897,7 +1897,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleMons[bank].status1 = 0;
                         // BUG: The nightmare status does not get cleared here. This was fixed in Emerald.
                         //gBattleMons[bank].status2 &= ~(STATUS2_NIGHTMARE);
-                        BATTLE_STRUCT->scriptingActive = gActiveBank = bank;
+                        gBattleStruct->scriptingActive = gActiveBank = bank;
                         BattleScriptPushCursorAndCallback(BattleScript_ShedSkinActivates);
                         EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[bank].status1);
                         MarkBufferBankForExecution(gActiveBank);
@@ -1908,10 +1908,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     if (gBattleMons[bank].statStages[STAT_STAGE_SPEED] < 0xC && gDisableStructs[bank].isFirstTurn != 2)
                     {
                         gBattleMons[bank].statStages[STAT_STAGE_SPEED]++;
-                        BATTLE_STRUCT->animArg1 = 0x11;
-                        BATTLE_STRUCT->animArg2 = 0;
+                        gBattleStruct->animArg1 = 0x11;
+                        gBattleStruct->animArg2 = 0;
                         BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
-                        BATTLE_STRUCT->scriptingActive = bank;
+                        gBattleStruct->scriptingActive = bank;
                         effect++;
                     }
                     break;
@@ -2218,7 +2218,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         }
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_AbilityCuredStatus;
-                        BATTLE_STRUCT->scriptingActive = bank;
+                        gBattleStruct->scriptingActive = bank;
                         gActiveBank = bank;
                         EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
                         MarkBufferBankForExecution(gActiveBank);
@@ -2238,8 +2238,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         if (effect)
                         {
                             BattleScriptPushCursorAndCallback(BattleScript_CastformChange);
-                            BATTLE_STRUCT->scriptingActive = bank;
-                            BATTLE_STRUCT->castformToChangeInto = effect - 1;
+                            gBattleStruct->scriptingActive = bank;
+                            gBattleStruct->castformToChangeInto = effect - 1;
                             return effect;
                         }
                     }
@@ -2251,11 +2251,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
             {
                 gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
-                BATTLE_STRUCT->synchroniseEffect &= 0x3F;
-                if (BATTLE_STRUCT->synchroniseEffect == 6)
-                    BATTLE_STRUCT->synchroniseEffect = 2;
-                gBattleCommunication[MOVE_EFFECT_BYTE] = BATTLE_STRUCT->synchroniseEffect + 0x40;
-                BATTLE_STRUCT->scriptingActive = gBankTarget;
+                gBattleStruct->synchroniseEffect &= 0x3F;
+                if (gBattleStruct->synchroniseEffect == 6)
+                    gBattleStruct->synchroniseEffect = 2;
+                gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchroniseEffect + 0x40;
+                gBattleStruct->scriptingActive = gBankTarget;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2267,11 +2267,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             if (gLastUsedAbility == ABILITY_SYNCHRONIZE && (gHitMarker & HITMARKER_SYNCHRONISE_EFFECT))
             {
                 gHitMarker &= ~(HITMARKER_SYNCHRONISE_EFFECT);
-                BATTLE_STRUCT->synchroniseEffect &= 0x3F;
-                if (BATTLE_STRUCT->synchroniseEffect == 6)
-                    BATTLE_STRUCT->synchroniseEffect = 2;
-                gBattleCommunication[MOVE_EFFECT_BYTE] = BATTLE_STRUCT->synchroniseEffect;
-                BATTLE_STRUCT->scriptingActive = gBankAttacker;
+                gBattleStruct->synchroniseEffect &= 0x3F;
+                if (gBattleStruct->synchroniseEffect == 6)
+                    gBattleStruct->synchroniseEffect = 2;
+                gBattleCommunication[MOVE_EFFECT_BYTE] = gBattleStruct->synchroniseEffect;
+                gBattleStruct->scriptingActive = gBankAttacker;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_IGNORE_SAFEGUARD;
@@ -2287,7 +2287,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
                     BattleScriptPushCursorAndCallback(gUnknown_081D978C);
-                    BATTLE_STRUCT->intimidateBank = i;
+                    gBattleStruct->intimidateBank = i;
                     effect++;
                     break;
                 }
@@ -2346,7 +2346,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     {
                         BattleScriptPushCursorAndCallback(BattleScript_TraceActivates);
                         gStatuses3[i] &= ~(STATUS3_TRACE);
-                        BATTLE_STRUCT->scriptingActive = i;
+                        gBattleStruct->scriptingActive = i;
 
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 4;
@@ -2373,7 +2373,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gStatuses3[i] &= ~(STATUS3_INTIMIDATE_POKES);
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = gUnknown_081D9795;
-                    BATTLE_STRUCT->intimidateBank = i;
+                    gBattleStruct->intimidateBank = i;
                     effect++;
                     break;
                 }
@@ -2499,7 +2499,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
     return effect;
 }
 
-void BattleScriptExecute(u8* BS_ptr)
+void BattleScriptExecute(const u8* BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;
     B_FUNCTION_STACK->ptr[B_FUNCTION_STACK->size++] = gBattleMainFunc;
@@ -2586,7 +2586,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
         switch (bankHoldEffect)
         {
         case HOLD_EFFECT_DOUBLE_PRIZE:
-            BATTLE_STRUCT->moneyMultiplier = 2;
+            gBattleStruct->moneyMultiplier = 2;
             break;
         case HOLD_EFFECT_RESTORE_STATS:
             for (i = 0; i < 8; i++)
@@ -2599,7 +2599,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             }
             if (effect)
             {
-                BATTLE_STRUCT->scriptingActive = bank;
+                gBattleStruct->scriptingActive = bank;
                 gStringBank = bank;
                 gActiveBank = gBankAttacker = bank;
                 BattleScriptExecute(BattleScript_WhiteHerbEnd2);
@@ -2672,7 +2672,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 }
                 if (effect)
                 {
-                    BATTLE_STRUCT->scriptingActive = bank;
+                    gBattleStruct->scriptingActive = bank;
                     gStringBank = bank;
                     gActiveBank = gBankAttacker = bank;
                     BattleScriptExecute(BattleScript_WhiteHerbEnd2);
@@ -2809,9 +2809,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleTextBuff2[4] = EOS;
 
                     gEffectBank = bank;
-                    BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_ATK;
-                    BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_ATK;
-                    BATTLE_STRUCT->animArg2 = 0;
+                    gBattleStruct->statChanger = 0x10 + STAT_STAGE_ATK;
+                    gBattleStruct->animArg1 = 0xE + STAT_STAGE_ATK;
+                    gBattleStruct->animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -2825,9 +2825,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleTextBuff1[3] = EOS;
 
                     gEffectBank = bank;
-                    BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_DEF;
-                    BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_DEF;
-                    BATTLE_STRUCT->animArg2 = 0;
+                    gBattleStruct->statChanger = 0x10 + STAT_STAGE_DEF;
+                    gBattleStruct->animArg1 = 0xE + STAT_STAGE_DEF;
+                    gBattleStruct->animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -2841,9 +2841,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleTextBuff1[3] = EOS;
 
                     gEffectBank = bank;
-                    BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPEED;
-                    BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPEED;
-                    BATTLE_STRUCT->animArg2 = 0;
+                    gBattleStruct->statChanger = 0x10 + STAT_STAGE_SPEED;
+                    gBattleStruct->animArg1 = 0xE + STAT_STAGE_SPEED;
+                    gBattleStruct->animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -2857,9 +2857,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleTextBuff1[3] = EOS;
 
                     gEffectBank = bank;
-                    BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPATK;
-                    BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPATK;
-                    BATTLE_STRUCT->animArg2 = 0;
+                    gBattleStruct->statChanger = 0x10 + STAT_STAGE_SPATK;
+                    gBattleStruct->animArg1 = 0xE + STAT_STAGE_SPATK;
+                    gBattleStruct->animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -2873,9 +2873,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     gBattleTextBuff1[3] = EOS;
 
                     gEffectBank = bank;
-                    BATTLE_STRUCT->statChanger = 0x10 + STAT_STAGE_SPDEF;
-                    BATTLE_STRUCT->animArg1 = 0xE + STAT_STAGE_SPDEF;
-                    BATTLE_STRUCT->animArg2 = 0;
+                    gBattleStruct->statChanger = 0x10 + STAT_STAGE_SPDEF;
+                    gBattleStruct->animArg1 = 0xE + STAT_STAGE_SPDEF;
+                    gBattleStruct->animArg2 = 0;
                     BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                     effect = ITEM_STATS_CHANGE;
                 }
@@ -2918,9 +2918,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                         gBattleTextBuff2[7] = EOS;
 
                         gEffectBank = bank;
-                        BATTLE_STRUCT->statChanger = 0x21 + i;
-                        BATTLE_STRUCT->animArg1 = 0x21 + i + 6;
-                        BATTLE_STRUCT->animArg2 = 0;
+                        gBattleStruct->statChanger = 0x21 + i;
+                        gBattleStruct->animArg1 = 0x21 + i + 6;
+                        gBattleStruct->animArg2 = 0;
                         BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);
                         effect = ITEM_STATS_CHANGE;
                     }
@@ -3033,7 +3033,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             }
             if (effect)
             {
-                BATTLE_STRUCT->scriptingActive = bank;
+                gBattleStruct->scriptingActive = bank;
                 gStringBank = bank;
                 gActiveBank = gBankAttacker = bank;
                 switch (effect)
@@ -3181,7 +3181,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 }
                 if (effect)
                 {
-                    BATTLE_STRUCT->scriptingActive = bank;
+                    gBattleStruct->scriptingActive = bank;
                     gStringBank = bank;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_WhiteHerbRet;
@@ -3191,7 +3191,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             }
             if (effect)
             {
-                BATTLE_STRUCT->scriptingActive = bank;
+                gBattleStruct->scriptingActive = bank;
                 gStringBank = bank;
                 gActiveBank = bank;
                 EmitSetMonData(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
@@ -3228,7 +3228,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 {
                     gLastUsedItem = atkItem;
                     gStringBank = gBankAttacker;
-                    BATTLE_STRUCT->scriptingActive = gBankAttacker;
+                    gBattleStruct->scriptingActive = gBankAttacker;
                     gBattleMoveDamage = (gSpecialStatuses[gBankTarget].moveturnLostHP / atkQuality) * -1;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = -1;
@@ -3433,7 +3433,7 @@ u8 IsMonDisobedient(void)
             gRandomMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
             gBattleCommunication[3] = 0;
             gDynamicBasePower = 0;
-            BATTLE_STRUCT->dynamicMoveType = 0;
+            gBattleStruct->dynamicMoveType = 0;
             gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
             gBankTarget = GetMoveTarget(gRandomMove, 0);
             gHitMarker |= HITMARKER_x200000;

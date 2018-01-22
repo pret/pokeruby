@@ -100,6 +100,8 @@ void GetMoneyAmountText(u8 *buffer, u32 amount, u8 arg2)
         width = 7;
     else if (amount > 99999)
         width = 6;
+    // A special sprite is used for 10000 in the decoration
+    // shop, so be sure to account for this.
     else if (amount > 10000)
         width = 5;
     else if (amount > 999)
@@ -175,7 +177,7 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top)
 }
 
 __attribute__((naked))
-void sub_80B7B34(u8 var1, u8 var2, int var3)
+void Draw10000Sprite(u8 var1, u8 var2, int var3)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

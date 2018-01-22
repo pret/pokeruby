@@ -101,7 +101,14 @@ static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
 static void sub_806BBEC(u8 a);
 
-const u16 TMHMMoves[] = {
+EWRAM_DATA u8 gUnknown_0202E8F4 = 0;
+EWRAM_DATA u8 gUnknown_0202E8F5 = 0;
+EWRAM_DATA u8 gUnknown_0202E8F6 = 0;
+EWRAM_DATA u16 gUnknown_0202E8F8 = 0;
+EWRAM_DATA u8 gPartyMenuType = 0;
+
+const u16 TMHMMoves[] =
+{
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,
     MOVE_WATER_PULSE,
@@ -458,10 +465,6 @@ struct Unk201FE00
 
 extern u16 gBattleTypeFlags;
 extern u8 gTileBuffer[];
-extern u8 gUnknown_0202E8F4;
-extern u8 gUnknown_0202E8F6;
-extern u16 gUnknown_0202E8F8;
-extern u8 gPartyMenuType;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gPlayerPartyCount;
 extern s32 gBattleMoveDamage;
@@ -620,27 +623,11 @@ bool8 SetupDefaultPartyMenu(void)
 
 bool8 InitPartyMenu(void)
 {
-    u8 *addr;
-    u32 size;
-
     switch (gMain.state)
     {
     case 0:
         SetVBlankCallback(NULL);
-        addr = (u8 *)VRAM;
-        size = VRAM_SIZE;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
-
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
         DmaClear32(3, OAM, OAM_SIZE);
         DmaClear16(3, PLTT, PLTT_SIZE);
 
@@ -793,9 +780,7 @@ void ReDrawPartyMonBackgrounds(void)
 {
     if (ewram1B000.unk261)
     {
-        const void *src = gBGTilemapBuffers[2];
-        void *dest = (void *)(BG_VRAM + 0x3000);
-        DmaCopy16(3, src, dest, 0x800);
+        DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(BG_VRAM + 0x3000), 0x800);
 
         if (ewram1B000.unk261 == 2)
         {

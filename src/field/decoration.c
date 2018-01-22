@@ -19,6 +19,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "shop.h"
 #include "ewram.h"
 
 EWRAM_DATA u8 *gUnknown_020388D0 = NULL;
@@ -1614,7 +1615,7 @@ void sub_80FE604(u8 taskId)
                     sub_8134104(gUnknown_020388F6);
                     gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
-                    sub_80F944C();
+                    ClearVerticalScrollIndicatorPalettes();
                     sub_80F9480(gUnknown_020388F7, 8);
                     LoadScrollIndicatorPalette();
                     gTasks[taskId].func = sub_80FE868;
@@ -1659,7 +1660,7 @@ void sub_80FE758(u8 taskId)
         gTasks[taskId].func = Task_DecorationPCProcessMenuInput;
     } else
     {
-        sub_80B3068(taskId);
+        Shop_RunExitSellMenuTask(taskId);
     }
 }
 
@@ -1783,17 +1784,17 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
     u16 i;
     u16 j;
     u8 ni;
-    if (gUnknown_020388F4 != 0 || (DestroyVerticalScrollIndicator(0), gUnknown_020388F4 != 0))
+    if (gUnknown_020388F4 != 0 || (DestroyVerticalScrollIndicator(TOP_ARROW), gUnknown_020388F4 != 0))
     {
-        CreateVerticalScrollIndicators(0, 0x3c, 0x08);
+        CreateVerticalScrollIndicators(TOP_ARROW, 0x3c, 0x08);
     }
     if (gUnknown_020388F4 + 7 == gUnknown_020388D5)
     {
-        DestroyVerticalScrollIndicator(1);
+        DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     }
     if (gUnknown_020388F4 + 7 < gUnknown_020388D5)
     {
-        CreateVerticalScrollIndicators(1, 0x3c, 0x98);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 0x3c, 0x98);
     }
     for (i=gUnknown_020388F4; i<gUnknown_020388F4+8; i++)
     {
@@ -2003,8 +2004,8 @@ void sub_80FEF50(u8 taskId)
 void sub_80FEF74(void)
 {
     sub_80F9520(gUnknown_020388F7, 8);
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 14, 19);
 }
@@ -2043,8 +2044,8 @@ void sub_80FF034(u8 taskId)
 void sub_80FF058(u8 taskId)
 {
     sub_80F9520(gUnknown_020388F7, 8);
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     BuyMenuFreeMemory();
     gTasks[taskId].func = sub_80FF034;
 }
@@ -2238,7 +2239,7 @@ void sub_80FF5BC(u8 taskId)
     {
         if (sub_80FF58C() == TRUE)
         {
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_80FF6AC;
         } else
@@ -2271,8 +2272,8 @@ void sub_80FF6AC(u8 taskId)
             if (!gPaletteFade.active)
             {
                 sub_80FF0E0(taskId);
-                DestroyVerticalScrollIndicator(0);
-                DestroyVerticalScrollIndicator(1);
+                DestroyVerticalScrollIndicator(TOP_ARROW);
+                DestroyVerticalScrollIndicator(BOTTOM_ARROW);
                 sub_80F9520(gUnknown_020388F7, 8);
                 BuyMenuFreeMemory();
                 gTasks[taskId].data[2] = 1;
@@ -2288,7 +2289,7 @@ void sub_80FF6AC(u8 taskId)
             gTasks[taskId].data[2] = 2;
             break;
         case 2:
-            if (sub_807D770() == 1)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[12] = 0;
                 sub_810065C(taskId);
@@ -3192,7 +3193,7 @@ void sub_810026C(u8 taskId)
 
 void sub_810028C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -3221,7 +3222,7 @@ void c1_overworld_prev_quest(u8 taskId)
 
 void sub_8100334(u8 taskId)
 {
-    if (sub_807D770() == 1)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         gTasks[taskId].func = sub_80FE948;
     }
@@ -3628,7 +3629,7 @@ void sub_8100A0C(u8 taskId)
 {
     if (sub_8100D38(taskId) == 1)
     {
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8100E70;
     } else
@@ -3734,7 +3735,7 @@ void sub_8100C88(u8 taskId)
             gTasks[taskId].data[2] = 3;
             break;
         case 3:
-            if (sub_807D770() == 1)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[13] = -1;
                 DisplayItemMessageOnField(taskId, gSecretBaseText_DecorReturned, sub_81010F0, 0);
@@ -3799,7 +3800,7 @@ void sub_8100E70(u8 taskId)
             data[2] = 2;
             break;
         case 2:
-            if (sub_807D770() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 data[12] = 1;
                 sub_8100EEC(taskId);
@@ -4137,7 +4138,7 @@ void sub_8101518(u8 taskId)
 
 void sub_810153C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_8100C88;
 }
@@ -4156,7 +4157,7 @@ void sub_8101590(u8 taskId)
 
 void sub_81015B0(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81015E0;
 }
@@ -4183,7 +4184,7 @@ void sub_81015E0(u8 taskId)
 
 void sub_8101648(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         gTasks[taskId].func = Task_DecorationPCProcessMenuInput;
     }

@@ -590,7 +590,7 @@ bool8 sub_80538D0(u16 x, u16 y)
 
 void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
-    s32 i;
+    s32 paletteIndex;
 
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
@@ -611,8 +611,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8056D38(gMapHeader.mapData);
     apply_map_tileset2_palette(gMapHeader.mapData);
 
-    for (i = 6; i < 12; i++)
-        sub_807D874(i);
+    for (paletteIndex = 6; paletteIndex < 12; paletteIndex++)
+        ApplyWeatherGammaShiftToPal(paletteIndex);
 
     sub_8072ED0();
     UpdateLocationHistoryForRoamer();
@@ -1664,29 +1664,12 @@ void do_load_map_stuff_loop(u8 *a1)
 
 void sub_8054BA8(void)
 {
-    u8 *addr;
-    u32 size;
-
     REG_DISPCNT = 0;
 
     ScanlineEffect_Stop();
 
     DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
-
-    addr = (void *)VRAM;
-    size = 0x18000;
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
     ResetOamRange(0, 128);
     LoadOam();
 }

@@ -26,7 +26,7 @@
 #include "tv.h"
 #include "ewram.h"
 
-extern struct RecordMixingDayCareMail gUnknown_02038738;
+EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02038738 = {0};
 extern u16 gSpecialVar_0x8005;
 
 u32 gUnknown_03005D2C;

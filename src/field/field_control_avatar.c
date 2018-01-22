@@ -181,7 +181,7 @@ int sub_8068024(struct FieldInput *input)
         return TRUE;
     if (input->input_field_0_6)
     {
-        IncrementGameStat(5);
+        IncrementGameStat(GAME_STAT_STEPS);
         if (sub_80687E4(&position, r4, r6) == 1)
             return TRUE;
     }
@@ -767,20 +767,19 @@ static u8 *trigger_activate(struct CoordEvent *coordEvent)
     return NULL;
 }
 
-static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16 y, u8 d)
+static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
     u8 coordEventCount = mapHeader->events->coordEventCount;
-    u8 *script;
 
     for (i = 0; i < coordEventCount; i++)
     {
         if ((u16)coordEvents[i].x == x && (u16)coordEvents[i].y == y)
         {
-            if (coordEvents[i].unk4 == d || coordEvents[i].unk4 == 0)
+            if (coordEvents[i].elevation == elevation || coordEvents[i].elevation == 0)
             {
-                script = trigger_activate(&coordEvents[i]);
+                u8 *script = trigger_activate(&coordEvents[i]);
                 if (script != NULL)
                     return script;
             }

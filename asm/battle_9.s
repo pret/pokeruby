@@ -273,7 +273,7 @@ sub_80361E8: @ 80361E8
 	beq _08036214
 	b _08036400
 _08036214:
-	ldr r1, _0803627C @ =gMoveHitWith
+	ldr r1, _0803627C @ =gLastLandedMoves
 	ldr r5, _08036280 @ =gActiveBank
 	ldrb r3, [r5]
 	lsls r0, r3, 1
@@ -326,7 +326,7 @@ _08036242:
 	ldrb r7, [r5]
 	b _080362B2
 	.align 2, 0
-_0803627C: .4byte gMoveHitWith
+_0803627C: .4byte gLastLandedMoves
 _08036280: .4byte gActiveBank
 _08036284: .4byte 0x0000ffff
 _08036288: .4byte gBattleMoves
@@ -348,7 +348,7 @@ _080362AE:
 	mov r8, r7
 _080362B2:
 	ldr r3, _080362D4 @ =gBattleMoves
-	ldr r1, _080362D8 @ =gMoveHitWith
+	ldr r1, _080362D8 @ =gLastLandedMoves
 	ldr r2, _080362DC @ =gActiveBank
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -366,7 +366,7 @@ _080362B2:
 	b _080362F2
 	.align 2, 0
 _080362D4: .4byte gBattleMoves
-_080362D8: .4byte gMoveHitWith
+_080362D8: .4byte gLastLandedMoves
 _080362DC: .4byte gActiveBank
 _080362E0:
 	cmp r0, 0xB
@@ -548,7 +548,7 @@ AI_SwitchIfNaturalCure: @ 8036410
 	lsrs r0, 1
 	cmp r1, r0
 	bcc _080364D8
-	ldr r1, _08036470 @ =gMoveHitWith
+	ldr r1, _08036470 @ =gLastLandedMoves
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -568,11 +568,11 @@ _08036456:
 	.align 2, 0
 _08036468: .4byte gBattleMons
 _0803646C: .4byte gActiveBank
-_08036470: .4byte gMoveHitWith
+_08036470: .4byte gLastLandedMoves
 _08036474: .4byte 0x0000ffff
 _08036478:
 	ldr r2, _080364A4 @ =gBattleMoves
-	ldr r1, _080364A8 @ =gMoveHitWith
+	ldr r1, _080364A8 @ =gLastLandedMoves
 	ldr r4, _080364AC @ =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 1
@@ -594,7 +594,7 @@ _08036478:
 	b _080364E0
 	.align 2, 0
 _080364A4: .4byte gBattleMoves
-_080364A8: .4byte gMoveHitWith
+_080364A8: .4byte gLastLandedMoves
 _080364AC: .4byte gActiveBank
 _080364B0:
 	movs r0, 0x8
@@ -863,7 +863,7 @@ sub_80366A4: @ 80366A4
 	lsls r1, 24
 	lsrs r1, 24
 	str r1, [sp, 0x4]
-	ldr r1, _08036730 @ =gMoveHitWith
+	ldr r1, _08036730 @ =gLastLandedMoves
 	ldr r5, _08036734 @ =gActiveBank
 	ldrb r3, [r5]
 	lsls r0, r3, 1
@@ -924,7 +924,7 @@ _080366F6:
 	mov r10, r5
 	b _0803679C
 	.align 2, 0
-_08036730: .4byte gMoveHitWith
+_08036730: .4byte gLastLandedMoves
 _08036734: .4byte gActiveBank
 _08036738: .4byte 0x0000ffff
 _0803673C: .4byte gUnknown_02024C5C
@@ -1053,7 +1053,7 @@ _08036844:
 	adds r0, r2
 	ldrb r2, [r0, 0x16]
 _08036850:
-	ldr r1, _080368F0 @ =gMoveHitWith
+	ldr r1, _080368F0 @ =gLastLandedMoves
 	ldr r5, _080368F4 @ =gActiveBank
 	ldrb r0, [r5]
 	lsls r0, 1
@@ -1132,7 +1132,7 @@ _080368DA:
 	bx r1
 	.align 2, 0
 _080368EC: .4byte gBaseStats
-_080368F0: .4byte gMoveHitWith
+_080368F0: .4byte gLastLandedMoves
 _080368F4: .4byte gActiveBank
 _080368F8: .4byte gUnknown_02024C5C
 _080368FC: .4byte gBattleMons
