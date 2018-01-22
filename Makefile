@@ -52,7 +52,11 @@ C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
 
-LIB := -L ../../tools/agbcc/lib -lgcc -lc
+ifeq ($(OS),Windows_NT)
+  LIB := ../../tools/agbcc/lib/libgcc.a ../../tools/agbcc/lib/libc.a
+else
+  LIB := -L ../../tools/agbcc/lib -lgcc -lc
+endif
 
 LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
