@@ -4223,7 +4223,7 @@ void debug_sub_808D54C()
         "	.align	2, 0\n"
         "._325:\n"
         "	.word	gMain\n"
-        "	.word	gUnknown_Debug_083C1194+0x2\n"
+        "	.word	gUnknown_Debug_083C1196\n"
         "._323:\n"
         "	add	r0, r4, #0\n"
         "	bl	FlagClear\n"
@@ -4288,7 +4288,7 @@ void debug_sub_808D59C()
         "	.align	2, 0\n"
         "._329:\n"
         "	.word	gUnknown_Debug_083C1194\n"
-        "	.word	gUnknown_Debug_083C1194+0x2\n"
+        "	.word	gUnknown_Debug_083C1196\n"
         "\n"
     );
 }
@@ -4554,7 +4554,7 @@ void debug_sub_808D790()
         "	.align	2, 0\n"
         "._351:\n"
         "	.word	gMain\n"
-        "	.word	gUnknown_Debug_083C12D0+0x2\n"
+        "	.word	gUnknown_Debug_083C12D2\n"
         "._349:\n"
         "	add	r0, r4, #0\n"
         "	bl	FlagClear\n"
@@ -4619,7 +4619,7 @@ void debug_sub_808D7E0()
         "	.align	2, 0\n"
         "._355:\n"
         "	.word	gUnknown_Debug_083C12D0\n"
-        "	.word	gUnknown_Debug_083C12D0+0x2\n"
+        "	.word	gUnknown_Debug_083C12D2\n"
         "\n"
     );
 }

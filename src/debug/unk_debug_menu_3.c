@@ -25,8 +25,8 @@ int debug_sub_813C404()
         "._2:\n"
         "	.align	2, 0\n"
         "._1:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x30d\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x3c\n"
+        "	.word	gUnknown_Debug_845DDB2\n"
+        "	.word	gUnknown_Debug_845DAE1\n"
         "\n"
     );
 }
@@ -53,8 +53,8 @@ int debug_sub_813C430()
         "._4:\n"
         "	.align	2, 0\n"
         "._3:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x95d\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x93b\n"
+        "	.word	gUnknown_Debug_845E402\n"
+        "	.word	gUnknown_Debug_845E3E0\n"
         "\n"
     );
 }
@@ -81,8 +81,8 @@ int debug_sub_813C45C()
         "._6:\n"
         "	.align	2, 0\n"
         "._5:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x99e\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x97d\n"
+        "	.word	gUnknown_Debug_845E443\n"
+        "	.word	gUnknown_Debug_845E422\n"
         "\n"
     );
 }
@@ -109,8 +109,8 @@ int debug_sub_813C488()
         "._8:\n"
         "	.align	2, 0\n"
         "._7:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x97d\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x95d\n"
+        "	.word	gUnknown_Debug_845E422\n"
+        "	.word	gUnknown_Debug_845E402\n"
         "\n"
     );
 }
@@ -132,8 +132,8 @@ int debug_sub_813C4B4()
         "._10:\n"
         "	.align	2, 0\n"
         "._9:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xb74\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xb61\n"
+        "	.word	gUnknown_Debug_845E619\n"
+        "	.word	gUnknown_Debug_845E606\n"
         "\n"
     );
 }
@@ -160,8 +160,8 @@ int debug_sub_813C4D4()
         "._12:\n"
         "	.align	2, 0\n"
         "._11:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xc6d\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xb74\n"
+        "	.word	gUnknown_Debug_845E712\n"
+        "	.word	gUnknown_Debug_845E619\n"
         "\n"
     );
 }
@@ -188,8 +188,8 @@ int debug_sub_813C500()
         "._14:\n"
         "	.align	2, 0\n"
         "._13:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xcf2\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xc6d\n"
+        "	.word	gUnknown_Debug_845E797\n"
+        "	.word	gUnknown_Debug_845E712\n"
         "\n"
     );
 }
@@ -234,9 +234,9 @@ void debug_sub_813C52C()
         "._16:\n"
         "	.align	2, 0\n"
         "._15:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xd16\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xcf2\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xd10\n"
+        "	.word	gUnknown_Debug_845E7BB\n"
+        "	.word	gUnknown_Debug_845E797\n"
+        "	.word	gUnknown_Debug_845E7B5\n"
         "\n"
     );
 }
@@ -358,10 +358,10 @@ int debug_sub_813C5B4()
         "	.align	2, 0\n"
         "._23:\n"
         "	.word	gSaveBlock1+0x3160\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x331\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x30d\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x861\n"
-        "	.word	sUnusedFlashSectors+0x8\n"
+        "	.word	gUnknown_Debug_845DDD6\n"
+        "	.word	gUnknown_Debug_845DDB2\n"
+        "	.word	gUnknown_Debug_845E306\n"
+        "	.word	Str_842E23C\n"
         "	.word	0xfff\n"
         "	.word	0x52f\n"
         "\n"
@@ -422,8 +422,8 @@ void debug_sub_813C638()
         "	.align	2, 0\n"
         "._25:\n"
         "	.word	0x270f\n"
-        "	.word	sUnusedFlashSectors+0xc\n"
-        "	.word	sUnusedFlashSectors+0x14\n"
+        "	.word	Str_842E240\n"
+        "	.word	Str_842E248\n"
         "\n"
     );
 }
@@ -590,12 +590,12 @@ int debug_sub_813C740()
         "._30:\n"
         "	.align	2, 0\n"
         "._29:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x99e\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa4a\n"
+        "	.word	gUnknown_Debug_845E443\n"
+        "	.word	gUnknown_Debug_845E4EF\n"
         "	.word	gEnemyParty\n"
-        "	.word	sUnusedFlashSectors+0x4\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x9c2\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa26\n"
+        "	.word	Str_842E238\n"
+        "	.word	gUnknown_Debug_845E467\n"
+        "	.word	gUnknown_Debug_845E4CB\n"
         "\n"
     );
 }
@@ -651,11 +651,11 @@ int debug_sub_813C810()
         "._32:\n"
         "	.align	2, 0\n"
         "._31:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x99e\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa4a\n"
+        "	.word	gUnknown_Debug_845E443\n"
+        "	.word	gUnknown_Debug_845E4EF\n"
         "	.word	gEnemyParty\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x9c2\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa26\n"
+        "	.word	gUnknown_Debug_845E467\n"
+        "	.word	gUnknown_Debug_845E4CB\n"
         "\n"
     );
 }
@@ -713,11 +713,11 @@ int debug_sub_813C888()
         "._34:\n"
         "	.align	2, 0\n"
         "._33:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x99e\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa4a\n"
+        "	.word	gUnknown_Debug_845E443\n"
+        "	.word	gUnknown_Debug_845E4EF\n"
         "	.word	gEnemyParty\n"
-        "	.word	gOtherText_DataCannotUseVersion+0x9c2\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa26\n"
+        "	.word	gUnknown_Debug_845E467\n"
+        "	.word	gUnknown_Debug_845E4CB\n"
         "\n"
     );
 }
@@ -791,11 +791,11 @@ int debug_sub_813C93C()
         "._38:\n"
         "	.align	2, 0\n"
         "._37:\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa4a\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xb61\n"
-        "	.word	sUnusedFlashSectors+0x24\n"
+        "	.word	gUnknown_Debug_845E4EF\n"
+        "	.word	gUnknown_Debug_845E606\n"
+        "	.word	Str_842E253+5  @ weird...\n"
         "	.word	0x270f\n"
-        "	.word	gOtherText_DataCannotUseVersion+0xa61\n"
+        "	.word	gUnknown_Debug_845E506\n"
         "\n"
     );
 }
