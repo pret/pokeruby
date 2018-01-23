@@ -1,10 +1,18 @@
 #include "global.h"
+#include "decompress.h"
+#include "palette.h"
+#include "graphics.h"
 #include "text.h"
 #include "menu.h"
 #include "battle.h"
 #include "contest.h"
 #include "link.h"
 
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+
+void sub_80C37E4(void);
+u8 sub_80C3990(u8 a0, u8 a5);
+s8 sub_80C39E4(u8 a0, u8 a5);
 
 void sub_80C2020(void)
 {
@@ -46,4 +54,44 @@ void sub_80C2020(void)
     gBattle_WIN0V = 0;
     gBattle_WIN1H = 0;
     gBattle_WIN1V = 0;
+}
+
+void sub_80C2144(void)
+{
+    int i;
+    int j;
+    s8 r7;
+    s8 r4;
+    u16 r6;
+    u16 r3;
+
+    DmaFill32Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
+    LZDecompressVram(gUnknown_08D1977C, BG_SCREEN_ADDR(0));
+    LZDecompressVram(gUnknown_08D1A490, BG_SCREEN_ADDR(26));
+    LZDecompressVram(gUnknown_08D1A364, BG_SCREEN_ADDR(28));
+    LZDecompressVram(gUnknown_08D1A250, BG_SCREEN_ADDR(30));
+    sub_80C37E4();
+    LoadCompressedPalette(gUnknown_08D1A618, 0, 0x200);
+    LoadFontDefaultPalette(&gWindowTemplate_81E6FA0);
+    for (i = 0; i < 4; i++)
+    {
+        r7 = sub_80C3990(i, 1);
+        r4 = sub_80C39E4(i, 1);
+        for (j = 0; j < 10; j++)
+        {
+            r6 = 0x60b2;
+            if (j < r7)
+                r6 = 0x60b4;
+            if (j < ABS(r4))
+            {
+                r3 = 0x60a4;
+                if (r4 < 0)
+                    r3 = 0x60a6;
+            }
+            else
+                r3 = 0x60a2;
+            ((u16 *)BG_VRAM)[i * 0x60 + j + 0x60b3] = r6;
+            ((u16 *)BG_VRAM)[i * 0x60 + j + 0x60d3] = r3;
+        }
+    }
 }
