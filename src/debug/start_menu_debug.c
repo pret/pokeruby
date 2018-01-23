@@ -1,5 +1,14 @@
 #if DEBUG
 
+#include "global.h"
+
+__attribute__((unused)) static u8 gUnknown_030006B8[4];
+__attribute__((unused)) static u8 gUnknown_030006BC[4];
+__attribute__((unused)) static u8 gUnknown_030006C0;
+__attribute__((unused)) static u8 gUnknown_030006C1;
+__attribute__((unused)) static void *gUnknown_030006C4;
+__attribute__((unused)) static u8 gUnknown_030006C8;
+
 __attribute__((naked))
 void debug_sub_8076AC8()
 {
@@ -65,9 +74,9 @@ void debug_sub_8076AC8()
         "._4:\n"
         "	.align	2, 0\n"
         "._3:\n"
-        "	.word	0x30006c4 @ gTileset1AnimLength\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x153\n"
-        "	.word	gUnknown_Debug_0839BBC1+0xd3\n"
+        "	.word	gUnknown_030006C4 \n"
+        "	.word	Str_839BD14\n"
+        "	.word	gUnknown_Debug_839BC94\n"
         "\n"
     );
 }
@@ -178,8 +187,8 @@ void debug_sub_8076BB4()
         "	.align	2, 0\n"
         "._13:\n"
         "	.word	gTasks+0x8\n"
-        "	.word	gUnknown_Debug_0839BBC1+0xd3\n"
-        "	.word	0x30006c4 @ gTileset1AnimLength\n"
+        "	.word	gUnknown_Debug_839BC94\n"
+        "	.word	gUnknown_030006C4 \n"
         "._10:\n"
         "	ldr	r0, ._18\n"
         "	ldrh	r1, [r0, #0x2e]\n"
@@ -511,7 +520,7 @@ void DebugMenu_8076D6C()
         "._57:\n"
         "	.align	2, 0\n"
         "._56:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x16b\n"
+        "	.word	Str_839BD2C\n"
         "._47:\n"
         "	ldr	r0, ._60\n"
         "	ldrh	r2, [r0, #0x2e]\n"
@@ -535,7 +544,7 @@ void DebugMenu_8076D6C()
         "	.align	2, 0\n"
         "._60:\n"
         "	.word	gMain\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x18b\n"
+        "	.word	Str_839BD4C\n"
         "._58:\n"
         "	mov	r0, #0x2\n"
         "	and	r0, r0, r2\n"
@@ -626,7 +635,7 @@ void DebugMenu_8076E30()
         "._79:\n"
         "	.align	2, 0\n"
         "._78:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x199\n"
+        "	.word	Str_839BD5A\n"
         "._69:\n"
         "	ldr	r0, ._82\n"
         "	ldrh	r2, [r0, #0x2e]\n"
@@ -650,7 +659,7 @@ void DebugMenu_8076E30()
         "	.align	2, 0\n"
         "._82:\n"
         "	.word	gMain\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x1bc\n"
+        "	.word	Str_839BD7D\n"
         "._80:\n"
         "	mov	r0, #0x2\n"
         "	and	r0, r0, r2\n"
@@ -759,7 +768,7 @@ void DebugMenu_8076EF4()
         "._94:\n"
         "	.align	2, 0\n"
         "._93:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x203\n"
+        "	.word	gUnknown_Debug_839BDC4\n"
         "\n"
     );
 }
@@ -816,7 +825,7 @@ void DebugMenu_8076F60()
         "._101:\n"
         "	.align	2, 0\n"
         "._100:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x203\n"
+        "	.word	gUnknown_Debug_839BDC4\n"
         "	.word	gSaveBlock2\n"
         "._98:\n"
         "	mov	r0, #0x1\n"
@@ -872,9 +881,9 @@ void DebugMenu_8077004()
         "._107:\n"
         "	.align	2, 0\n"
         "._106:\n"
-        "	.word	0x30006c4 @ gTileset1AnimLength\n"
-        "	.word	0x030006c0+0x1 @ gNumTilesetAnimDmas+0x1\n"
-        "	.word	gDebug0x839B9BC+0x1a8\n"
+        "	.word	gUnknown_030006C4 \n"
+        "	.word	gUnknown_030006C1 \n"
+        "	.word	gUnknown_Debug_839BB64\n"
         "\n"
     );
 }
@@ -1006,8 +1015,8 @@ void DebugMenu_807709C()
         "	.align	2, 0\n"
         "._120:\n"
         "	.word	gMain\n"
-        "	.word	0x030006c0 @ gNumTilesetAnimDmas\n"
-        "	.word	0x030006c0+0x1 @ gNumTilesetAnimDmas+0x1\n"
+        "	.word	gUnknown_030006C0 \n"
+        "	.word	gUnknown_030006C1 \n"
         "._118:\n"
         "	sub	r0, r0, #0x1\n"
         "._119:\n"
@@ -1033,7 +1042,7 @@ void DebugMenu_807709C()
         "	.align	2, 0\n"
         "._125:\n"
         "	.word	gMain\n"
-        "	.word	0x030006c0+0x1 @ gNumTilesetAnimDmas+0x1\n"
+        "	.word	gUnknown_030006C1 \n"
         "._123:\n"
         "	add	r0, r0, #0x1\n"
         "._124:\n"
@@ -1069,8 +1078,8 @@ void DebugMenu_807709C()
         "._129:\n"
         "	.word	gMain\n"
         "	.word	gDebug0x839B9BC\n"
-        "	.word	0x030006c0 @ gNumTilesetAnimDmas\n"
-        "	.word	0x30006c4 @ gTileset1AnimLength\n"
+        "	.word	gUnknown_030006C0 \n"
+        "	.word	gUnknown_030006C4 \n"
         "._127:\n"
         "	mov	r0, #0xa\n"
         "	and	r0, r0, r1\n"
@@ -1127,8 +1136,8 @@ void DebugMenu_807719C()
         "	.align	2, 0\n"
         "._133:\n"
         "	.word	gDebug0x839B9BC\n"
-        "	.word	0x30006c4 @ gTileset1AnimLength\n"
-        "	.word	0x030006c0 @ gNumTilesetAnimDmas\n"
+        "	.word	gUnknown_030006C4 \n"
+        "	.word	gUnknown_030006C0 \n"
         "\n"
     );
 }
@@ -1168,7 +1177,7 @@ void DebugMenu_80771EC()
         "	.align	2, 0\n"
         "._135:\n"
         "	.word	gStringVar4\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x243\n"
+        "	.word	Str_839BE04\n"
         "	.word	gSaveBlock1\n"
         "\n"
     );
@@ -1303,9 +1312,9 @@ void DebugMenu_8077238()
         "._140:\n"
         "	.align	2, 0\n"
         "._139:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x246\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x248\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x24b\n"
+        "	.word	Str_839BE07\n"
+        "	.word	Str_839BE09\n"
+        "	.word	Str_839BE0C\n"
         "	.word	gStringVar4\n"
         "\n"
     );
@@ -1527,7 +1536,7 @@ void DebugMenu_8077434()
         "._158:\n"
         "	.align	2, 0\n"
         "._157:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x24e\n"
+        "	.word	Str_839BE0F\n"
         "._152:\n"
         "	ldr	r0, ._160\n"
         "	mov	r1, #0x2\n"
@@ -1542,7 +1551,7 @@ void DebugMenu_8077434()
         "._161:\n"
         "	.align	2, 0\n"
         "._160:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x251\n"
+        "	.word	Str_839BE12\n"
         "._153:\n"
         "	ldr	r0, ._163\n"
         "	mov	r1, #0x3\n"
@@ -1556,7 +1565,7 @@ void DebugMenu_8077434()
         "._164:\n"
         "	.align	2, 0\n"
         "._163:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x255\n"
+        "	.word	Str_839BE16\n"
         "._154:\n"
         "	ldr	r0, ._166\n"
         "	mov	r1, #0x4\n"
@@ -1576,7 +1585,7 @@ void DebugMenu_8077434()
         "._167:\n"
         "	.align	2, 0\n"
         "._166:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x259\n"
+        "	.word	Str_839BE1A\n"
         "._155:\n"
         "	ldr	r0, ._168\n"
         "	mov	r1, #0x4\n"
@@ -1598,7 +1607,7 @@ void DebugMenu_8077434()
         "._169:\n"
         "	.align	2, 0\n"
         "._168:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x25d\n"
+        "	.word	Str_839BE1E\n"
         "\n"
     );
 }
@@ -1617,7 +1626,7 @@ void DebugMenu_807750C()
         "._171:\n"
         "	.align	2, 0\n"
         "._170:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x263\n"
+        "	.word	gUnknown_Debug_839BE24\n"
         "\n"
     );
 }
@@ -1640,7 +1649,7 @@ void DebugMenu_SetRamBerry()
         "._173:\n"
         "	.align	2, 0\n"
         "._172:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x263\n"
+        "	.word	gUnknown_Debug_839BE24\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_807750C+1\n"
         "\n"
@@ -1960,8 +1969,8 @@ void DebugMenu_80776B4()
         "._184:\n"
         "	.align	2, 0\n"
         "._183:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x28b\n"
-        "	.word	0x30006c8 @ gTileset2AnimLength\n"
+        "	.word	Str_839BE4C\n"
+        "	.word	gUnknown_030006C8 \n"
         "\n"
     );
 }
@@ -2007,8 +2016,8 @@ void DebugMenu_8077704()
         "._186:\n"
         "	.align	2, 0\n"
         "._185:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x292\n"
-        "	.word	0x30006c8 @ gTileset2AnimLength\n"
+        "	.word	Str_839BE53\n"
+        "	.word	gUnknown_030006C8 \n"
         "\n"
     );
 }
@@ -2040,7 +2049,7 @@ void DebugMenu_8077760()
         "	.align	2, 0\n"
         "._190:\n"
         "	.word	gMain\n"
-        "	.word	0x030006b0+0x8 @ gMenu+0x8\n"
+        "	.word	gUnknown_030006B8 \n"
         "._188:\n"
         "	mov	r0, #0x3\n"
         "._189:\n"
@@ -2064,7 +2073,7 @@ void DebugMenu_8077760()
         "._196:\n"
         "	.align	2, 0\n"
         "._195:\n"
-        "	.word	0x030006b0+0x8 @ gMenu+0x8\n"
+        "	.word	gUnknown_030006B8 \n"
         "._193:\n"
         "	mov	r0, #0x0\n"
         "._194:\n"
@@ -2117,7 +2126,7 @@ void DebugMenu_8077760()
         "._202:\n"
         "	.align	2, 0\n"
         "._201:\n"
-        "	.word	0x30006c8 @ gTileset2AnimLength\n"
+        "	.word	gUnknown_030006C8 \n"
         "	.word	0xf0ff\n"
         "._199:\n"
         "	mov	r0, #0x0\n"
@@ -2193,7 +2202,7 @@ void DebugMenu_807786C()
         "._206:\n"
         "	.align	2, 0\n"
         "._205:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2a3\n"
+        "	.word	Str_839BE64\n"
         "\n"
     );
 }
@@ -2370,7 +2379,7 @@ void DebugMenu_8077974()
         "._226:\n"
         "	.word	gSaveBlock1\n"
         "	.word	gStringVar1\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2cc\n"
+        "	.word	Str_839BE8D\n"
         "._224:\n"
         "	ldr	r0, ._230\n"
         "	ldr	r1, ._230 + 4\n"
@@ -2397,10 +2406,10 @@ void DebugMenu_8077974()
         "	.align	2, 0\n"
         "._230:\n"
         "	.word	gStringVar1\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2cf\n"
+        "	.word	Str_839BE90\n"
         "	.word	gSaveBlock1\n"
         "	.word	gStringVar2\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2cc\n"
+        "	.word	Str_839BE8D\n"
         "._228:\n"
         "	ldr	r0, ._232\n"
         "	ldr	r1, ._232 + 4\n"
@@ -2418,8 +2427,8 @@ void DebugMenu_8077974()
         "	.align	2, 0\n"
         "._232:\n"
         "	.word	gStringVar2\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2cf\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x2aa\n"
+        "	.word	Str_839BE90\n"
+        "	.word	Str_839BE6B\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077DB4+1\n"
         "\n"
@@ -2486,7 +2495,7 @@ void DebugMenu_8077A60()
         "._239:\n"
         "	.align	2, 0\n"
         "._238:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x323\n"
+        "	.word	gUnknown_Debug_839BEE4\n"
         "\n"
     );
 }
@@ -2510,7 +2519,7 @@ void DebugMenu_RematchTrainers()
         "._241:\n"
         "	.align	2, 0\n"
         "._240:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x323\n"
+        "	.word	gUnknown_Debug_839BEE4\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077A60+1\n"
         "\n"
@@ -2614,7 +2623,7 @@ void DebugMenu_8077B00()
         "._253:\n"
         "	.align	2, 0\n"
         "._252:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x353\n"
+        "	.word	Str_839BF14\n"
         "._250:\n"
         "	ldr	r0, ._254\n"
         "	bl	sub_8071F40\n"
@@ -2628,7 +2637,7 @@ void DebugMenu_8077B00()
         "._255:\n"
         "	.align	2, 0\n"
         "._254:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x35e\n"
+        "	.word	Str_839BF1F\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077DB4+1\n"
         "\n"
@@ -2649,7 +2658,7 @@ void DebugMenu_8077B3C()
         "._257:\n"
         "	.align	2, 0\n"
         "._256:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x3ab\n"
+        "	.word	gUnknown_Debug_839BF6C\n"
         "\n"
     );
 }
@@ -2684,10 +2693,10 @@ void DebugMenu_Safari()
         "._261:\n"
         "	.align	2, 0\n"
         "._260:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x3ab\n"
+        "	.word	gUnknown_Debug_839BF6C\n"
         "	.word	gStringVar1\n"
         "	.word	gSafariZoneStepCounter\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x34b\n"
+        "	.word	Str_839BF0C\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077B3C+1\n"
         "._258:\n"
@@ -2795,7 +2804,7 @@ void DebugMenu_8077C00()
         "._263:\n"
         "	.align	2, 0\n"
         "._262:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x3d3\n"
+        "	.word	gUnknown_Debug_839BF94\n"
         "\n"
     );
 }
@@ -2819,7 +2828,7 @@ void DebugMenu_8077C14()
         "._265:\n"
         "	.align	2, 0\n"
         "._264:\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x3d3\n"
+        "	.word	gUnknown_Debug_839BF94\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8077C00+1\n"
         "\n"
@@ -2923,8 +2932,8 @@ void DebugMenu_8077C3C()
         "._272:\n"
         "	.align	2, 0\n"
         "._271:\n"
-        "	.word	0x030006b0+0xc @ gMenu+0xc\n"
-        "	.word	gUnknown_Debug_0839BBC1+0x427\n"
+        "	.word	gUnknown_030006BC \n"
+        "	.word	gUnknown_Debug_839BFE8\n"
         "\n"
     );
 }
@@ -3359,7 +3368,7 @@ void DebugMenu_8077F7C()
         "._311:\n"
         "	.word	gTasks\n"
         "	.word	gMain\n"
-        "	.word	gDebug0x839C008+0xc\n"
+        "	.word	Str_839C014\n"
         "	.word	DebugMenu_8077FFC+1\n"
         "._309:\n"
         "	mov	r0, #0x2\n"
@@ -3540,7 +3549,7 @@ void DebugMenu_807808C()
         "	.align	2, 0\n"
         "._331:\n"
         "	.word	gSaveBlock1+0x2ddc\n"
-        "	.word	gDebug0x839C008+0x16\n"
+        "	.word	Str_839C01E\n"
         "._329:\n"
         "	ldr	r0, ._335\n"
         "	mov	r1, #0xb\n"
@@ -3563,7 +3572,7 @@ void DebugMenu_807808C()
         "._336:\n"
         "	.align	2, 0\n"
         "._335:\n"
-        "	.word	gDebug0x839C008+0x45\n"
+        "	.word	Str_839C04D\n"
         "._333:\n"
         "	ldr	r0, ._337\n"
         "	mov	r1, #0xb\n"
@@ -3595,7 +3604,7 @@ void DebugMenu_807808C()
         "._338:\n"
         "	.align	2, 0\n"
         "._337:\n"
-        "	.word	gDebug0x839C008+0x45\n"
+        "	.word	Str_839C04D\n"
         "\n"
     );
 }
@@ -3840,7 +3849,7 @@ void DebugMenu_80782EC()
         "	.align	2, 0\n"
         "._359:\n"
         "	.word	gStringVar1\n"
-        "	.word	gDebug0x839C008+0x4b\n"
+        "	.word	Str_839C053\n"
         "\n"
     );
 }
@@ -4232,9 +4241,9 @@ void DebugMenu_8078550()
         "._420:\n"
         "	.word	gStringVar1\n"
         "	.word	gStringVar2\n"
-        "	.word	gDebug0x839C008+0x264\n"
+        "	.word	gUnknown_Debug_839C26C\n"
         "	.word	gStringVar3\n"
-        "	.word	gDebug0x839C008+0x7d\n"
+        "	.word	Str_839C085\n"
         "._418:\n"
         "	cmp	r6, #0x1\n"
         "	beq	._422	@cond_branch\n"
@@ -4285,7 +4294,7 @@ void DebugMenu_8078550()
         "	.align	2, 0\n"
         "._426:\n"
         "	.word	gStringVar3\n"
-        "	.word	gDebug0x839C008+0x74\n"
+        "	.word	Str_839C07C\n"
         "\n"
     );
 }
@@ -4445,7 +4454,7 @@ void DebugMenu_80786D0()
         "	.align	2, 0\n"
         "._450:\n"
         "	.word	gTasks\n"
-        "	.word	gDebug0x839C008+0x264\n"
+        "	.word	gUnknown_Debug_839C26C\n"
         "\n"
     );
 }
@@ -4486,7 +4495,7 @@ void DebugMenu_8078714()
         "	.align	2, 0\n"
         "._454:\n"
         "	.word	gTasks\n"
-        "	.word	gDebug0x839C008+0x264\n"
+        "	.word	gUnknown_Debug_839C26C\n"
         "\n"
     );
 }
@@ -4581,7 +4590,7 @@ void DebugMenu_80787B0()
         "._463:\n"
         "	.align	2, 0\n"
         "._462:\n"
-        "	.word	gDebug0x839C008+0x3f4\n"
+        "	.word	gUnknown_Debug_839C3FC\n"
         "\n"
     );
 }
@@ -4605,7 +4614,7 @@ void DebugMenu_OpenLegendsRecord()
         "._465:\n"
         "	.align	2, 0\n"
         "._464:\n"
-        "	.word	gDebug0x839C008+0x3f4\n"
+        "	.word	gUnknown_Debug_839C3FC\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_80787B0+1\n"
         "\n"
@@ -4677,7 +4686,7 @@ void DebugMenu_80787EC()
         "	.word	gStringVar2\n"
         "	.word	gStringVar3\n"
         "	.word	gStringVar4\n"
-        "	.word	gDebug0x839C008+0x40c\n"
+        "	.word	Str_839C414\n"
         "\n"
     );
 }
@@ -4827,7 +4836,7 @@ void DebugMenu_8078950()
         "._490:\n"
         "	.align	2, 0\n"
         "._489:\n"
-        "	.word	gDebug0x839C008+0x426\n"
+        "	.word	Str_839C42E\n"
         "\n"
     );
 }
@@ -5166,7 +5175,7 @@ void DebugMenu_8078B70()
         "	.align	2, 0\n"
         "._526:\n"
         "	.word	gStringVar1\n"
-        "	.word	gDebug0x839C008+0x430\n"
+        "	.word	Str_839C438\n"
         "\n"
     );
 }
@@ -5208,7 +5217,7 @@ void DebugMenu_8078B94()
         "._532:\n"
         "	.align	2, 0\n"
         "._531:\n"
-        "	.word	gDebug0x839C008+0x43c\n"
+        "	.word	gUnknown_Debug_839C444\n"
         "	.word	gSaveBlock1+0x7f8\n"
         "\n"
     );
@@ -5330,7 +5339,7 @@ void DebugMenu_8078C80()
         "._549:\n"
         "	.align	2, 0\n"
         "._548:\n"
-        "	.word	gDebug0x839C574+0x30\n"
+        "	.word	Str_839C5A4\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078CA8+1\n"
         "\n"
@@ -5397,7 +5406,7 @@ void DebugMenu_8078CE4()
         "._558:\n"
         "	.word	+0x2000000\n"
         "	.word	gStringVar4\n"
-        "	.word	gDebug0x839C574+0x58\n"
+        "	.word	Str_839C5CC\n"
         "._556:\n"
         "	ldr	r0, ._560\n"
         "	ldr	r1, ._560 + 4\n"
@@ -5413,7 +5422,7 @@ void DebugMenu_8078CE4()
         "	.align	2, 0\n"
         "._560:\n"
         "	.word	gStringVar4\n"
-        "	.word	gDebug0x839C574+0x6b\n"
+        "	.word	Str_839C5DF\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078D7C+1\n"
         "\n"
@@ -5455,7 +5464,7 @@ void DebugMenu_8078D30()
         "._563:\n"
         "	.word	+0x2000000\n"
         "	.word	gStringVar4\n"
-        "	.word	gDebug0x839C574+0x62\n"
+        "	.word	Str_839C5D6\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078D7C+1\n"
         "\n"
@@ -5534,7 +5543,7 @@ void DebugMenu_MeTooBackupMan()
         "._572:\n"
         "	.align	2, 0\n"
         "._571:\n"
-        "	.word	gDebug0x839C574+0x20\n"
+        "	.word	gUnknown_Debug_839C594\n"
         "	.word	gMenuCallback\n"
         "	.word	DebugMenu_8078DF0+1\n"
         "\n"
@@ -5555,7 +5564,7 @@ void DebugMenu_8078DF0()
         "._574:\n"
         "	.align	2, 0\n"
         "._573:\n"
-        "	.word	gDebug0x839C574+0x20\n"
+        "	.word	gUnknown_Debug_839C594\n"
         "\n"
     );
 }
@@ -5673,7 +5682,7 @@ void DebugMenu_8078E80()
         "._582:\n"
         "	.align	2, 0\n"
         "._581:\n"
-        "	.word	gDebug0x839C574+0x80\n"
+        "	.word	gUnknown_Debug_839C5F4\n"
         "\n"
     );
 }
@@ -5877,7 +5886,7 @@ void DebugMenu_8078F68()
         "._603:\n"
         "	.align	2, 0\n"
         "._602:\n"
-        "	.word	gDebug0x839C574+0x80\n"
+        "	.word	gUnknown_Debug_839C5F4\n"
         "\n"
     );
 }
@@ -6082,7 +6091,7 @@ void DebugMenu_8079110()
         "._640:\n"
         "	.align	2, 0\n"
         "._639:\n"
-        "	.word	gDebug0x839C60C+0xe\n"
+        "	.word	Str_839C61A\n"
         "._635:\n"
         "	bl	Menu_UpdateWindowText\n"
         "	lsl	r0, r0, #0x18\n"

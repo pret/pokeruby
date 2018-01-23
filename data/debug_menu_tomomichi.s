@@ -837,8 +837,11 @@ gUnknown_Debug_083C1A9C:: @ 0x83C1A9C
 	.4byte gUnknown_Debug_083C1A80, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C1A8C, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C1AAC:: @ 0x83C1AAC
-	.string "い　ょえヘえ　　　　　　　　　　　　　　"
+	.string "い　"
+gUnknown_Debug_083C1AAE:: @ 0x83C1AAE
+	.string "ょえヘえ　　　　　　　　　　　　　　"
 
 gUnknown_Debug_083C1AC0:: @ 0x83C1AC0
 	.string "ジムリーダー$"
@@ -914,8 +917,11 @@ gUnknown_Debug_083C1C10:: @ 0x83C1C10
 gUnknown_Debug_083C1C2C:: @ 0x83C1C2C
 	.4byte gUnknown_Debug_083C1C10, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C1C34:: @ 0x83C1C34
-	.string "くえあ　“え’え,えCえGえOえSえZえ　　iえjえkえlえ　　　　　　　　　　mえ　　　　　　　　　　　　　　　　"
+	.string "くえあ　"
+gUnknown_Debug_083C1C38:: @ 0x83C1C38
+	.string "“え’え,えCえGえOえSえZえ　　iえjえkえlえ　　　　　　　　　　mえ　　　　　　　　　　　　　　　　"
 
 gUnknown_Debug_083C1C6E:: @ 0x83C1C6E
 	.string "120/119ばんどうろカクレオン$"
@@ -1294,8 +1300,11 @@ gUnknown_Debug_083C26C8:: @ 0x83C26C8
 	.4byte gUnknown_Debug_083C2693, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C26AC, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C2710:: @ 0x83C2710
-	.string "けけけけかけけけけ　aうPうbうeうfうgうhうiうjうNうhいZうプうHうネうイうXい{0xF8}いVいWいィうゥうェうベうらうりうンうbい▶いやうようコうツうテうワうヲうだうぢうLうMうRうSう　　　　　　iいmいxいzいÖいÜいおうミうムう:いöいüい{0xF7}いせうそうボうパう1うnいoいpいqいぽうナうマうロう♀うルうブうんうQうYいビうウう0うYう"
+	.string "けけけけかけけけけ　"
+gUnknown_Debug_083C271A:: @ 0x83C271A
+	.string "aうPうbうeうfうgうhうiうjうNうhいZうプうHうネうイうXい{0xF8}いVいWいィうゥうェうベうらうりうンうbい▶いやうようコうツうテうワうヲうだうぢうLうMうRうSう　　　　　　iいmいxいzいÖいÜいおうミうムう:いöいüい{0xF7}いせうそうボうパう1うnいoいpいqいぽうナうマうロう♀うルうブうんうQうYいビうウう0うYう"
 
 gUnknown_Debug_083C27BC:: @ 0x83C27BC
 	.string "FEひでんわざ/デボンかんれん$"
@@ -1686,7 +1695,11 @@ gUnknown_Debug_083C3194:: @ 0x83C3194
 	.4byte gUnknown_Debug_083C3192, TomomichiDebugMenu_Config+1
 
 gUnknown_Debug_083C31DC:: @ 0x83C31DC
-	.string "けけけけけけけけう　グ　ホ　レ　ハ　ヘ　ヒ　ゾ　ズ　ゼ　コ　サ　シ　ス　セ　ソ　ああo　ブ　ゴ　よあゥ　ム　　あもあらあさあ{0xF7}　フ　ン　D　G　ふあ:　Ä　Ö　Ü　H　I　J　K　L　ト　ナ　ニ　ヌ　ェ　ほあみあやあゆあっ　ア　イ　オ　N　O　P　Q　R　ウ　エ　カ　キ　▶　ä　ォ　そあうあきあこあつあへあク　ケ　タ　　　　　　　　　　　　　"
+	.byte 9, 9, 9, 9, 9, 9, 9, 9, 3, 0
+
+	@ This is not a string. I don't feel like converting it right now.
+gUnknown_Debug_83C31E6:: @ 0x83C31E6
+	.string "グ　ホ　レ　ハ　ヘ　ヒ　ゾ　ズ　ゼ　コ　サ　シ　ス　セ　ソ　ああo　ブ　ゴ　よあゥ　ム　　あもあらあさあ{0xF7}　フ　ン　D　G　ふあ:　Ä　Ö　Ü　H　I　J　K　L　ト　ナ　ニ　ヌ　ェ　ほあみあやあゆあっ　ア　イ　オ　N　O　P　Q　R　ウ　エ　カ　キ　▶　ä　ォ　そあうあきあこあつあへあク　ケ　タ　　　　　　　　　　　　　"
 
 gUnknown_Debug_083C3288:: @ 0x83C3288
 	.string "CYCLEかんれん$"
@@ -1822,8 +1835,11 @@ gUnknown_Debug_083C351C::
 	.4byte gUnknown_Debug_083C345E, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C346E, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C3544:: @ 0x83C3544
-	.string "ういかけお　らぞりぞるぞ　　　　　　　　　　　　びぞぽぞ　　　　　　　　　　　　　　むぞめぞぶぞぼぞれぞろぞ　　　　　　みぞもぞやぞゆぞぞぞだぞぢぞでぞどぞばぞべぞぱぞぴぞよぞ　　　　　　　　"
+	.string "ういかけお　"
+gUnknown_Debug_083C354A::
+	.string "らぞりぞるぞ　　　　　　　　　　　　びぞぽぞ　　　　　　　　　　　　　　むぞめぞぶぞぼぞれぞろぞ　　　　　　みぞもぞやぞゆぞぞぞだぞぢぞでぞどぞばぞべぞぱぞぴぞよぞ　　　　　　　　"
 
 gUnknown_Debug_083C35A4:: @ 0x83C35A4
 	.string "OBJCHRWORK0ー8$"
@@ -1905,8 +1921,11 @@ gUnknown_Debug_083C36E4::
 	.4byte gUnknown_Debug_083C3681, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C368E, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C371C:: @ 0x83C371C
-	.string "けきたぞちぞつぞてぞとぞなぞにぞぬぞねぞのぞはぞひぞふぞへぞほぞまぞ　　　　"
+	.string "けき"
+gUnknown_Debug_083C371E:: @ 0x83C371E
+	.string "たぞちぞつぞてぞとぞなぞにぞぬぞねぞのぞはぞひぞふぞへぞほぞまぞ　　　　"
 
 gUnknown_Debug_083C3742:: @ 0x83C3742
 	.string "SP$"
@@ -2163,9 +2182,14 @@ gUnknown_Debug_83C3C00::
 	.4byte gUnknown_Debug_083C3A9D, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C3A9E, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C3C48:: @ 0x83C3C48
-	.string "かおけいけかョぞガぞギぞゲぞヂぞ’ぞ　　　　　　5ぞGぞ♂ぞ6ぞ4ぞ　　　　　　　　！ぞ？ぞ。ぞーぞ·ぞ‥ぞ“ぞ”ぞ♀ぞゾぞDぞ　　　　　　　　　　　　　　グぞズぞバぞビぞベぞピぞ2ぞ3ぞ8ぞ‘ぞ¥ぞAぞBぞFぞKぞ　　　　　　"
+	.string "かおけいけか"
 
+gUnknown_Debug_83C3C4E:: @ 0x83C3C4E
+	.string "ョぞガぞギぞゲぞヂぞ’ぞ　　　　　　5ぞGぞ♂ぞ6ぞ4ぞ　　　　　　　　！ぞ？ぞ。ぞーぞ·ぞ‥ぞ“ぞ”ぞ♀ぞゾぞDぞ　　　　　　　　　　　　　　グぞズぞバぞビぞベぞピぞ2ぞ3ぞ8ぞ‘ぞ¥ぞAぞBぞFぞKぞ　　　　　　"
+
+	@ But these are strings
 gUnknown_Debug_083C3CBA:: @ 0x83C3CBA
 	.string "タウン$"
 
@@ -2523,8 +2547,11 @@ gUnknown_Debug_083C4534::
 	.4byte gUnknown_Debug_083C4301, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C4315, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C457C:: @ 0x83C457C
-	.string "くけけけけきかけけ　っぞアぞイぞウぞエぞオぞカぞMぞ　　キぞクぞケぞコぞサぞシぞスぞセぞソぞタぞチぞツぞテぞトぞナぞニぞヌぞネぞノぞハぞヒぞフぞヘぞホぞマぞミぞムぞメぞモぞヤぞユぞヨぞラぞリぞルぞレぞロぞワぞヲぞンぞァぞィぞゥぞ　　　　ェぞォぞャぞザぞジぞHぞ　　　　　　ュぞゼぞヅぞデぞドぞッぞ9ぞJぞLぞブぞボぞパぞ1ぞ7ぞ×ぞ/ぞEぞIぞ"
+	.string "くけけけけきかけけ　"
+gUnknown_Debug_083C4586:: @ 0x83C4586
+	.string "っぞアぞイぞウぞエぞオぞカぞMぞ　　キぞクぞケぞコぞサぞシぞスぞセぞソぞタぞチぞツぞテぞトぞナぞニぞヌぞネぞノぞハぞヒぞフぞヘぞホぞマぞミぞムぞメぞモぞヤぞユぞヨぞラぞリぞルぞレぞロぞワぞヲぞンぞァぞィぞゥぞ　　　　ェぞォぞャぞザぞジぞHぞ　　　　　　ュぞゼぞヅぞデぞドぞッぞ9ぞJぞLぞブぞボぞパぞ1ぞ7ぞ×ぞ/ぞEぞIぞ"
 
 gUnknown_Debug_083C4628:: @ 0x83C4628
 	.string "LOCALWORK0ー8$"
@@ -2606,8 +2633,11 @@ gUnknown_Debug_083C4754C::
 	.4byte gUnknown_Debug_083C46F2, TomomichiDebugMenu_Config+1
 	.4byte gUnknown_Debug_083C46FE, TomomichiDebugMenu_Config+1
 
+	@ These are not strings
 gUnknown_Debug_083C478C:: @ 0x83C478C
-	.string "けき　ぞあぞいぞうぞえぞおぞかぞきぞくぞけぞこぞさぞしぞすぞせぞそぞ　　　　"
+	.string "けき"
+gUnknown_Debug_083C478E:: @ 0x83C478E
+	.string "　ぞあぞいぞうぞえぞおぞかぞきぞくぞけぞこぞさぞしぞすぞせぞそぞ　　　　"
 
 gUnknown_Debug_083C47B2::
 	.string "Level$"

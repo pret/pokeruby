@@ -16,7 +16,7 @@
 . = ALIGN(4); src/engine/script.o(.bss);
 . = ALIGN(4); src/field/start_menu.o(.bss);
 #if DEBUG
-. += 0x18;
+. = ALIGN(4); src/debug/start_menu_debug.o(.bss);
 #endif
 . = ALIGN(4); src/engine/menu.o(.bss);
 . = ALIGN(4); src/engine/tileset_anim.o(.bss);

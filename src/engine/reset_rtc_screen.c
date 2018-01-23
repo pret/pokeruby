@@ -817,10 +817,10 @@ void debug_sub_806F9E4()
 ._159:\n\
 	.align	2, 0\n\
 ._158:\n\
-	.word	gUnknown_08376500+0x4\n\
-	.word	gUnknown_08376500+0x9\n\
-	.word	gUnknown_08376500+0x17\n\
-	.word	gUnknown_08376500+0xd\n\
+	.word	gUnknown_Debug_0839AE94\n\
+	.word	gUnknown_Debug_0839AE99\n\
+	.word	gUnknown_Debug_0839AEA7\n\
+	.word	gUnknown_Debug_0839AE9D\n\
 ._155:\n\
 	bl	RtcCalcLocalTime\n\
 	add	r0, r6, #0\n\
