@@ -465,7 +465,7 @@ void debug_sub_815D04C()
         "	add	r1, r1, r0\n"
         "	ldr	r0, ._133 + 8\n"
         "	ldr	r1, [r1]\n"
-        "	bl	gMysteryEventScriptCmdTableEnd+0x3cf8\n"
+        "	bl	_call_via_r1\n"
         "	ldr	r0, ._133 + 12\n"
         "	add	r1, r6, r0\n"
         "	ldrb	r0, [r1]\n"

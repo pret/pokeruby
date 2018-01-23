@@ -540,7 +540,7 @@ void debug_sub_81381B4()
         "	add	r0, r4, #0\n"
         "	mov	r1, #0x0\n"
         "	mov	r2, #0x60\n"
-        "	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n"
+        "	bl	memset\n"
         "	mov	r7, #0x0\n"
         "	mov	r8, r4\n"
         "	mov	r0, #0x4\n"

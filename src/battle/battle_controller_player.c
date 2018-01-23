@@ -2234,7 +2234,7 @@ void debug_sub_803107C(void)
 	mov	r7, #0x0\n\
 	ldr	r0, ._369\n\
 	ldr	r0, [r0]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	bl	_call_via_r0\n\
 	ldr	r0, ._369 + 4\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\

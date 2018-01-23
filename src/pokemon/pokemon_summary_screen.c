@@ -1042,7 +1042,7 @@ bool8 sub_809DA84(void)
 	lsl	r1, r1, #0x2\n\
 	add	r1, r1, r0\n\
 	ldr	r0, [r1]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	bl	_call_via_r0\n\
 ._132:\n\
 	ldr	r1, ._134 + 8\n\
 	ldr	r2, ._134 + 12\n\
@@ -1071,7 +1071,7 @@ bool8 sub_809DA84(void)
 	add	r1, r1, r2\n\
 	add	r0, r0, #0x10\n\
 	ldr	r1, [r1]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cf8\n\
+	bl	_call_via_r1\n\
 	ldr	r1, ._140 + 8\n\
 	ldr	r2, ._140 + 12\n\
 	add	r1, r1, r2\n\

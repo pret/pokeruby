@@ -212,7 +212,7 @@ void debug_sub_8110D84(void)
 	b	._65\n\
 ._38:\n\
 	mov	r0, #0x5\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x13c0\n\
+	bl	m4aSongNumStart\n\
 	ldr	r1, ._41 + 4\n\
 	add	r0, r4, r1\n\
 	mov	r1, #0x1\n\
@@ -228,7 +228,7 @@ void debug_sub_8110D84(void)
 	.word	sub_80FC69C+1\n\
 ._36:\n\
 	mov	r0, #0x5\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x13c0\n\
+	bl	m4aSongNumStart\n\
 	mov	r0, #0x1\n\
 	neg	r0, r0\n\
 	mov	r1, #0x0\n\

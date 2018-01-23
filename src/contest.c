@@ -1392,7 +1392,7 @@ void debug_sub_80BA054()
 	mov	r0, r9\n\
 	mov	r1, #0x0\n\
 	mov	r2, #0x14\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	bl	memset\n\
 	ldr	r4, ._262 + 8\n\
 	ldrb	r0, [r4]\n\
 	bl	sub_80B28F0\n\
@@ -1505,7 +1505,7 @@ void debug_sub_80BA054()
 ._241:\n\
 	ldr	r0, ._273\n\
 	ldr	r0, [r0]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	bl	_call_via_r0\n\
 	ldr	r0, ._273 + 4\n\
 	ldrb	r4, [r0]\n\
 	cmp	r4, #0\n\

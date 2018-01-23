@@ -646,10 +646,10 @@ void sub_8115384(void)
 	ldr	r0, ._47 + 16\n\
 	mov	r1, #0xc0\n\
 	lsl	r1, r1, #0x13\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cb8\n\
+	bl	LZ77UnCompVram\n\
 	ldr	r0, ._47 + 20\n\
 	ldr	r1, ._47 + 24\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cb8\n\
+	bl	LZ77UnCompVram\n\
 	ldr	r1, ._47 + 28\n\
 	ldr	r3, ._47 + 32\n\
 	add	r1, r1, r3\n\
@@ -706,10 +706,10 @@ void sub_8115384(void)
 	bl	ClearBGTilemapBuffers\n\
 	ldr	r0, ._56\n\
 	ldr	r1, ._56 + 4\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cbc\n\
+	bl	LZ77UnCompWram\n\
 	ldr	r0, ._56 + 8\n\
 	ldr	r1, ._56 + 12\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cb8\n\
+	bl	LZ77UnCompVram\n\
 	ldr	r1, ._56 + 16\n\
 	ldr	r3, ._56 + 20\n\
 	add	r1, r1, r3\n\
@@ -1051,11 +1051,11 @@ void sub_8115634(u8 unused)
 	ldr	r1, ._75 + 16\n\
 	str	r1, [r0]\n\
 	ldr	r0, ._75 + 20\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x1c08\n\
+	bl	m4aMPlayStop\n\
 	ldr	r0, ._75 + 24\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x1c08\n\
+	bl	m4aMPlayStop\n\
 	ldr	r0, ._75 + 28\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x1c08\n\
+	bl	m4aMPlayStop\n\
 ._74:\n\
 	pop	{r4, r5, r6}\n\
 	pop	{r0}\n\
@@ -2034,7 +2034,7 @@ void sub_8116B40(u8 taskid) // end roulette ?
 	mov	r2, #0xbe\n\
 	lsl	r2, r2, #0x1\n\
 	mov	r1, #0x0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	bl	memset\n\
 	ldr	r1, ._381 + 4\n\
 	ldr	r0, ._381 + 8\n\
 	mov	r4, #0x0\n\
@@ -4473,7 +4473,7 @@ void debug_sub_812E698()
 	add	r0, r7, #0\n\
 	bl	sub_81186B8\n\
 	mov	r0, #0x38\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x13c0\n\
+	bl	m4aSongNumStart\n\
 	bl	Random\n\
 	mov	r1, #0x1\n\
 	and	r1, r1, r0\n\
@@ -4489,7 +4489,7 @@ void debug_sub_812E698()
 	ldrb	r0, [r0]\n\
 	add	r0, r0, #0x1\n\
 	mov	r1, #0xc\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3e40\n\
+	bl	__modsi3\n\
 	add	r1, r4, #0\n\
 	add	r1, r1, #0x7f\n\
 	strb	r0, [r1]\n\
@@ -4515,7 +4515,7 @@ void debug_sub_812E698()
 	add	r0, r0, r1\n\
 	ldr	r1, [r0]\n\
 	add	r0, r1, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x54dc\n\
+	bl	__addsf3\n\
 	str	r0, [r5]\n\
 	add	r0, r6, #0\n\
 	add	r0, r0, #0x7e\n\
@@ -4845,7 +4845,7 @@ void sub_8118F8C(struct Sprite *sprite)
 	mov	r8, r0\n\
 	ldr	r0, [r0]\n\
 	ldr	r1, ._868 + 4\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5928\n\
+	bl	__gtsf2\n\
 	cmp	r0, #0\n\
 	bgt	._874	@cond_branch\n\
 	add	r0, r6, #0\n\
@@ -4868,26 +4868,26 @@ void sub_8118F8C(struct Sprite *sprite)
 	mov	r4, #0x3\n\
 	ldsb	r4, [r0, r4]\n\
 	add	r0, r4, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5a48\n\
+	bl	__floatsisf\n\
 	add	r5, r0, #0\n\
 	cmp	r4, #0\n\
 	bge	._865	@cond_branch\n\
 	ldr	r1, ._868 + 16\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x54dc\n\
+	bl	__addsf3\n\
 	add	r5, r0, #0\n\
 ._865:\n\
 	lsr	r0, r7, #0x19\n\
 	add r0, r0, r9\n\
 	ldrb	r0, [r0, #0x4]\n\
 	add	r0, r0, #0x1\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5a48\n\
+	bl	__floatsisf\n\
 	add	r1, r0, #0\n\
 	add	r0, r5, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x56a0\n\
+	bl	__divsf3\n\
 	add	r1, r0, #0\n\
 	mov	r2, r8\n\
 	ldr	r0, [r2]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5508\n\
+	bl	__subsf3\n\
 	mov	r1, r8\n\
 	str	r0, [r1]\n\
 	mov	r0, #0x4\n\
@@ -4923,13 +4923,13 @@ void sub_8118F8C(struct Sprite *sprite)
 	ldr	r0, [r6]\n\
 	ldr	r4, ._875\n\
 	add	r1, r4, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x58e0\n\
+	bl	__nesf2\n\
 	cmp	r0, #0\n\
 	beq	._874	@cond_branch\n\
 	mov	r2, r8\n\
 	ldr	r0, [r2]\n\
 	add	r1, r4, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x59b8\n\
+	bl	__ltsf2\n\
 	cmp	r0, #0\n\
 	bge	._874	@cond_branch\n\
 	str	r4, [r6]\n\
@@ -4938,11 +4938,11 @@ void sub_8118F8C(struct Sprite *sprite)
 	add	r4, r5, #0\n\
 	add	r4, r4, #0x98\n\
 	ldr	r0, [r4]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5b4c\n\
+	bl	__extendsfdf2\n\
 	ldr	r2, ._875 + 4\n\
 	ldr	r3, ._875 + 8\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x4c2c\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x51e8\n\
+	bl	__divdf3\n\
+	bl	__truncdfsf2\n\
 	str	r0, [r4]\n\
 ._874:\n\
 	pop	{r3, r4}\n\

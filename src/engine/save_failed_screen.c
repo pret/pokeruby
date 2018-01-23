@@ -424,7 +424,7 @@ bool8 VerifySectorWipe(u16 sector)
         "	mov	r3, #0x80\n"
         "	lsl	r3, r3, #0x5\n"
         "	mov	r1, #0x0\n"
-        "	bl	gMysteryEventScriptCmdTableEnd+0x2d64\n"
+        "	bl	ReadFlash\n"
         "	mov	r0, #0x0\n"
         "	ldr	r1, ._50 + 4\n"
         "._49:\n"

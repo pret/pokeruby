@@ -989,7 +989,7 @@ bool8 InitPartyMenu(void)
 	add	r2, r2, #0x4\n\
 	add	r0, r0, r2\n\
 	ldr	r0, [r0]\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x3cf4\n\
+	bl	_call_via_r0\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r0, r0, #0x18\n\
 	cmp	r0, #0x1\n\

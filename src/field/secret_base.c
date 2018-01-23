@@ -1686,13 +1686,13 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	add	r0, r6, r4\n\
 	mov	r1, #0x0\n\
 	add	r2, r5, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	bl	memset\n\
 	add	r4, r4, r5\n\
 	add	r4, r6, r4\n\
 	add	r0, r4, #0\n\
 	mov	r1, #0x0\n\
 	add	r2, r5, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	bl	memset\n\
 	b	._505\n\
 ._501:\n\
 	lsl	r0, r5, #0x1\n\
@@ -1700,7 +1700,7 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	add	r0, r6, r0\n\
 	mov	r1, #0x0\n\
 	add	r2, r5, #0\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x5c24\n\
+	bl	memset\n\
 ._505:\n\
 	cmp	r7, #0x1\n\
 	beq	._506	@cond_branch\n\

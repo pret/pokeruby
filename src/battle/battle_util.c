@@ -2407,7 +2407,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x3\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	lsr	r4, r0, #0x10\n\
 	cmp	r4, #0\n\
@@ -3332,7 +3332,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0xa\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	cmp	r0, #0\n\
 	beq	._1091	@cond_branch\n\
@@ -3542,7 +3542,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x3\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	cmp	r0, #0\n\
 	beq	._1124	@cond_branch\n\
@@ -3737,7 +3737,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x3\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	cmp	r0, #0\n\
 	beq	._1155	@cond_branch\n\
@@ -3932,7 +3932,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x3\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	cmp	r0, #0\n\
 	beq	._1186	@cond_branch\n\
@@ -4204,7 +4204,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x3\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	cmp	r0, #0\n\
 	beq	._1232	@cond_branch\n\

@@ -5111,7 +5111,7 @@ static void atk15_seteffectwithchance(void)
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	mov	r1, #0x64\n\
-	bl	gMysteryEventScriptCmdTableEnd+0x43d0\n\
+	bl	__umodsi3\n\
 	lsl	r0, r0, #0x10\n\
 	lsr	r0, r0, #0x10\n\
 	cmp	r0, r4\n\
