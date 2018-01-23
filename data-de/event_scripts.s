@@ -3283,7 +3283,7 @@ Route101_EventScript_1A14DC:: @ 81A14DC
 
 DebugScript_081C1CFE:: @ 81C1CFE
 	setflag 0x804
-	call 0x81C032D
+	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	end
 
 DebugScript_081C1D07:: @ 81C1D07
@@ -3297,7 +3297,7 @@ DebugScript_081C1D1D:: @ 81C1D1D
 	end
 
 DebugScript_081C1D1E:: @ 81C1D1E
-	goto 0x8167646
+	goto Route103_EventScript_14ED46
 
 DebugScript_081C1D23:: @ 81C1D23
 	end
@@ -3747,42 +3747,50 @@ DebugScript_081C23FD:: @ 81C23FD
 	compare 0x800d, 1
 	goto_if_eq DebugScript_081C2436
 	compare 0x800d, 2
-	goto_if_eq 0x81C2445
+	goto_if_eq DebugScript_081C2445
 	compare 0x800d, 3
-	goto_if_eq 0x81C2454
+	goto_if_eq DebugScript_081C2454
 	compare 0x800d, 4
-	goto_if_eq 0x81C2463
+	goto_if_eq DebugScript_081C2463
 	compare 0x800d, 5
-	goto_if_eq 0x81C2472
+	goto_if_eq DebugScript_081C2472
 	end
 
 DebugScript_081C2436:: @ 81C2436
 	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+DebugScript_081C2445:
 	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+DebugScript_081C2454:
 	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+DebugScript_081C2463:
 	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
+DebugScript_081C2472:
 	givemon SPECIES_BARBOACH, 99, 0, 0, 0, 0
 	end
 
 DebugScript_081C2482:: @ 81C2482
 	getpartysize
 	compare 0x800d, 1
-	goto_if_eq 0x81C24BB
+	goto_if_eq DebugScript_081C24BB
 	compare 0x800d, 2
-	goto_if_eq 0x81C24CA
+	goto_if_eq DebugScript_081C24CA
 	compare 0x800d, 3
-	goto_if_eq 0x81C24D9
+	goto_if_eq DebugScript_081C24D9
 	compare 0x800d, 4
-	goto_if_eq 0x81C24E8
+	goto_if_eq DebugScript_081C24E8
 	compare 0x800d, 5
-	goto_if_eq 0x81C24F7
+	goto_if_eq DebugScript_081C24F7
 	end
 
 DebugScript_081C24BB:: @ 81C24BB
 	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+DebugScript_081C24CA:
 	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+DebugScript_081C24D9:
 	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+DebugScript_081C24E8:
 	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
+DebugScript_081C24F7:
 	givemon SPECIES_SHROOMISH, 99, 0, 0, 0, 0
 	end
 
