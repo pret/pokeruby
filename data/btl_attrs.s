@@ -206,7 +206,31 @@ gSpriteTemplate_81F96D0:: @ 81F96D0
 .if DEBUG
 
 UnkDebug0:: @ 0x821F3B8
-    .incbin "baserom_de_debug.gba", 0x21F3B8, 620
+    .incbin "baserom_de_debug.gba", 0x21F3B8, 108
+
+gUnknown_Debug_821F424::
+	.incbin "baserom_de_debug.gba", 0x21F424, 320
+
+gUnknown_Debug_821F564::
+	.incbin "baserom_de_debug.gba", 0x21F564, 2
+
+gUnknown_Debug_821F566::
+	.incbin "baserom_de_debug.gba", 0x21F566, 2
+
+gUnknown_Debug_821F568::
+	.incbin "baserom_de_debug.gba", 0x21F568, 4
+
+gUnknown_Debug_821F56C::
+	.incbin "baserom_de_debug.gba", 0x21F56C, 32
+
+gUnknown_Debug_821F58C::
+	.incbin "baserom_de_debug.gba", 0x21F58C, 12
+
+gUnknown_Debug_821F598::
+	.incbin "baserom_de_debug.gba", 0x21F598, 20
+
+gUnknown_Debug_821F5AC::
+	.incbin "baserom_de_debug.gba", 0x21F5AC, 120
 
 Str_821F624:: @ 0x821F624
 	.string "ーーーーーーーーーーーー$"
@@ -242,7 +266,13 @@ debug_unk_0b::
 @ 0x821F66D
 	.string "せつぞくエラー$"
 
-.incbin "baserom_de_debug.gba", 0x21F675, 323
+	.incbin "baserom_de_debug.gba", 0x21F675, 11
+
+gUnknown_Debug_821F680::
+	.incbin "baserom_de_debug.gba", 0x21F680, 280
+
+gUnknown_Debug_821F798::
+	.incbin "baserom_de_debug.gba", 0x21F798, 312-280
 
 Str_821F7B8:: @ 0x821F7B8
 	.string "たかさ　$"

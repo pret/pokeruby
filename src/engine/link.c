@@ -147,6 +147,9 @@ void (*gLinkCallback)(void);
 struct LinkPlayer gSavedLinkPlayers[MAX_LINK_PLAYERS];
 u8 gShouldAdvanceLinkState;
 u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
+#if DEBUG
+u8 gUnknown_Debug_30030E0;
+#endif
 u8 gBlockRequestType;
 u8 gLastSendQueueCount;
 struct Link gLink;
@@ -158,11 +161,11 @@ u8 deUnkValue1;
 u8 deUnkValue2;
 #endif
 
-EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = {0};
-EWRAM_DATA bool8 gLinkTestDummyBool = {0};
-EWRAM_DATA u32 gFiller_20238B8 = {0};
-EWRAM_DATA u32 dword_20238BC = {0};
-EWRAM_DATA bool8 gLinkOpen = {0};
+EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = 0;
+EWRAM_DATA bool8 gLinkTestDummyBool = 0;
+EWRAM_DATA u32 gFiller_20238B8 = 0;
+EWRAM_DATA u32 dword_20238BC = 0;
+EWRAM_DATA bool8 gLinkOpen = 0;
 
 static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
 static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");

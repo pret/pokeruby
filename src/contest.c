@@ -919,7 +919,7 @@ void sub_80ABEA0(u8 taskId)
 ._180:\n\
 	.word	gDisplayedStringBattle\n\
 	.word	gText_Contest_ButItCantParticipate\n\
-	.word	+0x2019204\n\
+	.word	gSharedMem+0x19204\n\
 	.word	gStringVar4\n\
 	.word	gMenuWindow\n\
 	.word	gBattle_BG0_Y\n\
@@ -939,7 +939,7 @@ void sub_80ABEA0(u8 taskId)
 ._185:\n\
 	.align	2, 0\n\
 ._184:\n\
-	.word	+0x2019204\n\
+	.word	gSharedMem+0x19204\n\
 ._182:\n\
 	sub	r0, r0, #0x1\n\
 	b	._186\n\
@@ -957,7 +957,7 @@ void sub_80ABEA0(u8 taskId)
 ._190:\n\
 	.align	2, 0\n\
 ._189:\n\
-	.word	+0x2019204\n\
+	.word	gSharedMem+0x19204\n\
 ._187:\n\
 	add	r0, r1, #1\n\
 ._186:\n\
@@ -987,7 +987,7 @@ void sub_80ABEA0(u8 taskId)
 ._194:\n\
 	.align	2, 0\n\
 ._193:\n\
-	.word	+0x2019204\n\
+	.word	gSharedMem+0x19204\n\
 	.word	gContestMons\n\
 	.word	gContestPlayerMonIndex\n\
 ._168:\n\
@@ -1445,7 +1445,7 @@ void debug_sub_80BA054()
 ._263:\n\
 	.align	2, 0\n\
 ._262:\n\
-	.word	+0x2019348\n\
+	.word	gSharedMem+0x19348\n\
 	.word	gBattleMonForms\n\
 	.word	gContestPlayerMonIndex\n\
 	.word	gContestMons\n\
@@ -1501,7 +1501,7 @@ void debug_sub_80BA054()
 	.word	gSprites\n\
 	.word	SpriteCallbackDummy+1\n\
 	.word	gContestPlayerMonIndex\n\
-	.word	+0x2019260\n\
+	.word	gSharedMem+0x19260\n\
 ._241:\n\
 	ldr	r0, ._273\n\
 	ldr	r0, [r0]\n\
@@ -1535,7 +1535,7 @@ void debug_sub_80BA054()
 	.word	gAnimScriptCallback\n\
 	.word	gAnimScriptActive\n\
 	.word	gContestPlayerMonIndex\n\
-	.word	+0x2019204\n\
+	.word	gSharedMem+0x19204\n\
 	.word	gTasks\n\
 ._271:\n\
 	ldr	r0, ._276\n\

@@ -497,7 +497,7 @@ void sub_80EBDD8()
 ._65:\n\
 	.align	2, 0\n\
 ._64:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._66\n\
 ._66:\n\
 	.word	._67\n\
@@ -543,7 +543,7 @@ void sub_80EBDD8()
 ._87:\n\
 	.align	2, 0\n\
 ._86:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6ddc\n\
 	.word	0x6dae\n\
 ._68:\n\
@@ -570,7 +570,7 @@ void sub_80EBDD8()
 ._92:\n\
 	.align	2, 0\n\
 ._91:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._70:\n\
 	bl	sub_80F2598\n\
 	ldr	r1, ._94\n\
@@ -581,7 +581,7 @@ void sub_80EBDD8()
 ._95:\n\
 	.align	2, 0\n\
 ._94:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._71:\n\
 	bl	sub_80EEE20\n\
 	ldr	r1, ._99\n\
@@ -607,7 +607,7 @@ void sub_80EBDD8()
 ._100:\n\
 	.align	2, 0\n\
 ._99:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._73:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EF248\n\
@@ -630,7 +630,7 @@ void sub_80EBDD8()
 ._105:\n\
 	.align	2, 0\n\
 ._104:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._75:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F1B8C\n\
@@ -655,7 +655,7 @@ void sub_80EBDD8()
 ._109:\n\
 	.align	2, 0\n\
 ._108:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._77:\n\
 	ldr	r0, ._111\n\
 	bl	SetVBlankCallback\n\
@@ -680,7 +680,7 @@ void sub_80EBDD8()
 ._115:\n\
 	.align	2, 0\n\
 ._114:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._79:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EED2C\n\
@@ -692,7 +692,7 @@ void sub_80EBDD8()
 ._118:\n\
 	.align	2, 0\n\
 ._117:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._80:\n\
 	ldr	r0, ._121\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -732,7 +732,7 @@ void sub_80EBDD8()
 ._126:\n\
 	.align	2, 0\n\
 ._125:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._83:\n\
 	bl	sub_80F1DF0\n\
 ._110:\n\
@@ -748,7 +748,7 @@ void sub_80EBDD8()
 ._129:\n\
 	.align	2, 0\n\
 ._128:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._84:\n\
 	bl	sub_80F1E50\n\
 	lsl	r0, r0, #0x18\n\
@@ -895,7 +895,7 @@ void sub_80EC00C()
 ._137:\n\
 	.align	2, 0\n\
 ._136:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._138\n\
 ._138:\n\
 	.word	._139\n\
@@ -945,7 +945,7 @@ void sub_80EC00C()
 	.align	2, 0\n\
 ._156:\n\
 	.word	sub_80EBD80+1\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6ddc\n\
 	.word	0x6dad\n\
 	.word	0x6dae\n\
@@ -975,7 +975,7 @@ void sub_80EC00C()
 ._162:\n\
 	.align	2, 0\n\
 ._161:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._142:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F1B8C\n\
@@ -1002,7 +1002,7 @@ void sub_80EC00C()
 ._167:\n\
 	.align	2, 0\n\
 ._166:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._144:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -1041,7 +1041,7 @@ void sub_80EC00C()
 ._175:\n\
 	.align	2, 0\n\
 ._174:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._147:\n\
 	ldr	r0, ._178\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -1067,7 +1067,7 @@ void sub_80EC00C()
 ._182:\n\
 	.align	2, 0\n\
 ._181:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._149:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F2C80\n\
@@ -1092,7 +1092,7 @@ void sub_80EC00C()
 ._186:\n\
 	.align	2, 0\n\
 ._185:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._151:\n\
 	bl	sub_80F1DF0\n\
 ._169:\n\
@@ -1108,7 +1108,7 @@ void sub_80EC00C()
 ._189:\n\
 	.align	2, 0\n\
 ._188:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._152:\n\
 	bl	sub_80F1E50\n\
 	lsl	r0, r0, #0x18\n\
@@ -1139,7 +1139,7 @@ void sub_80EC00C()
 ._193:\n\
 	.align	2, 0\n\
 ._192:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dad\n\
 	.word	sub_80EC268+1\n\
 	.word	gLinkOpen\n\
@@ -1367,7 +1367,7 @@ void sub_80EC4A0()
 ._286:\n\
 	.align	2, 0\n\
 ._285:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._287\n\
 ._287:\n\
 	.word	._288\n\
@@ -1417,7 +1417,7 @@ void sub_80EC4A0()
 	.align	2, 0\n\
 ._308:\n\
 	.word	gSaveBlock2\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._290:\n\
 	bl	sub_80EEF34\n\
 	lsl	r0, r0, #0x18\n\
@@ -1444,7 +1444,7 @@ void sub_80EC4A0()
 ._314:\n\
 	.align	2, 0\n\
 ._313:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._291:\n\
 	ldr	r0, ._318\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -1472,7 +1472,7 @@ void sub_80EC4A0()
 ._322:\n\
 	.align	2, 0\n\
 ._321:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._293:\n\
 	bl	sub_80EF814\n\
 	b	._336\n\
@@ -1496,7 +1496,7 @@ void sub_80EC4A0()
 ._327:\n\
 	.align	2, 0\n\
 ._326:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._296:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80F2C80\n\
@@ -1514,7 +1514,7 @@ void sub_80EC4A0()
 ._330:\n\
 	.align	2, 0\n\
 ._329:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._298:\n\
 	bl	sub_80F2DD8\n\
 	ldr	r0, ._332\n\
@@ -1528,7 +1528,7 @@ void sub_80EC4A0()
 	.align	2, 0\n\
 ._332:\n\
 	.word	sub_80EBD30+1\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._299:\n\
 	bl	sub_8055870\n\
 	b	._334\n\
@@ -1576,7 +1576,7 @@ void sub_80EC4A0()
 	.word	gLinkOpen\n\
 	.word	0x60075e0\n\
 	.word	0x600f800\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._302:\n\
 	ldr	r0, ._341\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -1709,7 +1709,7 @@ void sub_80EC67C()
 ._346:\n\
 	.align	2, 0\n\
 ._345:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._347\n\
 ._347:\n\
 	.word	._348\n\
@@ -1754,7 +1754,7 @@ void sub_80EC67C()
 ._365:\n\
 	.align	2, 0\n\
 ._364:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._359:\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
@@ -1768,7 +1768,7 @@ void sub_80EC67C()
 ._368:\n\
 	.align	2, 0\n\
 ._367:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._349:\n\
 	ldr	r1, ._371\n\
 	add	r0, r4, r1\n\
@@ -1812,7 +1812,7 @@ void sub_80EC67C()
 ._379:\n\
 	.align	2, 0\n\
 ._378:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6e90\n\
 ._376:\n\
 	mov	r0, #0xc1\n\
@@ -1836,7 +1836,7 @@ void sub_80EC67C()
 ._384:\n\
 	.align	2, 0\n\
 ._383:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._352:\n\
 	mov	r2, #0xc2\n\
 	lsl	r2, r2, #0x2\n\
@@ -1911,7 +1911,7 @@ void sub_80EC67C()
 ._389:\n\
 	.word	gPaletteFade\n\
 	.word	gSaveBlock2\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6e90\n\
 	.word	sub_80EC00C+1\n\
 	.word	gLinkOpen\n\
@@ -2110,7 +2110,7 @@ void sub_80ECA10()
 ._457:\n\
 	.align	2, 0\n\
 ._456:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._458\n\
 ._458:\n\
 	.word	._459\n\
@@ -2160,7 +2160,7 @@ void sub_80ECA10()
 	.align	2, 0\n\
 ._476:\n\
 	.word	sub_80EBD80+1\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6df0\n\
 	.word	0x6dad\n\
 	.word	0x6dae\n\
@@ -2190,7 +2190,7 @@ void sub_80ECA10()
 ._482:\n\
 	.align	2, 0\n\
 ._481:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._462:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F1B8C\n\
@@ -2217,7 +2217,7 @@ void sub_80ECA10()
 ._487:\n\
 	.align	2, 0\n\
 ._486:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._464:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -2256,7 +2256,7 @@ void sub_80ECA10()
 ._495:\n\
 	.align	2, 0\n\
 ._494:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._467:\n\
 	bl	sub_80F2598\n\
 	b	._496\n\
@@ -2299,7 +2299,7 @@ void sub_80ECA10()
 ._504:\n\
 	.align	2, 0\n\
 ._503:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._471:\n\
 	bl	sub_80F1DF0\n\
 ._496:\n\
@@ -2315,7 +2315,7 @@ void sub_80ECA10()
 ._507:\n\
 	.align	2, 0\n\
 ._506:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._472:\n\
 	bl	sub_80F1E50\n\
 	lsl	r0, r0, #0x18\n\
@@ -2346,7 +2346,7 @@ void sub_80ECA10()
 ._511:\n\
 	.align	2, 0\n\
 ._510:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dad\n\
 	.word	sub_80EC86C+1\n\
 	.word	gLinkOpen\n\
@@ -2506,7 +2506,7 @@ void sub_80ECD80()
 ._565:\n\
 	.align	2, 0\n\
 ._564:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._566\n\
 ._566:\n\
 	.word	._567\n\
@@ -2587,7 +2587,7 @@ void sub_80ECD80()
 ._601:\n\
 	.align	2, 0\n\
 ._600:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._571:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2D6C\n\
@@ -2599,7 +2599,7 @@ void sub_80ECD80()
 ._604:\n\
 	.align	2, 0\n\
 ._603:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._572:\n\
 	mov	r0, #0x5\n\
 	bl	sub_80F2D6C\n\
@@ -2648,7 +2648,7 @@ void sub_80ECD80()
 ._613:\n\
 	.align	2, 0\n\
 ._612:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._576:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F1B8C\n\
@@ -2675,7 +2675,7 @@ void sub_80ECD80()
 ._618:\n\
 	.align	2, 0\n\
 ._617:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._578:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -2719,7 +2719,7 @@ void sub_80ECD80()
 ._628:\n\
 	.align	2, 0\n\
 ._627:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._582:\n\
 	ldr	r0, ._631\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -2766,7 +2766,7 @@ void sub_80ECD80()
 ._636:\n\
 	.align	2, 0\n\
 ._635:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x306\n\
 ._585:\n\
 	mov	r0, #0x5\n\
@@ -2798,7 +2798,7 @@ void sub_80ECD80()
 ._640:\n\
 	.align	2, 0\n\
 ._639:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._587:\n\
 	bl	sub_80F1E50\n\
 	lsl	r0, r0, #0x18\n\
@@ -2829,7 +2829,7 @@ void sub_80ECD80()
 ._644:\n\
 	.align	2, 0\n\
 ._643:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dad\n\
 	.word	sub_80ECC08+1\n\
 	.word	gLinkOpen\n\
@@ -2970,7 +2970,7 @@ void sub_80ED01C()
 ._648:\n\
 	.align	2, 0\n\
 ._647:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._649\n\
 ._649:\n\
 	.word	._650\n\
@@ -3007,7 +3007,7 @@ void sub_80ED01C()
 ._672:\n\
 	.align	2, 0\n\
 ._671:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._651:\n\
 	bl	sub_80F1F10\n\
 	lsl	r0, r0, #0x18\n\
@@ -3025,7 +3025,7 @@ void sub_80ED01C()
 ._677:\n\
 	.align	2, 0\n\
 ._676:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._652:\n\
 	bl	sub_80EEF34\n\
 	lsl	r0, r0, #0x18\n\
@@ -3052,7 +3052,7 @@ void sub_80ED01C()
 ._682:\n\
 	.align	2, 0\n\
 ._681:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._653:\n\
 	ldr	r0, ._686\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -3075,7 +3075,7 @@ void sub_80ED01C()
 	.align	2, 0\n\
 ._686:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._654:\n\
 	bl	sub_80F2620\n\
 	ldr	r1, ._689\n\
@@ -3086,7 +3086,7 @@ void sub_80ED01C()
 ._690:\n\
 	.align	2, 0\n\
 ._689:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._655:\n\
 	bl	sub_80F4D44\n\
 	ldr	r1, ._693\n\
@@ -3112,7 +3112,7 @@ void sub_80ED01C()
 ._694:\n\
 	.align	2, 0\n\
 ._693:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._691:\n\
 	ldr	r1, ._696\n\
 	mov	r0, #0xc1\n\
@@ -3122,7 +3122,7 @@ void sub_80ED01C()
 ._697:\n\
 	.align	2, 0\n\
 ._696:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._657:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -3140,7 +3140,7 @@ void sub_80ED01C()
 ._702:\n\
 	.align	2, 0\n\
 ._701:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._658:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -3155,7 +3155,7 @@ void sub_80ED01C()
 ._707:\n\
 	.align	2, 0\n\
 ._706:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._659:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F0264\n\
@@ -3181,7 +3181,7 @@ void sub_80ED01C()
 ._712:\n\
 	.align	2, 0\n\
 ._711:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._661:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F3008\n\
@@ -3193,7 +3193,7 @@ void sub_80ED01C()
 ._715:\n\
 	.align	2, 0\n\
 ._714:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._662:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -3208,7 +3208,7 @@ void sub_80ED01C()
 ._720:\n\
 	.align	2, 0\n\
 ._719:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._663:\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
@@ -3242,7 +3242,7 @@ void sub_80ED01C()
 ._726:\n\
 	.align	2, 0\n\
 ._725:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._665:\n\
 	ldr	r0, ._729\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -3299,7 +3299,7 @@ void sub_80ED01C()
 ._734:\n\
 	.align	2, 0\n\
 ._733:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x306\n\
 ._668:\n\
 	ldr	r4, ._737\n\
@@ -3347,7 +3347,7 @@ void sub_80ED01C()
 ._738:\n\
 	.align	2, 0\n\
 ._737:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dfc\n\
 	.word	sub_80ED31C+1\n\
 	.word	gLinkOpen\n\
@@ -3487,7 +3487,7 @@ void sub_80ED31C()
 ._744:\n\
 	.align	2, 0\n\
 ._743:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._740:\n\
 	cmp	r0, #0x2\n\
 	beq	._745	@cond_branch\n\
@@ -3655,7 +3655,7 @@ void sub_80ED3D0()
 ._768:\n\
 	.align	2, 0\n\
 ._767:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._769\n\
 ._769:\n\
 	.word	._770\n\
@@ -3678,7 +3678,7 @@ void sub_80ED3D0()
 ._781:\n\
 	.align	2, 0\n\
 ._780:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._771:\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80F6134\n\
@@ -3690,7 +3690,7 @@ void sub_80ED3D0()
 ._784:\n\
 	.align	2, 0\n\
 ._783:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._772:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EEFBC\n\
@@ -3702,7 +3702,7 @@ void sub_80ED3D0()
 ._787:\n\
 	.align	2, 0\n\
 ._786:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._773:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F0264\n\
@@ -3726,7 +3726,7 @@ void sub_80ED3D0()
 ._791:\n\
 	.align	2, 0\n\
 ._790:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._775:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -3739,7 +3739,7 @@ void sub_80ED3D0()
 ._795:\n\
 	.align	2, 0\n\
 ._794:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._776:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F3008\n\
@@ -3768,7 +3768,7 @@ void sub_80ED3D0()
 ._798:\n\
 	.align	2, 0\n\
 ._797:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	sub_80EBD18+1\n\
 ._777:\n\
 	mov	r0, #0x4\n\
@@ -3793,7 +3793,7 @@ void sub_80ED3D0()
 ._802:\n\
 	.align	2, 0\n\
 ._801:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
@@ -3890,7 +3890,7 @@ void sub_80ED4D8()
 ._809:\n\
 	.align	2, 0\n\
 ._808:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._810\n\
 ._810:\n\
 	.word	._811\n\
@@ -3936,7 +3936,7 @@ void sub_80ED4D8()
 	.align	2, 0\n\
 ._824:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._813:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -3949,7 +3949,7 @@ void sub_80ED4D8()
 ._829:\n\
 	.align	2, 0\n\
 ._828:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._814:\n\
 	bl	sub_80F4CF0\n\
 	ldr	r1, ._831\n\
@@ -3960,7 +3960,7 @@ void sub_80ED4D8()
 ._832:\n\
 	.align	2, 0\n\
 ._831:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._815:\n\
 	bl	sub_80EFF34\n\
 	ldr	r1, ._835\n\
@@ -3983,7 +3983,7 @@ void sub_80ED4D8()
 ._836:\n\
 	.align	2, 0\n\
 ._835:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._817:\n\
 	bl	sub_80F35B4\n\
 	mov	r0, #0x2\n\
@@ -4014,7 +4014,7 @@ void sub_80ED4D8()
 ._839:\n\
 	.align	2, 0\n\
 ._838:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	sub_80EBD4C+1\n\
 ._818:\n\
 	mov	r0, #0x2\n\
@@ -4039,7 +4039,7 @@ void sub_80ED4D8()
 ._843:\n\
 	.align	2, 0\n\
 ._842:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f000\n\
@@ -4141,7 +4141,7 @@ void sub_80ED620()
 ._850:\n\
 	.align	2, 0\n\
 ._849:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._851\n\
 ._851:\n\
 	.word	._852\n\
@@ -4173,7 +4173,7 @@ void sub_80ED620()
 ._871:\n\
 	.align	2, 0\n\
 ._870:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._853:\n\
 	bl	sub_80F1F10\n\
 	lsl	r0, r0, #0x18\n\
@@ -4210,7 +4210,7 @@ void sub_80ED620()
 ._879:\n\
 	.align	2, 0\n\
 ._878:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._855:\n\
 	ldr	r0, ._883\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -4241,7 +4241,7 @@ void sub_80ED620()
 	.align	2, 0\n\
 ._883:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x76aa\n\
 ._856:\n\
 	bl	sub_80F2620\n\
@@ -4275,7 +4275,7 @@ void sub_80ED620()
 ._891:\n\
 	.align	2, 0\n\
 ._890:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._860:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -4288,7 +4288,7 @@ void sub_80ED620()
 ._895:\n\
 	.align	2, 0\n\
 ._894:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._861:\n\
 	bl	sub_8055870\n\
 	b	._896\n\
@@ -4315,7 +4315,7 @@ void sub_80ED620()
 ._899:\n\
 	.align	2, 0\n\
 ._898:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	sub_80EBD4C+1\n\
 ._863:\n\
 	mov	r0, #0x2\n\
@@ -4328,7 +4328,7 @@ void sub_80ED620()
 ._902:\n\
 	.align	2, 0\n\
 ._901:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._864:\n\
 	ldr	r0, ._905\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -4375,7 +4375,7 @@ void sub_80ED620()
 ._910:\n\
 	.align	2, 0\n\
 ._909:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._867:\n\
 	mov	r0, #0x6\n\
 	bl	sub_80F2C80\n\
@@ -4411,7 +4411,7 @@ void sub_80ED620()
 ._914:\n\
 	.align	2, 0\n\
 ._913:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	sub_80ED858+1\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
@@ -4702,7 +4702,7 @@ void sub_80ED858()
 ._918:\n\
 	.align	2, 0\n\
 ._917:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._919\n\
 ._919:\n\
 	.word	._920\n\
@@ -4730,7 +4730,7 @@ void sub_80ED858()
 ._934:\n\
 	.align	2, 0\n\
 ._933:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._921:\n\
 	bl	sub_80F5B50\n\
 	lsl	r0, r0, #0x18\n\
@@ -4748,7 +4748,7 @@ void sub_80ED858()
 ._939:\n\
 	.align	2, 0\n\
 ._938:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._922:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F0174\n\
@@ -4762,7 +4762,7 @@ void sub_80ED858()
 ._942:\n\
 	.align	2, 0\n\
 ._941:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._923:\n\
 	bl	sub_80F4FB4\n\
 	lsl	r0, r0, #0x18\n\
@@ -4879,7 +4879,7 @@ void sub_80ED858()
 ._963:\n\
 	.align	2, 0\n\
 ._962:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._960:\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r2\n\
@@ -4958,7 +4958,7 @@ void sub_80ED858()
 ._981:\n\
 	.align	2, 0\n\
 ._980:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._926:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -4971,7 +4971,7 @@ void sub_80ED858()
 ._985:\n\
 	.align	2, 0\n\
 ._984:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._927:\n\
 	mov	r0, #0x3\n\
 	bl	sub_80EEFBC\n\
@@ -4986,7 +4986,7 @@ void sub_80ED858()
 ._988:\n\
 	.align	2, 0\n\
 ._987:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._928:\n\
 	bl	sub_80F7500\n\
 	lsl	r0, r0, #0x18\n\
@@ -5007,7 +5007,7 @@ void sub_80ED858()
 ._992:\n\
 	.align	2, 0\n\
 ._991:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._929:\n\
 	bl	sub_80F5038\n\
 	lsl	r0, r0, #0x18\n\
@@ -5037,7 +5037,7 @@ void sub_80ED858()
 ._996:\n\
 	.align	2, 0\n\
 ._995:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._931:\n\
 	ldr	r0, ._1000\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -5065,7 +5065,7 @@ void sub_80ED858()
 	.align	2, 0\n\
 ._1000:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x76aa\n\
 	.word	sub_80ECA10+1\n\
 ._998:\n\
@@ -5501,7 +5501,7 @@ void sub_80EDB88()
 ._1008:\n\
 	.align	2, 0\n\
 ._1007:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._1009\n\
 ._1009:\n\
 	.word	._1010\n\
@@ -5534,7 +5534,7 @@ void sub_80EDB88()
 ._1030:\n\
 	.align	2, 0\n\
 ._1029:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1011:\n\
 	bl	sub_80F1F10\n\
 	lsl	r0, r0, #0x18\n\
@@ -5552,7 +5552,7 @@ void sub_80EDB88()
 ._1035:\n\
 	.align	2, 0\n\
 ._1034:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1012:\n\
 	bl	sub_80EEF34\n\
 	lsl	r0, r0, #0x18\n\
@@ -5576,7 +5576,7 @@ void sub_80EDB88()
 ._1040:\n\
 	.align	2, 0\n\
 ._1039:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1013:\n\
 	ldr	r0, ._1044\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -5599,7 +5599,7 @@ void sub_80EDB88()
 	.align	2, 0\n\
 ._1044:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1014:\n\
 	bl	sub_80F2620\n\
 	ldr	r1, ._1047\n\
@@ -5610,7 +5610,7 @@ void sub_80EDB88()
 ._1048:\n\
 	.align	2, 0\n\
 ._1047:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1015:\n\
 	bl	sub_80F638C\n\
 	ldr	r1, ._1051\n\
@@ -5636,7 +5636,7 @@ void sub_80EDB88()
 ._1052:\n\
 	.align	2, 0\n\
 ._1051:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1049:\n\
 	ldr	r1, ._1054\n\
 	mov	r0, #0xc1\n\
@@ -5646,7 +5646,7 @@ void sub_80EDB88()
 ._1055:\n\
 	.align	2, 0\n\
 ._1054:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1017:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -5664,7 +5664,7 @@ void sub_80EDB88()
 ._1060:\n\
 	.align	2, 0\n\
 ._1059:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1018:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -5679,7 +5679,7 @@ void sub_80EDB88()
 ._1065:\n\
 	.align	2, 0\n\
 ._1064:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1019:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F0264\n\
@@ -5703,7 +5703,7 @@ void sub_80EDB88()
 ._1069:\n\
 	.align	2, 0\n\
 ._1068:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1021:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F2C80\n\
@@ -5728,7 +5728,7 @@ void sub_80EDB88()
 ._1073:\n\
 	.align	2, 0\n\
 ._1072:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1023:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F3008\n\
@@ -5740,7 +5740,7 @@ void sub_80EDB88()
 ._1076:\n\
 	.align	2, 0\n\
 ._1075:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1024:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -5753,7 +5753,7 @@ void sub_80EDB88()
 ._1080:\n\
 	.align	2, 0\n\
 ._1079:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1025:\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
@@ -5804,7 +5804,7 @@ void sub_80EDB88()
 ._1087:\n\
 	.align	2, 0\n\
 ._1086:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
@@ -5943,7 +5943,7 @@ void sub_80EDDBC()
 ._1096:\n\
 	.align	2, 0\n\
 ._1095:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1092:\n\
 	cmp	r0, #0x2\n\
 	beq	._1097	@cond_branch\n\
@@ -6136,7 +6136,7 @@ void sub_80EDEE4()
 ._1135:\n\
 	.align	2, 0\n\
 ._1134:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._1136\n\
 ._1136:\n\
 	.word	._1137\n\
@@ -6184,7 +6184,7 @@ void sub_80EDEE4()
 	.align	2, 0\n\
 ._1152:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1139:\n\
 	bl	sub_80F66E0\n\
 	bl	sub_80EEE08\n\
@@ -6196,7 +6196,7 @@ void sub_80EDEE4()
 ._1156:\n\
 	.align	2, 0\n\
 ._1155:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1140:\n\
 	bl	sub_80F1080\n\
 	lsl	r0, r0, #0x18\n\
@@ -6210,7 +6210,7 @@ void sub_80EDEE4()
 ._1160:\n\
 	.align	2, 0\n\
 ._1159:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1141:\n\
 	mov	r0, #0x5\n\
 	bl	sub_80EEFBC\n\
@@ -6235,7 +6235,7 @@ void sub_80EDEE4()
 ._1164:\n\
 	.align	2, 0\n\
 ._1163:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1143:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -6248,7 +6248,7 @@ void sub_80EDEE4()
 ._1168:\n\
 	.align	2, 0\n\
 ._1167:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1144:\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
@@ -6291,7 +6291,7 @@ void sub_80EDEE4()
 ._1175:\n\
 	.align	2, 0\n\
 ._1174:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f000\n\
@@ -6417,7 +6417,7 @@ void sub_80EE06C()
 ._1186:\n\
 	.align	2, 0\n\
 ._1185:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._1187\n\
 ._1187:\n\
 	.word	._1188\n\
@@ -6439,7 +6439,7 @@ void sub_80EE06C()
 ._1199:\n\
 	.align	2, 0\n\
 ._1198:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1189:\n\
 	ldr	r2, ._1203\n\
 	ldrh	r1, [r2, #0x30]\n\
@@ -6515,7 +6515,7 @@ void sub_80EE06C()
 ._1213:\n\
 	.align	2, 0\n\
 ._1212:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1210:\n\
 	mov	r0, #0x2\n\
 	and	r0, r0, r2\n\
@@ -6547,7 +6547,7 @@ void sub_80EE06C()
 ._1223:\n\
 	.align	2, 0\n\
 ._1222:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1191:\n\
 	bl	sub_8055870\n\
 	add	r1, r0, #0\n\
@@ -6562,7 +6562,7 @@ void sub_80EE06C()
 ._1227:\n\
 	.align	2, 0\n\
 ._1226:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1192:\n\
 	bl	sub_80F3B00\n\
 	ldr	r1, ._1229\n\
@@ -6577,7 +6577,7 @@ void sub_80EE06C()
 ._1230:\n\
 	.align	2, 0\n\
 ._1229:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1193:\n\
 	bl	sub_80F3B58\n\
 	lsl	r0, r0, #0x18\n\
@@ -6596,7 +6596,7 @@ void sub_80EE06C()
 ._1234:\n\
 	.align	2, 0\n\
 ._1233:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1194:\n\
 	bl	sub_80F68E8\n\
 	lsl	r0, r0, #0x18\n\
@@ -6618,7 +6618,7 @@ void sub_80EE06C()
 ._1239:\n\
 	.align	2, 0\n\
 ._1238:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1236:\n\
 	ldr	r0, ._1242\n\
 	ldrh	r1, [r0, #0x2e]\n\
@@ -6640,7 +6640,7 @@ void sub_80EE06C()
 	.align	2, 0\n\
 ._1242:\n\
 	.word	gMain\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1195:\n\
 	bl	sub_80F3BD4\n\
 	lsl	r0, r0, #0x18\n\
@@ -6657,7 +6657,7 @@ void sub_80EE06C()
 ._1247:\n\
 	.align	2, 0\n\
 ._1246:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1196:\n\
 	bl	sub_80F3BD4\n\
 	lsl	r0, r0, #0x18\n\
@@ -6694,7 +6694,7 @@ void sub_80EE06C()
 ._1251:\n\
 	.align	2, 0\n\
 ._1250:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	gLink\n\
 	.word	0xfbd");
@@ -6812,7 +6812,7 @@ void sub_80EE294()
 ._1255:\n\
 	.align	2, 0\n\
 ._1254:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._1256\n\
 ._1256:\n\
 	.word	._1257\n\
@@ -6858,7 +6858,7 @@ void sub_80EE294()
 	.align	2, 0\n\
 ._1270:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1259:\n\
 	bl	sub_80F6134\n\
 	mov	r0, #0x1\n\
@@ -6883,7 +6883,7 @@ void sub_80EE294()
 ._1275:\n\
 	.align	2, 0\n\
 ._1274:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1261:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EEFBC\n\
@@ -6900,7 +6900,7 @@ void sub_80EE294()
 	.align	2, 0\n\
 ._1277:\n\
 	.word	sub_80EBD18+1\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1262:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -6913,7 +6913,7 @@ void sub_80EE294()
 ._1282:\n\
 	.align	2, 0\n\
 ._1281:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1263:\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
@@ -6958,7 +6958,7 @@ void sub_80EE294()
 ._1287:\n\
 	.align	2, 0\n\
 ._1286:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
@@ -7059,7 +7059,7 @@ void sub_80EE3D8()
 ._1294:\n\
 	.align	2, 0\n\
 ._1293:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	._1295\n\
 ._1295:\n\
 	.word	._1296\n\
@@ -7088,7 +7088,7 @@ void sub_80EE3D8()
 ._1312:\n\
 	.align	2, 0\n\
 ._1311:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1297:\n\
 	bl	sub_80F1F10\n\
 	lsl	r0, r0, #0x18\n\
@@ -7106,7 +7106,7 @@ void sub_80EE3D8()
 ._1317:\n\
 	.align	2, 0\n\
 ._1316:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1298:\n\
 	bl	sub_80EEF34\n\
 	lsl	r0, r0, #0x18\n\
@@ -7130,7 +7130,7 @@ void sub_80EE3D8()
 ._1322:\n\
 	.align	2, 0\n\
 ._1321:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1299:\n\
 	ldr	r0, ._1326\n\
 	ldrb	r1, [r0, #0x7]\n\
@@ -7154,7 +7154,7 @@ void sub_80EE3D8()
 	.align	2, 0\n\
 ._1326:\n\
 	.word	gPaletteFade\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1300:\n\
 	bl	sub_80F2620\n\
 	ldr	r1, ._1329\n\
@@ -7165,7 +7165,7 @@ void sub_80EE3D8()
 ._1330:\n\
 	.align	2, 0\n\
 ._1329:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1301:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F0264\n\
@@ -7191,7 +7191,7 @@ void sub_80EE3D8()
 ._1335:\n\
 	.align	2, 0\n\
 ._1334:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1303:\n\
 	mov	r0, #0x3\n\
 	bl	sub_80F2C80\n\
@@ -7216,7 +7216,7 @@ void sub_80EE3D8()
 ._1339:\n\
 	.align	2, 0\n\
 ._1338:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1305:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F3008\n\
@@ -7228,7 +7228,7 @@ void sub_80EE3D8()
 ._1342:\n\
 	.align	2, 0\n\
 ._1341:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1306:\n\
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
@@ -7241,7 +7241,7 @@ void sub_80EE3D8()
 ._1346:\n\
 	.align	2, 0\n\
 ._1345:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1307:\n\
 	bl	sub_80F6F10\n\
 	ldr	r4, ._1348\n\
@@ -7270,7 +7270,7 @@ void sub_80EE3D8()
 ._1349:\n\
 	.align	2, 0\n\
 ._1348:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	sub_80EBD68+1\n\
 ._1308:\n\
 	mov	r0, #0x5\n\
@@ -7295,7 +7295,7 @@ void sub_80EE3D8()
 ._1353:\n\
 	.align	2, 0\n\
 ._1352:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	gLinkOpen\n\
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
@@ -7419,7 +7419,7 @@ void sub_80EE58C()
 ._1362:\n\
 	.align	2, 0\n\
 ._1361:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 ._1358:\n\
 	cmp	r0, #0x2\n\
 	beq	._1363	@cond_branch\n\
@@ -8045,7 +8045,7 @@ bool8 sub_80EEC10()
 	.align	2, 0\n\
 ._1563:\n\
 	.word	gMain\n\
-	.word	+0x2006dad\n\
+	.word	gSharedMem+0x6dad\n\
 ._1559:\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -8077,7 +8077,7 @@ bool8 sub_80EEC10()
 ._1570:\n\
 	.align	2, 0\n\
 ._1569:\n\
-	.word	+0x2006dad\n\
+	.word	gSharedMem+0x6dad\n\
 ._1565:\n\
 	ldr	r0, ._1572\n\
 	ldrb	r0, [r0]\n\
@@ -8166,7 +8166,7 @@ bool8 sub_80EEC90()
 	.align	2, 0\n\
 ._1577:\n\
 	.word	gMain\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dad\n\
 	.word	0x6dae\n\
 ._1574:\n\
@@ -8196,7 +8196,7 @@ bool8 sub_80EEC90()
 ._1583:\n\
 	.align	2, 0\n\
 ._1582:\n\
-	.word	+0x2000000\n\
+	.word	gSharedMem\n\
 	.word	0x6dad\n\
 ._1579:\n\
 	ldr	r0, ._1585\n\

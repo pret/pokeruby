@@ -3255,7 +3255,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 ._1079:\n\
 	.align	2, 0\n\
 ._1078:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoveFlags\n\
 	.word	gBattleMons\n\
 	.word	gBankAttacker\n\
@@ -3465,7 +3465,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 ._1112:\n\
 	.align	2, 0\n\
 ._1111:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoveFlags\n\
 	.word	gBattleMons\n\
 	.word	gBankAttacker\n\
@@ -3660,7 +3660,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 ._1143:\n\
 	.align	2, 0\n\
 ._1142:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoveFlags\n\
 	.word	gBattleMons\n\
 	.word	gBankAttacker\n\
@@ -3855,7 +3855,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 ._1174:\n\
 	.align	2, 0\n\
 ._1173:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoveFlags\n\
 	.word	gBattleMons\n\
 	.word	gBankAttacker\n\
@@ -4118,7 +4118,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 ._1218:\n\
 	.align	2, 0\n\
 ._1217:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoveFlags\n\
 	.word	gBattleMons\n\
 	.word	gBankAttacker\n\
@@ -7489,7 +7489,7 @@ u8 IsMonDisobedient(void)
 	.word	gBattleTypeFlags\n\
 	.word	gBankAttacker\n\
 	.word	gBattleMons\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 ._1783:\n\
 	ldr	r0, ._1794\n\
 	bl	FlagGet\n\

@@ -78,7 +78,7 @@ SYMBOL(gLinkCallback, 4)
 SYMBOL(gSavedLinkPlayers, 112)
 SYMBOL(gShouldAdvanceLinkState, 4)
 SYMBOL(gLinkTestBlockChecksums, 8)
-. += 0x4;
+SYMBOL(gUnknown_Debug_30030E0, 4)
 SYMBOL(gBlockRequestType, 4)
 . += 0x8;
 SYMBOL(gLastSendQueueCount, 4)

@@ -674,7 +674,7 @@ void sub_802C68C(void)
 	.align	2, 0\n\
 ._131:\n\
 	.word	gActiveBank\n\
-	.word	gUnknown_02023A64\n\
+	.word	gBattleBufferA+4\n\
 	.word	gMain\n\
 	.word	gMoveSelectionCursor\n\
 ._128:\n\
@@ -1328,7 +1328,7 @@ void sub_802C68C(void)
 	.word	gPlayerParty\n\
 	.word	gMoveNames\n\
 	.word	gDisplayedStringBattle\n\
-	.word	sBallCatchBonuses+0x4\n\
+	.word	gString_TurnJP\n\
 	.word	gAnimMoveTurn\n\
 	.word	gSprites\n\
 	.word	gOamMatrixAllocBitmap\n\

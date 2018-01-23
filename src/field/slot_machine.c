@@ -226,6 +226,15 @@ static void sub_81064B8(void);
 static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 static void sub_81065DC(void);
 
+#if DEBUG
+__attribute__((section(".bss"))) u8 unk_debug_bss_1_0 = 0;
+__attribute__((section(".bss"))) u8 unk_debug_bss_1_1 = 0;
+__attribute__((section(".bss"))) u8 unk_debug_bss_1_2 = 0;
+__attribute__((section(".bss"))) u8 unk_debug_bss_1_3 = 0;
+__attribute__((section(".bss"))) u8 unk_debug_bss_1_4 = 0;
+__attribute__((section(".bss"))) u32 unk_debug_bss_1_8 = 0;
+#endif
+
 static const struct UnkStruct1 *const gUnknown_083ED048[];
 static const u16 gPalette_83EDE24[];
 static const u8 gUnknown_083ECD04[][3];
@@ -252,7 +261,7 @@ void PlaySlotMachine(u8 arg0, MainCallback cb)
 ._2:\n\
 	.align	2, 0\n\
 ._1:\n\
-	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1_1\n\
 	.word	CB2_SlotMachineSetup+1");
 }
 #else
@@ -282,7 +291,7 @@ void debug_sub_811609C()
 ._4:\n\
 	.align	2, 0\n\
 ._3:\n\
-	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1_1\n\
 	.word	CB2_SlotMachineSetup+1");
 }
 #endif
@@ -544,7 +553,7 @@ static void SlotMachineSetup_0_1(void)
 	.word	gSaveBlock1\n\
 	.word	0x494\n\
 	.word	gUnknown_083ECCF8\n\
-	.word	unk_debug_bss_1+0x1");
+	.word	unk_debug_bss_1_1");
 }
 #else
 static void SlotMachineSetup_0_1(void)
@@ -744,8 +753,8 @@ static bool8 sub_8101E10(struct Task *task)
 	.align	2, 0\n\
 ._70:\n\
 	.word	+0x2000000\n\
-	.word	unk_debug_bss_1+0x1\n\
-	.word	unk_debug_bss_1+0x4\n\
+	.word	unk_debug_bss_1_1\n\
+	.word	unk_debug_bss_1_4\n\
 	.word	0x270e");
 }
 #else
@@ -794,9 +803,9 @@ static bool8 sub_8101E3C(struct Task *task)
 ._78:\n\
 	.align	2, 0\n\
 ._77:\n\
-	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1_1\n\
 	.word	gMain\n\
-	.word	unk_debug_bss_1+0x4\n\
+	.word	unk_debug_bss_1_4\n\
 	.word	+0x2000000\n\
 ._75:\n\
 	mov	r0, #0x0\n\
@@ -1101,7 +1110,7 @@ static bool8 sub_8101FA4(struct Task *task)
 	.align	2, 0\n\
 ._119:\n\
 	.word	+0x2000000\n\
-	.word	unk_debug_bss_1+0x1");
+	.word	unk_debug_bss_1_1");
 }
 #else
 static bool8 sub_8101FA4(struct Task *task)
@@ -1182,9 +1191,9 @@ static bool8 sub_8102034(struct Task *task)
 ._128:\n\
 	.align	2, 0\n\
 ._127:\n\
-	.word	unk_debug_bss_1+0x1\n\
-	.word	unk_debug_bss_1+0x4\n\
-	.word	unk_debug_bss_1+0x8\n\
+	.word	unk_debug_bss_1_1\n\
+	.word	unk_debug_bss_1_4\n\
+	.word	unk_debug_bss_1_8\n\
 	.word	+0x2000000");
 }
 #else
@@ -1235,9 +1244,9 @@ static bool8 sub_8102058(struct Task *task)
 ._134:\n\
 	.align	2, 0\n\
 ._133:\n\
-	.word	unk_debug_bss_1+0x1\n\
-	.word	unk_debug_bss_1+0x4\n\
-	.word	unk_debug_bss_1+0x8\n\
+	.word	unk_debug_bss_1_1\n\
+	.word	unk_debug_bss_1_4\n\
+	.word	unk_debug_bss_1_8\n\
 	.word	+0x2000000\n\
 ._130:\n\
 	ldr	r0, ._136\n\
@@ -1322,7 +1331,7 @@ static bool8 sub_8102090(struct Task *task)
 	.align	2, 0\n\
 ._146:\n\
 	.word	+0x2000000\n\
-	.word	unk_debug_bss_1\n\
+	.word	unk_debug_bss_1_0\n\
 ._143:\n\
 	cmp	r0, #0x4\n\
 	beq	._148	@cond_branch\n\
@@ -1821,7 +1830,7 @@ static bool8 sub_8102424(struct Task *task)
 ._235:\n\
 	.align	2, 0\n\
 ._234:\n\
-	.word	unk_debug_bss_1+0x1\n\
+	.word	unk_debug_bss_1_1\n\
 	.word	gSaveBlock1\n\
 	.word	+0x2000000\n\
 	.word	0x494");
@@ -1980,9 +1989,9 @@ static void sub_8102484(void)
 	.align	2, 0\n\
 ._256:\n\
 	.word	+0x2000000\n\
-	.word	unk_debug_bss_1+0x1\n\
-	.word	unk_debug_bss_1+0x2\n\
-	.word	unk_debug_bss_1+0x3\n\
+	.word	unk_debug_bss_1_1\n\
+	.word	unk_debug_bss_1_2\n\
+	.word	unk_debug_bss_1_3\n\
 ._245:\n\
 	add	r5, r4, #0\n\
 	ldrb	r1, [r5, #0x4]\n\
@@ -4047,11 +4056,6 @@ static void sub_8104C5C(void)
 
 static void LoadSlotMachineWheelOverlay(void);
 
-#if DEBUG
-// should be static
-__attribute__((section(".bss"))) u8 unk_debug_bss_1[0xC] = { 0 };
-#endif
-
 static void sub_8104CAC(u8 arg0)
 {
     u8 i;
@@ -5186,8 +5190,8 @@ void debug_sub_811B1C4()
         ".__2_:\n"
         "	.align	2, 0\n"
         ".__1_:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5212,8 +5216,8 @@ void debug_sub_811B1EC()
         ".__4:\n"
         "	.align	2, 0\n"
         ".__3:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5240,8 +5244,8 @@ void debug_sub_811B210()
         ".__6:\n"
         "	.align	2, 0\n"
         ".__5:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5268,8 +5272,8 @@ void debug_sub_811B238()
         ".__8:\n"
         "	.align	2, 0\n"
         ".__7:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5296,8 +5300,8 @@ void debug_sub_811B260()
         ".__10:\n"
         "	.align	2, 0\n"
         ".__9:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5324,8 +5328,8 @@ void debug_sub_811B288()
         ".__12:\n"
         "	.align	2, 0\n"
         ".__11:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5352,8 +5356,8 @@ void debug_sub_811B2B0()
         ".__14:\n"
         "	.align	2, 0\n"
         ".__13:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_0\n"
         "\n"
     );
 }
@@ -5371,7 +5375,7 @@ void debug_sub_811B2D8()
         ".__16:\n"
         "	.align	2, 0\n"
         ".__15:\n"
-        "	.word	unk_debug_bss_1+0x3\n"
+        "	.word	unk_debug_bss_1_3\n"
         "\n"
     );
 }
@@ -5650,7 +5654,7 @@ void debug_sub_811B310()
         ".__30:\n"
         "	.word	Str_841B249\n"
         "	.word	+0x2000000\n"
-        "	.word	unk_debug_bss_1\n"
+        "	.word	unk_debug_bss_1_0\n"
         ".__27:\n"
         "	cmp	r0, #0x4\n"
         "	beq	.__32	@cond_branch\n"
@@ -5765,10 +5769,10 @@ void debug_sub_811B5D0()
         ".__52:\n"
         "	.align	2, 0\n"
         ".__51:\n"
-        "	.word	unk_debug_bss_1\n"
-        "	.word	unk_debug_bss_1+0x2\n"
-        "	.word	unk_debug_bss_1+0x3\n"
-        "	.word	unk_debug_bss_1+0x4\n"
+        "	.word	unk_debug_bss_1_0\n"
+        "	.word	unk_debug_bss_1_2\n"
+        "	.word	unk_debug_bss_1_3\n"
+        "	.word	unk_debug_bss_1_4\n"
         "	.word	+0x2000000\n"
         "\n"
     );
@@ -5994,11 +5998,11 @@ void debug_sub_811B654()
         ".__92:\n"
         "	.align	2, 0\n"
         ".__91:\n"
-        "	.word	unk_debug_bss_1+0x2\n"
-        "	.word	unk_debug_bss_1+0x3\n"
+        "	.word	unk_debug_bss_1_2\n"
+        "	.word	unk_debug_bss_1_3\n"
         "	.word	Str_841B254\n"
         "	.word	_841B270\n"
-        "	.word	unk_debug_bss_1+0x4\n"
+        "	.word	unk_debug_bss_1_4\n"
         ".__66:\n"
         "	bl	Menu_ProcessInput\n"
         "	lsl	r0, r0, #0x18\n"
@@ -6027,7 +6031,7 @@ void debug_sub_811B654()
         ".__97:\n"
         "	.align	2, 0\n"
         ".__96:\n"
-        "	.word	unk_debug_bss_1+0x2\n"
+        "	.word	unk_debug_bss_1_2\n"
         "	.word	_841B270\n"
         ".__68:\n"
         "	ldr	r2, .__100\n"
@@ -6183,7 +6187,7 @@ void debug_sub_811B894()
         "	.word	+0x2000000\n"
         "	.word	0x270f\n"
         "	.word	Str_841B2B0\n"
-        "	.word	unk_debug_bss_1+0x4\n"
+        "	.word	unk_debug_bss_1_4\n"
         "	.word	Str_841B2D3\n"
         ".__117:\n"
         "	lsl	r0, r2, #0x10\n"
@@ -6373,7 +6377,7 @@ void debug_sub_811B894()
         "	.align	2, 0\n"
         ".__163:\n"
         "	.word	Str_841B2E4\n"
-        "	.word	unk_debug_bss_1+0x4\n"
+        "	.word	unk_debug_bss_1_4\n"
         "	.word	+0x2000000\n"
         "	.word	Str_841B2BF\n"
         "\n"

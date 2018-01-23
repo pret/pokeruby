@@ -1090,7 +1090,7 @@ static const u8 sTerrainToType[] =
     TYPE_NORMAL, // plain
 };
 
-const u8 sBallCatchBonuses[] =
+static const u8 sBallCatchBonuses[] =
 {
     20, 15, 10, 15 // Ultra, Great, Poke, Safari
 };
@@ -5103,7 +5103,7 @@ static void atk15_seteffectwithchance(void)
 ._1045:\n\
 	.word	gBattleMoves\n\
 	.word	gCurrentMove\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleCommunication\n\
 	.word	gBattleMoveFlags\n\
 ._1043:\n\

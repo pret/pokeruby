@@ -1232,7 +1232,7 @@ void OpponentHandleTrainerThrow(void)
 ._481:\n\
 	.align	2, 0\n\
 ._480:\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	+0x2000000\n\
 	.word	0x160a3\n\
 ._478:\n\
@@ -1718,8 +1718,8 @@ void OpponentHandlecmd20(void)
 	.align	2, 0\n\
 ._549:\n\
 	.word	gActiveBank\n\
-	.word	gUnknown_02023A64\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gBattleBufferA+4\n\
+	.word	gUnknown_02023A14_50\n\
 	.word	gBattleMoves\n\
 	.word	+0x2000000\n\
 	.word	0x1609e\n\
@@ -1781,7 +1781,7 @@ void OpponentHandlecmd20(void)
 	.align	2, 0\n\
 ._559:\n\
 	.word	gBattleTypeFlags\n\
-	.word	gUnknown_02023A14+0x50\n\
+	.word	gUnknown_02023A14_50\n\
 ._556:\n\
 	bl	Random\n\
 	add	r1, r5, #0\n\
@@ -2048,7 +2048,7 @@ void OpponentHandlecmd20(void)
     ldr r6, _0803545C @ =gActiveBank\n\
     ldrb r0, [r6]\n\
     lsls r0, 9\n\
-    ldr r1, _08035460 @ =gUnknown_02023A64\n\
+    ldr r1, _08035460 @ =gBattleBufferA+4\n\
     adds r5, r0, r1\n\
     ldr r0, _08035464 @ =gBattleTypeFlags\n\
     ldrh r1, [r0]\n\
@@ -2070,7 +2070,7 @@ void OpponentHandlecmd20(void)
     b _0803546C\n\
     .align 2, 0\n\
 _0803545C: .4byte gActiveBank\n\
-_08035460: .4byte gUnknown_02023A64\n\
+_08035460: .4byte gBattleBufferA+4\n\
 _08035464: .4byte gBattleTypeFlags\n\
 _08035468:\n\
     movs r0, 0x1\n\

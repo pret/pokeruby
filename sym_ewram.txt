@@ -33,29 +33,41 @@ gUnknown_02023A14 = .; /* 2023A14 */
     . += 0x4C;
 
 #if DEBUG
+
 gUnknown_02023A14_4C = .;
     . += 0x4;
+
 gUnknown_02023A14_50 = .;
-	. += 0x290;
+    . += 0x2;
+
+gUnknown_Debug_2023A76 = .;
+	. += 0x4;
+
+gUnknown_Debug_2023A7A = .;
+    . += 0x42;
+
+gUnknown_Debug_2023ABC = .;
+    . += 0x4;
+
+gUnknown_Debug_2023AC0 = .;
+    . += 0x42;
+
+gUnknown_Debug_2023B02 = .;
+    . += 0x30;
+
+gUnknown_Debug_2023B32 = .;
+    . += 0x30;
+
+gUnknown_Debug_2023B62 = .;
+    . += 0x1A2;
+
 #endif
 
 gBattleBufferA = .; /* 2023A60 */
-    . += 0x2;
-
-gUnknown_02023A62 = .; /* 2023A62 */
-    . += 0x1;
-
-gUnknown_02023A63 = .; /* 2023A63 */
-    . += 0x1;
-
-gUnknown_02023A64 = .; /* 2023A64 */
-    . += 0x7FC;
+    . += 0x800;
 
 gBattleBufferB = .; /* 2024260 */
-    . += 0x4;
-
-gUnknown_02024264 = .; /* 2024264 */
-    . += 0x7FC;
+    . += 0x800;
 
 gActiveBank = .; /* 2024A60 */
     . += 0x4;

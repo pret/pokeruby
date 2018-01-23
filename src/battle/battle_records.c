@@ -275,9 +275,9 @@ void debug_sub_81257E0(void)
 ._63:\n\
 	.align	2, 0\n\
 ._62:\n\
-	.word	gUnknown_083F8410+0xa\n\
+	.word	gUnknown_Debug_4245CC+2\n\
 	.word	gLinkPlayers\n\
-	.word	gUnknown_083F8410+0x5c\n\
+	.word	gUnknown_Debug_8424620\n\
 	.word	gLinkPlayerMapObjects\n\
 	.word	gSaveBlock1+0x30b8");
 }

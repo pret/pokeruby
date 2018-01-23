@@ -1,9 +1,9 @@
 #if DEBUG
 #include "global.h"
 
-#define BSS_DATA __attribute__((section(".bss")))
-
-BSS_DATA u8 gDebug_03000724[4] = { 0 };
+__attribute__((unused)) static u8 gDebug_03000724;
+__attribute__((unused)) static u8 gDebug_03000725;
+__attribute__((unused)) static u8 gDebug_03000726;
 
 __attribute__((naked))
 void InitNoharaDebugMenu()
@@ -127,7 +127,7 @@ void NoharaDebugMenu_TV()
         "._9:\n"
         "	.align	2, 0\n"
         "._8:\n"
-        "	.word	gDebug_03000724+0x2\n"
+        "	.word	gDebug_03000726\n"
         "	.word	gUnknown_Debug_083C4B8C\n"
         "	.word	gMenuCallback\n"
         "	.word	debug_sub_808F4AC+1\n"
@@ -414,7 +414,7 @@ void debug_sub_808F648()
         "	.align	2, 0\n"
         "._35:\n"
         "	.word	gMain\n"
-        "	.word	gDebug_03000724+0x2\n"
+        "	.word	gDebug_03000726\n"
         "._33:\n"
         "	bl	debug_sub_808F6BC\n"
         "	b	._40\n"
@@ -933,7 +933,7 @@ void debug_sub_808F93C()
         "	.align	2, 0\n"
         "._83:\n"
         "	.word	gMain\n"
-        "	.word	gDebug_03000724+0x1\n"
+        "	.word	gDebug_03000725\n"
         "	.word	gDebug_03000724\n"
         "	.word	gUnknown_Debug_083C4ABD+0xf\n"
         "	.word	gStringVar1\n"
@@ -1671,7 +1671,7 @@ void debug_sub_808FF3C()
         "	.align	2, 0\n"
         "._192:\n"
         "	.word	gMain\n"
-        "	.word	gDebug_03000724+0x1\n"
+        "	.word	gDebug_03000725\n"
         "	.word	gDebug_03000724\n"
         "	.word	gUnknown_Debug_083C4B20+0x4\n"
         "	.word	gStringVar1\n"

@@ -43,7 +43,10 @@ struct WeatherCallbacks
 
 EWRAM_DATA struct Weather gWeather = {0};
 EWRAM_DATA u8 gFieldEffectPaletteGammaTypes[32] = {0};
-EWRAM_DATA u16 gUnknown_0202FF58 = {0};
+EWRAM_DATA u16 gUnknown_0202FF58 = 0;
+#if DEBUG
+EWRAM_DATA u16 gUnknown_Debug_20301FE = 0;
+#endif
 
 static const u8 *sPaletteGammaTypes;
 
@@ -1297,7 +1300,7 @@ u8 debug_sub_8085564(void)
 	.align	2, 0\n\
 ._375:\n\
 	.word	gMain\n\
-	.word	gUnknown_0202FF58+0x2\n\
+	.word	gUnknown_Debug_20301FE\n\
 ._373:\n\
 	mov	r0, #0xe\n\
 ._374:\n\
@@ -1333,7 +1336,7 @@ u8 debug_sub_8085564(void)
 	.align	2, 0\n\
 ._380:\n\
 	.word	gDebugText_Weather\n\
-	.word	gUnknown_0202FF58+0x2\n\
+	.word	gUnknown_Debug_20301FE\n\
 	.word	gMain\n\
 ._378:\n\
 	ldr	r0, ._382\n\
@@ -1347,7 +1350,7 @@ u8 debug_sub_8085564(void)
 ._383:\n\
 	.align	2, 0\n\
 ._382:\n\
-	.word	gUnknown_0202FF58+0x2");
+	.word	gUnknown_Debug_20301FE");
 }
 
 __attribute__((naked))
@@ -1386,7 +1389,7 @@ u8 debug_sub_808560C(void)
 ._385:\n\
 	.align	2, 0\n\
 ._384:\n\
-	.word	gUnknown_0202FF58+0x2\n\
+	.word	gUnknown_Debug_20301FE\n\
 	.word	gWeather\n\
 	.word	gDebugText_Weather\n\
 	.word	gMenuCallback\n\

@@ -602,7 +602,7 @@ void debug_sub_815D1D8()
         "	.align	2, 0\n"
         "._161:\n"
         "	.word	gPaletteFade\n"
-        "	.word	gLinkTestBlockChecksums+0x8\n"
+        "	.word	gUnknown_Debug_30030E0\n"
         "	.word	Str_843DA70\n"
         "	.word	0x43c\n"
         "._144:\n"
