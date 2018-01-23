@@ -1224,11 +1224,7 @@ gUnknown_08D17C3C:: @ 8D17C3C
 
 	.align 2
 gContestMiscGfx:: @ 8D17D6C
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xD17DDC, 0xD188DC-0xD17DDC
-.else
 	.incbin "graphics/contest/misc.4bpp.lz"
-.endif
 
 	.align 2
 gContestAudienceGfx:: @ 8D18818
@@ -1251,11 +1247,7 @@ gTiles_8D1975C:: @ 8D1975C
 
 	.align 2
 gUnknown_08D1977C:: @ 8D1977C
-.if DEBUG
-	.incbin "baserom_de_debug.gba", 0xD19840, 0xD1A2E8-0xD19840
-.else
 	.incbin "graphics/contest/misc_2.4bpp.lz"
-.endif
 
 	.align 2
 gUnknown_08D1A250:: @ 8D1A250

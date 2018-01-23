@@ -222,17 +222,24 @@ const struct SpriteTemplate gSpriteTemplate_83F7F84 =
 
 const struct Pokeblock gUnknown_083F7F9C[] =
 {
-    { PBLOCK_CLR_RED,    20,  0,  0,  0,  0, 20},
-    { PBLOCK_CLR_BLUE,    0, 20,  0,  0,  0, 20},
-    { PBLOCK_CLR_PINK,    0,  0, 20,  0,  0, 20},
-    { PBLOCK_CLR_GREEN,   0,  0,  0, 20,  0, 20},
-    { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
-};
-
+    { PBLOCK_CLR_RED,      20,  0,  0,  0,  0, 20 },
+    { PBLOCK_CLR_BLUE,      0, 20,  0,  0,  0, 20 },
+    { PBLOCK_CLR_PINK,      0,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_GREEN,     0,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_YELLOW,    0,  0,  0,  0, 20, 20 },
 #if DEBUG
-// possibly continuation of gUnknown_083F7F9C?
-asm(".incbin \"baserom_de_debug.gba\", 0x424128, 0x50");
+    { PBLOCK_CLR_PURPLE,   20,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_INDIGO,    0, 20,  0, 20,  0, 20 },
+    { PBLOCK_CLR_BROWN,     0,  0, 20,  0, 20, 20 },
+	{ PBLOCK_CLR_LITEBLUE, 20,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_OLIVE,     0, 20,  0,  0, 20, 20 },
+    { PBLOCK_CLR_GRAY,      0,  2,  0,  2,  2,  0 },
+	{ PBLOCK_CLR_BLACK,     3,  3,  3,  4,  3,  0 },
+    { PBLOCK_CLR_WHITE,     1,  1,  1,  1,  1,  1 },
+    { PBLOCK_CLR_GOLD,     20,  0,  0,  0,  0, 20 },
+	{ 0 },
 #endif
+};
 
 // text
 

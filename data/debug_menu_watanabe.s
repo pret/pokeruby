@@ -612,19 +612,60 @@ gUnknown_Debug_083F875C:: @ 0x83F875C
 	.string "DebugーG$"
 
 gUnknown_Debug_083F8764::
-	.incbin "baserom_de_debug.gba", 0x3F8764, 4
+	.string " $"
+	.byte 0, 0
 
 gUnknown_Debug_083F8768::
-	.incbin "baserom_de_debug.gba", 0x3F8768, 40
+	.4byte 0x00000001
+	.4byte 0x0000000a
+    .4byte 0x00000064
+    .4byte 0x000003e8
+    .4byte 0x00002710
+    .4byte 0x000186a0
+    .4byte 0x000f4240
+    .4byte 0x00989680
+	.4byte 0x05f5e100
+	.4byte 0x3b9aca00
 
 gUnknown_Debug_083F8790::
-	.incbin "baserom_de_debug.gba", 0x3F8790, 64
+	.2byte 0x0000
+    .2byte 0x0002
+    .2byte 0x0004
+    .2byte 0x0006
+    .2byte 0x0008
+    .2byte 0x000a
+    .2byte 0x000c
+    .2byte 0x000e
+    .2byte 0x0010
+    .2byte 0x0012
+    .2byte 0x0014
+    .2byte 0x0016
+    .2byte 0x0018
+    .2byte 0x001a
+    .2byte 0x001c
+    .2byte 0x001e
+	.2byte 0x001f
+    .2byte 0x001e
+    .2byte 0x001c
+    .2byte 0x001a
+    .2byte 0x0018
+    .2byte 0x0016
+    .2byte 0x0014
+    .2byte 0x0012
+    .2byte 0x0010
+    .2byte 0x000e
+    .2byte 0x000c
+    .2byte 0x000a
+    .2byte 0x0008
+    .2byte 0x0006
+    .2byte 0x0004
+    .2byte 0x0002
 
 gUnknown_Debug_083F87D0:: @ 0x83F87D0
 	.string "{COLOR RED}L{ESCAPE}ロ$"
 
 gUnknown_Debug_083F87D8:: @ 0x83F87D8
-.string "{COLOR RED}{ESCAPE}ワR$"
+	.string "{COLOR RED}{ESCAPE}ワR$"
 
 gUnknown_Debug_083F87E0:: @ 0x83F87E0
 	.string "かいはつナンバー$"
@@ -642,7 +683,24 @@ gUnknown_Debug_083F8813:: @ 0x83F8813
 	.string ":$"
 
 gUnknown_Debug_083F8815::
-	.incbin "baserom_de_debug.gba", 0x3F8815, 18
+	.byte 0x00
+    .byte 0x10
+    .byte 0x20
+    .byte 0x20
+    .byte 0x20
+    .byte 0x21
+    .byte 0x20
+    .byte 0x20
+    .byte 0x20
+    .byte 0x21
+    .byte 0x20
+    .byte 0x20
+    .byte 0x20
+    .byte 0x21
+    .byte 0x20
+    .byte 0x20
+    .byte 0x20
+    .byte 0x21
 
 	.align 2
 stru_83F8828::
@@ -653,16 +711,29 @@ stru_83F8838::
 	obj_pal word_83F888C, 0x1000
 	null_obj_pal
 
-@ word_83F8848
-dword_83F8848:
-	.incbin "baserom_de_debug.gba", 0x3F8848, 32
+gOamData_83F8848:
+	.2byte 0x00a0
+	.2byte 0x0000
+	.2byte 0x0000
 
-@ unk_83F8868
-unk_83F8868::
-	.incbin "baserom_de_debug.gba", 0x3F8868, 12
+	.align 2
+gSpriteAnim_83F8850:
+    obj_image_anim_frame 38, 30
+    obj_image_anim_end
 
-@ 83F8874
-	spr_template 0x1000, 0x1000, dword_83F8848, unk_83F8868, 0, gDummySpriteAffineAnimTable, debug_80C7584
+gSpriteAnim_83F8858:
+    obj_image_anim_frame 39, 30
+    obj_image_anim_end
+
+gSpriteAnim_83F8860:
+    obj_image_anim_frame 40, 30
+    obj_image_anim_end
+
+gSpriteAnimTable_83F8868::
+	.4byte gSpriteAnim_83F8850, gSpriteAnim_83F8858, gSpriteAnim_83F8860
+
+gSpriteTemplate_83F8874::
+	spr_template 0x1000, 0x1000, gOamData_83F8848, gSpriteAnimTable_83F8868, 0, gDummySpriteAffineAnimTable, debug_80C7584
 
 word_83F888C::
 	.incbin "graphics/debug/sprite_browser.gbapal"

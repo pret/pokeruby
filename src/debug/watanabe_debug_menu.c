@@ -7068,7 +7068,7 @@ void InitSeePokemonGraphics()
         "	.word	unk_debug_ewram_0+0x34\n"
         "	.word	+0x2018000\n"
         "	.word	0x115\n"
-        "	.word	unk_83F8868+0xc\n"
+        "	.word	gSpriteTemplate_83F8874\n"
         "	.word	gSprites\n"
         "\n"
     );
@@ -8641,7 +8641,7 @@ void InitSeeTrainers()
         "	.word	debug_80C777C+1\n"
         "	.word	unk_debug_ewram_0+0x34\n"
         "	.word	+0x2018000\n"
-        "	.word	unk_83F8868+0xc\n"
+        "	.word	gSpriteTemplate_83F8874\n"
         "	.word	gSprites\n"
         "\n"
     );
