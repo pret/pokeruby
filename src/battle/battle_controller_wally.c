@@ -53,8 +53,6 @@ extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
 extern u8 gUnknown_0300434C[];
 extern const u8 BattleText_WallyMenu[];
 extern const u8 BattleText_MenuOptions[];

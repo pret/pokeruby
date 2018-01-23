@@ -48,8 +48,6 @@ extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
 extern u8 gUnknown_0300434C[];
 extern u32 gBattleExecBuffer;
 extern MainCallback gPreBattleCallback1;
@@ -1143,7 +1141,7 @@ void LinkOpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], 
+    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1],
         gBattleBufferA[gActiveBank][3 + i], gBattleBufferA[gActiveBank][2], i, dst);
 
     LinkOpponentBufferExecCompleted();

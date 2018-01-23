@@ -46,19 +46,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
-extern u16 gBattle_BG3_X;
-extern s16 gBattle_BG1_Y;
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1V;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_WIN0H;
 extern u32 gUnknown_03005D28;  // saved RNG value
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -585,8 +573,7 @@ void sub_80AB9A0(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        gBattle_BG1_Y += 7;
-        if (gBattle_BG1_Y <= 160)
+        if ((s16)(gBattle_BG1_Y += 7) <= 160)
             break;
         gTasks[taskId].data[0]++;
         break;
@@ -1834,10 +1821,9 @@ void sub_80ADE54(u8 taskId)
 
 void sub_80ADEAC(u8 taskId)
 {
-    gBattle_BG1_Y -= 7;
-    if (gBattle_BG1_Y < 0)
+    if ((s16)(gBattle_BG1_Y -= 7) < 0)
         gBattle_BG1_Y = 0;
-    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
+    if (gBattle_BG1_Y == 0)  // Why cast?
     {
         gTasks[taskId].func = sub_80ADEEC;
         gTasks[taskId].data[0] = 0;
@@ -4990,10 +4976,9 @@ void sub_80B237C(u8 taskId)
 
 void sub_80B23BC(u8 taskId)
 {
-    gBattle_BG1_Y -= 7;
-    if (gBattle_BG1_Y < 0)
+    if ((s16)(gBattle_BG1_Y -= 7) < 0)
         gBattle_BG1_Y = 0;
-    if (*(u16 *)&gBattle_BG1_Y == 0)  // Why cast?
+    if (gBattle_BG1_Y == 0)  // Why cast?
     {
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = 0;
@@ -5053,8 +5038,7 @@ void sub_80B2400(u8 taskId)
 
 void sub_80B2508(u8 taskId)
 {
-    gBattle_BG1_Y += 7;
-    if (gBattle_BG1_Y > DISPLAY_HEIGHT)
+    if ((s16)(gBattle_BG1_Y += 7) > DISPLAY_HEIGHT)
         gTasks[taskId].func = sub_80ADCDC;
 }
 

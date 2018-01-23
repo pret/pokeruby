@@ -708,6 +708,19 @@ void MarkBufferBankForExecution(u8 bank);
 
 extern u8 gBattleTextBuff1[];
 
+extern u16 gBattle_BG0_X;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
+extern u16 gBattle_BG3_X;
+extern u16 gBattle_BG3_Y;
+extern u16 gBattle_WIN0H;
+extern u16 gBattle_WIN0V;
+extern u16 gBattle_WIN1H;
+extern u16 gBattle_WIN1V;
+
 // asm/battle_1.o
 void sub_800D6D4();
 void sub_800D74C();

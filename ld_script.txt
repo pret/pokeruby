@@ -154,6 +154,7 @@ SECTIONS {
         src/debug/sound_check_menu.o(.text);
         src/field/secret_base.o(.text);
         src/field/tv.o(.text);
+        src/battle/contest_link_80C2020.o(.text);
         asm/contest_link_80C2020.o(.text);
         src/script_pokemon_util_80C4BF0.o(.text);
         src/field/field_poison.o(.text);

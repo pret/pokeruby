@@ -12,11 +12,6 @@
 #include "trig.h"
 
 extern u16 gBattleTypeFlags;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_WIN0V;
 extern u16 gUnknown_02024DE8;
 extern u8 gBattleMonForms[];
 
@@ -376,7 +371,7 @@ static void BattleIntroTask_ScrollAndFadeScenery(u8 taskId)
         REG_BLDALPHA = gTasks[taskId].data[4];
 }
 
-// Seems to only be used for link battles. 
+// Seems to only be used for link battles.
 static void BattleIntroTask_80E4C34(u8 taskId)
 {
     s32 i;

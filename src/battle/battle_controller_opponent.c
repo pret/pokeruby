@@ -50,8 +50,6 @@ extern u8 gAnimMoveTurn;
 extern u8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern struct Window gUnknown_03004210;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
@@ -1114,7 +1112,7 @@ void OpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i],
         gBattleBufferA[gActiveBank][2], i, dst);
     OpponentBufferExecCompleted();
 }
