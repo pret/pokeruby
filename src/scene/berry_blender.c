@@ -3763,7 +3763,7 @@ loc_805654C:\n\
                 .syntax divided\n");
 }
 #else
-static bool8 Blender_PrintBlendingResults(void)
+bool8 Blender_PrintBlendingResults(void)
 {
     u16 i;
 

@@ -423,9 +423,7 @@ gUnknown_020384EC = .; /* 20384EC */
 . = ALIGN(4); src/contest.o(ewram_data);
 . = ALIGN(4); src/field/shop.o(ewram_data);
 . = ALIGN(4); src/field/fldeff_escalator.o(ewram_data);
-#if DEBUG
 . = ALIGN(4); src/debug/watanabe_debug_menu.o(ewram_data);
-#endif
 . = ALIGN(4); src/field/money.o(ewram_data);
 . = ALIGN(4); src/engine/record_mixing.o(ewram_data);
 . = ALIGN(4); src/debug/sound_check_menu.o(ewram_data);
@@ -476,9 +474,7 @@ gUnknown_02039268 = .; /* 2039268 */
 gUnknown_0203926A = .; /* 203926A */
     . += 0x2;
 
-#if DEBUG
 . = ALIGN(4); src/roulette.o(ewram_data);
-#endif
 . = ALIGN(4); src/battle/battle_message.o(ewram_data);
 . = ALIGN(4); src/field/choose_party.o(ewram_data);
 . = ALIGN(4); src/scene/cable_car.o(ewram_data);
@@ -495,9 +491,7 @@ gUnknown_0203926A = .; /* 203926A */
 . = ALIGN(4); src/engine/mystery_event_menu.o(ewram_data);
 . = ALIGN(4); src/engine/save_failed_screen.o(ewram_data);
 . = ALIGN(4); src/pokemon/pokeblock_feed.o(ewram_data);
-#if DEBUG
 . = ALIGN(4); src/debug/nakamura_debug_menu.o(ewram_data);
-#endif
 . = ALIGN(4); src/scene/intro_credits_graphics.o(ewram_data);
 
 /* ??? */
