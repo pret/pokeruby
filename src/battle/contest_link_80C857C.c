@@ -10,17 +10,17 @@
 static void sub_80C8644(u8 taskId);
 static void sub_80C8660(u8 taskId);
 #if GERMAN
-void de_sub_80C9274(bool32 arg0);
-void de_sub_80C9294(bool32 arg0);
+static void de_sub_80C9274(bool32 arg0);
+static void de_sub_80C9294(bool32 arg0);
 #endif
 
-void sub_80C857C(const void *data, u16 size)
+static void SendBlockToAllOpponents(const void *data, u16 size)
 {
     memcpy(eContestLinkSendBuffer, data, size);
     SendBlock(bitmask_all_link_players_but_self(), eContestLinkSendBuffer, size);
 }
 
-bool8 sub_80C85AC(u8 who)
+static bool8 HasPlayerReceivedBlock(u8 who)
 {
     u8 flag = 1 << who;
     if (!(GetBlockReceivedStatus() & flag))
@@ -29,7 +29,7 @@ bool8 sub_80C85AC(u8 who)
     return TRUE;
 }
 
-bool8 sub_80C85D8(void)
+static bool8 HaveAllPlayersReceivedBlock(void)
 {
     int i;
 
@@ -214,7 +214,7 @@ void sub_80C8734(u8 taskId)
 #endif
         case 0:
             if (GetMultiplayerId() == 0) {
-                if (sub_8007ECC()) {
+                if (IsLinkTaskFinished()) {
 #if GERMAN
                     if (gTasks[taskId].data[0] == 0)
                     {
@@ -246,7 +246,7 @@ void sub_80C8734(u8 taskId)
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 for (i = 0; i < MAX_LINK_PLAYERS; i++)
                 {
@@ -308,9 +308,9 @@ void sub_80C88AC(u8 taskId)
         case 0:
             if (GetMultiplayerId() == 0)
             {
-                if (sub_8007ECC())
+                if (IsLinkTaskFinished())
                 {
-                    sub_80C857C(&gRngValue, sizeof(u32));
+                    SendBlockToAllOpponents(&gRngValue, sizeof(u32));
                     gTasks[taskId].data[0]++;
                 }
             }
@@ -320,7 +320,7 @@ void sub_80C88AC(u8 taskId)
             }
             break;
         case 1:
-            if (sub_80C85AC(0))
+            if (HasPlayerReceivedBlock(0))
             {
                 memcpy(&gRngValue, gBlockRecvBuffer[0], sizeof(u32));
                 memcpy(&gContestRngValue, gBlockRecvBuffer[0], sizeof(u32));
@@ -348,7 +348,7 @@ void sub_80C8938(u8 taskId)
             gBlockSendBuffer[0] = gTasks[taskId].data[9];
             if (GetMultiplayerId() == 0)
             {
-                if (sub_8007ECC())
+                if (IsLinkTaskFinished())
                 {
 #if GERMAN
                     if (gTasks[taskId].data[0] == 0)
@@ -377,7 +377,7 @@ void sub_80C8938(u8 taskId)
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 for (i = 0; i < MAX_LINK_PLAYERS; i++)
                 {
@@ -407,14 +407,14 @@ void sub_80C89DC(u8 taskId)
             SwitchTaskToFollowupFunc(taskId);
             break;
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(&gContestPlayerMonIndex, sizeof(u8));
+                SendBlockToAllOpponents(&gContestPlayerMonIndex, sizeof(u8));
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 gTasks[taskId].data[0]++;
             }
@@ -433,14 +433,14 @@ void sub_80C8A38(u8 taskId)
             SwitchTaskToFollowupFunc(taskId);
             break;
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(&sContestantStatus[gContestPlayerMonIndex].currMove, sizeof(u16));
+                SendBlockToAllOpponents(&sContestantStatus[gContestPlayerMonIndex].currMove, sizeof(u16));
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 for (i = 0; i < MAX_LINK_PLAYERS; i++)
                 {
@@ -457,14 +457,14 @@ void sub_80C8AD0(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038678, sizeof gUnknown_02038678);
+                SendBlockToAllOpponents(gUnknown_02038678, sizeof gUnknown_02038678);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038678, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038678);
                 gTasks[taskId].data[0]++;
@@ -481,42 +481,42 @@ void sub_80C8AD0(u8 taskId)
             }
             break;
         case 3:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038680, sizeof gUnknown_02038680);
+                SendBlockToAllOpponents(gUnknown_02038680, sizeof gUnknown_02038680);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 4:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038680, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038680);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 6:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038688, sizeof gUnknown_02038688);
+                SendBlockToAllOpponents(gUnknown_02038688, sizeof gUnknown_02038688);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 7:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038688, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038688);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 9:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gContestFinalStandings, sizeof gContestFinalStandings);
+                SendBlockToAllOpponents(gContestFinalStandings, sizeof gContestFinalStandings);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 10:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gContestFinalStandings, gBlockRecvBuffer[gUnknown_0203869B], sizeof gContestFinalStandings);
                 gTasks[taskId].data[0]++;
@@ -534,14 +534,14 @@ void sub_80C8C80(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(sContestantStatus, 4 * sizeof(struct ContestantStatus));
+                SendBlockToAllOpponents(sContestantStatus, 4 * sizeof(struct ContestantStatus));
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(sContestantStatus, gBlockRecvBuffer[gUnknown_0203869B], 4 * sizeof(struct ContestantStatus));
                 gTasks[taskId].data[0]++;
@@ -558,42 +558,42 @@ void sub_80C8C80(u8 taskId)
             }
             break;
         case 3:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(&shared192D0, sizeof shared192D0);
+                SendBlockToAllOpponents(&shared192D0, sizeof shared192D0);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 4:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(&shared192D0, gBlockRecvBuffer[gUnknown_0203869B], sizeof shared192D0);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 6:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(&shared19328, sizeof shared19328);
+                SendBlockToAllOpponents(&shared19328, sizeof shared19328);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 7:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(&shared19328, gBlockRecvBuffer[gUnknown_0203869B], sizeof shared19328);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 9:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038696, sizeof gUnknown_02038696);
+                SendBlockToAllOpponents(gUnknown_02038696, sizeof gUnknown_02038696);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 10:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038696, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038696);
                 gTasks[taskId].data[0]++;
@@ -624,7 +624,7 @@ void sub_80C8E1C(u8 taskId)
             gBlockSendBuffer[0] = 0x64;
             if (GetMultiplayerId() == 0)
             {
-                if (sub_8007ECC())
+                if (IsLinkTaskFinished())
                 {
 #if GERMAN
                     if (gTasks[taskId].data[0] == 0)
@@ -653,7 +653,7 @@ void sub_80C8E1C(u8 taskId)
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 for (i = 0; i < MAX_LINK_PLAYERS; i++)
                 {
@@ -683,14 +683,14 @@ void sub_80C8EBC(u8 taskId)
             SwitchTaskToFollowupFunc(taskId);
             break;
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038670, sizeof gUnknown_02038670);
+                SendBlockToAllOpponents(gUnknown_02038670, sizeof gUnknown_02038670);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038670, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038670);
                 gTasks[taskId].data[0]++;
@@ -708,14 +708,14 @@ void sub_80C8F34(u8 taskId)
             SwitchTaskToFollowupFunc(taskId);
             break;
         case 0:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
-                sub_80C857C(gUnknown_02038696, sizeof gUnknown_02038696);
+                SendBlockToAllOpponents(gUnknown_02038696, sizeof gUnknown_02038696);
                 gTasks[taskId].data[0]++;
             }
             break;
         case 1:
-            if (sub_80C85D8())
+            if (HaveAllPlayersReceivedBlock())
             {
                 memcpy(gUnknown_02038696, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038696);
                 gTasks[taskId].data[0]++;
@@ -726,7 +726,7 @@ void sub_80C8F34(u8 taskId)
 
 #if GERMAN
 
-void de_sub_80C9274(bool32 arg0)
+static void de_sub_80C9274(bool32 arg0)
 {
     if (deUnkValue2 == 1)
     {
@@ -737,7 +737,7 @@ void de_sub_80C9274(bool32 arg0)
     }
 }
 
-void de_sub_80C9294(bool32 arg0)
+static void de_sub_80C9294(bool32 arg0)
 {
     if (deUnkValue2 == 1)
     {
