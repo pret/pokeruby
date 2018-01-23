@@ -18,7 +18,6 @@
 #include "ewram.h"
 
 extern u8 gUnknown_0203856C;
-extern s16 gUnknown_02038670[];
 extern u8 gUnknown_02038694;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;

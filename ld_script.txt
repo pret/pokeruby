@@ -170,8 +170,6 @@ SECTIONS {
         src/field/rotating_gate.o(.text);
         src/field/safari_zone.o(.text);
         src/battle/contest_link_80C857C.o(.text);
-        asm/contest_link_80C857C.o(.text);
-        src/battle/contest_link_80C857C.o(.text_de);
         src/field/item_use.o(.text);
         src/battle/anim/powder.o(.text);
         src/battle/anim/orbs.o(.text);

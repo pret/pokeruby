@@ -228,11 +228,11 @@ void sub_80C8734(u8 taskId)
                     de_sub_80C9274(FALSE);
 #endif
                     sub_8007E9C(2);
-#if GERMAN
-                    gTasks[taskId].data[0] = 1;
-                    }
-#else
+#if ENGLISH
                     gTasks[taskId].data[0]++;
+#elif GERMAN
+                    gTasks[taskId].data[0] = 1;
+                }
 #endif
                 }
             }
@@ -638,7 +638,7 @@ void sub_80C8E1C(u8 taskId)
                     sub_8007E9C(2);
 #if ENGLISH
                     gTasks[taskId].data[0]++;
-#else
+#elif GERMAN
                     gTasks[taskId].data[0] = 1;
                     }
 #endif
@@ -674,7 +674,55 @@ void sub_80C8E1C(u8 taskId)
     }
 }
 
-asm(".section .text_de");
+void sub_80C8EBC(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 0:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gUnknown_02038670, sizeof gUnknown_02038670);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                memcpy(gUnknown_02038670, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038670);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+    }
+}
+
+void sub_80C8F34(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 0:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gUnknown_02038696, sizeof gUnknown_02038696);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                memcpy(gUnknown_02038696, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038696);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+    }
+}
 
 #if GERMAN
 

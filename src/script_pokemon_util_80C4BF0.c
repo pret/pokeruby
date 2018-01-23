@@ -39,7 +39,6 @@ extern u16 gSpecialVar_ContestRank;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern s16 gUnknown_02038670[];
 
 void SetContestTrainerGfxIds(void)
 {
