@@ -330,6 +330,74 @@ void sub_80C88AC(u8 taskId)
     }
 }
 
+void sub_80C8938(u8 taskId)
+{
+    int i;
+
+    switch (gTasks[taskId].data[0])
+    {
+#if ENGLISH
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+#elif GERMAN
+        case 8:
+#endif
+        case 0:
+            gBlockSendBuffer[0] = gTasks[taskId].data[9];
+            if (GetMultiplayerId() == 0)
+            {
+                if (sub_8007ECC())
+                {
+#if GERMAN
+                    if (gTasks[taskId].data[0] == 0)
+                    {
+                        gTasks[taskId].data[0] = 3;
+                    }
+                    else
+                    {
+                        de_sub_80C9274(TRUE);
+#endif
+                    sub_8007E9C(2);
+#if ENGLISH
+                    gTasks[taskId].data[0]++;
+#elif GERMAN
+                        gTasks[taskId].data[0] = 1;
+                    }
+#endif
+                }
+            }
+            else
+            {
+#if GERMAN
+                de_sub_80C9294(TRUE);
+#endif
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                for (i = 0; i < MAX_LINK_PLAYERS; i++)
+                {
+                    gTasks[taskId].data[i + 1] = gBlockRecvBuffer[i][0];
+                }
+                gTasks[taskId].data[0]++;
+            }
+            break;
+#if GERMAN
+        case 2:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        default:
+            gTasks[taskId].data[0]++;
+            break;
+#endif
+    }
+}
+
 asm(".section .text_de");
 
 #if GERMAN
