@@ -452,6 +452,83 @@ void sub_80C8A38(u8 taskId)
     }
 }
 
+void sub_80C8AD0(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gUnknown_02038678, sizeof gUnknown_02038678);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                memcpy(gUnknown_02038678, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038678);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 2:
+        case 5:
+        case 8:
+        case 11:
+            if (gTasks[taskId].data[1]++ > 10)
+            {
+                gTasks[taskId].data[1] = 0;
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 3:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gUnknown_02038680, sizeof gUnknown_02038680);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 4:
+            if (sub_80C85D8())
+            {
+                memcpy(gUnknown_02038680, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038680);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 6:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gUnknown_02038688, sizeof gUnknown_02038688);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 7:
+            if (sub_80C85D8())
+            {
+                memcpy(gUnknown_02038688, gBlockRecvBuffer[gUnknown_0203869B], sizeof gUnknown_02038688);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 9:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(gContestFinalStandings, sizeof gContestFinalStandings);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 10:
+            if (sub_80C85D8())
+            {
+                memcpy(gContestFinalStandings, gBlockRecvBuffer[gUnknown_0203869B], sizeof gContestFinalStandings);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+    }
+}
+
 asm(".section .text_de");
 
 #if GERMAN

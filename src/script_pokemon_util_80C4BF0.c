@@ -32,26 +32,14 @@ extern void sub_80C4698(u8 *, u8);
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-extern u8 gContestPlayerMonIndex;
-extern u8 gIsLinkContest;
-extern u8 gPlayerPartyCount;
 extern u8 gSelectedOrderFromParty[];
-
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
 
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
-extern u16 gSpecialVar_Result;
-
-extern u32 gContestRngValue;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern u8 gContestFinalStandings[];
 extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
 
 void SetContestTrainerGfxIds(void)
 {

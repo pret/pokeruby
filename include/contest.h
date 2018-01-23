@@ -274,5 +274,10 @@ struct UnknownContestStruct6
 extern u8 gContestPlayerMonIndex;
 extern u8 gIsLinkContest;
 extern u32 gContestRngValue;
+extern s16 gUnknown_02038678[4];
+extern s16 gUnknown_02038680[4];
+extern u16 gUnknown_02038688[4];
+extern u8 gContestFinalStandings[4];
+extern u8 gUnknown_0203869B;
 
 #endif // GUARD_CONTEST_H

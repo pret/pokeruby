@@ -19,13 +19,7 @@
 
 extern u8 gUnknown_0203856C;
 extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
-extern s16 gUnknown_02038680[];
-extern u8 gContestFinalStandings[];
 extern u8 gUnknown_02038694;
-extern u8 gIsLinkContest;
-extern u8 gUnknown_0203869B;
-extern u8 gContestPlayerMonIndex;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 
@@ -39,8 +33,6 @@ extern u16 gBattle_BG3_X;
 extern u16 gBattle_BG3_Y;
 
 extern u8 (*gMenuCallback)(void);
-
-extern bool8 gReceivedRemoteLinkPlayers;
 
 static bool8 sub_80A9B78(void);
 static void sub_80A9BE4(u8 taskId);
