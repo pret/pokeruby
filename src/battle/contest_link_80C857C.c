@@ -398,6 +398,60 @@ void sub_80C8938(u8 taskId)
     }
 }
 
+void sub_80C89DC(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 0:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(&gContestPlayerMonIndex, sizeof(u8));
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+    }
+}
+
+void sub_80C8A38(u8 taskId)
+{
+    int i;
+
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+            SwitchTaskToFollowupFunc(taskId);
+            break;
+        case 0:
+            if (sub_8007ECC())
+            {
+                sub_80C857C(&sContestantStatus[gContestPlayerMonIndex].currMove, sizeof(u16));
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 1:
+            if (sub_80C85D8())
+            {
+                for (i = 0; i < MAX_LINK_PLAYERS; i++)
+                {
+                    *&sContestantStatus[i].currMove = gBlockRecvBuffer[i][0];
+                }
+                gTasks[taskId].data[0]++;
+            }
+            break;
+    }
+}
+
 asm(".section .text_de");
 
 #if GERMAN
