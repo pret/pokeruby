@@ -215,24 +215,22 @@ void sub_80C8734(u8 taskId)
         case 0:
             if (GetMultiplayerId() == 0) {
                 if (IsLinkTaskFinished()) {
-#if GERMAN
+#if ENGLISH
+                    memcpy(gBlockSendBuffer, gContestMons + gContestPlayerMonIndex, sizeof(struct ContestPokemon));
+                    sub_8007E9C(2);
+                    gTasks[taskId].data[0]++;
+#elif GERMAN
                     if (gTasks[taskId].data[0] == 0)
                     {
                         gTasks[taskId].data[0] = 3;
                     }
                     else
                     {
-#endif
-                    memcpy(gBlockSendBuffer, gContestMons + gContestPlayerMonIndex, sizeof(struct ContestPokemon));
-#if GERMAN
-                    de_sub_80C9274(FALSE);
-#endif
-                    sub_8007E9C(2);
-#if ENGLISH
-                    gTasks[taskId].data[0]++;
-#elif GERMAN
-                    gTasks[taskId].data[0] = 1;
-                }
+                        memcpy(gBlockSendBuffer, gContestMons + gContestPlayerMonIndex, sizeof(struct ContestPokemon));
+                        de_sub_80C9274(FALSE);
+                        sub_8007E9C(2);
+                        gTasks[taskId].data[0] = 1;
+                    }
 #endif
                 }
             }
@@ -350,7 +348,10 @@ void sub_80C8938(u8 taskId)
             {
                 if (IsLinkTaskFinished())
                 {
-#if GERMAN
+#if ENGLISH
+                    sub_8007E9C(2);
+                    gTasks[taskId].data[0]++;
+#elif GERMAN
                     if (gTasks[taskId].data[0] == 0)
                     {
                         gTasks[taskId].data[0] = 3;
@@ -358,11 +359,7 @@ void sub_80C8938(u8 taskId)
                     else
                     {
                         de_sub_80C9274(TRUE);
-#endif
-                    sub_8007E9C(2);
-#if ENGLISH
-                    gTasks[taskId].data[0]++;
-#elif GERMAN
+                        sub_8007E9C(2);
                         gTasks[taskId].data[0] = 1;
                     }
 #endif
@@ -626,7 +623,10 @@ void sub_80C8E1C(u8 taskId)
             {
                 if (IsLinkTaskFinished())
                 {
-#if GERMAN
+#if ENGLISH
+                    sub_8007E9C(2);
+                    gTasks[taskId].data[0]++;
+#elif GERMAN
                     if (gTasks[taskId].data[0] == 0)
                     {
                         gTasks[taskId].data[0] = 3;
@@ -634,12 +634,8 @@ void sub_80C8E1C(u8 taskId)
                     else
                     {
                         de_sub_80C9274(FALSE);
-#endif
-                    sub_8007E9C(2);
-#if ENGLISH
-                    gTasks[taskId].data[0]++;
-#elif GERMAN
-                    gTasks[taskId].data[0] = 1;
+                        sub_8007E9C(2);
+                        gTasks[taskId].data[0] = 1;
                     }
 #endif
                 }
