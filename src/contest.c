@@ -47,7 +47,7 @@ extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
 extern struct Window gUnknown_03004210;
-extern u32 gUnknown_03005D28;  // saved RNG value
+extern u32 gContestRngValue;  // saved RNG value
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -483,7 +483,7 @@ void sub_80AB6B4(u8 taskId)
         GetMultiplayerId();  // unused return value
         DestroyTask(taskId);
         gTasks[sContest.mainTaskId].func = sub_80AB960;
-        gRngValue = gUnknown_03005D28;
+        gRngValue = gContestRngValue;
     }
 }
 
@@ -1799,7 +1799,7 @@ void sub_80ADDA4(u8 taskId)
     sub_80AF668();
     sub_80AF138();
     sub_80BE23C(sContestantStatus[gContestPlayerMonIndex].prevMove);
-    gUnknown_03005D28 = gRngValue;
+    gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gUnknown_083CB02C);
     Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
     gTasks[taskId].data[2] = 0;

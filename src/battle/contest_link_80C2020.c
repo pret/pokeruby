@@ -3,6 +3,7 @@
 #include "palette.h"
 #include "graphics.h"
 #include "text.h"
+#include "string_util.h"
 #include "menu.h"
 #include "battle.h"
 #include "contest.h"
@@ -13,6 +14,9 @@
 void sub_80C37E4(void);
 u8 sub_80C3990(u8 a0, u8 a5);
 s8 sub_80C39E4(u8 a0, u8 a5);
+
+extern const u8 gUnknown_083D17DC[];
+extern const u8 gUnknown_083D17E0[];
 
 void sub_80C2020(void)
 {
@@ -94,4 +98,37 @@ void sub_80C2144(void)
             ((u16 *)BG_VRAM)[i * 0x60 + j + 0x60d3] = r3;
         }
     }
+}
+
+void sub_80C226C(u8 a0)
+{
+    u8 *strbuf;
+
+    if (a0 == gContestPlayerMonIndex)
+        strbuf = StringCopy(gDisplayedStringBattle, gUnknown_083D17DC);
+    else
+        strbuf = gDisplayedStringBattle;
+    strbuf[0] = EXT_CTRL_CODE_BEGIN;
+    strbuf[1] = 0x06;
+    strbuf[2] = 0x04;
+    strbuf += 3;
+    strbuf = StringCopy(strbuf, gContestMons[a0].nickname);
+    strbuf[0] = EXT_CTRL_CODE_BEGIN;
+    strbuf[1] = 0x13;
+    strbuf[2] = 0x32;
+    strbuf += 3;
+    strbuf = StringCopy(strbuf, gUnknown_083D17E0);
+    if (gIsLinkContest & 1)
+        StringCopy(strbuf, gLinkPlayers[a0].name);
+    else
+        StringCopy(strbuf, gContestMons[a0].trainerName);
+    Text_InitWindowAndPrintText(&gMenuWindow, gDisplayedStringBattle, a0 * 36 + 770, 7, a0 * 3 + 4);
+}
+
+void sub_80C2340(void)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+        sub_80C226C(i);
 }

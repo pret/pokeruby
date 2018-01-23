@@ -721,6 +721,8 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
 
+extern u8 gDisplayedStringBattle[];
+
 // asm/battle_1.o
 void sub_800D6D4();
 void sub_800D74C();

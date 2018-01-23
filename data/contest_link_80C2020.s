@@ -73,6 +73,3 @@ gUnknown_083D17E0:: @ 83D17E0
 
 gUnknown_083D17E2:: @ 83D17E2
 	.string "{SIZE 3}{COLOR_HIGHLIGHT_SHADOW WHITE2 DARK_GREY LIGHT_BLUE}$"
-
-	.align 2
-	.incbin "graphics/unknown/unknown_3D17EC.gbapal"

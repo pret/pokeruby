@@ -8,7 +8,6 @@ extern u8 AreMovesContestCombo(u16, u16);
 extern bool8 sub_80B214C(u8);
 extern bool8 Contest_IsMonsTurnDisabled(u8);
 
-extern s16 gUnknown_02038670[];
 extern u16 gSpecialVar_ContestCategory;
 
 extern u8 *gAIScriptPtr;
@@ -1119,7 +1118,7 @@ static void ContestAICmd_check_would_finish_combo(void)
 
     if(sContestantStatus[eContestAI->unk41].prevMove)
         result = AreMovesContestCombo(sContestantStatus[eContestAI->unk41].prevMove, move);
-    
+
     if(result)
         result = 1;
 
@@ -1727,7 +1726,7 @@ static void ContestAICmd_unk_85(void)
     int result = 0;
     int i;
     u16 arg = T1_READ_16(gAIScriptPtr + 1);
-    
+
     for(i = 0; i < 4; i++)
     {
         u16 move = gContestMons[eContestAI->unk41].moves[i];

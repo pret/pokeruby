@@ -271,4 +271,16 @@ struct UnknownContestStruct6
 #define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
 #define shared19348 (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
 
+extern u8 gContestPlayerMonIndex;
+extern u8 gIsLinkContest;
+extern u32 gContestRngValue;
+extern u8 gUnknown_02038696[4];
+extern s16 gUnknown_02038670[4];
+extern s16 gUnknown_02038678[4];
+extern s16 gUnknown_02038680[4];
+extern u16 gUnknown_02038688[4];
+extern u8 gContestFinalStandings[4];
+extern u8 gUnknown_02038696[4];
+extern u8 gUnknown_0203869B;
+
 #endif // GUARD_CONTEST_H

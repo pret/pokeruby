@@ -735,7 +735,7 @@ _080C88FC:
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, _080C8934 @ =gUnknown_03005D28
+	ldr r0, _080C8934 @ =gContestRngValue
 	adds r1, r4, 0
 	movs r2, 0x4
 	bl memcpy
@@ -750,7 +750,7 @@ _080C8924:
 	.align 2, 0
 _080C892C: .4byte gRngValue
 _080C8930: .4byte gBlockRecvBuffer
-_080C8934: .4byte gUnknown_03005D28
+_080C8934: .4byte gContestRngValue
 	thumb_func_end sub_80C88AC
 
 .ifdef ENGLISH
