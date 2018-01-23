@@ -1,19 +1,45 @@
 #include "global.h"
+#include "constants/songs.h"
+#include "ewram.h"
+#include "main.h"
+#include "scanline_effect.h"
 #include "decompress.h"
 #include "palette.h"
 #include "graphics.h"
 #include "text.h"
 #include "string_util.h"
 #include "menu.h"
+#include "sound.h"
 #include "battle.h"
 #include "contest.h"
 #include "link.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
+struct UnkEwramStruct18000 {
+    u8 filler_00[2];
+    u8 unk_02;
+    u8 filler_03[0x15];
+};
+
+struct UnkEwramStruct18018 {
+    u8 filler_00[0x50];
+};
+
+#define eContestLink80C2020Struct2018000 (*(struct UnkEwramStruct18000 *)(gSharedMem + 0x18000))
+#define eContestLink80C2020Struct2018018 (*(struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
+
+void sub_80C2430(void);
+void sub_80C2448(void);
+void sub_80C24F4(u8 taskId);
+void sub_80C2F28(u8 taskId);
 void sub_80C37E4(void);
-u8 sub_80C3990(u8 a0, u8 a5);
-s8 sub_80C39E4(u8 a0, u8 a5);
+void sub_80C310C(void);
+void sub_80C30D4(u8 a0, u8 a1);
+void sub_80C33DC(void);
+void sub_80C3F00(void);
+u8 sub_80C3990(u8 a0, u8 a1);
+s8 sub_80C39E4(u8 a0, u8 a1);
 
 extern const u8 gUnknown_083D17DC[];
 extern const u8 gUnknown_083D17E0[];
@@ -131,4 +157,33 @@ void sub_80C2340(void)
 
     for (i = 0; i < 4; i++)
         sub_80C226C(i);
+}
+
+void sub_80C2358(void)
+{
+    gPaletteFade.bufferTransferDisabled = TRUE;
+    SetVBlankCallback(NULL);
+    sub_80C2020();
+    ScanlineEffect_Clear();
+    ResetPaletteFade();
+    ResetSpriteData();
+    ResetTasks();
+    FreeAllSpritePalettes();
+    sub_80C2144();
+    sub_80C310C();
+    sub_80C30D4(0, 1);
+    sub_80C2340();
+    eContestLink80C2020Struct2018000 = (struct UnkEwramStruct18000){};
+    eContestLink80C2020Struct2018018 = (struct UnkEwramStruct18018){};
+    sub_80C33DC();
+    BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+    gPaletteFade.bufferTransferDisabled = FALSE;
+    eContestLink80C2020Struct2018000.unk_02 = CreateTask(sub_80C24F4, 5);
+    SetMainCallback2(sub_80C2430);
+    gBattle_WIN1H = 0xf0;
+    gBattle_WIN1V = 0x80a0;
+    CreateTask(sub_80C2F28, 20);
+    sub_80C3F00();
+    PlayBGM(BGM_CON_K);
+    SetVBlankCallback(sub_80C2448);
 }
