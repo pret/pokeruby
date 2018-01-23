@@ -6,6 +6,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "graphics.h"
+#include "strings2.h"
 #include "text.h"
 #include "string_util.h"
 #include "menu.h"
@@ -32,11 +33,14 @@ struct UnkEwramStruct18018 {
 void sub_80C2430(void);
 void sub_80C2448(void);
 void sub_80C24F4(u8 taskId);
+void sub_80C255C(u8 taskId);
+void sub_80C2600(u8 taskId);
 void sub_80C2F28(u8 taskId);
 void sub_80C37E4(void);
 void sub_80C310C(void);
 void sub_80C30D4(u8 a0, u8 a1);
 void sub_80C33DC(void);
+void sub_80C3698(const u8 *string);
 void sub_80C3F00(void);
 u8 sub_80C3990(u8 a0, u8 a1);
 s8 sub_80C39E4(u8 a0, u8 a1);
@@ -186,4 +190,48 @@ void sub_80C2358(void)
     sub_80C3F00();
     PlayBGM(BGM_CON_K);
     SetVBlankCallback(sub_80C2448);
+}
+
+void sub_80C2430(void)
+{
+    AnimateSprites();
+    BuildOamBuffer();
+    RunTasks();
+    UpdatePaletteFade();
+}
+
+void sub_80C2448(void)
+{
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
+    REG_WIN0H = gBattle_WIN0H;
+    REG_WIN0V = gBattle_WIN0V;
+    REG_WIN1H = gBattle_WIN1H;
+    REG_WIN1V = gBattle_WIN1V;
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    ScanlineEffect_InitHBlankDmaTransfer();
+}
+
+void sub_80C24F4(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gIsLinkContest & 1)
+        {
+            sub_80C3698(gOtherText_LinkStandby);
+            gTasks[taskId].func = sub_80C255C;
+        }
+        else
+        {
+            gTasks[taskId].func = sub_80C2600;
+        }
+    }
 }
