@@ -194,5 +194,6 @@ u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
+void LinkTestScreen(void);
 
 #endif // GUARD_LINK_H

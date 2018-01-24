@@ -1,583 +1,492 @@
 #if DEBUG
 
 #include "global.h"
+#include "constants/songs.h"
+#include "battle.h"
+#include "debug.h"
+#include "link.h"
+#include "main.h"
+#include "menu.h"
+#include "mystery_event_menu.h"
+#include "overworld.h"
+#include "reset_rtc_screen.h"
+#include "rtc.h"
+#include "save.h"
+#include "sound.h"
+#include "task.h"
+#include "text.h"
+#include "trade.h"
+
+// berry_blender.c
+extern void unref_sub_80524BC(void);
+
+void debug_sub_8076BB4(u8);
+void debug_sub_8077CF4();
+
+u8 DebugMenu_Exit(void);
+u8 DebugMenu_OpenWatanabe(void);
+u8 DebugMenu_OpenSogabe(void);
+u8 DebugMenu_OpenTamada(void);
+u8 DebugMenu_OpenKagaya(void);
+u8 DebugMenu_OpenMatsuda(void);
+u8 DebugMenu_OpenNohara(void);
+u8 DebugMenu_OpenNakamura(void);
+u8 DebugMenu_Teleport(void);
+u8 DebugMenu_EditPKMN(void);
+u8 DebugMenu_SwitchBG(void);
+u8 DebugMenu_OpenMori(void);
+u8 DebugMenu_OpenTomomichi(void);
+u8 DebugMenu_OpenAoki(void);
+u8 DebugMenu_OpenTaya(void);
+u8 DebugMenu_ToggleClearFlag(void);
+u8 DebugMenu_ControlEncounter(void);
+u8 DebugMenu_PTime(void);
+u8 DebugMenu_MakeItems(void);
+u8 debug_sub_8091300(void);
+u8 DebugMenu_ViewPortraits(void);
+u8 DebugMenu_TimeRecords(void);
+u8 DebugMenu_SetTime(void);
+u8 DebugMenu_NationalDex(void);
+u8 DebugMenu_CreatePKMN(void);
+u8 DebugMenu_ViewPokemonGraphics(void);
+u8 DebugMenu_BattleForDebug(void);
+u8 DebugMenu_AllBadges(void);
+u8 DebugMenu_HoennNationalDex(void);
+u8 DebugMenu_SetRamBerry(void);
+u8 DebugMenu_UseHM(void);
+u8 DebugMenu_OpenIwasawa(void);
+u8 DebugMenu_ToggleBGM(void);
+u8 DebugMenu_OpenSizeComparison(void);
+u8 DebugMenu_Safari(void);
+u8 DebugMenu_RematchTrainers(void);
+u8 DebugMenu_MiragaIslandRND(void);
+u8 DebugMenu_HallOfFame(void);
+u8 DebugMenu_OpenMysteryEvent(void);
+u8 DebugMenu_OpenLegendsRecord(void);
+u8 DebugMenu_OpenWeatherEvents(void);
+u8 DebugMenu_CellInfo(void);
+u8 DebugMenu_CheckPKBLCK(void);
+u8 DebugMenu_EffortValues(void);
+u8 DebugMenu_HoennDex(void);
+u8 DebugMenu_OpenSeeTrainers(void);
+u8 DebugMenu_OpenBerryInfo(void);
+u8 DebugMenu_BattleTowerStages(void);
+u8 DebugMenu_EndSequenceDemo(void);
+u8 DebugMenu_RandomNumberTest(void);
+u8 DebugMenu_MeTooBackupMan(void);
+u8 DebugMenu_OpenMurakawa(void);
+u8 DebugMenu_OpenKiwa(void);
+u8 DebugMenu_8076CBC(void);
+u8 DebugMenu_8076CC0(void);
+u8 DebugMenu_8076CD4(void);
+u8 DebugMenu_8076C6C(void);
+u8 DebugMenu_8076CD8(void);
+u8 DebugMenu_8076D28(void);
+u8 DebugMenu_8076D3C(void);
+u8 DebugMenu_8076C80(void);
+u8 DebugMenu_8076C90(void);
+u8 DebugMenu_8076D50(void);
+u8 DebugMenu_8076CEC(void);
+u8 DebugMenu_8076D14(void);
+u8 DebugMenu_8076D00(void);
+u8 DebugMenu_8076D5C(void);
+u8 DebugMenu_8076E18(void);
+u8 DebugMenu_8076EDC(void);
+void DebugMenu_8076FEC(void);
+
+const u8 Str_839B740[] = _("·WATANABE");
+const u8 Str_839B74A[] = _("SOGABE");
+const u8 Str_839B751[] = _("·TAMADA");
+const u8 Str_839B759[] = _("KAGAYA");
+const u8 Str_839B760[] = _("MATUDA");
+const u8 Str_839B767[] = _("NOHARA");
+const u8 Str_839B76E[] = _("NAKAMURA");
+const u8 Str_839B777[] = _("EXIT");
+const u8 Str_839B77C[] = _("Teleport");
+const u8 Str_839B785[] = _("Switch BG");
+const u8 Str_839B78F[] = _("Edit your {PKMN}");
+const u8 Str_839B79C[] = _("MORI");
+const u8 Str_839B7A1[] = _("TOMOMITI");
+const u8 Str_839B7AA[] = _("·AOKI");
+const u8 Str_839B7B0[] = _("TAYA");
+const u8 Str_839B7B5[] = _("Control Encounter");
+const u8 Str_839B7C7[] = _("PTIME");
+const u8 Str_839B7CD[] = _("Make items");
+const u8 Str_839B7D8[] = _("Transport");
+const u8 Str_839B7E2[] = _("See portraits");
+const u8 Str_839B7F0[] = _("Time records");
+const u8 Str_839B7FD[] = _("Set time");
+const u8 Str_839B806[] = _("National オカDex");
+const u8 Str_839B815[] = _("Hoenn オカDex");
+const u8 Str_839B821[] = _("Create {PKMN}");
+const u8 Str_839B82B[] = _("See {PKMN} graphics");
+const u8 Str_839B83B[] = _("See trainers");
+const u8 Str_839B848[] = _("Battle for debug");
+const u8 Str_839B859[] = _("Full set of badges");
+const u8 Str_839B86C[] = _("Hoenn National Dex");
+const u8 Str_839B87F[] = _("Set Ram berry");
+const u8 Str_839B88D[] = _("Use HM");
+const u8 Str_839B894[] = _("IWASAWA");
+const u8 Str_839B89C[] = _("BGM ON/OFF");
+const u8 Str_839B8A7[] = _("Size comparison");
+const u8 Str_839B8B7[] = _("Clear flag ON/OFF");
+const u8 Str_839B8C9[] = _("Safari");
+const u8 Str_839B8D0[] = _("Rematch trainers");
+const u8 Str_839B8E1[] = _("Mirage island RND");
+const u8 Str_839B8F3[] = _("Hall of fame");
+const u8 Str_839B900[] = _("Mystery event");
+const u8 Str_839B90E[] = _("Legends records");
+const u8 Str_839B91E[] = _("Weather events");
+const u8 Str_839B92D[] = _("Cell info.");
+const u8 Str_839B938[] = _("Check {POKEBLOCK}");
+const u8 Str_839B944[] = _("Effort values");
+const u8 Str_839B952[] = _("Berrie Info");
+const u8 Str_839B95E[] = _("Battle Tower stages");
+const u8 Str_839B972[] = _("End sequence demo");
+const u8 Str_839B984[] = _("Random number test");
+const u8 Str_839B997[] = _("Me-too BackupMan");
+const u8 Str_839B9A8[] = _("MURAKAWA");
+const u8 Str_839B9B1[] = _("KINA(FONT)");
+
+const struct MenuAction gDebug0x839B9BC[] =
+{
+    { Str_839B777, DebugMenu_Exit },
+    { Str_839B740, DebugMenu_OpenWatanabe },
+    { Str_839B74A, DebugMenu_OpenSogabe },
+    { Str_839B751, DebugMenu_OpenTamada },
+    { Str_839B759, DebugMenu_OpenKagaya },
+    { Str_839B760, DebugMenu_OpenMatsuda },
+    { Str_839B767, DebugMenu_OpenNohara },
+    { Str_839B76E, DebugMenu_OpenNakamura },
+    { Str_839B77C, DebugMenu_Teleport },
+    { Str_839B78F, DebugMenu_EditPKMN },
+    { Str_839B785, DebugMenu_SwitchBG },
+    { Str_839B79C, DebugMenu_OpenMori },
+    { Str_839B7A1, DebugMenu_OpenTomomichi },
+    { Str_839B7AA, DebugMenu_OpenAoki },
+    { Str_839B7B0, DebugMenu_OpenTaya },
+    { Str_839B8B7, DebugMenu_ToggleClearFlag },
+    { Str_839B7B5, DebugMenu_ControlEncounter },
+    { Str_839B7C7, DebugMenu_PTime },
+    { Str_839B7CD, DebugMenu_MakeItems },
+    { Str_839B7D8, debug_sub_8091300 },
+    { Str_839B7E2, DebugMenu_ViewPortraits },
+    { Str_839B7F0, DebugMenu_TimeRecords },
+    { Str_839B7FD, DebugMenu_SetTime },
+    { Str_839B806, DebugMenu_NationalDex },
+    { Str_839B821, DebugMenu_CreatePKMN },
+    { Str_839B82B, DebugMenu_ViewPokemonGraphics },
+    { Str_839B848, DebugMenu_BattleForDebug },
+    { Str_839B859, DebugMenu_AllBadges },
+    { Str_839B86C, DebugMenu_HoennNationalDex },
+    { Str_839B87F, DebugMenu_SetRamBerry },
+    { Str_839B88D, DebugMenu_UseHM },
+    { Str_839B894, DebugMenu_OpenIwasawa },
+    { Str_839B89C, DebugMenu_ToggleBGM },
+    { Str_839B8A7, DebugMenu_OpenSizeComparison },
+    { Str_839B8C9, DebugMenu_Safari },
+    { Str_839B8D0, DebugMenu_RematchTrainers },
+    { Str_839B8E1, DebugMenu_MiragaIslandRND },
+    { Str_839B8F3, DebugMenu_HallOfFame },
+    { Str_839B900, DebugMenu_OpenMysteryEvent },
+    { Str_839B90E, DebugMenu_OpenLegendsRecord },
+    { Str_839B91E, DebugMenu_OpenWeatherEvents },
+    { Str_839B92D, DebugMenu_CellInfo },
+    { Str_839B938, DebugMenu_CheckPKBLCK },
+    { Str_839B944, DebugMenu_EffortValues },
+    { Str_839B815, DebugMenu_HoennDex },
+    { Str_839B83B, DebugMenu_OpenSeeTrainers },
+    { Str_839B952, DebugMenu_OpenBerryInfo },
+    { Str_839B95E, DebugMenu_BattleTowerStages },
+    { Str_839B972, DebugMenu_EndSequenceDemo },
+    { Str_839B984, DebugMenu_RandomNumberTest },
+    { Str_839B997, DebugMenu_MeTooBackupMan },
+    { Str_839B9A8, DebugMenu_OpenMurakawa },
+    { Str_839B9B1, DebugMenu_OpenKiwa },
+};
+
+const u8 gUnknown_Debug_839BB64[] =
+{
+    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x00, 0x0b, 0x0c, 0x0d, 0x0e, 0x1f, 0x12, 0x13, 0x00, 0x08, 0x09, 0x0a, 0x1e, 0x10, 0x24, 0x0f, 0x00, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x00,
+    0x1c, 0x1d, 0x14, 0x20, 0x21, 0x22, 0x23, 0x00, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2a, 0x2b, 0x00, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x00, 0x11, 0x33, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
+
+const u8 gUnknown_Debug_0839BBA4[] = _("Debugging Version");
+const u8 gUnknown_Debug_0839BBB6[] = _("{VERSION} Version");
+const u8 gUnknown_Debug_0839BBC1[] = _("Normal RTC compatible");
+const u8 Str_839BBD7[] = _("か　の　じっけん");
+const u8 Str_839BBE0[] = _("じっけん2");
+const u8 Str_839BBE6[] = _("BGじっけん");
+const u8 Str_839BBED[] = _("Battle");
+const u8 Str_839BBF4[] = _("つうしん　じっけん");
+const u8 Str_839BBFE[] = _("LINK Test2");
+const u8 Str_839BC09[] = _("フィールド　はじめる");
+const u8 Str_839BC14[] = _("フィールド　つづき");
+const u8 Str_839BC1E[] = _("Sound test");
+const u8 Str_839BC29[] = _("{POKEBLOCK} test");
+const u8 Str_839BC34[] = _("Crash backup data");
+const u8 Str_839BC46[] = _("e-Card test");
+const u8 Str_839BC52[] = _("こうかんデモ　　　");
+const u8 Str_839BC5C[] = _("Time in game");
+const u8 Str_839BC69[] = _("フェスタ　モード");
+const u8 Str_839BC72[] = _("Mimic e-Card");
+const u8 Str_839BC7F[] = _("RTC reset");
+const u8 Str_839BC89[] = _("Converter");
+
+const struct MenuAction gUnknown_Debug_839BC94[] =
+{
+    { Str_839BBD7, DebugMenu_8076CBC },
+    { Str_839BBE0, DebugMenu_8076CC0 },
+    { Str_839BBE6, DebugMenu_8076CD4 },
+    { Str_839BBED, DebugMenu_8076C6C },
+    { Str_839BC29, DebugMenu_8076CD8 },
+    { Str_839BBFE, DebugMenu_8076D28 },
+    { Str_839BC1E, DebugMenu_8076D3C },
+    { Str_839BC09, DebugMenu_8076C80 },
+    { Str_839BC14, DebugMenu_8076C90 },
+    { Str_839BC34, DebugMenu_8076D50 },
+    { Str_839BC46, DebugMenu_8076CEC },
+    { Str_839BC52, DebugMenu_8076D14 },
+    { Str_839BC72, DebugMenu_8076D00 },
+    { Str_839BC5C, DebugMenu_8076D5C },
+    { Str_839BC7F, DebugMenu_8076E18 },
+    { Str_839BC89, DebugMenu_8076EDC },
+};
+
+// NOTE: When decompiling this file, I found out that having an extraneous extern
+// in a C file can affect the generated asm. If this extern is commented out,
+// debug_sub_8076BB4 will access the array differently and no longer match.
+//extern const struct MenuAction gUnknown_Debug_839BC94[];
+
+const u8 Str_839BD14[][10] =
+{
+    _("うかえ"),
+    _("おけこしすせそ"),
+};
+
+const u8 Str_839BD26[] = {2, 0, 0, 0};  // doesn't appear to be referenced
+
+const u8 Str_839BD2C[] = _("RTCを　リセット　します\n"
+                           "Aで　じっこう　　　Bでキャンセル");
+
+const u8 Str_839BD4C[] = _("RTCを　リセット　した！");
+
+const u8 Str_839BD5A[] = _("セーブデータを　コンバートします\n"
+                           "Aで　けってい　　Bで　キャンセル");
+
+const u8 Str_839BD7D[] = _("へんかんが　しゅうりょう　しました！");
+
+
+extern const u8 Str_839BD2C[];
+extern const u8 Str_839BD4C[];
 
 __attribute__((unused)) static u8 gUnknown_030006B8[4];
 __attribute__((unused)) static u8 gUnknown_030006BC[4];
 __attribute__((unused)) static u8 gUnknown_030006C0;
 __attribute__((unused)) static u8 gUnknown_030006C1;
-__attribute__((unused)) static void *gUnknown_030006C4;
+static const u8 *gUnknown_030006C4;
 __attribute__((unused)) static u8 gUnknown_030006C8;
 
-__attribute__((naked))
-void debug_sub_8076AC8()
+void debug_sub_8076AC8(u8 a)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	ldr	r2, ._3\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	ldr	r0, ._3 + 4\n"
-        "	add	r1, r1, r0\n"
-        "	str	r1, [r2]\n"
-        "	mov	r4, #0x0\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0xff\n"
-        "	beq	._1	@cond_branch\n"
-        "._2:\n"
-        "	add	r4, r4, #0x1\n"
-        "	add	r0, r1, r4\n"
-        "	ldrb	r0, [r0]\n"
-        "	cmp	r0, #0xff\n"
-        "	bne	._2	@cond_branch\n"
-        "._1:\n"
-        "	mov	r0, #0x10\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_EraseWindowRect\n"
-        "	lsl	r3, r4, #0x1\n"
-        "	add	r3, r3, #0x1\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	lsr	r3, r3, #0x18\n"
-        "	mov	r0, #0x10\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x1d\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	ldr	r3, ._3 + 8\n"
-        "	ldr	r0, ._3\n"
-        "	ldr	r0, [r0]\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x11\n"
-        "	mov	r1, #0x1\n"
-        "	add	r2, r4, #0\n"
-        "	bl	Menu_PrintItemsReordered\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0xc\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x11\n"
-        "	mov	r2, #0x1\n"
-        "	add	r3, r4, #0\n"
-        "	bl	InitMenu\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._4:\n"
-        "	.align	2, 0\n"
-        "._3:\n"
-        "	.word	gUnknown_030006C4 \n"
-        "	.word	Str_839BD14\n"
-        "	.word	gUnknown_Debug_839BC94\n"
-        "\n"
-    );
+    s32 r4;
+
+    gUnknown_030006C4 = Str_839BD14[a];
+    for (r4 = 0; gUnknown_030006C4[r4] != EOS; r4++)
+        ;
+    Menu_EraseWindowRect(16, 0, 29, 19);
+    Menu_DrawStdWindowFrame(16, 0, 29, r4 * 2 + 1);
+    Menu_PrintItemsReordered(17, 1, r4, (struct MenuAction2 *)gUnknown_Debug_839BC94, gUnknown_030006C4);
+    InitMenu(0, 17, 1, r4, 0, 12);
+}
+
+void debug_sub_8076B4C(void)
+{
+    u8 taskId = FindTaskIdByFunc(debug_sub_8076BB4);
+
+    if (taskId != 0xFF)
+        DestroyTask(taskId);
+}
+
+// Initializes test menu
+void debug_sub_8076B68(void)
+{
+    Menu_PrintText(gUnknown_Debug_0839BBB6, 1, 1);
+    Menu_PrintText(gUnknown_Debug_0839BBC1, 1, 3);
+    Menu_PrintText(gUnknown_Debug_0839BBA4, 1, 9);
+    debug_sub_8077CF4(4, 11);
+    debug_sub_8076AC8(0);
+    CreateTask(debug_sub_8076BB4, 1);
+}
+
+// Handles input for the test menu
+void debug_sub_8076BB4(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    switch (input)
+    {
+    default:
+        gUnknown_Debug_839BC94[gUnknown_030006C4[cursorPos]].func();
+        break;
+    case -2:
+        if (gMain.newKeys & 0x20)
+        {
+            if (data[0] == 0)
+                data[0] = 1;
+            else
+                data[0]--;
+            debug_sub_8076AC8(data[0]);
+            PlaySE(SE_SELECT);
+        }
+        else if (gMain.newKeys & 0x10)
+        {
+            if (data[0] == 1)
+                data[0] = 0;
+            else
+                data[0]++;
+            debug_sub_8076AC8(data[0]);
+            PlaySE(SE_SELECT);
+        }
+        break;
+    case -1:
+        DoSoftReset();
+        break;
+    }
+}
+
+u8 DebugMenu_8076C6C(void)
+{
+    SetMainCallback2(debug_sub_8010800);
+    return 0;
+}
+
+u8 DebugMenu_8076C80(void)
+{
+    debug_sub_8076B4C();
+    DebugMenu_8076FEC();
+    return 0;
+}
+
+u8 DebugMenu_8076C90(void)
+{
+    if (gSaveFileStatus == SAVE_STATUS_ERROR)
+    {
+        PlaySE(0x16);
+    }
+    else
+    {
+        debug_sub_8076B4C();
+        SetMainCallback2(CB2_ContinueSavedGame);
+    }
+    return 0;
+}
+
+u8 DebugMenu_8076CBC(void)
+{
+    return 0;
+}
+
+u8 DebugMenu_8076CC0(void)
+{
+    SetMainCallback2(debug_nullsub_66);
+    return 0;
+}
+
+u8 DebugMenu_8076CD4(void)
+{
+    return 0;
+}
+
+u8 DebugMenu_8076CD8(void)
+{
+    SetMainCallback2(unref_sub_80524BC);
+    return 0;
+}
+
+u8 DebugMenu_8076CEC(void)
+{
+    SetMainCallback2(CB2_InitMysteryEventMenu);
+    return 0;
+}
+
+u8 DebugMenu_8076D00(void)
+{
+    SetMainCallback2(debug_sub_815D15C);
+    return 0;
+}
+
+u8 DebugMenu_8076D14(void)
+{
+    SetMainCallback2(sub_804B790);
+    return 0;
+}
+
+u8 DebugMenu_8076D28(void)
+{
+    SetMainCallback2(LinkTestScreen);
+    return 0;
+}
+
+u8 DebugMenu_8076D3C(void)
+{
+    SetMainCallback2(CB2_StartSoundCheckMenu);
+    return 0;
+}
+
+u8 DebugMenu_8076D50(void)
+{
+    Save_EraseAllData();
+    return 0;
+}
+
+u8 DebugMenu_8076D5C(void)
+{
+    debug_sub_8076B4C();
+    debug_sub_806F8F8();
+    return 0;
+}
+
+void DebugMenu_8076D6C(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+    case 0:
+        Menu_DisplayDialogueFrame();
+        Menu_PrintText(Str_839BD2C, 2, 15);
+        data[0]++;
+        break;
+    case 1:
+        if (gMain.newKeys & A_BUTTON)
+        {
+            Menu_DisplayDialogueFrame();
+            Menu_PrintText(Str_839BD4C, 2, 15);
+            PlaySE(0x49);
+            RtcReset();
+            data[0]++;
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            DestroyTask(taskId);
+            DoSoftReset();
+        }
+        break;
+    case 2:
+        if (gMain.newKeys & A_BUTTON)
+        {
+            DestroyTask(taskId);
+            DoSoftReset();
+        }
+        break;
+    }
 }
 
 __attribute__((naked))
-void debug_sub_8076B4C()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._6\n"
-        "	bl	FindTaskIdByFunc\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0xff\n"
-        "	beq	._5	@cond_branch\n"
-        "	bl	DestroyTask\n"
-        "._5:\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._7:\n"
-        "	.align	2, 0\n"
-        "._6:\n"
-        "	.word	debug_sub_8076BB4+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_8076B68()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._8\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._8 + 4\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._8 + 8\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0x4\n"
-        "	mov	r1, #0xb\n"
-        "	bl	debug_sub_8077CF4\n"
-        "	mov	r0, #0x0\n"
-        "	bl	debug_sub_8076AC8\n"
-        "	ldr	r0, ._8 + 12\n"
-        "	mov	r1, #0x1\n"
-        "	bl	CreateTask\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._9:\n"
-        "	.align	2, 0\n"
-        "._8:\n"
-        "	.word	gUnknown_Debug_0839BBB6\n"
-        "	.word	gUnknown_Debug_0839BBC1\n"
-        "	.word	gUnknown_Debug_0839BBA4\n"
-        "	.word	debug_sub_8076BB4+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_8076BB4()
-{
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x3\n"
-        "	ldr	r0, ._13\n"
-        "	add	r5, r1, r0\n"
-        "	bl	Menu_ProcessInput\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	bl	Menu_GetCursorPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r1, r0, #0x18\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	asr	r4, r4, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	cmp	r4, r0\n"
-        "	beq	._10	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "	cmp	r4, r0\n"
-        "	beq	._11	@cond_branch\n"
-        "	ldr	r2, ._13 + 4\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	asr	r1, r1, #0x18\n"
-        "	ldr	r0, ._13 + 8\n"
-        "	ldr	r0, [r0]\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r2, r2, #0x4\n"
-        "	add	r0, r0, r2\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	b	._24\n"
-        "._14:\n"
-        "	.align	2, 0\n"
-        "._13:\n"
-        "	.word	gTasks+0x8\n"
-        "	.word	gUnknown_Debug_839BC94\n"
-        "	.word	gUnknown_030006C4 \n"
-        "._10:\n"
-        "	ldr	r0, ._18\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r2, r0, #0x10\n"
-        "	cmp	r2, #0\n"
-        "	beq	._15	@cond_branch\n"
-        "	ldrh	r1, [r5]\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r0, [r5, r2]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._16	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	b	._20\n"
-        "._19:\n"
-        "	.align	2, 0\n"
-        "._18:\n"
-        "	.word	gMain\n"
-        "._16:\n"
-        "	sub	r0, r1, #1\n"
-        "	b	._20\n"
-        "._15:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._24	@cond_branch\n"
-        "	ldrh	r1, [r5]\n"
-        "	mov	r3, #0x0\n"
-        "	ldsh	r0, [r5, r3]\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._22	@cond_branch\n"
-        "	strh	r2, [r5]\n"
-        "	b	._23\n"
-        "._22:\n"
-        "	add	r0, r1, #1\n"
-        "._20:\n"
-        "	strh	r0, [r5]\n"
-        "._23:\n"
-        "	ldrb	r0, [r5]\n"
-        "	bl	debug_sub_8076AC8\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	b	._24\n"
-        "._11:\n"
-        "	bl	DoSoftReset\n"
-        "._24:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076C6C()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._25\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._26:\n"
-        "	.align	2, 0\n"
-        "._25:\n"
-        "	.word	debug_sub_8010800+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076C80()
-{
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8076B4C\n"
-        "	bl	DebugMenu_8076FEC\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076C90()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._29\n"
-        "	ldrh	r0, [r0]\n"
-        "	cmp	r0, #0xff\n"
-        "	bne	._27	@cond_branch\n"
-        "	mov	r0, #0x16\n"
-        "	bl	PlaySE\n"
-        "	b	._28\n"
-        "._30:\n"
-        "	.align	2, 0\n"
-        "._29:\n"
-        "	.word	gSaveFileStatus\n"
-        "._27:\n"
-        "	bl	debug_sub_8076B4C\n"
-        "	ldr	r0, ._31\n"
-        "	bl	SetMainCallback2\n"
-        "._28:\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._32:\n"
-        "	.align	2, 0\n"
-        "._31:\n"
-        "	.word	CB2_ContinueSavedGame+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076CBC()
-{
-    asm(
-        "	mov	r0, #0x0\n"
-        "	bx	lr\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076CC0()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._33\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._34:\n"
-        "	.align	2, 0\n"
-        "._33:\n"
-        "	.word	debug_nullsub_66+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076CD4()
-{
-    asm(
-        "	mov	r0, #0x0\n"
-        "	bx	lr\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076CD8()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._35\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._36:\n"
-        "	.align	2, 0\n"
-        "._35:\n"
-        "	.word	unref_sub_80524BC+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076CEC()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._37\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._38:\n"
-        "	.align	2, 0\n"
-        "._37:\n"
-        "	.word	CB2_InitMysteryEventMenu+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D00()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._39\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._40:\n"
-        "	.align	2, 0\n"
-        "._39:\n"
-        "	.word	debug_sub_815D15C+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D14()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._41\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._42:\n"
-        "	.align	2, 0\n"
-        "._41:\n"
-        "	.word	sub_804B790+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D28()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._43\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._44:\n"
-        "	.align	2, 0\n"
-        "._43:\n"
-        "	.word	LinkTestScreen+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D3C()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._45\n"
-        "	bl	SetMainCallback2\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._46:\n"
-        "	.align	2, 0\n"
-        "._45:\n"
-        "	.word	CB2_StartSoundCheckMenu+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D50()
-{
-    asm(
-        "	push	{lr}\n"
-        "	bl	Save_EraseAllData\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D5C()
-{
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8076B4C\n"
-        "	bl	debug_sub_806F8F8\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076D6C()
-{
-    asm(
-        "	push	{r4, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r3, r0, #0x18\n"
-        "	lsl	r0, r3, #0x2\n"
-        "	add	r0, r0, r3\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._51\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r1, [r4, r0]\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._47	@cond_branch\n"
-        "	cmp	r1, #0x1\n"
-        "	bgt	._48	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	beq	._49	@cond_branch\n"
-        "	b	._64\n"
-        "._52:\n"
-        "	.align	2, 0\n"
-        "._51:\n"
-        "	.word	gTasks+0x8\n"
-        "._48:\n"
-        "	cmp	r1, #0x2\n"
-        "	beq	._53	@cond_branch\n"
-        "	b	._64\n"
-        "._49:\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._56\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	b	._55\n"
-        "._57:\n"
-        "	.align	2, 0\n"
-        "._56:\n"
-        "	.word	Str_839BD2C\n"
-        "._47:\n"
-        "	ldr	r0, ._60\n"
-        "	ldrh	r2, [r0, #0x2e]\n"
-        "	and	r1, r1, r2\n"
-        "	cmp	r1, #0\n"
-        "	beq	._58	@cond_branch\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._60 + 4\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0x49\n"
-        "	bl	PlaySE\n"
-        "	bl	RtcReset\n"
-        "._55:\n"
-        "	ldrh	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r4]\n"
-        "	b	._64\n"
-        "._61:\n"
-        "	.align	2, 0\n"
-        "._60:\n"
-        "	.word	gMain\n"
-        "	.word	Str_839BD4C\n"
-        "._58:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	._64	@cond_branch\n"
-        "	add	r0, r3, #0\n"
-        "	bl	DestroyTask\n"
-        "	bl	DoSoftReset\n"
-        "	b	._64\n"
-        "._53:\n"
-        "	ldr	r0, ._65\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._64	@cond_branch\n"
-        "	add	r0, r3, #0\n"
-        "	bl	DestroyTask\n"
-        "	bl	DoSoftReset\n"
-        "._64:\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._66:\n"
-        "	.align	2, 0\n"
-        "._65:\n"
-        "	.word	gMain\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void DebugMenu_8076E18()
+u8 DebugMenu_8076E18()
 {
     asm(
         "	push	{lr}\n"
@@ -692,7 +601,7 @@ void DebugMenu_8076E30()
 }
 
 __attribute__((naked))
-void DebugMenu_8076EDC()
+u8 DebugMenu_8076EDC()
 {
     asm(
         "	push	{lr}\n"
@@ -1321,7 +1230,7 @@ void DebugMenu_8077238()
 }
 
 __attribute__((naked))
-void DebugMenu_Exit()
+u8 DebugMenu_Exit()
 {
     asm(
         "	push	{lr}\n"
@@ -1334,7 +1243,7 @@ void DebugMenu_Exit()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenSogabe()
+u8 DebugMenu_OpenSogabe()
 {
     asm(
         "	push	{lr}\n"
@@ -1348,7 +1257,7 @@ void DebugMenu_OpenSogabe()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenTamada()
+u8 DebugMenu_OpenTamada()
 {
     asm(
         "	push	{lr}\n"
@@ -1362,7 +1271,7 @@ void DebugMenu_OpenTamada()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenKagaya()
+u8 DebugMenu_OpenKagaya()
 {
     asm(
         "	push	{lr}\n"
@@ -1376,7 +1285,7 @@ void DebugMenu_OpenKagaya()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenMatsuda()
+u8 DebugMenu_OpenMatsuda()
 {
     asm(
         "	push	{lr}\n"
@@ -1390,7 +1299,7 @@ void DebugMenu_OpenMatsuda()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenNohara()
+u8 DebugMenu_OpenNohara()
 {
     asm(
         "	push	{lr}\n"
@@ -1404,7 +1313,7 @@ void DebugMenu_OpenNohara()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenWatanabe()
+u8 DebugMenu_OpenWatanabe()
 {
     asm(
         "	push	{lr}\n"
@@ -1424,7 +1333,7 @@ void DebugMenu_OpenWatanabe()
 }
 
 __attribute__((naked))
-void DebugMenu_EndSequenceDemo()
+u8 DebugMenu_EndSequenceDemo()
 {
     asm(
         "	push	{lr}\n"
@@ -1444,7 +1353,7 @@ void DebugMenu_EndSequenceDemo()
 }
 
 __attribute__((naked))
-void DebugMenu_HallOfFame()
+u8 DebugMenu_HallOfFame()
 {
     asm(
         "	push	{lr}\n"
@@ -1459,7 +1368,7 @@ void DebugMenu_HallOfFame()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenSizeComparison()
+u8 DebugMenu_OpenSizeComparison()
 {
     asm(
         "	push	{lr}\n"
@@ -1474,7 +1383,7 @@ void DebugMenu_OpenSizeComparison()
 }
 
 __attribute__((naked))
-void DebugMenu_HoennNationalDex()
+u8 DebugMenu_HoennNationalDex()
 {
     asm(
         "	push	{lr}\n"
@@ -1495,7 +1404,7 @@ void DebugMenu_HoennNationalDex()
 }
 
 __attribute__((naked))
-void DebugMenu_8077434()
+u8 DebugMenu_8077434()
 {
     asm(
         "	push	{lr}\n"
@@ -1613,7 +1522,7 @@ void DebugMenu_8077434()
 }
 
 __attribute__((naked))
-void DebugMenu_807750C()
+u8 DebugMenu_807750C()
 {
     asm(
         "	push	{lr}\n"
@@ -1632,7 +1541,7 @@ void DebugMenu_807750C()
 }
 
 __attribute__((naked))
-void DebugMenu_SetRamBerry()
+u8 DebugMenu_SetRamBerry()
 {
     asm(
         "	push	{lr}\n"
@@ -1657,7 +1566,7 @@ void DebugMenu_SetRamBerry()
 }
 
 __attribute__((naked))
-void DebugMenu_ToggleBGM()
+u8 DebugMenu_ToggleBGM()
 {
     asm(
         "	push	{lr}\n"
@@ -1682,7 +1591,7 @@ void DebugMenu_ToggleBGM()
 }
 
 __attribute__((naked))
-void DebugMenu_BattleForDebug()
+u8 DebugMenu_BattleForDebug()
 {
     asm(
         "	push	{lr}\n"
@@ -1697,7 +1606,7 @@ void DebugMenu_BattleForDebug()
 }
 
 __attribute__((naked))
-void DebugMenu_NationalDex()
+u8 DebugMenu_NationalDex()
 {
     asm(
         "	push	{r4, r5, lr}\n"
@@ -1733,7 +1642,7 @@ void DebugMenu_NationalDex()
 }
 
 __attribute__((naked))
-void DebugMenu_HoennDex()
+u8 DebugMenu_HoennDex()
 {
     asm(
         "	push	{r4, r5, lr}\n"
@@ -1772,7 +1681,7 @@ void DebugMenu_HoennDex()
 }
 
 __attribute__((naked))
-void DebugMenu_CreatePKMN()
+u8 DebugMenu_CreatePKMN()
 {
     asm(
         "	push	{lr}\n"
@@ -1787,7 +1696,7 @@ void DebugMenu_CreatePKMN()
 }
 
 __attribute__((naked))
-void DebugMenu_ViewPokemonGraphics()
+u8 DebugMenu_ViewPokemonGraphics()
 {
     asm(
         "	push	{lr}\n"
@@ -1802,7 +1711,7 @@ void DebugMenu_ViewPokemonGraphics()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenSeeTrainers()
+u8 DebugMenu_OpenSeeTrainers()
 {
     asm(
         "	push	{lr}\n"
@@ -1817,7 +1726,7 @@ void DebugMenu_OpenSeeTrainers()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenMori()
+u8 DebugMenu_OpenMori()
 {
     asm(
         "	push	{lr}\n"
@@ -1831,7 +1740,7 @@ void DebugMenu_OpenMori()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenTomomichi()
+u8 DebugMenu_OpenTomomichi()
 {
     asm(
         "	push	{lr}\n"
@@ -1845,7 +1754,7 @@ void DebugMenu_OpenTomomichi()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenAoki()
+u8 DebugMenu_OpenAoki()
 {
     asm(
         "	push	{lr}\n"
@@ -1858,7 +1767,7 @@ void DebugMenu_OpenAoki()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenTaya()
+u8 DebugMenu_OpenTaya()
 {
     asm(
         "	push	{lr}\n"
@@ -1872,7 +1781,7 @@ void DebugMenu_OpenTaya()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenNakamura()
+u8 DebugMenu_OpenNakamura()
 {
     asm(
         "	push	{lr}\n"
@@ -1886,7 +1795,7 @@ void DebugMenu_OpenNakamura()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenIwasawa()
+u8 DebugMenu_OpenIwasawa()
 {
     asm(
         "	push	{lr}\n"
@@ -1900,7 +1809,7 @@ void DebugMenu_OpenIwasawa()
 }
 
 __attribute__((naked))
-void DebugMenu_Teleport()
+u8 DebugMenu_Teleport()
 {
     asm(
         "	push	{lr}\n"
@@ -1916,7 +1825,7 @@ void DebugMenu_Teleport()
 }
 
 __attribute__((naked))
-void DebugMenu_EditPKMN()
+u8 DebugMenu_EditPKMN()
 {
     asm(
         "	push	{lr}\n"
@@ -2023,7 +1932,7 @@ void DebugMenu_8077704()
 }
 
 __attribute__((naked))
-void DebugMenu_8077760()
+u8 DebugMenu_8077760()
 {
     asm(
         "	push	{r4, r5, lr}\n"
@@ -2139,7 +2048,7 @@ void DebugMenu_8077760()
 }
 
 __attribute__((naked))
-void DebugMenu_SwitchBG()
+u8 DebugMenu_SwitchBG()
 {
     asm(
         "	push	{lr}\n"
@@ -2257,7 +2166,7 @@ void DebugMenu_80778A8()
 }
 
 __attribute__((naked))
-void DebugMenu_ControlEncounter()
+u8 DebugMenu_ControlEncounter()
 {
     asm(
         "	push	{lr}\n"
@@ -2282,7 +2191,7 @@ void DebugMenu_ControlEncounter()
 }
 
 __attribute__((naked))
-void DebugMenu_UseHM()
+u8 DebugMenu_UseHM()
 {
     asm(
         "	ldr	r1, ._215\n"
@@ -2501,7 +2410,7 @@ void DebugMenu_8077A60()
 }
 
 __attribute__((naked))
-void DebugMenu_RematchTrainers()
+u8 DebugMenu_RematchTrainers()
 {
     asm(
         "	push	{lr}\n"
@@ -2664,7 +2573,7 @@ void DebugMenu_8077B3C()
 }
 
 __attribute__((naked))
-void DebugMenu_Safari()
+u8 DebugMenu_Safari()
 {
     asm(
         "	push	{lr}\n"
@@ -3202,7 +3111,7 @@ void DebugMenu_8077E40()
 }
 
 __attribute__((naked))
-void DebugMenu_MakeItems()
+u8 DebugMenu_MakeItems()
 {
     asm(
         "	push	{lr}\n"
@@ -3721,7 +3630,7 @@ void DebugMenu_80781A8()
 }
 
 __attribute__((naked))
-void DebugMenu_ViewPortraits()
+u8 DebugMenu_ViewPortraits()
 {
     asm(
         "	push	{lr}\n"
@@ -3754,7 +3663,7 @@ void DebugMenu_8078254()
 }
 
 __attribute__((naked))
-void DebugMenu_AllBadges()
+u8 DebugMenu_AllBadges()
 {
     asm(
         "	push	{lr}\n"
@@ -3794,7 +3703,7 @@ void DebugMenu_AllBadges()
 }
 
 __attribute__((naked))
-void DebugMenu_TimeRecords()
+u8 DebugMenu_TimeRecords()
 {
     asm(
         "	push	{lr}\n"
@@ -3815,7 +3724,7 @@ void DebugMenu_TimeRecords()
 }
 
 __attribute__((naked))
-void DebugMenu_SetTime()
+u8 DebugMenu_SetTime()
 {
     asm(
         "	push	{lr}\n"
@@ -3943,7 +3852,7 @@ void DebugMenu_8078310()
 }
 
 __attribute__((naked))
-void DebugMenu_MiragaIslandRND()
+u8 DebugMenu_MiragaIslandRND()
 {
     asm(
         "	push	{lr}\n"
@@ -4027,7 +3936,7 @@ void DebugMenu_80783C8()
 }
 
 __attribute__((naked))
-void DebugMenu_ToggleClearFlag()
+u8 DebugMenu_ToggleClearFlag()
 {
     asm(
         "	push	{lr}\n"
@@ -4106,7 +4015,7 @@ void DebugMenu_8078464()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenWeatherEvents()
+u8 DebugMenu_OpenWeatherEvents()
 {
     asm(
         "	push	{lr}\n"
@@ -4177,7 +4086,7 @@ void DebugMenu_80784E8()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenMysteryEvent()
+u8 DebugMenu_OpenMysteryEvent()
 {
     asm(
         "	push	{lr}\n"
@@ -4596,7 +4505,7 @@ void DebugMenu_80787B0()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenLegendsRecord()
+u8 DebugMenu_OpenLegendsRecord()
 {
     asm(
         "	push	{lr}\n"
@@ -4761,7 +4670,7 @@ void DebugMenu_8078880()
 }
 
 __attribute__((naked))
-void DebugMenu_CellInfo()
+u8 DebugMenu_CellInfo()
 {
     asm(
         "	push	{lr}\n"
@@ -4783,7 +4692,7 @@ void DebugMenu_CellInfo()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenBerryInfo()
+u8 DebugMenu_OpenBerryInfo()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -5135,7 +5044,7 @@ void DebugMenu_8078B38()
 }
 
 __attribute__((naked))
-void DebugMenu_BattleTowerStages()
+u8 DebugMenu_BattleTowerStages()
 {
     asm(
         "	push	{lr}\n"
@@ -5300,7 +5209,7 @@ void DebugMenu_8078BD4()
 }
 
 __attribute__((naked))
-void DebugMenu_CheckPKBLCK()
+u8 DebugMenu_CheckPKBLCK()
 {
     asm(
         "	push	{lr}\n"
@@ -5525,7 +5434,7 @@ void DebugMenu_8078DA4()
 }
 
 __attribute__((naked))
-void DebugMenu_MeTooBackupMan()
+u8 DebugMenu_MeTooBackupMan()
 {
     asm(
         "	push	{lr}\n"
@@ -5911,7 +5820,7 @@ void DebugMenu_8079020()
 }
 
 __attribute__((naked))
-void DebugMenu_PTime()
+u8 DebugMenu_PTime()
 {
     asm(
         "	push	{lr}\n"
@@ -6026,7 +5935,7 @@ void DebugMenu_8079058()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenMurakawa()
+u8 DebugMenu_OpenMurakawa()
 {
     asm(
         "	push	{lr}\n"
@@ -6120,7 +6029,7 @@ void DebugMenu_8079110()
 }
 
 __attribute__((naked))
-void DebugMenu_OpenKiwa()
+u8 DebugMenu_OpenKiwa()
 {
     asm(
         "	push	{lr}\n"

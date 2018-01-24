@@ -534,6 +534,8 @@ SECTIONS {
         src/engine/reset_rtc_screen.o(.rodata);
         src/field/party_menu.o(.rodata);
         src/field/start_menu.o(.rodata);
+        src/debug/start_menu_debug.o(.data);
+        src/debug/start_menu_debug.o(.rodata);
         data/start_menu_debug.o(.rodata);
         src/engine/menu.o(.rodata);
         src/engine/tileset_anim.o(.rodata);
