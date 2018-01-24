@@ -1,5 +1,11 @@
 #include "global.h"
 #include "constants/abilities.h"
+#include "constants/battle_move_effects.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 #include "battle.h"
 #include "battle_ai.h"
 #include "battle_interface.h"
@@ -7,6 +13,7 @@
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "data2.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "item.h"
@@ -25,9 +32,7 @@
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "constants/songs.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
@@ -37,10 +42,6 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "util.h"
-#include "constants/battle_move_effects.h"
-#include "constants/items.h"
-#include "constants/hold_effects.h"
-#include "constants/moves.h"
 #include "ewram.h"
 
 struct UnknownStruct7
@@ -1362,12 +1363,55 @@ void c2_081284E0(void)
 // A LOT of debug code!
 #if DEBUG
 
-extern u8 gBattleBuffersTransferData[];
-
 void debug_sub_8010818(void);
 void debug_sub_80108B8(void);
+void debug_sub_8010CAC(void);
+void debug_sub_801174C(void);
+void debug_sub_8011D40(void);
 void debug_sub_8011EA0(u8);
 void debug_sub_8012294(void);
+void debug_sub_80123D8(u8);
+void debug_sub_8012540(void);
+void debug_sub_80125A0(void);
+void debug_nullsub_3(void);
+
+struct UnknownStruct2023A76
+{
+	u16 unk0;
+	u16 unk2[(0x44-2)/2];
+	s16 unk44;
+	u16 unk46;
+	u16 unk48[1];
+};
+
+struct UnknownStruct2023B02
+{
+	u16 unk0[4][4];
+	u8 filler20[0x10];
+	u16 unk30[4][4];
+};
+
+struct UnknownStruct821F424
+{
+	u8 filler0[0x12];
+	u16 unk12[1][5];  // unknown length
+};
+
+extern struct UnknownStruct2023A76 gUnknown_Debug_2023A76;
+extern struct UnknownStruct2023B02 gUnknown_Debug_2023B02;
+extern u8 gUnknown_Debug_03004360;
+extern struct Window gUnknown_Debug_03004370;
+extern u8 gUnknown_Debug_030043A0;
+extern u8 gUnknown_Debug_030043A4;
+extern u8 gUnknown_Debug_030043A8;
+extern u8 gBattleBuffersTransferData[];
+
+extern const struct UnknownStruct821F424 gUnknown_Debug_821F424;
+extern const u16 gUnknown_Debug_821F56C[][5];
+
+extern const u8 gUnusedOldCharmap_Gfx_lz[];
+extern const u8 gUnusedOldCharmap_Tilemap_lz[];
+extern const u8 gUnusedOldCharmap_Pal_lz[];
 
 void debug_sub_8010800(void)
 {
@@ -1376,283 +1420,84 @@ void debug_sub_8010800(void)
     *(u32 *)(gBattleBuffersTransferData + 0x100) = 0;
 }
 
-__attribute__((naked))
-void debug_sub_8010818()
+
+void debug_sub_8010818(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	ldr	r1, ._501\n"
-        "	ldr	r0, ._501 + 4\n"
-        "	strh	r0, [r1]\n"
-        "	add	r2, r1, #0\n"
-        "	add	r2, r2, #0x46\n"
-        "	strh	r0, [r2]\n"
-        "	ldr	r0, ._501 + 8\n"
-        "	add	r4, r1, #0\n"
-        "	add	r4, r4, #0x48\n"
-        "	add	r3, r0, #0\n"
-        "	add	r3, r3, #0x12\n"
-        "	add	r2, r1, #2\n"
-        "	mov	r1, #0x1d\n"
-        "._498:\n"
-        "	ldrh	r0, [r3]\n"
-        "	strh	r0, [r2]\n"
-        "	strh	r0, [r4]\n"
-        "	add	r4, r4, #0x2\n"
-        "	add	r3, r3, #0xa\n"
-        "	add	r2, r2, #0x2\n"
-        "	sub	r1, r1, #0x1\n"
-        "	cmp	r1, #0\n"
-        "	bge	._498	@cond_branch\n"
-        "	mov	r1, #0x0\n"
-        "	ldr	r4, ._501 + 12\n"
-        "	ldr	r7, ._501 + 16\n"
-        "	ldr	r6, ._501 + 20\n"
-        "	mov	r0, #0x30\n"
-        "	add	r0, r0, r7\n"
-        "	mov	ip, r0\n"
-        "._500:\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r4]\n"
-        "	add	r5, r1, #1\n"
-        "	lsl	r3, r1, #0x3\n"
-        "._499:\n"
-        "	ldrb	r2, [r4]\n"
-        "	lsl	r1, r2, #0x1\n"
-        "	add	r1, r1, r3\n"
-        "	add	r1, r1, r7\n"
-        "	lsl	r0, r2, #0x2\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r0, r6\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	ldrb	r2, [r4]\n"
-        "	lsl	r1, r2, #0x1\n"
-        "	add	r1, r1, r3\n"
-        "	add r1, r1, ip\n"
-        "	lsl	r0, r2, #0x2\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r0, r6\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	ldrb	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r4]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x3\n"
-        "	bls	._499	@cond_branch\n"
-        "	add	r1, r5, #0\n"
-        "	cmp	r1, #0x5\n"
-        "	ble	._500	@cond_branch\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._502:\n"
-        "	.align	2, 0\n"
-        "._501:\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	0x115\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "	.word	gUnknown_Debug_030043A8\n"
-        "	.word	gUnknown_Debug_2023B02\n"
-        "	.word	gUnknown_Debug_821F56C\n"
-        "\n"
-    );
+	s32 i;
+
+	gUnknown_Debug_2023A76.unk0 = 0x115;
+	gUnknown_Debug_2023A76.unk46 = 0x115;
+	for (i = 0; i < 30; i++)
+	{
+		gUnknown_Debug_2023A76.unk2[i] = gUnknown_Debug_821F424.unk12[i][0];
+		gUnknown_Debug_2023A76.unk48[i] = gUnknown_Debug_821F424.unk12[i][0];
+	}
+
+	for (i = 0; i < 6; i++)
+	{
+		for (gUnknown_Debug_030043A8 = 0; gUnknown_Debug_030043A8 < 4; gUnknown_Debug_030043A8++)
+		{
+			gUnknown_Debug_2023B02.unk0[i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
+			gUnknown_Debug_2023B02.unk30[i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
+		}
+	}
 }
 
-__attribute__((naked))
-void debug_sub_80108B8()
+void debug_sub_80108B8(void)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	bl	m4aSoundVSyncOff\n"
-        "	mov	r0, #0x0\n"
-        "	bl	SetHBlankCallback\n"
-        "	mov	r0, #0x0\n"
-        "	bl	SetVBlankCallback\n"
-        "	mov	r3, #0x0\n"
-        "	str	r3, [sp]\n"
-        "	ldr	r2, ._507\n"
-        "	mov	r0, sp\n"
-        "	str	r0, [r2]\n"
-        "	mov	r1, #0xc0\n"
-        "	lsl	r1, r1, #0x13\n"
-        "	str	r1, [r2, #0x4]\n"
-        "	ldr	r0, ._507 + 4\n"
-        "	str	r0, [r2, #0x8]\n"
-        "	ldr	r0, [r2, #0x8]\n"
-        "	ldr	r2, ._507 + 8\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r2]\n"
-        "	mov	r2, #0x80\n"
-        "	lsl	r2, r2, #0x13\n"
-        "	mov	r4, #0x9a\n"
-        "	lsl	r4, r4, #0x5\n"
-        "	add	r0, r4, #0\n"
-        "	strh	r0, [r2]\n"
-        "	ldr	r0, ._507 + 12\n"
-        "	mov	r5, #0x0\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 16\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 20\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 24\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 28\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 32\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 36\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 40\n"
-        "	strh	r3, [r0]\n"
-        "	add	r2, r2, #0x8\n"
-        "	ldr	r4, ._507 + 44\n"
-        "	add	r0, r4, #0\n"
-        "	strh	r0, [r2]\n"
-        "	add	r2, r2, #0x2\n"
-        "	ldr	r4, ._507 + 48\n"
-        "	add	r0, r4, #0\n"
-        "	strh	r0, [r2]\n"
-        "	ldr	r0, ._507 + 52\n"
-        "	strh	r3, [r0]\n"
-        "	add	r0, r0, #0x4\n"
-        "	strh	r3, [r0]\n"
-        "	ldr	r0, ._507 + 56\n"
-        "	bl	LZDecompressVram\n"
-        "	ldr	r0, ._507 + 60\n"
-        "	ldr	r1, ._507 + 64\n"
-        "	bl	LZDecompressWram\n"
-        "	ldr	r4, ._507 + 68\n"
-        "	mov	r1, #0xa0\n"
-        "	lsl	r1, r1, #0x13\n"
-        "	add	r0, r4, #0\n"
-        "	bl	LZDecompressVram\n"
-        "	ldr	r1, ._507 + 72\n"
-        "	add	r0, r4, #0\n"
-        "	bl	LZDecompressVram\n"
-        "	bl	m4aSoundVSyncOn\n"
-        "	ldr	r0, ._507 + 76\n"
-        "	bl	SetVBlankCallback\n"
-        "	ldr	r0, ._507 + 80\n"
-        "	bl	SetMainCallback2\n"
-        "	bl	ResetTasks\n"
-        "	bl	ResetSpriteData\n"
-        "	bl	ScanlineEffect_Stop\n"
-        "	ldr	r4, ._507 + 84\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_LoadWindowTemplate\n"
-        "	ldr	r0, ._507 + 88\n"
-        "	add	r1, r4, #0\n"
-        "	bl	Text_InitWindowWithTemplate\n"
-        "	ldr	r0, ._507 + 92\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r0, ._507 + 96\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r0, ._507 + 100\n"
-        "	strb	r5, [r0]\n"
-        "	mov	r4, #0x0\n"
-        "._503:\n"
-        "	lsl	r0, r4, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	debug_sub_8011EA0\n"
-        "	add	r4, r4, #0x1\n"
-        "	cmp	r4, #0x1e\n"
-        "	ble	._503	@cond_branch\n"
-        "	ldr	r1, ._507 + 104\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	add	r4, r1, #0\n"
-        "._504:\n"
-        "	bl	debug_sub_8012294\n"
-        "	ldrb	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r4]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x3\n"
-        "	bls	._504	@cond_branch\n"
-        "	ldr	r0, ._507 + 100\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	debug_sub_80123D8\n"
-        "	bl	debug_sub_8012540\n"
-        "	bl	debug_nullsub_3\n"
-        "	ldr	r1, ._507 + 104\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	bl	debug_sub_80125A0\n"
-        "	ldr	r0, ._507 + 108\n"
-        "	add	r0, r0, #0x44\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	cmp	r0, #0x8\n"
-        "	bne	._505	@cond_branch\n"
-        "	bl	debug_sub_801174C\n"
-        "	b	._506\n"
-        "._508:\n"
-        "	.align	2, 0\n"
-        "._507:\n"
-        "	.word	0x40000d4\n"
-        "	.word	0x85006000\n"
-        "	.word	0x4000200\n"
-        "	.word	gBattle_BG0_X\n"
-        "	.word	gBattle_BG0_Y\n"
-        "	.word	gBattle_BG1_X\n"
-        "	.word	gBattle_BG1_Y\n"
-        "	.word	gBattle_BG2_X\n"
-        "	.word	gBattle_BG2_Y\n"
-        "	.word	gBattle_BG3_X\n"
-        "	.word	gBattle_BG3_Y\n"
-        "	.word	0x1f09\n"
-        "	.word	0x4801\n"
-        "	.word	0x4000050\n"
-        "	.word	gMonShinyPalette_CircledQuestionMark+0x18\n"
-        "	.word	gMonShinyPalette_CircledQuestionMark+0x834\n"
-        "	.word	gSharedMem\n"
-        "	.word	gMonShinyPalette_CircledQuestionMark+0xa8c\n"
-        "	.word	0x50001e0\n"
-        "	.word	debug_sub_8011D40+1\n"
-        "	.word	debug_sub_8010CAC+1\n"
-        "	.word	gWindowTemplate_81E6C3C\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gUnknown_Debug_030043A0\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_030043A8\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "._505:\n"
-        "	ldr	r0, ._510\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r4, #0x7\n"
-        "	ldr	r2, ._510 + 4\n"
-        "	add	r0, r0, r2\n"
-        "._509:\n"
-        "	strb	r1, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	sub	r4, r4, #0x1\n"
-        "	cmp	r4, #0\n"
-        "	bge	._509	@cond_branch\n"
-        "._506:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._511:\n"
-        "	.align	2, 0\n"
-        "._510:\n"
-        "	.word	gSharedMem\n"
-        "	.word	0x160bb\n"
-        "\n"
-    );
+	s32 i;
+
+	m4aSoundVSyncOff();
+	SetHBlankCallback(NULL);
+	SetVBlankCallback(NULL);
+	DmaFill32(3, 0, (void *)VRAM, VRAM_SIZE);
+	REG_IE = 1;
+	REG_DISPCNT = 0x1340;
+	gBattle_BG0_X = 0;
+	gBattle_BG0_Y = 0;
+	gBattle_BG1_X = 0;
+	gBattle_BG1_Y = 0;
+	gBattle_BG2_X = 0;
+	gBattle_BG2_Y = 0;
+	gBattle_BG3_X = 0;
+	gBattle_BG3_Y = 0;
+	REG_BG0CNT = 0x1F09;
+	REG_BG1CNT = 0x4801;
+	REG_BLDCNT = 0;
+	REG_BLDY = 0;
+	LZDecompressVram(gUnusedOldCharmap_Gfx_lz, (void *)VRAM);
+	LZDecompressWram(gUnusedOldCharmap_Tilemap_lz, gSharedMem);
+	LZDecompressVram(gUnusedOldCharmap_Pal_lz, (void *)PLTT);
+	LZDecompressVram(gUnusedOldCharmap_Pal_lz, (void *)(PLTT + 0x1E0));
+	m4aSoundVSyncOn();
+	SetVBlankCallback(debug_sub_8011D40);
+	SetMainCallback2(debug_sub_8010CAC);
+	ResetTasks();
+	ResetSpriteData();
+	ScanlineEffect_Stop();
+	Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+	Text_InitWindowWithTemplate(&gUnknown_Debug_03004370, &gWindowTemplate_81E6C3C);
+	gUnknown_Debug_03004360 = 0;
+	gUnknown_Debug_030043A0 = 0;
+	gUnknown_Debug_030043A4 = 0;
+	for (i = 0; i < 31; i++)
+		debug_sub_8011EA0(i);
+	for (gUnknown_Debug_030043A8 = 0; gUnknown_Debug_030043A8 < 4; gUnknown_Debug_030043A8++)
+		debug_sub_8012294();
+	debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+	debug_sub_8012540();
+	debug_nullsub_3();
+	gUnknown_Debug_030043A8 = 0;
+	debug_sub_80125A0();
+	if (gUnknown_Debug_2023A76.unk44 == 8)
+	{
+		debug_sub_801174C();
+	}
+	else
+	{
+		for (i = 0; i < 8; i++)
+			gSharedMem[0x160B4 + i] = 0;
+	}
 }
 
 __attribute__((naked))
@@ -4128,19 +3973,19 @@ void debug_nullsub_45()
 void debug_sub_8011DD4(void)
 {
     REG_BG0CNT = 0x9803;
-    
+
     REG_BG0HOFS = gBattle_BG0_X;
     REG_BG0VOFS = gBattle_BG0_Y;
-    
+
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
-    
+
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    
+
     REG_BG3HOFS = gBattle_BG3_X;
     REG_BG3VOFS = gBattle_BG3_Y;
-    
+
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -4150,7 +3995,7 @@ void debug_sub_8011DD4(void)
 void debug_sub_8011E5C(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 31; i++)
         debug_sub_8011EA0(i);
 }
@@ -4160,7 +4005,7 @@ extern u8 gUnknown_Debug_030043A8;
 void debug_sub_8011E74(void)
 {
     u8 r5 = gUnknown_Debug_030043A8;
-    
+
     for (gUnknown_Debug_030043A8 = 0; gUnknown_Debug_030043A8 < 4; gUnknown_Debug_030043A8++)
         debug_sub_8012294();
 
@@ -4777,7 +4622,7 @@ void debug_sub_8012294()
 }
 
 __attribute__((naked))
-void debug_sub_80123D8()
+void debug_sub_80123D8(u8 a)
 {
     asm(
         "	push	{r4, r5, r6, r7, lr}\n"
