@@ -242,57 +242,21 @@ static const u8 gUnknown_083ECE3A[];
 static const u16 gUnknown_083ECE42[];
 static const u16 gUnknown_083ECE48[];
 
+void PlaySlotMachine(u8 arg0, MainCallback cb)
+{
 #if DEBUG
-__attribute__((naked))
-void PlaySlotMachine(u8 arg0, MainCallback cb)
-{
-    asm("\
- 	push	{lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r3, ._1\n\
-	mov	r2, #0x0\n\
-	strb	r2, [r3]\n\
-	bl	PlaySlotMachine_Internal\n\
-	ldr	r0, ._1 + 4\n\
-	bl	SetMainCallback2\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._2:\n\
-	.align	2, 0\n\
-._1:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	CB2_SlotMachineSetup+1");
-}
-#else
-void PlaySlotMachine(u8 arg0, MainCallback cb)
-{
+    unk_debug_bss_1_1 = 0;
+#endif
     PlaySlotMachine_Internal(arg0, cb);
     SetMainCallback2(CB2_SlotMachineSetup);
 }
-#endif
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_811609C()
+void debug_sub_811609C(u8 a, void (*func)(void))
 {
-    asm("\
-	push	{lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r3, ._3\n\
-	mov	r2, #0x1\n\
-	strb	r2, [r3]\n\
-	bl	PlaySlotMachine_Internal\n\
-	ldr	r0, ._3 + 4\n\
-	bl	SetMainCallback2\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._4:\n\
-	.align	2, 0\n\
-._3:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	CB2_SlotMachineSetup+1");
+    unk_debug_bss_1_1 = 1;
+    PlaySlotMachine_Internal(a, func);
+    SetMainCallback2(CB2_SlotMachineSetup);
 }
 #endif
 
