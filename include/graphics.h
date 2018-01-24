@@ -3337,4 +3337,7 @@ extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_17;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_20;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_21;
 
+extern const u8 gContestConfetti_Gfx[];
+extern const u8 gContestConfetti_Pal[];
+
 #endif  // GUARD_GRAPHICS_H

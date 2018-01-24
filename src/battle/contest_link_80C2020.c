@@ -1,5 +1,6 @@
 #include "global.h"
 #include "data2.h"
+#include "util.h"
 #include "constants/songs.h"
 #include "ewram.h"
 #include "main.h"
@@ -84,14 +85,72 @@ void sub_80C3B30(u8 taskId);
 void sub_80C3C44(struct Sprite *sprite);
 void sub_80C3CB8(struct Sprite *sprite);
 void sub_80C3D04(u8 taskId);
+void sub_80C3DF0(struct Sprite *sprite);
 void sub_80C3E60(u8 a0, u8 a1);
 void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
 
-extern const struct CompressedSpriteSheet gUnknown_083D17CC;
-extern const struct CompressedSpritePalette gUnknown_083D17D4;
-extern const u8 gUnknown_083D17DC[];
-extern const u8 gUnknown_083D17E0[];
+const u16 gUnknown_083D1624[] = INCBIN_U16("graphics/unknown/unknown_3D1624/0.4bpp");
+const u16 gUnknown_083D1644[] = INCBIN_U16("graphics/unknown/unknown_3D1624/1.4bpp");
+const u16 gUnknown_083D1664[] = INCBIN_U16("graphics/unknown/unknown_3D1624/2.4bpp");
+const u16 gUnknown_083D1684[] = INCBIN_U16("graphics/unknown/unknown_3D1624/3.4bpp");
+const u16 gUnknown_083D16A4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/4.4bpp");
+const u16 gUnknown_083D16C4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/5.4bpp");
+const u16 gUnknown_083D16E4[] = INCBIN_U16("graphics/unknown/unknown_3D1624/6.4bpp");
+const u16 gUnknown_083D1704[] = INCBIN_U16("graphics/unknown/unknown_3D1624/7.4bpp");
+const u16 gMiscBlank_Pal[] = INCBIN_U16("graphics/interface/blank.gbapal");
+
+const struct OamData gOamData_83D1744 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 3,
+    .priority = 3,
+    .paletteNum = 2
+};
+
+const struct SpriteTemplate gSpriteTemplate_83D174C = {
+    0xbc1,
+    0xbc1,
+    &gOamData_83D1744,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct SpriteSheet gUnknown_083D1764[] = {
+    {gMiscBlank_Gfx, 0x400, 0xbc1},
+    {gMiscBlank_Gfx, 0x400, 0xbc2},
+    {gMiscBlank_Gfx, 0x400, 0xbc3},
+    {gMiscBlank_Gfx, 0x400, 0xbc4},
+    {gMiscBlank_Gfx, 0x400, 0xbc5},
+    {gMiscBlank_Gfx, 0x400, 0xbc6},
+    {gMiscBlank_Gfx, 0x400, 0xbc7},
+    {gMiscBlank_Gfx, 0x400, 0xbc8},
+};
+
+const struct SpritePalette gUnknown_083D17A4 = {
+    gMiscBlank_Pal, 0xbc1
+};
+
+const struct OamData gOamData_83D17AC = {};
+
+const struct SpriteTemplate gSpriteTemplate_83D17B4 = {
+    0xbc9,
+    0xbc9,
+    &gOamData_83D17AC,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_80C3DF0
+};
+
+const struct CompressedSpriteSheet gUnknown_083D17CC = {gContestConfetti_Gfx, 0x220, 0xbc9};
+
+const struct CompressedSpritePalette gUnknown_083D17D4 = {gContestConfetti_Pal, 0xbc9};
+
+const u8 gUnknown_083D17DC[] = _("{COLOR RED}");
+const u8 gUnknown_083D17E0[] = _("/");
+const u8 gUnknown_083D17E2[] = _("{SIZE 3}{COLOR_HIGHLIGHT_SHADOW WHITE2 DARK_GREY LIGHT_BLUE}");
 
 void sub_80C2020(void)
 {
