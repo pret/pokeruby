@@ -14,13 +14,21 @@
 #include "battle.h"
 #include "contest.h"
 #include "link.h"
+#include "contest_link_80C857C.h"
+#include "contest_link_80C2020.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 
 struct UnkEwramStruct18000 {
-    u8 filler_00[2];
+    u8 unk_00;
+    u8 filler_01[1];
     u8 unk_02;
-    u8 filler_03[0x15];
+    u8 filler_03[1];
+    u8 unk_04;
+    u8 filler_05[5];
+    u8 unk_0a;
+    u8 filler_0b[9];
+    u8 unk_14;
 };
 
 struct UnkEwramStruct18018 {
@@ -34,8 +42,19 @@ void sub_80C2430(void);
 void sub_80C2448(void);
 void sub_80C24F4(u8 taskId);
 void sub_80C255C(u8 taskId);
+void sub_80C25A4(u8 taskId);
+void sub_80C25C0(u8 taskId);
 void sub_80C2600(u8 taskId);
+void sub_80C26E4(u8 taskId);
+void sub_80C2770(u8 taskId);
+void sub_80C27EC(u8 taskId);
 void sub_80C2F28(u8 taskId);
+void sub_80C2F64(u8 taskId);
+void sub_80C3158(const u8 *string, u8 spriteId);
+u16 sub_80C34AC(const u8 *string);
+void sub_80C34CC(s16 data4, s16 pos0y, u16 data5, s16 data6);
+void sub_80C3520(u16 a0);
+void sub_80C3764(void);
 void sub_80C37E4(void);
 void sub_80C310C(void);
 void sub_80C30D4(u8 a0, u8 a1);
@@ -44,6 +63,7 @@ void sub_80C3698(const u8 *string);
 void sub_80C3F00(void);
 u8 sub_80C3990(u8 a0, u8 a1);
 s8 sub_80C39E4(u8 a0, u8 a1);
+void sub_80C40D4(u8 a0, u8 a1);
 
 extern const u8 gUnknown_083D17DC[];
 extern const u8 gUnknown_083D17E0[];
@@ -233,5 +253,120 @@ void sub_80C24F4(u8 taskId)
         {
             gTasks[taskId].func = sub_80C2600;
         }
+    }
+}
+
+void sub_80C255C(u8 taskId)
+{
+    if (gReceivedRemoteLinkPlayers && GetLinkPlayerCount() == MAX_LINK_PLAYERS)
+    {
+        CreateTask(sub_80C25A4, 0);
+        gTasks[taskId].func = TaskDummy;
+    }
+}
+
+void sub_80C25A4(u8 taskId)
+{
+    SetTaskFuncWithFollowupFunc(taskId, sub_80C89DC, sub_80C25C0);
+}
+
+void sub_80C25C0(u8 taskId)
+{
+    if (sub_8007ECC())
+    {
+        DestroyTask(taskId);
+        gTasks[eContestLink80C2020Struct2018000.unk_02].func = sub_80C2600;
+        sub_80C3764();
+    }
+}
+
+void sub_80C2600(u8 taskId)
+{
+    if (gTasks[taskId].data[0] == 0)
+    {
+        CreateTask(sub_80C2F64, 20);
+        sub_80C3158(gContestText_AnnounceResults, eContestLink80C2020Struct2018000.unk_00);
+        sub_80C34CC(sub_80C34AC(gContestText_AnnounceResults), 0x90, 0x78, 0x440);
+        gTasks[taskId].data[0]++;
+    }
+    else if (gTasks[taskId].data[0] == 1)
+    {
+        if (eContestLink80C2020Struct2018000.unk_04 == 0)
+        {
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[0]++;
+        }
+    }
+    else if (gTasks[taskId].data[0] == 2)
+    {
+        if (++gTasks[taskId].data[1] == 0x15)
+        {
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[0]++;
+        }
+    }
+    else if (gTasks[taskId].data[0] == 3)
+    {
+        sub_80C3158(gContestText_PreliminaryResults, eContestLink80C2020Struct2018000.unk_00);
+        sub_80C34CC(sub_80C34AC(gContestText_PreliminaryResults), 0x90, 0xffff, 0x440);
+        gTasks[taskId].data[0]++;
+    }
+    else if (gTasks[taskId].data[0] == 4)
+    {
+        if (eContestLink80C2020Struct2018000.unk_04 == 2)
+        {
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = sub_80C26E4;
+        }
+    }
+}
+
+void sub_80C26E4(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (eContestLink80C2020Struct2018000.unk_0a == 0)
+            {
+                sub_80C40D4(0, gTasks[taskId].data[2]++);
+                if (eContestLink80C2020Struct2018000.unk_14 == 0)
+                {
+                    gTasks[taskId].data[0] = 2;
+                }
+                else
+                {
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 1:
+            if (eContestLink80C2020Struct2018000.unk_14 == 0)
+            {
+                gTasks[taskId].data[0] = 0;
+            }
+            break;
+        case 2:
+            sub_80C3520(0x440);
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].func = sub_80C2770;
+            break;
+    }
+}
+
+void sub_80C2770(u8 taskId)
+{
+    if (eContestLink80C2020Struct2018000.unk_04 == 0)
+    {
+        if (++gTasks[taskId].data[1] == 21)
+        {
+            gTasks[taskId].data[1] = 0;
+            sub_80C3158(gContestText_Round2Results, eContestLink80C2020Struct2018000.unk_00);
+            sub_80C34CC(sub_80C34AC(gContestText_Round2Results), 0x90, 0xffff, 0x440);
+        }
+    }
+    else if (eContestLink80C2020Struct2018000.unk_04 == 2)
+    {
+        gTasks[taskId].func = sub_80C27EC;
     }
 }
