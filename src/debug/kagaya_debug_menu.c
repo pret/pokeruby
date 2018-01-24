@@ -168,7 +168,7 @@ u8 debug_sub_80B07DC(void)
 u8 debug_sub_80B0800(void)
 {
     u8 r2;
-    
+
     CloseMenu();
     r2 = sub_8068F18();
     if (r2 != 0)
