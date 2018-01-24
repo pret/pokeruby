@@ -1,4 +1,5 @@
 #include "global.h"
+#include "data2.h"
 #include "constants/songs.h"
 #include "ewram.h"
 #include "main.h"
@@ -14,10 +15,19 @@
 #include "battle.h"
 #include "contest.h"
 #include "link.h"
+#include "field_effect.h"
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
+
+#define GET_CONTEST_WINNER(var) {           \
+    for ((var) = 0; (var) < 4; (var)++)     \
+    {                                       \
+        if (gContestFinalStandings[i] == 0) \
+            break;                          \
+    }                                       \
+}
 
 struct UnkEwramStruct18000 {
     u8 unk_00;
@@ -25,7 +35,11 @@ struct UnkEwramStruct18000 {
     u8 unk_02;
     u8 filler_03[1];
     u8 unk_04;
-    u8 filler_05[5];
+    u8 unk_05;
+    u8 unk_06;
+    u8 filler_07[1];
+    u8 unk_08;
+    u8 unk_09;
     u8 unk_0a;
     u8 filler_0b[9];
     u8 unk_14;
@@ -48,23 +62,34 @@ void sub_80C2600(u8 taskId);
 void sub_80C26E4(u8 taskId);
 void sub_80C2770(u8 taskId);
 void sub_80C27EC(u8 taskId);
+void sub_80C2878(u8 taskId);
+void sub_80C2A8C(u8 taskId);
+void sub_80C2D1C(u8 taskId);
 void sub_80C2F28(u8 taskId);
 void sub_80C2F64(u8 taskId);
+void sub_80C30D4(u8 a0, u8 a1);
+void sub_80C310C(void);
 void sub_80C3158(const u8 *string, u8 spriteId);
+void sub_80C33DC(void);
 u16 sub_80C34AC(const u8 *string);
 void sub_80C34CC(s16 data4, s16 pos0y, u16 data5, s16 data6);
 void sub_80C3520(u16 a0);
+void sub_80C3698(const u8 *string);
 void sub_80C3764(void);
 void sub_80C37E4(void);
-void sub_80C310C(void);
-void sub_80C30D4(u8 a0, u8 a1);
-void sub_80C33DC(void);
-void sub_80C3698(const u8 *string);
-void sub_80C3F00(void);
 u8 sub_80C3990(u8 a0, u8 a1);
 s8 sub_80C39E4(u8 a0, u8 a1);
+void sub_80C3A5C(u8 taskId);
+void sub_80C3B30(u8 taskId);
+void sub_80C3C44(struct Sprite *sprite);
+void sub_80C3CB8(struct Sprite *sprite);
+void sub_80C3D04(u8 taskId);
+void sub_80C3E60(u8 a0, u8 a1);
+void sub_80C3F00(void);
 void sub_80C40D4(u8 a0, u8 a1);
 
+extern const struct CompressedSpriteSheet gUnknown_083D17CC;
+extern const struct CompressedSpritePalette gUnknown_083D17D4;
 extern const u8 gUnknown_083D17DC[];
 extern const u8 gUnknown_083D17E0[];
 
@@ -368,5 +393,193 @@ void sub_80C2770(u8 taskId)
     else if (eContestLink80C2020Struct2018000.unk_04 == 2)
     {
         gTasks[taskId].func = sub_80C27EC;
+    }
+}
+
+void sub_80C27EC(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (eContestLink80C2020Struct2018000.unk_0a == 0)
+            {
+                sub_80C40D4(1, gTasks[taskId].data[2]++);
+                if (eContestLink80C2020Struct2018000.unk_14 == 0)
+                {
+                    gTasks[taskId].data[0] = 2;
+                }
+                else
+                {
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 1:
+            if (eContestLink80C2020Struct2018000.unk_14 == 0)
+            {
+                gTasks[taskId].data[0] = 0;
+            }
+            break;
+        case 2:
+            sub_80C3520(0x440);
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = sub_80C2878;
+            break;
+    }
+}
+
+void sub_80C2878(u8 taskId)
+{
+    int i;
+    u8 taskId2;
+    u8 strbuf[100];
+
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            if (eContestLink80C2020Struct2018000.unk_04 == 0)
+                gTasks[taskId].data[0]++;
+            break;
+        case 1:
+            if (++gTasks[taskId].data[1] == 31)
+            {
+                gTasks[taskId].data[1] = 0;
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 2:
+            for (i = 0; i < 4; i++)
+            {
+                taskId2 = CreateTask(sub_80C3A5C, 10);
+                gTasks[taskId2].data[0] = gContestFinalStandings[i];
+                gTasks[taskId2].data[1] = i;
+            }
+            gTasks[taskId].data[0]++;
+            break;
+        case 3:
+            if (eContestLink80C2020Struct2018000.unk_05 == 4)
+            {
+                if (++gTasks[taskId].data[1] == 31)
+                {
+                    gTasks[taskId].data[1] = 0;
+                    CreateTask(sub_80C3B30, 10);
+                    gTasks[taskId].data[0]++;
+                    GET_CONTEST_WINNER(i);
+                    sub_80C3E60(i, 14);
+                }
+            }
+            break;
+        case 4:
+            if (++gTasks[taskId].data[1] == 21)
+            {
+                gTasks[taskId].data[1] = 0;
+                GET_CONTEST_WINNER(i);
+                if (gIsLinkContest & 1)
+                {
+                    StringCopy(gStringVar1, gLinkPlayers[i].name);
+                }
+                else
+                {
+                    StringCopy(gStringVar1, gContestMons[i].trainerName);
+                }
+                StringCopy(gStringVar2, gContestMons[i].nickname);
+                StringExpandPlaceholders(strbuf, gContestText_PokeWon);
+                sub_80C3158(strbuf, eContestLink80C2020Struct2018000.unk_00);
+                sub_80C34CC(sub_80C34AC(strbuf), 0x90, 0xffff, 0x440);
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 5:
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].func = sub_80C2A8C;
+            break;
+    }
+}
+
+void sub_80C2A8C(u8 taskId)
+{
+    int i;
+    u8 spriteId;
+    u16 species;
+    u32 personality;
+    u32 otId;
+    const struct CompressedSpritePalette *monPal;
+
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            gBattle_WIN0H = 0xf0;
+            gBattle_WIN0V = 0x5050;
+            GET_CONTEST_WINNER(i);
+            species = gContestMons[i].species;
+            personality = gContestMons[i].personality;
+            otId = gContestMons[i].otId;
+            HandleLoadSpecialPokePic(gMonFrontPicTable + species, gMonFrontPicCoords[species].coords, gMonFrontPicCoords[species].y_offset, (intptr_t)gSharedMem, gUnknown_081FAF4C[1], species, personality);
+            monPal = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
+            LoadCompressedObjectPalette(monPal);
+            GetMonSpriteTemplate_803C56C(species, 1);
+            gUnknown_02024E8C.paletteTag = monPal->tag;
+            spriteId = CreateSprite(&gUnknown_02024E8C, 0x110, 0x50, 10);
+            gSprites[spriteId].data[1] = species;
+            gSprites[spriteId].oam.priority = 0;
+            gSprites[spriteId].callback = sub_80C3C44;
+            eContestLink80C2020Struct2018000.unk_08 = spriteId;
+            LoadCompressedObjectPic(&gUnknown_083D17CC);
+            LoadCompressedObjectPalette(&gUnknown_083D17D4);
+            CreateTask(sub_80C3D04, 10);
+            gTasks[taskId].data[0]++;
+            break;
+        case 1:
+            if (++gTasks[taskId].data[3] == 1)
+            {
+                u8 win0v;
+                gTasks[taskId].data[3] = 0;
+                gTasks[taskId].data[2] += 2;
+                if (gTasks[taskId].data[2] > 0x20)
+                    gTasks[taskId].data[2] = 0x20;
+                win0v = gTasks[taskId].data[2];
+                gBattle_WIN0V = ((0x50 - win0v) << 8) | (0x50 + win0v);
+                if (win0v == 0x20)
+                {
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 2:
+            if (eContestLink80C2020Struct2018000.unk_06 == 1)
+            {
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 3:
+            if (++gTasks[taskId].data[1] == 121)
+            {
+                gTasks[taskId].data[1] = 0;
+                gSprites[eContestLink80C2020Struct2018000.unk_08].callback = sub_80C3CB8;
+                gTasks[taskId].data[0]++;
+            }
+            break;
+        case 4:
+            if (eContestLink80C2020Struct2018000.unk_06 == 2)
+            {
+                u8 win0v = (gBattle_WIN0V >> 8);
+                win0v += 2;
+                if (win0v > 0x50)
+                    win0v = 0x50;
+                gBattle_WIN0V = (win0v << 8) | (0xa0 - win0v);
+                if (win0v == 0x50)
+                {
+                    gTasks[taskId].data[0]++;
+                }
+            }
+            break;
+        case 5:
+            if (eContestLink80C2020Struct2018000.unk_06 == 2)
+            {
+                eContestLink80C2020Struct2018000.unk_09 = 1;
+                gTasks[taskId].data[0] = 0;
+                gTasks[taskId].func = sub_80C2D1C;
+            }
+            break;
     }
 }
