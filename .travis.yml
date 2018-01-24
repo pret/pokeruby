@@ -31,7 +31,6 @@ matrix:
         - make -j2 sapphire
         - make -j2 sapphire_rev1
         - make -j2 sapphire_rev2
-        - make -j2 ruby_debug_de COMPARE=0
     - os: linux
       env: _="Formatting"
       addons:
@@ -56,5 +55,6 @@ matrix:
         - ./build_tools.sh
         - make -j2 ruby_de
         - make -j2 sapphire_de
+        - make -j2 ruby_de_debug
   allow_failures:
     - env: _="Formatting"
