@@ -1,6 +1,7 @@
 #include "global.h"
 #include "tv.h"
 #include "battle_tower.h"
+#include "contest.h"
 #include "contest_painting.h"
 #include "data2.h"
 #include "easy_chat.h"
@@ -69,7 +70,6 @@ struct UnkTvStruct gUnknown_03005D38;
 extern u16 gSpecialVar_LastTalked;
 
 extern u8 gSpecialVar_ContestCategory;
-extern u8 gSpecialVar_ContestRank;
 extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
@@ -443,12 +443,6 @@ void ClearTVShowData(void)
     sub_80BEBF4();
 }
 
-bool8 sub_80BF1B4(u8);
-void sub_80BF20C(void);
-extern u8 gSpecialVar_ContestCategory;
-extern u8 gSpecialVar_ContestRank;
-extern u8 gUnknown_03004316[11];
-extern u8 gBattleOutcome;
 
 void InterviewBefore_FanClubLetter(void);
 void InterviewBefore_RecentHappenings(void);
@@ -458,21 +452,9 @@ void InterviewBefore_NameRater(void);
 void InterviewBefore_BravoTrainerPkmnProfile(void);
 void InterviewBefore_BravoTrainerBTProfile(void);
 
-void sub_80BE028(void);
-void sub_80BE074(void);
-void sub_80BE778(void);
-void sub_80BEB20(void);
 
 u8 GetTVChannelByShowType(u8);
 
-s8 sub_80BF74C(TVShow tvShow[]);
-
-void sub_80BF55C(TVShow tvShow[], u8 showidx);
-void sub_80BEA88(void);
-
-void sub_80BE138(TVShow *show);
-void sub_80BE160(TVShow *show);
-extern u16 gLastUsedItem;
 
 void InterviewAfter_FanClubLetter(void);
 void InterviewAfter_RecentHappenings(void);
@@ -982,16 +964,16 @@ void sub_80BE23C(u16 a0)
     }
 }
 
-void sub_80BE284(u8 a0)
+void sub_80BE284(u8 contestResult)
 {
     struct TVShowBravoTrainerPokemonProfiles *bravoTrainer = &gSaveBlock1.tvShows[24].bravoTrainer;
 
     gUnknown_03005D38.var0 = sub_80BF720(gSaveBlock1.tvShows);
     if (gUnknown_03005D38.var0 != -1)
     {
-        bravoTrainer->contestResult = a0;
+        bravoTrainer->contestResult = contestResult;
         bravoTrainer->contestCategory = gSpecialVar_ContestCategory;
-        bravoTrainer->contestRank = gSpecialVar_ContestRank;
+        bravoTrainer->contestRank = (u8)gSpecialVar_ContestRank;
         bravoTrainer->species = GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_SPECIES, NULL);
         GetMonData(&gPlayerParty[gUnknown_02038694], MON_DATA_NICKNAME, bravoTrainer->pokemonNickname);
     }

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data2.h"
 #include "util.h"
+#include "overworld.h"
 #include "constants/songs.h"
 #include "ewram.h"
 #include "main.h"
@@ -13,10 +14,13 @@
 #include "string_util.h"
 #include "menu.h"
 #include "sound.h"
+#include "pokedex.h"
+#include "tv.h"
 #include "battle.h"
 #include "contest.h"
 #include "link.h"
 #include "field_effect.h"
+#include "field_specials.h"
 #include "contest_link_80C857C.h"
 #include "contest_link_80C2020.h"
 
@@ -34,7 +38,7 @@ struct UnkEwramStruct18000 {
     u8 unk_00;
     u8 filler_01[1];
     u8 unk_02;
-    u8 filler_03[1];
+    u8 unk_03;
     u8 unk_04;
     u8 unk_05;
     u8 unk_06;
@@ -66,6 +70,10 @@ void sub_80C27EC(u8 taskId);
 void sub_80C2878(u8 taskId);
 void sub_80C2A8C(u8 taskId);
 void sub_80C2D1C(u8 taskId);
+void sub_80C2D80(u8 taskId);
+void sub_80C2DD8(u8 taskId);
+void sub_80C2E14(u8 taskId);
+void sub_80C2EA0(u8 taskId);
 void sub_80C2F28(u8 taskId);
 void sub_80C2F64(u8 taskId);
 void sub_80C30D4(u8 a0, u8 a1);
@@ -640,5 +648,83 @@ void sub_80C2A8C(u8 taskId)
                 gTasks[taskId].func = sub_80C2D1C;
             }
             break;
+    }
+}
+
+void sub_80C2D1C(u8 taskId)
+{
+    int i;
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (!(gIsLinkContest & 1))
+        {
+            for (i = 0; i < 4; i++)
+            {
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(gContestMons[i].species), FLAG_SET_SEEN);
+            }
+        }
+        gTasks[taskId].func = sub_80C2D80;
+    }
+}
+
+void sub_80C2D80(u8 taskId)
+{
+    if (gIsLinkContest & 1)
+    {
+        sub_80C3698(gOtherText_LinkStandby);
+        sub_800832C();
+        gTasks[taskId].func = sub_80C2DD8;
+    }
+    else
+    {
+        gTasks[taskId].func = sub_80C2E14;
+    }
+}
+
+void sub_80C2DD8(u8 taskId)
+{
+    if (gReceivedRemoteLinkPlayers == 0)
+    {
+        gIsLinkContest = 0;
+        sub_80C3764();
+        gTasks[taskId].func = sub_80C2E14;
+    }
+}
+
+void sub_80C2E14(u8 taskId)
+{
+    sub_80BE284(gContestFinalStandings[gContestPlayerMonIndex]);
+    sub_810FB10(2);
+    Contest_SaveWinner(gSpecialVar_ContestRank);
+    Contest_SaveWinner(0xFE);
+    ewram15DDF = 1;
+    ewram15DDE = sub_80B2C4C(0xfe, 0);
+    BeginHardwarePaletteFade(0xff, 0, 0, 16, 0);
+    gTasks[taskId].func = sub_80C2EA0;
+}
+
+void sub_80C2EA0(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (gTasks[taskId].data[1] == 0)
+        {
+            DestroyTask(eContestLink80C2020Struct2018000.unk_03);
+            BlendPalettes(0x0000ffff, 16, 0);
+            gTasks[taskId].data[1]++;
+        }
+        else if (gTasks[taskId].data[1] == 1)
+        {
+            BlendPalettes(0xffff0000, 16, 0);
+            gTasks[taskId].data[1]++;
+        }
+        else
+        {
+            REG_BLDCNT = 0;
+            REG_BLDY = 0;
+            DestroyTask(taskId);
+            SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+        }
     }
 }
