@@ -195,5 +195,6 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 void LinkTestScreen(void);
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0);
 
 #endif // GUARD_LINK_H

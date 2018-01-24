@@ -1044,7 +1044,7 @@ void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
 }
 #else
 __attribute__((naked))
-void debug_sub_8008264()
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
 {
     asm(
         "	push	{r4, r5, r6, r7, lr}\n"

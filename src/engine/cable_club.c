@@ -23,6 +23,7 @@
 #include "text.h"
 #include "trainer_card.h"
 
+extern u8 unk_2030220;
 extern u16 gSpecialVar_Result;
 extern struct TrainerCard gTrainerCards[4];
 extern u8 gUnknown_03004860;
@@ -1374,50 +1375,19 @@ void unref_sub_8083CC8(u8 taskId)
 
 #if DEBUG
 
-__attribute__((naked))
-void debug_sub_808B82C()
+void debug_sub_808B82C(void)
 {
-    asm("\
-	ldr	r1, ._400\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r1]\n\
-	bx	lr\n\
-._401:\n\
-	.align	2, 0\n\
-._400:\n\
-	.word	unk_2030220");
+    unk_2030220 = 0;
 }
 
-__attribute__((naked))
 void debug_sub_808B838(u8 a)
 {
-    asm("\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._402\n\
-	mov	r1, #0x1\n\
-	LSL	r1, r0\n\
-	ldrb	r0, [r2]\n\
-	orr	r1, r1, r0\n\
-	strb	r1, [r2]\n\
-	bx	lr\n\
-._403:\n\
-	.align	2, 0\n\
-._402:\n\
-	.word	unk_2030220");
+    unk_2030220 |= 1 << a;
 }
 
-__attribute__((naked))
-int debug_sub_808B850()
+int debug_sub_808B850(void)
 {
-    asm("\
-	ldr	r0, ._404\n\
-	ldrb	r0, [r0]\n\
-	bx	lr\n\
-._405:\n\
-	.align	2, 0\n\
-._404:\n\
-	.word	unk_2030220");
+    return unk_2030220;
 }
 
 #endif
