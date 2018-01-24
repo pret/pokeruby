@@ -258,15 +258,15 @@ const struct MenuAction gUnknown_Debug_839BC94[] =
 // debug_sub_8076BB4 will access the array differently and no longer match.
 //extern const struct MenuAction gUnknown_Debug_839BC94[];
 
-const u8 Str_839BD14[][10] =
+const u8 gMenuOrders_839BD14[][10] =
 {
-    _("うかえ"),
-    _("おけこしすせそ"),
+    { 3, 6, 4, 0xFF },
+    { 5, 9, 10, 12, 13, 14, 15, 0xFF },
 };
 
 const u8 Str_839BD26[] = {2, 0, 0, 0};  // doesn't appear to be referenced
 
-const u8 Str_839BD2C[] = _("RTCを　リセット　します\n"
+const u8 Str_839BD2C[] = _("RTCを　リセット　します\n"         // Reset RTC
                            "Aで　じっこう　　　Bでキャンセル");
 
 const u8 Str_839BD4C[] = _("RTCを　リセット　した！");
@@ -291,8 +291,8 @@ void debug_sub_8076AC8(u8 a)
 {
     s32 r4;
 
-    gUnknown_030006C4 = Str_839BD14[a];
-    for (r4 = 0; gUnknown_030006C4[r4] != EOS; r4++)
+    gUnknown_030006C4 = gMenuOrders_839BD14[a];
+    for (r4 = 0; gUnknown_030006C4[r4] != 0xFF; r4++)
         ;
     Menu_EraseWindowRect(16, 0, 29, 19);
     Menu_DrawStdWindowFrame(16, 0, 29, r4 * 2 + 1);
