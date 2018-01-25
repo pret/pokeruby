@@ -207,16 +207,16 @@ int sub_8068024(struct FieldInput *input)
 
     if (
 #if DEBUG
-      !input->input_field_1_1
+     !input->input_field_1_1 &&
 #endif
-     && CheckTrainers() == TRUE)
+     CheckTrainers() == TRUE)
         return TRUE;
 
     if (
 #if DEBUG
-     !input->input_field_1_1
+     !input->input_field_1_1 &&
 #endif
-     && mapheader_run_first_tag2_script_list_match() == 1)
+     mapheader_run_first_tag2_script_list_match() == 1)
         return TRUE;
 
     if (input->pressedBButton && sub_80687A4() == 1)
