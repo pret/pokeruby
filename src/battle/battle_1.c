@@ -444,3 +444,5 @@ const u8 gEnemyMonElevation[] = {
     [SPECIES_DEOXYS] =  4,
     [SPECIES_CHIMECHO] = 12,
 };
+
+#include "../data/trainer_parties.h"

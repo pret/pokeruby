@@ -8,9 +8,6 @@
 
 	.section .rodata
 
-@ 81ECCB0
-	.include "data/trainer_parties.inc"
-
 @ 81F0208
 	.include "data/text/trainer_class_names.inc"
 
