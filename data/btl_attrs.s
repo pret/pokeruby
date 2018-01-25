@@ -8,9 +8,6 @@
 
 	.section .rodata
 
-@ 81F04FC
-	.include "data/trainers.inc"
-
 @ 81F716C
 	.include "data/text/species_names.inc"
 

@@ -16,6 +16,14 @@
 #define TRAINER_ENCOUNTER_MUSIC_INTERVIEWER 12
 #define TRAINER_ENCOUNTER_MUSIC_RICH        13 // Rich Boys and Gentlemen
 
+#define F_TRAINER_FEMALE 1 << 7
+
+// All trainer parties specify the IV, level, and species for each Pokémon in
+// the  party. Some trainer parties also specify held items and custom moves
+// for each Pokémon.
+#define F_TRAINER_PARTY_CUSTOM_MOVESET 1 << 0
+#define F_TRAINER_PARTY_HELD_ITEM 1 << 1
+
 enum {
     FACILITY_CLASS_AQUA_LEADER,
     FACILITY_CLASS_TEAM_AQUA_M,

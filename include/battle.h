@@ -53,7 +53,7 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ void *party;
+    /*0x24*/ const void *party;
 };
 
 struct UnkBattleStruct1 // AI_Opponent_Info?
