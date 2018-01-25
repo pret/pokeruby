@@ -31,10 +31,6 @@
 #include "text.h"
 #include "tv.h"
 
-#if DEBUG
-extern u8 gUnknown_020297ED;
-#endif
-
 EWRAM_DATA u8 gDifferentSaveFile = 0;
 EWRAM_DATA u8 gUnknown_020297ED = 0;
 

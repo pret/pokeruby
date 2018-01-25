@@ -4,6 +4,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "event_data.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
@@ -35,6 +36,7 @@ extern u16 gSpecialVar_Facing;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
+extern u8 gUnknown_020297ED;
 
 static EWRAM_DATA u8 gUnknown_0202E8C0 = 0;
 static EWRAM_DATA u16 gUnknown_0202E8C2 = 0;
@@ -82,28 +84,28 @@ extern u8 gUnknown_081C6BDE[];
 
 static void player_get_pos_to_and_height(struct MapPosition *);
 static void player_get_next_pos_and_height(struct MapPosition *);
-/*static*/ u16 cur_mapdata_block_role_at_player_pos(int);
-/*static*/ bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
+static u16 cur_mapdata_block_role_at_player_pos(int);
+static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
 static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c);
 static u8 *sub_8068364(struct MapPosition *, u8, u8);
 static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *, u8, u8 c);
 static u8 *sub_8068500(struct MapPosition *, u8, u8);
 static u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
-/*static*/ bool32 sub_8068770(void);
-/*static*/ bool32 sub_80687A4(void);
-/*static*/ bool8 sub_80687E4(struct MapPosition *, u16, u16);
+static bool32 sub_8068770(void);
+static bool32 sub_80687A4(void);
+static bool8 sub_80687E4(struct MapPosition *, u16, u16);
 static void happiness_algorithm_step(void);
 static bool8 overworld_poison_step(void);
-/*static*/ bool8 is_it_battle_time_3(u16);
-/*static*/ bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
+static bool8 is_it_battle_time_3(u16);
+static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
 static bool8 sub_8068B30(u16);
 static bool8 is_non_stair_warp_tile(u16, u8);
 static s8 map_warp_check_packed(struct MapHeader *, struct MapPosition *);
 static void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
-/*static*/ bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
+static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
 static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
 static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
-static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);
+static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);;
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -122,230 +124,6 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->dpadDirection = 0;
 }
 
-#if DEBUG
-__attribute__((naked))
-void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r9\n"
-        "	mov	r6, r8\n"
-        "	push	{r6, r7}\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r1, r1, #0x10\n"
-        "	lsr	r1, r1, #0x10\n"
-        "	mov	r8, r1\n"
-        "	lsl	r2, r2, #0x10\n"
-        "	lsr	r5, r2, #0x10\n"
-        "	ldr	r0, ._17\n"
-        "	ldrb	r6, [r0, #0x3]\n"
-        "	ldrb	r0, [r0, #0x2]\n"
-        "	mov	r9, r0\n"
-        "	bl	cur_mapdata_block_role_at_player_pos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	MetatileBehavior_IsMoveTile\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r6, #0x2\n"
-        "	bne	._1	@cond_branch\n"
-        "	cmp	r7, #0\n"
-        "	beq	._2	@cond_branch\n"
-        "._1:\n"
-        "	cmp	r6, #0\n"
-        "	bne	._9	@cond_branch\n"
-        "._2:\n"
-        "	bl	GetPlayerSpeed\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r0, r0, #0x10\n"
-        "	cmp	r0, #0x4\n"
-        "	beq	._8	@cond_branch\n"
-        "	mov	r0, #0x8\n"
-        "	mov	r1, r8\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._5	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x4\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._5:\n"
-        "	mov	r0, #0x4\n"
-        "	mov	r3, r8\n"
-        "	and	r0, r0, r3\n"
-        "	cmp	r0, #0\n"
-        "	beq	._6	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x8\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._6:\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, r8\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._7	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x1\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._7:\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r3, r8\n"
-        "	and	r0, r0, r3\n"
-        "	cmp	r0, #0\n"
-        "	beq	._8	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x80\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._8:\n"
-        "	mov	r0, #0xf0\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._9	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x10\n"
-        "	orr	r0, r0, r1\n"
-        "	mov	r1, #0x20\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._9:\n"
-        "	cmp	r7, #0\n"
-        "	bne	._14	@cond_branch\n"
-        "	cmp	r6, #0x2\n"
-        "	bne	._12	@cond_branch\n"
-        "	mov	r0, r9\n"
-        "	cmp	r0, #0x2\n"
-        "	bne	._12	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x40\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._12:\n"
-        "	cmp	r7, #0\n"
-        "	bne	._14	@cond_branch\n"
-        "	cmp	r6, #0x2\n"
-        "	bne	._14	@cond_branch\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r1, #0x2\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4]\n"
-        "._14:\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._15	@cond_branch\n"
-        "	mov	r0, #0x2\n"
-        "	b	._22\n"
-        "._18:\n"
-        "	.align	2, 0\n"
-        "._17:\n"
-        "	.word	gPlayerAvatar\n"
-        "._15:\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._19	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	b	._22\n"
-        "._19:\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._21	@cond_branch\n"
-        "	mov	r0, #0x3\n"
-        "	b	._22\n"
-        "._21:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._23	@cond_branch\n"
-        "	mov	r0, #0x4\n"
-        "._22:\n"
-        "	strb	r0, [r4, #0x2]\n"
-        "._23:\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._25	@cond_branch\n"
-        "	ldrb	r2, [r4]\n"
-        "	mov	r0, #0x4\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	._25	@cond_branch\n"
-        "	ldrb	r0, [r4, #0x1]\n"
-        "	mov	r1, #0x4\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4, #0x1]\n"
-        "	mov	r0, #0x5\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r2\n"
-        "	strb	r0, [r4]\n"
-        "._25:\n"
-        "	ldr	r0, ._30\n"
-        "	ldrb	r0, [r0]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._29	@cond_branch\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._28	@cond_branch\n"
-        "	ldrb	r1, [r4, #0x1]\n"
-        "	mov	r0, #0x2\n"
-        "	orr	r1, r1, r0\n"
-        "	strb	r1, [r4, #0x1]\n"
-        "	ldrb	r0, [r4]\n"
-        "	mov	r2, #0x41\n"
-        "	neg	r2, r2\n"
-        "	and	r2, r2, r0\n"
-        "	mov	r0, #0x3\n"
-        "	neg	r0, r0\n"
-        "	and	r2, r2, r0\n"
-        "	sub	r0, r0, #0xe\n"
-        "	and	r2, r2, r0\n"
-        "	sub	r0, r0, #0x10\n"
-        "	and	r2, r2, r0\n"
-        "	strb	r2, [r4]\n"
-        "	mov	r0, #0x4\n"
-        "	mov	r3, r8\n"
-        "	and	r0, r0, r3\n"
-        "	cmp	r0, #0\n"
-        "	beq	._28	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	orr	r1, r1, r0\n"
-        "	strb	r1, [r4, #0x1]\n"
-        "	mov	r0, #0x9\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r2\n"
-        "	strb	r0, [r4]\n"
-        "._28:\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	and	r0, r0, r5\n"
-        "	cmp	r0, #0\n"
-        "	beq	._29	@cond_branch\n"
-        "	ldrb	r0, [r4, #0x1]\n"
-        "	mov	r1, #0x8\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4, #0x1]\n"
-        "._29:\n"
-        "	pop	{r3, r4}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._31:\n"
-        "	.align	2, 0\n"
-        "._30:\n"
-        "	.word	gUnknown_020297ED\n"
-        "\n"
-    );
-}
-#else
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
     u8 r6 = gPlayerAvatar.tileTransitionState;
@@ -386,223 +164,33 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
-}
-#endif
-
 #if DEBUG
-__attribute__((naked))
-int sub_8068024(struct FieldInput *input)
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	add	r5, r0, #0\n"
-        "	bl	player_get_direction_lower_nybble\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	mov	r4, sp\n"
-        "	mov	r0, sp\n"
-        "	bl	player_get_pos_to_and_height\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	mov	r2, #0x2\n"
-        "	ldsh	r1, [r4, r2]\n"
-        "	bl	MapGridGetMetatileBehaviorAt\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r4, r0, #0x10\n"
-        "	ldrb	r1, [r5, #0x1]\n"
-        "	mov	r0, #0x8\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._33	@cond_branch\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r4, #0\n"
-        "	bl	dive_warp\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._33	@cond_branch\n"
-        "	b	._63\n"
-        "._33:\n"
-        "	ldrb	r1, [r5, #0x1]\n"
-        "	mov	r6, #0x2\n"
-        "	add	r0, r6, #0\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._39	@cond_branch\n"
-        "	bl	CheckTrainers\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._36	@cond_branch\n"
-        "	b	._63\n"
-        "._36:\n"
-        "	ldrb	r1, [r5, #0x1]\n"
-        "	add	r0, r6, #0\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._39	@cond_branch\n"
-        "	bl	mapheader_run_first_tag2_script_list_match\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._39	@cond_branch\n"
-        "	b	._63\n"
-        "._39:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._42	@cond_branch\n"
-        "	bl	sub_80687A4\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._42	@cond_branch\n"
-        "	b	._63\n"
-        "._42:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._44	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	IncrementGameStat\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r4, #0\n"
-        "	add	r2, r7, #0\n"
-        "	bl	sub_80687E4\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._44:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._46	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	bl	is_it_battle_time_3\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._46:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._49	@cond_branch\n"
-        "	ldrb	r0, [r5, #0x2]\n"
-        "	cmp	r0, r7\n"
-        "	bne	._49	@cond_branch\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r4, #0\n"
-        "	add	r2, r7, #0\n"
-        "	bl	mapheader_run_first_tag2_script_list_match_conditionally\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._49:\n"
-        "	mov	r4, sp\n"
-        "	mov	r0, sp\n"
-        "	bl	player_get_next_pos_and_height\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	mov	r2, #0x2\n"
-        "	ldsh	r1, [r4, r2]\n"
-        "	bl	MapGridGetMetatileBehaviorAt\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r4, r0, #0x10\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._51	@cond_branch\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r4, #0\n"
-        "	add	r2, r7, #0\n"
-        "	bl	sub_80681F0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._51:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._54	@cond_branch\n"
-        "	ldrb	r0, [r5, #0x2]\n"
-        "	cmp	r0, r7\n"
-        "	bne	._54	@cond_branch\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r4, #0\n"
-        "	add	r2, r7, #0\n"
-        "	bl	map_warp_consider_2_to_inside\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._54:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._56	@cond_branch\n"
-        "	bl	sub_8068770\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._56:\n"
-        "	ldrb	r1, [r5]\n"
-        "	mov	r0, #0x4\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._58	@cond_branch\n"
-        "	mov	r0, #0x6\n"
-        "	bl	PlaySE\n"
-        "	bl	sub_8071310\n"
-        "	b	._63\n"
-        "._58:\n"
-        "	mov	r0, #0x8\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._60	@cond_branch\n"
-        "	bl	sub_80A6D1C\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._63	@cond_branch\n"
-        "._60:\n"
-        "	ldrb	r1, [r5, #0x1]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._62	@cond_branch\n"
-        "	bl	debug_sub_80888D8\n"
-        "	b	._63\n"
-        "._62:\n"
-        "	mov	r0, #0x4\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._64	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	b	._65\n"
-        "._64:\n"
-        "	mov	r0, #0x6\n"
-        "	bl	PlaySE\n"
-        "	bl	DebugMenu_8077048\n"
-        "._63:\n"
-        "	mov	r0, #0x1\n"
-        "._65:\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if ((heldKeys & R_BUTTON) && input->pressedStartButton)
+    {
+        input->input_field_1_2 = TRUE;
+        input->pressedStartButton = FALSE;
+    }
+    if (gUnknown_020297ED)
+    {
+        if (heldKeys & R_BUTTON)
+        {
+            input->input_field_1_1 = TRUE;
+            input->input_field_0_6 = FALSE;
+            input->input_field_0_1 = FALSE;
+            input->input_field_0_4 = FALSE;
+            input->input_field_0_5 = FALSE;
+            if (newKeys & SELECT_BUTTON)
+            {
+                input->input_field_1_0 = TRUE;
+                input->pressedSelectButton = FALSE;
+            }
+        }
+        if (heldKeys & L_BUTTON)
+            input->input_field_1_3 = TRUE;
+    }
+#endif
 }
-#else
+
 int sub_8068024(struct FieldInput *input)
 {
     struct MapPosition position;
@@ -612,10 +200,25 @@ int sub_8068024(struct FieldInput *input)
     r6 = player_get_direction_lower_nybble();
     player_get_pos_to_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
-    if (CheckTrainers() == TRUE)
+#if DEBUG
+    if (input->input_field_1_3 && dive_warp(&position, r4) == TRUE)
         return TRUE;
-    if (mapheader_run_first_tag2_script_list_match() == 1)
+#endif
+
+    if (
+#if DEBUG
+      !input->input_field_1_1
+#endif
+     && CheckTrainers() == TRUE)
         return TRUE;
+
+    if (
+#if DEBUG
+     !input->input_field_1_1
+#endif
+     && mapheader_run_first_tag2_script_list_match() == 1)
+        return TRUE;
+
     if (input->pressedBButton && sub_80687A4() == 1)
         return TRUE;
     if (input->input_field_0_6)
@@ -650,9 +253,23 @@ int sub_8068024(struct FieldInput *input)
     }
     if (input->pressedSelectButton && sub_80A6D1C() == TRUE)
         return TRUE;
+
+#if DEBUG
+    if (input->input_field_1_0)
+    {
+        debug_sub_80888D8();
+        return TRUE;
+    }
+    if (input->input_field_1_2)
+    {
+        PlaySE(SE_WIN_OPEN);
+        DebugMenu_8077048();
+        return TRUE;
+    }
+#endif
+
     return FALSE;
 }
-#endif
 
 static void player_get_pos_to_and_height(struct MapPosition *position)
 {
@@ -672,7 +289,7 @@ static void player_get_next_pos_and_height(struct MapPosition *position)
         position->height = 0;
 }
 
-/*static*/ u16 cur_mapdata_block_role_at_player_pos(int unused)
+static u16 cur_mapdata_block_role_at_player_pos(int unused)
 {
     s16 x, y;
 
@@ -680,7 +297,7 @@ static void player_get_next_pos_and_height(struct MapPosition *position)
     return MapGridGetMetatileBehaviorAt(x, y);
 }
 
-/*static*/ bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
+static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
 {
     u8 *script = TryGetScriptOnPressingA(position, b, c);
 
@@ -875,7 +492,7 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     return NULL;
 }
 
-/*static*/ bool32 sub_8068770(void)
+static bool32 sub_8068770(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && sub_8068F18() == 2)
     {
@@ -885,7 +502,7 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     return FALSE;
 }
 
-/*static*/ bool32 sub_80687A4(void)
+static bool32 sub_80687A4(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_8068F18() == 1)
     {
@@ -895,7 +512,7 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     return FALSE;
 }
 
-/*static*/ bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
+static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 {
     if (mapheader_trigger_activate_at__run_now(position) == TRUE)
         return TRUE;
@@ -1015,7 +632,7 @@ void prev_quest_postbuffer_cursor_backup_reset(void)
     gUnknown_0202E8C0 = 0;
 }
 
-/*static*/ bool8 is_it_battle_time_3(u16 a)
+static bool8 is_it_battle_time_3(u16 a)
 {
     if (gUnknown_0202E8C0 < 4)
     {
@@ -1036,7 +653,7 @@ void prev_quest_postbuffer_cursor_backup_reset(void)
     }
 }
 
-/*static*/ bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
+static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r6 = map_warp_check_packed(&gMapHeader, position);
 
@@ -1144,7 +761,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *posi
     }
 }
 
-/*static*/ bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
+static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r4;
 
@@ -1250,7 +867,7 @@ static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHea
     return NULL;
 }
 
-int dive_warp(struct MapPosition *position, u16 b)
+bool8 dive_warp(struct MapPosition *position, u16 b)
 {
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(b) == 0)
     {
