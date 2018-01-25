@@ -1,6 +1,9 @@
 #include "global.h"
 #include "data2.h"
+#include "battle_setup.h"
 #include "constants/species.h"
+#include "constants/moves.h"
+#include "constants/items.h"
 
 const struct MonCoords gTrainerBackPicCoords[] = {
     {8, 4},

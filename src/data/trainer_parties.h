@@ -1,7 +1,3 @@
-#include "battle_setup.h"
-#include "constants/moves.h"
-#include "constants/items.h"
-
 const struct TrainerPartyMember0 gTrainerParty_Archie1[] = {
     {
 	.iv = 0,
