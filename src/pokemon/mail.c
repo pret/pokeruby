@@ -294,7 +294,7 @@ const u8 Str_8411608[] = _("メールをけす");  // Delete Mail
 static u8 *const sSharedMemPtr = gSharedMem;
 
 static u8 sub_80F8A28(void);
-/*static*/ void sub_80F8D50(void);
+static void sub_80F8D50(void);
 static void sub_80F8DA0(void);
 static void sub_80F8E80(void);
 static void sub_80F8F18(void);
@@ -527,7 +527,7 @@ static u8 sub_80F8A28(void)
     return FALSE;
 }
 
-/*static*/ void sub_80F8D50(void)
+static void sub_80F8D50(void)
 {
     do
     {
@@ -988,7 +988,85 @@ u8 debug_sub_810D030(void)
     }
 }
 
-const u8 Str_84116AE[] = _("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}");
+void debug_sub_810D174(u8 a)
+{
+    u8 string[] = _("メール{STR_VAR_1}　{STR_VAR_2}　{STR_VAR_3}");
+    u8 buffer[9][20];
+    struct MenuAction menuActions[9];
+    u8 i;
+
+    for (i = 0; i < 9; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, i, 1, 1);
+        if (gSaveBlock1.mail[i].itemId == 0xFFFF)
+        {
+            ConvertIntToDecimalStringN(gStringVar2, 1, 1, 1);
+        }
+        else if (IS_ITEM_MAIL(gSaveBlock1.mail[i].itemId))
+        {
+            ConvertIntToDecimalStringN(gStringVar2, 2, 1, 1);
+        }
+        else
+        {
+            ConvertIntToDecimalStringN(gStringVar2, 0, 1, 1);
+            gSaveBlock1.mail[i].itemId = 0;
+        }
+        StringCopy(gStringVar3, gSpeciesNames[gSaveBlock1.mail[i].species]);
+        StringExpandPlaceholders(buffer[i], string);
+        menuActions[i].text = buffer[i];
+        menuActions[i].func = NULL;
+    }
+    Menu_DrawStdWindowFrame(0, 0, 16, 19);
+    Menu_PrintItems(2, 1, 9, menuActions);
+    InitMenu(0, 1, 1, 9, 0, 15);
+    switch (a)
+    {
+    case 0:
+        gMenuCallback = debug_sub_810CE48;
+        break;
+    case 1:
+        gMenuCallback = debug_sub_810CED0;
+        break;
+    case 2:
+        gMenuCallback = debug_sub_810CFA4;
+        break;
+    case 3:
+        gMenuCallback = debug_sub_810D030;
+        break;
+    }
+}
+
+u8 debug_sub_810D2F4(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    switch (input)
+    {
+    case -1:
+        SetMainCallback2(debug_sub_810CDF0);
+        return 1;
+    case -2:
+        return 0;
+    }
+
+    switch (input)
+    {
+    case 0:
+        debug_sub_810D174(input);
+        return 0;
+    case 1:
+        debug_sub_810D174(input);
+        return 0;
+    case 2:
+        debug_sub_810D174(input);
+        return 0;
+    case 3:
+        debug_sub_810D174(input);
+        return 0;
+    }
+
+    return 1;
+}
 
 const struct MenuAction _84116BC[] =
 {
@@ -998,514 +1076,84 @@ const struct MenuAction _84116BC[] =
     {Str_8411608, NULL},
 };
 
-__attribute__((naked))
-void debug_sub_810D174()
+void debug_sub_810D340(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffeec\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	ldr	r1, ._242\n"
-        "	add	r0, sp, #0x8\n"
-        "	mov	r2, #0xc\n"
-        "	bl	memcpy\n"
-        "	mov	r5, #0x0\n"
-        "	mov	r0, sp\n"
-        "	add	r0, r0, #0x14\n"
-        "	str	r0, [sp, #0x110]\n"
-        "	add	r1, sp, #0xc8\n"
-        "	mov	r8, r1\n"
-        "	add	r2, sp, #0xcc\n"
-        "	mov	sl, r2\n"
-        "	ldr	r0, ._242 + 4\n"
-        "	mov	r9, r0\n"
-        "._248:\n"
-        "	ldr	r0, ._242 + 8\n"
-        "	add	r1, r5, #0\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	lsl	r1, r5, #0x3\n"
-        "	add	r0, r1, r5\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add r0, r0, r9\n"
-        "	ldr	r2, ._242 + 12\n"
-        "	add	r4, r0, r2\n"
-        "	ldrh	r0, [r4]\n"
-        "	add	r6, r1, #0\n"
-        "	ldr	r1, ._242 + 16\n"
-        "	cmp	r0, r1\n"
-        "	bne	._240	@cond_branch\n"
-        "	ldr	r0, ._242 + 20\n"
-        "	mov	r1, #0x1\n"
-        "	b	._241\n"
-        "._243:\n"
-        "	.align	2, 0\n"
-        "._242:\n"
-        "	.word	Str_84116AE\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	gStringVar1\n"
-        "	.word	0x2b6c\n"
-        "	.word	0xffff\n"
-        "	.word	gStringVar2\n"
-        "._240:\n"
-        "	sub	r0, r0, #0x79\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	cmp	r0, #0xb\n"
-        "	bhi	._244	@cond_branch\n"
-        "	ldr	r0, ._246\n"
-        "	mov	r1, #0x2\n"
-        "._241:\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	b	._245\n"
-        "._247:\n"
-        "	.align	2, 0\n"
-        "._246:\n"
-        "	.word	gStringVar2\n"
-        "._244:\n"
-        "	ldr	r0, ._253\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, #0x0\n"
-        "	strh	r0, [r4]\n"
-        "._245:\n"
-        "	add	r0, r6, r5\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add r0, r0, r9\n"
-        "	ldr	r2, ._253 + 4\n"
-        "	add	r0, r0, r2\n"
-        "	ldrh	r1, [r0]\n"
-        "	mov	r0, #0xb\n"
-        "	mul	r1, r1, r0\n"
-        "	ldr	r0, ._253 + 8\n"
-        "	add	r1, r1, r0\n"
-        "	ldr	r0, ._253 + 12\n"
-        "	bl	StringCopy\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x2\n"
-        "	ldr	r0, [sp, #0x110]\n"
-        "	add	r4, r0, r4\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, sp, #0x8\n"
-        "	bl	StringExpandPlaceholders\n"
-        "	mov	r1, r8\n"
-        "	add	r0, r1, r6\n"
-        "	str	r4, [r0]\n"
-        "	mov	r2, sl\n"
-        "	add	r0, r2, r6\n"
-        "	mov	r4, #0x0\n"
-        "	str	r4, [r0]\n"
-        "	add	r0, r5, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	cmp	r5, #0x8\n"
-        "	bls	._248	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x10\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x9\n"
-        "	mov	r3, r8\n"
-        "	bl	Menu_PrintItems\n"
-        "	str	r4, [sp]\n"
-        "	mov	r0, #0xf\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x9\n"
-        "	bl	InitMenu\n"
-        "	cmp	r7, #0x1\n"
-        "	beq	._249	@cond_branch\n"
-        "	cmp	r7, #0x1\n"
-        "	bgt	._250	@cond_branch\n"
-        "	cmp	r7, #0\n"
-        "	beq	._251	@cond_branch\n"
-        "	b	._257\n"
-        "._254:\n"
-        "	.align	2, 0\n"
-        "._253:\n"
-        "	.word	gStringVar2\n"
-        "	.word	0x2b6a\n"
-        "	.word	gSpeciesNames\n"
-        "	.word	gStringVar3\n"
-        "._250:\n"
-        "	cmp	r7, #0x2\n"
-        "	beq	._255	@cond_branch\n"
-        "	cmp	r7, #0x3\n"
-        "	beq	._256	@cond_branch\n"
-        "	b	._257\n"
-        "._251:\n"
-        "	ldr	r1, ._259\n"
-        "	ldr	r0, ._259 + 4\n"
-        "	b	._264\n"
-        "._260:\n"
-        "	.align	2, 0\n"
-        "._259:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	debug_sub_810CE48+1\n"
-        "._249:\n"
-        "	ldr	r1, ._262\n"
-        "	ldr	r0, ._262 + 4\n"
-        "	b	._264\n"
-        "._263:\n"
-        "	.align	2, 0\n"
-        "._262:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	debug_sub_810CED0+1\n"
-        "._255:\n"
-        "	ldr	r1, ._265\n"
-        "	ldr	r0, ._265 + 4\n"
-        "	b	._264\n"
-        "._266:\n"
-        "	.align	2, 0\n"
-        "._265:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	debug_sub_810CFA4+1\n"
-        "._256:\n"
-        "	ldr	r1, ._267\n"
-        "	ldr	r0, ._267 + 4\n"
-        "._264:\n"
-        "	str	r0, [r1]\n"
-        "._257:\n"
-        "	add	sp, sp, #0x114\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._268:\n"
-        "	.align	2, 0\n"
-        "._267:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	debug_sub_810D030+1\n"
-        "\n"
-    );
+    Menu_DrawStdWindowFrame(0, 0, 9, 9);
+    Menu_PrintItems(2, 1, 4, _84116BC);
+    InitMenu(0, 1, 1, 4, 0, 8);
+    gMenuCallback = debug_sub_810D2F4;
 }
 
-__attribute__((naked))
-void debug_sub_810D2F4()
+void debug_sub_810D388(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_ProcessInput\n"
-        "	lsl	r2, r0, #0x18\n"
-        "	asr	r1, r2, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	cmp	r1, r0\n"
-        "	beq	._269	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "	cmp	r1, r0\n"
-        "	bne	._270	@cond_branch\n"
-        "	ldr	r0, ._272\n"
-        "	bl	SetMainCallback2\n"
-        "	b	._279\n"
-        "._273:\n"
-        "	.align	2, 0\n"
-        "._272:\n"
-        "	.word	debug_sub_810CDF0+1\n"
-        "._270:\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._278	@cond_branch\n"
-        "	cmp	r1, #0x1\n"
-        "	bgt	._275	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	beq	._278	@cond_branch\n"
-        "	b	._279\n"
-        "._275:\n"
-        "	cmp	r1, #0x2\n"
-        "	beq	._278	@cond_branch\n"
-        "	cmp	r1, #0x3\n"
-        "	bne	._279	@cond_branch\n"
-        "._278:\n"
-        "	lsr	r0, r2, #0x18\n"
-        "	bl	debug_sub_810D174\n"
-        "._269:\n"
-        "	mov	r0, #0x0\n"
-        "	b	._280\n"
-        "._279:\n"
-        "	mov	r0, #0x1\n"
-        "._280:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    switch (gMain.state)
+    {
+    case 0:
+        if (gUnknown_Debug_0300079C != 0)
+        {
+            gMain.state = 2;
+            gUnknown_Debug_0300079C = 0;
+            return;
+        }
+        else
+        {
+            ScanlineEffect_Stop();
+            ResetPaletteFade();
+            SetVBlankCallback(sub_80F8F18);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        }
+        break;
+    case 1:
+        if (UpdatePaletteFade())
+            return;
+        break;
+    case 2:
+        SetVBlankCallback(NULL);
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+        REG_BG1HOFS = 0;
+        REG_BG1VOFS = 0;
+        REG_BG2VOFS = 0;
+        REG_BG2HOFS = 0;
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 0;
+        break;
+    case 3:
+        ResetSpriteData();
+        ResetTasks();
+        FreeAllSpritePalettes();
+        break;
+    case 4:
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        Menu_EraseScreen();
+        break;
+    case 5:
+        LoadPalette(gMailGraphicsTable[0].palette, 0, 32);
+        LZ77UnCompVram(gMailGraphicsTable[0].tiles, (void *)VRAM);
+        DmaFill16(3, 1, (void *)(VRAM + 0x4000), 0x500);
+        break;
+    case 6:
+        REG_BG0CNT = 0x9F08;
+        REG_BG1CNT = 0x0801;
+        REG_BLDCNT = 0;
+        REG_DISPCNT = 0x0340;
+        debug_sub_810D340();
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        SetVBlankCallback(sub_80F8F18);
+        break;
+    case 7:
+        if (!UpdatePaletteFade())
+            return;
+        break;
+    case 8:
+        CreateTask(debug_sub_810CE1C, 0);
+        SetMainCallback2(debug_sub_810CDE0);
+        break;
+    default:
+        return;
+    }
+    gMain.state++;
 }
 
-__attribute__((naked))
-void debug_sub_810D340()
-{
-    asm(
-        "	push	{lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x9\n"
-        "	mov	r3, #0x9\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r3, ._281\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x4\n"
-        "	bl	Menu_PrintItems\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x8\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x4\n"
-        "	bl	InitMenu\n"
-        "	ldr	r1, ._281 + 4\n"
-        "	ldr	r0, ._281 + 8\n"
-        "	str	r0, [r1]\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._282:\n"
-        "	.align	2, 0\n"
-        "._281:\n"
-        "	.word	_84116BC\n"
-        "	.word	gMenuCallback\n"
-        "	.word	debug_sub_810D2F4+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_810D388()
-{
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	ldr	r1, ._285\n"
-        "	ldr	r2, ._285 + 4\n"
-        "	add	r0, r1, r2\n"
-        "	ldrb	r0, [r0]\n"
-        "	add	r2, r1, #0\n"
-        "	cmp	r0, #0x8\n"
-        "	bls	._283	@cond_branch\n"
-        "	b	._320\n"
-        "._283:\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._285 + 8\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	pc, r0\n"
-        "._286:\n"
-        "	.align	2, 0\n"
-        "._285:\n"
-        "	.word	gMain\n"
-        "	.word	0x43c\n"
-        "	.word	._287\n"
-        "._287:\n"
-        "	.word	._288\n"
-        "	.word	._289\n"
-        "	.word	._290\n"
-        "	.word	._291\n"
-        "	.word	._292\n"
-        "	.word	._293\n"
-        "	.word	._294\n"
-        "	.word	._295\n"
-        "	.word	._296\n"
-        "._288:\n"
-        "	ldr	r3, ._299\n"
-        "	ldrb	r4, [r3]\n"
-        "	cmp	r4, #0\n"
-        "	beq	._297	@cond_branch\n"
-        "	ldr	r1, ._299 + 4\n"
-        "	add	r0, r2, r1\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r1, #0x2\n"
-        "	strb	r1, [r0]\n"
-        "	strb	r2, [r3]\n"
-        "	b	._320\n"
-        "._300:\n"
-        "	.align	2, 0\n"
-        "._299:\n"
-        "	.word	gUnknown_Debug_0300079C\n"
-        "	.word	0x43c\n"
-        "._297:\n"
-        "	bl	ScanlineEffect_Stop\n"
-        "	bl	ResetPaletteFade\n"
-        "	ldr	r0, ._302\n"
-        "	bl	SetVBlankCallback\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	str	r4, [sp]\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x10\n"
-        "	bl	BeginNormalPaletteFade\n"
-        "	b	._321\n"
-        "._303:\n"
-        "	.align	2, 0\n"
-        "._302:\n"
-        "	.word	sub_80F8F18+1\n"
-        "._289:\n"
-        "	bl	UpdatePaletteFade\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	beq	._304	@cond_branch\n"
-        "	b	._320\n"
-        "._304:\n"
-        "	b	._321\n"
-        "._290:\n"
-        "	mov	r0, #0x0\n"
-        "	bl	SetVBlankCallback\n"
-        "	ldr	r0, ._308\n"
-        "	mov	r1, #0x0\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x4\n"
-        "	strh	r1, [r0]\n"
-        "	sub	r0, r0, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x4\n"
-        "	strh	r1, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	b	._321\n"
-        "._309:\n"
-        "	.align	2, 0\n"
-        "._308:\n"
-        "	.word	0x4000010\n"
-        "._291:\n"
-        "	bl	ResetSpriteData\n"
-        "	bl	ResetTasks\n"
-        "	bl	FreeAllSpritePalettes\n"
-        "	b	._321\n"
-        "._292:\n"
-        "	ldr	r4, ._312\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_LoadWindowTemplate\n"
-        "	add	r0, r4, #0\n"
-        "	bl	InitMenuWindow\n"
-        "	bl	Menu_EraseScreen\n"
-        "	b	._321\n"
-        "._313:\n"
-        "	.align	2, 0\n"
-        "._312:\n"
-        "	.word	gWindowTemplate_81E6CE4\n"
-        "._293:\n"
-        "	ldr	r4, ._315\n"
-        "	ldr	r0, [r4]\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x20\n"
-        "	bl	LoadPalette\n"
-        "	ldr	r0, [r4, #0x4]\n"
-        "	mov	r1, #0xc0\n"
-        "	lsl	r1, r1, #0x13\n"
-        "	bl	LZ77UnCompVram\n"
-        "	add	r1, sp, #0x4\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r1]\n"
-        "	ldr	r1, ._315 + 4\n"
-        "	add	r2, sp, #0x4\n"
-        "	str	r2, [r1]\n"
-        "	ldr	r0, ._315 + 8\n"
-        "	str	r0, [r1, #0x4]\n"
-        "	ldr	r0, ._315 + 12\n"
-        "	str	r0, [r1, #0x8]\n"
-        "	ldr	r0, [r1, #0x8]\n"
-        "	b	._321\n"
-        "._316:\n"
-        "	.align	2, 0\n"
-        "._315:\n"
-        "	.word	gMailGraphicsTable\n"
-        "	.word	0x40000d4\n"
-        "	.word	0x6004000\n"
-        "	.word	0x81000280\n"
-        "._294:\n"
-        "	ldr	r1, ._318\n"
-        "	ldr	r2, ._318 + 4\n"
-        "	add	r0, r2, #0\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r2, ._318 + 8\n"
-        "	add	r0, r2, #0\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x46\n"
-        "	mov	r0, #0x0\n"
-        "	strh	r0, [r1]\n"
-        "	sub	r1, r1, #0x50\n"
-        "	mov	r2, #0xd0\n"
-        "	lsl	r2, r2, #0x2\n"
-        "	add	r0, r2, #0\n"
-        "	strh	r0, [r1]\n"
-        "	bl	debug_sub_810D340\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	mov	r1, #0x0\n"
-        "	str	r1, [sp]\n"
-        "	mov	r2, #0x10\n"
-        "	mov	r3, #0x0\n"
-        "	bl	BeginNormalPaletteFade\n"
-        "	ldr	r0, ._318 + 12\n"
-        "	bl	SetVBlankCallback\n"
-        "	b	._321\n"
-        "._319:\n"
-        "	.align	2, 0\n"
-        "._318:\n"
-        "	.word	0x4000008\n"
-        "	.word	0x9f08\n"
-        "	.word	0x801\n"
-        "	.word	sub_80F8F18+1\n"
-        "._295:\n"
-        "	bl	UpdatePaletteFade\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	beq	._320	@cond_branch\n"
-        "	b	._321\n"
-        "._296:\n"
-        "	ldr	r0, ._322\n"
-        "	mov	r1, #0x0\n"
-        "	bl	CreateTask\n"
-        "	ldr	r0, ._322 + 4\n"
-        "	bl	SetMainCallback2\n"
-        "._321:\n"
-        "	ldr	r1, ._322 + 8\n"
-        "	ldr	r0, ._322 + 12\n"
-        "	add	r1, r1, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "._320:\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._323:\n"
-        "	.align	2, 0\n"
-        "._322:\n"
-        "	.word	debug_sub_810CE1C+1\n"
-        "	.word	debug_sub_810CDE0+1\n"
-        "	.word	gMain\n"
-        "	.word	0x43c\n"
-        "\n"
-    );
-}
 #endif
