@@ -401,4 +401,6 @@
 // Check if the item is one that can be used on a Pokemon.
 #define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= ITEM_0B2)
 
+#define IS_ITEM_MAIL(item) ((item) >= ITEM_ORANGE_MAIL && (item) <= ITEM_RETRO_MAIL)
+
 #endif  // GUARD_CONSTANTS_ITEMS_H

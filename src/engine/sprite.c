@@ -815,7 +815,7 @@ void ProcessSpriteCopyRequests(void)
     }
 }
 
-/*static*/ void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
+static void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images)
 {
     if (gSpriteCopyRequestCount < MAX_SPRITE_COPY_REQUESTS)
     {
