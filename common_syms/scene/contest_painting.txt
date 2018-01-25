@@ -1,5 +1,0 @@
-gUnknown_03005E10
-gUnknown_03005E20
-gUnknown_03005E40
-gUnknown_03005E8C
-gUnknown_03005E90

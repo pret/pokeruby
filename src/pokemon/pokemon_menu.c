@@ -786,7 +786,7 @@ void FieldCallback_Teleport(void)
 
 static void sub_808ABA8(u8 taskID)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         gFieldEffectArguments[0] = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES);
         gUnknown_03005CE4();

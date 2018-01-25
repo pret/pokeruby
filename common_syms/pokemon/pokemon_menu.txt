@@ -1,2 +1,0 @@
-gLastFieldPokeMenuOpened
-gUnknown_03005CE4

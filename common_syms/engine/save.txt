@@ -1,9 +1,0 @@
-gFirstSaveSector
-gPrevSaveCounter
-gLastKnownGoodSector
-gDamagedSaveSectors
-gSaveCounter
-gFastSaveSection
-gUnknown_03005EB4
-gSaveFileStatus
-gGameContinueCallback

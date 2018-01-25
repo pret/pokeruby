@@ -43,18 +43,18 @@ void pal_fill_for_map_transition(void)
     switch (fade_type_for_given_maplight_pair(map_light, Overworld_GetMapTypeOfSaveblockLocation()))
     {
     case 0:
-        fade_screen(0, 0);
+        FadeScreen(0, 0);
         palette_bg_fill_black();
         break;
     case 1:
-        fade_screen(2, 0);
+        FadeScreen(2, 0);
         palette_bg_fill_white();
     }
 }
 
 void pal_fill_black(void)
 {
-    fade_screen(0, 0);
+    FadeScreen(0, 0);
     palette_bg_fill_black();
 }
 
@@ -64,10 +64,10 @@ void fade_8080918(void)
     switch (sub_810CDB8(light_level, warp1_get_mapheader()->mapType))
     {
     case 0:
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         break;
     case 1:
-        fade_screen(3, 0);
+        FadeScreen(3, 0);
     }
 }
 
@@ -365,7 +365,7 @@ bool32 sub_8080E64(void)
 
 bool32 sub_8080E70(void)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -482,7 +482,7 @@ void sub_8081050(u8 taskId)
     {
     case 0:
         ClearLinkCallback_2();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         sub_8053FF8();
         PlaySE(SE_KAIDAN);
         data[0]++;

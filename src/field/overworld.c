@@ -588,7 +588,7 @@ bool8 sub_80538D0(u16 x, u16 y)
 
 void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
-    s32 i;
+    s32 paletteIndex;
 
     Overworld_SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
@@ -609,8 +609,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8056D38(gMapHeader.mapData);
     apply_map_tileset2_palette(gMapHeader.mapData);
 
-    for (i = 6; i < 12; i++)
-        sub_807D874(i);
+    for (paletteIndex = 6; paletteIndex < 12; paletteIndex++)
+        ApplyWeatherGammaShiftToPal(paletteIndex);
 
     sub_8072ED0();
     UpdateLocationHistoryForRoamer();
