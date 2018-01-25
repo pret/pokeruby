@@ -1,7 +1,6 @@
 #include "global.h"
 #include "script_movement.h"
-#include "field_map_obj.h"
-#include "field_map_obj_helpers.h"
+#include "evobjmv.h"
 #include "task.h"
 #include "util.h"
 

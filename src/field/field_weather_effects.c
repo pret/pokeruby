@@ -1,5 +1,5 @@
 #include "global.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "random.h"

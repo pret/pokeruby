@@ -1,5 +1,5 @@
 #include "global.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "fldeff_recordmixing.h"
 #include "sprite.h"
 

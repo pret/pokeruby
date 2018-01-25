@@ -4,7 +4,7 @@
 #include "data2.h"
 #include "decompress.h"
 #include "field_effect.h"
-#include "field_map_obj_helpers.h"
+#include "evobjmv.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "item.h"

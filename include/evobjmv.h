@@ -1,5 +1,5 @@
-#ifndef GUARD_FIELD_MAP_OBJ_H
-#define GUARD_FIELD_MAP_OBJ_H
+#ifndef GUARD_EVOBJMV_H
+#define GUARD_EVOBJMV_H
 
 #include "sprite.h"
 
@@ -436,5 +436,43 @@ void sub_8060320(u32, s16 *, s16 *, s16, s16);
 u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
 u16 npc_paltag_by_palslot(u8);
 void sub_8060470(s16 *, s16 *, s16, s16);
+bool8 FreezeMapObject(struct MapObject *);
+void FreezeMapObjects(void);
+void FreezeMapObjectsExceptOne(u8);
+void UnfreezeMapObjects(void);
+void sub_806487C(struct Sprite *sprite, bool8 invisible);
+void sub_8064990(u8, u8);
+void UnfreezeMapObject(struct MapObject *mapObject);
+void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3);
+void sub_806467C(struct Sprite *sprite, u8 direction);
+bool8 sub_806468C(struct Sprite *sprite);
+void sub_80646E4(struct Sprite *sprite, u8 a2, u8 a3, u8 a4);
+void DoShadowFieldEffect(struct MapObject *mapObject);
+u8 sub_8064704(struct Sprite *);
+u8 sub_806478C(struct Sprite *);
+void obj_anim_image_set_and_seek(struct Sprite *sprite, u8 a2, u8 a3);
+void DoRippleFieldEffect(struct MapObject *mapObj, struct Sprite *sprite);
+bool8 IsZCoordMismatchAt(u8 z, s16 x, s16 y);
+bool8 AreZCoordsCompatible(u8 z1, u8 z2);
+void FieldObjectUpdateMetatileBehaviors(struct MapObject *);
+void GetGroundEffectFlags_Reflection(struct MapObject *, u32 *);
+void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject *, u32 *);
+void GetGroundEffectFlags_TallGrassOnBeginStep(struct MapObject *, u32 *);
+void GetGroundEffectFlags_LongGrassOnSpawn(struct MapObject *, u32 *);
+void GetGroundEffectFlags_LongGrassOnBeginStep(struct MapObject *, u32 *);
+void GetGroundEffectFlags_Tracks(struct MapObject *, u32 *);
+void GetGroundEffectFlags_SandPile(struct MapObject *, u32 *);
+void GetGroundEffectFlags_ShallowFlowingWater(struct MapObject *, u32 *);
+void GetGroundEffectFlags_Puddle(struct MapObject *, u32 *);
+void GetGroundEffectFlags_Ripple(struct MapObject *, u32 *);
+void GetGroundEffectFlags_ShortGrass(struct MapObject *, u32 *);
+void GetGroundEffectFlags_HotSprings(struct MapObject *, u32 *);
+void GetGroundEffectFlags_Seaweed(struct MapObject *, u32 *);
+void GetGroundEffectFlags_JumpLanding(struct MapObject *, u32 *);
+u8 FieldObjectCheckForReflectiveSurface(struct MapObject *);
+u8 GetLedgeJumpDirection(s16, s16, u8);
+u8 ZCoordToPriority(u8);
+void FieldObjectUpdateZCoord(struct MapObject *pObject);
+void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
-#endif // GUARD_FIELD_MAP_OBJ_H
+#endif // GUARD_EVOBJMV_H

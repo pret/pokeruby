@@ -121,7 +121,7 @@ gUnknown_03004828: @ 3004828
 	.include "field/overworld.o"
 	.include "field/fieldmap.o"
 	.include "field/field_camera.o"
-	.include "field/field_map_obj.o"
+	.include "field/evobjmv.o"
 	.include "field/field_control_avatar.o"
 
 @ party_menu?

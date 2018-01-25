@@ -13,7 +13,7 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "field_weather.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "scanline_effect.h"
 #include "event_data.h"
 #include "cable_car_util.h"

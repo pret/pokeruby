@@ -1,6 +1,6 @@
 #include "global.h"
 #include "blend_palette.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "field_weather.h"
 #include "palette.h"
 #include "random.h"

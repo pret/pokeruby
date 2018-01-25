@@ -10,7 +10,7 @@
 	.include "src/engine/play_time.o"
 	.include "src/field/overworld.o"
 	.include "src/field/field_camera.o"
-	.include "src/field/field_map_obj.o"
+	.include "src/field/evobjmv.o"
 	.include "src/field/field_message_box.o"
 	.include "src/engine/text_window.o"
 	.include "src/engine/script.o"

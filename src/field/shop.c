@@ -16,7 +16,7 @@
 #include "task.h"
 #include "tv.h"
 #include "scanline_effect.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "item.h"

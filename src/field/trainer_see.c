@@ -2,7 +2,7 @@
 #include "trainer_see.h"
 #include "battle_setup.h"
 #include "field_effect.h"
-#include "field_map_obj.h"
+#include "evobjmv.h"
 #include "field_player_avatar.h"
 #include "script.h"
 #include "sprite.h"

@@ -8,7 +8,6 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
-#include "field_map_obj_helpers.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
