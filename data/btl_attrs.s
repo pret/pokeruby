@@ -8,9 +8,6 @@
 
 	.section .rodata
 
-@ 81F8320
-	.include "data/text/move_names.inc"
-
 	.align 2
 @ 81F9528
 	.4byte 0x101 @ unknown data
