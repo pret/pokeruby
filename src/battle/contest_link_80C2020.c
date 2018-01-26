@@ -8,6 +8,7 @@
 #include "scanline_effect.h"
 #include "decompress.h"
 #include "palette.h"
+#include "blend_palette.h"
 #include "graphics.h"
 #include "strings2.h"
 #include "text.h"
@@ -15,6 +16,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "pokedex.h"
+#include "pokemon_icon.h"
 #include "tv.h"
 #include "battle.h"
 #include "contest.h"
@@ -728,3 +730,158 @@ void sub_80C2EA0(u8 taskId)
         }
     }
 }
+
+void sub_80C2F28(u8 taskId)
+{
+    gBattle_BG3_X += 2;
+    gBattle_BG3_Y++;
+    if (gBattle_BG3_X > 0xff)
+        gBattle_BG3_X -= 0xff;
+    if (gBattle_BG3_Y > 0xff)
+        gBattle_BG3_Y -= 0xff;
+}
+
+void sub_80C2F64(u8 taskId)
+{
+    if (++gTasks[taskId].data[0] == 2)
+    {
+        gTasks[taskId].data[0] = 0;
+        if (gTasks[taskId].data[2] == 0)
+            gTasks[taskId].data[1]++;
+        else
+            gTasks[taskId].data[1]--;
+        if (gTasks[taskId].data[1] == 16)
+            gTasks[taskId].data[2] = 1;
+        else if (gTasks[taskId].data[1] == 0)
+            gTasks[taskId].data[2] = 0;
+        BlendPalette(0x6b, 0x01, gTasks[taskId].data[1], RGB(30, 22, 11));
+        BlendPalette(0x68, 0x01, gTasks[taskId].data[1], RGB(31, 31, 31));
+        BlendPalette(0x6e, 0x01, gTasks[taskId].data[1], RGB(30, 29, 29));
+    }
+    if (gTasks[taskId].data[1] == 0)
+        eContestLink80C2020Struct2018000.unk_0a = 0;
+    else
+        eContestLink80C2020Struct2018000.unk_0a = 1;
+}
+
+#ifdef NONMATCHING
+void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
+{
+    int i;
+    int j;
+    u16 tile;
+    u16 offset;
+    int vOffset;
+
+    if (useDmaNow)
+    {
+        DmaCopy32Defvars(3, GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
+        tile = ((destOffset + 10) << 12);
+        tile |= (destOffset * 16 + 0x200);
+        offset = destOffset * 0x60 + 0x83;
+        for (i = 0; i < 3; i++)
+        {
+            vOffset = (i << 5) + offset;
+            for (j = 0; j < 4; j++)
+            {
+                ((u16 *)BG_CHAR_ADDR(3))[vOffset + j] = tile;
+                tile++;
+            }
+        }
+    }
+    else
+    {
+        RequestSpriteCopy(GetMonIconPtr(species, personality) + (srcOffset << 9) + 0x80, BG_CHAR_ADDR(1) + (destOffset << 9), 0x180);
+    }
+}
+#else
+__attribute__((naked)) void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset, bool8 useDmaNow, u32 personality)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                    "\tldr r6, [sp, 0x10]\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r0, 16\n"
+                    "\tlsls r1, 24\n"
+                    "\tlsrs r4, r1, 24\n"
+                    "\tlsls r2, 24\n"
+                    "\tlsrs r5, r2, 24\n"
+                    "\tlsls r3, 24\n"
+                    "\tcmp r3, 0\n"
+                    "\tbeq _080C30B0\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tbl GetMonIconPtr\n"
+                    "\tlsls r1, r5, 9\n"
+                    "\tadds r0, r1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tlsls r1, r4, 9\n"
+                    "\tldr r2, _080C30A0 @ =0x06004000\n"
+                    "\tadds r1, r2\n"
+                    "\tldr r2, _080C30A4 @ =0x040000d4\n"
+                    "\tstr r0, [r2]\n"
+                    "\tstr r1, [r2, 0x4]\n"
+                    "\tldr r0, _080C30A8 @ =0x84000060\n"
+                    "\tstr r0, [r2, 0x8]\n"
+                    "\tldr r0, [r2, 0x8]\n"
+                    "\tadds r1, r4, 0\n"
+                    "\tadds r1, 0xA\n"
+                    "\tlsls r1, 28\n"
+                    "\tlsls r0, r4, 20\n"
+                    "\tmovs r2, 0x80\n"
+                    "\tlsls r2, 18\n"
+                    "\tadds r0, r2\n"
+                    "\torrs r0, r1\n"
+                    "\tlsrs r1, r0, 16\n"
+                    "\tlsls r0, r4, 1\n"
+                    "\tadds r0, r4\n"
+                    "\tlsls r0, 21\n"
+                    "\tmovs r2, 0x83\n"
+                    "\tlsls r2, 16\n"
+                    "\tadds r0, r2\n"
+                    "\tlsrs r5, r0, 16\n"
+                    "\tmovs r2, 0\n"
+                    "\tldr r6, _080C30AC @ =0x0600c000\n"
+                    "_080C307C:\n"
+                    "\tlsls r0, r2, 5\n"
+                    "\tadds r4, r2, 0x1\n"
+                    "\tadds r0, r5\n"
+                    "\tmovs r3, 0x3\n"
+                    "\tlsls r0, 1\n"
+                    "\tadds r2, r0, r6\n"
+                    "_080C3088:\n"
+                    "\tstrh r1, [r2]\n"
+                    "\tadds r0, r1, 0x1\n"
+                    "\tlsls r0, 16\n"
+                    "\tlsrs r1, r0, 16\n"
+                    "\tadds r2, 0x2\n"
+                    "\tsubs r3, 0x1\n"
+                    "\tcmp r3, 0\n"
+                    "\tbge _080C3088\n"
+                    "\tadds r2, r4, 0\n"
+                    "\tcmp r2, 0x2\n"
+                    "\tble _080C307C\n"
+                    "\tb _080C30CA\n"
+                    "\t.align 2, 0\n"
+                    "_080C30A0: .4byte 0x06004000\n"
+                    "_080C30A4: .4byte 0x040000d4\n"
+                    "_080C30A8: .4byte 0x84000060\n"
+                    "_080C30AC: .4byte 0x0600c000\n"
+                    "_080C30B0:\n"
+                    "\tadds r1, r6, 0\n"
+                    "\tbl GetMonIconPtr\n"
+                    "\tlsls r1, r5, 9\n"
+                    "\tadds r0, r1\n"
+                    "\tadds r0, 0x80\n"
+                    "\tlsls r1, r4, 9\n"
+                    "\tldr r2, _080C30D0 @ =0x06004000\n"
+                    "\tadds r1, r2\n"
+                    "\tmovs r2, 0xC0\n"
+                    "\tlsls r2, 1\n"
+                    "\tbl RequestSpriteCopy\n"
+                    "_080C30CA:\n"
+                    "\tpop {r4-r6}\n"
+                    "\tpop {r0}\n"
+                    "\tbx r0\n"
+                    "\t.align 2, 0\n"
+                    "_080C30D0: .4byte 0x06004000");
+}
+#endif
