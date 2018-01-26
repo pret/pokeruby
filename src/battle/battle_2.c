@@ -6,6 +6,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/species.h"
+#include "gba/flash_internal.h"
 #include "battle.h"
 #include "battle_ai.h"
 #include "battle_interface.h"
@@ -1500,6 +1501,17 @@ void debug_sub_80108B8(void)
 	}
 }
 
+// This function matches, but it somehow affects registers in SetActionsAndBanksTurnOrder.
+#ifdef NONMATCHING
+void debug_sub_8010A7C(u8 a, u8 b)
+{
+    s32 i;
+
+    for (i = 0; i < b; i++)
+        gBattleTextBuff1[i] = a;
+    gBattleTextBuff1[i] = EOS;
+}
+#else
 __attribute__((naked))
 void debug_sub_8010A7C()
 {
@@ -1534,6 +1546,14 @@ void debug_sub_8010A7C()
         "\n"
     );
 }
+#endif
+
+/*
+void debug_sub_8010AAC(u8 a)
+{
+    u32 r7 = gUnknown_Debug_030043A4 * 5;
+}
+*/
 
 __attribute__((naked))
 void debug_sub_8010AAC()
@@ -3898,72 +3918,19 @@ void debug_sub_801174C()
     );
 }
 
-__attribute__((naked))
-void debug_sub_8011D40()
+void debug_sub_8011D40(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r1, ._774\n"
-        "	ldr	r0, ._774 + 4\n"
-        "	str	r0, [r1]\n"
-        "	ldr	r0, ._774 + 8\n"
-        "	str	r0, [r1, #0x4]\n"
-        "	ldr	r0, ._774 + 12\n"
-        "	str	r0, [r1, #0x8]\n"
-        "	ldr	r0, [r1, #0x8]\n"
-        "	sub	r1, r1, #0xc4\n"
-        "	ldr	r0, ._774 + 16\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 20\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 24\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 28\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 32\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 36\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 40\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	add	r1, r1, #0x2\n"
-        "	ldr	r0, ._774 + 44\n"
-        "	ldrh	r0, [r0]\n"
-        "	strh	r0, [r1]\n"
-        "	bl	LoadOam\n"
-        "	bl	ProcessSpriteCopyRequests\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._775:\n"
-        "	.align	2, 0\n"
-        "._774:\n"
-        "	.word	0x40000d4\n"
-        "	.word	gSharedMem\n"
-        "	.word	0x6004000\n"
-        "	.word	0x80000800\n"
-        "	.word	gBattle_BG0_X\n"
-        "	.word	gBattle_BG0_Y\n"
-        "	.word	gBattle_BG1_X\n"
-        "	.word	gBattle_BG1_Y\n"
-        "	.word	gBattle_BG2_X\n"
-        "	.word	gBattle_BG2_Y\n"
-        "	.word	gBattle_BG3_X\n"
-        "	.word	gBattle_BG3_Y\n"
-        "\n"
-    );
+    DmaCopy16(3, gSharedMem, (void *)(VRAM + 0x4000), 0x1000);
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
+    REG_BG1HOFS = gBattle_BG1_X;
+    REG_BG1VOFS = gBattle_BG1_Y;
+    REG_BG2HOFS = gBattle_BG2_X;
+    REG_BG2VOFS = gBattle_BG2_Y;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
+    LoadOam();
+    ProcessSpriteCopyRequests();
 }
 
 void debug_nullsub_45()
@@ -6517,125 +6484,45 @@ void debug_sub_8012D10()
     );
 }
 
-__attribute__((naked))
-void debug_sub_8013240()
+u8 debug_sub_8013240(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	IdentifyFlash\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1068	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	b	._1069\n"
-        "._1068:\n"
-        "	mov	r0, #0x0\n"
-        "._1069:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (IdentifyFlash() == 0)
+        return 0;
+    else
+        return 1;
 }
 
-__attribute__((naked))
-void debug_sub_8013258()
+u32 debug_sub_8013258(u16 sectorNum, u8 *data, u32 size)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r6, r1, #0\n"
-        "	add	r5, r2, #0\n"
-        "	b	._1070\n"
-        "._1072:\n"
-        "	ldr	r0, ._1074\n"
-        "	add	r5, r5, r0\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x5\n"
-        "	add	r6, r6, r0\n"
-        "	add	r0, r4, #1\n"
-        "._1070:\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r4, r0, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	ProgramFlashSectorAndVerify\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1071	@cond_branch\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x5\n"
-        "	cmp	r5, r0\n"
-        "	bhi	._1072	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	b	._1073\n"
-        "._1075:\n"
-        "	.align	2, 0\n"
-        "._1074:\n"
-        "	.word	0xfffff000\n"
-        "._1071:\n"
-        "	mov	r0, #0x0\n"
-        "._1073:\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    while (1)
+    {
+        if (ProgramFlashSectorAndVerify(sectorNum, data) != 0)
+            return 0;
+        if (size <= 0x1000)
+            break;
+        size -= 0x1000;
+        data += 0x1000;
+        sectorNum++;
+    }
+    return 1;
 }
 
-__attribute__((naked))
-void debug_sub_8013294()
+u32 debug_sub_8013294(u8 sectorNum, void *data, u32 size)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r5, r1, #0\n"
-        "	add	r6, r2, #0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	bl	debug_sub_8013240\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1076	@cond_branch\n"
-        "	bl	m4aSoundVSyncOff\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r5, #0\n"
-        "	add	r2, r6, #0\n"
-        "	bl	debug_sub_8013258\n"
-        "	add	r4, r0, #0\n"
-        "	bl	m4aSoundVSyncOn\n"
-        "	add	r0, r4, #0\n"
-        "	b	._1077\n"
-        "._1076:\n"
-        "	mov	r0, #0x0\n"
-        "._1077:\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    u32 result;
+
+    if (debug_sub_8013240() != 0)
+        return 0;
+    m4aSoundVSyncOff();
+    result = debug_sub_8013258(sectorNum, data, size);
+    m4aSoundVSyncOn();
+    return result;
 }
 
-__attribute__((naked))
-void debug_sub_80132C8()
+void debug_sub_80132C8(u8 a, void *b, u32 c)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r5, r1, #0\n"
-        "	add	r6, r2, #0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	bl	debug_sub_8013240\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1078	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x0\n"
-        "	add	r2, r5, #0\n"
-        "	add	r3, r6, #0\n"
-        "	bl	ReadFlash\n"
-        "._1078:\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    if (debug_sub_8013240() == 0)
+        ReadFlash(a, 0, b, c);
 }
 #endif
 
@@ -10146,7 +10033,7 @@ void SetActionsAndBanksTurnOrder(void)
     // And doing this seems to fix it.
 #if DEBUG
     asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");
-    asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");
+    asm("");asm("");asm("");asm("");asm("");asm("");asm("");
 #endif
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     eFocusPunchBank = 0;
