@@ -809,7 +809,7 @@ sub_800DAB8:
 	mov	r2, #0x80
 	lsl	r2, r2, #0x4
 	add	r1, r4, #0
-	bl	gMysteryEventScriptCmdTableEnd+0x3cb4 	@ uh, what?
+	bl	CpuSet
 	ldr	r0, ._113 + 12
 	mov	r1, #0x0
 	mov	r2, #0x40

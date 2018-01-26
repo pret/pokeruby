@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_anim_81258BC.h"
 #include "battle.h"
+#include "battle_interface.h"
 #include "battle_message.h"
 #include "data2.h"
 #include "link.h"
@@ -207,236 +208,6 @@ void SafariBufferRunCommand(void)
     }
 }
 
-#if DEBUG
-__attribute__((naked))
-void bx_battle_menu_t6_2(void)
-{
-    asm("\
-	push	{r4, r5, lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._94\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r2, #0x1\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._89	@cond_branch\n\
-	mov	r0, #0x5\n\
-	bl	PlaySE\n\
-	bl	DestroyMenuCursor\n\
-	ldr	r1, ._94 + 4\n\
-	ldr	r0, ._94 + 8\n\
-	ldrb	r0, [r0]\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x1\n\
-	beq	._90	@cond_branch\n\
-	cmp	r0, #0x1\n\
-	bgt	._91	@cond_branch\n\
-	cmp	r0, #0\n\
-	beq	._92	@cond_branch\n\
-	b	._101\n\
-._95:\n\
-	.align	2, 0\n\
-._94:\n\
-	.word	gMain\n\
-	.word	gActionSelectionCursor\n\
-	.word	gActiveBank\n\
-._91:\n\
-	cmp	r0, #0x2\n\
-	beq	._96	@cond_branch\n\
-	cmp	r0, #0x3\n\
-	beq	._97	@cond_branch\n\
-	b	._101\n\
-._92:\n\
-	mov	r0, #0x1\n\
-	mov	r1, #0x5\n\
-	b	._100\n\
-._90:\n\
-	mov	r0, #0x1\n\
-	mov	r1, #0x6\n\
-	b	._100\n\
-._96:\n\
-	mov	r0, #0x1\n\
-	mov	r1, #0x7\n\
-._100:\n\
-	mov	r2, #0x0\n\
-	bl	Emitcmd33\n\
-	b	._101\n\
-._97:\n\
-	mov	r0, #0x1\n\
-	mov	r1, #0x8\n\
-	mov	r2, #0x0\n\
-	bl	Emitcmd33\n\
-._101:\n\
-	bl	SafariBufferExecCompleted\n\
-	b	._129\n\
-._89:\n\
-	mov	r3, #0x20\n\
-	add	r0, r3, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._103	@cond_branch\n\
-	ldr	r5, ._107\n\
-	ldr	r4, ._107 + 4\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._104	@cond_branch\n\
-	b	._129\n\
-._104:\n\
-	mov	r0, #0x5\n\
-	bl	PlaySE\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r0, [r0]\n\
-	bl	nullsub_8\n\
-	ldrb	r1, [r4]\n\
-	add	r1, r1, r5\n\
-	ldrb	r0, [r1]\n\
-	mov	r2, #0x1\n\
-	b	._111\n\
-._108:\n\
-	.align	2, 0\n\
-._107:\n\
-	.word	gActionSelectionCursor\n\
-	.word	gActiveBank\n\
-._103:\n\
-	mov	r0, #0x10\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._109	@cond_branch\n\
-	ldr	r5, ._112\n\
-	ldr	r4, ._112 + 4\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._129	@cond_branch\n\
-	mov	r0, #0x5\n\
-	bl	PlaySE\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r0, [r0]\n\
-	bl	nullsub_8\n\
-	ldrb	r1, [r4]\n\
-	add	r1, r1, r5\n\
-	ldrb	r0, [r1]\n\
-	mov	r2, #0x1\n\
-	b	._111\n\
-._113:\n\
-	.align	2, 0\n\
-._112:\n\
-	.word	gActionSelectionCursor\n\
-	.word	gActiveBank\n\
-._109:\n\
-	mov	r0, #0x40\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._114	@cond_branch\n\
-	ldr	r5, ._117\n\
-	ldr	r4, ._117 + 4\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._129	@cond_branch\n\
-	b	._116\n\
-._118:\n\
-	.align	2, 0\n\
-._117:\n\
-	.word	gActionSelectionCursor\n\
-	.word	gActiveBank\n\
-._114:\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._119	@cond_branch\n\
-	ldr	r5, ._122\n\
-	ldr	r4, ._122 + 4\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._129	@cond_branch\n\
-._116:\n\
-	mov	r0, #0x5\n\
-	bl	PlaySE\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r0, [r0]\n\
-	bl	nullsub_8\n\
-	ldrb	r1, [r4]\n\
-	add	r1, r1, r5\n\
-	ldrb	r0, [r1]\n\
-	mov	r2, #0x2\n\
-._111:\n\
-	eor	r0, r0, r2\n\
-	strb	r0, [r1]\n\
-	ldrb	r0, [r4]\n\
-	add	r0, r0, r5\n\
-	ldrb	r0, [r0]\n\
-	mov	r1, #0x0\n\
-	bl	sub_802E3E4\n\
-	b	._129\n\
-._123:\n\
-	.align	2, 0\n\
-._122:\n\
-	.word	gActionSelectionCursor\n\
-	.word	gActiveBank\n\
-._119:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._124	@cond_branch\n\
-	ldr	r0, ._127\n\
-	ldrb	r2, [r0]\n\
-	lsl	r0, r2, #0x1\n\
-	add	r0, r0, r2\n\
-	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._127 + 4\n\
-	add	r0, r0, r1\n\
-	ldrb	r1, [r0]\n\
-	add	r0, r3, #0\n\
-	and	r0, r0, r1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	bne	._129	@cond_branch\n\
-	str	r0, [sp]\n\
-	add	r0, r2, #0\n\
-	add	r1, r2, #0\n\
-	mov	r3, #0x4\n\
-	bl	move_anim_start_t3\n\
-	b	._129\n\
-._128:\n\
-	.align	2, 0\n\
-._127:\n\
-	.word	gActiveBank\n\
-	.word	+0x2017810\n\
-._124:\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._129	@cond_branch\n\
-	bl	sub_804454C\n\
-._129:\n\
-	add	sp, sp, #0x4\n\
-	pop	{r4, r5}\n\
-	pop	{r0}\n\
-	bx	r0");
-}
-#else
 void bx_battle_menu_t6_2(void)
 {
     if (gMain.newKeys & A_BUTTON)
@@ -502,8 +273,18 @@ void bx_battle_menu_t6_2(void)
             sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
         }
     }
-}
+#if DEBUG
+    else if (gMain.newKeys & R_BUTTON)
+    {
+	if (!ewram17810[gActiveBank].unk0_5)
+	    move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, 4, 0);
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+	sub_804454C();
+    }
 #endif
+}
 
 void sub_812B65C(void)
 {

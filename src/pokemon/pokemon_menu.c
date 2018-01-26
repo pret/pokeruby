@@ -31,6 +31,7 @@
 #include "item_menu.h"
 #include "player_pc.h"
 #include "ewram.h"
+#include "script.h"
 
 /*
 Pokemon menu:
@@ -45,6 +46,7 @@ struct PokeMenuFieldMoveFunc
     u8 field_1;
 };
 
+extern u8 gUnknown_020297ED;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
@@ -900,9 +902,10 @@ static void sub_808AE08(void)
 static bool8 SetUpFieldMove_Waterfall(void)
 {
     s16 x, y;
+
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
-        && IsPlayerSurfingNorth() == TRUE)
+     && IsPlayerSurfingNorth() == TRUE)
     {
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808AE08;
@@ -913,138 +916,19 @@ static bool8 SetUpFieldMove_Waterfall(void)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_80986AC()
+void debug_sub_80986AC(void)
 {
-    asm("\
-	push	{r4, lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	mov	r4, sp\n\
-	add	r4, r4, #0x2\n\
-	mov	r0, sp\n\
-	add	r1, r4, #0\n\
-	bl	GetXYCoordsOneStepInFrontOfPlayer\n\
-	mov	r0, sp\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r0, r1]\n\
-	mov	r2, #0x0\n\
-	ldsh	r1, [r4, r2]\n\
-	bl	MapGridGetMetatileBehaviorAt\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	bl	MetatileBehavior_IsWaterfall\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bne	._274	@cond_branch\n\
-	bl	IsPlayerSurfingNorth\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bne	._274	@cond_branch\n\
-	bl	sub_808AE08\n\
-	b	._275\n\
-._274:\n\
-	bl	ScriptContext2_Disable\n\
-._275:\n\
-	add	sp, sp, #0x4\n\
-	pop	{r4}\n\
-	pop	{r0}\n\
-	bx	r0");
+    s16 x, y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
+     && IsPlayerSurfingNorth() == TRUE)
+        sub_808AE08();
+    else
+        ScriptContext2_Disable();
 }
 #endif
 
-#if DEBUG
-__attribute__((naked))
-static void sub_808AE8C(void)
-{
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	ldr	r0, ._281\n\
-	ldrb	r0, [r0]\n\
-	sub	r0, r0, #0x21\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r6, r0, #0x18\n\
-	mov	r5, #0x0\n\
-._287:\n\
-	mov	r0, #0x64\n\
-	add	r1, r5, #0\n\
-	mul	r1, r1, r0\n\
-	ldr	r0, ._281 + 4\n\
-	add	r4, r1, r0\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0xb\n\
-	bl	GetMonData\n\
-	cmp	r0, #0\n\
-	beq	._284	@cond_branch\n\
-	add	r0, r5, #0\n\
-	bl	sub_806D668\n\
-	ldr	r0, ._281 + 8\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._279	@cond_branch\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x2d\n\
-	bl	GetMonData\n\
-	cmp	r0, #0\n\
-	bne	._278	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r1, r6, #0\n\
-	bl	CanMonLearnTMHM\n\
-	cmp	r0, #0\n\
-	bne	._279	@cond_branch\n\
-._278:\n\
-	add	r0, r5, #0\n\
-	mov	r1, #0x9a\n\
-	bl	sub_806BC3C\n\
-	b	._284\n\
-._282:\n\
-	.align	2, 0\n\
-._281:\n\
-	.word	gSpecialVar_ItemId\n\
-	.word	gPlayerParty\n\
-	.word	gUnknown_020297ED\n\
-._279:\n\
-	mov	r0, #0x64\n\
-	add	r4, r5, #0\n\
-	mul	r4, r4, r0\n\
-	ldr	r0, ._285\n\
-	add	r4, r4, r0\n\
-	ldr	r0, ._285 + 4\n\
-	ldrh	r0, [r0]\n\
-	bl	ItemIdToBattleMoveId\n\
-	add	r1, r0, #0\n\
-	lsl	r1, r1, #0x10\n\
-	lsr	r1, r1, #0x10\n\
-	add	r0, r4, #0\n\
-	bl	pokemon_has_move\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	beq	._283	@cond_branch\n\
-	add	r0, r5, #0\n\
-	mov	r1, #0xa8\n\
-	bl	sub_806BC3C\n\
-	b	._284\n\
-._286:\n\
-	.align	2, 0\n\
-._285:\n\
-	.word	gPlayerParty\n\
-	.word	gSpecialVar_ItemId\n\
-._283:\n\
-	add	r0, r5, #0\n\
-	mov	r1, #0x8c\n\
-	bl	sub_806BC3C\n\
-._284:\n\
-	add	r0, r5, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r5, r0, #0x18\n\
-	cmp	r5, #0x5\n\
-	bls	._287	@cond_branch\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0");
-}
-#else
 static void sub_808AE8C(void)
 {
     u8 i;
@@ -1054,7 +938,11 @@ static void sub_808AE8C(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
         {
             sub_806D668(i);
-            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg))
+            if (
+#if DEBUG
+             gUnknown_020297ED == 0 &&
+#endif
+             (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg)))
                 sub_806BC3C(i, 0x9A);
             else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gSpecialVar_ItemId)))
                 sub_806BC3C(i, 0xA8);
@@ -1063,7 +951,6 @@ static void sub_808AE8C(void)
         }
     }
 }
-#endif
 
 static void sub_808AF20(void)
 {

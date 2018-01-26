@@ -30,6 +30,7 @@ struct MovePpInfo
     u8 ppBonuses;
 };
 
+extern u8 gUnknown_02023A14_50;
 extern u8 gActiveBank;
 extern u8 gBattleBufferA[][0x200];
 extern u16 gBattlePartyID[];
@@ -1209,255 +1210,27 @@ void sub_8034B74(void)
     }
 }
 
-#if DEBUG
-__attribute__((naked))
-void OpponentHandleTrainerThrow(void)
-{
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	mov	r6, r9\n\
-	mov	r5, r8\n\
-	push	{r5, r6}\n\
-	ldr	r0, ._480\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x10\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._478	@cond_branch\n\
-	ldr	r0, ._480 + 4\n\
-	ldr	r1, ._480 + 8\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	b	._491\n\
-._481:\n\
-	.align	2, 0\n\
-._480:\n\
-	.word	gUnknown_02023A14_50\n\
-	.word	+0x2000000\n\
-	.word	0x160a3\n\
-._478:\n\
-	ldr	r3, ._484\n\
-	ldrh	r1, [r3]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x3\n\
-	cmp	r1, r0\n\
-	bne	._482	@cond_branch\n\
-	bl	GetSecretBaseTrainerPicIndex\n\
-	b	._487\n\
-._485:\n\
-	.align	2, 0\n\
-._484:\n\
-	.word	gTrainerBattleOpponent\n\
-._482:\n\
-	ldr	r0, ._488\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._486	@cond_branch\n\
-	bl	get_trainer_class_pic_index\n\
-	b	._487\n\
-._489:\n\
-	.align	2, 0\n\
-._488:\n\
-	.word	gBattleTypeFlags\n\
-._486:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._490	@cond_branch\n\
-	bl	GetEReaderTrainerPicIndex\n\
-._487:\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	b	._491\n\
-._490:\n\
-	ldr	r2, ._492\n\
-	ldrh	r1, [r3]\n\
-	lsl	r0, r1, #0x2\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x3\n\
-	add	r0, r0, r2\n\
-	ldrb	r0, [r0, #0x3]\n\
-._491:\n\
-	mov	r9, r0\n\
-	ldr	r2, ._492 + 4\n\
-	mov	r8, r2\n\
-	ldrb	r1, [r2]\n\
-	bl	sub_8031A6C\n\
-	mov	r1, r8\n\
-	ldrb	r0, [r1]\n\
-	bl	GetBankIdentity\n\
-	add	r1, r0, #0\n\
-	lsl	r1, r1, #0x18\n\
-	lsr	r1, r1, #0x18\n\
-	mov	r0, r9\n\
-	bl	GetMonSpriteTemplate_803C5A0\n\
-	ldr	r5, ._492 + 8\n\
-	ldr	r1, ._492 + 12\n\
-	mov	r2, r9\n\
-	lsl	r0, r2, #0x2\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	mov	r4, #0x8\n\
-	sub	r4, r4, r0\n\
-	lsl	r4, r4, #0x12\n\
-	mov	r0, #0xa0\n\
-	lsl	r0, r0, #0xe\n\
-	add	r4, r4, r0\n\
-	asr	r4, r4, #0x10\n\
-	mov	r1, r8\n\
-	ldrb	r0, [r1]\n\
-	bl	sub_8079E90\n\
-	add	r3, r0, #0\n\
-	lsl	r3, r3, #0x18\n\
-	lsr	r3, r3, #0x18\n\
-	add	r0, r5, #0\n\
-	mov	r1, #0xb0\n\
-	add	r2, r4, #0\n\
-	bl	CreateSprite\n\
-	ldr	r5, ._492 + 16\n\
-	mov	r2, r8\n\
-	ldrb	r1, [r2]\n\
-	add	r1, r1, r5\n\
-	strb	r0, [r1]\n\
-	ldr	r4, ._492 + 20\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x4\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r4\n\
-	ldr	r1, ._492 + 24\n\
-	strh	r1, [r0, #0x24]\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x4\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r4\n\
-	mov	r1, #0x2\n\
-	strh	r1, [r0, #0x2e]\n\
-	ldr	r0, ._492 + 28\n\
-	mov	r1, r9\n\
-	lsl	r6, r1, #0x3\n\
-	add	r0, r6, r0\n\
-	ldrh	r0, [r0, #0x4]\n\
-	bl	IndexOfSpritePaletteTag\n\
-	mov	r2, r8\n\
-	ldrb	r1, [r2]\n\
-	add	r1, r1, r5\n\
-	ldrb	r1, [r1]\n\
-	lsl	r2, r1, #0x4\n\
-	add	r2, r2, r1\n\
-	lsl	r2, r2, #0x2\n\
-	add	r2, r2, r4\n\
-	lsl	r0, r0, #0x4\n\
-	ldrb	r3, [r2, #0x5]\n\
-	mov	r1, #0xf\n\
-	and	r1, r1, r3\n\
-	orr	r1, r1, r0\n\
-	strb	r1, [r2, #0x5]\n\
-	mov	r1, r8\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, r5\n\
-	ldrb	r0, [r0]\n\
-	lsl	r1, r0, #0x4\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x2\n\
-	add	r1, r1, r4\n\
-	ldrh	r0, [r1, #0x4]\n\
-	lsl	r0, r0, #0x16\n\
-	lsr	r0, r0, #0x16\n\
-	strh	r0, [r1, #0x38]\n\
-	ldr	r0, ._492 + 32\n\
-	add	r6, r6, r0\n\
-	ldrh	r0, [r6, #0x6]\n\
-	bl	GetSpriteTileStartByTag\n\
-	mov	r2, r8\n\
-	ldrb	r1, [r2]\n\
-	add	r1, r1, r5\n\
-	ldrb	r2, [r1]\n\
-	lsl	r1, r2, #0x4\n\
-	add	r1, r1, r2\n\
-	lsl	r1, r1, #0x2\n\
-	add	r1, r1, r4\n\
-	ldr	r2, ._492 + 36\n\
-	and	r2, r2, r0\n\
-	ldrh	r3, [r1, #0x4]\n\
-	ldr	r0, ._492 + 40\n\
-	and	r0, r0, r3\n\
-	orr	r0, r0, r2\n\
-	strh	r0, [r1, #0x4]\n\
-	mov	r1, r8\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x4\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r4\n\
-	mov	r2, r9\n\
-	strh	r2, [r0, #0x6]\n\
-	mov	r1, r8\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, r5\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x4\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r4, r4, #0x1c\n\
-	add	r0, r0, r4\n\
-	ldr	r1, ._492 + 44\n\
-	str	r1, [r0]\n\
-	ldr	r1, ._492 + 48\n\
-	mov	r2, r8\n\
-	ldrb	r0, [r2]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r1\n\
-	ldr	r1, ._492 + 52\n\
-	str	r1, [r0]\n\
-	pop	{r3, r4}\n\
-	mov	r8, r3\n\
-	mov	r9, r4\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._493:\n\
-	.align	2, 0\n\
-._492:\n\
-	.word	gTrainers\n\
-	.word	gActiveBank\n\
-	.word	gUnknown_02024E8C\n\
-	.word	gTrainerFrontPicCoords\n\
-	.word	gObjectBankIDs\n\
-	.word	gSprites\n\
-	.word	0xff10\n\
-	.word	gTrainerFrontPicPaletteTable\n\
-	.word	gTrainerFrontPicTable\n\
-	.word	0x3ff\n\
-	.word	0xfffffc00\n\
-	.word	sub_80313A0+1\n\
-	.word	gBattleBankFunc\n\
-	.word	sub_8032B4C+1");
-}
-#else
 void OpponentHandleTrainerThrow(void)
 {
     u32 trainerPicIndex;
 
-    if (gTrainerBattleOpponent == 0x400)
-        trainerPicIndex = GetSecretBaseTrainerPicIndex();
-    else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-        trainerPicIndex = get_trainer_class_pic_index();
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-        trainerPicIndex = GetEReaderTrainerPicIndex();
+#if DEBUG
+    if (gUnknown_02023A14_50 & 0x10)
+    {
+	trainerPicIndex = gSharedMem[0x160A3];
+    }
     else
-        trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
+#endif
+    {
+	if (gTrainerBattleOpponent == 0x400)
+	    trainerPicIndex = GetSecretBaseTrainerPicIndex();
+	else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+	    trainerPicIndex = get_trainer_class_pic_index();
+	else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
+	    trainerPicIndex = GetEReaderTrainerPicIndex();
+	else
+	    trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
+    }
 
     sub_8031A6C(trainerPicIndex, gActiveBank);
     GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBankIdentity(gActiveBank));
@@ -1475,7 +1248,6 @@ void OpponentHandleTrainerThrow(void)
     gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_8032B4C;
 }
-#endif
 
 void OpponentHandleTrainerSlide(void)
 {
