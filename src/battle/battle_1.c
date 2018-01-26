@@ -456,8 +456,10 @@ const u8 gEnemyMonElevation[] = {
 #if ENGLISH
 #include "../data/text/trainer_class_names_en.h"
 #include "../data/trainers_en.h"
+#include "../data/text/species_names_en.h"
 #elif GERMAN
 #include "../data/text/trainer_class_names_de.h"
 #include "../data/trainers_de.h"
+#include "../data/text/species_names_de.h"
 #endif
 
