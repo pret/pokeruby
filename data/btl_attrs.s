@@ -8,9 +8,6 @@
 
 	.section .rodata
 
-@ 81F716C
-@	.include "data/text/species_names.inc"
-
 @ 81F8320
 	.include "data/text/move_names.inc"
 
