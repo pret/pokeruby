@@ -13,5 +13,7 @@ void sub_809D608(u16);
 void sub_809D62C(struct Sprite *sprite);
 void sub_809D824(struct Sprite *sprite, u8 animNum);
 const u8 *GetMonIconPtr(u16 species, u32 personality);
+u16 mon_icon_convert_unown_species_id(u16 species, u32 personality);
+extern const u8 gMonIconPaletteIndices[];
 
 #endif // GUARD_POKEMON_ICON_H

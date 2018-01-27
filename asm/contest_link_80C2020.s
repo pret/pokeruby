@@ -5,37 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80C30D4
-sub_80C30D4: @ 80C30D4
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 24
-	lsrs r6, r1, 24
-	movs r5, 0
-	ldr r4, _080C3108 @ =gContestMons
-_080C30E4:
-	ldrh r0, [r4]
-	lsls r1, r5, 24
-	lsrs r1, 24
-	ldr r2, [r4, 0x38]
-	str r2, [sp]
-	adds r2, r7, 0
-	adds r3, r6, 0
-	bl sub_80C3024
-	adds r4, 0x40
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _080C30E4
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C3108: .4byte gContestMons
-	thumb_func_end sub_80C30D4
-
 	thumb_func_start sub_80C310C
 sub_80C310C: @ 80C310C
 	push {r4-r6,lr}

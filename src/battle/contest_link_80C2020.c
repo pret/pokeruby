@@ -59,26 +59,26 @@ struct UnkEwramStruct18018 {
 #define eContestLink80C2020Struct2018000 (*(struct UnkEwramStruct18000 *)(gSharedMem + 0x18000))
 #define eContestLink80C2020Struct2018018 (*(struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
 
-void sub_80C2430(void);
-void sub_80C2448(void);
-void sub_80C24F4(u8 taskId);
-void sub_80C255C(u8 taskId);
-void sub_80C25A4(u8 taskId);
-void sub_80C25C0(u8 taskId);
-void sub_80C2600(u8 taskId);
-void sub_80C26E4(u8 taskId);
-void sub_80C2770(u8 taskId);
-void sub_80C27EC(u8 taskId);
-void sub_80C2878(u8 taskId);
-void sub_80C2A8C(u8 taskId);
-void sub_80C2D1C(u8 taskId);
-void sub_80C2D80(u8 taskId);
-void sub_80C2DD8(u8 taskId);
-void sub_80C2E14(u8 taskId);
-void sub_80C2EA0(u8 taskId);
-void sub_80C2F28(u8 taskId);
-void sub_80C2F64(u8 taskId);
-void sub_80C30D4(u8 a0, u8 a1);
+static void sub_80C2430(void);
+static void sub_80C2448(void);
+static void sub_80C24F4(u8 taskId);
+static void sub_80C255C(u8 taskId);
+static void sub_80C25A4(u8 taskId);
+static void sub_80C25C0(u8 taskId);
+static void sub_80C2600(u8 taskId);
+static void sub_80C26E4(u8 taskId);
+static void sub_80C2770(u8 taskId);
+static void sub_80C27EC(u8 taskId);
+static void sub_80C2878(u8 taskId);
+static void sub_80C2A8C(u8 taskId);
+static void sub_80C2D1C(u8 taskId);
+static void sub_80C2D80(u8 taskId);
+static void sub_80C2DD8(u8 taskId);
+static void sub_80C2E14(u8 taskId);
+static void sub_80C2EA0(u8 taskId);
+static void sub_80C2F28(u8 taskId);
+static void sub_80C2F64(u8 taskId);
+static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow);
 void sub_80C310C(void);
 void sub_80C3158(const u8 *string, u8 spriteId);
 void sub_80C33DC(void);
@@ -289,7 +289,7 @@ void sub_80C2358(void)
     FreeAllSpritePalettes();
     sub_80C2144();
     sub_80C310C();
-    sub_80C30D4(0, 1);
+    LoadAllContestMonIcons(0, TRUE);
     sub_80C2340();
     eContestLink80C2020Struct2018000 = (struct UnkEwramStruct18000){};
     eContestLink80C2020Struct2018018 = (struct UnkEwramStruct18018){};
@@ -306,7 +306,7 @@ void sub_80C2358(void)
     SetVBlankCallback(sub_80C2448);
 }
 
-void sub_80C2430(void)
+static void sub_80C2430(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -314,7 +314,7 @@ void sub_80C2430(void)
     UpdatePaletteFade();
 }
 
-void sub_80C2448(void)
+static void sub_80C2448(void)
 {
     REG_BG0HOFS = gBattle_BG0_X;
     REG_BG0VOFS = gBattle_BG0_Y;
@@ -334,7 +334,7 @@ void sub_80C2448(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-void sub_80C24F4(u8 taskId)
+static void sub_80C24F4(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -350,7 +350,7 @@ void sub_80C24F4(u8 taskId)
     }
 }
 
-void sub_80C255C(u8 taskId)
+static void sub_80C255C(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers && GetLinkPlayerCount() == MAX_LINK_PLAYERS)
     {
@@ -359,12 +359,12 @@ void sub_80C255C(u8 taskId)
     }
 }
 
-void sub_80C25A4(u8 taskId)
+static void sub_80C25A4(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80C89DC, sub_80C25C0);
 }
 
-void sub_80C25C0(u8 taskId)
+static void sub_80C25C0(u8 taskId)
 {
     if (sub_8007ECC())
     {
@@ -374,7 +374,7 @@ void sub_80C25C0(u8 taskId)
     }
 }
 
-void sub_80C2600(u8 taskId)
+static void sub_80C2600(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
@@ -415,7 +415,7 @@ void sub_80C2600(u8 taskId)
     }
 }
 
-void sub_80C26E4(u8 taskId)
+static void sub_80C26E4(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -448,7 +448,7 @@ void sub_80C26E4(u8 taskId)
     }
 }
 
-void sub_80C2770(u8 taskId)
+static void sub_80C2770(u8 taskId)
 {
     if (eContestLink80C2020Struct2018000.unk_04 == 0)
     {
@@ -465,7 +465,7 @@ void sub_80C2770(u8 taskId)
     }
 }
 
-void sub_80C27EC(u8 taskId)
+static void sub_80C27EC(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
@@ -497,7 +497,7 @@ void sub_80C27EC(u8 taskId)
     }
 }
 
-void sub_80C2878(u8 taskId)
+static void sub_80C2878(u8 taskId)
 {
     int i;
     u8 taskId2;
@@ -565,7 +565,7 @@ void sub_80C2878(u8 taskId)
     }
 }
 
-void sub_80C2A8C(u8 taskId)
+static void sub_80C2A8C(u8 taskId)
 {
     int i;
     u8 spriteId;
@@ -653,7 +653,7 @@ void sub_80C2A8C(u8 taskId)
     }
 }
 
-void sub_80C2D1C(u8 taskId)
+static void sub_80C2D1C(u8 taskId)
 {
     int i;
 
@@ -670,7 +670,7 @@ void sub_80C2D1C(u8 taskId)
     }
 }
 
-void sub_80C2D80(u8 taskId)
+static void sub_80C2D80(u8 taskId)
 {
     if (gIsLinkContest & 1)
     {
@@ -684,7 +684,7 @@ void sub_80C2D80(u8 taskId)
     }
 }
 
-void sub_80C2DD8(u8 taskId)
+static void sub_80C2DD8(u8 taskId)
 {
     if (gReceivedRemoteLinkPlayers == 0)
     {
@@ -694,7 +694,7 @@ void sub_80C2DD8(u8 taskId)
     }
 }
 
-void sub_80C2E14(u8 taskId)
+static void sub_80C2E14(u8 taskId)
 {
     sub_80BE284(gContestFinalStandings[gContestPlayerMonIndex]);
     sub_810FB10(2);
@@ -706,7 +706,7 @@ void sub_80C2E14(u8 taskId)
     gTasks[taskId].func = sub_80C2EA0;
 }
 
-void sub_80C2EA0(u8 taskId)
+static void sub_80C2EA0(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -731,7 +731,7 @@ void sub_80C2EA0(u8 taskId)
     }
 }
 
-void sub_80C2F28(u8 taskId)
+static void sub_80C2F28(u8 taskId)
 {
     gBattle_BG3_X += 2;
     gBattle_BG3_Y++;
@@ -741,7 +741,7 @@ void sub_80C2F28(u8 taskId)
         gBattle_BG3_Y -= 0xff;
 }
 
-void sub_80C2F64(u8 taskId)
+static void sub_80C2F64(u8 taskId)
 {
     if (++gTasks[taskId].data[0] == 2)
     {
@@ -885,3 +885,23 @@ __attribute__((naked)) void sub_80C3024(u16 species, u8 destOffset, u8 srcOffset
                     "_080C30D0: .4byte 0x06004000");
 }
 #endif
+
+static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        sub_80C3024(gContestMons[i].species, i, srcOffset, useDmaNow, gContestMons[i].personality);
+    }
+}
+//
+//void sub_80C310C(void) {
+//    int i;
+//
+//    for (i = 0; i < 4; i++)
+//    {
+//        u16 species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
+//        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[species]], 0xa0 + 0x10 * i, 0x20);
+//    }
+//}
