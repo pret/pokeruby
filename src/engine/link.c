@@ -916,14 +916,9 @@ bool8 sub_8007E9C(u8 a1)
     }
 }
 
-bool8 sub_8007ECC(void)
+bool8 IsLinkTaskFinished(void)
 {
-    u8 retVal = FALSE;
-
-    if (!gLinkCallback)
-        retVal = TRUE;
-
-    return retVal;
+    return gLinkCallback == NULL;
 }
 
 u8 GetBlockReceivedStatus(void)

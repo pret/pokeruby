@@ -1711,7 +1711,7 @@ static bool8 sub_8048D44(void)
             gUnknown_03004824->unk_0075 ++;
             break;
         case  1:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 if (GetBlockReceivedStatus() == 0)
                 {
@@ -2210,7 +2210,7 @@ static void sub_8049A20(void)
     {
         sub_804AADC(3, 1);
         gUnknown_03004824->linkData[0] = 0xbbbb;
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             Trade_SendData(gUnknown_03004824);
         }
@@ -2239,7 +2239,7 @@ static void sub_8049AC0(void)
         else
         {
             sub_804AADC(3, 1);
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 gUnknown_03004824->linkData[0] = 0xbbcc;
                 Trade_SendData(gUnknown_03004824);
@@ -4632,7 +4632,7 @@ static void sub_804BB78(void)
     switch (gUnknown_03004828->unk_00bd)
     {
         case 1:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 Trade_SendData(gUnknown_03004828);
                 gUnknown_03004828->unk_00bd ++;
@@ -5534,13 +5534,13 @@ static void sub_804DC88(void)
                 gMain.state = 101;
                 gUnknown_03004828->unk_00c0 = 0;
             }
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 gMain.state = 2;
             }
             break;
         case 101:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 gMain.state = 2;
             }
@@ -5592,7 +5592,7 @@ static void sub_804DC88(void)
             gMain.state = 42;
             break;
         case 42:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 sub_8125E04();
                 gSoftResetDisabled = FALSE;
@@ -5607,7 +5607,7 @@ static void sub_804DC88(void)
             }
             break;
         case 6:
-            if (sub_8007ECC())
+            if (IsLinkTaskFinished())
             {
                 BeginNormalPaletteFade(-1, 0, 0, 16, 0);
                 gMain.state ++;
