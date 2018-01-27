@@ -726,6 +726,7 @@ void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
+void nullsub_36(struct Sprite *);
 void c2_8011A1C(void);
 void sub_80101B8(void);
 void c2_081284E0(void);

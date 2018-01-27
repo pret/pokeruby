@@ -3,6 +3,7 @@
 #include "battle_setup.h"
 #include "battle.h"
 #include "trainer.h"
+#include "gba/types.h"
 #include "constants/species.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -465,3 +466,58 @@ const u8 gEnemyMonElevation[] = {
 #include "../data/text/move_names_de.h"
 #endif
 
+const u32 gUnknown_81F9528 = 0x101;
+
+const struct OamData gOamData_81F952C = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 3
+};
+
+const struct OamData gOamData_81F9534 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 3,
+    .tileNum = 64
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_81F953C[] = {
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_81F954C[] = {
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x18, 0x18, 0, -128),
+    AFFINEANIMCMD_FRAME(0x18, 0x18, 0, -128),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_81F956C[] = {
+    gSpriteAffineAnim_81F953C,
+    gSpriteAffineAnim_81F954C
+};
+
+const struct SpriteTemplate gSpriteTemplate_81F9574 = {
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_81F952C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_81F956C,
+    .callback = nullsub_36
+};
+
+const struct SpriteTemplate gSpriteTemplate_81F958C = {
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_81F9534,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_81F956C,
+    .callback = nullsub_36
+};
+
+extern const u8 gUnknown_08E5DC2C[];
+
+const struct CompressedSpriteSheet gUnknown_081F95A4[] = {
+    {gUnknown_08E5DC2C, 4096, 0x2710},
+};
