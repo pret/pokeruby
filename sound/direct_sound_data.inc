@@ -87,8 +87,8 @@ DirectSoundWaveData_SC88_Piano2:: @ 8464E2C
 	.incbin "sound/direct_sound_samples/sc88/2_piano_2.bin"
 
 	.align 2
-DirectSoundWaveData_8466388:: @ 8466388
-	.incbin "sound/direct_sound_samples/sc88/8466388.bin"
+DirectSoundWaveData_SC88_UnisonSlap:: @ 8466388
+	.incbin "sound/direct_sound_samples/sc88/37_unison_slap.bin"
 
 	.align 2
 DirectSoundWaveData_SC88_Strings:: @ 8466F14
@@ -211,8 +211,8 @@ DirectSoundWaveData_SC88_TubularBell:: @ 849BAEC
 	.incbin "sound/direct_sound_samples/sc88/15_tubular_bell.bin"
 
 	.align 2
-DirectSoundWaveData_849D45C:: @ 849D45C
-	.incbin "sound/direct_sound_samples/849D45C.bin"
+DirectSoundWaveData_SC88_PinkNoise:: @ 849D45C
+	.incbin "sound/direct_sound_samples/sc88/123_pink_noise.bin"
 
 	.align 2
 DirectSoundWaveData_849F40C:: @ 849F40C
@@ -227,8 +227,8 @@ DirectSoundWaveData_SC88_Marimba:: @ 84A311C
 	.incbin "sound/direct_sound_samples/sc88/13_marimba.bin"
 
 	.align 2
-DirectSoundWaveData_84A3B50:: @ 84A3B50
-	.incbin "sound/direct_sound_samples/84A3B50.bin"
+DirectSoundWaveData_SC88_WhiteNoise:: @ 84A3B50
+	.incbin "sound/direct_sound_samples/sc88/123_white_noise.bin"
 
 	.align 2
 DirectSoundWaveData_84A5690:: @ 84A5690
