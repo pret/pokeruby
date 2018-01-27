@@ -657,7 +657,7 @@ sub_80C25C0: @ 80C25C0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8007ECC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C25EC
@@ -5778,7 +5778,7 @@ sub_80C4B5C: @ 80C4B5C
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080C4B90
-	bl sub_8007ECC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C4B9E
