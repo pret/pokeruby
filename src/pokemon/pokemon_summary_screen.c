@@ -583,12 +583,12 @@ void sub_809D844(void)
 	bl	AnimateSprites\n\
 	bl	BuildOamBuffer\n\
 	bl	UpdatePaletteFade\n\
-	ldr	r0, ._2\n\
+	ldr	r0, ._2         @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1	@cond_branch\n\
-	ldr	r0, ._2 + 4\n\
-	ldr	r1, ._2 + 8\n\
+	ldr	r0, ._2 + 4     @ gLink\n\
+	ldr	r1, ._2 + 8     @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x3\n\
@@ -733,8 +733,8 @@ bool8 sub_809DA84(void)
     asm("\
 	push	{r4, r5, r6, r7, lr}\n\
 	add	sp, sp, #0xfffffff8\n\
-	ldr	r1, ._52\n\
-	ldr	r2, ._52 + 4\n\
+	ldr	r1, ._52        @ gMain\n\
+	ldr	r2, ._52 + 4    @ 0x43c\n\
 	add	r0, r1, r2\n\
 	ldrb	r0, [r0]\n\
 	mov	ip, r1\n\
@@ -743,7 +743,7 @@ bool8 sub_809DA84(void)
 	b	._51\n\
 ._50:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._52 + 8\n\
+	ldr	r1, ._52 + 8    @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -784,8 +784,8 @@ bool8 sub_809DA84(void)
 	b	._146\n\
 ._56:\n\
 	bl	ScanlineEffect_Stop\n\
-	ldr	r1, ._80\n\
-	ldr	r2, ._80 + 4\n\
+	ldr	r1, ._80        @ gMain\n\
+	ldr	r2, ._80 + 4    @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._81:\n\
@@ -802,10 +802,10 @@ bool8 sub_809DA84(void)
 	mov	r3, #0x80\n\
 	lsl	r3, r3, #0x9\n\
 	mov	r5, #0x0\n\
-	ldr	r1, ._85\n\
+	ldr	r1, ._85        @ 0x40000d4\n\
 	mov	r4, #0x80\n\
 	lsl	r4, r4, #0x5\n\
-	ldr	r6, ._85 + 4\n\
+	ldr	r6, ._85 + 4    @ 0x85000400\n\
 	mov	r7, #0x85\n\
 	lsl	r7, r7, #0x18\n\
 ._83:\n\
@@ -827,7 +827,7 @@ bool8 sub_809DA84(void)
 	orr	r0, r0, r7\n\
 	str	r0, [r1, #0x8]\n\
 	ldr	r0, [r1, #0x8]\n\
-	ldr	r1, ._85 + 8\n\
+	ldr	r1, ._85 + 8    @ 0x43c\n\
 	add r1, r1, ip\n\
 	b	._153\n\
 ._86:\n\
@@ -838,8 +838,8 @@ bool8 sub_809DA84(void)
 	.word	0x43c\n\
 ._59:\n\
 	bl	sub_809DE64\n\
-	ldr	r1, ._88\n\
-	ldr	r2, ._88 + 4\n\
+	ldr	r1, ._88        @ gMain\n\
+	ldr	r2, ._88 + 4    @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._89:\n\
@@ -848,7 +848,7 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._60:\n\
-	ldr	r0, ._91\n\
+	ldr	r0, ._91        @ gWindowTemplate_81E6E6C\n\
 	bl	Text_LoadWindowTemplate\n\
 	b	._146\n\
 ._92:\n\
@@ -856,10 +856,10 @@ bool8 sub_809DA84(void)
 ._91:\n\
 	.word	gWindowTemplate_81E6E6C\n\
 ._61:\n\
-	ldr	r0, ._94\n\
+	ldr	r0, ._94        @ gWindowTemplate_81E6E6C\n\
 	bl	MultistepInitMenuWindowBegin\n\
-	ldr	r1, ._94 + 4\n\
-	ldr	r2, ._94 + 8\n\
+	ldr	r1, ._94 + 4    @ gMain\n\
+	ldr	r2, ._94 + 8    @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._95:\n\
@@ -877,8 +877,8 @@ bool8 sub_809DA84(void)
 	b	._146\n\
 ._63:\n\
 	bl	sub_809DA1C\n\
-	ldr	r1, ._100\n\
-	ldr	r2, ._100 + 4\n\
+	ldr	r1, ._100       @ gMain\n\
+	ldr	r2, ._100 + 4   @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._101:\n\
@@ -887,26 +887,26 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._64:\n\
-	ldr	r1, ._103\n\
-	ldr	r2, ._103 + 4\n\
-	ldr	r0, ._103 + 8\n\
+	ldr	r1, ._103       @ gSummaryScreenTextTiles\n\
+	ldr	r2, ._103 + 4   @ 0x600d000\n\
+	ldr	r0, ._103 + 8   @ 0x40000d4\n\
 	str	r1, [r0]\n\
 	str	r2, [r0, #0x4]\n\
-	ldr	r1, ._103 + 12\n\
+	ldr	r1, ._103 + 12  @ 0x800000a0\n\
 	str	r1, [r0, #0x8]\n\
 	ldr	r1, [r0, #0x8]\n\
-	ldr	r1, ._103 + 16\n\
-	ldr	r2, ._103 + 20\n\
+	ldr	r1, ._103 + 16  @ sSummaryScreenButtonTiles\n\
+	ldr	r2, ._103 + 20  @ 0x600d140\n\
 	str	r1, [r0]\n\
 	str	r2, [r0, #0x4]\n\
-	ldr	r1, ._103 + 24\n\
+	ldr	r1, ._103 + 24  @ 0x80000080\n\
 	str	r1, [r0, #0x8]\n\
 	ldr	r0, [r0, #0x8]\n\
-	ldr	r0, ._103 + 28\n\
+	ldr	r0, ._103 + 28  @ \n\
 	add	r0, r0, #0x74\n\
 	mov	r1, #0x0\n\
 	strb	r1, [r0]\n\
-	ldr	r1, ._103 + 32\n\
+	ldr	r1, ._103 + 32  @ \n\
 	add r1, r1, ip\n\
 	b	._153\n\
 ._104:\n\
@@ -928,7 +928,7 @@ bool8 sub_809DA84(void)
 	bne	._105	@cond_branch\n\
 	b	._157\n\
 ._105:\n\
-	ldr	r0, ._108\n\
+	ldr	r0, ._108       @ \n\
 	add	r0, r0, #0x74\n\
 	mov	r1, #0x0\n\
 	strb	r1, [r0]\n\
@@ -939,8 +939,8 @@ bool8 sub_809DA84(void)
 	.word	+0x2018000\n\
 ._66:\n\
 	bl	sub_80A18C4\n\
-	ldr	r1, ._111\n\
-	ldr	r2, ._111 + 4\n\
+	ldr	r1, ._111       @ gMain\n\
+	ldr	r2, ._111 + 4   @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._112:\n\
@@ -949,7 +949,7 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._67:\n\
-	ldr	r4, ._115\n\
+	ldr	r4, ._115       @ \n\
 	add	r0, r4, #0\n\
 	bl	sub_809F678\n\
 	add	r0, r4, #0\n\
@@ -968,7 +968,7 @@ bool8 sub_809DA84(void)
 	mov	r0, #0xa\n\
 	bl	sub_80A12D0\n\
 ._114:\n\
-	ldr	r0, ._118\n\
+	ldr	r0, ._118       @ \n\
 	bl	DrawPokerusSurvivorDot\n\
 	b	._146\n\
 ._119:\n\
@@ -977,10 +977,10 @@ bool8 sub_809DA84(void)
 	.word	+0x2018010\n\
 ._68:\n\
 	bl	sub_80A1950\n\
-	ldr	r0, ._121\n\
+	ldr	r0, ._121       @ \n\
 	bl	sub_80A1D84\n\
-	ldr	r1, ._121 + 4\n\
-	ldr	r2, ._121 + 8\n\
+	ldr	r1, ._121 + 4   @ \n\
+	ldr	r2, ._121 + 8   @ \n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._122:\n\
@@ -990,7 +990,7 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._69:\n\
-	ldr	r4, ._124\n\
+	ldr	r4, ._124       @ \n\
 	add	r0, r4, #0\n\
 	bl	sub_80A1DE8\n\
 	add	r4, r4, #0x64\n\
@@ -1002,7 +1002,7 @@ bool8 sub_809DA84(void)
 ._124:\n\
 	.word	+0x2018010\n\
 ._70:\n\
-	ldr	r4, ._129\n\
+	ldr	r4, ._129       @ \n\
 	add	r5, r4, #0\n\
 	add	r5, r5, #0x64\n\
 	add	r0, r4, #0\n\
@@ -1018,8 +1018,8 @@ bool8 sub_809DA84(void)
 ._126:\n\
 	mov	r0, #0x0\n\
 	strb	r0, [r5]\n\
-	ldr	r1, ._129 + 4\n\
-	ldr	r2, ._129 + 8\n\
+	ldr	r1, ._129 + 4   @ \n\
+	ldr	r2, ._129 + 8   @ \n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._130:\n\
@@ -1033,19 +1033,19 @@ bool8 sub_809DA84(void)
 	bl	DrawSummaryScreenNavigationDots\n\
 	b	._146\n\
 ._72:\n\
-	ldr	r1, ._134\n\
+	ldr	r1, ._134       @ \n\
 	ldrb	r0, [r1, #0xb]\n\
 	cmp	r0, #0x1\n\
 	bhi	._132	@cond_branch\n\
-	ldr	r0, ._134 + 4\n\
+	ldr	r0, ._134 + 4   @ \n\
 	ldrb	r1, [r1, #0xb]\n\
 	lsl	r1, r1, #0x2\n\
 	add	r1, r1, r0\n\
 	ldr	r0, [r1]\n\
 	bl	_call_via_r0\n\
 ._132:\n\
-	ldr	r1, ._134 + 8\n\
-	ldr	r2, ._134 + 12\n\
+	ldr	r1, ._134 + 8   @ \n\
+	ldr	r2, ._134 + 12  @ \n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._135:\n\
@@ -1056,7 +1056,7 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._73:\n\
-	ldr	r0, ._137\n\
+	ldr	r0, ._137       @ \n\
 	bl	sub_809FAC8\n\
 	b	._146\n\
 ._138:\n\
@@ -1064,16 +1064,16 @@ bool8 sub_809DA84(void)
 ._137:\n\
 	.word	+0x2018010\n\
 ._74:\n\
-	ldr	r2, ._140\n\
-	ldr	r0, ._140 + 4\n\
+	ldr	r2, ._140       @ sUnknown_083C1598\n\
+	ldr	r0, ._140 + 4   @ \n\
 	ldrb	r1, [r0, #0xb]\n\
 	lsl	r1, r1, #0x2\n\
 	add	r1, r1, r2\n\
 	add	r0, r0, #0x10\n\
 	ldr	r1, [r1]\n\
 	bl	_call_via_r1\n\
-	ldr	r1, ._140 + 8\n\
-	ldr	r2, ._140 + 12\n\
+	ldr	r1, ._140 + 8   @ \n\
+	ldr	r2, ._140 + 12  @ \n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._141:\n\
@@ -1084,13 +1084,13 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._75:\n\
-	ldr	r0, ._144\n\
+	ldr	r0, ._144       @ \n\
 	mov	r1, #0x2d\n\
 	bl	GetMonData\n\
 	add	r1, r0, #0\n\
 	cmp	r1, #0\n\
 	beq	._142	@cond_branch\n\
-	ldr	r1, ._144 + 4\n\
+	ldr	r1, ._144 + 4   @ \n\
 	mov	r2, #0x80\n\
 	lsl	r2, r2, #0x1\n\
 	add	r0, r2, #0\n\
@@ -1102,7 +1102,7 @@ bool8 sub_809DA84(void)
 	.word	+0x2018010\n\
 	.word	gBattle_BG3_X\n\
 ._142:\n\
-	ldr	r0, ._147\n\
+	ldr	r0, ._147       @ gBattle_BG3_X\n\
 	strh	r1, [r0]\n\
 	b	._146\n\
 ._148:\n\
@@ -1111,7 +1111,7 @@ bool8 sub_809DA84(void)
 	.word	gBattle_BG3_X\n\
 ._76:\n\
 	bl	sub_809EBC4\n\
-	ldr	r0, ._151\n\
+	ldr	r0, ._151       @ \n\
 	add	r0, r0, #0x79\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
@@ -1136,8 +1136,8 @@ bool8 sub_809DA84(void)
 	bl	sub_80A1654\n\
 ._150:\n\
 	bl	PrintSummaryWindowHeaderText\n\
-	ldr	r1, ._154\n\
-	ldr	r2, ._154 + 4\n\
+	ldr	r1, ._154       @ gMain\n\
+	ldr	r2, ._154 + 4   @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._153\n\
 ._155:\n\
@@ -1150,8 +1150,8 @@ bool8 sub_809DA84(void)
 	cmp	r0, #0x1\n\
 	beq	._157	@cond_branch\n\
 ._146:\n\
-	ldr	r1, ._158\n\
-	ldr	r0, ._158 + 4\n\
+	ldr	r1, ._158       @ gMain\n\
+	ldr	r0, ._158 + 4   @ 0x43c\n\
 	add	r1, r1, r0\n\
 ._153:\n\
 	ldrb	r0, [r1]\n\
@@ -1164,7 +1164,7 @@ bool8 sub_809DA84(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._51:\n\
-	ldr	r0, ._162\n\
+	ldr	r0, ._162       @ sub_809D85C\n\
 	bl	SetVBlankCallback\n\
 	mov	r0, #0x1\n\
 	str	r0, [sp]\n\
@@ -1173,21 +1173,21 @@ bool8 sub_809DA84(void)
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginHardwarePaletteFade\n\
-	ldr	r0, ._162 + 4\n\
+	ldr	r0, ._162 + 4   @ sub_809D844\n\
 	bl	SetMainCallback2\n\
-	ldr	r2, ._162 + 8\n\
+	ldr	r2, ._162 + 8   @ gPaletteFade\n\
 	ldrb	r1, [r2, #0x8]\n\
 	mov	r0, #0x7f\n\
 	and	r0, r0, r1\n\
 	strb	r0, [r2, #0x8]\n\
-	ldr	r0, ._162 + 12\n\
+	ldr	r0, ._162 + 12  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._160	@cond_branch\n\
-	ldr	r0, ._162 + 16\n\
+	ldr	r0, ._162 + 16  @ 0x600dde0\n\
 	mov	r1, #0x80\n\
 	lsl	r1, r1, #0x8\n\
-	ldr	r2, ._162 + 20\n\
+	ldr	r2, ._162 + 20  @ 0x600f000\n\
 	mov	r3, #0x3\n\
 	bl	debug_sub_8008218\n\
 ._160:\n\

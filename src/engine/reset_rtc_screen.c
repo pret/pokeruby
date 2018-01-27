@@ -602,7 +602,7 @@ void debug_sub_806F8F8(void)
 {
     asm("\
 	push	{lr}\n\
-	ldr	r0, ._131\n\
+	ldr	r0, ._131       @ CB2_InitResetRtcScreen\n\
 	bl	SetMainCallback2\n\
 	pop	{r0}\n\
 	bx	r0\n\
@@ -622,7 +622,7 @@ void debug_sub_806F908(u8 a)
 	lsl	r0, r5, #0x2\n\
 	add	r0, r0, r5\n\
 	lsl	r0, r0, #0x3\n\
-	ldr	r2, ._136\n\
+	ldr	r2, ._136       @ gTasks\n\
 	add	r4, r0, r2\n\
 	mov	r1, #0x0\n\
 	ldsh	r0, [r4, r1]\n\
@@ -636,7 +636,7 @@ void debug_sub_806F908(u8 a)
 ._136:\n\
 	.word	gTasks+0x8\n\
 ._133:\n\
-	ldr	r0, ._139\n\
+	ldr	r0, ._139       @ Task_ResetRtc_0\n\
 	mov	r1, #0x50\n\
 	bl	CreateTask\n\
 	lsl	r0, r0, #0x18\n\
@@ -666,7 +666,7 @@ void debug_sub_806F908(u8 a)
 	ldsh	r0, [r2, r1]\n\
 	cmp	r0, #0x1\n\
 	bne	._142	@cond_branch\n\
-	ldr	r3, ._143\n\
+	ldr	r3, ._143       @ gLocalTime\n\
 	mov	r1, #0x0\n\
 	ldsh	r0, [r3, r1]\n\
 	mov	r1, #0x2\n\
@@ -700,7 +700,7 @@ void debug_sub_806F99C()
     asm("\
 	push	{lr}\n\
 	bl	RtcCalcLocalTime\n\
-	ldr	r0, ._145\n\
+	ldr	r0, ._145       @ debug_sub_806F908\n\
 	mov	r1, #0x50\n\
 	bl	CreateTask\n\
 	bl	ScriptContext2_Enable\n\
@@ -717,14 +717,14 @@ void debug_sub_806F9B8()
 {
     asm("\
 	push	{lr}\n\
-	ldr	r2, ._147\n\
-	ldr	r0, ._147 + 4\n\
+	ldr	r2, ._147       @ gLocalTime\n\
+	ldr	r0, ._147 + 4   @ gSaveBlock2\n\
 	add	r0, r0, #0xa0\n\
 	ldr	r1, [r0, #0x4]\n\
 	ldr	r0, [r0]\n\
 	str	r0, [r2]\n\
 	str	r1, [r2, #0x4]\n\
-	ldr	r0, ._147 + 8\n\
+	ldr	r0, ._147 + 8   @ debug_sub_806F908\n\
 	mov	r1, #0x50\n\
 	bl	CreateTask\n\
 	bl	ScriptContext2_Enable\n\
@@ -752,9 +752,9 @@ void debug_sub_806F9E4()
 	lsl	r0, r7, #0x2\n\
 	add	r0, r0, r7\n\
 	lsl	r0, r0, #0x3\n\
-	ldr	r1, ._153\n\
+	ldr	r1, ._153       @ gTasks\n\
 	add	r5, r0, r1\n\
-	ldr	r6, ._153 + 4\n\
+	ldr	r6, ._153 + 4   @ gStringVar4\n\
 	mov	r1, #0x0\n\
 	ldsh	r0, [r5, r1]\n\
 	cmp	r0, #0x1\n\
@@ -793,19 +793,19 @@ void debug_sub_806F9E4()
 	mov	r1, #0x2\n\
 	mov	r2, #0xa\n\
 	bl	Menu_PrintText\n\
-	ldr	r0, ._158\n\
+	ldr	r0, ._158       @ gUnknown_Debug_0839AE94\n\
 	mov	r1, #0xc\n\
 	mov	r2, #0xc\n\
 	bl	Menu_PrintText\n\
-	ldr	r0, ._158 + 4\n\
+	ldr	r0, ._158 + 4   @ gUnknown_Debug_0839AE99\n\
 	mov	r1, #0x14\n\
 	mov	r2, #0xc\n\
 	bl	Menu_PrintText\n\
-	ldr	r0, ._158 + 8\n\
+	ldr	r0, ._158 + 8   @ gUnknown_Debug_0839AEA7\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0xe\n\
 	bl	Menu_PrintText\n\
-	ldr	r0, ._158 + 12\n\
+	ldr	r0, ._158 + 12  @ gUnknown_Debug_0839AE9D\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0x10\n\
 	bl	Menu_PrintText\n\
@@ -833,7 +833,7 @@ void debug_sub_806F9E4()
 	mov	r0, #0x28\n\
 	add	r0, r0, r6\n\
 	mov	sl, r0\n\
-	ldr	r4, ._163\n\
+	ldr	r4, ._163       @ gLocalTime\n\
 	mov	r1, #0x2\n\
 	ldsb	r1, [r4, r1]\n\
 	mov	r2, #0x3\n\
@@ -850,7 +850,7 @@ void debug_sub_806F9E4()
 	mov	r2, #0x1\n\
 	mov	r3, #0x4\n\
 	bl	ConvertIntToDecimalStringN\n\
-	ldr	r0, ._163 + 4\n\
+	ldr	r0, ._163 + 4   @ gSaveBlock2\n\
 	ldrb	r0, [r0, #0x12]\n\
 	cmp	r0, #0\n\
 	bne	._160	@cond_branch\n\
@@ -885,7 +885,7 @@ void debug_sub_806F9E4()
 	.word	gLocalTime\n\
 	.word	gSaveBlock2\n\
 ._161:\n\
-	ldr	r0, ._166\n\
+	ldr	r0, ._166       @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\

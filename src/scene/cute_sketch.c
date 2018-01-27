@@ -38,8 +38,8 @@ void debug_sub_8110CCC(void)
 	push	{r4, r5, r6, r7, lr}\n\
 	mov	r7, #0x0\n\
 	mov	r1, #0x0\n\
-	ldr	r2, ._5\n\
-	ldr	r6, ._5 + 4\n\
+	ldr	r2, ._5         @ gUnknown_083E79C0\n\
+	ldr	r6, ._5 + 4     @ \n\
 ._7:\n\
 	lsl	r0, r1, #0x3\n\
 	add	r4, r0, r2\n\
@@ -108,7 +108,7 @@ void debug_sub_8110CCC(void)
 	mov	r2, #0x1d\n\
 	mov	r3, #0x13\n\
 	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r0, ._9\n\
+	ldr	r0, ._9         @ \n\
 	mov	r1, #0x11\n\
 	mov	r2, #0x11\n\
 	bl	Menu_PrintText\n\
@@ -133,14 +133,14 @@ void debug_sub_8110D84(void)
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._13\n\
+	ldr	r0, ._13        @ \n\
 	ldrh	r0, [r0, #0x4]\n\
 	cmp	r0, #0x7\n\
 	bls	._11	@cond_branch\n\
 	b	._65\n\
 ._11:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._13 + 4\n\
+	ldr	r1, ._13 + 4    @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -166,7 +166,7 @@ void debug_sub_8110D84(void)
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._25\n\
+	ldr	r1, ._25        @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -181,7 +181,7 @@ void debug_sub_8110D84(void)
 	beq	._27	@cond_branch\n\
 	b	._65\n\
 ._27:\n\
-	ldr	r1, ._30\n\
+	ldr	r1, ._30        @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -205,7 +205,7 @@ void debug_sub_8110D84(void)
 	beq	._36	@cond_branch\n\
 	b	._65\n\
 ._35:\n\
-	ldr	r4, ._41\n\
+	ldr	r4, ._41        @ \n\
 	ldrb	r0, [r4, #0x1e]\n\
 	cmp	r0, #0\n\
 	bne	._38	@cond_branch\n\
@@ -213,11 +213,11 @@ void debug_sub_8110D84(void)
 ._38:\n\
 	mov	r0, #0x5\n\
 	bl	m4aSongNumStart\n\
-	ldr	r1, ._41 + 4\n\
+	ldr	r1, ._41 + 4    @ \n\
 	add	r0, r4, r1\n\
 	mov	r1, #0x1\n\
 	strb	r1, [r0]\n\
-	ldr	r0, ._41 + 8\n\
+	ldr	r0, ._41 + 8    @ \n\
 	bl	sub_80FC244\n\
 	b	._65\n\
 ._42:\n\
@@ -236,7 +236,7 @@ void debug_sub_8110D84(void)
 	mov	r2, #0x0\n\
 	mov	r3, #0x10\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._44\n\
+	ldr	r1, ._44        @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -249,7 +249,7 @@ void debug_sub_8110D84(void)
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._65	@cond_branch\n\
-	ldr	r0, ._48\n\
+	ldr	r0, ._48        @ sub_805469C\n\
 	bl	SetMainCallback2\n\
 	b	._65\n\
 ._49:\n\
@@ -265,7 +265,7 @@ void debug_sub_8110D84(void)
 	bl	debug_sub_8110CCC\n\
 	b	._65\n\
 ._50:\n\
-	ldr	r0, ._54\n\
+	ldr	r0, ._54        @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -273,7 +273,7 @@ void debug_sub_8110D84(void)
 	beq	._65	@cond_branch\n\
 	bl	sub_80FBCA0\n\
 	bl	sub_80FAEC4\n\
-	ldr	r1, ._54 + 4\n\
+	ldr	r1, ._54 + 4    @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -290,7 +290,7 @@ void debug_sub_8110D84(void)
 	mov	r0, #0x0\n\
 	mov	r1, #0x0\n\
 	bl	CreateRegionMapCursor\n\
-	ldr	r1, ._58\n\
+	ldr	r1, ._58        @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -305,7 +305,7 @@ void debug_sub_8110D84(void)
 	beq	._60	@cond_branch\n\
 	bl	debug_sub_8110CCC\n\
 ._60:\n\
-	ldr	r0, ._63\n\
+	ldr	r0, ._63        @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -313,7 +313,7 @@ void debug_sub_8110D84(void)
 	beq	._65	@cond_branch\n\
 	bl	sub_80FBCA0\n\
 	bl	sub_80FAEC4\n\
-	ldr	r1, ._63 + 4\n\
+	ldr	r1, ._63 + 4    @ \n\
 	ldrh	r0, [r1, #0x4]\n\
 	add	r0, r0, #0x1\n\
 	b	._62\n\
@@ -330,7 +330,7 @@ void debug_sub_8110D84(void)
 	mov	r0, #0x0\n\
 	mov	r1, #0x0\n\
 	bl	CreateRegionMapCursor\n\
-	ldr	r1, ._66\n\
+	ldr	r1, ._66        @ \n\
 	mov	r0, #0x3\n\
 ._62:\n\
 	strh	r0, [r1, #0x4]\n\
@@ -351,13 +351,13 @@ void debug_sub_8110F28(void)
     asm("\
 	push	{lr}\n\
 	bl	CB2_InitFlyRegionMap\n\
-	ldr	r0, ._69\n\
+	ldr	r0, ._69        @ gMain\n\
 	ldr	r1, [r0, #0x4]\n\
-	ldr	r0, ._69 + 4\n\
+	ldr	r0, ._69 + 4    @ CB2_FlyRegionMap\n\
 	cmp	r1, r0\n\
 	bne	._68	@cond_branch\n\
 	bl	sub_80FBF94\n\
-	ldr	r0, ._69 + 8\n\
+	ldr	r0, ._69 + 8    @ debug_sub_8110D84\n\
 	bl	sub_80FC244\n\
 	bl	debug_sub_8110CCC\n\
 ._68:\n\

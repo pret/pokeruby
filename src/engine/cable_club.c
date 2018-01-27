@@ -104,7 +104,7 @@ int debug_sub_808A4D0()
     asm("\
 	push	{lr}\n\
 	add	r1, r0, #0\n\
-	ldr	r0, ._3\n\
+	ldr	r0, ._3         @ sub_8082F68\n\
 	cmp	r1, r0\n\
 	bne	._1	@cond_branch\n\
 	mov	r0, #0x1\n\
@@ -114,7 +114,7 @@ int debug_sub_808A4D0()
 ._3:\n\
 	.word	sub_8082F68+1\n\
 ._1:\n\
-	ldr	r0, ._7\n\
+	ldr	r0, ._7         @ sub_8082FEC\n\
 	cmp	r1, r0\n\
 	bne	._5	@cond_branch\n\
 	mov	r0, #0x11\n\
@@ -124,7 +124,7 @@ int debug_sub_808A4D0()
 ._7:\n\
 	.word	sub_8082FEC+1\n\
 ._5:\n\
-	ldr	r0, ._11\n\
+	ldr	r0, ._11        @ sub_808303C\n\
 	cmp	r1, r0\n\
 	bne	._9	@cond_branch\n\
 	mov	r0, #0x12\n\
@@ -134,7 +134,7 @@ int debug_sub_808A4D0()
 ._11:\n\
 	.word	sub_808303C+1\n\
 ._9:\n\
-	ldr	r0, ._15\n\
+	ldr	r0, ._15        @ sub_8083188\n\
 	cmp	r1, r0\n\
 	bne	._13	@cond_branch\n\
 	mov	r0, #0x13\n\
@@ -144,7 +144,7 @@ int debug_sub_808A4D0()
 ._15:\n\
 	.word	sub_8083188+1\n\
 ._13:\n\
-	ldr	r0, ._19\n\
+	ldr	r0, ._19        @ sub_80830E4\n\
 	cmp	r1, r0\n\
 	bne	._17	@cond_branch\n\
 	mov	r0, #0x14\n\
@@ -154,7 +154,7 @@ int debug_sub_808A4D0()
 ._19:\n\
 	.word	sub_80830E4+1\n\
 ._17:\n\
-	ldr	r0, ._23\n\
+	ldr	r0, ._23        @ sub_80831F8\n\
 	cmp	r1, r0\n\
 	bne	._21	@cond_branch\n\
 	mov	r0, #0x21\n\
@@ -164,7 +164,7 @@ int debug_sub_808A4D0()
 ._23:\n\
 	.word	sub_80831F8+1\n\
 ._21:\n\
-	ldr	r0, ._27\n\
+	ldr	r0, ._27        @ sub_8083314\n\
 	cmp	r1, r0\n\
 	bne	._25	@cond_branch\n\
 	mov	r0, #0x2\n\
@@ -174,7 +174,7 @@ int debug_sub_808A4D0()
 ._27:\n\
 	.word	sub_8083314+1\n\
 ._25:\n\
-	ldr	r0, ._31\n\
+	ldr	r0, ._31        @ sub_80833C4\n\
 	cmp	r1, r0\n\
 	beq	._29	@cond_branch\n\
 	mov	r0, #0x0\n\
@@ -199,7 +199,7 @@ void debug_sub_808A55C()
 	push	{r7}\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r7, r0, #0x18\n\
-	ldr	r2, ._37\n\
+	ldr	r2, ._37        @ gTasks\n\
 	lsl	r0, r7, #0x2\n\
 	add	r0, r0, r7\n\
 	lsl	r0, r0, #0x3\n\
@@ -224,13 +224,13 @@ void debug_sub_808A55C()
 	add	r0, r0, #0x1\n\
 	strh	r0, [r4, #0xa]\n\
 ._33:\n\
-	ldr	r0, ._37 + 4\n\
+	ldr	r0, ._37 + 4    @ gShouldAdvanceLinkState\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0x0\n\
 	mov	r3, #0x2\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 8\n\
+	ldr	r0, ._37 + 8    @ gBlockSendBuffer\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x16\n\
 	mov	r2, #0x5\n\
@@ -244,14 +244,14 @@ void debug_sub_808A55C()
 	mov	r5, #0xa0\n\
 	lsl	r5, r5, #0x13\n\
 ._35:\n\
-	ldr	r0, ._37 + 12\n\
+	ldr	r0, ._37 + 12   @ gLinkPlayerPending\n\
 	add	r0, r4, r0\n\
 	ldrb	r0, [r0]\n\
 	lsr	r1, r5, #0x18\n\
 	mov	r2, #0x0\n\
 	mov	r3, #0x1\n\
 	bl	PrintHex\n\
-	ldr	r1, ._37 + 16\n\
+	ldr	r1, ._37 + 16   @ gBlockRecvBuffer\n\
 	lsl	r0, r4, #0x8\n\
 	add	r0, r0, r1\n\
 	ldrh	r0, [r0]\n\
@@ -268,13 +268,13 @@ void debug_sub_808A55C()
 	add	r4, r4, #0x1\n\
 	cmp	r4, #0x3\n\
 	ble	._35	@cond_branch\n\
-	ldr	r4, ._37 + 20\n\
+	ldr	r4, ._37 + 20   @ gLinkStatus\n\
 	ldr	r0, [r4]\n\
 	mov	r1, #0xf\n\
 	mov	r2, #0x0\n\
 	mov	r3, #0x8\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 24\n\
+	ldr	r0, ._37 + 24   @ gLink\n\
 	ldrb	r0, [r0, #0x1]\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0xa\n\
@@ -294,13 +294,13 @@ void debug_sub_808A55C()
 	mov	r2, #0xa\n\
 	mov	r3, #0x2\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 28\n\
+	ldr	r0, ._37 + 28   @ gReceivedRemoteLinkPlayers\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0xc\n\
 	mov	r3, #0x1\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 32\n\
+	ldr	r0, ._37 + 32   @ gSpecialVar_Result\n\
 	ldrh	r0, [r0]\n\
 	mov	r1, #0xb\n\
 	mov	r2, #0x8\n\
@@ -328,7 +328,7 @@ void debug_sub_808A55C()
 	mov	r2, #0xa\n\
 	mov	r3, #0x1\n\
 	bl	PrintHex\n\
-	ldr	r2, ._37\n\
+	ldr	r2, ._37        @ gTasks\n\
 	mov	r3, r8\n\
 	add	r0, r3, r7\n\
 	lsl	r0, r0, #0x3\n\
@@ -347,7 +347,7 @@ void debug_sub_808A55C()
 	mov	r2, #0xc\n\
 	mov	r3, #0x2\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 36\n\
+	ldr	r0, ._37 + 36   @ gLinkCallback\n\
 	ldr	r0, [r0]\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0xd\n\
@@ -360,7 +360,7 @@ void debug_sub_808A55C()
 	mov	r2, #0x2\n\
 	mov	r3, #0x1\n\
 	bl	PrintHex\n\
-	ldr	r0, ._37 + 40\n\
+	ldr	r0, ._37 + 40   @ gLinkPlayers\n\
 	mov	r6, #0x80\n\
 	lsl	r6, r6, #0x12\n\
 	add	r5, r0, #0\n\
@@ -379,7 +379,7 @@ void debug_sub_808A55C()
 	sub	r4, r4, #0x1\n\
 	cmp	r4, #0\n\
 	bge	._36	@cond_branch\n\
-	ldr	r0, ._37 + 44\n\
+	ldr	r0, ._37 + 44   @ 0x4000128\n\
 	ldrh	r0, [r0]\n\
 	mov	r1, #0x2\n\
 	mov	r2, #0x6\n\
@@ -430,7 +430,7 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
 	mov	r2, #0x1f\n\
 	mov	r3, #0x2\n\
 	bl	InitLinkTestBG_Unused\n\
-	ldr	r4, ._40\n\
+	ldr	r4, ._40        @ sub_8082F20\n\
 	add	r0, r4, #0\n\
 	bl	FindTaskIdByFunc\n\
 	lsl	r0, r0, #0x18\n\
@@ -443,14 +443,14 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
 	add	r4, r0, #0\n\
 	lsl	r4, r4, #0x18\n\
 	lsr	r4, r4, #0x18\n\
-	ldr	r5, ._40 + 4\n\
+	ldr	r5, ._40 + 4    @ gTasks\n\
 	lsl	r0, r4, #0x2\n\
 	add	r0, r0, r4\n\
 	lsl	r0, r0, #0x3\n\
 	add	r0, r0, r5\n\
 	strh	r7, [r0, #0xa]\n\
 	strh	r6, [r0, #0xc]\n\
-	ldr	r0, ._40 + 8\n\
+	ldr	r0, ._40 + 8    @ debug_sub_808A55C\n\
 	mov	r1, #0x50\n\
 	bl	CreateTask\n\
 	lsl	r0, r0, #0x18\n\
@@ -1297,7 +1297,7 @@ void debug_sub_808B778()
 {
     asm("\
 	push	{r4, lr}\n\
-	ldr	r4, ._390\n\
+	ldr	r4, ._390       @ debug_sub_808B7A8\n\
 	add	r0, r4, #0\n\
 	bl	FuncIsActiveTask\n\
 	lsl	r0, r0, #0x18\n\
@@ -1307,7 +1307,7 @@ void debug_sub_808B778()
 	mov	r1, #0x50\n\
 	bl	CreateTask\n\
 ._389:\n\
-	ldr	r1, ._390 + 4\n\
+	ldr	r1, ._390 + 4   @ unk_3004E98\n\
 	ldr	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	str	r0, [r1]\n\
@@ -1328,7 +1328,7 @@ void debug_sub_808B7A8()
 	push	{lr}\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._393\n\
+	ldr	r2, ._393       @ gTasks\n\
 	lsl	r1, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	lsl	r1, r1, #0x3\n\
@@ -1342,7 +1342,7 @@ void debug_sub_808B7A8()
 	bne	._392	@cond_branch\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r1, #0x8]\n\
-	ldr	r2, ._393 + 4\n\
+	ldr	r2, ._393 + 4   @ unk_3004E94\n\
 	ldrh	r0, [r2]\n\
 	mov	r1, #0x1\n\
 	orr	r0, r0, r1\n\

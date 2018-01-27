@@ -1264,14 +1264,14 @@ u8 debug_sub_8085564(void)
     asm("\
 	push	{lr}\n\
 	mov	r2, #0x0\n\
-	ldr	r0, ._375\n\
+	ldr	r0, ._375       @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x80\n\
 	lsl	r0, r0, #0x1\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._370	@cond_branch\n\
-	ldr	r1, ._375 + 4\n\
+	ldr	r1, ._375 + 4   @ gUnknown_Debug_20301FE\n\
 	ldrb	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strb	r0, [r1]\n\
@@ -1283,14 +1283,14 @@ u8 debug_sub_8085564(void)
 ._371:\n\
 	mov	r2, #0x1\n\
 ._370:\n\
-	ldr	r0, ._375\n\
+	ldr	r0, ._375       @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x80\n\
 	lsl	r0, r0, #0x2\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._372	@cond_branch\n\
-	ldr	r1, ._375 + 4\n\
+	ldr	r1, ._375 + 4   @ gUnknown_Debug_20301FE\n\
 	ldrb	r0, [r1]\n\
 	cmp	r0, #0\n\
 	beq	._373	@cond_branch\n\
@@ -1314,8 +1314,8 @@ u8 debug_sub_8085564(void)
 	mov	r2, #0x1c\n\
 	mov	r3, #0x2\n\
 	bl	Menu_BlankWindowRect\n\
-	ldr	r1, ._380\n\
-	ldr	r0, ._380 + 4\n\
+	ldr	r1, ._380       @ gDebugText_Weather\n\
+	ldr	r0, ._380 + 4   @ gUnknown_Debug_20301FE\n\
 	ldrb	r0, [r0]\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r1\n\
@@ -1324,7 +1324,7 @@ u8 debug_sub_8085564(void)
 	mov	r2, #0x1\n\
 	bl	Menu_PrintText\n\
 ._377:\n\
-	ldr	r0, ._380 + 8\n\
+	ldr	r0, ._380 + 8   @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -1339,7 +1339,7 @@ u8 debug_sub_8085564(void)
 	.word	gUnknown_Debug_20301FE\n\
 	.word	gMain\n\
 ._378:\n\
-	ldr	r0, ._382\n\
+	ldr	r0, ._382       @ gUnknown_Debug_20301FE\n\
 	ldrb	r0, [r0]\n\
 	bl	ChangeWeather\n\
 	bl	CloseMenu\n\
@@ -1358,8 +1358,8 @@ u8 debug_sub_808560C(void)
 {
     asm("\
 	push	{r4, lr}\n\
-	ldr	r4, ._384\n\
-	ldr	r0, ._384 + 4\n\
+	ldr	r4, ._384       @ gUnknown_Debug_20301FE\n\
+	ldr	r0, ._384 + 4   @ gWeather\n\
 	mov	r1, #0xda\n\
 	lsl	r1, r1, #0x3\n\
 	add	r0, r0, r1\n\
@@ -1371,7 +1371,7 @@ u8 debug_sub_808560C(void)
 	mov	r2, #0x1c\n\
 	mov	r3, #0x2\n\
 	bl	Menu_BlankWindowRect\n\
-	ldr	r1, ._384 + 8\n\
+	ldr	r1, ._384 + 8   @ gDebugText_Weather\n\
 	ldrb	r0, [r4]\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r1\n\
@@ -1379,8 +1379,8 @@ u8 debug_sub_808560C(void)
 	mov	r1, #0x17\n\
 	mov	r2, #0x1\n\
 	bl	Menu_PrintText\n\
-	ldr	r1, ._384 + 12\n\
-	ldr	r0, ._384 + 16\n\
+	ldr	r1, ._384 + 12  @ gMenuCallback\n\
+	ldr	r0, ._384 + 16  @ debug_sub_8085564\n\
 	str	r0, [r1]\n\
 	mov	r0, #0x0\n\
 	pop	{r4}\n\

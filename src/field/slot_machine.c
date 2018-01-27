@@ -402,7 +402,7 @@ static void SlotMachineSetup_0_1(void)
 	mov	r5, r8\n\
 	push	{r5, r6, r7}\n\
 	bl	sub_81019EC\n\
-	ldr	r5, ._43\n\
+	ldr	r5, ._43        @ \n\
 	mov	r4, #0x0\n\
 	strb	r4, [r5]\n\
 	strb	r4, [r5, #0x2]\n\
@@ -415,8 +415,8 @@ static void SlotMachineSetup_0_1(void)
 	strh	r4, [r5, #0x8]\n\
 	strb	r0, [r5, #0xa]\n\
 	strb	r0, [r5, #0xb]\n\
-	ldr	r0, ._43 + 4\n\
-	ldr	r1, ._43 + 8\n\
+	ldr	r0, ._43 + 4    @ \n\
+	ldr	r1, ._43 + 8    @ \n\
 	add	r0, r0, r1\n\
 	ldrh	r0, [r0]\n\
 	strh	r0, [r5, #0xc]\n\
@@ -445,7 +445,7 @@ static void SlotMachineSetup_0_1(void)
 	strh	r0, [r1]\n\
 	mov	r7, #0x0\n\
 	add	r6, r5, #0\n\
-	ldr	r2, ._43 + 12\n\
+	ldr	r2, ._43 + 12   @ \n\
 	mov	sl, r2\n\
 	mov	r0, #0x1c\n\
 	add	r0, r0, r6\n\
@@ -493,7 +493,7 @@ static void SlotMachineSetup_0_1(void)
 	cmp	r7, #0x2\n\
 	bls	._41	@cond_branch\n\
 	bl	debug_sub_811B5D0\n\
-	ldr	r0, ._43 + 16\n\
+	ldr	r0, ._43 + 16   @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._42	@cond_branch\n\
@@ -690,21 +690,21 @@ static bool8 sub_8101E10(struct Task *task)
     push	{lr}\n\
 	mov	r0, #0x0\n\
 	bl	sub_8104CAC\n\
-	ldr	r2, ._70\n\
+	ldr	r2, ._70        @ \n\
 	mov	r0, #0x5\n\
 	strb	r0, [r2]\n\
-	ldr	r0, ._70 + 4\n\
+	ldr	r0, ._70 + 4    @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._67	@cond_branch\n\
-	ldr	r0, ._70 + 8\n\
+	ldr	r0, ._70 + 8    @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	bne	._69	@cond_branch\n\
 ._67:\n\
 	mov	r0, #0xc\n\
 	ldsh	r1, [r2, r0]\n\
-	ldr	r0, ._70 + 12\n\
+	ldr	r0, ._70 + 12   @ \n\
 	cmp	r1, r0\n\
 	ble	._69	@cond_branch\n\
 	mov	r0, #0x17\n\
@@ -740,17 +740,17 @@ static bool8 sub_8101E3C(struct Task *task)
 {
     asm("\
 	push	{r4, r5, lr}\n\
-	ldr	r0, ._77\n\
+	ldr	r0, ._77        @ unk_debug_bss_1_1\n\
 	ldrb	r1, [r0]\n\
 	add	r3, r0, #0\n\
-	ldr	r5, ._77 + 4\n\
+	ldr	r5, ._77 + 4    @ gMain\n\
 	cmp	r1, #0\n\
 	beq	._76	@cond_branch\n\
-	ldr	r2, ._77 + 8\n\
+	ldr	r2, ._77 + 8    @ unk_debug_bss_1_4\n\
 	ldrb	r0, [r2]\n\
 	cmp	r0, #0\n\
 	beq	._76	@cond_branch\n\
-	ldr	r4, ._77 + 12\n\
+	ldr	r4, ._77 + 12   @ \n\
 	mov	r1, #0xc\n\
 	ldsh	r0, [r4, r1]\n\
 	cmp	r0, #0x3\n\
@@ -796,7 +796,7 @@ static bool8 sub_8101E3C(struct Task *task)
 	cmp	r0, #0\n\
 	beq	._81	@cond_branch\n\
 	bl	debug_sub_811B620\n\
-	ldr	r1, ._83\n\
+	ldr	r1, ._83        @ \n\
 	mov	r0, #0x1d\n\
 	strb	r0, [r1]\n\
 	b	._102\n\
@@ -812,7 +812,7 @@ static bool8 sub_8101E3C(struct Task *task)
 	beq	._85	@cond_branch\n\
 	mov	r0, #0x0\n\
 	bl	sub_8104AB8\n\
-	ldr	r1, ._87\n\
+	ldr	r1, ._87        @ \n\
 	mov	r0, #0x8\n\
 	strb	r0, [r1]\n\
 	b	._102\n\
@@ -826,7 +826,7 @@ static bool8 sub_8101E3C(struct Task *task)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._89	@cond_branch\n\
-	ldr	r2, ._94\n\
+	ldr	r2, ._94        @ \n\
 	mov	r3, #0xc\n\
 	ldsh	r0, [r2, r3]\n\
 	sub	r0, r0, #0x3\n\
@@ -852,7 +852,7 @@ static bool8 sub_8101E3C(struct Task *task)
 	cmp	r0, #0x2\n\
 	ble	._92	@cond_branch\n\
 ._91:\n\
-	ldr	r1, ._94\n\
+	ldr	r1, ._94        @ \n\
 	ldrh	r0, [r1, #0xc]\n\
 	sub	r0, r0, #0x3\n\
 	ldrh	r3, [r1, #0x12]\n\
@@ -877,7 +877,7 @@ static bool8 sub_8101E3C(struct Task *task)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._98	@cond_branch\n\
-	ldr	r4, ._103\n\
+	ldr	r4, ._103       @ \n\
 	mov	r1, #0xc\n\
 	ldsh	r0, [r4, r1]\n\
 	cmp	r0, #0\n\
@@ -893,11 +893,11 @@ static bool8 sub_8101E3C(struct Task *task)
 	add	r0, r0, #0x1\n\
 	strh	r0, [r4, #0x12]\n\
 ._98:\n\
-	ldr	r0, ._103\n\
+	ldr	r0, ._103       @ \n\
 	mov	r2, #0x12\n\
 	ldsh	r1, [r0, r2]\n\
 	add	r2, r0, #0\n\
-	ldr	r5, ._103 + 4\n\
+	ldr	r5, ._103 + 4   @ \n\
 	cmp	r1, #0x2\n\
 	bgt	._99	@cond_branch\n\
 	cmp	r1, #0\n\
@@ -1029,7 +1029,7 @@ static bool8 sub_8101FA4(struct Task *task)
 	bl	sub_8102DEC\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r4, #0x8]\n\
-	ldr	r4, ._115\n\
+	ldr	r4, ._115       @ \n\
 	ldrb	r1, [r4, #0x4]\n\
 	mov	r0, #0x20\n\
 	and	r0, r0, r1\n\
@@ -1048,7 +1048,7 @@ static bool8 sub_8101FA4(struct Task *task)
 	mov	r0, #0xb\n\
 ._114:\n\
 	strb	r0, [r4]\n\
-	ldr	r4, ._119\n\
+	ldr	r4, ._119       @ \n\
 	mov	r0, #0x8\n\
 	strh	r0, [r4, #0x1a]\n\
 	ldrb	r0, [r4, #0xa]\n\
@@ -1057,7 +1057,7 @@ static bool8 sub_8101FA4(struct Task *task)
 	bl	dp15_jump_random_unknown\n\
 	strh	r0, [r4, #0x1a]\n\
 ._117:\n\
-	ldr	r0, ._119 + 4\n\
+	ldr	r0, ._119 + 4   @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._118	@cond_branch\n\
@@ -1128,15 +1128,15 @@ static bool8 sub_8102034(struct Task *task)
 	asr	r1, r1, #0x10\n\
 	cmp	r1, #0x1d\n\
 	ble	._124	@cond_branch\n\
-	ldr	r0, ._127\n\
+	ldr	r0, ._127       @ unk_debug_bss_1_1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._126	@cond_branch\n\
-	ldr	r0, ._127 + 4\n\
+	ldr	r0, ._127 + 4   @ unk_debug_bss_1_4\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._126	@cond_branch\n\
-	ldr	r4, ._127 + 8\n\
+	ldr	r4, ._127 + 8   @ unk_debug_bss_1_8\n\
 	bl	Random\n\
 	mov	r1, #0x1f\n\
 	and	r1, r1, r0\n\
@@ -1144,7 +1144,7 @@ static bool8 sub_8102034(struct Task *task)
 	str	r1, [r4]\n\
 ._126:\n\
 	bl	sub_81024F0\n\
-	ldr	r1, ._127 + 12\n\
+	ldr	r1, ._127 + 12  @ \n\
 	mov	r0, #0xc\n\
 	strb	r0, [r1]\n\
 ._124:\n\
@@ -1178,15 +1178,15 @@ static bool8 sub_8102058(struct Task *task)
 {
     asm("\
 	push	{r4, r5, lr}\n\
-	ldr	r0, ._133\n\
+	ldr	r0, ._133       @ unk_debug_bss_1_1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._130	@cond_branch\n\
-	ldr	r0, ._133 + 4\n\
+	ldr	r0, ._133 + 4   @ unk_debug_bss_1_4\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._130	@cond_branch\n\
-	ldr	r5, ._133 + 8\n\
+	ldr	r5, ._133 + 8   @ unk_debug_bss_1_8\n\
 	ldr	r0, [r5]\n\
 	sub	r0, r0, #0x1\n\
 	str	r0, [r5]\n\
@@ -1194,7 +1194,7 @@ static bool8 sub_8102058(struct Task *task)
 	bne	._135	@cond_branch\n\
 	mov	r0, #0x18\n\
 	bl	PlaySE\n\
-	ldr	r4, ._133 + 12\n\
+	ldr	r4, ._133 + 12  @ \n\
 	ldrb	r0, [r4, #0x18]\n\
 	bl	sub_8102E1C\n\
 	ldrb	r0, [r4, #0x18]\n\
@@ -1213,7 +1213,7 @@ static bool8 sub_8102058(struct Task *task)
 	.word	unk_debug_bss_1_8\n\
 	.word	+0x2000000\n\
 ._130:\n\
-	ldr	r0, ._136\n\
+	ldr	r0, ._136       @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -1221,7 +1221,7 @@ static bool8 sub_8102058(struct Task *task)
 	beq	._135	@cond_branch\n\
 	mov	r0, #0x18\n\
 	bl	PlaySE\n\
-	ldr	r4, ._136 + 4\n\
+	ldr	r4, ._136 + 4   @ \n\
 	ldrb	r0, [r4, #0x18]\n\
 	bl	sub_8102E1C\n\
 	ldrb	r0, [r4, #0x18]\n\
@@ -1260,7 +1260,7 @@ static bool8 sub_8102090(struct Task *task)
 {
     asm("\
 	push	{r4, lr}\n\
-	ldr	r4, ._146\n\
+	ldr	r4, ._146       @ \n\
 	ldrb	r0, [r4, #0x18]\n\
 	bl	sub_8102E40\n\
 	lsl	r0, r0, #0x18\n\
@@ -1278,7 +1278,7 @@ static bool8 sub_8102090(struct Task *task)
 	ble	._161	@cond_branch\n\
 	mov	r0, #0xe\n\
 	strb	r0, [r4]\n\
-	ldr	r0, ._146 + 4\n\
+	ldr	r0, ._146 + 4   @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x8\n\
 	beq	._140	@cond_branch\n\
@@ -1389,7 +1389,7 @@ bool8 sub_81020C8(struct Task *task)
 {
     asm("\
 	push	{r4, lr}\n\
-	ldr	r4, ._165\n\
+	ldr	r4, ._165       @ \n\
 	ldrb	r1, [r4, #0x4]\n\
 	mov	r0, #0xc0\n\
 	and	r0, r0, r1\n\
@@ -1411,7 +1411,7 @@ bool8 sub_81020C8(struct Task *task)
 ._163:\n\
 	bl	debug_sub_811B894\n\
 ._164:\n\
-	ldr	r4, ._171\n\
+	ldr	r4, ._171       @ \n\
 	ldrh	r0, [r4, #0x8]\n\
 	cmp	r0, #0\n\
 	beq	._167	@cond_branch\n\
@@ -1440,7 +1440,7 @@ bool8 sub_81020C8(struct Task *task)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._169	@cond_branch\n\
-	ldr	r0, ._171 + 4\n\
+	ldr	r0, ._171 + 4   @ \n\
 	bl	PlayFanfare\n\
 	mov	r0, #0x6\n\
 	bl	sub_8104CAC\n\
@@ -1455,7 +1455,7 @@ bool8 sub_81020C8(struct Task *task)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._173	@cond_branch\n\
-	ldr	r0, ._175\n\
+	ldr	r0, ._175       @ 0x185\n\
 	bl	PlayFanfare\n\
 	mov	r0, #0x5\n\
 	bl	sub_8104CAC\n\
@@ -1471,7 +1471,7 @@ bool8 sub_81020C8(struct Task *task)
 	mov	r0, #0x2\n\
 	bl	sub_8104CAC\n\
 ._174:\n\
-	ldr	r1, ._183\n\
+	ldr	r1, ._183       @ \n\
 	ldrh	r3, [r1, #0x8]\n\
 	mov	r0, #0xe0\n\
 	lsl	r0, r0, #0x1\n\
@@ -1528,7 +1528,7 @@ bool8 sub_81020C8(struct Task *task)
 	strh	r0, [r4, #0x10]\n\
 	lsl	r0, r0, #0x10\n\
 	asr	r0, r0, #0x10\n\
-	ldr	r1, ._186\n\
+	ldr	r1, ._186       @ 0x270f\n\
 	cmp	r0, r1\n\
 	ble	._185	@cond_branch\n\
 	strh	r1, [r4, #0x10]\n\
@@ -1765,14 +1765,14 @@ static bool8 sub_8102424(struct Task *task)
     asm("\
 	push	{lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._234\n\
+	ldr	r0, ._234       @ unk_debug_bss_1_1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	bne	._233	@cond_branch\n\
-	ldr	r0, ._234 + 4\n\
-	ldr	r1, ._234 + 8\n\
+	ldr	r0, ._234 + 4   @ gSaveBlock1\n\
+	ldr	r1, ._234 + 8   @ \n\
 	ldrh	r1, [r1, #0xc]\n\
-	ldr	r2, ._234 + 12\n\
+	ldr	r2, ._234 + 12  @ \n\
 	add	r0, r0, r2\n\
 	strh	r1, [r0]\n\
 ._233:\n\
@@ -1783,7 +1783,7 @@ static bool8 sub_8102424(struct Task *task)
 	mov	r2, #0x0\n\
 	mov	r3, #0x10\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._234 + 8\n\
+	ldr	r1, ._234 + 8   @ \n\
 	ldrb	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strb	r0, [r1]\n\
@@ -1828,7 +1828,7 @@ static bool8 debug_sub_8116E74(struct Task *task)
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	beq	._239	@cond_branch\n\
-	ldr	r1, ._240\n\
+	ldr	r1, ._240       @ \n\
 	mov	r0, #0x5\n\
 	strb	r0, [r1]\n\
 ._239:\n\
@@ -1848,22 +1848,22 @@ static void sub_8102484(void)
 {
     asm("\
 	push	{r4, r5, r6, lr}\n\
-	ldr	r0, ._256\n\
+	ldr	r0, ._256       @ \n\
 	ldrb	r2, [r0, #0xa]\n\
 	add	r4, r0, #0\n\
 	cmp	r2, #0\n\
 	beq	._242	@cond_branch\n\
 	b	._270\n\
 ._242:\n\
-	ldr	r0, ._256 + 4\n\
+	ldr	r0, ._256 + 4   @ \n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._245	@cond_branch\n\
-	ldr	r3, ._256 + 8\n\
+	ldr	r3, ._256 + 8   @ \n\
 	ldrb	r0, [r3]\n\
 	cmp	r0, #0\n\
 	beq	._245	@cond_branch\n\
-	ldr	r0, ._256 + 12\n\
+	ldr	r0, ._256 + 12  @ \n\
 	ldrb	r1, [r0]\n\
 	strb	r1, [r4, #0x4]\n\
 	strb	r2, [r3]\n\
@@ -1972,7 +1972,7 @@ static void sub_8102484(void)
 	lsr	r6, r0, #0x18\n\
 	cmp	r6, #0x3\n\
 	beq	._260	@cond_branch\n\
-	ldr	r1, ._271\n\
+	ldr	r1, ._271       @ gUnknown_083ECE42\n\
 	lsl	r0, r6, #0x1\n\
 	add	r0, r0, r1\n\
 	ldrb	r1, [r0]\n\
@@ -2016,8 +2016,8 @@ static void sub_8102484(void)
 	lsr	r6, r0, #0x18\n\
 	cmp	r6, #0x5\n\
 	beq	._270	@cond_branch\n\
-	ldr	r4, ._271 + 4\n\
-	ldr	r1, ._271 + 8\n\
+	ldr	r4, ._271 + 4   @ \n\
+	ldr	r1, ._271 + 8   @ \n\
 	lsl	r0, r6, #0x1\n\
 	add	r0, r0, r1\n\
 	ldrb	r1, [r0]\n\

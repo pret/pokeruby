@@ -1007,21 +1007,21 @@ void debug_sub_8030C24(void)
     asm("\
 	push	{r4, r5, r6, lr}\n\
 	add	sp, sp, #0xfffffff4\n\
-	ldr	r1, ._293\n\
-	ldr	r4, ._293 + 4\n\
+	ldr	r1, ._293       @ gBattlePartyID\n\
+	ldr	r4, ._293 + 4   @ gActiveBank\n\
 	ldrb	r0, [r4]\n\
 	lsl	r0, r0, #0x1\n\
 	add	r0, r0, r1\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x64\n\
 	mul	r0, r0, r1\n\
-	ldr	r1, ._293 + 8\n\
+	ldr	r1, ._293 + 8   @ gPlayerParty\n\
 	add	r0, r0, r1\n\
 	mov	r1, #0xd\n\
 	bl	GetMonData\n\
 	add	r1, sp, #0x8\n\
 	strh	r0, [r1]\n\
-	ldr	r5, ._293 + 12\n\
+	ldr	r5, ._293 + 12  @ gMain\n\
 	ldrh	r1, [r5, #0x30]\n\
 	cmp	r1, #0x20\n\
 	bne	._286	@cond_branch\n\
@@ -1082,7 +1082,7 @@ void debug_sub_8030C24(void)
 	ldrb	r0, [r4]\n\
 	mov	r1, #0x0\n\
 	bl	dp11b_obj_free\n\
-	ldr	r0, ._312\n\
+	ldr	r0, ._312       @ gBankAttacker\n\
 	ldrb	r2, [r4]\n\
 	strb	r2, [r0]\n\
 	ldrh	r1, [r5, #0x28]\n\
@@ -1090,13 +1090,13 @@ void debug_sub_8030C24(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._310	@cond_branch\n\
-	ldr	r0, ._312 + 4\n\
+	ldr	r0, ._312 + 4   @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._310	@cond_branch\n\
-	ldr	r0, ._312 + 8\n\
+	ldr	r0, ._312 + 8   @ gBankTarget\n\
 	mov	r1, #0x2\n\
 	eor	r1, r1, r2\n\
 	strb	r1, [r0]\n\
@@ -1108,14 +1108,14 @@ void debug_sub_8030C24(void)
 	.word	gBattleTypeFlags\n\
 	.word	gBankTarget\n\
 ._310:\n\
-	ldr	r0, ._317\n\
+	ldr	r0, ._317       @ gMain\n\
 	ldrh	r1, [r0, #0x28]\n\
 	mov	r2, #0x1\n\
 	add	r0, r2, #0\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._315	@cond_branch\n\
-	ldr	r0, ._317 + 4\n\
+	ldr	r0, ._317 + 4   @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	add	r0, r2, #0\n\
 	and	r0, r0, r1\n\
@@ -1132,7 +1132,7 @@ void debug_sub_8030C24(void)
 	mov	r0, #0x1\n\
 ._316:\n\
 	bl	GetBankByIdentity\n\
-	ldr	r1, ._320\n\
+	ldr	r1, ._320       @ gBankTarget\n\
 	strb	r0, [r1]\n\
 ._311:\n\
 	mov	r0, #0x0\n\
@@ -1140,8 +1140,8 @@ void debug_sub_8030C24(void)
 	add	r0, sp, #0x8\n\
 	ldrh	r0, [r0]\n\
 	bl	DoMoveAnim\n\
-	ldr	r1, ._320 + 4\n\
-	ldr	r0, ._320 + 8\n\
+	ldr	r1, ._320 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._320 + 8   @ gActiveBank\n\
 	ldrb	r0, [r0]\n\
 	b	._332\n\
 ._321:\n\
@@ -1157,7 +1157,7 @@ void debug_sub_8030C24(void)
 	ldrb	r0, [r4]\n\
 	mov	r1, #0x0\n\
 	bl	dp11b_obj_free\n\
-	ldr	r0, ._325\n\
+	ldr	r0, ._325       @ gBankTarget\n\
 	ldrb	r2, [r4]\n\
 	strb	r2, [r0]\n\
 	ldrh	r1, [r5, #0x28]\n\
@@ -1165,13 +1165,13 @@ void debug_sub_8030C24(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._323	@cond_branch\n\
-	ldr	r0, ._325 + 4\n\
+	ldr	r0, ._325 + 4   @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._323	@cond_branch\n\
-	ldr	r0, ._325 + 8\n\
+	ldr	r0, ._325 + 8   @ gBankAttacker\n\
 	mov	r1, #0x2\n\
 	eor	r1, r1, r2\n\
 	strb	r1, [r0]\n\
@@ -1183,14 +1183,14 @@ void debug_sub_8030C24(void)
 	.word	gBattleTypeFlags\n\
 	.word	gBankAttacker\n\
 ._323:\n\
-	ldr	r0, ._330\n\
+	ldr	r0, ._330       @ gMain\n\
 	ldrh	r1, [r0, #0x28]\n\
 	mov	r2, #0x1\n\
 	add	r0, r2, #0\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._328	@cond_branch\n\
-	ldr	r0, ._330 + 4\n\
+	ldr	r0, ._330 + 4   @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	add	r0, r2, #0\n\
 	and	r0, r0, r1\n\
@@ -1207,7 +1207,7 @@ void debug_sub_8030C24(void)
 	mov	r0, #0x1\n\
 ._329:\n\
 	bl	GetBankByIdentity\n\
-	ldr	r1, ._333\n\
+	ldr	r1, ._333       @ gBankAttacker\n\
 	strb	r0, [r1]\n\
 ._324:\n\
 	mov	r0, #0x0\n\
@@ -1215,8 +1215,8 @@ void debug_sub_8030C24(void)
 	add	r0, sp, #0x8\n\
 	ldrh	r0, [r0]\n\
 	bl	DoMoveAnim\n\
-	ldr	r1, ._333 + 4\n\
-	ldr	r0, ._333 + 8\n\
+	ldr	r1, ._333 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._333 + 8   @ gActiveBank\n\
 	ldrb	r0, [r0]\n\
 	b	._332\n\
 ._334:\n\
@@ -1231,7 +1231,7 @@ void debug_sub_8030C24(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._336	@cond_branch\n\
-	ldr	r0, ._338\n\
+	ldr	r0, ._338       @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -1245,7 +1245,7 @@ void debug_sub_8030C24(void)
 	bl	dp11b_obj_free\n\
 	mov	r0, #0x3\n\
 	bl	GetBankByIdentity\n\
-	ldr	r1, ._338 + 4\n\
+	ldr	r1, ._338 + 4   @ gBankAttacker\n\
 	strb	r0, [r1]\n\
 	mov	r0, #0x1\n\
 	b	._337\n\
@@ -1283,7 +1283,7 @@ void debug_sub_8030C24(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._343	@cond_branch\n\
-	ldr	r0, ._345\n\
+	ldr	r0, ._345       @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -1297,24 +1297,24 @@ void debug_sub_8030C24(void)
 	bl	dp11b_obj_free\n\
 	mov	r0, #0x1\n\
 	bl	GetBankByIdentity\n\
-	ldr	r1, ._345 + 4\n\
+	ldr	r1, ._345 + 4   @ gBankAttacker\n\
 	strb	r0, [r1]\n\
 	mov	r0, #0x3\n\
 ._337:\n\
 	bl	GetBankByIdentity\n\
-	ldr	r1, ._345 + 8\n\
+	ldr	r1, ._345 + 8   @ gBankTarget\n\
 	strb	r0, [r1]\n\
 	mov	r0, #0x0\n\
 	bl	sub_80326EC\n\
 	add	r0, sp, #0x8\n\
 	ldrh	r0, [r0]\n\
 	bl	DoMoveAnim\n\
-	ldr	r1, ._345 + 12\n\
+	ldr	r1, ._345 + 12  @ gBattleBankFunc\n\
 	ldrb	r0, [r4]\n\
 ._332:\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r1\n\
-	ldr	r1, ._345 + 16\n\
+	ldr	r1, ._345 + 16  @ debug_sub_803107C\n\
 	str	r1, [r0]\n\
 	b	._348\n\
 ._346:\n\
@@ -1345,20 +1345,20 @@ void debug_sub_8030C24(void)
 	add	r0, r2, #0\n\
 	strh	r0, [r1]\n\
 ._347:\n\
-	ldr	r1, ._349\n\
-	ldr	r4, ._349 + 4\n\
+	ldr	r1, ._349       @ gBattlePartyID\n\
+	ldr	r4, ._349 + 4   @ gActiveBank\n\
 	ldrb	r0, [r4]\n\
 	lsl	r0, r0, #0x1\n\
 	add	r0, r0, r1\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x64\n\
 	mul	r0, r0, r1\n\
-	ldr	r1, ._349 + 8\n\
+	ldr	r1, ._349 + 8   @ gPlayerParty\n\
 	add	r0, r0, r1\n\
 	mov	r1, #0xd\n\
 	add	r2, sp, #0x8\n\
 	bl	SetMonData\n\
-	ldr	r2, ._349 + 12\n\
+	ldr	r2, ._349 + 12  @ gBattleMons\n\
 	ldrb	r1, [r4]\n\
 	mov	r0, #0x58\n\
 	mul	r0, r0, r1\n\
@@ -1366,8 +1366,8 @@ void debug_sub_8030C24(void)
 	add	r1, sp, #0x8\n\
 	ldrh	r1, [r1]\n\
 	strh	r1, [r0, #0xc]\n\
-	ldr	r5, ._349 + 16\n\
-	ldr	r1, ._349 + 20\n\
+	ldr	r5, ._349 + 16  @ gUnknown_03004210\n\
+	ldr	r1, ._349 + 20  @ 0x1016\n\
 	mov	r0, #0x10\n\
 	str	r0, [sp]\n\
 	mov	r0, #0x38\n\
@@ -1381,7 +1381,7 @@ void debug_sub_8030C24(void)
 	ldsh	r1, [r0, r2]\n\
 	mov	r0, #0xd\n\
 	mul	r1, r1, r0\n\
-	ldr	r0, ._349 + 24\n\
+	ldr	r0, ._349 + 24  @ gMoveNames\n\
 	add	r1, r1, r0\n\
 	mov	r2, #0x80\n\
 	lsl	r2, r2, #0x1\n\
@@ -1390,7 +1390,7 @@ void debug_sub_8030C24(void)
 	add	r0, r5, #0\n\
 	mov	r3, #0x2\n\
 	bl	Text_InitWindowAndPrintText\n\
-	ldr	r4, ._349 + 28\n\
+	ldr	r4, ._349 + 28  @ gDisplayedStringBattle\n\
 	add	r0, sp, #0x8\n\
 	mov	r2, #0x0\n\
 	ldsh	r1, [r0, r2]\n\
@@ -1418,11 +1418,11 @@ void debug_sub_8030C24(void)
 	.word	gMoveNames\n\
 	.word	gDisplayedStringBattle\n\
 ._302:\n\
-	ldr	r0, ._353\n\
+	ldr	r0, ._353       @ gMain\n\
 	ldrh	r0, [r0, #0x30]\n\
 	cmp	r0, #0x40\n\
 	bne	._351	@cond_branch\n\
-	ldr	r1, ._353 + 4\n\
+	ldr	r1, ._353 + 4   @ gAnimMoveTurn\n\
 	ldrb	r0, [r1]\n\
 	sub	r0, r0, #0x1\n\
 	b	._352\n\
@@ -1432,18 +1432,18 @@ void debug_sub_8030C24(void)
 	.word	gMain\n\
 	.word	gAnimMoveTurn\n\
 ._351:\n\
-	ldr	r1, ._359\n\
+	ldr	r1, ._359       @ gAnimMoveTurn\n\
 	ldrb	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 ._352:\n\
 	strb	r0, [r1]\n\
-	ldr	r4, ._359 + 4\n\
+	ldr	r4, ._359 + 4   @ gDisplayedStringBattle\n\
 	ldrb	r1, [r1]\n\
 	add	r0, r4, #0\n\
 	mov	r2, #0x2\n\
 	mov	r3, #0x3\n\
 	bl	ConvertIntToDecimalStringN\n\
-	ldr	r0, ._359 + 8\n\
+	ldr	r0, ._359 + 8   @ gUnknown_03004210\n\
 	mov	r2, #0x8e\n\
 	lsl	r2, r2, #0x1\n\
 	mov	r1, #0x39\n\
@@ -1452,7 +1452,7 @@ void debug_sub_8030C24(void)
 	mov	r3, #0x4\n\
 	bl	Text_InitWindowAndPrintText\n\
 ._348:\n\
-	ldr	r0, ._359 + 12\n\
+	ldr	r0, ._359 + 12  @ gMain\n\
 	ldrh	r2, [r0, #0x28]\n\
 	mov	r1, #0xc0\n\
 	lsl	r1, r1, #0x2\n\
@@ -1461,28 +1461,28 @@ void debug_sub_8030C24(void)
 	cmp	r0, r1\n\
 	bne	._355	@cond_branch\n\
 	mov	r4, #0x0\n\
-	ldr	r5, ._359 + 4\n\
-	ldr	r6, ._359 + 8\n\
+	ldr	r5, ._359 + 4   @ gDisplayedStringBattle\n\
+	ldr	r6, ._359 + 8   @ gUnknown_03004210\n\
 ._361:\n\
 	add	r0, r5, #0\n\
-	ldr	r1, ._359 + 16\n\
+	ldr	r1, ._359 + 16  @ BattleText_Format\n\
 	bl	StringCopy\n\
-	ldr	r1, ._359 + 20\n\
-	ldr	r0, ._359 + 24\n\
+	ldr	r1, ._359 + 20  @ gBattlePartyID\n\
+	ldr	r0, ._359 + 24  @ gActiveBank\n\
 	ldrb	r0, [r0]\n\
 	lsl	r0, r0, #0x1\n\
 	add	r0, r0, r1\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x64\n\
 	mul	r0, r0, r1\n\
-	ldr	r1, ._359 + 28\n\
+	ldr	r1, ._359 + 28  @ gPlayerParty\n\
 	add	r0, r0, r1\n\
 	add	r1, r4, #0\n\
 	add	r1, r1, #0xd\n\
 	bl	GetMonData\n\
 	mov	r1, #0xd\n\
 	mul	r1, r1, r0\n\
-	ldr	r0, ._359 + 32\n\
+	ldr	r0, ._359 + 32  @ gMoveNames\n\
 	add	r1, r1, r0\n\
 	add	r0, r5, #0\n\
 	bl	StringAppend\n\
@@ -1521,19 +1521,19 @@ void debug_sub_8030C24(void)
 	add	r0, r6, #0\n\
 	add	r1, r5, #0\n\
 	bl	Text_InitWindow\n\
-	ldr	r0, ._362\n\
+	ldr	r0, ._362       @ gUnknown_03004210\n\
 	bl	Text_PrintWindow8002F44\n\
 	add	r0, r4, #1\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r4, r0, #0x18\n\
 	cmp	r4, #0x3\n\
 	bls	._361	@cond_branch\n\
-	ldr	r1, ._362 + 4\n\
-	ldr	r0, ._362 + 8\n\
+	ldr	r1, ._362 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._362 + 8   @ gActiveBank\n\
 	ldrb	r0, [r0]\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r1\n\
-	ldr	r1, ._362 + 12\n\
+	ldr	r1, ._362 + 12  @ sub_802C68C\n\
 	str	r1, [r0]\n\
 ._355:\n\
 	add	sp, sp, #0xc\n\
@@ -1556,16 +1556,16 @@ void debug_sub_803107C(void)
 	push	{r4, r5, r6, r7, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
 	mov	r7, #0x0\n\
-	ldr	r0, ._369\n\
+	ldr	r0, ._369       @ gAnimScriptCallback\n\
 	ldr	r0, [r0]\n\
 	bl	_call_via_r0\n\
-	ldr	r0, ._369 + 4\n\
+	ldr	r0, ._369 + 4   @ gAnimScriptActive\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	bne	._364	@cond_branch\n\
 	mov	r0, #0x1\n\
 	bl	sub_80326EC\n\
-	ldr	r4, ._369 + 8\n\
+	ldr	r4, ._369 + 8   @ gActiveBank\n\
 	ldrb	r0, [r4]\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0x7\n\
@@ -1576,7 +1576,7 @@ void debug_sub_803107C(void)
 	mov	r2, #0x7\n\
 	mov	r3, #0x1\n\
 	bl	dp11b_obj_instanciate\n\
-	ldr	r0, ._369 + 12\n\
+	ldr	r0, ._369 + 12  @ gSprites\n\
 	add	r2, r0, #0\n\
 	add	r2, r2, #0x3e\n\
 	mov	r1, #0x3f\n\
@@ -1593,13 +1593,13 @@ void debug_sub_803107C(void)
 	sub	r1, r1, #0x1\n\
 	cmp	r1, #0\n\
 	bge	._366	@cond_branch\n\
-	ldr	r4, ._369 + 16\n\
+	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
 	add	r0, r4, #0\n\
 	add	r1, r7, #0\n\
 	mov	r2, #0x2\n\
 	mov	r3, #0x2\n\
 	bl	ConvertIntToDecimalStringN\n\
-	ldr	r6, ._369 + 20\n\
+	ldr	r6, ._369 + 20  @ gUnknown_03004210\n\
 	mov	r2, #0x91\n\
 	lsl	r2, r2, #0x1\n\
 	mov	r5, #0x39\n\
@@ -1625,7 +1625,7 @@ void debug_sub_803107C(void)
 	bl	Text_InitWindowAndPrintText\n\
 	mov	r1, #0x0\n\
 	mov	r7, #0x0\n\
-	ldr	r0, ._369 + 24\n\
+	ldr	r0, ._369 + 24  @ gOamMatrixAllocBitmap\n\
 	mov	r3, #0x1\n\
 	ldr	r2, [r0]\n\
 ._368:\n\
@@ -1641,13 +1641,13 @@ void debug_sub_803107C(void)
 	add	r1, r1, #0x1\n\
 	cmp	r1, #0x1f\n\
 	ble	._368	@cond_branch\n\
-	ldr	r4, ._369 + 16\n\
+	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
 	add	r0, r4, #0\n\
 	add	r1, r7, #0\n\
 	mov	r2, #0x2\n\
 	mov	r3, #0x2\n\
 	bl	ConvertIntToDecimalStringN\n\
-	ldr	r0, ._369 + 20\n\
+	ldr	r0, ._369 + 20  @ gUnknown_03004210\n\
 	mov	r2, #0x95\n\
 	lsl	r2, r2, #0x1\n\
 	mov	r1, #0x39\n\
@@ -1655,12 +1655,12 @@ void debug_sub_803107C(void)
 	add	r1, r4, #0\n\
 	mov	r3, #0xe\n\
 	bl	Text_InitWindowAndPrintText\n\
-	ldr	r1, ._369 + 28\n\
-	ldr	r0, ._369 + 8\n\
+	ldr	r1, ._369 + 28  @ gBattleBankFunc\n\
+	ldr	r0, ._369 + 8   @ gActiveBank\n\
 	ldrb	r0, [r0]\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r1\n\
-	ldr	r1, ._369 + 32\n\
+	ldr	r1, ._369 + 32  @ debug_sub_8030C24\n\
 	str	r1, [r0]\n\
 ._364:\n\
 	add	sp, sp, #0x4\n\

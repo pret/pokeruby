@@ -479,7 +479,7 @@ void sub_80EBDD8()
     asm("\
 	push	{lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._64\n\
+	ldr	r1, ._64        @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -490,7 +490,7 @@ void sub_80EBDD8()
 	b	._131\n\
 ._62:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._64 + 4\n\
+	ldr	r1, ._64 + 4    @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -525,14 +525,14 @@ void sub_80EBDD8()
 	lsl	r1, r1, #0x13\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r1]\n\
-	ldr	r1, ._86\n\
-	ldr	r3, ._86 + 4\n\
+	ldr	r1, ._86        @ gSharedMem\n\
+	ldr	r3, ._86 + 4    @ 0x6ddc\n\
 	add	r0, r1, r3\n\
 	ldrb	r2, [r0]\n\
 	sub	r3, r3, #0x2f\n\
 	add	r0, r1, r3\n\
 	strb	r2, [r0]\n\
-	ldr	r0, ._86 + 8\n\
+	ldr	r0, ._86 + 8    @ 0x6dae\n\
 	add	r2, r1, r0\n\
 	mov	r0, #0x5\n\
 	strb	r0, [r2]\n\
@@ -548,7 +548,7 @@ void sub_80EBDD8()
 	.word	0x6dae\n\
 ._68:\n\
 	bl	sub_80F3FF0\n\
-	ldr	r1, ._91\n\
+	ldr	r1, ._91        @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -562,7 +562,7 @@ void sub_80EBDD8()
 	beq	._88	@cond_branch\n\
 	b	._131\n\
 ._88:\n\
-	ldr	r1, ._91\n\
+	ldr	r1, ._91        @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -573,7 +573,7 @@ void sub_80EBDD8()
 	.word	gSharedMem\n\
 ._70:\n\
 	bl	sub_80F2598\n\
-	ldr	r1, ._94\n\
+	ldr	r1, ._94        @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -584,7 +584,7 @@ void sub_80EBDD8()
 	.word	gSharedMem\n\
 ._71:\n\
 	bl	sub_80EEE20\n\
-	ldr	r1, ._99\n\
+	ldr	r1, ._99        @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -599,7 +599,7 @@ void sub_80EBDD8()
 	b	._131\n\
 ._96:\n\
 	bl	sub_80EEE08\n\
-	ldr	r1, ._99\n\
+	ldr	r1, ._99        @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -611,7 +611,7 @@ void sub_80EBDD8()
 ._73:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EF248\n\
-	ldr	r1, ._104\n\
+	ldr	r1, ._104       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -634,7 +634,7 @@ void sub_80EBDD8()
 ._75:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F1B8C\n\
-	ldr	r1, ._108\n\
+	ldr	r1, ._108       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -647,7 +647,7 @@ void sub_80EBDD8()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._131	@cond_branch\n\
-	ldr	r1, ._108\n\
+	ldr	r1, ._108       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -657,7 +657,7 @@ void sub_80EBDD8()
 ._108:\n\
 	.word	gSharedMem\n\
 ._77:\n\
-	ldr	r0, ._111\n\
+	ldr	r0, ._111       @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	b	._110\n\
 ._112:\n\
@@ -672,7 +672,7 @@ void sub_80EBDD8()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._114\n\
+	ldr	r1, ._114       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -684,7 +684,7 @@ void sub_80EBDD8()
 ._79:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._117\n\
+	ldr	r1, ._117       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -694,7 +694,7 @@ void sub_80EBDD8()
 ._117:\n\
 	.word	gSharedMem\n\
 ._80:\n\
-	ldr	r0, ._121\n\
+	ldr	r0, ._121       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -711,7 +711,7 @@ void sub_80EBDD8()
 ._81:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._125\n\
+	ldr	r1, ._125       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -724,7 +724,7 @@ void sub_80EBDD8()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._131	@cond_branch\n\
-	ldr	r1, ._125\n\
+	ldr	r1, ._125       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -736,7 +736,7 @@ void sub_80EBDD8()
 ._83:\n\
 	bl	sub_80F1DF0\n\
 ._110:\n\
-	ldr	r1, ._128\n\
+	ldr	r1, ._128       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -757,14 +757,14 @@ void sub_80EBDD8()
 	mov	r0, #0x0\n\
 	mov	r1, #0x0\n\
 	bl	sub_80EF428\n\
-	ldr	r0, ._132\n\
+	ldr	r0, ._132       @ sub_80EC268\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._132 + 4\n\
+	ldr	r0, ._132 + 4   @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._131	@cond_branch\n\
-	ldr	r0, ._132 + 8\n\
-	ldr	r2, ._132 + 12\n\
+	ldr	r0, ._132 + 8   @ 0x6007de0\n\
+	ldr	r2, ._132 + 12  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -877,7 +877,7 @@ void sub_80EC00C()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._136\n\
+	ldr	r1, ._136       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -888,7 +888,7 @@ void sub_80EC00C()
 	b	._191\n\
 ._134:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._136 + 4\n\
+	ldr	r1, ._136 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -919,17 +919,17 @@ void sub_80EC00C()
 	beq	._153	@cond_branch\n\
 	b	._191\n\
 ._153:\n\
-	ldr	r0, ._156\n\
+	ldr	r0, ._156       @ sub_80EBD80\n\
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED1C\n\
-	ldr	r4, ._156 + 4\n\
-	ldr	r1, ._156 + 8\n\
+	ldr	r4, ._156 + 4   @ gSharedMem\n\
+	ldr	r1, ._156 + 8   @ 0x6ddc\n\
 	add	r0, r4, r1\n\
 	ldrb	r1, [r0]\n\
-	ldr	r2, ._156 + 12\n\
+	ldr	r2, ._156 + 12  @ 0x6dad\n\
 	add	r0, r4, r2\n\
 	strb	r1, [r0]\n\
-	ldr	r0, ._156 + 16\n\
+	ldr	r0, ._156 + 16  @ 0x6dae\n\
 	add	r1, r4, r0\n\
 	mov	r0, #0x5\n\
 	strb	r0, [r1]\n\
@@ -952,7 +952,7 @@ void sub_80EC00C()
 ._140:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EF248\n\
-	ldr	r1, ._161\n\
+	ldr	r1, ._161       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -967,7 +967,7 @@ void sub_80EC00C()
 	beq	._158	@cond_branch\n\
 	b	._191\n\
 ._158:\n\
-	ldr	r1, ._161\n\
+	ldr	r1, ._161       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -979,7 +979,7 @@ void sub_80EC00C()
 ._142:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F1B8C\n\
-	ldr	r1, ._166\n\
+	ldr	r1, ._166       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -994,7 +994,7 @@ void sub_80EC00C()
 	beq	._163	@cond_branch\n\
 	b	._191\n\
 ._163:\n\
-	ldr	r1, ._166\n\
+	ldr	r1, ._166       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -1020,7 +1020,7 @@ void sub_80EC00C()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._171\n\
+	ldr	r0, ._171       @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
@@ -1033,7 +1033,7 @@ void sub_80EC00C()
 ._146:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._174\n\
+	ldr	r1, ._174       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -1043,7 +1043,7 @@ void sub_80EC00C()
 ._174:\n\
 	.word	gSharedMem\n\
 ._147:\n\
-	ldr	r0, ._178\n\
+	ldr	r0, ._178       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -1059,7 +1059,7 @@ void sub_80EC00C()
 	.word	gPaletteFade\n\
 ._148:\n\
 	bl	sub_80F2598\n\
-	ldr	r1, ._181\n\
+	ldr	r1, ._181       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -1071,7 +1071,7 @@ void sub_80EC00C()
 ._149:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._185\n\
+	ldr	r1, ._185       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1084,7 +1084,7 @@ void sub_80EC00C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._191	@cond_branch\n\
-	ldr	r1, ._185\n\
+	ldr	r1, ._185       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -1096,7 +1096,7 @@ void sub_80EC00C()
 ._151:\n\
 	bl	sub_80F1DF0\n\
 ._169:\n\
-	ldr	r1, ._188\n\
+	ldr	r1, ._188       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1114,20 +1114,20 @@ void sub_80EC00C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._191	@cond_branch\n\
-	ldr	r0, ._192\n\
-	ldr	r1, ._192 + 4\n\
+	ldr	r0, ._192       @ gSharedMem\n\
+	ldr	r1, ._192 + 4   @ 0x6dad\n\
 	add	r0, r0, r1\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EF428\n\
-	ldr	r0, ._192 + 8\n\
+	ldr	r0, ._192 + 8   @ sub_80EC268\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._192 + 12\n\
+	ldr	r0, ._192 + 12  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._191	@cond_branch\n\
-	ldr	r0, ._192 + 16\n\
-	ldr	r2, ._192 + 20\n\
+	ldr	r0, ._192 + 16  @ 0x6007de0\n\
+	ldr	r2, ._192 + 20  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -1349,7 +1349,7 @@ void sub_80EC4A0()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._285\n\
+	ldr	r1, ._285       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -1360,7 +1360,7 @@ void sub_80EC4A0()
 	b	._340\n\
 ._283:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._285 + 4\n\
+	ldr	r1, ._285 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -1397,7 +1397,7 @@ void sub_80EC4A0()
 	beq	._304	@cond_branch\n\
 	b	._340\n\
 ._304:\n\
-	ldr	r0, ._308\n\
+	ldr	r0, ._308       @ gSaveBlock2\n\
 	ldrb	r1, [r0, #0x15]\n\
 	mov	r0, #0x8\n\
 	and	r0, r0, r1\n\
@@ -1408,7 +1408,7 @@ void sub_80EC4A0()
 ._306:\n\
 	add	r0, r1, #0\n\
 	bl	sub_80EEFBC\n\
-	ldr	r1, ._308 + 4\n\
+	ldr	r1, ._308 + 4   @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1426,7 +1426,7 @@ void sub_80EC4A0()
 	beq	._310	@cond_branch\n\
 	b	._340\n\
 ._310:\n\
-	ldr	r4, ._313\n\
+	ldr	r4, ._313       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -1446,7 +1446,7 @@ void sub_80EC4A0()
 ._313:\n\
 	.word	gSharedMem\n\
 ._291:\n\
-	ldr	r0, ._318\n\
+	ldr	r0, ._318       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -1464,7 +1464,7 @@ void sub_80EC4A0()
 	.word	gPaletteFade\n\
 ._292:\n\
 	bl	sub_80F2620\n\
-	ldr	r1, ._321\n\
+	ldr	r1, ._321       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1478,7 +1478,7 @@ void sub_80EC4A0()
 	b	._336\n\
 ._294:\n\
 	bl	sub_80EF840\n\
-	ldr	r1, ._326\n\
+	ldr	r1, ._326       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1500,7 +1500,7 @@ void sub_80EC4A0()
 ._296:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._329\n\
+	ldr	r1, ._329       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1517,9 +1517,9 @@ void sub_80EC4A0()
 	.word	gSharedMem\n\
 ._298:\n\
 	bl	sub_80F2DD8\n\
-	ldr	r0, ._332\n\
+	ldr	r0, ._332       @ sub_80EBD30\n\
 	bl	SetVBlankCallback\n\
-	ldr	r1, ._332 + 4\n\
+	ldr	r1, ._332 + 4   @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -1551,17 +1551,17 @@ void sub_80EC4A0()
 ._301:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80EED2C\n\
-	ldr	r0, ._338\n\
+	ldr	r0, ._338       @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._336	@cond_branch\n\
-	ldr	r0, ._338 + 4\n\
-	ldr	r2, ._338 + 8\n\
+	ldr	r0, ._338 + 4   @ 0x60075e0\n\
+	ldr	r2, ._338 + 8   @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
 ._336:\n\
-	ldr	r1, ._338 + 12\n\
+	ldr	r1, ._338 + 12  @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -1578,13 +1578,13 @@ void sub_80EC4A0()
 	.word	0x600f800\n\
 	.word	gSharedMem\n\
 ._302:\n\
-	ldr	r0, ._341\n\
+	ldr	r0, ._341       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._340	@cond_branch\n\
-	ldr	r0, ._341 + 4\n\
+	ldr	r0, ._341 + 4   @ sub_80EC67C\n\
 	bl	sub_80EBDBC\n\
 ._340:\n\
 	add	sp, sp, #0x4\n\
@@ -1691,7 +1691,7 @@ void sub_80EC67C()
     asm("\
 	push	{r4, r5, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._345\n\
+	ldr	r1, ._345       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -1702,7 +1702,7 @@ void sub_80EC67C()
 	b	._386\n\
 ._343:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._345 + 4\n\
+	ldr	r1, ._345 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -1744,7 +1744,7 @@ void sub_80EC67C()
 ._358:\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._364\n\
+	ldr	r0, ._364       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -1758,7 +1758,7 @@ void sub_80EC67C()
 ._359:\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._367\n\
+	ldr	r0, ._367       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r0, r2\n\
@@ -1770,7 +1770,7 @@ void sub_80EC67C()
 ._367:\n\
 	.word	gSharedMem\n\
 ._349:\n\
-	ldr	r1, ._371\n\
+	ldr	r1, ._371       @ 0x6e90\n\
 	add	r0, r4, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
@@ -1797,8 +1797,8 @@ void sub_80EC67C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._386	@cond_branch\n\
-	ldr	r5, ._378\n\
-	ldr	r1, ._378 + 4\n\
+	ldr	r5, ._378       @ gSharedMem\n\
+	ldr	r1, ._378 + 4   @ 0x6e90\n\
 	add	r0, r5, r1\n\
 	ldrb	r4, [r0]\n\
 	cmp	r4, #0\n\
@@ -1827,7 +1827,7 @@ void sub_80EC67C()
 	cmp	r4, #0\n\
 	bne	._386	@cond_branch\n\
 	bl	sub_80EFBB0\n\
-	ldr	r0, ._383\n\
+	ldr	r0, ._383       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -1858,7 +1858,7 @@ void sub_80EC67C()
 	strh	r0, [r1]\n\
 	b	._386\n\
 ._353:\n\
-	ldr	r0, ._389\n\
+	ldr	r0, ._389       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -1867,10 +1867,10 @@ void sub_80EC67C()
 	bl	sub_80F2DF4\n\
 	mov	r0, #0x4\n\
 	bl	sub_80F2D04\n\
-	ldr	r3, ._389 + 4\n\
+	ldr	r3, ._389 + 4   @ gSaveBlock2\n\
 	mov	r2, #0x0\n\
-	ldr	r0, ._389 + 8\n\
-	ldr	r1, ._389 + 12\n\
+	ldr	r0, ._389 + 8   @ gSharedMem\n\
+	ldr	r1, ._389 + 12  @ 0x6e90\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
@@ -1884,15 +1884,15 @@ void sub_80EC67C()
 	and	r0, r0, r1\n\
 	orr	r0, r0, r2\n\
 	strb	r0, [r3, #0x15]\n\
-	ldr	r0, ._389 + 16\n\
+	ldr	r0, ._389 + 16  @ sub_80EC00C\n\
 	bl	sub_80EBDBC\n\
 ._386:\n\
-	ldr	r0, ._389 + 20\n\
+	ldr	r0, ._389 + 20  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._388	@cond_branch\n\
-	ldr	r0, ._389 + 24\n\
-	ldr	r2, ._389 + 28\n\
+	ldr	r0, ._389 + 24  @ gLink\n\
+	ldr	r2, ._389 + 28  @ 0xfbd\n\
 	add	r0, r0, r2\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -2092,7 +2092,7 @@ void sub_80ECA10()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._456\n\
+	ldr	r1, ._456       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -2103,7 +2103,7 @@ void sub_80ECA10()
 	b	._509\n\
 ._454:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._456 + 4\n\
+	ldr	r1, ._456 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -2134,17 +2134,17 @@ void sub_80ECA10()
 	beq	._473	@cond_branch\n\
 	b	._509\n\
 ._473:\n\
-	ldr	r0, ._476\n\
+	ldr	r0, ._476       @ sub_80EBD80\n\
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED1C\n\
-	ldr	r4, ._476 + 4\n\
-	ldr	r1, ._476 + 8\n\
+	ldr	r4, ._476 + 4   @ gSharedMem\n\
+	ldr	r1, ._476 + 8   @ 0x6df0\n\
 	add	r0, r4, r1\n\
 	ldrb	r1, [r0]\n\
-	ldr	r2, ._476 + 12\n\
+	ldr	r2, ._476 + 12  @ 0x6dad\n\
 	add	r0, r4, r2\n\
 	strb	r1, [r0]\n\
-	ldr	r0, ._476 + 16\n\
+	ldr	r0, ._476 + 16  @ 0x6dae\n\
 	add	r1, r4, r0\n\
 	mov	r0, #0x3\n\
 	strb	r0, [r1]\n\
@@ -2167,7 +2167,7 @@ void sub_80ECA10()
 ._460:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80EF248\n\
-	ldr	r1, ._481\n\
+	ldr	r1, ._481       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2182,7 +2182,7 @@ void sub_80ECA10()
 	beq	._478	@cond_branch\n\
 	b	._509\n\
 ._478:\n\
-	ldr	r1, ._481\n\
+	ldr	r1, ._481       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2194,7 +2194,7 @@ void sub_80ECA10()
 ._462:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F1B8C\n\
-	ldr	r1, ._486\n\
+	ldr	r1, ._486       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2209,7 +2209,7 @@ void sub_80ECA10()
 	beq	._483	@cond_branch\n\
 	b	._509\n\
 ._483:\n\
-	ldr	r1, ._486\n\
+	ldr	r1, ._486       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2235,7 +2235,7 @@ void sub_80ECA10()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._491\n\
+	ldr	r0, ._491       @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
@@ -2248,7 +2248,7 @@ void sub_80ECA10()
 ._466:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._494\n\
+	ldr	r1, ._494       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2261,7 +2261,7 @@ void sub_80ECA10()
 	bl	sub_80F2598\n\
 	b	._496\n\
 ._468:\n\
-	ldr	r0, ._499\n\
+	ldr	r0, ._499       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -2278,7 +2278,7 @@ void sub_80ECA10()
 ._469:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._503\n\
+	ldr	r1, ._503       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2291,7 +2291,7 @@ void sub_80ECA10()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._509	@cond_branch\n\
-	ldr	r1, ._503\n\
+	ldr	r1, ._503       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2303,7 +2303,7 @@ void sub_80ECA10()
 ._471:\n\
 	bl	sub_80F1DF0\n\
 ._496:\n\
-	ldr	r1, ._506\n\
+	ldr	r1, ._506       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2321,20 +2321,20 @@ void sub_80ECA10()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._509	@cond_branch\n\
-	ldr	r0, ._510\n\
-	ldr	r1, ._510 + 4\n\
+	ldr	r0, ._510       @ gSharedMem\n\
+	ldr	r1, ._510 + 4   @ 0x6dad\n\
 	add	r0, r0, r1\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	bl	sub_80EF428\n\
-	ldr	r0, ._510 + 8\n\
+	ldr	r0, ._510 + 8   @ sub_80EC86C\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._510 + 12\n\
+	ldr	r0, ._510 + 12  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._509	@cond_branch\n\
-	ldr	r0, ._510 + 16\n\
-	ldr	r2, ._510 + 20\n\
+	ldr	r0, ._510 + 16  @ 0x6007de0\n\
+	ldr	r2, ._510 + 20  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -2488,7 +2488,7 @@ void sub_80ECD80()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._564\n\
+	ldr	r1, ._564       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -2499,7 +2499,7 @@ void sub_80ECD80()
 	b	._642\n\
 ._562:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._564 + 4\n\
+	ldr	r1, ._564 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -2546,7 +2546,7 @@ void sub_80ECD80()
 	add	r1, r4, r0\n\
 	b	._630\n\
 ._568:\n\
-	ldr	r0, ._592\n\
+	ldr	r0, ._592       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -2569,7 +2569,7 @@ void sub_80ECD80()
 	beq	._594	@cond_branch\n\
 	b	._642\n\
 ._594:\n\
-	ldr	r0, ._597\n\
+	ldr	r0, ._597       @ sub_80EBD80\n\
 	bl	SetVBlankCallback\n\
 	b	._625\n\
 ._598:\n\
@@ -2579,7 +2579,7 @@ void sub_80ECD80()
 ._570:\n\
 	bl	sub_80EED1C\n\
 	bl	sub_80F3130\n\
-	ldr	r1, ._600\n\
+	ldr	r1, ._600       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2591,7 +2591,7 @@ void sub_80ECD80()
 ._571:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2D6C\n\
-	ldr	r1, ._603\n\
+	ldr	r1, ._603       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2605,13 +2605,13 @@ void sub_80ECD80()
 	bl	sub_80F2D6C\n\
 	b	._625\n\
 ._573:\n\
-	ldr	r1, ._607\n\
+	ldr	r1, ._607       @ 0x6dfc\n\
 	add	r0, r4, r1\n\
 	ldrb	r1, [r0]\n\
-	ldr	r2, ._607 + 4\n\
+	ldr	r2, ._607 + 4   @ 0x6dad\n\
 	add	r0, r4, r2\n\
 	strb	r1, [r0]\n\
-	ldr	r3, ._607 + 8\n\
+	ldr	r3, ._607 + 8   @ 0x6dae\n\
 	add	r1, r4, r3\n\
 	mov	r0, #0x6\n\
 	strb	r0, [r1]\n\
@@ -2629,7 +2629,7 @@ void sub_80ECD80()
 ._574:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80EF248\n\
-	ldr	r1, ._612\n\
+	ldr	r1, ._612       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2652,7 +2652,7 @@ void sub_80ECD80()
 ._576:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F1B8C\n\
-	ldr	r1, ._617\n\
+	ldr	r1, ._617       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2667,7 +2667,7 @@ void sub_80ECD80()
 	beq	._614	@cond_branch\n\
 	b	._642\n\
 ._614:\n\
-	ldr	r1, ._617\n\
+	ldr	r1, ._617       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2695,7 +2695,7 @@ void sub_80ECD80()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._623\n\
+	ldr	r0, ._623       @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
@@ -2711,7 +2711,7 @@ void sub_80ECD80()
 	b	._625\n\
 ._581:\n\
 	bl	sub_80F2598\n\
-	ldr	r1, ._627\n\
+	ldr	r1, ._627       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -2721,7 +2721,7 @@ void sub_80ECD80()
 ._627:\n\
 	.word	gSharedMem\n\
 ._582:\n\
-	ldr	r0, ._631\n\
+	ldr	r0, ._631       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -2738,7 +2738,7 @@ void sub_80ECD80()
 ._583:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._635\n\
+	ldr	r1, ._635       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -2752,8 +2752,8 @@ void sub_80ECD80()
 	lsr	r2, r0, #0x18\n\
 	cmp	r2, #0\n\
 	bne	._642	@cond_branch\n\
-	ldr	r0, ._635\n\
-	ldr	r3, ._635 + 4\n\
+	ldr	r0, ._635       @ gSharedMem\n\
+	ldr	r3, ._635 + 4   @ 0x306\n\
 	add	r1, r0, r3\n\
 	strh	r2, [r1]\n\
 	mov	r1, #0xc1\n\
@@ -2771,7 +2771,7 @@ void sub_80ECD80()
 ._585:\n\
 	mov	r0, #0x5\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._639\n\
+	ldr	r1, ._639       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -2786,7 +2786,7 @@ void sub_80ECD80()
 	bne	._642	@cond_branch\n\
 	bl	sub_80F1DF0\n\
 ._625:\n\
-	ldr	r1, ._639\n\
+	ldr	r1, ._639       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -2804,20 +2804,20 @@ void sub_80ECD80()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._642	@cond_branch\n\
-	ldr	r0, ._643\n\
-	ldr	r1, ._643 + 4\n\
+	ldr	r0, ._643       @ gSharedMem\n\
+	ldr	r1, ._643 + 4   @ 0x6dad\n\
 	add	r0, r0, r1\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x2\n\
 	bl	sub_80EF428\n\
-	ldr	r0, ._643 + 8\n\
+	ldr	r0, ._643 + 8   @ sub_80ECC08\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._643 + 12\n\
+	ldr	r0, ._643 + 12  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._642	@cond_branch\n\
-	ldr	r0, ._643 + 16\n\
-	ldr	r2, ._643 + 20\n\
+	ldr	r0, ._643 + 16  @ 0x6007de0\n\
+	ldr	r2, ._643 + 20  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -2952,7 +2952,7 @@ void sub_80ED01C()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._647\n\
+	ldr	r1, ._647       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -2963,7 +2963,7 @@ void sub_80ED01C()
 	b	._736\n\
 ._645:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._647 + 4\n\
+	ldr	r1, ._647 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -2999,7 +2999,7 @@ void sub_80ED01C()
 	bl	sub_80F2D04\n\
 	mov	r0, #0x5\n\
 	bl	sub_80F2D04\n\
-	ldr	r1, ._671\n\
+	ldr	r1, ._671       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3017,7 +3017,7 @@ void sub_80ED01C()
 ._673:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EEFBC\n\
-	ldr	r1, ._676\n\
+	ldr	r1, ._676       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3034,7 +3034,7 @@ void sub_80ED01C()
 	beq	._678	@cond_branch\n\
 	b	._736\n\
 ._678:\n\
-	ldr	r4, ._681\n\
+	ldr	r4, ._681       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -3054,7 +3054,7 @@ void sub_80ED01C()
 ._681:\n\
 	.word	gSharedMem\n\
 ._653:\n\
-	ldr	r0, ._686\n\
+	ldr	r0, ._686       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -3066,7 +3066,7 @@ void sub_80ED01C()
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80EF814\n\
-	ldr	r1, ._686 + 4\n\
+	ldr	r1, ._686 + 4   @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3078,7 +3078,7 @@ void sub_80ED01C()
 	.word	gSharedMem\n\
 ._654:\n\
 	bl	sub_80F2620\n\
-	ldr	r1, ._689\n\
+	ldr	r1, ._689       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3089,7 +3089,7 @@ void sub_80ED01C()
 	.word	gSharedMem\n\
 ._655:\n\
 	bl	sub_80F4D44\n\
-	ldr	r1, ._693\n\
+	ldr	r1, ._693       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -3101,7 +3101,7 @@ void sub_80ED01C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._691	@cond_branch\n\
-	ldr	r1, ._693\n\
+	ldr	r1, ._693       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3114,7 +3114,7 @@ void sub_80ED01C()
 ._693:\n\
 	.word	gSharedMem\n\
 ._691:\n\
-	ldr	r1, ._696\n\
+	ldr	r1, ._696       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3129,7 +3129,7 @@ void sub_80ED01C()
 	beq	._698	@cond_branch\n\
 	b	._736\n\
 ._698:\n\
-	ldr	r1, ._701\n\
+	ldr	r1, ._701       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -3147,7 +3147,7 @@ void sub_80ED01C()
 	beq	._703	@cond_branch\n\
 	b	._736\n\
 ._703:\n\
-	ldr	r1, ._706\n\
+	ldr	r1, ._706       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3159,7 +3159,7 @@ void sub_80ED01C()
 ._659:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F0264\n\
-	ldr	r1, ._711\n\
+	ldr	r1, ._711       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3173,7 +3173,7 @@ void sub_80ED01C()
 	beq	._708	@cond_branch\n\
 	b	._736\n\
 ._708:\n\
-	ldr	r1, ._711\n\
+	ldr	r1, ._711       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -3185,7 +3185,7 @@ void sub_80ED01C()
 ._661:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F3008\n\
-	ldr	r1, ._714\n\
+	ldr	r1, ._714       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3200,7 +3200,7 @@ void sub_80ED01C()
 	beq	._716	@cond_branch\n\
 	b	._736\n\
 ._716:\n\
-	ldr	r1, ._719\n\
+	ldr	r1, ._719       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3221,7 +3221,7 @@ void sub_80ED01C()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._722\n\
+	ldr	r0, ._722       @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
@@ -3234,7 +3234,7 @@ void sub_80ED01C()
 ._664:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._725\n\
+	ldr	r1, ._725       @ gSharedMem\n\
 	mov	r3, #0xc1\n\
 	lsl	r3, r3, #0x2\n\
 	add	r1, r1, r3\n\
@@ -3244,7 +3244,7 @@ void sub_80ED01C()
 ._725:\n\
 	.word	gSharedMem\n\
 ._665:\n\
-	ldr	r0, ._729\n\
+	ldr	r0, ._729       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -3252,7 +3252,7 @@ void sub_80ED01C()
 	lsr	r1, r0, #0x18\n\
 	cmp	r1, #0\n\
 	bne	._736	@cond_branch\n\
-	ldr	r2, ._729 + 4\n\
+	ldr	r2, ._729 + 4   @ 0x306\n\
 	add	r0, r4, r2\n\
 	strh	r1, [r0]\n\
 	mov	r3, #0xc1\n\
@@ -3271,7 +3271,7 @@ void sub_80ED01C()
 ._666:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._733\n\
+	ldr	r1, ._733       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3285,8 +3285,8 @@ void sub_80ED01C()
 	lsr	r2, r0, #0x18\n\
 	cmp	r2, #0\n\
 	bne	._736	@cond_branch\n\
-	ldr	r0, ._733\n\
-	ldr	r3, ._733 + 4\n\
+	ldr	r0, ._733       @ gSharedMem\n\
+	ldr	r3, ._733 + 4   @ 0x306\n\
 	add	r1, r0, r3\n\
 	strh	r2, [r1]\n\
 	mov	r1, #0xc1\n\
@@ -3302,8 +3302,8 @@ void sub_80ED01C()
 	.word	gSharedMem\n\
 	.word	0x306\n\
 ._668:\n\
-	ldr	r4, ._737\n\
-	ldr	r2, ._737 + 4\n\
+	ldr	r4, ._737       @ gSharedMem\n\
+	ldr	r2, ._737 + 4   @ 0x6dfc\n\
 	add	r0, r4, r2\n\
 	ldrb	r0, [r0]\n\
 	add	r0, r0, #0x7\n\
@@ -3317,8 +3317,8 @@ void sub_80ED01C()
 	add	r0, r0, #0x1\n\
 	strh	r0, [r4]\n\
 ._669:\n\
-	ldr	r0, ._737\n\
-	ldr	r1, ._737 + 4\n\
+	ldr	r0, ._737       @ gSharedMem\n\
+	ldr	r1, ._737 + 4   @ 0x6dfc\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	add	r0, r0, #0x7\n\
@@ -3328,14 +3328,14 @@ void sub_80ED01C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._736	@cond_branch\n\
-	ldr	r0, ._737 + 8\n\
+	ldr	r0, ._737 + 8   @ sub_80ED31C\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._737 + 12\n\
+	ldr	r0, ._737 + 12  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._736	@cond_branch\n\
-	ldr	r0, ._737 + 16\n\
-	ldr	r2, ._737 + 20\n\
+	ldr	r0, ._737 + 16  @ 0x6007de0\n\
+	ldr	r2, ._737 + 20  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -3472,7 +3472,7 @@ void sub_80ED31C()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._743\n\
+	ldr	r0, ._743       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r4, r0, r1\n\
@@ -3500,7 +3500,7 @@ void sub_80ED31C()
 	beq	._747	@cond_branch\n\
 	cmp	r0, #0x2\n\
 	beq	._748	@cond_branch\n\
-	ldr	r0, ._751\n\
+	ldr	r0, ._751       @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -3508,7 +3508,7 @@ void sub_80ED31C()
 	beq	._749	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._751 + 4\n\
+	ldr	r0, ._751 + 4   @ sub_80ED4D8\n\
 	bl	sub_80EBDBC\n\
 	b	._762\n\
 ._752:\n\
@@ -3535,7 +3535,7 @@ void sub_80ED31C()
 	beq	._761	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._757\n\
+	ldr	r0, ._757       @ sub_80ECD80\n\
 	bl	sub_80EBDBC\n\
 	b	._762\n\
 ._758:\n\
@@ -3559,12 +3559,12 @@ void sub_80ED31C()
 ._760:\n\
 	strh	r0, [r4]\n\
 ._761:\n\
-	ldr	r0, ._763\n\
+	ldr	r0, ._763       @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._762	@cond_branch\n\
-	ldr	r0, ._763 + 4\n\
-	ldr	r1, ._763 + 8\n\
+	ldr	r0, ._763 + 4   @ gLink\n\
+	ldr	r1, ._763 + 8   @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -3638,7 +3638,7 @@ void sub_80ED3D0()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._767\n\
+	ldr	r0, ._767       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -3648,7 +3648,7 @@ void sub_80ED3D0()
 	b	._803\n\
 ._765:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._767 + 4\n\
+	ldr	r1, ._767 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -3670,7 +3670,7 @@ void sub_80ED3D0()
 ._770:\n\
 	mov	r0, #0x0\n\
 	bl	SetVBlankCallback\n\
-	ldr	r1, ._780\n\
+	ldr	r1, ._780       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3682,7 +3682,7 @@ void sub_80ED3D0()
 ._771:\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80F6134\n\
-	ldr	r1, ._783\n\
+	ldr	r1, ._783       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3694,7 +3694,7 @@ void sub_80ED3D0()
 ._772:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80EEFBC\n\
-	ldr	r1, ._786\n\
+	ldr	r1, ._786       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3706,7 +3706,7 @@ void sub_80ED3D0()
 ._773:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F0264\n\
-	ldr	r1, ._790\n\
+	ldr	r1, ._790       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3718,7 +3718,7 @@ void sub_80ED3D0()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._803	@cond_branch\n\
-	ldr	r1, ._790\n\
+	ldr	r1, ._790       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3731,7 +3731,7 @@ void sub_80ED3D0()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._803	@cond_branch\n\
-	ldr	r1, ._794\n\
+	ldr	r1, ._794       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3743,7 +3743,7 @@ void sub_80ED3D0()
 ._776:\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F3008\n\
-	ldr	r4, ._797\n\
+	ldr	r4, ._797       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -3755,7 +3755,7 @@ void sub_80ED3D0()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._797 + 4\n\
+	ldr	r0, ._797 + 4   @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
@@ -3773,19 +3773,19 @@ void sub_80ED3D0()
 ._777:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._801\n\
+	ldr	r1, ._801       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._801 + 4\n\
+	ldr	r0, ._801 + 4   @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._803	@cond_branch\n\
-	ldr	r0, ._801 + 8\n\
-	ldr	r2, ._801 + 12\n\
+	ldr	r0, ._801 + 8   @ 0x6007de0\n\
+	ldr	r2, ._801 + 12  @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -3798,13 +3798,13 @@ void sub_80ED3D0()
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
 ._778:\n\
-	ldr	r0, ._804\n\
+	ldr	r0, ._804       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._803	@cond_branch\n\
-	ldr	r0, ._804 + 4\n\
+	ldr	r0, ._804 + 4   @ sub_80ED31C\n\
 	bl	sub_80EBDBC\n\
 ._803:\n\
 	add	sp, sp, #0x4\n\
@@ -3872,7 +3872,7 @@ void sub_80ED4D8()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._808\n\
+	ldr	r1, ._808       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -3883,7 +3883,7 @@ void sub_80ED4D8()
 	b	._844\n\
 ._806:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._808 + 4\n\
+	ldr	r1, ._808 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -3915,7 +3915,7 @@ void sub_80ED4D8()
 	bl	BeginNormalPaletteFade\n\
 	b	._820\n\
 ._812:\n\
-	ldr	r0, ._824\n\
+	ldr	r0, ._824       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -3927,7 +3927,7 @@ void sub_80ED4D8()
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80F3130\n\
-	ldr	r1, ._824 + 4\n\
+	ldr	r1, ._824 + 4   @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3941,7 +3941,7 @@ void sub_80ED4D8()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._844	@cond_branch\n\
-	ldr	r1, ._828\n\
+	ldr	r1, ._828       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -3952,7 +3952,7 @@ void sub_80ED4D8()
 	.word	gSharedMem\n\
 ._814:\n\
 	bl	sub_80F4CF0\n\
-	ldr	r1, ._831\n\
+	ldr	r1, ._831       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3963,7 +3963,7 @@ void sub_80ED4D8()
 	.word	gSharedMem\n\
 ._815:\n\
 	bl	sub_80EFF34\n\
-	ldr	r1, ._835\n\
+	ldr	r1, ._835       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -3975,7 +3975,7 @@ void sub_80ED4D8()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._844	@cond_branch\n\
-	ldr	r1, ._835\n\
+	ldr	r1, ._835       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -3988,7 +3988,7 @@ void sub_80ED4D8()
 	bl	sub_80F35B4\n\
 	mov	r0, #0x2\n\
 	bl	sub_80EEFBC\n\
-	ldr	r4, ._838\n\
+	ldr	r4, ._838       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -4000,7 +4000,7 @@ void sub_80ED4D8()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._838 + 4\n\
+	ldr	r0, ._838 + 4   @ sub_80EBD4C\n\
 	bl	SetVBlankCallback\n\
 ._820:\n\
 	mov	r2, #0xc1\n\
@@ -4019,19 +4019,19 @@ void sub_80ED4D8()
 ._818:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._842\n\
+	ldr	r1, ._842       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._842 + 4\n\
+	ldr	r0, ._842 + 4   @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._844	@cond_branch\n\
-	ldr	r0, ._842 + 8\n\
-	ldr	r2, ._842 + 12\n\
+	ldr	r0, ._842 + 8   @ 0x6007de0\n\
+	ldr	r2, ._842 + 12  @ 0x600f000\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -4044,13 +4044,13 @@ void sub_80ED4D8()
 	.word	0x6007de0\n\
 	.word	0x600f000\n\
 ._819:\n\
-	ldr	r0, ._845\n\
+	ldr	r0, ._845       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._844	@cond_branch\n\
-	ldr	r0, ._845 + 4\n\
+	ldr	r0, ._845 + 4   @ sub_80ED858\n\
 	bl	sub_80EBDBC\n\
 ._844:\n\
 	add	sp, sp, #0x4\n\
@@ -4123,7 +4123,7 @@ void sub_80ED620()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._849\n\
+	ldr	r1, ._849       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -4134,7 +4134,7 @@ void sub_80ED620()
 	b	._912\n\
 ._847:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._849 + 4\n\
+	ldr	r1, ._849 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -4165,7 +4165,7 @@ void sub_80ED620()
 	bl	sub_80F1E84\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2D04\n\
-	ldr	r1, ._870\n\
+	ldr	r1, ._870       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4192,7 +4192,7 @@ void sub_80ED620()
 	beq	._875	@cond_branch\n\
 	b	._912\n\
 ._875:\n\
-	ldr	r4, ._878\n\
+	ldr	r4, ._878       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -4212,7 +4212,7 @@ void sub_80ED620()
 ._878:\n\
 	.word	gSharedMem\n\
 ._855:\n\
-	ldr	r0, ._883\n\
+	ldr	r0, ._883       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -4226,8 +4226,8 @@ void sub_80ED620()
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80EF814\n\
-	ldr	r0, ._883 + 4\n\
-	ldr	r2, ._883 + 8\n\
+	ldr	r0, ._883 + 4   @ gSharedMem\n\
+	ldr	r2, ._883 + 8   @ 0x76aa\n\
 	add	r1, r0, r2\n\
 	strb	r4, [r1]\n\
 	mov	r1, #0xc1\n\
@@ -4247,7 +4247,7 @@ void sub_80ED620()
 	bl	sub_80F2620\n\
 	b	._885\n\
 ._857:\n\
-	ldr	r0, ._887\n\
+	ldr	r0, ._887       @ 0xd162\n\
 	add	r1, r4, r0\n\
 	mov	r0, #0x2\n\
 	strb	r0, [r1]\n\
@@ -4262,7 +4262,7 @@ void sub_80ED620()
 	.word	0xd162\n\
 ._858:\n\
 	bl	sub_80EFF34\n\
-	ldr	r1, ._890\n\
+	ldr	r1, ._890       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4280,7 +4280,7 @@ void sub_80ED620()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._912	@cond_branch\n\
-	ldr	r1, ._894\n\
+	ldr	r1, ._894       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4294,7 +4294,7 @@ void sub_80ED620()
 	b	._896\n\
 ._862:\n\
 	bl	sub_80F33A8\n\
-	ldr	r4, ._898\n\
+	ldr	r4, ._898       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -4306,7 +4306,7 @@ void sub_80ED620()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._898 + 4\n\
+	ldr	r0, ._898 + 4   @ sub_80EBD4C\n\
 	bl	SetVBlankCallback\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
@@ -4320,7 +4320,7 @@ void sub_80ED620()
 ._863:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._901\n\
+	ldr	r1, ._901       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4330,7 +4330,7 @@ void sub_80ED620()
 ._901:\n\
 	.word	gSharedMem\n\
 ._864:\n\
-	ldr	r0, ._905\n\
+	ldr	r0, ._905       @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -4347,7 +4347,7 @@ void sub_80ED620()
 ._865:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._909\n\
+	ldr	r1, ._909       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4363,7 +4363,7 @@ void sub_80ED620()
 	cmp	r0, #0\n\
 	bne	._912	@cond_branch\n\
 ._885:\n\
-	ldr	r1, ._909\n\
+	ldr	r1, ._909       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -4379,7 +4379,7 @@ void sub_80ED620()
 ._867:\n\
 	mov	r0, #0x6\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._913\n\
+	ldr	r1, ._913       @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -4392,14 +4392,14 @@ void sub_80ED620()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._912	@cond_branch\n\
-	ldr	r0, ._913 + 4\n\
+	ldr	r0, ._913 + 4   @ sub_80ED858\n\
 	bl	sub_80EBDBC\n\
-	ldr	r0, ._913 + 8\n\
+	ldr	r0, ._913 + 8   @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._912	@cond_branch\n\
-	ldr	r0, ._913 + 12\n\
-	ldr	r2, ._913 + 16\n\
+	ldr	r0, ._913 + 12  @ 0x6007de0\n\
+	ldr	r2, ._913 + 16  @ 0x600f000\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -4684,7 +4684,7 @@ void sub_80ED858()
     asm("\
 	push	{r4, r5, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._917\n\
+	ldr	r1, ._917       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -4695,7 +4695,7 @@ void sub_80ED858()
 	b	._999\n\
 ._915:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._917 + 4\n\
+	ldr	r1, ._917 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -4720,7 +4720,7 @@ void sub_80ED858()
 ._920:\n\
 	bl	sub_80F4F78\n\
 	bl	sub_80F5B38\n\
-	ldr	r0, ._933\n\
+	ldr	r0, ._933       @ gSharedMem\n\
 	mov	r4, #0xc1\n\
 	lsl	r4, r4, #0x2\n\
 	add	r0, r0, r4\n\
@@ -4738,7 +4738,7 @@ void sub_80ED858()
 	beq	._935	@cond_branch\n\
 	b	._999\n\
 ._935:\n\
-	ldr	r0, ._938\n\
+	ldr	r0, ._938       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -4752,7 +4752,7 @@ void sub_80ED858()
 ._922:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F0174\n\
-	ldr	r0, ._941\n\
+	ldr	r0, ._941       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r0, r2\n\
@@ -4774,24 +4774,24 @@ void sub_80ED858()
 	bl	sub_80F3D00\n\
 	b	._945\n\
 ._924:\n\
-	ldr	r2, ._951\n\
+	ldr	r2, ._951       @ gMain\n\
 	ldrh	r1, [r2, #0x2c]\n\
 	mov	r0, #0x40\n\
 	and	r0, r0, r1\n\
 	add	r3, r2, #0\n\
 	cmp	r0, #0\n\
 	beq	._949	@cond_branch\n\
-	ldr	r1, ._951 + 4\n\
+	ldr	r1, ._951 + 4   @ 0x87cb\n\
 	add	r0, r5, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._949	@cond_branch\n\
-	ldr	r2, ._951 + 8\n\
+	ldr	r2, ._951 + 8   @ 0x76aa\n\
 	add	r0, r5, r2\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._948	@cond_branch\n\
-	ldr	r4, ._951 + 12\n\
+	ldr	r4, ._951 + 12  @ 0x87dc\n\
 	add	r0, r5, r4\n\
 	mov	r1, #0x0\n\
 	ldsh	r0, [r0, r1]\n\
@@ -4820,17 +4820,17 @@ void sub_80ED858()
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._956	@cond_branch\n\
-	ldr	r4, ._958\n\
+	ldr	r4, ._958       @ 0x87cb\n\
 	add	r0, r5, r4\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._956	@cond_branch\n\
-	ldr	r1, ._958 + 4\n\
+	ldr	r1, ._958 + 4   @ 0x76aa\n\
 	add	r0, r5, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	beq	._955	@cond_branch\n\
-	ldr	r2, ._958 + 8\n\
+	ldr	r2, ._958 + 8   @ 0x87dc\n\
 	add	r0, r5, r2\n\
 	sub	r4, r4, #0x57\n\
 	add	r1, r5, r4\n\
@@ -4869,7 +4869,7 @@ void sub_80ED858()
 	bl	PlaySE\n\
 	bl	sub_80F4FDC\n\
 	bl	move_anim_execute\n\
-	ldr	r0, ._962\n\
+	ldr	r0, ._962       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -4888,16 +4888,16 @@ void sub_80ED858()
 	b	._999\n\
 ._964:\n\
 	add	r4, r5, #0\n\
-	ldr	r2, ._970\n\
+	ldr	r2, ._970       @ 0x76aa\n\
 	add	r0, r4, r2\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	bne	._966	@cond_branch\n\
-	ldr	r1, ._970 + 4\n\
+	ldr	r1, ._970 + 4   @ 0x87dc\n\
 	add	r0, r4, r1\n\
 	mov	r2, #0x0\n\
 	ldsh	r1, [r0, r2]\n\
-	ldr	r2, ._970 + 8\n\
+	ldr	r2, ._970 + 8   @ 0x87da\n\
 	add	r0, r4, r2\n\
 	mov	r2, #0x0\n\
 	ldsh	r0, [r0, r2]\n\
@@ -4921,7 +4921,7 @@ void sub_80ED858()
 	.word	0x87dc\n\
 	.word	0x87da\n\
 ._966:\n\
-	ldr	r1, ._975\n\
+	ldr	r1, ._975       @ 0x6dac\n\
 	add	r0, r5, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
@@ -4948,7 +4948,7 @@ void sub_80ED858()
 	b	._999\n\
 ._977:\n\
 	bl	sub_80F3D00\n\
-	ldr	r0, ._980\n\
+	ldr	r0, ._980       @ gSharedMem\n\
 	mov	r4, #0xc1\n\
 	lsl	r4, r4, #0x2\n\
 	add	r0, r0, r4\n\
@@ -4963,7 +4963,7 @@ void sub_80ED858()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._999	@cond_branch\n\
-	ldr	r0, ._984\n\
+	ldr	r0, ._984       @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -4976,7 +4976,7 @@ void sub_80ED858()
 	mov	r0, #0x3\n\
 	bl	sub_80EEFBC\n\
 	bl	sub_80F3668\n\
-	ldr	r0, ._987\n\
+	ldr	r0, ._987       @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r0, r2\n\
@@ -4996,7 +4996,7 @@ void sub_80ED858()
 	bl	sub_80EEFBC\n\
 	bl	sub_80F3698\n\
 ._945:\n\
-	ldr	r0, ._991\n\
+	ldr	r0, ._991       @ gSharedMem\n\
 	mov	r4, #0xc1\n\
 	lsl	r4, r4, #0x2\n\
 	add	r0, r0, r4\n\
@@ -5017,7 +5017,7 @@ void sub_80ED858()
 	mov	r0, #0x0\n\
 	bl	sub_80F0174\n\
 	bl	sub_80F2F48\n\
-	ldr	r5, ._995\n\
+	ldr	r5, ._995       @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r5, r1\n\
@@ -5039,7 +5039,7 @@ void sub_80ED858()
 ._995:\n\
 	.word	gSharedMem\n\
 ._931:\n\
-	ldr	r0, ._1000\n\
+	ldr	r0, ._1000      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -5047,8 +5047,8 @@ void sub_80ED858()
 	bne	._999	@cond_branch\n\
 	bl	sub_80F3CE8\n\
 	bl	sub_80F5BDC\n\
-	ldr	r0, ._1000 + 4\n\
-	ldr	r4, ._1000 + 8\n\
+	ldr	r0, ._1000 + 4  @ gSharedMem\n\
+	ldr	r4, ._1000 + 8  @ 0x76aa\n\
 	add	r0, r0, r4\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
@@ -5058,7 +5058,7 @@ void sub_80ED858()
 	bl	sub_80F2D6C\n\
 	mov	r0, #0x6\n\
 	bl	sub_80F2D6C\n\
-	ldr	r0, ._1000 + 12\n\
+	ldr	r0, ._1000 + 12 @ sub_80ECA10\n\
 	bl	sub_80EBDBC\n\
 	b	._999\n\
 ._1001:\n\
@@ -5070,15 +5070,15 @@ void sub_80ED858()
 	.word	sub_80ECA10+1\n\
 ._998:\n\
 	bl	sub_80F3614\n\
-	ldr	r0, ._1003\n\
+	ldr	r0, ._1003      @ sub_80ED3D0\n\
 	bl	sub_80EBDBC\n\
 ._999:\n\
-	ldr	r0, ._1003 + 4\n\
+	ldr	r0, ._1003 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1002	@cond_branch\n\
-	ldr	r0, ._1003 + 8\n\
-	ldr	r1, ._1003 + 12\n\
+	ldr	r0, ._1003 + 8  @ gLink\n\
+	ldr	r1, ._1003 + 12 @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -5483,7 +5483,7 @@ void sub_80EDB88()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._1007\n\
+	ldr	r1, ._1007      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -5494,7 +5494,7 @@ void sub_80EDB88()
 	b	._1088\n\
 ._1005:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._1007 + 4\n\
+	ldr	r1, ._1007 + 4  @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -5526,7 +5526,7 @@ void sub_80EDB88()
 	bl	sub_80F1E84\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F2D04\n\
-	ldr	r1, ._1029\n\
+	ldr	r1, ._1029      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5544,7 +5544,7 @@ void sub_80EDB88()
 ._1031:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EEFBC\n\
-	ldr	r1, ._1034\n\
+	ldr	r1, ._1034      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5561,7 +5561,7 @@ void sub_80EDB88()
 	beq	._1036	@cond_branch\n\
 	b	._1088\n\
 ._1036:\n\
-	ldr	r4, ._1039\n\
+	ldr	r4, ._1039      @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -5578,7 +5578,7 @@ void sub_80EDB88()
 ._1039:\n\
 	.word	gSharedMem\n\
 ._1013:\n\
-	ldr	r0, ._1044\n\
+	ldr	r0, ._1044      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -5590,7 +5590,7 @@ void sub_80EDB88()
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80EF814\n\
-	ldr	r1, ._1044 + 4\n\
+	ldr	r1, ._1044 + 4  @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5602,7 +5602,7 @@ void sub_80EDB88()
 	.word	gSharedMem\n\
 ._1014:\n\
 	bl	sub_80F2620\n\
-	ldr	r1, ._1047\n\
+	ldr	r1, ._1047      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5613,7 +5613,7 @@ void sub_80EDB88()
 	.word	gSharedMem\n\
 ._1015:\n\
 	bl	sub_80F638C\n\
-	ldr	r1, ._1051\n\
+	ldr	r1, ._1051      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5625,7 +5625,7 @@ void sub_80EDB88()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1049	@cond_branch\n\
-	ldr	r1, ._1051\n\
+	ldr	r1, ._1051      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5638,7 +5638,7 @@ void sub_80EDB88()
 ._1051:\n\
 	.word	gSharedMem\n\
 ._1049:\n\
-	ldr	r1, ._1054\n\
+	ldr	r1, ._1054      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5653,7 +5653,7 @@ void sub_80EDB88()
 	beq	._1056	@cond_branch\n\
 	b	._1088\n\
 ._1056:\n\
-	ldr	r1, ._1059\n\
+	ldr	r1, ._1059      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5671,7 +5671,7 @@ void sub_80EDB88()
 	beq	._1061	@cond_branch\n\
 	b	._1088\n\
 ._1061:\n\
-	ldr	r1, ._1064\n\
+	ldr	r1, ._1064      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5683,7 +5683,7 @@ void sub_80EDB88()
 ._1019:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F0264\n\
-	ldr	r1, ._1068\n\
+	ldr	r1, ._1068      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5695,7 +5695,7 @@ void sub_80EDB88()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1088	@cond_branch\n\
-	ldr	r1, ._1068\n\
+	ldr	r1, ._1068      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5707,7 +5707,7 @@ void sub_80EDB88()
 ._1021:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._1072\n\
+	ldr	r1, ._1072      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5720,7 +5720,7 @@ void sub_80EDB88()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1088	@cond_branch\n\
-	ldr	r1, ._1072\n\
+	ldr	r1, ._1072      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5732,7 +5732,7 @@ void sub_80EDB88()
 ._1023:\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F3008\n\
-	ldr	r1, ._1075\n\
+	ldr	r1, ._1075      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -5745,7 +5745,7 @@ void sub_80EDB88()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._1088	@cond_branch\n\
-	ldr	r1, ._1079\n\
+	ldr	r1, ._1079      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -5766,7 +5766,7 @@ void sub_80EDB88()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._1082\n\
+	ldr	r0, ._1082      @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 ._1038:\n\
 	mov	r2, #0xc1\n\
@@ -5784,19 +5784,19 @@ void sub_80EDB88()
 ._1026:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._1086\n\
+	ldr	r1, ._1086      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._1086 + 4\n\
+	ldr	r0, ._1086 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1088	@cond_branch\n\
-	ldr	r0, ._1086 + 8\n\
-	ldr	r2, ._1086 + 12\n\
+	ldr	r0, ._1086 + 8  @ 0x6007de0\n\
+	ldr	r2, ._1086 + 12 @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -5809,13 +5809,13 @@ void sub_80EDB88()
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
 ._1027:\n\
-	ldr	r0, ._1089\n\
+	ldr	r0, ._1089      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._1088	@cond_branch\n\
-	ldr	r0, ._1089 + 4\n\
+	ldr	r0, ._1089 + 4  @ sub_80EDDBC\n\
 	bl	sub_80EBDBC\n\
 ._1088:\n\
 	add	sp, sp, #0x4\n\
@@ -5928,7 +5928,7 @@ void sub_80EDDBC()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._1095\n\
+	ldr	r0, ._1095      @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r4, r0, r1\n\
@@ -5956,7 +5956,7 @@ void sub_80EDDBC()
 	beq	._1099	@cond_branch\n\
 	cmp	r0, #0x2\n\
 	beq	._1100	@cond_branch\n\
-	ldr	r0, ._1103\n\
+	ldr	r0, ._1103      @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -5964,7 +5964,7 @@ void sub_80EDDBC()
 	beq	._1101	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._1103 + 4\n\
+	ldr	r0, ._1103 + 4  @ sub_80EDEE4\n\
 	bl	sub_80EBDBC\n\
 	b	._1114\n\
 ._1104:\n\
@@ -5991,7 +5991,7 @@ void sub_80EDDBC()
 	beq	._1113	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._1109\n\
+	ldr	r0, ._1109      @ sub_80EDE70\n\
 	bl	sub_80EBDBC\n\
 	b	._1114\n\
 ._1110:\n\
@@ -6015,12 +6015,12 @@ void sub_80EDDBC()
 ._1112:\n\
 	strh	r0, [r4]\n\
 ._1113:\n\
-	ldr	r0, ._1115\n\
+	ldr	r0, ._1115      @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1114	@cond_branch\n\
-	ldr	r0, ._1115 + 4\n\
-	ldr	r1, ._1115 + 8\n\
+	ldr	r0, ._1115 + 4  @ gLink\n\
+	ldr	r1, ._1115 + 8  @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -6118,7 +6118,7 @@ void sub_80EDEE4()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._1134\n\
+	ldr	r1, ._1134      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -6129,7 +6129,7 @@ void sub_80EDEE4()
 	b	._1180\n\
 ._1132:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._1134 + 4\n\
+	ldr	r1, ._1134 + 4  @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -6163,7 +6163,7 @@ void sub_80EDEE4()
 	bl	BeginNormalPaletteFade\n\
 	b	._1169\n\
 ._1138:\n\
-	ldr	r0, ._1152\n\
+	ldr	r0, ._1152      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -6175,7 +6175,7 @@ void sub_80EDEE4()
 	bl	SetVBlankCallback\n\
 	bl	sub_80EED0C\n\
 	bl	sub_80F3130\n\
-	ldr	r1, ._1152 + 4\n\
+	ldr	r1, ._1152 + 4  @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6188,7 +6188,7 @@ void sub_80EDEE4()
 ._1139:\n\
 	bl	sub_80F66E0\n\
 	bl	sub_80EEE08\n\
-	ldr	r1, ._1155\n\
+	ldr	r1, ._1155      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6202,7 +6202,7 @@ void sub_80EDEE4()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1180	@cond_branch\n\
-	ldr	r1, ._1159\n\
+	ldr	r1, ._1159      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6215,7 +6215,7 @@ void sub_80EDEE4()
 	mov	r0, #0x5\n\
 	bl	sub_80EEFBC\n\
 	bl	sub_80F38B8\n\
-	ldr	r1, ._1163\n\
+	ldr	r1, ._1163      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6227,7 +6227,7 @@ void sub_80EDEE4()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1180	@cond_branch\n\
-	ldr	r1, ._1163\n\
+	ldr	r1, ._1163      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6240,7 +6240,7 @@ void sub_80EDEE4()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._1180	@cond_branch\n\
-	ldr	r1, ._1167\n\
+	ldr	r1, ._1167      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6261,7 +6261,7 @@ void sub_80EDEE4()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._1170\n\
+	ldr	r0, ._1170      @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
 	b	._1169\n\
 ._1171:\n\
@@ -6271,19 +6271,19 @@ void sub_80EDEE4()
 ._1145:\n\
 	mov	r0, #0x3\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._1174\n\
+	ldr	r1, ._1174      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._1174 + 4\n\
+	ldr	r0, ._1174 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1180	@cond_branch\n\
-	ldr	r0, ._1174 + 8\n\
-	ldr	r2, ._1174 + 12\n\
+	ldr	r0, ._1174 + 8  @ 0x6007de0\n\
+	ldr	r2, ._1174 + 12 @ 0x600f000\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -6296,7 +6296,7 @@ void sub_80EDEE4()
 	.word	0x6007de0\n\
 	.word	0x600f000\n\
 ._1146:\n\
-	ldr	r0, ._1178\n\
+	ldr	r0, ._1178      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -6320,7 +6320,7 @@ void sub_80EDEE4()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1180	@cond_branch\n\
-	ldr	r0, ._1181\n\
+	ldr	r0, ._1181      @ sub_80EE06C\n\
 	bl	sub_80EBDBC\n\
 ._1180:\n\
 	add	sp, sp, #0x4\n\
@@ -6399,7 +6399,7 @@ void sub_80EE06C()
     asm("\
 	push	{r4, r5, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._1185\n\
+	ldr	r1, ._1185      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -6410,7 +6410,7 @@ void sub_80EE06C()
 	b	._1248\n\
 ._1183:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._1185 + 4\n\
+	ldr	r1, ._1185 + 4  @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -6431,7 +6431,7 @@ void sub_80EE06C()
 	.word	._1196\n\
 ._1188:\n\
 	bl	sub_80F15A8\n\
-	ldr	r1, ._1198\n\
+	ldr	r1, ._1198      @ gSharedMem\n\
 	mov	r5, #0xc1\n\
 	lsl	r5, r5, #0x2\n\
 	add	r1, r1, r5\n\
@@ -6441,14 +6441,14 @@ void sub_80EE06C()
 ._1198:\n\
 	.word	gSharedMem\n\
 ._1189:\n\
-	ldr	r2, ._1203\n\
+	ldr	r2, ._1203      @ gMain\n\
 	ldrh	r1, [r2, #0x30]\n\
 	mov	r0, #0x40\n\
 	and	r0, r0, r1\n\
 	add	r3, r2, #0\n\
 	cmp	r0, #0\n\
 	beq	._1201	@cond_branch\n\
-	ldr	r1, ._1203 + 4\n\
+	ldr	r1, ._1203 + 4  @ 0x87dc\n\
 	add	r0, r4, r1\n\
 	mov	r2, #0x0\n\
 	ldsh	r0, [r0, r2]\n\
@@ -6474,9 +6474,9 @@ void sub_80EE06C()
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._1206	@cond_branch\n\
-	ldr	r1, ._1208\n\
+	ldr	r1, ._1208      @ 0x87dc\n\
 	add	r0, r4, r1\n\
-	ldr	r2, ._1208 + 4\n\
+	ldr	r2, ._1208 + 4  @ 0x8774\n\
 	add	r1, r4, r2\n\
 	mov	r5, #0x0\n\
 	ldsh	r2, [r0, r5]\n\
@@ -6507,7 +6507,7 @@ void sub_80EE06C()
 	bl	PlaySE\n\
 	mov	r0, #0xb\n\
 	bl	sub_80EEFBC\n\
-	ldr	r0, ._1212\n\
+	ldr	r0, ._1212      @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -6525,7 +6525,7 @@ void sub_80EE06C()
 ._1214:\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._1217\n\
+	ldr	r0, ._1217      @ sub_80EE294\n\
 	bl	sub_80EBDBC\n\
 	b	._1248\n\
 ._1218:\n\
@@ -6539,7 +6539,7 @@ void sub_80EE06C()
 	beq	._1219	@cond_branch\n\
 	b	._1248\n\
 ._1219:\n\
-	ldr	r1, ._1222\n\
+	ldr	r1, ._1222      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6553,7 +6553,7 @@ void sub_80EE06C()
 	add	r1, r0, #0\n\
 	cmp	r1, #0\n\
 	bne	._1248	@cond_branch\n\
-	ldr	r0, ._1226\n\
+	ldr	r0, ._1226      @ gSharedMem\n\
 	mov	r5, #0xc1\n\
 	lsl	r5, r5, #0x2\n\
 	add	r0, r0, r5\n\
@@ -6565,7 +6565,7 @@ void sub_80EE06C()
 	.word	gSharedMem\n\
 ._1192:\n\
 	bl	sub_80F3B00\n\
-	ldr	r1, ._1229\n\
+	ldr	r1, ._1229      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6584,7 +6584,7 @@ void sub_80EE06C()
 	cmp	r0, #0\n\
 	bne	._1248	@cond_branch\n\
 	bl	sub_80F1494\n\
-	ldr	r1, ._1233\n\
+	ldr	r1, ._1233      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6608,7 +6608,7 @@ void sub_80EE06C()
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
 	bl	sub_80F3B94\n\
-	ldr	r0, ._1238\n\
+	ldr	r0, ._1238      @ gSharedMem\n\
 	mov	r5, #0xc1\n\
 	lsl	r5, r5, #0x2\n\
 	add	r0, r0, r5\n\
@@ -6620,7 +6620,7 @@ void sub_80EE06C()
 ._1238:\n\
 	.word	gSharedMem\n\
 ._1236:\n\
-	ldr	r0, ._1242\n\
+	ldr	r0, ._1242      @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x2\n\
 	and	r0, r0, r1\n\
@@ -6629,7 +6629,7 @@ void sub_80EE06C()
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
 	bl	sub_80F3B94\n\
-	ldr	r0, ._1242 + 4\n\
+	ldr	r0, ._1242 + 4  @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -6646,7 +6646,7 @@ void sub_80EE06C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1248	@cond_branch\n\
-	ldr	r0, ._1246\n\
+	ldr	r0, ._1246      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r0, r2\n\
@@ -6666,18 +6666,18 @@ void sub_80EE06C()
 	bne	._1248	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	sub_80EEFBC\n\
-	ldr	r0, ._1250\n\
+	ldr	r0, ._1250      @ gSharedMem\n\
 	mov	r5, #0xc1\n\
 	lsl	r5, r5, #0x2\n\
 	add	r0, r0, r5\n\
 	strh	r4, [r0]\n\
 ._1248:\n\
-	ldr	r0, ._1250 + 4\n\
+	ldr	r0, ._1250 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1249	@cond_branch\n\
-	ldr	r0, ._1250 + 8\n\
-	ldr	r1, ._1250 + 12\n\
+	ldr	r0, ._1250 + 8  @ gLink\n\
+	ldr	r1, ._1250 + 12 @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -6794,7 +6794,7 @@ void sub_80EE294()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._1254\n\
+	ldr	r1, ._1254      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
@@ -6805,7 +6805,7 @@ void sub_80EE294()
 	b	._1288\n\
 ._1252:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._1254 + 4\n\
+	ldr	r1, ._1254 + 4  @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -6836,7 +6836,7 @@ void sub_80EE294()
 	mov	r3, #0x10\n\
 	b	._1266\n\
 ._1258:\n\
-	ldr	r0, ._1270\n\
+	ldr	r0, ._1270      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -6849,7 +6849,7 @@ void sub_80EE294()
 	bl	sub_80EED0C\n\
 	bl	sub_80F3C2C\n\
 	bl	sub_80EEE08\n\
-	ldr	r1, ._1270 + 4\n\
+	ldr	r1, ._1270 + 4  @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6863,7 +6863,7 @@ void sub_80EE294()
 	bl	sub_80F6134\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F0264\n\
-	ldr	r1, ._1274\n\
+	ldr	r1, ._1274      @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6875,7 +6875,7 @@ void sub_80EE294()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1288	@cond_branch\n\
-	ldr	r1, ._1274\n\
+	ldr	r1, ._1274      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6889,9 +6889,9 @@ void sub_80EE294()
 	bl	sub_80EEFBC\n\
 	mov	r0, #0x1\n\
 	bl	sub_80F3008\n\
-	ldr	r0, ._1277\n\
+	ldr	r0, ._1277      @ sub_80EBD18\n\
 	bl	SetVBlankCallback\n\
-	ldr	r1, ._1277 + 4\n\
+	ldr	r1, ._1277 + 4  @ gSharedMem\n\
 	mov	r2, #0xc1\n\
 	lsl	r2, r2, #0x2\n\
 	add	r1, r1, r2\n\
@@ -6905,7 +6905,7 @@ void sub_80EE294()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._1288	@cond_branch\n\
-	ldr	r1, ._1281\n\
+	ldr	r1, ._1281      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -6938,19 +6938,19 @@ void sub_80EE294()
 ._1264:\n\
 	mov	r0, #0x4\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._1286\n\
+	ldr	r1, ._1286      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._1286 + 4\n\
+	ldr	r0, ._1286 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1288	@cond_branch\n\
-	ldr	r0, ._1286 + 8\n\
-	ldr	r2, ._1286 + 12\n\
+	ldr	r0, ._1286 + 8  @ 0x6007de0\n\
+	ldr	r2, ._1286 + 12 @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -6963,13 +6963,13 @@ void sub_80EE294()
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
 ._1265:\n\
-	ldr	r0, ._1289\n\
+	ldr	r0, ._1289      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._1288	@cond_branch\n\
-	ldr	r0, ._1289 + 4\n\
+	ldr	r0, ._1289 + 4  @ sub_80EDDBC\n\
 	bl	sub_80EBDBC\n\
 ._1288:\n\
 	add	sp, sp, #0x4\n\
@@ -7042,7 +7042,7 @@ void sub_80EE3D8()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._1293\n\
+	ldr	r0, ._1293      @ gSharedMem\n\
 	mov	r1, #0xc1\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -7052,7 +7052,7 @@ void sub_80EE3D8()
 	b	._1354\n\
 ._1291:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._1293 + 4\n\
+	ldr	r1, ._1293 + 4  @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -7080,7 +7080,7 @@ void sub_80EE3D8()
 	bl	sub_80F1E84\n\
 	mov	r0, #0x0\n\
 	bl	sub_80F2D04\n\
-	ldr	r1, ._1311\n\
+	ldr	r1, ._1311      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7098,7 +7098,7 @@ void sub_80EE3D8()
 ._1313:\n\
 	mov	r0, #0x9\n\
 	bl	sub_80EEFBC\n\
-	ldr	r1, ._1316\n\
+	ldr	r1, ._1316      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7115,7 +7115,7 @@ void sub_80EE3D8()
 	beq	._1318	@cond_branch\n\
 	b	._1354\n\
 ._1318:\n\
-	ldr	r4, ._1321\n\
+	ldr	r4, ._1321      @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -7132,7 +7132,7 @@ void sub_80EE3D8()
 ._1321:\n\
 	.word	gSharedMem\n\
 ._1299:\n\
-	ldr	r0, ._1326\n\
+	ldr	r0, ._1326      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
@@ -7145,7 +7145,7 @@ void sub_80EE3D8()
 	bl	sub_80EED0C\n\
 	bl	sub_80EF814\n\
 	bl	sub_80EEE08\n\
-	ldr	r1, ._1326 + 4\n\
+	ldr	r1, ._1326 + 4  @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7157,7 +7157,7 @@ void sub_80EE3D8()
 	.word	gSharedMem\n\
 ._1300:\n\
 	bl	sub_80F2620\n\
-	ldr	r1, ._1329\n\
+	ldr	r1, ._1329      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7169,7 +7169,7 @@ void sub_80EE3D8()
 ._1301:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F0264\n\
-	ldr	r1, ._1334\n\
+	ldr	r1, ._1334      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7183,7 +7183,7 @@ void sub_80EE3D8()
 	beq	._1331	@cond_branch\n\
 	b	._1354\n\
 ._1331:\n\
-	ldr	r1, ._1334\n\
+	ldr	r1, ._1334      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7195,7 +7195,7 @@ void sub_80EE3D8()
 ._1303:\n\
 	mov	r0, #0x3\n\
 	bl	sub_80F2C80\n\
-	ldr	r1, ._1338\n\
+	ldr	r1, ._1338      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7208,7 +7208,7 @@ void sub_80EE3D8()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1354	@cond_branch\n\
-	ldr	r1, ._1338\n\
+	ldr	r1, ._1338      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7220,7 +7220,7 @@ void sub_80EE3D8()
 ._1305:\n\
 	mov	r0, #0x2\n\
 	bl	sub_80F3008\n\
-	ldr	r1, ._1341\n\
+	ldr	r1, ._1341      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7233,7 +7233,7 @@ void sub_80EE3D8()
 	bl	sub_8055870\n\
 	cmp	r0, #0\n\
 	bne	._1354	@cond_branch\n\
-	ldr	r1, ._1345\n\
+	ldr	r1, ._1345      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
@@ -7244,7 +7244,7 @@ void sub_80EE3D8()
 	.word	gSharedMem\n\
 ._1307:\n\
 	bl	sub_80F6F10\n\
-	ldr	r4, ._1348\n\
+	ldr	r4, ._1348      @ gSharedMem\n\
 	mov	r1, #0xc2\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -7256,7 +7256,7 @@ void sub_80EE3D8()
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r0, ._1348 + 4\n\
+	ldr	r0, ._1348 + 4  @ sub_80EBD68\n\
 	bl	SetVBlankCallback\n\
 ._1320:\n\
 	mov	r0, #0xc1\n\
@@ -7275,19 +7275,19 @@ void sub_80EE3D8()
 ._1308:\n\
 	mov	r0, #0x5\n\
 	bl	sub_80EED2C\n\
-	ldr	r1, ._1352\n\
+	ldr	r1, ._1352      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	ldrh	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	strh	r0, [r1]\n\
-	ldr	r0, ._1352 + 4\n\
+	ldr	r0, ._1352 + 4  @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1354	@cond_branch\n\
-	ldr	r0, ._1352 + 8\n\
-	ldr	r2, ._1352 + 12\n\
+	ldr	r0, ._1352 + 8  @ 0x6007de0\n\
+	ldr	r2, ._1352 + 12 @ 0x600f800\n\
 	mov	r1, #0x0\n\
 	mov	r3, #0x4\n\
 	bl	debug_sub_8008218\n\
@@ -7300,13 +7300,13 @@ void sub_80EE3D8()
 	.word	0x6007de0\n\
 	.word	0x600f800\n\
 ._1309:\n\
-	ldr	r0, ._1355\n\
+	ldr	r0, ._1355      @ gPaletteFade\n\
 	ldrb	r1, [r0, #0x7]\n\
 	mov	r0, #0x80\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._1354	@cond_branch\n\
-	ldr	r0, ._1355 + 4\n\
+	ldr	r0, ._1355 + 4  @ sub_80EE58C\n\
 	bl	sub_80EBDBC\n\
 ._1354:\n\
 	add	sp, sp, #0x4\n\
@@ -7404,7 +7404,7 @@ void sub_80EE58C()
     asm("\
 	push	{r4, r5, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r5, ._1361\n\
+	ldr	r5, ._1361      @ gSharedMem\n\
 	mov	r0, #0xc1\n\
 	lsl	r0, r0, #0x2\n\
 	add	r4, r5, r0\n\
@@ -7432,7 +7432,7 @@ void sub_80EE58C()
 	beq	._1365	@cond_branch\n\
 	cmp	r0, #0x2\n\
 	beq	._1366	@cond_branch\n\
-	ldr	r0, ._1369\n\
+	ldr	r0, ._1369      @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
@@ -7440,7 +7440,7 @@ void sub_80EE58C()
 	beq	._1367	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._1369 + 4\n\
+	ldr	r0, ._1369 + 4  @ sub_80EE658\n\
 	bl	sub_80EBDBC\n\
 	b	._1384\n\
 ._1370:\n\
@@ -7451,7 +7451,7 @@ void sub_80EE58C()
 ._1365:\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r1, ._1372\n\
+	ldr	r1, ._1372      @ 0x876e\n\
 	add	r0, r5, r1\n\
 	ldrb	r0, [r0]\n\
 	bl	sub_80F0FFC\n\
@@ -7474,7 +7474,7 @@ void sub_80EE58C()
 	beq	._1383	@cond_branch\n\
 	mov	r0, #0x5\n\
 	bl	PlaySE\n\
-	ldr	r0, ._1377\n\
+	ldr	r0, ._1377      @ sub_80EE8F4\n\
 	bl	sub_80EBDBC\n\
 	b	._1384\n\
 ._1378:\n\
@@ -7486,7 +7486,7 @@ void sub_80EE58C()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bne	._1383	@cond_branch\n\
-	ldr	r1, ._1381\n\
+	ldr	r1, ._1381      @ 0x876e\n\
 	add	r0, r5, r1\n\
 	ldrb	r0, [r0]\n\
 	bl	sub_80F0FFC\n\
@@ -7505,12 +7505,12 @@ void sub_80EE58C()
 ._1380:\n\
 	strh	r0, [r4]\n\
 ._1383:\n\
-	ldr	r0, ._1385\n\
+	ldr	r0, ._1385      @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1384	@cond_branch\n\
-	ldr	r0, ._1385 + 4\n\
-	ldr	r1, ._1385 + 8\n\
+	ldr	r0, ._1385 + 4  @ gLink\n\
+	ldr	r1, ._1385 + 8  @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -8013,13 +8013,13 @@ bool8 sub_80EEC10()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._1563\n\
+	ldr	r0, ._1563      @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x40\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._1559	@cond_branch\n\
-	ldr	r1, ._1563 + 4\n\
+	ldr	r1, ._1563 + 4  @ gSharedMem\n\
 	add	r3, r1, #1\n\
 	add	r2, r1, #5\n\
 ._1561:\n\
@@ -8051,7 +8051,7 @@ bool8 sub_80EEC10()
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._1565	@cond_branch\n\
-	ldr	r1, ._1569\n\
+	ldr	r1, ._1569      @ gSharedMem\n\
 	mov	r4, #0x0\n\
 	mov	r2, #0x1\n\
 	ldsb	r2, [r1, r2]\n\
@@ -8079,12 +8079,12 @@ bool8 sub_80EEC10()
 ._1569:\n\
 	.word	gSharedMem+0x6dad\n\
 ._1565:\n\
-	ldr	r0, ._1572\n\
+	ldr	r0, ._1572      @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1571	@cond_branch\n\
-	ldr	r0, ._1572 + 4\n\
-	ldr	r1, ._1572 + 8\n\
+	ldr	r0, ._1572 + 4  @ gLink\n\
+	ldr	r1, ._1572 + 8  @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\
@@ -8139,7 +8139,7 @@ bool8 sub_80EEC90()
     asm("\
 	push	{r4, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._1577\n\
+	ldr	r0, ._1577      @ gMain\n\
 	ldrh	r1, [r0, #0x2e]\n\
 	mov	r0, #0x40\n\
 	and	r0, r0, r1\n\
@@ -8147,8 +8147,8 @@ bool8 sub_80EEC90()
 	lsr	r3, r0, #0x10\n\
 	cmp	r3, #0\n\
 	beq	._1574	@cond_branch\n\
-	ldr	r2, ._1577 + 4\n\
-	ldr	r0, ._1577 + 8\n\
+	ldr	r2, ._1577 + 4  @ gSharedMem\n\
+	ldr	r0, ._1577 + 8  @ 0x6dad\n\
 	add	r1, r2, r0\n\
 	ldrb	r0, [r1]\n\
 	sub	r0, r0, #0x1\n\
@@ -8156,7 +8156,7 @@ bool8 sub_80EEC90()
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\
 	bge	._1580	@cond_branch\n\
-	ldr	r3, ._1577 + 12\n\
+	ldr	r3, ._1577 + 12 @ 0x6dae\n\
 	add	r0, r2, r3\n\
 	ldrb	r0, [r0]\n\
 	sub	r0, r0, #0x1\n\
@@ -8174,8 +8174,8 @@ bool8 sub_80EEC90()
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._1579	@cond_branch\n\
-	ldr	r0, ._1582\n\
-	ldr	r4, ._1582 + 4\n\
+	ldr	r0, ._1582      @ gSharedMem\n\
+	ldr	r4, ._1582 + 4  @ 0x6dad\n\
 	add	r2, r0, r4\n\
 	ldrb	r1, [r2]\n\
 	add	r1, r1, #0x1\n\
@@ -8199,12 +8199,12 @@ bool8 sub_80EEC90()
 	.word	gSharedMem\n\
 	.word	0x6dad\n\
 ._1579:\n\
-	ldr	r0, ._1585\n\
+	ldr	r0, ._1585      @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._1584	@cond_branch\n\
-	ldr	r0, ._1585 + 4\n\
-	ldr	r1, ._1585 + 8\n\
+	ldr	r0, ._1585 + 4  @ gLink\n\
+	ldr	r1, ._1585 + 8  @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x4\n\

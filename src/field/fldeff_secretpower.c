@@ -251,7 +251,7 @@ void debug_sub_80D93F4()
     asm("\
 	push	{r4, lr}\n\
 	bl	sub_80BB63C\n\
-	ldr	r0, ._98\n\
+	ldr	r0, ._98        @ gSpecialVar_Result\n\
 	ldrh	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	beq	._95	@cond_branch\n\
@@ -268,7 +268,7 @@ void debug_sub_80D93F4()
 ._98:\n\
 	.word	gSpecialVar_Result\n\
 ._96:\n\
-	ldr	r4, ._102\n\
+	ldr	r4, ._102       @ gUnknown_0203923C\n\
 	add	r1, r4, #2\n\
 	add	r0, r4, #0\n\
 	bl	GetXYCoordsOneStepInFrontOfPlayer\n\
@@ -286,7 +286,7 @@ void debug_sub_80D93F4()
 	cmp	r0, #0x1\n\
 	bne	._100	@cond_branch\n\
 	bl	sub_80C6264\n\
-	ldr	r1, ._102 + 4\n\
+	ldr	r1, ._102 + 4   @ gLastFieldPokeMenuOpened\n\
 	mov	r0, #0x0\n\
 	strb	r0, [r1]\n\
 	bl	sub_80C639C\n\
@@ -304,7 +304,7 @@ void debug_sub_80D93F4()
 	cmp	r0, #0x1\n\
 	bne	._104	@cond_branch\n\
 	bl	sub_80C6264\n\
-	ldr	r1, ._106\n\
+	ldr	r1, ._106       @ gLastFieldPokeMenuOpened\n\
 	mov	r0, #0x0\n\
 	strb	r0, [r1]\n\
 	bl	sub_80C64A8\n\
@@ -321,7 +321,7 @@ void debug_sub_80D93F4()
 	cmp	r0, #0x1\n\
 	bne	._108	@cond_branch\n\
 	bl	sub_80C6264\n\
-	ldr	r1, ._110\n\
+	ldr	r1, ._110       @ gLastFieldPokeMenuOpened\n\
 	mov	r0, #0x0\n\
 	strb	r0, [r1]\n\
 	bl	sub_80C660C\n\

@@ -5024,8 +5024,8 @@ static void atk15_seteffectwithchance(void)
 {
     asm("\
 	push	{r4, lr}\n\
-	ldr	r2, ._1037\n\
-	ldr	r0, ._1037 + 4\n\
+	ldr	r2, ._1037      @ gBattleMons\n\
+	ldr	r0, ._1037 + 4  @ gBankAttacker\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x58\n\
 	mul	r0, r0, r1\n\
@@ -5034,8 +5034,8 @@ static void atk15_seteffectwithchance(void)
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x20\n\
 	bne	._1035	@cond_branch\n\
-	ldr	r2, ._1037 + 8\n\
-	ldr	r0, ._1037 + 12\n\
+	ldr	r2, ._1037 + 8  @ gBattleMoves\n\
+	ldr	r0, ._1037 + 12 @ gCurrentMove\n\
 	ldrh	r1, [r0]\n\
 	lsl	r0, r1, #0x1\n\
 	add	r0, r0, r1\n\
@@ -5052,8 +5052,8 @@ static void atk15_seteffectwithchance(void)
 	.word	gBattleMoves\n\
 	.word	gCurrentMove\n\
 ._1035:\n\
-	ldr	r2, ._1045\n\
-	ldr	r0, ._1045 + 4\n\
+	ldr	r2, ._1045      @ gBattleMoves\n\
+	ldr	r0, ._1045 + 4  @ gCurrentMove\n\
 	ldrh	r1, [r0]\n\
 	lsl	r0, r1, #0x1\n\
 	add	r0, r0, r1\n\
@@ -5061,11 +5061,11 @@ static void atk15_seteffectwithchance(void)
 	add	r0, r0, r2\n\
 	ldrb	r4, [r0, #0x5]\n\
 ._1036:\n\
-	ldr	r0, ._1045 + 8\n\
+	ldr	r0, ._1045 + 8  @ gUnknown_02023A14_50\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x4\n\
 	and	r0, r0, r1\n\
-	ldr	r2, ._1045 + 12\n\
+	ldr	r2, ._1045 + 12 @ gBattleCommunication\n\
 	cmp	r0, #0\n\
 	beq	._1039	@cond_branch\n\
 	ldrb	r1, [r2, #0x3]\n\
@@ -5073,7 +5073,7 @@ static void atk15_seteffectwithchance(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._1040	@cond_branch\n\
-	ldr	r0, ._1045 + 16\n\
+	ldr	r0, ._1045 + 16 @ gBattleMoveFlags\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x29\n\
 	and	r0, r0, r1\n\
@@ -5086,13 +5086,13 @@ static void atk15_seteffectwithchance(void)
 	cmp	r0, #0\n\
 	beq	._1043	@cond_branch\n\
 ._1040:\n\
-	ldr	r0, ._1045 + 16\n\
+	ldr	r0, ._1045 + 16 @ gBattleMoveFlags\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x29\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	bne	._1043	@cond_branch\n\
-	ldr	r2, ._1045 + 12\n\
+	ldr	r2, ._1045 + 12 @ gBattleCommunication\n\
 	ldrb	r1, [r2, #0x3]\n\
 	mov	r0, #0x7f\n\
 	and	r0, r0, r1\n\
@@ -5116,11 +5116,11 @@ static void atk15_seteffectwithchance(void)
 	lsr	r0, r0, #0x10\n\
 	cmp	r0, r4\n\
 	bhi	._1049	@cond_branch\n\
-	ldr	r0, ._1052\n\
+	ldr	r0, ._1052      @ gBattleCommunication\n\
 	ldrb	r0, [r0, #0x3]\n\
 	cmp	r0, #0\n\
 	beq	._1049	@cond_branch\n\
-	ldr	r0, ._1052 + 4\n\
+	ldr	r0, ._1052 + 4  @ gBattleMoveFlags\n\
 	ldrb	r1, [r0]\n\
 	mov	r0, #0x29\n\
 	and	r0, r0, r1\n\
@@ -5144,16 +5144,16 @@ static void atk15_seteffectwithchance(void)
 	bl	SetMoveEffect\n\
 	b	._1054\n\
 ._1049:\n\
-	ldr	r1, ._1055\n\
+	ldr	r1, ._1055      @ gBattlescriptCurrInstr\n\
 	ldr	r0, [r1]\n\
 	add	r0, r0, #0x1\n\
 	str	r0, [r1]\n\
 ._1054:\n\
-	ldr	r0, ._1055 + 4\n\
+	ldr	r0, ._1055 + 4  @ gBattleCommunication\n\
 	mov	r1, #0x0\n\
 	strb	r1, [r0, #0x3]\n\
-	ldr	r0, ._1055 + 8\n\
-	ldr	r2, ._1055 + 12\n\
+	ldr	r0, ._1055 + 8  @ \n\
+	ldr	r2, ._1055 + 12 @ \n\
 	add	r0, r0, r2\n\
 	strb	r1, [r0]\n\
 	pop	{r4}\n\
@@ -12778,12 +12778,12 @@ static void atk9E_metronome(void)
 	push	{r4, r5, r6, r7, lr}\n\
 	mov	r7, r8\n\
 	push	{r7}\n\
-	ldr	r6, ._3076\n\
+	ldr	r6, ._3076      @ gBankAttacker\n\
 	ldrb	r2, [r6]\n\
 	lsl	r1, r2, #0x1\n\
-	ldr	r0, ._3076 + 4\n\
+	ldr	r0, ._3076 + 4  @ \n\
 	add	r3, r1, r0\n\
-	ldr	r5, ._3076 + 8\n\
+	ldr	r5, ._3076 + 8  @ \n\
 	mov	r4, #0x58\n\
 	add	r0, r2, #0\n\
 	mul	r0, r0, r4\n\
@@ -12802,7 +12802,7 @@ static void atk9E_metronome(void)
 	bne	._3072	@cond_branch\n\
 	strh	r2, [r3]\n\
 ._3072:\n\
-	ldr	r1, ._3076 + 12\n\
+	ldr	r1, ._3076 + 12 @ \n\
 	ldrh	r0, [r3]\n\
 	strh	r0, [r1]\n\
 	ldrb	r0, [r6]\n\
@@ -12845,14 +12845,14 @@ static void atk9E_metronome(void)
 ._3079:\n\
 	strh	r0, [r3]\n\
 ._3081:\n\
-	ldr	r4, ._3083\n\
+	ldr	r4, ._3083      @ gHitMarker\n\
 	ldr	r2, [r4]\n\
-	ldr	r0, ._3083 + 4\n\
+	ldr	r0, ._3083 + 4  @ 0xfffffbff\n\
 	and	r2, r2, r0\n\
 	str	r2, [r4]\n\
-	ldr	r6, ._3083 + 8\n\
-	ldr	r5, ._3083 + 12\n\
-	ldr	r3, ._3083 + 16\n\
+	ldr	r6, ._3083 + 8  @ gBattlescriptCurrInstr\n\
+	ldr	r5, ._3083 + 12 @ gBattleScriptsForMoveEffects\n\
+	ldr	r3, ._3083 + 16 @ gBattleMoves\n\
 	ldrh	r1, [r7]\n\
 	lsl	r0, r1, #0x1\n\
 	add	r0, r0, r1\n\
@@ -12878,15 +12878,15 @@ static void atk9E_metronome(void)
 	.word	gBattleScriptsForMoveEffects\n\
 	.word	gBattleMoves\n\
 ._3071:\n\
-	ldr	r7, ._3090\n\
+	ldr	r7, ._3090      @ gCurrentMove\n\
 	mov	r6, #0xb1\n\
 	lsl	r6, r6, #0x1\n\
-	ldr	r5, ._3090 + 4\n\
-	ldr	r0, ._3090 + 8\n\
+	ldr	r5, ._3090 + 4  @ sMovesForbiddenToCopy\n\
+	ldr	r0, ._3090 + 8  @ gBattlescriptCurrInstr\n\
 	mov	r8, r0\n\
 ._3089:\n\
 	bl	Random\n\
-	ldr	r2, ._3090 + 12\n\
+	ldr	r2, ._3090 + 12 @ 0x1ff\n\
 	add	r1, r2, #0\n\
 	and	r0, r0, r1\n\
 	add	r0, r0, #0x1\n\
@@ -12898,9 +12898,9 @@ static void atk9E_metronome(void)
 	sub	r0, r0, #0x1\n\
 	cmp	r0, #0\n\
 	bge	._3086	@cond_branch\n\
-	ldr	r4, ._3090\n\
+	ldr	r4, ._3090      @ gCurrentMove\n\
 	ldrh	r2, [r4]\n\
-	ldr	r3, ._3090 + 16\n\
+	ldr	r3, ._3090 + 16 @ 0xffff\n\
 	sub	r0, r5, #2\n\
 ._3088:\n\
 	add	r0, r0, #0x2\n\
@@ -12910,16 +12910,16 @@ static void atk9E_metronome(void)
 	cmp	r1, r3\n\
 	bne	._3088	@cond_branch\n\
 ._3087:\n\
-	ldr	r0, ._3090 + 16\n\
+	ldr	r0, ._3090 + 16 @ 0xffff\n\
 	cmp	r1, r0\n\
 	bne	._3089	@cond_branch\n\
-	ldr	r2, ._3090 + 20\n\
+	ldr	r2, ._3090 + 20 @ gHitMarker\n\
 	ldr	r0, [r2]\n\
-	ldr	r1, ._3090 + 24\n\
+	ldr	r1, ._3090 + 24 @ 0xfffffbff\n\
 	and	r0, r0, r1\n\
 	str	r0, [r2]\n\
-	ldr	r3, ._3090 + 28\n\
-	ldr	r2, ._3090 + 32\n\
+	ldr	r3, ._3090 + 28 @ gBattleScriptsForMoveEffects\n\
+	ldr	r2, ._3090 + 32 @ gBattleMoves\n\
 	ldrh	r1, [r4]\n\
 	lsl	r0, r1, #0x1\n\
 	add	r0, r0, r1\n\
@@ -12935,7 +12935,7 @@ static void atk9E_metronome(void)
 ._3082:\n\
 	mov	r1, #0x0\n\
 	bl	GetMoveTarget\n\
-	ldr	r1, ._3090 + 36\n\
+	ldr	r1, ._3090 + 36 @ gBankTarget\n\
 	strb	r0, [r1]\n\
 	pop	{r3}\n\
 	mov	r8, r3\n\

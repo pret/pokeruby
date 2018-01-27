@@ -216,10 +216,10 @@ u8 debug_sub_8138C14(void)
 {
     asm("\n\
 	push	{lr}\n\
-	ldr	r0, ._1\n\
+	ldr	r0, ._1         @ unk_203955C\n\
 	mov	r1, #0x1\n\
 	strb	r1, [r0]\n\
-	ldr	r0, ._1 + 4\n\
+	ldr	r0, ._1 + 4     @ MauvilleCity_GameCorner_EventScript_1C407E\n\
 	bl	ScriptContext1_SetupScript\n\
 	bl	CloseMenu\n\
 	mov	r0, #0x1\n\
@@ -237,10 +237,10 @@ u8 debug_sub_8138C34(void)
 {
     asm("\n\
 	push	{lr}\n\
-	ldr	r0, ._3\n\
+	ldr	r0, ._3         @ unk_203955C\n\
 	mov	r1, #0x1\n\
 	strb	r1, [r0]\n\
-	ldr	r0, ._3 + 4\n\
+	ldr	r0, ._3 + 4     @ MauvilleCity_GameCorner_EventScript_1C40AC\n\
 	bl	ScriptContext1_SetupScript\n\
 	bl	CloseMenu\n\
 	mov	r0, #0x1\n\
@@ -258,7 +258,7 @@ u8 debug_sub_8138C54(void)
 {
     asm("\n\
 	push	{r4, lr}\n\
-	ldr	r4, ._10\n\
+	ldr	r4, ._10        @ gMain\n\
 	ldrh	r0, [r4, #0x2e]\n\
 	cmp	r0, #0x40\n\
 	bne	._5	@cond_branch\n\
@@ -275,14 +275,14 @@ u8 debug_sub_8138C54(void)
 	ldrh	r1, [r4, #0x2e]\n\
 	cmp	r1, #0x1\n\
 	beq	._7	@cond_branch\n\
-	ldr	r0, ._10 + 4\n\
+	ldr	r0, ._10 + 4    @ 0x101\n\
 	cmp	r1, r0\n\
 	bne	._8	@cond_branch\n\
-	ldr	r1, ._10 + 8\n\
+	ldr	r1, ._10 + 8    @ gSpecialVar_0x8004\n\
 	mov	r0, #0x1\n\
 	strh	r0, [r1]\n\
 ._7:\n\
-	ldr	r4, ._10 + 12\n\
+	ldr	r4, ._10 + 12   @ gUnkDebug4Menu\n\
 	bl	Menu_GetCursorPos\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r0, r0, #0x15\n\
@@ -320,7 +320,7 @@ u8 debug_sub_8138CC4(void)
     asm("\n\
 	push	{lr}\n\
 	add	sp, sp, #0xfffffff8\n\
-	ldr	r1, ._14\n\
+	ldr	r1, ._14        @ gSpecialVar_0x8004\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r1]\n\
 	bl	Menu_EraseScreen\n\
@@ -329,7 +329,7 @@ u8 debug_sub_8138CC4(void)
 	mov	r2, #0x1d\n\
 	mov	r3, #0xc\n\
 	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r3, ._14 + 4\n\
+	ldr	r3, ._14 + 4    @ gUnkDebug4Menu\n\
 	mov	r0, #0x14\n\
 	mov	r1, #0x1\n\
 	mov	r2, #0x5\n\
@@ -343,8 +343,8 @@ u8 debug_sub_8138CC4(void)
 	mov	r2, #0x1\n\
 	mov	r3, #0x5\n\
 	bl	InitMenu\n\
-	ldr	r1, ._14 + 8\n\
-	ldr	r0, ._14 + 12\n\
+	ldr	r1, ._14 + 8    @ gMenuCallback\n\
+	ldr	r0, ._14 + 12   @ debug_sub_8138C54\n\
 	str	r0, [r1]\n\
 	mov	r0, #0x0\n\
 	add	sp, sp, #0x8\n\
@@ -384,7 +384,7 @@ u8 debug_sub_8138D74(void)
 {
     asm("\n\
 	push	{lr}\n\
-	ldr	r1, ._21\n\
+	ldr	r1, ._21        @ gSpecialVar_0x8004\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r1]\n\
 	bl	CloseMenu\n\
@@ -402,7 +402,7 @@ u8 debug_sub_8138D8C(void)
 {
     asm("\n\
 	push	{lr}\n\
-	ldr	r1, ._23\n\
+	ldr	r1, ._23        @ gSpecialVar_0x8004\n\
 	mov	r0, #0x1\n\
 	strh	r0, [r1]\n\
 	bl	CloseMenu\n\

@@ -1447,26 +1447,26 @@ void OpponentHandlecmd20(void)
 	mov	r6, r9\n\
 	mov	r5, r8\n\
 	push	{r5, r6, r7}\n\
-	ldr	r6, ._549\n\
+	ldr	r6, ._549       @ gActiveBank\n\
 	ldrb	r0, [r6]\n\
 	lsl	r0, r0, #0x9\n\
-	ldr	r1, ._549 + 4\n\
+	ldr	r1, ._549 + 4   @ gBattleBufferA\n\
 	add	r5, r0, r1\n\
-	ldr	r2, ._549 + 8\n\
+	ldr	r2, ._549 + 8   @ gUnknown_02023A14_50\n\
 	ldrb	r1, [r2]\n\
 	mov	r0, #0x4\n\
 	and	r0, r0, r1\n\
 	mov	sl, r6\n\
 	cmp	r0, #0\n\
 	beq	._546	@cond_branch\n\
-	ldr	r0, ._549 + 12\n\
+	ldr	r0, ._549 + 12  @ gBattleMoves\n\
 	mov	r9, r0\n\
-	ldr	r1, ._549 + 16\n\
+	ldr	r1, ._549 + 16  @ \n\
 	mov	ip, r1\n\
 	add	r7, r6, #0\n\
 	mov	r0, #0x2\n\
 	mov	r8, r0\n\
-	ldr	r6, ._549 + 20\n\
+	ldr	r6, ._549 + 20  @ \n\
 ._552:\n\
 	ldrb	r1, [r7]\n\
 	mov	r0, r8\n\
@@ -1526,13 +1526,13 @@ void OpponentHandlecmd20(void)
 	ldrb	r0, [r1]\n\
 	b	._561\n\
 ._553:\n\
-	ldr	r0, ._559\n\
+	ldr	r0, ._559       @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._557	@cond_branch\n\
-	ldr	r0, ._559 + 4\n\
+	ldr	r0, ._559 + 4   @ gUnknown_02023A14_50\n\
 	ldrb	r1, [r0]\n\
 	mov	r5, #0x2\n\
 	add	r0, r5, #0\n\
@@ -1578,7 +1578,7 @@ void OpponentHandlecmd20(void)
 	bl	OpponentBufferExecCompleted\n\
 	b	._562\n\
 ._546:\n\
-	ldr	r0, ._567\n\
+	ldr	r0, ._567       @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x93\n\
 	lsl	r0, r0, #0x3\n\
@@ -1607,7 +1607,7 @@ void OpponentHandlecmd20(void)
 	mov	r2, #0x0\n\
 	b	._569\n\
 ._565:\n\
-	ldr	r3, ._574\n\
+	ldr	r3, ._574       @ gBattleMoves\n\
 	lsl	r0, r4, #0x1\n\
 	add	r2, r5, r0\n\
 	ldrh	r1, [r2]\n\
@@ -1620,7 +1620,7 @@ void OpponentHandlecmd20(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._570	@cond_branch\n\
-	ldr	r1, ._574 + 4\n\
+	ldr	r1, ._574 + 4   @ gBankTarget\n\
 	ldrb	r0, [r6]\n\
 	strb	r0, [r1]\n\
 ._570:\n\
@@ -1636,11 +1636,11 @@ void OpponentHandlecmd20(void)
 	beq	._572	@cond_branch\n\
 	mov	r0, #0x0\n\
 	bl	GetBankByIdentity\n\
-	ldr	r5, ._574 + 4\n\
+	ldr	r5, ._574 + 4   @ gBankTarget\n\
 	strb	r0, [r5]\n\
-	ldr	r0, ._574 + 8\n\
+	ldr	r0, ._574 + 8   @ gAbsentBankFlags\n\
 	ldrb	r1, [r0]\n\
-	ldr	r2, ._574 + 12\n\
+	ldr	r2, ._574 + 12  @ gBitTable\n\
 	ldrb	r0, [r5]\n\
 	lsl	r0, r0, #0x2\n\
 	add	r0, r0, r2\n\
@@ -1652,7 +1652,7 @@ void OpponentHandlecmd20(void)
 	bl	GetBankByIdentity\n\
 	strb	r0, [r5]\n\
 ._572:\n\
-	ldr	r0, ._574 + 4\n\
+	ldr	r0, ._574 + 4   @ gBankTarget\n\
 	ldrb	r2, [r0]\n\
 	lsl	r2, r2, #0x8\n\
 	orr	r2, r2, r4\n\
@@ -1678,7 +1678,7 @@ void OpponentHandlecmd20(void)
 	ldrh	r2, [r0]\n\
 	cmp	r2, #0\n\
 	beq	._576	@cond_branch\n\
-	ldr	r1, ._579\n\
+	ldr	r1, ._579       @ gBattleMoves\n\
 	lsl	r0, r2, #0x1\n\
 	add	r0, r0, r2\n\
 	lsl	r0, r0, #0x2\n\
@@ -1688,7 +1688,7 @@ void OpponentHandlecmd20(void)
 	and	r0, r0, r1\n\
 	cmp	r0, #0\n\
 	beq	._577	@cond_branch\n\
-	ldr	r0, ._579 + 4\n\
+	ldr	r0, ._579 + 4   @ gActiveBank\n\
 	ldrb	r2, [r0]\n\
 	lsl	r2, r2, #0x8\n\
 	b	._578\n\
@@ -1698,7 +1698,7 @@ void OpponentHandlecmd20(void)
 	.word	gBattleMoves\n\
 	.word	gActiveBank\n\
 ._577:\n\
-	ldr	r0, ._583\n\
+	ldr	r0, ._583       @ gBattleTypeFlags\n\
 	ldrh	r1, [r0]\n\
 	mov	r0, #0x1\n\
 	and	r0, r0, r1\n\

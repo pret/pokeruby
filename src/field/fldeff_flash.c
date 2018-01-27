@@ -77,11 +77,11 @@ void debug_sub_8122080(void)
 {
     asm("\
 	push	{lr}\n\
-	ldr	r0, ._4\n\
+	ldr	r0, ._4         @ gMapHeader\n\
 	ldrb	r0, [r0, #0x15]\n\
 	cmp	r0, #0x1\n\
 	bne	._2	@cond_branch\n\
-	ldr	r0, ._4 + 4\n\
+	ldr	r0, ._4 + 4     @ 0x828\n\
 	bl	FlagGet\n\
 	lsl	r0, r0, #0x18\n\
 	cmp	r0, #0\n\

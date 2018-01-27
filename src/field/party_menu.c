@@ -502,12 +502,12 @@ void CB2_PartyMenuMain(void)
 	add	sp, sp, #0xfffffffc\n\
 	bl	AnimateSprites\n\
 	bl	BuildOamBuffer\n\
-	ldr	r0, ._3\n\
+	ldr	r0, ._3         @ gPartyMenuType\n\
 	ldrb	r1, [r0]\n\
 	lsl	r0, r1, #0x1\n\
 	add	r0, r0, r1\n\
 	lsl	r0, r0, #0x4\n\
-	ldr	r1, ._3 + 4\n\
+	ldr	r1, ._3 + 4     @ PartyMonTextSettings\n\
 	add	r5, r0, r1\n\
 	mov	r6, #0x0\n\
 ._1:\n\
@@ -529,12 +529,12 @@ void CB2_PartyMenuMain(void)
 	ble	._1	@cond_branch\n\
 	bl	RunTasks\n\
 	bl	UpdatePaletteFade\n\
-	ldr	r0, ._3 + 8\n\
+	ldr	r0, ._3 + 8     @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._2	@cond_branch\n\
-	ldr	r0, ._3 + 12\n\
-	ldr	r1, ._3 + 16\n\
+	ldr	r0, ._3 + 12    @ gLink\n\
+	ldr	r1, ._3 + 16    @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x2\n\
@@ -696,8 +696,8 @@ bool8 InitPartyMenu(void)
 	mov	r7, r8\n\
 	push	{r7}\n\
 	add	sp, sp, #0xfffffff4\n\
-	ldr	r0, ._55\n\
-	ldr	r1, ._55 + 4\n\
+	ldr	r0, ._55        @ gMain\n\
+	ldr	r1, ._55 + 4    @ 0x43c\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x11\n\
@@ -705,7 +705,7 @@ bool8 InitPartyMenu(void)
 	b	._125\n\
 ._53:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._55 + 8\n\
+	ldr	r1, ._55 + 8    @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -745,10 +745,10 @@ bool8 InitPartyMenu(void)
 	mov	r8, r2\n\
 	add	r2, sp, #0x4\n\
 	mov	r6, #0x0\n\
-	ldr	r1, ._78\n\
+	ldr	r1, ._78        @ 0x40000d4\n\
 	mov	r5, #0x80\n\
 	lsl	r5, r5, #0x5\n\
-	ldr	r7, ._78 + 4\n\
+	ldr	r7, ._78 + 4    @ 0x81000800\n\
 	mov	r0, #0x81\n\
 	lsl	r0, r0, #0x18\n\
 	mov	ip, r0\n\
@@ -778,7 +778,7 @@ bool8 InitPartyMenu(void)
 	lsl	r3, r3, #0x3\n\
 	mov	r4, #0x0\n\
 	str	r4, [sp, #0x8]\n\
-	ldr	r2, ._78\n\
+	ldr	r2, ._78        @ 0x40000d4\n\
 	mov	r1, r8\n\
 	str	r1, [r2]\n\
 	str	r0, [r2, #0x4]\n\
@@ -800,13 +800,13 @@ bool8 InitPartyMenu(void)
 	orr	r3, r3, r0\n\
 	str	r3, [r2, #0x8]\n\
 	ldr	r0, [r2, #0x8]\n\
-	ldr	r2, ._78 + 8\n\
+	ldr	r2, ._78 + 8    @ gPaletteFade\n\
 	ldrb	r0, [r2, #0x8]\n\
 	mov	r1, #0x80\n\
 	orr	r0, r0, r1\n\
 	strb	r0, [r2, #0x8]\n\
-	ldr	r1, ._78 + 12\n\
-	ldr	r2, ._78 + 16\n\
+	ldr	r1, ._78 + 12   @ gMain\n\
+	ldr	r2, ._78 + 16   @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._79:\n\
@@ -822,21 +822,21 @@ bool8 InitPartyMenu(void)
 	b	._115\n\
 ._60:\n\
 	bl	sub_806B4A8\n\
-	ldr	r1, ._82\n\
+	ldr	r1, ._82        @ \n\
 	mov	r2, #0x99\n\
 	lsl	r2, r2, #0x2\n\
 	add	r0, r1, r2\n\
 	mov	r2, #0x0\n\
 	strh	r2, [r0]\n\
-	ldr	r3, ._82 + 4\n\
+	ldr	r3, ._82 + 4    @ \n\
 	add	r0, r1, r3\n\
 	strh	r2, [r0]\n\
 	mov	r0, #0x9a\n\
 	lsl	r0, r0, #0x2\n\
 	add	r1, r1, r0\n\
 	strh	r2, [r1]\n\
-	ldr	r1, ._82 + 8\n\
-	ldr	r2, ._82 + 12\n\
+	ldr	r1, ._82 + 8    @ \n\
+	ldr	r2, ._82 + 12   @ \n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._83:\n\
@@ -850,7 +850,7 @@ bool8 InitPartyMenu(void)
 	bl	ResetSpriteData\n\
 	b	._115\n\
 ._62:\n\
-	ldr	r0, ._88\n\
+	ldr	r0, ._88        @ \n\
 	mov	r1, #0x96\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -861,8 +861,8 @@ bool8 InitPartyMenu(void)
 	beq	._86	@cond_branch\n\
 	bl	ResetTasks\n\
 ._86:\n\
-	ldr	r1, ._88 + 4\n\
-	ldr	r2, ._88 + 8\n\
+	ldr	r1, ._88 + 4    @ \n\
+	ldr	r2, ._88 + 8    @ \n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._89:\n\
@@ -875,7 +875,7 @@ bool8 InitPartyMenu(void)
 	bl	FreeAllSpritePalettes\n\
 	b	._115\n\
 ._64:\n\
-	ldr	r4, ._92\n\
+	ldr	r4, ._92        @ \n\
 	mov	r1, #0x97\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r4, r1\n\
@@ -892,10 +892,10 @@ bool8 InitPartyMenu(void)
 ._92:\n\
 	.word	+0x201b000\n\
 ._65:\n\
-	ldr	r0, ._95\n\
+	ldr	r0, ._95        @ gWindowTemplate_81E6C90\n\
 	bl	Text_LoadWindowTemplate\n\
-	ldr	r1, ._95 + 4\n\
-	ldr	r0, ._95 + 8\n\
+	ldr	r1, ._95 + 4    @ gMain\n\
+	ldr	r0, ._95 + 8    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._122\n\
 ._96:\n\
@@ -905,15 +905,15 @@ bool8 InitPartyMenu(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._66:\n\
-	ldr	r4, ._98\n\
-	ldr	r1, ._98 + 4\n\
+	ldr	r4, ._98        @ gUnknown_03004210\n\
+	ldr	r1, ._98 + 4    @ gWindowTemplate_81E6C90\n\
 	add	r0, r4, #0\n\
 	bl	Text_InitWindowWithTemplate\n\
 	add	r0, r4, #0\n\
 	mov	r1, #0x1\n\
 	bl	MultistepInitWindowTileData\n\
-	ldr	r1, ._98 + 8\n\
-	ldr	r2, ._98 + 12\n\
+	ldr	r1, ._98 + 8    @ gMain\n\
+	ldr	r2, ._98 + 12   @ 0x43c\n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._99:\n\
@@ -929,14 +929,14 @@ bool8 InitPartyMenu(void)
 	bne	._100	@cond_branch\n\
 	b	._125\n\
 ._100:\n\
-	ldr	r0, ._103\n\
+	ldr	r0, ._103       @ \n\
 	mov	r3, #0x99\n\
 	lsl	r3, r3, #0x2\n\
 	add	r0, r0, r3\n\
 	mov	r1, #0x1\n\
 	strh	r1, [r0]\n\
-	ldr	r1, ._103 + 4\n\
-	ldr	r0, ._103 + 8\n\
+	ldr	r1, ._103 + 4   @ \n\
+	ldr	r0, ._103 + 8   @ \n\
 	add	r1, r1, r0\n\
 	b	._122\n\
 ._104:\n\
@@ -946,7 +946,7 @@ bool8 InitPartyMenu(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._68:\n\
-	ldr	r0, ._107\n\
+	ldr	r0, ._107       @ \n\
 	mov	r1, #0x99\n\
 	lsl	r1, r1, #0x2\n\
 	add	r4, r0, r1\n\
@@ -958,8 +958,8 @@ bool8 InitPartyMenu(void)
 	bne	._105	@cond_branch\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r4]\n\
-	ldr	r1, ._107 + 4\n\
-	ldr	r2, ._107 + 8\n\
+	ldr	r1, ._107 + 4   @ \n\
+	ldr	r2, ._107 + 8   @ \n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._108:\n\
@@ -977,8 +977,8 @@ bool8 InitPartyMenu(void)
 	bl	sub_809D51C\n\
 	b	._115\n\
 ._70:\n\
-	ldr	r2, ._113\n\
-	ldr	r0, ._113 + 4\n\
+	ldr	r2, ._113       @ PartyMenuHandlers\n\
+	ldr	r0, ._113 + 4   @ \n\
 	mov	r1, #0x96\n\
 	lsl	r1, r1, #0x2\n\
 	add	r0, r0, r1\n\
@@ -994,8 +994,8 @@ bool8 InitPartyMenu(void)
 	lsr	r0, r0, #0x18\n\
 	cmp	r0, #0x1\n\
 	bne	._125	@cond_branch\n\
-	ldr	r1, ._113 + 8\n\
-	ldr	r2, ._113 + 12\n\
+	ldr	r1, ._113 + 8   @ \n\
+	ldr	r2, ._113 + 12  @ \n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._114:\n\
@@ -1006,7 +1006,7 @@ bool8 InitPartyMenu(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._71:\n\
-	ldr	r0, ._116\n\
+	ldr	r0, ._116       @ gWindowTemplate_81E6CC8\n\
 	bl	MultistepInitMenuWindowBegin\n\
 	b	._115\n\
 ._117:\n\
@@ -1017,8 +1017,8 @@ bool8 InitPartyMenu(void)
 	bl	MultistepInitMenuWindowContinue\n\
 	cmp	r0, #0\n\
 	beq	._125	@cond_branch\n\
-	ldr	r1, ._120\n\
-	ldr	r0, ._120 + 4\n\
+	ldr	r1, ._120       @ gMain\n\
+	ldr	r0, ._120 + 4   @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._122\n\
 ._121:\n\
@@ -1027,14 +1027,14 @@ bool8 InitPartyMenu(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._73:\n\
-	ldr	r0, ._123\n\
-	ldr	r1, ._123 + 4\n\
+	ldr	r0, ._123       @ \n\
+	ldr	r1, ._123 + 4   @ \n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x0\n\
 	bl	PrintPartyMenuPromptText\n\
-	ldr	r1, ._123 + 8\n\
-	ldr	r2, ._123 + 12\n\
+	ldr	r1, ._123 + 8   @ \n\
+	ldr	r2, ._123 + 12  @ \n\
 	add	r1, r1, r2\n\
 	b	._122\n\
 ._124:\n\
@@ -1052,14 +1052,14 @@ bool8 InitPartyMenu(void)
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r2, ._126\n\
+	ldr	r2, ._126       @ gPaletteFade\n\
 	ldrb	r1, [r2, #0x8]\n\
 	mov	r0, #0x7f\n\
 	and	r0, r0, r1\n\
 	strb	r0, [r2, #0x8]\n\
 ._115:\n\
-	ldr	r1, ._126 + 4\n\
-	ldr	r3, ._126 + 8\n\
+	ldr	r1, ._126 + 4   @ gMain\n\
+	ldr	r3, ._126 + 8   @ 0x43c\n\
 	add	r1, r1, r3\n\
 ._122:\n\
 	ldrb	r0, [r1]\n\
@@ -1073,16 +1073,16 @@ bool8 InitPartyMenu(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._75:\n\
-	ldr	r0, ._130\n\
+	ldr	r0, ._130       @ VBlankCB_PartyMenu\n\
 	bl	SetVBlankCallback\n\
-	ldr	r0, ._130 + 4\n\
+	ldr	r0, ._130 + 4   @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._128	@cond_branch\n\
-	ldr	r0, ._130 + 8\n\
+	ldr	r0, ._130 + 8   @ 0x600e5e0\n\
 	mov	r1, #0x80\n\
 	lsl	r1, r1, #0x8\n\
-	ldr	r2, ._130 + 12\n\
+	ldr	r2, ._130 + 12  @ 0x6007800\n\
 	mov	r3, #0x2\n\
 	bl	debug_sub_8008218\n\
 ._128:\n\

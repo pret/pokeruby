@@ -400,8 +400,8 @@ static bool8 SetupBagMultistep(void)
     asm("\
 	push	{r4, r5, lr}\n\
 	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._5\n\
-	ldr	r1, ._5 + 4\n\
+	ldr	r0, ._5         @ gMain\n\
+	ldr	r1, ._5 + 4     @ 0x43c\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x10\n\
@@ -409,7 +409,7 @@ static bool8 SetupBagMultistep(void)
 	b	._66\n\
 ._3:\n\
 	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._5 + 8\n\
+	ldr	r1, ._5 + 8     @ \n\
 	add	r0, r0, r1\n\
 	ldr	r0, [r0]\n\
 	mov	pc, r0\n\
@@ -443,8 +443,8 @@ static bool8 SetupBagMultistep(void)
 	b	._61\n\
 ._9:\n\
 	bl	ScanlineEffect_Stop\n\
-	ldr	r1, ._27\n\
-	ldr	r0, ._27 + 4\n\
+	ldr	r1, ._27        @ gMain\n\
+	ldr	r0, ._27 + 4    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._28:\n\
@@ -457,8 +457,8 @@ static bool8 SetupBagMultistep(void)
 	b	._61\n\
 ._11:\n\
 	bl	ClearBGTilemapBuffers\n\
-	ldr	r0, ._31\n\
-	ldr	r1, ._31 + 4\n\
+	ldr	r0, ._31        @ \n\
+	ldr	r1, ._31 + 4    @ \n\
 	add	r0, r0, r1\n\
 	mov	r1, #0x0\n\
 	strb	r1, [r0]\n\
@@ -470,13 +470,13 @@ static bool8 SetupBagMultistep(void)
 	.word	0x1ffff\n\
 ._12:\n\
 	bl	ResetPaletteFade\n\
-	ldr	r2, ._34\n\
+	ldr	r2, ._34        @ gPaletteFade\n\
 	ldrb	r0, [r2, #0x8]\n\
 	mov	r1, #0x80\n\
 	orr	r0, r0, r1\n\
 	strb	r0, [r2, #0x8]\n\
-	ldr	r1, ._34 + 4\n\
-	ldr	r0, ._34 + 8\n\
+	ldr	r1, ._34 + 4    @ gMain\n\
+	ldr	r0, ._34 + 8    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._35:\n\
@@ -495,8 +495,8 @@ static bool8 SetupBagMultistep(void)
 	bne	._37	@cond_branch\n\
 	b	._66\n\
 ._37:\n\
-	ldr	r1, ._40\n\
-	ldr	r0, ._40 + 4\n\
+	ldr	r1, ._40        @ gMain\n\
+	ldr	r0, ._40 + 4    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._41:\n\
@@ -505,7 +505,7 @@ static bool8 SetupBagMultistep(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._15:\n\
-	ldr	r0, ._43\n\
+	ldr	r0, ._43        @ gWindowTemplate_81E6DFC\n\
 	bl	Text_LoadWindowTemplate\n\
 	b	._61\n\
 ._44:\n\
@@ -513,10 +513,10 @@ static bool8 SetupBagMultistep(void)
 ._43:\n\
 	.word	gWindowTemplate_81E6DFC\n\
 ._16:\n\
-	ldr	r0, ._46\n\
+	ldr	r0, ._46        @ gWindowTemplate_81E6DFC\n\
 	bl	MultistepInitMenuWindowBegin\n\
-	ldr	r1, ._46 + 4\n\
-	ldr	r0, ._46 + 8\n\
+	ldr	r1, ._46 + 4    @ gMain\n\
+	ldr	r0, ._46 + 8    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._47:\n\
@@ -563,7 +563,7 @@ static bool8 SetupBagMultistep(void)
 	mov	r0, #0x3\n\
 	mov	r1, #0x2\n\
 	bl	SetVerticalScrollIndicatorPriority\n\
-	ldr	r0, ._53\n\
+	ldr	r0, ._53        @ sReturnLocation\n\
 	ldrb	r0, [r0]\n\
 	sub	r0, r0, #0x4\n\
 	lsl	r0, r0, #0x18\n\
@@ -577,8 +577,8 @@ static bool8 SetupBagMultistep(void)
 	mov	r1, #0x1\n\
 	bl	SetVerticalScrollIndicators\n\
 ._51:\n\
-	ldr	r1, ._53 + 4\n\
-	ldr	r0, ._53 + 8\n\
+	ldr	r1, ._53 + 4    @ gMain\n\
+	ldr	r0, ._53 + 8    @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._54:\n\
@@ -588,11 +588,11 @@ static bool8 SetupBagMultistep(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._19:\n\
-	ldr	r1, ._56\n\
+	ldr	r1, ._56        @ gUnknown_0203855A\n\
 	mov	r0, #0x10\n\
 	strb	r0, [r1]\n\
-	ldr	r4, ._56 + 4\n\
-	ldr	r5, ._56 + 8\n\
+	ldr	r4, ._56 + 4    @ gBGTilemapBuffers\n\
+	ldr	r5, ._56 + 8    @ sCurrentBagPocket\n\
 	ldrb	r1, [r5]\n\
 	add	r1, r1, #0x1\n\
 	lsl	r1, r1, #0x18\n\
@@ -603,7 +603,7 @@ static bool8 SetupBagMultistep(void)
 	add	r0, r4, #0\n\
 	bl	DrawPocketIndicatorDots\n\
 	bl	UpdateAllBagPockets\n\
-	ldr	r4, ._56 + 12\n\
+	ldr	r4, ._56 + 12   @ gBagPockets\n\
 	ldr	r0, [r4, #0x10]\n\
 	ldr	r1, [r4, #0x14]\n\
 	bl	SortItemSlots\n\
@@ -611,7 +611,7 @@ static bool8 SetupBagMultistep(void)
 	ldr	r1, [r4, #0x1c]\n\
 	bl	SortItemSlots\n\
 	bl	sub_80A3D40\n\
-	ldr	r1, ._56 + 16\n\
+	ldr	r1, ._56 + 16   @ gCurrentBagPocketItemSlots\n\
 	mov	r0, #0x0\n\
 	ldsb	r0, [r5, r0]\n\
 	lsl	r0, r0, #0x3\n\
@@ -629,12 +629,12 @@ static bool8 SetupBagMultistep(void)
 	.word	gBagPockets\n\
 	.word	gCurrentBagPocketItemSlots\n\
 ._20:\n\
-	ldr	r0, ._59\n\
+	ldr	r0, ._59        @ 0xffff\n\
 	mov	r1, #0x0\n\
 	mov	r2, #0x7\n\
 	bl	sub_80A48E8\n\
-	ldr	r1, ._59 + 4\n\
-	ldr	r4, ._59 + 8\n\
+	ldr	r1, ._59 + 4    @ gBagPocketScrollStates\n\
+	ldr	r4, ._59 + 8    @ sCurrentBagPocket\n\
 	mov	r0, #0x0\n\
 	ldsb	r0, [r4, r0]\n\
 	lsl	r0, r0, #0x2\n\
@@ -642,7 +642,7 @@ static bool8 SetupBagMultistep(void)
 	ldrb	r1, [r0, #0x1]\n\
 	ldrb	r0, [r0]\n\
 	add	r1, r1, r0\n\
-	ldr	r0, ._59 + 12\n\
+	ldr	r0, ._59 + 12   @ gCurrentBagPocketItemSlots\n\
 	ldr	r0, [r0]\n\
 	lsl	r1, r1, #0x2\n\
 	add	r1, r1, r0\n\
@@ -650,15 +650,15 @@ static bool8 SetupBagMultistep(void)
 	ldsh	r0, [r1, r2]\n\
 	bl	ItemListMenu_InitDescription\n\
 	bl	ItemListMenu_InitMenu\n\
-	ldr	r1, ._59 + 16\n\
+	ldr	r1, ._59 + 16   @ gUnknown_0203855B\n\
 	ldrb	r0, [r4]\n\
 	add	r0, r0, #0x1\n\
 	strb	r0, [r1]\n\
-	ldr	r1, ._59 + 20\n\
+	ldr	r1, ._59 + 20   @ gUnknown_0203855C\n\
 	mov	r0, #0x0\n\
 	strb	r0, [r1]\n\
-	ldr	r1, ._59 + 24\n\
-	ldr	r0, ._59 + 28\n\
+	ldr	r1, ._59 + 24   @ gMain\n\
+	ldr	r0, ._59 + 28   @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._60:\n\
@@ -679,17 +679,17 @@ static bool8 SetupBagMultistep(void)
 	bl	sub_80A3740\n\
 	b	._61\n\
 ._22:\n\
-	ldr	r3, ._63\n\
+	ldr	r3, ._63        @ 0x4000208\n\
 	ldrh	r2, [r3]\n\
 	mov	r0, #0x0\n\
 	strh	r0, [r3]\n\
-	ldr	r4, ._63 + 4\n\
+	ldr	r4, ._63 + 4    @ 0x4000200\n\
 	ldrh	r0, [r4]\n\
 	mov	r1, #0x1\n\
 	orr	r0, r0, r1\n\
 	strh	r0, [r4]\n\
 	strh	r2, [r3]\n\
-	ldr	r2, ._63 + 8\n\
+	ldr	r2, ._63 + 8    @ 0x4000004\n\
 	ldrh	r0, [r2]\n\
 	mov	r1, #0x8\n\
 	orr	r0, r0, r1\n\
@@ -701,13 +701,13 @@ static bool8 SetupBagMultistep(void)
 	mov	r2, #0x10\n\
 	mov	r3, #0x0\n\
 	bl	BeginNormalPaletteFade\n\
-	ldr	r2, ._63 + 12\n\
+	ldr	r2, ._63 + 12   @ gPaletteFade\n\
 	ldrb	r1, [r2, #0x8]\n\
 	mov	r0, #0x7f\n\
 	and	r0, r0, r1\n\
 	strb	r0, [r2, #0x8]\n\
-	ldr	r1, ._63 + 16\n\
-	ldr	r0, ._63 + 20\n\
+	ldr	r1, ._63 + 16   @ gMain\n\
+	ldr	r0, ._63 + 20   @ 0x43c\n\
 	add	r1, r1, r0\n\
 	b	._62\n\
 ._64:\n\
@@ -724,8 +724,8 @@ static bool8 SetupBagMultistep(void)
 	cmp	r0, #0x1\n\
 	beq	._66	@cond_branch\n\
 ._61:\n\
-	ldr	r1, ._67\n\
-	ldr	r2, ._67 + 4\n\
+	ldr	r1, ._67        @ gMain\n\
+	ldr	r2, ._67 + 4    @ 0x43c\n\
 	add	r1, r1, r2\n\
 ._62:\n\
 	ldrb	r0, [r1]\n\
@@ -738,23 +738,23 @@ static bool8 SetupBagMultistep(void)
 	.word	gMain\n\
 	.word	0x43c\n\
 ._24:\n\
-	ldr	r0, ._71\n\
+	ldr	r0, ._71        @ sub_80A3134\n\
 	bl	SetVBlankCallback\n\
-	ldr	r0, ._71 + 4\n\
+	ldr	r0, ._71 + 4    @ sub_80A3118\n\
 	bl	SetMainCallback2\n\
 	bl	sub_80A751C\n\
 	bl	sub_80A7630\n\
 	bl	sub_80A770C\n\
 	bl	sub_80A7828\n\
 	bl	sub_80A78B8\n\
-	ldr	r0, ._71 + 8\n\
+	ldr	r0, ._71 + 8    @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._69	@cond_branch\n\
-	ldr	r0, ._71 + 12\n\
+	ldr	r0, ._71 + 12   @ 0x600f5e0\n\
 	mov	r1, #0x80\n\
 	lsl	r1, r1, #0x8\n\
-	ldr	r2, ._71 + 16\n\
+	ldr	r2, ._71 + 16   @ 0x600f800\n\
 	mov	r3, #0x0\n\
 	bl	debug_sub_8008218\n\
 ._69:\n\
@@ -1036,7 +1036,7 @@ void debug_sub_80A3714()
 	push	{r4, r5, r6, lr}\n\
 	add	sp, sp, #0xfffffff4\n\
 	mov	r5, #0x0\n\
-	ldr	r2, ._138\n\
+	ldr	r2, ._138       @ gUnknown_Debug_083EBC68\n\
 	mov	r1, #0x0\n\
 ._134:\n\
 	lsl	r0, r5, #0x1\n\
@@ -1059,10 +1059,10 @@ void debug_sub_80A3714()
 	bl	ItemId_GetPocket\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r0, r0, #0x8\n\
-	ldr	r1, ._138 + 4\n\
+	ldr	r1, ._138 + 4   @ 0xffff0000\n\
 	add	r0, r0, r1\n\
 	lsr	r0, r0, #0x10\n\
-	ldr	r1, ._138 + 8\n\
+	ldr	r1, ._138 + 8   @ gBagPockets\n\
 	lsl	r2, r0, #0x3\n\
 	add	r2, r2, r1\n\
 	lsl	r0, r0, #0x1\n\
@@ -4050,12 +4050,12 @@ static void sub_80A740C(void)
 	bl	sub_80A75E4\n\
 	bl	sub_80A7768\n\
 	bl	sub_80A7420\n\
-	ldr	r0, ._931\n\
+	ldr	r0, ._931       @ gLinkOpen\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0x1\n\
 	bne	._930	@cond_branch\n\
-	ldr	r0, ._931 + 4\n\
-	ldr	r1, ._931 + 8\n\
+	ldr	r0, ._931 + 4   @ gLink\n\
+	ldr	r1, ._931 + 8   @ 0xfbd\n\
 	add	r0, r0, r1\n\
 	ldrb	r0, [r0]\n\
 	mov	r1, #0x0\n\

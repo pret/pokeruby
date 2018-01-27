@@ -234,12 +234,12 @@ void debug_sub_81257E0(void)
 	add	sp, sp, #0xfffffffc\n\
 	bl	InitLinkBattleRecords\n\
 	mov	r5, #0x0\n\
-	ldr	r6, ._62\n\
+	ldr	r6, ._62        @ gUnknown_Debug_4245CC\n\
 	sub	r0, r6, #2\n\
 	mov	r8, r0\n\
-	ldr	r7, ._62 + 4\n\
+	ldr	r7, ._62 + 4    @ gLinkPlayers\n\
 ._61:\n\
-	ldr	r0, ._62 + 8\n\
+	ldr	r0, ._62 + 8    @ gUnknown_Debug_8424620\n\
 	lsl	r3, r5, #0x2\n\
 	add	r3, r3, r0\n\
 	ldrb	r4, [r3]\n\
@@ -251,7 +251,7 @@ void debug_sub_81257E0(void)
 	add r0, r0, r8\n\
 	ldrh	r2, [r0]\n\
 	ldrb	r3, [r3, #0x1]\n\
-	ldr	r0, ._62 + 12\n\
+	ldr	r0, ._62 + 12   @ gLinkPlayerMapObjects\n\
 	lsl	r4, r4, #0x2\n\
 	add	r4, r4, r0\n\
 	ldrb	r4, [r4, #0x1]\n\
@@ -261,7 +261,7 @@ void debug_sub_81257E0(void)
 	add	r0, r0, r7\n\
 	ldrb	r0, [r0, #0x1a]\n\
 	str	r0, [sp]\n\
-	ldr	r0, ._62 + 16\n\
+	ldr	r0, ._62 + 16   @ gSaveBlock1\n\
 	bl	UpdateLinkBattleRecords_\n\
 	add	r5, r5, #0x1\n\
 	cmp	r5, #0x2\n\

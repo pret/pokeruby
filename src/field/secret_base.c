@@ -1658,7 +1658,7 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	add	r5, r1, #0\n\
 	lsl	r2, r2, #0x18\n\
 	lsr	r7, r2, #0x18\n\
-	ldr	r0, ._503\n\
+	ldr	r0, ._503       @ gUnknown_020297ED\n\
 	ldrb	r0, [r0]\n\
 	cmp	r0, #0\n\
 	bne	._498	@cond_branch\n\
@@ -1747,10 +1747,10 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	bl	sub_80BD610\n\
 ._515:\n\
 	mov	r3, #0x1\n\
-	ldr	r6, ._521\n\
+	ldr	r6, ._521       @ gSaveBlock1\n\
 	mov	r5, #0x10\n\
 	neg	r5, r5\n\
-	ldr	r4, ._521 + 4\n\
+	ldr	r4, ._521 + 4   @ 0x1a09\n\
 ._517:\n\
 	lsl	r0, r3, #0x2\n\
 	add	r0, r0, r3\n\
@@ -1776,8 +1776,8 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	bls	._517	@cond_branch\n\
 	bl	sub_80BD280\n\
 	mov	r3, #0x1\n\
-	ldr	r4, ._521\n\
-	ldr	r6, ._521 + 4\n\
+	ldr	r4, ._521       @ gSaveBlock1\n\
+	ldr	r6, ._521 + 4   @ 0x1a09\n\
 	add	r7, r4, #0\n\
 	mov	r5, #0x3f\n\
 ._519:\n\
@@ -1799,10 +1799,10 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
 	lsr	r3, r0, #0x10\n\
 	cmp	r3, #0x13\n\
 	bls	._519	@cond_branch\n\
-	ldr	r0, ._521 + 8\n\
+	ldr	r0, ._521 + 8   @ 0x1a16\n\
 	add	r2, r7, r0\n\
 	ldrh	r1, [r2]\n\
-	ldr	r0, ._521 + 12\n\
+	ldr	r0, ._521 + 12  @ 0xffff\n\
 	cmp	r1, r0\n\
 	beq	._520	@cond_branch\n\
 	add	r0, r1, #1\n\

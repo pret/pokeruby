@@ -1247,7 +1247,7 @@ void debug_sub_80C2818(void)
 	push	{lr}\n\
 	mov	r0, #0x0\n\
 	bl	CreateShopMenu\n\
-	ldr	r0, ._290\n\
+	ldr	r0, ._290       @ gMartBuyNoSellOptionList\n\
 	bl	SetShopItemsForSale\n\
 	mov	r0, #0x0\n\
 	bl	SetShopMenuCallback\n\
