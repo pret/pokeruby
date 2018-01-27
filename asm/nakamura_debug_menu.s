@@ -15,7 +15,7 @@ debug_sub_815F1B8:
 	mov	r2, #0x1d
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._1
+	ldr	r3, ._1         @ _843E3DC
 	mov	r0, #0x10
 	mov	r1, #0x1
 	mov	r2, #0x9
@@ -43,8 +43,8 @@ debug_sub_815F1B8:
 InitNakamuraDebugMenu:
 	push	{lr}
 	bl	debug_sub_815F1B8
-	ldr	r1, ._3
-	ldr	r0, ._3 + 4
+	ldr	r1, ._3         @ gMenuCallback
+	ldr	r0, ._3 + 4     @ debug_sub_815F214
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -60,7 +60,7 @@ InitNakamuraDebugMenu:
 	thumb_func_start debug_sub_815F214
 debug_sub_815F214:
 	push	{r4, lr}
-	ldr	r4, ._9
+	ldr	r4, ._9         @ gMain
 	ldrh	r1, [r4, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -83,7 +83,7 @@ debug_sub_815F214:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._7	@cond_branch
-	ldr	r4, ._9 + 4
+	ldr	r4, ._9 + 4     @ _843E3DC
 	bl	Menu_GetCursorPos
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x15
@@ -122,7 +122,7 @@ debug_sub_815F284:
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r0, ._14
+	ldr	r0, ._14        @ gPaletteFade
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
@@ -151,10 +151,10 @@ debug_sub_815F2B4:
 	add	sp, sp, #0xfffffffc
 	bl	CloseMenu
 	bl	Menu_EraseScreen
-	ldr	r1, ._16
-	ldr	r0, ._16 + 4
+	ldr	r1, ._16        @ gMain
+	ldr	r0, ._16 + 4    @ sub_805469C
 	str	r0, [r1, #0x8]
-	ldr	r0, ._16 + 8
+	ldr	r0, ._16 + 8    @ debug_sub_815F284
 	mov	r1, #0x0
 	bl	CreateTask
 	mov	r0, #0x1
@@ -191,9 +191,9 @@ debug_sub_815F2F4:
 	lsl	r1, r7, #0x2
 	add	r0, r1, r7
 	lsl	r2, r0, #0x5
-	ldr	r3, ._24
+	ldr	r3, ._24        @ gSaveBlock1
 	add	r0, r2, r3
-	ldr	r5, ._24 + 4
+	ldr	r5, ._24 + 4    @ 0x1a08
 	add	r0, r0, r5
 	ldrb	r0, [r0]
 	mov	r9, r1
@@ -204,10 +204,10 @@ debug_sub_815F2F4:
 	b	._19
 ._18:
 	mov	r5, #0x0
-	ldr	r6, ._24 + 8
+	ldr	r6, ._24 + 8    @ gSaveBlock2
 	add	r4, r7, #0
 	sub	r4, r4, #0x46
-	ldr	r3, ._24 + 12
+	ldr	r3, ._24 + 12   @ gSaveBlock1
 ._21:
 	add	r1, r5, r2
 	add	r1, r1, r3
@@ -240,15 +240,15 @@ debug_sub_815F2F4:
 ._23:
 	add	r0, r0, r3
 	strb	r4, [r0]
-	ldr	r1, ._35
-	ldr	r2, ._35 + 4
+	ldr	r1, ._35        @ gSaveBlock1
+	ldr	r2, ._35 + 4    @ 0x1a08
 	add	r2, r2, r1
 	mov	sl, r2
 	mov	r3, r9
 	add	r0, r3, r7
 	lsl	r6, r0, #0x5
 	add	r1, r6, r1
-	ldr	r5, ._35 + 4
+	ldr	r5, ._35 + 4    @ 0x1a08
 	add	r5, r5, r1
 	mov	r8, r5
 ._30:
@@ -259,7 +259,7 @@ debug_sub_815F2F4:
 	bl	__umodsi3
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0xe
-	ldr	r1, ._35 + 8
+	ldr	r1, ._35 + 8    @ _843E424
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	mov	r2, r8
@@ -271,9 +271,9 @@ debug_sub_815F2F4:
 	ldrb	r3, [r3]
 	cmp	r0, r3
 	beq	._28	@cond_branch
-	ldr	r4, ._35
+	ldr	r4, ._35        @ gSaveBlock1
 	add	r0, r6, r4
-	ldr	r2, ._35 + 4
+	ldr	r2, ._35 + 4    @ 0x1a08
 	add	r3, r0, r2
 ._29:
 	add	r0, r5, #1
@@ -297,12 +297,12 @@ debug_sub_815F2F4:
 	mov	r5, r9
 	add	r4, r5, r7
 	lsl	r4, r4, #0x5
-	ldr	r1, ._35
+	ldr	r1, ._35        @ gSaveBlock1
 	add	r3, r4, r1
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	mov	r1, #0x1
-	ldr	r2, ._35 + 12
+	ldr	r2, ._35 + 12   @ 0x1a09
 	add	r3, r3, r2
 	and	r0, r0, r1
 	lsl	r0, r0, #0x4
@@ -314,7 +314,7 @@ debug_sub_815F2F4:
 	orr	r1, r1, r0
 	strb	r1, [r3]
 	mov	r5, #0x0
-	ldr	r6, ._35 + 16
+	ldr	r6, ._35 + 16   @ gSaveBlock1
 ._31:
 	bl	Random
 	add	r1, r5, r4
@@ -329,7 +329,7 @@ debug_sub_815F2F4:
 	mov	r1, r9
 	add	r0, r1, r7
 	lsl	r4, r0, #0x5
-	ldr	r3, ._35 + 20
+	ldr	r3, ._35 + 20   @ gSaveBlock1
 	mov	r2, #0x0
 	add	r6, r3, #0
 	add	r6, r6, #0x10
@@ -381,18 +381,18 @@ debug_sub_815F470:
 	add	r6, r0, #0
 	add	r7, r1, #0
 	mov	ip, r2
-	ldr	r2, ._39
-	ldr	r0, ._39 + 4
+	ldr	r2, ._39        @ gSaveBlock1
+	ldr	r0, ._39 + 4    @ _nakamuraData0
 	ldrb	r1, [r0]
 	lsl	r0, r1, #0x2
 	add	r0, r0, r1
 	lsl	r0, r0, #0x5
 	add	r0, r0, r2
-	ldr	r1, ._39 + 8
+	ldr	r1, ._39 + 8    @ 0x1a08
 	add	r0, r0, r1
 	ldrb	r4, [r0]
 	mov	r2, #0x0
-	ldr	r3, ._39 + 12
+	ldr	r3, ._39 + 12   @ _843E424
 	add	r5, r3, #0
 ._41:
 	lsl	r1, r2, #0x2
@@ -443,8 +443,8 @@ debug_sub_815F4D8:
 	mov	r2, #0xa
 	mov	r3, #0xa
 	bl	Menu_BlankWindowRect
-	ldr	r6, ._43
-	ldr	r7, ._43 + 4
+	ldr	r6, ._43        @ gStringVar1
+	ldr	r7, ._43 + 4    @ _nakamuraData0
 	ldrb	r1, [r7]
 	add	r0, r6, #0
 	mov	r2, #0x0
@@ -454,13 +454,13 @@ debug_sub_815F4D8:
 	mov	r1, #0x1
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r2, ._43 + 8
+	ldr	r2, ._43 + 8    @ gSaveBlock1
 	ldrb	r1, [r7]
 	lsl	r0, r1, #0x2
 	add	r0, r0, r1
 	lsl	r0, r0, #0x5
 	add	r0, r0, r2
-	ldr	r1, ._43 + 12
+	ldr	r1, ._43 + 12   @ 0x1a08
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	cmp	r0, #0
@@ -480,7 +480,7 @@ debug_sub_815F4D8:
 	mov	r1, #0x1
 	mov	r2, #0x3
 	bl	Menu_PrintText
-	ldr	r0, ._43 + 16
+	ldr	r0, ._43 + 16   @ Str_843E550
 	mov	r1, #0x1
 	mov	r2, #0x5
 	bl	Menu_PrintText
@@ -494,7 +494,7 @@ debug_sub_815F4D8:
 	mov	r1, #0x2
 	mov	r2, #0x5
 	bl	Menu_PrintText
-	ldr	r0, ._43 + 20
+	ldr	r0, ._43 + 20   @ Str_843E552
 	mov	r1, #0x1
 	mov	r2, #0x7
 	bl	Menu_PrintText
@@ -507,7 +507,7 @@ debug_sub_815F4D8:
 	mov	r1, #0x3
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r0, ._43 + 24
+	ldr	r0, ._43 + 24   @ Str_843E554
 	mov	r1, #0x1
 	mov	r2, #0x9
 	bl	Menu_PrintText
@@ -541,7 +541,7 @@ debug_sub_815F4D8:
 	thumb_func_start debug_sub_815F5C4
 debug_sub_815F5C4:
 	push	{lr}
-	ldr	r0, ._48
+	ldr	r0, ._48        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
@@ -549,7 +549,7 @@ debug_sub_815F5C4:
 	lsr	r2, r0, #0x10
 	cmp	r2, #0
 	beq	._45	@cond_branch
-	ldr	r1, ._48 + 4
+	ldr	r1, ._48 + 4    @ _nakamuraData0
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._46	@cond_branch
@@ -568,7 +568,7 @@ debug_sub_815F5C4:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._51	@cond_branch
-	ldr	r1, ._54
+	ldr	r1, ._54        @ _nakamuraData0
 	ldrb	r0, [r1]
 	cmp	r0, #0x13
 	bne	._52	@cond_branch
@@ -605,11 +605,11 @@ debug_sub_815F5C4:
 	thumb_func_start debug_sub_815F62C
 debug_sub_815F62C:
 	push	{lr}
-	ldr	r1, ._59
+	ldr	r1, ._59        @ _nakamuraData0
 	mov	r0, #0x0
 	strb	r0, [r1]
-	ldr	r1, ._59 + 4
-	ldr	r0, ._59 + 8
+	ldr	r1, ._59 + 4    @ gMenuCallback
+	ldr	r0, ._59 + 8    @ debug_sub_815F5C4
 	str	r0, [r1]
 	mov	r0, #0x0
 	mov	r1, #0x0
@@ -637,12 +637,12 @@ debug_sub_815F62C:
 	thumb_func_start debug_sub_815F668
 debug_sub_815F668:
 	push	{r4, r5, r6, lr}
-	ldr	r0, ._61
+	ldr	r0, ._61        @ _nakamuraData0
 	ldrb	r0, [r0]
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x5
-	ldr	r0, ._61 + 4
+	ldr	r0, ._61 + 4    @ gSaveBlock1
 	add	r1, r1, r0
 	ldrb	r4, [r1, #0x3]
 	lsl	r4, r4, #0x18
@@ -654,8 +654,8 @@ debug_sub_815F668:
 	orr	r4, r4, r0
 	ldrb	r0, [r1]
 	orr	r4, r4, r0
-	ldr	r5, ._61 + 8
-	ldr	r6, ._61 + 12
+	ldr	r5, ._61 + 8    @ gStringVar1
+	ldr	r6, ._61 + 12   @ 0x186a0
 	add	r0, r4, #0
 	add	r1, r6, #0
 	bl	__udivsi3
@@ -701,13 +701,13 @@ debug_sub_815F6E4:
 	mov	r2, #0xb
 	mov	r3, #0x4
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._63
-	ldr	r0, ._63 + 4
+	ldr	r4, ._63        @ gStringVar1
+	ldr	r0, ._63 + 4    @ _nakamuraData0
 	ldrb	r0, [r0]
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x5
-	ldr	r0, ._63 + 8
+	ldr	r0, ._63 + 8    @ gSaveBlock1
 	add	r1, r1, r0
 	add	r0, r4, #0
 	mov	r2, #0x7
@@ -738,8 +738,8 @@ debug_sub_815F72C:
 	mov	r2, #0xb
 	mov	r3, #0xa
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._66
-	ldr	r5, ._66 + 4
+	ldr	r4, ._66        @ gStringVar1
+	ldr	r5, ._66 + 4    @ _nakamuraData0
 	ldrb	r1, [r5]
 	add	r0, r4, #0
 	mov	r2, #0x0
@@ -749,13 +749,13 @@ debug_sub_815F72C:
 	mov	r1, #0x2
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r2, ._66 + 8
+	ldr	r2, ._66 + 8    @ gSaveBlock1
 	ldrb	r1, [r5]
 	lsl	r0, r1, #0x2
 	add	r0, r0, r1
 	lsl	r0, r0, #0x5
 	add	r0, r0, r2
-	ldr	r1, ._66 + 12
+	ldr	r1, ._66 + 12   @ 0x1a08
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	cmp	r0, #0
@@ -784,8 +784,8 @@ debug_sub_815F788:
 	mov	r2, #0xb
 	mov	r3, #0x6
 	bl	Menu_BlankWindowRect
-	ldr	r0, ._68
-	ldr	r1, ._68 + 4
+	ldr	r0, ._68        @ Str_843E574
+	ldr	r1, ._68 + 4    @ _nakamuraData2
 	ldrb	r1, [r1]
 	add	r1, r1, #0x2
 	lsl	r1, r1, #0x18
@@ -805,7 +805,7 @@ debug_sub_815F788:
 	thumb_func_start debug_sub_815F7B4
 debug_sub_815F7B4:
 	push	{lr}
-	ldr	r0, ._72
+	ldr	r0, ._72        @ _nakamuraData1
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._70	@cond_branch
@@ -820,10 +820,10 @@ debug_sub_815F7B4:
 ._72:
 	.word	_nakamuraData1
 ._70:
-	ldr	r0, ._74
+	ldr	r0, ._74        @ _nakamuraData3
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x1
-	ldr	r1, ._74 + 4
+	ldr	r1, ._74 + 4    @ Str_843E576
 	add	r0, r0, r1
 	mov	r1, #0xb
 	mov	r2, #0x1
@@ -842,12 +842,12 @@ debug_sub_815F7B4:
 	thumb_func_start debug_sub_815F7F0
 debug_sub_815F7F0:
 	push	{r4, r5, lr}
-	ldr	r1, ._78
+	ldr	r1, ._78        @ _nakamuraData0
 	ldrb	r2, [r1]
 	lsl	r1, r2, #0x2
 	add	r1, r1, r2
 	lsl	r1, r1, #0x5
-	ldr	r2, ._78 + 4
+	ldr	r2, ._78 + 4    @ gSaveBlock1
 	add	r3, r1, r2
 	ldrb	r1, [r3, #0x3]
 	lsl	r2, r1, #0x18
@@ -862,7 +862,7 @@ debug_sub_815F7F0:
 	lsl	r0, r0, #0x18
 	asr	r1, r0, #0x18
 	mov	r4, #0x9
-	ldr	r0, ._78 + 8
+	ldr	r0, ._78 + 8    @ _nakamuraData2
 	ldrb	r0, [r0]
 	cmp	r4, r0
 	ble	._76	@cond_branch
@@ -911,12 +911,12 @@ debug_sub_815F7F0:
 debug_sub_815F86C:
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
-	ldr	r1, ._84
+	ldr	r1, ._84        @ _nakamuraData0
 	ldrb	r2, [r1]
 	lsl	r1, r2, #0x2
 	add	r1, r1, r2
 	lsl	r1, r1, #0x5
-	ldr	r2, ._84 + 4
+	ldr	r2, ._84 + 4    @ gSaveBlock1
 	add	r5, r1, r2
 	mov	r2, #0x0
 	mov	r3, #0x0
@@ -924,7 +924,7 @@ debug_sub_815F86C:
 	asr	r0, r0, #0x18
 	cmp	r0, #0x64
 	bne	._80	@cond_branch
-	ldr	r0, ._84 + 8
+	ldr	r0, ._84 + 8    @ _nakamuraData2
 	ldrb	r1, [r0]
 	cmp	r1, #0x6
 	bhi	._100	@cond_branch
@@ -945,12 +945,12 @@ debug_sub_815F86C:
 	.word	gSaveBlock1+0x1a0a
 	.word	_nakamuraData2
 ._80:
-	ldr	r0, ._87
+	ldr	r0, ._87        @ _nakamuraData3
 	ldrb	r0, [r0]
 	cmp	r0, #0x4
 	bhi	._98	@cond_branch
 	lsl	r0, r0, #0x2
-	ldr	r1, ._87 + 4
+	ldr	r1, ._87 + 4    @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -985,7 +985,7 @@ debug_sub_815F86C:
 	mov	r3, #0xa1
 	mov	r2, #0xaa
 ._98:
-	ldr	r4, ._101
+	ldr	r4, ._101       @ _nakamuraData2
 	ldrb	r1, [r4]
 	add	r1, r5, r1
 	ldrb	r0, [r1]
@@ -1019,14 +1019,14 @@ debug_sub_815F86C:
 	thumb_func_start debug_sub_815F930
 debug_sub_815F930:
 	push	{r4, r5, lr}
-	ldr	r0, ._107
+	ldr	r0, ._107       @ _nakamuraData1
 	ldrb	r2, [r0]
 	mov	r4, #0xa
 	cmp	r2, #0
 	bne	._103	@cond_branch
 	mov	r4, #0x7
 ._103:
-	ldr	r5, ._107 + 4
+	ldr	r5, ._107 + 4   @ gMain
 	ldrh	r1, [r5, #0x30]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -1067,7 +1067,7 @@ debug_sub_815F930:
 	lsr	r3, r0, #0x10
 	cmp	r3, #0
 	beq	._114	@cond_branch
-	ldr	r1, ._117
+	ldr	r1, ._117       @ _nakamuraData2
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._115	@cond_branch
@@ -1089,7 +1089,7 @@ debug_sub_815F930:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._120	@cond_branch
-	ldr	r2, ._123
+	ldr	r2, ._123       @ _nakamuraData2
 	ldrb	r1, [r2]
 	sub	r0, r4, #1
 	cmp	r1, r0
@@ -1112,7 +1112,7 @@ debug_sub_815F930:
 	beq	._126	@cond_branch
 	cmp	r2, #0
 	bne	._127	@cond_branch
-	ldr	r4, ._129
+	ldr	r4, ._129       @ _nakamuraData3
 	ldrb	r0, [r4]
 	add	r0, r0, #0x1
 	mov	r1, #0x5
@@ -1140,8 +1140,8 @@ debug_sub_815F930:
 	mov	r2, #0xb
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._133
-	ldr	r0, ._133 + 4
+	ldr	r1, ._133       @ gMenuCallback
+	ldr	r0, ._133 + 4   @ debug_sub_815FA38
 	str	r0, [r1]
 	b	._136
 ._134:
@@ -1170,7 +1170,7 @@ debug_sub_815F930:
 	thumb_func_start debug_sub_815FA38
 debug_sub_815FA38:
 	push	{r4, lr}
-	ldr	r0, ._139
+	ldr	r0, ._139       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -1201,7 +1201,7 @@ debug_sub_815FA38:
 	lsr	r2, r0, #0x10
 	cmp	r2, #0
 	beq	._143	@cond_branch
-	ldr	r1, ._146
+	ldr	r1, ._146       @ _nakamuraData0
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._144	@cond_branch
@@ -1221,7 +1221,7 @@ debug_sub_815FA38:
 	lsr	r4, r0, #0x10
 	cmp	r4, #0
 	beq	._149	@cond_branch
-	ldr	r1, ._152
+	ldr	r1, ._152       @ _nakamuraData0
 	ldrb	r0, [r1]
 	cmp	r0, #0x13
 	bne	._150	@cond_branch
@@ -1243,30 +1243,30 @@ debug_sub_815FA38:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._155	@cond_branch
-	ldr	r1, ._159
+	ldr	r1, ._159       @ _nakamuraData0
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	beq	._161	@cond_branch
-	ldr	r2, ._159 + 4
+	ldr	r2, ._159 + 4   @ gSaveBlock1
 	add	r1, r0, #0
 	lsl	r0, r1, #0x2
 	add	r0, r0, r1
 	lsl	r0, r0, #0x5
 	add	r0, r0, r2
-	ldr	r1, ._159 + 8
+	ldr	r1, ._159 + 8   @ 0x1a08
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._161	@cond_branch
 	bl	Menu_GetCursorPos
-	ldr	r1, ._159 + 12
+	ldr	r1, ._159 + 12  @ _nakamuraData1
 	strb	r0, [r1]
-	ldr	r0, ._159 + 16
+	ldr	r0, ._159 + 16  @ _nakamuraData2
 	strb	r4, [r0]
 	bl	debug_sub_815F788
 	bl	debug_sub_815F7B4
-	ldr	r1, ._159 + 20
-	ldr	r0, ._159 + 24
+	ldr	r1, ._159 + 20  @ gMenuCallback
+	ldr	r0, ._159 + 24  @ debug_sub_815F930
 	str	r0, [r1]
 	b	._161
 ._160:
@@ -1297,13 +1297,13 @@ debug_sub_815FA38:
 debug_sub_815FB1C:
 	push	{lr}
 	add	sp, sp, #0xfffffff8
-	ldr	r0, ._162
+	ldr	r0, ._162       @ _nakamuraData0
 	mov	r1, #0x0
 	strb	r1, [r0]
-	ldr	r0, ._162 + 4
+	ldr	r0, ._162 + 4   @ _nakamuraData3
 	strb	r1, [r0]
-	ldr	r1, ._162 + 8
-	ldr	r0, ._162 + 12
+	ldr	r1, ._162 + 8   @ gMenuCallback
+	ldr	r0, ._162 + 12  @ debug_sub_815FA38
 	str	r0, [r1]
 	mov	r0, #0x0
 	mov	r1, #0x0
@@ -1342,7 +1342,7 @@ debug_sub_815FB1C:
 	thumb_func_start debug_sub_815FB78
 debug_sub_815FB78:
 	push	{lr}
-	ldr	r0, ._166
+	ldr	r0, ._166       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -1407,15 +1407,15 @@ debug_sub_815FB78:
 debug_sub_815FBE8:
 	push	{r4, lr}
 	add	sp, sp, #0xfffffff8
-	ldr	r1, ._178
-	ldr	r0, ._178 + 4
+	ldr	r1, ._178       @ gMenuCallback
+	ldr	r0, ._178 + 4   @ debug_sub_815FB78
 	str	r0, [r1]
 	mov	r0, #0x0
 	mov	r1, #0x0
 	mov	r2, #0x1d
 	mov	r3, #0x13
 	bl	Menu_EraseWindowRect
-	ldr	r4, ._178 + 8
+	ldr	r4, ._178 + 8   @ gStringVar1
 	add	r0, r4, #0
 	bl	debug_sub_814A73C
 	mov	r0, #0x0
@@ -1427,7 +1427,7 @@ debug_sub_815FBE8:
 	mov	r1, #0x1
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._178 + 12
+	ldr	r0, ._178 + 12  @ Str_843E580
 	mov	r1, #0x2
 	mov	r2, #0x3
 	bl	Menu_PrintText
@@ -1459,11 +1459,11 @@ debug_sub_815FBE8:
 debug_sub_815FC54:
 	push	{r4, r5, r6, r7, lr}
 	mov	r3, #0x0
-	ldr	r7, ._181
+	ldr	r7, ._181       @ gSaveBlock1
 	mov	r6, #0xe8
 	lsl	r6, r6, #0x3
-	ldr	r5, ._181 + 4
-	ldr	r4, ._181 + 8
+	ldr	r5, ._181 + 4   @ 0x3e7
+	ldr	r4, ._181 + 8   @ 0x742
 ._180:
 	lsl	r1, r3, #0x2
 	add	r1, r1, r7
@@ -1519,7 +1519,7 @@ debug_sub_815FCB4:
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
 	mov	r7, #0x0
-	ldr	r5, ._188
+	ldr	r5, ._188       @ gMapHeader
 	ldr	r0, [r5]
 	ldr	r0, [r0, #0x4]
 	mov	r1, #0x3
@@ -1543,7 +1543,7 @@ debug_sub_815FCB4:
 	add	r5, r6, #1
 	cmp	r4, r0
 	bge	._184	@cond_branch
-	ldr	r0, ._188
+	ldr	r0, ._188       @ gMapHeader
 	mov	r9, r0
 ._186:
 	add	r0, r4, #7
@@ -1563,7 +1563,7 @@ debug_sub_815FCB4:
 	add	r0, r4, #1
 	lsl	r0, r0, #0x10
 	lsr	r4, r0, #0x10
-	ldr	r0, ._188
+	ldr	r0, ._188       @ gMapHeader
 	ldr	r0, [r0]
 	ldr	r0, [r0]
 	cmp	r4, r0
@@ -1607,7 +1607,7 @@ debug_sub_815FD40:
 	sub	r0, r0, #0x7
 	strh	r0, [r4]
 	mov	r5, #0x0
-	ldr	r1, ._192
+	ldr	r1, ._192       @ gMapHeader
 	ldr	r0, [r1]
 	ldr	r0, [r0, #0x4]
 	add	r7, r4, #0
@@ -1650,7 +1650,7 @@ debug_sub_815FD40:
 	add	r0, r4, #1
 	lsl	r0, r0, #0x10
 	lsr	r4, r0, #0x10
-	ldr	r0, ._200
+	ldr	r0, ._200       @ gMapHeader
 	ldr	r0, [r0]
 ._191:
 	ldr	r0, [r0]
@@ -1659,7 +1659,7 @@ debug_sub_815FD40:
 	add	r0, r5, #1
 	lsl	r0, r0, #0x10
 	lsr	r5, r0, #0x10
-	ldr	r1, ._200
+	ldr	r1, ._200       @ gMapHeader
 	ldr	r0, [r1]
 	ldr	r0, [r0, #0x4]
 	cmp	r5, r0
@@ -1683,7 +1683,7 @@ debug_sub_815FD40:
 	thumb_func_start debug_sub_815FDE4
 debug_sub_815FDE4:
 	push	{lr}
-	ldr	r0, ._205
+	ldr	r0, ._205       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
@@ -1727,11 +1727,11 @@ debug_sub_815FE1C:
 	mov	r2, #0x10
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._210
+	ldr	r0, ._210       @ Str_843E58D
 	mov	r1, #0x1
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r6, ._210 + 4
+	ldr	r6, ._210 + 4   @ gStringVar1
 	mov	r0, #0x0
 	bl	debug_sub_815FCB4
 	add	r1, r0, #0
@@ -1810,8 +1810,8 @@ debug_sub_815FE1C:
 	mov	r1, #0xb
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r0, ._210 + 8
-	ldr	r1, ._210 + 12
+	ldr	r0, ._210 + 8   @ gSaveBlock1
+	ldr	r1, ._210 + 12  @ 0x2dd6
 	add	r0, r0, r1
 	ldrh	r0, [r0]
 	bl	FeebasSeedRng
@@ -1877,7 +1877,7 @@ debug_sub_815FE1C:
 ._208:
 	cmp	r5, #0x6
 	bne	._209	@cond_branch
-	ldr	r4, ._210 + 4
+	ldr	r4, ._210 + 4   @ gStringVar1
 	bl	debug_sub_815FD40
 	add	r1, r0, #0
 	lsl	r1, r1, #0x10
@@ -1890,8 +1890,8 @@ debug_sub_815FE1C:
 	mov	r1, #0x2
 	mov	r2, #0x11
 	bl	Menu_PrintText
-	ldr	r1, ._210 + 16
-	ldr	r0, ._210 + 20
+	ldr	r1, ._210 + 16  @ gMenuCallback
+	ldr	r0, ._210 + 20  @ debug_sub_815FDE4
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r4, r5, r6, r7}
@@ -1924,18 +1924,18 @@ debug_sub_815FFDC:
 	mov	r2, #0x1d
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._214
+	ldr	r0, ._214       @ Str_843E5D4
 	mov	r1, #0x1
 	mov	r2, #0xf
 	bl	Menu_PrintText
 	mov	r5, #0x0
-	ldr	r0, ._214 + 4
+	ldr	r0, ._214 + 4   @ _nakamuraStatic0
 	mov	r8, r0
 ._216:
 	mov	r0, #0x64
 	add	r1, r5, #0
 	mul	r1, r1, r0
-	ldr	r0, ._214 + 8
+	ldr	r0, ._214 + 8   @ gPlayerParty
 	add	r6, r1, r0
 	add	r0, r6, #0
 	mov	r1, #0xb
@@ -1978,15 +1978,15 @@ debug_sub_815FFDC:
 	lsr	r5, r0, #0x18
 	cmp	r5, #0x5
 	bls	._216	@cond_branch
-	ldr	r1, ._217
+	ldr	r1, ._217       @ _nakamuraData4
 	mov	r0, #0x0
 	strb	r0, [r1]
 	mov	r0, #0xf
 	mov	r1, #0x1
 	mov	r2, #0xff
 	bl	PrintTriangleCursorWithPalette
-	ldr	r1, ._217 + 4
-	ldr	r0, ._217 + 8
+	ldr	r1, ._217 + 4   @ gMenuCallback
+	ldr	r0, ._217 + 8   @ debug_sub_8160498
 	str	r0, [r1]
 	pop	{r3}
 	mov	r8, r3
@@ -2008,14 +2008,14 @@ debug_sub_816009C:
 	add	r2, r0, #0
 	lsl	r2, r2, #0x18
 	lsr	r2, r2, #0x18
-	ldr	r1, ._219
+	ldr	r1, ._219       @ _nakamuraStatic0
 	lsl	r0, r2, #0x2
 	add	r0, r0, r1
 	mov	r3, #0x0
 	ldsh	r1, [r0, r3]
 	mov	r0, #0xb
 	mul	r0, r0, r1
-	ldr	r1, ._219 + 4
+	ldr	r1, ._219 + 4   @ gSpeciesNames
 	add	r0, r0, r1
 	lsl	r2, r2, #0x1
 	add	r2, r2, #0x1
@@ -2040,20 +2040,20 @@ debug_sub_81600D0:
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	add	r5, r4, #0
-	ldr	r1, ._223
+	ldr	r1, ._223       @ Str_843E5F0
 	mov	r0, sp
 	mov	r2, #0x2
 	bl	memcpy
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, ._223 + 4
+	ldr	r1, ._223 + 4   @ gPlayerParty
 	add	r0, r0, r1
 	bl	GetMonGender
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0
 	bne	._221	@cond_branch
-	ldr	r0, ._223 + 8
+	ldr	r0, ._223 + 8   @ gOtherText_MaleSymbol2
 	b	._222
 ._224:
 	.align	2, 0
@@ -2064,7 +2064,7 @@ debug_sub_81600D0:
 ._221:
 	cmp	r0, #0xfe
 	bne	._225	@cond_branch
-	ldr	r0, ._227
+	ldr	r0, ._227       @ gOtherText_FemaleSymbolAndLv
 ._222:
 	lsl	r2, r4, #0x1
 	add	r2, r2, #0x1
@@ -2099,8 +2099,8 @@ debug_sub_816013C:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r5, ._229
-	ldr	r1, ._229 + 4
+	ldr	r5, ._229       @ gStringVar1
+	ldr	r1, ._229 + 4   @ _nakamuraStatic0
 	lsl	r0, r4, #0x2
 	add	r0, r0, r1
 	mov	r1, #0x2
@@ -2143,7 +2143,7 @@ debug_sub_816017C:
 	mov	r0, #0x10
 	mov	r2, #0x1c
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._232
+	ldr	r1, ._232       @ _nakamuraStatic0
 	lsl	r0, r4, #0x2
 	add	r0, r0, r1
 	mov	r1, #0x0
@@ -2177,7 +2177,7 @@ debug_sub_81601C8:
 	lsr	r5, r0, #0x18
 	lsl	r1, r1, #0x18
 	lsr	r3, r1, #0x18
-	ldr	r1, ._239
+	ldr	r1, ._239       @ _nakamuraStatic0
 	lsl	r0, r5, #0x2
 	add	r2, r0, r1
 	mov	r4, #0x0
@@ -2206,7 +2206,7 @@ debug_sub_81601C8:
 	lsl	r0, r0, #0x11
 	cmp	r1, r0
 	ble	._237	@cond_branch
-	ldr	r1, ._239 + 4
+	ldr	r1, ._239 + 4   @ 0xfffffe65
 	add	r0, r2, r1
 	strh	r0, [r4]
 ._237:
@@ -2215,13 +2215,13 @@ debug_sub_81601C8:
 	ldsh	r0, [r4, r2]
 	cmp	r0, #0
 	bge	._238	@cond_branch
-	ldr	r2, ._239 + 8
+	ldr	r2, ._239 + 8   @ 0x19b
 	add	r0, r1, r2
 	strh	r0, [r4]
 ._238:
 	mov	r0, #0x64
 	mul	r0, r0, r5
-	ldr	r1, ._239 + 12
+	ldr	r1, ._239 + 12  @ gPlayerParty
 	add	r0, r0, r1
 	ldrh	r1, [r4]
 	ldrb	r2, [r4, #0x2]
@@ -2252,7 +2252,7 @@ debug_sub_8160258:
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-	ldr	r1, ._242
+	ldr	r1, ._242       @ _nakamuraStatic0
 	lsl	r0, r2, #0x2
 	add	r0, r0, r1
 	mov	r1, #0x0
@@ -2279,7 +2279,7 @@ debug_sub_816027C:
 	add	r4, r0, #0
 	lsl	r1, r1, #0x18
 	lsr	r2, r1, #0x18
-	ldr	r1, ._247
+	ldr	r1, ._247       @ _nakamuraStatic0
 	lsl	r0, r4, #0x2
 	add	r3, r0, r1
 	mov	r1, #0x0
@@ -2307,9 +2307,9 @@ debug_sub_816027C:
 ._246:
 	mov	r0, #0x64
 	mul	r4, r4, r0
-	ldr	r0, ._247 + 4
+	ldr	r0, ._247 + 4   @ gPlayerParty
 	add	r4, r4, r0
-	ldr	r2, ._247 + 8
+	ldr	r2, ._247 + 8   @ gBaseStats
 	mov	r0, #0x0
 	ldsh	r1, [r3, r0]
 	lsl	r0, r1, #0x3
@@ -2324,7 +2324,7 @@ debug_sub_816027C:
 	mov	r0, #0x2
 	ldrsb	r0, [r3, r0]
 	lsl	r0, r0, #0x2
-	ldr	r1, ._247 + 12
+	ldr	r1, ._247 + 12  @ gExperienceTables
 	add	r0, r0, r1
 	add	r2, r2, r0
 	add	r0, r4, #0
@@ -2370,7 +2370,7 @@ debug_sub_8160308:
 	mov	r9, r0
 	mov	r0, r9
 	mul	r0, r0, r2
-	ldr	r7, ._254
+	ldr	r7, ._254       @ gPlayerParty
 	add	r6, r0, r7
 ._251:
 	add	r0, r6, #0
@@ -2407,11 +2407,11 @@ debug_sub_8160308:
 	cmp	r2, #0x4
 	bls	._252	@cond_branch
 	bl	CalculatePlayerPartyCount
-	ldr	r4, ._254 + 4
+	ldr	r4, ._254 + 4   @ gPlayerPartyCount
 	ldrb	r1, [r4]
 	cmp	r1, #0
 	bne	._253	@cond_branch
-	ldr	r0, ._254
+	ldr	r0, ._254       @ gPlayerParty
 	str	r1, [sp]
 	str	r1, [sp, #0x4]
 	str	r1, [sp, #0x8]
@@ -2445,7 +2445,7 @@ debug_sub_81603B8:
 	lsr	r6, r0, #0x18
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r7, ._259
+	ldr	r7, ._259       @ _nakamuraData4
 	ldrb	r4, [r7]
 	add	r0, r4, #0
 	mov	r1, #0x6
@@ -2457,7 +2457,7 @@ debug_sub_81603B8:
 	bl	__umodsi3
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r0, ._259 + 4
+	ldr	r0, ._259 + 4   @ _843E5D1
 	add	r0, r5, r0
 	ldrb	r2, [r0]
 	lsl	r3, r4, #0x1
@@ -2489,7 +2489,7 @@ debug_sub_81603B8:
 ._258:
 	strb	r0, [r7]
 ._256:
-	ldr	r1, ._264
+	ldr	r1, ._264       @ _nakamuraData4
 	cmp	r6, #0x1
 	bne	._261	@cond_branch
 	cmp	r4, #0x5
@@ -2543,7 +2543,7 @@ debug_sub_81603B8:
 	bl	__umodsi3
 	add	r1, r0, #0
 	lsl	r1, r1, #0x18
-	ldr	r0, ._272
+	ldr	r0, ._272       @ _843E5D1
 	add	r0, r5, r0
 	ldrb	r0, [r0]
 	lsr	r1, r1, #0x17
@@ -2565,7 +2565,7 @@ debug_sub_81603B8:
 	thumb_func_start debug_sub_8160498
 debug_sub_8160498:
 	push	{r4, lr}
-	ldr	r1, ._276
+	ldr	r1, ._276       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r2
@@ -2607,7 +2607,7 @@ debug_sub_8160498:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._284	@cond_branch
-	ldr	r4, ._289
+	ldr	r4, ._289       @ _nakamuraData4
 	ldrb	r0, [r4]
 	cmp	r0, #0x5
 	bhi	._285	@cond_branch
@@ -2649,7 +2649,7 @@ debug_sub_8160498:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._291	@cond_branch
-	ldr	r4, ._294
+	ldr	r4, ._294       @ _nakamuraData4
 	ldrb	r0, [r4]
 	cmp	r0, #0x5
 	bhi	._304	@cond_branch
@@ -2666,7 +2666,7 @@ debug_sub_8160498:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._296	@cond_branch
-	ldr	r4, ._301
+	ldr	r4, ._301       @ _nakamuraData4
 	ldrb	r0, [r4]
 	cmp	r0, #0x5
 	bhi	._297	@cond_branch
@@ -2709,7 +2709,7 @@ debug_sub_8160498:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._303	@cond_branch
-	ldr	r4, ._308
+	ldr	r4, ._308       @ _nakamuraData4
 	ldrb	r0, [r4]
 	cmp	r0, #0x5
 	bhi	._304	@cond_branch
@@ -2790,7 +2790,7 @@ debug_sub_816062C:
 	mov	r0, #0x64
 	mov	r4, r8
 	mul	r4, r4, r0
-	ldr	r0, ._316
+	ldr	r0, ._316       @ gPlayerParty
 	add	r4, r4, r0
 	add	r0, r4, #0
 	mov	r1, #0xb
@@ -2801,7 +2801,7 @@ debug_sub_816062C:
 	bl	GetMonGender
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-	ldr	r1, ._316 + 4
+	ldr	r1, ._316 + 4   @ gBaseStats
 	lsl	r0, r7, #0x3
 	sub	r0, r0, r7
 	lsl	r0, r0, #0x2
@@ -2818,7 +2818,7 @@ debug_sub_816062C:
 	mov	r1, r8
 	mul	r1, r1, r0
 	add	r0, r1, #0
-	ldr	r1, ._316
+	ldr	r1, ._316       @ gPlayerParty
 	add	r0, r0, r1
 	bl	GetMonGender
 	lsl	r0, r0, #0x18
@@ -2862,12 +2862,12 @@ debug_sub_816062C:
 	mov	r0, #0x64
 	mov	r4, r8
 	mul	r4, r4, r0
-	ldr	r0, ._323
+	ldr	r0, ._323       @ gPlayerParty
 	add	r4, r4, r0
 	add	r0, r4, #0
 	mov	r1, #0x42
 	bl	GetMonData
-	ldr	r0, ._323 + 4
+	ldr	r0, ._323 + 4   @ _nakamuraStatic0
 	add r0, r0, r9
 	ldrh	r1, [r0]
 	ldrb	r2, [r0, #0x2]
@@ -2978,7 +2978,7 @@ debug_sub_8160714:
 	cmp	r0, #0x31
 	ble	._334	@cond_branch
 ._333:
-	ldr	r1, ._336
+	ldr	r1, ._336       @ ContestStatsText_GoldPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0xe
@@ -2990,7 +2990,7 @@ debug_sub_8160714:
 ._334:
 	cmp	r7, #0x4
 	bne	._338	@cond_branch
-	ldr	r1, ._340
+	ldr	r1, ._340       @ ContestStatsText_WhitePokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0xd
@@ -3026,7 +3026,7 @@ debug_sub_8160714:
 	cmp	r4, #0x4
 	bne	._346	@cond_branch
 ._345:
-	ldr	r1, ._348
+	ldr	r1, ._348       @ ContestStatsText_BlackPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0xc
@@ -3038,7 +3038,7 @@ debug_sub_8160714:
 ._346:
 	cmp	r7, #0x3
 	bne	._350	@cond_branch
-	ldr	r1, ._352
+	ldr	r1, ._352       @ ContestStatsText_GrayPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0xb
@@ -3091,7 +3091,7 @@ debug_sub_8160714:
 ._360:
 	cmp	r2, #0
 	bne	._361	@cond_branch
-	ldr	r1, ._363
+	ldr	r1, ._363       @ ContestStatsText_PurplePokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x6
@@ -3103,7 +3103,7 @@ debug_sub_8160714:
 ._361:
 	cmp	r2, #0x1
 	bne	._365	@cond_branch
-	ldr	r1, ._367
+	ldr	r1, ._367       @ ContestStatsText_IndigoPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x7
@@ -3115,7 +3115,7 @@ debug_sub_8160714:
 ._365:
 	cmp	r2, #0x2
 	bne	._369	@cond_branch
-	ldr	r1, ._371
+	ldr	r1, ._371       @ ContestStatsText_BrownPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x8
@@ -3127,7 +3127,7 @@ debug_sub_8160714:
 ._369:
 	cmp	r2, #0x3
 	bne	._373	@cond_branch
-	ldr	r1, ._375
+	ldr	r1, ._375       @ ContestStatsText_LiteBluePokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x9
@@ -3139,7 +3139,7 @@ debug_sub_8160714:
 ._373:
 	cmp	r2, #0x4
 	bne	._377	@cond_branch
-	ldr	r1, ._379
+	ldr	r1, ._379       @ ContestStatsText_OlivePokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0xa
@@ -3160,7 +3160,7 @@ debug_sub_8160714:
 	ldsh	r0, [r0, r1]
 	cmp	r0, #0
 	beq	._383	@cond_branch
-	ldr	r1, ._385
+	ldr	r1, ._385       @ ContestStatsText_RedPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x1
@@ -3174,7 +3174,7 @@ debug_sub_8160714:
 	ldrh	r0, [r0, #0x2]
 	cmp	r0, #0
 	beq	._387	@cond_branch
-	ldr	r1, ._389
+	ldr	r1, ._389       @ ContestStatsText_BluePokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x2
@@ -3189,7 +3189,7 @@ debug_sub_8160714:
 	ldsh	r0, [r0, r4]
 	cmp	r0, #0
 	beq	._391	@cond_branch
-	ldr	r1, ._393
+	ldr	r1, ._393       @ ContestStatsText_PinkPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x3
@@ -3204,7 +3204,7 @@ debug_sub_8160714:
 	ldsh	r0, [r0, r1]
 	cmp	r0, #0
 	beq	._395	@cond_branch
-	ldr	r1, ._397
+	ldr	r1, ._397       @ ContestStatsText_GreenPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x4
@@ -3219,7 +3219,7 @@ debug_sub_8160714:
 	ldsh	r0, [r0, r4]
 	cmp	r0, #0
 	beq	._399	@cond_branch
-	ldr	r1, ._401
+	ldr	r1, ._401       @ ContestStatsText_YellowPokeBlock
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x5
@@ -3229,7 +3229,7 @@ debug_sub_8160714:
 ._401:
 	.word	ContestStatsText_YellowPokeBlock
 ._399:
-	ldr	r1, ._403
+	ldr	r1, ._403       @ gOtherText_FiveQuestions
 	add	r0, r6, #0
 	bl	StringCopy
 	mov	r0, #0x0
@@ -3393,10 +3393,10 @@ debug_sub_8160A80:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	add	r2, r0, #0
-	ldr	r1, ._422
+	ldr	r1, ._422       @ _nakamuraStatic18
 	cmp	r0, #0
 	bne	._420	@cond_branch
-	ldr	r4, ._422 + 4
+	ldr	r4, ._422 + 4   @ gStringVar1
 	ldrb	r1, [r1, #0x1]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3413,7 +3413,7 @@ debug_sub_8160A80:
 ._420:
 	cmp	r0, #0x1
 	bne	._424	@cond_branch
-	ldr	r4, ._426
+	ldr	r4, ._426       @ gStringVar1
 	ldrb	r1, [r1, #0x2]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3429,7 +3429,7 @@ debug_sub_8160A80:
 ._424:
 	cmp	r0, #0x2
 	bne	._428	@cond_branch
-	ldr	r4, ._430
+	ldr	r4, ._430       @ gStringVar1
 	ldrb	r1, [r1, #0x3]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3445,7 +3445,7 @@ debug_sub_8160A80:
 ._428:
 	cmp	r0, #0x3
 	bne	._432	@cond_branch
-	ldr	r4, ._434
+	ldr	r4, ._434       @ gStringVar1
 	ldrb	r1, [r1, #0x4]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3461,7 +3461,7 @@ debug_sub_8160A80:
 ._432:
 	cmp	r0, #0x4
 	bne	._436	@cond_branch
-	ldr	r4, ._438
+	ldr	r4, ._438       @ gStringVar1
 	ldrb	r1, [r1, #0x5]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3477,7 +3477,7 @@ debug_sub_8160A80:
 ._436:
 	cmp	r2, #0x5
 	bne	._440	@cond_branch
-	ldr	r4, ._441
+	ldr	r4, ._441       @ gStringVar1
 	ldrb	r1, [r1, #0x6]
 	add	r0, r4, #0
 	bl	debug_sub_816097C
@@ -3505,7 +3505,7 @@ debug_sub_8160B50:
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
 	add	r4, r1, #0
-	ldr	r2, ._445
+	ldr	r2, ._445       @ _nakamuraStatic18
 	cmp	r0, #0
 	bne	._443	@cond_branch
 	ldrb	r0, [r2, #0x1]
@@ -3560,8 +3560,8 @@ debug_sub_8160B50:
 	thumb_func_start debug_sub_8160BB0
 debug_sub_8160BB0:
 	push	{r4, r5, lr}
-	ldr	r5, ._456
-	ldr	r4, ._456 + 4
+	ldr	r5, ._456       @ gStringVar1
+	ldr	r4, ._456 + 4   @ _nakamuraStatic18
 	add	r0, r5, #0
 	add	r1, r4, #0
 	bl	debug_sub_8160714
@@ -3596,27 +3596,27 @@ debug_sub_8160BE4:
 	mov	r3, #0xf
 	bl	Menu_DrawStdWindowFrame
 	bl	debug_sub_8160BB0
-	ldr	r0, ._459
+	ldr	r0, ._459       @ gContestStatsText_Spicy
 	mov	r1, #0x2
 	mov	r2, #0x3
 	bl	Menu_PrintText
-	ldr	r0, ._459 + 4
+	ldr	r0, ._459 + 4   @ gContestStatsText_Dry
 	mov	r1, #0x2
 	mov	r2, #0x5
 	bl	Menu_PrintText
-	ldr	r0, ._459 + 8
+	ldr	r0, ._459 + 8   @ gContestStatsText_Sweet
 	mov	r1, #0x2
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r0, ._459 + 12
+	ldr	r0, ._459 + 12  @ gContestStatsText_Bitter
 	mov	r1, #0x2
 	mov	r2, #0x9
 	bl	Menu_PrintText
-	ldr	r0, ._459 + 16
+	ldr	r0, ._459 + 16  @ gContestStatsText_Sour
 	mov	r1, #0x2
 	mov	r2, #0xb
 	bl	Menu_PrintText
-	ldr	r0, ._459 + 20
+	ldr	r0, ._459 + 20  @ gContestStatsText_Tasty
 	mov	r1, #0x2
 	mov	r2, #0xd
 	bl	Menu_PrintText
@@ -3657,7 +3657,7 @@ debug_sub_8160BE4:
 	thumb_func_start debug_sub_8160C7C
 debug_sub_8160C7C:
 	push	{r4, lr}
-	ldr	r2, ._469
+	ldr	r2, ._469       @ _nakamuraStatic18
 	mov	r1, #0x0
 	ldrb	r0, [r2]
 	cmp	r0, #0xc
@@ -3727,7 +3727,7 @@ debug_sub_8160C7C:
 	thumb_func_start debug_sub_8160CF4
 debug_sub_8160CF4:
 	push	{lr}
-	ldr	r2, ._473
+	ldr	r2, ._473       @ gMain
 	ldrh	r1, [r2, #0x30]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -3820,8 +3820,8 @@ debug_sub_8160D98:
 	mov	r3, #0x13
 	bl	Menu_EraseWindowRect
 	bl	debug_sub_8160BE4
-	ldr	r1, ._485
-	ldr	r0, ._485 + 4
+	ldr	r1, ._485       @ gMenuCallback
+	ldr	r0, ._485 + 4   @ debug_sub_8160CF4
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -3842,39 +3842,39 @@ debug_sub_8160DC0:
 	mov	r2, #0x16
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._487
+	ldr	r0, ._487       @ gOtherText_Slash
 	mov	r1, #0xb
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 4
+	ldr	r0, ._487 + 4   @ Str_843E5F2
 	mov	r1, #0x2
 	mov	r2, #0x3
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 8
+	ldr	r0, ._487 + 8   @ Str_843E5FB
 	mov	r1, #0x2
 	mov	r2, #0x5
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 12
+	ldr	r0, ._487 + 12  @ Str_843E606
 	mov	r1, #0x2
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 16
+	ldr	r0, ._487 + 16  @ Str_843E611
 	mov	r1, #0x2
 	mov	r2, #0x9
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 20
+	ldr	r0, ._487 + 20  @ Str_843E61C
 	mov	r1, #0x2
 	mov	r2, #0xb
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 24
+	ldr	r0, ._487 + 24  @ Str_843E627
 	mov	r1, #0x2
 	mov	r2, #0xd
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 28
+	ldr	r0, ._487 + 28  @ Str_843E637
 	mov	r1, #0x2
 	mov	r2, #0xf
 	bl	Menu_PrintText
-	ldr	r0, ._487 + 32
+	ldr	r0, ._487 + 32  @ Str_843E632
 	mov	r1, #0x2
 	mov	r2, #0x11
 	bl	Menu_PrintText
@@ -3904,7 +3904,7 @@ debug_sub_8160E50:
 	mov	r2, #0xa
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r5, ._489
+	ldr	r5, ._489       @ gStringVar1
 	add	r0, r6, #0
 	mov	r1, #0x2
 	add	r2, r5, #0
@@ -3923,7 +3923,7 @@ debug_sub_8160E50:
 	bl	GetMonData
 	mov	r1, #0xb
 	mul	r0, r0, r1
-	ldr	r1, ._489 + 4
+	ldr	r1, ._489 + 4   @ gSpeciesNames
 	add	r0, r0, r1
 	mov	r1, #0xc
 	mov	r2, #0x1
@@ -4110,7 +4110,7 @@ debug_sub_8161028:
 	neg	r0, r0
 	cmp	r1, r0
 	bne	._491	@cond_branch
-	ldr	r0, ._496
+	ldr	r0, ._496       @ _nakamuraData5
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	bne	._492	@cond_branch
@@ -4120,7 +4120,7 @@ debug_sub_8161028:
 	asr	r4, r0, #0x10
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, ._496 + 4
+	ldr	r1, ._496 + 4   @ gPlayerParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -4132,7 +4132,7 @@ debug_sub_8161028:
 	cmp	r0, #0
 	bge	._494	@cond_branch
 ._492:
-	ldr	r1, ._496
+	ldr	r1, ._496       @ _nakamuraData5
 	ldrb	r0, [r1]
 	add	r0, r0, r6
 	strb	r0, [r1]
@@ -4145,7 +4145,7 @@ debug_sub_8161028:
 ._491:
 	cmp	r1, #0x1
 	bne	._506	@cond_branch
-	ldr	r4, ._501
+	ldr	r4, ._501       @ _nakamuraData5
 	ldrb	r0, [r4]
 	add	r0, r0, r6
 	strb	r0, [r4]
@@ -4160,7 +4160,7 @@ debug_sub_8161028:
 ._501:
 	.word	_nakamuraData5
 ._493:
-	ldr	r0, ._504
+	ldr	r0, ._504       @ _nakamuraData5
 	strb	r5, [r0]
 	b	._506
 ._505:
@@ -4171,7 +4171,7 @@ debug_sub_8161028:
 	ldrb	r1, [r4]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._507
+	ldr	r1, ._507       @ gPlayerParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -4193,7 +4193,7 @@ debug_sub_8161028:
 	thumb_func_start debug_sub_81610BC
 debug_sub_81610BC:
 	push	{lr}
-	ldr	r0, ._511
+	ldr	r0, ._511       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
@@ -4214,11 +4214,11 @@ debug_sub_81610BC:
 	mov	r0, #0x1
 ._510:
 	bl	debug_sub_8161028
-	ldr	r0, ._515
+	ldr	r0, ._515       @ _nakamuraData5
 	ldrb	r1, [r0]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._515 + 4
+	ldr	r1, ._515 + 4   @ gPlayerParty
 	add	r0, r0, r1
 	bl	debug_sub_8160E50
 	mov	r0, #0x0
@@ -4257,14 +4257,14 @@ DebugMenu_EffortValues:
 	mov	r2, #0x1d
 	mov	r3, #0x13
 	bl	Menu_EraseWindowRect
-	ldr	r1, ._519
+	ldr	r1, ._519       @ _nakamuraData5
 	mov	r0, #0x0
 	strb	r0, [r1]
 	bl	debug_sub_8160DC0
-	ldr	r0, ._519 + 4
+	ldr	r0, ._519 + 4   @ gPlayerParty
 	bl	debug_sub_8160E50
-	ldr	r1, ._519 + 8
-	ldr	r0, ._519 + 12
+	ldr	r1, ._519 + 8   @ gMenuCallback
+	ldr	r0, ._519 + 12  @ debug_sub_81610BC
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -4285,8 +4285,8 @@ debug_sub_8161160:
 	mov	r7, r8
 	push	{r7}
 	mov	r7, #0x0
-	ldr	r2, ._523
-	ldr	r1, ._523 + 4
+	ldr	r2, ._523       @ _nakamuraData6
+	ldr	r1, ._523 + 4   @ _nakamuraData8
 	ldrh	r0, [r2]
 	ldrh	r3, [r1]
 	cmp	r0, r3
@@ -4304,11 +4304,11 @@ debug_sub_8161160:
 	ldrh	r5, [r2]
 ._522:
 	mov	r4, #0x0
-	ldr	r0, ._529
+	ldr	r0, ._529       @ _nakamuraDataA
 	ldrh	r0, [r0]
 	cmp	r4, r0
 	bcs	._525	@cond_branch
-	ldr	r0, ._529 + 4
+	ldr	r0, ._529 + 4   @ _nakamuraDataC
 	mov	r8, r0
 ._528:
 	bl	Random
@@ -4328,7 +4328,7 @@ debug_sub_8161160:
 	lsr	r7, r0, #0x10
 ._527:
 	add	r4, r4, #0x1
-	ldr	r0, ._529
+	ldr	r0, ._529       @ _nakamuraDataA
 	ldrh	r0, [r0]
 	cmp	r4, r0
 	bcc	._528	@cond_branch
@@ -4356,31 +4356,31 @@ debug_sub_81611D8:
 	mov	r2, #0xf
 	mov	r3, #0xb
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._531
+	ldr	r0, ._531       @ Str_843E642
 	mov	r1, #0x2
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._531 + 4
+	ldr	r0, ._531 + 4   @ Str_843E647
 	mov	r1, #0x2
 	mov	r2, #0x3
 	bl	Menu_PrintText
-	ldr	r0, ._531 + 8
+	ldr	r0, ._531 + 8   @ Str_843E65A
 	mov	r1, #0x2
 	mov	r2, #0x5
 	bl	Menu_PrintText
-	ldr	r0, ._531 + 12
+	ldr	r0, ._531 + 12  @ Str_843E64C
 	mov	r1, #0x2
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r0, ._531 + 16
+	ldr	r0, ._531 + 16  @ Str_843E651
 	mov	r1, #0x2
 	mov	r2, #0x9
 	bl	Menu_PrintText
-	ldr	r0, ._531 + 20
+	ldr	r0, ._531 + 20  @ Str_843E655
 	mov	r1, #0xd
 	mov	r2, #0x9
 	bl	Menu_PrintText
-	ldr	r4, ._531 + 24
+	ldr	r4, ._531 + 24  @ Str_843E658
 	add	r0, r4, #0
 	mov	r1, #0xc
 	mov	r2, #0x1
@@ -4433,7 +4433,7 @@ debug_sub_8161290:
 	add	r1, r0, #0
 	lsl	r1, r1, #0x10
 	lsr	r1, r1, #0x10
-	ldr	r4, ._533
+	ldr	r4, ._533       @ gStringVar1
 	add	r0, r4, #0
 	mov	r2, #0x1
 	mov	r3, #0x5
@@ -4463,7 +4463,7 @@ debug_sub_81612B8:
 	ldrh	r2, [r0]
 	add	r1, r1, r2
 	strh	r1, [r0]
-	ldr	r5, ._535
+	ldr	r5, ._535       @ gStringVar1
 	ldrh	r1, [r0]
 	add	r0, r5, #0
 	mov	r2, #0x1
@@ -4486,7 +4486,7 @@ debug_sub_81612B8:
 	thumb_func_start debug_sub_81612EC
 debug_sub_81612EC:
 	push	{r4, r5, lr}
-	ldr	r2, ._540
+	ldr	r2, ._540       @ gMain
 	ldrh	r1, [r2, #0x2c]
 	mov	r0, #0x80
 	lsl	r0, r0, #0x1
@@ -4529,28 +4529,28 @@ debug_sub_81612EC:
 	asr	r4, r0, #0x18
 	cmp	r4, #0
 	bne	._545	@cond_branch
-	ldr	r0, ._550
+	ldr	r0, ._550       @ _nakamuraData6
 	neg	r1, r5
 	mov	r2, #0x1
 	bl	debug_sub_81612B8
 ._545:
 	cmp	r4, #0x1
 	bne	._546	@cond_branch
-	ldr	r0, ._550 + 4
+	ldr	r0, ._550 + 4   @ _nakamuraData8
 	neg	r1, r5
 	mov	r2, #0x3
 	bl	debug_sub_81612B8
 ._546:
 	cmp	r4, #0x2
 	bne	._547	@cond_branch
-	ldr	r0, ._550 + 8
+	ldr	r0, ._550 + 8   @ _nakamuraDataC
 	neg	r1, r5
 	mov	r2, #0x5
 	bl	debug_sub_81612B8
 ._547:
 	cmp	r4, #0x3
 	bne	._565	@cond_branch
-	ldr	r0, ._550 + 12
+	ldr	r0, ._550 + 12  @ _nakamuraDataA
 	neg	r1, r5
 	mov	r2, #0x7
 	bl	debug_sub_81612B8
@@ -4572,28 +4572,28 @@ debug_sub_81612EC:
 	asr	r4, r0, #0x18
 	cmp	r4, #0
 	bne	._553	@cond_branch
-	ldr	r0, ._558
+	ldr	r0, ._558       @ _nakamuraData6
 	add	r1, r5, #0
 	mov	r2, #0x1
 	bl	debug_sub_81612B8
 ._553:
 	cmp	r4, #0x1
 	bne	._554	@cond_branch
-	ldr	r0, ._558 + 4
+	ldr	r0, ._558 + 4   @ _nakamuraData8
 	add	r1, r5, #0
 	mov	r2, #0x3
 	bl	debug_sub_81612B8
 ._554:
 	cmp	r4, #0x2
 	bne	._555	@cond_branch
-	ldr	r0, ._558 + 8
+	ldr	r0, ._558 + 8   @ _nakamuraDataC
 	add	r1, r5, #0
 	mov	r2, #0x5
 	bl	debug_sub_81612B8
 ._555:
 	cmp	r4, #0x3
 	bne	._565	@cond_branch
-	ldr	r0, ._558 + 12
+	ldr	r0, ._558 + 12  @ _nakamuraDataA
 	add	r1, r5, #0
 	mov	r2, #0x7
 	bl	debug_sub_81612B8
@@ -4611,7 +4611,7 @@ debug_sub_81612EC:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._560	@cond_branch
-	ldr	r0, ._563
+	ldr	r0, ._563       @ _nakamuraDataC
 	ldrh	r0, [r0]
 	cmp	r0, #0
 	beq	._565	@cond_branch
@@ -4648,14 +4648,14 @@ debug_sub_81612EC:
 	thumb_func_start DebugMenu_RandomNumberTest
 DebugMenu_RandomNumberTest:
 	push	{lr}
-	ldr	r0, ._566
+	ldr	r0, ._566       @ _nakamuraData6
 	mov	r1, #0x0
 	strh	r1, [r0]
-	ldr	r0, ._566 + 4
+	ldr	r0, ._566 + 4   @ _nakamuraData8
 	strh	r1, [r0]
-	ldr	r0, ._566 + 8
+	ldr	r0, ._566 + 8   @ _nakamuraDataC
 	strh	r1, [r0]
-	ldr	r0, ._566 + 12
+	ldr	r0, ._566 + 12  @ _nakamuraDataA
 	strh	r1, [r0]
 	mov	r0, #0x0
 	mov	r1, #0x0
@@ -4663,8 +4663,8 @@ DebugMenu_RandomNumberTest:
 	mov	r3, #0x13
 	bl	Menu_EraseWindowRect
 	bl	debug_sub_81611D8
-	ldr	r1, ._566 + 16
-	ldr	r0, ._566 + 20
+	ldr	r1, ._566 + 16  @ gMenuCallback
+	ldr	r0, ._566 + 20  @ debug_sub_81612EC
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}

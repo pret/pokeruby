@@ -1392,7 +1392,7 @@ _08036AFE:
 sub_8036B0C:
 .syntax divided
 	push	{r4, r5, r6, lr}
-	ldr	r5, ._205
+	ldr	r5, ._205       @ gBattleTypeFlags
 	ldrh	r1, [r5]
 	mov	r0, #0x8
 	and	r0, r0, r1
@@ -1406,13 +1406,13 @@ sub_8036B0C:
 	bne	._199	@cond_branch
 	b	._200
 ._199:
-	ldr	r4, ._205 + 4
-	ldr	r0, ._205 + 8
+	ldr	r4, ._205 + 4   @ 0x2000000
+	ldr	r0, ._205 + 8   @ gActiveBank
 	ldrb	r0, [r0]
 	bl	GetBankIdentity
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x19
-	ldr	r1, ._205 + 12
+	ldr	r1, ._205 + 12  @ 0x160c8
 	add	r0, r0, r1
 	add	r0, r0, r4
 	ldrb	r0, [r0]
@@ -1438,7 +1438,7 @@ sub_8036B0C:
 	.align	2, 0
 ._205:
 	.word	gBattleTypeFlags
-	.word	+0x2000000
+	.word	0x2000000
 	.word	gActiveBank
 	.word	0x160c8
 ._203:
@@ -1455,13 +1455,13 @@ sub_8036B0C:
 ._212:
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, ._214
+	ldr	r1, ._214       @ gEnemyParty
 	add	r0, r0, r1
 	mov	r1, #0x39
 	bl	GetMonData
 	cmp	r0, #0
 	beq	._210	@cond_branch
-	ldr	r1, ._214 + 4
+	ldr	r1, ._214 + 4   @ gBattlePartyID
 	lsl	r0, r6, #0x1
 	add	r0, r0, r1
 	ldrh	r0, [r0]
@@ -1472,8 +1472,8 @@ sub_8036B0C:
 	ldrh	r0, [r0]
 	cmp	r4, r0
 	beq	._210	@cond_branch
-	ldr	r1, ._214 + 8
-	ldr	r2, ._214 + 12
+	ldr	r1, ._214 + 8   @ 0x2000000
+	ldr	r2, ._214 + 12  @ 0x16068
 	add	r0, r6, r2
 	add	r0, r0, r1
 	ldrb	r0, [r0]
@@ -1489,23 +1489,23 @@ sub_8036B0C:
 	cmp	r4, #0x5
 	ble	._212	@cond_branch
 ._211:
-	ldr	r0, ._214 + 16
+	ldr	r0, ._214 + 16  @ gActiveBank
 	ldrb	r0, [r0]
 	bl	GetBankIdentity
-	ldr	r1, ._214 + 8
+	ldr	r1, ._214 + 8   @ 0x2000000
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x19
-	ldr	r3, ._214 + 20
+	ldr	r3, ._214 + 20  @ 0x160c8
 	add	r0, r0, r3
 	add	r0, r0, r1
 	strb	r4, [r0]
 ._201:
-	ldr	r4, ._214 + 16
+	ldr	r4, ._214 + 16  @ gActiveBank
 	ldrb	r0, [r4]
 	bl	GetBankIdentity
-	ldr	r2, ._214 + 8
+	ldr	r2, ._214 + 8   @ 0x2000000
 	ldrb	r1, [r4]
-	ldr	r3, ._214 + 12
+	ldr	r3, ._214 + 12  @ 0x16068
 	add	r1, r1, r3
 	add	r1, r1, r2
 	lsl	r0, r0, #0x18
@@ -1521,12 +1521,12 @@ sub_8036B0C:
 ._214:
 	.word	gEnemyParty
 	.word	gBattlePartyID
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x16068
 	.word	gActiveBank
 	.word	0x160c8
 ._200:
-	ldr	r0, ._218
+	ldr	r0, ._218       @ gUnknown_02023A14
 	ldrb	r1, [r0]
 	mov	r0, #0x20
 	and	r0, r0, r1
@@ -1537,7 +1537,7 @@ sub_8036B0C:
 	cmp	r0, #0
 	bne	._217	@cond_branch
 ._216:
-	ldr	r0, ._218 + 4
+	ldr	r0, ._218 + 4   @ gActiveBank
 	ldrb	r0, [r0]
 	mov	r2, #0x1
 	eor	r2, r2, r0

@@ -19,7 +19,7 @@ TayaDebugMenu_Trend:
 	mov	r2, #0x1e
 	mov	r3, #0xb
 	bl	Menu_DrawStdWindowFrame
-	ldr	r5, ._3
+	ldr	r5, ._3         @ gSaveBlock1
 	mov	r7, #0x0
 	mov	r0, #0x1
 	add r0, r0, sp
@@ -96,8 +96,8 @@ TayaDebugMenu_Trend:
 	lsr	r7, r0, #0x10
 	cmp	r7, #0x4
 	bls	._2	@cond_branch
-	ldr	r1, ._3 + 4
-	ldr	r0, ._3 + 8
+	ldr	r1, ._3 + 4     @ gMenuCallback
+	ldr	r0, ._3 + 8     @ debug_sub_8090808
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x28
@@ -120,7 +120,7 @@ TayaDebugMenu_Trend:
 	thumb_func_start debug_sub_8090808
 debug_sub_8090808:
 	push	{lr}
-	ldr	r0, ._7
+	ldr	r0, ._7         @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x3
 	and	r0, r0, r1
@@ -146,7 +146,7 @@ debug_sub_8090808:
 TayaDebugMenu_TrendR:
 	push	{r4, r5, r6, r7, lr}
 	mov	r0, #0x0
-	ldr	r7, ._11
+	ldr	r7, ._11        @ gSaveBlock1
 ._10:
 	mov	r4, #0x0
 	lsl	r5, r0, #0x3
@@ -221,8 +221,8 @@ debug_sub_809089C:
 	mov	r0, #0x1
 	b	._17
 ._16:
-	ldr	r2, ._19
-	ldr	r0, ._19 + 4
+	ldr	r2, ._19        @ gSpecialVar_0x8004
+	ldr	r0, ._19 + 4    @ gUnknown_Debug_083C4EC0
 	lsl	r1, r1, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
@@ -233,7 +233,7 @@ debug_sub_809089C:
 	cmp	r0, #0x7
 	bhi	._27	@cond_branch
 	lsl	r0, r0, #0x2
-	ldr	r1, ._19 + 8
+	ldr	r1, ._19 + 8    @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -253,17 +253,17 @@ debug_sub_809089C:
 	.word	._29
 	.word	._29
 ._29:
-	ldr	r0, ._30
+	ldr	r0, ._30        @ gSpecialVar_0x8005
 	mov	r1, #0x0
 	strh	r1, [r0]
-	ldr	r0, ._30 + 4
+	ldr	r0, ._30 + 4    @ gSpecialVar_0x8006
 	strh	r1, [r0]
 ._27:
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-	ldr	r1, ._30 + 8
-	ldr	r0, ._30 + 12
+	ldr	r1, ._30 + 8    @ gMenuCallback
+	ldr	r0, ._30 + 12   @ debug_sub_8090880
 	str	r0, [r1]
 ._15:
 	mov	r0, #0x0
@@ -289,7 +289,7 @@ TayaDebugMenu_SimpleText:
 	mov	r2, #0xc
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._32
+	ldr	r3, ._32        @ gUnknown_Debug_083C4EC0
 	mov	r0, #0x1
 	mov	r1, #0x1
 	mov	r2, #0x9
@@ -303,8 +303,8 @@ TayaDebugMenu_SimpleText:
 	mov	r2, #0x1
 	mov	r3, #0x9
 	bl	InitMenu
-	ldr	r1, ._32 + 4
-	ldr	r0, ._32 + 8
+	ldr	r1, ._32 + 4    @ gMenuCallback
+	ldr	r0, ._32 + 8    @ debug_sub_809089C
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -349,11 +349,11 @@ debug_sub_8090984:
 	cmp	r1, #0x6
 	bne	._41	@cond_branch
 	mov	r4, #0x0
-	ldr	r0, ._44
+	ldr	r0, ._44        @ gSaveBlock1
 	add	r1, r0, #2
 	mov	ip, r1
-	ldr	r7, ._44 + 4
-	ldr	r1, ._44 + 8
+	ldr	r7, ._44 + 4    @ gUnknown_Debug_083C4F08
+	ldr	r1, ._44 + 8    @ 0xfffffd94
 	add	r6, r0, r1
 	add	r5, r0, #0
 	add	r5, r5, #0xe
@@ -412,7 +412,7 @@ TayaDebugMenu_OldMan:
 	mov	r2, #0xa
 	mov	r3, #0x11
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._48
+	ldr	r3, ._48        @ gUnknown_Debug_083C4F54
 	mov	r0, #0x1
 	mov	r1, #0x1
 	mov	r2, #0x8
@@ -428,8 +428,8 @@ TayaDebugMenu_OldMan:
 	mov	r2, #0x1
 	mov	r3, #0x8
 	bl	InitMenu
-	ldr	r1, ._48 + 4
-	ldr	r0, ._48 + 8
+	ldr	r1, ._48 + 4    @ gMenuCallback
+	ldr	r0, ._48 + 8    @ debug_sub_8090984
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -458,89 +458,89 @@ TayaDebugMenu_LanettesPC:
 	thumb_func_start TayaDebugMenu_TownFlags
 TayaDebugMenu_TownFlags:
 	push	{lr}
-	ldr	r0, ._50
+	ldr	r0, ._50        @ 0x80f
 	bl	FlagSet
 	mov	r0, #0x81
 	lsl	r0, r0, #0x4
 	bl	FlagSet
-	ldr	r0, ._50 + 4
+	ldr	r0, ._50 + 4    @ 0x811
 	bl	FlagSet
-	ldr	r0, ._50 + 8
+	ldr	r0, ._50 + 8    @ 0x812
 	bl	FlagSet
-	ldr	r0, ._50 + 12
+	ldr	r0, ._50 + 12   @ 0x813
 	bl	FlagSet
-	ldr	r0, ._50 + 16
+	ldr	r0, ._50 + 16   @ 0x814
 	bl	FlagSet
-	ldr	r0, ._50 + 20
+	ldr	r0, ._50 + 20   @ 0x815
 	bl	FlagSet
-	ldr	r0, ._50 + 24
+	ldr	r0, ._50 + 24   @ 0x816
 	bl	FlagSet
-	ldr	r0, ._50 + 28
+	ldr	r0, ._50 + 28   @ 0x817
 	bl	FlagSet
-	ldr	r0, ._50 + 32
+	ldr	r0, ._50 + 32   @ 0x818
 	bl	FlagSet
-	ldr	r0, ._50 + 36
+	ldr	r0, ._50 + 36   @ 0x819
 	bl	FlagSet
-	ldr	r0, ._50 + 40
+	ldr	r0, ._50 + 40   @ 0x81a
 	bl	FlagSet
-	ldr	r0, ._50 + 44
+	ldr	r0, ._50 + 44   @ 0x81b
 	bl	FlagSet
-	ldr	r0, ._50 + 48
+	ldr	r0, ._50 + 48   @ 0x81c
 	bl	FlagSet
-	ldr	r0, ._50 + 52
+	ldr	r0, ._50 + 52   @ 0x81d
 	bl	FlagSet
-	ldr	r0, ._50 + 56
+	ldr	r0, ._50 + 56   @ 0x81e
 	bl	FlagSet
-	ldr	r0, ._50 + 60
+	ldr	r0, ._50 + 60   @ 0x848
 	bl	FlagSet
-	ldr	r0, ._50 + 64
+	ldr	r0, ._50 + 64   @ 0x849
 	bl	FlagSet
-	ldr	r0, ._50 + 68
+	ldr	r0, ._50 + 68   @ 0x84a
 	bl	FlagSet
-	ldr	r0, ._50 + 72
+	ldr	r0, ._50 + 72   @ 0x854
 	bl	FlagSet
-	ldr	r0, ._50 + 76
+	ldr	r0, ._50 + 76   @ 0x855
 	bl	FlagSet
-	ldr	r0, ._50 + 80
+	ldr	r0, ._50 + 80   @ 0x856
 	bl	FlagSet
-	ldr	r0, ._50 + 84
+	ldr	r0, ._50 + 84   @ 0x857
 	bl	FlagSet
-	ldr	r0, ._50 + 88
+	ldr	r0, ._50 + 88   @ 0x858
 	bl	FlagSet
-	ldr	r0, ._50 + 92
+	ldr	r0, ._50 + 92   @ 0x859
 	bl	FlagSet
-	ldr	r0, ._50 + 96
+	ldr	r0, ._50 + 96   @ 0x85a
 	bl	FlagSet
-	ldr	r0, ._50 + 100
+	ldr	r0, ._50 + 100  @ 0x85b
 	bl	FlagSet
-	ldr	r0, ._50 + 104
+	ldr	r0, ._50 + 104  @ 0x85c
 	bl	FlagSet
-	ldr	r0, ._50 + 108
+	ldr	r0, ._50 + 108  @ 0x83c
 	bl	FlagSet
-	ldr	r0, ._50 + 112
+	ldr	r0, ._50 + 112  @ 0x83d
 	bl	FlagSet
-	ldr	r0, ._50 + 116
+	ldr	r0, ._50 + 116  @ 0x83e
 	bl	FlagSet
-	ldr	r0, ._50 + 120
+	ldr	r0, ._50 + 120  @ 0x83f
 	bl	FlagSet
 	mov	r0, #0x84
 	lsl	r0, r0, #0x4
 	bl	FlagSet
-	ldr	r0, ._50 + 124
+	ldr	r0, ._50 + 124  @ 0x841
 	bl	FlagSet
-	ldr	r0, ._50 + 128
+	ldr	r0, ._50 + 128  @ 0x842
 	bl	FlagSet
-	ldr	r0, ._50 + 132
+	ldr	r0, ._50 + 132  @ 0x843
 	bl	FlagSet
-	ldr	r0, ._50 + 136
+	ldr	r0, ._50 + 136  @ 0x844
 	bl	FlagSet
-	ldr	r0, ._50 + 140
+	ldr	r0, ._50 + 140  @ 0x845
 	bl	FlagSet
-	ldr	r0, ._50 + 144
+	ldr	r0, ._50 + 144  @ 0x846
 	bl	FlagSet
-	ldr	r0, ._50 + 148
+	ldr	r0, ._50 + 148  @ 0x847
 	bl	FlagSet
-	ldr	r0, ._50 + 152
+	ldr	r0, ._50 + 152  @ 0x83b
 	bl	FlagSet
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -599,7 +599,7 @@ TayaDebugMenu_AwardARibbon:
 	mov	r1, #0x10
 	mov	r2, #0x0
 	bl	BlendPalettes
-	ldr	r0, ._52
+	ldr	r0, ._52        @ debug_sub_80915BC
 	bl	SetMainCallback2
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -615,7 +615,7 @@ TayaDebugMenu_AwardARibbon:
 	thumb_func_start debug_sub_8090C44
 debug_sub_8090C44:
 	push	{r4, r5, lr}
-	ldr	r4, ._54
+	ldr	r4, ._54        @ gSharedMem
 	sub	r5, r4, #1
 	ldrh	r1, [r5, #0x8]
 	add	r0, r4, #0
@@ -656,14 +656,14 @@ debug_sub_8090C88:
 	add	sp, sp, #0xfffffffc
 	mov	r0, #0x1
 	mov	r8, r0
-	ldr	r2, ._59
+	ldr	r2, ._59        @ gMain
 	ldrh	r1, [r2, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
 	add	r3, r2, #0
 	cmp	r0, #0
 	beq	._57	@cond_branch
-	ldr	r1, ._59 + 4
+	ldr	r1, ._59 + 4    @ gSharedMem
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	beq	._57	@cond_branch
@@ -683,7 +683,7 @@ debug_sub_8090C88:
 	strh	r1, [r7, #0x8]
 	b	._62
 ._79:
-	ldr	r0, ._64
+	ldr	r0, ._64        @ gSharedMem
 	ldrh	r0, [r0, #0x8]
 	bl	SetLotteryNumber16_Unused
 ._78:
@@ -700,7 +700,7 @@ debug_sub_8090C88:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._66	@cond_branch
-	ldr	r1, ._81
+	ldr	r1, ._81        @ gSharedMem
 	ldrb	r0, [r1]
 	cmp	r0, #0x3
 	bls	._67	@cond_branch
@@ -710,10 +710,10 @@ debug_sub_8090C88:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._68	@cond_branch
-	ldr	r0, ._81
+	ldr	r0, ._81        @ gSharedMem
 	ldrh	r1, [r0, #0x8]
 	str	r1, [r0, #0xc]
-	ldr	r1, ._81 + 4
+	ldr	r1, ._81 + 4    @ 0x2710
 	strh	r1, [r0, #0x10]
 	mov	r4, #0x0
 	ldrb	r1, [r0]
@@ -739,7 +739,7 @@ debug_sub_8090C88:
 	ldr	r0, [r7, #0xc]
 	add	r0, r0, r1
 	str	r0, [r7, #0xc]
-	ldr	r1, ._81 + 8
+	ldr	r1, ._81 + 8    @ 0xffff
 	cmp	r0, r1
 	ble	._71	@cond_branch
 	str	r1, [r7, #0xc]
@@ -754,10 +754,10 @@ debug_sub_8090C88:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._73	@cond_branch
-	ldr	r0, ._81
+	ldr	r0, ._81        @ gSharedMem
 	ldrh	r1, [r0, #0x8]
 	str	r1, [r0, #0xc]
-	ldr	r1, ._81 + 4
+	ldr	r1, ._81 + 4    @ 0x2710
 	strh	r1, [r0, #0x10]
 	mov	r4, #0x0
 	ldrb	r1, [r0]
@@ -837,15 +837,15 @@ TayaDebugMenu_PKMNLottery:
 	mov	r3, #0x5
 	bl	Menu_DrawStdWindowFrame
 	bl	RetrieveLotteryNumber
-	ldr	r2, ._83
-	ldr	r0, ._83 + 4
+	ldr	r2, ._83        @ gSharedMem
+	ldr	r0, ._83 + 4    @ gSpecialVar_Result
 	ldrh	r0, [r0]
 	mov	r1, #0x0
 	strh	r0, [r2, #0x8]
 	strb	r1, [r2]
 	bl	debug_sub_8090C44
-	ldr	r1, ._83 + 8
-	ldr	r0, ._83 + 12
+	ldr	r1, ._83 + 8    @ gMenuCallback
+	ldr	r0, ._83 + 12   @ debug_sub_8090C88
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -864,7 +864,7 @@ TayaDebugMenu_PKMNLottery:
 TayaDebugMenu_Trainer:
 	push	{r4, r5, lr}
 	mov	r4, #0x0
-	ldr	r5, ._86
+	ldr	r5, ._86        @ gTrainerEyeTrainers
 ._85:
 	lsl	r0, r4, #0x4
 	add	r0, r0, r5
@@ -875,37 +875,37 @@ TayaDebugMenu_Trainer:
 	lsr	r4, r0, #0x10
 	cmp	r4, #0x37
 	bls	._85	@cond_branch
-	ldr	r0, ._86 + 4
+	ldr	r0, ._86 + 4    @ 0x109
 	bl	SetTrainerFlag
 	mov	r0, #0x85
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 8
+	ldr	r0, ._86 + 8    @ 0x10b
 	bl	SetTrainerFlag
 	mov	r0, #0x86
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 12
+	ldr	r0, ._86 + 12   @ 0x10d
 	bl	SetTrainerFlag
 	mov	r0, #0x87
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 16
+	ldr	r0, ._86 + 16   @ 0x10f
 	bl	SetTrainerFlag
 	mov	r0, #0x88
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 20
+	ldr	r0, ._86 + 20   @ 0x105
 	bl	SetTrainerFlag
 	mov	r0, #0x83
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 24
+	ldr	r0, ._86 + 24   @ 0x107
 	bl	SetTrainerFlag
 	mov	r0, #0x84
 	lsl	r0, r0, #0x1
 	bl	SetTrainerFlag
-	ldr	r0, ._86 + 28
+	ldr	r0, ._86 + 28   @ 0x14f
 	bl	SetTrainerFlag
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -942,9 +942,9 @@ TayaDebugMenu_PokenavD:
 	mov	r1, #0x3
 	mov	r9, r1
 ._93:
-	ldr	r4, ._94
+	ldr	r4, ._94        @ gSharedMem
 	add	r0, r4, #0
-	ldr	r1, ._94 + 4
+	ldr	r1, ._94 + 4    @ gUnknown_Debug_083C4F94
 	bl	StringCopy
 	mov	r5, sl
 	add	r5, r5, #0x1
@@ -990,7 +990,7 @@ TayaDebugMenu_PokenavD:
 	add	r0, r0, #0x19
 	lsl	r0, r0, #0x10
 	lsr	r3, r0, #0x10
-	ldr	r0, ._94 + 8
+	ldr	r0, ._94 + 8    @ 0x19b
 	cmp	r3, r0
 	bls	._89	@cond_branch
 	mov	r3, #0x1
@@ -1004,7 +1004,7 @@ TayaDebugMenu_PokenavD:
 	lsl	r0, r1, #0x2
 	add r0, r0, r8
 	lsl	r0, r0, #0x4
-	ldr	r1, ._94 + 12
+	ldr	r1, ._94 + 12   @ gPokemonStorage
 	add	r0, r0, r1
 	add	r4, r4, r0
 	lsl	r2, r5, #0x18
@@ -1261,9 +1261,9 @@ TayaDebugMenu_8091190:
 	add	r0, r0, #0x1
 	cmp	r3, r0
 	beq	._97	@cond_branch
-	ldr	r2, ._99
-	ldr	r1, ._99 + 4
-	ldr	r0, ._99 + 8
+	ldr	r2, ._99        @ gMenuCallback
+	ldr	r1, ._99 + 4    @ gUnknown_Debug_83C5068
+	ldr	r0, ._99 + 8    @ unk_2030224
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x18
 	asr	r0, r0, #0x18
@@ -1284,9 +1284,9 @@ TayaDebugMenu_8091190:
 	.word	gUnknown_Debug_83C5068
 	.word	unk_2030224
 ._96:
-	ldr	r3, ._107
+	ldr	r3, ._107       @ unk_2030224
 	ldrb	r4, [r3]
-	ldr	r2, ._107 + 4
+	ldr	r2, ._107 + 4   @ gMain
 	ldrh	r1, [r2, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
@@ -1328,7 +1328,7 @@ TayaDebugMenu_8091190:
 	mov	r2, #0xb
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r4, ._107 + 8
+	ldr	r4, ._107 + 8   @ gUnknown_Debug_83C5068
 	mov	r0, #0x0
 	ldrsb	r0, [r5, r0]
 	lsl	r0, r0, #0x3
@@ -1373,7 +1373,7 @@ TayaDebugMenu_8091190:
 InitTayaDebugWindow:
 	push	{lr}
 	add	sp, sp, #0xfffffff8
-	ldr	r1, ._109
+	ldr	r1, ._109       @ unk_2030224
 	mov	r0, #0x0
 	strb	r0, [r1]
 	bl	Menu_EraseScreen
@@ -1382,7 +1382,7 @@ InitTayaDebugWindow:
 	mov	r2, #0xb
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._109 + 4
+	ldr	r0, ._109 + 4   @ gUnknown_Debug_83C5068
 	ldr	r3, [r0]
 	mov	r0, #0x1
 	mov	r1, #0x1
@@ -1397,8 +1397,8 @@ InitTayaDebugWindow:
 	mov	r2, #0x1
 	mov	r3, #0x9
 	bl	InitMenu
-	ldr	r1, ._109 + 8
-	ldr	r0, ._109 + 12
+	ldr	r1, ._109 + 8   @ gMenuCallback
+	ldr	r0, ._109 + 12  @ TayaDebugMenu_8091190
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -1417,7 +1417,7 @@ InitTayaDebugWindow:
 	thumb_func_start debug_sub_80912D8
 debug_sub_80912D8:
 	push	{lr}
-	ldr	r0, ._113
+	ldr	r0, ._113       @ gPaletteFade
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
@@ -1430,7 +1430,7 @@ debug_sub_80912D8:
 ._113:
 	.word	gPaletteFade
 ._111:
-	ldr	r0, ._115
+	ldr	r0, ._115       @ debug_sub_8110F28
 	bl	SetMainCallback2
 	mov	r0, #0x1
 ._112:
@@ -1449,8 +1449,8 @@ debug_sub_8091300:
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-	ldr	r1, ._117
-	ldr	r0, ._117 + 4
+	ldr	r1, ._117       @ gMenuCallback
+	ldr	r0, ._117 + 4   @ debug_sub_80912D8
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -1482,7 +1482,7 @@ debug_sub_8091334:
 	push	{r6, r7}
 	bl	AnimateSprites
 	bl	BuildOamBuffer
-	ldr	r3, ._123
+	ldr	r3, ._123       @ gSharedMem
 	add	r0, r3, #0
 	add	r0, r0, #0x52
 	ldrb	r4, [r0]
@@ -1501,7 +1501,7 @@ debug_sub_8091334:
 	add	r5, r3, #0
 	add	r5, r5, #0x55
 	strb	r4, [r5]
-	ldr	r2, ._131
+	ldr	r2, ._131       @ gMain
 	ldrh	r1, [r2, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -1522,7 +1522,7 @@ debug_sub_8091334:
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x80
 	and	r0, r0, r1
-	ldr	r5, ._131 + 4
+	ldr	r5, ._131 + 4   @ gSharedMem
 	cmp	r0, #0
 	beq	._133	@cond_branch
 	add	r0, r5, #0
@@ -1612,7 +1612,7 @@ debug_sub_8091334:
 	and	r0, r0, r2
 	cmp	r0, #0
 	beq	._142	@cond_branch
-	ldr	r2, ._145
+	ldr	r2, ._145       @ gUnknown_Debug_083C50EC
 	add	r3, r5, #0
 	add	r3, r3, #0x53
 	add	r0, r5, #0
@@ -1661,7 +1661,7 @@ debug_sub_8091334:
 	mov	r1, #0x10
 	mov	r2, #0x0
 	bl	BlendPalettes
-	ldr	r0, ._151
+	ldr	r0, ._151       @ sub_80546F0
 	bl	SetMainCallback2
 	b	._162
 ._152:
@@ -1673,7 +1673,7 @@ debug_sub_8091334:
 	add	r5, r5, #0x55
 	mov	r0, #0x0
 	strb	r0, [r5]
-	ldr	r2, ._159
+	ldr	r2, ._159       @ gMain
 	ldrh	r1, [r2, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
@@ -1704,7 +1704,7 @@ debug_sub_8091334:
 	ldrh	r1, [r2, #0x2e]
 	mov	r0, #0x80
 	and	r0, r0, r1
-	ldr	r5, ._159 + 4
+	ldr	r5, ._159 + 4   @ gSharedMem
 	cmp	r0, #0
 	beq	._156	@cond_branch
 	add	r2, r5, #0
@@ -1748,8 +1748,8 @@ debug_sub_8091334:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._161	@cond_branch
-	ldr	r0, ._164
-	ldr	r1, ._164 + 4
+	ldr	r0, ._164       @ gPlayerParty
+	ldr	r1, ._164 + 4   @ gUnknown_Debug_083C50EC
 	mov	ip, r1
 	mov	r2, #0x53
 	add	r2, r2, r6
@@ -1785,7 +1785,7 @@ debug_sub_8091334:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._162	@cond_branch
-	ldr	r2, ._164 + 4
+	ldr	r2, ._164 + 4   @ gUnknown_Debug_083C50EC
 	add	r0, r6, #0
 	add	r0, r0, #0x53
 	ldrb	r4, [r0]
@@ -1799,7 +1799,7 @@ debug_sub_8091334:
 	ldrh	r0, [r1, #0x4]
 	cmp	r0, #0
 	beq	._163	@cond_branch
-	ldr	r0, ._164
+	ldr	r0, ._164       @ gPlayerParty
 	ldrh	r1, [r1, #0x4]
 	add	r2, r4, r6
 	add	r2, r3, r2
@@ -1828,15 +1828,15 @@ debug_sub_80915BC:
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
-	ldr	r0, ._168
+	ldr	r0, ._168       @ 0x4000010
 	mov	r1, #0x0
 	strh	r1, [r0]
 	add	r0, r0, #0x2
 	strh	r1, [r0]
 	mov	r1, #0x0
-	ldr	r0, ._168 + 4
+	ldr	r0, ._168 + 4   @ gUnknown_Debug_083C50EC
 	mov	r8, r0
-	ldr	r7, ._168 + 8
+	ldr	r7, ._168 + 8   @ gSharedMem
 ._171:
 	mov	r4, #0x0
 	lsl	r0, r1, #0x1
@@ -1849,7 +1849,7 @@ debug_sub_80915BC:
 	ldrh	r1, [r0, #0x4]
 	cmp	r1, #0
 	beq	._166	@cond_branch
-	ldr	r0, ._168 + 12
+	ldr	r0, ._168 + 12  @ gPlayerParty
 	bl	GetMonData
 	add	r1, r4, r5
 	add	r1, r1, r7
@@ -1876,7 +1876,7 @@ debug_sub_80915BC:
 	lsr	r1, r0, #0x18
 	cmp	r1, #0x5
 	bls	._171	@cond_branch
-	ldr	r4, ._172
+	ldr	r4, ._172       @ gWindowTemplate_81E7224
 	add	r0, r4, #0
 	bl	Text_LoadWindowTemplate
 	add	r0, r4, #0
@@ -1887,7 +1887,7 @@ debug_sub_80915BC:
 	mov	r2, #0x1d
 	mov	r3, #0x3
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._172 + 4
+	ldr	r0, ._172 + 4   @ gUnknown_Debug_083C517C
 	mov	r1, #0x1
 	mov	r2, #0x1
 	bl	Menu_PrintText
@@ -1907,7 +1907,7 @@ debug_sub_80915BC:
 	lsl	r2, r2, #0x5
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r2, ._172 + 8
+	ldr	r2, ._172 + 8   @ gSharedMem
 	add	r0, r2, #0
 	add	r0, r0, #0x53
 	mov	r1, #0x0
@@ -1917,9 +1917,9 @@ debug_sub_80915BC:
 	sub	r0, r0, #0x2
 	strb	r1, [r0]
 	bl	debug_sub_80916AC
-	ldr	r0, ._172 + 12
+	ldr	r0, ._172 + 12  @ debug_sub_8091320
 	bl	SetVBlankCallback
-	ldr	r0, ._172 + 16
+	ldr	r0, ._172 + 16  @ debug_sub_8091334
 	bl	SetMainCallback2
 	pop	{r3}
 	mov	r8, r3
@@ -1946,12 +1946,12 @@ debug_sub_80916AC:
 	push	{r5, r6, r7}
 	add	sp, sp, #0xfffffffc
 	mov	r6, #0x0
-	ldr	r0, ._177
+	ldr	r0, ._177       @ gSharedMem
 	mov	sl, r0
 	mov	r1, #0x0
 	mov	r8, r1
 ._182:
-	ldr	r2, ._177 + 4
+	ldr	r2, ._177 + 4   @ gSharedMem
 	mov	r5, #0x0
 	lsl	r0, r6, #0x1
 	mov	r9, r0
@@ -1963,7 +1963,7 @@ debug_sub_80916AC:
 	ldrb	r0, [r0]
 	cmp	r0, r5
 	bne	._175	@cond_branch
-	ldr	r1, ._177 + 8
+	ldr	r1, ._177 + 8   @ gSharedMem
 	ldrb	r0, [r1]
 	cmp	r0, r6
 	bne	._175	@cond_branch
@@ -1986,7 +1986,7 @@ debug_sub_80916AC:
 	add	r4, r1, r6
 	add	r0, r4, r5
 	lsl	r0, r0, #0x3
-	ldr	r1, ._183
+	ldr	r1, ._183       @ gUnknown_Debug_083C50EC
 	add	r0, r0, r1
 	ldr	r1, [r0]
 	add	r0, r2, #0
@@ -1995,7 +1995,7 @@ debug_sub_80916AC:
 	mov	r0, r8
 	strb	r0, [r2]
 	add	r2, r2, #0x1
-	ldr	r7, ._183 + 4
+	ldr	r7, ._183 + 4   @ gSharedMem
 	add	r4, r5, r4
 	add	r4, r4, r7
 	ldrb	r1, [r4]

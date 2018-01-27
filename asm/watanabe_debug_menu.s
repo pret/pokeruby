@@ -55,10 +55,10 @@ debug_80C35DC:
 	mov	r8, r0
 	mov	r2, sp
 	mov	r6, #0x0
-	ldr	r1, ._2
+	ldr	r1, ._2         @ 0x40000d4
 	mov	r5, #0x80
 	lsl	r5, r5, #0x5
-	ldr	r7, ._2 + 4
+	ldr	r7, ._2 + 4     @ 0x81000800
 	mov	r0, #0x81
 	lsl	r0, r0, #0x18
 	mov	ip, r0
@@ -88,7 +88,7 @@ debug_80C35DC:
 	lsl	r3, r3, #0x3
 	mov	r4, #0x0
 	str	r4, [sp, #0x4]
-	ldr	r2, ._2
+	ldr	r2, ._2         @ 0x40000d4
 	mov	r1, r8
 	str	r1, [r2]
 	str	r0, [r2, #0x4]
@@ -116,13 +116,13 @@ debug_80C35DC:
 	bl	ResetSpriteData
 	bl	ResetPaletteFade
 	bl	FreeAllSpritePalettes
-	ldr	r0, ._2 + 8
+	ldr	r0, ._2 + 8     @ stru_83F8828
 	bl	LoadSpriteSheet
-	ldr	r0, ._2 + 12
+	ldr	r0, ._2 + 12    @ stru_83F8838
 	bl	LoadSpritePalette
-	ldr	r0, ._2 + 16
+	ldr	r0, ._2 + 16    @ gWindowTemplate_81E6C3C
 	bl	Text_LoadWindowTemplate
-	ldr	r0, ._2 + 20
+	ldr	r0, ._2 + 20    @ gWindowTemplate_81E6CE4
 	bl	InitMenuWindow
 	add	sp, sp, #0x8
 	pop	{r3}
@@ -157,13 +157,13 @@ debug_80C36F4:
 	thumb_func_start debug_80C370C
 debug_80C370C:
 	push	{lr}
-	ldr	r0, ._6
+	ldr	r0, ._6         @ gPaletteFade
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
 	bne	._4	@cond_branch
-	ldr	r0, ._6 + 4
+	ldr	r0, ._6 + 4     @ debug_80C36F4
 	bl	SetMainCallback2
 	b	._5
 ._7:
@@ -188,7 +188,7 @@ debug_80C373C:
 	lsr	r0, r0, #0x18
 	bl	DestroyTask
 	bl	ScriptContext2_Disable
-	ldr	r0, ._8
+	ldr	r0, ._8         @ sub_80546F0
 	bl	SetMainCallback2
 	pop	{r0}
 	bx	r0
@@ -297,7 +297,7 @@ debug_80C3800:
 	lsl	r2, r2, #0x18
 	lsr	r5, r2, #0x18
 	mov	r3, #0x0
-	ldr	r2, ._18
+	ldr	r2, ._18        @ gSpeciesNames
 	mov	r1, #0x0
 ._14:
 	mov	r7, sp
@@ -371,7 +371,7 @@ debug_80C3878:
 	sub	r0, r1, #1
 	b	._23
 ._22:
-	ldr	r1, ._25
+	ldr	r1, ._25        @ 0x19b
 	b	._28
 ._26:
 	.align	2, 0
@@ -451,7 +451,7 @@ debug_80C38E4:
 	lsr	r5, r5, #0x18
 	lsl	r6, r6, #0x18
 	lsr	r6, r6, #0x18
-	ldr	r1, ._37
+	ldr	r1, ._37        @ gUnknown_Debug_083F7FD4
 	mov	r0, sp
 	mov	r2, #0x2
 	bl	memcpy
@@ -483,7 +483,7 @@ debug_80C38E4:
 	thumb_func_start debug_80C393C
 debug_80C393C:
 	push	{lr}
-	ldr	r1, ._39
+	ldr	r1, ._39        @ gUnknown_Debug_083F7FD6
 	mov	r0, #0x1e
 	bl	ProgramFlashSectorAndVerify
 	pop	{r0}
@@ -498,8 +498,8 @@ debug_80C393C:
 	thumb_func_start InitWatanabeDebugMenu
 InitWatanabeDebugMenu:
 	push	{r4, lr}
-	ldr	r0, ._46
-	ldr	r1, ._46 + 4
+	ldr	r0, ._46        @ gMain
+	ldr	r1, ._46 + 4    @ 0x43c
 	add	r4, r0, r1
 	ldrb	r0, [r4]
 	cmp	r0, #0x1
@@ -541,7 +541,7 @@ InitWatanabeDebugMenu:
 	cmp	r0, #0
 	bne	._51	@cond_branch
 	bl	ScriptContext2_Disable
-	ldr	r0, ._52
+	ldr	r0, ._52        @ sub_80546F0
 	bl	SetMainCallback2
 ._51:
 	pop	{r4}
@@ -559,19 +559,19 @@ InitSizeComparison:
 	push	{r4, lr}
 	add	sp, sp, #0xfffffffc
 	bl	debug_80C35DC
-	ldr	r1, ._54
+	ldr	r1, ._54        @ gReservedSpritePaletteCount
 	mov	r0, #0x1
 	strb	r0, [r1]
-	ldr	r0, ._54 + 4
+	ldr	r0, ._54 + 4    @ gUnknown_Debug_20389EC
 	mov	r1, #0x80
 	lsl	r1, r1, #0x1
 	mov	r2, #0x20
 	bl	LoadPalette
-	ldr	r3, ._54 + 8
+	ldr	r3, ._54 + 8    @ 0x4000208
 	ldrh	r2, [r3]
 	mov	r0, #0x0
 	strh	r0, [r3]
-	ldr	r4, ._54 + 12
+	ldr	r4, ._54 + 12   @ 0x4000200
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	orr	r0, r0, r1
@@ -584,9 +584,9 @@ InitSizeComparison:
 	mov	r2, #0x10
 	mov	r3, #0x0
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._54 + 16
+	ldr	r0, ._54 + 16   @ debug_80C3758
 	bl	SetVBlankCallback
-	ldr	r0, ._54 + 20
+	ldr	r0, ._54 + 20   @ debug_80C370C
 	bl	SetMainCallback2
 	mov	r1, #0x80
 	lsl	r1, r1, #0x13
@@ -594,12 +594,12 @@ InitSizeComparison:
 	lsl	r2, r2, #0x5
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r0, ._54 + 24
+	ldr	r0, ._54 + 24   @ debug_80C3A50
 	mov	r1, #0x0
 	bl	CreateTask
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._54 + 28
+	ldr	r2, ._54 + 28   @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
@@ -634,7 +634,7 @@ debug_80C3A50:
 	add	sp, sp, #0xffffffd8
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r1, ._56
+	ldr	r1, ._56        @ gTasks
 	lsl	r2, r0, #0x2
 	add	r0, r2, r0
 	lsl	r0, r0, #0x3
@@ -649,7 +649,7 @@ debug_80C3A50:
 	str	r2, [sp, #0xc]
 	lsr	r2, r2, #0x10
 	mov	r9, r2
-	ldr	r3, ._56 + 4
+	ldr	r3, ._56 + 4    @ gSaveBlock2
 	mov	r8, r3
 	mov	r0, #0x6
 	mov	r1, #0x0
@@ -661,12 +661,12 @@ debug_80C3A50:
 	mov	r2, #0x5
 	mov	r3, #0x9
 	bl	Menu_DrawStdWindowFrame
-	ldr	r5, ._56 + 8
+	ldr	r5, ._56 + 8    @ gUnknown_Debug_083F7FD6
 	add	r0, r5, #0
 	mov	r1, #0x1
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r4, ._56 + 12
+	ldr	r4, ._56 + 12   @ gUnknown_Debug_083F7FDE
 	add	r0, r4, #0
 	mov	r1, #0x1
 	mov	r2, #0x5
@@ -689,19 +689,19 @@ debug_80C3A50:
 	mov	r2, #0xb
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._56 + 16
+	ldr	r0, ._56 + 16   @ gUnknown_Debug_083F7FE2
 	mov	r1, #0x1
 	mov	r2, #0xb
 	bl	Menu_PrintText
-	ldr	r0, ._56 + 20
+	ldr	r0, ._56 + 20   @ gUnknown_Debug_083F7FED
 	mov	r1, #0x1
 	mov	r2, #0xd
 	bl	Menu_PrintText
-	ldr	r0, ._56 + 24
+	ldr	r0, ._56 + 24   @ gUnknown_Debug_083F7FF6
 	mov	r1, #0x1
 	mov	r2, #0xf
 	bl	Menu_PrintText
-	ldr	r0, ._56 + 28
+	ldr	r0, ._56 + 28   @ gUnknown_Debug_083F8001
 	mov	r1, #0x1
 	mov	r2, #0x11
 	bl	Menu_PrintText
@@ -710,11 +710,11 @@ debug_80C3A50:
 	mov	r2, #0x1d
 	mov	r3, #0xf
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._56 + 32
+	ldr	r0, ._56 + 32   @ gUnknown_Debug_083F800C
 	mov	r1, #0xd
 	mov	r2, #0xb
 	bl	Menu_PrintText
-	ldr	r0, ._56 + 36
+	ldr	r0, ._56 + 36   @ gUnknown_Debug_083F8019
 	mov	r1, #0xd
 	mov	r2, #0xd
 	bl	Menu_PrintText
@@ -723,11 +723,11 @@ debug_80C3A50:
 	mov	r2, #0x1d
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._56 + 40
+	ldr	r0, ._56 + 40   @ gUnknown_Debug_083F8022
 	mov	r1, #0xd
 	mov	r2, #0x11
 	bl	Menu_PrintText
-	ldr	r0, ._56 + 44
+	ldr	r0, ._56 + 44   @ gUnknown_Debug_083F8028
 	mov	r1, #0x18
 	mov	r2, #0x11
 	bl	Menu_PrintText
@@ -751,7 +751,7 @@ debug_80C3A50:
 	lsl	r4, r0, #0x4
 	add	r4, r4, r0
 	lsl	r4, r4, #0x2
-	ldr	r1, ._56 + 48
+	ldr	r1, ._56 + 48   @ gSprites
 	add	r4, r4, r1
 	ldrb	r1, [r4, #0x1]
 	mov	r2, #0x4
@@ -783,7 +783,7 @@ debug_80C3A50:
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	bl	FreeSpritePaletteByTag
-	ldr	r0, ._56 + 52
+	ldr	r0, ._56 + 52   @ gPokedexEntries
 	ldr	r1, [sp, #0x4]
 	lsl	r5, r1, #0x3
 	add	r5, r5, r1
@@ -817,7 +817,7 @@ debug_80C3A50:
 	lsl	r4, r1, #0x4
 	add	r4, r4, r1
 	lsl	r4, r4, #0x2
-	ldr	r2, ._56 + 48
+	ldr	r2, ._56 + 48   @ gSprites
 	add	r4, r4, r2
 	ldrb	r0, [r4, #0x1]
 	mov	r3, sl
@@ -861,14 +861,14 @@ debug_80C3A50:
 	mov	r3, #0x0
 	strh	r3, [r7, #0x18]
 	strh	r3, [r7, #0x1a]
-	ldr	r1, ._56 + 56
-	ldr	r2, ._56 + 60
+	ldr	r1, ._56 + 56   @ 0x4000048
+	ldr	r2, ._56 + 60   @ 0x3f1f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
 	mov	r0, #0x1f
 	strh	r0, [r1]
-	ldr	r2, ._56 + 64
+	ldr	r2, ._56 + 64   @ 0x4000040
 	mov	r3, #0x18
 	ldsh	r1, [r7, r3]
 	lsl	r1, r1, #0x6
@@ -878,22 +878,22 @@ debug_80C3A50:
 	add	r1, r1, #0x78
 	add	r0, r0, r1
 	strh	r0, [r2]
-	ldr	r1, ._56 + 68
-	ldr	r2, ._56 + 72
+	ldr	r1, ._56 + 68   @ 0x4000044
+	ldr	r2, ._56 + 72   @ 0x848
 	add	r0, r2, #0
 	strh	r0, [r1]
 	sub	r1, r1, #0x2
-	ldr	r3, ._56 + 76
+	ldr	r3, ._56 + 76   @ 0x31bf
 	add	r0, r3, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._56 + 80
+	ldr	r2, ._56 + 80   @ 0x14f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0xa
 	mov	r0, #0xe1
 	strh	r0, [r1]
-	ldr	r0, ._56 + 84
+	ldr	r0, ._56 + 84   @ 0x4000052
 	mov	r3, #0x0
 	strh	r3, [r0]
 	add	r1, r1, #0x4
@@ -907,7 +907,7 @@ debug_80C3A50:
 	add	r1, r3, #0
 	orr	r0, r0, r1
 	strh	r0, [r2]
-	ldr	r0, ._56 + 88
+	ldr	r0, ._56 + 88   @ debug_80C3D2C
 	str	r0, [r7]
 	add	sp, sp, #0x28
 	pop	{r3, r4, r5}
@@ -955,7 +955,7 @@ debug_80C3D2C:
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
 	add	r7, r6, #0
-	ldr	r4, ._60
+	ldr	r4, ._60        @ gMain
 	ldrh	r1, [r4, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r1
@@ -970,14 +970,14 @@ debug_80C3D2C:
 	mov	r2, #0x0
 	mov	r3, #0x10
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._60 + 4
+	ldr	r0, ._60 + 4    @ debug_80C370C
 	bl	SetMainCallback2
-	ldr	r1, ._60 + 8
+	ldr	r1, ._60 + 8    @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._60 + 12
+	ldr	r1, ._60 + 12   @ debug_80C373C
 	str	r1, [r0]
 	b	._117
 ._61:
@@ -995,7 +995,7 @@ debug_80C3D2C:
 	beq	._62	@cond_branch
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r1, ._64
+	ldr	r1, ._64        @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
@@ -1015,7 +1015,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._66	@cond_branch
-	ldr	r1, ._70
+	ldr	r1, ._70        @ gTasks
 	lsl	r2, r6, #0x2
 	add	r0, r2, r6
 	lsl	r0, r0, #0x3
@@ -1089,7 +1089,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._80	@cond_branch
-	ldr	r1, ._84
+	ldr	r1, ._84        @ gTasks
 	lsl	r2, r6, #0x2
 	add	r0, r2, r6
 	lsl	r0, r0, #0x3
@@ -1165,7 +1165,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._94	@cond_branch
-	ldr	r0, ._97
+	ldr	r0, ._97        @ gTasks
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
@@ -1192,7 +1192,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._100	@cond_branch
-	ldr	r0, ._103
+	ldr	r0, ._103       @ gTasks
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
@@ -1219,7 +1219,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._106	@cond_branch
-	ldr	r2, ._109
+	ldr	r2, ._109       @ gTasks
 	lsl	r3, r6, #0x2
 	add	r0, r3, r6
 	lsl	r0, r0, #0x3
@@ -1227,7 +1227,7 @@ debug_80C3D2C:
 	ldrh	r4, [r6, #0x8]
 	mov	r0, #0x8
 	ldsh	r1, [r6, r0]
-	ldr	r0, ._109 + 4
+	ldr	r0, ._109 + 4   @ 0x181
 	mov	r8, r2
 	add	r2, r3, #0
 	cmp	r1, r0
@@ -1254,7 +1254,7 @@ debug_80C3D2C:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._112	@cond_branch
-	ldr	r1, ._115
+	ldr	r1, ._115       @ gTasks
 	lsl	r2, r6, #0x2
 	add	r0, r2, r6
 	lsl	r0, r0, #0x3
@@ -1285,7 +1285,7 @@ debug_80C3D2C:
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r5, ._118
+	ldr	r5, ._118       @ gSprites
 	add	r0, r0, r5
 	bl	DestroySprite
 	mov	r0, #0xe
@@ -1295,7 +1295,7 @@ debug_80C3D2C:
 	lsl	r0, r0, #0x2
 	add	r0, r0, r5
 	bl	DestroySprite
-	ldr	r0, ._118 + 4
+	ldr	r0, ._118 + 4   @ debug_80C3A50
 	str	r0, [r4]
 	b	._117
 ._119:
@@ -1304,7 +1304,7 @@ debug_80C3D2C:
 	.word	gSprites
 	.word	debug_80C3A50+1
 ._112:
-	ldr	r0, ._120
+	ldr	r0, ._120       @ gTasks
 	lsl	r5, r7, #0x2
 	add	r5, r5, r7
 	lsl	r5, r5, #0x3
@@ -1327,7 +1327,7 @@ debug_80C3D2C:
 	mov	r2, #0x7
 	mov	r3, #0x4
 	bl	debug_80C68CC
-	ldr	r2, ._120 + 4
+	ldr	r2, ._120 + 4   @ gSprites
 	mov	r8, r2
 	mov	r4, #0xc
 	ldsh	r1, [r5, r4]
@@ -1361,7 +1361,7 @@ debug_80C3D2C:
 	lsl	r0, r0, #0x2
 	add r0, r0, r8
 	strh	r6, [r0, #0x26]
-	ldr	r2, ._120 + 8
+	ldr	r2, ._120 + 8   @ 0x4000040
 	mov	r4, #0x18
 	ldsh	r1, [r5, r4]
 	lsl	r1, r1, #0x6
@@ -1411,7 +1411,7 @@ debug_80C405C:
 	cmp	r5, #0
 	beq	._125	@cond_branch
 	mov	r2, #0x0
-	ldr	r3, ._127
+	ldr	r3, ._127       @ gSpeciesNames
 	mov	r0, #0xb
 	add	r1, r5, #0
 	mul	r1, r1, r0
@@ -1462,7 +1462,7 @@ debug_80C40C4:
 	mov	r0, #0x64
 	add	r1, r5, #0
 	mul	r1, r1, r0
-	ldr	r0, ._132
+	ldr	r0, ._132       @ gEnemyParty
 	add	r4, r1, r0
 	add	r0, r4, #0
 	mov	r1, #0xb
@@ -1488,7 +1488,7 @@ debug_80C40C4:
 	mov	r0, #0x64
 	add	r1, r5, #0
 	mul	r1, r1, r0
-	ldr	r0, ._136
+	ldr	r0, ._136       @ gPlayerParty
 	add	r4, r1, r0
 	add	r0, r4, #0
 	mov	r1, #0xb
@@ -1526,8 +1526,8 @@ debug_80C40C4:
 InitBattleForDebug:
 	push	{lr}
 	bl	SavePlayerParty
-	ldr	r1, ._138
-	ldr	r0, ._138 + 4
+	ldr	r1, ._138       @ gUnknown_Debug_2038A0C
+	ldr	r0, ._138 + 4   @ gSaveBlock2
 	ldrb	r2, [r0, #0x8]
 	mov	r0, #0x0
 	strb	r2, [r1, #0xd]
@@ -1541,13 +1541,13 @@ InitBattleForDebug:
 	strb	r0, [r1, #0x7]
 	strb	r0, [r1, #0x8]
 	strb	r0, [r1, #0xc]
-	ldr	r1, ._138 + 8
+	ldr	r1, ._138 + 8   @ byte_3005E30
 	str	r0, [r1]
 	bl	ZeroPlayerPartyMons
 	bl	ZeroEnemyPartyMons
 	mov	r0, #0x0
 	bl	debug_80C4214
-	ldr	r0, ._138 + 12
+	ldr	r0, ._138 + 12  @ debug_80C47BC
 	mov	r1, #0x0
 	bl	CreateTask
 	pop	{r0}
@@ -1565,7 +1565,7 @@ InitBattleForDebug:
 	thumb_func_start debug_80C41A8
 debug_80C41A8:
 	push	{lr}
-	ldr	r1, ._140
+	ldr	r1, ._140       @ gUnknown_Debug_2038A0C
 	mov	r0, #0x0
 	strb	r0, [r1, #0x1]
 	strb	r0, [r1, #0x2]
@@ -1573,7 +1573,7 @@ debug_80C41A8:
 	bl	ZeroEnemyPartyMons
 	mov	r0, #0x0
 	bl	debug_80C4214
-	ldr	r0, ._140 + 4
+	ldr	r0, ._140 + 4   @ debug_80C47BC
 	mov	r1, #0x0
 	bl	CreateTask
 	pop	{r0}
@@ -1593,7 +1593,7 @@ debug_80C41D4:
 	bl	debug_80C40C4
 	mov	r0, #0x0
 	bl	debug_80C4214
-	ldr	r0, ._142
+	ldr	r0, ._142       @ debug_80C42B8
 	mov	r1, #0x0
 	bl	CreateTask
 	pop	{r0}
@@ -1612,7 +1612,7 @@ debug_80C41F4:
 	bl	debug_80C40C4
 	mov	r0, #0x1
 	bl	debug_80C4214
-	ldr	r0, ._144
+	ldr	r0, ._144       @ debug_80C42B8
 	mov	r1, #0x0
 	bl	CreateTask
 	pop	{r0}
@@ -1628,17 +1628,17 @@ debug_80C41F4:
 debug_80C4214:
 	push	{r4, r5, r6, lr}
 	bl	debug_80C35DC
-	ldr	r6, ._146
+	ldr	r6, ._146       @ 0x4000040
 	mov	r4, #0x0
 	strh	r4, [r6]
-	ldr	r5, ._146 + 4
+	ldr	r5, ._146 + 4   @ 0x4000044
 	strh	r4, [r5]
-	ldr	r0, ._146 + 8
+	ldr	r0, ._146 + 8   @ 0x4000042
 	strh	r4, [r0]
 	add	r0, r0, #0x4
 	strh	r4, [r0]
-	ldr	r1, ._146 + 12
-	ldr	r2, ._146 + 16
+	ldr	r1, ._146 + 12  @ 0x4000048
+	ldr	r2, ._146 + 16  @ 0x1111
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
@@ -1647,33 +1647,33 @@ debug_80C4214:
 	add	r1, r1, #0x6
 	mov	r0, #0xe1
 	strh	r0, [r1]
-	ldr	r0, ._146 + 20
+	ldr	r0, ._146 + 20  @ 0x4000052
 	strh	r4, [r0]
 	add	r1, r1, #0x4
 	mov	r0, #0x7
 	strh	r0, [r1]
-	ldr	r3, ._146 + 24
+	ldr	r3, ._146 + 24  @ 0x4000208
 	ldrh	r2, [r3]
 	strh	r4, [r3]
-	ldr	r4, ._146 + 28
+	ldr	r4, ._146 + 28  @ 0x4000200
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	orr	r0, r0, r1
 	strh	r0, [r4]
 	strh	r2, [r3]
-	ldr	r0, ._146 + 32
+	ldr	r0, ._146 + 32  @ debug_80C3758
 	bl	SetVBlankCallback
-	ldr	r0, ._146 + 36
+	ldr	r0, ._146 + 36  @ debug_80C370C
 	bl	SetMainCallback2
 	mov	r1, #0x80
 	lsl	r1, r1, #0x13
-	ldr	r2, ._146 + 40
+	ldr	r2, ._146 + 40  @ 0x7140
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._146 + 44
+	ldr	r1, ._146 + 44  @ 0x1ef
 	add	r0, r1, #0
 	strh	r0, [r6]
-	ldr	r2, ._146 + 48
+	ldr	r2, ._146 + 48  @ 0x819f
 	add	r0, r2, #0
 	strh	r0, [r5]
 	pop	{r4, r5, r6}
@@ -1704,12 +1704,12 @@ debug_80C42B8:
 	add	sp, sp, #0xffffffe4
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-	ldr	r1, ._150
+	ldr	r1, ._150       @ gUnknown_Debug_083F8194
 	mov	r0, sp
 	mov	r2, #0xc
 	bl	memcpy
 	add	r4, sp, #0xc
-	ldr	r1, ._150 + 4
+	ldr	r1, ._150 + 4   @ gUnknown_Debug_083F81A0
 	add	r0, r4, #0
 	mov	r2, #0xd
 	bl	memcpy
@@ -1728,16 +1728,16 @@ debug_80C42B8:
 	bl	Menu_PrintText
 	bl	debug_80C4694
 	bl	debug_80C4704
-	ldr	r0, ._150 + 8
+	ldr	r0, ._150 + 8   @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._148	@cond_branch
-	ldr	r0, ._150 + 12
+	ldr	r0, ._150 + 12  @ gTasks
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._150 + 16
+	ldr	r0, ._150 + 16  @ debug_80C44EC
 	b	._149
 ._151:
 	.align	2, 0
@@ -1748,12 +1748,12 @@ debug_80C42B8:
 	.word	gTasks
 	.word	debug_80C44EC+1
 ._148:
-	ldr	r0, ._152
+	ldr	r0, ._152       @ gTasks
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._152 + 4
+	ldr	r0, ._152 + 4   @ debug_80C4348
 ._149:
 	str	r0, [r1]
 	add	sp, sp, #0x1c
@@ -1775,7 +1775,7 @@ debug_80C4348:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._154
+	ldr	r0, ._154       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x1]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -1787,20 +1787,20 @@ debug_80C4348:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._154 + 4
-	ldr	r2, ._154 + 8
+	ldr	r1, ._154 + 4   @ 0x4000042
+	ldr	r2, ._154 + 8   @ 0x177
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
 	add	r2, r2, #0x8
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._154 + 12
+	ldr	r1, ._154 + 12  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._154 + 16
+	ldr	r1, ._154 + 16  @ debug_80C43A8
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -1823,7 +1823,7 @@ debug_80C43A8:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r1, ._158
+	ldr	r1, ._158       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r2
@@ -1832,13 +1832,13 @@ debug_80C43A8:
 	beq	._156	@cond_branch
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._158 + 4
+	ldr	r0, ._158 + 4   @ gUnknown_Debug_2038A0C
 	ldrb	r1, [r0, #0x1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._158 + 8
+	ldr	r1, ._158 + 8   @ gPlayerParty
 	add	r0, r0, r1
-	ldr	r1, ._158 + 12
+	ldr	r1, ._158 + 12  @ debug_80C41D4
 	bl	debug_sub_80A433C
 	add	r0, r4, #0
 	bl	DestroyTask
@@ -1855,12 +1855,12 @@ debug_80C43A8:
 	and	r0, r0, r2
 	cmp	r0, #0
 	beq	._160	@cond_branch
-	ldr	r0, ._162
+	ldr	r0, ._162       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._162 + 4
+	ldr	r0, ._162 + 4   @ debug_80C4F48
 	str	r0, [r1]
 	b	._180
 ._163:
@@ -1883,12 +1883,12 @@ debug_80C43A8:
 	bl	PlaySE
 	bl	CalculatePlayerPartyCount
 	bl	CalculateEnemyPartyCount
-	ldr	r0, ._167
+	ldr	r0, ._167       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._167 + 4
+	ldr	r0, ._167 + 4   @ debug_80C4D14
 	str	r0, [r1]
 	b	._180
 ._168:
@@ -1908,12 +1908,12 @@ debug_80C43A8:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r0, ._171
+	ldr	r0, ._171       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._171 + 4
+	ldr	r0, ._171 + 4   @ debug_80C44EC
 	str	r0, [r1]
 	b	._180
 ._172:
@@ -1927,7 +1927,7 @@ debug_80C43A8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._174	@cond_branch
-	ldr	r1, ._176
+	ldr	r1, ._176       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x1]
 	cmp	r0, #0
 	beq	._174	@cond_branch
@@ -1944,14 +1944,14 @@ debug_80C43A8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._180	@cond_branch
-	ldr	r5, ._181
+	ldr	r5, ._181       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r5, #0x1]
 	cmp	r0, #0x4
 	bhi	._180	@cond_branch
 	add	r1, r0, #0
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._181 + 4
+	ldr	r1, ._181 + 4   @ gPlayerParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -1961,12 +1961,12 @@ debug_80C43A8:
 	add	r0, r0, #0x1
 	strb	r0, [r5, #0x1]
 ._175:
-	ldr	r1, ._181 + 8
+	ldr	r1, ._181 + 8   @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._181 + 12
+	ldr	r1, ._181 + 12  @ debug_80C4348
 	str	r1, [r0]
 ._180:
 	add	sp, sp, #0x4
@@ -1990,7 +1990,7 @@ debug_80C44EC:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._183
+	ldr	r0, ._183       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x2]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -2003,20 +2003,20 @@ debug_80C44EC:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._183 + 4
-	ldr	r2, ._183 + 8
+	ldr	r1, ._183 + 4   @ 0x4000042
+	ldr	r2, ._183 + 8   @ 0x79ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._183 + 12
+	ldr	r2, ._183 + 12  @ 0x17f
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._183 + 16
+	ldr	r1, ._183 + 16  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._183 + 20
+	ldr	r1, ._183 + 20  @ debug_80C4550
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -2040,7 +2040,7 @@ debug_80C4550:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r1, ._187
+	ldr	r1, ._187       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r2
@@ -2049,13 +2049,13 @@ debug_80C4550:
 	beq	._185	@cond_branch
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._187 + 4
+	ldr	r0, ._187 + 4   @ gUnknown_Debug_2038A0C
 	ldrb	r1, [r0, #0x2]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._187 + 8
+	ldr	r1, ._187 + 8   @ gEnemyParty
 	add	r0, r0, r1
-	ldr	r1, ._187 + 12
+	ldr	r1, ._187 + 12  @ debug_80C41F4
 	bl	debug_sub_80A433C
 	add	r0, r4, #0
 	bl	DestroyTask
@@ -2072,12 +2072,12 @@ debug_80C4550:
 	and	r0, r0, r2
 	cmp	r0, #0
 	beq	._189	@cond_branch
-	ldr	r0, ._191
+	ldr	r0, ._191       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._191 + 4
+	ldr	r0, ._191 + 4   @ debug_80C4F48
 	str	r0, [r1]
 	b	._209
 ._192:
@@ -2100,12 +2100,12 @@ debug_80C4550:
 	bl	PlaySE
 	bl	CalculatePlayerPartyCount
 	bl	CalculateEnemyPartyCount
-	ldr	r0, ._196
+	ldr	r0, ._196       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._196 + 4
+	ldr	r0, ._196 + 4   @ debug_80C4D14
 	str	r0, [r1]
 	b	._209
 ._197:
@@ -2125,12 +2125,12 @@ debug_80C4550:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r0, ._200
+	ldr	r0, ._200       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._200 + 4
+	ldr	r0, ._200 + 4   @ debug_80C4348
 	str	r0, [r1]
 	b	._209
 ._201:
@@ -2144,7 +2144,7 @@ debug_80C4550:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._203	@cond_branch
-	ldr	r1, ._205
+	ldr	r1, ._205       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x2]
 	cmp	r0, #0
 	beq	._203	@cond_branch
@@ -2161,14 +2161,14 @@ debug_80C4550:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._209	@cond_branch
-	ldr	r5, ._210
+	ldr	r5, ._210       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r5, #0x2]
 	cmp	r0, #0x4
 	bhi	._209	@cond_branch
 	add	r1, r0, #0
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, ._210 + 4
+	ldr	r1, ._210 + 4   @ gEnemyParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -2178,12 +2178,12 @@ debug_80C4550:
 	add	r0, r0, #0x1
 	strb	r0, [r5, #0x2]
 ._204:
-	ldr	r1, ._210 + 8
+	ldr	r1, ._210 + 8   @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._210 + 12
+	ldr	r1, ._210 + 12  @ debug_80C44EC
 	str	r1, [r0]
 ._209:
 	add	sp, sp, #0x4
@@ -2204,7 +2204,7 @@ debug_80C4550:
 debug_80C4694:
 	push	{r4, r5, lr}
 	add	sp, sp, #0xffffffe4
-	ldr	r1, ._213
+	ldr	r1, ._213       @ gUnknown_Debug_083F81AD
 	mov	r0, sp
 	mov	r2, #0xd
 	bl	memcpy
@@ -2222,7 +2222,7 @@ debug_80C4694:
 ._212:
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, ._213 + 4
+	ldr	r1, ._213 + 4   @ gPlayerParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -2260,7 +2260,7 @@ debug_80C4694:
 debug_80C4704:
 	push	{r4, r5, lr}
 	add	sp, sp, #0xffffffe4
-	ldr	r1, ._216
+	ldr	r1, ._216       @ gUnknown_Debug_083F81BA
 	mov	r0, sp
 	mov	r2, #0xd
 	bl	memcpy
@@ -2278,7 +2278,7 @@ debug_80C4704:
 ._215:
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, ._216 + 4
+	ldr	r1, ._216 + 4   @ gEnemyParty
 	add	r0, r0, r1
 	mov	r1, #0xb
 	bl	GetMonData
@@ -2315,7 +2315,7 @@ debug_80C4704:
 	thumb_func_start debug_80C4774
 debug_80C4774:
 	push	{r4, lr}
-	ldr	r0, ._221
+	ldr	r0, ._221       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0xc]
 	sub	r0, r0, #0x1
 	lsl	r0, r0, #0x18
@@ -2323,13 +2323,13 @@ debug_80C4774:
 	mov	r1, #0x64
 	add	r4, r0, #0
 	mul	r4, r4, r1
-	ldr	r0, ._221 + 4
+	ldr	r0, ._221 + 4   @ gPlayerParty
 	add	r0, r4, r0
 	mov	r1, #0xb
 	bl	GetMonData
 	cmp	r0, #0
 	beq	._219	@cond_branch
-	ldr	r0, ._221 + 8
+	ldr	r0, ._221 + 8   @ gEnemyParty
 	add	r0, r4, r0
 	mov	r1, #0xb
 	bl	GetMonData
@@ -2358,22 +2358,22 @@ debug_80C47BC:
 	add	sp, sp, #0xffffffc0
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-	ldr	r1, ._224
+	ldr	r1, ._224       @ gUnknown_Debug_083F81C7
 	mov	r0, sp
 	mov	r2, #0xf
 	bl	memcpy
 	add	r4, sp, #0x10
-	ldr	r1, ._224 + 4
+	ldr	r1, ._224 + 4   @ gUnknown_Debug_083F81A0
 	add	r0, r4, #0
 	mov	r2, #0xd
 	bl	memcpy
 	add	r6, sp, #0x20
-	ldr	r1, ._224 + 8
+	ldr	r1, ._224 + 8   @ gUnknown_Debug_083F81D6
 	add	r0, r6, #0
 	mov	r2, #0xf
 	bl	memcpy
 	add	r5, sp, #0x30
-	ldr	r1, ._224 + 12
+	ldr	r1, ._224 + 12  @ gUnknown_Debug_083F81E5
 	add	r0, r5, #0
 	mov	r2, #0x10
 	bl	memcpy
@@ -2400,7 +2400,7 @@ debug_80C47BC:
 	mov	r2, #0x1
 	bl	Menu_PrintText
 	mov	r4, #0x0
-	ldr	r6, ._224 + 16
+	ldr	r6, ._224 + 16  @ gUnknown_Debug_083F8068
 ._223:
 	lsl	r0, r4, #0x3
 	add	r0, r0, r6
@@ -2426,15 +2426,15 @@ debug_80C47BC:
 	mov	r1, #0x11
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._224 + 20
+	ldr	r0, ._224 + 20  @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x4]
 	bl	debug_80C4C44
-	ldr	r1, ._224 + 24
+	ldr	r1, ._224 + 24  @ gTasks
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._224 + 28
+	ldr	r1, ._224 + 28  @ debug_80C48A0
 	str	r1, [r0]
 	add	sp, sp, #0x40
 	pop	{r4, r5, r6, r7}
@@ -2461,7 +2461,7 @@ debug_80C48A0:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._226
+	ldr	r0, ._226       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x3]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -2473,20 +2473,20 @@ debug_80C48A0:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._226 + 4
-	ldr	r2, ._226 + 8
+	ldr	r1, ._226 + 4   @ 0x4000042
+	ldr	r2, ._226 + 8   @ 0x177
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
 	add	r2, r2, #0x8
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._226 + 12
+	ldr	r1, ._226 + 12  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._226 + 16
+	ldr	r1, ._226 + 16  @ debug_80C4900
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -2509,7 +2509,7 @@ debug_80C4900:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-	ldr	r1, ._230
+	ldr	r1, ._230       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r2
@@ -2528,24 +2528,24 @@ debug_80C4900:
 	mov	r2, #0x0
 	mov	r3, #0x10
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._230 + 4
+	ldr	r0, ._230 + 4   @ debug_80C370C
 	bl	SetMainCallback2
 	bl	LoadPlayerParty
-	ldr	r1, ._230 + 8
-	ldr	r0, ._230 + 12
+	ldr	r1, ._230 + 8   @ gSaveBlock2
+	ldr	r0, ._230 + 12  @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0xd]
 	strb	r0, [r1, #0x8]
-	ldr	r0, ._230 + 16
+	ldr	r0, ._230 + 16  @ gBattleTypeFlags
 	mov	r1, #0x0
 	strh	r4, [r0]
-	ldr	r0, ._230 + 20
+	ldr	r0, ._230 + 20  @ gUnknown_02023A14_50
 	strb	r1, [r0]
-	ldr	r1, ._230 + 24
+	ldr	r1, ._230 + 24  @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._230 + 28
+	ldr	r1, ._230 + 28  @ debug_80C373C
 	b	._229
 ._231:
 	.align	2, 0
@@ -2570,15 +2570,15 @@ debug_80C4900:
 ._232:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r1, ._236
-	ldr	r3, ._236 + 4
-	ldr	r2, ._236 + 8
+	ldr	r1, ._236       @ gBattleTypeFlags
+	ldr	r3, ._236 + 4   @ gUnknown_Debug_083F8068
+	ldr	r2, ._236 + 8   @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r2, #0x3]
 	lsl	r0, r0, #0x3
 	add	r0, r0, r3
 	ldrb	r0, [r0, #0x4]
 	strh	r0, [r1]
-	ldr	r1, ._236 + 12
+	ldr	r1, ._236 + 12  @ gUnknown_02023A14_50
 	mov	r0, #0x8
 	strb	r0, [r1]
 	ldrb	r0, [r2, #0x3]
@@ -2598,12 +2598,12 @@ debug_80C4900:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r0, ._236 + 16
+	ldr	r0, ._236 + 16  @ gTasks
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._236 + 20
+	ldr	r0, ._236 + 20  @ debug_80C4A60
 	str	r0, [r1]
 	b	._247
 ._237:
@@ -2616,12 +2616,12 @@ debug_80C4900:
 	.word	gTasks
 	.word	debug_80C4A60+1
 ._234:
-	ldr	r0, ._239
+	ldr	r0, ._239       @ gTasks
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._239 + 4
+	ldr	r0, ._239 + 4   @ debug_80C4F48
 	str	r0, [r1]
 	b	._247
 ._240:
@@ -2635,7 +2635,7 @@ debug_80C4900:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._242	@cond_branch
-	ldr	r1, ._244
+	ldr	r1, ._244       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x3]
 	cmp	r0, #0
 	beq	._242	@cond_branch
@@ -2651,19 +2651,19 @@ debug_80C4900:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._247	@cond_branch
-	ldr	r1, ._248
+	ldr	r1, ._248       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x3]
 	cmp	r0, #0x1
 	bhi	._247	@cond_branch
 	add	r0, r0, #0x1
 ._243:
 	strb	r0, [r1, #0x3]
-	ldr	r1, ._248 + 4
+	ldr	r1, ._248 + 4   @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._248 + 8
+	ldr	r1, ._248 + 8   @ debug_80C48A0
 ._229:
 	str	r1, [r0]
 ._247:
@@ -2687,7 +2687,7 @@ debug_80C4A60:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._250
+	ldr	r0, ._250       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x5]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -2700,20 +2700,20 @@ debug_80C4A60:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._250 + 4
-	ldr	r2, ._250 + 8
+	ldr	r1, ._250 + 4   @ 0x4000042
+	ldr	r2, ._250 + 8   @ 0x79ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._250 + 12
+	ldr	r2, ._250 + 12  @ 0x17f
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._250 + 16
+	ldr	r1, ._250 + 16  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._250 + 20
+	ldr	r1, ._250 + 20  @ debug_80C4AC4
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -2739,7 +2739,7 @@ debug_80C4AC4:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-	ldr	r7, ._255
+	ldr	r7, ._255       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r7, #0x4]
 	mov	ip, r0
 	ldrb	r5, [r7, #0x5]
@@ -2747,7 +2747,7 @@ debug_80C4AC4:
 	add	r0, r1, r5
 	lsl	r0, r0, #0x18
 	lsr	r1, r0, #0x18
-	ldr	r2, ._255 + 4
+	ldr	r2, ._255 + 4   @ gMain
 	mov	r8, r2
 	ldrh	r2, [r2, #0x2e]
 	mov	r3, #0x1
@@ -2755,18 +2755,18 @@ debug_80C4AC4:
 	add	r4, r7, #0
 	cmp	r3, #0
 	beq	._252	@cond_branch
-	ldr	r0, ._255 + 8
+	ldr	r0, ._255 + 8   @ gUnknown_Debug_083F80D8
 	lsl	r1, r1, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
 	ldr	r1, [r1]
-	ldr	r3, ._255 + 12
+	ldr	r3, ._255 + 12  @ byte_3005E30
 	ldr	r2, [r3]
 	add	r0, r2, #0
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._253	@cond_branch
-	ldr	r0, ._255 + 16
+	ldr	r0, ._255 + 16  @ 0xffff
 	eor	r1, r1, r0
 	and	r2, r2, r1
 	b	._254
@@ -2784,12 +2784,12 @@ debug_80C4AC4:
 	str	r2, [r3]
 	ldrb	r0, [r4, #0x4]
 	bl	debug_80C4C44
-	ldr	r1, ._258
+	ldr	r1, ._258       @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._258 + 4
+	ldr	r1, ._258 + 4   @ debug_80C4A60
 	str	r1, [r0]
 	b	._274
 ._259:
@@ -2810,12 +2810,12 @@ debug_80C4AC4:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r0, ._262
+	ldr	r0, ._262       @ gTasks
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._262 + 4
+	ldr	r0, ._262 + 4   @ debug_80C48A0
 	b	._261
 ._263:
 	.align	2, 0
@@ -2829,12 +2829,12 @@ debug_80C4AC4:
 	beq	._264	@cond_branch
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r1, ._266
+	ldr	r1, ._266       @ gTrainerBattleOpponent
 	mov	r2, #0x80
 	lsl	r2, r2, #0x3
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._266 + 4
+	ldr	r1, ._266 + 4   @ 0x2017000
 	ldrb	r2, [r1, #0x1]
 	mov	r0, #0x11
 	neg	r0, r0
@@ -2848,19 +2848,19 @@ debug_80C4AC4:
 	strb	r4, [r1, #0xa]
 	strb	r4, [r1, #0xb]
 	strb	r4, [r1, #0xc]
-	ldr	r1, ._266 + 8
+	ldr	r1, ._266 + 8   @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._266 + 12
+	ldr	r1, ._266 + 12  @ debug_80C4F48
 	str	r1, [r0]
 	b	._274
 ._267:
 	.align	2, 0
 ._266:
 	.word	gTrainerBattleOpponent
-	.word	+0x2017000
+	.word	0x2017000
 	.word	gTasks
 	.word	debug_80C4F48+1
 ._264:
@@ -2911,12 +2911,12 @@ debug_80C4AC4:
 	ldrb	r0, [r7, #0x4]
 	bl	debug_80C4C44
 ._277:
-	ldr	r0, ._278
+	ldr	r0, ._278       @ gTasks
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._278 + 4
+	ldr	r0, ._278 + 4   @ debug_80C4A60
 ._261:
 	str	r0, [r1]
 ._274:
@@ -2956,12 +2956,12 @@ debug_80C4C44:
 	cmp	r4, #0x9
 	bgt	._280	@cond_branch
 	mov	r3, #0x0
-	ldr	r1, ._288
+	ldr	r1, ._288       @ gUnknown_Debug_083F80D8
 	lsl	r0, r4, #0x3
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	ldrb	r0, [r0]
-	ldr	r7, ._288 + 4
+	ldr	r7, ._288 + 4   @ byte_3005E30
 	mov	r9, r7
 	lsl	r2, r2, #0x1
 	mov	ip, r2
@@ -3057,17 +3057,17 @@ debug_80C4D14:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r1, ._291
+	ldr	r1, ._291       @ gUnknown_Debug_083F81C7
 	mov	r0, sp
 	mov	r2, #0xf
 	bl	memcpy
 	add	r5, sp, #0x10
-	ldr	r1, ._291 + 4
+	ldr	r1, ._291 + 4   @ gUnknown_Debug_083F81F5
 	add	r0, r5, #0
 	mov	r2, #0xd
 	bl	memcpy
 	add	r6, sp, #0x20
-	ldr	r1, ._291 + 8
+	ldr	r1, ._291 + 8   @ gUnknown_Debug_083F8202
 	add	r0, r6, #0
 	mov	r2, #0xf
 	bl	memcpy
@@ -3093,7 +3093,7 @@ debug_80C4D14:
 	mov	r1, #0x2
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._291 + 12
+	ldr	r0, ._291 + 12  @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x6]
 	bl	debug_80C4F00
 	mov	r0, #0xf
@@ -3101,12 +3101,12 @@ debug_80C4D14:
 	mov	r2, #0x1d
 	mov	r3, #0xf
 	bl	Menu_DrawStdWindowFrame
-	ldr	r1, ._291 + 16
+	ldr	r1, ._291 + 16  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._291 + 20
+	ldr	r1, ._291 + 20  @ debug_80C4DB8
 	str	r1, [r0]
 	add	sp, sp, #0x30
 	pop	{r4, r5, r6}
@@ -3131,7 +3131,7 @@ debug_80C4DB8:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._293
+	ldr	r0, ._293       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x7]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -3143,20 +3143,20 @@ debug_80C4DB8:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._293 + 4
-	ldr	r2, ._293 + 8
+	ldr	r1, ._293 + 4   @ 0x4000042
+	ldr	r2, ._293 + 8   @ 0x177
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
 	add	r2, r2, #0x8
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._293 + 12
+	ldr	r1, ._293 + 12  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._293 + 16
+	ldr	r1, ._293 + 16  @ debug_80C4E18
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -3178,24 +3178,24 @@ debug_80C4E18:
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r5, ._297
+	ldr	r5, ._297       @ gUnknown_Debug_2038A0C
 	ldrb	r3, [r5, #0x6]
 	ldrb	r2, [r5, #0x7]
 	add	r0, r3, r2
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-	ldr	r7, ._297 + 4
+	ldr	r7, ._297 + 4   @ gMain
 	ldrh	r1, [r7, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._295	@cond_branch
-	ldr	r0, ._297 + 8
+	ldr	r0, ._297 + 8   @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._297 + 12
+	ldr	r0, ._297 + 12  @ debug_80C42B8
 	b	._296
 ._298:
 	.align	2, 0
@@ -3216,18 +3216,18 @@ debug_80C4E18:
 ._299:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r2, ._302
-	ldr	r1, ._302 + 4
+	ldr	r2, ._302       @ gBattleTerrain
+	ldr	r1, ._302 + 4   @ gUnknown_Debug_083F814C
 	lsl	r0, r6, #0x3
 	add	r0, r0, r1
 	ldrb	r0, [r0, #0x4]
 	strb	r0, [r2]
-	ldr	r1, ._302 + 8
+	ldr	r1, ._302 + 8   @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._302 + 12
+	ldr	r1, ._302 + 12  @ debug_80C5158
 	str	r1, [r0]
 	b	._310
 ._303:
@@ -3280,12 +3280,12 @@ debug_80C4E18:
 	ldrb	r0, [r5, #0x6]
 	bl	debug_80C4F00
 ._313:
-	ldr	r0, ._314
+	ldr	r0, ._314       @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._314 + 4
+	ldr	r0, ._314 + 4   @ debug_80C4DB8
 ._296:
 	str	r0, [r1]
 ._310:
@@ -3311,7 +3311,7 @@ debug_80C4F00:
 	mov	r3, #0xe
 	bl	Menu_BlankWindowRect
 	mov	r4, #0x0
-	ldr	r6, ._318
+	ldr	r6, ._318       @ gUnknown_Debug_083F814C
 ._317:
 	cmp	r4, #0x8
 	bhi	._316	@cond_branch
@@ -3352,28 +3352,28 @@ debug_80C4F48:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r1, ._320
+	ldr	r1, ._320       @ gUnknown_Debug_083F8211
 	mov	r0, sp
 	mov	r2, #0x11
 	bl	memcpy
 	add	r6, sp, #0x14
-	ldr	r1, ._320 + 4
+	ldr	r1, ._320 + 4   @ gUnknown_Debug_083F81A0
 	add	r0, r6, #0
 	mov	r2, #0xd
 	bl	memcpy
 	add	r5, sp, #0x24
-	ldr	r1, ._320 + 8
+	ldr	r1, ._320 + 8   @ gUnknown_Debug_083F8222
 	add	r0, r5, #0
 	mov	r2, #0xd
 	bl	memcpy
 	add	r0, sp, #0x34
 	mov	r9, r0
-	ldr	r1, ._320 + 12
+	ldr	r1, ._320 + 12  @ gUnknown_Debug_083F822F
 	mov	r2, #0x4
 	bl	memcpy
 	add	r0, sp, #0x38
 	mov	r8, r0
-	ldr	r1, ._320 + 16
+	ldr	r1, ._320 + 16  @ gUnknown_Debug_083F8233
 	mov	r2, #0x4
 	bl	memcpy
 	mov	r0, #0x0
@@ -3420,12 +3420,12 @@ debug_80C4F48:
 	mov	r2, #0x1d
 	mov	r3, #0xf
 	bl	Menu_DrawStdWindowFrame
-	ldr	r1, ._320 + 20
+	ldr	r1, ._320 + 20  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._320 + 24
+	ldr	r1, ._320 + 24  @ debug_80C5038
 	str	r1, [r0]
 	add	sp, sp, #0x3c
 	pop	{r3, r4}
@@ -3454,7 +3454,7 @@ debug_80C5038:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-	ldr	r0, ._322
+	ldr	r0, ._322       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x8]
 	lsl	r0, r0, #0x19
 	mov	r1, #0xc0
@@ -3466,20 +3466,20 @@ debug_80C5038:
 	mov	r2, #0x1
 	mov	r3, #0xe
 	bl	debug_80C38E4
-	ldr	r1, ._322 + 4
-	ldr	r2, ._322 + 8
+	ldr	r1, ._322 + 4   @ 0x4000042
+	ldr	r2, ._322 + 8   @ 0x177
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
 	add	r2, r2, #0x8
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._322 + 12
+	ldr	r1, ._322 + 12  @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._322 + 16
+	ldr	r1, ._322 + 16  @ debug_80C5098
 	str	r1, [r0]
 	add	sp, sp, #0x4
 	pop	{r4}
@@ -3501,19 +3501,19 @@ debug_80C5098:
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-	ldr	r1, ._326
+	ldr	r1, ._326       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r2
 	add	r3, r1, #0
 	cmp	r0, #0
 	beq	._324	@cond_branch
-	ldr	r0, ._326 + 4
+	ldr	r0, ._326 + 4   @ gTasks
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._326 + 8
+	ldr	r0, ._326 + 8   @ debug_80C47BC
 	str	r0, [r1]
 	b	._339
 ._327:
@@ -3534,16 +3534,16 @@ debug_80C5098:
 ._328:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r1, ._331
-	ldr	r0, ._331 + 4
+	ldr	r1, ._331       @ gSaveBlock2
+	ldr	r0, ._331 + 4   @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r0, #0x8]
 	strb	r0, [r1, #0x8]
-	ldr	r1, ._331 + 8
+	ldr	r1, ._331 + 8   @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._331 + 12
+	ldr	r1, ._331 + 12  @ debug_80C42B8
 	b	._330
 ._332:
 	.align	2, 0
@@ -3558,7 +3558,7 @@ debug_80C5098:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._334	@cond_branch
-	ldr	r1, ._336
+	ldr	r1, ._336       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x8]
 	cmp	r0, #0
 	beq	._334	@cond_branch
@@ -3574,19 +3574,19 @@ debug_80C5098:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._339	@cond_branch
-	ldr	r1, ._340
+	ldr	r1, ._340       @ gUnknown_Debug_2038A0C
 	ldrb	r0, [r1, #0x8]
 	cmp	r0, #0
 	bne	._339	@cond_branch
 	add	r0, r0, #0x1
 ._335:
 	strb	r0, [r1, #0x8]
-	ldr	r1, ._340 + 4
+	ldr	r1, ._340 + 4   @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._340 + 8
+	ldr	r1, ._340 + 8   @ debug_80C5038
 ._330:
 	str	r1, [r0]
 ._339:
@@ -3606,12 +3606,12 @@ debug_80C5098:
 debug_80C5158:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._342
+	ldr	r2, ._342       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._342 + 4
+	ldr	r0, ._342 + 4   @ debug_80C5174
 	str	r0, [r1]
 	bx	lr
 ._343:
@@ -3626,12 +3626,12 @@ debug_80C5158:
 debug_80C5174:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._344
+	ldr	r2, ._344       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._344 + 4
+	ldr	r0, ._344 + 4   @ debug_80C5190
 	str	r0, [r1]
 	bx	lr
 ._345:
@@ -3646,12 +3646,12 @@ debug_80C5174:
 debug_80C5190:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._346
+	ldr	r2, ._346       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._346 + 4
+	ldr	r0, ._346 + 4   @ debug_80C51AC
 	str	r0, [r1]
 	bx	lr
 ._347:
@@ -3666,12 +3666,12 @@ debug_80C5190:
 debug_80C51AC:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._348
+	ldr	r2, ._348       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._348 + 4
+	ldr	r0, ._348 + 4   @ debug_80C51C8
 	str	r0, [r1]
 	bx	lr
 ._349:
@@ -3686,12 +3686,12 @@ debug_80C51AC:
 debug_80C51C8:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._350
+	ldr	r2, ._350       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._350 + 4
+	ldr	r0, ._350 + 4   @ debug_80C51E4
 	str	r0, [r1]
 	bx	lr
 ._351:
@@ -3706,10 +3706,10 @@ debug_80C51C8:
 debug_80C51E4:
 	push	{lr}
 	bl	sub_80408BC
-	ldr	r0, ._352
-	ldr	r1, ._352 + 4
+	ldr	r0, ._352       @ gMain
+	ldr	r1, ._352 + 4   @ debug_80C41A8
 	str	r1, [r0, #0x8]
-	ldr	r0, ._352 + 8
+	ldr	r0, ._352 + 8   @ unref_sub_800D684
 	bl	SetMainCallback2
 	pop	{r0}
 	bx	r0
@@ -3725,12 +3725,12 @@ debug_80C51E4:
 	thumb_func_start debug_80C5208
 debug_80C5208:
 	push	{r4, r5, r6, lr}
-	ldr	r1, ._355
-	ldr	r0, ._355 + 4
+	ldr	r1, ._355       @ gUnknown_Debug_2038A1C
+	ldr	r0, ._355 + 4   @ 0x2018000
 	str	r0, [r1]
 	mov	r3, #0x0
 	add	r6, r1, #0
-	ldr	r4, ._355 + 8
+	ldr	r4, ._355 + 8   @ gSaveBlock2
 	add	r5, r6, #0
 	mov	r2, #0x0
 ._354:
@@ -3778,7 +3778,7 @@ debug_80C5208:
 	.align	2, 0
 ._355:
 	.word	gUnknown_Debug_2038A1C
-	.word	+0x2018000
+	.word	0x2018000
 	.word	gSaveBlock2
 
 	thumb_func_end debug_80C5208
@@ -3788,12 +3788,12 @@ debug_80C527C:
 	push	{r4, r5, r6, r7, lr}
 	add	r6, r0, #0
 	mov	r5, #0x0
-	ldr	r7, ._359
+	ldr	r7, ._359       @ gPlayerPartyCount
 ._361:
 	mov	r0, #0x64
 	add	r1, r5, #0
 	mul	r1, r1, r0
-	ldr	r0, ._359 + 4
+	ldr	r0, ._359 + 4   @ gPlayerParty
 	add	r4, r1, r0
 	add	r0, r4, #0
 	mov	r1, #0xb
@@ -3820,7 +3820,7 @@ debug_80C527C:
 	lsr	r5, r0, #0x18
 	cmp	r5, #0x5
 	bls	._361	@cond_branch
-	ldr	r0, ._362
+	ldr	r0, ._362       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	bl	SendMonToPC
 	mov	r0, #0x1
@@ -3839,7 +3839,7 @@ debug_80C527C:
 InitCreatePokemon:
 	push	{r4, r5, lr}
 	add	sp, sp, #0xffffffd4
-	ldr	r1, ._364
+	ldr	r1, ._364       @ gUnknown_Debug_083F8733
 	add	r0, sp, #0x4
 	mov	r2, #0x25
 	bl	memcpy
@@ -3852,30 +3852,30 @@ InitCreatePokemon:
 	mov	r2, #0x10
 	mov	r3, #0x0
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._364 + 4
+	ldr	r0, ._364 + 4   @ 0x4000050
 	mov	r5, #0x0
 	strh	r4, [r0]
 	add	r0, r0, #0x2
 	strh	r4, [r0]
 	add	r0, r0, #0x2
 	strh	r4, [r0]
-	ldr	r3, ._364 + 8
+	ldr	r3, ._364 + 8   @ 0x4000208
 	ldrh	r2, [r3]
 	strh	r4, [r3]
-	ldr	r4, ._364 + 12
+	ldr	r4, ._364 + 12  @ 0x4000200
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	orr	r0, r0, r1
 	strh	r0, [r4]
 	strh	r2, [r3]
-	ldr	r2, ._364 + 16
+	ldr	r2, ._364 + 16  @ 0x4000004
 	ldrh	r0, [r2]
 	mov	r1, #0x8
 	orr	r0, r0, r1
 	strh	r0, [r2]
-	ldr	r0, ._364 + 20
+	ldr	r0, ._364 + 20  @ debug_80C3758
 	bl	SetVBlankCallback
-	ldr	r0, ._364 + 24
+	ldr	r0, ._364 + 24  @ debug_80C370C
 	bl	SetMainCallback2
 	mov	r0, #0x0
 	mov	r1, #0x0
@@ -3892,18 +3892,18 @@ InitCreatePokemon:
 	lsl	r2, r2, #0x5
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r0, ._364 + 28
+	ldr	r0, ._364 + 28  @ debug_80C53A4
 	mov	r1, #0x0
 	bl	CreateTask
 	bl	debug_80C5208
-	ldr	r1, ._364 + 32
+	ldr	r1, ._364 + 32  @ gUnknown_Debug_2038A1C
 	ldr	r0, [r1]
 	mov	r2, #0xb4
 	lsl	r2, r2, #0x1
 	add	r0, r0, r2
 	strb	r5, [r0]
 	ldr	r0, [r1]
-	ldr	r1, ._364 + 36
+	ldr	r1, ._364 + 36  @ 0x169
 	add	r0, r0, r1
 	strb	r5, [r0]
 	add	sp, sp, #0x2c
@@ -3930,12 +3930,12 @@ InitCreatePokemon:
 debug_80C53A4:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._366
+	ldr	r2, ._366       @ gTasks
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
 	add	r1, r1, r2
-	ldr	r0, ._366 + 4
+	ldr	r0, ._366 + 4   @ debug_80C53C0
 	str	r0, [r1]
 	bx	lr
 ._367:
@@ -3955,12 +3955,12 @@ debug_80C53C0:
 	bl	debug_80C6384
 	mov	r0, #0x0
 	bl	debug_80C627C
-	ldr	r1, ._368
+	ldr	r1, ._368       @ gTasks
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._368 + 4
+	ldr	r1, ._368 + 4   @ debug_80C53F0
 	str	r1, [r0]
 	pop	{r4}
 	pop	{r0}
@@ -3979,26 +3979,26 @@ debug_80C53F0:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-	ldr	r0, ._372
+	ldr	r0, ._372       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r2, #0x1
 	and	r2, r2, r1
 	add	r4, r0, #0
 	cmp	r2, #0
 	beq	._370	@cond_branch
-	ldr	r0, ._372 + 4
+	ldr	r0, ._372 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r3, [r0]
 	mov	r0, #0xb2
 	lsl	r0, r0, #0x1
 	add	r2, r3, r0
-	ldr	r1, ._372 + 8
+	ldr	r1, ._372 + 8   @ gUnknown_Debug_083F8698
 	mov	r4, #0xb4
 	lsl	r4, r4, #0x1
 	add	r0, r3, r4
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r6, ._372 + 12
+	ldr	r6, ._372 + 12  @ 0x169
 	add	r1, r3, r6
 	ldrb	r1, [r1]
 	ldr	r0, [r0]
@@ -4016,12 +4016,12 @@ debug_80C53F0:
 	mov	r0, #0x0
 	strb	r0, [r1]
 	bl	debug_80C643C
-	ldr	r1, ._372 + 16
+	ldr	r1, ._372 + 16  @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._372 + 20
+	ldr	r1, ._372 + 20  @ debug_80C55E4
 	b	._375
 ._373:
 	.align	2, 0
@@ -4044,14 +4044,14 @@ debug_80C53F0:
 	mov	r2, #0x0
 	mov	r3, #0x10
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._376
+	ldr	r0, ._376       @ debug_80C370C
 	bl	SetMainCallback2
-	ldr	r1, ._376 + 4
+	ldr	r1, ._376 + 4   @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._376 + 8
+	ldr	r1, ._376 + 8   @ debug_80C373C
 	b	._375
 ._377:
 	.align	2, 0
@@ -4067,7 +4067,7 @@ debug_80C53F0:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	debug_80C5FFC
-	ldr	r0, ._381
+	ldr	r0, ._381       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	bl	debug_80C527C
 	add	r4, r0, #0
@@ -4080,7 +4080,7 @@ debug_80C53F0:
 	bl	Menu_DrawStdWindowFrame
 	cmp	r4, #0
 	beq	._379	@cond_branch
-	ldr	r0, ._381 + 4
+	ldr	r0, ._381 + 4   @ gUnknown_Debug_083F872A
 	mov	r1, #0x4
 	mov	r2, #0x9
 	bl	Menu_PrintText
@@ -4091,17 +4091,17 @@ debug_80C53F0:
 	.word	gUnknown_Debug_2038A1C
 	.word	gUnknown_Debug_083F872A
 ._379:
-	ldr	r0, ._384
+	ldr	r0, ._384       @ gUnknown_Debug_083F8720
 	mov	r1, #0x4
 	mov	r2, #0x9
 	bl	Menu_PrintText
 ._380:
-	ldr	r0, ._384 + 4
+	ldr	r0, ._384 + 4   @ gTasks
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._384 + 8
+	ldr	r0, ._384 + 8   @ debug_80C5708
 	str	r0, [r1]
 	b	._400
 ._385:
@@ -4115,7 +4115,7 @@ debug_80C53F0:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._386	@cond_branch
-	ldr	r0, ._388
+	ldr	r0, ._388       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	ldr	r4, [r0, #0x64]
 	lsl	r4, r4, #0x10
@@ -4157,7 +4157,7 @@ debug_80C53F0:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._395	@cond_branch
-	ldr	r2, ._397
+	ldr	r2, ._397       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r2]
 	mov	r6, #0xb4
 	lsl	r6, r6, #0x1
@@ -4168,7 +4168,7 @@ debug_80C53F0:
 	sub	r0, r0, #0x1
 	strb	r0, [r1]
 	ldr	r0, [r2]
-	ldr	r1, ._397 + 4
+	ldr	r1, ._397 + 4   @ 0x169
 	add	r0, r0, r1
 	strb	r3, [r0]
 	b	._396
@@ -4184,7 +4184,7 @@ debug_80C53F0:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._400	@cond_branch
-	ldr	r3, ._401
+	ldr	r3, ._401       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r3]
 	mov	r4, #0xb4
 	lsl	r4, r4, #0x1
@@ -4196,16 +4196,16 @@ debug_80C53F0:
 	mov	r1, #0x0
 	strb	r0, [r2]
 	ldr	r0, [r3]
-	ldr	r6, ._401 + 4
+	ldr	r6, ._401 + 4   @ 0x169
 	add	r0, r0, r6
 	strb	r1, [r0]
 ._396:
-	ldr	r1, ._401 + 8
+	ldr	r1, ._401 + 8   @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._401 + 12
+	ldr	r1, ._401 + 12  @ debug_80C53C0
 ._375:
 	str	r1, [r0]
 ._400:
@@ -4231,8 +4231,8 @@ debug_80C55E4:
 	lsl	r0, r0, #0x18
 	lsr	r3, r0, #0x18
 	add	r6, r3, #0
-	ldr	r1, ._405
-	ldr	r2, ._405 + 4
+	ldr	r1, ._405       @ gUnknown_Debug_083F8698
+	ldr	r2, ._405 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r0, [r2]
 	mov	ip, r0
 	mov	r0, #0xb4
@@ -4241,14 +4241,14 @@ debug_80C55E4:
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._405 + 8
+	ldr	r1, ._405 + 8   @ 0x169
 	add r1, r1, ip
 	ldrb	r1, [r1]
 	ldr	r0, [r0]
 	add	r0, r0, r1
 	ldrb	r5, [r0]
 	add	r7, r5, #0
-	ldr	r1, ._405 + 12
+	ldr	r1, ._405 + 12  @ gMain
 	ldrh	r4, [r1, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r4
@@ -4256,12 +4256,12 @@ debug_80C55E4:
 	add	r2, r1, #0
 	cmp	r0, #0
 	beq	._403	@cond_branch
-	ldr	r0, ._405 + 16
+	ldr	r0, ._405 + 16  @ gTasks
 	lsl	r1, r3, #0x2
 	add	r1, r1, r3
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._405 + 20
+	ldr	r0, ._405 + 20  @ debug_80C53C0
 	str	r0, [r1]
 	b	._422
 ._406:
@@ -4287,12 +4287,12 @@ debug_80C55E4:
 	add r1, r1, ip
 	ldr	r1, [r1]
 	str	r1, [r0]
-	ldr	r1, ._409
+	ldr	r1, ._409       @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._409 + 4
+	ldr	r1, ._409 + 4   @ debug_80C53C0
 	str	r1, [r0]
 	b	._422
 ._410:
@@ -4319,7 +4319,7 @@ debug_80C55E4:
 	bl	debug_80C643C
 	b	._422
 ._413:
-	ldr	r0, ._419
+	ldr	r0, ._419       @ gUnknown_Debug_083F8554
 	lsl	r1, r7, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
@@ -4380,18 +4380,18 @@ debug_80C5708:
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-	ldr	r0, ._424
+	ldr	r0, ._424       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._423	@cond_branch
-	ldr	r0, ._424 + 4
+	ldr	r0, ._424 + 4   @ gTasks
 	lsl	r1, r2, #0x2
 	add	r1, r1, r2
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._424 + 8
+	ldr	r0, ._424 + 8   @ debug_80C53C0
 	str	r0, [r1]
 ._423:
 	pop	{r0}
@@ -4419,11 +4419,11 @@ debug_80C5738:
 	mov	r8, r2
 	cmp	r4, #0xfe
 	bne	._426	@cond_branch
-	ldr	r1, ._428
+	ldr	r1, ._428       @ gUnknown_Debug_083F850A
 	mov	r2, #0x7
 	bl	debug_80C689C
 	add	r0, r6, #7
-	ldr	r7, ._428 + 4
+	ldr	r7, ._428 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r1, [r7]
 	add	r1, r1, #0xf0
 	ldr	r1, [r1]
@@ -4435,7 +4435,7 @@ debug_80C5738:
 	strb	r4, [r6, #0x14]
 	add	r0, r6, #0
 	add	r0, r0, #0x15
-	ldr	r1, ._428 + 8
+	ldr	r1, ._428 + 8   @ gUnknown_Debug_083F8514
 	mov	r2, #0x7
 	bl	debug_80C689C
 	add	r0, r6, #0
@@ -4452,7 +4452,7 @@ debug_80C5738:
 	add	r0, r0, #0x1
 	strb	r4, [r0]
 	add	r0, r0, #0x1
-	ldr	r1, ._428 + 12
+	ldr	r1, ._428 + 12  @ gUnknown_Debug_083F851C
 	mov	r2, #0x9
 	bl	debug_80C689C
 	add	r0, r6, #0
@@ -4475,13 +4475,13 @@ debug_80C5738:
 ._426:
 	cmp	r4, #0xfd
 	bne	._430	@cond_branch
-	ldr	r1, ._432
+	ldr	r1, ._432       @ gUnknown_Debug_083F8524
 	add	r0, r6, #0
 	mov	r2, #0x9
 	bl	debug_80C689C
 	add	r0, r6, #0
 	add	r0, r0, #0x9
-	ldr	r7, ._432 + 4
+	ldr	r7, ._432 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r1, [r7]
 	add	r1, r1, #0xfc
 	ldr	r1, [r1]
@@ -4493,7 +4493,7 @@ debug_80C5738:
 	strb	r4, [r6, #0x16]
 	add	r0, r6, #0
 	add	r0, r0, #0x17
-	ldr	r1, ._432 + 8
+	ldr	r1, ._432 + 8   @ gUnknown_Debug_083F852D
 	mov	r2, #0x9
 	bl	debug_80C689C
 	add	r0, r6, #0
@@ -4512,7 +4512,7 @@ debug_80C5738:
 	add	r0, r0, #0x1
 	strb	r4, [r0]
 	add	r0, r0, #0x1
-	ldr	r1, ._432 + 12
+	ldr	r1, ._432 + 12  @ gUnknown_Debug_083F8537
 	mov	r2, #0x9
 	bl	debug_80C689C
 	add	r0, r6, #0
@@ -4541,7 +4541,7 @@ debug_80C5738:
 	lsr	r1, r0, #0x10
 	cmp	r1, #0xb
 	bls	._434	@cond_branch
-	ldr	r0, ._437
+	ldr	r0, ._437       @ gUnknown_Debug_083F8554
 	add	r0, r5, r0
 	ldr	r1, [r0]
 	add	r0, r6, #0
@@ -4557,7 +4557,7 @@ debug_80C5738:
 	lsr	r1, r0, #0x10
 	cmp	r1, #0xff
 	bls	._435	@cond_branch
-	ldr	r0, ._437
+	ldr	r0, ._437       @ gUnknown_Debug_083F8554
 	add	r0, r0, #0x4
 	add	r0, r5, r0
 	ldr	r0, [r0]
@@ -4567,7 +4567,7 @@ debug_80C5738:
 	cmp	r4, #0x22
 	bhi	._436	@cond_branch
 	lsl	r0, r4, #0x2
-	ldr	r1, ._437 + 4
+	ldr	r1, ._437 + 4   @ 
 	add	r1, r0, r1
 	ldr	r1, [r1]
 	add	r7, r0, #0
@@ -4620,7 +4620,7 @@ debug_80C5738:
 ._440:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._477
+	ldr	r1, ._477       @ gUnknown_Debug_2038A1C
 	mov	r9, r1
 	ldr	r1, [r1]
 	add	r1, r1, #0x64
@@ -4650,7 +4650,7 @@ debug_80C5738:
 	lsr	r0, r0, #0x10
 	mov	r1, #0xb
 	mul	r1, r1, r0
-	ldr	r0, ._477 + 4
+	ldr	r0, ._477 + 4   @ gSpeciesNames
 	add	r1, r1, r0
 	add	r0, r4, #0
 	mov	r2, #0xa
@@ -4662,7 +4662,7 @@ debug_80C5738:
 	.word	gUnknown_Debug_2038A1C
 	.word	gSpeciesNames
 ._445:
-	ldr	r0, ._483
+	ldr	r0, ._483       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	add	r0, r0, #0x64
 	add	r0, r0, r7
@@ -4681,7 +4681,7 @@ debug_80C5738:
 ._480:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._486
+	ldr	r1, ._486       @ gUnknown_Debug_083F8546
 	b	._488
 ._487:
 	.align	2, 0
@@ -4690,7 +4690,7 @@ debug_80C5738:
 ._479:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._489
+	ldr	r1, ._489       @ gUnknown_Debug_083F8541
 	b	._488
 ._490:
 	.align	2, 0
@@ -4699,7 +4699,7 @@ debug_80C5738:
 ._481:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._492
+	ldr	r1, ._492       @ gUnknown_Debug_083F8544
 ._488:
 	mov	r2, #0x2
 	bl	debug_80C689C
@@ -4711,7 +4711,7 @@ debug_80C5738:
 ._450:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r4, ._495
+	ldr	r4, ._495       @ gUnknown_Debug_2038A1C
 	ldr	r1, [r4]
 	add	r1, r1, #0x64
 	add	r1, r1, r7
@@ -4736,7 +4736,7 @@ debug_80C5738:
 	ldr	r2, [r1]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, ._495 + 4
+	ldr	r2, ._495 + 4   @ gMoveNames
 	add	r1, r1, r2
 	b	._494
 ._496:
@@ -4747,7 +4747,7 @@ debug_80C5738:
 ._451:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r4, ._499
+	ldr	r4, ._499       @ gUnknown_Debug_2038A1C
 	ldr	r1, [r4]
 	add	r1, r1, #0x64
 	add	r1, r1, r7
@@ -4786,7 +4786,7 @@ debug_80C5738:
 	add	r0, r5, #0
 	add	r0, r0, #0xe
 	add	r0, r6, r0
-	ldr	r1, ._502
+	ldr	r1, ._502       @ gUnknown_Debug_083F8541
 ._498:
 	mov	r2, #0x9
 	bl	debug_80C689C
@@ -4797,7 +4797,7 @@ debug_80C5738:
 	.word	gUnknown_Debug_083F8541
 ._452:
 	add	r6, r6, #0xc
-	ldr	r4, ._505
+	ldr	r4, ._505       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r4]
 	ldr	r0, [r0, #0x64]
 	lsl	r0, r0, #0x10
@@ -4814,7 +4814,7 @@ debug_80C5738:
 	lsr	r0, r0, #0x18
 	mov	r1, #0xd
 	mul	r1, r1, r0
-	ldr	r0, ._505 + 4
+	ldr	r0, ._505 + 4   @ gAbilityNames
 	add	r1, r1, r0
 	add	r0, r6, #0
 ._494:
@@ -4829,8 +4829,8 @@ debug_80C5738:
 ._474:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r2, ._508
-	ldr	r1, ._508 + 4
+	ldr	r2, ._508       @ gUnknown_Debug_083F86E8
+	ldr	r1, ._508 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r1, [r1]
 	add	r1, r1, #0x64
 	add	r1, r1, r7
@@ -4847,7 +4847,7 @@ debug_80C5738:
 ._472:
 	add	r0, r6, #0
 	add	r0, r0, #0xc
-	ldr	r1, ._511
+	ldr	r1, ._511       @ gUnknown_Debug_2038A1C
 	ldr	r1, [r1]
 	add	r1, r1, #0x64
 	add	r1, r1, r7
@@ -4860,7 +4860,7 @@ debug_80C5738:
 ._511:
 	.word	gUnknown_Debug_2038A1C
 ._473:
-	ldr	r0, ._515
+	ldr	r0, ._515       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	add	r0, r0, #0x64
 	add	r0, r0, r7
@@ -4869,7 +4869,7 @@ debug_80C5738:
 	beq	._513	@cond_branch
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._515 + 4
+	ldr	r1, ._515 + 4   @ gUnknown_Debug_083F854A
 	b	._514
 ._516:
 	.align	2, 0
@@ -4879,7 +4879,7 @@ debug_80C5738:
 ._513:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r1, ._518
+	ldr	r1, ._518       @ gUnknown_Debug_083F854D
 ._514:
 	mov	r2, #0x4
 	bl	debug_80C689C
@@ -4891,8 +4891,8 @@ debug_80C5738:
 ._446:
 	add	r0, r6, #0
 	add	r0, r0, #0xa
-	ldr	r2, ._520
-	ldr	r1, ._520 + 4
+	ldr	r2, ._520       @ gNatureNames
+	ldr	r1, ._520 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r1, [r1]
 	add	r1, r1, #0x64
 	add	r1, r1, r7
@@ -4921,7 +4921,7 @@ debug_80C5738:
 	thumb_func_start debug_80C5B60
 debug_80C5B60:
 	lsl	r0, r0, #0x18
-	ldr	r1, ._522
+	ldr	r1, ._522       @ gUnknown_Debug_2038A1C
 	ldr	r1, [r1]
 	lsr	r0, r0, #0x16
 	add	r1, r1, #0x64
@@ -4944,7 +4944,7 @@ debug_80C5B74:
 	cmp	r2, #0x18
 	bhi	._540	@cond_branch
 	lsl	r0, r2, #0x2
-	ldr	r1, ._526
+	ldr	r1, ._526       @ 
 	add	r1, r0, r1
 	ldr	r1, [r1]
 	add	r3, r0, #0
@@ -4980,7 +4980,7 @@ debug_80C5B74:
 	.word	._552
 	.word	._552
 ._540:
-	ldr	r0, ._554
+	ldr	r0, ._554       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	lsl	r1, r2, #0x2
 	add	r0, r0, #0x64
@@ -4992,7 +4992,7 @@ debug_80C5B74:
 ._554:
 	.word	gUnknown_Debug_2038A1C
 ._532:
-	ldr	r0, ._557
+	ldr	r0, ._557       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	add	r0, r0, #0x64
 	add	r0, r0, r3
@@ -5004,7 +5004,7 @@ debug_80C5B74:
 ._557:
 	.word	gUnknown_Debug_2038A1C
 ._529:
-	ldr	r4, ._560
+	ldr	r4, ._560       @ gUnknown_Debug_2038A1C
 	ldr	r1, [r4]
 	add	r0, r1, #0
 	add	r0, r0, #0x64
@@ -5015,9 +5015,9 @@ debug_80C5B74:
 	lsr	r0, r0, #0x10
 	bl	NationalPokedexNumToSpecies
 	ldr	r5, [r4]
-	ldr	r4, ._560 + 4
+	ldr	r4, ._560 + 4   @ gExperienceTables
 	lsl	r2, r6, #0x2
-	ldr	r3, ._560 + 8
+	ldr	r3, ._560 + 8   @ gBaseStats
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	lsl	r1, r0, #0x3
@@ -5041,7 +5041,7 @@ debug_80C5B74:
 	.word	gExperienceTables
 	.word	gBaseStats
 ._530:
-	ldr	r0, ._563
+	ldr	r0, ._563       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	add	r0, r0, #0x64
 	add	r0, r0, r3
@@ -5053,7 +5053,7 @@ debug_80C5B74:
 ._563:
 	.word	gUnknown_Debug_2038A1C
 ._552:
-	ldr	r0, ._565
+	ldr	r0, ._565       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	add	r0, r0, #0x64
 	add	r0, r0, r3
@@ -5074,7 +5074,7 @@ debug_80C5B74:
 debug_80C5C94:
 	push	{r4, r5, r6, lr}
 	add	sp, sp, #0xfffffff0
-	ldr	r6, ._567
+	ldr	r6, ._567       @ gUnknown_Debug_2038A1C
 	ldr	r2, [r6]
 	add	r0, r2, #0
 	add	r0, r0, #0x98
@@ -5239,7 +5239,7 @@ debug_80C5DEC:
 	add	sp, sp, #0xfffffffc
 	mov	r0, #0x0
 	str	r0, [sp]
-	ldr	r4, ._569
+	ldr	r4, ._569       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r4]
 	add	r2, r0, #0
 	add	r2, r2, #0x6c
@@ -5356,7 +5356,7 @@ debug_80C5DEC:
 	thumb_func_start debug_80C5EF4
 debug_80C5EF4:
 	push	{r4, lr}
-	ldr	r4, ._571
+	ldr	r4, ._571       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r4]
 	add	r2, r0, #0
 	add	r2, r2, #0x98
@@ -5477,16 +5477,16 @@ debug_80C5EF4:
 debug_80C5FFC:
 	push	{r4, r5, r6, r7, lr}
 	add	sp, sp, #0xffffffe0
-	ldr	r1, ._578
+	ldr	r1, ._578       @ gUnknown_Debug_083F8758
 	add	r0, sp, #0x10
 	mov	r2, #0x4
 	bl	memcpy
 	add	r7, sp, #0x14
-	ldr	r1, ._578 + 4
+	ldr	r1, ._578 + 4   @ gUnknown_Debug_083F875C
 	add	r0, r7, #0
 	mov	r2, #0x8
 	bl	memcpy
-	ldr	r5, ._578 + 8
+	ldr	r5, ._578 + 8   @ gUnknown_Debug_2038A1C
 	ldr	r2, [r5]
 	add	r0, r2, #0
 	add	r0, r0, #0x98
@@ -5712,7 +5712,7 @@ debug_80C5FFC:
 	add	r1, r1, #0xec
 	ldr	r2, [r1]
 	lsl	r2, r2, #0x3
-	ldr	r1, ._578 + 12
+	ldr	r1, ._578 + 12  @ gUnknown_Debug_083F86E8
 	add	r2, r2, r1
 	mov	r1, #0x37
 	bl	SetMonData
@@ -5771,12 +5771,12 @@ debug_80C627C:
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	add	r6, r4, #0
-	ldr	r1, ._584
+	ldr	r1, ._584       @ gUnknown_Debug_083F7FD4
 	mov	r0, sp
 	mov	r2, #0x2
 	bl	memcpy
 	add	r5, sp, #0x4
-	ldr	r1, ._584 + 4
+	ldr	r1, ._584 + 4   @ gUnknown_Debug_083F8764
 	add	r0, r5, #0
 	mov	r2, #0x2
 	bl	memcpy
@@ -5797,9 +5797,9 @@ debug_80C627C:
 	beq	._586	@cond_branch
 	b	._595
 ._582:
-	ldr	r0, ._589
+	ldr	r0, ._589       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
-	ldr	r1, ._589 + 4
+	ldr	r1, ._589 + 4   @ 0x169
 	add	r0, r0, r1
 	b	._588
 ._590:
@@ -5808,12 +5808,12 @@ debug_80C627C:
 	.word	gUnknown_Debug_2038A1C
 	.word	0x169
 ._580:
-	ldr	r4, ._593
+	ldr	r4, ._593       @ gUnknown_Debug_2038A1C
 	ldr	r3, [r4]
-	ldr	r1, ._593 + 4
+	ldr	r1, ._593 + 4   @ 0x169
 	add	r0, r3, r1
 	ldrb	r2, [r0]
-	ldr	r1, ._593 + 8
+	ldr	r1, ._593 + 8   @ gUnknown_Debug_083F8698
 	mov	r6, #0xb4
 	lsl	r6, r6, #0x1
 	add	r0, r3, r6
@@ -5833,7 +5833,7 @@ debug_80C627C:
 	mov	r1, #0x1
 	bl	Menu_PrintText
 	ldr	r0, [r4]
-	ldr	r2, ._593 + 4
+	ldr	r2, ._593 + 4   @ 0x169
 	add	r1, r0, r2
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
@@ -5858,9 +5858,9 @@ debug_80C627C:
 	.word	0x169
 	.word	gUnknown_Debug_083F8698
 ._586:
-	ldr	r4, ._596
+	ldr	r4, ._596       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r4]
-	ldr	r2, ._596 + 4
+	ldr	r2, ._596 + 4   @ 0x169
 	add	r1, r0, r2
 	ldrb	r0, [r1]
 	cmp	r0, #0
@@ -5875,7 +5875,7 @@ debug_80C627C:
 	mov	r1, #0x1
 	bl	Menu_PrintText
 	ldr	r0, [r4]
-	ldr	r2, ._596 + 4
+	ldr	r2, ._596 + 4   @ 0x169
 	add	r1, r0, r2
 	ldrb	r0, [r1]
 	sub	r0, r0, #0x1
@@ -5914,8 +5914,8 @@ debug_80C6384:
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
 	mov	r5, #0x0
-	ldr	r3, ._600
-	ldr	r1, ._600 + 4
+	ldr	r3, ._600       @ gUnknown_Debug_083F8698
+	ldr	r1, ._600 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r0, [r1]
 	mov	r2, #0xb4
 	lsl	r2, r2, #0x1
@@ -5928,7 +5928,7 @@ debug_80C6384:
 	cmp	r0, #0xff
 	beq	._598	@cond_branch
 	add	r4, r1, #0
-	ldr	r0, ._600 + 8
+	ldr	r0, ._600 + 8   @ 0x16b
 	mov	r9, r0
 	mov	r8, r3
 	add	r7, r2, #0
@@ -5943,7 +5943,7 @@ debug_80C6384:
 	add	r0, r0, r1
 	strb	r6, [r0]
 	ldr	r0, [r4]
-	ldr	r2, ._600 + 12
+	ldr	r2, ._600 + 12  @ 0x16d
 	add	r0, r0, r2
 	strb	r6, [r0]
 	ldr	r1, [r4]
@@ -6008,8 +6008,8 @@ debug_80C643C:
 	mov	r3, #0x12
 	bl	Menu_BlankWindowRect
 	mov	r5, #0x0
-	ldr	r6, ._605
-	ldr	r1, ._605 + 4
+	ldr	r6, ._605       @ gUnknown_Debug_083F8698
+	ldr	r1, ._605 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r0, [r1]
 	mov	r3, #0xb4
 	lsl	r3, r3, #0x1
@@ -6026,7 +6026,7 @@ debug_80C643C:
 	mov	r8, r0
 ._607:
 	ldr	r0, [r4]
-	ldr	r7, ._605 + 8
+	ldr	r7, ._605 + 8   @ 0x16b
 	add	r2, r0, r7
 	mov	r0, #0xfc
 	strb	r0, [r2]
@@ -6037,12 +6037,12 @@ debug_80C643C:
 	mov	r7, r8
 	strb	r7, [r0]
 	ldr	r2, [r4]
-	ldr	r7, ._605 + 12
+	ldr	r7, ._605 + 12  @ 0x169
 	add	r0, r2, r7
 	ldrb	r0, [r0]
 	cmp	r5, r0
 	bne	._603	@cond_branch
-	ldr	r0, ._605 + 16
+	ldr	r0, ._605 + 16  @ 0x16d
 	add	r2, r2, r0
 	mov	r0, #0x2
 	strb	r0, [r2]
@@ -6069,7 +6069,7 @@ debug_80C643C:
 	.word	0x169
 	.word	0x16d
 ._603:
-	ldr	r3, ._608
+	ldr	r3, ._608       @ 0x16d
 	add	r0, r2, r3
 	mov	r7, r8
 	strb	r7, [r0]
@@ -6077,7 +6077,7 @@ debug_80C643C:
 	mov	r2, #0xb7
 	lsl	r2, r2, #0x1
 	add	r0, r1, r2
-	ldr	r2, ._608 + 4
+	ldr	r2, ._608 + 4   @ gUnknown_Debug_083F8698
 	sub	r3, r3, #0x5
 	add	r1, r1, r3
 	ldrb	r1, [r1]
@@ -6090,7 +6090,7 @@ debug_80C643C:
 	bl	debug_80C5738
 ._604:
 	ldr	r0, [r4]
-	ldr	r7, ._608 + 8
+	ldr	r7, ._608 + 8   @ 0x16b
 	add	r0, r0, r7
 	lsl	r2, r5, #0x19
 	mov	r1, #0xa0
@@ -6102,7 +6102,7 @@ debug_80C643C:
 	add	r0, r5, #1
 	lsl	r0, r0, #0x10
 	lsr	r5, r0, #0x10
-	ldr	r6, ._608 + 4
+	ldr	r6, ._608 + 4   @ gUnknown_Debug_083F8698
 	add	r1, r4, #0
 	ldr	r0, [r4]
 	mov	r3, #0xb4
@@ -6140,9 +6140,9 @@ debug_80C6544:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mov	r9, r0
-	ldr	r0, ._614
+	ldr	r0, ._614       @ gUnknown_Debug_083F8698
 	mov	r8, r0
-	ldr	r6, ._614 + 4
+	ldr	r6, ._614 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r1, [r6]
 	mov	r5, #0xb4
 	lsl	r5, r5, #0x1
@@ -6150,7 +6150,7 @@ debug_80C6544:
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x3
 	add r0, r0, r8
-	ldr	r4, ._614 + 8
+	ldr	r4, ._614 + 8   @ 0x169
 	add	r1, r1, r4
 	ldrb	r1, [r1]
 	ldr	r0, [r0]
@@ -6158,7 +6158,7 @@ debug_80C6544:
 	ldrb	r0, [r0]
 	bl	debug_80C5B60
 	add	r7, r0, #0
-	ldr	r2, ._614 + 12
+	ldr	r2, ._614 + 12  @ gUnknown_Debug_083F8554
 	ldr	r3, [r6]
 	add	r5, r3, r5
 	ldrb	r0, [r5]
@@ -6175,7 +6175,7 @@ debug_80C6544:
 	ldr	r1, [r0]
 	ldr	r5, [r1]
 	ldr	r4, [r1, #0x4]
-	ldr	r2, ._614 + 16
+	ldr	r2, ._614 + 16  @ gUnknown_Debug_083F8768
 	mov	r6, #0xb5
 	lsl	r6, r6, #0x1
 	add	r0, r3, r6
@@ -6225,8 +6225,8 @@ debug_80C6544:
 ._622:
 	add	r7, r4, #0
 ._623:
-	ldr	r1, ._624
-	ldr	r0, ._624 + 4
+	ldr	r1, ._624       @ gUnknown_Debug_083F8698
+	ldr	r0, ._624 + 4   @ gUnknown_Debug_2038A1C
 	ldr	r2, [r0]
 	mov	r3, #0xb4
 	lsl	r3, r3, #0x1
@@ -6234,7 +6234,7 @@ debug_80C6544:
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r6, ._624 + 8
+	ldr	r6, ._624 + 8   @ 0x169
 	add	r1, r2, r6
 	ldrb	r1, [r1]
 	ldr	r0, [r0]
@@ -6275,7 +6275,7 @@ debug_80C6630:
 	add	r4, r4, #0x1
 	cmp	r2, #0x2
 	bne	._626	@cond_branch
-	ldr	r0, ._629
+	ldr	r0, ._629       @ gUnknown_Debug_2038A1C
 	ldr	r0, [r0]
 	mov	r5, #0xb5
 	lsl	r5, r5, #0x1
@@ -6321,7 +6321,7 @@ debug_80C6678:
 	cmp	r0, #0x9
 	bhi	._644	@cond_branch
 	lsl	r0, r0, #0x2
-	ldr	r1, ._633
+	ldr	r1, ._633       @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -6343,7 +6343,7 @@ debug_80C6678:
 ._644:
 	mov	r0, r9
 	add	r4, r0, r7
-	ldr	r5, ._645
+	ldr	r5, ._645       @ 0x3b9aca00
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6364,7 +6364,7 @@ debug_80C6678:
 ._643:
 	mov	r1, r9
 	add	r4, r1, r7
-	ldr	r5, ._645 + 4
+	ldr	r5, ._645 + 4   @ 0x5f5e100
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6385,7 +6385,7 @@ debug_80C6678:
 ._642:
 	mov	r0, r9
 	add	r4, r0, r7
-	ldr	r5, ._645 + 8
+	ldr	r5, ._645 + 8   @ 0x989680
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6406,7 +6406,7 @@ debug_80C6678:
 ._641:
 	mov	r1, r9
 	add	r4, r1, r7
-	ldr	r5, ._645 + 12
+	ldr	r5, ._645 + 12  @ 0xf4240
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6427,7 +6427,7 @@ debug_80C6678:
 ._640:
 	mov	r0, r9
 	add	r4, r0, r7
-	ldr	r5, ._645 + 16
+	ldr	r5, ._645 + 16  @ 0x186a0
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6448,7 +6448,7 @@ debug_80C6678:
 ._639:
 	mov	r1, r9
 	add	r4, r1, r7
-	ldr	r5, ._645 + 20
+	ldr	r5, ._645 + 20  @ 0x2710
 	add	r0, r6, #0
 	add	r1, r5, #0
 	bl	__udivsi3
@@ -6683,19 +6683,19 @@ InitSeePokemonGraphics:
 	push	{r4, r5, r6, lr}
 	add	sp, sp, #0xfffffff8
 	bl	debug_80C35DC
-	ldr	r1, ._659
-	ldr	r2, ._659 + 4
-	ldr	r0, ._659 + 8
+	ldr	r1, ._659       @ byte_83F88EC
+	ldr	r2, ._659 + 4   @ 0x600e000
+	ldr	r0, ._659 + 8   @ 0x40000d4
 	str	r1, [r0]
 	str	r2, [r0, #0x4]
-	ldr	r1, ._659 + 12
+	ldr	r1, ._659 + 12  @ 0x80000400
 	str	r1, [r0, #0x8]
 	ldr	r0, [r0, #0x8]
-	ldr	r0, ._659 + 16
+	ldr	r0, ._659 + 16  @ word_83F888C
 	mov	r1, #0x80
 	mov	r2, #0x60
 	bl	LoadPalette
-	ldr	r1, ._659 + 20
+	ldr	r1, ._659 + 20  @ 0x7fff
 	add	r0, sp, #0x4
 	strh	r1, [r0]
 	mov	r1, #0x0
@@ -6709,7 +6709,7 @@ InitSeePokemonGraphics:
 	mov	r2, #0x10
 	mov	r3, #0x0
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._659 + 24
+	ldr	r0, ._659 + 24  @ 0x4000040
 	mov	r6, #0x0
 	strh	r5, [r0]
 	add	r0, r0, #0x4
@@ -6718,7 +6718,7 @@ InitSeePokemonGraphics:
 	strh	r5, [r0]
 	add	r0, r0, #0x4
 	strh	r5, [r0]
-	ldr	r1, ._659 + 28
+	ldr	r1, ._659 + 28  @ 0x4000048
 	mov	r0, #0x3f
 	strh	r0, [r1]
 	add	r1, r1, #0x2
@@ -6727,31 +6727,31 @@ InitSeePokemonGraphics:
 	add	r1, r1, #0x6
 	mov	r0, #0xf1
 	strh	r0, [r1]
-	ldr	r0, ._659 + 32
+	ldr	r0, ._659 + 32  @ 0x4000052
 	strh	r5, [r0]
 	add	r1, r1, #0x4
 	mov	r0, #0x7
 	strh	r0, [r1]
-	ldr	r3, ._659 + 36
+	ldr	r3, ._659 + 36  @ 0x4000208
 	ldrh	r2, [r3]
 	strh	r5, [r3]
-	ldr	r4, ._659 + 40
+	ldr	r4, ._659 + 40  @ 0x4000200
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	orr	r0, r0, r1
 	strh	r0, [r4]
 	strh	r2, [r3]
-	ldr	r0, ._659 + 44
+	ldr	r0, ._659 + 44  @ debug_80C3758
 	bl	SetVBlankCallback
-	ldr	r0, ._659 + 48
+	ldr	r0, ._659 + 48  @ debug_80C370C
 	bl	SetMainCallback2
 	bl	sub_809D51C
-	ldr	r1, ._659 + 52
-	ldr	r2, ._659 + 56
+	ldr	r1, ._659 + 52  @ 0x4000008
+	ldr	r2, ._659 + 56  @ 0x1f0b
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
-	ldr	r2, ._659 + 60
+	ldr	r2, ._659 + 60  @ 0x1e0a
 	add	r0, r2, #0
 	strh	r0, [r1]
 	sub	r1, r1, #0xa
@@ -6759,13 +6759,13 @@ InitSeePokemonGraphics:
 	lsl	r2, r2, #0x6
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r0, ._659 + 64
+	ldr	r0, ._659 + 64  @ debug_80C6B00
 	mov	r1, #0x0
 	bl	CreateTask
-	ldr	r1, ._659 + 68
-	ldr	r0, ._659 + 72
+	ldr	r1, ._659 + 68  @ gUnknown_Debug_2038A20
+	ldr	r0, ._659 + 72  @ 0x2018000
 	str	r0, [r1]
-	ldr	r1, ._659 + 76
+	ldr	r1, ._659 + 76  @ 0x115
 	strh	r1, [r0]
 	strb	r6, [r0, #0x2]
 	strb	r6, [r0, #0x3]
@@ -6773,7 +6773,7 @@ InitSeePokemonGraphics:
 	strb	r6, [r0, #0x7]
 	strb	r6, [r0, #0xa]
 	strb	r6, [r0, #0x8]
-	ldr	r4, ._659 + 80
+	ldr	r4, ._659 + 80  @ gSpriteTemplate_83F8874
 	add	r0, r4, #0
 	mov	r1, #0x6c
 	mov	r2, #0x74
@@ -6782,7 +6782,7 @@ InitSeePokemonGraphics:
 	add	r1, r0, #0
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
-	ldr	r6, ._659 + 84
+	ldr	r6, ._659 + 84  @ gSprites
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
@@ -6845,7 +6845,7 @@ InitSeePokemonGraphics:
 	.word	0x1e0a
 	.word	debug_80C6B00+1
 	.word	gUnknown_Debug_2038A20
-	.word	+0x2018000
+	.word	0x2018000
 	.word	0x115
 	.word	gSpriteTemplate_83F8874
 	.word	gSprites
@@ -6860,7 +6860,7 @@ debug_80C6B00:
 	add	sp, sp, #0xffffffec
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-	ldr	r1, ._666
+	ldr	r1, ._666       @ gUnknown_Debug_083F8815
 	mov	r0, sp
 	mov	r2, #0x12
 	bl	memcpy
@@ -6884,15 +6884,15 @@ debug_80C6B00:
 	mov	r2, #0x1d
 	mov	r3, #0x7
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._666 + 4
+	ldr	r0, ._666 + 4   @ gUnknown_Debug_083F87D0
 	mov	r1, #0x11
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._666 + 8
+	ldr	r0, ._666 + 8   @ gUnknown_Debug_083F87D8
 	mov	r1, #0x1b
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._666 + 12
+	ldr	r0, ._666 + 12  @ gUnknown_Debug_083F87E0
 	mov	r1, #0x11
 	mov	r2, #0x5
 	bl	Menu_PrintText
@@ -6902,8 +6902,8 @@ debug_80C6B00:
 	mov	r3, #0xc
 	bl	Menu_DrawStdWindowFrame
 	mov	r2, #0x0
-	ldr	r4, ._666 + 16
-	ldr	r0, ._666 + 20
+	ldr	r4, ._666 + 16  @ 0x600fa56
+	ldr	r0, ._666 + 20  @ 0xa311
 	add	r3, r0, #0
 ._661:
 	lsl	r0, r2, #0x1
@@ -6916,11 +6916,11 @@ debug_80C6B00:
 	cmp	r2, #0xe
 	bls	._661	@cond_branch
 	mov	r2, #0x0
-	ldr	r5, ._666 + 24
+	ldr	r5, ._666 + 24  @ gUnknown_Debug_083F87F4
 	lsl	r6, r7, #0x2
 	mov	r8, r6
-	ldr	r4, ._666 + 28
-	ldr	r0, ._666 + 32
+	ldr	r4, ._666 + 28  @ 0x600f256
+	ldr	r0, ._666 + 32  @ 0x8301
 	add	r3, r0, #0
 ._662:
 	lsl	r0, r2, #0x1
@@ -6945,7 +6945,7 @@ debug_80C6B00:
 	mov	r0, #0x23
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r4, ._666 + 36
+	ldr	r4, ._666 + 36  @ 0x600f396
 	mov	r5, #0x93
 	lsl	r5, r5, #0x8
 	add	r3, r5, #0
@@ -6966,8 +6966,8 @@ debug_80C6B00:
 	mov	r0, #0x24
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r5, ._666 + 40
-	ldr	r4, ._666 + 44
+	ldr	r5, ._666 + 40  @ gUnknown_Debug_083F8801
+	ldr	r4, ._666 + 44  @ 0x600f3d6
 	mov	r0, #0x93
 	lsl	r0, r0, #0x8
 	add	r3, r0, #0
@@ -6988,7 +6988,7 @@ debug_80C6B00:
 	mov	r0, #0x25
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r4, ._666 + 48
+	ldr	r4, ._666 + 48  @ 0x600f416
 	mov	r0, #0x93
 	lsl	r0, r0, #0x8
 	add	r3, r0, #0
@@ -7009,20 +7009,20 @@ debug_80C6B00:
 	mov	r1, #0xf
 	mov	r2, #0x11
 	bl	Menu_PrintText
-	ldr	r1, ._666 + 52
-	ldr	r2, ._666 + 56
+	ldr	r1, ._666 + 52  @ 0x4000040
+	ldr	r2, ._666 + 56  @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r5, ._666 + 60
+	ldr	r5, ._666 + 60  @ 0x699f
 	add	r0, r5, #0
 	strh	r0, [r1]
-	ldr	r1, ._666 + 64
+	ldr	r1, ._666 + 64  @ gTasks
 	mov	r6, r8
 	add	r0, r6, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._666 + 68
+	ldr	r1, ._666 + 68  @ debug_80C6CB8
 	str	r1, [r0]
 	add	sp, sp, #0x14
 	pop	{r3}
@@ -7066,18 +7066,18 @@ debug_80C6CB8:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mov	sl, r0
-	ldr	r5, ._668
+	ldr	r5, ._668       @ gUnknown_Debug_2038A20
 	ldr	r4, [r5]
 	ldrh	r2, [r4]
 	lsl	r0, r2, #0x3
-	ldr	r1, ._668 + 4
+	ldr	r1, ._668 + 4   @ gMonFrontPicTable
 	add	r0, r0, r1
-	ldr	r1, ._668 + 8
+	ldr	r1, ._668 + 8   @ gMonFrontPicCoords
 	lsl	r2, r2, #0x2
 	add	r2, r2, r1
 	ldrb	r1, [r2]
 	ldrb	r2, [r2, #0x1]
-	ldr	r3, ._668 + 12
+	ldr	r3, ._668 + 12  @ gUnknown_081FAF4C
 	mov	r8, r3
 	ldr	r6, [r3]
 	str	r6, [sp, #0x8]
@@ -7090,14 +7090,14 @@ debug_80C6CB8:
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	lsl	r0, r0, #0x3
-	ldr	r7, ._668 + 16
+	ldr	r7, ._668 + 16  @ gMonPaletteTable
 	add	r0, r0, r7
 	bl	LoadCompressedObjectPalette
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	mov	r1, #0x1
 	bl	GetMonSpriteTemplate_803C56C
-	ldr	r0, ._668 + 20
+	ldr	r0, ._668 + 20  @ gUnknown_02024E8C
 	mov	r1, #0x28
 	mov	r2, #0x28
 	mov	r3, #0x0
@@ -7109,16 +7109,16 @@ debug_80C6CB8:
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r1, ._668 + 24
+	ldr	r1, ._668 + 24  @ gSprites
 	add	r0, r0, r1
-	ldr	r3, ._668 + 28
+	ldr	r3, ._668 + 28  @ debug_69
 	mov	r9, r3
 	str	r3, [r0]
 	ldrb	r0, [r2, #0x2]
 	lsl	r1, r0, #0x4
 	add	r1, r1, r0
 	lsl	r1, r1, #0x2
-	ldr	r6, ._668 + 32
+	ldr	r6, ._668 + 32  @ gSprites
 	add	r1, r1, r6
 	ldrb	r2, [r1, #0x5]
 	mov	r6, #0xd
@@ -7129,9 +7129,9 @@ debug_80C6CB8:
 	ldr	r4, [r5]
 	ldrh	r2, [r4]
 	lsl	r0, r2, #0x3
-	ldr	r1, ._668 + 36
+	ldr	r1, ._668 + 36  @ gMonBackPicTable
 	add	r0, r0, r1
-	ldr	r1, ._668 + 40
+	ldr	r1, ._668 + 40  @ gMonBackPicCoords
 	lsl	r2, r2, #0x2
 	add	r2, r2, r1
 	ldrb	r1, [r2]
@@ -7146,14 +7146,14 @@ debug_80C6CB8:
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	lsl	r0, r0, #0x3
-	ldr	r1, ._668 + 16
+	ldr	r1, ._668 + 16  @ gMonPaletteTable
 	add	r0, r0, r1
 	bl	LoadCompressedObjectPalette
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	mov	r1, #0x2
 	bl	GetMonSpriteTemplate_803C56C
-	ldr	r0, ._668 + 20
+	ldr	r0, ._668 + 20  @ gUnknown_02024E8C
 	mov	r1, #0x28
 	mov	r2, #0x78
 	mov	r3, #0x0
@@ -7165,7 +7165,7 @@ debug_80C6CB8:
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r3, ._668 + 24
+	ldr	r3, ._668 + 24  @ gSprites
 	add	r0, r0, r3
 	mov	r7, r9
 	str	r7, [r0]
@@ -7173,14 +7173,14 @@ debug_80C6CB8:
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r1, ._668 + 32
+	ldr	r1, ._668 + 32  @ gSprites
 	add	r0, r0, r1
 	ldrb	r1, [r0, #0x5]
 	and	r6, r6, r1
 	strb	r6, [r0, #0x5]
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
-	ldr	r1, ._668 + 44
+	ldr	r1, ._668 + 44  @ sub_809D62C
 	mov	r2, #0x0
 	str	r2, [sp]
 	str	r2, [sp, #0x4]
@@ -7198,20 +7198,20 @@ debug_80C6CB8:
 	lsl	r2, r2, #0x2
 	mov	r1, #0x2
 	bl	sub_8091738
-	ldr	r1, ._668 + 48
-	ldr	r3, ._668 + 52
+	ldr	r1, ._668 + 48  @ 0x600f858
+	ldr	r3, ._668 + 52  @ 0xf3fc
 	add	r0, r3, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
-	ldr	r6, ._668 + 56
+	ldr	r6, ._668 + 56  @ 0xf3fd
 	add	r0, r6, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x3e
-	ldr	r7, ._668 + 60
+	ldr	r7, ._668 + 60  @ 0xf3fe
 	add	r0, r7, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
-	ldr	r2, ._668 + 64
+	ldr	r2, ._668 + 64  @ 0xf3ff
 	add	r0, r2, #0
 	strh	r0, [r1]
 	ldr	r0, [r5]
@@ -7229,7 +7229,7 @@ debug_80C6CB8:
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r3, ._668 + 32
+	ldr	r3, ._668 + 32  @ gSprites
 	add	r0, r0, r3
 	ldrb	r0, [r0, #0x5]
 	lsr	r0, r0, #0x4
@@ -7237,9 +7237,9 @@ debug_80C6CB8:
 	ldr	r0, [r5]
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
-	ldr	r4, ._668 + 68
+	ldr	r4, ._668 + 68  @ gPlttBufferUnfaded
 	add	r0, r0, r4
-	ldr	r6, ._668 + 72
+	ldr	r6, ._668 + 72  @ 0xffffff00
 	add	r1, r4, r6
 	mov	r2, #0x10
 	bl	CpuSet
@@ -7247,16 +7247,16 @@ debug_80C6CB8:
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
 	add	r0, r0, r4
-	ldr	r1, ._668 + 76
+	ldr	r1, ._668 + 76  @ gPlttBufferFaded
 	mov	r2, #0x10
 	bl	CpuSet
-	ldr	r1, ._668 + 80
+	ldr	r1, ._668 + 80  @ gTasks
 	mov	r7, sl
 	lsl	r0, r7, #0x2
 	add r0, r0, sl
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._668 + 84
+	ldr	r1, ._668 + 84  @ debug_80C6EE8
 	str	r1, [r0]
 	ldr	r0, [r5]
 	mov	r1, #0x0
@@ -7308,14 +7308,14 @@ debug_80C6EE8:
 	add	r6, r0, #0
 	lsl	r6, r6, #0x18
 	lsr	r6, r6, #0x18
-	ldr	r4, ._670
-	ldr	r5, ._670 + 4
+	ldr	r4, ._670       @ gPlttBufferUnfaded
+	ldr	r5, ._670 + 4   @ gUnknown_Debug_2038A20
 	ldr	r1, [r5]
 	add	r1, r1, #0x10
 	add	r0, r4, #0
 	mov	r2, #0x10
 	bl	CpuSet
-	ldr	r0, ._670 + 8
+	ldr	r0, ._670 + 8   @ 0xffffff00
 	add	r4, r4, r0
 	ldr	r3, [r5]
 	ldrb	r0, [r3, #0x7]
@@ -7336,7 +7336,7 @@ debug_80C6EE8:
 	lsl	r1, r1, #0x2
 	and	r1, r1, r4
 	ldrh	r2, [r3, #0xc]
-	ldr	r0, ._670 + 12
+	ldr	r0, ._670 + 12  @ 0xfffffc1f
 	and	r0, r0, r2
 	orr	r0, r0, r1
 	strh	r0, [r3, #0xc]
@@ -7362,7 +7362,7 @@ debug_80C6EE8:
 	mov	r2, #0xa
 	mov	r3, #0x2
 	bl	debug_80C68CC
-	ldr	r0, ._670 + 16
+	ldr	r0, ._670 + 16  @ gUnknown_Debug_083F8813
 	mov	r1, #0xd
 	mov	r2, #0xa
 	bl	Menu_PrintText
@@ -7371,12 +7371,12 @@ debug_80C6EE8:
 	mov	r2, #0xa
 	mov	r3, #0x4
 	bl	debug_80C68CC
-	ldr	r1, ._670 + 20
+	ldr	r1, ._670 + 20  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._670 + 24
+	ldr	r1, ._670 + 24  @ debug_80C6FA8
 	str	r1, [r0]
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -7400,7 +7400,7 @@ debug_80C6FA8:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-	ldr	r1, ._674
+	ldr	r1, ._674       @ gMain
 	ldrh	r2, [r1, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r2
@@ -7416,14 +7416,14 @@ debug_80C6FA8:
 	mov	r2, #0x0
 	mov	r3, #0x10
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._674 + 4
+	ldr	r0, ._674 + 4   @ debug_80C370C
 	bl	SetMainCallback2
-	ldr	r1, ._674 + 8
+	ldr	r1, ._674 + 8   @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._674 + 12
+	ldr	r1, ._674 + 12  @ debug_80C373C
 	str	r1, [r0]
 	b	._703
 ._675:
@@ -7440,7 +7440,7 @@ debug_80C6FA8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._676	@cond_branch
-	ldr	r4, ._678
+	ldr	r4, ._678       @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrh	r1, [r0]
 	mov	r0, #0x0
@@ -7455,7 +7455,7 @@ debug_80C6FA8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._680	@cond_branch
-	ldr	r4, ._682
+	ldr	r4, ._682       @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrh	r1, [r0]
 	mov	r0, #0x1
@@ -7463,12 +7463,12 @@ debug_80C6FA8:
 	bl	debug_80C3878
 	ldr	r1, [r4]
 	strh	r0, [r1]
-	ldr	r1, ._682 + 4
+	ldr	r1, ._682 + 4   @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._682 + 8
+	ldr	r1, ._682 + 8   @ debug_80C71FC
 	str	r1, [r0]
 	b	._703
 ._683:
@@ -7482,24 +7482,24 @@ debug_80C6FA8:
 	and	r3, r3, r2
 	cmp	r3, #0
 	beq	._684	@cond_branch
-	ldr	r0, ._686
+	ldr	r0, ._686       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	mov	r0, #0x1
 	strb	r0, [r1, #0x5]
-	ldr	r1, ._686 + 4
-	ldr	r2, ._686 + 8
+	ldr	r1, ._686 + 4   @ 0x4000040
+	ldr	r2, ._686 + 8   @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._686 + 12
+	ldr	r2, ._686 + 12  @ 0x4167
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._686 + 16
+	ldr	r1, ._686 + 16  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._686 + 20
+	ldr	r1, ._686 + 20  @ debug_80C7294
 	str	r1, [r0]
 	b	._703
 ._687:
@@ -7516,13 +7516,13 @@ debug_80C6FA8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._689	@cond_branch
-	ldr	r1, ._691
+	ldr	r1, ._691       @ gUnknown_Debug_2038A20
 	ldr	r2, [r1]
 	ldrb	r0, [r2, #0x7]
 	cmp	r0, #0xd
 	bhi	._689	@cond_branch
 	lsl	r0, r0, #0x1
-	ldr	r2, ._691 + 4
+	ldr	r2, ._691 + 4   @ 0x5000102
 	add	r0, r0, r2
 	strh	r3, [r0]
 	ldr	r1, [r1]
@@ -7541,13 +7541,13 @@ debug_80C6FA8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._694	@cond_branch
-	ldr	r2, ._696
+	ldr	r2, ._696       @ gUnknown_Debug_2038A20
 	ldr	r1, [r2]
 	ldrb	r0, [r1, #0x7]
 	cmp	r0, #0
 	beq	._694	@cond_branch
 	lsl	r0, r0, #0x1
-	ldr	r1, ._696 + 4
+	ldr	r1, ._696 + 4   @ 0x5000102
 	add	r0, r0, r1
 	mov	r1, #0x0
 	strh	r1, [r0]
@@ -7567,7 +7567,7 @@ debug_80C6FA8:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._698	@cond_branch
-	ldr	r4, ._701
+	ldr	r4, ._701       @ gUnknown_Debug_2038A20
 	ldr	r2, [r4]
 	ldrb	r0, [r2, #0x9]
 	mov	r1, #0x1
@@ -7610,13 +7610,13 @@ debug_80C6FA8:
 	mov	r2, #0x20
 	bl	LoadCompressedPalette
 ._700:
-	ldr	r5, ._704
+	ldr	r5, ._704       @ gUnknown_Debug_2038A20
 	ldr	r0, [r5]
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
-	ldr	r4, ._704 + 4
+	ldr	r4, ._704 + 4   @ gPlttBufferUnfaded
 	add	r0, r0, r4
-	ldr	r2, ._704 + 8
+	ldr	r2, ._704 + 8   @ 0xffffff00
 	add	r1, r4, r2
 	mov	r2, #0x10
 	bl	CpuSet
@@ -7624,16 +7624,16 @@ debug_80C6FA8:
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
 	add	r0, r0, r4
-	ldr	r1, ._704 + 12
+	ldr	r1, ._704 + 12  @ gPlttBufferFaded
 	mov	r2, #0x10
 	bl	CpuSet
 ._695:
-	ldr	r1, ._704 + 16
+	ldr	r1, ._704 + 16  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._704 + 20
+	ldr	r1, ._704 + 20  @ debug_80C6EE8
 	str	r1, [r0]
 	b	._703
 ._705:
@@ -7651,13 +7651,13 @@ debug_80C6FA8:
 	cmp	r0, #0
 	beq	._706	@cond_branch
 	bl	StopCryAndClearCrySongs
-	ldr	r0, ._707
+	ldr	r0, ._707       @ gUnknown_Debug_2038A20
 	ldr	r0, [r0]
 	ldrh	r0, [r0]
 	mov	r1, #0x0
 	bl	PlayCry1
 ._706:
-	ldr	r2, ._707
+	ldr	r2, ._707       @ gUnknown_Debug_2038A20
 	ldr	r1, [r2]
 	ldrb	r0, [r1, #0x8]
 	add	r0, r0, #0x4
@@ -7670,9 +7670,9 @@ debug_80C6FA8:
 	ldr	r0, [r2]
 	ldrb	r1, [r0, #0x7]
 	lsl	r1, r1, #0x1
-	ldr	r2, ._707 + 4
+	ldr	r2, ._707 + 4   @ 0x5000142
 	add	r1, r1, r2
-	ldr	r2, ._707 + 8
+	ldr	r2, ._707 + 8   @ gUnknown_Debug_083F8790
 	ldrb	r0, [r0, #0x8]
 	lsl	r0, r0, #0x1
 	add	r0, r0, r2
@@ -7698,8 +7698,8 @@ debug_80C71FC:
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-	ldr	r6, ._709
-	ldr	r4, ._709 + 4
+	ldr	r6, ._709       @ gSprites
+	ldr	r4, ._709 + 4   @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrb	r1, [r0, #0x2]
 	lsl	r0, r1, #0x4
@@ -7745,12 +7745,12 @@ debug_80C71FC:
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
 	bl	sub_809D510
-	ldr	r1, ._709 + 8
+	ldr	r1, ._709 + 8   @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._709 + 12
+	ldr	r1, ._709 + 12  @ debug_80C6CB8
 	str	r1, [r0]
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -7770,23 +7770,23 @@ debug_80C7294:
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-	ldr	r0, ._713
+	ldr	r0, ._713       @ gMain
 	ldrh	r2, [r0, #0x2e]
 	mov	r1, #0x1
 	and	r1, r1, r2
 	add	r3, r0, #0
 	cmp	r1, #0
 	beq	._711	@cond_branch
-	ldr	r0, ._713 + 4
+	ldr	r0, ._713 + 4   @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	mov	r0, #0x0
 	strb	r0, [r1, #0x5]
-	ldr	r1, ._713 + 8
-	ldr	r2, ._713 + 12
+	ldr	r1, ._713 + 8   @ 0x4000040
+	ldr	r2, ._713 + 12  @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._713 + 16
+	ldr	r2, ._713 + 16  @ 0x699f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	b	._712
@@ -7803,26 +7803,26 @@ debug_80C7294:
 	and	r0, r0, r2
 	cmp	r0, #0
 	beq	._715	@cond_branch
-	ldr	r6, ._717
+	ldr	r6, ._717       @ gUnknown_Debug_2038A20
 	ldr	r0, [r6]
 	strb	r1, [r0, #0x5]
-	ldr	r1, ._717 + 4
-	ldr	r2, ._717 + 8
+	ldr	r1, ._717 + 4   @ 0x4000040
+	ldr	r2, ._717 + 8   @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._717 + 12
+	ldr	r2, ._717 + 12  @ 0x699f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	ldr	r0, [r6]
 	add	r0, r0, #0x10
-	ldr	r4, ._717 + 16
+	ldr	r4, ._717 + 16  @ gPlttBufferUnfaded
 	add	r1, r4, #0
 	mov	r2, #0x10
 	bl	CpuSet
 	ldr	r0, [r6]
 	add	r0, r0, #0x10
-	ldr	r5, ._717 + 20
+	ldr	r5, ._717 + 20  @ gPlttBufferFaded
 	add	r1, r5, #0
 	mov	r2, #0x10
 	bl	CpuSet
@@ -7849,12 +7849,12 @@ debug_80C7294:
 	mov	r2, #0x10
 	bl	CpuSet
 ._712:
-	ldr	r1, ._717 + 24
+	ldr	r1, ._717 + 24  @ gTasks
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._717 + 28
+	ldr	r1, ._717 + 28  @ debug_80C6EE8
 	str	r1, [r0]
 	b	._754
 ._718:
@@ -7874,7 +7874,7 @@ debug_80C7294:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._720	@cond_branch
-	ldr	r0, ._722
+	ldr	r0, ._722       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	ldrb	r0, [r1, #0xa]
 	cmp	r0, #0x1
@@ -7892,7 +7892,7 @@ debug_80C7294:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._725	@cond_branch
-	ldr	r0, ._727
+	ldr	r0, ._727       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	ldrb	r0, [r1, #0xa]
 	cmp	r0, #0
@@ -7910,7 +7910,7 @@ debug_80C7294:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._729	@cond_branch
-	ldr	r0, ._734
+	ldr	r0, ._734       @ gUnknown_Debug_2038A20
 	ldr	r2, [r0]
 	ldrb	r0, [r2, #0xa]
 	cmp	r0, #0x1
@@ -7953,7 +7953,7 @@ debug_80C7294:
 	mov	r1, #0x1f
 	and	r0, r0, r1
 	lsl	r0, r0, #0x5
-	ldr	r1, ._742
+	ldr	r1, ._742       @ 0xfffffc1f
 	and	r1, r1, r3
 	orr	r1, r1, r0
 	strh	r1, [r2, #0xc]
@@ -7983,7 +7983,7 @@ debug_80C7294:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._754	@cond_branch
-	ldr	r0, ._751
+	ldr	r0, ._751       @ gUnknown_Debug_2038A20
 	ldr	r3, [r0]
 	ldrb	r0, [r3, #0xa]
 	cmp	r0, #0x1
@@ -8031,7 +8031,7 @@ debug_80C7294:
 	mov	r1, #0x1f
 	and	r0, r0, r1
 	lsl	r0, r0, #0x5
-	ldr	r1, ._759
+	ldr	r1, ._759       @ 0xfffffc1f
 	and	r1, r1, r2
 	orr	r1, r1, r0
 	strh	r1, [r3, #0xc]
@@ -8058,12 +8058,12 @@ debug_80C7294:
 	orr	r1, r1, r0
 	strb	r1, [r3, #0xd]
 ._761:
-	ldr	r0, ._762
+	ldr	r0, ._762       @ gTasks
 	lsl	r1, r7, #0x2
 	add	r1, r1, r7
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._762 + 4
+	ldr	r0, ._762 + 4   @ debug_80C74E4
 	str	r0, [r1]
 ._754:
 	pop	{r4, r5, r6, r7}
@@ -8085,7 +8085,7 @@ debug_80C74E4:
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-	ldr	r0, ._764
+	ldr	r0, ._764       @ gUnknown_Debug_2038A20
 	ldr	r3, [r0]
 	ldrb	r0, [r3, #0xc]
 	lsl	r0, r0, #0x1b
@@ -8100,13 +8100,13 @@ debug_80C74E4:
 	lsr	r1, r1, #0x1b
 	lsl	r1, r1, #0xa
 	add	r0, r0, r1
-	ldr	r6, ._764 + 4
+	ldr	r6, ._764 + 4   @ gPlttBufferUnfaded
 	ldrb	r1, [r3, #0x7]
 	add	r1, r1, #0x81
 	lsl	r1, r1, #0x1
 	add	r1, r1, r6
 	strh	r0, [r1]
-	ldr	r1, ._764 + 8
+	ldr	r1, ._764 + 8   @ gPlttBufferFaded
 	mov	r8, r1
 	ldrb	r1, [r3, #0x7]
 	add	r1, r1, #0x81
@@ -8116,7 +8116,7 @@ debug_80C74E4:
 	ldrb	r1, [r3, #0x6]
 	lsl	r1, r1, #0x4
 	ldrb	r2, [r3, #0x7]
-	ldr	r4, ._764 + 12
+	ldr	r4, ._764 + 12  @ 0x101
 	add	r2, r2, r4
 	add	r1, r1, r2
 	lsl	r1, r1, #0x1
@@ -8134,12 +8134,12 @@ debug_80C74E4:
 	mov	r2, #0xa
 	mov	r3, #0x4
 	bl	debug_80C68CC
-	ldr	r1, ._764 + 16
+	ldr	r1, ._764 + 16  @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._764 + 20
+	ldr	r1, ._764 + 20  @ debug_80C7294
 	str	r1, [r0]
 	pop	{r3}
 	mov	r8, r3
@@ -8162,7 +8162,7 @@ debug_80C74E4:
 debug_80C7584:
 	push	{r4, lr}
 	add	r2, r0, #0
-	ldr	r0, ._771
+	ldr	r0, ._771       @ gUnknown_Debug_2038A20
 	ldr	r3, [r0]
 	ldrb	r1, [r3, #0x5]
 	add	r4, r0, #0
@@ -8239,15 +8239,15 @@ InitSeeTrainers:
 	push	{r4, r5, r6, lr}
 	add	sp, sp, #0xfffffffc
 	bl	debug_80C35DC
-	ldr	r1, ._777
-	ldr	r2, ._777 + 4
-	ldr	r0, ._777 + 8
+	ldr	r1, ._777       @ byte_83F88EC
+	ldr	r2, ._777 + 4   @ 0x600e000
+	ldr	r0, ._777 + 8   @ 0x40000d4
 	str	r1, [r0]
 	str	r2, [r0, #0x4]
-	ldr	r1, ._777 + 12
+	ldr	r1, ._777 + 12  @ 0x80000400
 	str	r1, [r0, #0x8]
 	ldr	r0, [r0, #0x8]
-	ldr	r0, ._777 + 16
+	ldr	r0, ._777 + 16  @ word_83F888C
 	mov	r1, #0x80
 	mov	r2, #0x60
 	bl	LoadPalette
@@ -8259,7 +8259,7 @@ InitSeeTrainers:
 	mov	r2, #0x10
 	mov	r3, #0x0
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._777 + 20
+	ldr	r0, ._777 + 20  @ 0x4000040
 	mov	r6, #0x0
 	strh	r5, [r0]
 	add	r0, r0, #0x4
@@ -8268,7 +8268,7 @@ InitSeeTrainers:
 	strh	r5, [r0]
 	add	r0, r0, #0x4
 	strh	r5, [r0]
-	ldr	r1, ._777 + 24
+	ldr	r1, ._777 + 24  @ 0x4000048
 	mov	r0, #0x3f
 	strh	r0, [r1]
 	add	r1, r1, #0x2
@@ -8277,30 +8277,30 @@ InitSeeTrainers:
 	add	r1, r1, #0x6
 	mov	r0, #0xf1
 	strh	r0, [r1]
-	ldr	r0, ._777 + 28
+	ldr	r0, ._777 + 28  @ 0x4000052
 	strh	r5, [r0]
 	add	r1, r1, #0x4
 	mov	r0, #0x7
 	strh	r0, [r1]
-	ldr	r3, ._777 + 32
+	ldr	r3, ._777 + 32  @ 0x4000208
 	ldrh	r2, [r3]
 	strh	r5, [r3]
-	ldr	r4, ._777 + 36
+	ldr	r4, ._777 + 36  @ 0x4000200
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	orr	r0, r0, r1
 	strh	r0, [r4]
 	strh	r2, [r3]
-	ldr	r0, ._777 + 40
+	ldr	r0, ._777 + 40  @ debug_80C3758
 	bl	SetVBlankCallback
-	ldr	r0, ._777 + 44
+	ldr	r0, ._777 + 44  @ debug_80C370C
 	bl	SetMainCallback2
-	ldr	r1, ._777 + 48
-	ldr	r2, ._777 + 52
+	ldr	r1, ._777 + 48  @ 0x4000008
+	ldr	r2, ._777 + 52  @ 0x1f0b
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x2
-	ldr	r2, ._777 + 56
+	ldr	r2, ._777 + 56  @ 0x1e0a
 	add	r0, r2, #0
 	strh	r0, [r1]
 	sub	r1, r1, #0xa
@@ -8308,11 +8308,11 @@ InitSeeTrainers:
 	lsl	r2, r2, #0x6
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r0, ._777 + 60
+	ldr	r0, ._777 + 60  @ debug_80C777C
 	mov	r1, #0x0
 	bl	CreateTask
-	ldr	r1, ._777 + 64
-	ldr	r0, ._777 + 68
+	ldr	r1, ._777 + 64  @ gUnknown_Debug_2038A20
+	ldr	r0, ._777 + 68  @ 0x2018000
 	str	r0, [r1]
 	strh	r5, [r0]
 	strb	r6, [r0, #0x2]
@@ -8321,7 +8321,7 @@ InitSeeTrainers:
 	strb	r6, [r0, #0x7]
 	strb	r6, [r0, #0xa]
 	strb	r6, [r0, #0x8]
-	ldr	r4, ._777 + 72
+	ldr	r4, ._777 + 72  @ gSpriteTemplate_83F8874
 	add	r0, r4, #0
 	mov	r1, #0x6c
 	mov	r2, #0x74
@@ -8330,7 +8330,7 @@ InitSeeTrainers:
 	add	r1, r0, #0
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
-	ldr	r6, ._777 + 76
+	ldr	r6, ._777 + 76  @ gSprites
 	lsl	r0, r1, #0x4
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
@@ -8392,7 +8392,7 @@ InitSeeTrainers:
 	.word	0x1e0a
 	.word	debug_80C777C+1
 	.word	gUnknown_Debug_2038A20
-	.word	+0x2018000
+	.word	0x2018000
 	.word	gSpriteTemplate_83F8874
 	.word	gSprites
 
@@ -8406,7 +8406,7 @@ debug_80C777C:
 	add	sp, sp, #0xffffffec
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-	ldr	r1, ._784
+	ldr	r1, ._784       @ gUnknown_Debug_083F8815
 	mov	r0, sp
 	mov	r2, #0x12
 	bl	memcpy
@@ -8430,15 +8430,15 @@ debug_80C777C:
 	mov	r2, #0x1d
 	mov	r3, #0x7
 	bl	Menu_DrawStdWindowFrame
-	ldr	r0, ._784 + 4
+	ldr	r0, ._784 + 4   @ gUnknown_Debug_083F87D0
 	mov	r1, #0xf
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._784 + 8
+	ldr	r0, ._784 + 8   @ gUnknown_Debug_083F87D8
 	mov	r1, #0x19
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r0, ._784 + 12
+	ldr	r0, ._784 + 12  @ gUnknown_Debug_083F87E0
 	mov	r1, #0xf
 	mov	r2, #0x5
 	bl	Menu_PrintText
@@ -8448,8 +8448,8 @@ debug_80C777C:
 	mov	r3, #0xc
 	bl	Menu_DrawStdWindowFrame
 	mov	r2, #0x0
-	ldr	r4, ._784 + 16
-	ldr	r0, ._784 + 20
+	ldr	r4, ._784 + 16  @ 0x600fa56
+	ldr	r0, ._784 + 20  @ 0xa311
 	add	r3, r0, #0
 ._779:
 	lsl	r0, r2, #0x1
@@ -8462,11 +8462,11 @@ debug_80C777C:
 	cmp	r2, #0xe
 	bls	._779	@cond_branch
 	mov	r2, #0x0
-	ldr	r5, ._784 + 24
+	ldr	r5, ._784 + 24  @ gUnknown_Debug_083F87F4
 	lsl	r6, r7, #0x2
 	mov	r8, r6
-	ldr	r4, ._784 + 28
-	ldr	r0, ._784 + 32
+	ldr	r4, ._784 + 28  @ 0x600f256
+	ldr	r0, ._784 + 32  @ 0x8301
 	add	r3, r0, #0
 ._780:
 	lsl	r0, r2, #0x1
@@ -8491,7 +8491,7 @@ debug_80C777C:
 	mov	r0, #0x23
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r4, ._784 + 36
+	ldr	r4, ._784 + 36  @ 0x600f396
 	mov	r5, #0x93
 	lsl	r5, r5, #0x8
 	add	r3, r5, #0
@@ -8512,8 +8512,8 @@ debug_80C777C:
 	mov	r0, #0x24
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r5, ._784 + 40
-	ldr	r4, ._784 + 44
+	ldr	r5, ._784 + 40  @ gUnknown_Debug_083F8801
+	ldr	r4, ._784 + 44  @ 0x600f3d6
 	mov	r0, #0x93
 	lsl	r0, r0, #0x8
 	add	r3, r0, #0
@@ -8534,7 +8534,7 @@ debug_80C777C:
 	mov	r0, #0x25
 	strb	r0, [r1]
 	mov	r2, #0x0
-	ldr	r4, ._784 + 48
+	ldr	r4, ._784 + 48  @ 0x600f416
 	mov	r0, #0x93
 	lsl	r0, r0, #0x8
 	add	r3, r0, #0
@@ -8555,20 +8555,20 @@ debug_80C777C:
 	mov	r1, #0xf
 	mov	r2, #0x11
 	bl	Menu_PrintText
-	ldr	r1, ._784 + 52
-	ldr	r2, ._784 + 56
+	ldr	r1, ._784 + 52  @ 0x4000040
+	ldr	r2, ._784 + 56  @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r5, ._784 + 60
+	ldr	r5, ._784 + 60  @ 0x699f
 	add	r0, r5, #0
 	strh	r0, [r1]
-	ldr	r1, ._784 + 64
+	ldr	r1, ._784 + 64  @ gTasks
 	mov	r6, r8
 	add	r0, r6, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._784 + 68
+	ldr	r1, ._784 + 68  @ debug_80C7934
 	str	r1, [r0]
 	add	sp, sp, #0x14
 	pop	{r3}
@@ -8610,18 +8610,18 @@ debug_80C7934:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mov	r8, r0
-	ldr	r5, ._786
+	ldr	r5, ._786       @ gUnknown_Debug_2038A20
 	ldr	r6, [r5]
 	ldrh	r2, [r6]
 	lsl	r0, r2, #0x3
-	ldr	r1, ._786 + 4
+	ldr	r1, ._786 + 4   @ gTrainerFrontPicTable
 	add	r0, r0, r1
-	ldr	r1, ._786 + 8
+	ldr	r1, ._786 + 8   @ gTrainerFrontPicCoords
 	lsl	r2, r2, #0x2
 	add	r2, r2, r1
 	ldrb	r1, [r2]
 	ldrb	r2, [r2, #0x1]
-	ldr	r4, ._786 + 12
+	ldr	r4, ._786 + 12  @ gUnknown_081FAF4C
 	ldr	r3, [r4]
 	ldr	r4, [r4, #0x4]
 	str	r4, [sp]
@@ -8631,14 +8631,14 @@ debug_80C7934:
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	lsl	r0, r0, #0x3
-	ldr	r1, ._786 + 16
+	ldr	r1, ._786 + 16  @ gTrainerFrontPicPaletteTable
 	add	r0, r0, r1
 	bl	LoadCompressedObjectPalette
 	ldr	r0, [r5]
 	ldrh	r0, [r0]
 	mov	r1, #0x1
 	bl	GetMonSpriteTemplate_803C5A0
-	ldr	r0, ._786 + 20
+	ldr	r0, ._786 + 20  @ gUnknown_02024E8C
 	mov	r1, #0x28
 	mov	r2, #0x28
 	mov	r3, #0x0
@@ -8646,7 +8646,7 @@ debug_80C7934:
 	ldr	r1, [r5]
 	mov	r6, #0x0
 	strb	r0, [r1, #0x2]
-	ldr	r4, ._786 + 24
+	ldr	r4, ._786 + 24  @ gSprites
 	ldr	r2, [r5]
 	ldrb	r1, [r2, #0x2]
 	lsl	r0, r1, #0x4
@@ -8655,7 +8655,7 @@ debug_80C7934:
 	add	r1, r4, #0
 	add	r1, r1, #0x1c
 	add	r0, r0, r1
-	ldr	r1, ._786 + 28
+	ldr	r1, ._786 + 28  @ debug_69
 	str	r1, [r0]
 	ldrb	r0, [r2, #0x2]
 	lsl	r1, r0, #0x4
@@ -8684,9 +8684,9 @@ debug_80C7934:
 	ldr	r0, [r5]
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
-	ldr	r4, ._786 + 32
+	ldr	r4, ._786 + 32  @ gPlttBufferUnfaded
 	add	r0, r0, r4
-	ldr	r2, ._786 + 36
+	ldr	r2, ._786 + 36  @ 0xffffff00
 	add	r1, r4, r2
 	mov	r2, #0x10
 	bl	CpuSet
@@ -8694,16 +8694,16 @@ debug_80C7934:
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
 	add	r0, r0, r4
-	ldr	r1, ._786 + 40
+	ldr	r1, ._786 + 40  @ gPlttBufferFaded
 	mov	r2, #0x10
 	bl	CpuSet
-	ldr	r1, ._786 + 44
+	ldr	r1, ._786 + 44  @ gTasks
 	mov	r2, r8
 	lsl	r0, r2, #0x2
 	add r0, r0, r8
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._786 + 48
+	ldr	r1, ._786 + 48  @ debug_80C7A54
 	str	r1, [r0]
 	ldr	r0, [r5]
 	strb	r6, [r0, #0x9]
@@ -8738,14 +8738,14 @@ debug_80C7A54:
 	add	r6, r0, #0
 	lsl	r6, r6, #0x18
 	lsr	r6, r6, #0x18
-	ldr	r4, ._788
-	ldr	r5, ._788 + 4
+	ldr	r4, ._788       @ gPlttBufferUnfaded
+	ldr	r5, ._788 + 4   @ gUnknown_Debug_2038A20
 	ldr	r1, [r5]
 	add	r1, r1, #0x10
 	add	r0, r4, #0
 	mov	r2, #0x10
 	bl	CpuSet
-	ldr	r0, ._788 + 8
+	ldr	r0, ._788 + 8   @ 0xffffff00
 	add	r4, r4, r0
 	ldr	r3, [r5]
 	ldrb	r0, [r3, #0x7]
@@ -8766,7 +8766,7 @@ debug_80C7A54:
 	lsl	r1, r1, #0x2
 	and	r1, r1, r4
 	ldrh	r2, [r3, #0xc]
-	ldr	r0, ._788 + 12
+	ldr	r0, ._788 + 12  @ 0xfffffc1f
 	and	r0, r0, r2
 	orr	r0, r0, r1
 	strh	r0, [r3, #0xc]
@@ -8792,7 +8792,7 @@ debug_80C7A54:
 	mov	r2, #0xa
 	mov	r3, #0x2
 	bl	debug_80C68CC
-	ldr	r0, ._788 + 16
+	ldr	r0, ._788 + 16  @ gUnknown_Debug_083F8813
 	mov	r1, #0xd
 	mov	r2, #0xa
 	bl	Menu_PrintText
@@ -8801,12 +8801,12 @@ debug_80C7A54:
 	mov	r2, #0xa
 	mov	r3, #0x4
 	bl	debug_80C68CC
-	ldr	r1, ._788 + 20
+	ldr	r1, ._788 + 20  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._788 + 24
+	ldr	r1, ._788 + 24  @ debug_80C7B14
 	str	r1, [r0]
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -8830,7 +8830,7 @@ debug_80C7B14:
 	add	sp, sp, #0xfffffffc
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-	ldr	r1, ._792
+	ldr	r1, ._792       @ gMain
 	ldrh	r3, [r1, #0x2e]
 	mov	r0, #0x2
 	and	r0, r0, r3
@@ -8846,14 +8846,14 @@ debug_80C7B14:
 	mov	r2, #0x0
 	mov	r3, #0x10
 	bl	BeginNormalPaletteFade
-	ldr	r0, ._792 + 4
+	ldr	r0, ._792 + 4   @ debug_80C370C
 	bl	SetMainCallback2
-	ldr	r1, ._792 + 8
+	ldr	r1, ._792 + 8   @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._792 + 12
+	ldr	r1, ._792 + 12  @ debug_80C373C
 	str	r1, [r0]
 	b	._821
 ._793:
@@ -8870,7 +8870,7 @@ debug_80C7B14:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._794	@cond_branch
-	ldr	r4, ._796
+	ldr	r4, ._796       @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrh	r1, [r0]
 	mov	r0, #0x0
@@ -8885,7 +8885,7 @@ debug_80C7B14:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._798	@cond_branch
-	ldr	r4, ._800
+	ldr	r4, ._800       @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrh	r1, [r0]
 	mov	r0, #0x1
@@ -8893,12 +8893,12 @@ debug_80C7B14:
 	bl	debug_80C38B4
 	ldr	r1, [r4]
 	strh	r0, [r1]
-	ldr	r1, ._800 + 4
+	ldr	r1, ._800 + 4   @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._800 + 8
+	ldr	r1, ._800 + 8   @ debug_80C7D44
 	str	r1, [r0]
 	b	._821
 ._801:
@@ -8912,24 +8912,24 @@ debug_80C7B14:
 	and	r2, r2, r3
 	cmp	r2, #0
 	beq	._802	@cond_branch
-	ldr	r0, ._804
+	ldr	r0, ._804       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	mov	r0, #0x1
 	strb	r0, [r1, #0x5]
-	ldr	r1, ._804 + 4
-	ldr	r2, ._804 + 8
+	ldr	r1, ._804 + 4   @ 0x4000040
+	ldr	r2, ._804 + 8   @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._804 + 12
+	ldr	r2, ._804 + 12  @ 0x4167
 	add	r0, r2, #0
 	strh	r0, [r1]
-	ldr	r1, ._804 + 16
+	ldr	r1, ._804 + 16  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._804 + 20
+	ldr	r1, ._804 + 20  @ debug_80C7DDC
 	str	r1, [r0]
 	b	._821
 ._805:
@@ -8944,7 +8944,7 @@ debug_80C7B14:
 ._802:
 	mov	r0, #0x10
 	and	r0, r0, r1
-	ldr	r3, ._809
+	ldr	r3, ._809       @ gUnknown_Debug_2038A20
 	cmp	r0, #0
 	beq	._807	@cond_branch
 	ldr	r1, [r3]
@@ -8952,7 +8952,7 @@ debug_80C7B14:
 	cmp	r0, #0xd
 	bhi	._807	@cond_branch
 	lsl	r0, r0, #0x1
-	ldr	r1, ._809 + 4
+	ldr	r1, ._809 + 4   @ 0x5000102
 	add	r0, r0, r1
 	strh	r2, [r0]
 	ldr	r1, [r3]
@@ -8976,7 +8976,7 @@ debug_80C7B14:
 	cmp	r0, #0
 	beq	._812	@cond_branch
 	lsl	r0, r0, #0x1
-	ldr	r2, ._814
+	ldr	r2, ._814       @ 0x5000102
 	add	r0, r0, r2
 	mov	r1, #0x0
 	strh	r1, [r0]
@@ -8995,7 +8995,7 @@ debug_80C7B14:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._816	@cond_branch
-	ldr	r4, ._819
+	ldr	r4, ._819       @ gUnknown_Debug_2038A20
 	ldr	r2, [r4]
 	ldrb	r0, [r2, #0x9]
 	mov	r1, #0x1
@@ -9038,13 +9038,13 @@ debug_80C7B14:
 	mov	r2, #0x20
 	bl	LoadCompressedPalette
 ._818:
-	ldr	r5, ._822
+	ldr	r5, ._822       @ gUnknown_Debug_2038A20
 	ldr	r0, [r5]
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
-	ldr	r4, ._822 + 4
+	ldr	r4, ._822 + 4   @ gPlttBufferUnfaded
 	add	r0, r0, r4
-	ldr	r2, ._822 + 8
+	ldr	r2, ._822 + 8   @ 0xffffff00
 	add	r1, r4, r2
 	mov	r2, #0x10
 	bl	CpuSet
@@ -9052,16 +9052,16 @@ debug_80C7B14:
 	ldrb	r0, [r0, #0x6]
 	lsl	r0, r0, #0x5
 	add	r0, r0, r4
-	ldr	r1, ._822 + 12
+	ldr	r1, ._822 + 12  @ gPlttBufferFaded
 	mov	r2, #0x10
 	bl	CpuSet
 ._813:
-	ldr	r1, ._822 + 16
+	ldr	r1, ._822 + 16  @ gTasks
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._822 + 20
+	ldr	r1, ._822 + 20  @ debug_80C7A54
 	str	r1, [r0]
 	b	._821
 ._823:
@@ -9086,9 +9086,9 @@ debug_80C7B14:
 	ldr	r0, [r3]
 	ldrb	r1, [r0, #0x7]
 	lsl	r1, r1, #0x1
-	ldr	r2, ._824
+	ldr	r2, ._824       @ 0x5000142
 	add	r1, r1, r2
-	ldr	r2, ._824 + 4
+	ldr	r2, ._824 + 4   @ gUnknown_Debug_083F8790
 	ldrb	r0, [r0, #0x8]
 	lsl	r0, r0, #0x1
 	add	r0, r0, r2
@@ -9113,8 +9113,8 @@ debug_80C7D44:
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-	ldr	r6, ._826
-	ldr	r4, ._826 + 4
+	ldr	r6, ._826       @ gSprites
+	ldr	r4, ._826 + 4   @ gUnknown_Debug_2038A20
 	ldr	r0, [r4]
 	ldrb	r1, [r0, #0x2]
 	lsl	r0, r1, #0x4
@@ -9160,12 +9160,12 @@ debug_80C7D44:
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
 	bl	sub_809D510
-	ldr	r1, ._826 + 8
+	ldr	r1, ._826 + 8   @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._826 + 12
+	ldr	r1, ._826 + 12  @ debug_80C7934
 	str	r1, [r0]
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -9185,23 +9185,23 @@ debug_80C7DDC:
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-	ldr	r0, ._830
+	ldr	r0, ._830       @ gMain
 	ldrh	r2, [r0, #0x2e]
 	mov	r1, #0x1
 	and	r1, r1, r2
 	add	r3, r0, #0
 	cmp	r1, #0
 	beq	._828	@cond_branch
-	ldr	r0, ._830 + 4
+	ldr	r0, ._830 + 4   @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	mov	r0, #0x0
 	strb	r0, [r1, #0x5]
-	ldr	r1, ._830 + 8
-	ldr	r2, ._830 + 12
+	ldr	r1, ._830 + 8   @ 0x4000040
+	ldr	r2, ._830 + 12  @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._830 + 16
+	ldr	r2, ._830 + 16  @ 0x699f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	b	._829
@@ -9218,26 +9218,26 @@ debug_80C7DDC:
 	and	r0, r0, r2
 	cmp	r0, #0
 	beq	._832	@cond_branch
-	ldr	r6, ._834
+	ldr	r6, ._834       @ gUnknown_Debug_2038A20
 	ldr	r0, [r6]
 	strb	r1, [r0, #0x5]
-	ldr	r1, ._834 + 4
-	ldr	r2, ._834 + 8
+	ldr	r1, ._834 + 4   @ 0x4000040
+	ldr	r2, ._834 + 8   @ 0x51ef
 	add	r0, r2, #0
 	strh	r0, [r1]
 	add	r1, r1, #0x4
-	ldr	r2, ._834 + 12
+	ldr	r2, ._834 + 12  @ 0x699f
 	add	r0, r2, #0
 	strh	r0, [r1]
 	ldr	r0, [r6]
 	add	r0, r0, #0x10
-	ldr	r4, ._834 + 16
+	ldr	r4, ._834 + 16  @ gPlttBufferUnfaded
 	add	r1, r4, #0
 	mov	r2, #0x10
 	bl	CpuSet
 	ldr	r0, [r6]
 	add	r0, r0, #0x10
-	ldr	r5, ._834 + 20
+	ldr	r5, ._834 + 20  @ gPlttBufferFaded
 	add	r1, r5, #0
 	mov	r2, #0x10
 	bl	CpuSet
@@ -9264,12 +9264,12 @@ debug_80C7DDC:
 	mov	r2, #0x10
 	bl	CpuSet
 ._829:
-	ldr	r1, ._834 + 24
+	ldr	r1, ._834 + 24  @ gTasks
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._834 + 28
+	ldr	r1, ._834 + 28  @ debug_80C7A54
 	str	r1, [r0]
 	b	._871
 ._835:
@@ -9289,7 +9289,7 @@ debug_80C7DDC:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._837	@cond_branch
-	ldr	r0, ._839
+	ldr	r0, ._839       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	ldrb	r0, [r1, #0xa]
 	cmp	r0, #0x1
@@ -9307,7 +9307,7 @@ debug_80C7DDC:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._842	@cond_branch
-	ldr	r0, ._844
+	ldr	r0, ._844       @ gUnknown_Debug_2038A20
 	ldr	r1, [r0]
 	ldrb	r0, [r1, #0xa]
 	cmp	r0, #0
@@ -9325,7 +9325,7 @@ debug_80C7DDC:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._846	@cond_branch
-	ldr	r0, ._851
+	ldr	r0, ._851       @ gUnknown_Debug_2038A20
 	ldr	r2, [r0]
 	ldrb	r0, [r2, #0xa]
 	cmp	r0, #0x1
@@ -9368,7 +9368,7 @@ debug_80C7DDC:
 	mov	r1, #0x1f
 	and	r0, r0, r1
 	lsl	r0, r0, #0x5
-	ldr	r1, ._859
+	ldr	r1, ._859       @ 0xfffffc1f
 	and	r1, r1, r3
 	orr	r1, r1, r0
 	strh	r1, [r2, #0xc]
@@ -9398,7 +9398,7 @@ debug_80C7DDC:
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._871	@cond_branch
-	ldr	r0, ._868
+	ldr	r0, ._868       @ gUnknown_Debug_2038A20
 	ldr	r3, [r0]
 	ldrb	r0, [r3, #0xa]
 	cmp	r0, #0x1
@@ -9446,7 +9446,7 @@ debug_80C7DDC:
 	mov	r1, #0x1f
 	and	r0, r0, r1
 	lsl	r0, r0, #0x5
-	ldr	r1, ._876
+	ldr	r1, ._876       @ 0xfffffc1f
 	and	r1, r1, r2
 	orr	r1, r1, r0
 	strh	r1, [r3, #0xc]
@@ -9473,12 +9473,12 @@ debug_80C7DDC:
 	orr	r1, r1, r0
 	strb	r1, [r3, #0xd]
 ._878:
-	ldr	r0, ._879
+	ldr	r0, ._879       @ gTasks
 	lsl	r1, r7, #0x2
 	add	r1, r1, r7
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, ._879 + 4
+	ldr	r0, ._879 + 4   @ debug_80C802C
 	str	r0, [r1]
 ._871:
 	pop	{r4, r5, r6, r7}
@@ -9500,7 +9500,7 @@ debug_80C802C:
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-	ldr	r0, ._881
+	ldr	r0, ._881       @ gUnknown_Debug_2038A20
 	ldr	r3, [r0]
 	ldrb	r0, [r3, #0xc]
 	lsl	r0, r0, #0x1b
@@ -9515,13 +9515,13 @@ debug_80C802C:
 	lsr	r1, r1, #0x1b
 	lsl	r1, r1, #0xa
 	add	r0, r0, r1
-	ldr	r6, ._881 + 4
+	ldr	r6, ._881 + 4   @ gPlttBufferUnfaded
 	ldrb	r1, [r3, #0x7]
 	add	r1, r1, #0x81
 	lsl	r1, r1, #0x1
 	add	r1, r1, r6
 	strh	r0, [r1]
-	ldr	r1, ._881 + 8
+	ldr	r1, ._881 + 8   @ gPlttBufferFaded
 	mov	r8, r1
 	ldrb	r1, [r3, #0x7]
 	add	r1, r1, #0x81
@@ -9531,7 +9531,7 @@ debug_80C802C:
 	ldrb	r1, [r3, #0x6]
 	lsl	r1, r1, #0x4
 	ldrb	r2, [r3, #0x7]
-	ldr	r4, ._881 + 12
+	ldr	r4, ._881 + 12  @ 0x101
 	add	r2, r2, r4
 	add	r1, r1, r2
 	lsl	r1, r1, #0x1
@@ -9549,12 +9549,12 @@ debug_80C802C:
 	mov	r2, #0xa
 	mov	r3, #0x4
 	bl	debug_80C68CC
-	ldr	r1, ._881 + 16
+	ldr	r1, ._881 + 16  @ gTasks
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, ._881 + 20
+	ldr	r1, ._881 + 20  @ debug_80C7DDC
 	str	r1, [r0]
 	pop	{r3}
 	mov	r8, r3

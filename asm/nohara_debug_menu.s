@@ -15,7 +15,7 @@ InitNoharaDebugMenu:
 	mov	r2, #0x13
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._1
+	ldr	r3, ._1         @ gUnknown_Debug_083C4938
 	mov	r0, #0x1
 	mov	r1, #0x1
 	mov	r2, #0x9
@@ -29,8 +29,8 @@ InitNoharaDebugMenu:
 	mov	r2, #0x1
 	mov	r3, #0x9
 	bl	InitMenu
-	ldr	r1, ._1 + 4
-	ldr	r0, ._1 + 8
+	ldr	r1, ._1 + 4     @ gMenuCallback
+	ldr	r0, ._1 + 8     @ debug_sub_808F414
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -58,8 +58,8 @@ debug_sub_808F414:
 	add	r0, r0, #0x1
 	cmp	r1, r0
 	beq	._4	@cond_branch
-	ldr	r2, ._6
-	ldr	r0, ._6 + 4
+	ldr	r2, ._6         @ gMenuCallback
+	ldr	r0, ._6 + 4     @ gUnknown_Debug_083C4938
 	lsl	r1, r1, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
@@ -86,7 +86,7 @@ debug_sub_808F414:
 NoharaDebugMenu_TV:
 	push	{lr}
 	add	sp, sp, #0xfffffff8
-	ldr	r1, ._8
+	ldr	r1, ._8         @ gDebug_03000726
 	mov	r0, #0x0
 	strb	r0, [r1]
 	bl	Menu_EraseScreen
@@ -95,7 +95,7 @@ NoharaDebugMenu_TV:
 	mov	r2, #0xa
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._8 + 4
+	ldr	r3, ._8 + 4     @ gUnknown_Debug_083C4B8C
 	mov	r0, #0x1
 	mov	r1, #0x1
 	mov	r2, #0x9
@@ -109,8 +109,8 @@ NoharaDebugMenu_TV:
 	mov	r2, #0x1
 	mov	r3, #0x9
 	bl	InitMenu
-	ldr	r1, ._8 + 8
-	ldr	r0, ._8 + 12
+	ldr	r1, ._8 + 8     @ gMenuCallback
+	ldr	r0, ._8 + 12    @ debug_sub_808F4AC
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -139,8 +139,8 @@ debug_sub_808F4AC:
 	add	r0, r0, #0x1
 	cmp	r1, r0
 	beq	._11	@cond_branch
-	ldr	r2, ._13
-	ldr	r0, ._13 + 4
+	ldr	r2, ._13        @ gMenuCallback
+	ldr	r0, ._13 + 4    @ gUnknown_Debug_083C4B8C
 	lsl	r1, r1, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
@@ -167,14 +167,14 @@ debug_sub_808F4AC:
 debug_sub_808F4EC:
 	push	{lr}
 	bl	debug_sub_808F6BC
-	ldr	r0, ._15
+	ldr	r0, ._15        @ gUnknown_Debug_083C4980
 	bl	sub_8071F40
 	mov	r0, #0x3
 	mov	r1, #0x3
 	mov	r2, #0x1
 	bl	DisplayYesNoMenu
-	ldr	r1, ._15 + 4
-	ldr	r0, ._15 + 8
+	ldr	r1, ._15 + 4    @ gMenuCallback
+	ldr	r0, ._15 + 8    @ debug_sub_808F648
 	str	r0, [r1]
 	pop	{r0}
 	bx	r0
@@ -191,8 +191,8 @@ debug_sub_808F4EC:
 debug_sub_808F518:
 	push	{r4, lr}
 	mov	r2, #0x0
-	ldr	r4, ._20
-	ldr	r3, ._20 + 4
+	ldr	r4, ._20        @ gSaveBlock1
+	ldr	r3, ._20 + 4    @ 0x2738
 ._19:
 	lsl	r0, r2, #0x3
 	add	r0, r0, r2
@@ -205,7 +205,7 @@ debug_sub_808F518:
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x13
 	bhi	._18	@cond_branch
-	ldr	r0, ._20 + 8
+	ldr	r0, ._20 + 8    @ 0x2739
 	add	r1, r1, r0
 	ldrb	r0, [r1]
 	cmp	r0, #0
@@ -234,8 +234,8 @@ debug_sub_808F518:
 debug_sub_808F560:
 	push	{r4, lr}
 	mov	r1, #0x0
-	ldr	r4, ._23
-	ldr	r3, ._23 + 4
+	ldr	r4, ._23        @ gSaveBlock1
+	ldr	r3, ._23 + 4    @ 0x2739
 	mov	r2, #0x0
 ._22:
 	lsl	r0, r1, #0x3
@@ -266,9 +266,9 @@ debug_sub_808F560:
 debug_sub_808F594:
 	push	{r4, r5, r6, lr}
 	mov	r2, #0x0
-	ldr	r6, ._27
-	ldr	r5, ._27 + 4
-	ldr	r4, ._27 + 8
+	ldr	r6, ._27        @ gSaveBlock1
+	ldr	r5, ._27 + 4    @ 0x2738
+	ldr	r4, ._27 + 8    @ 0x2739
 	mov	r3, #0x1
 ._26:
 	lsl	r0, r2, #0x3
@@ -307,12 +307,12 @@ debug_sub_808F5D8:
 	mov	r7, r8
 	push	{r7}
 	mov	r4, #0x0
-	ldr	r6, ._30
-	ldr	r7, ._30 + 4
+	ldr	r6, ._30        @ gStringVar1
+	ldr	r7, ._30 + 4    @ gUnknown_Debug_083C4BD4
 	add	r0, r7, #1
 	mov	r8, r0
 ._29:
-	ldr	r5, ._30 + 8
+	ldr	r5, ._30 + 8    @ gSpecialVar_0x8004
 	strh	r4, [r5]
 	bl	GetSlotMachineId
 	add	r1, r0, #0
@@ -338,8 +338,8 @@ debug_sub_808F5D8:
 	bls	._29	@cond_branch
 	mov	r0, #0x0
 	strh	r0, [r5]
-	ldr	r1, ._30 + 12
-	ldr	r0, ._30 + 16
+	ldr	r1, ._30 + 12   @ gMenuCallback
+	ldr	r0, ._30 + 16   @ debug_sub_8090278
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r3}
@@ -361,7 +361,7 @@ debug_sub_808F5D8:
 	thumb_func_start debug_sub_808F648
 debug_sub_808F648:
 	push	{lr}
-	ldr	r0, ._35
+	ldr	r0, ._35        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
@@ -372,7 +372,7 @@ debug_sub_808F648:
 	mov	r2, #0x1d
 	mov	r3, #0xd
 	bl	Menu_EraseWindowRect
-	ldr	r0, ._35 + 4
+	ldr	r0, ._35 + 4    @ gDebug_03000726
 	ldrb	r1, [r0]
 	mov	r2, #0x1
 	eor	r1, r1, r2
@@ -425,14 +425,14 @@ debug_sub_808F648:
 debug_sub_808F6BC:
 	push	{r4, r5, r6, lr}
 	mov	r4, #0x0
-	ldr	r5, ._48
-	ldr	r6, ._48 + 4
+	ldr	r5, ._48        @ gStringVar1
+	ldr	r6, ._48 + 4    @ gSaveBlock1
 ._45:
 	lsl	r0, r4, #0x3
 	add	r0, r0, r4
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
-	ldr	r1, ._48 + 8
+	ldr	r1, ._48 + 8    @ 0x2738
 	add	r0, r0, r1
 	ldrb	r1, [r0]
 	add	r0, r5, #0
@@ -453,14 +453,14 @@ debug_sub_808F6BC:
 	cmp	r4, #0x4
 	bls	._45	@cond_branch
 	mov	r4, #0x5
-	ldr	r5, ._48
-	ldr	r6, ._48 + 4
+	ldr	r5, ._48        @ gStringVar1
+	ldr	r6, ._48 + 4    @ gSaveBlock1
 ._50:
 	lsl	r0, r4, #0x3
 	add	r0, r0, r4
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
-	ldr	r1, ._48 + 8
+	ldr	r1, ._48 + 8    @ 0x2738
 	add	r0, r0, r1
 	ldrb	r1, [r0]
 	add	r0, r5, #0
@@ -497,12 +497,12 @@ debug_sub_808F6BC:
 	cmp	r4, #0x17
 	bls	._50	@cond_branch
 	mov	r4, #0x0
-	ldr	r5, ._53
+	ldr	r5, ._53        @ gStringVar1
 ._55:
-	ldr	r0, ._53 + 4
+	ldr	r0, ._53 + 4    @ gSaveBlock1
 	lsl	r1, r4, #0x2
 	add	r1, r1, r0
-	ldr	r0, ._53 + 8
+	ldr	r0, ._53 + 8    @ 0x2abc
 	add	r1, r1, r0
 	ldrb	r1, [r1]
 	add	r0, r5, #0
@@ -551,14 +551,14 @@ debug_sub_808F6BC:
 debug_sub_808F7B4:
 	push	{r4, r5, r6, lr}
 	mov	r4, #0x0
-	ldr	r5, ._59
-	ldr	r6, ._59 + 4
+	ldr	r5, ._59        @ gStringVar1
+	ldr	r6, ._59 + 4    @ gSaveBlock1
 ._56:
 	lsl	r0, r4, #0x3
 	add	r0, r0, r4
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
-	ldr	r1, ._59 + 8
+	ldr	r1, ._59 + 8    @ 0x2739
 	add	r0, r0, r1
 	ldrb	r1, [r0]
 	add	r0, r5, #0
@@ -579,14 +579,14 @@ debug_sub_808F7B4:
 	cmp	r4, #0x4
 	bls	._56	@cond_branch
 	mov	r4, #0x5
-	ldr	r5, ._59
-	ldr	r6, ._59 + 4
+	ldr	r5, ._59        @ gStringVar1
+	ldr	r6, ._59 + 4    @ gSaveBlock1
 ._61:
 	lsl	r0, r4, #0x3
 	add	r0, r0, r4
 	lsl	r0, r0, #0x2
 	add	r0, r0, r6
-	ldr	r1, ._59 + 8
+	ldr	r1, ._59 + 8    @ 0x2739
 	add	r0, r0, r1
 	ldrb	r1, [r0]
 	add	r0, r5, #0
@@ -623,12 +623,12 @@ debug_sub_808F7B4:
 	cmp	r4, #0x17
 	bls	._61	@cond_branch
 	mov	r4, #0x0
-	ldr	r5, ._64
+	ldr	r5, ._64        @ gStringVar1
 ._66:
-	ldr	r0, ._64 + 4
+	ldr	r0, ._64 + 4    @ gSaveBlock1
 	lsl	r1, r4, #0x2
 	add	r1, r1, r0
-	ldr	r0, ._64 + 8
+	ldr	r0, ._64 + 8    @ 0x2abd
 	add	r1, r1, r0
 	ldrb	r1, [r1]
 	add	r0, r5, #0
@@ -676,9 +676,9 @@ debug_sub_808F7B4:
 	thumb_func_start debug_sub_808F8AC
 debug_sub_808F8AC:
 	push	{lr}
-	ldr	r0, ._67
+	ldr	r0, ._67        @ 0x832
 	bl	FlagSet
-	ldr	r0, ._67 + 4
+	ldr	r0, ._67 + 4    @ 0x818
 	bl	FlagSet
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -695,17 +695,17 @@ debug_sub_808F8AC:
 	thumb_func_start debug_sub_808F8CC
 debug_sub_808F8CC:
 	push	{r4, lr}
-	ldr	r1, ._69
+	ldr	r1, ._69        @ gDebug_03000724
 	mov	r0, #0x0
 	strb	r0, [r1]
-	ldr	r0, ._69 + 4
+	ldr	r0, ._69 + 4    @ gUnknown_Debug_083C49CA
 	bl	sub_8071F40
 	mov	r0, #0xd
 	mov	r1, #0x6
 	mov	r2, #0x1a
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r0, ._69 + 8
+	ldr	r0, ._69 + 8    @ gUnknown_Debug_083C4ABD
 	ldr	r0, [r0]
 	mov	r1, #0xe
 	mov	r2, #0x7
@@ -715,7 +715,7 @@ debug_sub_808F8CC:
 	mov	r2, #0x18
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._69 + 12
+	ldr	r4, ._69 + 12   @ gStringVar1
 	add	r0, r4, #0
 	mov	r1, #0x0
 	mov	r2, #0x0
@@ -725,8 +725,8 @@ debug_sub_808F8CC:
 	mov	r1, #0x17
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r1, ._69 + 16
-	ldr	r0, ._69 + 20
+	ldr	r1, ._69 + 16   @ gMenuCallback
+	ldr	r0, ._69 + 20   @ debug_sub_808F93C
 	str	r0, [r1]
 	pop	{r4}
 	pop	{r0}
@@ -747,13 +747,13 @@ debug_sub_808F8CC:
 debug_sub_808F93C:
 	push	{r4, lr}
 	mov	r2, #0x0
-	ldr	r0, ._83
+	ldr	r0, ._83        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._71	@cond_branch
-	ldr	r1, ._83 + 4
+	ldr	r1, ._83 + 4    @ gDebug_03000725
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
 	strb	r0, [r1]
@@ -767,13 +767,13 @@ debug_sub_808F93C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._71:
-	ldr	r0, ._83
+	ldr	r0, ._83        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._73	@cond_branch
-	ldr	r1, ._83 + 4
+	ldr	r1, ._83 + 4    @ gDebug_03000725
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._74	@cond_branch
@@ -787,13 +787,13 @@ debug_sub_808F93C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._73:
-	ldr	r0, ._83
+	ldr	r0, ._83        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x10
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._75	@cond_branch
-	ldr	r1, ._83 + 8
+	ldr	r1, ._83 + 8    @ gDebug_03000724
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
 	strb	r0, [r1]
@@ -808,13 +808,13 @@ debug_sub_808F93C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._75:
-	ldr	r0, ._83
+	ldr	r0, ._83        @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._77	@cond_branch
-	ldr	r1, ._83 + 8
+	ldr	r1, ._83 + 8    @ gDebug_03000724
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._78	@cond_branch
@@ -835,8 +835,8 @@ debug_sub_808F93C:
 	mov	r2, #0x1a
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._83 + 12
-	ldr	r0, ._83 + 8
+	ldr	r1, ._83 + 12   @ gUnknown_Debug_083C4ABD
+	ldr	r0, ._83 + 8    @ gDebug_03000724
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x2
 	add	r0, r0, r1
@@ -849,8 +849,8 @@ debug_sub_808F93C:
 	mov	r2, #0x18
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._83 + 16
-	ldr	r0, ._83 + 4
+	ldr	r4, ._83 + 16   @ gStringVar1
+	ldr	r0, ._83 + 4    @ gDebug_03000725
 	ldrb	r1, [r0]
 	add	r0, r4, #0
 	mov	r2, #0x0
@@ -861,7 +861,7 @@ debug_sub_808F93C:
 	mov	r2, #0x1
 	bl	Menu_PrintText
 ._79:
-	ldr	r4, ._83
+	ldr	r4, ._83        @ gMain
 	ldrh	r1, [r4, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
@@ -869,10 +869,10 @@ debug_sub_808F93C:
 	beq	._80	@cond_branch
 	mov	r0, #0x15
 	bl	PlaySE
-	ldr	r0, ._83 + 4
+	ldr	r0, ._83 + 4    @ gDebug_03000725
 	ldrb	r0, [r0]
-	ldr	r2, ._83 + 20
-	ldr	r1, ._83 + 8
+	ldr	r2, ._83 + 20   @ gUnknown_Debug_083C4ABD
+	ldr	r1, ._83 + 8    @ gDebug_03000724
 	ldrb	r1, [r1]
 	add	r1, r1, r2
 	ldrb	r1, [r1]
@@ -895,7 +895,7 @@ debug_sub_808F93C:
 	.word	gStringVar1
 	.word	gUnknown_Debug_083C4ABD
 ._81:
-	ldr	r0, ._85
+	ldr	r0, ._85        @ gSaveBlock1
 	bl	sub_80BF588
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -925,20 +925,20 @@ debug_sub_808FA88:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mov	r9, r0
-	ldr	r3, ._92
+	ldr	r3, ._92        @ gSaveBlock1
 	lsl	r4, r6, #0x3
 	add	r2, r4, r6
 	lsl	r2, r2, #0x2
 	add	r0, r2, r3
-	ldr	r5, ._92 + 4
+	ldr	r5, ._92 + 4    @ 0x2738
 	add	r1, r0, r5
 	strb	r7, [r1]
-	ldr	r1, ._92 + 8
+	ldr	r1, ._92 + 8    @ 0x2739
 	add	r0, r0, r1
 	mov	r1, #0x1
 	strb	r1, [r0]
 	mov	r1, #0x0
-	ldr	r0, ._92 + 12
+	ldr	r0, ._92 + 12   @ 0x273a
 	add	r5, r3, r0
 	mov	r3, #0x1
 ._87:
@@ -975,7 +975,7 @@ debug_sub_808FA88:
 ._90:
 	add	r0, r4, r6
 	lsl	r0, r0, #0x2
-	ldr	r1, ._96
+	ldr	r1, ._96        @ gSaveBlock1
 	add	r0, r0, r1
 	bl	sub_80BE160
 	b	._95
@@ -986,7 +986,7 @@ debug_sub_808FA88:
 ._88:
 	add	r0, r4, r6
 	lsl	r0, r0, #0x2
-	ldr	r1, ._100
+	ldr	r1, ._100       @ gSaveBlock1
 	add	r0, r0, r1
 	bl	sub_80BE138
 ._95:
@@ -996,7 +996,7 @@ debug_sub_808FA88:
 	b	._173
 ._98:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._100 + 4
+	ldr	r1, ._100 + 4   @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -1050,13 +1050,13 @@ debug_sub_808FA88:
 ._104:
 	add	r0, r4, r6
 	lsl	r0, r0, #0x2
-	ldr	r1, ._145
+	ldr	r1, ._145       @ gSaveBlock1
 	add	r4, r0, r1
 	mov	r2, #0x1
 	strh	r2, [r4, #0x2]
 	add	r1, r1, #0x10
 	add	r0, r0, r1
-	ldr	r1, ._145 + 4
+	ldr	r1, ._145 + 4   @ gSaveBlock2
 	bl	StringCopy
 	mov	r0, #0x5
 	strb	r0, [r4, #0x18]
@@ -1069,19 +1069,19 @@ debug_sub_808FA88:
 ._105:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r6, ._148
+	ldr	r6, ._148       @ gSaveBlock1
 	add	r1, r4, r6
 	mov	r8, r1
 	mov	r0, #0x1
 	strh	r0, [r1, #0x2]
 	add	r0, r6, #5
 	add	r0, r4, r0
-	ldr	r1, ._148 + 4
+	ldr	r1, ._148 + 4   @ gSaveBlock2
 	bl	StringCopy
 	mov	r0, #0x64
 	mov	r5, r9
 	mul	r5, r5, r0
-	ldr	r0, ._148 + 8
+	ldr	r0, ._148 + 8   @ gPlayerParty
 	add	r5, r5, r0
 	add	r6, r6, #0x10
 	add	r4, r4, r6
@@ -1109,14 +1109,14 @@ debug_sub_808FA88:
 	mov	r1, r9
 	mul	r1, r1, r0
 	mov	r8, r1
-	ldr	r0, ._151
+	ldr	r0, ._151       @ gPlayerParty
 	add r8, r8, r0
 	mov	r0, r8
 	mov	r1, #0xb
 	bl	GetMonData
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r5, ._151 + 4
+	ldr	r5, ._151 + 4   @ gSaveBlock1
 	add	r6, r4, r5
 	strh	r0, [r6, #0x2]
 	mov	r0, #0x1
@@ -1124,7 +1124,7 @@ debug_sub_808FA88:
 	add	r0, r5, #0
 	add	r0, r0, #0xf
 	add	r0, r4, r0
-	ldr	r1, ._151 + 8
+	ldr	r1, ._151 + 8   @ gSaveBlock2
 	bl	StringCopy
 	add	r5, r5, #0x4
 	add	r4, r4, r5
@@ -1148,7 +1148,7 @@ debug_sub_808FA88:
 ._108:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r6, ._154
+	ldr	r6, ._154       @ gSaveBlock1
 	add	r5, r4, r6
 	mov	r8, r5
 	mov	r0, #0x1
@@ -1156,12 +1156,12 @@ debug_sub_808FA88:
 	add	r0, r6, #0
 	add	r0, r0, #0x16
 	add	r0, r4, r0
-	ldr	r1, ._154 + 4
+	ldr	r1, ._154 + 4   @ gSaveBlock2
 	bl	StringCopy
 	mov	r0, #0x64
 	mov	r5, r9
 	mul	r5, r5, r0
-	ldr	r0, ._154 + 8
+	ldr	r0, ._154 + 8   @ gPlayerParty
 	add	r5, r5, r0
 	add	r6, r6, #0x8
 	add	r4, r4, r6
@@ -1187,14 +1187,14 @@ debug_sub_808FA88:
 ._109:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r5, ._157
+	ldr	r5, ._157       @ gSaveBlock1
 	add	r6, r4, r5
 	mov	r0, #0x1
 	strh	r0, [r6, #0xa]
 	strh	r0, [r6, #0x14]
 	add	r0, r5, #2
 	add	r0, r4, r0
-	ldr	r1, ._157 + 4
+	ldr	r1, ._157 + 4   @ gSaveBlock2
 	mov	r8, r1
 	bl	StringCopy
 	add	r5, r5, #0xc
@@ -1213,7 +1213,7 @@ debug_sub_808FA88:
 ._143:
 	add	r0, r4, r6
 	lsl	r0, r0, #0x2
-	ldr	r1, ._160
+	ldr	r1, ._160       @ gSaveBlock1
 	add	r0, r0, r1
 	mov	r1, #0x1
 	strh	r1, [r0, #0xc]
@@ -1226,14 +1226,14 @@ debug_sub_808FA88:
 ._123:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r0, ._163
+	ldr	r0, ._163       @ gSaveBlock1
 	add	r4, r4, r0
-	ldr	r1, ._163 + 4
+	ldr	r1, ._163 + 4   @ gUnknown_Debug_083C4C64
 	mov	r0, sp
 	mov	r2, #0x8
 	bl	memcpy
 	add	r5, sp, #0x8
-	ldr	r1, ._163 + 8
+	ldr	r1, ._163 + 8   @ gUnknown_Debug_083C4C6C
 	add	r0, r5, #0
 	mov	r2, #0xb
 	bl	memcpy
@@ -1263,10 +1263,10 @@ debug_sub_808FA88:
 ._124:
 	add	r0, r4, r6
 	lsl	r0, r0, #0x2
-	ldr	r1, ._168
+	ldr	r1, ._168       @ gSaveBlock1
 	add	r5, r0, r1
 	add	r4, sp, #0x14
-	ldr	r1, ._168 + 4
+	ldr	r1, ._168 + 4   @ gUnknown_Debug_083C4C64
 	add	r0, r4, #0
 	mov	r2, #0x8
 	bl	memcpy
@@ -1308,10 +1308,10 @@ debug_sub_808FA88:
 ._125:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r0, ._171
+	ldr	r0, ._171       @ gSaveBlock1
 	add	r4, r4, r0
 	add	r5, sp, #0x1c
-	ldr	r1, ._171 + 4
+	ldr	r1, ._171 + 4   @ gUnknown_Debug_083C4C64
 	add	r0, r5, #0
 	mov	r2, #0x8
 	bl	memcpy
@@ -1339,10 +1339,10 @@ debug_sub_808FA88:
 ._126:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r0, ._174
+	ldr	r0, ._174       @ gSaveBlock1
 	add	r4, r4, r0
 	add	r5, sp, #0x24
-	ldr	r1, ._174 + 4
+	ldr	r1, ._174 + 4   @ gUnknown_Debug_083C4C64
 	add	r0, r5, #0
 	mov	r2, #0x8
 	bl	memcpy
@@ -1367,14 +1367,14 @@ debug_sub_808FA88:
 ._127:
 	add	r4, r4, r6
 	lsl	r4, r4, #0x2
-	ldr	r0, ._176
+	ldr	r0, ._176       @ gSaveBlock1
 	add	r4, r4, r0
 	add	r5, sp, #0x2c
-	ldr	r1, ._176 + 4
+	ldr	r1, ._176 + 4   @ gUnknown_Debug_083C4C64
 	add	r0, r5, #0
 	mov	r2, #0x8
 	bl	memcpy
-	ldr	r0, ._176 + 8
+	ldr	r0, ._176 + 8   @ 0xffff
 	strh	r0, [r4, #0x2]
 	mov	r0, #0x1
 	neg	r0, r0
@@ -1421,17 +1421,17 @@ debug_sub_808FEBC:
 	thumb_func_start debug_sub_808FECC
 debug_sub_808FECC:
 	push	{r4, lr}
-	ldr	r1, ._178
+	ldr	r1, ._178       @ gDebug_03000724
 	mov	r0, #0x0
 	strb	r0, [r1]
-	ldr	r0, ._178 + 4
+	ldr	r0, ._178 + 4   @ gUnknown_Debug_083C49CA
 	bl	sub_8071F40
 	mov	r0, #0xd
 	mov	r1, #0x6
 	mov	r2, #0x17
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r0, ._178 + 8
+	ldr	r0, ._178 + 8   @ gUnknown_Debug_083C4B20
 	ldr	r0, [r0]
 	mov	r1, #0xe
 	mov	r2, #0x7
@@ -1441,7 +1441,7 @@ debug_sub_808FECC:
 	mov	r2, #0x18
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._178 + 12
+	ldr	r4, ._178 + 12  @ gStringVar1
 	add	r0, r4, #0
 	mov	r1, #0x0
 	mov	r2, #0x0
@@ -1451,8 +1451,8 @@ debug_sub_808FECC:
 	mov	r1, #0x17
 	mov	r2, #0x1
 	bl	Menu_PrintText
-	ldr	r1, ._178 + 16
-	ldr	r0, ._178 + 20
+	ldr	r1, ._178 + 16  @ gMenuCallback
+	ldr	r0, ._178 + 20  @ debug_sub_808FF3C
 	str	r0, [r1]
 	pop	{r4}
 	pop	{r0}
@@ -1473,13 +1473,13 @@ debug_sub_808FECC:
 debug_sub_808FF3C:
 	push	{r4, lr}
 	mov	r2, #0x0
-	ldr	r0, ._192
+	ldr	r0, ._192       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x40
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._180	@cond_branch
-	ldr	r1, ._192 + 4
+	ldr	r1, ._192 + 4   @ gDebug_03000725
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
 	strb	r0, [r1]
@@ -1493,13 +1493,13 @@ debug_sub_808FF3C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._180:
-	ldr	r0, ._192
+	ldr	r0, ._192       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._182	@cond_branch
-	ldr	r1, ._192 + 4
+	ldr	r1, ._192 + 4   @ gDebug_03000725
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._183	@cond_branch
@@ -1513,13 +1513,13 @@ debug_sub_808FF3C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._182:
-	ldr	r0, ._192
+	ldr	r0, ._192       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x10
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._184	@cond_branch
-	ldr	r1, ._192 + 8
+	ldr	r1, ._192 + 8   @ gDebug_03000724
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
 	strb	r0, [r1]
@@ -1534,13 +1534,13 @@ debug_sub_808FF3C:
 	bl	PlaySE
 	mov	r2, #0x1
 ._184:
-	ldr	r0, ._192
+	ldr	r0, ._192       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x20
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._186	@cond_branch
-	ldr	r1, ._192 + 8
+	ldr	r1, ._192 + 8   @ gDebug_03000724
 	ldrb	r0, [r1]
 	cmp	r0, #0
 	bne	._187	@cond_branch
@@ -1561,8 +1561,8 @@ debug_sub_808FF3C:
 	mov	r2, #0x17
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._192 + 12
-	ldr	r0, ._192 + 8
+	ldr	r1, ._192 + 12  @ gUnknown_Debug_083C4B20
+	ldr	r0, ._192 + 8   @ gDebug_03000724
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x2
 	add	r0, r0, r1
@@ -1575,8 +1575,8 @@ debug_sub_808FF3C:
 	mov	r2, #0x18
 	mov	r3, #0x2
 	bl	Menu_BlankWindowRect
-	ldr	r4, ._192 + 16
-	ldr	r0, ._192 + 4
+	ldr	r4, ._192 + 16  @ gStringVar1
+	ldr	r0, ._192 + 4   @ gDebug_03000725
 	ldrb	r1, [r0]
 	add	r0, r4, #0
 	mov	r2, #0x0
@@ -1587,7 +1587,7 @@ debug_sub_808FF3C:
 	mov	r2, #0x1
 	bl	Menu_PrintText
 ._188:
-	ldr	r4, ._192
+	ldr	r4, ._192       @ gMain
 	ldrh	r1, [r4, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
@@ -1595,10 +1595,10 @@ debug_sub_808FF3C:
 	beq	._189	@cond_branch
 	mov	r0, #0x15
 	bl	PlaySE
-	ldr	r0, ._192 + 4
+	ldr	r0, ._192 + 4   @ gDebug_03000725
 	ldrb	r0, [r0]
-	ldr	r2, ._192 + 20
-	ldr	r1, ._192 + 8
+	ldr	r2, ._192 + 20  @ gUnknown_Debug_083C4B20
+	ldr	r1, ._192 + 8   @ gDebug_03000724
 	ldrb	r1, [r1]
 	add	r1, r1, r2
 	ldrb	r1, [r1]
@@ -1634,13 +1634,13 @@ debug_sub_808FF3C:
 	thumb_func_start debug_sub_8090080
 debug_sub_8090080:
 	lsl	r0, r0, #0x18
-	ldr	r2, ._194
+	ldr	r2, ._194       @ gSaveBlock1
 	lsr	r0, r0, #0x16
 	add	r0, r0, r2
-	ldr	r3, ._194 + 4
+	ldr	r3, ._194 + 4   @ 0x2abc
 	add	r2, r0, r3
 	strb	r1, [r2]
-	ldr	r1, ._194 + 8
+	ldr	r1, ._194 + 8   @ 0x2abd
 	add	r2, r0, r1
 	mov	r1, #0x1
 	strb	r1, [r2]
@@ -1665,7 +1665,7 @@ debug_sub_80900AC:
 	push	{r7}
 	mov	r7, #0x0
 	mov	r5, #0x0
-	ldr	r0, ._202
+	ldr	r0, ._202       @ gSaveBlock1
 	mov	r8, r0
 ._198:
 	lsl	r0, r5, #0x3
@@ -1673,7 +1673,7 @@ debug_sub_80900AC:
 	lsl	r0, r0, #0x2
 	mov	r1, r8
 	add	r6, r0, r1
-	ldr	r1, ._202 + 4
+	ldr	r1, ._202 + 4   @ 0x2738
 	add	r0, r6, r1
 	ldrb	r4, [r0]
 	cmp	r4, #0
@@ -1682,12 +1682,12 @@ debug_sub_80900AC:
 	bne	._197	@cond_branch
 	mov	r7, #0x0
 ._197:
-	ldr	r0, ._202 + 8
+	ldr	r0, ._202 + 8   @ gUnknown_Debug_083C4ABD
 	add	r0, r7, r0
 	ldrb	r1, [r0]
 	add	r0, r5, #0
 	bl	debug_sub_808FA88
-	ldr	r1, ._202 + 12
+	ldr	r1, ._202 + 12  @ 0x2739
 	add	r0, r6, r1
 	strb	r4, [r0]
 	add	r0, r7, #1
@@ -1702,10 +1702,10 @@ debug_sub_80900AC:
 	mov	r7, #0x0
 	mov	r5, #0x0
 ._201:
-	ldr	r0, ._202
+	ldr	r0, ._202       @ gSaveBlock1
 	lsl	r1, r5, #0x2
 	add	r1, r1, r0
-	ldr	r0, ._202 + 16
+	ldr	r0, ._202 + 16  @ 0x2abc
 	add	r1, r1, r0
 	ldrb	r0, [r1]
 	cmp	r0, #0
@@ -1714,7 +1714,7 @@ debug_sub_80900AC:
 	bne	._200	@cond_branch
 	mov	r7, #0x0
 ._200:
-	ldr	r0, ._202 + 20
+	ldr	r0, ._202 + 20  @ gUnknown_Debug_083C4B20
 	add	r0, r7, r0
 	ldrb	r1, [r0]
 	add	r0, r5, #0
@@ -1757,7 +1757,7 @@ NoharaDebugMenu_Fan:
 	mov	r2, #0xb
 	mov	r3, #0x13
 	bl	Menu_DrawStdWindowFrame
-	ldr	r3, ._204
+	ldr	r3, ._204       @ gUnknown_Debug_083C4D28
 	mov	r0, #0x1
 	mov	r1, #0x1
 	mov	r2, #0x9
@@ -1771,8 +1771,8 @@ NoharaDebugMenu_Fan:
 	mov	r2, #0x1
 	mov	r3, #0x9
 	bl	InitMenu
-	ldr	r1, ._204 + 4
-	ldr	r0, ._204 + 8
+	ldr	r1, ._204 + 4   @ gMenuCallback
+	ldr	r0, ._204 + 8   @ debug_sub_80901A4
 	str	r0, [r1]
 	mov	r0, #0x0
 	add	sp, sp, #0x8
@@ -1800,8 +1800,8 @@ debug_sub_80901A4:
 	add	r0, r0, #0x1
 	cmp	r1, r0
 	beq	._207	@cond_branch
-	ldr	r2, ._209
-	ldr	r0, ._209 + 4
+	ldr	r2, ._209       @ gMenuCallback
+	ldr	r0, ._209 + 4   @ gUnknown_Debug_083C4D28
 	lsl	r1, r1, #0x3
 	add	r0, r0, #0x4
 	add	r1, r1, r0
@@ -1842,8 +1842,8 @@ debug_sub_80901F8:
 	bl	sub_810FB9C
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._211
-	ldr	r1, ._211 + 4
+	ldr	r2, ._211       @ gUnknown_Debug_083C4CA8
+	ldr	r1, ._211 + 4   @ gUnknown_083F8408
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	sub	r0, r0, #0x8
@@ -1853,8 +1853,8 @@ debug_sub_80901F8:
 	mov	r1, #0xe
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r1, ._211 + 8
-	ldr	r0, ._211 + 12
+	ldr	r1, ._211 + 8   @ gMenuCallback
+	ldr	r0, ._211 + 12  @ debug_sub_8090278
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -1875,8 +1875,8 @@ debug_sub_8090238:
 	bl	sub_810FC18
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-	ldr	r2, ._213
-	ldr	r1, ._213 + 4
+	ldr	r2, ._213       @ gUnknown_Debug_083C4CA8
+	ldr	r1, ._213 + 4   @ gUnknown_083F8410
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	sub	r0, r0, #0x8
@@ -1886,8 +1886,8 @@ debug_sub_8090238:
 	mov	r1, #0xe
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r1, ._213 + 8
-	ldr	r0, ._213 + 12
+	ldr	r1, ._213 + 8   @ gMenuCallback
+	ldr	r0, ._213 + 12  @ debug_sub_8090278
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r1}
@@ -1905,7 +1905,7 @@ debug_sub_8090238:
 	thumb_func_start debug_sub_8090278
 debug_sub_8090278:
 	push	{lr}
-	ldr	r0, ._217
+	ldr	r0, ._217       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
@@ -1929,9 +1929,9 @@ debug_sub_8090278:
 	thumb_func_start debug_sub_809029C
 debug_sub_809029C:
 	push	{r4, lr}
-	ldr	r4, ._219
-	ldr	r0, ._219 + 4
-	ldr	r1, ._219 + 8
+	ldr	r4, ._219       @ gStringVar1
+	ldr	r0, ._219 + 4   @ gSaveBlock1
+	ldr	r1, ._219 + 8   @ 0x13c2
 	add	r0, r0, r1
 	ldrh	r0, [r0]
 	mov	r1, #0x7f
@@ -1944,8 +1944,8 @@ debug_sub_809029C:
 	mov	r1, #0x10
 	mov	r2, #0x7
 	bl	Menu_PrintText
-	ldr	r1, ._219 + 12
-	ldr	r0, ._219 + 16
+	ldr	r1, ._219 + 12  @ gMenuCallback
+	ldr	r0, ._219 + 16  @ debug_sub_8090278
 	str	r0, [r1]
 	mov	r0, #0x0
 	pop	{r4}
@@ -1965,7 +1965,7 @@ debug_sub_809029C:
 	thumb_func_start debug_sub_80902E4
 debug_sub_80902E4:
 	push	{lr}
-	ldr	r1, ._221
+	ldr	r1, ._221       @ gSaveBlock2
 	ldrh	r0, [r1, #0xe]
 	add	r0, r0, #0x6
 	strh	r0, [r1, #0xe]
@@ -2031,7 +2031,7 @@ debug_sub_8090338:
 	thumb_func_start NoharaDebugMenu_BattleVSDad
 NoharaDebugMenu_BattleVSDad:
 	push	{lr}
-	ldr	r0, ._223
+	ldr	r0, ._223       @ 0x4085
 	mov	r1, #0x6
 	bl	VarSet
 	bl	CloseMenu
@@ -2048,7 +2048,7 @@ NoharaDebugMenu_BattleVSDad:
 	thumb_func_start NoharaDebugMenu_DadAfterBattle
 NoharaDebugMenu_DadAfterBattle:
 	push	{lr}
-	ldr	r0, ._225
+	ldr	r0, ._225       @ 0x4085
 	mov	r1, #0x7
 	bl	VarSet
 	bl	CloseMenu
@@ -2069,7 +2069,7 @@ NoharaDebugMenu_SootopolisCity:
 	bl	FlagSet
 	mov	r0, #0x71
 	bl	FlagSet
-	ldr	r0, ._227
+	ldr	r0, ._227       @ 0x32f
 	bl	FlagClear
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -2085,9 +2085,9 @@ NoharaDebugMenu_SootopolisCity:
 	thumb_func_start NoharaDebugMenu_Embark
 NoharaDebugMenu_Embark:
 	push	{lr}
-	ldr	r0, ._229
+	ldr	r0, ._229       @ 0x2e3
 	bl	FlagClear
-	ldr	r0, ._229 + 4
+	ldr	r0, ._229 + 4   @ 0x4090
 	mov	r1, #0x1
 	bl	VarSet
 	bl	CloseMenu
@@ -2105,8 +2105,8 @@ NoharaDebugMenu_Embark:
 	thumb_func_start NoharaDebugMenu_Yes9999
 NoharaDebugMenu_Yes9999:
 	push	{lr}
-	ldr	r0, ._231
-	ldr	r1, ._231 + 4
+	ldr	r0, ._231       @ 0x4048
+	ldr	r1, ._231 + 4   @ 0x270f
 	bl	VarSet
 	bl	CloseMenu
 	mov	r0, #0x1
@@ -2135,8 +2135,8 @@ NoharaDebugMenu_LegendsFlagOn:
 	thumb_func_start NoharaDebugMenu_AddNumWinningStreaks
 NoharaDebugMenu_AddNumWinningStreaks:
 	push	{lr}
-	ldr	r0, ._235
-	ldr	r1, ._235 + 4
+	ldr	r0, ._235       @ gSaveBlock2
+	ldr	r1, ._235 + 4   @ 0x572
 	add	r2, r0, r1
 	ldrh	r1, [r2]
 	cmp	r1, #0x31
@@ -2154,7 +2154,7 @@ NoharaDebugMenu_AddNumWinningStreaks:
 	mov	r0, #0x64
 	b	._244
 ._237:
-	ldr	r0, ._241
+	ldr	r0, ._241       @ 0x3e7
 	cmp	r1, r0
 	bhi	._239	@cond_branch
 	add	r0, r0, #0x1
@@ -2164,10 +2164,10 @@ NoharaDebugMenu_AddNumWinningStreaks:
 ._241:
 	.word	0x3e7
 ._239:
-	ldr	r0, ._245
+	ldr	r0, ._245       @ 0x1387
 	cmp	r1, r0
 	bhi	._243	@cond_branch
-	ldr	r0, ._245 + 4
+	ldr	r0, ._245 + 4   @ 0x2706
 	b	._244
 ._246:
 	.align	2, 0
@@ -2175,7 +2175,7 @@ NoharaDebugMenu_AddNumWinningStreaks:
 	.word	0x1387
 	.word	0x2706
 ._243:
-	ldr	r0, ._248
+	ldr	r0, ._248       @ 0x2705
 	cmp	r1, r0
 	bhi	._247	@cond_branch
 	add	r0, r0, #0xa

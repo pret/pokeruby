@@ -1047,10 +1047,10 @@ debug_sub_80A3904:
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x4
-	ldr	r2, ._163
+	ldr	r2, ._163       @ gPokemonStorage
 	add	r1, r1, r2
 	add	r6, r3, r1
-	ldr	r2, ._163 + 4
+	ldr	r2, ._163 + 4   @ gUnknown_Debug_083E05F0
 	lsl	r1, r7, #0x1
 	add	r1, r1, r2
 	ldrh	r4, [r1]
@@ -1983,8 +1983,8 @@ sub_8096874: @ 8096874
 sub_8096884:
 .syntax divided
 	push	{r4, lr}
-	ldr	r0, ._223
-	ldr	r1, ._223 + 4
+	ldr	r0, ._223       @ gMain
+	ldr	r1, ._223 + 4   @ 0x43c
 	add	r0, r0, r1
 	ldrb	r0, [r0]
 	cmp	r0, #0x9
@@ -1992,7 +1992,7 @@ sub_8096884:
 	b	._222
 ._221:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._223 + 8
+	ldr	r1, ._223 + 8   @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -2021,7 +2021,7 @@ sub_8096884:
 	mov	r4, #0x0
 	strh	r4, [r0]
 	bl	sub_8096804
-	ldr	r0, ._237
+	ldr	r0, ._237       @ unk_2038790
 	strb	r4, [r0]
 	b	._250
 ._238:
@@ -2029,7 +2029,7 @@ sub_8096884:
 ._237:
 	.word	unk_2038790
 ._227:
-	ldr	r0, ._240
+	ldr	r0, ._240       @ gWindowTemplate_81E6D00
 	bl	Text_LoadWindowTemplate
 	b	._250
 ._241:
@@ -2037,7 +2037,7 @@ sub_8096884:
 ._240:
 	.word	gWindowTemplate_81E6D00
 ._228:
-	ldr	r0, ._243
+	ldr	r0, ._243       @ gWindowTemplate_81E6D00
 	bl	InitMenuWindow
 	bl	Menu_EraseScreen
 	b	._250
@@ -2063,17 +2063,17 @@ sub_8096884:
 	bl	sub_8098400
 	b	._250
 ._234:
-	ldr	r0, ._251
+	ldr	r0, ._251       @ gPokemonStorage
 	ldrb	r0, [r0]
 	bl	sub_8099BF8
-	ldr	r2, ._251 + 4
-	ldr	r1, ._251 + 8
+	ldr	r2, ._251 + 4   @ 0x2000000
+	ldr	r1, ._251 + 8   @ 0x12bc
 	add	r0, r2, r1
 	mov	r1, #0xa
 	strh	r1, [r0]
-	ldr	r1, ._251 + 12
+	ldr	r1, ._251 + 12  @ 0x12be
 	add	r2, r2, r1
-	ldr	r1, ._251 + 16
+	ldr	r1, ._251 + 16  @ 0xdacb
 	strh	r1, [r2]
 	bl	sub_80F727C
 	bl	sub_80F7404
@@ -2082,21 +2082,21 @@ sub_8096884:
 	.align	2, 0
 ._251:
 	.word	gPokemonStorage
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x12bc
 	.word	0x12be
 	.word	0xdacb
 ._235:
 	bl	sub_8096874
-	ldr	r0, ._253
+	ldr	r0, ._253       @ sub_8096BF0
 	bl	sub_8096BE0
-	ldr	r0, ._253 + 4
+	ldr	r0, ._253 + 4   @ sub_8096B38
 	bl	SetMainCallback2
-	ldr	r0, ._253 + 8
+	ldr	r0, ._253 + 8   @ sub_8096AFC
 	bl	SetVBlankCallback
 ._250:
-	ldr	r1, ._253 + 12
-	ldr	r0, ._253 + 16
+	ldr	r1, ._253 + 12  @ gMain
+	ldr	r0, ._253 + 16  @ 0x43c
 	add	r1, r1, r0
 	ldrb	r0, [r1]
 	add	r0, r0, #0x1
@@ -2392,19 +2392,19 @@ _08096AF8: .4byte 0x0000043c
 debug_sub_80A4300:
 .syntax divided
 	push	{lr}
-	ldr	r1, ._296
+	ldr	r1, ._296       @ gUnknown_0203847D
 	mov	r0, #0x0
 	strb	r0, [r1]
-	ldr	r1, ._296 + 4
+	ldr	r1, ._296 + 4   @ 0x2000000
 	mov	r0, #0x0
 	strb	r0, [r1, #0x5]
 	bl	sub_8096884
-	ldr	r0, ._296 + 8
+	ldr	r0, ._296 + 8   @ gMain
 	ldr	r1, [r0, #0x4]
-	ldr	r0, ._296 + 12
+	ldr	r0, ._296 + 12  @ sub_8096B38
 	cmp	r1, r0
 	bne	._295	@cond_branch
-	ldr	r1, ._296 + 16
+	ldr	r1, ._296 + 16  @ unk_2038790
 	mov	r0, #0x1
 	strb	r0, [r1]
 ._295:
@@ -2414,7 +2414,7 @@ debug_sub_80A4300:
 	.align	2, 0
 ._296:
 	.word	gUnknown_0203847D
-	.word	+0x2000000
+	.word	0x2000000
 	.word	gMain
 	.word	sub_8096B38+1
 	.word	unk_2038790
@@ -2425,11 +2425,11 @@ debug_sub_80A4300:
 debug_sub_80A433C:
 .syntax divided
 	push	{lr}
-	ldr	r2, ._298
+	ldr	r2, ._298       @ unk_2038794
 	str	r1, [r2]
-	ldr	r1, ._298 + 4
+	ldr	r1, ._298 + 4   @ unk_2038798
 	str	r0, [r1]
-	ldr	r0, ._298 + 8
+	ldr	r0, ._298 + 8   @ debug_sub_80A4300
 	bl	SetMainCallback2
 	pop	{r0}
 	bx	r0
@@ -2447,7 +2447,7 @@ debug_sub_80A435C:
 .syntax divided
 	push	{r4, r5, lr}
 	add	sp, sp, #0xfffffffc
-	ldr	r5, ._303
+	ldr	r5, ._303       @ 0x2000000
 	ldrb	r4, [r5, #0x4]
 	cmp	r4, #0
 	beq	._300	@cond_branch
@@ -2457,9 +2457,9 @@ debug_sub_80A435C:
 ._304:
 	.align	2, 0
 ._303:
-	.word	+0x2000000
+	.word	0x2000000
 ._300:
-	ldr	r0, ._306
+	ldr	r0, ._306       @ unk_2038798
 	ldr	r0, [r0]
 	bl	unref_sub_809CB94
 	mov	r0, #0x1
@@ -2482,7 +2482,7 @@ debug_sub_80A435C:
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	bne	._308	@cond_branch
-	ldr	r0, ._309
+	ldr	r0, ._309       @ unk_2038794
 	ldr	r0, [r0]
 	bl	_call_via_r0
 ._308:
@@ -2700,21 +2700,21 @@ _08096C80: .4byte sub_8096C84
 sub_8096C84:
 .syntax divided
 	push	{r4, lr}
-	ldr	r0, ._347
+	ldr	r0, ._347       @ 0x2000000
 	ldrb	r0, [r0, #0x4]
 	cmp	r0, #0x6
 	bls	._345	@cond_branch
 	b	._466
 ._345:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._347 + 4
+	ldr	r1, ._347 + 4   @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
 ._348:
 	.align	2, 0
 ._347:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	._349
 ._349:
 	.word	._350
@@ -2734,7 +2734,7 @@ sub_8096C84:
 	b	._466
 ._357:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._360
+	ldr	r1, ._360       @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -2762,16 +2762,16 @@ sub_8096C84:
 ._362:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r1, ._379
+	ldr	r1, ._379       @ 0x2000000
 	mov	r0, #0x1
 	strb	r0, [r1, #0x4]
 	b	._466
 ._380:
 	.align	2, 0
 ._379:
-	.word	+0x2000000
+	.word	0x2000000
 ._366:
-	ldr	r4, ._383
+	ldr	r4, ._383       @ 0x2000000
 	ldrb	r0, [r4, #0x5]
 	cmp	r0, #0x2
 	beq	._381	@cond_branch
@@ -2783,10 +2783,10 @@ sub_8096C84:
 ._384:
 	.align	2, 0
 ._383:
-	.word	+0x2000000
+	.word	0x2000000
 ._381:
 	bl	sub_809B0D4
-	ldr	r0, ._386
+	ldr	r0, ._386       @ sub_8096FC8
 	bl	sub_8096BE0
 	b	._466
 ._387:
@@ -2794,7 +2794,7 @@ sub_8096C84:
 ._386:
 	.word	sub_8096FC8+1
 ._367:
-	ldr	r4, ._394
+	ldr	r4, ._394       @ 0x2000000
 	ldrb	r0, [r4, #0x5]
 	cmp	r0, #0x2
 	beq	._388	@cond_branch
@@ -2804,7 +2804,7 @@ sub_8096C84:
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	beq	._391	@cond_branch
-	ldr	r1, ._394 + 4
+	ldr	r1, ._394 + 4   @ 0x11f2
 	add	r0, r4, r1
 	ldrh	r0, [r0]
 	bl	ItemIsMail
@@ -2813,23 +2813,23 @@ sub_8096C84:
 	beq	._391	@cond_branch
 	b	._392
 ._391:
-	ldr	r0, ._394 + 8
+	ldr	r0, ._394 + 8   @ sub_8097004
 	bl	sub_8096BE0
 	b	._466
 ._395:
 	.align	2, 0
 ._394:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x11f2
 	.word	sub_8097004+1
 ._365:
-	ldr	r0, ._399
+	ldr	r0, ._399       @ unk_2038790
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._396	@cond_branch
 	b	._466
 ._396:
-	ldr	r0, ._399 + 4
+	ldr	r0, ._399 + 4   @ sub_8097BA0
 	bl	sub_8096BE0
 	b	._466
 ._400:
@@ -2838,13 +2838,13 @@ sub_8096C84:
 	.word	unk_2038790
 	.word	sub_8097BA0+1
 ._377:
-	ldr	r0, ._404
+	ldr	r0, ._404       @ unk_2038790
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._401	@cond_branch
 	b	._466
 ._401:
-	ldr	r0, ._404 + 4
+	ldr	r0, ._404 + 4   @ sub_8097CC0
 	bl	sub_8096BE0
 	b	._466
 ._405:
@@ -2855,7 +2855,7 @@ sub_8096C84:
 ._368:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._407
+	ldr	r0, ._407       @ sub_809789C
 	bl	sub_8096BE0
 	b	._466
 ._408:
@@ -2865,7 +2865,7 @@ sub_8096C84:
 ._369:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._410
+	ldr	r0, ._410       @ sub_8097078
 	bl	sub_8096BE0
 	b	._466
 ._411:
@@ -2875,11 +2875,11 @@ sub_8096C84:
 ._370:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r4, ._414
-	ldr	r0, ._414 + 4
+	ldr	r4, ._414       @ 0x2000000
+	ldr	r0, ._414 + 4   @ gPokemonStorage
 	ldrb	r0, [r0]
 	add	r0, r0, #0x1
-	ldr	r2, ._414 + 8
+	ldr	r2, ._414 + 8   @ 0x8b2
 	add	r1, r4, r2
 	strh	r0, [r1]
 	cmp	r0, #0xd
@@ -2889,17 +2889,17 @@ sub_8096C84:
 ._415:
 	.align	2, 0
 ._414:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	gPokemonStorage
 	.word	0x8b2
 ._371:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r4, ._418
-	ldr	r0, ._418 + 4
+	ldr	r4, ._418       @ 0x2000000
+	ldr	r0, ._418 + 4   @ gPokemonStorage
 	ldrb	r0, [r0]
 	sub	r0, r0, #0x1
-	ldr	r2, ._418 + 8
+	ldr	r2, ._418 + 8   @ 0x8b2
 	add	r1, r4, r2
 	strh	r0, [r1]
 	cmp	r0, #0
@@ -2916,7 +2916,7 @@ sub_8096C84:
 ._419:
 	.align	2, 0
 ._418:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	gPokemonStorage
 	.word	0x8b2
 ._372:
@@ -2924,8 +2924,8 @@ sub_8096C84:
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	bne	._428	@cond_branch
-	ldr	r4, ._423
-	ldr	r1, ._423 + 4
+	ldr	r4, ._423       @ 0x2000000
+	ldr	r1, ._423 + 4   @ 0x11f2
 	add	r0, r4, r1
 	ldrh	r0, [r0]
 	bl	ItemIsMail
@@ -2939,12 +2939,12 @@ sub_8096C84:
 ._424:
 	.align	2, 0
 ._423:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x11f2
 ._421:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._426
+	ldr	r0, ._426       @ sub_809746C
 	bl	sub_8096BE0
 	b	._466
 ._427:
@@ -2958,7 +2958,7 @@ sub_8096C84:
 	bne	._428	@cond_branch
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._430
+	ldr	r0, ._430       @ sub_80972A8
 	bl	sub_8096BE0
 	b	._466
 ._431:
@@ -2971,18 +2971,18 @@ sub_8096C84:
 	cmp	r0, #0
 	bne	._432	@cond_branch
 ._428:
-	ldr	r1, ._434
+	ldr	r1, ._434       @ 0x2000000
 	mov	r0, #0x4
 	strb	r0, [r1, #0x4]
 	b	._466
 ._435:
 	.align	2, 0
 ._434:
-	.word	+0x2000000
+	.word	0x2000000
 ._432:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._437
+	ldr	r0, ._437       @ c3_0808DC50
 	bl	sub_8096BE0
 	b	._466
 ._438:
@@ -2992,7 +2992,7 @@ sub_8096C84:
 ._373:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._440
+	ldr	r0, ._440       @ sub_8097390
 	bl	sub_8096BE0
 	b	._466
 ._441:
@@ -3002,7 +3002,7 @@ sub_8096C84:
 ._376:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._443
+	ldr	r0, ._443       @ sub_80972FC
 	bl	sub_8096BE0
 	b	._466
 ._444:
@@ -3023,8 +3023,8 @@ sub_8096C84:
 ._446:
 	bl	sub_8098710
 ._447:
-	ldr	r4, ._450
-	ldr	r2, ._450 + 4
+	ldr	r4, ._450       @ 0x2000000
+	ldr	r2, ._450 + 4   @ 0x11f6
 	add	r0, r4, r2
 	ldrb	r0, [r0]
 	cmp	r0, #0
@@ -3037,20 +3037,20 @@ sub_8096C84:
 ._451:
 	.align	2, 0
 ._450:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x11f6
 ._352:
 	bl	sub_8099D34
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	bne	._466	@cond_branch
-	ldr	r1, ._456
-	ldr	r0, ._456 + 4
-	ldr	r2, ._456 + 8
+	ldr	r1, ._456       @ gPokemonStorage
+	ldr	r0, ._456 + 4   @ 0x2000000
+	ldr	r2, ._456 + 8   @ 0x8b2
 	add	r0, r0, r2
 	ldrh	r0, [r0]
 	strb	r0, [r1]
-	ldr	r0, ._456 + 12
+	ldr	r0, ._456 + 12  @ gUnknown_0203847C
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	bne	._455	@cond_branch
@@ -3065,11 +3065,11 @@ sub_8096C84:
 	.align	2, 0
 ._456:
 	.word	gPokemonStorage
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x8b2
 	.word	gUnknown_0203847C
 ._353:
-	ldr	r0, ._460
+	ldr	r0, ._460       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0xf3
 	and	r0, r0, r1
@@ -3077,7 +3077,7 @@ sub_8096C84:
 	beq	._466	@cond_branch
 	bl	sub_8098A5C
 ._455:
-	ldr	r1, ._460 + 4
+	ldr	r1, ._460 + 4   @ 0x2000000
 	mov	r0, #0x0
 	strb	r0, [r1, #0x4]
 	b	._466
@@ -3085,7 +3085,7 @@ sub_8096C84:
 	.align	2, 0
 ._460:
 	.word	gMain
-	.word	+0x2000000
+	.word	0x2000000
 ._354:
 	mov	r0, #0x20
 	bl	PlaySE
@@ -3097,23 +3097,23 @@ sub_8096C84:
 	mov	r0, #0x16
 ._462:
 	bl	sub_8098898
-	ldr	r1, ._464
+	ldr	r1, ._464       @ 0x2000000
 	mov	r0, #0x6
 	strb	r0, [r1, #0x4]
 	b	._466
 ._465:
 	.align	2, 0
 ._464:
-	.word	+0x2000000
+	.word	0x2000000
 ._356:
-	ldr	r0, ._467
+	ldr	r0, ._467       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0xf3
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._466	@cond_branch
 	bl	sub_8098A5C
-	ldr	r0, ._467 + 4
+	ldr	r0, ._467 + 4   @ sub_8096C84
 	bl	sub_8096BE0
 ._466:
 	pop	{r4}
@@ -3594,21 +3594,21 @@ _08097074: .4byte sub_8096C84
 sub_8097078:
 .syntax divided
 	push	{r4, lr}
-	ldr	r0, ._495
+	ldr	r0, ._495       @ 0x2000000
 	ldrb	r0, [r0, #0x4]
 	cmp	r0, #0x5
 	bls	._493	@cond_branch
 	b	._597
 ._493:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._495 + 4
+	ldr	r1, ._495 + 4   @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
 ._496:
 	.align	2, 0
 ._495:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	._497
 ._497:
 	.word	._498
@@ -3621,14 +3621,14 @@ sub_8097078:
 	mov	r0, #0x4
 	bl	sub_8098898
 	bl	sub_809CE84
-	ldr	r1, ._505
+	ldr	r1, ._505       @ 0x2000000
 	mov	r0, #0x1
 	strb	r0, [r1, #0x4]
 	b	._597
 ._506:
 	.align	2, 0
 ._505:
-	.word	+0x2000000
+	.word	0x2000000
 ._499:
 	bl	sub_809CF30
 	add	r0, r0, #0x1
@@ -3639,7 +3639,7 @@ sub_8097078:
 	b	._597
 ._507:
 	lsl	r0, r0, #0x2
-	ldr	r1, ._510
+	ldr	r1, ._510       @ 
 	add	r0, r0, r1
 	ldr	r0, [r0]
 	mov	pc, r0
@@ -3684,7 +3684,7 @@ sub_8097078:
 	.word	._545
 ._513:
 	bl	sub_8098A5C
-	ldr	r0, ._547
+	ldr	r0, ._547       @ sub_8096C84
 	bl	sub_8096BE0
 	b	._597
 ._548:
@@ -3699,7 +3699,7 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._551
+	ldr	r0, ._551       @ sub_80972A8
 	bl	sub_8096BE0
 	b	._597
 ._552:
@@ -3710,7 +3710,7 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._554
+	ldr	r0, ._554       @ sub_80972FC
 	bl	sub_8096BE0
 	b	._597
 ._555:
@@ -3725,7 +3725,7 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._558
+	ldr	r0, ._558       @ c3_0808DC50
 	bl	sub_8096BE0
 	b	._597
 ._559:
@@ -3736,7 +3736,7 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._561
+	ldr	r0, ._561       @ sub_8097390
 	bl	sub_8096BE0
 	b	._597
 ._562:
@@ -3748,8 +3748,8 @@ sub_8097078:
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	bne	._563	@cond_branch
-	ldr	r4, ._566
-	ldr	r1, ._566 + 4
+	ldr	r4, ._566       @ 0x2000000
+	ldr	r1, ._566 + 4   @ 0x11f2
 	add	r0, r4, r1
 	ldrh	r0, [r0]
 	bl	ItemIsMail
@@ -3759,13 +3759,13 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._566 + 8
+	ldr	r0, ._566 + 8   @ sub_809746C
 	bl	sub_8096BE0
 	b	._597
 ._567:
 	.align	2, 0
 ._566:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x11f2
 	.word	sub_809746C+1
 ._520:
@@ -3774,17 +3774,17 @@ sub_8097078:
 	cmp	r0, #0
 	beq	._568	@cond_branch
 ._563:
-	ldr	r1, ._570
+	ldr	r1, ._570       @ 0x2000000
 	mov	r0, #0x2
 	strb	r0, [r1, #0x4]
 	b	._597
 ._571:
 	.align	2, 0
 ._570:
-	.word	+0x2000000
+	.word	0x2000000
 ._568:
-	ldr	r4, ._574
-	ldr	r1, ._574 + 4
+	ldr	r4, ._574       @ 0x2000000
+	ldr	r1, ._574 + 4   @ 0x11f9
 	add	r0, r4, r1
 	ldrb	r0, [r0]
 	cmp	r0, #0
@@ -3795,10 +3795,10 @@ sub_8097078:
 ._575:
 	.align	2, 0
 ._574:
-	.word	+0x2000000
+	.word	0x2000000
 	.word	0x11f9
 ._572:
-	ldr	r1, ._578
+	ldr	r1, ._578       @ 0x11f2
 	add	r0, r4, r1
 	ldrh	r0, [r0]
 	bl	ItemIsMail
@@ -3816,7 +3816,7 @@ sub_8097078:
 ._576:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._581
+	ldr	r0, ._581       @ sub_8097594
 	bl	sub_8096BE0
 	b	._597
 ._582:
@@ -3826,7 +3826,7 @@ sub_8097078:
 ._519:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._584
+	ldr	r0, ._584       @ sub_8097788
 	bl	sub_8096BE0
 	b	._597
 ._585:
@@ -3836,7 +3836,7 @@ sub_8097078:
 ._521:
 	mov	r0, #0x5
 	bl	PlaySE
-	ldr	r0, ._587
+	ldr	r0, ._587       @ sub_80977E4
 	bl	sub_8096BE0
 	b	._597
 ._588:
@@ -3847,7 +3847,7 @@ sub_8097078:
 	mov	r0, #0x5
 	bl	PlaySE
 	bl	sub_8098A5C
-	ldr	r0, ._590
+	ldr	r0, ._590       @ debug_sub_80A435C
 	bl	sub_8096BE0
 	b	._597
 ._591:
@@ -3870,23 +3870,23 @@ sub_8097078:
 	mov	r0, #0x16
 ._593:
 	bl	sub_8098898
-	ldr	r1, ._595
+	ldr	r1, ._595       @ 0x2000000
 	mov	r0, #0x5
 	strb	r0, [r1, #0x4]
 	b	._597
 ._596:
 	.align	2, 0
 ._595:
-	.word	+0x2000000
+	.word	0x2000000
 ._503:
-	ldr	r0, ._598
+	ldr	r0, ._598       @ gMain
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0xf3
 	and	r0, r0, r1
 	cmp	r0, #0
 	beq	._597	@cond_branch
 	bl	sub_8098A5C
-	ldr	r0, ._598 + 4
+	ldr	r0, ._598 + 4   @ sub_8096C84
 	bl	sub_8096BE0
 ._597:
 	pop	{r4}
@@ -15164,7 +15164,7 @@ debug_sub_80AA40C:
 sub_809CAB0:
 .syntax divided
 	push	{lr}
-	ldr	r0, ._2088
+	ldr	r0, ._2088      @ unk_2038790
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._2086	@cond_branch
@@ -15181,7 +15181,7 @@ sub_809CAB0:
 	bl	sub_809AB8C
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-	ldr	r0, ._2094
+	ldr	r0, ._2094      @ gUnknown_083B6DB4
 	ldr	r0, [r0]
 	ldrb	r0, [r0, #0x5]
 	cmp	r0, #0x1
@@ -15212,7 +15212,7 @@ sub_809CAB0:
 	bl	sub_809CDEC
 	b	._2109
 ._2096:
-	ldr	r0, ._2105
+	ldr	r0, ._2105      @ gUnknown_020384E6
 	ldrb	r0, [r0]
 	cmp	r0, #0
 	beq	._2102	@cond_branch
@@ -15241,12 +15241,12 @@ sub_809CAB0:
 ._2109:
 	mov	r0, #0x6
 	bl	sub_809CDEC
-	ldr	r0, ._2114
+	ldr	r0, ._2114      @ gUnknown_083B6DB4
 	ldr	r0, [r0]
 	ldrb	r0, [r0, #0x5]
 	cmp	r0, #0x2
 	bne	._2113	@cond_branch
-	ldr	r0, ._2114 + 4
+	ldr	r0, ._2114 + 4  @ gUnknown_020384E4
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x18
 	asr	r0, r0, #0x18

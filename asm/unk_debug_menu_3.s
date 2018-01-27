@@ -9,8 +9,8 @@
 debug_sub_813C404:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._1
-	ldr	r4, ._1 + 4
+	ldr	r5, ._1         @ gUnknown_Debug_845DDB2
+	ldr	r4, ._1 + 4     @ gUnknown_Debug_845DAE1
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -34,8 +34,8 @@ debug_sub_813C404:
 debug_sub_813C430:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._3
-	ldr	r4, ._3 + 4
+	ldr	r5, ._3         @ gUnknown_Debug_845E402
+	ldr	r4, ._3 + 4     @ gUnknown_Debug_845E3E0
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -59,8 +59,8 @@ debug_sub_813C430:
 debug_sub_813C45C:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._5
-	ldr	r4, ._5 + 4
+	ldr	r5, ._5         @ gUnknown_Debug_845E443
+	ldr	r4, ._5 + 4     @ gUnknown_Debug_845E422
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -84,8 +84,8 @@ debug_sub_813C45C:
 debug_sub_813C488:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._7
-	ldr	r4, ._7 + 4
+	ldr	r5, ._7         @ gUnknown_Debug_845E422
+	ldr	r4, ._7 + 4     @ gUnknown_Debug_845E402
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -108,8 +108,8 @@ debug_sub_813C488:
 	thumb_func_start debug_sub_813C4B4
 debug_sub_813C4B4:
 	push	{r4, lr}
-	ldr	r4, ._9
-	ldr	r1, ._9 + 4
+	ldr	r4, ._9         @ gUnknown_Debug_845E619
+	ldr	r1, ._9 + 4     @ gUnknown_Debug_845E606
 	sub	r4, r4, r1
 	add	r2, r4, #0
 	bl	memcpy
@@ -129,8 +129,8 @@ debug_sub_813C4B4:
 debug_sub_813C4D4:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._11
-	ldr	r4, ._11 + 4
+	ldr	r5, ._11        @ gUnknown_Debug_845E712
+	ldr	r4, ._11 + 4    @ gUnknown_Debug_845E619
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -154,8 +154,8 @@ debug_sub_813C4D4:
 debug_sub_813C500:
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
-	ldr	r5, ._13
-	ldr	r4, ._13 + 4
+	ldr	r5, ._13        @ gUnknown_Debug_845E797
+	ldr	r4, ._13 + 4    @ gUnknown_Debug_845E712
 	sub	r5, r5, r4
 	add	r1, r4, #0
 	add	r2, r5, #0
@@ -185,14 +185,14 @@ debug_sub_813C52C:
 	lsl	r5, r1, #0x10
 	lsr	r0, r5, #0x10
 	mov	r9, r0
-	ldr	r6, ._15
-	ldr	r4, ._15 + 4
+	ldr	r6, ._15        @ gUnknown_Debug_845E7BB
+	ldr	r4, ._15 + 4    @ gUnknown_Debug_845E797
 	sub	r6, r6, r4
 	mov	r0, r8
 	add	r1, r4, #0
 	add	r2, r6, #0
 	bl	memcpy
-	ldr	r0, ._15 + 8
+	ldr	r0, ._15 + 8    @ gUnknown_Debug_845E7B5
 	sub	r0, r0, r4
 	add r0, r0, r8
 	add	r0, r0, #0x3
@@ -252,7 +252,7 @@ debug_sub_813C598:
 	thumb_func_start debug_sub_813C5A4
 debug_sub_813C5A4:
 	push	{lr}
-	ldr	r1, ._17
+	ldr	r1, ._17        @ 0x121
 	bl	debug_sub_813C52C
 	pop	{r1}
 	bx	r1
@@ -267,19 +267,19 @@ debug_sub_813C5A4:
 debug_sub_813C5B4:
 	push	{r4, r5, r6, r7, lr}
 	add	r4, r0, #0
-	ldr	r7, ._23
-	ldr	r0, ._23 + 4
-	ldr	r1, ._23 + 8
+	ldr	r7, ._23        @ gSaveBlock1
+	ldr	r0, ._23 + 4    @ gUnknown_Debug_845DDD6
+	ldr	r1, ._23 + 8    @ gUnknown_Debug_845DDB2
 	sub	r0, r0, r1
 	add	r6, r0, r4
-	ldr	r0, ._23 + 12
+	ldr	r0, ._23 + 12   @ gUnknown_Debug_845E306
 	sub	r5, r0, r1
-	ldr	r0, ._23 + 16
+	ldr	r0, ._23 + 16   @ Str_842E23C
 	mov	r1, #0x0
 	mov	r2, #0x0
 	bl	GetEnigmaBerryChecksum
 	mov	r2, #0x0
-	ldr	r3, ._23 + 20
+	ldr	r3, ._23 + 20   @ 0xfff
 	mov	r1, #0x0
 ._19:
 	add	r0, r4, r2
@@ -290,7 +290,7 @@ debug_sub_813C5B4:
 	mov	r2, #0x0
 	cmp	r2, r5
 	bcs	._20	@cond_branch
-	ldr	r3, ._23 + 8
+	ldr	r3, ._23 + 8    @ gUnknown_Debug_845DDB2
 ._21:
 	add	r0, r4, r2
 	add	r1, r2, r3
@@ -301,7 +301,7 @@ debug_sub_813C5B4:
 	bcc	._21	@cond_branch
 ._20:
 	mov	r2, #0x0
-	ldr	r3, ._23 + 24
+	ldr	r3, ._23 + 24   @ 0x52f
 ._22:
 	add	r0, r6, r2
 	add	r1, r7, r2
@@ -311,7 +311,7 @@ debug_sub_813C5B4:
 	cmp	r2, r3
 	bls	._22	@cond_branch
 	bl	ClearEnigmaBerries
-	ldr	r1, ._23 + 8
+	ldr	r1, ._23 + 8    @ gUnknown_Debug_845DDB2
 	add	r0, r4, #0
 	bl	unref_sub_81261B4
 	add	r0, r5, #0
@@ -353,18 +353,18 @@ debug_sub_813C638:
 	str	r0, [sp, #0x4]
 	mov	r0, #0x1
 	str	r0, [sp, #0x8]
-	ldr	r0, ._25
+	ldr	r0, ._25        @ 0x270f
 	str	r0, [sp, #0xc]
 	mov	r0, r8
 	add	r1, r4, #0
 	add	r2, r5, #0
 	mov	r3, #0x20
 	bl	CreateMon
-	ldr	r2, ._25 + 4
+	ldr	r2, ._25 + 4    @ Str_842E240
 	mov	r0, r8
 	mov	r1, #0x7
 	bl	SetMonData
-	ldr	r2, ._25 + 8
+	ldr	r2, ._25 + 8    @ Str_842E248
 	mov	r0, r8
 	mov	r1, #0x2
 	bl	SetMonData
@@ -468,10 +468,10 @@ debug_sub_813C740:
 	push	{r4, r5, r6}
 	add	sp, sp, #0xffffffd0
 	add	r6, r0, #0
-	ldr	r0, ._29
+	ldr	r0, ._29        @ gUnknown_Debug_845E443
 	mov	r8, r0
-	ldr	r1, ._29 + 4
-	ldr	r5, ._29 + 8
+	ldr	r1, ._29 + 4    @ gUnknown_Debug_845E4EF
+	ldr	r5, ._29 + 8    @ gEnemyParty
 	sub	r1, r1, r0
 	mov	r9, r1
 	add	r0, r6, #0
@@ -504,7 +504,7 @@ debug_sub_813C740:
 	mov	r1, #0x23
 	add	r2, r4, #0
 	bl	SetMonData
-	ldr	r1, ._29 + 12
+	ldr	r1, ._29 + 12   @ Str_842E238
 	add	r0, r4, #0
 	mov	r2, #0xb
 	bl	StringCopyN
@@ -518,14 +518,14 @@ debug_sub_813C740:
 	mov	r1, #0x3
 	add	r2, r4, #0
 	bl	SetMonData
-	ldr	r0, ._29 + 16
+	ldr	r0, ._29 + 16   @ gUnknown_Debug_845E467
 	add	r0, r6, r0
 	mov	r1, r8
 	sub	r0, r0, r1
 	add	r1, r5, #0
 	mov	r2, #0x64
 	bl	memcpy
-	ldr	r0, ._29 + 20
+	ldr	r0, ._29 + 20   @ gUnknown_Debug_845E4CB
 	add	r6, r6, r0
 	mov	r0, r8
 	sub	r6, r6, r0
@@ -561,9 +561,9 @@ debug_sub_813C810:
 	push	{r6}
 	add	sp, sp, #0xffffffdc
 	add	r6, r0, #0
-	ldr	r5, ._31
-	ldr	r0, ._31 + 4
-	ldr	r4, ._31 + 8
+	ldr	r5, ._31        @ gUnknown_Debug_845E443
+	ldr	r0, ._31 + 4    @ gUnknown_Debug_845E4EF
+	ldr	r4, ._31 + 8    @ gEnemyParty
 	sub	r0, r0, r5
 	mov	r8, r0
 	add	r0, r6, #0
@@ -578,13 +578,13 @@ debug_sub_813C810:
 	add	r0, r4, #0
 	mov	r1, sp
 	bl	debug_sub_813C6AC
-	ldr	r0, ._31 + 12
+	ldr	r0, ._31 + 12   @ gUnknown_Debug_845E467
 	add	r0, r6, r0
 	sub	r0, r0, r5
 	add	r1, r4, #0
 	mov	r2, #0x64
 	bl	memcpy
-	ldr	r0, ._31 + 16
+	ldr	r0, ._31 + 16   @ gUnknown_Debug_845E4CB
 	add	r0, r6, r0
 	sub	r0, r0, r5
 	mov	r1, sp
@@ -618,9 +618,9 @@ debug_sub_813C888:
 	push	{r6}
 	add	sp, sp, #0xffffffdc
 	add	r6, r0, #0
-	ldr	r5, ._33
-	ldr	r0, ._33 + 4
-	ldr	r4, ._33 + 8
+	ldr	r5, ._33        @ gUnknown_Debug_845E443
+	ldr	r0, ._33 + 4    @ gUnknown_Debug_845E4EF
+	ldr	r4, ._33 + 8    @ gEnemyParty
 	sub	r0, r0, r5
 	mov	r8, r0
 	add	r0, r6, #0
@@ -637,13 +637,13 @@ debug_sub_813C888:
 	bl	debug_sub_813C6AC
 	mov	r0, #0x0
 	strh	r0, [r4, #0x1c]
-	ldr	r0, ._33 + 12
+	ldr	r0, ._33 + 12   @ gUnknown_Debug_845E467
 	add	r0, r6, r0
 	sub	r0, r0, r5
 	add	r1, r4, #0
 	mov	r2, #0x64
 	bl	memcpy
-	ldr	r0, ._33 + 16
+	ldr	r0, ._33 + 16   @ gUnknown_Debug_845E4CB
 	add	r0, r6, r0
 	sub	r0, r0, r5
 	mov	r1, sp
@@ -673,7 +673,7 @@ debug_sub_813C888:
 	thumb_func_start debug_sub_813C904
 debug_sub_813C904:
 	push	{r4, lr}
-	ldr	r4, ._35
+	ldr	r4, ._35        @ gPlayerParty
 	add	r0, r4, #0
 	mov	r1, #0x5
 	mov	r2, #0x32
@@ -706,20 +706,20 @@ debug_sub_813C93C:
 	push	{r4, r5, r6, lr}
 	add	sp, sp, #0xffffff44
 	add	r4, r0, #0
-	ldr	r6, ._37
-	ldr	r5, ._37 + 4
+	ldr	r6, ._37        @ gUnknown_Debug_845E4EF
+	ldr	r5, ._37 + 4    @ gUnknown_Debug_845E606
 	sub	r5, r5, r6
 	add	r1, r6, #0
 	add	r2, r5, #0
 	bl	memcpy
 	bl	SavePlayerParty
 	bl	debug_sub_813C904
-	ldr	r1, ._37 + 8
-	ldr	r2, ._37 + 12
+	ldr	r1, ._37 + 8    @ Str_842E253
+	ldr	r2, ._37 + 12   @ 0x270f
 	mov	r0, sp
 	bl	debug_sub_8075DB4
 	bl	LoadPlayerParty
-	ldr	r0, ._37 + 16
+	ldr	r0, ._37 + 16   @ gUnknown_Debug_845E506
 	add	r4, r4, r0
 	sub	r4, r4, r6
 	add	r0, r4, #0

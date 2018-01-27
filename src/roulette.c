@@ -607,7 +607,7 @@ void sub_8115384(void)
 	.align	2, 0\n\
 ._35:\n\
 	.word	gUnknown_Debug_03005FB8\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	gMain\n\
 	.word	0x43c\n\
 	.word	._37\n\
@@ -718,7 +718,7 @@ void sub_8115384(void)
 	.align	2, 0\n\
 ._56:\n\
 	.word	gUnknown_083F88BC\n\
-	.word	+0x2018800\n\
+	.word	0x2018800\n\
 	.word	gUnknown_083F8A60\n\
 	.word	0x6003000\n\
 	.word	gMain\n\
@@ -870,7 +870,7 @@ void sub_8115384(void)
 	.word	0x4000004\n\
 	.word	sub_8115124+1\n\
 	.word	sub_81156BC+1\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	gTasks\n\
 	.word	gSaveBlock1\n\
 	.word	0x494\n\
@@ -1063,7 +1063,7 @@ void sub_8115634(u8 unused)
 ._76:\n\
 	.align	2, 0\n\
 ._75:\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	unk_203955C\n\
 	.word	gMain\n\
 	.word	gTasks\n\
@@ -2067,7 +2067,7 @@ void sub_8116B40(u8 taskid) // end roulette ?
 ._382:\n\
 	.align	2, 0\n\
 ._381:\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	gSpriteCoordOffsetX\n\
 	.word	gSpriteCoordOffsetY\n\
 	.word	0x4000050\n\
@@ -4499,7 +4499,7 @@ void debug_sub_812E698()
 ._840:\n\
 	.align	2, 0\n\
 ._839:\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	0x0\n\
 	.word	gUnknown_083F8DF4\n\
 ._837:\n\
@@ -4546,7 +4546,7 @@ void debug_sub_812E698()
 ._842:\n\
 	.align	2, 0\n\
 ._841:\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	gUnknown_083F8DF4\n\
 	.word	0x3dae147b\n\
 	.word	sub_8118D2C+1");
@@ -4902,7 +4902,7 @@ void sub_8118F8C(struct Sprite *sprite)
 ._869:\n\
 	.align	2, 0\n\
 ._868:\n\
-	.word	+0x2019000\n\
+	.word	0x2019000\n\
 	.word	0x3f000000\n\
 	.word	0x0\n\
 	.word	gUnknown_083F8DF4\n\
