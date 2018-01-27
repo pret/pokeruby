@@ -321,7 +321,7 @@ void debug_sub_808A55C()
 	mov	r2, #0xc\n\
 	mov	r3, #0x1\n\
 	bl	PrintHex\n\
-	bl	sub_8007ECC\n\
+	bl	IsLinkTaskFinished\n\
 	lsl	r0, r0, #0x18\n\
 	lsr	r0, r0, #0x18\n\
 	mov	r1, #0xf\n\

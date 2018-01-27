@@ -697,7 +697,7 @@ void debug_sub_815D1D8()
         "	.word	0x43c\n"
         "._149:\n"
         "	bl	Menu_UpdateWindowText\n"
-        "	bl	sub_8007ECC\n"
+        "	bl	IsLinkTaskFinished\n"
         "	lsl	r0, r0, #0x18\n"
         "	cmp	r0, #0\n"
         "	beq	._196	@cond_branch\n"
