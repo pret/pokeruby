@@ -463,7 +463,7 @@ void sub_800C1A8(u8 taskId)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
             gTasks[taskId].data[13] = 1;
