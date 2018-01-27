@@ -19,60 +19,60 @@ DirectSoundWaveData_SC88_SynthBass1:: @ 8458CD0
 	.incbin "sound/direct_sound_samples/sc88/39_synth_bass_1.bin"
 
 	.align 2
-DirectSoundWaveData_8459944:: @ 8459944
-	.incbin "sound/direct_sound_samples/8459944.bin"
+DirectSoundWaveData_SC88_DrumKitTimbale2:: @ 8459944
+	.incbin "sound/direct_sound_samples/sc88/drumkit_timbale_2.bin"
 
 	.align 2
-DirectSoundWaveData_845AE14:: @ 845AE14
-	.incbin "sound/direct_sound_samples/845AE14.bin"
+DirectSoundWaveData_SC88_DrumKitBassDrum:: @ 845AE14
+	.incbin "sound/direct_sound_samples/sc88/drumkit_bass_drum.bin"
 
 	.align 2
-DirectSoundWaveData_845B2B4:: @ 845B2B4
-	.incbin "sound/direct_sound_samples/845B2B4.bin"
+DirectSoundWaveData_SC88_DrumKitSnare1:: @ 845B2B4
+	.incbin "sound/direct_sound_samples/sc88/drumkit_snare_1.bin"
 
 	.align 2
-DirectSoundWaveData_845B9A8:: @ 845B9A8
-	.incbin "sound/direct_sound_samples/845B9A8.bin"
+DirectSoundWaveData_SC88_DrumKitHandClap:: @ 845B9A8
+	.incbin "sound/direct_sound_samples/sc88/drumkit_hand_clap.bin"
 
 	.align 2
-DirectSoundWaveData_845C238:: @ 845C238
-	.incbin "sound/direct_sound_samples/845C238.bin"
+DirectSoundWaveData_SC88_DrumKitSnare2:: @ 845C238
+	.incbin "sound/direct_sound_samples/sc88/drumkit_snare_2.bin"
 
 	.align 2
-DirectSoundWaveData_845CAB0:: @ 845CAB0
-	.incbin "sound/direct_sound_samples/845CAB0.bin"
+DirectSoundWaveData_SC88_DrumKitHiMidTom:: @ 845CAB0
+	.incbin "sound/direct_sound_samples/sc88/drumkit_hi_mid_tom.bin"
 
 	.align 2
-DirectSoundWaveData_845DAF0:: @ 845DAF0
-	.incbin "sound/direct_sound_samples/845DAF0.bin"
+DirectSoundWaveData_SC88_DrumKitClosedHiHat:: @ 845DAF0
+	.incbin "sound/direct_sound_samples/sc88/drumkit_closed_hi_hat.bin"
 
 	.align 2
-DirectSoundWaveData_845DF04:: @ 845DF04
-	.incbin "sound/direct_sound_samples/845DF04.bin"
+DirectSoundWaveData_SC88_DrumKitOpenHiHat:: @ 845DF04
+	.incbin "sound/direct_sound_samples/sc88/drumkit_open_hi_hat.bin"
 
 	.align 2
 DirectSoundWaveData_845ED34:: @ 845ED34
 	.incbin "sound/direct_sound_samples/845ED34.bin"
 
 	.align 2
-DirectSoundWaveData_845FCC8:: @ 845FCC8
-	.incbin "sound/direct_sound_samples/845FCC8.bin"
+DirectSoundWaveData_SC88_DrumKitCabasa:: @ 845FCC8
+	.incbin "sound/direct_sound_samples/sc88/drumkit_cabasa.bin"
 
 	.align 2
-DirectSoundWaveData_846057C:: @ 846057C
-	.incbin "sound/direct_sound_samples/846057C.bin"
+DirectSoundWaveData_SC88_DrumKitCrashCymbal2:: @ 846057C
+	.incbin "sound/direct_sound_samples/sc88/drumkit_crash_cymbal_2.bin"
 
 	.align 2
-DirectSoundWaveData_8460E60:: @ 8460E60
-	.incbin "sound/direct_sound_samples/8460E60.bin"
+DirectSoundWaveData_SC88_DrumKitCrashCymbal1:: @ 8460E60
+	.incbin "sound/direct_sound_samples/sc88/drumkit_crash_cymbal_1.bin"
 
 	.align 2
-DirectSoundWaveData_8461D8C:: @ 8461D8C
-	.incbin "sound/direct_sound_samples/8461D8C.bin"
+DirectSoundWaveData_SC88_DrumKitMuteHiConga:: @ 8461D8C
+	.incbin "sound/direct_sound_samples/sc88/drumkit_mute_hi_conga.bin"
 
 	.align 2
-DirectSoundWaveData_84622A4:: @ 84622A4
-	.incbin "sound/direct_sound_samples/84622A4.bin"
+DirectSoundWaveData_SC88_DrumKitLowConga:: @ 84622A4
+	.incbin "sound/direct_sound_samples/sc88/drumkit_low_conga.bin"
 
 	.align 2
 DirectSoundWaveData_SC88_SteelStringGuitar:: @ 846286C
@@ -143,12 +143,12 @@ DirectSoundWaveData_SC88_FingeredBass:: @ 8483804
 	.incbin "sound/direct_sound_samples/sc88/34_fingered_bass.bin"
 
 	.align 2
-DirectSoundWaveData_8485454:: @ 8485454
-	.incbin "sound/direct_sound_samples/8485454.bin"
+DirectSoundWaveData_SC88_DrumKitTimbale1:: @ 8485454
+	.incbin "sound/direct_sound_samples/sc88/drumkit_timbale_1.bin"
 
 	.align 2
-DirectSoundWaveData_8486924:: @ 8486924
-	.incbin "sound/direct_sound_samples/8486924.bin"
+DirectSoundWaveData_SC88_DrumKitSnare4:: @ 8486924
+	.incbin "sound/direct_sound_samples/sc88/drumkit_snare_4.bin"
 
 	.align 2
 DirectSoundWaveData_SC88_SquareWave:: @ 8487330
@@ -159,8 +159,8 @@ DirectSoundWaveData_8488F44:: @ 8488F44
 	.incbin "sound/direct_sound_samples/8488F44.bin"
 
 	.align 2
-DirectSoundWaveData_848A8A4:: @ 848A8A4
-	.incbin "sound/direct_sound_samples/848A8A4.bin"
+DirectSoundWaveData_SC88_DrumKitSnare3:: @ 848A8A4
+	.incbin "sound/direct_sound_samples/sc88/drumkit_snare_3.bin"
 
 	.align 2
 DirectSoundWaveData_SC88_PizzicatoStrings:: @ 848BD68
@@ -203,8 +203,8 @@ DirectSoundWaveData_8499110:: @ 8499110
 	.incbin "sound/direct_sound_samples/8499110.bin"
 
 	.align 2
-DirectSoundWaveData_849B320:: @ 849B320
-	.incbin "sound/direct_sound_samples/849B320.bin"
+DirectSoundWaveData_SC88_DrumkitGuiro:: @ 849B320
+	.incbin "sound/direct_sound_samples/sc88/drumkit_guiro.bin"
 
 	.align 2
 DirectSoundWaveData_SC88_TubularBell:: @ 849BAEC
