@@ -34,7 +34,6 @@ extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern u8 gSelectedOrderFromParty[];
 
-
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
 

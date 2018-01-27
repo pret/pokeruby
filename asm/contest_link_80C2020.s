@@ -3704,7 +3704,7 @@ sub_80C4B5C: @ 80C4B5C
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080C4B90
-	bl sub_8007ECC
+	bl IsLinkTaskFinished
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C4B9E

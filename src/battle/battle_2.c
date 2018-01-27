@@ -384,7 +384,7 @@ void sub_800EC9C(void)
     case 0:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
+            if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
             {
                 gBattleStruct->unk0 = 1;
                 gBattleStruct->unk1 = 1;
@@ -452,7 +452,7 @@ void sub_800EC9C(void)
         }
         break;
     case 2:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty, sizeof(*gPlayerParty) * 2);
             gBattleCommunication[0]++;
@@ -467,7 +467,7 @@ void sub_800EC9C(void)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 2, sizeof(*gPlayerParty) * 2);
             gBattleCommunication[0]++;
@@ -482,7 +482,7 @@ void sub_800EC9C(void)
         }
         break;
     case 6:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), gPlayerParty + 4, sizeof(*gPlayerParty) * 2);
             gBattleCommunication[0]++;
@@ -567,7 +567,7 @@ void sub_800F104(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
+        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
         {
             sub_800F02C();
             SendBlock(bitmask_all_link_players_but_self(), gSharedMem, 0x60);
@@ -627,7 +627,7 @@ void sub_800F298(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        if (gReceivedRemoteLinkPlayers != 0 && sub_8007ECC())
+        if (gReceivedRemoteLinkPlayers != 0 && IsLinkTaskFinished())
         {
             gBattleStruct->unk0 = 1;
             gBattleStruct->unk1 = 1;
@@ -720,7 +720,7 @@ void sub_800F298(void)
         break;
     case 2:
       step_2:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
             gBattleCommunication[0]++;
@@ -783,7 +783,7 @@ void sub_800F298(void)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             SendBlock(bitmask_all_link_players_but_self(), ewram1D000 + 2, sizeof(struct Pokemon));
             gBattleCommunication[0]++;

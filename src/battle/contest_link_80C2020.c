@@ -366,7 +366,7 @@ static void sub_80C25A4(u8 taskId)
 
 static void sub_80C25C0(u8 taskId)
 {
-    if (sub_8007ECC())
+    if (IsLinkTaskFinished())
     {
         DestroyTask(taskId);
         gTasks[eContestLink80C2020Struct2018000.unk_02].func = sub_80C2600;

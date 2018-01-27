@@ -146,7 +146,7 @@ void sub_8080A5C(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             pal_fill_for_map_transition();
             task->data[0]++;
