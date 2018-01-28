@@ -9,7 +9,7 @@ voicegroup_pokemon_cry:: @ 842FC8
 	voice_square_2 2, 0, 0, 9, 2  @ 842FCD0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FCDC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FCE8
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 235  @ 842FCF4
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 51, 235  @ 842FCF4
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FD00
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FD0C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FD18
@@ -507,7 +507,7 @@ voicegroup_843129C:: @ 843129C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312E4
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312F0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312FC
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 235  @ 8431308
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 51, 235  @ 8431308
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431314
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8431320
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843132C
@@ -4061,7 +4061,7 @@ voicegroup_843B424:: @ 843B424
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B46C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B478
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B484
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 204, 51, 242  @ 843B490
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 204, 51, 242  @ 843B490
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B49C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B4A8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B4B4
@@ -4152,7 +4152,7 @@ voicegroup_843B844:: @ 843B844
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B88C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B898
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B8A4
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 242  @ 843B8B0
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 51, 242  @ 843B8B0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B8BC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B8C8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843B8D4
@@ -5146,7 +5146,7 @@ voicegroup_843E5BC:: @ 843E5BC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E604
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E610
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E61C
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 188, 51, 242  @ 843E628
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 188, 51, 242  @ 843E628
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E634
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E640
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843E64C
@@ -5408,7 +5408,7 @@ voicegroup_843F1BC:: @ 843F1BC
 	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 0  @ 843F204
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843F210
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843F21C
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 242  @ 843F228
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 51, 242  @ 843F228
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843F234
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843F240
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843F24C
@@ -8387,7 +8387,7 @@ voicegroup_8447A00:: @ 8447A00
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A48
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A54
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A60
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249  @ 8447A6C
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 72, 249  @ 8447A6C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A78
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A84
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8447A90
@@ -9391,7 +9391,7 @@ voicegroup_844A7F0:: @ 844A7F0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A838
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A844
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A850
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249  @ 844A85C
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 72, 249  @ 844A85C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A868
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A874
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844A880
@@ -9784,7 +9784,7 @@ voicegroup_844B9F0:: @ 844B9F0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA38
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA44
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA50
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249  @ 844BA5C
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 165, 72, 249  @ 844BA5C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA68
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA74
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844BA80
@@ -12006,7 +12006,7 @@ voicegroup_8451F90:: @ 8451F90
 	voice_directsound_no_resample 60, 0, DirectSoundWaveData_Ring, 255, 249, 0, 165  @ 8451F90
 	voice_directsound_alt 60, 0, DirectSoundWaveData_Ring, 255, 0, 255, 165  @ 8451F9C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitSnare4, 255, 0, 255, 165  @ 8451FA8
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 242, 0, 127  @ 8451FB4
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 242, 0, 127  @ 8451FB4
 	voice_noise_alt 0, 0, 1, 0, 1  @ 8451FC0
 	voice_noise_alt 1, 0, 1, 0, 1  @ 8451FCC
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitTimbale2, 255, 0, 255, 165  @ 8451FD8
@@ -12031,7 +12031,7 @@ voicegroup_8451F90:: @ 8451F90
 	voice_noise_alt 0, 0, 7, 15, 1  @ 84520BC
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_CarCrash, 255, 0, 255, 127  @ 84520C8
 	voice_noise_alt 1, 0, 7, 15, 1  @ 84520D4
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 246, 0, 127  @ 84520E0
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 246, 0, 127  @ 84520E0
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_PinkNoise, 255, 0, 255, 127  @ 84520EC
 	voice_square_1_alt 19, 2, 0, 2, 0, 0  @ 84520F8
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_WaspySynth, 255, 0, 255, 127  @ 8452104
@@ -12046,7 +12046,7 @@ voicegroup_8451F90:: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitClosedHiHat, 255, 127, 0, 188  @ 8452170
 	voice_directsound 60, 0, DirectSoundWaveData_Noise1, 255, 249, 0, 165  @ 845217C
 	voice_square_1 0, 0, 4, 6, 0, 0  @ 8452188
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 13, 0, 255, 127  @ 8452194
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 13, 0, 255, 127  @ 8452194
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_TubularBell, 13, 0, 255, 127  @ 84521A0
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_JPSuperSaw, 255, 0, 255, 127  @ 84521AC
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_Piano1, 255, 252, 0, 204  @ 84521B8
@@ -12057,7 +12057,7 @@ voicegroup_8451F90:: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_TubularBell, 255, 226, 0, 127  @ 84521F4
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitCrashCymbal1, 26, 0, 255, 127  @ 8452200
 	voice_square_1_alt 0, 2, 0, 1, 0, 0  @ 845220C
-	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 252, 0, 127  @ 8452218
+	voice_directsound 60, 0, DirectSoundWaveData_Tone1, 255, 252, 0, 127  @ 8452218
 	voice_square_1_alt 0, 1, 0, 2, 0, 0  @ 8452224
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_PizzicatoStrings, 255, 127, 0, 127  @ 8452230
 	voice_noise_alt 0, 1, 6, 0, 0  @ 845223C
@@ -12125,12 +12125,12 @@ voicegroup_8451F90:: @ 8451F90
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8452524
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8452530
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 845253C
-	voice_directsound 60, 0, DirectSoundWaveData_84A7328, 255, 0, 255, 165  @ 8452548
-	voice_directsound 60, 0, DirectSoundWaveData_84A7F38, 255, 0, 255, 165  @ 8452554
-	voice_directsound 60, 0, DirectSoundWaveData_84A8AC8, 255, 0, 255, 165  @ 8452560
-	voice_directsound 60, 0, DirectSoundWaveData_84A9564, 255, 0, 255, 165  @ 845256C
-	voice_directsound 60, 0, DirectSoundWaveData_84A9EAC, 255, 0, 255, 165  @ 8452578
-	voice_directsound 60, 0, DirectSoundWaveData_84AA8F4, 255, 0, 255, 165  @ 8452584
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel1, 255, 0, 255, 165  @ 8452548
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel2, 255, 0, 255, 165  @ 8452554
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel3, 255, 0, 255, 165  @ 8452560
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel4, 255, 0, 255, 165  @ 845256C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel5, 255, 0, 255, 165  @ 8452578
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel6, 255, 0, 255, 165  @ 8452584
 
 	.align 2
 voicegroup_8452590:: @ 8452590
@@ -12934,57 +12934,57 @@ voicegroup_84549C0:: @ 84549C0
 
 	.align 2
 voicegroup_84549F0:: @ 84549F0
-	voice_directsound 60, 0, DirectSoundWaveData_8639898, 255, 0, 255, 0  @ 84549F0
-	voice_directsound 60, 0, DirectSoundWaveData_8639EF8, 255, 0, 255, 0  @ 84549FC
-	voice_directsound 60, 0, DirectSoundWaveData_863A3DC, 255, 0, 255, 0  @ 8454A08
-	voice_directsound 60, 0, DirectSoundWaveData_863AD2C, 255, 0, 255, 0  @ 8454A14
-	voice_directsound 60, 0, DirectSoundWaveData_863B79C, 255, 0, 255, 0  @ 8454A20
-	voice_directsound 60, 0, DirectSoundWaveData_863BABC, 255, 0, 255, 0  @ 8454A2C
-	voice_directsound 60, 0, DirectSoundWaveData_863C744, 255, 0, 255, 0  @ 8454A38
-	voice_directsound 60, 0, DirectSoundWaveData_863CD64, 255, 0, 255, 0  @ 8454A44
-	voice_directsound 60, 0, DirectSoundWaveData_863D0EC, 255, 0, 255, 0  @ 8454A50
-	voice_directsound 60, 0, DirectSoundWaveData_863DED0, 255, 0, 255, 0  @ 8454A5C
-	voice_directsound 60, 0, DirectSoundWaveData_863E840, 255, 0, 255, 0  @ 8454A68
-	voice_directsound 60, 0, DirectSoundWaveData_863EBDC, 255, 0, 255, 0  @ 8454A74
-	voice_directsound 60, 0, DirectSoundWaveData_863F390, 255, 0, 255, 0  @ 8454A80
-	voice_directsound 60, 0, DirectSoundWaveData_86400EC, 255, 0, 255, 0  @ 8454A8C
-	voice_directsound 60, 0, DirectSoundWaveData_8640330, 255, 0, 255, 0  @ 8454A98
-	voice_directsound 60, 0, DirectSoundWaveData_8641170, 255, 0, 255, 0  @ 8454AA4
-	voice_directsound 60, 0, DirectSoundWaveData_8641AC4, 255, 0, 255, 0  @ 8454AB0
-	voice_directsound 60, 0, DirectSoundWaveData_8641E18, 255, 0, 255, 0  @ 8454ABC
-	voice_directsound 60, 0, DirectSoundWaveData_864244C, 255, 0, 255, 0  @ 8454AC8
-	voice_directsound 60, 0, DirectSoundWaveData_86430B8, 255, 0, 255, 0  @ 8454AD4
-	voice_directsound 60, 0, DirectSoundWaveData_8643650, 255, 0, 255, 0  @ 8454AE0
-	voice_directsound 60, 0, DirectSoundWaveData_8644154, 255, 0, 255, 0  @ 8454AEC
-	voice_directsound 60, 0, DirectSoundWaveData_8644758, 255, 0, 255, 0  @ 8454AF8
-	voice_directsound 60, 0, DirectSoundWaveData_8644950, 255, 0, 255, 0  @ 8454B04
-	voice_directsound 60, 0, DirectSoundWaveData_86452B4, 255, 0, 255, 0  @ 8454B10
-	voice_directsound 60, 0, DirectSoundWaveData_8646240, 255, 0, 255, 0  @ 8454B1C
-	voice_directsound 60, 0, DirectSoundWaveData_8646878, 255, 0, 255, 0  @ 8454B28
-	voice_directsound 60, 0, DirectSoundWaveData_864734C, 255, 0, 255, 0  @ 8454B34
-	voice_directsound 60, 0, DirectSoundWaveData_8648290, 255, 0, 255, 0  @ 8454B40
-	voice_directsound 60, 0, DirectSoundWaveData_8648808, 255, 0, 255, 0  @ 8454B4C
-	voice_directsound 60, 0, DirectSoundWaveData_8649654, 255, 0, 255, 0  @ 8454B58
-	voice_directsound 60, 0, DirectSoundWaveData_864A55C, 255, 0, 255, 0  @ 8454B64
-	voice_directsound 60, 0, DirectSoundWaveData_864B030, 255, 0, 255, 0  @ 8454B70
-	voice_directsound 60, 0, DirectSoundWaveData_864BBC4, 255, 0, 255, 0  @ 8454B7C
-	voice_directsound 60, 0, DirectSoundWaveData_864C59C, 255, 0, 255, 0  @ 8454B88
-	voice_directsound 60, 0, DirectSoundWaveData_864CBDC, 255, 0, 255, 0  @ 8454B94
-	voice_directsound 60, 0, DirectSoundWaveData_864D6BC, 255, 0, 255, 0  @ 8454BA0
-	voice_directsound 60, 0, DirectSoundWaveData_864DCF8, 255, 0, 255, 0  @ 8454BAC
-	voice_directsound 60, 0, DirectSoundWaveData_864E410, 255, 0, 255, 0  @ 8454BB8
-	voice_directsound 60, 0, DirectSoundWaveData_864ED4C, 255, 0, 255, 0  @ 8454BC4
-	voice_directsound 60, 0, DirectSoundWaveData_864F508, 255, 0, 255, 0  @ 8454BD0
-	voice_directsound 60, 0, DirectSoundWaveData_864FA6C, 255, 0, 255, 0  @ 8454BDC
-	voice_directsound 60, 0, DirectSoundWaveData_86507E0, 255, 0, 255, 0  @ 8454BE8
-	voice_directsound 60, 0, DirectSoundWaveData_8650C5C, 255, 0, 255, 0  @ 8454BF4
-	voice_directsound 60, 0, DirectSoundWaveData_8651148, 255, 0, 255, 0  @ 8454C00
-	voice_directsound 60, 0, DirectSoundWaveData_8651910, 255, 0, 255, 0  @ 8454C0C
-	voice_directsound 60, 0, DirectSoundWaveData_865250C, 255, 0, 255, 0  @ 8454C18
-	voice_directsound 60, 0, DirectSoundWaveData_8652884, 255, 0, 255, 0  @ 8454C24
-	voice_directsound 60, 0, DirectSoundWaveData_8653040, 255, 0, 255, 0  @ 8454C30
-	voice_directsound 60, 0, DirectSoundWaveData_8653CA4, 255, 0, 255, 0  @ 8454C3C
-	voice_directsound 60, 0, DirectSoundWaveData_8654170, 255, 0, 255, 0  @ 8454C48
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel7, 255, 0, 255, 0  @ 84549F0
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel8, 255, 0, 255, 0  @ 84549FC
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel9, 255, 0, 255, 0  @ 8454A08
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel10, 255, 0, 255, 0  @ 8454A14
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel11, 255, 0, 255, 0  @ 8454A20
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel12, 255, 0, 255, 0  @ 8454A2C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel13, 255, 0, 255, 0  @ 8454A38
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel14, 255, 0, 255, 0  @ 8454A44
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel15, 255, 0, 255, 0  @ 8454A50
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel16, 255, 0, 255, 0  @ 8454A5C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel17, 255, 0, 255, 0  @ 8454A68
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel18, 255, 0, 255, 0  @ 8454A74
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel19, 255, 0, 255, 0  @ 8454A80
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel20, 255, 0, 255, 0  @ 8454A8C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel21, 255, 0, 255, 0  @ 8454A98
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel22, 255, 0, 255, 0  @ 8454AA4
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel23, 255, 0, 255, 0  @ 8454AB0
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel24, 255, 0, 255, 0  @ 8454ABC
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel25, 255, 0, 255, 0  @ 8454AC8
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel26, 255, 0, 255, 0  @ 8454AD4
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel27, 255, 0, 255, 0  @ 8454AE0
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel28, 255, 0, 255, 0  @ 8454AEC
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel29, 255, 0, 255, 0  @ 8454AF8
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel30, 255, 0, 255, 0  @ 8454B04
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel31, 255, 0, 255, 0  @ 8454B10
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel32, 255, 0, 255, 0  @ 8454B1C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel33, 255, 0, 255, 0  @ 8454B28
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel34, 255, 0, 255, 0  @ 8454B34
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel35, 255, 0, 255, 0  @ 8454B40
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel36, 255, 0, 255, 0  @ 8454B4C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel37, 255, 0, 255, 0  @ 8454B58
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel38, 255, 0, 255, 0  @ 8454B64
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel39, 255, 0, 255, 0  @ 8454B70
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel40, 255, 0, 255, 0  @ 8454B7C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel41, 255, 0, 255, 0  @ 8454B88
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel42, 255, 0, 255, 0  @ 8454B94
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel43, 255, 0, 255, 0  @ 8454BA0
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel44, 255, 0, 255, 0  @ 8454BAC
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel45, 255, 0, 255, 0  @ 8454BB8
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel46, 255, 0, 255, 0  @ 8454BC4
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel47, 255, 0, 255, 0  @ 8454BD0
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel48, 255, 0, 255, 0  @ 8454BDC
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel49, 255, 0, 255, 0  @ 8454BE8
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel50, 255, 0, 255, 0  @ 8454BF4
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel51, 255, 0, 255, 0  @ 8454C00
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel52, 255, 0, 255, 0  @ 8454C0C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel53, 255, 0, 255, 0  @ 8454C18
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel54, 255, 0, 255, 0  @ 8454C24
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel55, 255, 0, 255, 0  @ 8454C30
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel56, 255, 0, 255, 0  @ 8454C3C
+	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel57, 255, 0, 255, 0  @ 8454C48
 
 	.align 2
 voicegroup_8454C54:: @ 8454C54
