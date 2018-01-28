@@ -8,54 +8,6 @@
 
 	.section .rodata
 
-@	.align 2
-@ 81F9528
-@	.4byte 0x101 @ unknown data
-
-@	.align 2
-@gOamData_81F952C:: @ 81F952C
-@	.byte 0x00
-@	.byte 0x03
-@	.byte 0x00
-@	.byte 0xC0
-@	.byte 0x00
-@	.byte 0x00
-
-@	.align 2
-@gOamData_81F9534:: @ 81F9534
-@	.2byte 0x0300
-@	.2byte 0xC000
-@	.2byte 0x0040
-
-@	.align 2
-@gSpriteAffineAnim_81F953C:: @ 81F953C
-@	obj_rot_scal_anim_frame 0x80, 0x80, 0, 0
-@	obj_rot_scal_anim_end
-
-@	.align 2
-@gSpriteAffineAnim_81F954C:: @ 81F954C
-@	obj_rot_scal_anim_frame 0x80, 0x80, 0, 0
-@	obj_rot_scal_anim_frame 0x18, 0x18, 0, -128
-@	obj_rot_scal_anim_frame 0x18, 0x18, 0, -128
-@	obj_rot_scal_anim_end
-
-@	.align 2
-@gSpriteAffineAnimTable_81F956C:: @ 81F956C
-@	.4byte gSpriteAffineAnim_81F953C
-@	.4byte gSpriteAffineAnim_81F954C
-
-@	.align 2
-@gSpriteTemplate_81F9574:: @ 81F9574
-@	spr_template 10000, 10000, gOamData_81F952C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_81F956C, nullsub_36
-
-@	.align 2
-@gSpriteTemplate_81F958C:: @ 81F958C
-@	spr_template 10000, 10000, gOamData_81F9534, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_81F956C, nullsub_36
-
-@	.align 2
-@gUnknown_081F95A4:: @ 81F95A4
-@	obj_tiles gUnknown_08E5DC2C, 4096, 0x2710
-
 	.align 2
 gBattleTerrainTable:: @ 81F95AC
 	@ tall_grass
