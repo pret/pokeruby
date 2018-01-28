@@ -67,12 +67,15 @@ struct UnknownStruct12
     u8 filler4[0x54];
 };
 
-void debug_sub_80139E4(void);
-extern u8 gUnknown_02023A14_50;
+extern void sub_802BBD4();
 
+extern const u8 Str_821F7B8[];
+extern u8 gUnknown_02023A14_50;
 extern const u16 gUnknown_08D004E0[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
-
+extern const u8 Str_821F7EA[];
+extern const u8 gUnknown_Debug_821F7F3[];
+extern const u8 BattleText_YesNo[];
 extern u8 gStatStageRatios[][2];
 extern u8 gActionsByTurnOrder[4];
 extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
@@ -85,7 +88,7 @@ extern u8 gCurrentActionFuncId;
 extern u8 gBanksByTurnOrder[];
 extern struct UnknownStruct12 gUnknown_02024AD0[];
 extern u8 gObjectBankIDs[];
-extern u16 gCurrentMove;
+extern u16 gCurrentMove;  // This is mis-named. It is a species, not a move ID.
 extern u8 gLastUsedAbility;
 extern u8 gStringBank;
 extern u8 gAbsentBankFlags;
@@ -182,7 +185,7 @@ extern u8 gUnknown_081FA70C[][3];
 extern u8 gUnknown_081FA71B[];
 extern u8 gUnknown_081FA71F[];
 
-
+void sub_8010824(void);
 static void BattlePrepIntroSlide(void);
 void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
 void SetActionsAndBanksTurnOrder(void);
@@ -551,11 +554,7 @@ void sub_800EC9C(void)
         if (battle_load_something(gUnknown_02024D1F, gUnknown_02024D1F + 1) != 0)
         {
             gPreBattleCallback1 = gMain.callback1;
-#if DEBUG
-            gMain.callback1 = debug_sub_80139E4;
-#else
             gMain.callback1 = sub_8010824;
-#endif
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
@@ -940,11 +939,7 @@ void sub_800F298(void)
         if (battle_load_something(gUnknown_02024D1F, gUnknown_02024D1F + 1) != 0)
         {
             gPreBattleCallback1 = gMain.callback1;
-#if DEBUG
-            gMain.callback1 = debug_sub_80139E4;
-#else
             gMain.callback1 = sub_8010824;
-#endif
             SetMainCallback2(BattleMainCB2);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
@@ -1363,6 +1358,10 @@ void c2_081284E0(void)
 // A LOT of debug code!
 #if DEBUG
 
+extern u8 gUnknown_Debug_2023B62[];
+extern const u8 Str_821F7BD[];
+extern const u8 Str_821F7DA[];
+
 void debug_sub_8010818(void);
 void debug_sub_80108B8(void);
 void debug_sub_8010CAC(void);
@@ -1372,8 +1371,10 @@ void debug_sub_8011EA0(u8);
 void debug_sub_8012294(void);
 void debug_sub_80123D8(u8);
 void debug_sub_8012540(void);
-void debug_sub_80125A0(void);
 void debug_nullsub_3(void);
+void debug_sub_80125A0(void);
+u32 debug_sub_8013294(u8, void *, u32);
+void debug_sub_80132C8(u8, void *, u32);
 
 struct UnknownStruct2023A76
 {
@@ -1500,8 +1501,6 @@ void debug_sub_80108B8(void)
 	}
 }
 
-// This function matches, but it somehow affects registers in SetActionsAndBanksTurnOrder.
-#ifdef NONMATCHING
 void debug_sub_8010A7C(u8 a, u8 b)
 {
     s32 i;
@@ -1510,49 +1509,6 @@ void debug_sub_8010A7C(u8 a, u8 b)
         gBattleTextBuff1[i] = a;
     gBattleTextBuff1[i] = EOS;
 }
-#else
-__attribute__((naked))
-void debug_sub_8010A7C()
-{
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r2, r1, #0x18\n"
-        "	mov	r1, #0x0\n"
-        "	ldr	r5, ._514       @ gBattleTextBuff1\n"
-        "	cmp	r1, r2\n"
-        "	bge	._512	@cond_branch\n"
-        "	add	r3, r5, #0\n"
-        "._513:\n"
-        "	add	r0, r1, r3\n"
-        "	strb	r4, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, r2\n"
-        "	blt	._513	@cond_branch\n"
-        "._512:\n"
-        "	add	r1, r1, r5\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r1]\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._515:\n"
-        "	.align	2, 0\n"
-        "._514:\n"
-        "	.word	gBattleTextBuff1\n"
-        "\n"
-    );
-}
-#endif
-
-/*
-void debug_sub_8010AAC(u8 a)
-{
-    u32 r7 = gUnknown_Debug_030043A4 * 5;
-}
-*/
 
 __attribute__((naked))
 void debug_sub_8010AAC()
@@ -5195,6 +5151,21 @@ void debug_sub_8012878()
     );
 }
 
+/*
+void debug_sub_80128B4(void)
+{
+    debug_sub_8010A7C(0, 9);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    ConvertIntToDecimalStringN(gBattleTextBuff1, gCurrentMove, 2, 3);
+    gBattleTextBuff1[3] = CHAR_SPACE;
+    gBattleTextBuff1[4] = EOS;
+    StringAppend(gBattleTextBuff1, gSpeciesNames[gCurrentMove]);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+}
+*/
+
 __attribute__((naked))
 void debug_sub_80128B4()
 {
@@ -5261,1226 +5232,354 @@ void debug_sub_80128B4()
     );
 }
 
-__attribute__((naked))
-void debug_sub_8012938()
+void debug_sub_8012938(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	mov	r6, sl\n"
-        "	mov	r5, r9\n"
-        "	mov	r4, r8\n"
-        "	push	{r4, r5, r6}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	add	r5, r0, #0\n"
-        "	lsl	r5, r5, #0x18\n"
-        "	lsr	r5, r5, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x7\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r6, ._880       @ gUnknown_03004210\n"
-        "	ldr	r4, ._880 + 4   @ gBattleTextBuff1\n"
-        "	mov	r0, #0x25\n"
-        "	mov	r8, r0\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r6, #0\n"
-        "	add	r1, r4, #0\n"
-        "	mov	r2, #0xa2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._880 + 8   @ Str_821F7B8\n"
-        "	add	r0, r4, #0\n"
-        "	bl	StringCopy\n"
-        "	add	r0, r4, #4\n"
-        "	ldr	r1, ._880 + 12  @ gUnknown_Debug_2023B62\n"
-        "	mov	sl, r1\n"
-        "	ldr	r2, ._880 + 16  @ gCurrentMove\n"
-        "	mov	r9, r2\n"
-        "	ldrh	r1, [r2]\n"
-        "	sub	r1, r1, #0x1\n"
-        "	add r1, r1, sl\n"
-        "	ldrb	r1, [r1]\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, r8\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r6, #0\n"
-        "	add	r1, r4, #0\n"
-        "	mov	r2, #0xa2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r2, ._880 + 20  @ gSprites\n"
-        "	ldr	r1, ._880 + 24  @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0xa\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	lsl	r1, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r2\n"
-        "	mov	r2, r9\n"
-        "	ldrh	r0, [r2]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add r0, r0, sl\n"
-        "	ldrb	r0, [r0]\n"
-        "	neg	r0, r0\n"
-        "	strh	r0, [r1, #0x26]\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._881:\n"
-        "	.align	2, 0\n"
-        "._880:\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	Str_821F7B8\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	gCurrentMove\n"
-        "	.word	gSprites\n"
-        "	.word	gTasks\n"
-        "\n"
-    );
+    debug_sub_8010A7C(0, 7);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    StringCopy(gBattleTextBuff1, Str_821F7B8);
+    ConvertIntToDecimalStringN(gBattleTextBuff1 + 4, gUnknown_Debug_2023B62[gCurrentMove - 1], 2, 3);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    gSprites[gTasks[taskId].data[1]].pos2.y = -gUnknown_Debug_2023B62[gCurrentMove - 1];
 }
 
-__attribute__((naked))
-void debug_sub_80129F8()
+void debug_sub_80129F8(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	mov	r6, r8\n"
-        "	push	{r6}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	add	r5, r0, #0\n"
-        "	lsl	r5, r5, #0x18\n"
-        "	lsr	r5, r5, #0x18\n"
-        "	ldr	r6, ._882       @ gCurrentMove\n"
-        "	ldrh	r2, [r6]\n"
-        "	lsl	r0, r2, #0x3\n"
-        "	ldr	r1, ._882 + 4   @ gMonFrontPicTable\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r1, ._882 + 8   @ gMonFrontPicCoords\n"
-        "	mov	r8, r1\n"
-        "	lsl	r2, r2, #0x2\n"
-        "	add r2, r2, r8\n"
-        "	ldrb	r1, [r2]\n"
-        "	ldrb	r2, [r2, #0x1]\n"
-        "	mov	r3, #0x80\n"
-        "	lsl	r3, r3, #0x12\n"
-        "	ldr	r4, ._882 + 12  @ gUnknown_081FAF4C\n"
-        "	ldr	r4, [r4, #0x4]\n"
-        "	str	r4, [sp]\n"
-        "	ldrh	r4, [r6]\n"
-        "	str	r4, [sp, #0x4]\n"
-        "	bl	DecompressPicFromTable_2\n"
-        "	ldr	r1, ._882 + 16  @ gMonPaletteTable\n"
-        "	ldrh	r0, [r6]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	r1, #0x88\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	mov	r2, #0x20\n"
-        "	bl	LoadCompressedPalette\n"
-        "	ldr	r4, ._882 + 20  @ gSprites\n"
-        "	ldr	r0, ._882 + 24  @ gTasks\n"
-        "	lsl	r2, r5, #0x2\n"
-        "	add	r2, r2, r5\n"
-        "	lsl	r2, r2, #0x3\n"
-        "	add	r2, r2, r0\n"
-        "	mov	r1, #0xa\n"
-        "	ldsh	r0, [r2, r1]\n"
-        "	lsl	r1, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r4\n"
-        "	ldrh	r0, [r6]\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add r0, r0, r8\n"
-        "	ldrb	r0, [r0, #0x1]\n"
-        "	add	r0, r0, #0x28\n"
-        "	strh	r0, [r1, #0x22]\n"
-        "	mov	r1, #0xa\n"
-        "	ldsh	r0, [r2, r1]\n"
-        "	lsl	r1, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r4\n"
-        "	ldr	r3, ._882 + 28  @ gUnknown_Debug_2023B62\n"
-        "	ldrh	r0, [r6]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r0, r0, r3\n"
-        "	ldrb	r0, [r0]\n"
-        "	neg	r0, r0\n"
-        "	strh	r0, [r1, #0x26]\n"
-        "	mov	r0, #0xa\n"
-        "	ldsh	r1, [r2, r0]\n"
-        "	lsl	r0, r1, #0x4\n"
-        "	add	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x0\n"
-        "	bl	StartSpriteAnim\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._883:\n"
-        "	.align	2, 0\n"
-        "._882:\n"
-        "	.word	gCurrentMove\n"
-        "	.word	gMonFrontPicTable\n"
-        "	.word	gMonFrontPicCoords\n"
-        "	.word	gUnknown_081FAF4C\n"
-        "	.word	gMonPaletteTable\n"
-        "	.word	gSprites\n"
-        "	.word	gTasks\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "\n"
-    );
+    DecompressPicFromTable_2(
+      &gMonFrontPicTable[gCurrentMove],
+      gMonFrontPicCoords[gCurrentMove].coords,
+      gMonFrontPicCoords[gCurrentMove].y_offset,
+      (void *)0x02000000,
+      gUnknown_081FAF4C[1],
+      gCurrentMove);
+    LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
+    gSprites[gTasks[taskId].data[1]].pos1.y = gMonFrontPicCoords[gCurrentMove].y_offset + 40;
+    gSprites[gTasks[taskId].data[1]].pos2.y = -gUnknown_Debug_2023B62[gCurrentMove - 1];
+    StartSpriteAnim(&gSprites[gTasks[taskId].data[1]], 0);
 }
 
-__attribute__((naked))
-void debug_sub_8012AC0()
+void debug_sub_8012AC0(s8 a, u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r6, r1, #0x18\n"
-        "	ldr	r3, ._885       @ gCurrentMove\n"
-        "	ldr	r4, ._885 + 4   @ gBaseStats\n"
-        "	b	._884\n"
-        "._886:\n"
-        "	.align	2, 0\n"
-        "._885:\n"
-        "	.word	gCurrentMove\n"
-        "	.word	gBaseStats\n"
-        "._890:\n"
-        "	ldrb	r0, [r1, #0x7]\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._887	@cond_branch\n"
-        "._884:\n"
-        "	add	r2, r3, #0\n"
-        "	lsl	r0, r5, #0x18\n"
-        "	asr	r0, r0, #0x18\n"
-        "	ldrh	r1, [r2]\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r0, [r2]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	cmp	r0, #0\n"
-        "	bne	._888	@cond_branch\n"
-        "	ldr	r1, ._891       @ 0x19b\n"
-        "	add	r0, r1, #0\n"
-        "	strh	r0, [r2]\n"
-        "._888:\n"
-        "	ldrh	r1, [r2]\n"
-        "	ldr	r0, ._891       @ 0x19b\n"
-        "	cmp	r1, r0\n"
-        "	bne	._889	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r2]\n"
-        "._889:\n"
-        "	ldrh	r0, [r3]\n"
-        "	lsl	r1, r0, #0x3\n"
-        "	sub	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r4\n"
-        "	ldrb	r0, [r1, #0x6]\n"
-        "	cmp	r0, #0x2\n"
-        "	bne	._890	@cond_branch\n"
-        "._887:\n"
-        "	bl	debug_sub_80128B4\n"
-        "	add	r0, r6, #0\n"
-        "	bl	debug_sub_8012938\n"
-        "	add	r0, r6, #0\n"
-        "	bl	debug_sub_80129F8\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._892:\n"
-        "	.align	2, 0\n"
-        "._891:\n"
-        "	.word	0x19b\n"
-        "\n"
-    );
+    do
+    {
+        gCurrentMove += a;
+        if (gCurrentMove == 0)
+            gCurrentMove = 411;
+        if (gCurrentMove == 411)
+            gCurrentMove = 1;
+    } while (gBaseStats[gCurrentMove].type1 != 2 && gBaseStats[gCurrentMove].type2 != 2);
+    debug_sub_80128B4();
+    debug_sub_8012938(taskId);
+    debug_sub_80129F8(taskId);
 }
 
-__attribute__((naked))
-void debug_sub_8012B2C()
+void debug_sub_8012B2C(u8 a)
 {
-    asm(
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x11\n"
-        "	ldr	r1, ._893       @ 0x600c772\n"
-        "	add	r2, r0, r1\n"
-        "	mov	r1, #0x1\n"
-        "	strh	r1, [r2]\n"
-        "	ldr	r1, ._893 + 4   @ 0x600c7b2\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x2\n"
-        "	strh	r1, [r0]\n"
-        "	bx	lr\n"
-        "._894:\n"
-        "	.align	2, 0\n"
-        "._893:\n"
-        "	.word	0x600c772\n"
-        "	.word	0x600c7b2\n"
-        "\n"
-    );
+    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 1;
+    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 2;
 }
 
-__attribute__((naked))
-void debug_sub_8012B4C()
+void debug_sub_8012B4C(u8 a)
 {
-    asm(
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x11\n"
-        "	ldr	r2, ._895       @ 0x600c772\n"
-        "	add	r1, r0, r2\n"
-        "	ldr	r3, ._895 + 4   @ 0x1016\n"
-        "	add	r2, r3, #0\n"
-        "	strh	r2, [r1]\n"
-        "	ldr	r1, ._895 + 8   @ 0x600c7b2\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r2, [r0]\n"
-        "	bx	lr\n"
-        "._896:\n"
-        "	.align	2, 0\n"
-        "._895:\n"
-        "	.word	0x600c772\n"
-        "	.word	0x1016\n"
-        "	.word	0x600c7b2\n"
-        "\n"
-    );
+    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 0) * 0x20) = 0x1016;
+    *(u16 *)(VRAM + 0xC000 + 0x772 + (a * 4 + 2) * 0x20) = 0x1016;
 }
 
-__attribute__((naked))
-void debug_sub_8012B70()
+void debug_sub_8012B70(u8 taskId, u8 b)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r6, r1, #0x18\n"
-        "	cmp	r6, #0\n"
-        "	beq	._897	@cond_branch\n"
-        "	mov	r4, #0x1\n"
-        "	str	r4, [sp]\n"
-        "	mov	r0, #0x18\n"
-        "	mov	r1, #0x1c\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x21\n"
-        "	bl	sub_802BBD4\n"
-        "	bl	debug_sub_80128B4\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_8012938\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_80129F8\n"
-        "	ldr	r1, ._899       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r4, [r0, #0x8]\n"
-        "	b	._898\n"
-        "._900:\n"
-        "	.align	2, 0\n"
-        "._899:\n"
-        "	.word	gTasks\n"
-        "._897:\n"
-        "	str	r6, [sp]\n"
-        "	mov	r0, #0x18\n"
-        "	mov	r1, #0x1c\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x21\n"
-        "	bl	sub_802BBD4\n"
-        "	ldr	r0, ._901       @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	mov	r0, #0x2\n"
-        "	strh	r0, [r4, #0x8]\n"
-        "	ldr	r5, ._901 + 4   @ gUnknown_03004210\n"
-        "	ldr	r1, ._901 + 8   @ Str_821F7DA\n"
-        "	mov	r2, #0xa4\n"
-        "	lsl	r2, r2, #0x2\n"
-        "	mov	r0, #0x1d\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r3, #0x1a\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	strh	r6, [r4, #0xe]\n"
-        "	mov	r0, #0x0\n"
-        "	bl	debug_sub_8012B2C\n"
-        "._898:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._902:\n"
-        "	.align	2, 0\n"
-        "._901:\n"
-        "	.word	gTasks\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	Str_821F7DA\n"
-        "\n"
-    );
+    if (b != 0)
+    {
+        sub_802BBD4(24, 28, 29, 33, 1);
+        debug_sub_80128B4();
+        debug_sub_8012938(taskId);
+        debug_sub_80129F8(taskId);
+        gTasks[taskId].data[0] = 1;
+    }
+    else
+    {
+        sub_802BBD4(24, 28, 29, 33, 0);
+        gTasks[taskId].data[0] = 2;
+        Text_InitWindow(&gUnknown_03004210, Str_821F7DA, 656, 26, 29);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
+        gTasks[taskId].data[3] = 0;
+        debug_sub_8012B2C(0);
+    }
 }
 
-__attribute__((naked))
-void debug_sub_8012C08()
+void debug_sub_8012C08(u8 taskId, u8 b)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r8\n"
-        "	push	{r7}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	add	r4, r1, #0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r6, r0, #0x18\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x9\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r7, ._905       @ gUnknown_03004210\n"
-        "	ldr	r5, ._905 + 4   @ gBattleTextBuff1\n"
-        "	mov	r0, #0x23\n"
-        "	mov	r8, r0\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	mov	r2, #0x90\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r7, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x7\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	mov	r0, #0x25\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	mov	r2, #0xa2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r7, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x18\n"
-        "	mov	r1, #0x1c\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x21\n"
-        "	bl	sub_802BBD4\n"
-        "	cmp	r4, #0\n"
-        "	beq	._903	@cond_branch\n"
-        "	ldr	r1, ._905 + 8   @ gTasks\n"
-        "	lsl	r4, r6, #0x2\n"
-        "	add	r0, r4, r6\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x4\n"
-        "	strh	r1, [r0, #0x8]\n"
-        "	ldr	r1, ._905 + 12  @ gUnknown_Debug_821F7F3\n"
-        "	mov	r0, r8\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r2, #0x90\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	b	._904\n"
-        "._906:\n"
-        "	.align	2, 0\n"
-        "._905:\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gTasks\n"
-        "	.word	gUnknown_Debug_821F7F3\n"
-        "._903:\n"
-        "	ldr	r1, ._907       @ gTasks\n"
-        "	lsl	r4, r6, #0x2\n"
-        "	add	r0, r4, r6\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x3\n"
-        "	strh	r1, [r0, #0x8]\n"
-        "	ldr	r1, ._907 + 4   @ Str_821F7EA\n"
-        "	mov	r0, r8\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r2, #0x90\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "._904:\n"
-        "	add	r5, r4, #0\n"
-        "	ldr	r4, ._907 + 8   @ gUnknown_03004210\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._907 + 12  @ BattleText_YesNo\n"
-        "	mov	r2, #0xa4\n"
-        "	lsl	r2, r2, #0x2\n"
-        "	mov	r0, #0x1d\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r3, #0x1a\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._907       @ gTasks\n"
-        "	add	r0, r5, r6\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x1\n"
-        "	strh	r1, [r0, #0xe]\n"
-        "	mov	r0, #0x1\n"
-        "	bl	debug_sub_8012B2C\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._908:\n"
-        "	.align	2, 0\n"
-        "._907:\n"
-        "	.word	gTasks\n"
-        "	.word	Str_821F7EA\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	BattleText_YesNo\n"
-        "\n"
-    );
+    debug_sub_8010A7C(0, 9);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    debug_sub_8010A7C(0, 7);
+    Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 162, 2, 37);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    sub_802BBD4(24, 28, 29, 33, 0);
+    if (b != 0)
+    {
+        gTasks[taskId].data[0] = 4;
+        Text_InitWindow(&gUnknown_03004210, gUnknown_Debug_821F7F3, 144, 2, 35);
+    }
+    else
+    {
+        gTasks[taskId].data[0] = 3;
+        Text_InitWindow(&gUnknown_03004210, Str_821F7EA, 144, 2, 35);
+    }
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    Text_InitWindow(&gUnknown_03004210, BattleText_YesNo, 656, 26, 29);
+    Text_PrintWindow8002F44(&gUnknown_03004210);
+    gTasks[taskId].data[3] = 1;
+    debug_sub_8012B2C(1);
 }
 
-__attribute__((naked))
-void debug_sub_8012D10()
+void debug_sub_8012D10(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	ldr	r1, ._911       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x8\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	cmp	r0, #0x4\n"
-        "	bls	._909	@cond_branch\n"
-        "	b	._1067\n"
-        "._909:\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._911 + 4   @ \n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	pc, r0\n"
-        "._912:\n"
-        "	.align	2, 0\n"
-        "._911:\n"
-        "	.word	gTasks\n"
-        "	.word	._913\n"
-        "._913:\n"
-        "	.word	._914\n"
-        "	.word	._915\n"
-        "	.word	._916\n"
-        "	.word	._917\n"
-        "	.word	._918\n"
-        "._914:\n"
-        "	bl	debug_sub_80128B4\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_8012938\n"
-        "	ldr	r4, ._920       @ gUnknown_03004210\n"
-        "	ldr	r1, ._920 + 4   @ Str_821F7BD\n"
-        "	mov	r2, #0xc8\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	mov	r0, #0x23\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._920 + 8   @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	ldrh	r1, [r0, #0x8]\n"
-        "	add	r1, r1, #0x1\n"
-        "	strh	r1, [r0, #0x8]\n"
-        "	ldrb	r0, [r0, #0xc]\n"
-        "	b	._919\n"
-        "._921:\n"
-        "	.align	2, 0\n"
-        "._920:\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	Str_821F7BD\n"
-        "	.word	gTasks\n"
-        "._915:\n"
-        "	ldr	r2, ._924       @ gMain\n"
-        "	ldrh	r1, [r2, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._922	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._924 + 4   @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xc]\n"
-        "	bl	nullsub_8\n"
-        "	ldrh	r1, [r4, #0xc]\n"
-        "	mov	r0, #0x3\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r1\n"
-        "	b	._931\n"
-        "._925:\n"
-        "	.align	2, 0\n"
-        "._924:\n"
-        "	.word	gMain\n"
-        "	.word	gTasks\n"
-        "._922:\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._926	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._928       @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xc]\n"
-        "	bl	nullsub_8\n"
-        "	ldrh	r1, [r4, #0xc]\n"
-        "	mov	r0, #0x2\n"
-        "	b	._927\n"
-        "._929:\n"
-        "	.align	2, 0\n"
-        "._928:\n"
-        "	.word	gTasks\n"
-        "._926:\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._930	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._932       @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xc]\n"
-        "	bl	nullsub_8\n"
-        "	ldrh	r1, [r4, #0xc]\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r1\n"
-        "	b	._931\n"
-        "._933:\n"
-        "	.align	2, 0\n"
-        "._932:\n"
-        "	.word	gTasks\n"
-        "._930:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._934	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._936       @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xc]\n"
-        "	bl	nullsub_8\n"
-        "	ldrh	r1, [r4, #0xc]\n"
-        "	mov	r0, #0x1\n"
-        "._927:\n"
-        "	orr	r0, r0, r1\n"
-        "._931:\n"
-        "	strh	r0, [r4, #0xc]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "._919:\n"
-        "	mov	r1, #0x0\n"
-        "	bl	sub_802E3E4\n"
-        "	b	._1067\n"
-        "._937:\n"
-        "	.align	2, 0\n"
-        "._936:\n"
-        "	.word	gTasks\n"
-        "._934:\n"
-        "	ldrh	r1, [r2, #0x30]\n"
-        "	mov	r4, #0x1\n"
-        "	add	r0, r4, #0\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._938	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._943       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r2, #0xc\n"
-        "	ldsh	r0, [r0, r2]\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._939	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._940	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._941	@cond_branch\n"
-        "	b	._1067\n"
-        "._944:\n"
-        "	.align	2, 0\n"
-        "._943:\n"
-        "	.word	gTasks\n"
-        "._940:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._945	@cond_branch\n"
-        "._990:\n"
-        "	cmp	r0, #0x3\n"
-        "	bne	._946	@cond_branch\n"
-        "	b	._1014\n"
-        "._946:\n"
-        "	b	._1067\n"
-        "._941:\n"
-        "	ldr	r1, ._952       @ gUnknown_Debug_2023B62\n"
-        "	ldr	r0, ._952 + 4   @ gCurrentMove\n"
-        "	ldrh	r0, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r1, r0, r1\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0x3f\n"
-        "	bls	._949	@cond_branch\n"
-        "	b	._1067\n"
-        "._949:\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	b	._1019\n"
-        "._953:\n"
-        "	.align	2, 0\n"
-        "._952:\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	gCurrentMove\n"
-        "._939:\n"
-        "	mov	r0, #0x1\n"
-        "	b	._997\n"
-        "._945:\n"
-        "	ldr	r1, ._957       @ gCurrentMove\n"
-        "	ldrh	r2, [r1]\n"
-        "	mov	r0, #0xcd\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	cmp	r2, r0\n"
-        "	bhi	._955	@cond_branch\n"
-        "	add	r0, r2, #1\n"
-        "._979:\n"
-        "	strh	r0, [r1]\n"
-        "	b	._1025\n"
-        "._958:\n"
-        "	.align	2, 0\n"
-        "._957:\n"
-        "	.word	gCurrentMove\n"
-        "._955:\n"
-        "	strh	r4, [r1]\n"
-        "	b	._1025\n"
-        "._938:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._960	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._966       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0xc\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._961	@cond_branch\n"
-        "	b	._1007\n"
-        "._961:\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._963	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._964	@cond_branch\n"
-        "	b	._1067\n"
-        "._967:\n"
-        "	.align	2, 0\n"
-        "._966:\n"
-        "	.word	gTasks\n"
-        "._963:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._968	@cond_branch\n"
-        "	b	._990\n"
-        "._964:\n"
-        "	ldr	r1, ._973       @ gUnknown_Debug_2023B62\n"
-        "	ldr	r0, ._973 + 4   @ gCurrentMove\n"
-        "	ldrh	r0, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r1, r0, r1\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._970	@cond_branch\n"
-        "	b	._1067\n"
-        "._970:\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	b	._1019\n"
-        "._974:\n"
-        "	.align	2, 0\n"
-        "._973:\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	gCurrentMove\n"
-        "._968:\n"
-        "	ldr	r1, ._977       @ gCurrentMove\n"
-        "	ldrh	r0, [r1]\n"
-        "	cmp	r0, #0x1\n"
-        "	bls	._975	@cond_branch\n"
-        "	sub	r0, r0, #0x1\n"
-        "	b	._979\n"
-        "._978:\n"
-        "	.align	2, 0\n"
-        "._977:\n"
-        "	.word	gCurrentMove\n"
-        "._975:\n"
-        "	ldr	r2, ._980       @ 0x19b\n"
-        "	add	r0, r2, #0\n"
-        "	b	._979\n"
-        "._981:\n"
-        "	.align	2, 0\n"
-        "._980:\n"
-        "	.word	0x19b\n"
-        "._960:\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._982	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._987       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0xc\n"
-        "	ldsh	r0, [r0, r1]\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._983	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._984	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._985	@cond_branch\n"
-        "	b	._1067\n"
-        "._988:\n"
-        "	.align	2, 0\n"
-        "._987:\n"
-        "	.word	gTasks\n"
-        "._984:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._989	@cond_branch\n"
-        "	b	._990\n"
-        "._985:\n"
-        "	ldr	r3, ._995       @ gUnknown_Debug_2023B62\n"
-        "	ldr	r2, ._995 + 4   @ gCurrentMove\n"
-        "	ldrh	r0, [r2]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r1, r0, r3\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0x3f\n"
-        "	bls	._991	@cond_branch\n"
-        "	b	._1067\n"
-        "._991:\n"
-        "	add	r0, r0, #0x8\n"
-        "	strb	r0, [r1]\n"
-        "	ldrh	r0, [r2]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r1, r0, r3\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0x40\n"
-        "	bls	._1019	@cond_branch\n"
-        "	mov	r0, #0x40\n"
-        "	strb	r0, [r1]\n"
-        "	b	._1019\n"
-        "._996:\n"
-        "	.align	2, 0\n"
-        "._995:\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	gCurrentMove\n"
-        "._983:\n"
-        "	mov	r0, #0x1\n"
-        "	b	._997\n"
-        "._989:\n"
-        "	ldr	r3, ._1000      @ gCurrentMove\n"
-        "	ldrh	r2, [r3]\n"
-        "	add	r1, r2, #0\n"
-        "	add	r1, r1, #0xa\n"
-        "	ldr	r0, ._1000 + 4  @ 0x19b\n"
-        "	cmp	r1, r0\n"
-        "	bgt	._998	@cond_branch\n"
-        "	strh	r1, [r3]\n"
-        "	b	._1025\n"
-        "._1001:\n"
-        "	.align	2, 0\n"
-        "._1000:\n"
-        "	.word	gCurrentMove\n"
-        "	.word	0x19b\n"
-        "._998:\n"
-        "	ldr	r1, ._1003      @ 0xfffffe70\n"
-        "	add	r0, r2, r1\n"
-        "	strh	r0, [r3]\n"
-        "	b	._1025\n"
-        "._1004:\n"
-        "	.align	2, 0\n"
-        "._1003:\n"
-        "	.word	0xfffffe70\n"
-        "._982:\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1005	@cond_branch\n"
-        "	b	._1067\n"
-        "._1005:\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._1011      @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r2, #0xc\n"
-        "	ldsh	r3, [r0, r2]\n"
-        "	cmp	r3, #0x1\n"
-        "	beq	._1007	@cond_branch\n"
-        "	cmp	r3, #0x1\n"
-        "	bgt	._1008	@cond_branch\n"
-        "	cmp	r3, #0\n"
-        "	beq	._1009	@cond_branch\n"
-        "	b	._1067\n"
-        "._1012:\n"
-        "	.align	2, 0\n"
-        "._1011:\n"
-        "	.word	gTasks\n"
-        "._1008:\n"
-        "	cmp	r3, #0x2\n"
-        "	beq	._1013	@cond_branch\n"
-        "	cmp	r3, #0x3\n"
-        "	beq	._1014	@cond_branch\n"
-        "	b	._1067\n"
-        "._1009:\n"
-        "	ldr	r1, ._1020      @ gUnknown_Debug_2023B62\n"
-        "	ldr	r0, ._1020 + 4  @ gCurrentMove\n"
-        "	ldrh	r0, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	add	r2, r0, r1\n"
-        "	ldrb	r0, [r2]\n"
-        "	add	r1, r0, #0\n"
-        "	cmp	r1, #0\n"
-        "	bne	._1016	@cond_branch\n"
-        "	b	._1067\n"
-        "._1016:\n"
-        "	cmp	r1, #0x8\n"
-        "	bls	._1018	@cond_branch\n"
-        "	sub	r0, r0, #0x8\n"
-        "	strb	r0, [r2]\n"
-        "	b	._1019\n"
-        "._1021:\n"
-        "	.align	2, 0\n"
-        "._1020:\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	gCurrentMove\n"
-        "._1018:\n"
-        "	strb	r3, [r2]\n"
-        "._1019:\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_8012938\n"
-        "	b	._1067\n"
-        "._1007:\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "._997:\n"
-        "	add	r1, r5, #0\n"
-        "	bl	debug_sub_8012AC0\n"
-        "	b	._1067\n"
-        "._1013:\n"
-        "	ldr	r2, ._1026      @ gCurrentMove\n"
-        "	ldrh	r0, [r2]\n"
-        "	add	r1, r0, #0\n"
-        "	sub	r1, r1, #0xa\n"
-        "	cmp	r1, #0x1\n"
-        "	ble	._1024	@cond_branch\n"
-        "	strh	r1, [r2]\n"
-        "	b	._1025\n"
-        "._1027:\n"
-        "	.align	2, 0\n"
-        "._1026:\n"
-        "	.word	gCurrentMove\n"
-        "._1024:\n"
-        "	mov	r1, #0xc8\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r0, [r2]\n"
-        "._1025:\n"
-        "	bl	debug_sub_80128B4\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_8012938\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_80129F8\n"
-        "	b	._1067\n"
-        "._1014:\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x0\n"
-        "	bl	debug_sub_8012B70\n"
-        "	b	._1067\n"
-        "._916:\n"
-        "	ldr	r0, ._1032      @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1030	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1032 + 4  @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xe]\n"
-        "	bl	debug_sub_8012B4C\n"
-        "	mov	r0, #0x0\n"
-        "	b	._1055\n"
-        "._1033:\n"
-        "	.align	2, 0\n"
-        "._1032:\n"
-        "	.word	gMain\n"
-        "	.word	gTasks\n"
-        "._1030:\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1046	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1035	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1037      @ gTasks\n"
-        "	lsl	r1, r5, #0x2\n"
-        "	add	r1, r1, r5\n"
-        "	lsl	r1, r1, #0x3\n"
-        "	add	r1, r1, r0\n"
-        "	ldrb	r1, [r1, #0xe]\n"
-        "	add	r0, r5, #0\n"
-        "	bl	debug_sub_8012C08\n"
-        "	b	._1067\n"
-        "._1038:\n"
-        "	.align	2, 0\n"
-        "._1037:\n"
-        "	.word	gTasks\n"
-        "._1035:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1039	@cond_branch\n"
-        "	b	._1067\n"
-        "._1039:\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	b	._1063\n"
-        "._917:\n"
-        "	ldr	r0, ._1044      @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1042	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1044 + 4  @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xe]\n"
-        "	bl	debug_sub_8012B4C\n"
-        "	mov	r0, #0x0\n"
-        "	b	._1055\n"
-        "._1045:\n"
-        "	.align	2, 0\n"
-        "._1044:\n"
-        "	.word	gMain\n"
-        "	.word	gTasks\n"
-        "._1042:\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1046	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1047	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1050      @ gTasks\n"
-        "	lsl	r1, r5, #0x2\n"
-        "	add	r1, r1, r5\n"
-        "	lsl	r1, r1, #0x3\n"
-        "	add	r1, r1, r0\n"
-        "	mov	r2, #0xe\n"
-        "	ldsh	r0, [r1, r2]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1063	@cond_branch\n"
-        "	ldr	r1, ._1050 + 4  @ gUnknown_Debug_2023B62\n"
-        "	ldr	r2, ._1050 + 8  @ 0x19b\n"
-        "	mov	r0, #0x1f\n"
-        "	bl	debug_sub_80132C8\n"
-        "	b	._1063\n"
-        "._1051:\n"
-        "	.align	2, 0\n"
-        "._1050:\n"
-        "	.word	gTasks\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	0x19b\n"
-        "._1047:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1067	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	b	._1063\n"
-        "._918:\n"
-        "	ldr	r0, ._1056      @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1054	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1056 + 4  @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xe]\n"
-        "	bl	debug_sub_8012B4C\n"
-        "	mov	r0, #0x0\n"
-        "	b	._1055\n"
-        "._1057:\n"
-        "	.align	2, 0\n"
-        "._1056:\n"
-        "	.word	gMain\n"
-        "	.word	gTasks\n"
-        "._1054:\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1058	@cond_branch\n"
-        "._1046:\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1060      @ gTasks\n"
-        "	lsl	r4, r5, #0x2\n"
-        "	add	r4, r4, r5\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	add	r4, r4, r0\n"
-        "	ldrb	r0, [r4, #0xe]\n"
-        "	bl	debug_sub_8012B4C\n"
-        "	mov	r0, #0x1\n"
-        "._1055:\n"
-        "	strh	r0, [r4, #0xe]\n"
-        "	bl	debug_sub_8012B2C\n"
-        "	b	._1067\n"
-        "._1061:\n"
-        "	.align	2, 0\n"
-        "._1060:\n"
-        "	.word	gTasks\n"
-        "._1058:\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1062	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._1065      @ gTasks\n"
-        "	lsl	r1, r5, #0x2\n"
-        "	add	r1, r1, r5\n"
-        "	lsl	r1, r1, #0x3\n"
-        "	add	r1, r1, r0\n"
-        "	mov	r2, #0xe\n"
-        "	ldsh	r0, [r1, r2]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1063	@cond_branch\n"
-        "	ldr	r1, ._1065 + 4  @ gUnknown_Debug_2023B62\n"
-        "	ldr	r2, ._1065 + 8  @ 0x19b\n"
-        "	mov	r0, #0x1f\n"
-        "	bl	debug_sub_8013294\n"
-        "._1063:\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x1\n"
-        "	bl	debug_sub_8012B70\n"
-        "	b	._1067\n"
-        "._1066:\n"
-        "	.align	2, 0\n"
-        "._1065:\n"
-        "	.word	gTasks\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	0x19b\n"
-        "._1062:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1067	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x1\n"
-        "	bl	debug_sub_8012B70\n"
-        "._1067:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        debug_sub_80128B4();
+        debug_sub_8012938(taskId);
+        Text_InitWindow(&gUnknown_03004210, Str_821F7BD, 400, 19, 35);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
+        gTasks[taskId].data[0]++;
+        sub_802E3E4(gTasks[taskId].data[2], 0);
+        break;
+    case 1:
+        if (gMain.newKeys & DPAD_UP)
+        {
+            PlaySE(SE_SELECT);
+            nullsub_8(gTasks[taskId].data[2]);
+            gTasks[taskId].data[2] &= ~2;
+            sub_802E3E4(gTasks[taskId].data[2], 0);
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            PlaySE(SE_SELECT);
+            nullsub_8(gTasks[taskId].data[2]);
+            gTasks[taskId].data[2] |= 2;
+            sub_802E3E4(gTasks[taskId].data[2], 0);
+        }
+        else if (gMain.newKeys & DPAD_LEFT)
+        {
+            PlaySE(SE_SELECT);
+            nullsub_8(gTasks[taskId].data[2]);
+            gTasks[taskId].data[2] &= ~1;
+            sub_802E3E4(gTasks[taskId].data[2], 0);
+        }
+        else if (gMain.newKeys & DPAD_RIGHT)
+        {
+            PlaySE(SE_SELECT);
+            nullsub_8(gTasks[taskId].data[2]);
+            gTasks[taskId].data[2] |= 1;
+            sub_802E3E4(gTasks[taskId].data[2], 0);
+        }
+        else if (gMain.newAndRepeatedKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            switch (gTasks[taskId].data[2])
+            {
+            case 0:
+                if (gUnknown_Debug_2023B62[gCurrentMove - 1] < 64)
+                {
+                    gUnknown_Debug_2023B62[gCurrentMove - 1] += 1;
+                    debug_sub_8012938(taskId);
+                }
+                break;
+            case 1:
+                debug_sub_8012AC0(1, taskId);
+                break;
+            case 2:
+                if (gCurrentMove < 411)
+                    gCurrentMove++;
+                else
+                    gCurrentMove = 1;
+                debug_sub_80128B4();
+                debug_sub_8012938(taskId);
+                debug_sub_80129F8(taskId);
+                break;
+            case 3:
+                debug_sub_8012B70(taskId, 0);
+                break;
+            }
+        }
+        else if (gMain.newAndRepeatedKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            switch (gTasks[taskId].data[2])
+            {
+            case 0:
+                if (gUnknown_Debug_2023B62[gCurrentMove - 1] > 0)
+                {
+                    gUnknown_Debug_2023B62[gCurrentMove - 1] -= 1;
+                    debug_sub_8012938(taskId);
+                }
+                break;
+            case 1:
+                debug_sub_8012AC0(-1, taskId);
+                break;
+            case 2:
+                if (gCurrentMove > 1)
+                    gCurrentMove--;
+                else
+                    gCurrentMove = 411;
+                debug_sub_80128B4();
+                debug_sub_8012938(taskId);
+                debug_sub_80129F8(taskId);
+                break;
+            case 3:
+                debug_sub_8012B70(taskId, 0);
+                break;
+            }
+        }
+        else if (gMain.newAndRepeatedKeys & R_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            switch (gTasks[taskId].data[2])
+            {
+            case 0:
+                if (gUnknown_Debug_2023B62[gCurrentMove - 1] < 64)
+                {
+                    gUnknown_Debug_2023B62[gCurrentMove - 1] += 8;
+                    if (gUnknown_Debug_2023B62[gCurrentMove - 1] > 64)
+                        gUnknown_Debug_2023B62[gCurrentMove - 1] = 64;
+                    debug_sub_8012938(taskId);
+                }
+                break;
+            case 1:
+                debug_sub_8012AC0(1, taskId);
+                break;
+            case 2:
+                if (gCurrentMove + 10 < 412)
+                    gCurrentMove += 10;
+                else
+                    gCurrentMove -= 400;
+                debug_sub_80128B4();
+                debug_sub_8012938(taskId);
+                debug_sub_80129F8(taskId);
+                break;
+            case 3:
+                debug_sub_8012B70(taskId, 0);
+                break;
+            }
+        }
+        else if (gMain.newAndRepeatedKeys & L_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            switch (gTasks[taskId].data[2])
+            {
+            case 0:
+                if (gUnknown_Debug_2023B62[gCurrentMove - 1] > 0)
+                {
+                    if (gUnknown_Debug_2023B62[gCurrentMove - 1] > 8)
+                        gUnknown_Debug_2023B62[gCurrentMove - 1] -= 8;
+                    else
+                        gUnknown_Debug_2023B62[gCurrentMove - 1] = 0;
+                    debug_sub_8012938(taskId);
+                }
+                break;
+            case 1:
+                debug_sub_8012AC0(-1, taskId);
+                break;
+            case 2:
+                if (gCurrentMove - 10 > 1)
+                    gCurrentMove -= 10;
+                else
+                    gCurrentMove += 400;
+                debug_sub_80128B4();
+                debug_sub_8012938(taskId);
+                debug_sub_80129F8(taskId);
+                break;
+            case 3:
+                debug_sub_8012B70(taskId, 0);
+                break;
+            }
+        }
+        break;
+    case 2:
+        if (gMain.newKeys & DPAD_UP)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 0;
+            debug_sub_8012B2C(0);
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 1;
+            debug_sub_8012B2C(1);
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012C08(taskId, gTasks[taskId].data[3]);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            asm("");
+            debug_sub_8012B70(taskId, 1);
+        }
+        return;
+    case 3:
+        if (gMain.newKeys & DPAD_UP)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 0;
+            debug_sub_8012B2C(0);
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 1;
+            debug_sub_8012B2C(1);
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            if (gTasks[taskId].data[3] == 0)
+                debug_sub_80132C8(31, gUnknown_Debug_2023B62, 411);
+            debug_sub_8012B70(taskId, 1);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B70(taskId, 1);
+        }
+        break;
+    case 4:
+        if (gMain.newKeys & DPAD_UP)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 0;
+            debug_sub_8012B2C(0);
+        }
+        else if (gMain.newKeys & DPAD_DOWN)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B4C(gTasks[taskId].data[3]);
+            gTasks[taskId].data[3] = 1;
+            debug_sub_8012B2C(1);
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            if (gTasks[taskId].data[3] == 0)
+                debug_sub_8013294(31, gUnknown_Debug_2023B62, 411);
+            debug_sub_8012B70(taskId, 1);
+        }
+        else if (gMain.newKeys & B_BUTTON)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8012B70(taskId, 1);
+        }
+        break;
+    }
 }
 
 u8 debug_sub_8013240(void)
@@ -6805,647 +5904,67 @@ void sub_8010800(void)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_80138CC()
+void debug_sub_80138CC(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._1167      @ gActiveBank\n"
-        "	ldrb	r0, [r0]\n"
-        "	bl	GetBankSide\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1163	@cond_branch\n"
-        "	b	._1186\n"
-        "._1163:\n"
-        "	ldr	r1, ._1167 + 4  @ gSharedMem\n"
-        "	ldr	r2, ._1167 + 8  @ 0x160fd\n"
-        "	add	r0, r1, r2\n"
-        "	ldrb	r0, [r0]\n"
-        "	add	r2, r1, #0\n"
-        "	cmp	r0, #0x4\n"
-        "	bls	._1165	@cond_branch\n"
-        "	b	._1186\n"
-        "._1165:\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._1167 + 12 @ \n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	pc, r0\n"
-        "._1168:\n"
-        "	.align	2, 0\n"
-        "._1167:\n"
-        "	.word	gActiveBank\n"
-        "	.word	gSharedMem\n"
-        "	.word	0x160fd\n"
-        "	.word	._1169\n"
-        "._1169:\n"
-        "	.word	._1170\n"
-        "	.word	._1171\n"
-        "	.word	._1172\n"
-        "	.word	._1173\n"
-        "	.word	._1174\n"
-        "._1170:\n"
-        "	ldr	r1, ._1177      @ gBattleBankFunc\n"
-        "	ldr	r0, ._1177 + 4  @ gActiveBank\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r1, [r0]\n"
-        "	ldr	r0, ._1177 + 8  @ sub_802C098\n"
-        "	cmp	r1, r0\n"
-        "	bne	._1186	@cond_branch\n"
-        "	ldr	r0, ._1177 + 12 @ 0x160fd\n"
-        "	add	r1, r2, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	b	._1187\n"
-        "._1178:\n"
-        "	.align	2, 0\n"
-        "._1177:\n"
-        "	.word	gBattleBankFunc\n"
-        "	.word	gActiveBank\n"
-        "	.word	sub_802C098+1\n"
-        "	.word	0x160fd\n"
-        "._1171:\n"
-        "	ldr	r1, ._1180      @ gMain\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r1, #0x2c]\n"
-        "	strh	r0, [r1, #0x2e]\n"
-        "	ldr	r0, ._1180 + 4  @ 0x160fd\n"
-        "	add	r1, r2, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r0, ._1180 + 8  @ 0x160fe\n"
-        "	add	r1, r2, r0\n"
-        "	mov	r0, #0x80\n"
-        "	b	._1187\n"
-        "._1181:\n"
-        "	.align	2, 0\n"
-        "._1180:\n"
-        "	.word	gMain\n"
-        "	.word	0x160fd\n"
-        "	.word	0x160fe\n"
-        "._1172:\n"
-        "	ldr	r0, ._1184      @ 0x160fe\n"
-        "	add	r3, r2, r0\n"
-        "	ldrb	r0, [r3]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r3]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1186	@cond_branch\n"
-        "	ldr	r1, ._1184 + 4  @ gMain\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r1, #0x2c]\n"
-        "	strh	r0, [r1, #0x2e]\n"
-        "	ldr	r0, ._1184 + 8  @ 0x160fd\n"
-        "	add	r1, r2, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	mov	r0, #0x80\n"
-        "	strb	r0, [r3]\n"
-        "	b	._1186\n"
-        "._1185:\n"
-        "	.align	2, 0\n"
-        "._1184:\n"
-        "	.word	0x160fe\n"
-        "	.word	gMain\n"
-        "	.word	0x160fd\n"
-        "._1173:\n"
-        "	ldr	r0, ._1188      @ 0x160fe\n"
-        "	add	r1, r2, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1186	@cond_branch\n"
-        "	ldr	r1, ._1188 + 4  @ gMain\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r1, #0x2c]\n"
-        "	strh	r0, [r1, #0x2e]\n"
-        "	ldr	r0, ._1188 + 8  @ 0x160fd\n"
-        "	add	r1, r2, r0\n"
-        "	ldrb	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	b	._1187\n"
-        "._1189:\n"
-        "	.align	2, 0\n"
-        "._1188:\n"
-        "	.word	0x160fe\n"
-        "	.word	gMain\n"
-        "	.word	0x160fd\n"
-        "._1174:\n"
-        "	ldr	r0, ._1190      @ 0x160fd\n"
-        "	add	r1, r2, r0\n"
-        "	mov	r0, #0x0\n"
-        "._1187:\n"
-        "	strb	r0, [r1]\n"
-        "._1186:\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._1191:\n"
-        "	.align	2, 0\n"
-        "._1190:\n"
-        "	.word	0x160fd\n"
-        "\n"
-    );
+    if (GetBankSide(gActiveBank) == 0)
+    {
+        switch (gSharedMem[0x160FD])
+        {
+        case 0:
+            if (gBattleBankFunc[gActiveBank] == sub_802C098)
+                gSharedMem[0x160FD]++;
+            break;
+        case 1:
+            gMain.heldKeys = A_BUTTON;
+            gMain.newKeys = A_BUTTON;
+            gSharedMem[0x160FD]++;
+            gSharedMem[0x160FE] = 0x80;
+            break;
+        case 2:
+            gSharedMem[0x160FE]--;
+            if (gSharedMem[0x160FE] == 0)
+            {
+                gMain.heldKeys = A_BUTTON;
+                gMain.newKeys = A_BUTTON;
+                gSharedMem[0x160FD]++;
+                gSharedMem[0x160FE] = 0x80;
+            }
+            break;
+        case 3:
+            gSharedMem[0x160FE]--;
+            if (gSharedMem[0x160FE] == 0)
+            {
+                gMain.heldKeys = A_BUTTON;
+                gMain.newKeys = A_BUTTON;
+                gSharedMem[0x160FD]++;
+            }
+            break;
+        case 4:
+            gSharedMem[0x160FD] = 0;
+            break;
+        }
+    }
 }
-
-__attribute__((naked))
-void debug_sub_80139E4()
-{
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	ldr	r0, ._1198      @ gUnknown_02023A14_50\n"
-        "	ldrb	r1, [r0]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	cmp	r4, #0\n"
-        "	beq	._1192	@cond_branch\n"
-        "	ldr	r2, ._1198 + 4  @ gActiveBank\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r2]\n"
-        "	ldr	r1, ._1198 + 8  @ gNoOfAllBanks\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1193	@cond_branch\n"
-        "	add	r4, r2, #0\n"
-        "	add	r5, r1, #0\n"
-        "._1194:\n"
-        "	bl	debug_sub_80138CC\n"
-        "	ldrb	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r4]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	ldrb	r1, [r5]\n"
-        "	cmp	r0, r1\n"
-        "	bcc	._1194	@cond_branch\n"
-        "._1193:\n"
-        "	ldr	r0, ._1198 + 12 @ gBattleMainFunc\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	ldr	r1, ._1198 + 4  @ gActiveBank\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r0, ._1198 + 8  @ gNoOfAllBanks\n"
-        "	ldrb	r0, [r0]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1200	@cond_branch\n"
-        "	ldr	r5, ._1198 + 16 @ gBattleBankFunc\n"
-        "	add	r4, r1, #0\n"
-        "._1196:\n"
-        "	ldrb	r0, [r4]\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	ldrb	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r4]\n"
-        "	ldr	r1, ._1198 + 8  @ gNoOfAllBanks\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	ldrb	r1, [r1]\n"
-        "	cmp	r0, r1\n"
-        "	bcc	._1196	@cond_branch\n"
-        "	b	._1200\n"
-        "._1199:\n"
-        "	.align	2, 0\n"
-        "._1198:\n"
-        "	.word	gUnknown_02023A14_50\n"
-        "	.word	gActiveBank\n"
-        "	.word	gNoOfAllBanks\n"
-        "	.word	gBattleMainFunc\n"
-        "	.word	gBattleBankFunc\n"
-        "._1192:\n"
-        "	ldr	r0, ._1202      @ gBattleMainFunc\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	ldr	r1, ._1202 + 4  @ gActiveBank\n"
-        "	strb	r4, [r1]\n"
-        "	ldr	r0, ._1202 + 8  @ gNoOfAllBanks\n"
-        "	ldrb	r0, [r0]\n"
-        "	cmp	r4, r0\n"
-        "	bcs	._1200	@cond_branch\n"
-        "	ldr	r5, ._1202 + 12 @ gBattleBankFunc\n"
-        "	add	r4, r1, #0\n"
-        "._1201:\n"
-        "	ldrb	r0, [r4]\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	ldrb	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r4]\n"
-        "	ldr	r1, ._1202 + 8  @ gNoOfAllBanks\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	ldrb	r1, [r1]\n"
-        "	cmp	r0, r1\n"
-        "	bcc	._1201	@cond_branch\n"
-        "._1200:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._1203:\n"
-        "	.align	2, 0\n"
-        "._1202:\n"
-        "	.word	gBattleMainFunc\n"
-        "	.word	gActiveBank\n"
-        "	.word	gNoOfAllBanks\n"
-        "	.word	gBattleBankFunc\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void sub_8010874()
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	mov	r0, #0x0\n"
-        "	bl	TurnValuesCleanUp\n"
-        "	bl	SpecialStatusesClear\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x0\n"
-        "	ldr	r0, ._1215      @ gUnknown_02024C4C\n"
-        "	mov	sl, r0\n"
-        "	ldr	r1, ._1215 + 4  @ gLastHitByType\n"
-        "	mov	r9, r1\n"
-        "	ldr	r4, ._1215 + 8  @ gLastLandedMoves\n"
-        "	mov	r8, r4\n"
-        "	ldr	r0, ._1215 + 12 @ gLastUsedMove\n"
-        "	mov	ip, r0\n"
-        "	ldr	r4, ._1215 + 16 @ gDisableStructs\n"
-        "	mov	r5, #0x0\n"
-        "	ldr	r7, ._1215 + 20 @ gUnknown_02024C2C\n"
-        "	ldr	r6, ._1215 + 24 @ gLockedMoves\n"
-        "._1205:\n"
-        "	ldr	r0, ._1215 + 28 @ gStatuses3\n"
-        "	add	r0, r5, r0\n"
-        "	str	r3, [r0]\n"
-        "	mov	r1, #0x0\n"
-        "._1204:\n"
-        "	add	r0, r4, r1\n"
-        "	strb	r3, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, #0x1b\n"
-        "	bls	._1204	@cond_branch\n"
-        "	mov	r0, #0x2\n"
-        "	strb	r0, [r4, #0x16]\n"
-        "	ldr	r1, ._1215 + 32 @ gUnknown_02024C70\n"
-        "	add	r0, r2, r1\n"
-        "	strb	r3, [r0]\n"
-        "	mov	r0, ip\n"
-        "	strh	r3, [r0]\n"
-        "	mov	r1, r8\n"
-        "	strh	r3, [r1]\n"
-        "	mov	r0, r9\n"
-        "	strh	r3, [r0]\n"
-        "	mov	r1, sl\n"
-        "	strh	r3, [r1]\n"
-        "	ldr	r0, ._1215 + 36 @ gUnknown_02024C5C\n"
-        "	add	r1, r2, r0\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r1]\n"
-        "	strh	r3, [r6]\n"
-        "	strh	r3, [r7]\n"
-        "	ldr	r1, ._1215 + 40 @ gSharedMem\n"
-        "	add	r0, r5, r1\n"
-        "	str	r3, [r0]\n"
-        "	mov	r0, #0x2\n"
-        "	add sl, sl, r0\n"
-        "	add r9, r9, r0\n"
-        "	add r8, r8, r0\n"
-        "	add ip, ip, r0\n"
-        "	add	r4, r4, #0x1c\n"
-        "	add	r5, r5, #0x4\n"
-        "	add	r7, r7, #0x2\n"
-        "	add	r6, r6, #0x2\n"
-        "	add	r2, r2, #0x1\n"
-        "	cmp	r2, #0x3\n"
-        "	ble	._1205	@cond_branch\n"
-        "	mov	r5, #0x0\n"
-        "	ldr	r3, ._1215 + 44 @ gSideTimers\n"
-        "	ldr	r4, ._1215 + 48 @ gSideAffecting\n"
-        "	mov	r2, #0x1\n"
-        "._1207:\n"
-        "	strh	r5, [r4]\n"
-        "	mov	r1, #0x0\n"
-        "._1206:\n"
-        "	add	r0, r3, r1\n"
-        "	strb	r5, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, #0xb\n"
-        "	bls	._1206	@cond_branch\n"
-        "	add	r3, r3, #0xc\n"
-        "	add	r4, r4, #0x2\n"
-        "	sub	r2, r2, #0x1\n"
-        "	cmp	r2, #0\n"
-        "	bge	._1207	@cond_branch\n"
-        "	mov	r1, #0x0\n"
-        "	ldr	r2, ._1215 + 52 @ gBankAttacker\n"
-        "	strb	r1, [r2]\n"
-        "	ldr	r3, ._1215 + 56 @ gBankTarget\n"
-        "	strb	r1, [r3]\n"
-        "	ldr	r4, ._1215 + 60 @ gBattleWeather\n"
-        "	strh	r1, [r4]\n"
-        "	ldr	r1, ._1215 + 64 @ gWishFutureKnock\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x0\n"
-        "._1208:\n"
-        "	add	r0, r1, r2\n"
-        "	strb	r3, [r0]\n"
-        "	add	r2, r2, #0x1\n"
-        "	cmp	r2, #0x2b\n"
-        "	bls	._1208	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	ldr	r1, ._1215 + 68 @ gHitMarker\n"
-        "	str	r0, [r1]\n"
-        "	ldr	r2, ._1215 + 72 @ gBattleTypeFlags\n"
-        "	ldrh	r1, [r2]\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._1210	@cond_branch\n"
-        "	ldr	r3, ._1215 + 76 @ gSaveBlock2\n"
-        "	ldrb	r1, [r3, #0x15]\n"
-        "	mov	r0, #0x4\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._1210	@cond_branch\n"
-        "	mov	r0, #0x80\n"
-        "	ldr	r4, ._1215 + 68 @ gHitMarker\n"
-        "	str	r0, [r4]\n"
-        "._1210:\n"
-        "	ldr	r1, ._1215 + 76 @ gSaveBlock2\n"
-        "	ldrb	r0, [r1, #0x15]\n"
-        "	lsl	r0, r0, #0x1e\n"
-        "	lsr	r0, r0, #0x1f\n"
-        "	ldr	r3, ._1215 + 80 @ gSharedMem\n"
-        "	ldr	r4, ._1215 + 84 @ 0x16084\n"
-        "	add	r2, r3, r4\n"
-        "	mov	r1, #0x0\n"
-        "	strb	r0, [r2]\n"
-        "	ldr	r0, ._1215 + 88 @ gMultiHitCounter\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r2, ._1215 + 92 @ gBattleOutcome\n"
-        "	strb	r1, [r2]\n"
-        "	ldr	r3, ._1215 + 96 @ gBattleExecBuffer\n"
-        "	str	r1, [r3]\n"
-        "	mov	r2, #0x0\n"
-        "	ldr	r4, ._1215 + 100@ gPaydayMoney\n"
-        "	strh	r1, [r4]\n"
-        "	ldr	r1, ._1215 + 80 @ gSharedMem\n"
-        "	ldr	r3, ._1215 + 104@ 0x17130\n"
-        "	add	r0, r1, r3\n"
-        "	strb	r2, [r0]\n"
-        "	ldr	r4, ._1215 + 108@ 0x17160\n"
-        "	add	r0, r1, r4\n"
-        "	strb	r2, [r0]\n"
-        "	ldr	r1, ._1215 + 112@ gBattleCommunication\n"
-        "	mov	r2, #0x0\n"
-        "	add	r0, r1, #7\n"
-        "._1211:\n"
-        "	strb	r2, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	cmp	r0, r1\n"
-        "	bge	._1211	@cond_branch\n"
-        "	mov	r5, #0x0\n"
-        "	ldr	r0, ._1215 + 116@ gPauseCounterBattle\n"
-        "	strh	r5, [r0]\n"
-        "	mov	r0, #0x0\n"
-        "	ldr	r1, ._1215 + 120@ gBattleMoveDamage\n"
-        "	str	r0, [r1]\n"
-        "	ldr	r2, ._1215 + 124@ gUnknown_02024DE8\n"
-        "	strh	r0, [r2]\n"
-        "	ldr	r4, ._1215 + 80 @ gSharedMem\n"
-        "	ldr	r3, ._1215 + 128@ 0x16002\n"
-        "	add	r0, r4, r3\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r1, ._1215 + 132@ 0x160a1\n"
-        "	add	r0, r4, r1\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r2, ._1215 + 136@ gLeveledUpInBattle\n"
-        "	strb	r5, [r2]\n"
-        "	ldr	r3, ._1215 + 140@ gAbsentBankFlags\n"
-        "	strb	r5, [r3]\n"
-        "	sub	r1, r1, #0x29\n"
-        "	add	r0, r4, r1\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r2, ._1215 + 144@ 0x16086\n"
-        "	add	r0, r4, r2\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r3, ._1215 + 148@ 0x16087\n"
-        "	add	r0, r4, r3\n"
-        "	strb	r5, [r0]\n"
-        "	ldr	r0, ._1215 + 152@ gEnemyParty\n"
-        "	mov	r1, #0xb\n"
-        "	bl	GetMonData\n"
-        "	ldr	r2, ._1215 + 156@ gBaseStats\n"
-        "	lsl	r1, r0, #0x3\n"
-        "	sub	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r2\n"
-        "	ldrb	r1, [r1, #0x8]\n"
-        "	mov	r0, #0x64\n"
-        "	mul	r0, r0, r1\n"
-        "	ldr	r1, ._1215 + 160@ 0x4fb\n"
-        "	bl	__divsi3\n"
-        "	ldr	r2, ._1215 + 164@ 0x16089\n"
-        "	add	r1, r4, r2\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r3, ._1215 + 168@ 0x16088\n"
-        "	add	r1, r4, r3\n"
-        "	mov	r0, #0x3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r1, ._1215 + 172@ 0x1601b\n"
-        "	add	r0, r4, r1\n"
-        "	strb	r5, [r0]\n"
-        "	sub	r2, r2, #0x33\n"
-        "	add	r1, r4, r2\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "._1212:\n"
-        "	ldr	r3, ._1215 + 176@ 0x160ac\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r3, r3, #0x20\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r3, r3, #0x1c\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r3, r3, #0x8\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r3, r3, #0x10\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r3, r3, #0x8\n"
-        "	add	r0, r2, r3\n"
-        "	add	r0, r0, r4\n"
-        "	strb	r1, [r0]\n"
-        "	add	r2, r2, #0x1\n"
-        "	cmp	r2, #0x7\n"
-        "	ble	._1212	@cond_branch\n"
-        "	ldr	r4, ._1215 + 80 @ gSharedMem\n"
-        "	ldr	r1, ._1215 + 180@ 0x160c8\n"
-        "	add	r0, r4, r1\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r1, #0x6\n"
-        "	strb	r1, [r0]\n"
-        "	sub	r3, r3, #0x3f\n"
-        "	add	r0, r4, r3\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r1, ._1215 + 184@ 0x16113\n"
-        "	add	r0, r4, r1\n"
-        "	strb	r2, [r0]\n"
-        "	ldr	r3, ._1215 + 188@ gBattleResults\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0xa\n"
-        "	add	r0, r3, #0\n"
-        "	add	r0, r0, #0x40\n"
-        "._1213:\n"
-        "	strb	r1, [r0]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	sub	r2, r2, #0x1\n"
-        "	cmp	r2, #0\n"
-        "	bge	._1213	@cond_branch\n"
-        "	mov	r1, #0x0\n"
-        "	strb	r1, [r3, #0x13]\n"
-        "	strb	r1, [r3]\n"
-        "	strb	r1, [r3, #0x1]\n"
-        "	strb	r1, [r3, #0x2]\n"
-        "	strb	r1, [r3, #0x3]\n"
-        "	strb	r1, [r3, #0x4]\n"
-        "	ldrb	r2, [r3, #0x5]\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r2\n"
-        "	mov	r2, #0x3\n"
-        "	neg	r2, r2\n"
-        "	and	r0, r0, r2\n"
-        "	strb	r0, [r3, #0x5]\n"
-        "	strh	r1, [r3, #0x20]\n"
-        "	strh	r1, [r3, #0x22]\n"
-        "	strh	r1, [r3, #0x24]\n"
-        "	strh	r1, [r3, #0x6]\n"
-        "	strh	r1, [r3, #0x26]\n"
-        "	strh	r1, [r3, #0x28]\n"
-        "	mov	r2, #0x0\n"
-        "	add	r5, r3, #0\n"
-        "	add	r5, r5, #0x8\n"
-        "	mov	r4, #0x0\n"
-        "	add	r1, r3, #0\n"
-        "	add	r1, r1, #0x14\n"
-        "._1214:\n"
-        "	add	r0, r2, r5\n"
-        "	strb	r4, [r0]\n"
-        "	strb	r4, [r1]\n"
-        "	strb	r4, [r1, #0x16]\n"
-        "	add	r1, r1, #0x1\n"
-        "	add	r2, r2, #0x1\n"
-        "	cmp	r2, #0x9\n"
-        "	ble	._1214	@cond_branch\n"
-        "	ldr	r2, ._1215 + 80 @ gSharedMem\n"
-        "	ldr	r3, ._1215 + 192@ 0x1609e\n"
-        "	add	r0, r2, r3\n"
-        "	mov	r1, #0x0\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r4, ._1215 + 196@ 0x1609f\n"
-        "	add	r0, r2, r4\n"
-        "	strb	r1, [r0]\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._1216:\n"
-        "	.align	2, 0\n"
-        "._1215:\n"
-        "	.word	gUnknown_02024C4C\n"
-        "	.word	gLastHitByType\n"
-        "	.word	gLastLandedMoves\n"
-        "	.word	gLastUsedMove\n"
-        "	.word	gDisableStructs\n"
-        "	.word	gUnknown_02024C2C\n"
-        "	.word	gLockedMoves\n"
-        "	.word	gStatuses3\n"
-        "	.word	gUnknown_02024C70\n"
-        "	.word	gUnknown_02024C5C\n"
-        "	.word	gSharedMem+0x17100\n"
-        "	.word	gSideTimers\n"
-        "	.word	gSideAffecting\n"
-        "	.word	gBankAttacker\n"
-        "	.word	gBankTarget\n"
-        "	.word	gBattleWeather\n"
-        "	.word	gWishFutureKnock\n"
-        "	.word	gHitMarker\n"
-        "	.word	gBattleTypeFlags\n"
-        "	.word	gSaveBlock2\n"
-        "	.word	gSharedMem\n"
-        "	.word	0x16084\n"
-        "	.word	gMultiHitCounter\n"
-        "	.word	gBattleOutcome\n"
-        "	.word	gBattleExecBuffer\n"
-        "	.word	gPaydayMoney\n"
-        "	.word	0x17130\n"
-        "	.word	0x17160\n"
-        "	.word	gBattleCommunication\n"
-        "	.word	gPauseCounterBattle\n"
-        "	.word	gBattleMoveDamage\n"
-        "	.word	gUnknown_02024DE8\n"
-        "	.word	0x16002\n"
-        "	.word	0x160a1\n"
-        "	.word	gLeveledUpInBattle\n"
-        "	.word	gAbsentBankFlags\n"
-        "	.word	0x16086\n"
-        "	.word	0x16087\n"
-        "	.word	gEnemyParty\n"
-        "	.word	gBaseStats\n"
-        "	.word	0x4fb\n"
-        "	.word	0x16089\n"
-        "	.word	0x16088\n"
-        "	.word	0x1601b\n"
-        "	.word	0x160ac\n"
-        "	.word	0x160c8\n"
-        "	.word	0x16113\n"
-        "	.word	gBattleResults\n"
-        "	.word	0x1609e\n"
-        "	.word	0x1609f\n"
-        "\n"
-    );
-}
-#else
+#endif
 
 void sub_8010824(void)
 {
-    gBattleMainFunc();
-
-    for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
-        gBattleBankFunc[gActiveBank]();
+#if DEBUG
+    if (gUnknown_02023A14_50 & 0x80)
+    {
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            debug_sub_80138CC();
+        gBattleMainFunc();
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            gBattleBankFunc[gActiveBank]();
+    }
+    else
+#endif
+    {
+        gBattleMainFunc();
+        for (gActiveBank = 0; gActiveBank < gNoOfAllBanks; gActiveBank++)
+            gBattleBankFunc[gActiveBank]();
+    }
 }
 
 void sub_8010874(void)
@@ -7548,8 +6067,11 @@ void sub_8010874(void)
         gBattleResults.pokeString2[i] = 0;
         gBattleResults.caughtNick[i] = 0;
     }
-}
+#if DEBUG
+    gSharedMem[0x1609E] = 0;
+    gSharedMem[0x1609F] = 0;
 #endif
+}
 
 void SwitchInClearSetData(void)
 {
@@ -9936,6 +8458,351 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     return strikesFirst;
 }
 
+// The debug version should be identical, but has a strange register swap, and
+// seems to be affected by other functions, which is bizarre.
+#if DEBUG
+__attribute__((naked))
+void SetActionsAndBanksTurnOrder(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, sl\n\
+	mov	r6, r9\n\
+	mov	r5, r8\n\
+	push	{r5, r6, r7}\n\
+	mov	r3, #0x0\n\
+	ldr	r0, ._L1550\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._L1499	@cond_branch\n\
+	ldr	r0, ._L1550+0x4\n\
+	strb	r3, [r0]\n\
+	ldr	r4, ._L1550+0x8\n\
+	mov	r8, r0\n\
+	ldrb	r0, [r4]\n\
+	cmp	r3, r0\n\
+	bcc	._LCB12758\n\
+	b	._L1505	@long jump\n\
+._LCB12758:\n\
+	ldr	r7, ._L1550+0xc\n\
+	ldr	r6, ._L1550+0x10\n\
+	mov	r2, r8\n\
+	ldr	r5, ._L1550+0x14\n\
+._L1503:\n\
+	add	r1, r3, r7\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, r6\n\
+	ldrb	r0, [r0]\n\
+	strb	r0, [r1]\n\
+	add	r1, r3, r5\n\
+	ldrb	r0, [r2]\n\
+	strb	r0, [r1]\n\
+	add	r3, r3, #0x1\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r2]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldrb	r1, [r4]\n\
+	cmp	r0, r1\n\
+	bcc	._L1503	@cond_branch\n\
+	b	._L1505\n\
+._L1551:\n\
+	.align	2, 0\n\
+._L1550:\n\
+	.word	gBattleTypeFlags\n\
+	.word	gActiveBank\n\
+	.word	gNoOfAllBanks\n\
+	.word	gActionsByTurnOrder\n\
+	.word	gActionForBanks\n\
+	.word	gBanksByTurnOrder\n\
+._L1499:\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._L1506	@cond_branch\n\
+	ldr	r0, ._L1552\n\
+	strb	r3, [r0]\n\
+	ldr	r1, ._L1552+0x4\n\
+	mov	r8, r0\n\
+	add	r2, r1, #0\n\
+	ldrb	r2, [r2]\n\
+	cmp	r3, r2\n\
+	bcs	._L1513	@cond_branch\n\
+	ldr	r0, ._L1552+0x8\n\
+	ldrb	r1, [r0]\n\
+	add	r4, r0, #0\n\
+	cmp	r1, #0x3\n\
+	beq	._L1548	@cond_branch\n\
+._L1509:\n\
+	mov	r7, r8\n\
+	ldrb	r0, [r7]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r7]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r1, ._L1552+0x4\n\
+	ldrb	r1, [r1]\n\
+	cmp	r0, r1\n\
+	bcs	._L1513	@cond_branch\n\
+	ldrb	r0, [r7]\n\
+	add	r0, r0, r4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x3\n\
+	bne	._L1509	@cond_branch\n\
+	b	._L1548\n\
+._L1553:\n\
+	.align	2, 0\n\
+._L1552:\n\
+	.word	gActiveBank\n\
+	.word	gNoOfAllBanks\n\
+	.word	gActionForBanks\n\
+._L1506:\n\
+	ldr	r0, ._L1554\n\
+	ldrb	r0, [r0]\n\
+	ldr	r2, ._L1554+0x4\n\
+	mov	r8, r2\n\
+	cmp	r0, #0x3\n\
+	bne	._L1513	@cond_branch\n\
+	strb	r3, [r2]\n\
+._L1548:\n\
+	mov	r3, #0x5\n\
+._L1513:\n\
+	cmp	r3, #0x5\n\
+	bne	._L1515	@cond_branch\n\
+	ldr	r6, ._L1554+0x8\n\
+	ldr	r1, ._L1554\n\
+	mov	r3, r8\n\
+	ldrb	r0, [r3]\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	strb	r0, [r6]\n\
+	ldr	r2, ._L1554+0xc\n\
+	ldrb	r0, [r3]\n\
+	strb	r0, [r2]\n\
+	mov	r3, #0x1\n\
+	mov	r5, #0x0\n\
+	add	r4, r1, #0\n\
+	ldr	r7, ._L1554+0x10\n\
+	mov	r9, r7\n\
+	ldr	r0, ._L1554+0x14\n\
+	mov	ip, r0\n\
+	ldr	r1, ._L1554+0x18\n\
+	mov	sl, r1\n\
+	ldr	r7, ._L1554+0x1c\n\
+	ldrb	r7, [r7]\n\
+	cmp	r5, r7\n\
+	bge	._L1517	@cond_branch\n\
+	add	r7, r6, #0\n\
+	add	r6, r4, #0\n\
+	add	r4, r2, #0\n\
+	ldr	r2, ._L1554+0x1c\n\
+._L1519:\n\
+	mov	r0, r8\n\
+	ldrb	r0, [r0]\n\
+	cmp	r5, r0\n\
+	beq	._L1518	@cond_branch\n\
+	add	r1, r3, r7\n\
+	add	r0, r5, r6\n\
+	ldrb	r0, [r0]\n\
+	strb	r0, [r1]\n\
+	add	r0, r3, r4\n\
+	strb	r5, [r0]\n\
+	add	r3, r3, #0x1\n\
+._L1518:\n\
+	add	r5, r5, #0x1\n\
+	ldrb	r1, [r2]\n\
+	cmp	r5, r1\n\
+	blt	._L1519	@cond_branch\n\
+._L1517:\n\
+	mov	r2, ip\n\
+	mov	r3, r9\n\
+	str	r2, [r3]\n\
+	ldr	r1, ._L1554+0x20\n\
+	add	r1, r1, sl\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	b	._L1498\n\
+._L1555:\n\
+	.align	2, 0\n\
+._L1554:\n\
+	.word	gActionForBanks\n\
+	.word	gActiveBank\n\
+	.word	gActionsByTurnOrder\n\
+	.word	gBanksByTurnOrder\n\
+	.word	gBattleMainFunc\n\
+	.word	CheckFocusPunch_ClearVarsBeforeTurnStarts\n\
+	.word	gSharedMem\n\
+	.word	gNoOfAllBanks\n\
+	.word	0x1601d\n\
+._L1515:\n\
+	mov	r0, #0x0\n\
+	mov	r7, r8\n\
+	strb	r0, [r7]\n\
+	ldr	r1, ._L1556\n\
+	ldrb	r0, [r1]\n\
+	cmp	r0, #0\n\
+	beq	._L1524	@cond_branch\n\
+	ldr	r6, ._L1556+0x4\n\
+	mov	r2, r8\n\
+	ldr	r5, ._L1556+0x8\n\
+	ldr	r4, ._L1556+0xc\n\
+._L1526:\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, r6\n\
+	ldrb	r1, [r0]\n\
+	sub	r0, r1, #0x1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bhi	._L1525	@cond_branch\n\
+	add	r0, r3, r5\n\
+	strb	r1, [r0]\n\
+	add	r1, r3, r4\n\
+	mov	r7, r8\n\
+	ldrb	r0, [r7]\n\
+	strb	r0, [r1]\n\
+	add	r3, r3, #0x1\n\
+._L1525:\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r2]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r1, ._L1556\n\
+	ldrb	r1, [r1]\n\
+	cmp	r0, r1\n\
+	bcc	._L1526	@cond_branch\n\
+._L1524:\n\
+	mov	r0, #0x0\n\
+	mov	r2, r8\n\
+	strb	r0, [r2]\n\
+	ldr	r7, ._L1556\n\
+	ldrb	r0, [r7]\n\
+	cmp	r0, #0\n\
+	beq	._L1530	@cond_branch\n\
+	ldr	r6, ._L1556+0x4\n\
+	ldr	r5, ._L1556+0x8\n\
+	ldr	r4, ._L1556+0xc\n\
+._L1532:\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, r6\n\
+	ldrb	r1, [r0]\n\
+	sub	r0, r1, #0x1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bls	._L1531	@cond_branch\n\
+	add	r0, r3, r5\n\
+	strb	r1, [r0]\n\
+	add	r1, r3, r4\n\
+	mov	r7, r8\n\
+	ldrb	r0, [r7]\n\
+	strb	r0, [r1]\n\
+	add	r3, r3, #0x1\n\
+._L1531:\n\
+	ldrb	r0, [r2]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r2]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r1, ._L1556\n\
+	ldrb	r1, [r1]\n\
+	cmp	r0, r1\n\
+	bcc	._L1532	@cond_branch\n\
+._L1530:\n\
+	mov	r5, #0x0\n\
+	b	._L1549\n\
+._L1557:\n\
+	.align	2, 0\n\
+._L1556:\n\
+	.word	gNoOfAllBanks\n\
+	.word	gActionForBanks\n\
+	.word	gActionsByTurnOrder\n\
+	.word	gBanksByTurnOrder\n\
+._L1538:\n\
+	add	r4, r5, #0x1\n\
+	add	r7, r4, #0\n\
+	ldrb	r1, [r1]\n\
+	cmp	r7, r1\n\
+	bge	._L1537	@cond_branch\n\
+	ldr	r6, ._L1558\n\
+	lsl	r2, r5, #0x18\n\
+	mov	r8, r2\n\
+._L1542:\n\
+	ldr	r0, ._L1558+0x4\n\
+	add	r1, r5, r0\n\
+	ldrb	r3, [r1]\n\
+	add	r0, r4, r0\n\
+	ldrb	r1, [r0]\n\
+	add	r0, r5, r6\n\
+	ldrb	r2, [r0]\n\
+	cmp	r2, #0x1\n\
+	beq	._L1541	@cond_branch\n\
+	add	r0, r4, r6\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	beq	._L1541	@cond_branch\n\
+	cmp	r2, #0x2\n\
+	beq	._L1541	@cond_branch\n\
+	cmp	r0, #0x2\n\
+	beq	._L1541	@cond_branch\n\
+	add	r0, r3, #0\n\
+	mov	r2, #0x0\n\
+	bl	GetWhoStrikesFirst\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._L1541	@cond_branch\n\
+	lsl	r1, r4, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	mov	r3, r8\n\
+	lsr	r0, r3, #0x18\n\
+	bl	SwapTurnOrder\n\
+._L1541:\n\
+	add	r4, r4, #0x1\n\
+	ldr	r0, ._L1558+0x8\n\
+	ldrb	r0, [r0]\n\
+	cmp	r4, r0\n\
+	blt	._L1542	@cond_branch\n\
+._L1537:\n\
+	add	r5, r7, #0\n\
+._L1549:\n\
+	ldr	r1, ._L1558+0x8\n\
+	ldrb	r0, [r1]\n\
+	sub	r0, r0, #0x1\n\
+	cmp	r5, r0\n\
+	blt	._L1538	@cond_branch\n\
+._L1505:\n\
+	ldr	r1, ._L1558+0xc\n\
+	ldr	r0, ._L1558+0x10\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._L1558+0x14\n\
+	ldr	r7, ._L1558+0x18\n\
+	add	r0, r0, r7\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0]\n\
+._L1498:\n\
+	pop	{r3, r4, r5}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	mov	sl, r5\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._L1559:\n\
+	.align	2, 0\n\
+._L1558:\n\
+	.word	gActionsByTurnOrder\n\
+	.word	gBanksByTurnOrder\n\
+	.word	gNoOfAllBanks\n\
+	.word	gBattleMainFunc\n\
+	.word	CheckFocusPunch_ClearVarsBeforeTurnStarts\n\
+	.word	gSharedMem\n\
+	.word	0x1601d");
+}
+#else
 void SetActionsAndBanksTurnOrder(void)
 {
     s32 var = 0;
@@ -10028,15 +8895,11 @@ void SetActionsAndBanksTurnOrder(void)
             }
         }
     }
-    // Debug ROM has a register swap from the retail ROM.
-    // And doing this seems to fix it.
-#if DEBUG
-    asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");asm("");
-    asm("");asm("");asm("");asm("");asm("");asm("");asm("");
-#endif
+
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     eFocusPunchBank = 0;
 }
+#endif
 
 static void TurnValuesCleanUp(bool8 var0)
 {
