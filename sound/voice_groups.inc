@@ -108,7 +108,7 @@ voicegroup_842FEF8:: @ 842FEF8
 	voice_directsound 62, 212, DirectSoundWaveData_SC88_DrumKitHiMidTom, 255, 204, 77, 204  @ 8430150
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843015C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8430168
-	voice_directsound_no_resample 70, 177, DirectSoundWaveData_845ED34, 255, 165, 103, 231  @ 8430174
+	voice_directsound_no_resample 70, 177, DirectSoundWaveData_HiHatRattle, 255, 165, 103, 231  @ 8430174
 	voice_directsound_no_resample 32, 162, DirectSoundWaveData_SC88_DrumKitCabasa, 255, 127, 77, 204  @ 8430180
 	voice_directsound_no_resample 60, 142, DirectSoundWaveData_SC88_DrumKitCrashCymbal2, 255, 235, 0, 165  @ 843018C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8430198
@@ -500,7 +500,7 @@ voicegroup_8430C9C:: @ 8430C9C
 voicegroup_843129C:: @ 843129C
 	voice_keysplit_all voicegroup_842FEF8  @ 843129C
 	voice_keysplit voicegroup_8430204, KeySplitTable_8455224  @ 84312A8
-	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 178, 180, 165  @ 84312B4
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_WaspySynth, 255, 178, 180, 165  @ 84312B4
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312C0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312CC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84312D8
@@ -2234,7 +2234,7 @@ voicegroup_8435FAC:: @ 8435FAC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843612C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8436138
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8436144
-	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 165, 154, 127  @ 8436150
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_JPSuperSaw, 255, 165, 154, 127  @ 8436150
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843615C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8436168
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8436174
@@ -10424,7 +10424,7 @@ voicegroup_844D1F0:: @ 844D1F0
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844D7A8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844D7B4
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844D7C0
-	voice_directsound 60, 0, DirectSoundWaveData_SC88_WhiteNoise, 255, 255, 255, 127  @ 844D7CC
+	voice_directsound 60, 0, DirectSoundWaveData_Noise2, 255, 255, 255, 127  @ 844D7CC
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitHandClap, 255, 255, 255, 127  @ 844D7D8
 	voice_noise_alt 0, 0, 1, 0, 0  @ 844D7E4
 
@@ -11065,7 +11065,7 @@ voicegroup_844F0C8:: @ 844F0C8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844F4DC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844F4E8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 844F4F4
-	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 0, 255, 127  @ 844F500
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_JPSuperSaw, 255, 0, 255, 127  @ 844F500
 
 	.align 2
 voicegroup_844F50C:: @ 844F50C
@@ -11402,7 +11402,7 @@ voicegroup_845019C:: @ 845019C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450418
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450424
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450430
-	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 165, 154, 127  @ 845043C
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_JPSuperSaw, 255, 165, 154, 127  @ 845043C
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450448
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450454
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8450460
@@ -12003,8 +12003,8 @@ voicegroup_8451990:: @ 8451990
 
 	.align 2
 voicegroup_8451F90:: @ 8451F90
-	voice_directsound_no_resample 60, 0, DirectSoundWaveData_8488F44, 255, 249, 0, 165  @ 8451F90
-	voice_directsound_alt 60, 0, DirectSoundWaveData_8488F44, 255, 0, 255, 165  @ 8451F9C
+	voice_directsound_no_resample 60, 0, DirectSoundWaveData_Ring, 255, 249, 0, 165  @ 8451F90
+	voice_directsound_alt 60, 0, DirectSoundWaveData_Ring, 255, 0, 255, 165  @ 8451F9C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitSnare4, 255, 0, 255, 165  @ 8451FA8
 	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 242, 0, 127  @ 8451FB4
 	voice_noise_alt 0, 0, 1, 0, 1  @ 8451FC0
@@ -12013,42 +12013,42 @@ voicegroup_8451F90:: @ 8451F90
 	voice_square_1_alt 0, 2, 0, 2, 0, 1  @ 8451FE4
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitSnare3, 255, 0, 255, 165  @ 8451FF0
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_PizzicatoStrings, 255, 0, 255, 127  @ 8451FFC
-	voice_directsound 60, 0, DirectSoundWaveData_848C4A4, 255, 0, 255, 127  @ 8452008
+	voice_directsound 60, 0, DirectSoundWaveData_MachineSound2, 255, 0, 255, 127  @ 8452008
 	voice_noise_alt 1, 0, 2, 0, 0  @ 8452014
 	voice_square_1 0x67, 3, 2, 7, 0, 0  @ 8452020
 	voice_square_2 3, 2, 7, 0, 0  @ 845202C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_SquareWave, 255, 226, 0, 127  @ 8452038
-	voice_directsound 60, 0, DirectSoundWaveData_848E094, 255, 0, 255, 0  @ 8452044
+	voice_directsound 60, 0, DirectSoundWaveData_MachineSound1, 255, 0, 255, 0  @ 8452044
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_SquareWave, 255, 204, 0, 127  @ 8452050
 	voice_square_1_alt 0, 2, 0, 2, 0, 1  @ 845205C
-	voice_directsound 60, 0, DirectSoundWaveData_848F448, 255, 0, 255, 127  @ 8452068
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_Applause2, 255, 0, 255, 127  @ 8452068
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_SquareWave, 255, 0, 255, 127  @ 8452074
 	voice_square_1 103, 0, 0, 7, 0, 0  @ 8452080
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitSnare2, 255, 0, 255, 127  @ 845208C
-	voice_directsound 60, 0, DirectSoundWaveData_8491ACC, 255, 0, 255, 127  @ 8452098
+	voice_directsound 60, 0, DirectSoundWaveData_Noise3, 255, 0, 255, 127  @ 8452098
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_Bubble, 255, 0, 255, 127  @ 84520A4
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitSnare1, 255, 0, 255, 127  @ 84520B0
 	voice_noise_alt 0, 0, 7, 15, 1  @ 84520BC
-	voice_directsound 60, 0, DirectSoundWaveData_8493D20, 255, 0, 255, 127  @ 84520C8
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_CarCrash, 255, 0, 255, 127  @ 84520C8
 	voice_noise_alt 1, 0, 7, 15, 1  @ 84520D4
 	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 246, 0, 127  @ 84520E0
-	voice_directsound 60, 0, DirectSoundWaveData_8495028, 255, 0, 255, 127  @ 84520EC
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_PinkNoise, 255, 0, 255, 127  @ 84520EC
 	voice_square_1_alt 19, 2, 0, 2, 0, 0  @ 84520F8
-	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 0, 255, 127  @ 8452104
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_WaspySynth, 255, 0, 255, 127  @ 8452104
 	voice_square_1 103, 0, 0, 0, 15, 0  @ 8452110
-	voice_directsound_alt 60, 0, DirectSoundWaveData_8495028, 255, 0, 255, 127  @ 845211C
+	voice_directsound_alt 60, 0, DirectSoundWaveData_SC88_PinkNoise, 255, 0, 255, 127  @ 845211C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_FretlessBass, 255, 255, 255, 127  @ 8452128
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_SynthBass1, 255, 0, 255, 127  @ 8452134
-	voice_directsound 60, 0, DirectSoundWaveData_8499110, 255, 0, 255, 127  @ 8452140
-	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 242, 0, 0  @ 845214C
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_WhiteNoise, 255, 0, 255, 127  @ 8452140
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_WaspySynth, 255, 242, 0, 0  @ 845214C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumkitGuiro, 255, 0, 255, 0  @ 8452158
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_TubularBell, 255, 165, 90, 216  @ 8452164
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitClosedHiHat, 255, 127, 0, 188  @ 8452170
-	voice_directsound 60, 0, DirectSoundWaveData_SC88_PinkNoise, 255, 249, 0, 165  @ 845217C
+	voice_directsound 60, 0, DirectSoundWaveData_Noise1, 255, 249, 0, 165  @ 845217C
 	voice_square_1 0, 0, 4, 6, 0, 0  @ 8452188
 	voice_directsound 60, 0, DirectSoundWaveData_8456330, 13, 0, 255, 127  @ 8452194
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_TubularBell, 13, 0, 255, 127  @ 84521A0
-	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 0, 255, 127  @ 84521AC
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_JPSuperSaw, 255, 0, 255, 127  @ 84521AC
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_Piano1, 255, 252, 0, 204  @ 84521B8
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84521C4
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_Marimba, 255, 235, 0, 204  @ 84521D0
@@ -12063,10 +12063,10 @@ voicegroup_8451F90:: @ 8451F90
 	voice_noise_alt 0, 1, 6, 0, 0  @ 845223C
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_FingerSlap, 255, 255, 255, 127  @ 8452248
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitHandClap, 255, 255, 255, 127  @ 8452254
-	voice_directsound 60, 0, DirectSoundWaveData_SC88_WhiteNoise, 255, 255, 255, 127  @ 8452260
+	voice_directsound 60, 0, DirectSoundWaveData_Noise2, 255, 255, 255, 127  @ 8452260
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_WideFrenchHorns, 11, 242, 0, 127  @ 845226C
 	voice_square_1_alt 0, 2, 4, 6, 0, 0  @ 8452278
-	voice_directsound 60, 0, DirectSoundWaveData_84A5690, 255, 255, 255, 127  @ 8452284
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_HorseGallop, 255, 255, 255, 127  @ 8452284
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_AccordianFr, 255, 0, 255, 165  @ 8452290
 	voice_directsound 60, 0, DirectSoundWaveData_SC88_DrumKitHiMidTom, 255, 0, 255, 165  @ 845229C
 	voice_noise_alt 0, 5, 7, 15, 1  @ 84522A8
@@ -12076,7 +12076,7 @@ voicegroup_8451F90:: @ 8451F90
 	voice_noise_alt 0, 6, 6, 0, 1  @ 84522D8
 	voice_noise_alt 0, 3, 6, 0, 1  @ 84522E4
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 84522F0
-	voice_directsound 60, 0, DirectSoundWaveData_8497134, 15, 127, 231, 127  @ 84522FC
+	voice_directsound 60, 0, DirectSoundWaveData_SC88_WaspySynth, 15, 127, 231, 127  @ 84522FC
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8452308
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8452314
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8452320
