@@ -3,6 +3,7 @@
 #include "battle_setup.h"
 #include "battle.h"
 #include "trainer.h"
+#include "graphics.h"
 #include "gba/types.h"
 #include "constants/species.h"
 #include "constants/moves.h"
@@ -520,4 +521,86 @@ extern const u8 gUnknown_08E5DC2C[];
 
 const struct CompressedSpriteSheet gUnknown_081F95A4[] = {
     {gUnknown_08E5DC2C, 4096, 0x2710},
+};
+
+struct BattleBackground
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+};
+
+const struct BattleBackground gBattleTerrainTable[] = {
+    {
+	.tileset = gBattleTerrainTiles_TallGrass,
+	.tilemap = gBattleTerrainTilemap_TallGrass,
+	.entryTileset = gBattleTerrainAnimTiles_TallGrass,
+	.entryTilemap = gBattleTerrainAnimTilemap_TallGrass,
+	.palette = gBattleTerrainPalette_TallGrass
+    },
+    {
+	.tileset = gBattleTerrainTiles_LongGrass,
+	.tilemap = gBattleTerrainTilemap_LongGrass,
+	.entryTileset = gBattleTerrainAnimTiles_LongGrass,
+	.entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
+	.palette = gBattleTerrainPalette_LongGrass
+    },
+    {
+	.tileset = gBattleTerrainTiles_Sand,
+	.tilemap = gBattleTerrainTilemap_Sand,
+	.entryTileset = gBattleTerrainAnimTiles_Sand,
+	.entryTilemap = gBattleTerrainAnimTilemap_Sand,
+	.palette = gBattleTerrainPalette_Sand
+    },
+    {
+	.tileset = gBattleTerrainTiles_Underwater,
+	.tilemap = gBattleTerrainTilemap_Underwater,
+	.entryTileset = gBattleTerrainAnimTiles_Underwater,
+	.entryTilemap = gBattleTerrainAnimTilemap_Underwater,
+	.palette = gBattleTerrainPalette_Underwater
+    },
+    {
+	.tileset = gBattleTerrainTiles_Water,
+	.tilemap = gBattleTerrainTilemap_Water,
+	.entryTileset = gBattleTerrainAnimTiles_Water,
+	.entryTilemap = gBattleTerrainAnimTilemap_Water,
+	.palette = gBattleTerrainPalette_Water
+    },
+    {
+	.tileset = gBattleTerrainTiles_PondWater,
+	.tilemap = gBattleTerrainTilemap_PondWater,
+	.entryTileset = gBattleTerrainAnimTiles_PondWater,
+	.entryTilemap = gBattleTerrainAnimTilemap_PondWater,
+	.palette = gBattleTerrainPalette_PondWater
+    },
+    {
+	.tileset = gBattleTerrainTiles_Rock,
+	.tilemap = gBattleTerrainTilemap_Rock,
+	.entryTileset = gBattleTerrainAnimTiles_Rock,
+	.entryTilemap = gBattleTerrainAnimTilemap_Rock,
+	.palette = gBattleTerrainPalette_Rock
+    },
+    {
+	.tileset = gBattleTerrainTiles_Cave,
+	.tilemap = gBattleTerrainTilemap_Cave,
+	.entryTileset = gBattleTerrainAnimTiles_Cave,
+	.entryTilemap = gBattleTerrainAnimTilemap_Cave,
+	.palette = gBattleTerrainPalette_Cave
+    },
+    {
+	.tileset = gBattleTerrainTiles_Building,
+	.tilemap = gBattleTerrainTilemap_Building,
+	.entryTileset = gBattleTerrainAnimTiles_Building,
+	.entryTilemap = gBattleTerrainAnimTilemap_Building,
+	.palette = gBattleTerrainPalette_Building
+    },
+    {
+	.tileset = gBattleTerrainTiles_Building,
+	.tilemap = gBattleTerrainTilemap_Building,
+	.entryTileset = gBattleTerrainAnimTiles_Building,
+	.entryTilemap = gBattleTerrainAnimTilemap_Building,
+	.palette = gBattleTerrainPalette_Plain
+    }
 };
