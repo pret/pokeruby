@@ -1,8 +1,15 @@
 #include "global.h"
 #include "battle.h"
-#include "link.h"
-#include "text.h"
+#include "constants/songs.h"
+#include "decompress.h"
 #include "ewram.h"
+#include "link.h"
+#include "palette.h"
+#include "task.h"
+#include "text.h"
+#include "trig.h"
+#include "sound.h"
+
 
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;
@@ -12,6 +19,78 @@ extern struct Window gUnknown_03004210;
 extern u8 BattleText_Win[];
 extern u8 BattleText_Loss[];
 extern u8 BattleText_Tie[];
+
+extern const u8 gGameVersion;
+extern u8 gUnknown_08D00000[];
+extern u16 gUnknown_08D00524[];
+extern u16 gUnknown_08D004E0[];
+extern u16 gBattleTypeFlags;
+extern struct Trainer gTrainers[];
+extern u16 gTrainerBattleOpponent;
+
+extern void *gBattleTerrainTable[][5];
+extern u8 gBattleTerrain;
+
+extern u8 gBattleTerrainTiles_Cave[];
+extern u8 gBattleTerrainTiles_Water[];
+extern u8 gBattleTerrainTiles_Building[];
+extern u8 gBattleTerrainTiles_Stadium[];
+
+extern u16 gBattleTerrainTilemap_Cave[];
+extern u16 gBattleTerrainTilemap_Water[];
+extern u16 gBattleTerrainTilemap_Building[];
+extern u16 gBattleTerrainTilemap_Stadium[];
+
+extern u16 gBattleTerrainPalette_Groudon[];
+extern u16 gBattleTerrainPalette_Kyogre[];
+extern u16 gBattleTerrainPalette_BuildingLeader[];
+extern u16 gBattleTerrainPalette_StadiumSteven[];
+extern u16 gBattleTerrainPalette_BuildingGym[];
+extern u16 gBattleTerrainPalette_StadiumMagma[];
+extern u16 gBattleTerrainPalette_StadiumAqua[];
+extern u16 gBattleTerrainPalette_StadiumSidney[];
+extern u16 gBattleTerrainPalette_StadiumPhoebe[];
+extern u16 gBattleTerrainPalette_StadiumGlacia[];
+extern u16 gBattleTerrainPalette_StadiumDrake[];
+extern u16 gBattleTerrainPalette_BattleTower[];
+
+extern u8 gBattleTerrainAnimTiles_Building[];
+extern u16 gBattleTerrainAnimTilemap_Building[];
+extern u8 gBattleTerrainAnimTiles_Cave[];
+extern u16 gBattleTerrainAnimTilemap_Cave[];
+extern u8 gBattleTerrainAnimTiles_Underwater[];
+extern u16 gBattleTerrainAnimTilemap_Underwater[];
+extern u8 gVersusFrameGfx[];
+extern u16 gVersusFrameTilemap[];
+extern u8 gUnknown_08E5DC2C[];
+extern u16 gVersusFramePal[];
+
+extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_Y;
+extern struct CompressedSpriteSheet gUnknown_081F95A4;
+
+extern u8 sav1_map_get_battletype(void);
+extern void sub_800D74C(void);
+
+struct LinkResultWindow {
+	struct Window *window;
+	u16 offset;
+	u8 left;
+	u8 top;
+	u8 *dest;
+};
+
+#define gLinkResultWindows gUnknown_081F9680
+extern const struct LinkResultWindow gLinkResultWindows[];
+extern void PrintLinkBattleWinLossTie(void);
+extern void sub_800DAF8(u8, u8, u8 *);
+
+extern struct SpriteTemplate gSpriteTemplate_81F9574;
+extern struct SpriteTemplate gSpriteTemplate_81F958C;
+
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG2_X;
+
 
 #if ENGLISH
 #define LEFT_MESSAGE_X 6
@@ -119,94 +198,9 @@ void PrintLinkBattleWinLossTie(void)
 }
 
 
-#include "global.h"
-#include "decompress.h"
-#include "palette.h"
-#include "battle.h"
-#include "text.h"
-#include "trig.h"
-#include "sound.h"
-#include "constants/songs.h"
-#include "task.h"
-#include "link.h"
-
-
-#define gBattle gBattleStruct
-
-extern const u8 gGameVersion;
-extern u8 gUnknown_08D00000[];
-extern u16 gUnknown_08D00524[];
-extern u16 gUnknown_08D004E0[];
-extern u16 gBattleTypeFlags;
-extern struct Trainer gTrainers[];
-extern u16 gTrainerBattleOpponent;
-
-extern void *gBattleTerrainTable[][5];
-extern u8 gBattleTerrain;
-
-extern u8 gBattleTerrainTiles_Cave[];
-extern u8 gBattleTerrainTiles_Water[];
-extern u8 gBattleTerrainTiles_Building[];
-extern u8 gBattleTerrainTiles_Stadium[];
-
-extern u16 gBattleTerrainTilemap_Cave[];
-extern u16 gBattleTerrainTilemap_Water[];
-extern u16 gBattleTerrainTilemap_Building[];
-extern u16 gBattleTerrainTilemap_Stadium[];
-
-extern u16 gBattleTerrainPalette_Groudon[];
-extern u16 gBattleTerrainPalette_Kyogre[];
-extern u16 gBattleTerrainPalette_BuildingLeader[];
-extern u16 gBattleTerrainPalette_StadiumSteven[];
-extern u16 gBattleTerrainPalette_BuildingGym[];
-extern u16 gBattleTerrainPalette_StadiumMagma[];
-extern u16 gBattleTerrainPalette_StadiumAqua[];
-extern u16 gBattleTerrainPalette_StadiumSidney[];
-extern u16 gBattleTerrainPalette_StadiumPhoebe[];
-extern u16 gBattleTerrainPalette_StadiumGlacia[];
-extern u16 gBattleTerrainPalette_StadiumDrake[];
-extern u16 gBattleTerrainPalette_BattleTower[];
-
-extern u8 gBattleTerrainAnimTiles_Building[];
-extern u16 gBattleTerrainAnimTilemap_Building[];
-extern u8 gBattleTerrainAnimTiles_Cave[];
-extern u16 gBattleTerrainAnimTilemap_Cave[];
-extern u8 gBattleTerrainAnimTiles_Underwater[];
-extern u16 gBattleTerrainAnimTilemap_Underwater[];
-extern u8 gVersusFrameGfx[];
-extern u16 gVersusFrameTilemap[];
-extern u8 gUnknown_08E5DC2C[];
-extern u16 gVersusFramePal[];
-
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_Y;
-extern struct CompressedSpriteSheet gUnknown_081F95A4;
-
-extern u8 sav1_map_get_battletype(void);
-extern void sub_800D74C(void);
-
-struct Struct_081F9680 {
-	struct Window *window;
-	u16 offset;
-	u8 left;
-	u8 top;
-	u8 *field_8;
-};
-
-extern const struct Struct_081F9680 gUnknown_081F9680[];
-extern void PrintLinkBattleWinLossTie(void);
-extern void sub_800DAF8(u8, u8, u8 *);
-
-extern struct SpriteTemplate gSpriteTemplate_81F9574;
-extern struct SpriteTemplate gSpriteTemplate_81F958C;
-
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG2_X;
-
-
 void sub_800DE30(u8 taskId)
 {
-	int palette;
+	u8 palette;
 	int i;
 
 	switch (gTasks[taskId].data[0]) {
@@ -214,46 +208,46 @@ void sub_800DE30(u8 taskId)
 	case 0:
 		if (gBattleTypeFlags & BATTLE_TYPE_MULTI) {
 			for (i = 0; i < 4; i++) {
-				u8 sp8 = (gLinkPlayers[i].lp_field_18 & 3);
+				u8 windowId = (gLinkPlayers[i].lp_field_18 & 3);
 				Text_InitWindow8002E4C(
-					gUnknown_081F9680[sp8].window,
+					gLinkResultWindows[windowId].window,
 					gLinkPlayers[i].name,
-					gUnknown_081F9680[sp8].offset,
-					gUnknown_081F9680[sp8].left,
-					gUnknown_081F9680[sp8].top,
+					gLinkResultWindows[windowId].offset,
+					gLinkResultWindows[windowId].left,
+					gLinkResultWindows[windowId].top,
 					1);
-				Text_PrintWindow8002F44(gUnknown_081F9680[sp8].window);
-				sub_800DAF8(taskId, sp8, gUnknown_081F9680[sp8].field_8);
+				Text_PrintWindow8002F44(gLinkResultWindows[windowId].window);
+				sub_800DAF8(taskId, windowId, gLinkResultWindows[windowId].dest);
 			}
 		} else {
-			u8 sp8 = 4;
+			u8 windowId = 4;
 
-			u8 r7 = gBattle->linkPlayerIndex;
-			u8 r6 = gBattle->linkPlayerIndex ^ 1;
-			if (gLinkPlayers[r7].lp_field_18) {
-				r6 = gBattle->linkPlayerIndex;
-				r7 = gBattle->linkPlayerIndex ^ 1;
+			u8 playerId = gBattleStruct->linkPlayerIndex;
+			u8 opponentId = gBattleStruct->linkPlayerIndex ^ 1;
+			if (gLinkPlayers[playerId].lp_field_18) {
+				opponentId = gBattleStruct->linkPlayerIndex;
+				playerId = gBattleStruct->linkPlayerIndex ^ 1;
 			}
 
 			Text_InitWindow8002E4C(
-				gUnknown_081F9680[sp8].window,
-				gLinkPlayers[r7].name,
-				gUnknown_081F9680[sp8].offset,
-				gUnknown_081F9680[sp8].left,
-				gUnknown_081F9680[sp8].top,
+				gLinkResultWindows[windowId].window,
+				gLinkPlayers[playerId].name,
+				gLinkResultWindows[windowId].offset,
+				gLinkResultWindows[windowId].left,
+				gLinkResultWindows[windowId].top,
 				1);
-			Text_PrintWindow8002F44(gUnknown_081F9680[sp8].window);
-			sub_800DAF8(taskId, r7, gUnknown_081F9680[sp8].field_8);
+			Text_PrintWindow8002F44(gLinkResultWindows[windowId].window);
+			sub_800DAF8(taskId, playerId, gLinkResultWindows[windowId].dest);
 
 			Text_InitWindow8002E4C(
-				gUnknown_081F9680[sp8 + 1].window,
-				gLinkPlayers[r6].name,
-				gUnknown_081F9680[sp8 + 1].offset,
-				gUnknown_081F9680[sp8 + 1].left,
-				gUnknown_081F9680[sp8 + 1].top,
+				gLinkResultWindows[windowId + 1].window,
+				gLinkPlayers[opponentId].name,
+				gLinkResultWindows[windowId + 1].offset,
+				gLinkResultWindows[windowId + 1].left,
+				gLinkResultWindows[windowId + 1].top,
 				1);
-			Text_PrintWindow8002F44(gUnknown_081F9680[sp8 + 1].window);
-			sub_800DAF8(taskId, r6, gUnknown_081F9680[sp8 + 1].field_8);
+			Text_PrintWindow8002F44(gLinkResultWindows[windowId + 1].window);
+			sub_800DAF8(taskId, opponentId, gLinkResultWindows[windowId + 1].dest);
 		}
 		gTasks[taskId].data[0]++;
 		break;
@@ -261,10 +255,10 @@ void sub_800DE30(u8 taskId)
 	case 1:
 		palette = AllocSpritePalette(10000);
 		gPlttBufferUnfaded[palette * 16 + 0x10f] = gPlttBufferFaded[palette * 16 + 0x10f] = 0x7fff;
-		gBattle->unk1608A = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
-		gBattle->unk1608B = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
-		gSprites[gBattle->unk1608A].invisible = TRUE;
-		gSprites[gBattle->unk1608B].invisible = TRUE;
+		gBattleStruct->unk1608A = CreateSprite(&gSpriteTemplate_81F9574, 108, 80, 0);
+		gBattleStruct->unk1608B = CreateSprite(&gSpriteTemplate_81F958C, 132, 80, 0);
+		gSprites[gBattleStruct->unk1608A].invisible = TRUE;
+		gSprites[gBattleStruct->unk1608B].invisible = TRUE;
 		gTasks[taskId].data[0]++;
 		break;
 
@@ -289,20 +283,19 @@ void sub_800DE30(u8 taskId)
 			}
 			PlaySE(SE_W231);
 			DestroyTask(taskId);
-			gSprites[gBattle->unk1608A].invisible = FALSE;
-			gSprites[gBattle->unk1608B].invisible = FALSE;
-			gSprites[gBattle->unk1608B].oam.tileNum += 0x40;
-			gSprites[gBattle->unk1608A].data[0] = 0;
-			gSprites[gBattle->unk1608B].data[0] = 1;
-			gSprites[gBattle->unk1608A].data[1] = gSprites[gBattle->unk1608A].pos1.x;
-			gSprites[gBattle->unk1608B].data[1] = gSprites[gBattle->unk1608B].pos1.x;
-			gSprites[gBattle->unk1608A].data[2] = 0;
-			gSprites[gBattle->unk1608B].data[2] = 0;
+			gSprites[gBattleStruct->unk1608A].invisible = FALSE;
+			gSprites[gBattleStruct->unk1608B].invisible = FALSE;
+			gSprites[gBattleStruct->unk1608B].oam.tileNum += 0x40;
+			gSprites[gBattleStruct->unk1608A].data[0] = 0;
+			gSprites[gBattleStruct->unk1608B].data[0] = 1;
+			gSprites[gBattleStruct->unk1608A].data[1] = gSprites[gBattleStruct->unk1608A].pos1.x;
+			gSprites[gBattleStruct->unk1608B].data[1] = gSprites[gBattleStruct->unk1608B].pos1.x;
+			gSprites[gBattleStruct->unk1608A].data[2] = 0;
+			gSprites[gBattleStruct->unk1608B].data[2] = 0;
 		}
 		break;
 	}
 }
-
 
 void sub_800E23C(void) {
 	if (gBattleTypeFlags & BATTLE_TYPE_LINK) {
@@ -352,9 +345,9 @@ void sub_800E23C(void) {
 	LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void *)0x600e000);
 }
 
-int sub_800E414(u8 a1) {
+int sub_800E414(u8 type) {
 	int ret = 0;
-	switch (a1) {
+	switch (type) {
 	case 0:
 		LZDecompressVram(&gUnknown_08D00000, (void *)0x6000000);
 		break;
