@@ -2239,7 +2239,7 @@ void sub_80FF5BC(u8 taskId)
     {
         if (sub_80FF58C() == TRUE)
         {
-            fade_screen(1, 0);
+            FadeScreen(1, 0);
             gTasks[taskId].data[2] = 0;
             gTasks[taskId].func = sub_80FF6AC;
         } else
@@ -2289,7 +2289,7 @@ void sub_80FF6AC(u8 taskId)
             gTasks[taskId].data[2] = 2;
             break;
         case 2:
-            if (sub_807D770() == 1)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[12] = 0;
                 sub_810065C(taskId);
@@ -3193,7 +3193,7 @@ void sub_810026C(u8 taskId)
 
 void sub_810028C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = c1_overworld_prev_quest;
 }
@@ -3222,7 +3222,7 @@ void c1_overworld_prev_quest(u8 taskId)
 
 void sub_8100334(u8 taskId)
 {
-    if (sub_807D770() == 1)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         gTasks[taskId].func = sub_80FE948;
     }
@@ -3629,7 +3629,7 @@ void sub_8100A0C(u8 taskId)
 {
     if (sub_8100D38(taskId) == 1)
     {
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         gTasks[taskId].data[2] = 0;
         gTasks[taskId].func = sub_8100E70;
     } else
@@ -3735,7 +3735,7 @@ void sub_8100C88(u8 taskId)
             gTasks[taskId].data[2] = 3;
             break;
         case 3:
-            if (sub_807D770() == 1)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 gTasks[taskId].data[13] = -1;
                 DisplayItemMessageOnField(taskId, gSecretBaseText_DecorReturned, sub_81010F0, 0);
@@ -3800,7 +3800,7 @@ void sub_8100E70(u8 taskId)
             data[2] = 2;
             break;
         case 2:
-            if (sub_807D770() == TRUE)
+            if (IsWeatherNotFadingIn() == TRUE)
             {
                 data[12] = 1;
                 sub_8100EEC(taskId);
@@ -4138,7 +4138,7 @@ void sub_8101518(u8 taskId)
 
 void sub_810153C(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_8100C88;
 }
@@ -4157,7 +4157,7 @@ void sub_8101590(u8 taskId)
 
 void sub_81015B0(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_81015E0;
 }
@@ -4184,7 +4184,7 @@ void sub_81015E0(u8 taskId)
 
 void sub_8101648(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         gTasks[taskId].func = Task_DecorationPCProcessMenuInput;
     }

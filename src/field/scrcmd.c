@@ -625,7 +625,7 @@ bool8 IsPaletteNotActive(void)
 
 bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 {
-    fade_screen(ScriptReadByte(ctx), 0);
+    FadeScreen(ScriptReadByte(ctx), 0);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
@@ -635,7 +635,7 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
     u8 duration = ScriptReadByte(ctx);
     u8 delay = ScriptReadByte(ctx);
 
-    fade_screen(duration, delay);
+    FadeScreen(duration, delay);
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }

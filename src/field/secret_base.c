@@ -348,7 +348,7 @@ void sub_80BBA48(u8 taskid)
 void sub_80BBAF0(void)
 {
     CreateTask(sub_80BBA48, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
 }
 
@@ -362,7 +362,7 @@ bool8 sub_80BBB24(void)
 void sub_80BBB50(u8 taskid)
 {
     FieldObjectTurn(&(gMapObjects[gPlayerAvatar.mapObjectId]), 2);
-    if (sub_807D770() == 1) {
+    if (IsWeatherNotFadingIn() == 1) {
         EnableBothScriptContexts();
         DestroyTask(taskid);
     }
@@ -397,7 +397,7 @@ void sub_80BBC78(void)
 {
     u8 taskid = CreateTask(sub_80BBBEC, 0);
     gTasks[taskid].data[0] = 0;
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 bool8 CurrentMapIsSecretBase(void)
@@ -534,7 +534,7 @@ void sub_80BC074(u8 taskid)
 
 void sub_80BC0F8(void) {
     CreateTask(sub_80BC074, 0);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 void sub_80BC114(void) {

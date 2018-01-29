@@ -29,7 +29,7 @@ extern void DestroyVerticalScrollIndicator(u8);
 extern void PauseVerticalScrollIndicator(u8);
 extern void LoadScrollIndicatorPalette(void);
 extern void ClearMailStruct(struct MailStruct *);
-extern u8 sub_807D770(void);
+extern u8 IsWeatherNotFadingIn(void);
 extern void sub_808B020(void);
 extern void ClearVerticalScrollIndicatorPalettes(void);
 
@@ -357,12 +357,12 @@ static void Task_ItemStorage_Deposit(u8 taskId)
 static void ItemStorage_Deposit(u8 taskId)
 {
     TASK.FUNC = Task_ItemStorage_Deposit;
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 static void ItemStorage_HandleReturnToProcessInput(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         TASK.FUNC = ItemStorageMenuProcessInput;
 }
 
@@ -1196,7 +1196,7 @@ static void Mailbox_MailOptionsProcessInput(u8 taskId)
 
 static void Mailbox_DoMailRead(u8 taskId)
 {
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
     TASK.FUNC = Mailbox_FadeAndReadMail;
 }
 
@@ -1211,7 +1211,7 @@ static void Mailbox_FadeAndReadMail(u8 taskId)
 
 static void Mailbox_HandleReturnToProcessInput(u8 taskId) // Mailbox_HandleReturnToProcessInput
 {
-    if(sub_807D770() == TRUE) // is black fade finished? why not gPaletteFade.active?
+    if (IsWeatherNotFadingIn() == TRUE) // is black fade finished? why not gPaletteFade.active?
         TASK.FUNC = Mailbox_ProcessInput;
 }
 
@@ -1280,7 +1280,7 @@ static void Mailbox_Give(u8 taskId)
         Mailbox_NoPokemonForMail(taskId); // cannot be reached normally
     else
     {
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         TASK.FUNC = Mailbox_DoGiveMailPokeMenu;
     }
 }

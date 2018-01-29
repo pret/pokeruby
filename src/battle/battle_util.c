@@ -4,6 +4,7 @@
 #include "data2.h"
 #include "event_data.h"
 #include "ewram.h"
+#include "field_weather.h"
 #include "item.h"
 #include "link.h"
 #include "pokemon.h"
@@ -85,7 +86,6 @@ u8 CountTrailingZeroBits(u32 a);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 sub_803FC34(u8 bank);
 u16 sub_803FBFC(u8 a);
-u8 weather_get_current(void);
 void RecordAbilityBattle(u8 bank, u8 ability);
 void RecordItemBattle(u8 bank, u8 holdEffect);
 s8 GetPokeFlavourRelation(u32 pid, u8 flavor);
@@ -1747,7 +1747,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             {
             case 0xFF: //weather from overworld
             //_08018586
-                switch (weather_get_current())
+                switch (GetCurrentWeather())
                 {
                 case WEATHER_RAIN_LIGHT:
                 case WEATHER_RAIN_MED:
@@ -1781,7 +1781,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 if (effect)
                 {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
+                    gBattleCommunication[MULTISTRING_CHOOSER] = GetCurrentWeather();
                     BattleScriptPushCursorAndCallback(BattleScript_OverworldWeatherStarts);
                 }
                 break;

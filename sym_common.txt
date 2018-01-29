@@ -1,240 +1,315 @@
-	.include "engine/main.o"
-	.include "engine/sprite.o"
-	.include "engine/string_util.o"
-	.include "engine/link.o"
-	.include "engine/rtc.o"
-	.include "rom3.o"
-
-@ battle
-
-	.align 2
-gBattle_BG3_X: @ 30041B0
-	.space 0x4
-
-gBattle_BG1_Y: @ 30041B4
-	.space 0x4
-
-gBattle_BG3_Y: @ 30041B8
-	.space 0x8
-
-gBattleTextBuff1: @ 30041C0
-	.space 0x10
-
-gUnknown_030041D0: @ 30041D0
-	.space 0x30
-
-gBattle_WIN1H: @ 3004200
-	.space 0x10
-
-gUnknown_03004210: @ 3004210
-	.space 0x30
-
-gBattle_WIN0V: @ 3004240
-	.space 0x4
-
-gBattle_WIN1V: @ 3004244
-	.space 0xC
-
-gUnknown_03004250: @ 3004250
-	.space 0x30
-
-gBattle_BG2_Y: @ 3004280
-	.space 0x4
-
-gUnknown_03004284: @ 3004284
-	.space 0x4
-
-gBattle_BG2_X: @ 3004288
-	.space 0x4
-
-gBattleTerrain: @ 300428C
-	.space 0x4
-
-gBattleTextBuff2: @ 3004290
-	.space 0x10
-
-gBattle_BG0_Y: @ 30042A0
-	.space 0x4
-
-gBattle_BG0_X: @ 30042A4
-	.space 0xC
-
-gBattleTextBuff3: @ 30042B0
-	.space 0x10
-
-gBattle_BG1_X: @ 30042C0
-	.space 0x4
-
-gBattle_WIN0H: @ 30042C4
-	.space 0xC
-
-gPreBattleCallback1: @ 30042D0
-	.space 0x4
-
-gBattleMainFunc: @ 30042D4
-	.space 0xC
-
-gBattleResults: @ 30042E0
-	.space 0x1C
-
-gUnknown_030042FC: @ 30042FC
-	.space 0xE
-
-gUnknown_0300430A: @ 300430A
-	.space 0xC
-
-gUnknown_03004316: @ 3004316
-	.space 0xE
-
-gLeveledUpInBattle: @ 3004324
-	.space 0xC
-
-gBattleBankFunc: @ 3004330
-	.space 0x10
-
-gHealthboxIDs: @ 3004340
-	.space 0x4
-
-gUnknown_03004344: @ 3004344
-	.space 0x4
-
-gUnknown_03004348: @ 3004348
-	.space 0x4
-
-gUnknown_0300434C: @ 300434C
-	.space 0x4
-
-	.include "pokemon/pokemon_1.o"
-	.include "engine/random.o"
-	.include "scene/egg_hatch.o"
-	.include "engine/load_save.o"
-
-@ trade
-
-gUnknown_03004824: @ 3004824
-	.space 0x4
-
-gUnknown_03004828: @ 3004828
-	.space 0x8
-
-	.include "scene/berry_blender.o"
-	.include "field/overworld.o"
-	.include "field/fieldmap.o"
-	.include "field/field_camera.o"
-	.include "field/evobjmv.o"
-	.include "field/field_control_avatar.o"
-
-@ party_menu?
-
-	.align 2
-gPokemonItemUseCallback: @ 3004AE4
-	.space 0x4
-
-	.include "field/start_menu.o"
-	.include "engine/sound.o"
-	.include "battle/battle_anim.o"
-	.include "engine/task.o"
-	.include "debug/mori_debug_menu.o"
-
-@ unknown_task
-	.include "scanline_effect.o"
-	.include "pokemon/pokemon_menu.o"
-	.include "pokemon/pokedex.o"
-
-@ pokemon_summary_screen
-
-	.align 4
-gUnknown_03005CF0: @ 3005CF0
-	.space 0x10
-
-@ item_menu
-
-	.align 4
-gFieldItemUseCallback: @ 3005D00
-	.space 0x10
-
-gBagPocketScrollStates: @ 3005D10
-	.space 0x14
-
-gCurrentBagPocketItemSlots: @ 3005D24
-	.space 0x4
-
-@ contest
-
-	.align 2
-gUnknown_03005D28: @ 3005D28
-	.space 0x4
-
-	.include "engine/record_mixing.o"
-	.include "debug/sound_check_menu.o"
-	.include "field/tv.o"
-
-	.space 0x64 @ unused variable?
-
-@ mauville_old_man
-
-	.align 4
-gUnknown_03005DA0: @ 3005DA0
-	.space 0x48
-
-@ cute_sketch
-
-gUnknown_03005DE8: @ 3005DE8
-	.space 0x4
-
-gUnknown_03005DEC: @ 3005DEC
-	.space 0x4
-
-gUnknown_03005DF0: @ 3005DF0
-	.space 0x4
-
-gUnknown_03005DF4: @ 3005DF4
-	.space 0x4
-
-gUnknown_03005DF8: @ 3005DF8
-	.space 0x4
-
-gUnknown_03005DFC: @ 3005DFC
-	.space 0x4
-
-gUnknown_03005E00: @ 3005E00
-	.space 0x4
-
-gUnknown_03005E04: @ 3005E04
-	.space 0x4
-
-gUnknown_03005E08: @ 3005E08
-	.space 0x4
-
-gUnknown_03005E0C: @ 3005E0C
-	.space 0x4
-
-	.include "scene/contest_painting.o"
-	.include "scene/evolution_scene.o"
-
-@ pokedex_cry_screen
-
-gUnknown_03005E98: @ 3005E98
-	.space 0x4
-
-	.include "engine/save.o"
-
-	.space 0x10 @ unused variable?
-
-	.include "scene/intro.o"
-
-@ battle_anim_813F0F4
-
-	.align 2
-gUnknown_03005F0C: @ 3005F0C
-	.space 0x4
-
-gUnknown_03005F10: @ 3005F10
-	.space 0x4
-
-gUnknown_03005F14: @ 3005F14
-	.space 0xC
-
-	.include "pokemon/pokeblock_feed.o"
-	.include "libs/m4a_2.o"
-	.include "libs/agb_flash.o"
+#define SYMBOL(name, size)                   \
+    . = ALIGN (((size) > 16) ? 16 : (size)); \
+    . = ALIGN(4);                            \
+    name = .;                                \
+    . += size;
+
+
+// main.c
+SYMBOL(gKeyRepeatStartDelay, 4)
+SYMBOL(gLinkTransferringData, 4)
+SYMBOL(gMain, 1088)
+SYMBOL(gKeyRepeatContinueDelay, 4)
+SYMBOL(gSoftResetDisabled, 4)
+SYMBOL(gIntrTable, 56)
+SYMBOL(gLinkVSyncDisabled, 4)
+SYMBOL(IntrMain_Buffer, 2048)
+SYMBOL(gPcmDmaCounter, 4)
+
+// sprite.c
+SYMBOL(gSpriteOrder, 64)
+SYMBOL(gSpriteTileAllocBitmap, 128)
+SYMBOL(gSpriteCoordOffsetX, 4)
+SYMBOL(gOamLimit, 4)
+SYMBOL(gReservedSpriteTileCount, 4)
+SYMBOL(gSpriteCopyRequestCount, 4)
+SYMBOL(gSpriteCopyRequests, 768)
+SYMBOL(gSpriteCoordOffsetY, 4)
+SYMBOL(gOamMatrices, 256)
+SYMBOL(gShouldProcessSpriteCopyRequests, 4)
+SYMBOL(gOamMatrixAllocBitmap, 4)
+SYMBOL(gReservedSpritePaletteCount, 4)
+
+// string_util.c
+SYMBOL(gUnknownStringVar, 16)
+
+// link.c
+SYMBOL(word_3002910, 8)
+SYMBOL(gLinkDebugValue1, 4)
+SYMBOL(localLinkPlayerBlock, 60)
+SYMBOL(gLinkErrorOccurred, 4)
+. += 0x4;
+SYMBOL(gLinkDebugValue2, 4)
+. += 0x4;
+#ifdef GERMAN
+SYMBOL(deUnkValue1, 4)
+SYMBOL(deUnkValue2, 4)
+#endif
+SYMBOL(gLinkPlayerPending, 4)
+SYMBOL(gLinkPlayers, 112)
+SYMBOL(gBlockReceived, 4)
+. += 0x4;
+SYMBOL(gLinkHeldKeys, 4)
+SYMBOL(gLinkTimeOutCounter, 4)
+. += 0x4;
+SYMBOL(localLinkPlayer, 28)
+SYMBOL(gRecvCmds, 64)
+SYMBOL(gLinkStatus, 4)
+SYMBOL(gLinkDummyBool, 4)
+SYMBOL(byte_3002A68, 4)
+SYMBOL(gBlockSendBuffer, 256)
+SYMBOL(u8_array_3002B70, 4)
+SYMBOL(gLinkType, 4)
+SYMBOL(u8_array_3002B78, 4)
+SYMBOL(gBlockRecvBuffer, 1024)
+SYMBOL(gSuppressLinkErrorMessage, 4)
+SYMBOL(gSavedLinkPlayerCount, 4)
+SYMBOL(gSendCmd, 16)
+SYMBOL(gSavedMultiplayerId, 4)
+SYMBOL(gReceivedRemoteLinkPlayers, 4)
+SYMBOL(gLinkTestBGInfo, 16)
+SYMBOL(gLinkCallback, 4)
+SYMBOL(gSavedLinkPlayers, 112)
+SYMBOL(gShouldAdvanceLinkState, 4)
+SYMBOL(gLinkTestBlockChecksums, 8)
+. += 0x4;
+SYMBOL(gBlockRequestType, 4)
+. += 0x8;
+SYMBOL(gLastSendQueueCount, 4)
+SYMBOL(gLink, 4032)
+SYMBOL(gLastRecvQueueCount, 4)
+SYMBOL(gLinkSavedIme, 4)
+
+// rtc.c
+SYMBOL(gLocalTime, 8)
+
+// battle
+SYMBOL(gBattleBuffersTransferData, 368)
+SYMBOL(gBattle_BG3_X, 4)
+SYMBOL(gBattle_BG1_Y, 4)
+SYMBOL(gBattle_BG3_Y, 4)
+SYMBOL(gBattleTextBuff1, 16)
+SYMBOL(gUnknown_030041D0, 48)
+SYMBOL(gBattle_WIN1H, 4)
+SYMBOL(gUnknown_03004210, 48)
+SYMBOL(gBattle_WIN0V, 4)
+SYMBOL(gBattle_WIN1V, 4)
+SYMBOL(gUnknown_03004250, 48)
+SYMBOL(gBattle_BG2_Y, 4)
+SYMBOL(gUnknown_03004284, 4)
+SYMBOL(gBattle_BG2_X, 4)
+SYMBOL(gBattleTerrain, 4)
+SYMBOL(gBattleTextBuff2, 16)
+SYMBOL(gBattle_BG0_Y, 4)
+SYMBOL(gBattle_BG0_X, 4)
+SYMBOL(gBattleTextBuff3, 16)
+SYMBOL(gBattle_BG1_X, 4)
+SYMBOL(gBattle_WIN0H, 4)
+. += 0x8;
+SYMBOL(gPreBattleCallback1, 4)
+gBattleMainFunc = .;
+. += 0xC;
+gBattleResults = .;
+. += 0x1C;
+// Why is this not aligned?
+gUnknown_030042FC = .;
+. += 0x1A;
+gUnknown_03004316 = .;
+. += 0xE;
+gLeveledUpInBattle = .;
+. += 0xC;
+SYMBOL(gBattleBankFunc, 16)
+SYMBOL(gHealthboxIDs, 4)
+SYMBOL(gUnknown_03004344, 4)
+SYMBOL(gUnknown_03004348, 4)
+SYMBOL(gUnknown_0300434C, 4)
+
+// pokemon_1.c
+SYMBOL(gPlayerPartyCount, 4)
+SYMBOL(gPlayerParty, 600)
+SYMBOL(gEnemyPartyCount, 4)
+SYMBOL(gEnemyParty, 600)
+
+// random.c
+SYMBOL(gRngValue, 4)
+
+// egg_hatch.c
+SYMBOL(gEggHatchData, 4)
+
+// load_save.c
+SYMBOL(gFlashMemoryPresent, 4)
+
+// ???
+SYMBOL(gUnknown_03004824, 4)
+SYMBOL(gUnknown_03004828, 4)
+. += 0x4;
+
+// berry_blender.c
+SYMBOL(gUnknown_03004830, 4)
+SYMBOL(gInGameOpponentsNo, 4)
+SYMBOL(gUnknown_03004840, 20)
+SYMBOL(gBerryBlenderData, 4)
+
+// overworld.c
+SYMBOL(word_3004858, 4)
+SYMBOL(gFieldCallback, 4)
+SYMBOL(gUnknown_03004860, 4)
+SYMBOL(gFieldLinkPlayerCount, 4)
+
+// fieldmap.c
+. = ALIGN(16);
+gUnknown_03004870 = .;
+. += 0xC;
+
+// field_camera.c
+SYMBOL(gUnknown_03004880, 24)
+SYMBOL(gUnknown_03004898, 4)
+SYMBOL(gUnknown_0300489C, 4)
+
+// evobjmv.c
+SYMBOL(gMapObjects, 576)
+
+// field_control_avatar.c
+SYMBOL(gSelectedMapObject, 4)
+
+// ???
+SYMBOL(gPokemonItemUseCallback, 4)
+
+// start_menu.c
+SYMBOL(gMenuCallback, 4)
+
+// sound.c
+SYMBOL(gDisableMusic, 4)
+
+// battle_anim.c
+SYMBOL(gSoundAnimFramesToWait, 4)
+SYMBOL(gBattleAnimArgs, 16)
+SYMBOL(gAnimSpriteIndexArray, 16)
+
+// task.c
+SYMBOL(gTasks, 640)
+
+// mori_debug_menu.c
+SYMBOL(gUnknown_03004DA0, 32)
+
+// scanline_effect.c
+SYMBOL(gScanlineEffect, 32)
+SYMBOL(gScanlineEffectRegBuffers, 3840)
+
+// pokemon_menu.c
+SYMBOL(gLastFieldPokeMenuOpened, 4)
+SYMBOL(gUnknown_03005CE4, 4)
+
+// pokedex.c
+SYMBOL(gUnknown_03005CE8, 4)
+SYMBOL(gUnknown_03005CEC, 4)
+
+// ???
+SYMBOL(gUnknown_03005CF0, 4)
+// huh?
+. = ALIGN(16);
+gFieldItemUseCallback = .;
+. += 0x10;
+gBagPocketScrollStates = .;
+. += 0x14;
+SYMBOL(gCurrentBagPocketItemSlots, 4)
+SYMBOL(gContestRngValue, 4)
+
+// record_mixing.c
+SYMBOL(gUnknown_03005D2C, 4)
+
+// sound_check_menu.c
+SYMBOL(gUnknown_03005D30, 4)
+SYMBOL(gSoundTestCryNum, 4)
+
+// tv.c
+SYMBOL(gUnknown_03005D38, 4)
+. += 0x64;  // huge gap?
+
+// ???
+SYMBOL(gUnknown_03005DA0, 0x48)
+SYMBOL(gUnknown_03005DE8, 4)
+SYMBOL(gUnknown_03005DEC, 4)
+SYMBOL(gUnknown_03005DF0, 4)
+SYMBOL(gUnknown_03005DF4, 4)
+SYMBOL(gUnknown_03005DF8, 4)
+SYMBOL(gUnknown_03005DFC, 4)
+SYMBOL(gUnknown_03005E00, 4)
+SYMBOL(gUnknown_03005E04, 4)
+SYMBOL(gUnknown_03005E08, 4)
+SYMBOL(gUnknown_03005E0C, 4)
+
+// contest_painting.c
+SYMBOL(gUnknown_03005E10, 4)
+SYMBOL(gUnknown_03005E20, 32)
+SYMBOL(gUnknown_03005E40, 76)
+SYMBOL(gUnknown_03005E8C, 4)
+SYMBOL(gUnknown_03005E90, 4)
+
+// evolution_scene.c
+SYMBOL(gCB2_AfterEvolution, 4)
+
+// ???
+SYMBOL(gUnknown_03005E98, 4)
+
+// save.c
+SYMBOL(gFirstSaveSector, 4)
+SYMBOL(gPrevSaveCounter, 4)
+SYMBOL(gLastKnownGoodSector, 4)
+SYMBOL(gDamagedSaveSectors, 4)
+SYMBOL(gSaveCounter, 4)
+SYMBOL(gFastSaveSection, 4)
+SYMBOL(gUnknown_03005EB4, 4)
+SYMBOL(gSaveFileStatus, 4)
+SYMBOL(gGameContinueCallback, 4)
+. += 0x10;
+
+// intro.c
+SYMBOL(gIntroFrameCounter, 4)
+SYMBOL(gMultibootProgramStruct, 44)
+
+// ???
+SYMBOL(gUnknown_03005F0C, 4)
+SYMBOL(gUnknown_03005F10, 4)
+gUnknown_03005F14 = .;
+. += 0xC;
+
+// pokeblock_feed.c
+SYMBOL(gPokeblockFeedPokeSprite, 4)
+SYMBOL(gPokeblockFeedMonSpecies, 4)
+SYMBOL(gPokeblockMonNotFlipped, 4)
+SYMBOL(gPokeblockFeedMonSpriteID, 4)
+SYMBOL(gPokeblockFeedMonNature, 4)
+SYMBOL(gUnknown_03005F34, 4)
+SYMBOL(gPokeblockFeedUnused0, 4)
+SYMBOL(gUnknown_03005F3C, 4)
+SYMBOL(gUnknown_03005F40, 4)
+SYMBOL(gPokeblockFeedPokeSpriteCopy, 68)
+SYMBOL(gUnknown_03005F94, 4)
+SYMBOL(gUnknown_03005FA0, 48)
+
+// m4a_2.c
+SYMBOL(gSoundInfo, 4016)
+SYMBOL(gPokemonCrySongs, 104)
+SYMBOL(gPokemonCryMusicPlayers, 128)
+SYMBOL(gMPlayJumpTable, 144)
+SYMBOL(gCgbChans, 256)
+SYMBOL(gPokemonCryTracks, 320)
+SYMBOL(gPokemonCrySong, 52)
+SYMBOL(gMPlay_BGM, 64)
+SYMBOL(gMPlay_SE1, 64)
+SYMBOL(gMPlay_SE2, 64)
+SYMBOL(gMPlayMemAccArea, 16)
+SYMBOL(gMPlay_SE3, 64)
+
+// agb_flash.c
+SYMBOL(gFlashTimeoutFlag, 4)
+SYMBOL(PollFlashStatus, 4)
+SYMBOL(WaitForFlashWrite, 4)
+SYMBOL(ProgramFlashSector, 4)
+SYMBOL(gFlash, 4)
+SYMBOL(ProgramFlashByte, 4)
+SYMBOL(gFlashNumRemainingBytes, 4)
+SYMBOL(EraseFlashChip, 4)
+SYMBOL(EraseFlashSector, 4)
+SYMBOL(gFlashMaxTime, 4)

@@ -8,7 +8,7 @@ extern u8 gSharedMem[];
 // regions overlap others but have different definitions. Until some
 // dupes can be determined to be the same, they will be deliberate
 // seperated.
-#define eWeatherPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
+#define eDroughtPaletteData             (*(struct WeatherPaletteData *)gSharedMem)
 #define gBattleStruct                   ((struct BattleStruct *)     (gSharedMem + 0x0))
 #define ewram0_2                        (*(struct Struct2000000 *)(gSharedMem + 0x0))
 #define namingScreenData                (*(struct NamingScreenData *)(gSharedMem + 0x0))
@@ -261,6 +261,7 @@ extern u8 gSharedMem[];
 #define eHallOfFame                     (struct HallOfFame *)(gSharedMem + 0x1E000)
 #define HALL_OF_FAME_SHEET_0            ((u8 *)(gSharedMem + 0x1E000))
 #define ewram1E000_2                    (const u8 *)(gSharedMem + 0x1E000)
+#define eContestLinkSendBuffer          gSharedMem + 0x1E000
 #define HALL_OF_FAME_SHEET_1            ((u8 *)(gSharedMem + 0x1E800))
 #define ewram_1f000                     (*(struct DecoPCPointers *)(gSharedMem + 0x1f000))
 #define ewramSavedPokeballsPocket       ((struct ItemSlot *)(gSharedMem + 0x1F000))  // saved Pokeballs pocket (for Wally battle)
