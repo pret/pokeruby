@@ -96,7 +96,7 @@ ifeq ($(COMPARE),1)
 endif
 
 clean: tidy
-	$(RM) sound/direct_sound_samples/*.bin
+	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
@@ -160,7 +160,7 @@ include override.mk
 
 #### Sound Rules ####
 
-sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif
+sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.aif
 	$(AIF2PCM) $< $@ --compress
 
 sound/%.bin: sound/%.aif
