@@ -1163,7 +1163,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->framesToWait = 0;
         break;
     case 9:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
@@ -1215,7 +1215,7 @@ static void sub_804E9F8(void)
         }
         break;
     case 13:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_0++;
             sub_8051414(&gBerryBlenderData->field_168);
@@ -1257,7 +1257,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->field_0++;
         break;
     case 20:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             sub_8007E24();
             gBerryBlenderData->field_0++;
@@ -2506,7 +2506,7 @@ static void sub_8050954(void)
     case 3:
         if (/*multiplayerID != 0*/ GetMultiplayerId() != 0)
             gBerryBlenderData->field_6F++;
-        else if (sub_8007ECC())
+        else if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_1BC = gBerryBlenderData->gameFrameTime;
             gBerryBlenderData->field_1C0 = gBerryBlenderData->max_RPM;
@@ -2646,7 +2646,7 @@ bool8 sub_8050CE8(void)
         gBerryBlenderData->framesToWait = 0;
         break;
     case 1:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_1C4++;
             gSoftResetDisabled = TRUE;
@@ -2665,7 +2665,7 @@ bool8 sub_8050CE8(void)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             if (sub_8125E6C())
                 gBerryBlenderData->field_1C4 = 5;
@@ -2752,7 +2752,7 @@ static void sub_8050E30(void)
         gBerryBlenderData->field_6F++;
         break;
     case 6:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->framesToWait = 0;
             gBerryBlenderData->field_6F++;
@@ -2771,7 +2771,7 @@ static void sub_8050E30(void)
         sub_80084A4();
         break;
     case 9:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gBerryBlenderData->field_6F++;

@@ -218,7 +218,7 @@ gBagPocketScrollStates = .;
 SYMBOL(gCurrentBagPocketItemSlots, 4)
 
 // contest.c
-SYMBOL(gUnknown_03005D28, 4)
+SYMBOL(gContestRngValue, 4)
 
 // record_mixing.c
 SYMBOL(gUnknown_03005D2C, 4)

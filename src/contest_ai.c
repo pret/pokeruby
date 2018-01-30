@@ -8,7 +8,6 @@ extern u8 AreMovesContestCombo(u16, u16);
 extern bool8 sub_80B214C(u8);
 extern bool8 Contest_IsMonsTurnDisabled(u8);
 
-extern s16 gUnknown_02038670[];
 extern u16 gSpecialVar_ContestCategory;
 
 extern u8 *gAIScriptPtr;
