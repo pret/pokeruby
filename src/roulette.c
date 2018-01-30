@@ -1,4 +1,5 @@
 #include "global.h"
+#include "random.h"
 #include "ewram.h"
 #include "field_fadetransition.h"
 #include "constants/game_stat.h"
@@ -657,9 +658,9 @@ void sub_8115B58(u8 r0)
                         gTasks[r0].data[0x1] = z;
                         PlaySE(SE_SELECT);
                         sub_8124D3C((&eRoulette->varB8), 0xFFFF);
-                        (&eRoulette->varB8)->var04[0xF].var00_7 = 0x0;
-                        (&eRoulette->varB8)->var04[0xE].var00_7 = 0x0;
-                        (&eRoulette->varB8)->var04[0xD].var00_7 = 0x0;
+                        eRoulette->varB8.var04[0xF].var00_7 = 0x0;
+                        eRoulette->varB8.var04[0xE].var00_7 = 0x0;
+                        eRoulette->varB8.var04[0xD].var00_7 = 0x0;
                         sub_8116EF8(gTasks[r0].data[0x4]);
                         for (i = 0; i < 0x4; i++)
                         {
@@ -855,7 +856,6 @@ u8 sub_8115F58(u16 r0, u16 r1)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8116100(u8 taskid)
 {
     u8 randf;
@@ -865,14 +865,14 @@ void sub_8116100(u8 taskid)
     u16 rand;
     u16 randmod;
     u16 angles[0x4]; // angles in 90 degree steps
-    u8 zero = 0x0;
+    g = 0x0;
     memcpy(angles, &gUnknown_083F8ECE, 0x8);
     rand = Random();
     randmod = rand % 0x64;
     eRoulette->var7C = gTasks[taskid].data[0x6];
-    eRoulette->var7F = zero;
-    eRoulette->var7E = zero;
-    eRoulette->var7D = zero;
+    eRoulette->var7F = g;
+    eRoulette->var7E = g;
+    eRoulette->var7D = g;
     randf = sub_8115F58(gTasks[taskid].data[0x8], rand);
     randfinal = (rand % randf) - (randf / 2);
     if (gLocalTime.hours < 0xD)
@@ -883,263 +883,22 @@ void sub_8116100(u8 taskid)
         r5 *= 2;
     else
         r5 = (1 - r5) * 2;
-    g = (&gUnknown_083F8DF4[eRoulette->var04_0])->var1A;
-    eRoulette->var80 = (g + randfinal);
+    eRoulette->var80 = g = gUnknown_083F8DF4[eRoulette->var04_0].var1A + randfinal;
     //
-    g = ((float)(u16)(g + randfinal)) / 5.0f;
+    g = S16TOPOSFLOAT(g) / 5.0f;
     eRoulette->var82 = g * 3;
     eRoulette->var84 = g;
     eRoulette->var86 = g;
     //
-    eRoulette->var88 = (float)(angles[(rand & 0x1) + r5]);
-    eRoulette->var8C = (float)((&gUnknown_083F8DF4[eRoulette->var04_0])->var18);
-    eRoulette->var90 = ((eRoulette->var8C * 0.5f) - eRoulette->var8C) / (float)(u16)(g * 3);
+    eRoulette->var88 = S16TOPOSFLOAT(angles[(rand & 0x1) + r5]);
+    eRoulette->var8C = S16TOPOSFLOAT(gUnknown_083F8DF4[eRoulette->var04_0].var18);
+    eRoulette->var90 = ((eRoulette->var8C * 0.5f) - eRoulette->var8C) / S16TOPOSFLOAT(g * 3);
     eRoulette->var94 = 68.0f;
     eRoulette->var9C = 0.0f;
-    eRoulette->var98 = -(8.0f / (float)(u16)(g * 3));
+    eRoulette->var98 = -(8.0f / S16TOPOSFLOAT(g * 3));
     eRoulette->varA0 = 36.0f;
-    gTasks[taskid].func = &sub_8116308;
+    gTasks[taskid].func = sub_8116308;
 }
-#else
-__attribute__((naked))
-void sub_8116100(u8 taskid)
-{
-asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-mov r7, r10\n\
-mov r6, r9\n\
-mov r5, r8\n\
-push {r5-r7}\n\
-sub sp, 0x8\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-mov r9, r0\n\
-movs r4, 0\n\
-ldr r1, _08116188 @ =gUnknown_083F8ECE\n\
-mov r0, sp\n\
-movs r2, 0x8\n\
-bl memcpy\n\
-bl Random\n\
-lsls r0, 16\n\
-lsrs r7, r0, 16\n\
-adds r0, r7, 0\n\
-movs r1, 0x64\n\
-bl __umodsi3\n\
-lsls r0, 16\n\
-lsrs r6, r0, 16\n\
-ldr r3, _0811618C @ =0x02019000\n\
-ldr r1, _08116190 @ =gTasks\n\
-mov r2, r9\n\
-lsls r0, r2, 2\n\
-add r0, r9\n\
-lsls r0, 3\n\
-adds r0, r1\n\
-ldrh r2, [r0, 0x14]\n\
-adds r1, r3, 0\n\
-adds r1, 0x7C\n\
-strb r2, [r1]\n\
-adds r1, 0x3\n\
-strb r4, [r1]\n\
-subs r1, 0x1\n\
-strb r4, [r1]\n\
-subs r1, 0x1\n\
-strb r4, [r1]\n\
-ldrh r0, [r0, 0x18]\n\
-adds r1, r7, 0\n\
-bl sub_8115F58\n\
-adds r4, r0, 0\n\
-lsls r4, 24\n\
-lsrs r1, r4, 24\n\
-adds r0, r7, 0\n\
-bl __modsi3\n\
-lsrs r4, 25\n\
-subs r0, r4\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r0, _08116194 @ =gLocalTime\n\
-ldrb r0, [r0, 0x2]\n\
-lsls r0, 24\n\
-asrs r0, 24\n\
-movs r5, 0x1\n\
-cmp r0, 0xC\n\
-bgt _08116180\n\
-movs r5, 0\n\
-_08116180:\n\
-cmp r6, 0x4F\n\
-bhi _08116198\n\
-lsls r0, r5, 25\n\
-b _081161A2\n\
-.align 2, 0\n\
-_08116188: .4byte gUnknown_083F8ECE\n\
-_0811618C: .4byte 0x02019000\n\
-_08116190: .4byte gTasks\n\
-_08116194: .4byte gLocalTime\n\
-_08116198:\n\
-lsls r1, r5, 24\n\
-asrs r1, 24\n\
-movs r0, 0x1\n\
-subs r0, r1\n\
-lsls r0, 25\n\
-_081161A2:\n\
-lsrs r5, r0, 24\n\
-ldr r6, _081162D8 @ =0x02019000\n\
-ldrb r0, [r6, 0x4]\n\
-lsls r0, 30\n\
-mov r10, r0\n\
-lsrs r0, 25\n\
-ldr r1, _081162DC @ =gUnknown_083F8DF4\n\
-adds r0, r1\n\
-lsls r4, 24\n\
-asrs r4, 24\n\
-ldrh r0, [r0, 0x1A]\n\
-adds r4, r0\n\
-adds r0, r6, 0\n\
-adds r0, 0x80\n\
-strh r4, [r0]\n\
-lsls r4, 16\n\
-asrs r4, 16\n\
-adds r0, r4, 0\n\
-bl __floatsisf\n\
-cmp r4, 0\n\
-bge _081161D4\n\
-ldr r1, _081162E0 @ =0x47800000\n\
-bl __addsf3\n\
-_081161D4:\n\
-ldr r1, _081162E4 @ =0x40a00000\n\
-bl __divsf3\n\
-bl __fixunssfsi\n\
-lsls r0, 16\n\
-lsrs r4, r0, 16\n\
-lsls r0, r4, 1\n\
-adds r0, r4\n\
-mov r8, r0\n\
-adds r0, r6, 0\n\
-adds r0, 0x82\n\
-mov r2, r8\n\
-strh r2, [r0]\n\
-adds r0, 0x2\n\
-strh r4, [r0]\n\
-adds r0, 0x2\n\
-strh r4, [r0]\n\
-movs r0, 0x1\n\
-ands r0, r7\n\
-lsls r1, r5, 24\n\
-asrs r1, 24\n\
-adds r0, r1\n\
-lsls r0, 1\n\
-add r0, sp\n\
-movs r1, 0\n\
-ldrsh r4, [r0, r1]\n\
-adds r0, r4, 0\n\
-bl __floatsisf\n\
-cmp r4, 0\n\
-bge _0811621A\n\
-ldr r1, _081162E0 @ =0x47800000\n\
-bl __addsf3\n\
-_0811621A:\n\
-ldr r2, _081162E8 @ =0x02019088\n\
-str r0, [r2]\n\
-adds r7, r6, 0\n\
-adds r7, 0x8C\n\
-mov r1, r10\n\
-lsrs r0, r1, 25\n\
-ldr r2, _081162DC @ =gUnknown_083F8DF4\n\
-adds r0, r2\n\
-movs r1, 0x18\n\
-ldrsh r4, [r0, r1]\n\
-adds r0, r4, 0\n\
-bl __floatsisf\n\
-adds r5, r0, 0\n\
-cmp r4, 0\n\
-bge _08116242\n\
-ldr r1, _081162E0 @ =0x47800000\n\
-bl __addsf3\n\
-adds r5, r0, 0\n\
-_08116242:\n\
-str r5, [r7]\n\
-adds r7, r6, 0\n\
-adds r7, 0x90\n\
-ldr r1, _081162EC @ =0x3f000000\n\
-adds r0, r5, 0\n\
-bl __mulsf3\n\
-adds r1, r5, 0\n\
-bl __subsf3\n\
-adds r5, r0, 0\n\
-mov r2, r8\n\
-lsls r0, r2, 16\n\
-asrs r4, r0, 16\n\
-adds r0, r4, 0\n\
-bl __floatsisf\n\
-adds r2, r0, 0\n\
-cmp r4, 0\n\
-bge _08116272\n\
-ldr r1, _081162E0 @ =0x47800000\n\
-bl __addsf3\n\
-adds r2, r0, 0\n\
-_08116272:\n\
-adds r0, r5, 0\n\
-adds r1, r2, 0\n\
-bl __divsf3\n\
-str r0, [r7]\n\
-adds r1, r6, 0\n\
-adds r1, 0x94\n\
-ldr r0, _081162F0 @ =0x42880000\n\
-str r0, [r1]\n\
-adds r1, 0x8\n\
-ldr r0, _081162F4 @ =0x00000000\n\
-str r0, [r1]\n\
-adds r5, r6, 0\n\
-adds r5, 0x98\n\
-adds r0, r4, 0\n\
-bl __floatsisf\n\
-adds r2, r0, 0\n\
-cmp r4, 0\n\
-bge _081162A2\n\
-ldr r1, _081162E0 @ =0x47800000\n\
-bl __addsf3\n\
-adds r2, r0, 0\n\
-_081162A2:\n\
-ldr r0, _081162F8 @ =0x41000000\n\
-adds r1, r2, 0\n\
-bl __divsf3\n\
-bl __negsf2\n\
-str r0, [r5]\n\
-adds r1, r6, 0\n\
-adds r1, 0xA0\n\
-ldr r0, _081162FC @ =0x42100000\n\
-str r0, [r1]\n\
-ldr r1, _08116300 @ =gTasks\n\
-mov r2, r9\n\
-lsls r0, r2, 2\n\
-add r0, r9\n\
-lsls r0, 3\n\
-adds r0, r1\n\
-ldr r1, _08116304 @ =sub_8116308\n\
-str r1, [r0]\n\
-add sp, 0x8\n\
-pop {r3-r5}\n\
-mov r8, r3\n\
-mov r9, r4\n\
-mov r10, r5\n\
-pop {r4-r7}\n\
-pop {r0}\n\
-bx r0\n\
-.align 2, 0\n\
-_081162D8: .4byte 0x02019000\n\
-_081162DC: .4byte gUnknown_083F8DF4\n\
-_081162E0: .4byte 0x47800000\n\
-_081162E4: .4byte 0x40a00000\n\
-_081162E8: .4byte 0x02019088\n\
-_081162EC: .4byte 0x3f000000\n\
-_081162F0: .4byte 0x42880000\n\
-_081162F4: .4byte 0x00000000\n\
-_081162F8: .4byte 0x41000000\n\
-_081162FC: .4byte 0x42100000\n\
-_08116300: .4byte gTasks\n\
-_08116304: .4byte sub_8116308\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_8116308(u8 taskid)
 {
@@ -1147,7 +906,7 @@ void sub_8116308(u8 taskid)
     eRoulette->var03_7 = 1;
     index = eRoulette->var3C[eRoulette->var7C];
     eRoulette->var38 = &gSprites[index];
-    (&gSprites[index])->callback = &sub_81191F4;
+    eRoulette->var38->callback = sub_81191F4;
     gTasks[taskid].data[0x6]++;
     gTasks[taskid].data[0x8]++;
     sub_81182F8(0x6 - gTasks[taskid].data[0x6]);
@@ -1333,9 +1092,9 @@ void sub_811677C(u8 taskid)
 void sub_81167F4(u8 taskid)
 {
     sub_8124D3C((&eRoulette->varB8), 0xFFFF);
-    (&eRoulette->varB8)->var04[0xF].var00_7 = 0x0;
-    (&eRoulette->varB8)->var04[0xE].var00_7 = 0x0;
-    (&eRoulette->varB8)->var04[0xD].var00_7 = 0x0;
+    eRoulette->varB8.var04[0xF].var00_7 = 0x0;
+    eRoulette->varB8.var04[0xE].var00_7 = 0x0;
+    eRoulette->varB8.var04[0xD].var00_7 = 0x0;
     gSprites[eRoulette->var3C[0x7 + gUnknown_083F8C00[gTasks[taskid].data[0xC]].var00]].invisible = TRUE;
     gTasks[taskid].func = &sub_8116880;
 }
@@ -3454,18 +3213,18 @@ void sub_8118DE4(struct Sprite *sprite)
         if (gUnknown_083F8D90[t].var04 & eRoulette->var08)
         {
             sprite->data[0x0] = 0x1;
-            sprite->data[0x2] = (&gUnknown_083F8DF4[eRoulette->var04_0])->var02;
+            sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
         }
         else
         {
             sprite->data[0x0] = gUnknown_083F8D90[t].var04 & eRoulette->var08;
             if (eRoulette->var04_0)
             {
-                sprite->data[0x2] = (&gUnknown_083F8DF4[eRoulette->var04_0])->var01;
+                sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var01;
             }
             else
             {
-                sprite->data[0x2] = (&gUnknown_083F8DF4[eRoulette->var04_0])->var02;
+                sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
                 if (z)
                 {
                     eRoulette->var8C = 1.5f;
@@ -3701,7 +3460,7 @@ void sub_8118F8C(struct Sprite *sprite)
             eRoulette->var90 = 0.0f;
             p = &gUnknown_083F8DF4[0];
             eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
-                / ((float)(s16)((&p[eRoulette->var04_0])->var04 + 0x1));
+                / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
             sprite->callback = &sub_8118DE4;
         }
@@ -3783,8 +3542,8 @@ void sub_8119224(struct Sprite *sprite)
         gSprites[eRoulette->var3C[0x37 + i]].data[0x5]          = eRoulette->var3C[0x38];
         gSprites[eRoulette->var3C[0x37 + i]].data[0x6]          = eRoulette->var3C[0x39];
         gSprites[eRoulette->var3C[0x37 + i]].data[0x2]          = t;
-        gSprites[eRoulette->var3C[0x37 + i]].data[0x3]          = (sprite->data[0x7] * (&gUnknown_083F8DF4[eRoulette->var04_0])->var01) +
-                                                                ((&gUnknown_083F8DF4[eRoulette->var04_0])->var02 + 0xFFFF);
+        gSprites[eRoulette->var3C[0x37 + i]].data[0x3]          = (sprite->data[0x7] * gUnknown_083F8DF4[eRoulette->var04_0].var01) +
+                                                                (gUnknown_083F8DF4[eRoulette->var04_0].var02 + 0xFFFF);
     }
     gSprites[eRoulette->var3C[0x38]].coordOffsetEnabled = TRUE;
     eRoulette->var38 = sprite;
@@ -3832,7 +3591,7 @@ void sub_811952C(struct Sprite *sprite)
     eRoulette->var7E   = 0xFF;
     eRoulette->var88   = sprite->data[0x3];
     eRoulette->var98   = 0.0f;
-    eRoulette->var8C   = (&gUnknown_083F8DF4[eRoulette->var04_0])->var1C; //couldn't replicate load, same as sub_8118DE4
+    eRoulette->var8C   = gUnknown_083F8DF4[eRoulette->var04_0].var1C; //couldn't replicate load, same as sub_8118DE4
     o = (eRoulette->var04_0 * 30 + 33) + (0x1 - eRoulette->var03_0) * 15;
     for (i = 0x0; i < 0x4; i++)
     {

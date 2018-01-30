@@ -22,15 +22,6 @@
 
 // Static type declarations
 
-// Credits to Made (dolphin emoji)
-#define S16TOPOSFLOAT(val)   \
-({                           \
-    s16 v = (val);           \
-    float f = (float)v;      \
-    if(v < 0) f += 65536.0f; \
-    f;                       \
-})
-
 struct CableCarEwramStruct1 {
     u8 unk_0000;
     u8 unk_0001;
