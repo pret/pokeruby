@@ -348,22 +348,20 @@ void sub_8115124(void)
         REG_BG0CNT = 0x1F08;
         DmaFill16(3, 0x0, (void *)(VRAM + 0xF9C0), 0x340);
         eRoulette->var28 = 0x0;
-    break;
     case 0x0:
+        break;
     }
 }
-#ifdef NONMATCHING
 
 void sub_8115238(void)
 {
     u8 i;
     u32 temp;
-    struct PlttData t;
-    struct PlttData *unfaded;
-    struct PlttData *faded;
     struct StructgUnknown_083F8DF4 *s0;
-    struct PlttData arr[0x3]; // the third is never used ?
-    memcpy(&arr, &gUnknown_083F8EC4, 0x6);
+    u16 arr[0x3]; // the third is never used ?
+
+    memcpy(arr, &gUnknown_083F8EC4, 0x6);
+    // u16 arr[] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)};
     memset(eRoulette, 0x0, 0x17C);
     eRoulette->var04_0 = (gSpecialVar_0x8004 & 0x1);
     if (gSpecialVar_0x8004 & 0x80)
@@ -371,25 +369,12 @@ void sub_8115238(void)
     s0 = &gUnknown_083F8DF4[0];
     eRoulette->var22   = s0[eRoulette->var04_0].var03;
     eRoulette->var23   = s0[eRoulette->var04_0].var04;
-    temp = gUnknown_083F8DF0[eRoulette->var04_0 + eRoulette->var04_7 * 2];
-    eRoulette->var19   = temp;
+    eRoulette->var19 = temp = gUnknown_083F8DF0[eRoulette->var04_0 + eRoulette->var04_7 * 2];
     eRoulette->var1A_4 = 0x1;
     if (temp == 0x1)
-    {
-        unfaded = (struct PlttData *)&gPlttBufferUnfaded[0];
-        faded = (struct PlttData *)&gPlttBufferFaded[0];
-        t = arr[0];
-    }
+        gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = arr[0];
     else
-    {
-        unfaded = (struct PlttData *)&gPlttBufferUnfaded[0];
-        faded = (struct PlttData *)&gPlttBufferFaded[0];
-        t = arr[1];
-    }
-    faded[0x51]   = t;
-    faded[0x0]    = faded[0x51];
-    unfaded[0x51] = t;
-    unfaded[0x0]  = t;
+        gPlttBufferUnfaded[0] = gPlttBufferUnfaded[0x51] = gPlttBufferFaded[0] = gPlttBufferFaded[0x51] = arr[1];
     sub_8124918((&eRoulette->varB8));
     for (i = 0; i < 0xD; i++)
         sub_812492C((&eRoulette->varB8), i, (struct UnkStruct1 *)&gUnknown_083F8E34[i * 8]);
@@ -397,178 +382,16 @@ void sub_8115238(void)
     {
         switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2))
         {
-        case SPECIES_TAILLOW:
-        eRoulette->var02 |= 0x2;
-        break;
         case SPECIES_SHROOMISH:
-        eRoulette->var02 |= 0x1;
-        break;
+            eRoulette->var02 |= 0x1;
+            break;
+        case SPECIES_TAILLOW:
+            eRoulette->var02 |= 0x2;
+            break;
         }
     }
     RtcCalcLocalTime();
 }
-#else
-__attribute__((naked))
-void sub_8115238(void)
-{
-    	asm(".syntax unified\n\
-        push {r4-r6,lr}\n\
-    	sub sp, 0x8\n\
-    	ldr r1, _081152C0 @ =gUnknown_083F8EC4\n\
-    	mov r0, sp\n\
-    	movs r2, 0x6\n\
-    	bl memcpy\n\
-    	ldr r5, _081152C4 @ =0x02019000\n\
-    	movs r2, 0xBE\n\
-    	lsls r2, 1\n\
-    	adds r0, r5, 0\n\
-    	movs r1, 0\n\
-    	bl memset\n\
-    	ldr r0, _081152C8 @ =gSpecialVar_0x8004\n\
-    	ldrh r2, [r0]\n\
-    	movs r0, 0x1\n\
-    	ands r0, r2\n\
-    	ldrb r1, [r5, 0x4]\n\
-    	movs r3, 0x4\n\
-    	negs r3, r3\n\
-    	ands r3, r1\n\
-    	orrs r3, r0\n\
-    	strb r3, [r5, 0x4]\n\
-    	movs r0, 0x80\n\
-    	ands r0, r2\n\
-    	cmp r0, 0\n\
-    	beq _08115276\n\
-    	movs r0, 0x80\n\
-    	orrs r3, r0\n\
-    	strb r3, [r5, 0x4]\n\
-    _08115276:\n\
-    	ldr r3, _081152CC @ =gUnknown_083F8DF4\n\
-    	ldrb r2, [r5, 0x4]\n\
-    	lsls r1, r2, 30\n\
-    	lsrs r0, r1, 25\n\
-    	adds r0, r3\n\
-    	ldrb r0, [r0, 0x3]\n\
-    	adds r4, r5, 0\n\
-    	adds r4, 0x22\n\
-    	strb r0, [r4]\n\
-    	lsrs r0, r1, 25\n\
-    	adds r0, r3\n\
-    	ldrb r0, [r0, 0x4]\n\
-    	adds r3, r5, 0\n\
-    	adds r3, 0x23\n\
-    	strb r0, [r3]\n\
-    	ldr r0, _081152D0 @ =gUnknown_083F8DF0\n\
-    	lsrs r1, 30\n\
-    	lsls r2, 24\n\
-    	lsrs r2, 31\n\
-    	lsls r2, 1\n\
-    	adds r1, r2\n\
-    	adds r1, r0\n\
-    	ldrb r2, [r1]\n\
-    	strb r2, [r5, 0x19]\n\
-    	ldrb r1, [r5, 0x1A]\n\
-    	movs r0, 0xF\n\
-    	ands r0, r1\n\
-    	movs r1, 0x10\n\
-    	orrs r0, r1\n\
-    	strb r0, [r5, 0x1A]\n\
-    	cmp r2, 0x1\n\
-    	bne _081152DC\n\
-    	ldr r4, _081152D4 @ =gPlttBufferUnfaded\n\
-    	ldr r3, _081152D8 @ =gPlttBufferFaded\n\
-    	mov r0, sp\n\
-    	ldrh r2, [r0]\n\
-    	b _081152E4\n\
-    	.align 2, 0\n\
-    _081152C0: .4byte gUnknown_083F8EC4\n\
-    _081152C4: .4byte 0x02019000\n\
-    _081152C8: .4byte gSpecialVar_0x8004\n\
-    _081152CC: .4byte gUnknown_083F8DF4\n\
-    _081152D0: .4byte gUnknown_083F8DF0\n\
-    _081152D4: .4byte gPlttBufferUnfaded\n\
-    _081152D8: .4byte gPlttBufferFaded\n\
-    _081152DC:\n\
-    	ldr r4, _08115348 @ =gPlttBufferUnfaded\n\
-    	ldr r3, _0811534C @ =gPlttBufferFaded\n\
-    	mov r0, sp\n\
-    	ldrh r2, [r0, 0x2]\n\
-    _081152E4:\n\
-    	adds r0, r3, 0\n\
-    	adds r0, 0xA2\n\
-    	strh r2, [r0]\n\
-    	ldr r1, _08115350 @ =0x0000ffff\n\
-    	adds r0, r1, 0\n\
-    	ands r0, r2\n\
-    	strh r0, [r3]\n\
-    	ands r0, r1\n\
-    	adds r2, r4, 0\n\
-    	adds r2, 0xA2\n\
-    	strh r0, [r2]\n\
-    	ands r0, r1\n\
-    	strh r0, [r4]\n\
-    	ldr r0, _08115354 @ =0x020190b8\n\
-    	bl sub_8124918\n\
-    	movs r4, 0\n\
-    	ldr r5, _08115358 @ =gUnknown_083F8E34\n\
-    _08115308:\n\
-    	lsls r2, r4, 3\n\
-    	adds r2, r5\n\
-    	ldr r0, _08115354 @ =0x020190b8\n\
-    	adds r1, r4, 0\n\
-    	bl sub_812492C\n\
-    	adds r0, r4, 0x1\n\
-    	lsls r0, 24\n\
-    	lsrs r4, r0, 24\n\
-    	cmp r4, 0xC\n\
-    	bls _08115308\n\
-    	movs r4, 0\n\
-    	ldr r5, _0811535C @ =0x02019000\n\
-    _08115322:\n\
-    	movs r0, 0x64\n\
-    	muls r0, r4\n\
-    	ldr r1, _08115360 @ =gPlayerParty\n\
-    	adds r0, r1\n\
-    	movs r1, 0x41\n\
-    	bl GetMonData\n\
-    	adds r1, r0, 0\n\
-    	movs r0, 0x98\n\
-    	lsls r0, 1\n\
-    	cmp r1, r0\n\
-    	beq _08115364\n\
-    	adds r0, 0x2\n\
-    	cmp r1, r0\n\
-    	bne _0811536C\n\
-    	ldrb r0, [r5, 0x2]\n\
-    	movs r1, 0x1\n\
-    	b _08115368\n\
-    	.align 2, 0\n\
-    _08115348: .4byte gPlttBufferUnfaded\n\
-    _0811534C: .4byte gPlttBufferFaded\n\
-    _08115350: .4byte 0x0000ffff\n\
-    _08115354: .4byte 0x020190b8\n\
-    _08115358: .4byte gUnknown_083F8E34\n\
-    _0811535C: .4byte 0x02019000\n\
-    _08115360: .4byte gPlayerParty\n\
-    _08115364:\n\
-    	ldrb r0, [r5, 0x2]\n\
-    	movs r1, 0x2\n\
-    _08115368:\n\
-    	orrs r0, r1\n\
-    	strb r0, [r5, 0x2]\n\
-    _0811536C:\n\
-    	adds r0, r4, 0x1\n\
-    	lsls r0, 24\n\
-    	lsrs r4, r0, 24\n\
-    	cmp r4, 0x5\n\
-    	bls _08115322\n\
-    	bl RtcCalcLocalTime\n\
-    	add sp, 0x8\n\
-    	pop {r4-r6}\n\
-    	pop {r0}\n\
-    	bx r0\n\
-        .syntax divided\n");
-}
-#endif
 
 void sub_8115384(void)
 {
