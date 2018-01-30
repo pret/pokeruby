@@ -614,6 +614,7 @@ u8 sub_8115A94(s16 *r0, u8 r1)
     s8 arr[0x4];
     s8 t;
     memcpy(&arr, gUnknown_083F8ECA, 0x4);
+    // char arr[] = {-5, 5, -1, 1};
     t = (u8)*r0;
     switch (r1)
     {
@@ -861,12 +862,12 @@ void sub_8116100(u8 taskid)
     u8 randf;
     s8 randfinal;
     s8 r5;
-    u16 g;
+    u16 g = 0;
     u16 rand;
     u16 randmod;
     u16 angles[0x4]; // angles in 90 degree steps
-    g = 0x0;
     memcpy(angles, &gUnknown_083F8ECE, 0x8);
+    // u16 angles[] = {0, 180, 90, 270};
     rand = Random();
     randmod = rand % 0x64;
     eRoulette->var7C = gTasks[taskid].data[0x6];
@@ -1258,6 +1259,8 @@ u8 sub_8116D54(u8 taskid, u8 r1)
     u32 t1[0x3];
     memcpy(t0, gUnknown_083F8ED8, 0x10);
     memcpy(t1, gUnknown_083F8EE8, 0xC);
+    // u32 t0[] = {67650, 135300, 270600, 541200};
+    // u32 t1[] = {0x3e0, 0x7c00, 0xf8000};
     if (r1 > 0xB)
     {
         return 0x0;
@@ -2021,135 +2024,32 @@ _0811737C: .4byte 0x020189a4\n\
 }
 #endif
 
-#ifdef NONMATCHING
 u8 sub_8117380(u8 r0)
 {
-    u8 var0[0x5];
-    u8 t;
-    u8 z;
-    memcpy(var0, gUnknown_083F8EF4, 0x5);
-    if (r0 > 0x13)
-        r0 = 0x0;
+    u8 var0[5];
+    memcpy(var0, gUnknown_083F8EF4, 5);
+    // u8 var0[] = {0, 3, 4, 6, 12};
+    if (r0 > 19)
+        r0 = 0;
     switch (gUnknown_083F8C00[r0].var01_0)
     {
-    case 0x3:
-        z = r0 / 0x5 - 0x1;
-        if (eRoulette->var16[z] > 0x3)
+    case 3:
+        r0 = r0 / 5 - 1;
+        if (eRoulette->var16[r0] > 3)
             return 0x0;
-        return var0[eRoulette->var16[z] + 0x1];
-    case 0x4:
-        t = r0 - 0x1;
-        if (eRoulette->var12[t] > 0x2)
-            return 0x0;
-        return var0[eRoulette->var12[t] + 0x2];
-    case 0xC:
+        return var0[eRoulette->var16[r0] + 1];
+    case 4:
+        r0--;
+        if (eRoulette->var12[r0] > 2)
+            return 0;
+        return var0[eRoulette->var12[r0] + 2];
+    case 12:
         if (eRoulette->var08 & gUnknown_083F8C00[r0].var08)
-            return 0x0;
-        return var0[0x4];
-    default:
+            return 0;
+        return var0[4];
     }
-    return 0x0;
+    return 0;
 }
-#else
-__attribute__((naked))
-u8 sub_8117380(u8 r0)
-{
-asm(".syntax unified\n\
-push {r4,lr}\n\
-sub sp, 0x8\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r1, _081173B8 @ =gUnknown_083F8EF4\n\
-mov r0, sp\n\
-movs r2, 0x5\n\
-bl memcpy\n\
-cmp r4, 0x13\n\
-bls _08117398\n\
-movs r4, 0\n\
-_08117398:\n\
-ldr r3, _081173BC @ =gUnknown_083F8C00\n\
-lsls r0, r4, 2\n\
-adds r0, r4\n\
-lsls r2, r0, 2\n\
-adds r0, r2, r3\n\
-ldrb r0, [r0, 0x1]\n\
-lsls r0, 28\n\
-lsrs r0, 28\n\
-cmp r0, 0x4\n\
-beq _081173EC\n\
-cmp r0, 0x4\n\
-bgt _081173C0\n\
-cmp r0, 0x3\n\
-beq _081173C6\n\
-b _08117428\n\
-.align 2, 0\n\
-_081173B8: .4byte gUnknown_083F8EF4\n\
-_081173BC: .4byte gUnknown_083F8C00\n\
-_081173C0:\n\
-cmp r0, 0xC\n\
-beq _0811740C\n\
-b _08117428\n\
-_081173C6:\n\
-adds r0, r4, 0\n\
-movs r1, 0x5\n\
-bl __udivsi3\n\
-subs r0, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r0, _081173E8 @ =0x02019000\n\
-adds r0, 0x16\n\
-adds r1, r4, r0\n\
-ldrb r0, [r1]\n\
-cmp r0, 0x3\n\
-bhi _08117428\n\
-ldrb r0, [r1]\n\
-adds r0, 0x1\n\
-b _08117402\n\
-.align 2, 0\n\
-_081173E8: .4byte 0x02019000\n\
-_081173EC:\n\
-subs r0, r4, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r0, _08117408 @ =0x02019000\n\
-adds r0, 0x12\n\
-adds r1, r4, r0\n\
-ldrb r0, [r1]\n\
-cmp r0, 0x2\n\
-bhi _08117428\n\
-ldrb r0, [r1]\n\
-adds r0, 0x2\n\
-_08117402:\n\
-add r0, sp\n\
-ldrb r0, [r0]\n\
-b _0811742A\n\
-.align 2, 0\n\
-_08117408: .4byte 0x02019000\n\
-_0811740C:\n\
-ldr r1, _08117424 @ =0x02019000\n\
-adds r0, r3, 0\n\
-adds r0, 0x8\n\
-adds r0, r2, r0\n\
-ldr r1, [r1, 0x8]\n\
-ldr r0, [r0]\n\
-ands r1, r0\n\
-cmp r1, 0\n\
-bne _08117428\n\
-mov r0, sp\n\
-ldrb r0, [r0, 0x4]\n\
-b _0811742A\n\
-.align 2, 0\n\
-_08117424: .4byte 0x02019000\n\
-_08117428:\n\
-movs r0, 0\n\
-_0811742A:\n\
-add sp, 0x8\n\
-pop {r4}\n\
-pop {r1}\n\
-bx r1\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_8117434(void)
 {

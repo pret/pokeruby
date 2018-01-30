@@ -103,6 +103,8 @@ gUnknown_083F8EBC:: @ 83F8EBC
 	.4byte sub_811577C
 	.4byte sub_81157AC
 
+// These objects are initialied in the functions in which they are used.
+
 	.align 1
 gUnknown_083F8EC4:: @ 83F8EC4
 	.2byte 0x2898
