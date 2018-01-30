@@ -3,6 +3,7 @@
 #include "trig.h"
 #include "battle_anim.h"
 #include "sound.h"
+#include "palette.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
@@ -26,23 +27,19 @@ void sub_80CFDFC(struct Sprite* sprite)
 void sub_80CFE2C(struct Sprite* sprite)
 {
     u16 r7;
-    u16* r1;
-    u16* r2;
+    u16 r5;
     int i;
     if (++sprite->data[1] == 2)
     {
         sprite->data[1] = 0;
-        r7 = gPlttBufferFaded[sprite->data[0] + 8];
-        r2 = &gPlttBufferFaded[0x10];
-        r1 = &gPlttBufferFaded[sprite->data[0] + 9];
-        for (i = 7; i >= 0; i--)
+        r5 = sprite->data[0];
+        r7 = gPlttBufferFaded[r5 + 8];
+        for (i = 0; i < 8; i++)
         {
-            *r2 = *r1;
-            r1++;
-            r2++;
+            gPlttBufferFaded[r5 + i + 8] = gPlttBufferFaded[r5 + i + 9];
         }
+        gPlttBufferFaded[r5 + 15] = r7;
 
-        gPlttBufferFaded[sprite->data[0] + 15] = r7;
         if (++sprite->data[2] == 0x18)
             DestroyAnimSprite(sprite);
     }
