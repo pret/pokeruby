@@ -428,10 +428,10 @@ struct BattleMove
 
 struct PokemonStorage
 {
-    /*0x00*/ u8 currentBox;
-    /*0x01*/ struct BoxPokemon boxes[14][30];
-             u8 boxNames[14][9];
-             u8 unkArray[14];
+    /*0x0000*/ u8 currentBox;
+    /*0x0004*/ struct BoxPokemon boxes[14][30];
+    /*0x8344*/ u8 boxNames[14][9];
+    /*0x83c2*/ u8 wallpaper[14];
 };
 
 struct SpindaSpot
@@ -522,7 +522,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest);
+void ExpandBoxMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
@@ -627,9 +627,8 @@ void RandomlyGivePartyPokerus(struct Pokemon *party);
 void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
+void BoxMonRestorePP(struct BoxPokemon *);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
-
-
 
 #endif // GUARD_POKEMON_H

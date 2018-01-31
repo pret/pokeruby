@@ -2,18 +2,7 @@
 #include "main.h"
 #include "palette.h"
 #include "sprite.h"
-
-struct UnkStruct
-{
-    /*0x00*/ u16 tileTag;
-    /*0x02*/ u16 paletteTag;
-    /*0x04*/ u16 unk04;
-    /*0x06*/ u16 unk06;
-    /*0x08*/ u16 unk08;
-    /*0x0A*/ u16 unk0A;
-    /*0x0C*/ s16 unk0C;
-    /*0x10*/ u32 selectedPalettes;
-};
+#include "pc_screen_effect.h"
 
 void sub_80C603C(void);
 void sub_80C6078(void);
@@ -30,7 +19,7 @@ extern const u16 gUnknownPal_083D18EC[16];
 
 extern const u8 gUnknownGfx_083D190C[128];
 
-EWRAM_DATA struct UnkStruct *gUnknown_020387EC = NULL;
+EWRAM_DATA struct PCScreenEffectStruct *gUnknown_020387EC = NULL;
 
 const struct SpriteSheet gUnknown_083D1898 = { gUnknownGfx_083D190C, sizeof(gUnknownGfx_083D190C), 0 };
 
@@ -58,7 +47,7 @@ const struct SpriteTemplate gSpriteTemplate_83D18C0 =
     sub_80C6130,
 };
 
-void sub_80C5CD4(struct UnkStruct *unkStruct)
+void sub_80C5CD4(struct PCScreenEffectStruct *unkStruct)
 {
     u16 i;
 

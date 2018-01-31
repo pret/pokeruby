@@ -43,7 +43,7 @@ void MonFaintFromPoisonOnField(u8 partyMember)
     u32 val = 0;
 
     AdjustFriendship(pkmn, 7);
-    SetMonData(pkmn, MON_DATA_STATUS, (u8*)&val);
+    SetMonData(pkmn, MON_DATA_STATUS, &val);
     GetMonData(pkmn, MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
@@ -60,38 +60,36 @@ bool32 CheckMonFaintedFromPoison(u8 partyMember)
         return FALSE;
 }
 
-//Task data
-enum
-{
-    TD_STATE,
-    TD_PARTY_MEMBER,
-};
+#define tState       data[0]
+#define tPartyMember data[1]
 
 void Task_WhiteOut(u8 taskId)
 {
-    s16 *taskData = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
-    switch (taskData[TD_STATE])
+    switch (tState)
     {
-    case 0: //Check if Pokemon have fainted due to poison
-        while (taskData[TD_PARTY_MEMBER] < 6)
+    case 0:
+        // Check if any Pokemon have fainted due to poison
+        while (tPartyMember < 6)
         {
-            if (CheckMonFaintedFromPoison(taskData[TD_PARTY_MEMBER]))
+            if (CheckMonFaintedFromPoison(tPartyMember))
             {
-                MonFaintFromPoisonOnField(taskData[TD_PARTY_MEMBER]);
+                // Show message about fainted mon
+                MonFaintFromPoisonOnField(tPartyMember);
                 ShowFieldMessage(fieldPoisonText_PokemonFainted);
-                taskData[TD_STATE]++;
+                tState++;
                 return;
             }
-            taskData[TD_PARTY_MEMBER]++;
+            tPartyMember++;
         }
-        taskData[TD_STATE] = 2;
+        tState = 2;
         break;
-    case 1: //Wait for message box to disappear
+    case 1:  // Wait for message box to disappear
         if (IsFieldMessageBoxHidden())
-            taskData[TD_STATE]--; //Check next party member
+            tState--;  // Go to previous step and check next party member
         break;
-    case 2: //Done checking Pokemon
+    case 2:  // done checking all mons
         if (AllMonsFainted())
             gSpecialVar_Result = 1;
         else
@@ -101,6 +99,9 @@ void Task_WhiteOut(u8 taskId)
         break;
     }
 }
+
+#undef tState
+#undef tPartyMember
 
 void ExecuteWhiteOut(void)
 {
@@ -115,26 +116,28 @@ s32 DoPoisonFieldEffect(void)
     u32 numFainting = 0;
     int i;
 
+    // count the number of mons that are poisoned and fainting from poison,
+    // and decrement HP of all poisoned mons
     for (i = 0; i < 6; i++)
     {
         u32 hp;
 
-        // UB: Too few arguments for function 'GetMonData'
         if (GetMonData(pkmn, MON_DATA_SANITY_BIT2) != 0
          && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
         {
+            // decrement HP of poisoned mon
             hp = GetMonData(pkmn, MON_DATA_HP);
             if (hp != 0)
                 hp--;
             if (hp == 0)
-                numFainting++; //Pokemon will now faint due to poison
+                numFainting++;
             SetMonData(pkmn, MON_DATA_HP, &hp);
             numPoisoned++;
         }
         pkmn++;
     }
     if (numFainting != 0 || numPoisoned != 0)
-        DoFieldPoisonEffect();
+        FldeffPoison_Start();
     if (numFainting != 0)
         return 2;
     if (numPoisoned != 0)
