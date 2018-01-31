@@ -1,5 +1,5 @@
-#ifndef POKERUBY_PC_SCREEN_EFFECT_H
-#define POKERUBY_PC_SCREEN_EFFECT_H
+#ifndef GUARD_PC_SCREEN_EFFECT_H
+#define GUARD_PC_SCREEN_EFFECT_H
 
 struct PCScreenEffectStruct
 {
@@ -18,4 +18,4 @@ bool8 sub_80C5DCC(void);
 void sub_80C5E38(struct PCScreenEffectStruct *unkStruct);
 bool8 sub_80C5F98(void);
 
-#endif //POKERUBY_PC_SCREEN_EFFECT_H
+#endif //GUARD_PC_SCREEN_EFFECT_H
