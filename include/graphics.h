@@ -2739,7 +2739,15 @@ extern const u16 gCableCar_Pal[];
 extern const u16 gCableCarBG_Pal[];
 extern const u8 gCableCarBG_Gfx[];
 
-// data/graphics.s
+extern const u8 gPSSMenuHeader_Gfx[];
+extern const u8 gPSSMenuHeader_Tilemap[];
+extern const u16 gPSSMenu1_Pal[];
+extern const u16 gPSSMenu2_Pal[];
+extern const u8 gPSSMenuMisc_Gfx[];
+extern const u8 gPSSMenuMisc_Tilemap[];
+extern const u16 gPSSMenu3_Pal[];
+extern const u16 gPSSMenu4_Pal[];
+
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_000;
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_001;
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_002;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/hold_effects.h"
+#include "constants/moves.h"
 #include "battle.h"
 #include "battle_util.h"
 #include "data2.h"
@@ -569,7 +570,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             u16 *moves = (u16 *)data;
             s32 i = 0;
 
-            while (moves[i] != 355)
+            while (moves[i] != NUM_MOVES)
             {
                 u16 move = moves[i];
                 if (substruct1->moves[0] == move

@@ -135,9 +135,12 @@ SECTIONS {
         src/engine/save_menu_util.o(.text);
         src/battle/battle_party_menu.o(.text);
         asm/unk_text_8095904.o(.text);
-        asm/pokemon_storage_system.o(.text);
         src/pokemon/pokemon_storage_system.o(.text);
-        asm/pokemon_storage_system.o(.text_8098A38);
+        src/pokemon/pokemon_storage_system_2.o(.text);
+        src/pokemon/pokemon_storage_system_3.o(.text);
+        src/pokemon/pokemon_storage_system_4.o(.text);
+        src/pokemon/pokemon_storage_system_5.o(.text);
+        asm/pokemon_storage_system.o(.text);
         src/pokemon/pokemon_icon.o(.text);
         src/pokemon/pokemon_summary_screen.o(.text);
         src/field/script_movement.o(.text);
@@ -305,7 +308,7 @@ SECTIONS {
         asm/flying.o(.text);
         asm/psychic.o(.text);
         src/battle/anim/bug.o(.text);
-        asm/rock.o(.text);
+        src/battle/anim/rock.o(.text);
         asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
@@ -574,6 +577,11 @@ SECTIONS {
         src/pokemon/pokedex.o(.rodata);
         src/engine/trainer_card.o(.rodata);
         src/battle/battle_party_menu.o(.rodata);
+        src/pokemon/pokemon_storage_system.o(.rodata);
+        src/pokemon/pokemon_storage_system_2.o(.rodata);
+        src/pokemon/pokemon_storage_system_3.o(.rodata);
+        src/pokemon/pokemon_storage_system_4.o(.rodata);
+        src/pokemon/pokemon_storage_system_5.o(.rodata);
         data/pokemon_storage_system.o(.rodata);
         src/pokemon/pokemon_icon.o(.rodata);
         src/pokemon/pokemon_summary_screen.o(.rodata);

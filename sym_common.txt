@@ -159,7 +159,7 @@ SYMBOL(gEggHatchData, 4)
 // load_save.c
 SYMBOL(gFlashMemoryPresent, 4)
 
-// ???
+// trade.c
 SYMBOL(gUnknown_03004824, 4)
 SYMBOL(gUnknown_03004828, 4)
 . += 0x4;
@@ -248,15 +248,20 @@ SYMBOL(gUnknown_03005CE4, 4)
 SYMBOL(gUnknown_03005CE8, 4)
 SYMBOL(gUnknown_03005CEC, 4)
 
-// ???
+// pokemon_summary_screen.o
 SYMBOL(gUnknown_03005CF0, 4)
+
 // huh?
 . = ALIGN(16);
+
+// item_menu.c
 gFieldItemUseCallback = .;
 . += 0x10;
 gBagPocketScrollStates = .;
 . += 0x14;
 SYMBOL(gCurrentBagPocketItemSlots, 4)
+
+// contest.c
 SYMBOL(gContestRngValue, 4)
 
 #if DEBUG
@@ -284,8 +289,10 @@ SYMBOL(gUnknown_03005D38, 4)
 . += 0x64;  // huge gap?
 #endif
 
-// ???
+// mauville_man.c
 SYMBOL(gUnknown_03005DA0, 0x48)
+
+// cute_sketch.c
 SYMBOL(gUnknown_03005DE8, 4)
 SYMBOL(gUnknown_03005DEC, 4)
 SYMBOL(gUnknown_03005DF0, 4)
@@ -312,7 +319,7 @@ gUnknown_Debug_03005FB8 = .;
 . += 0x4;
 #endif
 
-// ???
+// pokedex_cry_screen.c
 SYMBOL(gUnknown_03005E98, 4)
 
 // save.c
@@ -335,7 +342,7 @@ SYMBOL(gGameContinueCallback, 4)
 SYMBOL(gIntroFrameCounter, 4)
 SYMBOL(gMultibootProgramStruct, 44)
 
-// ???
+// battle_anim_813F0F4.c
 SYMBOL(gUnknown_03005F0C, 4)
 SYMBOL(gUnknown_03005F10, 4)
 gUnknown_03005F14 = .;
