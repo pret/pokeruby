@@ -1376,30 +1376,9 @@ void debug_sub_80125A0(void);
 u32 debug_sub_8013294(u8, void *, u32);
 void debug_sub_80132C8(u8, void *, u32);
 
-struct UnknownStruct2023A76
-{
-	u16 unk0;
-	u16 unk2[(0x44-2)/2];
-	s16 unk44;
-	u16 unk46;
-	u16 unk48[1];
-};
-
-struct UnknownStruct2023B02
-{
-	u16 unk0[4][4];
-	u8 filler20[0x10];
-	u16 unk30[4][4];
-};
-
-struct UnknownStruct821F424
-{
-	u8 filler0[0x12];
-	u16 unk12[1][5];  // unknown length
-};
-
-extern struct UnknownStruct2023A76 gUnknown_Debug_2023A76;
-extern struct UnknownStruct2023B02 gUnknown_Debug_2023B02;
+extern s16 gUnknown_Debug_2023A76[][0x23];
+extern s16 gUnknown_Debug_2023A76_[][7][5];
+extern s16 gUnknown_Debug_2023B02[][6][4];
 extern u8 gUnknown_Debug_03004360;
 extern struct Window gUnknown_Debug_03004370;
 extern u8 gUnknown_Debug_030043A0;
@@ -1407,7 +1386,7 @@ extern u8 gUnknown_Debug_030043A4;
 extern u8 gUnknown_Debug_030043A8;
 extern u8 gBattleBuffersTransferData[];
 
-extern const struct UnknownStruct821F424 gUnknown_Debug_821F424;
+extern const s16 gUnknown_Debug_821F424[][5];
 extern const u16 gUnknown_Debug_821F56C[][5];
 
 extern const u8 gUnusedOldCharmap_Gfx_lz[];
@@ -1421,25 +1400,24 @@ void debug_sub_8010800(void)
     *(u32 *)(gBattleBuffersTransferData + 0x100) = 0;
 }
 
-
 void debug_sub_8010818(void)
 {
 	s32 i;
 
-	gUnknown_Debug_2023A76.unk0 = 0x115;
-	gUnknown_Debug_2023A76.unk46 = 0x115;
-	for (i = 0; i < 30; i++)
+	gUnknown_Debug_2023A76[0][0] = 0x115;
+	gUnknown_Debug_2023A76[1][0] = 0x115;
+	for (i = 1; i < 31; i++)
 	{
-		gUnknown_Debug_2023A76.unk2[i] = gUnknown_Debug_821F424.unk12[i][0];
-		gUnknown_Debug_2023A76.unk48[i] = gUnknown_Debug_821F424.unk12[i][0];
+		gUnknown_Debug_2023A76[0][i] = gUnknown_Debug_821F424[i][4];
+		gUnknown_Debug_2023A76[1][i] = gUnknown_Debug_821F424[i][4];
 	}
 
 	for (i = 0; i < 6; i++)
 	{
 		for (gUnknown_Debug_030043A8 = 0; gUnknown_Debug_030043A8 < 4; gUnknown_Debug_030043A8++)
 		{
-			gUnknown_Debug_2023B02.unk0[i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
-			gUnknown_Debug_2023B02.unk30[i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
+			gUnknown_Debug_2023B02[0][i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
+			gUnknown_Debug_2023B02[1][i][gUnknown_Debug_030043A8] = gUnknown_Debug_821F56C[gUnknown_Debug_030043A8][0];
 		}
 	}
 }
@@ -1490,7 +1468,7 @@ void debug_sub_80108B8(void)
 	debug_nullsub_3();
 	gUnknown_Debug_030043A8 = 0;
 	debug_sub_80125A0();
-	if (gUnknown_Debug_2023A76.unk44 == 8)
+	if (gUnknown_Debug_2023A76[0][0x22] == 8)
 	{
 		debug_sub_801174C();
 	}
@@ -1510,289 +1488,91 @@ void debug_sub_8010A7C(u8 a, u8 b)
     gBattleTextBuff1[i] = EOS;
 }
 
-__attribute__((naked))
-void debug_sub_8010AAC()
+// gUnknown_Debug_2023A76_ seems like a 3D array, but this function refuses to match when I do that.
+#ifdef NONMATCHING
+void debug_sub_8010AAC(u8 a)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	ip, r0\n"
-        "	ldr	r6, ._520       @ gBaseStats\n"
-        "	ldr	r4, ._520 + 4   @ gUnknown_Debug_2023A76\n"
-        "	ldr	r5, ._520 + 8   @ gUnknown_Debug_030043A4\n"
-        "	ldrb	r1, [r5]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r7, r0, r1\n"
-        "	lsl	r1, r7, #0x1\n"
-        "	ldr	r3, ._520 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r3]\n"
-        "	mov	r0, #0x46\n"
-        "	mul	r2, r2, r0\n"
-        "	add	r1, r1, r2\n"
-        "	add	r1, r1, r4\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r1, [r1, r0]\n"
-        "	lsl	r0, r1, #0x3\n"
-        "	sub	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r6\n"
-        "	ldrb	r0, [r0, #0x10]\n"
-        "	add	r6, r3, #0\n"
-        "	cmp	r0, #0xfe\n"
-        "	beq	._516	@cond_branch\n"
-        "	cmp	r0, #0xfe\n"
-        "	bgt	._517	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._518	@cond_branch\n"
-        "	b	._523\n"
-        "._521:\n"
-        "	.align	2, 0\n"
-        "._520:\n"
-        "	.word	gBaseStats\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "._517:\n"
-        "	cmp	r0, #0xff\n"
-        "	beq	._522	@cond_branch\n"
-        "	b	._523\n"
-        "._518:\n"
-        "	add	r0, r7, #4\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r0, r2\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x2\n"
-        "	b	._528\n"
-        "._516:\n"
-        "	add	r0, r7, #4\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r0, r2\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x3\n"
-        "	b	._528\n"
-        "._522:\n"
-        "	add	r0, r7, #4\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r0, r2\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x4\n"
-        "	b	._528\n"
-        "._523:\n"
-        "	ldrb	r0, [r5]\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, #0x4\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	ldrb	r0, [r6]\n"
-        "	mov	r3, #0x46\n"
-        "	mul	r0, r0, r3\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r4\n"
-        "	ldrh	r2, [r1]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r2\n"
-        "	strh	r0, [r1]\n"
-        "	mov	r1, ip\n"
-        "	cmp	r1, #0\n"
-        "	beq	._527	@cond_branch\n"
-        "	ldrb	r1, [r5]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, #0x4\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	ldrb	r1, [r6]\n"
-        "	mul	r1, r1, r3\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, r4\n"
-        "	ldrh	r1, [r0]\n"
-        "	mov	r2, #0x1\n"
-        "	eor	r1, r1, r2\n"
-        "	b	._528\n"
-        "._527:\n"
-        "	ldrb	r1, [r5]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, #0x4\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	ldrb	r1, [r6]\n"
-        "	mul	r1, r1, r3\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, ip\n"
-        "._528:\n"
-        "	strh	r1, [r0]\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+	switch (gBaseStats[gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][0]].genderRatio)
+	{
+	case 0:
+		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 2;
+		break;
+	case 0xFE:
+		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 3;
+		break;
+	case 0xFF:
+		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 4;
+		break;
+	default:
+		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] &= 1;
+		if (a != 0)
+			gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] ^= 1;
+		else
+			gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 0;
+		break;
+	}
 }
-
-__attribute__((naked))
-void debug_sub_8010B80()
+#else
+void debug_sub_8010AAC(u8 a)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r9\n"
-        "	mov	r6, r8\n"
-        "	push	{r6, r7}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r6, r0, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	mov	ip, r0\n"
-        "	ldr	r4, ._534       @ gUnknown_Debug_2023A76\n"
-        "	ldr	r1, ._534 + 4   @ gUnknown_Debug_030043A0\n"
-        "	mov	r8, r1\n"
-        "	ldr	r5, ._534 + 8   @ gUnknown_Debug_030043A4\n"
-        "	ldrb	r1, [r5]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r2, r8\n"
-        "	ldrb	r2, [r2]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	ldr	r3, ._534 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r3]\n"
-        "	mov	r1, #0x46\n"
-        "	mul	r1, r1, r2\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, r4\n"
-        "	ldrb	r7, [r0]\n"
-        "	lsl	r1, r7, #0x18\n"
-        "	asr	r0, r1, #0x18\n"
-        "	mov	r9, r4\n"
-        "	add	r2, r5, #0\n"
-        "	add	r4, r3, #0\n"
-        "	cmp	r0, #0x9\n"
-        "	ble	._529	@cond_branch\n"
-        "._530:\n"
-        "	mov	r3, #0xf6\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	add	r0, r1, r3\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	mov	r3, #0x80\n"
-        "	lsl	r3, r3, #0x11\n"
-        "	add	r0, r0, r3\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	ip, r0\n"
-        "	lsl	r1, r7, #0x18\n"
-        "	asr	r0, r1, #0x18\n"
-        "	cmp	r0, #0x9\n"
-        "	bgt	._530	@cond_branch\n"
-        "._529:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r6\n"
-        "	cmp	r0, #0\n"
-        "	beq	._531	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r6\n"
-        "	cmp	r0, #0\n"
-        "	beq	._532	@cond_branch\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	mov	r3, #0x80\n"
-        "	lsl	r3, r3, #0x11\n"
-        "	b	._533\n"
-        "._535:\n"
-        "	.align	2, 0\n"
-        "._534:\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_030043A0\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "._532:\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	mov	r3, #0xff\n"
-        "	lsl	r3, r3, #0x18\n"
-        "._533:\n"
-        "	add	r0, r0, r3\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	ip, r0\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bge	._536	@cond_branch\n"
-        "	mov	r3, #0x9\n"
-        "	mov	ip, r3\n"
-        "._536:\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	asr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x9\n"
-        "	ble	._542	@cond_branch\n"
-        "	mov	r3, #0x0\n"
-        "	mov	ip, r3\n"
-        "	b	._542\n"
-        "._531:\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r6\n"
-        "	cmp	r0, #0\n"
-        "	beq	._539	@cond_branch\n"
-        "	lsl	r0, r7, #0x18\n"
-        "	mov	r1, #0x80\n"
-        "	lsl	r1, r1, #0x11\n"
-        "	add	r0, r0, r1\n"
-        "	b	._540\n"
-        "._539:\n"
-        "	lsl	r0, r7, #0x18\n"
-        "	mov	r3, #0xff\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	add	r0, r0, r3\n"
-        "._540:\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	lsl	r0, r7, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bgt	._541	@cond_branch\n"
-        "	mov	r7, #0x9\n"
-        "._541:\n"
-        "	lsl	r0, r7, #0x18\n"
-        "	asr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x9\n"
-        "	ble	._542	@cond_branch\n"
-        "	mov	r7, #0x1\n"
-        "._542:\n"
-        "	ldrb	r0, [r2]\n"
-        "	lsl	r2, r0, #0x2\n"
-        "	add	r2, r2, r0\n"
-        "	mov	r0, r8\n"
-        "	ldrb	r0, [r0]\n"
-        "	add	r2, r2, r0\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	ldrb	r1, [r4]\n"
-        "	mov	r0, #0x1\n"
-        "	eor	r0, r0, r1\n"
-        "	mov	r1, #0x46\n"
-        "	add	r3, r0, #0\n"
-        "	mul	r3, r3, r1\n"
-        "	add	r3, r2, r3\n"
-        "	add r3, r3, r9\n"
-        "	ldrb	r0, [r4]\n"
-        "	mul	r0, r0, r1\n"
-        "	add	r2, r2, r0\n"
-        "	add r2, r2, r9\n"
-        "	mov	r1, ip\n"
-        "	lsl	r0, r1, #0x18\n"
-        "	asr	r0, r0, #0x18\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	lsl	r0, r7, #0x18\n"
-        "	asr	r0, r0, #0x18\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r0, [r2]\n"
-        "	strh	r0, [r3]\n"
-        "	pop	{r3, r4}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+	switch (gBaseStats[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5]].genderRatio)
+	{
+	case 0:
+		gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] = 2;
+		break;
+	case 0xFE:
+		gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] = 3;
+		break;
+	case 0xFF:
+		gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] = 4;
+		break;
+	default:
+		gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] &= 1;
+		if (a != 0)
+			gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] ^= 1;
+		else
+			gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + 4] = 0;
+		break;
+	}
+}
+#endif
+
+void debug_sub_8010B80(u8 a)
+{
+	s8 r12 = 0;
+	s8 r7 = gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0];
+	
+	while (r7 >= 10)
+	{
+		r7 -= 10;
+		r12++;
+	}
+	
+	if (a & 2)
+	{
+		if (a & 1)
+			r12++;
+		else
+			r12--;
+		if (r12 < 0)
+			r12 = 9;
+		if (r12 > 9)
+			r12 = 0;
+	}
+	else
+	{
+		if (a & 1)
+			r7++;
+		else
+			r7--;
+		if (r7 < 1)
+			r7 = 9;
+		if (r7 > 9)
+			r7 = 1;
+	}
+	gUnknown_Debug_2023A76_[gUnknown_Debug_03004360 ^ 1][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0]
+	= gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0]
+	= r12 * 10 + r7;
 }
 
 __attribute__((naked))
@@ -5119,39 +4899,17 @@ void debug_sub_8012688()
     );
 }
 
-__attribute__((naked))
-void debug_sub_8012878()
+void debug_sub_8012878(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	AnimateSprites\n"
-        "	bl	BuildOamBuffer\n"
-        "	ldr	r0, ._876       @ gUnknown_03004210\n"
-        "	bl	Text_UpdateWindowInBattle\n"
-        "	bl	UpdatePaletteFade\n"
-        "	bl	RunTasks\n"
-        "	ldr	r0, ._876 + 4   @ gMain\n"
-        "	ldrh	r1, [r0, #0x2c]\n"
-        "	mov	r0, #0x82\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	cmp	r1, r0\n"
-        "	bne	._875	@cond_branch\n"
-        "	ldr	r0, ._876 + 8   @ debug_sub_80108B8\n"
-        "	bl	SetMainCallback2\n"
-        "._875:\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._877:\n"
-        "	.align	2, 0\n"
-        "._876:\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	gMain\n"
-        "	.word	debug_sub_80108B8+1\n"
-        "\n"
-    );
+	AnimateSprites();
+	BuildOamBuffer();
+	Text_UpdateWindowInBattle(&gUnknown_03004210);
+	UpdatePaletteFade();
+	RunTasks();
+	if (gMain.heldKeys == (SELECT_BUTTON | R_BUTTON))
+		SetMainCallback2(debug_sub_80108B8);
 }
 
-/*
 void debug_sub_80128B4(void)
 {
     debug_sub_8010A7C(0, 9);
@@ -5163,73 +4921,6 @@ void debug_sub_80128B4(void)
     StringAppend(gBattleTextBuff1, gSpeciesNames[gCurrentMove]);
     Text_InitWindow(&gUnknown_03004210, gBattleTextBuff1, 144, 2, 35);
     Text_PrintWindow8002F44(&gUnknown_03004210);
-}
-*/
-
-__attribute__((naked))
-void debug_sub_80128B4()
-{
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	mov	r6, r8\n"
-        "	push	{r6}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x9\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r5, ._878       @ gUnknown_03004210\n"
-        "	ldr	r4, ._878 + 4   @ gBattleTextBuff1\n"
-        "	mov	r0, #0x23\n"
-        "	mov	r8, r0\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r4, #0\n"
-        "	mov	r2, #0x90\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r6, ._878 + 8   @ gCurrentMove\n"
-        "	ldrh	r1, [r6]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r4, #0x3]\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r4, #0x4]\n"
-        "	ldrh	r1, [r6]\n"
-        "	mov	r0, #0xb\n"
-        "	mul	r1, r1, r0\n"
-        "	ldr	r0, ._878 + 12  @ gSpeciesNames\n"
-        "	add	r1, r1, r0\n"
-        "	add	r0, r4, #0\n"
-        "	bl	StringAppend\n"
-        "	mov	r0, r8\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r4, #0\n"
-        "	mov	r2, #0x90\n"
-        "	mov	r3, #0x2\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._879:\n"
-        "	.align	2, 0\n"
-        "._878:\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gCurrentMove\n"
-        "	.word	gSpeciesNames\n"
-        "\n"
-    );
 }
 
 void debug_sub_8012938(u8 taskId)

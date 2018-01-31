@@ -41,6 +41,7 @@ gUnknown_02023A14_50 = .;
     . += 0x2;
 
 gUnknown_Debug_2023A76 = .;
+gUnknown_Debug_2023A76_ = .;
 	. += 0x4;
 
 gUnknown_Debug_2023A7A = .;
