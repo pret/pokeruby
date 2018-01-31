@@ -295,7 +295,7 @@ SECTIONS {
         asm/flying.o(.text);
         asm/psychic.o(.text);
         src/battle/anim/bug.o(.text);
-        asm/rock.o(.text);
+        src/battle/anim/rock.o(.text);
         asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
