@@ -145,6 +145,8 @@ gUnknown_083F8EE8:: @ 83F8EE8
 gUnknown_083F8EF4:: @ 83F8EF4
 	.byte 0, 3, 4, 6, 12
 
+// This might indicate a file boundary
+
 .ifdef ENGLISH
 	.align 2
 RouletteSpritePalette_01:

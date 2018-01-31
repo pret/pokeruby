@@ -1855,132 +1855,32 @@ void sub_81180F4(u16 r0)
     }
 }
 
-#ifdef NONMATCHING
 u8 sub_81181E8(u8 r0)
 {
-    u8 t[0x5];
-    memcpy(&t, &gUnknown_083FA608, 0x5);
-    if (r0 > 0x13)
-        r0 = 0x0;
+    u8 t[5];
+    memcpy(t, gUnknown_083FA608, sizeof t);
+    // u8 t = {0, 1, 2, 3, 4};
+    if (r0 >= 20)
+        r0 = 0;
     switch(gUnknown_083F8C00[r0].var01_0)
     {
     case 0x3:
-        r0 = r0 / 0x5 - 0x1;
-        if ((u32)eRoulette->var16[r0] < 0x4)
-            return t[0x1 + eRoulette->var16[r0]]; // couldn't recreate redundant loads
+        r0 = r0 / 5 - 1;
+        if (eRoulette->var16[r0] < 4)
+            return t[((vu8 *)eRoulette->var16)[r0] + 1]; // couldn't recreate redundant loads
         break;
     case 0x4:
-        r0 = r0 - 0x1;
-        if (eRoulette->var12[r0] < 0x3)
-            return t[0x2 + eRoulette->var12[r0]];
+        r0--;
+        if (eRoulette->var12[r0] < 3)
+            return t[((vu8 *)eRoulette->var12)[r0] + 2];
         break;
     case 0xC:
         if (!(eRoulette->var08 & gUnknown_083F8C00[r0].var08))
-            return t[0x4];
+            return t[4];
         break;
     }
-    return 0x0;
+    return 0;
 }
-#else
-__attribute__((naked))
-u8 sub_81181E8(u8 r0)
-{
-asm(".syntax unified\n\
-push {r4,lr}\n\
-sub sp, 0x8\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r1, _08118220 @ =gUnknown_083FA608\n\
-mov r0, sp\n\
-movs r2, 0x5\n\
-bl memcpy\n\
-cmp r4, 0x13\n\
-bls _08118200\n\
-movs r4, 0\n\
-_08118200:\n\
-ldr r3, _08118224 @ =gUnknown_083F8C00\n\
-lsls r0, r4, 2\n\
-adds r0, r4\n\
-lsls r2, r0, 2\n\
-adds r0, r2, r3\n\
-ldrb r0, [r0, 0x1]\n\
-lsls r0, 28\n\
-lsrs r0, 28\n\
-cmp r0, 0x4\n\
-beq _08118254\n\
-cmp r0, 0x4\n\
-bgt _08118228\n\
-cmp r0, 0x3\n\
-beq _0811822E\n\
-b _08118290\n\
-.align 2, 0\n\
-_08118220: .4byte gUnknown_083FA608\n\
-_08118224: .4byte gUnknown_083F8C00\n\
-_08118228:\n\
-cmp r0, 0xC\n\
-beq _08118274\n\
-b _08118290\n\
-_0811822E:\n\
-adds r0, r4, 0\n\
-movs r1, 0x5\n\
-bl __udivsi3\n\
-subs r0, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r0, _08118250 @ =0x02019000\n\
-adds r0, 0x16\n\
-adds r1, r4, r0\n\
-ldrb r0, [r1]\n\
-cmp r0, 0x3\n\
-bhi _08118290\n\
-ldrb r0, [r1]\n\
-adds r0, 0x1\n\
-b _0811826A\n\
-.align 2, 0\n\
-_08118250: .4byte 0x02019000\n\
-_08118254:\n\
-subs r0, r4, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-ldr r0, _08118270 @ =0x02019000\n\
-adds r0, 0x12\n\
-adds r1, r4, r0\n\
-ldrb r0, [r1]\n\
-cmp r0, 0x2\n\
-bhi _08118290\n\
-ldrb r0, [r1]\n\
-adds r0, 0x2\n\
-_0811826A:\n\
-add r0, sp\n\
-ldrb r0, [r0]\n\
-b _08118292\n\
-.align 2, 0\n\
-_08118270: .4byte 0x02019000\n\
-_08118274:\n\
-ldr r1, _0811828C @ =0x02019000\n\
-adds r0, r3, 0\n\
-adds r0, 0x8\n\
-adds r0, r2, r0\n\
-ldr r1, [r1, 0x8]\n\
-ldr r0, [r0]\n\
-ands r1, r0\n\
-cmp r1, 0\n\
-bne _08118290\n\
-mov r0, sp\n\
-ldrb r0, [r0, 0x4]\n\
-b _08118292\n\
-.align 2, 0\n\
-_0811828C: .4byte 0x02019000\n\
-_08118290:\n\
-movs r0, 0\n\
-_08118292:\n\
-add sp, 0x8\n\
-pop {r4}\n\
-pop {r1}\n\
-bx r1\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_811829C(u8 r0)
 {
