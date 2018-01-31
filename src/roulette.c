@@ -1392,19 +1392,18 @@ void sub_8116EF8(u8 r0)
     }
 }
 
-#ifdef NONMATCHING //not enough stack usage
 void sub_8117158(u8 r0)
 {
-    u8 i;
-    u8 l;
+    vu8 i;
+    vu8 z;
+    vu16 var1;
+    vu16 var2;
+    vu8 var0;
     u8 v[0x5];
-    u8 z;
-    u8 var0;
-    u8 var1;
-    u16 var2;
+    u8 l;
     eRoulette->var2A = 0x1;
     sub_8117AA8(0x0, 0x0);
-    sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18800, 0xE, 0x7, 0x10, 0xD);
+    sub_8124E2C(gBGTilemapBuffers[1], (u16 *)ewram18800, 0xE, 0x7, 0x10, 0xD);
     switch(r0)
     {
     case 0x0:
@@ -1427,291 +1426,17 @@ void sub_8117158(u8 r0)
     }
     for (i = 0x0; i < l; i++)
     {
-        //_0811727C
         var0 = gUnknown_083F8C00[v[i]].var06;
         var1 = gUnknown_083F8C00[v[i]].var03;
         for (z = 0; z < 0x3; z++)
         {
             var2 = (gUnknown_083F8C00[v[i]].var04 + z) * 0x20;
-            gBGTilemapBuffers[2][var2 + var1 + 0x0] = ewram189a0[(var0 + z) * 0x3 + 0x0];
-            gBGTilemapBuffers[2][var2 + var1 + 0x1] = ewram189a0[(var0 + z) * 0x3 + 0x1];
-            gBGTilemapBuffers[2][var2 + var1 + 0x2] = ewram189a0[(var0 + z) * 0x3 + 0x2];
+            gBGTilemapBuffers[1][var1 + var2 + 0x0] = ewram189a0[(var0 + z) * 0x3 + 0x0];
+            gBGTilemapBuffers[1][var1 + var2 + 0x1] = ewram189a0[(var0 + z) * 0x3 + 0x1];
+            gBGTilemapBuffers[1][var1 + var2 + 0x2] = ewram189a0[(var0 + z) * 0x3 + 0x2];
         }
-        //_08117350
     }
 }
-#else
-__attribute__((naked))
-void sub_8117158(u8 r0)
-{
-asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-mov r7, r10\n\
-mov r6, r9\n\
-mov r5, r8\n\
-push {r5-r7}\n\
-sub sp, 0x24\n\
-lsls r0, 24\n\
-lsrs r5, r0, 24\n\
-ldr r4, _0811719C @ =0x02019000\n\
-movs r0, 0x1\n\
-strh r0, [r4, 0x2A]\n\
-movs r0, 0\n\
-movs r1, 0\n\
-bl sub_8117AA8\n\
-ldr r0, _081171A0 @ =gBGTilemapBuffers + 0x800\n\
-ldr r1, _081171A4 @ =0xfffff800\n\
-adds r4, r1\n\
-movs r1, 0x10\n\
-str r1, [sp]\n\
-movs r1, 0xD\n\
-str r1, [sp, 0x4]\n\
-adds r1, r4, 0\n\
-movs r2, 0xE\n\
-movs r3, 0x7\n\
-bl sub_8124E2C\n\
-cmp r5, 0xF\n\
-bhi _08117250\n\
-lsls r0, r5, 2\n\
-ldr r1, _081171A8 @ =_081171AC\n\
-adds r0, r1\n\
-ldr r0, [r0]\n\
-mov pc, r0\n\
-.align 2, 0\n\
-_0811719C: .4byte 0x02019000\n\
-_081171A0: .4byte gBGTilemapBuffers + 0x800\n\
-_081171A4: .4byte 0xfffff800\n\
-_081171A8: .4byte _081171AC\n\
-.align 2, 0\n\
-_081171AC:\n\
-.4byte _08117360\n\
-.4byte _081171EC\n\
-.4byte _081171EC\n\
-.4byte _081171EC\n\
-.4byte _081171EC\n\
-.4byte _08117220\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117220\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117250\n\
-.4byte _08117220\n\
-_081171EC:\n\
-movs r0, 0x4\n\
-str r0, [sp, 0x18]\n\
-add r1, sp, 0x8\n\
-movs r0, 0\n\
-strb r0, [r1]\n\
-adds r0, r1, 0\n\
-ldrb r0, [r0]\n\
-cmp r0, 0x3\n\
-bhi _08117258\n\
-add r4, sp, 0x10\n\
-adds r3, r1, 0\n\
-_08117202:\n\
-ldrb r2, [r3]\n\
-adds r2, r4\n\
-ldrb r1, [r3]\n\
-lsls r0, r1, 2\n\
-adds r0, r1\n\
-adds r0, r5, r0\n\
-strb r0, [r2]\n\
-ldrb r0, [r3]\n\
-adds r0, 0x1\n\
-strb r0, [r3]\n\
-ldrb r0, [r3]\n\
-ldr r1, [sp, 0x18]\n\
-cmp r0, r1\n\
-bcc _08117202\n\
-b _08117258\n\
-_08117220:\n\
-movs r0, 0x5\n\
-str r0, [sp, 0x18]\n\
-add r1, sp, 0x8\n\
-movs r0, 0\n\
-strb r0, [r1]\n\
-adds r0, r1, 0\n\
-ldrb r0, [r0]\n\
-cmp r0, 0x4\n\
-bhi _08117258\n\
-add r3, sp, 0x10\n\
-adds r2, r1, 0\n\
-_08117236:\n\
-ldrb r1, [r2]\n\
-adds r1, r3\n\
-ldrb r0, [r2]\n\
-adds r0, r5, r0\n\
-strb r0, [r1]\n\
-ldrb r0, [r2]\n\
-adds r0, 0x1\n\
-strb r0, [r2]\n\
-ldrb r0, [r2]\n\
-ldr r1, [sp, 0x18]\n\
-cmp r0, r1\n\
-bcc _08117236\n\
-b _08117258\n\
-_08117250:\n\
-movs r0, 0x1\n\
-str r0, [sp, 0x18]\n\
-add r0, sp, 0x10\n\
-strb r5, [r0]\n\
-_08117258:\n\
-add r1, sp, 0x8\n\
-movs r0, 0\n\
-strb r0, [r1]\n\
-adds r0, r1, 0\n\
-ldrb r0, [r0]\n\
-ldr r1, [sp, 0x18]\n\
-cmp r0, r1\n\
-bcs _08117360\n\
-mov r0, sp\n\
-adds r0, 0xE\n\
-str r0, [sp, 0x1C]\n\
-add r1, sp, 0x10\n\
-mov r9, r1\n\
-add r0, sp, 0x8\n\
-mov r12, r0\n\
-mov r1, sp\n\
-adds r1, 0xA\n\
-str r1, [sp, 0x20]\n\
-_0811727C:\n\
-mov r1, r12\n\
-ldrb r0, [r1]\n\
-add r0, r9\n\
-ldrb r1, [r0]\n\
-lsls r0, r1, 2\n\
-adds r0, r1\n\
-lsls r0, 2\n\
-ldr r1, _08117370 @ =gUnknown_083F8C00\n\
-adds r0, r1\n\
-ldrb r0, [r0, 0x6]\n\
-ldr r1, [sp, 0x1C]\n\
-strb r0, [r1]\n\
-mov r1, r12\n\
-ldrb r0, [r1]\n\
-add r0, r9\n\
-ldrb r1, [r0]\n\
-lsls r0, r1, 2\n\
-adds r0, r1\n\
-lsls r0, 2\n\
-ldr r1, _08117370 @ =gUnknown_083F8C00\n\
-adds r0, r1\n\
-ldrb r0, [r0, 0x3]\n\
-ldr r1, [sp, 0x20]\n\
-strh r0, [r1]\n\
-mov r4, sp\n\
-adds r4, 0x9\n\
-movs r0, 0\n\
-strb r0, [r4]\n\
-ldrb r0, [r4]\n\
-cmp r0, 0x2\n\
-bhi _08117350\n\
-add r5, sp, 0xC\n\
-ldr r7, [sp, 0x20]\n\
-ldr r0, _08117374 @ =gBGTilemapBuffers + 0x800\n\
-mov r8, r0\n\
-ldr r6, [sp, 0x1C]\n\
-ldr r1, _08117378 @ =0x020189a0\n\
-mov r10, r1\n\
-_081172C8:\n\
-mov r1, r12\n\
-ldrb r0, [r1]\n\
-add r0, r9\n\
-ldrb r0, [r0]\n\
-lsls r1, r0, 2\n\
-adds r1, r0\n\
-lsls r1, 2\n\
-ldr r0, _08117370 @ =gUnknown_083F8C00\n\
-adds r1, r0\n\
-adds r3, r4, 0\n\
-ldrb r0, [r4]\n\
-ldrb r1, [r1, 0x4]\n\
-adds r0, r1\n\
-lsls r0, 5\n\
-strh r0, [r5]\n\
-ldrh r0, [r7]\n\
-ldrh r2, [r5]\n\
-adds r2, r0\n\
-lsls r2, 1\n\
-add r2, r8\n\
-ldrb r0, [r6]\n\
-ldrb r1, [r4]\n\
-adds r1, r0\n\
-lsls r0, r1, 1\n\
-adds r0, r1\n\
-lsls r0, 1\n\
-add r0, r10\n\
-ldrh r0, [r0]\n\
-strh r0, [r2]\n\
-ldrh r0, [r7]\n\
-ldrh r2, [r5]\n\
-adds r2, r0\n\
-adds r2, 0x1\n\
-lsls r2, 1\n\
-add r2, r8\n\
-ldrb r0, [r6]\n\
-ldrb r1, [r4]\n\
-adds r1, r0\n\
-lsls r0, r1, 1\n\
-adds r0, r1\n\
-lsls r0, 1\n\
-mov r1, r10\n\
-adds r1, 0x2\n\
-adds r0, r1\n\
-ldrh r0, [r0]\n\
-strh r0, [r2]\n\
-ldrh r0, [r7]\n\
-ldrh r2, [r5]\n\
-adds r2, r0\n\
-adds r2, 0x2\n\
-lsls r2, 1\n\
-add r2, r8\n\
-ldrb r0, [r6]\n\
-ldrb r1, [r4]\n\
-adds r1, r0\n\
-lsls r0, r1, 1\n\
-adds r0, r1\n\
-lsls r0, 1\n\
-ldr r1, _0811737C @ =0x020189a4\n\
-adds r0, r1\n\
-ldrh r0, [r0]\n\
-strh r0, [r2]\n\
-ldrb r0, [r4]\n\
-adds r0, 0x1\n\
-strb r0, [r4]\n\
-ldrb r0, [r3]\n\
-cmp r0, 0x2\n\
-bls _081172C8\n\
-_08117350:\n\
-mov r1, r12\n\
-ldrb r0, [r1]\n\
-adds r0, 0x1\n\
-strb r0, [r1]\n\
-ldrb r0, [r1]\n\
-ldr r1, [sp, 0x18]\n\
-cmp r0, r1\n\
-bcc _0811727C\n\
-_08117360:\n\
-add sp, 0x24\n\
-pop {r3-r5}\n\
-mov r8, r3\n\
-mov r9, r4\n\
-mov r10, r5\n\
-pop {r4-r7}\n\
-pop {r0}\n\
-bx r0\n\
-.align 2, 0\n\
-_08117370: .4byte gUnknown_083F8C00\n\
-_08117374: .4byte gBGTilemapBuffers + 0x800\n\
-_08117378: .4byte 0x020189a0\n\
-_0811737C: .4byte 0x020189a4\n\
-.syntax divided\n");
-}
-#endif
 
 u8 sub_8117380(u8 r0)
 {
