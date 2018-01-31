@@ -1779,111 +1779,25 @@ void sub_8117DF4(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8117E98(struct Sprite *sprite)
 {
-    struct OamMatrix *m;
-    u8 p;
-    u16 angle;
-    s16 cos, sin, z;
-    u32 cos32;
-    angle = eRoulette->var24 + sprite->data[0x0];
-    z = angle;
-    if (z > 359)
-        angle = z - 360;
+    s16 cos;
+    s16 sin;
+    u32 matrixNum;
+    s16 angle = eRoulette->var24 + sprite->data[0];
+    if (angle >= 360)
+        angle -= 360;
     sin = Sin2(angle);
     cos = Cos2(angle);
-    sprite->pos2.x =  sin * sprite->data[0x1] >> 0xC;
-    sprite->pos2.y = -cos * sprite->data[0x1] >> 0xC;
-    p = sprite->oam.matrixNum;
-    sin = sin / 0x10;
-    m = &gOamMatrices[p];
-    cos32 = cos / 0x10;
-
-    m->d =  cos32;
-    m->a =  cos32;
-    m->b =  sin;
-    m->c = -sin;
+    sprite->pos2.x =  sin * sprite->data[1] >> 0xC;
+    sprite->pos2.y = -cos * sprite->data[1] >> 0xC;
+    matrixNum = sprite->oam.matrixNum;
+    sin /= 16;
+    gOamMatrices[matrixNum].d = cos /= 16;
+    gOamMatrices[matrixNum].a = cos;
+    gOamMatrices[matrixNum].b = sin;
+    gOamMatrices[matrixNum].c = -sin;
 }
-#else
-__attribute__((naked))
-void sub_8117E98(struct Sprite *r0)
-{
-asm(".syntax unified\n\
-push {r4-r6,lr}\n\
-adds r6, r0, 0\n\
-ldr r0, _08117F1C @ =0x02019000\n\
-ldrh r1, [r6, 0x2E]\n\
-ldrh r0, [r0, 0x24]\n\
-adds r1, r0\n\
-lsls r1, 16\n\
-lsrs r4, r1, 16\n\
-asrs r1, 16\n\
-ldr r0, _08117F20 @ =0x00000167\n\
-cmp r1, r0\n\
-ble _08117EB8\n\
-ldr r2, _08117F24 @ =0xfffffe98\n\
-adds r0, r1, r2\n\
-lsls r0, 16\n\
-lsrs r4, r0, 16\n\
-_08117EB8:\n\
-adds r0, r4, 0\n\
-bl Sin2\n\
-lsls r0, 16\n\
-lsrs r5, r0, 16\n\
-adds r0, r4, 0\n\
-bl Cos2\n\
-lsls r2, r5, 16\n\
-asrs r2, 16\n\
-movs r3, 0x30\n\
-ldrsh r1, [r6, r3]\n\
-muls r1, r2\n\
-asrs r1, 12\n\
-strh r1, [r6, 0x24]\n\
-lsls r0, 16\n\
-asrs r4, r0, 16\n\
-negs r1, r4\n\
-movs r3, 0x30\n\
-ldrsh r0, [r6, r3]\n\
-muls r0, r1\n\
-asrs r0, 12\n\
-strh r0, [r6, 0x26]\n\
-ldrb r0, [r6, 0x3]\n\
-lsls r0, 26\n\
-lsrs r3, r0, 27\n\
-cmp r2, 0\n\
-bge _08117EF2\n\
-adds r2, 0xF\n\
-_08117EF2:\n\
-lsls r0, r2, 12\n\
-lsrs r5, r0, 16\n\
-ldr r1, _08117F28 @ =gOamMatrices\n\
-lsls r0, r3, 3\n\
-adds r1, r0, r1\n\
-adds r0, r4, 0\n\
-cmp r0, 0\n\
-bge _08117F04\n\
-adds r0, 0xF\n\
-_08117F04:\n\
-asrs r0, 4\n\
-strh r0, [r1, 0x6]\n\
-strh r0, [r1]\n\
-strh r5, [r1, 0x2]\n\
-lsls r0, r5, 16\n\
-asrs r0, 16\n\
-negs r0, r0\n\
-strh r0, [r1, 0x4]\n\
-pop {r4-r6}\n\
-pop {r0}\n\
-bx r0\n\
-.align 2, 0\n\
-_08117F1C: .4byte 0x02019000\n\
-_08117F20: .4byte 0x00000167\n\
-_08117F24: .4byte 0xfffffe98\n\
-_08117F28: .4byte gOamMatrices\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_8117F2C(void)
 {
