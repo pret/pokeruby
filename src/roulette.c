@@ -2301,7 +2301,6 @@ void sub_8118D2C(struct Sprite *sprite)
     }
 }
 
-#ifdef NONMATCHING
 void sub_8118DE4(struct Sprite *sprite)
 {
     sub_8118724(sprite);
@@ -2317,13 +2316,13 @@ void sub_8118DE4(struct Sprite *sprite)
         sub_811866C(sprite);
         sprite->data[0x6] = (sprite->data[0x6] / 30) * 30 + 15;
         sprite->callback  = &sub_8118834;
-        m4aSongNumStartOrChange(0x47);
+        m4aSongNumStartOrChange(SE_HASHI);
     }
     else
     {
         u8 t;
         u32 z;
-        m4aSongNumStart(0x38);
+        m4aSongNumStart(SE_KON);
         if ((z = (Random() & 0x1)))
         {
             u32 o;
@@ -2355,7 +2354,7 @@ void sub_8118DE4(struct Sprite *sprite)
                 sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
                 if (z)
                 {
-                    eRoulette->var8C = 1.5f;
+                    eRoulette->var8C = 0.5f;
                 }
                 else
                 {
@@ -2364,217 +2363,10 @@ void sub_8118DE4(struct Sprite *sprite)
             }
         }
         eRoulette->var98 = 0.085f;
-        sprite->callback = &sub_8118D2C;
+        sprite->callback = sub_8118D2C;
         sprite->data[0x1] = 0x5;
     }
 }
-#else
-__attribute__((naked))
-void sub_8118DE4(struct Sprite *sprite)
-{
-asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-mov r7, r9\n\
-mov r6, r8\n\
-push {r6,r7}\n\
-adds r7, r0, 0\n\
-bl sub_8118724\n\
-movs r0, 0\n\
-strh r0, [r7, 0x32]\n\
-adds r0, r7, 0\n\
-bl sub_81186B8\n\
-ldr r1, _08118E70 @ =gUnknown_083F8D90\n\
-ldr r6, _08118E74 @ =gSharedMem + 0x19000\n\
-movs r0, 0x7E\n\
-adds r0, r6\n\
-mov r8, r0\n\
-ldrb r0, [r0]\n\
-lsls r0, 3\n\
-adds r1, 0x4\n\
-adds r0, r1\n\
-ldr r0, [r0]\n\
-ldr r1, [r6, 0x8]\n\
-ands r0, r1\n\
-cmp r0, 0\n\
-bne _08118E7C\n\
-adds r1, r6, 0\n\
-adds r1, 0x7D\n\
-movs r0, 0xFF\n\
-strb r0, [r1]\n\
-ldrb r1, [r6, 0x3]\n\
-movs r0, 0x7F\n\
-ands r0, r1\n\
-strb r0, [r6, 0x3]\n\
-adds r0, r7, 0\n\
-adds r0, 0x2B\n\
-ldrb r1, [r0]\n\
-adds r1, 0x3\n\
-lsls r1, 24\n\
-lsrs r1, 24\n\
-adds r0, r7, 0\n\
-bl StartSpriteAnim\n\
-adds r0, r7, 0\n\
-bl sub_81186B8\n\
-movs r0, 0x1E\n\
-strh r0, [r7, 0x36]\n\
-adds r0, r7, 0\n\
-bl sub_811866C\n\
-movs r1, 0x3A\n\
-ldrsh r0, [r7, r1]\n\
-movs r1, 0x1E\n\
-bl __divsi3\n\
-lsls r0, 16\n\
-asrs r0, 16\n\
-lsls r1, r0, 4\n\
-subs r1, r0\n\
-lsls r1, 1\n\
-adds r1, 0xF\n\
-strh r1, [r7, 0x3A]\n\
-ldr r0, _08118E78 @ =sub_8118834\n\
-str r0, [r7, 0x1C]\n\
-movs r0, 0x47\n\
-bl m4aSongNumStartOrChange\n\
-b _08118F74\n\
-.align 2, 0\n\
-_08118E70: .4byte gUnknown_083F8D90\n\
-_08118E74: .4byte gSharedMem + 0x19000\n\
-_08118E78: .4byte sub_8118834\n\
-_08118E7C:\n\
-movs r0, 0x38\n\
-bl m4aSongNumStart\n\
-bl Random\n\
-movs r2, 0x1\n\
-mov r9, r2\n\
-mov r1, r9\n\
-ands r1, r0\n\
-mov r9, r1\n\
-cmp r1, 0\n\
-beq _08118EC0\n\
-adds r1, r6, 0\n\
-adds r1, 0x8C\n\
-ldr r0, _08118EB8 @ =0x00000000\n\
-str r0, [r1]\n\
-mov r2, r8\n\
-ldrb r0, [r2]\n\
-adds r0, 0x1\n\
-movs r1, 0xC\n\
-bl __modsi3\n\
-lsls r1, r0, 24\n\
-lsrs r2, r1, 24\n\
-adds r1, r6, 0\n\
-adds r1, 0x7F\n\
-strb r0, [r1]\n\
-ldr r5, _08118EBC @ =gUnknown_083F8DF4\n\
-b _08118EF4\n\
-.align 2, 0\n\
-_08118EB8: .4byte 0x00000000\n\
-_08118EBC: .4byte gUnknown_083F8DF4\n\
-_08118EC0:\n\
-adds r4, r6, 0\n\
-adds r4, 0x8C\n\
-ldr r5, _08118F1C @ =gUnknown_083F8DF4\n\
-ldrb r0, [r6, 0x4]\n\
-lsls r0, 30\n\
-lsrs r0, 25\n\
-adds r1, r5, 0\n\
-adds r1, 0x1C\n\
-adds r0, r1\n\
-ldr r1, [r0]\n\
-adds r0, r1, 0\n\
-bl __addsf3\n\
-str r0, [r4]\n\
-mov r0, r8\n\
-ldrb r4, [r0]\n\
-adds r0, r4, 0\n\
-adds r0, 0xB\n\
-movs r1, 0xC\n\
-bl __modsi3\n\
-lsls r0, 24\n\
-lsrs r2, r0, 24\n\
-adds r0, r6, 0\n\
-adds r0, 0x7F\n\
-strb r4, [r0]\n\
-_08118EF4:\n\
-ldr r0, _08118F20 @ =gUnknown_083F8D90\n\
-lsls r1, r2, 3\n\
-adds r0, 0x4\n\
-adds r1, r0\n\
-ldr r2, _08118F24 @ =gSharedMem + 0x19000\n\
-ldr r1, [r1]\n\
-ldr r0, [r2, 0x8]\n\
-ands r1, r0\n\
-cmp r1, 0\n\
-beq _08118F28\n\
-movs r0, 0x1\n\
-strh r0, [r7, 0x2E]\n\
-ldrb r0, [r2, 0x4]\n\
-lsls r0, 30\n\
-lsrs r0, 25\n\
-adds r0, r5\n\
-ldrb r0, [r0, 0x2]\n\
-strh r0, [r7, 0x32]\n\
-b _08118F64\n\
-.align 2, 0\n\
-_08118F1C: .4byte gUnknown_083F8DF4\n\
-_08118F20: .4byte gUnknown_083F8D90\n\
-_08118F24: .4byte gSharedMem + 0x19000\n\
-_08118F28:\n\
-strh r1, [r7, 0x2E]\n\
-ldrb r1, [r2, 0x4]\n\
-movs r0, 0x3\n\
-ands r0, r1\n\
-cmp r0, 0\n\
-beq _08118F40\n\
-lsls r0, r1, 30\n\
-lsrs r0, 25\n\
-adds r0, r5\n\
-ldrb r0, [r0, 0x1]\n\
-strh r0, [r7, 0x32]\n\
-b _08118F64\n\
-_08118F40:\n\
-lsls r0, r1, 30\n\
-lsrs r0, 25\n\
-adds r0, r5\n\
-ldrb r0, [r0, 0x2]\n\
-strh r0, [r7, 0x32]\n\
-mov r1, r9\n\
-cmp r1, 0\n\
-beq _08118F5C\n\
-adds r1, r2, 0\n\
-adds r1, 0x8C\n\
-ldr r0, _08118F58 @ =0x3f000000\n\
-b _08118F62\n\
-.align 2, 0\n\
-_08118F58: .4byte 0x3f000000\n\
-_08118F5C:\n\
-adds r1, r2, 0\n\
-adds r1, 0x8C\n\
-ldr r0, _08118F80 @ =0xbfc00000\n\
-_08118F62:\n\
-str r0, [r1]\n\
-_08118F64:\n\
-adds r1, r2, 0\n\
-adds r1, 0x98\n\
-ldr r0, _08118F84 @ =0x3dae147b\n\
-str r0, [r1]\n\
-ldr r0, _08118F88 @ =sub_8118D2C\n\
-str r0, [r7, 0x1C]\n\
-movs r0, 0x5\n\
-strh r0, [r7, 0x30]\n\
-_08118F74:\n\
-pop {r3,r4}\n\
-mov r8, r3\n\
-mov r9, r4\n\
-pop {r4-r7}\n\
-pop {r0}\n\
-bx r0\n\
-.align 2, 0\n\
-_08118F80: .4byte 0xbfc00000\n\
-_08118F84: .4byte 0x3dae147b\n\
-_08118F88: .4byte sub_8118D2C\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_8118F8C(struct Sprite *sprite)
 {
