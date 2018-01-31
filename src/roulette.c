@@ -1318,15 +1318,12 @@ u8 sub_8116E5C(u8 r0, u8 r1)
     return 0x0;
 }
 
-#ifdef NONMATCHING // stack variable switched with a register variable
 void sub_8116EF8(u8 r0)
 {
 
-    u32 var0 = 0x0;
-    struct UnkStruct1 var1[0x3];
-    u32 var2;
+    u16 var0 = 0x0;
+    u8 var2;
     u16 var3;
-    u32 var4;
     u8 i;
     switch(r0)
     {
@@ -1336,372 +1333,64 @@ void sub_8116EF8(u8 r0)
         for (i = (r0 + 0x1); i < (r0 + 0x5); i++)
             if (!(eRoulette->var08 & gUnknown_083F8C00[i].var08))
                 var0 |= gUnknown_083F8C00[i].var10;
-        var0 &= 0xDFFF;
-        sub_8124CE8(&eRoulette->varB8, var0);
+        sub_8124CE8(&eRoulette->varB8, var0 &= 0xDFFF);
         break;
     default:
-        memcpy(var1, gUnknown_083F8E9C, 0x18);
-        if ((u8)(r0 - 0x1) < 0x4)
-            var2 = 0x3;
+    {
+        struct UnkStruct1 var1[0x3];
+        memcpy(var1, gUnknown_083F8E9C, sizeof var1);
+        if (r0 > 0 && r0 < 5)
+            var2 = 3;
         else
-            var2 = 0x1;
-        var3 = ((r0 / 0x5) - 0x1);
-        switch((u8)r0 % 0x5)
+            var2 = 1;
+        var3 = r0 / 5 - 1;
+        switch (r0 % 5)
         {
-        case 0x1:
-            var3 = gSprites[eRoulette->var3C[0x7 + 0x0]].oam.paletteNum * 0x10;
-            break;
-        case 0x2:
-            var3 = gSprites[eRoulette->var3C[0x7 + 0x1]].oam.paletteNum * 0x10;
-            break;
-        case 0x3:
-            var3 = gSprites[eRoulette->var3C[0x7 + 0x2]].oam.paletteNum * 0x10;
-            break;
-        case 0x4:
-            var3 = gSprites[eRoulette->var3C[0x7 + 0x3]].oam.paletteNum * 0x10;
-            break;
+            case 0x1:
+                var3 = gSprites[eRoulette->var3C[7 + 0]].oam.paletteNum * 0x10;
+                break;
+            case 0x2:
+                var3 = gSprites[eRoulette->var3C[7 + 1]].oam.paletteNum * 0x10;
+                break;
+            case 0x3:
+                var3 = gSprites[eRoulette->var3C[7 + 2]].oam.paletteNum * 0x10;
+                break;
+            case 0x4:
+                var3 = gSprites[eRoulette->var3C[7 + 3]].oam.paletteNum * 0x10;
+                break;
         }
-        if (var2 == 0x1)
+        if (var2 == 1)
         {
             if (!(eRoulette->var08 & gUnknown_083F8C00[r0].var08))
             {
-                var4 = (r0 / 0x5);
-                var1[var4 - 0x1].var02 += var3;
-                sub_812492C(&eRoulette->varB8, 0xD, &var1[var4 - 0x2]);
-                sub_8124CE8(&eRoulette->varB8, var0 |= gUnknown_083F8C00[r0].var10);
+                var1[r0 / 5 - 1].var02 += var3;
+                sub_812492C(&eRoulette->varB8, 13, &var1[r0 / 5 - 1]);
             }
+            else
+                return;
         }
         else
         {
-            for (i = 0; i < 0x3; i++)
+            for (i = 0; i < 3; i++)
             {
-                u8 var4 = i * 0x5 + r0 + 0x5;
+                u8 var4 = i * 5 + r0 + 5;
                 if (!(eRoulette->var08 & gUnknown_083F8C00[var4].var08))
                 {
-                    u8 var5 = (var4 / 0x5);
-                    var1[var5 - 0x1].var02 += var3;
-                    sub_812492C(&eRoulette->varB8, (u8)(0xD + i), &var1[var5 - 0x2]);
-                    if (var2 == 0x3)
+                    var1[var4 / 5 - 1].var02 += var3;
+                    sub_812492C(&eRoulette->varB8, i + 13, &var1[var4 / 5 - 1]);
+                    if (var2 == 3)
                         var0 = gUnknown_083F8C00[var4].var10;
                     var2--;
                 }
             }
-            if (var2 != 0x2)
-                var0 = 0x0;
-            sub_8124CE8(&eRoulette->varB8, var0 |= gUnknown_083F8C00[r0].var10);
+            if (var2 != 2)
+                var0 = 0;
         }
+        sub_8124CE8(&eRoulette->varB8, var0 |= gUnknown_083F8C00[r0].var10);
+        break;
+    }
     }
 }
-
-#else
-__attribute__((naked))
-void sub_8116EF8(u8 r0)
-{
-asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-mov r7, r10\n\
-mov r6, r9\n\
-mov r5, r8\n\
-push {r5-r7}\n\
-sub sp, 0x20\n\
-lsls r0, 24\n\
-lsrs r6, r0, 24\n\
-movs r0, 0\n\
-str r0, [sp, 0x18]\n\
-cmp r6, 0xA\n\
-beq _08116F1E\n\
-cmp r6, 0xA\n\
-bgt _08116F1A\n\
-cmp r6, 0x5\n\
-beq _08116F1E\n\
-b _08116F7C\n\
-_08116F1A:\n\
-cmp r6, 0xF\n\
-bne _08116F7C\n\
-_08116F1E:\n\
-adds r0, r6, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-adds r0, r6, 0x5\n\
-ldr r7, _08116F70 @ =0x020190b8\n\
-cmp r4, r0\n\
-bge _08116F5E\n\
-adds r1, r7, 0\n\
-subs r1, 0xB8\n\
-ldr r3, _08116F74 @ =gUnknown_083F8C00\n\
-ldr r5, [r1, 0x8]\n\
-adds r6, r3, 0\n\
-adds r6, 0x8\n\
-adds r2, r0, 0\n\
-_08116F3A:\n\
-lsls r0, r4, 2\n\
-adds r0, r4\n\
-lsls r1, r0, 2\n\
-adds r0, r1, r6\n\
-ldr r0, [r0]\n\
-ands r0, r5\n\
-cmp r0, 0\n\
-bne _08116F54\n\
-adds r0, r1, r3\n\
-ldrh r0, [r0, 0x10]\n\
-ldr r1, [sp, 0x18]\n\
-orrs r1, r0\n\
-str r1, [sp, 0x18]\n\
-_08116F54:\n\
-adds r0, r4, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-cmp r4, r2\n\
-blt _08116F3A\n\
-_08116F5E:\n\
-ldr r0, _08116F78 @ =0x0000dfff\n\
-ldr r2, [sp, 0x18]\n\
-ands r2, r0\n\
-str r2, [sp, 0x18]\n\
-adds r0, r7, 0\n\
-adds r1, r2, 0\n\
-bl sub_8124CE8\n\
-b _0811713C\n\
-.align 2, 0\n\
-_08116F70: .4byte 0x020190b8\n\
-_08116F74: .4byte gUnknown_083F8C00\n\
-_08116F78: .4byte 0x0000dfff\n\
-_08116F7C:\n\
-mov r0, sp\n\
-ldr r1, _08116FC8 @ =gUnknown_083F8E9C\n\
-ldm r1!, {r2-r4}\n\
-stm r0!, {r2-r4}\n\
-ldm r1!, {r2-r4}\n\
-stm r0!, {r2-r4}\n\
-subs r0, r6, 0x1\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-movs r3, 0x1\n\
-mov r10, r3\n\
-cmp r0, 0x3\n\
-bhi _08116F9A\n\
-movs r4, 0x3\n\
-mov r10, r4\n\
-_08116F9A:\n\
-adds r0, r6, 0\n\
-movs r1, 0x5\n\
-bl __udivsi3\n\
-lsls r0, 24\n\
-lsrs r0, 8\n\
-ldr r1, _08116FCC @ =0xffff0000\n\
-adds r0, r1\n\
-lsrs r7, r0, 16\n\
-adds r0, r6, 0\n\
-movs r1, 0x5\n\
-bl __umodsi3\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-cmp r0, 0x2\n\
-beq _08116FF8\n\
-cmp r0, 0x2\n\
-bgt _08116FD4\n\
-cmp r0, 0x1\n\
-beq _08116FE4\n\
-ldr r4, _08116FD0 @ =0x02019000\n\
-b _0811703A\n\
-.align 2, 0\n\
-_08116FC8: .4byte gUnknown_083F8E9C\n\
-_08116FCC: .4byte 0xffff0000\n\
-_08116FD0: .4byte 0x02019000\n\
-_08116FD4:\n\
-cmp r0, 0x3\n\
-beq _0811700C\n\
-cmp r0, 0x4\n\
-beq _08117020\n\
-ldr r4, _08116FE0 @ =0x02019000\n\
-b _0811703A\n\
-.align 2, 0\n\
-_08116FE0: .4byte 0x02019000\n\
-_08116FE4:\n\
-ldr r3, _08116FF0 @ =gSprites\n\
-ldr r2, _08116FF4 @ =0x02019000\n\
-adds r0, r2, 0\n\
-adds r0, 0x43\n\
-b _08117028\n\
-.align 2, 0\n\
-_08116FF0: .4byte gSprites\n\
-_08116FF4: .4byte 0x02019000\n\
-_08116FF8:\n\
-ldr r3, _08117004 @ =gSprites\n\
-ldr r2, _08117008 @ =0x02019000\n\
-adds r0, r2, 0\n\
-adds r0, 0x44\n\
-b _08117028\n\
-.align 2, 0\n\
-_08117004: .4byte gSprites\n\
-_08117008: .4byte 0x02019000\n\
-_0811700C:\n\
-ldr r3, _08117018 @ =gSprites\n\
-ldr r2, _0811701C @ =0x02019000\n\
-adds r0, r2, 0\n\
-adds r0, 0x45\n\
-b _08117028\n\
-.align 2, 0\n\
-_08117018: .4byte gSprites\n\
-_0811701C: .4byte 0x02019000\n\
-_08117020:\n\
-ldr r3, _08117088 @ =gSprites\n\
-ldr r2, _0811708C @ =0x02019000\n\
-adds r0, r2, 0\n\
-adds r0, 0x46\n\
-_08117028:\n\
-ldrb r1, [r0]\n\
-lsls r0, r1, 4\n\
-adds r0, r1\n\
-lsls r0, 2\n\
-adds r0, r3\n\
-ldrb r0, [r0, 0x5]\n\
-lsrs r0, 4\n\
-lsls r7, r0, 4\n\
-adds r4, r2, 0\n\
-_0811703A:\n\
-mov r2, r10\n\
-cmp r2, 0x1\n\
-bne _08117094\n\
-ldr r1, _08117090 @ =gUnknown_083F8C00\n\
-lsls r2, r6, 2\n\
-adds r0, r2, r6\n\
-lsls r0, 2\n\
-adds r1, 0x8\n\
-adds r0, r1\n\
-ldr r1, [r4, 0x8]\n\
-ldr r0, [r0]\n\
-ands r1, r0\n\
-str r2, [sp, 0x1C]\n\
-cmp r1, 0\n\
-bne _0811713C\n\
-adds r0, r6, 0\n\
-movs r1, 0x5\n\
-bl __udivsi3\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-subs r1, r0, 0x1\n\
-lsls r1, 3\n\
-mov r3, sp\n\
-adds r2, r3, r1\n\
-ldrh r1, [r2, 0x2]\n\
-adds r1, r7, r1\n\
-strh r1, [r2, 0x2]\n\
-adds r1, r4, 0\n\
-adds r1, 0xB8\n\
-lsls r0, 3\n\
-subs r0, 0x8\n\
-adds r2, r3, r0\n\
-adds r0, r1, 0\n\
-movs r1, 0xD\n\
-bl sub_812492C\n\
-b _08117122\n\
-.align 2, 0\n\
-_08117088: .4byte gSprites\n\
-_0811708C: .4byte 0x02019000\n\
-_08117090: .4byte gUnknown_083F8C00\n\
-_08117094:\n\
-movs r4, 0\n\
-lsls r0, r6, 2\n\
-str r0, [sp, 0x1C]\n\
-ldr r1, _0811714C @ =0x02019000\n\
-mov r8, r1\n\
-ldr r2, _08117150 @ =gUnknown_083F8C00\n\
-mov r9, r2\n\
-_081170A2:\n\
-lsls r0, r4, 2\n\
-adds r0, r4\n\
-adds r0, r6, r0\n\
-adds r0, 0x5\n\
-lsls r0, 24\n\
-lsrs r2, r0, 24\n\
-lsls r0, r2, 2\n\
-adds r0, r2\n\
-lsls r5, r0, 2\n\
-mov r0, r9\n\
-adds r0, 0x8\n\
-adds r0, r5, r0\n\
-mov r3, r8\n\
-ldr r1, [r3, 0x8]\n\
-ldr r0, [r0]\n\
-ands r1, r0\n\
-cmp r1, 0\n\
-bne _0811710E\n\
-adds r0, r2, 0\n\
-movs r1, 0x5\n\
-bl __udivsi3\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-subs r1, r0, 0x1\n\
-lsls r1, 3\n\
-mov r3, sp\n\
-adds r2, r3, r1\n\
-ldrh r1, [r2, 0x2]\n\
-adds r1, r7, r1\n\
-strh r1, [r2, 0x2]\n\
-adds r1, r4, 0\n\
-adds r1, 0xD\n\
-lsls r1, 24\n\
-lsrs r1, 24\n\
-lsls r0, 3\n\
-subs r0, 0x8\n\
-adds r2, r3, r0\n\
-mov r0, r8\n\
-adds r0, 0xB8\n\
-bl sub_812492C\n\
-mov r0, r10\n\
-cmp r0, 0x3\n\
-bne _08117104\n\
-mov r1, r9\n\
-adds r0, r5, r1\n\
-ldrh r0, [r0, 0x10]\n\
-str r0, [sp, 0x18]\n\
-_08117104:\n\
-mov r0, r10\n\
-subs r0, 0x1\n\
-lsls r0, 24\n\
-lsrs r0, 24\n\
-mov r10, r0\n\
-_0811710E:\n\
-adds r0, r4, 0x1\n\
-lsls r0, 24\n\
-lsrs r4, r0, 24\n\
-cmp r4, 0x2\n\
-bls _081170A2\n\
-mov r2, r10\n\
-cmp r2, 0x2\n\
-beq _08117122\n\
-movs r3, 0\n\
-str r3, [sp, 0x18]\n\
-_08117122:\n\
-ldr r0, _08117154 @ =0x020190b8\n\
-ldr r2, _08117150 @ =gUnknown_083F8C00\n\
-ldr r4, [sp, 0x1C]\n\
-adds r1, r4, r6\n\
-lsls r1, 2\n\
-adds r1, r2\n\
-ldrh r1, [r1, 0x10]\n\
-ldr r2, [sp, 0x18]\n\
-orrs r2, r1\n\
-str r2, [sp, 0x18]\n\
-adds r1, r2, 0\n\
-bl sub_8124CE8\n\
-_0811713C:\n\
-add sp, 0x20\n\
-pop {r3-r5}\n\
-mov r8, r3\n\
-mov r9, r4\n\
-mov r10, r5\n\
-pop {r4-r7}\n\
-pop {r0}\n\
-bx r0\n\
-.align 2, 0\n\
-_0811714C: .4byte 0x02019000\n\
-_08117150: .4byte gUnknown_083F8C00\n\
-_08117154: .4byte 0x020190b8\n\
-.syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING //not enough stack usage
 void sub_8117158(u8 r0)
