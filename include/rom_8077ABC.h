@@ -85,7 +85,7 @@ void sub_8078174(struct Sprite *sprite);
 void sub_80793C4(struct Sprite *sprite);
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);
-int sub_807A100(u8 slot, u8 a2);
+s16 sub_807A100(u8 slot, u8 a2);
 u16 sub_80790F0(s16 a, s16 b);
 void sub_8078FDC(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 rotation);
 void sub_807867C(struct Sprite *sprite, s16 a2);

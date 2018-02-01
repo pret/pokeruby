@@ -1970,7 +1970,7 @@ void sub_807A0F4(struct Sprite *sprite)
     DestroySpriteAndFreeResources(sprite);
 }
 
-int sub_807A100(u8 slot, u8 a2)
+s16 sub_807A100(u8 slot, u8 a2)
 {
     u16 species;
     u32 personality;
