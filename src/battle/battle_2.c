@@ -69,6 +69,7 @@ struct UnknownStruct12
 
 extern void sub_802BBD4();
 
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern const u8 Str_821F7B8[];
 extern u8 gUnknown_02023A14_50;
 extern const u16 gUnknown_08D004E0[];
@@ -1362,6 +1363,8 @@ extern u8 gUnknown_Debug_2023B62[];
 extern const u8 Str_821F7BD[];
 extern const u8 Str_821F7DA[];
 
+void debug_sub_8012878(void);
+void debug_sub_8012D10(u8);
 void debug_sub_8010818(void);
 void debug_sub_80108B8(void);
 void debug_sub_8010CAC(void);
@@ -1388,6 +1391,7 @@ extern u8 gBattleBuffersTransferData[];
 
 extern const s16 gUnknown_Debug_821F424[][5];
 extern const u16 gUnknown_Debug_821F56C[][5];
+extern const u32 gUnknown_Debug_821F798[][4];
 
 extern const u8 gUnusedOldCharmap_Gfx_lz[];
 extern const u8 gUnusedOldCharmap_Tilemap_lz[];
@@ -4628,275 +4632,73 @@ void debug_sub_80125E4()
     );
 }
 
-__attribute__((naked))
-void debug_sub_8012628()
+void debug_sub_8012628(void)
 {
-    asm(
-        "	ldr	r3, ._868       @ gSharedMem\n"
-        "	ldr	r2, ._868 + 4   @ gUnknown_Debug_821F798\n"
-        "	ldr	r0, ._868 + 8   @ gUnknown_Debug_030043A8\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	ldr	r0, ._868 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r2\n"
-        "	ldr	r0, [r1]\n"
-        "	add	r0, r0, r3\n"
-        "	mov	r1, #0x6d\n"
-        "	strb	r1, [r0]\n"
-        "	bx	lr\n"
-        "._869:\n"
-        "	.align	2, 0\n"
-        "._868:\n"
-        "	.word	gSharedMem\n"
-        "	.word	gUnknown_Debug_821F798\n"
-        "	.word	gUnknown_Debug_030043A8\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "\n"
-    );
+	gSharedMem[gUnknown_Debug_821F798[gUnknown_Debug_03004360][gUnknown_Debug_030043A8]] = 0x6D;
 }
 
-__attribute__((naked))
-void debug_sub_8012658()
+void debug_sub_8012658(void)
 {
-    asm(
-        "	ldr	r3, ._870       @ gSharedMem\n"
-        "	ldr	r2, ._870 + 4   @ gUnknown_Debug_821F798\n"
-        "	ldr	r0, ._870 + 8   @ gUnknown_Debug_030043A8\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	ldr	r0, ._870 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r2\n"
-        "	ldr	r0, [r1]\n"
-        "	add	r0, r0, r3\n"
-        "	mov	r1, #0x81\n"
-        "	strb	r1, [r0]\n"
-        "	bx	lr\n"
-        "._871:\n"
-        "	.align	2, 0\n"
-        "._870:\n"
-        "	.word	gSharedMem\n"
-        "	.word	gUnknown_Debug_821F798\n"
-        "	.word	gUnknown_Debug_030043A8\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "\n"
-    );
+	gSharedMem[gUnknown_Debug_821F798[gUnknown_Debug_03004360][gUnknown_Debug_030043A8]] = 0x81;
 }
 
-__attribute__((naked))
-void debug_sub_8012688()
+void debug_sub_8012688(void)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	mov	r6, r8\n"
-        "	push	{r6}\n"
-        "	add	sp, sp, #0xfffffff4\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r4, #0xcd\n"
-        "	lsl	r4, r4, #0x1\n"
-        "	ldr	r3, ._873       @ gUnknown_Debug_2023B62\n"
-        "	mov	r2, #0x0\n"
-        "._872:\n"
-        "	add	r0, r1, r3\n"
-        "	strb	r2, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, r4\n"
-        "	ble	._872	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	bl	SetHBlankCallback\n"
-        "	mov	r0, #0x0\n"
-        "	bl	SetVBlankCallback\n"
-        "	mov	r5, #0x0\n"
-        "	str	r5, [sp, #0x8]\n"
-        "	ldr	r1, ._873 + 4   @ 0x40000d4\n"
-        "	add	r0, sp, #0x8\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0xc0\n"
-        "	lsl	r0, r0, #0x13\n"
-        "	str	r0, [r1, #0x4]\n"
-        "	ldr	r0, ._873 + 8   @ 0x85006000\n"
-        "	str	r0, [r1, #0x8]\n"
-        "	ldr	r0, [r1, #0x8]\n"
-        "	ldr	r0, ._873 + 12  @ 0x400004c\n"
-        "	strh	r5, [r0]\n"
-        "	sub	r0, r0, #0xc\n"
-        "	strh	r5, [r0]\n"
-        "	add	r0, r0, #0x4\n"
-        "	strh	r5, [r0]\n"
-        "	sub	r0, r0, #0x2\n"
-        "	strh	r5, [r0]\n"
-        "	add	r0, r0, #0x4\n"
-        "	strh	r5, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r5, [r0]\n"
-        "	add	r0, r0, #0x2\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r4, ._873 + 16  @ gWindowTemplate_81E6C58\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_LoadWindowTemplate\n"
-        "	bl	ResetPaletteFade\n"
-        "	ldr	r0, ._873 + 20  @ gBattle_BG0_X\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r1, ._873 + 24  @ gBattle_BG0_Y\n"
-        "	mov	r0, #0xa0\n"
-        "	strh	r0, [r1]\n"
-        "	ldr	r0, ._873 + 28  @ gBattle_BG1_X\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r0, ._873 + 32  @ gBattle_BG1_Y\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r0, ._873 + 36  @ gBattle_BG2_X\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r0, ._873 + 40  @ gBattle_BG2_Y\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r0, ._873 + 44  @ gBattle_BG3_X\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r0, ._873 + 48  @ gBattle_BG3_Y\n"
-        "	strh	r5, [r0]\n"
-        "	ldr	r1, ._873 + 52  @ gBattleTerrain\n"
-        "	mov	r0, #0x9\n"
-        "	strb	r0, [r1]\n"
-        "	bl	sub_800D6D4\n"
-        "	bl	sub_800DAB8\n"
-        "	bl	ResetSpriteData\n"
-        "	bl	ResetTasks\n"
-        "	bl	FreeAllSpritePalettes\n"
-        "	ldr	r1, ._873 + 56  @ gReservedSpritePaletteCount\n"
-        "	mov	r0, #0x4\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r6, ._873 + 60  @ gCurrentMove\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r6]\n"
-        "	ldr	r0, ._873 + 64  @ gUnknown_03004210\n"
-        "	add	r1, r4, #0\n"
-        "	bl	Text_InitWindowWithTemplate\n"
-        "	ldrh	r2, [r6]\n"
-        "	lsl	r0, r2, #0x3\n"
-        "	ldr	r1, ._873 + 68  @ gMonFrontPicTable\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r1, ._873 + 72  @ gMonFrontPicCoords\n"
-        "	mov	r8, r1\n"
-        "	lsl	r2, r2, #0x2\n"
-        "	add r2, r2, r8\n"
-        "	ldrb	r1, [r2]\n"
-        "	ldrb	r2, [r2, #0x1]\n"
-        "	mov	r3, #0x80\n"
-        "	lsl	r3, r3, #0x12\n"
-        "	ldr	r4, ._873 + 76  @ gUnknown_081FAF4C\n"
-        "	ldr	r4, [r4, #0x4]\n"
-        "	str	r4, [sp]\n"
-        "	ldrh	r4, [r6]\n"
-        "	str	r4, [sp, #0x4]\n"
-        "	bl	DecompressPicFromTable_2\n"
-        "	ldr	r1, ._873 + 80  @ gMonPaletteTable\n"
-        "	ldrh	r0, [r6]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	r1, #0x88\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	mov	r2, #0x20\n"
-        "	bl	LoadCompressedPalette\n"
-        "	ldrh	r0, [r6]\n"
-        "	mov	r1, #0x1\n"
-        "	bl	GetMonSpriteTemplate_803C56C\n"
-        "	ldr	r0, ._873 + 84  @ gUnknown_02024E8C\n"
-        "	ldrh	r1, [r6]\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add r1, r1, r8\n"
-        "	ldrb	r2, [r1, #0x1]\n"
-        "	add	r2, r2, #0x28\n"
-        "	mov	r1, #0xb0\n"
-        "	mov	r3, #0x28\n"
-        "	bl	CreateSprite\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	ldr	r3, ._873 + 88  @ gSprites\n"
-        "	lsl	r1, r4, #0x4\n"
-        "	add	r1, r1, r4\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r0, r3, #0\n"
-        "	add	r0, r0, #0x1c\n"
-        "	add	r0, r1, r0\n"
-        "	ldr	r2, ._873 + 92  @ nullsub_37\n"
-        "	str	r2, [r0]\n"
-        "	add	r1, r1, r3\n"
-        "	ldrb	r2, [r1, #0x5]\n"
-        "	mov	r0, #0xf\n"
-        "	and	r0, r0, r2\n"
-        "	mov	r2, #0x10\n"
-        "	orr	r0, r0, r2\n"
-        "	strb	r0, [r1, #0x5]\n"
-        "	mov	r1, #0x80\n"
-        "	lsl	r1, r1, #0x13\n"
-        "	mov	r2, #0xfa\n"
-        "	lsl	r2, r2, #0x5\n"
-        "	add	r0, r2, #0\n"
-        "	strh	r0, [r1]\n"
-        "	ldr	r0, ._873 + 96  @ debug_nullsub_45\n"
-        "	bl	SetHBlankCallback\n"
-        "	ldr	r0, ._873 + 100 @ debug_sub_8011DD4\n"
-        "	bl	SetVBlankCallback\n"
-        "	bl	m4aMPlayAllStop\n"
-        "	ldr	r0, ._873 + 104 @ debug_sub_8012D10\n"
-        "	mov	r1, #0x0\n"
-        "	bl	CreateTask\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	ldr	r2, ._873 + 108 @ gTasks\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r1, r1, #0x3\n"
-        "	add	r1, r1, r2\n"
-        "	strh	r5, [r1, #0x8]\n"
-        "	strh	r4, [r1, #0xa]\n"
-        "	ldr	r0, ._873 + 112 @ debug_sub_8012878\n"
-        "	bl	SetMainCallback2\n"
-        "	add	sp, sp, #0xc\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._874:\n"
-        "	.align	2, 0\n"
-        "._873:\n"
-        "	.word	gUnknown_Debug_2023B62\n"
-        "	.word	0x40000d4\n"
-        "	.word	0x85006000\n"
-        "	.word	0x400004c\n"
-        "	.word	gWindowTemplate_81E6C58\n"
-        "	.word	gBattle_BG0_X\n"
-        "	.word	gBattle_BG0_Y\n"
-        "	.word	gBattle_BG1_X\n"
-        "	.word	gBattle_BG1_Y\n"
-        "	.word	gBattle_BG2_X\n"
-        "	.word	gBattle_BG2_Y\n"
-        "	.word	gBattle_BG3_X\n"
-        "	.word	gBattle_BG3_Y\n"
-        "	.word	gBattleTerrain\n"
-        "	.word	gReservedSpritePaletteCount\n"
-        "	.word	gCurrentMove\n"
-        "	.word	gUnknown_03004210\n"
-        "	.word	gMonFrontPicTable\n"
-        "	.word	gMonFrontPicCoords\n"
-        "	.word	gUnknown_081FAF4C\n"
-        "	.word	gMonPaletteTable\n"
-        "	.word	gUnknown_02024E8C\n"
-        "	.word	gSprites\n"
-        "	.word	nullsub_37+1\n"
-        "	.word	debug_nullsub_45+1\n"
-        "	.word	debug_sub_8011DD4+1\n"
-        "	.word	debug_sub_8012D10+1\n"
-        "	.word	gTasks\n"
-        "	.word	debug_sub_8012878+1\n"
-        "\n"
-    );
+	s32 i;
+	u8 spriteId;
+	u8 taskId;
+	
+	for (i = 0; i < 411; i++)
+		gUnknown_Debug_2023B62[i] = 0;
+	SetHBlankCallback(NULL);
+	SetVBlankCallback(NULL);
+	DmaFill32(3, 0, (void *)VRAM, VRAM_SIZE);
+	REG_MOSAIC = 0;
+	REG_WIN0H = 0;
+	REG_WIN0V = 0;
+	REG_WIN1H = 0;
+	REG_WIN1V = 0;
+	REG_WININ = 0;
+	REG_WINOUT = 0;
+	Text_LoadWindowTemplate(&gWindowTemplate_81E6C58);
+	ResetPaletteFade();
+	gBattle_BG0_X = 0;
+	gBattle_BG0_Y = DISPLAY_HEIGHT;
+	gBattle_BG1_X = 0;
+	gBattle_BG1_Y = 0;
+	gBattle_BG2_X = 0;
+	gBattle_BG2_Y = 0;
+	gBattle_BG3_X = 0;
+	gBattle_BG3_Y = 0;
+	gBattleTerrain = 9;
+	sub_800D6D4();
+	sub_800DAB8();
+	ResetSpriteData();
+	ResetTasks();
+	FreeAllSpritePalettes();
+	gReservedSpritePaletteCount = 4;
+	gCurrentMove = 1;
+	Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6C58);
+	DecompressPicFromTable_2(
+	  &gMonFrontPicTable[gCurrentMove],
+	  gMonFrontPicCoords[gCurrentMove].coords,
+	  gMonFrontPicCoords[gCurrentMove].y_offset,
+	  (void *)0x02000000,
+	  gUnknown_081FAF4C[1],
+	  gCurrentMove);
+	LoadCompressedPalette(gMonPaletteTable[gCurrentMove].data, 272, 32);
+	GetMonSpriteTemplate_803C56C(gCurrentMove, 1);
+	spriteId = CreateSprite(&gUnknown_02024E8C, 176, 40 + gMonFrontPicCoords[gCurrentMove].y_offset, 40);
+	gSprites[spriteId].callback = nullsub_37;
+	gSprites[spriteId].oam.paletteNum = 1;
+	REG_DISPCNT = 0x1F40;
+	SetHBlankCallback(debug_nullsub_45);
+	SetVBlankCallback(debug_sub_8011DD4);
+	m4aMPlayAllStop();
+	taskId = CreateTask(debug_sub_8012D10, 0);
+	gTasks[taskId].data[0] = 0;
+	gTasks[taskId].data[1] = spriteId;
+	SetMainCallback2(debug_sub_8012878);
 }
 
 void debug_sub_8012878(void)
