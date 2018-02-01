@@ -105,5 +105,6 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 void sub_8078BD4(struct Sprite *sprite);
 void sub_807941C(struct Sprite *sprite);
 void sub_80789D4(bool8 a1);
+void sub_8079AB8(u8 sprite, u8 sprite2);
 
 #endif // GUARD_ROM_8077ABC_H
