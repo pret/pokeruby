@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "palette.h"
 #include "rom_8077ABC.h"
+#include "scanline_effect.h"
 #include "sound.h"
 #include "task.h"
 #include "trig.h"
@@ -18,6 +19,8 @@ extern u8 gObjectBankIDs[];
 extern const union AffineAnimCmd *const gUnknown_083DA888[];
 extern struct AffineAnimFrameCmd gUnknown_083DA8A4;
 extern struct AffineAnimFrameCmd gUnknown_083DA8C4;
+extern const struct SpriteTemplate gSpriteTemplate_83DA8DC;
+extern const struct SpriteTemplate gSpriteTemplate_83DA9AC;
 
 static void sub_80DB88C(struct Sprite *sprite);
 static void sub_80DB8C0(struct Sprite *sprite);
@@ -27,7 +30,9 @@ static void sub_80DBC00(struct Sprite *sprite);
 static void sub_80DBC34(struct Sprite *sprite);
 static void sub_80DBCD0(u8 taskId);
 static void sub_80DBD58(u8 taskId);
-void sub_80DBE98(u8 taskId);
+static void sub_80DBE98(u8 taskId);
+static void sub_80DC1FC(u8 taskId);
+void sub_80DC3F4(u8 taskId);
 
 
 void sub_80DB74C(struct Sprite *sprite)
@@ -353,4 +358,251 @@ void sub_80DBE00(u8 taskId)
     REG_BLDALPHA = 0x10;
 
     task->func = sub_80DBE98;
+}
+
+static void sub_80DBE98(u8 taskId)
+{
+    u16 i;
+    u8 spriteId;
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->data[0])
+    {
+    case 0:
+        if (++task->data[1] > 8)
+        {
+            task->data[1] = 0;
+            spriteId = CreateSprite(&gSpriteTemplate_83DA8DC, task->data[13], task->data[14], 0);
+            task->data[task->data[2] + 8] = spriteId;
+
+            if (spriteId != 64)
+            {
+                switch (task->data[2])
+                {
+                case 0:
+                    gSprites[spriteId].pos2.x = task->data[12];
+                    gSprites[spriteId].pos2.y = -task->data[12];
+                    break;
+                case 1:
+                    gSprites[spriteId].pos2.x = -task->data[12];
+                    gSprites[spriteId].pos2.y = task->data[12];
+                    break;
+                case 2:
+                    gSprites[spriteId].pos2.x = task->data[12];
+                    gSprites[spriteId].pos2.y = task->data[12];
+                    break;
+                case 3:
+                    gSprites[spriteId].pos2.x = -task->data[12];
+                    gSprites[spriteId].pos2.y = -task->data[12];
+                    break;
+                }
+            }
+
+            if (++task->data[2] == 5)
+                task->data[0]++;
+        }
+        break;
+    case 1:
+        if (task->data[1] & 1)
+            task->data[3]--;
+        else
+            task->data[4]++;
+
+        REG_BLDALPHA = (task->data[4] << 8) | task->data[3];
+
+        if (++task->data[1] == 32)
+        {
+            for (i = 8; i < 13; i++)
+            {
+                if (task->data[i] != 64)
+                    DestroySprite(&gSprites[task->data[i]]);
+            }
+
+            task->data[0]++;
+        }
+        break;
+    case 2:
+        task->data[0]++;
+        break;
+    case 3:
+        REG_BLDALPHA = 0;
+        REG_BLDCNT = 0;
+        DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+static void sub_80DC020(struct Sprite *sprite)
+{
+    if (sprite->data[1] > sprite->data[0] - 10)
+        sprite->invisible = sprite->data[1] & 1;
+
+    if (sprite->data[1] == sprite->data[0])
+        DestroyAnimSprite(sprite);
+
+    sprite->data[1]++;
+}
+
+void sub_80DC068(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[0] == 0)
+    {
+        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
+        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    }
+
+    sprite->data[0] = gBattleAnimArgs[1];
+    sprite->callback = sub_80DC020;
+}
+
+void sub_80DC0B0(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (IsContest())
+    {
+        if (gBattleAnimArgs[0] == 1)
+        {
+            task->data[10] = -10;
+            task->data[11] = sub_807A100(gAnimBankTarget, 5) - 8;
+            task->data[12] = sub_807A100(gAnimBankTarget, 2) + 8;
+            task->data[13] = sub_807A100(gAnimBankAttacker, 5) - 8;
+            task->data[14] = sub_807A100(gAnimBankAttacker, 2) + 8;
+        }
+        else
+        {
+            task->data[10] = 10;
+            task->data[11] = sub_807A100(gAnimBankAttacker, 4) + 8;
+            task->data[12] = sub_807A100(gAnimBankAttacker, 3) - 8;
+            task->data[13] = sub_807A100(gAnimBankTarget, 4) + 8;
+            task->data[14] = sub_807A100(gAnimBankTarget, 3) - 8;
+        }
+    }
+    else
+    {
+        if (gBattleAnimArgs[0] == 1)
+        {
+            task->data[10] = -10;
+            task->data[11] = sub_807A100(gAnimBankTarget, 4) + 8;
+            task->data[12] = sub_807A100(gAnimBankTarget, 2) + 8;
+            task->data[13] = sub_807A100(gAnimBankAttacker, 4) + 8;
+            task->data[14] = sub_807A100(gAnimBankAttacker, 2) + 8;
+        }
+        else
+        {
+            task->data[10] = 10;
+            task->data[11] = sub_807A100(gAnimBankAttacker, 5) - 8;
+            task->data[12] = sub_807A100(gAnimBankAttacker, 3) - 8;
+            task->data[13] = sub_807A100(gAnimBankTarget, 5) - 8;
+            task->data[14] = sub_807A100(gAnimBankTarget, 3) - 8;
+        }
+    }
+
+    task->data[1] = 6;
+    task->func = sub_80DC1FC;
+}
+
+static void sub_80DC1FC(u8 taskId)
+{
+    u8 spriteId;
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->data[0])
+    {
+    case 0:
+        if (++task->data[1] > 6)
+        {
+            task->data[1] = 0;
+            spriteId = CreateSprite(&gSpriteTemplate_83DA9AC, task->data[11], task->data[12], 0);
+            if (spriteId != 64)
+            {
+                gSprites[spriteId].data[0] = 16;
+                gSprites[spriteId].data[2] = task->data[13];
+                gSprites[spriteId].data[4] = task->data[14];
+                gSprites[spriteId].data[5] = task->data[10];
+
+                sub_80786EC(&gSprites[spriteId]);
+                StartSpriteAffineAnim(&gSprites[spriteId], task->data[2] & 3);
+            }
+
+            if (++task->data[2] == 12)
+                task->data[0]++;
+        }
+        break;
+    case 1:
+        if (++task->data[1] > 17)
+            DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+void sub_80DC2B0(struct Sprite *sprite)
+{
+    if (sub_8078718(sprite))
+    {
+        FreeOamMatrix(sprite->oam.matrixNum);
+        DestroySprite(sprite);
+    }
+}
+
+void sub_80DC2D4(u8 taskId)
+{
+    s16 i;
+    u8 var1;
+    struct ScanlineEffectParams scanlineParams;
+    struct Task *task = &gTasks[taskId];
+    
+    var1 = sub_8077FC0(gAnimBankTarget);
+    task->data[14] = var1 - 32;
+
+    switch (gBattleAnimArgs[0])
+    {
+    case 0:
+        task->data[11] = 2;
+        task->data[12] = 5;
+        task->data[13] = 64;
+        task->data[15] = var1 + 32;
+        break;
+    case 1:
+        task->data[11] = 2;
+        task->data[12] = 5;
+        task->data[13] = 192;
+        task->data[15] = var1 + 32;
+        break;
+    case 2:
+        task->data[11] = 4;
+        task->data[12] = 4;
+        task->data[13] = 0;
+        task->data[15] = var1 + 32;
+        break;
+    }
+
+    if (task->data[14] < 0)
+        task->data[14] = 0;
+
+    if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
+    {
+        task->data[10] = gBattle_BG1_X;
+        scanlineParams.dmaDest = &REG_BG1HOFS;
+    }
+    else
+    {
+        task->data[10] = gBattle_BG2_X;
+        scanlineParams.dmaDest = &REG_BG2HOFS;
+    }
+
+    i = task->data[14];
+    while (i <= task->data[14] + 64)
+    {
+        gScanlineEffectRegBuffers[0][i] = task->data[10];
+        gScanlineEffectRegBuffers[1][i] = task->data[10];
+        i++;
+    }
+
+    scanlineParams.dmaControl = 0XA2600001;
+    scanlineParams.initState = 1;
+    scanlineParams.unused9 = 0;
+    ScanlineEffect_SetParams(scanlineParams);
+
+    task->func = sub_80DC3F4;
 }
