@@ -85,7 +85,7 @@ void sub_8078174(struct Sprite *sprite);
 void sub_80793C4(struct Sprite *sprite);
 void sub_807A3FC(u8 slot, u8 a2, s16 *a3, s16 *a4);
 u8 sub_8079ED4(u8 slot);
-int sub_807A100(u8 slot, u8 a2);
+s16 sub_807A100(u8 slot, u8 a2);
 u16 sub_80790F0(s16 a, s16 b);
 void sub_8078FDC(struct Sprite *sprite, bool8 a2, s16 xScale, s16 yScale, u16 rotation);
 void sub_807867C(struct Sprite *sprite, s16 a2);
@@ -105,5 +105,6 @@ void oamt_add_pos2_onto_pos1(struct Sprite *sprite);
 void sub_8078BD4(struct Sprite *sprite);
 void sub_807941C(struct Sprite *sprite);
 void sub_80789D4(bool8 a1);
+void sub_8079AB8(u8 sprite, u8 sprite2);
 
 #endif // GUARD_ROM_8077ABC_H
