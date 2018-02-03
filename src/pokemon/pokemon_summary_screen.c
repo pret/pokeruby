@@ -144,7 +144,6 @@ extern const u8 gUnknown_08E74E88[];
 extern const u8 gUnknown_08E73508[];
 extern const u8 gStatusScreen_Gfx[];
 extern const u8 gFontDefaultPalette[];
-extern const u8 gUnknownPalette_81E6692[];
 extern const u8 gAbilityNames[][13];
 extern const u8 * const gAbilityDescriptions[];
 extern const u8 * const gContestEffectStrings[];
@@ -931,21 +930,21 @@ static bool8 LoadPokemonSummaryScreenGraphics(void)
 
 static void sub_809E044(void)
 {
-    LoadPalette(&gUnknownPalette_81E6692[28], 129, 2);
-    LoadPalette(&gUnknownPalette_81E6692[30], 136, 2);
-    LoadPalette(&gUnknownPalette_81E6692[28], 143, 2);
-    LoadPalette(&gUnknownPalette_81E6692[30], 137, 2);
-    LoadPalette(&gUnknownPalette_81E6692[12], 209, 4);
-    LoadPalette(&gUnknownPalette_81E6692[20], 211, 4);
-    LoadPalette(&gUnknownPalette_81E6692[28], 213, 4);
-    LoadPalette(&gUnknownPalette_81E6692[12], 215, 4);
-    LoadPalette(&gUnknownPalette_81E6692[8],  217, 4);
-    LoadPalette(&gUnknownPalette_81E6692[16], 219, 4);
-    LoadPalette(&gUnknownPalette_81E6692[4],  221, 2);
-    LoadPalette(&gUnknownPalette_81E6692[6], 222, 2);
-    LoadPalette(&gUnknownPalette_81E6692[2],  223, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 129, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 15, 136, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 143, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 15, 137, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 6,  209, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 10, 211, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 213, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 6,  215, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 4,  217, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 8,  219, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 2,  221, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 3,  222, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 1,  223, 2);
     LoadPalette(gFontDefaultPalette,          240, 32);
-    LoadPalette(&gUnknownPalette_81E6692[6], 249, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 3,  249, 2);
 }
 
 static void SummaryScreenExit(u8 taskId)
@@ -2245,7 +2244,7 @@ static void sub_809F678(struct Pokemon *mon)
     else
     {
         struct BoxPokemon *mons = pssData.monList.boxMons;
-        sub_803B4B4(&mons[pssData.monIndex], mon);
+        ExpandBoxMon(&mons[pssData.monIndex], mon);
     }
 }
 

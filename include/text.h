@@ -253,4 +253,6 @@ void Text_StripExtCtrlCodes(u8 *str);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 u8 sub_8004FD0(struct Window *win, u8 *dest, const u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8);
 
+extern const u16 gUnknownPalette_81E6692[];
+
 #endif // GUARD_TEXT_H

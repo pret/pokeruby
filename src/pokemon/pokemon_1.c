@@ -524,7 +524,7 @@ void CalculateMonStats(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }
 
-void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest)
+void ExpandBoxMon(const struct BoxPokemon *src, struct Pokemon *dest)
 {
     u32 value = 0;
     dest->box = *src;

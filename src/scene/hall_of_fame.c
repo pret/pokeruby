@@ -18,6 +18,9 @@
 #include "random.h"
 #include "scanline_effect.h"
 #include "trig.h"
+#include "hof_pc.h"
+#include "credits.h"
+#include "pc_screen_effect.h"
 #include "ewram.h"
 
 static EWRAM_DATA u32 sUnknown_0203931C = 0;
@@ -88,15 +91,6 @@ static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID
 static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a3);
 static bool8 sub_81438C4(void);
 
-// functions from different files
-void sub_81439D0(void);
-void sub_80C5CD4(void*); // ?
-void sub_80C5E38(void*); // ?
-bool8 sub_80C5DCC(void);
-bool8 sub_80C5F98(void);
-void ReturnFromHallOfFamePC(void);
-u16 SpeciesToPokedexNum(u16 species);
-
 // data and gfx
 
 static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
@@ -130,9 +124,9 @@ static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
     {-41,   214,    184,    64}
 };
 
-static const struct HallofFameMon sDummyFameMon =
-{
-    0x3EA03EA, 0, 0, 0, {0}
+static const struct PCScreenEffectStruct sPCScreenEffectTemplate = {
+    .tileTag = 0x3ea,
+    .paletteTag = 0x3ea
 };
 
 static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
@@ -800,20 +794,15 @@ void sub_81428CC(void)
         }
         break;
     case 3:
-        {
-            struct HallofFameMons* fameMons;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0;
+        sub_81435B8();
 
-            REG_BLDCNT = 0;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0;
-            sub_81435B8();
+        eHOFPCScreenEffect = sPCScreenEffectTemplate;
 
-            fameMons = eHallOfFameMons1;
-            fameMons->mons[0] = sDummyFameMon;
-
-            sub_80C5CD4(fameMons);
-            gMain.state++;
-        }
+        sub_80C5CD4(&eHOFPCScreenEffect);
+        gMain.state++;
         break;
     case 4:
         AnimateSprites();
@@ -1022,12 +1011,9 @@ static void sub_8142DF4(u8 taskID)
 
 static void sub_8142F78(u8 taskID)
 {
-    struct HallofFameMons* fameMons;
-
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    fameMons = eHallOfFameMons1;
-    fameMons->mons[0] = sDummyFameMon;
-    sub_80C5E38(fameMons);
+    eHOFPCScreenEffect = sPCScreenEffectTemplate;
+    sub_80C5E38(&eHOFPCScreenEffect);
     gTasks[taskID].func = sub_8142FCC;
 }
 
