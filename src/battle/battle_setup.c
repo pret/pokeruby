@@ -802,25 +802,25 @@ static u8 GetTrainerBattleTransition(void)
     u8 enemyLevel;
     u8 playerLevel;
 
-    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT) // link battle?
+    if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
         return B_TRANSITION_STEVEN;
 
     trainer = gTrainers;
 
-    if (trainer[gTrainerBattleOpponent].trainerClass == 24) // league?
+    if (trainer[gTrainerBattleOpponent].trainerClass == TRAINER_CLASS_ELITE_FOUR)
     {
-        if (gTrainerBattleOpponent == 261)
+        if (gTrainerBattleOpponent == OPPONENT_SIDNEY)
             return B_TRANSITION_SYDNEY;
-        if (gTrainerBattleOpponent == 262)
+        if (gTrainerBattleOpponent == OPPONENT_PHOEBE)
             return B_TRANSITION_PHOEBE;
-        if (gTrainerBattleOpponent == 263)
+        if (gTrainerBattleOpponent == OPPONENT_GLACIA)
             return B_TRANSITION_GLACIA;
-        if (gTrainerBattleOpponent == 264)
+        if (gTrainerBattleOpponent == OPPONENT_DRAKE)
             return B_TRANSITION_DRAKE;
         return B_TRANSITION_STEVEN;
     }
 
-    if (trainer[gTrainerBattleOpponent].trainerClass == 32) // team leader?
+    if (trainer[gTrainerBattleOpponent].trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_STEVEN;
 
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
@@ -1096,7 +1096,7 @@ void CB2_EndTrainerBattle(void)
 {
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
+        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
@@ -1113,7 +1113,7 @@ void CB2_EndTrainerEyeRematchBattle(void)
 {
     if (gTrainerBattleOpponent == SECRET_BASE_OPPONENT)
     {
-        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
+        SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {

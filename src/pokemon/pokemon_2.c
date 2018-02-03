@@ -1102,8 +1102,8 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
         }
     }
 
-    gBattleTypeFlags = 8;
-    gTrainerBattleOpponent = 1024;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
 }
 
 const u8 gSecretBaseTrainerClasses[][5] = {
