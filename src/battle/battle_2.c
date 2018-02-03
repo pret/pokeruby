@@ -727,16 +727,14 @@ void sub_800F298(void)
             ZeroPlayerPartyMons();
             ZeroEnemyPartyMons();
             gBattleCommunication[0]++;
-            goto step_2;
-        }
-        break;
+            // fallthrough
     case 2:
-      step_2:
-        if (IsLinkTaskFinished())
-        {
-            SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
-            gBattleCommunication[0]++;
-        }
+            if (IsLinkTaskFinished())
+            {
+                SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
+                gBattleCommunication[0]++;
+            }
+	}
         break;
     case 3:
         if ((GetBlockReceivedStatus() & 0xF) == 0xF)
