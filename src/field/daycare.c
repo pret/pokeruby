@@ -1581,13 +1581,14 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
 
     flags[0] = flags[1] = 0;
     for (i = 0; name[i] != EOS; i++)
-
     {
         if (name[i] == CHAR_MALE) flags[0]++;
         if (name[i] == CHAR_FEMALE) flags[1]++;
     }
-    if (genderRatio == MON_MALE && flags[0] && !flags[1]) return TRUE;
-    if (genderRatio == MON_FEMALE && flags[1] && !flags[0]) return TRUE;
+    if (genderRatio == MON_MALE && flags[0] && !flags[1])
+        return TRUE;
+    if (genderRatio == MON_FEMALE && flags[1] && !flags[0])
+        return TRUE;
     return FALSE;
 }
 
