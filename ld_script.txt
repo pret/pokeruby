@@ -302,7 +302,6 @@ SECTIONS {
         asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
-        asm/dark.o(.text);
         asm/ground.o(.text);
         asm/normal.o(.text);
         src/battle/anim/battle_intro.o(.text);
