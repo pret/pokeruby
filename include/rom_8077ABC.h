@@ -106,5 +106,6 @@ void sub_8078BD4(struct Sprite *sprite);
 void sub_807941C(struct Sprite *sprite);
 void sub_80789D4(bool8 a1);
 void sub_8079AB8(u8 sprite, u8 sprite2);
+u8 sub_807A4A0(int bank, u8 sprite, int species);
 
 #endif // GUARD_ROM_8077ABC_H
