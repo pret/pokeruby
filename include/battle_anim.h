@@ -63,5 +63,6 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 s16 sub_8077104(s16 newPan, int oldPan);
 void DestroyAnimSoundTask(u8 taskId);
+void sub_8076464(u8 a);
 
 #endif

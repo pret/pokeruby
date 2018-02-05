@@ -205,7 +205,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DayCare * daycare, u8 slot)
 
     GetBoxMonNick(&daycare->mons[slot], gStringVar1);
     species = GetBoxMonData(&daycare->mons[slot], MON_DATA_SPECIES);
-    sub_803B4B4(&daycare->mons[slot], &pokemon);
+    ExpandBoxMon(&daycare->mons[slot], &pokemon);
 
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {

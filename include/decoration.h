@@ -127,17 +127,12 @@ extern u8 gUnknown_020388F5;
 extern u8 gUnknown_020388F6;
 extern u8 gUnknown_020388D6[16];
 extern u8 gUnknown_020388E6[12];
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
-extern u16 gSpecialVar_0x8007;
 extern u16 gUnknown_020391A4;
 extern u16 gUnknown_020391A6;
 extern u8 gUnknown_020391A8;
 extern u8 gUnknown_020391A9;
 extern u8 gUnknown_020391AA;
 extern u8 gUnknown_02039234;
-extern void (*gFieldCallback)(void);
 extern const struct YesNoFuncTable gUnknown_083EC96C[];
 extern struct UnkStruct_020391B4 gUnknown_020391B4[16];
 
@@ -160,7 +155,6 @@ extern const struct YesNoFuncTable gUnknown_083ECAA0;
 extern u8 sub_8134194(u8); // src/decoration_inventory
 extern bool8 sub_81341D4(void); // src/decoration_inventory
 extern void sub_8134104(u8); // src/decoration_inventory
-extern bool8 IsWeatherNotFadingIn(void);
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
 void Task_SecretBasePC_Decoration(u8);
