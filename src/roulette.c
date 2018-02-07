@@ -3330,144 +3330,13 @@ void sub_8118DE4(struct Sprite *sprite)
     }
 }
 
-#if DEBUG
-__attribute__((naked))
-void sub_8118F8C(struct Sprite *sprite)
-{
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r9\n\
-	mov	r6, r8\n\
-	push	{r6, r7}\n\
-	add	r6, r0, #0\n\
-	bl	sub_8118724\n\
-	ldr	r5, ._868       @ 0x2019000\n\
-	mov	r0, #0x8c\n\
-	add	r0, r0, r5\n\
-	mov	r8, r0\n\
-	ldr	r0, [r0]\n\
-	ldr	r1, ._868 + 4   @ 0x3f000000\n\
-	bl	__gtsf2\n\
-	cmp	r0, #0\n\
-	bgt	._874	@cond_branch\n\
-	add	r0, r6, #0\n\
-	bl	sub_81186B8\n\
-	add	r0, r6, #0\n\
-	bl	sub_81186E8\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bne	._864	@cond_branch\n\
-	add	r1, r5, #0\n\
-	add	r1, r1, #0x90\n\
-	ldr	r0, ._868 + 8   @ 0x0\n\
-	str	r0, [r1]\n\
-	ldr	r1, ._868 + 12  @ gUnknown_083F8DF4\n\
-	mov	r9, r1\n\
-	ldrb	r0, [r5, #0x4]\n\
-	lsl	r7, r0, #0x1e\n\
-	lsr	r0, r7, #0x19\n\
-	add r0, r0, r9\n\
-	mov	r4, #0x3\n\
-	ldsb	r4, [r0, r4]\n\
-	add	r0, r4, #0\n\
-	bl	__floatsisf\n\
-	add	r5, r0, #0\n\
-	cmp	r4, #0\n\
-	bge	._865	@cond_branch\n\
-	ldr	r1, ._868 + 16  @ 0x43800000\n\
-	bl	__addsf3\n\
-	add	r5, r0, #0\n\
-._865:\n\
-	lsr	r0, r7, #0x19\n\
-	add r0, r0, r9\n\
-	ldrb	r0, [r0, #0x4]\n\
-	add	r0, r0, #0x1\n\
-	bl	__floatsisf\n\
-	add	r1, r0, #0\n\
-	add	r0, r5, #0\n\
-	bl	__divsf3\n\
-	add	r1, r0, #0\n\
-	mov	r2, r8\n\
-	ldr	r0, [r2]\n\
-	bl	__subsf3\n\
-	mov	r1, r8\n\
-	str	r0, [r1]\n\
-	mov	r0, #0x4\n\
-	strh	r0, [r6, #0x30]\n\
-	ldr	r0, ._868 + 20  @ unk_2039560\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._866	@cond_branch\n\
-	ldr	r0, ._868 + 24  @ debug_sub_812E698\n\
-	str	r0, [r6, #0x1c]\n\
-	b	._874\n\
-._869:\n\
-	.align	2, 0\n\
-._868:\n\
-	.word	0x2019000\n\
-	.word	0x3f000000\n\
-	.word	0x0\n\
-	.word	gUnknown_083F8DF4\n\
-	.word	0x43800000\n\
-	.word	unk_2039560\n\
-	.word	debug_sub_812E698+1\n\
-._866:\n\
-	ldr	r0, ._871       @ sub_8118DE4\n\
-	str	r0, [r6, #0x1c]\n\
-	b	._874\n\
-._872:\n\
-	.align	2, 0\n\
-._871:\n\
-	.word	sub_8118DE4+1\n\
-._864:\n\
-	add	r6, r5, #0\n\
-	add	r6, r6, #0x90\n\
-	ldr	r0, [r6]\n\
-	ldr	r4, ._875       @ 0x0\n\
-	add	r1, r4, #0\n\
-	bl	__nesf2\n\
-	cmp	r0, #0\n\
-	beq	._874	@cond_branch\n\
-	mov	r2, r8\n\
-	ldr	r0, [r2]\n\
-	add	r1, r4, #0\n\
-	bl	__ltsf2\n\
-	cmp	r0, #0\n\
-	bge	._874	@cond_branch\n\
-	str	r4, [r6]\n\
-	mov	r0, r8\n\
-	str	r4, [r0]\n\
-	add	r4, r5, #0\n\
-	add	r4, r4, #0x98\n\
-	ldr	r0, [r4]\n\
-	bl	__extendsfdf2\n\
-	ldr	r2, ._875 + 4   @ 0x3ff33333\n\
-	ldr	r3, ._875 + 8   @ 0x33333333\n\
-	bl	__divdf3\n\
-	bl	__truncdfsf2\n\
-	str	r0, [r4]\n\
-._874:\n\
-	pop	{r3, r4}\n\
-	mov	r8, r3\n\
-	mov	r9, r4\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._876:\n\
-	.align	2, 0\n\
-._875:\n\
-	.word	0x0\n\
-	.word	0x3ff33333\n\
-	.word	0x33333333");
-}
-#else
 void sub_8118F8C(struct Sprite *sprite)
 {
     sub_8118724(sprite);
     if (!(eRoulette->var8C > 0.5f))
     {
         sub_81186B8(sprite);
-        if (sub_81186E8(sprite) == 0x0)
+        if (!sub_81186E8(sprite))
         {
             struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
@@ -3475,7 +3344,12 @@ void sub_8118F8C(struct Sprite *sprite)
             eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
-            sprite->callback = &sub_8118DE4;
+#if DEBUG
+            if (unk_2039560)
+                sprite->callback = debug_sub_812E698;
+            else
+#endif
+                sprite->callback = sub_8118DE4;
         }
         else
         {
@@ -3491,7 +3365,6 @@ void sub_8118F8C(struct Sprite *sprite)
         }
     }
 }
-#endif
 
 void sub_8119088(struct Sprite *sprite)
 {
@@ -3979,7 +3852,7 @@ void sub_811952C(struct Sprite *sprite)
 
 void sub_8119780(struct Sprite *sprite)
 {
-    if (!(sprite->data[0x1]++ < sprite->data[0x3]))
+    if (sprite->data[0x1]++ >= sprite->data[0x3])
     {
         if ((sprite->pos1.x -= 0x2) < -0x10)
         {
@@ -4118,7 +3991,7 @@ void sub_8119AAC(struct Sprite *sprite)
 
 void sub_8119B24(struct Sprite *sprite)
 {
-    if (!(sprite->data[0x1] < 0x0))
+    if (sprite->data[0x1] >= 0x0)
     {
         sprite->data[0x1]--;
         sprite->pos1.y--;
@@ -4127,7 +4000,7 @@ void sub_8119B24(struct Sprite *sprite)
     }
     else
     {
-        if (!(sprite->data[0x3] < 0x0))
+        if (sprite->data[0x3] >= 0x0)
         {
             sprite->data[0x3]--;
             if (sprite->animDelayCounter == 0x0)
@@ -4166,7 +4039,7 @@ void sub_8119BCC(struct Sprite *sprite)
     }
     else
     {
-        if (!(sprite->data[0x1] < 0x0))
+        if (sprite->data[0x1] >= 0x0)
         {
             sprite->pos1.x += t[eRoulette->var38->data[0x0]] * z[0x7 - sprite->data[0x1]][0x0];
             sprite->pos1.y += z[0x7 - sprite->data[0x1]][0x1];
@@ -4189,7 +4062,7 @@ void sub_8119D08(struct Sprite *sprite)
 {
     s8 t[0x2]; //sign
     memcpy(t, &gUnknown_083FA64A, 0x2);
-    if (!(sprite->data[0x1]-- < 0x0))
+    if (sprite->data[0x1]-- >= 0x0)
     {
         sprite->pos1.x += t[eRoulette->var38->data[0x0]] * 0x2;
         gSprites[sprite->data[0x6]].invisible ^= 0x1;
