@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/map_objects.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
 #include "party_menu.h"
@@ -19,6 +20,28 @@ extern void (*gFieldCallback)(void);
 extern void (*gUnknown_03005CE4)(void);
 
 extern u8 S_UseStrength[];
+
+#if DEBUG
+void debug_sub_8130318(void)
+{
+    if (ShouldDoBrailleStrengthEffect())
+    {
+        gLastFieldPokeMenuOpened = 0;
+        gSpecialVar_Result = 0;
+        sub_811AA38();
+    }
+    else if (npc_before_player_of_type(MAP_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
+    {
+        gLastFieldPokeMenuOpened = 0;
+        gSpecialVar_Result = 0;
+        sub_811AA18();
+    }
+    else
+    {
+        ScriptContext2_Disable();
+    }
+}
+#endif
 
 bool8 SetUpFieldMove_Strength(void)
 {

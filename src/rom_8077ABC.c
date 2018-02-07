@@ -1970,7 +1970,7 @@ void sub_807A0F4(struct Sprite *sprite)
     DestroySpriteAndFreeResources(sprite);
 }
 
-int sub_807A100(u8 slot, u8 a2)
+s16 sub_807A100(u8 slot, u8 a2)
 {
     u16 species;
     u32 personality;
@@ -2138,7 +2138,7 @@ void sub_807A3FC(u8 slot, bool8 a2, s16 *a3, s16 *a4)
     *a4 = (v4 + v6) / 2;
 }
 
-u8 sub_807A4A0(int a1, u8 sprite, int a3)
+u8 sub_807A4A0(int bank, u8 sprite, int species)
 {
     u8 new_sprite = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     gSprites[new_sprite] = gSprites[sprite];

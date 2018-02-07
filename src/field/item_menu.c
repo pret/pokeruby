@@ -158,6 +158,9 @@ extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
 
+// TODO: decompile the debug code so we can use static in this file
+#define static
+
 extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
 extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
 extern const struct CompressedSpritePalette sBagSpritePalette;
@@ -286,6 +289,24 @@ static void sub_80A6618(u8);
 
 const struct YesNoFuncTable gUnknown_083C16FC = {sub_80A65AC, sub_80A6618};
 
+#if DEBUG
+const struct {u16 item; u8 unk;} gUnknown_Debug_083EBC68[12+48] =
+{
+    {ITEM_POKE_BALL,      10},
+    {ITEM_ULTRA_BALL,     15},
+    {ITEM_GREAT_BALL,     20},
+    {ITEM_MASTER_BALL,    25},
+    {ITEM_ACRO_BIKE,      1 },
+    {ITEM_OLD_ROD,        1 },
+    {ITEM_GOOD_ROD,       1 },
+    {ITEM_SUPER_ROD,      1 },
+    {ITEM_POKEBLOCK_CASE, 1 },
+    {ITEM_WAILMER_PAIL,   1 },
+    {ITEM_ITEMFINDER,     1 },
+    {ITEM_NONE,           1 },
+};
+#endif
+
 void sub_80A34E8(void);
 static bool8 LoadBagGraphicsMultistep(void);
 static void sub_80A362C(void);
@@ -372,6 +393,390 @@ static void sub_80A3134(void)
     DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x6000), 0x800);
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 SetupBagMultistep(void)
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r0, ._5         @ gMain\n\
+	ldr	r1, ._5 + 4     @ 0x43c\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x10\n\
+	bls	._3	@cond_branch\n\
+	b	._66\n\
+._3:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._5 + 8     @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._6:\n\
+	.align	2, 0\n\
+._5:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._7\n\
+._7:\n\
+	.word	._8\n\
+	.word	._9\n\
+	.word	._10\n\
+	.word	._11\n\
+	.word	._12\n\
+	.word	._13\n\
+	.word	._14\n\
+	.word	._15\n\
+	.word	._16\n\
+	.word	._17\n\
+	.word	._18\n\
+	.word	._19\n\
+	.word	._20\n\
+	.word	._21\n\
+	.word	._22\n\
+	.word	._23\n\
+	.word	._24\n\
+._8:\n\
+	bl	ClearVideoCallbacks\n\
+	bl	sub_80A34E8\n\
+	b	._61\n\
+._9:\n\
+	bl	ScanlineEffect_Stop\n\
+	ldr	r1, ._27        @ gMain\n\
+	ldr	r0, ._27 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._28:\n\
+	.align	2, 0\n\
+._27:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._10:\n\
+	bl	gpu_pal_allocator_reset__manage_upper_four\n\
+	b	._61\n\
+._11:\n\
+	bl	ClearBGTilemapBuffers\n\
+	ldr	r0, ._31        @ \n\
+	ldr	r1, ._31 + 4    @ \n\
+	add	r0, r0, r1\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0]\n\
+	b	._61\n\
+._32:\n\
+	.align	2, 0\n\
+._31:\n\
+	.word	+0x2000000\n\
+	.word	0x1ffff\n\
+._12:\n\
+	bl	ResetPaletteFade\n\
+	ldr	r2, ._34        @ gPaletteFade\n\
+	ldrb	r0, [r2, #0x8]\n\
+	mov	r1, #0x80\n\
+	orr	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r1, ._34 + 4    @ gMain\n\
+	ldr	r0, ._34 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._35:\n\
+	.align	2, 0\n\
+._34:\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._13:\n\
+	bl	ResetSpriteData\n\
+	b	._61\n\
+._14:\n\
+	bl	LoadBagGraphicsMultistep\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._37	@cond_branch\n\
+	b	._66\n\
+._37:\n\
+	ldr	r1, ._40        @ gMain\n\
+	ldr	r0, ._40 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._41:\n\
+	.align	2, 0\n\
+._40:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._15:\n\
+	ldr	r0, ._43        @ gWindowTemplate_81E6DFC\n\
+	bl	Text_LoadWindowTemplate\n\
+	b	._61\n\
+._44:\n\
+	.align	2, 0\n\
+._43:\n\
+	.word	gWindowTemplate_81E6DFC\n\
+._16:\n\
+	ldr	r0, ._46        @ gWindowTemplate_81E6DFC\n\
+	bl	MultistepInitMenuWindowBegin\n\
+	ldr	r1, ._46 + 4    @ gMain\n\
+	ldr	r0, ._46 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._47:\n\
+	.align	2, 0\n\
+._46:\n\
+	.word	gWindowTemplate_81E6DFC\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._17:\n\
+	bl	MultistepInitMenuWindowContinue\n\
+	cmp	r0, #0\n\
+	bne	._48	@cond_branch\n\
+	b	._66\n\
+._48:\n\
+	b	._61\n\
+._18:\n\
+	bl	ClearVerticalScrollIndicatorPalettes\n\
+	bl	LoadScrollIndicatorPalette\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0xac\n\
+	mov	r2, #0xc\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xac\n\
+	mov	r2, #0x94\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x1c\n\
+	mov	r2, #0x58\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x64\n\
+	mov	r2, #0x58\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	ldr	r0, ._53        @ sReturnLocation\n\
+	ldrb	r0, [r0]\n\
+	sub	r0, r0, #0x4\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bhi	._51	@cond_branch\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x1\n\
+	bl	SetVerticalScrollIndicators\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x1\n\
+	bl	SetVerticalScrollIndicators\n\
+._51:\n\
+	ldr	r1, ._53 + 4    @ gMain\n\
+	ldr	r0, ._53 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._54:\n\
+	.align	2, 0\n\
+._53:\n\
+	.word	sReturnLocation\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._19:\n\
+	ldr	r1, ._56        @ gUnknown_0203855A\n\
+	mov	r0, #0x10\n\
+	strb	r0, [r1]\n\
+	ldr	r4, ._56 + 4    @ gBGTilemapBuffers\n\
+	ldr	r5, ._56 + 8    @ sCurrentBagPocket\n\
+	ldrb	r1, [r5]\n\
+	add	r1, r1, #0x1\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	add	r0, r4, #0\n\
+	bl	sub_80A39B8\n\
+	ldrb	r1, [r5]\n\
+	add	r0, r4, #0\n\
+	bl	DrawPocketIndicatorDots\n\
+	bl	UpdateAllBagPockets\n\
+	ldr	r4, ._56 + 12   @ gBagPockets\n\
+	ldr	r0, [r4, #0x10]\n\
+	ldr	r1, [r4, #0x14]\n\
+	bl	SortItemSlots\n\
+	ldr	r0, [r4, #0x18]\n\
+	ldr	r1, [r4, #0x1c]\n\
+	bl	SortItemSlots\n\
+	bl	sub_80A3D40\n\
+	ldr	r1, ._56 + 16   @ gCurrentBagPocketItemSlots\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r5, r0]\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r4\n\
+	ldr	r0, [r0]\n\
+	str	r0, [r1]\n\
+	bl	sub_80A362C\n\
+	b	._61\n\
+._57:\n\
+	.align	2, 0\n\
+._56:\n\
+	.word	gUnknown_0203855A\n\
+	.word	gBGTilemapBuffers+0x1000\n\
+	.word	sCurrentBagPocket\n\
+	.word	gBagPockets\n\
+	.word	gCurrentBagPocketItemSlots\n\
+._20:\n\
+	ldr	r0, ._59        @ 0xffff\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x7\n\
+	bl	sub_80A48E8\n\
+	ldr	r1, ._59 + 4    @ gBagPocketScrollStates\n\
+	ldr	r4, ._59 + 8    @ sCurrentBagPocket\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r4, r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0, #0x1]\n\
+	ldrb	r0, [r0]\n\
+	add	r1, r1, r0\n\
+	ldr	r0, ._59 + 12   @ gCurrentBagPocketItemSlots\n\
+	ldr	r0, [r0]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r0\n\
+	mov	r2, #0x0\n\
+	ldsh	r0, [r1, r2]\n\
+	bl	ItemListMenu_InitDescription\n\
+	bl	ItemListMenu_InitMenu\n\
+	ldr	r1, ._59 + 16   @ gUnknown_0203855B\n\
+	ldrb	r0, [r4]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	ldr	r1, ._59 + 20   @ gUnknown_0203855C\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	ldr	r1, ._59 + 24   @ gMain\n\
+	ldr	r0, ._59 + 28   @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._60:\n\
+	.align	2, 0\n\
+._59:\n\
+	.word	0xffff\n\
+	.word	gBagPocketScrollStates\n\
+	.word	sCurrentBagPocket\n\
+	.word	gCurrentBagPocketItemSlots\n\
+	.word	gUnknown_0203855B\n\
+	.word	gUnknown_0203855C\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._21:\n\
+	bl	CreateBagSprite\n\
+	mov	r0, #0x0\n\
+	bl	CreateBagPokeballSprite\n\
+	bl	sub_80A3740\n\
+	b	._61\n\
+._22:\n\
+	ldr	r3, ._63        @ 0x4000208\n\
+	ldrh	r2, [r3]\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r3]\n\
+	ldr	r4, ._63 + 4    @ 0x4000200\n\
+	ldrh	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r4]\n\
+	strh	r2, [r3]\n\
+	ldr	r2, ._63 + 8    @ 0x4000004\n\
+	ldrh	r0, [r2]\n\
+	mov	r1, #0x8\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r2]\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r2, #0x10\n\
+	mov	r3, #0x0\n\
+	bl	BeginNormalPaletteFade\n\
+	ldr	r2, ._63 + 12   @ gPaletteFade\n\
+	ldrb	r1, [r2, #0x8]\n\
+	mov	r0, #0x7f\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r1, ._63 + 16   @ gMain\n\
+	ldr	r0, ._63 + 20   @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._64:\n\
+	.align	2, 0\n\
+._63:\n\
+	.word	0x4000208\n\
+	.word	0x4000200\n\
+	.word	0x4000004\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._23:\n\
+	bl	sub_8055870\n\
+	cmp	r0, #0x1\n\
+	beq	._66	@cond_branch\n\
+._61:\n\
+	ldr	r1, ._67        @ gMain\n\
+	ldr	r2, ._67 + 4    @ 0x43c\n\
+	add	r1, r1, r2\n\
+._62:\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	b	._66\n\
+._68:\n\
+	.align	2, 0\n\
+._67:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._24:\n\
+	ldr	r0, ._71        @ sub_80A3134\n\
+	bl	SetVBlankCallback\n\
+	ldr	r0, ._71 + 4    @ sub_80A3118\n\
+	bl	SetMainCallback2\n\
+	bl	sub_80A751C\n\
+	bl	sub_80A7630\n\
+	bl	sub_80A770C\n\
+	bl	sub_80A7828\n\
+	bl	sub_80A78B8\n\
+	ldr	r0, ._71 + 8    @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._69	@cond_branch\n\
+	ldr	r0, ._71 + 12   @ 0x600f5e0\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x8\n\
+	ldr	r2, ._71 + 16   @ 0x600f800\n\
+	mov	r3, #0x0\n\
+	bl	debug_sub_8008218\n\
+._69:\n\
+	mov	r0, #0x1\n\
+	b	._70\n\
+._72:\n\
+	.align	2, 0\n\
+._71:\n\
+	.word	sub_80A3134+1\n\
+	.word	sub_80A3118+1\n\
+	.word	gLinkOpen\n\
+	.word	0x600f5e0\n\
+	.word	0x600f800\n\
+._66:\n\
+	mov	r0, #0x0\n\
+._70:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+#else
 static bool8 SetupBagMultistep(void)
 {
     u32 index;
@@ -496,6 +901,7 @@ static bool8 SetupBagMultistep(void)
     }
     return FALSE;
 }
+#endif
 
 static bool8 sub_80A34B4(void)
 {
@@ -621,6 +1027,79 @@ void ClearBag(void)
         ClearItemSlots(gBagPockets[i].itemSlots, gBagPockets[i].capacity);
     ResetBagScrollPositions();
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80A3714()
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	add	sp, sp, #0xfffffff4\n\
+	mov	r5, #0x0\n\
+	ldr	r2, ._138       @ gUnknown_Debug_083EBC68\n\
+	mov	r1, #0x0\n\
+._134:\n\
+	lsl	r0, r5, #0x1\n\
+	add r0, r0, sp\n\
+	strh	r1, [r0]\n\
+	add	r0, r5, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	cmp	r5, #0x4\n\
+	bls	._134	@cond_branch\n\
+	mov	r5, #0x0\n\
+	ldrh	r0, [r2]\n\
+	cmp	r0, #0\n\
+	beq	._136	@cond_branch\n\
+	add	r6, r2, #0\n\
+._137:\n\
+	lsl	r4, r5, #0x2\n\
+	add	r4, r4, r6\n\
+	ldrh	r0, [r4]\n\
+	bl	ItemId_GetPocket\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x8\n\
+	ldr	r1, ._138 + 4   @ 0xffff0000\n\
+	add	r0, r0, r1\n\
+	lsr	r0, r0, #0x10\n\
+	ldr	r1, ._138 + 8   @ gBagPockets\n\
+	lsl	r2, r0, #0x3\n\
+	add	r2, r2, r1\n\
+	lsl	r0, r0, #0x1\n\
+	mov	r1, sp\n\
+	add	r3, r1, r0\n\
+	ldrh	r1, [r3]\n\
+	ldr	r0, [r2]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r0\n\
+	ldr	r0, [r4]\n\
+	str	r0, [r1]\n\
+	ldrh	r0, [r3]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r3]\n\
+	add	r0, r5, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	cmp	r5, #0x3b\n\
+	bhi	._136	@cond_branch\n\
+	lsl	r0, r5, #0x2\n\
+	add	r0, r0, r6\n\
+	ldrh	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._137	@cond_branch\n\
+._136:\n\
+	add	sp, sp, #0xc\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._139:\n\
+	.align	2, 0\n\
+._138:\n\
+	.word	gUnknown_Debug_083EBC68\n\
+	.word	0xffff0000\n\
+	.word	gBagPockets");
+}
+#endif
 
 static void sub_80A3740(void)
 {
@@ -3561,12 +4040,49 @@ static void sub_80A73FC(void)
     MenuCursor_Destroy814AD44();
 }
 
+#if DEBUG
+__attribute__((naked))
+static void sub_80A740C(void)
+{
+    asm("\
+	push	{lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	bl	sub_80A75E4\n\
+	bl	sub_80A7768\n\
+	bl	sub_80A7420\n\
+	ldr	r0, ._931       @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._930	@cond_branch\n\
+	ldr	r0, ._931 + 4   @ gLink\n\
+	ldr	r1, ._931 + 8   @ 0xfbd\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008264\n\
+._930:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._932:\n\
+	.align	2, 0\n\
+._931:\n\
+	.word	gLinkOpen\n\
+	.word	gLink\n\
+	.word	0xfbd");
+}
+#else
 static void sub_80A740C(void)
 {
     sub_80A75E4();
     sub_80A7768();
     sub_80A7420();
 }
+#endif
 
 static void sub_80A7420(void)
 {

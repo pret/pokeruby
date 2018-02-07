@@ -25,6 +25,11 @@ struct WallpaperTable {
 // Static RAM declarations
 
 EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
+#if DEBUG
+EWRAM_DATA u32 unk_2038790 = 0;
+EWRAM_DATA u32 unk_2038794 = 0;
+EWRAM_DATA u32 unk_2038798 = 0;
+#endif
 EWRAM_DATA s8 gUnknown_020384E4 = 0;
 EWRAM_DATA s8 gUnknown_020384E5 = 0;
 EWRAM_DATA bool8 gUnknown_020384E6 = FALSE;

@@ -999,6 +999,66 @@ extern u16 gSpecialVar_0x8006;
 static u8 CalcBerryYield(struct BerryTree *tree);
 static u16 GetStageDurationByBerryType(u8 berry);
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80C2B04()
+{
+    asm(
+        "	push	{lr}\n"
+        "	mov	r0, #0x0\n"
+        "	bl	sub_80B47D8\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	ldr	r2, ._1         @ gTasks\n"
+        "	lsl	r1, r0, #0x2\n"
+        "	add	r1, r1, r0\n"
+        "	lsl	r1, r1, #0x3\n"
+        "	add	r1, r1, r2\n"
+        "	ldrh	r0, [r1, #0x10]\n"
+        "	sub	r0, r0, #0x1\n"
+        "	strh	r0, [r1, #0x10]\n"
+        "	bl	CloseMenu\n"
+        "	mov	r0, #0x1\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._2:\n"
+        "	.align	2, 0\n"
+        "._1:\n"
+        "	.word	gTasks\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void debug_sub_80C2B30()
+{
+    asm(
+        "	push	{lr}\n"
+        "	mov	r0, #0x1\n"
+        "	bl	sub_80B47D8\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	ldr	r2, ._3         @ gTasks\n"
+        "	lsl	r1, r0, #0x2\n"
+        "	add	r1, r1, r0\n"
+        "	lsl	r1, r1, #0x3\n"
+        "	add	r1, r1, r2\n"
+        "	ldrh	r0, [r1, #0x10]\n"
+        "	sub	r0, r0, #0x1\n"
+        "	strh	r0, [r1, #0x10]\n"
+        "	bl	CloseMenu\n"
+        "	mov	r0, #0x1\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._4:\n"
+        "	.align	2, 0\n"
+        "._3:\n"
+        "	.word	gTasks\n"
+        "\n"
+    );
+}
+#endif
+
 // unused
 // this could be static, but making it so causes a compile-time warning.
 void ClearEnigmaBerries(void)
@@ -1022,6 +1082,180 @@ void SetEnigmaBerry(u8 *src)
     gSaveBlock1.enigmaBerry.berry.description2 = gSaveBlock1.enigmaBerry.description2;
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80C2BD0()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	ldr	r3, ._11        @ gSaveBlock1\n"
+        "	ldr	r1, ._11 + 4    @ 0x316c\n"
+        "	add	r4, r3, r1\n"
+        "	ldr	r6, [r4]\n"
+        "	add	r1, r1, #0x4\n"
+        "	add	r2, r3, r1\n"
+        "	ldr	r7, [r2]\n"
+        "	mov	r1, #0x0\n"
+        "	str	r1, [r4]\n"
+        "	str	r1, [r2]\n"
+        "	add	r4, r0, #0\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r5, ._11 + 8    @ 0x52b\n"
+        "._10:\n"
+        "	add	r0, r4, r1\n"
+        "	ldrb	r0, [r0]\n"
+        "	add	r2, r2, r0\n"
+        "	add	r1, r1, #0x1\n"
+        "	cmp	r1, r5\n"
+        "	bls	._10	@cond_branch\n"
+        "	ldr	r1, ._11 + 4    @ 0x316c\n"
+        "	add	r0, r3, r1\n"
+        "	str	r6, [r0]\n"
+        "	add	r1, r1, #0x4\n"
+        "	add	r0, r3, r1\n"
+        "	str	r7, [r0]\n"
+        "	add	r0, r2, #0\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._12:\n"
+        "	.align	2, 0\n"
+        "._11:\n"
+        "	.word	gSaveBlock1\n"
+        "	.word	0x316c\n"
+        "	.word	0x52b\n"
+        "\n"
+    );
+}
+#endif
+
+#if DEBUG
+__attribute__((naked))
+u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r9\n"
+        "	mov	r6, r8\n"
+        "	push	{r6, r7}\n"
+        "	add	r3, r0, #0\n"
+        "	lsl	r1, r1, #0x18\n"
+        "	lsr	r1, r1, #0x18\n"
+        "	mov	r9, r1\n"
+        "	lsl	r2, r2, #0x18\n"
+        "	lsr	r2, r2, #0x18\n"
+        "	mov	r8, r2\n"
+        "	ldr	r4, ._16        @ gSaveBlock1\n"
+        "	ldr	r1, ._16 + 4    @ 0x3160\n"
+        "	add	r0, r4, r1\n"
+        "	add	r2, r0, #0\n"
+        "	ldr	r1, ._16 + 8    @ gBerries\n"
+        "	ldmia	r1!, {r5, r6, r7}\n"
+        "	stmia	r2!, {r5, r6, r7}\n"
+        "	ldmia	r1!, {r5, r6, r7}\n"
+        "	stmia	r2!, {r5, r6, r7}\n"
+        "	ldr	r1, [r1]\n"
+        "	str	r1, [r2]\n"
+        "	add	r1, r3, #0\n"
+        "	bl	StringCopy\n"
+        "	ldr	r0, ._16 + 12   @ 0x361c\n"
+        "	add	r6, r4, r0\n"
+        "	ldr	r1, ._16 + 16   @ gUnknown_Debug_083F7F84\n"
+        "	add	r0, r6, #0\n"
+        "	bl	StringCopy\n"
+        "	ldr	r1, ._16 + 20   @ 0x3649\n"
+        "	add	r5, r4, r1\n"
+        "	ldr	r1, ._16 + 24   @ gUnknown_Debug_083F7F90\n"
+        "	add	r0, r5, #0\n"
+        "	bl	StringCopy\n"
+        "	ldr	r2, ._16 + 28   @ 0x316c\n"
+        "	add	r0, r4, r2\n"
+        "	str	r6, [r0]\n"
+        "	ldr	r6, ._16 + 32   @ 0x3170\n"
+        "	add	r0, r4, r6\n"
+        "	str	r5, [r0]\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r6, ._16 + 36   @ 0x47f\n"
+        "	ldr	r7, ._16 + 40   @ 0x317c\n"
+        "	add	r5, r4, r7\n"
+        "	ldr	r3, ._16 + 44   @ gSpriteImage_UnusedCherry\n"
+        "._13:\n"
+        "	add	r0, r2, r5\n"
+        "	add	r1, r2, r3\n"
+        "	ldrb	r1, [r1]\n"
+        "	strb	r1, [r0]\n"
+        "	add	r2, r2, #0x1\n"
+        "	cmp	r2, r6\n"
+        "	ble	._13	@cond_branch\n"
+        "	ldr	r0, ._16        @ gSaveBlock1\n"
+        "	ldr	r3, ._16 + 48   @ gSpritePalette_UnusedCherry\n"
+        "	ldr	r2, ._16 + 52   @ 0x35fc\n"
+        "	add	r1, r0, r2\n"
+        "	mov	r2, #0xf\n"
+        "._14:\n"
+        "	ldrh	r0, [r3]\n"
+        "	strh	r0, [r1]\n"
+        "	add	r3, r3, #0x2\n"
+        "	add	r1, r1, #0x2\n"
+        "	sub	r2, r2, #0x1\n"
+        "	cmp	r2, #0\n"
+        "	bge	._14	@cond_branch\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r5, ._16 + 56   @ gSaveBlock1\n"
+        "	ldr	r3, ._16 + 60   @ gUnknown_Debug_839B6CE\n"
+        "._15:\n"
+        "	add	r0, r2, r5\n"
+        "	add	r1, r2, r3\n"
+        "	ldrb	r1, [r1]\n"
+        "	strb	r1, [r0]\n"
+        "	add	r2, r2, #0x1\n"
+        "	cmp	r2, #0x11\n"
+        "	ble	._15	@cond_branch\n"
+        "	ldr	r5, ._16 + 64   @ 0x3688\n"
+        "	add	r0, r4, r5\n"
+        "	mov	r6, r9\n"
+        "	strb	r6, [r0]\n"
+        "	ldr	r7, ._16 + 68   @ 0x3689\n"
+        "	add	r0, r4, r7\n"
+        "	mov	r1, r8\n"
+        "	strb	r1, [r0]\n"
+        "	ldr	r2, ._16 + 4    @ 0x3160\n"
+        "	add	r0, r4, r2\n"
+        "	bl	debug_sub_80C2BD0\n"
+        "	add	r5, r5, #0x4\n"
+        "	add	r1, r4, r5\n"
+        "	str	r0, [r1]\n"
+        "	pop	{r3, r4}\n"
+        "	mov	r8, r3\n"
+        "	mov	r9, r4\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._17:\n"
+        "	.align	2, 0\n"
+        "._16:\n"
+        "	.word	gSaveBlock1\n"
+        "	.word	0x3160\n"
+        "	.word	gBerries\n"
+        "	.word	0x361c\n"
+        "	.word	gUnknown_Debug_083F7F84\n"
+        "	.word	0x3649\n"
+        "	.word	gUnknown_Debug_083F7F90\n"
+        "	.word	0x316c\n"
+        "	.word	0x3170\n"
+        "	.word	0x47f\n"
+        "	.word	0x317c\n"
+        "	.word	gSpriteImage_UnusedCherry\n"
+        "	.word	gSpritePalette_UnusedCherry\n"
+        "	.word	0x35fc\n"
+        "	.word	gSaveBlock1+0x3676\n"
+        "	.word	gUnknown_Debug_839B6CE\n"
+        "	.word	0x3688\n"
+        "	.word	0x3689\n"
+        "\n"
+    );
+}
+#else
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 {
     const u8 *description1;
@@ -1051,9 +1285,110 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 
     return checksum;
 }
+#endif
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80C2D24()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r8\n"
+        "	push	{r7}\n"
+        "	ldr	r6, [sp, #0x18]\n"
+        "	ldr	r4, [sp, #0x1c]\n"
+        "	mov	r8, r4\n"
+        "	ldr	r5, ._18        @ gSaveBlock1\n"
+        "	ldr	r7, ._18 + 4    @ 0x3175\n"
+        "	add	r4, r5, r7\n"
+        "	strb	r0, [r4]\n"
+        "	ldr	r4, ._18 + 8    @ 0x3176\n"
+        "	add	r0, r5, r4\n"
+        "	strb	r1, [r0]\n"
+        "	add	r7, r7, #0x2\n"
+        "	add	r0, r5, r7\n"
+        "	strb	r2, [r0]\n"
+        "	ldr	r1, ._18 + 12   @ 0x3178\n"
+        "	add	r0, r5, r1\n"
+        "	strb	r3, [r0]\n"
+        "	add	r4, r4, #0x3\n"
+        "	add	r0, r5, r4\n"
+        "	strb	r6, [r0]\n"
+        "	add	r7, r7, #0x3\n"
+        "	add	r0, r5, r7\n"
+        "	mov	r1, r8\n"
+        "	strb	r1, [r0]\n"
+        "	sub	r4, r4, #0x19\n"
+        "	add	r0, r5, r4\n"
+        "	bl	debug_sub_80C2BD0\n"
+        "	ldr	r7, ._18 + 16   @ 0x368c\n"
+        "	add	r5, r5, r7\n"
+        "	str	r0, [r5]\n"
+        "	pop	{r3}\n"
+        "	mov	r8, r3\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._19:\n"
+        "	.align	2, 0\n"
+        "._18:\n"
+        "	.word	gSaveBlock1\n"
+        "	.word	0x3175\n"
+        "	.word	0x3176\n"
+        "	.word	0x3178\n"
+        "	.word	0x368c\n"
+        "\n"
+    );
+}
+#endif
 
 // due to e-reader scans being particularly volatile to failure, it is a requirement to check for
 // their integrity here due to scans possibly failing to produce the correct result.
+#if DEBUG
+__attribute__((naked))
+bool32 IsEnigmaBerryValid()
+{
+    asm(
+        "	push	{r4, lr}\n"
+        "	ldr	r4, ._24        @ gSaveBlock1\n"
+        "	ldr	r1, ._24 + 4    @ 0x3174\n"
+        "	add	r0, r4, r1\n"
+        "	ldrb	r0, [r0]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._22	@cond_branch\n"
+        "	ldr	r2, ._24 + 8    @ 0x316a\n"
+        "	add	r0, r4, r2\n"
+        "	ldrb	r0, [r0]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._22	@cond_branch\n"
+        "	ldr	r1, ._24 + 12   @ 0x3160\n"
+        "	add	r0, r4, r1\n"
+        "	bl	debug_sub_80C2BD0\n"
+        "	ldr	r2, ._24 + 16   @ 0x368c\n"
+        "	add	r1, r4, r2\n"
+        "	ldr	r1, [r1]\n"
+        "	cmp	r0, r1\n"
+        "	bne	._22	@cond_branch\n"
+        "	mov	r0, #0x1\n"
+        "	b	._23\n"
+        "._25:\n"
+        "	.align	2, 0\n"
+        "._24:\n"
+        "	.word	gSaveBlock1\n"
+        "	.word	0x3174\n"
+        "	.word	0x316a\n"
+        "	.word	0x3160\n"
+        "	.word	0x368c\n"
+        "._22:\n"
+        "	mov	r0, #0x0\n"
+        "._23:\n"
+        "	pop	{r4}\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "\n"
+    );
+}
+#else
 bool32 IsEnigmaBerryValid(void)
 {
     if (gSaveBlock1.enigmaBerry.berry.stageDuration == 0)
@@ -1064,6 +1399,7 @@ bool32 IsEnigmaBerryValid(void)
         return FALSE;
     return TRUE;
 }
+#endif
 
 const struct Berry *GetBerryInfo(u8 berry)
 {
@@ -1417,6 +1753,177 @@ bool8 PlayerHasBerries(void)
     return IsBagPocketNonEmpty(BAG_BERRIES);
 }
 
+#if DEBUG
+void debug_sub_80C33FC(u8 *buffer, s32 value, u8 n)
+{
+    StringAppend(gStringVar4, buffer);
+    ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, n);
+    StringAppend(gStringVar4, gStringVar1);
+}
+
+extern const u8 gUnknown_Debug_083F7F9D[];
+extern const u8 gUnknown_Debug_083F7FA2[];
+extern const u8 gUnknown_Debug_083F7FA9[];
+extern const u8 gUnknown_Debug_083F7FB0[];
+extern const u8 gUnknown_Debug_083F7FB7[];
+extern const u8 gUnknown_Debug_083F7FBE[];
+extern const u8 gUnknown_Debug_083F7FC5[];
+extern const u8 gUnknown_Debug_083F7FCC[];
+extern const u8 gUnknown_Debug_083F7FD3[];
+extern const u8 gUnknown_Debug_083F7FD3[];
+extern const u8 gUnknown_Debug_083F7FD3[];
+
+#ifdef NONMATCHING
+u8* DebugOpenBerryInfo(void)
+{
+    s32 i;
+    u8 berryTreeId;
+    struct BerryTree *berryTree;
+
+    if (GetFieldObjectScriptPointerPlayerFacing() != &S_BerryTree)
+        return NULL;
+
+    berryTreeId = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    berryTree = GetBerryTreeInfo(berryTreeId);
+    
+    for (i = 0; i < 500; i++)
+        gStringVar4[i] |= 0xFF;
+
+    debug_sub_80C33FC(gUnknown_Debug_083F7F9D, berryTreeId, 3);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FA2, berryTree->berry, 2);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FA9, berryTree->stage, 2);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FB0, berryTree->secondsUntilNextStage, 5);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FB7, berryTree->berryYield, 2);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FBE, berryTree->regrowthCount, 3);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FC5, berryTree->growthSparkle, 1);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FCC, berryTree->watered1, 1);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FD3, berryTree->watered2, 1);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FD3, berryTree->watered3, 1);
+    debug_sub_80C33FC(gUnknown_Debug_083F7FD3, berryTree->watered4, 1);
+
+    return gStringVar4;
+}
+#else
+__attribute__((naked))
+void DebugOpenBerryInfo()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	bl	GetFieldObjectScriptPointerPlayerFacing\n"
+        "	ldr	r1, ._138       @ S_BerryTree\n"
+        "	cmp	r0, r1\n"
+        "	beq	._136	@cond_branch\n"
+        "	mov	r0, #0x0\n"
+        "	b	._137\n"
+        "._139:\n"
+        "	.align	2, 0\n"
+        "._138:\n"
+        "	.word	S_BerryTree\n"
+        "._136:\n"
+        "	ldr	r0, ._141       @ gSelectedMapObject\n"
+        "	ldrb	r0, [r0]\n"
+        "	bl	FieldObjectGetBerryTreeId\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r6, r0, #0x18\n"
+        "	add	r0, r6, #0\n"
+        "	bl	GetBerryTreeInfo\n"
+        "	add	r5, r0, #0\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r7, ._141 + 4   @ 0x1f3\n"
+        "	ldr	r4, ._141 + 8   @ gStringVar4\n"
+        "	mov	r3, #0xff\n"
+        "._140:\n"
+        "	add	r1, r2, r4\n"
+        "	ldrb	r0, [r1]\n"
+        "	orr	r0, r0, r3\n"
+        "	strb	r0, [r1]\n"
+        "	add	r2, r2, #0x1\n"
+        "	cmp	r2, r7\n"
+        "	ble	._140	@cond_branch\n"
+        "	ldr	r0, ._141 + 12  @ gUnknown_Debug_083F7F9D\n"
+        "	add	r1, r6, #0\n"
+        "	mov	r2, #0x3\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 16  @ gUnknown_Debug_083F7FA2\n"
+        "	ldrb	r1, [r5]\n"
+        "	mov	r2, #0x2\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 20  @ gUnknown_Debug_083F7FA9\n"
+        "	ldrb	r1, [r5, #0x1]\n"
+        "	lsl	r1, r1, #0x19\n"
+        "	lsr	r1, r1, #0x19\n"
+        "	mov	r2, #0x2\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 24  @ gUnknown_Debug_083F7FB0\n"
+        "	ldrh	r1, [r5, #0x2]\n"
+        "	mov	r2, #0x5\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 28  @ gUnknown_Debug_083F7FB7\n"
+        "	ldrb	r1, [r5, #0x4]\n"
+        "	mov	r2, #0x2\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 32  @ gUnknown_Debug_083F7FBE\n"
+        "	ldrb	r1, [r5, #0x5]\n"
+        "	lsl	r1, r1, #0x1c\n"
+        "	lsr	r1, r1, #0x1c\n"
+        "	mov	r2, #0x3\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 36  @ gUnknown_Debug_083F7FC5\n"
+        "	ldrb	r1, [r5, #0x1]\n"
+        "	lsr	r1, r1, #0x7\n"
+        "	mov	r2, #0x1\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 40  @ gUnknown_Debug_083F7FCC\n"
+        "	ldrb	r1, [r5, #0x5]\n"
+        "	lsl	r1, r1, #0x1b\n"
+        "	lsr	r1, r1, #0x1f\n"
+        "	mov	r2, #0x1\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r4, ._141 + 44  @ gUnknown_Debug_083F7FD3\n"
+        "	ldrb	r1, [r5, #0x5]\n"
+        "	lsl	r1, r1, #0x1a\n"
+        "	lsr	r1, r1, #0x1f\n"
+        "	add	r0, r4, #0\n"
+        "	mov	r2, #0x1\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldrb	r1, [r5, #0x5]\n"
+        "	lsl	r1, r1, #0x19\n"
+        "	lsr	r1, r1, #0x1f\n"
+        "	add	r0, r4, #0\n"
+        "	mov	r2, #0x1\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldrb	r1, [r5, #0x5]\n"
+        "	lsr	r1, r1, #0x7\n"
+        "	add	r0, r4, #0\n"
+        "	mov	r2, #0x1\n"
+        "	bl	debug_sub_80C33FC\n"
+        "	ldr	r0, ._141 + 8   @ gStringVar4\n"
+        "._137:\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._142:\n"
+        "	.align	2, 0\n"
+        "._141:\n"
+        "	.word	gSelectedMapObject\n"
+        "	.word	0x1f3\n"
+        "	.word	gStringVar4\n"
+        "	.word	gUnknown_Debug_083F7F9D\n"
+        "	.word	gUnknown_Debug_083F7FA2\n"
+        "	.word	gUnknown_Debug_083F7FA9\n"
+        "	.word	gUnknown_Debug_083F7FB0\n"
+        "	.word	gUnknown_Debug_083F7FB7\n"
+        "	.word	gUnknown_Debug_083F7FBE\n"
+        "	.word	gUnknown_Debug_083F7FC5\n"
+        "	.word	gUnknown_Debug_083F7FCC\n"
+        "	.word	gUnknown_Debug_083F7FD3\n"
+        "\n"
+    );
+}
+#endif
+
+#endif
+
 // whenever the player is not within view of the berry tree during its sparkle state, the
 // sparkle state will be reset.
 void ResetBerryTreeSparkleFlags(void)
@@ -1445,3 +1952,17 @@ void ResetBerryTreeSparkleFlags(void)
         }
     }
 }
+
+#if DEBUG
+static const u8 gUnknown_Debug_083F7F84[] = _("そとから　きた　きのみ");
+static const u8 gUnknown_Debug_083F7F90[] = _("ただいま　かいはつちゅう");
+static const u8 gUnknown_Debug_083F7F9D[] = _("POS:");
+static const u8 gUnknown_Debug_083F7FA2[] = _("\nTYPE:");
+static const u8 gUnknown_Debug_083F7FA9[] = _("\nGROW:");
+static const u8 gUnknown_Debug_083F7FB0[] = _("\nTIME:");
+static const u8 gUnknown_Debug_083F7FB7[] = _("\nFCNT:");
+static const u8 gUnknown_Debug_083F7FBE[] = _("\nSCNT:");
+static const u8 gUnknown_Debug_083F7FC5[] = _("\nHOOK:");
+static const u8 gUnknown_Debug_083F7FCC[] = _("\nWBIT:");
+static const u8 gUnknown_Debug_083F7FD3[] = _("");
+#endif

@@ -510,6 +510,22 @@ void sub_80810DC(void)
     CreateTask(sub_8081050, 10);
 }
 
+#if DEBUG
+
+__attribute__((naked))
+void debug_sub_80888D8()
+{
+    asm("\
+    PUSH    {LR}\n\
+    BL      debug_sub_8052E04\n\
+    BL      sub_8080E88\n\
+    BL      ScriptContext2_Enable\n\
+    POP     {R0}\n\
+    BX      R0");
+}
+
+#endif
+
 void task0A_fade_n_map_maybe(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];

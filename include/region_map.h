@@ -68,5 +68,6 @@ void CreateRegionMapPlayerIcon(u16, u16);
 const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length);
 const u8 *CopyMapName(u8 *dest, u16 b);
 const u8 *CopyLocationName(u8 *dest, u16 b);
+void CB2_InitFlyRegionMap(void);
 
 #endif // GUARD_REGION_MAP_H

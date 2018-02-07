@@ -8,8 +8,34 @@
 #include "strings2.h"
 #include "trainer_card.h"
 
+struct DebugStruct1
+{
+    u16 var0;
+    u8 var1[10];
+};
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern u8 gBattleOutcome;
+
+#if DEBUG
+const struct DebugStruct1 gUnknown_Debug_4245CC[] =
+{
+    { 1, _("NUMBER1") },
+    { 2, _("ナンバー2") },
+    { 3, _("ナンバー3") },
+    { 4, _("ナンバー4") },
+    { 5, _("ナンバー5") },
+    { 6, _("ナンバー6") },
+    { 7, _("ナンバー7") },
+};
+
+const u8 gUnknown_Debug_8424620[][4] =
+{
+    { 1, 1, 0, 0 },
+    { 2, 1, 0, 0 },
+    { 3, 1, 0, 0 },
+};
+#endif
 
 static void InitLinkBattleRecord(struct LinkBattleRecord *record)
 {
@@ -197,6 +223,66 @@ void UpdateLinkBattleRecords(int id)
         gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_81257E0(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r8\n\
+	push	{r7}\n\
+	add	sp, sp, #0xfffffffc\n\
+	bl	InitLinkBattleRecords\n\
+	mov	r5, #0x0\n\
+	ldr	r6, ._62        @ gUnknown_Debug_4245CC\n\
+	sub	r0, r6, #2\n\
+	mov	r8, r0\n\
+	ldr	r7, ._62 + 4    @ gLinkPlayers\n\
+._61:\n\
+	ldr	r0, ._62 + 8    @ gUnknown_Debug_8424620\n\
+	lsl	r3, r5, #0x2\n\
+	add	r3, r3, r0\n\
+	ldrb	r4, [r3]\n\
+	sub	r4, r4, #0x1\n\
+	lsl	r0, r4, #0x1\n\
+	add	r0, r0, r4\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r0, r6\n\
+	add r0, r0, r8\n\
+	ldrh	r2, [r0]\n\
+	ldrb	r3, [r3, #0x1]\n\
+	ldr	r0, ._62 + 12   @ gLinkPlayerMapObjects\n\
+	lsl	r4, r4, #0x2\n\
+	add	r4, r4, r0\n\
+	ldrb	r4, [r4, #0x1]\n\
+	lsl	r0, r4, #0x3\n\
+	sub	r0, r0, r4\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r7\n\
+	ldrb	r0, [r0, #0x1a]\n\
+	str	r0, [sp]\n\
+	ldr	r0, ._62 + 16   @ gSaveBlock1\n\
+	bl	UpdateLinkBattleRecords_\n\
+	add	r5, r5, #0x1\n\
+	cmp	r5, #0x2\n\
+	bls	._61	@cond_branch\n\
+	add	sp, sp, #0x4\n\
+	pop	{r3}\n\
+	mov	r8, r3\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._63:\n\
+	.align	2, 0\n\
+._62:\n\
+	.word	gUnknown_Debug_4245CC+2\n\
+	.word	gLinkPlayers\n\
+	.word	gUnknown_Debug_8424620\n\
+	.word	gLinkPlayerMapObjects\n\
+	.word	gSaveBlock1+0x30b8");
+}
+#endif
+
 static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
 {
     ConvertIntToDecimalStringN_DigitWidth6(gStringVar1, GetGameStat(GAME_STAT_LINK_BATTLE_WINS), STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -240,7 +326,8 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y)
     }
 }
 
-void ShowLinkBattleRecords(void) {
+void ShowLinkBattleRecords(void)
+{
     s32 i;
     Menu_DrawStdWindowFrame(1, 0, 28, 18);
     sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);

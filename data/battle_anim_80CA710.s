@@ -3137,7 +3137,7 @@ gBattleAnimSpriteTemplate_83D9F0C:: @ 83D9F0C
 
 	.align 2
 gSpriteTemplate_83D9F24:: @ 83D9F24
-	spr_template 10050, 10050, gOamData_837DF34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, unc_080B08A0
+	spr_template 10050, 10050, gOamData_837DF34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_080B08A0
 
 	.align 2
 gSpriteAnim_83D9F3C:: @ 83D9F3C
