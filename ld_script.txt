@@ -303,7 +303,7 @@ SECTIONS {
         src/battle/anim/shock.o(.text);
         asm/current.o(.text);
         asm/ice.o(.text);
-        asm/fight.o(.text);
+        src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
         asm/flying.o(.text);
         src/battle/anim/psychic.o(.text);
