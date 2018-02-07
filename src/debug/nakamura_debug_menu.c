@@ -15,6 +15,7 @@ EWRAM_DATA u16 _nakamuraDataC = 0;
 
 __attribute__((unused)) static u8 _nakamuraStatic0[0x18];
 __attribute__((unused)) static u8 _nakamuraStatic18;
+__attribute__((unused)) static u8 gDebugFiller3000814[4];
 
 asm(".global _nakamuraStatic0");
 asm(".global _nakamuraStatic18");
