@@ -269,7 +269,7 @@ void unref_sub_8082EEC(u8 taskId)
     }
 }
 
-/*static*/ void sub_8082F20(u8 taskId)
+static void sub_8082F20(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

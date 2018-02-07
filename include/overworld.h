@@ -189,9 +189,9 @@ u16 sub_8055438(u32);
 // sub_80554E4
 s32 sub_80554F8(void);
 // unref_sub_8055568
-void sub_8055574(void);
+u16 sub_8055574(void);
 u16 sub_8055588(void);
-void sub_805559C(void);
+u16 sub_805559C(void);
 void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3);
 bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
