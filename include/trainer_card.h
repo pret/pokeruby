@@ -32,6 +32,8 @@ void TrainerCard_ShowPlayerCard(void (*)(void));
 void TrainerCard_ShowLinkCard(u8, void (*)(void));
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
 u8 sub_80934C4(u8 id);
+void debug_sub_80A0710(void (*)(void));
+void debug_sub_80A073C(void (*)(void));
 
 extern struct TrainerCard gTrainerCards[4];
 

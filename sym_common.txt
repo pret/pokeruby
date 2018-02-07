@@ -6,8 +6,14 @@
 
 
 // main.c
+#if DEBUG
+/*. += 0x18;*/
+#endif
 SYMBOL(gKeyRepeatStartDelay, 4)
 SYMBOL(gLinkTransferringData, 4)
+#if DEBUG
+. += 0x8;
+#endif
 SYMBOL(gMain, 1088)
 SYMBOL(gKeyRepeatContinueDelay, 4)
 SYMBOL(gSoftResetDisabled, 4)
@@ -72,7 +78,7 @@ SYMBOL(gLinkCallback, 4)
 SYMBOL(gSavedLinkPlayers, 112)
 SYMBOL(gShouldAdvanceLinkState, 4)
 SYMBOL(gLinkTestBlockChecksums, 8)
-. += 0x4;
+SYMBOL(gUnknown_Debug_30030E0, 4)
 SYMBOL(gBlockRequestType, 4)
 . += 0x8;
 SYMBOL(gLastSendQueueCount, 4)
@@ -106,6 +112,20 @@ SYMBOL(gBattleTextBuff3, 16)
 SYMBOL(gBattle_BG1_X, 4)
 SYMBOL(gBattle_WIN0H, 4)
 . += 0x8;
+
+#if DEBUG
+gUnknown_Debug_03004360 = .;
+    . += 0x10;
+gUnknown_Debug_03004370 = .;
+    . += 0x30;
+gUnknown_Debug_030043A0 = .;
+    . += 0x4;
+gUnknown_Debug_030043A4 = .;
+    . += 0x4;
+gUnknown_Debug_030043A8 = .;
+    . += 0x8;
+#endif
+
 SYMBOL(gPreBattleCallback1, 4)
 gBattleMainFunc = .;
 . += 0xC;
@@ -169,6 +189,11 @@ SYMBOL(gUnknown_0300489C, 4)
 // field_map_obj.c
 SYMBOL(gMapObjects, 576)
 
+#if DEBUG
+gUnknown_Debug_03004BC0 = .;
+. += 0x4;
+#endif
+
 // field_control_avatar.c
 SYMBOL(gSelectedMapObject, 4)
 
@@ -178,8 +203,18 @@ SYMBOL(gPokemonItemUseCallback, 4)
 // start_menu.c
 SYMBOL(gMenuCallback, 4)
 
+#if DEBUG
+gUnknown_Debug_03004BD0 = .;
+. += 0x4;
+#endif
+
 // sound.c
 SYMBOL(gDisableMusic, 4)
+
+#if DEBUG
+unk_debug_common_2 = .;
+. += 0x8;
+#endif
 
 // battle_anim.c
 SYMBOL(gSoundAnimFramesToWait, 4)
@@ -188,6 +223,15 @@ SYMBOL(gAnimSpriteIndexArray, 16)
 
 // task.c
 SYMBOL(gTasks, 640)
+
+#if DEBUG
+unk_debug_common_1 = .;
+. += 0x4;
+unk_3004E94 = .;
+. += 0x4;
+unk_3004E98 = .;
+. += 0x8;
+#endif
 
 // mori_debug_menu.c
 SYMBOL(gUnknown_03004DA0, 32)
@@ -220,6 +264,16 @@ SYMBOL(gCurrentBagPocketItemSlots, 4)
 // contest.c
 SYMBOL(gContestRngValue, 4)
 
+#if DEBUG
+unk_debug_common_0 = .;
+. += 0x4;
+
+// watanabe_debug_menu.c
+byte_3005E30 = .;
+. += 0x20;
+
+#endif
+
 // record_mixing.c
 SYMBOL(gUnknown_03005D2C, 4)
 
@@ -229,7 +283,11 @@ SYMBOL(gSoundTestCryNum, 4)
 
 // tv.c
 SYMBOL(gUnknown_03005D38, 4)
+#if DEBUG
+. += 0x54;
+#else
 . += 0x64;  // huge gap?
+#endif
 
 // mauville_man.c
 SYMBOL(gUnknown_03005DA0, 0x48)
@@ -256,6 +314,11 @@ SYMBOL(gUnknown_03005E90, 4)
 // evolution_scene.c
 SYMBOL(gCB2_AfterEvolution, 4)
 
+#if DEBUG
+gUnknown_Debug_03005FB8 = .;
+. += 0x4;
+#endif
+
 // pokedex_cry_screen.c
 SYMBOL(gUnknown_03005E98, 4)
 
@@ -269,7 +332,11 @@ SYMBOL(gFastSaveSection, 4)
 SYMBOL(gUnknown_03005EB4, 4)
 SYMBOL(gSaveFileStatus, 4)
 SYMBOL(gGameContinueCallback, 4)
+#if DEBUG
+. += 0xC;
+#else
 . += 0x10;
+#endif
 
 // intro.c
 SYMBOL(gIntroFrameCounter, 4)
@@ -293,9 +360,16 @@ SYMBOL(gUnknown_03005F3C, 4)
 SYMBOL(gUnknown_03005F40, 4)
 SYMBOL(gPokeblockFeedPokeSpriteCopy, 68)
 SYMBOL(gUnknown_03005F94, 4)
+#if DEBUG
+SYMBOL(gUnknown_03005FA0, 32)
+#else
 SYMBOL(gUnknown_03005FA0, 48)
+#endif
 
 // m4a_2.c
+#if DEBUG
+. += 0x10;
+#endif
 SYMBOL(gSoundInfo, 4016)
 SYMBOL(gPokemonCrySongs, 104)
 SYMBOL(gPokemonCryMusicPlayers, 128)

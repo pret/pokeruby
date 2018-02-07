@@ -4,6 +4,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "event_data.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
@@ -35,6 +36,7 @@ extern u16 gSpecialVar_Facing;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
+extern u8 gUnknown_020297ED;
 
 static EWRAM_DATA u8 gUnknown_0202E8C0 = 0;
 static EWRAM_DATA u16 gUnknown_0202E8C2 = 0;
@@ -103,7 +105,7 @@ static void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
 static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
 static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
 static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
-static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);
+static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);;
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -162,6 +164,31 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+#if DEBUG
+    if ((heldKeys & R_BUTTON) && input->pressedStartButton)
+    {
+        input->input_field_1_2 = TRUE;
+        input->pressedStartButton = FALSE;
+    }
+    if (gUnknown_020297ED)
+    {
+        if (heldKeys & R_BUTTON)
+        {
+            input->input_field_1_1 = TRUE;
+            input->input_field_0_6 = FALSE;
+            input->input_field_0_1 = FALSE;
+            input->input_field_0_4 = FALSE;
+            input->input_field_0_5 = FALSE;
+            if (newKeys & SELECT_BUTTON)
+            {
+                input->input_field_1_0 = TRUE;
+                input->pressedSelectButton = FALSE;
+            }
+        }
+        if (heldKeys & L_BUTTON)
+            input->input_field_1_3 = TRUE;
+    }
+#endif
 }
 
 int sub_8068024(struct FieldInput *input)
@@ -173,10 +200,25 @@ int sub_8068024(struct FieldInput *input)
     r6 = player_get_direction_lower_nybble();
     player_get_pos_to_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
-    if (CheckTrainers() == TRUE)
+#if DEBUG
+    if (input->input_field_1_3 && dive_warp(&position, r4) == TRUE)
         return TRUE;
-    if (mapheader_run_first_tag2_script_list_match() == 1)
+#endif
+
+    if (
+#if DEBUG
+     !input->input_field_1_1 &&
+#endif
+     CheckTrainers() == TRUE)
         return TRUE;
+
+    if (
+#if DEBUG
+     !input->input_field_1_1 &&
+#endif
+     mapheader_run_first_tag2_script_list_match() == 1)
+        return TRUE;
+
     if (input->pressedBButton && sub_80687A4() == 1)
         return TRUE;
     if (input->input_field_0_6)
@@ -211,6 +253,21 @@ int sub_8068024(struct FieldInput *input)
     }
     if (input->pressedSelectButton && sub_80A6D1C() == TRUE)
         return TRUE;
+
+#if DEBUG
+    if (input->input_field_1_0)
+    {
+        debug_sub_80888D8();
+        return TRUE;
+    }
+    if (input->input_field_1_2)
+    {
+        PlaySE(SE_WIN_OPEN);
+        DebugMenu_8077048();
+        return TRUE;
+    }
+#endif
+
     return FALSE;
 }
 
@@ -810,7 +867,7 @@ static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHea
     return NULL;
 }
 
-int dive_warp(struct MapPosition *position, u16 b)
+bool8 dive_warp(struct MapPosition *position, u16 b)
 {
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(b) == 0)
     {

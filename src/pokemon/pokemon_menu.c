@@ -31,6 +31,7 @@
 #include "item_menu.h"
 #include "player_pc.h"
 #include "ewram.h"
+#include "script.h"
 
 /*
 Pokemon menu:
@@ -45,6 +46,7 @@ struct PokeMenuFieldMoveFunc
     u8 field_1;
 };
 
+extern u8 gUnknown_020297ED;
 extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
@@ -900,9 +902,10 @@ static void sub_808AE08(void)
 static bool8 SetUpFieldMove_Waterfall(void)
 {
     s16 x, y;
+
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
-        && IsPlayerSurfingNorth() == TRUE)
+     && IsPlayerSurfingNorth() == TRUE)
     {
         gFieldCallback = FieldCallback_Teleport;
         gUnknown_03005CE4 = sub_808AE08;
@@ -911,6 +914,20 @@ static bool8 SetUpFieldMove_Waterfall(void)
     else
         return FALSE;
 }
+
+#if DEBUG
+void debug_sub_80986AC(void)
+{
+    s16 x, y;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
+     && IsPlayerSurfingNorth() == TRUE)
+        sub_808AE08();
+    else
+        ScriptContext2_Disable();
+}
+#endif
 
 static void sub_808AE8C(void)
 {
@@ -921,7 +938,11 @@ static void sub_808AE8C(void)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
         {
             sub_806D668(i);
-            if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg))
+            if (
+#if DEBUG
+             gUnknown_020297ED == 0 &&
+#endif
+             (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg)))
                 sub_806BC3C(i, 0x9A);
             else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gSpecialVar_ItemId)))
                 sub_806BC3C(i, 0xA8);

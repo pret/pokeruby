@@ -33,6 +33,8 @@
 #include "util.h"
 #include "contest_ai.h"
 
+extern u8 gUnknown_020297ED;
+
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
@@ -238,6 +240,7 @@ void sub_80B0BC4(u8, bool8);
 void sub_80B0C5C(struct Sprite *);
 void sub_80B0CB0(struct Sprite *);
 void sub_80B0CDC(u8, int);
+void unref_sub_80B0CF4(void);
 void sub_80B0D7C(void);
 void sub_80B1118(void);
 void sub_80B114C(u8);
@@ -613,6 +616,10 @@ void sub_80AB9A0(u8 taskId)
 
 void ContestMainCallback2(void)
 {
+#if DEBUG
+    if (gUnknown_020297ED == 1 && gMain.newKeys == 4)
+	unref_sub_80B0CF4();
+#endif
     AnimateSprites();
     RunTasks();
     BuildOamBuffer();
@@ -732,6 +739,8 @@ void sub_80ABCDC(u8 taskId)
     gTasks[taskId].func = sub_80ABEA0;
 }
 
+void debug_sub_80B9EBC(u8);
+
 // Handle move selection input
 void sub_80ABEA0(u8 taskId)
 {
@@ -804,9 +813,192 @@ void sub_80ABEA0(u8 taskId)
             if (numMoves > 1)
                 PlaySE(SE_SELECT);
             break;
+#if DEBUG
+	case START_BUTTON:
+	    if (gUnknown_020297ED == 1 && !(gIsLinkContest & 1))
+	    {
+		gTasks[taskId].data[0] = 0;
+		gTasks[taskId].data[1] = gContestMons[gContestPlayerMonIndex].moves[0];
+		gTasks[taskId].func = debug_sub_80B9EBC;
+	    }
+	    break;
+#endif
         }
     }
 }
+
+#if DEBUG
+
+void debug_sub_80BA054(u8);
+
+void debug_sub_80B9EBC(u8 taskId)
+{
+    u8 text[100];
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+	Text_FillWindowRectDefPalette(
+	  &gUnknown_03004210,
+	  0,
+	  gUnknown_083CA340[0][0],
+	  gUnknown_083CA340[0][1],
+	  gUnknown_083CA340[0][2],
+	  gUnknown_083CA340[0][3]);
+	Text_InitWindowAndPrintText(
+	  &gUnknown_03004210,
+	  gMoveNames[gTasks[taskId].data[1]],
+	  776,
+	  gUnknown_083CA340[0][0],
+	  gUnknown_083CA340[0][1]);
+	ConvertIntToDecimalStringN(text, gTasks[taskId].data[1], 2, 3);
+	Text_InitWindowAndPrintText(
+	  &gUnknown_03004210,
+	  text,
+	  796,
+	  gUnknown_083CA340[1][0],
+	  gUnknown_083CA340[1][1]);
+	sub_80AED58();
+	sub_80AEBEC(gTasks[taskId].data[1]);
+	gTasks[taskId].data[0]++;
+	break;
+    case 1:
+	switch (gMain.newAndRepeatedKeys)
+	{
+	case 0x20:
+	    gTasks[taskId].data[1] -= 1;
+	    if (gTasks[taskId].data[1] < 1)
+		gTasks[taskId].data[1] = 354;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x200:
+	    gTasks[taskId].data[1] -= 10;
+	    if (gTasks[taskId].data[1] < 1)
+		gTasks[taskId].data[1] = 354;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x10:
+	    gTasks[taskId].data[1] += 1;
+	    if (gTasks[taskId].data[1] > 354)
+		gTasks[taskId].data[1] = 1;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x100:
+	    gTasks[taskId].data[1] += 10;
+	    if (gTasks[taskId].data[1] > 354)
+		gTasks[taskId].data[1] = 1;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 4:
+	case 8:
+	    gBattle_BG0_Y = 0;
+	    gBattle_BG2_Y = 0;
+	    sub_80B1BDC();
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].func = debug_sub_80BA054;
+	    break;
+	case 2:
+	    gBattle_BG0_Y = DISPLAY_HEIGHT;
+	    gBattle_BG2_Y = DISPLAY_HEIGHT;
+	    gContestMons[gContestPlayerMonIndex].moves[0] = gTasks[taskId].data[1];
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].data[1] = 0;
+	    gTasks[taskId].data[2] = 0;
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].func = sub_80ABCDC;
+	    break;
+	}
+	break;
+    }
+}
+
+void debug_sub_80BA054(u8 taskId)
+{
+    s32 i;
+    u8 r6;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+	for (i = 0; i < 4; i++)
+	    gBattleMonForms[i] = 0;
+	memset(&shared19348, 0, sizeof(shared19348));
+	sub_80B28F0(gContestPlayerMonIndex);
+	r6 = sub_80AE9FC(
+	  gContestMons[gContestPlayerMonIndex].species, 
+	  gContestMons[gContestPlayerMonIndex].otId, 
+	  gContestMons[gContestPlayerMonIndex].personality);
+	gSprites[r6].pos2.x = 120;
+	gSprites[r6].callback = sub_80AD8FC;
+	gTasks[taskId].data[2] = r6;
+	gObjectBankIDs[gBankAttacker] = r6;
+	gTasks[taskId].data[3] = 0;
+	gTasks[taskId].data[0]++;
+	sContest.unk1925E = 0;
+	break;
+    case 1:
+	r6 = gTasks[taskId].data[2];
+	if (gSprites[r6].callback == SpriteCallbackDummy)
+	{
+	    sContestantStatus[gContestPlayerMonIndex].currMove = gTasks[taskId].data[1];
+	    sub_80B2790(gContestPlayerMonIndex);
+	    sub_80B28F0(gContestPlayerMonIndex);
+	    SelectContestMoveBankTarget(gTasks[taskId].data[1]);
+	    DoMoveAnim(gTasks[taskId].data[1]);
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].data[0]++;
+	}
+	break;
+    case 2:
+	gAnimScriptCallback();
+	if (!gAnimScriptActive)
+	{
+	    sub_80B28CC(gContestPlayerMonIndex);
+	    if (sContest.unk1925E != 0)
+	    {
+		gTasks[taskId].data[10] = 0;
+		gTasks[taskId].data[0] = 20;
+	    }
+	    else
+	    {
+		gTasks[taskId].data[0]++;
+	    }
+	}
+	break;
+    case 3:
+	gTasks[taskId].data[3]++;
+	if (gTasks[taskId].data[3] == 21)
+	{
+	    r6 = gTasks[taskId].data[2];
+	    gSprites[r6].callback = sub_80AD92C;
+	    sub_80B1B14();
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].data[0]++;
+	}
+	break;
+    case 4:
+	r6 = gTasks[taskId].data[2];
+	if (gSprites[r6].invisible)
+	{
+	    FreeSpriteOamMatrix(&gSprites[r6]);
+	    DestroySprite(&gSprites[r6]);
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].func = debug_sub_80B9EBC;
+	    gBattle_BG0_Y = DISPLAY_HEIGHT;
+	    gBattle_BG2_Y = DISPLAY_HEIGHT;
+	}
+	break;
+    case 20:
+	if (gTasks[taskId].data[10]++ > 30)
+	{
+	    gTasks[taskId].data[10] = 0;
+	    gTasks[taskId].data[0] = 1;
+	}
+	break;
+    }
+}
+
+#endif
 
 void sub_80AC0AC(s8 a)
 {

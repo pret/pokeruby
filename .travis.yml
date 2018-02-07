@@ -55,5 +55,6 @@ matrix:
         - ./build_tools.sh
         - make -j2 ruby_de
         - make -j2 sapphire_de
+        - make -j2 ruby_de_debug
   allow_failures:
     - env: _="Formatting"

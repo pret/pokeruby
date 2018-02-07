@@ -32,23 +32,43 @@ gUnknown_02023A04 = .; /* 2023A04 */
 gUnknown_02023A14 = .; /* 2023A14 */
     . += 0x4C;
 
-gBattleBufferA = .; /* 2023A60 */
-    . += 0x2;
+#if DEBUG
 
-gUnknown_02023A62 = .; /* 2023A62 */
-    . += 0x1;
-
-gUnknown_02023A63 = .; /* 2023A63 */
-    . += 0x1;
-
-gUnknown_02023A64 = .; /* 2023A64 */
-    . += 0x7FC;
-
-gBattleBufferB = .; /* 2024260 */
+gUnknown_02023A14_4C = .;
     . += 0x4;
 
-gUnknown_02024264 = .; /* 2024264 */
-    . += 0x7FC;
+gUnknown_02023A14_50 = .;
+    . += 0x2;
+
+gUnknown_Debug_2023A76 = .;
+gUnknown_Debug_2023A76_ = .;
+	. += 0x4;
+
+gUnknown_Debug_2023A7A = .;
+    . += 0x42;
+
+gUnknown_Debug_2023ABC = .;
+    . += 0x4;
+
+gUnknown_Debug_2023AC0 = .;
+    . += 0x42;
+
+gUnknown_Debug_2023B02 = .;
+    . += 0x30;
+
+gUnknown_Debug_2023B32 = .;
+    . += 0x30;
+
+gUnknown_Debug_2023B62 = .;
+    . += 0x1A2;
+
+#endif
+
+gBattleBufferA = .; /* 2023A60 */
+    . += 0x800;
+
+gBattleBufferB = .; /* 2024260 */
+    . += 0x800;
 
 gActiveBank = .; /* 2024A60 */
     . += 0x4;
@@ -319,6 +339,13 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/scene/title_screen.o(ewram_data);
 . = ALIGN(4); src/field/field_weather.o(ewram_data);
 . = ALIGN(4); src/battle/battle_setup.o(ewram_data);
+
+#if DEBUG
+unk_2030220 = .;
+    . += 0x4;
+. = ALIGN(4); src/debug/taya_debug_window.o(ewram_data);
+#endif
+
 . = ALIGN(4); src/field/wild_encounter.o(ewram_data);
 . = ALIGN(4); src/field/field_effect.o(ewram_data);
 . = ALIGN(4); src/scanline_effect.o(ewram_data);
@@ -337,6 +364,7 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/contest.o(ewram_data);
 . = ALIGN(4); src/field/shop.o(ewram_data);
 . = ALIGN(4); src/field/fldeff_escalator.o(ewram_data);
+. = ALIGN(4); src/debug/watanabe_debug_menu.o(ewram_data);
 . = ALIGN(4); src/field/money.o(ewram_data);
 . = ALIGN(4); src/engine/record_mixing.o(ewram_data);
 . = ALIGN(4); src/debug/sound_check_menu.o(ewram_data);
@@ -357,6 +385,7 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/field/pokeblock.o(ewram_data);
 . = ALIGN(4); src/field/field_specials.o(ewram_data);
 . = ALIGN(4); src/field/pokedex_area_screen.o(ewram_data);
+. = ALIGN(4); src/roulette.o(ewram_data);
 . = ALIGN(4); src/battle/battle_message.o(ewram_data);
 . = ALIGN(4); src/field/choose_party.o(ewram_data);
 . = ALIGN(4); src/scene/cable_car.o(ewram_data);
@@ -373,11 +402,16 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/engine/mystery_event_menu.o(ewram_data);
 . = ALIGN(4); src/engine/save_failed_screen.o(ewram_data);
 . = ALIGN(4); src/pokemon/pokeblock_feed.o(ewram_data);
+. = ALIGN(4); src/debug/nakamura_debug_menu.o(ewram_data);
 . = ALIGN(4); src/scene/intro_credits_graphics.o(ewram_data);
 
 /* ??? */
 
+#if DEBUG
+    . = ALIGN(8);
+#else
     . = ALIGN(16);
+#endif
 gTileBuffer = .; /* 2039360 */
     . += 0x100;
 

@@ -132,6 +132,12 @@ struct StructgUnknown_083F8D90
     u32 var04;
 };
 
+#if DEBUG
+u8 gUnknown_Debug_03005FB8;
+#endif
+
+#define static
+
 static void sub_81150FC(void);
 static void sub_8115124(void);
 static void sub_8115238(void);
@@ -309,7 +315,10 @@ extern const u16 gUnknown_083FA632[];
 extern const s8 gUnknown_083FA64A[0x2];
 extern const s8 gUnknown_083FA64C[0x8][0x2];
 
-
+#if DEBUG
+EWRAM_DATA u8 unk_203955C[4] = { 0 };
+EWRAM_DATA u8 unk_2039560[4] = { 0 };
+#endif
 
 
 void sub_81150FC(void)
@@ -394,6 +403,305 @@ void sub_8115238(void)
     RtcCalcLocalTime();
 }
 
+#if DEBUG
+__attribute__((naked))
+void sub_8115384(void)
+{
+    asm("\
+	push	{r4, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r1, ._35        @ gUnknown_Debug_03005FB8\n\
+	ldr	r0, ._35 + 4    @ 0x2019000\n\
+	str	r0, [r1]\n\
+	ldr	r1, ._35 + 8    @ gMain\n\
+	ldr	r2, ._35 + 12   @ 0x43c\n\
+	add	r0, r1, r2\n\
+	ldrb	r0, [r0]\n\
+	add	r2, r1, #0\n\
+	cmp	r0, #0x7\n\
+	bls	._33	@cond_branch\n\
+	b	._64\n\
+._33:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._35 + 16   @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._36:\n\
+	.align	2, 0\n\
+._35:\n\
+	.word	gUnknown_Debug_03005FB8\n\
+	.word	0x2019000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._37\n\
+._37:\n\
+	.word	._38\n\
+	.word	._39\n\
+	.word	._40\n\
+	.word	._41\n\
+	.word	._42\n\
+	.word	._43\n\
+	.word	._44\n\
+	.word	._45\n\
+._38:\n\
+	mov	r0, #0x0\n\
+	bl	SetVBlankCallback\n\
+	bl	ScanlineEffect_Stop\n\
+	bl	ClearVideoCallbacks\n\
+	bl	sub_80F9368\n\
+	ldr	r1, ._47        @ 0x400000c\n\
+	ldr	r3, ._47 + 4    @ 0x4686\n\
+	add	r0, r3, #0\n\
+	strh	r0, [r1]\n\
+	sub	r1, r1, #0x2\n\
+	ldr	r2, ._47 + 8    @ 0x4401\n\
+	add	r0, r2, #0\n\
+	strh	r0, [r1]\n\
+	add	r1, r1, #0x46\n\
+	mov	r3, #0x90\n\
+	lsl	r3, r3, #0x6\n\
+	add	r0, r3, #0\n\
+	strh	r0, [r1]\n\
+	add	r1, r1, #0x2\n\
+	ldr	r2, ._47 + 12   @ 0x60a\n\
+	add	r0, r2, #0\n\
+	strh	r0, [r1]\n\
+	ldr	r0, ._47 + 16   @ gUnknown_08E8096C\n\
+	mov	r1, #0xc0\n\
+	lsl	r1, r1, #0x13\n\
+	bl	LZ77UnCompVram\n\
+	ldr	r0, ._47 + 20   @ gRouletteWheelTiles\n\
+	ldr	r1, ._47 + 24   @ 0x6004000\n\
+	bl	LZ77UnCompVram\n\
+	ldr	r1, ._47 + 28   @ gMain\n\
+	ldr	r3, ._47 + 32   @ 0x43c\n\
+	add	r1, r1, r3\n\
+	b	._61\n\
+._48:\n\
+	.align	2, 0\n\
+._47:\n\
+	.word	0x400000c\n\
+	.word	0x4686\n\
+	.word	0x4401\n\
+	.word	0x60a\n\
+	.word	gUnknown_08E8096C\n\
+	.word	gRouletteWheelTiles\n\
+	.word	0x6004000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._39:\n\
+	bl	ResetPaletteFade\n\
+	bl	ResetSpriteData\n\
+	bl	ResetTasks\n\
+	ldr	r1, ._50        @ gMain\n\
+	ldr	r0, ._50 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._61\n\
+._51:\n\
+	.align	2, 0\n\
+._50:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._40:\n\
+	ldr	r0, ._53        @ gWindowTemplate_81E6C3C\n\
+	bl	Text_LoadWindowTemplate\n\
+	ldr	r0, ._53 + 4    @ gWindowTemplate_81E6CE4\n\
+	bl	InitMenuWindow\n\
+	ldr	r0, ._53 + 8    @ gUnknown_083F86BC\n\
+	mov	r2, #0xe0\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r1, #0x0\n\
+	bl	LoadPalette\n\
+	ldr	r1, ._53 + 12   @ gMain\n\
+	ldr	r2, ._53 + 16   @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._61\n\
+._54:\n\
+	.align	2, 0\n\
+._53:\n\
+	.word	gWindowTemplate_81E6C3C\n\
+	.word	gWindowTemplate_81E6CE4\n\
+	.word	gUnknown_083F86BC\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._41:\n\
+	bl	sub_8115238\n\
+	bl	ClearBGTilemapBuffers\n\
+	ldr	r0, ._56        @ gUnknown_083F88BC\n\
+	ldr	r1, ._56 + 4    @ 0x2018800\n\
+	bl	LZ77UnCompWram\n\
+	ldr	r0, ._56 + 8    @ gUnknown_083F8A60\n\
+	ldr	r1, ._56 + 12   @ 0x6003000\n\
+	bl	LZ77UnCompVram\n\
+	ldr	r1, ._56 + 16   @ gMain\n\
+	ldr	r3, ._56 + 20   @ 0x43c\n\
+	add	r1, r1, r3\n\
+	b	._61\n\
+._57:\n\
+	.align	2, 0\n\
+._56:\n\
+	.word	gUnknown_083F88BC\n\
+	.word	0x2018800\n\
+	.word	gUnknown_083F8A60\n\
+	.word	0x6003000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._42:\n\
+	mov	r0, #0x0\n\
+	bl	sub_8117838\n\
+	bl	sub_811857C\n\
+	bl	sub_81184D8\n\
+	bl	sub_8117F2C\n\
+	bl	sub_8117900\n\
+	bl	sub_8117BBC\n\
+	bl	sub_8117DF4\n\
+	ldr	r1, ._59        @ gMain\n\
+	ldr	r0, ._59 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._61\n\
+._60:\n\
+	.align	2, 0\n\
+._59:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._43:\n\
+	bl	AnimateSprites\n\
+	bl	BuildOamBuffer\n\
+	ldr	r0, ._62        @ gSaveBlock1\n\
+	ldr	r1, ._62 + 4    @ 0x494\n\
+	add	r0, r0, r1\n\
+	ldrh	r0, [r0]\n\
+	bl	sub_81180F4\n\
+	mov	r0, #0x6\n\
+	bl	sub_81182F8\n\
+	mov	r0, #0x0\n\
+	bl	sub_811829C\n\
+	mov	r0, #0x0\n\
+	bl	sub_8117158\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0xe\n\
+	mov	r2, #0x1d\n\
+	mov	r3, #0x13\n\
+	bl	Menu_DrawStdWindowFrame\n\
+	ldr	r0, ._62 + 8    @ gUnknown_081C4157\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0xf\n\
+	bl	Menu_PrintText\n\
+	ldr	r1, ._62 + 12   @ gSpriteCoordOffsetX\n\
+	mov	r2, #0x3c\n\
+	neg	r2, r2\n\
+	add	r0, r2, #0\n\
+	strh	r0, [r1]\n\
+	ldr	r1, ._62 + 16   @ gSpriteCoordOffsetY\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r1]\n\
+	ldr	r1, ._62 + 20   @ gMain\n\
+	ldr	r3, ._62 + 24   @ 0x43c\n\
+	add	r1, r1, r3\n\
+	b	._61\n\
+._63:\n\
+	.align	2, 0\n\
+._62:\n\
+	.word	gSaveBlock1\n\
+	.word	0x494\n\
+	.word	gUnknown_081C4157\n\
+	.word	gSpriteCoordOffsetX\n\
+	.word	gSpriteCoordOffsetY\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._44:\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x13\n\
+	ldr	r3, ._65        @ 0x1741\n\
+	add	r0, r3, #0\n\
+	strh	r0, [r1]\n\
+	ldr	r0, ._65 + 4    @ 0x43c\n\
+	add	r1, r2, r0\n\
+._61:\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	b	._64\n\
+._66:\n\
+	.align	2, 0\n\
+._65:\n\
+	.word	0x1741\n\
+	.word	0x43c\n\
+._45:\n\
+	ldr	r3, ._67        @ 0x4000208\n\
+	ldrh	r2, [r3]\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r3]\n\
+	ldr	r4, ._67 + 4    @ 0x4000200\n\
+	ldrh	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r4]\n\
+	strh	r2, [r3]\n\
+	ldr	r2, ._67 + 8    @ 0x4000004\n\
+	ldrh	r0, [r2]\n\
+	mov	r1, #0x8\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r2]\n\
+	ldr	r0, ._67 + 12   @ sub_8115124\n\
+	bl	SetVBlankCallback\n\
+	mov	r0, #0x1\n\
+	str	r0, [sp]\n\
+	mov	r0, #0xff\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x10\n\
+	mov	r3, #0x0\n\
+	bl	BeginHardwarePaletteFade\n\
+	ldr	r0, ._67 + 16   @ sub_81156BC\n\
+	mov	r1, #0x0\n\
+	bl	CreateTask\n\
+	ldr	r4, ._67 + 20   @ 0x2019000\n\
+	add	r1, r4, #0\n\
+	add	r1, r1, #0xa4\n\
+	strb	r0, [r1]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r2, ._67 + 24   @ gTasks\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r2\n\
+	mov	r0, #0x6\n\
+	strh	r0, [r1, #0x14]\n\
+	ldr	r0, ._67 + 28   @ gSaveBlock1\n\
+	ldr	r2, ._67 + 32   @ 0x494\n\
+	add	r0, r0, r2\n\
+	ldrh	r0, [r0]\n\
+	strh	r0, [r1, #0x22]\n\
+	ldr	r0, ._67 + 36   @ sub_8115634\n\
+	mov	r1, #0x1\n\
+	bl	CreateTask\n\
+	add	r4, r4, #0xa5\n\
+	strb	r0, [r4]\n\
+	ldr	r0, ._67 + 40   @ sub_81150FC\n\
+	bl	SetMainCallback2\n\
+._64:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._68:\n\
+	.align	2, 0\n\
+._67:\n\
+	.word	0x4000208\n\
+	.word	0x4000200\n\
+	.word	0x4000004\n\
+	.word	sub_8115124+1\n\
+	.word	sub_81156BC+1\n\
+	.word	0x2019000\n\
+	.word	gTasks\n\
+	.word	gSaveBlock1\n\
+	.word	0x494\n\
+	.word	sub_8115634+1\n\
+	.word	sub_81150FC+1");
+}
+#else
 void sub_8115384(void)
 {
     u32 temp_IME;
@@ -475,7 +783,120 @@ void sub_8115384(void)
         break;
     }
 }
+#endif
 
+#if DEBUG
+__attribute__((naked))
+void sub_8115634(u8 unused)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	ldr	r0, ._75        @ 0x2019000\n\
+	add	r3, r0, #0\n\
+	add	r3, r3, #0x21\n\
+	ldrb	r1, [r3]\n\
+	add	r2, r1, #1\n\
+	strb	r2, [r3]\n\
+	add	r2, r0, #0\n\
+	add	r2, r2, #0x23\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	add	r6, r0, #0\n\
+	ldrb	r2, [r2]\n\
+	cmp	r1, r2\n\
+	bne	._70	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r3]\n\
+	add	r2, r6, #0\n\
+	add	r2, r2, #0x22\n\
+	ldrb	r1, [r2]\n\
+	ldrh	r0, [r6, #0x24]\n\
+	sub	r0, r0, r1\n\
+	strh	r0, [r6, #0x24]\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bge	._70	@cond_branch\n\
+	ldrb	r1, [r2]\n\
+	mov	r2, #0xb4\n\
+	lsl	r2, r2, #0x1\n\
+	add	r0, r2, #0\n\
+	sub	r0, r0, r1\n\
+	strh	r0, [r6, #0x24]\n\
+._70:\n\
+	add	r4, r6, #0\n\
+	ldrh	r0, [r4, #0x24]\n\
+	bl	Sin2\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	ldrh	r0, [r4, #0x24]\n\
+	bl	Cos2\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r1, r0, #0x10\n\
+	lsl	r0, r5, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bge	._71	@cond_branch\n\
+	add	r0, r0, #0xf\n\
+._71:\n\
+	lsl	r0, r0, #0xc\n\
+	lsr	r5, r0, #0x10\n\
+	lsl	r0, r1, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bge	._72	@cond_branch\n\
+	add	r0, r0, #0xf\n\
+._72:\n\
+	asr	r0, r0, #0x4\n\
+	strh	r0, [r6, #0x32]\n\
+	strh	r0, [r6, #0x2c]\n\
+	strh	r5, [r6, #0x2e]\n\
+	lsl	r0, r5, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	neg	r0, r0\n\
+	strh	r0, [r6, #0x30]\n\
+	ldr	r0, ._75 + 4    @ unk_203955C\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._74	@cond_branch\n\
+	ldr	r0, ._75 + 8    @ gMain\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._74	@cond_branch\n\
+	ldr	r2, ._75 + 12   @ gTasks\n\
+	add	r0, r6, #0\n\
+	add	r0, r0, #0xa4\n\
+	ldrb	r1, [r0]\n\
+	lsl	r0, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r2\n\
+	ldr	r1, ._75 + 16   @ sub_81157AC\n\
+	str	r1, [r0]\n\
+	ldr	r0, ._75 + 20   @ gMPlay_SE1\n\
+	bl	m4aMPlayStop\n\
+	ldr	r0, ._75 + 24   @ gMPlay_SE2\n\
+	bl	m4aMPlayStop\n\
+	ldr	r0, ._75 + 28   @ gMPlay_SE3\n\
+	bl	m4aMPlayStop\n\
+._74:\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._76:\n\
+	.align	2, 0\n\
+._75:\n\
+	.word	0x2019000\n\
+	.word	unk_203955C\n\
+	.word	gMain\n\
+	.word	gTasks\n\
+	.word	sub_81157AC+1\n\
+	.word	gMPlay_SE1\n\
+	.word	gMPlay_SE2\n\
+	.word	gMPlay_SE3");
+}
+#else
 void sub_8115634(u8 unused)
 {
     s16 sin;
@@ -496,6 +917,7 @@ void sub_8115634(u8 unused)
     eRoulette->var2C.b =  sin;
     eRoulette->var2C.c = -sin;
 }
+#endif
 
 void sub_81156BC(u8 taskid)
 {
@@ -1176,7 +1598,69 @@ void sub_8116AB0(u8 taskid)
     gTasks[taskid].func = &sub_8116B40;
 }
 
-void sub_8116B40(u8 taskid) // end oulette ?
+#if DEBUG
+__attribute__((naked))
+void sub_8116B40(u8 taskid) // end roulette ?
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r6, r0, #0x18\n\
+	bl	UpdatePaletteFade\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r5, r0, #0x18\n\
+	cmp	r5, #0\n\
+	bne	._380	@cond_branch\n\
+	mov	r0, #0x0\n\
+	bl	SetVBlankCallback\n\
+	ldr	r0, ._381       @ 0x2019000\n\
+	mov	r2, #0xbe\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r1, #0x0\n\
+	bl	memset\n\
+	ldr	r1, ._381 + 4   @ gSpriteCoordOffsetX\n\
+	ldr	r0, ._381 + 8   @ gSpriteCoordOffsetY\n\
+	mov	r4, #0x0\n\
+	strh	r5, [r0]\n\
+	strh	r5, [r1]\n\
+	bl	sub_80F9368\n\
+	bl	FreeAllSpritePalettes\n\
+	bl	ResetPaletteFade\n\
+	bl	ResetSpriteData\n\
+	bl	ClearBGTilemapBuffers\n\
+	ldr	r0, ._381 + 12  @ 0x4000050\n\
+	strh	r5, [r0]\n\
+	add	r0, r0, #0x2\n\
+	strh	r5, [r0]\n\
+	add	r0, r0, #0x2\n\
+	strh	r5, [r0]\n\
+	ldr	r1, ._381 + 16  @ gFieldCallback\n\
+	ldr	r0, ._381 + 20  @ sub_8080990\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._381 + 24  @ c2_exit_to_overworld_2_switch\n\
+	bl	SetMainCallback2\n\
+	add	r0, r6, #0\n\
+	bl	DestroyTask\n\
+	ldr	r0, ._381 + 28  @ unk_203955C\n\
+	strb	r4, [r0]\n\
+._380:\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._382:\n\
+	.align	2, 0\n\
+._381:\n\
+	.word	0x2019000\n\
+	.word	gSpriteCoordOffsetX\n\
+	.word	gSpriteCoordOffsetY\n\
+	.word	0x4000050\n\
+	.word	gFieldCallback\n\
+	.word	sub_8080990+1\n\
+	.word	c2_exit_to_overworld_2_switch+1\n\
+	.word	unk_203955C");
+}
+#else
+void sub_8116B40(u8 taskid) // end roulette ?
 {
     if (UpdatePaletteFade() == 0)
     {
@@ -1196,6 +1680,7 @@ void sub_8116B40(u8 taskid) // end oulette ?
         DestroyTask(taskid);
     }
 }
+#endif
 
 void sub_8116BC0(u8 taskid)
 {
@@ -1525,6 +2010,9 @@ void sub_811755C(u8 taskid)
 
 void sub_81175C0(u8 taskid)
 {
+#if DEBUG
+    unk_203955C[0] = 0;
+#endif
     Menu_EraseScreen();
     ScriptContext2_Disable();
     DestroyTask(taskid);
@@ -1587,6 +2075,386 @@ void Task_Roulette_0(u8 taskid)
     }
 }
 
+#if DEBUG
+
+__attribute__((naked))
+void debug_sub_812CDE4()
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r3, r0, #0x18\n\
+	add	r4, r3, #0\n\
+	ldr	r0, ._575       @ gMain\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._572	@cond_branch\n\
+	ldr	r1, ._575 + 4   @ gTasks\n\
+	lsl	r0, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	lsl	r0, r0, #0x3\n\
+	add	r2, r0, r1\n\
+	ldrh	r0, [r2, #0x22]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r2, #0x22]\n\
+	lsl	r0, r0, #0x10\n\
+	ldr	r1, ._575 + 8   @ 0x27100000\n\
+	cmp	r0, r1\n\
+	bne	._573	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r2, #0x22]\n\
+._573:\n\
+	ldr	r0, ._575 + 12  @ gStringVar1\n\
+	mov	r3, #0x22\n\
+	ldsh	r1, [r2, r3]\n\
+	b	._584\n\
+._576:\n\
+	.align	2, 0\n\
+._575:\n\
+	.word	gMain\n\
+	.word	gTasks\n\
+	.word	0x27100000\n\
+	.word	gStringVar1\n\
+._572:\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._577	@cond_branch\n\
+	ldr	r1, ._580       @ gTasks\n\
+	lsl	r0, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	lsl	r0, r0, #0x3\n\
+	add	r2, r0, r1\n\
+	ldrh	r0, [r2, #0x22]\n\
+	sub	r0, r0, #0x1\n\
+	strh	r0, [r2, #0x22]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	mov	r1, #0x1\n\
+	neg	r1, r1\n\
+	cmp	r0, r1\n\
+	bne	._578	@cond_branch\n\
+	ldr	r0, ._580 + 4   @ 0x270f\n\
+	strh	r0, [r2, #0x22]\n\
+._578:\n\
+	ldr	r0, ._580 + 8   @ gStringVar1\n\
+	mov	r3, #0x22\n\
+	ldsh	r1, [r2, r3]\n\
+	b	._584\n\
+._581:\n\
+	.align	2, 0\n\
+._580:\n\
+	.word	gTasks\n\
+	.word	0x270f\n\
+	.word	gStringVar1\n\
+._577:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._582	@cond_branch\n\
+	ldr	r1, ._585       @ gTasks\n\
+	lsl	r0, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	lsl	r0, r0, #0x3\n\
+	add	r2, r0, r1\n\
+	ldrh	r3, [r2, #0x22]\n\
+	add	r0, r3, #0\n\
+	add	r0, r0, #0xa\n\
+	strh	r0, [r2, #0x22]\n\
+	lsl	r0, r0, #0x10\n\
+	ldr	r1, ._585 + 4   @ 0x270f0000\n\
+	cmp	r0, r1\n\
+	ble	._583	@cond_branch\n\
+	ldr	r1, ._585 + 8   @ 0xffffd8fb\n\
+	add	r0, r3, r1\n\
+	strh	r0, [r2, #0x22]\n\
+._583:\n\
+	ldr	r0, ._585 + 12  @ gStringVar1\n\
+	mov	r3, #0x22\n\
+	ldsh	r1, [r2, r3]\n\
+	b	._584\n\
+._586:\n\
+	.align	2, 0\n\
+._585:\n\
+	.word	gTasks\n\
+	.word	0x270f0000\n\
+	.word	0xffffd8fb\n\
+	.word	gStringVar1\n\
+._582:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._587	@cond_branch\n\
+	ldr	r0, ._590       @ gTasks\n\
+	lsl	r1, r3, #0x2\n\
+	add	r1, r1, r3\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r0\n\
+	ldrh	r2, [r1, #0x22]\n\
+	add	r0, r2, #0\n\
+	sub	r0, r0, #0xa\n\
+	strh	r0, [r1, #0x22]\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bge	._588	@cond_branch\n\
+	ldr	r3, ._590 + 4   @ 0x2705\n\
+	add	r0, r2, r3\n\
+	strh	r0, [r1, #0x22]\n\
+._588:\n\
+	ldr	r0, ._590 + 8   @ gStringVar1\n\
+	mov	r2, #0x22\n\
+	ldsh	r1, [r1, r2]\n\
+._584:\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x4\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r4, ._590 + 12  @ gStringVar4\n\
+	ldr	r1, ._590 + 16  @ gOtherText_Coins\n\
+	add	r0, r4, #0\n\
+	bl	StringExpandPlaceholders\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x9\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint_RightAligned\n\
+	b	._596\n\
+._591:\n\
+	.align	2, 0\n\
+._590:\n\
+	.word	gTasks\n\
+	.word	0x2705\n\
+	.word	gStringVar1\n\
+	.word	gStringVar4\n\
+	.word	gOtherText_Coins\n\
+._587:\n\
+	mov	r0, #0x8\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._592	@cond_branch\n\
+	ldr	r0, ._594       @ gSaveBlock1\n\
+	ldr	r2, ._594 + 4   @ gTasks\n\
+	lsl	r1, r3, #0x2\n\
+	add	r1, r1, r3\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r2\n\
+	ldrh	r2, [r1, #0x22]\n\
+	ldr	r3, ._594 + 8   @ 0x494\n\
+	add	r0, r0, r3\n\
+	mov	r5, #0x0\n\
+	strh	r2, [r0]\n\
+	ldr	r0, ._594 + 12  @ Task_Roulette_0\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._594 + 16  @ gStringVar1\n\
+	mov	r2, #0x22\n\
+	ldsh	r1, [r1, r2]\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x4\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r4, ._594 + 20  @ gStringVar4\n\
+	ldr	r1, ._594 + 24  @ gOtherText_Coins\n\
+	add	r0, r4, #0\n\
+	bl	StringExpandPlaceholders\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x9\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint_RightAligned\n\
+	ldr	r0, ._594 + 28  @ unk_2039560\n\
+	strb	r5, [r0]\n\
+	b	._596\n\
+._595:\n\
+	.align	2, 0\n\
+._594:\n\
+	.word	gSaveBlock1\n\
+	.word	gTasks\n\
+	.word	0x494\n\
+	.word	Task_Roulette_0+1\n\
+	.word	gStringVar1\n\
+	.word	gStringVar4\n\
+	.word	gOtherText_Coins\n\
+	.word	unk_2039560\n\
+._592:\n\
+	mov	r0, #0x4\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._596	@cond_branch\n\
+	ldr	r0, ._597       @ gSaveBlock1\n\
+	ldr	r2, ._597 + 4   @ gTasks\n\
+	lsl	r1, r4, #0x2\n\
+	add	r1, r1, r4\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r2\n\
+	ldrh	r2, [r1, #0x22]\n\
+	ldr	r3, ._597 + 8   @ 0x494\n\
+	add	r0, r0, r3\n\
+	strh	r2, [r0]\n\
+	ldr	r0, ._597 + 12  @ Task_Roulette_0\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._597 + 16  @ gStringVar1\n\
+	mov	r2, #0x22\n\
+	ldsh	r1, [r1, r2]\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x4\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r4, ._597 + 20  @ gStringVar4\n\
+	ldr	r1, ._597 + 24  @ gOtherText_Coins\n\
+	add	r0, r4, #0\n\
+	bl	StringExpandPlaceholders\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x9\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint_RightAligned\n\
+	ldr	r1, ._597 + 28  @ unk_2039560\n\
+	mov	r0, #0x1\n\
+	strb	r0, [r1]\n\
+._596:\n\
+	pop	{r4, r5}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._598:\n\
+	.align	2, 0\n\
+._597:\n\
+	.word	gSaveBlock1\n\
+	.word	gTasks\n\
+	.word	0x494\n\
+	.word	Task_Roulette_0+1\n\
+	.word	gStringVar1\n\
+	.word	gStringVar4\n\
+	.word	gOtherText_Coins\n\
+	.word	unk_2039560");
+}
+
+__attribute__((naked))
+void debug_sub_812CFE8()
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r2, ._600       @ gTasks\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r5, r1, r2\n\
+	ldr	r0, ._600 + 4   @ gSaveBlock1\n\
+	ldr	r1, ._600 + 8   @ 0x494\n\
+	add	r0, r0, r1\n\
+	ldrh	r0, [r0]\n\
+	strh	r0, [r5, #0x22]\n\
+	bl	Random\n\
+	mov	r1, #0x1\n\
+	and	r1, r1, r0\n\
+	cmp	r1, #0\n\
+	beq	._599	@cond_branch\n\
+	ldr	r0, ._600 + 12  @ gSpecialVar_0x8004\n\
+	ldrh	r1, [r0]\n\
+	mov	r2, #0x80\n\
+	orr	r1, r1, r2\n\
+	strh	r1, [r0]\n\
+._599:\n\
+	ldr	r0, ._600 + 16  @ gStringVar1\n\
+	mov	r2, #0x22\n\
+	ldsh	r1, [r5, r2]\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x4\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r4, ._600 + 20  @ gStringVar4\n\
+	ldr	r1, ._600 + 24  @ gOtherText_Coins\n\
+	add	r0, r4, #0\n\
+	bl	StringExpandPlaceholders\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x9\n\
+	mov	r3, #0x3\n\
+	bl	Menu_DrawStdWindowFrame\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x9\n\
+	mov	r2, #0x1\n\
+	bl	MenuPrint_RightAligned\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0xe\n\
+	mov	r2, #0x1d\n\
+	mov	r3, #0x13\n\
+	bl	Menu_DrawStdWindowFrame\n\
+	ldr	r0, ._600 + 28  @ gUnknown_Debug_0842510D\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0xf\n\
+	bl	Menu_PrintText\n\
+	ldr	r0, ._600 + 32  @ debug_sub_812CDE4\n\
+	str	r0, [r5]\n\
+	pop	{r4, r5}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._601:\n\
+	.align	2, 0\n\
+._600:\n\
+	.word	gTasks\n\
+	.word	gSaveBlock1\n\
+	.word	0x494\n\
+	.word	gSpecialVar_0x8004\n\
+	.word	gStringVar1\n\
+	.word	gStringVar4\n\
+	.word	gOtherText_Coins\n\
+	.word	gUnknown_Debug_0842510D\n\
+	.word	debug_sub_812CDE4+1");
+}
+
+#endif
+
+#if DEBUG
+__attribute__((naked))
+void PlayRoulette(void)
+{
+    asm("\
+	push	{lr}\n\
+	bl	ScriptContext2_Enable\n\
+	ldr	r1, ._604       @ unk_2039560\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	ldr	r0, ._604 + 4   @ unk_203955C\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._602	@cond_branch\n\
+	ldr	r0, ._604 + 8   @ debug_sub_812CFE8\n\
+	mov	r1, #0x0\n\
+	bl	CreateTask\n\
+	b	._603\n\
+._605:\n\
+	.align	2, 0\n\
+._604:\n\
+	.word	unk_2039560\n\
+	.word	unk_203955C\n\
+	.word	debug_sub_812CFE8+1\n\
+._602:\n\
+	ldr	r0, ._606       @ Task_Roulette_0\n\
+	mov	r1, #0x0\n\
+	bl	CreateTask\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r2, ._606 + 4   @ gTasks\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r2\n\
+	ldr	r0, ._606 + 8   @ gSaveBlock1\n\
+	ldr	r2, ._606 + 12  @ 0x494\n\
+	add	r0, r0, r2\n\
+	ldrh	r0, [r0]\n\
+	strh	r0, [r1, #0x22]\n\
+._603:\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._607:\n\
+	.align	2, 0\n\
+._606:\n\
+	.word	Task_Roulette_0+1\n\
+	.word	gTasks\n\
+	.word	gSaveBlock1\n\
+	.word	0x494");
+}
+#else
 void PlayRoulette(void)
 {
     u8 taskid;
@@ -1594,6 +2462,7 @@ void PlayRoulette(void)
     taskid = CreateTask(&Task_Roulette_0, 0x0);
     gTasks[taskid].data[0xD] = gSaveBlock1.coins;
 }
+#endif
 
 void sub_8117838(u8 r0)
 {
@@ -2301,6 +3170,99 @@ void sub_8118D2C(struct Sprite *sprite)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_812E698()
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	add	r7, r0, #0\n\
+	bl	sub_8118724\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r7, #0x32]\n\
+	add	r0, r7, #0\n\
+	bl	sub_81186B8\n\
+	mov	r0, #0x38\n\
+	bl	m4aSongNumStart\n\
+	bl	Random\n\
+	mov	r1, #0x1\n\
+	and	r1, r1, r0\n\
+	cmp	r1, #0\n\
+	beq	._837	@cond_branch\n\
+	ldr	r4, ._839       @ 0x2019000\n\
+	add	r1, r4, #0\n\
+	add	r1, r1, #0x8c\n\
+	ldr	r0, ._839 + 4   @ 0x0\n\
+	str	r0, [r1]\n\
+	add	r0, r4, #0\n\
+	add	r0, r0, #0x7e\n\
+	ldrb	r0, [r0]\n\
+	add	r0, r0, #0x1\n\
+	mov	r1, #0xc\n\
+	bl	__modsi3\n\
+	add	r1, r4, #0\n\
+	add	r1, r1, #0x7f\n\
+	strb	r0, [r1]\n\
+	add	r1, r4, #0\n\
+	ldr	r4, ._839 + 8   @ gUnknown_083F8DF4\n\
+	b	._838\n\
+._840:\n\
+	.align	2, 0\n\
+._839:\n\
+	.word	0x2019000\n\
+	.word	0x0\n\
+	.word	gUnknown_083F8DF4\n\
+._837:\n\
+	ldr	r6, ._841       @ 0x2019000\n\
+	add	r5, r6, #0\n\
+	add	r5, r5, #0x8c\n\
+	ldr	r4, ._841 + 4   @ gUnknown_083F8DF4\n\
+	ldrb	r0, [r6, #0x4]\n\
+	lsl	r0, r0, #0x1e\n\
+	lsr	r0, r0, #0x19\n\
+	add	r1, r4, #0\n\
+	add	r1, r1, #0x1c\n\
+	add	r0, r0, r1\n\
+	ldr	r1, [r0]\n\
+	add	r0, r1, #0\n\
+	bl	__addsf3\n\
+	str	r0, [r5]\n\
+	add	r0, r6, #0\n\
+	add	r0, r0, #0x7e\n\
+	ldrb	r0, [r0]\n\
+	add	r1, r6, #0\n\
+	add	r1, r1, #0x7f\n\
+	strb	r0, [r1]\n\
+	add	r1, r6, #0\n\
+._838:\n\
+	mov	r0, #0x1\n\
+	strh	r0, [r7, #0x2e]\n\
+	ldrb	r0, [r1, #0x4]\n\
+	lsl	r0, r0, #0x1e\n\
+	lsr	r0, r0, #0x19\n\
+	add	r0, r0, r4\n\
+	ldrb	r0, [r0, #0x2]\n\
+	strh	r0, [r7, #0x32]\n\
+	add	r1, r1, #0x98\n\
+	ldr	r0, ._841 + 8   @ 0x3dae147b\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._841 + 12  @ sub_8118D2C\n\
+	str	r0, [r7, #0x1c]\n\
+	mov	r0, #0x5\n\
+	strh	r0, [r7, #0x30]\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._842:\n\
+	.align	2, 0\n\
+._841:\n\
+	.word	0x2019000\n\
+	.word	gUnknown_083F8DF4\n\
+	.word	0x3dae147b\n\
+	.word	sub_8118D2C+1");
+}
+#endif
+
 void sub_8118DE4(struct Sprite *sprite)
 {
     sub_8118724(sprite);
@@ -2368,6 +3330,137 @@ void sub_8118DE4(struct Sprite *sprite)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void sub_8118F8C(struct Sprite *sprite)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r9\n\
+	mov	r6, r8\n\
+	push	{r6, r7}\n\
+	add	r6, r0, #0\n\
+	bl	sub_8118724\n\
+	ldr	r5, ._868       @ 0x2019000\n\
+	mov	r0, #0x8c\n\
+	add	r0, r0, r5\n\
+	mov	r8, r0\n\
+	ldr	r0, [r0]\n\
+	ldr	r1, ._868 + 4   @ 0x3f000000\n\
+	bl	__gtsf2\n\
+	cmp	r0, #0\n\
+	bgt	._874	@cond_branch\n\
+	add	r0, r6, #0\n\
+	bl	sub_81186B8\n\
+	add	r0, r6, #0\n\
+	bl	sub_81186E8\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bne	._864	@cond_branch\n\
+	add	r1, r5, #0\n\
+	add	r1, r1, #0x90\n\
+	ldr	r0, ._868 + 8   @ 0x0\n\
+	str	r0, [r1]\n\
+	ldr	r1, ._868 + 12  @ gUnknown_083F8DF4\n\
+	mov	r9, r1\n\
+	ldrb	r0, [r5, #0x4]\n\
+	lsl	r7, r0, #0x1e\n\
+	lsr	r0, r7, #0x19\n\
+	add r0, r0, r9\n\
+	mov	r4, #0x3\n\
+	ldsb	r4, [r0, r4]\n\
+	add	r0, r4, #0\n\
+	bl	__floatsisf\n\
+	add	r5, r0, #0\n\
+	cmp	r4, #0\n\
+	bge	._865	@cond_branch\n\
+	ldr	r1, ._868 + 16  @ 0x43800000\n\
+	bl	__addsf3\n\
+	add	r5, r0, #0\n\
+._865:\n\
+	lsr	r0, r7, #0x19\n\
+	add r0, r0, r9\n\
+	ldrb	r0, [r0, #0x4]\n\
+	add	r0, r0, #0x1\n\
+	bl	__floatsisf\n\
+	add	r1, r0, #0\n\
+	add	r0, r5, #0\n\
+	bl	__divsf3\n\
+	add	r1, r0, #0\n\
+	mov	r2, r8\n\
+	ldr	r0, [r2]\n\
+	bl	__subsf3\n\
+	mov	r1, r8\n\
+	str	r0, [r1]\n\
+	mov	r0, #0x4\n\
+	strh	r0, [r6, #0x30]\n\
+	ldr	r0, ._868 + 20  @ unk_2039560\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._866	@cond_branch\n\
+	ldr	r0, ._868 + 24  @ debug_sub_812E698\n\
+	str	r0, [r6, #0x1c]\n\
+	b	._874\n\
+._869:\n\
+	.align	2, 0\n\
+._868:\n\
+	.word	0x2019000\n\
+	.word	0x3f000000\n\
+	.word	0x0\n\
+	.word	gUnknown_083F8DF4\n\
+	.word	0x43800000\n\
+	.word	unk_2039560\n\
+	.word	debug_sub_812E698+1\n\
+._866:\n\
+	ldr	r0, ._871       @ sub_8118DE4\n\
+	str	r0, [r6, #0x1c]\n\
+	b	._874\n\
+._872:\n\
+	.align	2, 0\n\
+._871:\n\
+	.word	sub_8118DE4+1\n\
+._864:\n\
+	add	r6, r5, #0\n\
+	add	r6, r6, #0x90\n\
+	ldr	r0, [r6]\n\
+	ldr	r4, ._875       @ 0x0\n\
+	add	r1, r4, #0\n\
+	bl	__nesf2\n\
+	cmp	r0, #0\n\
+	beq	._874	@cond_branch\n\
+	mov	r2, r8\n\
+	ldr	r0, [r2]\n\
+	add	r1, r4, #0\n\
+	bl	__ltsf2\n\
+	cmp	r0, #0\n\
+	bge	._874	@cond_branch\n\
+	str	r4, [r6]\n\
+	mov	r0, r8\n\
+	str	r4, [r0]\n\
+	add	r4, r5, #0\n\
+	add	r4, r4, #0x98\n\
+	ldr	r0, [r4]\n\
+	bl	__extendsfdf2\n\
+	ldr	r2, ._875 + 4   @ 0x3ff33333\n\
+	ldr	r3, ._875 + 8   @ 0x33333333\n\
+	bl	__divdf3\n\
+	bl	__truncdfsf2\n\
+	str	r0, [r4]\n\
+._874:\n\
+	pop	{r3, r4}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._876:\n\
+	.align	2, 0\n\
+._875:\n\
+	.word	0x0\n\
+	.word	0x3ff33333\n\
+	.word	0x33333333");
+}
+#else
 void sub_8118F8C(struct Sprite *sprite)
 {
     sub_8118724(sprite);
@@ -2398,6 +3491,7 @@ void sub_8118F8C(struct Sprite *sprite)
         }
     }
 }
+#endif
 
 void sub_8119088(struct Sprite *sprite)
 {

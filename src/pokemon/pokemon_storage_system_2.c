@@ -192,6 +192,144 @@ void sub_8096874(void)
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
 }
 
+#if DEBUG
+__attribute__((naked))
+void sub_8096884(void)
+{
+	asm("\
+	push	{r4, lr}\n\
+	ldr	r0, ._223       @ gMain\n\
+	ldr	r1, ._223 + 4   @ 0x43c\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x9\n\
+	bls	._221	@cond_branch\n\
+	b	._222\n\
+._221:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._223 + 8   @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._224:\n\
+	.align	2, 0\n\
+._223:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._225\n\
+._225:\n\
+	.word	._226\n\
+	.word	._227\n\
+	.word	._228\n\
+	.word	._229\n\
+	.word	._230\n\
+	.word	._231\n\
+	.word	._232\n\
+	.word	._233\n\
+	.word	._234\n\
+	.word	._235\n\
+._226:\n\
+	mov	r0, #0x0\n\
+	bl	SetVBlankCallback\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x13\n\
+	mov	r4, #0x0\n\
+	strh	r4, [r0]\n\
+	bl	sub_8096804\n\
+	ldr	r0, ._237       @ unk_2038790\n\
+	strb	r4, [r0]\n\
+	b	._250\n\
+._238:\n\
+	.align	2, 0\n\
+._237:\n\
+	.word	unk_2038790\n\
+._227:\n\
+	ldr	r0, ._240       @ gWindowTemplate_81E6D00\n\
+	bl	Text_LoadWindowTemplate\n\
+	b	._250\n\
+._241:\n\
+	.align	2, 0\n\
+._240:\n\
+	.word	gWindowTemplate_81E6D00\n\
+._228:\n\
+	ldr	r0, ._243       @ gWindowTemplate_81E6D00\n\
+	bl	InitMenuWindow\n\
+	bl	Menu_EraseScreen\n\
+	b	._250\n\
+._244:\n\
+	.align	2, 0\n\
+._243:\n\
+	.word	gWindowTemplate_81E6D00\n\
+._229:\n\
+	bl	sub_80967DC\n\
+	bl	sub_8096848\n\
+	b	._250\n\
+._230:\n\
+	bl	ResetPSSMonIconSprites\n\
+	bl	sub_809AA24\n\
+	b	._250\n\
+._231:\n\
+	bl	sub_8097DE0\n\
+	b	._250\n\
+._232:\n\
+	bl	sub_8097E70\n\
+	b	._250\n\
+._233:\n\
+	bl	sub_8098400\n\
+	b	._250\n\
+._234:\n\
+	ldr	r0, ._251       @ gPokemonStorage\n\
+	ldrb	r0, [r0]\n\
+	bl	sub_8099BF8\n\
+	ldr	r2, ._251 + 4   @ 0x2000000\n\
+	ldr	r1, ._251 + 8   @ 0x12bc\n\
+	add	r0, r2, r1\n\
+	mov	r1, #0xa\n\
+	strh	r1, [r0]\n\
+	ldr	r1, ._251 + 12  @ 0x12be\n\
+	add	r2, r2, r1\n\
+	ldr	r1, ._251 + 16  @ 0xdacb\n\
+	strh	r1, [r2]\n\
+	bl	sub_80F727C\n\
+	bl	sub_80F7404\n\
+	b	._250\n\
+._252:\n\
+	.align	2, 0\n\
+._251:\n\
+	.word	gPokemonStorage\n\
+	.word	0x2000000\n\
+	.word	0x12bc\n\
+	.word	0x12be\n\
+	.word	0xdacb\n\
+._235:\n\
+	bl	sub_8096874\n\
+	ldr	r0, ._253       @ sub_8096BF0\n\
+	bl	SetPSSCallback\n\
+	ldr	r0, ._253 + 4   @ sub_8096B38\n\
+	bl	SetMainCallback2\n\
+	ldr	r0, ._253 + 8   @ sub_8096AFC\n\
+	bl	SetVBlankCallback\n\
+._250:\n\
+	ldr	r1, ._253 + 12  @ gMain\n\
+	ldr	r0, ._253 + 16  @ 0x43c\n\
+	add	r1, r1, r0\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+._222:\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._254:\n\
+	.align	2, 0\n\
+._253:\n\
+	.word	sub_8096BF0+1\n\
+	.word	sub_8096B38+1\n\
+	.word	sub_8096AFC+1\n\
+	.word	gMain\n\
+	.word	0x43c");
+}
+#else
 void sub_8096884(void)
 {
     switch (gMain.state)
@@ -250,6 +388,7 @@ void sub_8096884(void)
             break;
     }
 }
+#endif
 
 void sub_80969A0(void)
 {
@@ -317,6 +456,117 @@ void sub_80969A0(void)
             break;
     }
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80A4300()
+{
+	asm("\
+	push	{lr}\n\
+	ldr	r1, ._296       @ gUnknown_0203847D\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	ldr	r1, ._296 + 4   @ 0x2000000\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1, #0x5]\n\
+	bl	sub_8096884\n\
+	ldr	r0, ._296 + 8   @ gMain\n\
+	ldr	r1, [r0, #0x4]\n\
+	ldr	r0, ._296 + 12  @ sub_8096B38\n\
+	cmp	r1, r0\n\
+	bne	._295	@cond_branch\n\
+	ldr	r1, ._296 + 16  @ unk_2038790\n\
+	mov	r0, #0x1\n\
+	strb	r0, [r1]\n\
+._295:\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._297:\n\
+	.align	2, 0\n\
+._296:\n\
+	.word	gUnknown_0203847D\n\
+	.word	0x2000000\n\
+	.word	gMain\n\
+	.word	sub_8096B38+1\n\
+	.word	unk_2038790");
+}
+
+__attribute__((naked))
+void debug_sub_80A433C()
+{
+	asm("\
+	push	{lr}\n\
+	ldr	r2, ._298       @ unk_2038794\n\
+	str	r1, [r2]\n\
+	ldr	r1, ._298 + 4   @ unk_2038798\n\
+	str	r0, [r1]\n\
+	ldr	r0, ._298 + 8   @ debug_sub_80A4300\n\
+	bl	SetMainCallback2\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._299:\n\
+	.align	2, 0\n\
+._298:\n\
+	.word	unk_2038794\n\
+	.word	unk_2038798\n\
+	.word	debug_sub_80A4300+1");
+}
+
+__attribute__((naked))
+void debug_sub_80A435C()
+{
+	asm("\
+	push	{r4, r5, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r5, ._303       @ 0x2000000\n\
+	ldrb	r4, [r5, #0x4]\n\
+	cmp	r4, #0\n\
+	beq	._300	@cond_branch\n\
+	cmp	r4, #0x1\n\
+	beq	._301	@cond_branch\n\
+	b	._308\n\
+._304:\n\
+	.align	2, 0\n\
+._303:\n\
+	.word	0x2000000\n\
+._300:\n\
+	ldr	r0, ._306       @ unk_2038798\n\
+	ldr	r0, [r0]\n\
+	bl	unref_sub_809CB94\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	str	r4, [sp]\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x10\n\
+	bl	BeginNormalPaletteFade\n\
+	ldrb	r0, [r5, #0x4]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r5, #0x4]\n\
+	b	._308\n\
+._307:\n\
+	.align	2, 0\n\
+._306:\n\
+	.word	unk_2038798\n\
+._301:\n\
+	bl	UpdatePaletteFade\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._308	@cond_branch\n\
+	ldr	r0, ._309       @ unk_2038794\n\
+	ldr	r0, [r0]\n\
+	bl	_call_via_r0\n\
+._308:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._310:\n\
+	.align	2, 0\n\
+._309:\n\
+	.word	unk_2038794");
+}
+#endif
 
 void sub_8096AFC(void)
 {
@@ -388,6 +638,438 @@ void sub_8096C68(void)
         SetPSSCallback(sub_8096C84);
 }
 
+#if DEBUG
+__attribute__((naked))
+void sub_8096C84(void)
+{
+	asm("\
+	push	{r4, lr}\n\
+	ldr	r0, ._347       @ 0x2000000\n\
+	ldrb	r0, [r0, #0x4]\n\
+	cmp	r0, #0x6\n\
+	bls	._345	@cond_branch\n\
+	b	._466\n\
+._345:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._347 + 4   @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._348:\n\
+	.align	2, 0\n\
+._347:\n\
+	.word	0x2000000\n\
+	.word	._349\n\
+._349:\n\
+	.word	._350\n\
+	.word	._351\n\
+	.word	._352\n\
+	.word	._353\n\
+	.word	._354\n\
+	.word	._355\n\
+	.word	._356\n\
+._350:\n\
+	bl	sub_809CA40\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	sub	r0, r0, #0x1\n\
+	cmp	r0, #0xf\n\
+	bls	._357	@cond_branch\n\
+	b	._466\n\
+._357:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._360       @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._361:\n\
+	.align	2, 0\n\
+._360:\n\
+	.word	._359\n\
+._359:\n\
+	.word	._362\n\
+	.word	._466\n\
+	.word	._466\n\
+	.word	._365\n\
+	.word	._366\n\
+	.word	._367\n\
+	.word	._368\n\
+	.word	._369\n\
+	.word	._370\n\
+	.word	._371\n\
+	.word	._372\n\
+	.word	._373\n\
+	.word	._374\n\
+	.word	._375\n\
+	.word	._376\n\
+	.word	._377\n\
+._362:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r1, ._379       @ 0x2000000\n\
+	mov	r0, #0x1\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._466\n\
+._380:\n\
+	.align	2, 0\n\
+._379:\n\
+	.word	0x2000000\n\
+._366:\n\
+	ldr	r4, ._383       @ 0x2000000\n\
+	ldrb	r0, [r4, #0x5]\n\
+	cmp	r0, #0x2\n\
+	beq	._381	@cond_branch\n\
+	mov	r0, #0x10\n\
+	bl	PrintStorageActionText\n\
+	mov	r0, #0x3\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._466\n\
+._384:\n\
+	.align	2, 0\n\
+._383:\n\
+	.word	0x2000000\n\
+._381:\n\
+	bl	sub_809B0D4\n\
+	ldr	r0, ._386       @ sub_8096FC8\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._387:\n\
+	.align	2, 0\n\
+._386:\n\
+	.word	sub_8096FC8+1\n\
+._367:\n\
+	ldr	r4, ._394       @ 0x2000000\n\
+	ldrb	r0, [r4, #0x5]\n\
+	cmp	r0, #0x2\n\
+	beq	._388	@cond_branch\n\
+	b	._466\n\
+._388:\n\
+	bl	sub_809BF20\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._391	@cond_branch\n\
+	ldr	r1, ._394 + 4   @ 0x11f2\n\
+	add	r0, r4, r1\n\
+	ldrh	r0, [r0]\n\
+	bl	ItemIsMail\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._391	@cond_branch\n\
+	b	._392\n\
+._391:\n\
+	ldr	r0, ._394 + 8   @ sub_8097004\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._395:\n\
+	.align	2, 0\n\
+._394:\n\
+	.word	0x2000000\n\
+	.word	0x11f2\n\
+	.word	sub_8097004+1\n\
+._365:\n\
+	ldr	r0, ._399       @ unk_2038790\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._396	@cond_branch\n\
+	b	._466\n\
+._396:\n\
+	ldr	r0, ._399 + 4   @ sub_8097BA0\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._400:\n\
+	.align	2, 0\n\
+._399:\n\
+	.word	unk_2038790\n\
+	.word	sub_8097BA0+1\n\
+._377:\n\
+	ldr	r0, ._404       @ unk_2038790\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._401	@cond_branch\n\
+	b	._466\n\
+._401:\n\
+	ldr	r0, ._404 + 4   @ sub_8097CC0\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._405:\n\
+	.align	2, 0\n\
+._404:\n\
+	.word	unk_2038790\n\
+	.word	sub_8097CC0+1\n\
+._368:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._407       @ sub_809789C\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._408:\n\
+	.align	2, 0\n\
+._407:\n\
+	.word	sub_809789C+1\n\
+._369:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._410       @ sub_8097078\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._411:\n\
+	.align	2, 0\n\
+._410:\n\
+	.word	sub_8097078+1\n\
+._370:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r4, ._414       @ 0x2000000\n\
+	ldr	r0, ._414 + 4   @ gPokemonStorage\n\
+	ldrb	r0, [r0]\n\
+	add	r0, r0, #0x1\n\
+	ldr	r2, ._414 + 8   @ 0x8b2\n\
+	add	r1, r4, r2\n\
+	strh	r0, [r1]\n\
+	cmp	r0, #0xd\n\
+	ble	._416	@cond_branch\n\
+	mov	r0, #0x0\n\
+	b	._413\n\
+._415:\n\
+	.align	2, 0\n\
+._414:\n\
+	.word	0x2000000\n\
+	.word	gPokemonStorage\n\
+	.word	0x8b2\n\
+._371:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r4, ._418       @ 0x2000000\n\
+	ldr	r0, ._418 + 4   @ gPokemonStorage\n\
+	ldrb	r0, [r0]\n\
+	sub	r0, r0, #0x1\n\
+	ldr	r2, ._418 + 8   @ 0x8b2\n\
+	add	r1, r4, r2\n\
+	strh	r0, [r1]\n\
+	cmp	r0, #0\n\
+	bge	._416	@cond_branch\n\
+	mov	r0, #0xd\n\
+._413:\n\
+	strh	r0, [r1]\n\
+._416:\n\
+	ldrb	r0, [r1]\n\
+	bl	sub_8099C70\n\
+	mov	r0, #0x2\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._466\n\
+._419:\n\
+	.align	2, 0\n\
+._418:\n\
+	.word	0x2000000\n\
+	.word	gPokemonStorage\n\
+	.word	0x8b2\n\
+._372:\n\
+	bl	sub_809BE80\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._428	@cond_branch\n\
+	ldr	r4, ._423       @ 0x2000000\n\
+	ldr	r1, ._423 + 4   @ 0x11f2\n\
+	add	r0, r4, r1\n\
+	ldrh	r0, [r0]\n\
+	bl	ItemIsMail\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._421	@cond_branch\n\
+._392:\n\
+	mov	r0, #0x5\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._466\n\
+._424:\n\
+	.align	2, 0\n\
+._423:\n\
+	.word	0x2000000\n\
+	.word	0x11f2\n\
+._421:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._426       @ sub_809746C\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._427:\n\
+	.align	2, 0\n\
+._426:\n\
+	.word	sub_809746C+1\n\
+._374:\n\
+	bl	sub_809BE80\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._428	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._430       @ sub_80972A8\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._431:\n\
+	.align	2, 0\n\
+._430:\n\
+	.word	sub_80972A8+1\n\
+._375:\n\
+	bl	sub_809BEBC\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._432	@cond_branch\n\
+._428:\n\
+	ldr	r1, ._434       @ 0x2000000\n\
+	mov	r0, #0x4\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._466\n\
+._435:\n\
+	.align	2, 0\n\
+._434:\n\
+	.word	0x2000000\n\
+._432:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._437       @ c3_0808DC50\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._438:\n\
+	.align	2, 0\n\
+._437:\n\
+	.word	c3_0808DC50+1\n\
+._373:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._440       @ sub_8097390\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._441:\n\
+	.align	2, 0\n\
+._440:\n\
+	.word	sub_8097390+1\n\
+._376:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._443       @ sub_80972FC\n\
+	bl	SetPSSCallback\n\
+	b	._466\n\
+._444:\n\
+	.align	2, 0\n\
+._443:\n\
+	.word	sub_80972FC+1\n\
+._351:\n\
+	bl	sub_809AC00\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._466	@cond_branch\n\
+	bl	sub_809BF48\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._446	@cond_branch\n\
+	bl	sub_80986E8\n\
+	b	._447\n\
+._446:\n\
+	bl	sub_8098710\n\
+._447:\n\
+	ldr	r4, ._450       @ 0x2000000\n\
+	ldr	r2, ._450 + 4   @ 0x11f6\n\
+	add	r0, r4, r2\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._448	@cond_branch\n\
+	bl	BoxSetMosaic\n\
+._448:\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._466\n\
+._451:\n\
+	.align	2, 0\n\
+._450:\n\
+	.word	0x2000000\n\
+	.word	0x11f6\n\
+._352:\n\
+	bl	sub_8099D34\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._466	@cond_branch\n\
+	ldr	r1, ._456       @ gPokemonStorage\n\
+	ldr	r0, ._456 + 4   @ 0x2000000\n\
+	ldr	r2, ._456 + 8   @ 0x8b2\n\
+	add	r0, r0, r2\n\
+	ldrh	r0, [r0]\n\
+	strb	r0, [r1]\n\
+	ldr	r0, ._456 + 12  @ gUnknown_0203847C\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._455	@cond_branch\n\
+	bl	sub_809BF20\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._455	@cond_branch\n\
+	bl	sub_809B440\n\
+	bl	BoxSetMosaic\n\
+	b	._455\n\
+._457:\n\
+	.align	2, 0\n\
+._456:\n\
+	.word	gPokemonStorage\n\
+	.word	0x2000000\n\
+	.word	0x8b2\n\
+	.word	gUnknown_0203847C\n\
+._353:\n\
+	ldr	r0, ._460       @ gMain\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0xf3\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._466	@cond_branch\n\
+	bl	sub_8098A5C\n\
+._455:\n\
+	ldr	r1, ._460 + 4   @ 0x2000000\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._466\n\
+._461:\n\
+	.align	2, 0\n\
+._460:\n\
+	.word	gMain\n\
+	.word	0x2000000\n\
+._354:\n\
+	mov	r0, #0x20\n\
+	bl	PlaySE\n\
+	mov	r0, #0xd\n\
+	b	._462\n\
+._355:\n\
+	mov	r0, #0x20\n\
+	bl	PlaySE\n\
+	mov	r0, #0x16\n\
+._462:\n\
+	bl	PrintStorageActionText\n\
+	ldr	r1, ._464       @ 0x2000000\n\
+	mov	r0, #0x6\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._466\n\
+._465:\n\
+	.align	2, 0\n\
+._464:\n\
+	.word	0x2000000\n\
+._356:\n\
+	ldr	r0, ._467       @ gMain\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0xf3\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._466	@cond_branch\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._467 + 4   @ sub_8096C84\n\
+	bl	SetPSSCallback\n\
+._466:\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._468:\n\
+	.align	2, 0\n\
+._467:\n\
+	.word	gMain\n\
+	.word	sub_8096C84+1");
+}
+#else
 void sub_8096C84(void)
 {
     switch (gPokemonStorageSystemPtr->unk_0004)
@@ -554,6 +1236,7 @@ void sub_8096C84(void)
             break;
     }
 }
+#endif
 
 void sub_8096FC8(void)
 {
@@ -597,6 +1280,317 @@ void sub_8097004(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void sub_8097078(void)
+{
+	asm("\
+	push	{r4, lr}\n\
+	ldr	r0, ._495       @ 0x2000000\n\
+	ldrb	r0, [r0, #0x4]\n\
+	cmp	r0, #0x5\n\
+	bls	._493	@cond_branch\n\
+	b	._597\n\
+._493:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._495 + 4   @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._496:\n\
+	.align	2, 0\n\
+._495:\n\
+	.word	0x2000000\n\
+	.word	._497\n\
+._497:\n\
+	.word	._498\n\
+	.word	._499\n\
+	.word	._500\n\
+	.word	._501\n\
+	.word	._502\n\
+	.word	._503\n\
+._498:\n\
+	mov	r0, #0x4\n\
+	bl	PrintStorageActionText\n\
+	bl	sub_809CE84\n\
+	ldr	r1, ._505       @ 0x2000000\n\
+	mov	r0, #0x1\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._597\n\
+._506:\n\
+	.align	2, 0\n\
+._505:\n\
+	.word	0x2000000\n\
+._499:\n\
+	bl	sub_809CF30\n\
+	add	r0, r0, #0x1\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x21\n\
+	bls	._507	@cond_branch\n\
+	b	._597\n\
+._507:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._510       @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._511:\n\
+	.align	2, 0\n\
+._510:\n\
+	.word	._509\n\
+._509:\n\
+	.word	._513\n\
+	.word	._513\n\
+	.word	._514\n\
+	.word	._515\n\
+	.word	._516\n\
+	.word	._517\n\
+	.word	._518\n\
+	.word	._519\n\
+	.word	._520\n\
+	.word	._521\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._597\n\
+	.word	._545\n\
+._513:\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._547       @ sub_8096C84\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._548:\n\
+	.align	2, 0\n\
+._547:\n\
+	.word	sub_8096C84+1\n\
+._516:\n\
+	bl	sub_809BE80\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._563	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._551       @ sub_80972A8\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._552:\n\
+	.align	2, 0\n\
+._551:\n\
+	.word	sub_80972A8+1\n\
+._518:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._554       @ sub_80972FC\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._555:\n\
+	.align	2, 0\n\
+._554:\n\
+	.word	sub_80972FC+1\n\
+._517:\n\
+	bl	sub_809BEBC\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._563	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._558       @ c3_0808DC50\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._559:\n\
+	.align	2, 0\n\
+._558:\n\
+	.word	c3_0808DC50+1\n\
+._515:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._561       @ sub_8097390\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._562:\n\
+	.align	2, 0\n\
+._561:\n\
+	.word	sub_8097390+1\n\
+._514:\n\
+	bl	sub_809BE80\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._563	@cond_branch\n\
+	ldr	r4, ._566       @ 0x2000000\n\
+	ldr	r1, ._566 + 4   @ 0x11f2\n\
+	add	r0, r4, r1\n\
+	ldrh	r0, [r0]\n\
+	bl	ItemIsMail\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._564	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._566 + 8   @ sub_809746C\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._567:\n\
+	.align	2, 0\n\
+._566:\n\
+	.word	0x2000000\n\
+	.word	0x11f2\n\
+	.word	sub_809746C+1\n\
+._520:\n\
+	bl	sub_809BE80\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._568	@cond_branch\n\
+._563:\n\
+	ldr	r1, ._570       @ 0x2000000\n\
+	mov	r0, #0x2\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._597\n\
+._571:\n\
+	.align	2, 0\n\
+._570:\n\
+	.word	0x2000000\n\
+._568:\n\
+	ldr	r4, ._574       @ 0x2000000\n\
+	ldr	r1, ._574 + 4   @ 0x11f9\n\
+	add	r0, r4, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._572	@cond_branch\n\
+	mov	r0, #0x4\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._597\n\
+._575:\n\
+	.align	2, 0\n\
+._574:\n\
+	.word	0x2000000\n\
+	.word	0x11f9\n\
+._572:\n\
+	ldr	r1, ._578       @ 0x11f2\n\
+	add	r0, r4, r1\n\
+	ldrh	r0, [r0]\n\
+	bl	ItemIsMail\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._576	@cond_branch\n\
+._564:\n\
+	mov	r0, #0x3\n\
+	strb	r0, [r4, #0x4]\n\
+	b	._597\n\
+._579:\n\
+	.align	2, 0\n\
+._578:\n\
+	.word	0x11f2\n\
+._576:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._581       @ sub_8097594\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._582:\n\
+	.align	2, 0\n\
+._581:\n\
+	.word	sub_8097594+1\n\
+._519:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._584       @ sub_8097788\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._585:\n\
+	.align	2, 0\n\
+._584:\n\
+	.word	sub_8097788+1\n\
+._521:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	ldr	r0, ._587       @ sub_80977E4\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._588:\n\
+	.align	2, 0\n\
+._587:\n\
+	.word	sub_80977E4+1\n\
+._545:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._590       @ debug_sub_80A435C\n\
+	bl	SetPSSCallback\n\
+	b	._597\n\
+._591:\n\
+	.align	2, 0\n\
+._590:\n\
+	.word	debug_sub_80A435C+1\n\
+._500:\n\
+	mov	r0, #0x20\n\
+	bl	PlaySE\n\
+	mov	r0, #0xd\n\
+	b	._593\n\
+._502:\n\
+	mov	r0, #0x20\n\
+	bl	PlaySE\n\
+	mov	r0, #0x11\n\
+	b	._593\n\
+._501:\n\
+	mov	r0, #0x20\n\
+	bl	PlaySE\n\
+	mov	r0, #0x16\n\
+._593:\n\
+	bl	PrintStorageActionText\n\
+	ldr	r1, ._595       @ 0x2000000\n\
+	mov	r0, #0x5\n\
+	strb	r0, [r1, #0x4]\n\
+	b	._597\n\
+._596:\n\
+	.align	2, 0\n\
+._595:\n\
+	.word	0x2000000\n\
+._503:\n\
+	ldr	r0, ._598       @ gMain\n\
+	ldrh	r1, [r0, #0x2e]\n\
+	mov	r0, #0xf3\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._597	@cond_branch\n\
+	bl	sub_8098A5C\n\
+	ldr	r0, ._598 + 4   @ sub_8096C84\n\
+	bl	SetPSSCallback\n\
+._597:\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._599:\n\
+	.align	2, 0\n\
+._598:\n\
+	.word	gMain\n\
+	.word	sub_8096C84+1");
+}
+#else
 void sub_8097078(void)
 {
     switch (gPokemonStorageSystemPtr->unk_0004)
@@ -717,6 +1711,7 @@ void sub_8097078(void)
             break;
     }
 }
+#endif
 
 void sub_80972A8(void)
 {

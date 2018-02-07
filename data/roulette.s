@@ -147,6 +147,13 @@ gUnknown_083F8EF4:: @ 83F8EF4
 
 // This might indicate a file boundary
 
+.if DEBUG
+@ Could also be after English-only graphics
+gUnknown_Debug_0842510D:: @ 0x842510D
+	.string "Set　COIN　and　Press　START\n"
+	.string "Aーp1　Bーm1　R:Lー×10$"
+.endif
+
 .ifdef ENGLISH
 	.align 2
 RouletteSpritePalette_01:

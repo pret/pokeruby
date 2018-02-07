@@ -5,7 +5,6 @@
 
 	.text
 
-
 	thumb_func_start sub_80FCB5C
 sub_80FCB5C: @ 80FCB5C
 	push {r4-r7,lr}
