@@ -35,6 +35,10 @@ const struct PSS_MenuStringPtrs gUnknown_083B600C[] = {
     {PCText_SeeYa,        PCText_ReturnToPrevMenu}
 };
 
+#if DEBUG
+const u16 gUnknown_Debug_083E05F0[2] = {0};
+#endif
+
 const union AnimCmd gSpriteAnim_83B602C[] = {
     ANIMCMD_FRAME( 0, 5),
     ANIMCMD_END
@@ -399,6 +403,180 @@ void ResetPokemonStorageSystem(void)
         gPokemonStorage.wallpaper[boxId] = boxId & 0x03;
     }
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80A3904(void)
+{
+	asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, sl\n\
+	mov	r6, r9\n\
+	mov	r5, r8\n\
+	push	{r5, r6, r7}\n\
+	add	sp, sp, #0xffffffe4\n\
+	mov	r0, #0x0\n\
+	mov	r8, r0\n\
+	mov	r7, r8\n\
+	mov	r1, #0x14\n\
+	str	r1, [sp, #0x18]\n\
+	mov	r2, #0xff\n\
+	mov	r9, r2\n\
+._162:\n\
+	mov	r5, #0x0\n\
+	cmp	r7, #0\n\
+	beq	._160	@cond_branch\n\
+	mov	r0, #0xe\n\
+	mov	r8, r0\n\
+	b	._158\n\
+._160:\n\
+	bl	Random\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r0, r0, #0x10\n\
+	str	r0, [sp, #0x14]\n\
+	mov	r2, r8\n\
+	lsl	r1, r2, #0x2\n\
+	add r1, r1, r8\n\
+	lsl	r3, r1, #0x4\n\
+	sub	r3, r3, r1\n\
+	lsl	r3, r3, #0x5\n\
+	lsl	r1, r5, #0x2\n\
+	add	r1, r1, r5\n\
+	lsl	r1, r1, #0x4\n\
+	ldr	r2, ._163       @ gPokemonStorage\n\
+	add	r1, r1, r2\n\
+	add	r6, r3, r1\n\
+	ldr	r2, ._163 + 4   @ gUnknown_Debug_083E05F0\n\
+	lsl	r1, r7, #0x1\n\
+	add	r1, r1, r2\n\
+	ldrh	r4, [r1]\n\
+	add	r5, r5, #0x1\n\
+	lsl	r2, r5, #0x18\n\
+	lsr	r2, r2, #0x18\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	str	r1, [sp, #0x4]\n\
+	mov	r1, #0x1\n\
+	mov	sl, r1\n\
+	str	r1, [sp, #0x8]\n\
+	str	r0, [sp, #0xc]\n\
+	add	r0, r6, #0\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0x20\n\
+	bl	CreateBoxMon\n\
+	cmp	r4, #0\n\
+	beq	._157	@cond_branch\n\
+	cmp	r4, #0xac\n\
+	bne	._156	@cond_branch\n\
+	add	r0, sp, #0x10\n\
+	mov	r2, sl\n\
+	strb	r2, [r0]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x2d\n\
+	add	r2, sp, #0x10\n\
+	bl	SetBoxMonData\n\
+._156:\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r4, sp, #0x14\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x16\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x17\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x18\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x21\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x2f\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	bl	Random\n\
+	mov	r1, r9\n\
+	and	r1, r1, r0\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x30\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+	ldr	r0, [sp, #0x18]\n\
+	cmp	r0, #0\n\
+	beq	._157	@cond_branch\n\
+	sub	r0, r0, #0x1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r0, r0, #0x10\n\
+	str	r0, [sp, #0x18]\n\
+	mov	r1, sl\n\
+	str	r1, [sp, #0x14]\n\
+	add	r0, r6, #0\n\
+	mov	r1, #0x32\n\
+	add	r2, r4, #0\n\
+	bl	SetBoxMonData\n\
+._157:\n\
+	add	r0, r7, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r7, r0, #0x10\n\
+	lsl	r0, r5, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	cmp	r5, #0x1d\n\
+	bhi	._158	@cond_branch\n\
+	cmp	r7, #0\n\
+	bne	._159	@cond_branch\n\
+	b	._160\n\
+._159:\n\
+	mov	r2, #0xe\n\
+	mov	r8, r2\n\
+._158:\n\
+	mov	r0, r8\n\
+	add	r0, r0, #0x1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r0, r0, #0x10\n\
+	mov	r8, r0\n\
+	cmp	r0, #0xd\n\
+	bhi	._161	@cond_branch\n\
+	b	._162\n\
+._161:\n\
+	add	sp, sp, #0x1c\n\
+	pop	{r3, r4, r5}\n\
+	mov	r8, r3\n\
+	mov	r9, r4\n\
+	mov	sl, r5\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._164:\n\
+	.align	2, 0\n\
+._163:\n\
+	.word	gPokemonStorage+0x4\n\
+	.word	gUnknown_Debug_083E05F0");
+}
+#endif
 
 void sub_8096264(struct UnkPSSStruct_2002370 *a0, u16 tileTag, u16 palTag, u8 a3)
 {

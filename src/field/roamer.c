@@ -1,7 +1,9 @@
 #include "global.h"
+#include "debug.h"
 #include "roamer.h"
 #include "pokemon.h"
 #include "random.h"
+#include "region_map.h"
 #include "constants/species.h"
 
 #ifdef SAPPHIRE
@@ -224,3 +226,20 @@ void GetRoamerLocation(u8 *mapGroup, u8 *mapNum)
     *mapGroup = sRoamerLocation[MAP_GRP];
     *mapNum = sRoamerLocation[MAP_NUM];
 }
+
+#if DEBUG
+void debug_sub_814A714(void)
+{
+    if (gSaveBlock1.location.mapGroup == 0)
+    {
+        CreateInitialRoamerMon();
+        sRoamerLocation[0] = 0;
+        sRoamerLocation[1] = gSaveBlock1.location.mapNum;
+    }
+}
+
+void debug_sub_814A73C(u8* str)
+{
+    GetMapSectionName(str, sRoamerLocation[1], 0);
+}
+#endif

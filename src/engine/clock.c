@@ -13,12 +13,11 @@
 #include "tv.h"
 #include "wallclock.h"
 
-static void InitTimeBasedEvents(void);
 static void UpdatePerDay(struct Time *time);
 static void UpdatePerMinute(struct Time *time);
 static void ReturnFromStartWallClock(void);
 
-static void InitTimeBasedEvents(void)
+void InitTimeBasedEvents(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();

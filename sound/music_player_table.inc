@@ -1,4 +1,3 @@
-
 	.align 2
 gMPlayTable:: @ 845545C
 	music_player gMPlay_BGM, gUnknown_030007B8 + 0x40,  10, 0

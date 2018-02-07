@@ -13,6 +13,8 @@
 #include "util.h"
 #include "ewram.h"
 
+extern u8 gUnknown_02023A14_50;
+extern u32 gUnknown_02023A14_4C;
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern u8 gActiveBank;
@@ -336,11 +338,15 @@ void BattleAI_SetupAIData(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         AI_THINKING_STRUCT->aiFlags = 0x80000000;
 #ifdef GERMAN
-    else if (gBattleTypeFlags & 0x900 || gTrainerBattleOpponent == 0x400)
+    else if (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER) || gTrainerBattleOpponent == 0x400)
         AI_THINKING_STRUCT->aiFlags = 7;
 #endif
     else // otherwise, just set aiFlags to whatever flags the trainer has set in their data.
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;
+#if DEBUG
+    if (gUnknown_02023A14_50 & 1)
+        AI_THINKING_STRUCT->aiFlags = gUnknown_02023A14_4C;
+#endif
 }
 
 u8 BattleAI_GetAIActionToUse(void)

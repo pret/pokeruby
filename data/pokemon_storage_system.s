@@ -4,6 +4,7 @@
 	.section .rodata
 
 	.align 2
+
 gUnknown_083BBBD4:: @ 83BBBD4
 	.4byte sub_809C464, 0
 	.4byte sub_809C664, 1
@@ -71,6 +72,11 @@ gSpriteTemplate_83BBC70:: @ 83BBC70
 gSpriteTemplate_83BBC88:: @ 83BBC88
 	spr_template 1, 56006, gOamData_83BBC34, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_809CB74
 
+.if DEBUG
+gUnknown_Debug_0x83E6268:: @ 0x83E6268
+	.string "セットする$"
+.endif
+
 	.align 2
 gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_Cancel2
@@ -105,3 +111,6 @@ gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_PokeCenter
 	.4byte PCText_Machine
 	.4byte PCText_Plain
+.if DEBUG
+	.4byte gUnknown_Debug_0x83E6268
+.endif

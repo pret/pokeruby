@@ -1238,3 +1238,24 @@ void Shop_CreateDecorationShop2Menu(u16 *itemList)
     SetShopItemsForSale(itemList);
     SetShopMenuCallback(EnableBothScriptContexts);
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80C2818(void)
+{
+    asm("\
+	push	{lr}\n\
+	mov	r0, #0x0\n\
+	bl	CreateShopMenu\n\
+	ldr	r0, ._290       @ gMartBuyNoSellOptionList\n\
+	bl	SetShopItemsForSale\n\
+	mov	r0, #0x0\n\
+	bl	SetShopMenuCallback\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._291:\n\
+	.align	2, 0\n\
+._290:\n\
+	.word	gMartBuyNoSellOptionList+0x3");
+}
+#endif

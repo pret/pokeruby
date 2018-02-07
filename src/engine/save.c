@@ -663,6 +663,35 @@ static u16 CalculateChecksum(void *data, u16 size)
     return ((checksum >> 16) + checksum);
 }
 
+#if DEBUG
+void sub_813B79C(void)
+{
+    struct SaveSector *sbSector;
+    struct SaveSector *hofSector;
+    const struct SaveBlockChunk *sbChunks;
+    const struct SaveBlockChunk *hofChunks;
+    u16 i;
+
+    sbSector = eSaveSection;
+    sbChunks = sSaveBlockChunks;
+    for (i = 0; i < NUM_SECTORS_PER_SAVE_SLOT * 2; i++)
+    {
+        DoReadFlashWholeSection(i, sbSector);
+        sbSector->checksum = CalculateChecksum(sbSector, sbChunks[sbSector->id].size);
+        ProgramFlashSectorAndVerify(i, sbSector->data);
+    }
+
+    hofSector = eSaveSection;
+    hofChunks = sHallOfFameChunks;
+    for (i = 0; i < NUM_HALL_OF_FAME_SECTORS; i++)
+    {
+        DoReadFlashWholeSection(HALL_OF_FAME_SECTOR + i, hofSector);
+        hofSector->id = CalculateChecksum(hofSector, hofChunks[i].size);  // why id?
+        ProgramFlashSectorAndVerify(HALL_OF_FAME_SECTOR + i, hofSector->data);
+    }
+}
+#endif
+
 u8 Save_WriteDataInternal(u8 saveType)
 {
     u8 i;
@@ -706,13 +735,21 @@ u8 Save_WriteDataInternal(u8 saveType)
     return 0;
 }
 
+#if DEBUG
+extern u32 gUnknown_Debug_03004BD0;
+#endif
+
 u8 Save_WriteData(u8 saveType) // TrySave
 {
     if (gFlashMemoryPresent != TRUE)
         return SAVE_STATUS_ERROR;
 
     Save_WriteDataInternal(saveType);
-    if (!gDamagedSaveSectors)
+    if (!gDamagedSaveSectors
+#if DEBUG
+        && gUnknown_Debug_03004BD0 == 0
+#endif
+        )
         return SAVE_STATUS_OK;
 
     DoSaveFailedScreen(saveType);
@@ -815,7 +852,7 @@ u8 Save_LoadGameData(u8 saveType)
     return result;
 }
 
-static const u8 sUnusedFlashSectors[] = { 30, 31 };
+const u8 sUnusedFlashSectors[] = { 30, 31 };
 
 bool8 unref_sub_8125F4C(struct UnkSaveSection *a1)
 {

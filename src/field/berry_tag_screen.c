@@ -42,7 +42,7 @@ extern u8 gBerryCheck_Pal[];
 extern u8 gUnknown_08E788E4[];
 extern u8 gUnknown_08E78A84[];
 
-static const u8 *const gUnknown_0841192C[] =
+const u8 *const gUnknown_0841192C[] =
 {
     ContestStatsText_VerySoft,
     ContestStatsText_Soft,

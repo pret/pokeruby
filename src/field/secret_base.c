@@ -1648,6 +1648,178 @@ void sub_80BD610(struct SecretBaseRecord *basesA, struct SecretBaseRecord *bases
     sub_80BD328(basesC, 0);
 } 
 
+#if DEBUG
+__attribute__((naked))
+void sub_80BD674(void *playerRecords, u32 size, u8 c)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	add	r6, r0, #0\n\
+	add	r5, r1, #0\n\
+	lsl	r2, r2, #0x18\n\
+	lsr	r7, r2, #0x18\n\
+	ldr	r0, ._503       @ gUnknown_020297ED\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._498	@cond_branch\n\
+	mov	r0, #0x60\n\
+	bl	FlagGet\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._498	@cond_branch\n\
+	b	._520\n\
+._498:\n\
+	bl	GetLinkPlayerCount\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x2\n\
+	beq	._500	@cond_branch\n\
+	cmp	r0, #0x3\n\
+	beq	._501	@cond_branch\n\
+	b	._505\n\
+._504:\n\
+	.align	2, 0\n\
+._503:\n\
+	.word	gUnknown_020297ED\n\
+._500:\n\
+	lsl	r4, r5, #0x1\n\
+	add	r0, r6, r4\n\
+	mov	r1, #0x0\n\
+	add	r2, r5, #0\n\
+	bl	memset\n\
+	add	r4, r4, r5\n\
+	add	r4, r6, r4\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x0\n\
+	add	r2, r5, #0\n\
+	bl	memset\n\
+	b	._505\n\
+._501:\n\
+	lsl	r0, r5, #0x1\n\
+	add	r0, r0, r5\n\
+	add	r0, r6, r0\n\
+	mov	r1, #0x0\n\
+	add	r2, r5, #0\n\
+	bl	memset\n\
+._505:\n\
+	cmp	r7, #0x1\n\
+	beq	._506	@cond_branch\n\
+	cmp	r7, #0x1\n\
+	bgt	._507	@cond_branch\n\
+	cmp	r7, #0\n\
+	beq	._508	@cond_branch\n\
+	b	._515\n\
+._507:\n\
+	cmp	r7, #0x2\n\
+	beq	._510	@cond_branch\n\
+	cmp	r7, #0x3\n\
+	beq	._511	@cond_branch\n\
+	b	._515\n\
+._508:\n\
+	add	r0, r6, r5\n\
+	lsl	r2, r5, #0x1\n\
+	add	r1, r6, r2\n\
+	add	r2, r2, r5\n\
+	add	r2, r6, r2\n\
+	bl	sub_80BD610\n\
+	b	._515\n\
+._506:\n\
+	lsl	r1, r5, #0x1\n\
+	add	r0, r6, r1\n\
+	add	r1, r1, r5\n\
+	add	r1, r6, r1\n\
+	add	r2, r6, #0\n\
+	bl	sub_80BD610\n\
+	b	._515\n\
+._510:\n\
+	lsl	r0, r5, #0x1\n\
+	add	r0, r0, r5\n\
+	add	r0, r6, r0\n\
+	add	r2, r6, r5\n\
+	add	r1, r6, #0\n\
+	bl	sub_80BD610\n\
+	b	._515\n\
+._511:\n\
+	add	r1, r6, r5\n\
+	lsl	r2, r5, #0x1\n\
+	add	r2, r6, r2\n\
+	add	r0, r6, #0\n\
+	bl	sub_80BD610\n\
+._515:\n\
+	mov	r3, #0x1\n\
+	ldr	r6, ._521       @ gSaveBlock1\n\
+	mov	r5, #0x10\n\
+	neg	r5, r5\n\
+	ldr	r4, ._521 + 4   @ 0x1a09\n\
+._517:\n\
+	lsl	r0, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	lsl	r0, r0, #0x5\n\
+	add	r0, r0, r6\n\
+	add	r2, r0, r4\n\
+	ldrb	r1, [r2]\n\
+	lsl	r0, r1, #0x1c\n\
+	lsr	r0, r0, #0x1c\n\
+	cmp	r0, #0x1\n\
+	bne	._516	@cond_branch\n\
+	mov	r0, #0x3f\n\
+	and	r0, r0, r1\n\
+	mov	r1, #0x40\n\
+	orr	r0, r0, r1\n\
+	and	r0, r0, r5\n\
+	strb	r0, [r2]\n\
+._516:\n\
+	add	r0, r3, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r3, r0, #0x10\n\
+	cmp	r3, #0x13\n\
+	bls	._517	@cond_branch\n\
+	bl	sub_80BD280\n\
+	mov	r3, #0x1\n\
+	ldr	r4, ._521       @ gSaveBlock1\n\
+	ldr	r6, ._521 + 4   @ 0x1a09\n\
+	add	r7, r4, #0\n\
+	mov	r5, #0x3f\n\
+._519:\n\
+	lsl	r0, r3, #0x2\n\
+	add	r0, r0, r3\n\
+	lsl	r0, r0, #0x5\n\
+	add	r0, r0, r4\n\
+	add	r2, r0, r6\n\
+	ldrb	r1, [r2]\n\
+	lsr	r0, r1, #0x6\n\
+	cmp	r0, #0x2\n\
+	bne	._518	@cond_branch\n\
+	add	r0, r5, #0\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2]\n\
+._518:\n\
+	add	r0, r3, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r3, r0, #0x10\n\
+	cmp	r3, #0x13\n\
+	bls	._519	@cond_branch\n\
+	ldr	r0, ._521 + 8   @ 0x1a16\n\
+	add	r2, r7, r0\n\
+	ldrh	r1, [r2]\n\
+	ldr	r0, ._521 + 12  @ 0xffff\n\
+	cmp	r1, r0\n\
+	beq	._520	@cond_branch\n\
+	add	r0, r1, #1\n\
+	strh	r0, [r2]\n\
+._520:\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._522:\n\
+	.align	2, 0\n\
+._521:\n\
+	.word	gSaveBlock1\n\
+	.word	0x1a09\n\
+	.word	0x1a16\n\
+	.word	0xffff");
+}
+#else
 void sub_80BD674(void *playerRecords, u32 size, u8 c)
 {
     if (FlagGet(FLAG_RECEIVED_SECRET_POWER))
@@ -1706,3 +1878,4 @@ void sub_80BD674(void *playerRecords, u32 size, u8 c)
         }
     }
 }
+#endif

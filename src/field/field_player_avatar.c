@@ -32,9 +32,9 @@ static void npc_clear_strange_bits(struct MapObject *a);
 static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c);
 static void PlayerAllowForcedMovementIfMovingSameDirection(void);
 static bool8 TryDoMetatileBehaviorForcedMovement(void);
-static u8 GetForcedMovementByMetatileBehavior(void);
+/*static*/ u8 GetForcedMovementByMetatileBehavior(void);
 static void MovePlayerNotOnBike(u8 a, u16 b);
-static u8 CheckMovementInputNotOnBike(u8 a);
+/*static*/ u8 CheckMovementInputNotOnBike(u8 a);
 static u8 CheckForPlayerAvatarCollision(u8 a);
 static u8 sub_8058EF0(s16 a, s16 b, u8 c);
 static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c);
@@ -260,12 +260,59 @@ static void PlayerAllowForcedMovementIfMovingSameDirection(void)
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_5;
 }
 
+#if DEBUG
+__attribute__((naked))
+u8 TryDoMetatileBehaviorForcedMovement()
+{
+    asm(
+        "	push	{r4, lr}\n"
+        "	ldr	r0, ._27        @ gUnknown_020297ED\n"
+        "	ldrb	r0, [r0]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._25	@cond_branch\n"
+        "	ldr	r0, ._27 + 4    @ gMain\n"
+        "	ldrh	r1, [r0, #0x2c]\n"
+        "	mov	r0, #0x80\n"
+        "	lsl	r0, r0, #0x1\n"
+        "	and	r0, r0, r1\n"
+        "	cmp	r0, #0\n"
+        "	beq	._25	@cond_branch\n"
+        "	mov	r0, #0x0\n"
+        "	b	._26\n"
+        "._28:\n"
+        "	.align	2, 0\n"
+        "._27:\n"
+        "	.word	gUnknown_020297ED\n"
+        "	.word	gMain\n"
+        "._25:\n"
+        "	ldr	r4, ._29        @ gUnknown_0830FBA0\n"
+        "	bl	GetForcedMovementByMetatileBehavior\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x16\n"
+        "	add	r0, r0, r4\n"
+        "	ldr	r0, [r0]\n"
+        "	bl	_call_via_r0\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "._26:\n"
+        "	pop	{r4}\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "._30:\n"
+        "	.align	2, 0\n"
+        "._29:\n"
+        "	.word	gUnknown_0830FBA0\n"
+        "\n"
+    );
+}
+#else
 static bool8 TryDoMetatileBehaviorForcedMovement(void)
 {
     return gUnknown_0830FBA0[GetForcedMovementByMetatileBehavior()]();
 }
+#endif
 
-static u8 GetForcedMovementByMetatileBehavior(void)
+/*static*/ u8 GetForcedMovementByMetatileBehavior(void)
 {
     u8 i;
 
@@ -436,12 +483,57 @@ bool8 ForcedMovement_MuddySlope(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void MovePlayerNotOnBike(u8 u81, u16 u161)
+{
+    asm(
+        "	push	{r4, r5, r6, lr}\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r2, r0, #0x18\n"
+        "	add	r5, r2, #0\n"
+        "	lsl	r1, r1, #0x10\n"
+        "	lsr	r6, r1, #0x10\n"
+        "	ldr	r0, ._84        @ gUnknown_020297ED\n"
+        "	ldrb	r0, [r0]\n"
+        "	cmp	r0, #0\n"
+        "	beq	._82	@cond_branch\n"
+        "	add	r0, r2, #0\n"
+        "	bl	debug_sub_805F2B0\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	cmp	r0, #0\n"
+        "	bne	._83	@cond_branch\n"
+        "._82:\n"
+        "	ldr	r4, ._84 + 4    @ gUnknown_0830FBEC\n"
+        "	add	r0, r5, #0\n"
+        "	bl	CheckMovementInputNotOnBike\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x16\n"
+        "	add	r0, r0, r4\n"
+        "	ldr	r2, [r0]\n"
+        "	add	r0, r5, #0\n"
+        "	add	r1, r6, #0\n"
+        "	bl	_call_via_r2\n"
+        "._83:\n"
+        "	pop	{r4, r5, r6}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._85:\n"
+        "	.align	2, 0\n"
+        "._84:\n"
+        "	.word	gUnknown_020297ED\n"
+        "	.word	gUnknown_0830FBEC\n"
+        "\n"
+    );
+}
+#else
 static void MovePlayerNotOnBike(u8 direction, u16 heldKeys)
 {
     gUnknown_0830FBEC[CheckMovementInputNotOnBike(direction)](direction, heldKeys);
 }
+#endif
 
-static u8 CheckMovementInputNotOnBike(u8 direction)
+/*static*/ u8 CheckMovementInputNotOnBike(u8 direction)
 {
     if (direction == DIR_NONE)
     {
@@ -1763,3 +1855,98 @@ static void sub_805A954(void)
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 1, playerSprite->pos2.y);
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_805F2B0()
+{
+    asm(
+        "	push	{lr}\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r2, r0, #0x18\n"
+        "	ldr	r0, ._422       @ gMain\n"
+        "	ldrh	r1, [r0, #0x2c]\n"
+        "	mov	r0, #0x80\n"
+        "	lsl	r0, r0, #0x1\n"
+        "	and	r0, r0, r1\n"
+        "	cmp	r0, #0\n"
+        "	bne	._420	@cond_branch\n"
+        "	mov	r0, #0x0\n"
+        "	b	._421\n"
+        "._423:\n"
+        "	.align	2, 0\n"
+        "._422:\n"
+        "	.word	gMain\n"
+        "._420:\n"
+        "	add	r0, r2, #0\n"
+        "	bl	debug_sub_805F2DC\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "._421:\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void debug_sub_805F2DC()
+{
+    asm(
+        "	push	{r4, lr}\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r4, r0, #0x18\n"
+        "	cmp	r4, #0\n"
+        "	bne	._424	@cond_branch\n"
+        "	ldr	r2, ._426       @ gMapObjects\n"
+        "	ldr	r0, ._426 + 4   @ gPlayerAvatar\n"
+        "	ldrb	r1, [r0, #0x5]\n"
+        "	lsl	r0, r1, #0x3\n"
+        "	add	r0, r0, r1\n"
+        "	lsl	r0, r0, #0x2\n"
+        "	add	r0, r0, r2\n"
+        "	ldrb	r0, [r0, #0x18]\n"
+        "	lsr	r0, r0, #0x4\n"
+        "	bl	PlayerFaceDirection\n"
+        "	b	._430\n"
+        "._427:\n"
+        "	.align	2, 0\n"
+        "._426:\n"
+        "	.word	gMapObjects\n"
+        "	.word	gPlayerAvatar\n"
+        "._424:\n"
+        "	ldr	r2, ._431       @ gMapObjects\n"
+        "	ldr	r0, ._431 + 4   @ gPlayerAvatar\n"
+        "	ldrb	r1, [r0, #0x5]\n"
+        "	lsl	r0, r1, #0x3\n"
+        "	add	r0, r0, r1\n"
+        "	lsl	r0, r0, #0x2\n"
+        "	add	r0, r0, r2\n"
+        "	ldrb	r0, [r0, #0x1]\n"
+        "	lsr	r0, r0, #0x7\n"
+        "	cmp	r0, #0\n"
+        "	beq	._429	@cond_branch\n"
+        "	add	r0, r4, #0\n"
+        "	bl	CanCameraMoveInDirection\n"
+        "	cmp	r0, #0\n"
+        "	bne	._429	@cond_branch\n"
+        "	add	r0, r4, #0\n"
+        "	bl	PlayerOnBikeCollide\n"
+        "	b	._430\n"
+        "._432:\n"
+        "	.align	2, 0\n"
+        "._431:\n"
+        "	.word	gMapObjects\n"
+        "	.word	gPlayerAvatar\n"
+        "._429:\n"
+        "	add	r0, r4, #0\n"
+        "	bl	PlayerGoSpeed4\n"
+        "._430:\n"
+        "	mov	r0, #0x1\n"
+        "	pop	{r4}\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "\n"
+    );
+}
+#endif

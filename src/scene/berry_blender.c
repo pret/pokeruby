@@ -274,12 +274,12 @@ static void sub_8051B18(void);
 static void sub_805123C(void);
 static void sub_8050954(void);
 static bool8 Blender_PrintBlendingRanking(void);
-static bool8 Blender_PrintBlendingResults(void);
+bool8 Blender_PrintBlendingResults(void);
 static void sub_80510E8(void);
 static void sub_8050E30(void);
 static void sub_805197C(u16 a0, u16 a1);
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
-static void sub_8052BD0(u8 taskID);
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
+/*static*/ void sub_8052BD0(u8 taskID);
 static void sub_8052AF8(void);
 static void sub_804F8C8(u8 taskID);
 static void sub_804F9F4(u8 taskID);
@@ -2411,7 +2411,7 @@ static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct
     Blender_CalculatePokeblock(berries, pokeblock, playersNo, flavours, a4);
 }
 
-static void sub_8050760(void)
+/*static*/ void sub_8050760(void)
 {
     u32 frames = (u16)(gBerryBlenderData->gameFrameTime);
     u16 max_RPM = gBerryBlenderData->max_RPM;
@@ -3270,13 +3270,13 @@ static void sub_8051C04(struct Sprite* sprite)
    sprite->pos2.y = -(gBerryBlenderData->field_146);
 }
 
-static void Blender_TrySettingRecord(void)
+/*static*/ void Blender_TrySettingRecord(void)
 {
     if (gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] < gBerryBlenderData->max_RPM)
         gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] = gBerryBlenderData->max_RPM;
 }
 
-static bool8 Blender_PrintBlendingResults(void)
+bool8 Blender_PrintBlendingResults(void)
 {
     u16 i;
 
@@ -3395,6 +3395,11 @@ static bool8 Blender_PrintBlendingResults(void)
         Blender_CalculatePokeblock(gBerryBlenderData->blendedBerries, &pokeblock, gBerryBlenderData->playersNo, flavours, gBerryBlenderData->max_RPM);
         Blender_PrintMadePokeblockString(&pokeblock, gBerryBlenderData->stringVar);
         CreateTask(sub_8052BD0, 6);
+#if DEBUG
+        ConvertIntToHexStringN(text[0], sub_8007E40(), 0, 4);
+        StringAppend(text[0], gUnknown_08216249);
+        StringAppend(gBerryBlenderData->stringVar, text[0]);
+#endif
         MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_810CA34(&pokeblock);
@@ -3411,7 +3416,7 @@ static bool8 Blender_PrintBlendingResults(void)
     return FALSE;
 }
 
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
 {
     u8 text[12];
     u8 flavourLvl, feel;
@@ -3834,7 +3839,7 @@ void ShowBerryBlenderRecordWindow(void)
     }
 }
 
-static void sub_8052BD0(u8 taskID)
+/*static*/ void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {
