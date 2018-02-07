@@ -1,15 +1,6 @@
-@ TODO: remove the raw pointers
-
 	.align 2
 gMPlayTable:: @ 845545C
-.if DEBUG
-	music_player gMPlay_BGM, 0x3000878, 10, 0
-	music_player gMPlay_SE1, 0x3000B98,  3, 1
-	music_player gMPlay_SE2, 0x3000C88,  9, 1
-	music_player gMPlay_SE3, 0x3000F58,  1, 0
-.else
-	music_player gMPlay_BGM, 0x30007F8, 10, 0
-	music_player gMPlay_SE1, 0x3000B18,  3, 1
-	music_player gMPlay_SE2, 0x3000C08,  9, 1
-	music_player gMPlay_SE3, 0x3000ED8,  1, 0
-.endif
+	music_player gMPlay_BGM, gUnknown_030007B8 + 0x40,  10, 0
+	music_player gMPlay_SE1, gUnknown_030007B8 + 0x360,  3, 1
+	music_player gMPlay_SE2, gUnknown_030007B8 + 0x450,  9, 1
+	music_player gMPlay_SE3, gUnknown_030007B8 + 0x720,  1, 0

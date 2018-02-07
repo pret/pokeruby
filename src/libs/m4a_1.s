@@ -4,7 +4,11 @@
 
 	.syntax unified
 
-	.lcomm gUnknown_030007B8, 0x770
+	.bss
+
+	.global gUnknown_030007B8
+gUnknown_030007B8:
+	.space 0x770
 
 	.text
 
