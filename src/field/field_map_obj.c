@@ -1908,7 +1908,7 @@ static u16 gUnknown_030005A6;
 
 struct MapObject gMapObjects[16];
 #if DEBUG
-u8 gUnknown_Debug_03004BC0[4];  // unknown type
+u8 gUnknown_Debug_03004BC0;  // unknown type
 #endif
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
@@ -1920,48 +1920,16 @@ void npc_clear_ids_and_state(struct MapObject *mapObj)
     mapObj->mapobj_unk_1C = 0xFF;
 }
 
-#if DEBUG
-__attribute__((naked))
-void npcs_clear_ids_and_state()
-{
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r5, ._2         @ gMapObjects\n"
-        "._1:\n"
-        "	lsl	r0, r4, #0x3\n"
-        "	add	r0, r0, r4\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	bl	npc_clear_ids_and_state\n"
-        "	add	r0, r4, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	cmp	r4, #0xf\n"
-        "	bls	._1	@cond_branch\n"
-        "	ldr	r1, ._2 + 4     @ gUnknown_Debug_03004BC0\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._3:\n"
-        "	.align	2, 0\n"
-        "._2:\n"
-        "	.word	gMapObjects\n"
-        "	.word	gUnknown_Debug_03004BC0\n"
-        "\n"
-    );
-}
-#else
 void npcs_clear_ids_and_state(void)
 {
     u8 i;
 
     for (i = 0; i < 16; i++)
         npc_clear_ids_and_state(&gMapObjects[i]);
-}
+#if DEBUG
+	gUnknown_Debug_03004BC0 = 0;
 #endif
+}
 
 void sub_805AA98(void)
 {
@@ -2004,7 +1972,7 @@ u8 sub_805AB54(void)
 
 u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    if (localId <= 0xFE)
+    if (localId < 255)
         return GetFieldObjectIdByLocalIdAndMapInternal(localId, mapNum, mapGroup);
     else
         return GetFieldObjectIdByLocalId(localId);
@@ -2475,38 +2443,14 @@ u8 GetAvailableFieldObjectSlot(u16 a, u8 b, u8 c, u8 *d)
     return 0;
 }
 
-#if DEBUG
-__attribute__((naked))
-void RemoveFieldObject(struct MapObject *mapObject)
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldrb	r2, [r0]\n"
-        "	mov	r1, #0x2\n"
-        "	neg	r1, r1\n"
-        "	and	r1, r1, r2\n"
-        "	strb	r1, [r0]\n"
-        "	bl	RemoveFieldObjectInternal\n"
-        "	ldr	r1, ._72        @ gUnknown_Debug_03004BC0\n"
-        "	ldrb	r0, [r1]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._73:\n"
-        "	.align	2, 0\n"
-        "._72:\n"
-        "	.word	gUnknown_Debug_03004BC0\n"
-        "\n"
-    );
-}
-#else
 void RemoveFieldObject(struct MapObject *mapObject)
 {
     mapObject->active = FALSE;
     RemoveFieldObjectInternal(mapObject);
-}
+#if DEBUG
+	gUnknown_Debug_03004BC0--;
 #endif
+}
 
 void RemoveFieldObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
