@@ -131,10 +131,11 @@ extern const struct BlockRequest sBlockRequestLookupTable[5];
 
 extern struct Link gLink;
 extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+// TODO: Why is gBlockSendBuffer a u8 array, while gBlockRecvBuffer is a u16 array?
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
+extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gLinkType;
 extern u32 gLinkStatus;
-extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
 #if GERMAN
@@ -145,6 +146,8 @@ extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkOpen;
+extern bool8 gLinkPlayerPending[MAX_LINK_PLAYERS];
+void (*gLinkCallback)(void);
 
 void Task_DestroySelf(u8);
 void sub_8007270(u8);
@@ -198,5 +201,7 @@ void LinkTestScreen(void);
 void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3);
 void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0);
 u32 sub_8007E40(void);
+void PrintHex(u32, u8, u8, u8);
+void InitLinkTestBG_Unused(u8, u8, u8, u8);
 
 #endif // GUARD_LINK_H

@@ -339,13 +339,8 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/scene/title_screen.o(ewram_data);
 . = ALIGN(4); src/field/field_weather.o(ewram_data);
 . = ALIGN(4); src/battle/battle_setup.o(ewram_data);
-
-#if DEBUG
-unk_2030220 = .;
-    . += 0x4;
+. = ALIGN(4); src/engine/cable_club.o(ewram_data);
 . = ALIGN(4); src/debug/taya_debug_window.o(ewram_data);
-#endif
-
 . = ALIGN(4); src/field/wild_encounter.o(ewram_data);
 . = ALIGN(4); src/field/field_effect.o(ewram_data);
 . = ALIGN(4); src/scanline_effect.o(ewram_data);

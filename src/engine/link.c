@@ -45,7 +45,6 @@ extern u16 word_3004858;
 extern void Blender_SetBankBerryData(u8 bank, u16 itemID);
 
 static void InitLinkTestBG(u8, u8, u8, u8);
-void InitLinkTestBG_Unused(u8, u8, u8, u8);
 void LinkTestScreen();
 static void InitLocalLinkPlayer(void);
 static void VBlankCB_LinkTest(void);
@@ -68,7 +67,6 @@ u32 sub_8007E40(void);
 static void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
-void PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8);
 bool8 sub_8008224(void);
