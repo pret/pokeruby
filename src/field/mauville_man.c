@@ -250,7 +250,88 @@ void SetupMauvilleOldMan(void)
     sub_80F83D0();
 }
 
-static u8 GetCurrentMauvilleOldMan(void)
+#if DEBUG
+__attribute__((naked))
+void debug_sub_810B32C()
+{
+    asm(
+        "	push	{r4, lr}\n"
+        "	add	sp, sp, #0xfffffff8\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	cmp	r0, #0x4\n"
+        "	bhi	._37	@cond_branch\n"
+        "	lsl	r0, r0, #0x2\n"
+        "	ldr	r1, ._23        @ \n"
+        "	add	r0, r0, r1\n"
+        "	ldr	r0, [r0]\n"
+        "	mov	pc, r0\n"
+        "._24:\n"
+        "	.align	2, 0\n"
+        "._23:\n"
+        "	.word	._22\n"
+        "._22:\n"
+        "	.word	._25\n"
+        "	.word	._26\n"
+        "	.word	._27\n"
+        "	.word	._28\n"
+        "	.word	._29\n"
+        "._25:\n"
+        "	bl	SetupBard\n"
+        "	b	._37\n"
+        "._26:\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r3, ._34        @ gSaveBlock1\n"
+        "._31:\n"
+        "	mov	r0, sp\n"
+        "	add	r1, r0, r2\n"
+        "	add	r0, r2, r3\n"
+        "	ldrb	r0, [r0]\n"
+        "	strb	r0, [r1]\n"
+        "	add	r0, r2, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r2, r0, #0x18\n"
+        "	cmp	r2, #0x7\n"
+        "	bls	._31	@cond_branch\n"
+        "	bl	SetupHipster\n"
+        "	mov	r2, #0x0\n"
+        "	ldr	r3, ._34        @ gSaveBlock1\n"
+        "._32:\n"
+        "	add	r1, r2, r3\n"
+        "	mov	r4, sp\n"
+        "	add	r0, r4, r2\n"
+        "	ldrb	r0, [r0]\n"
+        "	strb	r0, [r1]\n"
+        "	add	r0, r2, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r2, r0, #0x18\n"
+        "	cmp	r2, #0x7\n"
+        "	bls	._32	@cond_branch\n"
+        "	b	._37\n"
+        "._35:\n"
+        "	.align	2, 0\n"
+        "._34:\n"
+        "	.word	gSaveBlock1+0x2d8c\n"
+        "._27:\n"
+        "	bl	SetupTrader\n"
+        "	b	._37\n"
+        "._28:\n"
+        "	bl	SetupStoryteller\n"
+        "	b	._37\n"
+        "._29:\n"
+        "	bl	SetupGiddy\n"
+        "._37:\n"
+        "	bl	sub_80F83D0\n"
+        "	add	sp, sp, #0x8\n"
+        "	pop	{r4}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "\n"
+    );
+}
+#endif
+
+u8 GetCurrentMauvilleOldMan(void)
 {
     struct MauvilleManCommon *common = &gSaveBlock1.mauvilleMan.common;
 
@@ -345,7 +426,7 @@ void PrepareSongText(void)
 void ScrSpecial_PlayBardSong(void)
 {
     StartBardSong(gSpecialVar_0x8004);
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     ScriptContext1_Stop();
 }
 
@@ -858,8 +939,8 @@ static void Task_BardSong(u8 taskId)
     {
     case 0:  // Initialize song
         PrepareSongText();
-        InitWindowFromConfig(gMenuWindowPtr, &gWindowConfig_81E6CE4);
-        sub_8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
+        Text_InitWindowWithTemplate(gMenuWindowPtr, &gWindowTemplate_81E6CE4);
+        Text_InitWindow8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;
         task->tCharIndex = 0;
@@ -921,7 +1002,7 @@ static void Task_BardSong(u8 taskId)
         }
         else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
         {
-            sub_8003418(gMenuWindowPtr);
+            Text_PrintWindowSimple(gMenuWindowPtr);
             task->tCharIndex++;
             task->tState = 2;
             task->data[2] = 0;
@@ -941,7 +1022,7 @@ static void Task_BardSong(u8 taskId)
         else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
         {
             gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
-            sub_8003418(gMenuWindowPtr);
+            Text_PrintWindowSimple(gMenuWindowPtr);
             task->tCharIndex++;
             task->data[2] = 0;
         }
@@ -950,7 +1031,7 @@ static void Task_BardSong(u8 taskId)
             switch (task->data[1])
             {
             case 0:
-                sub_8003418(gMenuWindowPtr);
+                Text_PrintWindowSimple(gMenuWindowPtr);
                 task->data[1]++;
                 break;
             case 1:
@@ -1219,7 +1300,7 @@ static void PrintStoryList(void)
 {
     s32 i;
 
-    MenuDrawTextWindow(0, 0, 25, 4 + GetFreeStorySlot() * 2);
+    Menu_DrawStdWindowFrame(0, 0, 25, 4 + GetFreeStorySlot() * 2);
     for (i = 0; i < 4; i++)
     {
         struct MauvilleManStoryteller *storyteller = &gSaveBlock1.mauvilleMan.storyteller;
@@ -1227,9 +1308,9 @@ static void PrintStoryList(void)
 
         if (stat == 0)
             break;
-        MenuPrint(GetStoryTitleByStat(stat), 1, 2 + i * 2);
+        Menu_PrintText(GetStoryTitleByStat(stat), 1, 2 + i * 2);
     }
-    MenuPrint(gPCText_Cancel, 1, 2 + i * 2);
+    Menu_PrintText(gPCText_Cancel, 1, 2 + i * 2);
 }
 
 static u8 gUnknown_03000748;
@@ -1247,7 +1328,7 @@ static void Task_StoryListMenu(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        selection = ProcessMenuInput();
+        selection = Menu_ProcessInput();
         if (selection == -2)
             break;
         if (selection == -1 || selection == GetFreeStorySlot())
@@ -1259,8 +1340,8 @@ static void Task_StoryListMenu(u8 taskId)
             gSpecialVar_Result = 1;
             gUnknown_03000748 = selection;
         }
-        HandleDestroyMenuCursors();
-        MenuZeroFillWindowRect(0, 0, 25, 12);
+        Menu_DestroyCursor();
+        Menu_EraseWindowRect(0, 0, 25, 12);
         DestroyTask(taskId);
         EnableBothScriptContexts();
         break;

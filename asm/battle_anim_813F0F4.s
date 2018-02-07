@@ -1,5 +1,5 @@
 	.include "constants/gba_constants.inc"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -1366,7 +1366,7 @@ _0813FBE0:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8079E90
@@ -1418,7 +1418,7 @@ _0813FBE0:
 	ldr r0, _0813FCAC @ =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _0813FCB0 @ =gObjectBankIDs
 	lsls r0, 24
 	lsrs r0, 24
@@ -1462,7 +1462,7 @@ sub_813FCBC: @ 813FCBC
 	lsrs r5, r0, 24
 	ldr r6, _0813FD1C @ =gSprites
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _0813FD20 @ =gObjectBankIDs
 	lsls r0, 24
 	lsrs r0, 24
@@ -1519,7 +1519,7 @@ sub_813FD34: @ 813FD34
 	lsrs r5, r0, 24
 	ldr r6, _0813FD88 @ =gSprites
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r4, _0813FD8C @ =gObjectBankIDs
 	lsls r0, 24
 	lsrs r0, 24
@@ -1535,7 +1535,7 @@ sub_813FD34: @ 813FD34
 	cmp r0, 0
 	bge _0813FD80
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -5483,7 +5483,7 @@ sub_8141C30: @ 8141C30
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -5495,7 +5495,7 @@ sub_8141C30: @ 8141C30
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5644,11 +5644,11 @@ sub_8141D7C: @ 8141D7C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08141DA4 @ =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0x1
-	bl GetBankByPlayerAI
+	bl GetBankByIdentity
 	ldr r1, _08141DA8 @ =gAnimBankTarget
 	strb r0, [r1]
 	adds r0, r4, 0

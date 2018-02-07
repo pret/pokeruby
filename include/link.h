@@ -167,7 +167,7 @@ u8 GetMultiplayerId(void);
 u8 bitmask_all_link_players_but_self(void);
 bool8 SendBlock(u8, void *, u16);
 bool8 sub_8007E9C(u8);
-bool8 sub_8007ECC(void);
+bool8 IsLinkTaskFinished(void);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
@@ -194,5 +194,9 @@ u32 LinkMain1(u8 *, u16 *, u16[CMD_LENGTH][MAX_LINK_PLAYERS]);
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
+void LinkTestScreen(void);
+void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3);
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0);
+u32 sub_8007E40(void);
 
 #endif // GUARD_LINK_H

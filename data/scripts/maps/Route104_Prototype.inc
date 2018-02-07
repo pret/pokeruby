@@ -4,22 +4,15 @@ Route104_Prototype_MapScripts:: @ 8160C4A
 Route104_Prototype_EventScript_160C4B:: @ 8160C4B
 	lock
 	faceplayer
-	checktrainerflag OPPONENT_BRIANNA_1
-	goto_if 0, Route104_Prototype_EventScript_160C99
-	checktrainerflag OPPONENT_CINDY_2
-	goto_if 0, Route104_Prototype_EventScript_160C99
-	checktrainerflag OPPONENT_AMY_AND_LIV_3
-	goto_if 0, Route104_Prototype_EventScript_160C99
-	checktrainerflag OPPONENT_GINA_AND_MIA_2
-	goto_if 0, Route104_Prototype_EventScript_160C99
-	checktrainerflag OPPONENT_LUCAS_2
-	goto_if 0, Route104_Prototype_EventScript_160C99
-	checktrainerflag OPPONENT_MIKE_1
-	goto_if 0, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_BRIANNA_1, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_CINDY_2, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_AMY_AND_LIV_3, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_GINA_AND_MIA_2, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_LUCAS_2, Route104_Prototype_EventScript_160C99
+	goto_if_trainer_not_defeated OPPONENT_MIKE_1, Route104_Prototype_EventScript_160C99
 	setflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_1
 	msgbox Route104_Prototype_Text_19B267, 4
-	checkflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_2
-	goto_if_eq Route104_Prototype_EventScript_160CFB
+	goto_if_set FLAG_ROUTE104_PROTOTYPE_COMPLETED_2, Route104_Prototype_EventScript_160CFB
 	release
 	end
 
@@ -31,22 +24,15 @@ Route104_Prototype_EventScript_160C99:: @ 8160C99
 Route104_Prototype_EventScript_160CA3:: @ 8160CA3
 	lock
 	faceplayer
-	checktrainerflag OPPONENT_BRIANNA_1
-	goto_if 0, Route104_Prototype_EventScript_160CF1
-	checktrainerflag OPPONENT_CINDY_2
-	goto_if 0, Route104_Prototype_EventScript_160CF1
-	checktrainerflag OPPONENT_AMY_AND_LIV_3
-	goto_if 0, Route104_Prototype_EventScript_160CF1
-	checktrainerflag OPPONENT_GINA_AND_MIA_2
-	goto_if 0, Route104_Prototype_EventScript_160CF1
-	checktrainerflag OPPONENT_LUCAS_2
-	goto_if 0, Route104_Prototype_EventScript_160CF1
-	checktrainerflag OPPONENT_MIKE_1
-	goto_if 0, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_BRIANNA_1, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_CINDY_2, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_AMY_AND_LIV_3, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_GINA_AND_MIA_2, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_LUCAS_2, Route104_Prototype_EventScript_160CF1
+	goto_if_trainer_not_defeated OPPONENT_MIKE_1, Route104_Prototype_EventScript_160CF1
 	setflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_2
 	msgbox Route104_Prototype_Text_19B2E9, 4
-	checkflag FLAG_ROUTE104_PROTOTYPE_COMPLETED_1
-	goto_if_eq Route104_Prototype_EventScript_160CFB
+	goto_if_set FLAG_ROUTE104_PROTOTYPE_COMPLETED_1, Route104_Prototype_EventScript_160CFB
 	release
 	end
 

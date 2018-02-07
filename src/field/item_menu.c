@@ -33,13 +33,13 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
+#include "menu_helpers.h"
 #include "ewram.h"
 
 // External stuff
 extern void gpu_pal_allocator_reset__manage_upper_four(void);
-extern void sub_80F9020(void);
-extern void sub_80F9988();
+extern void SetVerticalScrollIndicatorPriority();
 extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void PauseVerticalScrollIndicator();
 extern u8 sub_80F9284(void);
@@ -47,10 +47,10 @@ extern void sub_808B5B4();
 extern u8 sub_80F92F4();
 extern void sub_80C9C7C(u8);
 extern void pal_fill_black(void);
-extern bool8 sub_807D770(void);
+extern bool8 IsWeatherNotFadingIn(void);
 extern u8 sub_80F931C();
 extern void sub_808A3F8(u8);
-extern void sub_80B3050(void);
+extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
 extern void sub_802E424(u8);
@@ -157,6 +157,9 @@ extern u16 gBattle_BG1_Y;
 extern struct PocketScrollState gBagPocketScrollStates[];
 extern struct ItemSlot *gCurrentBagPocketItemSlots;  // selected pocket item slots
 extern const u8 Event_NoRegisteredItem[];
+
+// TODO: decompile the debug code so we can use static in this file
+#define static
 
 extern const struct CompressedSpriteSheet sMaleBagSpriteSheet;
 extern const struct CompressedSpriteSheet sFemaleBagSpriteSheet;
@@ -286,6 +289,24 @@ static void sub_80A6618(u8);
 
 const struct YesNoFuncTable gUnknown_083C16FC = {sub_80A65AC, sub_80A6618};
 
+#if DEBUG
+const struct {u16 item; u8 unk;} gUnknown_Debug_083EBC68[12+48] =
+{
+    {ITEM_POKE_BALL,      10},
+    {ITEM_ULTRA_BALL,     15},
+    {ITEM_GREAT_BALL,     20},
+    {ITEM_MASTER_BALL,    25},
+    {ITEM_ACRO_BIKE,      1 },
+    {ITEM_OLD_ROD,        1 },
+    {ITEM_GOOD_ROD,       1 },
+    {ITEM_SUPER_ROD,      1 },
+    {ITEM_POKEBLOCK_CASE, 1 },
+    {ITEM_WAILMER_PAIL,   1 },
+    {ITEM_ITEMFINDER,     1 },
+    {ITEM_NONE,           1 },
+};
+#endif
+
 void sub_80A34E8(void);
 static bool8 LoadBagGraphicsMultistep(void);
 static void sub_80A362C(void);
@@ -368,22 +389,394 @@ static void sub_80A3134(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-
-    {
-        const void *src = gBGTilemapBuffers[1];
-        void *dst = (void *)(VRAM + 0x2000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
-
-    {
-        const void *src = gBGTilemapBuffers[2];
-        void *dst = (void *)(VRAM + 0x6000);
-
-        DmaCopy16(3, src, dst, 0x800);
-    }
+    DmaCopy16Defvars(3, gBGTilemapBuffers[1], (void *)(VRAM + 0x2000), 0x800);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x6000), 0x800);
 }
 
+#if DEBUG
+__attribute__((naked))
+static bool8 SetupBagMultistep(void)
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r0, ._5         @ gMain\n\
+	ldr	r1, ._5 + 4     @ 0x43c\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x10\n\
+	bls	._3	@cond_branch\n\
+	b	._66\n\
+._3:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._5 + 8     @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._6:\n\
+	.align	2, 0\n\
+._5:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._7\n\
+._7:\n\
+	.word	._8\n\
+	.word	._9\n\
+	.word	._10\n\
+	.word	._11\n\
+	.word	._12\n\
+	.word	._13\n\
+	.word	._14\n\
+	.word	._15\n\
+	.word	._16\n\
+	.word	._17\n\
+	.word	._18\n\
+	.word	._19\n\
+	.word	._20\n\
+	.word	._21\n\
+	.word	._22\n\
+	.word	._23\n\
+	.word	._24\n\
+._8:\n\
+	bl	ClearVideoCallbacks\n\
+	bl	sub_80A34E8\n\
+	b	._61\n\
+._9:\n\
+	bl	ScanlineEffect_Stop\n\
+	ldr	r1, ._27        @ gMain\n\
+	ldr	r0, ._27 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._28:\n\
+	.align	2, 0\n\
+._27:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._10:\n\
+	bl	gpu_pal_allocator_reset__manage_upper_four\n\
+	b	._61\n\
+._11:\n\
+	bl	ClearBGTilemapBuffers\n\
+	ldr	r0, ._31        @ \n\
+	ldr	r1, ._31 + 4    @ \n\
+	add	r0, r0, r1\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0]\n\
+	b	._61\n\
+._32:\n\
+	.align	2, 0\n\
+._31:\n\
+	.word	+0x2000000\n\
+	.word	0x1ffff\n\
+._12:\n\
+	bl	ResetPaletteFade\n\
+	ldr	r2, ._34        @ gPaletteFade\n\
+	ldrb	r0, [r2, #0x8]\n\
+	mov	r1, #0x80\n\
+	orr	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r1, ._34 + 4    @ gMain\n\
+	ldr	r0, ._34 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._35:\n\
+	.align	2, 0\n\
+._34:\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._13:\n\
+	bl	ResetSpriteData\n\
+	b	._61\n\
+._14:\n\
+	bl	LoadBagGraphicsMultistep\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._37	@cond_branch\n\
+	b	._66\n\
+._37:\n\
+	ldr	r1, ._40        @ gMain\n\
+	ldr	r0, ._40 + 4    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._41:\n\
+	.align	2, 0\n\
+._40:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._15:\n\
+	ldr	r0, ._43        @ gWindowTemplate_81E6DFC\n\
+	bl	Text_LoadWindowTemplate\n\
+	b	._61\n\
+._44:\n\
+	.align	2, 0\n\
+._43:\n\
+	.word	gWindowTemplate_81E6DFC\n\
+._16:\n\
+	ldr	r0, ._46        @ gWindowTemplate_81E6DFC\n\
+	bl	MultistepInitMenuWindowBegin\n\
+	ldr	r1, ._46 + 4    @ gMain\n\
+	ldr	r0, ._46 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._47:\n\
+	.align	2, 0\n\
+._46:\n\
+	.word	gWindowTemplate_81E6DFC\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._17:\n\
+	bl	MultistepInitMenuWindowContinue\n\
+	cmp	r0, #0\n\
+	bne	._48	@cond_branch\n\
+	b	._66\n\
+._48:\n\
+	b	._61\n\
+._18:\n\
+	bl	ClearVerticalScrollIndicatorPalettes\n\
+	bl	LoadScrollIndicatorPalette\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0xac\n\
+	mov	r2, #0xc\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0xac\n\
+	mov	r2, #0x94\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x1c\n\
+	mov	r2, #0x58\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x64\n\
+	mov	r2, #0x58\n\
+	bl	CreateVerticalScrollIndicators\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x1\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x2\n\
+	bl	SetVerticalScrollIndicatorPriority\n\
+	ldr	r0, ._53        @ sReturnLocation\n\
+	ldrb	r0, [r0]\n\
+	sub	r0, r0, #0x4\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0x1\n\
+	bhi	._51	@cond_branch\n\
+	mov	r0, #0x2\n\
+	mov	r1, #0x1\n\
+	bl	SetVerticalScrollIndicators\n\
+	mov	r0, #0x3\n\
+	mov	r1, #0x1\n\
+	bl	SetVerticalScrollIndicators\n\
+._51:\n\
+	ldr	r1, ._53 + 4    @ gMain\n\
+	ldr	r0, ._53 + 8    @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._54:\n\
+	.align	2, 0\n\
+._53:\n\
+	.word	sReturnLocation\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._19:\n\
+	ldr	r1, ._56        @ gUnknown_0203855A\n\
+	mov	r0, #0x10\n\
+	strb	r0, [r1]\n\
+	ldr	r4, ._56 + 4    @ gBGTilemapBuffers\n\
+	ldr	r5, ._56 + 8    @ sCurrentBagPocket\n\
+	ldrb	r1, [r5]\n\
+	add	r1, r1, #0x1\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r1, r1, #0x18\n\
+	add	r0, r4, #0\n\
+	bl	sub_80A39B8\n\
+	ldrb	r1, [r5]\n\
+	add	r0, r4, #0\n\
+	bl	DrawPocketIndicatorDots\n\
+	bl	UpdateAllBagPockets\n\
+	ldr	r4, ._56 + 12   @ gBagPockets\n\
+	ldr	r0, [r4, #0x10]\n\
+	ldr	r1, [r4, #0x14]\n\
+	bl	SortItemSlots\n\
+	ldr	r0, [r4, #0x18]\n\
+	ldr	r1, [r4, #0x1c]\n\
+	bl	SortItemSlots\n\
+	bl	sub_80A3D40\n\
+	ldr	r1, ._56 + 16   @ gCurrentBagPocketItemSlots\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r5, r0]\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r4\n\
+	ldr	r0, [r0]\n\
+	str	r0, [r1]\n\
+	bl	sub_80A362C\n\
+	b	._61\n\
+._57:\n\
+	.align	2, 0\n\
+._56:\n\
+	.word	gUnknown_0203855A\n\
+	.word	gBGTilemapBuffers+0x1000\n\
+	.word	sCurrentBagPocket\n\
+	.word	gBagPockets\n\
+	.word	gCurrentBagPocketItemSlots\n\
+._20:\n\
+	ldr	r0, ._59        @ 0xffff\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x7\n\
+	bl	sub_80A48E8\n\
+	ldr	r1, ._59 + 4    @ gBagPocketScrollStates\n\
+	ldr	r4, ._59 + 8    @ sCurrentBagPocket\n\
+	mov	r0, #0x0\n\
+	ldsb	r0, [r4, r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldrb	r1, [r0, #0x1]\n\
+	ldrb	r0, [r0]\n\
+	add	r1, r1, r0\n\
+	ldr	r0, ._59 + 12   @ gCurrentBagPocketItemSlots\n\
+	ldr	r0, [r0]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r0\n\
+	mov	r2, #0x0\n\
+	ldsh	r0, [r1, r2]\n\
+	bl	ItemListMenu_InitDescription\n\
+	bl	ItemListMenu_InitMenu\n\
+	ldr	r1, ._59 + 16   @ gUnknown_0203855B\n\
+	ldrb	r0, [r4]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	ldr	r1, ._59 + 20   @ gUnknown_0203855C\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r1]\n\
+	ldr	r1, ._59 + 24   @ gMain\n\
+	ldr	r0, ._59 + 28   @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._60:\n\
+	.align	2, 0\n\
+._59:\n\
+	.word	0xffff\n\
+	.word	gBagPocketScrollStates\n\
+	.word	sCurrentBagPocket\n\
+	.word	gCurrentBagPocketItemSlots\n\
+	.word	gUnknown_0203855B\n\
+	.word	gUnknown_0203855C\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._21:\n\
+	bl	CreateBagSprite\n\
+	mov	r0, #0x0\n\
+	bl	CreateBagPokeballSprite\n\
+	bl	sub_80A3740\n\
+	b	._61\n\
+._22:\n\
+	ldr	r3, ._63        @ 0x4000208\n\
+	ldrh	r2, [r3]\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r3]\n\
+	ldr	r4, ._63 + 4    @ 0x4000200\n\
+	ldrh	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r4]\n\
+	strh	r2, [r3]\n\
+	ldr	r2, ._63 + 8    @ 0x4000004\n\
+	ldrh	r0, [r2]\n\
+	mov	r1, #0x8\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r2]\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r2, #0x10\n\
+	mov	r3, #0x0\n\
+	bl	BeginNormalPaletteFade\n\
+	ldr	r2, ._63 + 12   @ gPaletteFade\n\
+	ldrb	r1, [r2, #0x8]\n\
+	mov	r0, #0x7f\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r1, ._63 + 16   @ gMain\n\
+	ldr	r0, ._63 + 20   @ 0x43c\n\
+	add	r1, r1, r0\n\
+	b	._62\n\
+._64:\n\
+	.align	2, 0\n\
+._63:\n\
+	.word	0x4000208\n\
+	.word	0x4000200\n\
+	.word	0x4000004\n\
+	.word	gPaletteFade\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._23:\n\
+	bl	sub_8055870\n\
+	cmp	r0, #0x1\n\
+	beq	._66	@cond_branch\n\
+._61:\n\
+	ldr	r1, ._67        @ gMain\n\
+	ldr	r2, ._67 + 4    @ 0x43c\n\
+	add	r1, r1, r2\n\
+._62:\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	b	._66\n\
+._68:\n\
+	.align	2, 0\n\
+._67:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._24:\n\
+	ldr	r0, ._71        @ sub_80A3134\n\
+	bl	SetVBlankCallback\n\
+	ldr	r0, ._71 + 4    @ sub_80A3118\n\
+	bl	SetMainCallback2\n\
+	bl	sub_80A751C\n\
+	bl	sub_80A7630\n\
+	bl	sub_80A770C\n\
+	bl	sub_80A7828\n\
+	bl	sub_80A78B8\n\
+	ldr	r0, ._71 + 8    @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._69	@cond_branch\n\
+	ldr	r0, ._71 + 12   @ 0x600f5e0\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x8\n\
+	ldr	r2, ._71 + 16   @ 0x600f800\n\
+	mov	r3, #0x0\n\
+	bl	debug_sub_8008218\n\
+._69:\n\
+	mov	r0, #0x1\n\
+	b	._70\n\
+._72:\n\
+	.align	2, 0\n\
+._71:\n\
+	.word	sub_80A3134+1\n\
+	.word	sub_80A3118+1\n\
+	.word	gLinkOpen\n\
+	.word	0x600f5e0\n\
+	.word	0x600f800\n\
+._66:\n\
+	mov	r0, #0x0\n\
+._70:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+#else
 static bool8 SetupBagMultistep(void)
 {
     u32 index;
@@ -392,12 +785,12 @@ static bool8 SetupBagMultistep(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80A34E8();
         gMain.state++;
         break;
     case 1:
-        remove_some_task();
+        ScanlineEffect_Stop();
         gMain.state++;
         break;
     case 2:
@@ -405,7 +798,7 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 3:
-        sub_80F9020();
+        ClearBGTilemapBuffers();
         ewramBagSetupStep = 0;
         gMain.state++;
         break;
@@ -424,11 +817,11 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 7:
-        SetUpWindowConfig(&gWindowConfig_81E6DFC);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6DFC);
         gMain.state++;
         break;
     case 8:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6DFC);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6DFC);
         gMain.state++;
         break;
     case 9:
@@ -437,20 +830,20 @@ static bool8 SetupBagMultistep(void)
         gMain.state++;
         break;
     case 10:
-        sub_80F944C();
+        ClearVerticalScrollIndicatorPalettes();
         LoadScrollIndicatorPalette();
-        CreateVerticalScrollIndicators(0, 172, 12);
-        CreateVerticalScrollIndicators(1, 172, 148);
-        CreateVerticalScrollIndicators(2, 28, 88);
-        CreateVerticalScrollIndicators(3, 100, 88);
-        sub_80F9988(0, 2);
-        sub_80F9988(1, 2);
-        sub_80F9988(2, 2);
-        sub_80F9988(3, 2);
+        CreateVerticalScrollIndicators(TOP_ARROW, 172, 12);
+        CreateVerticalScrollIndicators(BOTTOM_ARROW, 172, 148);
+        CreateVerticalScrollIndicators(LEFT_ARROW, 28, 88);
+        CreateVerticalScrollIndicators(RIGHT_ARROW, 100, 88);
+        SetVerticalScrollIndicatorPriority(TOP_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(BOTTOM_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(LEFT_ARROW, 2);
+        SetVerticalScrollIndicatorPriority(RIGHT_ARROW, 2);
         if (sReturnLocation == RETURN_TO_FIELD_4 || sReturnLocation == RETURN_TO_FIELD_5)
         {
-            sub_80F979C(2, 1);
-            sub_80F979C(3, 1);
+            SetVerticalScrollIndicators(LEFT_ARROW, INVISIBLE);
+            SetVerticalScrollIndicators(RIGHT_ARROW, INVISIBLE);
         }
         gMain.state++;
         break;
@@ -508,6 +901,7 @@ static bool8 SetupBagMultistep(void)
     }
     return FALSE;
 }
+#endif
 
 static bool8 sub_80A34B4(void)
 {
@@ -634,6 +1028,79 @@ void ClearBag(void)
     ResetBagScrollPositions();
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80A3714()
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	add	sp, sp, #0xfffffff4\n\
+	mov	r5, #0x0\n\
+	ldr	r2, ._138       @ gUnknown_Debug_083EBC68\n\
+	mov	r1, #0x0\n\
+._134:\n\
+	lsl	r0, r5, #0x1\n\
+	add r0, r0, sp\n\
+	strh	r1, [r0]\n\
+	add	r0, r5, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	cmp	r5, #0x4\n\
+	bls	._134	@cond_branch\n\
+	mov	r5, #0x0\n\
+	ldrh	r0, [r2]\n\
+	cmp	r0, #0\n\
+	beq	._136	@cond_branch\n\
+	add	r6, r2, #0\n\
+._137:\n\
+	lsl	r4, r5, #0x2\n\
+	add	r4, r4, r6\n\
+	ldrh	r0, [r4]\n\
+	bl	ItemId_GetPocket\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x8\n\
+	ldr	r1, ._138 + 4   @ 0xffff0000\n\
+	add	r0, r0, r1\n\
+	lsr	r0, r0, #0x10\n\
+	ldr	r1, ._138 + 8   @ gBagPockets\n\
+	lsl	r2, r0, #0x3\n\
+	add	r2, r2, r1\n\
+	lsl	r0, r0, #0x1\n\
+	mov	r1, sp\n\
+	add	r3, r1, r0\n\
+	ldrh	r1, [r3]\n\
+	ldr	r0, [r2]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r0\n\
+	ldr	r0, [r4]\n\
+	str	r0, [r1]\n\
+	ldrh	r0, [r3]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r3]\n\
+	add	r0, r5, #1\n\
+	lsl	r0, r0, #0x10\n\
+	lsr	r5, r0, #0x10\n\
+	cmp	r5, #0x3b\n\
+	bhi	._136	@cond_branch\n\
+	lsl	r0, r5, #0x2\n\
+	add	r0, r0, r6\n\
+	ldrh	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._137	@cond_branch\n\
+._136:\n\
+	add	sp, sp, #0xc\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._139:\n\
+	.align	2, 0\n\
+._138:\n\
+	.word	gUnknown_Debug_083EBC68\n\
+	.word	0xffff0000\n\
+	.word	gBagPockets");
+}
+#endif
+
 static void sub_80A3740(void)
 {
     const u16 colors[2] = {RGB(14, 15, 16), RGB_WHITE};
@@ -657,10 +1124,10 @@ static void sub_80A3770(void)
 static void sub_80A37C0(u8 taskId)
 {
     gTasks[taskId].func = sub_80A50C8;
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
-    StartVerticalScrollIndicators(2);
-    StartVerticalScrollIndicators(3);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
+    StartVerticalScrollIndicators(LEFT_ARROW);
+    StartVerticalScrollIndicators(RIGHT_ARROW);
 }
 
 static void sub_80A37F8(u8 taskId)
@@ -702,8 +1169,8 @@ static void sub_80A37F8(u8 taskId)
         sub_80A37C0(FindTaskIdByFunc(sub_80A4F68));
         DestroyTask(taskId);
         ItemListMenu_InitMenu();
-        sub_80F979C(2, 0);
-        sub_80F979C(3, 0);
+        SetVerticalScrollIndicators(LEFT_ARROW, VISIBLE);
+        SetVerticalScrollIndicators(RIGHT_ARROW, VISIBLE);
     }
 }
 
@@ -1062,7 +1529,7 @@ void sub_80A4164(u8 *dest, u16 value, enum StringConvertMode mode, u8 digits)
 void sub_80A418C(u16 value, enum StringConvertMode mode, u8 c, u8 d, u8 digits)
 {
     sub_80A4164(gStringVar1, value, mode, digits);
-    MenuPrint(gStringVar1, c, d);
+    Menu_PrintText(gStringVar1, c, d);
 }
 
 static void sub_80A41D4(u8 taskId)
@@ -1112,7 +1579,7 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
             return TRUE;
         r5 = itemPos * 2 + 2;
         sub_8072C74(gStringVar1, gOtherText_CloseBag, 0x78, 0);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
         ptr = gBGTilemapBuffers[2] + 14 + r5 * 32;
         ptr[0] = 0x4F;
         ptr[1] = 0x4F;
@@ -1121,9 +1588,9 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
         if (itemPos == 7)
             return TRUE;
         if ((b == 1 && r8->unk2 != 0) || b == 2)
-            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 13);
+            Menu_BlankWindowRect(14, r5 + 2, 29, 13);
         else
-            MenuFillWindowRectWithBlankTile(14, r5 + 2, 29, 17);
+            Menu_BlankWindowRect(14, r5 + 2, 29, 17);
         return TRUE;
     }
     return FALSE;
@@ -1148,7 +1615,7 @@ static void sub_80A4380(u16 a, int b, int c, int d)
         text = sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x66, 0);
         *text++ = CHAR_MULT_SIGN;
         sub_8072C14(text, gCurrentBagPocketItemSlots[r4].quantity, 0x78, 1);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
     }
 }
 
@@ -1173,7 +1640,7 @@ static void sub_80A444C(u16 a, int b, int c, int d)
 #else
         sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x63, 0);
 #endif
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
         if (gUnknown_02038558 != 0)
         {
             if (gCurrentBagPocketItemSlots[r4].itemId == gSaveBlock1.registeredItem)
@@ -1240,7 +1707,7 @@ static void sub_80A4548(u16 a, int b, int c, int d)
             moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[r4].itemId)];
             sub_8072C74(text, moveName, 0x78, 0);
         }
-        MenuPrint(gStringVar1, 14, sp10);
+        Menu_PrintText(gStringVar1, 14, sp10);
     }
 }
 #else
@@ -1421,7 +1888,7 @@ _080A46AE:\n\
     ldr r0, _080A46F8 @ =gStringVar1\n\
     movs r1, 0xE\n\
     ldr r2, [sp, 0x10]\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     mov r0, r8\n\
     adds r0, 0x1\n\
     lsls r0, 24\n\
@@ -1482,7 +1949,7 @@ static void sub_80A46FC(u16 a, int b, int c, int d)
         text = sub_80A425C(a, text, i);
         CopyItemName(gCurrentBagPocketItemSlots[r4].itemId, gStringVar2);
         sub_80A41E0(text, gCurrentBagPocketItemSlots[r4].itemId - 0x84, gStringVar2, gCurrentBagPocketItemSlots[r4].quantity, 3);
-        MenuPrint(gStringVar1, 14, r5);
+        Menu_PrintText(gStringVar1, 14, r5);
     }
 }
 
@@ -1505,14 +1972,14 @@ static void sub_80A47E8(u16 a, int b, int c, int d)
         break;
     }
     if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop != 0)
-        sub_80F979C(0, 0);
+        SetVerticalScrollIndicators(TOP_ARROW, VISIBLE);
     else
-        sub_80F979C(0, 1);
+        SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
     if ((sReturnLocation != RETURN_TO_FIELD_5 && gBagPocketScrollStates[sCurrentBagPocket].scrollTop + 8 < gBagPocketScrollStates[sCurrentBagPocket].numSlots + 1)
      || (sReturnLocation == RETURN_TO_FIELD_5 && gBagPocketScrollStates[sCurrentBagPocket].scrollTop + 8 < gBagPocketScrollStates[sCurrentBagPocket].numSlots))
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     else
-        sub_80F979C(1, 1);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
 }
 
 static void sub_80A48E8(u16 taskId, int b, int c)
@@ -1540,7 +2007,7 @@ static void ItemListMenu_InitDescription(s16 itemId)
     }
 
     if (r5 < 3)
-        MenuZeroFillWindowRect(0, 13 + r5 * 2, 13, 20);
+        Menu_EraseWindowRect(0, 13 + r5 * 2, 13, 20);
 }
 
 static void ItemListMenu_ChangeDescription(s16 itemId, int b)
@@ -1551,20 +2018,20 @@ static void ItemListMenu_ChangeDescription(s16 itemId, int b)
     {
         if (b == 0)
         {
-            MenuZeroFillWindowRect(0, 13, 13, 20);
-            MenuPrint_PixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
+            Menu_EraseWindowRect(0, 13, 13, 20);
+            Menu_PrintTextPixelCoords(gOtherText_ReturnTo, 4, 0x68, 0);
         }
         else if (b == 1)
         {
-            MenuPrint_PixelCoords(gUnknown_0840E740[sReturnLocation], 4, 0x78, 0);
+            Menu_PrintTextPixelCoords(gUnknown_0840E740[sReturnLocation], 4, 0x78, 0);
         }
     }
     else
     {
         if (b == 0)
-            MenuZeroFillWindowRect(0, 13, 13, 20);
+            Menu_EraseWindowRect(0, 13, 13, 20);
         if (ItemId_CopyDescription(description, itemId, b))
-            MenuPrint_PixelCoords(description, 4, 104 + b * 16, 0);
+            Menu_PrintTextPixelCoords(description, 4, 104 + b * 16, 0);
     }
 }
 
@@ -1602,9 +2069,9 @@ static void sub_80A4A98(const u8 *text, u32 line)
     u8 buffer[100];
 
     if (line == 0)
-        MenuZeroFillWindowRect(0, 13, 13, 20);
+        Menu_EraseWindowRect(0, 13, 13, 20);
     if (CopyTextLine(buffer, text, line))
-        MenuPrint_PixelCoords(buffer, 4, 104 + line * 16, 0);
+        Menu_PrintTextPixelCoords(buffer, 4, 104 + line * 16, 0);
 }
 
 static void sub_80A4ADC(u8 taskId)
@@ -1618,7 +2085,7 @@ static void sub_80A4ADC(u8 taskId)
 static void sub_80A4B14(s8 a, u8 b)
 {
     gBagPocketScrollStates[sCurrentBagPocket].scrollTop += a;
-    MoveMenuCursor(0);
+    Menu_MoveCursor(0);
     sub_80A73C0();
     sub_80A763C();
     sub_80A4ADC(b);
@@ -1626,7 +2093,7 @@ static void sub_80A4B14(s8 a, u8 b)
 
 static void sub_80A4B58(s8 delta, u8 b)
 {
-    gBagPocketScrollStates[sCurrentBagPocket].cursorPos = MoveMenuCursor(delta);
+    gBagPocketScrollStates[sCurrentBagPocket].cursorPos = Menu_MoveCursor(delta);
     sub_80A73C0();
     sub_80A4ADC(b);
 }
@@ -1649,7 +2116,7 @@ static void sub_80A4BF0(u16 *a)
 
     if (gUnknown_02038564 == 4)
     {
-        MenuDrawTextWindow(0, 7, 13, 12);
+        Menu_DrawStdWindowFrame(0, 7, 13, 12);
         sub_80A4008(a, 1, 8, 12, 4);
         if (sub_80F9344() == TRUE && sReturnLocation == RETURN_TO_FIELD_5)
         {
@@ -1665,7 +2132,7 @@ static void sub_80A4BF0(u16 *a)
                     text = sub_80A4B90(gSpecialVar_ItemId);
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[i]].text;
-                MenuPrint(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
+                Menu_PrintText(text, 1 + (i / 2) * 6, 8 + (i % 2) * 2);
             }
         }
         if (sReturnLocation == RETURN_TO_FIELD_5)
@@ -1676,10 +2143,10 @@ static void sub_80A4BF0(u16 *a)
     }
     else
     {
-        MenuDrawTextWindow(0, 5, 13, 12);
+        Menu_DrawStdWindowFrame(0, 5, 13, 12);
         sub_80A4008(a, 1, 6, 12, 6);
         for (i = 0; i < gUnknown_02038564; i++)
-            MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[i]].text, 1 + (i / 3) * 6, 6 + (i % 3) * 2);
+            Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[i]].text, 1 + (i / 3) * 6, 6 + (i % 3) * 2);
         InitMenu(0, 1, 6, gUnknown_02038564, 0, 1);
         sub_8072DCC(0x2F);
     }
@@ -1690,7 +2157,7 @@ static void sub_80A4DA4(u16 *a)
 {
     sub_80A73FC();
     sub_80A36B8(a, 0, 6, 13, 6);
-    MenuZeroFillWindowRect(0, 5, 13, 12);
+    Menu_EraseWindowRect(0, 5, 13, 12);
     sub_80A7590();
 }
 
@@ -1699,7 +2166,7 @@ static void sub_80A4DD8(u8 taskId, u8 b, u8 c, u8 d, u8 e, u8 digits)
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = b + 2;
     gTasks[taskId].data[3] = c + 1;
-    MenuDrawTextWindow(b, c, b + d, c + e);
+    Menu_DrawStdWindowFrame(b, c, b + d, c + e);
     sub_80A4008(gBGTilemapBuffers[1], b + 1, c + 1, d - 1, e - 1);
     sub_80A418C(1, 1, b + 2, c + 1, digits);
 }
@@ -1707,14 +2174,14 @@ static void sub_80A4DD8(u8 taskId, u8 b, u8 c, u8 d, u8 e, u8 digits)
 static void sub_80A4E8C(s8 delta, u8 b)
 {
     PlaySE(SE_SELECT);
-    sub_80F979C(0, 1);
-    sub_80F979C(1, 1);
-    sub_80F979C(2, 1);
-    sub_80F979C(3, 1);
-    PauseVerticalScrollIndicator(0);
-    PauseVerticalScrollIndicator(1);
-    PauseVerticalScrollIndicator(2);
-    PauseVerticalScrollIndicator(3);
+    SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(LEFT_ARROW, INVISIBLE);
+    SetVerticalScrollIndicators(RIGHT_ARROW, INVISIBLE);
+    PauseVerticalScrollIndicator(TOP_ARROW);
+    PauseVerticalScrollIndicator(BOTTOM_ARROW);
+    PauseVerticalScrollIndicator(LEFT_ARROW);
+    PauseVerticalScrollIndicator(RIGHT_ARROW);
     ChangePocket(gBGTilemapBuffers[2], delta);
     DrawPocketIndicatorDots(gBGTilemapBuffers[2], sCurrentBagPocket);
     sub_80A3770();
@@ -1866,10 +2333,10 @@ static void sub_80A50C8(u8 taskId)
                     gUnknown_02038560 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos;
                     gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gUnknown_02038560].itemId;
                     gUnknown_083C16BC[sReturnLocation].onItemSelect(taskId);
-                    sub_80F98A4(0);
-                    sub_80F98A4(1);
-                    sub_80F98A4(2);
-                    sub_80F98A4(3);
+                    StopVerticalScrollIndicators(TOP_ARROW);
+                    StopVerticalScrollIndicators(BOTTOM_ARROW);
+                    StopVerticalScrollIndicators(LEFT_ARROW);
+                    StopVerticalScrollIndicators(RIGHT_ARROW);
                     sub_80A797C();
                 }
                 else
@@ -1901,7 +2368,7 @@ static void sub_80A50C8(u8 taskId)
     }
 }
 
-bool8 sub_80A52C4(u8 taskId, u16 b)
+bool8 SellMenu_QuantityRoller(u8 taskId, u16 b)
 {
     s16 *taskData = gTasks[taskId].data;
 
@@ -1948,7 +2415,7 @@ static bool8 sub_80A5350(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (sub_80A52C4(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
+    if (SellMenu_QuantityRoller(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
     {
         // if (sCurrentBagPocket == BAG_POCKET_BERRIES)  Can't get it to match this way
         if (sCurrentBagPocket + 1 == BAG_POCKET_BERRIES + 1)
@@ -2539,7 +3006,7 @@ static void sub_80A57C4(void)
         r5 = 7;
     }
     sub_80A4008(gBGTilemapBuffers[1], 7, r5 + 1, 6, gUnknown_02038564 * 2);
-    MenuDrawTextWindow(6, r5, 13, gUnknown_02038564 * 2 + 1 + r5);
+    Menu_DrawStdWindowFrame(6, r5, 13, gUnknown_02038564 * 2 + 1 + r5);
     sub_80A7834(0, r5);
     InitMenu(0, 7, r5 + 1, gUnknown_02038564, 0, 6);
 }
@@ -2553,7 +3020,7 @@ static void sub_80A5888(u8 taskId)
             if (sPopupMenuSelection != 0)
             {
                 PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor(-1);
+                sPopupMenuSelection = Menu_MoveCursor(-1);
             }
         }
         else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
@@ -2561,7 +3028,7 @@ static void sub_80A5888(u8 taskId)
             if (sPopupMenuSelection != gUnknown_02038564 - 1)
             {
                 PlaySE(SE_SELECT);
-                sPopupMenuSelection = MoveMenuCursor(1);
+                sPopupMenuSelection = Menu_MoveCursor(1);
             }
         }
         else if (gMain.newKeys & A_BUTTON)
@@ -2690,14 +3157,14 @@ static void sub_80A5C24(u8 taskId)
 void CleanUpItemMenuMessage(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    MenuZeroFillWindowRect(7, 7, 13, 12);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(7, 7, 13, 12);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A5C24;
 }
 
 void CleanUpOverworldMessage(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 13, 29, 19);
+    Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
     sub_8064E2C();
     ScriptContext2_Disable();
@@ -2711,7 +3178,7 @@ void ExecuteItemUseFromBlackPalette(void)
 
 static void Task_CallItemUseOnFieldCallback(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         gFieldItemUseCallback(taskId);
 }
 
@@ -2760,7 +3227,7 @@ static void sub_80A5DA0(u16 itemId, u16 quantity)
 static void sub_80A5DF8(void)
 {
     sub_80A4DA4(gBGTilemapBuffers[1]);
-    MenuZeroFillWindowRect(7, 6, 11, 13);
+    Menu_EraseWindowRect(7, 6, 11, 13);
     sub_80A7528(4);
 }
 
@@ -2857,7 +3324,7 @@ static void sub_80A6024(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskId].func = sub_80A6000;
     }
 }
@@ -2963,7 +3430,7 @@ static void sub_80A62D8(void)
         gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
 }
 
-void sub_80A6300(void)
+void ItemMenu_LoadSellMenu(void)
 {
     sReturnLocation = RETURN_TO_SHOP;
     SetMainCallback2(sub_80A62D8);
@@ -2971,7 +3438,7 @@ void sub_80A6300(void)
 
 static void OnBagClose_Shop(u8 taskId)
 {
-    gFieldCallback = sub_80B3050;
+    gFieldCallback = Shop_FadeReturnToMartMenu;
     gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
     gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
     sub_80A5AE4(taskId);
@@ -3008,7 +3475,7 @@ static void sub_80A640C(u8 taskId)
 static void sub_80A6444(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A640C;
 }
 
@@ -3016,7 +3483,7 @@ static void sub_80A648C(u8 taskId)
 {
     gTasks[taskId].func = Task_BuyHowManyDialogueHandleInput;
     sub_80A4008(gBGTilemapBuffers[1], 1, 11, 12, 2);
-    MenuDrawTextWindow(0, 10, 13, 13);
+    Menu_DrawStdWindowFrame(0, 10, 13, 13);
     gTasks[taskId].data[1] = 1;
     gTasks[taskId].data[2] = 1;
     gTasks[taskId].data[3] = 11;
@@ -3053,7 +3520,7 @@ static void sub_80A6574(u8 taskId)
 
 static void sub_80A65AC(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 12);
+    Menu_EraseWindowRect(7, 6, 13, 12);
     sub_80A36B8(gBGTilemapBuffers[1], 7, 6, 6, 6);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gOtherText_SoldItem);
@@ -3063,7 +3530,7 @@ static void sub_80A65AC(u8 taskId)
 
 static void sub_80A6618(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 12);
+    Menu_EraseWindowRect(7, 6, 13, 12);
     sub_80A36B8(gBGTilemapBuffers[1], 7, 6, 6, 6);
     BuyMenuPrintItemQuantityAndPrice(taskId);
 }
@@ -3078,13 +3545,13 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 {
     if (sub_80A5350(taskId) == TRUE)
     {
-        MenuZeroFillWindowRect(6, 11, 12, 11);
+        Menu_EraseWindowRect(6, 11, 12, 11);
         BuyMenuDisplayMessage(gSpecialVar_ItemId, gTasks[taskId].data[1]);
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        MenuZeroFillWindowRect(0, 10, 13, 13);
+        Menu_EraseWindowRect(0, 10, 13, 13);
         sub_80A36B8(gBGTilemapBuffers[1], 0, 10, 13, 3);
         ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(gSpecialVar_ItemId) / 2 * gTasks[taskId].data[1], STR_CONV_MODE_LEFT_ALIGN, 6);
         StringExpandPlaceholders(gStringVar4, gOtherText_CanPay);
@@ -3110,8 +3577,8 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 {
     sub_80A36B8(gBGTilemapBuffers[1], 0, 0, 31, 31);
     CloseMoneyWindow(0, 0);
-    MenuZeroFillWindowRect(0, 4, 13, 13);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 4, 13, 13);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_80A6760;
 }
 
@@ -3229,7 +3696,7 @@ static void sub_80A6A84(u8 taskId)
     sub_80A4DA4(gBGTilemapBuffers[1]);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, taskData[1], STR_CONV_MODE_LEFT_ALIGN, 3);
-    MenuZeroFillWindowRect(7, 6, 11, 13);
+    Menu_EraseWindowRect(7, 6, 11, 13);
     sub_80A7528(7);
     sub_80A3D5C(taskId);
     gTasks[taskId].func = sub_80A5E1C;
@@ -3361,16 +3828,16 @@ static void sub_80A6DF0(u16 *a)
 {
     u8 r6 = (gUnknown_02038564 - 1) * 2;
 
-    MenuDrawTextWindow(7, 9 - r6, 13, 12);
+    Menu_DrawStdWindowFrame(7, 9 - r6, 13, 12);
     sub_80A4008(a, 8, 10 - r6, 5, r6 + 2);
     if (gUnknown_02038564 == 1)
     {
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 10);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 10);
     }
     else
     {
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 8);
-        MenuPrint(sItemPopupMenuActions[sPopupMenuActionList[1]].text, 8, 10);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[0]].text, 8, 8);
+        Menu_PrintText(sItemPopupMenuActions[sPopupMenuActionList[1]].text, 8, 10);
     }
     InitMenu(0, 8, 10 - r6, gUnknown_02038564, 0, 5);
     sub_80A7528(2);
@@ -3383,7 +3850,7 @@ static void sub_80A6EB8(u8 taskId)
         if (sPopupMenuSelection == 1)
         {
             PlaySE(SE_SELECT);
-            sPopupMenuSelection = MoveMenuCursor(-1);
+            sPopupMenuSelection = Menu_MoveCursor(-1);
         }
     }
     else if ((gMain.newAndRepeatedKeys & DPAD_ANY) == DPAD_DOWN)
@@ -3391,7 +3858,7 @@ static void sub_80A6EB8(u8 taskId)
         if (sPopupMenuSelection + 1 < gUnknown_02038564)
         {
             PlaySE(SE_SELECT);
-            sPopupMenuSelection = MoveMenuCursor(1);
+            sPopupMenuSelection = Menu_MoveCursor(1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
@@ -3523,8 +3990,8 @@ static void sub_80A7230(u8 taskId)
         break;
     case 204:
         PlaySE(SE_SELECT);
-        sub_80F98A4(2);
-        sub_80F98A4(3);
+        StopVerticalScrollIndicators(LEFT_ARROW);
+        StopVerticalScrollIndicators(RIGHT_ARROW);
         gSpecialVar_ItemId = ITEM_POKE_BALL;
         sPopupMenuActionList = gUnknown_083C1708;
         gUnknown_02038564 = 2;
@@ -3559,7 +4026,7 @@ static void ItemListMenu_InitMenu(void)
 
 static void sub_80A73C0(void)
 {
-    sub_814AD7C(0x70, gBagPocketScrollStates[sCurrentBagPocket].cursorPos * 16 + 16);
+    MenuCursor_SetPos814AD7C(0x70, gBagPocketScrollStates[sCurrentBagPocket].cursorPos * 16 + 16);
 }
 
 static void sub_80A73F0(void)
@@ -3569,16 +4036,53 @@ static void sub_80A73F0(void)
 
 static void sub_80A73FC(void)
 {
-    HandleDestroyMenuCursors();
-    sub_814AD44();
+    Menu_DestroyCursor();
+    MenuCursor_Destroy814AD44();
 }
 
+#if DEBUG
+__attribute__((naked))
+static void sub_80A740C(void)
+{
+    asm("\
+	push	{lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	bl	sub_80A75E4\n\
+	bl	sub_80A7768\n\
+	bl	sub_80A7420\n\
+	ldr	r0, ._931       @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._930	@cond_branch\n\
+	ldr	r0, ._931 + 4   @ gLink\n\
+	ldr	r1, ._931 + 8   @ 0xfbd\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x0\n\
+	str	r1, [sp]\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008264\n\
+._930:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._932:\n\
+	.align	2, 0\n\
+._931:\n\
+	.word	gLinkOpen\n\
+	.word	gLink\n\
+	.word	0xfbd");
+}
+#else
 static void sub_80A740C(void)
 {
     sub_80A75E4();
     sub_80A7768();
     sub_80A7420();
 }
+#endif
 
 static void sub_80A7420(void)
 {
@@ -3669,7 +4173,7 @@ static void sub_80A756C(void)
 
 static void sub_80A7590(void)
 {
-    MenuZeroFillWindowRect(0, 13, 13, 20);
+    Menu_EraseWindowRect(0, 13, 13, 20);
     sub_80A756C();
 }
 
@@ -3748,7 +4252,7 @@ static void sub_80A7694(void)
 
 static void sub_80A76A0(void)
 {
-    MenuZeroFillWindowRect(14, 2, 29, 18);
+    Menu_EraseWindowRect(14, 2, 29, 18);
     sub_80A7678();
 }
 
@@ -3816,7 +4320,7 @@ static void sub_80A7768(void)
                 const u8 *text = sItemPopupMenuActions[sPopupMenuActionList[r4->unk1 - 1]].text;
                 int var = r4->unk1 - 1;
 
-                MenuPrint(text, 7, var * 2 + 1 + r4->unk3);
+                Menu_PrintText(text, 7, var * 2 + 1 + r4->unk3);
             }
             else
             {
@@ -3828,7 +4332,7 @@ static void sub_80A7768(void)
                 else
                     text = sItemPopupMenuActions[sPopupMenuActionList[r4->unk1 - 1]].text;
                 var = r4->unk1 - 1;
-                MenuPrint(text, (var >> 1) * 6 + 1, (var & 1) * 2 + 8);
+                Menu_PrintText(text, (var >> 1) * 6 + 1, (var & 1) * 2 + 8);
             }
             if (r4->unk1 == gUnknown_02038564)
             {

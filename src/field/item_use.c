@@ -40,7 +40,7 @@
 extern void (*gFieldItemUseCallback)(u8);
 extern void (*gFieldCallback)(void);
 extern void (*gUnknown_0300485C)(void);
-extern void (*gUnknown_03004AE4)(u8, u16, TaskFunc);
+extern void (*gPokemonItemUseCallback)(u8, u16, TaskFunc);
 
 extern u8 gUnknown_02038561;
 extern u8 gLastFieldPokeMenuOpened;
@@ -100,7 +100,7 @@ void ItemMenu_ConfirmNormalFade(u8 var)
 void ItemMenu_ConfirmComplexFade(u8 var)
 {
     ExecuteSwitchToOverworldFromItemUse(var);
-    fade_screen(1, 0);
+    FadeScreen(1, 0);
 }
 
 void SetUpItemUseOnFieldCallback(u8 taskId)
@@ -123,7 +123,7 @@ void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *text)
     switch (playerMenuStatus)
     {
     case 0: // Item Menu
-        MenuZeroFillWindowRect(0, 13, 13, 20);
+        Menu_EraseWindowRect(0, 13, 13, 20);
         DisplayItemMessageOnField(var1, gStringVar4, CleanUpItemMenuMessage, 1);
         break;
     default: // Field
@@ -259,7 +259,7 @@ void ItemUseOnFieldCB_Rod(u8 taskId)
 
 void ItemUseOutOfBattle_Itemfinder(u8 var)
 {
-    IncrementGameStat(0x27);
+    IncrementGameStat(GAME_STAT_USED_ITEMFINDER);
     gFieldItemUseCallback = (void *)ItemUseOnFieldCB_Itemfinder;
     SetUpItemUseOnFieldCallback(var);
 }
@@ -312,7 +312,7 @@ void RunItemfinderResults(u8 taskId)
 
 void ExitItemfinder(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     sub_8064E2C();
     ScriptContext2_Disable();
     DestroyTask(taskId);
@@ -744,7 +744,7 @@ void ItemUseOutOfBattle_CoinCase(u8 taskId)
 
     if (!gTasks[taskId].data[2])
     {
-        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
         DisplayItemMessageOnField(taskId, gStringVar4, CleanUpItemMenuMessage, 1);
     }
     else
@@ -770,7 +770,7 @@ void ItemUseOutOfBattle_SSTicket(u8 taskId)
 {
     if (gTasks[taskId].data[2] == 0)
     {
-        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
         DisplayItemMessageOnField(taskId, gUnknown_083D61DC[ItemId_GetSecondaryId(gSpecialVar_ItemId)], sub_80C9BB8, 1);
     }
     else
@@ -832,7 +832,7 @@ void sub_80C9D98(u8 taskId)
 
 void ItemUseOutOfBattle_Medicine(u8 taskId)
 {
-    gUnknown_03004AE4 = UseMedicine;
+    gPokemonItemUseCallback = UseMedicine;
     sub_80C9D98(taskId);
 }
 
@@ -850,34 +850,34 @@ void ItemUseOutOfBattle_SacredAsh(u8 taskId)
             break;
         }
     }
-    gUnknown_03004AE4 = sub_8070048;
+    gPokemonItemUseCallback = sub_8070048;
     gUnknown_02038561 = 4;
     ItemMenu_ConfirmNormalFade(taskId);
 }
 
 void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 {
-    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    gPokemonItemUseCallback = DoPPRecoveryItemEffect;
     sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_PPUp(u8 taskId)
 {
-    gUnknown_03004AE4 = DoPPUpItemEffect;
+    gPokemonItemUseCallback = DoPPUpItemEffect;
     sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
-    gUnknown_03004AE4 = DoRareCandyItemEffect;
+    gPokemonItemUseCallback = DoRareCandyItemEffect;
     sub_80C9D98(taskId);
 }
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
 
-    if (gSpecialVar_ItemId >= ITEM_HM01)
+    if (gSpecialVar_ItemId >= ITEM_HM01_CUT)
         DisplayItemMessageOnField(taskId, gOtherText_BootedHM, sub_80C9EE4, 1); // HM
     else
         DisplayItemMessageOnField(taskId, gOtherText_BootedTM, sub_80C9EE4, 1); // TM
@@ -908,7 +908,7 @@ void sub_80C9F80(u8 var)
 
 void sub_80C9FC0(u8 var)
 {
-    gUnknown_03004AE4 = TeachMonTMMove;
+    gPokemonItemUseCallback = TeachMonTMMove;
     sub_80C9D98(var);
 }
 
@@ -1009,7 +1009,7 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 
 void ItemUseOutOfBattle_EvolutionStone(u8 var)
 {
-    gUnknown_03004AE4 = DoEvolutionStoneItemEffect;
+    gPokemonItemUseCallback = DoEvolutionStoneItemEffect;
     sub_80C9D98(var);
 }
 
@@ -1022,7 +1022,7 @@ void ItemUseInBattle_PokeBall(u8 var)
     }
     else
     {
-        MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+        Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
         DisplayItemMessageOnField(var, gOtherText_BoxIsFull, CleanUpItemMenuMessage, 1);
     }
 }
@@ -1047,7 +1047,7 @@ void ItemUseInBattle_StatIncrease(u8 taskId)
 {
     u16 partyId = gBattlePartyID[gBankInMenu];
 
-    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
 
     if (ExecuteTableBasedItemEffect_(&gPlayerParty[partyId], gSpecialVar_ItemId, partyId, 0) != FALSE)
     {
@@ -1078,25 +1078,25 @@ void sub_80CA3C0(u8 taskId)
 
 void ItemUseInBattle_Medicine(u8 var)
 {
-    gUnknown_03004AE4 = UseMedicine;
+    gPokemonItemUseCallback = UseMedicine;
     sub_80CA3C0(var);
 }
 
 void unref_sub_80CA410(u8 var)
 {
-    gUnknown_03004AE4 = sub_8070048;
+    gPokemonItemUseCallback = sub_8070048;
     sub_80CA3C0(var);
 }
 
 void ItemUseInBattle_PPRecovery(u8 var)
 {
-    gUnknown_03004AE4 = DoPPRecoveryItemEffect;
+    gPokemonItemUseCallback = DoPPRecoveryItemEffect;
     sub_80CA3C0(var);
 }
 
 void unref_sub_80CA448(u8 var)
 {
-    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
 
     if (ExecuteTableBasedItemEffect__(0, gSpecialVar_ItemId, 0) == FALSE)
     {
@@ -1113,7 +1113,7 @@ void unref_sub_80CA448(u8 var)
 
 void ItemUseInBattle_Escape(u8 taskId)
 {
-    MenuZeroFillWindowRect(0, 0xD, 0xD, 0x14);
+    Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
 
     if((gBattleTypeFlags & BATTLE_TYPE_TRAINER) == FALSE)
     {

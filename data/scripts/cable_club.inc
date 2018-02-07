@@ -136,7 +136,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A3E30:: @ 81A3E30
 	waitmovement 0
 	message OldaleTown_PokemonCenter_2F_Text_1A4E50
 	waitmessage
-	playse 21
+	playse SE_PIN
 	message OldaleTown_PokemonCenter_2F_Text_1A4E79
 	waitmessage
 	applymovement 255, OldaleTown_PokemonCenter_2F_Movement_1A4358
@@ -174,8 +174,7 @@ RustboroCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SlateportCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SootopolisCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 VerdanturfTown_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4342
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_1A4342
 	copyvar VAR_SPECIAL_7, LAST_TALKED
 	lock
 	faceplayer
@@ -282,7 +281,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
 	special CheckForAlivePartyMons
 	compare RESULT, 0
-	goto_if 5, OldaleTown_PokemonCenter_2F_EventScript_1A4056
+	goto_if_ne OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar VAR_SPECIAL_4, 2
 	return
 
@@ -346,15 +345,14 @@ RustboroCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SlateportCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SootopolisCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 VerdanturfTown_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
-	checkflag FLAG_SYS_POKEDEX_GET
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A4339
+	goto_if_unset FLAG_SYS_POKEDEX_GET, OldaleTown_PokemonCenter_2F_EventScript_1A4339
 	copyvar VAR_SPECIAL_7, LAST_TALKED
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A457E, 5
-	compare RESULT, 0
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A457E, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A40FA
 
 OldaleTown_PokemonCenter_2F_EventScript_1A40FA:: @ 81A40FA
@@ -407,7 +405,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
 	specialvar RESULT, CalculatePlayerPartyCount
 	compare RESULT, 2
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
+	goto_if_lt OldaleTown_PokemonCenter_2F_EventScript_1A41E1
 	specialvar RESULT, GetNameOfEnigmaBerryInPlayerParty
 	compare RESULT, 1
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A41EE
@@ -443,15 +441,14 @@ RustboroCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SlateportCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SootopolisCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
-	checkflag FLAG_VISITED_MAUVILLE_CITY
-	goto_if 0, OldaleTown_PokemonCenter_2F_EventScript_1A434B
+	goto_if_unset FLAG_VISITED_MAUVILLE_CITY, OldaleTown_PokemonCenter_2F_EventScript_1A434B
 	copyvar VAR_SPECIAL_7, LAST_TALKED
 	lock
 	faceplayer
-	msgbox OldaleTown_PokemonCenter_2F_Text_1A45FE, 5
-	compare RESULT, 0
+	msgbox OldaleTown_PokemonCenter_2F_Text_1A45FE, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4319
-	compare RESULT, 1
+	compare RESULT, YES
 	goto_if_eq OldaleTown_PokemonCenter_2F_EventScript_1A4229
 
 OldaleTown_PokemonCenter_2F_EventScript_1A4229:: @ 81A4229
@@ -691,7 +688,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 	special sub_80B929C
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_1A446C
+	goto_if_ne RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A442D:: @ 81A442D
@@ -699,7 +696,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 	special sub_80B929C
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_1A446C
+	goto_if_ne RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A4442:: @ 81A4442
@@ -707,7 +704,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 	special sub_80B929C
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_1A446C
+	goto_if_ne RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A4457:: @ 81A4457
@@ -715,7 +712,7 @@ RecordCorner_EventScript_1A4457:: @ 81A4457
 	special sub_80B929C
 	waitstate
 	compare VAR_TEMP_1, 0
-	goto_if 5, RecordCorner_EventScript_1A446C
+	goto_if_ne RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A446C:: @ 81A446C
@@ -771,7 +768,7 @@ TradeCenter_EventScript_1A44AD:: @ 81A44AD
 
 RecordCorner_EventScript_1A44BC:: @ 81A44BC
 	compare VAR_TEMP_0, 0
-	goto_if 5, RecordCorner_EventScript_1A44D6
+	goto_if_ne RecordCorner_EventScript_1A44D6
 	special sub_8064EAC
 	message RecordCorner_Text_1A4DD7
 	waitmessage
@@ -790,8 +787,8 @@ RecordCorner_EventScript_1A44D6:: @ 81A44D6
 	end
 
 TradeRoom_PromptToCancelLink:: @ 81A44E5
-	msgbox TradeRoom_WillLinkBeTerminated, 5
-	compare RESULT, 1
+	msgbox TradeRoom_WillLinkBeTerminated, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq TradeRoom_TerminateLink
 	erasebox 0, 0, 29, 19
 	end

@@ -28,8 +28,8 @@ extern u8 BattleText_Tie[];
 
 #define PRINT_MESSAGE(text, tileDataStartOffset, x)                             \
 {                                                                               \
-    InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
-    sub_8002F44(&gUnknown_03004210);                                            \
+    Text_InitWindow(&gUnknown_03004210, text, tileDataStartOffset, x, MESSAGE_Y);    \
+    Text_PrintWindow8002F44(&gUnknown_03004210);                                            \
 }
 
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
@@ -52,7 +52,7 @@ void PrintLinkBattleWinLossTie(void)
         {
 
             // lp_field_18 = player position?
-            switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
+            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18)
             {
             case 0:
             case 2:
@@ -70,7 +70,7 @@ void PrintLinkBattleWinLossTie(void)
         else
         {
 
-            switch (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18)
+            switch (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18)
             {
             case 1:
             case 3:
@@ -92,7 +92,7 @@ void PrintLinkBattleWinLossTie(void)
 
     if (gBattleOutcome == 1)
     {
-        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
+        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 != 0)
         {
             PRINT_MESSAGE_RIGHT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_LEFT(BattleText_Loss, TILE_OFFSET_LOSS);
@@ -105,7 +105,7 @@ void PrintLinkBattleWinLossTie(void)
     }
     else
     {
-        if (gLinkPlayers[BATTLE_STRUCT->linkPlayerIndex].lp_field_18 != 0)
+        if (gLinkPlayers[gBattleStruct->linkPlayerIndex].lp_field_18 != 0)
         {
             PRINT_MESSAGE_LEFT(BattleText_Win, TILE_OFFSET_WIN);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, TILE_OFFSET_LOSS);

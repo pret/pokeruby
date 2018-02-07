@@ -1,4 +1,5 @@
 #include "global.h"
+#include "cable_club.h"
 #include "link.h"
 #include "battle.h"
 #include "berry.h"
@@ -12,6 +13,7 @@
 #include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
+#include "string_util.h"
 #include "strings2.h"
 #include "task.h"
 #include "text.h"
@@ -66,7 +68,7 @@ u32 sub_8007E40(void);
 static void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
-static void PrintHex(u32, u8, u8, u8);
+void PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8);
 bool8 sub_8008224(void);
@@ -79,7 +81,7 @@ static void sub_80084C8(void);
 static void sub_80084F4(void);
 
 static void CheckErrorStatus(void);
-static void CB2_PrintErrorMessage(void);
+void CB2_PrintErrorMessage(void);
 static u8 IsSioMultiMaster(void);
 static void DisableSerial(void);
 static void EnableSerial(void);
@@ -145,6 +147,9 @@ void (*gLinkCallback)(void);
 struct LinkPlayer gSavedLinkPlayers[MAX_LINK_PLAYERS];
 u8 gShouldAdvanceLinkState;
 u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
+#if DEBUG
+u8 gUnknown_Debug_30030E0;
+#endif
 u8 gBlockRequestType;
 u8 gLastSendQueueCount;
 struct Link gLink;
@@ -156,11 +161,11 @@ u8 deUnkValue1;
 u8 deUnkValue2;
 #endif
 
-EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = {0};
-EWRAM_DATA bool8 gLinkTestDummyBool = {0};
-EWRAM_DATA u32 gFiller_20238B8 = {0};
-EWRAM_DATA u32 dword_20238BC = {0};
-EWRAM_DATA bool8 gLinkOpen = {0};
+EWRAM_DATA bool8 gLinkTestDebugValuesEnabled = 0;
+EWRAM_DATA bool8 gLinkTestDummyBool = 0;
+EWRAM_DATA u32 gFiller_20238B8 = 0;
+EWRAM_DATA u32 dword_20238BC = 0;
+EWRAM_DATA bool8 gLinkOpen = 0;
 
 static const u16 sLinkTestDigitPalette[] = INCBIN_U16("graphics/interface/link_test_digits.gbapal");
 static const u32 sLinkTestDigitTiles[] = INCBIN_U32("graphics/interface/link_test_digits.4bpp");
@@ -189,9 +194,19 @@ const struct BlockRequest sBlockRequestLookupTable[5] =
 
 static const u8 sTestString[] = _("テストな");
 
-ALIGNED(4) static const u8 sMagic[] = "GameFreak inc.";
+// TODO: fix the alignment here
 
-ALIGNED(4) static const u8 sEmptyString[] = _("");
+ALIGNED(4) const u8 sMagic[] = "GameFreak inc.";
+
+#if DEBUG
+const u8 sEmptyString[] = _(" ");
+#else
+ALIGNED(4) const u8 sEmptyString[] = _("");
+#endif
+
+#if DEBUG
+const u8 linkDebugFillerPleaseRemove[2] = {0}; 
+#endif
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -238,8 +253,8 @@ void LinkTestScreen(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -409,7 +424,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)
-        TrySavingData(LINK_SAVE);
+        Save_WriteData(SAVE_LINK);
     if (gMain.newKeys & SELECT_BUTTON)
         sub_800832C();
     if (gLinkTestDebugValuesEnabled)
@@ -543,6 +558,9 @@ static void ProcessRecvCmds(u8 unusedParam)
                 else
                 {
                     SetBlockReceivedFlag(i);
+#if DEBUG
+                    debug_sub_808B838(i);
+#endif
                 }
             }
             break;
@@ -898,14 +916,9 @@ bool8 sub_8007E9C(u8 a1)
     }
 }
 
-bool8 sub_8007ECC(void)
+bool8 IsLinkTaskFinished(void)
 {
-    u8 retVal = FALSE;
-
-    if (!gLinkCallback)
-        retVal = TRUE;
-
-    return retVal;
+    return gLinkCallback == NULL;
 }
 
 u8 GetBlockReceivedStatus(void)
@@ -957,7 +970,7 @@ static void PrintHexDigit(u8 tileNum, u8 x, u8 y)
     tilemap[(32 * y) + x] = (gLinkTestBGInfo.paletteNum << 12) | (tileNum + 1);
 }
 
-static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
+void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
 {
     u8 buffer[16];
     s32 i;
@@ -974,6 +987,143 @@ static void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
         x++;
     }
 }
+
+#if DEBUG
+
+EWRAM_DATA u16 *debugCharacterBase = NULL;
+EWRAM_DATA void *unk_20238C8 = NULL;
+EWRAM_DATA u16 (*debugTileMap)[] = NULL;
+EWRAM_DATA u32 unk_20238D0 = 0;
+
+void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3)
+{
+    CpuSet(sLinkTestDigitTiles, buffer, 272);
+    debugCharacterBase = buffer;
+    unk_20238C8 = arg1;
+    debugTileMap = arg2;
+    unk_20238D0 = arg3;
+}
+
+#ifdef NONMATCHING
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
+{
+    u32 buffer[8];
+    u32 *ptr;
+
+    u16 *dest;
+
+    int i;
+
+    if (unk_20238D0 != sp0)
+        return;
+
+    r3 = max(r3, 8);
+
+    ptr = &buffer[0];
+    dest = &(*debugTileMap)[left + top * 32];
+
+    for (i = r3; i != 0; i--)
+    {
+        *(ptr++) = value & 0xF;
+        value = value >> 4;
+    }
+
+    ptr = &buffer[8 - r3];
+    for (i = r3; i != 0; i--)
+    {
+        int charOffset = (((uintptr_t) debugCharacterBase) - ((uintptr_t) unk_20238C8)) / 32;
+        *dest = *ptr + charOffset + 1;
+        ptr--;
+        dest++;
+    }
+}
+#else
+__attribute__((naked))
+void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r8\n"
+        "	push	{r7}\n"
+        "	add	sp, sp, #0xffffffe0\n"
+        "	add	r5, r0, #0\n"
+        "	add	r6, r1, #0\n"
+        "	add	r4, r3, #0\n"
+        "	ldr	r0, [sp, #0x38]\n"
+        "	ldr	r1, ._347       @ unk_20238D0\n"
+        "	ldr	r1, [r1]\n"
+        "	cmp	r1, r0\n"
+        "	bne	._345	@cond_branch\n"
+        "	cmp	r4, #0x8\n"
+        "	ble	._342	@cond_branch\n"
+        "	mov	r4, #0x8\n"
+        "._342:\n"
+        "	mov	r3, sp\n"
+        "	ldr	r0, ._347 + 4   @ debugTileMap\n"
+        "	mov	r8, r0\n"
+        "	lsl	r2, r2, #0x6\n"
+        "	mov	ip, r2\n"
+        "	lsl	r6, r6, #0x1\n"
+        "	lsl	r7, r4, #0x2\n"
+        "	cmp	r4, #0\n"
+        "	ble	._343	@cond_branch\n"
+        "	mov	r1, #0xf\n"
+        "	add	r2, r4, #0\n"
+        "._344:\n"
+        "	add	r0, r5, #0\n"
+        "	and	r0, r0, r1\n"
+        "	stmia	r3!, {r0}\n"
+        "	lsr	r5, r5, #0x4\n"
+        "	sub	r2, r2, #0x1\n"
+        "	cmp	r2, #0\n"
+        "	bne	._344	@cond_branch\n"
+        "._343:\n"
+        "	mov	r1, r8\n"
+        "	ldr	r0, [r1]\n"
+        "	add r0, r0, ip\n"
+        "	add	r5, r0, r6\n"
+        "	mov	r1, sp\n"
+        "	add	r0, r1, r7\n"
+        "	sub	r3, r0, #4\n"
+        "	cmp	r4, #0\n"
+        "	ble	._345	@cond_branch\n"
+        "	ldr	r7, ._347 + 8   @ debugCharacterBase\n"
+        "	ldr	r6, ._347 + 12  @ unk_20238C8\n"
+        "	add	r2, r4, #0\n"
+        "._346:\n"
+        "	ldr	r1, [r7]\n"
+        "	ldr	r0, [r6]\n"
+        "	sub	r1, r1, r0\n"
+        "	lsr	r1, r1, #0x5\n"
+        "	ldr	r0, [r3]\n"
+        "	add	r0, r0, r1\n"
+        "	add	r0, r0, #0x1\n"
+        "	strh	r0, [r5]\n"
+        "	sub	r3, r3, #0x4\n"
+        "	add	r5, r5, #0x2\n"
+        "	sub	r2, r2, #0x1\n"
+        "	cmp	r2, #0\n"
+        "	bne	._346	@cond_branch\n"
+        "._345:\n"
+        "	add	sp, sp, #0x20\n"
+        "	pop	{r3}\n"
+        "	mov	r8, r3\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._348:\n"
+        "	.align	2, 0\n"
+        "._347:\n"
+        "	.word	unk_20238D0\n"
+        "	.word	debugTileMap\n"
+        "	.word	debugCharacterBase\n"
+        "	.word	unk_20238C8\n"
+        "\n"
+    );
+}
+#endif
+
+#endif
 
 static void LinkCB_RequestPlayerDataExchange(void)
 {
@@ -1236,9 +1386,9 @@ void CB2_LinkError(void)
     FillPalette(0, 0, 2);
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E7198);
-    MenuZeroFillScreen();
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7198);
+    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E7198);
+    Menu_EraseScreen();
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;
@@ -1253,14 +1403,33 @@ void CB2_LinkError(void)
     SetMainCallback2(CB2_PrintErrorMessage);
 }
 
-static void CB2_PrintErrorMessage(void)
+void CB2_PrintErrorMessage(void)
 {
-    u8 array[64] __attribute__((unused)); // unused
+    u8 array[32] __attribute__((unused)); // unused
+    u8 array2[32] __attribute__((unused)); // unused
 
     switch (gMain.state)
     {
     case 0:
-        MenuPrint_PixelCoords(gMultiText_LinkError, 20, 56, 1);
+        Menu_PrintTextPixelCoords(gMultiText_LinkError, 20, 56, 1);
+#if DEBUG
+        StringCopy(array, sColorCodes);
+
+        ConvertIntToHexStringN(array2, sErrorLinkStatus, STR_CONV_MODE_LEADING_ZEROS, 8);
+        StringAppend(array, array2);
+
+        StringAppend(array, sEmptyString);
+
+        ConvertIntToHexStringN(array2, sErrorLastSendQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringAppend(array, array2);
+
+        StringAppend(array, sEmptyString);
+
+        ConvertIntToHexStringN(array2, sErrorLastRecvQueueCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+        StringAppend(array, array2);
+
+        Menu_PrintText(array, 2, 15);
+#endif
         break;
     case 30:
     case 60:

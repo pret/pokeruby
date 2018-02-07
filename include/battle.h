@@ -4,6 +4,30 @@
 #include "sprite.h"
 #include "constants/battle_constants.h"
 
+/*
+    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
+    Each bank has a value consisting of two bits.
+    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
+    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
+*/
+
+#define BATTLE_BANKS_COUNT  4
+
+#define IDENTITY_PLAYER_MON1        0
+#define IDENTITY_OPPONENT_MON1      1
+#define IDENTITY_PLAYER_MON2        2
+#define IDENTITY_OPPONENT_MON2      3
+
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
+
+#define BIT_SIDE        0x1
+#define BIT_MON         0x2
+
+#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
+#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
+#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+
 enum
 {
     BATTLE_TERRAIN_GRASS,
@@ -49,16 +73,16 @@ struct AI_Stack
 
 struct AI_ThinkingStruct /* 0x2016800 */
 {
-/* 0x00 */ u8 aiState;
-/* 0x01 */ u8 movesetIndex;
-/* 0x02 */ u16 moveConsidered;
-/* 0x04 */ s8 score[4]; // score?
-/* 0x08 */ u32 funcResult;
-/* 0x0C */ u32 aiFlags;
-/* 0x10 */ u8 aiAction;
-/* 0x11 */ u8 aiLogicId;
-/* 0x12 */ u8 filler12[6];
-/* 0x18 */ u8 simulatedRNG[4];
+    /*0x00*/ u8 aiState;
+    /*0x01*/ u8 movesetIndex;
+    /*0x02*/ u16 moveConsidered;
+    /*0x04*/ s8 score[4]; // score?
+    /*0x08*/ u32 funcResult;
+    /*0x0C*/ u32 aiFlags;
+    /*0x10*/ u8 aiAction;
+    /*0x11*/ u8 aiLogicId;
+    /*0x12*/ u8 filler12[6];
+    /*0x18*/ u8 simulatedRNG[4];
 };
 
 struct BattleStruct /* 0x2000000 */
@@ -227,10 +251,8 @@ struct BattleStruct /* 0x2000000 */
     /*0x160D5*/ u8 unk160D5;
     /*0x160D6*/ u8 unk160D6;
     /*0x160D7*/ u8 unk160D7;
-    /*0x160D8*/ u8 unk160D8;
-    /*0x160D9*/ u8 unk160D9;
-    /*0x160DA*/ u8 unk160DA;
-    /*0x160DB*/ u8 unk160DB;
+    /*0x160D8*/ u8 unk160D8[2];
+    /*0x160DA*/ u8 unk160DA[2];
     /*0x160DC*/ u8 unk160DC;
     /*0x160DD*/ u8 intimidateBank;
     /*0x160DE*/ u8 unk160DE;
@@ -304,6 +326,18 @@ struct BattleStruct /* 0x2000000 */
     /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
 };
 
+struct StatsArray
+{
+    u16 hp;
+    u16 atk;
+    u16 def;
+    u16 spd;
+    u16 spAtk;
+    u16 spDef;
+};
+
+#define gBattleResources_statsBeforeLvlUp ((struct StatsArray *)(gSharedMem + 0x17180))
+
 struct DisableStruct
 {
     /*0x00*/ u32 transformedMonPersonality;
@@ -366,16 +400,6 @@ struct BattleResults
 struct Struct2017100
 {
     u32 arr[4];
-};
-
-struct Struct2019348
-{
-    u16 unk0;
-    u16 unk2;
-    u8 unk4;
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
 };
 
 struct Struct2017800
@@ -485,7 +509,7 @@ struct sideTimer
     u8 lightscreenTimer;    //0x1
     u8 mistTimer;           //0x2
     u8 field3;              //0x3
-    u16 field4;              //0x4
+    u16 field4;             //0x4
     u8 spikesAmount;        //0x6
     u8 safeguardTimer;      //0x7
     u8 followmeTimer;       //0x8
@@ -503,7 +527,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BANKS_BATTLE];
     u8 wishUserID[MAX_BANKS_BATTLE];
     u8 weatherDuration;
-    u16 knockedOffPokes;
+    u8 knockedOffPokes[2];
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;
@@ -511,10 +535,92 @@ extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
 extern struct BattleResults gBattleResults;
 extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
 extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
-extern struct sideTimer gSideTimer[2];
+extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct Struct20238C8 gUnknown_020238C8;
+
+#define GET_MOVE_TYPE(move, typeArg)                        \
+{                                                           \
+    if (gBattleStruct->dynamicMoveType)                     \
+        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
+    else                                                    \
+        typeArg = gBattleMoves[move].type;                  \
+}
+
+#define MOVE_EFFECT_SLEEP               0x1
+#define MOVE_EFFECT_POISON              0x2
+#define MOVE_EFFECT_BURN                0x3
+#define MOVE_EFFECT_FREEZE              0x4
+#define MOVE_EFFECT_PARALYSIS           0x5
+#define MOVE_EFFECT_TOXIC               0x6
+#define MOVE_EFFECT_CONFUSION           0x7
+#define MOVE_EFFECT_FLINCH              0x8
+#define MOVE_EFFECT_TRI_ATTACK          0x9
+#define MOVE_EFFECT_UPROAR              0xA
+#define MOVE_EFFECT_PAYDAY              0xB
+#define MOVE_EFFECT_CHARGING            0xC
+#define MOVE_EFFECT_WRAP                0xD
+#define MOVE_EFFECT_RECOIL_25           0xE
+#define MOVE_EFFECT_ATK_PLUS_1          0xF
+#define MOVE_EFFECT_DEF_PLUS_1          0x10
+#define MOVE_EFFECT_SPD_PLUS_1          0x11
+#define MOVE_EFFECT_SP_ATK_PLUS_1       0x12
+#define MOVE_EFFECT_SP_DEF_PLUS_1       0x13
+#define MOVE_EFFECT_ACC_PLUS_1          0x14
+#define MOVE_EFFECT_EVS_PLUS_1          0x15
+#define MOVE_EFFECT_ATK_MINUS_1         0x16
+#define MOVE_EFFECT_DEF_MINUS_1         0x17
+#define MOVE_EFFECT_SPD_MINUS_1         0x18
+#define MOVE_EFFECT_SP_ATK_MINUS_1      0x19
+#define MOVE_EFFECT_SP_DEF_MINUS_1      0x1A
+#define MOVE_EFFECT_ACC_MINUS_1         0x1B
+#define MOVE_EFFECT_EVS_MINUS_1         0x1C
+#define MOVE_EFFECT_RECHARGE            0x1D
+#define MOVE_EFFECT_RAGE                0x1E
+#define MOVE_EFFECT_STEAL_ITEM          0x1F
+#define MOVE_EFFECT_PREVENT_ESCAPE      0x20
+#define MOVE_EFFECT_NIGHTMARE           0x21
+#define MOVE_EFFECT_ALL_STATS_UP        0x22
+#define MOVE_EFFECT_RAPIDSPIN           0x23
+#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
+#define MOVE_EFFECT_ATK_DEF_DOWN        0x25
+#define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
+#define MOVE_EFFECT_ATK_PLUS_2          0x27
+#define MOVE_EFFECT_DEF_PLUS_2          0x28
+#define MOVE_EFFECT_SPD_PLUS_2          0x29
+#define MOVE_EFFECT_SP_ATK_PLUS_2       0x2A
+#define MOVE_EFFECT_SP_DEF_PLUS_2       0x2B
+#define MOVE_EFFECT_ACC_PLUS_2          0x2C
+#define MOVE_EFFECT_EVS_PLUS_2          0x2D
+#define MOVE_EFFECT_ATK_MINUS_2         0x2E
+#define MOVE_EFFECT_DEF_MINUS_2         0x2F
+#define MOVE_EFFECT_SPD_MINUS_2         0x30
+#define MOVE_EFFECT_SP_ATK_MINUS_2      0x31
+#define MOVE_EFFECT_SP_DEF_MINUS_2      0x32
+#define MOVE_EFFECT_ACC_MINUS_2         0x33
+#define MOVE_EFFECT_EVS_MINUS_2         0x34
+#define MOVE_EFFECT_THRASH              0x35
+#define MOVE_EFFECT_KNOCK_OFF           0x36
+#define MOVE_EFFECT_NOTHING_37          0x37
+#define MOVE_EFFECT_NOTHING_38          0x38
+#define MOVE_EFFECT_NOTHING_39          0x39
+#define MOVE_EFFECT_NOTHING_3A          0x3A
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
+#define MOVE_EFFECT_NOTHING_3C          0x3C
+#define MOVE_EFFECT_NOTHING_3D          0x3D
+#define MOVE_EFFECT_NOTHING_3E          0x3E
+#define MOVE_EFFECT_NOTHING_3F          0x3F
+#define MOVE_EFFECT_AFFECTS_USER        0x40
+#define MOVE_EFFECT_CERTAIN             0x80
+
+#define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
+#define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
+#define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
+
+#define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
+
+#define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
 
 // used in many battle files, it seems as though Hisashi Sogabe wrote
 // some sort of macro to replace the use of actually calling memset.
@@ -552,7 +658,7 @@ struct funcStack
 
 struct scriptsStack
 {
-    u8* ptr[8];
+    const u8 *ptr[8];
     u8 size;
 };
 
@@ -561,7 +667,7 @@ extern u8 gBattleTextBuff1[];
 //function declarations of buffer emits
 void EmitGetAttributes(u8 buffID, u8 request, u8 c);    //0x0
 void Emitcmd1(u8 a, u8 b, u8 c); //0x1
-void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
+void EmitSetMonData(u8 a, u8 request, u8 c, u8 bytes, void *data);  //0x2
 void EmitSendOutPoke(u8 a, u8 b, u8 c); //0x5
 void EmitReturnPokeToBall(u8 a, u8 b); //0x6
 void EmitTrainerSlide(u8 a); //0x8
@@ -616,7 +722,7 @@ void InitBattle(void);
 void sub_800EC9C(void);
 void sub_800F104(void);
 void sub_800F298(void);
-void sub_800F808(void);
+void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
@@ -648,32 +754,30 @@ void sub_8011970(void);
 void sub_80119B4(void);
 void BattleBeginFirstTurn(void);
 void BattleTurnPassed(void);
+void RunBattleScriptCommands_PopCallbacksStack(void);
+void RunBattleScriptCommands(void);
+bool8 TryRunFromBattle(u8 bank);
 
 // asm/battle_2.o
 void sub_8012324(void);
-void sub_8012FBC(u8, u8);
+void SwapTurnOrder(u8, u8);
 u8 GetWhoStrikesFirst(u8, u8, u8);
-void TurnValuesCleanUp(u8);
-void SpecialStatusesClear(void);
-void sub_80138F0(void);
-void sub_80155A4();
-void CancelMultiTurnMoves(u8 bank);
-void PrepareStringBattle();
-void sub_80156DC();
-void sub_80157C4(u8 index);
+
+void debug_sub_8010800(void);
 
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);
 u8 TurnBasedEffects(void);
-u8 sub_80170DC();
-u8 sub_80173A4();
+u8 HandleFaintedMonActions();
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
 u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 
 // asm/battle_4.o
 void AI_CalcDmg(u8, u8);
 u8 TypeCalc(u16 move, u8 bank_atk, u8 bank_def);
+u8 BankGetTurnOrder(u8 bank);
 
 // asm/battle_5.o
 void nullsub_91(void);
@@ -692,10 +796,11 @@ void nullsub_10(int);
 void load_gfxc_health_bar();
 u8 battle_load_something();
 void sub_8031F88(u8);
-void sub_80324F8(struct Pokemon *, u8);
+void HandleLowHpMusicChange(struct Pokemon *, u8);
 void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
+void BattleStopLowHpSound(void);
 
 // asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);

@@ -13,6 +13,8 @@
 #include "util.h"
 #include "ewram.h"
 
+extern u8 gUnknown_02023A14_50;
+extern u32 gUnknown_02023A14_4C;
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern u8 gActiveBank;
@@ -336,11 +338,15 @@ void BattleAI_SetupAIData(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         AI_THINKING_STRUCT->aiFlags = 0x80000000;
 #ifdef GERMAN
-    else if (gBattleTypeFlags & 0x900 || gTrainerBattleOpponent == 0x400)
+    else if (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER) || gTrainerBattleOpponent == 0x400)
         AI_THINKING_STRUCT->aiFlags = 7;
 #endif
     else // otherwise, just set aiFlags to whatever flags the trainer has set in their data.
         AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;
+#if DEBUG
+    if (gUnknown_02023A14_50 & 1)
+        AI_THINKING_STRUCT->aiFlags = gUnknown_02023A14_4C;
+#endif
 }
 
 u8 BattleAI_GetAIActionToUse(void)
@@ -355,7 +361,7 @@ u8 BattleAI_GetAIActionToUse(void)
     {
         if (AI_THINKING_STRUCT->aiFlags & 1)
         {
-            AI_THINKING_STRUCT->aiState = AIState_SettingUp;
+            AI_THINKING_STRUCT->aiState = BATTLEAI_SETTING_UP;
             BattleAI_DoAIProcessing();
         }
         AI_THINKING_STRUCT->aiFlags >>= 1;
@@ -393,13 +399,13 @@ u8 BattleAI_GetAIActionToUse(void)
 
 void BattleAI_DoAIProcessing(void)
 {
-    while (AI_THINKING_STRUCT->aiState != AIState_FinishedProcessing)
+    while (AI_THINKING_STRUCT->aiState != BATTLEAI_FINISHED)
     {
         switch (AI_THINKING_STRUCT->aiState)
         {
-        case AIState_DoNotProcess: //Needed to match.
+        case BATTLEAI_DO_NOT_PROCESS: //Needed to match.
             break;
-        case AIState_SettingUp:
+        case BATTLEAI_SETTING_UP:
             gAIScriptPtr = BattleAIs[AI_THINKING_STRUCT->aiLogicId]; // set the AI ptr.
             if (gBattleMons[gBankAttacker].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
             {
@@ -411,7 +417,7 @@ void BattleAI_DoAIProcessing(void)
             }
             AI_THINKING_STRUCT->aiState++;
             break;
-        case AIState_Processing:
+        case BATTLEAI_PROCESSING:
             if (AI_THINKING_STRUCT->moveConsidered != MOVE_NONE)
                 sBattleAICmdTable[*gAIScriptPtr](); // run AI command.
             else
@@ -423,7 +429,7 @@ void BattleAI_DoAIProcessing(void)
             {
                 AI_THINKING_STRUCT->movesetIndex++;
                 if (AI_THINKING_STRUCT->movesetIndex < MAX_MON_MOVES && (AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK) == 0)
-                    AI_THINKING_STRUCT->aiState = AIState_SettingUp; // as long as their are more moves to process, keep setting this to setup state.
+                    AI_THINKING_STRUCT->aiState = BATTLEAI_SETTING_UP; // as long as their are more moves to process, keep setting this to setup state.
                 else
                     AI_THINKING_STRUCT->aiState++; // done processing.
                 AI_THINKING_STRUCT->aiAction &= (AI_ACTION_FLEE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK |
@@ -1275,7 +1281,7 @@ static void BattleAICmd_if_arg_not_equal(void)
 
 static void BattleAICmd_if_would_go_first(void)
 {
-    if (GetWhoStrikesFirst(gBankAttacker, gBankTarget, 1) == gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(gBankAttacker, gBankTarget, TRUE) == gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1283,7 +1289,7 @@ static void BattleAICmd_if_would_go_first(void)
 
 static void BattleAICmd_if_would_not_go_first(void)
 {
-    if (GetWhoStrikesFirst(gBankAttacker, gBankTarget, 1) != gAIScriptPtr[1])
+    if (GetWhoStrikesFirst(gBankAttacker, gBankTarget, TRUE) != gAIScriptPtr[1])
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1321,7 +1327,7 @@ static void BattleAICmd_count_alive_pokemon(void)
         u32 status;
         var = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlePartyID[GetBankByPlayerAI(status)];
+        var2 = gBattlePartyID[GetBankByIdentity(status)];
     }
     else
     {
@@ -1422,8 +1428,8 @@ static void BattleAICmd_get_highest_possible_damage(void)
     s32 i;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1462,8 +1468,8 @@ static void BattleAICmd_if_damage_bonus(void)
     u8 damageVar;
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
@@ -1669,8 +1675,8 @@ static void BattleAICmd_if_can_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1698,8 +1704,8 @@ static void BattleAICmd_if_cant_faint(void)
     }
 
     gDynamicBasePower = 0;
-    BATTLE_STRUCT->dynamicMoveType = 0;
-    BATTLE_STRUCT->dmgMultiplier = 1;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
@@ -1907,7 +1913,7 @@ static void BattleAICmd_flee(void)
 
 static void BattleAICmd_if_random_100(void)
 {
-    u8 safariFleeRate = BATTLE_STRUCT->safariFleeRate * 5; // safari flee rate, from 0-20
+    u8 safariFleeRate = gBattleStruct->safariFleeRate * 5; // safari flee rate, from 0-20
 
     if ((u8)(Random() % 100) < safariFleeRate)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);

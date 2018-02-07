@@ -1,14 +1,10 @@
-//
-
-//
-
 #include "global.h"
 #include "overworld.h"
 #include "sprite.h"
 #include "script.h"
 #include "strings.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "text.h"
 #include "main.h"
 #include "menu.h"
@@ -95,7 +91,8 @@ static const u8 *gUnknown_03000758;
 
 #define GFX_TAG_POKEBLOCK_CASE 14800
 
-const s8 gPokeblockFlavorCompatibilityTable[] = {
+const s8 gPokeblockFlavorCompatibilityTable[] =
+{
     // Cool, Beauty, Cute, Smart, Tough
           0,      0,    0,     0,     0, // Hardy
           1,      0,    0,     0,    -1, // Lonely
@@ -124,14 +121,16 @@ const s8 gPokeblockFlavorCompatibilityTable[] = {
           0,      0,    0,     0,     0  // Quirky
 };
 
-void (*const gUnknown_083F7EA8[])(void) = {
+void (*const gUnknown_083F7EA8[])(void) =
+{
     sub_80A5B40,
     c2_exit_to_overworld_2_switch,
     sub_802E424,
     c2_exit_to_overworld_2_switch
 };
 
-const u8 *const gPokeblockNames[] = {
+const u8 *const gPokeblockNames[] =
+{
     NULL,
     ContestStatsText_RedPokeBlock,
     ContestStatsText_BluePokeBlock,
@@ -149,7 +148,8 @@ const u8 *const gPokeblockNames[] = {
     ContestStatsText_GoldPokeBlock
 };
 
-const struct MenuAction2 gUnknown_083F7EF4[] = {
+const struct MenuAction2 gUnknown_083F7EF4[] =
+{
     {OtherText_Use,     sub_810C508},
     {OtherText_Toss,    sub_810C5C0},
     {gOtherText_CancelNoTerminator, sub_810C748},
@@ -165,21 +165,25 @@ const struct YesNoFuncTable gUnknown_083F7F24 = {sub_810C610, sub_810C668};
 
 const u8 UnreferencedData_083F7F2C[] = {0x16, 0x17, 0x18, 0x21, 0x2f};
 
-const struct OamData gOamData_83F7F34 = {
+const struct OamData gOamData_83F7F34 =
+{
     .size = 3,
     .priority = 2
 };
 
-const union AnimCmd gSpriteAnim_83F7F3C[] = {
+const union AnimCmd gSpriteAnim_83F7F3C[] =
+{
     ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_83F7F44[] = {
+const union AnimCmd *const gSpriteAnimTable_83F7F44[] =
+{
     gSpriteAnim_83F7F3C
 };
 
-const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] = {
+const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] =
+{
     AFFINEANIMCMD_FRAME(0, 0, -2,  2),
     AFFINEANIMCMD_FRAME(0, 0,  2,  4),
     AFFINEANIMCMD_FRAME(0, 0, -2,  4),
@@ -187,22 +191,26 @@ const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] = {
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] = {
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] =
+{
     gSpriteAffineAnim_83F7F48
 };
 
-const struct CompressedSpriteSheet gUnknown_083F7F74 = {
+const struct CompressedSpriteSheet gUnknown_083F7F74 =
+{
     gMenuPokeblockDevice_Gfx,
     0x800,
     GFX_TAG_POKEBLOCK_CASE
 };
 
-const struct CompressedSpritePalette gUnknown_083F7F7C = {
+const struct CompressedSpritePalette gUnknown_083F7F7C =
+{
     gMenuPokeblockDevice_Pal,
     GFX_TAG_POKEBLOCK_CASE
 };
 
-const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
+const struct SpriteTemplate gSpriteTemplate_83F7F84 =
+{
     GFX_TAG_POKEBLOCK_CASE,
     GFX_TAG_POKEBLOCK_CASE,
     &gOamData_83F7F34,
@@ -212,12 +220,25 @@ const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
     SpriteCallbackDummy
 };
 
-const struct Pokeblock gUnknown_083F7F9C[] = {
-    { PBLOCK_CLR_RED,    20,  0,  0,  0,  0, 20},
-    { PBLOCK_CLR_BLUE,    0, 20,  0,  0,  0, 20},
-    { PBLOCK_CLR_PINK,    0,  0, 20,  0,  0, 20},
-    { PBLOCK_CLR_GREEN,   0,  0,  0, 20,  0, 20},
-    { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
+const struct Pokeblock gUnknown_083F7F9C[] =
+{
+    { PBLOCK_CLR_RED,      20,  0,  0,  0,  0, 20 },
+    { PBLOCK_CLR_BLUE,      0, 20,  0,  0,  0, 20 },
+    { PBLOCK_CLR_PINK,      0,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_GREEN,     0,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_YELLOW,    0,  0,  0,  0, 20, 20 },
+#if DEBUG
+    { PBLOCK_CLR_PURPLE,   20,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_INDIGO,    0, 20,  0, 20,  0, 20 },
+    { PBLOCK_CLR_BROWN,     0,  0, 20,  0, 20, 20 },
+	{ PBLOCK_CLR_LITEBLUE, 20,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_OLIVE,     0, 20,  0,  0, 20, 20 },
+    { PBLOCK_CLR_GRAY,      0,  2,  0,  2,  2,  0 },
+	{ PBLOCK_CLR_BLACK,     3,  3,  3,  4,  3,  0 },
+    { PBLOCK_CLR_WHITE,     1,  1,  1,  1,  1,  1 },
+    { PBLOCK_CLR_GOLD,     20,  0,  0,  0,  0, 20 },
+	{ 0 },
+#endif
 };
 
 // text
@@ -232,14 +253,10 @@ static void sub_810B674(void)
 
 static void sub_810B68C(void)
 {
-    u16 *src;
-    vu16 *dest;
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    src = gBGTilemapBuffers[2];
-    dest = (vu16 *)(VRAM + 0x7800);
-    DmaCopy16(3, src, dest, sizeof gBGTilemapBuffers[2]);
+    DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x7800), sizeof gBGTilemapBuffers[2]);
 }
 
 static bool8 sub_810B6C0(void)
@@ -248,14 +265,14 @@ static bool8 sub_810B6C0(void)
     switch (gMain.state)
     {
         case  0:
-            sub_80F9438();
+            ClearVideoCallbacks();
             sub_80F9368();
             REG_BG2CNT = BGCNT_SCREENBASE(15) | BGCNT_CHARBASE(2) | BGCNT_PRIORITY(2);
             REG_BLDCNT = 0;
             gMain.state++;
             break;
         case  1:
-            remove_some_task();
+            ScanlineEffect_Stop();
             gMain.state++;
             break;
         case  2:
@@ -275,15 +292,15 @@ static bool8 sub_810B6C0(void)
             gMain.state++;
             break;
         case  5:
-            SetUpWindowConfig(&gWindowConfig_81E6E34);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  6:
-            SetUpWindowConfig(&gWindowConfig_81E6E50);
+            Text_LoadWindowTemplate(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case  7:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E34);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E34);
             gMain.state++;
             break;
         case  8:
@@ -293,7 +310,7 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case  9:
-            MultistepInitMenuWindowBegin(&gWindowConfig_81E6E50);
+            MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E50);
             gMain.state++;
             break;
         case 10:
@@ -310,10 +327,10 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case 12:
-            sub_80F944C();
+            ClearVerticalScrollIndicatorPalettes();
             LoadScrollIndicatorPalette();
-            CreateVerticalScrollIndicators(0, 0xb0, 0x08);
-            CreateVerticalScrollIndicators(1, 0xb0, 0x98);
+            CreateVerticalScrollIndicators(TOP_ARROW, 0xb0, 0x08);
+            CreateVerticalScrollIndicators(BOTTOM_ARROW, 0xb0, 0x98);
             gMain.state++;
             break;
         case 13:
@@ -432,31 +449,30 @@ void OpenPokeblockCaseOnFeeder(void)
     SetMainCallback2(sub_810B96C);
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_8120F98(void)
 {
     u8 i;
-    for (i=0; i<40 && gUnknown_083F7F9C[i].color != 0; i++)
-    {
+
+    for (i = 0; i < 40 && gUnknown_083F7F9C[i].color != 0; i++)
         gSaveBlock1.pokeblocks[i] = gUnknown_083F7F9C[i];
-    }
 }
 #endif
 
 static void sub_810BB0C(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
 }
 
 static void sub_810BB30(void)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
-    MenuPrint(gContestStatsText_Spicy,   2, 13);
-    MenuPrint(gContestStatsText_Dry,     2, 15);
-    MenuPrint(gContestStatsText_Sweet,   2, 17);
-    MenuPrint(gContestStatsText_Bitter,  8, 13);
-    MenuPrint(gContestStatsText_Sour,    8, 15);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
+    Menu_PrintText(gContestStatsText_Spicy,   2, 13);
+    Menu_PrintText(gContestStatsText_Dry,     2, 15);
+    Menu_PrintText(gContestStatsText_Sweet,   2, 17);
+    Menu_PrintText(gContestStatsText_Bitter,  8, 13);
+    Menu_PrintText(gContestStatsText_Sour,    8, 15);
 }
 
 static void sub_810BB88(u8 a0)
@@ -464,17 +480,17 @@ static void sub_810BB88(u8 a0)
     u8 i;
     u8 y;
     u8 *buf;
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     for (i=a0; i<=a0+8; i++)
     {
         y = (i - a0) << 1;
         if (i == gUnknown_02039248.unk2)
         {
             buf = sub_8072C74(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
-            MenuPrint(gStringVar1, 15, y + 1);
+            Menu_PrintText(gStringVar1, 15, y + 1);
             if (i != a0 + 8)
             {
-                MenuZeroFillWindowRect(15, y + 3, 29, 18);
+                Menu_EraseWindowRect(15, y + 3, 29, 18);
             }
             break;
         }
@@ -484,7 +500,7 @@ static void sub_810BB88(u8 a0)
         buf[2] = 0x06;
         buf += 3;
         ConvertIntToDecimalStringN(buf, sub_810C9B0(&gSaveBlock1.pokeblocks[i]), STR_CONV_MODE_RIGHT_ALIGN, 3);
-        MenuPrint(gStringVar1, 15, y + 1);
+        Menu_PrintText(gStringVar1, 15, y + 1);
     }
 }
 
@@ -560,19 +576,19 @@ static void sub_810BDAC(bool8 flag)
     }
     if (gUnknown_02039248.unk1)
     {
-        sub_80F979C(0, 0);
+        SetVerticalScrollIndicators(TOP_ARROW, VISIBLE);
     }
     else
     {
-        sub_80F979C(0, 1);
+        SetVerticalScrollIndicators(TOP_ARROW, INVISIBLE);
     }
     if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     }
     else
     {
-        sub_80F979C(1, 1);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     }
     for (i=0; i<5; i++)
     {
@@ -596,15 +612,15 @@ static void sub_810BDAC(bool8 flag)
             gBGTilemapBuffers[2][v0 + 32] = 15;
         }
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
     {
         sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
-        MenuPrint(gStringVar1, 11, 17);
+        Menu_PrintText(gStringVar1, 11, 17);
     }
     else
     {
-        MenuZeroFillWindowRect(11, 17, 12, 18);
+        Menu_EraseWindowRect(11, 17, 12, 18);
     }
 }
 
@@ -776,8 +792,8 @@ static void sub_810C23C(u8 taskId)
 
 static void sub_810C2B0(void)
 {
-    DestroyVerticalScrollIndicator(0);
-    DestroyVerticalScrollIndicator(1);
+    DestroyVerticalScrollIndicator(TOP_ARROW);
+    DestroyVerticalScrollIndicator(BOTTOM_ARROW);
     BuyMenuFreeMemory();
 }
 
@@ -810,11 +826,11 @@ static void sub_810C368(u8 taskId)
     int v0 = 0;
     if (gUnknown_02039244 > 1)
         v0 = 2;
-    sub_80F98A4(0);
-    sub_80F98A4(1);
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    MenuDrawTextWindow(7, v0 + 4, 13, 11);
-    PrintMenuItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
+    StopVerticalScrollIndicators(TOP_ARROW);
+    StopVerticalScrollIndicators(BOTTOM_ARROW);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_DrawStdWindowFrame(7, v0 + 4, 13, 11);
+    Menu_PrintItemsReordered(8, v0 + 5, gUnknown_0203924C, gUnknown_083F7EF4, gUnknown_03000758);
     InitMenu(0, 8, v0 + 5, gUnknown_0203924C, 0, 5);
     gSpecialVar_ItemId = gUnknown_02039248.unk0 + gUnknown_02039248.unk1;
     gTasks[taskId].func = sub_810C40C;
@@ -824,24 +840,24 @@ static void sub_810C40C(u8 taskId)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (GetMenuCursorPos())
+        if (Menu_GetCursorPos())
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
         }
     }
     else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (GetMenuCursorPos() != gUnknown_0203924C - 1)
+        if (Menu_GetCursorPos() != gUnknown_0203924C - 1)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(+1);
+            Menu_MoveCursor(+1);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gUnknown_083F7EF4[gUnknown_03000758[GetMenuCursorPos()]].func(taskId);
+        gUnknown_083F7EF4[gUnknown_03000758[Menu_GetCursorPos()]].func(taskId);
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -868,9 +884,9 @@ static void sub_810C508(u8 taskId)
 
 static void sub_810C540(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(7, 4, 13, 11);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(7, 4, 13, 11);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1].color]);
     StringExpandPlaceholders(gStringVar4, gContestStatsText_ThrowAwayPrompt);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C5EC, 0);
@@ -878,7 +894,7 @@ static void sub_810C540(u8 taskId)
 
 static void sub_810C5C0(u8 taskId)
 {
-    sub_80F979C(1, 1);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     gTasks[taskId].func = sub_810C540;
 }
 
@@ -890,7 +906,7 @@ static void sub_810C5EC(u8 taskId)
 
 static void sub_810C610(u8 taskId)
 {
-    MenuZeroFillWindowRect(7, 6, 13, 11);
+    Menu_EraseWindowRect(7, 6, 13, 11);
     PokeblockClearIfExists((gUnknown_02039248.unk0 + gUnknown_02039248.unk1));
     StringExpandPlaceholders(gStringVar4, gContestStatsText_WasThrownAway);
     DisplayItemMessageOnField(taskId, gStringVar4, sub_810C704, 0);
@@ -900,15 +916,15 @@ static void sub_810C610(u8 taskId)
 
 static void sub_810C668(u8 taskId)
 {
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
     if (gUnknown_02039248.unk2 > gUnknown_02039248.unk3 && gUnknown_02039248.unk1 + gUnknown_02039248.unk3 != gUnknown_02039248.unk2)
     {
-        sub_80F979C(1, 0);
+        SetVerticalScrollIndicators(BOTTOM_ARROW, VISIBLE);
     }
-    BasicInitMenuWindow(&gWindowConfig_81E6E50);
-    MenuZeroFillWindowRect(7, 6, 13, 11);
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E50);
+    Menu_EraseWindowRect(7, 6, 13, 11);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskId].func = sub_810BF7C;
 }
 
@@ -922,18 +938,18 @@ static void sub_810C6DC(u8 taskId)
 
 static void sub_810C704(u8 taskId)
 {
-    BasicInitMenuWindow(&gWindowConfig_81E6E34);
+    BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     sub_810BC84(gUnknown_02039248.unk1);
-    sub_80F979C(1, 1);
+    SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
     gTasks[taskId].func = sub_810C6DC;
 }
 
 static void sub_810C748(u8 taskId)
 {
-    StartVerticalScrollIndicators(0);
-    StartVerticalScrollIndicators(1);
-    HandleDestroyMenuCursors();
-    MenuZeroFillWindowRect(7, 4, 13, 11);
+    StartVerticalScrollIndicators(TOP_ARROW);
+    StartVerticalScrollIndicators(BOTTOM_ARROW);
+    Menu_DestroyCursor();
+    Menu_EraseWindowRect(7, 4, 13, 11);
     gTasks[taskId].func = sub_810BF7C;
 }
 

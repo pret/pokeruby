@@ -2,8 +2,8 @@
 #include "constants/battle_constants.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-	.include "asm/macros.inc"
-	.include "asm/macros/battle_script.inc"
+	.include "include/macros.inc"
+	.include "include/macros/battle_script.inc"
 	.include "constants/constants.inc"
 	.include "constants/battle_script_constants.inc"
 
@@ -2589,12 +2589,12 @@ BattleScript_EffectEndeavor: @ 81D8852
 	attackstring
 	ppreduce
 	setdamagetohealthdifference BattleScript_ButItFailed
-	copyword gHP_dealt, gBattleMoveDamage
+	copyword gHpDealt, gBattleMoveDamage
 	accuracycheck BattleScript_MoveMissed, ACC_CURR_MOVE
 	typecalc
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
 	bicbyte gBattleMoveFlags, MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE
-	copyword gBattleMoveDamage, gHP_dealt
+	copyword gBattleMoveDamage, gHpDealt
 	adjustsetdamage
 	goto BattleScript_HitFromAtkAnimation
 
@@ -3065,7 +3065,7 @@ BattleScript_LocalBattleLost:: @ 81D8DD1
 BattleScript_LocalBattleLostEnd: @ 81D8E01
 	end2
 
-gUnknown_081D8E02:: @ 81D8E02
+BattleScript_LinkBattleWonOrLost:: @ 81D8E02
 	printstring 5
 	waitmessage 64
 	atk57
@@ -3248,7 +3248,7 @@ BattleScript_DamagingWeatherContinues:: @ 81D8F7D
 	setbyte gBattleCommunication, 0
 
 BattleScript_DamagingWeatherLoop: @ 81D8F95
-	copyarraywithindex gBankAttacker, gTurnOrder, gBattleCommunication, 1
+	copyarraywithindex gBankAttacker, gBanksByTurnOrder, gBattleCommunication, 1
 	weatherdamage
 	jumpifword EQUAL, gBattleMoveDamage, 0x0, BattleScript_DamagingWeatherLoopIncrement
 	printfromtable gSandStormHailDmgStringIds
@@ -3314,7 +3314,7 @@ BattleScript_LeechSeedTurnDrain:: @ 81D904B
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000
 	healthbarupdate USER
 	datahpupdate USER
-	copyword gBattleMoveDamage, gHP_dealt
+	copyword gBattleMoveDamage, gHpDealt
 	jumpifability USER, ABILITY_LIQUID_OOZE, BattleScript_LeechSeedTurnPrintLiquidOoze
 	manipulatedamage 0
 	setbyte cMULTISTRING_CHOOSER, 3

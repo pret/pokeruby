@@ -100,6 +100,8 @@ void GetMoneyAmountText(u8 *buffer, u32 amount, u8 arg2)
         width = 7;
     else if (amount > 99999)
         width = 6;
+    // A special sprite is used for 10000 in the decoration
+    // shop, so be sure to account for this.
     else if (amount > 10000)
         width = 5;
     else if (amount > 999)
@@ -143,12 +145,12 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
 
     if (stringWidth >= (size + 1) * 8)
     {
-        MenuPrint(buffer, x, y);
+        Menu_PrintText(buffer, x, y);
     }
     else
     {
         int xPlusOne = x + 1;
-        MenuPrint_PixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
+        Menu_PrintTextPixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
     }
 }
 
@@ -175,7 +177,7 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top)
 }
 
 __attribute__((naked))
-void sub_80B7B34(u8 var1, u8 var2, int var3)
+void Draw10000Sprite(u8 var1, u8 var2, int var3)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -275,7 +277,7 @@ void UpdateMoneyWindow(u32 amount, u8 x, u8 y)
 
 void OpenMoneyWindow(u32 amount, u8 x, u8 y)
 {
-    MenuDrawTextWindow(x, y, x + 13, y + 3);
+    Menu_DrawStdWindowFrame(x, y, x + 13, y + 3);
     UpdateMoneyWindow(amount, x, y);
 
     LoadCompressedObjectPic(gUnknown_083CF584);
@@ -288,7 +290,7 @@ void CloseMoneyWindow(u8 x, u8 y)
 {
     DestroySpriteAndFreeResources(&gSprites[gUnknown_02038734]);
     FreeSpritePaletteByTag(SPRITE_TAG_MONEY);
-    MenuZeroFillWindowRect(x, y, x + 13, y + 3);
+    Menu_EraseWindowRect(x, y, x + 13, y + 3);
 }
 
 bool8 HasEnoughMoneyFor(void)

@@ -5,7 +5,7 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
 	compare VAR_CABLE_CAR_STATION_STATE, 1
-	call_if 1, MtChimney_CableCarStation_EventScript_15C111
+	call_if_eq MtChimney_CableCarStation_EventScript_15C111
 	end
 
 MtChimney_CableCarStation_EventScript_15C111:: @ 815C111
@@ -31,10 +31,10 @@ MtChimney_CableCarStation_EventScript_15C127:: @ 815C127
 MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	lock
 	faceplayer
-	msgbox MtChimney_CableCarStation_Text_19256A, 5
-	compare RESULT, 1
+	msgbox MtChimney_CableCarStation_Text_19256A, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C16C
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MtChimney_CableCarStation_EventScript_15C19B
 	end
 
@@ -48,7 +48,7 @@ MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
-	special sub_8123218
+	special CableCar
 	waitstate
 	release
 	end

@@ -258,7 +258,6 @@ struct BoxPokemon
     /*0x13*/ u8 isBadEgg:1;
              u8 hasSpecies:1;
              u8 isEgg:1;
-             u8 unused:5;
     /*0x14*/ u8 otName[OT_NAME_LENGTH];
     /*0x1B*/ u8 markings;
     /*0x1C*/ u16 checksum;
@@ -351,6 +350,8 @@ struct BattlePokemon
     /*0x54*/ u32 otId;
 };
 
+// Shouldn't these be the same enum?
+
 enum
 {
     STAT_STAGE_HP,       // 0
@@ -361,6 +362,16 @@ enum
     STAT_STAGE_SPDEF,    // 5
     STAT_STAGE_ACC,      // 6
     STAT_STAGE_EVASION,  // 7
+};
+
+enum
+{
+    STAT_HP,     // 0
+    STAT_ATK,    // 1
+    STAT_DEF,    // 2
+    STAT_SPD,    // 3
+    STAT_SPATK,  // 4
+    STAT_SPDEF,  // 5
 };
 
 struct BaseStats
@@ -405,9 +416,8 @@ struct BattleMove
     u8 pp;
     u8 secondaryEffectChance;
     u8 target;
-    u8 priority;
+    s8 priority;
     u8 flags;
-    u8 pad[3];
 };
 
 #define FLAG_MAKES_CONTACT       0x1
@@ -418,10 +428,10 @@ struct BattleMove
 
 struct PokemonStorage
 {
-    /*0x00*/ u8 currentBox;
-    /*0x01*/ struct BoxPokemon boxes[14][30];
-             u8 boxNames[14][9];
-             u8 unkArray[14];
+    /*0x0000*/ u8 currentBox;
+    /*0x0004*/ struct BoxPokemon boxes[14][30];
+    /*0x8344*/ u8 boxNames[14][9];
+    /*0x83c2*/ u8 wallpaper[14];
 };
 
 struct SpindaSpot
@@ -492,8 +502,8 @@ extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const u8 *const gItemEffectTable[];
 extern const struct BaseStats gBaseStats[];
 extern const u32 gExperienceTables[][101];
-extern const u16 *const gLevelUpLearnsets[];
-extern const struct EvolutionData gEvolutionTable[];
+extern const u16 *gLevelUpLearnsets[];
+extern struct Evolution gEvolutionTable[][5];
 extern struct PokemonStorage gPokemonStorage;
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
@@ -512,7 +522,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
 u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 void CalculateMonStats(struct Pokemon *mon);
-void sub_803B4B4(const struct BoxPokemon *src, struct Pokemon *dest);
+void ExpandBoxMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
 u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
@@ -613,8 +623,12 @@ bool8 IsPokeSpriteNotFlipped(u16);
 u8 GetLevelUpMovesBySpecies(u16, u16 *);
 u8 TryIncrementMonLevel(struct Pokemon *);
 bool8 IsShiny(struct Pokemon *mon);
+void RandomlyGivePartyPokerus(struct Pokemon *party);
+void PartySpreadPokerus(struct Pokemon *party);
 
 struct Sprite *sub_80F7920(u16, u16, const u16 *);
+void BoxMonRestorePP(struct BoxPokemon *);
 
+bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 
 #endif // GUARD_POKEMON_H

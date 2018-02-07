@@ -1,4 +1,4 @@
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata
@@ -132,6 +132,13 @@ gUnknown_083F8EE8:: @ 83F8EE8
 
 gUnknown_083F8EF4:: @ 83F8EF4
 	.byte 0, 3, 4, 6, 12
+
+.if DEBUG
+@ Could also be after English-only graphics
+gUnknown_Debug_0842510D:: @ 0x842510D
+	.string "Set　COIN　and　Press　START\n"
+	.string "Aーp1　Bーm1　R:Lー×10$"
+.endif
 
 .ifdef ENGLISH
 	.align 2

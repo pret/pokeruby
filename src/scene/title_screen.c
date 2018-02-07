@@ -8,12 +8,13 @@
 #include "m4a.h"
 #include "main.h"
 #include "main_menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "reset_rtc_screen.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 #if ENGLISH
 #define VERSION_BANNER_SHAPE 1
@@ -353,6 +354,9 @@ static void Task_TitleScreenPhase1(u8);
 static void Task_TitleScreenPhase2(u8);
 static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
+#if DEBUG
+static void CB2_GoToTestMenu(void);
+#endif
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToCopyrightScreen(void);
@@ -598,7 +602,7 @@ static void StartPokemonLogoShine(bool8 flashBackground)
 
 static void VBlankCB(void)
 {
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -644,7 +648,7 @@ void CB2_InitTitleScreen(void)
         LZ77UnCompVram(sLegendaryMonTilemap, (void *)(VRAM + 0xC000));
         LZ77UnCompVram(sBackdropTilemap, (void *)(VRAM + 0xC800));
         LoadPalette(sLegendaryMonPalettes, 0xE0, sizeof(sLegendaryMonPalettes));
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -711,7 +715,7 @@ void CB2_InitTitleScreen(void)
         if (!UpdatePaletteFade())
         {
             StartPokemonLogoShine(FALSE);
-            sub_8089944(0, 0xA0, 4, 4, 0, 4, 1);
+            ScanlineEffect_InitWave(0, DISPLAY_HEIGHT, 4, 4, 0, SCANLINE_EFFECT_REG_BG1HOFS, TRUE);
             SetMainCallback2(MainCB2);
         }
         break;
@@ -829,6 +833,13 @@ static void Task_TitleScreenPhase3(u8 taskId)
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             SetMainCallback2(CB2_GoToResetRtcScreen);
         }
+#if DEBUG
+        else if (gMain.heldKeys == SELECT_BUTTON)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            SetMainCallback2(CB2_GoToTestMenu);
+        }
+#endif
         else
         {
             REG_BG2Y = 0;
@@ -854,6 +865,14 @@ static void CB2_GoToMainMenu(void)
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitMainMenu);
 }
+
+#if DEBUG
+static void CB2_GoToTestMenu(void)
+{
+    if (!UpdatePaletteFade())
+        SetMainCallback2(CB2_InitTestMenu);
+}
+#endif
 
 static void CB2_GoToCopyrightScreen(void)
 {

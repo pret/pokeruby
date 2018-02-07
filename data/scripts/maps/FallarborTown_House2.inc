@@ -5,8 +5,7 @@ FallarborTown_House2_EventScript_153C91:: @ 8153C91
 	lockall
 	applymovement 1, FallarborTown_House2_Movement_1A0839
 	waitmovement 0
-	checkflag FLAG_TEMP_1
-	goto_if_eq FallarborTown_House2_EventScript_153CB6
+	goto_if_set FLAG_TEMP_1, FallarborTown_House2_EventScript_153CB6
 	msgbox FallarborTown_House2_Text_177AF4, 4
 	setflag FLAG_TEMP_1
 	goto FallarborTown_House2_EventScript_153CB6
@@ -16,9 +15,9 @@ FallarborTown_House2_EventScript_153CB6:: @ 8153CB6
 	checkitem ITEM_HEART_SCALE, 1
 	compare RESULT, 0
 	goto_if_eq FallarborTown_House2_EventScript_153D60
-	msgbox FallarborTown_House2_Text_177BDB, 5
+	msgbox FallarborTown_House2_Text_177BDB, MSGBOX_YESNO
 	switch RESULT
-	case 0, FallarborTown_House2_EventScript_153D60
+	case NO, FallarborTown_House2_EventScript_153D60
 	goto FallarborTown_House2_EventScript_153CE4
 	end
 

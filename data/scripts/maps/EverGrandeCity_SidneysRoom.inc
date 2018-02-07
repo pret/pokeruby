@@ -5,10 +5,9 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
 	.byte 0
 
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
-	checkflag FLAG_DEFEATED_ELITE_4_SYDNEY
-	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B564
+	call_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B564
 	compare VAR_ELITE_4_STATE, 1
-	call_if 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
+	call_if_eq EverGrandeCity_SidneysRoom_EventScript_15B56A
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564
@@ -42,9 +41,8 @@ EverGrandeCity_SidneysRoom_EventScript_15B589:: @ 815B589
 EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_ELITE_4_SYDNEY
-	goto_if_eq EverGrandeCity_SidneysRoom_EventScript_15B5BD
-	playbgm 450, 0
+	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B5BD
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
 	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823
 	goto EverGrandeCity_SidneysRoom_EventScript_15B5C7

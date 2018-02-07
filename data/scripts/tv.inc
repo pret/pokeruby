@@ -7,10 +7,8 @@ Event_TV:: @ 81A6E72
 	goto_if_eq EventScript_1A6F01
 	compare RESULT, 1
 	goto_if_eq EventScript_1A6F0B
-	checkflag FLAG_SYS_TV_START
-	goto_if 0, EventScript_1A6EF1
-	checkflag FLAG_SYS_TV_WATCH
-	goto_if_eq EventScript_1A6EF1
+	goto_if_unset FLAG_SYS_TV_START, EventScript_1A6EF1
+	goto_if_set FLAG_SYS_TV_WATCH, EventScript_1A6EF1
 	specialvar RESULT, IsTVShowInSearchOfTrainersAiring
 	compare RESULT, 1
 	goto_if_eq EventScript_1A6F66
@@ -27,7 +25,7 @@ EventScript_1A6EBB:
 	copyvar VAR_SPECIAL_4, RESULT
 	specialvar RESULT, GetTVShowType
 	compare RESULT, 0
-	goto_if 5, EventScript_1A6F21
+	goto_if_ne EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -60,7 +58,7 @@ EventScript_1A6F21:
 	waitmessage
 	waitbuttonpress
 	compare RESULT, 1
-	goto_if 5, EventScript_1A6F21
+	goto_if_ne EventScript_1A6F21
 	goto EventScript_1A6F37
 	end
 

@@ -47,8 +47,6 @@ struct UnkTvStruct
     s8 var0;
 };
 
-extern u8 gUnknown_0300430A[11];
-
 struct OutbreakPokemon
 {
     /*0x00*/ u16 species;
@@ -64,7 +62,7 @@ struct TVSaleItem {
 
 extern u8 gUnknown_02038694;
 
-extern struct TVSaleItem gUnknown_02038724[3];
+extern struct TVSaleItem gMartPurchaseHistory[3];
 
 struct UnkTvStruct gUnknown_03005D38;
 
@@ -811,7 +809,7 @@ u8 sub_80BDEAC(u8 *a0)
     return lang;
 }
 
-void sub_80BDEC8(void)
+void PutPokemonTodayCaughtOnAir(void)
 {
     u8 i;
     u16 total;
@@ -864,7 +862,7 @@ void sub_80BDEC8(void)
                     sub_80BE138((TVShow *)pokemonToday);
                     pokemonToday->language = GAME_LANGUAGE;
                     pokemonToday->language2 = sub_80BDEAC(pokemonToday->nickname);
-                    StripExtCtrlCodes(pokemonToday->nickname);
+                    Text_StripExtCtrlCodes(pokemonToday->nickname);
                 }
             }
         }
@@ -966,7 +964,7 @@ void InterviewAfter_BravoTrainerPokemonProfile(void)
         sub_80BE160((TVShow *)bravoTrainerNew);
         bravoTrainerNew->language = GAME_LANGUAGE;
         bravoTrainerNew->var1f = sub_80BDEAC(bravoTrainerNew->pokemonNickname);
-        StripExtCtrlCodes(bravoTrainerNew->pokemonNickname);
+        Text_StripExtCtrlCodes(bravoTrainerNew->pokemonNickname);
     }
 }
 
@@ -1032,7 +1030,7 @@ void sub_80BE3BC(void)
         if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_SMART_SHOPPER) != 1)
         {
             sub_80BF20C();
-            if (gUnknown_02038724[0].item_amount >= 20)
+            if (gMartPurchaseHistory[0].item_amount >= 20)
             {
                 struct TVShowSmartShopper *smartShopper = &gSaveBlock1.tvShows[gUnknown_03005D38.var0].smartshopperShow;
 
@@ -1041,8 +1039,8 @@ void sub_80BE3BC(void)
                 smartShopper->shopLocation = gMapHeader.regionMapSectionId;
                 for (i=0; i<3; i++)
                 {
-                    smartShopper->itemIds[i] = gUnknown_02038724[i].item_id;
-                    smartShopper->itemAmounts[i] = gUnknown_02038724[i].item_amount;
+                    smartShopper->itemIds[i] = gMartPurchaseHistory[i].item_id;
+                    smartShopper->itemAmounts[i] = gMartPurchaseHistory[i].item_amount;
                 }
                 smartShopper->priceReduced = GetPriceReduction(1);
                 StringCopy(smartShopper->playerName, gSaveBlock2.playerName);
@@ -1075,7 +1073,7 @@ void sub_80BE478(void)
         sub_80BE160((TVShow *)nameRaterShow);
         nameRaterShow->language = GAME_LANGUAGE;
         nameRaterShow->pokemonNameLanguage = sub_80BDEAC(nameRaterShow->pokemonName);
-        StripExtCtrlCodes(nameRaterShow->pokemonName);
+        Text_StripExtCtrlCodes(nameRaterShow->pokemonName);
     }
 }
 
@@ -1138,7 +1136,7 @@ void InterviewAfter_PkmnFanClubOpinions(void)
     sub_80BE160((TVShow *)fanclubOpinions);
     fanclubOpinions->language = GAME_LANGUAGE;
     fanclubOpinions->var0E = sub_80BDEAC(fanclubOpinions->var10);
-    StripExtCtrlCodes(fanclubOpinions->var10);
+    Text_StripExtCtrlCodes(fanclubOpinions->var10);
 }
 
 void InterviewAfter_DummyShow4(void)
@@ -1646,14 +1644,14 @@ void sub_80BF20C(void)
     {
         for (j = i + 1; j < 3; j++)
         {
-            if (gUnknown_02038724[i].item_amount < gUnknown_02038724[j].item_amount)
+            if (gMartPurchaseHistory[i].item_amount < gMartPurchaseHistory[j].item_amount)
             {
-                tmpId = gUnknown_02038724[i].item_id;
-                tmpAmount = gUnknown_02038724[i].item_amount;
-                gUnknown_02038724[i].item_id = gUnknown_02038724[j].item_id;
-                gUnknown_02038724[i].item_amount = gUnknown_02038724[j].item_amount;
-                gUnknown_02038724[j].item_id = tmpId;
-                gUnknown_02038724[j].item_amount = tmpAmount;
+                tmpId = gMartPurchaseHistory[i].item_id;
+                tmpAmount = gMartPurchaseHistory[i].item_amount;
+                gMartPurchaseHistory[i].item_id = gMartPurchaseHistory[j].item_id;
+                gMartPurchaseHistory[i].item_amount = gMartPurchaseHistory[j].item_amount;
+                gMartPurchaseHistory[j].item_id = tmpId;
+                gMartPurchaseHistory[j].item_amount = tmpAmount;
             }
         }
     }

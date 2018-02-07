@@ -72,6 +72,115 @@ static const struct SpriteTemplate gSpriteTemplate_CutGrass =
     .callback = sub_80A2A48,
 };
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_80AFEE4()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r8\n"
+        "	push	{r7}\n"
+        "	mov	r0, #0x52\n"
+        "	bl	npc_before_player_of_type\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	cmp	r0, #0x1\n"
+        "	bne	._1	@cond_branch\n"
+        "	ldr	r1, ._3         @ gLastFieldPokeMenuOpened\n"
+        "	mov	r0, #0x0\n"
+        "	strb	r0, [r1]\n"
+        "	bl	sub_80A2634\n"
+        "	b	._8\n"
+        "._4:\n"
+        "	.align	2, 0\n"
+        "._3:\n"
+        "	.word	gLastFieldPokeMenuOpened\n"
+        "._1:\n"
+        "	ldr	r4, ._9         @ gUnknown_0203923C\n"
+        "	add	r1, r4, #2\n"
+        "	add	r0, r4, #0\n"
+        "	bl	PlayerGetDestCoords\n"
+        "	mov	r7, #0x0\n"
+        "	mov	r8, r4\n"
+        "._12:\n"
+        "	ldr	r1, ._9 + 4     @ 0xffff\n"
+        "	add	r0, r7, r1\n"
+        "	mov	r2, r8\n"
+        "	ldrh	r2, [r2, #0x2]\n"
+        "	add	r0, r0, r2\n"
+        "	mov	r6, #0x0\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	asr	r5, r0, #0x10\n"
+        "._11:\n"
+        "	ldr	r1, ._9 + 4     @ 0xffff\n"
+        "	add	r0, r6, r1\n"
+        "	mov	r2, r8\n"
+        "	ldrh	r2, [r2]\n"
+        "	add	r0, r0, r2\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	asr	r4, r0, #0x10\n"
+        "	add	r0, r4, #0\n"
+        "	add	r1, r5, #0\n"
+        "	bl	MapGridGetZCoordAt\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	mov	r2, r8\n"
+        "	mov	r1, #0x4\n"
+        "	ldsb	r1, [r2, r1]\n"
+        "	cmp	r0, r1\n"
+        "	bne	._7	@cond_branch\n"
+        "	add	r0, r4, #0\n"
+        "	add	r1, r5, #0\n"
+        "	bl	MapGridGetMetatileBehaviorAt\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r4, r0, #0x18\n"
+        "	add	r0, r4, #0\n"
+        "	bl	MetatileBehavior_IsPokeGrass\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	cmp	r0, #0x1\n"
+        "	beq	._6	@cond_branch\n"
+        "	add	r0, r4, #0\n"
+        "	bl	MetatileBehavior_IsAshGrass\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r0, r0, #0x18\n"
+        "	cmp	r0, #0x1\n"
+        "	bne	._7	@cond_branch\n"
+        "._6:\n"
+        "	ldr	r1, ._9 + 8     @ gLastFieldPokeMenuOpened\n"
+        "	mov	r0, #0x0\n"
+        "	strb	r0, [r1]\n"
+        "	bl	sub_80A25E8\n"
+        "	b	._8\n"
+        "._10:\n"
+        "	.align	2, 0\n"
+        "._9:\n"
+        "	.word	gUnknown_0203923C\n"
+        "	.word	0xffff\n"
+        "	.word	gLastFieldPokeMenuOpened\n"
+        "._7:\n"
+        "	add	r0, r6, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r6, r0, #0x18\n"
+        "	cmp	r6, #0x2\n"
+        "	bls	._11	@cond_branch\n"
+        "	add	r0, r7, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r7, r0, #0x18\n"
+        "	cmp	r7, #0x2\n"
+        "	bls	._12	@cond_branch\n"
+        "	bl	ScriptContext2_Disable\n"
+        "._8:\n"
+        "	pop	{r3}\n"
+        "	mov	r8, r3\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "\n"
+    );
+}
+#endif
+
 bool8 SetUpFieldMove_Cut(void)
 {
     s16 x, y;
@@ -122,7 +231,7 @@ bool8 FldEff_UseCutOnGrass(void)
 
     gTasks[taskId].data[8] = (u32)sub_80A2684 >> 16;
     gTasks[taskId].data[9] = (u32)sub_80A2684;
-    IncrementGameStat(0x12);
+    IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
@@ -138,7 +247,7 @@ bool8 FldEff_UseCutOnTree(void)
 
     gTasks[taskId].data[8] = (u32)sub_80A2B00 >> 16;
     gTasks[taskId].data[9] = (u32)sub_80A2B00;
-    IncrementGameStat(0x12);
+    IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 

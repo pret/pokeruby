@@ -48,8 +48,8 @@ extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u8 gAnimMoveTurn;
 extern struct Window gUnknown_03004210;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern MainCallback gPreBattleCallback1;
 extern void (*gBattleBankFunc[])(void);
 extern u8 gHealthboxIDs[];
@@ -62,7 +62,7 @@ extern u8 move_anim_start_t3();
 extern u8 IsBankSpritePresent();
 extern void sub_8044CA0(u8);
 extern void sub_8030E38(struct Sprite *);
-extern void sub_80E43C0();
+extern void StartBattleIntroAnim();
 extern void sub_8047858();
 extern void move_anim_start_t2_for_situation();
 extern void load_gfxc_health_bar();
@@ -94,7 +94,7 @@ extern void sub_804777C();
 extern void sub_8043DFC();
 //extern s16 sub_8045C78();
 extern void sub_80440EC();
-extern void sub_80324F8();
+extern void HandleLowHpMusicChange();
 extern void nullsub_9(u16);
 extern void sub_8043DB0();
 extern void move_anim_start_t4();
@@ -355,7 +355,7 @@ void bx_t3_healthbar_update(void)
     }
     else
     {
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         LinkPartnerBufferExecCompleted();
     }
 }
@@ -434,7 +434,7 @@ void sub_811E0CC(void)
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 0);
         sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 0);
         sub_804777C(gActiveBank);
@@ -1084,7 +1084,7 @@ void sub_811EC68(u8 a)
         SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
         break;
     }
-    sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
 }
 
 void LinkPartnerHandlecmd3(void)
@@ -1243,7 +1243,7 @@ void LinkPartnerHandlecmd10(void)
     else if (!ewram17810[gActiveBank].unk0_6)
     {
         ewram17810[gActiveBank].unk4 = 0;
-        sub_80324F8(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
         PlaySE12WithPanning(SE_POKE_DEAD, -64);
         gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
         gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
@@ -1355,10 +1355,10 @@ void sub_811FF30(void)
 
 void LinkPartnerHandlePrintString(void)
 {
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
-    sub_8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
+    Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
     gBattleBankFunc[gActiveBank] = sub_811DFA0;
 }
 
@@ -1565,7 +1565,7 @@ void LinkPartnerHandleFaintingCry(void)
 
 void LinkPartnerHandleIntroSlide(void)
 {
-    sub_80E43C0(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
     gUnknown_02024DE8 |= 1;
     LinkPartnerBufferExecCompleted();
 }

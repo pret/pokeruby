@@ -1,15 +1,14 @@
 S_CuttableTree:: @ 81B0DCC
 	lockall
-	checkflag FLAG_BADGE01_GET
-	goto_if 0, CannotUseCut
+	goto_if_unset FLAG_BADGE01_GET, CannotUseCut
 	checkpartymove MOVE_CUT
 	compare RESULT, 6
 	goto_if_eq CannotUseCut
 	setfieldeffectargument 0, RESULT
 	bufferpartymonnick 0, RESULT
 	buffermovename 1, MOVE_CUT
-	msgbox UseCutPromptText, 5
-	compare RESULT, 0
+	msgbox UseCutPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -58,16 +57,15 @@ CannotUseCutText: @ 81B0E8E
 
 S_BreakableRock:: @ 81B0EB7
 	lockall
-	checkflag FLAG_BADGE03_GET
-	goto_if 0, CannotUseRockSmash
+	goto_if_unset FLAG_BADGE03_GET, CannotUseRockSmash
 	checkpartymove MOVE_ROCK_SMASH
 	compare RESULT, 6
 	goto_if_eq CannotUseRockSmash
 	setfieldeffectargument 0, RESULT
 	bufferpartymonnick 0, RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
-	msgbox UseRockSmashPromptText, 5
-	compare RESULT, 0
+	msgbox UseRockSmashPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
@@ -125,16 +123,14 @@ CannotUseRockSmashText: @ 81B0F90
 
 S_PushableBoulder:: @ 81B0FCB
 	lockall
-	checkflag FLAG_BADGE04_GET
-	goto_if 0, CannotUseStrength
-	checkflag FLAG_SYS_USE_STRENGTH
-	goto_if_eq AlreadyUsedStrength
+	goto_if_unset FLAG_BADGE04_GET, CannotUseStrength
+	goto_if_set FLAG_SYS_USE_STRENGTH, AlreadyUsedStrength
 	checkpartymove 70
 	compare RESULT, 6
 	goto_if_eq CannotUseStrength
 	setfieldeffectargument 0, RESULT
-	msgbox UseStrengthPromptText, 5
-	compare RESULT, 0
+	msgbox UseStrengthPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Strength_ChoseNo
 	closemessage
 	dofieldeffect 40
@@ -195,8 +191,8 @@ S_UseWaterfall:: @ 81B115A
 	goto_if_eq Waterfall_NoMonKnows
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
-	msgbox UseWaterfallPromptText, 5
-	compare RESULT, 0
+	msgbox UseWaterfallPromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	dofieldeffect 43
@@ -229,8 +225,8 @@ UseDiveScript:: @ 81B1220
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
 	setfieldeffectargument 1, 1
-	msgbox UseDivePromptText, 5
-	compare RESULT, 0
+	msgbox UseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect 44
@@ -252,8 +248,8 @@ S_UseDiveUnderwater:: @ 81B1269
 	bufferpartymonnick 0, RESULT
 	setfieldeffectargument 0, RESULT
 	setfieldeffectargument 1, 1
-	msgbox UnderwaterUseDivePromptText, 5
-	compare RESULT, 0
+	msgbox UnderwaterUseDivePromptText, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	dofieldeffect 44

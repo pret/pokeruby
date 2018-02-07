@@ -5,9 +5,9 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 815A13F
 LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
 	getpricereduction 3
 	compare RESULT, 1
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
 	compare RESULT, 0
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F:: @ 815A15F
@@ -53,7 +53,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1A0:: @ 815A1A0
 	faceplayer
 	getpricereduction 3
 	compare RESULT, 1
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C61F, 4
 	release
 	end
@@ -88,17 +88,17 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1DE:: @ 815A1DE
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A21C:: @ 815A21C
-	setvar VAR_TEMP_0, 26
+	setvar VAR_TEMP_0, ITEM_FRESH_WATER
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A227:: @ 815A227
-	setvar VAR_TEMP_0, 27
+	setvar VAR_TEMP_0, ITEM_SODA_POP
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A232:: @ 815A232
-	setvar VAR_TEMP_0, 28
+	setvar VAR_TEMP_0, ITEM_LEMONADE
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_15A267
 	end
 
@@ -128,26 +128,26 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A260:: @ 815A260
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	compare VAR_TEMP_1, 0
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
 	compare VAR_TEMP_1, 1
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
 	compare VAR_TEMP_1, 2
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
 	checkitemspace VAR_TEMP_0, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	compare VAR_TEMP_1, 0
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
 	compare VAR_TEMP_1, 1
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
 	compare VAR_TEMP_1, 2
-	call_if 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
+	call_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoneybox 0, 0
 	nop
 	bufferitemname 0, VAR_TEMP_0
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C75F, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
@@ -155,11 +155,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	goto_if_ne LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace VAR_TEMP_0, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0
@@ -167,11 +167,11 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	goto_if 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	goto_if_ne LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace VAR_TEMP_0, 1
 	compare RESULT, 0
 	goto_if_eq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
-	playse 106
+	playse SE_JIHANKI
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	giveitem VAR_TEMP_0, 1
 	bufferitemname 1, VAR_TEMP_0

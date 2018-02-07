@@ -20,16 +20,76 @@ static void sub_80A808C(u8 taskId);
 static void sub_80A81D8(u8 taskId);
 static void sub_80A8374(u8 taskId);
 static void sub_80A8488(u8 taskId);
+static void sub_80A8530(struct Sprite *sprite);
 static void sub_80A85A4(struct Sprite *sprite);
-void sub_80A8614(struct Sprite* sprite);
+static void sub_80A85C8(struct Sprite *sprite);
+static void sub_80A8614(struct Sprite* sprite);
+static void sub_80A8638(struct Sprite *sprite);
 static void sub_80A86F4(struct Sprite *sprite);
+static void sub_80A8764(struct Sprite *sprite);
+static void sub_80A8818(struct Sprite *sprite);
 static void sub_80A88F0(struct Sprite *sprite);
 static void sub_80A89B4(u8 taskId);
 static void sub_80A8A18(u8 taskId);
 static void sub_80A8C0C(u8 taskId);
 static void sub_80A8D8C(u8 taskId);
-void sub_80A8FD8(u8 taskId);
+static void sub_80A8FD8(u8 taskId);
 static void sub_80A913C(u8 taskId);
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FB0 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8530,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FC8 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A85C8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FE0 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8638,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FF8 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8764,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83C2010 =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80A8818,
+};
 
 void sub_80A7E7C(u8 taskId)
 {
@@ -108,17 +168,17 @@ void sub_80A7FA0(u8 taskId)
         switch (gBattleAnimArgs[0])
         {
         case 4:
-            side = GetBankByPlayerAI(0);
+            side = GetBankByIdentity(0);
             break;
         case 5:
-            side = GetBankByPlayerAI(2);
+            side = GetBankByIdentity(2);
             break;
         case 6:
-            side = GetBankByPlayerAI(1);
+            side = GetBankByIdentity(1);
             break;
         case 7:
         default:
-            side = GetBankByPlayerAI(3);
+            side = GetBankByIdentity(3);
             break;
         }
         if (IsAnimBankSpriteVisible(side) == FALSE)
@@ -335,7 +395,7 @@ void sub_80A8500(u8 taskId)
     sub_80A8408(taskId);
 }
 
-void sub_80A8530(struct Sprite *sprite)
+static void sub_80A8530(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
     if (GetBankSide(gAnimBankAttacker))
@@ -362,7 +422,7 @@ static void sub_80A85A4(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-void sub_80A85C8(struct Sprite *sprite)
+static void sub_80A85C8(struct Sprite *sprite)
 {
     u8 spriteId;
     sprite->invisible = TRUE;
@@ -376,7 +436,7 @@ void sub_80A85C8(struct Sprite *sprite)
     sprite->callback = sub_8078458;
 }
 
-void sub_80A8614(struct Sprite *sprite)
+static void sub_80A8614(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
@@ -384,7 +444,7 @@ void sub_80A8614(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-void sub_80A8638(struct Sprite *sprite)
+static void sub_80A8638(struct Sprite *sprite)
 {
     int something;
     int spriteId;
@@ -451,7 +511,7 @@ static void sub_80A86F4(struct Sprite *sprite)
     }
 }
 
-void sub_80A8764(struct Sprite *sprite)
+static void sub_80A8764(struct Sprite *sprite)
 {
     u8 v1;
     u8 spriteId;
@@ -486,7 +546,7 @@ void sub_80A8764(struct Sprite *sprite)
     sprite->callback = sub_80784A8;
 }
 
-void sub_80A8818(struct Sprite *sprite)
+static void sub_80A8818(struct Sprite *sprite)
 {
     u8 spriteId;
     u8 v1;
@@ -833,7 +893,7 @@ void sub_80A8EFC(u8 taskId)
     TASK.func = sub_80A8FD8;
 }
 
-void sub_80A8FD8(u8 taskId)
+static void sub_80A8FD8(u8 taskId)
 {
     TASK.data[3] += TASK.data[4];
     obj_id_set_rotscale(TASK.data[5], 0x100, 0x100, TASK.data[3]);

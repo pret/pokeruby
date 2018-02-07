@@ -1,6 +1,6 @@
 	.include "constants/gba_constants.inc"
 
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 
 	.syntax unified
 
@@ -448,16 +448,16 @@ _0800D748: .4byte 0x0000bf40
 sub_800D74C: @ 800D74C
 	push {r4,lr}
 	movs r0, 0x12
-	bl SetTextWindowBaseTileNum
+	bl TextWindow_SetBaseTileNum
 	ldr r4, _0800D79C @ =gUnknown_03004210
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl LoadTextWindowGraphics_OverridePalSlot
+	bl TextWindow_LoadStdFrameGraphicsOverridePal
 	movs r0, 0x22
-	bl SetTextWindowBaseTileNum
+	bl TextWindow_SetBaseTileNum
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl LoadTextWindowGraphics_OverridePalSlot
+	bl TextWindow_LoadStdFrameGraphicsOverridePal
 	ldr r3, _0800D7A0 @ =gPlttBufferUnfaded
 	adds r0, r3, 0
 	adds r0, 0xB8
@@ -794,6 +794,77 @@ _0800DAB0: .4byte 0x0600d000
 _0800DAB4: .4byte gBattleTerrainPalette_BattleTower
 	thumb_func_end DrawMainBattleBackground
 
+.if DEBUG
+	thumb_func_start sub_800DAB8
+sub_800DAB8:
+.syntax divided
+	push	{r4, r5, lr}
+	add	sp, sp, #0xfffffffc
+	ldr	r0, ._113       @ gUnknown_08D00000
+	mov	r1, #0xc0
+	lsl	r1, r1, #0x13
+	bl	LZDecompressVram
+	ldr	r0, ._113 + 4   @ gUnknown_08D00524
+	ldr	r4, ._113 + 8   @ 0x600c000
+	mov	r2, #0x80
+	lsl	r2, r2, #0x4
+	add	r1, r4, #0
+	bl	CpuSet
+	ldr	r0, ._113 + 12  @ gUnknown_08D004E0
+	mov	r1, #0x0
+	mov	r2, #0x40
+	bl	LoadCompressedPalette
+	bl	sub_800D74C
+	bl	DrawMainBattleBackground
+	ldr	r0, ._113 + 16  @ gBattleTypeFlags
+	ldrh	r1, [r0]
+	mov	r0, #0x2
+	and	r0, r0, r1
+	cmp	r0, #0
+	beq	._112	@cond_branch
+	ldr	r0, ._113 + 20  @ 0x6000600
+	mov	r1, #0x0
+	add	r2, r4, #0
+	mov	r3, #0x1
+	bl	debug_sub_8008218
+	ldr	r5, ._113 + 24  @ 0x101
+	mov	r4, #0x1
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x1
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x15
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+	str	r4, [sp]
+	add	r0, r5, #0
+	mov	r1, #0x3
+	mov	r2, #0x29
+	mov	r3, #0x3
+	bl	debug_sub_8008264
+._112:
+	add	sp, sp, #0x4
+	pop	{r4, r5}
+	pop	{r0}
+	bx	r0
+._114:
+	.align	2, 0
+._113:
+	.word	gUnknown_08D00000
+	.word	gUnknown_08D00524
+	.word	0x600c000
+	.word	gUnknown_08D004E0
+	.word	gBattleTypeFlags
+	.word	0x6000600
+	.word	0x101
+.syntax unified
+	thumb_func_end sub_800DAB8
+.else
 	thumb_func_start sub_800DAB8
 sub_800DAB8: @ 800DAB8
 	push {lr}
@@ -820,6 +891,7 @@ _0800DAEC: .4byte gUnknown_08D00524
 _0800DAF0: .4byte 0x0600c000
 _0800DAF4: .4byte gUnknown_08D004E0
 	thumb_func_end sub_800DAB8
+.endif
 
 	thumb_func_start sub_800DAF8
 sub_800DAF8: @ 800DAF8
@@ -1055,9 +1127,9 @@ _0800DE88:
 	str r0, [sp, 0x4]
 	adds r0, r1, 0
 	adds r1, r7, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	ldr r0, [sp, 0xC]
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	ldr r2, _0800DEDC @ =gUnknown_081F9680 + 0x8
 	adds r4, r2
 	ldr r2, [r4]
@@ -1111,9 +1183,9 @@ _0800DF04:
 	movs r5, 0x1
 	str r5, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	adds r0, r4, 0
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	mov r0, r8
 	ldr r2, [r0, 0x38]
 	mov r0, r9
@@ -1134,9 +1206,9 @@ _0800DF04:
 	str r0, [sp]
 	str r5, [sp, 0x4]
 	adds r0, r4, 0
-	bl sub_8002E4C
+	bl Text_InitWindow8002E4C
 	adds r0, r4, 0
-	bl sub_8002F44
+	bl Text_PrintWindow8002F44
 	mov r5, r8
 	ldr r2, [r5, 0x44]
 	mov r0, r9

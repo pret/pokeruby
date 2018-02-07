@@ -8,10 +8,8 @@ AbandonedShip_Corridors_B1F_MapScript1_15E99A:: @ 815E99A
 	end
 
 AbandonedShip_Corridors_B1F_MapScript1_15E9A3:: @ 815E9A3
-	checkflag FLAG_USED_STORAGE_KEY
-	call_if 0, AbandonedShip_Corridors_B1F_EventScript_15E9B6
-	checkflag FLAG_USED_STORAGE_KEY
-	call_if 1, AbandonedShip_Corridors_B1F_EventScript_15E9C0
+	call_if_unset FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15E9B6
+	call_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15E9C0
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15E9B6:: @ 815E9B6
@@ -28,13 +26,12 @@ AbandonedShip_Corridors_B1F_EventScript_15E9CA:: @ 815E9CA
 
 AbandonedShip_Corridors_B1F_EventScript_15E9D3:: @ 815E9D3
 	lockall
-	checkflag FLAG_USED_STORAGE_KEY
-	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA14
+	goto_if_set FLAG_USED_STORAGE_KEY, AbandonedShip_Corridors_B1F_EventScript_15EA14
 	checkitem ITEM_STORAGE_KEY, 1
 	compare RESULT, 0
 	goto_if_eq AbandonedShip_Corridors_B1F_EventScript_15EA0A
 	msgbox AbandonedShip_Corridors_B1F_Text_198692, 4
-	playse 21
+	playse SE_PIN
 	takeitem ITEM_STORAGE_KEY, 1
 	setflag FLAG_USED_STORAGE_KEY
 	call AbandonedShip_Corridors_B1F_EventScript_15E9C0

@@ -5,6 +5,7 @@
 #include "battle_anim.h"
 #include "battle_anim_81258BC.h"
 #include "battle_anim_8137220.h"
+#include "battle_util.h"
 #include "cable_club.h"
 #include "constants/items.h"
 #include "link.h"
@@ -66,6 +67,10 @@ void sub_800B858(void)
     }
 }
 
+#if DEBUG
+extern u8 gUnknown_02023A14_50;
+#endif
+
 void setup_poochyena_battle(void)
 {
     s32 i;
@@ -92,6 +97,16 @@ void setup_poochyena_battle(void)
     }
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
+
+#if DEBUG
+    if (gUnknown_02023A14_50 & 0x80)
+    {
+        gSharedMem[0x160fd] = 0;
+        gSharedMem[0x160fe] = 0;
+        gSharedMem[0x160ff] = 0;
+        ((u32 *) gBattleBuffersTransferData)[64]++;
+    }
+#endif
 }
 
 void sub_800B950(void)
@@ -462,7 +477,7 @@ void sub_800C1A8(u8 taskId)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
             gTasks[taskId].data[13] = 1;
@@ -582,7 +597,7 @@ void Emitcmd1(u8 a, u8 b, u8 c)
     PrepareBufferDataTransfer(a, gBattleBuffersTransferData, 4);
 }
 
-void EmitSetAttributes(u8 a, u8 b, u8 c, u8 d, void *e)
+void EmitSetMonData(u8 a, u8 b, u8 c, u8 d, void *e)
 {
     int i;
 
@@ -748,9 +763,9 @@ void EmitPrintString(u8 a, u16 stringID)
     stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
-    stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
-    stringInfo->unk1605E = BATTLE_STRUCT->unk1605E;
-    stringInfo->hpScale = BATTLE_STRUCT->hpScale;
+    stringInfo->scrActive = gBattleStruct->scriptingActive;
+    stringInfo->unk1605E = gBattleStruct->unk1605E;
+    stringInfo->hpScale = gBattleStruct->hpScale;
     stringInfo->StringBank = gStringBank;
     stringInfo->moveType = gBattleMoves[gCurrentMove].type;
 
@@ -780,8 +795,8 @@ void EmitPrintStringPlayerOnly(u8 a, u16 stringID)
     stringInfo->lastMove = gChosenMove;
     stringInfo->lastItem = gLastUsedItem;
     stringInfo->lastAbility = gLastUsedAbility;
-    stringInfo->scrActive = BATTLE_STRUCT->scriptingActive;
-    stringInfo->unk1605E = BATTLE_STRUCT->unk1605E;
+    stringInfo->scrActive = gBattleStruct->scriptingActive;
+    stringInfo->unk1605E = gBattleStruct->unk1605E;
 
     for (i = 0; i < 4; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;

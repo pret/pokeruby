@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "blend_palette.h"
+#include "contest.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -623,15 +624,12 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
     }
     else
     {
-        const void *src;
-        void *dst;
-
         if (IsContest())
         {
             r10 = 0;
-            species = ewram19348.unk2;
-            personalityValue = ewram19348.unk8;
-            otId = ewram19348.unkC;
+            species = shared19348.unk2;
+            personalityValue = shared19348.unk8;
+            otId = shared19348.unkC;
             HandleLoadSpecialPokePic(
               &gMonBackPicTable[species],
               gMonBackPicCoords[species].coords,
@@ -639,7 +637,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
               eVoidSharedArr2,
               gUnknown_081FAF4C[0],
               species,
-              ewram19348.unk10);
+              shared19348.unk10);
         }
         else
         {
@@ -675,9 +673,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   gTransformedPersonalities[a]);
             }
         }
-        src = gUnknown_081FAF4C[r10];
-        dst = (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32);
-        DmaCopy32(3, src, dst, 0x800);
+        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32), 0x800);
         paletteOffset = 0x100 + a * 16;
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
         LZDecompressWram(lzPaletteData, gSharedMem);
@@ -762,7 +758,7 @@ void sub_80324E0(u8 a)
     ewram17800[a].substituteSprite = 0;
 }
 
-void sub_80324F8(struct Pokemon *pkmn, u8 b)
+void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
 {
     u16 hp = GetMonData(pkmn, MON_DATA_HP);
     u16 maxHP = GetMonData(pkmn, MON_DATA_MAX_HP);
@@ -792,9 +788,9 @@ void sub_80324F8(struct Pokemon *pkmn, u8 b)
     }
 }
 
-void BattleMusicStop(void)
+void BattleStopLowHpSound(void)
 {
-    u8 r4 = GetBankByPlayerAI(0);
+    u8 r4 = GetBankByIdentity(0);
 
     ewram17800[r4].unk0_1 = 0;
     if (IsDoubleBattle())
@@ -814,17 +810,17 @@ void sub_8032638(void)
 {
     if (gMain.inBattle)
     {
-        u8 r8 = GetBankByPlayerAI(0);
-        u8 r9 = GetBankByPlayerAI(2);
+        u8 r8 = GetBankByIdentity(0);
+        u8 r9 = GetBankByIdentity(2);
         u8 r4 = pokemon_order_func(gBattlePartyID[r8]);
         u8 r5 = pokemon_order_func(gBattlePartyID[r9]);
 
         if (GetMonData(&gPlayerParty[r4], MON_DATA_HP) != 0)
-            sub_80324F8(&gPlayerParty[r4], r8);
+            HandleLowHpMusicChange(&gPlayerParty[r4], r8);
         if (IsDoubleBattle())
         {
             if (GetMonData(&gPlayerParty[r5], MON_DATA_HP) != 0)
-                sub_80324F8(&gPlayerParty[r5], r9);
+                HandleLowHpMusicChange(&gPlayerParty[r5], r9);
         }
     }
 }
@@ -856,12 +852,12 @@ void sub_80327CC(void)
     u8 r5;
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
-    r5 = GetBankByPlayerAI(1);
+    r5 = GetBankByIdentity(1);
     ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
     gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
-        r5 = GetBankByPlayerAI(3);
+        r5 = GetBankByIdentity(3);
         ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
         gSprites[ewram17810[r5].unk7].data[0] = r5;
     }

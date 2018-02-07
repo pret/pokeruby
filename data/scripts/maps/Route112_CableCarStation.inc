@@ -6,7 +6,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
 	setescapewarp MAP_ROUTE112, 255, 28, 28
 	compare VAR_CABLE_CAR_STATION_STATE, 2
-	call_if 1, Route112_CableCarStation_EventScript_15C052
+	call_if_eq Route112_CableCarStation_EventScript_15C052
 	end
 
 Route112_CableCarStation_EventScript_15C052:: @ 815C052
@@ -32,10 +32,10 @@ Route112_CableCarStation_EventScript_15C068:: @ 815C068
 Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	lock
 	faceplayer
-	msgbox Route112_CableCarStation_Text_1924F5, 5
-	compare RESULT, 1
+	msgbox Route112_CableCarStation_Text_1924F5, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route112_CableCarStation_EventScript_15C0AD
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route112_CableCarStation_EventScript_15C0DC
 	end
 
@@ -49,7 +49,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp
-	special sub_8123218
+	special CableCar
 	waitstate
 	release
 	end

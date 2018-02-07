@@ -622,7 +622,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ig
 static u16 GetStringWidthInTilesForScriptMenu(const u8 *str)
 {
     // each tile on screen is 8x8, so it needs the number of tiles and not pixels, hence the division by 8.
-    return (GetStringWidthGivenWindowConfig((struct WindowConfig *)&gWindowConfig_81E6CE4, str) + 7) / 8;
+    return (Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowTemplate_81E6CE4, str) + 7) / 8;
 }
 
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress, u8 cursorPos)
@@ -651,8 +651,8 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuActi
 
     bottom = top + (2 * count + 1);
 
-    MenuDrawTextWindow(left, top, right, bottom);
-    PrintMenuItems(left + 1, top + 1, count, list);
+    Menu_DrawStdWindowFrame(left, top, right, bottom);
+    Menu_PrintItems(left + 1, top + 1, count, list);
     InitMenu(0, left + 1, top + 1, count, cursorPos, right - left - 1);
     StartScriptMenuTask(left, top, right, bottom, ignoreBPress, count);
 }
@@ -687,9 +687,9 @@ static void Task_HandleMultichoiceInput(u8 taskId)
     if (!gPaletteFade.active)
     {
         if (!gTasks[taskId].tDoWrap)
-            selection = ProcessMenuInputNoWrap();
+            selection = Menu_ProcessInputNoWrap();
         else
-            selection = ProcessMenuInput();
+            selection = Menu_ProcessInput();
 
         if (selection != -2)
         {
@@ -704,8 +704,8 @@ static void Task_HandleMultichoiceInput(u8 taskId)
             {
                 gSpecialVar_Result = selection;
             }
-            HandleDestroyMenuCursors();
-            MenuZeroFillWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
+            Menu_DestroyCursor();
+            Menu_EraseWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
             DestroyTask(taskId);
             EnableBothScriptContexts();
         }
@@ -745,7 +745,7 @@ static void sub_80B53B4(u8 left, u8 top, u8 count, const struct MenuAction *list
     right = (right + left) + 2;
     bottom = top + (2 * count + 1);
 
-    PrintMenuItems(left, top, count, list);
+    Menu_PrintItems(left, top, count, list);
     InitMenu(0, left, top, count, 0, right - left - 1);
     StartScriptMenuTask(left, top, right, bottom, ignoreBPress, count);
 }
@@ -788,7 +788,7 @@ static void Task_HandleYesNoInput(u8 taskId)
         return;
     }
 
-    switch (ProcessMenuInputNoWrap())
+    switch (Menu_ProcessInputNoWrap())
     {
     case -2:
         return;
@@ -805,7 +805,7 @@ static void Task_HandleYesNoInput(u8 taskId)
     left = gTasks[taskId].tLeft;
     top = gTasks[taskId].tTop;
 
-    MenuZeroFillWindowRect(left, top, left + 6, top + 5);
+    Menu_EraseWindowRect(left, top, left + 6, top + 5);
     DestroyTask(taskId);
     EnableBothScriptContexts();
 }
@@ -839,7 +839,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
             bottom = (2 * (gMultichoiceLists[multichoiceId].count / columnCount)) + 3 + top;
         }
 
-        width = sub_807288C(columnCount);
+        width = Menu_GetColumnXCoord(columnCount);
         gTasks[taskId].tLeft = left;
         gTasks[taskId].tTop = top;
         gTasks[taskId].tRight = width + left + 2;
@@ -851,7 +851,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPr
 
 static void Task_HandleMultichoiceGridInput(u8 taskId)
 {
-    s8 selection = sub_80727CC();
+    s8 selection = Menu_ProcessInputGridLayout();
 
     if (selection != -2)
     {
@@ -866,8 +866,8 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
         {
             gSpecialVar_Result = selection;
         }
-        HandleDestroyMenuCursors();
-        MenuZeroFillWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
+        Menu_DestroyCursor();
+        Menu_EraseWindowRect(gTasks[taskId].tLeft, gTasks[taskId].tTop, gTasks[taskId].tRight, gTasks[taskId].tBottom);
         DestroyTask(taskId);
         EnableBothScriptContexts();
     }
@@ -909,23 +909,23 @@ void ScriptMenu_CreatePCMenu(void)
     if (FlagGet(FLAG_SYS_GAME_CLEAR)) // player has cleared game?
     {
         numChoices = 4;
-        MenuDrawTextWindow(0, 0, width + 2, 9);
-        MenuPrint(gPCText_HallOfFame, 1, 5);
-        MenuPrint(gPCText_LogOff, 1, 7);
+        Menu_DrawStdWindowFrame(0, 0, width + 2, 9);
+        Menu_PrintText(gPCText_HallOfFame, 1, 5);
+        Menu_PrintText(gPCText_LogOff, 1, 7);
     }
     else
     {
         numChoices = 3;
-        MenuDrawTextWindow(0, 0, width + 2, 7);
-        MenuPrint(gPCText_LogOff, 1, 5);
+        Menu_DrawStdWindowFrame(0, 0, width + 2, 7);
+        Menu_PrintText(gPCText_LogOff, 1, 5);
     }
 
     if (FlagGet(FLAG_SYS_PC_LANETTE)) // player met lanette?
-        MenuPrint(gPCText_LanettesPC, 1, 1);
+        Menu_PrintText(gPCText_LanettesPC, 1, 1);
     else
-        MenuPrint(gPCText_SomeonesPC, 1, 1);
+        Menu_PrintText(gPCText_SomeonesPC, 1, 1);
 
-    MenuPrint(gPCText_PlayersPC, 1, 3);
+    Menu_PrintText(gPCText_PlayersPC, 1, 3);
     InitMenu(0, 1, 1, numChoices, 0, width + 1);
     StartScriptMenuTask(0, 0, width + 2, 2 * numChoices + 1, 0, numChoices);
 }
@@ -1008,15 +1008,15 @@ _080B57B4:\n\
     movs r0, 0\n\
     movs r1, 0\n\
     movs r3, 0x9\n\
-    bl MenuDrawTextWindow\n\
+    bl Menu_DrawStdWindowFrame\n\
     ldr r0, _080B57F8 @ =gPCText_HallOfFame\n\
     movs r1, 0x1\n\
     movs r2, 0x5\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     ldr r0, _080B57F0 @ =gPCText_LogOff\n\
     movs r1, 0x1\n\
     movs r2, 0x7\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     b _080B5818\n\
     .align 2, 0\n\
 _080B57E8: .4byte gPCText_SomeonesPC\n\
@@ -1032,11 +1032,11 @@ _080B57FC:\n\
     movs r0, 0\n\
     movs r1, 0\n\
     movs r3, 0x7\n\
-    bl MenuDrawTextWindow\n\
+    bl Menu_DrawStdWindowFrame\n\
     ldr r0, _080B5834 @ =gPCText_LogOff\n\
     movs r1, 0x1\n\
     movs r2, 0x5\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
 _080B5818:\n\
     adds r6, r4, 0\n\
     ldr r0, _080B5838 @ =0x0000084b\n\
@@ -1047,7 +1047,7 @@ _080B5818:\n\
     ldr r0, _080B583C @ =gPCText_LanettesPC\n\
     movs r1, 0x1\n\
     movs r2, 0x1\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     b _080B584A\n\
     .align 2, 0\n\
 _080B5834: .4byte gPCText_LogOff\n\
@@ -1057,12 +1057,12 @@ _080B5840:\n\
     ldr r0, _080B5888 @ =gPCText_SomeonesPC\n\
     movs r1, 0x1\n\
     movs r2, 0x1\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
 _080B584A:\n\
     ldr r0, _080B588C @ =gPCText_PlayersPC\n\
     movs r1, 0x1\n\
     movs r2, 0x3\n\
-    bl MenuPrint\n\
+    bl Menu_PrintText\n\
     movs r4, 0\n\
     str r4, [sp]\n\
     adds r0, r5, 0x1\n\
@@ -1096,8 +1096,8 @@ _080B588C: .4byte gPCText_PlayersPC\n\
 
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
-    MenuDisplayMessageBox();
-    MenuPrint(gPCText_WhichPCShouldBeAccessed, 2, 15);
+    Menu_DisplayDialogueFrame();
+    Menu_PrintText(gPCText_WhichPCShouldBeAccessed, 2, 15);
 }
 
 #define tState       data[0]
@@ -1122,7 +1122,7 @@ static void Task_PokemonPicWindow(u8 taskId)
         task->tState++;
         break;
     case 3:
-        MenuZeroFillWindowRect(task->tWindowX, task->tWindowY, task->tWindowX + 9, task->tWindowY + 10);
+        Menu_EraseWindowRect(task->tWindowX, task->tWindowY, task->tWindowX + 9, task->tWindowY + 10);
         DestroyTask(taskId);
         break;
     }
@@ -1139,7 +1139,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     }
     else
     {
-        MenuDrawTextWindow(x, y, x + 9, y + 10);
+        Menu_DrawStdWindowFrame(x, y, x + 9, y + 10);
         taskId = CreateTask(Task_PokemonPicWindow, 0x50);
         gTasks[taskId].tState = 0;
         gTasks[taskId].tMonSpecies = species;

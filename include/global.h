@@ -1,11 +1,11 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
-#include "config.h"
 
 // IDE support
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x
 #define __(x) x
 #define INCBIN_U8 {0}
@@ -14,9 +14,9 @@
 #define INCBIN_S8 {0}
 #define INCBIN_S16 {0}
 #define INCBIN_S32 {0}
-void *     memcpy (void *, const void *, size_t);
-void *     memset (void *, int, size_t);
-int     strcmp (const char *, const char *);
+void *memcpy (void *, const void *, size_t);
+void *memset (void *, int, size_t);
+int strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
@@ -27,21 +27,13 @@ int     strcmp (const char *, const char *);
 
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided\n")
 
-#define nonmatching(fndec, x) {\
-__attribute__((naked))\
-fndec\
-{\
-    asm_unified(x);\
-}\
-}
-
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_SLOTS_NUMBER 412
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-#define min(a, b) ((a) <= (b) ? (a) : (b))
+#define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
 
 // why does GF hate 2d arrays
@@ -690,7 +682,7 @@ struct SaveBlock1 /* 0x02025734 */
         /*0x2B40*/ u16 unk2B40[6];
     } easyChats;
     /*0x2B4C*/ struct MailStruct mail[16];
-    /*0x2D8C*/ u8 unk2D8C[4];
+    /*0x2D8C*/ u8 unk2D8C[4];  // What is this? Apparently it's supposed to be 64 bytes in size.
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
@@ -851,5 +843,6 @@ struct HallOfFame
 
 extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
+extern u8 ewram[];
 
 #endif // GUARD_GLOBAL_H

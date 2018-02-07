@@ -87,7 +87,7 @@
 #define DmaCopyLarge(dmaNum, src, dest, size, block, bit) \
 {                                                         \
     const void *_src = src;                               \
-    void *_dest = dest;                                   \
+    void *_dest = (void *)(dest);                         \
     u32 _size = size;                                     \
     while (1)                                             \
     {                                                     \
@@ -105,7 +105,7 @@
 
 #define DmaClearLarge(dmaNum, dest, size, block, bit) \
 {                                                     \
-	const void *_dest = dest;                         \
+	void *_dest = dest;                               \
     u32 _size = size;                                 \
     while (1)                                         \
     {                                                 \
@@ -129,12 +129,95 @@
 #define DmaCopyDefvars(dmaNum, src, dest, size, bit) \
 {                                                    \
     const void *_src = src;                          \
-    void *_dest = dest;                              \
+    void *_dest = (void *)(dest);                    \
     u32 _size = size;                                \
     DmaCopy##bit(dmaNum, _src, _dest, _size);        \
 }
 
 #define DmaCopy16Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 16)
 #define DmaCopy32Defvars(dmaNum, src, dest, size) DmaCopyDefvars(dmaNum, src, dest, size, 32)
+
+#define DmaFillLarge(dmaNum, fillval, dest, size, block, bit) \
+{                                                             \
+    void *_dest = (void *)(dest);                             \
+    u32 _size = (u32)(size);                                  \
+    while (1)                                                 \
+    {                                                         \
+        DmaFill##bit(dmaNum, fillval, _dest, (block));        \
+        _dest += (block);                                     \
+        _size -= (block);                                     \
+        if (_size <= (block))                                 \
+        {                                                     \
+            DmaFill##bit(dmaNum, fillval, _dest, _size);      \
+            break;                                            \
+        }                                                     \
+    }                                                         \
+}
+
+#define DmaFill16Large(dmaNum, fillval, dest, size, block) DmaFillLarge(dmaNum, fillval, dest, size, block, 16)
+#define DmaFill32Large(dmaNum, fillval, dest, size, block) DmaFillLarge(dmaNum, fillval, dest, size, block, 32)
+
+#define DmaFillDefvars(dmaNum, fillval, dest, size, bit) \
+{                                                        \
+    void *_dest = (void *)(dest);                        \
+    u32 _size = (u##bit)(size);                          \
+    DmaFill##bit(dmaNum, fillval, _dest, _size);         \
+}
+
+#define DmaFill16Defvars(dmaNum, fillval, dest, size) DmaFillDefvars(dmaNum, fillval, dest, size, 16)
+#define DmaFill32Defvars(dmaNum, fillval, dest, size) DmaFillDefvars(dmaNum, fillval, dest, size, 32)
+
+// from pokeemerald
+// Maximum amount of data we will transfer in one operation
+#define MAX_DMA_BLOCK_SIZE 0x1000
+
+#define MAX_DMA_REQUESTS 128
+
+#define DMA_REQUEST_COPY32 1
+#define DMA_REQUEST_FILL32 2
+#define DMA_REQUEST_COPY16 3
+#define DMA_REQUEST_FILL16 4
+
+#define Dma3CopyLarge_(src, dest, size, bit)               \
+{                                                          \
+    const void *_src = src;                                \
+    void *_dest = dest;                                    \
+    u32 _size = size;                                      \
+    while (1)                                              \
+    {                                                      \
+        if (_size <= MAX_DMA_BLOCK_SIZE)                   \
+        {                                                  \
+            DmaCopy##bit(3, _src, _dest, _size);           \
+            break;                                         \
+        }                                                  \
+        DmaCopy##bit(3, _src, _dest, MAX_DMA_BLOCK_SIZE);  \
+        _src += MAX_DMA_BLOCK_SIZE;                        \
+        _dest += MAX_DMA_BLOCK_SIZE;                       \
+        _size -= MAX_DMA_BLOCK_SIZE;                       \
+    }                                                      \
+}
+
+#define Dma3CopyLarge16_(src, dest, size) Dma3CopyLarge_(src, dest, size, 16)
+#define Dma3CopyLarge32_(src, dest, size) Dma3CopyLarge_(src, dest, size, 32)
+
+#define Dma3FillLarge_(value, dest, size, bit)             \
+{                                                          \
+    void *_dest = dest;                                    \
+    u32 _size = size;                                      \
+    while (1)                                              \
+    {                                                      \
+        if (_size <= MAX_DMA_BLOCK_SIZE)                   \
+        {                                                  \
+            DmaFill##bit(3, value, _dest, _size);          \
+            break;                                         \
+        }                                                  \
+        DmaFill##bit(3, value, _dest, MAX_DMA_BLOCK_SIZE); \
+        _dest += MAX_DMA_BLOCK_SIZE;                       \
+        _size -= MAX_DMA_BLOCK_SIZE;                       \
+    }                                                      \
+}
+
+#define Dma3FillLarge16_(value, dest, size) Dma3FillLarge_(value, dest, size, 16)
+#define Dma3FillLarge32_(value, dest, size) Dma3FillLarge_(value, dest, size, 32)
 
 #endif // GUARD_GBA_MACRO_H

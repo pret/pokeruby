@@ -271,15 +271,14 @@ Route109_Movement_14F67D:: @ 814F67D
 Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
-	checkflag FLAG_DELIVERED_DEVON_GOODS
-	goto_if 0, Route109_EventScript_14F691
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, Route109_EventScript_14F691
 	goto Route109_EventScript_14F6AF
 	end
 
 Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
-	msgbox Route109_Text_16E0F9, 5
-	compare RESULT, 0
+	msgbox Route109_Text_16E0F9, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route109_EventScript_14F6F1
 	goto Route109_EventScript_14F6E2
 	end
@@ -328,8 +327,7 @@ Route109_EventScript_14F725:: @ 814F725
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	checkflag FLAG_RECEIVED_SOFT_SAND
-	goto_if_eq Route109_EventScript_14F762
+	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem_std ITEM_SOFT_SAND
 	compare RESULT, 0

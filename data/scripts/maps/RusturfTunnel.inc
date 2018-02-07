@@ -11,7 +11,7 @@ RusturfTunnel_MapScript2_15C750:: @ 815C750
 RusturfTunnel_MapScript1_15C762:: @ 815C762
 	call RusturfTunnel_EventScript_1A0196
 	compare VAR_RUSTURF_TUNNEL_STATE, 2
-	call_if 1, RusturfTunnel_EventScript_15C773
+	call_if_eq RusturfTunnel_EventScript_15C773
 	end
 
 RusturfTunnel_EventScript_15C773:: @ 815C773
@@ -32,8 +32,7 @@ RusturfTunnel_EventScript_15C782:: @ 815C782
 RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_1
-	goto_if_eq RusturfTunnel_EventScript_15C7BC
+	goto_if_set FLAG_TEMP_1, RusturfTunnel_EventScript_15C7BC
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closemessage
@@ -53,35 +52,35 @@ RusturfTunnel_EventScript_15C7BC:: @ 815C7BC
 RusturfTunnel_EventScript_15C7D1:: @ 815C7D1
 	lockall
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_15C8CA
+	call_if_eq RusturfTunnel_EventScript_15C8CA
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_15C8DF
+	call_if_eq RusturfTunnel_EventScript_15C8DF
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_15C8EA
+	call_if_eq RusturfTunnel_EventScript_15C8EA
 	call RusturfTunnel_EventScript_15C92D
 	msgbox RusturfTunnel_Text_19461D, 4
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_15C8EB
+	call_if_eq RusturfTunnel_EventScript_15C8EB
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_15C8EB
-	giveitem_std ITEM_HM04
+	call_if_eq RusturfTunnel_EventScript_15C8EB
+	giveitem_std ITEM_HM04_STRENGTH
 	setflag FLAG_RECEIVED_HM04
 	msgbox RusturfTunnel_Text_194693, 4
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_15C880
+	call_if_eq RusturfTunnel_EventScript_15C880
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_15C892
+	call_if_eq RusturfTunnel_EventScript_15C892
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_15C8AE
+	call_if_eq RusturfTunnel_EventScript_15C8AE
 	msgbox RusturfTunnel_Text_194706, 4
 	closemessage
 	compare VAR_TEMP_1, 1
-	call_if 1, RusturfTunnel_EventScript_15C8F7
+	call_if_eq RusturfTunnel_EventScript_15C8F7
 	compare VAR_TEMP_1, 2
-	call_if 1, RusturfTunnel_EventScript_15C909
+	call_if_eq RusturfTunnel_EventScript_15C909
 	compare VAR_TEMP_1, 3
-	call_if 1, RusturfTunnel_EventScript_15C91B
+	call_if_eq RusturfTunnel_EventScript_15C91B
 	call RusturfTunnel_EventScript_1A0442
 	releaseall
 	end
@@ -148,7 +147,7 @@ RusturfTunnel_EventScript_15C91B:: @ 815C91B
 	return
 
 RusturfTunnel_EventScript_15C92D:: @ 815C92D
-	playse 21
+	playse SE_PIN
 	applymovement 1, RusturfTunnel_Movement_1A0833
 	waitmovement 0
 	applymovement 1, RusturfTunnel_Movement_1A0835
@@ -309,7 +308,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	lock
 	faceplayer
-	playbgm BGM_EVIL_TEAM, 0
+	playbgm BGM_EVIL_TEAM, FALSE
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4

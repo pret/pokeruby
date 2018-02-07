@@ -11,7 +11,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 static u8 gUnknown_03000750;
@@ -147,7 +147,7 @@ static void ShowContestPainting(void)
     switch (gMain.state)
     {
     case 0:
-        remove_some_task();
+        ScanlineEffect_Stop();
         SetVBlankCallback(NULL);
         gUnknown_03005E8C = &ewram15DE0;
         ContestPaintingInitVars(TRUE);
@@ -156,23 +156,8 @@ static void ShowContestPainting(void)
         break;
     case 1:
     {
-        u8 *addr;
-        size_t size;
-
         ResetPaletteFade();
-        addr = (void *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill32(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill32(3, 0, addr, size);
-                break;
-            }
-        }
+        DmaFill32Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
         ResetSpriteData();
         gMain.state++;
         break;
@@ -243,8 +228,8 @@ static void HoldContestPainting(void)
 
 static void ContestPaintingInitWindow(u8 arg0)
 {
-    InitMenuWindow(&gWindowConfig_81E7160);
-    SetUpWindowConfig(&gWindowConfig_81E7160);
+    InitMenuWindow(&gWindowTemplate_81E7160);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7160);
 }
 
 static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
@@ -291,7 +276,7 @@ static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
         xPos = 3;
         yPos = 14;
     }
-    MenuPrint_PixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
+    Menu_PrintTextPixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
 }
 
 static void ContestPaintingInitBG(void)

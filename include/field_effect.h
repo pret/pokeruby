@@ -103,7 +103,6 @@ void FieldEffectActiveListClear(void);
 void FieldEffectActiveListAdd(u8 id);
 void FieldEffectActiveListRemove(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);
-void sub_807DE38(u8 index);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);
@@ -252,6 +251,7 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
 void sub_8087BA8(void);
+void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 
 extern s32 gFieldEffectArguments[8];
 

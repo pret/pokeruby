@@ -33,8 +33,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155AF5:: @ 8155AF5
 SlateportCity_OceanicMuseum_1F_EventScript_155B06:: @ 8155B06
 	showmoneybox 0, 0
 	nop
-	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, 5
-	compare RESULT, 1
+	msgbox SlateportCity_OceanicMuseum_1F_Text_17E18D, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155B2D
 	closemessage
 	hidemoneybox 0, 0
@@ -57,8 +57,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
-	checkflag FLAG_DELIVERED_DEVON_GOODS
-	goto_if 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
+	goto_if_unset FLAG_DELIVERED_DEVON_GOODS, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closemessage
 	hidemoneybox 0, 0
@@ -158,13 +157,13 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	lock
 	faceplayer
 	delay 8
-	playse 21
+	playse SE_PIN
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0833
 	waitmovement 0
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_1A0835
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E582, 4
-	giveitem_std ITEM_TM46
+	giveitem_std ITEM_TM46_THIEF
 	compare RESULT, 0
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155CC2
 	setflag FLAG_RECEIVED_TM46
@@ -173,14 +172,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	compare FACING, 2
 	goto_if_eq SlateportCity_OceanicMuseum_1F_EventScript_155C98
 	compare FACING, 2
-	goto_if 5, SlateportCity_OceanicMuseum_1F_EventScript_155CAD
+	goto_if_ne SlateportCity_OceanicMuseum_1F_EventScript_155CAD
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CD3
 	waitmovement 0
 	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
-	playse 9
+	playse SE_KAIDAN
 	removeobject 13
 	release
 	end
@@ -189,7 +188,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155CAD:: @ 8155CAD
 	applymovement 13, SlateportCity_OceanicMuseum_1F_Movement_155CCC
 	waitmovement 0
 	setflag FLAG_HIDE_SCARED_GRUNT_OCEANIC_MUSEUM
-	playse 9
+	playse SE_KAIDAN
 	removeobject 13
 	release
 	end

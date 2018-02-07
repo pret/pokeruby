@@ -28,7 +28,7 @@
 #include "strings2.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 //Menu actions
 enum {
@@ -44,6 +44,11 @@ enum {
     MENU_ACTION_PLAYER_LINK
 };
 
+#if DEBUG
+static u32 _debugStartMenu_0  __attribute__((unused));
+static u32 _debugStartMenu_1 __attribute__((unused));
+#endif
+
 static u8 (*saveDialogCallback)(void);
 static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
 static bool8 savingComplete;
@@ -54,7 +59,7 @@ extern u16 gSpecialVar_Result;
 
 extern u8 gUnknown_03004860;
 
-u8 (*gCallback_03004AE8)(void);
+u8 (*gMenuCallback)(void);
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
@@ -132,6 +137,304 @@ static bool32 sub_80719FC(u8 *ptr);
 static void sub_8071B54(void);
 static void Task_8071B64(u8 taskId);
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_8075C30()
+{
+    asm(
+        "	push	{lr}\n"
+        "	bl	CloseMenu\n"
+        "	bl	debug_sub_8075D9C\n"
+        "	mov	r0, #0x1\n"
+        "	pop	{r1}\n"
+        "	bx	r1\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void debug_sub_8075C40()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, sl\n"
+        "	mov	r6, r9\n"
+        "	mov	r5, r8\n"
+        "	push	{r5, r6, r7}\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r4, r0, #0x18\n"
+        "	lsl	r0, r4, #0x2\n"
+        "	add	r0, r0, r4\n"
+        "	lsl	r0, r0, #0x3\n"
+        "	ldr	r1, ._5         @ gTasks\n"
+        "	add	r5, r0, r1\n"
+        "	mov	r1, #0x0\n"
+        "	ldsh	r0, [r5, r1]\n"
+        "	cmp	r0, #0x1\n"
+        "	beq	._1	@cond_branch\n"
+        "	cmp	r0, #0x1\n"
+        "	bgt	._2	@cond_branch\n"
+        "	cmp	r0, #0\n"
+        "	beq	._3	@cond_branch\n"
+        "	b	._18\n"
+        "._6:\n"
+        "	.align	2, 0\n"
+        "._5:\n"
+        "	.word	gTasks+0x8\n"
+        "._2:\n"
+        "	cmp	r0, #0x2\n"
+        "	beq	._7	@cond_branch\n"
+        "	cmp	r0, #0x3\n"
+        "	beq	._8	@cond_branch\n"
+        "	b	._18\n"
+        "._3:\n"
+        "	bl	m4aSoundVSyncOff\n"
+        "	b	._12\n"
+        "._1:\n"
+        "	ldr	r1, ._13        @ 0x4000208\n"
+        "	ldrh	r0, [r1]\n"
+        "	mov	sl, r0\n"
+        "	mov	r0, #0x0\n"
+        "	strh	r0, [r1]\n"
+        "	ldr	r1, ._13 + 4    @ 0x4000108\n"
+        "	strh	r0, [r1]\n"
+        "	mov	r0, #0x83\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	str	r0, [r1]\n"
+        "	ldr	r4, ._13 + 8    @ 0xc34f\n"
+        "	mov	r9, r4\n"
+        "	ldr	r2, ._13 + 12   @ 0x40000b0\n"
+        "	ldr	r0, ._13 + 16   @ gScanlineEffectRegBuffers\n"
+        "	mov	ip, r0\n"
+        "	ldr	r1, ._13 + 20   @ 0xc5ff\n"
+        "	mov	r8, r1\n"
+        "	ldr	r7, ._13 + 24   @ 0x7fff\n"
+        "	mov	r3, r9\n"
+        "	add	r3, r3, #0x1\n"
+        "	ldr	r6, ._13 + 28   @ 0x4000040\n"
+        "	ldr	r4, ._13 + 32   @ 0xa2600001\n"
+        "._11:\n"
+        "	mov	r0, ip\n"
+        "	str	r0, [r2]\n"
+        "	str	r6, [r2, #0x4]\n"
+        "	str	r4, [r2, #0x8]\n"
+        "	ldr	r0, [r2, #0x8]\n"
+        "	ldrh	r1, [r2, #0xa]\n"
+        "	mov	r0, r8\n"
+        "	and	r0, r0, r1\n"
+        "	strh	r0, [r2, #0xa]\n"
+        "	ldrh	r1, [r2, #0xa]\n"
+        "	add	r0, r7, #0\n"
+        "	and	r0, r0, r1\n"
+        "	strh	r0, [r2, #0xa]\n"
+        "	ldrh	r0, [r2, #0xa]\n"
+        "	sub	r3, r3, #0x1\n"
+        "	cmp	r3, #0\n"
+        "	bne	._11	@cond_branch\n"
+        "	mov	r3, r9\n"
+        "	add	r3, r3, #0x1\n"
+        "	ldr	r0, ._13 + 36   @ 0x400010a\n"
+        "	mov	r2, #0x0\n"
+        "	strh	r2, [r0]\n"
+        "	ldr	r1, ._13 + 4    @ 0x4000108\n"
+        "	ldrh	r0, [r1]\n"
+        "	ldr	r4, ._13 + 40   @ _debugStartMenu_0\n"
+        "	str	r0, [r4]\n"
+        "	strh	r2, [r1]\n"
+        "	ldr	r0, ._13        @ 0x4000208\n"
+        "	mov	r1, sl\n"
+        "	strh	r1, [r0]\n"
+        "	ldr	r4, ._13 + 44   @ _debugStartMenu_1\n"
+        "	str	r3, [r4]\n"
+        "	bl	m4aSoundVSyncOn\n"
+        "	b	._12\n"
+        "._14:\n"
+        "	.align	2, 0\n"
+        "._13:\n"
+        "	.word	0x4000208\n"
+        "	.word	0x4000108\n"
+        "	.word	0xc34f\n"
+        "	.word	0x40000b0\n"
+        "	.word	gScanlineEffectRegBuffers\n"
+        "	.word	0xc5ff\n"
+        "	.word	0x7fff\n"
+        "	.word	0x4000040\n"
+        "	.word	0xa2600001\n"
+        "	.word	0x400010a\n"
+        "	.word	_debugStartMenu_0\n"
+        "	.word	_debugStartMenu_1\n"
+        "._7:\n"
+        "	mov	r0, #0x15\n"
+        "	bl	PlaySE\n"
+        "	ldr	r0, ._16        @ gStringVar1\n"
+        "	ldr	r1, ._16 + 4    @ _debugStartMenu_1\n"
+        "	ldr	r1, [r1]\n"
+        "	mov	r2, #0x1\n"
+        "	mov	r3, #0x8\n"
+        "	bl	ConvertIntToDecimalStringN\n"
+        "	ldr	r0, ._16 + 8    @ gStringVar2\n"
+        "	ldr	r1, ._16 + 12   @ _debugStartMenu_0\n"
+        "	ldr	r1, [r1]\n"
+        "	mov	r2, #0x1\n"
+        "	mov	r3, #0x8\n"
+        "	bl	ConvertIntToDecimalStringN\n"
+        "	bl	Menu_DisplayDialogueFrame\n"
+        "	ldr	r0, ._16 + 16   @ gUnknown_Debug_839B6D8\n"
+        "	mov	r1, #0x2\n"
+        "	mov	r2, #0xf\n"
+        "	bl	Menu_PrintText\n"
+        "._12:\n"
+        "	ldrh	r0, [r5]\n"
+        "	add	r0, r0, #0x1\n"
+        "	strh	r0, [r5]\n"
+        "	b	._18\n"
+        "._17:\n"
+        "	.align	2, 0\n"
+        "._16:\n"
+        "	.word	gStringVar1\n"
+        "	.word	_debugStartMenu_1\n"
+        "	.word	gStringVar2\n"
+        "	.word	_debugStartMenu_0\n"
+        "	.word	gUnknown_Debug_839B6D8\n"
+        "._8:\n"
+        "	ldr	r0, ._19        @ gMain\n"
+        "	ldrh	r1, [r0, #0x2e]\n"
+        "	mov	r0, #0x1\n"
+        "	and	r0, r0, r1\n"
+        "	cmp	r0, #0\n"
+        "	beq	._18	@cond_branch\n"
+        "	bl	Menu_EraseScreen\n"
+        "	bl	ScriptContext2_Disable\n"
+        "	add	r0, r4, #0\n"
+        "	bl	DestroyTask\n"
+        "._18:\n"
+        "	pop	{r3, r4, r5}\n"
+        "	mov	r8, r3\n"
+        "	mov	r9, r4\n"
+        "	mov	sl, r5\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._20:\n"
+        "	.align	2, 0\n"
+        "._19:\n"
+        "	.word	gMain\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void debug_sub_8075D9C()
+{
+    asm(
+        "	push	{lr}\n"
+        "	ldr	r0, ._21        @ debug_sub_8075C40\n"
+        "	mov	r1, #0xa\n"
+        "	bl	CreateTask\n"
+        "	bl	ScriptContext2_Enable\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._22:\n"
+        "	.align	2, 0\n"
+        "._21:\n"
+        "	.word	debug_sub_8075C40+1\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void debug_sub_8075DB4()
+{
+    asm(
+        "	push	{r4, r5, r6, lr}\n"
+        "	add	r6, r0, #0\n"
+        "	add	r5, r1, #0\n"
+        "	add	r4, r2, #0\n"
+        "	add	r0, r4, #0\n"
+        "	mov	r1, #0x4d\n"
+        "	bl	__umodsi3\n"
+        "	strb	r0, [r6, #0x1]\n"
+        "	add	r1, r6, #0\n"
+        "	add	r1, r1, #0xc\n"
+        "	add	r0, r4, #0\n"
+        "	bl	write_word_to_mem\n"
+        "	add	r0, r6, #4\n"
+        "	add	r1, r5, #0\n"
+        "	bl	StringCopy8\n"
+        "	mov	r3, #0x7\n"
+        "	mov	r4, #0x0\n"
+        "	ldr	r0, ._25        @ gSaveBlock1\n"
+        "	ldr	r1, ._25 + 4    @ 0x2b28\n"
+        "	add	r5, r0, r1\n"
+        "	add	r2, r6, #0\n"
+        "	add	r2, r2, #0x10\n"
+        "	add	r1, r6, #0\n"
+        "	add	r1, r1, #0x1c\n"
+        "._23:\n"
+        "	ldrh	r0, [r5]\n"
+        "	strh	r0, [r2]\n"
+        "	strh	r3, [r1]\n"
+        "	add	r0, r3, #6\n"
+        "	strh	r0, [r1, #0xc]\n"
+        "	add	r3, r3, #0x1\n"
+        "	add	r5, r5, #0x2\n"
+        "	add	r2, r2, #0x2\n"
+        "	add	r1, r1, #0x2\n"
+        "	add	r4, r4, #0x1\n"
+        "	cmp	r4, #0x5\n"
+        "	ble	._23	@cond_branch\n"
+        "	mov	r4, #0x0\n"
+        "._24:\n"
+        "	mov	r0, #0x64\n"
+        "	mul	r0, r0, r4\n"
+        "	ldr	r1, ._25 + 8    @ gPlayerParty\n"
+        "	add	r0, r0, r1\n"
+        "	mov	r1, #0x2c\n"
+        "	mul	r1, r1, r4\n"
+        "	add	r1, r1, #0x34\n"
+        "	add	r1, r6, r1\n"
+        "	bl	sub_803AF78\n"
+        "	add	r4, r4, #0x1\n"
+        "	cmp	r4, #0x2\n"
+        "	ble	._24	@cond_branch\n"
+        "	add	r0, r6, #0\n"
+        "	bl	SetEReaderTrainerChecksum\n"
+        "	pop	{r4, r5, r6}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._26:\n"
+        "	.align	2, 0\n"
+        "._25:\n"
+        "	.word	gSaveBlock1\n"
+        "	.word	0x2b28\n"
+        "	.word	gPlayerParty\n"
+        "\n"
+    );
+}
+
+__attribute__((naked))
+void unref_sub_8070F90()
+{
+    asm(
+        "	push	{lr}\n"
+        "	ldr	r0, ._27        @ 0x801\n"
+        "	bl	FlagSet\n"
+        "	mov	r0, #0x80\n"
+        "	lsl	r0, r0, #0x4\n"
+        "	bl	FlagSet\n"
+        "	ldr	r0, ._27 + 4    @ 0x802\n"
+        "	bl	FlagSet\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._28:\n"
+        "	.align	2, 0\n"
+        "._27:\n"
+        "	.word	0x801\n"
+        "	.word	0x802\n"
+        "\n"
+    );
+}
+#endif
 
 static void BuildStartMenuActions(void)
 {
@@ -193,8 +496,8 @@ static void BuildStartMenuActions_Link(void)
 static void DisplaySafariBallsWindow(void)
 {
     sub_8072C44(gStringVar1, gNumSafariBalls, 12, 1);
-    MenuDrawTextWindow(0, 0, 10, 5);
-    MenuPrint(gOtherText_SafariStock, 1, 1);
+    Menu_DrawStdWindowFrame(0, 0, 10, 5);
+    Menu_PrintText(gOtherText_SafariStock, 1, 1);
 }
 
 //Prints n menu items starting at *index
@@ -204,7 +507,7 @@ static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
 
     do
     {
-        MenuPrint(sStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
+        Menu_PrintText(sStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
         _index++;
         if (_index >= sNumStartMenuActions)
         {
@@ -226,7 +529,7 @@ static bool32 InitStartMenuMultistep(s16 *step, s16 *index)
         (*step)++;
         break;
     case 2:
-        MenuDrawTextWindow(22, 0, 29, sNumStartMenuActions * 2 + 3);
+        Menu_DrawStdWindowFrame(22, 0, 29, sNumStartMenuActions * 2 + 3);
         *index = 0;
         (*step)++;
         break;
@@ -271,7 +574,7 @@ void CreateStartMenuTask(void (*func)(u8))
 {
     u8 taskId;
 
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     taskId = CreateTask(Task_StartMenu, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
 }
@@ -283,11 +586,11 @@ void sub_80712B4(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        gMenuCallback = StartMenu_InputProcessCallback;
         task->data[0]++;
         break;
     case 1:
-        if (gCallback_03004AE8() == 1)
+        if (gMenuCallback() == 1)
             DestroyTask(taskId);
         break;
     }
@@ -310,12 +613,12 @@ static u8 StartMenu_InputProcessCallback(void)
     if (gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = MoveMenuCursor(-1);
+        sStartMenuCursorPos = Menu_MoveCursor(-1);
     }
     if (gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = MoveMenuCursor(1);
+        sStartMenuCursorPos = Menu_MoveCursor(1);
     }
     if (gMain.newKeys & A_BUTTON)
     {
@@ -325,11 +628,11 @@ static u8 StartMenu_InputProcessCallback(void)
             if (GetNationalPokedexCount(0) == 0)
                 return 0;
         }
-        gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
-        if (gCallback_03004AE8 != StartMenu_SaveCallback &&
-           gCallback_03004AE8 != StartMenu_ExitCallback &&
-           gCallback_03004AE8 != StartMenu_RetireCallback)
-            fade_screen(1, 0);
+        gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
+        if (gMenuCallback != StartMenu_SaveCallback &&
+           gMenuCallback != StartMenu_ExitCallback &&
+           gMenuCallback != StartMenu_RetireCallback)
+            FadeScreen(1, 0);
         return 0;
     }
     if (gMain.newKeys & (START_BUTTON | B_BUTTON))
@@ -345,7 +648,7 @@ static u8 StartMenu_PokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
-        IncrementGameStat(0x29);
+        IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
@@ -395,7 +698,7 @@ static u8 StartMenu_PlayerCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        sub_8093110(sub_805469C);
+        TrainerCard_ShowPlayerCard(sub_805469C);
         return 1;
     }
     return 0;
@@ -404,8 +707,8 @@ static u8 StartMenu_PlayerCallback(void)
 //When player selects SAVE
 static u8 StartMenu_SaveCallback(void)
 {
-    HandleDestroyMenuCursors();
-    gCallback_03004AE8 = SaveCallback1;
+    Menu_DestroyCursor();
+    gMenuCallback = SaveCallback1;
     return 0;
 }
 
@@ -443,7 +746,7 @@ static u8 StartMenu_PlayerLinkCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        sub_8093130(gUnknown_03004860, sub_805469C);
+        TrainerCard_ShowLinkCard(gUnknown_03004860, sub_805469C);
         return 1;
     }
     return 0;
@@ -461,7 +764,7 @@ enum
 static u8 SaveCallback1(void)
 {
     sub_807160C();
-    gCallback_03004AE8 = SaveCallback2;
+    gMenuCallback = SaveCallback2;
     return FALSE;
 }
 
@@ -473,13 +776,13 @@ static u8 SaveCallback2(void)
         return FALSE;
     case SAVE_CANCELED:
         //Go back to start menu
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         InitStartMenu();
-        gCallback_03004AE8 = StartMenu_InputProcessCallback;
+        gMenuCallback = StartMenu_InputProcessCallback;
         return FALSE;
     case SAVE_SUCCESS:
     case SAVE_ERROR:
-        MenuZeroFillScreen();
+        Menu_EraseScreen();
         sub_8064E2C();
         ScriptContext2_Disable();
         return TRUE;
@@ -498,7 +801,7 @@ static u8 RunSaveDialogCallback(void)
 {
     if (savingComplete)
     {
-        if (!MenuUpdateWindowText())
+        if (!Menu_UpdateWindowText())
             return 0;
     }
     savingComplete = FALSE;
@@ -514,7 +817,7 @@ void ScrSpecial_DoSaveDialog(void)
 static void DisplaySaveMessageWithCallback(const u8 *ptr, u8 (*func)(void))
 {
     StringExpandPlaceholders(gStringVar4, ptr);
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     MenuPrintMessageDefaultCoords(gStringVar4);
     savingComplete = TRUE;
     saveDialogCallback = func;
@@ -547,7 +850,7 @@ static void sub_8071700(void)
 
 static void HideSaveDialog(void)
 {
-    MenuZeroFillWindowRect(20, 8, 26, 13);
+    Menu_EraseWindowRect(20, 8, 26, 13);
 }
 
 static void SaveDialogStartTimeout(void)
@@ -579,7 +882,7 @@ static bool8 SaveDialogCheckForTimeoutAndKeypress(void)
 
 static u8 SaveDialogCB_DisplayConfirmMessage(void)
 {
-    MenuZeroFillScreen();
+    Menu_EraseScreen();
     HandleDrawSaveWindowInfo(0, 0);
     DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_DisplayConfirmYesNoMenu);
     return SAVE_IN_PROGRESS;
@@ -594,7 +897,7 @@ static u8 SaveDialogCB_DisplayConfirmYesNoMenu(void)
 
 static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         HideSaveDialog();
@@ -640,7 +943,7 @@ static u8 SaveDialogCB_DisplayOverwriteYesNoMenu(void)
 
 static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:     //YES
         HideSaveDialog();
@@ -664,20 +967,20 @@ static u8 SaveDialogCB_DisplaySavingMessage(void)
 
 static u8 SaveDialogCB_DoSave(void)
 {
-    bool8 saveSucceeded;
+    u8 saveStatus;
 
-    IncrementGameStat(0);
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
     if (gDifferentSaveFile == TRUE)
     {
-        saveSucceeded = TrySavingData(DIFFERENT_FILE_SAVE);
+        saveStatus = Save_WriteData(SAVE_OVERWRITE_DIFFERENT_FILE);
         gDifferentSaveFile = FALSE;
     }
     else
     {
-        saveSucceeded = TrySavingData(NORMAL_SAVE);
+        saveStatus = Save_WriteData(SAVE_NORMAL);
     }
 
-    if (saveSucceeded == TRUE)
+    if (saveStatus == SAVE_STATUS_OK)
     {
         //"(Player) saved the game."
         DisplaySaveMessageWithCallback(gSaveText_PlayerSavedTheGame, SaveDialogCB_SaveSuccess);
@@ -694,7 +997,7 @@ static u8 SaveDialogCB_DoSave(void)
 
 static u8 SaveDialogCB_SaveSuccess(void)
 {
-    if (MenuUpdateWindowText())
+    if (Menu_UpdateWindowText())
     {
         PlaySE(SE_SAVE);
         saveDialogCallback = SaveDialogCB_ReturnSuccess;
@@ -715,7 +1018,7 @@ static u8 SaveDialogCB_ReturnSuccess(void)
 
 static u8 SaveDialogCB_SaveError(void)
 {
-    if (MenuUpdateWindowText())
+    if (Menu_UpdateWindowText())
     {
         PlaySE(SE_BOO);
         saveDialogCallback = SaveDialogCB_ReturnError;
@@ -744,38 +1047,21 @@ static bool32 sub_80719FC(u8 *step)
     switch (*step)
     {
     case 0:
-    {
-        u8 *addr;
-        u32 size;
-
         REG_DISPCNT = 0;
         SetVBlankCallback(NULL);
-        remove_some_task();
+        ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        addr = (void *)VRAM;
-        size = 0x18000;
-        while (1)
-        {
-            DmaFill16(3, 0, addr, 0x1000);
-            addr += 0x1000;
-            size -= 0x1000;
-            if (size <= 0x1000)
-            {
-                DmaFill16(3, 0, addr, size);
-                break;
-            }
-        }
+        DmaFill16Large(3, 0, (void *)(VRAM + 0x0), 0x18000, 0x1000);
         break;
-    }
     case 1:
         ResetSpriteData();
         ResetTasks();
         ResetPaletteFade();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         break;
     case 2:
-        SetUpWindowConfig(&gWindowConfig_81E6CE4);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
         break;
     case 3:
@@ -821,8 +1107,8 @@ static void Task_8071B64(u8 taskId)
         switch (*step)
         {
         case 0:
-            MenuDisplayMessageBox();
-            MenuPrint(gSystemText_Saving, 2, 15);
+            Menu_DisplayDialogueFrame();
+            Menu_PrintText(gSystemText_Saving, 2, 15);
             BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
             (*step)++;
             break;

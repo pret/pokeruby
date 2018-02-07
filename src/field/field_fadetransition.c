@@ -44,18 +44,18 @@ void pal_fill_for_map_transition(void)
     switch (fade_type_for_given_maplight_pair(map_light, Overworld_GetMapTypeOfSaveblockLocation()))
     {
     case 0:
-        fade_screen(0, 0);
+        FadeScreen(0, 0);
         palette_bg_fill_black();
         break;
     case 1:
-        fade_screen(2, 0);
+        FadeScreen(2, 0);
         palette_bg_fill_white();
     }
 }
 
 void pal_fill_black(void)
 {
-    fade_screen(0, 0);
+    FadeScreen(0, 0);
     palette_bg_fill_black();
 }
 
@@ -65,10 +65,10 @@ void fade_8080918(void)
     switch (sub_810CDB8(light_level, warp1_get_mapheader()->mapType))
     {
     case 0:
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         break;
     case 1:
-        fade_screen(3, 0);
+        FadeScreen(3, 0);
     }
 }
 
@@ -146,7 +146,7 @@ void sub_8080A5C(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             pal_fill_for_map_transition();
             task->data[0]++;
@@ -366,7 +366,7 @@ bool32 sub_8080E64(void)
 
 bool32 sub_8080E70(void)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -483,7 +483,7 @@ void sub_8081050(u8 taskId)
     {
     case 0:
         ClearLinkCallback_2();
-        fade_screen(1, 0);
+        FadeScreen(1, 0);
         sub_8053FF8();
         PlaySE(SE_KAIDAN);
         data[0]++;
@@ -510,6 +510,22 @@ void sub_80810DC(void)
 {
     CreateTask(sub_8081050, 10);
 }
+
+#if DEBUG
+
+__attribute__((naked))
+void debug_sub_80888D8()
+{
+    asm("\
+    PUSH    {LR}\n\
+    BL      debug_sub_8052E04\n\
+    BL      sub_8080E88\n\
+    BL      ScriptContext2_Enable\n\
+    POP     {R0}\n\
+    BX      R0");
+}
+
+#endif
 
 void task0A_fade_n_map_maybe(u8 taskId)
 {

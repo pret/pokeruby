@@ -41,11 +41,11 @@ static void Task_InitMenu(u8 taskId)
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
     SetVBlankCallback(VBlankCB_ClearSaveDataScreen);
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gSystemText_ClearAllSaveDataPrompt, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gSystemText_ClearAllSaveDataPrompt, 3, 15);
 
-    MenuDrawTextWindow(2, 1, 8, 6);
-    PrintMenuItems(3, 2, 2, gMenuYesNoItems);
+    Menu_DrawStdWindowFrame(2, 1, 8, 6);
+    Menu_PrintItems(3, 2, 2, gMenuYesNoItems);
     InitMenu(0, 3, 2, 2, 1, 5);
 
     gTasks[taskId].func = Task_ProcessMenuInput;
@@ -53,7 +53,7 @@ static void Task_InitMenu(u8 taskId)
 
 static void Task_ProcessMenuInput(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);
@@ -73,7 +73,7 @@ static void Task_ProcessMenuInput(u8 taskId)
 
 static void Task_ClearSaveData(u8 taskId)
 {
-    ClearSaveData();
+    Save_EraseAllData();
     DestroyTask(taskId);
     SetMainCallback2(CB2_SoftReset);
 }
@@ -133,8 +133,8 @@ static u8 InitClearSaveDataScreen(void)
         ResetTasks();
         ResetSpriteData();
 
-        SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow(&gWindowConfig_81E6CE4);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
+        InitMenuWindow(&gWindowTemplate_81E6CE4);
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
 
         ime = REG_IME;

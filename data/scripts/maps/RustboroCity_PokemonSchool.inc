@@ -77,12 +77,11 @@ RustboroCity_PokemonSchool_EventScript_157AC5:: @ 8157AC5
 RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_QUICK_CLAW
-	goto_if_eq RustboroCity_PokemonSchool_EventScript_157B34
+	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_157B34
 	compare FACING, 4
-	call_if 1, RustboroCity_PokemonSchool_EventScript_157B1E
+	call_if_eq RustboroCity_PokemonSchool_EventScript_157B1E
 	compare FACING, 3
-	call_if 1, RustboroCity_PokemonSchool_EventScript_157B29
+	call_if_eq RustboroCity_PokemonSchool_EventScript_157B29
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, 4
 	giveitem_std ITEM_QUICK_CLAW
 	compare RESULT, 0

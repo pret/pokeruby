@@ -13,7 +13,7 @@
 #include "rtc.h"
 #include "siirtc.h"
 #include "sound.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 IntrMain[];
@@ -83,6 +83,10 @@ static void WaitForVBlank(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
+#ifndef NDEBUG
+    #include <stdlib.h> // don't include if not needed.
+#endif
+
 void AgbMain()
 {
     RegisterRamReset(RESET_ALL);
@@ -97,6 +101,14 @@ void AgbMain()
     SeedRngWithRtc();
 
     gSoftResetDisabled = FALSE;
+
+// In Fire Red, AGBPrintInit is called at this spot. For user convenience, I
+// opt to initialize the print area here. It is up to the user where they choose
+// to print stuff from, as anything else declared is NOT authoritative.
+#ifndef NDEBUG
+    AGBPrintInit();
+    __mb_cur_max = 1; // fix for AGBPrintf
+#endif
 
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
@@ -350,7 +362,7 @@ void DoSoftReset(void)
 {
     REG_IME = 0;
     m4aSoundVSyncOff();
-    remove_some_task();
+    ScanlineEffect_Stop();
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);

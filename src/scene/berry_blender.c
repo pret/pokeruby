@@ -198,8 +198,8 @@ void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
 void m4aMPlayStop(struct MusicPlayerInfo *mplayInfo);
 void sub_80A6978(void);
 u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
-void sub_814A880(u8 a1, u8 a2);
-u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
+void MenuCursor_SetPos814A880(u8 a1, u8 a2);
+u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 s8 GetFirstFreePokeblockSlot(void);
 bool8 sub_810CA34(struct Pokeblock *pokeblock);
 #ifdef GERMAN
@@ -215,7 +215,7 @@ extern u8 byte_3002A68;
 extern const u8 gUnknown_08E6C100[];
 extern const u8 gUnknown_08E6C920[];
 extern const u8 gUnknown_08E6D354[];
-extern const struct WindowConfig gWindowConfig_81E6F68;
+extern const struct WindowTemplate gWindowTemplate_81E6F68;
 extern const u8 *const gPokeblockNames[];
 extern const struct Berry gBerries[];
 
@@ -274,12 +274,12 @@ static void sub_8051B18(void);
 static void sub_805123C(void);
 static void sub_8050954(void);
 static bool8 Blender_PrintBlendingRanking(void);
-static bool8 Blender_PrintBlendingResults(void);
+bool8 Blender_PrintBlendingResults(void);
 static void sub_80510E8(void);
 static void sub_8050E30(void);
 static void sub_805197C(u16 a0, u16 a1);
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
-static void sub_8052BD0(u8 taskID);
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
+/*static*/ void sub_8052BD0(u8 taskID);
 static void sub_8052AF8(void);
 static void sub_804F8C8(u8 taskID);
 static void sub_804F9F4(u8 taskID);
@@ -832,34 +832,13 @@ static bool8 sub_804E2EC(void)
         gBerryBlenderData->field_1++;
         break;
     case 1:
-        {
-            const void* offsetRead = sBlenderCenterMap;
-            void* offsetWrite = (void*)(VRAM + 0x4000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x400);
-            LoadPalette(sBlenderCenterPal, 0, 0x100);
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopy16Defvars(3, sBlenderCenterMap, (void *)(VRAM + 0x4000), 0x400);
+        LoadPalette(sBlenderCenterPal, 0, 0x100);
+        gBerryBlenderData->field_1++;
         break;
     case 2:
-        {
-            void* offsetRead = ewram10000;
-            void* offsetWrite = (void*)(VRAM);
-            u32 size = 0x2000;
-            while (TRUE)
-            {
-                DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-                offsetRead += 0x1000;
-                offsetWrite += 0x1000;
-                size -= 0x1000;
-                if (size <= 0x1000)
-                {
-                    DmaCopy16(3, offsetRead, offsetWrite, size);
-                    break;
-                }
-            }
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopyLarge16(3, ewram10000, (void *)(VRAM + 0x0), 0x2000, 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 3:
         LZDecompressWram(gUnknown_08E6C920, ewram10000);
@@ -870,37 +849,23 @@ static bool8 sub_804E2EC(void)
         gBerryBlenderData->field_1++;
         break;
     case 5:
-        {
-            void* offsetRead = ewram10000;
-            void* offsetWrite = (void*)(VRAM + 0xE000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            gBerryBlenderData->field_1++;
-        }
+        DmaCopy16Defvars(3, ewram10000, (void *)(VRAM + 0xE000), 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 6:
-        {
-            void* offsetRead = ewram11000;
-            void* offsetWrite = (void*)(VRAM + 0xF000);
-
-            DmaCopy16(3, offsetRead, offsetWrite, 0x1000);
-            gBerryBlenderData->field_1++;
-        }
+		DmaCopy16Defvars(3, ewram11000, (void *)(VRAM + 0xF000), 0x1000);
+        gBerryBlenderData->field_1++;
         break;
     case 7:
         {
             u16 i;
             u16* palStore = (u16*)(ewram13000);
-            void* offsetRead;
-            void* offsetWrite;
 
             for (i = 0; i < 640; i++)
             {
                 *(palStore + i) |= 0x100;
             }
-            offsetRead = ewram13000;
-            offsetWrite = (void*)(VRAM + 0x6000);
-            DmaCopy16(3, offsetRead, offsetWrite, 0x500);
+            DmaCopy16Defvars(3, ewram13000, (void *)(VRAM + 0x6000), 0x500);
             LoadPalette(sBlenderOuterPal, 0x80, 0x20);
             gBerryBlenderData->field_1++;
         }
@@ -957,8 +922,8 @@ static void sub_804E56C(void)
         ResetSpriteData();
         FreeAllSpritePalettes();
         SetVBlankCallback(NULL);
-        SetUpWindowConfig(&gWindowConfig_81E6F68);
-        InitMenuWindow(&gWindowConfig_81E6F68);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
+        InitMenuWindow(&gWindowTemplate_81E6F68);
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_140 = 0;
         gBerryBlenderData->field_13E = 0;
@@ -993,12 +958,12 @@ static void sub_804E56C(void)
         }
         break;
     case 4:
-        MenuDrawTextWindow(0, 14, 29, 19);
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
         MenuPrintMessage(gOtherText_BlenderChooseBerry, 1, 15);
         gBerryBlenderData->field_0++;
         break;
     case 5:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             gBerryBlenderData->field_0++;
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
@@ -1135,8 +1100,8 @@ static void sub_804E9F8(void)
         FreeAllSpritePalettes();
         ResetTasks();
         SetVBlankCallback(VBlankCB0_BerryBlender);
-        SetUpWindowConfig(&gWindowConfig_81E6F68);
-        InitMenuWindow(&gWindowConfig_81E6F68);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
+        InitMenuWindow(&gWindowTemplate_81E6F68);
         gLinkType = 0x4422;
         gBerryBlenderData->field_0++;
         gBerryBlenderData->field_4E = 0;
@@ -1184,8 +1149,8 @@ static void sub_804E9F8(void)
         }
         break;
     case 5:
-        MenuDrawTextWindow(0, 13, 29, 19);
-        MenuPrint(gOtherText_LinkStandby3, 1, 14);
+        Menu_DrawStdWindowFrame(0, 13, 29, 19);
+        Menu_PrintText(gOtherText_LinkStandby3, 1, 14);
         gBerryBlenderData->field_0 = 8;
         gBerryBlenderData->framesToWait = 0;
         break;
@@ -1198,7 +1163,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->framesToWait = 0;
         break;
     case 9:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             ResetBlockReceivedFlags();
             if (GetMultiplayerId() == 0)
@@ -1209,7 +1174,7 @@ static void sub_804E9F8(void)
     case 10:
         if (++gBerryBlenderData->framesToWait > 20)
         {
-            MenuZeroFillScreen();
+            Menu_EraseScreen();
             if (GetBlockReceivedStatus() == sub_8008198())
             {
                 for (i = 0; i < GetLinkPlayerCount(); i++)
@@ -1250,7 +1215,7 @@ static void sub_804E9F8(void)
         }
         break;
     case 13:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_0++;
             sub_8051414(&gBerryBlenderData->field_168);
@@ -1292,7 +1257,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->field_0++;
         break;
     case 20:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             sub_8007E24();
             gBerryBlenderData->field_0++;
@@ -1309,12 +1274,12 @@ static void sub_804E9F8(void)
         PlayBGM(BGM_CYCLING);
         break;
     case 100:
-        MenuDrawTextWindow(0, 13, 29, 19);
+        Menu_DrawStdWindowFrame(0, 13, 29, 19);
         MenuPrintMessage(gOtherText_LinkNotFound, 1, 15);
         gBerryBlenderData->field_0++;
         break;
     case 101:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             gBerryBlenderData->field_0++;
         break;
     case 102:
@@ -1338,8 +1303,8 @@ static void sub_804F0F4(void)
 
     SetVBlankCallback(VBlankCB0_BerryBlender);
 
-    SetUpWindowConfig(&gWindowConfig_81E6F68);
-    InitMenuWindow(&gWindowConfig_81E6F68);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6F68);
+    InitMenuWindow(&gWindowTemplate_81E6F68);
 
     gLinkType = 0x4422;
 
@@ -1426,7 +1391,7 @@ static void sub_804F2A8(void)
             if (GetMultiplayerId() == gBerryBlenderData->field_9A[i])
                 stringPtr = StringCopy(stringPtr, sRedColorString);
             StringCopy(stringPtr, gLinkPlayers[gBerryBlenderData->field_9A[i]].name);
-            MenuPrint_PixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
+            Menu_PrintTextPixelCoords(gStringVar1, gUnknown_082162D4[i][0] * 8 + 1, gUnknown_082162D4[i][1] * 8, 1);
         }
     }
 }
@@ -2446,7 +2411,7 @@ static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct
     Blender_CalculatePokeblock(berries, pokeblock, playersNo, flavours, a4);
 }
 
-static void sub_8050760(void)
+/*static*/ void sub_8050760(void)
 {
     u32 frames = (u16)(gBerryBlenderData->gameFrameTime);
     u16 max_RPM = gBerryBlenderData->max_RPM;
@@ -2494,15 +2459,15 @@ static void sub_8050760(void)
 static void sub_80508D4(u8 value)
 {
     gBerryBlenderData->field_AA = value;
-    sub_814A880(192, (gBerryBlenderData->field_AA * 16) + 72);
+    MenuCursor_SetPos814A880(192, (gBerryBlenderData->field_AA * 16) + 72);
 }
 
 static void sub_80508FC(void)
 {
     gBerryBlenderData->field_AA = 0;
-    MenuDrawTextWindow(23, 8, 28, 13);
-    sub_814A5C0(0, -1, 12, 0x2D9F, 32);
-    MenuPrint(gOtherText_YesNoTerminating, 24, 9);
+    Menu_DrawStdWindowFrame(23, 8, 28, 13);
+    MenuCursor_Create814A5C0(0, -1, 12, 0x2D9F, 32);
+    Menu_PrintText(gOtherText_YesNoTerminating, 24, 9);
     sub_80508D4(gBerryBlenderData->field_AA);
 }
 
@@ -2541,7 +2506,7 @@ static void sub_8050954(void)
     case 3:
         if (/*multiplayerID != 0*/ GetMultiplayerId() != 0)
             gBerryBlenderData->field_6F++;
-        else if (sub_8007ECC())
+        else if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_1BC = gBerryBlenderData->gameFrameTime;
             gBerryBlenderData->field_1C0 = gBerryBlenderData->max_RPM;
@@ -2567,19 +2532,19 @@ static void sub_8050954(void)
         if (Blender_PrintBlendingResults())
         {
             if (gInGameOpponentsNo == 0)
-                IncrementGameStat(34);
+                IncrementGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS);
             else
-                IncrementGameStat(33);
+                IncrementGameStat(GAME_STAT_POKEBLOCKS);
             gBerryBlenderData->field_6F++;
         }
         break;
     case 7:
         gBerryBlenderData->field_6F++;
-        MenuDrawTextWindow(0, 14, 29, 19);
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
         MenuPrintMessage(gOtherText_BlendAnotherBerryPrompt, 1, 15);
         break;
     case 8:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             gBerryBlenderData->field_6F++;
         break;
     case 9:
@@ -2654,7 +2619,7 @@ static void sub_8050954(void)
         }
         break;
     case 13:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             SetMainCallback2(sub_8050E30);
             gBerryBlenderData->field_6F = 0;
@@ -2681,7 +2646,7 @@ bool8 sub_8050CE8(void)
         gBerryBlenderData->framesToWait = 0;
         break;
     case 1:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->field_1C4++;
             gSoftResetDisabled = TRUE;
@@ -2700,7 +2665,7 @@ bool8 sub_8050CE8(void)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             if (sub_8125E6C())
                 gBerryBlenderData->field_1C4 = 5;
@@ -2746,7 +2711,7 @@ static void sub_8050E30(void)
     case 1:
         gBerryBlenderData->field_6F = 3;
         DestroyMenuCursor();
-        MenuZeroFillWindowRect(23, 8, 28, 13);
+        Menu_EraseWindowRect(23, 8, 28, 13);
 #ifdef ENGLISH
         StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_OtherCaseIsFull);
@@ -2759,7 +2724,7 @@ static void sub_8050E30(void)
     case 2:
         gBerryBlenderData->field_6F++;
         DestroyMenuCursor();
-        MenuZeroFillWindowRect(23, 8, 28, 13);
+        Menu_EraseWindowRect(23, 8, 28, 13);
 #ifdef ENGLISH
         StringCopy(gStringVar4, gLinkPlayers[gBerryBlenderData->field_7A].name);
         StringAppend(gStringVar4, gOtherText_NoBerriesForBlend);
@@ -2770,7 +2735,7 @@ static void sub_8050E30(void)
         MenuPrintMessage(gStringVar4, 1, 15);
         break;
     case 3:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             gBerryBlenderData->framesToWait = 0;
             gBerryBlenderData->field_6F++;
@@ -2781,13 +2746,13 @@ static void sub_8050E30(void)
             gBerryBlenderData->field_6F = 5;
         break;
     case 5:
-        MenuDrawTextWindow(0, 14, 29, 19);
-        MenuPrint(gMultiText_Saving, 2, 15);
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
+        Menu_PrintText(gMultiText_Saving, 2, 15);
         sub_80084A4();
         gBerryBlenderData->field_6F++;
         break;
     case 6:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             gBerryBlenderData->framesToWait = 0;
             gBerryBlenderData->field_6F++;
@@ -2806,7 +2771,7 @@ static void sub_8050E30(void)
         sub_80084A4();
         break;
     case 9:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gBerryBlenderData->field_6F++;
@@ -2859,17 +2824,17 @@ static void sub_80510E8(void)
     case 1:
         gBerryBlenderData->field_6F = 3;
         DestroyMenuCursor();
-        MenuZeroFillWindowRect(23, 8, 28, 13);
+        Menu_EraseWindowRect(23, 8, 28, 13);
         MenuPrintMessage(gOtherText_CaseIsFull, 1, 15);
         break;
     case 2:
         gBerryBlenderData->field_6F++;
         DestroyMenuCursor();
-        MenuZeroFillWindowRect(23, 8, 28, 13);
+        Menu_EraseWindowRect(23, 8, 28, 13);
         MenuPrintMessage(gOtherText_OutOfBerries, 1, 15);
         break;
     case 3:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
             gBerryBlenderData->field_6F = 9;
         break;
     case 9:
@@ -3080,14 +3045,14 @@ void unref_sub_80516F8(u8 taskID)
                 task->data[0] = 0;
             if (task->data[0] == 100)
             {
-                ZeroFillWindowRect(&gBerryBlenderData->field_4, 0, 0, 16, 20);
-                MenuDrawTextWindow(4, 4, 10, 12);
+                Text_EraseWindowRect(&gBerryBlenderData->field_4, 0, 0, 16, 20);
+                Menu_DrawStdWindowFrame(4, 4, 10, 12);
                 for (i = 0; i < 3; i++)
                 {
                     if (gLinkPlayers[i + 1].trainerId != 0)
-                        MenuPrint(gUnknown_08216284[i], 5, (2 * i) + 5);
-                    MenuDrawTextWindow(0, 13, 29, 19);
-                    MenuPrint(gOtherText_PressAToStart, 1, 15);
+                        Menu_PrintText(gUnknown_08216284[i], 5, (2 * i) + 5);
+                    Menu_DrawStdWindowFrame(0, 13, 29, 19);
+                    Menu_PrintText(gOtherText_PressAToStart, 1, 15);
                 }
             }
             if (gMain.newKeys & A_BUTTON)
@@ -3099,7 +3064,7 @@ void unref_sub_80516F8(u8 taskID)
         else
         {
             if (task->data[0] == 10)
-                MenuPrint(gOtherText_PleaseWait, 3, 10);
+                Menu_PrintText(gOtherText_PleaseWait, 3, 10);
             if (++task->data[0] > 120)
                 task->data[0] = 0;
             if (byte_3002A68 > 4 && gReceivedRemoteLinkPlayers == 1)
@@ -3305,13 +3270,13 @@ static void sub_8051C04(struct Sprite* sprite)
    sprite->pos2.y = -(gBerryBlenderData->field_146);
 }
 
-static void Blender_TrySettingRecord(void)
+/*static*/ void Blender_TrySettingRecord(void)
 {
     if (gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] < gBerryBlenderData->max_RPM)
         gSaveBlock1.berryBlenderRecords[gBerryBlenderData->playersNo - 2] = gBerryBlenderData->max_RPM;
 }
 
-static bool8 Blender_PrintBlendingResults(void)
+bool8 Blender_PrintBlendingResults(void)
 {
     u16 i;
 
@@ -3348,7 +3313,7 @@ static bool8 Blender_PrintBlendingResults(void)
             u8* textPtr;
             u16 secondsPassed, minutes, seconds;
 
-            MenuDrawTextWindow(4, 2, 25, 17);
+            Menu_DrawStdWindowFrame(4, 2, 25, 17);
             sub_8072BD8(gOtherText_ResultsOfBlending, 5, 3, 160);
             for (i = 0; i < gBerryBlenderData->playersNo; i++)
             {
@@ -3370,7 +3335,7 @@ static bool8 Blender_PrintBlendingResults(void)
                 textPtr += 3;
                 textPtr = sub_8072C74(textPtr, gLinkPlayers[place].name, 88, 0);
                 sub_8072C74(textPtr, text[0], 157, 0);
-                MenuPrint(gBerryBlenderData->stringVar, 5, gUnknown_082165E9[gBerryBlenderData->playersNo] + (i * gUnknown_082165EE[gBerryBlenderData->playersNo]));
+                Menu_PrintText(gBerryBlenderData->stringVar, 5, gUnknown_082165E9[gBerryBlenderData->playersNo] + (i * gUnknown_082165EE[gBerryBlenderData->playersNo]));
             }
             ConvertIntToDecimalStringN(text[0], gBerryBlenderData->max_RPM % 100, 2, 2);
             textPtr = gBerryBlenderData->stringVar;
@@ -3388,7 +3353,7 @@ static bool8 Blender_PrintBlendingResults(void)
             textPtr = sub_8072C74(textPtr, text[0], 136, 1);
 #endif
             StringCopy(textPtr, gOtherText_RPM);
-            MenuPrint(gBerryBlenderData->stringVar, 5, 13);
+            Menu_PrintText(gBerryBlenderData->stringVar, 5, 13);
 
             secondsPassed = gBerryBlenderData->gameFrameTime / 60;
             seconds = secondsPassed % 60;
@@ -3408,7 +3373,7 @@ static bool8 Blender_PrintBlendingResults(void)
             textPtr = sub_8072C74(textPtr, text[1], 136, 1);
             StringCopy(textPtr, gOtherText_Sec);
 
-            MenuPrint(gBerryBlenderData->stringVar, 5, 15);
+            Menu_PrintText(gBerryBlenderData->stringVar, 5, 15);
 
             gBerryBlenderData->framesToWait = 0;
             gBerryBlenderData->field_0++;
@@ -3419,8 +3384,8 @@ static bool8 Blender_PrintBlendingResults(void)
             gBerryBlenderData->field_0++;
         break;
     case 5:
-        MenuZeroFillScreen();
-        MenuDrawTextWindow(0, 14, 29, 19);
+        Menu_EraseScreen();
+        Menu_DrawStdWindowFrame(0, 14, 29, 19);
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
             if (gBerryBlenderData->chosenItemID[i] != 0)
@@ -3430,13 +3395,18 @@ static bool8 Blender_PrintBlendingResults(void)
         Blender_CalculatePokeblock(gBerryBlenderData->blendedBerries, &pokeblock, gBerryBlenderData->playersNo, flavours, gBerryBlenderData->max_RPM);
         Blender_PrintMadePokeblockString(&pokeblock, gBerryBlenderData->stringVar);
         CreateTask(sub_8052BD0, 6);
+#if DEBUG
+        ConvertIntToHexStringN(text[0], sub_8007E40(), 0, 4);
+        StringAppend(text[0], gUnknown_08216249);
+        StringAppend(gBerryBlenderData->stringVar, text[0]);
+#endif
         MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
         RemoveBagItem(gSpecialVar_ItemId, 1);
         sub_810CA34(&pokeblock);
         gBerryBlenderData->field_0++;
         break;
     case 6:
-        if (MenuUpdateWindowText())
+        if (Menu_UpdateWindowText())
         {
             Blender_TrySettingRecord();
             return TRUE;
@@ -3446,7 +3416,7 @@ static bool8 Blender_PrintBlendingResults(void)
     return FALSE;
 }
 
-static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
+/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
 {
     u8 text[12];
     u8 flavourLvl, feel;
@@ -3536,7 +3506,7 @@ static bool8 Blender_PrintBlendingRanking(void)
         }
         break;
     case 3:
-        MenuDrawTextWindow(4, 2, 25, 17);
+        Menu_DrawStdWindowFrame(4, 2, 25, 17);
         sub_8072BD8(gOtherText_Ranking, 5, 3, 160);
 
         gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&sSpriteTemplate_821645C, 140, 52, 0);
@@ -3575,7 +3545,7 @@ static bool8 Blender_PrintBlendingRanking(void)
             txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
             txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
 
-            MenuPrint(gBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[gBerryBlenderData->playersNo] + 8);
+            Menu_PrintText(gBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[gBerryBlenderData->playersNo] + 8);
         }
         gBerryBlenderData->framesToWait = 0;
         gBerryBlenderData->field_0++;
@@ -3606,8 +3576,8 @@ void unref_sub_80524BC(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB1_BerryBlender);
-    SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
     SeedRng(gMain.vblankCounter1);
     REG_DISPCNT = 0x1540;
     RunTasks();
@@ -3625,10 +3595,10 @@ static void BlenderDebug_PrintBerryData(void)
     u8 i;
 
     StringCopy(text, sText_BPM);
-    MenuPrint(text, 2, 0);
+    Menu_PrintText(text, 2, 0);
 
     ConvertIntToDecimalStringN(text, sBlenderDebug.BPM / 100, 2, 3);
-    MenuPrint(text, 6, 0);
+    Menu_PrintText(text, 6, 0);
 
     for (i = 0; i < 4; i++)
     {
@@ -3646,7 +3616,7 @@ static void BlenderDebug_PrintBerryData(void)
             text[7] = EOS;
         }
         var = (i * 3) + 3;
-        MenuPrint(text, 2, var);
+        Menu_PrintText(text, 2, var);
 
         ConvertIntToDecimalStringN(&text[0], gBerries[sBlenderDebug.berries[i]].spicy, 2, 2);
         StringAppend(text, sText_Space);
@@ -3666,12 +3636,12 @@ static void BlenderDebug_PrintBerryData(void)
         ConvertIntToDecimalStringN(&text[15], gBerries[sBlenderDebug.berries[i]].smoothness, 2, 2);
 
         text[17] = EOS;
-        MenuPrint(text, 7, var);
+        Menu_PrintText(text, 7, var);
     }
     if (sBlenderDebug.pokeblock.color != 0)
     {
         StringCopy(text, gPokeblockNames[sBlenderDebug.pokeblock.color]);
-        MenuPrint(text, 2, 15);
+        Menu_PrintText(text, 2, 15);
 
         ConvertIntToHexStringN(&text[0], sBlenderDebug.spicy, 2, 2);
         StringAppend(text, sText_Space);
@@ -3691,7 +3661,7 @@ static void BlenderDebug_PrintBerryData(void)
         ConvertIntToHexStringN(&text[15], sBlenderDebug.feel, 2, 2);
 
         text[17] = EOS;
-        MenuPrint(text, 7, 17);
+        Menu_PrintText(text, 7, 17);
     }
 }
 
@@ -3743,7 +3713,7 @@ static void sub_80527BC(void)
         gUnknown_020297DC = 0;
     }
 
-    MenuPrint(text, 2, 15);
+    Menu_PrintText(text, 2, 15);
 }
 
 static void sub_8052918(void)
@@ -3845,9 +3815,9 @@ void ShowBerryBlenderRecordWindow(void)
     u8 text[30];
     s32 i;
 
-    MenuDrawTextWindow(6, 3, 23, 16);
-    MenuPrint(gMultiText_BerryBlenderMaxSpeedRecord, 8, 4);
-    MenuPrint(gMultiText_2P3P4P, 8, 9);
+    Menu_DrawStdWindowFrame(6, 3, 23, 16);
+    Menu_PrintText(gMultiText_BerryBlenderMaxSpeedRecord, 8, 4);
+    Menu_PrintText(gMultiText_2P3P4P, 8, 9);
 
     for (i = 0; i < 3; i++)
     {
@@ -3865,11 +3835,11 @@ void ShowBerryBlenderRecordWindow(void)
 
         txtPtr = ConvertIntToDecimalStringN(txtPtr, record % 100, 2, 2);
         StringAppend(txtPtr, gOtherText_RPM);
-        MenuPrint(text, 15, i * 2 + 9);
+        Menu_PrintText(text, 15, i * 2 + 9);
     }
 }
 
-static void sub_8052BD0(u8 taskID)
+/*static*/ void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {

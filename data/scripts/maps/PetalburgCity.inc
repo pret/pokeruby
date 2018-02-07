@@ -6,9 +6,9 @@ PetalburgCity_MapScripts:: @ 814B70C
 PetalburgCity_MapScript1_14B717:: @ 814B717
 	setflag FLAG_VISITED_PETALBURG_CITY
 	compare VAR_PETALBURG_STATE, 0
-	call_if 1, PetalburgCity_EventScript_14B731
+	call_if_eq PetalburgCity_EventScript_14B731
 	compare VAR_PETALBURG_STATE, 2
-	call_if 1, PetalburgCity_EventScript_14B739
+	call_if_eq PetalburgCity_EventScript_14B739
 	end
 
 PetalburgCity_EventScript_14B731:: @ 814B731
@@ -16,7 +16,7 @@ PetalburgCity_EventScript_14B731:: @ 814B731
 	return
 
 PetalburgCity_EventScript_14B739:: @ 814B739
-	savebgm 420
+	savebgm BGM_TSURETEK
 	return
 
 PetalburgCity_MapScript2_14B73D:: @ 814B73D
@@ -181,30 +181,30 @@ PetalburgCity_EventScript_14B85A:: @ 814B85A
 PetalburgCity_EventScript_14B866:: @ 814B866
 	applymovement 9, PetalburgCity_Movement_1A0839
 	waitmovement 0
-	playbgm 420, 0
-	playse 21
+	playbgm BGM_TSURETEK, FALSE
+	playse SE_PIN
 	applymovement 9, PetalburgCity_Movement_1A0833
 	waitmovement 0
 	applymovement 9, PetalburgCity_Movement_1A0835
 	waitmovement 0
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_EventScript_14B91B
+	call_if_eq PetalburgCity_EventScript_14B91B
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_EventScript_14B930
+	call_if_eq PetalburgCity_EventScript_14B930
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_EventScript_14B93B
+	call_if_eq PetalburgCity_EventScript_14B93B
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_EventScript_14B950
+	call_if_eq PetalburgCity_EventScript_14B950
 	msgbox PetalburgCity_Text_16438A, 4
 	closemessage
 	compare VAR_SPECIAL_8, 0
-	call_if 1, PetalburgCity_EventScript_14B965
+	call_if_eq PetalburgCity_EventScript_14B965
 	compare VAR_SPECIAL_8, 1
-	call_if 1, PetalburgCity_EventScript_14B977
+	call_if_eq PetalburgCity_EventScript_14B977
 	compare VAR_SPECIAL_8, 2
-	call_if 1, PetalburgCity_EventScript_14B989
+	call_if_eq PetalburgCity_EventScript_14B989
 	compare VAR_SPECIAL_8, 3
-	call_if 1, PetalburgCity_EventScript_14B99B
+	call_if_eq PetalburgCity_EventScript_14B99B
 	msgbox PetalburgCity_Text_164426, 4
 	applymovement 9, PetalburgCity_Movement_1A0843
 	applymovement 255, PetalburgCity_Movement_1A0843

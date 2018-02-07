@@ -18,8 +18,7 @@ FortreeCity_EventScript_14C955:: @ 814C955
 FortreeCity_EventScript_14C95E:: @ 814C95E
 	lock
 	faceplayer
-	checkflag FLAG_KECLEON_FLED_FORTREE
-	goto_if_eq FortreeCity_EventScript_14C973
+	goto_if_set FLAG_KECLEON_FLED_FORTREE, FortreeCity_EventScript_14C973
 	msgbox FortreeCity_Text_1675C2, 4
 	release
 	end
@@ -64,8 +63,8 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	end
 
 FortreeCity_EventScript_14C9CF:: @ 814C9CF
-	msgbox FortreeCity_Text_16788B, 5
-	compare RESULT, 1
+	msgbox FortreeCity_Text_16788B, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq FortreeCity_EventScript_14C9E4
 	release
 	end

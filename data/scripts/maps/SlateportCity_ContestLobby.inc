@@ -22,13 +22,13 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	lockall
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CC
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, SlateportCity_ContestLobby_Movement_1554CF
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
@@ -101,8 +101,7 @@ SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
 
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
-	checkflag FLAG_RECEIVED_POKEBLOCK_CASE
-	goto_if_eq SlateportCity_ContestLobby_EventScript_155526
+	goto_if_set FLAG_RECEIVED_POKEBLOCK_CASE, SlateportCity_ContestLobby_EventScript_155526
 	applymovement 7, SlateportCity_ContestLobby_Movement_1A0839
 	waitmovement 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4

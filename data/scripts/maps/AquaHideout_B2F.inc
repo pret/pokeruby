@@ -10,7 +10,7 @@ AquaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 MagmaHideout_B2F_EventScript_15D8BD:: @ 815D8BD
 	lockall
 	setvar VAR_SPECIAL_8, 1
-	playse 21
+	playse SE_PIN
 	applymovement VAR_SPECIAL_8, AquaHideout_B2F_Movement_1A0833
 	waitmovement 0
 	.ifdef SAPPHIRE

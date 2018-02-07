@@ -5,13 +5,13 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 8161D76
 
 Route110_TrickHousePuzzle2_MapScript1_161D81:: @ 8161D81
 	compare VAR_TEMP_1, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E2C
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_161E2C
 	compare VAR_TEMP_2, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E3F
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_161E3F
 	compare VAR_TEMP_3, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E52
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_161E52
 	compare VAR_TEMP_4, 1
-	call_if 1, Route110_TrickHousePuzzle2_EventScript_161E65
+	call_if_eq Route110_TrickHousePuzzle2_EventScript_161E65
 	end
 
 Route110_TrickHousePuzzle2_MapScript1_161DAE:: @ 8161DAE
@@ -36,7 +36,7 @@ Route110_TrickHousePuzzle2_EventScript_161DD5:: @ 8161DD5
 Route110_TrickHousePuzzle2_EventScript_161DE0:: @ 8161DE0
 	lockall
 	setvar VAR_TEMP_1, 1
-	playse 21
+	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_161E2C
 	special DrawWholeMapView
 	releaseall
@@ -45,7 +45,7 @@ Route110_TrickHousePuzzle2_EventScript_161DE0:: @ 8161DE0
 Route110_TrickHousePuzzle2_EventScript_161DF3:: @ 8161DF3
 	lockall
 	setvar VAR_TEMP_2, 1
-	playse 21
+	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_161E3F
 	special DrawWholeMapView
 	releaseall
@@ -54,7 +54,7 @@ Route110_TrickHousePuzzle2_EventScript_161DF3:: @ 8161DF3
 Route110_TrickHousePuzzle2_EventScript_161E06:: @ 8161E06
 	lockall
 	setvar VAR_TEMP_3, 1
-	playse 21
+	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_161E52
 	special DrawWholeMapView
 	releaseall
@@ -63,7 +63,7 @@ Route110_TrickHousePuzzle2_EventScript_161E06:: @ 8161E06
 Route110_TrickHousePuzzle2_EventScript_161E19:: @ 8161E19
 	lockall
 	setvar VAR_TEMP_4, 1
-	playse 21
+	playse SE_PIN
 	call Route110_TrickHousePuzzle2_EventScript_161E65
 	special DrawWholeMapView
 	releaseall

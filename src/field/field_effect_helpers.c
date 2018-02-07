@@ -29,8 +29,6 @@ static void sub_81280A0(struct MapObject *, struct Sprite *, struct Sprite *);
 static void sub_8128174(struct Sprite *);
 static u32 ShowDisguiseFieldEffect(u8, u8, u8);
 
-const u8 UnusedEggString_8401E28[] = _("タマゴ");
-
 void SetUpReflection(struct MapObject *mapObject, struct Sprite *sprite, bool8 flag)
 {
     struct Sprite *newSprite;
@@ -95,7 +93,7 @@ static void npc_pal_op_B(struct MapObject *mapObject, u8 paletteNum)
         {
             pal_patch_for_npc(npc_paltag_by_palslot(paletteNum), paletteNum);
         }
-        sub_807D78C(paletteNum);
+        UpdateSpritePaletteWithWeather(paletteNum);
     }
 }
 
@@ -107,7 +105,7 @@ static void npc_pal_op_A(struct MapObject *mapObject, u8 paletteNum)
     if (graphicsInfo->paletteTag2 != 0x11ff)
     {
         pal_patch_for_npc(graphicsInfo->paletteTag2, paletteNum);
-        sub_807D78C(paletteNum);
+        UpdateSpritePaletteWithWeather(paletteNum);
     }
 }
 

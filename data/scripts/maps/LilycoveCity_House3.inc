@@ -10,8 +10,8 @@ LilycoveCity_House3_MapScript1_159BEA:: @ 8159BEA
 LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 	lock
 	faceplayer
-	msgbox LilycoveCity_House3_Text_18B8CC, 5
-	compare RESULT, 0
+	msgbox LilycoveCity_House3_Text_18B8CC, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq LilycoveCity_House3_EventScript_159C1D
 	msgbox LilycoveCity_House3_Text_18BA2B, 4
 	closemessage

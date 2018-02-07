@@ -26,7 +26,7 @@ static void DecrementFeederStepCounters(void);
 extern u8 gBattleOutcome;
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
-EWRAM_DATA static u16 gSafariZoneStepCounter = 0;
+EWRAM_DATA u16 gSafariZoneStepCounter = 0;
 EWRAM_DATA static struct PokeblockFeeder gPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
 
 extern void (*gFieldCallback)(void);
@@ -56,7 +56,7 @@ void ResetSafariZoneFlag(void)
 
 void EnterSafariMode(void)
 {
-    IncrementGameStat(0x11);
+    IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = 30;

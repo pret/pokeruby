@@ -16,7 +16,11 @@
 #include "data2.h"
 #include "decompress.h"
 #include "random.h"
+#include "scanline_effect.h"
 #include "trig.h"
+#include "hof_pc.h"
+#include "credits.h"
+#include "pc_screen_effect.h"
 #include "ewram.h"
 
 static EWRAM_DATA u32 sUnknown_0203931C = 0;
@@ -87,16 +91,6 @@ static u32 HallOfFame_LoadPokemonPic(u16 species, s16 posX, s16 posY, u16 pokeID
 static u32 HallOfFame_LoadTrainerPic(u16 trainerPicID, s16 posX, s16 posY, u16 a3);
 static bool8 sub_81438C4(void);
 
-// functions from different files
-void sub_81439D0(void);
-void sub_80C5CD4(void*); // ?
-void sub_80C5E38(void*); // ?
-bool8 sub_80C5DCC(void);
-bool8 sub_80C5F98(void);
-void ReturnFromHallOfFamePC(void);
-u16 SpeciesToPokedexNum(u16 species);
-void remove_some_task(void);
-
 // data and gfx
 
 static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet =
@@ -130,9 +124,9 @@ static const s16 sHallOfFame_MonsHalfTeamPositions[3][4] =
     {-41,   214,    184,    64}
 };
 
-static const struct HallofFameMon sDummyFameMon =
-{
-    0x3EA03EA, 0, 0, 0, {0}
+static const struct PCScreenEffectStruct sPCScreenEffectTemplate = {
+    .tileTag = 0x3ea,
+    .paletteTag = 0x3ea
 };
 
 static const u8 sUnused2[6] = {2, 1, 3, 6, 4, 5};
@@ -539,7 +533,7 @@ static void sub_814217C(u8 taskID)
             ewram1E000(i) = 0;
     }
     else
-        sub_8125EC8(3);
+        Save_LoadGameData(SAVE_HALL_OF_FAME);
 
     for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, lastSavedTeam++)
     {
@@ -558,15 +552,15 @@ static void sub_814217C(u8 taskID)
         lastSavedTeam--;
     }
     *lastSavedTeam = *fameMons;
-    MenuDrawTextWindow(2, 14, 27, 19);
-    MenuPrint(gMenuText_HOFSaving, 3, 15);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
+    Menu_PrintText(gMenuText_HOFSaving, 3, 15);
     gTasks[taskID].func = sub_8142274;
 }
 
 static void sub_8142274(u8 taskID)
 {
     gGameContinueCallback = sub_8141FC4;
-    TrySavingData(3);
+    Save_WriteData(3);
     PlaySE(SE_SAVE);
     gTasks[taskID].func = sub_81422B8;
     gTasks[taskID].tFrameCount = 32;
@@ -582,8 +576,8 @@ static void sub_81422B8(u8 taskID)
 
 static void sub_81422E8(u8 taskID)
 {
-    SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow(&gWindowConfig_81E7198);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E7198);
+    InitMenuWindow(&gWindowTemplate_81E7198);
     gTasks[taskID].func = sub_8142320;
 }
 
@@ -617,7 +611,7 @@ static void sub_8142320(u8 taskID)
     gSprites[spriteID].data[0] = 0;
     gSprites[spriteID].callback = sub_81435DC;
     gTasks[taskID].tMonSpriteID(currPokeID) = spriteID;
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     gTasks[taskID].func = sub_8142404;
 }
 
@@ -670,7 +664,7 @@ static void sub_8142570(u8 taskID)
         if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
             gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 0;
     }
-    MenuZeroFillWindowRect(0, 14, 29, 19);
+    Menu_EraseWindowRect(0, 14, 29, 19);
     sub_8143068(0, 15);
     PlaySE(SE_DENDOU);
     gTasks[taskID].tFrameCount = 400;
@@ -694,7 +688,7 @@ static void sub_8142618(u8 taskID)
                 gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 1;
         }
         BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
-        MenuZeroFillWindowRect(0, 14, 29, 19);
+        Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskID].tFrameCount = 7;
         gTasks[taskID].func = sub_81426F8;
     }
@@ -714,8 +708,8 @@ static void sub_81426F8(u8 taskID)
 static void sub_8142738(u8 taskID)
 {
     REG_DISPCNT = 0x1940;
-    SetUpWindowConfig(&gWindowConfig_81E71B4);
-    InitMenuWindow(&gWindowConfig_81E71B4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E71B4);
+    InitMenuWindow(&gWindowTemplate_81E71B4);
 
     gTasks[taskID].tPlayerSpriteID = HallOfFame_LoadTrainerPic(gSaveBlock2.playerGender, 120, 72, 6);
     gTasks[taskID].tFrameCount = 120;
@@ -732,10 +726,10 @@ static void sub_8142794(u8 taskID)
             gSprites[gTasks[taskID].tPlayerSpriteID].pos1.x++;
         else
         {
-            MenuDrawTextWindow(1, 2, 15, 9);
+            Menu_DrawStdWindowFrame(1, 2, 15, 9);
             HallOfFame_PrintPlayerInfo(1, 2);
-            MenuDrawTextWindow(2, 14, 27, 19);
-            MenuPrint(gMenuText_HOFCongratulations, 4, 15);
+            Menu_DrawStdWindowFrame(2, 14, 27, 19);
+            Menu_PrintText(gMenuText_HOFCongratulations, 4, 15);
             gTasks[taskID].func = sub_8142818;
         }
     }
@@ -800,20 +794,15 @@ void sub_81428CC(void)
         }
         break;
     case 3:
-        {
-            struct HallofFameMons* fameMons;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0;
+        sub_81435B8();
 
-            REG_BLDCNT = 0;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0;
-            sub_81435B8();
+        eHOFPCScreenEffect = sPCScreenEffectTemplate;
 
-            fameMons = eHallOfFameMons1;
-            fameMons->mons[0] = sDummyFameMon;
-
-            sub_80C5CD4(fameMons);
-            gMain.state++;
-        }
+        sub_80C5CD4(&eHOFPCScreenEffect);
+        gMain.state++;
         break;
     case 4:
         AnimateSprites();
@@ -840,7 +829,7 @@ void sub_81428CC(void)
 
 static void sub_8142A28(u8 taskID)
 {
-    if (sub_8125EC8(3) != 1)
+    if (Save_LoadGameData(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
         gTasks[taskID].func = sub_8142FEC;
     else
     {
@@ -864,8 +853,8 @@ static void sub_8142A28(u8 taskID)
             *(vram1 + i) = i + 3;
             *(vram2 + i) = i + 20;
         }
-        SetUpWindowConfig(&gWindowConfig_81E7198);
-        InitMenuWindow(&gWindowConfig_81E7198);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E7198);
+        InitMenuWindow(&gWindowTemplate_81E7198);
         gTasks[taskID].func = sub_8142B04;
     }
 }
@@ -930,7 +919,7 @@ static void sub_8142B04(u8 taskID)
     stringPtr[1] = 0x13;
     stringPtr[2] = 0xF0;
     stringPtr[3] = EOS;
-    MenuPrint(gStringVar1, 0, 0);
+    Menu_PrintText(gStringVar1, 0, 0);
 
     gTasks[taskID].func = sub_8142CC8;
 }
@@ -1022,12 +1011,9 @@ static void sub_8142DF4(u8 taskID)
 
 static void sub_8142F78(u8 taskID)
 {
-    struct HallofFameMons* fameMons;
-
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    fameMons = eHallOfFameMons1;
-    fameMons->mons[0] = sDummyFameMon;
-    sub_80C5E38(fameMons);
+    eHOFPCScreenEffect = sPCScreenEffectTemplate;
+    sub_80C5E38(&eHOFPCScreenEffect);
     gTasks[taskID].func = sub_8142FCC;
 }
 
@@ -1042,14 +1028,14 @@ static void sub_8142FCC(u8 taskID)
 
 static void sub_8142FEC(u8 taskID)
 {
-    MenuDrawTextWindow(2, 14, 27, 19);
+    Menu_DrawStdWindowFrame(2, 14, 27, 19);
     MenuPrintMessage(gMenuText_HOFCorrupt, 3, 15);
     gTasks[taskID].func = sub_814302C;
 }
 
 static void sub_814302C(u8 taskID)
 {
-    if (MenuUpdateWindowText() && gMain.newKeys & A_BUTTON)
+    if (Menu_UpdateWindowText() && gMain.newKeys & A_BUTTON)
         gTasks[taskID].func = sub_8142F78;
 }
 
@@ -1086,7 +1072,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         }
     }
 
-    MenuPrint(gStringVar1, a1 + 4, a2 + 1);
+    Menu_PrintText(gStringVar1, a1 + 4, a2 + 1);
     stringPtr = gStringVar1;
 
     for (i = 0; i < 10 && currMon->nick[i] != EOS; stringPtr[i] = currMon->nick[i], i++) {}
@@ -1099,8 +1085,8 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[1] = 0x13;
         stringPtr[2] = 0xA0;
         stringPtr[3] = EOS;
-        MenuPrint(gStringVar1, a1 + 9, a2 + 1);
-        MenuZeroFillWindowRect(0, a2 + 3, 29, a2 + 4);
+        Menu_PrintText(gStringVar1, a1 + 9, a2 + 1);
+        Menu_EraseWindowRect(0, a2 + 3, 29, a2 + 4);
     }
     else
     {
@@ -1139,7 +1125,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[2] = 0xA0;
         stringPtr[3] = EOS;
 
-        MenuPrint(gStringVar1, a1 + 9, a2 + 1);
+        Menu_PrintText(gStringVar1, a1 + 9, a2 + 1);
 
         monData = currMon->lvl;
 
@@ -1157,14 +1143,14 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 a1, u8 a2)
         stringPtr[2] = 0x30;
         stringPtr[3] = EOS;
 
-        MenuPrint(gStringVar1, a1 + 7, a2 + 3);
+        Menu_PrintText(gStringVar1, a1 + 7, a2 + 3);
 
         monData = currMon->tid;
 
         stringPtr = StringCopy(gStringVar1, gOtherText_IDNumber);
         ConvertIntToDecimalStringN(stringPtr, monData, 2, 5);
 
-        MenuPrint(gStringVar1, a1 + 13, a2 + 3);
+        Menu_PrintText(gStringVar1, a1 + 13, a2 + 3);
     }
 }
 
@@ -1175,15 +1161,15 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
     u8* stringPtr;
     u16 visibleTid;
 
-    MenuPrint(gOtherText_Name, a0 + 1, a1 + 1);
+    Menu_PrintText(gOtherText_Name, a0 + 1, a1 + 1);
     MenuPrint_RightAligned(gSaveBlock2.playerName, a0 + 14, a1 + 1);
 
-    MenuPrint(gOtherText_IDNumber2, a0 + 1, a1 + 3);
+    Menu_PrintText(gOtherText_IDNumber2, a0 + 1, a1 + 3);
     visibleTid = ByteRead16(gSaveBlock2.playerTrainerId);
     ConvertIntToDecimalStringN(gStringVar1, visibleTid, 2, 5);
 
     MenuPrint_RightAligned(gStringVar1, a0 + 14, a1 + 3);
-    MenuPrint(gMainMenuString_Time, a0 + 1, a1 + 5);
+    Menu_PrintText(gMainMenuString_Time, a0 + 1, a1 + 5);
 
     stringPtr = ConvertIntToDecimalString(gStringVar1, gSaveBlock2.playTimeHours);
     stringPtr[0] = CHAR_SPACE;
@@ -1199,8 +1185,6 @@ static void HallOfFame_PrintPlayerInfo(u8 a0, u8 a1)
 
 static void sub_81433E0(void)
 {
-    u32 offsetWrite, offsetWrite2, offsetWrite3, offsetWrite4;
-    u32 size, size2, size3, size4;
     u16 i;
 
     REG_DISPCNT = 0;
@@ -1221,27 +1205,9 @@ static void sub_81433E0(void)
     REG_BG3HOFS = 0;
     REG_BG3VOFS = 0;
 
-    offsetWrite = (VRAM);
-    size = 0x18000;
-    while (TRUE)
-    {
-        DmaFill16(3, 0, offsetWrite, 0x1000);
-        offsetWrite += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, offsetWrite, size);
-            break;
-        }
-    }
-
-    offsetWrite2 = OAM;
-    size2 = OAM_SIZE;
-    DmaFill32(3, 0, offsetWrite2, size2);
-
-    offsetWrite3 = PLTT;
-    size3 = PLTT_SIZE;
-    DmaFill16(3, 0, offsetWrite3, size3);
+    DmaFill16Large(3, 0, VRAM, 0x18000, 0x1000);
+    DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
+    DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
 
     LZ77UnCompVram(gHallOfFame_Gfx, (void*)(VRAM));
 
@@ -1258,35 +1224,22 @@ static void sub_81433E0(void)
         *((u16*)(VRAM + 0x3000) + i) = 2;
     }
 
-    offsetWrite4 = ewram0_6;
-    size4 = 0x4000;
-    while (TRUE)
-    {
-        DmaFill16(3, 0, offsetWrite4, 0x1000);
-        offsetWrite4 += 0x1000;
-        size4 -= 0x1000;
-        if (size4 <= 0x1000)
-        {
-            DmaFill16(3, 0, offsetWrite4, size4);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, ewram0_6, 0x4000, 0x1000);
     ResetPaletteFade();
     LoadPalette(gHallOfFame_Pal, 0, 0x20);
 }
 
 static void sub_8143570(void)
 {
-    remove_some_task();
+    ScanlineEffect_Stop();
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
     LoadCompressedObjectPic(&sHallOfFame_ConfettiSpriteSheet);
     LoadCompressedObjectPalette(&sHallOfFame_ConfettiSpritePalette);
-    SetUpWindowConfig(&gWindowConfig_81E71B4);
-    InitMenuWindow(&gWindowConfig_81E71B4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E71B4);
+    InitMenuWindow(&gWindowTemplate_81E71B4);
 }
 
 static void sub_81435B8(void)

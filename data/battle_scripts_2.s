@@ -1,8 +1,8 @@
 #include "constants/battle_constants.h"
 #include "constants/items.h"
 #include "constants/songs.h"
-	.include "asm/macros.inc"
-	.include "asm/macros/battle_script.inc"
+	.include "include/macros.inc"
+	.include "include/macros/battle_script.inc"
 	.include "constants/constants.inc"
 	.include "constants/battle_script_constants.inc"
 
@@ -164,7 +164,7 @@ BattleScript_OpponentUsesGuardSpecs: @ 81D9FBB
 	finishaction
 
 BattleScript_RunByUsingItem: @ 81D9FDA
-	playse 17
+	playse SE_NIGERU
 	setbyte gBattleOutcome, BATTLE_RAN
 	finishturn
 

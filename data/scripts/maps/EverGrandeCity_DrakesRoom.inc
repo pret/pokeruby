@@ -24,10 +24,9 @@ EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 	end
 
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
-	checkflag FLAG_DEFEATED_ELITE_4_DRAKE
-	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B758
+	call_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B758
 	compare VAR_ELITE_4_STATE, 4
-	call_if 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
+	call_if_eq EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758
@@ -41,9 +40,8 @@ EverGrandeCity_DrakesRoom_EventScript_15B75E:: @ 815B75E
 EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_ELITE_4_DRAKE
-	goto_if_eq EverGrandeCity_DrakesRoom_EventScript_15B78B
-	playbgm 450, 0
+	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B78B
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
 	goto EverGrandeCity_DrakesRoom_EventScript_15B795

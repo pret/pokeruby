@@ -17,8 +17,7 @@ FortreeCity_Gym_EventScript_157EEC:: @ 8157EEC
 
 FortreeCity_Gym_EventScript_157EF0:: @ 8157EF0
 	trainerbattle 1, OPPONENT_WINONA, 0, FortreeCity_Gym_Text_185CCB, FortreeCity_Gym_Text_185DBA, FortreeCity_Gym_EventScript_157F15
-	checkflag FLAG_RECEIVED_TM40
-	goto_if 0, FortreeCity_Gym_EventScript_157F3E
+	goto_if_unset FLAG_RECEIVED_TM40, FortreeCity_Gym_EventScript_157F3E
 	msgbox FortreeCity_Gym_Text_185F98, 4
 	release
 	end
@@ -36,7 +35,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 	end
 
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
-	giveitem_std ITEM_TM40
+	giveitem_std ITEM_TM40_AERIAL_ACE
 	compare RESULT, 0
 	goto_if_eq FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
@@ -67,8 +66,7 @@ FortreeCity_Gym_EventScript_157FA7:: @ 8157FA7
 FortreeCity_Gym_EventScript_157FBE:: @ 8157FBE
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_FORTREE_GYM
-	goto_if_eq FortreeCity_Gym_EventScript_157FD3
+	goto_if_set FLAG_DEFEATED_FORTREE_GYM, FortreeCity_Gym_EventScript_157FD3
 	msgbox FortreeCity_Gym_Text_18589C, 4
 	release
 	end
@@ -80,15 +78,13 @@ FortreeCity_Gym_EventScript_157FD3:: @ 8157FD3
 
 FortreeCity_Gym_EventScript_157FDD:: @ 8157FDD
 	lockall
-	checkflag FLAG_BADGE06_GET
-	goto_if_eq FortreeCity_Gym_EventScript_157FFD
+	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FED:: @ 8157FED
 	lockall
-	checkflag FLAG_BADGE06_GET
-	goto_if_eq FortreeCity_Gym_EventScript_157FFD
+	goto_if_set FLAG_BADGE06_GET, FortreeCity_Gym_EventScript_157FFD
 	goto FortreeCity_Gym_EventScript_158007
 	end
 

@@ -21,7 +21,7 @@ SafariZone_Southeast_EventScript_16004B:: @ 816004B
 
 SafariZone_Southeast_MapScript1_160073:: @ 8160073
 	compare VAR_SAFARI_ZONE_STATE, 2
-	call_if 1, SafariZone_Southeast_EventScript_16007F
+	call_if_eq SafariZone_Southeast_EventScript_16007F
 	end
 
 SafariZone_Southeast_EventScript_16007F:: @ 816007F
@@ -54,8 +54,8 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	faceplayer
 	compare VAR_TEMP_1, 0
 	goto_if_eq SafariZone_Southeast_EventScript_1600D1
-	msgbox SafariZone_Southeast_Text_1C3A56, 5
-	compare RESULT, 1
+	msgbox SafariZone_Southeast_Text_1C3A56, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq SafariZone_Southeast_EventScript_1600E0
 	msgbox SafariZone_Southeast_Text_1C3A9C, 4
 	release

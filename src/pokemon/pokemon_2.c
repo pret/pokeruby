@@ -1,5 +1,8 @@
 #include "global.h"
+#include "constants/hold_effects.h"
+#include "constants/moves.h"
 #include "battle.h"
+#include "battle_util.h"
 #include "data2.h"
 #include "event_data.h"
 #include "main.h"
@@ -11,6 +14,7 @@
 #include "string_util.h"
 #include "strings2.h"
 #include "text.h"
+#include "trainer.h"
 #include "util.h"
 #include "ewram.h"
 
@@ -39,11 +43,12 @@ extern const struct SpriteTemplate gSpriteTemplate_8208288[];
 //array of pointers to arrays of pointers to union AnimCmd (We probably need to typedef this.)
 extern u8 gTrainerClassToPicIndex[];
 extern u8 gTrainerClassToNameIndex[];
-extern u8 gSecretBaseTrainerClasses[][5];
-extern u8 gUnknown_08208238[];
-extern u8 gUnknown_0820823C[];
-extern u8 gStatStageRatios[][2];
-extern u8 gHoldEffectToType[][2];
+
+extern const u8 gUnknown_08208238[];
+extern const u8 gUnknown_0820823C[];
+
+extern void sub_80105A0(struct Sprite *);
+extern void oac_poke_opponent(struct Sprite *);
 
 u8 CountAliveMons(u8 a1)
 {
@@ -84,7 +89,7 @@ u8 sub_803C434(u8 a1)
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByPlayerAI(status);
+        return GetBankByIdentity(status);
     if (CountAliveMons(0) > 1)
     {
         u8 val;
@@ -93,14 +98,14 @@ u8 sub_803C434(u8 a1)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByPlayerAI(val);
+        return GetBankByIdentity(val);
     }
     else
     {
         if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByPlayerAI(status ^ 2);
+            return GetBankByIdentity(status ^ 2);
         else
-            return GetBankByPlayerAI(status);
+            return GetBankByIdentity(status);
     }
 }
 
@@ -143,6 +148,14 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
     else
         return MON_MALE;
 }
+
+const struct SpriteTemplate gSpriteTemplate_8208288[] =
+{
+    {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A10, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A30, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+    {0xFFFF, 0, &gOamData_81F96F0, NULL, gSpriteImageTable_81E7A50, gSpriteAffineAnimTable_81E7B70, sub_80105A0},
+    {0xFFFF, 0, &gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent},
+};
 
 void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
 {
@@ -557,7 +570,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             u16 *moves = (u16 *)data;
             s32 i = 0;
 
-            while (moves[i] != 355)
+            while (moves[i] != NUM_MOVES)
             {
                 u16 move = moves[i];
                 if (substruct1->moves[0] == move
@@ -1092,6 +1105,13 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     gBattleTypeFlags = 8;
     gTrainerBattleOpponent = 1024;
 }
+
+const u8 gSecretBaseTrainerClasses[][5] = {
+    // male
+    {FACILITY_CLASS_YOUNGSTER, FACILITY_CLASS_BUG_CATCHER,  FACILITY_CLASS_RICH_BOY, FACILITY_CLASS_CAMPER,    FACILITY_CLASS_COOL_TRAINER_M},
+    // female
+    {FACILITY_CLASS_LASS,      FACILITY_CLASS_SCHOOL_KID_F, FACILITY_CLASS_LADY,     FACILITY_CLASS_PICNICKER, FACILITY_CLASS_COOL_TRAINER_F}
+};
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {

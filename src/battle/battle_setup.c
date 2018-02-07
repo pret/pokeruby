@@ -475,7 +475,7 @@ static void Task_BattleStart(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!FieldPoisonEffectIsRunning()) // is poison not active?
+        if (!FldeffPoison_IsActive()) // is poison not active?
         {
             BattleTransition_StartOnField(tTransition);
             tState++; // go to case 1.
@@ -520,8 +520,8 @@ static void DoStandardWildBattle(void)
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 void BattleSetup_StartRoamerBattle(void)
@@ -532,8 +532,8 @@ void BattleSetup_StartRoamerBattle(void)
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 static void DoSafariBattle(void)
@@ -549,8 +549,8 @@ static void DoSafariBattle(void)
 static void StartTheBattle(void)
 {
     CreateBattleStartTask(GetTrainerBattleTransition(), 0);
-    IncrementGameStat(7);
-    IncrementGameStat(9);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
 }
 
 //Initiates battle where Wally catches Ralts
@@ -569,8 +569,8 @@ void BattleSetup_StartScriptedWildBattle(void)
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 void ScrSpecial_StartSouthernIslandBattle(void)
@@ -579,8 +579,8 @@ void ScrSpecial_StartSouthernIslandBattle(void)
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 void ScrSpecial_StartRayquazaBattle(void)
@@ -589,8 +589,8 @@ void ScrSpecial_StartRayquazaBattle(void)
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     CreateBattleStartTask(B_TRANSITION_BLUR, BGM_BATTLE34);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 void ScrSpecial_StartGroudonKyogreBattle(void)
@@ -602,8 +602,8 @@ void ScrSpecial_StartGroudonKyogreBattle(void)
         CreateBattleStartTask(B_TRANSITION_SHARDS, BGM_BATTLE34); // GROUDON
     else
         CreateBattleStartTask(B_TRANSITION_RIPPLE, BGM_BATTLE34); // KYOGRE
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 void ScrSpecial_StartRegiBattle(void)
@@ -612,8 +612,8 @@ void ScrSpecial_StartRegiBattle(void)
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, BGM_BATTLE36);
-    IncrementGameStat(7);
-    IncrementGameStat(8);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
 static void CB2_EndWildBattle(void)
@@ -879,8 +879,8 @@ static void CB2_StartFirstBattle(void)
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
-        IncrementGameStat(7);
-        IncrementGameStat(8);
+        IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+        IncrementGameStat(GAME_STAT_WILD_BATTLES);
     }
 }
 

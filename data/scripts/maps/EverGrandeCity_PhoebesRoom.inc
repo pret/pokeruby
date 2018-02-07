@@ -24,10 +24,9 @@ EverGrandeCity_PhoebesRoom_EventScript_15B602:: @ 815B602
 	end
 
 EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
-	checkflag FLAG_DEFEATED_ELITE_4_PHOEBE
-	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B624
+	call_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_15B624
 	compare VAR_ELITE_4_STATE, 2
-	call_if 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
+	call_if_eq EverGrandeCity_PhoebesRoom_EventScript_15B62A
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_15B624:: @ 815B624
@@ -41,9 +40,8 @@ EverGrandeCity_PhoebesRoom_EventScript_15B62A:: @ 815B62A
 EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	lock
 	faceplayer
-	checkflag FLAG_DEFEATED_ELITE_4_PHOEBE
-	goto_if_eq EverGrandeCity_PhoebesRoom_EventScript_15B657
-	playbgm 450, 0
+	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_15B657
+	playbgm BGM_SITENNOU, FALSE
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
 	trainerbattle 3, OPPONENT_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_190A0C
 	goto EverGrandeCity_PhoebesRoom_EventScript_15B661

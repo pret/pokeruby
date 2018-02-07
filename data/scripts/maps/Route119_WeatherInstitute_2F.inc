@@ -5,9 +5,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CE4
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_163CE4
 	compare VAR_WEATHER_INSTITUTE_STATE, 1
-	call_if 1, Route119_WeatherInstitute_2F_EventScript_163CF0
+	call_if_eq Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163CE4:: @ 8163CE4
@@ -58,7 +58,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	getpartysize
 	compare RESULT, 6
 	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DB4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
 	waitmessage
@@ -87,7 +87,6 @@ Route119_WeatherInstitute_2F_Movement_163DC8:: @ 8163DC8
 Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_CASTFORM
-	goto_if_eq Route119_WeatherInstitute_2F_EventScript_163DBE
+	goto_if_set FLAG_RECEIVED_CASTFORM, Route119_WeatherInstitute_2F_EventScript_163DBE
 	goto Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

@@ -5389,7 +5389,7 @@ static const u8 DexDescription_Deoxys_2[] = _(
   "chest appears to be its brain.");
 #endif
 
-static const struct PokedexEntry gPokedexEntries[] =
+const struct PokedexEntry gPokedexEntries[] =
 {
     {  //Dummy
         .categoryName = _("UNKNOWN"),

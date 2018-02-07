@@ -10,8 +10,7 @@ Route123_BerryMastersHouse_EventScript_1639E9:: @ 81639E9
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163A5A
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER, Route123_BerryMastersHouse_EventScript_163A5A
 	msgbox Route123_BerryMastersHouse_Text_1C5BC4, 4
 	random 10
 	addvar RESULT, 20
@@ -40,8 +39,7 @@ Route123_BerryMastersHouse_EventScript_163A64:: @ 8163A64
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER_WIFE
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163C13
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_FROM_BERRYMASTER_WIFE, Route123_BerryMastersHouse_EventScript_163C13
 	msgbox Route123_BerryMastersHouse_Text_1C5D24, 4
 	setvar VAR_SPECIAL_4, 13
 	call Route123_BerryMastersHouse_EventScript_1A00F3
@@ -86,8 +84,7 @@ Route123_BerryMastersHouse_EventScript_163AF0:: @ 8163AF0
 	end
 
 Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
-	checkflag FLAG_RECEIVED_SPELON_BERRY
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
+	goto_if_set FLAG_RECEIVED_SPELON_BERRY, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem_std ITEM_SPELON_BERRY
 	compare RESULT, 0
@@ -97,8 +94,7 @@ Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
 	end
 
 Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
-	checkflag FLAG_RECEIVED_PAMTRE_BERRY
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
+	goto_if_set FLAG_RECEIVED_PAMTRE_BERRY, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem_std ITEM_PAMTRE_BERRY
 	compare RESULT, 0
@@ -108,8 +104,7 @@ Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
 	end
 
 Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
-	checkflag FLAG_RECEIVED_WATMEL_BERRY
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
+	goto_if_set FLAG_RECEIVED_WATMEL_BERRY, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem_std ITEM_WATMEL_BERRY
 	compare RESULT, 0
@@ -119,8 +114,7 @@ Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
 	end
 
 Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
-	checkflag FLAG_RECEIVED_DURIN_BERRY
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
+	goto_if_set FLAG_RECEIVED_DURIN_BERRY, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem_std ITEM_DURIN_BERRY
 	compare RESULT, 0
@@ -130,8 +124,7 @@ Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
 	end
 
 Route123_BerryMastersHouse_EventScript_163BE2:: @ 8163BE2
-	checkflag FLAG_RECEIVED_BELUE_BERRY
-	goto_if_eq Route123_BerryMastersHouse_EventScript_163AF0
+	goto_if_set FLAG_RECEIVED_BELUE_BERRY, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem_std ITEM_BELUE_BERRY
 	compare RESULT, 0

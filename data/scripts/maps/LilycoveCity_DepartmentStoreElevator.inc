@@ -4,8 +4,7 @@ LilycoveCity_DepartmentStoreElevator_MapScripts:: @ 815A39B
 LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	call_if 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
+	call_if_unset FLAG_TEMP_2, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
 	copyvar VAR_SPECIAL_5, VAR_DEPT_STORE_FLOOR
 	special DisplayCurrentElevatorFloor
 	message LilycoveCity_DepartmentStoreElevator_Text_1A0EF6

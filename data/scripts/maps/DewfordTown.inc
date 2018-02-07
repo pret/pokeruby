@@ -9,8 +9,7 @@ DewfordTown_MapScript1_14DFFE:: @ 814DFFE
 DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
-	checkflag FLAG_DELIVERED_STEVEN_LETTER
-	goto_if 0, DewfordTown_EventScript_14E076
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
 	waitmessage
 	multichoicedefault 21, 6, 0, 2, 0
@@ -42,8 +41,8 @@ DewfordTown_EventScript_14E06B:: @ 814E06B
 	end
 
 DewfordTown_EventScript_14E076:: @ 814E076
-	msgbox DewfordTown_Text_16B3BC, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Text_16B3BC, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
@@ -74,12 +73,11 @@ DewfordTown_EventScript_14E0BD:: @ 814E0BD
 DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_OLD_ROD
-	goto_if_eq DewfordTown_EventScript_14E11B
-	msgbox DewfordTown_Text_16B665, 5
-	compare RESULT, 1
+	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_14E11B
+	msgbox DewfordTown_Text_16B665, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E0F0
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E111
 	end
 
@@ -176,10 +174,8 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
 	hideobjectat 4, MAP_DEWFORD_TOWN
-	checkflag FLAG_DELIVERED_DEVON_GOODS
-	call_if 0, DewfordTown_EventScript_14E281
-	checkflag FLAG_DELIVERED_DEVON_GOODS
-	call_if 1, DewfordTown_EventScript_14E28A
+	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E281
+	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_14E28A
 	closemessage
 	copyvar VAR_BRINEY_LOCATION, VAR_SPECIAL_8
 	resetobjectpriority 255, MAP_DEWFORD_TOWN
@@ -598,10 +594,10 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	lock
 	faceplayer
 	call DewfordTown_EventScript_1A0102
-	msgbox DewfordTown_Text_16B9CE, 5
-	compare RESULT, 1
+	msgbox DewfordTown_Text_16B9CE, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq DewfordTown_EventScript_14E439
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq DewfordTown_EventScript_14E443
 	end
 

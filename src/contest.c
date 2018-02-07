@@ -29,184 +29,18 @@
 #include "task.h"
 #include "text.h"
 #include "tv.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "util.h"
+#include "contest_ai.h"
+
+extern u8 gUnknown_020297ED;
 
 extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
-extern void sub_81288F4();
-extern u8 sub_8128944(void);
-
-struct Shared18000
-{
-    /*0x18000*/ u8 unk18000;
-    /*0x18001*/ u8 filler18001[3];
-    /*0x18004*/ u16 unk18004[16][16];
-    /*0x18204*/ u16 unk18204[0x200];
-    /*0x18604*/ u16 unk18604[0x200];
-    /*0x18A04*/ u8 unk18A04[0x800];
-};
-
-struct Contest
-{
-    /*0x19204*/ u8 playerMoveChoice;
-    /*0x19205*/ u8 turnNumber;
-    /*0x19206*/ u8 unk19206[4];    // seems to only be used by an unref function
-    /*0x1920A*/ u16 unk1920A_0:1;  // Task active flags?
-                u16 unk1920A_1:1;
-                u16 unk1920A_2:1;
-                u16 unk1920A_3:1;
-                u16 unk1920A_4:1;
-                u16 unk1920A_5:1;
-                u16 unk1920A_6:1;
-                u16 unk1920A_7:1;
-    /*0x1920B*/ u16 unk1920B_0:1;
-                u16 unk1920B_1:1;
-                u16 unk1920B_2:1;
-    /*0x1920C*/ u8 mainTaskId;
-    /*0x1920D*/ u8 unk1920D[4];
-    /*0x19211*/ u8 unk19211;
-    /*0x19212*/ u8 unk19212;
-    /*0x19213*/ u8 filler19213;
-    /*0x19214*/ u8 unk19214;
-    /*0x19215*/ u8 unk19215;
-    /*0x19216*/ u8 unk19216;    // sprite ID
-    /*0x19217*/ s8 applauseLevel;
-    /*0x19218*/ u8 unk19218[4];
-    /*0x1921C*/ u32 unk1921C;   // saved RNG value?
-                u16 unk19220[5][4];  // move history?
-                u8 unk19248[5][4];  // excitement history
-                u8 applauseMeterSpriteId;    // sprite ID
-    /*0x1925D*/ u8 unk1925D;
-    /*0x1925E*/ u8 unk1925E;
-};
-
-struct ContestantStatus
-{
-    s16 appeal1;  // move appeal?
-    s16 appeal2;  // final appeal after end of turn, maybe?
-    s16 unk4;
-    u16 currMove;
-    u16 prevMove;
-    u8 moveCategory;
-    u8 unkB_0:2;
-    u8 unkB_2:2;
-    u8 moveRepeatCount:3;
-    u8 unkB_7:1;  // used a one-time move?
-    u8 unkC_0:1;
-    u8 unkC_1:2;
-    s8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u8 unk10_0:1;
-    u8 unk10_1:1;
-    u8 unk10_2:1;
-    u8 unk10_3:1;
-    u8 unk10_4:2;
-    u8 unk10_6:2;
-    u8 unk11_0:2;
-    u8 unk11_2:1;
-    u8 unk11_3:1;
-    u8 unk11_4:1;
-    u8 unk11_5:1;
-    u8 unk12;
-    u8 unk13;   // status action?
-    u8 unk14;
-    u8 disappointedRepeat:1;
-    u8 unk15_1:1;
-    u8 unk15_2:1;
-    u8 unk15_3:1;
-    u8 unk15_4:1;
-    u8 unk15_5:1;
-    u8 unk15_6:1;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;  // turn position
-    u8 attentionLevel;  // How much the Pokemon "stood out"
-    u8 unk1B;
-};
-
-struct UnknownContestStruct3
-{
-    u8 unk0;
-    u8 unk1;
-    //u8 unk2_0:1;
-    //u8 unk2_1:1;
-    u8 unk2;  // maybe a bitfield
-    u8 filler3;
-};
-
-// possibly the same as UnknownContestStruct3?
-struct UnknownContestStruct4
-{
-    u8 unk0;  // sprite ID
-    u8 unk1;  // sprite ID
-    u8 unk2_0:1;
-    u8 unk2_1:1;
-    u8 unk2_2:1;
-    u8 filler3;
-};
-
-struct UnknownContestStruct5
-{
-    s8 bits_0;  // current move excitement?
-    u8 bits_8:1;
-    u8 bits_9:3;
-    u8 bits_C:4;
-    s8 unk2;
-    u8 filler3;
-};
-
-struct UnknownContestStruct7
-{
-    u8 unk0[4];
-    u16 unk4;
-    u16 unk6;
-    u8 filler8[0xD-8];
-    u8 unkD[4];
-    u8 unk11;
-    u8 filler12[2];
-};
-
-struct UnknownContestStruct8
-{
-    u16 unk0;
-    u16 unk2;
-    u8 unk4_0:1;
-    u8 unk5;
-    u8 filler6[2];
-    u32 unk8;
-    u32 unkC;
-    u32 unk10;
-};
-
-struct UnknownContestStruct6
-{
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-};
-
-#define shared15800 (gSharedMem + 0x15800)
-#define shared15DE0 (*(struct ContestWinner *)(gSharedMem + 0x15DE0))
-#define shared16800 (gSharedMem + 0x16800)
-#define shared18000 (*(struct Shared18000 *)(gSharedMem + 0x18000))
-#define shared18004 ((u16 *)(gSharedMem + 0x18004))
-#define sContest (*(struct Contest *)(gSharedMem + 0x19204))
-#define sContestantStatus ((struct ContestantStatus *)(gSharedMem + 0x19260))
-#define shared192D0_ (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
-#define shared192E4 (gSharedMem + 0x192E4)
-#define shared19328 (*(struct UnknownContestStruct5 *)(gSharedMem + 0x19328))
-#define shared19338 ((struct UnknownContestStruct4 *)(gSharedMem + 0x19338))
-#define shared19348_ (*(struct UnknownContestStruct8 *)(gSharedMem + 0x19348))
 
 extern struct MusicPlayerInfo gMPlay_SE1;
-extern u16 gSpecialVar_ContestCategory;
-extern u16 gSpecialVar_ContestRank;
 extern u8 gBattleMonForms[];
 extern u8 gDisplayedStringBattle[];
 extern u16 gBattleTypeFlags;
@@ -214,31 +48,21 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
 extern u8 gObjectBankIDs[];
-extern u8 gIsLinkContest;
-extern u8 gContestPlayerMonIndex;
-extern u16 gUnknown_030041B0;
+extern u16 gBattle_BG3_X;
 extern s16 gBattle_BG1_Y;
-extern u16 gUnknown_030041B8;
+extern u16 gBattle_BG3_Y;
 extern u16 gBattle_WIN1H;
 extern struct Window gUnknown_03004210;
 extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1V;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_BG2_X;
-extern u16 gUnknown_030042A0;
-extern u16 gUnknown_030042A4;
+extern u16 gBattle_BG0_Y;
+extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
-extern u32 gUnknown_03005D28;  // saved RNG value
+extern u32 gContestRngValue;  // saved RNG value
 
-extern s16 gUnknown_02038680[];
-extern u16 gUnknown_02038688[];
-extern u8 gUnknown_02038694;
-extern u8 gUnknown_02038696[];
-extern u8 gUnknown_0203869B;
-extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
-extern u8 gContestFinalStandings[];  // What "place" each participant came in.
 extern struct SpriteTemplate gUnknown_02024E8C;
 
 
@@ -416,6 +240,7 @@ void sub_80B0BC4(u8, bool8);
 void sub_80B0C5C(struct Sprite *);
 void sub_80B0CB0(struct Sprite *);
 void sub_80B0CDC(u8, int);
+void unref_sub_80B0CF4(void);
 void sub_80B0D7C(void);
 void sub_80B1118(void);
 void sub_80B114C(u8);
@@ -458,6 +283,20 @@ void sub_80B292C(void);
 void sub_80B2968(void);
 void SelectContestMoveBankTarget(u16);
 
+EWRAM_DATA u8 gUnknown_0203856C = 0;
+EWRAM_DATA struct ContestPokemon gContestMons[4] = {0};
+EWRAM_DATA s16 gUnknown_02038670[4] = {0};
+EWRAM_DATA s16 gUnknown_02038678[4] = {0};
+EWRAM_DATA s16 gUnknown_02038680[4] = {0};
+EWRAM_DATA u16 gUnknown_02038688[4] = {0};
+EWRAM_DATA u8 gContestFinalStandings[4] = {0};  // What "place" each participant came in.
+EWRAM_DATA u8 gUnknown_02038694 = 0;
+EWRAM_DATA u8 gContestPlayerMonIndex = 0;
+EWRAM_DATA u8 gUnknown_02038696[4] = {0};
+EWRAM_DATA u8 gIsLinkContest = 0;
+EWRAM_DATA u8 gUnknown_0203869B = 0;
+EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
+EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 
 void nullsub_89(u8 taskId)
 {
@@ -489,14 +328,14 @@ void ResetContestGpuRegs(void)
     REG_WINOUT = 0x3F3F;
     REG_DISPCNT |= 0x7F00;
 
-    gUnknown_030042A4 = 0;
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
     gBattle_BG2_X = 0;
     gBattle_BG2_Y = 0;
-    gUnknown_030041B0 = 0;
-    gUnknown_030041B8 = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
     gBattle_WIN0H = 0;
     gBattle_WIN0V = 0;
     gBattle_WIN1H = 0;
@@ -522,16 +361,16 @@ void LoadContestBgAfterMoveAnim(void)
 
 void SetUpContestWindow(void)
 {
-    SetUpWindowConfig(&gWindowConfig_81E6FD8);
-    InitWindowFromConfig(&gUnknown_03004210, &gWindowConfig_81E6FD8);
-    InitWindowFromConfig(&gMenuWindow, &gWindowConfig_81E6FF4);
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gUnknown_03004210, &gWindowTemplate_81E6FD8);
+    Text_InitWindowWithTemplate(&gMenuWindow, &gWindowTemplate_81E6FF4);
 }
 
 void sub_80AB350(void)
 {
     u8 i;
 
-    LoadFontDefaultPalette(&gWindowConfig_81E6FD8);
+    LoadFontDefaultPalette(&gWindowTemplate_81E6FD8);
     FillPalette(0, 0, 2);
     for (i = 10; i < 14; i++)
         LoadPalette(gPlttBufferUnfaded + 241, 240 + i, 2);
@@ -555,8 +394,8 @@ void ClearContestVars(void)
         sContestantStatus[i].unk14 = 0xFF;
     }
 
-    memset(&shared192D0_, 0, sizeof(shared192D0_));
-    memset(shared192E4, 0, 0x44 * sizeof(*shared192E4));
+    memset(&shared192D0, 0, sizeof(shared192D0));
+    memset(eContestAI, 0, sizeof(struct ContestAIInfo));
     memset(&shared19328, 0, sizeof(shared19328));
     memset(shared19338, 0, 4 * sizeof(*shared19338));
     if (!(gIsLinkContest & 1))
@@ -577,7 +416,7 @@ void CB2_StartContest(void)
         SetVBlankCallback(NULL);
         SetUpContestWindow();
         ResetContestGpuRegs();
-        dp12_8087EA4();
+        ScanlineEffect_Clear();
         ResetPaletteFade();
         gPaletteFade.bufferTransferDisabled = TRUE;
         DmaClearLarge32(3, (void *)VRAM, VRAM_SIZE, 0x1000);
@@ -659,7 +498,7 @@ void sub_80AB6B4(u8 taskId)
         GetMultiplayerId();  // unused return value
         DestroyTask(taskId);
         gTasks[sContest.mainTaskId].func = sub_80AB960;
-        gRngValue = gUnknown_03005D28;
+        gRngValue = gContestRngValue;
     }
 }
 
@@ -777,6 +616,10 @@ void sub_80AB9A0(u8 taskId)
 
 void ContestMainCallback2(void)
 {
+#if DEBUG
+    if (gUnknown_020297ED == 1 && gMain.newKeys == 4)
+	unref_sub_80B0CF4();
+#endif
     AnimateSprites();
     RunTasks();
     BuildOamBuffer();
@@ -785,14 +628,14 @@ void ContestMainCallback2(void)
 
 void ContestVBlankCallback(void)
 {
-    REG_BG0HOFS = gUnknown_030042A4;
-    REG_BG0VOFS = gUnknown_030042A0;
+    REG_BG0HOFS = gBattle_BG0_X;
+    REG_BG0VOFS = gBattle_BG0_Y;
     REG_BG1HOFS = gBattle_BG1_X;
     REG_BG1VOFS = gBattle_BG1_Y;
     REG_BG2HOFS = gBattle_BG2_X;
     REG_BG2VOFS = gBattle_BG2_Y;
-    REG_BG3HOFS = gUnknown_030041B0;
-    REG_BG3VOFS = gUnknown_030041B8;
+    REG_BG3HOFS = gBattle_BG3_X;
+    REG_BG3VOFS = gBattle_BG3_Y;
     REG_WIN0H = gBattle_WIN0H;
     REG_WIN0V = gBattle_WIN0V;
     REG_WIN1H = gBattle_WIN1H;
@@ -800,12 +643,12 @@ void ContestVBlankCallback(void)
     TransferPlttBuffer();
     LoadOam();
     ProcessSpriteCopyRequests();
-    sub_8089668();
+    ScanlineEffect_InitHBlankDmaTransfer();
 }
 
 void sub_80ABB70(u8 taskId)
 {
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80B0D7C();
     DmaCopy32Defvars(3, gPlttBufferUnfaded, shared18000.unk18204, 0x400);
@@ -816,13 +659,13 @@ void sub_80ABB70(u8 taskId)
     InsertStringDigit(gDisplayedStringBattle, sContest.turnNumber + 1);
     sub_80AF138();
     StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
     gTasks[taskId].func = sub_80ABC3C;
 }
 
 void sub_80ABC3C(u8 taskId)
 {
-    if (sub_80037A0(&gMenuWindow) == 1)
+    if (Text_UpdateWindowInContest(&gMenuWindow) == 1)
         gTasks[taskId].func = sub_80ABC70;
 }
 
@@ -849,9 +692,9 @@ void sub_80ABCDC(u8 taskId)
     u8 i;
     u8 sp8[32];
 
-    gUnknown_030042A0 = 0xA0;
+    gBattle_BG0_Y = 0xA0;
     gBattle_BG2_Y = 0xA0;
-    FillWindowRect_DefaultPalette(
+    Text_FillWindowRectDefPalette(
       &gUnknown_03004210,
       0,
       gUnknown_083CA340[0][0],
@@ -880,21 +723,23 @@ void sub_80ABCDC(u8 taskId)
         }
         r5 = StringCopy(r5, gMoveNames[move]);
 
-        sub_8002E4C(
+        Text_InitWindow8002E4C(
           &gUnknown_03004210,
           sp8,
           776 + i * 20,
           gUnknown_083CA340[i][0] * 8 + 4,
           gUnknown_083CA340[i][1] * 8,
           1);
-        sub_8002F44(&gUnknown_03004210);
+        Text_PrintWindow8002F44(&gUnknown_03004210);
     }
 
-    sub_814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
+    MenuCursor_Create814A5C0(0, 0xFFFF, 12, 0x2D9F, 72);
     sub_80AC0AC(sContest.playerMoveChoice);
     sub_80AEBEC(gContestMons[gContestPlayerMonIndex].moves[sContest.playerMoveChoice]);
     gTasks[taskId].func = sub_80ABEA0;
 }
+
+void debug_sub_80B9EBC(u8);
 
 // Handle move selection input
 void sub_80ABEA0(u8 taskId)
@@ -922,7 +767,7 @@ void sub_80ABEA0(u8 taskId)
             sub_814A904();
             PlaySE(SE_SELECT);
             sub_80AFFE0(FALSE);
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA340[0][0],
@@ -936,8 +781,8 @@ void sub_80ABEA0(u8 taskId)
             InsertStringDigit(gDisplayedStringBattle, sContest.turnNumber + 1);
             sub_80AF138();
             StringExpandPlaceholders(gStringVar4, gDisplayedStringBattle);
-            sub_8003460(&gMenuWindow, gStringVar4, 776, 1, 15);
-            gUnknown_030042A0 = 0;
+            Text_InitWindowAndPrintText(&gMenuWindow, gStringVar4, 776, 1, 15);
+            gBattle_BG0_Y = 0;
             gBattle_BG2_Y = 0;
             gTasks[taskId].func = sub_80ABC70;
             break;
@@ -968,13 +813,196 @@ void sub_80ABEA0(u8 taskId)
             if (numMoves > 1)
                 PlaySE(SE_SELECT);
             break;
+#if DEBUG
+	case START_BUTTON:
+	    if (gUnknown_020297ED == 1 && !(gIsLinkContest & 1))
+	    {
+		gTasks[taskId].data[0] = 0;
+		gTasks[taskId].data[1] = gContestMons[gContestPlayerMonIndex].moves[0];
+		gTasks[taskId].func = debug_sub_80B9EBC;
+	    }
+	    break;
+#endif
         }
     }
 }
 
+#if DEBUG
+
+void debug_sub_80BA054(u8);
+
+void debug_sub_80B9EBC(u8 taskId)
+{
+    u8 text[100];
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+	Text_FillWindowRectDefPalette(
+	  &gUnknown_03004210,
+	  0,
+	  gUnknown_083CA340[0][0],
+	  gUnknown_083CA340[0][1],
+	  gUnknown_083CA340[0][2],
+	  gUnknown_083CA340[0][3]);
+	Text_InitWindowAndPrintText(
+	  &gUnknown_03004210,
+	  gMoveNames[gTasks[taskId].data[1]],
+	  776,
+	  gUnknown_083CA340[0][0],
+	  gUnknown_083CA340[0][1]);
+	ConvertIntToDecimalStringN(text, gTasks[taskId].data[1], 2, 3);
+	Text_InitWindowAndPrintText(
+	  &gUnknown_03004210,
+	  text,
+	  796,
+	  gUnknown_083CA340[1][0],
+	  gUnknown_083CA340[1][1]);
+	sub_80AED58();
+	sub_80AEBEC(gTasks[taskId].data[1]);
+	gTasks[taskId].data[0]++;
+	break;
+    case 1:
+	switch (gMain.newAndRepeatedKeys)
+	{
+	case 0x20:
+	    gTasks[taskId].data[1] -= 1;
+	    if (gTasks[taskId].data[1] < 1)
+		gTasks[taskId].data[1] = 354;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x200:
+	    gTasks[taskId].data[1] -= 10;
+	    if (gTasks[taskId].data[1] < 1)
+		gTasks[taskId].data[1] = 354;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x10:
+	    gTasks[taskId].data[1] += 1;
+	    if (gTasks[taskId].data[1] > 354)
+		gTasks[taskId].data[1] = 1;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 0x100:
+	    gTasks[taskId].data[1] += 10;
+	    if (gTasks[taskId].data[1] > 354)
+		gTasks[taskId].data[1] = 1;
+	    gTasks[taskId].data[0]--;
+	    break;
+	case 4:
+	case 8:
+	    gBattle_BG0_Y = 0;
+	    gBattle_BG2_Y = 0;
+	    sub_80B1BDC();
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].func = debug_sub_80BA054;
+	    break;
+	case 2:
+	    gBattle_BG0_Y = DISPLAY_HEIGHT;
+	    gBattle_BG2_Y = DISPLAY_HEIGHT;
+	    gContestMons[gContestPlayerMonIndex].moves[0] = gTasks[taskId].data[1];
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].data[1] = 0;
+	    gTasks[taskId].data[2] = 0;
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].func = sub_80ABCDC;
+	    break;
+	}
+	break;
+    }
+}
+
+void debug_sub_80BA054(u8 taskId)
+{
+    s32 i;
+    u8 r6;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+	for (i = 0; i < 4; i++)
+	    gBattleMonForms[i] = 0;
+	memset(&shared19348, 0, sizeof(shared19348));
+	sub_80B28F0(gContestPlayerMonIndex);
+	r6 = sub_80AE9FC(
+	  gContestMons[gContestPlayerMonIndex].species, 
+	  gContestMons[gContestPlayerMonIndex].otId, 
+	  gContestMons[gContestPlayerMonIndex].personality);
+	gSprites[r6].pos2.x = 120;
+	gSprites[r6].callback = sub_80AD8FC;
+	gTasks[taskId].data[2] = r6;
+	gObjectBankIDs[gBankAttacker] = r6;
+	gTasks[taskId].data[3] = 0;
+	gTasks[taskId].data[0]++;
+	sContest.unk1925E = 0;
+	break;
+    case 1:
+	r6 = gTasks[taskId].data[2];
+	if (gSprites[r6].callback == SpriteCallbackDummy)
+	{
+	    sContestantStatus[gContestPlayerMonIndex].currMove = gTasks[taskId].data[1];
+	    sub_80B2790(gContestPlayerMonIndex);
+	    sub_80B28F0(gContestPlayerMonIndex);
+	    SelectContestMoveBankTarget(gTasks[taskId].data[1]);
+	    DoMoveAnim(gTasks[taskId].data[1]);
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].data[0]++;
+	}
+	break;
+    case 2:
+	gAnimScriptCallback();
+	if (!gAnimScriptActive)
+	{
+	    sub_80B28CC(gContestPlayerMonIndex);
+	    if (sContest.unk1925E != 0)
+	    {
+		gTasks[taskId].data[10] = 0;
+		gTasks[taskId].data[0] = 20;
+	    }
+	    else
+	    {
+		gTasks[taskId].data[0]++;
+	    }
+	}
+	break;
+    case 3:
+	gTasks[taskId].data[3]++;
+	if (gTasks[taskId].data[3] == 21)
+	{
+	    r6 = gTasks[taskId].data[2];
+	    gSprites[r6].callback = sub_80AD92C;
+	    sub_80B1B14();
+	    gTasks[taskId].data[3] = 0;
+	    gTasks[taskId].data[0]++;
+	}
+	break;
+    case 4:
+	r6 = gTasks[taskId].data[2];
+	if (gSprites[r6].invisible)
+	{
+	    FreeSpriteOamMatrix(&gSprites[r6]);
+	    DestroySprite(&gSprites[r6]);
+	    gTasks[taskId].data[0] = 0;
+	    gTasks[taskId].func = debug_sub_80B9EBC;
+	    gBattle_BG0_Y = DISPLAY_HEIGHT;
+	    gBattle_BG2_Y = DISPLAY_HEIGHT;
+	}
+	break;
+    case 20:
+	if (gTasks[taskId].data[10]++ > 30)
+	{
+	    gTasks[taskId].data[10] = 0;
+	    gTasks[taskId].data[0] = 1;
+	}
+	break;
+    }
+}
+
+#endif
+
 void sub_80AC0AC(s8 a)
 {
-    sub_814A880(4, 88 + a * 16);
+    MenuCursor_SetPos814A880(4, 88 + a * 16);
 }
 
 void nullsub_17(s8 a)
@@ -1011,7 +1039,7 @@ void sub_80AC15C(u8 taskId)
 void sub_80AC188(u8 taskId)
 {
     sub_80AF138();
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80AFFE0(FALSE);
     DmaCopy32Defvars(3, gPlttBufferFaded, shared18000.unk18604, 0x400);
@@ -1063,7 +1091,7 @@ void sub_80AC2CC(u8 taskId)
     {
     case 0:
         sub_80B0D7C();
-        for (i = 0; sContest.unk19214 != shared192D0_.unk0[i]; i++)
+        for (i = 0; sContest.unk19214 != shared192D0.unk0[i]; i++)
             ;
         sContest.unk19215 = i;
         r7 = sContest.unk19215;
@@ -1106,7 +1134,7 @@ void sub_80AC2CC(u8 taskId)
     case 3:
         for (i = 0; i < 4; i++)
             gBattleMonForms[i] = 0;
-        memset(&shared19348_, 0, sizeof(shared19348_));
+        memset(&shared19348, 0, sizeof(shared19348));
         sub_80B28F0(sContest.unk19215);
         spriteId = sub_80AE9FC(
           gContestMons[sContest.unk19215].species,
@@ -1141,12 +1169,12 @@ void sub_80AC2CC(u8 taskId)
             else
                 StringCopy(gStringVar2, gUnknown_083CC330[sContestantStatus[r7].moveCategory]);
             StringExpandPlaceholders(gStringVar4, gUnknown_083CAFD7);
-            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             gTasks[taskId].data[0] = 6;
         }
         return;
     case 6:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             sContest.unk1925E = 0;
             gTasks[taskId].data[0] = 7;
@@ -1224,7 +1252,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 24:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
             gTasks[taskId].data[0] = 23;
         return;
     case 48:
@@ -1336,7 +1364,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 27:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
             gTasks[taskId].data[0] = 28;
         return;
     case 28:
@@ -1399,13 +1427,13 @@ void sub_80AC2CC(u8 taskId)
                 sub_80AF138();
                 StringCopy(gStringVar1, gContestMons[r7].nickname);
                 StringExpandPlaceholders(gStringVar4, ContestString_CantAppealNextTurn);
-                sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+                Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             }
             gTasks[taskId].data[0] = 52;
         }
         return;
     case 52:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             if (!sContestantStatus[r7].unk15_6)
                 gTasks[taskId].data[0] = 17;
@@ -1419,11 +1447,11 @@ void sub_80AC2CC(u8 taskId)
         {
             sub_80AF138();
             if (r4 == 1)
-                sub_8002EB0(&gMenuWindow, ContestString_WentOverWell, 776, 1, 15);
+                Text_InitWindow8002EB0(&gMenuWindow, ContestString_WentOverWell, 776, 1, 15);
             else if (r4 == 2)
-                sub_8002EB0(&gMenuWindow, ContestString_WentOverVeryWell, 776, 1, 15);
+                Text_InitWindow8002EB0(&gMenuWindow, ContestString_WentOverVeryWell, 776, 1, 15);
             else
-                sub_8002EB0(&gMenuWindow, ContestString_AppealComboExcellently, 776, 1, 15);
+                Text_InitWindow8002EB0(&gMenuWindow, ContestString_AppealComboExcellently, 776, 1, 15);
             sub_80B1710(3);
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 45;
@@ -1433,7 +1461,7 @@ void sub_80AC2CC(u8 taskId)
             sub_80AF138();
             StringCopy(gStringVar1, gContestMons[r7].nickname);
             StringExpandPlaceholders(gStringVar4, ContestString_JudgeExpectantly2);
-            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             sub_80B1710(2);
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[0] = 45;
@@ -1447,7 +1475,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 15:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             if (++gTasks[taskId].data[10] > 50)
             {
@@ -1476,7 +1504,7 @@ void sub_80AC2CC(u8 taskId)
             sub_80AF138();
             StringCopy(gStringVar1, gContestMons[r7].nickname);
             StringExpandPlaceholders(gStringVar4, ContestString_DissapointedRepeat);
-            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             gTasks[taskId].data[10] = 0;
             sub_80B1710(0);
             gTasks[taskId].data[0] = 46;
@@ -1491,7 +1519,7 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 19;
         return;
     case 19:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             sub_80AFBA0(sContestantStatus[r7].appeal2, -sContestantStatus[r7].unk18, r7);
             sContestantStatus[r7].appeal2 -= sContestantStatus[r7].unk18;
@@ -1546,7 +1574,7 @@ void sub_80AC2CC(u8 taskId)
                     StringExpandPlaceholders(gStringVar4, ContestString_WentOverGreat);
                 else
                     StringExpandPlaceholders(gStringVar4, ContestString_GotCrowdGoing);
-                sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+                Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
                 gTasks[taskId].data[10] = 0;
                 gTasks[taskId].data[11] = 0;
                 if (r4 < 0)
@@ -1565,7 +1593,7 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[10]++;
             break;
         case 1:
-            if (!sContest.unk1920B_0 && sub_80037A0(&gMenuWindow) != 0)
+            if (!sContest.unk1920B_0 && Text_UpdateWindowInContest(&gMenuWindow) != 0)
             {
                 sub_80B1CBC(-1);
                 gTasks[taskId].data[10]++;
@@ -1596,7 +1624,7 @@ void sub_80AC2CC(u8 taskId)
         switch (gTasks[taskId].data[10])
         {
         case 0:
-            if (sub_80037A0(&gMenuWindow) != 0)
+            if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
             {
                 sub_80B1EA8(1, 1);
                 gTasks[taskId].data[10]++;
@@ -1656,20 +1684,20 @@ void sub_80AC2CC(u8 taskId)
         StringCopy(gStringVar1, gContestMons[r7].nickname);
         StringCopy(gStringVar2, gMoveNames[sContestantStatus[r7].currMove]);
         StringExpandPlaceholders(gStringVar4, ContestString_CrowdWatches);
-        sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+        Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
         gTasks[taskId].data[0] = 58;
         return;
     case 58:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             sub_80AF138();
             StringExpandPlaceholders(gStringVar4, ContestString_Ignored2);
-            sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+            Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
             gTasks[taskId].data[0] = 59;
         }
         return;
     case 59:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
         {
             sub_80AF138();
             gTasks[taskId].data[0] = 55;
@@ -1682,11 +1710,11 @@ void sub_80AC2CC(u8 taskId)
         StringCopy(gStringVar1, gContestMons[r7].nickname);
         StringCopy(gStringVar2, gMoveNames[sContestantStatus[r7].currMove]);
         StringExpandPlaceholders(gStringVar4, gUnknown_083CBF60);
-        sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+        Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
         gTasks[taskId].data[0] = 34;
         return;
     case 34:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
             gTasks[taskId].data[0] = 55;
         return;
     case 55:
@@ -1728,11 +1756,11 @@ void sub_80AC2CC(u8 taskId)
         sub_80AF138();
         StringCopy(gStringVar1, gContestMons[r7].nickname);
         StringExpandPlaceholders(gStringVar4, gUnknown_083CB00D);
-        sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+        Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
         gTasks[taskId].data[0] = 32;
         return;
     case 32:
-        if (sub_80037A0(&gMenuWindow) != 0)
+        if (Text_UpdateWindowInContest(&gMenuWindow) != 0)
             gTasks[taskId].data[0] = 21;
         return;
     case 21:
@@ -1899,13 +1927,13 @@ void sub_80ADB88(u8 taskId)
     sub_80AF138();
     StringCopy(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
     StringExpandPlaceholders(gStringVar4, gContestStandOutStrings[r4]);
-    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
     gTasks[taskId].func = sub_80ADC10;
 }
 
 void sub_80ADC10(u8 taskId)
 {
-    if (sub_80037A0(&gMenuWindow) == 1)
+    if (Text_UpdateWindowInContest(&gMenuWindow) == 1)
     {
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = sub_80ADC4C;
@@ -1969,23 +1997,23 @@ void sub_80ADDA4(u8 taskId)
 {
     s32 i;
 
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     for (i = 0; i < 4; i++)
         gUnknown_02038680[i] = sContestantStatus[i].unk4;
     sub_80AF668();
     sub_80AF138();
     sub_80BE23C(sContestantStatus[gContestPlayerMonIndex].prevMove);
-    gUnknown_03005D28 = gRngValue;
+    gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gUnknown_083CB02C);
-    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].func = sub_80ADE54;
 }
 
 void sub_80ADE54(u8 taskId)
 {
-    if (sub_80037A0(&gMenuWindow) == 1)
+    if (Text_UpdateWindowInContest(&gMenuWindow) == 1)
     {
         sub_80B2184();
         gBattle_BG1_X = 0;
@@ -2105,7 +2133,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     s16 tough;
 
     StringCopy(name, gSaveBlock2.playerName);
-    StripExtCtrlCodes(name);
+    Text_StripExtCtrlCodes(name);
     if (gIsLinkContest & 1)
     {
         u8 temp = name[5];
@@ -2125,7 +2153,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     StringGetEnd10(name);
     if (gIsLinkContest & 1)
     {
-        StripExtCtrlCodes(name);
+        Text_StripExtCtrlCodes(name);
         if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE)
         {
             name[5] = EOS;
@@ -2286,7 +2314,7 @@ void sub_80AE514(void)
 
     for (i = 0; i < 4; i++)
     {
-        FillWindowRect_DefaultPalette(
+        Text_FillWindowRectDefPalette(
           &gUnknown_03004210,
           0,
           gUnknown_083CA308[gUnknown_02038696[i]][0],
@@ -2326,7 +2354,7 @@ void sub_80AE5D4(u8 p, u8 b)
     if ((gIsLinkContest & 1) && gLinkPlayers[p].language == LANGUAGE_JAPANESE)
     {
         StringCopy(str, gLinkPlayers[p].name);
-        sub_8004D04(
+        Text_InitWindow8004D04(
           &gUnknown_03004210,
           gDisplayedStringBattle,
           592 + gUnknown_02038696[p] * 22,
@@ -2337,7 +2365,7 @@ void sub_80AE5D4(u8 p, u8 b)
     else
     {
         StringCopy(str, gContestMons[p].trainerName);
-        sub_8003460(
+        Text_InitWindowAndPrintText(
           &gUnknown_03004210,
           gDisplayedStringBattle,
           592 + gUnknown_02038696[p] * 22,
@@ -2363,7 +2391,7 @@ void sub_80AE6E4(u8 a, u8 b)
     str = sub_80AE598(str, gContestMons[a].nickname, b);
     *str = EOS;
 
-    sub_8004D04(
+    Text_InitWindow8004D04(
       &gUnknown_03004210,
       gDisplayedStringBattle,
       512 + gUnknown_02038696[a] * 20,
@@ -2548,7 +2576,7 @@ void sub_80AEBEC(u16 a)
     s32 i;
     u8 numHearts;
 
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 31, 16, 34);
 
     category = gContestMoves[a].contestCategory;
     if      (category == CONTEST_CATEGORY_COOL)
@@ -2597,13 +2625,13 @@ void sub_80AEBEC(u16 a)
             *(u16 *)(VRAM + 0xC82A + i * 2) = 0x5036;
     }
 
-    sub_8003460(&gUnknown_03004210, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
-    sub_8003460(&gUnknown_03004210, gUnknown_083CC5A2, 866, 16, 31);
+    Text_InitWindowAndPrintText(&gUnknown_03004210, gContestEffectStrings[gContestMoves[a].effect], 868, 11, 35);
+    Text_InitWindowAndPrintText(&gUnknown_03004210, gUnknown_083CC5A2, 866, 16, 31);
 }
 
 void sub_80AED58(void)
 {
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 11, 35, 28, 40);
 }
 
 // unused
@@ -2779,7 +2807,7 @@ void sub_80AF120(void)
 
 void sub_80AF138(void)
 {
-    FillWindowRect_DefaultPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
+    Text_FillWindowRectDefPalette(&gUnknown_03004210, 0, 1, 15, 17, 18);
 }
 
 u16 GetChosenMove(u8 a)
@@ -2794,8 +2822,8 @@ u16 GetChosenMove(u8 a)
     {
         u8 moveChoice;
 
-        sub_81288F4(a);
-        moveChoice = sub_8128944();
+        ContestAI_ResetAI(a);
+        moveChoice = ContestAI_GetActionToUse();
         return gContestMons[a].moves[moveChoice];
     }
 }
@@ -2821,7 +2849,7 @@ void sub_80AF1E4(u8 a, u8 b)
     else
         sub_80AE598(gDisplayedStringBattle, gMoveNames[sContestantStatus[a].currMove], r3);
     sub_80AF2A0(a);
-    sub_8003460(
+    Text_InitWindowAndPrintText(
       &gUnknown_03004210,
       gDisplayedStringBattle,
       696 + a * 20,
@@ -2839,7 +2867,7 @@ void unref_sub_80AF280(u8 a)
 
 void sub_80AF2A0(u8 a)
 {
-    FillWindowRect_DefaultPalette(
+    Text_FillWindowRectDefPalette(
       &gUnknown_03004210,
       0,
       gUnknown_083CA318[a][0],
@@ -3115,10 +3143,10 @@ bool8 sub_80AF828(s32 a, s32 b, struct UnknownContestStruct6 *c)
 
 void sub_80AF860(void)
 {
-    gUnknown_030042A0 = 0;
+    gBattle_BG0_Y = 0;
     gBattle_BG2_Y = 0;
     sub_80AF138();
-    sub_8003460(&gMenuWindow, gUnknownText_LinkStandbyAndWinner, 776, 1, 15);
+    Text_InitWindowAndPrintText(&gMenuWindow, gUnknownText_LinkStandbyAndWinner, 776, 1, 15);
 }
 
 u8 unref_sub_80AF89C(s16 a, s16 b, u8 c, u8 d)
@@ -3837,12 +3865,8 @@ void sub_80B0748(u8 taskId)
                     {
                         // What the hell? These aren't pointers.
                         // This code would crash if run.
-                        {
-                            void *src = (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1];
-                            void *dest = (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1];
-                            u32 size = 6;
-                            DmaCopy16(3, src, dest, size);
-                        }
+                        DmaCopy16Defvars(3, (void *)(u32)gPlttBufferFaded[(r4 + 5) * 16 + 1],
+                            (void *)(u32)gPlttBufferUnfaded[(r4 + 5) * 16 + 1], 6);
                         gTasks[taskId].data[r1 + 0] = 0;
                     }
                 }
@@ -4212,21 +4236,13 @@ u8 sub_80B09E4(u8 a)
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x26), (u8 *)(VRAM + 0x10000 + gSprites[r8].oam.tileNum * 32));
     CopySpriteTiles(0, 3, (void *)VRAM, (u16 *)(VRAM + 0xE000 + gUnknown_02038696[a] * 5 * 64 + 0x36), (u8 *)(VRAM + 0x10000 + gSprites[r6].oam.tileNum * 32));
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r8].oam.tileNum) * 32), 0x300);
 
     // What is this?
     zero = 0;
     zero = 0;
 
-    {
-        void *dest = (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32);
-        u32 size = 0x300;
-        DmaFill32(3, 0, dest, size);
-    }
+    DmaFill32Defvars(3, 0, (void *)(VRAM + 0x10000 + (0x28 + gSprites[r6].oam.tileNum) * 32), 0x300);
 
     gSprites[r8].data[0] = r6;
     gSprites[r6].data[0] = r8;
@@ -4311,7 +4327,7 @@ void unref_sub_80B0CF4(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA308[i][0],
@@ -4340,7 +4356,7 @@ void sub_80B0D7C(void)
 
         for (i = 0; i < 4; i++)
         {
-            FillWindowRect_DefaultPalette(
+            Text_FillWindowRectDefPalette(
               &gUnknown_03004210,
               0,
               gUnknown_083CA308[i][0],
@@ -4358,7 +4374,7 @@ void sub_80B0D7C(void)
                 r5++;
             }
             ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
-            sub_8003460(
+            Text_InitWindowAndPrintText(
               &gUnknown_03004210,
               sp8,
               592 + gUnknown_02038696[i] * 22,
@@ -4376,7 +4392,7 @@ void sub_80B0D7C(void)
                 r5++;
             }
             ConvertIntToDecimalStringN(sp8 + r5, r2, 0, 4);
-            sub_8003460(
+            Text_InitWindowAndPrintText(
               &gUnknown_03004210,
               sp8,
               512 + gUnknown_02038696[i] * 20,
@@ -4528,13 +4544,13 @@ void sub_80B114C(u8 contestant)
         }
         sContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
         sContestantStatus[contestant].appeal2 = gContestEffects[effect].appeal;
-        shared192D0_.unk4 = gContestEffects[effect].jam;
-        shared192D0_.unk6 = gContestEffects[effect].jam;
-        shared192D0_.unk11 = contestant;
+        shared192D0.unk4 = gContestEffects[effect].jam;
+        shared192D0.unk6 = gContestEffects[effect].jam;
+        shared192D0.unk11 = contestant;
         for (i = 0; i < 4; i++)
         {
             sContestantStatus[i].unkE = 0;
-            shared192D0_.unkD[i] = 0;
+            shared192D0.unkD[i] = 0;
         }
         if (sContestantStatus[contestant].unk15_4 && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
             sContestantStatus[contestant].unk15_4 = 0;
@@ -4637,19 +4653,19 @@ void sub_80B146C(u8 a, u8 b)
 {
     StringCopy(gStringVar1, gContestMons[a].nickname);
     StringCopy(gStringVar2, gMoveNames[sContestantStatus[a].currMove]);
-    if      (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_COOL)
+    if      (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
         StringCopy(gStringVar3, gText_Contest_Anxiety);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
         StringCopy(gStringVar3, gText_Contest_Laziness);
-    else if (gContestMoves[sContestantStatus[shared192D0_.unk11].currMove].contestCategory == CONTEST_CATEGORY_SMART)
+    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_SMART)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
     StringExpandPlaceholders(gStringVar4, gUnknown_083CC188[b]);
     sub_80AF138();
-    sub_8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
+    Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
 }
 
 void sub_80B157C(u8 p)
@@ -4708,7 +4724,7 @@ void sub_80B159C(void)
 
     for (i = 0; i < 4; i++)
     {
-        shared192D0_.unk0[i] = sp0[i];
+        shared192D0.unk0[i] = sp0[i];
         sContestantStatus[i].unk19 = 0xFF;
         sContestantStatus[i].unk10_6 = 0;
         gUnknown_02038696[i] = sp0[i];
@@ -4796,7 +4812,7 @@ void unref_sub_80B19D0(void)
 {
     u8 str[20];
     StringCopy(str, gUnknown_083CC2EC);
-    sub_8003460(&gUnknown_03004210, str, 680, 0, 0);
+    Text_InitWindowAndPrintText(&gUnknown_03004210, str, 680, 0, 0);
 }
 
 s8 Contest_GetMoveExcitement(u16 move)
@@ -5083,7 +5099,7 @@ void sub_80B20C4(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (shared192D0_.unkD[i] != 0 && !Contest_IsMonsTurnDisabled(i))
+        if (shared192D0.unkD[i] != 0 && !Contest_IsMonsTurnDisabled(i))
         {
             u8 r4 = gUnknown_02038696[i] * 5 + 2;
             u16 r0 = sub_80AEFE8(i, 3);
@@ -5339,7 +5355,7 @@ void sub_80B2790(u8 a)
     u16 species = SanitizeSpecies(gContestMons[a].species);
     u8 r5_2;
 
-    memset(&shared19348_, 0, sizeof(shared19348_));
+    memset(&shared19348, 0, sizeof(shared19348));
     ClearBattleAnimationVars();
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
@@ -5354,9 +5370,9 @@ void sub_80B2790(u8 a)
     case MOVE_TRANSFORM:
     case MOVE_ROLE_PLAY:
         r5_2 = sContestantStatus[a].unk1B;
-        shared19348_.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
-        shared19348_.unk10 = gContestMons[r5_2].personality;
-        shared19348_.unk4_0 = 1;
+        shared19348.unk2 = SanitizeSpecies(gContestMons[r5_2].species);
+        shared19348.unk10 = gContestMons[r5_2].personality;
+        shared19348.unk4_0 = 1;
         break;
     case MOVE_RETURN:
         gAnimFriendship = 0xFF;
@@ -5384,17 +5400,17 @@ void sub_80B2790(u8 a)
 
 void sub_80B28CC(int unused)
 {
-    memset(&shared19348_, 0, sizeof(shared19348_));
+    memset(&shared19348, 0, sizeof(shared19348));
     if (sContest.unk1925E != 0)
         sContest.unk1925E--;
 }
 
 void sub_80B28F0(u8 a)
 {
-    shared19348_.unk5 = a;
-    shared19348_.unk0 = SanitizeSpecies(gContestMons[a].species);
-    shared19348_.unk8 = gContestMons[a].personality;
-    shared19348_.unkC = gContestMons[a].otId;
+    shared19348.unk5 = a;
+    shared19348.unk0 = SanitizeSpecies(gContestMons[a].species);
+    shared19348.unk8 = gContestMons[a].personality;
+    shared19348.unkC = gContestMons[a].otId;
 }
 
 void sub_80B292C(void)

@@ -205,7 +205,7 @@ static u16 TakeSelectedPokemonFromDaycare(struct DayCare * daycare, u8 slot)
 
     GetBoxMonNick(&daycare->mons[slot], gStringVar1);
     species = GetBoxMonData(&daycare->mons[slot], MON_DATA_SPECIES);
-    sub_803B4B4(&daycare->mons[slot], &pokemon);
+    ExpandBoxMon(&daycare->mons[slot], &pokemon);
 
     if (GetMonData(&pokemon, MON_DATA_LEVEL) != MAX_LEVEL)
     {
@@ -341,7 +341,7 @@ u16 GetEggSpecies(u16 species)
         {
             for (k = 0; k < 5; k++)
             {
-                if (gEvolutionTable[j].evolutions[k].targetSpecies == species)
+                if (gEvolutionTable[j][k].targetSpecies == species)
                 {
                     species = j;
                     found = TRUE;
@@ -557,7 +557,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
         {
             for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
             {
-                if (gHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01 + j) && CanMonLearnTMHM(egg, j))
+                if (gHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
                 {
                     if (GiveMoveToMon(egg, gHatchedEggFatherMoves[i]) == 0xffff)
                         DeleteFirstMoveAndGiveMoveToMon(egg, gHatchedEggFatherMoves[i]);
@@ -1741,7 +1741,7 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
         if (gTasks[taskId].data[0] != 0)
         {
             gTasks[taskId].data[0] --;
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
             PlaySE(SE_SELECT);
         }
     }
@@ -1750,25 +1750,25 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
         if (gTasks[taskId].data[0] != 2)
         {
             gTasks[taskId].data[0]++;
-            MoveMenuCursor(+1);
+            Menu_MoveCursor(+1);
             PlaySE(SE_SELECT);
         }
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         PlaySE(SE_SELECT);
         gLastFieldPokeMenuOpened = gSpecialVar_Result = gTasks[taskId].data[0];
         DestroyTask(taskId);
-        MenuZeroFillWindowRect(15, 6, 29, 13);
+        Menu_EraseWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        HandleDestroyMenuCursors();
+        Menu_DestroyCursor();
         gLastFieldPokeMenuOpened = gSpecialVar_Result = 2;
         DestroyTask(taskId);
-        MenuZeroFillWindowRect(15, 6, 29, 13);
+        Menu_EraseWindowRect(15, 6, 29, 13);
         EnableBothScriptContexts();
     }
 }
@@ -1776,11 +1776,11 @@ static void HandleDaycareLevelMenuInput(u8 taskId)
 void ShowDaycareLevelMenu(void)
 {
     u8 buffer[100];
-    MenuDrawTextWindow(15, 6, 29, 13);
+    Menu_DrawStdWindowFrame(15, 6, 29, 13);
     GetDaycareLevelMenuText(&gSaveBlock1.daycare, buffer);
-    MenuPrint(buffer, 16, 7);
+    Menu_PrintText(buffer, 16, 7);
     GetDaycareLevelMenuLevelText(&gSaveBlock1.daycare, buffer);
-    MenuPrint_PixelCoords(buffer, 0xce, 0x38, TRUE);
+    Menu_PrintTextPixelCoords(buffer, 0xce, 0x38, TRUE);
     InitMenu(0, 16, 7, 3, 0, 13);
     CreateTask(HandleDaycareLevelMenuInput, 3);
 }

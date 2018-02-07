@@ -62,7 +62,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B49C1, 4
 	.endif
-	setweather 0
+	setweather WEATHER_NONE
 	doweather
 	special sub_8081924
 	waitstate
@@ -78,7 +78,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	setvar RESULT, 0
 	.endif
-	playse 209
+	playse SE_W197
 	setfieldeffectargument 0, 16
 	setfieldeffectargument 1, 42
 	setfieldeffectargument 2, 0
@@ -89,8 +89,8 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	setvar RESULT, 1
 	.endif
-	playfanfare 388
-	playse 107
+	playfanfare BGM_ME_TAMA
+	playse SE_TAMA
 	special sub_80818A4
 	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0841
 	applymovement 255, SeafloorCavern_Room9_Movement_1A0841
@@ -126,7 +126,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4A89, 4
 	.endif
-	playse 2
+	playse SE_PC_LOGON
 	applymovement 255, SeafloorCavern_Room9_Movement_1A083F
 	waitmovement 0
 	.ifdef SAPPHIRE
@@ -143,7 +143,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4B11, 4
 	.endif
 	closemessage
-	playse 3
+	playse SE_PC_OFF
 	delay 20
 	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0845
 	waitmovement 0
@@ -167,7 +167,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	msgbox SeafloorCavern_Room9_Text_1B4D02, 4
 	.endif
-	playse 21
+	playse SE_PIN
 	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0833
 	waitmovement 0
 	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0835

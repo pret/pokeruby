@@ -4,7 +4,7 @@
 
 extern u8 gBattleCommunication[];
 
-extern u8 (*gCallback_03004AE8)(void);
+extern u8 (*gMenuCallback)(void);
 
 static u8 sub_814A4B8(void);
 static u8 sub_814A464(void);
@@ -32,17 +32,17 @@ const struct MenuAction gUnknown_0842C29C[] = {
 
 int unref_sub_814A414(void)
 {
-    MenuZeroFillScreen();
-    MenuDrawTextWindow(0, 0, 16, 18);
-    PrintMenuItems(2, 1, 8, gUnknown_0842C29C);
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 16, 18);
+    Menu_PrintItems(2, 1, 8, gUnknown_0842C29C);
     InitMenu(0, 1, 1, 8, 0, 15);
-    gCallback_03004AE8 = sub_814A464;
+    gMenuCallback = sub_814A464;
     return 0;
 }
 
 static u8 sub_814A464(void)
 {
-    s8 result = ProcessMenuInput();
+    s8 result = Menu_ProcessInput();
     if (result == -2)
     {
         return 0;
@@ -55,7 +55,7 @@ static u8 sub_814A464(void)
     else
     {
         gBattleCommunication[0] = result;
-        gCallback_03004AE8 = gUnknown_0842C29C[result].func;
+        gMenuCallback = gUnknown_0842C29C[result].func;
         return 0;
     }
 }

@@ -1,4 +1,5 @@
 .macro def_special ptr
+.global SPECIAL_\ptr
 .set SPECIAL_\ptr, __special__
 .set __special__, __special__ + 1
     .4byte \ptr
@@ -159,7 +160,7 @@ gSpecials::
 	def_special GetRivalSonDaughterString
 	def_special SetFlagInVar
 	def_special CableCarWarp
-	def_special sub_8123218
+	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
 	def_special StartWallClock
 	def_special ScrSpecial_ViewWallClock

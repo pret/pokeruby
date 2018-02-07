@@ -4,10 +4,9 @@ RustboroCity_CuttersHouse_MapScripts:: @ 8157D26
 RustboroCity_CuttersHouse_EventScript_157D27:: @ 8157D27
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_HM01
-	goto_if_eq RustboroCity_CuttersHouse_EventScript_157D53
+	goto_if_set FLAG_RECEIVED_HM01, RustboroCity_CuttersHouse_EventScript_157D53
 	msgbox RustboroCity_CuttersHouse_Text_18509C, 4
-	giveitem_std ITEM_HM01
+	giveitem_std ITEM_HM01_CUT
 	setflag FLAG_RECEIVED_HM01
 	msgbox RustboroCity_CuttersHouse_Text_1851C9, 4
 	release

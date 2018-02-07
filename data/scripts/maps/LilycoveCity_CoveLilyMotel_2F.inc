@@ -4,10 +4,8 @@ LilycoveCity_CoveLilyMotel_2F_MapScripts:: @ 81583A0
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583A1:: @ 81583A1
 	lock
 	faceplayer
-	checkflag FLAG_TEMP_2
-	call_if 0, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
-	checkflag FLAG_TEMP_2
-	call_if 1, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
+	call_if_unset FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7
+	call_if_set FLAG_TEMP_2, LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	specialvar RESULT, CompletedHoennPokedex
 	compare RESULT, 1
 	goto_if_eq LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0
@@ -20,7 +18,7 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_1583C7:: @ 81583C7
 
 LilycoveCity_CoveLilyMotel_2F_EventScript_1583D0:: @ 81583D0
 	setflag FLAG_TEMP_2
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	waitfanfare
 	goto LilycoveCity_CoveLilyMotel_2F_EventScript_1583DD
 	end

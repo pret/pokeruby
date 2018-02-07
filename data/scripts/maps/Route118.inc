@@ -9,12 +9,11 @@ Route118_MapScript1_150F2E:: @ 8150F2E
 Route118_EventScript_150F34:: @ 8150F34
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_GOOD_ROD
-	goto_if_eq Route118_EventScript_150F89
-	msgbox Route118_Text_170F12, 5
-	compare RESULT, 1
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_150F89
+	msgbox Route118_Text_170F12, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route118_EventScript_150F5E
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq Route118_EventScript_150F7F
 	end
 
@@ -77,18 +76,18 @@ Route118_EventScript_150FE4:: @ 8150FE4
 	end
 
 Route118_EventScript_151004:: @ 8151004
-	playse 10
+	playse SE_DANSA
 	applymovement 19, Route118_Movement_15106D
 	waitmovement 0
 	delay 30
 	msgbox Route118_Text_170D66, 4
 	closemessage
 	compare VAR_SPECIAL_8, 0
-	call_if 1, Route118_EventScript_151048
+	call_if_eq Route118_EventScript_151048
 	compare VAR_SPECIAL_8, 1
-	call_if 1, Route118_EventScript_151053
+	call_if_eq Route118_EventScript_151053
 	compare VAR_SPECIAL_8, 2
-	call_if 1, Route118_EventScript_15105E
+	call_if_eq Route118_EventScript_15105E
 	setvar VAR_ROUTE118_STATE, 1
 	removeobject 19
 	releaseall

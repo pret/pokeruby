@@ -42,7 +42,7 @@ extern u8 gBerryCheck_Pal[];
 extern u8 gUnknown_08E788E4[];
 extern u8 gUnknown_08E78A84[];
 
-static const u8 *const gUnknown_0841192C[] =
+const u8 *const gUnknown_0841192C[] =
 {
     ContestStatsText_VerySoft,
     ContestStatsText_Soft,
@@ -93,7 +93,7 @@ static bool8 sub_8146058(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80F9438();
+        ClearVideoCallbacks();
         sub_80F9368();
         sub_8146288();
         REG_BLDCNT = 0;
@@ -109,11 +109,11 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 3:
-        SetUpWindowConfig(&gWindowConfig_81E6E18);
+        Text_LoadWindowTemplate(&gWindowTemplate_81E6E18);
         gMain.state += 1;
         break;
     case 4:
-        MultistepInitMenuWindowBegin(&gWindowConfig_81E6E18);
+        MultistepInitMenuWindowBegin(&gWindowTemplate_81E6E18);
         gMain.state += 1;
         break;
     case 5:
@@ -189,7 +189,6 @@ static void sub_8146288(void)
 bool8 sub_81462B8(void)
 {
     u16 i;
-    void *addr;
 
     switch (gSharedMem.var_1FFFF)
     {
@@ -213,8 +212,7 @@ bool8 sub_81462B8(void)
             else
                 gBGTilemapBuffers[2][i] = 0x5042;
         }
-        addr = (void *)(VRAM + 0x3800);
-        DmaCopy16(3, gBGTilemapBuffers[2], addr, 0x800);
+        DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(VRAM + 0x3800), 0x800);
         gSharedMem.var_1FFFF += 1;
         break;
     case 4:
@@ -280,18 +278,18 @@ static void sub_81464E4(void)
     berryInfo = GetBerryInfo(gSpecialVar_ItemId + OFFSET_7B + 1);
 
     ConvertIntToDecimalStringN(gStringVar1, gSpecialVar_ItemId - FIRST_BERRY + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    MenuPrint(gStringVar1, 12, 4);
+    Menu_PrintText(gStringVar1, 12, 4);
 
 #if ENGLISH
-    MenuPrint(berryInfo->name, 14, 4);
+    Menu_PrintText(berryInfo->name, 14, 4);
 #elif GERMAN
     StringCopy(buffer, berryInfo->name);
     StringAppend(buffer, gOtherText_Berry2);
-    MenuPrint(buffer, 14, 4);
+    Menu_PrintText(buffer, 14, 4);
 #endif
 
-    MenuPrint(berryInfo->description1, 4, 14);
-    MenuPrint(berryInfo->description2, 4, 16);
+    Menu_PrintText(berryInfo->description1, 4, 14);
+    Menu_PrintText(berryInfo->description2, 4, 16);
 
 #ifdef UNITS_IMPERIAL
     size = (berryInfo->size * 1000) / 254;
@@ -301,7 +299,7 @@ static void sub_81464E4(void)
     sizeMajor = size / 100;
 #endif
 
-    MenuPrint(gOtherText_Size, 11, 7);
+    Menu_PrintText(gOtherText_Size, 11, 7);
     if (berryInfo->size != 0)
     {
 #ifdef UNITS_IMPERIAL
@@ -311,18 +309,18 @@ static void sub_81464E4(void)
         ConvertIntToDecimalStringN(gStringVar1, berryInfo->size / 10, STR_CONV_MODE_LEFT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, berryInfo->size % 10, STR_CONV_MODE_LEFT_ALIGN, 2);
 #endif
-        MenuPrint(gContestStatsText_Unknown1, 16, 7);
+        Menu_PrintText(gContestStatsText_Unknown1, 16, 7);
     }
     else
     {
-        MenuPrint(gOtherText_ThreeQuestions2, 16, 7);
+        Menu_PrintText(gOtherText_ThreeQuestions2, 16, 7);
     }
 
-    MenuPrint(gOtherText_Firm, 11, 9);
+    Menu_PrintText(gOtherText_Firm, 11, 9);
     if (berryInfo->firmness != 0)
-        MenuPrint(gUnknown_0841192C[berryInfo->firmness - 1], 16, 9);
+        Menu_PrintText(gUnknown_0841192C[berryInfo->firmness - 1], 16, 9);
     else
-        MenuPrint(gOtherText_ThreeQuestions2, 16, 9);
+        Menu_PrintText(gOtherText_ThreeQuestions2, 16, 9);
 }
 
 static void sub_8146600(u8 berry)
@@ -445,7 +443,7 @@ static void sub_8146810(s8 berry)
 
 static void sub_81468BC(void)
 {
-    MenuZeroFillWindowRect(0, 4, 29, 19);
+    Menu_EraseWindowRect(0, 4, 29, 19);
     sub_81464E4();
 
     // center of berry sprite

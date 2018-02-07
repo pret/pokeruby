@@ -18,7 +18,7 @@
 
 static void sub_80F9834(struct Sprite *sprite);
 
-static EWRAM_DATA u8 gUnknown_020388C0[4] = {0};
+static EWRAM_DATA u8 gVerticalScrollIndicatorIds[4] = {0};
 static EWRAM_DATA struct YesNoFuncTable gUnknown_020388C4 = {0};
 
 static TaskFunc gUnknown_0300074C;
@@ -125,7 +125,7 @@ static const struct SpriteTemplate gSpriteTemplate_83E5A00 =
     .callback = SpriteCallbackDummy,
 };
 
-void sub_80F9020(void)
+void ClearBGTilemapBuffers(void)
 {
     memset(&gBGTilemapBuffers[1], 0, 0x800);
     memset(&gBGTilemapBuffers[2], 0, 0x800);
@@ -135,7 +135,7 @@ void sub_80F9020(void)
 // display message box, fill box with tile if tile is not zero, print string
 static void PrintMessage(const u8 *str, u16 tile)
 {
-    MenuDisplayMessageBox();
+    Menu_DisplayDialogueFrame();
     if (tile)
     {
         sub_80A3FA0(&gBGTilemapBuffers[1][0], 2, 15, 26, 4, tile);
@@ -145,7 +145,7 @@ static void PrintMessage(const u8 *str, u16 tile)
 
 static void sub_80F9090(u8 taskId)
 {
-    if (MenuUpdateWindowText() == TRUE)
+    if (Menu_UpdateWindowText() == TRUE)
     {
         gUnknown_0300074C(taskId);
     }
@@ -160,7 +160,7 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *str, TaskFunc callback, u16 
 
 static void Task_CallYesOrNoCallback(u8 taskId)
 {
-    switch (ProcessMenuInputNoWrap_())
+    switch (Menu_ProcessInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);
@@ -196,7 +196,7 @@ static void PrintStringWithPalette(const u8 *str, u8 paletteNum, u8 left, u8 top
         StringCopy(gStringVar4, str);
     }
 
-    MenuPrint(gStringVar4, left, top);
+    Menu_PrintText(gStringVar4, left, top);
 }
 
 // unused
@@ -209,7 +209,7 @@ void PrintNumberWithPalette(s32 value, u8 paletteNum, u8 n, u8 mode, u8 left, u8
     }
     else
     {
-        MenuPrint(gStringVar1, left, top);
+        Menu_PrintText(gStringVar1, left, top);
     }
 }
 
@@ -296,9 +296,6 @@ bool8 sub_80F9344(void)
 
 void sub_80F9368(void)
 {
-    u8 *addr;
-    u32 size;
-
     REG_DISPCNT = 0;
     REG_BG3CNT = 0;
     REG_BG2CNT = 0;
@@ -312,38 +309,24 @@ void sub_80F9368(void)
     REG_BG1VOFS = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-
-    addr = (u8 *)VRAM;
-    size = 0x18000;
-    while (1)
-    {
-        DmaFill16(3, 0, addr, 0x1000);
-        addr += 0x1000;
-        size -= 0x1000;
-        if (size <= 0x1000)
-        {
-            DmaFill16(3, 0, addr, size);
-            break;
-        }
-    }
-
+    DmaFill16Large(3, 0, (u8 *)VRAM, 0x18000, 0x1000);
     DmaClear32(3, OAM, OAM_SIZE);
     DmaClear16(3, PLTT, PLTT_SIZE);
 }
 
-void sub_80F9438(void)
+void ClearVideoCallbacks(void)
 {
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
 }
 
-void sub_80F944C(void)
+void ClearVerticalScrollIndicatorPalettes(void)
 {
     u8 i;
 
     for (i = 0; i < 4; i++)
     {
-        gUnknown_020388C0[i] = 0xFF;
+        gVerticalScrollIndicatorIds[i] = 0xFF;
     }
 
     FreeSpritePaletteByTag(SCROLL_INDICATOR_PAL_TAG);
@@ -401,92 +384,92 @@ void CreateVerticalScrollIndicators(u8 id, u16 x, u16 y)
 
     switch (id)
     {
-    case 0:
-        if (gUnknown_020388C0[0] == 0xFF)
+    case TOP_ARROW:
+        if (gVerticalScrollIndicatorIds[TOP_ARROW] == 0xFF)
         {
-            gUnknown_020388C0[0] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
-            gSprites[gUnknown_020388C0[0]].data[2] = -1;
-            if (gUnknown_020388C0[1] != 0xFF)
+            gVerticalScrollIndicatorIds[TOP_ARROW] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
+            gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[2] = -1;
+            if (gVerticalScrollIndicatorIds[BOTTOM_ARROW] != 0xFF)
             {
-                gSprites[gUnknown_020388C0[0]].pos2.y = gSprites[gUnknown_020388C0[1]].pos2.y * -1;
-                gSprites[gUnknown_020388C0[0]].data[3] = gSprites[gUnknown_020388C0[1]].data[3];
+                gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].pos2.y = gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].pos2.y * -1;
+                gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[3] = gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[3];
             }
             else
             {
-                gSprites[gUnknown_020388C0[0]].data[3] = 0;
+                gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[3] = 0;
             }
         }
         break;
 
-    case 1:
-        if (gUnknown_020388C0[1] == 0xFF)
+    case BOTTOM_ARROW:
+        if (gVerticalScrollIndicatorIds[BOTTOM_ARROW] == 0xFF)
         {
-            gUnknown_020388C0[1] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
-            gSprites[gUnknown_020388C0[1]].data[2] = 1;
-            if (gUnknown_020388C0[0] != 0xFF)
+            gVerticalScrollIndicatorIds[BOTTOM_ARROW] = CreateSprite(&gSpriteTemplate_83E59D0, x, y, 0);
+            gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[2] = 1;
+            if (gVerticalScrollIndicatorIds[TOP_ARROW] != 0xFF)
             {
-                gSprites[gUnknown_020388C0[1]].pos2.y = gSprites[gUnknown_020388C0[0]].pos2.y * -1;
-                gSprites[gUnknown_020388C0[1]].data[3] = gSprites[gUnknown_020388C0[0]].data[3];
+                gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].pos2.y = gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].pos2.y * -1;
+                gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[3] = gSprites[gVerticalScrollIndicatorIds[TOP_ARROW]].data[3];
             }
             else
             {
-                gSprites[gUnknown_020388C0[1]].data[3] = 0;
+                gSprites[gVerticalScrollIndicatorIds[BOTTOM_ARROW]].data[3] = 0;
             }
         }
         break;
 
-     case 2:
-        if (gUnknown_020388C0[2] == 0xFF)
+     case LEFT_ARROW:
+        if (gVerticalScrollIndicatorIds[LEFT_ARROW] == 0xFF)
         {
-            gUnknown_020388C0[2] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
-            gSprites[gUnknown_020388C0[2]].data[0] = -1;
-            if (gUnknown_020388C0[3] != 0xFF)
+            gVerticalScrollIndicatorIds[LEFT_ARROW] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
+            gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[0] = -1;
+            if (gVerticalScrollIndicatorIds[RIGHT_ARROW] != 0xFF)
             {
-                gSprites[gUnknown_020388C0[2]].pos2.x = gSprites[gUnknown_020388C0[3]].pos2.x * -1;
-                gSprites[gUnknown_020388C0[2]].data[1] = gSprites[gUnknown_020388C0[3]].data[1];
+                gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].pos2.x = gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].pos2.x * -1;
+                gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[1] = gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[1];
             }
             else
             {
-                gSprites[gUnknown_020388C0[2]].data[1] = 0;
+                gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[1] = 0;
             }
         }
         break;
 
-    case 3:
-        if (gUnknown_020388C0[3] == 0xFF)
+    case RIGHT_ARROW:
+        if (gVerticalScrollIndicatorIds[RIGHT_ARROW] == 0xFF)
         {
-            gUnknown_020388C0[3] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
-            gSprites[gUnknown_020388C0[3]].data[0] = 1;
-            if (gUnknown_020388C0[2] != 0xFF)
+            gVerticalScrollIndicatorIds[RIGHT_ARROW] = CreateSprite(&gSpriteTemplate_83E59E8, x, y, 0);
+            gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[0] = 1;
+            if (gVerticalScrollIndicatorIds[LEFT_ARROW] != 0xFF)
             {
-                gSprites[gUnknown_020388C0[3]].pos2.x = gSprites[gUnknown_020388C0[2]].pos2.x * -1;
-                gSprites[gUnknown_020388C0[3]].data[1] = gSprites[gUnknown_020388C0[2]].data[1];
+                gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].pos2.x = gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].pos2.x * -1;
+                gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[1] = gSprites[gVerticalScrollIndicatorIds[LEFT_ARROW]].data[1];
             }
             else
             {
-                gSprites[gUnknown_020388C0[3]].data[1] = 0;
+                gSprites[gVerticalScrollIndicatorIds[RIGHT_ARROW]].data[1] = 0;
             }
         }
         break;
     }
 
-    StartSpriteAnim(&gSprites[gUnknown_020388C0[id]], id & 1);
+    StartSpriteAnim(&gSprites[gVerticalScrollIndicatorIds[id]], id & 1);
 }
 
-void sub_80F979C(u8 id, bool8 invisible)
+void SetVerticalScrollIndicators(u8 id, bool8 invisible)
 {
-    if (id < 4 && gUnknown_020388C0[id] != 0xFF)
+    if (id < 4 && gVerticalScrollIndicatorIds[id] != 0xFF)
     {
-        gSprites[gUnknown_020388C0[id]].invisible = invisible;
+        gSprites[gVerticalScrollIndicatorIds[id]].invisible = invisible;
     }
 }
 
 void DestroyVerticalScrollIndicator(u8 id)
 {
-    if (id < 4 && gUnknown_020388C0[id] != 0xFF)
+    if (id < 4 && gVerticalScrollIndicatorIds[id] != 0xFF)
     {
-        DestroySprite(&gSprites[gUnknown_020388C0[id]]);
-        gUnknown_020388C0[id] = 0xFF;
+        DestroySprite(&gSprites[gVerticalScrollIndicatorIds[id]]);
+        gVerticalScrollIndicatorIds[id] = 0xFF;
     }
 }
 
@@ -530,43 +513,43 @@ static void sub_80F9834(struct Sprite *sprite)
     }
 }
 
-void sub_80F98A4(u8 id)
+void StopVerticalScrollIndicators(u8 id)
 {
-    if (gUnknown_020388C0[id] != 0xFF && id < 4)
+    if (gVerticalScrollIndicatorIds[id] != 0xFF && id < 4)
     {
-        gSprites[gUnknown_020388C0[id]].callback = SpriteCallbackDummy;
+        gSprites[gVerticalScrollIndicatorIds[id]].callback = SpriteCallbackDummy;
     }
 }
 
 void StartVerticalScrollIndicators(u8 id)
 {
-    if (gUnknown_020388C0[id] != 0xFF && id < 4)
+    if (gVerticalScrollIndicatorIds[id] != 0xFF && id < 4)
     {
-        gSprites[gUnknown_020388C0[id]].callback = sub_80F9834;
+        gSprites[gVerticalScrollIndicatorIds[id]].callback = sub_80F9834;
     }
 }
 
-static void sub_80F9914(u8 id)
+static void ResetVerticalScrollIndicators(u8 id)
 {
-    if (gUnknown_020388C0[id] != 0xFF && id < 4)
+    if (gVerticalScrollIndicatorIds[id] != 0xFF && id < 4)
     {
-        gSprites[gUnknown_020388C0[id]].pos2.x = 0;
-        gSprites[gUnknown_020388C0[id]].pos2.y = 0;
-        gSprites[gUnknown_020388C0[id]].data[1] = 0;
-        gSprites[gUnknown_020388C0[id]].data[3] = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].pos2.x = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].pos2.y = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].data[1] = 0;
+        gSprites[gVerticalScrollIndicatorIds[id]].data[3] = 0;
     }
 }
 
 void PauseVerticalScrollIndicator(u8 id)
 {
-    sub_80F98A4(id);
-    sub_80F9914(id);
+    StopVerticalScrollIndicators(id);
+    ResetVerticalScrollIndicators(id);
 }
 
-void sub_80F9988(u8 id, u8 priority)
+void SetVerticalScrollIndicatorPriority(u8 id, u8 priority)
 {
-    if (gUnknown_020388C0[id] != 0xFF && id < 4)
+    if (gVerticalScrollIndicatorIds[id] != 0xFF && id < 4)
     {
-        gSprites[gUnknown_020388C0[id]].oam.priority = priority;
+        gSprites[gVerticalScrollIndicatorIds[id]].oam.priority = priority;
     }
 }

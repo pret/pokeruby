@@ -40,7 +40,7 @@ extern u8 gUnknown_0202E8F6;
 extern u8 gUnknown_02038470[3];
 extern u8 gUnknown_02038473;
 extern u8 gUnknown_020384F0;
-extern void (*gUnknown_03004AE4)();  //don't know types yet
+extern void (*gPokemonItemUseCallback)();  //don't know types yet
 extern struct PokemonStorage gPokemonStorage;
 extern void nullsub_14();
 
@@ -122,7 +122,7 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         if (!IsDoubleBattle())
         {
             pos = 1;
-            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
+            *temp = gBattlePartyID[GetBankByIdentity(0)];
             for (i = 0; i <= 5; i++)
                 if (i != *temp)
                     temp[pos++] = i;
@@ -130,8 +130,8 @@ static void sub_8094998(u8 arg[3], u8 player_number)
         else
         {
             pos = 2;
-            *temp = gBattlePartyID[GetBankByPlayerAI(0)];
-            temp[1] = gBattlePartyID[GetBankByPlayerAI(2)];
+            *temp = gBattlePartyID[GetBankByIdentity(0)];
+            temp[1] = gBattlePartyID[GetBankByIdentity(2)];
             for (i = 0; i <= 5; i++)
                 if ((i != *temp) && (i != temp[1]))
                     temp[pos++] = i;
@@ -147,13 +147,13 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
     u8 temp[6];
     if (!GetBankSide(arg3))
     {
-        i = GetBankByPlayerAI(0);
-        j = GetBankByPlayerAI(2);
+        i = GetBankByIdentity(0);
+        j = GetBankByIdentity(2);
     }
     else
     {
-        i = GetBankByPlayerAI(1);
-        j = GetBankByPlayerAI(3);
+        i = GetBankByIdentity(1);
+        j = GetBankByIdentity(3);
     }
     if (IsLinkDoubleBattle() == TRUE)
     {
@@ -466,7 +466,7 @@ void HandleBattlePartyMenu(u8 taskId)
     {
         if (gUnknown_02038473 == 3 && GetItemEffectType(gSpecialVar_ItemId) == 10)
         {
-            gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
+            gPokemonItemUseCallback(taskId, gSpecialVar_ItemId, Task_80952E4);
             return;
         }
 
@@ -480,7 +480,7 @@ void HandleBattlePartyMenu(u8 taskId)
                 else
                 {
                     sub_806D5A4();
-                    gUnknown_03004AE4(taskId, gSpecialVar_ItemId, Task_80952E4);
+                    gPokemonItemUseCallback(taskId, gSpecialVar_ItemId, Task_80952E4);
                 }
             }
             else
@@ -583,13 +583,13 @@ static void Task_HandlePopupMenuInput(u8 taskId)
         if (gMain.newAndRepeatedKeys & DPAD_UP)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(-1);
+            Menu_MoveCursor(-1);
             return;
         }
         if (gMain.newAndRepeatedKeys & DPAD_DOWN)
         {
             PlaySE(SE_SELECT);
-            MoveMenuCursor(1);
+            Menu_MoveCursor(1);
             return;
         }
         if (gMain.newKeys & A_BUTTON)
@@ -598,7 +598,7 @@ static void Task_HandlePopupMenuInput(u8 taskId)
             func = PartyMenuGetPopupMenuFunc(gTasks[taskId].data[4],
                                sBattlePartyPopupMenus,
                                sBattlePartyMenuActions,
-                               GetMenuCursorPos());
+                               Menu_GetCursorPos());
             func(taskId);
             return;
         }
@@ -723,7 +723,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
 
 static void Task_BattlePartyMenuCancel(u8 taskId)
 {
-    HandleDestroyMenuCursors();
+    Menu_DestroyCursor();
     ClosePartyPopupMenu(gTasks[taskId].data[4], sBattlePartyPopupMenus);
     gTasks[taskId].data[4] = gTasks[taskId].data[5];
     PrintPartyMenuPromptText(0, 0);

@@ -32,26 +32,13 @@ extern void sub_80C4698(u8 *, u8);
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-extern u8 gContestPlayerMonIndex;
-extern u8 gIsLinkContest;
-extern u8 gPlayerPartyCount;
 extern u8 gSelectedOrderFromParty[];
-
-extern u16 gSpecialVar_0x8004;
-extern u16 gSpecialVar_0x8005;
-extern u16 gSpecialVar_0x8006;
 
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
-extern u16 gSpecialVar_Result;
-
-extern u32 gUnknown_03005D28;
 
 extern u8 gUnknown_02038694;
 extern u8 gUnknown_0203856C;
-extern u8 gContestFinalStandings[];
-extern s16 gUnknown_02038670[];
-extern s16 gUnknown_02038678[];
 
 void SetContestTrainerGfxIds(void)
 {
@@ -238,8 +225,8 @@ void ShowContestWinner(void)
     if(gUnknown_0203856C)
     {
         sub_80AAF30();
-        BATTLE_STRUCT->unk15DDF = 1;
-        BATTLE_STRUCT->unk15DDE = sub_80B2C4C(254, 0);
+        gBattleStruct->unk15DDF = 1;
+        gBattleStruct->unk15DDE = sub_80B2C4C(254, 0);
         Contest_SaveWinner(3);
         gUnknown_0203856C = 0;
     }
@@ -292,7 +279,7 @@ void ShowContestEntryMonPic(void)
         u8 left = CONTEST_ENTRY_PIC_LEFT;
         u8 top = CONTEST_ENTRY_PIC_TOP;
 
-        MenuDrawTextWindow(left, top, 19, 13);
+        Menu_DrawStdWindowFrame(left, top, 19, 13);
         species = gContestMons[gSpecialVar_0x8006].species;
         var1 = gContestMons[gSpecialVar_0x8006].personality;
         var2 = gContestMons[gSpecialVar_0x8006].otId;
@@ -349,7 +336,7 @@ void sub_80C5190(u8 taskId)
         task->data[0]++;
         break;
     case 3:
-        MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
+        Menu_EraseWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
         DestroyTask(taskId);
         break;
     case 1:
@@ -373,8 +360,8 @@ void ScriptRandom(void)
 
     if(gIsLinkContest & 1)
     {
-        gUnknown_03005D28 = 1103515245 * gUnknown_03005D28 + 24691;
-        random = gUnknown_03005D28 >> 16;
+        gContestRngValue = 1103515245 * gContestRngValue + 24691;
+        random = gContestRngValue >> 16;
         scriptPtr = &gSpecialVar_Result;
     }
     else

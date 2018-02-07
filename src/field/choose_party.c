@@ -1,5 +1,5 @@
 #include "global.h"
-#include "decoration.h"
+#include "event_data.h"
 #include "field_fadetransition.h"
 #include "main.h"
 #include "menu.h"
@@ -7,6 +7,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_menu.h"
+#include "field_weather.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "overworld.h"
@@ -318,19 +319,19 @@ static void sub_812238C(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & 0x40)
         {
-            if (GetMenuCursorPos() != 0)
+            if (Menu_GetCursorPos() != 0)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(-1);
+                Menu_MoveCursor(-1);
             }
             return;
         }
         if (gMain.newAndRepeatedKeys & 0x80)
         {
-            if (GetMenuCursorPos() != 3)
+            if (Menu_GetCursorPos() != 3)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(1);
+                Menu_MoveCursor(1);
             }
             return;
         }
@@ -343,7 +344,7 @@ static void sub_812238C(u8 taskId)
               gTasks[taskId].data[4],
               sBattleTowerEntryMenu,
               sBattleTowerEntryMenuItems,
-              GetMenuCursorPos());
+              Menu_GetCursorPos());
             popupMenuFunc(taskId);
             return;
         }
@@ -461,8 +462,8 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
         }
     }
     PlaySE(SE_HAZURE);
-    MenuZeroFillWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_EraseWindowRect(20, 10, 29, 19);
+    Menu_DestroyCursor();
     sub_806D5A4();
     sub_806E834(gOtherText_NoMoreThreePoke, 1);
     gTasks[taskId].func = sub_8122728;
@@ -475,8 +476,8 @@ static void sub_8122728(u8 taskId)
 
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
     {
-        MenuZeroFillWindowRect(0, 14, 29, 19);
-        HandleDestroyMenuCursors();
+        Menu_EraseWindowRect(0, 14, 29, 19);
+        Menu_DestroyCursor();
         BattleTowerEntryMenuCallback_Exit(taskId);
     }
 }
@@ -515,8 +516,8 @@ static void BattleTowerEntryMenuCallback_NoEntry(u8 taskId)
 
 static void sub_81227FC(u8 taskId)
 {
-    MenuZeroFillWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_EraseWindowRect(20, 10, 29, 19);
+    Menu_DestroyCursor();
     PrintPartyMenuPromptText(0, 0);
     gTasks[taskId].func = HandleBattleTowerPartyMenu;
 }
@@ -526,6 +527,107 @@ static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
     PlaySE(SE_SELECT);
     sub_81227FC(taskId);
 }
+
+#if DEBUG
+__attribute__((naked))
+void debug_sub_81381B4()
+{
+    asm(
+        "	push	{r4, r5, r6, r7, lr}\n"
+        "	mov	r7, r9\n"
+        "	mov	r6, r8\n"
+        "	push	{r6, r7}\n"
+        "	ldr	r4, ._189       @ gUnknown_02023A00\n"
+        "	add	r0, r4, #0\n"
+        "	mov	r1, #0x0\n"
+        "	mov	r2, #0x60\n"
+        "	bl	memset\n"
+        "	mov	r7, #0x0\n"
+        "	mov	r8, r4\n"
+        "	mov	r0, #0x4\n"
+        "	add r0, r0, r8\n"
+        "	mov	r9, r0\n"
+        "._188:\n"
+        "	mov	r0, #0x64\n"
+        "	add	r1, r7, #0\n"
+        "	mul	r1, r1, r0\n"
+        "	ldr	r0, ._189 + 4   @ gPlayerParty\n"
+        "	add	r5, r1, r0\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x41\n"
+        "	bl	GetMonData\n"
+        "	lsl	r4, r7, #0x5\n"
+        "	mov	r1, r8\n"
+        "	add	r6, r4, r1\n"
+        "	strh	r0, [r6]\n"
+        "	lsl	r0, r0, #0x10\n"
+        "	cmp	r0, #0\n"
+        "	beq	._187	@cond_branch\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x38\n"
+        "	bl	GetMonData\n"
+        "	strb	r0, [r6, #0xf]\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x39\n"
+        "	bl	GetMonData\n"
+        "	strh	r0, [r6, #0x10]\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x3a\n"
+        "	bl	GetMonData\n"
+        "	strh	r0, [r6, #0x12]\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x37\n"
+        "	bl	GetMonData\n"
+        "	mov	r1, r8\n"
+        "	add	r1, r1, #0x14\n"
+        "	add	r1, r4, r1\n"
+        "	str	r0, [r1]\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0xc\n"
+        "	bl	GetMonData\n"
+        "	strh	r0, [r6, #0x2]\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x0\n"
+        "	bl	GetMonData\n"
+        "	mov	r1, r8\n"
+        "	add	r1, r1, #0x18\n"
+        "	add	r1, r4, r1\n"
+        "	str	r0, [r1]\n"
+        "	add	r0, r5, #0\n"
+        "	bl	GetMonGender\n"
+        "	strb	r0, [r6, #0x1c]\n"
+        "	add r4, r4, r9\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x2\n"
+        "	add	r2, r4, #0\n"
+        "	bl	GetMonData\n"
+        "	add	r0, r4, #0\n"
+        "	bl	Text_StripExtCtrlCodes\n"
+        "	add	r0, r5, #0\n"
+        "	mov	r1, #0x3\n"
+        "	bl	GetMonData\n"
+        "	strb	r0, [r6, #0x1d]\n"
+        "._187:\n"
+        "	add	r0, r7, #1\n"
+        "	lsl	r0, r0, #0x18\n"
+        "	lsr	r7, r0, #0x18\n"
+        "	cmp	r7, #0x2\n"
+        "	bls	._188	@cond_branch\n"
+        "	pop	{r3, r4}\n"
+        "	mov	r8, r3\n"
+        "	mov	r9, r4\n"
+        "	pop	{r4, r5, r6, r7}\n"
+        "	pop	{r0}\n"
+        "	bx	r0\n"
+        "._190:\n"
+        "	.align	2, 0\n"
+        "._189:\n"
+        "	.word	gUnknown_02023A00\n"
+        "	.word	gPlayerParty+0x12c\n"
+        "\n"
+    );
+}
+#endif
 
 bool8 SetupLinkMultiBattlePartyMenu(void)
 {
@@ -806,19 +908,19 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
     {
         if (gMain.newAndRepeatedKeys & 0x40)
         {
-            if (GetMenuCursorPos() != 0)
+            if (Menu_GetCursorPos() != 0)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(-1);
+                Menu_MoveCursor(-1);
             }
             return;
         }
         if (gMain.newAndRepeatedKeys & 0x80)
         {
-            if (GetMenuCursorPos() != 3)
+            if (Menu_GetCursorPos() != 3)
             {
                 PlaySE(SE_SELECT);
-                MoveMenuCursor(1);
+                Menu_MoveCursor(1);
             }
             return;
         }
@@ -831,7 +933,7 @@ static void Task_DaycareStorageMenu8122EAC(u8 taskId)
               gTasks[taskId].data[4],
               sDaycareStorageMenus,
               sDaycareStorageMenuItems,
-              GetMenuCursorPos());
+              Menu_GetCursorPos());
             popupMenuFunc(taskId);
             return;
         }
@@ -896,8 +998,8 @@ static void DaycareStorageMenuCallback_Summary(u8 taskId)
 static void DaycareStorageMenuCallback_Exit(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    MenuZeroFillWindowRect(20, 10, 29, 19);
-    HandleDestroyMenuCursors();
+    Menu_EraseWindowRect(20, 10, 29, 19);
+    Menu_DestroyCursor();
     PrintPartyMenuPromptText(15, 0);
     gTasks[taskId].func = HandleDaycarePartyMenu;
 }
@@ -930,7 +1032,7 @@ void sub_81231AC(void)
 
 static void sub_81231C4(u8 taskId)
 {
-    if (sub_807D770() == TRUE)
+    if (IsWeatherNotFadingIn() == TRUE)
     {
         DestroyTask(taskId);
         ScriptContext2_Disable();

@@ -4,8 +4,7 @@ MauvilleCity_House2_MapScripts:: @ 81572BF
 MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_COIN_CASE
-	goto_if_eq MauvilleCity_House2_EventScript_15733D
+	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_15733D
 	msgbox MauvilleCity_House2_Text_18244E, 4
 	checkitem ITEM_HARBOR_MAIL, 1
 	compare RESULT, 1
@@ -14,15 +13,15 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	end
 
 MauvilleCity_House2_EventScript_1572E5:: @ 81572E5
-	playse 21
+	playse SE_PIN
 	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0833
 	waitmovement 0
 	applymovement LAST_TALKED, MauvilleCity_House2_Movement_1A0835
 	waitmovement 0
-	msgbox MauvilleCity_House2_Text_1824D8, 5
-	compare RESULT, 1
+	msgbox MauvilleCity_House2_Text_1824D8, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq MauvilleCity_House2_EventScript_15731B
-	compare RESULT, 0
+	compare RESULT, NO
 	goto_if_eq MauvilleCity_House2_EventScript_157347
 	end
 

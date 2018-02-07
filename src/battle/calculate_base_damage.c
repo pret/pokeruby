@@ -1,16 +1,16 @@
 #include "global.h"
 #include "constants/abilities.h"
+#include "constants/battle_move_effects.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 #include "battle.h"
 #include "berry.h"
 #include "data2.h"
 #include "event_data.h"
-#include "constants/hold_effects.h"
 #include "item.h"
-#include "constants/items.h"
 #include "pokemon.h"
-#include "constants/species.h"
-#include "constants/moves.h"
-#include "constants/battle_move_effects.h"
 #include "ewram.h"
 
 extern u16 gBattleTypeFlags;
@@ -22,8 +22,54 @@ extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
 extern u16 gTrainerBattleOpponent;
 
-extern const u8 gHoldEffectToType[][2];
-extern const u8 gStatStageRatios[][2];
+// Masks for getting PP Up count, also PP Max values
+const u8 gUnknown_08208238[] = {0x03, 0x0c, 0x30, 0xc0};
+
+// Masks for setting PP Up count
+const u8 gUnknown_0820823C[] = {0xFC, 0xF3, 0xCF, 0x3F};
+
+// Values added to PP Up count
+const u8 gUnknown_08208240[] = {0x01, 0x04, 0x10, 0x40};
+
+const u8 gStatStageRatios[][2] =
+{
+    {10, 40}, // -6
+    {10, 35}, // -5
+    {10, 30}, // -4
+    {10, 25}, // -3
+    {10, 20}, // -2
+    {10, 15}, // -1
+    {10, 10}, //  0
+    {15, 10}, //  1
+    {20, 10}, //  2
+    {25, 10}, //  3
+    {30, 10}, //  4
+    {35, 10}, //  5
+    {40, 10}  //  6
+};
+
+const u8 unknownGameFreakAbbrev_820825E[] = _("ゲーフリ");
+
+const u8 gHoldEffectToType[][2] =
+{
+    {HOLD_EFFECT_BUG_POWER,      TYPE_BUG},
+    {HOLD_EFFECT_STEEL_POWER,    TYPE_STEEL},
+    {HOLD_EFFECT_GROUND_POWER,   TYPE_GROUND},
+    {HOLD_EFFECT_ROCK_POWER,     TYPE_ROCK},
+    {HOLD_EFFECT_GRASS_POWER,    TYPE_GRASS},
+    {HOLD_EFFECT_DARK_POWER,     TYPE_DARK},
+    {HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING},
+    {HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC},
+    {HOLD_EFFECT_WATER_POWER,    TYPE_WATER},
+    {HOLD_EFFECT_FLYING_POWER,   TYPE_FLYING},
+    {HOLD_EFFECT_POISON_POWER,   TYPE_POISON},
+    {HOLD_EFFECT_ICE_POWER,      TYPE_ICE},
+    {HOLD_EFFECT_GHOST_POWER,    TYPE_GHOST},
+    {HOLD_EFFECT_PSYCHIC_POWER,  TYPE_PSYCHIC},
+    {HOLD_EFFECT_FIRE_POWER,     TYPE_FIRE},
+    {HOLD_EFFECT_DRAGON_POWER,   TYPE_DRAGON},
+    {HOLD_EFFECT_NORMAL_POWER,   TYPE_NORMAL}
+};
 
 u8 GetBankSide(u8 bank);
 

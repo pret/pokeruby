@@ -1,6 +1,6 @@
 #include "constants/maps.h"
 #include "constants/songs.h"
-	.include "asm/macros.inc"
+	.include "include/macros.inc"
 	.include "constants/constants.inc"
 
 	.section .rodata

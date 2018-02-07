@@ -5,8 +5,7 @@ Route114_EventScript_150733:: @ 8150733
 	lock
 	faceplayer
 	dodailyevents
-	checkflag FLAG_DAILY_RECEIVED_BERRY_ROUTE114
-	goto_if_eq Route114_EventScript_150778
+	goto_if_set FLAG_DAILY_RECEIVED_BERRY_ROUTE114, Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
 	random 5
 	addvar RESULT, 15
@@ -27,10 +26,9 @@ Route114_EventScript_150778:: @ 8150778
 Route114_EventScript_150782:: @ 8150782
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM05
-	goto_if_eq Route114_EventScript_1507B9
+	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
-	giveitem_std ITEM_TM05
+	giveitem_std ITEM_TM05_ROAR
 	compare RESULT, 0
 	goto_if_eq Route114_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM05

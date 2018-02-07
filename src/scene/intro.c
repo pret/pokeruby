@@ -19,7 +19,7 @@
 #include "task.h"
 #include "title_screen.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 #include "ewram.h"
 
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -873,7 +873,7 @@ static u8 SetUpCopyrightScreen(void)
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
         LoadCopyrightGraphics(0, 0x3800, 0);
-        remove_some_task();
+        ScanlineEffect_Stop();
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
@@ -930,8 +930,8 @@ void CB2_InitCopyrightScreenAfterBootup(void)
     if (!SetUpCopyrightScreen())
     {
         sub_8052E4C();
-        ResetSaveCounters();
-        sub_8125EC8(0);
+        Save_ResetSaveCounters();
+        Save_LoadGameData(SAVE_NORMAL);
         if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
             ClearSav2();
         SetPokemonCryStereo(gSaveBlock2.optionsSound);
@@ -1217,7 +1217,6 @@ static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
 static void Task_IntroLoadPart3Streaks(u8 taskId)
 {
     u16 i;
-    void *vram;
 
     intro_reset_and_hide_bgs();
     for (i = 0; i < 32; i++)
@@ -1226,8 +1225,7 @@ static void Task_IntroLoadPart3Streaks(u8 taskId)
         ewram0arr[1][i] = 17;
         ewram0arr[2][i] = 34;
     }
-    vram = (void *)VRAM;
-    DmaCopy16(3, gSharedMem, vram, 0x60);
+    DmaCopy16Defvars(3, gSharedMem, (void *)(VRAM + 0x0), 0x60);
     for (i = 0; i < 0x280; i++)
         ((u16 *)(VRAM + 0x3000))[i] = 0xF001;
     for (i = 0; i < 0x80; i++)

@@ -6,7 +6,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 8157711
 
 RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
 	compare VAR_DEVON_CORP_3F_STATE, 0
-	call_if 1, RustboroCity_DevonCorp_3F_EventScript_15772D
+	call_if_eq RustboroCity_DevonCorp_3F_EventScript_15772D
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_15772D:: @ 815772D
@@ -37,7 +37,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_183903, 4
 	closemessage
-	playbgm 420, 0
+	playbgm BGM_TSURETEK, FALSE
 	applymovement 2, RustboroCity_DevonCorp_3F_Movement_157803
 	applymovement 255, RustboroCity_DevonCorp_3F_Movement_157827
 	waitmovement 0
@@ -50,7 +50,7 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	msgbox RustboroCity_DevonCorp_3F_Text_18320B, 4
 	giveitem_std ITEM_LETTER
 	msgbox RustboroCity_DevonCorp_3F_Text_18337E, 4
-	playfanfare 370
+	playfanfare BGM_FANFA4
 	message RustboroCity_DevonCorp_3F_Text_183422
 	waitfanfare
 	waitmessage
@@ -146,10 +146,8 @@ RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
 RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_EXP_SHARE
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_15789B
-	checkflag FLAG_DELIVERED_STEVEN_LETTER
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_157864
+	goto_if_set FLAG_RECEIVED_EXP_SHARE, RustboroCity_DevonCorp_3F_EventScript_15789B
+	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closemessage
 	applymovement LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
@@ -181,8 +179,7 @@ RustboroCity_DevonCorp_3F_EventScript_15789B:: @ 815789B
 RustboroCity_DevonCorp_3F_EventScript_1578B0:: @ 81578B0
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_REPEAT_BALL
-	goto_if_eq RustboroCity_DevonCorp_3F_EventScript_1578C5
+	goto_if_set FLAG_RECEIVED_REPEAT_BALL, RustboroCity_DevonCorp_3F_EventScript_1578C5
 	msgbox RustboroCity_DevonCorp_3F_Text_18395C, 4
 	release
 	end

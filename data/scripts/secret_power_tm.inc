@@ -1,15 +1,15 @@
 Route111_EventScript_1A3858:: @ 81A3858
 	lock
 	faceplayer
-	msgbox Route111_Text_1A3520, 5
-	compare RESULT, 1
+	msgbox Route111_Text_1A3520, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route111_EventScript_1A3877
 	msgbox Route111_Text_1A37B5, 4
 	release
 	end
 
 Route111_EventScript_1A3877:: @ 81A3877
-	giveitem_std ITEM_TM43
+	giveitem_std ITEM_TM43_SECRET_POWER
 	compare RESULT, 0
 	goto_if_eq Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4
@@ -17,11 +17,11 @@ Route111_EventScript_1A3877:: @ 81A3877
 	setflag FLAG_RECEIVED_SECRET_POWER
 	clearflag FLAG_HIDE_TM_SALESMAN_SLATEPORT
 	compare FACING, 3
-	call_if 1, Route111_EventScript_1A38C3
+	call_if_eq Route111_EventScript_1A38C3
 	compare FACING, 4
-	call_if 1, Route111_EventScript_1A38C3
+	call_if_eq Route111_EventScript_1A38C3
 	compare FACING, 2
-	call_if 1, Route111_EventScript_1A38CE
+	call_if_eq Route111_EventScript_1A38CE
 	removeobject LAST_TALKED
 	release
 	end

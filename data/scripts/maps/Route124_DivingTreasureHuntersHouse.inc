@@ -9,8 +9,7 @@ Route124_DivingTreasureHuntersHouse_MapScript1_163E00:: @ 8163E00
 Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
-	checkflag FLAG_MET_DIVING_TREASURE_HUNTER
-	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E20
+	goto_if_set FLAG_MET_DIVING_TREASURE_HUNTER, Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
 	setflag FLAG_MET_DIVING_TREASURE_HUNTER
 	goto Route124_DivingTreasureHuntersHouse_EventScript_163E2E
@@ -32,16 +31,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
 	setvar VAR_TEMP_1, 0
 	checkitem ITEM_RED_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E8A
 	checkitem ITEM_YELLOW_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E90
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E90
 	checkitem ITEM_BLUE_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E96
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E96
 	checkitem ITEM_GREEN_SHARD, 1
 	compare RESULT, 1
-	call_if 1, Route124_DivingTreasureHuntersHouse_EventScript_163E9C
+	call_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163E9C
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E8A:: @ 8163E8A
@@ -224,30 +223,30 @@ Route124_DivingTreasureHuntersHouse_EventScript_16420F:: @ 816420F
 	end
 
 Route124_DivingTreasureHuntersHouse_EventScript_164256:: @ 8164256
-	setvar VAR_SPECIAL_8, 48
-	setvar VAR_SPECIAL_9, 95
+	setvar VAR_SPECIAL_8, ITEM_RED_SHARD
+	setvar VAR_SPECIAL_9, ITEM_FIRE_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164265:: @ 8164265
-	setvar VAR_SPECIAL_8, 50
-	setvar VAR_SPECIAL_9, 96
+	setvar VAR_SPECIAL_8, ITEM_YELLOW_SHARD
+	setvar VAR_SPECIAL_9, ITEM_THUNDER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164274:: @ 8164274
-	setvar VAR_SPECIAL_8, 49
-	setvar VAR_SPECIAL_9, 97
+	setvar VAR_SPECIAL_8, ITEM_BLUE_SHARD
+	setvar VAR_SPECIAL_9, ITEM_WATER_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164283:: @ 8164283
-	setvar VAR_SPECIAL_8, 51
-	setvar VAR_SPECIAL_9, 98
+	setvar VAR_SPECIAL_8, ITEM_GREEN_SHARD
+	setvar VAR_SPECIAL_9, ITEM_LEAF_STONE
 	goto Route124_DivingTreasureHuntersHouse_EventScript_164292
 
 Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	bufferitemname 0, VAR_SPECIAL_8
 	bufferitemname 1, VAR_SPECIAL_9
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
-	compare RESULT, 0
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, MSGBOX_YESNO
+	compare RESULT, NO
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	checkitemspace VAR_SPECIAL_9, 1
 	compare RESULT, 1
@@ -265,8 +264,8 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare VAR_TEMP_1, 0
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_164333
-	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
-	compare RESULT, 1
+	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, MSGBOX_YESNO
+	compare RESULT, YES
 	goto_if_eq Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	goto Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end

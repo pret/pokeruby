@@ -19,7 +19,7 @@
 #include "task.h"
 #include "title_screen.h"
 #include "trig.h"
-#include "unknown_task.h"
+#include "scanline_effect.h"
 
 // define register constants for the inline asm
 asm(".include \"constants/gba_constants.inc\"\n");
@@ -301,9 +301,10 @@ const struct CompressedSpriteSheet gUnknown_08416E34[] = {
 };
 
 
-extern u16 gUnknown_02039358;
-extern s16 gUnknown_0203935A;
-extern s16 gUnknown_0203935C;
+EWRAM_DATA u16 gUnknown_02039358 = 0;
+EWRAM_DATA s16 gUnknown_0203935A = 0;
+EWRAM_DATA s16 gUnknown_0203935C = 0;
+
 extern u8 gReservedSpritePaletteCount;
 
 void sub_8149248();

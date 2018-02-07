@@ -5,8 +5,7 @@ DesertRuins_MapScripts:: @ 815CAF3
 	.byte 0
 
 DesertRuins_MapScript1_15CB03:: @ 815CB03
-	checkflag FLAG_SYS_CTRL_OBJ_DELETE
-	call_if 1, DesertRuins_EventScript_15CB0D
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, DesertRuins_EventScript_15CB0D
 	end
 
 DesertRuins_EventScript_15CB0D:: @ 815CB0D
@@ -14,8 +13,7 @@ DesertRuins_EventScript_15CB0D:: @ 815CB0D
 	return
 
 DesertRuins_MapScript1_15CB11:: @ 815CB11
-	checkflag FLAG_SYS_BRAILLE_STRENGTH
-	call_if 0, DesertRuins_EventScript_15CB1B
+	call_if_unset FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_15CB1B
 	end
 
 DesertRuins_EventScript_15CB1B:: @ 815CB1B
@@ -33,8 +31,7 @@ DesertRuins_MapScript1_15CB52:: @ 815CB52
 
 DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
-	checkflag FLAG_SYS_BRAILLE_STRENGTH
-	goto_if_eq DesertRuins_EventScript_15CB6D
+	goto_if_set FLAG_SYS_BRAILLE_STRENGTH, DesertRuins_EventScript_15CB6D
 	braillemessage DesertRuins_Braille_1C54C8
 	waitbuttonpress
 	erasebox 0, 0, 29, 19

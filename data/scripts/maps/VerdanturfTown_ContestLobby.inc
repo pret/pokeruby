@@ -22,13 +22,13 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	lockall
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E25
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 545, 1
 	setmetatile 4, 3, 609, 1
 	special DrawWholeMapView
 	applymovement 1, VerdanturfTown_ContestLobby_Movement_153E28
 	waitmovement 0
-	playse 71
+	playse SE_HASHI
 	setmetatile 4, 2, 721, 1
 	setmetatile 4, 3, 729, 1
 	special DrawWholeMapView
@@ -101,10 +101,9 @@ VerdanturfTown_ContestLobby_EventScript_153E3E:: @ 8153E3E
 VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
-	checkflag FLAG_RECEIVED_TM45
-	goto_if_eq VerdanturfTown_ContestLobby_EventScript_153E76
+	goto_if_set FLAG_RECEIVED_TM45, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
-	giveitem_std ITEM_TM45
+	giveitem_std ITEM_TM45_ATTRACT
 	compare RESULT, 0
 	goto_if_eq VerdanturfTown_ContestLobby_EventScript_1A029B
 	setflag FLAG_RECEIVED_TM45
