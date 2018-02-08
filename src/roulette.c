@@ -3345,7 +3345,7 @@ void sub_8118F8C(struct Sprite *sprite)
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
-            if (unk_2039560)
+            if (unk_2039560[0])
                 sprite->callback = debug_sub_812E698;
             else
 #endif
