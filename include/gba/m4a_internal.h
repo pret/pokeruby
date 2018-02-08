@@ -77,7 +77,7 @@ struct CgbChannel
     u8 de;
     u8 su;
     u8 re;
-    u8 ky;
+    u8 ky; // 0x08
     u8 ev;
     u8 eg;
     u8 ec;
@@ -85,7 +85,7 @@ struct CgbChannel
     u8 echoLength;
     u8 d1;
     u8 d2;
-    u8 gt;
+    u8 gt; // 0x10
     u8 mk;
     u8 ve;
     u8 pr;
@@ -96,10 +96,10 @@ struct CgbChannel
     u8 n4;
     u8 pan;
     u8 panMask;
-    u8 mo;
+    u8 mo; // 0x1d
     u8 le;
     u8 sw;
-    u32 fr;
+    u32 fr; // 0x20
     u32 wp;
     u32 cp;
     u32 tp;
@@ -168,11 +168,11 @@ struct SoundInfo
     u8 freq;
 
     u8 mode;
-    u8 c15;
+    u8 c15; // 0xa
     u8 pcmDmaPeriod; // number of V-blanks per PCM DMA
     u8 maxLines;
     u8 gap[3];
-    s32 pcmSamplesPerVBlank;
+    s32 pcmSamplesPerVBlank; // 0x10
     s32 pcmFreq;
     s32 divFreq;
     struct CgbChannel *cgbChans;
@@ -333,7 +333,7 @@ struct Song
 
 extern const struct MusicPlayer gMPlayTable[];
 extern const struct Song gSongTable[];
-
+extern const u8 gCgb3Vol[];
 
 
 extern u8 gMPlayMemAccArea[];
@@ -397,6 +397,7 @@ void m4aSoundMode(u32 mode);
 void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track, u8 a3);
 void CgbSound(void);
 void CgbOscOff(u8);
+void CgbModVol(struct CgbChannel *chan);
 u32 MidiKeyToCgbFreq(u8, u8, u8);
 void DummyFunc(void);
 void MPlayJumpTableCopy(void **mplayJumpTable);

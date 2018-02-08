@@ -63,6 +63,7 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_3.o: CC1 := tools/agbcc/bin/old_agbcc
 %src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 %src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
 %src/libs/libisagbprn.o: CC1FLAGS := -mthumb-interwork
