@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pokeruby", "pokeruby.vcxproj", "{F0F7B293-A134-41D6-AD91-2B2623CD7932}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0F7B293-A134-41D6-AD91-2B2623CD7932}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F0F7B293-A134-41D6-AD91-2B2623CD7932}.Debug|ARM.Build.0 = Debug|ARM
+		{F0F7B293-A134-41D6-AD91-2B2623CD7932}.Release|ARM.ActiveCfg = Release|ARM
+		{F0F7B293-A134-41D6-AD91-2B2623CD7932}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD7AE6A3-56A5-4EAE-98E4-A38414650A8C}
+	EndGlobalSection
+EndGlobal
