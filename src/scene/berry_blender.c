@@ -2015,36 +2015,32 @@ s16 unref_sub_8050514(void)
     return gUnknown_0300052E;
 }
 
-#ifdef NONMATCHING
-
 static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 playersNo, u8* flavours, u16 maxRPM)
 {
     s32 i;
     s32 j;
-    s32 savedEntry;
     s32 var3;
     s32 var4;
-    u32 var6;
-    s32 var11;
-    u16 rand;
+    s32 var6;
+    u8 r10;
 
     for (i = 0; i < 6; i++)
         gUnknown_03000510[i] = 0;
     for (i = 0; i < playersNo; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < 6; j++)
             gUnknown_03000510[j] += berries[i].flavours[j];
     }
 
-    savedEntry = gUnknown_03000510[0];
+    var6 = gUnknown_03000510[0];
     gUnknown_03000510[0] -= gUnknown_03000510[1];
     gUnknown_03000510[1] -= gUnknown_03000510[2];
     gUnknown_03000510[2] -= gUnknown_03000510[3];
     gUnknown_03000510[3] -= gUnknown_03000510[4];
-    gUnknown_03000510[4] -= savedEntry;
+    gUnknown_03000510[4] -= var6;
 
     var6 = 0;
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < 5; i++)
     {
         if (gUnknown_03000510[i] < 0)
         {
@@ -2052,6 +2048,7 @@ static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Poke
             var6++;
         }
     }
+    r10 = var6;
     for (i = 0; i < 5; i++)
     {
         if (gUnknown_03000510[i] > 0)
@@ -2067,13 +2064,13 @@ static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Poke
         gUnknown_03000530[i] = gUnknown_03000510[i];
     }
 
-    var11 = maxRPM / 333 + 100;
-    gUnknown_0300055C = ((var11));
+    var6 = maxRPM / 333 + 100;
+    gUnknown_0300055C = var6;
 
     for (i = 0; i < 5; i++)
     {
         var3 = gUnknown_03000510[i];
-        var3 = ((var11) * var3) / 10;
+        var3 = (var3 * var6) / 10;
         var4 = var3 % 10;
         var3 /= 10;
         if (var4 > 4)
@@ -2084,16 +2081,16 @@ static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Poke
     {
         gUnknown_03000548[i] = gUnknown_03000510[i];
     }
-    pokeblock->color = Blender_GetPokeblockColor(berries, &gUnknown_03000510[0], playersNo, var6);
+    pokeblock->color = Blender_GetPokeblockColor(berries, &gUnknown_03000510[0], playersNo, r10);
     gUnknown_03000510[5] = (gUnknown_03000510[5] / playersNo) - playersNo;
     if (gUnknown_03000510[5] < 0)
         gUnknown_03000510[5] = 0;
     if (pokeblock->color == 12)
     {
-        rand = Random() % 10;
-        for (i = 0; i < 6; i++)
+        var6 = Random() % 10;
+        for (i = 0; i < 5; i++)
         {
-            if ((gUnknown_082165DF[rand] >> i) & 1)
+            if ((gUnknown_082165DF[var6] >> i) & 1)
                 gUnknown_03000510[i] = 2;
             else
                 gUnknown_03000510[i] = 0;
@@ -2115,296 +2112,6 @@ static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Poke
         flavours[i] = gUnknown_03000510[i];
     }
 }
-
-#else
-__attribute__((naked))
-static void Blender_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 a2, u8* flavours, u16 a4)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x10\n\
-    str r0, [sp]\n\
-    mov r8, r1\n\
-    str r3, [sp, 0x4]\n\
-    ldr r0, [sp, 0x30]\n\
-    lsls r2, 24\n\
-    lsrs r2, 24\n\
-    mov r9, r2\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    str r0, [sp, 0x8]\n\
-    ldr r7, _080505DC @ =gUnknown_03000510\n\
-    adds r2, r7, 0\n\
-    movs r1, 0\n\
-    adds r0, r7, 0\n\
-    adds r0, 0xA\n\
-_0805054A:\n\
-    strh r1, [r0]\n\
-    subs r0, 0x2\n\
-    cmp r0, r2\n\
-    bge _0805054A\n\
-    movs r6, 0\n\
-    cmp r6, r9\n\
-    bge _08050580\n\
-    ldr r0, _080505DC @ =gUnknown_03000510\n\
-    mov r12, r0\n\
-    ldr r5, [sp]\n\
-    adds r5, 0x9\n\
-_08050560:\n\
-    movs r3, 0\n\
-    adds r4, r5, 0\n\
-    mov r2, r12\n\
-_08050566:\n\
-    adds r1, r4, r3\n\
-    ldrh r0, [r2]\n\
-    ldrb r1, [r1]\n\
-    adds r0, r1\n\
-    strh r0, [r2]\n\
-    adds r2, 0x2\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x5\n\
-    ble _08050566\n\
-    adds r5, 0x10\n\
-    adds r6, 0x1\n\
-    cmp r6, r9\n\
-    blt _08050560\n\
-_08050580:\n\
-    movs r1, 0\n\
-    ldrsh r3, [r7, r1]\n\
-    ldrh r0, [r7]\n\
-    ldrh r1, [r7, 0x2]\n\
-    subs r0, r1\n\
-    strh r0, [r7]\n\
-    ldrh r0, [r7, 0x4]\n\
-    subs r1, r0\n\
-    strh r1, [r7, 0x2]\n\
-    ldrh r1, [r7, 0x6]\n\
-    subs r0, r1\n\
-    strh r0, [r7, 0x4]\n\
-    ldrh r0, [r7, 0x8]\n\
-    subs r1, r0\n\
-    strh r1, [r7, 0x6]\n\
-    subs r0, r3\n\
-    strh r0, [r7, 0x8]\n\
-    movs r3, 0\n\
-    movs r2, 0\n\
-    adds r1, r7, 0\n\
-    movs r6, 0x4\n\
-_080505AA:\n\
-    movs r4, 0\n\
-    ldrsh r0, [r1, r4]\n\
-    cmp r0, 0\n\
-    bge _080505B6\n\
-    strh r2, [r1]\n\
-    adds r3, 0x1\n\
-_080505B6:\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080505AA\n\
-    lsls r0, r3, 24\n\
-    lsrs r0, 24\n\
-    mov r10, r0\n\
-    movs r4, 0\n\
-    ldr r1, _080505DC @ =gUnknown_03000510\n\
-    movs r6, 0x4\n\
-_080505CA:\n\
-    ldrh r2, [r1]\n\
-    movs r5, 0\n\
-    ldrsh r0, [r1, r5]\n\
-    cmp r0, 0\n\
-    ble _080505E4\n\
-    cmp r0, r3\n\
-    bge _080505E0\n\
-    strh r4, [r1]\n\
-    b _080505E4\n\
-    .align 2, 0\n\
-_080505DC: .4byte gUnknown_03000510\n\
-_080505E0:\n\
-    subs r0, r2, r3\n\
-    strh r0, [r1]\n\
-_080505E4:\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080505CA\n\
-    ldr r1, _080506C4 @ =gUnknown_03000510\n\
-    ldr r2, _080506C8 @ =gUnknown_03000530\n\
-    movs r6, 0x4\n\
-_080505F2:\n\
-    movs r3, 0\n\
-    ldrsh r0, [r1, r3]\n\
-    stm r2!, {r0}\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080505F2\n\
-    ldr r1, _080506CC @ =0x0000014d\n\
-    ldr r0, [sp, 0x8]\n\
-    bl __udivsi3\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r3, r0, 0\n\
-    adds r3, 0x64\n\
-    ldr r4, _080506D0 @ =gUnknown_0300055C\n\
-    str r3, [r4]\n\
-    movs r6, 0x4\n\
-_08050616:\n\
-    movs r0, 0\n\
-    ldrsh r5, [r7, r0]\n\
-    adds r0, r5, 0\n\
-    muls r0, r3\n\
-    movs r1, 0xA\n\
-    str r3, [sp, 0xC]\n\
-    bl __divsi3\n\
-    adds r5, r0, 0\n\
-    movs r1, 0xA\n\
-    bl __modsi3\n\
-    adds r4, r0, 0\n\
-    adds r0, r5, 0\n\
-    movs r1, 0xA\n\
-    bl __divsi3\n\
-    adds r5, r0, 0\n\
-    ldr r3, [sp, 0xC]\n\
-    cmp r4, 0x4\n\
-    ble _08050642\n\
-    adds r5, 0x1\n\
-_08050642:\n\
-    strh r5, [r7]\n\
-    adds r7, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _08050616\n\
-    ldr r1, _080506C4 @ =gUnknown_03000510\n\
-    ldr r2, _080506D4 @ =gUnknown_03000548\n\
-    movs r6, 0x4\n\
-_08050652:\n\
-    movs r3, 0\n\
-    ldrsh r0, [r1, r3]\n\
-    stm r2!, {r0}\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _08050652\n\
-    ldr r4, _080506C4 @ =gUnknown_03000510\n\
-    ldr r0, [sp]\n\
-    adds r1, r4, 0\n\
-    mov r2, r9\n\
-    mov r3, r10\n\
-    bl Blender_GetPokeblockColor\n\
-    mov r5, r8\n\
-    strb r0, [r5]\n\
-    movs r1, 0xA\n\
-    ldrsh r0, [r4, r1]\n\
-    mov r1, r9\n\
-    bl __divsi3\n\
-    mov r3, r9\n\
-    subs r0, r3\n\
-    strh r0, [r4, 0xA]\n\
-    lsls r0, 16\n\
-    cmp r0, 0\n\
-    bge _0805068C\n\
-    movs r0, 0\n\
-    strh r0, [r4, 0xA]\n\
-_0805068C:\n\
-    mov r5, r8\n\
-    ldrb r0, [r5]\n\
-    cmp r0, 0xC\n\
-    bne _080506E6\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0xA\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    movs r6, 0\n\
-    ldr r0, _080506D8 @ =gUnknown_082165DF\n\
-    adds r0, r3, r0\n\
-    ldrb r0, [r0]\n\
-    adds r1, r4, 0\n\
-    movs r4, 0x1\n\
-    movs r3, 0x2\n\
-_080506B4:\n\
-    adds r2, r0, 0\n\
-    asrs r2, r6\n\
-    ands r2, r4\n\
-    cmp r2, 0\n\
-    beq _080506DC\n\
-    strh r3, [r1]\n\
-    b _080506DE\n\
-    .align 2, 0\n\
-_080506C4: .4byte gUnknown_03000510\n\
-_080506C8: .4byte gUnknown_03000530\n\
-_080506CC: .4byte 0x0000014d\n\
-_080506D0: .4byte gUnknown_0300055C\n\
-_080506D4: .4byte gUnknown_03000548\n\
-_080506D8: .4byte gUnknown_082165DF\n\
-_080506DC:\n\
-    strh r2, [r1]\n\
-_080506DE:\n\
-    adds r1, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x4\n\
-    ble _080506B4\n\
-_080506E6:\n\
-    ldr r7, _08050740 @ =gUnknown_03000510\n\
-    movs r2, 0xFF\n\
-    adds r1, r7, 0\n\
-    movs r6, 0x5\n\
-_080506EE:\n\
-    movs r3, 0\n\
-    ldrsh r0, [r1, r3]\n\
-    cmp r0, 0xFF\n\
-    ble _080506F8\n\
-    strh r2, [r1]\n\
-_080506F8:\n\
-    adds r1, 0x2\n\
-    subs r6, 0x1\n\
-    cmp r6, 0\n\
-    bge _080506EE\n\
-    ldrh r0, [r7]\n\
-    mov r4, r8\n\
-    strb r0, [r4, 0x1]\n\
-    ldrh r0, [r7, 0x2]\n\
-    strb r0, [r4, 0x2]\n\
-    ldrh r0, [r7, 0x4]\n\
-    strb r0, [r4, 0x3]\n\
-    ldrh r0, [r7, 0x6]\n\
-    strb r0, [r4, 0x4]\n\
-    ldrh r0, [r7, 0x8]\n\
-    strb r0, [r4, 0x5]\n\
-    ldrh r0, [r7, 0xA]\n\
-    strb r0, [r4, 0x6]\n\
-    movs r6, 0\n\
-    adds r2, r7, 0\n\
-_0805071E:\n\
-    ldr r5, [sp, 0x4]\n\
-    adds r1, r5, r6\n\
-    ldrh r0, [r2]\n\
-    strb r0, [r1]\n\
-    adds r2, 0x2\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x5\n\
-    ble _0805071E\n\
-    add sp, 0x10\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08050740: .4byte gUnknown_03000510\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
 
 static void BlenderDebug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 playersNo, u8* flavours, u16 a4)
 {
