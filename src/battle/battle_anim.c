@@ -1327,7 +1327,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 
-extern const u16 gUnknown_081C7160[];
+extern const u16 gSingingMoves[];
 extern const u8 *const gBattleAnims_Moves[];
 
 static void RunAnimScriptCommand(void);
@@ -1521,10 +1521,11 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
 
     if (isMoveAnim)
     {
-        for (i = 0; gUnknown_081C7160[i] != 0xFFFF; i++)
+        for (i = 0; gSingingMoves[i] != 0xFFFF; i++)
         {
-            if (move == gUnknown_081C7160[i])
+            if (move == gSingingMoves[i])
             {
+                // Lower the volume for the short song that gets played.
                 m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
                 break;
             }
