@@ -244,7 +244,7 @@ void sub_80DFFD0(struct Sprite *sprite)
 
 static void sub_80E00D0(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
         move_anim_8074EE0(sprite);
 }
 

@@ -15,7 +15,7 @@ static void sub_80CF6B4(struct Sprite* sprite);
 
 void sub_80CF690(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     sprite->callback = sub_80785E4;
     StoreSpriteCallbackInData(sprite, sub_80CF6B4);
 }

@@ -298,7 +298,7 @@ const struct SpriteTemplate gBallSpriteTemplates[] =
 
 extern u32 ball_number_to_ball_processing_index(u16);  // not sure of return type
 extern void sub_80786EC();
-extern bool8 sub_8078718(struct Sprite *);
+extern bool8 TranslateAnimSpriteLinearAndSine(struct Sprite *);
 extern u8 sub_814086C(u8, u8, int, int, u8);
 extern u8 sub_8141314(u8, u8, int, u8);
 
@@ -406,7 +406,7 @@ static void sub_8046464(u8 taskId)
 
 static void objc_0804ABD4(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         u8 taskId = sprite->oam.affineParam;
         u8 r5 = gTasks[taskId].data[4];
@@ -858,7 +858,7 @@ static void sub_80470C4(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 4);
         }
         r4 = sprite->data[0];
-        sub_8078B5C(sprite);
+        TranslateAnimSpriteByDeltas(sprite);
         sprite->data[7] += sprite->data[6] / 3;
         sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
         sprite->oam.affineParam += 0x100;
@@ -876,7 +876,7 @@ static void sub_80470C4(struct Sprite *sprite)
     }
     else
     {
-        if (sub_8078718(sprite))
+        if (TranslateAnimSpriteLinearAndSine(sprite))
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;

@@ -22,7 +22,7 @@ static void sub_80D158C(struct Sprite* sprite);
 void sub_80D1368(struct Sprite* sprite)
 {
     s16 r1;
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     r1 = (GetBankSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;

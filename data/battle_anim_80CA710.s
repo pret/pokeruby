@@ -20,11 +20,11 @@ gSpriteAnimTable_83D6220:: @ 83D6220
 	.4byte gSpriteAnim_83D61FC
 
 	.align 2
-gBattleAnimSpriteTemplate_83D6224:: @ 83D6224
+gSleepPowderParticleSpriteTemplate:: @ 83D6224
 	spr_template 10067, 10067, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, AnimMovePowderParticle
 
 	.align 2
-gBattleAnimSpriteTemplate_83D623C:: @ 83D623C
+gStunSporeParticleSpriteTemplate:: @ 83D623C
 	spr_template 10068, 10068, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, AnimMovePowderParticle
 
 	.align 2
@@ -243,7 +243,7 @@ gBattleAnimSpriteTemplate_83D649C:: @ 83D649C
 
 	.align 2
 gBattleAnimSpriteTemplate_83D64B4:: @ 83D64B4
-	spr_template 10063, 10063, gOamData_837DF2C, gSpriteAnimTable_83D6494, NULL, gDummySpriteAffineAnimTable, sub_80CB144
+	spr_template 10063, 10063, gOamData_837DF2C, gSpriteAnimTable_83D6494, NULL, gDummySpriteAffineAnimTable, AnimMoveTwisterParticle
 
 	.align 2
 gSpriteAnim_83D64CC:: @ 83D64CC
@@ -259,7 +259,7 @@ gSpriteAnimTable_83D64E0:: @ 83D64E0
 
 	.align 2
 gBattleAnimSpriteTemplate_83D64E4:: @ 83D64E4
-	spr_template 10160, 10160, gOamData_837DF54, gSpriteAnimTable_83D64E0, NULL, gDummySpriteAffineAnimTable, sub_80CAFD0
+	spr_template 10160, 10160, gOamData_837DF54, gSpriteAnimTable_83D64E0, NULL, gDummySpriteAffineAnimTable, AnimTranslateLinearSingleSineWave
 
 	.align 2
 gSpriteAffineAnim_83D64FC:: @ 83D64FC
@@ -271,8 +271,8 @@ gSpriteAffineAnimTable_83D650C:: @ 83D650C
 	.4byte gSpriteAffineAnim_83D64FC
 
 	.align 2
-gBattleAnimSpriteTemplate_83D6510:: @ 83D6510
-	spr_template 10174, 10174, gOamData_837DF94, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D650C, sub_80CAFD0
+gSwiftStarSpriteTemplate:: @ 83D6510
+	spr_template 10174, 10174, gOamData_837DF94, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D650C, AnimTranslateLinearSingleSineWave
 
 	.align 2
 gSpriteAnim_83D6528:: @ 83D6528
@@ -4151,7 +4151,7 @@ gBattleAnimSpriteTemplate_83DAE00:: @ 83DAE00
 
 	.align 2
 gBattleAnimSpriteTemplate_83DAE18:: @ 83DAE18
-	spr_template 10058, 10058, gOamData_837DF34, gSpriteAnimTable_83DAD58, NULL, gSpriteAffineAnimTable_83DADE0, sub_80CB144
+	spr_template 10058, 10058, gOamData_837DF34, gSpriteAnimTable_83DAD58, NULL, gSpriteAffineAnimTable_83DADE0, AnimMoveTwisterParticle
 
 	.align 2
 gBattleAnimSpriteTemplate_83DAE30:: @ 83DAE30

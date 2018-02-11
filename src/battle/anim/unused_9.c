@@ -18,7 +18,7 @@ static void sub_80CFE2C(struct Sprite* sprite);
 
 void sub_80CFDFC(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     sprite->data[0] = 0x100 + (IndexOfSpritePaletteTag(gSpriteTemplate_83D75AC.paletteTag) << 4);
     sprite->callback = sub_80CFE2C;
 }

@@ -12,7 +12,7 @@ sub_80DDB6C: @ 80DDB6C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _080DDBC8 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
@@ -63,7 +63,7 @@ sub_80DDBD8: @ 80DDBD8
 	adds r4, r0, 0
 	bl sub_80DDCC8
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DDBF8
@@ -123,7 +123,7 @@ sub_80DDC4C: @ 80DDC4C
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
@@ -2539,7 +2539,7 @@ sub_80DEF3C: @ 80DEF3C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _080DEF68 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide

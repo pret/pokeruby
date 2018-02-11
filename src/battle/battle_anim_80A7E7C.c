@@ -16,7 +16,7 @@ extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
 static void AnimTask_ShakeMonStep(u8 taskId);
-static void sub_80A808C(u8 taskId);
+static void AnimTask_ShakeMon2Step(u8 taskId);
 static void sub_80A81D8(u8 taskId);
 static void sub_80A8374(u8 taskId);
 static void sub_80A8488(u8 taskId);
@@ -154,13 +154,19 @@ static void AnimTask_ShakeMonStep(u8 taskId)
     }
 }
 
-
-void sub_80A7FA0(u8 taskId)
+// Task to facilitate simple shaking of a pokemon's picture in battle.
+// The shaking alternates between the positive and negative versions of the specified pixel offsets.
+// arg 0: anim battler
+// arg 1: x pixel offset
+// arg 2: y pixel offset
+// arg 3: num times to shake
+// arg 4: frame delay
+void AnimTask_ShakeMon2(u8 taskId)
 {
     u8 sprite;
-    bool8 r6;
+    bool8 destroy;
     u8 side;
-    r6 = 0;
+    destroy = FALSE;
     if (gBattleAnimArgs[0] < 4)
     {
         sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
@@ -188,21 +194,23 @@ void sub_80A7FA0(u8 taskId)
             side = GetBankByIdentity(3);
             break;
         }
+
         if (IsAnimBankSpriteVisible(side) == FALSE)
-        {
-            r6 = 1;
-        }
+            destroy = TRUE;
+
         sprite = gBankSpriteIds[side];
     }
     else
     {
         sprite = gBankSpriteIds[gAnimBankAttacker];
     }
-    if (r6)
+
+    if (destroy)
     {
         DestroyAnimVisualTask(taskId);
         return;
     }
+
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
     gSprites[sprite].pos2.y = gBattleAnimArgs[2];
     TASK.data[0] = sprite;
@@ -211,30 +219,24 @@ void sub_80A7FA0(u8 taskId)
     TASK.data[3] = gBattleAnimArgs[4];
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
-    TASK.func = sub_80A808C;
-    sub_80A808C(taskId);
+    TASK.func = AnimTask_ShakeMon2Step;
+    TASK.func(taskId);
 }
 
-static void sub_80A808C(u8 taskId)
+static void AnimTask_ShakeMon2Step(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
         if (SPRITE.pos2.x == TASK.data[4])
-        {
             SPRITE.pos2.x = -TASK.data[4];
-        }
         else
-        {
             SPRITE.pos2.x = TASK.data[4];
-        }
+
         if (SPRITE.pos2.y == TASK.data[5])
-        {
             SPRITE.pos2.y = -TASK.data[5];
-        }
         else
-        {
             SPRITE.pos2.y = TASK.data[5];
-        }
+
         TASK.data[3] = TASK.data[2];
         if (--TASK.data[1] == 0)
         {

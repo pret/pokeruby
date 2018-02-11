@@ -795,7 +795,7 @@ sub_812C720: @ 812C720
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _0812C784 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	mov r5, sp
@@ -803,7 +803,7 @@ sub_812C720: @ 812C720
 	movs r1, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_807A3FC
+	bl SetAverageBattlerPositions
 	ldr r0, _0812C788 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -849,7 +849,7 @@ _0812C794: .4byte sub_812C798
 sub_812C798: @ 812C798
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812C7BA
@@ -2301,7 +2301,7 @@ sub_812D294: @ 812D294
 	bne _0812D2A8
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 _0812D2A8:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
@@ -2915,7 +2915,7 @@ sub_812D724: @ 812D724
 _0812D736:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	movs r0, 0x90
 	lsls r0, 4
 	strh r0, [r4, 0x30]
@@ -4626,7 +4626,7 @@ sub_812E4F0: @ 812E4F0
 	bne _0812E50E
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -9023,7 +9023,7 @@ _081306D6:
 	lsls r0, 2
 	ldr r1, _08130708 @ =gSprites
 	adds r0, r1
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -9042,7 +9042,7 @@ _0813070C:
 	lsls r0, 2
 	ldr r1, _0813072C @ =gSprites
 	adds r0, r1
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _081307AA
@@ -10151,7 +10151,7 @@ sub_8130F5C: @ 8130F5C
 	bne _08130F80
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _08130F7C @ =gAnimBankAttacker
 	b _08130F82
 	.align 2, 0
@@ -10356,11 +10356,11 @@ _081310FA:
 	strh r0, [r4, 0x34]
 	strh r1, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimSpriteTranslationDeltas
 	b _081311CA
 _08131110:
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	beq _081311DE
