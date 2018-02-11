@@ -262,7 +262,7 @@ _0812C31A:
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
 	strh r6, [r5, 0x36]
-	ldr r0, _0812C350 @ =sub_8078B34
+	ldr r0, _0812C350 @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r5, 0x1C]
 	ldr r1, _0812C354 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -274,7 +274,7 @@ _0812C31A:
 	.align 2, 0
 _0812C348: .4byte gAnimBankTarget
 _0812C34C: .4byte gBattleAnimArgs
-_0812C350: .4byte sub_8078B34
+_0812C350: .4byte StartTranslateAnimSpriteByDeltas
 _0812C354: .4byte DestroyAnimSprite
 	thumb_func_end sub_812C2BC
 
@@ -2376,7 +2376,7 @@ _0812D2F0:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, _0812D34C @ =sub_8078B34
+	ldr r0, _0812D34C @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r5, 0x1C]
 _0812D33C:
 	pop {r4,r5}
@@ -2385,7 +2385,7 @@ _0812D33C:
 	.align 2, 0
 _0812D344: .4byte DestroyAnimSprite
 _0812D348: .4byte gAnimBankTarget
-_0812D34C: .4byte sub_8078B34
+_0812D34C: .4byte StartTranslateAnimSpriteByDeltas
 	thumb_func_end sub_812D294
 
 	thumb_func_start sub_812D350

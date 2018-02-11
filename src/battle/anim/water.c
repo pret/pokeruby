@@ -18,7 +18,7 @@ void sub_80D37FC(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[4];
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 

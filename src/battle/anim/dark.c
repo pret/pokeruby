@@ -128,7 +128,7 @@ void sub_80DFE14(struct Sprite *sprite)
     sprite->data[3] = GetBankPosition(gAnimBankTarget, 3);
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
     sprite->data[0] = 0x7E;
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = -sprite->data[1];
     sprite->data[4] = -sprite->data[2];
     sprite->data[6] = 0xFFD8;

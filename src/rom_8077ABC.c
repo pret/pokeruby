@@ -636,7 +636,7 @@ void unref_sub_8078414(struct Sprite *sprite)
     sprite->callback = sub_80782F8;
 }
 
-void sub_8078458(struct Sprite *sprite)
+void TranslateMonBGUntil(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -650,7 +650,9 @@ void sub_8078458(struct Sprite *sprite)
     }
 }
 
-void sub_80784A8(struct Sprite *sprite)
+// Same as TranslateMonBGUntil, but it operates on sub-pixel values
+// to handle slower translations.
+void TranslateMonBGSubPixelUntil(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -938,12 +940,12 @@ void sub_8078A34(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->callback = sub_80783D0;
     sprite->callback(sprite);
 }
 
-void sub_8078A5C(struct Sprite *sprite)
+void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 {
     s16 x = (sprite->data[2] - sprite->data[1]) << 8;
     s16 y = (sprite->data[4] - sprite->data[3]) << 8;
@@ -981,12 +983,12 @@ void InitAnimSpriteTranslationDeltas(struct Sprite *sprite)
     sprite->data[3] = 0;
 }
 
-void sub_8078B34(struct Sprite *sprite)
+void StartTranslateAnimSpriteByDeltas(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     InitAnimSpriteTranslationDeltas(sprite);
-    sprite->callback = sub_8078BB8;
+    sprite->callback = TranslateAnimSpriteByDeltasUntil;
     sprite->callback(sprite);
 }
 
@@ -1020,7 +1022,7 @@ bool8 TranslateAnimSpriteByDeltas(struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_8078BB8(struct Sprite *sprite)
+void TranslateAnimSpriteByDeltasUntil(struct Sprite *sprite)
 {
     if (TranslateAnimSpriteByDeltas(sprite))
         SetCallbackToStoredInData(sprite);
@@ -1038,7 +1040,7 @@ void sub_8078C00(struct Sprite *sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sub_8078BD4(sprite);
-    sprite->callback = sub_8078BB8;
+    sprite->callback = TranslateAnimSpriteByDeltasUntil;
     sprite->callback(sprite);
 }
 
@@ -1392,7 +1394,15 @@ void sub_80793C4(struct Sprite *sprite)
     }
 }
 
-void sub_807941C(struct Sprite *sprite)
+// Linearly translates a sprite to a target position on the
+// other mon's sprite.
+// arg 0: initial x offset
+// arg 1: initial y offset
+// arg 2: target x offset
+// arg 3: target y offset
+// arg 4: duration
+// arg 5: lower 8 bits = location on attacking mon, upper 8 bits = location on target mon pick to target
+void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 {
     bool8 v1;
     u8 v2;
@@ -1408,12 +1418,13 @@ void sub_807941C(struct Sprite *sprite)
         v2 = 1;
 
     InitAnimSpritePos(sprite, v1);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, v2) + gBattleAnimArgs[3];
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -1466,7 +1477,7 @@ void sub_8079534(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBankPosition(slot, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(slot, r7) + gBattleAnimArgs[3];
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -2338,6 +2349,6 @@ void sub_807A9BC(struct Sprite *sprite)
         sprite->pos1.x += x;
         sprite->pos1.y = gBattleAnimArgs[5] - 80;
     }
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

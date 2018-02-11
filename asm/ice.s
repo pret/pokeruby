@@ -371,7 +371,7 @@ _080D7976:
 	ldr r1, _080D79AC @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData
-	ldr r0, _080D79B0 @ =sub_8078B34
+	ldr r0, _080D79B0 @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
@@ -380,7 +380,7 @@ _080D7976:
 _080D79A4: .4byte gBattleAnimArgs
 _080D79A8: .4byte gAnimBankTarget
 _080D79AC: .4byte DestroyAnimSprite
-_080D79B0: .4byte sub_8078B34
+_080D79B0: .4byte StartTranslateAnimSpriteByDeltas
 	thumb_func_end sub_80D792C
 
 	thumb_func_start sub_80D79B4
@@ -1696,14 +1696,14 @@ sub_80D83E0: @ 80D83E0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, _080D8410 @ =sub_807941C
+	ldr r0, _080D8410 @ =TranslateAnimSpriteToTargetMonLocation
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080D840C: .4byte gAnimBankAttacker
-_080D8410: .4byte sub_807941C
+_080D8410: .4byte TranslateAnimSpriteToTargetMonLocation
 	thumb_func_end sub_80D83E0
 
 	thumb_func_start sub_80D8414

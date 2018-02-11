@@ -21,7 +21,7 @@ void sub_80CFFD8(struct Sprite* sprite)
     sprite->data[0] = 20;
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     sprite->affineAnimPaused = 1;
     StoreSpriteCallbackInData(sprite, sub_80D0030);
 }

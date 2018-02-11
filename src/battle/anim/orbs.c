@@ -23,7 +23,7 @@ void sub_80CA7B0(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 
@@ -34,7 +34,7 @@ void sub_80CA800(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 

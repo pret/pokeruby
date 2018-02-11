@@ -87,7 +87,7 @@ extern void sub_80304A8(void);
 extern void sub_8047858();
 extern void StartBattleIntroAnim();
 extern void oamt_add_pos2_onto_pos1();
-extern void sub_8078B34(struct Sprite *);
+extern void StartTranslateAnimSpriteByDeltas(struct Sprite *);
 extern void sub_8030E38(struct Sprite *);
 extern void StoreSpriteCallbackInData();
 extern u8 sub_8046400();
@@ -1484,7 +1484,7 @@ void WallyHandleTrainerBallThrow(void)
     gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
     gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
     gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_8078B34;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = StartTranslateAnimSpriteByDeltas;
     gSprites[gBankSpriteIds[gActiveBank]].data[5] = gActiveBank;
     StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBank]], sub_8030E38);
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
