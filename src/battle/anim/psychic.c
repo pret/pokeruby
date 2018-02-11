@@ -14,7 +14,7 @@ extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 extern const union AffineAnimCmd *const gUnknown_083DA888[];
 extern struct AffineAnimFrameCmd gUnknown_083DA8A4;
@@ -53,11 +53,11 @@ void sub_80DB74C(struct Sprite *sprite)
         u8 toBG_2 = (identity ^ var0) != 0;
 
         if (IsAnimBankSpriteVisible(bank))
-            sub_8076034(bank, toBG_2);
+            MoveBattlerSpriteToBG(bank, toBG_2);
 
         bank = bankCopy ^ 2;
         if (IsAnimBankSpriteVisible(bank))
-            sub_8076034(bank, toBG_2 ^ var0);
+            MoveBattlerSpriteToBG(bank, toBG_2 ^ var0);
     }
 
     if (!IsContest() && IsDoubleBattle())
@@ -134,11 +134,11 @@ static void sub_80DB92C(struct Sprite *sprite)
             u8 bank = bankCopy = GetBankByIdentity(IDENTITY_OPPONENT_MON1);
 
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gObjectBankIDs[bank]].invisible = 0;
+                gSprites[gBankSpriteIds[bank]].invisible = 0;
 
             bank = bankCopy ^ 2;
             if (IsAnimBankSpriteVisible(bank))
-                gSprites[gObjectBankIDs[bank]].invisible = 0;
+                gSprites[gBankSpriteIds[bank]].invisible = 0;
         }
 
         sprite->invisible = 1;

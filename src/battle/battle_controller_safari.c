@@ -28,7 +28,7 @@ extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG0_X;
 extern u8 gBattleBufferA[][0x200];
 extern bool8 gDoingBattleAnim;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
@@ -288,7 +288,7 @@ void bx_battle_menu_t6_2(void)
 
 void sub_812B65C(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
 }
 
@@ -399,15 +399,15 @@ void SafariHandleTrainerThrow(void)
 {
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
-    gObjectBankIDs[gActiveBank] = CreateSprite(
+    gBankSpriteIds[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
-    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
-    gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_812B65C;
 }
 

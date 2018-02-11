@@ -1270,7 +1270,7 @@ _080E18CE:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r1, r0
-	ldr r0, _080E1904 @ =gObjectBankIDs
+	ldr r0, _080E1904 @ =gBankSpriteIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	strh r0, [r1]
@@ -1285,7 +1285,7 @@ _080E18F8:
 	bls _080E18CE
 	b _080E1924
 	.align 2, 0
-_080E1904: .4byte gObjectBankIDs
+_080E1904: .4byte gBankSpriteIds
 _080E1908:
 	ldrb r0, [r6]
 	bl GetAnimBankSpriteId

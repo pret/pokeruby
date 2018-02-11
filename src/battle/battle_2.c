@@ -88,7 +88,7 @@ extern u16 gBattlePartyID[];
 extern u8 gCurrentActionFuncId;
 extern u8 gBanksByTurnOrder[];
 extern struct UnknownStruct12 gUnknown_02024AD0[];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u16 gCurrentMove;  // This is mis-named. It is a species, not a move ID.
 extern u8 gLastUsedAbility;
 extern u8 gStringBank;
@@ -4671,7 +4671,7 @@ void dp11b_obj_instanciate(u8 bank, u8 b, s8 c, s8 d)
     }
     else
     {
-        objectID = gObjectBankIDs[bank];
+        objectID = gBankSpriteIds[bank];
         ewram17810[bank].unk3 = spriteId;
         ewram17810[bank].unk0_2 = 1;
         gSprites[spriteId].data[0] = 0xC0;

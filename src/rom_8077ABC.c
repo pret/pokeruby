@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/battle_anim.h"
 #include "constants/species.h"
 #include "rom_8077ABC.h"
 #include "battle.h"
@@ -30,7 +31,7 @@
 #define gCastformElevations gUnknownCastformData_0837F5A8
 #define gCastformBackSpriteYCoords gUnknown_0837F5AC
 #define gTransformPersonalities gTransformedPersonalities
-#define gBattleMonSprites gObjectBankIDs
+#define gBattleMonSprites gBankSpriteIds
 
 struct TransformStatus
 {
@@ -850,7 +851,7 @@ bool8 IsBankSpritePresent(u8 slot)
     {
         if (gBanksBySide[slot] == 0xff)
             return FALSE;
-        if (GetBankSide(slot))
+        if (GetBankSide(slot) != SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_HP) != 0)
                 return TRUE;

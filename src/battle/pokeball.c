@@ -21,7 +21,7 @@ extern u16 gBattleTypeFlags;
 extern u8 gBankTarget;
 extern u8 gActiveBank;
 extern u16 gBattlePartyID[];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u8 gDoingBattleAnim;
 extern u8 gHealthboxIDs[];
 
@@ -442,9 +442,9 @@ static void sub_80466F4(struct Sprite *sprite)
     {
         sprite->data[5] = 0;
         sprite->callback = sub_8046760;
-        StartSpriteAffineAnim(&gSprites[gObjectBankIDs[sprite->data[6]]], 2);
-        AnimateSprite(&gSprites[gObjectBankIDs[sprite->data[6]]]);
-        gSprites[gObjectBankIDs[sprite->data[6]]].data[1] = 0;
+        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->data[6]]], 2);
+        AnimateSprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
+        gSprites[gBankSpriteIds[sprite->data[6]]].data[1] = 0;
     }
 }
 
@@ -453,17 +453,17 @@ static void sub_8046760(struct Sprite *sprite)
     sprite->data[5]++;
     if (sprite->data[5] == 11)
         PlaySE(SE_SUIKOMU);
-    if (gSprites[gObjectBankIDs[sprite->data[6]]].affineAnimEnded)
+    if (gSprites[gBankSpriteIds[sprite->data[6]]].affineAnimEnded)
     {
         StartSpriteAnim(sprite, 2);
-        gSprites[gObjectBankIDs[sprite->data[6]]].invisible = TRUE;
+        gSprites[gBankSpriteIds[sprite->data[6]]].invisible = TRUE;
         sprite->data[5] = 0;
         sprite->callback = sub_80467F8;
     }
     else
     {
-        gSprites[gObjectBankIDs[sprite->data[6]]].data[1] += 0x60;
-        gSprites[gObjectBankIDs[sprite->data[6]]].pos2.y = -gSprites[gObjectBankIDs[sprite->data[6]]].data[1] >> 8;
+        gSprites[gBankSpriteIds[sprite->data[6]]].data[1] += 0x60;
+        gSprites[gBankSpriteIds[sprite->data[6]]].pos2.y = -gSprites[gBankSpriteIds[sprite->data[6]]].data[1] >> 8;
     }
 }
 
@@ -747,9 +747,9 @@ static void sub_8046C78(struct Sprite *sprite)
         gTasks[taskId].data[2] = r4_2;
         gTasks[taskId].data[15] = 0;
     }
-    StartSpriteAffineAnim(&gSprites[gObjectBankIDs[sprite->data[6]]], 1);
-    AnimateSprite(&gSprites[gObjectBankIDs[sprite->data[6]]]);
-    gSprites[gObjectBankIDs[sprite->data[6]]].data[1] = 0x1000;
+    StartSpriteAffineAnim(&gSprites[gBankSpriteIds[sprite->data[6]]], 1);
+    AnimateSprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
+    gSprites[gBankSpriteIds[sprite->data[6]]].data[1] = 0x1000;
 }
 
 static void sub_8046E7C(struct Sprite *sprite)
@@ -766,25 +766,25 @@ static void sub_8046E9C(struct Sprite *sprite)
     bool8 r7 = FALSE;
     u8 r4 = sprite->data[6];
 
-    gSprites[gObjectBankIDs[r4]].invisible = FALSE;
+    gSprites[gBankSpriteIds[r4]].invisible = FALSE;
     if (sprite->animEnded)
         sprite->invisible = TRUE;
-    if (gSprites[gObjectBankIDs[r4]].affineAnimEnded)
+    if (gSprites[gBankSpriteIds[r4]].affineAnimEnded)
     {
-        StartSpriteAffineAnim(&gSprites[gObjectBankIDs[r4]], 0);
+        StartSpriteAffineAnim(&gSprites[gBankSpriteIds[r4]], 0);
         r7 = TRUE;
     }
     else
     {
-        gSprites[gObjectBankIDs[r4]].data[1] -= 288;
-        gSprites[gObjectBankIDs[r4]].pos2.y = gSprites[gObjectBankIDs[r4]].data[1] >> 8;
+        gSprites[gBankSpriteIds[r4]].data[1] -= 288;
+        gSprites[gBankSpriteIds[r4]].pos2.y = gSprites[gBankSpriteIds[r4]].data[1] >> 8;
     }
     if (sprite->animEnded && r7)
     {
         s32 i;
         u32 r3;
 
-        gSprites[gObjectBankIDs[r4]].pos2.y = 0;
+        gSprites[gBankSpriteIds[r4]].pos2.y = 0;
         gDoingBattleAnim = 0;
         ewram17810[r4].unk0_3 = 0;
         FreeSpriteOamMatrix(sprite);
@@ -819,8 +819,8 @@ static void sub_8046FBC(struct Sprite *sprite)
     }
     else if (sprite->data[4] == 315)
     {
-        FreeOamMatrix(gSprites[gObjectBankIDs[sprite->data[6]]].oam.matrixNum);
-        DestroySprite(&gSprites[gObjectBankIDs[sprite->data[6]]]);
+        FreeOamMatrix(gSprites[gBankSpriteIds[sprite->data[6]]].oam.matrixNum);
+        DestroySprite(&gSprites[gBankSpriteIds[sprite->data[6]]]);
         DestroySpriteAndFreeResources(sprite);
         if (gMain.inBattle)
             ewram17810[r7].unk0_3 = 0;
