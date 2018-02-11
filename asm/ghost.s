@@ -3257,7 +3257,7 @@ sub_80DF49C: @ 80DF49C
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r2, _080DF4E0 @ =gObjectBankIDs
+	ldr r2, _080DF4E0 @ =gBankSpriteIds
 	ldr r1, _080DF4E4 @ =gAnimBankAttacker
 	ldrb r1, [r1]
 	adds r1, r2
@@ -3286,7 +3286,7 @@ sub_80DF49C: @ 80DF49C
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_080DF4E0: .4byte gObjectBankIDs
+_080DF4E0: .4byte gBankSpriteIds
 _080DF4E4: .4byte gAnimBankAttacker
 _080DF4E8: .4byte gBattleAnimArgs
 _080DF4EC: .4byte sub_80DF4F4

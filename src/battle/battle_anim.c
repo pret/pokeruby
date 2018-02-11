@@ -14,6 +14,7 @@
 #include "task.h"
 #include "ewram.h"
 #include "graphics.h"
+#include "constants/battle_anim.h"
 
 // sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
 #define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
@@ -1287,7 +1288,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 };
 
 extern u16 gBattlePartyID[4];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
 EWRAM_DATA const u8 *sBattleAnimScriptPtr = NULL;
@@ -1608,28 +1609,28 @@ static void RunAnimScriptCommand(void)
 
 static void ScriptCmd_loadspritegfx(void)
 {
-    u16 index;
+    u16 tag;
 
     sBattleAnimScriptPtr++;
-    index = T1_READ_16(sBattleAnimScriptPtr);
-    LoadCompressedObjectPic(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)]);
-    LoadCompressedObjectPalette(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(index)]);
+    tag = T1_READ_16(sBattleAnimScriptPtr);
+    LoadCompressedObjectPic(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(tag)]);
+    LoadCompressedObjectPalette(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(tag)]);
     sBattleAnimScriptPtr += 2;
-    AddSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
+    AddSpriteIndex(GET_TRUE_SPRITE_INDEX(tag));
     gAnimFramesToWait = 1;
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
 static void ScriptCmd_unloadspritegfx(void)
 {
-    u16 index;
+    u16 tag;
 
     sBattleAnimScriptPtr++;
-    index = T1_READ_16(sBattleAnimScriptPtr);
-    FreeSpriteTilesByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
-    FreeSpritePaletteByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(index)].tag);
+    tag = T1_READ_16(sBattleAnimScriptPtr);
+    FreeSpriteTilesByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(tag)].tag);
+    FreeSpritePaletteByTag(gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(tag)].tag);
     sBattleAnimScriptPtr += 2;
-    ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(index));
+    ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(tag));
 }
 
 static void ScriptCmd_createsprite(void)
@@ -1811,7 +1812,7 @@ static void ScriptCmd_monbg(void)
     u8 bank;
     u8 identity;
     bool8 toBG_2;
-    u16 r4;
+    u16 spriteId;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
@@ -1835,12 +1836,12 @@ static void ScriptCmd_monbg(void)
         else
             toBG_2 = 1;
 
-        sub_8076034(bank, toBG_2);
-        r4 = gObjectBankIDs[bank];
+        MoveBattlerSpriteToBG(bank, toBG_2);
+        spriteId = gBankSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
-        gTasks[taskId].data[0] = r4;
-        gTasks[taskId].data[1] = gSprites[r4].pos1.x + gSprites[r4].pos2.x;
-        gTasks[taskId].data[2] = gSprites[r4].pos1.y + gSprites[r4].pos2.y;
+        gTasks[taskId].data[0] = spriteId;
+        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1856,8 +1857,9 @@ static void ScriptCmd_monbg(void)
         gMonAnimTaskIdArray[0] = taskId;
 
     }
+
     bank ^= 2;
-    if (animBank > 1 && IsAnimBankSpriteVisible(bank))
+    if (animBank >= ANIM_BANK_ATK_PARTNER && IsAnimBankSpriteVisible(bank))
     {
         identity = GetBankIdentity(bank);
         identity += 0xFF;
@@ -1865,12 +1867,12 @@ static void ScriptCmd_monbg(void)
             toBG_2 = 0;
         else
             toBG_2 = 1;
-        sub_8076034(bank, toBG_2);
-        r4 = gObjectBankIDs[bank];
+        MoveBattlerSpriteToBG(bank, toBG_2);
+        spriteId = gBankSpriteIds[bank];
         taskId = CreateTask(task_pA_ma0A_obj_to_bg_pal, 10);
-        gTasks[taskId].data[0] = r4;
-        gTasks[taskId].data[1] = gSprites[r4].pos1.x + gSprites[r4].pos2.x;
-        gTasks[taskId].data[2] = gSprites[r4].pos1.y + gSprites[r4].pos2.y;
+        gTasks[taskId].data[0] = spriteId;
+        gTasks[taskId].data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
+        gTasks[taskId].data[2] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
         if (toBG_2 == 0)
         {
             gTasks[taskId].data[3] = gBattle_BG1_X;
@@ -1903,17 +1905,17 @@ bool8 IsAnimBankSpriteVisible(u8 bank)
         return FALSE;
     if (IsContest())
         return TRUE; // this line wont ever be reached.
-    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gObjectBankIDs[bank]].invisible)
+    if (!(EWRAM_17800[bank].unk0 & 1) || !gSprites[gBankSpriteIds[bank]].invisible)
         return TRUE;
 
     return FALSE;
 }
 
-void sub_8076034(u8 a, u8 b)
+void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
 {
     u8 spriteId;
 
-    if (b == 0)
+    if (toBG_2 == 0)
     {
         volatile u8 pointlessZero;
         struct UnknownStruct2 s;
@@ -1929,23 +1931,23 @@ void sub_8076034(u8 a, u8 b)
         REG_BG1CNT_BITFIELD.screenSize = 1;
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gObjectBankIDs[a];
+        spriteId = gBankSpriteIds[bank];
         gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         if (IsContest() != 0 && IsSpeciesNotUnown(EWRAM_19348) != 0)
             gBattle_BG1_X--;
         gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gObjectBankIDs[a]].invisible = TRUE;
+        gSprites[gBankSpriteIds[bank]].invisible = TRUE;
 
         REG_BG1HOFS = gBattle_BG1_X;
         REG_BG1VOFS = gBattle_BG1_Y;
 
-        LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, s.unk8 * 16, 32);
-        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + a * 16, (u16 *)PLTT + s.unk8 * 16, 32);
+        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, s.unk8 * 16, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (u16 *)PLTT + s.unk8 * 16, 32);
 
         if (IsContest() != 0)
             r2 = 0;
         else
-            r2 = GetBankIdentity(a);
+            r2 = GetBankIdentity(bank);
         sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (IsContest() != 0)
             sub_8076380();
@@ -1963,18 +1965,18 @@ void sub_8076034(u8 a, u8 b)
         REG_BG2CNT_BITFIELD.screenSize = 1;
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
 
-        spriteId = gObjectBankIDs[a];
+        spriteId = gBankSpriteIds[bank];
         gBattle_BG2_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         gBattle_BG2_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
-        gSprites[gObjectBankIDs[a]].invisible = TRUE;
+        gSprites[gBankSpriteIds[bank]].invisible = TRUE;
 
         REG_BG2HOFS = gBattle_BG2_X;
         REG_BG2VOFS = gBattle_BG2_Y;
 
-        LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, 0x90, 32);
-        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + a * 16, (void *)(PLTT + 0x120), 32);
+        LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, 0x90, 32);
+        DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (void *)(PLTT + 0x120), 32);
 
-        sub_80E4EF8(0, 0, GetBankIdentity(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
+        sub_80E4EF8(0, 0, GetBankIdentity(bank), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
 }
 
@@ -2097,9 +2099,9 @@ static void ScriptCmd_clearmonbg(void)
         bank = gAnimBankTarget;
 
     if (gMonAnimTaskIdArray[0] != 0xFF)
-        gSprites[gObjectBankIDs[bank]].invisible = FALSE;
+        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
     if (animBankId > 1 && gMonAnimTaskIdArray[1] != 0xFF)
-        gSprites[gObjectBankIDs[bank ^ 2]].invisible = FALSE;
+        gSprites[gBankSpriteIds[bank ^ 2]].invisible = FALSE;
     else
         animBankId = 0;
 
@@ -2167,8 +2169,8 @@ static void ScriptCmd_monbg_22(void)
             r1 = 0;
         else
             r1 = 1;
-        sub_8076034(bank, r1);
-        gSprites[gObjectBankIDs[bank]].invisible = FALSE;
+        MoveBattlerSpriteToBG(bank, r1);
+        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
     }
 
     bank ^= 2;
@@ -2180,8 +2182,8 @@ static void ScriptCmd_monbg_22(void)
             r1 = 0;
         else
             r1 = 1;
-        sub_8076034(bank, r1);
-        gSprites[gObjectBankIDs[bank]].invisible = FALSE;
+        MoveBattlerSpriteToBG(bank, r1);
+        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
     }
     sBattleAnimScriptPtr++;
 }
@@ -2206,9 +2208,9 @@ static void ScriptCmd_clearmonbg_23(void)
         bank = gAnimBankTarget;
 
     if (IsAnimBankSpriteVisible(bank))
-        gSprites[gObjectBankIDs[bank]].invisible = FALSE;
+        gSprites[gBankSpriteIds[bank]].invisible = FALSE;
     if (animBankId > 1 && IsAnimBankSpriteVisible(bank ^ 2))
-        gSprites[gObjectBankIDs[bank ^ 2]].invisible = FALSE;
+        gSprites[gBankSpriteIds[bank ^ 2]].invisible = FALSE;
     else
         animBankId = 0;
 
@@ -2245,13 +2247,13 @@ static void sub_80769A4(u8 taskId)
 
 static void ScriptCmd_setalpha(void)
 {
-    u16 half1, half2;
+    u16 spriteAlpha, bgAlpha;
 
     sBattleAnimScriptPtr++;
-    half1 = *(sBattleAnimScriptPtr++);
-    half2 = *(sBattleAnimScriptPtr++) << 8;
-    REG_BLDCNT = 0x3F40;
-    REG_BLDALPHA = half1 | half2;
+    spriteAlpha = *(sBattleAnimScriptPtr++);
+    bgAlpha = *(sBattleAnimScriptPtr++) << 8;
+    REG_BLDCNT = BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND;
+    REG_BLDALPHA = spriteAlpha | bgAlpha;
 }
 
 static void ScriptCmd_setbldcnt(void)
@@ -2700,13 +2702,13 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan)
 
 static void ScriptCmd_playsewithpan(void)
 {
-    u16 songId;
+    u16 soundId;
     s8 pan;
 
     sBattleAnimScriptPtr++;
-    songId = T1_READ_16(sBattleAnimScriptPtr);
+    soundId = T1_READ_16(sBattleAnimScriptPtr);
     pan = T1_READ_8(sBattleAnimScriptPtr + 2);
-    PlaySE12WithPanning(songId, BattleAnimAdjustPanning(pan));
+    PlaySE12WithPanning(soundId, BattleAnimAdjustPanning(pan));
     sBattleAnimScriptPtr += 3;
 }
 

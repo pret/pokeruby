@@ -9,13 +9,13 @@
 
 extern s16 gBattleAnimArgs[8];
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80A7EF0(u8 taskId);
+static void AnimTask_ShakeMonStep(u8 taskId);
 static void sub_80A808C(u8 taskId);
 static void sub_80A81D8(u8 taskId);
 static void sub_80A8374(u8 taskId);
@@ -91,28 +91,35 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C2010 =
     .callback = sub_80A8818,
 };
 
-void sub_80A7E7C(u8 taskId)
+// Task to facilitate simple shaking of a pokemon's picture in battle.
+// The shaking alternates between the original position and the target position.
+// arg 0: anim battler
+// arg 1: x pixel offset
+// arg 2: y pixel offset
+// arg 3: num times to shake
+// arg 4: frame delay
+void AnimTask_ShakeMon(u8 taskId)
 {
-    u8 sprite;
-    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
-    if (sprite == 0xff)
+    u8 spriteId;
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    if (spriteId == 0xff)
     {
         DestroyAnimVisualTask(taskId);
         return;
     }
-    gSprites[sprite].pos2.x = gBattleAnimArgs[1];
-    gSprites[sprite].pos2.y = gBattleAnimArgs[2];
-    TASK.data[0] = sprite;
+    gSprites[spriteId].pos2.x = gBattleAnimArgs[1];
+    gSprites[spriteId].pos2.y = gBattleAnimArgs[2];
+    TASK.data[0] = spriteId;
     TASK.data[1] = gBattleAnimArgs[3];
     TASK.data[2] = gBattleAnimArgs[4];
     TASK.data[3] = gBattleAnimArgs[4];
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
-    TASK.func = sub_80A7EF0;
-    sub_80A7EF0(taskId);
+    TASK.func = AnimTask_ShakeMonStep;
+    AnimTask_ShakeMonStep(taskId);
 }
 
-static void sub_80A7EF0(u8 taskId)
+static void AnimTask_ShakeMonStep(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -185,11 +192,11 @@ void sub_80A7FA0(u8 taskId)
         {
             r6 = 1;
         }
-        sprite = gObjectBankIDs[side];
+        sprite = gBankSpriteIds[side];
     }
     else
     {
-        sprite = gObjectBankIDs[gAnimBankAttacker];
+        sprite = gBankSpriteIds[gAnimBankAttacker];
     }
     if (r6)
     {
@@ -408,7 +415,7 @@ static void sub_80A8530(struct Sprite *sprite)
     }
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[2] = 0;
-    sprite->data[3] = gObjectBankIDs[gAnimBankAttacker];
+    sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
     StoreSpriteCallbackInData(sprite, sub_80A85A4);
     sprite->callback = sub_8078458;
@@ -450,11 +457,11 @@ static void sub_80A8638(struct Sprite *sprite)
     int spriteId;
     if (!gBattleAnimArgs[0])
     {
-        spriteId = gObjectBankIDs[gAnimBankAttacker];
+        spriteId = gBankSpriteIds[gAnimBankAttacker];
     }
     else
     {
-        spriteId = gObjectBankIDs[gAnimBankTarget];
+        spriteId = gBankSpriteIds[gAnimBankTarget];
     }
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
@@ -523,7 +530,7 @@ static void sub_80A8764(struct Sprite *sprite)
     {
         v1 = gAnimBankTarget;
     }
-    spriteId = gObjectBankIDs[v1];
+    spriteId = gBankSpriteIds[v1];
     if (GetBankSide(v1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -559,7 +566,7 @@ static void sub_80A8818(struct Sprite *sprite)
     {
         v1 = gAnimBankTarget;
     }
-    spriteId = gObjectBankIDs[v1];
+    spriteId = gBankSpriteIds[v1];
     if (GetBankSide(v1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -668,7 +675,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gAnimBankAttacker ^ 2];
+        spriteId = gBankSpriteIds[gAnimBankAttacker ^ 2];
         break;
     case 3:
         if (!IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
@@ -676,7 +683,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gAnimBankTarget ^ 2];
+        spriteId = gBankSpriteIds[gAnimBankTarget ^ 2];
         break;
     default:
         DestroyAnimVisualTask(taskId);

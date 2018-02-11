@@ -118,7 +118,7 @@ gUnknown_02024ACC = .; /* 2024ACC */
 gUnknown_02024AD0 = .; /* 2024AD0 */
     . += 0x110;
 
-gObjectBankIDs = .; /* 2024BE0 */
+gBankSpriteIds = .; /* 2024BE0 */
     . += 0x4;
 
 gCurrMovePos = .; /* 2024BE4 */

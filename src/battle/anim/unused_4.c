@@ -8,7 +8,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 static void sub_80CD9D4(struct Sprite* sprite);
 
@@ -27,7 +27,7 @@ void sub_80CD9D4(struct Sprite* sprite)
     {
     case 0:
         sprite->data[1] = 0;
-        sprite->data[2] = gObjectBankIDs[gAnimBankAttacker];
+        sprite->data[2] = gBankSpriteIds[gAnimBankAttacker];
         sprite->data[3] = GetBankSide(gAnimBankAttacker);
         sprite->data[4] = (sprite->data[3] != 0) ? 0x200 : -0x200;
         sprite->data[5] = 0;

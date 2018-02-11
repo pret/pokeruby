@@ -818,7 +818,7 @@ sub_813F798: @ 813F798
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _0813F7C4 @ =gObjectBankIDs
+	ldr r1, _0813F7C4 @ =gBankSpriteIds
 	ldr r0, _0813F7C8 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -838,7 +838,7 @@ sub_813F798: @ 813F798
 	beq _0813F7D6
 	b _0813F838
 	.align 2, 0
-_0813F7C4: .4byte gObjectBankIDs
+_0813F7C4: .4byte gBankSpriteIds
 _0813F7C8: .4byte gAnimBankAttacker
 _0813F7CC: .4byte gTasks
 _0813F7D0:
@@ -909,7 +909,7 @@ sub_813F844: @ 813F844
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, _0813F87C @ =gObjectBankIDs
+	ldr r1, _0813F87C @ =gBankSpriteIds
 	ldr r4, _0813F880 @ =gAnimBankAttacker
 	ldrb r0, [r4]
 	adds r1, r0, r1
@@ -929,7 +929,7 @@ sub_813F844: @ 813F844
 	ldr r1, _0813F888 @ =gPlayerParty
 	b _0813F89C
 	.align 2, 0
-_0813F87C: .4byte gObjectBankIDs
+_0813F87C: .4byte gBankSpriteIds
 _0813F880: .4byte gAnimBankAttacker
 _0813F884: .4byte gBattlePartyID
 _0813F888: .4byte gPlayerParty
@@ -1256,7 +1256,7 @@ sub_813FA94: @ 813FA94
 	ldr r0, _0813FB68 @ =sub_813FD90
 	str r0, [r4]
 	ldr r3, _0813FB6C @ =gSharedMem + 0x17840
-	ldr r1, _0813FB70 @ =gObjectBankIDs
+	ldr r1, _0813FB70 @ =gBankSpriteIds
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -1299,7 +1299,7 @@ _0813FB60: .4byte gSprites
 _0813FB64: .4byte gAnimBankTarget
 _0813FB68: .4byte sub_813FD90
 _0813FB6C: .4byte gSharedMem + 0x17840
-_0813FB70: .4byte gObjectBankIDs
+_0813FB70: .4byte gBankSpriteIds
 _0813FB74: .4byte gTasks
 _0813FB78: .4byte sub_813FB7C
 	thumb_func_end sub_813FA94
@@ -1419,7 +1419,7 @@ _0813FBE0:
 	str r0, [r4]
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r1, _0813FCB0 @ =gObjectBankIDs
+	ldr r1, _0813FCB0 @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1450,7 +1450,7 @@ _0813FCA0: .4byte gBallSpriteTemplates
 _0813FCA4: .4byte gSprites
 _0813FCA8: .4byte gAnimBankTarget
 _0813FCAC: .4byte SpriteCallbackDummy
-_0813FCB0: .4byte gObjectBankIDs
+_0813FCB0: .4byte gBankSpriteIds
 _0813FCB4: .4byte gTasks
 _0813FCB8: .4byte sub_813FCBC
 	thumb_func_end sub_813FBB8
@@ -1463,7 +1463,7 @@ sub_813FCBC: @ 813FCBC
 	ldr r6, _0813FD1C @ =gSprites
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r1, _0813FD20 @ =gObjectBankIDs
+	ldr r1, _0813FD20 @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1505,7 +1505,7 @@ _0813FD16:
 	bx r0
 	.align 2, 0
 _0813FD1C: .4byte gSprites
-_0813FD20: .4byte gObjectBankIDs
+_0813FD20: .4byte gBankSpriteIds
 _0813FD24: .4byte gTasks
 _0813FD28: .4byte sub_813FD90
 _0813FD2C: .4byte sub_813FD34
@@ -1520,7 +1520,7 @@ sub_813FD34: @ 813FD34
 	ldr r6, _0813FD88 @ =gSprites
 	movs r0, 0
 	bl GetBankByIdentity
-	ldr r4, _0813FD8C @ =gObjectBankIDs
+	ldr r4, _0813FD8C @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1554,7 +1554,7 @@ _0813FD80:
 	bx r0
 	.align 2, 0
 _0813FD88: .4byte gSprites
-_0813FD8C: .4byte gObjectBankIDs
+_0813FD8C: .4byte gBankSpriteIds
 	thumb_func_end sub_813FD34
 
 	thumb_func_start sub_813FD90
@@ -1688,7 +1688,7 @@ sub_813FE70: @ 813FE70
 	ldr r0, _0813FEB8 @ =sub_813FEC8
 	str r0, [r4, 0x1C]
 	ldr r2, _0813FEBC @ =gSprites
-	ldr r1, _0813FEC0 @ =gObjectBankIDs
+	ldr r1, _0813FEC0 @ =gBankSpriteIds
 	ldr r0, _0813FEC4 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1707,7 +1707,7 @@ _0813FEAC:
 _0813FEB4: .4byte TaskDummy
 _0813FEB8: .4byte sub_813FEC8
 _0813FEBC: .4byte gSprites
-_0813FEC0: .4byte gObjectBankIDs
+_0813FEC0: .4byte gBankSpriteIds
 _0813FEC4: .4byte gAnimBankTarget
 	thumb_func_end sub_813FE70
 
@@ -1715,7 +1715,7 @@ _0813FEC4: .4byte gAnimBankTarget
 sub_813FEC8: @ 813FEC8
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r1, _0813FF0C @ =gObjectBankIDs
+	ldr r1, _0813FF0C @ =gBankSpriteIds
 	ldr r0, _0813FF10 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1748,7 +1748,7 @@ _0813FEFA:
 	beq _0813FF1E
 	b _0813FFDC
 	.align 2, 0
-_0813FF0C: .4byte gObjectBankIDs
+_0813FF0C: .4byte gBankSpriteIds
 _0813FF10: .4byte gAnimBankTarget
 _0813FF14: .4byte gTasks
 _0813FF18:
@@ -2478,7 +2478,7 @@ _08140490:
 	cmp r1, r0
 	bne _081404CC
 	ldr r5, _081404D8 @ =gSprites
-	ldr r4, _081404DC @ =gObjectBankIDs
+	ldr r4, _081404DC @ =gBankSpriteIds
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2509,7 +2509,7 @@ _081404CC:
 	.align 2, 0
 _081404D4: .4byte 0x0000013b
 _081404D8: .4byte gSprites
-_081404DC: .4byte gObjectBankIDs
+_081404DC: .4byte gBankSpriteIds
 _081404E0: .4byte sub_81404E4
 	thumb_func_end sub_8140454
 
@@ -2697,7 +2697,7 @@ sub_81405F4: @ 81405F4
 	bl sub_8141314
 _08140646:
 	ldr r6, _081406B4 @ =gSprites
-	ldr r5, _081406B8 @ =gObjectBankIDs
+	ldr r5, _081406B8 @ =gBankSpriteIds
 	ldr r4, _081406B0 @ =gAnimBankTarget
 	ldrb r0, [r4]
 	adds r0, r5
@@ -2748,7 +2748,7 @@ _081406A8: .4byte sub_81406BC
 _081406AC: .4byte gLastUsedItem
 _081406B0: .4byte gAnimBankTarget
 _081406B4: .4byte gSprites
-_081406B8: .4byte gObjectBankIDs
+_081406B8: .4byte gBankSpriteIds
 	thumb_func_end sub_81405F4
 
 	thumb_func_start sub_81406BC
@@ -2770,7 +2770,7 @@ sub_81406BC: @ 81406BC
 	strb r0, [r2]
 _081406DA:
 	ldr r4, _08140708 @ =gSprites
-	ldr r3, _0814070C @ =gObjectBankIDs
+	ldr r3, _0814070C @ =gBankSpriteIds
 	ldr r2, _08140710 @ =gAnimBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
@@ -2792,7 +2792,7 @@ _081406DA:
 	b _08140734
 	.align 2, 0
 _08140708: .4byte gSprites
-_0814070C: .4byte gObjectBankIDs
+_0814070C: .4byte gBankSpriteIds
 _08140710: .4byte gAnimBankTarget
 _08140714:
 	ldr r6, _0814079C @ =0xfffffee0
@@ -2822,7 +2822,7 @@ _08140734:
 	cmp r5, 0
 	beq _08140796
 	ldr r4, _081407A0 @ =gSprites
-	ldr r3, _081407A4 @ =gObjectBankIDs
+	ldr r3, _081407A4 @ =gBankSpriteIds
 	ldr r2, _081407A8 @ =gAnimBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
@@ -2867,7 +2867,7 @@ _08140796:
 	.align 2, 0
 _0814079C: .4byte 0xfffffee0
 _081407A0: .4byte gSprites
-_081407A4: .4byte gObjectBankIDs
+_081407A4: .4byte gBankSpriteIds
 _081407A8: .4byte gAnimBankTarget
 _081407AC: .4byte gSharedMem + 0x17840
 _081407B0: .4byte sub_81405C8
@@ -4581,7 +4581,7 @@ sub_814151C: @ 814151C
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r0, _08141550 @ =gObjectBankIDs
+	ldr r0, _08141550 @ =gBankSpriteIds
 	ldr r3, _08141554 @ =gAnimBankAttacker
 	ldrb r2, [r3]
 	adds r0, r2, r0
@@ -4601,7 +4601,7 @@ sub_814151C: @ 814151C
 	beq _08141562
 	b _081416B6
 	.align 2, 0
-_08141550: .4byte gObjectBankIDs
+_08141550: .4byte gBankSpriteIds
 _08141554: .4byte gAnimBankAttacker
 _08141558: .4byte gTasks
 _0814155C:
@@ -4882,7 +4882,7 @@ _08141744:
 	.align 2, 0
 _08141778: .4byte REG_BLDALPHA
 _0814177C:
-	ldr r1, _081417C0 @ =gObjectBankIDs
+	ldr r1, _081417C0 @ =gBankSpriteIds
 	ldr r3, _081417C4 @ =gAnimBankAttacker
 	ldrb r0, [r3]
 	adds r0, r1
@@ -4916,7 +4916,7 @@ _081417B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081417C0: .4byte gObjectBankIDs
+_081417C0: .4byte gBankSpriteIds
 _081417C4: .4byte gAnimBankAttacker
 _081417C8: .4byte gSprites
 _081417CC: .4byte 0x06010000
@@ -5509,7 +5509,7 @@ sub_8141C30: @ 8141C30
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
 	bl sub_80786EC
-	ldr r1, _08141CAC @ =gObjectBankIDs
+	ldr r1, _08141CAC @ =gBankSpriteIds
 	ldr r0, _08141CB0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -5529,7 +5529,7 @@ sub_8141C30: @ 8141C30
 	.align 2, 0
 _08141CA4: .4byte gBattleAnimArgs
 _08141CA8: .4byte 0x0000ffe0
-_08141CAC: .4byte gObjectBankIDs
+_08141CAC: .4byte gBankSpriteIds
 _08141CB0: .4byte gAnimBankAttacker
 _08141CB4: .4byte gSprites
 _08141CB8: .4byte sub_8141CBC
@@ -5540,7 +5540,7 @@ sub_8141CBC: @ 8141CBC
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, _08141CE4 @ =gSprites
-	ldr r1, _08141CE8 @ =gObjectBankIDs
+	ldr r1, _08141CE8 @ =gBankSpriteIds
 	ldr r0, _08141CEC @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -5560,7 +5560,7 @@ _08141CE0:
 	bx r0
 	.align 2, 0
 _08141CE4: .4byte gSprites
-_08141CE8: .4byte gObjectBankIDs
+_08141CE8: .4byte gBankSpriteIds
 _08141CEC: .4byte gAnimBankAttacker
 _08141CF0: .4byte sub_8141CF4
 	thumb_func_end sub_8141CBC
@@ -5596,7 +5596,7 @@ sub_8141D20: @ 8141D20
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _08141D70 @ =gSprites
-	ldr r3, _08141D74 @ =gObjectBankIDs
+	ldr r3, _08141D74 @ =gBankSpriteIds
 	ldr r2, _08141D78 @ =gAnimBankAttacker
 	ldrb r0, [r2]
 	adds r0, r3
@@ -5633,7 +5633,7 @@ _08141D68:
 	bx r0
 	.align 2, 0
 _08141D70: .4byte gSprites
-_08141D74: .4byte gObjectBankIDs
+_08141D74: .4byte gBankSpriteIds
 _08141D78: .4byte gAnimBankAttacker
 	thumb_func_end sub_8141D20
 
