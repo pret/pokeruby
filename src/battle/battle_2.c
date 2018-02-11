@@ -8307,9 +8307,8 @@ void HandleAction_UseItem(void)
     }
     else
     {
-        ewram16003 = gBankAttacker;
 
-        switch (ewram160D8(gBankAttacker))
+        switch (ewram160D8((ewram16003 = gBankAttacker)))
         {
         case AI_ITEM_FULL_RESTORE:
         case AI_ITEM_HEAL_HP:

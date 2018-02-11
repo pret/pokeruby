@@ -59,7 +59,6 @@ void sub_80D0C88(u8 taskId)
     task->func = sub_80D0D68;
 }
 
-#ifdef NONMATCHING
 void sub_80D0D68(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
@@ -99,126 +98,13 @@ void sub_80D0D68(u8 taskId)
 
             if (++task->data[3] >= task->data[15])
             {
-                gScanlineEffect.unk15 = 3;
+                gScanlineEffect.state = 3;
                 DestroyAnimVisualTask(taskId);
             }
         }
         break;
     }
 }
-#else
-__attribute__((naked))
-void sub_80D0D68(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	ldr r1, _080D0D88 @ =gTasks\n\
-	adds r3, r0, r1\n\
-	movs r1, 0x10\n\
-	ldrsh r0, [r3, r1]\n\
-	cmp r0, 0\n\
-	beq _080D0D8C\n\
-	cmp r0, 0x1\n\
-	beq _080D0DA2\n\
-	b _080D0E22\n\
-	.align 2, 0\n\
-_080D0D88: .4byte gTasks\n\
-_080D0D8C:\n\
-	ldrh r0, [r3, 0x12]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x12]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x14\n\
-	ble _080D0E22\n\
-	ldrh r0, [r3, 0x10]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0x10]\n\
-	b _080D0E22\n\
-_080D0DA2:\n\
-	ldrh r0, [r3, 0xA]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0xA]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x3\n\
-	ble _080D0E22\n\
-	movs r0, 0\n\
-	strh r0, [r3, 0xA]\n\
-	ldrh r1, [r3, 0xE]\n\
-	movs r0, 0x3\n\
-	ands r0, r1\n\
-	strh r0, [r3, 0xC]\n\
-	ldrh r0, [r3, 0x8]\n\
-	subs r0, r1\n\
-	strh r0, [r3, 0x12]\n\
-	movs r2, 0xC\n\
-	ldrsh r1, [r3, r2]\n\
-	cmp r1, 0x1\n\
-	beq _080D0DD8\n\
-	cmp r1, 0x1\n\
-	ble _080D0DE0\n\
-	cmp r1, 0x2\n\
-	beq _080D0DDC\n\
-	cmp r1, 0x3\n\
-	beq _080D0DDC\n\
-	b _080D0DE0\n\
-_080D0DD8:\n\
-	subs r0, 0x2\n\
-	b _080D0DDE\n\
-_080D0DDC:\n\
-	adds r0, 0x1\n\
-_080D0DDE:\n\
-	strh r0, [r3, 0x12]\n\
-_080D0DE0:\n\
-	movs r1, 0x12\n\
-	ldrsh r0, [r3, r1]\n\
-	cmp r0, 0\n\
-	blt _080D0E04\n\
-	ldr r2, _080D0E28 @ =gScanlineEffectRegBuffers\n\
-	lsls r0, 1\n\
-	adds r0, r2\n\
-	ldrh r1, [r3, 0x14]\n\
-	strh r1, [r0]\n\
-	movs r1, 0x12\n\
-	ldrsh r0, [r3, r1]\n\
-	lsls r0, 1\n\
-	movs r1, 0xF0\n\
-	lsls r1, 3\n\
-	adds r2, r1\n\
-	adds r0, r2\n\
-	ldrh r1, [r3, 0x14]\n\
-	strh r1, [r0]\n\
-_080D0E04:\n\
-	ldrh r0, [r3, 0xE]\n\
-	adds r0, 0x1\n\
-	strh r0, [r3, 0xE]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	movs r2, 0x26\n\
-	ldrsh r1, [r3, r2]\n\
-	cmp r0, r1\n\
-	blt _080D0E22\n\
-	ldr r1, _080D0E2C @ =gScanlineEffect\n\
-	movs r0, 0x3\n\
-	strb r0, [r1, 0x15]\n\
-	adds r0, r4, 0\n\
-	bl DestroyAnimVisualTask\n\
-_080D0E22:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080D0E28: .4byte gScanlineEffectRegBuffers\n\
-_080D0E2C: .4byte gScanlineEffect\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_80D0E30(struct Sprite* sprite)
 {

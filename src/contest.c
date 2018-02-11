@@ -2147,7 +2147,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_MAY;
     gContestMons[gContestPlayerMonIndex].flags = 0;
-    gContestMons[gContestPlayerMonIndex].unk2C = 0;
+    gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGetEnd10(name);
@@ -2214,7 +2214,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].tough = tough;
 }
 
-void Contest_InitAllPokemon(u8 a, u8 b)
+void Contest_InitAllPokemon(u8 contestType, u8 rank)
 {
     s32 i;
     u8 opponentsCount = 0;
@@ -2225,17 +2225,17 @@ void Contest_InitAllPokemon(u8 a, u8 b)
     // Find all suitable opponents
     for (i = 0; i < 60; i++)
     {
-        if (b == gContestOpponents[i].unk1C_0)
+        if (rank == gContestOpponents[i].whichRank)
         {
-            if      (a == 0 && gContestOpponents[i].unk1C_2)
+            if      (contestType == 0 && gContestOpponents[i].aiPool_Cool)
                 opponents[opponentsCount++] = i;
-            else if (a == 1 && gContestOpponents[i].unk1C_3)
+            else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
                 opponents[opponentsCount++] = i;
-            else if (a == 2 && gContestOpponents[i].unk1C_4)
+            else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
                 opponents[opponentsCount++] = i;
-            else if (a == 3 && gContestOpponents[i].unk1C_5)
+            else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
                 opponents[opponentsCount++] = i;
-            else if (a == 4 && gContestOpponents[i].unk1C_6)
+            else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
                 opponents[opponentsCount++] = i;
         }
     }
