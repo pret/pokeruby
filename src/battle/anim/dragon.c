@@ -19,7 +19,7 @@ extern u8 gBankAttacker;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u16 gUnknown_03000730[];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 // Outrage
 

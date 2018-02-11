@@ -10,7 +10,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 static void sub_80D1098(struct Sprite* sprite);
 
@@ -94,23 +94,23 @@ void sub_80D10B8(struct Sprite* sprite)
     {
         r9 = GetBankPosition(bankr7, r10) + gBattleAnimArgs[0];
         if (IsAnimBankSpriteVisible(bankr8 ^ 2))
-            sprite->subpriority = gSprites[gObjectBankIDs[bankr8 ^ 2]].subpriority - 1;
+            sprite->subpriority = gSprites[gBankSpriteIds[bankr8 ^ 2]].subpriority - 1;
         else
-            sprite->subpriority = gSprites[gObjectBankIDs[bankr8]].subpriority - 1;
+            sprite->subpriority = gSprites[gBankSpriteIds[bankr8]].subpriority - 1;
     }
     else
     {
         r9 = GetBankPosition(bankr7, r10) - gBattleAnimArgs[0];
         if (gMain.inBattle && IsAnimBankSpriteVisible(bankr7 ^ 2))
         {
-            if (gSprites[gObjectBankIDs[bankr7]].pos1.x < gSprites[gObjectBankIDs[bankr7 ^ 2]].pos1.x)
-                sprite->subpriority = gSprites[gObjectBankIDs[bankr7 ^ 2]].subpriority + 1;
+            if (gSprites[gBankSpriteIds[bankr7]].pos1.x < gSprites[gBankSpriteIds[bankr7 ^ 2]].pos1.x)
+                sprite->subpriority = gSprites[gBankSpriteIds[bankr7 ^ 2]].subpriority + 1;
             else
-                sprite->subpriority = gSprites[gObjectBankIDs[bankr7]].subpriority - 1;
+                sprite->subpriority = gSprites[gBankSpriteIds[bankr7]].subpriority - 1;
         }
         else
         {
-            sprite->subpriority = gSprites[gObjectBankIDs[bankr7]].subpriority - 1;
+            sprite->subpriority = gSprites[gBankSpriteIds[bankr7]].subpriority - 1;
         }
 
     }

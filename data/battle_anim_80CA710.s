@@ -21,15 +21,15 @@ gSpriteAnimTable_83D6220:: @ 83D6220
 
 	.align 2
 gBattleAnimSpriteTemplate_83D6224:: @ 83D6224
-	spr_template 10067, 10067, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, sub_80CA710
+	spr_template 10067, 10067, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, AnimMovePowderParticle
 
 	.align 2
 gBattleAnimSpriteTemplate_83D623C:: @ 83D623C
-	spr_template 10068, 10068, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, sub_80CA710
+	spr_template 10068, 10068, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, AnimMovePowderParticle
 
 	.align 2
-gBattleAnimSpriteTemplate_83D6254:: @ 83D6254
-	spr_template 10065, 10065, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, sub_80CA710
+gPoisonPowderParticleSpriteTemplate:: @ 83D6254
+	spr_template 10065, 10065, gOamData_837DF64, gSpriteAnimTable_83D6220, NULL, gDummySpriteAffineAnimTable, AnimMovePowderParticle
 
 	.align 2
 gSpriteAnim_83D626C:: @ 83D626C
@@ -4614,7 +4614,7 @@ gSpriteAffineAnimTable_83DB498:: @ 83DB498
 	.4byte gSpriteAffineAnim_83DB480
 
 	.align 2
-gBattleAnimSpriteTemplate_83DB4A8:: @ 83DB4A8
+gBasicHitSplatSpriteTemplate:: @ 83DB4A8
 	spr_template 10135, 10135, gOamData_837E0B4, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83DB498, sub_80E27A0
 
 	.align 2

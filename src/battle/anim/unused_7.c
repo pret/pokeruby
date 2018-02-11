@@ -8,7 +8,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 // unused_7
 
@@ -32,7 +32,7 @@ void sub_80CF3C4(struct Sprite* sprite)
     u8 a;
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
-    a = gObjectBankIDs[gAnimBankTarget];
+    a = gBankSpriteIds[gAnimBankTarget];
     if (GetBankSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];

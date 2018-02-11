@@ -11,7 +11,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gBankAttacker;
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u8 gBanksBySide[];
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -24,7 +24,7 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattlePartyID[];
 extern u8 gAnimMoveTurn;
 
-extern struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4A8;
+extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 
 static void sub_80D927C(struct Sprite *sprite);
 static void sub_80D9328(struct Sprite *sprite);
@@ -122,7 +122,7 @@ void sub_80D90F4(struct Sprite *sprite)
     sprite->pos1.y += y;
 
     sprite->data[0] = gBattleAnimArgs[1];
-    sprite->data[7] = CreateSprite(&gBattleAnimSpriteTemplate_83DB4A8, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
+    sprite->data[7] = CreateSprite(&gBasicHitSplatSpriteTemplate, sprite->pos1.x, sprite->pos1.y, sprite->subpriority + 1);
     if (sprite->data[7] != 64)
     {
         StartSpriteAffineAnim(&gSprites[sprite->data[7]], 0);

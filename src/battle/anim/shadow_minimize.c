@@ -93,7 +93,7 @@ void sub_80D04E0(u8 taskId)
         sub_8078F40(task->data[0]);
         gSprites[task->data[15]].pos2.y = 0;
         DestroyAnimVisualTask(taskId);
-        break;    
+        break;
     }
 }
 
@@ -110,10 +110,11 @@ void sub_80D0614(struct Task* task, u8 taskId)
         }
         else
         {
-            gSprites[r8].oam.objMode = 1;
-            gSprites[r8].oam.affineMode = 3;
-            gSprites[r8].affineAnimPaused = 1;
-            gSprites[r8].oam.matrixNum = r6;
+            gSprites[r8].oam.objMode = ST_OAM_OBJ_BLEND;
+            gSprites[r8].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+            gSprites[r8].affineAnimPaused = TRUE;
+            r6 &= 0x1f;
+            gSprites[r8].oam.matrixNum = r6; // need to inhibit optimizing out the mov r0, 0x3f / neg r0, r0
             gSprites[r8].subpriority = task->data[7] - task->data[3];
             task->data[3]++;
             task->data[6]++;
@@ -132,7 +133,7 @@ __attribute__((naked))
 void sub_80D0614(struct Task* task, u8 taskId)
 {
     asm(".syntax unified\n\
-    	push {r4-r7,lr}\n\
+    push {r4-r7,lr}\n\
 	mov r7, r9\n\
 	mov r6, r8\n\
 	push {r6,r7}\n\

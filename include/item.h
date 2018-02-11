@@ -30,8 +30,6 @@ struct BagPocket
 
 #define NUM_BAG_POCKETS 5
 
-extern const struct BagPocket gBagPockets[NUM_BAG_POCKETS];
-
 void CopyItemName(u16 itemId, u8 *string);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);
