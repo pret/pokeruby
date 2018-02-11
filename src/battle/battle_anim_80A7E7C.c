@@ -32,7 +32,7 @@ static void sub_80A8818(struct Sprite *sprite);
 static void sub_80A88F0(struct Sprite *sprite);
 static void sub_80A89B4(u8 taskId);
 static void sub_80A8A18(u8 taskId);
-static void sub_80A8C0C(u8 taskId);
+static void AnimTask_SwayMonStep(u8 taskId);
 static void sub_80A8D8C(u8 taskId);
 static void sub_80A8FD8(u8 taskId);
 static void sub_80A913C(u8 taskId);
@@ -754,59 +754,67 @@ static void sub_80A8B3C(u8 taskId)
     }
 }
 
-void sub_80A8B88(u8 taskId)
+// Task that facilitates translating the mon bg picture back and forth
+// in a swaying motion (uses Sine wave). It can sway either horizontally
+// or vertically, but not both.
+// arg 0: direction (0 = horizontal, 1 = vertical)
+// arg 1: wave amplitude
+// arg 2: wave period
+// arg 3: num sways
+// arg 4: which mon (0 = attacker, 1`= target)
+void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
-    if (GetBankSide(gAnimBankAttacker))
-    {
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    }
+
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[4]);
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
     TASK.data[2] = gBattleAnimArgs[2];
     TASK.data[3] = gBattleAnimArgs[3];
     TASK.data[4] = spriteId;
+
     if (gBattleAnimArgs[4] == 0)
-    {
         TASK.data[5] = gAnimBankAttacker;
-    }
     else
-    {
         TASK.data[5] = gAnimBankTarget;
-    }
+
     TASK.data[12] = 1;
-    TASK.func = sub_80A8C0C;
+    TASK.func = AnimTask_SwayMonStep;
 }
 
-static void sub_80A8C0C(u8 taskId)
+static void AnimTask_SwayMonStep(u8 taskId)
 {
-    s16 y;
+    s16 sineValue;
     u8 spriteId;
-    int index;
-    u16 val;
+    int waveIndex;
+    u16 sineIndex;
+
     spriteId = TASK.data[4];
-    val = TASK.data[10] + TASK.data[2];
-    TASK.data[10] = val;
-    index = val >> 8;
-    y = Sin(index, TASK.data[1]);
+    sineIndex = TASK.data[10] + TASK.data[2];
+    TASK.data[10] = sineIndex;
+    waveIndex = sineIndex >> 8;
+    sineValue = Sin(waveIndex, TASK.data[1]);
+
     if (TASK.data[0] == 0)
     {
-        gSprites[spriteId].pos2.x = y;
+        gSprites[spriteId].pos2.x = sineValue;
     }
     else
     {
-        if (GetBankSide(TASK.data[5]) == 0)
+        if (GetBankSide(TASK.data[5]) == SIDE_PLAYER)
         {
-            gSprites[spriteId].pos2.y = (y >= 0) ? y : -y;
+            gSprites[spriteId].pos2.y = (sineValue >= 0) ? sineValue : -sineValue;
         }
         else
         {
-            gSprites[spriteId].pos2.y = (y >= 0) ? -y : y;
+            gSprites[spriteId].pos2.y = (sineValue >= 0) ? -sineValue : sineValue;
         }
     }
-    if (((index >= 0x80u) && (TASK.data[11] == 0) && (TASK.data[12] == 1))
-        || ((index < 0x7fu) && (TASK.data[11] == 1) && (TASK.data[12] == 0)))
+
+    if (((waveIndex >= 0x80u) && (TASK.data[11] == 0) && (TASK.data[12] == 1))
+        || ((waveIndex < 0x7fu) && (TASK.data[11] == 1) && (TASK.data[12] == 0)))
     {
         TASK.data[11] ^= 1;
         TASK.data[12] ^= 1;

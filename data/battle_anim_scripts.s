@@ -642,15 +642,15 @@ Move_SUPERSONIC_CreateWaveSprite:
 Move_SCREECH: @ 81C7E15
 	loadspritegfx 10164
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_ATTACKER, 3, 0, 2, 1
-	call _81C7E48
-	call _81C7E48
+	call Move_SCREECH_CreateWaveSprite
+	call Move_SCREECH_CreateWaveSprite
 	delay 16
-	createvisualtask sub_80A8B88, 5, 0, 6, 2048, 2, 1
+	createvisualtask AnimTask_SwayMon, 5, 0, 6, 2048, 2, 1
 	waitforvisualfinish
 	end
-_81C7E48:
+Move_SCREECH_CreateWaveSprite:
 	playsewithpan SE_W103, 192
-	createsprite gBattleAnimSpriteTemplate_83D754C, 130, 16, 0, 0, 0, 30, 0
+	createsprite gScreechWaveSpriteTemplate, 130, 16, 0, 0, 0, 30, 0
 	delay 2
 	return
 
@@ -1340,7 +1340,7 @@ Move_PSYCH_UP: @ 81C8EEA
 	setalpha 12, 8
 	loopsewithpan SE_W060B, 192, 5, 10
 	createsprite gBattleAnimSpriteTemplate_83DA690, 2, 0, 0, 0, 0
-	createvisualtask sub_80A8B88, 5, 0, 5, 2560, 8, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 5, 2560, 8, 0
 	delay 127
 	delay 4
 	playsewithpan SE_W060, 192
@@ -1714,7 +1714,7 @@ _81C9864:
 	createsprite gBattleAnimSpriteTemplate_83D7798, 2, 0, 20, -28
 	waitforvisualfinish
 	delay 10
-	createvisualtask sub_80A8B88, 5, 0, 16, 6144, 8, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 16, 6144, 8, 0
 	delay 5
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 4, 0, 30, 1
 	createsprite gBasicHitSplatSpriteTemplate, 3, 0, 0, 1, 0
@@ -1986,7 +1986,7 @@ Move_SPARK: @ 81C9EA3
 Move_ATTRACT: @ 81CA0BA
 	loadspritegfx 10216
 	loopsewithpan SE_W204, 192, 12, 3
-	createvisualtask sub_80A8B88, 5, 0, 12, 4096, 4, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 12, 4096, 4, 0
 	delay 15
 	createsprite gBattleAnimSpriteTemplate_83D7AB0, 131, 20, -8
 	waitforvisualfinish
@@ -2189,7 +2189,7 @@ Move_BUBBLE_BEAM: @ 81CA573
 	setalpha 12, 8
 	delay 1
 	call _81CA5AD
-	createvisualtask sub_80A8B88, 5, 0, 3, 3072, 8, 1
+	createvisualtask AnimTask_SwayMon, 5, 0, 3, 3072, 8, 1
 	call _81CA5AD
 	call _81CA5AD
 	waitforvisualfinish
@@ -4268,7 +4268,7 @@ Move_TICKLE: @ 81CD33C
 	createsprite gBattleAnimSpriteTemplate_83DB3C4, 2, 2, 0, 16, 0, 0
 	waitforvisualfinish
 	delay 20
-	createvisualtask sub_80A8B88, 3, 0, 6, 1280, 3, 0
+	createvisualtask AnimTask_SwayMon, 3, 0, 6, 1280, 3, 0
 	delay 12
 	createvisualtask sub_812E568, 3, 1, 6, 2
 	loopsewithpan SE_W039, 63, 8, 8
@@ -7086,7 +7086,7 @@ Move_POISON_GAS: @ 81D1474
 	end
 
 Move_BIND: @ 81D1552
-	createvisualtask sub_80A8B88, 5, 0, 6, 3328, 4, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 6, 3328, 4, 0
 	goto _81D1568
 _81D1568:
 	playsewithpan SE_W020, 63
@@ -7110,7 +7110,7 @@ Move_PSYBEAM: @ 81D15A2
 	createsoundtask sub_812B058, 200, -64, 63, 3, 4, 0, 15
 	call _81D1626
 	call _81D1626
-	createvisualtask sub_80A8B88, 5, 0, 6, 2048, 4, 1
+	createvisualtask AnimTask_SwayMon, 5, 0, 6, 2048, 4, 1
 	createvisualtask sub_80E1F8C, 2, 4, 2, 2, 0, 12, 32351
 	call _81D1626
 	call _81D1626
@@ -7635,7 +7635,7 @@ _81D20EB:
 	playsewithpan SE_W020, 192
 	return
 _81D2101:
-	createvisualtask sub_80A8B88, 5, 0, 10, 1536, 3, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 10, 1536, 3, 0
 	waitforvisualfinish
 	delay 10
 	call _81D211C
@@ -7926,7 +7926,7 @@ Move_PERISH_SONG: @ 81D2784
 
 Move_SLEEP_TALK: @ 81D28ED
 	loadspritegfx 10228
-	createvisualtask sub_80A8B88, 5, 0, 4, 4096, 2, 0
+	createvisualtask AnimTask_SwayMon, 5, 0, 4, 4096, 2, 0
 	delay 20
 	createsprite gBattleAnimSpriteTemplate_84022F0, 130, 0, 20, 5, -1
 	playsewithpan SE_W173, 192
@@ -8075,7 +8075,7 @@ Move_ENCORE: @ 81D2C41
 	createsprite gBattleAnimSpriteTemplate_84023BC, 3, 2, 0, 1, 0, 9
 	delay 16
 	createvisualtask sub_812B340, 5, 223, 63
-	createvisualtask sub_80A8B88, 5, 1, 8, 1536, 5, 1
+	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 5, 1
 	waitforvisualfinish
 	createvisualtask sub_80E2D78, 2, 248, 3, 10, 0, 1
 	waitforvisualfinish
@@ -10337,7 +10337,7 @@ General_PokeblockThrow: @ 81D6438
 	createsprite gBattleAnimSpriteTemplate_840B4FC, 131, -16, 7, 0, 32
 	delay 50
 	loopsewithpan SE_W039, 63, 19, 2
-	createvisualtask sub_80A8B88, 5, 1, 8, 1536, 2, 1
+	createvisualtask AnimTask_SwayMon, 5, 1, 8, 1536, 2, 1
 	waitforvisualfinish
 	createvisualtask sub_8141C08, 2
 	end
@@ -10546,7 +10546,7 @@ General_SnatchMove: @ 81D6877
 	createvisualtask sub_80E4234, 2
 	call Unknown_81D6AB6
 	delay 1
-	createvisualtask sub_80A8B88, 2, 0, 5, 5120, 4, 1
+	createvisualtask AnimTask_SwayMon, 2, 0, 5, 5120, 4, 1
 	waitforvisualfinish
 	createvisualtask sub_80E4264, 2
 	jumpargeq 7, 0, _81D68B5
