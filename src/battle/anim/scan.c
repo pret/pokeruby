@@ -47,7 +47,7 @@ void sub_80CD408(struct Sprite* sprite)
         sprite->data[0] = 8;
         sprite->data[2] = sprite->pos1.x + gUnknown_083D6DDC[sprite->data[5] >> 8][0];
         sprite->data[4] = sprite->pos1.y + gUnknown_083D6DDC[sprite->data[5] >> 8][1];
-        sprite->callback = sub_8078B34;
+        sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, sub_80CD4B8);
         sprite->data[5] += 0x100;
         PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(0x3F));
@@ -112,7 +112,7 @@ void sub_80CD4EC(struct Sprite* sprite)
         sprite->data[0] = 6;
         sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + a;
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + b;
-        sprite->callback = sub_8078B34;
+        sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, sub_80CD654);
     }
 }

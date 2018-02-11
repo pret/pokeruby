@@ -166,7 +166,7 @@ void sub_80D92D0(struct Sprite *sprite)
     }
 
     sprite->data[4] = sprite->pos1.y - 20;
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, sub_80D9328);
 }
 
@@ -182,7 +182,7 @@ static void sub_80D9328(struct Sprite *sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
-        sprite->callback = sub_8078B34;
+        sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
 }
@@ -261,7 +261,7 @@ static void sub_80D94CC(struct Sprite *sprite)
         sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
-        sprite->callback = sub_8078B34;
+        sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, sub_80D9524);
     }
 }
@@ -437,7 +437,7 @@ static void sub_80D986C(struct Sprite *sprite)
 
         InitAnimSpriteTranslationDeltas(sprite);
         StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
-        sprite->callback = sub_8078BB8;
+        sprite->callback = TranslateAnimSpriteByDeltasUntil;
     }
 }
 
@@ -532,7 +532,7 @@ void sub_80D9A38(struct Sprite *sprite)
 
     InitAnimSpriteTranslationDeltas(sprite);
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
-    sprite->callback = sub_8078BB8;
+    sprite->callback = TranslateAnimSpriteByDeltasUntil;
 }
 
 static void sub_80D9B24(struct Sprite *sprite)

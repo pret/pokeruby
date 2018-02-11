@@ -71,7 +71,7 @@ void sub_80D9E94(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[1];
 
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
 
     sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
     sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
@@ -104,7 +104,7 @@ void sub_80D9F14(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.y + sprite->data[0];
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 

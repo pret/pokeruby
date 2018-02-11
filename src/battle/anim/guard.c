@@ -30,6 +30,6 @@ void sub_80D3014(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y - 72;
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
