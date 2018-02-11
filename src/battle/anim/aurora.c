@@ -16,7 +16,7 @@ void sub_80D33B4(struct Sprite *sprite)
 {
     s16 r6;
 
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     if (GetBankSide(gAnimBankAttacker) != 0)
         r6 = -gBattleAnimArgs[2];
     else
@@ -26,7 +26,7 @@ void sub_80D33B4(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + r6;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
     sprite->callback = sub_80D344C;
     sprite->affineAnimPaused = TRUE;
     sprite->callback(sprite);
@@ -39,7 +39,7 @@ static void sub_80D344C(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
     }
-    if (sub_8078B5C(sprite) != 0)
+    if (TranslateAnimSpriteByDeltas(sprite) != 0)
         DestroyAnimSprite(sprite);
 }
 

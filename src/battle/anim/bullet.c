@@ -17,7 +17,7 @@ static void sub_80D00B4(struct Sprite* sprite);
 
 void sub_80CFFD8(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     sprite->data[0] = 20;
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);

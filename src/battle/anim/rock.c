@@ -38,7 +38,7 @@ static void sub_80DD9FC(struct Sprite *sprite);
 void sub_80DCE9C(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        sub_807A3FC(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
 
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += 14;
@@ -102,7 +102,7 @@ void sub_80DCF60(struct Sprite *sprite)
 void sub_80DCFE4(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == 0)
-        sub_80787B0(sprite, 0);
+        InitAnimSpritePos(sprite, 0);
     else
         sub_8078764(sprite, 0);
 
@@ -275,7 +275,7 @@ void sub_80DD3AC(struct Sprite *sprite)
 void sub_80DD490(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[2] = sprite->pos1.x;
@@ -455,7 +455,7 @@ static void sub_80DD774(struct Task *task)
 
 void sub_80DD87C(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         u8 taskId = FindTaskIdByFunc(sub_80DD604);
         if (taskId != 0xFF)

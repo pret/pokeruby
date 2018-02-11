@@ -192,7 +192,7 @@ void sub_80DBA4C(struct Sprite *sprite)
         else
         {
             if (gBattleAnimArgs[2] == 0)
-                sub_80787B0(sprite, var0);
+                InitAnimSpritePos(sprite, var0);
             else
                 sub_8078764(sprite, var0);
         }
@@ -539,7 +539,7 @@ static void sub_80DC1FC(u8 taskId)
 
 void sub_80DC2B0(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);

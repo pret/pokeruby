@@ -1588,7 +1588,7 @@ sub_813FDC0: @ 813FDC0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813FE5A
@@ -5479,7 +5479,7 @@ sub_8141C30: @ 8141C30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
@@ -5569,7 +5569,7 @@ _08141CF0: .4byte sub_8141CF4
 sub_8141CF4: @ 8141CF4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _08141D16

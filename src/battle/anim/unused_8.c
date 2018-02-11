@@ -15,7 +15,7 @@ static void sub_80CF4B8(struct Sprite* sprite);
 
 void sub_80CF458(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];

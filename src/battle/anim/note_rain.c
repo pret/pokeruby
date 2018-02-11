@@ -24,7 +24,7 @@ void sub_80D1BA8(struct Sprite* sprite, u8 a, u8 b)
 
 void sub_80D1C08(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     if (GetBankSide(gAnimBankAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 

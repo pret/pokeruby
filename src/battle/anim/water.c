@@ -30,7 +30,7 @@ void sub_80D3838(struct Sprite *sprite)
     }
     else
     {
-        sub_80787B0(sprite, 1);
+        InitAnimSpritePos(sprite, 1);
     }
 
     sprite->data[7] = gBattleAnimArgs[2];

@@ -1471,7 +1471,7 @@ sub_80E27A0: @ 80E27A0
 	bne _080E27C4
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	b _080E27CC
 	.align 2, 0
 _080E27C0: .4byte gBattleAnimArgs
@@ -1506,7 +1506,7 @@ sub_80E27E8: @ 80E27E8
 	bne _080E280C
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	b _080E2814
 	.align 2, 0
 _080E2808: .4byte gBattleAnimArgs
@@ -1586,7 +1586,7 @@ _080E288C:
 	bne _080E28AC
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	b _080E28B4
 	.align 2, 0
 _080E28A8: .4byte gBattleAnimArgs
@@ -1694,7 +1694,7 @@ sub_80E2978: @ 80E2978
 	bne _080E2994
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	b _080E299C
 	.align 2, 0
 _080E2990: .4byte gBattleAnimArgs
@@ -1733,7 +1733,7 @@ sub_80E29C0: @ 80E29C0
 	bne _080E29E4
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	b _080E29EC
 	.align 2, 0
 _080E29E0: .4byte gBattleAnimArgs
