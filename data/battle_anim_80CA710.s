@@ -1494,7 +1494,7 @@ gSupersonicWaveSpriteTemplate:: @ 83D7534
 	spr_template 10163, 10163, gOamData_837E034, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D752C, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
-gBattleAnimSpriteTemplate_83D754C:: @ 83D754C
+gScreechWaveSpriteTemplate:: @ 83D754C
 	spr_template 10164, 10164, gOamData_837E034, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D752C, TranslateAnimSpriteToTargetMonLocation
 
 	.align 2
