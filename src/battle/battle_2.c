@@ -33,6 +33,7 @@
 #include "rom3.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
+#include "safari_zone.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -1965,6 +1966,166 @@ void debug_sub_8011498(void)
 	AnimateSprites();
 	BuildOamBuffer();
 }
+
+extern const u16 gUnknown_Debug_821F598[];
+extern const u8 str_821F631[][6];
+extern const u8 Str_821F649[];
+
+extern u8 gUnknown_020297ED;
+
+#if 0
+void debug_sub_801174C(void)
+{
+	u32 r9 = 0;
+	u8 r6;
+	s32 r7;
+	s32 spC;
+	u16 sp10;
+	
+	gUnknown_020297ED = 1;
+	r6 = Random() % 4;
+	StringCopy(gSaveBlock2.playerName, str_821F631[r6]);
+	gSaveBlock2.playerGender = r6 >> 1;
+	ZeroPlayerPartyMons();
+	ZeroEnemyPartyMons();
+	r7 = gUnknown_Debug_2023A76[0][30];
+	spC = r9;
+	if (r7 > 9)
+	{
+		spC = 0;
+		while (r7 > 9)
+		{
+			r7 -= 10;
+			spC++;
+		}
+	}
+	//_695
+	gBattleTypeFlags = gUnknown_Debug_821F598[r7 - 1];
+	gUnknown_02023A14_50 = 8;
+	gBattleTerrain = spC;
+	if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+		EnterSafariMode();
+	//_697
+	if ((u16)(gUnknown_Debug_2023A76 - 2) <= 2)
+	{
+		gTrainerBattleOpponent = Random() % 8 + 1;
+	}
+	
+	gPlayerPartyCount = 0;
+	for (r7 = 0; r7 < 30; r7 += 5)
+	{
+		if (gUnknown_Debug_2023A76[0][r7] != 0)
+		{
+			switch (gUnknown_Debug_2023A76[0][r7 + 4])
+			{
+			case 0:
+			case 2:
+				r6 = 0;
+				break;
+			case 1:
+				r6 = 0xFE;
+				break;
+			default:
+				r6 = 0xFF;
+				break;
+			}
+			if (gUnknown_Debug_2023A76[0][r7] == 0xC9 && r7 + 5 < 30)
+				r9 = gUnknown_Debug_2023A76[0][r7 + 7];
+			else
+				r9 = 0;
+			CreateMonWithGenderNatureLetter(
+				&gEnemyParty[r7 / 5],
+				gUnknown_Debug_2023A76[0][r7], 
+				gUnknown_Debug_2023A76[0][r7 + 1],
+				0,
+				r6,
+				0,
+				r9);
+		}
+		//_699
+		SetMonData(&gEnemyParty[r7 / 5], MON_DATA_HELD_ITEM, &gUnknown_Debug_2023A76[0][r7 + 2]);
+		sp10 = gUnknown_Debug_2023A76[0][r7 + 2] - 1;
+		if (sp10 <= 11)
+			SetMonData(&gEnemyParty[r7 / 5], MON_DATA_POKEBALL, &gUnknown_Debug_2023A76[0][r7 + 2]);
+		//_714
+		/*
+		switch (gUnknown_Debug_2023A76[r7 + 3])
+		{
+		case 1:
+		case 2:
+			spC = gUnknown_Debug_2023A76[r7 + 3] - 1;
+			SetMonData(&gEnemyParty[r7 / 5], MON_DATA_ALT_ABILITY, &spC);
+			break;
+		}
+		*/
+		if (gUnknown_Debug_2023A76[0][r7 + 3] != 0 && gUnknown_Debug_2023A76[0][r7 + 3] != 3)
+		{
+			if (gUnknown_Debug_2023A76[0][r7 + 3] <= 2)
+				spC = gUnknown_Debug_2023A76[0][r7 + 3] - 1;
+			else
+				spC = gUnknown_Debug_2023A76[0][r7 + 3] - 4;
+			SetMonData(&gEnemyParty[r7 / 5], MON_DATA_ALT_ABILITY, &spC);
+		}
+		
+		//_716
+		if (gUnknown_Debug_2023A76[1][r7] != 0)
+		{
+			switch (gUnknown_Debug_2023A76[1][r7 + 4])
+			{
+			case 0:
+			case 2:
+				r6 = 0;
+				break;
+			case 1:
+				r6 = 0xFE;
+				break;
+			default:
+				r6 = 0xFF;
+				break;
+			}
+			if (gUnknown_Debug_2023A76[1][r7] == 0xC9 && r7 + 5 < 30)
+				r9 = gUnknown_Debug_2023A76[1][r7 + 7];
+			else
+				r9 = 0;
+			CreateMonWithGenderNatureLetter(
+				&gPlayerParty[r7 / 5],
+				gUnknown_Debug_2023A76[1][r7], 
+				gUnknown_Debug_2023A76[1][r7 + 1],
+				0,
+				r6,
+				0,
+				r9);
+			gPlayerPartyCount++;
+		}
+		SetMonData(&gPlayerParty[r7 / 5], MON_DATA_HELD_ITEM, &gUnknown_Debug_2023A76[1][r7 + 2]);
+		sp10 = gUnknown_Debug_2023A76[1][r7 + 2] - 1;
+		if (sp10 <= 11)
+			SetMonData(&gPlayerParty[r7 / 5], MON_DATA_POKEBALL, &gUnknown_Debug_2023A76[1][r7 + 2]);
+		if (gUnknown_Debug_2023A76[1][r7 + 3] != 0 && gUnknown_Debug_2023A76[1][r7 + 3] != 3)
+		{
+			if (gUnknown_Debug_2023A76[1][r7 + 3] <= 2)
+				spC = gUnknown_Debug_2023A76[1][r7 + 3] - 1;
+			else
+				spC = gUnknown_Debug_2023A76[1][r7 + 3] - 4;
+			SetMonData(&gPlayerParty[r7 / 5], MON_DATA_ALT_ABILITY, &spC);
+		}
+		//_738
+		if (gUnknown_Debug_2023A76[1][r7 + 3] > 2)
+		{
+			SetMonData(&gPlayerParty[r7 / 5], MON_DATA_OT_NAME, Str_821F649);
+			gUnknown_02023A14_50 |= 0x40;
+		}
+	}
+	//_744
+	spC = 0;
+	for (r7 = 0; r7 < 4; r7++)
+	{
+		SetMonData(&gEnemyParty[spC], MON_DATA_MOVE1 + r7, &gUnknown_Debug_2023B02[0][spC][r7]);
+		SetMonData(&gEnemyParty[spC], MON_DATA_PP1 + r7, &gBattleMoves[gUnknown_Debug_2023B02[0][spC][r7]].pp);
+		SetMonData(&gEnemyParty[
+	}
+}
+#endif
 
 __attribute__((naked))
 void debug_sub_801174C()
