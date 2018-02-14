@@ -79,13 +79,13 @@ void sub_80CACEC(u8 taskId)
 
 void sub_80CAD54(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CADA8;
     sub_80CADA8(sprite);
@@ -93,7 +93,7 @@ void sub_80CAD54(struct Sprite* sprite)
 
 void sub_80CADA8(struct Sprite* sprite)
 {
-    if (!sub_8078B5C(sprite))
+    if (!TranslateAnimSpriteByDeltas(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 32);
         sprite->pos2.y += Cos(sprite->data[5], -5);
@@ -116,13 +116,13 @@ void sub_80CADA8(struct Sprite* sprite)
 
 void sub_80CAE20(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CAE74;
     sub_80CAE74(sprite);
@@ -130,7 +130,7 @@ void sub_80CAE20(struct Sprite* sprite)
 
 void sub_80CAE74(struct Sprite* sprite)
 {
-    if (!sub_8078B5C(sprite))
+    if (!TranslateAnimSpriteByDeltas(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 8);
         if ((u16)(sprite->data[5] - 0x3B) < 5 || (u16)(sprite->data[5] - 0xBB) < 5)

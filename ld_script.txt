@@ -134,7 +134,7 @@ SECTIONS {
         src/engine/trainer_card.o(.text);
         src/engine/save_menu_util.o(.text);
         src/battle/battle_party_menu.o(.text);
-        asm/unk_text_8095904.o(.text);
+        src/unk_text_8095904.o(.text);
         src/pokemon/pokemon_storage_system.o(.text);
         src/pokemon/pokemon_storage_system_2.o(.text);
         src/pokemon/pokemon_storage_system_3.o(.text);
@@ -303,7 +303,7 @@ SECTIONS {
         src/battle/anim/shock.o(.text);
         asm/current.o(.text);
         asm/ice.o(.text);
-        asm/fight.o(.text);
+        src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
         asm/flying.o(.text);
         src/battle/anim/psychic.o(.text);

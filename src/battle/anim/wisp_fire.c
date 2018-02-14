@@ -10,7 +10,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankTarget;
 extern u8 gAnimBankAttacker;
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern s8 gUnknown_083D9794[16];
 extern s8 gUnknown_083D97A4[16];
 
@@ -175,7 +175,7 @@ void sub_80D60B4(u8 taskId)
     }
     gTasks[taskId].data[0]++;
 
-    spriteId = gObjectBankIDs[gAnimBankTarget];
+    spriteId = gBankSpriteIds[gAnimBankTarget];
 
     if (!gTasks[taskId].data[4])
         unk = gUnknown_083D9794[gTasks[taskId].data[0] % 10];

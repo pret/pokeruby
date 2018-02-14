@@ -436,161 +436,47 @@ u8 sub_8148EC0(u8 a, u16 b, u16 c, u16 d)
     return taskId;
 }
 
-#ifdef NONMATCHING
 void sub_8148F3C(u8 taskId)
 {
-    register u32 r4 asm("r4");
+    s16 r4;
     s32 r2;
 
-    r4 = (u16)gTasks[taskId].data[1] << 16;
+    r4 = gTasks[taskId].data[1];
     if (r4 != 0)
     {
-        r2 = (gTasks[taskId].data[2] << 16) + (u16)gTasks[taskId].data[3] - (r4 >> 12);
+        r2 = (gTasks[taskId].data[2] << 16) + (u16)gTasks[taskId].data[3];
+        r2 -= 16 * (u16)r4;
         gTasks[taskId].data[2] = r2 >> 16;
         gTasks[taskId].data[3] = r2;
         REG_BG1HOFS = gTasks[taskId].data[2];
-        REG_BG1VOFS = gUnknown_0203935A + gUnknown_02039358;
+        REG_BG1VOFS = gUnknown_02039358 + gUnknown_0203935A;
     }
 
-    r4 = (u16)gTasks[taskId].data[4] << 16;
+    r4 = gTasks[taskId].data[4];
     if (r4 != 0)
     {
-        r2 = (gTasks[taskId].data[5] << 16) + (u16)gTasks[taskId].data[6] - (r4 >> 12);
+        r2 = (gTasks[taskId].data[5] << 16) + (u16)gTasks[taskId].data[6];
+        r2 -= 16 * (u16)r4;
         gTasks[taskId].data[5] = r2 >> 16;
-        gTasks[taskId].data[3] = r2;
+        gTasks[taskId].data[6] = r2;
         REG_BG2HOFS = gTasks[taskId].data[5];
         if (gTasks[taskId].data[0] != 0)
-            REG_BG2VOFS = gUnknown_0203935A + gUnknown_02039358;
+            REG_BG2VOFS = gUnknown_02039358 + gUnknown_0203935A;
         else
             REG_BG2VOFS = gUnknown_02039358;
     }
 
-    r4 = (u16)gTasks[taskId].data[7] << 16;
+    r4 = gTasks[taskId].data[7];
     if (r4 != 0)
     {
-        r2 = (gTasks[taskId].data[8] << 16) + (u16)gTasks[taskId].data[9] - (r4 >> 12);;
+        r2 = (gTasks[taskId].data[8] << 16) + (u16)gTasks[taskId].data[9];
+        r2 -= 16 * (u16)r4;
         gTasks[taskId].data[8] = r2 >> 16;
         gTasks[taskId].data[9] = r2;
         REG_BG3HOFS = gTasks[taskId].data[8];
         REG_BG3VOFS = gUnknown_02039358;
     }
 }
-#else
-__attribute__((naked))
-void sub_8148F3C(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    ldr r1, _08148FB4 @ =gTasks\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r3, r0, r1\n\
-    ldrh r0, [r3, 0xA]\n\
-    lsls r4, r0, 16\n\
-    adds r6, r1, 0\n\
-    cmp r4, 0\n\
-    beq _08148F7C\n\
-    movs r1, 0xC\n\
-    ldrsh r0, [r3, r1]\n\
-    lsls r0, 16\n\
-    ldrh r1, [r3, 0xE]\n\
-    adds r2, r0, r1\n\
-    lsrs r0, r4, 12\n\
-    subs r2, r0\n\
-    asrs r1, r2, 16\n\
-    strh r1, [r3, 0xC]\n\
-    strh r2, [r3, 0xE]\n\
-    ldr r0, _08148FB8 @ =REG_BG1HOFS\n\
-    strh r1, [r0]\n\
-    ldr r2, _08148FBC @ =REG_BG1VOFS\n\
-    ldr r1, _08148FC0 @ =gUnknown_02039358\n\
-    ldr r0, _08148FC4 @ =gUnknown_0203935A\n\
-    ldrh r0, [r0]\n\
-    ldrh r1, [r1]\n\
-    adds r0, r1\n\
-    strh r0, [r2]\n\
-_08148F7C:\n\
-    ldrh r0, [r3, 0x10]\n\
-    lsls r4, r0, 16\n\
-    cmp r4, 0\n\
-    beq _08148FD8\n\
-    movs r1, 0x12\n\
-    ldrsh r0, [r3, r1]\n\
-    lsls r0, 16\n\
-    ldrh r1, [r3, 0x14]\n\
-    adds r2, r0, r1\n\
-    lsrs r0, r4, 12\n\
-    subs r2, r0\n\
-    asrs r1, r2, 16\n\
-    strh r1, [r3, 0x12]\n\
-    strh r2, [r3, 0x14]\n\
-    ldr r0, _08148FC8 @ =REG_BG2HOFS\n\
-    strh r1, [r0]\n\
-    movs r1, 0x8\n\
-    ldrsh r0, [r3, r1]\n\
-    cmp r0, 0\n\
-    beq _08148FD0\n\
-    ldr r2, _08148FCC @ =REG_BG2VOFS\n\
-    ldr r1, _08148FC0 @ =gUnknown_02039358\n\
-    ldr r0, _08148FC4 @ =gUnknown_0203935A\n\
-    ldrh r0, [r0]\n\
-    ldrh r1, [r1]\n\
-    adds r0, r1\n\
-    strh r0, [r2]\n\
-    b _08148FD8\n\
-    .align 2, 0\n\
-_08148FB4: .4byte gTasks\n\
-_08148FB8: .4byte REG_BG1HOFS\n\
-_08148FBC: .4byte REG_BG1VOFS\n\
-_08148FC0: .4byte gUnknown_02039358\n\
-_08148FC4: .4byte gUnknown_0203935A\n\
-_08148FC8: .4byte REG_BG2HOFS\n\
-_08148FCC: .4byte REG_BG2VOFS\n\
-_08148FD0:\n\
-    ldr r0, _08149010 @ =REG_BG2VOFS\n\
-    ldr r1, _08149014 @ =gUnknown_02039358\n\
-    ldrh r1, [r1]\n\
-    strh r1, [r0]\n\
-_08148FD8:\n\
-    lsls r0, r5, 2\n\
-    adds r0, r5\n\
-    lsls r0, 3\n\
-    adds r3, r0, r6\n\
-    ldrh r0, [r3, 0x16]\n\
-    lsls r4, r0, 16\n\
-    cmp r4, 0\n\
-    beq _08149008\n\
-    movs r1, 0x18\n\
-    ldrsh r0, [r3, r1]\n\
-    lsls r0, 16\n\
-    ldrh r1, [r3, 0x1A]\n\
-    adds r2, r0, r1\n\
-    lsrs r0, r4, 12\n\
-    subs r2, r0\n\
-    asrs r1, r2, 16\n\
-    strh r1, [r3, 0x18]\n\
-    strh r2, [r3, 0x1A]\n\
-    ldr r0, _08149018 @ =REG_BG3HOFS\n\
-    strh r1, [r0]\n\
-    ldr r1, _0814901C @ =REG_BG3VOFS\n\
-    ldr r0, _08149014 @ =gUnknown_02039358\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1]\n\
-_08149008:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08149010: .4byte REG_BG2VOFS\n\
-_08149014: .4byte gUnknown_02039358\n\
-_08149018: .4byte REG_BG3HOFS\n\
-_0814901C: .4byte REG_BG3VOFS\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_8149020(u8 mode)
 {

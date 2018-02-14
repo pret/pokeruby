@@ -47,7 +47,7 @@ extern u16 gBattleTypeFlags;
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gBanksBySide[];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u16 gBattle_BG3_X;
 extern s16 gBattle_BG1_Y;
 extern u16 gBattle_BG3_Y;
@@ -553,7 +553,7 @@ u8 sub_80AB70C(u8 *a)
         gBattleTypeFlags = 0;
         gBankAttacker = 2;
         gBankTarget = 3;
-        gObjectBankIDs[gBankAttacker] = CreateJudgeSprite();
+        gBankSpriteIds[gBankAttacker] = CreateJudgeSprite();
         sub_80B292C();
         break;
     default:
@@ -931,7 +931,7 @@ void debug_sub_80BA054(u8 taskId)
 	gSprites[r6].pos2.x = 120;
 	gSprites[r6].callback = sub_80AD8FC;
 	gTasks[taskId].data[2] = r6;
-	gObjectBankIDs[gBankAttacker] = r6;
+	gBankSpriteIds[gBankAttacker] = r6;
 	gTasks[taskId].data[3] = 0;
 	gTasks[taskId].data[0]++;
 	sContest.unk1925E = 0;
@@ -1143,7 +1143,7 @@ void sub_80AC2CC(u8 taskId)
         gSprites[spriteId].pos2.x = 120;
         gSprites[spriteId].callback = sub_80AD8FC;
         gTasks[taskId].data[2] = spriteId;
-        gObjectBankIDs[gBankAttacker] = spriteId;
+        gBankSpriteIds[gBankAttacker] = spriteId;
         sub_80B0BC4(sub_80B09E4(sContest.unk19215), FALSE);
         gTasks[taskId].data[0] = 4;
         return;
@@ -2147,7 +2147,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = MAP_OBJ_GFX_LINK_MAY;
     gContestMons[gContestPlayerMonIndex].flags = 0;
-    gContestMons[gContestPlayerMonIndex].unk2C = 0;
+    gContestMons[gContestPlayerMonIndex].unk2C[0] = 0;
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGetEnd10(name);
@@ -2214,7 +2214,7 @@ void Contest_CreatePlayerMon(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].tough = tough;
 }
 
-void Contest_InitAllPokemon(u8 a, u8 b)
+void Contest_InitAllPokemon(u8 contestType, u8 rank)
 {
     s32 i;
     u8 opponentsCount = 0;
@@ -2225,17 +2225,17 @@ void Contest_InitAllPokemon(u8 a, u8 b)
     // Find all suitable opponents
     for (i = 0; i < 60; i++)
     {
-        if (b == gContestOpponents[i].unk1C_0)
+        if (rank == gContestOpponents[i].whichRank)
         {
-            if      (a == 0 && gContestOpponents[i].unk1C_2)
+            if      (contestType == 0 && gContestOpponents[i].aiPool_Cool)
                 opponents[opponentsCount++] = i;
-            else if (a == 1 && gContestOpponents[i].unk1C_3)
+            else if (contestType == 1 && gContestOpponents[i].aiPool_Beauty)
                 opponents[opponentsCount++] = i;
-            else if (a == 2 && gContestOpponents[i].unk1C_4)
+            else if (contestType == 2 && gContestOpponents[i].aiPool_Cute)
                 opponents[opponentsCount++] = i;
-            else if (a == 3 && gContestOpponents[i].unk1C_5)
+            else if (contestType == 3 && gContestOpponents[i].aiPool_Smart)
                 opponents[opponentsCount++] = i;
-            else if (a == 4 && gContestOpponents[i].unk1C_6)
+            else if (contestType == 4 && gContestOpponents[i].aiPool_Tough)
                 opponents[opponentsCount++] = i;
         }
     }
@@ -5415,14 +5415,14 @@ void sub_80B28F0(u8 a)
 
 void sub_80B292C(void)
 {
-    gObjectBankIDs[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
-    InitSpriteAffineAnim(&gSprites[gObjectBankIDs[gBankTarget]]);
+    gBankSpriteIds[3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    InitSpriteAffineAnim(&gSprites[gBankSpriteIds[gBankTarget]]);
     sub_80B2968();
 }
 
 void sub_80B2968(void)
 {
-    struct Sprite *sprite = &gSprites[gObjectBankIDs[3]];
+    struct Sprite *sprite = &gSprites[gBankSpriteIds[3]];
 
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;

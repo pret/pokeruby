@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_anim.h"
 #include "rom_8077ABC.h"
 #include "sprite.h"
@@ -9,34 +10,34 @@
 
 extern s16 gBattleAnimArgs[8];
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80A7EF0(u8 taskId);
-static void sub_80A808C(u8 taskId);
-static void sub_80A81D8(u8 taskId);
-static void sub_80A8374(u8 taskId);
+static void AnimTask_ShakeMonStep(u8 taskId);
+static void AnimTask_ShakeMon2Step(u8 taskId);
+static void AnimTask_ShakeMonInPlaceStep(u8 taskId);
+static void AnimTask_ShakeAndSinkMonStep(u8 taskId);
 static void sub_80A8488(u8 taskId);
-static void sub_80A8530(struct Sprite *sprite);
-static void sub_80A85A4(struct Sprite *sprite);
-static void sub_80A85C8(struct Sprite *sprite);
-static void sub_80A8614(struct Sprite* sprite);
-static void sub_80A8638(struct Sprite *sprite);
-static void sub_80A86F4(struct Sprite *sprite);
-static void sub_80A8764(struct Sprite *sprite);
+static void DoHorizontalLunge(struct Sprite *sprite);
+static void ReverseHorizontalLungeDirection(struct Sprite *sprite);
+static void DoVerticalDip(struct Sprite *sprite);
+static void ReverseVerticalDipDirection(struct Sprite* sprite);
+static void SlideMonToOriginalPos(struct Sprite *sprite);
+static void SlideMonToOriginalPosStep(struct Sprite *sprite);
+static void SlideMonToOffset(struct Sprite *sprite);
 static void sub_80A8818(struct Sprite *sprite);
 static void sub_80A88F0(struct Sprite *sprite);
 static void sub_80A89B4(u8 taskId);
 static void sub_80A8A18(u8 taskId);
-static void sub_80A8C0C(u8 taskId);
+static void AnimTask_SwayMonStep(u8 taskId);
 static void sub_80A8D8C(u8 taskId);
 static void sub_80A8FD8(u8 taskId);
 static void sub_80A913C(u8 taskId);
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FB0 =
+const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -44,10 +45,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FB0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8530,
+    .callback = DoHorizontalLunge,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FC8 =
+const struct SpriteTemplate gVerticalDipSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -55,10 +56,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FC8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A85C8,
+    .callback = DoVerticalDip,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FE0 =
+const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -66,10 +67,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FE0 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8638,
+    .callback = SlideMonToOriginalPos,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FF8 =
+const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
 {
     .tileTag = 0,
     .paletteTag = 0,
@@ -77,7 +78,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C1FF8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A8764,
+    .callback = SlideMonToOffset,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83C2010 =
@@ -91,28 +92,35 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83C2010 =
     .callback = sub_80A8818,
 };
 
-void sub_80A7E7C(u8 taskId)
+// Task to facilitate simple shaking of a pokemon's picture in battle.
+// The shaking alternates between the original position and the target position.
+// arg 0: anim battler
+// arg 1: x pixel offset
+// arg 2: y pixel offset
+// arg 3: num times to shake
+// arg 4: frame delay
+void AnimTask_ShakeMon(u8 taskId)
 {
-    u8 sprite;
-    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
-    if (sprite == 0xff)
+    u8 spriteId;
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    if (spriteId == 0xff)
     {
         DestroyAnimVisualTask(taskId);
         return;
     }
-    gSprites[sprite].pos2.x = gBattleAnimArgs[1];
-    gSprites[sprite].pos2.y = gBattleAnimArgs[2];
-    TASK.data[0] = sprite;
+    gSprites[spriteId].pos2.x = gBattleAnimArgs[1];
+    gSprites[spriteId].pos2.y = gBattleAnimArgs[2];
+    TASK.data[0] = spriteId;
     TASK.data[1] = gBattleAnimArgs[3];
     TASK.data[2] = gBattleAnimArgs[4];
     TASK.data[3] = gBattleAnimArgs[4];
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
-    TASK.func = sub_80A7EF0;
-    sub_80A7EF0(taskId);
+    TASK.func = AnimTask_ShakeMonStep;
+    AnimTask_ShakeMonStep(taskId);
 }
 
-static void sub_80A7EF0(u8 taskId)
+static void AnimTask_ShakeMonStep(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -147,13 +155,19 @@ static void sub_80A7EF0(u8 taskId)
     }
 }
 
-
-void sub_80A7FA0(u8 taskId)
+// Task to facilitate simple shaking of a pokemon's picture in battle.
+// The shaking alternates between the positive and negative versions of the specified pixel offsets.
+// arg 0: anim battler
+// arg 1: x pixel offset
+// arg 2: y pixel offset
+// arg 3: num times to shake
+// arg 4: frame delay
+void AnimTask_ShakeMon2(u8 taskId)
 {
     u8 sprite;
-    bool8 r6;
+    bool8 destroy;
     u8 side;
-    r6 = 0;
+    destroy = FALSE;
     if (gBattleAnimArgs[0] < 4)
     {
         sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
@@ -181,21 +195,23 @@ void sub_80A7FA0(u8 taskId)
             side = GetBankByIdentity(3);
             break;
         }
+
         if (IsAnimBankSpriteVisible(side) == FALSE)
-        {
-            r6 = 1;
-        }
-        sprite = gObjectBankIDs[side];
+            destroy = TRUE;
+
+        sprite = gBankSpriteIds[side];
     }
     else
     {
-        sprite = gObjectBankIDs[gAnimBankAttacker];
+        sprite = gBankSpriteIds[gAnimBankAttacker];
     }
-    if (r6)
+
+    if (destroy)
     {
         DestroyAnimVisualTask(taskId);
         return;
     }
+
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
     gSprites[sprite].pos2.y = gBattleAnimArgs[2];
     TASK.data[0] = sprite;
@@ -204,30 +220,24 @@ void sub_80A7FA0(u8 taskId)
     TASK.data[3] = gBattleAnimArgs[4];
     TASK.data[4] = gBattleAnimArgs[1];
     TASK.data[5] = gBattleAnimArgs[2];
-    TASK.func = sub_80A808C;
-    sub_80A808C(taskId);
+    TASK.func = AnimTask_ShakeMon2Step;
+    TASK.func(taskId);
 }
 
-static void sub_80A808C(u8 taskId)
+static void AnimTask_ShakeMon2Step(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
         if (SPRITE.pos2.x == TASK.data[4])
-        {
             SPRITE.pos2.x = -TASK.data[4];
-        }
         else
-        {
             SPRITE.pos2.x = TASK.data[4];
-        }
+
         if (SPRITE.pos2.y == TASK.data[5])
-        {
             SPRITE.pos2.y = -TASK.data[5];
-        }
         else
-        {
             SPRITE.pos2.y = TASK.data[5];
-        }
+
         TASK.data[3] = TASK.data[2];
         if (--TASK.data[1] == 0)
         {
@@ -243,29 +253,37 @@ static void sub_80A808C(u8 taskId)
     }
 }
 
-void sub_80A8154(u8 taskId)
+// Task to facilitate simple shaking of a pokemon's picture in battle.
+// The shaking alternates between the positive and negative versions of the specified pixel offsets
+// with respect to the current location of the mon's picture.
+// arg 0: battler
+// arg 1: x offset
+// arg 2: y offset
+// arg 3: num shakes
+// arg 4: delay
+void AnimTask_ShakeMonInPlace(u8 taskId)
 {
-    u8 sprite;
-    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
-    if (sprite == 0xff)
+    u8 spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    if (spriteId == 0xff)
     {
         DestroyAnimVisualTask(taskId);
         return;
     }
-    gSprites[sprite].pos2.x += gBattleAnimArgs[1];
-    gSprites[sprite].pos2.y += gBattleAnimArgs[2];
-    TASK.data[0] = sprite;
+
+    gSprites[spriteId].pos2.x += gBattleAnimArgs[1];
+    gSprites[spriteId].pos2.y += gBattleAnimArgs[2];
+    TASK.data[0] = spriteId;
     TASK.data[1] = 0;
     TASK.data[2] = gBattleAnimArgs[3];
     TASK.data[3] = 0;
     TASK.data[4] = gBattleAnimArgs[4];
     TASK.data[5] = gBattleAnimArgs[1] * 2;
     TASK.data[6] = gBattleAnimArgs[2] * 2;
-    TASK.func = sub_80A81D8;
-    sub_80A81D8(taskId);
+    TASK.func = AnimTask_ShakeMonInPlaceStep;
+    TASK.func(taskId);
 }
 
-static void sub_80A81D8(u8 taskId)
+static void AnimTask_ShakeMonInPlaceStep(u8 taskId)
 {
     if (TASK.data[3] == 0)
     {
@@ -302,7 +320,13 @@ static void sub_80A81D8(u8 taskId)
     }
 }
 
-void sub_80A8314(u8 taskId)
+// Shakes a mon bg horizontally and moves it downward linearly.
+// arg 0: battler
+// arg 1: x offset
+// arg 2: frame delay between each movement
+// arg 3: downward speed (subpixel)
+// arg 4: duration
+void AnimTask_ShakeAndSinkMon(u8 taskId)
 {
     u8 sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     gSprites[sprite].pos2.x = gBattleAnimArgs[1];
@@ -311,11 +335,11 @@ void sub_80A8314(u8 taskId)
     TASK.data[2] = gBattleAnimArgs[2];
     TASK.data[3] = gBattleAnimArgs[3];
     TASK.data[4] = gBattleAnimArgs[4];
-    TASK.func = sub_80A8374;
-    sub_80A8374(taskId);
+    TASK.func = AnimTask_ShakeAndSinkMonStep;
+    TASK.func(taskId);
 }
 
-static void sub_80A8374(u8 taskId)
+static void AnimTask_ShakeAndSinkMonStep(u8 taskId)
 {
     s16 x;
     u8 sprite;
@@ -325,11 +349,11 @@ static void sub_80A8374(u8 taskId)
     {
         TASK.data[8] = 0;
         if (gSprites[sprite].pos2.x == x)
-        {
             x = -x;
-        }
+
         gSprites[sprite].pos2.x += x;
     }
+
     TASK.data[1] = x;
     TASK.data[9] += TASK.data[3];
     gSprites[sprite].pos2.y = TASK.data[9] >> 8;
@@ -340,89 +364,109 @@ static void sub_80A8374(u8 taskId)
     }
 }
 
-void sub_80A8408(u8 taskId)
+// Moves a mon bg picture along an elliptical path that begins
+// and ends at the mon's origin location.
+// arg 0: battler
+// arg 1: ellipse width
+// arg 2: ellipse height
+// arg 3: num loops
+// arg 4: speed (valid values are 0-5)
+void AnimTask_TranslateMonElliptical(u8 taskId)
 {
     u8 i;
-    u8 sprite;
-    u8 v1;
-    v1 = 1;
-    sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    u8 spriteId;
+    u8 wavePeriod;
+
+    wavePeriod = 1;
+    spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
     if (gBattleAnimArgs[4] > 5)
-    {
         gBattleAnimArgs[4] = 5;
-    }
+
     for (i = 0; i < gBattleAnimArgs[4]; i++)
     {
-        v1 <<= 1;
+        wavePeriod <<= 1;
     }
-    TASK.data[0] = sprite;
+
+    TASK.data[0] = spriteId;
     TASK.data[1] = gBattleAnimArgs[1];
     TASK.data[2] = gBattleAnimArgs[2];
     TASK.data[3] = gBattleAnimArgs[3];
-    TASK.data[4] = v1;
+    TASK.data[4] = wavePeriod;
     TASK.func = sub_80A8488;
-    sub_80A8488(taskId);
+    TASK.func(taskId);
 }
 
 static void sub_80A8488(u8 taskId)
 {
-    u8 sprite;
-    sprite = TASK.data[0];
-    gSprites[sprite].pos2.x = Sin(TASK.data[5], TASK.data[1]);
-    gSprites[sprite].pos2.y = -Cos(TASK.data[5], TASK.data[2]);
-    gSprites[sprite].pos2.y += TASK.data[2];
+    u8 spriteId = TASK.data[0];
+    gSprites[spriteId].pos2.x = Sin(TASK.data[5], TASK.data[1]);
+    gSprites[spriteId].pos2.y = -Cos(TASK.data[5], TASK.data[2]);
+    gSprites[spriteId].pos2.y += TASK.data[2];
     TASK.data[5] += TASK.data[4];
     TASK.data[5] &= 0xff;
+
     if (TASK.data[5] == 0)
-    {
         TASK.data[3]--;
-    }
+
     if (TASK.data[3] == 0)
     {
-        gSprites[sprite].pos2.x = 0;
-        gSprites[sprite].pos2.y = 0;
+        gSprites[spriteId].pos2.x = 0;
+        gSprites[spriteId].pos2.y = 0;
         DestroyAnimVisualTask(taskId);
         return;
     }
 }
 
-void sub_80A8500(u8 taskId)
+// Moves a mon bg picture along an elliptical path that begins
+// and ends at the mon's origin location. Reverses the direction
+// of the path if it's not on the player's side of the battle.
+// arg 0: battler
+// arg 1: ellipse width
+// arg 2: ellipse height
+// arg 3: num loops
+// arg 4: speed (valid values are 0-5)
+void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 {
-    if (GetBankSide(gAnimBankAttacker))
-    {
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    }
-    sub_80A8408(taskId);
+
+    AnimTask_TranslateMonElliptical(taskId);
 }
 
-static void sub_80A8530(struct Sprite *sprite)
+// Performs a simple horizontal lunge, where the mon moves
+// horizontally, and then moves back in the opposite direction.
+// arg 0: duration of single lunge direction
+// arg 1: x pixel delta that is applied each frame
+static void DoHorizontalLunge(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (GetBankSide(gAnimBankAttacker))
-    {
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         sprite->data[1] = -gBattleAnimArgs[1];
-    }
     else
-    {
         sprite->data[1] = gBattleAnimArgs[1];
-    }
+
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[2] = 0;
-    sprite->data[3] = gObjectBankIDs[gAnimBankAttacker];
+    sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
     sprite->data[4] = gBattleAnimArgs[0];
-    StoreSpriteCallbackInData(sprite, sub_80A85A4);
-    sprite->callback = sub_8078458;
+    StoreSpriteCallbackInData(sprite, ReverseHorizontalLungeDirection);
+    sprite->callback = TranslateMonBGUntil;
 }
 
-static void sub_80A85A4(struct Sprite *sprite)
+static void ReverseHorizontalLungeDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[1] = -sprite->data[1];
-    sprite->callback = sub_8078458;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-static void sub_80A85C8(struct Sprite *sprite)
+// Performs a simple vertical dipping motion, where moves vertically, and then
+// moves back in the opposite direction.
+// arg 0: duration of single dip direction
+// arg 1: y pixel delta that is applied each frame
+// arg 2: battler
+static void DoVerticalDip(struct Sprite *sprite)
 {
     u8 spriteId;
     sprite->invisible = TRUE;
@@ -432,73 +476,72 @@ static void sub_80A85C8(struct Sprite *sprite)
     sprite->data[2] = gBattleAnimArgs[1];
     sprite->data[3] = spriteId;
     sprite->data[4] = gBattleAnimArgs[0];
-    StoreSpriteCallbackInData(sprite, sub_80A8614);
-    sprite->callback = sub_8078458;
+    StoreSpriteCallbackInData(sprite, ReverseVerticalDipDirection);
+    sprite->callback = TranslateMonBGUntil;
 }
 
-static void sub_80A8614(struct Sprite *sprite)
+static void ReverseVerticalDipDirection(struct Sprite *sprite)
 {
     sprite->data[0] = sprite->data[4];
     sprite->data[2] = -sprite->data[2];
-    sprite->callback = sub_8078458;
+    sprite->callback = TranslateMonBGUntil;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-static void sub_80A8638(struct Sprite *sprite)
+// Linearly slides a mon's bg picture back to its original sprite position.
+// The sprite parameter is a dummy sprite used for facilitating the movement with its callback.
+// arg 0: 1 = target or 0 = attacker
+// arg 1: direction (0 = horizontal and vertical, 1 = horizontal only, 2 = vertical only)
+// arg 2: duration
+static void SlideMonToOriginalPos(struct Sprite *sprite)
 {
     int something;
-    int spriteId;
+    int monSpriteId;
     if (!gBattleAnimArgs[0])
-    {
-        spriteId = gObjectBankIDs[gAnimBankAttacker];
-    }
+        monSpriteId = gBankSpriteIds[gAnimBankAttacker];
     else
-    {
-        spriteId = gObjectBankIDs[gAnimBankTarget];
-    }
+        monSpriteId = gBankSpriteIds[gAnimBankTarget];
+
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[1] = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-    sprite->data[2] = gSprites[spriteId].pos1.x;
-    sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
-    sprite->data[4] = gSprites[spriteId].pos1.y;
+    sprite->data[1] = gSprites[monSpriteId].pos1.x + gSprites[monSpriteId].pos2.x;
+    sprite->data[2] = gSprites[monSpriteId].pos1.x;
+    sprite->data[3] = gSprites[monSpriteId].pos1.y + gSprites[monSpriteId].pos2.y;
+    sprite->data[4] = gSprites[monSpriteId].pos1.y;
     something = 0;
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = something;
     sprite->data[4] = something;
-    sprite->data[5] = gSprites[spriteId].pos2.x;
-    sprite->data[6] = gSprites[spriteId].pos2.y;
+    sprite->data[5] = gSprites[monSpriteId].pos2.x;
+    sprite->data[6] = gSprites[monSpriteId].pos2.y;
     sprite->invisible = TRUE;
+
     if (gBattleAnimArgs[1] == 1)
-    {
         sprite->data[2] = something;
-    }
     else if (gBattleAnimArgs[1] == 2)
-    {
         sprite->data[1] = something;
-    }
+
     sprite->data[7] = gBattleAnimArgs[1];
-    sprite->data[7] |= spriteId << 8;
-    sprite->callback = sub_80A86F4;
+    sprite->data[7] |= monSpriteId << 8;
+    sprite->callback = SlideMonToOriginalPosStep;
 }
 
-static void sub_80A86F4(struct Sprite *sprite)
+static void SlideMonToOriginalPosStep(struct Sprite *sprite)
 {
-    s8 spriteId;
+    s8 monSpriteId;
     u8 lo;
-    struct Sprite *sprite2;
+    struct Sprite *monSprite;
+
     lo = sprite->data[7] & 0xff;
-    spriteId = sprite->data[7] >> 8;
-    sprite2 = &gSprites[spriteId];
+    monSpriteId = sprite->data[7] >> 8;
+    monSprite = &gSprites[monSpriteId];
     if (sprite->data[0] == 0)
     {
         if (lo < 2)
-        {
-            sprite2->pos2.x = 0;
-        }
+            monSprite->pos2.x = 0;
+
         if (lo == 2 || lo == 0)
-        {
-            sprite2->pos2.y = 0;
-        }
+            monSprite->pos2.y = 0;
+
         DestroyAnimSprite(sprite);
     }
     else
@@ -506,25 +549,30 @@ static void sub_80A86F4(struct Sprite *sprite)
         sprite->data[0]--;
         sprite->data[3] += sprite->data[1];
         sprite->data[4] += sprite->data[2];
-        sprite2->pos2.x = (s8)(sprite->data[3] >> 8) + sprite->data[5];
-        sprite2->pos2.y = (s8)(sprite->data[4] >> 8) + sprite->data[6];
+        monSprite->pos2.x = (s8)(sprite->data[3] >> 8) + sprite->data[5];
+        monSprite->pos2.y = (s8)(sprite->data[4] >> 8) + sprite->data[6];
     }
 }
 
-static void sub_80A8764(struct Sprite *sprite)
+// Linearly translates a mon to a target offset. The horizontal offset
+// is mirrored for the opponent's pokemon, and the vertical offset
+// is only mirrored if arg 3 is set to 1.
+// arg 0: 0 = attacker, 1 = target
+// arg 1: target x pixel offset
+// arg 2: target y pixel offset
+// arg 3: mirror vertical translation for opposite battle side
+// arg 4: duration
+static void SlideMonToOffset(struct Sprite *sprite)
 {
-    u8 v1;
-    u8 spriteId;
+    u8 battler;
+    u8 monSpriteId;
     if (!gBattleAnimArgs[0])
-    {
-        v1 = gAnimBankAttacker;
-    }
+        battler = gAnimBankAttacker;
     else
-    {
-        v1 = gAnimBankTarget;
-    }
-    spriteId = gObjectBankIDs[v1];
-    if (GetBankSide(v1))
+        battler = gAnimBankTarget;
+
+    monSpriteId = gBankSpriteIds[battler];
+    if (GetBankSide(battler) != SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[3] == 1)
@@ -532,18 +580,19 @@ static void sub_80A8764(struct Sprite *sprite)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         }
     }
+
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = gSprites[spriteId].pos1.x;
-    sprite->data[2] = gSprites[spriteId].pos1.x + gBattleAnimArgs[1];
-    sprite->data[3] = gSprites[spriteId].pos1.y;
-    sprite->data[4] = gSprites[spriteId].pos1.y + gBattleAnimArgs[2];
-    sub_8078A5C(sprite);
+    sprite->data[1] = gSprites[monSpriteId].pos1.x;
+    sprite->data[2] = gSprites[monSpriteId].pos1.x + gBattleAnimArgs[1];
+    sprite->data[3] = gSprites[monSpriteId].pos1.y;
+    sprite->data[4] = gSprites[monSpriteId].pos1.y + gBattleAnimArgs[2];
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = spriteId;
+    sprite->data[5] = monSpriteId;
     sprite->invisible = TRUE;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
-    sprite->callback = sub_80784A8;
+    sprite->callback = TranslateMonBGSubPixelUntil;
 }
 
 static void sub_80A8818(struct Sprite *sprite)
@@ -559,7 +608,7 @@ static void sub_80A8818(struct Sprite *sprite)
     {
         v1 = gAnimBankTarget;
     }
-    spriteId = gObjectBankIDs[v1];
+    spriteId = gBankSpriteIds[v1];
     if (GetBankSide(v1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -573,7 +622,7 @@ static void sub_80A8818(struct Sprite *sprite)
     sprite->data[2] = sprite->data[1] + gBattleAnimArgs[1];
     sprite->data[3] = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
     sprite->data[4] = sprite->data[3] + gBattleAnimArgs[2];
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = gSprites[spriteId].pos2.x << 8;
     sprite->data[4] = gSprites[spriteId].pos2.y << 8;
     sprite->data[5] = spriteId;
@@ -586,7 +635,7 @@ static void sub_80A8818(struct Sprite *sprite)
     {
         StoreSpriteCallbackInData(sprite, sub_80A88F0);
     }
-    sprite->callback = sub_80784A8;
+    sprite->callback = TranslateMonBGSubPixelUntil;
 }
 
 
@@ -668,7 +717,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gAnimBankAttacker ^ 2];
+        spriteId = gBankSpriteIds[gAnimBankAttacker ^ 2];
         break;
     case 3:
         if (!IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
@@ -676,7 +725,7 @@ void sub_80A8A80(u8 taskId)
             DestroyAnimVisualTask(taskId);
             return;
         }
-        spriteId = gObjectBankIDs[gAnimBankTarget ^ 2];
+        spriteId = gBankSpriteIds[gAnimBankTarget ^ 2];
         break;
     default:
         DestroyAnimVisualTask(taskId);
@@ -705,59 +754,67 @@ static void sub_80A8B3C(u8 taskId)
     }
 }
 
-void sub_80A8B88(u8 taskId)
+// Task that facilitates translating the mon bg picture back and forth
+// in a swaying motion (uses Sine wave). It can sway either horizontally
+// or vertically, but not both.
+// arg 0: direction (0 = horizontal, 1 = vertical)
+// arg 1: wave amplitude
+// arg 2: wave period
+// arg 3: num sways
+// arg 4: which mon (0 = attacker, 1`= target)
+void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
-    if (GetBankSide(gAnimBankAttacker))
-    {
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
-    }
+
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[4]);
     TASK.data[0] = gBattleAnimArgs[0];
     TASK.data[1] = gBattleAnimArgs[1];
     TASK.data[2] = gBattleAnimArgs[2];
     TASK.data[3] = gBattleAnimArgs[3];
     TASK.data[4] = spriteId;
+
     if (gBattleAnimArgs[4] == 0)
-    {
         TASK.data[5] = gAnimBankAttacker;
-    }
     else
-    {
         TASK.data[5] = gAnimBankTarget;
-    }
+
     TASK.data[12] = 1;
-    TASK.func = sub_80A8C0C;
+    TASK.func = AnimTask_SwayMonStep;
 }
 
-static void sub_80A8C0C(u8 taskId)
+static void AnimTask_SwayMonStep(u8 taskId)
 {
-    s16 y;
+    s16 sineValue;
     u8 spriteId;
-    int index;
-    u16 val;
+    int waveIndex;
+    u16 sineIndex;
+
     spriteId = TASK.data[4];
-    val = TASK.data[10] + TASK.data[2];
-    TASK.data[10] = val;
-    index = val >> 8;
-    y = Sin(index, TASK.data[1]);
+    sineIndex = TASK.data[10] + TASK.data[2];
+    TASK.data[10] = sineIndex;
+    waveIndex = sineIndex >> 8;
+    sineValue = Sin(waveIndex, TASK.data[1]);
+
     if (TASK.data[0] == 0)
     {
-        gSprites[spriteId].pos2.x = y;
+        gSprites[spriteId].pos2.x = sineValue;
     }
     else
     {
-        if (GetBankSide(TASK.data[5]) == 0)
+        if (GetBankSide(TASK.data[5]) == SIDE_PLAYER)
         {
-            gSprites[spriteId].pos2.y = (y >= 0) ? y : -y;
+            gSprites[spriteId].pos2.y = (sineValue >= 0) ? sineValue : -sineValue;
         }
         else
         {
-            gSprites[spriteId].pos2.y = (y >= 0) ? -y : y;
+            gSprites[spriteId].pos2.y = (sineValue >= 0) ? -sineValue : sineValue;
         }
     }
-    if (((index >= 0x80u) && (TASK.data[11] == 0) && (TASK.data[12] == 1))
-        || ((index < 0x7fu) && (TASK.data[11] == 1) && (TASK.data[12] == 0)))
+
+    if (((waveIndex >= 0x80u) && (TASK.data[11] == 0) && (TASK.data[12] == 1))
+        || ((waveIndex < 0x7fu) && (TASK.data[11] == 1) && (TASK.data[12] == 0)))
     {
         TASK.data[11] ^= 1;
         TASK.data[12] ^= 1;

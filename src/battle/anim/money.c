@@ -19,7 +19,7 @@ void sub_80CFE9C(struct Sprite* sprite)
     s16 r7;
     u16 var;
 
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     r6 = GetBankPosition(gAnimBankTarget, 2);
     r7 = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     if (GetBankSide(gAnimBankAttacker) != 0)

@@ -14,7 +14,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
@@ -69,7 +69,7 @@ static void sub_80DFC9C(u8 taskId)
         gTasks[taskId].data[2] = 0;
         if (r2 == 16)
         {
-            gSprites[gObjectBankIDs[gAnimBankAttacker]].invisible = 1;
+            gSprites[gBankSpriteIds[gAnimBankAttacker]].invisible = 1;
             DestroyAnimVisualTask(taskId);
         }
     }
@@ -128,7 +128,7 @@ void sub_80DFE14(struct Sprite *sprite)
     sprite->data[3] = GetBankPosition(gAnimBankTarget, 3);
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
     sprite->data[0] = 0x7E;
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = -sprite->data[1];
     sprite->data[4] = -sprite->data[2];
     sprite->data[6] = 0xFFD8;
@@ -244,7 +244,7 @@ void sub_80DFFD0(struct Sprite *sprite)
 
 static void sub_80E00D0(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
         move_anim_8074EE0(sprite);
 }
 
@@ -792,13 +792,13 @@ static void sub_80E08CC(u8 priority)
 void sub_80E0918(u8 taskId)
 {
     u8 toBG2 = GetBankIdentity_permutated(gAnimBankAttacker) ^ 1 ? 1 : 0;
-    sub_8076034(gAnimBankAttacker, toBG2);
-    gSprites[gObjectBankIDs[gAnimBankAttacker]].invisible = 0;
+    MoveBattlerSpriteToBG(gAnimBankAttacker, toBG2);
+    gSprites[gBankSpriteIds[gAnimBankAttacker]].invisible = 0;
 
     if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
     {
-        sub_8076034(gAnimBankAttacker ^ 2, toBG2 ^ 1);
-        gSprites[gObjectBankIDs[gAnimBankAttacker ^ 2]].invisible = 0;
+        MoveBattlerSpriteToBG(gAnimBankAttacker ^ 2, toBG2 ^ 1);
+        gSprites[gBankSpriteIds[gAnimBankAttacker ^ 2]].invisible = 0;
     }
 
     DestroyAnimVisualTask(taskId);
@@ -851,7 +851,7 @@ void sub_80E0A4C(u8 taskId)
         {
             if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2) == TRUE)
             {
-                gSprites[gObjectBankIDs[gAnimBankAttacker ^ 2]].oam.priority--;
+                gSprites[gBankSpriteIds[gAnimBankAttacker ^ 2]].oam.priority--;
                 REG_BG1CNT_BITFIELD.priority = 1;
                 var0 = 1;
             }
@@ -937,7 +937,7 @@ static void sub_80E0CD0(u8 taskId)
 
             if (gTasks[taskIdCopy].data[6] == 1)
             {
-                gSprites[gObjectBankIDs[gAnimBankAttacker ^ 2]].oam.priority++;
+                gSprites[gBankSpriteIds[gAnimBankAttacker ^ 2]].oam.priority++;
             }
             
             DestroyAnimVisualTask(taskIdCopy);
@@ -985,7 +985,7 @@ void sub_80E0E24(u8 taskId)
     {
         bank = GetBankByIdentity(identity);
         if (IsAnimBankSpriteVisible(bank))
-            spriteId = gObjectBankIDs[bank];
+            spriteId = gBankSpriteIds[bank];
         else
             spriteId = 0xFF;
     }

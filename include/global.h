@@ -65,6 +65,15 @@ enum
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// Credits to Made (dolphin emoji)
+#define S16TOPOSFLOAT(val)   \
+({                           \
+    s16 v = (val);           \
+    float f = (float)v;      \
+    if(v < 0) f += 65536.0f; \
+    f;                       \
+})
+
 enum
 {
     VERSION_SAPPHIRE = 1,

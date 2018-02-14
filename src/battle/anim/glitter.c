@@ -35,7 +35,7 @@ void sub_80CD190(struct Sprite* sprite)
 
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {
-        sub_807A3FC(bank, gBattleAnimArgs[6], &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(bank, gBattleAnimArgs[6], &sprite->pos1.x, &sprite->pos1.y);
         sub_807867C(sprite, gBattleAnimArgs[0]);
         sprite->pos1.y += gBattleAnimArgs[1];
     }

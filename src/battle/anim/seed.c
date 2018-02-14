@@ -15,7 +15,7 @@ static void sub_80CABC0(struct Sprite* sprite);
 
 void sub_80CAB18(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     if (GetBankSide(gAnimBankAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
@@ -31,7 +31,7 @@ void sub_80CAB18(struct Sprite* sprite)
 
 void sub_80CAB88(struct Sprite* sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         sprite->invisible = 1;
         sprite->data[0] = 10;

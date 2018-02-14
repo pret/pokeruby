@@ -2075,7 +2075,7 @@ _080D4B38: .4byte sub_80D4B3C
 sub_80D4B3C: @ 80D4B3C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4B96
@@ -2126,7 +2126,7 @@ _080D4BA0: .4byte sub_80D4BA4
 sub_80D4BA4: @ 80D4BA4
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4BE0
@@ -2264,7 +2264,7 @@ sub_80D4CA4: @ 80D4CA4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r5, _080D4CE0 @ =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
