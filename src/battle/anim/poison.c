@@ -17,7 +17,7 @@ void sub_80D9D70(struct Sprite *sprite)
     if (!gBattleAnimArgs[3])
         StartSpriteAnim(sprite, 2);
 
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
@@ -31,7 +31,7 @@ void sub_80D9D70(struct Sprite *sprite)
 
 void sub_80D9DD4(struct Sprite *sprite) // same as sub_80D9E78
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -41,8 +41,8 @@ void sub_80D9DF0(struct Sprite *sprite)
     if (!gBattleAnimArgs[3])
         StartSpriteAnim(sprite, 2);
 
-    sub_80787B0(sprite, 1);
-    sub_807A3FC(gAnimBankTarget, 1, &l1, &l2);
+    InitAnimSpritePos(sprite, 1);
+    SetAverageBattlerPositions(gAnimBankTarget, 1, &l1, &l2);
 
     if (GetBankSide(gAnimBankAttacker))
         gBattleAnimArgs[4] = -gBattleAnimArgs[4];
@@ -59,7 +59,7 @@ void sub_80D9DF0(struct Sprite *sprite)
 
 void sub_80D9E78(struct Sprite *sprite) // same as sub_80D9DD4
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -71,7 +71,7 @@ void sub_80D9E94(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[1];
 
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
 
     sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
     sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
@@ -92,7 +92,7 @@ void sub_80D9EE8(struct Sprite *sprite)
 
 void sub_80D9F14(struct Sprite *sprite)
 {
-    sub_807A3FC(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+    SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
     if (GetBankSide(gAnimBankAttacker))
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -104,7 +104,7 @@ void sub_80D9F14(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.y + sprite->data[0];
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -116,7 +116,7 @@ void sub_80D9F88(struct Sprite *sprite)
     }
     else
     {
-        sub_807A3FC(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
         if (GetBankSide(gAnimBankAttacker))
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];

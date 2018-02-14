@@ -53,7 +53,7 @@ void sub_80CBF5C(u8 taskId)
     {
     case 4:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
         {
             break;
         }
@@ -65,7 +65,7 @@ void sub_80CBF5C(u8 taskId)
         break;
     case 8:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
         {
             break;
         }
@@ -77,7 +77,7 @@ void sub_80CBF5C(u8 taskId)
         break;
     case 0:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
             break;
 
         task->data[15] = 1;
@@ -103,7 +103,7 @@ void sub_80CBF5C(u8 taskId)
         break;
     case 2:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
             break;
 
         task->data[15] = 3;
@@ -146,7 +146,7 @@ void sub_80CBF5C(u8 taskId)
         break;
     case 6:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
             break;
 
         task->data[15] = 7;
@@ -189,7 +189,7 @@ void sub_80CBF5C(u8 taskId)
         break;
     case 10:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) == 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) == 0)
         {
             break;
         }
@@ -221,7 +221,7 @@ void sub_80CBF5C(u8 taskId)
     }
     case 12:
         sub_80CC358(task, taskId);
-        if (sub_8078718(sprite) != 0)
+        if (TranslateAnimSpriteLinearAndSine(sprite) != 0)
         {
             DestroySprite(sprite);
             task->data[0]++;

@@ -87,7 +87,7 @@ void sub_80CFB04(u8 taskId)
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         && IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
     {
-        sub_807A3FC(gAnimBankTarget, 0, &sp1, &sp2);
+        SetAverageBattlerPositions(gAnimBankTarget, 0, &sp1, &sp2);
     }
     else
     {

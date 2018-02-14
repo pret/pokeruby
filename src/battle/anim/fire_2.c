@@ -42,7 +42,7 @@ struct Sprite *sub_80D5210(struct Sprite *sprite)
 
 void sub_80D522C(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     sprite->data[7] = gBattleAnimArgs[2];
     sprite->data[0] = 0;
@@ -62,7 +62,7 @@ void sub_80D5254(struct Sprite *sprite)
         sprite->data[3] = sprite->pos1.y;
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
-        obj_translate_based_on_private_1_2_3_4(sprite);
+        InitAnimSpriteTranslationDeltas(sprite);
 
         sprite->callback = sub_80D52AC;
     }
@@ -70,7 +70,7 @@ void sub_80D5254(struct Sprite *sprite)
 
 void sub_80D52AC(struct Sprite *sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
     {
         sprite->data[0] = 0;
 
@@ -123,7 +123,7 @@ void sub_80D5374(struct Sprite *sprite)
 
 void sub_80D53B4(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[3];

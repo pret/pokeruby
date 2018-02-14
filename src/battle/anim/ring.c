@@ -32,7 +32,7 @@ void sub_80D0FD8(struct Sprite* sprite)
     r4 = gBattleAnimArgs[3] ^ 1;
     if (IsDoubleBattle() && IsAnimBankSpriteVisible(bank ^ 2))
     {
-        sub_807A3FC(bank, r4, &sp0, &sp1);
+        SetAverageBattlerPositions(bank, r4, &sp0, &sp1);
         if (r4 == 0)
             r4 = GetBankPosition(bank, 0);
         else
@@ -50,7 +50,7 @@ void sub_80D0FD8(struct Sprite* sprite)
 
 void sub_80D1098(struct Sprite* sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
     {
         FreeSpriteOamMatrix(sprite);
         DestroyAnimSprite(sprite);
@@ -118,7 +118,7 @@ void sub_80D10B8(struct Sprite* sprite)
     r6 = GetBankPosition(bankr7, sp4) + gBattleAnimArgs[1];
     if (gMain.inBattle && IsAnimBankSpriteVisible(bankr8 ^ 2))
     {
-        sub_807A3FC(bankr8, gBattleAnimArgs[6], &sp0, &sp1);
+        SetAverageBattlerPositions(bankr8, gBattleAnimArgs[6], &sp0, &sp1);
     }
     else
     {
@@ -137,7 +137,7 @@ void sub_80D10B8(struct Sprite* sprite)
     sprite->data[2] = sp0;
     sprite->data[4] = sp1;
     sprite->data[0] = gBattleAnimArgs[0];
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
     sprite->callback = sub_80D1098;
     sub_80D1098(sprite);
 }

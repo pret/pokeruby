@@ -636,7 +636,7 @@ void unref_sub_8078414(struct Sprite *sprite)
     sprite->callback = sub_80782F8;
 }
 
-void sub_8078458(struct Sprite *sprite)
+void TranslateMonBGUntil(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -650,7 +650,9 @@ void sub_8078458(struct Sprite *sprite)
     }
 }
 
-void sub_80784A8(struct Sprite *sprite)
+// Same as TranslateMonBGUntil, but it operates on sub-pixel values
+// to handle slower translations.
+void TranslateMonBGSubPixelUntil(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -766,14 +768,14 @@ void sub_80786EC(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[6] = 0x8000 / sprite->data[0];
     sprite->data[7] = 0;
 }
 
-bool8 sub_8078718(struct Sprite *sprite)
+bool8 TranslateAnimSpriteLinearAndSine(struct Sprite *sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
         return TRUE;
     sprite->data[7] += sprite->data[6];
     sprite->pos2.y += Sin((u8)(sprite->data[7] >> 8), sprite->data[5]);
@@ -799,7 +801,7 @@ void sub_8078764(struct Sprite *sprite, bool8 a2)
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
-void sub_80787B0(struct Sprite *sprite, u8 a2)
+void InitAnimSpritePos(struct Sprite *sprite, u8 a2)
 {
     if (!a2)
     {
@@ -938,12 +940,12 @@ void sub_8078A34(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->callback = sub_80783D0;
     sprite->callback(sprite);
 }
 
-void sub_8078A5C(struct Sprite *sprite)
+void InitSpriteDataForLinearTranslation(struct Sprite *sprite)
 {
     s16 x = (sprite->data[2] - sprite->data[1]) << 8;
     s16 y = (sprite->data[4] - sprite->data[3]) << 8;
@@ -953,44 +955,44 @@ void sub_8078A5C(struct Sprite *sprite)
     sprite->data[3] = 0;
 }
 
-void obj_translate_based_on_private_1_2_3_4(struct Sprite *sprite)
+void InitAnimSpriteTranslationDeltas(struct Sprite *sprite)
 {
     int x = sprite->data[2] - sprite->data[1];
     int y = sprite->data[4] - sprite->data[3];
-    bool8 r8 = x < 0;
-    bool8 r9 = y < 0;
-    u16 x2 = abs(x) << 8;
-    u16 y2 = abs(y) << 8;
+    bool8 movingLeft = x < 0;
+    bool8 movingUp = y < 0;
+    u16 xDelta = abs(x) << 8;
+    u16 yDelta = abs(y) << 8;
 
-    x2 = x2 / sprite->data[0];
-    y2 = y2 / sprite->data[0];
+    xDelta = xDelta / sprite->data[0];
+    yDelta = yDelta / sprite->data[0];
 
-    if (r8)
-        x2 |= 1;
+    if (movingLeft)
+        xDelta |= 1;
     else
-        x2 &= ~1;
+        xDelta &= ~1;
 
-    if (r9)
-        y2 |= 1;
+    if (movingUp)
+        yDelta |= 1;
     else
-        y2 &= ~1;
+        yDelta &= ~1;
 
-    sprite->data[1] = x2;
-    sprite->data[2] = y2;
+    sprite->data[1] = xDelta;
+    sprite->data[2] = yDelta;
     sprite->data[4] = 0;
     sprite->data[3] = 0;
 }
 
-void sub_8078B34(struct Sprite *sprite)
+void StartTranslateAnimSpriteByDeltas(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    obj_translate_based_on_private_1_2_3_4(sprite);
-    sprite->callback = sub_8078BB8;
+    InitAnimSpriteTranslationDeltas(sprite);
+    sprite->callback = TranslateAnimSpriteByDeltasUntil;
     sprite->callback(sprite);
 }
 
-bool8 sub_8078B5C(struct Sprite *sprite)
+bool8 TranslateAnimSpriteByDeltas(struct Sprite *sprite)
 {
     u16 v1, v2, x, y;
 
@@ -1020,9 +1022,9 @@ bool8 sub_8078B5C(struct Sprite *sprite)
     return FALSE;
 }
 
-void sub_8078BB8(struct Sprite *sprite)
+void TranslateAnimSpriteByDeltasUntil(struct Sprite *sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
         SetCallbackToStoredInData(sprite);
 }
 
@@ -1030,7 +1032,7 @@ void sub_8078BD4(struct Sprite *sprite)
 {
     int v1 = abs(sprite->data[2] - sprite->data[1]) << 8;
     sprite->data[0] = v1 / sprite->data[0];
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
 }
 
 void sub_8078C00(struct Sprite *sprite)
@@ -1038,7 +1040,7 @@ void sub_8078C00(struct Sprite *sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sub_8078BD4(sprite);
-    sprite->callback = sub_8078BB8;
+    sprite->callback = TranslateAnimSpriteByDeltasUntil;
     sprite->callback(sprite);
 }
 
@@ -1380,7 +1382,7 @@ void sub_80793C4(struct Sprite *sprite)
         else
             var = FALSE;
         if (!gBattleAnimArgs[2])
-            sub_80787B0(sprite, var);
+            InitAnimSpritePos(sprite, var);
         else
             sub_8078764(sprite, var);
         sprite->data[0]++;
@@ -1392,7 +1394,15 @@ void sub_80793C4(struct Sprite *sprite)
     }
 }
 
-void sub_807941C(struct Sprite *sprite)
+// Linearly translates a sprite to a target position on the
+// other mon's sprite.
+// arg 0: initial x offset
+// arg 1: initial y offset
+// arg 2: target x offset
+// arg 3: target y offset
+// arg 4: duration
+// arg 5: lower 8 bits = location on attacking mon, upper 8 bits = location on target mon pick to target
+void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 {
     bool8 v1;
     u8 v2;
@@ -1407,19 +1417,20 @@ void sub_807941C(struct Sprite *sprite)
     else
         v2 = 1;
 
-    sub_80787B0(sprite, v1);
-    if (GetBankSide(gAnimBankAttacker))
+    InitAnimSpritePos(sprite, v1);
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, v2) + gBattleAnimArgs[3];
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 void sub_80794A8(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     if (GetBankSide(gAnimBankAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
@@ -1432,7 +1443,7 @@ void sub_80794A8(struct Sprite *sprite)
 
 void sub_8079518(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -1452,7 +1463,7 @@ void sub_8079534(struct Sprite *sprite)
     }
     if (!gBattleAnimArgs[5])
     {
-        sub_80787B0(sprite, r4);
+        InitAnimSpritePos(sprite, r4);
         slot = gAnimBankAttacker;
     }
     else
@@ -1466,7 +1477,7 @@ void sub_8079534(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBankPosition(slot, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(slot, r7) + gBattleAnimArgs[3];
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -2107,7 +2118,7 @@ s16 sub_807A100(u8 slot, u8 a2)
     }
 }
 
-void sub_807A3FC(u8 slot, bool8 a2, s16 *a3, s16 *a4)
+void SetAverageBattlerPositions(u8 slot, bool8 a2, s16 *x, s16 *y)
 {
     u8 v1, v2;
     s16 v3, v4;
@@ -2135,8 +2146,8 @@ void sub_807A3FC(u8 slot, bool8 a2, s16 *a3, s16 *a4)
         v5 = v3;
         v6 = v4;
     }
-    *a3 = (v3 + v5) / 2;
-    *a4 = (v4 + v6) / 2;
+    *x = (v3 + v5) / 2;
+    *y = (v4 + v6) / 2;
 }
 
 u8 sub_807A4A0(int bank, u8 sprite, int species)
@@ -2338,6 +2349,6 @@ void sub_807A9BC(struct Sprite *sprite)
         sprite->pos1.x += x;
         sprite->pos1.y = gBattleAnimArgs[5] - 80;
     }
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
