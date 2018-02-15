@@ -660,6 +660,7 @@ u8 ItemId_GetImportance(u16 itemId)
     return gItems[SanitizeItemId(itemId)].importance;
 }
 
+// unused
 u8 ItemId_GetUnknownValue(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].unk19;

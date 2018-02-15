@@ -1359,7 +1359,6 @@ void c2_081284E0(void)
     }
 }
 
-// A LOT of debug code!
 #if DEBUG
 
 extern u8 gUnknown_Debug_2023B62[];
@@ -1390,7 +1389,6 @@ u32 debug_sub_8013294(u8, void *, u32);
 void debug_sub_80132C8(u8, void *, u32);
 
 extern s16 gUnknown_Debug_2023A76[][0x23];
-extern s16 gUnknown_Debug_2023A76_[][7][5];
 extern s16 gUnknown_Debug_2023B02[][6][4];
 extern u8 gUnknown_Debug_03004360;
 extern struct Window gUnknown_Debug_03004370;
@@ -1502,31 +1500,6 @@ void debug_sub_8010A7C(u8 a, u8 b)
     gBattleTextBuff1[i] = EOS;
 }
 
-// gUnknown_Debug_2023A76_ seems like a 3D array, but this function refuses to match when I do that.
-#ifdef NONMATCHING
-void debug_sub_8010AAC(u8 a)
-{
-	switch (gBaseStats[gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][0]].genderRatio)
-	{
-	case 0:
-		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 2;
-		break;
-	case 0xFE:
-		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 3;
-		break;
-	case 0xFF:
-		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 4;
-		break;
-	default:
-		gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] &= 1;
-		if (a != 0)
-			gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] ^= 1;
-		else
-			gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][4] = 0;
-		break;
-	}
-}
-#else
 void debug_sub_8010AAC(u8 a)
 {
 	switch (gBaseStats[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5]].genderRatio)
@@ -1549,12 +1522,12 @@ void debug_sub_8010AAC(u8 a)
 		break;
 	}
 }
-#endif
 
+// gUnknown_Debug_2023A76 2D array
 void debug_sub_8010B80(u8 a)
 {
 	s8 r12 = 0;
-	s8 r7 = gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0];
+	s8 r7 = gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5];
 
 	while (r7 >= 10)
 	{
@@ -1584,10 +1557,318 @@ void debug_sub_8010B80(u8 a)
 		if (r7 > 9)
 			r7 = 1;
 	}
-	gUnknown_Debug_2023A76_[gUnknown_Debug_03004360 ^ 1][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0]
-	= gUnknown_Debug_2023A76_[gUnknown_Debug_03004360][gUnknown_Debug_030043A4][gUnknown_Debug_030043A0]
+	gUnknown_Debug_2023A76[gUnknown_Debug_03004360 ^ 1][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]
+	= gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]
 	= r12 * 10 + r7;
 }
+
+// For some unexplainable reason, code in various functions will cause SetActionsAndBanksTurnOrder,
+// a completely separate and unrelated function, to use different registers. I have
+// absolutely no clue as to why this phenomenon occurs. For example,
+// I have to make debug_sub_8010CAC access gUnknown_Debug_2023A76 as a 3D array.
+// If I use a 2D array, SetActionsAndBanksTurnOrder will no longer match.
+#ifdef NONMATCHING
+void debug_sub_8010CAC(void)
+{
+    s32 r5;
+
+    if (gMain.heldKeysRaw == (L_BUTTON | SELECT_BUTTON))
+        DoSoftReset();
+    if (gMain.newKeysRaw == SELECT_BUTTON)
+    {
+        if (gUnknown_Debug_030043A4 < 6)
+        {
+            gUnknown_Debug_030043A8 = 0;
+            debug_sub_8012628();
+            SetMainCallback2(debug_sub_8011498);
+        }
+        if (gUnknown_Debug_030043A0 == 0 && gUnknown_Debug_030043A4 == 6)
+        {
+            gMain.savedCallback = debug_sub_80108B8;
+            CreateMon(
+              &gPlayerParty[0],
+              gUnknown_Debug_2023A76[0][0 * 5 + 0],
+              gUnknown_Debug_2023A76[0][0 * 5 + 1],
+              32,
+              0, 0, 0, 0);
+            for (r5 = 0; r5 < 4; r5++)
+            {
+                SetMonData(&gPlayerParty[0], MON_DATA_MOVE1 + r5, &gUnknown_Debug_2023B02[0][0][r5]);
+                SetMonData(&gPlayerParty[0], MON_DATA_PP1 + r5, &gBattleMoves[gUnknown_Debug_2023B02[0][0][r5]].pp);
+            }
+            switch (gUnknown_Debug_2023A76[0][6 * 5 + 0])
+            {
+            case 1:
+                gCB2_AfterEvolution = debug_sub_80108B8;
+                EvolutionScene(&gPlayerParty[0], gUnknown_Debug_2023A76[0][1 * 5 + 0], 1, 0);
+                break;
+            case 2:
+                debug_sub_8012688();
+                break;
+            }
+        }
+        if (gUnknown_Debug_030043A0 == 1 && gUnknown_Debug_030043A4 == 6)
+        {
+            // This is really weird
+            r5 = (gSaveBlock2.optionsBattleSceneOff | (gSaveBlock2.optionsSound << 1));
+            r5++;
+            if (r5 == 4)
+                r5 = 0;
+            gSaveBlock2.optionsBattleSceneOff = (r5 & 1);
+            gSaveBlock2.optionsSound = (r5 & 2) >> 1;
+            SetPokemonCryStereo(gSaveBlock2.optionsSound);
+            debug_nullsub_3();
+        }
+    }
+    if (gMain.newKeysRaw == START_BUTTON)
+        debug_sub_801174C();
+    if (gMain.newKeysRaw == DPAD_UP)
+    {
+        debug_sub_80125E4();
+        if (gUnknown_Debug_030043A4 != 0)
+            gUnknown_Debug_030043A4--;
+        else
+            gUnknown_Debug_030043A4 = 6;
+        debug_sub_8011E74();
+        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+        debug_sub_80125A0();
+    }
+    if (gMain.newKeysRaw == DPAD_DOWN)
+    {
+        debug_sub_80125E4();
+        if (gUnknown_Debug_030043A4 == 6)
+            gUnknown_Debug_030043A4 = 0;
+        else
+            gUnknown_Debug_030043A4++;
+        debug_sub_8011E74();
+        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+        debug_sub_80125A0();
+    }
+    if (gMain.newKeysRaw == DPAD_LEFT)
+    {
+        debug_sub_80125E4();
+        if (gUnknown_Debug_030043A0 != 0)
+        {
+            gUnknown_Debug_030043A0--;
+        }
+        else
+        {
+            if (gUnknown_Debug_03004360 != 0)
+            {
+                gUnknown_Debug_03004360 = 0;
+                gUnknown_Debug_030043A0 = 4;
+                gBattle_BG1_X = 0;
+                debug_sub_8011E5C();
+                debug_sub_8011E74();
+                debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            }
+        }
+        debug_sub_80125A0();
+    }
+    if (gMain.newKeysRaw == DPAD_RIGHT)
+    {
+        debug_sub_80125E4();
+        if (gUnknown_Debug_030043A0 != 4)
+        {
+            gUnknown_Debug_030043A0++;
+        }
+        else
+        {
+            if (gUnknown_Debug_03004360 == 0)
+            {
+                gUnknown_Debug_03004360 = 1;
+                gUnknown_Debug_030043A0 = 0;
+                gBattle_BG1_X = 0x100;
+                debug_sub_8011E5C();
+                debug_sub_8011E74();
+                debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            }
+        }
+        debug_sub_80125A0();
+    }
+    if (gMain.newAndRepeatedKeys & B_BUTTON)
+    {
+        switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
+        {
+        case 31:
+            debug_sub_8010818();
+            debug_sub_8011E5C();
+            debug_sub_8011E74();
+            debug_sub_8012540();
+            debug_nullsub_3();
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        case 32:
+            debug_sub_80132C8(31, gUnknown_Debug_2023A76, 0xEC);
+            debug_sub_8011E5C();
+            debug_sub_8011E74();
+            debug_sub_8012540();
+            debug_nullsub_3();
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        case 33:
+            debug_sub_8013294(31, gUnknown_Debug_2023A76, 0xEC);
+            break;
+        case 34:
+            if (gUnknown_Debug_2023A76[0][6 * 5 + 4] != 0)
+            {
+                gUnknown_Debug_2023A76[0][6 * 5 + 4]--;
+                gUnknown_Debug_2023A76[1][6 * 5 + 4]--;
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[0][6 * 5 + 4] = 8;
+                gUnknown_Debug_2023A76[1][6 * 5 + 4] = 8;
+            }
+            debug_sub_8012540();
+            break;
+        case 30:
+            debug_sub_8010B80(0);
+            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
+            break;
+        default:
+            if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
+            {
+                debug_sub_8010AAC(1);
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]--;
+                if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5] < gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4])
+                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5] = gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
+            }
+            if (gUnknown_Debug_030043A0 == 0)
+            {
+                debug_sub_8010AAC(0);
+                debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
+            }
+            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        }
+    }
+    if (gMain.newAndRepeatedKeys & A_BUTTON)
+    {
+        switch (gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5)
+        {
+        case 31:
+            debug_sub_8010818();
+            debug_sub_8011E5C();
+            debug_sub_8011E74();
+            debug_sub_8012540();
+            debug_nullsub_3();
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        case 32:
+            debug_sub_80132C8(31, gUnknown_Debug_2023A76, 0xEC);
+            debug_sub_8011E5C();
+            debug_sub_8011E74();
+            debug_sub_8012540();
+            debug_nullsub_3();
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        case 33:
+            debug_sub_8013294(31, gUnknown_Debug_2023A76, 0xEC);
+            break;
+        case 34:
+            if (gUnknown_Debug_2023A76[0][6 * 5 + 4] < 8)
+            {
+                gUnknown_Debug_2023A76[0][6 * 5 + 4]++;
+                gUnknown_Debug_2023A76[1][6 * 5 + 4]++;
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[0][6 * 5 + 4] = 0;
+                gUnknown_Debug_2023A76[1][6 * 5 + 4] = 0;
+            }
+            debug_sub_8012540();
+            break;
+        case 30:
+            debug_sub_8010B80(1);
+            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
+            break;
+        default:
+            if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
+            {
+                debug_sub_8010AAC(1);
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]++;
+                if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] > gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3])
+                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] = gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4];
+            }
+            if (gUnknown_Debug_030043A0 == 0)
+            {
+                debug_sub_8010AAC(0);
+                debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
+            }
+            debug_sub_8011EA0(gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5);
+            debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+            break;
+        }
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
+        {
+            debug_sub_8010AAC(1);
+        }
+        else
+        {
+            if (gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0 == 30)
+            {
+                debug_sub_8010B80(2);
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] -= 10;
+                while (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] < gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][4])
+                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] += gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
+            }
+        }
+        if (gUnknown_Debug_030043A0 == 0)
+        {
+            debug_sub_8010AAC(0);
+            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
+        }
+        debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
+        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (gUnknown_Debug_030043A0 == 4 && gUnknown_Debug_030043A4 < 6)
+        {
+            debug_sub_8010AAC(1);
+        }
+        else
+        {
+            if (gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0 == 30)
+            {
+                debug_sub_8010B80(3);
+            }
+            else
+            {
+                gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] += 10;
+                while (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] > gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3])
+                    gUnknown_Debug_2023A76[gUnknown_Debug_03004360][gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0] -= gUnknown_Debug_821F424[gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0][3];
+            }
+        }
+        if (gUnknown_Debug_030043A0 == 0)
+        {
+            debug_sub_8010AAC(0);
+            debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + 4);
+        }
+        debug_sub_8011EA0(gUnknown_Debug_030043A4 * 5 + gUnknown_Debug_030043A0);
+        debug_sub_80123D8(gUnknown_Debug_030043A4 * 5);
+    }
+    AnimateSprites();
+    BuildOamBuffer();
+}
+#else
+
+// 3D array
+extern s16 gUnknown_Debug_2023A76_[][7][5];
 
 void debug_sub_8010CAC(void)
 {
@@ -1886,6 +2167,7 @@ void debug_sub_8010CAC(void)
     AnimateSprites();
     BuildOamBuffer();
 }
+#endif
 
 extern u16 gUnknown_Debug_821F564[][5];
 
@@ -2424,304 +2706,91 @@ void debug_sub_8012294(void)
     }
 }
 
-__attribute__((naked))
+extern const u16 gUnknown_Debug_821F58C[];
+
 void debug_sub_80123D8(u8 a)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	cmp	r5, #0x1d\n"
-        "	bhi	._856	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x12\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r4, ._858       @ gUnknown_Debug_03004370\n"
-        "	ldr	r0, ._858 + 4   @ gBattleTextBuff1\n"
-        "	mov	r8, r0\n"
-        "	ldr	r6, ._858 + 8   @ gUnknown_Debug_821F58C\n"
-        "	ldrh	r1, [r6]\n"
-        "	mov	sl, r1\n"
-        "	ldrb	r7, [r6, #0x2]\n"
-        "	ldrb	r2, [r6, #0x4]\n"
-        "	mov	r9, r2\n"
-        "	str	r2, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, r8\n"
-        "	mov	r2, sl\n"
-        "	add	r3, r7, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	lsl	r5, r5, #0x1\n"
-        "	ldr	r1, ._858 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r2, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r0, r5, r0\n"
-        "	ldr	r1, ._858 + 16  @ gUnknown_Debug_2023A76\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r0, r2]\n"
-        "	lsl	r0, r1, #0x3\n"
-        "	sub	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._858 + 20  @ gBaseStats\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0, #0x16]\n"
-        "	mov	r2, #0xd\n"
-        "	add	r1, r0, #0\n"
-        "	mul	r1, r1, r2\n"
-        "	ldr	r0, ._858 + 24  @ gAbilityNames\n"
-        "	add	r1, r1, r0\n"
-        "	mov	r0, r8\n"
-        "	bl	StringCopy\n"
-        "	mov	r1, r9\n"
-        "	str	r1, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, r8\n"
-        "	mov	r2, sl\n"
-        "	add	r3, r7, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x12\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldrh	r2, [r6, #0x6]\n"
-        "	mov	r9, r2\n"
-        "	ldrb	r0, [r6, #0x8]\n"
-        "	mov	sl, r0\n"
-        "	ldrb	r6, [r6, #0xa]\n"
-        "	str	r6, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, r8\n"
-        "	mov	r3, sl\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._858 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r2, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r5, r5, r0\n"
-        "	ldr	r0, ._858 + 16  @ gUnknown_Debug_2023A76\n"
-        "	add	r5, r5, r0\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r5, r2]\n"
-        "	lsl	r0, r1, #0x3\n"
-        "	sub	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._858 + 20  @ gBaseStats\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0, #0x17]\n"
-        "	mov	r2, #0xd\n"
-        "	add	r1, r0, #0\n"
-        "	mul	r1, r1, r2\n"
-        "	ldr	r0, ._858 + 24  @ gAbilityNames\n"
-        "	add	r1, r1, r0\n"
-        "	mov	r0, r8\n"
-        "	bl	StringCopy\n"
-        "	str	r6, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, r8\n"
-        "	mov	r2, r9\n"
-        "	mov	r3, sl\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	b	._857\n"
-        "._859:\n"
-        "	.align	2, 0\n"
-        "._858:\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F58C\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gBaseStats\n"
-        "	.word	gAbilityNames\n"
-        "._856:\n"
-        "	ldr	r6, ._860       @ gBattleTextBuff1\n"
-        "	ldr	r1, ._860 + 4   @ gAbilityNames\n"
-        "	add	r0, r6, #0\n"
-        "	bl	StringCopy\n"
-        "	ldr	r5, ._860 + 8   @ gUnknown_Debug_03004370\n"
-        "	ldr	r4, ._860 + 12  @ gUnknown_Debug_821F58C\n"
-        "	ldrh	r2, [r4]\n"
-        "	ldrb	r3, [r4, #0x2]\n"
-        "	ldrb	r0, [r4, #0x4]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldrh	r2, [r4, #0x6]\n"
-        "	ldrb	r3, [r4, #0x8]\n"
-        "	ldrb	r0, [r4, #0xa]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "._857:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._861:\n"
-        "	.align	2, 0\n"
-        "._860:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gAbilityNames\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_821F58C\n"
-        "\n"
-    );
+    if (a < 30)
+    {
+        debug_sub_8010A7C(0, 18);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[0],
+            gUnknown_Debug_821F58C[1],
+            gUnknown_Debug_821F58C[2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        StringCopy(gBattleTextBuff1, gAbilityNames[gBaseStats[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]].ability1]);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[0],
+            gUnknown_Debug_821F58C[1],
+            gUnknown_Debug_821F58C[2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        debug_sub_8010A7C(0, 18);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[3],
+            gUnknown_Debug_821F58C[4],
+            gUnknown_Debug_821F58C[5]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        StringCopy(gBattleTextBuff1, gAbilityNames[gBaseStats[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]].ability2]);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[3],
+            gUnknown_Debug_821F58C[4],
+            gUnknown_Debug_821F58C[5]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+    }
+    else
+    {
+        StringCopy(gBattleTextBuff1, gAbilityNames[0]);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[0],
+            gUnknown_Debug_821F58C[1],
+            gUnknown_Debug_821F58C[2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F58C[3],
+            gUnknown_Debug_821F58C[4],
+            gUnknown_Debug_821F58C[5]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+    }
 }
 
-__attribute__((naked))
-void debug_sub_8012540()
+void debug_sub_8012540(void)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r5, ._862       @ gBattleTextBuff1\n"
-        "	ldr	r0, ._862 + 4   @ gUnknown_Debug_2023A76\n"
-        "	add	r0, r0, #0x44\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r0, r2]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	ldr	r4, ._862 + 8   @ gUnknown_Debug_03004370\n"
-        "	ldr	r1, ._862 + 12  @ gUnknown_Debug_821F424\n"
-        "	mov	r3, #0x9b\n"
-        "	lsl	r3, r3, #0x1\n"
-        "	add	r0, r1, r3\n"
-        "	ldrh	r2, [r0]\n"
-        "	mov	r6, #0x9c\n"
-        "	lsl	r6, r6, #0x1\n"
-        "	add	r0, r1, r6\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r6, r6, #0x2\n"
-        "	add	r0, r1, r6\n"
-        "	ldrb	r0, [r0]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._863:\n"
-        "	.align	2, 0\n"
-        "._862:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "\n"
-    );
+    ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023A76[0][0x22], 0, 1);
+    Text_InitWindow(
+        &gUnknown_Debug_03004370,
+        gBattleTextBuff1,
+        gUnknown_Debug_821F424[31][0],
+        gUnknown_Debug_821F424[31][1],
+        gUnknown_Debug_821F424[31][2]);
+    Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
 }
 
 void debug_nullsub_3(void)
 {
 }
 
-__attribute__((naked))
-void debug_sub_80125A0()
+extern const u32 gUnknown_Debug_821F680[][0x23];
+
+void debug_sub_80125A0(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r4, ._864       @ gSharedMem\n"
-        "	ldr	r3, ._864 + 4   @ gUnknown_Debug_821F680\n"
-        "	ldr	r2, ._864 + 8   @ gUnknown_Debug_030043A0\n"
-        "	ldr	r0, ._864 + 12  @ gUnknown_Debug_030043A4\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r2, [r2]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._864 + 16  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r1]\n"
-        "	mov	r1, #0x8c\n"
-        "	mul	r1, r1, r2\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, r3\n"
-        "	ldr	r0, [r0]\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x6d\n"
-        "	strb	r1, [r0]\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._865:\n"
-        "	.align	2, 0\n"
-        "._864:\n"
-        "	.word	gSharedMem\n"
-        "	.word	gUnknown_Debug_821F680\n"
-        "	.word	gUnknown_Debug_030043A0\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "\n"
-    );
+    gSharedMem[gUnknown_Debug_821F680[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]] = 0x6D;
 }
 
-__attribute__((naked))
-void debug_sub_80125E4()
+void debug_sub_80125E4(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r4, ._866       @ gSharedMem\n"
-        "	ldr	r3, ._866 + 4   @ gUnknown_Debug_821F680\n"
-        "	ldr	r2, ._866 + 8   @ gUnknown_Debug_030043A0\n"
-        "	ldr	r0, ._866 + 12  @ gUnknown_Debug_030043A4\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r2, [r2]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._866 + 16  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r1]\n"
-        "	mov	r1, #0x8c\n"
-        "	mul	r1, r1, r2\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, r3\n"
-        "	ldr	r0, [r0]\n"
-        "	add	r0, r0, r4\n"
-        "	mov	r1, #0x81\n"
-        "	strb	r1, [r0]\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._867:\n"
-        "	.align	2, 0\n"
-        "._866:\n"
-        "	.word	gSharedMem\n"
-        "	.word	gUnknown_Debug_821F680\n"
-        "	.word	gUnknown_Debug_030043A0\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "\n"
-    );
+    gSharedMem[gUnknown_Debug_821F680[gUnknown_Debug_03004360][gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5]] = 0x81;
 }
 
 void debug_sub_8012628(void)
@@ -6043,351 +6112,6 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     return strikesFirst;
 }
 
-// The debug version should be identical, but has a strange register swap, and
-// seems to be affected by other functions, which is bizarre.
-#if DEBUG
-__attribute__((naked))
-void SetActionsAndBanksTurnOrder(void)
-{
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, sl\n\
-	mov	r6, r9\n\
-	mov	r5, r8\n\
-	push	{r5, r6, r7}\n\
-	mov	r3, #0x0\n\
-	ldr	r0, ._L1550\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._L1499	@cond_branch\n\
-	ldr	r0, ._L1550+0x4\n\
-	strb	r3, [r0]\n\
-	ldr	r4, ._L1550+0x8\n\
-	mov	r8, r0\n\
-	ldrb	r0, [r4]\n\
-	cmp	r3, r0\n\
-	bcc	._LCB12758\n\
-	b	._L1505	@long jump\n\
-._LCB12758:\n\
-	ldr	r7, ._L1550+0xc\n\
-	ldr	r6, ._L1550+0x10\n\
-	mov	r2, r8\n\
-	ldr	r5, ._L1550+0x14\n\
-._L1503:\n\
-	add	r1, r3, r7\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, r6\n\
-	ldrb	r0, [r0]\n\
-	strb	r0, [r1]\n\
-	add	r1, r3, r5\n\
-	ldrb	r0, [r2]\n\
-	strb	r0, [r1]\n\
-	add	r3, r3, #0x1\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r2]\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldrb	r1, [r4]\n\
-	cmp	r0, r1\n\
-	bcc	._L1503	@cond_branch\n\
-	b	._L1505\n\
-._L1551:\n\
-	.align	2, 0\n\
-._L1550:\n\
-	.word	gBattleTypeFlags\n\
-	.word	gActiveBank\n\
-	.word	gNoOfAllBanks\n\
-	.word	gActionsByTurnOrder\n\
-	.word	gActionForBanks\n\
-	.word	gBanksByTurnOrder\n\
-._L1499:\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._L1506	@cond_branch\n\
-	ldr	r0, ._L1552\n\
-	strb	r3, [r0]\n\
-	ldr	r1, ._L1552+0x4\n\
-	mov	r8, r0\n\
-	add	r2, r1, #0\n\
-	ldrb	r2, [r2]\n\
-	cmp	r3, r2\n\
-	bcs	._L1513	@cond_branch\n\
-	ldr	r0, ._L1552+0x8\n\
-	ldrb	r1, [r0]\n\
-	add	r4, r0, #0\n\
-	cmp	r1, #0x3\n\
-	beq	._L1548	@cond_branch\n\
-._L1509:\n\
-	mov	r7, r8\n\
-	ldrb	r0, [r7]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r7]\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r1, ._L1552+0x4\n\
-	ldrb	r1, [r1]\n\
-	cmp	r0, r1\n\
-	bcs	._L1513	@cond_branch\n\
-	ldrb	r0, [r7]\n\
-	add	r0, r0, r4\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x3\n\
-	bne	._L1509	@cond_branch\n\
-	b	._L1548\n\
-._L1553:\n\
-	.align	2, 0\n\
-._L1552:\n\
-	.word	gActiveBank\n\
-	.word	gNoOfAllBanks\n\
-	.word	gActionForBanks\n\
-._L1506:\n\
-	ldr	r0, ._L1554\n\
-	ldrb	r0, [r0]\n\
-	ldr	r2, ._L1554+0x4\n\
-	mov	r8, r2\n\
-	cmp	r0, #0x3\n\
-	bne	._L1513	@cond_branch\n\
-	strb	r3, [r2]\n\
-._L1548:\n\
-	mov	r3, #0x5\n\
-._L1513:\n\
-	cmp	r3, #0x5\n\
-	bne	._L1515	@cond_branch\n\
-	ldr	r6, ._L1554+0x8\n\
-	ldr	r1, ._L1554\n\
-	mov	r3, r8\n\
-	ldrb	r0, [r3]\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	strb	r0, [r6]\n\
-	ldr	r2, ._L1554+0xc\n\
-	ldrb	r0, [r3]\n\
-	strb	r0, [r2]\n\
-	mov	r3, #0x1\n\
-	mov	r5, #0x0\n\
-	add	r4, r1, #0\n\
-	ldr	r7, ._L1554+0x10\n\
-	mov	r9, r7\n\
-	ldr	r0, ._L1554+0x14\n\
-	mov	ip, r0\n\
-	ldr	r1, ._L1554+0x18\n\
-	mov	sl, r1\n\
-	ldr	r7, ._L1554+0x1c\n\
-	ldrb	r7, [r7]\n\
-	cmp	r5, r7\n\
-	bge	._L1517	@cond_branch\n\
-	add	r7, r6, #0\n\
-	add	r6, r4, #0\n\
-	add	r4, r2, #0\n\
-	ldr	r2, ._L1554+0x1c\n\
-._L1519:\n\
-	mov	r0, r8\n\
-	ldrb	r0, [r0]\n\
-	cmp	r5, r0\n\
-	beq	._L1518	@cond_branch\n\
-	add	r1, r3, r7\n\
-	add	r0, r5, r6\n\
-	ldrb	r0, [r0]\n\
-	strb	r0, [r1]\n\
-	add	r0, r3, r4\n\
-	strb	r5, [r0]\n\
-	add	r3, r3, #0x1\n\
-._L1518:\n\
-	add	r5, r5, #0x1\n\
-	ldrb	r1, [r2]\n\
-	cmp	r5, r1\n\
-	blt	._L1519	@cond_branch\n\
-._L1517:\n\
-	mov	r2, ip\n\
-	mov	r3, r9\n\
-	str	r2, [r3]\n\
-	ldr	r1, ._L1554+0x20\n\
-	add	r1, r1, sl\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r1]\n\
-	b	._L1498\n\
-._L1555:\n\
-	.align	2, 0\n\
-._L1554:\n\
-	.word	gActionForBanks\n\
-	.word	gActiveBank\n\
-	.word	gActionsByTurnOrder\n\
-	.word	gBanksByTurnOrder\n\
-	.word	gBattleMainFunc\n\
-	.word	CheckFocusPunch_ClearVarsBeforeTurnStarts\n\
-	.word	gSharedMem\n\
-	.word	gNoOfAllBanks\n\
-	.word	0x1601d\n\
-._L1515:\n\
-	mov	r0, #0x0\n\
-	mov	r7, r8\n\
-	strb	r0, [r7]\n\
-	ldr	r1, ._L1556\n\
-	ldrb	r0, [r1]\n\
-	cmp	r0, #0\n\
-	beq	._L1524	@cond_branch\n\
-	ldr	r6, ._L1556+0x4\n\
-	mov	r2, r8\n\
-	ldr	r5, ._L1556+0x8\n\
-	ldr	r4, ._L1556+0xc\n\
-._L1526:\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, r6\n\
-	ldrb	r1, [r0]\n\
-	sub	r0, r1, #0x1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bhi	._L1525	@cond_branch\n\
-	add	r0, r3, r5\n\
-	strb	r1, [r0]\n\
-	add	r1, r3, r4\n\
-	mov	r7, r8\n\
-	ldrb	r0, [r7]\n\
-	strb	r0, [r1]\n\
-	add	r3, r3, #0x1\n\
-._L1525:\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r2]\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r1, ._L1556\n\
-	ldrb	r1, [r1]\n\
-	cmp	r0, r1\n\
-	bcc	._L1526	@cond_branch\n\
-._L1524:\n\
-	mov	r0, #0x0\n\
-	mov	r2, r8\n\
-	strb	r0, [r2]\n\
-	ldr	r7, ._L1556\n\
-	ldrb	r0, [r7]\n\
-	cmp	r0, #0\n\
-	beq	._L1530	@cond_branch\n\
-	ldr	r6, ._L1556+0x4\n\
-	ldr	r5, ._L1556+0x8\n\
-	ldr	r4, ._L1556+0xc\n\
-._L1532:\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, r6\n\
-	ldrb	r1, [r0]\n\
-	sub	r0, r1, #0x1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bls	._L1531	@cond_branch\n\
-	add	r0, r3, r5\n\
-	strb	r1, [r0]\n\
-	add	r1, r3, r4\n\
-	mov	r7, r8\n\
-	ldrb	r0, [r7]\n\
-	strb	r0, [r1]\n\
-	add	r3, r3, #0x1\n\
-._L1531:\n\
-	ldrb	r0, [r2]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r2]\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r1, ._L1556\n\
-	ldrb	r1, [r1]\n\
-	cmp	r0, r1\n\
-	bcc	._L1532	@cond_branch\n\
-._L1530:\n\
-	mov	r5, #0x0\n\
-	b	._L1549\n\
-._L1557:\n\
-	.align	2, 0\n\
-._L1556:\n\
-	.word	gNoOfAllBanks\n\
-	.word	gActionForBanks\n\
-	.word	gActionsByTurnOrder\n\
-	.word	gBanksByTurnOrder\n\
-._L1538:\n\
-	add	r4, r5, #0x1\n\
-	add	r7, r4, #0\n\
-	ldrb	r1, [r1]\n\
-	cmp	r7, r1\n\
-	bge	._L1537	@cond_branch\n\
-	ldr	r6, ._L1558\n\
-	lsl	r2, r5, #0x18\n\
-	mov	r8, r2\n\
-._L1542:\n\
-	ldr	r0, ._L1558+0x4\n\
-	add	r1, r5, r0\n\
-	ldrb	r3, [r1]\n\
-	add	r0, r4, r0\n\
-	ldrb	r1, [r0]\n\
-	add	r0, r5, r6\n\
-	ldrb	r2, [r0]\n\
-	cmp	r2, #0x1\n\
-	beq	._L1541	@cond_branch\n\
-	add	r0, r4, r6\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x1\n\
-	beq	._L1541	@cond_branch\n\
-	cmp	r2, #0x2\n\
-	beq	._L1541	@cond_branch\n\
-	cmp	r0, #0x2\n\
-	beq	._L1541	@cond_branch\n\
-	add	r0, r3, #0\n\
-	mov	r2, #0x0\n\
-	bl	GetWhoStrikesFirst\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	beq	._L1541	@cond_branch\n\
-	lsl	r1, r4, #0x18\n\
-	lsr	r1, r1, #0x18\n\
-	mov	r3, r8\n\
-	lsr	r0, r3, #0x18\n\
-	bl	SwapTurnOrder\n\
-._L1541:\n\
-	add	r4, r4, #0x1\n\
-	ldr	r0, ._L1558+0x8\n\
-	ldrb	r0, [r0]\n\
-	cmp	r4, r0\n\
-	blt	._L1542	@cond_branch\n\
-._L1537:\n\
-	add	r5, r7, #0\n\
-._L1549:\n\
-	ldr	r1, ._L1558+0x8\n\
-	ldrb	r0, [r1]\n\
-	sub	r0, r0, #0x1\n\
-	cmp	r5, r0\n\
-	blt	._L1538	@cond_branch\n\
-._L1505:\n\
-	ldr	r1, ._L1558+0xc\n\
-	ldr	r0, ._L1558+0x10\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._L1558+0x14\n\
-	ldr	r7, ._L1558+0x18\n\
-	add	r0, r0, r7\n\
-	mov	r1, #0x0\n\
-	strb	r1, [r0]\n\
-._L1498:\n\
-	pop	{r3, r4, r5}\n\
-	mov	r8, r3\n\
-	mov	r9, r4\n\
-	mov	sl, r5\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._L1559:\n\
-	.align	2, 0\n\
-._L1558:\n\
-	.word	gActionsByTurnOrder\n\
-	.word	gBanksByTurnOrder\n\
-	.word	gNoOfAllBanks\n\
-	.word	gBattleMainFunc\n\
-	.word	CheckFocusPunch_ClearVarsBeforeTurnStarts\n\
-	.word	gSharedMem\n\
-	.word	0x1601d");
-}
-#else
 void SetActionsAndBanksTurnOrder(void)
 {
     s32 var = 0;
@@ -6484,7 +6208,6 @@ void SetActionsAndBanksTurnOrder(void)
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
     eFocusPunchBank = 0;
 }
-#endif
 
 static void TurnValuesCleanUp(bool8 var0)
 {

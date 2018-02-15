@@ -42,22 +42,10 @@ gUnknown_02023A14_50 = .;
 
 gUnknown_Debug_2023A76 = .;
 gUnknown_Debug_2023A76_ = .;
-	. += 0x4;
-
-gUnknown_Debug_2023A7A = .;
-    . += 0x42;
-
-gUnknown_Debug_2023ABC = .;
-    . += 0x4;
-
-gUnknown_Debug_2023AC0 = .;
-    . += 0x42;
+	. += 0x8C;
 
 gUnknown_Debug_2023B02 = .;
-    . += 0x30;
-
-gUnknown_Debug_2023B32 = .;
-    . += 0x30;
+    . += 0x60;
 
 gUnknown_Debug_2023B62 = .;
     . += 0x1A2;
