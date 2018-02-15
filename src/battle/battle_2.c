@@ -1949,7 +1949,7 @@ void debug_sub_8011498(void)
 extern const u16 gUnknown_Debug_821F598[];
 extern const u8 str_821F631[][6];
 extern const u8 Str_821F649[];
-extern /*const*/ struct Pokeblock gUnknown_Debug_821F5AC[];
+extern const struct Pokeblock gUnknown_Debug_821F5AC[];
 
 extern u8 gUnknown_020297ED;
 
@@ -2226,613 +2226,202 @@ void debug_sub_8011E74(void)
     gUnknown_Debug_030043A8 = r5;
 }
 
-__attribute__((naked))
+extern const u8 Str_821F624[];
+
 void debug_sub_8011EA0(u8 a)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffff4\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r7, #0x22\n"
-        "	bls	._782	@cond_branch\n"
-        "	b	._815\n"
-        "._782:\n"
-        "	lsl	r0, r7, #0x2\n"
-        "	ldr	r1, ._785       @ \n"
-        "	add	r1, r0, r1\n"
-        "	ldr	r1, [r1]\n"
-        "	str	r0, [sp, #0x8]\n"
-        "	mov	pc, r1\n"
-        "._786:\n"
-        "	.align	2, 0\n"
-        "._785:\n"
-        "	.word	._784\n"
-        "._784:\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._812\n"
-        "	.word	._817\n"
-        "	.word	._814\n"
-        "	.word	._815\n"
-        "	.word	._816\n"
-        "	.word	._817\n"
-        "	.word	._848\n"
-        "	.word	._848\n"
-        "	.word	._848\n"
-        "	.word	._848\n"
-        "._812:\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x14\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r6, ._823       @ gBattleTextBuff1\n"
-        "	ldr	r2, ._823 + 4   @ gUnknown_Debug_821F424\n"
-        "	ldr	r0, [sp, #0x8]\n"
-        "	add	r1, r0, r7\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r1, r2\n"
-        "	ldrh	r0, [r0]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	add	r0, r2, #2\n"
-        "	add	r0, r1, r0\n"
-        "	ldrb	r0, [r0]\n"
-        "	mov	r8, r0\n"
-        "	add	r2, r2, #0x4\n"
-        "	add	r1, r1, r2\n"
-        "	ldrb	r1, [r1]\n"
-        "	mov	r9, r1\n"
-        "	str	r1, [sp]\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	add	r1, r6, #0\n"
-        "	ldr	r2, [sp, #0x4]\n"
-        "	mov	r3, r8\n"
-        "	bl	Text_InitWindow\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldr	r1, ._823 + 12  @ gUnknown_Debug_2023A76\n"
-        "	mov	sl, r1\n"
-        "	lsl	r4, r7, #0x1\n"
-        "	ldr	r5, ._823 + 16  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r5]\n"
-        "	mov	r7, #0x46\n"
-        "	mul	r0, r0, r7\n"
-        "	add	r0, r4, r0\n"
-        "	add r0, r0, sl\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r0, r2]\n"
-        "	add	r0, r6, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r2, #0xd3\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	ldrb	r3, [r5]\n"
-        "	lsl	r3, r3, #0x5\n"
-        "	add	r3, r3, #0x19\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	lsr	r3, r3, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r6]\n"
-        "	ldrb	r0, [r5]\n"
-        "	mul	r0, r0, r7\n"
-        "	add	r4, r4, r0\n"
-        "	add r4, r4, sl\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r1, [r4, r0]\n"
-        "	mov	r0, #0xb\n"
-        "	mul	r1, r1, r0\n"
-        "	ldr	r0, ._823 + 20  @ gSpeciesNames\n"
-        "	add	r1, r1, r0\n"
-        "	add	r0, r6, #0\n"
-        "	bl	StringAppend\n"
-        "	mov	r1, r9\n"
-        "	str	r1, [sp]\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	add	r1, r6, #0\n"
-        "	ldr	r2, [sp, #0x4]\n"
-        "	mov	r3, r8\n"
-        "	bl	Text_InitWindow\n"
-        "	ldr	r0, ._823 + 8   @ gUnknown_Debug_03004370\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	b	._848\n"
-        "._824:\n"
-        "	.align	2, 0\n"
-        "._823:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gSpeciesNames\n"
-        "._817:\n"
-        "	ldr	r6, ._826       @ gBattleTextBuff1\n"
-        "	ldr	r3, ._826 + 4   @ gUnknown_Debug_2023A76\n"
-        "	lsl	r1, r7, #0x1\n"
-        "	ldr	r0, ._826 + 8   @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r0]\n"
-        "	mov	r0, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r3\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r1, r2]\n"
-        "	add	r0, r6, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	b	._825\n"
-        "._827:\n"
-        "	.align	2, 0\n"
-        "._826:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "._814:\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x18\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r6, ._830       @ gUnknown_Debug_03004370\n"
-        "	ldr	r1, ._830 + 4   @ gBattleTextBuff1\n"
-        "	mov	sl, r1\n"
-        "	ldr	r4, ._830 + 8   @ gUnknown_Debug_821F424\n"
-        "	ldr	r2, [sp, #0x8]\n"
-        "	add	r1, r2, r7\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r1, r4\n"
-        "	ldrh	r2, [r0]\n"
-        "	add	r0, r4, #2\n"
-        "	add	r0, r1, r0\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r4, r4, #0x4\n"
-        "	add	r1, r1, r4\n"
-        "	ldrb	r0, [r1]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r6, #0\n"
-        "	mov	r1, sl\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	lsl	r4, r7, #0x1\n"
-        "	ldr	r5, ._830 + 12  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r0, [r5]\n"
-        "	mov	r1, #0x46\n"
-        "	mul	r0, r0, r1\n"
-        "	add	r0, r4, r0\n"
-        "	ldr	r2, ._830 + 16  @ gUnknown_Debug_2023A76\n"
-        "	add	r0, r0, r2\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r0, r2]\n"
-        "	mov	r0, sl\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r2, #0xd3\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	ldrb	r3, [r5]\n"
-        "	lsl	r3, r3, #0x5\n"
-        "	add	r3, r3, #0x19\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	lsr	r3, r3, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r6, #0\n"
-        "	mov	r1, sl\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0xff\n"
-        "	mov	r1, sl\n"
-        "	strb	r0, [r1]\n"
-        "	ldrb	r0, [r5]\n"
-        "	mov	r2, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r4, r4, r0\n"
-        "	ldr	r0, ._830 + 16  @ gUnknown_Debug_2023A76\n"
-        "	add	r4, r4, r0\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r4, r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._828	@cond_branch\n"
-        "	ldrh	r0, [r4]\n"
-        "	bl	ItemId_GetItem\n"
-        "	add	r1, r0, #0\n"
-        "	mov	r0, sl\n"
-        "	bl	StringAppend\n"
-        "	b	._829\n"
-        "._831:\n"
-        "	.align	2, 0\n"
-        "._830:\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "._828:\n"
-        "	ldr	r1, ._833       @ Str_821F624\n"
-        "	mov	r0, sl\n"
-        "	bl	StringAppend\n"
-        "._829:\n"
-        "	ldr	r6, ._833 + 4   @ gUnknown_Debug_03004370\n"
-        "	ldr	r1, ._833 + 8   @ gBattleTextBuff1\n"
-        "	ldr	r5, ._833 + 12  @ gUnknown_Debug_821F424\n"
-        "	ldr	r2, [sp, #0x8]\n"
-        "	add	r4, r2, r7\n"
-        "	lsl	r4, r4, #0x1\n"
-        "	add	r0, r4, r5\n"
-        "	ldrh	r2, [r0]\n"
-        "	add	r0, r5, #2\n"
-        "	add	r0, r4, r0\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r5, r5, #0x4\n"
-        "	add	r4, r4, r5\n"
-        "	ldrb	r0, [r4]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r6, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	b	._848\n"
-        "._834:\n"
-        "	.align	2, 0\n"
-        "._833:\n"
-        "	.word	Str_821F624\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "._816:\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x4\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r5, ._839       @ gUnknown_Debug_03004370\n"
-        "	ldr	r6, ._839 + 4   @ gBattleTextBuff1\n"
-        "	ldr	r4, ._839 + 8   @ gUnknown_Debug_821F424\n"
-        "	ldr	r0, [sp, #0x8]\n"
-        "	add	r1, r0, r7\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r1, r4\n"
-        "	ldrh	r2, [r0]\n"
-        "	add	r0, r4, #2\n"
-        "	add	r0, r1, r0\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r4, r4, #0x4\n"
-        "	add	r1, r1, r4\n"
-        "	ldrb	r0, [r1]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r3, ._839 + 12  @ gUnknown_Debug_2023A76\n"
-        "	lsl	r1, r7, #0x1\n"
-        "	ldr	r0, ._839 + 16  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r0]\n"
-        "	mov	r0, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r3\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r0, [r1, r2]\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._835	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._836	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._837	@cond_branch\n"
-        "	b	._843\n"
-        "._840:\n"
-        "	.align	2, 0\n"
-        "._839:\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "._836:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._841	@cond_branch\n"
-        "	cmp	r0, #0x3\n"
-        "	beq	._842	@cond_branch\n"
-        "	b	._843\n"
-        "._837:\n"
-        "	mov	r0, #0xb5\n"
-        "	b	._844\n"
-        "._835:\n"
-        "	mov	r0, #0xb6\n"
-        "._844:\n"
-        "	strb	r0, [r6]\n"
-        "	mov	r4, #0x1\n"
-        "	b	._847\n"
-        "._841:\n"
-        "	mov	r0, #0xb5\n"
-        "	b	._846\n"
-        "._842:\n"
-        "	mov	r0, #0xb6\n"
-        "._846:\n"
-        "	strb	r0, [r6]\n"
-        "	strb	r0, [r6, #0x1]\n"
-        "	mov	r4, #0x2\n"
-        "	b	._847\n"
-        "._843:\n"
-        "	ldr	r2, ._849       @ gBattleTextBuff1\n"
-        "	add	r1, r4, r2\n"
-        "	mov	r0, #0xac\n"
-        "	strb	r0, [r1]\n"
-        "	add	r4, r4, #0x1\n"
-        "	add	r6, r2, #0\n"
-        "._847:\n"
-        "	add	r1, r4, r6\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r1]\n"
-        "._825:\n"
-        "	ldr	r5, ._849 + 4   @ gUnknown_Debug_03004370\n"
-        "	ldr	r4, ._849 + 8   @ gUnknown_Debug_821F424\n"
-        "	ldr	r0, [sp, #0x8]\n"
-        "	add	r1, r0, r7\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r1, r4\n"
-        "	ldrh	r2, [r0]\n"
-        "	add	r0, r4, #2\n"
-        "	add	r0, r1, r0\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r4, r4, #0x4\n"
-        "	add	r1, r1, r4\n"
-        "	ldrb	r0, [r1]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	b	._848\n"
-        "._850:\n"
-        "	.align	2, 0\n"
-        "._849:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "._815:\n"
-        "	ldr	r6, ._851       @ gBattleTextBuff1\n"
-        "	ldr	r3, ._851 + 4   @ gUnknown_Debug_2023A76\n"
-        "	lsl	r1, r7, #0x1\n"
-        "	ldr	r0, ._851 + 8   @ gUnknown_Debug_03004360\n"
-        "	ldrb	r2, [r0]\n"
-        "	mov	r0, #0x46\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r1, r1, r0\n"
-        "	add	r1, r1, r3\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r1, r2]\n"
-        "	add	r0, r6, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	ldr	r5, ._851 + 12  @ gUnknown_Debug_03004370\n"
-        "	ldr	r4, ._851 + 16  @ gUnknown_Debug_821F424\n"
-        "	lsl	r1, r7, #0x2\n"
-        "	add	r1, r1, r7\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r0, r1, r4\n"
-        "	ldrh	r2, [r0]\n"
-        "	add	r0, r4, #2\n"
-        "	add	r0, r1, r0\n"
-        "	ldrb	r3, [r0]\n"
-        "	add	r4, r4, #0x4\n"
-        "	add	r1, r1, r4\n"
-        "	ldrb	r0, [r1]\n"
-        "	str	r0, [sp]\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	Text_InitWindow\n"
-        "	add	r0, r5, #0\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "._848:\n"
-        "	add	sp, sp, #0xc\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._852:\n"
-        "	.align	2, 0\n"
-        "._851:\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_2023A76\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gUnknown_Debug_821F424\n"
-        "\n"
-    );
+    u32 length;
+
+    switch (a)
+    {
+    case 0:
+    case 5:
+    case 10:
+    case 15:
+    case 20:
+    case 25:
+        debug_sub_8010A7C(0, 20);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a], 2, 3);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            422,
+            gUnknown_Debug_03004360 * 32 + 25,
+            0);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        gBattleTextBuff1[0] = EOS;
+        StringAppend(gBattleTextBuff1, gSpeciesNames[gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]]);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        break;
+    case 1:
+    case 6:
+    case 11:
+    case 16:
+    case 21:
+    case 26:
+    case 30:
+        ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a], 2, 3);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        break;
+    case 2:
+    case 7:
+    case 12:
+    case 17:
+    case 22:
+    case 27:
+        debug_sub_8010A7C(0, 24);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a], 2, 3);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            422,
+            gUnknown_Debug_03004360 * 32 + 25,
+            0);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        gBattleTextBuff1[0] = EOS;
+        if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a] != 0)
+            StringAppend(gBattleTextBuff1, ItemId_GetItem(gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a])->name);
+        else
+            StringAppend(gBattleTextBuff1, Str_821F624);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        break;
+    case 4:
+    case 9:
+    case 14:
+    case 19:
+    case 24:
+    case 29:
+        debug_sub_8010A7C(0, 4);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        length = 0;
+        switch (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a])
+        {
+        case 0:
+            gBattleTextBuff1[0] = CHAR_MALE;
+            length = 1;
+            break;
+        case 1:
+            gBattleTextBuff1[0] = CHAR_FEMALE;
+            length = 1;
+            break;
+        case 2:
+            gBattleTextBuff1[0] = CHAR_MALE;
+            gBattleTextBuff1[1] = CHAR_MALE;
+            length = 2;
+            break;
+        case 3:
+            gBattleTextBuff1[0] = CHAR_FEMALE;
+            gBattleTextBuff1[1] = CHAR_FEMALE;
+            length = 2;
+            break;
+        default:
+            gBattleTextBuff1[length] = CHAR_QUESTION_MARK;
+            length++;
+            break;
+        }
+        gBattleTextBuff1[length] = EOS;
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        break;
+    case 3:
+    case 8:
+    case 13:
+    case 18:
+    case 23:
+    case 28:
+    default:
+        ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a], 2, 1);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F424[a][0],
+            gUnknown_Debug_821F424[a][1],
+            gUnknown_Debug_821F424[a][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        break;
+    case 31:
+    case 32:
+    case 33:
+    case 34:
+        break;
+    }
 }
 
-__attribute__((naked))
-void debug_sub_8012294()
+void debug_sub_8012294(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r2, ._854       @ gUnknown_Debug_030043A0\n"
-        "	ldr	r0, ._854 + 4   @ gUnknown_Debug_030043A4\n"
-        "	ldrb	r1, [r0]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r2, [r2]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	cmp	r5, #0x1d\n"
-        "	bhi	._853	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x18\n"
-        "	bl	debug_sub_8010A7C\n"
-        "	ldr	r0, ._854 + 8   @ gUnknown_Debug_03004370\n"
-        "	mov	sl, r0\n"
-        "	ldr	r1, ._854 + 12  @ gBattleTextBuff1\n"
-        "	mov	r9, r1\n"
-        "	ldr	r2, ._854 + 16  @ gUnknown_Debug_821F564\n"
-        "	mov	r8, r2\n"
-        "	ldr	r7, ._854 + 20  @ gUnknown_Debug_030043A8\n"
-        "	ldrb	r1, [r7]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r1, r0, r2\n"
-        "	ldrh	r2, [r1]\n"
-        "	ldr	r3, ._854 + 24  @ gUnknown_Debug_821F566\n"
-        "	add	r1, r0, r3\n"
-        "	ldrb	r3, [r1]\n"
-        "	ldr	r1, ._854 + 28  @ gUnknown_Debug_821F568\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0]\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, sl\n"
-        "	mov	r1, r9\n"
-        "	bl	Text_InitWindow\n"
-        "	mov	r0, sl\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	ldrb	r4, [r7]\n"
-        "	lsl	r4, r4, #0x1\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x5\n"
-        "	bl	__udivsi3\n"
-        "	add	r5, r0, #0\n"
-        "	lsl	r5, r5, #0x18\n"
-        "	lsr	r5, r5, #0x15\n"
-        "	add	r4, r4, r5\n"
-        "	ldr	r6, ._854 + 32  @ gUnknown_Debug_03004360\n"
-        "	ldrb	r1, [r6]\n"
-        "	lsl	r0, r1, #0x1\n"
-        "	add	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x4\n"
-        "	add	r4, r4, r0\n"
-        "	ldr	r2, ._854 + 36  @ gUnknown_Debug_2023B02\n"
-        "	add	r4, r4, r2\n"
-        "	mov	r3, #0x0\n"
-        "	ldsh	r1, [r4, r3]\n"
-        "	mov	r0, r9\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r2, #0xd3\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	ldrb	r3, [r6]\n"
-        "	lsl	r3, r3, #0x5\n"
-        "	add	r3, r3, #0x19\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	lsr	r3, r3, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, sl\n"
-        "	mov	r1, r9\n"
-        "	bl	Text_InitWindow\n"
-        "	mov	r0, sl\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "	mov	r0, #0xff\n"
-        "	mov	r1, r9\n"
-        "	strb	r0, [r1]\n"
-        "	ldrb	r1, [r7]\n"
-        "	lsl	r1, r1, #0x1\n"
-        "	add	r1, r1, r5\n"
-        "	ldrb	r2, [r6]\n"
-        "	lsl	r0, r2, #0x1\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	ldr	r2, ._854 + 36  @ gUnknown_Debug_2023B02\n"
-        "	add	r1, r1, r2\n"
-        "	mov	r3, #0x0\n"
-        "	ldsh	r1, [r1, r3]\n"
-        "	mov	r0, #0xd\n"
-        "	mul	r1, r1, r0\n"
-        "	ldr	r0, ._854 + 40  @ gMoveNames\n"
-        "	add	r1, r1, r0\n"
-        "	mov	r0, r9\n"
-        "	bl	StringAppend\n"
-        "	ldrb	r1, [r7]\n"
-        "	lsl	r0, r1, #0x2\n"
-        "	add	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add r8, r8, r0\n"
-        "	mov	r1, r8\n"
-        "	ldrh	r2, [r1]\n"
-        "	ldr	r3, ._854 + 24  @ gUnknown_Debug_821F566\n"
-        "	add	r1, r0, r3\n"
-        "	ldrb	r3, [r1]\n"
-        "	ldr	r1, ._854 + 28  @ gUnknown_Debug_821F568\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0]\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, sl\n"
-        "	mov	r1, r9\n"
-        "	bl	Text_InitWindow\n"
-        "	mov	r0, sl\n"
-        "	bl	Text_PrintWindow8002F44\n"
-        "._853:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._855:\n"
-        "	.align	2, 0\n"
-        "._854:\n"
-        "	.word	gUnknown_Debug_030043A0\n"
-        "	.word	gUnknown_Debug_030043A4\n"
-        "	.word	gUnknown_Debug_03004370\n"
-        "	.word	gBattleTextBuff1\n"
-        "	.word	gUnknown_Debug_821F564\n"
-        "	.word	gUnknown_Debug_030043A8\n"
-        "	.word	gUnknown_Debug_821F566\n"
-        "	.word	gUnknown_Debug_821F568\n"
-        "	.word	gUnknown_Debug_03004360\n"
-        "	.word	gUnknown_Debug_2023B02\n"
-        "	.word	gMoveNames\n"
-        "\n"
-    );
+    u8 r5 = gUnknown_Debug_030043A0 + gUnknown_Debug_030043A4 * 5;
+    
+    if (r5 < 30)
+    {
+        debug_sub_8010A7C(0, 24);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][0],
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][1],
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        ConvertIntToDecimalStringN(gBattleTextBuff1, gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r5 / 5][gUnknown_Debug_030043A8], 2, 3);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            422,
+            gUnknown_Debug_03004360 * 32 + 25,
+            0);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+        gBattleTextBuff1[0] = EOS;
+        StringAppend(gBattleTextBuff1, gMoveNames[gUnknown_Debug_2023B02[gUnknown_Debug_03004360][r5 / 5][gUnknown_Debug_030043A8]]);
+        Text_InitWindow(
+            &gUnknown_Debug_03004370,
+            gBattleTextBuff1,
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][0],
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][1],
+            gUnknown_Debug_821F564[gUnknown_Debug_030043A8][2]);
+        Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
+    }
 }
 
 __attribute__((naked))
@@ -3051,13 +2640,8 @@ void debug_sub_8012540()
     );
 }
 
-__attribute__((naked))
-void debug_nullsub_3()
+void debug_nullsub_3(void)
 {
-    asm(
-        "	bx	lr\n"
-        "\n"
-    );
 }
 
 __attribute__((naked))

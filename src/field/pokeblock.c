@@ -1070,7 +1070,7 @@ s8 GetFirstFreePokeblockSlot(void)
     return -1;
 }
 
-bool8 sub_810CA34(struct Pokeblock *pokeblock)
+bool8 sub_810CA34(const struct Pokeblock *pokeblock)
 {
     s8 idx = GetFirstFreePokeblockSlot();
     if (idx == -1)
