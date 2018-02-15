@@ -201,7 +201,6 @@ u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 void MenuCursor_SetPos814A880(u8 a1, u8 a2);
 u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 s8 GetFirstFreePokeblockSlot(void);
-bool8 sub_810CA34(struct Pokeblock *pokeblock);
 #ifdef GERMAN
 extern void de_sub_8073110();
 #endif

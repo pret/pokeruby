@@ -3930,7 +3930,7 @@ static void PrintHeldItemName(u16 itemId, u8 left, u8 top)
         && IsLinkDoubleBattle() == TRUE
         && (pssData.monIndex == 1 || pssData.monIndex == 4 || pssData.monIndex == 5))
     {
-        StringCopy(gStringVar1, ItemId_GetItem(itemId)->name);
+        StringCopy(gStringVar1, ItemId_GetName(itemId));
     }
     else if (itemId == 0)
     {

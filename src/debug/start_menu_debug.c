@@ -3184,7 +3184,7 @@ void DebugMenu_8077EE0()
         "	mov	r2, #0x11\n"
         "	bl	Menu_PrintText\n"
         "	add	r0, r4, #0\n"
-        "	bl	ItemId_GetItem\n"
+        "	bl	ItemId_GetName\n"
         "	mov	r1, #0x8\n"
         "	mov	r2, #0x11\n"
         "	bl	Menu_PrintText\n"

@@ -1612,7 +1612,7 @@ static void sub_80A4380(u16 a, int b, int c, int d)
         r5 = i * 2 + 2;
         text = gStringVar1;
         text = sub_80A425C(a, text, i);
-        text = sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x66, 0);
+        text = sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x66, 0);
         *text++ = CHAR_MULT_SIGN;
         sub_8072C14(text, gCurrentBagPocketItemSlots[r4].quantity, 0x78, 1);
         Menu_PrintText(gStringVar1, 14, r5);
@@ -1636,9 +1636,9 @@ static void sub_80A444C(u16 a, int b, int c, int d)
         text = gStringVar1;
         text = sub_80A425C(a, text, i);
 #if ENGLISH
-        sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x60, 0);
+        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x60, 0);
 #else
-        sub_8072C74(text, ItemId_GetItem(gCurrentBagPocketItemSlots[r4].itemId)->name, 0x63, 0);
+        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x63, 0);
 #endif
         Menu_PrintText(gStringVar1, 14, r5);
         if (gUnknown_02038558 != 0)

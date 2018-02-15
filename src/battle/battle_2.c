@@ -2306,7 +2306,7 @@ void debug_sub_8011EA0(u8 a)
         Text_PrintWindow8002F44(&gUnknown_Debug_03004370);
         gBattleTextBuff1[0] = EOS;
         if (gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a] != 0)
-            StringAppend(gBattleTextBuff1, ItemId_GetItem(gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a])->name);
+            StringAppend(gBattleTextBuff1, ItemId_GetName(gUnknown_Debug_2023A76[gUnknown_Debug_03004360][a]));
         else
             StringAppend(gBattleTextBuff1, Str_821F624);
         Text_InitWindow(
