@@ -226,6 +226,12 @@ static void sub_81064B8(void);
 static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 static void sub_81065DC(void);
 
+static void debug_sub_811B5D0(void);
+static void debug_sub_811B620(void);
+static void debug_sub_811B5B4();
+static void debug_sub_811B894(void);
+static u8 debug_sub_811B634(void);
+
 #if DEBUG
 __attribute__((section(".bss"))) u8 unk_debug_bss_1_0 = 0;
 __attribute__((section(".bss"))) u8 unk_debug_bss_1_1 = 0;
@@ -391,135 +397,6 @@ static void SlotMachineSetup_2_1(void)
 
 static const s16 gUnknown_083ECCF8[][2];
 
-#if DEBUG
-__attribute__((naked))
-static void SlotMachineSetup_0_1(void)
-{
-    asm("\
-    push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, sl\n\
-	mov	r6, r9\n\
-	mov	r5, r8\n\
-	push	{r5, r6, r7}\n\
-	bl	sub_81019EC\n\
-	ldr	r5, ._43        @ \n\
-	mov	r4, #0x0\n\
-	strb	r4, [r5]\n\
-	strb	r4, [r5, #0x2]\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	strb	r1, [r5, #0x3]\n\
-	strb	r4, [r5, #0x4]\n\
-	mov	r0, #0x0\n\
-	strh	r4, [r5, #0x8]\n\
-	strb	r0, [r5, #0xa]\n\
-	strb	r0, [r5, #0xb]\n\
-	ldr	r0, ._43 + 4    @ \n\
-	ldr	r1, ._43 + 8    @ \n\
-	add	r0, r0, r1\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r5, #0xc]\n\
-	strh	r4, [r5, #0xe]\n\
-	strh	r4, [r5, #0x10]\n\
-	strh	r4, [r5, #0x12]\n\
-	strh	r4, [r5, #0x18]\n\
-	mov	r0, #0x8\n\
-	strh	r0, [r5, #0x1a]\n\
-	add	r1, r5, #0\n\
-	add	r1, r1, #0x58\n\
-	mov	r0, #0xf0\n\
-	strh	r0, [r1]\n\
-	add	r1, r1, #0x2\n\
-	mov	r0, #0xa0\n\
-	strh	r0, [r1]\n\
-	add	r0, r5, #0\n\
-	add	r0, r0, #0x5c\n\
-	mov	r1, #0x3f\n\
-	strh	r1, [r0]\n\
-	add	r0, r0, #0x2\n\
-	strh	r1, [r0]\n\
-	bl	GetCurrentMapMusic\n\
-	add	r1, r5, #0\n\
-	add	r1, r1, #0x60\n\
-	strh	r0, [r1]\n\
-	mov	r7, #0x0\n\
-	add	r6, r5, #0\n\
-	ldr	r2, ._43 + 12   @ \n\
-	mov	sl, r2\n\
-	mov	r0, #0x1c\n\
-	add	r0, r0, r6\n\
-	mov	r9, r0\n\
-._41:\n\
-	lsl	r5, r7, #0x1\n\
-	mov	r1, #0x22\n\
-	add	r1, r1, r6\n\
-	mov	r8, r1\n\
-	add	r1, r5, r1\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r1]\n\
-	add	r4, r6, #0\n\
-	add	r4, r4, #0x28\n\
-	add	r4, r5, r4\n\
-	ldrb	r0, [r6, #0x3]\n\
-	lsl	r0, r0, #0x1\n\
-	lsl	r1, r7, #0x2\n\
-	add	r0, r0, r1\n\
-	add r0, r0, sl\n\
-	mov	r2, #0x0\n\
-	ldsh	r0, [r0, r2]\n\
-	mov	r1, #0x15\n\
-	bl	__modsi3\n\
-	strh	r0, [r4]\n\
-	add r5, r5, r9\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r4, r1]\n\
-	lsl	r1, r0, #0x1\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	mov	r2, #0xfc\n\
-	lsl	r2, r2, #0x1\n\
-	add	r0, r2, #0\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r5]\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r5, r1]\n\
-	add	r1, r2, #0\n\
-	bl	__modsi3\n\
-	strh	r0, [r5]\n\
-	add	r0, r7, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r7, r0, #0x18\n\
-	cmp	r7, #0x2\n\
-	bls	._41	@cond_branch\n\
-	bl	debug_sub_811B5D0\n\
-	ldr	r0, ._43 + 16   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._42	@cond_branch\n\
-	mov	r1, r8\n\
-	sub	r1, r1, #0x22\n\
-	mov	r0, #0xfa\n\
-	lsl	r0, r0, #0x2\n\
-	strh	r0, [r1, #0xc]\n\
-._42:\n\
-	pop	{r3, r4, r5}\n\
-	mov	r8, r3\n\
-	mov	r9, r4\n\
-	mov	sl, r5\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._44:\n\
-	.align	2, 0\n\
-._43:\n\
-	.word	+0x2000000\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	gUnknown_083ECCF8\n\
-	.word	unk_debug_bss_1_1");
-}
-#else
 static void SlotMachineSetup_0_1(void)
 {
     u8 i;
@@ -550,8 +427,12 @@ static void SlotMachineSetup_0_1(void)
         eSlotMachine->unk1C[i] = 0x1f8 - eSlotMachine->reelPositions[i] * 24;
         eSlotMachine->unk1C[i] %= 0x1f8;
     }
-}
+#if DEBUG
+    debug_sub_811B5D0();
+    if (unk_debug_bss_1_1 != 0)
+        eSlotMachine->coins = 1000;
 #endif
+}
 
 static void SlotMachineSetup_3_0(void)
 {
@@ -676,264 +557,52 @@ static bool8 sub_8101DB0(struct Task *task)
 static bool8 sub_8101DF4(struct Task *task)
 {
     if (sub_8104E18())
-    {
         eSlotMachine->state = 4;
-    }
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101E10(struct Task *task)
-{
-    asm("\
-    push	{lr}\n\
-	mov	r0, #0x0\n\
-	bl	sub_8104CAC\n\
-	ldr	r2, ._70        @ \n\
-	mov	r0, #0x5\n\
-	strb	r0, [r2]\n\
-	ldr	r0, ._70 + 4    @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._67	@cond_branch\n\
-	ldr	r0, ._70 + 8    @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._69	@cond_branch\n\
-._67:\n\
-	mov	r0, #0xc\n\
-	ldsh	r1, [r2, r0]\n\
-	ldr	r0, ._70 + 12   @ \n\
-	cmp	r1, r0\n\
-	ble	._69	@cond_branch\n\
-	mov	r0, #0x17\n\
-	strb	r0, [r2]\n\
-._69:\n\
-	mov	r0, #0x1\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._71:\n\
-	.align	2, 0\n\
-._70:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	0x270e");
-}
-#else
 static bool8 sub_8101E10(struct Task *task)
 {
     sub_8104CAC(0);
     eSlotMachine->state = 5;
-    if (eSlotMachine->coins >= 9999)
-    {
+    if (
+#if DEBUG
+      (unk_debug_bss_1_1 == 0 || unk_debug_bss_1_4 == 0) &&
+#endif
+      eSlotMachine->coins >= 9999)
         eSlotMachine->state = 23;
-    }
     return TRUE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101E3C(struct Task *task)
-{
-    asm("\
-	push	{r4, r5, lr}\n\
-	ldr	r0, ._77        @ unk_debug_bss_1_1\n\
-	ldrb	r1, [r0]\n\
-	add	r3, r0, #0\n\
-	ldr	r5, ._77 + 4    @ gMain\n\
-	cmp	r1, #0\n\
-	beq	._76	@cond_branch\n\
-	ldr	r2, ._77 + 8    @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r2]\n\
-	cmp	r0, #0\n\
-	beq	._76	@cond_branch\n\
-	ldr	r4, ._77 + 12   @ \n\
-	mov	r1, #0xc\n\
-	ldsh	r0, [r4, r1]\n\
-	cmp	r0, #0x3\n\
-	ble	._74	@cond_branch\n\
-	ldrh	r1, [r5, #0x2c]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._75	@cond_branch\n\
-._74:\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r2]\n\
-	b	._76\n\
-._78:\n\
-	.align	2, 0\n\
-._77:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	gMain\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	+0x2000000\n\
-._75:\n\
-	mov	r0, #0x0\n\
-	bl	sub_8103D50\n\
-	mov	r0, #0x1\n\
-	bl	sub_8103D50\n\
-	mov	r0, #0x2\n\
-	bl	sub_8103D50\n\
-	ldrh	r0, [r4, #0xc]\n\
-	sub	r0, r0, #0x3\n\
-	strh	r0, [r4, #0xc]\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r4, #0x12]\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r4]\n\
-	b	._102\n\
-._76:\n\
-	ldrb	r0, [r3]\n\
-	cmp	r0, #0\n\
-	beq	._81	@cond_branch\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._81	@cond_branch\n\
-	bl	debug_sub_811B620\n\
-	ldr	r1, ._83        @ \n\
-	mov	r0, #0x1d\n\
-	strb	r0, [r1]\n\
-	b	._102\n\
-._84:\n\
-	.align	2, 0\n\
-._83:\n\
-	.word	+0x2000000\n\
-._81:\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._85	@cond_branch\n\
-	mov	r0, #0x0\n\
-	bl	sub_8104AB8\n\
-	ldr	r1, ._87        @ \n\
-	mov	r0, #0x8\n\
-	strb	r0, [r1]\n\
-	b	._102\n\
-._88:\n\
-	.align	2, 0\n\
-._87:\n\
-	.word	+0x2000000\n\
-._85:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._89	@cond_branch\n\
-	ldr	r2, ._94        @ \n\
-	mov	r3, #0xc\n\
-	ldsh	r0, [r2, r3]\n\
-	sub	r0, r0, #0x3\n\
-	mov	r3, #0x12\n\
-	ldsh	r1, [r2, r3]\n\
-	add	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	blt	._90	@cond_branch\n\
-	ldrh	r4, [r2, #0x12]\n\
-	add	r0, r1, #0\n\
-	cmp	r0, #0x2\n\
-	bgt	._91	@cond_branch\n\
-._92:\n\
-	lsl	r0, r4, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	bl	sub_8103D50\n\
-	lsl	r0, r4, #0x10\n\
-	mov	r2, #0x80\n\
-	lsl	r2, r2, #0x9\n\
-	add	r0, r0, r2\n\
-	lsr	r4, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0x2\n\
-	ble	._92	@cond_branch\n\
-._91:\n\
-	ldr	r1, ._94        @ \n\
-	ldrh	r0, [r1, #0xc]\n\
-	sub	r0, r0, #0x3\n\
-	ldrh	r3, [r1, #0x12]\n\
-	add	r0, r0, r3\n\
-	strh	r0, [r1, #0xc]\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r1, #0x12]\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x5f\n\
-	bl	PlaySE\n\
-	b	._102\n\
-._95:\n\
-	.align	2, 0\n\
-._94:\n\
-	.word	+0x2000000\n\
-._90:\n\
-	mov	r0, #0x6\n\
-	b	._96\n\
-._89:\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._98	@cond_branch\n\
-	ldr	r4, ._103       @ \n\
-	mov	r1, #0xc\n\
-	ldsh	r0, [r4, r1]\n\
-	cmp	r0, #0\n\
-	beq	._98	@cond_branch\n\
-	mov	r0, #0x5f\n\
-	bl	PlaySE\n\
-	ldrb	r0, [r4, #0x12]\n\
-	bl	sub_8103D50\n\
-	ldrh	r0, [r4, #0xc]\n\
-	sub	r0, r0, #0x1\n\
-	strh	r0, [r4, #0xc]\n\
-	ldrh	r0, [r4, #0x12]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r4, #0x12]\n\
-._98:\n\
-	ldr	r0, ._103       @ \n\
-	mov	r2, #0x12\n\
-	ldsh	r1, [r0, r2]\n\
-	add	r2, r0, #0\n\
-	ldr	r5, ._103 + 4   @ \n\
-	cmp	r1, #0x2\n\
-	bgt	._99	@cond_branch\n\
-	cmp	r1, #0\n\
-	beq	._101	@cond_branch\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._101	@cond_branch\n\
-._99:\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r2]\n\
-._101:\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._102	@cond_branch\n\
-	mov	r0, #0x15\n\
-._96:\n\
-	strb	r0, [r2]\n\
-._102:\n\
-	mov	r0, #0x0\n\
-	pop	{r4, r5}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._104:\n\
-	.align	2, 0\n\
-._103:\n\
-	.word	+0x2000000\n\
-	.word	gMain");
-}
-#else
 static bool8 sub_8101E3C(struct Task *task)
 {
     s16 i;
+
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+    {
+        if (eSlotMachine->coins <= 3 || (gMain.heldKeys & B_BUTTON))
+        {
+            unk_debug_bss_1_4 = 0;
+        }
+        else
+        {
+            sub_8103D50(0);
+            sub_8103D50(1);
+            sub_8103D50(2);
+            eSlotMachine->coins -= 3;
+            eSlotMachine->bet = 3;
+            eSlotMachine->state = 9;
+            return 0;
+        }
+    }
+    if (unk_debug_bss_1_1 != 0 && (gMain.newKeys & 8))
+    {
+        debug_sub_811B620();
+        eSlotMachine->state = 29;
+        return 0;
+    }
+#endif
 
     if (gMain.newKeys & SELECT_BUTTON)
     {
@@ -945,9 +614,7 @@ static bool8 sub_8101E3C(struct Task *task)
         if (eSlotMachine->coins - (3 - eSlotMachine->bet) >= 0)
         {
             for (i = eSlotMachine->bet; i < 3; i++)
-            {
                 sub_8103D50(i);
-            }
             eSlotMachine->coins -= (3 - eSlotMachine->bet);
             eSlotMachine->bet = 3;
             eSlotMachine->state = 9;
@@ -968,17 +635,12 @@ static bool8 sub_8101E3C(struct Task *task)
             eSlotMachine->bet++;
         }
         if (eSlotMachine->bet >= 3 || (eSlotMachine->bet != 0 && gMain.newKeys & A_BUTTON))
-        {
             eSlotMachine->state = 9;
-        }
         if (gMain.newKeys & B_BUTTON)
-        {
             eSlotMachine->state = 21;
-        }
     }
     return FALSE;
 }
-#endif
 
 static void sub_8101F2C(const u8 *str)
 {
@@ -1006,77 +668,10 @@ static bool8 sub_8101F60(struct Task *task)
 static bool8 sub_8101F88(struct Task *task)
 {
     if (sub_8104AEC())
-    {
         eSlotMachine->state = 5;
-    }
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101FA4(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	add	r4, r0, #0\n\
-	bl	sub_8102484\n\
-	bl	sub_8104DA4\n\
-	mov	r0, #0x0\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x1\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x2\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r4, #0x8]\n\
-	ldr	r4, ._115       @ \n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._113	@cond_branch\n\
-	bl	sub_810430C\n\
-	mov	r0, #0xa\n\
-	b	._114\n\
-._116:\n\
-	.align	2, 0\n\
-._115:\n\
-	.word	+0x2000000\n\
-._113:\n\
-	mov	r0, #0x1\n\
-	bl	sub_8104CAC\n\
-	mov	r0, #0xb\n\
-._114:\n\
-	strb	r0, [r4]\n\
-	ldr	r4, ._119       @ \n\
-	mov	r0, #0x8\n\
-	strh	r0, [r4, #0x1a]\n\
-	ldrb	r0, [r4, #0xa]\n\
-	cmp	r0, #0\n\
-	beq	._117	@cond_branch\n\
-	bl	dp15_jump_random_unknown\n\
-	strh	r0, [r4, #0x1a]\n\
-._117:\n\
-	ldr	r0, ._119 + 4   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._118	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x68\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._118:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._120:\n\
-	.align	2, 0\n\
-._119:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_1");
-}
-#else
 static bool8 sub_8101FA4(struct Task *task)
 {
     sub_8102484();
@@ -1097,12 +692,13 @@ static bool8 sub_8101FA4(struct Task *task)
     }
     eSlotMachine->unk1A = 8;
     if (eSlotMachine->unk0A)
-    {
         eSlotMachine->unk1A = dp15_jump_random_unknown();
-    }
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0)
+        debug_sub_811B5B4(eSlotMachine->unk68, 1);
+#endif
     return FALSE;
 }
-#endif
 
 static bool8 sub_8102008(struct Task *task)
 {
@@ -1115,134 +711,38 @@ static bool8 sub_8102008(struct Task *task)
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102034(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldrh	r1, [r0, #0x8]\n\
-	add	r1, r1, #0x1\n\
-	strh	r1, [r0, #0x8]\n\
-	lsl	r1, r1, #0x10\n\
-	asr	r1, r1, #0x10\n\
-	cmp	r1, #0x1d\n\
-	ble	._124	@cond_branch\n\
-	ldr	r0, ._127       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._126	@cond_branch\n\
-	ldr	r0, ._127 + 4   @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._126	@cond_branch\n\
-	ldr	r4, ._127 + 8   @ unk_debug_bss_1_8\n\
-	bl	Random\n\
-	mov	r1, #0x1f\n\
-	and	r1, r1, r0\n\
-	add	r1, r1, #0x1\n\
-	str	r1, [r4]\n\
-._126:\n\
-	bl	sub_81024F0\n\
-	ldr	r1, ._127 + 12  @ \n\
-	mov	r0, #0xc\n\
-	strb	r0, [r1]\n\
-._124:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._128:\n\
-	.align	2, 0\n\
-._127:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	unk_debug_bss_1_8\n\
-	.word	+0x2000000");
-}
-#else
 static bool8 sub_8102034(struct Task *task)
 {
     if (++task->data[0] >= 30)
     {
+#if DEBUG
+        if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+            unk_debug_bss_1_8 = (Random() & 0x1F) + 1;
+#endif
         sub_81024F0();
         eSlotMachine->state = 12;
     }
     return FALSE;
 }
+
+static bool8 sub_8102058(struct Task *task)
+{
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+    {
+        unk_debug_bss_1_8--;
+        if (unk_debug_bss_1_8 == 0)
+        {
+            PlaySE(0x18);
+            sub_8102E1C(eSlotMachine->unk18);
+            sub_8103C14(eSlotMachine->unk18);
+            unk_debug_bss_1_8 = (Random() & 0x1F) + 1;
+            eSlotMachine->state = 13;
+        }
+        return FALSE;
+    }
 #endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102058(struct Task *task)
-{
-    asm("\
-	push	{r4, r5, lr}\n\
-	ldr	r0, ._133       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._130	@cond_branch\n\
-	ldr	r0, ._133 + 4   @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._130	@cond_branch\n\
-	ldr	r5, ._133 + 8   @ unk_debug_bss_1_8\n\
-	ldr	r0, [r5]\n\
-	sub	r0, r0, #0x1\n\
-	str	r0, [r5]\n\
-	cmp	r0, #0\n\
-	bne	._135	@cond_branch\n\
-	mov	r0, #0x18\n\
-	bl	PlaySE\n\
-	ldr	r4, ._133 + 12  @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E1C\n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8103C14\n\
-	bl	Random\n\
-	mov	r1, #0x1f\n\
-	and	r1, r1, r0\n\
-	add	r1, r1, #0x1\n\
-	str	r1, [r5]\n\
-	b	._132\n\
-._134:\n\
-	.align	2, 0\n\
-._133:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	unk_debug_bss_1_8\n\
-	.word	+0x2000000\n\
-._130:\n\
-	ldr	r0, ._136       @ gMain\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._135	@cond_branch\n\
-	mov	r0, #0x18\n\
-	bl	PlaySE\n\
-	ldr	r4, ._136 + 4   @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E1C\n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8103C14\n\
-._132:\n\
-	mov	r0, #0xd\n\
-	strb	r0, [r4]\n\
-._135:\n\
-	mov	r0, #0x0\n\
-	pop	{r4, r5}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._137:\n\
-	.align	2, 0\n\
-._136:\n\
-	.word	gMain\n\
-	.word	+0x2000000");
-}
-#else
-static bool8 sub_8102058(struct Task *task)
-{
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_JYUNI);
@@ -1252,121 +752,7 @@ static bool8 sub_8102058(struct Task *task)
     }
     return FALSE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102090(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldr	r4, ._146       @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E40\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r2, r0, #0x18\n\
-	cmp	r2, #0\n\
-	bne	._138	@cond_branch\n\
-	ldrh	r0, [r4, #0x18]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r4, #0x18]\n\
-	mov	r1, #0xc\n\
-	strb	r1, [r4]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0x2\n\
-	ble	._161	@cond_branch\n\
-	mov	r0, #0xe\n\
-	strb	r0, [r4]\n\
-	ldr	r0, ._146 + 4   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x8\n\
-	beq	._140	@cond_branch\n\
-	cmp	r0, #0x8\n\
-	bgt	._141	@cond_branch\n\
-	cmp	r0, #0x2\n\
-	beq	._142	@cond_branch\n\
-	cmp	r0, #0x2\n\
-	bgt	._143	@cond_branch\n\
-	cmp	r0, #0x1\n\
-	beq	._144	@cond_branch\n\
-	b	._161\n\
-._147:\n\
-	.align	2, 0\n\
-._146:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_0\n\
-._143:\n\
-	cmp	r0, #0x4\n\
-	beq	._148	@cond_branch\n\
-	b	._161\n\
-._141:\n\
-	cmp	r0, #0x40\n\
-	beq	._150	@cond_branch\n\
-	cmp	r0, #0x40\n\
-	bgt	._151	@cond_branch\n\
-	cmp	r0, #0x10\n\
-	beq	._152	@cond_branch\n\
-	b	._161\n\
-._151:\n\
-	cmp	r0, #0x80\n\
-	beq	._154	@cond_branch\n\
-	b	._161\n\
-._142:\n\
-	mov	r0, #0x14\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x12\n\
-	b	._160\n\
-._144:\n\
-	mov	r0, #0x14\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x12\n\
-	b	._160\n\
-._148:\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r4, #0x28]\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x2\n\
-	b	._160\n\
-._140:\n\
-	strh	r2, [r4, #0x28]\n\
-	mov	r0, #0x2\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x3\n\
-	b	._160\n\
-._152:\n\
-	mov	r0, #0x2\n\
-	strh	r0, [r4, #0x28]\n\
-	mov	r0, #0x5\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x14\n\
-	b	._160\n\
-._150:\n\
-	mov	r0, #0x13\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	strh	r2, [r4, #0x2c]\n\
-	b	._161\n\
-._154:\n\
-	mov	r0, #0x13\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-._160:\n\
-	strh	r0, [r4, #0x2c]\n\
-._161:\n\
-	mov	r0, #0x1\n\
-	b	._162\n\
-._138:\n\
-	mov	r0, #0x0\n\
-._162:\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1");
-}
-#else
 static bool8 sub_8102090(struct Task *task)
 {
     if (!sub_8102E40(eSlotMachine->unk18))
@@ -1376,173 +762,52 @@ static bool8 sub_8102090(struct Task *task)
         if (eSlotMachine->unk18 > 2)
         {
             eSlotMachine->state = 14;
+#if DEBUG
+            switch (unk_debug_bss_1_0)
+            {
+            case 2:
+                eSlotMachine->reelPositions[0] = 20;
+                eSlotMachine->reelPositions[1] = 20;
+                eSlotMachine->reelPositions[2] = 18;
+                break;
+            case 1:
+                eSlotMachine->reelPositions[0] = 20;
+                eSlotMachine->reelPositions[1] = 20;
+                eSlotMachine->reelPositions[2] = 18;
+                break;
+            case 4:
+                eSlotMachine->reelPositions[0] = 3;
+                eSlotMachine->reelPositions[1] = 1;
+                eSlotMachine->reelPositions[2] = 2;
+                break;
+            case 8:
+                eSlotMachine->reelPositions[0] = 0;
+                eSlotMachine->reelPositions[1] = 2;
+                eSlotMachine->reelPositions[2] = 3;
+                break;
+            case 0x10:
+                eSlotMachine->reelPositions[0] = 2;
+                eSlotMachine->reelPositions[1] = 5;
+                eSlotMachine->reelPositions[2] = 20;
+                break;
+            case 0x40:
+                eSlotMachine->reelPositions[0] = 19;
+                eSlotMachine->reelPositions[1] = 19;
+                eSlotMachine->reelPositions[2] = 0;
+                break;
+            case 0x80:
+                eSlotMachine->reelPositions[0] = 19;
+                eSlotMachine->reelPositions[1] = 19;
+                eSlotMachine->reelPositions[2] = 19;
+                break;
+            }
+#endif
         }
         return TRUE;
     }
     return FALSE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-bool8 sub_81020C8(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldr	r4, ._165       @ \n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0xc0\n\
-	and	r0, r0, r1\n\
-	strb	r0, [r4, #0x4]\n\
-	bl	CheckMatch\n\
-	ldrb	r0, [r4, #0xa]\n\
-	cmp	r0, #0\n\
-	beq	._163	@cond_branch\n\
-	sub	r0, r0, #0x1\n\
-	strb	r0, [r4, #0xa]\n\
-	ldrb	r0, [r4, #0xb]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r4, #0xb]\n\
-	b	._164\n\
-._166:\n\
-	.align	2, 0\n\
-._165:\n\
-	.word	+0x2000000\n\
-._163:\n\
-	bl	debug_sub_811B894\n\
-._164:\n\
-	ldr	r4, ._171       @ \n\
-	ldrh	r0, [r4, #0x8]\n\
-	cmp	r0, #0\n\
-	beq	._167	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x6c\n\
-	mov	r2, #0xe\n\
-	ldsh	r1, [r4, r2]\n\
-	bl	debug_sub_811B5B4\n\
-	mov	r0, #0xf\n\
-	strb	r0, [r4]\n\
-	bl	sub_8102A24\n\
-	bl	sub_8103F70\n\
-	ldrh	r0, [r4, #0x10]\n\
-	ldrh	r1, [r4, #0xe]\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r4, #0x10]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._168	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r4, #0x10]\n\
-._168:\n\
-	ldrh	r1, [r4, #0x8]\n\
-	mov	r0, #0xc0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._169	@cond_branch\n\
-	ldr	r0, ._171 + 4   @ \n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x6\n\
-	bl	sub_8104CAC\n\
-	b	._174\n\
-._172:\n\
-	.align	2, 0\n\
-._171:\n\
-	.word	+0x2000000\n\
-	.word	0x185\n\
-._169:\n\
-	mov	r0, #0x40\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._173	@cond_branch\n\
-	ldr	r0, ._175       @ 0x185\n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x5\n\
-	bl	sub_8104CAC\n\
-	b	._174\n\
-._176:\n\
-	.align	2, 0\n\
-._175:\n\
-	.word	0x185\n\
-._173:\n\
-	mov	r0, #0xc3\n\
-	lsl	r0, r0, #0x1\n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x2\n\
-	bl	sub_8104CAC\n\
-._174:\n\
-	ldr	r1, ._183       @ \n\
-	ldrh	r3, [r1, #0x8]\n\
-	mov	r0, #0xe0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	add	r2, r1, #0\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	ldrb	r1, [r2, #0x4]\n\
-	mov	r0, #0x3f\n\
-	and	r0, r0, r1\n\
-	mov	r1, #0x0\n\
-	strb	r0, [r2, #0x4]\n\
-	mov	r0, #0xc0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	strb	r1, [r2, #0xa]\n\
-	strb	r1, [r2, #0xb]\n\
-	strb	r1, [r2, #0x3]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	mov	r0, #0x1\n\
-	strb	r0, [r2, #0x3]\n\
-._179:\n\
-	ldrh	r1, [r2, #0x8]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._185	@cond_branch\n\
-	ldrb	r0, [r2, #0x2]\n\
-	cmp	r0, #0xf\n\
-	bhi	._185	@cond_branch\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r2, #0x2]\n\
-	ldrb	r0, [r2, #0x2]\n\
-	bl	sub_8104064\n\
-	b	._185\n\
-._184:\n\
-	.align	2, 0\n\
-._183:\n\
-	.word	+0x2000000\n\
-._167:\n\
-	mov	r0, #0x3\n\
-	bl	sub_8104CAC\n\
-	mov	r0, #0x14\n\
-	strb	r0, [r4]\n\
-	ldrh	r0, [r4, #0x12]\n\
-	ldrh	r1, [r4, #0x10]\n\
-	add	r0, r0, r1\n\
-	strh	r0, [r4, #0x10]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	ldr	r1, ._186       @ 0x270f\n\
-	cmp	r0, r1\n\
-	ble	._185	@cond_branch\n\
-	strh	r1, [r4, #0x10]\n\
-._185:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._187:\n\
-	.align	2, 0\n\
-._186:\n\
-	.word	0x270f");
-}
-#else
 bool8 sub_81020C8(struct Task *task)
 {
     eSlotMachine->unk04 &= 0xc0;
@@ -1552,8 +817,18 @@ bool8 sub_81020C8(struct Task *task)
         eSlotMachine->unk0A--;
         eSlotMachine->unk0B++;
     }
+#if DEBUG
+    else
+    {
+        debug_sub_811B894();
+    }
+#endif
+
     if (eSlotMachine->matchedSymbols)
     {
+#if DEBUG
+        debug_sub_811B5B4(eSlotMachine->unk6C, eSlotMachine->payout);
+#endif
         eSlotMachine->state = 15;
         sub_8102A24();
         sub_8103F70();
@@ -1585,9 +860,7 @@ bool8 sub_81020C8(struct Task *task)
                 eSlotMachine->unk0B = 0;
                 eSlotMachine->unk03 = 0;
                 if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_BLUE))
-                {
                     eSlotMachine->unk03 = 1;
-                }
             }
         }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER) && eSlotMachine->pikaPower < 16)
@@ -1601,20 +874,15 @@ bool8 sub_81020C8(struct Task *task)
         sub_8104CAC(3);
         eSlotMachine->state = 20;
         if ((eSlotMachine->unk10 += eSlotMachine->bet) > 9999)
-        {
             eSlotMachine->unk10 = 9999;
-        }
     }
     return FALSE;
 }
-#endif
 
 static bool8 sub_81021E0(struct Task *task)
 {
     if (sub_8102A44())
-    {
         eSlotMachine->state = 16;
-    }
     return FALSE;
 }
 
@@ -1624,18 +892,14 @@ static bool8 sub_81021FC(struct Task *task)
     {
         eSlotMachine->state = 19;
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_RED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE)))
-        {
             IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
-        }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             eSlotMachine->unk18 = 0;
             eSlotMachine->state = 9;
         }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER))
-        {
             eSlotMachine->state = 17;
-        }
         if (eSlotMachine->unk0A && eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             sub_8104CAC(4);
@@ -1758,56 +1022,18 @@ static bool8 sub_81023FC(struct Task *task)
     return FALSE;
 }
 
+static bool8 sub_8102424(struct Task *task)
+{
 #if DEBUG
-__attribute__((naked))
-static bool8 sub_8102424(struct Task *task)
-{
-    asm("\
-	push	{lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._234       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._233	@cond_branch\n\
-	ldr	r0, ._234 + 4   @ gSaveBlock1\n\
-	ldr	r1, ._234 + 8   @ \n\
-	ldrh	r1, [r1, #0xc]\n\
-	ldr	r2, ._234 + 12  @ \n\
-	add	r0, r0, r2\n\
-	strh	r1, [r0]\n\
-._233:\n\
-	mov	r0, #0x1\n\
-	neg	r0, r0\n\
-	mov	r1, #0x0\n\
-	str	r1, [sp]\n\
-	mov	r2, #0x0\n\
-	mov	r3, #0x10\n\
-	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._234 + 8   @ \n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x0\n\
-	add	sp, sp, #0x4\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._235:\n\
-	.align	2, 0\n\
-._234:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	gSaveBlock1\n\
-	.word	+0x2000000\n\
-	.word	0x494");
-}
+    if (unk_debug_bss_1_1 == 0)
+        gSaveBlock1.coins = eSlotMachine->coins;
 #else
-static bool8 sub_8102424(struct Task *task)
-{
     gSaveBlock1.coins = eSlotMachine->coins;
+#endif
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     eSlotMachine->state++;
     return FALSE;
 }
-#endif
 
 static bool8 sub_8102460(struct Task *task)
 {
@@ -1819,27 +1045,14 @@ static bool8 sub_8102460(struct Task *task)
 }
 
 #if DEBUG
-__attribute__((naked))
+
 static bool8 debug_sub_8116E74(struct Task *task)
 {
-    asm("\
-	push	{lr}\n\
-	bl	debug_sub_811B634\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	beq	._239	@cond_branch\n\
-	ldr	r1, ._240       @ \n\
-	mov	r0, #0x5\n\
-	strb	r0, [r1]\n\
-._239:\n\
-	mov	r0, #0x0\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._241:\n\
-	.align	2, 0\n\
-._240:\n\
-	.word	+0x2000000");
+    if (debug_sub_811B634() != 0)
+        eSlotMachine->state = 5;
+    return FALSE;
 }
+
 #endif
 
 #if DEBUG
@@ -5674,7 +4887,7 @@ void debug_sub_811B310()
 }
 
 __attribute__((naked))
-void debug_sub_811B5B4()
+static void debug_sub_811B5B4()
 {
     asm(
         "	push	{lr}\n"
@@ -5698,7 +4911,7 @@ void debug_sub_811B5B4()
 }
 
 __attribute__((naked))
-void debug_sub_811B5D0()
+static void debug_sub_811B5D0(void)
 {
     asm(
         "	ldr	r0, .__51\n"
@@ -5743,7 +4956,7 @@ void debug_sub_811B5D0()
 }
 
 __attribute__((naked))
-void debug_sub_811B620()
+static void debug_sub_811B620(void)
 {
     asm(
         "	push	{lr}\n"
@@ -5761,7 +4974,7 @@ void debug_sub_811B620()
 }
 
 __attribute__((naked))
-void debug_sub_811B634()
+static u8 debug_sub_811B634()
 {
     asm(
         "	push	{lr}\n"
@@ -6094,7 +5307,7 @@ void debug_sub_811B654()
 }
 
 __attribute__((naked))
-void debug_sub_811B894()
+static void debug_sub_811B894()
 {
     asm(
         "	push	{r4, r5, r6, r7, lr}\n"

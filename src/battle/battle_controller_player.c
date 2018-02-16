@@ -761,38 +761,38 @@ void sub_802C68C(void)
 #if DEBUG
     else if (gUnknown_020297ED == 1 && (gMain.newKeys & START_BUTTON))
     {
-	const u8 *moveName;
-	s32 i;
-	
-	Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
-	moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1)];
-	Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
-	ConvertIntToDecimalStringN(
-	  gDisplayedStringBattle,
-	  GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1),
-	  2, 3);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
-	for (i = 0; i < 64; i++)
-	{
-	    if (gSprites[i].inUse)
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
-	count = GetTaskCount();
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
-	for (i = 0, count = 0; i < 32; i++)
-	{
-	    if (gOamMatrixAllocBitmap & (1 << i))
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
-	gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
+        const u8 *moveName;
+        s32 i;
+
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
+        moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1)];
+        Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
+        ConvertIntToDecimalStringN(
+            gDisplayedStringBattle,
+            GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1),
+            2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
+        for (i = 0; i < 64; i++)
+        {
+            if (gSprites[i].inUse)
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
+        count = GetTaskCount();
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
+        for (i = 0, count = 0; i < 32; i++)
+        {
+            if (gOamMatrixAllocBitmap & (1 << i))
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
+        gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
     }
 #endif
 }
@@ -1008,117 +1008,117 @@ void debug_sub_803107C(void);
 void debug_sub_8030C24(void)
 {
     s16 move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1);
-    
+
     switch (gMain.newAndRepeatedKeys)
     {
     case START_BUTTON:
-	dp11b_obj_free(gActiveBank, 1);
-	dp11b_obj_free(gActiveBank, 0);
-	gBankAttacker = gActiveBank;
-	if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	    gBankTarget = gBankAttacker ^ 2;
-	else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	    gBankTarget = GetBankByIdentity(3);
-	else
-	    gBankTarget = GetBankByIdentity(1);
-	sub_80326EC(0);
-	DoMoveAnim(move);
-	gBattleBankFunc[gActiveBank] = debug_sub_803107C;
-	break;
+        dp11b_obj_free(gActiveBank, 1);
+        dp11b_obj_free(gActiveBank, 0);
+        gBankAttacker = gActiveBank;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankTarget = gBankAttacker ^ 2;
+        else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankTarget = GetBankByIdentity(3);
+        else
+            gBankTarget = GetBankByIdentity(1);
+        sub_80326EC(0);
+        DoMoveAnim(move);
+        gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        break;
     case SELECT_BUTTON:
-	dp11b_obj_free(gActiveBank, 1);
-	dp11b_obj_free(gActiveBank, 0);
-	gBankTarget = gActiveBank;
-	if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	    gBankAttacker = gBankTarget ^ 2;
-	else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	    gBankAttacker = GetBankByIdentity(3);
-	else
-	    gBankAttacker = GetBankByIdentity(1);
-	sub_80326EC(0);
-	DoMoveAnim(move);
-	gBattleBankFunc[gActiveBank] = debug_sub_803107C;
-	break;
+        dp11b_obj_free(gActiveBank, 1);
+        dp11b_obj_free(gActiveBank, 0);
+        gBankTarget = gActiveBank;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankAttacker = gBankTarget ^ 2;
+        else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankAttacker = GetBankByIdentity(3);
+        else
+            gBankAttacker = GetBankByIdentity(1);
+        sub_80326EC(0);
+        DoMoveAnim(move);
+        gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        break;
     case R_BUTTON:
-	if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	{
-	    dp11b_obj_free(gActiveBank, 1);
-	    dp11b_obj_free(gActiveBank, 0);
-	    gBankAttacker = GetBankByIdentity(3);
-	    gBankTarget = GetBankByIdentity(1);
-	    sub_80326EC(0);
-	    DoMoveAnim(move);
-	    gBattleBankFunc[gActiveBank] = debug_sub_803107C;
-	}
-	else
-	{
-	    move += 9;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            dp11b_obj_free(gActiveBank, 1);
+            dp11b_obj_free(gActiveBank, 0);
+            gBankAttacker = GetBankByIdentity(3);
+            gBankTarget = GetBankByIdentity(1);
+            sub_80326EC(0);
+            DoMoveAnim(move);
+            gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        }
+        else
+        {
+            move += 9;
     case DPAD_RIGHT:
-	    if (++move > 354)
-		move = 1;
-	    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
-	    gBattleMons[gActiveBank].moves[0] = move;
-	    Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
-	    Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
-	    ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
-	    Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
-	}
-	break;
+            if (++move > 354)
+            move = 1;
+            SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
+            gBattleMons[gActiveBank].moves[0] = move;
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+        }
+        break;
     case L_BUTTON:
-	if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-	{
-	    dp11b_obj_free(gActiveBank, 1);
-	    dp11b_obj_free(gActiveBank, 0);
-	    gBankAttacker = GetBankByIdentity(1);
-	    gBankTarget = GetBankByIdentity(3);
-	    sub_80326EC(0);
-	    DoMoveAnim(move);
-	    gBattleBankFunc[gActiveBank] = debug_sub_803107C;
-	}
-	else
-	{
-	    move -= 9;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            dp11b_obj_free(gActiveBank, 1);
+            dp11b_obj_free(gActiveBank, 0);
+            gBankAttacker = GetBankByIdentity(1);
+            gBankTarget = GetBankByIdentity(3);
+            sub_80326EC(0);
+            DoMoveAnim(move);
+            gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        }
+        else
+        {
+            move -= 9;
     case DPAD_LEFT:
-	    if (--move <= 0)
-		move = 354;
-	    SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
-	    gBattleMons[gActiveBank].moves[0] = move;
-	    Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
-	    Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
-	    ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
-	    Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
-	}
-	break;
+            if (--move <= 0)
+            move = 354;
+            SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
+            gBattleMons[gActiveBank].moves[0] = move;
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+        }
+        break;
     case DPAD_UP:
     case DPAD_DOWN:
-	if (gMain.newAndRepeatedKeys == DPAD_UP)
-	    gAnimMoveTurn--;
-	else
-	    gAnimMoveTurn++;
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 284, 4, 0x39);
-	break;
+        if (gMain.newAndRepeatedKeys == DPAD_UP)
+            gAnimMoveTurn--;
+        else
+            gAnimMoveTurn++;
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 284, 4, 0x39);
+        break;
     }
-    
+
     if ((gMain.heldKeysRaw & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON))
     {
-	u8 i;
-	u32 move;
+        u8 i;
+        u32 move;
 
-	for (i = 0; i < 4; i++)
-	{
-	    StringCopy(gDisplayedStringBattle, BattleText_Format);
-	    move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i);
-	    StringAppend(gDisplayedStringBattle, gMoveNames[move]);
-	    Text_InitWindow(
-		&gUnknown_03004210,
-		gDisplayedStringBattle,
-		0x100 + i * 16,
-		(i & 1) ? 10 : 2,
-		(i < 2) ? 0x37 : 0x39);
-	    Text_PrintWindow8002F44(&gUnknown_03004210);
-	}
-	gBattleBankFunc[gActiveBank] = sub_802C68C;
+        for (i = 0; i < 4; i++)
+        {
+            StringCopy(gDisplayedStringBattle, BattleText_Format);
+            move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i);
+            StringAppend(gDisplayedStringBattle, gMoveNames[move]);
+            Text_InitWindow(
+            &gUnknown_03004210,
+            gDisplayedStringBattle,
+            0x100 + i * 16,
+            (i & 1) ? 10 : 2,
+            (i < 2) ? 0x37 : 0x39);
+            Text_PrintWindow8002F44(&gUnknown_03004210);
+        }
+        gBattleBankFunc[gActiveBank] = sub_802C68C;
     }
 }
 
@@ -1129,33 +1129,33 @@ void debug_sub_803107C(void)
     gAnimScriptCallback();
     if (!gAnimScriptActive)
     {
-	s32 i;
-	
-	sub_80326EC(1);
-	dp11b_obj_instanciate(gActiveBank, 1, 7, 1);
-	dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
-	
-	for (i = 0, count = 0; i < MAX_SPRITES; i++)
-	{
-	    if (gSprites[i].inUse)
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 290, 8, 0x39);
-	
-	count = GetTaskCount();
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 294, 11, 0x39);
-	
-	for (i = 0, count = 0; i < 32; i++)
-	{
-	    if (gOamMatrixAllocBitmap & (1 << i))
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 298, 14, 0x39);
-	
-	gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
+        s32 i;
+
+        sub_80326EC(1);
+        dp11b_obj_instanciate(gActiveBank, 1, 7, 1);
+        dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
+
+        for (i = 0, count = 0; i < MAX_SPRITES; i++)
+        {
+            if (gSprites[i].inUse)
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 290, 8, 0x39);
+
+        count = GetTaskCount();
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 294, 11, 0x39);
+
+        for (i = 0, count = 0; i < 32; i++)
+        {
+            if (gOamMatrixAllocBitmap & (1 << i))
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 298, 14, 0x39);
+
+        gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
     }
 }
 
@@ -2491,7 +2491,7 @@ void PlayerHandlecmd3(void)
     u8 i;
     u8 *dst;
 
-    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i],
         gBattleBufferA[gActiveBank][2], i, dst);
     PlayerBufferExecCompleted();
 }

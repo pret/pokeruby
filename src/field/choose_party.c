@@ -23,7 +23,7 @@
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
-extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
+extern struct UnknownPokemonStruct2 gUnknown_02023A00[3];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
 extern const u16 gBattleTowerBannedSpecies[];
@@ -529,104 +529,31 @@ static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_81381B4()
+
+void debug_sub_81381B4(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r9\n"
-        "	mov	r6, r8\n"
-        "	push	{r6, r7}\n"
-        "	ldr	r4, ._189       @ gUnknown_02023A00\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x60\n"
-        "	bl	memset\n"
-        "	mov	r7, #0x0\n"
-        "	mov	r8, r4\n"
-        "	mov	r0, #0x4\n"
-        "	add r0, r0, r8\n"
-        "	mov	r9, r0\n"
-        "._188:\n"
-        "	mov	r0, #0x64\n"
-        "	add	r1, r7, #0\n"
-        "	mul	r1, r1, r0\n"
-        "	ldr	r0, ._189 + 4   @ gPlayerParty\n"
-        "	add	r5, r1, r0\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x41\n"
-        "	bl	GetMonData\n"
-        "	lsl	r4, r7, #0x5\n"
-        "	mov	r1, r8\n"
-        "	add	r6, r4, r1\n"
-        "	strh	r0, [r6]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	cmp	r0, #0\n"
-        "	beq	._187	@cond_branch\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x38\n"
-        "	bl	GetMonData\n"
-        "	strb	r0, [r6, #0xf]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x39\n"
-        "	bl	GetMonData\n"
-        "	strh	r0, [r6, #0x10]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x3a\n"
-        "	bl	GetMonData\n"
-        "	strh	r0, [r6, #0x12]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x37\n"
-        "	bl	GetMonData\n"
-        "	mov	r1, r8\n"
-        "	add	r1, r1, #0x14\n"
-        "	add	r1, r4, r1\n"
-        "	str	r0, [r1]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0xc\n"
-        "	bl	GetMonData\n"
-        "	strh	r0, [r6, #0x2]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x0\n"
-        "	bl	GetMonData\n"
-        "	mov	r1, r8\n"
-        "	add	r1, r1, #0x18\n"
-        "	add	r1, r4, r1\n"
-        "	str	r0, [r1]\n"
-        "	add	r0, r5, #0\n"
-        "	bl	GetMonGender\n"
-        "	strb	r0, [r6, #0x1c]\n"
-        "	add r4, r4, r9\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x2\n"
-        "	add	r2, r4, #0\n"
-        "	bl	GetMonData\n"
-        "	add	r0, r4, #0\n"
-        "	bl	Text_StripExtCtrlCodes\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetMonData\n"
-        "	strb	r0, [r6, #0x1d]\n"
-        "._187:\n"
-        "	add	r0, r7, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r7, #0x2\n"
-        "	bls	._188	@cond_branch\n"
-        "	pop	{r3, r4}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._190:\n"
-        "	.align	2, 0\n"
-        "._189:\n"
-        "	.word	gUnknown_02023A00\n"
-        "	.word	gPlayerParty+0x12c\n"
-        "\n"
-    );
+    u8 i;
+    
+    memset(gUnknown_02023A00, 0, sizeof(gUnknown_02023A00));
+    for (i = 0; i < 3; i++)
+    {
+        gUnknown_02023A00[i].species = GetMonData(&gPlayerParty[3 + i], MON_DATA_SPECIES2);
+        if (gUnknown_02023A00[i].species != 0)
+        {
+            gUnknown_02023A00[i].level = GetMonData(&gPlayerParty[3 + i], MON_DATA_LEVEL);
+            gUnknown_02023A00[i].hp = GetMonData(&gPlayerParty[3 + i], MON_DATA_HP);
+            gUnknown_02023A00[i].maxhp = GetMonData(&gPlayerParty[3 + i], MON_DATA_MAX_HP);
+            gUnknown_02023A00[i].status = GetMonData(&gPlayerParty[3 + i], MON_DATA_STATUS);
+            gUnknown_02023A00[i].heldItem = GetMonData(&gPlayerParty[3 + i], MON_DATA_HELD_ITEM);
+            gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[3 + i], MON_DATA_PERSONALITY);
+            gUnknown_02023A00[i].gender = GetMonGender(&gPlayerParty[3 + i]);
+            GetMonData(&gPlayerParty[3 + i], MON_DATA_NICKNAME, gUnknown_02023A00[i].nickname);
+            Text_StripExtCtrlCodes(gUnknown_02023A00[i].nickname);
+            gUnknown_02023A00[i].language = GetMonData(&gPlayerParty[3 + i], MON_DATA_LANGUAGE);
+        }
+    }
 }
+
 #endif
 
 bool8 SetupLinkMultiBattlePartyMenu(void)

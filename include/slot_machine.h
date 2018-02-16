@@ -1,7 +1,8 @@
 #ifndef GUARD_SLOT_MACHINE_H
 #define GUARD_SLOT_MACHINE_H
 
-enum {
+enum
+{
     SLOT_MACHINE_TAG_7_RED,
     SLOT_MACHINE_TAG_7_BLUE,
     SLOT_MACHINE_TAG_AZURILL,
@@ -11,7 +12,8 @@ enum {
     SLOT_MACHINE_TAG_REPLAY
 };
 
-enum {
+enum
+{
     SLOT_MACHINE_MATCHED_1CHERRY,
     SLOT_MACHINE_MATCHED_2CHERRY,
     SLOT_MACHINE_MATCHED_REPLAY,
@@ -24,7 +26,8 @@ enum {
     SLOT_MACHINE_MATCHED_NONE
 };
 
-struct SlotMachineEwramStruct {
+struct SlotMachineEwramStruct
+{
     /*0x00*/ u8 state;
     /*0x01*/ u8 unk01;
     /*0x02*/ u8 pikaPower;
@@ -70,6 +73,10 @@ struct SlotMachineEwramStruct {
     /*0x5e*/ u16 winOut;
     /*0x60*/ u16 backupMapMusic;
     /*0x64*/ MainCallback prevMainCb;
+#if DEBUG
+             u8 unk68[4];
+             u8 unk6C[0];
+#endif
 };
 
 void PlaySlotMachine(u8 arg0, MainCallback cb);
