@@ -2002,7 +2002,6 @@ static u8 CreateGameFreakLogo(s16 a, s16 b, u8 c)
     return spriteId;
 }
 
-#ifdef NONMATCHING
 static void sub_813DA64(struct Sprite *sprite)
 {
     sprite->data[7]++;
@@ -2022,14 +2021,13 @@ static void sub_813DA64(struct Sprite *sprite)
         break;
     case 1:
     {
-        s16 r3;
-        s16 sin1;
-        s16 r6;
-        s16 foo;
-        s16 r5;
-        s16 r2;
+        s16 sin;
+        s16 cos;
+        s16 a;
+        s16 b;
+        s16 c;
+        s16 d;
 
-        //_0813DAC0
         if (sprite->data[3] < 0x50)
         {
             sprite->pos2.y = -Sin((u8)sprite->data[3], 0x78);
@@ -2037,15 +2035,14 @@ static void sub_813DA64(struct Sprite *sprite)
             if (sprite->data[3] > 64)
                 sprite->oam.priority = 3;
         }
-        //_0813DAF8
-        r3 = gSineTable[(u8)sprite->data[2]];
-        sin1 = gSineTable[(u8)(sprite->data[2] + 64)];
-        r6 = sin1 * sprite->data[1] / 256;
-        foo = sin1 * sprite->data[1] / 256;
-        r5 = -r3 * sprite->data[1] / 256;
-        r2 = r3 * sprite->data[1] / 256;
+        sin = gSineTable[(u8)sprite->data[2]];
+        cos = gSineTable[(u8)(sprite->data[2] + 64)];
+        d =  cos * sprite->data[1] / 256;
+        c = -sin * sprite->data[1] / 256;
+        b =  sin * sprite->data[1] / 256;
+        a  = cos * sprite->data[1] / 256;
 
-        SetOamMatrix(1, r6, r2, r5, foo);
+        SetOamMatrix(1, a, b, c, d);
 
         if (sprite->data[1] < 0x100)
             sprite->data[1] += 8;
@@ -2060,180 +2057,7 @@ static void sub_813DA64(struct Sprite *sprite)
         break;
     }
     }
-    //_0813DB92
 }
-#else
-__attribute__((naked))
-static void sub_813DA64(struct Sprite *sprite)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x4\n\
-    adds r4, r0, 0\n\
-    ldrh r0, [r4, 0x3C]\n\
-    adds r0, 0x1\n\
-    strh r0, [r4, 0x3C]\n\
-    movs r1, 0x2E\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0\n\
-    beq _0813DA7C\n\
-    cmp r0, 0x1\n\
-    beq _0813DAC0\n\
-_0813DA7C:\n\
-    ldrb r0, [r4, 0x1]\n\
-    movs r1, 0x3\n\
-    orrs r0, r1\n\
-    strb r0, [r4, 0x1]\n\
-    ldrb r1, [r4, 0x3]\n\
-    movs r0, 0x3F\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    movs r1, 0x2\n\
-    orrs r0, r1\n\
-    strb r0, [r4, 0x3]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    movs r2, 0x3\n\
-    movs r3, 0x3\n\
-    bl CalcCenterToCornerVec\n\
-    adds r2, r4, 0\n\
-    adds r2, 0x3E\n\
-    ldrb r1, [r2]\n\
-    movs r0, 0x5\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r2]\n\
-    movs r0, 0x1\n\
-    strh r0, [r4, 0x2E]\n\
-    movs r0, 0x80\n\
-    strh r0, [r4, 0x30]\n\
-    ldr r0, _0813DABC @ =0x0000ffe8\n\
-    strh r0, [r4, 0x32]\n\
-    movs r0, 0\n\
-    b _0813DB92\n\
-    .align 2, 0\n\
-_0813DABC: .4byte 0x0000ffe8\n\
-_0813DAC0:\n\
-    ldrh r1, [r4, 0x34]\n\
-    movs r2, 0x34\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0x4F\n\
-    bgt _0813DAF8\n\
-    lsls r0, r1, 24\n\
-    lsrs r0, 24\n\
-    movs r1, 0x78\n\
-    bl Sin\n\
-    negs r0, r0\n\
-    strh r0, [r4, 0x26]\n\
-    ldrh r0, [r4, 0x34]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    movs r1, 0x8C\n\
-    bl Sin\n\
-    negs r0, r0\n\
-    strh r0, [r4, 0x24]\n\
-    movs r1, 0x34\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0x40\n\
-    ble _0813DAF8\n\
-    ldrb r0, [r4, 0x5]\n\
-    movs r1, 0xC\n\
-    orrs r0, r1\n\
-    strb r0, [r4, 0x5]\n\
-_0813DAF8:\n\
-    ldr r2, _0813DB60 @ =gSineTable\n\
-    ldrh r1, [r4, 0x32]\n\
-    lsls r0, r1, 24\n\
-    lsrs r0, 23\n\
-    adds r0, r2\n\
-    ldrh r3, [r0]\n\
-    adds r1, 0x40\n\
-    lsls r1, 24\n\
-    lsrs r1, 23\n\
-    adds r1, r2\n\
-    movs r2, 0\n\
-    ldrsh r0, [r1, r2]\n\
-    movs r1, 0x30\n\
-    ldrsh r2, [r4, r1]\n\
-    adds r1, r0, 0\n\
-    muls r1, r2\n\
-    adds r0, r1, 0\n\
-    cmp r1, 0\n\
-    bge _0813DB20\n\
-    adds r0, 0xFF\n\
-_0813DB20:\n\
-    lsls r0, 8\n\
-    lsrs r6, r0, 16\n\
-    lsls r0, r3, 16\n\
-    asrs r3, r0, 16\n\
-    negs r0, r3\n\
-    muls r0, r2\n\
-    cmp r0, 0\n\
-    bge _0813DB32\n\
-    adds r0, 0xFF\n\
-_0813DB32:\n\
-    lsls r0, 8\n\
-    lsrs r5, r0, 16\n\
-    adds r0, r3, 0\n\
-    muls r0, r2\n\
-    cmp r0, 0\n\
-    bge _0813DB40\n\
-    adds r0, 0xFF\n\
-_0813DB40:\n\
-    lsls r0, 8\n\
-    lsrs r2, r0, 16\n\
-    adds r1, r6, 0\n\
-    adds r3, r5, 0\n\
-    str r1, [sp]\n\
-    movs r0, 0x1\n\
-    bl SetOamMatrix\n\
-    ldrh r1, [r4, 0x30]\n\
-    movs r2, 0x30\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0xFF\n\
-    bgt _0813DB64\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x8\n\
-    b _0813DB68\n\
-    .align 2, 0\n\
-_0813DB60: .4byte gSineTable\n\
-_0813DB64:\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x20\n\
-_0813DB68:\n\
-    strh r0, [r4, 0x30]\n\
-    ldrh r1, [r4, 0x32]\n\
-    movs r2, 0x32\n\
-    ldrsh r0, [r4, r2]\n\
-    cmp r0, 0x17\n\
-    bgt _0813DB78\n\
-    adds r0, r1, 0x1\n\
-    strh r0, [r4, 0x32]\n\
-_0813DB78:\n\
-    ldrh r2, [r4, 0x34]\n\
-    movs r1, 0x34\n\
-    ldrsh r0, [r4, r1]\n\
-    cmp r0, 0x3F\n\
-    bgt _0813DB86\n\
-    adds r0, r2, 0x2\n\
-    b _0813DB92\n\
-_0813DB86:\n\
-    ldrh r1, [r4, 0x3C]\n\
-    movs r0, 0x3\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    bne _0813DB94\n\
-    adds r0, r2, 0x1\n\
-_0813DB92:\n\
-    strh r0, [r4, 0x34]\n\
-_0813DB94:\n\
-    add sp, 0x4\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_813DB9C(struct Sprite *sprite)
 {
