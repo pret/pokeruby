@@ -29,11 +29,11 @@ const struct DebugStruct1 gUnknown_Debug_4245CC[] =
     { 7, _("ナンバー7") },
 };
 
-const u8 gUnknown_Debug_8424620[][4] =
+const struct {u8 unk0; u8 unk1;} gUnknown_Debug_8424620[] =
 {
-    { 1, 1, 0, 0 },
-    { 2, 1, 0, 0 },
-    { 3, 1, 0, 0 },
+    { 1, 1 },
+    { 2, 1 },
+    { 3, 1 },
 };
 #endif
 
@@ -64,7 +64,7 @@ static int GetLinkBattleRecordTotalBattles(struct LinkBattleRecord *record)
     return record->wins + record->losses + record->draws;
 }
 
-static int FindLinkBattleRecord(struct LinkBattleRecord *records, u8 *name, u16 trainerId)
+static int FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u16 trainerId)
 {
     int i;
 
@@ -145,7 +145,7 @@ static void UpdateLinkBattleGameStats(int battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords_(struct LinkBattleRecord *records, u8 *name, u16 trainerId, int battleOutcome, u8 language)
+static void UpdateLinkBattleRecords_(struct LinkBattleRecord *records, const u8 *name, u16 trainerId, int battleOutcome, u8 language)
 {
     int index;
     UpdateLinkBattleGameStats(battleOutcome);
@@ -224,62 +224,22 @@ void UpdateLinkBattleRecords(int id)
 }
 
 #if DEBUG
-__attribute__((naked))
 void debug_sub_81257E0(void)
 {
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r8\n\
-	push	{r7}\n\
-	add	sp, sp, #0xfffffffc\n\
-	bl	InitLinkBattleRecords\n\
-	mov	r5, #0x0\n\
-	ldr	r6, ._62        @ gUnknown_Debug_4245CC\n\
-	sub	r0, r6, #2\n\
-	mov	r8, r0\n\
-	ldr	r7, ._62 + 4    @ gLinkPlayers\n\
-._61:\n\
-	ldr	r0, ._62 + 8    @ gUnknown_Debug_8424620\n\
-	lsl	r3, r5, #0x2\n\
-	add	r3, r3, r0\n\
-	ldrb	r4, [r3]\n\
-	sub	r4, r4, #0x1\n\
-	lsl	r0, r4, #0x1\n\
-	add	r0, r0, r4\n\
-	lsl	r0, r0, #0x2\n\
-	add	r1, r0, r6\n\
-	add r0, r0, r8\n\
-	ldrh	r2, [r0]\n\
-	ldrb	r3, [r3, #0x1]\n\
-	ldr	r0, ._62 + 12   @ gLinkPlayerMapObjects\n\
-	lsl	r4, r4, #0x2\n\
-	add	r4, r4, r0\n\
-	ldrb	r4, [r4, #0x1]\n\
-	lsl	r0, r4, #0x3\n\
-	sub	r0, r0, r4\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r7\n\
-	ldrb	r0, [r0, #0x1a]\n\
-	str	r0, [sp]\n\
-	ldr	r0, ._62 + 16   @ gSaveBlock1\n\
-	bl	UpdateLinkBattleRecords_\n\
-	add	r5, r5, #0x1\n\
-	cmp	r5, #0x2\n\
-	bls	._61	@cond_branch\n\
-	add	sp, sp, #0x4\n\
-	pop	{r3}\n\
-	mov	r8, r3\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._63:\n\
-	.align	2, 0\n\
-._62:\n\
-	.word	gUnknown_Debug_4245CC+2\n\
-	.word	gLinkPlayers\n\
-	.word	gUnknown_Debug_8424620\n\
-	.word	gLinkPlayerMapObjects\n\
-	.word	gSaveBlock1+0x30b8");
+    u32 i;
+
+    InitLinkBattleRecords();
+    for (i = 0; i < 3; i++)
+    {
+        u32 id = gUnknown_Debug_8424620[i].unk0 - 1;
+
+        UpdateLinkBattleRecords_(
+            gSaveBlock1.linkBattleRecords,
+            gUnknown_Debug_4245CC[id].var1,
+            gUnknown_Debug_4245CC[id].var0,
+            gUnknown_Debug_8424620[i].unk1,
+            gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
+    }
 }
 #endif
 

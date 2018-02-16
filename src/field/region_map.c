@@ -1413,14 +1413,14 @@ static const u8 sUnknown_083E7920[][3] =
 
 struct UnknownStruct4
 {
-    const u8 *const *unk0;
+    const u8 *const *partNames;
     u16 mapSectionId;
-    u16 flag;
+    u16 requiredFlag;
 };
 
 static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
 
-const struct UnknownStruct4 gUnknown_083E79C0[1] =
+static const struct UnknownStruct4 sMultiPartMapSections[1] =
 {
     {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
@@ -1608,21 +1608,19 @@ static void PrintFlyTargetName(void)
 {
     if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
     {
+        bool8 drawFrameDisabled = FALSE;
         u16 i;
-        bool32 drawFrameDisabled = FALSE;
 
-        for (i = 0; i < ARRAY_COUNT(gUnknown_083E79C0); i++)
+        for (i = 0; i < ARRAY_COUNT(sMultiPartMapSections); i++)
         {
-            const struct UnknownStruct4 *r4 = &gUnknown_083E79C0[i];
-
-            if (ewram0_3.regionMap.mapSectionId == r4->mapSectionId)
+            if (ewram0_3.regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
             {
-                if (FlagGet(r4->flag))
+                if (FlagGet(sMultiPartMapSections[i].requiredFlag))
                 {
                     Menu_DrawStdWindowFrame(16, 14, 29, 19);
                     Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 15);
-                    MenuPrint_RightAligned(r4->unk0[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
-                    return;
+                    MenuPrint_RightAligned(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
+                    drawFrameDisabled = TRUE;
                 }
                 break;
             }
@@ -1839,3 +1837,131 @@ void sub_80FC69C(void)
         break;
     }
 }
+
+#if DEBUG
+
+void debug_sub_8110CCC(void)
+{
+    bool8 r7 = FALSE;
+    u16 i;
+    s16 indent;
+
+    for (i = 0; i < ARRAY_COUNT(sMultiPartMapSections); i++)
+    {
+        if (ewram0_3.regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
+        {
+            if (FlagGet(sMultiPartMapSections[i].requiredFlag))
+            {
+                indent = 12 - StringLength(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea]);
+                if (indent < 0)
+                    indent = 0;
+                r7 = TRUE;
+                Menu_DrawStdWindowFrame(16, 14, 29, 19);
+                Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 15);
+                Menu_PrintText(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea], 17 + indent, 17);
+            }
+            break;
+        }
+    }
+    if (!r7)
+    {
+        Menu_DrawStdWindowFrame(16, 16, 29, 19);
+        Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 17);
+        Menu_EraseWindowRect(16, 14, 29, 15);
+    }
+}
+
+void debug_sub_8110D84(void)
+{
+    switch (ewram0_3.unk4)
+    {
+    case 0:
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        ewram0_3.unk4++;
+        break;
+    case 1:
+        if (!UpdatePaletteFade())
+            ewram0_3.unk4++;
+        break;
+    case 2:
+        switch (sub_80FAB60())
+        {
+        case 0:
+            break;
+        case 3:
+            debug_sub_8110CCC();
+            break;
+        case 4:
+            if (ewram0_3.regionMap.unk16 != 0)
+            {
+                m4aSongNumStart(SE_SELECT);
+                gSharedMem[0xA6E] = 1;  // TODO: what is this?
+                sub_80FC244(sub_80FC69C);
+            }
+            break;
+        case 5:
+            m4aSongNumStart(SE_SELECT);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            ewram0_3.unk4++;
+            break;
+        }
+        break;
+    case 3:
+        if (!UpdatePaletteFade())
+            SetMainCallback2(sub_805469C);
+        break;
+    case 4:
+        if (sub_80FAB60() != 0)
+        {
+            debug_sub_8110CCC();
+        }
+        else if (gMain.newKeys & A_BUTTON)
+        {
+            sub_80FBCA0();
+            sub_80FAEC4();
+            ewram0_3.unk4++;
+        }
+        break;
+    case 5:
+        if (sub_80FAFC0() == 0)
+        {
+            CreateRegionMapCursor(0, 0);
+            ewram0_3.unk4++;
+        }
+        break;
+    case 6:
+        if (sub_80FAB60() != 0)
+        {
+            debug_sub_8110CCC();
+        }
+        if (gMain.newKeys & A_BUTTON)  // no "else if" like above?
+        {
+            sub_80FBCA0();
+            sub_80FAEC4();
+            ewram0_3.unk4++;
+        }
+        break;
+    case 7:
+        if (sub_80FAFC0() == 0)
+        {
+            CreateRegionMapCursor(0, 0);
+            ewram0_3.unk4 = 3;
+        }
+        break;
+    }
+}
+
+void debug_sub_8110F28(void)
+{
+    CB2_InitFlyRegionMap();
+    
+    if (gMain.callback2 == CB2_FlyRegionMap)
+    {
+        sub_80FBF94();
+        sub_80FC244(debug_sub_8110D84);
+        debug_sub_8110CCC();
+    }
+}
+
+#endif
+
