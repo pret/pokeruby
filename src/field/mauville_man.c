@@ -253,32 +253,32 @@ void SetupMauvilleOldMan(void)
 #if DEBUG
 void debug_sub_810B32C(u8 a)
 {
-	u8 i;
-	u8 savedArr[8];
+    u8 i;
+    u8 savedArr[8];
 
-	switch (a)
-	{
-	case 0:
-		SetupBard();
-		break;
-	case 1:
-		for (i = 0; i < 8; i++)
-			savedArr[i] = gSaveBlock1.unk2D8C[i];
-		SetupHipster();
-		for (i = 0; i < 8; i++)
-			gSaveBlock1.unk2D8C[i] = savedArr[i];
-		break;
-	case 2:
-		SetupTrader();
-		break;
-	case 3:
-		SetupStoryteller();
-		break;
-	case 4:
-		SetupGiddy();
-		break;
-	}
-	sub_80F83D0();
+    switch (a)
+    {
+    case 0:
+        SetupBard();
+        break;
+    case 1:
+        for (i = 0; i < 8; i++)
+            savedArr[i] = gSaveBlock1.unk2D8C[i];
+        SetupHipster();
+        for (i = 0; i < 8; i++)
+            gSaveBlock1.unk2D8C[i] = savedArr[i];
+        break;
+    case 2:
+        SetupTrader();
+        break;
+    case 3:
+        SetupStoryteller();
+        break;
+    case 4:
+        SetupGiddy();
+        break;
+    }
+    sub_80F83D0();
 }
 #endif
 

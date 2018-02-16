@@ -1411,22 +1411,26 @@ static const u8 sUnknown_083E7920[][3] =
     {0, 49,  0},
 };
 
-struct UnknownStruct4
+static const u8 *const sEverGrandeCityAreaNames[] =
+{
+    OtherText_PokeLeague,
+    OtherText_PokeCenter,
+};
+
+struct MultiPartMapSection
 {
     const u8 *const *partNames;
     u16 mapSectionId;
     u16 requiredFlag;
 };
 
-static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
-
-static const struct UnknownStruct4 sMultiPartMapSections[1] =
+// Map sections that are divided into multiple parts. Ever Grande City is the only one.
+static const struct MultiPartMapSection sMultiPartMapSections[1] =
 {
     {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
-// XXX: what is this?
-static u8 *const ewram_ = gSharedMem;
+static struct UnknownStruct3 *const sFlyDataPtr = (struct UnknownStruct3 *)gSharedMem;
 
 static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
 
@@ -1547,10 +1551,10 @@ void CB2_InitFlyRegionMap(void)
         Menu_EraseScreen();
         break;
     case 3:
-        InitRegionMap(&ewram0_3.regionMap, 0);
+        InitRegionMap(&sFlyDataPtr->regionMap, 0);
         CreateRegionMapCursor(0, 0);
         CreateRegionMapPlayerIcon(1, 1);
-        ewram0_3.unk6 = ewram0_3.regionMap.mapSectionId;
+        sFlyDataPtr->unk6 = sFlyDataPtr->regionMap.mapSectionId;
         StringFill(ewramBlankMapName, CHAR_SPACE, 12);
         PrintFlyTargetName();
         break;
@@ -1593,33 +1597,33 @@ static void VBlankCB_FlyRegionMap(void)
 
 void CB2_FlyRegionMap(void)
 {
-    ewram0_3.unk0();
+    sFlyDataPtr->unk0();
     AnimateSprites();
     BuildOamBuffer();
 }
 
 void sub_80FC244(void (*func)(void))
 {
-    ewram0_3.unk0 = func;
-    ewram0_3.unk4 = 0;
+    sFlyDataPtr->unk0 = func;
+    sFlyDataPtr->unk4 = 0;
 }
 
 static void PrintFlyTargetName(void)
 {
-    if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
+    if (sFlyDataPtr->regionMap.unk16 == 2 || sFlyDataPtr->regionMap.unk16 == 4)
     {
         bool8 drawFrameDisabled = FALSE;
         u16 i;
 
         for (i = 0; i < ARRAY_COUNT(sMultiPartMapSections); i++)
         {
-            if (ewram0_3.regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
+            if (sFlyDataPtr->regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
             {
                 if (FlagGet(sMultiPartMapSections[i].requiredFlag))
                 {
                     Menu_DrawStdWindowFrame(16, 14, 29, 19);
-                    Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 15);
-                    MenuPrint_RightAligned(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea], 29, 17);
+                    Menu_PrintText(sFlyDataPtr->regionMap.mapSectionName, 17, 15);
+                    MenuPrint_RightAligned(sMultiPartMapSections[i].partNames[sFlyDataPtr->regionMap.everGrandeCityArea], 29, 17);
                     drawFrameDisabled = TRUE;
                 }
                 break;
@@ -1629,7 +1633,7 @@ static void PrintFlyTargetName(void)
         if (!drawFrameDisabled)
         {
             Menu_DrawStdWindowFrame(16, 16, 29, 19);
-            Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 17);
+            Menu_PrintText(sFlyDataPtr->regionMap.mapSectionName, 17, 17);
             Menu_EraseWindowRect(16, 14, 29, 15);
         }
     }
@@ -1730,7 +1734,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 {
     // Blink if our mapSectionId is the one selected on the map
-    if (ewram0_3.regionMap.mapSectionId == sprite->data[0])
+    if (sFlyDataPtr->regionMap.mapSectionId == sprite->data[0])
     {
         // Toggle visibility every 16 frames
         sprite->data[1]++;
@@ -1749,11 +1753,11 @@ static void SpriteCB_FlyTargetIcons(struct Sprite *sprite)
 
 static void sub_80FC5B4(void)
 {
-    switch (ewram0_3.unk4)
+    switch (sFlyDataPtr->unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-        ewram0_3.unk4++;
+        sFlyDataPtr->unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1765,7 +1769,7 @@ static void sub_80FC5B4(void)
 
 static void sub_80FC600(void)
 {
-    if (ewram0_3.unk4 == 0)
+    if (sFlyDataPtr->unk4 == 0)
     {
         switch (sub_80FAB60())
         {
@@ -1777,7 +1781,7 @@ static void sub_80FC600(void)
             PrintFlyTargetName();
             break;
         case INPUT_EVENT_A_BUTTON:
-            if (ewram0_3.regionMap.unk16 == 2 || ewram0_3.regionMap.unk16 == 4)
+            if (sFlyDataPtr->regionMap.unk16 == 2 || sFlyDataPtr->regionMap.unk16 == 4)
             {
                 m4aSongNumStart(SE_SELECT);
                 ewramA6E = 1;
@@ -1795,11 +1799,11 @@ static void sub_80FC600(void)
 
 void sub_80FC69C(void)
 {
-    switch (ewram0_3.unk4)
+    switch (sFlyDataPtr->unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-        ewram0_3.unk4++;
+        sFlyDataPtr->unk4++;
         break;
     case 1:
         if (UpdatePaletteFade() != 0)
@@ -1807,7 +1811,7 @@ void sub_80FC69C(void)
         FreeRegionMapIconResources();
         if (ewramA6E != 0)
         {
-            switch (ewram0_3.regionMap.mapSectionId)
+            switch (sFlyDataPtr->regionMap.mapSectionId)
             {
             case MAPSEC_SOUTHERN_ISLAND:
                 sub_8053538(22);
@@ -1819,13 +1823,13 @@ void sub_80FC69C(void)
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && ewram0_3.regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:
-                if (sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2] != 0)
-                    sub_8053538(sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][2]);
+                if (sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
+                    sub_8053538(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2]);
                 else
-                    warp1_set_2(sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][0], sUnknown_083E7920[ewram0_3.regionMap.mapSectionId][1], -1);
+                    warp1_set_2(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][0], sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][1], -1);
                 break;
             }
             sub_80865BC();
@@ -1848,17 +1852,17 @@ void debug_sub_8110CCC(void)
 
     for (i = 0; i < ARRAY_COUNT(sMultiPartMapSections); i++)
     {
-        if (ewram0_3.regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
+        if (sFlyDataPtr->regionMap.mapSectionId == sMultiPartMapSections[i].mapSectionId)
         {
             if (FlagGet(sMultiPartMapSections[i].requiredFlag))
             {
-                indent = 12 - StringLength(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea]);
+                indent = 12 - StringLength(sMultiPartMapSections[i].partNames[sFlyDataPtr->regionMap.everGrandeCityArea]);
                 if (indent < 0)
                     indent = 0;
                 r7 = TRUE;
                 Menu_DrawStdWindowFrame(16, 14, 29, 19);
-                Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 15);
-                Menu_PrintText(sMultiPartMapSections[i].partNames[ewram0_3.regionMap.everGrandeCityArea], 17 + indent, 17);
+                Menu_PrintText(sFlyDataPtr->regionMap.mapSectionName, 17, 15);
+                Menu_PrintText(sMultiPartMapSections[i].partNames[sFlyDataPtr->regionMap.everGrandeCityArea], 17 + indent, 17);
             }
             break;
         }
@@ -1866,22 +1870,22 @@ void debug_sub_8110CCC(void)
     if (!r7)
     {
         Menu_DrawStdWindowFrame(16, 16, 29, 19);
-        Menu_PrintText(ewram0_3.regionMap.mapSectionName, 17, 17);
+        Menu_PrintText(sFlyDataPtr->regionMap.mapSectionName, 17, 17);
         Menu_EraseWindowRect(16, 14, 29, 15);
     }
 }
 
 void debug_sub_8110D84(void)
 {
-    switch (ewram0_3.unk4)
+    switch (sFlyDataPtr->unk4)
     {
     case 0:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
-        ewram0_3.unk4++;
+        sFlyDataPtr->unk4++;
         break;
     case 1:
         if (!UpdatePaletteFade())
-            ewram0_3.unk4++;
+            sFlyDataPtr->unk4++;
         break;
     case 2:
         switch (sub_80FAB60())
@@ -1892,7 +1896,7 @@ void debug_sub_8110D84(void)
             debug_sub_8110CCC();
             break;
         case 4:
-            if (ewram0_3.regionMap.unk16 != 0)
+            if (sFlyDataPtr->regionMap.unk16 != 0)
             {
                 m4aSongNumStart(SE_SELECT);
                 gSharedMem[0xA6E] = 1;  // TODO: what is this?
@@ -1902,7 +1906,7 @@ void debug_sub_8110D84(void)
         case 5:
             m4aSongNumStart(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-            ewram0_3.unk4++;
+            sFlyDataPtr->unk4++;
             break;
         }
         break;
@@ -1919,14 +1923,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            ewram0_3.unk4++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 5:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            ewram0_3.unk4++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 6:
@@ -1938,14 +1942,14 @@ void debug_sub_8110D84(void)
         {
             sub_80FBCA0();
             sub_80FAEC4();
-            ewram0_3.unk4++;
+            sFlyDataPtr->unk4++;
         }
         break;
     case 7:
         if (sub_80FAFC0() == 0)
         {
             CreateRegionMapCursor(0, 0);
-            ewram0_3.unk4 = 3;
+            sFlyDataPtr->unk4 = 3;
         }
         break;
     }
