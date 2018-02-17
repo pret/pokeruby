@@ -1521,9 +1521,9 @@ void PrintBattleTowerTrainerGreeting(void)
     if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
         PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.ereaderTrainer.greeting);
     else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-        PrintBattleTowerTrainerMessage((u16 *)gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].greeting.easyChat);
+        PrintBattleTowerTrainerMessage((u16 *)gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].greeting);
     else
-        PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting.easyChat);
+        PrintBattleTowerTrainerMessage(gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].greeting);
 }
 
 void sub_81354CC(void)
@@ -1792,7 +1792,7 @@ void sub_8135AC4(void)
     playerRecord->winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
 
     for (i = 0; i < 6; i++)
-        playerRecord->greeting.easyChat[i] = gSaveBlock1.easyChats.unk2B28[i];
+        playerRecord->greeting[i] = gSaveBlock1.easyChats.unk2B28[i];
 
     for (i = 0; i < 3; i++)
         sub_803AF78(&gUnknown_030042FC[gSaveBlock2.battleTower.selectedPartyMons[i]], &playerRecord->party[i]);

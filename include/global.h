@@ -737,24 +737,20 @@ struct BattleTowerTrainer
     /*0x00*/ u8 trainerClass;
     /*0x01*/ u8 name[8];
     /*0x09*/ u8 teamFlags;
-    /*0x0C*/
-    struct {
-        u16 easyChat[6];
-    } greeting[6];
+             u8 filler0A[2];
+    /*0x0C*/ u16 greeting[6];
 };
 
 struct BattleTowerRecord // record mixing
 {
-    /*0x00*/u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/u8 trainerClass;
-    /*0x02*/u16 winStreak;
-    /*0x04*/u8 name[8];
-    /*0x0C*/u8 trainerId[4];
-    /*0x10*/struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/struct UnknownPokemonStruct party[3];
-    /*0xA0*/u32 checksum;
+    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ struct UnknownPokemonStruct party[3];
+    /*0xA0*/ u32 checksum;
 };
 
 struct BattleTowerEReaderTrainer
