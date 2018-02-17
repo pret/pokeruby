@@ -164,7 +164,9 @@ static bool8 sub_81023E0(struct Task *task);
 static bool8 sub_81023FC(struct Task *task);
 static bool8 sub_8102424(struct Task *task);
 static bool8 sub_8102460(struct Task *task);
+#if DEBUG
 static bool8 debug_sub_8116E74(struct Task *);
+#endif
 static void sub_8102484(void);
 static void sub_81024F0(void);
 static bool8 sub_8102540(void);
@@ -311,12 +313,14 @@ static void sub_81064B8(void);
 static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 static void sub_81065DC(void);
 
+#if DEBUG
 static void debug_sub_811B5D0(void);
 static void debug_sub_811B620(void);
 static void debug_sub_811B5B4(s32 *, s32);
 static void debug_sub_811B894(void);
 static u8 debug_sub_811B634(void);
 static void debug_sub_811B654(u8 taskId);
+#endif
 
 #if DEBUG
 static u8 unk_debug_bss_1_0;
