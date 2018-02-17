@@ -734,9 +734,10 @@ struct Pokedex
 
 struct BattleTowerTrainer
 {
-    u8 trainerClass;
-    u8 name[8];
-    u8 teamFlags;
+    /*0x00*/ u8 trainerClass;
+    /*0x01*/ u8 name[8];
+    /*0x09*/ u8 teamFlags;
+    /*0x0C*/
     struct {
         u16 easyChat[6];
     } greeting;
@@ -756,6 +757,7 @@ struct BattleTowerRecord // record mixing
     /*0xA0*/u32 checksum;
 };
 
+#if 0
 struct BattleTowerEReaderTrainer
 {
     /*0x00*/u8 unk0;
@@ -774,6 +776,21 @@ struct BattleTowerEReaderTrainer
     } farewellPlayerWon;
     /*0x34*/struct UnknownPokemonStruct party[3];
     /*0xB8*/u32 checksum;
+};
+#endif
+
+struct BattleTowerEReaderTrainer
+{
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct BattleTowerData
@@ -831,7 +848,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 height;
+    s8 height;
 };
 
 struct UnkStruct_8054FF8

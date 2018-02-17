@@ -73,112 +73,43 @@ static const struct SpriteTemplate gSpriteTemplate_CutGrass =
 };
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_80AFEE4()
+
+void debug_sub_80AFEE4(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r8\n"
-        "	push	{r7}\n"
-        "	mov	r0, #0x52\n"
-        "	bl	npc_before_player_of_type\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._1	@cond_branch\n"
-        "	ldr	r1, ._3         @ gLastFieldPokeMenuOpened\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	bl	sub_80A2634\n"
-        "	b	._8\n"
-        "._4:\n"
-        "	.align	2, 0\n"
-        "._3:\n"
-        "	.word	gLastFieldPokeMenuOpened\n"
-        "._1:\n"
-        "	ldr	r4, ._9         @ gUnknown_0203923C\n"
-        "	add	r1, r4, #2\n"
-        "	add	r0, r4, #0\n"
-        "	bl	PlayerGetDestCoords\n"
-        "	mov	r7, #0x0\n"
-        "	mov	r8, r4\n"
-        "._12:\n"
-        "	ldr	r1, ._9 + 4     @ 0xffff\n"
-        "	add	r0, r7, r1\n"
-        "	mov	r2, r8\n"
-        "	ldrh	r2, [r2, #0x2]\n"
-        "	add	r0, r0, r2\n"
-        "	mov	r6, #0x0\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r5, r0, #0x10\n"
-        "._11:\n"
-        "	ldr	r1, ._9 + 4     @ 0xffff\n"
-        "	add	r0, r6, r1\n"
-        "	mov	r2, r8\n"
-        "	ldrh	r2, [r2]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r4, r0, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	MapGridGetZCoordAt\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r2, r8\n"
-        "	mov	r1, #0x4\n"
-        "	ldsb	r1, [r2, r1]\n"
-        "	cmp	r0, r1\n"
-        "	bne	._7	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	MapGridGetMetatileBehaviorAt\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	add	r0, r4, #0\n"
-        "	bl	MetatileBehavior_IsPokeGrass\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._6	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	bl	MetatileBehavior_IsAshGrass\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._7	@cond_branch\n"
-        "._6:\n"
-        "	ldr	r1, ._9 + 8     @ gLastFieldPokeMenuOpened\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        "	bl	sub_80A25E8\n"
-        "	b	._8\n"
-        "._10:\n"
-        "	.align	2, 0\n"
-        "._9:\n"
-        "	.word	gUnknown_0203923C\n"
-        "	.word	0xffff\n"
-        "	.word	gLastFieldPokeMenuOpened\n"
-        "._7:\n"
-        "	add	r0, r6, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r6, r0, #0x18\n"
-        "	cmp	r6, #0x2\n"
-        "	bls	._11	@cond_branch\n"
-        "	add	r0, r7, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r7, #0x2\n"
-        "	bls	._12	@cond_branch\n"
-        "	bl	ScriptContext2_Disable\n"
-        "._8:\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    s16 x, y;
+    u8 i, j;
+    u8 metatile;
+
+    if (npc_before_player_of_type(0x52) == TRUE)
+    {
+        gLastFieldPokeMenuOpened = 0;
+        sub_80A2634();
+        return;
+    }
+
+    PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+    for (i = 0; i < 3; i++)
+    {
+        y = i - 1 + gUnknown_0203923C.y;
+        for (j = 0; j < 3; j++)
+        {
+            x = j - 1 + gUnknown_0203923C.x;
+            if (MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
+            {
+                metatile = MapGridGetMetatileBehaviorAt(x, y);
+                if (MetatileBehavior_IsPokeGrass(metatile) == TRUE
+                 || MetatileBehavior_IsAshGrass(metatile) == TRUE)
+                {
+                    gLastFieldPokeMenuOpened = 0;
+                    sub_80A25E8();
+                    return;
+                }
+            }
+        }
+    }
+    ScriptContext2_Disable();
 }
+
 #endif
 
 bool8 SetUpFieldMove_Cut(void)
@@ -202,7 +133,7 @@ bool8 SetUpFieldMove_Cut(void)
             for(j = 0; j < 3; j++)
             {
                 x = j - 1 + gUnknown_0203923C.x;
-                if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
+                if(MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE

@@ -253,33 +253,33 @@ void debug_sub_80D93F4(void)
 
     if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != 2)
     {
-	ScriptContext2_Disable();
-	return;
+        ScriptContext2_Disable();
+        return;
     }
     
     GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
     metatile = MapGridGetMetatileBehaviorAt(gUnknown_0203923C.x, gUnknown_0203923C.y);
     if (MetatileBehavior_IsSecretBaseCave(metatile) == TRUE)
     {
-	sub_80C6264();
-	gLastFieldPokeMenuOpened = 0;
-	sub_80C639C();
+        sub_80C6264();
+        gLastFieldPokeMenuOpened = 0;
+        sub_80C639C();
     }
     else if (MetatileBehavior_IsSecretBaseTree(metatile) == TRUE)
     {
-	sub_80C6264();
-	gLastFieldPokeMenuOpened = 0;
-	sub_80C64A8();
+        sub_80C6264();
+        gLastFieldPokeMenuOpened = 0;
+        sub_80C64A8();
     }
     else if (MetatileBehavior_IsSecretBaseShrub(metatile) == TRUE)
     {
-	sub_80C6264();
-	gLastFieldPokeMenuOpened = 0;
-	sub_80C660C();
+        sub_80C6264();
+        gLastFieldPokeMenuOpened = 0;
+        sub_80C660C();
     }
     else
     {
-	ScriptContext2_Disable();
+        ScriptContext2_Disable();
     }
 }
 
