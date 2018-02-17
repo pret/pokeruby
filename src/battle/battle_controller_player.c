@@ -778,7 +778,7 @@ void sub_802C68C(void)
         for (i = 0; i < 64; i++)
         {
             if (gSprites[i].inUse)
-            count++;
+                count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
         Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
@@ -788,7 +788,7 @@ void sub_802C68C(void)
         for (i = 0, count = 0; i < 32; i++)
         {
             if (gOamMatrixAllocBitmap & (1 << i))
-            count++;
+                count++;
         }
         ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
         Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);

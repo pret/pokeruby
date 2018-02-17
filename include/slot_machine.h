@@ -74,8 +74,17 @@ struct SlotMachineEwramStruct
     /*0x60*/ u16 backupMapMusic;
     /*0x64*/ MainCallback prevMainCb;
 #if DEBUG
-             u8 unk68[4];
-             u8 unk6C[0];
+             u32 unk68;
+             u32 unk6C;
+             u32 unk70;
+             u32 unk74;
+             u32 unk78;
+             u32 unk7C;
+             u32 unk80;
+             u32 unk84;
+             u32 unk88;
+             u32 unk8C;
+             s32 unk90;
 #endif
 };
 
