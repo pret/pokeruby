@@ -148,6 +148,7 @@ extern bool8 gReceivedRemoteLinkPlayers;
 extern bool8 gLinkOpen;
 extern bool8 gLinkPlayerPending[MAX_LINK_PLAYERS];
 void (*gLinkCallback)(void);
+extern u8 gUnknown_Debug_30030E0;
 
 void Task_DestroySelf(u8);
 void sub_8007270(u8);

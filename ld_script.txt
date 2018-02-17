@@ -671,7 +671,7 @@ SECTIONS {
         src/field/diploma.o(.rodata);
         src/strings.o(.rodata);
         src/field/berry_tag_screen.o(.rodata);
-        data/debug_mystery_event_menu.o(.rodata);
+        src/engine/mystery_event_menu.o(.rodata);
         src/engine/save_failed_screen.o(.rodata);
         src/pokemon/pokeblock_feed.o(.rodata);
         src/debug/nakamura_debug_menu.o(.rodata);

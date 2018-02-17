@@ -33,7 +33,8 @@
 #include "../data/battle_tower/trainers_de.h"
 #endif
 
-static const u16 sBattleTowerHeldItems[] = {
+static const u16 sBattleTowerHeldItems[] =
+{
     ITEM_NONE,
     ITEM_KINGS_ROCK,
     ITEM_SITRUS_BERRY,
@@ -102,7 +103,8 @@ static const u16 sBattleTowerHeldItems[] = {
 #include "../data/battle_tower/level_50_mons.h"
 #include "../data/battle_tower/level_100_mons.h"
 
-static const u8 sMaleTrainerClasses[] = {
+static const u8 sMaleTrainerClasses[] =
+{
     FACILITY_CLASS_RUIN_MANIAC,
     FACILITY_CLASS_TUBER_M,
     FACILITY_CLASS_COOL_TRAINER_M,
@@ -135,7 +137,8 @@ static const u8 sMaleTrainerClasses[] = {
     FACILITY_CLASS_HIKER,
 };
 
-static const u8 sFemaleTrainerClasses[] = {
+static const u8 sFemaleTrainerClasses[] =
+{
     FACILITY_CLASS_AROMA_LADY,
     FACILITY_CLASS_TUBER_F,
     FACILITY_CLASS_COOL_TRAINER_F,
@@ -158,7 +161,8 @@ static const u8 sFemaleTrainerClasses[] = {
     FACILITY_CLASS_LASS,
 };
 
-static const u8 sMaleTrainerGfxIds[] = {
+static const u8 sMaleTrainerGfxIds[] =
+{
     MAP_OBJ_GFX_HIKER,
     MAP_OBJ_GFX_TUBER_M,
     MAP_OBJ_GFX_MAN_4,
@@ -191,7 +195,8 @@ static const u8 sMaleTrainerGfxIds[] = {
     MAP_OBJ_GFX_HIKER,
 };
 
-static const u8 sFemaleTrainerGfxIds[] = {
+static const u8 sFemaleTrainerGfxIds[] =
+{
     MAP_OBJ_GFX_WOMAN_3,
     MAP_OBJ_GFX_TUBER_F,
     MAP_OBJ_GFX_WOMAN_7,
@@ -214,7 +219,8 @@ static const u8 sFemaleTrainerGfxIds[] = {
     MAP_OBJ_GFX_LASS,
 };
 
-const u16 gBattleTowerBannedSpecies[] = {
+const u16 gBattleTowerBannedSpecies[] =
+{
     SPECIES_MEW,
     SPECIES_MEWTWO,
     SPECIES_HO_OH,
@@ -229,7 +235,8 @@ const u16 gBattleTowerBannedSpecies[] = {
 };
 
 // Item prizes for battle tower streaks of 5 or fewer sets.
-/*static*/ const u16 sShortStreakPrizes[] = {
+static const u16 sShortStreakPrizes[] =
+{
     ITEM_HP_UP,
     ITEM_PROTEIN,
     ITEM_IRON,
@@ -239,7 +246,8 @@ const u16 gBattleTowerBannedSpecies[] = {
 };
 
 // Item prizes for battle tower streaks of greater than 5 sets.
-/*static*/ const u16 sLongStreakPrizes[] = {
+static const u16 sLongStreakPrizes[] =
+{
     ITEM_BRIGHT_POWDER,
     ITEM_WHITE_HERB,
     ITEM_QUICK_CLAW,
@@ -292,9 +300,7 @@ void sub_8134548(void)
         default:
             ResetBattleTowerStreak(levelType);
             if (!var1)
-            {
                 VarSet(VAR_TEMP_0, 5);
-            }
             break;
         case 1:
             ResetBattleTowerStreak(levelType);
@@ -320,10 +326,8 @@ void sub_8134548(void)
     }
 
     if ((gSaveBlock2.battleTower.var_4AE[0] == 3 || gSaveBlock2.battleTower.var_4AE[0] == 6)
-        && (gSaveBlock2.battleTower.var_4AE[1] == 3 || gSaveBlock2.battleTower.var_4AE[1] == 6))
-    {
+     && (gSaveBlock2.battleTower.var_4AE[1] == 3 || gSaveBlock2.battleTower.var_4AE[1] == 6))
         VarSet(VAR_TEMP_0, 5);
-    }
 
     ValidateBattleTowerRecordChecksums();
 }
@@ -350,23 +354,18 @@ bool8 ShouldBattleEReaderTrainer(u8 levelType, u16 winStreak)
     ValidateEReaderTrainer();
 
     if (gSpecialVar_Result != 0 || gSaveBlock2.battleTower.ereaderTrainer.winStreak != winStreak)
-    {
         return FALSE;
-    }
 
-    trainerTeamLevel = 50;
     if (levelType != 0)
-    {
         trainerTeamLevel = 100;
-    }
+    else
+        trainerTeamLevel = 50;
 
     for (i = 0; i < 3; i++)
     {
         monLevel = gSaveBlock2.battleTower.ereaderTrainer.party[i].level;
         if (gSaveBlock2.battleTower.ereaderTrainer.party[i].level != trainerTeamLevel)
-        {
             return FALSE;
-        }
 
         CheckMonBattleTowerBanlist(
             gSaveBlock2.battleTower.ereaderTrainer.party[i].species,
@@ -379,7 +378,7 @@ bool8 ShouldBattleEReaderTrainer(u8 levelType, u16 winStreak)
             &numValid);
     }
 
-    return numValid == 3;
+    return (numValid == 3);
 }
 
 bool8 sub_81346F4(void)
@@ -408,6 +407,7 @@ bool8 sub_81346F4(void)
             struct BattleTowerRecord *record = &gSaveBlock2.battleTower.records[recordIndex];
             u32 recordHasData = 0;
             u32 checksum = 0;
+
             for (i = 0; i < sizeof(struct BattleTowerRecord) / sizeof(u32) - 1; i++)
             {
                 recordHasData |= ((u32 *)record)[i];
@@ -415,9 +415,9 @@ bool8 sub_81346F4(void)
             }
 
             if (gSaveBlock2.battleTower.records[recordIndex].winStreak == winStreak
-                && gSaveBlock2.battleTower.records[recordIndex].battleTowerLevelType == battleTowerLevelType
-                && recordHasData
-                && gSaveBlock2.battleTower.records[recordIndex].checksum == checksum)
+             && gSaveBlock2.battleTower.records[recordIndex].battleTowerLevelType == battleTowerLevelType
+             && recordHasData
+             && gSaveBlock2.battleTower.records[recordIndex].checksum == checksum)
             {
                 trainerIds[numCandidates] = recordIndex;
                 numCandidates++;
@@ -784,19 +784,17 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
     u8 trainerClass;
 
     if (trainerIndex < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-    {
         trainerClass = gBattleTowerTrainers[trainerIndex].trainerClass;
-    }
     else if (trainerIndex < BATTLE_TOWER_EREADER_TRAINER_ID)
-    {
         trainerClass = gSaveBlock2.battleTower.records[trainerIndex - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass;
-    }
     else
-    {
         trainerClass = gSaveBlock2.battleTower.ereaderTrainer.trainerClass;
-    }
 
-    for (i = 0; i < 30 && sMaleTrainerClasses[i] != trainerClass; i++);
+    for (i = 0; i < 30; i++)
+    {
+        if (sMaleTrainerClasses[i] == trainerClass)
+            break;
+    }
     if (i != 30)
     {
         u8 trainerObjectGfxId = sMaleTrainerGfxIds[i];
@@ -804,7 +802,11 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
         return;
     }
 
-    for (i = 0; i < 20 && sFemaleTrainerClasses[i] != trainerClass; i++);
+    for (i = 0; i < 20; i++)
+    {
+        if (sFemaleTrainerClasses[i] == trainerClass)
+            break;
+    }
     if (i != 20)
     {
         u8 trainerObjectGfxId = sFemaleTrainerGfxIds[i];
@@ -1143,33 +1145,21 @@ _08134C70: .4byte gSaveBlock2\n\
 u8 get_trainer_class_pic_index(void)
 {
     if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
-    {
         return gTrainerClassToPicIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
-    }
     else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-    {
         return gTrainerClassToPicIndex[gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass];
-    }
     else
-    {
         return gTrainerClassToPicIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
-    }
 }
 
 u8 get_trainer_class_name_index(void)
 {
     if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
-    {
         return gTrainerClassToNameIndex[gSaveBlock2.battleTower.ereaderTrainer.trainerClass];
-    }
     else if (gSaveBlock2.battleTower.battleTowerTrainerId >= BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-    {
         return gTrainerClassToNameIndex[gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
-    }
     else
-    {
         return gTrainerClassToNameIndex[gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].trainerClass];
-    }
 }
 
 void get_trainer_name(u8* dest)
@@ -1179,26 +1169,20 @@ void get_trainer_name(u8* dest)
     if (gSaveBlock2.battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
     {
         for (i = 0; i < 7; i++)
-        {
             dest[i] = gSaveBlock2.battleTower.ereaderTrainer.name[i];
-        }
     }
     else if (gSaveBlock2.battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
     {
         for (i = 0; i < 7; i++)
-        {
             dest[i] = gBattleTowerTrainers[gSaveBlock2.battleTower.battleTowerTrainerId].name[i];
-        }
     }
     else
     {
         for (i = 0; i < 7; i++)
-        {
             dest[i] = gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].name[i];
-        }
     }
 
-    dest[i] = 0xFF;
+    dest[i] = EOS;
 }
 
 void FillBattleTowerTrainerParty(void)
@@ -1266,10 +1250,7 @@ void FillBattleTowerTrainerParty(void)
     {
         // Load E-Reader trainer's party.
         for (partyIndex = 0; partyIndex < 3; partyIndex++)
-        {
             sub_803ADE8(&gEnemyParty[partyIndex], &gSaveBlock2.battleTower.ereaderTrainer.party[partyIndex]);
-        }
-
         return;
     }
     else
@@ -1281,7 +1262,6 @@ void FillBattleTowerTrainerParty(void)
                 &gEnemyParty[partyIndex],
                 &gSaveBlock2.battleTower.records[gSaveBlock2.battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].party[partyIndex]);
         }
-
         return;
     }
 
@@ -1329,10 +1309,8 @@ void FillBattleTowerTrainerParty(void)
             for (i = 0; i < partyIndex; i++)
             {
                 if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != 0
-                    && GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) == sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem])
-                {
+                 && GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) == sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem])
                     break;
-                }
             }
 
             if (i != partyIndex)
@@ -1341,7 +1319,12 @@ void FillBattleTowerTrainerParty(void)
             // Ensure this exact pokemon index isn't a duplicate. This check doesn't seem necessary
             // because the species and held items were already checked directly above. Perhaps this
             // is leftover code before the logic for duplicate species and held items was added.
-            for (i = 0; i < partyIndex && chosenMonIndices[i] != battleMonIndex; i++);
+            //for (i = 0; i < partyIndex && chosenMonIndices[i] != battleMonIndex; i++);
+            for (i = 0; i < partyIndex; i++)
+            {
+                if (chosenMonIndices[i] == battleMonIndex)
+                    break;
+            }
 
             if (i != partyIndex)
                 continue;
@@ -1361,10 +1344,7 @@ void FillBattleTowerTrainerParty(void)
             {
                 SetMonMoveSlot(&gEnemyParty[partyIndex], battleTowerMons[battleMonIndex].moves[i], i);
                 if (battleTowerMons[battleMonIndex].moves[i] == MOVE_FRUSTRATION)
-                {
-                    // MOVE_FRUSTRATION is more powerful the lower the pokemon's friendship is.
-                    friendship = 0;
-                }
+                    friendship = 0;  // MOVE_FRUSTRATION is more powerful the lower the pokemon's friendship is.
             }
 
             SetMonData(&gEnemyParty[partyIndex], MON_DATA_FRIENDSHIP, &friendship);
@@ -1385,9 +1365,7 @@ u32 CountBattleTowerBanlistCaught(void)
     for (i = 0; gBattleTowerBannedSpecies[i] != 0xFFFF; i++)
     {
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleTowerBannedSpecies[i]), FLAG_GET_CAUGHT))
-        {
             numCaught++;
-        }
     }
 
     return numCaught;
@@ -1398,7 +1376,6 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         curIndexToAppend++;
-
         switch (curIndexToAppend - 1)
         {
         case 0:
@@ -1408,24 +1385,15 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
         case 8:
         case 10:
             if (numToAppend == curIndexToAppend)
-            {
                 StringAppend(gStringVar1, BattleText_Format3);
-            }
             else if (numToAppend > curIndexToAppend)
-            {
                 StringAppend(gStringVar1, BattleText_Format4);
-            }
             break;
         case 1:
             if (curIndexToAppend == numToAppend)
-            {
                 StringAppend(gStringVar1, BattleText_Format3);
-            }
             else
-            {
                 StringAppend(gStringVar1, BattleText_Format4);
-            }
-
             StringAppend(gStringVar1, BattleText_Format7);
             break;
         case 3:
@@ -1434,18 +1402,12 @@ u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 curIndexToAppend, s32 numT
         case 9:
         default:
             if (curIndexToAppend == numToAppend)
-            {
                 StringAppend(gStringVar1, BattleText_Format3);
-            }
             else
-            {
                 StringAppend(gStringVar1, BattleText_Format4);
-            }
-
             StringAppend(gStringVar1, BattleText_Format6);
             break;
         }
-
         StringAppend(gStringVar1, gSpeciesNames[species]);
     }
 
@@ -1463,7 +1425,7 @@ void CheckMonBattleTowerBanlist(u16 species, u16 heldItem, u16 hp, u8 battleTowe
     while (1)
     {
         if (gBattleTowerBannedSpecies[counter] == 0xFFFF)
-            goto EXIT2; // Couldn't get the code to match without this GOTO
+            break;
 
         if (gBattleTowerBannedSpecies[counter] == species)
             break;
@@ -1474,7 +1436,6 @@ void CheckMonBattleTowerBanlist(u16 species, u16 heldItem, u16 hp, u8 battleTowe
     if (gBattleTowerBannedSpecies[counter] != 0xFFFF)
         return;
 
-    EXIT2:
     if (battleTowerLevelType == 0 && monLevel > 50)
         return;
 
@@ -1527,9 +1488,7 @@ void CheckPartyBattleTowerBanlist(void)
         numBanlistCaught = CountBattleTowerBanlistCaught();
 
         for (i = 0; gBattleTowerBannedSpecies[i] != 0xFFFF; i++)
-        {
             counter = AppendBattleTowerBannedSpeciesName(gBattleTowerBannedSpecies[i], counter, numBanlistCaught);
-        }
 
         if (counter == 0)
         {
