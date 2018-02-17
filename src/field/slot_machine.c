@@ -18,6 +18,93 @@
 #include "menu.h"
 #include "ewram.h"
 
+enum
+{
+    SLOT_MACHINE_TAG_7_RED,
+    SLOT_MACHINE_TAG_7_BLUE,
+    SLOT_MACHINE_TAG_AZURILL,
+    SLOT_MACHINE_TAG_LOTAD,
+    SLOT_MACHINE_TAG_CHERRY,
+    SLOT_MACHINE_TAG_POWER,
+    SLOT_MACHINE_TAG_REPLAY
+};
+
+enum
+{
+    SLOT_MACHINE_MATCHED_1CHERRY,
+    SLOT_MACHINE_MATCHED_2CHERRY,
+    SLOT_MACHINE_MATCHED_REPLAY,
+    SLOT_MACHINE_MATCHED_LOTAD,
+    SLOT_MACHINE_MATCHED_AZURILL,
+    SLOT_MACHINE_MATCHED_POWER,
+    SLOT_MACHINE_MATCHED_777_MIXED,
+    SLOT_MACHINE_MATCHED_777_RED,
+    SLOT_MACHINE_MATCHED_777_BLUE,
+    SLOT_MACHINE_MATCHED_NONE
+};
+
+struct SlotMachineEwramStruct
+{
+    /*0x00*/ u8 state;
+    /*0x01*/ u8 unk01;
+    /*0x02*/ u8 pikaPower;
+    /*0x03*/ u8 unk03;
+    /*0x04*/ u8 unk04;
+    /*0x05*/ u8 unk05;
+    /*0x06*/ u8 unk06;
+    /*0x07*/ u8 unk07;
+    /*0x08*/ u16 matchedSymbols;
+    /*0x0A*/ u8 unk0A;
+    /*0x0B*/ u8 unk0B;
+    /*0x0C*/ s16 coins;
+    /*0x0E*/ s16 payout;
+    /*0x10*/ s16 unk10;
+    /*0x12*/ s16 bet;
+    /*0x14*/ s16 unk14;
+    /*0x16*/ s16 unk16;
+    /*0x18*/ s16 unk18;
+    /*0x1A*/ s16 unk1A;
+    /*0x1C*/ s16 unk1C[3];
+    /*0x22*/ u16 unk22[3];
+    /*0x28*/ s16 reelPositions[3];
+    /*0x2E*/ s16 unk2E[3];
+    /*0x34*/ s16 unk34[3];
+    /*0x3A*/ u8 reelTasks[3];
+    /*0x3D*/ u8 unk3D;
+    /*0x3E*/ u8 unk3E;
+    /*0x3F*/ u8 unk3F;
+    /*0x40*/ u8 unk40;
+    /*0x41*/ u8 unk41;
+    /*0x42*/ u8 unk42;
+    /*0x43*/ u8 unk43;
+    /*0x44*/ u8 unk44[5];
+    /*0x49*/ u8 unk49[2];
+    /*0x49*/ u8 unk4B[3];
+    /*0x4E*/ u8 unk4E[2];
+    /*0x50*/ u8 unk50[2];
+    /*0x52*/ u8 unk52[2];
+    /*0x54*/ u8 unk54[4];
+    /*0x58*/ u16 win0h;
+    /*0x5a*/ u16 win0v;
+    /*0x5c*/ u16 winIn;
+    /*0x5e*/ u16 winOut;
+    /*0x60*/ u16 backupMapMusic;
+    /*0x64*/ MainCallback prevMainCb;
+#if DEBUG
+             u32 unk68;
+             u32 unk6C;
+             u32 unk70;
+             u32 unk74;
+             u32 unk78;
+             u32 unk7C;
+             u32 unk80;
+             u32 unk84;
+             u32 unk88;
+             u32 unk8C;
+             s32 unk90;
+#endif
+};
+
 struct UnkStruct1
 {
     /*0x00*/ u8 unk00;
@@ -30,9 +117,6 @@ struct UnkStruct1
 #elif GERMAN
 #define SLOTMACHINE_GFX_TILES 236
 #endif
-
-// TODO: figure out which functions are static and which are not.
-#define static
 
 static void CB2_SlotMachineSetup(void);
 static void CB2_SlotMachineLoop(void);
@@ -235,12 +319,12 @@ static u8 debug_sub_811B634(void);
 static void debug_sub_811B654(u8 taskId);
 
 #if DEBUG
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_0 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_1 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_2 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_3 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_4 = 0;
-__attribute__((section(".bss"))) u32 unk_debug_bss_1_8 = 0;
+static u8 unk_debug_bss_1_0;
+static u8 unk_debug_bss_1_1;
+static u8 unk_debug_bss_1_2;
+static u8 unk_debug_bss_1_3;
+static u8 unk_debug_bss_1_4;
+static u32 unk_debug_bss_1_8;
 #endif
 
 static const struct UnkStruct1 *const gUnknown_083ED048[];
@@ -517,7 +601,8 @@ static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) =
 
 static void sub_8101D24(u8 taskId)
 {
-    while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId));
+    while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId))
+        ;
 }
 
 static bool8 sub_8101D5C(struct Task *task)
@@ -531,9 +616,7 @@ static bool8 sub_8101D5C(struct Task *task)
 static bool8 sub_8101D8C(struct Task *task)
 {
     if (!gPaletteFade.active)
-    {
         eSlotMachine->state++;
-    }
     return FALSE;
 }
 
@@ -4039,389 +4122,6 @@ static void sub_81065DC(void)
     }
 }
 
-struct UnknownMenuAction
-{
-    const u8 *text;
-    void (*func)();
-};
-
-#if DEBUG
-
-void debug_sub_811B1C4(void)
-{
-    unk_debug_bss_1_3 |= 2;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 2) ? 0 : 2;
-}
-
-void debug_sub_811B1EC(void)
-{
-    unk_debug_bss_1_3 |= 1;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 1) ? 0 : 1;
-}
-
-void debug_sub_811B210(void)
-{
-    unk_debug_bss_1_3 |= 4;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 4) ? 0 : 4;
-}
-
-void debug_sub_811B238(void)
-{
-    unk_debug_bss_1_3 |= 8;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 8) ? 0 : 8;
-}
-
-void debug_sub_811B260(void)
-{
-    unk_debug_bss_1_3 |= 0x10;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x10) ? 0 : 0x10;
-}
-
-void debug_sub_811B288(void)
-{
-    unk_debug_bss_1_3 |= 0x40;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x40) ? 0 : 0x40;
-}
-
-void debug_sub_811B2B0(void)
-{
-    unk_debug_bss_1_3 |= 0x80;
-    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x80) ? 0 : 0x80;
-}
-
-void debug_sub_811B2D8(void)
-{
-    unk_debug_bss_1_3 |= 0x20;
-}
-
-void debug_sub_811B2E8(void)
-{
-    u8 text[2];
-
-    ConvertIntToDecimalStringN(text, eSlotMachine->unk01 + 1, 2, 1);
-    Menu_PrintText(text, 6, 1);
-}
-
-static const u8 Str_841B1C4[];
-static const u8 Str_841B1CB[];
-static const u8 Str_841B1D4[];
-static const u8 Str_841B1DB[];
-static const u8 Str_841B1E2[];
-static const u8 Str_841B1E8[];
-static const u8 Str_841B1F3[];
-static const u8 Str_841B202[];
-static const u8 Str_841B211[];
-static const u8 Str_841B219[];
-static const u8 Str_841B220[];
-static const u8 Str_841B227[];
-static const u8 Str_841B22E[];
-static const u8 Str_841B235[];
-static const u8 Str_841B23B[];
-static const u8 Str_841B23F[];
-static const u8 Str_841B243[];
-static const u8 Str_841B246[];
-static const u8 Str_841B249[];
-static const u8 Str_841B24C[];
-static const u8 Str_841B254[];
-static const u8 Str_841B25C[];
-static const u8 Str_841B264[];
-static const u8 Str_841B26D[];
-
-void debug_sub_811B310(void)
-{
-    u8 text[5];
-
-    Menu_PrintText(Str_841B1C4, 1, 1);
-    Menu_PrintText(Str_841B1CB, 1, 3);
-    Menu_PrintText(Str_841B1D4, 1, 5);
-    Menu_PrintText(Str_841B1DB, 1, 7);
-    Menu_PrintText(Str_841B1E2, 1, 9);
-    Menu_PrintText(Str_841B1E8, 1, 11);
-    Menu_PrintText(Str_841B1F3, 1, 13);
-    Menu_PrintText(Str_841B202, 1, 15);
-    Menu_PrintText(Str_841B24C, 1, 17);
-    Menu_PrintText(Str_841B211, 15, 1);
-    Menu_PrintText(Str_841B219, 15, 3);
-    Menu_PrintText(Str_841B220, 15, 5);
-    Menu_PrintText(Str_841B227, 15, 7);
-    Menu_PrintText(Str_841B22E, 15, 9);
-    Menu_PrintText(Str_841B235, 15, 11);
-    Menu_PrintText(Str_841B23B, 15, 13);
-    Menu_PrintText(Str_841B23F, 15, 15);
-    Menu_PrintText(Str_841B243, 15, 17);
-    if (eSlotMachine->unk03 == 0)
-        Menu_PrintText(Str_841B246, 10, 9);
-    else
-        Menu_PrintText(Str_841B249, 10, 9);
-
-#define PRINT_NUMBER(n, x, y)                  \
-    ConvertIntToDecimalStringN(text, n, 2, 4); \
-    Menu_PrintText(text, x, y);
-
-    PRINT_NUMBER(eSlotMachine->unk68, 10, 3);
-    PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
-    PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
-    PRINT_NUMBER(eSlotMachine->unk70, 20, 3);
-    PRINT_NUMBER(eSlotMachine->unk74, 20, 5);
-    PRINT_NUMBER(eSlotMachine->unk78, 20, 7);
-    PRINT_NUMBER(eSlotMachine->unk7C, 20, 9);
-    PRINT_NUMBER(eSlotMachine->unk80, 20, 11);
-    PRINT_NUMBER(eSlotMachine->unk84, 20, 13);
-    PRINT_NUMBER(eSlotMachine->unk88, 20, 15);
-    PRINT_NUMBER(eSlotMachine->unk8C, 20, 17);
-
-#undef PRINT_NUMBER
-
-    if (unk_debug_bss_1_0 != 0)
-    {
-        u8 y = 0;
-
-        switch (unk_debug_bss_1_0)
-        {
-        case 2:
-            y = 3;
-            break;
-        case 1:
-            y = 5;
-            break;
-        case 4:
-            y = 7;
-            break;
-        case 8:
-            y = 9;
-            break;
-        case 16:
-            y = 11;
-            break;
-        case 64:
-            y = 13;
-            break;
-        case 128:
-            y = 15;
-            break;
-        }
-        Menu_PrintText(Str_841B26D, 23, y);
-    }
-    debug_sub_811B2E8();
-}
-
-static void debug_sub_811B5B4(s32 *a, s32 b)
-{
-    *a += b;
-    if (*a > 9999)
-        *a = 9999;
-}
-
-static void debug_sub_811B5D0(void)
-{
-    unk_debug_bss_1_0 = 0;
-    unk_debug_bss_1_2 = 0;
-    unk_debug_bss_1_3 = 0;
-    unk_debug_bss_1_4 = 0;
-    eSlotMachine->unk68 = 0;
-    eSlotMachine->unk6C = 0;
-    eSlotMachine->unk70 = 0;
-    eSlotMachine->unk74 = 0;
-    eSlotMachine->unk78 = 0;
-    eSlotMachine->unk7C = 0;
-    eSlotMachine->unk80 = 0;
-    eSlotMachine->unk84 = 0;
-    eSlotMachine->unk88 = 0;
-    eSlotMachine->unk8C = 0;
-    eSlotMachine->unk90 = 0;
-}
-
-static void debug_sub_811B620(void)
-{
-    CreateTask(debug_sub_811B654, 0);
-}
-
-static u8 debug_sub_811B634(void)
-{
-    if (FindTaskIdByFunc(debug_sub_811B654) == 0xFF)
-        return 1;
-    else
-        return 0;
-}
-
-static const struct UnknownMenuAction _841B270[];
-
-static void debug_sub_811B654(u8 taskId)
-{
-    struct Task *task = &gTasks[taskId];
-    s8 selection;
-
-    switch (task->data[0])
-    {
-    case 0:
-        Menu_DrawStdWindowFrame(0, 0, 24, 19);
-        debug_sub_811B310();
-        task->data[0]++;
-        break;
-    case 1:
-        if (gMain.newKeys & B_BUTTON)
-        {
-            Menu_EraseScreen();
-            DestroyTask(taskId);
-            break;
-        }
-        if (gMain.newKeys & 0x20)
-        {
-            eSlotMachine->unk01--;
-            if ((s8)eSlotMachine->unk01 < 0)  // Why? It's unsigned
-                eSlotMachine->unk01 = 5;
-            debug_sub_811B2E8();
-            break;
-        }
-        if (gMain.newKeys & 0x10)
-        {
-            eSlotMachine->unk01++;
-            if (eSlotMachine->unk01 > 5)
-                eSlotMachine->unk01 = 0;
-            debug_sub_811B2E8();
-            break;
-        }
-        if (gMain.newKeys & A_BUTTON)
-        {
-            task->data[0] = 3;
-            Menu_EraseScreen();
-            Menu_DrawStdWindowFrame(0, 0, 9, 5);
-            Menu_PrintText(Str_841B25C, 1, 1);
-            Menu_PrintText(Str_841B264, 1, 3);
-            break;
-        }
-        if (gMain.newKeys & 4)
-        {
-            unk_debug_bss_1_2 = 0;
-            unk_debug_bss_1_3 = 0;
-            Menu_EraseScreen();
-            Menu_DrawStdWindowFrame(0, 0, 10, 19);
-            Menu_PrintText(Str_841B254, 1, 1);
-            Menu_PrintItems(2, 3, 8, (void *)_841B270);
-            InitMenu(0, 1, 3, 8, 0, 9);
-            task->data[0]++;
-        }
-        if (gMain.newKeys & 8)
-        {
-            unk_debug_bss_1_4 = 1;
-            Menu_EraseScreen();
-            DestroyTask(taskId);
-        }
-        break;
-    case 2:
-        selection = Menu_ProcessInput();
-        if (selection == -2)
-            break;
-        if (selection != -1)
-        {
-            unk_debug_bss_1_2 = 1;
-            _841B270[selection].func();
-        }
-        Menu_EraseScreen();
-        DestroyTask(taskId);
-        break;
-    case 3:
-        if (gMain.newAndRepeatedKeys & 0x80)
-        {
-            eSlotMachine->coins += 100;
-            if (eSlotMachine->coins > 9999)
-                eSlotMachine->coins = 9999;
-            break;
-        }
-        if (gMain.newAndRepeatedKeys & 0x40)
-        {
-            eSlotMachine->coins -= 100;
-            if (eSlotMachine->coins <= 0)
-                eSlotMachine->coins = 9999;
-            break;
-        }
-        if (gMain.newAndRepeatedKeys & 0x20)
-        {
-            eSlotMachine->coins -= 1000;
-            if (eSlotMachine->coins <= 0)
-                eSlotMachine->coins = 9999;
-            break;
-        }
-        if (gMain.newAndRepeatedKeys & 0x10)
-        {
-            eSlotMachine->coins += 1000;
-            if (eSlotMachine->coins > 9999)
-                eSlotMachine->coins = 9999;
-            break;
-        }
-        if (gMain.newKeys & B_BUTTON)
-        {
-            Menu_EraseScreen();
-            DestroyTask(taskId);
-        }
-        break;
-    }
-}
-
-static const u8 Str_841B2B0[];
-static const u8 Str_841B2BF[];
-static const u8 Str_841B2D3[];
-static const u8 Str_841B2E4[];
-
-static void debug_sub_811B894(void)
-{
-    if (eSlotMachine->matchedSymbols & 0x180)
-    {
-        eSlotMachine->unk90++;
-        if (eSlotMachine->unk90 > 9999)
-            eSlotMachine->unk90 = 9999;
-        if (eSlotMachine->unk90 != eSlotMachine->unk88)
-        {
-            Menu_PrintText(Str_841B2B0, 4, 15);
-            unk_debug_bss_1_4 = 0;
-        }
-        if (!(eSlotMachine->unk04 & 0x80))
-        {
-            Menu_PrintText(Str_841B2D3, 4, 17);
-            unk_debug_bss_1_4 = 0;
-        }
-    }
-    else if (eSlotMachine->matchedSymbols != 0)
-    {
-        if ((eSlotMachine->unk04 & 0x80) && !(eSlotMachine->matchedSymbols & 3))
-        {
-            Menu_PrintText(Str_841B2E4, 4, 2);
-            unk_debug_bss_1_4 = 0;
-        }
-    }
-    if (eSlotMachine->matchedSymbols == 0 && eSlotMachine->bet == 3 && !(eSlotMachine->unk04 & 0x80))
-    {
-        u8 sym_0_1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
-        u8 sym_0_2 = GetTagOfReelSymbolOnScreenAtPos(0, 2);
-        u8 sym_0_3 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
-
-        u8 sym_1_1 = GetTagOfReelSymbolOnScreenAtPos(1, 1);
-        u8 sym_1_2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
-        u8 sym_1_3 = GetTagOfReelSymbolOnScreenAtPos(1, 3);
-
-        u8 sym_2_1 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
-        u8 sym_2_2 = GetTagOfReelSymbolOnScreenAtPos(2, 2);
-        u8 sym_2_3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
-
-        if ((sym_0_1 == 0 && sym_1_1 == 1 && sym_2_1 == 0)
-         || (sym_0_2 == 0 && sym_1_2 == 1 && sym_2_2 == 0)
-         || (sym_0_3 == 0 && sym_1_3 == 1 && sym_2_3 == 0)
-         || (sym_0_1 == 0 && sym_1_2 == 1 && sym_2_3 == 0)
-         || (sym_0_3 == 0 && sym_1_2 == 1 && sym_2_1 == 0)
-         || (sym_0_1 == 1 && sym_1_1 == 0 && sym_2_1 == 1)
-         || (sym_0_2 == 1 && sym_1_2 == 0 && sym_2_2 == 1)
-         || (sym_0_3 == 1 && sym_1_3 == 0 && sym_2_3 == 1)
-         || (sym_0_1 == 1 && sym_1_2 == 0 && sym_2_3 == 1)
-         || (sym_0_3 == 1 && sym_1_2 == 0 && sym_2_1 == 1))
-        {
-            Menu_PrintText(Str_841B2BF, 4, 0);
-            unk_debug_bss_1_4 = 0;
-        }
-    }
-}
-
-#endif
-
 static const u8 sReelSymbols[][21] =
 {
     {
@@ -5857,14 +5557,60 @@ static const u16 sReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/re
 
 #if DEBUG
 
-static void debug_sub_811B1C4(void);
-static void debug_sub_811B1EC(void);
-static void debug_sub_811B210(void);
-static void debug_sub_811B238(void);
-static void debug_sub_811B260(void);
-static void debug_sub_811B288(void);
-static void debug_sub_811B2B0(void);
-static void debug_sub_811B2D8(void);
+static void debug_sub_811B1C4(void)
+{
+    unk_debug_bss_1_3 |= 2;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 2) ? 0 : 2;
+}
+
+static void debug_sub_811B1EC(void)
+{
+    unk_debug_bss_1_3 |= 1;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 1) ? 0 : 1;
+}
+
+static void debug_sub_811B210(void)
+{
+    unk_debug_bss_1_3 |= 4;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 4) ? 0 : 4;
+}
+
+static void debug_sub_811B238(void)
+{
+    unk_debug_bss_1_3 |= 8;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 8) ? 0 : 8;
+}
+
+static void debug_sub_811B260(void)
+{
+    unk_debug_bss_1_3 |= 0x10;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x10) ? 0 : 0x10;
+}
+
+static void debug_sub_811B288(void)
+{
+    unk_debug_bss_1_3 |= 0x40;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x40) ? 0 : 0x40;
+}
+
+static void debug_sub_811B2B0(void)
+{
+    unk_debug_bss_1_3 |= 0x80;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x80) ? 0 : 0x80;
+}
+
+static void debug_sub_811B2D8(void)
+{
+    unk_debug_bss_1_3 |= 0x20;
+}
+
+static void debug_sub_811B2E8(void)
+{
+    u8 text[2];
+
+    ConvertIntToDecimalStringN(text, eSlotMachine->unk01 + 1, 2, 1);
+    Menu_PrintText(text, 6, 1);
+}
 
 static const u8 Str_841B1C4[] = _("SETTEI");
 static const u8 Str_841B1CB[] = _("MAWASITA");
@@ -5891,8 +5637,124 @@ static const u8 Str_841B25C[] = _("UD　　100");
 static const u8 Str_841B264[] = _("LR　　1000");
 static const u8 Str_841B26D[] = _("×");
 
-// Is this MenuAction2? I'm not sure.
-static const struct UnknownMenuAction _841B270[] =
+void debug_sub_811B310(void)
+{
+    u8 text[5];
+
+    Menu_PrintText(Str_841B1C4, 1, 1);
+    Menu_PrintText(Str_841B1CB, 1, 3);
+    Menu_PrintText(Str_841B1D4, 1, 5);
+    Menu_PrintText(Str_841B1DB, 1, 7);
+    Menu_PrintText(Str_841B1E2, 1, 9);
+    Menu_PrintText(Str_841B1E8, 1, 11);
+    Menu_PrintText(Str_841B1F3, 1, 13);
+    Menu_PrintText(Str_841B202, 1, 15);
+    Menu_PrintText(Str_841B24C, 1, 17);
+    Menu_PrintText(Str_841B211, 15, 1);
+    Menu_PrintText(Str_841B219, 15, 3);
+    Menu_PrintText(Str_841B220, 15, 5);
+    Menu_PrintText(Str_841B227, 15, 7);
+    Menu_PrintText(Str_841B22E, 15, 9);
+    Menu_PrintText(Str_841B235, 15, 11);
+    Menu_PrintText(Str_841B23B, 15, 13);
+    Menu_PrintText(Str_841B23F, 15, 15);
+    Menu_PrintText(Str_841B243, 15, 17);
+    if (eSlotMachine->unk03 == 0)
+        Menu_PrintText(Str_841B246, 10, 9);
+    else
+        Menu_PrintText(Str_841B249, 10, 9);
+
+#define PRINT_NUMBER(n, x, y)                  \
+    ConvertIntToDecimalStringN(text, n, 2, 4); \
+    Menu_PrintText(text, x, y);
+
+    PRINT_NUMBER(eSlotMachine->unk68, 10, 3);
+    PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
+    PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
+    PRINT_NUMBER(eSlotMachine->unk70, 20, 3);
+    PRINT_NUMBER(eSlotMachine->unk74, 20, 5);
+    PRINT_NUMBER(eSlotMachine->unk78, 20, 7);
+    PRINT_NUMBER(eSlotMachine->unk7C, 20, 9);
+    PRINT_NUMBER(eSlotMachine->unk80, 20, 11);
+    PRINT_NUMBER(eSlotMachine->unk84, 20, 13);
+    PRINT_NUMBER(eSlotMachine->unk88, 20, 15);
+    PRINT_NUMBER(eSlotMachine->unk8C, 20, 17);
+
+#undef PRINT_NUMBER
+
+    if (unk_debug_bss_1_0 != 0)
+    {
+        u8 y = 0;
+
+        switch (unk_debug_bss_1_0)
+        {
+        case 2:
+            y = 3;
+            break;
+        case 1:
+            y = 5;
+            break;
+        case 4:
+            y = 7;
+            break;
+        case 8:
+            y = 9;
+            break;
+        case 16:
+            y = 11;
+            break;
+        case 64:
+            y = 13;
+            break;
+        case 128:
+            y = 15;
+            break;
+        }
+        Menu_PrintText(Str_841B26D, 23, y);
+    }
+    debug_sub_811B2E8();
+}
+
+static void debug_sub_811B5B4(s32 *a, s32 b)
+{
+    *a += b;
+    if (*a > 9999)
+        *a = 9999;
+}
+
+static void debug_sub_811B5D0(void)
+{
+    unk_debug_bss_1_0 = 0;
+    unk_debug_bss_1_2 = 0;
+    unk_debug_bss_1_3 = 0;
+    unk_debug_bss_1_4 = 0;
+    eSlotMachine->unk68 = 0;
+    eSlotMachine->unk6C = 0;
+    eSlotMachine->unk70 = 0;
+    eSlotMachine->unk74 = 0;
+    eSlotMachine->unk78 = 0;
+    eSlotMachine->unk7C = 0;
+    eSlotMachine->unk80 = 0;
+    eSlotMachine->unk84 = 0;
+    eSlotMachine->unk88 = 0;
+    eSlotMachine->unk8C = 0;
+    eSlotMachine->unk90 = 0;
+}
+
+static void debug_sub_811B620(void)
+{
+    CreateTask(debug_sub_811B654, 0);
+}
+
+static u8 debug_sub_811B634(void)
+{
+    if (FindTaskIdByFunc(debug_sub_811B654) == 0xFF)
+        return 1;
+    else
+        return 0;
+}
+
+static const struct {const u8 *text; void (*func)();} _841B270[] =
 {
     {Str_841B219, debug_sub_811B1C4},
     {Str_841B220, debug_sub_811B1EC},
@@ -5904,9 +5766,178 @@ static const struct UnknownMenuAction _841B270[] =
     {Str_841B243, debug_sub_811B2D8},
 };
 
+static void debug_sub_811B654(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    s8 selection;
+
+    switch (task->data[0])
+    {
+    case 0:
+        Menu_DrawStdWindowFrame(0, 0, 24, 19);
+        debug_sub_811B310();
+        task->data[0]++;
+        break;
+    case 1:
+        if (gMain.newKeys & B_BUTTON)
+        {
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+            break;
+        }
+        if (gMain.newKeys & 0x20)
+        {
+            eSlotMachine->unk01--;
+            if ((s8)eSlotMachine->unk01 < 0)  // Why? It's unsigned
+                eSlotMachine->unk01 = 5;
+            debug_sub_811B2E8();
+            break;
+        }
+        if (gMain.newKeys & 0x10)
+        {
+            eSlotMachine->unk01++;
+            if (eSlotMachine->unk01 > 5)
+                eSlotMachine->unk01 = 0;
+            debug_sub_811B2E8();
+            break;
+        }
+        if (gMain.newKeys & A_BUTTON)
+        {
+            task->data[0] = 3;
+            Menu_EraseScreen();
+            Menu_DrawStdWindowFrame(0, 0, 9, 5);
+            Menu_PrintText(Str_841B25C, 1, 1);
+            Menu_PrintText(Str_841B264, 1, 3);
+            break;
+        }
+        if (gMain.newKeys & 4)
+        {
+            unk_debug_bss_1_2 = 0;
+            unk_debug_bss_1_3 = 0;
+            Menu_EraseScreen();
+            Menu_DrawStdWindowFrame(0, 0, 10, 19);
+            Menu_PrintText(Str_841B254, 1, 1);
+            Menu_PrintItems(2, 3, 8, (void *)_841B270);
+            InitMenu(0, 1, 3, 8, 0, 9);
+            task->data[0]++;
+        }
+        if (gMain.newKeys & 8)
+        {
+            unk_debug_bss_1_4 = 1;
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+        }
+        break;
+    case 2:
+        selection = Menu_ProcessInput();
+        if (selection == -2)
+            break;
+        if (selection != -1)
+        {
+            unk_debug_bss_1_2 = 1;
+            _841B270[selection].func();
+        }
+        Menu_EraseScreen();
+        DestroyTask(taskId);
+        break;
+    case 3:
+        if (gMain.newAndRepeatedKeys & 0x80)
+        {
+            eSlotMachine->coins += 100;
+            if (eSlotMachine->coins > 9999)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x40)
+        {
+            eSlotMachine->coins -= 100;
+            if (eSlotMachine->coins <= 0)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x20)
+        {
+            eSlotMachine->coins -= 1000;
+            if (eSlotMachine->coins <= 0)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x10)
+        {
+            eSlotMachine->coins += 1000;
+            if (eSlotMachine->coins > 9999)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
 static const u8 Str_841B2B0[] = _("·カウントエラーがおきました");
 static const u8 Str_841B2BF[] = _("·リールそうさで　エラーが　おきました");
 static const u8 Str_841B2D3[] = _("·フラグオフエラーが　おきました");
 static const u8 Str_841B2E4[] = _("·ボーナスこやくの　エラーが　おきました");
+
+static void debug_sub_811B894(void)
+{
+    if (eSlotMachine->matchedSymbols & 0x180)
+    {
+        eSlotMachine->unk90++;
+        if (eSlotMachine->unk90 > 9999)
+            eSlotMachine->unk90 = 9999;
+        if (eSlotMachine->unk90 != eSlotMachine->unk88)
+        {
+            Menu_PrintText(Str_841B2B0, 4, 15);
+            unk_debug_bss_1_4 = 0;
+        }
+        if (!(eSlotMachine->unk04 & 0x80))
+        {
+            Menu_PrintText(Str_841B2D3, 4, 17);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+    else if (eSlotMachine->matchedSymbols != 0)
+    {
+        if ((eSlotMachine->unk04 & 0x80) && !(eSlotMachine->matchedSymbols & 3))
+        {
+            Menu_PrintText(Str_841B2E4, 4, 2);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+    if (eSlotMachine->matchedSymbols == 0 && eSlotMachine->bet == 3 && !(eSlotMachine->unk04 & 0x80))
+    {
+        u8 sym_0_1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+        u8 sym_0_2 = GetTagOfReelSymbolOnScreenAtPos(0, 2);
+        u8 sym_0_3 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+
+        u8 sym_1_1 = GetTagOfReelSymbolOnScreenAtPos(1, 1);
+        u8 sym_1_2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+        u8 sym_1_3 = GetTagOfReelSymbolOnScreenAtPos(1, 3);
+
+        u8 sym_2_1 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
+        u8 sym_2_2 = GetTagOfReelSymbolOnScreenAtPos(2, 2);
+        u8 sym_2_3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
+
+        if ((sym_0_1 == 0 && sym_1_1 == 1 && sym_2_1 == 0)
+         || (sym_0_2 == 0 && sym_1_2 == 1 && sym_2_2 == 0)
+         || (sym_0_3 == 0 && sym_1_3 == 1 && sym_2_3 == 0)
+         || (sym_0_1 == 0 && sym_1_2 == 1 && sym_2_3 == 0)
+         || (sym_0_3 == 0 && sym_1_2 == 1 && sym_2_1 == 0)
+         || (sym_0_1 == 1 && sym_1_1 == 0 && sym_2_1 == 1)
+         || (sym_0_2 == 1 && sym_1_2 == 0 && sym_2_2 == 1)
+         || (sym_0_3 == 1 && sym_1_3 == 0 && sym_2_3 == 1)
+         || (sym_0_1 == 1 && sym_1_2 == 0 && sym_2_3 == 1)
+         || (sym_0_3 == 1 && sym_1_2 == 0 && sym_2_1 == 1))
+        {
+            Menu_PrintText(Str_841B2BF, 4, 0);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+}
 
 #endif
