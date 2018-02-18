@@ -1,6 +1,6 @@
 #include "global.h"
 #include "map_obj_lock.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "script_movement.h"
 #include "task.h"

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "berry.h"
 #include "event_data.h"
 #include "field_camera.h"
@@ -15,6 +15,8 @@
 #include "constants/maps.h"
 #include "constants/map_objects.h"
 #include "trainer_see.h"
+
+// this file was known as evobjmv.c in Game Freak's original source
 
 // rodata
 

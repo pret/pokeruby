@@ -4,7 +4,7 @@
 #include "rom6.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "item_use.h"
 #include "pokemon_menu.h"

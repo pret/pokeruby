@@ -14,7 +14,7 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "field_weather.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "scanline_effect.h"
 #include "event_data.h"
 #include "cable_car_util.h"

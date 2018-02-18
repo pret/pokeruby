@@ -3,7 +3,7 @@
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_fadetransition.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_specials.h"
 #include "fieldmap.h"
 #include "main.h"

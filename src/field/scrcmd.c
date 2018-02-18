@@ -12,7 +12,7 @@
 #include "field_door.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
