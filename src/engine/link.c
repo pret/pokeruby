@@ -978,13 +978,12 @@ void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
 
 #if DEBUG
 
-//EWRAM_DATA u16 *debugCharacterBase = NULL;
 EWRAM_DATA uintptr_t debugCharacterBase = 0;
 EWRAM_DATA uintptr_t unk_20238C8 = 0;
 EWRAM_DATA u16 *debugTileMap = NULL;
 EWRAM_DATA u32 unk_20238D0 = 0;
 
-void debug_sub_8008218(u16 *buffer, void *arg1, u16 *arg2, u32 arg3)
+void debug_sub_8008218(u16 *buffer, u32 arg1, u16 *arg2, u32 arg3)
 {
     CpuSet(sLinkTestDigitTiles, buffer, 272);
     debugCharacterBase = (uintptr_t)buffer;

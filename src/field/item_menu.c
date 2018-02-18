@@ -497,7 +497,7 @@ static bool8 SetupBagMultistep(void)
         sub_80A78B8();
 #if DEBUG
         if (gLinkOpen == TRUE)
-            debug_sub_8008218((void *)(VRAM + 0xF5E0), (void *)0x8000, (void *)(VRAM + 0xF800), 0);
+            debug_sub_8008218((void *)(VRAM + 0xF5E0), 0x8000, (void *)(VRAM + 0xF800), 0);
 #endif
         return TRUE;
     }

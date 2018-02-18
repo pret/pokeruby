@@ -726,7 +726,7 @@ bool8 InitPartyMenu(void)
         SetVBlankCallback(VBlankCB_PartyMenu);
 #if DEBUG
         if (gLinkOpen == TRUE)
-            debug_sub_8008218((void *)(VRAM + 0xE5E0), (void *)0x8000, (void *)(VRAM + 0x7800), 2);
+            debug_sub_8008218((void *)(VRAM + 0xE5E0), 0x8000, (void *)(VRAM + 0x7800), 2);
 #endif
         return TRUE;
     }
