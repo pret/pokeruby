@@ -23,6 +23,7 @@
 #include "link.h"
 #include "load_save.h"
 #include "main.h"
+#include "m4a.h"
 #include "constants/maps.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -60,6 +61,7 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
+extern u8 gUnknown_020297ED;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
 
@@ -1104,6 +1106,68 @@ u8 sav1_map_get_battletype(void)
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum)->battleType;
 }
 
+#if DEBUG
+
+void debug_sub_8076B68(void);
+
+void debug_sub_80589D8(void);
+
+void debug_sub_8058A50(void);
+
+void CB2_InitTestMenu(void)
+{
+    m4aSoundVSyncOff();
+    SetVBlankCallback(NULL);
+    DmaFill32(3, 0, (void *) VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *) PLTT, PLTT_SIZE);
+    ResetPaletteFade();
+    ResetSpriteData();
+    ResetTasks();
+    ScanlineEffect_Stop();
+    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    debug_sub_8076B68();
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    REG_IE |= 1;
+    REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP;
+    m4aSoundVSyncOn();
+    SetVBlankCallback(debug_sub_8058A50);
+    m4aSongNumStart(0x19D);
+    SetMainCallback2(debug_sub_80589D8);
+}
+
+void debug_sub_80589D8(void)
+{
+    if (UpdatePaletteFade())
+        return;
+
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+}
+
+void debug_sub_80589F4(void)
+{
+    if (UpdatePaletteFade())
+        return;
+
+    SetVBlankCallback(NULL);
+
+    DmaFill32(3, 0, (void *) VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *) PLTT, PLTT_SIZE);
+
+    SetMainCallback2(gMain.savedCallback);
+}
+
+void debug_sub_8058A50(void)
+{
+    ProcessSpriteCopyRequests();
+    LoadOam();
+    TransferPlttBuffer();
+}
+
+#endif
+
 void ResetSafariZoneFlag_(void)
 {
     ResetSafariZoneFlag();
@@ -1207,6 +1271,33 @@ void CB2_NewGame(void)
     set_callback1(c1_overworld);
     SetMainCallback2(c2_overworld);
 }
+
+#if DEBUG
+
+extern void (*gFieldCallback)(void);
+
+void debug_sub_8058C00(void)
+{
+    FieldClearVBlankHBlankCallbacks();
+    StopMapMusic();
+    ResetSafariZoneFlag_();
+    player_avatar_init_params_reset();
+    PlayTimeCounter_Start();
+    ScriptContext1_Init();
+    ScriptContext2_Disable();
+
+    if (gMain.heldKeys & R_BUTTON)
+        gFieldCallback = ExecuteTruckSequence;
+    else
+        gFieldCallback = sub_8080B60;
+
+    do_load_map_stuff_loop(&gMain.state);
+    SetFieldVBlankCallback();
+    set_callback1(c1_overworld);
+    SetMainCallback2(c2_overworld);
+}
+
+#endif
 
 void CB2_WhiteOut(void)
 {
@@ -1363,6 +1454,10 @@ void CB2_ContinueSavedGame(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
+#if DEBUG
+    if (gMain.heldKeys & R_BUTTON)
+        gUnknown_020297ED = TRUE;
+#endif
     ResetSafariZoneFlag_();
     LoadSaveblockMapHeader();
     LoadSaveblockMapObjScripts();

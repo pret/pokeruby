@@ -280,7 +280,7 @@ static u16 sub_80FB9C0(u16);
 static void sub_80FBA18(void);
 static bool8 sub_80FBAA0(u16);
 void CreateRegionMapCursor(u16, u16);
-static void sub_80FBCA0(void);
+void sub_80FBCA0(void);
 static void sub_80FBDF8(void);
 static void sub_80FBE24(void);
 static void SpriteCB_PlayerIconZoomedOut(struct Sprite *);
@@ -288,8 +288,8 @@ static void UpdateIconBlink(struct Sprite *);
 static void SpriteCB_PlayerIconZoomedIn(struct Sprite *);
 const u8 *GetMapSectionName(u8 *, u16, u16);
 static void VBlankCB_FlyRegionMap(void);
-static void CB2_FlyRegionMap(void);
-static void sub_80FC244(void (*func)(void));
+void CB2_FlyRegionMap(void);
+void sub_80FC244(void (*func)(void));
 static void PrintFlyTargetName(void);
 static void CreateFlyTargetGraphics(void);
 static void CreateCityTownFlyTargetIcons(void);
@@ -297,7 +297,7 @@ static void CreateSpecialAreaFlyTargetIcons(void);
 static void SpriteCB_FlyTargetIcons(struct Sprite *);
 static void sub_80FC5B4(void);
 static void sub_80FC600(void);
-static void sub_80FC69C(void);
+void sub_80FC69C(void);
 
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed)
 {
@@ -1127,7 +1127,7 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag)
     }
 }
 
-static void sub_80FBCA0(void)
+void sub_80FBCA0(void)
 {
     if (gRegionMap->cursorSprite != NULL)
     {
@@ -1420,7 +1420,7 @@ struct UnknownStruct4
 
 static const u8 *const sEverGrandeCityAreaNames[] = {OtherText_PokeLeague, OtherText_PokeCenter};
 
-static const struct UnknownStruct4 sUnknown_083E79C0[1] =
+const struct UnknownStruct4 gUnknown_083E79C0[1] =
 {
     {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
@@ -1591,14 +1591,14 @@ static void VBlankCB_FlyRegionMap(void)
     TransferPlttBuffer();
 }
 
-static void CB2_FlyRegionMap(void)
+void CB2_FlyRegionMap(void)
 {
     ewram0_3.unk0();
     AnimateSprites();
     BuildOamBuffer();
 }
 
-static void sub_80FC244(void (*func)(void))
+void sub_80FC244(void (*func)(void))
 {
     ewram0_3.unk0 = func;
     ewram0_3.unk4 = 0;
@@ -1611,9 +1611,9 @@ static void PrintFlyTargetName(void)
         u16 i;
         bool32 drawFrameDisabled = FALSE;
 
-        for (i = 0; i < ARRAY_COUNT(sUnknown_083E79C0); i++)
+        for (i = 0; i < ARRAY_COUNT(gUnknown_083E79C0); i++)
         {
-            const struct UnknownStruct4 *r4 = &sUnknown_083E79C0[i];
+            const struct UnknownStruct4 *r4 = &gUnknown_083E79C0[i];
 
             if (ewram0_3.regionMap.mapSectionId == r4->mapSectionId)
             {
@@ -1795,7 +1795,7 @@ static void sub_80FC600(void)
     }
 }
 
-static void sub_80FC69C(void)
+void sub_80FC69C(void)
 {
     switch (ewram0_3.unk4)
     {

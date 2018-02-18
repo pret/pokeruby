@@ -23,6 +23,7 @@
 #include "text.h"
 #include "trainer_card.h"
 
+extern u8 unk_2030220;
 extern u16 gSpecialVar_Result;
 extern struct TrainerCard gTrainerCards[4];
 extern u8 gUnknown_03004860;
@@ -41,7 +42,7 @@ extern struct
     u8 field1;
 } gUnknown_020297D8;
 
-static void sub_8082F20(u8 taskId);
+/*static*/ void sub_8082F20(u8 taskId);
 static void sub_8082F68(u8 taskId);
 static void sub_8082FEC(u8 taskId);
 static void sub_808303C(u8 taskId);
@@ -95,6 +96,382 @@ const u8 *const gTrainerCardColorNames[] =
     TrainerCardColorName_Gold,
 };
 
+#if DEBUG
+
+__attribute__((naked))
+int debug_sub_808A4D0()
+{
+    asm("\
+	push	{lr}\n\
+	add	r1, r0, #0\n\
+	ldr	r0, ._3         @ sub_8082F68\n\
+	cmp	r1, r0\n\
+	bne	._1	@cond_branch\n\
+	mov	r0, #0x1\n\
+	b	._30\n\
+._4:\n\
+	.align	2, 0\n\
+._3:\n\
+	.word	sub_8082F68+1\n\
+._1:\n\
+	ldr	r0, ._7         @ sub_8082FEC\n\
+	cmp	r1, r0\n\
+	bne	._5	@cond_branch\n\
+	mov	r0, #0x11\n\
+	b	._30\n\
+._8:\n\
+	.align	2, 0\n\
+._7:\n\
+	.word	sub_8082FEC+1\n\
+._5:\n\
+	ldr	r0, ._11        @ sub_808303C\n\
+	cmp	r1, r0\n\
+	bne	._9	@cond_branch\n\
+	mov	r0, #0x12\n\
+	b	._30\n\
+._12:\n\
+	.align	2, 0\n\
+._11:\n\
+	.word	sub_808303C+1\n\
+._9:\n\
+	ldr	r0, ._15        @ sub_8083188\n\
+	cmp	r1, r0\n\
+	bne	._13	@cond_branch\n\
+	mov	r0, #0x13\n\
+	b	._30\n\
+._16:\n\
+	.align	2, 0\n\
+._15:\n\
+	.word	sub_8083188+1\n\
+._13:\n\
+	ldr	r0, ._19        @ sub_80830E4\n\
+	cmp	r1, r0\n\
+	bne	._17	@cond_branch\n\
+	mov	r0, #0x14\n\
+	b	._30\n\
+._20:\n\
+	.align	2, 0\n\
+._19:\n\
+	.word	sub_80830E4+1\n\
+._17:\n\
+	ldr	r0, ._23        @ sub_80831F8\n\
+	cmp	r1, r0\n\
+	bne	._21	@cond_branch\n\
+	mov	r0, #0x21\n\
+	b	._30\n\
+._24:\n\
+	.align	2, 0\n\
+._23:\n\
+	.word	sub_80831F8+1\n\
+._21:\n\
+	ldr	r0, ._27        @ sub_8083314\n\
+	cmp	r1, r0\n\
+	bne	._25	@cond_branch\n\
+	mov	r0, #0x2\n\
+	b	._30\n\
+._28:\n\
+	.align	2, 0\n\
+._27:\n\
+	.word	sub_8083314+1\n\
+._25:\n\
+	ldr	r0, ._31        @ sub_80833C4\n\
+	cmp	r1, r0\n\
+	beq	._29	@cond_branch\n\
+	mov	r0, #0x0\n\
+	b	._30\n\
+._32:\n\
+	.align	2, 0\n\
+._31:\n\
+	.word	sub_80833C4+1\n\
+._29:\n\
+	mov	r0, #0x3\n\
+._30:\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+
+__attribute__((naked))
+void debug_sub_808A55C()
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	mov	r7, r8\n\
+	push	{r7}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	ldr	r2, ._37        @ gTasks\n\
+	lsl	r0, r7, #0x2\n\
+	add	r0, r0, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r4, r0, r2\n\
+	mov	r0, #0x8\n\
+	ldsh	r1, [r4, r0]\n\
+	lsl	r0, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r2\n\
+	ldrb	r0, [r0, #0x4]\n\
+	cmp	r0, #0\n\
+	bne	._33	@cond_branch\n\
+	mov	r1, #0xa\n\
+	ldsh	r0, [r4, r1]\n\
+	cmp	r0, #0x5\n\
+	bne	._34	@cond_branch\n\
+	add	r0, r7, #0\n\
+	bl	DestroyTask\n\
+._34:\n\
+	ldrh	r0, [r4, #0xa]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r4, #0xa]\n\
+._33:\n\
+	ldr	r0, ._37 + 4    @ gShouldAdvanceLinkState\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 8    @ gBlockSendBuffer\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x16\n\
+	mov	r2, #0x5\n\
+	mov	r3, #0x4\n\
+	bl	PrintHex\n\
+	mov	r4, #0x0\n\
+	lsl	r3, r7, #0x2\n\
+	mov	r8, r3\n\
+	mov	r6, #0xc0\n\
+	lsl	r6, r6, #0x13\n\
+	mov	r5, #0xa0\n\
+	lsl	r5, r5, #0x13\n\
+._35:\n\
+	ldr	r0, ._37 + 12   @ gLinkPlayerPending\n\
+	add	r0, r4, r0\n\
+	ldrb	r0, [r0]\n\
+	lsr	r1, r5, #0x18\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	ldr	r1, ._37 + 16   @ gBlockRecvBuffer\n\
+	lsl	r0, r4, #0x8\n\
+	add	r0, r0, r1\n\
+	ldrh	r0, [r0]\n\
+	lsr	r2, r6, #0x18\n\
+	mov	r1, #0x16\n\
+	mov	r3, #0x4\n\
+	bl	PrintHex\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x11\n\
+	add	r6, r6, r0\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x12\n\
+	add	r5, r5, r1\n\
+	add	r4, r4, #0x1\n\
+	cmp	r4, #0x3\n\
+	ble	._35	@cond_branch\n\
+	ldr	r4, ._37 + 20   @ gLinkStatus\n\
+	ldr	r0, [r4]\n\
+	mov	r1, #0xf\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x8\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 24   @ gLink\n\
+	ldrb	r0, [r0, #0x1]\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0xa\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	bl	GetMultiplayerId\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0x7\n\
+	mov	r2, #0xc\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	bl	GetBlockReceivedStatus\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0x7\n\
+	mov	r2, #0xa\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 28   @ gReceivedRemoteLinkPlayers\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0xc\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 32   @ gSpecialVar_Result\n\
+	ldrh	r0, [r0]\n\
+	mov	r1, #0xb\n\
+	mov	r2, #0x8\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	ldr	r0, [r4]\n\
+	mov	r1, #0x1c\n\
+	and	r0, r0, r1\n\
+	lsr	r0, r0, #0x2\n\
+	mov	r1, #0xb\n\
+	mov	r2, #0xa\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	bl	IsLinkConnectionEstablished\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0xb\n\
+	mov	r2, #0xc\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	bl	IsLinkTaskFinished\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0xf\n\
+	mov	r2, #0xa\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	ldr	r2, ._37        @ gTasks\n\
+	mov	r3, r8\n\
+	add	r0, r3, r7\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r2\n\
+	mov	r3, #0x8\n\
+	ldsh	r1, [r0, r3]\n\
+	lsl	r0, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r2\n\
+	ldr	r0, [r0]\n\
+	bl	debug_sub_808A4D0\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0xf\n\
+	mov	r2, #0xc\n\
+	mov	r3, #0x2\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 36   @ gLinkCallback\n\
+	ldr	r0, [r0]\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0xd\n\
+	mov	r3, #0x8\n\
+	bl	PrintHex\n\
+	bl	HasLinkErrorOccurred\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	ldr	r0, ._37 + 40   @ gLinkPlayers\n\
+	mov	r6, #0x80\n\
+	lsl	r6, r6, #0x12\n\
+	add	r5, r0, #0\n\
+	add	r5, r5, #0x14\n\
+	mov	r4, #0x3\n\
+._36:\n\
+	ldr	r0, [r5]\n\
+	lsr	r1, r6, #0x18\n\
+	mov	r2, #0x3\n\
+	mov	r3, #0x4\n\
+	bl	PrintHex\n\
+	mov	r0, #0xc0\n\
+	lsl	r0, r0, #0x13\n\
+	add	r6, r6, r0\n\
+	add	r5, r5, #0x1c\n\
+	sub	r4, r4, #0x1\n\
+	cmp	r4, #0\n\
+	bge	._36	@cond_branch\n\
+	ldr	r0, ._37 + 44   @ 0x4000128\n\
+	ldrh	r0, [r0]\n\
+	mov	r1, #0x2\n\
+	mov	r2, #0x6\n\
+	mov	r3, #0x4\n\
+	bl	PrintHex\n\
+	bl	debug_sub_808B850\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	mov	r1, #0x19\n\
+	mov	r2, #0x3\n\
+	mov	r3, #0x1\n\
+	bl	PrintHex\n\
+	pop	{r3}\n\
+	mov	r8, r3\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._38:\n\
+	.align	2, 0\n\
+._37:\n\
+	.word	gTasks\n\
+	.word	gShouldAdvanceLinkState\n\
+	.word	gBlockSendBuffer\n\
+	.word	gLinkPlayerPending\n\
+	.word	gBlockRecvBuffer\n\
+	.word	gLinkStatus\n\
+	.word	gLink\n\
+	.word	gReceivedRemoteLinkPlayers\n\
+	.word	gSpecialVar_Result\n\
+	.word	gLinkCallback\n\
+	.word	gLinkPlayers\n\
+	.word	0x4000128");
+}
+#endif
+
+#if DEBUG
+__attribute__((naked))
+static void sub_8082CD4(u8 arg0, u8 arg1)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	lsl	r1, r1, #0x18\n\
+	lsr	r6, r1, #0x18\n\
+	mov	r0, #0xc\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x1f\n\
+	mov	r3, #0x2\n\
+	bl	InitLinkTestBG_Unused\n\
+	ldr	r4, ._40        @ sub_8082F20\n\
+	add	r0, r4, #0\n\
+	bl	FindTaskIdByFunc\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0xff\n\
+	bne	._39	@cond_branch\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x50\n\
+	bl	CreateTask\n\
+	add	r4, r0, #0\n\
+	lsl	r4, r4, #0x18\n\
+	lsr	r4, r4, #0x18\n\
+	ldr	r5, ._40 + 4    @ gTasks\n\
+	lsl	r0, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	lsl	r0, r0, #0x3\n\
+	add	r0, r0, r5\n\
+	strh	r7, [r0, #0xa]\n\
+	strh	r6, [r0, #0xc]\n\
+	ldr	r0, ._40 + 8    @ debug_sub_808A55C\n\
+	mov	r1, #0x50\n\
+	bl	CreateTask\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r5\n\
+	strh	r4, [r1, #0x8]\n\
+._39:\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._41:\n\
+	.align	2, 0\n\
+._40:\n\
+	.word	sub_8082F20+1\n\
+	.word	gTasks\n\
+	.word	debug_sub_808A55C+1");
+}
+#else
 static void sub_8082CD4(u8 arg0, u8 arg1)
 {
     if (FindTaskIdByFunc(sub_8082F20) == 0xFF)
@@ -105,6 +482,7 @@ static void sub_8082CD4(u8 arg0, u8 arg1)
         gTasks[taskId].data[2] = arg1;
     }
 }
+#endif
 
 static void sub_8082D18(u32 value)
 {
@@ -207,7 +585,7 @@ void unref_sub_8082EEC(u8 taskId)
     }
 }
 
-static void sub_8082F20(u8 taskId)
+/*static*/ void sub_8082F20(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -359,6 +737,10 @@ void sub_80831F8(u8 taskId)
     if (sub_8082E28(taskId) == TRUE
      || sub_8082DF4(taskId) == TRUE)
         return;
+
+#if DEBUG
+    sub_8082D60(taskId, GetLinkPlayerCount_2());
+#endif
 
     gSpecialVar_Result = sub_8082D9C(local1, local2);
     if (gSpecialVar_Result == 0)
@@ -908,6 +1290,74 @@ void sub_8083C50(u8 taskId)
         DestroyTask(taskId);
 }
 
+#if DEBUG
+
+__attribute__((naked))
+void debug_sub_808B778()
+{
+    asm("\
+	push	{r4, lr}\n\
+	ldr	r4, ._390       @ debug_sub_808B7A8\n\
+	add	r0, r4, #0\n\
+	bl	FuncIsActiveTask\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._389	@cond_branch\n\
+	add	r0, r4, #0\n\
+	mov	r1, #0x50\n\
+	bl	CreateTask\n\
+._389:\n\
+	ldr	r1, ._390 + 4   @ unk_3004E98\n\
+	ldr	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	str	r0, [r1]\n\
+	pop	{r4}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._391:\n\
+	.align	2, 0\n\
+._390:\n\
+	.word	debug_sub_808B7A8+1\n\
+	.word	unk_3004E98");
+}
+
+__attribute__((naked))
+void debug_sub_808B7A8()
+{
+    asm("\
+	push	{lr}\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	ldr	r2, ._393       @ gTasks\n\
+	lsl	r1, r0, #0x2\n\
+	add	r1, r1, r0\n\
+	lsl	r1, r1, #0x3\n\
+	add	r1, r1, r2\n\
+	ldrh	r0, [r1, #0x8]\n\
+	add	r0, r0, #0x1\n\
+	strh	r0, [r1, #0x8]\n\
+	lsl	r0, r0, #0x10\n\
+	asr	r0, r0, #0x10\n\
+	cmp	r0, #0x1e\n\
+	bne	._392	@cond_branch\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r1, #0x8]\n\
+	ldr	r2, ._393 + 4   @ unk_3004E94\n\
+	ldrh	r0, [r2]\n\
+	mov	r1, #0x1\n\
+	orr	r0, r0, r1\n\
+	strh	r0, [r2]\n\
+._392:\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._394:\n\
+	.align	2, 0\n\
+._393:\n\
+	.word	gTasks\n\
+	.word	unk_3004E94");
+}
+#endif
+
 static void sub_8083CA4(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
@@ -922,3 +1372,22 @@ void unref_sub_8083CC8(u8 taskId)
     sub_800832C();
     gTasks[taskId].func = sub_8083CA4;
 }
+
+#if DEBUG
+
+void debug_sub_808B82C(void)
+{
+    unk_2030220 = 0;
+}
+
+void debug_sub_808B838(u8 a)
+{
+    unk_2030220 |= 1 << a;
+}
+
+int debug_sub_808B850(void)
+{
+    return unk_2030220;
+}
+
+#endif

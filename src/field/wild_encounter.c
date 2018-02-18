@@ -3698,13 +3698,13 @@ const u16 gRoute119WaterTileData[] =
 extern u16 gSpecialVar_Result;
 extern u8 S_RepelWoreOff[];
 
-EWRAM_DATA static u8 sWildEncountersDisabled = 0;
+EWRAM_DATA u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
 
 #define NUM_FEEBAS_SPOTS 6
 
-static u16 FeebasRandom(void);
-static void FeebasSeedRng(u16 seed);
+u16 FeebasRandom(void);
+void FeebasSeedRng(u16 seed);
 
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
@@ -3791,16 +3791,29 @@ static bool8 CheckFeebas(void)
     return FALSE;
 }
 
-static u16 FeebasRandom(void)
+u16 FeebasRandom(void)
 {
     sFeebasRngValue = 12345 + 0x41C64E6D * sFeebasRngValue;
     return sFeebasRngValue >> 16;
 }
 
-static void FeebasSeedRng(u16 seed)
+void FeebasSeedRng(u16 seed)
 {
     sFeebasRngValue = seed;
 }
+
+#if DEBUG
+u16 debug_sub_8092344(u8 arg0)
+{
+    if (arg0 == 0)
+        return 131;
+    if (arg0 == 1)
+        return 167;
+    if (arg0 == 2)
+        return 149;
+    return 0;
+}
+#endif
 
 static u8 ChooseWildMonIndex_Land(void)
 {
@@ -4041,6 +4054,24 @@ static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
     else
         return FALSE;
 }
+
+#if DEBUG
+u16 debug_sub_809283C(u16 attempts)
+{
+    u16 retval = 0;
+    u16 i = 0;
+
+    while (i < attempts)
+    {
+        if (DoWildEncounterRateDiceRoll(320) == TRUE)
+            retval++;
+
+        i++;
+    }
+
+    return retval;
+}
+#endif
 
 static bool8 DoWildEncounterTest(u32 encounterRate, bool8 ignoreAbility)
 {

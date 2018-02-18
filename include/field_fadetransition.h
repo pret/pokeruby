@@ -27,5 +27,6 @@ void sub_8080F48(void);
 void sub_8080F58(void);
 void sub_8080F68(void);
 void sub_8080F9C(void);
+void debug_sub_80888D8(void);
 
 #endif // GUARD_FIELD_FADETRANSITION_H

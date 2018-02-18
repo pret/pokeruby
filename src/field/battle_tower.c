@@ -259,7 +259,7 @@ static void SaveCurrentWinStreak(void);
 static void sub_8135CFC(void);
 static void CheckMonBattleTowerBanlist(u16, u16, u16, u8, u8, u16 *, u16 *, u8 *);
 static void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
-static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
+void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static void SetBattleTowerRecordChecksum(struct BattleTowerRecord *);
 static void ClearBattleTowerRecord(struct BattleTowerRecord *);
 

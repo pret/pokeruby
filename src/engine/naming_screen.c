@@ -26,8 +26,6 @@
 #define COLUMN_COUNT 10
 #endif
 
-extern u16 gKeyRepeatStartDelay;
-
 extern u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality);
 
 const u8 gSpriteImage_83CE094[] = INCBIN_U8("graphics/naming_screen/pc_icon/0.4bpp");

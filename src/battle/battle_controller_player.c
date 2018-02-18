@@ -42,6 +42,8 @@ extern struct Window gUnknown_03004210;
 
 extern void (*gBattleBankFunc[])(void);
 
+extern u32 gOamMatrixAllocBitmap;
+extern u8 gUnknown_020297ED;
 extern u8 gActiveBank;
 extern u8 gActionSelectionCursor[];
 extern u8 gDisplayedStringBattle[];
@@ -51,7 +53,7 @@ extern u8 gBankInMenu;
 extern u16 gBattlePartyID[];
 extern u8 gHealthboxIDs[];
 extern u8 gDoingBattleAnim;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleOutcome;
 extern void (*gAnimScriptCallback)(void);
@@ -100,7 +102,7 @@ extern void sub_8047858();
 extern u8 GetBankSide(u8);
 extern void StartBattleIntroAnim();
 extern void oamt_add_pos2_onto_pos1();
-extern void sub_8078B34(struct Sprite *);
+extern void StartTranslateAnimSpriteByDeltas(struct Sprite *);
 extern void StoreSpriteCallbackInData();
 extern void BattleLoadPlayerMonSprite();
 extern bool8 IsDoubleBattle(void);
@@ -141,7 +143,7 @@ extern bool8 gDoingBattleAnim;
 extern u16 gBattleTypeFlags;
 extern u32 gBattleExecBuffer;
 extern u8 gBattleBufferA[][0x200];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gAbsentBankFlags;
@@ -368,7 +370,7 @@ void PlayerBufferRunCommand(void)
 
 void bx_0802E404(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].pos2.x == 0)
+    if (gSprites[gBankSpriteIds[gActiveBank]].pos2.x == 0)
         PlayerBufferExecCompleted();
 }
 
@@ -496,7 +498,7 @@ void sub_802C2EC(void)
     {
         DestroyMenuCursor();
         PlaySE(SE_SELECT);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010574;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010574;
         Emitcmd33(1, 10, gMoveSelectionCursor[gActiveBank] | (gUnknown_03004344 << 8));
         dp11b_obj_free(gUnknown_03004344, 1);
         PlayerBufferExecCompleted();
@@ -505,7 +507,7 @@ void sub_802C2EC(void)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010574;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010574;
         gBattleBankFunc[gActiveBank] = sub_802C68C;
         dp11b_obj_instanciate(gActiveBank, 1, 7, 1);
         dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
@@ -514,7 +516,7 @@ void sub_802C2EC(void)
     else if (gMain.newKeys & 0x60)
     {
         PlaySE(SE_SELECT);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010574;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010574;
         do
         {
             u8 var = GetBankIdentity(gUnknown_03004344);
@@ -555,13 +557,13 @@ void sub_802C2EC(void)
             if (gAbsentBankFlags & gBitTable[gUnknown_03004344])
                 i = 0;
         } while (i == 0);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010520;
     }
     //_0802C540
     else if (gMain.newKeys & 0x90)
     {
         PlaySE(SE_SELECT);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010574;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010574;
         do
         {
             u8 var = GetBankIdentity(gUnknown_03004344);
@@ -601,7 +603,7 @@ void sub_802C2EC(void)
             if (gAbsentBankFlags & gBitTable[gUnknown_03004344])
                 i = 0;
         } while (i == 0);
-        gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
+        gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010520;
     }
 }
 
@@ -617,9 +619,14 @@ struct ChooseMoveStruct
 
 const u8 gUnknown_081FAE80[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}");
 
+void debug_sub_8030C24(void);
+
 void sub_802C68C(void)
 {
     u32 r8 = 0;
+#if DEBUG
+    u8 count = 0;
+#endif
     struct ChooseMoveStruct *r6 = (struct ChooseMoveStruct *)(gBattleBufferA[gActiveBank] + 4);
 
     if (gMain.newKeys & A_BUTTON)
@@ -672,7 +679,7 @@ void sub_802C68C(void)
                 gUnknown_03004344 = GetBankByIdentity(3);
             else
                 gUnknown_03004344 = GetBankByIdentity(1);
-            gSprites[gObjectBankIDs[gUnknown_03004344]].callback = sub_8010520;
+            gSprites[gBankSpriteIds[gUnknown_03004344]].callback = sub_8010520;
         }
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -750,6 +757,43 @@ void sub_802C68C(void)
             gBattleBankFunc[gActiveBank] = sub_802CA60;
         }
     }
+#if DEBUG
+    else if (gUnknown_020297ED == 1 && (gMain.newKeys & START_BUTTON))
+    {
+	const u8 *moveName;
+	s32 i;
+	
+	Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
+	moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1)];
+	Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
+	ConvertIntToDecimalStringN(
+	  gDisplayedStringBattle,
+	  GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1),
+	  2, 3);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
+	ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
+	for (i = 0; i < 64; i++)
+	{
+	    if (gSprites[i].inUse)
+		count++;
+	}
+	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
+	count = GetTaskCount();
+	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
+	for (i = 0, count = 0; i < 32; i++)
+	{
+	    if (gOamMatrixAllocBitmap & (1 << i))
+		count++;
+	}
+	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
+	gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
+    }
+#endif
 }
 
 extern const u8 BattleText_Format[];
@@ -956,26 +1000,708 @@ void sub_802D18C(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+void debug_sub_8030C24(void)
+{
+    asm("\
+	push	{r4, r5, r6, lr}\n\
+	add	sp, sp, #0xfffffff4\n\
+	ldr	r1, ._293       @ gBattlePartyID\n\
+	ldr	r4, ._293 + 4   @ gActiveBank\n\
+	ldrb	r0, [r4]\n\
+	lsl	r0, r0, #0x1\n\
+	add	r0, r0, r1\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x64\n\
+	mul	r0, r0, r1\n\
+	ldr	r1, ._293 + 8   @ gPlayerParty\n\
+	add	r0, r0, r1\n\
+	mov	r1, #0xd\n\
+	bl	GetMonData\n\
+	add	r1, sp, #0x8\n\
+	strh	r0, [r1]\n\
+	ldr	r5, ._293 + 12  @ gMain\n\
+	ldrh	r1, [r5, #0x30]\n\
+	cmp	r1, #0x20\n\
+	bne	._286	@cond_branch\n\
+	b	._287\n\
+._286:\n\
+	cmp	r1, #0x20\n\
+	bgt	._288	@cond_branch\n\
+	cmp	r1, #0x8\n\
+	beq	._289	@cond_branch\n\
+	cmp	r1, #0x8\n\
+	bgt	._290	@cond_branch\n\
+	cmp	r1, #0x4\n\
+	beq	._291	@cond_branch\n\
+	b	._348\n\
+._294:\n\
+	.align	2, 0\n\
+._293:\n\
+	.word	gBattlePartyID\n\
+	.word	gActiveBank\n\
+	.word	gPlayerParty\n\
+	.word	gMain\n\
+._290:\n\
+	cmp	r1, #0x10\n\
+	bne	._295	@cond_branch\n\
+	b	._296\n\
+._295:\n\
+	b	._348\n\
+._288:\n\
+	cmp	r1, #0x80\n\
+	bne	._298	@cond_branch\n\
+	b	._302\n\
+._298:\n\
+	cmp	r1, #0x80\n\
+	bgt	._300	@cond_branch\n\
+	cmp	r1, #0x40\n\
+	bne	._301	@cond_branch\n\
+	b	._302\n\
+._301:\n\
+	b	._348\n\
+._300:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x1\n\
+	cmp	r1, r0\n\
+	bne	._304	@cond_branch\n\
+	b	._305\n\
+._304:\n\
+	mov	r0, #0x80\n\
+	lsl	r0, r0, #0x2\n\
+	cmp	r1, r0\n\
+	bne	._306	@cond_branch\n\
+	b	._307\n\
+._306:\n\
+	b	._348\n\
+._289:\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	bl	dp11b_obj_free\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x0\n\
+	bl	dp11b_obj_free\n\
+	ldr	r0, ._312       @ gBankAttacker\n\
+	ldrb	r2, [r4]\n\
+	strb	r2, [r0]\n\
+	ldrh	r1, [r5, #0x28]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._310	@cond_branch\n\
+	ldr	r0, ._312 + 4   @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._310	@cond_branch\n\
+	ldr	r0, ._312 + 8   @ gBankTarget\n\
+	mov	r1, #0x2\n\
+	eor	r1, r1, r2\n\
+	strb	r1, [r0]\n\
+	b	._311\n\
+._313:\n\
+	.align	2, 0\n\
+._312:\n\
+	.word	gBankAttacker\n\
+	.word	gBattleTypeFlags\n\
+	.word	gBankTarget\n\
+._310:\n\
+	ldr	r0, ._317       @ gMain\n\
+	ldrh	r1, [r0, #0x28]\n\
+	mov	r2, #0x1\n\
+	add	r0, r2, #0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._315	@cond_branch\n\
+	ldr	r0, ._317 + 4   @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	add	r0, r2, #0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._315	@cond_branch\n\
+	mov	r0, #0x3\n\
+	b	._316\n\
+._318:\n\
+	.align	2, 0\n\
+._317:\n\
+	.word	gMain\n\
+	.word	gBattleTypeFlags\n\
+._315:\n\
+	mov	r0, #0x1\n\
+._316:\n\
+	bl	GetBankByIdentity\n\
+	ldr	r1, ._320       @ gBankTarget\n\
+	strb	r0, [r1]\n\
+._311:\n\
+	mov	r0, #0x0\n\
+	bl	sub_80326EC\n\
+	add	r0, sp, #0x8\n\
+	ldrh	r0, [r0]\n\
+	bl	DoMoveAnim\n\
+	ldr	r1, ._320 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._320 + 8   @ gActiveBank\n\
+	ldrb	r0, [r0]\n\
+	b	._332\n\
+._321:\n\
+	.align	2, 0\n\
+._320:\n\
+	.word	gBankTarget\n\
+	.word	gBattleBankFunc\n\
+	.word	gActiveBank\n\
+._291:\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	bl	dp11b_obj_free\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x0\n\
+	bl	dp11b_obj_free\n\
+	ldr	r0, ._325       @ gBankTarget\n\
+	ldrb	r2, [r4]\n\
+	strb	r2, [r0]\n\
+	ldrh	r1, [r5, #0x28]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._323	@cond_branch\n\
+	ldr	r0, ._325 + 4   @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._323	@cond_branch\n\
+	ldr	r0, ._325 + 8   @ gBankAttacker\n\
+	mov	r1, #0x2\n\
+	eor	r1, r1, r2\n\
+	strb	r1, [r0]\n\
+	b	._324\n\
+._326:\n\
+	.align	2, 0\n\
+._325:\n\
+	.word	gBankTarget\n\
+	.word	gBattleTypeFlags\n\
+	.word	gBankAttacker\n\
+._323:\n\
+	ldr	r0, ._330       @ gMain\n\
+	ldrh	r1, [r0, #0x28]\n\
+	mov	r2, #0x1\n\
+	add	r0, r2, #0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._328	@cond_branch\n\
+	ldr	r0, ._330 + 4   @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	add	r0, r2, #0\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._328	@cond_branch\n\
+	mov	r0, #0x3\n\
+	b	._329\n\
+._331:\n\
+	.align	2, 0\n\
+._330:\n\
+	.word	gMain\n\
+	.word	gBattleTypeFlags\n\
+._328:\n\
+	mov	r0, #0x1\n\
+._329:\n\
+	bl	GetBankByIdentity\n\
+	ldr	r1, ._333       @ gBankAttacker\n\
+	strb	r0, [r1]\n\
+._324:\n\
+	mov	r0, #0x0\n\
+	bl	sub_80326EC\n\
+	add	r0, sp, #0x8\n\
+	ldrh	r0, [r0]\n\
+	bl	DoMoveAnim\n\
+	ldr	r1, ._333 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._333 + 8   @ gActiveBank\n\
+	ldrb	r0, [r0]\n\
+	b	._332\n\
+._334:\n\
+	.align	2, 0\n\
+._333:\n\
+	.word	gBankAttacker\n\
+	.word	gBattleBankFunc\n\
+	.word	gActiveBank\n\
+._305:\n\
+	ldrh	r1, [r5, #0x28]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._336	@cond_branch\n\
+	ldr	r0, ._338       @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._336	@cond_branch\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	bl	dp11b_obj_free\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x0\n\
+	bl	dp11b_obj_free\n\
+	mov	r0, #0x3\n\
+	bl	GetBankByIdentity\n\
+	ldr	r1, ._338 + 4   @ gBankAttacker\n\
+	strb	r0, [r1]\n\
+	mov	r0, #0x1\n\
+	b	._337\n\
+._339:\n\
+	.align	2, 0\n\
+._338:\n\
+	.word	gBattleTypeFlags\n\
+	.word	gBankAttacker\n\
+._336:\n\
+	add	r0, sp, #0x8\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r0, r1]\n\
+	add	r0, r0, #0x9\n\
+	add	r1, sp, #0x8\n\
+	strh	r0, [r1]\n\
+._296:\n\
+	add	r0, sp, #0x8\n\
+	mov	r2, #0x0\n\
+	ldsh	r0, [r0, r2]\n\
+	add	r0, r0, #0x1\n\
+	lsl	r2, r0, #0x10\n\
+	add	r1, sp, #0x8\n\
+	strh	r0, [r1]\n\
+	mov	r0, #0xb1\n\
+	lsl	r0, r0, #0x11\n\
+	cmp	r2, r0\n\
+	ble	._347	@cond_branch\n\
+	mov	r1, #0x1\n\
+	add	r0, sp, #0x8\n\
+	strh	r1, [r0]\n\
+	b	._347\n\
+._307:\n\
+	ldrh	r1, [r5, #0x28]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._343	@cond_branch\n\
+	ldr	r0, ._345       @ gBattleTypeFlags\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._343	@cond_branch\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	bl	dp11b_obj_free\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x0\n\
+	bl	dp11b_obj_free\n\
+	mov	r0, #0x1\n\
+	bl	GetBankByIdentity\n\
+	ldr	r1, ._345 + 4   @ gBankAttacker\n\
+	strb	r0, [r1]\n\
+	mov	r0, #0x3\n\
+._337:\n\
+	bl	GetBankByIdentity\n\
+	ldr	r1, ._345 + 8   @ gBankTarget\n\
+	strb	r0, [r1]\n\
+	mov	r0, #0x0\n\
+	bl	sub_80326EC\n\
+	add	r0, sp, #0x8\n\
+	ldrh	r0, [r0]\n\
+	bl	DoMoveAnim\n\
+	ldr	r1, ._345 + 12  @ gBattleBankFunc\n\
+	ldrb	r0, [r4]\n\
+._332:\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._345 + 16  @ debug_sub_803107C\n\
+	str	r1, [r0]\n\
+	b	._348\n\
+._346:\n\
+	.align	2, 0\n\
+._345:\n\
+	.word	gBattleTypeFlags\n\
+	.word	gBankAttacker\n\
+	.word	gBankTarget\n\
+	.word	gBattleBankFunc\n\
+	.word	debug_sub_803107C+1\n\
+._343:\n\
+	add	r1, sp, #0x8\n\
+	add	r0, r1, #0\n\
+	ldrh	r0, [r0]\n\
+	sub	r0, r0, #0x9\n\
+	strh	r0, [r1]\n\
+._287:\n\
+	add	r1, sp, #0x8\n\
+	add	r0, r1, #0\n\
+	ldrh	r0, [r0]\n\
+	sub	r0, r0, #0x1\n\
+	strh	r0, [r1]\n\
+	lsl	r0, r0, #0x10\n\
+	cmp	r0, #0\n\
+	bgt	._347	@cond_branch\n\
+	mov	r2, #0xb1\n\
+	lsl	r2, r2, #0x1\n\
+	add	r0, r2, #0\n\
+	strh	r0, [r1]\n\
+._347:\n\
+	ldr	r1, ._349       @ gBattlePartyID\n\
+	ldr	r4, ._349 + 4   @ gActiveBank\n\
+	ldrb	r0, [r4]\n\
+	lsl	r0, r0, #0x1\n\
+	add	r0, r0, r1\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x64\n\
+	mul	r0, r0, r1\n\
+	ldr	r1, ._349 + 8   @ gPlayerParty\n\
+	add	r0, r0, r1\n\
+	mov	r1, #0xd\n\
+	add	r2, sp, #0x8\n\
+	bl	SetMonData\n\
+	ldr	r2, ._349 + 12  @ gBattleMons\n\
+	ldrb	r1, [r4]\n\
+	mov	r0, #0x58\n\
+	mul	r0, r0, r1\n\
+	add	r0, r0, r2\n\
+	add	r1, sp, #0x8\n\
+	ldrh	r1, [r1]\n\
+	strh	r1, [r0, #0xc]\n\
+	ldr	r5, ._349 + 16  @ gUnknown_03004210\n\
+	ldr	r1, ._349 + 20  @ 0x1016\n\
+	mov	r0, #0x10\n\
+	str	r0, [sp]\n\
+	mov	r0, #0x38\n\
+	str	r0, [sp, #0x4]\n\
+	add	r0, r5, #0\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x37\n\
+	bl	Text_FillWindowRect\n\
+	add	r0, sp, #0x8\n\
+	mov	r2, #0x0\n\
+	ldsh	r1, [r0, r2]\n\
+	mov	r0, #0xd\n\
+	mul	r1, r1, r0\n\
+	ldr	r0, ._349 + 24  @ gMoveNames\n\
+	add	r1, r1, r0\n\
+	mov	r2, #0x80\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r6, #0x37\n\
+	str	r6, [sp]\n\
+	add	r0, r5, #0\n\
+	mov	r3, #0x2\n\
+	bl	Text_InitWindowAndPrintText\n\
+	ldr	r4, ._349 + 28  @ gDisplayedStringBattle\n\
+	add	r0, sp, #0x8\n\
+	mov	r2, #0x0\n\
+	ldsh	r1, [r0, r2]\n\
+	add	r0, r4, #0\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x3\n\
+	bl	ConvertIntToDecimalStringN\n\
+	mov	r2, #0x88\n\
+	lsl	r2, r2, #0x1\n\
+	str	r6, [sp]\n\
+	add	r0, r5, #0\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0xa\n\
+	bl	Text_InitWindowAndPrintText\n\
+	b	._348\n\
+._350:\n\
+	.align	2, 0\n\
+._349:\n\
+	.word	gBattlePartyID\n\
+	.word	gActiveBank\n\
+	.word	gPlayerParty\n\
+	.word	gBattleMons\n\
+	.word	gUnknown_03004210\n\
+	.word	0x1016\n\
+	.word	gMoveNames\n\
+	.word	gDisplayedStringBattle\n\
+._302:\n\
+	ldr	r0, ._353       @ gMain\n\
+	ldrh	r0, [r0, #0x30]\n\
+	cmp	r0, #0x40\n\
+	bne	._351	@cond_branch\n\
+	ldr	r1, ._353 + 4   @ gAnimMoveTurn\n\
+	ldrb	r0, [r1]\n\
+	sub	r0, r0, #0x1\n\
+	b	._352\n\
+._354:\n\
+	.align	2, 0\n\
+._353:\n\
+	.word	gMain\n\
+	.word	gAnimMoveTurn\n\
+._351:\n\
+	ldr	r1, ._359       @ gAnimMoveTurn\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+._352:\n\
+	strb	r0, [r1]\n\
+	ldr	r4, ._359 + 4   @ gDisplayedStringBattle\n\
+	ldrb	r1, [r1]\n\
+	add	r0, r4, #0\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x3\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r0, ._359 + 8   @ gUnknown_03004210\n\
+	mov	r2, #0x8e\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r1, #0x39\n\
+	str	r1, [sp]\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0x4\n\
+	bl	Text_InitWindowAndPrintText\n\
+._348:\n\
+	ldr	r0, ._359 + 12  @ gMain\n\
+	ldrh	r2, [r0, #0x28]\n\
+	mov	r1, #0xc0\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r1, #0\n\
+	and	r0, r0, r2\n\
+	cmp	r0, r1\n\
+	bne	._355	@cond_branch\n\
+	mov	r4, #0x0\n\
+	ldr	r5, ._359 + 4   @ gDisplayedStringBattle\n\
+	ldr	r6, ._359 + 8   @ gUnknown_03004210\n\
+._361:\n\
+	add	r0, r5, #0\n\
+	ldr	r1, ._359 + 16  @ BattleText_Format\n\
+	bl	StringCopy\n\
+	ldr	r1, ._359 + 20  @ gBattlePartyID\n\
+	ldr	r0, ._359 + 24  @ gActiveBank\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x1\n\
+	add	r0, r0, r1\n\
+	ldrh	r1, [r0]\n\
+	mov	r0, #0x64\n\
+	mul	r0, r0, r1\n\
+	ldr	r1, ._359 + 28  @ gPlayerParty\n\
+	add	r0, r0, r1\n\
+	add	r1, r4, #0\n\
+	add	r1, r1, #0xd\n\
+	bl	GetMonData\n\
+	mov	r1, #0xd\n\
+	mul	r1, r1, r0\n\
+	ldr	r0, ._359 + 32  @ gMoveNames\n\
+	add	r1, r1, r0\n\
+	add	r0, r5, #0\n\
+	bl	StringAppend\n\
+	lsl	r0, r4, #0x14\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x11\n\
+	add	r0, r0, r1\n\
+	lsr	r2, r0, #0x10\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r4\n\
+	mov	r3, #0x2\n\
+	cmp	r0, #0\n\
+	beq	._356	@cond_branch\n\
+	mov	r3, #0xa\n\
+._356:\n\
+	cmp	r4, #0x1\n\
+	bhi	._357	@cond_branch\n\
+	mov	r0, #0x37\n\
+	b	._358\n\
+._360:\n\
+	.align	2, 0\n\
+._359:\n\
+	.word	gAnimMoveTurn\n\
+	.word	gDisplayedStringBattle\n\
+	.word	gUnknown_03004210\n\
+	.word	gMain\n\
+	.word	BattleText_Format\n\
+	.word	gBattlePartyID\n\
+	.word	gActiveBank\n\
+	.word	gPlayerParty\n\
+	.word	gMoveNames\n\
+._357:\n\
+	mov	r0, #0x39\n\
+._358:\n\
+	str	r0, [sp]\n\
+	add	r0, r6, #0\n\
+	add	r1, r5, #0\n\
+	bl	Text_InitWindow\n\
+	ldr	r0, ._362       @ gUnknown_03004210\n\
+	bl	Text_PrintWindow8002F44\n\
+	add	r0, r4, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r4, r0, #0x18\n\
+	cmp	r4, #0x3\n\
+	bls	._361	@cond_branch\n\
+	ldr	r1, ._362 + 4   @ gBattleBankFunc\n\
+	ldr	r0, ._362 + 8   @ gActiveBank\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._362 + 12  @ sub_802C68C\n\
+	str	r1, [r0]\n\
+._355:\n\
+	add	sp, sp, #0xc\n\
+	pop	{r4, r5, r6}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._363:\n\
+	.align	2, 0\n\
+._362:\n\
+	.word	gUnknown_03004210\n\
+	.word	gBattleBankFunc\n\
+	.word	gActiveBank\n\
+	.word	sub_802C68C+1");
+}
+
+__attribute__((naked))
+void debug_sub_803107C(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	mov	r7, #0x0\n\
+	ldr	r0, ._369       @ gAnimScriptCallback\n\
+	ldr	r0, [r0]\n\
+	bl	_call_via_r0\n\
+	ldr	r0, ._369 + 4   @ gAnimScriptActive\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._364	@cond_branch\n\
+	mov	r0, #0x1\n\
+	bl	sub_80326EC\n\
+	ldr	r4, ._369 + 8   @ gActiveBank\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x7\n\
+	mov	r3, #0x1\n\
+	bl	dp11b_obj_instanciate\n\
+	ldrb	r0, [r4]\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x7\n\
+	mov	r3, #0x1\n\
+	bl	dp11b_obj_instanciate\n\
+	ldr	r0, ._369 + 12  @ gSprites\n\
+	add	r2, r0, #0\n\
+	add	r2, r2, #0x3e\n\
+	mov	r1, #0x3f\n\
+._366:\n\
+	ldrb	r0, [r2]\n\
+	lsl	r0, r0, #0x1f\n\
+	cmp	r0, #0\n\
+	beq	._365	@cond_branch\n\
+	add	r0, r7, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+._365:\n\
+	add	r2, r2, #0x44\n\
+	sub	r1, r1, #0x1\n\
+	cmp	r1, #0\n\
+	bge	._366	@cond_branch\n\
+	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
+	add	r0, r4, #0\n\
+	add	r1, r7, #0\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x2\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r6, ._369 + 20  @ gUnknown_03004210\n\
+	mov	r2, #0x91\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r5, #0x39\n\
+	str	r5, [sp]\n\
+	add	r0, r6, #0\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0x8\n\
+	bl	Text_InitWindowAndPrintText\n\
+	bl	GetTaskCount\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+	add	r0, r4, #0\n\
+	add	r1, r7, #0\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x2\n\
+	bl	ConvertIntToDecimalStringN\n\
+	mov	r2, #0x93\n\
+	lsl	r2, r2, #0x1\n\
+	str	r5, [sp]\n\
+	add	r0, r6, #0\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0xb\n\
+	bl	Text_InitWindowAndPrintText\n\
+	mov	r1, #0x0\n\
+	mov	r7, #0x0\n\
+	ldr	r0, ._369 + 24  @ gOamMatrixAllocBitmap\n\
+	mov	r3, #0x1\n\
+	ldr	r2, [r0]\n\
+._368:\n\
+	add	r0, r3, #0\n\
+	LSL	r0, r1\n\
+	and	r0, r0, r2\n\
+	cmp	r0, #0\n\
+	beq	._367	@cond_branch\n\
+	add	r0, r7, #1\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r7, r0, #0x18\n\
+._367:\n\
+	add	r1, r1, #0x1\n\
+	cmp	r1, #0x1f\n\
+	ble	._368	@cond_branch\n\
+	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
+	add	r0, r4, #0\n\
+	add	r1, r7, #0\n\
+	mov	r2, #0x2\n\
+	mov	r3, #0x2\n\
+	bl	ConvertIntToDecimalStringN\n\
+	ldr	r0, ._369 + 20  @ gUnknown_03004210\n\
+	mov	r2, #0x95\n\
+	lsl	r2, r2, #0x1\n\
+	mov	r1, #0x39\n\
+	str	r1, [sp]\n\
+	add	r1, r4, #0\n\
+	mov	r3, #0xe\n\
+	bl	Text_InitWindowAndPrintText\n\
+	ldr	r1, ._369 + 28  @ gBattleBankFunc\n\
+	ldr	r0, ._369 + 8   @ gActiveBank\n\
+	ldrb	r0, [r0]\n\
+	lsl	r0, r0, #0x2\n\
+	add	r0, r0, r1\n\
+	ldr	r1, ._369 + 32  @ debug_sub_8030C24\n\
+	str	r1, [r0]\n\
+._364:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._370:\n\
+	.align	2, 0\n\
+._369:\n\
+	.word	gAnimScriptCallback\n\
+	.word	gAnimScriptActive\n\
+	.word	gActiveBank\n\
+	.word	gSprites\n\
+	.word	gDisplayedStringBattle\n\
+	.word	gUnknown_03004210\n\
+	.word	gOamMatrixAllocBitmap\n\
+	.word	gBattleBankFunc\n\
+	.word	debug_sub_8030C24+1");
+}
+#endif
+
 void sub_802D204(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         PlayerBufferExecCompleted();
 }
 
 // duplicate of sub_802D204
 void sub_802D23C(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
         PlayerBufferExecCompleted();
 }
 
 void sub_802D274(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
     {
         nullsub_10(gSaveBlock2.playerGender);
-        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
         PlayerBufferExecCompleted();
     }
 }
@@ -1450,13 +2176,13 @@ void sub_802DDC4(u8 taskId)
 
 void sub_802DE10(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].pos1.y + gSprites[gObjectBankIDs[gActiveBank]].pos2.y > DISPLAY_HEIGHT)
+    if (gSprites[gBankSpriteIds[gActiveBank]].pos1.y + gSprites[gBankSpriteIds[gActiveBank]].pos2.y > DISPLAY_HEIGHT)
     {
         u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
 
         nullsub_9(species);
-        FreeOamMatrix(gSprites[gObjectBankIDs[gActiveBank]].oam.matrixNum);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        FreeOamMatrix(gSprites[gBankSpriteIds[gActiveBank]].oam.matrixNum);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
         sub_8043DB0(gHealthboxIDs[gActiveBank]);
         PlayerBufferExecCompleted();
     }
@@ -1466,8 +2192,8 @@ void sub_802DEAC(void)
 {
     if (!ewram17810[gActiveBank].unk0_6)
     {
-        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
         sub_8043DB0(gHealthboxIDs[gActiveBank]);
         PlayerBufferExecCompleted();
     }
@@ -1534,7 +2260,7 @@ void bx_wait_t1(void)
 
 void bx_blink_t1(void)
 {
-    u8 spriteId = gObjectBankIDs[gActiveBank];
+    u8 spriteId = gBankSpriteIds[gActiveBank];
 
     if (gSprites[spriteId].data[1] == 32)
     {
@@ -2294,7 +3020,7 @@ void PlayerHandlecmd3(void)
 void PlayerHandleLoadPokeSprite(void)
 {
     BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
     gBattleBankFunc[gActiveBank] = bx_0802E404;
 }
 
@@ -2318,18 +3044,18 @@ void sub_802F934(u8 bank, u8 b)
     species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
     gUnknown_0300434C[bank] = CreateInvisibleSpriteWithCallback(sub_80312F0);
     GetMonSpriteTemplate_803C56C(species, GetBankIdentity(bank));
-    gObjectBankIDs[bank] = CreateSprite(
+    gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_02024E8C,
       GetBankPosition(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
-    gSprites[gUnknown_0300434C[bank]].data[1] = gObjectBankIDs[bank];
-    gSprites[gObjectBankIDs[bank]].data[0] = bank;
-    gSprites[gObjectBankIDs[bank]].data[2] = species;
-    gSprites[gObjectBankIDs[bank]].oam.paletteNum = bank;
-    StartSpriteAnim(&gSprites[gObjectBankIDs[bank]], gBattleMonForms[bank]);
-    gSprites[gObjectBankIDs[bank]].invisible = TRUE;
-    gSprites[gObjectBankIDs[bank]].callback = SpriteCallbackDummy;
+    gSprites[gUnknown_0300434C[bank]].data[1] = gBankSpriteIds[bank];
+    gSprites[gBankSpriteIds[bank]].data[0] = bank;
+    gSprites[gBankSpriteIds[bank]].data[2] = species;
+    gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
+    StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
+    gSprites[gBankSpriteIds[bank]].invisible = TRUE;
+    gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
     gSprites[gUnknown_0300434C[bank]].data[0] = sub_8046400(0, 0xFF);
 }
 
@@ -2342,8 +3068,8 @@ void PlayerHandleReturnPokeToBall(void)
     }
     else
     {
-        FreeSpriteOamMatrix(&gSprites[gObjectBankIDs[gActiveBank]]);
-        DestroySprite(&gSprites[gObjectBankIDs[gActiveBank]]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
         sub_8043DB0(gHealthboxIDs[gActiveBank]);
         PlayerBufferExecCompleted();
     }
@@ -2385,15 +3111,15 @@ void PlayerHandleTrainerThrow(void)
     }
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
-    gObjectBankIDs[gActiveBank] = CreateSprite(
+    gBankSpriteIds[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
       r7 + 80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       sub_8079E90(gActiveBank));
-    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gObjectBankIDs[gActiveBank]].pos2.x = 240;
-    gSprites[gObjectBankIDs[gActiveBank]].data[0] = -2;
-    gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D204;
 }
 
@@ -2401,27 +3127,27 @@ void PlayerHandleTrainerSlide(void)
 {
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
     GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
-    gObjectBankIDs[gActiveBank] = CreateSprite(
+    gBankSpriteIds[gActiveBank] = CreateSprite(
       &gUnknown_02024E8C,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
-    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gObjectBankIDs[gActiveBank]].pos2.x = -96;
-    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 2;
-    gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80313A0;
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
+    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -96;
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 2;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80313A0;
     gBattleBankFunc[gActiveBank] = sub_802D23C;
 }
 
 void PlayerHandleTrainerSlideBack(void)
 {
-    oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
-    gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], SpriteCallbackDummy);
-    StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
+    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = StartTranslateAnimSpriteByDeltas;
+    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBank]], SpriteCallbackDummy);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
     gBattleBankFunc[gActiveBank] = sub_802D274;
 }
 
@@ -2440,9 +3166,9 @@ void PlayerHandlecmd10(void)
             ewram17810[gActiveBank].unk4 = 0;
             HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
             PlaySE12WithPanning(SE_POKE_DEAD, -64);
-            gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
-            gSprites[gObjectBankIDs[gActiveBank]].data[2] = 5;
-            gSprites[gObjectBankIDs[gActiveBank]].callback = sub_80105EC;
+            gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
+            gSprites[gBankSpriteIds[gActiveBank]].data[2] = 5;
+            gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80105EC;
             gBattleBankFunc[gActiveBank] = sub_802DE10;
         }
     }
@@ -2814,14 +3540,14 @@ void PlayerHandlecmd40(void)
 
 void PlayerHandleHitAnimation(void)
 {
-    if (gSprites[gObjectBankIDs[gActiveBank]].invisible == TRUE)
+    if (gSprites[gBankSpriteIds[gActiveBank]].invisible == TRUE)
     {
         PlayerBufferExecCompleted();
     }
     else
     {
         gDoingBattleAnim = 1;
-        gSprites[gObjectBankIDs[gActiveBank]].data[1] = 0;
+        gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
         sub_8047858(gActiveBank);
         gBattleBankFunc[gActiveBank] = bx_blink_t1;
     }
@@ -2870,17 +3596,17 @@ void PlayerHandleTrainerBallThrow(void)
     u8 paletteNum;
     u8 taskId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gObjectBankIDs[gActiveBank]]);
-    gSprites[gObjectBankIDs[gActiveBank]].data[0] = 50;
-    gSprites[gObjectBankIDs[gActiveBank]].data[2] = -40;
-    gSprites[gObjectBankIDs[gActiveBank]].data[4] = gSprites[gObjectBankIDs[gActiveBank]].pos1.y;
-    gSprites[gObjectBankIDs[gActiveBank]].callback = sub_8078B34;
-    gSprites[gObjectBankIDs[gActiveBank]].data[5] = gActiveBank;
-    StoreSpriteCallbackInData(&gSprites[gObjectBankIDs[gActiveBank]], sub_8030E38);
-    StartSpriteAnim(&gSprites[gObjectBankIDs[gActiveBank]], 1);
+    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
+    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBank]].callback = StartTranslateAnimSpriteByDeltas;
+    gSprites[gBankSpriteIds[gActiveBank]].data[5] = gActiveBank;
+    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBank]], sub_8030E38);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
     paletteNum = AllocSpritePalette(0xD6F8);
     LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2.playerGender].data, 0x100 + paletteNum * 16, 32);
-    gSprites[gObjectBankIDs[gActiveBank]].oam.paletteNum = paletteNum;
+    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = paletteNum;
     taskId = CreateTask(task05_08033660, 5);
     gTasks[taskId].data[0] = gActiveBank;
     if (ewram17810[gActiveBank].unk0_0)
@@ -2897,7 +3623,7 @@ void sub_8030E38(struct Sprite *sprite)
     FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
     DestroySprite(sprite);
     BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[r4]], r4);
-    StartSpriteAnim(&gSprites[gObjectBankIDs[r4]], 0);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[r4]], 0);
 }
 
 void task05_08033660(u8 taskId)
@@ -2976,7 +3702,7 @@ void PlayerHandleSpriteInvisibility(void)
 {
     if (IsBankSpritePresent(gActiveBank))
     {
-        gSprites[gObjectBankIDs[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
+        gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
         sub_8031F88(gActiveBank);
     }
     PlayerBufferExecCompleted();

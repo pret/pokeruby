@@ -41,11 +41,11 @@ static void sub_80A0090(struct Pokemon *);
 static void sub_80A015C(struct Pokemon *);
 static void sub_809DE44(void);
 static void sub_809EB40(u8);
-static void sub_809EBC4(void);
-static void sub_809E044(void);
+/*static*/ void sub_809EBC4(void);
+/*static*/ void sub_809E044(void);
 static void sub_80A1D84(struct Pokemon *);
-static void sub_80A18C4(void);
-static bool8 LoadPokemonSummaryScreenGraphics(void);
+/*static*/ void sub_80A18C4(void);
+/*static*/ bool8 LoadPokemonSummaryScreenGraphics(void);
 static bool8 MonKnowsMultipleMoves(struct Pokemon *);
 static void PrintSummaryWindowHeaderText(void);
 static void sub_80A1DCC(struct Pokemon *);
@@ -63,8 +63,8 @@ static void PrintHeldItemName(u16, u8, u8);
 static void PrintNumRibbons(struct Pokemon *);
 static void DrawExperienceProgressBar(struct Pokemon *, u8, u8);
 static void sub_809E13C(u8 taskId);
-static void sub_80A1950(void);
-static void sub_809DE64(void);
+/*static*/ void sub_80A1950(void);
+/*static*/ void sub_809DE64(void);
 static void SummaryScreenHandleAButton(u8);
 static void SummaryScreenHandleUpDownInput(u8, s8);
 static bool8 sub_809F7D0(u8);
@@ -144,7 +144,6 @@ extern const u8 gUnknown_08E74E88[];
 extern const u8 gUnknown_08E73508[];
 extern const u8 gStatusScreen_Gfx[];
 extern const u8 gFontDefaultPalette[];
-extern const u8 gUnknownPalette_81E6692[];
 extern const u8 gAbilityNames[][13];
 extern const u8 * const gAbilityDescriptions[];
 extern const u8 * const gContestEffectStrings[];
@@ -572,7 +571,43 @@ static const u8 sUnknown_083C15BC[] = {
     -1, 15, 0, 10,
 };
 
-
+#if DEBUG
+__attribute__((naked))
+void sub_809D844(void)
+{
+    asm("\
+	push	{lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	bl	RunTasks\n\
+	bl	AnimateSprites\n\
+	bl	BuildOamBuffer\n\
+	bl	UpdatePaletteFade\n\
+	ldr	r0, ._2         @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._1	@cond_branch\n\
+	ldr	r0, ._2 + 4     @ gLink\n\
+	ldr	r1, ._2 + 8     @ 0xfbd\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x3\n\
+	str	r1, [sp]\n\
+	mov	r1, #0x14\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008264\n\
+._1:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._3:\n\
+	.align	2, 0\n\
+._2:\n\
+	.word	gLinkOpen\n\
+	.word	gLink\n\
+	.word	0xfbd");
+}
+#else
 void sub_809D844(void)
 {
     RunTasks();
@@ -580,6 +615,7 @@ void sub_809D844(void)
     BuildOamBuffer();
     UpdatePaletteFade();
 }
+#endif
 
 void sub_809D85C(void)
 {
@@ -689,6 +725,491 @@ void sub_809DA1C(void)
     }
 }
 
+#if DEBUG
+__attribute__((naked))
+bool8 sub_809DA84(void)
+{
+    asm("\
+	push	{r4, r5, r6, r7, lr}\n\
+	add	sp, sp, #0xfffffff8\n\
+	ldr	r1, ._52        @ gMain\n\
+	ldr	r2, ._52 + 4    @ 0x43c\n\
+	add	r0, r1, r2\n\
+	ldrb	r0, [r0]\n\
+	mov	ip, r1\n\
+	cmp	r0, #0x16\n\
+	bls	._50	@cond_branch\n\
+	b	._51\n\
+._50:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._52 + 8    @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._53:\n\
+	.align	2, 0\n\
+._52:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+	.word	._54\n\
+._54:\n\
+	.word	._55\n\
+	.word	._56\n\
+	.word	._57\n\
+	.word	._58\n\
+	.word	._59\n\
+	.word	._60\n\
+	.word	._61\n\
+	.word	._62\n\
+	.word	._63\n\
+	.word	._64\n\
+	.word	._65\n\
+	.word	._66\n\
+	.word	._67\n\
+	.word	._68\n\
+	.word	._69\n\
+	.word	._70\n\
+	.word	._71\n\
+	.word	._72\n\
+	.word	._73\n\
+	.word	._74\n\
+	.word	._75\n\
+	.word	._76\n\
+	.word	._77\n\
+._55:\n\
+	mov	r0, #0x0\n\
+	bl	SetVBlankCallback\n\
+	bl	ResetSpriteData\n\
+	b	._146\n\
+._56:\n\
+	bl	ScanlineEffect_Stop\n\
+	ldr	r1, ._80        @ gMain\n\
+	ldr	r2, ._80 + 4    @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._81:\n\
+	.align	2, 0\n\
+._80:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._57:\n\
+	bl	FreeAllSpritePalettes\n\
+	b	._146\n\
+._58:\n\
+	mov	r2, #0xc0\n\
+	lsl	r2, r2, #0x13\n\
+	mov	r3, #0x80\n\
+	lsl	r3, r3, #0x9\n\
+	mov	r5, #0x0\n\
+	ldr	r1, ._85        @ 0x40000d4\n\
+	mov	r4, #0x80\n\
+	lsl	r4, r4, #0x5\n\
+	ldr	r6, ._85 + 4    @ 0x85000400\n\
+	mov	r7, #0x85\n\
+	lsl	r7, r7, #0x18\n\
+._83:\n\
+	str	r5, [sp, #0x4]\n\
+	add	r0, sp, #0x4\n\
+	str	r0, [r1]\n\
+	str	r2, [r1, #0x4]\n\
+	str	r6, [r1, #0x8]\n\
+	ldr	r0, [r1, #0x8]\n\
+	add	r2, r2, r4\n\
+	sub	r3, r3, r4\n\
+	cmp	r3, r4\n\
+	bhi	._83	@cond_branch\n\
+	str	r5, [sp, #0x4]\n\
+	add	r0, sp, #0x4\n\
+	str	r0, [r1]\n\
+	str	r2, [r1, #0x4]\n\
+	lsr	r0, r3, #0x2\n\
+	orr	r0, r0, r7\n\
+	str	r0, [r1, #0x8]\n\
+	ldr	r0, [r1, #0x8]\n\
+	ldr	r1, ._85 + 8    @ 0x43c\n\
+	add r1, r1, ip\n\
+	b	._153\n\
+._86:\n\
+	.align	2, 0\n\
+._85:\n\
+	.word	0x40000d4\n\
+	.word	0x85000400\n\
+	.word	0x43c\n\
+._59:\n\
+	bl	sub_809DE64\n\
+	ldr	r1, ._88        @ gMain\n\
+	ldr	r2, ._88 + 4    @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._89:\n\
+	.align	2, 0\n\
+._88:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._60:\n\
+	ldr	r0, ._91        @ gWindowTemplate_81E6E6C\n\
+	bl	Text_LoadWindowTemplate\n\
+	b	._146\n\
+._92:\n\
+	.align	2, 0\n\
+._91:\n\
+	.word	gWindowTemplate_81E6E6C\n\
+._61:\n\
+	ldr	r0, ._94        @ gWindowTemplate_81E6E6C\n\
+	bl	MultistepInitMenuWindowBegin\n\
+	ldr	r1, ._94 + 4    @ gMain\n\
+	ldr	r2, ._94 + 8    @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._95:\n\
+	.align	2, 0\n\
+._94:\n\
+	.word	gWindowTemplate_81E6E6C\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._62:\n\
+	bl	MultistepInitMenuWindowContinue\n\
+	cmp	r0, #0\n\
+	bne	._96	@cond_branch\n\
+	b	._157\n\
+._96:\n\
+	b	._146\n\
+._63:\n\
+	bl	sub_809DA1C\n\
+	ldr	r1, ._100       @ gMain\n\
+	ldr	r2, ._100 + 4   @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._101:\n\
+	.align	2, 0\n\
+._100:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._64:\n\
+	ldr	r1, ._103       @ gSummaryScreenTextTiles\n\
+	ldr	r2, ._103 + 4   @ 0x600d000\n\
+	ldr	r0, ._103 + 8   @ 0x40000d4\n\
+	str	r1, [r0]\n\
+	str	r2, [r0, #0x4]\n\
+	ldr	r1, ._103 + 12  @ 0x800000a0\n\
+	str	r1, [r0, #0x8]\n\
+	ldr	r1, [r0, #0x8]\n\
+	ldr	r1, ._103 + 16  @ sSummaryScreenButtonTiles\n\
+	ldr	r2, ._103 + 20  @ 0x600d140\n\
+	str	r1, [r0]\n\
+	str	r2, [r0, #0x4]\n\
+	ldr	r1, ._103 + 24  @ 0x80000080\n\
+	str	r1, [r0, #0x8]\n\
+	ldr	r0, [r0, #0x8]\n\
+	ldr	r0, ._103 + 28  @ \n\
+	add	r0, r0, #0x74\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0]\n\
+	ldr	r1, ._103 + 32  @ \n\
+	add r1, r1, ip\n\
+	b	._153\n\
+._104:\n\
+	.align	2, 0\n\
+._103:\n\
+	.word	gSummaryScreenTextTiles\n\
+	.word	0x600d000\n\
+	.word	0x40000d4\n\
+	.word	0x800000a0\n\
+	.word	sSummaryScreenButtonTiles\n\
+	.word	0x600d140\n\
+	.word	0x80000080\n\
+	.word	+0x2018000\n\
+	.word	0x43c\n\
+._65:\n\
+	bl	LoadPokemonSummaryScreenGraphics\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._105	@cond_branch\n\
+	b	._157\n\
+._105:\n\
+	ldr	r0, ._108       @ \n\
+	add	r0, r0, #0x74\n\
+	mov	r1, #0x0\n\
+	strb	r1, [r0]\n\
+	b	._146\n\
+._109:\n\
+	.align	2, 0\n\
+._108:\n\
+	.word	+0x2018000\n\
+._66:\n\
+	bl	sub_80A18C4\n\
+	ldr	r1, ._111       @ gMain\n\
+	ldr	r2, ._111 + 4   @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._112:\n\
+	.align	2, 0\n\
+._111:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._67:\n\
+	ldr	r4, ._115       @ \n\
+	add	r0, r4, #0\n\
+	bl	sub_809F678\n\
+	add	r0, r4, #0\n\
+	bl	GetMonStatusAndPokerus\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._113	@cond_branch\n\
+	mov	r0, #0x0\n\
+	bl	sub_80A12D0\n\
+	b	._114\n\
+._116:\n\
+	.align	2, 0\n\
+._115:\n\
+	.word	+0x2018010\n\
+._113:\n\
+	mov	r0, #0xa\n\
+	bl	sub_80A12D0\n\
+._114:\n\
+	ldr	r0, ._118       @ \n\
+	bl	DrawPokerusSurvivorDot\n\
+	b	._146\n\
+._119:\n\
+	.align	2, 0\n\
+._118:\n\
+	.word	+0x2018010\n\
+._68:\n\
+	bl	sub_80A1950\n\
+	ldr	r0, ._121       @ \n\
+	bl	sub_80A1D84\n\
+	ldr	r1, ._121 + 4   @ \n\
+	ldr	r2, ._121 + 8   @ \n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._122:\n\
+	.align	2, 0\n\
+._121:\n\
+	.word	+0x2018010\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._69:\n\
+	ldr	r4, ._124       @ \n\
+	add	r0, r4, #0\n\
+	bl	sub_80A1DE8\n\
+	add	r4, r4, #0x64\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r4]\n\
+	b	._146\n\
+._125:\n\
+	.align	2, 0\n\
+._124:\n\
+	.word	+0x2018010\n\
+._70:\n\
+	ldr	r4, ._129       @ \n\
+	add	r5, r4, #0\n\
+	add	r5, r5, #0x64\n\
+	add	r0, r4, #0\n\
+	add	r1, r5, #0\n\
+	bl	sub_809F6B4\n\
+	sub	r4, r4, #0x10\n\
+	strb	r0, [r4, #0xc]\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	cmp	r0, #0xff\n\
+	bne	._126	@cond_branch\n\
+	b	._157\n\
+._126:\n\
+	mov	r0, #0x0\n\
+	strb	r0, [r5]\n\
+	ldr	r1, ._129 + 4   @ \n\
+	ldr	r2, ._129 + 8   @ \n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._130:\n\
+	.align	2, 0\n\
+._129:\n\
+	.word	+0x2018010\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._71:\n\
+	bl	sub_809E044\n\
+	bl	DrawSummaryScreenNavigationDots\n\
+	b	._146\n\
+._72:\n\
+	ldr	r1, ._134       @ \n\
+	ldrb	r0, [r1, #0xb]\n\
+	cmp	r0, #0x1\n\
+	bhi	._132	@cond_branch\n\
+	ldr	r0, ._134 + 4   @ \n\
+	ldrb	r1, [r1, #0xb]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r0\n\
+	ldr	r0, [r1]\n\
+	bl	_call_via_r0\n\
+._132:\n\
+	ldr	r1, ._134 + 8   @ \n\
+	ldr	r2, ._134 + 12  @ \n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._135:\n\
+	.align	2, 0\n\
+._134:\n\
+	.word	+0x2018000\n\
+	.word	sUnknown_083C1580\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._73:\n\
+	ldr	r0, ._137       @ \n\
+	bl	sub_809FAC8\n\
+	b	._146\n\
+._138:\n\
+	.align	2, 0\n\
+._137:\n\
+	.word	+0x2018010\n\
+._74:\n\
+	ldr	r2, ._140       @ sUnknown_083C1598\n\
+	ldr	r0, ._140 + 4   @ \n\
+	ldrb	r1, [r0, #0xb]\n\
+	lsl	r1, r1, #0x2\n\
+	add	r1, r1, r2\n\
+	add	r0, r0, #0x10\n\
+	ldr	r1, [r1]\n\
+	bl	_call_via_r1\n\
+	ldr	r1, ._140 + 8   @ \n\
+	ldr	r2, ._140 + 12  @ \n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._141:\n\
+	.align	2, 0\n\
+._140:\n\
+	.word	sUnknown_083C1598\n\
+	.word	+0x2018000\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._75:\n\
+	ldr	r0, ._144       @ \n\
+	mov	r1, #0x2d\n\
+	bl	GetMonData\n\
+	add	r1, r0, #0\n\
+	cmp	r1, #0\n\
+	beq	._142	@cond_branch\n\
+	ldr	r1, ._144 + 4   @ \n\
+	mov	r2, #0x80\n\
+	lsl	r2, r2, #0x1\n\
+	add	r0, r2, #0\n\
+	strh	r0, [r1]\n\
+	b	._146\n\
+._145:\n\
+	.align	2, 0\n\
+._144:\n\
+	.word	+0x2018010\n\
+	.word	gBattle_BG3_X\n\
+._142:\n\
+	ldr	r0, ._147       @ gBattle_BG3_X\n\
+	strh	r1, [r0]\n\
+	b	._146\n\
+._148:\n\
+	.align	2, 0\n\
+._147:\n\
+	.word	gBattle_BG3_X\n\
+._76:\n\
+	bl	sub_809EBC4\n\
+	ldr	r0, ._151       @ \n\
+	add	r0, r0, #0x79\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._149	@cond_branch\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x0\n\
+	bl	sub_80A1488\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x0\n\
+	bl	sub_80A1654\n\
+	b	._150\n\
+._152:\n\
+	.align	2, 0\n\
+._151:\n\
+	.word	+0x2018000\n\
+._149:\n\
+	mov	r0, #0xa\n\
+	mov	r1, #0x0\n\
+	bl	sub_80A1488\n\
+	mov	r0, #0xa\n\
+	mov	r1, #0x0\n\
+	bl	sub_80A1654\n\
+._150:\n\
+	bl	PrintSummaryWindowHeaderText\n\
+	ldr	r1, ._154       @ gMain\n\
+	ldr	r2, ._154 + 4   @ 0x43c\n\
+	add	r1, r1, r2\n\
+	b	._153\n\
+._155:\n\
+	.align	2, 0\n\
+._154:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._77:\n\
+	bl	sub_8055870\n\
+	cmp	r0, #0x1\n\
+	beq	._157	@cond_branch\n\
+._146:\n\
+	ldr	r1, ._158       @ gMain\n\
+	ldr	r0, ._158 + 4   @ 0x43c\n\
+	add	r1, r1, r0\n\
+._153:\n\
+	ldrb	r0, [r1]\n\
+	add	r0, r0, #0x1\n\
+	strb	r0, [r1]\n\
+	b	._157\n\
+._159:\n\
+	.align	2, 0\n\
+._158:\n\
+	.word	gMain\n\
+	.word	0x43c\n\
+._51:\n\
+	ldr	r0, ._162       @ sub_809D85C\n\
+	bl	SetVBlankCallback\n\
+	mov	r0, #0x1\n\
+	str	r0, [sp]\n\
+	mov	r0, #0xff\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x10\n\
+	mov	r3, #0x0\n\
+	bl	BeginHardwarePaletteFade\n\
+	ldr	r0, ._162 + 4   @ sub_809D844\n\
+	bl	SetMainCallback2\n\
+	ldr	r2, ._162 + 8   @ gPaletteFade\n\
+	ldrb	r1, [r2, #0x8]\n\
+	mov	r0, #0x7f\n\
+	and	r0, r0, r1\n\
+	strb	r0, [r2, #0x8]\n\
+	ldr	r0, ._162 + 12  @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._160	@cond_branch\n\
+	ldr	r0, ._162 + 16  @ 0x600dde0\n\
+	mov	r1, #0x80\n\
+	lsl	r1, r1, #0x8\n\
+	ldr	r2, ._162 + 20  @ 0x600f000\n\
+	mov	r3, #0x3\n\
+	bl	debug_sub_8008218\n\
+._160:\n\
+	mov	r0, #0x1\n\
+	b	._161\n\
+._163:\n\
+	.align	2, 0\n\
+._162:\n\
+	.word	sub_809D85C+1\n\
+	.word	sub_809D844+1\n\
+	.word	gPaletteFade\n\
+	.word	gLinkOpen\n\
+	.word	0x600dde0\n\
+	.word	0x600f000\n\
+._157:\n\
+	mov	r0, #0x0\n\
+._161:\n\
+	add	sp, sp, #0x8\n\
+	pop	{r4, r5, r6, r7}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+#else
 bool8 sub_809DA84(void)
 {
     switch (gMain.state)
@@ -846,13 +1367,15 @@ bool8 sub_809DA84(void)
 
     return FALSE;
 }
+#endif
 
 static void sub_809DE44(void)
 {
-    while (sub_809DA84() != TRUE && sub_80F9344() != TRUE);
+    while (sub_809DA84() != TRUE && sub_80F9344() != TRUE)
+        ;
 }
 
-static void sub_809DE64(void)
+/*static*/ void sub_809DE64(void)
 {
     REG_BG0CNT = 0x1E08;
     REG_BG1CNT = 0x4801;
@@ -879,7 +1402,7 @@ static void sub_809DE64(void)
     REG_DISPCNT = 0x1F40;
 }
 
-static bool8 LoadPokemonSummaryScreenGraphics(void)
+/*static*/ bool8 LoadPokemonSummaryScreenGraphics(void)
 {
     switch (pssData.loadGfxState)
     {
@@ -929,23 +1452,23 @@ static bool8 LoadPokemonSummaryScreenGraphics(void)
     return FALSE;
 }
 
-static void sub_809E044(void)
+/*static*/ void sub_809E044(void)
 {
-    LoadPalette(&gUnknownPalette_81E6692[28], 129, 2);
-    LoadPalette(&gUnknownPalette_81E6692[30], 136, 2);
-    LoadPalette(&gUnknownPalette_81E6692[28], 143, 2);
-    LoadPalette(&gUnknownPalette_81E6692[30], 137, 2);
-    LoadPalette(&gUnknownPalette_81E6692[12], 209, 4);
-    LoadPalette(&gUnknownPalette_81E6692[20], 211, 4);
-    LoadPalette(&gUnknownPalette_81E6692[28], 213, 4);
-    LoadPalette(&gUnknownPalette_81E6692[12], 215, 4);
-    LoadPalette(&gUnknownPalette_81E6692[8],  217, 4);
-    LoadPalette(&gUnknownPalette_81E6692[16], 219, 4);
-    LoadPalette(&gUnknownPalette_81E6692[4],  221, 2);
-    LoadPalette(&gUnknownPalette_81E6692[6], 222, 2);
-    LoadPalette(&gUnknownPalette_81E6692[2],  223, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 129, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 15, 136, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 143, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 15, 137, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 6,  209, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 10, 211, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 14, 213, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 6,  215, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 4,  217, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 8,  219, 4);
+    LoadPalette(gUnknownPalette_81E6692 + 2,  221, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 3,  222, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 1,  223, 2);
     LoadPalette(gFontDefaultPalette,          240, 32);
-    LoadPalette(&gUnknownPalette_81E6692[6], 249, 2);
+    LoadPalette(gUnknownPalette_81E6692 + 3,  249, 2);
 }
 
 static void SummaryScreenExit(u8 taskId)
@@ -1508,7 +2031,7 @@ static void sub_809EB40(u8 taskId)
     }
 }
 
-static void sub_809EBC4(void)
+/*static*/ void sub_809EBC4(void)
 {
     if (pssData.page != PSS_PAGE_INFO)
     {
@@ -2245,7 +2768,7 @@ static void sub_809F678(struct Pokemon *mon)
     else
     {
         struct BoxPokemon *mons = pssData.monList.boxMons;
-        sub_803B4B4(&mons[pssData.monIndex], mon);
+        ExpandBoxMon(&mons[pssData.monIndex], mon);
     }
 }
 
@@ -2566,14 +3089,14 @@ static void sub_809FC34(struct Pokemon *mon)
         buffer = gStringVar1;
         buffer = sub_80A1E58(buffer, 13);
         buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
-        buffer = StringCopy(buffer, gOtherText_FiveQuestionsAndSlash);
+        buffer = StringCopy(buffer, gOtherText_FiveQuestions);
         buffer[0] = EXT_CTRL_CODE_BEGIN;
         buffer[1] = 0x13;
         buffer[2] = 0x4E;
         buffer[3] = EOS;
         Menu_PrintText(gStringVar1, 11, 4);
 
-        sub_80A1EF8(gOtherText_FiveQuestionsAndSlash, 13, 193, 32, 1);
+        sub_80A1EF8(gOtherText_FiveQuestions, 13, 193, 32, 1);
         sub_80A198C(9, 120, 48, 0);
 
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
@@ -4875,7 +5398,7 @@ static void sub_80A1888(struct Sprite *sprite)
     }
 }
 
-static void sub_80A18C4(void)
+/*static*/ void sub_80A18C4(void)
 {
     u8 i;
 
@@ -4899,7 +5422,7 @@ static void sub_80A1918(u8 a, u8 invisible)
     gSprites[ewram1A000[a]].invisible = invisible;
 }
 
-static void sub_80A1950(void)
+/*static*/ void sub_80A1950(void)
 {
     u8 i;
 

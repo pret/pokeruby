@@ -91,7 +91,8 @@ static const u8 *gUnknown_03000758;
 
 #define GFX_TAG_POKEBLOCK_CASE 14800
 
-const s8 gPokeblockFlavorCompatibilityTable[] = {
+const s8 gPokeblockFlavorCompatibilityTable[] =
+{
     // Cool, Beauty, Cute, Smart, Tough
           0,      0,    0,     0,     0, // Hardy
           1,      0,    0,     0,    -1, // Lonely
@@ -120,14 +121,16 @@ const s8 gPokeblockFlavorCompatibilityTable[] = {
           0,      0,    0,     0,     0  // Quirky
 };
 
-void (*const gUnknown_083F7EA8[])(void) = {
+void (*const gUnknown_083F7EA8[])(void) =
+{
     sub_80A5B40,
     c2_exit_to_overworld_2_switch,
     sub_802E424,
     c2_exit_to_overworld_2_switch
 };
 
-const u8 *const gPokeblockNames[] = {
+const u8 *const gPokeblockNames[] =
+{
     NULL,
     ContestStatsText_RedPokeBlock,
     ContestStatsText_BluePokeBlock,
@@ -145,7 +148,8 @@ const u8 *const gPokeblockNames[] = {
     ContestStatsText_GoldPokeBlock
 };
 
-const struct MenuAction2 gUnknown_083F7EF4[] = {
+const struct MenuAction2 gUnknown_083F7EF4[] =
+{
     {OtherText_Use,     sub_810C508},
     {OtherText_Toss,    sub_810C5C0},
     {gOtherText_CancelNoTerminator, sub_810C748},
@@ -161,21 +165,25 @@ const struct YesNoFuncTable gUnknown_083F7F24 = {sub_810C610, sub_810C668};
 
 const u8 UnreferencedData_083F7F2C[] = {0x16, 0x17, 0x18, 0x21, 0x2f};
 
-const struct OamData gOamData_83F7F34 = {
+const struct OamData gOamData_83F7F34 =
+{
     .size = 3,
     .priority = 2
 };
 
-const union AnimCmd gSpriteAnim_83F7F3C[] = {
+const union AnimCmd gSpriteAnim_83F7F3C[] =
+{
     ANIMCMD_FRAME(.imageValue = 0, .duration = 0),
     ANIMCMD_END
 };
 
-const union AnimCmd *const gSpriteAnimTable_83F7F44[] = {
+const union AnimCmd *const gSpriteAnimTable_83F7F44[] =
+{
     gSpriteAnim_83F7F3C
 };
 
-const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] = {
+const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] =
+{
     AFFINEANIMCMD_FRAME(0, 0, -2,  2),
     AFFINEANIMCMD_FRAME(0, 0,  2,  4),
     AFFINEANIMCMD_FRAME(0, 0, -2,  4),
@@ -183,22 +191,26 @@ const union AffineAnimCmd gSpriteAffineAnim_83F7F48[] = {
     AFFINEANIMCMD_END
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] = {
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83F7F70[] =
+{
     gSpriteAffineAnim_83F7F48
 };
 
-const struct CompressedSpriteSheet gUnknown_083F7F74 = {
+const struct CompressedSpriteSheet gUnknown_083F7F74 =
+{
     gMenuPokeblockDevice_Gfx,
     0x800,
     GFX_TAG_POKEBLOCK_CASE
 };
 
-const struct CompressedSpritePalette gUnknown_083F7F7C = {
+const struct CompressedSpritePalette gUnknown_083F7F7C =
+{
     gMenuPokeblockDevice_Pal,
     GFX_TAG_POKEBLOCK_CASE
 };
 
-const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
+const struct SpriteTemplate gSpriteTemplate_83F7F84 =
+{
     GFX_TAG_POKEBLOCK_CASE,
     GFX_TAG_POKEBLOCK_CASE,
     &gOamData_83F7F34,
@@ -208,12 +220,25 @@ const struct SpriteTemplate gSpriteTemplate_83F7F84 = {
     SpriteCallbackDummy
 };
 
-const struct Pokeblock gUnknown_083F7F9C[] = {
-    { PBLOCK_CLR_RED,    20,  0,  0,  0,  0, 20},
-    { PBLOCK_CLR_BLUE,    0, 20,  0,  0,  0, 20},
-    { PBLOCK_CLR_PINK,    0,  0, 20,  0,  0, 20},
-    { PBLOCK_CLR_GREEN,   0,  0,  0, 20,  0, 20},
-    { PBLOCK_CLR_YELLOW,  0,  0,  0,  0, 20, 20}
+const struct Pokeblock gUnknown_083F7F9C[] =
+{
+    { PBLOCK_CLR_RED,      20,  0,  0,  0,  0, 20 },
+    { PBLOCK_CLR_BLUE,      0, 20,  0,  0,  0, 20 },
+    { PBLOCK_CLR_PINK,      0,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_GREEN,     0,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_YELLOW,    0,  0,  0,  0, 20, 20 },
+#if DEBUG
+    { PBLOCK_CLR_PURPLE,   20,  0, 20,  0,  0, 20 },
+    { PBLOCK_CLR_INDIGO,    0, 20,  0, 20,  0, 20 },
+    { PBLOCK_CLR_BROWN,     0,  0, 20,  0, 20, 20 },
+	{ PBLOCK_CLR_LITEBLUE, 20,  0,  0, 20,  0, 20 },
+    { PBLOCK_CLR_OLIVE,     0, 20,  0,  0, 20, 20 },
+    { PBLOCK_CLR_GRAY,      0,  2,  0,  2,  2,  0 },
+	{ PBLOCK_CLR_BLACK,     3,  3,  3,  4,  3,  0 },
+    { PBLOCK_CLR_WHITE,     1,  1,  1,  1,  1,  1 },
+    { PBLOCK_CLR_GOLD,     20,  0,  0,  0,  0, 20 },
+	{ 0 },
+#endif
 };
 
 // text
@@ -424,14 +449,13 @@ void OpenPokeblockCaseOnFeeder(void)
     SetMainCallback2(sub_810B96C);
 }
 
-#ifdef DEBUG
+#if DEBUG
 void debug_sub_8120F98(void)
 {
     u8 i;
-    for (i=0; i<40 && gUnknown_083F7F9C[i].color != 0; i++)
-    {
+
+    for (i = 0; i < 40 && gUnknown_083F7F9C[i].color != 0; i++)
         gSaveBlock1.pokeblocks[i] = gUnknown_083F7F9C[i];
-    }
 }
 #endif
 

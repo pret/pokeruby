@@ -6,6 +6,7 @@
 #include "palette.h"
 #include "random.h"
 #include "main.h"
+#include "menu.h"
 #include "script.h"
 #include "task.h"
 #include "sound.h"
@@ -21,15 +22,6 @@
 #include "constants/weather.h"
 
 // Static type declarations
-
-// Credits to Made (dolphin emoji)
-#define S16TOPOSFLOAT(val)   \
-({                           \
-    s16 v = (val);           \
-    float f = (float)v;      \
-    if(v < 0) f += 65536.0f; \
-    f;                       \
-})
 
 struct CableCarEwramStruct1 {
     u8 unk_0000;
@@ -102,6 +94,31 @@ static void sub_812476C(void);
 static void sub_81248AC(u8);
 
 // .rodata
+
+#if DEBUG
+
+u8 debug_sub_8138D74(void);
+u8 debug_sub_8138D8C(void);
+u8 debug_sub_8138C14(void);
+u8 debug_sub_8138C34(void);
+u8 debug_sub_810CD9C(void);
+
+const u8 Str_842DBD0[] = _("CABLE CAR U");
+const u8 Str_842DBDC[] = _("CABLE CAR D");
+const u8 Str_842DBE8[] = _("ROULETTE1");
+const u8 Str_842DBF2[] = _("ROULETTE3");
+const u8 Str_842DBFC[] = _("View a MAIL");
+
+const struct MenuAction gUnkDebug4Menu[] =
+{
+    {Str_842DBD0, debug_sub_8138D74},
+    {Str_842DBDC, debug_sub_8138D8C},
+    {Str_842DBE8, debug_sub_8138C14},
+    {Str_842DBF2, debug_sub_8138C34},
+    {Str_842DBFC, debug_sub_810CD9C},
+};
+
+#endif
 
 static const u8 gCableCarMtChimneyTilemap[] = INCBIN_U8("graphics/misc/cable_car_mt_chimney_map.bin.lz");
 
@@ -183,6 +200,158 @@ static const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
 
 // .text
 
+#if DEBUG
+
+__attribute__((naked))
+u8 debug_sub_8138C14(void)
+{
+    asm("\n\
+	push	{lr}\n\
+	ldr	r0, ._1         @ unk_203955C\n\
+	mov	r1, #0x1\n\
+	strb	r1, [r0]\n\
+	ldr	r0, ._1 + 4     @ MauvilleCity_GameCorner_EventScript_1C407E\n\
+	bl	ScriptContext1_SetupScript\n\
+	bl	CloseMenu\n\
+	mov	r0, #0x1\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._2:\n\
+	.align	2, 0\n\
+._1:\n\
+	.word	unk_203955C\n\
+	.word	MauvilleCity_GameCorner_EventScript_1C407E");
+}
+
+__attribute__((naked))
+u8 debug_sub_8138C34(void)
+{
+    asm("\n\
+	push	{lr}\n\
+	ldr	r0, ._3         @ unk_203955C\n\
+	mov	r1, #0x1\n\
+	strb	r1, [r0]\n\
+	ldr	r0, ._3 + 4     @ MauvilleCity_GameCorner_EventScript_1C40AC\n\
+	bl	ScriptContext1_SetupScript\n\
+	bl	CloseMenu\n\
+	mov	r0, #0x1\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._4:\n\
+	.align	2, 0\n\
+._3:\n\
+	.word	unk_203955C\n\
+	.word	MauvilleCity_GameCorner_EventScript_1C40AC");
+}
+
+__attribute__((naked))
+u8 debug_sub_8138C54(void)
+{
+    asm("\n\
+	push	{r4, lr}\n\
+	ldr	r4, ._10        @ gMain\n\
+	ldrh	r0, [r4, #0x2e]\n\
+	cmp	r0, #0x40\n\
+	bne	._5	@cond_branch\n\
+	mov	r0, #0x1\n\
+	neg	r0, r0\n\
+	bl	Menu_MoveCursor\n\
+._5:\n\
+	ldrh	r0, [r4, #0x2e]\n\
+	cmp	r0, #0x80\n\
+	bne	._6	@cond_branch\n\
+	mov	r0, #0x1\n\
+	bl	Menu_MoveCursor\n\
+._6:\n\
+	ldrh	r1, [r4, #0x2e]\n\
+	cmp	r1, #0x1\n\
+	beq	._7	@cond_branch\n\
+	ldr	r0, ._10 + 4    @ 0x101\n\
+	cmp	r1, r0\n\
+	bne	._8	@cond_branch\n\
+	ldr	r1, ._10 + 8    @ gSpecialVar_0x8004\n\
+	mov	r0, #0x1\n\
+	strh	r0, [r1]\n\
+._7:\n\
+	ldr	r4, ._10 + 12   @ gUnkDebug4Menu\n\
+	bl	Menu_GetCursorPos\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x15\n\
+	add	r4, r4, #0x4\n\
+	add	r0, r0, r4\n\
+	ldr	r0, [r0]\n\
+	bl	_call_via_r0\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r0, r0, #0x18\n\
+	b	._13\n\
+._11:\n\
+	.align	2, 0\n\
+._10:\n\
+	.word	gMain\n\
+	.word	0x101\n\
+	.word	gSpecialVar_0x8004\n\
+	.word	gUnkDebug4Menu\n\
+._8:\n\
+	cmp	r1, #0x2\n\
+	beq	._12	@cond_branch\n\
+	mov	r0, #0x0\n\
+	b	._13\n\
+._12:\n\
+	bl	CloseMenu\n\
+	mov	r0, #0x1\n\
+._13:\n\
+	pop	{r4}\n\
+	pop	{r1}\n\
+	bx	r1");
+}
+
+__attribute__((naked))
+u8 debug_sub_8138CC4(void)
+{
+    asm("\n\
+	push	{lr}\n\
+	add	sp, sp, #0xfffffff8\n\
+	ldr	r1, ._14        @ gSpecialVar_0x8004\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r1]\n\
+	bl	Menu_EraseScreen\n\
+	mov	r0, #0x13\n\
+	mov	r1, #0x0\n\
+	mov	r2, #0x1d\n\
+	mov	r3, #0xc\n\
+	bl	Menu_DrawStdWindowFrame\n\
+	ldr	r3, ._14 + 4    @ gUnkDebug4Menu\n\
+	mov	r0, #0x14\n\
+	mov	r1, #0x1\n\
+	mov	r2, #0x5\n\
+	bl	Menu_PrintItems\n\
+	mov	r0, #0x0\n\
+	str	r0, [sp]\n\
+	mov	r0, #0x8\n\
+	str	r0, [sp, #0x4]\n\
+	mov	r0, #0x0\n\
+	mov	r1, #0x14\n\
+	mov	r2, #0x1\n\
+	mov	r3, #0x5\n\
+	bl	InitMenu\n\
+	ldr	r1, ._14 + 8    @ gMenuCallback\n\
+	ldr	r0, ._14 + 12   @ debug_sub_8138C54\n\
+	str	r0, [r1]\n\
+	mov	r0, #0x0\n\
+	add	sp, sp, #0x8\n\
+	pop	{r1}\n\
+	bx	r1\n\
+._15:\n\
+	.align	2, 0\n\
+._14:\n\
+	.word	gSpecialVar_0x8004\n\
+	.word	gUnkDebug4Menu\n\
+	.word	gMenuCallback\n\
+	.word	debug_sub_8138C54+1");
+}
+
+#endif
+
 static void CableCarTask1(u8 taskId)
 {
     if (!gPaletteFade.active)
@@ -198,6 +367,46 @@ void CableCar(void)
     CreateTask(CableCarTask1, 1);
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
 }
+
+#if DEBUG
+
+__attribute__((naked))
+u8 debug_sub_8138D74(void)
+{
+    asm("\n\
+	push	{lr}\n\
+	ldr	r1, ._21        @ gSpecialVar_0x8004\n\
+	mov	r0, #0x0\n\
+	strh	r0, [r1]\n\
+	bl	CloseMenu\n\
+	bl	CableCar\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._22:\n\
+	.align	2, 0\n\
+._21:\n\
+	.word	gSpecialVar_0x8004");
+}
+
+__attribute__((naked))
+u8 debug_sub_8138D8C(void)
+{
+    asm("\n\
+	push	{lr}\n\
+	ldr	r1, ._23        @ gSpecialVar_0x8004\n\
+	mov	r0, #0x1\n\
+	strh	r0, [r1]\n\
+	bl	CloseMenu\n\
+	bl	CableCar\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._24:\n\
+	.align	2, 0\n\
+._23:\n\
+	.word	gSpecialVar_0x8004");
+}
+
+#endif
 
 static void CableCarMainCallback_Setup(void)
 {

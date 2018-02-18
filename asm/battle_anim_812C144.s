@@ -262,7 +262,7 @@ _0812C31A:
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
 	strh r6, [r5, 0x36]
-	ldr r0, _0812C350 @ =sub_8078B34
+	ldr r0, _0812C350 @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r5, 0x1C]
 	ldr r1, _0812C354 @ =DestroyAnimSprite
 	adds r0, r5, 0
@@ -274,7 +274,7 @@ _0812C31A:
 	.align 2, 0
 _0812C348: .4byte gAnimBankTarget
 _0812C34C: .4byte gBattleAnimArgs
-_0812C350: .4byte sub_8078B34
+_0812C350: .4byte StartTranslateAnimSpriteByDeltas
 _0812C354: .4byte DestroyAnimSprite
 	thumb_func_end sub_812C2BC
 
@@ -795,7 +795,7 @@ sub_812C720: @ 812C720
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _0812C784 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	mov r5, sp
@@ -803,7 +803,7 @@ sub_812C720: @ 812C720
 	movs r1, 0
 	mov r2, sp
 	adds r3, r5, 0
-	bl sub_807A3FC
+	bl SetAverageBattlerPositions
 	ldr r0, _0812C788 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -849,7 +849,7 @@ _0812C794: .4byte sub_812C798
 sub_812C798: @ 812C798
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812C7BA
@@ -2301,7 +2301,7 @@ sub_812D294: @ 812D294
 	bne _0812D2A8
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 _0812D2A8:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
@@ -2376,7 +2376,7 @@ _0812D2F0:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x36]
-	ldr r0, _0812D34C @ =sub_8078B34
+	ldr r0, _0812D34C @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r5, 0x1C]
 _0812D33C:
 	pop {r4,r5}
@@ -2385,7 +2385,7 @@ _0812D33C:
 	.align 2, 0
 _0812D344: .4byte DestroyAnimSprite
 _0812D348: .4byte gAnimBankTarget
-_0812D34C: .4byte sub_8078B34
+_0812D34C: .4byte StartTranslateAnimSpriteByDeltas
 	thumb_func_end sub_812D294
 
 	thumb_func_start sub_812D350
@@ -2915,7 +2915,7 @@ sub_812D724: @ 812D724
 _0812D736:
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	movs r0, 0x90
 	lsls r0, 4
 	strh r0, [r4, 0x30]
@@ -3227,7 +3227,7 @@ _0812D9A2:
 	cmp r0, 0
 	beq _0812D9F0
 	ldr r3, _0812D9E4 @ =gSprites
-	ldr r4, _0812D9E8 @ =gObjectBankIDs
+	ldr r4, _0812D9E8 @ =gBankSpriteIds
 	ldr r2, _0812D9D4 @ =gAnimBankAttacker
 	ldrb r0, [r2]
 	adds r0, r4
@@ -3248,11 +3248,11 @@ _0812D9D8: .4byte 0x040000d4
 _0812D9DC: .4byte 0x84000200
 _0812D9E0: .4byte gSharedMem + 0x19348
 _0812D9E4: .4byte gSprites
-_0812D9E8: .4byte gObjectBankIDs
+_0812D9E8: .4byte gBankSpriteIds
 _0812D9EC: .4byte gSpriteAffineAnimTable_81E7C18
 _0812D9F0:
 	ldr r3, _0812DA34 @ =gSprites
-	ldr r4, _0812DA38 @ =gObjectBankIDs
+	ldr r4, _0812DA38 @ =gBankSpriteIds
 	ldr r2, _0812DA3C @ =gAnimBankAttacker
 	ldrb r0, [r2]
 	adds r0, r4
@@ -3288,7 +3288,7 @@ _0812DA2A:
 	b _0812DAFA
 	.align 2, 0
 _0812DA34: .4byte gSprites
-_0812DA38: .4byte gObjectBankIDs
+_0812DA38: .4byte gBankSpriteIds
 _0812DA3C: .4byte gAnimBankAttacker
 _0812DA40: .4byte gSpriteAffineAnimTable_81E7BEC
 _0812DA44: .4byte gTasks
@@ -3401,7 +3401,7 @@ c3_80DFBE4: @ 812DB18
 	lsrs r0, 24
 	ldr r4, _0812DB48 @ =gBattleAnimArgs
 	ldr r3, _0812DB4C @ =gSprites
-	ldr r2, _0812DB50 @ =gObjectBankIDs
+	ldr r2, _0812DB50 @ =gBankSpriteIds
 	ldr r1, _0812DB54 @ =gAnimBankAttacker
 	ldrb r1, [r1]
 	adds r1, r2
@@ -3422,7 +3422,7 @@ c3_80DFBE4: @ 812DB18
 	.align 2, 0
 _0812DB48: .4byte gBattleAnimArgs
 _0812DB4C: .4byte gSprites
-_0812DB50: .4byte gObjectBankIDs
+_0812DB50: .4byte gBankSpriteIds
 _0812DB54: .4byte gAnimBankAttacker
 	thumb_func_end c3_80DFBE4
 
@@ -4626,7 +4626,7 @@ sub_812E4F0: @ 812E4F0
 	bne _0812E50E
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -7672,7 +7672,7 @@ sub_812FC68: @ 812FC68
 	lsls r0, 3
 	mov r1, r8
 	adds r4, r0, r1
-	ldr r1, _0812FCCC @ =gObjectBankIDs
+	ldr r1, _0812FCCC @ =gBankSpriteIds
 	ldr r2, _0812FCD0 @ =gAnimBankAttacker
 	ldrb r0, [r2]
 	adds r0, r1
@@ -7709,7 +7709,7 @@ _0812FCAC:
 	b _0812FD4C
 	.align 2, 0
 _0812FCC8: .4byte gTasks
-_0812FCCC: .4byte gObjectBankIDs
+_0812FCCC: .4byte gBankSpriteIds
 _0812FCD0: .4byte gAnimBankAttacker
 _0812FCD4: .4byte gBattleAnimArgs
 _0812FCD8: .4byte 0xffff8000
@@ -9023,7 +9023,7 @@ _081306D6:
 	lsls r0, 2
 	ldr r1, _08130708 @ =gSprites
 	adds r0, r1
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -9042,7 +9042,7 @@ _0813070C:
 	lsls r0, 2
 	ldr r1, _0813072C @ =gSprites
 	adds r0, r1
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _081307AA
@@ -10151,7 +10151,7 @@ sub_8130F5C: @ 8130F5C
 	bne _08130F80
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _08130F7C @ =gAnimBankAttacker
 	b _08130F82
 	.align 2, 0
@@ -10356,11 +10356,11 @@ _081310FA:
 	strh r0, [r4, 0x34]
 	strh r1, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimSpriteTranslationDeltas
 	b _081311CA
 _08131110:
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	beq _081311DE
@@ -10694,7 +10694,7 @@ _08131384:
 	cmp r0, 0
 	beq _081313C6
 	ldr r3, _081313F8 @ =gSprites
-	ldr r2, _081313FC @ =gObjectBankIDs
+	ldr r2, _081313FC @ =gBankSpriteIds
 	ldrb r0, [r4]
 	adds r0, r2
 	ldrb r1, [r0]
@@ -10744,7 +10744,7 @@ _081313E8:
 	.align 2, 0
 _081313F4: .4byte gAnimBankAttacker
 _081313F8: .4byte gSprites
-_081313FC: .4byte gObjectBankIDs
+_081313FC: .4byte gBankSpriteIds
 _08131400: .4byte gSpriteAffineAnimTable_81E7C18
 _08131404: .4byte sub_8131408
 	thumb_func_end sub_81312E4
@@ -12326,7 +12326,7 @@ _08132084: .4byte gAnimBankAttacker
 _08132088: .4byte gAnimBankTarget
 _0813208C: .4byte gTasks
 _08132090:
-	ldr r1, _081320CC @ =gObjectBankIDs
+	ldr r1, _081320CC @ =gBankSpriteIds
 	ldr r0, _081320D0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -12357,7 +12357,7 @@ _08132090:
 	ldrsh r1, [r2, r3]
 	b _0813215E
 	.align 2, 0
-_081320CC: .4byte gObjectBankIDs
+_081320CC: .4byte gBankSpriteIds
 _081320D0: .4byte gAnimBankAttacker
 _081320D4: .4byte gSprites
 _081320D8:
@@ -12385,7 +12385,7 @@ _081320EC:
 	strh r1, [r0, 0x26]
 	b _08132188
 _08132104:
-	ldr r1, _08132144 @ =gObjectBankIDs
+	ldr r1, _08132144 @ =gBankSpriteIds
 	ldr r0, _08132148 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -12418,7 +12418,7 @@ _08132104:
 	bgt _08132188
 	b _08132162
 	.align 2, 0
-_08132144: .4byte gObjectBankIDs
+_08132144: .4byte gBankSpriteIds
 _08132148: .4byte gAnimBankAttacker
 _0813214C: .4byte gSprites
 _08132150:
@@ -12438,7 +12438,7 @@ _08132162:
 	strh r0, [r2, 0x26]
 	b _08132188
 _0813216A:
-	ldr r1, _08132190 @ =gObjectBankIDs
+	ldr r1, _08132190 @ =gBankSpriteIds
 	ldr r0, _08132194 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
@@ -12457,7 +12457,7 @@ _08132188:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08132190: .4byte gObjectBankIDs
+_08132190: .4byte gBankSpriteIds
 _08132194: .4byte gAnimBankAttacker
 _08132198: .4byte gSprites
 	thumb_func_end sub_8131FFC

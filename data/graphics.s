@@ -18,8 +18,11 @@ gUnknown_08D00524:: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
+gUnusedOldCharmap_Gfx_lz::
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
+gUnusedOldCharmap_Tilemap_lz::
 	.incbin "graphics/unused/old_charmap.bin.lz"
+gUnusedOldCharmap_Pal_lz::
 	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2

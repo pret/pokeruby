@@ -43,7 +43,7 @@ void sub_80D31C8(struct Sprite* sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
-    obj_translate_based_on_private_1_2_3_4(sprite);
+    InitAnimSpriteTranslationDeltas(sprite);
 
     newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     sprite->data[5] = newSpriteId;
@@ -69,7 +69,7 @@ static void sub_80D32E8(struct Sprite *sprite)
     u16 index = gSprites[spriteId].data[3];
 
     sprite->data[0] = 1;
-    sub_8078B5C(sprite);
+    TranslateAnimSpriteByDeltas(sprite);
 
     sprite->pos2.x += Sin(index / 256, gSprites[spriteId].data[0]);
     sprite->pos2.y += Cos(index / 256, gSprites[spriteId].data[1]);

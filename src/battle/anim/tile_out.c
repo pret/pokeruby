@@ -37,7 +37,7 @@ void sub_80CE1AC(struct Sprite* sprite)
         sprite->data[0] = 30;
         sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
         sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
-        sprite->callback = sub_8078B34;
+        sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
 }

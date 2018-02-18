@@ -8,6 +8,7 @@
 #include "m4a.h"
 #include "main.h"
 #include "main_menu.h"
+#include "overworld.h"
 #include "palette.h"
 #include "reset_rtc_screen.h"
 #include "sound.h"
@@ -353,6 +354,9 @@ static void Task_TitleScreenPhase1(u8);
 static void Task_TitleScreenPhase2(u8);
 static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
+#if DEBUG
+static void CB2_GoToTestMenu(void);
+#endif
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToCopyrightScreen(void);
@@ -829,6 +833,13 @@ static void Task_TitleScreenPhase3(u8 taskId)
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             SetMainCallback2(CB2_GoToResetRtcScreen);
         }
+#if DEBUG
+        else if (gMain.heldKeys == SELECT_BUTTON)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            SetMainCallback2(CB2_GoToTestMenu);
+        }
+#endif
         else
         {
             REG_BG2Y = 0;
@@ -854,6 +865,14 @@ static void CB2_GoToMainMenu(void)
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitMainMenu);
 }
+
+#if DEBUG
+static void CB2_GoToTestMenu(void)
+{
+    if (!UpdatePaletteFade())
+        SetMainCallback2(CB2_InitTestMenu);
+}
+#endif
 
 static void CB2_GoToCopyrightScreen(void)
 {
