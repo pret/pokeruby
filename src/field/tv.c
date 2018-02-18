@@ -21,7 +21,7 @@
 #include "battle.h"
 #include "link.h"
 #include "constants/easy_chat.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_specials.h"
 #include "item.h"
 #include "constants/items.h"
