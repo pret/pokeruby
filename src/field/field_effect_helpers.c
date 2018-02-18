@@ -4,7 +4,7 @@
 #include "metatile_behavior.h"
 #include "constants/songs.h"
 #include "sound.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_weather.h"
 #include "field_effect.h"

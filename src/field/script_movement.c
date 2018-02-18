@@ -1,6 +1,6 @@
 #include "global.h"
 #include "script_movement.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "task.h"
 #include "util.h"
 

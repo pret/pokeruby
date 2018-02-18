@@ -15,7 +15,7 @@
 #include "constants/songs.h"
 #include "decoration.h"
 #include "field_player_avatar.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "metatile_behavior.h"
 #include "field_camera.h"
 #include "field_effect.h"

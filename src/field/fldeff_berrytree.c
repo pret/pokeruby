@@ -1,5 +1,5 @@
 #include "global.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "script.h"
 

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "berry.h"
 #include "field_control_avatar.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"

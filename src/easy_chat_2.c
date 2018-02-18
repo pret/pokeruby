@@ -5,7 +5,7 @@
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "field_message_box.h"
 #include "graphics.h"
 #include "menu.h"

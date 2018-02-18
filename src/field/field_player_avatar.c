@@ -4,7 +4,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
-#include "evobjmv.h"
+#include "event_object_movement.h"
 #include "fieldmap.h"
 #include "main.h"
 #include "constants/map_objects.h"
