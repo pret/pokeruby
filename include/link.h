@@ -199,7 +199,7 @@ void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
 void LinkTestScreen(void);
-void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3);
+void debug_sub_8008218(u16 *buffer, void *arg1, u16 *arg2, u32 arg3);
 void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0);
 u32 sub_8007E40(void);
 void PrintHex(u32, u8, u8, u8);

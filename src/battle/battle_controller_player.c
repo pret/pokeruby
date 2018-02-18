@@ -1055,7 +1055,7 @@ void debug_sub_8030C24(void)
             move += 9;
     case DPAD_RIGHT:
             if (++move > 354)
-            move = 1;
+                move = 1;
             SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
             gBattleMons[gActiveBank].moves[0] = move;
             Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
@@ -1080,7 +1080,7 @@ void debug_sub_8030C24(void)
             move -= 9;
     case DPAD_LEFT:
             if (--move <= 0)
-            move = 354;
+                move = 354;
             SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
             gBattleMons[gActiveBank].moves[0] = move;
             Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
@@ -1111,11 +1111,11 @@ void debug_sub_8030C24(void)
             move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i);
             StringAppend(gDisplayedStringBattle, gMoveNames[move]);
             Text_InitWindow(
-            &gUnknown_03004210,
-            gDisplayedStringBattle,
-            0x100 + i * 16,
-            (i & 1) ? 10 : 2,
-            (i < 2) ? 0x37 : 0x39);
+                &gUnknown_03004210,
+                gDisplayedStringBattle,
+                0x100 + i * 16,
+                (i & 1) ? 10 : 2,
+                (i < 2) ? 0x37 : 0x39);
             Text_PrintWindow8002F44(&gUnknown_03004210);
         }
         gBattleBankFunc[gActiveBank] = sub_802C68C;

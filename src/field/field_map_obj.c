@@ -1908,7 +1908,7 @@ static u16 gUnknown_030005A6;
 
 struct MapObject gMapObjects[16];
 #if DEBUG
-u8 gUnknown_Debug_03004BC0;  // unknown type
+u8 gUnknown_Debug_03004BC0;
 #endif
 
 void npc_clear_ids_and_state(struct MapObject *mapObj)
@@ -2214,226 +2214,6 @@ void npc_hide_all_but_player(void)
     }
 }
 
-#if DEBUG
-__attribute__((naked))
-u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, u8 c, u8 d, s16 e, s16 f)
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	r7, r1, #0\n"
-        "	add	r1, r2, #0\n"
-        "	add	r2, r3, #0\n"
-        "	ldr	r3, [sp, #0x20]\n"
-        "	ldr	r4, [sp, #0x24]\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r1, r1, #0x18\n"
-        "	lsl	r2, r2, #0x18\n"
-        "	lsr	r2, r2, #0x18\n"
-        "	lsl	r3, r3, #0x10\n"
-        "	lsr	r3, r3, #0x10\n"
-        "	mov	r9, r3\n"
-        "	lsl	r4, r4, #0x10\n"
-        "	lsr	r4, r4, #0x10\n"
-        "	mov	sl, r4\n"
-        "	bl	InitFieldObjectStateFromTemplate\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r8, r0\n"
-        "	cmp	r0, #0x10\n"
-        "	bne	._83	@cond_branch\n"
-        "	mov	r0, #0x10\n"
-        "	b	._92\n"
-        "._83:\n"
-        "	mov	r0, r8\n"
-        "	lsl	r4, r0, #0x3\n"
-        "	add	r0, r4, r0\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._87        @ gMapObjects\n"
-        "	add	r5, r0, r1\n"
-        "	ldrb	r0, [r5, #0x5]\n"
-        "	bl	GetFieldObjectGraphicsInfo\n"
-        "	add	r6, r0, #0\n"
-        "	ldrb	r1, [r6, #0xc]\n"
-        "	mov	r0, #0xf\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._85	@cond_branch\n"
-        "	ldrh	r0, [r6, #0x2]\n"
-        "	lsl	r1, r1, #0x1c\n"
-        "	lsr	r1, r1, #0x1c\n"
-        "	bl	npc_load_two_palettes__no_record\n"
-        "	b	._89\n"
-        "._88:\n"
-        "	.align	2, 0\n"
-        "._87:\n"
-        "	.word	gMapObjects\n"
-        "._85:\n"
-        "	cmp	r0, #0xa\n"
-        "	bne	._89	@cond_branch\n"
-        "	ldrh	r0, [r6, #0x2]\n"
-        "	lsl	r1, r1, #0x1c\n"
-        "	lsr	r1, r1, #0x1c\n"
-        "	bl	npc_load_two_palettes__and_record\n"
-        "._89:\n"
-        "	ldrb	r0, [r5, #0x6]\n"
-        "	cmp	r0, #0x4c\n"
-        "	bne	._90	@cond_branch\n"
-        "	ldrb	r0, [r5, #0x1]\n"
-        "	mov	r1, #0x20\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r5, #0x1]\n"
-        "._90:\n"
-        "	ldr	r1, ._93        @ 0xffff\n"
-        "	add	r0, r1, #0\n"
-        "	strh	r0, [r7, #0x2]\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x0\n"
-        "	bl	CreateSprite\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r7, #0x40\n"
-        "	bne	._91	@cond_branch\n"
-        "	ldr	r1, ._93 + 4    @ gUnknown_Debug_03004BC0\n"
-        "	ldrb	r0, [r1]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r0, ._93 + 8    @ gMapObjects\n"
-        "	mov	r2, r8\n"
-        "	add	r1, r4, r2\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	ldrb	r2, [r1]\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r2\n"
-        "	strb	r0, [r1]\n"
-        "	mov	r0, #0x10\n"
-        "	b	._92\n"
-        "._94:\n"
-        "	.align	2, 0\n"
-        "._93:\n"
-        "	.word	0xffff\n"
-        "	.word	gUnknown_Debug_03004BC0\n"
-        "	.word	gMapObjects\n"
-        "._91:\n"
-        "	lsl	r0, r7, #0x4\n"
-        "	add	r0, r0, r7\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._96        @ gSprites\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r1, r9\n"
-        "	lsl	r0, r1, #0x10\n"
-        "	asr	r0, r0, #0x10\n"
-        "	ldrh	r2, [r5, #0x10]\n"
-        "	add	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r0, r0, #0x10\n"
-        "	mov	r2, sl\n"
-        "	lsl	r1, r2, #0x10\n"
-        "	asr	r1, r1, #0x10\n"
-        "	ldrh	r2, [r5, #0x12]\n"
-        "	add	r1, r1, r2\n"
-        "	lsl	r1, r1, #0x10\n"
-        "	asr	r1, r1, #0x10\n"
-        "	add	r2, r4, #0\n"
-        "	add	r2, r2, #0x20\n"
-        "	add	r3, r4, #0\n"
-        "	add	r3, r3, #0x22\n"
-        "	bl	sub_8060388\n"
-        "	ldrh	r0, [r6, #0x8]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r0, r0, #0x11\n"
-        "	neg	r0, r0\n"
-        "	add	r1, r4, #0\n"
-        "	add	r1, r1, #0x28\n"
-        "	strb	r0, [r1]\n"
-        "	ldrh	r0, [r6, #0xa]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r0, r0, #0x11\n"
-        "	neg	r0, r0\n"
-        "	add	r2, r4, #0\n"
-        "	add	r2, r2, #0x29\n"
-        "	strb	r0, [r2]\n"
-        "	ldrh	r0, [r4, #0x20]\n"
-        "	add	r0, r0, #0x8\n"
-        "	strh	r0, [r4, #0x20]\n"
-        "	ldrh	r1, [r4, #0x22]\n"
-        "	add	r1, r1, #0x10\n"
-        "	mov	r0, #0x0\n"
-        "	ldsb	r0, [r2, r0]\n"
-        "	add	r0, r0, r1\n"
-        "	strh	r0, [r4, #0x22]\n"
-        "	ldrb	r1, [r6, #0xc]\n"
-        "	lsl	r1, r1, #0x1c\n"
-        "	lsr	r1, r1, #0x18\n"
-        "	ldrb	r2, [r4, #0x5]\n"
-        "	mov	r0, #0xf\n"
-        "	and	r0, r0, r2\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r4, #0x5]\n"
-        "	add	r2, r4, #0\n"
-        "	add	r2, r2, #0x3e\n"
-        "	ldrb	r0, [r2]\n"
-        "	mov	r1, #0x2\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r2]\n"
-        "	mov	r0, r8\n"
-        "	strh	r0, [r4, #0x2e]\n"
-        "	strb	r7, [r5, #0x4]\n"
-        "	ldrb	r1, [r6, #0xc]\n"
-        "	lsl	r1, r1, #0x19\n"
-        "	lsr	r1, r1, #0x1f\n"
-        "	lsl	r1, r1, #0x4\n"
-        "	ldrb	r2, [r5, #0x1]\n"
-        "	mov	r0, #0x11\n"
-        "	neg	r0, r0\n"
-        "	and	r0, r0, r2\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r5, #0x1]\n"
-        "	lsl	r0, r0, #0x1b\n"
-        "	cmp	r0, #0\n"
-        "	blt	._95	@cond_branch\n"
-        "	ldrb	r0, [r5, #0x18]\n"
-        "	lsl	r0, r0, #0x1c\n"
-        "	lsr	r0, r0, #0x1c\n"
-        "	bl	FieldObjectDirectionToImageAnimId\n"
-        "	add	r1, r0, #0\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r1, r1, #0x18\n"
-        "	add	r0, r4, #0\n"
-        "	bl	StartSpriteAnim\n"
-        "._95:\n"
-        "	ldrb	r0, [r5, #0xb]\n"
-        "	lsr	r0, r0, #0x4\n"
-        "	add	r1, r4, #0\n"
-        "	mov	r2, #0x1\n"
-        "	bl	SetObjectSubpriorityByZCoord\n"
-        "	add	r0, r5, #0\n"
-        "	add	r1, r4, #0\n"
-        "	bl	sub_80634D0\n"
-        "	mov	r0, r8\n"
-        "._92:\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._97:\n"
-        "	.align	2, 0\n"
-        "._96:\n"
-        "	.word	gSprites\n"
-        "\n"
-    );
-}
-#else
 u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, u8 c, u8 d, s16 e, s16 f)
 {
     u8 mapObjectId;
@@ -2463,6 +2243,9 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     spriteId = CreateSprite(sprTemplate, 0, 0, 0);
     if (spriteId == 64)
     {
+#if DEBUG
+        gUnknown_Debug_03004BC0--;
+#endif
         gMapObjects[mapObjectId].active = FALSE;
         return 16;
     }
@@ -2483,7 +2266,6 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     sub_80634D0(mapObject, sprite);
     return mapObjectId;
 }
-#endif
 
 u8 SpawnFieldObject(struct MapObjectTemplate *mapObjTemplate, u8 b, u8 c, s16 d, s16 e)
 {
@@ -2706,79 +2488,26 @@ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
 
 void sub_805B75C(u8, s16, s16);
 
-#if DEBUG
-__attribute__((naked))
-void sub_805B710(u16 u161, u16 u162)
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r8\n"
-        "	push	{r7}\n"
-        "	add	r4, r0, #0\n"
-        "	add	r5, r1, #0\n"
-        "	lsl	r4, r4, #0x10\n"
-        "	lsr	r4, r4, #0x10\n"
-        "	lsl	r5, r5, #0x10\n"
-        "	lsr	r5, r5, #0x10\n"
-        "	ldr	r6, ._153       @ gUnknown_Debug_03004BC0\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r6]\n"
-        "	bl	ClearPlayerAvatarInfo\n"
-        "	mov	r7, #0x0\n"
-        "	ldr	r0, ._153 + 4   @ gMapObjects\n"
-        "	mov	r8, r0\n"
-        "	lsl	r4, r4, #0x10\n"
-        "	lsl	r5, r5, #0x10\n"
-        "._152:\n"
-        "	lsl	r0, r7, #0x3\n"
-        "	add	r0, r0, r7\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add r0, r0, r8\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x1f\n"
-        "	cmp	r0, #0\n"
-        "	beq	._151	@cond_branch\n"
-        "	add	r0, r7, #0\n"
-        "	asr	r1, r4, #0x10\n"
-        "	asr	r2, r5, #0x10\n"
-        "	bl	sub_805B75C\n"
-        "	ldrb	r0, [r6]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r6]\n"
-        "._151:\n"
-        "	add	r0, r7, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	cmp	r7, #0xf\n"
-        "	bls	._152	@cond_branch\n"
-        "	bl	sub_805AAB0\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._154:\n"
-        "	.align	2, 0\n"
-        "._153:\n"
-        "	.word	gUnknown_Debug_03004BC0\n"
-        "	.word	gMapObjects\n"
-        "\n"
-    );
-}
-#else
 void sub_805B710(u16 a, u16 b)
 {
     u8 i;
 
+#if DEBUG
+    gUnknown_Debug_03004BC0 = 0;
+#endif
     ClearPlayerAvatarInfo();
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active)
+        {
             sub_805B75C(i, a, b);
+#if DEBUG
+            gUnknown_Debug_03004BC0++;
+#endif
+        }
     }
     sub_805AAB0();
 }
-#endif
 
 extern void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 extern void sub_805B914(struct MapObject *);

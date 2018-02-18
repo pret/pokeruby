@@ -317,7 +317,7 @@ extern const s8 gUnknown_083FA64C[0x8][0x2];
 
 #if DEBUG
 EWRAM_DATA u8 unk_203955C[4] = { 0 };
-EWRAM_DATA u8 unk_2039560[4] = { 0 };
+EWRAM_DATA u8 unk_2039560 = 0;
 #endif
 
 
@@ -1008,7 +1008,7 @@ void sub_811597C(u8 taskid)
 void sub_81159BC(u8 taskid)
 {
     s16 i;
-    if(eRoulette->var08 & 0x20)
+    if (eRoulette->var08 & 0x20)
     {
         for (i = 0xB; (i < 0xE); i++)
             if ((eRoulette->var08 & gUnknown_083F8C00[i].var08) == 0)
@@ -1380,9 +1380,9 @@ void sub_8116474(u8 taskid)
 {
     if (gTasks[taskid].data[0x1]-- > 0x0)
     {
-        if(gTasks[taskid].data[0x1] > 0x2)
+        if (gTasks[taskid].data[0x1] > 0x2)
             gSpriteCoordOffsetX -= 0x2;
-        if((eRoulette->var26 -= 0x4) == 0x68)
+        if ((eRoulette->var26 -= 0x4) == 0x68)
             gSprites[eRoulette->var3C[0x19]].callback = &sub_81184CC;
     }
     else
@@ -1400,7 +1400,7 @@ void sub_8116514(u8 taskid)
 {
     if (gTasks[taskid].data[0x1]-- > 0x1)
     {
-        switch(gTasks[taskid].data[0x1] % 0x10)
+        switch (gTasks[taskid].data[0x1] % 0x10)
         {
         case 0x8:
             sub_8117AA8(0x0, 0xFF);
@@ -1420,14 +1420,14 @@ void sub_8116514(u8 taskid)
 
 void sub_811659C(u8 taskid)
 {
-    switch(gTasks[taskid].data[0x5])
+    switch (gTasks[taskid].data[0x5])
     {
     case 0x1:
     case 0x2:
         if (IsFanfareTaskInactive())
         {
             u32 wins = GetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS);
-            if(wins < ++gTasks[taskid].data[0xB])
+            if (wins < ++gTasks[taskid].data[0xB])
                 SetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS, gTasks[taskid].data[0xB]);
             sub_8116C34(taskid, &sub_811677C, 0xFFFF, 0x3);
         }
@@ -1444,7 +1444,7 @@ void sub_811659C(u8 taskid)
 
 void sub_8116638(u8 taskid)
 {
-    switch(gTasks[taskid].data[0x5])
+    switch (gTasks[taskid].data[0x5])
     {
     case 0x1:
     case 0x2:
@@ -1474,7 +1474,7 @@ void sub_8116638(u8 taskid)
 void sub_81166E8(u8 taskid)
 {
     s32 r0 = gTasks[taskid].data[0x7];
-    switch(r0)
+    switch (r0)
     {
     case 0x0:
         gTasks[taskid].data[0xD]++;
@@ -1684,7 +1684,7 @@ void sub_8116B40(u8 taskid) // end roulette ?
 
 void sub_8116BC0(u8 taskid)
 {
-    if(eRoulette->varA8 == 0 || gMain.newKeys & eRoulette->varAA)
+    if (eRoulette->varA8 == 0 || gMain.newKeys & eRoulette->varAA)
     {
         gTasks[taskid].func = eRoulette->varAC;
         if (eRoulette->varAA > 0)
@@ -1700,7 +1700,7 @@ void sub_8116BC0(u8 taskid)
 void sub_8116C34(u8 taskid, TaskFunc r1, u16 r2, u16 r3)
 {
     eRoulette->varB4 = gTasks[taskid].func;
-    if(r1 == NULL)
+    if (r1 == NULL)
         r1 = eRoulette->varB4;
     eRoulette->varAC = r1;
     eRoulette->varA8 = r2;
@@ -1780,7 +1780,7 @@ u8 sub_8116E5C(u8 r0, u8 r1)
     u8 t = r0;
     if (--r0 < 0x13)
     {
-        switch(r1)
+        switch (r1)
         {
         case 0x0:
             return 0x3;
@@ -1810,7 +1810,7 @@ void sub_8116EF8(u8 r0)
     u8 var2;
     u16 var3;
     u8 i;
-    switch(r0)
+    switch (r0)
     {
     case 0x5:
     case 0xA:
@@ -1889,7 +1889,7 @@ void sub_8117158(u8 r0)
     eRoulette->var2A = 0x1;
     sub_8117AA8(0x0, 0x0);
     sub_8124E2C(gBGTilemapBuffers[1], (u16 *)ewram18800, 0xE, 0x7, 0x10, 0xD);
-    switch(r0)
+    switch (r0)
     {
     case 0x0:
         return;
@@ -2327,7 +2327,7 @@ void debug_sub_812CDE4()
 }
 
 __attribute__((naked))
-void debug_sub_812CFE8()
+void debug_sub_812CFE8(u8 taskId)
 {
     asm("\
 	push	{r4, r5, lr}\n\
@@ -2403,66 +2403,22 @@ void debug_sub_812CFE8()
 
 #endif
 
-#if DEBUG
-__attribute__((naked))
-void PlayRoulette(void)
-{
-    asm("\
-	push	{lr}\n\
-	bl	ScriptContext2_Enable\n\
-	ldr	r1, ._604       @ unk_2039560\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r1]\n\
-	ldr	r0, ._604 + 4   @ unk_203955C\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._602	@cond_branch\n\
-	ldr	r0, ._604 + 8   @ debug_sub_812CFE8\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	b	._603\n\
-._605:\n\
-	.align	2, 0\n\
-._604:\n\
-	.word	unk_2039560\n\
-	.word	unk_203955C\n\
-	.word	debug_sub_812CFE8+1\n\
-._602:\n\
-	ldr	r0, ._606       @ Task_Roulette_0\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._606 + 4   @ gTasks\n\
-	lsl	r1, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldr	r0, ._606 + 8   @ gSaveBlock1\n\
-	ldr	r2, ._606 + 12  @ 0x494\n\
-	add	r0, r0, r2\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r1, #0x22]\n\
-._603:\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._607:\n\
-	.align	2, 0\n\
-._606:\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gTasks\n\
-	.word	gSaveBlock1\n\
-	.word	0x494");
-}
-#else
 void PlayRoulette(void)
 {
     u8 taskid;
+
     ScriptContext2_Enable();
-    taskid = CreateTask(&Task_Roulette_0, 0x0);
+#if DEBUG
+    unk_2039560 = 0;
+    if (unk_203955C[0] != 0)
+    {
+	taskid = CreateTask(debug_sub_812CFE8, 0);
+	return;
+    }
+#endif
+    taskid = CreateTask(Task_Roulette_0, 0);
     gTasks[taskid].data[0xD] = gSaveBlock1.coins;
 }
-#endif
 
 void sub_8117838(u8 r0)
 {
@@ -2548,7 +2504,7 @@ void unref_sub_8117A74(void) //destroy all sprites at 0x1D
 void sub_8117AA8(u8 r0, u8 r1)
 {
     u8 i;
-    switch(r0)
+    switch (r0)
     {
     case 0x1:
         for (i = 0x0; i < 0x13; i++)
@@ -2564,7 +2520,7 @@ void sub_8117AA8(u8 r0, u8 r1)
             else
                 gSprites[eRoulette->var3C[0x1D + i]].invisible = FALSE;
         }
-        for ( ; i < 0x13; i++)
+        for (; i < 0x13; i++)
             gSprites[eRoulette->var3C[0x1D + i]].invisible = FALSE;
         break;
     }
@@ -2577,7 +2533,7 @@ void sub_8117BBC(void)
     {
         eRoulette->var3C[0x31 + i] = CreateSprite(&gSpriteTemplate_83FA40C, 0x74, 0x14, 0xA);
         gSprites[eRoulette->var3C[0x31 + i]].invisible    = TRUE;
-        gSprites[eRoulette->var3C[0x31 + i]].data[0]        = 0x1;
+        gSprites[eRoulette->var3C[0x31 + i]].data[0]      = 0x1;
         gSprites[eRoulette->var3C[0x31 + i]].callback     = &sub_81184CC;
         gSprites[eRoulette->var3C[0x31 + i]].oam.priority = 0x1;
         StartSpriteAnim(&gSprites[eRoulette->var3C[0x31 + i]], 0x8);
@@ -2731,7 +2687,7 @@ u8 sub_81181E8(u8 r0)
     // u8 t = {0, 1, 2, 3, 4};
     if (r0 >= 20)
         r0 = 0;
-    switch(gUnknown_083F8C00[r0].var01_0)
+    switch (gUnknown_083F8C00[r0].var01_0)
     {
     case 0x3:
         r0 = r0 / 5 - 1;
@@ -2766,7 +2722,7 @@ void sub_81182F8(u8 r0)
     u8 t = 0x0;
     if (eRoulette->var19 == 0x1)
         t = 0x2;
-    switch(r0)
+    switch (r0)
     {
     case 0x6:
         for (i = 0x0; i < 0x3; i++)
@@ -3006,7 +2962,7 @@ void sub_81189A8(struct Sprite *sprite)
     float f0, f1, f2;
     struct StructgUnknown_083F8DF4 *p;
     sub_8118724(sprite);
-    switch(sprite->data[0x3])
+    switch (sprite->data[0x3])
     {
     case 0:
         if (sprite->data[0x0] != 0x1)
@@ -3072,7 +3028,7 @@ void sub_8118BD8(struct Sprite *sprite)
     if (sprite->data[0x2]++ < 45)
     {
         sprite->pos2.y--;
-        if(sprite->data[0x2] == 45)
+        if (sprite->data[0x2] == 45)
         {
             if (gSprites[eRoulette->var3C[0x37]].animCmdIndex == 0x1)
                 sprite->pos2.y++;
@@ -3106,7 +3062,7 @@ void sub_8118BD8(struct Sprite *sprite)
 void sub_8118CAC(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    switch(sprite->data[0x3])
+    switch (sprite->data[0x3])
     {
     case 90:
         if (sprite->data[0x0] != 0x1)
@@ -3128,7 +3084,7 @@ void sub_8118CAC(struct Sprite *sprite)
 void sub_8118CEC(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    switch(eRoulette->var03_0)
+    switch (eRoulette->var03_0)
     {
     default:
     case 0x0:
@@ -3171,96 +3127,30 @@ void sub_8118D2C(struct Sprite *sprite)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_812E698()
+
+void debug_sub_812E698(struct Sprite *sprite)
 {
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	add	r7, r0, #0\n\
-	bl	sub_8118724\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r7, #0x32]\n\
-	add	r0, r7, #0\n\
-	bl	sub_81186B8\n\
-	mov	r0, #0x38\n\
-	bl	m4aSongNumStart\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	cmp	r1, #0\n\
-	beq	._837	@cond_branch\n\
-	ldr	r4, ._839       @ 0x2019000\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x8c\n\
-	ldr	r0, ._839 + 4   @ 0x0\n\
-	str	r0, [r1]\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x7e\n\
-	ldrb	r0, [r0]\n\
-	add	r0, r0, #0x1\n\
-	mov	r1, #0xc\n\
-	bl	__modsi3\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x7f\n\
-	strb	r0, [r1]\n\
-	add	r1, r4, #0\n\
-	ldr	r4, ._839 + 8   @ gUnknown_083F8DF4\n\
-	b	._838\n\
-._840:\n\
-	.align	2, 0\n\
-._839:\n\
-	.word	0x2019000\n\
-	.word	0x0\n\
-	.word	gUnknown_083F8DF4\n\
-._837:\n\
-	ldr	r6, ._841       @ 0x2019000\n\
-	add	r5, r6, #0\n\
-	add	r5, r5, #0x8c\n\
-	ldr	r4, ._841 + 4   @ gUnknown_083F8DF4\n\
-	ldrb	r0, [r6, #0x4]\n\
-	lsl	r0, r0, #0x1e\n\
-	lsr	r0, r0, #0x19\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x1c\n\
-	add	r0, r0, r1\n\
-	ldr	r1, [r0]\n\
-	add	r0, r1, #0\n\
-	bl	__addsf3\n\
-	str	r0, [r5]\n\
-	add	r0, r6, #0\n\
-	add	r0, r0, #0x7e\n\
-	ldrb	r0, [r0]\n\
-	add	r1, r6, #0\n\
-	add	r1, r1, #0x7f\n\
-	strb	r0, [r1]\n\
-	add	r1, r6, #0\n\
-._838:\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r7, #0x2e]\n\
-	ldrb	r0, [r1, #0x4]\n\
-	lsl	r0, r0, #0x1e\n\
-	lsr	r0, r0, #0x19\n\
-	add	r0, r0, r4\n\
-	ldrb	r0, [r0, #0x2]\n\
-	strh	r0, [r7, #0x32]\n\
-	add	r1, r1, #0x98\n\
-	ldr	r0, ._841 + 8   @ 0x3dae147b\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._841 + 12  @ sub_8118D2C\n\
-	str	r0, [r7, #0x1c]\n\
-	mov	r0, #0x5\n\
-	strh	r0, [r7, #0x30]\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._842:\n\
-	.align	2, 0\n\
-._841:\n\
-	.word	0x2019000\n\
-	.word	gUnknown_083F8DF4\n\
-	.word	0x3dae147b\n\
-	.word	sub_8118D2C+1");
+    sub_8118724(sprite);
+    sprite->data[2] = 0;
+    sub_81186B8(sprite);
+    m4aSongNumStart(0x38);
+    if (Random() & 1)
+    {
+	eRoulette->var8C = 0;
+	eRoulette->var7F = (eRoulette->var7E + 1) % 12;
+    }
+    else
+    {
+	eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+	eRoulette->var7F = eRoulette->var7E;
+    }
+    sprite->data[0] = 1;
+    sprite->data[2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
+    eRoulette->var98 = 0.085;
+    sprite->callback = sub_8118D2C;
+    sprite->data[1] = 5;
 }
+
 #endif
 
 void sub_8118DE4(struct Sprite *sprite)
@@ -3345,7 +3235,7 @@ void sub_8118F8C(struct Sprite *sprite)
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
-            if (unk_2039560[0])
+            if (unk_2039560 != 0)
                 sprite->callback = debug_sub_812E698;
             else
 #endif
@@ -3852,17 +3742,16 @@ void sub_811952C(struct Sprite *sprite)
 
 void sub_8119780(struct Sprite *sprite)
 {
-    if (sprite->data[0x1]++ >= sprite->data[0x3])
+    if (sprite->data[1]++ >= sprite->data[3])
     {
-        if ((sprite->pos1.x -= 0x2) < -0x10)
+	sprite->pos1.x -= 2;
+        if (sprite->pos1.x < -16)
         {
             if (!eRoulette->var03_6)
-            {
                 eRoulette->var03_6 = TRUE;
-            }
             DestroySprite(sprite);
-            eRoulette->var01 = 0x0;
-            eRoulette->var34 = gUnknown_083FA61E[0x0];
+            eRoulette->var01 = 0;
+            eRoulette->var34 = gUnknown_083FA61E[0];
         }
     }
 }
@@ -3871,18 +3760,19 @@ void sub_81197D8(struct Sprite *sprite)
 {
     u16 t[0x3][0x4];
     s32 p, z;
-    memcpy(t, &gUnknown_083FA632, 0x18);
-    if (sprite->data[0x1]++ < sprite->data[0x3])
+
+    memcpy(t, &gUnknown_083FA632, 24);
+    if (sprite->data[1]++ < sprite->data[3])
     {
-        if(sprite->data[0x1] & 0x1)
+        if (sprite->data[1] & 1)
         {
-            gSpriteCoordOffsetY = t[sprite->data[0x2] / 0x2][sprite->data[0x7]];
-            p = z = sprite->data[0x7] + 0x1;
+            gSpriteCoordOffsetY = t[sprite->data[2] / 2][sprite->data[7]];
+            p = z = sprite->data[7] + 1;
             if (z < 0)
-                p += 0x3;
-            sprite->data[0x7] = z - ((p >> 2) * 4);
+                p += 3;
+            sprite->data[7] = z - ((p >> 2) * 4);
         }
-        sprite->invisible ^= 0x1;
+        sprite->invisible ^= 1;
     }
     else
     {
@@ -3915,7 +3805,7 @@ void sub_8119898(struct Sprite *sprite)
 
 void sub_8119964(struct Sprite *sprite)
 {
-    if(sprite->data[0x7] == 0x0)
+    if (sprite->data[0x7] == 0x0)
     {
         register u32 t asm("r2");
         u32 z ;
@@ -4047,7 +3937,7 @@ void sub_8119BCC(struct Sprite *sprite)
         else
         {
             m4aSongNumStartOrChange(0x5E);
-            if(eRoulette->var38->data[0x0] == 0x0)
+            if (eRoulette->var38->data[0x0] == 0x0)
                 PlayCry1(SPECIES_TAILLOW, 0x3F);
             else
                 PlayCry1(SPECIES_TAILLOW, -0x3F);

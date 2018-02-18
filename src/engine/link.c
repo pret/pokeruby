@@ -192,19 +192,9 @@ const struct BlockRequest sBlockRequestLookupTable[5] =
 
 static const u8 sTestString[] = _("テストな");
 
-// TODO: fix the alignment here
+const u8 sMagic[] = "GameFreak inc.";
 
-ALIGNED(4) const u8 sMagic[] = "GameFreak inc.";
-
-#if DEBUG
 const u8 sEmptyString[] = _(" ");
-#else
-ALIGNED(4) const u8 sEmptyString[] = _("");
-#endif
-
-#if DEBUG
-const u8 linkDebugFillerPleaseRemove[2] = {0}; 
-#endif
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -988,138 +978,50 @@ void PrintHex(u32 num, u8 x, u8 y, u8 maxDigits)
 
 #if DEBUG
 
-EWRAM_DATA u16 *debugCharacterBase = NULL;
-EWRAM_DATA void *unk_20238C8 = NULL;
-EWRAM_DATA u16 (*debugTileMap)[] = NULL;
+//EWRAM_DATA u16 *debugCharacterBase = NULL;
+EWRAM_DATA uintptr_t debugCharacterBase = 0;
+EWRAM_DATA uintptr_t unk_20238C8 = 0;
+EWRAM_DATA u16 *debugTileMap = NULL;
 EWRAM_DATA u32 unk_20238D0 = 0;
 
-void debug_sub_8008218(u16 *buffer, void *arg1, u16 (*arg2)[], u32 arg3)
+void debug_sub_8008218(u16 *buffer, void *arg1, u16 *arg2, u32 arg3)
 {
     CpuSet(sLinkTestDigitTiles, buffer, 272);
-    debugCharacterBase = buffer;
-    unk_20238C8 = arg1;
+    debugCharacterBase = (uintptr_t)buffer;
+    unk_20238C8 = (uintptr_t)arg1;
     debugTileMap = arg2;
     unk_20238D0 = arg3;
 }
 
-#ifdef NONMATCHING
-void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
+void debug_sub_8008264(u32 value, int left, int top, int d, int e)
 {
+    s32 i;
     u32 buffer[8];
-    u32 *ptr;
 
-    u16 *dest;
-
-    int i;
-
-    if (unk_20238D0 != sp0)
-        return;
-
-    r3 = max(r3, 8);
-
-    ptr = &buffer[0];
-    dest = &(*debugTileMap)[left + top * 32];
-
-    for (i = r3; i != 0; i--)
+    if (unk_20238D0 == e)
     {
-        *(ptr++) = value & 0xF;
-        value = value >> 4;
-    }
+        u32 *ptr;
+        u16 *tilemapDest;
 
-    ptr = &buffer[8 - r3];
-    for (i = r3; i != 0; i--)
-    {
-        int charOffset = (((uintptr_t) debugCharacterBase) - ((uintptr_t) unk_20238C8)) / 32;
-        *dest = *ptr + charOffset + 1;
-        ptr--;
-        dest++;
+        if (d > 8)
+            d = 8;
+        ptr = buffer;
+        for (i = 0; i < d; i++)
+        {
+            *ptr++ = value & 0xF;
+            value >>= 4;
+        }
+
+        tilemapDest = (u16 *)debugTileMap + top * 0x20 + left;
+        ptr = buffer + d - 1;
+        for (i = 0; i < d; i++)
+        {
+            *tilemapDest = (debugCharacterBase - unk_20238C8) / 32 + *ptr + 1;
+            ptr--;
+            tilemapDest++;
+        }
     }
 }
-#else
-__attribute__((naked))
-void debug_sub_8008264(u32 value, int left, int top, int r3, int sp0)
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, r8\n"
-        "	push	{r7}\n"
-        "	add	sp, sp, #0xffffffe0\n"
-        "	add	r5, r0, #0\n"
-        "	add	r6, r1, #0\n"
-        "	add	r4, r3, #0\n"
-        "	ldr	r0, [sp, #0x38]\n"
-        "	ldr	r1, ._347       @ unk_20238D0\n"
-        "	ldr	r1, [r1]\n"
-        "	cmp	r1, r0\n"
-        "	bne	._345	@cond_branch\n"
-        "	cmp	r4, #0x8\n"
-        "	ble	._342	@cond_branch\n"
-        "	mov	r4, #0x8\n"
-        "._342:\n"
-        "	mov	r3, sp\n"
-        "	ldr	r0, ._347 + 4   @ debugTileMap\n"
-        "	mov	r8, r0\n"
-        "	lsl	r2, r2, #0x6\n"
-        "	mov	ip, r2\n"
-        "	lsl	r6, r6, #0x1\n"
-        "	lsl	r7, r4, #0x2\n"
-        "	cmp	r4, #0\n"
-        "	ble	._343	@cond_branch\n"
-        "	mov	r1, #0xf\n"
-        "	add	r2, r4, #0\n"
-        "._344:\n"
-        "	add	r0, r5, #0\n"
-        "	and	r0, r0, r1\n"
-        "	stmia	r3!, {r0}\n"
-        "	lsr	r5, r5, #0x4\n"
-        "	sub	r2, r2, #0x1\n"
-        "	cmp	r2, #0\n"
-        "	bne	._344	@cond_branch\n"
-        "._343:\n"
-        "	mov	r1, r8\n"
-        "	ldr	r0, [r1]\n"
-        "	add r0, r0, ip\n"
-        "	add	r5, r0, r6\n"
-        "	mov	r1, sp\n"
-        "	add	r0, r1, r7\n"
-        "	sub	r3, r0, #4\n"
-        "	cmp	r4, #0\n"
-        "	ble	._345	@cond_branch\n"
-        "	ldr	r7, ._347 + 8   @ debugCharacterBase\n"
-        "	ldr	r6, ._347 + 12  @ unk_20238C8\n"
-        "	add	r2, r4, #0\n"
-        "._346:\n"
-        "	ldr	r1, [r7]\n"
-        "	ldr	r0, [r6]\n"
-        "	sub	r1, r1, r0\n"
-        "	lsr	r1, r1, #0x5\n"
-        "	ldr	r0, [r3]\n"
-        "	add	r0, r0, r1\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r5]\n"
-        "	sub	r3, r3, #0x4\n"
-        "	add	r5, r5, #0x2\n"
-        "	sub	r2, r2, #0x1\n"
-        "	cmp	r2, #0\n"
-        "	bne	._346	@cond_branch\n"
-        "._345:\n"
-        "	add	sp, sp, #0x20\n"
-        "	pop	{r3}\n"
-        "	mov	r8, r3\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._348:\n"
-        "	.align	2, 0\n"
-        "._347:\n"
-        "	.word	unk_20238D0\n"
-        "	.word	debugTileMap\n"
-        "	.word	debugCharacterBase\n"
-        "	.word	unk_20238C8\n"
-        "\n"
-    );
-}
-#endif
 
 #endif
 
