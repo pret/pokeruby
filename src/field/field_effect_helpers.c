@@ -4,12 +4,10 @@
 #include "metatile_behavior.h"
 #include "constants/songs.h"
 #include "sound.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_camera.h"
-#include "field_map_obj_helpers.h"
 #include "field_weather.h"
 #include "field_effect.h"
-#include "field_ground_effect.h"
 #include "field_effect_helpers.h"
 
 static void sub_81269E0(struct Sprite *);

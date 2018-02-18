@@ -2,7 +2,7 @@
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "script.h"

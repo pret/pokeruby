@@ -2,7 +2,7 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 #include "blend_palette.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_weather.h"
 #include "main.h"
 #include "menu.h"

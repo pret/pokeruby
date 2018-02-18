@@ -4,7 +4,7 @@
 #include "fieldmap.h"
 #include "event_data.h"
 #include "battle_tower.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "region_map.h"
 #include "field_region_map.h"
 #include "field_message_box.h"

@@ -186,7 +186,7 @@ SYMBOL(gUnknown_03004880, 24)
 SYMBOL(gUnknown_03004898, 4)
 SYMBOL(gUnknown_0300489C, 4)
 
-// field_map_obj.c
+// event_object_movement.c
 SYMBOL(gMapObjects, 576)
 
 #if DEBUG
