@@ -277,7 +277,7 @@ debug_sub_813C5B4:
 	ldr	r0, ._23 + 16   @ Str_842E23C
 	mov	r1, #0x0
 	mov	r2, #0x0
-	bl	GetEnigmaBerryChecksum
+	bl	debug_sub_80C2C18
 	mov	r2, #0x0
 	ldr	r3, ._23 + 20   @ 0xfff
 	mov	r1, #0x0

@@ -42,6 +42,8 @@ extern struct Window gUnknown_03004210;
 
 extern void (*gBattleBankFunc[])(void);
 
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
 extern u32 gOamMatrixAllocBitmap;
 extern u8 gUnknown_020297ED;
 extern u8 gActiveBank;
@@ -115,7 +117,6 @@ extern void sub_802D18C(void);
 extern void sub_802DF18(void);
 extern void BufferStringBattle();
 extern void sub_80326EC();
-extern void DoMoveAnim();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
 extern u8 sub_8031720();
@@ -760,38 +761,38 @@ void sub_802C68C(void)
 #if DEBUG
     else if (gUnknown_020297ED == 1 && (gMain.newKeys & START_BUTTON))
     {
-	const u8 *moveName;
-	s32 i;
-	
-	Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
-	moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1)];
-	Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
-	ConvertIntToDecimalStringN(
-	  gDisplayedStringBattle,
-	  GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1),
-	  2, 3);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
-	for (i = 0; i < 64; i++)
-	{
-	    if (gSprites[i].inUse)
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
-	count = GetTaskCount();
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
-	for (i = 0, count = 0; i < 32; i++)
-	{
-	    if (gOamMatrixAllocBitmap & (1 << i))
-		count++;
-	}
-	ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
-	Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
-	gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
+        const u8 *moveName;
+        s32 i;
+
+        Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x3A);
+        moveName = gMoveNames[GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1)];
+        Text_InitWindowAndPrintText(&gUnknown_03004210, moveName, 0x100, 2, 0x37);
+        ConvertIntToDecimalStringN(
+            gDisplayedStringBattle,
+            GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1),
+            2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x110, 10, 0x37);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gString_TurnJP, 0x116, 1, 0x39);
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x11C, 4, 0x39);
+        for (i = 0; i < 64; i++)
+        {
+            if (gSprites[i].inUse)
+                count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x122, 8, 0x39);
+        count = GetTaskCount();
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x126, 11, 0x39);
+        for (i = 0, count = 0; i < 32; i++)
+        {
+            if (gOamMatrixAllocBitmap & (1 << i))
+                count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 0x12A, 14, 0x39);
+        gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
     }
 #endif
 }
@@ -1001,685 +1002,163 @@ void sub_802D18C(void)
 }
 
 #if DEBUG
-__attribute__((naked))
+
+void debug_sub_803107C(void);
+
 void debug_sub_8030C24(void)
 {
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	add	sp, sp, #0xfffffff4\n\
-	ldr	r1, ._293       @ gBattlePartyID\n\
-	ldr	r4, ._293 + 4   @ gActiveBank\n\
-	ldrb	r0, [r4]\n\
-	lsl	r0, r0, #0x1\n\
-	add	r0, r0, r1\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x64\n\
-	mul	r0, r0, r1\n\
-	ldr	r1, ._293 + 8   @ gPlayerParty\n\
-	add	r0, r0, r1\n\
-	mov	r1, #0xd\n\
-	bl	GetMonData\n\
-	add	r1, sp, #0x8\n\
-	strh	r0, [r1]\n\
-	ldr	r5, ._293 + 12  @ gMain\n\
-	ldrh	r1, [r5, #0x30]\n\
-	cmp	r1, #0x20\n\
-	bne	._286	@cond_branch\n\
-	b	._287\n\
-._286:\n\
-	cmp	r1, #0x20\n\
-	bgt	._288	@cond_branch\n\
-	cmp	r1, #0x8\n\
-	beq	._289	@cond_branch\n\
-	cmp	r1, #0x8\n\
-	bgt	._290	@cond_branch\n\
-	cmp	r1, #0x4\n\
-	beq	._291	@cond_branch\n\
-	b	._348\n\
-._294:\n\
-	.align	2, 0\n\
-._293:\n\
-	.word	gBattlePartyID\n\
-	.word	gActiveBank\n\
-	.word	gPlayerParty\n\
-	.word	gMain\n\
-._290:\n\
-	cmp	r1, #0x10\n\
-	bne	._295	@cond_branch\n\
-	b	._296\n\
-._295:\n\
-	b	._348\n\
-._288:\n\
-	cmp	r1, #0x80\n\
-	bne	._298	@cond_branch\n\
-	b	._302\n\
-._298:\n\
-	cmp	r1, #0x80\n\
-	bgt	._300	@cond_branch\n\
-	cmp	r1, #0x40\n\
-	bne	._301	@cond_branch\n\
-	b	._302\n\
-._301:\n\
-	b	._348\n\
-._300:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	cmp	r1, r0\n\
-	bne	._304	@cond_branch\n\
-	b	._305\n\
-._304:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x2\n\
-	cmp	r1, r0\n\
-	bne	._306	@cond_branch\n\
-	b	._307\n\
-._306:\n\
-	b	._348\n\
-._289:\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	bl	dp11b_obj_free\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x0\n\
-	bl	dp11b_obj_free\n\
-	ldr	r0, ._312       @ gBankAttacker\n\
-	ldrb	r2, [r4]\n\
-	strb	r2, [r0]\n\
-	ldrh	r1, [r5, #0x28]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._310	@cond_branch\n\
-	ldr	r0, ._312 + 4   @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._310	@cond_branch\n\
-	ldr	r0, ._312 + 8   @ gBankTarget\n\
-	mov	r1, #0x2\n\
-	eor	r1, r1, r2\n\
-	strb	r1, [r0]\n\
-	b	._311\n\
-._313:\n\
-	.align	2, 0\n\
-._312:\n\
-	.word	gBankAttacker\n\
-	.word	gBattleTypeFlags\n\
-	.word	gBankTarget\n\
-._310:\n\
-	ldr	r0, ._317       @ gMain\n\
-	ldrh	r1, [r0, #0x28]\n\
-	mov	r2, #0x1\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._315	@cond_branch\n\
-	ldr	r0, ._317 + 4   @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._315	@cond_branch\n\
-	mov	r0, #0x3\n\
-	b	._316\n\
-._318:\n\
-	.align	2, 0\n\
-._317:\n\
-	.word	gMain\n\
-	.word	gBattleTypeFlags\n\
-._315:\n\
-	mov	r0, #0x1\n\
-._316:\n\
-	bl	GetBankByIdentity\n\
-	ldr	r1, ._320       @ gBankTarget\n\
-	strb	r0, [r1]\n\
-._311:\n\
-	mov	r0, #0x0\n\
-	bl	sub_80326EC\n\
-	add	r0, sp, #0x8\n\
-	ldrh	r0, [r0]\n\
-	bl	DoMoveAnim\n\
-	ldr	r1, ._320 + 4   @ gBattleBankFunc\n\
-	ldr	r0, ._320 + 8   @ gActiveBank\n\
-	ldrb	r0, [r0]\n\
-	b	._332\n\
-._321:\n\
-	.align	2, 0\n\
-._320:\n\
-	.word	gBankTarget\n\
-	.word	gBattleBankFunc\n\
-	.word	gActiveBank\n\
-._291:\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	bl	dp11b_obj_free\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x0\n\
-	bl	dp11b_obj_free\n\
-	ldr	r0, ._325       @ gBankTarget\n\
-	ldrb	r2, [r4]\n\
-	strb	r2, [r0]\n\
-	ldrh	r1, [r5, #0x28]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._323	@cond_branch\n\
-	ldr	r0, ._325 + 4   @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._323	@cond_branch\n\
-	ldr	r0, ._325 + 8   @ gBankAttacker\n\
-	mov	r1, #0x2\n\
-	eor	r1, r1, r2\n\
-	strb	r1, [r0]\n\
-	b	._324\n\
-._326:\n\
-	.align	2, 0\n\
-._325:\n\
-	.word	gBankTarget\n\
-	.word	gBattleTypeFlags\n\
-	.word	gBankAttacker\n\
-._323:\n\
-	ldr	r0, ._330       @ gMain\n\
-	ldrh	r1, [r0, #0x28]\n\
-	mov	r2, #0x1\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._328	@cond_branch\n\
-	ldr	r0, ._330 + 4   @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	add	r0, r2, #0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._328	@cond_branch\n\
-	mov	r0, #0x3\n\
-	b	._329\n\
-._331:\n\
-	.align	2, 0\n\
-._330:\n\
-	.word	gMain\n\
-	.word	gBattleTypeFlags\n\
-._328:\n\
-	mov	r0, #0x1\n\
-._329:\n\
-	bl	GetBankByIdentity\n\
-	ldr	r1, ._333       @ gBankAttacker\n\
-	strb	r0, [r1]\n\
-._324:\n\
-	mov	r0, #0x0\n\
-	bl	sub_80326EC\n\
-	add	r0, sp, #0x8\n\
-	ldrh	r0, [r0]\n\
-	bl	DoMoveAnim\n\
-	ldr	r1, ._333 + 4   @ gBattleBankFunc\n\
-	ldr	r0, ._333 + 8   @ gActiveBank\n\
-	ldrb	r0, [r0]\n\
-	b	._332\n\
-._334:\n\
-	.align	2, 0\n\
-._333:\n\
-	.word	gBankAttacker\n\
-	.word	gBattleBankFunc\n\
-	.word	gActiveBank\n\
-._305:\n\
-	ldrh	r1, [r5, #0x28]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._336	@cond_branch\n\
-	ldr	r0, ._338       @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._336	@cond_branch\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	bl	dp11b_obj_free\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x0\n\
-	bl	dp11b_obj_free\n\
-	mov	r0, #0x3\n\
-	bl	GetBankByIdentity\n\
-	ldr	r1, ._338 + 4   @ gBankAttacker\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x1\n\
-	b	._337\n\
-._339:\n\
-	.align	2, 0\n\
-._338:\n\
-	.word	gBattleTypeFlags\n\
-	.word	gBankAttacker\n\
-._336:\n\
-	add	r0, sp, #0x8\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r0, r1]\n\
-	add	r0, r0, #0x9\n\
-	add	r1, sp, #0x8\n\
-	strh	r0, [r1]\n\
-._296:\n\
-	add	r0, sp, #0x8\n\
-	mov	r2, #0x0\n\
-	ldsh	r0, [r0, r2]\n\
-	add	r0, r0, #0x1\n\
-	lsl	r2, r0, #0x10\n\
-	add	r1, sp, #0x8\n\
-	strh	r0, [r1]\n\
-	mov	r0, #0xb1\n\
-	lsl	r0, r0, #0x11\n\
-	cmp	r2, r0\n\
-	ble	._347	@cond_branch\n\
-	mov	r1, #0x1\n\
-	add	r0, sp, #0x8\n\
-	strh	r1, [r0]\n\
-	b	._347\n\
-._307:\n\
-	ldrh	r1, [r5, #0x28]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._343	@cond_branch\n\
-	ldr	r0, ._345       @ gBattleTypeFlags\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._343	@cond_branch\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	bl	dp11b_obj_free\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x0\n\
-	bl	dp11b_obj_free\n\
-	mov	r0, #0x1\n\
-	bl	GetBankByIdentity\n\
-	ldr	r1, ._345 + 4   @ gBankAttacker\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x3\n\
-._337:\n\
-	bl	GetBankByIdentity\n\
-	ldr	r1, ._345 + 8   @ gBankTarget\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x0\n\
-	bl	sub_80326EC\n\
-	add	r0, sp, #0x8\n\
-	ldrh	r0, [r0]\n\
-	bl	DoMoveAnim\n\
-	ldr	r1, ._345 + 12  @ gBattleBankFunc\n\
-	ldrb	r0, [r4]\n\
-._332:\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r1\n\
-	ldr	r1, ._345 + 16  @ debug_sub_803107C\n\
-	str	r1, [r0]\n\
-	b	._348\n\
-._346:\n\
-	.align	2, 0\n\
-._345:\n\
-	.word	gBattleTypeFlags\n\
-	.word	gBankAttacker\n\
-	.word	gBankTarget\n\
-	.word	gBattleBankFunc\n\
-	.word	debug_sub_803107C+1\n\
-._343:\n\
-	add	r1, sp, #0x8\n\
-	add	r0, r1, #0\n\
-	ldrh	r0, [r0]\n\
-	sub	r0, r0, #0x9\n\
-	strh	r0, [r1]\n\
-._287:\n\
-	add	r1, sp, #0x8\n\
-	add	r0, r1, #0\n\
-	ldrh	r0, [r0]\n\
-	sub	r0, r0, #0x1\n\
-	strh	r0, [r1]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bgt	._347	@cond_branch\n\
-	mov	r2, #0xb1\n\
-	lsl	r2, r2, #0x1\n\
-	add	r0, r2, #0\n\
-	strh	r0, [r1]\n\
-._347:\n\
-	ldr	r1, ._349       @ gBattlePartyID\n\
-	ldr	r4, ._349 + 4   @ gActiveBank\n\
-	ldrb	r0, [r4]\n\
-	lsl	r0, r0, #0x1\n\
-	add	r0, r0, r1\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x64\n\
-	mul	r0, r0, r1\n\
-	ldr	r1, ._349 + 8   @ gPlayerParty\n\
-	add	r0, r0, r1\n\
-	mov	r1, #0xd\n\
-	add	r2, sp, #0x8\n\
-	bl	SetMonData\n\
-	ldr	r2, ._349 + 12  @ gBattleMons\n\
-	ldrb	r1, [r4]\n\
-	mov	r0, #0x58\n\
-	mul	r0, r0, r1\n\
-	add	r0, r0, r2\n\
-	add	r1, sp, #0x8\n\
-	ldrh	r1, [r1]\n\
-	strh	r1, [r0, #0xc]\n\
-	ldr	r5, ._349 + 16  @ gUnknown_03004210\n\
-	ldr	r1, ._349 + 20  @ 0x1016\n\
-	mov	r0, #0x10\n\
-	str	r0, [sp]\n\
-	mov	r0, #0x38\n\
-	str	r0, [sp, #0x4]\n\
-	add	r0, r5, #0\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x37\n\
-	bl	Text_FillWindowRect\n\
-	add	r0, sp, #0x8\n\
-	mov	r2, #0x0\n\
-	ldsh	r1, [r0, r2]\n\
-	mov	r0, #0xd\n\
-	mul	r1, r1, r0\n\
-	ldr	r0, ._349 + 24  @ gMoveNames\n\
-	add	r1, r1, r0\n\
-	mov	r2, #0x80\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r6, #0x37\n\
-	str	r6, [sp]\n\
-	add	r0, r5, #0\n\
-	mov	r3, #0x2\n\
-	bl	Text_InitWindowAndPrintText\n\
-	ldr	r4, ._349 + 28  @ gDisplayedStringBattle\n\
-	add	r0, sp, #0x8\n\
-	mov	r2, #0x0\n\
-	ldsh	r1, [r0, r2]\n\
-	add	r0, r4, #0\n\
-	mov	r2, #0x2\n\
-	mov	r3, #0x3\n\
-	bl	ConvertIntToDecimalStringN\n\
-	mov	r2, #0x88\n\
-	lsl	r2, r2, #0x1\n\
-	str	r6, [sp]\n\
-	add	r0, r5, #0\n\
-	add	r1, r4, #0\n\
-	mov	r3, #0xa\n\
-	bl	Text_InitWindowAndPrintText\n\
-	b	._348\n\
-._350:\n\
-	.align	2, 0\n\
-._349:\n\
-	.word	gBattlePartyID\n\
-	.word	gActiveBank\n\
-	.word	gPlayerParty\n\
-	.word	gBattleMons\n\
-	.word	gUnknown_03004210\n\
-	.word	0x1016\n\
-	.word	gMoveNames\n\
-	.word	gDisplayedStringBattle\n\
-._302:\n\
-	ldr	r0, ._353       @ gMain\n\
-	ldrh	r0, [r0, #0x30]\n\
-	cmp	r0, #0x40\n\
-	bne	._351	@cond_branch\n\
-	ldr	r1, ._353 + 4   @ gAnimMoveTurn\n\
-	ldrb	r0, [r1]\n\
-	sub	r0, r0, #0x1\n\
-	b	._352\n\
-._354:\n\
-	.align	2, 0\n\
-._353:\n\
-	.word	gMain\n\
-	.word	gAnimMoveTurn\n\
-._351:\n\
-	ldr	r1, ._359       @ gAnimMoveTurn\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-._352:\n\
-	strb	r0, [r1]\n\
-	ldr	r4, ._359 + 4   @ gDisplayedStringBattle\n\
-	ldrb	r1, [r1]\n\
-	add	r0, r4, #0\n\
-	mov	r2, #0x2\n\
-	mov	r3, #0x3\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r0, ._359 + 8   @ gUnknown_03004210\n\
-	mov	r2, #0x8e\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r1, #0x39\n\
-	str	r1, [sp]\n\
-	add	r1, r4, #0\n\
-	mov	r3, #0x4\n\
-	bl	Text_InitWindowAndPrintText\n\
-._348:\n\
-	ldr	r0, ._359 + 12  @ gMain\n\
-	ldrh	r2, [r0, #0x28]\n\
-	mov	r1, #0xc0\n\
-	lsl	r1, r1, #0x2\n\
-	add	r0, r1, #0\n\
-	and	r0, r0, r2\n\
-	cmp	r0, r1\n\
-	bne	._355	@cond_branch\n\
-	mov	r4, #0x0\n\
-	ldr	r5, ._359 + 4   @ gDisplayedStringBattle\n\
-	ldr	r6, ._359 + 8   @ gUnknown_03004210\n\
-._361:\n\
-	add	r0, r5, #0\n\
-	ldr	r1, ._359 + 16  @ BattleText_Format\n\
-	bl	StringCopy\n\
-	ldr	r1, ._359 + 20  @ gBattlePartyID\n\
-	ldr	r0, ._359 + 24  @ gActiveBank\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x1\n\
-	add	r0, r0, r1\n\
-	ldrh	r1, [r0]\n\
-	mov	r0, #0x64\n\
-	mul	r0, r0, r1\n\
-	ldr	r1, ._359 + 28  @ gPlayerParty\n\
-	add	r0, r0, r1\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0xd\n\
-	bl	GetMonData\n\
-	mov	r1, #0xd\n\
-	mul	r1, r1, r0\n\
-	ldr	r0, ._359 + 32  @ gMoveNames\n\
-	add	r1, r1, r0\n\
-	add	r0, r5, #0\n\
-	bl	StringAppend\n\
-	lsl	r0, r4, #0x14\n\
-	mov	r1, #0x80\n\
-	lsl	r1, r1, #0x11\n\
-	add	r0, r0, r1\n\
-	lsr	r2, r0, #0x10\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r4\n\
-	mov	r3, #0x2\n\
-	cmp	r0, #0\n\
-	beq	._356	@cond_branch\n\
-	mov	r3, #0xa\n\
-._356:\n\
-	cmp	r4, #0x1\n\
-	bhi	._357	@cond_branch\n\
-	mov	r0, #0x37\n\
-	b	._358\n\
-._360:\n\
-	.align	2, 0\n\
-._359:\n\
-	.word	gAnimMoveTurn\n\
-	.word	gDisplayedStringBattle\n\
-	.word	gUnknown_03004210\n\
-	.word	gMain\n\
-	.word	BattleText_Format\n\
-	.word	gBattlePartyID\n\
-	.word	gActiveBank\n\
-	.word	gPlayerParty\n\
-	.word	gMoveNames\n\
-._357:\n\
-	mov	r0, #0x39\n\
-._358:\n\
-	str	r0, [sp]\n\
-	add	r0, r6, #0\n\
-	add	r1, r5, #0\n\
-	bl	Text_InitWindow\n\
-	ldr	r0, ._362       @ gUnknown_03004210\n\
-	bl	Text_PrintWindow8002F44\n\
-	add	r0, r4, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r4, r0, #0x18\n\
-	cmp	r4, #0x3\n\
-	bls	._361	@cond_branch\n\
-	ldr	r1, ._362 + 4   @ gBattleBankFunc\n\
-	ldr	r0, ._362 + 8   @ gActiveBank\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r1\n\
-	ldr	r1, ._362 + 12  @ sub_802C68C\n\
-	str	r1, [r0]\n\
-._355:\n\
-	add	sp, sp, #0xc\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._363:\n\
-	.align	2, 0\n\
-._362:\n\
-	.word	gUnknown_03004210\n\
-	.word	gBattleBankFunc\n\
-	.word	gActiveBank\n\
-	.word	sub_802C68C+1");
+    s16 move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1);
+
+    switch (gMain.newAndRepeatedKeys)
+    {
+    case START_BUTTON:
+        dp11b_obj_free(gActiveBank, 1);
+        dp11b_obj_free(gActiveBank, 0);
+        gBankAttacker = gActiveBank;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankTarget = gBankAttacker ^ 2;
+        else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankTarget = GetBankByIdentity(3);
+        else
+            gBankTarget = GetBankByIdentity(1);
+        sub_80326EC(0);
+        DoMoveAnim(move);
+        gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        break;
+    case SELECT_BUTTON:
+        dp11b_obj_free(gActiveBank, 1);
+        dp11b_obj_free(gActiveBank, 0);
+        gBankTarget = gActiveBank;
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankAttacker = gBankTarget ^ 2;
+        else if ((gMain.heldKeysRaw & A_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+            gBankAttacker = GetBankByIdentity(3);
+        else
+            gBankAttacker = GetBankByIdentity(1);
+        sub_80326EC(0);
+        DoMoveAnim(move);
+        gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        break;
+    case R_BUTTON:
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            dp11b_obj_free(gActiveBank, 1);
+            dp11b_obj_free(gActiveBank, 0);
+            gBankAttacker = GetBankByIdentity(3);
+            gBankTarget = GetBankByIdentity(1);
+            sub_80326EC(0);
+            DoMoveAnim(move);
+            gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        }
+        else
+        {
+            move += 9;
+    case DPAD_RIGHT:
+            if (++move > 354)
+                move = 1;
+            SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
+            gBattleMons[gActiveBank].moves[0] = move;
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+        }
+        break;
+    case L_BUTTON:
+        if ((gMain.heldKeysRaw & B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            dp11b_obj_free(gActiveBank, 1);
+            dp11b_obj_free(gActiveBank, 0);
+            gBankAttacker = GetBankByIdentity(1);
+            gBankTarget = GetBankByIdentity(3);
+            sub_80326EC(0);
+            DoMoveAnim(move);
+            gBattleBankFunc[gActiveBank] = debug_sub_803107C;
+        }
+        else
+        {
+            move -= 9;
+    case DPAD_LEFT:
+            if (--move <= 0)
+                move = 354;
+            SetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1, &move);
+            gBattleMons[gActiveBank].moves[0] = move;
+            Text_FillWindowRect(&gUnknown_03004210, 0x1016, 1, 0x37, 16, 0x38);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gMoveNames[move], 0x100, 2, 0x37);
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, move, 2, 3);
+            Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 272, 10, 0x37);
+        }
+        break;
+    case DPAD_UP:
+    case DPAD_DOWN:
+        if (gMain.newAndRepeatedKeys == DPAD_UP)
+            gAnimMoveTurn--;
+        else
+            gAnimMoveTurn++;
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, gAnimMoveTurn, 2, 3);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 284, 4, 0x39);
+        break;
+    }
+
+    if ((gMain.heldKeysRaw & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON))
+    {
+        u8 i;
+        u32 move;
+
+        for (i = 0; i < 4; i++)
+        {
+            StringCopy(gDisplayedStringBattle, BattleText_Format);
+            move = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MOVE1 + i);
+            StringAppend(gDisplayedStringBattle, gMoveNames[move]);
+            Text_InitWindow(
+                &gUnknown_03004210,
+                gDisplayedStringBattle,
+                0x100 + i * 16,
+                (i & 1) ? 10 : 2,
+                (i < 2) ? 0x37 : 0x39);
+            Text_PrintWindow8002F44(&gUnknown_03004210);
+        }
+        gBattleBankFunc[gActiveBank] = sub_802C68C;
+    }
 }
 
-__attribute__((naked))
 void debug_sub_803107C(void)
 {
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	mov	r7, #0x0\n\
-	ldr	r0, ._369       @ gAnimScriptCallback\n\
-	ldr	r0, [r0]\n\
-	bl	_call_via_r0\n\
-	ldr	r0, ._369 + 4   @ gAnimScriptActive\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._364	@cond_branch\n\
-	mov	r0, #0x1\n\
-	bl	sub_80326EC\n\
-	ldr	r4, ._369 + 8   @ gActiveBank\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0x7\n\
-	mov	r3, #0x1\n\
-	bl	dp11b_obj_instanciate\n\
-	ldrb	r0, [r4]\n\
-	mov	r1, #0x0\n\
-	mov	r2, #0x7\n\
-	mov	r3, #0x1\n\
-	bl	dp11b_obj_instanciate\n\
-	ldr	r0, ._369 + 12  @ gSprites\n\
-	add	r2, r0, #0\n\
-	add	r2, r2, #0x3e\n\
-	mov	r1, #0x3f\n\
-._366:\n\
-	ldrb	r0, [r2]\n\
-	lsl	r0, r0, #0x1f\n\
-	cmp	r0, #0\n\
-	beq	._365	@cond_branch\n\
-	add	r0, r7, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r7, r0, #0x18\n\
-._365:\n\
-	add	r2, r2, #0x44\n\
-	sub	r1, r1, #0x1\n\
-	cmp	r1, #0\n\
-	bge	._366	@cond_branch\n\
-	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
-	add	r0, r4, #0\n\
-	add	r1, r7, #0\n\
-	mov	r2, #0x2\n\
-	mov	r3, #0x2\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r6, ._369 + 20  @ gUnknown_03004210\n\
-	mov	r2, #0x91\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r5, #0x39\n\
-	str	r5, [sp]\n\
-	add	r0, r6, #0\n\
-	add	r1, r4, #0\n\
-	mov	r3, #0x8\n\
-	bl	Text_InitWindowAndPrintText\n\
-	bl	GetTaskCount\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r7, r0, #0x18\n\
-	add	r0, r4, #0\n\
-	add	r1, r7, #0\n\
-	mov	r2, #0x2\n\
-	mov	r3, #0x2\n\
-	bl	ConvertIntToDecimalStringN\n\
-	mov	r2, #0x93\n\
-	lsl	r2, r2, #0x1\n\
-	str	r5, [sp]\n\
-	add	r0, r6, #0\n\
-	add	r1, r4, #0\n\
-	mov	r3, #0xb\n\
-	bl	Text_InitWindowAndPrintText\n\
-	mov	r1, #0x0\n\
-	mov	r7, #0x0\n\
-	ldr	r0, ._369 + 24  @ gOamMatrixAllocBitmap\n\
-	mov	r3, #0x1\n\
-	ldr	r2, [r0]\n\
-._368:\n\
-	add	r0, r3, #0\n\
-	LSL	r0, r1\n\
-	and	r0, r0, r2\n\
-	cmp	r0, #0\n\
-	beq	._367	@cond_branch\n\
-	add	r0, r7, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r7, r0, #0x18\n\
-._367:\n\
-	add	r1, r1, #0x1\n\
-	cmp	r1, #0x1f\n\
-	ble	._368	@cond_branch\n\
-	ldr	r4, ._369 + 16  @ gDisplayedStringBattle\n\
-	add	r0, r4, #0\n\
-	add	r1, r7, #0\n\
-	mov	r2, #0x2\n\
-	mov	r3, #0x2\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r0, ._369 + 20  @ gUnknown_03004210\n\
-	mov	r2, #0x95\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r1, #0x39\n\
-	str	r1, [sp]\n\
-	add	r1, r4, #0\n\
-	mov	r3, #0xe\n\
-	bl	Text_InitWindowAndPrintText\n\
-	ldr	r1, ._369 + 28  @ gBattleBankFunc\n\
-	ldr	r0, ._369 + 8   @ gActiveBank\n\
-	ldrb	r0, [r0]\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r1\n\
-	ldr	r1, ._369 + 32  @ debug_sub_8030C24\n\
-	str	r1, [r0]\n\
-._364:\n\
-	add	sp, sp, #0x4\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._370:\n\
-	.align	2, 0\n\
-._369:\n\
-	.word	gAnimScriptCallback\n\
-	.word	gAnimScriptActive\n\
-	.word	gActiveBank\n\
-	.word	gSprites\n\
-	.word	gDisplayedStringBattle\n\
-	.word	gUnknown_03004210\n\
-	.word	gOamMatrixAllocBitmap\n\
-	.word	gBattleBankFunc\n\
-	.word	debug_sub_8030C24+1");
+    u8 count = 0;
+
+    gAnimScriptCallback();
+    if (!gAnimScriptActive)
+    {
+        s32 i;
+
+        sub_80326EC(1);
+        dp11b_obj_instanciate(gActiveBank, 1, 7, 1);
+        dp11b_obj_instanciate(gActiveBank, 0, 7, 1);
+
+        for (i = 0, count = 0; i < MAX_SPRITES; i++)
+        {
+            if (gSprites[i].inUse)
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 290, 8, 0x39);
+
+        count = GetTaskCount();
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 294, 11, 0x39);
+
+        for (i = 0, count = 0; i < 32; i++)
+        {
+            if (gOamMatrixAllocBitmap & (1 << i))
+            count++;
+        }
+        ConvertIntToDecimalStringN(gDisplayedStringBattle, count, 2, 2);
+        Text_InitWindowAndPrintText(&gUnknown_03004210, gDisplayedStringBattle, 298, 14, 0x39);
+
+        gBattleBankFunc[gActiveBank] = debug_sub_8030C24;
+    }
 }
+
 #endif
 
 void sub_802D204(void)
@@ -3012,7 +2491,7 @@ void PlayerHandlecmd3(void)
     u8 i;
     u8 *dst;
 
-    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i], 
+    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1], gBattleBufferA[gActiveBank][3 + i],
         gBattleBufferA[gActiveBank][2], i, dst);
     PlayerBufferExecCompleted();
 }

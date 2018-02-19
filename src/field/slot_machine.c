@@ -8,6 +8,7 @@
 #include "sound.h"
 #include "main.h"
 #include "slot_machine.h"
+#include "string_util.h"
 #include "decompress.h"
 #include "trig.h"
 #include "graphics.h"
@@ -16,6 +17,93 @@
 #include "text.h"
 #include "menu.h"
 #include "ewram.h"
+
+enum
+{
+    SLOT_MACHINE_TAG_7_RED,
+    SLOT_MACHINE_TAG_7_BLUE,
+    SLOT_MACHINE_TAG_AZURILL,
+    SLOT_MACHINE_TAG_LOTAD,
+    SLOT_MACHINE_TAG_CHERRY,
+    SLOT_MACHINE_TAG_POWER,
+    SLOT_MACHINE_TAG_REPLAY
+};
+
+enum
+{
+    SLOT_MACHINE_MATCHED_1CHERRY,
+    SLOT_MACHINE_MATCHED_2CHERRY,
+    SLOT_MACHINE_MATCHED_REPLAY,
+    SLOT_MACHINE_MATCHED_LOTAD,
+    SLOT_MACHINE_MATCHED_AZURILL,
+    SLOT_MACHINE_MATCHED_POWER,
+    SLOT_MACHINE_MATCHED_777_MIXED,
+    SLOT_MACHINE_MATCHED_777_RED,
+    SLOT_MACHINE_MATCHED_777_BLUE,
+    SLOT_MACHINE_MATCHED_NONE
+};
+
+struct SlotMachineEwramStruct
+{
+    /*0x00*/ u8 state;
+    /*0x01*/ u8 unk01;
+    /*0x02*/ u8 pikaPower;
+    /*0x03*/ u8 unk03;
+    /*0x04*/ u8 unk04;
+    /*0x05*/ u8 unk05;
+    /*0x06*/ u8 unk06;
+    /*0x07*/ u8 unk07;
+    /*0x08*/ u16 matchedSymbols;
+    /*0x0A*/ u8 unk0A;
+    /*0x0B*/ u8 unk0B;
+    /*0x0C*/ s16 coins;
+    /*0x0E*/ s16 payout;
+    /*0x10*/ s16 unk10;
+    /*0x12*/ s16 bet;
+    /*0x14*/ s16 unk14;
+    /*0x16*/ s16 unk16;
+    /*0x18*/ s16 unk18;
+    /*0x1A*/ s16 unk1A;
+    /*0x1C*/ s16 unk1C[3];
+    /*0x22*/ u16 unk22[3];
+    /*0x28*/ s16 reelPositions[3];
+    /*0x2E*/ s16 unk2E[3];
+    /*0x34*/ s16 unk34[3];
+    /*0x3A*/ u8 reelTasks[3];
+    /*0x3D*/ u8 unk3D;
+    /*0x3E*/ u8 unk3E;
+    /*0x3F*/ u8 unk3F;
+    /*0x40*/ u8 unk40;
+    /*0x41*/ u8 unk41;
+    /*0x42*/ u8 unk42;
+    /*0x43*/ u8 unk43;
+    /*0x44*/ u8 unk44[5];
+    /*0x49*/ u8 unk49[2];
+    /*0x49*/ u8 unk4B[3];
+    /*0x4E*/ u8 unk4E[2];
+    /*0x50*/ u8 unk50[2];
+    /*0x52*/ u8 unk52[2];
+    /*0x54*/ u8 unk54[4];
+    /*0x58*/ u16 win0h;
+    /*0x5a*/ u16 win0v;
+    /*0x5c*/ u16 winIn;
+    /*0x5e*/ u16 winOut;
+    /*0x60*/ u16 backupMapMusic;
+    /*0x64*/ MainCallback prevMainCb;
+#if DEBUG
+             u32 unk68;
+             u32 unk6C;
+             u32 unk70;
+             u32 unk74;
+             u32 unk78;
+             u32 unk7C;
+             u32 unk80;
+             u32 unk84;
+             u32 unk88;
+             u32 unk8C;
+             s32 unk90;
+#endif
+};
 
 struct UnkStruct1
 {
@@ -29,9 +117,6 @@ struct UnkStruct1
 #elif GERMAN
 #define SLOTMACHINE_GFX_TILES 236
 #endif
-
-// TODO: figure out which functions are static and which are not.
-#define static
 
 static void CB2_SlotMachineSetup(void);
 static void CB2_SlotMachineLoop(void);
@@ -79,7 +164,9 @@ static bool8 sub_81023E0(struct Task *task);
 static bool8 sub_81023FC(struct Task *task);
 static bool8 sub_8102424(struct Task *task);
 static bool8 sub_8102460(struct Task *task);
+#if DEBUG
 static bool8 debug_sub_8116E74(struct Task *);
+#endif
 static void sub_8102484(void);
 static void sub_81024F0(void);
 static bool8 sub_8102540(void);
@@ -227,12 +314,21 @@ static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4);
 static void sub_81065DC(void);
 
 #if DEBUG
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_0 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_1 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_2 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_3 = 0;
-__attribute__((section(".bss"))) u8 unk_debug_bss_1_4 = 0;
-__attribute__((section(".bss"))) u32 unk_debug_bss_1_8 = 0;
+static void debug_sub_811B5D0(void);
+static void debug_sub_811B620(void);
+static void debug_sub_811B5B4(s32 *, s32);
+static void debug_sub_811B894(void);
+static u8 debug_sub_811B634(void);
+static void debug_sub_811B654(u8 taskId);
+#endif
+
+#if DEBUG
+static u8 unk_debug_bss_1_0;
+static u8 unk_debug_bss_1_1;
+static u8 unk_debug_bss_1_2;
+static u8 unk_debug_bss_1_3;
+static u8 unk_debug_bss_1_4;
+static u32 unk_debug_bss_1_8;
 #endif
 
 static const struct UnkStruct1 *const gUnknown_083ED048[];
@@ -391,135 +487,6 @@ static void SlotMachineSetup_2_1(void)
 
 static const s16 gUnknown_083ECCF8[][2];
 
-#if DEBUG
-__attribute__((naked))
-static void SlotMachineSetup_0_1(void)
-{
-    asm("\
-    push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, sl\n\
-	mov	r6, r9\n\
-	mov	r5, r8\n\
-	push	{r5, r6, r7}\n\
-	bl	sub_81019EC\n\
-	ldr	r5, ._43        @ \n\
-	mov	r4, #0x0\n\
-	strb	r4, [r5]\n\
-	strb	r4, [r5, #0x2]\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	strb	r1, [r5, #0x3]\n\
-	strb	r4, [r5, #0x4]\n\
-	mov	r0, #0x0\n\
-	strh	r4, [r5, #0x8]\n\
-	strb	r0, [r5, #0xa]\n\
-	strb	r0, [r5, #0xb]\n\
-	ldr	r0, ._43 + 4    @ \n\
-	ldr	r1, ._43 + 8    @ \n\
-	add	r0, r0, r1\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r5, #0xc]\n\
-	strh	r4, [r5, #0xe]\n\
-	strh	r4, [r5, #0x10]\n\
-	strh	r4, [r5, #0x12]\n\
-	strh	r4, [r5, #0x18]\n\
-	mov	r0, #0x8\n\
-	strh	r0, [r5, #0x1a]\n\
-	add	r1, r5, #0\n\
-	add	r1, r1, #0x58\n\
-	mov	r0, #0xf0\n\
-	strh	r0, [r1]\n\
-	add	r1, r1, #0x2\n\
-	mov	r0, #0xa0\n\
-	strh	r0, [r1]\n\
-	add	r0, r5, #0\n\
-	add	r0, r0, #0x5c\n\
-	mov	r1, #0x3f\n\
-	strh	r1, [r0]\n\
-	add	r0, r0, #0x2\n\
-	strh	r1, [r0]\n\
-	bl	GetCurrentMapMusic\n\
-	add	r1, r5, #0\n\
-	add	r1, r1, #0x60\n\
-	strh	r0, [r1]\n\
-	mov	r7, #0x0\n\
-	add	r6, r5, #0\n\
-	ldr	r2, ._43 + 12   @ \n\
-	mov	sl, r2\n\
-	mov	r0, #0x1c\n\
-	add	r0, r0, r6\n\
-	mov	r9, r0\n\
-._41:\n\
-	lsl	r5, r7, #0x1\n\
-	mov	r1, #0x22\n\
-	add	r1, r1, r6\n\
-	mov	r8, r1\n\
-	add	r1, r5, r1\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r1]\n\
-	add	r4, r6, #0\n\
-	add	r4, r4, #0x28\n\
-	add	r4, r5, r4\n\
-	ldrb	r0, [r6, #0x3]\n\
-	lsl	r0, r0, #0x1\n\
-	lsl	r1, r7, #0x2\n\
-	add	r0, r0, r1\n\
-	add r0, r0, sl\n\
-	mov	r2, #0x0\n\
-	ldsh	r0, [r0, r2]\n\
-	mov	r1, #0x15\n\
-	bl	__modsi3\n\
-	strh	r0, [r4]\n\
-	add r5, r5, r9\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r4, r1]\n\
-	lsl	r1, r0, #0x1\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	mov	r2, #0xfc\n\
-	lsl	r2, r2, #0x1\n\
-	add	r0, r2, #0\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r5]\n\
-	mov	r1, #0x0\n\
-	ldsh	r0, [r5, r1]\n\
-	add	r1, r2, #0\n\
-	bl	__modsi3\n\
-	strh	r0, [r5]\n\
-	add	r0, r7, #1\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r7, r0, #0x18\n\
-	cmp	r7, #0x2\n\
-	bls	._41	@cond_branch\n\
-	bl	debug_sub_811B5D0\n\
-	ldr	r0, ._43 + 16   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._42	@cond_branch\n\
-	mov	r1, r8\n\
-	sub	r1, r1, #0x22\n\
-	mov	r0, #0xfa\n\
-	lsl	r0, r0, #0x2\n\
-	strh	r0, [r1, #0xc]\n\
-._42:\n\
-	pop	{r3, r4, r5}\n\
-	mov	r8, r3\n\
-	mov	r9, r4\n\
-	mov	sl, r5\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._44:\n\
-	.align	2, 0\n\
-._43:\n\
-	.word	+0x2000000\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	gUnknown_083ECCF8\n\
-	.word	unk_debug_bss_1_1");
-}
-#else
 static void SlotMachineSetup_0_1(void)
 {
     u8 i;
@@ -550,8 +517,12 @@ static void SlotMachineSetup_0_1(void)
         eSlotMachine->unk1C[i] = 0x1f8 - eSlotMachine->reelPositions[i] * 24;
         eSlotMachine->unk1C[i] %= 0x1f8;
     }
-}
+#if DEBUG
+    debug_sub_811B5D0();
+    if (unk_debug_bss_1_1 != 0)
+        eSlotMachine->coins = 1000;
 #endif
+}
 
 static void SlotMachineSetup_3_0(void)
 {
@@ -634,7 +605,8 @@ static bool8 (*const gUnknown_083ECAAC[])(struct Task *task) =
 
 static void sub_8101D24(u8 taskId)
 {
-    while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId));
+    while (gUnknown_083ECAAC[eSlotMachine->state](gTasks + taskId))
+        ;
 }
 
 static bool8 sub_8101D5C(struct Task *task)
@@ -648,9 +620,7 @@ static bool8 sub_8101D5C(struct Task *task)
 static bool8 sub_8101D8C(struct Task *task)
 {
     if (!gPaletteFade.active)
-    {
         eSlotMachine->state++;
-    }
     return FALSE;
 }
 
@@ -676,264 +646,52 @@ static bool8 sub_8101DB0(struct Task *task)
 static bool8 sub_8101DF4(struct Task *task)
 {
     if (sub_8104E18())
-    {
         eSlotMachine->state = 4;
-    }
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101E10(struct Task *task)
-{
-    asm("\
-    push	{lr}\n\
-	mov	r0, #0x0\n\
-	bl	sub_8104CAC\n\
-	ldr	r2, ._70        @ \n\
-	mov	r0, #0x5\n\
-	strb	r0, [r2]\n\
-	ldr	r0, ._70 + 4    @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._67	@cond_branch\n\
-	ldr	r0, ._70 + 8    @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._69	@cond_branch\n\
-._67:\n\
-	mov	r0, #0xc\n\
-	ldsh	r1, [r2, r0]\n\
-	ldr	r0, ._70 + 12   @ \n\
-	cmp	r1, r0\n\
-	ble	._69	@cond_branch\n\
-	mov	r0, #0x17\n\
-	strb	r0, [r2]\n\
-._69:\n\
-	mov	r0, #0x1\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._71:\n\
-	.align	2, 0\n\
-._70:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	0x270e");
-}
-#else
 static bool8 sub_8101E10(struct Task *task)
 {
     sub_8104CAC(0);
     eSlotMachine->state = 5;
-    if (eSlotMachine->coins >= 9999)
-    {
+    if (
+#if DEBUG
+      (unk_debug_bss_1_1 == 0 || unk_debug_bss_1_4 == 0) &&
+#endif
+      eSlotMachine->coins >= 9999)
         eSlotMachine->state = 23;
-    }
     return TRUE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101E3C(struct Task *task)
-{
-    asm("\
-	push	{r4, r5, lr}\n\
-	ldr	r0, ._77        @ unk_debug_bss_1_1\n\
-	ldrb	r1, [r0]\n\
-	add	r3, r0, #0\n\
-	ldr	r5, ._77 + 4    @ gMain\n\
-	cmp	r1, #0\n\
-	beq	._76	@cond_branch\n\
-	ldr	r2, ._77 + 8    @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r2]\n\
-	cmp	r0, #0\n\
-	beq	._76	@cond_branch\n\
-	ldr	r4, ._77 + 12   @ \n\
-	mov	r1, #0xc\n\
-	ldsh	r0, [r4, r1]\n\
-	cmp	r0, #0x3\n\
-	ble	._74	@cond_branch\n\
-	ldrh	r1, [r5, #0x2c]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._75	@cond_branch\n\
-._74:\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r2]\n\
-	b	._76\n\
-._78:\n\
-	.align	2, 0\n\
-._77:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	gMain\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	+0x2000000\n\
-._75:\n\
-	mov	r0, #0x0\n\
-	bl	sub_8103D50\n\
-	mov	r0, #0x1\n\
-	bl	sub_8103D50\n\
-	mov	r0, #0x2\n\
-	bl	sub_8103D50\n\
-	ldrh	r0, [r4, #0xc]\n\
-	sub	r0, r0, #0x3\n\
-	strh	r0, [r4, #0xc]\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r4, #0x12]\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r4]\n\
-	b	._102\n\
-._76:\n\
-	ldrb	r0, [r3]\n\
-	cmp	r0, #0\n\
-	beq	._81	@cond_branch\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._81	@cond_branch\n\
-	bl	debug_sub_811B620\n\
-	ldr	r1, ._83        @ \n\
-	mov	r0, #0x1d\n\
-	strb	r0, [r1]\n\
-	b	._102\n\
-._84:\n\
-	.align	2, 0\n\
-._83:\n\
-	.word	+0x2000000\n\
-._81:\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._85	@cond_branch\n\
-	mov	r0, #0x0\n\
-	bl	sub_8104AB8\n\
-	ldr	r1, ._87        @ \n\
-	mov	r0, #0x8\n\
-	strb	r0, [r1]\n\
-	b	._102\n\
-._88:\n\
-	.align	2, 0\n\
-._87:\n\
-	.word	+0x2000000\n\
-._85:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._89	@cond_branch\n\
-	ldr	r2, ._94        @ \n\
-	mov	r3, #0xc\n\
-	ldsh	r0, [r2, r3]\n\
-	sub	r0, r0, #0x3\n\
-	mov	r3, #0x12\n\
-	ldsh	r1, [r2, r3]\n\
-	add	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	blt	._90	@cond_branch\n\
-	ldrh	r4, [r2, #0x12]\n\
-	add	r0, r1, #0\n\
-	cmp	r0, #0x2\n\
-	bgt	._91	@cond_branch\n\
-._92:\n\
-	lsl	r0, r4, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	bl	sub_8103D50\n\
-	lsl	r0, r4, #0x10\n\
-	mov	r2, #0x80\n\
-	lsl	r2, r2, #0x9\n\
-	add	r0, r0, r2\n\
-	lsr	r4, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0x2\n\
-	ble	._92	@cond_branch\n\
-._91:\n\
-	ldr	r1, ._94        @ \n\
-	ldrh	r0, [r1, #0xc]\n\
-	sub	r0, r0, #0x3\n\
-	ldrh	r3, [r1, #0x12]\n\
-	add	r0, r0, r3\n\
-	strh	r0, [r1, #0xc]\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r1, #0x12]\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x5f\n\
-	bl	PlaySE\n\
-	b	._102\n\
-._95:\n\
-	.align	2, 0\n\
-._94:\n\
-	.word	+0x2000000\n\
-._90:\n\
-	mov	r0, #0x6\n\
-	b	._96\n\
-._89:\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._98	@cond_branch\n\
-	ldr	r4, ._103       @ \n\
-	mov	r1, #0xc\n\
-	ldsh	r0, [r4, r1]\n\
-	cmp	r0, #0\n\
-	beq	._98	@cond_branch\n\
-	mov	r0, #0x5f\n\
-	bl	PlaySE\n\
-	ldrb	r0, [r4, #0x12]\n\
-	bl	sub_8103D50\n\
-	ldrh	r0, [r4, #0xc]\n\
-	sub	r0, r0, #0x1\n\
-	strh	r0, [r4, #0xc]\n\
-	ldrh	r0, [r4, #0x12]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r4, #0x12]\n\
-._98:\n\
-	ldr	r0, ._103       @ \n\
-	mov	r2, #0x12\n\
-	ldsh	r1, [r0, r2]\n\
-	add	r2, r0, #0\n\
-	ldr	r5, ._103 + 4   @ \n\
-	cmp	r1, #0x2\n\
-	bgt	._99	@cond_branch\n\
-	cmp	r1, #0\n\
-	beq	._101	@cond_branch\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._101	@cond_branch\n\
-._99:\n\
-	mov	r0, #0x9\n\
-	strb	r0, [r2]\n\
-._101:\n\
-	ldrh	r1, [r5, #0x2e]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._102	@cond_branch\n\
-	mov	r0, #0x15\n\
-._96:\n\
-	strb	r0, [r2]\n\
-._102:\n\
-	mov	r0, #0x0\n\
-	pop	{r4, r5}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._104:\n\
-	.align	2, 0\n\
-._103:\n\
-	.word	+0x2000000\n\
-	.word	gMain");
-}
-#else
 static bool8 sub_8101E3C(struct Task *task)
 {
     s16 i;
+
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+    {
+        if (eSlotMachine->coins <= 3 || (gMain.heldKeys & B_BUTTON))
+        {
+            unk_debug_bss_1_4 = 0;
+        }
+        else
+        {
+            sub_8103D50(0);
+            sub_8103D50(1);
+            sub_8103D50(2);
+            eSlotMachine->coins -= 3;
+            eSlotMachine->bet = 3;
+            eSlotMachine->state = 9;
+            return 0;
+        }
+    }
+    if (unk_debug_bss_1_1 != 0 && (gMain.newKeys & 8))
+    {
+        debug_sub_811B620();
+        eSlotMachine->state = 29;
+        return 0;
+    }
+#endif
 
     if (gMain.newKeys & SELECT_BUTTON)
     {
@@ -945,9 +703,7 @@ static bool8 sub_8101E3C(struct Task *task)
         if (eSlotMachine->coins - (3 - eSlotMachine->bet) >= 0)
         {
             for (i = eSlotMachine->bet; i < 3; i++)
-            {
                 sub_8103D50(i);
-            }
             eSlotMachine->coins -= (3 - eSlotMachine->bet);
             eSlotMachine->bet = 3;
             eSlotMachine->state = 9;
@@ -968,17 +724,12 @@ static bool8 sub_8101E3C(struct Task *task)
             eSlotMachine->bet++;
         }
         if (eSlotMachine->bet >= 3 || (eSlotMachine->bet != 0 && gMain.newKeys & A_BUTTON))
-        {
             eSlotMachine->state = 9;
-        }
         if (gMain.newKeys & B_BUTTON)
-        {
             eSlotMachine->state = 21;
-        }
     }
     return FALSE;
 }
-#endif
 
 static void sub_8101F2C(const u8 *str)
 {
@@ -1006,77 +757,10 @@ static bool8 sub_8101F60(struct Task *task)
 static bool8 sub_8101F88(struct Task *task)
 {
     if (sub_8104AEC())
-    {
         eSlotMachine->state = 5;
-    }
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8101FA4(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	add	r4, r0, #0\n\
-	bl	sub_8102484\n\
-	bl	sub_8104DA4\n\
-	mov	r0, #0x0\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x1\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x2\n\
-	bl	sub_8102DEC\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r4, #0x8]\n\
-	ldr	r4, ._115       @ \n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._113	@cond_branch\n\
-	bl	sub_810430C\n\
-	mov	r0, #0xa\n\
-	b	._114\n\
-._116:\n\
-	.align	2, 0\n\
-._115:\n\
-	.word	+0x2000000\n\
-._113:\n\
-	mov	r0, #0x1\n\
-	bl	sub_8104CAC\n\
-	mov	r0, #0xb\n\
-._114:\n\
-	strb	r0, [r4]\n\
-	ldr	r4, ._119       @ \n\
-	mov	r0, #0x8\n\
-	strh	r0, [r4, #0x1a]\n\
-	ldrb	r0, [r4, #0xa]\n\
-	cmp	r0, #0\n\
-	beq	._117	@cond_branch\n\
-	bl	dp15_jump_random_unknown\n\
-	strh	r0, [r4, #0x1a]\n\
-._117:\n\
-	ldr	r0, ._119 + 4   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._118	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x68\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._118:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._120:\n\
-	.align	2, 0\n\
-._119:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_1");
-}
-#else
 static bool8 sub_8101FA4(struct Task *task)
 {
     sub_8102484();
@@ -1097,12 +781,13 @@ static bool8 sub_8101FA4(struct Task *task)
     }
     eSlotMachine->unk1A = 8;
     if (eSlotMachine->unk0A)
-    {
         eSlotMachine->unk1A = dp15_jump_random_unknown();
-    }
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0)
+        debug_sub_811B5B4(&eSlotMachine->unk68, 1);
+#endif
     return FALSE;
 }
-#endif
 
 static bool8 sub_8102008(struct Task *task)
 {
@@ -1115,134 +800,38 @@ static bool8 sub_8102008(struct Task *task)
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102034(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldrh	r1, [r0, #0x8]\n\
-	add	r1, r1, #0x1\n\
-	strh	r1, [r0, #0x8]\n\
-	lsl	r1, r1, #0x10\n\
-	asr	r1, r1, #0x10\n\
-	cmp	r1, #0x1d\n\
-	ble	._124	@cond_branch\n\
-	ldr	r0, ._127       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._126	@cond_branch\n\
-	ldr	r0, ._127 + 4   @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._126	@cond_branch\n\
-	ldr	r4, ._127 + 8   @ unk_debug_bss_1_8\n\
-	bl	Random\n\
-	mov	r1, #0x1f\n\
-	and	r1, r1, r0\n\
-	add	r1, r1, #0x1\n\
-	str	r1, [r4]\n\
-._126:\n\
-	bl	sub_81024F0\n\
-	ldr	r1, ._127 + 12  @ \n\
-	mov	r0, #0xc\n\
-	strb	r0, [r1]\n\
-._124:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._128:\n\
-	.align	2, 0\n\
-._127:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	unk_debug_bss_1_8\n\
-	.word	+0x2000000");
-}
-#else
 static bool8 sub_8102034(struct Task *task)
 {
     if (++task->data[0] >= 30)
     {
+#if DEBUG
+        if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+            unk_debug_bss_1_8 = (Random() & 0x1F) + 1;
+#endif
         sub_81024F0();
         eSlotMachine->state = 12;
     }
     return FALSE;
 }
+
+static bool8 sub_8102058(struct Task *task)
+{
+#if DEBUG
+    if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_4 != 0)
+    {
+        unk_debug_bss_1_8--;
+        if (unk_debug_bss_1_8 == 0)
+        {
+            PlaySE(0x18);
+            sub_8102E1C(eSlotMachine->unk18);
+            sub_8103C14(eSlotMachine->unk18);
+            unk_debug_bss_1_8 = (Random() & 0x1F) + 1;
+            eSlotMachine->state = 13;
+        }
+        return FALSE;
+    }
 #endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102058(struct Task *task)
-{
-    asm("\
-	push	{r4, r5, lr}\n\
-	ldr	r0, ._133       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._130	@cond_branch\n\
-	ldr	r0, ._133 + 4   @ unk_debug_bss_1_4\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._130	@cond_branch\n\
-	ldr	r5, ._133 + 8   @ unk_debug_bss_1_8\n\
-	ldr	r0, [r5]\n\
-	sub	r0, r0, #0x1\n\
-	str	r0, [r5]\n\
-	cmp	r0, #0\n\
-	bne	._135	@cond_branch\n\
-	mov	r0, #0x18\n\
-	bl	PlaySE\n\
-	ldr	r4, ._133 + 12  @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E1C\n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8103C14\n\
-	bl	Random\n\
-	mov	r1, #0x1f\n\
-	and	r1, r1, r0\n\
-	add	r1, r1, #0x1\n\
-	str	r1, [r5]\n\
-	b	._132\n\
-._134:\n\
-	.align	2, 0\n\
-._133:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_4\n\
-	.word	unk_debug_bss_1_8\n\
-	.word	+0x2000000\n\
-._130:\n\
-	ldr	r0, ._136       @ gMain\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._135	@cond_branch\n\
-	mov	r0, #0x18\n\
-	bl	PlaySE\n\
-	ldr	r4, ._136 + 4   @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E1C\n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8103C14\n\
-._132:\n\
-	mov	r0, #0xd\n\
-	strb	r0, [r4]\n\
-._135:\n\
-	mov	r0, #0x0\n\
-	pop	{r4, r5}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._137:\n\
-	.align	2, 0\n\
-._136:\n\
-	.word	gMain\n\
-	.word	+0x2000000");
-}
-#else
-static bool8 sub_8102058(struct Task *task)
-{
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_JYUNI);
@@ -1252,121 +841,7 @@ static bool8 sub_8102058(struct Task *task)
     }
     return FALSE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-static bool8 sub_8102090(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldr	r4, ._146       @ \n\
-	ldrb	r0, [r4, #0x18]\n\
-	bl	sub_8102E40\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r2, r0, #0x18\n\
-	cmp	r2, #0\n\
-	bne	._138	@cond_branch\n\
-	ldrh	r0, [r4, #0x18]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r4, #0x18]\n\
-	mov	r1, #0xc\n\
-	strb	r1, [r4]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0x2\n\
-	ble	._161	@cond_branch\n\
-	mov	r0, #0xe\n\
-	strb	r0, [r4]\n\
-	ldr	r0, ._146 + 4   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x8\n\
-	beq	._140	@cond_branch\n\
-	cmp	r0, #0x8\n\
-	bgt	._141	@cond_branch\n\
-	cmp	r0, #0x2\n\
-	beq	._142	@cond_branch\n\
-	cmp	r0, #0x2\n\
-	bgt	._143	@cond_branch\n\
-	cmp	r0, #0x1\n\
-	beq	._144	@cond_branch\n\
-	b	._161\n\
-._147:\n\
-	.align	2, 0\n\
-._146:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_0\n\
-._143:\n\
-	cmp	r0, #0x4\n\
-	beq	._148	@cond_branch\n\
-	b	._161\n\
-._141:\n\
-	cmp	r0, #0x40\n\
-	beq	._150	@cond_branch\n\
-	cmp	r0, #0x40\n\
-	bgt	._151	@cond_branch\n\
-	cmp	r0, #0x10\n\
-	beq	._152	@cond_branch\n\
-	b	._161\n\
-._151:\n\
-	cmp	r0, #0x80\n\
-	beq	._154	@cond_branch\n\
-	b	._161\n\
-._142:\n\
-	mov	r0, #0x14\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x12\n\
-	b	._160\n\
-._144:\n\
-	mov	r0, #0x14\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x12\n\
-	b	._160\n\
-._148:\n\
-	mov	r0, #0x3\n\
-	strh	r0, [r4, #0x28]\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x2\n\
-	b	._160\n\
-._140:\n\
-	strh	r2, [r4, #0x28]\n\
-	mov	r0, #0x2\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x3\n\
-	b	._160\n\
-._152:\n\
-	mov	r0, #0x2\n\
-	strh	r0, [r4, #0x28]\n\
-	mov	r0, #0x5\n\
-	strh	r0, [r4, #0x2a]\n\
-	mov	r0, #0x14\n\
-	b	._160\n\
-._150:\n\
-	mov	r0, #0x13\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-	strh	r2, [r4, #0x2c]\n\
-	b	._161\n\
-._154:\n\
-	mov	r0, #0x13\n\
-	strh	r0, [r4, #0x28]\n\
-	strh	r0, [r4, #0x2a]\n\
-._160:\n\
-	strh	r0, [r4, #0x2c]\n\
-._161:\n\
-	mov	r0, #0x1\n\
-	b	._162\n\
-._138:\n\
-	mov	r0, #0x0\n\
-._162:\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1");
-}
-#else
 static bool8 sub_8102090(struct Task *task)
 {
     if (!sub_8102E40(eSlotMachine->unk18))
@@ -1376,173 +851,52 @@ static bool8 sub_8102090(struct Task *task)
         if (eSlotMachine->unk18 > 2)
         {
             eSlotMachine->state = 14;
+#if DEBUG
+            switch (unk_debug_bss_1_0)
+            {
+            case 2:
+                eSlotMachine->reelPositions[0] = 20;
+                eSlotMachine->reelPositions[1] = 20;
+                eSlotMachine->reelPositions[2] = 18;
+                break;
+            case 1:
+                eSlotMachine->reelPositions[0] = 20;
+                eSlotMachine->reelPositions[1] = 20;
+                eSlotMachine->reelPositions[2] = 18;
+                break;
+            case 4:
+                eSlotMachine->reelPositions[0] = 3;
+                eSlotMachine->reelPositions[1] = 1;
+                eSlotMachine->reelPositions[2] = 2;
+                break;
+            case 8:
+                eSlotMachine->reelPositions[0] = 0;
+                eSlotMachine->reelPositions[1] = 2;
+                eSlotMachine->reelPositions[2] = 3;
+                break;
+            case 0x10:
+                eSlotMachine->reelPositions[0] = 2;
+                eSlotMachine->reelPositions[1] = 5;
+                eSlotMachine->reelPositions[2] = 20;
+                break;
+            case 0x40:
+                eSlotMachine->reelPositions[0] = 19;
+                eSlotMachine->reelPositions[1] = 19;
+                eSlotMachine->reelPositions[2] = 0;
+                break;
+            case 0x80:
+                eSlotMachine->reelPositions[0] = 19;
+                eSlotMachine->reelPositions[1] = 19;
+                eSlotMachine->reelPositions[2] = 19;
+                break;
+            }
+#endif
         }
         return TRUE;
     }
     return FALSE;
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-bool8 sub_81020C8(struct Task *task)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldr	r4, ._165       @ \n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0xc0\n\
-	and	r0, r0, r1\n\
-	strb	r0, [r4, #0x4]\n\
-	bl	CheckMatch\n\
-	ldrb	r0, [r4, #0xa]\n\
-	cmp	r0, #0\n\
-	beq	._163	@cond_branch\n\
-	sub	r0, r0, #0x1\n\
-	strb	r0, [r4, #0xa]\n\
-	ldrb	r0, [r4, #0xb]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r4, #0xb]\n\
-	b	._164\n\
-._166:\n\
-	.align	2, 0\n\
-._165:\n\
-	.word	+0x2000000\n\
-._163:\n\
-	bl	debug_sub_811B894\n\
-._164:\n\
-	ldr	r4, ._171       @ \n\
-	ldrh	r0, [r4, #0x8]\n\
-	cmp	r0, #0\n\
-	beq	._167	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x6c\n\
-	mov	r2, #0xe\n\
-	ldsh	r1, [r4, r2]\n\
-	bl	debug_sub_811B5B4\n\
-	mov	r0, #0xf\n\
-	strb	r0, [r4]\n\
-	bl	sub_8102A24\n\
-	bl	sub_8103F70\n\
-	ldrh	r0, [r4, #0x10]\n\
-	ldrh	r1, [r4, #0xe]\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r4, #0x10]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._168	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r4, #0x10]\n\
-._168:\n\
-	ldrh	r1, [r4, #0x8]\n\
-	mov	r0, #0xc0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._169	@cond_branch\n\
-	ldr	r0, ._171 + 4   @ \n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x6\n\
-	bl	sub_8104CAC\n\
-	b	._174\n\
-._172:\n\
-	.align	2, 0\n\
-._171:\n\
-	.word	+0x2000000\n\
-	.word	0x185\n\
-._169:\n\
-	mov	r0, #0x40\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._173	@cond_branch\n\
-	ldr	r0, ._175       @ 0x185\n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x5\n\
-	bl	sub_8104CAC\n\
-	b	._174\n\
-._176:\n\
-	.align	2, 0\n\
-._175:\n\
-	.word	0x185\n\
-._173:\n\
-	mov	r0, #0xc3\n\
-	lsl	r0, r0, #0x1\n\
-	bl	PlayFanfare\n\
-	mov	r0, #0x2\n\
-	bl	sub_8104CAC\n\
-._174:\n\
-	ldr	r1, ._183       @ \n\
-	ldrh	r3, [r1, #0x8]\n\
-	mov	r0, #0xe0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	add	r2, r1, #0\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	ldrb	r1, [r2, #0x4]\n\
-	mov	r0, #0x3f\n\
-	and	r0, r0, r1\n\
-	mov	r1, #0x0\n\
-	strb	r0, [r2, #0x4]\n\
-	mov	r0, #0xc0\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	strb	r1, [r2, #0xa]\n\
-	strb	r1, [r2, #0xb]\n\
-	strb	r1, [r2, #0x3]\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r3\n\
-	cmp	r0, #0\n\
-	beq	._179	@cond_branch\n\
-	mov	r0, #0x1\n\
-	strb	r0, [r2, #0x3]\n\
-._179:\n\
-	ldrh	r1, [r2, #0x8]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._185	@cond_branch\n\
-	ldrb	r0, [r2, #0x2]\n\
-	cmp	r0, #0xf\n\
-	bhi	._185	@cond_branch\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r2, #0x2]\n\
-	ldrb	r0, [r2, #0x2]\n\
-	bl	sub_8104064\n\
-	b	._185\n\
-._184:\n\
-	.align	2, 0\n\
-._183:\n\
-	.word	+0x2000000\n\
-._167:\n\
-	mov	r0, #0x3\n\
-	bl	sub_8104CAC\n\
-	mov	r0, #0x14\n\
-	strb	r0, [r4]\n\
-	ldrh	r0, [r4, #0x12]\n\
-	ldrh	r1, [r4, #0x10]\n\
-	add	r0, r0, r1\n\
-	strh	r0, [r4, #0x10]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	ldr	r1, ._186       @ 0x270f\n\
-	cmp	r0, r1\n\
-	ble	._185	@cond_branch\n\
-	strh	r1, [r4, #0x10]\n\
-._185:\n\
-	mov	r0, #0x0\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._187:\n\
-	.align	2, 0\n\
-._186:\n\
-	.word	0x270f");
-}
-#else
 bool8 sub_81020C8(struct Task *task)
 {
     eSlotMachine->unk04 &= 0xc0;
@@ -1552,8 +906,18 @@ bool8 sub_81020C8(struct Task *task)
         eSlotMachine->unk0A--;
         eSlotMachine->unk0B++;
     }
+#if DEBUG
+    else
+    {
+        debug_sub_811B894();
+    }
+#endif
+
     if (eSlotMachine->matchedSymbols)
     {
+#if DEBUG
+        debug_sub_811B5B4(&eSlotMachine->unk6C, eSlotMachine->payout);
+#endif
         eSlotMachine->state = 15;
         sub_8102A24();
         sub_8103F70();
@@ -1585,9 +949,7 @@ bool8 sub_81020C8(struct Task *task)
                 eSlotMachine->unk0B = 0;
                 eSlotMachine->unk03 = 0;
                 if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_BLUE))
-                {
                     eSlotMachine->unk03 = 1;
-                }
             }
         }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER) && eSlotMachine->pikaPower < 16)
@@ -1601,20 +963,15 @@ bool8 sub_81020C8(struct Task *task)
         sub_8104CAC(3);
         eSlotMachine->state = 20;
         if ((eSlotMachine->unk10 += eSlotMachine->bet) > 9999)
-        {
             eSlotMachine->unk10 = 9999;
-        }
     }
     return FALSE;
 }
-#endif
 
 static bool8 sub_81021E0(struct Task *task)
 {
     if (sub_8102A44())
-    {
         eSlotMachine->state = 16;
-    }
     return FALSE;
 }
 
@@ -1624,18 +981,14 @@ static bool8 sub_81021FC(struct Task *task)
     {
         eSlotMachine->state = 19;
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_RED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE)))
-        {
             IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
-        }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             eSlotMachine->unk18 = 0;
             eSlotMachine->state = 9;
         }
         if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_POWER))
-        {
             eSlotMachine->state = 17;
-        }
         if (eSlotMachine->unk0A && eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_REPLAY))
         {
             sub_8104CAC(4);
@@ -1758,56 +1111,18 @@ static bool8 sub_81023FC(struct Task *task)
     return FALSE;
 }
 
+static bool8 sub_8102424(struct Task *task)
+{
 #if DEBUG
-__attribute__((naked))
-static bool8 sub_8102424(struct Task *task)
-{
-    asm("\
-	push	{lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	ldr	r0, ._234       @ unk_debug_bss_1_1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	bne	._233	@cond_branch\n\
-	ldr	r0, ._234 + 4   @ gSaveBlock1\n\
-	ldr	r1, ._234 + 8   @ \n\
-	ldrh	r1, [r1, #0xc]\n\
-	ldr	r2, ._234 + 12  @ \n\
-	add	r0, r0, r2\n\
-	strh	r1, [r0]\n\
-._233:\n\
-	mov	r0, #0x1\n\
-	neg	r0, r0\n\
-	mov	r1, #0x0\n\
-	str	r1, [sp]\n\
-	mov	r2, #0x0\n\
-	mov	r3, #0x10\n\
-	bl	BeginNormalPaletteFade\n\
-	ldr	r1, ._234 + 8   @ \n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r1]\n\
-	mov	r0, #0x0\n\
-	add	sp, sp, #0x4\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._235:\n\
-	.align	2, 0\n\
-._234:\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	gSaveBlock1\n\
-	.word	+0x2000000\n\
-	.word	0x494");
-}
+    if (unk_debug_bss_1_1 == 0)
+        gSaveBlock1.coins = eSlotMachine->coins;
 #else
-static bool8 sub_8102424(struct Task *task)
-{
     gSaveBlock1.coins = eSlotMachine->coins;
+#endif
     BeginNormalPaletteFade(-1, 0, 0, 16, 0);
     eSlotMachine->state++;
     return FALSE;
 }
-#endif
 
 static bool8 sub_8102460(struct Task *task)
 {
@@ -1819,271 +1134,91 @@ static bool8 sub_8102460(struct Task *task)
 }
 
 #if DEBUG
-__attribute__((naked))
+
 static bool8 debug_sub_8116E74(struct Task *task)
 {
-    asm("\
-	push	{lr}\n\
-	bl	debug_sub_811B634\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	beq	._239	@cond_branch\n\
-	ldr	r1, ._240       @ \n\
-	mov	r0, #0x5\n\
-	strb	r0, [r1]\n\
-._239:\n\
-	mov	r0, #0x0\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._241:\n\
-	.align	2, 0\n\
-._240:\n\
-	.word	+0x2000000");
+    if (debug_sub_811B634() != 0)
+        eSlotMachine->state = 5;
+    return FALSE;
 }
+
 #endif
 
-#if DEBUG
-__attribute__((naked))
 static void sub_8102484(void)
 {
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	ldr	r0, ._256       @ \n\
-	ldrb	r2, [r0, #0xa]\n\
-	add	r4, r0, #0\n\
-	cmp	r2, #0\n\
-	beq	._242	@cond_branch\n\
-	b	._270\n\
-._242:\n\
-	ldr	r0, ._256 + 4   @ \n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._245	@cond_branch\n\
-	ldr	r3, ._256 + 8   @ \n\
-	ldrb	r0, [r3]\n\
-	cmp	r0, #0\n\
-	beq	._245	@cond_branch\n\
-	ldr	r0, ._256 + 12  @ \n\
-	ldrb	r1, [r0]\n\
-	strb	r1, [r4, #0x4]\n\
-	strb	r2, [r3]\n\
-	strb	r2, [r0]\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._246	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x88\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._246:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x40\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._247	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x84\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._247:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._248	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x8c\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._248:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x10\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._249	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x80\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._249:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._250	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x7c\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._250:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._251	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x78\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._251:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._252	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x74\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._252:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._253	@cond_branch\n\
-	b	._270\n\
-._253:\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x70\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-	b	._270\n\
-._257:\n\
-	.align	2, 0\n\
-._256:\n\
-	.word	+0x2000000\n\
-	.word	unk_debug_bss_1_1\n\
-	.word	unk_debug_bss_1_2\n\
-	.word	unk_debug_bss_1_3\n\
-._245:\n\
-	add	r5, r4, #0\n\
-	ldrb	r1, [r5, #0x4]\n\
-	mov	r0, #0xc0\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._270	@cond_branch\n\
-	bl	sub_8102540\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	beq	._260	@cond_branch\n\
-	bl	sub_8102578\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r6, r0, #0x18\n\
-	cmp	r6, #0x3\n\
-	beq	._260	@cond_branch\n\
-	ldr	r1, ._271       @ gUnknown_083ECE42\n\
-	lsl	r0, r6, #0x1\n\
-	add	r0, r0, r1\n\
-	ldrb	r1, [r0]\n\
-	ldrb	r0, [r5, #0x4]\n\
-	orr	r0, r0, r1\n\
-	strb	r0, [r5, #0x4]\n\
-	mov	r1, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._261	@cond_branch\n\
-	add	r0, r5, #0\n\
-	add	r0, r0, #0x88\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._261:\n\
-	ldrb	r1, [r5, #0x4]\n\
-	mov	r0, #0x40\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._262	@cond_branch\n\
-	add	r0, r5, #0\n\
-	add	r0, r0, #0x84\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._262:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x20\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._263	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x8c\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._263:\n\
-	cmp	r6, #0x1\n\
-	bne	._270	@cond_branch\n\
-._260:\n\
-	bl	sub_81025BC\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r6, r0, #0x18\n\
-	cmp	r6, #0x5\n\
-	beq	._270	@cond_branch\n\
-	ldr	r4, ._271 + 4   @ \n\
-	ldr	r1, ._271 + 8   @ \n\
-	lsl	r0, r6, #0x1\n\
-	add	r0, r0, r1\n\
-	ldrb	r1, [r0]\n\
-	ldrb	r0, [r4, #0x4]\n\
-	orr	r0, r0, r1\n\
-	strb	r0, [r4, #0x4]\n\
-	mov	r1, #0x10\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._266	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x80\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._266:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._267	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x7c\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._267:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._268	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x78\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._268:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._269	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x74\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._269:\n\
-	ldrb	r1, [r4, #0x4]\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._270	@cond_branch\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x70\n\
-	mov	r1, #0x1\n\
-	bl	debug_sub_811B5B4\n\
-._270:\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._272:\n\
-	.align	2, 0\n\
-._271:\n\
-	.word	gUnknown_083ECE42\n\
-	.word	+0x2000000\n\
-	.word	gUnknown_083ECE48");
+    u8 r3;
+
+    if (eSlotMachine->unk0A == 0)
+    {
+#if DEBUG
+        if (unk_debug_bss_1_1 != 0 && unk_debug_bss_1_2 != 0)
+        {
+            eSlotMachine->unk04 = unk_debug_bss_1_3;
+            unk_debug_bss_1_2 = 0;
+            unk_debug_bss_1_3 = 0;
+            if (eSlotMachine->unk04 & 0x80)
+                debug_sub_811B5B4(&eSlotMachine->unk88, 1);
+            if (eSlotMachine->unk04 & 0x40)
+                debug_sub_811B5B4(&eSlotMachine->unk84, 1);
+            if (eSlotMachine->unk04 & 0x20)
+                debug_sub_811B5B4(&eSlotMachine->unk8C, 1);
+            if (eSlotMachine->unk04 & 0x10)
+                debug_sub_811B5B4(&eSlotMachine->unk80, 1);
+            if (eSlotMachine->unk04 & 8)
+                debug_sub_811B5B4(&eSlotMachine->unk7C, 1);
+            if (eSlotMachine->unk04 & 4)
+                debug_sub_811B5B4(&eSlotMachine->unk78, 1);
+            if (eSlotMachine->unk04 & 1)
+                debug_sub_811B5B4(&eSlotMachine->unk74, 1);
+            if (eSlotMachine->unk04 & 2)
+                debug_sub_811B5B4(&eSlotMachine->unk70, 1);
+            return;
+        }
+#endif
+        if (!(eSlotMachine->unk04 & 0xc0))
+        {
+            if (sub_8102540())
+            {
+                r3 = sub_8102578();
+                if (r3 != 3)
+                {
+                    eSlotMachine->unk04 |= gUnknown_083ECE42[r3];
+#if DEBUG
+                    if (eSlotMachine->unk04 & 0x80)
+                        debug_sub_811B5B4(&eSlotMachine->unk88, 1);
+                    if (eSlotMachine->unk04 & 0x40)
+                        debug_sub_811B5B4(&eSlotMachine->unk84, 1);
+                    if (eSlotMachine->unk04 & 0x20)
+                        debug_sub_811B5B4(&eSlotMachine->unk8C, 1);
+#endif
+                    if (r3 != 1)
+                    {
+                        return;
+                    }
+                }
+            }
+            r3 = sub_81025BC();
+            if (r3 != 5)
+            {
+                eSlotMachine->unk04 |= gUnknown_083ECE48[r3];
+#if DEBUG
+                if (eSlotMachine->unk04 & 0x10)
+                    debug_sub_811B5B4(&eSlotMachine->unk80, 1);
+                if (eSlotMachine->unk04 & 8)
+                    debug_sub_811B5B4(&eSlotMachine->unk7C, 1);
+                if (eSlotMachine->unk04 & 4)
+                    debug_sub_811B5B4(&eSlotMachine->unk78, 1);
+                if (eSlotMachine->unk04 & 1)
+                    debug_sub_811B5B4(&eSlotMachine->unk74, 1);
+                if (eSlotMachine->unk04 & 2)
+                    debug_sub_811B5B4(&eSlotMachine->unk70, 1);
+#endif
+            }
+        }
+    }
 }
-#else
+
+/*
 static void sub_8102484(void)
 {
     u8 r3;
@@ -2109,15 +1244,13 @@ static void sub_8102484(void)
         }
     }
 }
-#endif
+*/
 
 static void sub_81024F0(void)
 {
     eSlotMachine->unk06 = 0;
     if (eSlotMachine->unk04)
-    {
         eSlotMachine->unk06 = 1;
-    }
 }
 
 static u8 sub_810250C(u8 a0)
@@ -2127,9 +1260,7 @@ static u8 sub_810250C(u8 a0)
     for (i = 0; i < 8; i++)
     {
         if (a0 & 1)
-        {
             return gUnknown_083ECE3A[i];
-        }
         a0 >>= 1;
     }
     return 0;
@@ -2139,9 +1270,7 @@ static bool8 sub_8102540(void)
 {
     u8 rval = Random();
     if (gUnknown_083ECD04[eSlotMachine->unk01][eSlotMachine->bet - 1] > rval)
-    {
         return TRUE;
-    }
     return FALSE;
 }
 
@@ -2156,9 +1285,7 @@ static u8 sub_8102578(void)
         s16 rval = Random() & 0xff;
         s16 value = gUnknown_083ECD16[i][eSlotMachine->unk01];
         if (value > rval)
-        {
             break;
-        }
     }
     return i;
 }
@@ -2177,22 +1304,16 @@ static u8 sub_81025BC(void)
         {
             r3 += 10;
             if (r3 > 0x100)
-            {
                 r3 = 0x100;
-            }
         }
         else if (i == 4 && eSlotMachine->unk03 == 1)
         {
             r3 -= 10;
             if (r3 < 0)
-            {
                 r3 = 0;
-            }
         }
         if (r3 > rval)
-        {
             break;
-        }
     }
     return i;
 }
@@ -2203,10 +1324,9 @@ static const u8 gUnknown_083ECDAC[][17];
 static u8 sub_810264C(u8 a0)
 {
     if (eSlotMachine->unk03 == 0)
-    {
         return gUnknown_083ECD46[a0][eSlotMachine->pikaPower];
-    }
-    return gUnknown_083ECDAC[a0][eSlotMachine->pikaPower];
+    else
+        return gUnknown_083ECDAC[a0][eSlotMachine->pikaPower];
 }
 
 static void sub_8102680(void)
@@ -2217,16 +1337,12 @@ static void sub_8102680(void)
     eSlotMachine->unk05 = 0;
     rval = Random();
     if (rval < sub_810264C(0))
-    {
         return;
-    }
     for (i = 5; i > 0; i--)
     {
         rval = Random();
         if (rval < sub_810264C(i))
-        {
             break;
-        }
     }
     eSlotMachine->unk05 = i;
 }
@@ -2237,10 +1353,9 @@ static bool8 sub_81026DC(u16 a0)
 {
     u16 rval = Random() & 0xff;
     if (rval < gUnknown_083ECE12[a0])
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static const u16 gUnknown_083ECE1C[][2];
@@ -2252,33 +1367,21 @@ static u16 dp15_jump_random_unknown(void)
     u8 rval;
     u8 value;
     if (eSlotMachine->unk10 >= 300)
-    {
         r4 = 4;
-    }
     else if (eSlotMachine->unk10 >= 250)
-    {
         r4 = 3;
-    }
     else if (eSlotMachine->unk10 >= 200)
-    {
         r4 = 2;
-    }
     else if (eSlotMachine->unk10 >= 150)
-    {
         r4 = 1;
-    }
     rval = Random() % 100;
     value = gUnknown_083ECE1C[r4][0];
     if (rval < value)
-    {
         return 4;
-    }
     rval = Random() % 100;
     value = gUnknown_083ECE1C[r4][1] + gUnknown_083ECE30[eSlotMachine->unk0B];
     if (rval < value)
-    {
         return 2;
-    }
     return 8;
 }
 
@@ -2287,13 +1390,9 @@ static void CheckMatch(void)
     eSlotMachine->matchedSymbols = 0;
     CheckMatch_CenterRow();
     if (eSlotMachine->bet > 1)
-    {
         CheckMatch_TopAndBottom();
-    }
     if (eSlotMachine->bet > 2)
-    {
         CheckMatch_Diagonals();
-    }
 }
 
 static const u16 sSlotMatchFlags[];
@@ -2326,9 +1425,7 @@ static void CheckMatch_TopAndBottom(void)
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
         if (match == SLOT_MACHINE_MATCHED_1CHERRY)
-        {
             match = SLOT_MACHINE_MATCHED_2CHERRY;
-        }
         eSlotMachine->payout += sSlotPayouts[match];
         eSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
         sub_8103E04(1);
@@ -2340,9 +1437,7 @@ static void CheckMatch_TopAndBottom(void)
     if (match != SLOT_MACHINE_MATCHED_NONE)
     {
         if (match == SLOT_MACHINE_MATCHED_1CHERRY)
-        {
             match = SLOT_MACHINE_MATCHED_2CHERRY;
-        }
         eSlotMachine->payout += sSlotPayouts[match];
         eSlotMachine->matchedSymbols |= sSlotMatchFlags[match];
         sub_8103E04(2);
@@ -2386,21 +1481,13 @@ static const u8 sSym2Match[];
 static u8 GetMatchFromSymbolsInRow(u8 c1, u8 c2, u8 c3)
 {
     if (c1 == c2 && c1 == c3)
-    {
         return sSym2Match[c1];
-    }
     if (c1 == SLOT_MACHINE_TAG_7_RED && c2 == SLOT_MACHINE_TAG_7_RED && c3 == SLOT_MACHINE_TAG_7_BLUE)
-    {
         return SLOT_MACHINE_MATCHED_777_MIXED;
-    }
     if (c1 == SLOT_MACHINE_TAG_7_BLUE && c2 == SLOT_MACHINE_TAG_7_BLUE && c3 == SLOT_MACHINE_TAG_7_RED)
-    {
         return SLOT_MACHINE_MATCHED_777_MIXED;
-    }
     if (c1 == SLOT_MACHINE_TAG_CHERRY)
-    {
         return SLOT_MACHINE_MATCHED_1CHERRY;
-    }
     return SLOT_MACHINE_MATCHED_NONE;
 }
 
@@ -2412,13 +1499,13 @@ static void sub_8102A24(void)
 static bool8 sub_8102A44(void)
 {
     if (FindTaskIdByFunc(sub_8102A64) == 0xff)
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
-static bool8 (*const gUnknown_083ECB20[])(struct Task *task) = {
+static bool8 (*const gUnknown_083ECB20[])(struct Task *task) =
+{
     sub_8102A9C,
     sub_8102AD0,
     sub_8102B80
@@ -2426,7 +1513,8 @@ static bool8 (*const gUnknown_083ECB20[])(struct Task *task) = {
 
 static void sub_8102A64(u8 taskId)
 {
-    while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId));
+    while (gUnknown_083ECB20[gTasks[taskId].data[0]](gTasks + taskId))
+        ;
 }
 
 static bool8 sub_8102A9C(struct Task *task)
@@ -2448,43 +1536,31 @@ static bool8 sub_8102AD0(struct Task *task)
     if (!task->data[1]--)
     {
         if (IsFanfareTaskInactive())
-        {
             PlaySE(SE_PIN);
-        }
         eSlotMachine->payout--;
         if (eSlotMachine->coins < 9999)
-        {
             eSlotMachine->coins++;
-        }
         task->data[1] = 8;
         if (gMain.heldKeys & A_BUTTON)
-        {
             task->data[1] = 4;
-        }
     }
     if (IsFanfareTaskInactive() && gMain.newKeys & START_BUTTON)
     {
         PlaySE(SE_PIN);
         eSlotMachine->coins += eSlotMachine->payout;
         if (eSlotMachine->coins > 9999)
-        {
             eSlotMachine->coins = 9999;
-        }
         eSlotMachine->payout = 0;
     }
     if (eSlotMachine->payout == 0)
-    {
         task->data[0]++;
-    }
     return FALSE;
 }
 
 static bool8 sub_8102B80(struct Task *task)
 {
     if (sub_8103E7C())
-    {
         DestroyTask(FindTaskIdByFunc(sub_8102A64));
-    }
     return FALSE;
 }
 
@@ -2494,9 +1570,7 @@ static u8 GetTagOfReelSymbolOnScreenAtPos(u8 x, s16 y)
 {
     s16 offset = (eSlotMachine->reelPositions[x] + y) % 21;
     if (offset < 0)
-    {
         offset += 21;
-    }
     return sReelSymbols[x][offset];
 }
 
@@ -2586,7 +1660,8 @@ static bool8 sub_8102E40(u8 a0)
     return gTasks[eSlotMachine->reelTasks[a0]].data[14];
 }
 
-static bool8 (*const gUnknown_083ECB2C[])(struct Task *task) = {
+static bool8 (*const gUnknown_083ECB2C[])(struct Task *task) =
+{
     sub_8102EA0,
     sub_8102EA4,
     sub_8102EC0,
@@ -2596,7 +1671,8 @@ static bool8 (*const gUnknown_083ECB2C[])(struct Task *task) = {
 
 static void sub_8102E68(u8 taskId)
 {
-    while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId));
+    while (gUnknown_083ECB2C[gTasks[taskId].data[0]](gTasks + taskId))
+        ;
 }
 
 static bool8 sub_8102EA0(struct Task *task)
@@ -2610,12 +1686,15 @@ static bool8 sub_8102EA4(struct Task *task)
     return FALSE;
 }
 
-static bool8 (*const gUnknown_083ECB40[])(void) = {
+static bool8 (*const gUnknown_083ECB40[])(void) =
+{
     sub_810305C,
     sub_81032C0,
     sub_81033DC
 };
-static void (*const gUnknown_083ECB4C[])(void) = {
+
+static void (*const gUnknown_083ECB4C[])(void) =
+{
     sub_81034F4,
     sub_8103540,
     sub_810380C
@@ -2640,9 +1719,7 @@ static bool8 sub_8102F4C(struct Task *task)
     u16 sp[] = {2, 4, 4, 4, 8};
     s16 r2 = eSlotMachine->unk1C[task->data[15]] % 24;
     if (r2 != 0)
-    {
         r2 = sub_8102CCC(task->data[15], eSlotMachine->unk1A);
-    }
     else if (eSlotMachine->unk2E[task->data[15]])
     {
         eSlotMachine->unk2E[task->data[15]]--;
@@ -2664,9 +1741,7 @@ static bool8 sub_8103008(struct Task *task)
     task->data[1] = -task->data[1];
     task->data[2]++;
     if ((task->data[2] & 0x3) == 0)
-    {
         task->data[1] >>= 1;
-    }
     if (task->data[1] == 0)
     {
         task->data[0] = 0;
@@ -2676,7 +1751,8 @@ static bool8 sub_8103008(struct Task *task)
     return FALSE;
 }
 
-static bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1) = {
+static bool8 (*const gUnknown_083ECB64[])(u8 a0, u8 a1) =
+{
     sub_8103154,
     sub_81031B4,
     sub_81031B4
@@ -2708,19 +1784,17 @@ static bool8 sub_81030A4(s16 y, u8 tag1, u8 tag2)
 static bool8 sub_81030E0(s16 y)
 {
     if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 1 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 2 - y) == 4 || GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(0, 3 - y) == 4)
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool8 sub_8103134(void)
 {
     if (eSlotMachine->unk04 & 0xc2)
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool8 sub_8103154(u8 a0, u8 a1)
@@ -2783,7 +1857,8 @@ static bool8 sub_81031B4(u8 tag1, u8 tag2)
     return FALSE;
 }
 
-static bool8 (*const gUnknown_083ECB70[])(void) = {
+static bool8 (*const gUnknown_083ECB70[])(void) =
+{
     sub_81032E8,
     sub_81032E8,
     sub_810333C
@@ -2845,7 +1920,8 @@ static bool8 sub_810333C(void)
     return FALSE;
 }
 
-static bool8 (*const gUnknown_083ECB7C[])(u8 a0) = {
+static bool8 (*const gUnknown_083ECB7C[])(u8 a0) =
+{
     sub_810341C,
     sub_810341C,
     sub_810347C
@@ -2887,14 +1963,11 @@ static bool8 sub_810347C(u8 a0)
     s16 i;
     s16 r8;
     if (eSlotMachine->unk34[0] == eSlotMachine->unk34[1])
-    {
         return sub_810341C(a0);
-    }
-    r8 = 1;
     if (eSlotMachine->unk34[0] == 1)
-    {
         r8 = 3;
-    }
+    else
+        r8 = 1;
     for (i = 0; i < 5; i++)
     {
         if (GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, r8 - i) == a0)
@@ -2909,8 +1982,10 @@ static bool8 sub_810347C(u8 a0)
 
 static void sub_81034F4(void)
 {
-    s16 i;
-    for (i = 0; sub_81030E0(i); i++);
+    s16 i = 0;
+
+    while (sub_81030E0(i) != 0)
+        i++;
     eSlotMachine->unk2E[0] = i;
 }
 
@@ -2929,7 +2004,8 @@ static bool8 sub_8103520(u8 *a0)
     return FALSE;
 }
 
-static void (*const gUnknown_083ECB88[])(void) = {
+static void (*const gUnknown_083ECB88[])(void) =
+{
     sub_8103564,
     j5_08111E84,
     sub_8103668
@@ -3050,19 +2126,17 @@ static void sub_8103668(void)
 static bool8 sub_8103764(u8 a0, u8 a1)
 {
     if ((a0 == 0 && a1 == 1) || (a0 == 1 && a1 == 0))
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool8 sub_810378C(u8 a0, u8 a1, u8 a2)
 {
     if ((a0 == 0 && a1 == 1 && a2 == 0) || (a0 == 1 && a1 == 0 && a2 == 1))
-    {
         return TRUE;
-    }
-    return FALSE;
+    else
+        return FALSE;
 }
 
 static bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
@@ -3078,7 +2152,8 @@ static bool8 sub_81037BC(u8 a0, u8 a1, u8 a2)
     return TRUE;
 }
 
-static void (*const gUnknown_083ECB94[])(void) = {
+static void (*const gUnknown_083ECB94[])(void) =
+{
     sub_8103830,
     sub_8103910,
     sub_8103A78
@@ -3100,9 +2175,7 @@ static void sub_8103830(void)
         {
             u8 r0;
             if (!(r5 == (r0 = GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i)) || (r5 == 0 && r0 == 1) || (r5 == 1 && r0 == 0)))
-            {
                 break;
-            }
             i++;
         }
     }
@@ -3123,9 +2196,7 @@ static void sub_8103830(void)
         while (1)
         {
             if (r5 != GetTagOfReelSymbolOnScreenAtPos_AdjustForPixelOffset(2, 2 - i))
-            {
                 break;
-            }
             i++;
         }
     }
@@ -3172,9 +2243,7 @@ static void sub_8103910(void)
             }
         }
         if (r8 == 0)
-        {
             break;
-        }
         sp0++;
     }
     eSlotMachine->unk2E[2] = sp0;
@@ -3236,7 +2305,8 @@ static void sub_8103C14(u8 a0)
     sub_8103C48(taskId);
 }
 
-static void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) = {
+static void (*const gUnknown_083ECBA0[])(struct Task *task, u8 taskId) =
+{
     sub_8103C78,
     sub_8103CAC,
     sub_8103CC8
@@ -3288,18 +2358,14 @@ static void sub_8103D50(u8 a0)
 {
     u8 i;
     for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
-    {
         sub_8103D00(gUnknown_083EDD35[a0][i]);
-    }
 }
 
 static void sub_8103D8C(u8 a0)
 {
     u8 i;
     for (i = 0; i < gUnknown_083EDD3B[a0]; i++)
-    {
         sub_8103D28(gUnknown_083EDD35[a0][i]);
-    }
 }
 
 static void sub_8103DC8(void)
@@ -3329,7 +2395,7 @@ static bool8 sub_8103E38(void)
     u8 i;
     for (i = 0; i < 5; i++)
     {
-        struct Sprite *sprite = gSprites + eSlotMachine->unk44[i];
+        struct Sprite *sprite = &gSprites[eSlotMachine->unk44[i]];
         if (sprite->data[1] && sprite->data[2])
             return FALSE;
     }
@@ -3416,9 +2482,7 @@ static void sub_8103FE8(u8 taskId)
         task->data[1] = 4;
         task->data[2] += task->data[3];
         if (task->data[2] == 0 || task->data[2] == 2)
-        {
             task->data[3] = -task->data[3];
-        }
     }
     LoadPalette(gUnknown_083EDDA0[task->data[2]], 0x10, 0x20);
 }
@@ -3450,7 +2514,8 @@ static bool8 sub_81040C8(void)
     return gTasks[eSlotMachine->unk3E].data[15];
 }
 
-static void (*const gUnknown_083ECBB4[])(struct Task *task) = {
+static void (*const gUnknown_083ECBB4[])(struct Task *task) =
+{
     nullsub_68,
     sub_810411C,
     sub_8104144,
@@ -3464,7 +2529,6 @@ static void sub_81040E8(u8 taskId)
 
 static void nullsub_68(struct Task *task)
 {
-
 }
 
 static void sub_810411C(struct Task *task)
@@ -3473,10 +2537,11 @@ static void sub_810411C(struct Task *task)
     task->data[0]++;
 }
 
-static const u16 gUnknown_083ECBC4[][2] = {
+static const u16 gUnknown_083ECBC4[][2] =
+{
     {0x9e, 0x6e},
     {0x9f, 0x6f},
-    {0xaf, 0x7f}
+    {0xaf, 0x7f},
 };
 
 static void sub_8104144(struct Task *task)
@@ -3568,7 +2633,8 @@ static bool8 sub_810432C(void)
     return FALSE;
 }
 
-static void (*const gUnknown_083ECBD0[])(struct Task *task) = {
+static void (*const gUnknown_083ECBD0[])(struct Task *task) =
+{
     sub_810437C,
     sub_81043EC,
     sub_8104468,
@@ -3705,9 +2771,7 @@ static void sub_81045CC(struct Task *task)
         if (eSlotMachine->unk05)
         {
             if (eSlotMachine->unk0A <= task->data[6])
-            {
                 task->data[0]++;
-            }
         }
         else if (task->data[6] > 3)
         {
@@ -3774,9 +2838,7 @@ static void sub_81046C0(struct Task *task)
 static void sub_8104764(struct Task *task)
 {
     if ((task->data[4] == 0 || --task->data[4] == 0) && !sub_81040C8())
-    {
         task->data[0]++;
-    }
 }
 
 static void sub_8104794(struct Task *task)
@@ -3788,13 +2850,9 @@ static void sub_8104794(struct Task *task)
     r4 = ((task->data[1] - 8) & 0xff) >> 3;
     REG_BG1HOFS = task->data[1] & 0x1ff;
     if (task->data[3] >> 3 <= 25)
-    {
         sub_8104A88(r4);
-    }
     else
-    {
         task->data[0]++;
-    }
 }
 
 static void sub_81047EC(struct Task *task)
@@ -3825,21 +2883,15 @@ static void sub_81047EC(struct Task *task)
 static void sub_8104860(struct Task *task)
 {
     if (eSlotMachine->unk1A == task->data[1])
-    {
         task->data[0]++;
-    }
     else if (eSlotMachine->unk1C[0] % 24 == 0 && (++task->data[2]& 0x07) == 0)
-    {
         eSlotMachine->unk1A >>= 1;
-    }
 }
 
 static void sub_81048A8(struct Task *task)
 {
     if (sub_8104E18())
-    {
         DestroyTask(FindTaskIdByFunc(sub_810434C));
-    }
 }
 
 static void sub_81048CC(struct Task *task)
@@ -3935,10 +2987,12 @@ static bool8 sub_8104AEC(void)
 {
     if (FindTaskIdByFunc(sub_8104B0C) == 0xFF)
         return TRUE;
-    return FALSE;
+    else
+        return FALSE;
 }
 
-static void (*const gUnknown_083ECC30[])(struct Task *task) = {
+static void (*const gUnknown_083ECC30[])(struct Task *task) =
+{
     sub_8104B3C,
     sub_8104B60,
     sub_8104B80,
@@ -3964,9 +3018,7 @@ static void sub_8104B3C(struct Task *task)
 static void sub_8104B60(struct Task *task)
 {
     if (!gPaletteFade.active)
-    {
         task->data[0]++;
-    }
 }
 
 static void sub_8104B80(struct Task *task)
@@ -4013,9 +3065,7 @@ static void sub_8104C5C(void)
     task = gTasks + i;
     task->data[1] = -1;
     for (i = 4; i < 16; i++)
-    {
         task->data[i] = MAX_SPRITES;
-    }
 }
 
 static void LoadSlotMachineWheelOverlay(void);
@@ -4094,8 +3144,9 @@ static bool8 sub_8104E18(void)
     return TRUE;
 }
 
-static void (*const gUnknown_083ECC54[])(struct Task *task) = {
-    nullsub_69
+static void (*const gUnknown_083ECC54[])(struct Task *task) =
+{
+    nullsub_69,
 };
 
 static void sub_8104E74(u8 taskId)
@@ -4105,7 +3156,6 @@ static void sub_8104E74(u8 taskId)
 
 static void nullsub_69(struct Task *task)
 {
-
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED414;
@@ -4141,14 +3191,11 @@ static void sub_8104F8C(void)
 {
     s16 i;
     s16 x;
+
     for (x = 203, i = 1; i < 10000; i *= 10, x -= 7)
-    {
         sub_8104FF4(x, 23, 0, i);
-    }
     for (x = 235, i = 1; i < 10000; i *= 10, x -= 7)
-    {
         sub_8104FF4(x, 23, 1, i);
-    }
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED42C;
@@ -4211,9 +3258,7 @@ static void sub_8105170(struct Sprite *sprite)
     {
         sprite->pos2.y = sprite->pos2.x = 8;
         if ((sprite->animCmdIndex != 0 && sprite->animDelayCounter != 0) || (sprite->animCmdIndex == 0 && sprite->animDelayCounter == 0))
-        {
             sprite->pos2.y = -8;
-        }
     }
 }
 
@@ -4225,14 +3270,14 @@ static const struct SubspriteTable gSubspriteTables_83ED75C[];
 static void sub_81051C0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED474, 0x170, 0x34, 7);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = TRUE;
     SetSubspriteTables(sprite, gSubspriteTables_83ED73C);
     eSlotMachine->unk49[0] = spriteId;
 
     spriteId = CreateSprite(&gSpriteTemplate_83ED48C, 0x170, 0x54, 7);
-    sprite = gSprites + spriteId;
+    sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = TRUE;
     SetSubspriteTables(sprite, gSubspriteTables_83ED75C);
@@ -4245,7 +3290,7 @@ static const struct SubspriteTable gSubspriteTables_83ED78C[];
 static void sub_8105284(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4A4, 0xa8 - gSpriteCoordOffsetX, 0x50, 7);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     sprite->coordOffsetEnabled = TRUE;
     SetSubspriteTables(sprite, gSubspriteTables_83ED78C);
@@ -4261,7 +3306,7 @@ static void sub_81052EC(void)
     for (i = 0, r5 = 0; i < 3; i++, r5 += 20)
     {
         u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4BC, 0x170, 0x00, 10);
-        struct Sprite *sprite = gSprites + spriteId;
+        struct Sprite *sprite = &gSprites[spriteId];
         sprite->oam.priority = 1;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[7] = r5;
@@ -4283,14 +3328,14 @@ static const struct SubspriteTable gSubspriteTables_83ED7B4[];
 static void sub_81053A0(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x170, 0x64, 9);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->coordOffsetEnabled = TRUE;
     sprite->oam.priority = 1;
     SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
     eSlotMachine->unk4E[0] = spriteId;
 
     spriteId = CreateSprite(&gSpriteTemplate_83ED4D4, 0x120, 0x68, 4);
-    sprite = gSprites + spriteId;
+    sprite = &gSprites[spriteId];
     sprite->coordOffsetEnabled = TRUE;
     sprite->oam.priority = 1;
     SetSubspriteTables(sprite, gSubspriteTables_83ED7B4);
@@ -4303,7 +3348,7 @@ static const struct SubspriteTable gSubspriteTables_83ED7D4[];
 static void sub_810545C(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED4EC, 0x170, 0x4c, 11);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->coordOffsetEnabled = TRUE;
     sprite->oam.priority = 1;
     SetSubspriteTables(sprite, gSubspriteTables_83ED7D4);
@@ -4314,29 +3359,24 @@ static void sub_81054B8(void)
 {
     u8 i;
 
-    DestroySprite(gSprites + eSlotMachine->unk40);
+    DestroySprite(&gSprites[eSlotMachine->unk40]);
     for (i = 0; i < 2; i++)
-    {
-        DestroySprite(gSprites + eSlotMachine->unk49[i]);
-    }
+        DestroySprite(&gSprites[eSlotMachine->unk49[i]]);
     for (i = 0; i < 3; i++)
-    {
-        DestroySprite(gSprites + eSlotMachine->unk4B[i]);
-    }
+        DestroySprite(&gSprites[eSlotMachine->unk4B[i]]);
 }
 
 static void sub_8105524(void)
 {
     u8 i;
+
     for (i = 0; i < 2; i++)
-    {
-        DestroySprite(gSprites + eSlotMachine->unk4E[i]);
-    }
+        DestroySprite(&gSprites[eSlotMachine->unk4E[i]]);
 }
 
 static void sub_8105554(void)
 {
-    DestroySprite(gSprites + eSlotMachine->unk42);
+    DestroySprite(&gSprites[eSlotMachine->unk42]);
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED504;
@@ -4344,7 +3384,7 @@ static const struct SpriteTemplate gSpriteTemplate_83ED504;
 static void sub_8105578(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0x98, 0x20, 5);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     sprite->hFlip = TRUE;
     eSlotMachine->unk50[0] = spriteId;
@@ -4354,7 +3394,7 @@ static void sub_8105578(void)
     sprite->data[7] = 0x20;
 
     spriteId = CreateSprite(&gSpriteTemplate_83ED504, 0xb8, 0x20, 5);
-    sprite = gSprites + spriteId;
+    sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     eSlotMachine->unk50[1] = spriteId;
     sprite->data[1] = 1;
@@ -4395,9 +3435,7 @@ static void sub_81056C0(void)
     u8 i;
 
     for (i = 0; i < 2; i++)
-    {
-        DestroySprite(gSprites + eSlotMachine->unk50[i]);
-    }
+        DestroySprite(&gSprites[eSlotMachine->unk50[i]]);
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED51C;
@@ -4442,9 +3480,7 @@ static void sub_8105804(void)
     u8 i;
     MultiplyInvertedPaletteRGBComponents((IndexOfSpritePaletteTag(7) << 4) + 0x103, 0, 0, 0);
     for (i = 0; i < 2; i++)
-    {
-        DestroySprite(gSprites + eSlotMachine->unk52[i]);
-    }
+        DestroySprite(&gSprites[eSlotMachine->unk52[i]]);
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED534;
@@ -4463,7 +3499,7 @@ static void sub_8105894(struct Sprite *sprite)
 
 static void sub_81058A0(void)
 {
-    DestroySprite(gSprites + eSlotMachine->unk41);
+    DestroySprite(&gSprites[eSlotMachine->unk41]);
 }
 
 static const struct SpriteTemplate gSpriteTemplate_83ED54C;
@@ -4475,7 +3511,7 @@ static void sub_81058C4(void)
     for (i = 0; i < 4; i++)
     {
         u8 spriteId = CreateSprite(&gSpriteTemplate_83ED54C, 0x50 - gSpriteCoordOffsetX, 0x44, 0);
-        struct Sprite *sprite = gSprites + spriteId;
+        struct Sprite *sprite = &gSprites[spriteId];
         sprite->oam.priority = 1;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = sp[i];
@@ -4506,7 +3542,7 @@ static void sub_81059B8(void)
     u8 i;
     for (i = 0; i < 4; i++)
     {
-        DestroySprite(gSprites + eSlotMachine->unk54[i]);
+        DestroySprite(&gSprites[eSlotMachine->unk54[i]]);
     }
 }
 
@@ -4515,7 +3551,7 @@ static const struct SpriteTemplate gSpriteTemplate_83ED564;
 static void sub_81059E8(void)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED564, 0xa8, 0x3c, 8);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 1;
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     InitSpriteAffineAnim(sprite);
@@ -4556,7 +3592,7 @@ u8 sub_8105ACC(void)
 
 static void sub_8105AEC(void)
 {
-    struct Sprite *sprite = gSprites + eSlotMachine->unk43;
+    struct Sprite *sprite = &gSprites[eSlotMachine->unk43];
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
@@ -4566,7 +3602,7 @@ static const struct SpriteTemplate gSpriteTemplate_83ED6CC;
 static u8 sub_8105B1C(s16 x, s16 y)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_83ED6CC, x, y, 12);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 2;
     sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     InitSpriteAffineAnim(sprite);
@@ -4581,7 +3617,7 @@ static void sub_8105B70(struct Sprite *sprite)
 
 static void sub_8105B88(u8 spriteId)
 {
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     FreeOamMatrix(sprite->oam.matrixNum);
     DestroySprite(sprite);
 }
@@ -4600,7 +3636,7 @@ static const struct SubspriteTable *const gUnknown_083EDBC4[];
 static u8 sub_8105BF8(u8 templateIdx, SpriteCallback callback, s16 x, s16 y, s16 a4)
 {
     u8 spriteId = CreateSprite(gUnknown_083EDB5C[templateIdx], x, y, 16);
-    struct Sprite *sprite = gSprites + spriteId;
+    struct Sprite *sprite = &gSprites[spriteId];
     sprite->oam.priority = 3;
     sprite->callback = callback;
     sprite->data[6] = a4;
@@ -4657,30 +3693,26 @@ static void sub_8105D3C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->pos1.x += 4;
-            if (sprite->pos1.x >= 0xd0)
-            {
-                sprite->pos1.x = 0xd0;
-                sprite->data[0]++;
-            }
-            break;
-        case 1:
-            if (++sprite->data[1] > 90)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 2:
-            sprite->pos1.x += 4;
-            if (sprite->pos1.x >= 0x110)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 3:
-            sprite->data[7] = 0;
-            break;
+    case 0:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 2:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0x110)
+            sprite->data[0]++;
+        break;
+    case 3:
+        sprite->data[7] = 0;
+        break;
     }
 }
 
@@ -4688,30 +3720,26 @@ static void sub_8105DA4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->pos1.x -= 4;
-            if (sprite->pos1.x <= 0xd0)
-            {
-                sprite->pos1.x = 0xd0;
-                sprite->data[0]++;
-            }
-            break;
-        case 1:
-            if (++sprite->data[1] > 90)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 2:
-            sprite->pos1.x -= 4;
-            if (sprite->pos1.x <= 0x90)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 3:
-            sprite->data[7] = 0;
-            break;
+    case 0:
+        sprite->pos1.x -= 4;
+        if (sprite->pos1.x <= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 2:
+        sprite->pos1.x -= 4;
+        if (sprite->pos1.x <= 0x90)
+            sprite->data[0]++;
+        break;
+    case 3:
+        sprite->data[7] = 0;
+        break;
     }
 }
 
@@ -4719,41 +3747,37 @@ static void sub_8105E08(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            StartSpriteAnim(sprite, eSlotMachine->unk0A - 1);
+    case 0:
+        StartSpriteAnim(sprite, eSlotMachine->unk0A - 1);
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        if (++sprite->data[1] >= 4)
+        {
             sprite->data[0]++;
-            // fallthrough
-        case 1:
-            if (++sprite->data[1] >= 4)
-            {
-                sprite->data[0]++;
-                sprite->data[1] = 0;
-            }
-            break;
-        case 2:
-            sprite->pos1.x += 4;
-            if (sprite->pos1.x >= 0xd0)
-            {
-                sprite->pos1.x = 0xd0;
-                sprite->data[0]++;
-            }
-            break;
-        case 3:
-            if (++sprite->data[1] > 90)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 4:
-            sprite->pos1.x += 4;
-            if (sprite->pos1.x >= 0xf8)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 5:
-            sprite->data[7] = 0;
-            break;
+            sprite->data[1] = 0;
+        }
+        break;
+    case 2:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xd0)
+        {
+            sprite->pos1.x = 0xd0;
+            sprite->data[0]++;
+        }
+        break;
+    case 3:
+        if (++sprite->data[1] > 90)
+            sprite->data[0]++;
+        break;
+    case 4:
+        sprite->pos1.x += 4;
+        if (sprite->pos1.x >= 0xf8)
+            sprite->data[0]++;
+        break;
+    case 5:
+        sprite->data[7] = 0;
+        break;
     }
 }
 
@@ -4761,39 +3785,39 @@ static void sub_8105EB4(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->animPaused = TRUE;
+    case 0:
+        sprite->animPaused = TRUE;
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        sprite->pos1.y += 8;
+        if (sprite->pos1.y >= 0x70)
+        {
+            sprite->pos1.y = 0x70;
+            sprite->data[1] = 16;
             sprite->data[0]++;
-            // fallthrough
-        case 1:
-            sprite->pos1.y += 8;
-            if (sprite->pos1.y >= 0x70)
+        }
+        break;
+    case 2:
+        if (sprite->data[2] == 0)
+        {
+            sprite->pos1.y -= sprite->data[1];
+            sprite->data[1] = -sprite->data[1];
+            if (++sprite->data[3] >= 2)
             {
-                sprite->pos1.y = 0x70;
-                sprite->data[1] = 16;
-                sprite->data[0]++;
-            }
-            break;
-        case 2:
-            if (sprite->data[2] == 0)
-            {
-                sprite->pos1.y -= sprite->data[1];
-                sprite->data[1] = -sprite->data[1];
-                if (++sprite->data[3] >= 2)
+                sprite->data[1] >>= 2;
+                sprite->data[3] = 0;
+                if (sprite->data[1] == 0)
                 {
-                    sprite->data[1] >>= 2;
-                    sprite->data[3] = 0;
-                    if (sprite->data[1] == 0)
-                    {
-                        sprite->data[0]++;
-                        sprite->data[7] = 0;
-                        sprite->animPaused = FALSE;
-                    }
+                    sprite->data[0]++;
+                    sprite->data[7] = 0;
+                    sprite->animPaused = FALSE;
                 }
             }
-            sprite->data[2]++;
-            sprite->data[2] &= 0x07;
-            break;
+        }
+        sprite->data[2]++;
+        sprite->data[2] &= 0x07;
+        break;
     }
 }
 
@@ -4801,21 +3825,19 @@ static void sub_8105F54(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            if (++sprite->data[1] > 8)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 1:
-            sprite->pos1.y += 2;
-            if (sprite->pos1.y >= 0x30)
-            {
-                sprite->pos1.y = 0x30;
-                sprite->data[0]++;
-                sprite->data[7] = 0;
-            }
-            break;
+    case 0:
+        if (++sprite->data[1] > 8)
+            sprite->data[0]++;
+        break;
+    case 1:
+        sprite->pos1.y += 2;
+        if (sprite->pos1.y >= 0x30)
+        {
+            sprite->pos1.y = 0x30;
+            sprite->data[0]++;
+            sprite->data[7] = 0;
+        }
+        break;
     }
 }
 
@@ -4823,35 +3845,33 @@ static void sub_8105F9C(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->invisible = TRUE;
-            if (++sprite->data[1] > 0x20)
-            {
-                sprite->data[0]++;
-                sprite->data[1] = 5;
-                sprite->oam.mosaic = TRUE;
-                sprite->invisible = FALSE;
-                StartSpriteAnim(sprite, 1);
-                REG_MOSAIC = ((sprite->data[1] << 4) | sprite->data[1]) << 8;
-            }
-            break;
-        case 1:
-            sprite->data[1] -= (sprite->data[2] >> 8);
-            if (sprite->data[1] < 0)
-            {
-                sprite->data[1] = 0;
-            }
+    case 0:
+        sprite->invisible = TRUE;
+        if (++sprite->data[1] > 0x20)
+        {
+            sprite->data[0]++;
+            sprite->data[1] = 5;
+            sprite->oam.mosaic = TRUE;
+            sprite->invisible = FALSE;
+            StartSpriteAnim(sprite, 1);
             REG_MOSAIC = ((sprite->data[1] << 4) | sprite->data[1]) << 8;
-            sprite->data[2] &= 0xff;
-            sprite->data[2] += 0x80;
-            if (sprite->data[1] == 0)
-            {
-                sprite->data[0]++;
-                sprite->data[7] = 0;
-                sprite->oam.mosaic = FALSE;
-                StartSpriteAnim(sprite, 0);
-            }
-            break;
+        }
+        break;
+    case 1:
+        sprite->data[1] -= (sprite->data[2] >> 8);
+        if (sprite->data[1] < 0)
+            sprite->data[1] = 0;
+        REG_MOSAIC = ((sprite->data[1] << 4) | sprite->data[1]) << 8;
+        sprite->data[2] &= 0xff;
+        sprite->data[2] += 0x80;
+        if (sprite->data[1] == 0)
+        {
+            sprite->data[0]++;
+            sprite->data[7] = 0;
+            sprite->oam.mosaic = FALSE;
+            StartSpriteAnim(sprite, 0);
+        }
+        break;
     }
 }
 
@@ -4889,40 +3909,30 @@ static void sub_81060FC(struct Sprite *sprite)
 
     switch (sprite->data[0])
     {
-        case 0:
-            sprite->pos2.x = sp00[sprite->data[6]];
-            sprite->pos2.y = sp10[sprite->data[6]];
-            sprite->data[1] = sp20[sprite->data[6]];
+    case 0:
+        sprite->pos2.x = sp00[sprite->data[6]];
+        sprite->pos2.y = sp10[sprite->data[6]];
+        sprite->data[1] = sp20[sprite->data[6]];
+        sprite->data[0]++;
+        // fallthrough
+    case 1:
+        if (sprite->data[1]-- == 0)
             sprite->data[0]++;
-            // fallthrough
-        case 1:
-            if (sprite->data[1]-- == 0)
-            {
-                sprite->data[0]++;
-            }
-            break;
-        case 2:
-            if (sprite->pos2.x > 0)
-            {
-                sprite->pos2.x -= 4;
-            }
-            else if (sprite->pos2.x < 0)
-            {
-                sprite->pos2.x += 4;
-            }
-            if (sprite->pos2.y > 0)
-            {
-                sprite->pos2.y -= 4;
-            }
-            else if (sprite->pos2.y < 0)
-            {
-                sprite->pos2.y += 4;
-            }
-            if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
-            {
-                sprite->data[0]++;
-            }
-            break;
+        break;
+    case 2:
+        if (sprite->pos2.x > 0)
+            sprite->pos2.x -= 4;
+        else if (sprite->pos2.x < 0)
+            sprite->pos2.x += 4;
+
+        if (sprite->pos2.y > 0)
+            sprite->pos2.y -= 4;
+        else if (sprite->pos2.y < 0)
+            sprite->pos2.y += 4;
+
+        if (sprite->pos2.x == 0 && sprite->pos2.y == 0)
+            sprite->data[0]++;
+        break;
     }
 }
 
@@ -4937,10 +3947,8 @@ static void sub_81061C8(struct Sprite *sprite)
     }
     sprite->pos2.x = Cos(sp0[sprite->data[6]], sprite->data[1]);
     sprite->pos2.y = Sin(sp0[sprite->data[6]], sprite->data[1]);
-    if (sprite->data[1])
-    {
+    if (sprite->data[1] != 0)
         sprite->data[1]--;
-    }
 }
 
 static void sub_8106230(struct Sprite *sprite)
@@ -4959,13 +3967,9 @@ static void sub_8106230(struct Sprite *sprite)
             sprite->data[2] = sprite->data[1] + 0xb0;
             sprite->data[3] = 0xf0 - sprite->data[1];
             if (sprite->data[2] > 0xd0)
-            {
                 sprite->data[2] = 0xd0;
-            }
             if (sprite->data[3] < 0xd0)
-            {
                 sprite->data[3] = 0xd0;
-            }
             eSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
             if (sprite->data[1] > 0x33)
             {
@@ -4975,9 +3979,7 @@ static void sub_8106230(struct Sprite *sprite)
             break;
         case 2:
             if (eSlotMachine->bet == 0)
-            {
                 break;
-            }
             sub_8104D30(5, SpriteCallbackDummy, 0xd0, 0x74, 0);
             eSlotMachine->win0h = 0xc0e0;
             eSlotMachine->win0v = 0x6880;
@@ -4990,13 +3992,9 @@ static void sub_8106230(struct Sprite *sprite)
             sprite->data[2] = sprite->data[1] + 0xc0;
             sprite->data[3] = 0xe0 - sprite->data[1];
             if (sprite->data[2] > 0xd0)
-            {
                 sprite->data[2] = 0xd0;
-            }
             if (sprite->data[3] < 0xd0)
-            {
                 sprite->data[3] = 0xd0;
-            }
             eSlotMachine->win0h = (sprite->data[2] << 8) | sprite->data[3];
             if (sprite->data[1] > 0x0f)
             {
@@ -5009,7 +4007,6 @@ static void sub_8106230(struct Sprite *sprite)
 
 static void nullsub_70(void)
 {
-
 }
 
 static void sub_8106364(void)
@@ -5058,14 +4055,13 @@ static void sub_8106404(void)
     {
         u8 j;
         for (j = 0; j < 0x20; j++, dest++)
-        {
             *dest = src[j];
-        }
     }
     LoadSpriteSheet(sheet);
 }
 
-static void sub_8106448(void) {
+static void sub_8106448(void)
+{
     LZDecompressWram(gSlotMachine_Gfx, eSlotMachineGfxBuffer);
 
     DmaCopyLarge16(3, eSlotMachineGfxBuffer, BG_VRAM, SLOTMACHINE_GFX_TILES * 32, 0x1000);
@@ -5074,12 +4070,14 @@ static void sub_8106448(void) {
     LoadPalette(gPalette_83EDE24, 208, 32);
 }
 
-static void sub_81064B8(void) {
+static void sub_81064B8(void)
+{
     CpuCopy16(gUnknown_08E95AB8, BG_SCREEN_ADDR(29), 20 * 32 * 2);
     LoadSlotMachineWheelOverlay();
 }
 
-static void LoadSlotMachineWheelOverlay(void) {
+static void LoadSlotMachineWheelOverlay(void)
+{
     s16 x, y, dx;
     u16 *screen;
 
@@ -5099,13 +4097,12 @@ static void LoadSlotMachineWheelOverlay(void) {
         screen[12 * 32 + x] = 0x28BE;
 
         for (y = 7; y <= 11; y++)
-        {
             screen[y * 32 + x] = 0x20BF;
-        }
     }
 }
 
-static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4) {
+static void sub_81065A8(s16 arg0, u16 arg1, u16 arg2, u16 arg3, u16 arg4)
+{
     u16 *vram = BG_SCREEN_ADDR(29);
 
     vram[15 * 32 + arg0] = arg1;
@@ -5125,1229 +4122,9 @@ static void sub_81065DC(void)
     for (y = 0; y < 20; y++)
     {
         for (x = 0; x < 30; x++)
-        {
             screen[x + y * 32] = 0;
-        }
     }
 }
-
-#if DEBUG
-__attribute__((naked))
-void debug_sub_811B1C4()
-{
-    asm(
-        "	ldr	r1, .__1_\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x2\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__1_ + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x2\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__2_:\n"
-        "	.align	2, 0\n"
-        ".__1_:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B1EC()
-{
-    asm(
-        "	ldr	r2, .__3\n"
-        "	ldrb	r0, [r2]\n"
-        "	mov	r1, #0x1\n"
-        "	orr	r0, r0, r1\n"
-        "	strb	r0, [r2]\n"
-        "	ldr	r2, .__3 + 4\n"
-        "	ldrb	r0, [r2]\n"
-        "	mov	r1, #0x1\n"
-        "	eor	r0, r0, r1\n"
-        "	neg	r0, r0\n"
-        "	lsr	r0, r0, #0x1f\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__4:\n"
-        "	.align	2, 0\n"
-        ".__3:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B210()
-{
-    asm(
-        "	ldr	r1, .__5\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x4\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__5 + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x4\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__6:\n"
-        "	.align	2, 0\n"
-        ".__5:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B238()
-{
-    asm(
-        "	ldr	r1, .__7\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x8\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__7 + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x8\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__8:\n"
-        "	.align	2, 0\n"
-        ".__7:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B260()
-{
-    asm(
-        "	ldr	r1, .__9\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x10\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__9 + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x10\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__10:\n"
-        "	.align	2, 0\n"
-        ".__9:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B288()
-{
-    asm(
-        "	ldr	r1, .__11\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x40\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__11 + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x40\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__12:\n"
-        "	.align	2, 0\n"
-        ".__11:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B2B0()
-{
-    asm(
-        "	ldr	r1, .__13\n"
-        "	ldrb	r0, [r1]\n"
-        "	mov	r3, #0x80\n"
-        "	orr	r0, r0, r3\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r2, .__13 + 4\n"
-        "	ldrb	r1, [r2]\n"
-        "	mov	r0, #0x80\n"
-        "	eor	r1, r1, r0\n"
-        "	neg	r0, r1\n"
-        "	orr	r0, r0, r1\n"
-        "	asr	r0, r0, #0x1f\n"
-        "	and	r0, r0, r3\n"
-        "	strb	r0, [r2]\n"
-        "	bx	lr\n"
-        ".__14:\n"
-        "	.align	2, 0\n"
-        ".__13:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B2D8()
-{
-    asm(
-        "	ldr	r0, .__15\n"
-        "	ldrb	r1, [r0]\n"
-        "	mov	r2, #0x20\n"
-        "	orr	r1, r1, r2\n"
-        "	strb	r1, [r0]\n"
-        "	bx	lr\n"
-        ".__16:\n"
-        "	.align	2, 0\n"
-        ".__15:\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B2E8()
-{
-    asm(
-        "	push	{lr}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r0, .__17\n"
-        "	ldrb	r1, [r0, #0x1]\n"
-        "	add	r1, r1, #0x1\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x1\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x6\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        ".__18:\n"
-        "	.align	2, 0\n"
-        ".__17:\n"
-        "	.word	+0x2000000\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B310()
-{
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	ldr	r0, .__21\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 4\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 8\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x5\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 12\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x7\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 16\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 20\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 24\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0xd\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 28\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 32\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 36\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 40\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 44\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x5\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 48\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x7\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 52\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 56\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 60\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0xd\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 64\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 68\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__21 + 72\n"
-        "	ldrb	r0, [r0, #0x3]\n"
-        "	cmp	r0, #0\n"
-        "	bne	.__19	@cond_branch\n"
-        "	ldr	r0, .__21 + 76\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        "	b	.__20\n"
-        ".__22:\n"
-        "	.align	2, 0\n"
-        ".__21:\n"
-        "	.word	Str_841B1C4\n"
-        "	.word	Str_841B1CB\n"
-        "	.word	Str_841B1D4\n"
-        "	.word	Str_841B1DB\n"
-        "	.word	Str_841B1E2\n"
-        "	.word	Str_841B1E8\n"
-        "	.word	Str_841B1F3\n"
-        "	.word	Str_841B202\n"
-        "	.word	Str_841B24C\n"
-        "	.word	Str_841B211\n"
-        "	.word	Str_841B219\n"
-        "	.word	Str_841B220\n"
-        "	.word	Str_841B227\n"
-        "	.word	Str_841B22E\n"
-        "	.word	Str_841B235\n"
-        "	.word	Str_841B23B\n"
-        "	.word	Str_841B23F\n"
-        "	.word	Str_841B243\n"
-        "	.word	+0x2000000\n"
-        "	.word	Str_841B246\n"
-        ".__19:\n"
-        "	ldr	r0, .__30\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        ".__20:\n"
-        "	ldr	r4, .__30 + 4\n"
-        "	ldr	r1, [r4, #0x68]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, [r4, #0x6c]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x5\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0x10\n"
-        "	ldsh	r1, [r4, r0]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x7\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, [r4, #0x70]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, [r4, #0x74]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x5\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, [r4, #0x78]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x7\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, [r4, #0x7c]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x9\n"
-        "	bl	Menu_PrintText\n"
-        "	add	r0, r4, #0\n"
-        "	add	r0, r0, #0x80\n"
-        "	ldr	r1, [r0]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	add	r0, r4, #0\n"
-        "	add	r0, r0, #0x84\n"
-        "	ldr	r1, [r0]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0xd\n"
-        "	bl	Menu_PrintText\n"
-        "	add	r0, r4, #0\n"
-        "	add	r0, r0, #0x88\n"
-        "	ldr	r1, [r0]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	add	r0, r4, #0\n"
-        "	add	r0, r0, #0x8c\n"
-        "	ldr	r1, [r0]\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, .__30 + 8\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__23	@cond_branch\n"
-        "	mov	r2, #0x0\n"
-        "	cmp	r0, #0x8\n"
-        "	beq	.__24	@cond_branch\n"
-        "	cmp	r0, #0x8\n"
-        "	bgt	.__25	@cond_branch\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	.__26	@cond_branch\n"
-        "	cmp	r0, #0x2\n"
-        "	bgt	.__27	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	.__28	@cond_branch\n"
-        "	b	.__45\n"
-        ".__31:\n"
-        "	.align	2, 0\n"
-        ".__30:\n"
-        "	.word	Str_841B249\n"
-        "	.word	+0x2000000\n"
-        "	.word	unk_debug_bss_1_0\n"
-        ".__27:\n"
-        "	cmp	r0, #0x4\n"
-        "	beq	.__32	@cond_branch\n"
-        "	b	.__45\n"
-        ".__25:\n"
-        "	cmp	r0, #0x40\n"
-        "	beq	.__34	@cond_branch\n"
-        "	cmp	r0, #0x40\n"
-        "	bgt	.__35	@cond_branch\n"
-        "	cmp	r0, #0x10\n"
-        "	beq	.__36	@cond_branch\n"
-        "	b	.__45\n"
-        ".__35:\n"
-        "	cmp	r0, #0x80\n"
-        "	beq	.__38	@cond_branch\n"
-        "	b	.__45\n"
-        ".__26:\n"
-        "	mov	r2, #0x3\n"
-        "	b	.__45\n"
-        ".__28:\n"
-        "	mov	r2, #0x5\n"
-        "	b	.__45\n"
-        ".__32:\n"
-        "	mov	r2, #0x7\n"
-        "	b	.__45\n"
-        ".__24:\n"
-        "	mov	r2, #0x9\n"
-        "	b	.__45\n"
-        ".__36:\n"
-        "	mov	r2, #0xb\n"
-        "	b	.__45\n"
-        ".__34:\n"
-        "	mov	r2, #0xd\n"
-        "	b	.__45\n"
-        ".__38:\n"
-        "	mov	r2, #0xf\n"
-        ".__45:\n"
-        "	ldr	r0, .__46\n"
-        "	mov	r1, #0x17\n"
-        "	bl	Menu_PrintText\n"
-        ".__23:\n"
-        "	bl	debug_sub_811B2E8\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        ".__47:\n"
-        "	.align	2, 0\n"
-        ".__46:\n"
-        "	.word	Str_841B26D\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B5B4()
-{
-    asm(
-        "	push	{lr}\n"
-        "	add	r2, r0, #0\n"
-        "	ldr	r0, [r2]\n"
-        "	add	r0, r0, r1\n"
-        "	str	r0, [r2]\n"
-        "	ldr	r1, .__49\n"
-        "	cmp	r0, r1\n"
-        "	ble	.__48	@cond_branch\n"
-        "	str	r1, [r2]\n"
-        ".__48:\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        ".__50:\n"
-        "	.align	2, 0\n"
-        ".__49:\n"
-        "	.word	0x270f\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B5D0()
-{
-    asm(
-        "	ldr	r0, .__51\n"
-        "	mov	r1, #0x0\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r0, .__51 + 4\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r0, .__51 + 8\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r0, .__51 + 12\n"
-        "	strb	r1, [r0]\n"
-        "	ldr	r2, .__51 + 16\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [r2, #0x68]\n"
-        "	str	r0, [r2, #0x6c]\n"
-        "	str	r0, [r2, #0x70]\n"
-        "	str	r0, [r2, #0x74]\n"
-        "	str	r0, [r2, #0x78]\n"
-        "	str	r0, [r2, #0x7c]\n"
-        "	add	r1, r2, #0\n"
-        "	add	r1, r1, #0x80\n"
-        "	str	r0, [r1]\n"
-        "	add	r1, r1, #0x4\n"
-        "	str	r0, [r1]\n"
-        "	add	r1, r1, #0x4\n"
-        "	str	r0, [r1]\n"
-        "	add	r1, r1, #0x4\n"
-        "	str	r0, [r1]\n"
-        "	add	r1, r1, #0x4\n"
-        "	str	r0, [r1]\n"
-        "	bx	lr\n"
-        ".__52:\n"
-        "	.align	2, 0\n"
-        ".__51:\n"
-        "	.word	unk_debug_bss_1_0\n"
-        "	.word	unk_debug_bss_1_2\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	unk_debug_bss_1_4\n"
-        "	.word	+0x2000000\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B620()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, .__53\n"
-        "	mov	r1, #0x0\n"
-        "	bl	CreateTask\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        ".__54:\n"
-        "	.align	2, 0\n"
-        ".__53:\n"
-        "	.word	debug_sub_811B654+1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B634()
-{
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, .__57\n"
-        "	bl	FindTaskIdByFunc\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0xff\n"
-        "	beq	.__55	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	b	.__56\n"
-        ".__58:\n"
-        "	.align	2, 0\n"
-        ".__57:\n"
-        "	.word	debug_sub_811B654+1\n"
-        ".__55:\n"
-        "	mov	r0, #0x1\n"
-        ".__56:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B654()
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r6, r0, #0x18\n"
-        "	lsl	r0, r6, #0x2\n"
-        "	add	r0, r0, r6\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, .__63\n"
-        "	add	r5, r0, r1\n"
-        "	mov	r0, #0x8\n"
-        "	ldsh	r1, [r5, r0]\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	.__59	@cond_branch\n"
-        "	cmp	r1, #0x1\n"
-        "	bgt	.__60	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	beq	.__61	@cond_branch\n"
-        "	b	.__116\n"
-        ".__64:\n"
-        "	.align	2, 0\n"
-        ".__63:\n"
-        "	.word	gTasks\n"
-        ".__60:\n"
-        "	cmp	r1, #0x2\n"
-        "	bne	.__65	@cond_branch\n"
-        "	b	.__66\n"
-        ".__65:\n"
-        "	cmp	r1, #0x3\n"
-        "	bne	.__67	@cond_branch\n"
-        "	b	.__68\n"
-        ".__67:\n"
-        "	b	.__116\n"
-        ".__61:\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x18\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	bl	debug_sub_811B310\n"
-        "	ldrh	r0, [r5, #0x8]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r5, #0x8]\n"
-        "	b	.__116\n"
-        ".__59:\n"
-        "	ldr	r7, .__76\n"
-        "	ldrh	r2, [r7, #0x2e]\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__71	@cond_branch\n"
-        "	b	.__94\n"
-        ".__71:\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r2\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r3, r0, #0x10\n"
-        "	cmp	r3, #0\n"
-        "	beq	.__73	@cond_branch\n"
-        "	ldr	r1, .__76 + 4\n"
-        "	ldrb	r0, [r1, #0x1]\n"
-        "	sub	r0, r0, #0x1\n"
-        "	strb	r0, [r1, #0x1]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bge	.__79	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	strb	r0, [r1, #0x1]\n"
-        "	b	.__79\n"
-        ".__77:\n"
-        "	.align	2, 0\n"
-        ".__76:\n"
-        "	.word	gMain\n"
-        "	.word	+0x2000000\n"
-        ".__73:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__78	@cond_branch\n"
-        "	ldr	r1, .__81\n"
-        "	ldrb	r0, [r1, #0x1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strb	r0, [r1, #0x1]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x5\n"
-        "	bls	.__79	@cond_branch\n"
-        "	strb	r3, [r1, #0x1]\n"
-        ".__79:\n"
-        "	bl	debug_sub_811B2E8\n"
-        "	b	.__116\n"
-        ".__82:\n"
-        "	.align	2, 0\n"
-        ".__81:\n"
-        "	.word	+0x2000000\n"
-        ".__78:\n"
-        "	and	r1, r1, r2\n"
-        "	lsl	r0, r1, #0x10\n"
-        "	lsr	r4, r0, #0x10\n"
-        "	cmp	r4, #0\n"
-        "	beq	.__83	@cond_branch\n"
-        "	mov	r0, #0x3\n"
-        "	strh	r0, [r5, #0x8]\n"
-        "	bl	Menu_EraseScreen\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x9\n"
-        "	mov	r3, #0x5\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, .__85\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__85 + 4\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x3\n"
-        "	bl	Menu_PrintText\n"
-        "	b	.__116\n"
-        ".__86:\n"
-        "	.align	2, 0\n"
-        ".__85:\n"
-        "	.word	Str_841B25C\n"
-        "	.word	Str_841B264\n"
-        ".__83:\n"
-        "	mov	r0, #0x4\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__87	@cond_branch\n"
-        "	ldr	r0, .__91\n"
-        "	strb	r4, [r0]\n"
-        "	ldr	r0, .__91 + 4\n"
-        "	strb	r4, [r0]\n"
-        "	bl	Menu_EraseScreen\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0xa\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, .__91 + 8\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r3, .__91 + 12\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x3\n"
-        "	mov	r2, #0x8\n"
-        "	bl	Menu_PrintItems\n"
-        "	str	r4, [sp]\n"
-        "	mov	r0, #0x9\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x3\n"
-        "	mov	r3, #0x8\n"
-        "	bl	InitMenu\n"
-        "	ldrh	r0, [r5, #0x8]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r5, #0x8]\n"
-        ".__87:\n"
-        "	ldrh	r1, [r7, #0x2e]\n"
-        "	mov	r0, #0x8\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	.__88	@cond_branch\n"
-        "	b	.__116\n"
-        ".__88:\n"
-        "	ldr	r1, .__91 + 16\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	b	.__94\n"
-        ".__92:\n"
-        "	.align	2, 0\n"
-        ".__91:\n"
-        "	.word	unk_debug_bss_1_2\n"
-        "	.word	unk_debug_bss_1_3\n"
-        "	.word	Str_841B254\n"
-        "	.word	_841B270\n"
-        "	.word	unk_debug_bss_1_4\n"
-        ".__66:\n"
-        "	bl	Menu_ProcessInput\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	asr	r2, r0, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	cmp	r2, r0\n"
-        "	beq	.__116	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "	cmp	r2, r0\n"
-        "	beq	.__94	@cond_branch\n"
-        "	ldr	r1, .__96\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	ldr	r0, .__96 + 4\n"
-        "	lsl	r1, r2, #0x3\n"
-        "	add	r0, r0, #0x4\n"
-        "	add	r1, r1, r0\n"
-        "	ldr	r0, [r1]\n"
-        "	bl	_call_via_r0\n"
-        ".__94:\n"
-        "	bl	Menu_EraseScreen\n"
-        "	add	r0, r6, #0\n"
-        "	bl	DestroyTask\n"
-        "	b	.__116\n"
-        ".__97:\n"
-        "	.align	2, 0\n"
-        ".__96:\n"
-        "	.word	unk_debug_bss_1_2\n"
-        "	.word	_841B270\n"
-        ".__68:\n"
-        "	ldr	r2, .__100\n"
-        "	ldrh	r1, [r2, #0x30]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__98	@cond_branch\n"
-        "	ldr	r2, .__100 + 4\n"
-        "	ldrh	r0, [r2, #0xc]\n"
-        "	add	r0, r0, #0x64\n"
-        "	b	.__99\n"
-        ".__101:\n"
-        "	.align	2, 0\n"
-        ".__100:\n"
-        "	.word	gMain\n"
-        "	.word	+0x2000000\n"
-        ".__98:\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__102	@cond_branch\n"
-        "	ldr	r1, .__104\n"
-        "	ldrh	r0, [r1, #0xc]\n"
-        "	sub	r0, r0, #0x64\n"
-        "	b	.__103\n"
-        ".__105:\n"
-        "	.align	2, 0\n"
-        ".__104:\n"
-        "	.word	+0x2000000\n"
-        ".__102:\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__106	@cond_branch\n"
-        "	ldr	r1, .__109\n"
-        "	ldr	r2, .__109 + 4\n"
-        "	add	r0, r2, #0\n"
-        "	ldrh	r2, [r1, #0xc]\n"
-        "	add	r0, r0, r2\n"
-        ".__103:\n"
-        "	strh	r0, [r1, #0xc]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	cmp	r0, #0\n"
-        "	bgt	.__116	@cond_branch\n"
-        "	ldr	r0, .__109 + 8\n"
-        "	strh	r0, [r1, #0xc]\n"
-        "	b	.__116\n"
-        ".__110:\n"
-        "	.align	2, 0\n"
-        ".__109:\n"
-        "	.word	+0x2000000\n"
-        "	.word	0xfffffc18\n"
-        "	.word	0x270f\n"
-        ".__106:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__111	@cond_branch\n"
-        "	ldr	r2, .__114\n"
-        "	mov	r1, #0xfa\n"
-        "	lsl	r1, r1, #0x2\n"
-        "	add	r0, r1, #0\n"
-        "	ldrh	r1, [r2, #0xc]\n"
-        "	add	r0, r0, r1\n"
-        ".__99:\n"
-        "	strh	r0, [r2, #0xc]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	asr	r0, r0, #0x10\n"
-        "	ldr	r1, .__114 + 4\n"
-        "	cmp	r0, r1\n"
-        "	ble	.__116	@cond_branch\n"
-        "	strh	r1, [r2, #0xc]\n"
-        "	b	.__116\n"
-        ".__115:\n"
-        "	.align	2, 0\n"
-        ".__114:\n"
-        "	.word	+0x2000000\n"
-        "	.word	0x270f\n"
-        ".__111:\n"
-        "	ldrh	r1, [r2, #0x2e]\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__116	@cond_branch\n"
-        "	bl	Menu_EraseScreen\n"
-        "	add	r0, r6, #0\n"
-        "	bl	DestroyTask\n"
-        ".__116:\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
-}
-
-__attribute__((naked))
-void debug_sub_811B894()
-{
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	ldr	r1, .__122\n"
-        "	ldrh	r2, [r1, #0x8]\n"
-        "	mov	r0, #0xc0\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	and	r0, r0, r2\n"
-        "	add	r4, r1, #0\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__117	@cond_branch\n"
-        "	add	r1, r1, #0x90\n"
-        "	ldr	r0, [r1]\n"
-        "	add	r0, r0, #0x1\n"
-        "	str	r0, [r1]\n"
-        "	ldr	r2, .__122 + 4\n"
-        "	cmp	r0, r2\n"
-        "	ble	.__118	@cond_branch\n"
-        "	str	r2, [r1]\n"
-        ".__118:\n"
-        "	add	r0, r4, #0\n"
-        "	add	r0, r0, #0x88\n"
-        "	ldr	r1, [r1]\n"
-        "	ldr	r0, [r0]\n"
-        "	cmp	r1, r0\n"
-        "	beq	.__119	@cond_branch\n"
-        "	ldr	r0, .__122 + 8\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, .__122 + 12\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        ".__119:\n"
-        "	ldrb	r1, [r4, #0x4]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	cmp	r4, #0\n"
-        "	bne	.__126	@cond_branch\n"
-        "	ldr	r0, .__122 + 16\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0x11\n"
-        "	b	.__121\n"
-        ".__123:\n"
-        "	.align	2, 0\n"
-        ".__122:\n"
-        "	.word	+0x2000000\n"
-        "	.word	0x270f\n"
-        "	.word	Str_841B2B0\n"
-        "	.word	unk_debug_bss_1_4\n"
-        "	.word	Str_841B2D3\n"
-        ".__117:\n"
-        "	lsl	r0, r2, #0x10\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__127	@cond_branch\n"
-        "	ldrb	r1, [r4, #0x4]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__126	@cond_branch\n"
-        "	mov	r4, #0x3\n"
-        "	and	r4, r4, r2\n"
-        "	cmp	r4, #0\n"
-        "	bne	.__126	@cond_branch\n"
-        "	ldr	r0, .__163\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0x2\n"
-        ".__121:\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, .__163 + 4\n"
-        "	strb	r4, [r0]\n"
-        ".__126:\n"
-        "	ldr	r0, .__163 + 8\n"
-        "	ldrh	r1, [r0, #0x8]\n"
-        "	add	r4, r0, #0\n"
-        "	cmp	r1, #0\n"
-        "	beq	.__127	@cond_branch\n"
-        "	b	.__162\n"
-        ".__127:\n"
-        "	mov	r1, #0x12\n"
-        "	ldsh	r0, [r4, r1]\n"
-        "	cmp	r0, #0x3\n"
-        "	beq	.__129	@cond_branch\n"
-        "	b	.__162\n"
-        ".__129:\n"
-        "	ldrb	r1, [r4, #0x4]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__131	@cond_branch\n"
-        "	b	.__162\n"
-        ".__131:\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r7, r0, #0x18\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x2\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r6, r0, #0x18\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0x1\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r9, r0\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0x2\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	sl, r0\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x1\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x2\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r8, r0\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetTagOfReelSymbolOnScreenAtPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r7, #0\n"
-        "	bne	.__134	@cond_branch\n"
-        "	mov	r1, r9\n"
-        "	cmp	r1, #0x1\n"
-        "	bne	.__134	@cond_branch\n"
-        "	cmp	r5, #0\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__134:\n"
-        "	ldr	r1, [sp]\n"
-        "	cmp	r1, #0\n"
-        "	bne	.__137	@cond_branch\n"
-        "	cmp	r4, #0x1\n"
-        "	bne	.__137	@cond_branch\n"
-        "	mov	r1, r8\n"
-        "	cmp	r1, #0\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__137:\n"
-        "	cmp	r6, #0\n"
-        "	bne	.__140	@cond_branch\n"
-        "	mov	r1, sl\n"
-        "	cmp	r1, #0x1\n"
-        "	bne	.__140	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__140:\n"
-        "	cmp	r7, #0\n"
-        "	bne	.__143	@cond_branch\n"
-        "	cmp	r4, #0x1\n"
-        "	bne	.__143	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__143:\n"
-        "	cmp	r6, #0\n"
-        "	bne	.__146	@cond_branch\n"
-        "	cmp	r4, #0x1\n"
-        "	bne	.__146	@cond_branch\n"
-        "	cmp	r5, #0\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__146:\n"
-        "	cmp	r7, #0x1\n"
-        "	bne	.__149	@cond_branch\n"
-        "	mov	r1, r9\n"
-        "	cmp	r1, #0\n"
-        "	bne	.__149	@cond_branch\n"
-        "	cmp	r5, #0x1\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__149:\n"
-        "	ldr	r1, [sp]\n"
-        "	cmp	r1, #0x1\n"
-        "	bne	.__152	@cond_branch\n"
-        "	cmp	r4, #0\n"
-        "	bne	.__152	@cond_branch\n"
-        "	mov	r1, r8\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__152:\n"
-        "	cmp	r6, #0x1\n"
-        "	bne	.__155	@cond_branch\n"
-        "	mov	r1, sl\n"
-        "	cmp	r1, #0\n"
-        "	bne	.__155	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__155:\n"
-        "	cmp	r7, #0x1\n"
-        "	bne	.__158	@cond_branch\n"
-        "	cmp	r4, #0\n"
-        "	bne	.__158	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	.__159	@cond_branch\n"
-        ".__158:\n"
-        "	cmp	r6, #0x1\n"
-        "	bne	.__162	@cond_branch\n"
-        "	cmp	r4, #0\n"
-        "	bne	.__162	@cond_branch\n"
-        "	cmp	r5, #0x1\n"
-        "	bne	.__162	@cond_branch\n"
-        ".__159:\n"
-        "	ldr	r0, .__163 + 12\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0x0\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, .__163 + 4\n"
-        "	mov	r0, #0x0\n"
-        "	strb	r0, [r1]\n"
-        ".__162:\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        ".__164:\n"
-        "	.align	2, 0\n"
-        ".__163:\n"
-        "	.word	Str_841B2E4\n"
-        "	.word	unk_debug_bss_1_4\n"
-        "	.word	+0x2000000\n"
-        "	.word	Str_841B2BF\n"
-        "\n"
-    );
-}
-#endif
 
 static const u8 sReelSymbols[][21] =
 {
@@ -6373,7 +4150,8 @@ static const u8 sReelSymbols[][21] =
         SLOT_MACHINE_TAG_POWER,
         SLOT_MACHINE_TAG_LOTAD,
         SLOT_MACHINE_TAG_REPLAY
-    }, {
+    },
+    {
         SLOT_MACHINE_TAG_7_RED,
         SLOT_MACHINE_TAG_CHERRY,
         SLOT_MACHINE_TAG_REPLAY,
@@ -6395,7 +4173,8 @@ static const u8 sReelSymbols[][21] =
         SLOT_MACHINE_TAG_LOTAD,
         SLOT_MACHINE_TAG_REPLAY,
         SLOT_MACHINE_TAG_CHERRY
-    }, {
+    },
+    {
         SLOT_MACHINE_TAG_7_RED,
         SLOT_MACHINE_TAG_POWER,
         SLOT_MACHINE_TAG_7_BLUE,
@@ -6417,7 +4196,7 @@ static const u8 sReelSymbols[][21] =
         SLOT_MACHINE_TAG_REPLAY,
         SLOT_MACHINE_TAG_LOTAD,
         SLOT_MACHINE_TAG_CHERRY
-    }
+    },
 };
 
 static const u8 gUnknown_083ECCF1[] = {
@@ -7782,33 +5561,204 @@ static const u16 sReelTimeWindowTilemap[] = INCBIN_U16("graphics/slot_machine/re
 
 #if DEBUG
 
-const u8 Str_841B1C4[] = _("SETTEI");
-const u8 Str_841B1CB[] = _("MAWASITA");
-const u8 Str_841B1D4[] = _("MODOSI");
-const u8 Str_841B1DB[] = _("NOMARE");
-const u8 Str_841B1E2[] = _("MAE　7");
-const u8 Str_841B1E8[] = _("LR　　HENKOU");
-const u8 Str_841B1F3[] = _("START　　JIDOUSU");
-const u8 Str_841B202[] = _("SELECT　　SETTEI");
-const u8 Str_841B211[] = _("TYUHSEN");
-const u8 Str_841B219[] = _("CHERRY");
-const u8 Str_841B220[] = _("REPLAY");
-const u8 Str_841B227[] = _("HASUBO");
-const u8 Str_841B22E[] = _("RURIRI");
-const u8 Str_841B235[] = _("INAZU");
-const u8 Str_841B23B[] = _("REG");
-const u8 Str_841B23F[] = _("BIG");
-const u8 Str_841B243[] = _("BD");
-const u8 Str_841B246[] = _("R7");
-const u8 Str_841B249[] = _("B7");
-const u8 Str_841B24C[] = _("A　　COIN");
-const u8 Str_841B254[] = _("TYUHSEN");
-const u8 Str_841B25C[] = _("UD　　100");
-const u8 Str_841B264[] = _("LR　　1000");
-const u8 Str_841B26D[] = _("×");
+static void debug_sub_811B1C4(void)
+{
+    unk_debug_bss_1_3 |= 2;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 2) ? 0 : 2;
+}
 
-// Is this MenuAction2? I'm not sure.
-const struct {const u8 *text; void (*func)();} _841B270[] =
+static void debug_sub_811B1EC(void)
+{
+    unk_debug_bss_1_3 |= 1;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 1) ? 0 : 1;
+}
+
+static void debug_sub_811B210(void)
+{
+    unk_debug_bss_1_3 |= 4;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 4) ? 0 : 4;
+}
+
+static void debug_sub_811B238(void)
+{
+    unk_debug_bss_1_3 |= 8;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 8) ? 0 : 8;
+}
+
+static void debug_sub_811B260(void)
+{
+    unk_debug_bss_1_3 |= 0x10;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x10) ? 0 : 0x10;
+}
+
+static void debug_sub_811B288(void)
+{
+    unk_debug_bss_1_3 |= 0x40;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x40) ? 0 : 0x40;
+}
+
+static void debug_sub_811B2B0(void)
+{
+    unk_debug_bss_1_3 |= 0x80;
+    unk_debug_bss_1_0 = (unk_debug_bss_1_0 == 0x80) ? 0 : 0x80;
+}
+
+static void debug_sub_811B2D8(void)
+{
+    unk_debug_bss_1_3 |= 0x20;
+}
+
+static void debug_sub_811B2E8(void)
+{
+    u8 text[2];
+
+    ConvertIntToDecimalStringN(text, eSlotMachine->unk01 + 1, 2, 1);
+    Menu_PrintText(text, 6, 1);
+}
+
+static const u8 Str_841B1C4[] = _("SETTEI");
+static const u8 Str_841B1CB[] = _("MAWASITA");
+static const u8 Str_841B1D4[] = _("MODOSI");
+static const u8 Str_841B1DB[] = _("NOMARE");
+static const u8 Str_841B1E2[] = _("MAE　7");
+static const u8 Str_841B1E8[] = _("LR　　HENKOU");
+static const u8 Str_841B1F3[] = _("START　　JIDOUSU");
+static const u8 Str_841B202[] = _("SELECT　　SETTEI");
+static const u8 Str_841B211[] = _("TYUHSEN");
+static const u8 Str_841B219[] = _("CHERRY");
+static const u8 Str_841B220[] = _("REPLAY");
+static const u8 Str_841B227[] = _("HASUBO");
+static const u8 Str_841B22E[] = _("RURIRI");
+static const u8 Str_841B235[] = _("INAZU");
+static const u8 Str_841B23B[] = _("REG");
+static const u8 Str_841B23F[] = _("BIG");
+static const u8 Str_841B243[] = _("BD");
+static const u8 Str_841B246[] = _("R7");
+static const u8 Str_841B249[] = _("B7");
+static const u8 Str_841B24C[] = _("A　　COIN");
+static const u8 Str_841B254[] = _("TYUHSEN");
+static const u8 Str_841B25C[] = _("UD　　100");
+static const u8 Str_841B264[] = _("LR　　1000");
+static const u8 Str_841B26D[] = _("×");
+
+void debug_sub_811B310(void)
+{
+    u8 text[5];
+
+    Menu_PrintText(Str_841B1C4, 1, 1);
+    Menu_PrintText(Str_841B1CB, 1, 3);
+    Menu_PrintText(Str_841B1D4, 1, 5);
+    Menu_PrintText(Str_841B1DB, 1, 7);
+    Menu_PrintText(Str_841B1E2, 1, 9);
+    Menu_PrintText(Str_841B1E8, 1, 11);
+    Menu_PrintText(Str_841B1F3, 1, 13);
+    Menu_PrintText(Str_841B202, 1, 15);
+    Menu_PrintText(Str_841B24C, 1, 17);
+    Menu_PrintText(Str_841B211, 15, 1);
+    Menu_PrintText(Str_841B219, 15, 3);
+    Menu_PrintText(Str_841B220, 15, 5);
+    Menu_PrintText(Str_841B227, 15, 7);
+    Menu_PrintText(Str_841B22E, 15, 9);
+    Menu_PrintText(Str_841B235, 15, 11);
+    Menu_PrintText(Str_841B23B, 15, 13);
+    Menu_PrintText(Str_841B23F, 15, 15);
+    Menu_PrintText(Str_841B243, 15, 17);
+    if (eSlotMachine->unk03 == 0)
+        Menu_PrintText(Str_841B246, 10, 9);
+    else
+        Menu_PrintText(Str_841B249, 10, 9);
+
+#define PRINT_NUMBER(n, x, y)                  \
+    ConvertIntToDecimalStringN(text, n, 2, 4); \
+    Menu_PrintText(text, x, y);
+
+    PRINT_NUMBER(eSlotMachine->unk68, 10, 3);
+    PRINT_NUMBER(eSlotMachine->unk6C, 10, 5);
+    PRINT_NUMBER(eSlotMachine->unk10, 10, 7);
+    PRINT_NUMBER(eSlotMachine->unk70, 20, 3);
+    PRINT_NUMBER(eSlotMachine->unk74, 20, 5);
+    PRINT_NUMBER(eSlotMachine->unk78, 20, 7);
+    PRINT_NUMBER(eSlotMachine->unk7C, 20, 9);
+    PRINT_NUMBER(eSlotMachine->unk80, 20, 11);
+    PRINT_NUMBER(eSlotMachine->unk84, 20, 13);
+    PRINT_NUMBER(eSlotMachine->unk88, 20, 15);
+    PRINT_NUMBER(eSlotMachine->unk8C, 20, 17);
+
+#undef PRINT_NUMBER
+
+    if (unk_debug_bss_1_0 != 0)
+    {
+        u8 y = 0;
+
+        switch (unk_debug_bss_1_0)
+        {
+        case 2:
+            y = 3;
+            break;
+        case 1:
+            y = 5;
+            break;
+        case 4:
+            y = 7;
+            break;
+        case 8:
+            y = 9;
+            break;
+        case 16:
+            y = 11;
+            break;
+        case 64:
+            y = 13;
+            break;
+        case 128:
+            y = 15;
+            break;
+        }
+        Menu_PrintText(Str_841B26D, 23, y);
+    }
+    debug_sub_811B2E8();
+}
+
+static void debug_sub_811B5B4(s32 *a, s32 b)
+{
+    *a += b;
+    if (*a > 9999)
+        *a = 9999;
+}
+
+static void debug_sub_811B5D0(void)
+{
+    unk_debug_bss_1_0 = 0;
+    unk_debug_bss_1_2 = 0;
+    unk_debug_bss_1_3 = 0;
+    unk_debug_bss_1_4 = 0;
+    eSlotMachine->unk68 = 0;
+    eSlotMachine->unk6C = 0;
+    eSlotMachine->unk70 = 0;
+    eSlotMachine->unk74 = 0;
+    eSlotMachine->unk78 = 0;
+    eSlotMachine->unk7C = 0;
+    eSlotMachine->unk80 = 0;
+    eSlotMachine->unk84 = 0;
+    eSlotMachine->unk88 = 0;
+    eSlotMachine->unk8C = 0;
+    eSlotMachine->unk90 = 0;
+}
+
+static void debug_sub_811B620(void)
+{
+    CreateTask(debug_sub_811B654, 0);
+}
+
+static u8 debug_sub_811B634(void)
+{
+    if (FindTaskIdByFunc(debug_sub_811B654) == 0xFF)
+        return 1;
+    else
+        return 0;
+}
+
+static const struct {const u8 *text; void (*func)();} _841B270[] =
 {
     {Str_841B219, debug_sub_811B1C4},
     {Str_841B220, debug_sub_811B1EC},
@@ -7820,9 +5770,178 @@ const struct {const u8 *text; void (*func)();} _841B270[] =
     {Str_841B243, debug_sub_811B2D8},
 };
 
-const u8 Str_841B2B0[] = _("·カウントエラーがおきました");
-const u8 Str_841B2BF[] = _("·リールそうさで　エラーが　おきました");
-const u8 Str_841B2D3[] = _("·フラグオフエラーが　おきました");
-const u8 Str_841B2E4[] = _("·ボーナスこやくの　エラーが　おきました");
+static void debug_sub_811B654(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    s8 selection;
+
+    switch (task->data[0])
+    {
+    case 0:
+        Menu_DrawStdWindowFrame(0, 0, 24, 19);
+        debug_sub_811B310();
+        task->data[0]++;
+        break;
+    case 1:
+        if (gMain.newKeys & B_BUTTON)
+        {
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+            break;
+        }
+        if (gMain.newKeys & 0x20)
+        {
+            eSlotMachine->unk01--;
+            if ((s8)eSlotMachine->unk01 < 0)  // Why? It's unsigned
+                eSlotMachine->unk01 = 5;
+            debug_sub_811B2E8();
+            break;
+        }
+        if (gMain.newKeys & 0x10)
+        {
+            eSlotMachine->unk01++;
+            if (eSlotMachine->unk01 > 5)
+                eSlotMachine->unk01 = 0;
+            debug_sub_811B2E8();
+            break;
+        }
+        if (gMain.newKeys & A_BUTTON)
+        {
+            task->data[0] = 3;
+            Menu_EraseScreen();
+            Menu_DrawStdWindowFrame(0, 0, 9, 5);
+            Menu_PrintText(Str_841B25C, 1, 1);
+            Menu_PrintText(Str_841B264, 1, 3);
+            break;
+        }
+        if (gMain.newKeys & 4)
+        {
+            unk_debug_bss_1_2 = 0;
+            unk_debug_bss_1_3 = 0;
+            Menu_EraseScreen();
+            Menu_DrawStdWindowFrame(0, 0, 10, 19);
+            Menu_PrintText(Str_841B254, 1, 1);
+            Menu_PrintItems(2, 3, 8, (void *)_841B270);
+            InitMenu(0, 1, 3, 8, 0, 9);
+            task->data[0]++;
+        }
+        if (gMain.newKeys & 8)
+        {
+            unk_debug_bss_1_4 = 1;
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+        }
+        break;
+    case 2:
+        selection = Menu_ProcessInput();
+        if (selection == -2)
+            break;
+        if (selection != -1)
+        {
+            unk_debug_bss_1_2 = 1;
+            _841B270[selection].func();
+        }
+        Menu_EraseScreen();
+        DestroyTask(taskId);
+        break;
+    case 3:
+        if (gMain.newAndRepeatedKeys & 0x80)
+        {
+            eSlotMachine->coins += 100;
+            if (eSlotMachine->coins > 9999)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x40)
+        {
+            eSlotMachine->coins -= 100;
+            if (eSlotMachine->coins <= 0)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x20)
+        {
+            eSlotMachine->coins -= 1000;
+            if (eSlotMachine->coins <= 0)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newAndRepeatedKeys & 0x10)
+        {
+            eSlotMachine->coins += 1000;
+            if (eSlotMachine->coins > 9999)
+                eSlotMachine->coins = 9999;
+            break;
+        }
+        if (gMain.newKeys & B_BUTTON)
+        {
+            Menu_EraseScreen();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+static const u8 Str_841B2B0[] = _("·カウントエラーがおきました");
+static const u8 Str_841B2BF[] = _("·リールそうさで　エラーが　おきました");
+static const u8 Str_841B2D3[] = _("·フラグオフエラーが　おきました");
+static const u8 Str_841B2E4[] = _("·ボーナスこやくの　エラーが　おきました");
+
+static void debug_sub_811B894(void)
+{
+    if (eSlotMachine->matchedSymbols & 0x180)
+    {
+        eSlotMachine->unk90++;
+        if (eSlotMachine->unk90 > 9999)
+            eSlotMachine->unk90 = 9999;
+        if (eSlotMachine->unk90 != eSlotMachine->unk88)
+        {
+            Menu_PrintText(Str_841B2B0, 4, 15);
+            unk_debug_bss_1_4 = 0;
+        }
+        if (!(eSlotMachine->unk04 & 0x80))
+        {
+            Menu_PrintText(Str_841B2D3, 4, 17);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+    else if (eSlotMachine->matchedSymbols != 0)
+    {
+        if ((eSlotMachine->unk04 & 0x80) && !(eSlotMachine->matchedSymbols & 3))
+        {
+            Menu_PrintText(Str_841B2E4, 4, 2);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+    if (eSlotMachine->matchedSymbols == 0 && eSlotMachine->bet == 3 && !(eSlotMachine->unk04 & 0x80))
+    {
+        u8 sym_0_1 = GetTagOfReelSymbolOnScreenAtPos(0, 1);
+        u8 sym_0_2 = GetTagOfReelSymbolOnScreenAtPos(0, 2);
+        u8 sym_0_3 = GetTagOfReelSymbolOnScreenAtPos(0, 3);
+
+        u8 sym_1_1 = GetTagOfReelSymbolOnScreenAtPos(1, 1);
+        u8 sym_1_2 = GetTagOfReelSymbolOnScreenAtPos(1, 2);
+        u8 sym_1_3 = GetTagOfReelSymbolOnScreenAtPos(1, 3);
+
+        u8 sym_2_1 = GetTagOfReelSymbolOnScreenAtPos(2, 1);
+        u8 sym_2_2 = GetTagOfReelSymbolOnScreenAtPos(2, 2);
+        u8 sym_2_3 = GetTagOfReelSymbolOnScreenAtPos(2, 3);
+
+        if ((sym_0_1 == 0 && sym_1_1 == 1 && sym_2_1 == 0)
+         || (sym_0_2 == 0 && sym_1_2 == 1 && sym_2_2 == 0)
+         || (sym_0_3 == 0 && sym_1_3 == 1 && sym_2_3 == 0)
+         || (sym_0_1 == 0 && sym_1_2 == 1 && sym_2_3 == 0)
+         || (sym_0_3 == 0 && sym_1_2 == 1 && sym_2_1 == 0)
+         || (sym_0_1 == 1 && sym_1_1 == 0 && sym_2_1 == 1)
+         || (sym_0_2 == 1 && sym_1_2 == 0 && sym_2_2 == 1)
+         || (sym_0_3 == 1 && sym_1_3 == 0 && sym_2_3 == 1)
+         || (sym_0_1 == 1 && sym_1_2 == 0 && sym_2_3 == 1)
+         || (sym_0_3 == 1 && sym_1_2 == 0 && sym_2_1 == 1))
+        {
+            Menu_PrintText(Str_841B2BF, 4, 0);
+            unk_debug_bss_1_4 = 0;
+        }
+    }
+}
 
 #endif

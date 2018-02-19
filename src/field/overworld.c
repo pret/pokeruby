@@ -2233,7 +2233,7 @@ u16 sub_80554E4(u32 a1)
     return 23;
 }
 
-u32 sub_80554F8(void)
+s32 sub_80554F8(void)
 {
     if (sub_8054FC0(0x83) == TRUE)
         return 2;

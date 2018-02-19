@@ -3,7 +3,7 @@
 
 struct Berry
 {
-    /*0x00*/ const u8 name[7];
+    /*0x00*/ u8 name[7];
     /*0x07*/ u8 firmness;
     /*0x08*/ u16 size;
     /*0x0A*/ u8 maxYield;

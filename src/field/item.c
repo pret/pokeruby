@@ -8,6 +8,24 @@
 #include "string_util.h"
 #include "strings.h"
 
+struct Item
+{
+    u8 name[14];
+    u16 itemId;
+    u16 price;
+    u8 holdEffect;
+    u8 holdEffectParam;
+    const u8 *description;
+    u8 importance;
+    u8 unk19;
+    u8 pocket;
+    u8 type;
+    ItemUseFunc fieldUseFunc;
+    u8 battleUsage;
+    ItemUseFunc battleUseFunc;
+    u8 secondaryId;
+};
+
 extern u8 gUnknown_02038560;
 extern struct BagPocket gBagPockets[NUM_BAG_POCKETS];
 
@@ -49,7 +67,9 @@ void CopyItemName(u16 itemId, u8 *string)
         StringAppend(string, gOtherText_Berry2);
     }
     else
-        StringCopy(string, ItemId_GetItem(itemId)->name);
+    {
+        StringCopy(string, ItemId_GetName(itemId));
+    }
 }
 
 //Unreferenced
@@ -579,9 +599,9 @@ static u16 SanitizeItemId(u16 itemId)
         return itemId;
 }
 
-const struct Item *ItemId_GetItem(u16 itemId)
+const u8 *ItemId_GetName(u16 itemId)
 {
-    return &gItems[SanitizeItemId(itemId)];
+    return gItems[SanitizeItemId(itemId)].name;
 }
 
 u16 ItemId_GetId(u16 itemId)
@@ -640,6 +660,7 @@ u8 ItemId_GetImportance(u16 itemId)
     return gItems[SanitizeItemId(itemId)].importance;
 }
 
+// unused
 u8 ItemId_GetUnknownValue(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].unk19;

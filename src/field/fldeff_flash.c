@@ -72,33 +72,15 @@ static const u16 gCaveTransitionTilemap[] = INCBIN_U16("graphics/misc/cave_trans
 static const u8 gCaveTransitionTiles[] = INCBIN_U8("graphics/misc/cave_transition.4bpp.lz");
 
 #if DEBUG
-__attribute__((naked))
+
 void debug_sub_8122080(void)
 {
-    asm("\
-	push	{lr}\n\
-	ldr	r0, ._4         @ gMapHeader\n\
-	ldrb	r0, [r0, #0x15]\n\
-	cmp	r0, #0x1\n\
-	bne	._2	@cond_branch\n\
-	ldr	r0, ._4 + 4     @ 0x828\n\
-	bl	FlagGet\n\
-	lsl	r0, r0, #0x18\n\
-	cmp	r0, #0\n\
-	bne	._2	@cond_branch\n\
-	bl	sub_810CBFC\n\
-	b	._3\n\
-._5:\n\
-	.align	2, 0\n\
-._4:\n\
-	.word	gMapHeader\n\
-	.word	0x828\n\
-._2:\n\
-	bl	ScriptContext2_Disable\n\
-._3:\n\
-	pop	{r0}\n\
-	bx	r0");
+    if (gMapHeader.cave == 1 && !FlagGet(FLAG_SYS_USE_FLASH))
+        sub_810CBFC();
+    else
+        ScriptContext2_Disable();
 }
+
 #endif
 
 bool8 SetUpFieldMove_Flash(void)

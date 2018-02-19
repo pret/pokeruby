@@ -1,4 +1,8 @@
 #include "global.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 #include "party_menu.h"
 #include "battle.h"
 #include "battle_interface.h"
@@ -11,12 +15,11 @@
 #include "item.h"
 #include "item_use.h"
 #include "item_menu.h"
-#include "constants/items.h"
+#include "link.h"
 #include "mail_data.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "constants/moves.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
@@ -25,9 +28,7 @@
 #include "pokemon_summary_screen.h"
 #include "rom_8077ABC.h"
 #include "rom_8094928.h"
-#include "constants/songs.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
@@ -397,7 +398,8 @@ static const u16 PartyMonOAMSettings_RightColumn[] = {
 };
 
 // Controls where and how the mons' text appears in the party menu screen (nickname, HP, and level).
-static struct PartyMonTextSettingsStruct const PartyMonTextSettings[4][6] = {
+static struct PartyMonTextSettingsStruct const PartyMonTextSettings[4][6] =
+{
     { // PARTY_MENU_LAYOUT_STANDARD
         { 1,  4, PartyMonOAMSettings_LeftColumn},
         {12,  1, PartyMonOAMSettings_RightColumn},
@@ -432,7 +434,8 @@ static struct PartyMonTextSettingsStruct const PartyMonTextSettings[4][6] = {
     },
 };
 
-static const struct PartyMenuHandlersStruct PartyMenuHandlers[] = {
+static const struct PartyMenuHandlersStruct PartyMenuHandlers[] =
+{
     {HandleDefaultPartyMenu,         SetupDefaultPartyMenu,            0}, // PARTY_MENU_TYPE_STANDARD
     {HandleBattlePartyMenu,          SetUpBattlePartyMenu,             0}, // PARTY_MENU_TYPE_BATTLE
     {HandleSelectPartyMenu,          SetupContestPartyMenu,            0}, // PARTY_MENU_TYPE_CONTEST
@@ -493,71 +496,6 @@ extern const u8 gStatusPal_Icons[];
 #define WINDOW_RIGHT (29)
 #endif
 
-#if DEBUG
-__attribute__((naked))
-void CB2_PartyMenuMain(void)
-{
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	bl	AnimateSprites\n\
-	bl	BuildOamBuffer\n\
-	ldr	r0, ._3         @ gPartyMenuType\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x4\n\
-	ldr	r1, ._3 + 4     @ PartyMonTextSettings\n\
-	add	r5, r0, r1\n\
-	mov	r6, #0x0\n\
-._1:\n\
-	ldrb	r0, [r5]\n\
-	lsl	r0, r0, #0x3\n\
-	ldrb	r1, [r5, #0x1]\n\
-	lsl	r1, r1, #0x3\n\
-	ldr	r2, [r5, #0x4]\n\
-	lsl	r3, r6, #0x5\n\
-	mov	r4, #0x80\n\
-	lsl	r4, r4, #0x2\n\
-	orr	r3, r3, r4\n\
-	str	r3, [sp]\n\
-	mov	r3, #0x0\n\
-	bl	DrawPartyMenuMonText\n\
-	add	r5, r5, #0x8\n\
-	add	r6, r6, #0x1\n\
-	cmp	r6, #0x5\n\
-	ble	._1	@cond_branch\n\
-	bl	RunTasks\n\
-	bl	UpdatePaletteFade\n\
-	ldr	r0, ._3 + 8     @ gLinkOpen\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x1\n\
-	bne	._2	@cond_branch\n\
-	ldr	r0, ._3 + 12    @ gLink\n\
-	ldr	r1, ._3 + 16    @ 0xfbd\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	mov	r1, #0x2\n\
-	str	r1, [sp]\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x2\n\
-	bl	debug_sub_8008264\n\
-._2:\n\
-	add	sp, sp, #0x4\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._4:\n\
-	.align	2, 0\n\
-._3:\n\
-	.word	gPartyMenuType\n\
-	.word	PartyMonTextSettings\n\
-	.word	gLinkOpen\n\
-	.word	gLink\n\
-	.word	0xfbd");
-}
-#else
 void CB2_PartyMenuMain(void)
 {
     const struct PartyMonTextSettingsStruct *textSettings;
@@ -581,8 +519,12 @@ void CB2_PartyMenuMain(void)
 
     RunTasks();
     UpdatePaletteFade();
-}
+
+#if DEBUG
+    if (gLinkOpen == TRUE)
+        debug_sub_8008264(gLink.recvQueue.count, 1, 1, 2, 2);
 #endif
+}
 
 void VBlankCB_PartyMenu(void)
 {
@@ -621,14 +563,16 @@ bool8 SetupDefaultPartyMenu(void)
     switch (ewram1B000_alt.setupState)
     {
     case 0:
-        if (ewram1B000_alt.monIndex < gPlayerPartyCount) {
+        if (ewram1B000_alt.monIndex < gPlayerPartyCount)
+        {
             TryCreatePartyMenuMonIcon(ewram1B000_alt.menuHandlerTaskId, ewram1B000_alt.monIndex, &gPlayerParty[ewram1B000_alt.monIndex]);
             ewram1B000_alt.monIndex++;
-        } else {
+        }
+        else
+        {
             ewram1B000_alt.monIndex = 0;
             ewram1B000_alt.setupState++;
         }
-
         break;
     case 1:
         LoadHeldItemIconGraphics();
@@ -648,7 +592,6 @@ bool8 SetupDefaultPartyMenu(void)
             ewram1B000_alt.monIndex = 0;
             ewram1B000_alt.setupState++;
         }
-
         break;
     case 4:
         PartyMenuPrintMonsLevelOrStatus();
@@ -687,425 +630,6 @@ bool8 SetupDefaultPartyMenu(void)
     return FALSE;
 }
 
-#if DEBUG
-__attribute__((naked))
-bool8 InitPartyMenu(void)
-{
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r8\n\
-	push	{r7}\n\
-	add	sp, sp, #0xfffffff4\n\
-	ldr	r0, ._55        @ gMain\n\
-	ldr	r1, ._55 + 4    @ 0x43c\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x11\n\
-	bls	._53	@cond_branch\n\
-	b	._125\n\
-._53:\n\
-	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._55 + 8    @ \n\
-	add	r0, r0, r1\n\
-	ldr	r0, [r0]\n\
-	mov	pc, r0\n\
-._56:\n\
-	.align	2, 0\n\
-._55:\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-	.word	._57\n\
-._57:\n\
-	.word	._58\n\
-	.word	._59\n\
-	.word	._60\n\
-	.word	._61\n\
-	.word	._62\n\
-	.word	._63\n\
-	.word	._64\n\
-	.word	._65\n\
-	.word	._66\n\
-	.word	._67\n\
-	.word	._68\n\
-	.word	._69\n\
-	.word	._70\n\
-	.word	._71\n\
-	.word	._72\n\
-	.word	._73\n\
-	.word	._74\n\
-	.word	._75\n\
-._58:\n\
-	mov	r0, #0x0\n\
-	bl	SetVBlankCallback\n\
-	mov	r3, #0xc0\n\
-	lsl	r3, r3, #0x13\n\
-	mov	r4, #0xc0\n\
-	lsl	r4, r4, #0x9\n\
-	add	r2, sp, #0x8\n\
-	mov	r8, r2\n\
-	add	r2, sp, #0x4\n\
-	mov	r6, #0x0\n\
-	ldr	r1, ._78        @ 0x40000d4\n\
-	mov	r5, #0x80\n\
-	lsl	r5, r5, #0x5\n\
-	ldr	r7, ._78 + 4    @ 0x81000800\n\
-	mov	r0, #0x81\n\
-	lsl	r0, r0, #0x18\n\
-	mov	ip, r0\n\
-._76:\n\
-	strh	r6, [r2]\n\
-	add	r0, sp, #0x4\n\
-	str	r0, [r1]\n\
-	str	r3, [r1, #0x4]\n\
-	str	r7, [r1, #0x8]\n\
-	ldr	r0, [r1, #0x8]\n\
-	add	r3, r3, r5\n\
-	sub	r4, r4, r5\n\
-	cmp	r4, r5\n\
-	bhi	._76	@cond_branch\n\
-	strh	r6, [r2]\n\
-	add	r2, sp, #0x4\n\
-	str	r2, [r1]\n\
-	str	r3, [r1, #0x4]\n\
-	lsr	r0, r4, #0x1\n\
-	mov	r3, ip\n\
-	orr	r0, r0, r3\n\
-	str	r0, [r1, #0x8]\n\
-	ldr	r0, [r1, #0x8]\n\
-	mov	r0, #0xe0\n\
-	lsl	r0, r0, #0x13\n\
-	mov	r3, #0x80\n\
-	lsl	r3, r3, #0x3\n\
-	mov	r4, #0x0\n\
-	str	r4, [sp, #0x8]\n\
-	ldr	r2, ._78        @ 0x40000d4\n\
-	mov	r1, r8\n\
-	str	r1, [r2]\n\
-	str	r0, [r2, #0x4]\n\
-	lsr	r0, r3, #0x2\n\
-	mov	r1, #0x85\n\
-	lsl	r1, r1, #0x18\n\
-	orr	r0, r0, r1\n\
-	str	r0, [r2, #0x8]\n\
-	ldr	r0, [r2, #0x8]\n\
-	mov	r1, #0xa0\n\
-	lsl	r1, r1, #0x13\n\
-	add	r0, sp, #0x4\n\
-	strh	r4, [r0]\n\
-	str	r0, [r2]\n\
-	str	r1, [r2, #0x4]\n\
-	lsr	r3, r3, #0x1\n\
-	mov	r0, #0x81\n\
-	lsl	r0, r0, #0x18\n\
-	orr	r3, r3, r0\n\
-	str	r3, [r2, #0x8]\n\
-	ldr	r0, [r2, #0x8]\n\
-	ldr	r2, ._78 + 8    @ gPaletteFade\n\
-	ldrb	r0, [r2, #0x8]\n\
-	mov	r1, #0x80\n\
-	orr	r0, r0, r1\n\
-	strb	r0, [r2, #0x8]\n\
-	ldr	r1, ._78 + 12   @ gMain\n\
-	ldr	r2, ._78 + 16   @ 0x43c\n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._79:\n\
-	.align	2, 0\n\
-._78:\n\
-	.word	0x40000d4\n\
-	.word	0x81000800\n\
-	.word	gPaletteFade\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._59:\n\
-	bl	ScanlineEffect_Stop\n\
-	b	._115\n\
-._60:\n\
-	bl	sub_806B4A8\n\
-	ldr	r1, ._82        @ \n\
-	mov	r2, #0x99\n\
-	lsl	r2, r2, #0x2\n\
-	add	r0, r1, r2\n\
-	mov	r2, #0x0\n\
-	strh	r2, [r0]\n\
-	ldr	r3, ._82 + 4    @ \n\
-	add	r0, r1, r3\n\
-	strh	r2, [r0]\n\
-	mov	r0, #0x9a\n\
-	lsl	r0, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	strh	r2, [r1]\n\
-	ldr	r1, ._82 + 8    @ \n\
-	ldr	r2, ._82 + 12   @ \n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._83:\n\
-	.align	2, 0\n\
-._82:\n\
-	.word	+0x201b000\n\
-	.word	0x266\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._61:\n\
-	bl	ResetSpriteData\n\
-	b	._115\n\
-._62:\n\
-	ldr	r0, ._88        @ \n\
-	mov	r1, #0x96\n\
-	lsl	r1, r1, #0x2\n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x1\n\
-	beq	._86	@cond_branch\n\
-	cmp	r0, #0x5\n\
-	beq	._86	@cond_branch\n\
-	bl	ResetTasks\n\
-._86:\n\
-	ldr	r1, ._88 + 4    @ \n\
-	ldr	r2, ._88 + 8    @ \n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._89:\n\
-	.align	2, 0\n\
-._88:\n\
-	.word	+0x201b000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._63:\n\
-	bl	FreeAllSpritePalettes\n\
-	b	._115\n\
-._64:\n\
-	ldr	r4, ._92        @ \n\
-	mov	r1, #0x97\n\
-	lsl	r1, r1, #0x2\n\
-	add	r0, r4, r1\n\
-	ldr	r0, [r0]\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	mov	r2, #0x98\n\
-	lsl	r2, r2, #0x2\n\
-	add	r1, r4, r2\n\
-	strb	r0, [r1]\n\
-	b	._115\n\
-._93:\n\
-	.align	2, 0\n\
-._92:\n\
-	.word	+0x201b000\n\
-._65:\n\
-	ldr	r0, ._95        @ gWindowTemplate_81E6C90\n\
-	bl	Text_LoadWindowTemplate\n\
-	ldr	r1, ._95 + 4    @ gMain\n\
-	ldr	r0, ._95 + 8    @ 0x43c\n\
-	add	r1, r1, r0\n\
-	b	._122\n\
-._96:\n\
-	.align	2, 0\n\
-._95:\n\
-	.word	gWindowTemplate_81E6C90\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._66:\n\
-	ldr	r4, ._98        @ gUnknown_03004210\n\
-	ldr	r1, ._98 + 4    @ gWindowTemplate_81E6C90\n\
-	add	r0, r4, #0\n\
-	bl	Text_InitWindowWithTemplate\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x1\n\
-	bl	MultistepInitWindowTileData\n\
-	ldr	r1, ._98 + 8    @ gMain\n\
-	ldr	r2, ._98 + 12   @ 0x43c\n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._99:\n\
-	.align	2, 0\n\
-._98:\n\
-	.word	gUnknown_03004210\n\
-	.word	gWindowTemplate_81E6C90\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._67:\n\
-	bl	MultistepLoadFont\n\
-	cmp	r0, #0\n\
-	bne	._100	@cond_branch\n\
-	b	._125\n\
-._100:\n\
-	ldr	r0, ._103       @ \n\
-	mov	r3, #0x99\n\
-	lsl	r3, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	mov	r1, #0x1\n\
-	strh	r1, [r0]\n\
-	ldr	r1, ._103 + 4   @ \n\
-	ldr	r0, ._103 + 8   @ \n\
-	add	r1, r1, r0\n\
-	b	._122\n\
-._104:\n\
-	.align	2, 0\n\
-._103:\n\
-	.word	+0x201b000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._68:\n\
-	ldr	r0, ._107       @ \n\
-	mov	r1, #0x99\n\
-	lsl	r1, r1, #0x2\n\
-	add	r4, r0, r1\n\
-	ldrb	r0, [r4]\n\
-	bl	LoadPartyMenuGraphics\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bne	._105	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r4]\n\
-	ldr	r1, ._107 + 4   @ \n\
-	ldr	r2, ._107 + 8   @ \n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._108:\n\
-	.align	2, 0\n\
-._107:\n\
-	.word	+0x201b000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._105:\n\
-	ldrh	r0, [r4]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r4]\n\
-	b	._125\n\
-._69:\n\
-	bl	sub_809D51C\n\
-	b	._115\n\
-._70:\n\
-	ldr	r2, ._113       @ PartyMenuHandlers\n\
-	ldr	r0, ._113 + 4   @ \n\
-	mov	r1, #0x96\n\
-	lsl	r1, r1, #0x2\n\
-	add	r0, r0, r1\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r2, r2, #0x4\n\
-	add	r0, r0, r2\n\
-	ldr	r0, [r0]\n\
-	bl	_call_via_r0\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	cmp	r0, #0x1\n\
-	bne	._125	@cond_branch\n\
-	ldr	r1, ._113 + 8   @ \n\
-	ldr	r2, ._113 + 12  @ \n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._114:\n\
-	.align	2, 0\n\
-._113:\n\
-	.word	PartyMenuHandlers\n\
-	.word	+0x201b000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._71:\n\
-	ldr	r0, ._116       @ gWindowTemplate_81E6CC8\n\
-	bl	MultistepInitMenuWindowBegin\n\
-	b	._115\n\
-._117:\n\
-	.align	2, 0\n\
-._116:\n\
-	.word	gWindowTemplate_81E6CC8\n\
-._72:\n\
-	bl	MultistepInitMenuWindowContinue\n\
-	cmp	r0, #0\n\
-	beq	._125	@cond_branch\n\
-	ldr	r1, ._120       @ gMain\n\
-	ldr	r0, ._120 + 4   @ 0x43c\n\
-	add	r1, r1, r0\n\
-	b	._122\n\
-._121:\n\
-	.align	2, 0\n\
-._120:\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._73:\n\
-	ldr	r0, ._123       @ \n\
-	ldr	r1, ._123 + 4   @ \n\
-	add	r0, r0, r1\n\
-	ldrb	r0, [r0]\n\
-	mov	r1, #0x0\n\
-	bl	PrintPartyMenuPromptText\n\
-	ldr	r1, ._123 + 8   @ \n\
-	ldr	r2, ._123 + 12  @ \n\
-	add	r1, r1, r2\n\
-	b	._122\n\
-._124:\n\
-	.align	2, 0\n\
-._123:\n\
-	.word	+0x201b000\n\
-	.word	0x259\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._74:\n\
-	mov	r0, #0x1\n\
-	neg	r0, r0\n\
-	mov	r1, #0x0\n\
-	str	r1, [sp]\n\
-	mov	r2, #0x10\n\
-	mov	r3, #0x0\n\
-	bl	BeginNormalPaletteFade\n\
-	ldr	r2, ._126       @ gPaletteFade\n\
-	ldrb	r1, [r2, #0x8]\n\
-	mov	r0, #0x7f\n\
-	and	r0, r0, r1\n\
-	strb	r0, [r2, #0x8]\n\
-._115:\n\
-	ldr	r1, ._126 + 4   @ gMain\n\
-	ldr	r3, ._126 + 8   @ 0x43c\n\
-	add	r1, r1, r3\n\
-._122:\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r1]\n\
-	b	._125\n\
-._127:\n\
-	.align	2, 0\n\
-._126:\n\
-	.word	gPaletteFade\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._75:\n\
-	ldr	r0, ._130       @ VBlankCB_PartyMenu\n\
-	bl	SetVBlankCallback\n\
-	ldr	r0, ._130 + 4   @ gLinkOpen\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x1\n\
-	bne	._128	@cond_branch\n\
-	ldr	r0, ._130 + 8   @ 0x600e5e0\n\
-	mov	r1, #0x80\n\
-	lsl	r1, r1, #0x8\n\
-	ldr	r2, ._130 + 12  @ 0x6007800\n\
-	mov	r3, #0x2\n\
-	bl	debug_sub_8008218\n\
-._128:\n\
-	mov	r0, #0x1\n\
-	b	._129\n\
-._131:\n\
-	.align	2, 0\n\
-._130:\n\
-	.word	VBlankCB_PartyMenu+1\n\
-	.word	gLinkOpen\n\
-	.word	0x600e5e0\n\
-	.word	0x6007800\n\
-._125:\n\
-	mov	r0, #0x0\n\
-._129:\n\
-	add	sp, sp, #0xc\n\
-	pop	{r3}\n\
-	mov	r8, r3\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r1}\n\
-	bx	r1");
-}
-#else
 bool8 InitPartyMenu(void)
 {
     switch (gMain.state)
@@ -1115,7 +639,6 @@ bool8 InitPartyMenu(void)
         DmaFill16Large(3, 0, (void *)(VRAM + 0x0), VRAM_SIZE, 0x1000);
         DmaClear32(3, OAM, OAM_SIZE);
         DmaClear16(3, PLTT, PLTT_SIZE);
-
         gPaletteFade.bufferTransferDisabled = 1;
         gMain.state++;
         break;
@@ -1136,10 +659,7 @@ bool8 InitPartyMenu(void)
         break;
     case 4:
         if (ewram1B000.menuType != PARTY_MENU_TYPE_BATTLE && ewram1B000.menuType != PARTY_MENU_TYPE_LINK_MULTI_BATTLE)
-        {
             ResetTasks();
-        }
-
         gMain.state++;
         break;
     case 5:
@@ -1183,9 +703,7 @@ bool8 InitPartyMenu(void)
         break;
     case 12:
         if (PartyMenuHandlers[ewram1B000.menuType].menuSetup() == TRUE)
-        {
             gMain.state++;
-        }
         break;
     case 13:
         MultistepInitMenuWindowBegin(&gWindowTemplate_81E6CC8);
@@ -1193,9 +711,7 @@ bool8 InitPartyMenu(void)
         break;
     case 14:
         if (MultistepInitMenuWindowContinue())
-        {
             gMain.state++;
-        }
         break;
     case 15:
         PrintPartyMenuPromptText(ewram1B000.promptTextId, 0);
@@ -1208,27 +724,26 @@ bool8 InitPartyMenu(void)
         break;
     case 17:
         SetVBlankCallback(VBlankCB_PartyMenu);
+#if DEBUG
+        if (gLinkOpen == TRUE)
+            debug_sub_8008218((void *)(VRAM + 0xE5E0), 0x8000, (void *)(VRAM + 0x7800), 2);
+#endif
         return TRUE;
     }
 
     return FALSE;
 }
-#endif
 
 void CB2_InitPartyMenu(void)
 {
     while (InitPartyMenu() != TRUE)
     {
         if (sub_80F9344() == TRUE)
-        {
             return;
-        }
     }
 
     if (ewram1B000.menuType != PARTY_MENU_TYPE_LINK_MULTI_BATTLE)
-    {
         ChangePartyMenuSelection(ewram1B000.menuHandlerTaskId, 0);
-    }
 
     SetMainCallback2(CB2_PartyMenuMain);
 }
@@ -1269,9 +784,7 @@ void ReDrawPartyMonBackgrounds(void)
         DmaCopy16Defvars(3, gBGTilemapBuffers[2], (void *)(BG_VRAM + 0x3000), 0x800);
 
         if (ewram1B000.unk261 == 2)
-        {
             ewram1B000.unk261 = 0;
-        }
     }
 }
 
@@ -1298,119 +811,172 @@ bool8 DrawPartyMonBackground(u8 monIndex)
         sub_806BF24(&arr[0], 0, 3, 0);
         break;
     case 2:
-        if (!IsDoubleBattle()) {
-            if (gPlayerPartyCount > 1) {
+        if (!IsDoubleBattle())
+        {
+            if (gPlayerPartyCount > 1)
+            {
                 sub_806BA94(arr[2], arr[3], 0, 3);
                 sub_806BF24(&arr[2], 1, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[2], arr[3], 1, 3);
             }
-        } else if (IsLinkDoubleBattle() == TRUE) {
+        }
+        else if (IsLinkDoubleBattle() == TRUE)
+        {
             sub_806B9A4(arr[2], arr[3], 4);
             sub_806BF24(&arr[2], 1, 4, 0);
-        } else {
+        }
+        else
+        {
             sub_806B9A4(arr[2], arr[3], 3);
             sub_806BF24(&arr[2], 1, 3, 0);
         }
-
         break;
     case 3:
-        if (!IsDoubleBattle()) {
-            if (gPlayerPartyCount > 2) {
+        if (!IsDoubleBattle())
+        {
+            if (gPlayerPartyCount > 2)
+            {
                 sub_806BA94(arr[4], arr[5], 0, 3);
                 sub_806BF24(&arr[4], 2, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[4], arr[5], 1, 3);
             }
-        } else if (IsLinkDoubleBattle() == TRUE) {
-            if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
+        }
+        else if (IsLinkDoubleBattle() == TRUE)
+        {
+            if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES))
+            {
                 sub_806BA94(arr[4], arr[5], 0, 3);
                 sub_806BF24(&arr[4], 2, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[4], arr[5], 1, 3);
             }
-        } else if (gPlayerPartyCount > 2) {
+        }
+        else if (gPlayerPartyCount > 2)
+        {
             sub_806BA94(arr[4], arr[5], 0, 3);
             sub_806BF24(&arr[4], 2, 3, 0);
-        } else {
+        }
+        else
+        {
             sub_806BA94(arr[4], arr[5], 1, 3);
         }
-
         break;
     case 4:
-        if (!IsDoubleBattle()) {
-            if (gPlayerPartyCount > 3) {
+        if (!IsDoubleBattle())
+        {
+            if (gPlayerPartyCount > 3)
+            {
                 sub_806BA94(arr[6], arr[7], 0, 3);
                 sub_806BF24(&arr[6], 3, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[6], arr[7], 1, 3);
             }
-        } else if (IsLinkDoubleBattle() == TRUE) {
-            if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
+        }
+        else if (IsLinkDoubleBattle() == TRUE)
+        {
+            if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES))
+            {
                 sub_806BA94(arr[6], arr[7], 0, 3);
                 sub_806BF24(&arr[6], 3, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[6], arr[7], 1, 3);
             }
-        } else if (gPlayerPartyCount > 3) {
+        }
+        else if (gPlayerPartyCount > 3)
+        {
             sub_806BA94(arr[6], arr[7], 0, 3);
             sub_806BF24(&arr[6], 3, 3, 0);
-        } else {
+        }
+        else
+        {
             sub_806BA94(arr[6], arr[7], 1, 3);
         }
-
         break;
     case 5:
-        if (!IsDoubleBattle()) {
-            if (gPlayerPartyCount > 4) {
+        if (!IsDoubleBattle())
+        {
+            if (gPlayerPartyCount > 4)
+            {
                 sub_806BA94(arr[8], arr[9], 0, 3);
                 sub_806BF24(&arr[8], 4, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[8], arr[9], 1, 3);
             }
-        } else if (IsLinkDoubleBattle() == TRUE) {
-            if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
+        }
+        else if (IsLinkDoubleBattle() == TRUE)
+        {
+            if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES))
+            {
                 sub_806BA94(arr[8], arr[9], 0, 4);
                 sub_806BF24(&arr[8], 4, 4, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[8], arr[9], 1, 4);
             }
-        } else if (gPlayerPartyCount > 4) {
+        }
+        else if (gPlayerPartyCount > 4)
+        {
             sub_806BA94(arr[8], arr[9], 0, 3);
             sub_806BF24(&arr[8], 4, 3, 0);
-        } else {
+        }
+        else
+        {
             sub_806BA94(arr[8], arr[9], 1, 3);
         }
-
         break;
     case 6:
-        if (!IsDoubleBattle()) {
-            if (gPlayerPartyCount > 5) {
+        if (!IsDoubleBattle())
+        {
+            if (gPlayerPartyCount > 5)
+            {
                 sub_806BA94(arr[10], arr[11], 0, 3);
                 sub_806BF24(&arr[10], 5, 3, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[10], arr[11], 1, 3);
             }
-        } else if (IsLinkDoubleBattle() == TRUE) {
-            if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
+        }
+        else if (IsLinkDoubleBattle() == TRUE)
+        {
+            if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES))
+            {
                 sub_806BA94(arr[10], arr[11], 0, 4);
                 sub_806BF24(&arr[10], 5, 4, 0);
-            } else {
+            }
+            else
+            {
                 sub_806BA94(arr[10], arr[11], 1, 4);
             }
-        } else if (gPlayerPartyCount > 5) {
+        }
+        else if (gPlayerPartyCount > 5)
+        {
             sub_806BA94(arr[10], arr[11], 0, 3);
             sub_806BF24(&arr[10], 5, 3, 0);
-        } else {
+        }
+        else
+        {
             sub_806BA94(arr[10], arr[11], 1, 3);
         }
-
         break;
     case 7:
-        if (ewram1B000.menuType == PARTY_MENU_TYPE_BATTLE_TOWER) {
+        if (ewram1B000.menuType == PARTY_MENU_TYPE_BATTLE_TOWER)
             sub_806BB9C(1);
-        }
-
         sub_806BBEC(1);
         break;
     case 8:
@@ -1533,9 +1099,7 @@ void sub_806B9A4(s16 a, u16 b, u8 c)
             for (; j <= 10 && a + j <= 0x1F; j++)
             {
                 if (a + j >= 0)
-                {
                     gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = (c << 12) | gUnknown_083769D8[i * 11 + j];
-                }
             }
         }
     }
@@ -1555,9 +1119,7 @@ void sub_806BA34(s16 a, u16 b)
             for (; j <= 10 && a + j <= 0x1F; j++)
             {
                 if (a + j >= 0)
-                {
                     gBGTilemapBuffers[2][var1 + (i * 32) + (a + j)] = 0;
-                }
             }
         }
     }
@@ -1569,14 +1131,12 @@ void sub_806BA94(s16 a, u16 b, u8 c, u8 d)
     const u8 *arr;
     u16 var1;
 
-    arr = gUnknown_08376A5E;
     if (c == 0)
-    {
         arr = gUnknown_08376A25;
-    }
+    else
+        arr = gUnknown_08376A5E;
 
     var1 = b * 32;
-
 
     for (i = 0; i < 3; i++)
     {
@@ -1622,11 +1182,13 @@ void sub_806BB3C(s16 a, u16 b)
 void sub_806BB9C(u8 a)
 {
     u8 i;
-    u16 arr[12] = {
+    u16 arr[12] =
+    {
         0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
         0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
     };
     u16 *vramPtr = (u16 *)(BG_VRAM + 0x3C30);
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         vramPtr[i] = arr[i] + (a << 12);
@@ -1637,11 +1199,13 @@ void sub_806BB9C(u8 a)
 void sub_806BBEC(u8 a)
 {
     u8 i;
-    u16 arr[12] = {
+    u16 arr[12] =
+    {
         0x2A, 0x0B, 0x0C, 0x0D, 0x0E, 0x2F,
         0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
     };
     u16 *vramPtr = (u16 *)(BG_VRAM + 0x3CB0);
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         vramPtr[i] = arr[i] + (a << 12);
@@ -1671,9 +1235,7 @@ void unref_sub_806BCB8(u8 a)
     u8 i;
 
     for (i = 0; i < gPlayerPartyCount; i++)
-    {
         sub_806BC3C(i, a);
-    }
 }
 
 // This is ultimately unreferenced, since it's caller is unreferenced.
@@ -1685,8 +1247,7 @@ void sub_806BCE8()
     {
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            u8 gender = GetMonGender(&gPlayerParty[i]);
-            switch (gender)
+            switch (GetMonGender(&gPlayerParty[i]))
             {
             case MON_MALE:
                 sub_806BC3C(i, 0x54);
@@ -1893,8 +1454,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
 
     if (menuDirectionPressed == 0)
     {
-        u8 var1 = sub_80F92BC();
-        switch (var1)
+        switch (sub_80F92BC())
         {
         case 1:
             menuDirectionPressed = 0xFF;
@@ -1923,9 +1483,7 @@ u16 HandleBattleTowerPartyMenuInput(u8 taskId)
             if (gMain.newKeys & A_BUTTON)
             {
                 if (gSprites[sub_806CA00(taskId)].data[0] == 7)
-                {
                     return B_BUTTON;
-                }
             }
         }
     }
@@ -1989,31 +1547,19 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
         u8 isDoubleBattle = IsDoubleBattle();
 
         if (menuIndex < PARTY_SIZE)
-        {
             sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + menuIndex * 2], menuIndex, 3, 0);
-        }
         else
-        {
             sub_806BBEC(1);
-        }
 
         if (!isDoubleBattle)
-        {
             ChangeDefaultPartyMenuSelection(spriteId, menuIndex, directionPressed);
-        }
         else
-        {
             ChangeDoubleBattlePartyMenuSelection(spriteId, menuIndex, directionPressed);
-        }
 
         if (gSprites[spriteId].data[0] < PARTY_SIZE)
-        {
             sub_806BF24(&gUnknown_083769A8[isDoubleBattle * 12 + gSprites[spriteId].data[0] * 2], gSprites[spriteId].data[0], 3, 1);
-        }
         else
-        {
             sub_806BBEC(2);
-        }
 
         ewram1B000.unk261 = 2;
 
@@ -2024,9 +1570,7 @@ void ChangePartyMenuSelection(u8 taskId, s8 directionPressed)
     UpdateMonIconFrame_806DA44(taskId, gSprites[spriteId].data[0], 1);
 
     if (menuIndex != gSprites[spriteId].data[0])
-    {
-        PlaySE(5);
-    }
+        PlaySE(SE_SELECT);
 }
 
 void ChangeDefaultPartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed)
@@ -2040,27 +1584,35 @@ void ChangeDefaultPartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPres
         gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
-        if (menuIndex == 0) {
+        if (menuIndex == 0)
+        {
             gSprites[spriteId].data[0] = 7;
-        } else if (menuIndex == 7) {
+        }
+        else if (menuIndex == 7)
+        {
             gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
-        } else {
+        }
+        else
+        {
             s8 diff = directionPressed;
             gSprites[spriteId].data[0] += diff;
         }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
-        if (menuIndex == gPlayerPartyCount - 1) {
+        if (menuIndex == gPlayerPartyCount - 1)
+        {
             gSprites[spriteId].data[0] = 7;
-        } else if (menuIndex == 7) {
+        }
+        else if (menuIndex == 7)
+        {
             gSprites[spriteId].data[0] = 0;
-        } else {
+        }
+        else
+        {
             s8 diff = directionPressed;
             gSprites[spriteId].data[0] += diff;
         }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
@@ -2068,14 +1620,14 @@ void ChangeDefaultPartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPres
         {
             if (gSprites[spriteId].data[1] == 0)
                 gSprites[spriteId].data[1] = 1;
-
             gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
         }
         break;
     case 0: // moving left
         // Only move the selection to the left side if one of the mons in the right-hand column are currently selected
         nextIndex = menuIndex - 1;
-        if (nextIndex <= 4) {
+        if (nextIndex <= 4)
+        {
             gSprites[spriteId].data[0] = 0;
             gSprites[spriteId].data[1] = menuIndex;
         }
@@ -2094,32 +1646,42 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
         gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
-        if (menuIndex == 7) {
+        if (menuIndex == 7)
+        {
             gSprites[spriteId].data[0] = 0;
-        } else if (menuIndex == gPlayerPartyCount - 1) {
+        }
+        else if (menuIndex == gPlayerPartyCount - 1)
+        {
             gSprites[spriteId].data[0] = 7;
-        } else {
+        }
+        else
+        {
             s8 diff = directionPressed;
             gSprites[spriteId].data[0] += diff;
         }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
-        if (menuIndex == 0) {
+        if (menuIndex == 0)
+        {
             gSprites[spriteId].data[0] = 7;
-        } else if (menuIndex == 7) {
+        }
+        else if (menuIndex == 7)
+        {
             gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
-        } else {
+        }
+        else
+        {
             s8 diff = directionPressed;
             gSprites[spriteId].data[0] += diff;
         }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
-        if (menuIndex == 0) {
-            if (gPlayerPartyCount > 2) {
+        if (menuIndex == 0)
+        {
+            if (gPlayerPartyCount > 2)
+            {
                 u16 var1 = gSprites[spriteId].data[1] - 2;
                 if (var1 > 1)
                     gSprites[spriteId].data[0] = 2;
@@ -2127,8 +1689,10 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
                     gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
             }
         }
-        else if (menuIndex == 1) {
-            if (gPlayerPartyCount > 4) {
+        else if (menuIndex == 1)
+        {
+            if (gPlayerPartyCount > 4)
+            {
                 u16 var1 = gSprites[spriteId].data[1] - 4;
                 if (var1 <= 1)
                     gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
@@ -2139,12 +1703,16 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
         break;
     case 0: // moving left
         var1 = menuIndex - 2;
-        if (var1 <= 1) {
+        if (var1 <= 1)
+        {
             gSprites[spriteId].data[0] = 0;
             gSprites[spriteId].data[1] = menuIndex;
-        } else {
+        }
+        else
+        {
             u8 var2 = menuIndex - 4;
-            if (var2 <= 1) {
+            if (var2 <= 1)
+            {
                 gSprites[spriteId].data[0] = 1;
                 gSprites[spriteId].data[1] = menuIndex;
             }
@@ -2497,54 +2065,41 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
     UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
 
     if (menuIndex < PARTY_SIZE)
-    {
         sub_806BF24(&gUnknown_083769A8[menuIndex * 2], menuIndex, 3, 0);
-    }
     else if (menuIndex == PARTY_SIZE)
-    {
         sub_806BB9C(1);
-    }
     else
-    {
         sub_806BBEC(1);
-    }
 
     menuMovement = directionPressed + 2;
-
     switch (menuMovement)
     {
     case 2: // no movement
         gSprites[spriteId].data[1] = 0;
         break;
     case 1: // moving up
-        if (menuIndex == 0) {
+        if (menuIndex == 0)
             gSprites[spriteId].data[0] = 7;
-        } else if (menuIndex == PARTY_SIZE) {
+        else if (menuIndex == PARTY_SIZE)
             gSprites[spriteId].data[0] = gPlayerPartyCount - 1;
-        } else {
+        else
             gSprites[spriteId].data[0] += directionPressed;
-        }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 3: // moving down
-        if (menuIndex == gPlayerPartyCount - 1) {
+        if (menuIndex == gPlayerPartyCount - 1)
             gSprites[spriteId].data[0] = 6;
-        } else if (menuIndex == 7) {
+        else if (menuIndex == 7)
             gSprites[spriteId].data[0] = 0;
-        } else {
+        else
             gSprites[spriteId].data[0] += directionPressed;
-        }
-
         gSprites[spriteId].data[1] = 0;
         break;
     case 4: // moving right
         if (gPlayerPartyCount > 1 && menuIndex == 0)
         {
-            if (gSprites[spriteId].data[1] == 0) {
+            if (gSprites[spriteId].data[1] == 0)
                 gSprites[spriteId].data[1] = 1;
-            }
-
             gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
         }
         break;
@@ -2564,17 +2119,11 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
 
     newMenuIndex = gSprites[spriteId].data[0];
     if (gSprites[spriteId].data[0] < PARTY_SIZE)
-    {
         sub_806BF24(&gUnknown_083769A8[gSprites[spriteId].data[0] * 2], newMenuIndex, 3, 1);
-    }
     else if (gSprites[spriteId].data[0] == PARTY_SIZE)
-    {
         sub_806BB9C(2);
-    }
     else
-    {
         sub_806BBEC(2);
-    }
 
     ewram1B000.unk261 = 2;
 
@@ -2582,9 +2131,7 @@ void ChangeBattleTowerPartyMenuSelection(u8 taskId, s8 directionPressed)
     UpdateMonIconFrame_806DA44(taskId, newMenuIndex2, 1);
 
     if (menuIndex != gSprites[spriteId].data[0])
-    {
-        PlaySE(5);
-    }
+        PlaySE(SE_SELECT);
 }
 
 // Selects the "OK" button in the Battle Tower party menu.
@@ -2598,13 +2145,9 @@ void SelectBattleTowerOKButton(u8 taskId)
         UpdateMonIconFrame_806DA44(taskId, menuIndex, 0);
 
         if (menuIndex < PARTY_SIZE)
-        {
             sub_806BF24(&gUnknown_083769A8[menuIndex * 2], menuIndex, 3, 0);
-        }
         else
-        {
             sub_806BBEC(1);
-        }
 
         gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].data[0] = 6;
@@ -2614,7 +2157,7 @@ void SelectBattleTowerOKButton(u8 taskId)
         sub_806BB9C(2);
 
         ewram1B000.unk261 = 2;
-        PlaySE(5);
+        PlaySE(SE_SELECT);
     }
 }
 
@@ -2625,24 +2168,28 @@ void sub_806C92C(u8 spriteId)
 
     if (!IsDoubleBattle())
     {
-        if (menuIndex1 < 1) {
-            if (menuIndex2 < 1) {
+        if (menuIndex1 < 1)
+        {
+            if (menuIndex2 < 1)
                 menuIndex2 = 1;
-            }
-        } else {
-            if (menuIndex2 >= 1) {
-                menuIndex2 = 0;
-            }
         }
-    } else {
-        if (menuIndex1 < 2) {
-            if (menuIndex2 < 2) {
-                menuIndex2 = 2;
-            }
-        } else {
-            if (menuIndex2 >= 2) {
+        else
+        {
+            if (menuIndex2 >= 1)
                 menuIndex2 = 0;
-            }
+        }
+    }
+    else
+    {
+        if (menuIndex1 < 2)
+        {
+            if (menuIndex2 < 2)
+                menuIndex2 = 2;
+        }
+        else
+        {
+            if (menuIndex2 >= 2)
+                menuIndex2 = 0;
         }
     }
 
@@ -2709,13 +2256,9 @@ void ChangePartyMenuSwitchPokemonSelection(u8 taskId, s16 menuDirectionPressed)
     ChangePartyMenuSelection(taskId, menuDirectionPressed);
 
     if (sprite1->data[0] != sprite2->data[0])
-    {
         sub_806BF24(&gUnknown_083769A8[sprite1->data[0] * 2], sprite1->data[0], 6, 1);
-    }
     else
-    {
         sub_806BF24(&gUnknown_083769A8[sprite1->data[0] * 2], sprite1->data[0], 6, 0);
-    }
 }
 
 void HandlePartyMenuSwitchPokemonInput(u8 taskId)
@@ -2772,14 +2315,9 @@ void sub_806CCE4()
     u8 monIndex2 = gSprites[ewram01000.unk2].data[0];
 
     if (monIndex1 <= 5)
-    {
         sub_806BF24(&gUnknown_083769A8[monIndex1 * 2], monIndex1, 3, 0);
-    }
-
     if (monIndex2 <= 5)
-    {
         sub_806BF24(&gUnknown_083769A8[monIndex2 * 2], monIndex2, 3, 1);
-    }
 }
 
 void sub_806CD44(u8 taskId)
@@ -2988,9 +2526,7 @@ void sub_806D05C(u8 taskId)
     sub_806CFA0(taskId, 1);
 
     if (ewram01000.unk8 == 0 && ewram01000.unkA == 11)
-    {
         gTasks[taskId].func = sub_806D198;
-    }
 }
 
 void sub_806D098(u8 a, u8 b)
@@ -3032,9 +2568,7 @@ void sub_806D15C(u8 taskId)
     sub_806D098(taskId, 1);
 
     if (ewram01000.unk8 == 11 && ewram01000.unkA == 11)
-    {
         gTasks[taskId].func = sub_806D198;
-    }
 }
 
 void sub_806D198(u8 taskId)
@@ -3104,22 +2638,14 @@ void sub_806D3B4(u8 taskId, u16 species1, u16 species2)
     sub_806B9A4(var1[2] + gTasks[taskId].data[0], var1[3], 4);
 
     if (species1)
-    {
         sub_806BA94(var1[8] + gTasks[taskId].data[0], var1[9], 0, 4);
-    }
     else
-    {
         sub_806BA94(var1[8] + gTasks[taskId].data[0], var1[9], 1, 4);
-    }
 
     if (species2)
-    {
         sub_806BA94(var1[10] + gTasks[taskId].data[0], var1[11], 0, 4);
-    }
     else
-    {
         sub_806BA94(var1[10] + gTasks[taskId].data[0], var1[11], 1, 4);
-    }
 }
 
 void sub_806D4AC(u8 taskId, u16 species, u8 c)
@@ -3203,19 +2729,13 @@ bool8 LoadPartyMenuGraphics(u8 a)
     bool8 retVal = FALSE;
 
     if (a < 2)
-    {
         LZDecompressVram(gPartyMenuMisc_Gfx, (void *)BG_VRAM);
-    }
 
     if (a == 2 || a == 0)
-    {
         LZDecompressVram(gPartyMenuMisc_Tilemap, (void *)(BG_VRAM + 0x3800));
-    }
 
     if (a == 3 || a == 0)
-    {
         LoadCompressedPalette(gPartyMenuMisc_Pal, 0, 0x160);
-    }
 
     if (a == 4 || a == 0)
     {
@@ -3224,19 +2744,13 @@ bool8 LoadPartyMenuGraphics(u8 a)
     }
 
     if (a == 5 || a == 0)
-    {
         LZDecompressVram(gPartyMenuHpBar_Gfx, (void *)(BG_VRAM + 0x6000));
-    }
 
     if (a == 6 || a == 0)
-    {
         LZDecompressVram(gPartyMenuOrderText_Gfx, (void *)(BG_VRAM + 0x6180));
-    }
 
     if (a == 7 || a == 0)
-    {
         LZDecompressVram(gStatusGfx_Icons, (void *)(BG_VRAM + 0x7180));
-    }
 
     if (a == 8 || a == 0)
     {
@@ -3255,21 +2769,13 @@ void SetMonIconAnimByHP(u8 spriteId, u16 currentHP, u16 maxHP)
     if (currentHP != maxHP)
     {
         if (hpBarLevel == 3)
-        {
             animNum = 1;
-        }
         else if (hpBarLevel == 2)
-        {
             animNum = 2;
-        }
         else if (hpBarLevel == 1)
-        {
             animNum = 3;
-        }
         else
-        {
             animNum = 4;
-        }
     }
 
     sub_809D824(&gSprites[spriteId], animNum);
@@ -3300,25 +2806,19 @@ void TryCreatePartyMenuMonIcon(u8 taskId, u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES))
     {
-        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
-        if (isLinkDoubleBattle == TRUE)
-        {
+        if (IsLinkDoubleBattle() == TRUE)
             CreatePartyMenuMonIcon(taskId, monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
-        }
         else
-        {
             CreatePartyMenuMonIcon(taskId, monIndex, IsDoubleBattle(), pokemon);
-        }
     }
 }
 
 void unref_sub_806D964(u8 taskId)
 {
     u8 i;
+
     for (i = 0; i < gPlayerPartyCount; i++)
-    {
         TryCreatePartyMenuMonIcon(taskId, i, &gPlayerParty[i]);
-    }
 }
 
 void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct UnknownPokemonStruct2 *pokemon)
@@ -3333,19 +2833,14 @@ void CreateMonIcon_LinkMultiBattle(u8 taskId, u8 monIndex, u8 menuType, struct U
 
 void UpdateMonIconFrame_806DA0C(struct Sprite *sprite)
 {
-    u8 var1;
+    u8 var1 = UpdateMonIconFrame(sprite);
 
-    var1 = UpdateMonIconFrame(sprite);
     if (var1)
     {
         if (var1 & 1)
-        {
             sprite->pos2.y = -3;
-        }
         else
-        {
             sprite->pos2.y = 1;
-        }
     }
 }
 
@@ -3365,13 +2860,9 @@ void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c)
         gSprites[spriteId].data[0] = 0;
 
         if (!c)
-        {
             gSprites[spriteId].callback = UpdateMonIconFrame_806DA38;
-        }
         else
-        {
             gSprites[spriteId].callback = UpdateMonIconFrame_806DA0C;
-        }
     }
 }
 
@@ -3383,8 +2874,8 @@ void LoadHeldItemIconGraphics(void)
 
 void SpriteCB_HeldItemIcon(struct Sprite *sprite)
 {
-
     u8 data7 = sprite->data[7];
+
     if (gSprites[data7].invisible)
     {
         sprite->invisible = 1;
@@ -3422,29 +2913,19 @@ void CreateHeldItemIcons(u8 *a, u8 *b, u8 c)
     switch (c)
     {
     case 0:
-        i = 0;
-        while (i < a[0])
+        for (i = 0; i < a[0]; i++)
         {
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
             if (heldItem)
-            {
                 CreateHeldItemIcon(b[i], ItemIsMail(heldItem));
-            }
-
-            i++;
         }
         break;
     case 1:
-        i = 0;
-        while (i < a[1])
+        for (i = 0; i < a[1]; i++)
         {
             heldItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
             if (heldItem)
-            {
                 CreateHeldItemIcon(b[i + 6], ItemIsMail(heldItem));
-            }
-
-            i++;
         }
         break;
     }
@@ -3495,13 +2976,9 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
     else
     {
         if (ItemIsMail(item))
-        {
             StartSpriteAnim(&gSprites[heldItemSpriteId], 1);
-        }
         else
-        {
             StartSpriteAnim(&gSprites[heldItemSpriteId], 0);
-        }
 
         gSprites[heldItemSpriteId].invisible = 0;
     }
@@ -3611,25 +3088,25 @@ u8 GetMonIconSpriteId(u8 taskId, u8 monIndex)
 {
     switch (monIndex)
     {
-        case 1:
-            return gTasks[taskId].data[0]; 
-            break;
-        case 2:
-            return gTasks[taskId].data[1] >> 8;
-            break;
-        case 3:
-            return gTasks[taskId].data[1];
-            break;
-        case 4:
-            return gTasks[taskId].data[2] >> 8;
-            break;
-        case 5:
-            return gTasks[taskId].data[2];
-            break;
-        case 0:
-        default:
-            return gTasks[taskId].data[0] >> 8;
-            break;
+    case 1:
+        return gTasks[taskId].data[0]; 
+        break;
+    case 2:
+        return gTasks[taskId].data[1] >> 8;
+        break;
+    case 3:
+        return gTasks[taskId].data[1];
+        break;
+    case 4:
+        return gTasks[taskId].data[2] >> 8;
+        break;
+    case 5:
+        return gTasks[taskId].data[2];
+        break;
+    case 0:
+    default:
+        return gTasks[taskId].data[0] >> 8;
+        break;
     }
 }
 
@@ -3637,24 +3114,24 @@ void SetMonIconSpriteId(u8 taskId, u8 monIndex, u8 spriteId)
 {
     switch (monIndex)
     {
-        case 0:
-            gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (spriteId << 8);
-            break;
-        case 1:
-            gTasks[taskId].data[0] = (gTasks[taskId].data[0] & -0x100) | spriteId;
-            break;
-        case 2:
-            gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (spriteId << 8);
-            break;
-        case 3:
-            gTasks[taskId].data[1] = (gTasks[taskId].data[1] & -0x100) | spriteId;
-            break;
-        case 4:
-            gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (spriteId << 8);
-            break;
-        case 5:
-            gTasks[taskId].data[2] = (gTasks[taskId].data[2] & -0x100) | spriteId;
-            break;
+    case 0:
+        gTasks[taskId].data[0] = (u8)gTasks[taskId].data[0] | (spriteId << 8);
+        break;
+    case 1:
+        gTasks[taskId].data[0] = (gTasks[taskId].data[0] & -0x100) | spriteId;
+        break;
+    case 2:
+        gTasks[taskId].data[1] = (u8)gTasks[taskId].data[1] | (spriteId << 8);
+        break;
+    case 3:
+        gTasks[taskId].data[1] = (gTasks[taskId].data[1] & -0x100) | spriteId;
+        break;
+    case 4:
+        gTasks[taskId].data[2] = (u8)gTasks[taskId].data[2] | (spriteId << 8);
+        break;
+    case 5:
+        gTasks[taskId].data[2] = (gTasks[taskId].data[2] & -0x100) | spriteId;
+        break;
     }
 }
 
@@ -3799,15 +3276,10 @@ void TryPrintPartyMenuMonNickname(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES))
     {
-        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
-        if (isLinkDoubleBattle == TRUE)
-        {
+        if (IsLinkDoubleBattle() == TRUE)
             PrintPartyMenuMonNickname(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
-        }
         else
-        {
             PrintPartyMenuMonNickname(monIndex, IsDoubleBattle(), pokemon);
-        }
     }
 }
 
@@ -3816,9 +3288,7 @@ void PrintPartyMenuMonNicknames(void)
     u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
-    {
         TryPrintPartyMenuMonNickname(i, &gPlayerParty[i]);
-    }
 }
 
 u8 *GetMonNickname(struct Pokemon *pokemon, u8 *stringBuffer)
@@ -3836,38 +3306,28 @@ void PartyMenuPutStatusTilemap(u8 monIndex, u8 menuLayout, u8 status)
     u8 var1 = status * 4;
 
     for (i = 0; i < 4; i++)
-    {
         vramPtr[i] = (0x18C + var1 + i) | -0x5000;
-    }
 }
 
 static void PartyMenuClearLevelStatusTilemap(u8 monIndex)
 {
-    bool8 isLinkDoubleBattle;
     u8 menuLayout;
     u8 x;
     u8 y;
     u16 *vramPtr;
     u8 i;
 
-    isLinkDoubleBattle = IsLinkDoubleBattle();
-    if (isLinkDoubleBattle == TRUE)
-    {
+    if (IsLinkDoubleBattle() == TRUE)
         menuLayout = PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE;
-    }
     else
-    {
         menuLayout = IsDoubleBattle();
-    }
 
     x = gUnknown_08376738[menuLayout][monIndex].x - 1;
     y = gUnknown_08376738[menuLayout][monIndex].y + 1;
 
     vramPtr = (u16*)(VRAM + 0xF000) + (x + y * 32);
     for (i = 0; i < 4; i++)
-    {
         vramPtr[i] = 0;
-    }
 }
 
 static void PartyMenuWriteTilemap(u8 a, u8 x, u8 y)
@@ -3908,30 +3368,18 @@ void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        u8 statusAndPkrs;
-        bool8 isLinkDoubleBattle;
+        u8 statusAndPkrs = GetMonStatusAndPokerus(pokemon);
         u8 menuLayout;
 
-        statusAndPkrs = GetMonStatusAndPokerus(pokemon);
-
-        isLinkDoubleBattle = IsLinkDoubleBattle();
-        if (isLinkDoubleBattle == TRUE)
-        {
+        if (IsLinkDoubleBattle() == TRUE)
             menuLayout = PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE;
-        }
         else
-        {
             menuLayout = IsDoubleBattle();
-        }
 
         if (statusAndPkrs != 0 && statusAndPkrs != 6)
-        {
             PartyMenuPutStatusTilemap(monIndex, menuLayout, statusAndPkrs - 1);
-        }
         else
-        {
             PartyMenuPrintLevel(monIndex, menuLayout, pokemon);
-        }
 
         PartyMenuPrintGenderIcon(monIndex, menuLayout, pokemon);
     }
@@ -3942,9 +3390,7 @@ void PartyMenuPrintMonsLevelOrStatus(void)
     u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
-    {
         PartyMenuPrintMonLevelOrStatus(i, &gPlayerParty[i]);
-    }
 }
 
 void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 menuLayout, u8 monIndex, u8 *nickname)
@@ -3956,12 +3402,12 @@ void PartyMenuDoPrintGenderIcon(u16 species, u8 gender, u8 menuLayout, u8 monInd
 
         switch (gender)
         {
-            case MON_MALE:
-                PartyMenuWriteTilemap(0x42, x, y);
-                break;
-            case MON_FEMALE:
-                PartyMenuWriteTilemap(0x44, x, y);
-                break;
+        case MON_MALE:
+            PartyMenuWriteTilemap(0x42, x, y);
+            break;
+        case MON_FEMALE:
+            PartyMenuWriteTilemap(0x44, x, y);
+            break;
         }
     }
 }
@@ -3994,11 +3440,8 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 
 void PartyMenuPrintHP(u8 monIndex, u8 b, struct Pokemon *pokemon)
 {
-    u16 currentHP;
-    u16 maxHP;
-
-    currentHP = GetMonData(pokemon, MON_DATA_HP);
-    maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
+    u16 currentHP = GetMonData(pokemon, MON_DATA_HP);
+    u16 maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
 
     PartyMenuDoPrintHP(monIndex, b, currentHP, maxHP);
 }
@@ -4007,15 +3450,10 @@ void PartyMenuTryPrintHP(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        bool8 isLinkDoubleBattle = IsLinkDoubleBattle();
-        if (isLinkDoubleBattle == TRUE)
-        {
+        if (IsLinkDoubleBattle() == TRUE)
             PartyMenuPrintHP(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
-        }
         else
-        {
             PartyMenuPrintHP(monIndex, IsDoubleBattle(), pokemon);
-        }
     }
 }
 
@@ -4024,9 +3462,7 @@ void PartyMenuTryPrintMonsHP(void)
     u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
-    {
         PartyMenuTryPrintHP(i, &gPlayerParty[i]);
-    }
 }
 
 void unref_sub_806E564(void) { }
@@ -4046,17 +3482,11 @@ void PartyMenuDoDrawHPBar(u8 monIndex, u8 menuLayout, u16 currentHP, u16 maxHP)
 
     hpBarLevel = GetHPBarLevel(currentHP, maxHP);
     if (hpBarLevel > 2)
-    {
         battleInterface.unkC_0 = 4;
-    }
     if (hpBarLevel == 2)
-    {
         battleInterface.unkC_0 = 5;
-    }
     if (hpBarLevel < 2)
-    {
         battleInterface.unkC_0 = 6;
-    }
 
     battleInterface.unk10 = 0x100;
 
@@ -4082,15 +3512,10 @@ void PartyMenuTryDrawHPBar(u8 monIndex, struct Pokemon *pokemon)
 {
     if (GetMonData(pokemon, MON_DATA_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
     {
-        bool8 isDoubleBattle = IsLinkDoubleBattle();
-        if (isDoubleBattle == TRUE)
-        {
+        if (IsLinkDoubleBattle() == TRUE)
             PartyMenuDrawHPBar(monIndex, PARTY_MENU_LAYOUT_LINK_DOUBLE_BATTLE, pokemon);
-        }
         else
-        {
             PartyMenuDrawHPBar(monIndex, IsDoubleBattle(), pokemon);
-        }
     }
 }
 
@@ -4099,9 +3524,7 @@ void PartyMenuDrawHPBars(void)
     u8 i;
 
     for (i = 0; i < PARTY_SIZE; i++)
-    {
         PartyMenuTryDrawHPBar(i, &gPlayerParty[i]);
-    }
 }
 
 void SwapPokemon(struct Pokemon *a, struct Pokemon *b)
@@ -4871,64 +4294,64 @@ void GetMedicineItemEffectMessage(u16 item)
 {
     switch (GetItemEffectType(item))
     {
-        case 3:
-            StringExpandPlaceholders(gStringVar4, gOtherText_CuredPoisoning);
-            break;
-        case 4:
-            StringExpandPlaceholders(gStringVar4, gOtherText_WokeUp);
-            break;
-        case 5:
-            StringExpandPlaceholders(gStringVar4, gOtherText_BurnHealed);
-            break;
-        case 6:
-            StringExpandPlaceholders(gStringVar4, gOtherText_ThawedOut);
-            break;
-        case 7:
-            StringExpandPlaceholders(gStringVar4, gOtherText_CuredParalysis);
-            break;
-        case 8:
-            StringExpandPlaceholders(gStringVar4, gOtherText_SnapConfusion);
-            break;
-        case 9:
-            StringExpandPlaceholders(gStringVar4, gOtherText_GotOverLove);
-            break;
-        case 11:
-            StringExpandPlaceholders(gStringVar4, gOtherText_BecameHealthy);
-            break;
-        case 13:
-            StringCopy(gStringVar2, gOtherText_Hp2);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 12:
-            StringCopy(gStringVar2, gOtherText_Attack);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 17:
-            StringCopy(gStringVar2, gOtherText_Defense);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 16:
-            StringCopy(gStringVar2, gOtherText_Speed);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 14:
-            StringCopy(gStringVar2, gOtherText_SpAtk2);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 15:
-            StringCopy(gStringVar2, gOtherText_SpDef2);
-            StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
-            break;
-        case 19:
-        case 20:
-            StringExpandPlaceholders(gStringVar4, gOtherText_PPIncreased);
-            break;
-        case 21:
-            StringExpandPlaceholders(gStringVar4, gOtherText_PPRestored);
-            break;
-        default:
-            StringExpandPlaceholders(gStringVar4, gOtherText_WontHaveAnyEffect);
-            break;
+    case 3:
+        StringExpandPlaceholders(gStringVar4, gOtherText_CuredPoisoning);
+        break;
+    case 4:
+        StringExpandPlaceholders(gStringVar4, gOtherText_WokeUp);
+        break;
+    case 5:
+        StringExpandPlaceholders(gStringVar4, gOtherText_BurnHealed);
+        break;
+    case 6:
+        StringExpandPlaceholders(gStringVar4, gOtherText_ThawedOut);
+        break;
+    case 7:
+        StringExpandPlaceholders(gStringVar4, gOtherText_CuredParalysis);
+        break;
+    case 8:
+        StringExpandPlaceholders(gStringVar4, gOtherText_SnapConfusion);
+        break;
+    case 9:
+        StringExpandPlaceholders(gStringVar4, gOtherText_GotOverLove);
+        break;
+    case 11:
+        StringExpandPlaceholders(gStringVar4, gOtherText_BecameHealthy);
+        break;
+    case 13:
+        StringCopy(gStringVar2, gOtherText_Hp2);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 12:
+        StringCopy(gStringVar2, gOtherText_Attack);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 17:
+        StringCopy(gStringVar2, gOtherText_Defense);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 16:
+        StringCopy(gStringVar2, gOtherText_Speed);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 14:
+        StringCopy(gStringVar2, gOtherText_SpAtk2);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 15:
+        StringCopy(gStringVar2, gOtherText_SpDef2);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WasRaised);
+        break;
+    case 19:
+    case 20:
+        StringExpandPlaceholders(gStringVar4, gOtherText_PPIncreased);
+        break;
+    case 21:
+        StringExpandPlaceholders(gStringVar4, gOtherText_PPRestored);
+        break;
+    default:
+        StringExpandPlaceholders(gStringVar4, gOtherText_WontHaveAnyEffect);
+        break;
     }
 }
 
@@ -5025,9 +4448,9 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
 
 bool8 IsBlueYellowRedFlute(u16 item)
 {
-    if (item == 0x27
-     || item == 0x29
-     || item == 0x28)
+    if (item == ITEM_BLUE_FLUTE
+     || item == ITEM_RED_FLUTE
+     || item == ITEM_YELLOW_FLUTE)
         return TRUE;
     else
         return FALSE;
@@ -5339,7 +4762,6 @@ void Task_RareCandy2(u8 taskId)
     }
 }
 
-#if ENGLISH
 void PrintStatGrowthsInLevelUpWindow(u8 taskId)
 {
     u8 i;
@@ -5351,6 +4773,9 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId)
         u8 x;
         u8 y;
         u32 stat;
+#if GERMAN
+        u8 *ptr;
+#endif
 
         stat = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
 
@@ -5360,142 +4785,31 @@ void PrintStatGrowthsInLevelUpWindow(u8 taskId)
         x = (i / 3) * 9 + 11;
         y = ((i % 3) << 1) + 1;
 
+#if GERMAN
+        ptr = StringCopy(gStringVar1, StatNames[i]);
+        *ptr++ = EXT_CTRL_CODE_BEGIN;
+        *ptr++ = 0x13;
+        *ptr++ = 0x2E;
+        ptr = StringCopy(ptr, gOtherText_TallPlusAndRightArrow);
+        *ptr++ = EXT_CTRL_CODE_BEGIN;
+        *ptr++ = 0x13;
+        *ptr++ = 0x34;
+        ConvertIntToDecimalStringN(ptr, ewram1B000.statGrowths[i], 1, 2);
+        Menu_PrintText(gStringVar1, x + 1, y);
+#else
         Menu_PrintTextPixelCoords(StatNames[i], (x + 1) * 8, y * 8, 1);
-
         if (i == 2)
             Menu_PrintTextPixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 0);
         else
             Menu_PrintTextPixelCoords(gOtherText_TallPlusAndRightArrow, (x + 6) * 8 + 6, y * 8, 1);
-
         gStringVar1[0] = EXT_CTRL_CODE_BEGIN;
         gStringVar1[1] = 0x14;
         gStringVar1[2] = 0x06;
-
         ConvertIntToDecimalStringN(gStringVar1 + 3, ewram1B000.statGrowths[i], 1, 2);
-
         Menu_PrintTextPixelCoords(gStringVar1, (x + 6) * 8 + 12, y * 8, 0);
+#endif
     }
 }
-#elif GERMAN
-__attribute__((naked))
-void PrintStatGrowthsInLevelUpWindow(u8 taskId) {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    movs r0, 0xB\n\
-    movs r1, 0\n\
-    movs r2, 0x1D\n\
-    movs r3, 0x7\n\
-    bl Menu_DrawStdWindowFrame\n\
-    movs r7, 0\n\
-    ldr r0, _0807092C @ =gStringVar1\n\
-    mov r10, r0\n\
-    movs r1, 0xFC\n\
-    mov r9, r1\n\
-    movs r2, 0x13\n\
-    mov r8, r2\n\
-_0807086C:\n\
-    ldr r1, _08070930 @ =gSharedMem + 0x1C000\n\
-    ldr r0, [r1]\n\
-    ldr r1, _08070934 @ =StatDataTypes\n\
-    adds r1, r7, r1\n\
-    ldrb r1, [r1]\n\
-    bl GetMonData\n\
-    adds r1, r7, 0x6\n\
-    lsls r1, 1\n\
-    ldr r2, _08070938 @ =gSharedMem + 0x1B264\n\
-    adds r1, r2, r1\n\
-    strh r0, [r1]\n\
-    lsls r6, r7, 1\n\
-    adds r6, r2, r6\n\
-    ldrh r1, [r6]\n\
-    subs r0, r1\n\
-    strh r0, [r6]\n\
-    adds r0, r7, 0\n\
-    movs r1, 0x3\n\
-    bl __udivsi3\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r4, r0, 3\n\
-    adds r4, r0\n\
-    adds r4, 0xB\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r0, r7, 0\n\
-    movs r1, 0x3\n\
-    bl __umodsi3\n\
-    adds r5, r0, 0\n\
-    lsls r5, 1\n\
-    adds r5, 0x1\n\
-    lsls r5, 24\n\
-    lsrs r5, 24\n\
-    ldr r1, _0807093C @ =StatNames\n\
-    lsls r0, r7, 2\n\
-    adds r0, r1\n\
-    ldr r1, [r0]\n\
-    mov r0, r10\n\
-    bl StringCopy\n\
-    adds r2, r0, 0\n\
-    mov r0, r9\n\
-    strb r0, [r2]\n\
-    adds r2, 0x1\n\
-    mov r1, r8\n\
-    strb r1, [r2]\n\
-    adds r2, 0x1\n\
-    movs r0, 0x2E\n\
-    strb r0, [r2]\n\
-    adds r2, 0x1\n\
-    adds r0, r2, 0\n\
-    ldr r1, _08070940 @ =gOtherText_TallPlusAndRightArrow\n\
-    bl StringCopy\n\
-    adds r2, r0, 0\n\
-    mov r0, r9\n\
-    strb r0, [r2]\n\
-    adds r2, 0x1\n\
-    mov r1, r8\n\
-    strb r1, [r2]\n\
-    adds r2, 0x1\n\
-    movs r0, 0x34\n\
-    strb r0, [r2]\n\
-    adds r2, 0x1\n\
-    movs r0, 0\n\
-    ldrsh r1, [r6, r0]\n\
-    adds r0, r2, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x2\n\
-    bl ConvertIntToDecimalStringN\n\
-    adds r4, 0x1\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r0, r10\n\
-    adds r1, r4, 0\n\
-    adds r2, r5, 0\n\
-    bl Menu_PrintText\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r7, r0, 24\n\
-    cmp r7, 0x5\n\
-    bls _0807086C\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0807092C: .4byte gStringVar1\n\
-_08070930: .4byte gSharedMem + 0x1C000\n\
-_08070934: .4byte StatDataTypes\n\
-_08070938: .4byte gSharedMem + 0x1B264\n\
-_0807093C: .4byte StatNames\n\
-_08070940: .4byte gOtherText_TallPlusAndRightArrow\n\
-    .syntax divided\n");
-}
-#endif
 
 void PrintNewStatsInLevelUpWindow(u8 taskId)
 {
@@ -5526,24 +4840,13 @@ void PrintNewStatsInLevelUpWindow(u8 taskId)
 
 void RedrawPokemonInfoInMenu(u8 monIndex, struct Pokemon *pokemon)
 {
-    u8 statusAndPkrs;
-    bool8 isDoubleBattle;
-    u16 currentHP;
-    u16 maxHP;
+    u8 statusAndPkrs = GetMonStatusAndPokerus(pokemon);
     u8 icon;
 
-    statusAndPkrs = GetMonStatusAndPokerus(pokemon);
     if (statusAndPkrs == 0 || statusAndPkrs == 6)
-    {
         PartyMenuUpdateLevelOrStatus(pokemon, monIndex);
-    }
 
-    isDoubleBattle = IsDoubleBattle();
-
-    currentHP = GetMonData(pokemon, MON_DATA_HP);
-    maxHP = GetMonData(pokemon, MON_DATA_MAX_HP);
-
-    PartyMenuDoPrintHP(monIndex, isDoubleBattle, currentHP, maxHP);
+    PartyMenuDoPrintHP(monIndex, IsDoubleBattle(), GetMonData(pokemon, MON_DATA_HP), GetMonData(pokemon, MON_DATA_MAX_HP));
     PartyMenuTryDrawHPBar(monIndex, pokemon);
 
     icon = GetMonIconSpriteId(ewram1C000.unk4, monIndex);
@@ -5569,45 +4872,45 @@ void Task_RareCandy3(u8 taskId)
 
             switch (learnedMove)
             {
-                case 0:
-                    // No move is learned.
-                    evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
-                    if (evolutionSpecies != 0)
-                    {
-                        gCB2_AfterEvolution = sub_80A53F8;
-                        BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
-                        DestroyTask(taskId);
-                    }
-                    else
-                    {
-                        sub_8070D90(taskId);
-                    }
-                    break;
-                case 0xFFFF:
-                    // Mon already knows 4 moves.
-                    GetMonNickname(ewram1C000.pokemon, gStringVar1);
-                    StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+            case 0:
+                // No move is learned.
+                evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
+                if (evolutionSpecies != 0)
+                {
+                    gCB2_AfterEvolution = sub_80A53F8;
+                    BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+                    DestroyTask(taskId);
+                }
+                else
+                {
+                    sub_8070D90(taskId);
+                }
+                break;
+            case 0xFFFF:
+                // Mon already knows 4 moves.
+                GetMonNickname(ewram1C000.pokemon, gStringVar1);
+                StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
 
-                    StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
-                    sub_806E834(gStringVar4, 1);
+                StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
+                sub_806E834(gStringVar4, 1);
 
-                    ewram1C000.unk8 = gMoveToLearn;
-                    gTasks[taskId].func = sub_806F358;
-                    break;
-                case 0xFFFE:
-                    // Move was already known by the mon.
-                    gTasks[taskId].func = TeachMonMoveInPartyMenu;
-                    break;
-                default:
-                    // Mon automatically learned a move because it knew less than four moves.
-                    GetMonNickname(ewram1C000.pokemon, gStringVar1);
-                    StringCopy(gStringVar2, gMoveNames[learnedMove]);
+                ewram1C000.unk8 = gMoveToLearn;
+                gTasks[taskId].func = sub_806F358;
+                break;
+            case 0xFFFE:
+                // Move was already known by the mon.
+                gTasks[taskId].func = TeachMonMoveInPartyMenu;
+                break;
+            default:
+                // Mon automatically learned a move because it knew less than four moves.
+                GetMonNickname(ewram1C000.pokemon, gStringVar1);
+                StringCopy(gStringVar2, gMoveNames[learnedMove]);
 
-                    StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
-                    sub_806E834(gStringVar4, 1);
+                StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
+                sub_806E834(gStringVar4, 1);
 
-                    gTasks[taskId].func = Task_TeamMonTMMove3;
-                    break;
+                gTasks[taskId].func = Task_TeamMonTMMove3;
+                break;
             }
         }
     }
@@ -5621,45 +4924,45 @@ void TeachMonMoveInPartyMenu(u8 taskId)
     learnedMove = MonTryLearningNewMove(ewram1C000.pokemon, FALSE);
     switch (learnedMove)
     {
-        case 0:
-            // No move is learned.
-            evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
-            if (evolutionSpecies != 0)
-            {
-                gCB2_AfterEvolution = sub_80A53F8;
-                BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
-                DestroyTask(taskId);
-            }
-            else
-            {
-                sub_8070D90(taskId);
-            }
-            break;
-        case 0xFFFF:
-            // Mon already knows 4 moves.
-            GetMonNickname(ewram1C000.pokemon, gStringVar1);
-            StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+    case 0:
+        // No move is learned.
+        evolutionSpecies = GetEvolutionTargetSpecies(ewram1C000.pokemon, 0, 0);
+        if (evolutionSpecies != 0)
+        {
+            gCB2_AfterEvolution = sub_80A53F8;
+            BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+            DestroyTask(taskId);
+        }
+        else
+        {
+            sub_8070D90(taskId);
+        }
+        break;
+    case 0xFFFF:
+        // Mon already knows 4 moves.
+        GetMonNickname(ewram1C000.pokemon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
 
-            StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
-            sub_806E834(gStringVar4, 1);
+        StringExpandPlaceholders(gStringVar4, gOtherText_WantsToLearn);
+        sub_806E834(gStringVar4, 1);
 
-            ewram1C000.unk8 = gMoveToLearn;
-            gTasks[taskId].func = sub_806F358;
-            break;
-        case 0xFFFE:
-            // Move was already known by the mon. Go on the the next move to be learned.
-            TeachMonMoveInPartyMenu(taskId);
-            break;
-        default:
-            // Mon automatically learned a move because it knew less than four moves.
-            GetMonNickname(ewram1C000.pokemon, gStringVar1);
-            StringCopy(gStringVar2, gMoveNames[learnedMove]);
+        ewram1C000.unk8 = gMoveToLearn;
+        gTasks[taskId].func = sub_806F358;
+        break;
+    case 0xFFFE:
+        // Move was already known by the mon. Go on the the next move to be learned.
+        TeachMonMoveInPartyMenu(taskId);
+        break;
+    default:
+        // Mon automatically learned a move because it knew less than four moves.
+        GetMonNickname(ewram1C000.pokemon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[learnedMove]);
 
-            StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
-            sub_806E834(gStringVar4, 1);
+        StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
+        sub_806E834(gStringVar4, 1);
 
-            gTasks[taskId].func = Task_TeamMonTMMove3;
-            break;
+        gTasks[taskId].func = Task_TeamMonTMMove3;
+        break;
     }
 }
 

@@ -21,9 +21,12 @@
 #include "constants/map_objects.h"
 #include "constants/weather.h"
 
+extern u8 (*gMenuCallback)(void);
+
 // Static type declarations
 
-struct CableCarEwramStruct1 {
+struct CableCarEwramStruct1
+{
     u8 unk_0000;
     u8 unk_0001;
     u8 unk_0002;
@@ -55,7 +58,8 @@ struct CableCarEwramStruct1 {
     u16 unk_08fc[0x20][0x20];
 }; // size 0x10FC
 
-struct CableCarEwramStruct2 {
+struct CableCarEwramStruct2
+{
     /* 0x000 */ u16 mtChimneyTilemap[0xb4];
     /* 0x168 */ u16 treeTilemap[0x1e0];
     /* 0x528 */ u16 mountainTilemap[0x258];
@@ -97,8 +101,8 @@ static void sub_81248AC(u8);
 
 #if DEBUG
 
-u8 debug_sub_8138D74(void);
-u8 debug_sub_8138D8C(void);
+void debug_sub_8138D74(void);
+void debug_sub_8138D8C(void);
 u8 debug_sub_8138C14(void);
 u8 debug_sub_8138C34(void);
 u8 debug_sub_810CD9C(void);
@@ -111,8 +115,8 @@ const u8 Str_842DBFC[] = _("View a MAIL");
 
 const struct MenuAction gUnkDebug4Menu[] =
 {
-    {Str_842DBD0, debug_sub_8138D74},
-    {Str_842DBDC, debug_sub_8138D8C},
+    {Str_842DBD0, (u8 (*)(void))debug_sub_8138D74},  // why do these two functions have a different prototype?
+    {Str_842DBDC, (u8 (*)(void))debug_sub_8138D8C},
     {Str_842DBE8, debug_sub_8138C14},
     {Str_842DBF2, debug_sub_8138C34},
     {Str_842DBFC, debug_sub_810CD9C},
@@ -170,184 +174,90 @@ static const struct OamData gOamData_8401D38 = {
     .priority = 2
 };
 
-static const struct SpriteTemplate gSpriteTemplate_8401D40[] = {
+static const struct SpriteTemplate gSpriteTemplate_8401D40[] =
+{
     {
-        1,
-        1,
-        &gOamData_8401D28,
-        gDummySpriteAnimTable,
-        NULL,
-        gDummySpriteAffineAnimTable,
-        sub_8123CB8
-    }, {
-        2,
-        1,
-        &gOamData_8401D30,
-        gDummySpriteAnimTable,
-        NULL,
-        gDummySpriteAffineAnimTable,
-        sub_8123CB8
-    }, {
-        3,
-        1,
-        &gOamData_8401D38,
-        gDummySpriteAnimTable,
-        NULL,
-        gDummySpriteAffineAnimTable,
-        nullsub_76
+        .tileTag = 1,
+        .paletteTag = 1,
+        .oam = &gOamData_8401D28,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8123CB8,
+    },
+    {
+        .tileTag = 2,
+        .paletteTag = 1,
+        .oam = &gOamData_8401D30,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = sub_8123CB8,
+    },
+    {
+        .tileTag = 3,
+        .paletteTag = 1,
+        .oam = &gOamData_8401D38,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = nullsub_76,
     }
 };
 
-// .text
-
 #if DEBUG
 
-__attribute__((naked))
+extern u8 unk_203955C;
+
+extern const u8 MauvilleCity_GameCorner_EventScript_1C407E[];
+extern const u8 MauvilleCity_GameCorner_EventScript_1C40AC[];
+
 u8 debug_sub_8138C14(void)
 {
-    asm("\n\
-	push	{lr}\n\
-	ldr	r0, ._1         @ unk_203955C\n\
-	mov	r1, #0x1\n\
-	strb	r1, [r0]\n\
-	ldr	r0, ._1 + 4     @ MauvilleCity_GameCorner_EventScript_1C407E\n\
-	bl	ScriptContext1_SetupScript\n\
-	bl	CloseMenu\n\
-	mov	r0, #0x1\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._2:\n\
-	.align	2, 0\n\
-._1:\n\
-	.word	unk_203955C\n\
-	.word	MauvilleCity_GameCorner_EventScript_1C407E");
+    unk_203955C = 1;
+    ScriptContext1_SetupScript(MauvilleCity_GameCorner_EventScript_1C407E);
+    CloseMenu();
+    return 1;
 }
 
-__attribute__((naked))
 u8 debug_sub_8138C34(void)
 {
-    asm("\n\
-	push	{lr}\n\
-	ldr	r0, ._3         @ unk_203955C\n\
-	mov	r1, #0x1\n\
-	strb	r1, [r0]\n\
-	ldr	r0, ._3 + 4     @ MauvilleCity_GameCorner_EventScript_1C40AC\n\
-	bl	ScriptContext1_SetupScript\n\
-	bl	CloseMenu\n\
-	mov	r0, #0x1\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._4:\n\
-	.align	2, 0\n\
-._3:\n\
-	.word	unk_203955C\n\
-	.word	MauvilleCity_GameCorner_EventScript_1C40AC");
+    unk_203955C = 1;
+    ScriptContext1_SetupScript(MauvilleCity_GameCorner_EventScript_1C40AC);
+    CloseMenu();
+    return 1;
 }
 
-__attribute__((naked))
 u8 debug_sub_8138C54(void)
 {
-    asm("\n\
-	push	{r4, lr}\n\
-	ldr	r4, ._10        @ gMain\n\
-	ldrh	r0, [r4, #0x2e]\n\
-	cmp	r0, #0x40\n\
-	bne	._5	@cond_branch\n\
-	mov	r0, #0x1\n\
-	neg	r0, r0\n\
-	bl	Menu_MoveCursor\n\
-._5:\n\
-	ldrh	r0, [r4, #0x2e]\n\
-	cmp	r0, #0x80\n\
-	bne	._6	@cond_branch\n\
-	mov	r0, #0x1\n\
-	bl	Menu_MoveCursor\n\
-._6:\n\
-	ldrh	r1, [r4, #0x2e]\n\
-	cmp	r1, #0x1\n\
-	beq	._7	@cond_branch\n\
-	ldr	r0, ._10 + 4    @ 0x101\n\
-	cmp	r1, r0\n\
-	bne	._8	@cond_branch\n\
-	ldr	r1, ._10 + 8    @ gSpecialVar_0x8004\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r1]\n\
-._7:\n\
-	ldr	r4, ._10 + 12   @ gUnkDebug4Menu\n\
-	bl	Menu_GetCursorPos\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x15\n\
-	add	r4, r4, #0x4\n\
-	add	r0, r0, r4\n\
-	ldr	r0, [r0]\n\
-	bl	_call_via_r0\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	b	._13\n\
-._11:\n\
-	.align	2, 0\n\
-._10:\n\
-	.word	gMain\n\
-	.word	0x101\n\
-	.word	gSpecialVar_0x8004\n\
-	.word	gUnkDebug4Menu\n\
-._8:\n\
-	cmp	r1, #0x2\n\
-	beq	._12	@cond_branch\n\
-	mov	r0, #0x0\n\
-	b	._13\n\
-._12:\n\
-	bl	CloseMenu\n\
-	mov	r0, #0x1\n\
-._13:\n\
-	pop	{r4}\n\
-	pop	{r1}\n\
-	bx	r1");
+    if (gMain.newKeys == DPAD_UP)
+        Menu_MoveCursor(-1);
+    if (gMain.newKeys == DPAD_DOWN)
+        Menu_MoveCursor(1);
+    if (gMain.newKeys == A_BUTTON)
+        return gUnkDebug4Menu[Menu_GetCursorPos()].func();
+    if (gMain.newKeys == (R_BUTTON | A_BUTTON))
+    {
+        gSpecialVar_0x8004 = 1;
+        return gUnkDebug4Menu[Menu_GetCursorPos()].func();
+    }
+    if (gMain.newKeys == B_BUTTON)
+    {
+        CloseMenu();
+        return 1;
+    }
+    return 0;
 }
 
-__attribute__((naked))
 u8 debug_sub_8138CC4(void)
 {
-    asm("\n\
-	push	{lr}\n\
-	add	sp, sp, #0xfffffff8\n\
-	ldr	r1, ._14        @ gSpecialVar_0x8004\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r1]\n\
-	bl	Menu_EraseScreen\n\
-	mov	r0, #0x13\n\
-	mov	r1, #0x0\n\
-	mov	r2, #0x1d\n\
-	mov	r3, #0xc\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r3, ._14 + 4    @ gUnkDebug4Menu\n\
-	mov	r0, #0x14\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0x5\n\
-	bl	Menu_PrintItems\n\
-	mov	r0, #0x0\n\
-	str	r0, [sp]\n\
-	mov	r0, #0x8\n\
-	str	r0, [sp, #0x4]\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0x14\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x5\n\
-	bl	InitMenu\n\
-	ldr	r1, ._14 + 8    @ gMenuCallback\n\
-	ldr	r0, ._14 + 12   @ debug_sub_8138C54\n\
-	str	r0, [r1]\n\
-	mov	r0, #0x0\n\
-	add	sp, sp, #0x8\n\
-	pop	{r1}\n\
-	bx	r1\n\
-._15:\n\
-	.align	2, 0\n\
-._14:\n\
-	.word	gSpecialVar_0x8004\n\
-	.word	gUnkDebug4Menu\n\
-	.word	gMenuCallback\n\
-	.word	debug_sub_8138C54+1");
+    gSpecialVar_0x8004 = 0;
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(19, 0, 29, 12);
+    Menu_PrintItems(20, 1, 5, gUnkDebug4Menu);
+    InitMenu(0, 20, 1, 5, 0, 8);
+    gMenuCallback = debug_sub_8138C54;
+    return 0;
 }
 
 #endif
@@ -370,40 +280,18 @@ void CableCar(void)
 
 #if DEBUG
 
-__attribute__((naked))
-u8 debug_sub_8138D74(void)
+void debug_sub_8138D74(void)
 {
-    asm("\n\
-	push	{lr}\n\
-	ldr	r1, ._21        @ gSpecialVar_0x8004\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r1]\n\
-	bl	CloseMenu\n\
-	bl	CableCar\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._22:\n\
-	.align	2, 0\n\
-._21:\n\
-	.word	gSpecialVar_0x8004");
+    gSpecialVar_0x8004 = 0;
+    CloseMenu();
+    CableCar();
 }
 
-__attribute__((naked))
-u8 debug_sub_8138D8C(void)
+void debug_sub_8138D8C(void)
 {
-    asm("\n\
-	push	{lr}\n\
-	ldr	r1, ._23        @ gSpecialVar_0x8004\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r1]\n\
-	bl	CloseMenu\n\
-	bl	CableCar\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._24:\n\
-	.align	2, 0\n\
-._23:\n\
-	.word	gSpecialVar_0x8004");
+    gSpecialVar_0x8004 = 1;
+    CloseMenu();
+    CableCar();
 }
 
 #endif
