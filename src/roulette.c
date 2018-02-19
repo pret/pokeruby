@@ -241,9 +241,10 @@ void sub_8119D80(struct Sprite *);
 
 extern u8 gUnknown_02019000[];
 extern u16 gSpecialVar_0x8004;
-extern struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
+extern const struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
+extern struct StructgUnknown_083F8DF4 gUnknown_083F8DF4_[];
 extern u8 gUnknown_083F8EC4;
-extern u8 gUnknown_083F8DF0[];
+extern const u8 gUnknown_083F8DF0[];
 extern u8 gUnknown_083F8E34[];
 extern const u8 gUnknown_08E8096C[];
 extern const u8 gRouletteWheelTiles[];
@@ -321,6 +322,57 @@ EWRAM_DATA u8 unk_203955C[4] = { 0 };
 EWRAM_DATA u8 unk_2039560 = 0;
 #endif
 
+const u16 gUnknown_083F86BC[] = INCBIN_U16("graphics/roulette/83F86BC.gbapal");
+const u8 gUnknown_083F88BC[] = INCBIN_U8("graphics/roulette/83F88BC.bin.lz");
+const u8 gUnknown_083F8A60[] = INCBIN_U8("graphics/roulette/wheel_map.bin.lz");
+
+const struct StructgUnknown_083F8C00 gUnknown_083F8C00[] =
+{
+	{0xFF, 0x0, 0x0, 0x00, 0x07, 0x07, 0x00, 0x00, 0x00, 0x00000000, 0x00000000, 0x0000, 0x0000},
+	{0x0C, 0x4, 0x1, 0x00, 0x11, 0x07, 0x00, 0x00, 0x00, 0x00000002, 0x00010842, 0xE000, 0x0000},
+	{0x0D, 0x4, 0x2, 0x00, 0x14, 0x07, 0x00, 0x00, 0x00, 0x00000004, 0x00021084, 0xE000, 0x0000},
+	{0x0E, 0x4, 0x3, 0x00, 0x17, 0x07, 0x00, 0x00, 0x00, 0x00000008, 0x00042108, 0xE000, 0x0000},
+	{0x0F, 0x4, 0x4, 0x00, 0x1A, 0x07, 0x00, 0x00, 0x00, 0x00000010, 0x00084210, 0xE000, 0x0000},
+	{0x10, 0x3, 0x0, 0x01, 0x0E, 0x0A, 0x00, 0x0C, 0x00, 0x00000020, 0x000003E0, 0x0249, 0x0000},
+	{0x00, 0xC, 0x1, 0x01, 0x11, 0x0A, 0x03, 0x03, 0x00, 0x00000040, 0x00000040, 0x2001, 0x0000},
+	{0x09, 0xC, 0x2, 0x01, 0x14, 0x0A, 0x03, 0x03, 0x00, 0x00000080, 0x00000080, 0x2200, 0x0000},
+	{0x06, 0xC, 0x3, 0x01, 0x17, 0x0A, 0x03, 0x03, 0x00, 0x00000100, 0x00000100, 0x2040, 0x0000},
+	{0x03, 0xC, 0x4, 0x01, 0x1A, 0x0A, 0x03, 0x03, 0x00, 0x00000200, 0x00000200, 0x2008, 0x0000},
+	{0x11, 0x3, 0x0, 0x02, 0x0E, 0x0D, 0x03, 0x0F, 0x00, 0x00000400, 0x00007C00, 0x0492, 0x0000},
+	{0x04, 0xC, 0x1, 0x02, 0x11, 0x0D, 0x06, 0x06, 0x00, 0x00000800, 0x00000800, 0x2010, 0x0000},
+	{0x01, 0xC, 0x2, 0x02, 0x14, 0x0D, 0x06, 0x06, 0x00, 0x00001000, 0x00001000, 0x2002, 0x0000},
+	{0x0A, 0xC, 0x3, 0x02, 0x17, 0x0D, 0x06, 0x06, 0x00, 0x00002000, 0x00002000, 0x2400, 0x0000},
+	{0x07, 0xC, 0x4, 0x02, 0x1A, 0x0D, 0x06, 0x06, 0x00, 0x00004000, 0x00004000, 0x2080, 0x0000},
+	{0x12, 0x3, 0x0, 0x03, 0x0E, 0x10, 0x06, 0x12, 0x00, 0x00008000, 0x000F8000, 0x0924, 0x0000},
+	{0x08, 0xC, 0x1, 0x03, 0x11, 0x10, 0x09, 0x09, 0x00, 0x00010000, 0x00010000, 0x2100, 0x0000},
+	{0x05, 0xC, 0x2, 0x03, 0x14, 0x10, 0x09, 0x09, 0x00, 0x00020000, 0x00020000, 0x2020, 0x0000},
+	{0x02, 0xC, 0x3, 0x03, 0x17, 0x10, 0x09, 0x09, 0x00, 0x00040000, 0x00040000, 0x2004, 0x0000},
+	{0x0B, 0xC, 0x4, 0x03, 0x1A, 0x10, 0x09, 0x09, 0x00, 0x00080000, 0x00080000, 0x2800, 0x0000},
+};
+
+const struct StructgUnknown_083F8D90 gUnknown_083F8D90[] =
+{
+	{ 0,   1,   6,   0,    0x40},
+	{ 1,   3,  12,   0,  0x1000},
+	{ 2,   5,  18,   0, 0x40000},
+	{ 3,   7,   9,   0,   0x200},
+	{ 4,   9,  11,   0,   0x800},
+	{ 5,  11,  17,   0, 0x20000},
+	{ 6,  13,   8,   0,   0x100},
+	{ 7,  15,  14,   0,  0x4000},
+	{ 8,  17,  16,   0, 0x10000},
+	{ 9,  19,   7,   0,    0x80},
+	{10,  21,  13,   0,  0x2000},
+	{11,  23,  19,   0, 0x80000},
+};
+
+const u8 gUnknown_083F8DF0[] =
+{
+	1, 3,
+	1, 6,
+};
+
+//extern const struct StructgUnknown_083F8DF4 gUnknown_083F8DF4[];
 
 void sub_81150FC(void)
 {
@@ -368,7 +420,6 @@ void sub_8115238(void)
 {
     u8 i;
     u32 temp;
-    struct StructgUnknown_083F8DF4 *s0;
     u16 arr[0x3]; // the third is never used ?
 
     memcpy(arr, &gUnknown_083F8EC4, 0x6);
@@ -377,9 +428,8 @@ void sub_8115238(void)
     eRoulette->var04_0 = (gSpecialVar_0x8004 & 0x1);
     if (gSpecialVar_0x8004 & 0x80)
         eRoulette->var04_7 = 0x1;
-    s0 = &gUnknown_083F8DF4[0];
-    eRoulette->var22   = s0[eRoulette->var04_0].var03;
-    eRoulette->var23   = s0[eRoulette->var04_0].var04;
+    eRoulette->var22   = gUnknown_083F8DF4[eRoulette->var04_0].var03;
+    eRoulette->var23   = gUnknown_083F8DF4[eRoulette->var04_0].var04;
     eRoulette->var19 = temp = gUnknown_083F8DF0[eRoulette->var04_0 + eRoulette->var04_7 * 2];
     eRoulette->var1A_4 = 0x1;
     if (temp == 0x1)
@@ -792,21 +842,16 @@ u8 sub_8115F58(u16 r0, u16 r1)
             if (!(r0 < 0xC || (r1 & 0x1)))
                 return 0x1;
             else
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02 / 2;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
         }
         else if (!(r1 & 0x3))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-            return p[eRoulette->var04_0].var02 / 2;
+            return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
         }
         else
-        {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-            return p[eRoulette->var04_0].var02;
-        }
+		{
+            return gUnknown_083F8DF4[eRoulette->var04_0].var02;
+		}
         break;
     case 0x3:
         // both are in party
@@ -814,24 +859,17 @@ u8 sub_8115F58(u16 r0, u16 r1)
         if (!(timeh > 0x6))
         {
             if (r0 < 0x6 || (r1 & 0x1))
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02 / 2;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
             else
-            {
                 return 0x1;
-            }
         }
         else if ((r1 & 0x1) && !(r0 < 0x7))
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-            return p[eRoulette->var04_0].var02 / 4;
+            return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 4;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-            return p[eRoulette->var04_0].var02 / 2;
+            return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
         }
         break;
     case 0:
@@ -841,45 +879,27 @@ u8 sub_8115F58(u16 r0, u16 r1)
         if (!(timeh > 5))
         {
             if (!(r1 & 0x3))
-            {
                 return 0x1;
-            }
             else
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02 / 2;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
         }
         else if (!(r1 & 0x3))
         {
             if (!(r0 < 0xD))
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02 / 2;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02 / 2;
             else
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02;
         }
         else if (r1 & (0x80 << 8))
         {
             if (!(r0 < 0xD))
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var02;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var02;
             else
-            {
-                struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-                return p[eRoulette->var04_0].var01;
-            }
+                return gUnknown_083F8DF4[eRoulette->var04_0].var01;
         }
         else
         {
-            struct StructgUnknown_083F8DF4 *p = &gUnknown_083F8DF4[0];
-            return p[eRoulette->var04_0].var01 * 2;
+            return gUnknown_083F8DF4[eRoulette->var04_0].var01 * 2;
         }
     }
 }
@@ -2255,7 +2275,7 @@ void sub_811889C(struct Sprite *sprite)
 void sub_81189A8(struct Sprite *sprite)
 {
     float f0, f1, f2;
-    struct StructgUnknown_083F8DF4 *p;
+
     sub_8118724(sprite);
     switch (sprite->data[0x3])
     {
@@ -2263,9 +2283,8 @@ void sub_81189A8(struct Sprite *sprite)
         if (sprite->data[0x0] != 0x1)
         {
             f0 = ((float)sprite->data[0x7]);
-            p = &gUnknown_083F8DF4[0];
-            f1 = (f0 * ((float)(s32)p[eRoulette->var04_0].var01) + (float)((s32)p[eRoulette->var04_0].var02 - 0x1));
-            f2 = (f0 / ((float)(s32)p[eRoulette->var04_0].var0C));
+            f1 = (f0 * ((float)(s32)gUnknown_083F8DF4[eRoulette->var04_0].var01) + (float)((s32)gUnknown_083F8DF4[eRoulette->var04_0].var02 - 0x1));
+            f2 = (f0 / ((float)(s32)gUnknown_083F8DF4[eRoulette->var04_0].var0C));
         }
         else
         {
@@ -2276,16 +2295,16 @@ void sub_81189A8(struct Sprite *sprite)
         if (sprite->data[0x0] != 0x0)
         {
             f0 = ((float)sprite->data[0x7]);
-            p = &gUnknown_083F8DF4[0];
-            f1 = (f0 * ((float)(s32)p[eRoulette->var04_0].var01) + (float)((s32)p[eRoulette->var04_0].var02 - 0x1));
-            f2 = -(f0 / ((float)(s32)p[eRoulette->var04_0].var0C));
+            f1 = (f0 * ((float)(s32)gUnknown_083F8DF4[eRoulette->var04_0].var01) + (float)((s32)gUnknown_083F8DF4[eRoulette->var04_0].var02 - 0x1));
+            f2 = -(f0 / ((float)(s32)gUnknown_083F8DF4[eRoulette->var04_0].var0C));
         }
         else
         {
             return;
         }
         break;
-        default: return;
+    default:
+		return;
     }
     eRoulette->varA0 = eRoulette->var94;
     eRoulette->var98 = f2;
@@ -2448,6 +2467,9 @@ void debug_sub_812E698(struct Sprite *sprite)
 
 #endif
 
+// TODO: get this to match with const
+#define gUnknown_083F8DF4 gUnknown_083F8DF4_
+
 void sub_8118DE4(struct Sprite *sprite)
 {
     sub_8118724(sprite);
@@ -2470,28 +2492,27 @@ void sub_8118DE4(struct Sprite *sprite)
         u8 t;
         u32 z;
         m4aSongNumStart(SE_KON);
-        if ((z = (Random() & 0x1)))
+		z = Random() & 1;
+        if (z)
         {
-            u32 o;
             eRoulette->var8C = 0.0f;
-            o = (eRoulette->var7E + 0x1) % 0xC;
-            t = o;
-            eRoulette->var7F = o;
+            t = (eRoulette->var7E + 1) % 12;
+            eRoulette->var7F = (eRoulette->var7E + 1) % 12;
         }
         else
         {
             eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2; // couldn't replicate loads
-            t = (eRoulette->var7E + 0xB) % 0xC;
+            t = (eRoulette->var7E + 11) % 12;
             eRoulette->var7F = eRoulette->var7E;
         }
         if (gUnknown_083F8D90[t].var04 & eRoulette->var08)
         {
-            sprite->data[0x0] = 0x1;
+            sprite->data[0x0] = 1;
             sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
         }
         else
         {
-            sprite->data[0x0] = gUnknown_083F8D90[t].var04 & eRoulette->var08;
+            sprite->data[0x0] = 0;
             if (eRoulette->var04_0)
             {
                 sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var01;
@@ -2500,13 +2521,9 @@ void sub_8118DE4(struct Sprite *sprite)
             {
                 sprite->data[0x2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
                 if (z)
-                {
                     eRoulette->var8C = 0.5f;
-                }
                 else
-                {
                     eRoulette->var8C = -1.5f;
-                }
             }
         }
         eRoulette->var98 = 0.085f;
@@ -2514,6 +2531,8 @@ void sub_8118DE4(struct Sprite *sprite)
         sprite->data[0x1] = 0x5;
     }
 }
+
+#undef gUnknown_083F8DF4
 
 void sub_8118F8C(struct Sprite *sprite)
 {
@@ -2523,11 +2542,9 @@ void sub_8118F8C(struct Sprite *sprite)
         sub_81186B8(sprite);
         if (!sub_81186E8(sprite))
         {
-            struct StructgUnknown_083F8DF4 *p;
             eRoulette->var90 = 0.0f;
-            p = &gUnknown_083F8DF4[0];
-            eRoulette->var8C -= ((float)p[eRoulette->var04_0].var03)
-                / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
+            eRoulette->var8C -= ((float)gUnknown_083F8DF4[eRoulette->var04_0].var03)
+                / ((float)(s16)(gUnknown_083F8DF4[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
             if (unk_2039560 != 0)
@@ -2626,7 +2643,7 @@ void sub_81193D4(struct Sprite *sprite)
     u8 i = 0;
     s16 t;
     s16 s[0x2][0x2];
-    struct StructgUnknown_083F8DF4 *p;
+
     memcpy(s, &gUnknown_083FA616, 0x8);
     t = sprite->data[0x7] - 0x2;
     eRoulette->var3C[0x37] = CreateSprite(&gSpriteTemplate_83FA524, s[sprite->data[0x0]][0x0], s[sprite->data[0x0]][0x1], 0x32);
@@ -2634,7 +2651,8 @@ void sub_81193D4(struct Sprite *sprite)
     eRoulette->var3C[0x38] = CreateSprite(&gSpriteTemplate_83FA5F0, s[sprite->data[0x0]][0x0], s[sprite->data[0x0]][0x1], 0x33);
     gSprites[eRoulette->var3C[0x38]].affineAnimPaused = TRUE;
     gSprites[eRoulette->var3C[0x38]].animPaused       = TRUE;
-    sprite->data[0x7] = (t * (p = &gUnknown_083F8DF4[0])[eRoulette->var04_0].var01) + (p[eRoulette->var04_0].var10 + 0x2D);
+
+    sprite->data[0x7] = (t * gUnknown_083F8DF4[eRoulette->var04_0].var01) + (gUnknown_083F8DF4[eRoulette->var04_0].var10 + 0x2D);
     for (; i < 0x2; i++)
     {
         gSprites[eRoulette->var3C[0x37 + i]].data[0x4] = eRoulette->var3C[0x37];
