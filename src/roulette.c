@@ -1622,328 +1622,78 @@ void Task_Roulette_0(u8 taskid)
 
 #if DEBUG
 
-__attribute__((naked))
-void debug_sub_812CDE4()
+void debug_sub_812CDE4(u8 taskId)
 {
-    asm("\
-	push	{r4, r5, lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r3, r0, #0x18\n\
-	add	r4, r3, #0\n\
-	ldr	r0, ._575       @ gMain\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._572	@cond_branch\n\
-	ldr	r1, ._575 + 4   @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r0, [r2, #0x22]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	ldr	r1, ._575 + 8   @ 0x27100000\n\
-	cmp	r0, r1\n\
-	bne	._573	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r2, #0x22]\n\
-._573:\n\
-	ldr	r0, ._575 + 12  @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._576:\n\
-	.align	2, 0\n\
-._575:\n\
-	.word	gMain\n\
-	.word	gTasks\n\
-	.word	0x27100000\n\
-	.word	gStringVar1\n\
-._572:\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._577	@cond_branch\n\
-	ldr	r1, ._580       @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r0, [r2, #0x22]\n\
-	sub	r0, r0, #0x1\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	mov	r1, #0x1\n\
-	neg	r1, r1\n\
-	cmp	r0, r1\n\
-	bne	._578	@cond_branch\n\
-	ldr	r0, ._580 + 4   @ 0x270f\n\
-	strh	r0, [r2, #0x22]\n\
-._578:\n\
-	ldr	r0, ._580 + 8   @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._581:\n\
-	.align	2, 0\n\
-._580:\n\
-	.word	gTasks\n\
-	.word	0x270f\n\
-	.word	gStringVar1\n\
-._577:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._582	@cond_branch\n\
-	ldr	r1, ._585       @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r3, [r2, #0x22]\n\
-	add	r0, r3, #0\n\
-	add	r0, r0, #0xa\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	ldr	r1, ._585 + 4   @ 0x270f0000\n\
-	cmp	r0, r1\n\
-	ble	._583	@cond_branch\n\
-	ldr	r1, ._585 + 8   @ 0xffffd8fb\n\
-	add	r0, r3, r1\n\
-	strh	r0, [r2, #0x22]\n\
-._583:\n\
-	ldr	r0, ._585 + 12  @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._586:\n\
-	.align	2, 0\n\
-._585:\n\
-	.word	gTasks\n\
-	.word	0x270f0000\n\
-	.word	0xffffd8fb\n\
-	.word	gStringVar1\n\
-._582:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._587	@cond_branch\n\
-	ldr	r0, ._590       @ gTasks\n\
-	lsl	r1, r3, #0x2\n\
-	add	r1, r1, r3\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r0\n\
-	ldrh	r2, [r1, #0x22]\n\
-	add	r0, r2, #0\n\
-	sub	r0, r0, #0xa\n\
-	strh	r0, [r1, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._588	@cond_branch\n\
-	ldr	r3, ._590 + 4   @ 0x2705\n\
-	add	r0, r2, r3\n\
-	strh	r0, [r1, #0x22]\n\
-._588:\n\
-	ldr	r0, ._590 + 8   @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-._584:\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._590 + 12  @ gStringVar4\n\
-	ldr	r1, ._590 + 16  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	b	._596\n\
-._591:\n\
-	.align	2, 0\n\
-._590:\n\
-	.word	gTasks\n\
-	.word	0x2705\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-._587:\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._592	@cond_branch\n\
-	ldr	r0, ._594       @ gSaveBlock1\n\
-	ldr	r2, ._594 + 4   @ gTasks\n\
-	lsl	r1, r3, #0x2\n\
-	add	r1, r1, r3\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldrh	r2, [r1, #0x22]\n\
-	ldr	r3, ._594 + 8   @ 0x494\n\
-	add	r0, r0, r3\n\
-	mov	r5, #0x0\n\
-	strh	r2, [r0]\n\
-	ldr	r0, ._594 + 12  @ Task_Roulette_0\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._594 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._594 + 20  @ gStringVar4\n\
-	ldr	r1, ._594 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	ldr	r0, ._594 + 28  @ unk_2039560\n\
-	strb	r5, [r0]\n\
-	b	._596\n\
-._595:\n\
-	.align	2, 0\n\
-._594:\n\
-	.word	gSaveBlock1\n\
-	.word	gTasks\n\
-	.word	0x494\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	unk_2039560\n\
-._592:\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._596	@cond_branch\n\
-	ldr	r0, ._597       @ gSaveBlock1\n\
-	ldr	r2, ._597 + 4   @ gTasks\n\
-	lsl	r1, r4, #0x2\n\
-	add	r1, r1, r4\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldrh	r2, [r1, #0x22]\n\
-	ldr	r3, ._597 + 8   @ 0x494\n\
-	add	r0, r0, r3\n\
-	strh	r2, [r0]\n\
-	ldr	r0, ._597 + 12  @ Task_Roulette_0\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._597 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._597 + 20  @ gStringVar4\n\
-	ldr	r1, ._597 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	ldr	r1, ._597 + 28  @ unk_2039560\n\
-	mov	r0, #0x1\n\
-	strb	r0, [r1]\n\
-._596:\n\
-	pop	{r4, r5}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._598:\n\
-	.align	2, 0\n\
-._597:\n\
-	.word	gSaveBlock1\n\
-	.word	gTasks\n\
-	.word	0x494\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	unk_2039560");
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].data[13]++;
+        if (gTasks[taskId].data[13] == 10000)
+            gTasks[taskId].data[13] = 0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].data[13]--;
+        if (gTasks[taskId].data[13] == -1)
+            gTasks[taskId].data[13] = 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 0x100)
+    {
+        gTasks[taskId].data[13] += 10;
+        if (gTasks[taskId].data[13] > 9999)
+            gTasks[taskId].data[13] -= 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 0x200)
+    {
+        gTasks[taskId].data[13] -= 10;
+        if (gTasks[taskId].data[13] < 0)
+            gTasks[taskId].data[13] += 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 8)
+    {
+        gSaveBlock1.coins = gTasks[taskId].data[13];
+        gTasks[taskId].func = Task_Roulette_0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+        unk_2039560 = 0;
+    }
+    else if (gMain.newKeys & 4)
+    {
+        gSaveBlock1.coins = gTasks[taskId].data[13];
+        gTasks[taskId].func = Task_Roulette_0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+        unk_2039560 = 1;
+    }
 }
 
-__attribute__((naked))
+extern const u8 gUnknown_Debug_0842510D[];
+
 void debug_sub_812CFE8(u8 taskId)
 {
-    asm("\
-	push	{r4, r5, lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._600       @ gTasks\n\
-	lsl	r1, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	add	r5, r1, r2\n\
-	ldr	r0, ._600 + 4   @ gSaveBlock1\n\
-	ldr	r1, ._600 + 8   @ 0x494\n\
-	add	r0, r0, r1\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r5, #0x22]\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	cmp	r1, #0\n\
-	beq	._599	@cond_branch\n\
-	ldr	r0, ._600 + 12  @ gSpecialVar_0x8004\n\
-	ldrh	r1, [r0]\n\
-	mov	r2, #0x80\n\
-	orr	r1, r1, r2\n\
-	strh	r1, [r0]\n\
-._599:\n\
-	ldr	r0, ._600 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r5, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._600 + 20  @ gStringVar4\n\
-	ldr	r1, ._600 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0x0\n\
-	mov	r2, #0x9\n\
-	mov	r3, #0x3\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0xe\n\
-	mov	r2, #0x1d\n\
-	mov	r3, #0x13\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r0, ._600 + 28  @ gUnknown_Debug_0842510D\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0xf\n\
-	bl	Menu_PrintText\n\
-	ldr	r0, ._600 + 32  @ debug_sub_812CDE4\n\
-	str	r0, [r5]\n\
-	pop	{r4, r5}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._601:\n\
-	.align	2, 0\n\
-._600:\n\
-	.word	gTasks\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	gSpecialVar_0x8004\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	gUnknown_Debug_0842510D\n\
-	.word	debug_sub_812CDE4+1");
+    gTasks[taskId].data[13] = gSaveBlock1.coins;
+    if (Random() & 1)
+        gSpecialVar_0x8004 |= 0x80;
+    ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+    StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+    Menu_DrawStdWindowFrame(0, 0, 9, 3);
+    MenuPrint_RightAligned(gStringVar4, 9, 1);
+    Menu_DrawStdWindowFrame(0, 14, 29, 19);
+    Menu_PrintText(gUnknown_Debug_0842510D, 1, 15);
+    gTasks[taskId].func = debug_sub_812CDE4;
 }
 
 #endif
@@ -2681,13 +2431,13 @@ void debug_sub_812E698(struct Sprite *sprite)
     m4aSongNumStart(0x38);
     if (Random() & 1)
     {
-	eRoulette->var8C = 0;
-	eRoulette->var7F = (eRoulette->var7E + 1) % 12;
+	    eRoulette->var8C = 0;
+	    eRoulette->var7F = (eRoulette->var7E + 1) % 12;
     }
     else
     {
-	eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
-	eRoulette->var7F = eRoulette->var7E;
+	    eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+	    eRoulette->var7F = eRoulette->var7E;
     }
     sprite->data[0] = 1;
     sprite->data[2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
