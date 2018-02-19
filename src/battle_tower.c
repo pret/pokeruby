@@ -28,9 +28,9 @@
 #include "ewram.h"
 
 #if ENGLISH
-#include "../data/battle_tower/trainers.h"
+#include "data/battle_tower/trainers.h"
 #elif GERMAN
-#include "../data/battle_tower/trainers_de.h"
+#include "data/battle_tower/trainers_de.h"
 #endif
 
 static const u16 sBattleTowerHeldItems[] =
@@ -100,8 +100,8 @@ static const u16 sBattleTowerHeldItems[] =
     ITEM_GANLON_BERRY,
 };
 
-#include "../data/battle_tower/level_50_mons.h"
-#include "../data/battle_tower/level_100_mons.h"
+#include "data/battle_tower/level_50_mons.h"
+#include "data/battle_tower/level_100_mons.h"
 
 static const u8 sMaleTrainerClasses[] =
 {

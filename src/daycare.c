@@ -35,7 +35,7 @@ static void ClearDaycareMail(struct DayCareMail *);
 static void SetInitialEggData(struct Pokemon *, u16, struct DayCare *);
 static u8 GetDaycareCompatibilityScore(struct DayCare *);
 
-#include "../data/pokemon/egg_moves.h"
+#include "data/pokemon/egg_moves.h"
 
 static const u8 *const sCompatibilityMessages[] = {
     DaycareText_GetAlongVeryWell,

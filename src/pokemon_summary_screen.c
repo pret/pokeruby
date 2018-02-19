@@ -158,11 +158,11 @@ EWRAM_DATA u8 gUnknown_020384F0 = 0;
 EWRAM_DATA struct Sprite *gUnknown_020384F4 = NULL;
 
 #if ENGLISH
-#include "../data/text/move_descriptions_en.h"
-#include "../data/text/nature_names_en.h"
+#include "data/text/move_descriptions_en.h"
+#include "data/text/nature_names_en.h"
 #elif GERMAN
-#include "../data/text/move_descriptions_de.h"
-#include "../data/text/nature_names_de.h"
+#include "data/text/move_descriptions_de.h"
+#include "data/text/nature_names_de.h"
 #endif
 
 static const u8 * const sPageHeaderTexts[] = {

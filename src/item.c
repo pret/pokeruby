@@ -50,11 +50,11 @@ enum
 };
 
 #if ENGLISH
-#include "../data/item_descriptions_en.h"
-#include "../data/items_en.h"
+#include "data/item_descriptions_en.h"
+#include "data/items_en.h"
 #elif GERMAN
-#include "../data/item_descriptions_de.h"
-#include "../data/items_de.h"
+#include "data/item_descriptions_de.h"
+#include "data/items_de.h"
 #endif
 
 static void CompactPCItems(void);
