@@ -26,6 +26,7 @@
 static EWRAM_DATA u16 gSaveFailedType = 0;
 static EWRAM_DATA u16 gSaveFailedClockInfo[9] = {0};
 
+extern u32 gUnknown_Debug_03004BD0;
 extern u32 gDamagedSaveSectors;
 extern u32 gGameContinueCallback;
 
@@ -61,18 +62,16 @@ static const u8 sClockFrames[8][3] =
 static const u8 gSaveFailedClockPal[] = INCBIN_U8("graphics/misc/clock_small.gbapal");
 static const u8 gSaveFailedClockGfx[] = INCBIN_U8("graphics/misc/clock_small.4bpp.lz");
 
-#define static
-
 static void VBlankCB(void);
 static void CB2_SaveFailedScreen(void);
 static void CB2_WipeSave(void);
-/*static*/ void CB2_GameplayCannotBeContinued(void);
+static void CB2_GameplayCannotBeContinued(void);
 static void CB2_FadeAndReturnToTitleScreen(void);
 static void CB2_ReturnToTitleScreen(void);
 static void VBlankCB_UpdateClockGraphics(void);
-static bool8 VerifySectorWipe(u16 sector);
+static bool8 IsSectorNonEmpty(u16 sector);
 static bool8 WipeSector(u16 sector);
-/*static*/ bool8 WipeSectors(u32 sectorBits);
+static bool8 WipeSectors(u32 sectorBits);
 
 void DoSaveFailedScreen(u8 saveType)
 {
@@ -150,156 +149,16 @@ static void CB2_SaveFailedScreen(void)
     }
 }
 
-#if DEBUG
-__attribute__((naked))
-void CB2_WipeSave()
-{
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r0, ._20        @ gSaveFailedClockInfo\n"
-        "	mov	r2, #0x1\n"
-        "	strh	r2, [r0]\n"
-        "	ldr	r0, ._20 + 4    @ gUnknown_Debug_03004BD0\n"
-        "	ldr	r0, [r0]\n"
-        "	ldr	r1, ._20 + 8    @ gDamagedSaveSectors\n"
-        "	cmp	r0, #0\n"
-        "	beq	._12	@cond_branch\n"
-        "	str	r2, [r1]\n"
-        "._12:\n"
-        "	ldr	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._16	@cond_branch\n"
-        "	add	r5, r1, #0\n"
-        "._17:\n"
-        "	ldr	r0, [r5]\n"
-        "	bl	WipeSectors\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._14	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x1c\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._20 + 12   @ gSystemText_CheckCompleteSaveAttempt\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._20 + 16   @ gSaveFailedType\n"
-        "	ldrb	r0, [r0]\n"
-        "	bl	Save_WriteDataInternal\n"
-        "	ldr	r0, [r5]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._15	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x1c\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._20 + 20   @ gSystemText_SaveFailedBackupCheck\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "._15:\n"
-        "	add	r0, r4, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	ldr	r0, [r5]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._16	@cond_branch\n"
-        "	cmp	r4, #0x2\n"
-        "	bls	._17	@cond_branch\n"
-        "._16:\n"
-        "	cmp	r4, #0x3\n"
-        "	bne	._18	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x1c\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._20 + 24   @ gSystemText_BackupDamagedGameContinue\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._20 + 28   @ CB2_FadeAndReturnToTitleScreen\n"
-        "	bl	SetMainCallback2\n"
-        "	b	._23\n"
-        "._21:\n"
-        "	.align	2, 0\n"
-        "._20:\n"
-        "	.word	gSaveFailedClockInfo\n"
-        "	.word	gUnknown_Debug_03004BD0\n"
-        "	.word	gDamagedSaveSectors\n"
-        "	.word	gSystemText_CheckCompleteSaveAttempt\n"
-        "	.word	gSaveFailedType\n"
-        "	.word	gSystemText_SaveFailedBackupCheck\n"
-        "	.word	gSystemText_BackupDamagedGameContinue\n"
-        "	.word	CB2_FadeAndReturnToTitleScreen+1\n"
-        "._18:\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x1c\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._24        @ gGameContinueCallback\n"
-        "	ldr	r0, [r0]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._22	@cond_branch\n"
-        "	ldr	r0, ._24 + 4    @ gSystemText_SaveCompletedGameEnd\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	b	._23\n"
-        "._25:\n"
-        "	.align	2, 0\n"
-        "._24:\n"
-        "	.word	gGameContinueCallback\n"
-        "	.word	gSystemText_SaveCompletedGameEnd\n"
-        "._14:\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0xa\n"
-        "	mov	r2, #0x1c\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._27        @ gSystemText_BackupDamagedGameContinue\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r0, ._27 + 4    @ CB2_GameplayCannotBeContinued\n"
-        "	bl	SetMainCallback2\n"
-        "	b	._26\n"
-        "._28:\n"
-        "	.align	2, 0\n"
-        "._27:\n"
-        "	.word	gSystemText_BackupDamagedGameContinue\n"
-        "	.word	CB2_GameplayCannotBeContinued+1\n"
-        "._22:\n"
-        "	ldr	r0, ._29        @ gSystemText_SaveCompletedPressA\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xb\n"
-        "	bl	Menu_PrintText\n"
-        "._23:\n"
-        "	ldr	r0, ._29 + 4    @ CB2_FadeAndReturnToTitleScreen\n"
-        "	bl	SetMainCallback2\n"
-        "._26:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._30:\n"
-        "	.align	2, 0\n"
-        "._29:\n"
-        "	.word	gSystemText_SaveCompletedPressA\n"
-        "	.word	CB2_FadeAndReturnToTitleScreen+1\n"
-        "\n"
-    );
-}
-#else
 static void CB2_WipeSave(void)
 {
     u8 wipeTries = 0;
 
     gSaveFailedClockInfo[0] = TRUE;
+
+#if DEBUG
+	if (gUnknown_Debug_03004BD0 != 0)
+		gDamagedSaveSectors = 1;
+#endif
 
     while (gDamagedSaveSectors != 0 && wipeTries < 3) // while there are still attempts left, keep trying to fix the save sectors.
     {
@@ -345,9 +204,8 @@ static void CB2_WipeSave(void)
 
     SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
 }
-#endif
 
-/*static*/ void CB2_GameplayCannotBeContinued(void)
+static void CB2_GameplayCannotBeContinued(void)
 {
     gSaveFailedClockInfo[0] = FALSE;
 
@@ -412,55 +270,24 @@ static void VBlankCB_UpdateClockGraphics(void)
         gSaveFailedClockInfo[1]--;
 }
 
-#if DEBUG
-__attribute__((naked))
-bool8 VerifySectorWipe(u16 sector)
-{
-    asm(
-        "	push	{lr}\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	ldr	r2, ._50        @ \n"
-        "	mov	r3, #0x80\n"
-        "	lsl	r3, r3, #0x5\n"
-        "	mov	r1, #0x0\n"
-        "	bl	ReadFlash\n"
-        "	mov	r0, #0x0\n"
-        "	ldr	r1, ._50 + 4    @ \n"
-        "._49:\n"
-        "	add	r0, r0, #0x1\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	cmp	r0, r1\n"
-        "	bls	._49	@cond_branch\n"
-        "	ldr	r0, ._50 + 8    @ \n"
-        "	ldrb	r0, [r0]\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._51:\n"
-        "	.align	2, 0\n"
-        "._50:\n"
-        "	.word	+0x2000000\n"
-        "	.word	0x3ff\n"
-        "	.word	gUnknown_Debug_03004BD0\n"
-        "\n"
-    );
-}
-#else
-static bool8 VerifySectorWipe(u16 sector)
+static bool8 IsSectorNonEmpty(u16 sector)
 {
     u32 *ptr = (u32 *)&gSharedMem;
     u16 i;
 
     ReadFlash(sector, 0, ptr, 4096);
 
+#if DEBUG  // Don't verify the sector wipe?
     for (i = 0; i < 0x400; i++, ptr++)
-        if (*ptr)
+		;
+    return gUnknown_Debug_03004BD0;
+#else
+	for (i = 0; i < 0x400; i++, ptr++)
+        if (*ptr != 0)
             return TRUE;
-
     return FALSE;
-}
 #endif
+}
 
 static bool8 WipeSector(u16 sector)
 {
@@ -472,13 +299,13 @@ static bool8 WipeSector(u16 sector)
         for (j = 0; j < 0x1000; j++)
             ProgramFlashByte(sector, j, 0);
 
-        failed = VerifySectorWipe(sector);
+        failed = IsSectorNonEmpty(sector);
     }
 
     return failed;
 }
 
-/*static*/ bool8 WipeSectors(u32 sectorBits)
+static bool8 WipeSectors(u32 sectorBits)
 {
     u16 i;
 

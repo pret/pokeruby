@@ -734,46 +734,37 @@ struct Pokedex
 
 struct BattleTowerTrainer
 {
-    u8 trainerClass;
-    u8 name[8];
-    u8 teamFlags;
-    struct {
-        u16 easyChat[6];
-    } greeting;
+    /*0x00*/ u8 trainerClass;
+    /*0x01*/ u8 name[8];
+    /*0x09*/ u8 teamFlags;
+             u8 filler0A[2];
+    /*0x0C*/ u16 greeting[6];
 };
 
 struct BattleTowerRecord // record mixing
 {
-    /*0x00*/u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/u8 trainerClass;
-    /*0x02*/u16 winStreak;
-    /*0x04*/u8 name[8];
-    /*0x0C*/u8 trainerId[4];
-    /*0x10*/struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/struct UnknownPokemonStruct party[3];
-    /*0xA0*/u32 checksum;
+    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ struct UnknownPokemonStruct party[3];
+    /*0xA0*/ u32 checksum;
 };
 
 struct BattleTowerEReaderTrainer
 {
-    /*0x00*/u8 unk0;
-    /*0x01*/u8 trainerClass;
-    /*0x02*/u16 winStreak;
-    /*0x04*/u8 name[8];
-    /*0x0C*/u8 trainerId[4];
-    /*0x10*/struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/struct {
-        u16 easyChat[6];
-    } farewellPlayerLost;
-    /*0x28*/struct {
-        u16 easyChat[6];
-    } farewellPlayerWon;
-    /*0x34*/struct UnknownPokemonStruct party[3];
-    /*0xB8*/u32 checksum;
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct BattleTowerData
@@ -831,7 +822,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 height;
+    s8 height;
 };
 
 struct UnkStruct_8054FF8
@@ -850,8 +841,6 @@ struct HallOfFame
     u8 filler[0x1F00];
 };
 
-extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
-extern u8 ewram[];
 
 #endif // GUARD_GLOBAL_H

@@ -201,7 +201,6 @@ u8 sub_80A7DEC(u8 berryId, u8 x, u8 y, bool8 animate);
 void MenuCursor_SetPos814A880(u8 a1, u8 a2);
 u8 MenuCursor_Create814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5);
 s8 GetFirstFreePokeblockSlot(void);
-bool8 sub_810CA34(struct Pokeblock *pokeblock);
 #ifdef GERMAN
 extern void de_sub_8073110();
 #endif
@@ -278,8 +277,8 @@ bool8 Blender_PrintBlendingResults(void);
 static void sub_80510E8(void);
 static void sub_8050E30(void);
 static void sub_805197C(u16 a0, u16 a1);
-/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
-/*static*/ void sub_8052BD0(u8 taskID);
+static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst);
+static void sub_8052BD0(u8 taskID);
 static void sub_8052AF8(void);
 static void sub_804F8C8(u8 taskID);
 static void sub_804F9F4(u8 taskID);
@@ -3123,7 +3122,7 @@ bool8 Blender_PrintBlendingResults(void)
     return FALSE;
 }
 
-/*static*/ void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
+static void Blender_PrintMadePokeblockString(struct Pokeblock* pokeblock, u8* dst)
 {
     u8 text[12];
     u8 flavourLvl, feel;
@@ -3546,7 +3545,7 @@ void ShowBerryBlenderRecordWindow(void)
     }
 }
 
-/*static*/ void sub_8052BD0(u8 taskID)
+static void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {

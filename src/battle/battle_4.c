@@ -95,6 +95,7 @@ enum
 };
 
 //extern needed variables
+extern u8 gUnknown_02023A14_50;
 extern u8 gCritMultiplier;
 extern s32 gBattleMoveDamage;
 extern u32 gStatuses3[BATTLE_BANKS_COUNT];
@@ -5018,169 +5019,26 @@ _0801F610: .4byte BattleScript_SAtkDown2\n\
 }
 #endif // NONMATCHING
 
-#if DEBUG
-__attribute__((naked))
-static void atk15_seteffectwithchance(void)
-{
-    asm("\
-	push	{r4, lr}\n\
-	ldr	r2, ._1037      @ gBattleMons\n\
-	ldr	r0, ._1037 + 4  @ gBankAttacker\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x58\n\
-	mul	r0, r0, r1\n\
-	add	r0, r0, r2\n\
-	add	r0, r0, #0x20\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0x20\n\
-	bne	._1035	@cond_branch\n\
-	ldr	r2, ._1037 + 8  @ gBattleMoves\n\
-	ldr	r0, ._1037 + 12 @ gCurrentMove\n\
-	ldrh	r1, [r0]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r2\n\
-	ldrb	r0, [r0, #0x5]\n\
-	lsl	r4, r0, #0x1\n\
-	b	._1036\n\
-._1038:\n\
-	.align	2, 0\n\
-._1037:\n\
-	.word	gBattleMons\n\
-	.word	gBankAttacker\n\
-	.word	gBattleMoves\n\
-	.word	gCurrentMove\n\
-._1035:\n\
-	ldr	r2, ._1045      @ gBattleMoves\n\
-	ldr	r0, ._1045 + 4  @ gCurrentMove\n\
-	ldrh	r1, [r0]\n\
-	lsl	r0, r1, #0x1\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x2\n\
-	add	r0, r0, r2\n\
-	ldrb	r4, [r0, #0x5]\n\
-._1036:\n\
-	ldr	r0, ._1045 + 8  @ gUnknown_02023A14_50\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	ldr	r2, ._1045 + 12 @ gBattleCommunication\n\
-	cmp	r0, #0\n\
-	beq	._1039	@cond_branch\n\
-	ldrb	r1, [r2, #0x3]\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._1040	@cond_branch\n\
-	ldr	r0, ._1045 + 16 @ gBattleMoveFlags\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x29\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._1050	@cond_branch\n\
-._1039:\n\
-	ldrb	r1, [r2, #0x3]\n\
-	mov	r0, #0x80\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._1043	@cond_branch\n\
-._1040:\n\
-	ldr	r0, ._1045 + 16 @ gBattleMoveFlags\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x29\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._1043	@cond_branch\n\
-	ldr	r2, ._1045 + 12 @ gBattleCommunication\n\
-	ldrb	r1, [r2, #0x3]\n\
-	mov	r0, #0x7f\n\
-	and	r0, r0, r1\n\
-	strb	r0, [r2, #0x3]\n\
-	b	._1044\n\
-._1046:\n\
-	.align	2, 0\n\
-._1045:\n\
-	.word	gBattleMoves\n\
-	.word	gCurrentMove\n\
-	.word	gUnknown_02023A14_50\n\
-	.word	gBattleCommunication\n\
-	.word	gBattleMoveFlags\n\
-._1043:\n\
-	bl	Random\n\
-	lsl	r0, r0, #0x10\n\
-	lsr	r0, r0, #0x10\n\
-	mov	r1, #0x64\n\
-	bl	__umodsi3\n\
-	lsl	r0, r0, #0x10\n\
-	lsr	r0, r0, #0x10\n\
-	cmp	r0, r4\n\
-	bhi	._1049	@cond_branch\n\
-	ldr	r0, ._1052      @ gBattleCommunication\n\
-	ldrb	r0, [r0, #0x3]\n\
-	cmp	r0, #0\n\
-	beq	._1049	@cond_branch\n\
-	ldr	r0, ._1052 + 4  @ gBattleMoveFlags\n\
-	ldrb	r1, [r0]\n\
-	mov	r0, #0x29\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	bne	._1049	@cond_branch\n\
-	cmp	r4, #0x63\n\
-	bls	._1050	@cond_branch\n\
-._1044:\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0x80\n\
-	bl	SetMoveEffect\n\
-	b	._1054\n\
-._1053:\n\
-	.align	2, 0\n\
-._1052:\n\
-	.word	gBattleCommunication\n\
-	.word	gBattleMoveFlags\n\
-._1050:\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0x0\n\
-	bl	SetMoveEffect\n\
-	b	._1054\n\
-._1049:\n\
-	ldr	r1, ._1055      @ gBattlescriptCurrInstr\n\
-	ldr	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-	str	r0, [r1]\n\
-._1054:\n\
-	ldr	r0, ._1055 + 4  @ gBattleCommunication\n\
-	mov	r1, #0x0\n\
-	strb	r1, [r0, #0x3]\n\
-	ldr	r0, ._1055 + 8  @ \n\
-	ldr	r2, ._1055 + 12 @ \n\
-	add	r0, r0, r2\n\
-	strb	r1, [r0]\n\
-	pop	{r4}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._1056:\n\
-	.align	2, 0\n\
-._1055:\n\
-	.word	gBattlescriptCurrInstr\n\
-	.word	gBattleCommunication\n\
-	.word	+0x2000000\n\
-	.word	0x16112");
-}
-#else
 static void atk15_seteffectwithchance(void)
 {
     u32 PercentChance;
+
     if (gBattleMons[gBankAttacker].ability == ABILITY_SERENE_GRACE)
         PercentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         PercentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
-    if (gBattleCommunication[MOVE_EFFECT_BYTE] & 0x80 && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+
+    if (DEBUG && (gUnknown_02023A14_50 & 4)
+     && !(gBattleCommunication[MOVE_EFFECT_BYTE] & 0x80) && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+    {
+        SetMoveEffect(0, 0);
+    }
+    else if ((gBattleCommunication[MOVE_EFFECT_BYTE] & 0x80) && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
     {
         gBattleCommunication[MOVE_EFFECT_BYTE] &= 0x7F;
         SetMoveEffect(0, 0x80);
     }
-    else if (Random() % 100 <= PercentChance && gBattleCommunication[MOVE_EFFECT_BYTE] && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+    else if (Random() % 100 <= PercentChance && gBattleCommunication[MOVE_EFFECT_BYTE] != 0 && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
     {
         if (PercentChance >= 100)
             SetMoveEffect(0, 0x80);
@@ -5188,11 +5046,13 @@ static void atk15_seteffectwithchance(void)
             SetMoveEffect(0, 0);
     }
     else
+    {
         gBattlescriptCurrInstr++;
+    }
+
     gBattleCommunication[MOVE_EFFECT_BYTE] = 0;
     gBattleStruct->unk16112 = 0;
 }
-#endif
 
 static void atk16_seteffectprimary(void)
 {

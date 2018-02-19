@@ -64,7 +64,7 @@ const u8 gBadgesTiles[] = INCBIN_U8("graphics/trainer_card/badges.4bpp");
 u8 *const ewram_ = gSharedMem;
 
 #if DEBUG
-const struct TrainerCard gUnknown_Debug_083E0448 =
+const struct TrainerCard sTestTrainerCard =
 {
     .gender = FEMALE,
     .stars = 4,
@@ -87,7 +87,7 @@ const struct TrainerCard gUnknown_Debug_083E0448 =
     .pokemonTrades = 0xFFFF,
     .money = 99999,
     .var_28 = {1, 2, 3, 4},
-    .playerName = _("てすと"),
+    .playerName = _("てすと"),  // "test"
 };
 #endif
 
@@ -239,7 +239,7 @@ void debug_sub_80A0710(Callback callback)
 
 void debug_sub_80A073C(Callback callback)
 {
-    memcpy(&gTrainerCards[0], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+    memcpy(&gTrainerCards[0], &sTestTrainerCard, sizeof(struct TrainerCard));
     gDebug_03000748=TRUE;
     TrainerCard_InitScreenForLinkPlayer(0, callback);
     SetMainCallback2(sub_8093174);
@@ -251,7 +251,7 @@ void debug_sub_80A0780()
     int i;
 
     for (i = 0; i < 4; i++)
-        memcpy(&gTrainerCards[i], &gUnknown_Debug_083E0448, sizeof(struct TrainerCard));
+        memcpy(&gTrainerCards[i], &sTestTrainerCard, sizeof(struct TrainerCard));
 }
 #endif
 

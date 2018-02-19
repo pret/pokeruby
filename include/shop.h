@@ -28,7 +28,7 @@ enum
 struct MartInfo
 {
     /* 0x0 */ void (* callback) (void);
-    /* 0x4 */ u16 *itemList;
+    /* 0x4 */ const u16 *itemList;
     /* 0x8 */ u8 itemCount; // how many unique items are there for sale?
     /* 0x9 */ u8 cursor; // this shows the on-screen true index of the cursor and not the current item selected.
     /* 0xA */ u8 numChoices; // how many options does the mart have? can be either 2 or 1 (BUY/SELL vs BUY)

@@ -2101,7 +2101,7 @@ void sub_809C04C(void *pokemon, u8 a1)
             buf[1] = 0x06; // size
             buf[2] = 0x04;
             buf = gPokemonStorageSystemPtr->unk_127a + 8;
-            buf = StringCopy(buf, ItemId_GetItem(gPokemonStorageSystemPtr->unk_11f2)->name);
+            buf = StringCopy(buf, ItemId_GetName(gPokemonStorageSystemPtr->unk_11f2));
             buf[0] = EXT_CTRL_CODE_BEGIN;
             buf[1] = 0x07; // UNKNOWN_7;
             buf += 2;

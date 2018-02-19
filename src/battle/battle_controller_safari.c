@@ -276,12 +276,12 @@ void bx_battle_menu_t6_2(void)
 #if DEBUG
     else if (gMain.newKeys & R_BUTTON)
     {
-	if (!ewram17810[gActiveBank].unk0_5)
-	    move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, 4, 0);
+        if (!ewram17810[gActiveBank].unk0_5)
+            move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, 4, 0);
     }
     else if (gMain.newKeys & START_BUTTON)
     {
-	sub_804454C();
+        sub_804454C();
     }
 #endif
 }

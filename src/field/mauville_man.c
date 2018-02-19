@@ -251,83 +251,34 @@ void SetupMauvilleOldMan(void)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_810B32C()
+void debug_sub_810B32C(u8 a)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x4\n"
-        "	bhi	._37	@cond_branch\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._23        @ \n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	pc, r0\n"
-        "._24:\n"
-        "	.align	2, 0\n"
-        "._23:\n"
-        "	.word	._22\n"
-        "._22:\n"
-        "	.word	._25\n"
-        "	.word	._26\n"
-        "	.word	._27\n"
-        "	.word	._28\n"
-        "	.word	._29\n"
-        "._25:\n"
-        "	bl	SetupBard\n"
-        "	b	._37\n"
-        "._26:\n"
-        "	mov	r2, #0x0\n"
-        "	ldr	r3, ._34        @ gSaveBlock1\n"
-        "._31:\n"
-        "	mov	r0, sp\n"
-        "	add	r1, r0, r2\n"
-        "	add	r0, r2, r3\n"
-        "	ldrb	r0, [r0]\n"
-        "	strb	r0, [r1]\n"
-        "	add	r0, r2, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r2, r0, #0x18\n"
-        "	cmp	r2, #0x7\n"
-        "	bls	._31	@cond_branch\n"
-        "	bl	SetupHipster\n"
-        "	mov	r2, #0x0\n"
-        "	ldr	r3, ._34        @ gSaveBlock1\n"
-        "._32:\n"
-        "	add	r1, r2, r3\n"
-        "	mov	r4, sp\n"
-        "	add	r0, r4, r2\n"
-        "	ldrb	r0, [r0]\n"
-        "	strb	r0, [r1]\n"
-        "	add	r0, r2, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r2, r0, #0x18\n"
-        "	cmp	r2, #0x7\n"
-        "	bls	._32	@cond_branch\n"
-        "	b	._37\n"
-        "._35:\n"
-        "	.align	2, 0\n"
-        "._34:\n"
-        "	.word	gSaveBlock1+0x2d8c\n"
-        "._27:\n"
-        "	bl	SetupTrader\n"
-        "	b	._37\n"
-        "._28:\n"
-        "	bl	SetupStoryteller\n"
-        "	b	._37\n"
-        "._29:\n"
-        "	bl	SetupGiddy\n"
-        "._37:\n"
-        "	bl	sub_80F83D0\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    u8 i;
+    u8 savedArr[8];
+
+    switch (a)
+    {
+    case 0:
+        SetupBard();
+        break;
+    case 1:
+        for (i = 0; i < 8; i++)
+            savedArr[i] = gSaveBlock1.unk2D8C[i];
+        SetupHipster();
+        for (i = 0; i < 8; i++)
+            gSaveBlock1.unk2D8C[i] = savedArr[i];
+        break;
+    case 2:
+        SetupTrader();
+        break;
+    case 3:
+        SetupStoryteller();
+        break;
+    case 4:
+        SetupGiddy();
+        break;
+    }
+    sub_80F83D0();
 }
 #endif
 

@@ -98,5 +98,6 @@ void SetEReaderTrainerName(u8*);
 u8 GetEReaderTrainerPicIndex(void);
 u8 GetEReaderTrainerClassNameIndex(void);
 void ValidateEReaderTrainer(void);
+void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 
 #endif // GUARD_BATTLE_TOWER_H

@@ -4774,7 +4774,7 @@ debug_80C5738:
 	add	r4, r6, r4
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
-	bl	ItemId_GetItem
+	bl	ItemId_GetName
 	add	r1, r0, #0
 	add	r0, r4, #0
 	b	._498

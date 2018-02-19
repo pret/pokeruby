@@ -133,7 +133,7 @@ struct StructgUnknown_083F8D90
 };
 
 #if DEBUG
-u8 gUnknown_Debug_03005FB8;
+void *gUnknown_Debug_03005FB8;
 #endif
 
 #define static
@@ -304,6 +304,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83FA434;
 extern void (*gFieldCallback)(void);
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
+extern struct MusicPlayerInfo gMPlay_SE3;
 extern const u16 gUnknown_083FA60E[0x2][0x2];
 extern const struct SpriteTemplate gSpriteTemplate_83FA50C;
 extern const struct SpriteTemplate gSpriteTemplate_83FA5C0[];
@@ -317,7 +318,7 @@ extern const s8 gUnknown_083FA64C[0x8][0x2];
 
 #if DEBUG
 EWRAM_DATA u8 unk_203955C[4] = { 0 };
-EWRAM_DATA u8 unk_2039560[4] = { 0 };
+EWRAM_DATA u8 unk_2039560 = 0;
 #endif
 
 
@@ -403,309 +404,15 @@ void sub_8115238(void)
     RtcCalcLocalTime();
 }
 
-#if DEBUG
-__attribute__((naked))
-void sub_8115384(void)
-{
-    asm("\
-	push	{r4, lr}\n\
-	add	sp, sp, #0xfffffffc\n\
-	ldr	r1, ._35        @ gUnknown_Debug_03005FB8\n\
-	ldr	r0, ._35 + 4    @ 0x2019000\n\
-	str	r0, [r1]\n\
-	ldr	r1, ._35 + 8    @ gMain\n\
-	ldr	r2, ._35 + 12   @ 0x43c\n\
-	add	r0, r1, r2\n\
-	ldrb	r0, [r0]\n\
-	add	r2, r1, #0\n\
-	cmp	r0, #0x7\n\
-	bls	._33	@cond_branch\n\
-	b	._64\n\
-._33:\n\
-	lsl	r0, r0, #0x2\n\
-	ldr	r1, ._35 + 16   @ \n\
-	add	r0, r0, r1\n\
-	ldr	r0, [r0]\n\
-	mov	pc, r0\n\
-._36:\n\
-	.align	2, 0\n\
-._35:\n\
-	.word	gUnknown_Debug_03005FB8\n\
-	.word	0x2019000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-	.word	._37\n\
-._37:\n\
-	.word	._38\n\
-	.word	._39\n\
-	.word	._40\n\
-	.word	._41\n\
-	.word	._42\n\
-	.word	._43\n\
-	.word	._44\n\
-	.word	._45\n\
-._38:\n\
-	mov	r0, #0x0\n\
-	bl	SetVBlankCallback\n\
-	bl	ScanlineEffect_Stop\n\
-	bl	ClearVideoCallbacks\n\
-	bl	sub_80F9368\n\
-	ldr	r1, ._47        @ 0x400000c\n\
-	ldr	r3, ._47 + 4    @ 0x4686\n\
-	add	r0, r3, #0\n\
-	strh	r0, [r1]\n\
-	sub	r1, r1, #0x2\n\
-	ldr	r2, ._47 + 8    @ 0x4401\n\
-	add	r0, r2, #0\n\
-	strh	r0, [r1]\n\
-	add	r1, r1, #0x46\n\
-	mov	r3, #0x90\n\
-	lsl	r3, r3, #0x6\n\
-	add	r0, r3, #0\n\
-	strh	r0, [r1]\n\
-	add	r1, r1, #0x2\n\
-	ldr	r2, ._47 + 12   @ 0x60a\n\
-	add	r0, r2, #0\n\
-	strh	r0, [r1]\n\
-	ldr	r0, ._47 + 16   @ gUnknown_08E8096C\n\
-	mov	r1, #0xc0\n\
-	lsl	r1, r1, #0x13\n\
-	bl	LZ77UnCompVram\n\
-	ldr	r0, ._47 + 20   @ gRouletteWheelTiles\n\
-	ldr	r1, ._47 + 24   @ 0x6004000\n\
-	bl	LZ77UnCompVram\n\
-	ldr	r1, ._47 + 28   @ gMain\n\
-	ldr	r3, ._47 + 32   @ 0x43c\n\
-	add	r1, r1, r3\n\
-	b	._61\n\
-._48:\n\
-	.align	2, 0\n\
-._47:\n\
-	.word	0x400000c\n\
-	.word	0x4686\n\
-	.word	0x4401\n\
-	.word	0x60a\n\
-	.word	gUnknown_08E8096C\n\
-	.word	gRouletteWheelTiles\n\
-	.word	0x6004000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._39:\n\
-	bl	ResetPaletteFade\n\
-	bl	ResetSpriteData\n\
-	bl	ResetTasks\n\
-	ldr	r1, ._50        @ gMain\n\
-	ldr	r0, ._50 + 4    @ 0x43c\n\
-	add	r1, r1, r0\n\
-	b	._61\n\
-._51:\n\
-	.align	2, 0\n\
-._50:\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._40:\n\
-	ldr	r0, ._53        @ gWindowTemplate_81E6C3C\n\
-	bl	Text_LoadWindowTemplate\n\
-	ldr	r0, ._53 + 4    @ gWindowTemplate_81E6CE4\n\
-	bl	InitMenuWindow\n\
-	ldr	r0, ._53 + 8    @ gUnknown_083F86BC\n\
-	mov	r2, #0xe0\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r1, #0x0\n\
-	bl	LoadPalette\n\
-	ldr	r1, ._53 + 12   @ gMain\n\
-	ldr	r2, ._53 + 16   @ 0x43c\n\
-	add	r1, r1, r2\n\
-	b	._61\n\
-._54:\n\
-	.align	2, 0\n\
-._53:\n\
-	.word	gWindowTemplate_81E6C3C\n\
-	.word	gWindowTemplate_81E6CE4\n\
-	.word	gUnknown_083F86BC\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._41:\n\
-	bl	sub_8115238\n\
-	bl	ClearBGTilemapBuffers\n\
-	ldr	r0, ._56        @ gUnknown_083F88BC\n\
-	ldr	r1, ._56 + 4    @ 0x2018800\n\
-	bl	LZ77UnCompWram\n\
-	ldr	r0, ._56 + 8    @ gUnknown_083F8A60\n\
-	ldr	r1, ._56 + 12   @ 0x6003000\n\
-	bl	LZ77UnCompVram\n\
-	ldr	r1, ._56 + 16   @ gMain\n\
-	ldr	r3, ._56 + 20   @ 0x43c\n\
-	add	r1, r1, r3\n\
-	b	._61\n\
-._57:\n\
-	.align	2, 0\n\
-._56:\n\
-	.word	gUnknown_083F88BC\n\
-	.word	0x2018800\n\
-	.word	gUnknown_083F8A60\n\
-	.word	0x6003000\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._42:\n\
-	mov	r0, #0x0\n\
-	bl	sub_8117838\n\
-	bl	sub_811857C\n\
-	bl	sub_81184D8\n\
-	bl	sub_8117F2C\n\
-	bl	sub_8117900\n\
-	bl	sub_8117BBC\n\
-	bl	sub_8117DF4\n\
-	ldr	r1, ._59        @ gMain\n\
-	ldr	r0, ._59 + 4    @ 0x43c\n\
-	add	r1, r1, r0\n\
-	b	._61\n\
-._60:\n\
-	.align	2, 0\n\
-._59:\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._43:\n\
-	bl	AnimateSprites\n\
-	bl	BuildOamBuffer\n\
-	ldr	r0, ._62        @ gSaveBlock1\n\
-	ldr	r1, ._62 + 4    @ 0x494\n\
-	add	r0, r0, r1\n\
-	ldrh	r0, [r0]\n\
-	bl	sub_81180F4\n\
-	mov	r0, #0x6\n\
-	bl	sub_81182F8\n\
-	mov	r0, #0x0\n\
-	bl	sub_811829C\n\
-	mov	r0, #0x0\n\
-	bl	sub_8117158\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0xe\n\
-	mov	r2, #0x1d\n\
-	mov	r3, #0x13\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r0, ._62 + 8    @ gUnknown_081C4157\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0xf\n\
-	bl	Menu_PrintText\n\
-	ldr	r1, ._62 + 12   @ gSpriteCoordOffsetX\n\
-	mov	r2, #0x3c\n\
-	neg	r2, r2\n\
-	add	r0, r2, #0\n\
-	strh	r0, [r1]\n\
-	ldr	r1, ._62 + 16   @ gSpriteCoordOffsetY\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r1]\n\
-	ldr	r1, ._62 + 20   @ gMain\n\
-	ldr	r3, ._62 + 24   @ 0x43c\n\
-	add	r1, r1, r3\n\
-	b	._61\n\
-._63:\n\
-	.align	2, 0\n\
-._62:\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	gUnknown_081C4157\n\
-	.word	gSpriteCoordOffsetX\n\
-	.word	gSpriteCoordOffsetY\n\
-	.word	gMain\n\
-	.word	0x43c\n\
-._44:\n\
-	mov	r1, #0x80\n\
-	lsl	r1, r1, #0x13\n\
-	ldr	r3, ._65        @ 0x1741\n\
-	add	r0, r3, #0\n\
-	strh	r0, [r1]\n\
-	ldr	r0, ._65 + 4    @ 0x43c\n\
-	add	r1, r2, r0\n\
-._61:\n\
-	ldrb	r0, [r1]\n\
-	add	r0, r0, #0x1\n\
-	strb	r0, [r1]\n\
-	b	._64\n\
-._66:\n\
-	.align	2, 0\n\
-._65:\n\
-	.word	0x1741\n\
-	.word	0x43c\n\
-._45:\n\
-	ldr	r3, ._67        @ 0x4000208\n\
-	ldrh	r2, [r3]\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r3]\n\
-	ldr	r4, ._67 + 4    @ 0x4000200\n\
-	ldrh	r0, [r4]\n\
-	mov	r1, #0x1\n\
-	orr	r0, r0, r1\n\
-	strh	r0, [r4]\n\
-	strh	r2, [r3]\n\
-	ldr	r2, ._67 + 8    @ 0x4000004\n\
-	ldrh	r0, [r2]\n\
-	mov	r1, #0x8\n\
-	orr	r0, r0, r1\n\
-	strh	r0, [r2]\n\
-	ldr	r0, ._67 + 12   @ sub_8115124\n\
-	bl	SetVBlankCallback\n\
-	mov	r0, #0x1\n\
-	str	r0, [sp]\n\
-	mov	r0, #0xff\n\
-	mov	r1, #0x0\n\
-	mov	r2, #0x10\n\
-	mov	r3, #0x0\n\
-	bl	BeginHardwarePaletteFade\n\
-	ldr	r0, ._67 + 16   @ sub_81156BC\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	ldr	r4, ._67 + 20   @ 0x2019000\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0xa4\n\
-	strb	r0, [r1]\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._67 + 24   @ gTasks\n\
-	lsl	r1, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	mov	r0, #0x6\n\
-	strh	r0, [r1, #0x14]\n\
-	ldr	r0, ._67 + 28   @ gSaveBlock1\n\
-	ldr	r2, ._67 + 32   @ 0x494\n\
-	add	r0, r0, r2\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r1, #0x22]\n\
-	ldr	r0, ._67 + 36   @ sub_8115634\n\
-	mov	r1, #0x1\n\
-	bl	CreateTask\n\
-	add	r4, r4, #0xa5\n\
-	strb	r0, [r4]\n\
-	ldr	r0, ._67 + 40   @ sub_81150FC\n\
-	bl	SetMainCallback2\n\
-._64:\n\
-	add	sp, sp, #0x4\n\
-	pop	{r4}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._68:\n\
-	.align	2, 0\n\
-._67:\n\
-	.word	0x4000208\n\
-	.word	0x4000200\n\
-	.word	0x4000004\n\
-	.word	sub_8115124+1\n\
-	.word	sub_81156BC+1\n\
-	.word	0x2019000\n\
-	.word	gTasks\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	sub_8115634+1\n\
-	.word	sub_81150FC+1");
-}
-#else
 void sub_8115384(void)
 {
     u32 temp_IME;
     u8 taskid;
+
+#if DEBUG
+    gUnknown_Debug_03005FB8 = eRoulette;
+#endif
+
     switch (gMain.state)
     {
     case 0x0:
@@ -783,125 +490,13 @@ void sub_8115384(void)
         break;
     }
 }
-#endif
 
-#if DEBUG
-__attribute__((naked))
-void sub_8115634(u8 unused)
-{
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	ldr	r0, ._75        @ 0x2019000\n\
-	add	r3, r0, #0\n\
-	add	r3, r3, #0x21\n\
-	ldrb	r1, [r3]\n\
-	add	r2, r1, #1\n\
-	strb	r2, [r3]\n\
-	add	r2, r0, #0\n\
-	add	r2, r2, #0x23\n\
-	lsl	r1, r1, #0x18\n\
-	lsr	r1, r1, #0x18\n\
-	add	r6, r0, #0\n\
-	ldrb	r2, [r2]\n\
-	cmp	r1, r2\n\
-	bne	._70	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r3]\n\
-	add	r2, r6, #0\n\
-	add	r2, r2, #0x22\n\
-	ldrb	r1, [r2]\n\
-	ldrh	r0, [r6, #0x24]\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r6, #0x24]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._70	@cond_branch\n\
-	ldrb	r1, [r2]\n\
-	mov	r2, #0xb4\n\
-	lsl	r2, r2, #0x1\n\
-	add	r0, r2, #0\n\
-	sub	r0, r0, r1\n\
-	strh	r0, [r6, #0x24]\n\
-._70:\n\
-	add	r4, r6, #0\n\
-	ldrh	r0, [r4, #0x24]\n\
-	bl	Sin2\n\
-	lsl	r0, r0, #0x10\n\
-	lsr	r5, r0, #0x10\n\
-	ldrh	r0, [r4, #0x24]\n\
-	bl	Cos2\n\
-	lsl	r0, r0, #0x10\n\
-	lsr	r1, r0, #0x10\n\
-	lsl	r0, r5, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._71	@cond_branch\n\
-	add	r0, r0, #0xf\n\
-._71:\n\
-	lsl	r0, r0, #0xc\n\
-	lsr	r5, r0, #0x10\n\
-	lsl	r0, r1, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._72	@cond_branch\n\
-	add	r0, r0, #0xf\n\
-._72:\n\
-	asr	r0, r0, #0x4\n\
-	strh	r0, [r6, #0x32]\n\
-	strh	r0, [r6, #0x2c]\n\
-	strh	r5, [r6, #0x2e]\n\
-	lsl	r0, r5, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	neg	r0, r0\n\
-	strh	r0, [r6, #0x30]\n\
-	ldr	r0, ._75 + 4    @ unk_203955C\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._74	@cond_branch\n\
-	ldr	r0, ._75 + 8    @ gMain\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._74	@cond_branch\n\
-	ldr	r2, ._75 + 12   @ gTasks\n\
-	add	r0, r6, #0\n\
-	add	r0, r0, #0xa4\n\
-	ldrb	r1, [r0]\n\
-	lsl	r0, r1, #0x2\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #0x3\n\
-	add	r0, r0, r2\n\
-	ldr	r1, ._75 + 16   @ sub_81157AC\n\
-	str	r1, [r0]\n\
-	ldr	r0, ._75 + 20   @ gMPlay_SE1\n\
-	bl	m4aMPlayStop\n\
-	ldr	r0, ._75 + 24   @ gMPlay_SE2\n\
-	bl	m4aMPlayStop\n\
-	ldr	r0, ._75 + 28   @ gMPlay_SE3\n\
-	bl	m4aMPlayStop\n\
-._74:\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._76:\n\
-	.align	2, 0\n\
-._75:\n\
-	.word	0x2019000\n\
-	.word	unk_203955C\n\
-	.word	gMain\n\
-	.word	gTasks\n\
-	.word	sub_81157AC+1\n\
-	.word	gMPlay_SE1\n\
-	.word	gMPlay_SE2\n\
-	.word	gMPlay_SE3");
-}
-#else
 void sub_8115634(u8 unused)
 {
     s16 sin;
     s16 cos;
     s32 cos32;
+
     if (eRoulette->var21++ == eRoulette->var23)
     {
         eRoulette->var21 = 0x0;
@@ -916,8 +511,16 @@ void sub_8115634(u8 unused)
     eRoulette->var2C.a =  cos32;
     eRoulette->var2C.b =  sin;
     eRoulette->var2C.c = -sin;
-}
+#if DEBUG
+    if (unk_203955C[0] != 0 && (gMain.newKeys & 8))
+    {
+        gTasks[eRoulette->varA4].func = sub_81157AC;
+        m4aMPlayStop(&gMPlay_SE1);
+        m4aMPlayStop(&gMPlay_SE2);
+        m4aMPlayStop(&gMPlay_SE3);
+    }
 #endif
+}
 
 void sub_81156BC(u8 taskid)
 {
@@ -984,6 +587,7 @@ void sub_81157D0(u8 r0)
         temp1 = ((r0 - 1) / 5 * 3 + 0x7);
         sub_8124DDC(&gBGTilemapBuffers[2][0], 0x0, 0xE, 0x7, 0x10, 0xD);
         sub_8124E2C(&gBGTilemapBuffers[2][0], ewram18a20, temp0, temp1, 0x3, 0x3);
+        break;
     }
 }
 
@@ -1008,7 +612,8 @@ void sub_811597C(u8 taskid)
 void sub_81159BC(u8 taskid)
 {
     s16 i;
-    if(eRoulette->var08 & 0x20)
+
+    if (eRoulette->var08 & 0x20)
     {
         for (i = 0xB; (i < 0xE); i++)
             if ((eRoulette->var08 & gUnknown_083F8C00[i].var08) == 0)
@@ -1380,9 +985,9 @@ void sub_8116474(u8 taskid)
 {
     if (gTasks[taskid].data[0x1]-- > 0x0)
     {
-        if(gTasks[taskid].data[0x1] > 0x2)
+        if (gTasks[taskid].data[0x1] > 0x2)
             gSpriteCoordOffsetX -= 0x2;
-        if((eRoulette->var26 -= 0x4) == 0x68)
+        if ((eRoulette->var26 -= 0x4) == 0x68)
             gSprites[eRoulette->var3C[0x19]].callback = &sub_81184CC;
     }
     else
@@ -1400,7 +1005,7 @@ void sub_8116514(u8 taskid)
 {
     if (gTasks[taskid].data[0x1]-- > 0x1)
     {
-        switch(gTasks[taskid].data[0x1] % 0x10)
+        switch (gTasks[taskid].data[0x1] % 0x10)
         {
         case 0x8:
             sub_8117AA8(0x0, 0xFF);
@@ -1420,14 +1025,14 @@ void sub_8116514(u8 taskid)
 
 void sub_811659C(u8 taskid)
 {
-    switch(gTasks[taskid].data[0x5])
+    switch (gTasks[taskid].data[0x5])
     {
     case 0x1:
     case 0x2:
         if (IsFanfareTaskInactive())
         {
             u32 wins = GetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS);
-            if(wins < ++gTasks[taskid].data[0xB])
+            if (wins < ++gTasks[taskid].data[0xB])
                 SetGameStat(GAME_STAT_CONSECUTIVE_ROULETTE_WINS, gTasks[taskid].data[0xB]);
             sub_8116C34(taskid, &sub_811677C, 0xFFFF, 0x3);
         }
@@ -1444,7 +1049,7 @@ void sub_811659C(u8 taskid)
 
 void sub_8116638(u8 taskid)
 {
-    switch(gTasks[taskid].data[0x5])
+    switch (gTasks[taskid].data[0x5])
     {
     case 0x1:
     case 0x2:
@@ -1474,7 +1079,7 @@ void sub_8116638(u8 taskid)
 void sub_81166E8(u8 taskid)
 {
     s32 r0 = gTasks[taskid].data[0x7];
-    switch(r0)
+    switch (r0)
     {
     case 0x0:
         gTasks[taskid].data[0xD]++;
@@ -1598,73 +1203,11 @@ void sub_8116AB0(u8 taskid)
     gTasks[taskid].func = &sub_8116B40;
 }
 
-#if DEBUG
-__attribute__((naked))
-void sub_8116B40(u8 taskid) // end roulette ?
-{
-    asm("\
-	push	{r4, r5, r6, lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r6, r0, #0x18\n\
-	bl	UpdatePaletteFade\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r5, r0, #0x18\n\
-	cmp	r5, #0\n\
-	bne	._380	@cond_branch\n\
-	mov	r0, #0x0\n\
-	bl	SetVBlankCallback\n\
-	ldr	r0, ._381       @ 0x2019000\n\
-	mov	r2, #0xbe\n\
-	lsl	r2, r2, #0x1\n\
-	mov	r1, #0x0\n\
-	bl	memset\n\
-	ldr	r1, ._381 + 4   @ gSpriteCoordOffsetX\n\
-	ldr	r0, ._381 + 8   @ gSpriteCoordOffsetY\n\
-	mov	r4, #0x0\n\
-	strh	r5, [r0]\n\
-	strh	r5, [r1]\n\
-	bl	sub_80F9368\n\
-	bl	FreeAllSpritePalettes\n\
-	bl	ResetPaletteFade\n\
-	bl	ResetSpriteData\n\
-	bl	ClearBGTilemapBuffers\n\
-	ldr	r0, ._381 + 12  @ 0x4000050\n\
-	strh	r5, [r0]\n\
-	add	r0, r0, #0x2\n\
-	strh	r5, [r0]\n\
-	add	r0, r0, #0x2\n\
-	strh	r5, [r0]\n\
-	ldr	r1, ._381 + 16  @ gFieldCallback\n\
-	ldr	r0, ._381 + 20  @ sub_8080990\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._381 + 24  @ c2_exit_to_overworld_2_switch\n\
-	bl	SetMainCallback2\n\
-	add	r0, r6, #0\n\
-	bl	DestroyTask\n\
-	ldr	r0, ._381 + 28  @ unk_203955C\n\
-	strb	r4, [r0]\n\
-._380:\n\
-	pop	{r4, r5, r6}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._382:\n\
-	.align	2, 0\n\
-._381:\n\
-	.word	0x2019000\n\
-	.word	gSpriteCoordOffsetX\n\
-	.word	gSpriteCoordOffsetY\n\
-	.word	0x4000050\n\
-	.word	gFieldCallback\n\
-	.word	sub_8080990+1\n\
-	.word	c2_exit_to_overworld_2_switch+1\n\
-	.word	unk_203955C");
-}
-#else
-void sub_8116B40(u8 taskid) // end roulette ?
+void sub_8116B40(u8 taskId) // end roulette ?
 {
     if (UpdatePaletteFade() == 0)
     {
-        SetVBlankCallback(0x0);
+        SetVBlankCallback(NULL);
         memset(eRoulette, 0x0, 0x17C);
         gSpriteCoordOffsetX = gSpriteCoordOffsetY = 0x0;
         sub_80F9368();
@@ -1677,14 +1220,16 @@ void sub_8116B40(u8 taskid) // end roulette ?
         REG_BLDY = 0x0;
         gFieldCallback = &sub_8080990;
         SetMainCallback2(&c2_exit_to_overworld_2_switch);
-        DestroyTask(taskid);
+        DestroyTask(taskId);
+#if DEBUG
+        unk_203955C[0] = 0;
+#endif
     }
 }
-#endif
 
 void sub_8116BC0(u8 taskid)
 {
-    if(eRoulette->varA8 == 0 || gMain.newKeys & eRoulette->varAA)
+    if (eRoulette->varA8 == 0 || gMain.newKeys & eRoulette->varAA)
     {
         gTasks[taskid].func = eRoulette->varAC;
         if (eRoulette->varAA > 0)
@@ -1700,7 +1245,7 @@ void sub_8116BC0(u8 taskid)
 void sub_8116C34(u8 taskid, TaskFunc r1, u16 r2, u16 r3)
 {
     eRoulette->varB4 = gTasks[taskid].func;
-    if(r1 == NULL)
+    if (r1 == NULL)
         r1 = eRoulette->varB4;
     eRoulette->varAC = r1;
     eRoulette->varA8 = r2;
@@ -1780,7 +1325,7 @@ u8 sub_8116E5C(u8 r0, u8 r1)
     u8 t = r0;
     if (--r0 < 0x13)
     {
-        switch(r1)
+        switch (r1)
         {
         case 0x0:
             return 0x3;
@@ -1810,7 +1355,7 @@ void sub_8116EF8(u8 r0)
     u8 var2;
     u16 var3;
     u8 i;
-    switch(r0)
+    switch (r0)
     {
     case 0x5:
     case 0xA:
@@ -1889,7 +1434,7 @@ void sub_8117158(u8 r0)
     eRoulette->var2A = 0x1;
     sub_8117AA8(0x0, 0x0);
     sub_8124E2C(gBGTilemapBuffers[1], (u16 *)ewram18800, 0xE, 0x7, 0x10, 0xD);
-    switch(r0)
+    switch (r0)
     {
     case 0x0:
         return;
@@ -2077,392 +1622,98 @@ void Task_Roulette_0(u8 taskid)
 
 #if DEBUG
 
-__attribute__((naked))
-void debug_sub_812CDE4()
+void debug_sub_812CDE4(u8 taskId)
 {
-    asm("\
-	push	{r4, r5, lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r3, r0, #0x18\n\
-	add	r4, r3, #0\n\
-	ldr	r0, ._575       @ gMain\n\
-	ldrh	r1, [r0, #0x2e]\n\
-	mov	r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._572	@cond_branch\n\
-	ldr	r1, ._575 + 4   @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r0, [r2, #0x22]\n\
-	add	r0, r0, #0x1\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	ldr	r1, ._575 + 8   @ 0x27100000\n\
-	cmp	r0, r1\n\
-	bne	._573	@cond_branch\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r2, #0x22]\n\
-._573:\n\
-	ldr	r0, ._575 + 12  @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._576:\n\
-	.align	2, 0\n\
-._575:\n\
-	.word	gMain\n\
-	.word	gTasks\n\
-	.word	0x27100000\n\
-	.word	gStringVar1\n\
-._572:\n\
-	mov	r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._577	@cond_branch\n\
-	ldr	r1, ._580       @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r0, [r2, #0x22]\n\
-	sub	r0, r0, #0x1\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	asr	r0, r0, #0x10\n\
-	mov	r1, #0x1\n\
-	neg	r1, r1\n\
-	cmp	r0, r1\n\
-	bne	._578	@cond_branch\n\
-	ldr	r0, ._580 + 4   @ 0x270f\n\
-	strh	r0, [r2, #0x22]\n\
-._578:\n\
-	ldr	r0, ._580 + 8   @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._581:\n\
-	.align	2, 0\n\
-._580:\n\
-	.word	gTasks\n\
-	.word	0x270f\n\
-	.word	gStringVar1\n\
-._577:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x1\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._582	@cond_branch\n\
-	ldr	r1, ._585       @ gTasks\n\
-	lsl	r0, r3, #0x2\n\
-	add	r0, r0, r3\n\
-	lsl	r0, r0, #0x3\n\
-	add	r2, r0, r1\n\
-	ldrh	r3, [r2, #0x22]\n\
-	add	r0, r3, #0\n\
-	add	r0, r0, #0xa\n\
-	strh	r0, [r2, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	ldr	r1, ._585 + 4   @ 0x270f0000\n\
-	cmp	r0, r1\n\
-	ble	._583	@cond_branch\n\
-	ldr	r1, ._585 + 8   @ 0xffffd8fb\n\
-	add	r0, r3, r1\n\
-	strh	r0, [r2, #0x22]\n\
-._583:\n\
-	ldr	r0, ._585 + 12  @ gStringVar1\n\
-	mov	r3, #0x22\n\
-	ldsh	r1, [r2, r3]\n\
-	b	._584\n\
-._586:\n\
-	.align	2, 0\n\
-._585:\n\
-	.word	gTasks\n\
-	.word	0x270f0000\n\
-	.word	0xffffd8fb\n\
-	.word	gStringVar1\n\
-._582:\n\
-	mov	r0, #0x80\n\
-	lsl	r0, r0, #0x2\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._587	@cond_branch\n\
-	ldr	r0, ._590       @ gTasks\n\
-	lsl	r1, r3, #0x2\n\
-	add	r1, r1, r3\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r0\n\
-	ldrh	r2, [r1, #0x22]\n\
-	add	r0, r2, #0\n\
-	sub	r0, r0, #0xa\n\
-	strh	r0, [r1, #0x22]\n\
-	lsl	r0, r0, #0x10\n\
-	cmp	r0, #0\n\
-	bge	._588	@cond_branch\n\
-	ldr	r3, ._590 + 4   @ 0x2705\n\
-	add	r0, r2, r3\n\
-	strh	r0, [r1, #0x22]\n\
-._588:\n\
-	ldr	r0, ._590 + 8   @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-._584:\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._590 + 12  @ gStringVar4\n\
-	ldr	r1, ._590 + 16  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	b	._596\n\
-._591:\n\
-	.align	2, 0\n\
-._590:\n\
-	.word	gTasks\n\
-	.word	0x2705\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-._587:\n\
-	mov	r0, #0x8\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._592	@cond_branch\n\
-	ldr	r0, ._594       @ gSaveBlock1\n\
-	ldr	r2, ._594 + 4   @ gTasks\n\
-	lsl	r1, r3, #0x2\n\
-	add	r1, r1, r3\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldrh	r2, [r1, #0x22]\n\
-	ldr	r3, ._594 + 8   @ 0x494\n\
-	add	r0, r0, r3\n\
-	mov	r5, #0x0\n\
-	strh	r2, [r0]\n\
-	ldr	r0, ._594 + 12  @ Task_Roulette_0\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._594 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._594 + 20  @ gStringVar4\n\
-	ldr	r1, ._594 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	ldr	r0, ._594 + 28  @ unk_2039560\n\
-	strb	r5, [r0]\n\
-	b	._596\n\
-._595:\n\
-	.align	2, 0\n\
-._594:\n\
-	.word	gSaveBlock1\n\
-	.word	gTasks\n\
-	.word	0x494\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	unk_2039560\n\
-._592:\n\
-	mov	r0, #0x4\n\
-	and	r0, r0, r1\n\
-	cmp	r0, #0\n\
-	beq	._596	@cond_branch\n\
-	ldr	r0, ._597       @ gSaveBlock1\n\
-	ldr	r2, ._597 + 4   @ gTasks\n\
-	lsl	r1, r4, #0x2\n\
-	add	r1, r1, r4\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldrh	r2, [r1, #0x22]\n\
-	ldr	r3, ._597 + 8   @ 0x494\n\
-	add	r0, r0, r3\n\
-	strh	r2, [r0]\n\
-	ldr	r0, ._597 + 12  @ Task_Roulette_0\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._597 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r1, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._597 + 20  @ gStringVar4\n\
-	ldr	r1, ._597 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	ldr	r1, ._597 + 28  @ unk_2039560\n\
-	mov	r0, #0x1\n\
-	strb	r0, [r1]\n\
-._596:\n\
-	pop	{r4, r5}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._598:\n\
-	.align	2, 0\n\
-._597:\n\
-	.word	gSaveBlock1\n\
-	.word	gTasks\n\
-	.word	0x494\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	unk_2039560");
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].data[13]++;
+        if (gTasks[taskId].data[13] == 10000)
+            gTasks[taskId].data[13] = 0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].data[13]--;
+        if (gTasks[taskId].data[13] == -1)
+            gTasks[taskId].data[13] = 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 0x100)
+    {
+        gTasks[taskId].data[13] += 10;
+        if (gTasks[taskId].data[13] > 9999)
+            gTasks[taskId].data[13] -= 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 0x200)
+    {
+        gTasks[taskId].data[13] -= 10;
+        if (gTasks[taskId].data[13] < 0)
+            gTasks[taskId].data[13] += 9999;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+    }
+    else if (gMain.newKeys & 8)
+    {
+        gSaveBlock1.coins = gTasks[taskId].data[13];
+        gTasks[taskId].func = Task_Roulette_0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+        unk_2039560 = 0;
+    }
+    else if (gMain.newKeys & 4)
+    {
+        gSaveBlock1.coins = gTasks[taskId].data[13];
+        gTasks[taskId].func = Task_Roulette_0;
+        ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+        StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+        MenuPrint_RightAligned(gStringVar4, 9, 1);
+        unk_2039560 = 1;
+    }
 }
 
-__attribute__((naked))
-void debug_sub_812CFE8()
+extern const u8 gUnknown_Debug_0842510D[];
+
+void debug_sub_812CFE8(u8 taskId)
 {
-    asm("\
-	push	{r4, r5, lr}\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._600       @ gTasks\n\
-	lsl	r1, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	add	r5, r1, r2\n\
-	ldr	r0, ._600 + 4   @ gSaveBlock1\n\
-	ldr	r1, ._600 + 8   @ 0x494\n\
-	add	r0, r0, r1\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r5, #0x22]\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	cmp	r1, #0\n\
-	beq	._599	@cond_branch\n\
-	ldr	r0, ._600 + 12  @ gSpecialVar_0x8004\n\
-	ldrh	r1, [r0]\n\
-	mov	r2, #0x80\n\
-	orr	r1, r1, r2\n\
-	strh	r1, [r0]\n\
-._599:\n\
-	ldr	r0, ._600 + 16  @ gStringVar1\n\
-	mov	r2, #0x22\n\
-	ldsh	r1, [r5, r2]\n\
-	mov	r2, #0x1\n\
-	mov	r3, #0x4\n\
-	bl	ConvertIntToDecimalStringN\n\
-	ldr	r4, ._600 + 20  @ gStringVar4\n\
-	ldr	r1, ._600 + 24  @ gOtherText_Coins\n\
-	add	r0, r4, #0\n\
-	bl	StringExpandPlaceholders\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0x0\n\
-	mov	r2, #0x9\n\
-	mov	r3, #0x3\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	add	r0, r4, #0\n\
-	mov	r1, #0x9\n\
-	mov	r2, #0x1\n\
-	bl	MenuPrint_RightAligned\n\
-	mov	r0, #0x0\n\
-	mov	r1, #0xe\n\
-	mov	r2, #0x1d\n\
-	mov	r3, #0x13\n\
-	bl	Menu_DrawStdWindowFrame\n\
-	ldr	r0, ._600 + 28  @ gUnknown_Debug_0842510D\n\
-	mov	r1, #0x1\n\
-	mov	r2, #0xf\n\
-	bl	Menu_PrintText\n\
-	ldr	r0, ._600 + 32  @ debug_sub_812CDE4\n\
-	str	r0, [r5]\n\
-	pop	{r4, r5}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._601:\n\
-	.align	2, 0\n\
-._600:\n\
-	.word	gTasks\n\
-	.word	gSaveBlock1\n\
-	.word	0x494\n\
-	.word	gSpecialVar_0x8004\n\
-	.word	gStringVar1\n\
-	.word	gStringVar4\n\
-	.word	gOtherText_Coins\n\
-	.word	gUnknown_Debug_0842510D\n\
-	.word	debug_sub_812CDE4+1");
+    gTasks[taskId].data[13] = gSaveBlock1.coins;
+    if (Random() & 1)
+        gSpecialVar_0x8004 |= 0x80;
+    ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[13], 1, 4);
+    StringExpandPlaceholders(gStringVar4, gOtherText_Coins);
+    Menu_DrawStdWindowFrame(0, 0, 9, 3);
+    MenuPrint_RightAligned(gStringVar4, 9, 1);
+    Menu_DrawStdWindowFrame(0, 14, 29, 19);
+    Menu_PrintText(gUnknown_Debug_0842510D, 1, 15);
+    gTasks[taskId].func = debug_sub_812CDE4;
 }
 
 #endif
 
-#if DEBUG
-__attribute__((naked))
-void PlayRoulette(void)
-{
-    asm("\
-	push	{lr}\n\
-	bl	ScriptContext2_Enable\n\
-	ldr	r1, ._604       @ unk_2039560\n\
-	mov	r0, #0x0\n\
-	strb	r0, [r1]\n\
-	ldr	r0, ._604 + 4   @ unk_203955C\n\
-	ldrb	r0, [r0]\n\
-	cmp	r0, #0\n\
-	beq	._602	@cond_branch\n\
-	ldr	r0, ._604 + 8   @ debug_sub_812CFE8\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	b	._603\n\
-._605:\n\
-	.align	2, 0\n\
-._604:\n\
-	.word	unk_2039560\n\
-	.word	unk_203955C\n\
-	.word	debug_sub_812CFE8+1\n\
-._602:\n\
-	ldr	r0, ._606       @ Task_Roulette_0\n\
-	mov	r1, #0x0\n\
-	bl	CreateTask\n\
-	lsl	r0, r0, #0x18\n\
-	lsr	r0, r0, #0x18\n\
-	ldr	r2, ._606 + 4   @ gTasks\n\
-	lsl	r1, r0, #0x2\n\
-	add	r1, r1, r0\n\
-	lsl	r1, r1, #0x3\n\
-	add	r1, r1, r2\n\
-	ldr	r0, ._606 + 8   @ gSaveBlock1\n\
-	ldr	r2, ._606 + 12  @ 0x494\n\
-	add	r0, r0, r2\n\
-	ldrh	r0, [r0]\n\
-	strh	r0, [r1, #0x22]\n\
-._603:\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._607:\n\
-	.align	2, 0\n\
-._606:\n\
-	.word	Task_Roulette_0+1\n\
-	.word	gTasks\n\
-	.word	gSaveBlock1\n\
-	.word	0x494");
-}
-#else
 void PlayRoulette(void)
 {
     u8 taskid;
+
     ScriptContext2_Enable();
-    taskid = CreateTask(&Task_Roulette_0, 0x0);
+#if DEBUG
+    unk_2039560 = 0;
+    if (unk_203955C[0] != 0)
+    {
+	    CreateTask(debug_sub_812CFE8, 0);
+	    return;
+    }
+#endif
+    taskid = CreateTask(Task_Roulette_0, 0);
     gTasks[taskid].data[0xD] = gSaveBlock1.coins;
 }
-#endif
 
 void sub_8117838(u8 r0)
 {
@@ -2548,7 +1799,7 @@ void unref_sub_8117A74(void) //destroy all sprites at 0x1D
 void sub_8117AA8(u8 r0, u8 r1)
 {
     u8 i;
-    switch(r0)
+    switch (r0)
     {
     case 0x1:
         for (i = 0x0; i < 0x13; i++)
@@ -2564,7 +1815,7 @@ void sub_8117AA8(u8 r0, u8 r1)
             else
                 gSprites[eRoulette->var3C[0x1D + i]].invisible = FALSE;
         }
-        for ( ; i < 0x13; i++)
+        for (; i < 0x13; i++)
             gSprites[eRoulette->var3C[0x1D + i]].invisible = FALSE;
         break;
     }
@@ -2577,7 +1828,7 @@ void sub_8117BBC(void)
     {
         eRoulette->var3C[0x31 + i] = CreateSprite(&gSpriteTemplate_83FA40C, 0x74, 0x14, 0xA);
         gSprites[eRoulette->var3C[0x31 + i]].invisible    = TRUE;
-        gSprites[eRoulette->var3C[0x31 + i]].data[0]        = 0x1;
+        gSprites[eRoulette->var3C[0x31 + i]].data[0]      = 0x1;
         gSprites[eRoulette->var3C[0x31 + i]].callback     = &sub_81184CC;
         gSprites[eRoulette->var3C[0x31 + i]].oam.priority = 0x1;
         StartSpriteAnim(&gSprites[eRoulette->var3C[0x31 + i]], 0x8);
@@ -2731,7 +1982,7 @@ u8 sub_81181E8(u8 r0)
     // u8 t = {0, 1, 2, 3, 4};
     if (r0 >= 20)
         r0 = 0;
-    switch(gUnknown_083F8C00[r0].var01_0)
+    switch (gUnknown_083F8C00[r0].var01_0)
     {
     case 0x3:
         r0 = r0 / 5 - 1;
@@ -2766,7 +2017,7 @@ void sub_81182F8(u8 r0)
     u8 t = 0x0;
     if (eRoulette->var19 == 0x1)
         t = 0x2;
-    switch(r0)
+    switch (r0)
     {
     case 0x6:
         for (i = 0x0; i < 0x3; i++)
@@ -3006,7 +2257,7 @@ void sub_81189A8(struct Sprite *sprite)
     float f0, f1, f2;
     struct StructgUnknown_083F8DF4 *p;
     sub_8118724(sprite);
-    switch(sprite->data[0x3])
+    switch (sprite->data[0x3])
     {
     case 0:
         if (sprite->data[0x0] != 0x1)
@@ -3072,7 +2323,7 @@ void sub_8118BD8(struct Sprite *sprite)
     if (sprite->data[0x2]++ < 45)
     {
         sprite->pos2.y--;
-        if(sprite->data[0x2] == 45)
+        if (sprite->data[0x2] == 45)
         {
             if (gSprites[eRoulette->var3C[0x37]].animCmdIndex == 0x1)
                 sprite->pos2.y++;
@@ -3106,7 +2357,7 @@ void sub_8118BD8(struct Sprite *sprite)
 void sub_8118CAC(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    switch(sprite->data[0x3])
+    switch (sprite->data[0x3])
     {
     case 90:
         if (sprite->data[0x0] != 0x1)
@@ -3128,7 +2379,7 @@ void sub_8118CAC(struct Sprite *sprite)
 void sub_8118CEC(struct Sprite *sprite)
 {
     sub_8118724(sprite);
-    switch(eRoulette->var03_0)
+    switch (eRoulette->var03_0)
     {
     default:
     case 0x0:
@@ -3171,96 +2422,30 @@ void sub_8118D2C(struct Sprite *sprite)
 }
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_812E698()
+
+void debug_sub_812E698(struct Sprite *sprite)
 {
-    asm("\
-	push	{r4, r5, r6, r7, lr}\n\
-	add	r7, r0, #0\n\
-	bl	sub_8118724\n\
-	mov	r0, #0x0\n\
-	strh	r0, [r7, #0x32]\n\
-	add	r0, r7, #0\n\
-	bl	sub_81186B8\n\
-	mov	r0, #0x38\n\
-	bl	m4aSongNumStart\n\
-	bl	Random\n\
-	mov	r1, #0x1\n\
-	and	r1, r1, r0\n\
-	cmp	r1, #0\n\
-	beq	._837	@cond_branch\n\
-	ldr	r4, ._839       @ 0x2019000\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x8c\n\
-	ldr	r0, ._839 + 4   @ 0x0\n\
-	str	r0, [r1]\n\
-	add	r0, r4, #0\n\
-	add	r0, r0, #0x7e\n\
-	ldrb	r0, [r0]\n\
-	add	r0, r0, #0x1\n\
-	mov	r1, #0xc\n\
-	bl	__modsi3\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x7f\n\
-	strb	r0, [r1]\n\
-	add	r1, r4, #0\n\
-	ldr	r4, ._839 + 8   @ gUnknown_083F8DF4\n\
-	b	._838\n\
-._840:\n\
-	.align	2, 0\n\
-._839:\n\
-	.word	0x2019000\n\
-	.word	0x0\n\
-	.word	gUnknown_083F8DF4\n\
-._837:\n\
-	ldr	r6, ._841       @ 0x2019000\n\
-	add	r5, r6, #0\n\
-	add	r5, r5, #0x8c\n\
-	ldr	r4, ._841 + 4   @ gUnknown_083F8DF4\n\
-	ldrb	r0, [r6, #0x4]\n\
-	lsl	r0, r0, #0x1e\n\
-	lsr	r0, r0, #0x19\n\
-	add	r1, r4, #0\n\
-	add	r1, r1, #0x1c\n\
-	add	r0, r0, r1\n\
-	ldr	r1, [r0]\n\
-	add	r0, r1, #0\n\
-	bl	__addsf3\n\
-	str	r0, [r5]\n\
-	add	r0, r6, #0\n\
-	add	r0, r0, #0x7e\n\
-	ldrb	r0, [r0]\n\
-	add	r1, r6, #0\n\
-	add	r1, r1, #0x7f\n\
-	strb	r0, [r1]\n\
-	add	r1, r6, #0\n\
-._838:\n\
-	mov	r0, #0x1\n\
-	strh	r0, [r7, #0x2e]\n\
-	ldrb	r0, [r1, #0x4]\n\
-	lsl	r0, r0, #0x1e\n\
-	lsr	r0, r0, #0x19\n\
-	add	r0, r0, r4\n\
-	ldrb	r0, [r0, #0x2]\n\
-	strh	r0, [r7, #0x32]\n\
-	add	r1, r1, #0x98\n\
-	ldr	r0, ._841 + 8   @ 0x3dae147b\n\
-	str	r0, [r1]\n\
-	ldr	r0, ._841 + 12  @ sub_8118D2C\n\
-	str	r0, [r7, #0x1c]\n\
-	mov	r0, #0x5\n\
-	strh	r0, [r7, #0x30]\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._842:\n\
-	.align	2, 0\n\
-._841:\n\
-	.word	0x2019000\n\
-	.word	gUnknown_083F8DF4\n\
-	.word	0x3dae147b\n\
-	.word	sub_8118D2C+1");
+    sub_8118724(sprite);
+    sprite->data[2] = 0;
+    sub_81186B8(sprite);
+    m4aSongNumStart(0x38);
+    if (Random() & 1)
+    {
+	    eRoulette->var8C = 0;
+	    eRoulette->var7F = (eRoulette->var7E + 1) % 12;
+    }
+    else
+    {
+	    eRoulette->var8C = gUnknown_083F8DF4[eRoulette->var04_0].var1C * 2;
+	    eRoulette->var7F = eRoulette->var7E;
+    }
+    sprite->data[0] = 1;
+    sprite->data[2] = gUnknown_083F8DF4[eRoulette->var04_0].var02;
+    eRoulette->var98 = 0.085;
+    sprite->callback = sub_8118D2C;
+    sprite->data[1] = 5;
 }
+
 #endif
 
 void sub_8118DE4(struct Sprite *sprite)
@@ -3345,7 +2530,7 @@ void sub_8118F8C(struct Sprite *sprite)
                 / ((float)(s16)(p[eRoulette->var04_0].var04 + 0x1));
             sprite->data[0x1] = 0x4;
 #if DEBUG
-            if (unk_2039560[0])
+            if (unk_2039560 != 0)
                 sprite->callback = debug_sub_812E698;
             else
 #endif
@@ -3852,17 +3037,16 @@ void sub_811952C(struct Sprite *sprite)
 
 void sub_8119780(struct Sprite *sprite)
 {
-    if (sprite->data[0x1]++ >= sprite->data[0x3])
+    if (sprite->data[1]++ >= sprite->data[3])
     {
-        if ((sprite->pos1.x -= 0x2) < -0x10)
+	sprite->pos1.x -= 2;
+        if (sprite->pos1.x < -16)
         {
             if (!eRoulette->var03_6)
-            {
                 eRoulette->var03_6 = TRUE;
-            }
             DestroySprite(sprite);
-            eRoulette->var01 = 0x0;
-            eRoulette->var34 = gUnknown_083FA61E[0x0];
+            eRoulette->var01 = 0;
+            eRoulette->var34 = gUnknown_083FA61E[0];
         }
     }
 }
@@ -3871,18 +3055,19 @@ void sub_81197D8(struct Sprite *sprite)
 {
     u16 t[0x3][0x4];
     s32 p, z;
-    memcpy(t, &gUnknown_083FA632, 0x18);
-    if (sprite->data[0x1]++ < sprite->data[0x3])
+
+    memcpy(t, &gUnknown_083FA632, 24);
+    if (sprite->data[1]++ < sprite->data[3])
     {
-        if(sprite->data[0x1] & 0x1)
+        if (sprite->data[1] & 1)
         {
-            gSpriteCoordOffsetY = t[sprite->data[0x2] / 0x2][sprite->data[0x7]];
-            p = z = sprite->data[0x7] + 0x1;
+            gSpriteCoordOffsetY = t[sprite->data[2] / 2][sprite->data[7]];
+            p = z = sprite->data[7] + 1;
             if (z < 0)
-                p += 0x3;
-            sprite->data[0x7] = z - ((p >> 2) * 4);
+                p += 3;
+            sprite->data[7] = z - ((p >> 2) * 4);
         }
-        sprite->invisible ^= 0x1;
+        sprite->invisible ^= 1;
     }
     else
     {
@@ -3915,7 +3100,7 @@ void sub_8119898(struct Sprite *sprite)
 
 void sub_8119964(struct Sprite *sprite)
 {
-    if(sprite->data[0x7] == 0x0)
+    if (sprite->data[0x7] == 0x0)
     {
         register u32 t asm("r2");
         u32 z ;
@@ -4047,7 +3232,7 @@ void sub_8119BCC(struct Sprite *sprite)
         else
         {
             m4aSongNumStartOrChange(0x5E);
-            if(eRoulette->var38->data[0x0] == 0x0)
+            if (eRoulette->var38->data[0x0] == 0x0)
                 PlayCry1(SPECIES_TAILLOW, 0x3F);
             else
                 PlayCry1(SPECIES_TAILLOW, -0x3F);

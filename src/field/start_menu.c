@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_tower.h"
 #include "start_menu.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
@@ -6,9 +7,11 @@
 #include "fieldmap.h"
 #include "item_menu.h"
 #include "load_save.h"
+#include "m4a.h"
 #include "main.h"
 #include "map_obj_lock.h"
 #include "menu.h"
+#include "new_game.h"
 #include "option_menu.h"
 #include "palette.h"
 #include "pokedex.h"
@@ -137,302 +140,105 @@ static void sub_8071B54(void);
 static void Task_8071B64(u8 taskId);
 
 #if DEBUG
-__attribute__((naked))
-void debug_sub_8075C30()
+
+void debug_sub_8075D9C(void);
+
+u8 debug_sub_8075C30(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	debug_sub_8075D9C\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    debug_sub_8075D9C();
+    return 1;
 }
 
-__attribute__((naked))
-void debug_sub_8075C40()
+extern const u8 gUnknown_Debug_839B6D8[];
+
+void debug_sub_8075C40(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	lsl	r0, r4, #0x2\n"
-        "	add	r0, r0, r4\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._5         @ gTasks\n"
-        "	add	r5, r0, r1\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r5, r1]\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._1	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._2	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._3	@cond_branch\n"
-        "	b	._18\n"
-        "._6:\n"
-        "	.align	2, 0\n"
-        "._5:\n"
-        "	.word	gTasks+0x8\n"
-        "._2:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._7	@cond_branch\n"
-        "	cmp	r0, #0x3\n"
-        "	beq	._8	@cond_branch\n"
-        "	b	._18\n"
-        "._3:\n"
-        "	bl	m4aSoundVSyncOff\n"
-        "	b	._12\n"
-        "._1:\n"
-        "	ldr	r1, ._13        @ 0x4000208\n"
-        "	ldrh	r0, [r1]\n"
-        "	mov	sl, r0\n"
-        "	mov	r0, #0x0\n"
-        "	strh	r0, [r1]\n"
-        "	ldr	r1, ._13 + 4    @ 0x4000108\n"
-        "	strh	r0, [r1]\n"
-        "	mov	r0, #0x83\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	str	r0, [r1]\n"
-        "	ldr	r4, ._13 + 8    @ 0xc34f\n"
-        "	mov	r9, r4\n"
-        "	ldr	r2, ._13 + 12   @ 0x40000b0\n"
-        "	ldr	r0, ._13 + 16   @ gScanlineEffectRegBuffers\n"
-        "	mov	ip, r0\n"
-        "	ldr	r1, ._13 + 20   @ 0xc5ff\n"
-        "	mov	r8, r1\n"
-        "	ldr	r7, ._13 + 24   @ 0x7fff\n"
-        "	mov	r3, r9\n"
-        "	add	r3, r3, #0x1\n"
-        "	ldr	r6, ._13 + 28   @ 0x4000040\n"
-        "	ldr	r4, ._13 + 32   @ 0xa2600001\n"
-        "._11:\n"
-        "	mov	r0, ip\n"
-        "	str	r0, [r2]\n"
-        "	str	r6, [r2, #0x4]\n"
-        "	str	r4, [r2, #0x8]\n"
-        "	ldr	r0, [r2, #0x8]\n"
-        "	ldrh	r1, [r2, #0xa]\n"
-        "	mov	r0, r8\n"
-        "	and	r0, r0, r1\n"
-        "	strh	r0, [r2, #0xa]\n"
-        "	ldrh	r1, [r2, #0xa]\n"
-        "	add	r0, r7, #0\n"
-        "	and	r0, r0, r1\n"
-        "	strh	r0, [r2, #0xa]\n"
-        "	ldrh	r0, [r2, #0xa]\n"
-        "	sub	r3, r3, #0x1\n"
-        "	cmp	r3, #0\n"
-        "	bne	._11	@cond_branch\n"
-        "	mov	r3, r9\n"
-        "	add	r3, r3, #0x1\n"
-        "	ldr	r0, ._13 + 36   @ 0x400010a\n"
-        "	mov	r2, #0x0\n"
-        "	strh	r2, [r0]\n"
-        "	ldr	r1, ._13 + 4    @ 0x4000108\n"
-        "	ldrh	r0, [r1]\n"
-        "	ldr	r4, ._13 + 40   @ _debugStartMenu_0\n"
-        "	str	r0, [r4]\n"
-        "	strh	r2, [r1]\n"
-        "	ldr	r0, ._13        @ 0x4000208\n"
-        "	mov	r1, sl\n"
-        "	strh	r1, [r0]\n"
-        "	ldr	r4, ._13 + 44   @ _debugStartMenu_1\n"
-        "	str	r3, [r4]\n"
-        "	bl	m4aSoundVSyncOn\n"
-        "	b	._12\n"
-        "._14:\n"
-        "	.align	2, 0\n"
-        "._13:\n"
-        "	.word	0x4000208\n"
-        "	.word	0x4000108\n"
-        "	.word	0xc34f\n"
-        "	.word	0x40000b0\n"
-        "	.word	gScanlineEffectRegBuffers\n"
-        "	.word	0xc5ff\n"
-        "	.word	0x7fff\n"
-        "	.word	0x4000040\n"
-        "	.word	0xa2600001\n"
-        "	.word	0x400010a\n"
-        "	.word	_debugStartMenu_0\n"
-        "	.word	_debugStartMenu_1\n"
-        "._7:\n"
-        "	mov	r0, #0x15\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._16        @ gStringVar1\n"
-        "	ldr	r1, ._16 + 4    @ _debugStartMenu_1\n"
-        "	ldr	r1, [r1]\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x8\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	ldr	r0, ._16 + 8    @ gStringVar2\n"
-        "	ldr	r1, ._16 + 12   @ _debugStartMenu_0\n"
-        "	ldr	r1, [r1]\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x8\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._16 + 16   @ gUnknown_Debug_839B6D8\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "._12:\n"
-        "	ldrh	r0, [r5]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r5]\n"
-        "	b	._18\n"
-        "._17:\n"
-        "	.align	2, 0\n"
-        "._16:\n"
-        "	.word	gStringVar1\n"
-        "	.word	_debugStartMenu_1\n"
-        "	.word	gStringVar2\n"
-        "	.word	_debugStartMenu_0\n"
-        "	.word	gUnknown_Debug_839B6D8\n"
-        "._8:\n"
-        "	ldr	r0, ._19        @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._18	@cond_branch\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	ScriptContext2_Disable\n"
-        "	add	r0, r4, #0\n"
-        "	bl	DestroyTask\n"
-        "._18:\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._20:\n"
-        "	.align	2, 0\n"
-        "._19:\n"
-        "	.word	gMain\n"
-        "\n"
-    );
+    s16 *data = gTasks[taskId].data;
+    u16 savedIme;
+    s32 i;
+
+    switch (data[0])
+    {
+    case 0:
+        m4aSoundVSyncOff();
+        data[0]++;
+        break;
+    case 1:
+        savedIme = REG_IME;
+        REG_IME = 0;
+        REG_TM2CNT_L = 0;
+        REG_TM2CNT = 0x830000;
+        for (i = 0; i < 0xC350; i++)
+        {
+            DmaSet(
+                0,
+                gScanlineEffectRegBuffers,
+                &REG_WIN0H,
+                ((DMA_ENABLE | DMA_START_HBLANK | DMA_16BIT | DMA_REPEAT | DMA_SRC_INC | DMA_DEST_RELOAD) << 16) | 1);
+            DmaStop(0);
+        }
+        REG_TM2CNT_H = 0;
+        _debugStartMenu_0 = REG_TM2CNT_L;
+        REG_TM2CNT_L = 0;
+        REG_IME = savedIme;
+        _debugStartMenu_1 = i;
+        m4aSoundVSyncOn();
+        data[0]++;
+        break;
+    case 2:
+        PlaySE(0x15);
+        ConvertIntToDecimalStringN(gStringVar1, _debugStartMenu_1, 1, 8);
+        ConvertIntToDecimalStringN(gStringVar2, _debugStartMenu_0, 1, 8);
+        Menu_DisplayDialogueFrame();
+        Menu_PrintText(gUnknown_Debug_839B6D8, 2, 15);
+        data[0]++;
+        break;
+    case 3:
+        if (gMain.newKeys & A_BUTTON)
+        {
+            Menu_EraseScreen();
+            ScriptContext2_Disable();
+            DestroyTask(taskId);
+        }
+        break;
+    }
 }
 
-__attribute__((naked))
-void debug_sub_8075D9C()
+void debug_sub_8075D9C(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._21        @ debug_sub_8075C40\n"
-        "	mov	r1, #0xa\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._22:\n"
-        "	.align	2, 0\n"
-        "._21:\n"
-        "	.word	debug_sub_8075C40+1\n"
-        "\n"
-    );
+    CreateTask(debug_sub_8075C40, 10);
+    ScriptContext2_Enable();
 }
 
-__attribute__((naked))
-void debug_sub_8075DB4()
+void debug_sub_8075DB4(struct BattleTowerEReaderTrainer *ereaderTrainer, const u8 *b, u32 trainerId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r6, r0, #0\n"
-        "	add	r5, r1, #0\n"
-        "	add	r4, r2, #0\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x4d\n"
-        "	bl	__umodsi3\n"
-        "	strb	r0, [r6, #0x1]\n"
-        "	add	r1, r6, #0\n"
-        "	add	r1, r1, #0xc\n"
-        "	add	r0, r4, #0\n"
-        "	bl	write_word_to_mem\n"
-        "	add	r0, r6, #4\n"
-        "	add	r1, r5, #0\n"
-        "	bl	StringCopy8\n"
-        "	mov	r3, #0x7\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r0, ._25        @ gSaveBlock1\n"
-        "	ldr	r1, ._25 + 4    @ 0x2b28\n"
-        "	add	r5, r0, r1\n"
-        "	add	r2, r6, #0\n"
-        "	add	r2, r2, #0x10\n"
-        "	add	r1, r6, #0\n"
-        "	add	r1, r1, #0x1c\n"
-        "._23:\n"
-        "	ldrh	r0, [r5]\n"
-        "	strh	r0, [r2]\n"
-        "	strh	r3, [r1]\n"
-        "	add	r0, r3, #6\n"
-        "	strh	r0, [r1, #0xc]\n"
-        "	add	r3, r3, #0x1\n"
-        "	add	r5, r5, #0x2\n"
-        "	add	r2, r2, #0x2\n"
-        "	add	r1, r1, #0x2\n"
-        "	add	r4, r4, #0x1\n"
-        "	cmp	r4, #0x5\n"
-        "	ble	._23	@cond_branch\n"
-        "	mov	r4, #0x0\n"
-        "._24:\n"
-        "	mov	r0, #0x64\n"
-        "	mul	r0, r0, r4\n"
-        "	ldr	r1, ._25 + 8    @ gPlayerParty\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x2c\n"
-        "	mul	r1, r1, r4\n"
-        "	add	r1, r1, #0x34\n"
-        "	add	r1, r6, r1\n"
-        "	bl	sub_803AF78\n"
-        "	add	r4, r4, #0x1\n"
-        "	cmp	r4, #0x2\n"
-        "	ble	._24	@cond_branch\n"
-        "	add	r0, r6, #0\n"
-        "	bl	SetEReaderTrainerChecksum\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._26:\n"
-        "	.align	2, 0\n"
-        "._25:\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	0x2b28\n"
-        "	.word	gPlayerParty\n"
-        "\n"
-    );
+    s32 i;
+    s32 r3;
+
+    ereaderTrainer->trainerClass = trainerId % 77;
+    write_word_to_mem(trainerId, ereaderTrainer->trainerId);
+    StringCopy8(ereaderTrainer->name, b);
+    r3 = 7;
+    for (i = 0; i < 6; i++)
+    {
+        ereaderTrainer->greeting[i] = gSaveBlock1.easyChats.unk2B28[i];
+        ereaderTrainer->farewellPlayerLost[i] = r3;
+        ereaderTrainer->farewellPlayerWon[i] = r3 + 6;
+        r3++;
+    }
+    for (i = 0; i < 3; i++)
+        sub_803AF78(&gPlayerParty[i], &ereaderTrainer->party[i]);
+    SetEReaderTrainerChecksum(ereaderTrainer);
 }
 
-__attribute__((naked))
-void unref_sub_8070F90()
+void unref_sub_8070F90(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._27        @ 0x801\n"
-        "	bl	FlagSet\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x4\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._27 + 4    @ 0x802\n"
-        "	bl	FlagSet\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._28:\n"
-        "	.align	2, 0\n"
-        "._27:\n"
-        "	.word	0x801\n"
-        "	.word	0x802\n"
-        "\n"
-    );
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKENAV_GET);
 }
+
 #endif
 
 static void BuildStartMenuActions(void)

@@ -462,7 +462,7 @@ void debug_sub_8120F98(void)
 static void sub_810BB0C(void)
 {
     BasicInitMenuWindow(&gWindowTemplate_81E6E34);
-    sub_8072BD8(ItemId_GetItem(ITEM_POKEBLOCK_CASE)->name, 2, 1, 0x48);
+    sub_8072BD8(ItemId_GetName(ITEM_POKEBLOCK_CASE), 2, 1, 0x48);
 }
 
 static void sub_810BB30(void)
@@ -481,7 +481,7 @@ static void sub_810BB88(u8 a0)
     u8 y;
     u8 *buf;
     BasicInitMenuWindow(&gWindowTemplate_81E6E34);
-    for (i=a0; i<=a0+8; i++)
+    for (i = a0; i <= a0 + 8; i++)
     {
         y = (i - a0) << 1;
         if (i == gUnknown_02039248.unk2)
@@ -1070,7 +1070,7 @@ s8 GetFirstFreePokeblockSlot(void)
     return -1;
 }
 
-bool8 sub_810CA34(struct Pokeblock *pokeblock)
+bool8 sub_810CA34(const struct Pokeblock *pokeblock)
 {
     s8 idx = GetFirstFreePokeblockSlot();
     if (idx == -1)

@@ -115,7 +115,7 @@ static void SetShopMenuCallback(void *callbackPtr)
     gMartInfo.callback = callbackPtr;
 }
 
-static void SetShopItemsForSale(u16 *items)
+static void SetShopItemsForSale(const u16 *items)
 {
     u16 i = 0;
 
@@ -153,13 +153,9 @@ static void Task_DoBuySellMenu(u8 taskId)
     {
         PlaySE(SE_SELECT);
         if (gMartInfo.martType == MART_TYPE_0)
-        {
             sBuySellQuitMenuActions[gMartBuySellOptionList[gMartInfo.cursor]].func(taskIdConst);
-        }
         else
-        {
             sBuySellQuitMenuActions[gMartBuyNoSellOptionList[gMartInfo.cursor]].func(taskIdConst);
-        }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
@@ -366,15 +362,15 @@ static void BuyMenuDrawMapMetatile(int var1, int var2, u16 *var3, s32 var4)
 
     switch (tempVar4)
     {
-    case 0: // _080B335C
+    case 0:
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3);
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
         break;
-    case 1: // _080B3364
+    case 1:
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[2], offset1, offset2, var3 + 4);
         break;
-    case 2: // _080B3398
+    case 2:
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[3], offset1, offset2, var3);
         BuyMenuDrawMapMetatileLayer(gBGTilemapBuffers[1], offset1, offset2, var3 + 4);
         break;
@@ -550,7 +546,7 @@ static void Shop_DisplayNormalPriceInList(u16 itemId, u8 var2, bool32 hasControl
 {
     u8 *stringPtr = gStringVar1;
 
-    if (hasControlCode != FALSE)
+    if (hasControlCode)
     {
         stringPtr[0] = EXT_CTRL_CODE_BEGIN;
         stringPtr[1] = 0x1;
@@ -563,7 +559,7 @@ static void Shop_DisplayNormalPriceInList(u16 itemId, u8 var2, bool32 hasControl
     sub_8072A18(&gStringVar1[0], 0x70, var2 << 3, 0x58, 0x1);
     stringPtr = gStringVar1;
 
-    if (hasControlCode != FALSE)
+    if (hasControlCode)
         stringPtr = &gStringVar1[3];
 
     GetMoneyAmountText(stringPtr, (ItemId_GetPrice(itemId) >> GetPriceReduction(1)), 0x4);
@@ -574,7 +570,7 @@ static void Shop_DisplayDecorationPriceInList(u16 itemId, u8 var2, bool32 hasCon
 {
     u8 *stringPtr = gStringVar1;
 
-    if (hasControlCode != FALSE)
+    if (hasControlCode)
     {
         stringPtr[0] = EXT_CTRL_CODE_BEGIN;
         stringPtr[1] = 0x1;
@@ -586,7 +582,7 @@ static void Shop_DisplayDecorationPriceInList(u16 itemId, u8 var2, bool32 hasCon
     sub_8072A18(&gStringVar1[0], 0x70, var2 << 3, 0x58, 0x1);
     stringPtr = gStringVar1;
 
-    if (hasControlCode != FALSE)
+    if (hasControlCode)
         stringPtr = &gStringVar1[3];
 
     // some names are the maximum string length for a shop item. Because there is no room for
@@ -632,8 +628,10 @@ static void Shop_PrintItemDescText(void)
                 0x4, 0x68, 0x68, 0x30, 0);
         }
         else
+        {
             sub_8072AB0(gDecorations[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].description,
                 0x4, 0x68, 0x68, 0x30, 0);
+        }
     }
     else
     {
@@ -687,7 +685,9 @@ static void Task_DoItemPurchase(u8 taskId)
                 Task_UpdatePurchaseHistory(taskId);
             }
             else
+            {
                 DisplayItemMessageOnField(taskId, gOtherText_NoRoomFor, Shop_DoPricePrintAndReturnToBuyMenu, 0xC3E1);
+            }
         }
         else // a normal mart is only type 0, so types 1 and 2 are decoration marts.
         {
@@ -706,7 +706,9 @@ static void Task_DoItemPurchase(u8 taskId)
         }
     }
     else
+    {
         DisplayItemMessageOnField(taskId, gOtherText_NotEnoughMoney, Shop_DoPricePrintAndReturnToBuyMenu, 0xC3E1);
+    }
 }
 
 static void Shop_DoYesNoPurchase(u8 taskId)
@@ -1129,19 +1131,17 @@ static void Shop_DoCursorAction(u8 taskId)
                         ConvertIntToDecimalStringN(gStringVar2, gMartTotalCost, 0, 0x8);
 
                         if (gMartInfo.martType == MART_TYPE_1)
-                        {
                             StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe2);
-                        }
                         else
-                        {
                             StringExpandPlaceholders(gStringVar4, gOtherText_ThatWillBe3);
-                        }
                         DisplayItemMessageOnField(taskId, gStringVar4, Shop_DoYesNoPurchase, 0xC3E1);
                     }
                 }
             }
             else
+            {
                 Task_ExitBuyMenu(taskId);
+            }
         }
         else if (gMain.newKeys & B_BUTTON) // go back to buy/sell/exit menu
         {
@@ -1240,22 +1240,12 @@ void Shop_CreateDecorationShop2Menu(u16 *itemList)
 }
 
 #if DEBUG
-__attribute__((naked))
+
 void debug_sub_80C2818(void)
 {
-    asm("\
-	push	{lr}\n\
-	mov	r0, #0x0\n\
-	bl	CreateShopMenu\n\
-	ldr	r0, ._290       @ gMartBuyNoSellOptionList\n\
-	bl	SetShopItemsForSale\n\
-	mov	r0, #0x0\n\
-	bl	SetShopMenuCallback\n\
-	pop	{r0}\n\
-	bx	r0\n\
-._291:\n\
-	.align	2, 0\n\
-._290:\n\
-	.word	gMartBuyNoSellOptionList+0x3");
+    CreateShopMenu(MART_TYPE_0);
+    SetShopItemsForSale(gUnusedMartArray);
+    SetShopMenuCallback(NULL);
 }
+
 #endif
