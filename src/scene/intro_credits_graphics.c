@@ -438,25 +438,27 @@ u8 sub_8148EC0(u8 a, u16 b, u16 c, u16 d)
 
 void sub_8148F3C(u8 taskId)
 {
-    s16 r4;
+    s16 deltaBG1HOFS;
+    s16 deltaBG2HOFS;
+    s16 deltaBG3HOFS;
     s32 r2;
 
-    r4 = gTasks[taskId].data[1];
-    if (r4 != 0)
+    deltaBG1HOFS = gTasks[taskId].data[1];
+    if (deltaBG1HOFS != 0)
     {
         r2 = (gTasks[taskId].data[2] << 16) + (u16)gTasks[taskId].data[3];
-        r2 -= 16 * (u16)r4;
+        r2 -= 16 * (u16)deltaBG1HOFS;
         gTasks[taskId].data[2] = r2 >> 16;
         gTasks[taskId].data[3] = r2;
         REG_BG1HOFS = gTasks[taskId].data[2];
         REG_BG1VOFS = gUnknown_02039358 + gUnknown_0203935A;
     }
 
-    r4 = gTasks[taskId].data[4];
-    if (r4 != 0)
+    deltaBG2HOFS = gTasks[taskId].data[4];
+    if (deltaBG2HOFS != 0)
     {
         r2 = (gTasks[taskId].data[5] << 16) + (u16)gTasks[taskId].data[6];
-        r2 -= 16 * (u16)r4;
+        r2 -= 16 * (u16)deltaBG2HOFS;
         gTasks[taskId].data[5] = r2 >> 16;
         gTasks[taskId].data[6] = r2;
         REG_BG2HOFS = gTasks[taskId].data[5];
@@ -466,11 +468,11 @@ void sub_8148F3C(u8 taskId)
             REG_BG2VOFS = gUnknown_02039358;
     }
 
-    r4 = gTasks[taskId].data[7];
-    if (r4 != 0)
+    deltaBG3HOFS = gTasks[taskId].data[7];
+    if (deltaBG3HOFS != 0)
     {
         r2 = (gTasks[taskId].data[8] << 16) + (u16)gTasks[taskId].data[9];
-        r2 -= 16 * (u16)r4;
+        r2 -= 16 * (u16)deltaBG3HOFS;
         gTasks[taskId].data[8] = r2 >> 16;
         gTasks[taskId].data[9] = r2;
         REG_BG3HOFS = gTasks[taskId].data[8];
