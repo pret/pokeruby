@@ -705,7 +705,7 @@ debug_sub_808F8CC:
 	mov	r2, #0x1a
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r0, ._69 + 8    @ gUnknown_Debug_083C4ABD
+	ldr	r0, ._69 + 8    @ gUnknown_Debug_083C4ACC
 	ldr	r0, [r0]
 	mov	r1, #0xe
 	mov	r2, #0x7
@@ -736,7 +736,7 @@ debug_sub_808F8CC:
 ._69:
 	.word	gDebug_03000724
 	.word	gUnknown_Debug_083C49CA
-	.word	gUnknown_Debug_083C4ABD+0xf
+	.word	gUnknown_Debug_083C4ACC
 	.word	gStringVar1
 	.word	gMenuCallback
 	.word	debug_sub_808F93C+1
@@ -835,7 +835,7 @@ debug_sub_808F93C:
 	mov	r2, #0x1a
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._83 + 12   @ gUnknown_Debug_083C4ABD
+	ldr	r1, ._83 + 12   @ gUnknown_Debug_083C4ACC
 	ldr	r0, ._83 + 8    @ gDebug_03000724
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x2
@@ -891,7 +891,7 @@ debug_sub_808F93C:
 	.word	gMain
 	.word	gDebug_03000725
 	.word	gDebug_03000724
-	.word	gUnknown_Debug_083C4ABD+0xf
+	.word	gUnknown_Debug_083C4ACC
 	.word	gStringVar1
 	.word	gUnknown_Debug_083C4ABD
 ._81:
@@ -1431,7 +1431,7 @@ debug_sub_808FECC:
 	mov	r2, #0x17
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r0, ._178 + 8   @ gUnknown_Debug_083C4B20
+	ldr	r0, ._178 + 8   @ gUnknown_Debug_083C4B24
 	ldr	r0, [r0]
 	mov	r1, #0xe
 	mov	r2, #0x7
@@ -1462,7 +1462,7 @@ debug_sub_808FECC:
 ._178:
 	.word	gDebug_03000724
 	.word	gUnknown_Debug_083C49CA
-	.word	gUnknown_Debug_083C4B20+0x4
+	.word	gUnknown_Debug_083C4B24
 	.word	gStringVar1
 	.word	gMenuCallback
 	.word	debug_sub_808FF3C+1
@@ -1561,7 +1561,7 @@ debug_sub_808FF3C:
 	mov	r2, #0x17
 	mov	r3, #0x8
 	bl	Menu_BlankWindowRect
-	ldr	r1, ._192 + 12  @ gUnknown_Debug_083C4B20
+	ldr	r1, ._192 + 12  @ gUnknown_Debug_083C4B24
 	ldr	r0, ._192 + 8   @ gDebug_03000724
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x2
@@ -1617,7 +1617,7 @@ debug_sub_808FF3C:
 	.word	gMain
 	.word	gDebug_03000725
 	.word	gDebug_03000724
-	.word	gUnknown_Debug_083C4B20+0x4
+	.word	gUnknown_Debug_083C4B24
 	.word	gStringVar1
 	.word	gUnknown_Debug_083C4B20
 ._190:
