@@ -33,25 +33,7 @@ const u8 gSpriteImage_83CE154[] = INCBIN_U8("graphics/naming_screen/pc_icon/1.4b
 
 struct NamingScreenData *const namingScreenDataPtr = &namingScreenData;
 
-extern const struct SubspriteTable gSubspriteTables_83CE558[];
-extern const struct SubspriteTable gSubspriteTables_83CE560[];
-extern const struct SubspriteTable gSubspriteTables_83CE578[];
-extern const struct SubspriteTable gSubspriteTables_83CE580[];
-extern const struct SpriteTemplate gSpriteTemplate_83CE5C8;
-extern const struct SpriteTemplate gSpriteTemplate_83CE5E0;
-extern const struct SpriteTemplate gSpriteTemplate_83CE5F8;
-extern const struct SpriteTemplate gSpriteTemplate_83CE610;
-extern const struct SpriteTemplate gSpriteTemplate_83CE628;
-extern const struct SpriteTemplate gSpriteTemplate_83CE640;
-extern const struct SpriteTemplate gSpriteTemplate_83CE658;
-extern const struct SpriteTemplate gSpriteTemplate_83CE670;
-extern const struct SpriteTemplate gSpriteTemplate_83CE688;
-extern const struct SpriteSheet gUnknown_083CE6A0[];
-extern const struct SpritePalette gUnknown_083CE708[];
 extern const u8 gNamingScreenMenu_Gfx[];
-extern const u16 gUnknown_083CE748[];
-extern const u16 gUnknown_083CEBF8[];
-extern const u16 gUnknown_083CF0A8[];
 extern const u16 gUnknown_08E86258[];
 
 static void C2_NamingScreen(void);
@@ -129,6 +111,305 @@ static void sub_80B7698(u16 *, const u16 *);
 static void sub_80B76E0();
 static void nullsub_20(u8, u8);
 static void PrintKeyboardCharacters(u8);
+static void sub_80B6B34(struct Sprite *sprite);
+static void sub_80B6998(struct Sprite *sprite);
+static void sub_80B6D9C(struct Sprite *sprite);
+static void sub_80B6DE8(struct Sprite *sprite);
+
+
+static struct NamingScreenTemplate playerNamingScreenTemplate =
+    {
+        .unk0 = 0,
+        .maxChars = 7,
+        .unk2 = 1,
+        .unk3 = 0,
+        .unk4 = 0,
+        .unk5 = 0,
+        .unk6 = 0,
+        .unk7 = 0,
+        .title = OtherText_YourName,
+    };
+
+static struct NamingScreenTemplate pcBoxNamingTemplate =
+    {
+        .unk0 = 0,
+        .maxChars = 8,
+        .unk2 = 2,
+        .unk3 = 0,
+        .unk4 = 0,
+        .unk5 = 0,
+        .unk6 = 0,
+        .unk7 = 0,
+        .title = OtherText_BoxName,
+    };
+
+static struct NamingScreenTemplate monNamingScreenTemplate =
+    {
+        .unk0 = 0,
+        .maxChars = 10,
+        .unk2 = 3,
+        .unk3 = 1,
+        .unk4 = 0,
+        .unk5 = 0,
+        .unk6 = 0,
+        .unk7 = 0,
+        .title = OtherText_PokeName,
+    };
+
+static struct NamingScreenTemplate *sNamingScreenTemplates[] =
+    {
+        &playerNamingScreenTemplate,
+        &pcBoxNamingTemplate,
+        &monNamingScreenTemplate,
+        &monNamingScreenTemplate,
+    };
+
+static u8 sKeyboardCharacters[][4][20] =
+    {
+#if ENGLISH
+        {
+            _(" A B C  D E F    . "),
+            _(" G H I  J K L    , "),
+            _(" M N O  P Q R S    "),
+            _(" T U V  W X Y Z    "),
+        },
+        {
+            _(" a b c  d e f    . "),
+            _(" g h i  j k l    , "),
+            _(" m n o  p q r s    "),
+            _(" t u v  w x y z    "),
+        },
+#elif GERMAN
+    {
+        _("  ABCD   EFGH   .  "),
+        _("  IJKL   MNOP   ,  "),
+        _("  QRST   UVWX      "),
+        _("  YZ     ÄÖÜ       "),
+    },
+    {
+        _("  abcd   efgh   .  "),
+        _("  ijkl   mnop   ,  "),
+        _("  qrst   uvwx      "),
+        _("  yz     äöü       "),
+    },
+#endif
+        {
+            _(" 0  1  2  3  4     "),
+            _(" 5  6  7  8  9     "),
+            _(" !  ?  ♂  ♀  /  -  "),
+            _(" …  “  ”  ‘  ’     "),
+        },
+    };
+
+struct OamData gOamData_83CE498 =
+    {
+        .y = 0,
+        .affineMode = 0,
+        .objMode = 0,
+        .mosaic = 0,
+        .bpp = 0,
+        .shape = 0,
+        .x = 0,
+        .matrixNum = 0,
+        .size = 0,
+        .tileNum = 0,
+        .priority = 0,
+        .paletteNum = 0,
+        .affineParam = 0,
+    };
+
+struct OamData gOamData_83CE4A0 =
+    {
+        .y = 0,
+        .affineMode = 0,
+        .objMode = 0,
+        .mosaic = 0,
+        .bpp = 0,
+        .shape = 0,
+        .x = 0,
+        .matrixNum = 0,
+        .size = 1,
+        .tileNum = 0,
+        .priority = 0,
+        .paletteNum = 0,
+        .affineParam = 0,
+    };
+
+struct OamData gOamData_83CE4A8 =
+    {
+        .y = 0,
+        .affineMode = 0,
+        .objMode = 0,
+        .mosaic = 0,
+        .bpp = 0,
+        .shape = 1,
+        .x = 0,
+        .matrixNum = 0,
+        .size = 2,
+        .tileNum = 0,
+        .priority = 0,
+        .paletteNum = 0,
+        .affineParam = 0,
+    };
+
+
+struct Subsprite gSubspriteTable_83CE4B0[] = {
+    { -20, -16, ST_OAM_H_RECTANGLE, 1,   0, 1 },
+    {  12, -16, ST_OAM_SQUARE, 0,   4, 1 },
+    { -20,  -8, ST_OAM_H_RECTANGLE, 1,   5, 1 },
+    {  12,  -8, ST_OAM_SQUARE, 0,   9, 1 },
+    { -20,   0, ST_OAM_H_RECTANGLE, 1,  10, 1 },
+    {  12,   0, ST_OAM_SQUARE, 0,  14, 1 },
+    { -20,   8, ST_OAM_H_RECTANGLE, 1,  15, 1 },
+    {  12,   8, ST_OAM_SQUARE, 0,  19, 1 }
+};
+
+struct Subsprite gSubspriteTable_83CE4F0[] = {
+    { -12,  -4, ST_OAM_SQUARE, 0,   0, 1 },
+    {   4,  -4, ST_OAM_SQUARE, 0,   1, 1 }
+};
+
+struct Subsprite gSubspriteTable_83CE500[] = {
+    { -12,  -4, ST_OAM_H_RECTANGLE, 0,   0, 1 },
+    {   4,  -4, ST_OAM_SQUARE, 0,   2, 1 }
+};
+
+struct Subsprite gSubspriteTable_83CE510[] = {
+    { -20, -12, ST_OAM_H_RECTANGLE, 1,   0, 1 },
+    {  12, -12, ST_OAM_SQUARE, 0,   4, 1 },
+    { -20,  -4, ST_OAM_H_RECTANGLE, 1,   5, 1 },
+    {  12,  -4, ST_OAM_SQUARE, 0,   9, 1 },
+    { -20,   4, ST_OAM_H_RECTANGLE, 1,  10, 1 },
+    {  12,   4, ST_OAM_SQUARE, 0,  14, 1 }
+};
+
+struct Subsprite gSubspriteTable_83CE540[] = {
+    {  -8, -12, ST_OAM_H_RECTANGLE, 0,   0, 3 },
+    {  -8,  -4, ST_OAM_H_RECTANGLE, 0,   2, 3 },
+    {  -8,   4, ST_OAM_H_RECTANGLE, 0,   4, 3 }
+};
+
+struct SubspriteTable gSubspriteTables_83CE558[] = {
+    { 8, gSubspriteTable_83CE4B0 }
+};
+
+struct SubspriteTable gSubspriteTables_83CE560[] = {
+    { 2, gSubspriteTable_83CE500 },
+    { 2, gSubspriteTable_83CE500 },
+    { 2, gSubspriteTable_83CE500 }
+};
+
+struct SubspriteTable gSubspriteTables_83CE578[] = {
+    { 6, gSubspriteTable_83CE510 }
+};
+
+struct SubspriteTable gSubspriteTables_83CE580[] = {
+    { 3, gSubspriteTable_83CE540 }
+};
+
+struct SpriteFrameImage gSpriteImageTable_83CE588[] = {
+    { gSpriteImage_83CE094, 0xc0 },
+    { gSpriteImage_83CE154, 0xc0 }
+};
+
+union AnimCmd gSpriteAnim_83CE598[] = {
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_JUMP(0)
+};
+
+union AnimCmd gSpriteAnim_83CE5A0[] = {
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(8, 8),
+    ANIMCMD_END
+};
+
+union AnimCmd gSpriteAnim_83CE5AC[] = {
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_JUMP(0)
+};
+
+const union AnimCmd *gSpriteAnimTable_83CE5B8[] = {
+    gSpriteAnim_83CE598
+};
+
+const union AnimCmd *gSpriteAnimTable_83CE5BC[] = {
+    gSpriteAnim_83CE598,
+    gSpriteAnim_83CE5A0
+};
+
+const union AnimCmd *gSpriteAnimTable_83CE5C4[] = {
+    gSpriteAnim_83CE5AC
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE5C8 = {
+    2, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6B34
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE5E0 = {
+    3, 1, &gOamData_83CE4A8, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE5F8 = {
+    4, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE610 = {
+    0, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE628 = {
+    1, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE640 = {
+    7, 5, &gOamData_83CE4A0, gSpriteAnimTable_83CE5BC, NULL, gDummySpriteAffineAnimTable, sub_80B6998
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE658 = {
+    10, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6D9C
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE670 = {
+    11, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6DE8
+};
+
+struct SpriteTemplate gSpriteTemplate_83CE688 = {
+    0xFFFF, 0, &gOamData_83CE498, gSpriteAnimTable_83CE5C4, gSpriteImageTable_83CE588, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+};
+
+struct SpriteSheet gUnknown_083CE6A0[] = {
+    { gNamingScreenBackButtonTiles, 0x1E0, 0 },
+    { gNamingScreenOKButtonTiles, 0x1E0, 1 },
+    { gNamingScreenChangeKeyboardBoxTiles, 0x280, 2 },
+    { gNamingScreenChangeKeyboardButtonTiles, 0x100, 3 },
+    { gNamingScreenLowerTextTiles, 0x60, 4 },
+    { gNamingScreenUpperTextTiles, 0x60, 5 },
+    { gNamingScreenOthersTextTiles, 0x60, 6 },
+    { gNamingScreenCursorTiles, 0x80, 7 },
+    { gNamingScreenActiveCursorSmallTiles, 0x80, 8 },
+    { gNamingScreenActiveCursorBigTiles, 0x80, 9 },
+    { gNamingScreenRightPointingTriangleTiles, 0x20, 10 },
+    { gNamingScreenUnderscoreTiles, 0x20, 11 },
+    {}
+};
+
+struct SpritePalette gUnknown_083CE708[] = {
+    {gNamingScreenPalettes[0], 0},
+    {gNamingScreenPalettes[1], 1},
+    {gNamingScreenPalettes[2], 2},
+    {gNamingScreenPalettes[3], 3},
+    {gNamingScreenPalettes[4], 4},
+    {gNamingScreenPalettes[5], 5},
+    {gNamingScreenPalettes[4], 6},
+    {}
+};
+
+u16 gUnknown_083CE748[] = INCBIN_U16("graphics/naming_screen/lower_keyboard_map.bin");
+
+u16 gUnknown_083CEBF8[] = INCBIN_U16("graphics/naming_screen/upper_keyboard_map.bin");
+
+u16 gUnknown_083CF0A8[] = INCBIN_U16("graphics/naming_screen/others_keyboard_map.bin");
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 c, u16 d, u32 e, MainCallback returnCallback)
 {
@@ -285,8 +566,6 @@ static void NamingScreen_SetUpVideoRegs(void)
     REG_BLDCNT = 0x640;
     REG_BLDALPHA = 0x80C;
 }
-
-static const struct NamingScreenTemplate *const sNamingScreenTemplates[];  //forward declaration
 
 static void NamingScreen_Init(void)
 {
@@ -1075,7 +1354,7 @@ static u8 GetKeyRoleAtCursorPos(void)
         return keyRoles[cursorY];
 }
 
-void sub_80B6998(struct Sprite *sprite)
+static void sub_80B6998(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         StartSpriteAnim(sprite, 0);
@@ -1147,7 +1426,7 @@ static u8 (*const gUnknown_083CE2B4[])(struct Sprite *) =
     sub_80B6C08,
 };
 
-void sub_80B6B34(struct Sprite *sprite)
+static void sub_80B6B34(struct Sprite *sprite)
 {
     while (gUnknown_083CE2B4[sprite->data[0]](sprite) != 0)
         ;
@@ -1239,7 +1518,7 @@ static void sub_80B6D04(void)
     }
 }
 
-void sub_80B6D9C(struct Sprite *sprite)
+static void sub_80B6D9C(struct Sprite *sprite)
 {
     const s16 arr[] = {0, -4, -2, -1};
 
@@ -1251,7 +1530,7 @@ void sub_80B6D9C(struct Sprite *sprite)
     sprite->pos2.x = arr[sprite->data[1]];
 }
 
-void sub_80B6DE8(struct Sprite *sprite)
+static void sub_80B6DE8(struct Sprite *sprite)
 {
     const s16 arr[] = {2, 3, 2, 1};
     u8 var;
@@ -1770,8 +2049,6 @@ static void (*const gUnknown_083CE368[])(void) =
     sub_80B7924,
 };
 
-static const u8 sKeyboardCharacters[][4][20];  //forward declaration
-
 static u8 GetCharAtKeyboardPos(s16 a, s16 b)
 {
     return sKeyboardCharacters[namingScreenDataPtr->currentPage][b][a];
@@ -1866,302 +2143,3 @@ static void sub_80B7960(void)
     BasicInitMenuWindow(&gWindowTemplate_81E6F4C);
     Menu_PrintText(gStringVar1, namingScreenDataPtr->unk2, 4);
 }
-
-//--------------------------------------------------
-// Forward-declared variables
-//--------------------------------------------------
-
-static const struct NamingScreenTemplate playerNamingScreenTemplate =
-{
-    .unk0 = 0,
-    .maxChars = 7,
-    .unk2 = 1,
-    .unk3 = 0,
-    .unk4 = 0,
-    .unk5 = 0,
-    .unk6 = 0,
-    .unk7 = 0,
-    .title = OtherText_YourName,
-};
-
-static const struct NamingScreenTemplate pcBoxNamingTemplate =
-{
-    .unk0 = 0,
-    .maxChars = 8,
-    .unk2 = 2,
-    .unk3 = 0,
-    .unk4 = 0,
-    .unk5 = 0,
-    .unk6 = 0,
-    .unk7 = 0,
-    .title = OtherText_BoxName,
-};
-
-static const struct NamingScreenTemplate monNamingScreenTemplate =
-{
-    .unk0 = 0,
-    .maxChars = 10,
-    .unk2 = 3,
-    .unk3 = 1,
-    .unk4 = 0,
-    .unk5 = 0,
-    .unk6 = 0,
-    .unk7 = 0,
-    .title = OtherText_PokeName,
-};
-
-static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
-{
-    &playerNamingScreenTemplate,
-    &pcBoxNamingTemplate,
-    &monNamingScreenTemplate,
-    &monNamingScreenTemplate,
-};
-
-static const u8 sKeyboardCharacters[][4][20] =
-{
-#if ENGLISH
-    {
-        _(" A B C  D E F    . "),
-        _(" G H I  J K L    , "),
-        _(" M N O  P Q R S    "),
-        _(" T U V  W X Y Z    "),
-    },
-    {
-        _(" a b c  d e f    . "),
-        _(" g h i  j k l    , "),
-        _(" m n o  p q r s    "),
-        _(" t u v  w x y z    "),
-    },
-#elif GERMAN
-    {
-        _("  ABCD   EFGH   .  "),
-        _("  IJKL   MNOP   ,  "),
-        _("  QRST   UVWX      "),
-        _("  YZ     ÄÖÜ       "),
-    },
-    {
-        _("  abcd   efgh   .  "),
-        _("  ijkl   mnop   ,  "),
-        _("  qrst   uvwx      "),
-        _("  yz     äöü       "),
-    },
-#endif
-    {
-        _(" 0  1  2  3  4     "),
-        _(" 5  6  7  8  9     "),
-        _(" !  ?  ♂  ♀  /  -  "),
-        _(" …  “  ”  ‘  ’     "),
-    },
-};
-
-const struct OamData gOamData_83CE498 =
-{
-    .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
-    .size = 0,
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
-const struct OamData gOamData_83CE4A0 =
-{
-    .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 0,
-    .x = 0,
-    .matrixNum = 0,
-    .size = 1,
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
-const struct OamData gOamData_83CE4A8 =
-{
-    .y = 0,
-    .affineMode = 0,
-    .objMode = 0,
-    .mosaic = 0,
-    .bpp = 0,
-    .shape = 1,
-    .x = 0,
-    .matrixNum = 0,
-    .size = 2,
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0,
-};
-
-
-const struct Subsprite gSubspriteTable_83CE4B0[] = {
-    { -20, -16, ST_OAM_H_RECTANGLE, 1,   0, 1 },
-    {  12, -16, ST_OAM_SQUARE, 0,   4, 1 },
-    { -20,  -8, ST_OAM_H_RECTANGLE, 1,   5, 1 },
-    {  12,  -8, ST_OAM_SQUARE, 0,   9, 1 },
-    { -20,   0, ST_OAM_H_RECTANGLE, 1,  10, 1 },
-    {  12,   0, ST_OAM_SQUARE, 0,  14, 1 },
-    { -20,   8, ST_OAM_H_RECTANGLE, 1,  15, 1 },
-    {  12,   8, ST_OAM_SQUARE, 0,  19, 1 }
-};
-
-const struct Subsprite gSubspriteTable_83CE4F0[] = {
-    { -12,  -4, ST_OAM_SQUARE, 0,   0, 1 },
-    {   4,  -4, ST_OAM_SQUARE, 0,   1, 1 }
-};
-
-const struct Subsprite gSubspriteTable_83CE500[] = {
-    { -12,  -4, ST_OAM_H_RECTANGLE, 0,   0, 1 },
-    {   4,  -4, ST_OAM_SQUARE, 0,   2, 1 }
-};
-
-const struct Subsprite gSubspriteTable_83CE510[] = {
-    { -20, -12, ST_OAM_H_RECTANGLE, 1,   0, 1 },
-    {  12, -12, ST_OAM_SQUARE, 0,   4, 1 },
-    { -20,  -4, ST_OAM_H_RECTANGLE, 1,   5, 1 },
-    {  12,  -4, ST_OAM_SQUARE, 0,   9, 1 },
-    { -20,   4, ST_OAM_H_RECTANGLE, 1,  10, 1 },
-    {  12,   4, ST_OAM_SQUARE, 0,  14, 1 }
-};
-
-const struct Subsprite gSubspriteTable_83CE540[] = {
-    {  -8, -12, ST_OAM_H_RECTANGLE, 0,   0, 3 },
-    {  -8,  -4, ST_OAM_H_RECTANGLE, 0,   2, 3 },
-    {  -8,   4, ST_OAM_H_RECTANGLE, 0,   4, 3 }
-};
-
-const struct SubspriteTable gSubspriteTables_83CE558[] = {
-    { 8, gSubspriteTable_83CE4B0 }
-};
-
-const struct SubspriteTable gSubspriteTables_83CE560[] = {
-    { 2, gSubspriteTable_83CE500 },
-    { 2, gSubspriteTable_83CE500 },
-    { 2, gSubspriteTable_83CE500 }
-};
-
-const struct SubspriteTable gSubspriteTables_83CE578[] = {
-    { 6, gSubspriteTable_83CE510 }
-};
-
-const struct SubspriteTable gSubspriteTables_83CE580[] = {
-    { 3, gSubspriteTable_83CE540 }
-};
-
-const struct SpriteFrameImage gSpriteImageTable_83CE588[] = {
-    { gSpriteImage_83CE094, 0xc0 },
-    { gSpriteImage_83CE154, 0xc0 }
-};
-
-const union AnimCmd gSpriteAnim_83CE598[] = {
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd gSpriteAnim_83CE5A0[] = {
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(8, 8),
-    ANIMCMD_END
-};
-
-const union AnimCmd gSpriteAnim_83CE5AC[] = {
-    ANIMCMD_FRAME(0, 2),
-    ANIMCMD_FRAME(1, 2),
-    ANIMCMD_JUMP(0)
-};
-
-const union AnimCmd *const gSpriteAnimTable_83CE5B8[] = {
-    gSpriteAnim_83CE598
-};
-
-const union AnimCmd *const gSpriteAnimTable_83CE5BC[] = {
-    gSpriteAnim_83CE598,
-    gSpriteAnim_83CE5A0
-};
-
-const union AnimCmd *const gSpriteAnimTable_83CE5C4[] = {
-    gSpriteAnim_83CE5AC
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE5C8 = {
-    2, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6B34
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE5E0 = {
-    3, 1, &gOamData_83CE4A8, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE5F8 = {
-    4, 4, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE610 = {
-    0, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE628 = {
-    1, 6, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE640 = {
-    7, 5, &gOamData_83CE4A0, gSpriteAnimTable_83CE5BC, NULL, gDummySpriteAffineAnimTable, sub_80B6998
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE658 = {
-    10, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6D9C
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE670 = {
-    11, 3, &gOamData_83CE498, gSpriteAnimTable_83CE5B8, NULL, gDummySpriteAffineAnimTable, sub_80B6DE8
-};
-
-const struct SpriteTemplate gSpriteTemplate_83CE688 = {
-    0xFFFF, 0, &gOamData_83CE498, gSpriteAnimTable_83CE5C4, gSpriteImageTable_83CE588, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-};
-
-const struct SpriteSheet gUnknown_083CE6A0[] = {
-    { gNamingScreenBackButtonTiles, 0x1E0, 0 },
-    { gNamingScreenOKButtonTiles, 0x1E0, 1 },
-    { gNamingScreenChangeKeyboardBoxTiles, 0x280, 2 },
-    { gNamingScreenChangeKeyboardButtonTiles, 0x100, 3 },
-    { gNamingScreenLowerTextTiles, 0x60, 4 },
-    { gNamingScreenUpperTextTiles, 0x60, 5 },
-    { gNamingScreenOthersTextTiles, 0x60, 6 },
-    { gNamingScreenCursorTiles, 0x80, 7 },
-    { gNamingScreenActiveCursorSmallTiles, 0x80, 8 },
-    { gNamingScreenActiveCursorBigTiles, 0x80, 9 },
-    { gNamingScreenRightPointingTriangleTiles, 0x20, 10 },
-    { gNamingScreenUnderscoreTiles, 0x20, 11 },
-    {}
-};
-
-const struct SpritePalette gUnknown_083CE708[] = {
-    {gNamingScreenPalettes[0], 0},
-    {gNamingScreenPalettes[1], 1},
-    {gNamingScreenPalettes[2], 2},
-    {gNamingScreenPalettes[3], 3},
-    {gNamingScreenPalettes[4], 4},
-    {gNamingScreenPalettes[5], 5},
-    {gNamingScreenPalettes[4], 6},
-    {}
-};
-
-const u16 gUnknown_083CE748[] = INCBIN_U16("graphics/naming_screen/lower_keyboard_map.bin");
-
-const u16 gUnknown_083CEBF8[] = INCBIN_U16("graphics/naming_screen/upper_keyboard_map.bin");
-
-const u16 gUnknown_083CF0A8[] = INCBIN_U16("graphics/naming_screen/others_keyboard_map.bin");
-

@@ -593,6 +593,7 @@ SECTIONS {
         data/debug_menu_watanabe.o(.rodata);
         src/field/script_menu.o(.rodata);
         src/engine/naming_screen.o(.rodata);
+        src/engine/naming_screen.o(.data);
         src/field/money.o(.rodata);
         data/contest_effect.o(.rodata);
         src/engine/record_mixing.o(.data);
