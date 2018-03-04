@@ -75,6 +75,11 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
 
+# Disable dependency scanning for clean/tidy/tools
+ifneq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
+NODEP := 1
+endif
+
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_FILE = $(*D)/$(*F).c
