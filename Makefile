@@ -114,6 +114,13 @@ clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
+	$(MAKE) clean -C tools/gbagfx
+	$(MAKE) clean -C tools/scaninc
+	$(MAKE) clean -C tools/preproc
+	$(MAKE) clean -C tools/bin2c
+	$(MAKE) clean -C tools/rsfont
+	$(MAKE) clean -C tools/aif2pcm
+	$(MAKE) clean -C tools/ramscrgen
 
 tools:
 	$(MAKE) -C tools/gbagfx
