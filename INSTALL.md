@@ -4,26 +4,56 @@ Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
-Then get the compiler from https://github.com/pret/agbcc and run the following commands.
+Then run the following commands.
 
+	git clone https://github.com/pret/pokeruby
+	git clone https://github.com/pret/agbcc
+
+	cd agbcc
 	./build.sh
-	./install.sh PATH_OF_POKERUBY_DIRECTORY
+	./install.sh ../pokeruby
 
-Then in the pokeruby directory, build the tools.
-
+	cd ../pokeruby
 	./build_tools.sh
 
-Finally, build the rom.
+To build **pokeruby.gba**:
 
 	make
 
+
 # Windows
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM) to the default directory (C:/devkitpro).
 
-Then get the compiled tools from https://github.com/pret/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
+Then download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
 
-You can then build pokeruby using `make` in the MSYS environment provided with devkitARM.
+Run the Cygwin setup and leave the default settings. At "Select Packages", set the view to "Full" and choose to install the following:
+
+- `make`
+- `git`
+- `gcc-core`
+- `gcc-g++`
+- `libpng-dev`
+
+In the **Cygwin terminal**, enter these commands:
+
+	export DEVKITARM=/cygdrive/c/devkitpro/devkitARM
+	echo export DEVKITARM=/cygdrive/c/devkitpro/devkitARM >> ~/.bashrc
+
+	git clone https://github.com/pret/pokeruby
+	git clone https://github.com/pret/agbcc
+
+	cd agbcc
+	./build.sh
+	./install.sh ../pokeruby
+
+	cd ../pokeruby
+	./build_tools.sh
+
+To build **pokeruby.gba**:
+
+	make -j`nproc`
+
 
 # Compiling Sapphire and later revisions
 
