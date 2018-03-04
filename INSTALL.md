@@ -14,7 +14,6 @@ Then run the following commands.
 	./install.sh ../pokeruby
 
 	cd ../pokeruby
-	./build_tools.sh
 
 To build **pokeruby.gba**:
 
@@ -48,7 +47,6 @@ In the **Cygwin terminal**, enter these commands:
 	./install.sh ../pokeruby
 
 	cd ../pokeruby
-	./build_tools.sh
 
 To build **pokeruby.gba**:
 

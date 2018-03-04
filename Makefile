@@ -70,12 +70,22 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
 #### Main Rules ####
 
+ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
+
+# Available targets
+.PHONY: all clean tidy tools $(ALL_BUILDS)
+
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_FILE = $(*D)/$(*F).c
   $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(C_FILE:$(BUILD_DIR)/=))
   $(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
   $(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
+endif
+
+# Build tools when building the rom
+ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
+$(info $(shell $(MAKE) tools))
 endif
 
 # Secondary expansion is required for dependency variables in object rules.
@@ -100,7 +110,15 @@ clean: tidy
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
-ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
+tools:
+	$(MAKE) -C tools/gbagfx
+	$(MAKE) -C tools/scaninc
+	$(MAKE) -C tools/preproc
+	$(MAKE) -C tools/bin2c
+	$(MAKE) -C tools/rsfont
+	$(MAKE) -C tools/aif2pcm
+	$(MAKE) -C tools/ramscrgen
+
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
