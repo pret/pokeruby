@@ -20,6 +20,15 @@ To build **pokeruby.gba**:
 	make
 
 
+# Mac
+
+In **Terminal**, run the following command:
+
+	xcode-select --install
+
+Then follow the Linux instructions.
+
+
 # Windows
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM) to the default directory (C:/devkitpro).
