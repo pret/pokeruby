@@ -82,3 +82,20 @@ Pokémon Sapphire 1.1
 Pokémon Sapphire 1.2
 
 	make sapphire_rev2
+
+
+# Faster builds
+
+After the first build, subsequent builds are faster. You can further speed up the build:
+
+## Parallel build
+
+This significantly speeds up the build on modern machines.
+
+	make -j`nproc`
+
+## Disable the dependency scanning
+
+If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to all other files will be ignored, and the build will either fail or not reflect the changes.
+
+	make NODEP=1
