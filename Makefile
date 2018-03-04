@@ -75,8 +75,11 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
 
+# Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifneq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
+ifeq (,$(filter-out all,$(MAKECMDGOALS)))
+$(info $(shell $(MAKE) tools))
+else
 NODEP := 1
 endif
 
@@ -86,11 +89,6 @@ ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(C_FILE:$(BUILD_DIR)/=))
   $(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
   $(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
-endif
-
-# Build tools when building the rom
-ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
-$(info $(shell $(MAKE) tools))
 endif
 
 # Secondary expansion is required for dependency variables in object rules.
