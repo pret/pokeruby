@@ -5,59 +5,6 @@
 
 	.if DEBUG
 
-gUnknown_Debug_083C0C54:: @ 0x83C0C54
-	.string "Contest graphics$"
-
-gUnknown_Debug_083C0C65:: @ 0x83C0C65
-	.string "Art Mus. graphics$"
-
-gUnknown_Debug_083C0C77:: @ 0x83C0C77
-	.string "Preview data$"
-
-gUnknown_Debug_083C0C84:: @ 0x83C0C84
-	.string "TRICK HOUSE$"
-
-gUnknown_Debug_083C0C90:: @ 0x83C0C90
-	.string "Control events$"
-
-gUnknown_Debug_083C0C9F:: @ 0x83C0C9F
-	.string "Control flags$"
-
-gUnknown_Debug_083C0CAD:: @ 0x83C0CAD
-	.string "Control WORK$"
-
-	.align 2
-gUnknown_Debug_083C0CBA:: @ 0x83C0CBA
-	.4byte gUnknown_Debug_083C0C54, TomomichiDebugMenu_ContestGraphics+1
-	.4byte gUnknown_Debug_083C0C65, TomomichiDebugMenu_ArtMusGraphics+1
-	.4byte gUnknown_Debug_083C0C77, TomomichiDebugMenu_PreviewData+1
-	.4byte gUnknown_Debug_083C0C84, TomomichiDebugMenu_TrickHouse+1
-	.4byte gUnknown_Debug_083C0C90, TomomichiDebugMenu_ControlEvents+1
-	.4byte gUnknown_Debug_083C0C9F, TomomichiDebugMenu_ControlFlags+1
-	.4byte gUnknown_Debug_083C0CAD, TomomichiDebugMenu_ControlWorks+1
-
-gUnknown_Debug_083C0CF4:: @ 0x83C0CF4
-	.string "Contest$"
-
-gUnknown_Debug_083C0CFC:: @ 0x83C0CFC
-	.string "Pokémon No.$"
-
-gUnknown_Debug_083C0D08:: @ 0x83C0D08
-	.string "ID rnd. digit$"
-
-gUnknown_Debug_083C0D16:: @ 0x83C0D16
-	.string "Contest Type$"
-
-gUnknown_Debug_083C0D23:: @ 0x83C0D23
-	.string "Poké Art$"
-
-	.align 2
-gUnknown_Debug_083C0D2C:: @ 0x83C0D2C
-	.4byte gUnknown_Debug_083C0CFC, TomomichiDebugMenu_Config+1
-	.4byte gUnknown_Debug_083C0D08, TomomichiDebugMenu_Config+1
-	.4byte gUnknown_Debug_083C0D16, TomomichiDebugMenu_Config+1
-	.4byte gUnknown_Debug_083C0D23, TomomichiDebugMenu_ContestGraphics_Show+1
-
 gUnknown_Debug_083C0D4C:: @ 0x83C0D4C
 	.string "Art Mus.$"
 

@@ -560,6 +560,7 @@ SECTIONS {
         src/field/field_screen_effect.o(.rodata);
         src/battle/battle_setup.o(.rodata);
         src/engine/cable_club.o(.rodata);
+        src/debug/tomomichi_debug_menu.o(.rodata);
         data/debug_menu_tomomichi.o(.rodata);
         data/debug_menu_nohara.o(.rodata);
         src/debug/mori_debug_menu.o(.rodata);
