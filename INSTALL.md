@@ -17,7 +17,7 @@ Then run the following commands.
 
 To build **pokeruby.gba**:
 
-	make
+	make -j4
 
 
 # Mac
@@ -59,7 +59,7 @@ In the **Cygwin terminal**, enter these commands:
 
 To build **pokeruby.gba**:
 
-	make -j`nproc`
+	make -j4
 
 
 # Compiling Sapphire and later revisions
@@ -99,10 +99,21 @@ After the first build, subsequent builds are faster. You can further speed up th
 
 This significantly speeds up the build on modern machines.
 
-	make -j`nproc`
+By default `make` only runs a single thread. You can tell `make` to run on multiple threads with `make -j`. See the manfile for usage (`man make`).
+
+The optimal value for `-j` is the number of logical cores on your machine. You can run `nproc` to see the exact number.
+
+	$ nproc
+	8
+
+If you have 8 cores, run:
+
+	make -j8
+
+`-j` on its own will spawn a new thread for each job. A clean build will have thousands of jobs, which will be slower than not using -j at all.
 
 ## Disable the dependency scanning
 
-If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to all other files will be ignored, and the build will either fail or not reflect the changes.
+If you've only changed `.c` or `.s` files, you can turn off the dependency scanning temporarily. Changes to any other files will be ignored, and the build will either fail or not reflect those changes.
 
 	make NODEP=1
