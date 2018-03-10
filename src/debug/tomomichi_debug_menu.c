@@ -63,6 +63,8 @@ bool8 debug_sub_808DFC0(void);
 void debug_sub_808ED0C(void);
 void debug_sub_808ED9C(void);
 void debug_sub_808EE3C(void);
+void debug_sub_808EE9C(void);
+void debug_sub_808EF14(void);
 void debug_sub_808EF8C(u32 a0);
 
 const u8 gUnknown_Debug_083C0C54[] = _("Contest graphics");
@@ -338,6 +340,97 @@ bool8 debug_sub_808BC48(void)
     {
         gMenuCallback = gUnknown_Debug_083C0D2C[3].func;
         return FALSE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808BCBC(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    switch (cursorPos)
+    {
+        case 0:
+            debug_sub_808ED0C();
+            break;
+        case 1:
+            debug_sub_808ED9C();
+            break;
+        case 2:
+            debug_sub_808EE9C();
+            break;
+    }
+    debug_sub_808EF8C(1);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    if (input == 3)
+    {
+        gMenuCallback = gUnknown_Debug_083C0D83[3].func;
+        return FALSE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808BD30(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    switch (cursorPos)
+    {
+        case 0:
+            debug_sub_808ED0C();
+            break;
+        case 1:
+            debug_sub_808ED9C();
+            break;
+        case 2:
+            debug_sub_808EF14();
+            break;
+    }
+    debug_sub_808EF8C(2);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    if (input == 3)
+    {
+        gMenuCallback = gUnknown_Debug_083C0DD4[3].func;
+        return FALSE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808BDA4(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_0300071E = Menu_MoveCursor(-1);
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_0300071E = Menu_MoveCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_Debug_083C0E15[gDebug_0300071E].func();
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        CloseMenu();
+        return TRUE;
     }
     return FALSE;
 }
