@@ -60,6 +60,10 @@ bool8 debug_sub_808E6C0(void);
 bool8 debug_sub_808E90C(void);
 bool8 debug_sub_808DA30(void);
 bool8 debug_sub_808DFC0(void);
+void debug_sub_808ED0C(void);
+void debug_sub_808ED9C(void);
+void debug_sub_808EE3C(void);
+void debug_sub_808EF8C(u32 a0);
 
 const u8 gUnknown_Debug_083C0C54[] = _("Contest graphics");
 const u8 gUnknown_Debug_083C0C65[] = _("Art Mus. graphics");
@@ -302,6 +306,39 @@ bool8 TomomichiDebugMenu_ControlWorks(void)
     Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0EF1), gUnknown_Debug_083C0EF1);
     InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0EF1), gDebug_03000721, 23);
     gMenuCallback = debug_sub_808BF3C;
+    return FALSE;
+}
+
+bool8 debug_sub_808BC48(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    switch (cursorPos)
+    {
+        case 0:
+            debug_sub_808ED0C();
+            break;
+        case 1:
+            debug_sub_808ED9C();
+            break;
+        case 2:
+            debug_sub_808EE3C();
+            break;
+    }
+    debug_sub_808EF8C(0);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    if (input == 3)
+    {
+        gMenuCallback = gUnknown_Debug_083C0D2C[3].func;
+        return FALSE;
+    }
     return FALSE;
 }
 
