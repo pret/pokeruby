@@ -435,4 +435,79 @@ bool8 debug_sub_808BDA4(void)
     return FALSE;
 }
 
+bool8 debug_sub_808BE2C(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_0300071F = Menu_MoveCursor(-1);
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_0300071F = Menu_MoveCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_Debug_083C0E32[gDebug_0300071F].func();
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808BEB4(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_03000720 = Menu_MoveCursor(-1);
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_03000720 = Menu_MoveCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_Debug_083C0E7F[gDebug_03000720].func();
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808BF3C(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_03000721 = Menu_MoveCursor(-1);
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gDebug_03000721 = Menu_MoveCursor(+1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gUnknown_Debug_083C0EF1[gDebug_03000721].func();
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
 #endif
