@@ -2,6 +2,7 @@
 #include "global.h"
 #include "constants/songs.h"
 #include "overworld.h"
+#include "script.h"
 #include "menu.h"
 #include "start_menu.h"
 #include "main.h"
@@ -96,6 +97,22 @@ bool8 debug_sub_808D15C(void);
 bool8 debug_sub_808D1B4(void);
 bool8 debug_sub_808D20C(void);
 bool8 debug_sub_808D264(void);
+
+extern const u8 DebugScript_081C1CFE[];
+extern const u8 DebugScript_081C1D07[];
+extern const u8 DebugScript_081C1D1E[];
+extern const u8 DebugScript_081C1D24[];
+extern const u8 DebugScript_081C1D2A[];
+extern const u8 DebugScript_081C1D35[];
+extern const u8 DebugScript_081C1D46[];
+extern const u8 DebugScript_081C221F[];
+extern const u8 DebugScript_081C23E2[];
+extern const u8 DebugScript_081C23E6[];
+extern const u8 DebugScript_081C23F6[];
+extern const u8 DebugScript_081C2482[];
+extern const u8 DebugScript_081C23FD[];
+extern const u8 DebugScript_081C2518[];
+extern const u8 DebugScript_081C2507[];
 
 const u8 gUnknown_Debug_083C0C54[] = _("Contest graphics");
 const u8 gUnknown_Debug_083C0C65[] = _("Art Mus. graphics");
@@ -990,6 +1007,141 @@ bool8 debug_sub_808C014(void)
     InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0FFC), 0, 27);
     gMenuCallback = debug_sub_808C0A8;
     return FALSE;
+}
+
+bool8 debug_sub_808C064(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C0F79[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808C0A8(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C0FFC[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808C0EC(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1CFE);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C104(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D07);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C11C(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D1E);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C134(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D24);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C14C(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D2A);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C164(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D35);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C17C(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C1D46);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C194(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C221F);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C1AC(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C23E2);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C1C4(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C23E6);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C1DC(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C23F6);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C1F4(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C2482);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C20C(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C23FD);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C224(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C2518);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808C23C(void)
+{
+    ScriptContext1_SetupScript(DebugScript_081C2507);
+    CloseMenu();
+    return TRUE;
 }
 
 #endif
