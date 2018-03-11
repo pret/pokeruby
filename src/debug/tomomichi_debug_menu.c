@@ -125,6 +125,7 @@ bool8 debug_sub_808C5C0(void);
 bool8 debug_sub_808C618(void);
 bool8 debug_sub_808C670(void);
 bool8 debug_sub_808C36C(void);
+bool8 debug_sub_808C6C8(void);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -1750,6 +1751,65 @@ bool8 debug_sub_808C31C(void)
     Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2828), gUnknown_Debug_083C2828);
     InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2828), 0, 27);
     gMenuCallback = debug_sub_808C36C;
+    return FALSE;
+}
+
+bool8 debug_sub_808C36C(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C2828[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808C3B0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2938), gUnknown_Debug_083C2938);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2938), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C408(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2A48), gUnknown_Debug_083C2A48);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2A48), 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C460(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2B4C), gUnknown_Debug_083C2B4C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2B4C), 0, 28);
+    gDebug_0300070F = 2;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C4B8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2C80), gUnknown_Debug_083C2C80);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2C80), 0, 28);
+    gDebug_0300070F = 3;
+    gMenuCallback = debug_sub_808C6C8;
     return FALSE;
 }
 
