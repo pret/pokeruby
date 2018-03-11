@@ -1,6 +1,7 @@
 #if DEBUG
 #include "global.h"
 #include "palette.h"
+#include "event_data.h"
 #include "constants/songs.h"
 #include "overworld.h"
 #include "script.h"
@@ -126,6 +127,9 @@ bool8 debug_sub_808C618(void);
 bool8 debug_sub_808C670(void);
 bool8 debug_sub_808C36C(void);
 bool8 debug_sub_808C6C8(void);
+void debug_sub_808C714(u8, u8);
+void debug_sub_808C764(u8);
+void debug_sub_808F2E0(u8, u8, bool8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -1218,6 +1222,20 @@ const struct MenuAction gUnknown_Debug_083C3194[] = {
     {gUnknown_Debug_083C3192, TomomichiDebugMenu_Config}
 };
 
+const u8 gUnknown_Debug_083C31DC[] = {9, 9, 9, 9, 9, 9, 9, 9, 3, 0};
+
+const u16 gUnknown_Debug_83C31E6[][9] = {
+    {0x89, 0x6E, 0x7A, 0x6A, 0x6D, 0x6B, 0x90, 0x8E, 0x8F},
+    {0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F, 0x101, 0xE3, 0x98},
+    {0x8B, 0x126, 0x81, 0x71, 0x100, 0x123, 0x127, 0x10B, 0xF7},
+    {0x6C, 0x7E, 0xBE, 0xC1, 0x11C, 0xF0, 0xF1, 0xF2, 0xF3},
+    {0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0x64, 0x65, 0x66, 0x67},
+    {0x82, 0x11E, 0x120, 0x124, 0x125, 0x50, 0x51, 0x52, 0x55},
+    {0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0x53, 0x54, 0x56, 0x57},
+    {0xEF, 0xF4, 0x83, 0x10F, 0x103, 0x107, 0x10A, 0x112, 0x11D},
+    {0x58, 0x59, 0x60, 0, 0, 0, 0, 0, 0}
+};
+
 bool8 InitTomomichiDebugWindow(void)
 {
     debug_sub_808B874();
@@ -1811,6 +1829,100 @@ bool8 debug_sub_808C4B8(void)
     gDebug_0300070F = 3;
     gMenuCallback = debug_sub_808C6C8;
     return FALSE;
+}
+
+bool8 debug_sub_808C510(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2D8C), gUnknown_Debug_083C2D8C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2D8C), 0, 28);
+    gDebug_0300070F = 4;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C568(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2EB0), gUnknown_Debug_083C2EB0);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2EB0), 0, 28);
+    gDebug_0300070F = 5;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C5C0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2FE0), gUnknown_Debug_083C2FE0);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2FE0), 0, 28);
+    gDebug_0300070F = 6;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C618(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C3100), gUnknown_Debug_083C3100);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C3100), 0, 28);
+    gDebug_0300070F = 7;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C670(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 7);
+    Menu_PrintItems(2, 1, 3, gUnknown_Debug_083C3194);
+    InitMenu(0, 1, 1, 3, 0, 28);
+    gDebug_0300070F = 8;
+    gMenuCallback = debug_sub_808C6C8;
+    return FALSE;
+}
+
+bool8 debug_sub_808C6C8(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808C714(gDebug_0300070F, cursorPos);
+    debug_sub_808C764(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808C714(u8 whichMenu, u8 cursorPos)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        u16 flag = gUnknown_Debug_83C31E6[whichMenu][cursorPos];
+        if (!FlagGet(flag))
+            FlagSet(flag);
+        else
+            FlagClear(flag);
+    }
+}
+
+void debug_sub_808C764(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C31DC[whichMenu]; i++)
+    {
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_83C31E6[whichMenu][i]) ? TRUE : FALSE);
+    }
 }
 
 #endif

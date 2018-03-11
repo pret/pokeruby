@@ -5,13 +5,6 @@
 
 	.if DEBUG
 
-gUnknown_Debug_083C31DC:: @ 0x83C31DC
-	.byte 9, 9, 9, 9, 9, 9, 9, 9, 3, 0
-
-	@ This is not a string. I don't feel like converting it right now.
-gUnknown_Debug_83C31E6:: @ 0x83C31E6
-	.string "グ　ホ　レ　ハ　ヘ　ヒ　ゾ　ズ　ゼ　コ　サ　シ　ス　セ　ソ　ああo　ブ　ゴ　よあゥ　ム　　あもあらあさあ{0xF7}　フ　ン　D　G　ふあ:　Ä　Ö　Ü　H　I　J　K　L　ト　ナ　ニ　ヌ　ェ　ほあみあやあゆあっ　ア　イ　オ　N　O　P　Q　R　ウ　エ　カ　キ　▶　ä　ォ　そあうあきあこあつあへあク　ケ　タ　　　　　　　　　　　　　"
-
 gUnknown_Debug_083C3288:: @ 0x83C3288
 	.string "CYCLEかんれん$"
 
