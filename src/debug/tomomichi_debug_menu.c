@@ -1,11 +1,13 @@
 #if DEBUG
 #include "global.h"
+#include "palette.h"
 #include "constants/songs.h"
 #include "overworld.h"
 #include "script.h"
 #include "menu.h"
 #include "start_menu.h"
 #include "main.h"
+#include "contest_painting.h"
 #include "sound.h"
 
 // These should be static, uninitialized once it gets decompiled.
@@ -97,6 +99,32 @@ bool8 debug_sub_808D15C(void);
 bool8 debug_sub_808D1B4(void);
 bool8 debug_sub_808D20C(void);
 bool8 debug_sub_808D264(void);
+bool8 debug_sub_808C280(void);
+void debug_sub_808F168(u32 a0);
+bool8 debug_sub_808C2E4(void);
+bool8 debug_sub_808D8D8(void);
+bool8 debug_sub_808CD08(void);
+bool8 debug_sub_808CD60(void);
+bool8 debug_sub_808CDB8(void);
+bool8 debug_sub_808C85C(void);
+bool8 debug_sub_808C8B4(void);
+bool8 debug_sub_808C90C(void);
+bool8 debug_sub_808C964(void);
+bool8 debug_sub_808C9BC(void);
+bool8 debug_sub_808CA14(void);
+bool8 debug_sub_808CA6C(void);
+bool8 debug_sub_808CAC4(void);
+bool8 debug_sub_808CB1C(void);
+bool8 debug_sub_808C3B0(void);
+bool8 debug_sub_808C408(void);
+bool8 debug_sub_808C460(void);
+bool8 debug_sub_808C4B8(void);
+bool8 debug_sub_808C510(void);
+bool8 debug_sub_808C568(void);
+bool8 debug_sub_808C5C0(void);
+bool8 debug_sub_808C618(void);
+bool8 debug_sub_808C670(void);
+bool8 debug_sub_808C36C(void);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -658,6 +686,537 @@ const struct MenuAction gDebug_0x83C1974[] = {
     {gUnknown_Debug_083C1970, TomomichiDebugMenu_Config}
 };
 
+const u8 gUnknown_Debug_083C19BC[] = {0x08, 0x07, 0x09, 0x04, 0x09, 0x09, 0x09, 0x07, 0x05, 0x00};
+
+const u16 gUnknown_Debug_083C19C6[] = {0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e, 0x0000,
+	0x080f, 0x0810, 0x0811, 0x0812, 0x0813, 0x0814, 0x0815, 0x0000, 0x0000,
+	0x0816, 0x0817, 0x0818, 0x0819, 0x081a, 0x081b, 0x081c, 0x081d, 0x081e,
+	0x0800, 0x0801, 0x0802, 0x083b, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+	0x0804, 0x0805, 0x0806, 0x0828, 0x0829, 0x082a, 0x082b, 0x082c, 0x082d,
+	0x0830, 0x0831, 0x0832, 0x0833, 0x0834, 0x0835, 0x0837, 0x0838, 0x0839,
+	0x0836, 0x083a, 0x083b, 0x084b, 0x084c, 0x084f, 0x0850, 0x0851, 0x0852,
+	0x084d, 0x084e, 0x0853, 0x085d, 0x085f, 0x0860, 0x0861, 0x0000, 0x0000,
+	0x0847, 0x0848, 0x0849, 0x0854, 0x085e, 0x0000, 0x0000, 0x0000, 0x0000};
+
+const u8 gDebug_0x83C1A68[] = _("FVーBALL　パート1");
+
+const struct MenuAction gUnknown_Debug_083C1A78[] = {
+	{gDebug_0x83C1A68, debug_sub_808D8D8}
+};
+
+const u8 gUnknown_Debug_083C1A80[] = _("FVーBALL1ー78");
+const u8 gUnknown_Debug_083C1A8C[] = _("FVーBALL1ー133");
+
+const struct MenuAction gUnknown_Debug_083C1A9C[] = {
+	{gUnknown_Debug_083C1A80, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1A8C, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1AAC[] = {2, 0};
+
+const u16 gUnknown_Debug_083C1AAE[] = {0x0436, 0x046d, 0, 0, 0, 0, 0, 0, 0};
+
+const u8 gUnknown_Debug_083C1AC0[] = _("ジムリーダー");
+const u8 gUnknown_Debug_083C1AC7[] = _("してんのう");
+const u8 gUnknown_Debug_083C1ACD[] = _("みつる/Champロード");
+
+const struct MenuAction gUnknown_Debug_083C1ADC[] = {
+	{gUnknown_Debug_083C1AC0, debug_sub_808CD08},
+	{gUnknown_Debug_083C1AC7, debug_sub_808CD60},
+	{gUnknown_Debug_083C1ACD, debug_sub_808CDB8}
+};
+
+const u8 gUnknown_Debug_083C1AF4[] = _("FTーGYMー01ーLEADER");
+const u8 gUnknown_Debug_083C1B05[] = _("FTーGYMー02ーLEADER");
+const u8 gUnknown_Debug_083C1B16[] = _("FTーGYMー03ーLEADER");
+const u8 gUnknown_Debug_083C1B27[] = _("FTーGYMー04ーLEADER");
+const u8 gUnknown_Debug_083C1B38[] = _("FTーGYMー05ーLEADER");
+const u8 gUnknown_Debug_083C1B49[] = _("FTーGYMー06ーLEADER");
+const u8 gUnknown_Debug_083C1B5A[] = _("FTーGYMー07ーLEADER");
+const u8 gUnknown_Debug_083C1B6B[] = _("FTーGYMー08ーLEADER");
+
+const struct MenuAction gUnknown_Debug_083C1B7C[] = {
+	{gUnknown_Debug_083C1AF4, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B05, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B16, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B27, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B38, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B49, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B5A, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1B6B, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1BBC[] = _("FTーSHITENー01");
+const u8 gUnknown_Debug_083C1BC9[] = _("FTーSHITENー02");
+const u8 gUnknown_Debug_083C1BD6[] = _("FTーSHITENー03");
+const u8 gUnknown_Debug_083C1BE3[] = _("FTーSHITENー04");
+
+const struct MenuAction gUnknown_Debug_083C1BF0[] = {
+	{gUnknown_Debug_083C1BBC, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1BC9, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1BD6, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1BE3, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1C10[] = _("FTーMITSURUー01ーCAVEーD1301");
+
+const struct MenuAction gUnknown_Debug_083C1C2C[] = {
+	{gUnknown_Debug_083C1C10, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1C34[] = {0x08, 0x04, 0x01, 0x00};
+const u16 gUnknown_Debug_083C1C38[] = {0x04B1, 0x04B4, 0x04B8, 0x04BD, 0x04C1, 0x04C9, 0x04CD, 0x04D4, 0x0000, 0x04DD, 0x04DE, 0x04DF, 0x04E0, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x04E1, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000};
+
+const u8 gUnknown_Debug_083C1C6E[] = _("120/119ばんどうろカクレオン");
+const u8 gUnknown_Debug_083C1C80[] = _("そのた1　/　SUPPORTM/W");
+const u8 gUnknown_Debug_083C1C92[] = _("ODAMAKI/FIGHTER1");
+const u8 gUnknown_Debug_083C1CA3[] = _("MITSURU/TENKI");
+const u8 gUnknown_Debug_083C1CB1[] = _("そのた2　/DAIGO");
+const u8 gUnknown_Debug_083C1CBD[] = _("POKE/POKEMON");
+const u8 gUnknown_Debug_083C1CCA[] = _("MAMA/SUPPORT02");
+const u8 gUnknown_Debug_083C1CD9[] = _("HAGI");
+const u8 gUnknown_Debug_083C1CDE[] = _("SUPPORT01");
+
+const struct MenuAction gUnknown_Debug_083C1CE8[] = {
+	{gUnknown_Debug_083C1C6E, debug_sub_808C85C},
+	{gUnknown_Debug_083C1C80, debug_sub_808C8B4},
+	{gUnknown_Debug_083C1C92, debug_sub_808C90C},
+	{gUnknown_Debug_083C1CA3, debug_sub_808C964},
+	{gUnknown_Debug_083C1CB1, debug_sub_808C9BC},
+	{gUnknown_Debug_083C1CBD, debug_sub_808CA14},
+	{gUnknown_Debug_083C1CCA, debug_sub_808CA6C},
+	{gUnknown_Debug_083C1CD9, debug_sub_808CAC4},
+	{gUnknown_Debug_083C1CDE, debug_sub_808CB1C}
+};
+
+const u8 gUnknown_Debug_083C1D30[] = _("FVーKAKUREONBー01ーFIELDーR120");
+const u8 gUnknown_Debug_083C1D4B[] = _("FVーKAKUREー01ーFIELDーR120");
+const u8 gUnknown_Debug_083C1D63[] = _("FVーKAKUREー02ーFIELDーR120");
+const u8 gUnknown_Debug_083C1D7B[] = _("FVーKAKUREー03ーFIELDーR120");
+const u8 gUnknown_Debug_083C1D93[] = _("FVーKAKUREー04ーFIELDーR120");
+const u8 gUnknown_Debug_083C1DAB[] = _("FVーKAKUREー05ーFIELDーR120");
+const u8 gUnknown_Debug_083C1DC3[] = _("FVーKAKUREー06ーFIELDーR120");
+const u8 gUnknown_Debug_083C1DDB[] = _("FVーKAKUREー01ーFIELDーR119");
+const u8 gUnknown_Debug_083C1DF3[] = _("FVーKAKUREー02ーFIELDーR119");
+
+const struct MenuAction gUnknown_Debug_083C1E0C[] = {
+	{gUnknown_Debug_083C1D30, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1D4B, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1D63, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1D7B, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1D93, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1DAB, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1DC3, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1DDB, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1DF3, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1E54[] = _("FVーBALLー01ーC107ーR0501");
+const u8 gUnknown_Debug_083C1E6A[] = _("FVーWORKERM1ー04ーFIELDーC104");
+const u8 gUnknown_Debug_083C1E84[] = _("FVーSUBMARINEー06ーCAVEーD1101");
+const u8 gUnknown_Debug_083C1E9F[] = _("FVーGUESTーALLーC106ーR0102");
+const u8 gUnknown_Debug_083C1EB7[] = _("FVーHORIDASIー01ーC106ーR1106");
+const u8 gUnknown_Debug_083C1ED1[] = _("FVーMIDDLEM1ー01ーR110ーR0101");
+const u8 gUnknown_Debug_083C1EEB[] = _("FVーFUNEー01ーC102ーR0601");
+const u8 gUnknown_Debug_083C1F01[] = _("FVーSUPPORTWー01ーT101ーR0202");
+const u8 gUnknown_Debug_083C1F1B[] = _("FVーSUPPORTMー01ーT101ーR0102");
+
+const struct MenuAction gUnknown_Debug_083C1F38[] = {
+	{gUnknown_Debug_083C1E54, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1E6A, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1E84, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1E9F, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1EB7, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1ED1, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1EEB, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1F01, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1F1B, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C1F80[] = _("FVーODAMAKIー01ーFIELDーR101");
+const u8 gUnknown_Debug_083C1F99[] = _("FVーODAMAKIー01ーT101ーR0301");
+const u8 gUnknown_Debug_083C1FB2[] = _("FVーODAMAKIーHYOKAーT101ーR0301");
+const u8 gUnknown_Debug_083C1FCE[] = _("FVーODAMAKIーHYOKAーFIELDーR101");
+const u8 gUnknown_Debug_083C1FEA[] = _("FVーODAMAKIーHYOKAーFIELDーR103");
+const u8 gUnknown_Debug_083C2006[] = _("FVーODAMAKIー01ーC109ーR0105");
+const u8 gUnknown_Debug_083C201F[] = _("FVーFIGHTERー01ーCAVEーD0201");
+const u8 gUnknown_Debug_083C2038[] = _("FVーFIGHTERー01ーT106ーR0201");
+const u8 gUnknown_Debug_083C2051[] = _("FVーFIGHTERー01ーFIELDーR116");
+
+const struct MenuAction gUnknown_Debug_083C206C[] = {
+	{gUnknown_Debug_083C1F80, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1F99, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1FB2, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1FCE, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C1FEA, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2006, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C201F, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2038, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2051, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C20B4[] = _("FVーMITSURUー01ーFIELDーC101");
+const u8 gUnknown_Debug_083C20CD[] = _("FVーMITSURUー02ーCAVEーD1301");
+const u8 gUnknown_Debug_083C20E6[] = _("FVーMITSURUー01ーFIELDーC103");
+const u8 gUnknown_Debug_083C20FF[] = _("FVーMITSURUー01ーT106ーR0201");
+const u8 gUnknown_Debug_083C2118[] = _("FVーMITSURUー01ーCAVEーD1301");
+const u8 gUnknown_Debug_083C2131[] = _("FVーMITSURUー01ーC101ーR0201");
+const u8 gUnknown_Debug_083C214A[] = _("FVーMITSURUー01ーFIELDーR102");
+const u8 gUnknown_Debug_083C2163[] = _("FVーTENKIー01ーR119ーR101");
+const u8 gUnknown_Debug_083C2179[] = _("FVーTENKIー01ーR119ーR102");
+
+const struct MenuAction gUnknown_Debug_083C2190[] = {
+	{gUnknown_Debug_083C20B4, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C20CD, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C20E6, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C20FF, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2118, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2131, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C214A, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2163, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2179, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C21D8[] = _("FVーDAIGOー01ーCAVEーD0504");
+const u8 gUnknown_Debug_083C21EF[] = _("FVーDAIGOー01ーFIELDーR128");
+const u8 gUnknown_Debug_083C2206[] = _("FVーDAIGOー01ーFIELDーR118");
+const u8 gUnknown_Debug_083C221D[] = _("FVーDAIGOー01ーC107ーR0501");
+const u8 gUnknown_Debug_083C2234[] = _("FVーDAIGOー01ーFIELDーR120");
+const u8 gUnknown_Debug_083C224B[] = _("FVーDAIGOー01ーFIELDーR108");
+
+const struct MenuAction gUnknown_Debug_083C2264[] = {
+	{gUnknown_Debug_083C21D8, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C21EF, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2206, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C221D, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2234, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C224B, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2294[] = _("FVーPOKE1ー02ーCAVEーD1111");
+const u8 gUnknown_Debug_083C22AB[] = _("FVーPOKE1ー01ーCAVEーD0601");
+const u8 gUnknown_Debug_083C22C2[] = _("FVーPOKE1ー02ーCAVEーD0601");
+const u8 gUnknown_Debug_083C22D9[] = _("FVーPOKE1ー01ーFIELDーR101");
+const u8 gUnknown_Debug_083C22F0[] = _("FVーPOKE1ー01ーOPENINGーROOM01");
+const u8 gUnknown_Debug_083C230B[] = _("FVーPOKE1ー02ーOPENINGーROOM01");
+const u8 gUnknown_Debug_083C2326[] = _("FVーPOKE1ー01ーCAVEーD2308");
+const u8 gUnknown_Debug_083C233D[] = _("FVーPOKEMONー01ーCAVEーD0201");
+const u8 gUnknown_Debug_083C2356[] = _("FVーPOKEMONー01ーR104ーR0101");
+
+const struct MenuAction gUnknown_Debug_083C2370[] = {
+	{gUnknown_Debug_083C2294, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C22AB, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C22C2, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C22D9, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C22F0, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C230B, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2326, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C233D, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2356, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C23B8[] = _("FVーMAMAー01ーFIELDーT101");
+const u8 gUnknown_Debug_083C23CE[] = _("FVーMAMAー01ーOPENINGーROOM02");
+const u8 gUnknown_Debug_083C23E8[] = _("FVーMAMAー01ーT101ーR0101");
+const u8 gUnknown_Debug_083C23FE[] = _("FVーMAMAー01ーT101ーR0201");
+const u8 gUnknown_Debug_083C2414[] = _("FVーMAMAー02ーT101ーR0101");
+const u8 gUnknown_Debug_083C242A[] = _("FVーMAMAー02ーT101ーR0201");
+const u8 gUnknown_Debug_083C2440[] = _("FVーSUPPORTー02ーFIELDーR110");
+const u8 gUnknown_Debug_083C2459[] = _("FVーSUPPORTー02ーFIELDーR119");
+const u8 gUnknown_Debug_083C2472[] = _("FVーSUPPORTー02ーFIELDーT104");
+
+const struct MenuAction gUnknown_Debug_083C248C[] = {
+	{gUnknown_Debug_083C23B8, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C23CE, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C23E8, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C23FE, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2414, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C242A, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2440, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2459, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2472, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C24D4[] = _("FVーHAGIー01ーFIELDーR104");
+const u8 gUnknown_Debug_083C24EA[] = _("FVーHAGIー01ーR104ーR0101");
+const u8 gUnknown_Debug_083C2500[] = _("FVーHAGIー01ーFIELDーT103");
+const u8 gUnknown_Debug_083C2516[] = _("FVーHAGIー01ーFIELDーR109");
+const u8 gUnknown_Debug_083C252C[] = _("FVーHAGIー01ーC102ーR0601");
+const u8 gUnknown_Debug_083C2542[] = _("FVーHAGIー01ーC102ーR0101");
+const u8 gUnknown_Debug_083C2558[] = _("FVーHAGIー01ーCAVEーD0201");
+const u8 gUnknown_Debug_083C256E[] = _("FVーHAGIー01ーFIELDーR116");
+const u8 gUnknown_Debug_083C2584[] = _("FVーHAGIー01ーSPーSHIP01");
+
+const struct MenuAction gUnknown_Debug_083C259C[] = {
+	{gUnknown_Debug_083C24D4, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C24EA, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2500, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2516, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C252C, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2542, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2558, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C256E, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2584, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C25E4[] = _("FVーSUPPORTー01ーT101ーR0301");
+const u8 gUnknown_Debug_083C25FD[] = _("FVーSUPPORTー01ーC109ーR0105");
+const u8 gUnknown_Debug_083C2616[] = _("FVーSUPPORTー01ーFIELDーC104");
+const u8 gUnknown_Debug_083C262F[] = _("FVーSUPPORTー01ーFIELDーC106");
+const u8 gUnknown_Debug_083C2648[] = _("FVーSUPPORTー01ーFIELDーR103");
+const u8 gUnknown_Debug_083C2661[] = _("FVーSUPPORTー01ーFIELDーR110");
+const u8 gUnknown_Debug_083C267A[] = _("FVーSUPPORTー01ーFIELDーR119");
+const u8 gUnknown_Debug_083C2693[] = _("FVーSUPPORTー01ーFIELDーT104");
+const u8 gUnknown_Debug_083C26AC[] = _("FVーSUPPORTー01ーFIELDーT102");
+
+const struct MenuAction gUnknown_Debug_083C26C8[] = {
+	{gUnknown_Debug_083C25E4, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C25FD, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2616, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C262F, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2648, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2661, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C267A, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C2693, TomomichiDebugMenu_Config},
+	{gUnknown_Debug_083C26AC, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2710[] = {9, 9, 9, 9, 6, 9, 9, 9, 9, 0};
+
+const u16 gUnknown_Debug_083C271A[] = {
+    0x03d5, 0x03ca, 0x03d6, 0x03d9, 0x03da, 0x03db, 0x03dc,
+    0x03dd, 0x03de, 0x03c8, 0x02dc, 0x03d4, 0x039d, 0x03c2,
+    0x0368, 0x0352, 0x02d2, 0x02f8, 0x02d0, 0x02d1, 0x0380,
+    0x0381, 0x0382, 0x0399, 0x0327, 0x0328, 0x037e, 0x02d6,
+    0x02ef, 0x0324, 0x0326, 0x035a, 0x0362, 0x0363, 0x037c,
+    0x037d, 0x0341, 0x0342, 0x03c6, 0x03c7, 0x03cc, 0x03cd,
+    0x0000, 0x0000, 0x0000, 0x02dd, 0x02e1, 0x02ec, 0x02ee,
+    0x02f2, 0x02f3, 0x0305, 0x0370, 0x0371, 0x02f0, 0x02f5,
+    0x02f6, 0x02f7, 0x030e, 0x030f, 0x039a, 0x039b, 0x03a2,
+    0x02e2, 0x02e3, 0x02e4, 0x02e5, 0x034f, 0x0365, 0x036f,
+    0x037b, 0x03b6, 0x0379, 0x0398, 0x032e, 0x03cb, 0x02d3,
+    0x0397, 0x0353, 0x03a1, 0x03d3};
+
+const u8 gUnknown_Debug_083C27BC[] = _("FEひでんわざ/デボンかんれん");
+const u8 gUnknown_Debug_083C27CC[] = _("FEだいじなアイテムPART1");
+const u8 gUnknown_Debug_083C27DC[] = _("そのた1");
+const u8 gUnknown_Debug_083C27E1[] = _("MITSURU/DOOR");
+const u8 gUnknown_Debug_083C27EE[] = _("カラクリやしき10のやじるし/GYM07");
+const u8 gUnknown_Debug_083C2803[] = _("SUPPORT/そのた4");
+const u8 gUnknown_Debug_083C2810[] = _("DAISUKI/そのた5");
+const u8 gUnknown_Debug_083C281D[] = _("そのた2");
+const u8 gUnknown_Debug_083C2822[] = _("そのた6");
+
+const struct MenuAction gUnknown_Debug_083C2828[] = {
+	{gUnknown_Debug_083C27BC, debug_sub_808C3B0},
+	{gUnknown_Debug_083C27CC, debug_sub_808C408},
+	{gUnknown_Debug_083C27DC, debug_sub_808C460},
+	{gUnknown_Debug_083C27E1, debug_sub_808C4B8},
+	{gUnknown_Debug_083C27EE, debug_sub_808C510},
+	{gUnknown_Debug_083C2803, debug_sub_808C568},
+	{gUnknown_Debug_083C2810, debug_sub_808C5C0},
+	{gUnknown_Debug_083C281D, debug_sub_808C618},
+	{gUnknown_Debug_083C2822, debug_sub_808C670}
+};
+
+const u8 gUnknown_Debug_083C2870[] = _("FEーHWAZA01ーGET");
+const u8 gUnknown_Debug_083C287F[] = _("FEーHWAZA02ー01ーFIELDR119");
+const u8 gUnknown_Debug_083C2897[] = _("FEーHWAZA03ーGET");
+const u8 gUnknown_Debug_083C28A6[] = _("FEーHWAZA04ー01ーT106ーR0201");
+const u8 gUnknown_Debug_083C28BF[] = _("FEーHWAZA05ー01ーCAVEーD0502");
+const u8 gUnknown_Debug_083C28D8[] = _("FEーHWAZA04ー01ーC103ーR0301");
+const u8 gUnknown_Debug_083C28F1[] = _("FEーDEBONーNIMOTSUーRETURN");
+const u8 gUnknown_Debug_083C2909[] = _("FEーDEBONー01ーFIELDーC104");
+const u8 gUnknown_Debug_083C2920[] = _("FEーDEBONー02ーFIELDーC104");
+
+const struct MenuAction gUnknown_Debug_083C2938[] = {
+    {gUnknown_Debug_083C2870, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C287F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2897, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C28A6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C28BF, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C28D8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C28F1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2909, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2920, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2980[] = _("FEーCYCLEー01ーP01ーP01ーC103ーR0201");
+const u8 gUnknown_Debug_083C299F[] = _("FEーSCOOPー01ーP01ーFIELDーR115");
+const u8 gUnknown_Debug_083C29BA[] = _("FEーROPEー01ーP01ーFIELDーR114");
+const u8 gUnknown_Debug_083C29D4[] = _("FEーKAMAー01ーP01ーFIELDーR119");
+const u8 gUnknown_Debug_083C29EE[] = _("FEーZYOUROーGET");
+const u8 gUnknown_Debug_083C29FC[] = _("FEーCUBECASEーGET");
+const u8 gUnknown_Debug_083C2A0C[] = _("FEーBORONOTURIZAOーGET");
+const u8 gUnknown_Debug_083C2A21[] = _("FEーIITURIZAOーGET");
+const u8 gUnknown_Debug_083C2A32[] = _("FEーSUGOITURIZAOーGET");
+
+const struct MenuAction gUnknown_Debug_083C2A48[] = {
+    {gUnknown_Debug_083C2980, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C299F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C29BA, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C29D4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C29EE, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C29FC, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2A0C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2A21, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2A32, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2A90[] = _("FEーBOSSー01ーCAVEーD0701");
+const u8 gUnknown_Debug_083C2AA6[] = _("FEーTANTIKIーRETURN");
+const u8 gUnknown_Debug_083C2AB8[] = _("FEーPOKE1ー01ーCAVEーD1111");
+const u8 gUnknown_Debug_083C2ACF[] = _("FEーPOKE1ー01ーCAVEーD1206");
+const u8 gUnknown_Debug_083C2AE6[] = _("FEーSHOPー01ーC104ーFS01");
+const u8 gUnknown_Debug_083C2AFB[] = _("FEーHUNENOTIKETTーGET");
+const u8 gUnknown_Debug_083C2B0F[] = _("FEーKAKUREー01ーFIELDーC105");
+const u8 gUnknown_Debug_083C2B27[] = _("FEーKASEKIーRETURN");
+const u8 gUnknown_Debug_083C2B38[] = _("FEーWINー01ーSPーSHIP01");
+
+const struct MenuAction gUnknown_Debug_083C2B4C[] = {
+    {gUnknown_Debug_083C2A90, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2AA6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2AB8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2ACF, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2AE6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2AFB, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2B0F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2B27, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2B38, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2B94[] = _("FEーMITSURUー01ーT106ーR0201");
+const u8 gUnknown_Debug_083C2BAD[] = _("FEーMITSURUー01ーCAVEーD1301");
+const u8 gUnknown_Debug_083C2BC6[] = _("FEーMITSURUー02ーFIELDーC103");
+const u8 gUnknown_Debug_083C2BDF[] = _("FEーMITSURUー02ーT106ーR0201");
+const u8 gUnknown_Debug_083C2BF8[] = _("FEーMITSURUー01ーFIELDーC103");
+const u8 gUnknown_Debug_083C2C11[] = _("FEーDOORーOPENー01ーCAVEーD1712");
+const u8 gUnknown_Debug_083C2C2C[] = _("FEーDOORーOPENー02ーCAVEーD1712");
+const u8 gUnknown_Debug_083C2C47[] = _("FEーDOORーOPENー04ーCAVEーD1712");
+const u8 gUnknown_Debug_083C2C62[] = _("FEーDOORーOPENー06ーCAVEーD1712");
+
+const struct MenuAction gUnknown_Debug_083C2C80[] = {
+    {gUnknown_Debug_083C2B94, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2BAD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2BC6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2BDF, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2BF8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2C11, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2C2C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2C47, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2C62, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2CC8[] = _("FEーKARAKURI10ーSWITCHー01");
+const u8 gUnknown_Debug_083C2CE0[] = _("FEーKARAKURI10ーSWITCHー02");
+const u8 gUnknown_Debug_083C2CF8[] = _("FEーKARAKURI10ーSWITCHー03");
+const u8 gUnknown_Debug_083C2D10[] = _("FEーKARAKURI10ーSWITCHー04");
+const u8 gUnknown_Debug_083C2D28[] = _("FEーKARAKURI10ーSWITCHー05");
+const u8 gUnknown_Debug_083C2D40[] = _("FEーGYM07ーSWITCHー01");
+const u8 gUnknown_Debug_083C2D53[] = _("FEーGYM07ーSWITCHー02");
+const u8 gUnknown_Debug_083C2D66[] = _("FEーGYM07ーSWITCHー03");
+const u8 gUnknown_Debug_083C2D79[] = _("FEーGYM07ーSWITCHー04");
+
+const struct MenuAction gUnknown_Debug_083C2D8C[] = {
+    {gUnknown_Debug_083C2CC8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2CE0, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2CF8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D10, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D28, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D40, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D53, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D66, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2D79, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2DD4[] = _("FEーSUPPORTー01ーFIELDーR103");
+const u8 gUnknown_Debug_083C2DED[] = _("FEーSUPPORTー01ーFIELDーC106");
+const u8 gUnknown_Debug_083C2E06[] = _("FEーSUPPORTー01ーFIELDーR104");
+const u8 gUnknown_Debug_083C2E1F[] = _("FEーSUPPORTー02ーFIELDーC106");
+const u8 gUnknown_Debug_083C2E38[] = _("FEーSUPPORTー01ーT101ーR0202");
+const u8 gUnknown_Debug_083C2E51[] = _("FEーMAMAー01ーP01ーT101ーR0101");
+const u8 gUnknown_Debug_083C2E6B[] = _("FEーCLOCKーSET");
+const u8 gUnknown_Debug_083C2E78[] = _("FEーODAMAKIー01ーP01ーT101ーR03");
+const u8 gUnknown_Debug_083C2E93[] = _("FEーPAPAー01ーP01ーC101ーR0201");
+
+const struct MenuAction gUnknown_Debug_083C2EB0[] = {
+    {gUnknown_Debug_083C2DD4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2DED, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E06, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E1F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E38, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E51, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E6B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E78, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2E93, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C2EF8[] = _("FEーDAISUKIーGOODSーFLAG01");
+const u8 gUnknown_Debug_083C2F10[] = _("FEーDAISUKIーGOODSーFLAG02");
+const u8 gUnknown_Debug_083C2F28[] = _("FEーDAISUKIーGOODSーFLAG03");
+const u8 gUnknown_Debug_083C2F40[] = _("FEーDAISUKIーGOODSーFLAG04");
+const u8 gUnknown_Debug_083C2F58[] = _("FEーDAISUKIーGOODSーFLAG05");
+const u8 gUnknown_Debug_083C2F70[] = _("FEーBASHAー01ーP01ーFIELDーC101ー");
+const u8 gUnknown_Debug_083C2F8C[] = _("FEーBASHAー01ーP02ーFIELDーC101ー");
+const u8 gUnknown_Debug_083C2FA8[] = _("FEーBALLー01ーP01ーSPーCONTEST");
+const u8 gUnknown_Debug_083C2FC2[] = _("FEーWOMAN2ー01ーP01ーT101ーR0201");
+
+const struct MenuAction gUnknown_Debug_083C2FE0[] = {
+    {gUnknown_Debug_083C2EF8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F10, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F28, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F40, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F58, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F70, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2F8C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2FA8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C2FC2, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C3028[] = _("FEーSOUKOーOPENーCAVEーD1704");
+const u8 gUnknown_Debug_083C3041[] = _("FEーSORAISIー01ーCAVEーD0101");
+const u8 gUnknown_Debug_083C305A[] = _("FEーMAYUMIー01ーーR114ーR0201");
+const u8 gUnknown_Debug_083C3073[] = _("FEーKUSUNOKIー01ーC102ーR0601");
+const u8 gUnknown_Debug_083C308D[] = _("FEーOLDWOMAN1ー01ーCAVEーD0808");
+const u8 gUnknown_Debug_083C30A8[] = _("FEーTRAINERM1ー01ーC109ーR0206");
+const u8 gUnknown_Debug_083C30C3[] = _("FEーSOONANOーTAMAGOーGET");
+const u8 gUnknown_Debug_083C30D9[] = _("FEーDASHーSHOESーGET");
+const u8 gUnknown_Debug_083C30EB[] = _("FEーDEBONSUKOOPUーGET");
+
+const struct MenuAction gUnknown_Debug_083C3100[] = {
+    {gUnknown_Debug_083C3028, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3041, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C305A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3073, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C308D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C30A8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C30C3, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C30D9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C30EB, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C3148[] = _("FEーSTUDYM1ー01ーP01ーT101R0301");
+const u8 gUnknown_Debug_083C3164[] = _("FEーWORKERM1ー01ーC103ーR0201");
+const u8 gUnknown_Debug_083C317E[] = _("FEーHIMITSUーGET");
+const u8 gUnknown_Debug_083C318D[] = _("");
+const u8 gUnknown_Debug_083C318E[] = _("");
+const u8 gUnknown_Debug_083C318F[] = _("");
+const u8 gUnknown_Debug_083C3190[] = _("");
+const u8 gUnknown_Debug_083C3191[] = _("");
+const u8 gUnknown_Debug_083C3192[] = _("");
+
+const struct MenuAction gUnknown_Debug_083C3194[] = {
+    {gUnknown_Debug_083C3148, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3164, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C317E, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C318D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C318E, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C318F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3190, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3191, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3192, TomomichiDebugMenu_Config}
+};
+
 bool8 InitTomomichiDebugWindow(void)
 {
     debug_sub_808B874();
@@ -1142,6 +1701,56 @@ bool8 debug_sub_808C23C(void)
     ScriptContext1_SetupScript(DebugScript_081C2507);
     CloseMenu();
     return TRUE;
+}
+
+bool8 TomomichiDebugMenu_ContestGraphics_Show(void)
+{
+    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    gMenuCallback = debug_sub_808C280;
+    return FALSE;
+}
+
+bool8 debug_sub_808C280(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        CloseMenu();
+        debug_sub_808F168(0);
+        SetMainCallback2(CB2_ContestPainting);
+        gMain.savedCallback = debug_sub_808B868;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 TomomichiDebugMenu_MuseumGraphics_Show(void)
+{
+    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    gMenuCallback = debug_sub_808C2E4;
+    return FALSE;
+}
+
+bool8 debug_sub_808C2E4(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        CloseMenu();
+        debug_sub_808F168(1);
+        SetMainCallback2(CB2_ContestPainting);
+        gMain.savedCallback = debug_sub_808B868;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 debug_sub_808C31C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 28, 19);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C2828), gUnknown_Debug_083C2828);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C2828), 0, 27);
+    gMenuCallback = debug_sub_808C36C;
+    return FALSE;
 }
 
 #endif
