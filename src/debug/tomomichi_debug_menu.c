@@ -133,6 +133,30 @@ void debug_sub_808C764(u8);
 void debug_sub_808F2E0(u8, u8, bool8);
 bool8 debug_sub_808C818(void);
 bool8 debug_sub_808CB74(void);
+bool8 debug_sub_808E400(void);
+bool8 debug_sub_808E458(void);
+bool8 debug_sub_808E4B0(void);
+bool8 debug_sub_808E508(void);
+bool8 debug_sub_808E560(void);
+bool8 debug_sub_808E9A0(void);
+bool8 debug_sub_808E9F8(void);
+bool8 debug_sub_808E054(void);
+bool8 debug_sub_808E0AC(void);
+bool8 debug_sub_808E104(void);
+bool8 debug_sub_808E15C(void);
+bool8 debug_sub_808E1B4(void);
+bool8 debug_sub_808E20C(void);
+bool8 debug_sub_808DBA0(void);
+bool8 debug_sub_808DBF8(void);
+bool8 debug_sub_808DC50(void);
+bool8 debug_sub_808DCA8(void);
+bool8 debug_sub_808DD00(void);
+bool8 debug_sub_808DD58(void);
+bool8 debug_sub_808DDB0(void);
+bool8 debug_sub_808DE08(void);
+bool8 debug_sub_808DE60(void);
+bool8 debug_sub_808E754(void);
+bool8 debug_sub_808E7AC(void);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -1178,6 +1202,628 @@ const u16 gUnknown_Debug_83C31E6[][9] = {
     {FLAG_USED_STORAGE_KEY, FLAG_MET_PROF_COSMO, FLAG_RECEIVED_DOLL_LANETTE, FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE, FLAG_RETURNED_RED_OR_BLUE_ORB, FLAG_ENTERED_ELITE_FOUR, FLAG_RECEIVED_LAVARIDGE_EGG, FLAG_RECEIVED_RUNNING_SHOES, FLAG_RECEIVED_DEVON_SCOPE},
     {FLAG_BIRCH_AIDE_MET, FLAG_DECLINED_BIKE, FLAG_RECEIVED_SECRET_POWER}
 };
+
+const u8 gUnknown_Debug_083C3288[] = _("CYCLEかんれん");
+const u8 gUnknown_Debug_083C3292[] = _("おおきさくらべ");
+const u8 gUnknown_Debug_083C329A[] = _("カウンタ");
+const u8 gUnknown_Debug_083C329F[] = _("そのた1");
+const u8 gUnknown_Debug_083C32A4[] = _("そのた2");
+
+const struct MenuAction gUnknown_Debug_083C32AC[] = {
+    {gUnknown_Debug_083C3288, debug_sub_808E400},
+    {gUnknown_Debug_083C3292, debug_sub_808E458},
+    {gUnknown_Debug_083C329A, debug_sub_808E4B0},
+    {gUnknown_Debug_083C329F, debug_sub_808E508},
+    {gUnknown_Debug_083C32A4, debug_sub_808E560}
+};
+
+const u8 gUnknown_Debug_083C32D4[] = _("WKーCYCLEーROADーHIT");
+const u8 gUnknown_Debug_083C32E6[] = _("WKーCYCLEーROADーTIMエ1");
+const u8 gUnknown_Debug_083C32FA[] = _("WKーCYCLEーROADーTIMエ2");
+
+const u8 gUnknown_Debug_083C330E[] = _("WKーSIZEーKINOKOKOーOYAJI");
+const u8 gUnknown_Debug_083C3325[] = _("WKーSIZEーNAMAZOーOYAJI");
+
+const u8 gUnknown_Debug_083C333A[] = _("WKーSPRAYーCOUNT");
+const u8 gUnknown_Debug_083C3349[] = _("WKーICEーCOUNT");
+const u8 gUnknown_Debug_083C3356[] = _("WKーASHーGATHERーCOUNT");
+const u8 gUnknown_Debug_083C336A[] = _("WKーCRUISEーCOUNT");
+const u8 gUnknown_Debug_083C337A[] = _("WKーFRIENDLYーSTEPーCOUNT");
+const u8 gUnknown_Debug_083C3391[] = _("WKーPOISONーSTEPーCOUNT");
+
+const u8 gUnknown_Debug_083C33A6[] = _("WKRECYCLEーGOODS");
+const u8 gUnknown_Debug_083C33B6[] = _("WKーFIRSTーPOKE");
+const u8 gUnknown_Debug_083C33C4[] = _("WKーMABOROSIRNDーH");
+const u8 gUnknown_Debug_083C33D5[] = _("WKーMABOROSIRNDーL");
+const u8 gUnknown_Debug_083C33E6[] = _("EVーONEーDAYーWORK");
+const u8 gUnknown_Debug_083C33F6[] = _("EVーFANWORK");
+const u8 gUnknown_Debug_083C3401[] = _("EVーFANTIME");
+const u8 gUnknown_Debug_083C340C[] = _("WKーKARAKURIーLEVEL");
+const u8 gUnknown_Debug_083C341E[] = _("WKーPOKELOTーPRIZE");
+
+const u8 gUnknown_Debug_083C342F[] = _("WKーSPECIALーZUKN");
+const u8 gUnknown_Debug_083C343F[] = _("WKーHYOUKAーDAYS");
+const u8 gUnknown_Debug_083C344E[] = _("WKーPOKELOTーRND1");
+const u8 gUnknown_Debug_083C345E[] = _("WKーPOKELOTーRND2");
+const u8 gUnknown_Debug_083C346E[] = _("WKーBASEーMAPNO");
+
+const struct MenuAction gUnknown_Debug_083C347C[] = {
+    {gUnknown_Debug_083C32D4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C32E6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C32FA, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C3494[] = {
+    {gUnknown_Debug_083C330E, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3325, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C34A4[] = {
+    {gUnknown_Debug_083C333A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3349, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3356, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C336A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C337A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3391, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C34D4[] = {
+    {gUnknown_Debug_083C33A6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C33B6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C33C4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C33D5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C33E6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C33F6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3401, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C340C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C341E, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C351C[] = {
+    {gUnknown_Debug_083C342F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C343F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C344E, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C345E, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C346E, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C3544[] = {3, 2, 6, 9, 5};
+
+const u16 gUnknown_Debug_083C354A[][9] = {
+    {0x4027, 0x4028, 0x4029},
+    {0x4047, 0x404F},
+    {0x4021, 0x4022, 0x4048, 0x404A, 0x402A, 0x402B},
+    {0x4020, 0x4023, 0x4024, 0x4025, 0x4040, 0x4041, 0x4042, 0x4044, 0x4045},
+    {0x4046, 0x4049, 0x404B, 0x404C, 0x4026}
+};
+
+const u8 gUnknown_Debug_083C35A4[] = _("OBJCHRWORK0ー8");
+const u8 gUnknown_Debug_083C35B2[] = _("OBJCHRWORK9ー15");
+
+const struct MenuAction gUnknown_Debug_083C35C4[] = {
+    {gUnknown_Debug_083C35A4, debug_sub_808E9A0},
+    {gUnknown_Debug_083C35B2, debug_sub_808E9F8}
+};
+
+const u8 gUnknown_Debug_083C35D4[] = _("OBJCHRWORK1");
+const u8 gUnknown_Debug_083C35E0[] = _("OBJCHRWORK2");
+const u8 gUnknown_Debug_083C35EC[] = _("OBJCHRWORK3");
+const u8 gUnknown_Debug_083C35F8[] = _("OBJCHRWORK4");
+const u8 gUnknown_Debug_083C3604[] = _("OBJCHRWORK5");
+const u8 gUnknown_Debug_083C3610[] = _("OBJCHRWORK6");
+const u8 gUnknown_Debug_083C361C[] = _("OBJCHRWORK7");
+const u8 gUnknown_Debug_083C3628[] = _("OBJCHRWORK8");
+const u8 gUnknown_Debug_083C3634[] = _("OBJCHRWORK9");
+
+const u8 gUnknown_Debug_083C3640[] = _("OBJCHRWORK10");
+const u8 gUnknown_Debug_083C364D[] = _("OBJCHRWORK11");
+const u8 gUnknown_Debug_083C365A[] = _("OBJCHRWORK12");
+const u8 gUnknown_Debug_083C3667[] = _("OBJCHRWORK13");
+const u8 gUnknown_Debug_083C3674[] = _("OBJCHRWORK14");
+const u8 gUnknown_Debug_083C3681[] = _("OBJCHRWORK15");
+const u8 gUnknown_Debug_083C368E[] = _("OBJCHRWORK16");
+
+const struct MenuAction gUnknown_Debug_083C369C[] = {
+    {gUnknown_Debug_083C35D4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C35E0, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C35EC, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C35F8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3604, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3610, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C361C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3628, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3634, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C36E4[] = {
+    {gUnknown_Debug_083C3640, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C364D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C365A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3667, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3674, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3681, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C368E, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C371C[] = {9, 7};
+
+const u16 gUnknown_Debug_083C371E[][9] = {
+    {0x4010, 0x4011, 0x4012, 0x4013, 0x4014, 0x4015, 0x4016, 0x4017, 0x4018},
+    {0x4019, 0x401A, 0x401B, 0x401C, 0x401D, 0x401E, 0x401F}
+};
+
+const u8 gUnknown_Debug_083C3742[] = _("SP");
+const u8 gUnknown_Debug_083C3745[] = _("ルーム　R110　PART1/カラクリ");
+const u8 gUnknown_Debug_083C3759[] = _("ルーム　R110　PART2");
+const u8 gUnknown_Debug_083C3768[] = _("ルーム　ロード");
+const u8 gUnknown_Debug_083C3770[] = _("ソノタ1");
+const u8 gUnknown_Debug_083C3775[] = _("ソノタ2");
+
+const struct MenuAction gUnknown_Debug_083C377C[] = {
+    {gUnknown_Debug_083C3742, debug_sub_808E054},
+    {gUnknown_Debug_083C3745, debug_sub_808E0AC},
+    {gUnknown_Debug_083C3759, debug_sub_808E104},
+    {gUnknown_Debug_083C3768, debug_sub_808E15C},
+    {gUnknown_Debug_083C3770, debug_sub_808E1B4},
+    {gUnknown_Debug_083C3775, debug_sub_808E20C}
+};
+
+const u8 gUnknown_Debug_083C37AC[] = _("WKーSCENEーSPーCONTEST");
+const u8 gUnknown_Debug_083C37C0[] = _("WKーSCENEーSPーPC");
+const u8 gUnknown_Debug_083C37CF[] = _("WKーSCENEーSPーCONTEST03");
+const u8 gUnknown_Debug_083C37E5[] = _("WKーSCENEーSPーCONTESTITEM");
+const u8 gUnknown_Debug_083C37FD[] = _("WKーSCENEーSPーOPENING");
+const u8 gUnknown_Debug_083C3811[] = _("WKーSCENEーSPーSHIP01");
+const u8 gUnknown_Debug_083C3824[] = _("");
+const u8 gUnknown_Debug_083C3825[] = _("");
+const u8 gUnknown_Debug_083C3826[] = _("");
+
+const u8 gUnknown_Debug_083C3827[] = _("WKーSCENEーR110ーR0101");
+const u8 gUnknown_Debug_083C383B[] = _("WKーSCENEーR110ーR0102");
+const u8 gUnknown_Debug_083C384F[] = _("WKーSCENEーR110ーR0103");
+const u8 gUnknown_Debug_083C3863[] = _("WKーKARAKURIーDAIOU");
+const u8 gUnknown_Debug_083C3875[] = _("WKーSCENEーSHISEN");
+const u8 gUnknown_Debug_083C3885[] = _("");
+const u8 gUnknown_Debug_083C3886[] = _("");
+const u8 gUnknown_Debug_083C3887[] = _("");
+const u8 gUnknown_Debug_083C3888[] = _("");
+
+const u8 gUnknown_Debug_083C3889[] = _("WKーSCENEーR110ーR0104");
+const u8 gUnknown_Debug_083C389D[] = _("WKーSCENEーR110ーR0105");
+const u8 gUnknown_Debug_083C38B1[] = _("WKーSCENEーR110ーR0106");
+const u8 gUnknown_Debug_083C38C5[] = _("WKーSCENEーR110ーR0107");
+const u8 gUnknown_Debug_083C38D9[] = _("WKーSCENEーR110ーR0108");
+const u8 gUnknown_Debug_083C38ED[] = _("WKーSCENEーR110ーR0109");
+const u8 gUnknown_Debug_083C3901[] = _("WKーSCENEーR110ーR0110");
+const u8 gUnknown_Debug_083C3915[] = _("WKーSCENEーR110ーR0111");
+const u8 gUnknown_Debug_083C3929[] = _("WKーSCENEー02ーR110ーR0110");
+
+const u8 gUnknown_Debug_083C3940[] = _("WKーSCENEーR104ーR0101");
+const u8 gUnknown_Debug_083C3954[] = _("WKーSCENEーR113ーR0101");
+const u8 gUnknown_Debug_083C3968[] = _("");
+const u8 gUnknown_Debug_083C3969[] = _("");
+const u8 gUnknown_Debug_083C396A[] = _("");
+const u8 gUnknown_Debug_083C396B[] = _("");
+const u8 gUnknown_Debug_083C396C[] = _("");
+const u8 gUnknown_Debug_083C396D[] = _("");
+const u8 gUnknown_Debug_083C396E[] = _("");
+
+const u8 gUnknown_Debug_083C396F[] = _("WKーSCENEーBASEーGDOODS");
+const u8 gUnknown_Debug_083C3984[] = _("WKーSCENEーHAGIーFUNE");
+const u8 gUnknown_Debug_083C3997[] = _("WKーSCENEーFUNEーPOS");
+const u8 gUnknown_Debug_083C39A9[] = _("WKーSCENEーBASEーMAKE");
+const u8 gUnknown_Debug_083C39BC[] = _("WKーSCENEーARTISTーC106ーR");
+const u8 gUnknown_Debug_083C39D3[] = _("WKーSCENEーPOKEーLEAGUE");
+const u8 gUnknown_Debug_083C39E8[] = _("WKーSCENEーROPEWAY");
+const u8 gUnknown_Debug_083C39F9[] = _("WKーSCENEーSAFARIーZONE");
+const u8 gUnknown_Debug_083C3A0E[] = _("WKーSCENEーCYCLEーROAD");
+
+const u8 gUnknown_Debug_083C3A22[] = _("WKーSCENEーR119ーTENKI");
+const u8 gUnknown_Debug_083C3A36[] = _("WKーSCENEー01ーC102ーR0401");
+const u8 gUnknown_Debug_083C3A4D[] = _("WKーFUTAGOー01ーFIELDーR104");
+const u8 gUnknown_Debug_083C3A65[] = _("WKーSCENEーBATTLEーTOWER");
+const u8 gUnknown_Debug_083C3A7B[] = _("WKーSCENEーTRーHOUSE");
+const u8 gUnknown_Debug_083C3A8D[] = _("WKーKASEKIーTYPE");
+const u8 gUnknown_Debug_083C3A9C[] = _("");
+const u8 gUnknown_Debug_083C3A9D[] = _("");
+const u8 gUnknown_Debug_083C3A9E[] = _("");
+
+const struct MenuAction gUnknown_Debug_083C3AA0[] = {
+    {gUnknown_Debug_083C37AC, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C37C0, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C37CF, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C37E5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C37FD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3811, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3824, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3825, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C3AE0[] = {
+    {gUnknown_Debug_083C3827, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C383B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C384F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3863, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3875, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3885, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3886, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3887, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3888, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C3B28[] = {
+    {gUnknown_Debug_083C3889, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C389D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C38B1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C38C5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C38D9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C38ED, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3901, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3915, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3929, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C3B70[] = {
+    {gUnknown_Debug_083C3940, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3954, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3968, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3969, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C396A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C396B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C396C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C396D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C396E, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C3BB8[] = {
+    {gUnknown_Debug_083C396F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3984, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3997, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C39A9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C39BC, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C39D3, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C39E8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C39F9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A0E, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C3C00[] = {
+    {gUnknown_Debug_083C3A22, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A36, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A4D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A65, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A7B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A8D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A9C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A9D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3A9E, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C3C48[] = {6, 5, 9, 2, 9, 6};
+
+const u16 gUnknown_Debug_83C3C4E[][9] = {
+    {0x4086, 0x4087, 0x4088, 0x408A, 0x4092, 0x40B4},
+    {0x40A6, 0x40C1, 0x40B5, 0x40A7, 0x40A5},
+    {0x40AB, 0x40AC, 0x40AD, 0x40AE, 0x40AF, 0x40B0, 0x40B1, 0x40B2, 0x40B6},
+    {0x4090, 0x40BE},
+    {0x4089, 0x408E, 0x4096, 0x4097, 0x4099, 0x409C, 0x40A3, 0x40A4, 0x40A9},
+    {0x40B3, 0x40B7, 0x40BB, 0x40BC, 0x40C0, 0x40C5}
+};
+
+const u8 gUnknown_Debug_083C3CBA[] = _("タウン");
+const u8 gUnknown_Debug_083C3CBE[] = _("シティ");
+const u8 gUnknown_Debug_083C3CC2[] = _("ロード101ー109");
+const u8 gUnknown_Debug_083C3CCD[] = _("ロード110ー118");
+const u8 gUnknown_Debug_083C3CD8[] = _("ロード119ー127");
+const u8 gUnknown_Debug_083C3CE3[] = _("ロード128ー134");
+const u8 gUnknown_Debug_083C3CEE[] = _("ルーム　タウン");
+const u8 gUnknown_Debug_083C3CF6[] = _("ルーム　シティ");
+const u8 gUnknown_Debug_083C3CFE[] = _("ダンジョンない");
+
+const struct MenuAction gUnknown_Debug_083C3D08[] = {
+    {gUnknown_Debug_083C3CBA, debug_sub_808DBA0},
+    {gUnknown_Debug_083C3CBE, debug_sub_808DBF8},
+    {gUnknown_Debug_083C3CC2, debug_sub_808DC50},
+    {gUnknown_Debug_083C3CCD, debug_sub_808DCA8},
+    {gUnknown_Debug_083C3CD8, debug_sub_808DD00},
+    {gUnknown_Debug_083C3CE3, debug_sub_808DD58},
+    {gUnknown_Debug_083C3CEE, debug_sub_808DDB0},
+    {gUnknown_Debug_083C3CF6, debug_sub_808DE08},
+    {gUnknown_Debug_083C3CFE, debug_sub_808DE60}
+};
+
+const u8 gUnknown_Debug_083C3D50[] = _("WKーSCENEーFIELDーT101");
+const u8 gUnknown_Debug_083C3D64[] = _("WKーSCENEーFIELDーT102");
+const u8 gUnknown_Debug_083C3D78[] = _("WKーSCENEーFIELDーT103");
+const u8 gUnknown_Debug_083C3D8C[] = _("WKーSCENEーFIELDーT104");
+const u8 gUnknown_Debug_083C3DA0[] = _("WKーBASEーPOSNO");
+const u8 gUnknown_Debug_083C3DAE[] = _("WKーSCENEーFIELDーT106");
+const u8 gUnknown_Debug_083C3DC2[] = _("WKーSCENEーFIELDーT107");
+const u8 gUnknown_Debug_083C3DD6[] = _("WKーSCENEー02ーFIELDーT102");
+
+const u8 gUnknown_Debug_083C3DED[] = _("WKーSCENEーFIELDーC101");
+const u8 gUnknown_Debug_083C3E01[] = _("WKーSCENEーFIELDーC102");
+const u8 gUnknown_Debug_083C3E15[] = _("WKーSCENEーFIELDーC103");
+const u8 gUnknown_Debug_083C3E29[] = _("WKーSCENEーFIELDーC104");
+const u8 gUnknown_Debug_083C3E3D[] = _("WKーSCENEーFIELDーC105");
+const u8 gUnknown_Debug_083C3E51[] = _("WKーSCENEーFIELDーC106");
+const u8 gUnknown_Debug_083C3E65[] = _("WKーSCENEーFIELDーC107");
+const u8 gUnknown_Debug_083C3E79[] = _("WKーSCENEーFIELDーC108");
+const u8 gUnknown_Debug_083C3E8D[] = _("WKーSCENEーFIELDーC109");
+
+const u8 gUnknown_Debug_083C3EA1[] = _("WKーSCENEーFIELDーR101");
+const u8 gUnknown_Debug_083C3EB5[] = _("WKーSCENEーFIELDーR102");
+const u8 gUnknown_Debug_083C3EC9[] = _("WKーSCENEーFIELDーR103");
+const u8 gUnknown_Debug_083C3EDD[] = _("WKーSCENEーFIELDーR104");
+const u8 gUnknown_Debug_083C3EF1[] = _("WKーSCENEーFIELDーR105");
+const u8 gUnknown_Debug_083C3F05[] = _("WKーSCENEーFIELDーR106");
+const u8 gUnknown_Debug_083C3F19[] = _("WKーSCENEーFIELDーR107");
+const u8 gUnknown_Debug_083C3F2D[] = _("WKーSCENEーFIELDーR108");
+const u8 gUnknown_Debug_083C3F41[] = _("WKーSCENEーFIELDーR109");
+
+const u8 gUnknown_Debug_083C3F55[] = _("WKーSCENEーFIELDーR110");
+const u8 gUnknown_Debug_083C3F69[] = _("WKーSCENEーFIELDーR111");
+const u8 gUnknown_Debug_083C3F7D[] = _("WKーSCENEーFIELDーR112");
+const u8 gUnknown_Debug_083C3F91[] = _("WKーSCENEーFIELDーR113");
+const u8 gUnknown_Debug_083C3FA5[] = _("WKーSCENEーFIELDーR114");
+const u8 gUnknown_Debug_083C3FB9[] = _("WKーSCENEーFIELDーR115");
+const u8 gUnknown_Debug_083C3FCD[] = _("WKーSCENEーFIELDーR116");
+const u8 gUnknown_Debug_083C3FE1[] = _("WKーSCENEーFIELDーR117");
+const u8 gUnknown_Debug_083C3FF5[] = _("WKーSCENEーFIELDーR118");
+
+const u8 gUnknown_Debug_083C4009[] = _("WKーSCENEーFIELDーR119");
+const u8 gUnknown_Debug_083C401D[] = _("WKーSCENEーFIELDーR120");
+const u8 gUnknown_Debug_083C4031[] = _("WKーSCENEーFIELDーR121");
+const u8 gUnknown_Debug_083C4045[] = _("WKーSCENEーFIELDーR122");
+const u8 gUnknown_Debug_083C4059[] = _("WKーSCENEーFIELDーR123");
+const u8 gUnknown_Debug_083C406D[] = _("WKーSCENEーFIELDーR124");
+const u8 gUnknown_Debug_083C4081[] = _("WKーSCENEーFIELDーR125");
+const u8 gUnknown_Debug_083C4095[] = _("WKーSCENEーFIELDーR126");
+const u8 gUnknown_Debug_083C40A9[] = _("WKーSCENEーFIELDーR127");
+
+const u8 gUnknown_Debug_083C40BD[] = _("WKーSCENEーFIELDーR128");
+const u8 gUnknown_Debug_083C40D1[] = _("WKーSCENEーFIELDーR129");
+const u8 gUnknown_Debug_083C40E5[] = _("WKーSCENEーFIELDーR130");
+const u8 gUnknown_Debug_083C40F9[] = _("WKーSCENEーFIELDーR131");
+const u8 gUnknown_Debug_083C410D[] = _("WKーSCENEーFIELDーR132");
+const u8 gUnknown_Debug_083C4121[] = _("WKーSCENEーFIELDーR133");
+const u8 gUnknown_Debug_083C4135[] = _("WKーSCENEーFIELDーR134");
+
+const u8 gUnknown_Debug_083C4149[] = _("WKーSCENEーT101ーR0101");
+const u8 gUnknown_Debug_083C415D[] = _("WKーSCENEーT101ーR0102");
+const u8 gUnknown_Debug_083C4171[] = _("WKーSCENEーT101ーR0301");
+const u8 gUnknown_Debug_083C4185[] = _("WKーSCENEーT101ーR0201");
+const u8 gUnknown_Debug_083C4199[] = _("WKーSCENEーT101ーR0202");
+const u8 gUnknown_Debug_083C41AD[] = _("WKーSCENEーT107ーR0201");
+
+const u8 gUnknown_Debug_083C41C1[] = _("WKーSCENEーC101ーR0201");
+const u8 gUnknown_Debug_083C41D5[] = _("WKーSCENEーC104ーR0103");
+const u8 gUnknown_Debug_083C41E9[] = _("WKーSCENEーC103ーR0101");
+const u8 gUnknown_Debug_083C41FD[] = _("WKーSCENEーC106ーR0202");
+const u8 gUnknown_Debug_083C4211[] = _("WKーSCENEーC106ーR0401");
+const u8 gUnknown_Debug_083C4225[] = _("WKーSCENEーC102ーR0601");
+const u8 gUnknown_Debug_083C4239[] = _("WKーSCENEーC102ーR0501");
+const u8 gUnknown_Debug_083C424D[] = _("WKーSCENEーC104ーR0102");
+const u8 gUnknown_Debug_083C4261[] = _("WKーSCENEーC107ーR0501");
+
+const u8 gUnknown_Debug_083C4275[] = _("WKーSCENEーCAVEーD0601");
+const u8 gUnknown_Debug_083C4289[] = _("WKーSCENEーCAVEーD0201");
+const u8 gUnknown_Debug_083C429D[] = _("WKーSCENEーCAVEーD1206");
+const u8 gUnknown_Debug_083C42B1[] = _("WKーSCENEーCAVEーD1111");
+const u8 gUnknown_Debug_083C42C5[] = _("WKーSCENEーCAVEーD0701");
+const u8 gUnknown_Debug_083C42D9[] = _("WKーSCENEーCAVEーD0808");
+const u8 gUnknown_Debug_083C42ED[] = _("WKーSCENEーCAVEーD1602");
+const u8 gUnknown_Debug_083C4301[] = _("WKーSCENEーCAVEーD0101");
+const u8 gUnknown_Debug_083C4315[] = _("WKーSCENEーCAVEーD1301");
+
+const struct MenuAction gUnknown_Debug_083C432C[] = {
+    {gUnknown_Debug_083C3D50, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3D64, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3D78, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3D8C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3DA0, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3DAE, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3DC2, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3DD6, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C436C[] = {
+    {gUnknown_Debug_083C3DED, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E01, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E15, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E29, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E3D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E51, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E65, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E79, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3E8D, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C43B4[] = {
+    {gUnknown_Debug_083C3EA1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3EB5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3EC9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3EDD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3EF1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F05, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F19, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F2D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F41, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C43FC[] = {
+    {gUnknown_Debug_083C3F55, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F69, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F7D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3F91, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3FA5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3FB9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3FCD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3FE1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C3FF5, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C4444[] = {
+    {gUnknown_Debug_083C4009, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C401D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4031, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4045, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4059, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C406D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4081, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4095, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C40A9, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C448C[] = {
+    {gUnknown_Debug_083C40BD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C40D1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C40E5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C40F9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C410D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4121, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4135, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C44C4[] = {
+    {gUnknown_Debug_083C4149, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C415D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4171, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4185, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4199, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_83C44EC[] = {
+    {gUnknown_Debug_083C41C1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C41D5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C41E9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C41FD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4211, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4225, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4239, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C424D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4261, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C4534[] = {
+    {gUnknown_Debug_083C4275, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4289, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C429D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C42B1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C42C5, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C42D9, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C42ED, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4301, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4315, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C457C[] = {8, 9, 9, 9, 9, 7, 6, 9, 9};
+
+const u16 gUnknown_Debug_083C4586[][9] = {
+    {0x4050, 0x4051, 0x4052, 0x4053, 0x4054, 0x4055, 0x4056, 0x40C7, 0x0000},
+    {0x4057, 0x4058, 0x4059, 0x405A, 0x405B, 0x405C, 0x405D, 0x405E, 0x405F},
+    {0x4060, 0x4061, 0x4062, 0x4063, 0x4064, 0x4065, 0x4066, 0x4067, 0x4068},
+    {0x4069, 0x406A, 0x406B, 0x406C, 0x406D, 0x406E, 0x406F, 0x4070, 0x4071},
+    {0x4072, 0x4073, 0x4074, 0x4075, 0x4076, 0x4077, 0x4078, 0x4079, 0x407A},
+    {0x407B, 0x407C, 0x407D, 0x407E, 0x407F, 0x4080, 0x4081, 0x0000, 0x0000},
+    {0x4082, 0x4083, 0x4084, 0x408C, 0x408D, 0x40C2, 0x0000, 0x0000, 0x0000},
+    {0x4085, 0x408F, 0x4093, 0x4094, 0x4095, 0x40A0, 0x40AA, 0x40C4, 0x40C6},
+    {0x4098, 0x409A, 0x409B, 0x40A2, 0x40A8, 0x40B9, 0x40BA, 0x40BF, 0x40C3}
+};
+
+const u8 gUnknown_Debug_083C4628[] = _("LOCALWORK0ー8");
+const u8 gUnknown_Debug_083C4635[] = _("LOCALWORK9ー15");
+
+const struct MenuAction gUnknown_Debug_083C4644[] = {
+    {gUnknown_Debug_083C4628, debug_sub_808E754},
+    {gUnknown_Debug_083C4635, debug_sub_808E7AC}
+};
+
+const u8 gUnknown_Debug_083C4654[] = _("LOCALWORK0");
+const u8 gUnknown_Debug_083C465F[] = _("LOCALWORK1");
+const u8 gUnknown_Debug_083C466A[] = _("LOCALWORK2");
+const u8 gUnknown_Debug_083C4675[] = _("LOCALWORK3");
+const u8 gUnknown_Debug_083C4680[] = _("LOCALWORK4");
+const u8 gUnknown_Debug_083C468B[] = _("LOCALWORK5");
+const u8 gUnknown_Debug_083C4696[] = _("LOCALWORK6");
+const u8 gUnknown_Debug_083C46A1[] = _("LOCALWORK7");
+const u8 gUnknown_Debug_083C46AC[] = _("LOCALWORK8");
+
+const u8 gUnknown_Debug_083C46B7[] = _("LOCALWORK9");
+const u8 gUnknown_Debug_083C46C2[] = _("LOCALWORK10");
+const u8 gUnknown_Debug_083C46CE[] = _("LOCALWORK11");
+const u8 gUnknown_Debug_083C46DA[] = _("LOCALWORK12");
+const u8 gUnknown_Debug_083C46E6[] = _("LOCALWORK13");
+const u8 gUnknown_Debug_083C46F2[] = _("LOCALWORK14");
+const u8 gUnknown_Debug_083C46FE[] = _("LOCALWORK15");
+
+const struct MenuAction gUnknown_Debug_083C470C[] = {
+    {gUnknown_Debug_083C4654, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C465F, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C466A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4675, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4680, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C468B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4696, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46A1, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46AC, TomomichiDebugMenu_Config}
+};
+
+const struct MenuAction gUnknown_Debug_083C4754C[] = {
+    {gUnknown_Debug_083C46B7, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46C2, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46CE, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46DA, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46E6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46F2, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C46FE, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C478C[] = {9, 7};
+
+const u16 gUnknown_Debug_083C478E[][9] = {
+    {0x4000, 0x4001, 0x4002, 0x4003, 0x4004, 0x4005, 0x4006, 0x4007, 0x4008},
+    {0x4009, 0x400A, 0x400B, 0x400C, 0x400D, 0x400E, 0x400F}
+};
+
+const u8 gUnknown_Debug_083C47B2[] = _("Level");
+const u8 gUnknown_Debug_083C47B8[] = _("Scene1");
+const u8 gUnknown_Debug_083C47BF[] = _("Scene2");
+const u8 gUnknown_Debug_083C47C6[] = _("Scene3");
+const u8 gUnknown_Debug_083C47CD[] = _("Scene4");
+const u8 gUnknown_Debug_083C47D4[] = _("Scene5");
+const u8 gUnknown_Debug_083C47DB[] = _("Scene6");
+const u8 gUnknown_Debug_083C47E2[] = _("Scene7");
+const u8 gUnknown_Debug_083C47E9[] = _("Scene8");
+
+const struct MenuAction gUnknown_Debug_083C47F0[] = {
+    {gUnknown_Debug_083C47B8, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47BF, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47C6, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47CD, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47D4, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47DB, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47E2, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C47E9, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C4830[] = _("Trick　Master");
+const u8 gUnknown_Debug_083C483D[] = _("Hidden　MASTER");
+const u8 gUnknown_Debug_083C484B[] = _("Inside　the　HOUSE");
+const u8 gUnknown_Debug_083C485C[] = _("Pass　a　reward");
+const u8 gUnknown_Debug_083C486A[] = _("Rig　a　trick");
+const u8 gUnknown_Debug_083C4876[] = _("MASTER　is　gone");
+
+const struct MenuAction gUnknown_Debug_083C4888[] = {
+    {gUnknown_Debug_083C483D, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C484B, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C485C, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C486A, TomomichiDebugMenu_Config},
+    {gUnknown_Debug_083C4876, TomomichiDebugMenu_Config}
+};
+
+const u8 gUnknown_Debug_083C48B0[] = _("PMNICKNAME");
+const u8 gUnknown_Debug_083C48BB[] = _("BREEDER");
 
 bool8 InitTomomichiDebugWindow(void)
 {
