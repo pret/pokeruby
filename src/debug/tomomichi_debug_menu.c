@@ -163,6 +163,8 @@ bool8 debug_sub_808CE10(void);
 void debug_sub_808CC10(u8);
 void debug_sub_808CE5C(u8, u8);
 void debug_sub_808CEAC(u8);
+bool8 debug_sub_808CF60(void);
+bool8 debug_sub_808D2BC(void);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -2778,6 +2780,130 @@ void debug_sub_808CEAC(u8 whichMenu)
     {
         debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1C38[whichMenu][i]) ? TRUE : FALSE);
     }
+}
+
+bool8 debug_sub_808CF10(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1330) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1330), gUnknown_Debug_083C1330);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1330), 0, 27);
+    gMenuCallback = debug_sub_808CF60;
+    return FALSE;
+}
+
+bool8 debug_sub_808CF60(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C1330[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808CFA4(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C13D8) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C13D8), gUnknown_Debug_083C13D8);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C13D8), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808CFFC(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1465) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1465), gUnknown_Debug_083C1465);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1465), 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D054(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1503) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1503), gUnknown_Debug_083C1503);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1503), 0, 28);
+    gDebug_0300070F = 2;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D0AC(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C158A) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C158A), gUnknown_Debug_083C158A);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C158A), 0, 28);
+    gDebug_0300070F = 3;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D104(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1647) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1647), gUnknown_Debug_083C1647);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1647), 0, 28);
+    gDebug_0300070F = 4;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D15C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1712) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1712), gUnknown_Debug_083C1712);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1712), 0, 28);
+    gDebug_0300070F = 5;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D1B4(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C17F8) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C17F8), gUnknown_Debug_083C17F8);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C17F8), 0, 28);
+    gDebug_0300070F = 6;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D20C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 7 + 1);
+    Menu_PrintItems(2, 1, 7, gUnknown_Debug_083C18B8);
+    InitMenu(0, 1, 1, 7, 0, 28);
+    gDebug_0300070F = 7;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
+}
+
+bool8 debug_sub_808D264(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 5 + 1);
+    Menu_PrintItems(2, 1, 5, gDebug_0x83C1974);
+    InitMenu(0, 1, 1, 5, 0, 28);
+    gDebug_0300070F = 8;
+    gMenuCallback = debug_sub_808D2BC;
+    return FALSE;
 }
 
 #endif
