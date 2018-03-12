@@ -171,6 +171,10 @@ bool8 debug_sub_808D40C(void);
 bool8 debug_sub_808D500(void);
 void debug_sub_808D54C(u8, u8);
 void debug_sub_808D59C(u8);
+bool8 debug_sub_808D650(void);
+bool8 debug_sub_808D744(void);
+void debug_sub_808D790(u8, u8);
+void debug_sub_808D7E0(u8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -3029,6 +3033,91 @@ void debug_sub_808D59C(u8 whichMenu)
     for (i = 0; i < gUnknown_Debug_083C1194[whichMenu]; i++)
     {
         debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1196[whichMenu][i]) ? TRUE : FALSE);
+    }
+}
+
+bool8 debug_sub_808D600(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C11CC) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C11CC), gUnknown_Debug_083C11CC);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C11CC), 0, 27);
+    gMenuCallback = debug_sub_808D650;
+    return FALSE;
+}
+
+bool8 debug_sub_808D650(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C11CC[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808D694(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1212) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1212), gUnknown_Debug_083C1212);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1212), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808D744;
+    return FALSE;
+}
+
+bool8 debug_sub_808D6EC(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 7 + 1);
+    Menu_PrintItems(2, 1, 7, gUnknown_Debug_083C1288);
+    InitMenu(0, 1, 1, 7, 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808D744;
+    return FALSE;
+}
+
+bool8 debug_sub_808D744(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808D790(gDebug_0300070F, cursorPos);
+    debug_sub_808D7E0(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808D790(u8 whichMenu, u8 cursorPos)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        if (!FlagGet(gUnknown_Debug_083C12D2[whichMenu][cursorPos]))
+            FlagSet(gUnknown_Debug_083C12D2[whichMenu][cursorPos]);
+        else
+            FlagClear(gUnknown_Debug_083C12D2[whichMenu][cursorPos]);
+    }
+}
+
+void debug_sub_808D7E0(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C12D0[whichMenu]; i++)
+    {
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C12D2[whichMenu][i]) ? TRUE : FALSE);
     }
 }
 
