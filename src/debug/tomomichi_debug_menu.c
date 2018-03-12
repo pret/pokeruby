@@ -157,6 +157,12 @@ bool8 debug_sub_808DE08(void);
 bool8 debug_sub_808DE60(void);
 bool8 debug_sub_808E754(void);
 bool8 debug_sub_808E7AC(void);
+void debug_sub_808CBC0(u8, u8);
+bool8 debug_sub_808CCC4(void);
+bool8 debug_sub_808CE10(void);
+void debug_sub_808CC10(u8);
+void debug_sub_808CE5C(u8, u8);
+void debug_sub_808CEAC(u8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -2636,6 +2642,142 @@ bool8 debug_sub_808CB1C(void)
     gDebug_0300070F = 8;
     gMenuCallback = debug_sub_808CB74;
     return FALSE;
+}
+
+bool8 debug_sub_808CB74(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808CBC0(gDebug_0300070F, cursorPos);
+    debug_sub_808CC10(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808CBC0(u8 whichMenu, u8 cursorPos)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        u16 flag = gUnknown_Debug_083C271A[whichMenu][cursorPos];
+        if (!FlagGet(flag))
+            FlagSet(flag);
+        else
+            FlagClear(flag);
+    }
+}
+
+void debug_sub_808CC10(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C2710[whichMenu]; i++)
+    {
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C271A[whichMenu][i]) ? TRUE : FALSE);
+    }
+}
+
+bool8 debug_sub_808CC74(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1ADC) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1ADC), gUnknown_Debug_083C1ADC);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1ADC), 0, 27);
+    gMenuCallback = debug_sub_808CCC4;
+    return FALSE;
+}
+
+bool8 debug_sub_808CCC4(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C1ADC[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808CD08(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1B7C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1B7C), gUnknown_Debug_083C1B7C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1B7C), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808CE10;
+    return FALSE;
+}
+
+bool8 debug_sub_808CD60(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1BF0) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1BF0), gUnknown_Debug_083C1BF0);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1BF0), 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808CE10;
+    return FALSE;
+}
+
+bool8 debug_sub_808CDB8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1C2C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1C2C), gUnknown_Debug_083C1C2C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1C2C), 0, 28);
+    gDebug_0300070F = 2;
+    gMenuCallback = debug_sub_808CE10;
+    return FALSE;
+}
+
+bool8 debug_sub_808CE10(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808CE5C(gDebug_0300070F, cursorPos);
+    debug_sub_808CEAC(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808CE5C(u8 whichMenu, u8 cursorPos)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        u16 flag = gUnknown_Debug_083C1C38[whichMenu][cursorPos];
+        if (!FlagGet(flag))
+            FlagSet(flag);
+        else
+            FlagClear(flag);
+    }
+}
+
+void debug_sub_808CEAC(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C1C34[whichMenu]; i++)
+    {
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1C38[whichMenu][i]) ? TRUE : FALSE);
+    }
 }
 
 #endif
