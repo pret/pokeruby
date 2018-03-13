@@ -175,6 +175,18 @@ bool8 debug_sub_808D650(void);
 bool8 debug_sub_808D744(void);
 void debug_sub_808D790(u8, u8);
 void debug_sub_808D7E0(u8);
+bool8 debug_sub_808D894(void);
+bool8 debug_sub_808D930(void);
+void debug_sub_808D97C(u8, u8);
+void debug_sub_808D9CC(u8);
+bool8 debug_sub_808DA80(void);
+void debug_sub_808DAD4(void);
+void debug_sub_808DABC(void);
+void debug_sub_808F31C(u8, u8, u16);
+bool8 debug_sub_808DB5C(void);
+bool8 debug_sub_808DEB8(void);
+void debug_sub_808DF64(u8, u8);
+void debug_sub_808DF04(u8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -1308,11 +1320,11 @@ const struct MenuAction gUnknown_Debug_083C351C[] = {
 const u8 gUnknown_Debug_083C3544[] = {3, 2, 6, 9, 5};
 
 const u16 gUnknown_Debug_083C354A[][9] = {
-    {0x4027, 0x4028, 0x4029},
-    {0x4047, 0x404F},
-    {0x4021, 0x4022, 0x4048, 0x404A, 0x402A, 0x402B},
-    {0x4020, 0x4023, 0x4024, 0x4025, 0x4040, 0x4041, 0x4042, 0x4044, 0x4045},
-    {0x4046, 0x4049, 0x404B, 0x404C, 0x4026}
+    {VAR_CYCLING_ROAD_RECORD_COLLISIONS, VAR_CYCLING_ROAD_RECORD_TIME_L, VAR_CYCLING_ROAD_RECORD_TIME_H},
+    {VAR_SHROOMISH_SIZE_RECORD, VAR_BARBOACH_SIZE_RECORD},
+    {VAR_REPEL_STEP_COUNT, VAR_ICE_STEP_COUNT, VAR_ASH_GATHER_COUNT, VAR_CRUISE_STEP_COUNT, VAR_HAPPINESS_STEP_COUNTER, VAR_POISON_STEP_COUNTER},
+    {VAR_RECYCLE_GOODS, VAR_STARTER_MON, VAR_MIRAGE_RND_H, VAR_MIRAGE_RND_L, VAR_DAYS, VAR_FANCLUB_UNKNOWN_1, VAR_FANCLUB_UNKNOWN_2, VAR_TRICK_HOUSE_ROOMS_COMPLETED, VAR_LOTTERY_PRIZE},
+    {VAR_NATIONAL_DEX, VAR_BIRCH_STATE, VAR_LOTTERY_RND_L, VAR_LOTTERY_RND_H, VAR_SECRET_BASE_MAP}
 };
 
 const u8 gUnknown_Debug_083C35A4[] = _("OBJCHRWORK0ー8");
@@ -1366,8 +1378,8 @@ const struct MenuAction gUnknown_Debug_083C36E4[] = {
 const u8 gUnknown_Debug_083C371C[] = {9, 7};
 
 const u16 gUnknown_Debug_083C371E[][9] = {
-    {0x4010, 0x4011, 0x4012, 0x4013, 0x4014, 0x4015, 0x4016, 0x4017, 0x4018},
-    {0x4019, 0x401A, 0x401B, 0x401C, 0x401D, 0x401E, 0x401F}
+    {VAR_OBJ_GFX_ID_0, VAR_OBJ_GFX_ID_1, VAR_OBJ_GFX_ID_2, VAR_OBJ_GFX_ID_3, VAR_OBJ_GFX_ID_4, VAR_OBJ_GFX_ID_5, VAR_OBJ_GFX_ID_6, VAR_OBJ_GFX_ID_7, VAR_OBJ_GFX_ID_8},
+    {VAR_OBJ_GFX_ID_9, VAR_OBJ_GFX_ID_A, VAR_OBJ_GFX_ID_B, VAR_OBJ_GFX_ID_C, VAR_OBJ_GFX_ID_D, VAR_OBJ_GFX_ID_E, VAR_OBJ_GFX_ID_F}
 };
 
 const u8 gUnknown_Debug_083C3742[] = _("SP");
@@ -1520,12 +1532,12 @@ const struct MenuAction gUnknown_Debug_83C3C00[] = {
 const u8 gUnknown_Debug_083C3C48[] = {6, 5, 9, 2, 9, 6};
 
 const u16 gUnknown_Debug_83C3C4E[][9] = {
-    {0x4086, 0x4087, 0x4088, 0x408A, 0x4092, 0x40B4},
-    {0x40A6, 0x40C1, 0x40B5, 0x40A7, 0x40A5},
-    {0x40AB, 0x40AC, 0x40AD, 0x40AE, 0x40AF, 0x40B0, 0x40B1, 0x40B2, 0x40B6},
-    {0x4090, 0x40BE},
-    {0x4089, 0x408E, 0x4096, 0x4097, 0x4099, 0x409C, 0x40A3, 0x40A4, 0x40A9},
-    {0x40B3, 0x40B7, 0x40BB, 0x40BC, 0x40C0, 0x40C5}
+    {VAR_LINK_CONTEST_ROOM_STATE, VAR_CABLE_CLUB_STATE, VAR_CONTEST_LOCATION, VAR_CONTEST_PRIZE_PICKUP, VAR_LITTLEROOT_INTRO_STATE, VAR_PORTHOLE_STATE},
+    {VAR_TRICK_HOUSE_ENTRANCE_STATE_2, VAR_TRICK_HOUSE_PRIZE_PICKUP, VAR_TRICK_HOUSE_STATE, VAR_TRICK_HOUSE_ENTRANCE_STATE_3, VAR_TRICK_HOUSE_ENTRANCE_STATE},
+    {VAR_TRICK_HOUSE_PUZZLE_1_STATE, VAR_TRICK_HOUSE_PUZZLE_2_STATE, VAR_TRICK_HOUSE_PUZZLE_3_STATE, VAR_TRICK_HOUSE_PUZZLE_4_STATE, VAR_TRICK_HOUSE_PUZZLE_5_STATE, VAR_TRICK_HOUSE_PUZZLE_6_STATE, VAR_TRICK_HOUSE_PUZZLE_7_STATE, VAR_TRICK_HOUSE_PUZZLE_8_STATE, VAR_TRICK_HOUSE_PUZZLE_7_STATE_2},
+    {VAR_BRINEY_HOUSE_STATE, VAR_GLASS_WORKSHOP_STATE},
+    {VAR_0x4089, VAR_BOARD_BRINEY_BOAT_ROUTE104_STATE, VAR_BRINEY_LOCATION, VAR_0x4097, VAR_LILYCOVE_CONTEST_LOBBY_STATE, VAR_ELITE_4_STATE, VAR_CABLE_CAR_STATION_STATE, VAR_SAFARI_ZONE_STATE, VAR_CYCLING_CHALLENGE_STATE},
+    {VAR_WEATHER_INSTITUTE_STATE, VAR_SLATEPORT_FAN_CLUB_STATE, 0x40BB, VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, VAR_GAME_CORNER_STATE, VAR_WHICH_FOSSIL_REVIVED}
 };
 
 const u8 gUnknown_Debug_083C3CBA[] = _("タウン");
@@ -1738,15 +1750,15 @@ const struct MenuAction gUnknown_Debug_083C4534[] = {
 const u8 gUnknown_Debug_083C457C[] = {8, 9, 9, 9, 9, 7, 6, 9, 9};
 
 const u16 gUnknown_Debug_083C4586[][9] = {
-    {0x4050, 0x4051, 0x4052, 0x4053, 0x4054, 0x4055, 0x4056, 0x40C7, 0x0000},
-    {0x4057, 0x4058, 0x4059, 0x405A, 0x405B, 0x405C, 0x405D, 0x405E, 0x405F},
-    {0x4060, 0x4061, 0x4062, 0x4063, 0x4064, 0x4065, 0x4066, 0x4067, 0x4068},
-    {0x4069, 0x406A, 0x406B, 0x406C, 0x406D, 0x406E, 0x406F, 0x4070, 0x4071},
-    {0x4072, 0x4073, 0x4074, 0x4075, 0x4076, 0x4077, 0x4078, 0x4079, 0x407A},
-    {0x407B, 0x407C, 0x407D, 0x407E, 0x407F, 0x4080, 0x4081, 0x0000, 0x0000},
-    {0x4082, 0x4083, 0x4084, 0x408C, 0x408D, 0x40C2, 0x0000, 0x0000, 0x0000},
-    {0x4085, 0x408F, 0x4093, 0x4094, 0x4095, 0x40A0, 0x40AA, 0x40C4, 0x40C6},
-    {0x4098, 0x409A, 0x409B, 0x40A2, 0x40A8, 0x40B9, 0x40BA, 0x40BF, 0x40C3}
+    {VAR_LITTLEROOT_STATE, VAR_ROUTE102_ACCESSIBLE, 0x4052, VAR_LAVARIDGE_RIVAL_STATE, VAR_CURRENT_SECRET_BASE, 0x4055, 0x4056, VAR_OLDALE_STATE},
+    {VAR_PETALBURG_STATE, VAR_SLATEPORT_STATE, 0x4059, VAR_RUSTBORO_STATE, 0x405B, 0x405C, 0x405D, VAR_SOOTOPOLIS_STATE, 0x405F},
+    {VAR_ROUTE101_STATE, 0x4061, VAR_ROUTE103_STATE, 0x4063, 0x4064, 0x4065, 0x4066, 0x4067, 0x4068},
+    {VAR_ROUTE110_STATE, 0x406A, 0x406B, 0x406C, 0x406D, 0x406E, VAR_ROUTE116_STATE, 0x4070, VAR_ROUTE118_STATE},
+    {VAR_ROUTE119_STATE, 0x4073, VAR_ROUTE121_STATE, 0x4075, 0x4076, 0x4077, 0x4078, 0x4079, 0x407A},
+    {VAR_ROUTE128_STATE, 0x407C, 0x407D, 0x407E, 0x407F, 0x4080, 0x4081},
+    {VAR_LITTLEROOT_HOUSES_STATE, 0x4083, VAR_BIRCH_LAB_STATE, VAR_LITTLEROOT_HOUSES_STATE_2, VAR_LITTLEROOT_RIVAL_STATE, VAR_PACIFIDLOG_TM_RECEIVED_DAY},
+    {VAR_PETALBURG_GYM_STATE, VAR_DEVON_CORP_3F_STATE, VAR_MAUVILLE_GYM_STATE, VAR_LILYCOVE_MUSEUM_2F_STATE, VAR_LILYCOVE_FAN_CLUB_STATE, VAR_SLATEPORT_HARBOR_STATE, VAR_SLATEPORT_MUSEUM_1F_STATE, VAR_FOSSIL_RESURRECTION_STATE, VAR_STEVENS_HOUSE_STATE},
+    {VAR_PETALBURG_WOODS_STATE, VAR_RUSTURF_TUNNEL_STATE, VAR_CAVE_OF_ORIGIN_B4F_STATE, VAR_SEAFLOOR_CAVERN_STATE, 0x40A8, VAR_MT_PYRE_STATE, VAR_NEW_MAUVILLE_STATE, VAR_METEOR_FALLS_STATE, VAR_VICTORY_ROAD_1F_STATE}
 };
 
 const u8 gUnknown_Debug_083C4628[] = _("LOCALWORK0ー8");
@@ -1800,8 +1812,8 @@ const struct MenuAction gUnknown_Debug_083C4754C[] = {
 const u8 gUnknown_Debug_083C478C[] = {9, 7};
 
 const u16 gUnknown_Debug_083C478E[][9] = {
-    {0x4000, 0x4001, 0x4002, 0x4003, 0x4004, 0x4005, 0x4006, 0x4007, 0x4008},
-    {0x4009, 0x400A, 0x400B, 0x400C, 0x400D, 0x400E, 0x400F}
+    {VAR_TEMP_0, VAR_TEMP_1, VAR_TEMP_2, VAR_TEMP_3, VAR_TEMP_4, VAR_TEMP_5, VAR_TEMP_6, VAR_TEMP_7, VAR_TEMP_8},
+    {VAR_TEMP_9, VAR_TEMP_A, VAR_TEMP_B, VAR_TEMP_C, VAR_TEMP_D, VAR_TEMP_E, VAR_TEMP_F}
 };
 
 const u8 gUnknown_Debug_083C47B2[] = _("Level");
@@ -2527,7 +2539,7 @@ void debug_sub_808C764(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C31DC[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_83C31E6[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_83C31E6[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -2689,7 +2701,7 @@ void debug_sub_808CC10(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C2710[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C271A[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C271A[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -2785,7 +2797,7 @@ void debug_sub_808CEAC(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C1C34[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1C38[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1C38[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -2947,7 +2959,7 @@ void debug_sub_808D358(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C19BC[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C19C6[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C19C6[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -3032,7 +3044,7 @@ void debug_sub_808D59C(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C1194[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1196[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1196[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -3117,8 +3129,295 @@ void debug_sub_808D7E0(u8 whichMenu)
 
     for (i = 0; i < gUnknown_Debug_083C12D0[whichMenu]; i++)
     {
-        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C12D2[whichMenu][i]) ? TRUE : FALSE);
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C12D2[whichMenu][i]) ? 1 : 0);
     }
+}
+
+bool8 debug_sub_808D844(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1A78) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1A78), gUnknown_Debug_083C1A78);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1A78), 0, 27);
+    gMenuCallback = debug_sub_808D894;
+    return FALSE;
+}
+
+bool8 debug_sub_808D894(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C1A78[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808D8D8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C1A9C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C1A9C), gUnknown_Debug_083C1A9C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C1A9C), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808D930;
+    return FALSE;
+}
+
+bool8 debug_sub_808D930(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808D97C(gDebug_0300070F, cursorPos);
+    debug_sub_808D9CC(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808D97C(u8 whichMenu, u8 cursorPos)
+{
+    if (gMain.newKeys & R_BUTTON)
+    {
+        if (!FlagGet(gUnknown_Debug_083C1AAE[whichMenu][cursorPos]))
+            FlagSet(gUnknown_Debug_083C1AAE[whichMenu][cursorPos]);
+        else
+            FlagClear(gUnknown_Debug_083C1AAE[whichMenu][cursorPos]);
+    }
+}
+
+void debug_sub_808D9CC(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C1AAC[whichMenu]; i++)
+    {
+        debug_sub_808F2E0(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1AAE[whichMenu][i]) ? 1 : 0);
+    }
+}
+
+bool8 debug_sub_808DA30(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C103A) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C103A), gUnknown_Debug_083C103A);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C103A), 0, 28);
+    gMenuCallback = debug_sub_808DA80;
+    return FALSE;
+}
+
+bool8 debug_sub_808DA80(void)
+{
+    s8 input = Menu_ProcessInput();
+    /*s8 cursorPos = */Menu_GetCursorPos();
+
+    debug_sub_808DAD4();
+    debug_sub_808DABC();
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808DABC(void)
+{
+    debug_sub_808F31C(24, 1, gSpecialVar_Result);
+}
+
+void debug_sub_808DAD4(void)
+{
+    u16 delta;
+
+    if (gMain.newKeys & R_BUTTON)
+    {
+        delta = +1;
+    }
+    else if (gMain.newKeys & L_BUTTON)
+    {
+        delta = -1;
+    }
+    else
+        return;
+    gSpecialVar_Result += delta;
+}
+
+bool8 debug_sub_808DB0C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C3D08) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C3D08), gUnknown_Debug_083C3D08);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C3D08), 0, 23);
+    gMenuCallback = debug_sub_808DB5C;
+    return FALSE;
+}
+
+bool8 debug_sub_808DB5C(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C3D08[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808DBA0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C432C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C432C), gUnknown_Debug_083C432C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C432C), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DBF8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C436C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C436C), gUnknown_Debug_083C436C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C436C), 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DC50(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C43B4) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C43B4), gUnknown_Debug_083C43B4);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C43B4), 0, 28);
+    gDebug_0300070F = 2;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DCA8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C43FC) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C43FC), gUnknown_Debug_083C43FC);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C43FC), 0, 28);
+    gDebug_0300070F = 3;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DD00(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C4444) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C4444), gUnknown_Debug_083C4444);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C4444), 0, 28);
+    gDebug_0300070F = 4;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DD58(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C448C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C448C), gUnknown_Debug_083C448C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C448C), 0, 28);
+    gDebug_0300070F = 5;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DDB0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 6 + 1);
+    Menu_PrintItems(2, 1, 6, gUnknown_Debug_83C44C4); // overflows into the next menu
+    InitMenu(0, 1, 1, 6, 0, 28);
+    gDebug_0300070F = 6;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DE08(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_83C44EC) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_83C44EC), gUnknown_Debug_83C44EC);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_83C44EC), 0, 28);
+    gDebug_0300070F = 7;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DE60(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C4534) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C4534), gUnknown_Debug_083C4534);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C4534), 0, 28);
+    gDebug_0300070F = 8;
+    gMenuCallback = debug_sub_808DEB8;
+    return FALSE;
+}
+
+bool8 debug_sub_808DEB8(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+    
+    debug_sub_808DF64(gDebug_0300070F, cursorPos);
+    debug_sub_808DF04(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808DF04(u8 whichMenu)
+{
+    u8 i;
+    
+    for (i = 0; i < gUnknown_Debug_083C457C[whichMenu]; i++)
+    {
+        debug_sub_808F31C(24, 2 * i + 1, VarGet(gUnknown_Debug_083C4586[whichMenu][i]));
+    }
+}
+
+void debug_sub_808DF64(u8 whichMenu, u8 cursorPos)
+{
+    u16 delta;
+
+    if (gMain.newKeys & R_BUTTON)
+        delta = +1;
+    else if (gMain.newKeys & L_BUTTON)
+        delta = -1;
+    else
+        return;
+    VarSet(gUnknown_Debug_083C4586[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C4586[whichMenu][cursorPos]) + delta);
 }
 
 #endif
