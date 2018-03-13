@@ -1,6 +1,7 @@
 #if DEBUG
 #include "global.h"
 #include "palette.h"
+#include "data2.h"
 #include "event_data.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
@@ -71,7 +72,7 @@ void debug_sub_808ED9C(void);
 void debug_sub_808EE3C(void);
 void debug_sub_808EE9C(void);
 void debug_sub_808EF14(void);
-void debug_sub_808EF8C(u32 a0);
+void debug_sub_808EF8C(u8 a0);
 bool8 debug_sub_808C064(void);
 bool8 debug_sub_808C0EC(void);
 bool8 debug_sub_808C104(void);
@@ -4082,4 +4083,327 @@ void debug_sub_808EF14(void)
     }
 }
 
-#endif
+#ifdef NONMATCHING
+void debug_sub_808EF8C(u8 a0)
+{
+    u8 i;
+    u8 digit;
+    u16 species;
+
+    switch (a0)
+    {
+        case 0:
+        case 1:
+        case 2:
+            for (i = 0; i < 8; i++)
+            {
+                digit = (gDebug_03000708 >> (4 * (7 - i))) & 0xf;
+                if (digit < 10)
+                    gDebug_03000710[i] = digit + CHAR_0;
+                else
+                    gDebug_03000710[i] = digit + CHAR_A - 10;
+            }
+            gDebug_03000710[i] = EOS;
+            Menu_PrintText(gDebug_03000710, 12, 5);
+            break;
+    }
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++)
+    {
+        gDebug_03000710[i + 1] = CHAR_SPACE;
+    }
+
+    for (i = 0, species = gDebug_03000700; gSpeciesNames[species][i] != EOS && i < POKEMON_NAME_LENGTH; i++)
+    {
+        gDebug_03000710[i + 1] = gSpeciesNames[species][i];
+    }
+
+    gDebug_03000710[0] = 0xB1;
+    gDebug_03000710[POKEMON_NAME_LENGTH + 1] = 0xB2;
+    gDebug_03000710[POKEMON_NAME_LENGTH + 2] = EOS;
+    switch (a0)
+    {
+        case 0:
+        case 1:
+        case 2:
+            Menu_PrintText(gDebug_03000710, 8, 1);
+            break;
+        default:
+            Menu_PrintText(gDebug_03000710, 12, 1);
+            break;
+    }
+    gDebug_03000710[3] = EOS;
+    gDebug_03000710[0] = gDebug_03000700 / 100 + CHAR_0;
+    gDebug_03000710[1] = (gDebug_03000700 % 100) / 10 + CHAR_0;
+    gDebug_03000710[2] = gDebug_03000700 % 10 + CHAR_0;
+    Menu_PrintText(gDebug_03000710, 12, 3);
+
+    switch (a0)
+    {
+        case 0:
+            gDebug_03000710[0] = gDebug_0300070C / 100 + CHAR_0;
+            gDebug_03000710[1] = (gDebug_0300070C % 100) / 10 + CHAR_0;
+            gDebug_03000710[2] = gDebug_0300070C % 10 + CHAR_0;
+            Menu_PrintText(gDebug_03000710, 12, 7);
+            break;
+        case 1:
+            gDebug_03000710[0] = gDebug_0300070D / 100 + CHAR_0;
+            gDebug_03000710[1] = (gDebug_0300070D % 100) / 10 + CHAR_0;
+            gDebug_03000710[2] = gDebug_0300070D % 10 + CHAR_0;
+            Menu_PrintText(gDebug_03000710, 12, 7);
+            break;
+        case 2:
+            gDebug_03000710[0] = gDebug_0300070E / 100 + CHAR_0;
+            gDebug_03000710[1] = (gDebug_0300070E % 100) / 10 + CHAR_0;
+            gDebug_03000710[2] = gDebug_0300070E % 10 + CHAR_0;
+            Menu_PrintText(gDebug_03000710, 12, 7);
+            break;
+    }
+}
+#else
+__attribute__((naked)) void debug_sub_808EF8C(u8 a0)
+{
+    asm("\tpush\t{r4, r5, r6, r7, lr}\n"
+        "\tmov\tr7, r8\n"
+        "\tpush\t{r7}\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr6, r0, #0x18\n"
+        "\tcmp\tr6, #0x2\n"
+        "\tbgt\t._653\t@cond_branch\n"
+        "\tcmp\tr6, #0\n"
+        "\tblt\t._653\t@cond_branch\n"
+        "\tmov\tr3, #0x0\n"
+        "\tldr\tr0, ._656       @ gDebug_03000708\n"
+        "\tmov\tr8, r0\n"
+        "\tldr\tr4, ._656 + 4   @ gDebug_03000710\n"
+        "\tmov\tr7, #0x7\n"
+        "\tmov\tr5, #0xf\n"
+        "._658:\n"
+        "\tsub\tr0, r7, r3\n"
+        "\tlsl\tr0, r0, #0x2\n"
+        "\tmov\tr1, r8\n"
+        "\tldr\tr2, [r1]\n"
+        "\tLSR\tr2, r0\n"
+        "\tand\tr2, r2, r5\n"
+        "\tcmp\tr2, #0x9\n"
+        "\tbhi\t._654\t@cond_branch\n"
+        "\tadd\tr1, r3, r4\n"
+        "\tadd\tr0, r2, #0\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tb\t._655\n"
+        "._657:\n"
+        "\t.align\t2, 0\n"
+        "._656:\n"
+        "\t.word\tgDebug_03000708\n"
+        "\t.word\tgDebug_03000710\n"
+        "._654:\n"
+        "\tadd\tr1, r3, r4\n"
+        "\tadd\tr0, r2, #0\n"
+        "\tsub\tr0, r0, #0x4f\n"
+        "._655:\n"
+        "\tstrb\tr0, [r1]\n"
+        "\tadd\tr0, r3, #1\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr3, r0, #0x18\n"
+        "\tcmp\tr3, #0x7\n"
+        "\tbls\t._658\t@cond_branch\n"
+        "\tldr\tr0, ._666       @ gDebug_03000710\n"
+        "\tmov\tr1, #0xff\n"
+        "\tstrb\tr1, [r0, #0x8]\n"
+        "\tmov\tr1, #0xc\n"
+        "\tmov\tr2, #0x5\n"
+        "\tbl\tMenu_PrintText\n"
+        "._653:\n"
+        "\tmov\tr3, #0x0\n"
+        "\tldr\tr7, ._666       @ gDebug_03000710\n"
+        "\tldr\tr5, ._666 + 4   @ gDebug_03000700\n"
+        "\tldr\tr2, ._666 + 8   @ gSpeciesNames\n"
+        "\tmov\tr8, r2\n"
+        "\tadd\tr4, r7, #0\n"
+        "\tmov\tr2, #0x0\n"
+        "._659:\n"
+        "\tadd\tr1, r3, #1\n"
+        "\tadd\tr0, r1, r4\n"
+        "\tstrb\tr2, [r0]\n"
+        "\tlsl\tr1, r1, #0x18\n"
+        "\tlsr\tr3, r1, #0x18\n"
+        "\tcmp\tr3, #0x9\n"
+        "\tbls\t._659\t@cond_branch\n"
+        "\tmov\tr3, #0x0\n"
+        "\tldrh\tr2, [r5]\n"
+        "\tmov\tr0, #0xb\n"
+        "\tadd\tr1, r2, #0\n"
+        "\tmul\tr1, r1, r0\n"
+        "\tmov\tr2, r8\n"
+        "\tadd\tr0, r1, r2\n"
+        "\tldrb\tr0, [r0]\n"
+        "\tcmp\tr0, #0xff\n"
+        "\tbeq\t._661\t@cond_branch\n"
+        "\tldr\tr0, ._666       @ gDebug_03000710\n"
+        "\tmov\tip, r0\n"
+        "\tmov\tr5, r8\n"
+        "\tadd\tr4, r1, #0\n"
+        "._662:\n"
+        "\tadd\tr1, r3, #1\n"
+        "\tmov\tr0, ip\n"
+        "\tadd\tr2, r1, r0\n"
+        "\tadd\tr0, r3, r4\n"
+        "\tadd\tr0, r0, r5\n"
+        "\tldrb\tr0, [r0]\n"
+        "\tstrb\tr0, [r2]\n"
+        "\tlsl\tr1, r1, #0x18\n"
+        "\tlsr\tr3, r1, #0x18\n"
+        "\tadd\tr0, r3, r4\n"
+        "\tadd\tr0, r0, r5\n"
+        "\tldrb\tr0, [r0]\n"
+        "\tcmp\tr0, #0xff\n"
+        "\tbeq\t._661\t@cond_branch\n"
+        "\tcmp\tr3, #0x9\n"
+        "\tbls\t._662\t@cond_branch\n"
+        "._661:\n"
+        "\tmov\tr0, #0xb1\n"
+        "\tstrb\tr0, [r7]\n"
+        "\tmov\tr0, #0xb2\n"
+        "\tstrb\tr0, [r7, #0xb]\n"
+        "\tmov\tr0, #0xff\n"
+        "\tstrb\tr0, [r7, #0xc]\n"
+        "\tcmp\tr6, #0x2\n"
+        "\tbgt\t._664\t@cond_branch\n"
+        "\tcmp\tr6, #0\n"
+        "\tblt\t._664\t@cond_branch\n"
+        "\tadd\tr0, r7, #0\n"
+        "\tmov\tr1, #0x8\n"
+        "\tmov\tr2, #0x1\n"
+        "\tbl\tMenu_PrintText\n"
+        "\tb\t._665\n"
+        "._667:\n"
+        "\t.align\t2, 0\n"
+        "._666:\n"
+        "\t.word\tgDebug_03000710\n"
+        "\t.word\tgDebug_03000700\n"
+        "\t.word\tgSpeciesNames\n"
+        "._664:\n"
+        "\tldr\tr0, ._672       @ gDebug_03000710\n"
+        "\tmov\tr1, #0xc\n"
+        "\tmov\tr2, #0x1\n"
+        "\tbl\tMenu_PrintText\n"
+        "._665:\n"
+        "\tldr\tr5, ._672       @ gDebug_03000710\n"
+        "\tmov\tr0, #0xff\n"
+        "\tstrb\tr0, [r5, #0x3]\n"
+        "\tldr\tr4, ._672 + 4   @ gDebug_03000700\n"
+        "\tldrh\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5]\n"
+        "\tldrh\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__umodsi3\n"
+        "\tlsl\tr0, r0, #0x10\n"
+        "\tlsr\tr0, r0, #0x10\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x1]\n"
+        "\tldrh\tr0, [r4]\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__umodsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x2]\n"
+        "\tadd\tr0, r5, #0\n"
+        "\tmov\tr1, #0xc\n"
+        "\tmov\tr2, #0x3\n"
+        "\tbl\tMenu_PrintText\n"
+        "\tcmp\tr6, #0x1\n"
+        "\tbeq\t._668\t@cond_branch\n"
+        "\tcmp\tr6, #0x1\n"
+        "\tbgt\t._669\t@cond_branch\n"
+        "\tcmp\tr6, #0\n"
+        "\tbeq\t._670\t@cond_branch\n"
+        "\tb\t._679\n"
+        "._673:\n"
+        "\t.align\t2, 0\n"
+        "._672:\n"
+        "\t.word\tgDebug_03000710\n"
+        "\t.word\tgDebug_03000700\n"
+        "._669:\n"
+        "\tcmp\tr6, #0x2\n"
+        "\tbeq\t._674\t@cond_branch\n"
+        "\tb\t._679\n"
+        "._670:\n"
+        "\tldr\tr4, ._677       @ gDebug_0300070C\n"
+        "\tb\t._676\n"
+        "._678:\n"
+        "\t.align\t2, 0\n"
+        "._677:\n"
+        "\t.word\tgDebug_0300070C\n"
+        "._668:\n"
+        "\tldr\tr4, ._680       @ gDebug_0300070D\n"
+        "._676:\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5]\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__umodsi3\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr0, r0, #0x18\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x1]\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__umodsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x2]\n"
+        "\tadd\tr0, r5, #0\n"
+        "\tmov\tr1, #0xc\n"
+        "\tmov\tr2, #0x7\n"
+        "\tbl\tMenu_PrintText\n"
+        "\tb\t._679\n"
+        "._681:\n"
+        "\t.align\t2, 0\n"
+        "._680:\n"
+        "\t.word\tgDebug_0300070D\n"
+        "._674:\n"
+        "\tldr\tr4, ._682       @ gDebug_0300070E\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5]\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0x64\n"
+        "\tbl\t__umodsi3\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr0, r0, #0x18\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__udivsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x1]\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tmov\tr1, #0xa\n"
+        "\tbl\t__umodsi3\n"
+        "\tadd\tr0, r0, #0xa1\n"
+        "\tstrb\tr0, [r5, #0x2]\n"
+        "\tadd\tr0, r5, #0\n"
+        "\tmov\tr1, #0xc\n"
+        "\tmov\tr2, #0x7\n"
+        "\tbl\tMenu_PrintText\n"
+        "._679:\n"
+        "\tpop\t{r3}\n"
+        "\tmov\tr8, r3\n"
+        "\tpop\t{r4, r5, r6, r7}\n"
+        "\tpop\t{r0}\n"
+        "\tbx\tr0\n"
+        "._683:\n"
+        "\t.align\t2, 0\n"
+        "._682:\n"
+        "\t.word\tgDebug_0300070E");
+}
+#endif // NONMATCHING
+
+#endif // DEBUG
