@@ -40,7 +40,7 @@ struct Unk2015E00
 
 struct ContestEntry
 {
-    /*0x00*/ u8 var0;
+    /*0x00*/ u32 var0;
     /*0x04*/ u32 var4;
     /*0x08*/ u16 var8;
     /*0x0A*/ u8 contestType;

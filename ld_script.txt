@@ -116,7 +116,6 @@ SECTIONS {
         src/battle/battle_setup.o(.text);
         src/engine/cable_club.o(.text);
         src/debug/tomomichi_debug_menu.o(.text);
-        asm/tomomichi_debug_menu.o(.text);
         src/debug/nohara_debug_menu.o(.text);
         asm/nohara_debug_menu.o(.text);
         src/debug/mori_debug_menu.o(.text);
