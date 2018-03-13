@@ -199,6 +199,10 @@ bool8 debug_sub_808E710(void);
 bool8 debug_sub_808E804(void);
 void debug_sub_808E850(u8, u8);
 void debug_sub_808E8AC(u8);
+bool8 debug_sub_808E95C(void);
+bool8 debug_sub_808EA50(void);
+void debug_sub_808EA9C(u8);
+void debug_sub_808EAFC(u8, u8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -3768,6 +3772,93 @@ void debug_sub_808E8AC(u8 whichMenu)
     {
         debug_sub_808F31C(24, 2 * i + 1, VarGet(gUnknown_Debug_083C478E[whichMenu][i]));
     }
+}
+
+bool8 debug_sub_808E90C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C35C4) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C35C4), gUnknown_Debug_083C35C4);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C35C4), 0, 23);
+    gMenuCallback = debug_sub_808E95C;
+    return FALSE;
+}
+
+bool8 debug_sub_808E95C(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C35C4[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808E9A0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C369C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C369C), gUnknown_Debug_083C369C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C369C), 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808EA50;
+    return FALSE;
+}
+
+bool8 debug_sub_808E9F8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C36E4) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C36E4), gUnknown_Debug_083C36E4);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C36E4), 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808EA50;
+    return FALSE;
+}
+
+bool8 debug_sub_808EA50(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808EAFC(gDebug_0300070F, cursorPos);
+    debug_sub_808EA9C(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808EA9C(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C371C[whichMenu]; i++)
+    {
+        debug_sub_808F31C(24, 2 * i + 1, VarGet(gUnknown_Debug_083C371E[whichMenu][i]));
+    }
+}
+
+void debug_sub_808EAFC(u8 whichMenu, u8 cursorPos)
+{
+    u16 delta;
+
+    if (gMain.newKeys & R_BUTTON)
+        delta = +1;
+    else if (gMain.newKeys & L_BUTTON)
+        delta = -1;
+    else
+        return;
+    VarSet(gUnknown_Debug_083C371E[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C371E[whichMenu][cursorPos]) + delta);
 }
 
 #endif
