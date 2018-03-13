@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "overworld.h"
 #include "script.h"
 #include "menu.h"
@@ -3945,6 +3946,140 @@ bool8 debug_sub_808ECD0(void)
 bool8 TomomichiDebugMenu_Config(void)
 {
     return FALSE;
+}
+
+void debug_sub_808ED0C(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gDebug_03000700 != SPECIES_BULBASAUR)
+            gDebug_03000700--;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gDebug_03000700 != SPECIES_CHIMECHO)
+            gDebug_03000700++;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (gDebug_03000700 >= SPECIES_BULBASAUR + 10)
+            gDebug_03000700 -= 10;
+        else
+            gDebug_03000700 = SPECIES_BULBASAUR;
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (gDebug_03000700 <= SPECIES_CHIMECHO - 10)
+            gDebug_03000700 += 10;
+        else
+            gDebug_03000700 = SPECIES_CHIMECHO;
+    }
+}
+
+void debug_sub_808ED9C(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gDebug_03000708 != 0)
+            gDebug_03000708--;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gDebug_03000708 != UINT32_MAX)
+            gDebug_03000708++;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (gDebug_03000708 >= 0x10)
+            gDebug_03000708 -= 0x10;
+        else
+            gDebug_03000708 = 0;
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (gDebug_03000708 <= UINT32_MAX - 0x10)
+            gDebug_03000708 += 0x10;
+        else
+            gDebug_03000708 = UINT32_MAX;
+    }
+    if ((gMain.newKeys & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON))
+    {
+        gDebug_03000708 = UINT32_MAX;
+    }
+}
+
+void debug_sub_808EE3C(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gDebug_0300070C != 1)
+            gDebug_0300070C--;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gDebug_0300070C != 5)
+            gDebug_0300070C++;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+        gDebug_0300070C = 1;
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+        gDebug_0300070C = 5;
+}
+
+void debug_sub_808EE9C(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gDebug_0300070D != 1)
+            gDebug_0300070D--;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gDebug_0300070D != 15)
+            gDebug_0300070D++;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (gDebug_0300070D >= 11)
+            gDebug_0300070D -= 10;
+        else
+            gDebug_0300070D = 0; // Causes underflow when pressing left on the dpad shortly thereafter.
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (gDebug_0300070D <= 5)
+            gDebug_0300070D += 10;
+        else
+            gDebug_0300070D = 15;
+    }
+}
+
+void debug_sub_808EF14(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gDebug_0300070E != 1)
+            gDebug_0300070E--;
+    }
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gDebug_0300070E != 15)
+            gDebug_0300070E++;
+    }
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (gDebug_0300070E >= 11)
+            gDebug_0300070E -= 10;
+        else
+            gDebug_0300070E = 0; // Causes underflow when pressing left on the dpad shortly thereafter.
+    }
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (gDebug_0300070E <= 5)
+            gDebug_0300070E += 10;
+        else
+            gDebug_0300070E = 15;
+    }
 }
 
 #endif
