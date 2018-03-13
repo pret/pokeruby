@@ -187,6 +187,10 @@ bool8 debug_sub_808DB5C(void);
 bool8 debug_sub_808DEB8(void);
 void debug_sub_808DF64(u8, u8);
 void debug_sub_808DF04(u8);
+bool8 debug_sub_808E010(void);
+bool8 debug_sub_808E264(void);
+void debug_sub_808E310(u8, u8);
+void debug_sub_808E2B0(u8);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -3418,6 +3422,137 @@ void debug_sub_808DF64(u8 whichMenu, u8 cursorPos)
     else
         return;
     VarSet(gUnknown_Debug_083C4586[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C4586[whichMenu][cursorPos]) + delta);
+}
+
+bool8 debug_sub_808DFC0(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C377C) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C377C), gUnknown_Debug_083C377C);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C377C), 0, 23);
+    gMenuCallback = debug_sub_808E010;
+    return FALSE;
+}
+
+bool8 debug_sub_808E010(void)
+{
+    s8 input = Menu_ProcessInput();
+
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    gMenuCallback = gUnknown_Debug_083C377C[input].func;
+    return FALSE;
+}
+
+bool8 debug_sub_808E054(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 6 + 1);
+    Menu_PrintItems(2, 1, 6, gUnknown_Debug_083C3AA0);
+    InitMenu(0, 1, 1, 6, 0, 28);
+    gDebug_0300070F = 0;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E0AC(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 5 + 1);
+    Menu_PrintItems(2, 1, 5, gUnknown_Debug_83C3AE0);
+    InitMenu(0, 1, 1, 5, 0, 28);
+    gDebug_0300070F = 1;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E104(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_83C3B28) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_83C3B28), gUnknown_Debug_83C3B28);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_83C3B28), 0, 28);
+    gDebug_0300070F = 2;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E15C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 2 + 1);
+    Menu_PrintItems(2, 1, 2, gUnknown_Debug_83C3B70);
+    InitMenu(0, 1, 1, 2, 0, 28);
+    gDebug_0300070F = 3;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E1B4(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_83C3BB8) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_83C3BB8), gUnknown_Debug_83C3BB8);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_83C3BB8), 0, 28);
+    gDebug_0300070F = 4;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E20C(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * 6 + 1);
+    Menu_PrintItems(2, 1, 6, gUnknown_Debug_83C3C00);
+    InitMenu(0, 1, 1, 6, 0, 28);
+    gDebug_0300070F = 5;
+    gMenuCallback = debug_sub_808E264;
+    return FALSE;
+}
+
+bool8 debug_sub_808E264(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    debug_sub_808E310(gDebug_0300070F, cursorPos);
+    debug_sub_808E2B0(gDebug_0300070F);
+    if (input == -2)
+        return FALSE;
+    if (input == -1)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void debug_sub_808E2B0(u8 whichMenu)
+{
+    u8 i;
+
+    for (i = 0; i < gUnknown_Debug_083C3C48[whichMenu]; i++)
+    {
+        debug_sub_808F31C(24, 2 * i + 1, VarGet(gUnknown_Debug_83C3C4E[whichMenu][i]));
+    }
+}
+
+void debug_sub_808E310(u8 whichMenu, u8 cursorPos)
+{
+    u16 delta;
+
+    if (gMain.newKeys & R_BUTTON)
+        delta = +1;
+    else if (gMain.newKeys & L_BUTTON)
+        delta = -1;
+    else
+        return;
+    VarSet(gUnknown_Debug_83C3C4E[whichMenu][cursorPos], VarGet(gUnknown_Debug_83C3C4E[whichMenu][cursorPos]) + delta);
 }
 
 #endif
