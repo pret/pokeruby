@@ -203,6 +203,9 @@ bool8 debug_sub_808E95C(void);
 bool8 debug_sub_808EA50(void);
 void debug_sub_808EA9C(u8);
 void debug_sub_808EAFC(u8, u8);
+bool8 debug_sub_808EC10(void);
+bool8 debug_sub_808EC5C(void);
+bool8 debug_sub_808ECD0(void);
 
 extern const u8 DebugScript_081C1CFE[];
 extern const u8 DebugScript_081C1D07[];
@@ -3859,6 +3862,89 @@ void debug_sub_808EAFC(u8 whichMenu, u8 cursorPos)
     else
         return;
     VarSet(gUnknown_Debug_083C371E[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C371E[whichMenu][cursorPos]) + delta);
+}
+
+bool8 debug_sub_808EB58(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 12, 2 * ARRAY_COUNT(gUnknown_Debug_083C47F0) + 3);
+    Menu_PrintText(gUnknown_Debug_083C47B2, 1, 1);
+    Menu_PrintItems(2, 3, ARRAY_COUNT(gUnknown_Debug_083C47F0), gUnknown_Debug_083C47F0);
+    InitMenu(0, 1, 3, ARRAY_COUNT(gUnknown_Debug_083C47F0), 0, 11);
+    gMenuCallback = debug_sub_808EC10;
+    return FALSE;
+}
+
+bool8 debug_sub_808EBB4(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 13, 2 * ARRAY_COUNT(gUnknown_Debug_083C4888) + 3);
+    Menu_PrintText(gUnknown_Debug_083C4830, 1, 1);
+    Menu_PrintItems(2, 3, ARRAY_COUNT(gUnknown_Debug_083C4888), gUnknown_Debug_083C4888);
+    InitMenu(0, 1, 3, ARRAY_COUNT(gUnknown_Debug_083C4888), 0, 12);
+    gMenuCallback = debug_sub_808EC5C;
+    return FALSE;
+}
+
+bool8 debug_sub_808EC10(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    if (input == -2)
+    {
+        return FALSE;
+    }
+    if (input == -1)
+    {
+        return FALSE;
+    }
+    gSaveBlock1.vars[VAR_TRICK_HOUSE_ROOMS_COMPLETED - VARS_START] = cursorPos;
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808EC5C(void)
+{
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    if (input == -2)
+    {
+        return FALSE;
+    }
+    if (input == -1)
+    {
+        return FALSE;
+    }
+    VarSet(VAR_TRICK_HOUSE_ENTRANCE_STATE_3, cursorPos);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_808ECA4(void)
+{
+    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    gMenuCallback = debug_sub_808ECD0;
+    return FALSE;
+}
+
+bool8 debug_sub_808ECD0(void)
+{
+    if (!UpdatePaletteFade())
+    {
+        CloseMenu();
+        debug_sub_808F168(2);
+        SetMainCallback2(CB2_ContestPainting);
+        gMain.savedCallback = debug_sub_808B868;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 TomomichiDebugMenu_Config(void)
+{
+    return FALSE;
 }
 
 #endif
