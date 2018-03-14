@@ -743,7 +743,7 @@ static void sub_8106F6C(u8 arg0)
     gUnknown_03005E20.var_4 = gUnknown_03005E10;
     gUnknown_03005E20.var_8 = gUnknown_03005E90;
     gUnknown_03005E20.var_18 = 0;
-    gUnknown_03005E20.var_1F = gUnknown_03005E8C->var0;
+    gUnknown_03005E20.var_1F = gUnknown_03005E8C->var0 % 256;
     gUnknown_03005E20.var_19 = 0;
     gUnknown_03005E20.var_1A = 0;
     gUnknown_03005E20.var_1B = 64;
