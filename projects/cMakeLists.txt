@@ -1,0 +1,13 @@
+# DOES NOT BUILD! Used for code inspection.
+
+cmake_minimum_required(VERSION 3.6)
+set(CMAKE_C_STANDARD 90)
+project(pokeruby.gba)
+
+add_definitions(-DENGLISH -DREVISION=0 -DRUBY)
+
+file(GLOB_RECURSE C_SOURCES ../src/*.c ../src/*.h ../include/*.h)
+file(GLOB_RECURSE ASM_SOURCES ../asm/*.s ../asm/*.inc ../constants/*.inc ../data/*.s ../data/*.inc)
+include_directories(include ../tools/agbcc/include)
+
+add_executable(pokeruby.gba ${C_SOURCES} ${ASM_SOURCES})
