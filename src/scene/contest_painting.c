@@ -333,8 +333,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
 {
     void *pal;
 
-    // Unsure what gUnknown_03005E8C->var0 is supposed to be.
-    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->var4, gUnknown_03005E8C->var0);
+    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->otId, gUnknown_03005E8C->personality);
     LZDecompressVram(pal, gUnknown_03005E90);
 
     if (arg1 == 1)
@@ -346,7 +345,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[1],
             species,
-            (u32)gUnknown_03005E8C->var0
+            (u32)gUnknown_03005E8C->personality
         );
         sub_8106B90(gUnknown_081FAF4C[1], gUnknown_03005E90, gUnknown_03005E10);
     }
@@ -359,7 +358,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[0],
             species,
-            (u32)gUnknown_03005E8C->var0
+            (u32)gUnknown_03005E8C->personality
         );
         sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
     }
@@ -743,7 +742,7 @@ static void sub_8106F6C(u8 arg0)
     gUnknown_03005E20.var_4 = gUnknown_03005E10;
     gUnknown_03005E20.var_8 = gUnknown_03005E90;
     gUnknown_03005E20.var_18 = 0;
-    gUnknown_03005E20.var_1F = gUnknown_03005E8C->var0 % 256;
+    gUnknown_03005E20.var_1F = gUnknown_03005E8C->personality % 256;
     gUnknown_03005E20.var_19 = 0;
     gUnknown_03005E20.var_1A = 0;
     gUnknown_03005E20.var_1B = 64;
@@ -779,7 +778,7 @@ static void sub_8106F6C(u8 arg0)
 static void sub_8107090(u8 arg0, u8 arg1)
 {
     sub_8106F4C();
-    sub_8106AC4(gUnknown_03005E8C->var8, 0);
+    sub_8106AC4(gUnknown_03005E8C->species, 0);
     sub_8106F6C(sub_8106EE0(arg0));
     sub_8106E98(arg0);
     sub_8106C40(arg0, arg1);

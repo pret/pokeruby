@@ -17,8 +17,8 @@
 #include "sound.h"
 
 static u16 sPicTest_Species;
-static u32 sPicTest_ContestEntryVar4;
-static u32 sPicTest_IDrndDigit;
+static u32 sPicTest_OTID;
+static u32 sPicTest_Personality;
 static u8 sPicTest_ContestType;
 static u8 sPicTest_MuseumArtTitleType;
 static u8 sPicTest_PreviewType;
@@ -31,7 +31,7 @@ static u8 sControlFlagsCursorPos;
 static u8 sControlWORKCursorPos;
 
 static bool8 ArtMusGraphics(void);
-static bool8 Config(void);
+static bool8 DummyMenuAction(void);
 static bool8 ContestGraphics(void);
 static bool8 ContestGraphics_Show(void);
 static bool8 ControlEvents(void);
@@ -40,37 +40,37 @@ static bool8 ControlWorks(void);
 static bool8 MuseumGraphics_Show(void);
 static bool8 PreviewData(void);
 static bool8 TrickHouse(void);
-static bool8 debug_sub_808B874(void);
-static bool8 debug_sub_808B8C8(void);
-static bool8 debug_sub_808BC48(void);
-static bool8 debug_sub_808BCBC(void);
+static bool8 InitDebugWindow(void);
+static bool8 TopMenu_HandleInput(void);
+static bool8 ContestGraphics_HandleInput(void);
+static bool8 ArtMusGraphics_HandleInput(void);
 static bool8 PreviewData_HandleInput(void);
-static bool8 debug_sub_808BDA4(void);
-static bool8 debug_sub_808BE2C(void);
-static bool8 debug_sub_808BEB4(void);
-static bool8 debug_sub_808BF3C(void);
-static bool8 debug_sub_808BFC4(void);
-static bool8 debug_sub_808C014(void);
-static bool8 debug_sub_808C064(void);
-static bool8 debug_sub_808C0A8(void);
-static bool8 debug_sub_808C0EC(void);
-static bool8 debug_sub_808C104(void);
-static bool8 debug_sub_808C11C(void);
-static bool8 debug_sub_808C134(void);
-static bool8 debug_sub_808C14C(void);
-static bool8 debug_sub_808C164(void);
-static bool8 debug_sub_808C17C(void);
-static bool8 debug_sub_808C194(void);
-static bool8 debug_sub_808C1AC(void);
-static bool8 debug_sub_808C1C4(void);
-static bool8 debug_sub_808C1DC(void);
-static bool8 debug_sub_808C1F4(void);
-static bool8 debug_sub_808C20C(void);
-static bool8 debug_sub_808C224(void);
-static bool8 debug_sub_808C23C(void);
+static bool8 TrickHouse_HandleInput(void);
+static bool8 ControlEvents_HandleInput(void);
+static bool8 ControlFlags_HandleInput(void);
+static bool8 ControlWorks_HandleInput(void);
+static bool8 ControlEvents_InitSubmenu1(void);
+static bool8 ControlEvents_InitSubmenu2(void);
+static bool8 ControlEvents_Events1_HandleInput(void);
+static bool8 ControlEvents_Events2_HandleInput(void);
+static bool8 CallScript_DoHallOfFame(void);
+static bool8 CallScript_GiveCoinCaseIfNotAlreadyOwned(void);
+static bool8 CallScript_SetOldaleStateAfterRoute103Rival(void);
+static bool8 CallScript_OpenNewMauville(void);
+static bool8 CallScript_GiveSSTicketAndDoHallOfFame(void);
+static bool8 CallScript_GiveKyogreEgg(void);
+static bool8 CallScript_GiveAllItems(void);
+static bool8 CallScript_GiveAllDecorations(void);
+static bool8 CallScript_GiveAllCoins(void);
+static bool8 CallScript_OpenSootopolisGym(void);
+static bool8 CallScript_SetMoneyTo0(void);
+static bool8 CallScript_FillPartyWithBarboach(void);
+static bool8 CallScript_FillPartyWithShroomish(void);
+static bool8 CallScript_GiveBarboachEgg(void);
+static bool8 CallScript_GiveShroomishEgg(void);
 static bool8 debug_sub_808C280(void);
 static bool8 debug_sub_808C2E4(void);
-static bool8 debug_sub_808C31C(void);
+static bool8 ControlFlags_EventFlag_InitSubmenu(void);
 static bool8 debug_sub_808C36C(void);
 static bool8 debug_sub_808C3B0(void);
 static bool8 debug_sub_808C408(void);
@@ -84,7 +84,7 @@ static bool8 debug_sub_808C670(void);
 static bool8 debug_sub_808C6C8(void);
 static void debug_sub_808C714(u8, u8);
 static void debug_sub_808C764(u8);
-static bool8 debug_sub_808C7C8(void);
+static bool8 ControlFlags_VanishFlag_InitSubmenu(void);
 static bool8 debug_sub_808C818(void);
 static bool8 debug_sub_808C85C(void);
 static bool8 debug_sub_808C8B4(void);
@@ -98,7 +98,7 @@ static bool8 debug_sub_808CB1C(void);
 static bool8 debug_sub_808CB74(void);
 static void debug_sub_808CBC0(u8, u8);
 static void debug_sub_808CC10(u8);
-static bool8 debug_sub_808CC74(void);
+static bool8 ControlFlags_TrainerFlag_InitSubmenu(void);
 static bool8 debug_sub_808CCC4(void);
 static bool8 debug_sub_808CD08(void);
 static bool8 debug_sub_808CD60(void);
@@ -106,7 +106,7 @@ static bool8 debug_sub_808CDB8(void);
 static bool8 debug_sub_808CE10(void);
 static void debug_sub_808CE5C(u8, u8);
 static void debug_sub_808CEAC(u8);
-static bool8 debug_sub_808CF10(void);
+static bool8 ControlFlags_SysFlag_InitSubmenu(void);
 static bool8 debug_sub_808CF60(void);
 static bool8 debug_sub_808CFA4(void);
 static bool8 debug_sub_808CFFC(void);
@@ -120,45 +120,45 @@ static bool8 debug_sub_808D264(void);
 static bool8 debug_sub_808D2BC(void);
 static void debug_sub_808D308(u8, u8);
 static void debug_sub_808D358(u8);
-static bool8 debug_sub_808D3BC(void);
+static bool8 ControlFlags_FH_OBJ_InitSubmenu(void);
 static bool8 debug_sub_808D40C(void);
 static bool8 debug_sub_808D450(void);
 static bool8 debug_sub_808D4A8(void);
 static bool8 debug_sub_808D500(void);
 static void debug_sub_808D54C(u8, u8);
 static void debug_sub_808D59C(u8);
-static bool8 debug_sub_808D600(void);
+static bool8 ControlFlags_FH_InitSubmenu(void);
 static bool8 debug_sub_808D650(void);
 static bool8 debug_sub_808D694(void);
 static bool8 debug_sub_808D6EC(void);
 static bool8 debug_sub_808D744(void);
 static void debug_sub_808D790(u8, u8);
 static void debug_sub_808D7E0(u8);
-static bool8 debug_sub_808D844(void);
+static bool8 ControlFlags_BallVanishFlag_InitSubmenu(void);
 static bool8 debug_sub_808D894(void);
 static bool8 debug_sub_808D8D8(void);
 static bool8 debug_sub_808D930(void);
 static void debug_sub_808D97C(u8, u8);
 static void debug_sub_808D9CC(u8);
-static bool8 debug_sub_808DA30(void);
-static bool8 debug_sub_808DA80(void);
-static void debug_sub_808DABC(void);
-static void debug_sub_808DAD4(void);
-static bool8 debug_sub_808DB0C(void);
-static bool8 debug_sub_808DB5C(void);
-static bool8 debug_sub_808DBA0(void);
-static bool8 debug_sub_808DBF8(void);
-static bool8 debug_sub_808DC50(void);
-static bool8 debug_sub_808DCA8(void);
-static bool8 debug_sub_808DD00(void);
-static bool8 debug_sub_808DD58(void);
-static bool8 debug_sub_808DDB0(void);
-static bool8 debug_sub_808DE08(void);
-static bool8 debug_sub_808DE60(void);
-static bool8 debug_sub_808DEB8(void);
+static bool8 ControlWorks_AnsWork_InitSubmenu(void);
+static bool8 ControlWorks_AnsWork_HandleInput(void);
+static void ControlWorks_AnsWork_PrintRESULT(void);
+static void ControlWorks_AnsWork_AdjustRESULT(void);
+static bool8 ControlWorks_SaveWork_InitSubmenu(void);
+static bool8 ControlWorks_SaveWork_HandleInput(void);
+static bool8 ControlWorks_SaveWork_Town_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_City_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Route101To109_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Route110To118_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Route119To127_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Route128To134_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_RoomTown_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_RoomCity_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Dungeon_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWork_Subsubmenu_HandleInput(void);
 static void debug_sub_808DF04(u8);
 static void debug_sub_808DF64(u8, u8);
-static bool8 debug_sub_808DFC0(void);
+static bool8 ControlWorks_SaveWorkPart2_InitSubmenu(void);
 static bool8 debug_sub_808E010(void);
 static bool8 debug_sub_808E054(void);
 static bool8 debug_sub_808E0AC(void);
@@ -169,7 +169,7 @@ static bool8 debug_sub_808E20C(void);
 static bool8 debug_sub_808E264(void);
 static void debug_sub_808E2B0(u8);
 static void debug_sub_808E310(u8, u8);
-static bool8 debug_sub_808E36C(void);
+static bool8 ControlWorks_SysWork_InitSubmenu(void);
 static bool8 debug_sub_808E3BC(void);
 static bool8 debug_sub_808E400(void);
 static bool8 debug_sub_808E458(void);
@@ -179,28 +179,28 @@ static bool8 debug_sub_808E560(void);
 static bool8 debug_sub_808E5B8(void);
 static void debug_sub_808E604(u8, u8);
 static void debug_sub_808E660(u8);
-static bool8 debug_sub_808E6C0(void);
+static bool8 ControlWorks_LocalWork_InitSubmenu(void);
 static bool8 debug_sub_808E710(void);
 static bool8 debug_sub_808E754(void);
 static bool8 debug_sub_808E7AC(void);
 static bool8 debug_sub_808E804(void);
 static void debug_sub_808E850(u8, u8);
 static void debug_sub_808E8AC(u8);
-static bool8 debug_sub_808E90C(void);
+static bool8 ControlWorks_ObjWork_InitSubmenu(void);
 static bool8 debug_sub_808E95C(void);
 static bool8 debug_sub_808E9A0(void);
 static bool8 debug_sub_808E9F8(void);
 static bool8 debug_sub_808EA50(void);
 static void debug_sub_808EA9C(u8);
 static void debug_sub_808EAFC(u8, u8);
-static bool8 debug_sub_808EB58(void);
-static bool8 debug_sub_808EBB4(void);
+static bool8 TrickRelated_Level_InitSubmenu(void);
+static bool8 TrickRelated_TrickMaster_InitSubmenu(void);
 static bool8 debug_sub_808EC10(void);
 static bool8 debug_sub_808EC5C(void);
-static bool8 debug_sub_808ECA4(void);
+static bool8 PreviewGraphics_Show(void);
 static bool8 debug_sub_808ECD0(void);
 static void PicTest_SelectPokemon(void);
-static void PicTest_SelectIDrndDigit(void);
+static void PicTest_SelectPersonality(void);
 static void ContestPicTest_SelectContestType(void);
 static void MuseumArtPicTest_SelectTitleType(void);
 static void PreviewPicTest_SelectType(void);
@@ -233,7 +233,7 @@ static const u8 sString_ControlEvents[] = _("Control events");
 static const u8 sString_ControlFlags[] = _("Control flags");
 static const u8 sString_ControlWORK[] = _("Control WORK");
 
-static const struct MenuAction gUnknown_Debug_083C0CBA[] = {
+static const struct MenuAction sMenuActions_TopMenu[] = {
     {sString_ContestGraphics, ContestGraphics},
     {sString_ArtMuseumGraphics, ArtMusGraphics},
     {sString_PreviewData, PreviewData},
@@ -246,140 +246,139 @@ static const struct MenuAction gUnknown_Debug_083C0CBA[] = {
 static const u8 sString_ContestMenuTitle[] = _("Contest");
 
 static const u8 sString_Contest_PokemonNo[] = _("Pokémon No.");
-static const u8 sString_Contest_IDrndDigit[] = _("ID rnd. digit");
+static const u8 sString_Contest_Personality[] = _("ID rnd. digit");
 static const u8 sString_Contest_Type[] = _("Contest Type");
 static const u8 sString_Contest_PokeArt[] = _("Poké Art");
 
 static const struct MenuAction sMenuActions_ContestPicTest[] = {
-    {sString_Contest_PokemonNo, Config},
-    {sString_Contest_IDrndDigit, Config},
-    {sString_Contest_Type, Config},
+    {sString_Contest_PokemonNo, DummyMenuAction},
+    {sString_Contest_Personality, DummyMenuAction},
+    {sString_Contest_Type, DummyMenuAction},
     {sString_Contest_PokeArt, ContestGraphics_Show}
 };
 
 static const u8 sString_Contest_ArtMuseumTitle[] = _("Art Mus.");
 
 static const u8 sString_Contest_ArtMuseum_PokemonNo[] = _("Pokémon No.");
-static const u8 sString_Contest_ArtMuseum_IDrndDigit[] = _("ID rnd. digit");
+static const u8 sString_Contest_ArtMuseum_Personality[] = _("ID rnd. digit");
 static const u8 sString_Contest_ArtMuseum_Type[] = _("Title Type");
 static const u8 sString_Contest_ArtMuseum_PokeArt[] = _("Poké Art");
 
 static const struct MenuAction sMenuActions_ArtMuseumPicTest[] = {
-    {sString_Contest_ArtMuseum_PokemonNo, Config},
-    {sString_Contest_ArtMuseum_IDrndDigit, Config},
-    {sString_Contest_ArtMuseum_Type, Config},
+    {sString_Contest_ArtMuseum_PokemonNo, DummyMenuAction},
+    {sString_Contest_ArtMuseum_Personality, DummyMenuAction},
+    {sString_Contest_ArtMuseum_Type, DummyMenuAction},
     {sString_Contest_ArtMuseum_PokeArt, MuseumGraphics_Show}
 };
 
-static const u8 gUnknown_Debug_083C0DA4[] = _("Preview");
+static const u8 sString_Contest_PreviewTitle[] = _("Preview");
 
-static const u8 gUnknown_Debug_083C0DAC[] = _("Pokémon No.");
-static const u8 gUnknown_Debug_083C0DB8[] = _("ID rnd. digit");
-static const u8 gUnknown_Debug_083C0DC6[] = _("Type");
-static const u8 gUnknown_Debug_083C0DCB[] = _("Poké Art");
+static const u8 sString_Contest_Preview_PokemonNo[] = _("Pokémon No.");
+static const u8 sString_Contest_Preview_Personality[] = _("ID rnd. digit");
+static const u8 sString_Contest_Preview_Type[] = _("Type");
+static const u8 sString_Contest_Preview_PokeArt[] = _("Poké Art");
 
 static const struct MenuAction sMenuActions_PreviewPicTest[] = {
-    {gUnknown_Debug_083C0DAC, Config},
-    {gUnknown_Debug_083C0DB8, Config},
-    {gUnknown_Debug_083C0DC6, Config},
-    {gUnknown_Debug_083C0DCB, debug_sub_808ECA4}
+    {sString_Contest_Preview_PokemonNo, DummyMenuAction},
+    {sString_Contest_Preview_Personality, DummyMenuAction},
+    {sString_Contest_Preview_Type, DummyMenuAction},
+    {sString_Contest_Preview_PokeArt, PreviewGraphics_Show}
 };
 
-static const u8 gUnknown_Debug_083C0DF4[] = _("Trick related");
+static const u8 sString_TrickRelated[] = _("Trick related");
 
-static const u8 gUnknown_Debug_083C0E02[] = _("Level");
-static const u8 gUnknown_Debug_083C0E08[] = _("Trick Master");
+static const u8 sString_TrickRelated_Level[] = _("Level");
+static const u8 sString_TrickRelated_TrickMaster[] = _("Trick Master");
 
 static const struct MenuAction sMenuActions_TrickRelated[] = {
-    {gUnknown_Debug_083C0E02, debug_sub_808EB58},
-    {gUnknown_Debug_083C0E08, debug_sub_808EBB4}
+    {sString_TrickRelated_Level, TrickRelated_Level_InitSubmenu},
+    {sString_TrickRelated_TrickMaster, TrickRelated_TrickMaster_InitSubmenu}
 };
 
-static const u8 gUnknown_Debug_083C0E28[] = _("パート1");
-static const u8 gUnknown_Debug_083C0E2D[] = _("パート2");
+static const u8 sString_Event1[] = _("パート1");
+static const u8 sString_Event2[] = _("パート2");
 
-static const struct MenuAction gUnknown_Debug_083C0E32[] = {
-    {gUnknown_Debug_083C0E28, debug_sub_808BFC4},
-    {gUnknown_Debug_083C0E2D, debug_sub_808C014}
+static const struct MenuAction sMenuActions_ControlEvents[] = {
+    {sString_Event1, ControlEvents_InitSubmenu1},
+    {sString_Event2, ControlEvents_InitSubmenu2}
 };
 
-static const u8 gUnknown_Debug_083C0E44[] = _("イベントFLAG");
-static const u8 gUnknown_Debug_083C0E4D[] = _("バニシュFLAG");
-static const u8 gUnknown_Debug_083C0E56[] = _("トレーナーFLAG");
-static const u8 gUnknown_Debug_083C0E60[] = _("SYSFLAG");
-static const u8 gUnknown_Debug_083C0E68[] = _("BALLバニシュFLAG");
-static const u8 gUnknown_Debug_083C0E75[] = _("FH");
-static const u8 gUnknown_Debug_083C0E78[] = _("FH-OBJ");
+static const u8 sString_EventFlag[] = _("イベントFLAG");
+static const u8 sString_VanishFlag[] = _("バニシュFLAG");
+static const u8 sString_TrainerFlag[] = _("トレーナーFLAG");
+static const u8 sString_SysFlag[] = _("SYSFLAG");
+static const u8 sString_BallVanishFlag[] = _("BALLバニシュFLAG");
+static const u8 sString_FH[] = _("FH");
+static const u8 sString_FH_OBJ[] = _("FH-OBJ");
 
-static const struct MenuAction gUnknown_Debug_083C0E7F[] = {
-    {gUnknown_Debug_083C0E44, debug_sub_808C31C},
-    {gUnknown_Debug_083C0E4D, debug_sub_808C7C8},
-    {gUnknown_Debug_083C0E56, debug_sub_808CC74},
-    {gUnknown_Debug_083C0E60, debug_sub_808CF10},
-    {gUnknown_Debug_083C0E68, debug_sub_808D844},
-    {gUnknown_Debug_083C0E75, debug_sub_808D600},
-    {gUnknown_Debug_083C0E78, debug_sub_808D3BC}
+static const struct MenuAction sMenuActions_ControlFlags[] = {
+    {sString_EventFlag, ControlFlags_EventFlag_InitSubmenu},
+    {sString_VanishFlag, ControlFlags_VanishFlag_InitSubmenu},
+    {sString_TrainerFlag, ControlFlags_TrainerFlag_InitSubmenu},
+    {sString_SysFlag, ControlFlags_SysFlag_InitSubmenu},
+    {sString_BallVanishFlag, ControlFlags_BallVanishFlag_InitSubmenu},
+    {sString_FH, ControlFlags_FH_InitSubmenu},
+    {sString_FH_OBJ, ControlFlags_FH_OBJ_InitSubmenu}
 };
 
-static const u8 gUnknown_Debug_083C0EB8[] = _("SAVEWORK");
+static const u8 sString_SaveWork[] = _("SAVEWORK");
+static const u8 sString_SysWork[] = _("SYSWORK");
+static const u8 sString_LocalWork[] = _("LOCALWORK");
+static const u8 sString_ObjWork[] = _("OBJWORK");
+static const u8 sString_AnsWork[] = _("ANSWORK");
+static const u8 sString_SaveWorkPart2[] = _("SAVEWORK　パート2");
 
-static const u8 gUnknown_Debug_083C0EC1[] = _("SYSWORK");
-static const u8 gUnknown_Debug_083C0EC9[] = _("LOCALWORK");
-static const u8 gUnknown_Debug_083C0ED3[] = _("OBJWORK");
-static const u8 gUnknown_Debug_083C0EDB[] = _("ANSWORK");
-static const u8 gUnknown_Debug_083C0EE3[] = _("SAVEWORK　パート2");
-
-static const struct MenuAction gUnknown_Debug_083C0EF1[] = {
-    {gUnknown_Debug_083C0EB8, debug_sub_808DB0C},
-    {gUnknown_Debug_083C0EC1, debug_sub_808E36C},
-    {gUnknown_Debug_083C0EC9, debug_sub_808E6C0},
-    {gUnknown_Debug_083C0ED3, debug_sub_808E90C},
-    {gUnknown_Debug_083C0EDB, debug_sub_808DA30},
-    {gUnknown_Debug_083C0EE3, debug_sub_808DFC0}
+static const struct MenuAction sMenuActions_ControlWorks[] = {
+    {sString_SaveWork, ControlWorks_SaveWork_InitSubmenu},
+    {sString_SysWork, ControlWorks_SysWork_InitSubmenu},
+    {sString_LocalWork, ControlWorks_LocalWork_InitSubmenu},
+    {sString_ObjWork, ControlWorks_ObjWork_InitSubmenu},
+    {sString_AnsWork, ControlWorks_AnsWork_InitSubmenu},
+    {sString_SaveWorkPart2, ControlWorks_SaveWorkPart2_InitSubmenu}
 };
 
-static const u8 gUnknown_Debug_083C0F24[] = _("クリアご");
-static const u8 gUnknown_Debug_083C0F29[] = _("コインこうにゅうかのう");
-static const u8 gUnknown_Debug_083C0F35[] = _("コトキサポーターセット");
-static const u8 gUnknown_Debug_083C0F41[] = _("ニューキンセツOPEN");
-static const u8 gUnknown_Debug_083C0F4D[] = _("れんらくせんにのれる");
-static const u8 gUnknown_Debug_083C0F58[] = _("タマゴついか");
-static const u8 gUnknown_Debug_083C0F5F[] = _("アイテムいっぱい");
-static const u8 gUnknown_Debug_083C0F68[] = _("グッズいっぱい");
-static const u8 gUnknown_Debug_083C0F70[] = _("COINいっぱい");
+static const u8 sString_Clear_go[] = _("クリアご");
+static const u8 sString_Coin_kounyuuka[] = _("コインこうにゅうかのう");
+static const u8 sString_Oldale_supporter_set[] = _("コトキサポーターセット");
+static const u8 sString_New_Mauville_open[] = _("ニューキンセツOPEN");
+static const u8 sString_Renrakusen_ni_noreru[] = _("れんらくせんにのれる");
+static const u8 sString_Egg_tsuika[] = _("タマゴついか");
+static const u8 sString_Item_ippai[] = _("アイテムいっぱい");
+static const u8 sString_Gezzu_ippai[] = _("グッズいっぱい");
+static const u8 sString_Coin_ippai[] = _("COINいっぱい");
 
-static const struct MenuAction gUnknown_Debug_083C0F79[] = {
-    {gUnknown_Debug_083C0F24, debug_sub_808C0EC},
-    {gUnknown_Debug_083C0F29, debug_sub_808C104},
-    {gUnknown_Debug_083C0F35, debug_sub_808C11C},
-    {gUnknown_Debug_083C0F41, debug_sub_808C134},
-    {gUnknown_Debug_083C0F4D, debug_sub_808C14C},
-    {gUnknown_Debug_083C0F58, debug_sub_808C164},
-    {gUnknown_Debug_083C0F5F, debug_sub_808C17C},
-    {gUnknown_Debug_083C0F68, debug_sub_808C194},
-    {gUnknown_Debug_083C0F70, debug_sub_808C1AC}
+static const struct MenuAction sMenuActions_ControlEvents_Events1[] = {
+    {sString_Clear_go, CallScript_DoHallOfFame},
+    {sString_Coin_kounyuuka, CallScript_GiveCoinCaseIfNotAlreadyOwned},
+    {sString_Oldale_supporter_set, CallScript_SetOldaleStateAfterRoute103Rival},
+    {sString_New_Mauville_open, CallScript_OpenNewMauville},
+    {sString_Renrakusen_ni_noreru, CallScript_GiveSSTicketAndDoHallOfFame},
+    {sString_Egg_tsuika, CallScript_GiveKyogreEgg},
+    {sString_Item_ippai, CallScript_GiveAllItems},
+    {sString_Gezzu_ippai, CallScript_GiveAllDecorations},
+    {sString_Coin_ippai, CallScript_GiveAllCoins}
 };
 
-static const u8 gUnknown_Debug_083C0FC4[] = _("ムロジムOPEN");
-static const u8 gUnknown_Debug_083C0FCD[] = _("おかねを0へ");
-static const u8 gUnknown_Debug_083C0FD4[] = _("ドジョッチ　FULL");
-static const u8 gUnknown_Debug_083C0FDF[] = _("キノココ　FULL");
-static const u8 gUnknown_Debug_083C0FE9[] = _("ドジョッチ　タマゴ");
-static const u8 gUnknown_Debug_083C0FF3[] = _("キノココ　タマゴ");
+static const u8 sString_SootpolisGymOpen[] = _("ムロジムOPEN");
+static const u8 sString_MoneyTo0[] = _("おかねを0へ");
+static const u8 sString_BarboachFull[] = _("ドジョッチ　FULL");
+static const u8 sString_ShroomishFull[] = _("キノココ　FULL");
+static const u8 sString_BarboachEgg[] = _("ドジョッチ　タマゴ");
+static const u8 sString_ShroomishEgg[] = _("キノココ　タマゴ");
 
-static const struct MenuAction gUnknown_Debug_083C0FFC[] = {
-    {gUnknown_Debug_083C0FC4, debug_sub_808C1C4},
-    {gUnknown_Debug_083C0FCD, debug_sub_808C1DC},
-    {gUnknown_Debug_083C0FD4, debug_sub_808C1F4},
-    {gUnknown_Debug_083C0FDF, debug_sub_808C20C},
-    {gUnknown_Debug_083C0FE9, debug_sub_808C224},
-    {gUnknown_Debug_083C0FF3, debug_sub_808C23C}
+static const struct MenuAction sMenuActions_ControlEvents_Events2[] = {
+    {sString_SootpolisGymOpen, CallScript_OpenSootopolisGym},
+    {sString_MoneyTo0, CallScript_SetMoneyTo0},
+    {sString_BarboachFull, CallScript_FillPartyWithBarboach},
+    {sString_ShroomishFull, CallScript_FillPartyWithShroomish},
+    {sString_BarboachEgg, CallScript_GiveBarboachEgg},
+    {sString_ShroomishEgg, CallScript_GiveShroomishEgg}
 };
 
-static const u8 gUnknown_Debug_083C102C[] = _("ANSWORK　みかんせい");
+static const u8 sString_Answork_Mikansei[] = _("ANSWORK　みかんせい");
 
-static const struct MenuAction gUnknown_Debug_083C103A[] = {
-    {gUnknown_Debug_083C102C, Config}
+static const struct MenuAction sMenuActions_ControlEvents_AnsWork[] = {
+    {sString_Answork_Mikansei, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1044[] = _("FHーOBJ00ー08");
@@ -401,15 +400,15 @@ static const u8 gUnknown_Debug_083C10AB[] = _("FHーOBJ07");
 static const u8 gUnknown_Debug_083C10B4[] = _("FHーOBJ08");
 
 static const struct MenuAction gUnknown_Debug_083C10BD[] = {
-    {gUnknown_Debug_083C106C, Config},
-    {gUnknown_Debug_083C1075, Config},
-    {gUnknown_Debug_083C107E, Config},
-    {gUnknown_Debug_083C1087, Config},
-    {gUnknown_Debug_083C1090, Config},
-    {gUnknown_Debug_083C1099, Config},
-    {gUnknown_Debug_083C10A2, Config},
-    {gUnknown_Debug_083C10AB, Config},
-    {gUnknown_Debug_083C10B4, Config}
+    {gUnknown_Debug_083C106C, DummyMenuAction},
+    {gUnknown_Debug_083C1075, DummyMenuAction},
+    {gUnknown_Debug_083C107E, DummyMenuAction},
+    {gUnknown_Debug_083C1087, DummyMenuAction},
+    {gUnknown_Debug_083C1090, DummyMenuAction},
+    {gUnknown_Debug_083C1099, DummyMenuAction},
+    {gUnknown_Debug_083C10A2, DummyMenuAction},
+    {gUnknown_Debug_083C10AB, DummyMenuAction},
+    {gUnknown_Debug_083C10B4, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1108[] = _("FH-OBJ09");
@@ -423,15 +422,15 @@ static const u8 gUnknown_Debug_083C1147[] = _("");
 static const u8 gUnknown_Debug_083C1148[] = _("");
 
 static const struct MenuAction gUnknown_Debug_083C1149[] = {
-    {gUnknown_Debug_083C1108, Config},
-    {gUnknown_Debug_083C1111, Config},
-    {gUnknown_Debug_083C111A, Config},
-    {gUnknown_Debug_083C1123, Config},
-    {gUnknown_Debug_083C112C, Config},
-    {gUnknown_Debug_083C1135, Config},
-    {gUnknown_Debug_083C113E, Config},
-    {gUnknown_Debug_083C1147, Config},
-    {gUnknown_Debug_083C1148, Config}
+    {gUnknown_Debug_083C1108, DummyMenuAction},
+    {gUnknown_Debug_083C1111, DummyMenuAction},
+    {gUnknown_Debug_083C111A, DummyMenuAction},
+    {gUnknown_Debug_083C1123, DummyMenuAction},
+    {gUnknown_Debug_083C112C, DummyMenuAction},
+    {gUnknown_Debug_083C1135, DummyMenuAction},
+    {gUnknown_Debug_083C113E, DummyMenuAction},
+    {gUnknown_Debug_083C1147, DummyMenuAction},
+    {gUnknown_Debug_083C1148, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1194[] = {9, 7};
@@ -460,15 +459,15 @@ static const u8 gUnknown_Debug_083C1206[] = _("FH-07");
 static const u8 gUnknown_Debug_083C120C[] = _("FH-08");
 
 static const struct MenuAction gUnknown_Debug_083C1212[] = {
-    {gUnknown_Debug_083C11DC, Config},
-    {gUnknown_Debug_083C11E2, Config},
-    {gUnknown_Debug_083C11E8, Config},
-    {gUnknown_Debug_083C11EE, Config},
-    {gUnknown_Debug_083C11F4, Config},
-    {gUnknown_Debug_083C11FA, Config},
-    {gUnknown_Debug_083C1200, Config},
-    {gUnknown_Debug_083C1206, Config},
-    {gUnknown_Debug_083C120C, Config}
+    {gUnknown_Debug_083C11DC, DummyMenuAction},
+    {gUnknown_Debug_083C11E2, DummyMenuAction},
+    {gUnknown_Debug_083C11E8, DummyMenuAction},
+    {gUnknown_Debug_083C11EE, DummyMenuAction},
+    {gUnknown_Debug_083C11F4, DummyMenuAction},
+    {gUnknown_Debug_083C11FA, DummyMenuAction},
+    {gUnknown_Debug_083C1200, DummyMenuAction},
+    {gUnknown_Debug_083C1206, DummyMenuAction},
+    {gUnknown_Debug_083C120C, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C125C[] = _("FHー09");
@@ -482,15 +481,15 @@ static const u8 gUnknown_Debug_083C1286[] = _("");
 static const u8 gUnknown_Debug_083C1287[] = _("");
 
 static const struct MenuAction gUnknown_Debug_083C1288[] = {
-    {gUnknown_Debug_083C125C, Config},
-    {gUnknown_Debug_083C1262, Config},
-    {gUnknown_Debug_083C1268, Config},
-    {gUnknown_Debug_083C126E, Config},
-    {gUnknown_Debug_083C1274, Config},
-    {gUnknown_Debug_083C127A, Config},
-    {gUnknown_Debug_083C1280, Config},
-    {gUnknown_Debug_083C1286, Config},
-    {gUnknown_Debug_083C1287, Config}
+    {gUnknown_Debug_083C125C, DummyMenuAction},
+    {gUnknown_Debug_083C1262, DummyMenuAction},
+    {gUnknown_Debug_083C1268, DummyMenuAction},
+    {gUnknown_Debug_083C126E, DummyMenuAction},
+    {gUnknown_Debug_083C1274, DummyMenuAction},
+    {gUnknown_Debug_083C127A, DummyMenuAction},
+    {gUnknown_Debug_083C1280, DummyMenuAction},
+    {gUnknown_Debug_083C1286, DummyMenuAction},
+    {gUnknown_Debug_083C1287, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C12D0[] = {9, 7};
@@ -532,14 +531,14 @@ static const u8 gUnknown_Debug_083C13C0[] = _("BATCH07ーGET");
 static const u8 gUnknown_Debug_083C13CC[] = _("BATCH08ーGET");
 
 static const struct MenuAction gUnknown_Debug_083C13D8[] = {
-    {gUnknown_Debug_083C1378, Config},
-    {gUnknown_Debug_083C1384, Config},
-    {gUnknown_Debug_083C1390, Config},
-    {gUnknown_Debug_083C139C, Config},
-    {gUnknown_Debug_083C13A8, Config},
-    {gUnknown_Debug_083C13B4, Config},
-    {gUnknown_Debug_083C13C0, Config},
-    {gUnknown_Debug_083C13CC, Config}
+    {gUnknown_Debug_083C1378, DummyMenuAction},
+    {gUnknown_Debug_083C1384, DummyMenuAction},
+    {gUnknown_Debug_083C1390, DummyMenuAction},
+    {gUnknown_Debug_083C139C, DummyMenuAction},
+    {gUnknown_Debug_083C13A8, DummyMenuAction},
+    {gUnknown_Debug_083C13B4, DummyMenuAction},
+    {gUnknown_Debug_083C13C0, DummyMenuAction},
+    {gUnknown_Debug_083C13CC, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1418[] = _("T101ARRIVE");
@@ -551,13 +550,13 @@ static const u8 gUnknown_Debug_083C144F[] = _("T106ARRIVE");
 static const u8 gUnknown_Debug_083C145A[] = _("T107ARRIVE");
 
 static const struct MenuAction gUnknown_Debug_083C1465[] = {
-    {gUnknown_Debug_083C1418, Config},
-    {gUnknown_Debug_083C1423, Config},
-    {gUnknown_Debug_083C142E, Config},
-    {gUnknown_Debug_083C1439, Config},
-    {gUnknown_Debug_083C1444, Config},
-    {gUnknown_Debug_083C144F, Config},
-    {gUnknown_Debug_083C145A, Config}
+    {gUnknown_Debug_083C1418, DummyMenuAction},
+    {gUnknown_Debug_083C1423, DummyMenuAction},
+    {gUnknown_Debug_083C142E, DummyMenuAction},
+    {gUnknown_Debug_083C1439, DummyMenuAction},
+    {gUnknown_Debug_083C1444, DummyMenuAction},
+    {gUnknown_Debug_083C144F, DummyMenuAction},
+    {gUnknown_Debug_083C145A, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C14A0[] = _("C101ARRIVE");
@@ -571,15 +570,15 @@ static const u8 gUnknown_Debug_083C14ED[] = _("C108ARRIVE");
 static const u8 gUnknown_Debug_083C14F8[] = _("C109ARRIVE");
 
 static const struct MenuAction gUnknown_Debug_083C1503[] = {
-    {gUnknown_Debug_083C14A0, Config},
-    {gUnknown_Debug_083C14AB, Config},
-    {gUnknown_Debug_083C14B6, Config},
-    {gUnknown_Debug_083C14C1, Config},
-    {gUnknown_Debug_083C14CC, Config},
-    {gUnknown_Debug_083C14D7, Config},
-    {gUnknown_Debug_083C14E2, Config},
-    {gUnknown_Debug_083C14ED, Config},
-    {gUnknown_Debug_083C14F8, Config}
+    {gUnknown_Debug_083C14A0, DummyMenuAction},
+    {gUnknown_Debug_083C14AB, DummyMenuAction},
+    {gUnknown_Debug_083C14B6, DummyMenuAction},
+    {gUnknown_Debug_083C14C1, DummyMenuAction},
+    {gUnknown_Debug_083C14CC, DummyMenuAction},
+    {gUnknown_Debug_083C14D7, DummyMenuAction},
+    {gUnknown_Debug_083C14E2, DummyMenuAction},
+    {gUnknown_Debug_083C14ED, DummyMenuAction},
+    {gUnknown_Debug_083C14F8, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C154C[] = _("SYSーPOKEMONーGET");
@@ -588,10 +587,10 @@ static const u8 gUnknown_Debug_083C156A[] = _("SYSーPOKEGEARーGET");
 static const u8 gUnknown_Debug_083C157B[] = _("SYSーRIBBONーGET");
 
 static const struct MenuAction gUnknown_Debug_083C158A[] = {
-    {gUnknown_Debug_083C154C, Config},
-    {gUnknown_Debug_083C155C, Config},
-    {gUnknown_Debug_083C156A, Config},
-    {gUnknown_Debug_083C157B, Config}
+    {gUnknown_Debug_083C154C, DummyMenuAction},
+    {gUnknown_Debug_083C155C, DummyMenuAction},
+    {gUnknown_Debug_083C156A, DummyMenuAction},
+    {gUnknown_Debug_083C157B, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C15AC[] = _("SYSーGAMEーCLEAR");
@@ -605,15 +604,15 @@ static const u8 gUnknown_Debug_083C1627[] = _("SYSーSAFARIーMODE");
 static const u8 gUnknown_Debug_083C1637[] = _("SYSーCRUISEーMODE");
 
 static const struct MenuAction gUnknown_Debug_083C1647[] = {
-    {gUnknown_Debug_083C15AC, Config},
-    {gUnknown_Debug_083C15BB, Config},
-    {gUnknown_Debug_083C15CA, Config},
-    {gUnknown_Debug_083C15DD, Config},
-    {gUnknown_Debug_083C15F0, Config},
-    {gUnknown_Debug_083C1605, Config},
-    {gUnknown_Debug_083C1616, Config},
-    {gUnknown_Debug_083C1627, Config},
-    {gUnknown_Debug_083C1637, Config}
+    {gUnknown_Debug_083C15AC, DummyMenuAction},
+    {gUnknown_Debug_083C15BB, DummyMenuAction},
+    {gUnknown_Debug_083C15CA, DummyMenuAction},
+    {gUnknown_Debug_083C15DD, DummyMenuAction},
+    {gUnknown_Debug_083C15F0, DummyMenuAction},
+    {gUnknown_Debug_083C1605, DummyMenuAction},
+    {gUnknown_Debug_083C1616, DummyMenuAction},
+    {gUnknown_Debug_083C1627, DummyMenuAction},
+    {gUnknown_Debug_083C1637, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1690[] = _("SYSーTVーHOME");
@@ -627,15 +626,15 @@ static const u8 gUnknown_Debug_083C16F2[] = _("SYSーCAVEーWONDER");
 static const u8 gUnknown_Debug_083C1702[] = _("SYSーCAVEーBATTLE");
 
 static const struct MenuAction gUnknown_Debug_083C1712[] = {
-    {gUnknown_Debug_083C1690, Config},
-    {gUnknown_Debug_083C169C, Config},
-    {gUnknown_Debug_083C16A9, Config},
-    {gUnknown_Debug_083C16B5, Config},
-    {gUnknown_Debug_083C16C7, Config},
-    {gUnknown_Debug_083C16D6, Config},
-    {gUnknown_Debug_083C16E4, Config},
-    {gUnknown_Debug_083C16F2, Config},
-    {gUnknown_Debug_083C1702, Config}
+    {gUnknown_Debug_083C1690, DummyMenuAction},
+    {gUnknown_Debug_083C169C, DummyMenuAction},
+    {gUnknown_Debug_083C16A9, DummyMenuAction},
+    {gUnknown_Debug_083C16B5, DummyMenuAction},
+    {gUnknown_Debug_083C16C7, DummyMenuAction},
+    {gUnknown_Debug_083C16D6, DummyMenuAction},
+    {gUnknown_Debug_083C16E4, DummyMenuAction},
+    {gUnknown_Debug_083C16F2, DummyMenuAction},
+    {gUnknown_Debug_083C1702, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C175C[] = _("SYSーSPECIALーZUKAN");
@@ -649,15 +648,15 @@ static const u8 gUnknown_Debug_083C17D4[] = _("SYSーTENJIーWAIT");
 static const u8 gUnknown_Debug_083C17E3[] = _("SYSーTENJIーSORAWOTOBU");
 
 static const struct MenuAction gUnknown_Debug_083C17F8[] = {
-    {gUnknown_Debug_083C175C, Config},
-    {gUnknown_Debug_083C176E, Config},
-    {gUnknown_Debug_083C177D, Config},
-    {gUnknown_Debug_083C178C, Config},
-    {gUnknown_Debug_083C179C, Config},
-    {gUnknown_Debug_083C17AE, Config},
-    {gUnknown_Debug_083C17C2, Config},
-    {gUnknown_Debug_083C17D4, Config},
-    {gUnknown_Debug_083C17E3, Config}
+    {gUnknown_Debug_083C175C, DummyMenuAction},
+    {gUnknown_Debug_083C176E, DummyMenuAction},
+    {gUnknown_Debug_083C177D, DummyMenuAction},
+    {gUnknown_Debug_083C178C, DummyMenuAction},
+    {gUnknown_Debug_083C179C, DummyMenuAction},
+    {gUnknown_Debug_083C17AE, DummyMenuAction},
+    {gUnknown_Debug_083C17C2, DummyMenuAction},
+    {gUnknown_Debug_083C17D4, DummyMenuAction},
+    {gUnknown_Debug_083C17E3, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1840[] = _("SYSーENCーUPーITEM");
@@ -671,15 +670,15 @@ static const u8 gUnknown_Debug_083C18B4[] = _("");
 static const u8 gUnknown_Debug_083C18B5[] = _("");
 
 static const struct MenuAction gUnknown_Debug_083C18B8[] = {
-    {gUnknown_Debug_083C1840, Config},
-    {gUnknown_Debug_083C1850, Config},
-    {gUnknown_Debug_083C1862, Config},
-    {gUnknown_Debug_083C1873, Config},
-    {gUnknown_Debug_083C1886, Config},
-    {gUnknown_Debug_083C1895, Config},
-    {gUnknown_Debug_083C18A0, Config},
-    {gUnknown_Debug_083C18B4, Config},
-    {gUnknown_Debug_083C18B5, Config}
+    {gUnknown_Debug_083C1840, DummyMenuAction},
+    {gUnknown_Debug_083C1850, DummyMenuAction},
+    {gUnknown_Debug_083C1862, DummyMenuAction},
+    {gUnknown_Debug_083C1873, DummyMenuAction},
+    {gUnknown_Debug_083C1886, DummyMenuAction},
+    {gUnknown_Debug_083C1895, DummyMenuAction},
+    {gUnknown_Debug_083C18A0, DummyMenuAction},
+    {gUnknown_Debug_083C18B4, DummyMenuAction},
+    {gUnknown_Debug_083C18B5, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1900[] = _("SYSーARRIVEーSUBMARINECAVE");
@@ -693,15 +692,15 @@ static const u8 gUnknown_Debug_083C196F[] = _("");
 static const u8 gUnknown_Debug_083C1970[] = _("");
 
 static const struct MenuAction gDebug_0x83C1974[] = {
-    {gUnknown_Debug_083C1900, Config},
-    {gUnknown_Debug_083C1919, Config},
-    {gUnknown_Debug_083C1930, Config},
-    {gUnknown_Debug_083C1942, Config},
-    {gUnknown_Debug_083C1954, Config},
-    {gUnknown_Debug_083C196D, Config},
-    {gUnknown_Debug_083C196E, Config},
-    {gUnknown_Debug_083C196F, Config},
-    {gUnknown_Debug_083C1970, Config}
+    {gUnknown_Debug_083C1900, DummyMenuAction},
+    {gUnknown_Debug_083C1919, DummyMenuAction},
+    {gUnknown_Debug_083C1930, DummyMenuAction},
+    {gUnknown_Debug_083C1942, DummyMenuAction},
+    {gUnknown_Debug_083C1954, DummyMenuAction},
+    {gUnknown_Debug_083C196D, DummyMenuAction},
+    {gUnknown_Debug_083C196E, DummyMenuAction},
+    {gUnknown_Debug_083C196F, DummyMenuAction},
+    {gUnknown_Debug_083C1970, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C19BC[] = {8, 7, 9, 4, 9, 9, 9, 7, 5};
@@ -728,8 +727,8 @@ static const u8 gUnknown_Debug_083C1A80[] = _("FVーBALL1ー78");
 static const u8 gUnknown_Debug_083C1A8C[] = _("FVーBALL1ー133");
 
 static const struct MenuAction gUnknown_Debug_083C1A9C[] = {
-	{gUnknown_Debug_083C1A80, Config},
-	{gUnknown_Debug_083C1A8C, Config}
+	{gUnknown_Debug_083C1A80, DummyMenuAction},
+	{gUnknown_Debug_083C1A8C, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1AAC[] = {2};
@@ -758,14 +757,14 @@ static const u8 gUnknown_Debug_083C1B5A[] = _("FTーGYMー07ーLEADER");
 static const u8 gUnknown_Debug_083C1B6B[] = _("FTーGYMー08ーLEADER");
 
 static const struct MenuAction gUnknown_Debug_083C1B7C[] = {
-	{gUnknown_Debug_083C1AF4, Config},
-	{gUnknown_Debug_083C1B05, Config},
-	{gUnknown_Debug_083C1B16, Config},
-	{gUnknown_Debug_083C1B27, Config},
-	{gUnknown_Debug_083C1B38, Config},
-	{gUnknown_Debug_083C1B49, Config},
-	{gUnknown_Debug_083C1B5A, Config},
-	{gUnknown_Debug_083C1B6B, Config}
+	{gUnknown_Debug_083C1AF4, DummyMenuAction},
+	{gUnknown_Debug_083C1B05, DummyMenuAction},
+	{gUnknown_Debug_083C1B16, DummyMenuAction},
+	{gUnknown_Debug_083C1B27, DummyMenuAction},
+	{gUnknown_Debug_083C1B38, DummyMenuAction},
+	{gUnknown_Debug_083C1B49, DummyMenuAction},
+	{gUnknown_Debug_083C1B5A, DummyMenuAction},
+	{gUnknown_Debug_083C1B6B, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1BBC[] = _("FTーSHITENー01");
@@ -774,16 +773,16 @@ static const u8 gUnknown_Debug_083C1BD6[] = _("FTーSHITENー03");
 static const u8 gUnknown_Debug_083C1BE3[] = _("FTーSHITENー04");
 
 static const struct MenuAction gUnknown_Debug_083C1BF0[] = {
-	{gUnknown_Debug_083C1BBC, Config},
-	{gUnknown_Debug_083C1BC9, Config},
-	{gUnknown_Debug_083C1BD6, Config},
-	{gUnknown_Debug_083C1BE3, Config}
+	{gUnknown_Debug_083C1BBC, DummyMenuAction},
+	{gUnknown_Debug_083C1BC9, DummyMenuAction},
+	{gUnknown_Debug_083C1BD6, DummyMenuAction},
+	{gUnknown_Debug_083C1BE3, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1C10[] = _("FTーMITSURUー01ーCAVEーD1301");
 
 static const struct MenuAction gUnknown_Debug_083C1C2C[] = {
-	{gUnknown_Debug_083C1C10, Config}
+	{gUnknown_Debug_083C1C10, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1C34[] = {8, 4, 1};
@@ -826,15 +825,15 @@ static const u8 gUnknown_Debug_083C1DDB[] = _("FVーKAKUREー01ーFIELDーR119")
 static const u8 gUnknown_Debug_083C1DF3[] = _("FVーKAKUREー02ーFIELDーR119");
 
 static const struct MenuAction gUnknown_Debug_083C1E0C[] = {
-	{gUnknown_Debug_083C1D30, Config},
-	{gUnknown_Debug_083C1D4B, Config},
-	{gUnknown_Debug_083C1D63, Config},
-	{gUnknown_Debug_083C1D7B, Config},
-	{gUnknown_Debug_083C1D93, Config},
-	{gUnknown_Debug_083C1DAB, Config},
-	{gUnknown_Debug_083C1DC3, Config},
-	{gUnknown_Debug_083C1DDB, Config},
-	{gUnknown_Debug_083C1DF3, Config}
+	{gUnknown_Debug_083C1D30, DummyMenuAction},
+	{gUnknown_Debug_083C1D4B, DummyMenuAction},
+	{gUnknown_Debug_083C1D63, DummyMenuAction},
+	{gUnknown_Debug_083C1D7B, DummyMenuAction},
+	{gUnknown_Debug_083C1D93, DummyMenuAction},
+	{gUnknown_Debug_083C1DAB, DummyMenuAction},
+	{gUnknown_Debug_083C1DC3, DummyMenuAction},
+	{gUnknown_Debug_083C1DDB, DummyMenuAction},
+	{gUnknown_Debug_083C1DF3, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1E54[] = _("FVーBALLー01ーC107ーR0501");
@@ -848,15 +847,15 @@ static const u8 gUnknown_Debug_083C1F01[] = _("FVーSUPPORTWー01ーT101ーR0202
 static const u8 gUnknown_Debug_083C1F1B[] = _("FVーSUPPORTMー01ーT101ーR0102");
 
 static const struct MenuAction gUnknown_Debug_083C1F38[] = {
-	{gUnknown_Debug_083C1E54, Config},
-	{gUnknown_Debug_083C1E6A, Config},
-	{gUnknown_Debug_083C1E84, Config},
-	{gUnknown_Debug_083C1E9F, Config},
-	{gUnknown_Debug_083C1EB7, Config},
-	{gUnknown_Debug_083C1ED1, Config},
-	{gUnknown_Debug_083C1EEB, Config},
-	{gUnknown_Debug_083C1F01, Config},
-	{gUnknown_Debug_083C1F1B, Config}
+	{gUnknown_Debug_083C1E54, DummyMenuAction},
+	{gUnknown_Debug_083C1E6A, DummyMenuAction},
+	{gUnknown_Debug_083C1E84, DummyMenuAction},
+	{gUnknown_Debug_083C1E9F, DummyMenuAction},
+	{gUnknown_Debug_083C1EB7, DummyMenuAction},
+	{gUnknown_Debug_083C1ED1, DummyMenuAction},
+	{gUnknown_Debug_083C1EEB, DummyMenuAction},
+	{gUnknown_Debug_083C1F01, DummyMenuAction},
+	{gUnknown_Debug_083C1F1B, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C1F80[] = _("FVーODAMAKIー01ーFIELDーR101");
@@ -870,15 +869,15 @@ static const u8 gUnknown_Debug_083C2038[] = _("FVーFIGHTERー01ーT106ーR0201"
 static const u8 gUnknown_Debug_083C2051[] = _("FVーFIGHTERー01ーFIELDーR116");
 
 static const struct MenuAction gUnknown_Debug_083C206C[] = {
-	{gUnknown_Debug_083C1F80, Config},
-	{gUnknown_Debug_083C1F99, Config},
-	{gUnknown_Debug_083C1FB2, Config},
-	{gUnknown_Debug_083C1FCE, Config},
-	{gUnknown_Debug_083C1FEA, Config},
-	{gUnknown_Debug_083C2006, Config},
-	{gUnknown_Debug_083C201F, Config},
-	{gUnknown_Debug_083C2038, Config},
-	{gUnknown_Debug_083C2051, Config}
+	{gUnknown_Debug_083C1F80, DummyMenuAction},
+	{gUnknown_Debug_083C1F99, DummyMenuAction},
+	{gUnknown_Debug_083C1FB2, DummyMenuAction},
+	{gUnknown_Debug_083C1FCE, DummyMenuAction},
+	{gUnknown_Debug_083C1FEA, DummyMenuAction},
+	{gUnknown_Debug_083C2006, DummyMenuAction},
+	{gUnknown_Debug_083C201F, DummyMenuAction},
+	{gUnknown_Debug_083C2038, DummyMenuAction},
+	{gUnknown_Debug_083C2051, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C20B4[] = _("FVーMITSURUー01ーFIELDーC101");
@@ -892,15 +891,15 @@ static const u8 gUnknown_Debug_083C2163[] = _("FVーTENKIー01ーR119ーR101");
 static const u8 gUnknown_Debug_083C2179[] = _("FVーTENKIー01ーR119ーR102");
 
 static const struct MenuAction gUnknown_Debug_083C2190[] = {
-	{gUnknown_Debug_083C20B4, Config},
-	{gUnknown_Debug_083C20CD, Config},
-	{gUnknown_Debug_083C20E6, Config},
-	{gUnknown_Debug_083C20FF, Config},
-	{gUnknown_Debug_083C2118, Config},
-	{gUnknown_Debug_083C2131, Config},
-	{gUnknown_Debug_083C214A, Config},
-	{gUnknown_Debug_083C2163, Config},
-	{gUnknown_Debug_083C2179, Config}
+	{gUnknown_Debug_083C20B4, DummyMenuAction},
+	{gUnknown_Debug_083C20CD, DummyMenuAction},
+	{gUnknown_Debug_083C20E6, DummyMenuAction},
+	{gUnknown_Debug_083C20FF, DummyMenuAction},
+	{gUnknown_Debug_083C2118, DummyMenuAction},
+	{gUnknown_Debug_083C2131, DummyMenuAction},
+	{gUnknown_Debug_083C214A, DummyMenuAction},
+	{gUnknown_Debug_083C2163, DummyMenuAction},
+	{gUnknown_Debug_083C2179, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C21D8[] = _("FVーDAIGOー01ーCAVEーD0504");
@@ -911,12 +910,12 @@ static const u8 gUnknown_Debug_083C2234[] = _("FVーDAIGOー01ーFIELDーR120");
 static const u8 gUnknown_Debug_083C224B[] = _("FVーDAIGOー01ーFIELDーR108");
 
 static const struct MenuAction gUnknown_Debug_083C2264[] = {
-	{gUnknown_Debug_083C21D8, Config},
-	{gUnknown_Debug_083C21EF, Config},
-	{gUnknown_Debug_083C2206, Config},
-	{gUnknown_Debug_083C221D, Config},
-	{gUnknown_Debug_083C2234, Config},
-	{gUnknown_Debug_083C224B, Config}
+	{gUnknown_Debug_083C21D8, DummyMenuAction},
+	{gUnknown_Debug_083C21EF, DummyMenuAction},
+	{gUnknown_Debug_083C2206, DummyMenuAction},
+	{gUnknown_Debug_083C221D, DummyMenuAction},
+	{gUnknown_Debug_083C2234, DummyMenuAction},
+	{gUnknown_Debug_083C224B, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2294[] = _("FVーPOKE1ー02ーCAVEーD1111");
@@ -930,15 +929,15 @@ static const u8 gUnknown_Debug_083C233D[] = _("FVーPOKEMONー01ーCAVEーD0201"
 static const u8 gUnknown_Debug_083C2356[] = _("FVーPOKEMONー01ーR104ーR0101");
 
 static const struct MenuAction gUnknown_Debug_083C2370[] = {
-	{gUnknown_Debug_083C2294, Config},
-	{gUnknown_Debug_083C22AB, Config},
-	{gUnknown_Debug_083C22C2, Config},
-	{gUnknown_Debug_083C22D9, Config},
-	{gUnknown_Debug_083C22F0, Config},
-	{gUnknown_Debug_083C230B, Config},
-	{gUnknown_Debug_083C2326, Config},
-	{gUnknown_Debug_083C233D, Config},
-	{gUnknown_Debug_083C2356, Config}
+	{gUnknown_Debug_083C2294, DummyMenuAction},
+	{gUnknown_Debug_083C22AB, DummyMenuAction},
+	{gUnknown_Debug_083C22C2, DummyMenuAction},
+	{gUnknown_Debug_083C22D9, DummyMenuAction},
+	{gUnknown_Debug_083C22F0, DummyMenuAction},
+	{gUnknown_Debug_083C230B, DummyMenuAction},
+	{gUnknown_Debug_083C2326, DummyMenuAction},
+	{gUnknown_Debug_083C233D, DummyMenuAction},
+	{gUnknown_Debug_083C2356, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C23B8[] = _("FVーMAMAー01ーFIELDーT101");
@@ -952,15 +951,15 @@ static const u8 gUnknown_Debug_083C2459[] = _("FVーSUPPORTー02ーFIELDーR119"
 static const u8 gUnknown_Debug_083C2472[] = _("FVーSUPPORTー02ーFIELDーT104");
 
 static const struct MenuAction gUnknown_Debug_083C248C[] = {
-	{gUnknown_Debug_083C23B8, Config},
-	{gUnknown_Debug_083C23CE, Config},
-	{gUnknown_Debug_083C23E8, Config},
-	{gUnknown_Debug_083C23FE, Config},
-	{gUnknown_Debug_083C2414, Config},
-	{gUnknown_Debug_083C242A, Config},
-	{gUnknown_Debug_083C2440, Config},
-	{gUnknown_Debug_083C2459, Config},
-	{gUnknown_Debug_083C2472, Config}
+	{gUnknown_Debug_083C23B8, DummyMenuAction},
+	{gUnknown_Debug_083C23CE, DummyMenuAction},
+	{gUnknown_Debug_083C23E8, DummyMenuAction},
+	{gUnknown_Debug_083C23FE, DummyMenuAction},
+	{gUnknown_Debug_083C2414, DummyMenuAction},
+	{gUnknown_Debug_083C242A, DummyMenuAction},
+	{gUnknown_Debug_083C2440, DummyMenuAction},
+	{gUnknown_Debug_083C2459, DummyMenuAction},
+	{gUnknown_Debug_083C2472, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C24D4[] = _("FVーHAGIー01ーFIELDーR104");
@@ -974,15 +973,15 @@ static const u8 gUnknown_Debug_083C256E[] = _("FVーHAGIー01ーFIELDーR116");
 static const u8 gUnknown_Debug_083C2584[] = _("FVーHAGIー01ーSPーSHIP01");
 
 static const struct MenuAction gUnknown_Debug_083C259C[] = {
-	{gUnknown_Debug_083C24D4, Config},
-	{gUnknown_Debug_083C24EA, Config},
-	{gUnknown_Debug_083C2500, Config},
-	{gUnknown_Debug_083C2516, Config},
-	{gUnknown_Debug_083C252C, Config},
-	{gUnknown_Debug_083C2542, Config},
-	{gUnknown_Debug_083C2558, Config},
-	{gUnknown_Debug_083C256E, Config},
-	{gUnknown_Debug_083C2584, Config}
+	{gUnknown_Debug_083C24D4, DummyMenuAction},
+	{gUnknown_Debug_083C24EA, DummyMenuAction},
+	{gUnknown_Debug_083C2500, DummyMenuAction},
+	{gUnknown_Debug_083C2516, DummyMenuAction},
+	{gUnknown_Debug_083C252C, DummyMenuAction},
+	{gUnknown_Debug_083C2542, DummyMenuAction},
+	{gUnknown_Debug_083C2558, DummyMenuAction},
+	{gUnknown_Debug_083C256E, DummyMenuAction},
+	{gUnknown_Debug_083C2584, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C25E4[] = _("FVーSUPPORTー01ーT101ーR0301");
@@ -996,15 +995,15 @@ static const u8 gUnknown_Debug_083C2693[] = _("FVーSUPPORTー01ーFIELDーT104"
 static const u8 gUnknown_Debug_083C26AC[] = _("FVーSUPPORTー01ーFIELDーT102");
 
 static const struct MenuAction gUnknown_Debug_083C26C8[] = {
-	{gUnknown_Debug_083C25E4, Config},
-	{gUnknown_Debug_083C25FD, Config},
-	{gUnknown_Debug_083C2616, Config},
-	{gUnknown_Debug_083C262F, Config},
-	{gUnknown_Debug_083C2648, Config},
-	{gUnknown_Debug_083C2661, Config},
-	{gUnknown_Debug_083C267A, Config},
-	{gUnknown_Debug_083C2693, Config},
-	{gUnknown_Debug_083C26AC, Config}
+	{gUnknown_Debug_083C25E4, DummyMenuAction},
+	{gUnknown_Debug_083C25FD, DummyMenuAction},
+	{gUnknown_Debug_083C2616, DummyMenuAction},
+	{gUnknown_Debug_083C262F, DummyMenuAction},
+	{gUnknown_Debug_083C2648, DummyMenuAction},
+	{gUnknown_Debug_083C2661, DummyMenuAction},
+	{gUnknown_Debug_083C267A, DummyMenuAction},
+	{gUnknown_Debug_083C2693, DummyMenuAction},
+	{gUnknown_Debug_083C26AC, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2710[] = {9, 9, 9, 9, 6, 9, 9, 9, 9};
@@ -1054,15 +1053,15 @@ static const u8 gUnknown_Debug_083C2909[] = _("FEーDEBONー01ーFIELDーC104");
 static const u8 gUnknown_Debug_083C2920[] = _("FEーDEBONー02ーFIELDーC104");
 
 static const struct MenuAction gUnknown_Debug_083C2938[] = {
-    {gUnknown_Debug_083C2870, Config},
-    {gUnknown_Debug_083C287F, Config},
-    {gUnknown_Debug_083C2897, Config},
-    {gUnknown_Debug_083C28A6, Config},
-    {gUnknown_Debug_083C28BF, Config},
-    {gUnknown_Debug_083C28D8, Config},
-    {gUnknown_Debug_083C28F1, Config},
-    {gUnknown_Debug_083C2909, Config},
-    {gUnknown_Debug_083C2920, Config}
+    {gUnknown_Debug_083C2870, DummyMenuAction},
+    {gUnknown_Debug_083C287F, DummyMenuAction},
+    {gUnknown_Debug_083C2897, DummyMenuAction},
+    {gUnknown_Debug_083C28A6, DummyMenuAction},
+    {gUnknown_Debug_083C28BF, DummyMenuAction},
+    {gUnknown_Debug_083C28D8, DummyMenuAction},
+    {gUnknown_Debug_083C28F1, DummyMenuAction},
+    {gUnknown_Debug_083C2909, DummyMenuAction},
+    {gUnknown_Debug_083C2920, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2980[] = _("FEーCYCLEー01ーP01ーP01ーC103ーR0201");
@@ -1076,15 +1075,15 @@ static const u8 gUnknown_Debug_083C2A21[] = _("FEーIITURIZAOーGET");
 static const u8 gUnknown_Debug_083C2A32[] = _("FEーSUGOITURIZAOーGET");
 
 static const struct MenuAction gUnknown_Debug_083C2A48[] = {
-    {gUnknown_Debug_083C2980, Config},
-    {gUnknown_Debug_083C299F, Config},
-    {gUnknown_Debug_083C29BA, Config},
-    {gUnknown_Debug_083C29D4, Config},
-    {gUnknown_Debug_083C29EE, Config},
-    {gUnknown_Debug_083C29FC, Config},
-    {gUnknown_Debug_083C2A0C, Config},
-    {gUnknown_Debug_083C2A21, Config},
-    {gUnknown_Debug_083C2A32, Config}
+    {gUnknown_Debug_083C2980, DummyMenuAction},
+    {gUnknown_Debug_083C299F, DummyMenuAction},
+    {gUnknown_Debug_083C29BA, DummyMenuAction},
+    {gUnknown_Debug_083C29D4, DummyMenuAction},
+    {gUnknown_Debug_083C29EE, DummyMenuAction},
+    {gUnknown_Debug_083C29FC, DummyMenuAction},
+    {gUnknown_Debug_083C2A0C, DummyMenuAction},
+    {gUnknown_Debug_083C2A21, DummyMenuAction},
+    {gUnknown_Debug_083C2A32, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2A90[] = _("FEーBOSSー01ーCAVEーD0701");
@@ -1098,15 +1097,15 @@ static const u8 gUnknown_Debug_083C2B27[] = _("FEーKASEKIーRETURN");
 static const u8 gUnknown_Debug_083C2B38[] = _("FEーWINー01ーSPーSHIP01");
 
 static const struct MenuAction gUnknown_Debug_083C2B4C[] = {
-    {gUnknown_Debug_083C2A90, Config},
-    {gUnknown_Debug_083C2AA6, Config},
-    {gUnknown_Debug_083C2AB8, Config},
-    {gUnknown_Debug_083C2ACF, Config},
-    {gUnknown_Debug_083C2AE6, Config},
-    {gUnknown_Debug_083C2AFB, Config},
-    {gUnknown_Debug_083C2B0F, Config},
-    {gUnknown_Debug_083C2B27, Config},
-    {gUnknown_Debug_083C2B38, Config}
+    {gUnknown_Debug_083C2A90, DummyMenuAction},
+    {gUnknown_Debug_083C2AA6, DummyMenuAction},
+    {gUnknown_Debug_083C2AB8, DummyMenuAction},
+    {gUnknown_Debug_083C2ACF, DummyMenuAction},
+    {gUnknown_Debug_083C2AE6, DummyMenuAction},
+    {gUnknown_Debug_083C2AFB, DummyMenuAction},
+    {gUnknown_Debug_083C2B0F, DummyMenuAction},
+    {gUnknown_Debug_083C2B27, DummyMenuAction},
+    {gUnknown_Debug_083C2B38, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2B94[] = _("FEーMITSURUー01ーT106ーR0201");
@@ -1120,15 +1119,15 @@ static const u8 gUnknown_Debug_083C2C47[] = _("FEーDOORーOPENー04ーCAVEーD1
 static const u8 gUnknown_Debug_083C2C62[] = _("FEーDOORーOPENー06ーCAVEーD1712");
 
 static const struct MenuAction gUnknown_Debug_083C2C80[] = {
-    {gUnknown_Debug_083C2B94, Config},
-    {gUnknown_Debug_083C2BAD, Config},
-    {gUnknown_Debug_083C2BC6, Config},
-    {gUnknown_Debug_083C2BDF, Config},
-    {gUnknown_Debug_083C2BF8, Config},
-    {gUnknown_Debug_083C2C11, Config},
-    {gUnknown_Debug_083C2C2C, Config},
-    {gUnknown_Debug_083C2C47, Config},
-    {gUnknown_Debug_083C2C62, Config}
+    {gUnknown_Debug_083C2B94, DummyMenuAction},
+    {gUnknown_Debug_083C2BAD, DummyMenuAction},
+    {gUnknown_Debug_083C2BC6, DummyMenuAction},
+    {gUnknown_Debug_083C2BDF, DummyMenuAction},
+    {gUnknown_Debug_083C2BF8, DummyMenuAction},
+    {gUnknown_Debug_083C2C11, DummyMenuAction},
+    {gUnknown_Debug_083C2C2C, DummyMenuAction},
+    {gUnknown_Debug_083C2C47, DummyMenuAction},
+    {gUnknown_Debug_083C2C62, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2CC8[] = _("FEーKARAKURI10ーSWITCHー01");
@@ -1142,15 +1141,15 @@ static const u8 gUnknown_Debug_083C2D66[] = _("FEーGYM07ーSWITCHー03");
 static const u8 gUnknown_Debug_083C2D79[] = _("FEーGYM07ーSWITCHー04");
 
 static const struct MenuAction gUnknown_Debug_083C2D8C[] = {
-    {gUnknown_Debug_083C2CC8, Config},
-    {gUnknown_Debug_083C2CE0, Config},
-    {gUnknown_Debug_083C2CF8, Config},
-    {gUnknown_Debug_083C2D10, Config},
-    {gUnknown_Debug_083C2D28, Config},
-    {gUnknown_Debug_083C2D40, Config},
-    {gUnknown_Debug_083C2D53, Config},
-    {gUnknown_Debug_083C2D66, Config},
-    {gUnknown_Debug_083C2D79, Config}
+    {gUnknown_Debug_083C2CC8, DummyMenuAction},
+    {gUnknown_Debug_083C2CE0, DummyMenuAction},
+    {gUnknown_Debug_083C2CF8, DummyMenuAction},
+    {gUnknown_Debug_083C2D10, DummyMenuAction},
+    {gUnknown_Debug_083C2D28, DummyMenuAction},
+    {gUnknown_Debug_083C2D40, DummyMenuAction},
+    {gUnknown_Debug_083C2D53, DummyMenuAction},
+    {gUnknown_Debug_083C2D66, DummyMenuAction},
+    {gUnknown_Debug_083C2D79, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2DD4[] = _("FEーSUPPORTー01ーFIELDーR103");
@@ -1164,15 +1163,15 @@ static const u8 gUnknown_Debug_083C2E78[] = _("FEーODAMAKIー01ーP01ーT101ー
 static const u8 gUnknown_Debug_083C2E93[] = _("FEーPAPAー01ーP01ーC101ーR0201");
 
 static const struct MenuAction gUnknown_Debug_083C2EB0[] = {
-    {gUnknown_Debug_083C2DD4, Config},
-    {gUnknown_Debug_083C2DED, Config},
-    {gUnknown_Debug_083C2E06, Config},
-    {gUnknown_Debug_083C2E1F, Config},
-    {gUnknown_Debug_083C2E38, Config},
-    {gUnknown_Debug_083C2E51, Config},
-    {gUnknown_Debug_083C2E6B, Config},
-    {gUnknown_Debug_083C2E78, Config},
-    {gUnknown_Debug_083C2E93, Config}
+    {gUnknown_Debug_083C2DD4, DummyMenuAction},
+    {gUnknown_Debug_083C2DED, DummyMenuAction},
+    {gUnknown_Debug_083C2E06, DummyMenuAction},
+    {gUnknown_Debug_083C2E1F, DummyMenuAction},
+    {gUnknown_Debug_083C2E38, DummyMenuAction},
+    {gUnknown_Debug_083C2E51, DummyMenuAction},
+    {gUnknown_Debug_083C2E6B, DummyMenuAction},
+    {gUnknown_Debug_083C2E78, DummyMenuAction},
+    {gUnknown_Debug_083C2E93, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C2EF8[] = _("FEーDAISUKIーGOODSーFLAG01");
@@ -1186,15 +1185,15 @@ static const u8 gUnknown_Debug_083C2FA8[] = _("FEーBALLー01ーP01ーSPーCONTE
 static const u8 gUnknown_Debug_083C2FC2[] = _("FEーWOMAN2ー01ーP01ーT101ーR0201");
 
 static const struct MenuAction gUnknown_Debug_083C2FE0[] = {
-    {gUnknown_Debug_083C2EF8, Config},
-    {gUnknown_Debug_083C2F10, Config},
-    {gUnknown_Debug_083C2F28, Config},
-    {gUnknown_Debug_083C2F40, Config},
-    {gUnknown_Debug_083C2F58, Config},
-    {gUnknown_Debug_083C2F70, Config},
-    {gUnknown_Debug_083C2F8C, Config},
-    {gUnknown_Debug_083C2FA8, Config},
-    {gUnknown_Debug_083C2FC2, Config}
+    {gUnknown_Debug_083C2EF8, DummyMenuAction},
+    {gUnknown_Debug_083C2F10, DummyMenuAction},
+    {gUnknown_Debug_083C2F28, DummyMenuAction},
+    {gUnknown_Debug_083C2F40, DummyMenuAction},
+    {gUnknown_Debug_083C2F58, DummyMenuAction},
+    {gUnknown_Debug_083C2F70, DummyMenuAction},
+    {gUnknown_Debug_083C2F8C, DummyMenuAction},
+    {gUnknown_Debug_083C2FA8, DummyMenuAction},
+    {gUnknown_Debug_083C2FC2, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C3028[] = _("FEーSOUKOーOPENーCAVEーD1704");
@@ -1208,15 +1207,15 @@ static const u8 gUnknown_Debug_083C30D9[] = _("FEーDASHーSHOESーGET");
 static const u8 gUnknown_Debug_083C30EB[] = _("FEーDEBONSUKOOPUーGET");
 
 static const struct MenuAction gUnknown_Debug_083C3100[] = {
-    {gUnknown_Debug_083C3028, Config},
-    {gUnknown_Debug_083C3041, Config},
-    {gUnknown_Debug_083C305A, Config},
-    {gUnknown_Debug_083C3073, Config},
-    {gUnknown_Debug_083C308D, Config},
-    {gUnknown_Debug_083C30A8, Config},
-    {gUnknown_Debug_083C30C3, Config},
-    {gUnknown_Debug_083C30D9, Config},
-    {gUnknown_Debug_083C30EB, Config}
+    {gUnknown_Debug_083C3028, DummyMenuAction},
+    {gUnknown_Debug_083C3041, DummyMenuAction},
+    {gUnknown_Debug_083C305A, DummyMenuAction},
+    {gUnknown_Debug_083C3073, DummyMenuAction},
+    {gUnknown_Debug_083C308D, DummyMenuAction},
+    {gUnknown_Debug_083C30A8, DummyMenuAction},
+    {gUnknown_Debug_083C30C3, DummyMenuAction},
+    {gUnknown_Debug_083C30D9, DummyMenuAction},
+    {gUnknown_Debug_083C30EB, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C3148[] = _("FEーSTUDYM1ー01ーP01ーT101R0301");
@@ -1230,15 +1229,15 @@ static const u8 gUnknown_Debug_083C3191[] = _("");
 static const u8 gUnknown_Debug_083C3192[] = _("");
 
 static const struct MenuAction gUnknown_Debug_083C3194[] = {
-    {gUnknown_Debug_083C3148, Config},
-    {gUnknown_Debug_083C3164, Config},
-    {gUnknown_Debug_083C317E, Config},
-    {gUnknown_Debug_083C318D, Config},
-    {gUnknown_Debug_083C318E, Config},
-    {gUnknown_Debug_083C318F, Config},
-    {gUnknown_Debug_083C3190, Config},
-    {gUnknown_Debug_083C3191, Config},
-    {gUnknown_Debug_083C3192, Config}
+    {gUnknown_Debug_083C3148, DummyMenuAction},
+    {gUnknown_Debug_083C3164, DummyMenuAction},
+    {gUnknown_Debug_083C317E, DummyMenuAction},
+    {gUnknown_Debug_083C318D, DummyMenuAction},
+    {gUnknown_Debug_083C318E, DummyMenuAction},
+    {gUnknown_Debug_083C318F, DummyMenuAction},
+    {gUnknown_Debug_083C3190, DummyMenuAction},
+    {gUnknown_Debug_083C3191, DummyMenuAction},
+    {gUnknown_Debug_083C3192, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C31DC[] = {9, 9, 9, 9, 9, 9, 9, 9, 3};
@@ -1300,43 +1299,43 @@ static const u8 gUnknown_Debug_083C345E[] = _("WKーPOKELOTーRND2");
 static const u8 gUnknown_Debug_083C346E[] = _("WKーBASEーMAPNO");
 
 static const struct MenuAction gUnknown_Debug_083C347C[] = {
-    {gUnknown_Debug_083C32D4, Config},
-    {gUnknown_Debug_083C32E6, Config},
-    {gUnknown_Debug_083C32FA, Config}
+    {gUnknown_Debug_083C32D4, DummyMenuAction},
+    {gUnknown_Debug_083C32E6, DummyMenuAction},
+    {gUnknown_Debug_083C32FA, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C3494[] = {
-    {gUnknown_Debug_083C330E, Config},
-    {gUnknown_Debug_083C3325, Config}
+    {gUnknown_Debug_083C330E, DummyMenuAction},
+    {gUnknown_Debug_083C3325, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C34A4[] = {
-    {gUnknown_Debug_083C333A, Config},
-    {gUnknown_Debug_083C3349, Config},
-    {gUnknown_Debug_083C3356, Config},
-    {gUnknown_Debug_083C336A, Config},
-    {gUnknown_Debug_083C337A, Config},
-    {gUnknown_Debug_083C3391, Config}
+    {gUnknown_Debug_083C333A, DummyMenuAction},
+    {gUnknown_Debug_083C3349, DummyMenuAction},
+    {gUnknown_Debug_083C3356, DummyMenuAction},
+    {gUnknown_Debug_083C336A, DummyMenuAction},
+    {gUnknown_Debug_083C337A, DummyMenuAction},
+    {gUnknown_Debug_083C3391, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C34D4[] = {
-    {gUnknown_Debug_083C33A6, Config},
-    {gUnknown_Debug_083C33B6, Config},
-    {gUnknown_Debug_083C33C4, Config},
-    {gUnknown_Debug_083C33D5, Config},
-    {gUnknown_Debug_083C33E6, Config},
-    {gUnknown_Debug_083C33F6, Config},
-    {gUnknown_Debug_083C3401, Config},
-    {gUnknown_Debug_083C340C, Config},
-    {gUnknown_Debug_083C341E, Config}
+    {gUnknown_Debug_083C33A6, DummyMenuAction},
+    {gUnknown_Debug_083C33B6, DummyMenuAction},
+    {gUnknown_Debug_083C33C4, DummyMenuAction},
+    {gUnknown_Debug_083C33D5, DummyMenuAction},
+    {gUnknown_Debug_083C33E6, DummyMenuAction},
+    {gUnknown_Debug_083C33F6, DummyMenuAction},
+    {gUnknown_Debug_083C3401, DummyMenuAction},
+    {gUnknown_Debug_083C340C, DummyMenuAction},
+    {gUnknown_Debug_083C341E, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C351C[] = {
-    {gUnknown_Debug_083C342F, Config},
-    {gUnknown_Debug_083C343F, Config},
-    {gUnknown_Debug_083C344E, Config},
-    {gUnknown_Debug_083C345E, Config},
-    {gUnknown_Debug_083C346E, Config}
+    {gUnknown_Debug_083C342F, DummyMenuAction},
+    {gUnknown_Debug_083C343F, DummyMenuAction},
+    {gUnknown_Debug_083C344E, DummyMenuAction},
+    {gUnknown_Debug_083C345E, DummyMenuAction},
+    {gUnknown_Debug_083C346E, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C3544[] = {3, 2, 6, 9, 5};
@@ -1376,25 +1375,25 @@ static const u8 gUnknown_Debug_083C3681[] = _("OBJCHRWORK15");
 static const u8 gUnknown_Debug_083C368E[] = _("OBJCHRWORK16");
 
 static const struct MenuAction gUnknown_Debug_083C369C[] = {
-    {gUnknown_Debug_083C35D4, Config},
-    {gUnknown_Debug_083C35E0, Config},
-    {gUnknown_Debug_083C35EC, Config},
-    {gUnknown_Debug_083C35F8, Config},
-    {gUnknown_Debug_083C3604, Config},
-    {gUnknown_Debug_083C3610, Config},
-    {gUnknown_Debug_083C361C, Config},
-    {gUnknown_Debug_083C3628, Config},
-    {gUnknown_Debug_083C3634, Config}
+    {gUnknown_Debug_083C35D4, DummyMenuAction},
+    {gUnknown_Debug_083C35E0, DummyMenuAction},
+    {gUnknown_Debug_083C35EC, DummyMenuAction},
+    {gUnknown_Debug_083C35F8, DummyMenuAction},
+    {gUnknown_Debug_083C3604, DummyMenuAction},
+    {gUnknown_Debug_083C3610, DummyMenuAction},
+    {gUnknown_Debug_083C361C, DummyMenuAction},
+    {gUnknown_Debug_083C3628, DummyMenuAction},
+    {gUnknown_Debug_083C3634, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C36E4[] = {
-    {gUnknown_Debug_083C3640, Config},
-    {gUnknown_Debug_083C364D, Config},
-    {gUnknown_Debug_083C365A, Config},
-    {gUnknown_Debug_083C3667, Config},
-    {gUnknown_Debug_083C3674, Config},
-    {gUnknown_Debug_083C3681, Config},
-    {gUnknown_Debug_083C368E, Config}
+    {gUnknown_Debug_083C3640, DummyMenuAction},
+    {gUnknown_Debug_083C364D, DummyMenuAction},
+    {gUnknown_Debug_083C365A, DummyMenuAction},
+    {gUnknown_Debug_083C3667, DummyMenuAction},
+    {gUnknown_Debug_083C3674, DummyMenuAction},
+    {gUnknown_Debug_083C3681, DummyMenuAction},
+    {gUnknown_Debug_083C368E, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C371C[] = {9, 7};
@@ -1481,79 +1480,79 @@ static const u8 gUnknown_Debug_083C3A9D[] = _("");
 static const u8 gUnknown_Debug_083C3A9E[] = _("");
 
 static const struct MenuAction gUnknown_Debug_083C3AA0[] = {
-    {gUnknown_Debug_083C37AC, Config},
-    {gUnknown_Debug_083C37C0, Config},
-    {gUnknown_Debug_083C37CF, Config},
-    {gUnknown_Debug_083C37E5, Config},
-    {gUnknown_Debug_083C37FD, Config},
-    {gUnknown_Debug_083C3811, Config},
-    {gUnknown_Debug_083C3824, Config},
-    {gUnknown_Debug_083C3825, Config}
+    {gUnknown_Debug_083C37AC, DummyMenuAction},
+    {gUnknown_Debug_083C37C0, DummyMenuAction},
+    {gUnknown_Debug_083C37CF, DummyMenuAction},
+    {gUnknown_Debug_083C37E5, DummyMenuAction},
+    {gUnknown_Debug_083C37FD, DummyMenuAction},
+    {gUnknown_Debug_083C3811, DummyMenuAction},
+    {gUnknown_Debug_083C3824, DummyMenuAction},
+    {gUnknown_Debug_083C3825, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_83C3AE0[] = {
-    {gUnknown_Debug_083C3827, Config},
-    {gUnknown_Debug_083C383B, Config},
-    {gUnknown_Debug_083C384F, Config},
-    {gUnknown_Debug_083C3863, Config},
-    {gUnknown_Debug_083C3875, Config},
-    {gUnknown_Debug_083C3885, Config},
-    {gUnknown_Debug_083C3886, Config},
-    {gUnknown_Debug_083C3887, Config},
-    {gUnknown_Debug_083C3888, Config}
+    {gUnknown_Debug_083C3827, DummyMenuAction},
+    {gUnknown_Debug_083C383B, DummyMenuAction},
+    {gUnknown_Debug_083C384F, DummyMenuAction},
+    {gUnknown_Debug_083C3863, DummyMenuAction},
+    {gUnknown_Debug_083C3875, DummyMenuAction},
+    {gUnknown_Debug_083C3885, DummyMenuAction},
+    {gUnknown_Debug_083C3886, DummyMenuAction},
+    {gUnknown_Debug_083C3887, DummyMenuAction},
+    {gUnknown_Debug_083C3888, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_83C3B28[] = {
-    {gUnknown_Debug_083C3889, Config},
-    {gUnknown_Debug_083C389D, Config},
-    {gUnknown_Debug_083C38B1, Config},
-    {gUnknown_Debug_083C38C5, Config},
-    {gUnknown_Debug_083C38D9, Config},
-    {gUnknown_Debug_083C38ED, Config},
-    {gUnknown_Debug_083C3901, Config},
-    {gUnknown_Debug_083C3915, Config},
-    {gUnknown_Debug_083C3929, Config}
+    {gUnknown_Debug_083C3889, DummyMenuAction},
+    {gUnknown_Debug_083C389D, DummyMenuAction},
+    {gUnknown_Debug_083C38B1, DummyMenuAction},
+    {gUnknown_Debug_083C38C5, DummyMenuAction},
+    {gUnknown_Debug_083C38D9, DummyMenuAction},
+    {gUnknown_Debug_083C38ED, DummyMenuAction},
+    {gUnknown_Debug_083C3901, DummyMenuAction},
+    {gUnknown_Debug_083C3915, DummyMenuAction},
+    {gUnknown_Debug_083C3929, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_83C3B70[] = {
-    {gUnknown_Debug_083C3940, Config},
-    {gUnknown_Debug_083C3954, Config},
-    {gUnknown_Debug_083C3968, Config},
-    {gUnknown_Debug_083C3969, Config},
-    {gUnknown_Debug_083C396A, Config},
-    {gUnknown_Debug_083C396B, Config},
-    {gUnknown_Debug_083C396C, Config},
-    {gUnknown_Debug_083C396D, Config},
-    {gUnknown_Debug_083C396E, Config}
+    {gUnknown_Debug_083C3940, DummyMenuAction},
+    {gUnknown_Debug_083C3954, DummyMenuAction},
+    {gUnknown_Debug_083C3968, DummyMenuAction},
+    {gUnknown_Debug_083C3969, DummyMenuAction},
+    {gUnknown_Debug_083C396A, DummyMenuAction},
+    {gUnknown_Debug_083C396B, DummyMenuAction},
+    {gUnknown_Debug_083C396C, DummyMenuAction},
+    {gUnknown_Debug_083C396D, DummyMenuAction},
+    {gUnknown_Debug_083C396E, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_83C3BB8[] = {
-    {gUnknown_Debug_083C396F, Config},
-    {gUnknown_Debug_083C3984, Config},
-    {gUnknown_Debug_083C3997, Config},
-    {gUnknown_Debug_083C39A9, Config},
-    {gUnknown_Debug_083C39BC, Config},
-    {gUnknown_Debug_083C39D3, Config},
-    {gUnknown_Debug_083C39E8, Config},
-    {gUnknown_Debug_083C39F9, Config},
-    {gUnknown_Debug_083C3A0E, Config}
+    {gUnknown_Debug_083C396F, DummyMenuAction},
+    {gUnknown_Debug_083C3984, DummyMenuAction},
+    {gUnknown_Debug_083C3997, DummyMenuAction},
+    {gUnknown_Debug_083C39A9, DummyMenuAction},
+    {gUnknown_Debug_083C39BC, DummyMenuAction},
+    {gUnknown_Debug_083C39D3, DummyMenuAction},
+    {gUnknown_Debug_083C39E8, DummyMenuAction},
+    {gUnknown_Debug_083C39F9, DummyMenuAction},
+    {gUnknown_Debug_083C3A0E, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_83C3C00[] = {
-    {gUnknown_Debug_083C3A22, Config},
-    {gUnknown_Debug_083C3A36, Config},
-    {gUnknown_Debug_083C3A4D, Config},
-    {gUnknown_Debug_083C3A65, Config},
-    {gUnknown_Debug_083C3A7B, Config},
-    {gUnknown_Debug_083C3A8D, Config},
-    {gUnknown_Debug_083C3A9C, Config},
-    {gUnknown_Debug_083C3A9D, Config},
-    {gUnknown_Debug_083C3A9E, Config}
+    {gUnknown_Debug_083C3A22, DummyMenuAction},
+    {gUnknown_Debug_083C3A36, DummyMenuAction},
+    {gUnknown_Debug_083C3A4D, DummyMenuAction},
+    {gUnknown_Debug_083C3A65, DummyMenuAction},
+    {gUnknown_Debug_083C3A7B, DummyMenuAction},
+    {gUnknown_Debug_083C3A8D, DummyMenuAction},
+    {gUnknown_Debug_083C3A9C, DummyMenuAction},
+    {gUnknown_Debug_083C3A9D, DummyMenuAction},
+    {gUnknown_Debug_083C3A9E, DummyMenuAction}
 };
 
-static const u8 gUnknown_Debug_083C3C48[] = {6, 5, 9, 2, 9, 6};
+static const u8 sControlWorks_SaveWork_CountsArray[] = {6, 5, 9, 2, 9, 6};
 
-static const u16 gUnknown_Debug_83C3C4E[][9] = {
+static const u16 sControlWorks_SaveWork_ItemArrays[][9] = {
     {VAR_LINK_CONTEST_ROOM_STATE, VAR_CABLE_CLUB_STATE, VAR_CONTEST_LOCATION, VAR_CONTEST_PRIZE_PICKUP, VAR_LITTLEROOT_INTRO_STATE, VAR_PORTHOLE_STATE},
     {VAR_TRICK_HOUSE_ENTRANCE_STATE_2, VAR_TRICK_HOUSE_PRIZE_PICKUP, VAR_TRICK_HOUSE_STATE, VAR_TRICK_HOUSE_ENTRANCE_STATE_3, VAR_TRICK_HOUSE_ENTRANCE_STATE},
     {VAR_TRICK_HOUSE_PUZZLE_1_STATE, VAR_TRICK_HOUSE_PUZZLE_2_STATE, VAR_TRICK_HOUSE_PUZZLE_3_STATE, VAR_TRICK_HOUSE_PUZZLE_4_STATE, VAR_TRICK_HOUSE_PUZZLE_5_STATE, VAR_TRICK_HOUSE_PUZZLE_6_STATE, VAR_TRICK_HOUSE_PUZZLE_7_STATE, VAR_TRICK_HOUSE_PUZZLE_8_STATE, VAR_TRICK_HOUSE_PUZZLE_7_STATE_2},
@@ -1562,26 +1561,26 @@ static const u16 gUnknown_Debug_83C3C4E[][9] = {
     {VAR_WEATHER_INSTITUTE_STATE, VAR_SLATEPORT_FAN_CLUB_STATE, 0x40BB, VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, VAR_GAME_CORNER_STATE, VAR_WHICH_FOSSIL_REVIVED}
 };
 
-static const u8 gUnknown_Debug_083C3CBA[] = _("タウン");
-static const u8 gUnknown_Debug_083C3CBE[] = _("シティ");
-static const u8 gUnknown_Debug_083C3CC2[] = _("ロード101ー109");
-static const u8 gUnknown_Debug_083C3CCD[] = _("ロード110ー118");
-static const u8 gUnknown_Debug_083C3CD8[] = _("ロード119ー127");
-static const u8 gUnknown_Debug_083C3CE3[] = _("ロード128ー134");
-static const u8 gUnknown_Debug_083C3CEE[] = _("ルーム　タウン");
-static const u8 gUnknown_Debug_083C3CF6[] = _("ルーム　シティ");
-static const u8 gUnknown_Debug_083C3CFE[] = _("ダンジョンない");
+static const u8 sString_Town[] = _("タウン");
+static const u8 sString_City[] = _("シティ");
+static const u8 sString_Route_101_to_109[] = _("ロード101ー109");
+static const u8 sString_Route_110_to_118[] = _("ロード110ー118");
+static const u8 sString_Route_119_to_127[] = _("ロード119ー127");
+static const u8 sString_Route_128_to_134[] = _("ロード128ー134");
+static const u8 sString_Room_Town[] = _("ルーム　タウン");
+static const u8 sString_Room_City[] = _("ルーム　シティ");
+static const u8 sString_Dungeon_nai[] = _("ダンジョンない");
 
-static const struct MenuAction gUnknown_Debug_083C3D08[] = {
-    {gUnknown_Debug_083C3CBA, debug_sub_808DBA0},
-    {gUnknown_Debug_083C3CBE, debug_sub_808DBF8},
-    {gUnknown_Debug_083C3CC2, debug_sub_808DC50},
-    {gUnknown_Debug_083C3CCD, debug_sub_808DCA8},
-    {gUnknown_Debug_083C3CD8, debug_sub_808DD00},
-    {gUnknown_Debug_083C3CE3, debug_sub_808DD58},
-    {gUnknown_Debug_083C3CEE, debug_sub_808DDB0},
-    {gUnknown_Debug_083C3CF6, debug_sub_808DE08},
-    {gUnknown_Debug_083C3CFE, debug_sub_808DE60}
+static const struct MenuAction sMenuAction_ControlWorks_SaveWork[] = {
+    {sString_Town, ControlWorks_SaveWork_Town_InitSubsubmenu},
+    {sString_City, ControlWorks_SaveWork_City_InitSubsubmenu},
+    {sString_Route_101_to_109, ControlWorks_SaveWork_Route101To109_InitSubsubmenu},
+    {sString_Route_110_to_118, ControlWorks_SaveWork_Route110To118_InitSubsubmenu},
+    {sString_Route_119_to_127, ControlWorks_SaveWork_Route119To127_InitSubsubmenu},
+    {sString_Route_128_to_134, ControlWorks_SaveWork_Route128To134_InitSubsubmenu},
+    {sString_Room_Town, ControlWorks_SaveWork_RoomTown_InitSubsubmenu},
+    {sString_Room_City, ControlWorks_SaveWork_RoomCity_InitSubsubmenu},
+    {sString_Dungeon_nai, ControlWorks_SaveWork_Dungeon_InitSubsubmenu}
 };
 
 static const u8 gUnknown_Debug_083C3D50[] = _("WKーSCENEーFIELDーT101");
@@ -1668,105 +1667,105 @@ static const u8 gUnknown_Debug_083C42ED[] = _("WKーSCENEーCAVEーD1602");
 static const u8 gUnknown_Debug_083C4301[] = _("WKーSCENEーCAVEーD0101");
 static const u8 gUnknown_Debug_083C4315[] = _("WKーSCENEーCAVEーD1301");
 
-static const struct MenuAction gUnknown_Debug_083C432C[] = {
-    {gUnknown_Debug_083C3D50, Config},
-    {gUnknown_Debug_083C3D64, Config},
-    {gUnknown_Debug_083C3D78, Config},
-    {gUnknown_Debug_083C3D8C, Config},
-    {gUnknown_Debug_083C3DA0, Config},
-    {gUnknown_Debug_083C3DAE, Config},
-    {gUnknown_Debug_083C3DC2, Config},
-    {gUnknown_Debug_083C3DD6, Config}
+static const struct MenuAction sMenuActions_SaveWork_Town[] = {
+    {gUnknown_Debug_083C3D50, DummyMenuAction},
+    {gUnknown_Debug_083C3D64, DummyMenuAction},
+    {gUnknown_Debug_083C3D78, DummyMenuAction},
+    {gUnknown_Debug_083C3D8C, DummyMenuAction},
+    {gUnknown_Debug_083C3DA0, DummyMenuAction},
+    {gUnknown_Debug_083C3DAE, DummyMenuAction},
+    {gUnknown_Debug_083C3DC2, DummyMenuAction},
+    {gUnknown_Debug_083C3DD6, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C436C[] = {
-    {gUnknown_Debug_083C3DED, Config},
-    {gUnknown_Debug_083C3E01, Config},
-    {gUnknown_Debug_083C3E15, Config},
-    {gUnknown_Debug_083C3E29, Config},
-    {gUnknown_Debug_083C3E3D, Config},
-    {gUnknown_Debug_083C3E51, Config},
-    {gUnknown_Debug_083C3E65, Config},
-    {gUnknown_Debug_083C3E79, Config},
-    {gUnknown_Debug_083C3E8D, Config}
+static const struct MenuAction sMenuActions_SaveWork_City[] = {
+    {gUnknown_Debug_083C3DED, DummyMenuAction},
+    {gUnknown_Debug_083C3E01, DummyMenuAction},
+    {gUnknown_Debug_083C3E15, DummyMenuAction},
+    {gUnknown_Debug_083C3E29, DummyMenuAction},
+    {gUnknown_Debug_083C3E3D, DummyMenuAction},
+    {gUnknown_Debug_083C3E51, DummyMenuAction},
+    {gUnknown_Debug_083C3E65, DummyMenuAction},
+    {gUnknown_Debug_083C3E79, DummyMenuAction},
+    {gUnknown_Debug_083C3E8D, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C43B4[] = {
-    {gUnknown_Debug_083C3EA1, Config},
-    {gUnknown_Debug_083C3EB5, Config},
-    {gUnknown_Debug_083C3EC9, Config},
-    {gUnknown_Debug_083C3EDD, Config},
-    {gUnknown_Debug_083C3EF1, Config},
-    {gUnknown_Debug_083C3F05, Config},
-    {gUnknown_Debug_083C3F19, Config},
-    {gUnknown_Debug_083C3F2D, Config},
-    {gUnknown_Debug_083C3F41, Config}
+static const struct MenuAction sMenuActions_SaveWork_Route101To109[] = {
+    {gUnknown_Debug_083C3EA1, DummyMenuAction},
+    {gUnknown_Debug_083C3EB5, DummyMenuAction},
+    {gUnknown_Debug_083C3EC9, DummyMenuAction},
+    {gUnknown_Debug_083C3EDD, DummyMenuAction},
+    {gUnknown_Debug_083C3EF1, DummyMenuAction},
+    {gUnknown_Debug_083C3F05, DummyMenuAction},
+    {gUnknown_Debug_083C3F19, DummyMenuAction},
+    {gUnknown_Debug_083C3F2D, DummyMenuAction},
+    {gUnknown_Debug_083C3F41, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C43FC[] = {
-    {gUnknown_Debug_083C3F55, Config},
-    {gUnknown_Debug_083C3F69, Config},
-    {gUnknown_Debug_083C3F7D, Config},
-    {gUnknown_Debug_083C3F91, Config},
-    {gUnknown_Debug_083C3FA5, Config},
-    {gUnknown_Debug_083C3FB9, Config},
-    {gUnknown_Debug_083C3FCD, Config},
-    {gUnknown_Debug_083C3FE1, Config},
-    {gUnknown_Debug_083C3FF5, Config}
+static const struct MenuAction sMenuActions_SaveWork_Route110To118[] = {
+    {gUnknown_Debug_083C3F55, DummyMenuAction},
+    {gUnknown_Debug_083C3F69, DummyMenuAction},
+    {gUnknown_Debug_083C3F7D, DummyMenuAction},
+    {gUnknown_Debug_083C3F91, DummyMenuAction},
+    {gUnknown_Debug_083C3FA5, DummyMenuAction},
+    {gUnknown_Debug_083C3FB9, DummyMenuAction},
+    {gUnknown_Debug_083C3FCD, DummyMenuAction},
+    {gUnknown_Debug_083C3FE1, DummyMenuAction},
+    {gUnknown_Debug_083C3FF5, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C4444[] = {
-    {gUnknown_Debug_083C4009, Config},
-    {gUnknown_Debug_083C401D, Config},
-    {gUnknown_Debug_083C4031, Config},
-    {gUnknown_Debug_083C4045, Config},
-    {gUnknown_Debug_083C4059, Config},
-    {gUnknown_Debug_083C406D, Config},
-    {gUnknown_Debug_083C4081, Config},
-    {gUnknown_Debug_083C4095, Config},
-    {gUnknown_Debug_083C40A9, Config}
+static const struct MenuAction sMenuActions_SaveWork_Route119To127[] = {
+    {gUnknown_Debug_083C4009, DummyMenuAction},
+    {gUnknown_Debug_083C401D, DummyMenuAction},
+    {gUnknown_Debug_083C4031, DummyMenuAction},
+    {gUnknown_Debug_083C4045, DummyMenuAction},
+    {gUnknown_Debug_083C4059, DummyMenuAction},
+    {gUnknown_Debug_083C406D, DummyMenuAction},
+    {gUnknown_Debug_083C4081, DummyMenuAction},
+    {gUnknown_Debug_083C4095, DummyMenuAction},
+    {gUnknown_Debug_083C40A9, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C448C[] = {
-    {gUnknown_Debug_083C40BD, Config},
-    {gUnknown_Debug_083C40D1, Config},
-    {gUnknown_Debug_083C40E5, Config},
-    {gUnknown_Debug_083C40F9, Config},
-    {gUnknown_Debug_083C410D, Config},
-    {gUnknown_Debug_083C4121, Config},
-    {gUnknown_Debug_083C4135, Config}
+static const struct MenuAction sMenuActions_SaveWork_Route128To134[] = {
+    {gUnknown_Debug_083C40BD, DummyMenuAction},
+    {gUnknown_Debug_083C40D1, DummyMenuAction},
+    {gUnknown_Debug_083C40E5, DummyMenuAction},
+    {gUnknown_Debug_083C40F9, DummyMenuAction},
+    {gUnknown_Debug_083C410D, DummyMenuAction},
+    {gUnknown_Debug_083C4121, DummyMenuAction},
+    {gUnknown_Debug_083C4135, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_83C44C4[] = {
-    {gUnknown_Debug_083C4149, Config},
-    {gUnknown_Debug_083C415D, Config},
-    {gUnknown_Debug_083C4171, Config},
-    {gUnknown_Debug_083C4185, Config},
-    {gUnknown_Debug_083C4199, Config}
+static const struct MenuAction sMenuActions_SaveWork_RoomTown[] = {
+    {gUnknown_Debug_083C4149, DummyMenuAction},
+    {gUnknown_Debug_083C415D, DummyMenuAction},
+    {gUnknown_Debug_083C4171, DummyMenuAction},
+    {gUnknown_Debug_083C4185, DummyMenuAction},
+    {gUnknown_Debug_083C4199, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_83C44EC[] = {
-    {gUnknown_Debug_083C41C1, Config},
-    {gUnknown_Debug_083C41D5, Config},
-    {gUnknown_Debug_083C41E9, Config},
-    {gUnknown_Debug_083C41FD, Config},
-    {gUnknown_Debug_083C4211, Config},
-    {gUnknown_Debug_083C4225, Config},
-    {gUnknown_Debug_083C4239, Config},
-    {gUnknown_Debug_083C424D, Config},
-    {gUnknown_Debug_083C4261, Config}
+static const struct MenuAction sMenuActions_SaveWork_RoomCity[] = {
+    {gUnknown_Debug_083C41C1, DummyMenuAction},
+    {gUnknown_Debug_083C41D5, DummyMenuAction},
+    {gUnknown_Debug_083C41E9, DummyMenuAction},
+    {gUnknown_Debug_083C41FD, DummyMenuAction},
+    {gUnknown_Debug_083C4211, DummyMenuAction},
+    {gUnknown_Debug_083C4225, DummyMenuAction},
+    {gUnknown_Debug_083C4239, DummyMenuAction},
+    {gUnknown_Debug_083C424D, DummyMenuAction},
+    {gUnknown_Debug_083C4261, DummyMenuAction}
 };
 
-static const struct MenuAction gUnknown_Debug_083C4534[] = {
-    {gUnknown_Debug_083C4275, Config},
-    {gUnknown_Debug_083C4289, Config},
-    {gUnknown_Debug_083C429D, Config},
-    {gUnknown_Debug_083C42B1, Config},
-    {gUnknown_Debug_083C42C5, Config},
-    {gUnknown_Debug_083C42D9, Config},
-    {gUnknown_Debug_083C42ED, Config},
-    {gUnknown_Debug_083C4301, Config},
-    {gUnknown_Debug_083C4315, Config}
+static const struct MenuAction sMenuActions_SaveWork_Dungeon[] = {
+    {gUnknown_Debug_083C4275, DummyMenuAction},
+    {gUnknown_Debug_083C4289, DummyMenuAction},
+    {gUnknown_Debug_083C429D, DummyMenuAction},
+    {gUnknown_Debug_083C42B1, DummyMenuAction},
+    {gUnknown_Debug_083C42C5, DummyMenuAction},
+    {gUnknown_Debug_083C42D9, DummyMenuAction},
+    {gUnknown_Debug_083C42ED, DummyMenuAction},
+    {gUnknown_Debug_083C4301, DummyMenuAction},
+    {gUnknown_Debug_083C4315, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C457C[] = {8, 9, 9, 9, 9, 7, 6, 9, 9};
@@ -1810,25 +1809,25 @@ static const u8 gUnknown_Debug_083C46F2[] = _("LOCALWORK14");
 static const u8 gUnknown_Debug_083C46FE[] = _("LOCALWORK15");
 
 static const struct MenuAction gUnknown_Debug_083C470C[] = {
-    {gUnknown_Debug_083C4654, Config},
-    {gUnknown_Debug_083C465F, Config},
-    {gUnknown_Debug_083C466A, Config},
-    {gUnknown_Debug_083C4675, Config},
-    {gUnknown_Debug_083C4680, Config},
-    {gUnknown_Debug_083C468B, Config},
-    {gUnknown_Debug_083C4696, Config},
-    {gUnknown_Debug_083C46A1, Config},
-    {gUnknown_Debug_083C46AC, Config}
+    {gUnknown_Debug_083C4654, DummyMenuAction},
+    {gUnknown_Debug_083C465F, DummyMenuAction},
+    {gUnknown_Debug_083C466A, DummyMenuAction},
+    {gUnknown_Debug_083C4675, DummyMenuAction},
+    {gUnknown_Debug_083C4680, DummyMenuAction},
+    {gUnknown_Debug_083C468B, DummyMenuAction},
+    {gUnknown_Debug_083C4696, DummyMenuAction},
+    {gUnknown_Debug_083C46A1, DummyMenuAction},
+    {gUnknown_Debug_083C46AC, DummyMenuAction}
 };
 
 static const struct MenuAction gUnknown_Debug_083C4754C[] = {
-    {gUnknown_Debug_083C46B7, Config},
-    {gUnknown_Debug_083C46C2, Config},
-    {gUnknown_Debug_083C46CE, Config},
-    {gUnknown_Debug_083C46DA, Config},
-    {gUnknown_Debug_083C46E6, Config},
-    {gUnknown_Debug_083C46F2, Config},
-    {gUnknown_Debug_083C46FE, Config}
+    {gUnknown_Debug_083C46B7, DummyMenuAction},
+    {gUnknown_Debug_083C46C2, DummyMenuAction},
+    {gUnknown_Debug_083C46CE, DummyMenuAction},
+    {gUnknown_Debug_083C46DA, DummyMenuAction},
+    {gUnknown_Debug_083C46E6, DummyMenuAction},
+    {gUnknown_Debug_083C46F2, DummyMenuAction},
+    {gUnknown_Debug_083C46FE, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C478C[] = {9, 7};
@@ -1849,14 +1848,14 @@ static const u8 gUnknown_Debug_083C47E2[] = _("Scene7");
 static const u8 gUnknown_Debug_083C47E9[] = _("Scene8");
 
 static const struct MenuAction gUnknown_Debug_083C47F0[] = {
-    {gUnknown_Debug_083C47B8, Config},
-    {gUnknown_Debug_083C47BF, Config},
-    {gUnknown_Debug_083C47C6, Config},
-    {gUnknown_Debug_083C47CD, Config},
-    {gUnknown_Debug_083C47D4, Config},
-    {gUnknown_Debug_083C47DB, Config},
-    {gUnknown_Debug_083C47E2, Config},
-    {gUnknown_Debug_083C47E9, Config}
+    {gUnknown_Debug_083C47B8, DummyMenuAction},
+    {gUnknown_Debug_083C47BF, DummyMenuAction},
+    {gUnknown_Debug_083C47C6, DummyMenuAction},
+    {gUnknown_Debug_083C47CD, DummyMenuAction},
+    {gUnknown_Debug_083C47D4, DummyMenuAction},
+    {gUnknown_Debug_083C47DB, DummyMenuAction},
+    {gUnknown_Debug_083C47E2, DummyMenuAction},
+    {gUnknown_Debug_083C47E9, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C4830[] = _("Trick　Master");
@@ -1868,11 +1867,11 @@ static const u8 gUnknown_Debug_083C486A[] = _("Rig　a　trick");
 static const u8 gUnknown_Debug_083C4876[] = _("MASTER　is　gone");
 
 static const struct MenuAction gUnknown_Debug_083C4888[] = {
-    {gUnknown_Debug_083C483D, Config},
-    {gUnknown_Debug_083C484B, Config},
-    {gUnknown_Debug_083C485C, Config},
-    {gUnknown_Debug_083C486A, Config},
-    {gUnknown_Debug_083C4876, Config}
+    {gUnknown_Debug_083C483D, DummyMenuAction},
+    {gUnknown_Debug_083C484B, DummyMenuAction},
+    {gUnknown_Debug_083C485C, DummyMenuAction},
+    {gUnknown_Debug_083C486A, DummyMenuAction},
+    {gUnknown_Debug_083C4876, DummyMenuAction}
 };
 
 static const u8 sDummyNickname[] = _("PMNICKNAME");
@@ -1880,7 +1879,7 @@ static const u8 sDummyTrainerName[] = _("BREEDER");
 
 bool8 InitTomomichiDebugWindow(void)
 {
-    debug_sub_808B874();
+    InitDebugWindow();
     return FALSE;
 }
 
@@ -1889,17 +1888,17 @@ static void debug_sub_808B868(void)
     c2_exit_to_overworld_1_continue_scripts_restart_music();
 }
 
-static bool8 debug_sub_808B874(void)
+static bool8 InitDebugWindow(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 13, 15);
-    Menu_PrintItems(1, 1, ARRAY_COUNT(gUnknown_Debug_083C0CBA), gUnknown_Debug_083C0CBA);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0CBA), sTopMenuCursorPos, 12);
-    gMenuCallback = debug_sub_808B8C8;
+    Menu_PrintItems(1, 1, ARRAY_COUNT(sMenuActions_TopMenu), sMenuActions_TopMenu);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_TopMenu), sTopMenuCursorPos, 12);
+    gMenuCallback = TopMenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808B8C8(void)
+static bool8 TopMenu_HandleInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -1914,7 +1913,7 @@ static bool8 debug_sub_808B8C8(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_Debug_083C0CBA[sTopMenuCursorPos].func();
+        return sMenuActions_TopMenu[sTopMenuCursorPos].func();
     }
     if (gMain.newKeys & (B_BUTTON | START_BUTTON))
     {
@@ -1931,10 +1930,10 @@ static bool8 ContestGraphics(void)
     Menu_PrintText(sString_ContestMenuTitle, 1, 1);
     Menu_PrintItems(2, 3, ARRAY_COUNT(sMenuActions_ContestPicTest), sMenuActions_ContestPicTest);
     InitMenu(0, 1, 3, ARRAY_COUNT(sMenuActions_ContestPicTest), 0, 19);
-    gMenuCallback = debug_sub_808BC48;
+    gMenuCallback = ContestGraphics_HandleInput;
     sPicTest_Species = SPECIES_BULBASAUR;
-    sPicTest_ContestEntryVar4 = 0x6f33;
-    sPicTest_IDrndDigit = 0;
+    sPicTest_OTID = 28467;
+    sPicTest_Personality = 0;
     sPicTest_ContestType = 1;
     return FALSE;
 }
@@ -1946,10 +1945,10 @@ static bool8 ArtMusGraphics(void)
     Menu_PrintText(sString_Contest_ArtMuseumTitle, 1, 1);
     Menu_PrintItems(2, 3, ARRAY_COUNT(sMenuActions_ArtMuseumPicTest), sMenuActions_ArtMuseumPicTest);
     InitMenu(0, 1, 3, ARRAY_COUNT(sMenuActions_ArtMuseumPicTest), 0, 19);
-    gMenuCallback = debug_sub_808BCBC;
+    gMenuCallback = ArtMusGraphics_HandleInput;
     sPicTest_Species = SPECIES_BULBASAUR;
-    sPicTest_ContestEntryVar4 = 0x6f33;
-    sPicTest_IDrndDigit = 0;
+    sPicTest_OTID = 28467;
+    sPicTest_Personality = 0;
     sPicTest_MuseumArtTitleType = 1;
     return FALSE;
 }
@@ -1958,13 +1957,13 @@ static bool8 PreviewData(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 20, 11);
-    Menu_PrintText(gUnknown_Debug_083C0DA4, 1, 1);
+    Menu_PrintText(sString_Contest_PreviewTitle, 1, 1);
     Menu_PrintItems(2, 3, ARRAY_COUNT(sMenuActions_PreviewPicTest), sMenuActions_PreviewPicTest);
     InitMenu(0, 1, 3, ARRAY_COUNT(sMenuActions_PreviewPicTest), 0, 19);
     gMenuCallback = PreviewData_HandleInput;
     sPicTest_Species = SPECIES_BULBASAUR;
-    sPicTest_ContestEntryVar4 = 0x6f33;
-    sPicTest_IDrndDigit = 0;
+    sPicTest_OTID = 28467;
+    sPicTest_Personality = 0;
     sPicTest_PreviewType = 1;
     return FALSE;
 }
@@ -1973,10 +1972,10 @@ static bool8 TrickHouse(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 7);
-    Menu_PrintText(gUnknown_Debug_083C0DF4, 1, 1);
+    Menu_PrintText(sString_TrickRelated, 1, 1);
     Menu_PrintItems(2, 3, ARRAY_COUNT(sMenuActions_TrickRelated), sMenuActions_TrickRelated);
     InitMenu(0, 1, 3, ARRAY_COUNT(sMenuActions_TrickRelated), sTrickRelatedMenuCursorPos, 23);
-    gMenuCallback = debug_sub_808BDA4;
+    gMenuCallback = TrickHouse_HandleInput;
     return FALSE;
 }
 
@@ -1984,9 +1983,9 @@ static bool8 ControlEvents(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 5);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0E32), gUnknown_Debug_083C0E32);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0E32), sControlEventsCursorPos, 23);
-    gMenuCallback = debug_sub_808BE2C;
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlEvents), sMenuActions_ControlEvents);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlEvents), sControlEventsCursorPos, 23);
+    gMenuCallback = ControlEvents_HandleInput;
     return FALSE;
 }
 
@@ -1994,9 +1993,9 @@ static bool8 ControlFlags(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 15);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0E7F), gUnknown_Debug_083C0E7F);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0E7F), sControlFlagsCursorPos, 23);
-    gMenuCallback = debug_sub_808BEB4;
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlFlags), sMenuActions_ControlFlags);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlFlags), sControlFlagsCursorPos, 23);
+    gMenuCallback = ControlFlags_HandleInput;
     return FALSE;
 }
 
@@ -2004,13 +2003,13 @@ static bool8 ControlWorks(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 13);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0EF1), gUnknown_Debug_083C0EF1);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0EF1), sControlWORKCursorPos, 23);
-    gMenuCallback = debug_sub_808BF3C;
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlWorks), sMenuActions_ControlWorks);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlWorks), sControlWORKCursorPos, 23);
+    gMenuCallback = ControlWorks_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808BC48(void)
+static bool8 ContestGraphics_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
     s8 cursorPos = Menu_GetCursorPos();
@@ -2021,7 +2020,7 @@ static bool8 debug_sub_808BC48(void)
             PicTest_SelectPokemon();
             break;
         case 1:
-            PicTest_SelectIDrndDigit();
+            PicTest_SelectPersonality();
             break;
         case 2:
             ContestPicTest_SelectContestType();
@@ -2043,7 +2042,7 @@ static bool8 debug_sub_808BC48(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BCBC(void)
+static bool8 ArtMusGraphics_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
     s8 cursorPos = Menu_GetCursorPos();
@@ -2054,7 +2053,7 @@ static bool8 debug_sub_808BCBC(void)
             PicTest_SelectPokemon();
             break;
         case 1:
-            PicTest_SelectIDrndDigit();
+            PicTest_SelectPersonality();
             break;
         case 2:
             MuseumArtPicTest_SelectTitleType();
@@ -2087,7 +2086,7 @@ static bool8 PreviewData_HandleInput(void)
             PicTest_SelectPokemon();
             break;
         case 1:
-            PicTest_SelectIDrndDigit();
+            PicTest_SelectPersonality();
             break;
         case 2:
             PreviewPicTest_SelectType();
@@ -2109,7 +2108,7 @@ static bool8 PreviewData_HandleInput(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BDA4(void)
+static bool8 TrickHouse_HandleInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -2134,7 +2133,7 @@ static bool8 debug_sub_808BDA4(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BE2C(void)
+static bool8 ControlEvents_HandleInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -2149,7 +2148,7 @@ static bool8 debug_sub_808BE2C(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_Debug_083C0E32[sControlEventsCursorPos].func();
+        return sMenuActions_ControlEvents[sControlEventsCursorPos].func();
     }
     if (gMain.newKeys & (B_BUTTON | START_BUTTON))
     {
@@ -2159,7 +2158,7 @@ static bool8 debug_sub_808BE2C(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BEB4(void)
+static bool8 ControlFlags_HandleInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -2174,7 +2173,7 @@ static bool8 debug_sub_808BEB4(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_Debug_083C0E7F[sControlFlagsCursorPos].func();
+        return sMenuActions_ControlFlags[sControlFlagsCursorPos].func();
     }
     if (gMain.newKeys & (B_BUTTON | START_BUTTON))
     {
@@ -2184,7 +2183,7 @@ static bool8 debug_sub_808BEB4(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BF3C(void)
+static bool8 ControlWorks_HandleInput(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -2199,7 +2198,7 @@ static bool8 debug_sub_808BF3C(void)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        return gUnknown_Debug_083C0EF1[sControlWORKCursorPos].func();
+        return sMenuActions_ControlWorks[sControlWORKCursorPos].func();
     }
     if (gMain.newKeys & (B_BUTTON | START_BUTTON))
     {
@@ -2209,27 +2208,27 @@ static bool8 debug_sub_808BF3C(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808BFC4(void)
+static bool8 ControlEvents_InitSubmenu1(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 19);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0F79), gUnknown_Debug_083C0F79);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0F79), 0, 27);
-    gMenuCallback = debug_sub_808C064;
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlEvents_Events1), sMenuActions_ControlEvents_Events1);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlEvents_Events1), 0, 27);
+    gMenuCallback = ControlEvents_Events1_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808C014(void)
+static bool8 ControlEvents_InitSubmenu2(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 13);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C0FFC), gUnknown_Debug_083C0FFC);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C0FFC), 0, 27);
-    gMenuCallback = debug_sub_808C0A8;
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlEvents_Events2), sMenuActions_ControlEvents_Events2);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlEvents_Events2), 0, 27);
+    gMenuCallback = ControlEvents_Events2_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808C064(void)
+static bool8 ControlEvents_Events1_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
 
@@ -2240,11 +2239,11 @@ static bool8 debug_sub_808C064(void)
         CloseMenu();
         return TRUE;
     }
-    gMenuCallback = gUnknown_Debug_083C0F79[input].func;
+    gMenuCallback = sMenuActions_ControlEvents_Events1[input].func;
     return FALSE;
 }
 
-static bool8 debug_sub_808C0A8(void)
+static bool8 ControlEvents_Events2_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
 
@@ -2255,109 +2254,109 @@ static bool8 debug_sub_808C0A8(void)
         CloseMenu();
         return TRUE;
     }
-    gMenuCallback = gUnknown_Debug_083C0FFC[input].func;
+    gMenuCallback = sMenuActions_ControlEvents_Events2[input].func;
     return FALSE;
 }
 
-static bool8 debug_sub_808C0EC(void)
+static bool8 CallScript_DoHallOfFame(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1CFE);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C104(void)
+static bool8 CallScript_GiveCoinCaseIfNotAlreadyOwned(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D07);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C11C(void)
+static bool8 CallScript_SetOldaleStateAfterRoute103Rival(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D1E);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C134(void)
+static bool8 CallScript_OpenNewMauville(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D24);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C14C(void)
+static bool8 CallScript_GiveSSTicketAndDoHallOfFame(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D2A);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C164(void)
+static bool8 CallScript_GiveKyogreEgg(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D35);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C17C(void)
+static bool8 CallScript_GiveAllItems(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C1D46);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C194(void)
+static bool8 CallScript_GiveAllDecorations(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C221F);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C1AC(void)
+static bool8 CallScript_GiveAllCoins(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C23E2);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C1C4(void)
+static bool8 CallScript_OpenSootopolisGym(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C23E6);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C1DC(void)
+static bool8 CallScript_SetMoneyTo0(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C23F6);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C1F4(void)
+static bool8 CallScript_FillPartyWithBarboach(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C2482);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C20C(void)
+static bool8 CallScript_FillPartyWithShroomish(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C23FD);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C224(void)
+static bool8 CallScript_GiveBarboachEgg(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C2518);
     CloseMenu();
     return TRUE;
 }
 
-static bool8 debug_sub_808C23C(void)
+static bool8 CallScript_GiveShroomishEgg(void)
 {
     ScriptContext1_SetupScript(DebugScript_081C2507);
     CloseMenu();
@@ -2404,7 +2403,7 @@ static bool8 debug_sub_808C2E4(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808C31C(void)
+static bool8 ControlFlags_EventFlag_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 19);
@@ -2566,7 +2565,7 @@ static void debug_sub_808C764(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808C7C8(void)
+static bool8 ControlFlags_VanishFlag_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 19);
@@ -2728,7 +2727,7 @@ static void debug_sub_808CC10(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808CC74(void)
+static bool8 ControlFlags_TrainerFlag_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1ADC) + 1);
@@ -2824,7 +2823,7 @@ static void debug_sub_808CEAC(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808CF10(void)
+static bool8 ControlFlags_SysFlag_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1330) + 1);
@@ -2986,7 +2985,7 @@ static void debug_sub_808D358(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808D3BC(void)
+static bool8 ControlFlags_FH_OBJ_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C105C) + 1);
@@ -3071,7 +3070,7 @@ static void debug_sub_808D59C(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808D600(void)
+static bool8 ControlFlags_FH_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C11CC) + 1);
@@ -3156,7 +3155,7 @@ static void debug_sub_808D7E0(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808D844(void)
+static bool8 ControlFlags_BallVanishFlag_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C1A78) + 1);
@@ -3230,23 +3229,23 @@ static void debug_sub_808D9CC(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808DA30(void)
+static bool8 ControlWorks_AnsWork_InitSubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C103A) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C103A), gUnknown_Debug_083C103A);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C103A), 0, 28);
-    gMenuCallback = debug_sub_808DA80;
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_ControlEvents_AnsWork) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlEvents_AnsWork), sMenuActions_ControlEvents_AnsWork);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlEvents_AnsWork), 0, 28);
+    gMenuCallback = ControlWorks_AnsWork_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DA80(void)
+static bool8 ControlWorks_AnsWork_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
     /*s8 cursorPos = */Menu_GetCursorPos();
 
-    debug_sub_808DAD4();
-    debug_sub_808DABC();
+    ControlWorks_AnsWork_AdjustRESULT();
+    ControlWorks_AnsWork_PrintRESULT();
     if (input == -2)
         return FALSE;
     if (input == -1)
@@ -3257,12 +3256,12 @@ static bool8 debug_sub_808DA80(void)
     return FALSE;
 }
 
-static void debug_sub_808DABC(void)
+static void ControlWorks_AnsWork_PrintRESULT(void)
 {
     PrintUnsignedShort(24, 1, gSpecialVar_Result);
 }
 
-static void debug_sub_808DAD4(void)
+static void ControlWorks_AnsWork_AdjustRESULT(void)
 {
     u16 delta;
 
@@ -3279,17 +3278,17 @@ static void debug_sub_808DAD4(void)
     gSpecialVar_Result += delta;
 }
 
-static bool8 debug_sub_808DB0C(void)
+static bool8 ControlWorks_SaveWork_InitSubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C3D08) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C3D08), gUnknown_Debug_083C3D08);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C3D08), 0, 23);
-    gMenuCallback = debug_sub_808DB5C;
+    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(sMenuAction_ControlWorks_SaveWork) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuAction_ControlWorks_SaveWork), sMenuAction_ControlWorks_SaveWork);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuAction_ControlWorks_SaveWork), 0, 23);
+    gMenuCallback = ControlWorks_SaveWork_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DB5C(void)
+static bool8 ControlWorks_SaveWork_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
 
@@ -3300,114 +3299,114 @@ static bool8 debug_sub_808DB5C(void)
         CloseMenu();
         return TRUE;
     }
-    gMenuCallback = gUnknown_Debug_083C3D08[input].func;
+    gMenuCallback = sMenuAction_ControlWorks_SaveWork[input].func;
     return FALSE;
 }
 
-static bool8 debug_sub_808DBA0(void)
+static bool8 ControlWorks_SaveWork_Town_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C432C) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C432C), gUnknown_Debug_083C432C);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C432C), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Town) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Town), sMenuActions_SaveWork_Town);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Town), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 0;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DBF8(void)
+static bool8 ControlWorks_SaveWork_City_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C436C) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C436C), gUnknown_Debug_083C436C);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C436C), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_City) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_City), sMenuActions_SaveWork_City);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_City), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 1;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DC50(void)
+static bool8 ControlWorks_SaveWork_Route101To109_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C43B4) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C43B4), gUnknown_Debug_083C43B4);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C43B4), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Route101To109) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route101To109), sMenuActions_SaveWork_Route101To109);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route101To109), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 2;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DCA8(void)
+static bool8 ControlWorks_SaveWork_Route110To118_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C43FC) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C43FC), gUnknown_Debug_083C43FC);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C43FC), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Route110To118) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route110To118), sMenuActions_SaveWork_Route110To118);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route110To118), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 3;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DD00(void)
+static bool8 ControlWorks_SaveWork_Route119To127_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C4444) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C4444), gUnknown_Debug_083C4444);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C4444), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Route119To127) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route119To127), sMenuActions_SaveWork_Route119To127);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route119To127), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 4;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DD58(void)
+static bool8 ControlWorks_SaveWork_Route128To134_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C448C) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C448C), gUnknown_Debug_083C448C);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C448C), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Route128To134) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route128To134), sMenuActions_SaveWork_Route128To134);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Route128To134), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 5;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DDB0(void)
+static bool8 ControlWorks_SaveWork_RoomTown_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * 6 + 1);
-    Menu_PrintItems(2, 1, 6, gUnknown_Debug_83C44C4); // overflows into the next menu
+    Menu_PrintItems(2, 1, 6, sMenuActions_SaveWork_RoomTown); // overflows into the next menu
     InitMenu(0, 1, 1, 6, 0, 28);
     sFlagAndVarTest_WhichSubmenu = 6;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DE08(void)
+static bool8 ControlWorks_SaveWork_RoomCity_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_83C44EC) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_83C44EC), gUnknown_Debug_83C44EC);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_83C44EC), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_RoomCity) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_RoomCity), sMenuActions_SaveWork_RoomCity);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_RoomCity), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 7;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DE60(void)
+static bool8 ControlWorks_SaveWork_Dungeon_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C4534) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C4534), gUnknown_Debug_083C4534);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C4534), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_SaveWork_Dungeon) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_SaveWork_Dungeon), sMenuActions_SaveWork_Dungeon);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_SaveWork_Dungeon), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 8;
-    gMenuCallback = debug_sub_808DEB8;
+    gMenuCallback = ControlWorks_SaveWork_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808DEB8(void)
+static bool8 ControlWorks_SaveWork_Subsubmenu_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
     s8 cursorPos = Menu_GetCursorPos();
-    
+
     debug_sub_808DF64(sFlagAndVarTest_WhichSubmenu, cursorPos);
     debug_sub_808DF04(sFlagAndVarTest_WhichSubmenu);
     if (input == -2)
@@ -3423,7 +3422,7 @@ static bool8 debug_sub_808DEB8(void)
 static void debug_sub_808DF04(u8 whichMenu)
 {
     u8 i;
-    
+
     for (i = 0; i < gUnknown_Debug_083C457C[whichMenu]; i++)
     {
         PrintUnsignedShort(24, 2 * i + 1, VarGet(gUnknown_Debug_083C4586[whichMenu][i]));
@@ -3443,7 +3442,7 @@ static void debug_sub_808DF64(u8 whichMenu, u8 cursorPos)
     VarSet(gUnknown_Debug_083C4586[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C4586[whichMenu][cursorPos]) + delta);
 }
 
-static bool8 debug_sub_808DFC0(void)
+static bool8 ControlWorks_SaveWorkPart2_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C377C) + 1);
@@ -3555,9 +3554,9 @@ static void debug_sub_808E2B0(u8 whichMenu)
 {
     u8 i;
 
-    for (i = 0; i < gUnknown_Debug_083C3C48[whichMenu]; i++)
+    for (i = 0; i < sControlWorks_SaveWork_CountsArray[whichMenu]; i++)
     {
-        PrintUnsignedShort(24, 2 * i + 1, VarGet(gUnknown_Debug_83C3C4E[whichMenu][i]));
+        PrintUnsignedShort(24, 2 * i + 1, VarGet(sControlWorks_SaveWork_ItemArrays[whichMenu][i]));
     }
 }
 
@@ -3571,10 +3570,10 @@ static void debug_sub_808E310(u8 whichMenu, u8 cursorPos)
         delta = -1;
     else
         return;
-    VarSet(gUnknown_Debug_83C3C4E[whichMenu][cursorPos], VarGet(gUnknown_Debug_83C3C4E[whichMenu][cursorPos]) + delta);
+    VarSet(sControlWorks_SaveWork_ItemArrays[whichMenu][cursorPos], VarGet(sControlWorks_SaveWork_ItemArrays[whichMenu][cursorPos]) + delta);
 }
 
-static bool8 debug_sub_808E36C(void)
+static bool8 ControlWorks_SysWork_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C32AC) + 1);
@@ -3694,7 +3693,7 @@ static void debug_sub_808E660(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808E6C0(void)
+static bool8 ControlWorks_LocalWork_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C4644) + 1);
@@ -3781,7 +3780,7 @@ static void debug_sub_808E8AC(u8 whichMenu)
     }
 }
 
-static bool8 debug_sub_808E90C(void)
+static bool8 ControlWorks_ObjWork_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C35C4) + 1);
@@ -3868,7 +3867,7 @@ static void debug_sub_808EAFC(u8 whichMenu, u8 cursorPos)
     VarSet(gUnknown_Debug_083C371E[whichMenu][cursorPos], VarGet(gUnknown_Debug_083C371E[whichMenu][cursorPos]) + delta);
 }
 
-static bool8 debug_sub_808EB58(void)
+static bool8 TrickRelated_Level_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 12, 2 * ARRAY_COUNT(gUnknown_Debug_083C47F0) + 3);
@@ -3879,7 +3878,7 @@ static bool8 debug_sub_808EB58(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808EBB4(void)
+static bool8 TrickRelated_TrickMaster_InitSubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 13, 2 * ARRAY_COUNT(gUnknown_Debug_083C4888) + 3);
@@ -3926,7 +3925,7 @@ static bool8 debug_sub_808EC5C(void)
     return TRUE;
 }
 
-static bool8 debug_sub_808ECA4(void)
+static bool8 PreviewGraphics_Show(void)
 {
     BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
     gMenuCallback = debug_sub_808ECD0;
@@ -3946,7 +3945,7 @@ static bool8 debug_sub_808ECD0(void)
     return FALSE;
 }
 
-static bool8 Config(void)
+static bool8 DummyMenuAction(void)
 {
     return FALSE;
 }
@@ -3979,35 +3978,35 @@ static void PicTest_SelectPokemon(void)
     }
 }
 
-static void PicTest_SelectIDrndDigit(void)
+static void PicTest_SelectPersonality(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        if (sPicTest_IDrndDigit != 0)
-            sPicTest_IDrndDigit--;
+        if (sPicTest_Personality != 0)
+            sPicTest_Personality--;
     }
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        if (sPicTest_IDrndDigit != UINT32_MAX)
-            sPicTest_IDrndDigit++;
+        if (sPicTest_Personality != UINT32_MAX)
+            sPicTest_Personality++;
     }
     if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        if (sPicTest_IDrndDigit >= 0x10)
-            sPicTest_IDrndDigit -= 0x10;
+        if (sPicTest_Personality >= 0x10)
+            sPicTest_Personality -= 0x10;
         else
-            sPicTest_IDrndDigit = 0;
+            sPicTest_Personality = 0;
     }
     if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        if (sPicTest_IDrndDigit <= UINT32_MAX - 0x10)
-            sPicTest_IDrndDigit += 0x10;
+        if (sPicTest_Personality <= UINT32_MAX - 0x10)
+            sPicTest_Personality += 0x10;
         else
-            sPicTest_IDrndDigit = UINT32_MAX;
+            sPicTest_Personality = UINT32_MAX;
     }
     if ((gMain.newKeys & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON))
     {
-        sPicTest_IDrndDigit = UINT32_MAX;
+        sPicTest_Personality = UINT32_MAX;
     }
 }
 
@@ -4015,18 +4014,18 @@ static void ContestPicTest_SelectContestType(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        if (sPicTest_ContestType != 1)
+        if (sPicTest_ContestType != CONTEST_COOL + 1)
             sPicTest_ContestType--;
     }
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        if (sPicTest_ContestType != 5)
+        if (sPicTest_ContestType != CONTEST_TOUGH + 1)
             sPicTest_ContestType++;
     }
     if (gMain.newAndRepeatedKeys & L_BUTTON)
-        sPicTest_ContestType = 1;
+        sPicTest_ContestType = CONTEST_COOL + 1;
     if (gMain.newAndRepeatedKeys & R_BUTTON)
-        sPicTest_ContestType = 5;
+        sPicTest_ContestType = CONTEST_TOUGH + 1;
 }
 
 static void MuseumArtPicTest_SelectTitleType(void)
@@ -4099,7 +4098,7 @@ static void PicTest_Redraw(u8 a0)
         case 2:
             for (i = 0; i < 8; i++)
             {
-                digit = (sPicTest_IDrndDigit >> (4 * (7 - i))) & 0xf;
+                digit = (sPicTest_Personality >> (4 * (7 - i))) & 0xf;
                 if (digit < 10)
                     sPicTest_StringBuffer[i] = digit + CHAR_0;
                 else
@@ -4174,7 +4173,7 @@ __attribute__((naked)) void PicTest_Redraw(u8 a0)
         "\tcmp\tr6, #0\n"
         "\tblt\t._653\t@cond_branch\n"
         "\tmov\tr3, #0x0\n"
-        "\tldr\tr0, ._656       @ sPicTest_IDrndDigit\n"
+        "\tldr\tr0, ._656       @ sPicTest_Personality\n"
         "\tmov\tr8, r0\n"
         "\tldr\tr4, ._656 + 4   @ sPicTest_StringBuffer\n"
         "\tmov\tr7, #0x7\n"
@@ -4195,7 +4194,7 @@ __attribute__((naked)) void PicTest_Redraw(u8 a0)
         "._657:\n"
         "\t.align\t2, 0\n"
         "._656:\n"
-        "\t.word\tsPicTest_IDrndDigit\n"
+        "\t.word\tsPicTest_Personality\n"
         "\t.word\tsPicTest_StringBuffer\n"
         "._654:\n"
         "\tadd\tr1, r3, r4\n"
@@ -4411,9 +4410,9 @@ __attribute__((naked)) void PicTest_Redraw(u8 a0)
 static void PrepareDebugOverlayBeforeShowingContestPainting(u8 a0)
 {
     struct ContestEntry *contestEntry = &ewram15DE0;
-    contestEntry->var8 = sPicTest_Species;
-    contestEntry->var4 = sPicTest_ContestEntryVar4;
-    contestEntry->var0 = sPicTest_IDrndDigit;
+    contestEntry->species = sPicTest_Species;
+    contestEntry->otId = sPicTest_OTID;
+    contestEntry->personality = sPicTest_Personality;
     switch (a0)
     {
         case 0:
