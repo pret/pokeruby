@@ -43,7 +43,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
     }
 
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
         sprite->data[0] = 1;

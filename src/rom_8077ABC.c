@@ -764,7 +764,7 @@ void sub_807867C(struct Sprite *sprite, s16 a2)
     }
 }
 
-void sub_80786EC(struct Sprite *sprite)
+void InitAnimSpriteTranslationOverDuration(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1234,7 +1234,7 @@ static u16 ArcTan2_(s16 a, s16 b)
     return ArcTan2(a, b);
 }
 
-u16 sub_80790F0(s16 a, s16 b)
+u16 ArcTan2Neg(s16 a, s16 b)
 {
     u16 var = ArcTan2_(a, b);
     return -var;
@@ -1437,7 +1437,7 @@ void sub_80794A8(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = sub_8079518;
 }
 

@@ -297,7 +297,7 @@ const struct SpriteTemplate gBallSpriteTemplates[] =
 };
 
 extern u32 ball_number_to_ball_processing_index(u16);  // not sure of return type
-extern void sub_80786EC();
+extern void InitAnimSpriteTranslationOverDuration();
 extern bool8 TranslateAnimSpriteLinearAndSine(struct Sprite *);
 extern u8 sub_814086C(u8, u8, int, int, u8);
 extern u8 sub_8141314(u8, u8, int, u8);
@@ -397,7 +397,7 @@ static void sub_8046464(u8 taskId)
     gSprites[spriteId].data[2] = GetBankPosition(gBankTarget, 0);
     gSprites[spriteId].data[4] = GetBankPosition(gBankTarget, 1) - 16;
     gSprites[spriteId].data[5] = -40;
-    sub_80786EC(&gSprites[spriteId]);
+    InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
     gSprites[spriteId].oam.affineParam = taskId;
     gTasks[taskId].data[4] = gBankTarget;
     gTasks[taskId].func = TaskDummy;
@@ -834,7 +834,7 @@ static void sub_8047074(struct Sprite *sprite)
     sprite->data[4] = GetBankPosition(sprite->data[6], 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->data[6];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = sub_80470C4;
 }
 

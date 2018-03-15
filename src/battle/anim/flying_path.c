@@ -40,7 +40,7 @@ void sub_80CBDF4(u8 taskId)
     gSprites[task->data[2]].data[3] = task->data[9];
     gSprites[task->data[2]].data[4] = task->data[7] + (task->data[11] / 2 + 10) * task->data[5];
     gSprites[task->data[2]].data[5] = sub_80CC338(&gSprites[task->data[2]]);
-    sub_80786EC(&gSprites[task->data[2]]);
+    InitAnimSpriteTranslationOverDuration(&gSprites[task->data[2]]);
     task->func = sub_80CBF5C;
 }
 
@@ -98,7 +98,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = a;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     case 2:
@@ -123,7 +123,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = 2;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     case 5:
@@ -141,7 +141,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = 3;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     case 6:
@@ -167,7 +167,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = 4;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     case 9:
@@ -184,7 +184,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = 5;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     case 10:
@@ -215,7 +215,7 @@ void sub_80CBF5C(u8 taskId)
         task->data[3] = 6;
         sprite->subpriority = task->data[4];
         StartSpriteAnim(sprite, task->data[3]);
-        sub_80786EC(sprite);
+        InitAnimSpriteTranslationOverDuration(sprite);
         task->data[0]++;
         break;
     }

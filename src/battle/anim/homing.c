@@ -60,7 +60,7 @@ void sub_80CC6CC(struct Sprite* sprite)
         sprite->data[2] = y * 16;
         sprite->data[3] = (sprite->data[5] - sprite->pos1.x) * 16 / gBattleAnimArgs[4];
         sprite->data[4] = (sprite->data[6] - sprite->pos1.y) * 16 / gBattleAnimArgs[4];
-        c = sub_80790F0(sprite->data[5] - x, sprite->data[6] - y);
+        c = ArcTan2Neg(sprite->data[5] - x, sprite->data[6] - y);
         if (IsContest())
             c -= 0x8000;
 

@@ -703,15 +703,15 @@ Move_PIN_MISSILE: @ 81C7F5C
 	monbgprio_28 1
 	setalpha 12, 8
 	playsewithpan SE_W026, 192
-	createsprite gBattleAnimSpriteTemplate_83DABA4, 2, 20, -8, -8, -8, 20, -32
+	createsprite gPinMissileSpriteTemplate, 2, 20, -8, -8, -8, 20, -32
 	delay 15
-	createsprite gBattleAnimSpriteTemplate_83DABA4, 2, 20, -8, 8, 8, 20, -40
+	createsprite gPinMissileSpriteTemplate, 2, 20, -8, 8, 8, 20, -40
 	delay 4
 	playsewithpan SE_W030, 63
 	createsprite gBasicHitSplatSpriteTemplate, 3, -8, -8, 1, 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 3, 0, 2, 1
 	delay 9
-	createsprite gBattleAnimSpriteTemplate_83DABA4, 2, 20, -8, 0, 0, 20, -32
+	createsprite gPinMissileSpriteTemplate, 2, 20, -8, 0, 0, 20, -32
 	delay 4
 	playsewithpan SE_W030, 63
 	createsprite gBasicHitSplatSpriteTemplate, 3, 8, 8, 1, 2
@@ -732,15 +732,15 @@ Move_ICICLE_SPEAR: @ 81C8021
 	monbgprio_28 1
 	setalpha 12, 8
 	playsewithpan SE_W196, 192
-	createsprite gBattleAnimSpriteTemplate_83DABBC, 2, 20, -8, -8, -8, 20, -32
+	createsprite gIcicleSpearSpriteTemplate, 2, 20, -8, -8, -8, 20, -32
 	delay 15
-	createsprite gBattleAnimSpriteTemplate_83DABBC, 2, 20, -8, 8, 8, 20, -40
+	createsprite gIcicleSpearSpriteTemplate, 2, 20, -8, 8, 8, 20, -40
 	delay 4
 	playsewithpan SE_W030, 63
 	createsprite gBasicHitSplatSpriteTemplate, 3, -8, -8, 1, 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 3, 0, 2, 1
 	delay 9
-	createsprite gBattleAnimSpriteTemplate_83DABBC, 2, 20, -8, 0, 0, 20, -32
+	createsprite gIcicleSpearSpriteTemplate, 2, 20, -8, 0, 0, 20, -32
 	delay 4
 	playsewithpan SE_W030, 63
 	createsprite gBasicHitSplatSpriteTemplate, 3, 8, 8, 1, 2

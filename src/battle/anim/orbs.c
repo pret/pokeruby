@@ -99,7 +99,7 @@ void sub_80CA9A8(struct Sprite* sprite)
     sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
     sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
     sprite->data[5] = gBattleAnimArgs[2];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = sub_80CA9F8;
 }
 

@@ -24,7 +24,7 @@ void sub_80D9D70(struct Sprite *sprite)
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
     sprite->data[5] = -30;
 
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
 
     sprite->callback = sub_80D9DD4;
 }
@@ -52,7 +52,7 @@ void sub_80D9DF0(struct Sprite *sprite)
     sprite->data[4] = l2 + gBattleAnimArgs[5];
     sprite->data[5] = -30;
 
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
 
     sprite->callback = sub_80D9E78;
 }

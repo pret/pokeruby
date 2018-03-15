@@ -234,7 +234,7 @@ sub_812C2BC: @ 812C2BC
 	subs r1, r6
 	lsls r1, 16
 	asrs r1, 16
-	bl sub_80790F0
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 23
@@ -830,7 +830,7 @@ _0812C754:
 	ldr r0, _0812C790 @ =0x0000ffce
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _0812C794 @ =sub_812C798
 	str r0, [r4, 0x1C]
 	add sp, 0x4
@@ -8939,7 +8939,7 @@ _081305C6:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	mov r1, r10
 	ldrb r0, [r1]
 	bl GetBankSide

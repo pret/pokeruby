@@ -32,7 +32,7 @@ void sub_80CF6DC(struct Sprite* sprite)
     InitAnimSpritePos(sprite, 1);
     a = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     b = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    c = sub_80790F0(a - sprite->pos1.x, b - sprite->pos1.y);
+    c = ArcTan2Neg(a - sprite->pos1.x, b - sprite->pos1.y);
     c += 0xF000;
     if (IsContest())
         c -= 0x6000;

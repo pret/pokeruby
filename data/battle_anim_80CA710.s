@@ -3974,12 +3974,12 @@ gBattleAnimSpriteTemplate_83DAB8C:: @ 83DAB8C
 	spr_template 10161, 10161, gOamData_837DF8C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80DCBCC
 
 	.align 2
-gBattleAnimSpriteTemplate_83DABA4:: @ 83DABA4
-	spr_template 10161, 10161, gOamData_837DF8C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80DCCFC
+gPinMissileSpriteTemplate:: @ 83DABA4
+	spr_template 10161, 10161, gOamData_837DF8C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, AnimMissileArc
 
 	.align 2
-gBattleAnimSpriteTemplate_83DABBC:: @ 83DABBC
-	spr_template 10262, 10262, gOamData_837DF94, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80DCCFC
+gIcicleSpearSpriteTemplate:: @ 83DABBC
+	spr_template 10262, 10262, gOamData_837DF94, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, AnimMissileArc
 
 	.align 2
 gSpriteAffineAnim_83DABD4:: @ 83DABD4
