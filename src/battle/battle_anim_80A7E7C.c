@@ -30,8 +30,8 @@ static void SlideMonToOriginalPosStep(struct Sprite *sprite);
 static void SlideMonToOffset(struct Sprite *sprite);
 static void sub_80A8818(struct Sprite *sprite);
 static void sub_80A88F0(struct Sprite *sprite);
-static void sub_80A89B4(u8 taskId);
-static void sub_80A8A18(u8 taskId);
+static void AnimTask_WindUpLungePart1(u8 taskId);
+static void AnimTask_WindUpLungePart2(u8 taskId);
 static void AnimTask_SwayMonStep(u8 taskId);
 static void sub_80A8D8C(u8 taskId);
 static void sub_80A8FD8(u8 taskId);
@@ -646,11 +646,20 @@ static void sub_80A88F0(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_80A8920(u8 taskId)
+// Task to facilitate a two-part translation animation, in which the sprite
+// is first translated in an arc to one position.  Then, it "lunges" to a target
+// x offset.  Used in TAKE_DOWN, for example.
+// arg 0: anim bank
+// arg 1: horizontal speed (subpixel)
+// arg 2: wave amplitude
+// arg 3: first duration
+// arg 4: delay before starting lunge
+// arg 5: target x offset for lunge
+// arg 6: lunge duration
+void AnimTask_WindUpLunge(u8 taskId)
 {
-    s16 r7;
-    r7 = 0x8000 / gBattleAnimArgs[3];
-    if (GetBankSide(gAnimBankAttacker))
+    s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
@@ -662,11 +671,11 @@ void sub_80A8920(u8 taskId)
     TASK.data[4] = gBattleAnimArgs[4];
     TASK.data[5] = (gBattleAnimArgs[5] << 8) / gBattleAnimArgs[6];
     TASK.data[6] = gBattleAnimArgs[6];
-    TASK.data[7] = r7;
-    TASK.func = sub_80A89B4;
+    TASK.data[7] = wavePeriod;
+    TASK.func = AnimTask_WindUpLungePart1;
 }
 
-static void sub_80A89B4(u8 taskId)
+static void AnimTask_WindUpLungePart1(u8 taskId)
 {
     u8 spriteId;
     spriteId = TASK.data[0];
@@ -676,11 +685,11 @@ static void sub_80A89B4(u8 taskId)
     TASK.data[10] += TASK.data[7];
     if (--TASK.data[3] == 0)
     {
-        TASK.func = sub_80A8A18;
+        TASK.func = AnimTask_WindUpLungePart2;
     }
 }
 
-static void sub_80A8A18(u8 taskId)
+static void AnimTask_WindUpLungePart2(u8 taskId)
 {
     u8 spriteId;
     if (TASK.data[4] > 0)
