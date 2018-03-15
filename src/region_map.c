@@ -141,12 +141,12 @@ static const u16 sRegionMapBkgnd_Pal[] = INCBIN_U16("graphics/pokenav/region_map
 static const u8 sRegionMapBkgnd_ImageLZ[] = INCBIN_U8("graphics/pokenav/region_map.8bpp.lz");
 static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region_map_map.bin.lz");
 
-#include "../data/region_map_layout.h"
+#include "data/region_map_layout.h"
 
 #if ENGLISH
-#include "../data/region_map_names_en.h"
+#include "data/region_map_names_en.h"
 #elif GERMAN
-#include "../data/region_map_names_de.h"
+#include "data/region_map_names_de.h"
 #endif
 
 struct RegionMapLocation
