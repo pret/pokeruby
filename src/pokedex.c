@@ -185,7 +185,7 @@ static const u8 gUnknown_0839FA7C[] = INCBIN_U8("graphics/pokedex/noball.4bpp.lz
 extern const u8 gUnknown_0839FA7C[];
 #endif
 
-#include "../data/pokedex_orders.h"
+#include "data/pokedex_orders.h"
 static const struct OamData gOamData_83A0404 =
 {
     .y = 160,
@@ -514,9 +514,9 @@ static const u8 gUnknown_083A05F1[] = {16, 8, 4, 2, 1};
 const u8 gEmptySpacce_83A05F6[] = {0, 0};  // Padding, maybe?
 static const u8 gUnknown_083A05F8[] = _("");
 #if ENGLISH
-#include "../data/pokedex_entries_en.h"
+#include "data/pokedex_entries_en.h"
 #elif GERMAN
-#include "../data/pokedex_entries_de.h"
+#include "data/pokedex_entries_de.h"
 #endif
 static const u16 gUnknown_083B4EC4[16] = {0};
 static const u8 *const sMonFootprintTable[] =

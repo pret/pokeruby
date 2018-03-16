@@ -41,7 +41,7 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
     {34, 33, INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
 };
 
-#include "../data/pokemon/item_effects.h"
+#include "data/pokemon/item_effects.h"
 
 const s8 gNatureStatTable[][5] =
 {
@@ -73,14 +73,14 @@ const s8 gNatureStatTable[][5] =
     {    0,  0,  0,     0,     0} // Quirky
 };
 
-#include "../data/pokemon/tmhm_learnsets.h"
-#include "../data/pokemon/trainer_class_lookups.h"
-#include "../data/pokemon/cry_ids.h"
-#include "../data/pokemon/experience_tables.h"
-#include "../data/pokemon/base_stats.h"
-#include "../data/pokemon/level_up_learnsets.h"
-#include "../data/pokemon/evolution.h"
-#include "../data/pokemon/level_up_learnset_pointers.h"
+#include "data/pokemon/tmhm_learnsets.h"
+#include "data/pokemon/trainer_class_lookups.h"
+#include "data/pokemon/cry_ids.h"
+#include "data/pokemon/experience_tables.h"
+#include "data/pokemon/base_stats.h"
+#include "data/pokemon/level_up_learnsets.h"
+#include "data/pokemon/evolution.h"
+#include "data/pokemon/level_up_learnset_pointers.h"
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {

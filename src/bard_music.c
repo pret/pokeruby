@@ -141,9 +141,9 @@ static const u32 sBardSoundLengthDeltas[] = {
 };
 
 #if ENGLISH
-#include "../src/data/bard_music_en.h"
+#include "data/bard_music_en.h"
 #elif GERMAN
-#include "../src/data/bard_music_de.h"
+#include "data/bard_music_de.h"
 #endif // ENGLISH/GERMAN
 
 static const struct BardSound (*const gBardMusicTable[])[6] = {

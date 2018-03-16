@@ -12,9 +12,9 @@ EWRAM_DATA static u8 gUnknown_0203A3D3 = 0;
 EWRAM_DATA static u8 gUnknown_0203A3D4 = 0;
 
 #if ENGLISH
-#include "../src/data/menu_cursor_en.h"
+#include "data/menu_cursor_en.h"
 #elif GERMAN
-#include "../src/data/menu_cursor_de.h"
+#include "data/menu_cursor_de.h"
 #endif // ENGLISH/GERMAN
 
 void sub_814A590(void)
