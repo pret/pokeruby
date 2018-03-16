@@ -121,12 +121,12 @@ static bool8 debug_sub_808D2BC(void);
 static void debug_sub_808D308(u8, u8);
 static void debug_sub_808D358(u8);
 static bool8 ControlFlags_FH_OBJ_InitSubmenu(void);
-static bool8 debug_sub_808D40C(void);
-static bool8 debug_sub_808D450(void);
-static bool8 debug_sub_808D4A8(void);
-static bool8 debug_sub_808D500(void);
-static void debug_sub_808D54C(u8, u8);
-static void debug_sub_808D59C(u8);
+static bool8 ControlFlags_FH_OBJ_HandleInput(void);
+static bool8 ControlFlags_FH_OBJ00_08_InitSubsubmenu(void);
+static bool8 ControlFlags_FH_OBJ09_15_InitSubsubmenu(void);
+static bool8 ControlFlags_FH_OBJ_Subsubmenu_HandleInput(void);
+static void ControlFlags_FH_OBJ_FlagToggle(u8, u8);
+static void ControlFlags_FH_OBJ_UpdateDisplay(u8);
 static bool8 ControlFlags_FH_InitSubmenu(void);
 static bool8 debug_sub_808D650(void);
 static bool8 debug_sub_808D694(void);
@@ -159,11 +159,11 @@ static bool8 ControlWorks_SaveWork_Subsubmenu_HandleInput(void);
 static void debug_sub_808DF04(u8);
 static void debug_sub_808DF64(u8, u8);
 static bool8 ControlWorks_SaveWorkPart2_InitSubmenu(void);
-static bool8 debug_sub_808E010(void);
-static bool8 debug_sub_808E054(void);
-static bool8 debug_sub_808E0AC(void);
-static bool8 debug_sub_808E104(void);
-static bool8 debug_sub_808E15C(void);
+static bool8 ControlWorks_SaveWorkPart2_HandleInput(void);
+static bool8 ControlWorks_SaveWorkPart2_SP_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWorkPart2_RoomR110Part1TrickHouse_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWorkPart2_RoomR110Part2_InitSubsubmenu(void);
+static bool8 ControlWorks_SaveWorkPart2_RoomLoad_InitSubsubmenu(void);
 static bool8 debug_sub_808E1B4(void);
 static bool8 debug_sub_808E20C(void);
 static bool8 debug_sub_808E264(void);
@@ -381,61 +381,61 @@ static const struct MenuAction sMenuActions_ControlEvents_AnsWork[] = {
     {sString_Answork_Mikansei, DummyMenuAction}
 };
 
-static const u8 gUnknown_Debug_083C1044[] = _("FHーOBJ00ー08");
-static const u8 gUnknown_Debug_083C1050[] = _("FHーOBJ09ー15");
+static const u8 sString_FH_OBJ00_08[] = _("FHーOBJ00ー08");
+static const u8 sString_FH_OBJ09_15[] = _("FHーOBJ09ー15");
 
-static const struct MenuAction gUnknown_Debug_083C105C[] = {
-    {gUnknown_Debug_083C1044, debug_sub_808D450},
-    {gUnknown_Debug_083C1050, debug_sub_808D4A8}
+static const struct MenuAction sMenuActions_ControlFlags_FH_OBJ[] = {
+    {sString_FH_OBJ00_08, ControlFlags_FH_OBJ00_08_InitSubsubmenu},
+    {sString_FH_OBJ09_15, ControlFlags_FH_OBJ09_15_InitSubsubmenu}
 };
 
-static const u8 gUnknown_Debug_083C106C[] = _("FHーOBJ00");
-static const u8 gUnknown_Debug_083C1075[] = _("FHーOBJ01");
-static const u8 gUnknown_Debug_083C107E[] = _("FHーOBJ02");
-static const u8 gUnknown_Debug_083C1087[] = _("FHーOBJ03");
-static const u8 gUnknown_Debug_083C1090[] = _("FHーOBJ04");
-static const u8 gUnknown_Debug_083C1099[] = _("FHーOBJ05");
-static const u8 gUnknown_Debug_083C10A2[] = _("FHーOBJ06");
-static const u8 gUnknown_Debug_083C10AB[] = _("FHーOBJ07");
-static const u8 gUnknown_Debug_083C10B4[] = _("FHーOBJ08");
+static const u8 sString_FH_OBJ00[] = _("FHーOBJ00");
+static const u8 sString_FH_OBJ01[] = _("FHーOBJ01");
+static const u8 sString_FH_OBJ02[] = _("FHーOBJ02");
+static const u8 sString_FH_OBJ03[] = _("FHーOBJ03");
+static const u8 sString_FH_OBJ04[] = _("FHーOBJ04");
+static const u8 sString_FH_OBJ05[] = _("FHーOBJ05");
+static const u8 sString_FH_OBJ06[] = _("FHーOBJ06");
+static const u8 sString_FH_OBJ07[] = _("FHーOBJ07");
+static const u8 sString_FH_OBJ08[] = _("FHーOBJ08");
 
-static const struct MenuAction gUnknown_Debug_083C10BD[] = {
-    {gUnknown_Debug_083C106C, DummyMenuAction},
-    {gUnknown_Debug_083C1075, DummyMenuAction},
-    {gUnknown_Debug_083C107E, DummyMenuAction},
-    {gUnknown_Debug_083C1087, DummyMenuAction},
-    {gUnknown_Debug_083C1090, DummyMenuAction},
-    {gUnknown_Debug_083C1099, DummyMenuAction},
-    {gUnknown_Debug_083C10A2, DummyMenuAction},
-    {gUnknown_Debug_083C10AB, DummyMenuAction},
-    {gUnknown_Debug_083C10B4, DummyMenuAction}
+static const struct MenuAction sMenuActions_ControlFlags_FH_OBJ00_08[] = {
+    {sString_FH_OBJ00, DummyMenuAction},
+    {sString_FH_OBJ01, DummyMenuAction},
+    {sString_FH_OBJ02, DummyMenuAction},
+    {sString_FH_OBJ03, DummyMenuAction},
+    {sString_FH_OBJ04, DummyMenuAction},
+    {sString_FH_OBJ05, DummyMenuAction},
+    {sString_FH_OBJ06, DummyMenuAction},
+    {sString_FH_OBJ07, DummyMenuAction},
+    {sString_FH_OBJ08, DummyMenuAction}
 };
 
-static const u8 gUnknown_Debug_083C1108[] = _("FH-OBJ09");
-static const u8 gUnknown_Debug_083C1111[] = _("FH-OBJ10");
-static const u8 gUnknown_Debug_083C111A[] = _("FH-OBJ11");
-static const u8 gUnknown_Debug_083C1123[] = _("FH-OBJ12");
-static const u8 gUnknown_Debug_083C112C[] = _("FH-OBJ13");
-static const u8 gUnknown_Debug_083C1135[] = _("FH-OBJ14");
-static const u8 gUnknown_Debug_083C113E[] = _("FH-OBJ15");
-static const u8 gUnknown_Debug_083C1147[] = _("");
-static const u8 gUnknown_Debug_083C1148[] = _("");
+static const u8 sString_FH_OBJ09[] = _("FH-OBJ09");
+static const u8 sString_FH_OBJ10[] = _("FH-OBJ10");
+static const u8 sString_FH_OBJ11[] = _("FH-OBJ11");
+static const u8 sString_FH_OBJ12[] = _("FH-OBJ12");
+static const u8 sString_FH_OBJ13[] = _("FH-OBJ13");
+static const u8 sString_FH_OBJ14[] = _("FH-OBJ14");
+static const u8 sString_FH_OBJ15[] = _("FH-OBJ15");
+static const u8 sString_Blank_083C1147[] = _("");
+static const u8 sString_Blank_083C1148[] = _("");
 
-static const struct MenuAction gUnknown_Debug_083C1149[] = {
-    {gUnknown_Debug_083C1108, DummyMenuAction},
-    {gUnknown_Debug_083C1111, DummyMenuAction},
-    {gUnknown_Debug_083C111A, DummyMenuAction},
-    {gUnknown_Debug_083C1123, DummyMenuAction},
-    {gUnknown_Debug_083C112C, DummyMenuAction},
-    {gUnknown_Debug_083C1135, DummyMenuAction},
-    {gUnknown_Debug_083C113E, DummyMenuAction},
-    {gUnknown_Debug_083C1147, DummyMenuAction},
-    {gUnknown_Debug_083C1148, DummyMenuAction}
+static const struct MenuAction sMenuActions_ControlFlags_FH_OBJ09_15[] = {
+    {sString_FH_OBJ09, DummyMenuAction},
+    {sString_FH_OBJ10, DummyMenuAction},
+    {sString_FH_OBJ11, DummyMenuAction},
+    {sString_FH_OBJ12, DummyMenuAction},
+    {sString_FH_OBJ13, DummyMenuAction},
+    {sString_FH_OBJ14, DummyMenuAction},
+    {sString_FH_OBJ15, DummyMenuAction},
+    {sString_Blank_083C1147, DummyMenuAction},
+    {sString_Blank_083C1148, DummyMenuAction}
 };
 
-static const u8 gUnknown_Debug_083C1194[] = {9, 7};
+static const u8 sControlFlags_FH_OBJ_CountsArray[] = {9, 7};
 
-static const u16 gUnknown_Debug_083C1196[][9] = {
+static const u16 sControlFlags_FH_OBJ_FlagsArrays[][9] = {
     {0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19},
     {0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x20}
 };
@@ -1410,11 +1410,11 @@ static const u8 gUnknown_Debug_083C3768[] = _("ルーム　ロード");
 static const u8 gUnknown_Debug_083C3770[] = _("ソノタ1");
 static const u8 gUnknown_Debug_083C3775[] = _("ソノタ2");
 
-static const struct MenuAction gUnknown_Debug_083C377C[] = {
-    {gUnknown_Debug_083C3742, debug_sub_808E054},
-    {gUnknown_Debug_083C3745, debug_sub_808E0AC},
-    {gUnknown_Debug_083C3759, debug_sub_808E104},
-    {gUnknown_Debug_083C3768, debug_sub_808E15C},
+static const struct MenuAction sMenuActions_ControlWorks_SaveWorkPart2[] = {
+    {gUnknown_Debug_083C3742, ControlWorks_SaveWorkPart2_SP_InitSubsubmenu},
+    {gUnknown_Debug_083C3745, ControlWorks_SaveWorkPart2_RoomR110Part1TrickHouse_InitSubsubmenu},
+    {gUnknown_Debug_083C3759, ControlWorks_SaveWorkPart2_RoomR110Part2_InitSubsubmenu},
+    {gUnknown_Debug_083C3768, ControlWorks_SaveWorkPart2_RoomLoad_InitSubsubmenu},
     {gUnknown_Debug_083C3770, debug_sub_808E1B4},
     {gUnknown_Debug_083C3775, debug_sub_808E20C}
 };
@@ -1583,189 +1583,189 @@ static const struct MenuAction sMenuAction_ControlWorks_SaveWork[] = {
     {sString_Dungeon_nai, ControlWorks_SaveWork_Dungeon_InitSubsubmenu}
 };
 
-static const u8 gUnknown_Debug_083C3D50[] = _("WKーSCENEーFIELDーT101");
-static const u8 gUnknown_Debug_083C3D64[] = _("WKーSCENEーFIELDーT102");
-static const u8 gUnknown_Debug_083C3D78[] = _("WKーSCENEーFIELDーT103");
-static const u8 gUnknown_Debug_083C3D8C[] = _("WKーSCENEーFIELDーT104");
-static const u8 gUnknown_Debug_083C3DA0[] = _("WKーBASEーPOSNO");
-static const u8 gUnknown_Debug_083C3DAE[] = _("WKーSCENEーFIELDーT106");
-static const u8 gUnknown_Debug_083C3DC2[] = _("WKーSCENEーFIELDーT107");
-static const u8 gUnknown_Debug_083C3DD6[] = _("WKーSCENEー02ーFIELDーT102");
+static const u8 sString_WK_SCENE_FIELD_T101[] = _("WKーSCENEーFIELDーT101");
+static const u8 sString_WK_SCENE_FIELD_T102[] = _("WKーSCENEーFIELDーT102");
+static const u8 sString_WK_SCENE_FIELD_T103[] = _("WKーSCENEーFIELDーT103");
+static const u8 sString_WK_SCENE_FIELD_T104[] = _("WKーSCENEーFIELDーT104");
+static const u8 sString_WK_BASE_POSNO[] = _("WKーBASEーPOSNO");
+static const u8 sString_WK_SCENE_FIELD_T106[] = _("WKーSCENEーFIELDーT106");
+static const u8 sString_WK_SCENE_FIELD_T107[] = _("WKーSCENEーFIELDーT107");
+static const u8 sString_WK_SCENE_2_FIELD_T102[] = _("WKーSCENEー02ーFIELDーT102");
 
-static const u8 gUnknown_Debug_083C3DED[] = _("WKーSCENEーFIELDーC101");
-static const u8 gUnknown_Debug_083C3E01[] = _("WKーSCENEーFIELDーC102");
-static const u8 gUnknown_Debug_083C3E15[] = _("WKーSCENEーFIELDーC103");
-static const u8 gUnknown_Debug_083C3E29[] = _("WKーSCENEーFIELDーC104");
-static const u8 gUnknown_Debug_083C3E3D[] = _("WKーSCENEーFIELDーC105");
-static const u8 gUnknown_Debug_083C3E51[] = _("WKーSCENEーFIELDーC106");
-static const u8 gUnknown_Debug_083C3E65[] = _("WKーSCENEーFIELDーC107");
-static const u8 gUnknown_Debug_083C3E79[] = _("WKーSCENEーFIELDーC108");
-static const u8 gUnknown_Debug_083C3E8D[] = _("WKーSCENEーFIELDーC109");
+static const u8 sString_WK_SCENE_FIELD_C101[] = _("WKーSCENEーFIELDーC101");
+static const u8 sString_WK_SCENE_FIELD_C102[] = _("WKーSCENEーFIELDーC102");
+static const u8 sString_WK_SCENE_FIELD_C103[] = _("WKーSCENEーFIELDーC103");
+static const u8 sString_WK_SCENE_FIELD_C104[] = _("WKーSCENEーFIELDーC104");
+static const u8 sString_WK_SCENE_FIELD_C105[] = _("WKーSCENEーFIELDーC105");
+static const u8 sString_WK_SCENE_FIELD_C106[] = _("WKーSCENEーFIELDーC106");
+static const u8 sString_WK_SCENE_FIELD_C107[] = _("WKーSCENEーFIELDーC107");
+static const u8 sString_WK_SCENE_FIELD_C108[] = _("WKーSCENEーFIELDーC108");
+static const u8 sString_WK_SCENE_FIELD_C109[] = _("WKーSCENEーFIELDーC109");
 
-static const u8 gUnknown_Debug_083C3EA1[] = _("WKーSCENEーFIELDーR101");
-static const u8 gUnknown_Debug_083C3EB5[] = _("WKーSCENEーFIELDーR102");
-static const u8 gUnknown_Debug_083C3EC9[] = _("WKーSCENEーFIELDーR103");
-static const u8 gUnknown_Debug_083C3EDD[] = _("WKーSCENEーFIELDーR104");
-static const u8 gUnknown_Debug_083C3EF1[] = _("WKーSCENEーFIELDーR105");
-static const u8 gUnknown_Debug_083C3F05[] = _("WKーSCENEーFIELDーR106");
-static const u8 gUnknown_Debug_083C3F19[] = _("WKーSCENEーFIELDーR107");
-static const u8 gUnknown_Debug_083C3F2D[] = _("WKーSCENEーFIELDーR108");
-static const u8 gUnknown_Debug_083C3F41[] = _("WKーSCENEーFIELDーR109");
+static const u8 sString_WK_SCENE_FIELD_R101[] = _("WKーSCENEーFIELDーR101");
+static const u8 sString_WK_SCENE_FIELD_R102[] = _("WKーSCENEーFIELDーR102");
+static const u8 sString_WK_SCENE_FIELD_R103[] = _("WKーSCENEーFIELDーR103");
+static const u8 sString_WK_SCENE_FIELD_R104[] = _("WKーSCENEーFIELDーR104");
+static const u8 sString_WK_SCENE_FIELD_R105[] = _("WKーSCENEーFIELDーR105");
+static const u8 sString_WK_SCENE_FIELD_R106[] = _("WKーSCENEーFIELDーR106");
+static const u8 sString_WK_SCENE_FIELD_R107[] = _("WKーSCENEーFIELDーR107");
+static const u8 sString_WK_SCENE_FIELD_R108[] = _("WKーSCENEーFIELDーR108");
+static const u8 sString_WK_SCENE_FIELD_R109[] = _("WKーSCENEーFIELDーR109");
 
-static const u8 gUnknown_Debug_083C3F55[] = _("WKーSCENEーFIELDーR110");
-static const u8 gUnknown_Debug_083C3F69[] = _("WKーSCENEーFIELDーR111");
-static const u8 gUnknown_Debug_083C3F7D[] = _("WKーSCENEーFIELDーR112");
-static const u8 gUnknown_Debug_083C3F91[] = _("WKーSCENEーFIELDーR113");
-static const u8 gUnknown_Debug_083C3FA5[] = _("WKーSCENEーFIELDーR114");
-static const u8 gUnknown_Debug_083C3FB9[] = _("WKーSCENEーFIELDーR115");
-static const u8 gUnknown_Debug_083C3FCD[] = _("WKーSCENEーFIELDーR116");
-static const u8 gUnknown_Debug_083C3FE1[] = _("WKーSCENEーFIELDーR117");
-static const u8 gUnknown_Debug_083C3FF5[] = _("WKーSCENEーFIELDーR118");
+static const u8 sString_WK_SCENE_FIELD_R110[] = _("WKーSCENEーFIELDーR110");
+static const u8 sString_WK_SCENE_FIELD_R111[] = _("WKーSCENEーFIELDーR111");
+static const u8 sString_WK_SCENE_FIELD_R112[] = _("WKーSCENEーFIELDーR112");
+static const u8 sString_WK_SCENE_FIELD_R113[] = _("WKーSCENEーFIELDーR113");
+static const u8 sString_WK_SCENE_FIELD_R114[] = _("WKーSCENEーFIELDーR114");
+static const u8 sString_WK_SCENE_FIELD_R115[] = _("WKーSCENEーFIELDーR115");
+static const u8 sString_WK_SCENE_FIELD_R116[] = _("WKーSCENEーFIELDーR116");
+static const u8 sString_WK_SCENE_FIELD_R117[] = _("WKーSCENEーFIELDーR117");
+static const u8 sString_WK_SCENE_FIELD_R118[] = _("WKーSCENEーFIELDーR118");
 
-static const u8 gUnknown_Debug_083C4009[] = _("WKーSCENEーFIELDーR119");
-static const u8 gUnknown_Debug_083C401D[] = _("WKーSCENEーFIELDーR120");
-static const u8 gUnknown_Debug_083C4031[] = _("WKーSCENEーFIELDーR121");
-static const u8 gUnknown_Debug_083C4045[] = _("WKーSCENEーFIELDーR122");
-static const u8 gUnknown_Debug_083C4059[] = _("WKーSCENEーFIELDーR123");
-static const u8 gUnknown_Debug_083C406D[] = _("WKーSCENEーFIELDーR124");
-static const u8 gUnknown_Debug_083C4081[] = _("WKーSCENEーFIELDーR125");
-static const u8 gUnknown_Debug_083C4095[] = _("WKーSCENEーFIELDーR126");
-static const u8 gUnknown_Debug_083C40A9[] = _("WKーSCENEーFIELDーR127");
+static const u8 sString_WK_SCENE_FIELD_R119[] = _("WKーSCENEーFIELDーR119");
+static const u8 sString_WK_SCENE_FIELD_R120[] = _("WKーSCENEーFIELDーR120");
+static const u8 sString_WK_SCENE_FIELD_R121[] = _("WKーSCENEーFIELDーR121");
+static const u8 sString_WK_SCENE_FIELD_R122[] = _("WKーSCENEーFIELDーR122");
+static const u8 sString_WK_SCENE_FIELD_R123[] = _("WKーSCENEーFIELDーR123");
+static const u8 sString_WK_SCENE_FIELD_R124[] = _("WKーSCENEーFIELDーR124");
+static const u8 sString_WK_SCENE_FIELD_R125[] = _("WKーSCENEーFIELDーR125");
+static const u8 sString_WK_SCENE_FIELD_R126[] = _("WKーSCENEーFIELDーR126");
+static const u8 sString_WK_SCENE_FIELD_R127[] = _("WKーSCENEーFIELDーR127");
 
-static const u8 gUnknown_Debug_083C40BD[] = _("WKーSCENEーFIELDーR128");
-static const u8 gUnknown_Debug_083C40D1[] = _("WKーSCENEーFIELDーR129");
-static const u8 gUnknown_Debug_083C40E5[] = _("WKーSCENEーFIELDーR130");
-static const u8 gUnknown_Debug_083C40F9[] = _("WKーSCENEーFIELDーR131");
-static const u8 gUnknown_Debug_083C410D[] = _("WKーSCENEーFIELDーR132");
-static const u8 gUnknown_Debug_083C4121[] = _("WKーSCENEーFIELDーR133");
-static const u8 gUnknown_Debug_083C4135[] = _("WKーSCENEーFIELDーR134");
+static const u8 sString_WK_SCENE_FIELD_R128[] = _("WKーSCENEーFIELDーR128");
+static const u8 sString_WK_SCENE_FIELD_R129[] = _("WKーSCENEーFIELDーR129");
+static const u8 sString_WK_SCENE_FIELD_R130[] = _("WKーSCENEーFIELDーR130");
+static const u8 sString_WK_SCENE_FIELD_R131[] = _("WKーSCENEーFIELDーR131");
+static const u8 sString_WK_SCENE_FIELD_R132[] = _("WKーSCENEーFIELDーR132");
+static const u8 sString_WK_SCENE_FIELD_R133[] = _("WKーSCENEーFIELDーR133");
+static const u8 sString_WK_SCENE_FIELD_R134[] = _("WKーSCENEーFIELDーR134");
 
-static const u8 gUnknown_Debug_083C4149[] = _("WKーSCENEーT101ーR0101");
-static const u8 gUnknown_Debug_083C415D[] = _("WKーSCENEーT101ーR0102");
-static const u8 gUnknown_Debug_083C4171[] = _("WKーSCENEーT101ーR0301");
-static const u8 gUnknown_Debug_083C4185[] = _("WKーSCENEーT101ーR0201");
-static const u8 gUnknown_Debug_083C4199[] = _("WKーSCENEーT101ーR0202");
-static const u8 gUnknown_Debug_083C41AD[] = _("WKーSCENEーT107ーR0201");
+static const u8 sString_WK_SCENE_T101_R0101[] = _("WKーSCENEーT101ーR0101");
+static const u8 sString_WK_SCENE_T101_R0102[] = _("WKーSCENEーT101ーR0102");
+static const u8 sString_WK_SCENE_T101_R0301[] = _("WKーSCENEーT101ーR0301");
+static const u8 sString_WK_SCENE_T101_R0201[] = _("WKーSCENEーT101ーR0201");
+static const u8 sString_WK_SCENE_T101_R0202[] = _("WKーSCENEーT101ーR0202");
+static const u8 sString_WK_SCENE_T107_R0201[] = _("WKーSCENEーT107ーR0201"); // unused string
 
-static const u8 gUnknown_Debug_083C41C1[] = _("WKーSCENEーC101ーR0201");
-static const u8 gUnknown_Debug_083C41D5[] = _("WKーSCENEーC104ーR0103");
-static const u8 gUnknown_Debug_083C41E9[] = _("WKーSCENEーC103ーR0101");
-static const u8 gUnknown_Debug_083C41FD[] = _("WKーSCENEーC106ーR0202");
-static const u8 gUnknown_Debug_083C4211[] = _("WKーSCENEーC106ーR0401");
-static const u8 gUnknown_Debug_083C4225[] = _("WKーSCENEーC102ーR0601");
-static const u8 gUnknown_Debug_083C4239[] = _("WKーSCENEーC102ーR0501");
-static const u8 gUnknown_Debug_083C424D[] = _("WKーSCENEーC104ーR0102");
-static const u8 gUnknown_Debug_083C4261[] = _("WKーSCENEーC107ーR0501");
+static const u8 sString_WK_SCENE_C101_R0201[] = _("WKーSCENEーC101ーR0201");
+static const u8 sString_WK_SCENE_C104_R0103[] = _("WKーSCENEーC104ーR0103");
+static const u8 sString_WK_SCENE_C103_R0101[] = _("WKーSCENEーC103ーR0101");
+static const u8 sString_WK_SCENE_C106_R0202[] = _("WKーSCENEーC106ーR0202");
+static const u8 sString_WK_SCENE_C106_R0401[] = _("WKーSCENEーC106ーR0401");
+static const u8 sString_WK_SCENE_C101_R0601[] = _("WKーSCENEーC102ーR0601");
+static const u8 sString_WK_SCENE_C102_R0501[] = _("WKーSCENEーC102ーR0501");
+static const u8 sString_WK_SCENE_C104_R0102[] = _("WKーSCENEーC104ーR0102");
+static const u8 sString_WK_SCENE_C107_R0501[] = _("WKーSCENEーC107ーR0501");
 
-static const u8 gUnknown_Debug_083C4275[] = _("WKーSCENEーCAVEーD0601");
-static const u8 gUnknown_Debug_083C4289[] = _("WKーSCENEーCAVEーD0201");
-static const u8 gUnknown_Debug_083C429D[] = _("WKーSCENEーCAVEーD1206");
-static const u8 gUnknown_Debug_083C42B1[] = _("WKーSCENEーCAVEーD1111");
-static const u8 gUnknown_Debug_083C42C5[] = _("WKーSCENEーCAVEーD0701");
-static const u8 gUnknown_Debug_083C42D9[] = _("WKーSCENEーCAVEーD0808");
-static const u8 gUnknown_Debug_083C42ED[] = _("WKーSCENEーCAVEーD1602");
-static const u8 gUnknown_Debug_083C4301[] = _("WKーSCENEーCAVEーD0101");
-static const u8 gUnknown_Debug_083C4315[] = _("WKーSCENEーCAVEーD1301");
+static const u8 sString_WK_SCENE_CAVE_D0601[] = _("WKーSCENEーCAVEーD0601");
+static const u8 sString_WK_SCENE_CAVE_D0201[] = _("WKーSCENEーCAVEーD0201");
+static const u8 sString_WK_SCENE_CAVE_D1206[] = _("WKーSCENEーCAVEーD1206");
+static const u8 sString_WK_SCENE_CAVE_D1111[] = _("WKーSCENEーCAVEーD1111");
+static const u8 sString_WK_SCENE_CAVE_D0701[] = _("WKーSCENEーCAVEーD0701");
+static const u8 sString_WK_SCENE_CAVE_D0808[] = _("WKーSCENEーCAVEーD0808");
+static const u8 sString_WK_SCENE_CAVE_D1602[] = _("WKーSCENEーCAVEーD1602");
+static const u8 sString_WK_SCENE_CAVE_D0101[] = _("WKーSCENEーCAVEーD0101");
+static const u8 sString_WK_SCENE_CAVE_D1301[] = _("WKーSCENEーCAVEーD1301");
 
 static const struct MenuAction sMenuActions_SaveWork_Town[] = {
-    {gUnknown_Debug_083C3D50, DummyMenuAction},
-    {gUnknown_Debug_083C3D64, DummyMenuAction},
-    {gUnknown_Debug_083C3D78, DummyMenuAction},
-    {gUnknown_Debug_083C3D8C, DummyMenuAction},
-    {gUnknown_Debug_083C3DA0, DummyMenuAction},
-    {gUnknown_Debug_083C3DAE, DummyMenuAction},
-    {gUnknown_Debug_083C3DC2, DummyMenuAction},
-    {gUnknown_Debug_083C3DD6, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_T101, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_T102, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_T103, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_T104, DummyMenuAction},
+    {sString_WK_BASE_POSNO, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_T106, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_T107, DummyMenuAction},
+    {sString_WK_SCENE_2_FIELD_T102, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_City[] = {
-    {gUnknown_Debug_083C3DED, DummyMenuAction},
-    {gUnknown_Debug_083C3E01, DummyMenuAction},
-    {gUnknown_Debug_083C3E15, DummyMenuAction},
-    {gUnknown_Debug_083C3E29, DummyMenuAction},
-    {gUnknown_Debug_083C3E3D, DummyMenuAction},
-    {gUnknown_Debug_083C3E51, DummyMenuAction},
-    {gUnknown_Debug_083C3E65, DummyMenuAction},
-    {gUnknown_Debug_083C3E79, DummyMenuAction},
-    {gUnknown_Debug_083C3E8D, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_C101, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C102, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C103, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C104, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C105, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C106, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C107, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C108, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_C109, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_Route101To109[] = {
-    {gUnknown_Debug_083C3EA1, DummyMenuAction},
-    {gUnknown_Debug_083C3EB5, DummyMenuAction},
-    {gUnknown_Debug_083C3EC9, DummyMenuAction},
-    {gUnknown_Debug_083C3EDD, DummyMenuAction},
-    {gUnknown_Debug_083C3EF1, DummyMenuAction},
-    {gUnknown_Debug_083C3F05, DummyMenuAction},
-    {gUnknown_Debug_083C3F19, DummyMenuAction},
-    {gUnknown_Debug_083C3F2D, DummyMenuAction},
-    {gUnknown_Debug_083C3F41, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_R101, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R102, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R103, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R104, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R105, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R106, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R107, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R108, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R109, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_Route110To118[] = {
-    {gUnknown_Debug_083C3F55, DummyMenuAction},
-    {gUnknown_Debug_083C3F69, DummyMenuAction},
-    {gUnknown_Debug_083C3F7D, DummyMenuAction},
-    {gUnknown_Debug_083C3F91, DummyMenuAction},
-    {gUnknown_Debug_083C3FA5, DummyMenuAction},
-    {gUnknown_Debug_083C3FB9, DummyMenuAction},
-    {gUnknown_Debug_083C3FCD, DummyMenuAction},
-    {gUnknown_Debug_083C3FE1, DummyMenuAction},
-    {gUnknown_Debug_083C3FF5, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_R110, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R111, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R112, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R113, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R114, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R115, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R116, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R117, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R118, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_Route119To127[] = {
-    {gUnknown_Debug_083C4009, DummyMenuAction},
-    {gUnknown_Debug_083C401D, DummyMenuAction},
-    {gUnknown_Debug_083C4031, DummyMenuAction},
-    {gUnknown_Debug_083C4045, DummyMenuAction},
-    {gUnknown_Debug_083C4059, DummyMenuAction},
-    {gUnknown_Debug_083C406D, DummyMenuAction},
-    {gUnknown_Debug_083C4081, DummyMenuAction},
-    {gUnknown_Debug_083C4095, DummyMenuAction},
-    {gUnknown_Debug_083C40A9, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_R119, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R120, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R121, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R122, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R123, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R124, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R125, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R126, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R127, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_Route128To134[] = {
-    {gUnknown_Debug_083C40BD, DummyMenuAction},
-    {gUnknown_Debug_083C40D1, DummyMenuAction},
-    {gUnknown_Debug_083C40E5, DummyMenuAction},
-    {gUnknown_Debug_083C40F9, DummyMenuAction},
-    {gUnknown_Debug_083C410D, DummyMenuAction},
-    {gUnknown_Debug_083C4121, DummyMenuAction},
-    {gUnknown_Debug_083C4135, DummyMenuAction}
+    {sString_WK_SCENE_FIELD_R128, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R129, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R130, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R131, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R132, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R133, DummyMenuAction},
+    {sString_WK_SCENE_FIELD_R134, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_RoomTown[] = {
-    {gUnknown_Debug_083C4149, DummyMenuAction},
-    {gUnknown_Debug_083C415D, DummyMenuAction},
-    {gUnknown_Debug_083C4171, DummyMenuAction},
-    {gUnknown_Debug_083C4185, DummyMenuAction},
-    {gUnknown_Debug_083C4199, DummyMenuAction}
+    {sString_WK_SCENE_T101_R0101, DummyMenuAction},
+    {sString_WK_SCENE_T101_R0102, DummyMenuAction},
+    {sString_WK_SCENE_T101_R0301, DummyMenuAction},
+    {sString_WK_SCENE_T101_R0201, DummyMenuAction},
+    {sString_WK_SCENE_T101_R0202, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_RoomCity[] = {
-    {gUnknown_Debug_083C41C1, DummyMenuAction},
-    {gUnknown_Debug_083C41D5, DummyMenuAction},
-    {gUnknown_Debug_083C41E9, DummyMenuAction},
-    {gUnknown_Debug_083C41FD, DummyMenuAction},
-    {gUnknown_Debug_083C4211, DummyMenuAction},
-    {gUnknown_Debug_083C4225, DummyMenuAction},
-    {gUnknown_Debug_083C4239, DummyMenuAction},
-    {gUnknown_Debug_083C424D, DummyMenuAction},
-    {gUnknown_Debug_083C4261, DummyMenuAction}
+    {sString_WK_SCENE_C101_R0201, DummyMenuAction},
+    {sString_WK_SCENE_C104_R0103, DummyMenuAction},
+    {sString_WK_SCENE_C103_R0101, DummyMenuAction},
+    {sString_WK_SCENE_C106_R0202, DummyMenuAction},
+    {sString_WK_SCENE_C106_R0401, DummyMenuAction},
+    {sString_WK_SCENE_C101_R0601, DummyMenuAction},
+    {sString_WK_SCENE_C102_R0501, DummyMenuAction},
+    {sString_WK_SCENE_C104_R0102, DummyMenuAction},
+    {sString_WK_SCENE_C107_R0501, DummyMenuAction}
 };
 
 static const struct MenuAction sMenuActions_SaveWork_Dungeon[] = {
-    {gUnknown_Debug_083C4275, DummyMenuAction},
-    {gUnknown_Debug_083C4289, DummyMenuAction},
-    {gUnknown_Debug_083C429D, DummyMenuAction},
-    {gUnknown_Debug_083C42B1, DummyMenuAction},
-    {gUnknown_Debug_083C42C5, DummyMenuAction},
-    {gUnknown_Debug_083C42D9, DummyMenuAction},
-    {gUnknown_Debug_083C42ED, DummyMenuAction},
-    {gUnknown_Debug_083C4301, DummyMenuAction},
-    {gUnknown_Debug_083C4315, DummyMenuAction}
+    {sString_WK_SCENE_CAVE_D0601, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D0201, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D1206, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D1111, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D0701, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D0808, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D1602, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D0101, DummyMenuAction},
+    {sString_WK_SCENE_CAVE_D1301, DummyMenuAction}
 };
 
 static const u8 gUnknown_Debug_083C457C[] = {8, 9, 9, 9, 9, 7, 6, 9, 9};
@@ -2988,14 +2988,14 @@ static void debug_sub_808D358(u8 whichMenu)
 static bool8 ControlFlags_FH_OBJ_InitSubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(gUnknown_Debug_083C105C) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C105C), gUnknown_Debug_083C105C);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C105C), 0, 27);
-    gMenuCallback = debug_sub_808D40C;
+    Menu_DrawStdWindowFrame(0, 0, 28, 2 * ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ), sMenuActions_ControlFlags_FH_OBJ);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ), 0, 27);
+    gMenuCallback = ControlFlags_FH_OBJ_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808D40C(void)
+static bool8 ControlFlags_FH_OBJ_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
 
@@ -3006,39 +3006,39 @@ static bool8 debug_sub_808D40C(void)
         CloseMenu();
         return TRUE;
     }
-    gMenuCallback = gUnknown_Debug_083C105C[input].func;
+    gMenuCallback = sMenuActions_ControlFlags_FH_OBJ[input].func;
     return FALSE;
 }
 
-static bool8 debug_sub_808D450(void)
+static bool8 ControlFlags_FH_OBJ00_08_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_083C10BD) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C10BD), gUnknown_Debug_083C10BD);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C10BD), 0, 28);
+    Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ00_08) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ00_08), sMenuActions_ControlFlags_FH_OBJ00_08);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlFlags_FH_OBJ00_08), 0, 28);
     sFlagAndVarTest_WhichSubmenu = 0;
-    gMenuCallback = debug_sub_808D500;
+    gMenuCallback = ControlFlags_FH_OBJ_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808D4A8(void)
+static bool8 ControlFlags_FH_OBJ09_15_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * 7 + 1);
-    Menu_PrintItems(2, 1, 7, gUnknown_Debug_083C1149);
+    Menu_PrintItems(2, 1, 7, sMenuActions_ControlFlags_FH_OBJ09_15);
     InitMenu(0, 1, 1, 7, 0, 28);
     sFlagAndVarTest_WhichSubmenu = 1;
-    gMenuCallback = debug_sub_808D500;
+    gMenuCallback = ControlFlags_FH_OBJ_Subsubmenu_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808D500(void)
+static bool8 ControlFlags_FH_OBJ_Subsubmenu_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
     s8 cursorPos = Menu_GetCursorPos();
 
-    debug_sub_808D54C(sFlagAndVarTest_WhichSubmenu, cursorPos);
-    debug_sub_808D59C(sFlagAndVarTest_WhichSubmenu);
+    ControlFlags_FH_OBJ_FlagToggle(sFlagAndVarTest_WhichSubmenu, cursorPos);
+    ControlFlags_FH_OBJ_UpdateDisplay(sFlagAndVarTest_WhichSubmenu);
     if (input == -2)
         return FALSE;
     if (input == -1)
@@ -3049,24 +3049,24 @@ static bool8 debug_sub_808D500(void)
     return FALSE;
 }
 
-static void debug_sub_808D54C(u8 whichMenu, u8 cursorPos)
+static void ControlFlags_FH_OBJ_FlagToggle(u8 whichMenu, u8 cursorPos)
 {
     if (gMain.newKeys & R_BUTTON)
     {
-        if (!FlagGet(gUnknown_Debug_083C1196[whichMenu][cursorPos]))
-            FlagSet(gUnknown_Debug_083C1196[whichMenu][cursorPos]);
+        if (!FlagGet(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][cursorPos]))
+            FlagSet(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][cursorPos]);
         else
-            FlagClear(gUnknown_Debug_083C1196[whichMenu][cursorPos]);
+            FlagClear(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][cursorPos]);
     }
 }
 
-static void debug_sub_808D59C(u8 whichMenu)
+static void ControlFlags_FH_OBJ_UpdateDisplay(u8 whichMenu)
 {
     u8 i;
 
-    for (i = 0; i < gUnknown_Debug_083C1194[whichMenu]; i++)
+    for (i = 0; i < sControlFlags_FH_OBJ_CountsArray[whichMenu]; i++)
     {
-        PrintBool(28, 2 * i + 1, FlagGet(gUnknown_Debug_083C1196[whichMenu][i]) ? 1 : 0);
+        PrintBool(28, 2 * i + 1, FlagGet(sControlFlags_FH_OBJ_FlagsArrays[whichMenu][i]) ? 1 : 0);
     }
 }
 
@@ -3445,14 +3445,14 @@ static void debug_sub_808DF64(u8 whichMenu, u8 cursorPos)
 static bool8 ControlWorks_SaveWorkPart2_InitSubmenu(void)
 {
     Menu_EraseScreen();
-    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(gUnknown_Debug_083C377C) + 1);
-    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_083C377C), gUnknown_Debug_083C377C);
-    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C377C), 0, 23);
-    gMenuCallback = debug_sub_808E010;
+    Menu_DrawStdWindowFrame(0, 0, 24, 2 * ARRAY_COUNT(sMenuActions_ControlWorks_SaveWorkPart2) + 1);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(sMenuActions_ControlWorks_SaveWorkPart2), sMenuActions_ControlWorks_SaveWorkPart2);
+    InitMenu(0, 1, 1, ARRAY_COUNT(sMenuActions_ControlWorks_SaveWorkPart2), 0, 23);
+    gMenuCallback = ControlWorks_SaveWorkPart2_HandleInput;
     return FALSE;
 }
 
-static bool8 debug_sub_808E010(void)
+static bool8 ControlWorks_SaveWorkPart2_HandleInput(void)
 {
     s8 input = Menu_ProcessInput();
 
@@ -3463,11 +3463,11 @@ static bool8 debug_sub_808E010(void)
         CloseMenu();
         return TRUE;
     }
-    gMenuCallback = gUnknown_Debug_083C377C[input].func;
+    gMenuCallback = sMenuActions_ControlWorks_SaveWorkPart2[input].func;
     return FALSE;
 }
 
-static bool8 debug_sub_808E054(void)
+static bool8 ControlWorks_SaveWorkPart2_SP_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * 6 + 1);
@@ -3478,7 +3478,7 @@ static bool8 debug_sub_808E054(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808E0AC(void)
+static bool8 ControlWorks_SaveWorkPart2_RoomR110Part1TrickHouse_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * 5 + 1);
@@ -3489,7 +3489,7 @@ static bool8 debug_sub_808E0AC(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808E104(void)
+static bool8 ControlWorks_SaveWorkPart2_RoomR110Part2_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * ARRAY_COUNT(gUnknown_Debug_83C3B28) + 1);
@@ -3500,7 +3500,7 @@ static bool8 debug_sub_808E104(void)
     return FALSE;
 }
 
-static bool8 debug_sub_808E15C(void)
+static bool8 ControlWorks_SaveWorkPart2_RoomLoad_InitSubsubmenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 29, 2 * 2 + 1);
