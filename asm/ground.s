@@ -1188,7 +1188,7 @@ _080E17EA:
 	bl StoreSpriteCallbackInData
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x2E]
-	ldr r0, _080E1860 @ =sub_80782D8
+	ldr r0, _080E1860 @ =WaitAnimForDuration
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
 	pop {r0}
@@ -1200,7 +1200,7 @@ _080E1850: .4byte gBattleAnimArgs
 _080E1854: .4byte 0x000003ff
 _080E1858: .4byte 0xfffffc00
 _080E185C: .4byte DestroyAnimSprite
-_080E1860: .4byte sub_80782D8
+_080E1860: .4byte WaitAnimForDuration
 	thumb_func_end sub_80E17CC
 
 	thumb_func_start sub_80E1864

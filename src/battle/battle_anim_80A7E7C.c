@@ -33,7 +33,7 @@ static void sub_80A88F0(struct Sprite *sprite);
 static void AnimTask_WindUpLungePart1(u8 taskId);
 static void AnimTask_WindUpLungePart2(u8 taskId);
 static void AnimTask_SwayMonStep(u8 taskId);
-static void sub_80A8D8C(u8 taskId);
+static void AnimTask_ScaleMonAndRestoreStep(u8 taskId);
 static void sub_80A8FD8(u8 taskId);
 static void sub_80A913C(u8 taskId);
 
@@ -837,7 +837,13 @@ static void AnimTask_SwayMonStep(u8 taskId)
     }
 }
 
-void sub_80A8D34(u8 taskId)
+// Scales a mon's sprite, and then scales back to its original dimensions.
+// arg 0: x scale delta
+// arg 1: y scale delta
+// arg 2: duration
+// arg 3: anim bank
+// arg 4: sprite object mode
+void AnimTask_ScaleMonAndRestore(u8 taskId)
 {
     u8 spriteId;
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[3]);
@@ -849,10 +855,10 @@ void sub_80A8D34(u8 taskId)
     TASK.data[4] = spriteId;
     TASK.data[10] = 0x100;
     TASK.data[11] = 0x100;
-    TASK.func = sub_80A8D8C;
+    TASK.func = AnimTask_ScaleMonAndRestoreStep;
 }
 
-static void sub_80A8D8C(u8 taskId)
+static void AnimTask_ScaleMonAndRestoreStep(u8 taskId)
 {
     u8 spriteId;
     TASK.data[10] += TASK.data[0];

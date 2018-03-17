@@ -10,7 +10,7 @@ extern u8 gAnimBankTarget;
 void sub_80D9DD4(struct Sprite *sprite);
 void sub_80D9E78(struct Sprite *sprite);
 void sub_80D9EE8(struct Sprite *sprite);
-void sub_80D9FF0(struct Sprite *sprite);
+static void AnimBubbleEffectStep(struct Sprite *sprite);
 
 void sub_80D9D70(struct Sprite *sprite)
 {
@@ -108,7 +108,13 @@ void sub_80D9F14(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-void sub_80D9F88(struct Sprite *sprite)
+// Animates a bubble by rising upward, swaying side to side, and
+// enlarging the sprite. This is used as an after-effect by poison-type
+// moves, along with MOVE_BUBBLE, and MOVE_BUBBLEBEAM.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: 0 = single-target, 1 = multi-target
+void AnimBubbleEffect(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[2])
     {
@@ -125,10 +131,10 @@ void sub_80D9F88(struct Sprite *sprite)
         sprite->pos1.y += gBattleAnimArgs[1];
     }
 
-    sprite->callback = sub_80D9FF0;
+    sprite->callback = AnimBubbleEffectStep;
 }
 
-void sub_80D9FF0(struct Sprite *sprite)
+static void AnimBubbleEffectStep(struct Sprite *sprite)
 {
     sprite->data[0] = (sprite->data[0] + 0xB) & 0xFF;
     sprite->pos2.x = Sin(sprite->data[0], 4);

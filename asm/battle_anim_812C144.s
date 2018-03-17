@@ -128,7 +128,7 @@ sub_812C220: @ 812C220
 	adds r4, r0, 0
 	movs r0, 0x5A
 	strh r0, [r4, 0x2E]
-	ldr r0, _0812C258 @ =sub_80782D8
+	ldr r0, _0812C258 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	movs r0, 0x7
 	strh r0, [r4, 0x30]
@@ -151,7 +151,7 @@ sub_812C220: @ 812C220
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812C258: .4byte sub_80782D8
+_0812C258: .4byte WaitAnimForDuration
 _0812C25C: .4byte sub_812C268
 _0812C260: .4byte REG_BLDCNT
 _0812C264: .4byte REG_BLDALPHA
@@ -857,7 +857,7 @@ sub_812C798: @ 812C798
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	strh r1, [r4, 0x30]
-	ldr r0, _0812C7C0 @ =sub_80782D8
+	ldr r0, _0812C7C0 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _0812C7C4 @ =sub_812C7C8
 	adds r0, r4, 0
@@ -867,7 +867,7 @@ _0812C7BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0812C7C0: .4byte sub_80782D8
+_0812C7C0: .4byte WaitAnimForDuration
 _0812C7C4: .4byte sub_812C7C8
 	thumb_func_end sub_812C798
 

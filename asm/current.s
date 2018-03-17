@@ -442,7 +442,7 @@ _080D67F6:
 	ldr r0, _080D6810 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
-	ldr r0, _080D6814 @ =sub_80782D8
+	ldr r0, _080D6814 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _080D6818 @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -452,7 +452,7 @@ _080D67F6:
 	bx r0
 	.align 2, 0
 _080D6810: .4byte gBattleAnimArgs
-_080D6814: .4byte sub_80782D8
+_080D6814: .4byte WaitAnimForDuration
 _080D6818: .4byte DestroyAnimSprite
 	thumb_func_end sub_80D679C
 

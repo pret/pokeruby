@@ -174,9 +174,15 @@ static void sub_80DCBB4(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-// used in 3 moves:
-//         Move_POISON_STING, Move_TWINEEDLE, Move_SPIKE_CANNON
-void sub_80DCBCC(struct Sprite *sprite)
+// Translates a stinger sprite linearly to a destination location. The sprite is
+// initially rotated so that it appears to be traveling in a straight line.
+// Used by Move_POISON_STING, Move_TWINEEDLE, Move_SPIKE_CANNON
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+void AnimTranslateStinger(struct Sprite *sprite)
 {
     s16 lVarX, lVarY;
     u16 rot;

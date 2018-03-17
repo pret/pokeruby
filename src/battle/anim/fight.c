@@ -29,9 +29,9 @@ extern struct SpriteTemplate gBasicHitSplatSpriteTemplate;
 static void sub_80D927C(struct Sprite *sprite);
 static void sub_80D9328(struct Sprite *sprite);
 static void sub_80D9404(struct Sprite *sprite);
-static void sub_80D9474(struct Sprite *sprite);
-static void sub_80D94CC(struct Sprite *sprite);
-static void sub_80D9524(struct Sprite *sprite);
+static void AnimSpinningKickOrPunchFinish(struct Sprite *sprite);
+static void AnimStompFootStep(struct Sprite *sprite);
+static void AnimStompFootEnd(struct Sprite *sprite);
 static void sub_80D9640(struct Sprite *sprite);
 static void sub_80D97A0(struct Sprite *sprite);
 static void sub_80D986C(struct Sprite *sprite);
@@ -44,7 +44,7 @@ void sub_080B08A0(struct Sprite *sprite)
     sub_807867C(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
     sprite->data[0] = 15;
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -72,7 +72,14 @@ void sub_80D9078(struct Sprite *sprite)
     sub_80D902C(sprite);
 }
 
-void sub_80D90A4(struct Sprite *sprite)
+// Displays a basic fist or foot sprite for a given duration.
+// Used by many fighting moves (and elemental "punch" moves).
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration
+// arg 3: ? (todo: related to initial pixel offsets)
+// arg 4: anim num
+void AnimBasicFistOrFoot(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
 
@@ -82,7 +89,7 @@ void sub_80D90A4(struct Sprite *sprite)
         sub_8078764(sprite, 1);
 
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -225,35 +232,45 @@ static void sub_80D9404(struct Sprite *sprite)
     }
 }
 
-void sub_80D943C(struct Sprite *sprite)
+// Animates the spinning, shrinking kick or punch, which then
+// reappears at full size. Used by moves such as MOVE_MEGA_PUNCH and MOVE_MEGA_KICK.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: anim num
+// arg 3: spin duration
+void AnimSpinningKickOrPunch(struct Sprite *sprite)
 {
     sub_8078764(sprite, 1);
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
     sprite->data[0] = gBattleAnimArgs[3];
 
-    sprite->callback = sub_80782D8;
-    StoreSpriteCallbackInData(sprite, sub_80D9474);
+    sprite->callback = WaitAnimForDuration;
+    StoreSpriteCallbackInData(sprite, AnimSpinningKickOrPunchFinish);
 }
 
-static void sub_80D9474(struct Sprite *sprite)
+static void AnimSpinningKickOrPunchFinish(struct Sprite *sprite)
 {
     StartSpriteAffineAnim(sprite, 0);
     sprite->affineAnimPaused = 1;
     sprite->data[0] = 20;
 
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-void sub_80D94A8(struct Sprite *sprite)
+// Animates MOVE_STOMP's foot that slides downward.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: initial wait duration
+void AnimStompFoot(struct Sprite *sprite)
 {
     sub_8078764(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
 
-    sprite->callback = sub_80D94CC;
+    sprite->callback = AnimStompFootStep;
 }
 
-static void sub_80D94CC(struct Sprite *sprite)
+static void AnimStompFootStep(struct Sprite *sprite)
 {
     if (--sprite->data[0] == -1)
     {
@@ -262,15 +279,15 @@ static void sub_80D94CC(struct Sprite *sprite)
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
         sprite->callback = StartTranslateAnimSpriteByDeltas;
-        StoreSpriteCallbackInData(sprite, sub_80D9524);
+        StoreSpriteCallbackInData(sprite, AnimStompFootEnd);
     }
 }
 
-static void sub_80D9524(struct Sprite *sprite)
+static void AnimStompFootEnd(struct Sprite *sprite)
 {
     sprite->data[0] = 15;
 
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
