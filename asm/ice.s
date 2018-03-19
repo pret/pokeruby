@@ -3060,7 +3060,7 @@ _080D8E92:
 	ldrh r0, [r6, 0xA]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _080D8EDC @ =sub_80D8EE0
 	str r0, [r5, 0x1C]
 	pop {r4-r6}

@@ -2934,7 +2934,7 @@ sub_80DB5E4: @ 80DB5E4
 	asrs r5, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80790F0
+	bl ArcTan2Neg
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 24

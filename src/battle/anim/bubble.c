@@ -97,6 +97,6 @@ static void sub_80D3370(struct Sprite *sprite)
 static void sub_80D3398(struct Sprite *sprite)
 {
     sprite->data[0] = 10;
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }

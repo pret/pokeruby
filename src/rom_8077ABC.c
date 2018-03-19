@@ -551,7 +551,10 @@ void sub_8078278(struct Sprite *sprite)
     }
 }
 
-void sub_80782D8(struct Sprite *sprite)
+// Simply waits until the sprite's data[0] hits zero.
+// This is used to let sprite anims or affine anims to run for a designated
+// duration.
+void WaitAnimForDuration(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
         sprite->data[0]--;
@@ -562,7 +565,7 @@ void sub_80782D8(struct Sprite *sprite)
 void sub_80782F8(struct Sprite *sprite)
 {
     sub_8078314(sprite);
-    sprite->callback = sub_8078364;
+    sprite->callback = TranslateSpriteOverDuration;
     sprite->callback(sprite);
 }
 
@@ -580,7 +583,7 @@ void sub_8078314(struct Sprite *sprite)
     sprite->data[1] = old;
 }
 
-void sub_8078364(struct Sprite *sprite)
+void TranslateSpriteOverDuration(struct Sprite *sprite)
 {
     if (sprite->data[0] > 0)
     {
@@ -764,7 +767,7 @@ void sub_807867C(struct Sprite *sprite, s16 a2)
     }
 }
 
-void sub_80786EC(struct Sprite *sprite)
+void InitAnimSpriteTranslationOverDuration(struct Sprite *sprite)
 {
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -1163,13 +1166,13 @@ bool8 sub_8078E38()
     return FALSE;
 }
 
-void sub_8078E70(u8 sprite, u8 a2)
+void sub_8078E70(u8 sprite, u8 objMode)
 {
     u8 r7 = gSprites[sprite].data[0];
 
     if (IsContest() || IsAnimBankSpriteVisible(r7))
         gSprites[sprite].invisible = FALSE;
-    gSprites[sprite].oam.objMode = a2;
+    gSprites[sprite].oam.objMode = objMode;
     gSprites[sprite].affineAnimPaused = TRUE;
     if (!IsContest() && !gSprites[sprite].oam.affineMode)
         gSprites[sprite].oam.matrixNum = ewram17810[r7].unk6;
@@ -1234,7 +1237,7 @@ static u16 ArcTan2_(s16 a, s16 b)
     return ArcTan2(a, b);
 }
 
-u16 sub_80790F0(s16 a, s16 b)
+u16 ArcTan2Neg(s16 a, s16 b)
 {
     u16 var = ArcTan2_(a, b);
     return -var;
@@ -1437,7 +1440,7 @@ void sub_80794A8(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = sub_8079518;
 }
 
@@ -1561,20 +1564,26 @@ void sub_80796F8(u8 taskId)
     }
 }
 
-void sub_8079790(u8 task)
+// Linearly blends a mon's sprite colors with a target color with increasing
+// strength, and then blends out to the original color.
+// arg 0: anim bank
+// arg 1: blend color
+// arg 2: target blend coefficient
+// arg 3: initial delay
+// arg 4: number of times to blend in and out
+void AnimTask_BlendMonInAndOut(u8 task)
 {
-    u8 sprite = GetAnimBankSpriteId(gBattleAnimArgs[0]);
-
-    if (sprite == 0xff)
+    u8 spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    if (spriteId == 0xff)
     {
         DestroyAnimVisualTask(task);
         return;
     }
-    gTasks[task].data[0] = (gSprites[sprite].oam.paletteNum * 0x10) + 0x101;
-    sub_80797EC(&gTasks[task]);
+    gTasks[task].data[0] = (gSprites[spriteId].oam.paletteNum * 0x10) + 0x101;
+    AnimTask_BlendMonInAndOutSetup(&gTasks[task]);
 }
 
-void sub_80797EC(struct Task *task)
+void AnimTask_BlendMonInAndOutSetup(struct Task *task)
 {
     task->data[1] = gBattleAnimArgs[1];
     task->data[2] = 0;
@@ -1583,10 +1592,10 @@ void sub_80797EC(struct Task *task)
     task->data[5] = gBattleAnimArgs[3];
     task->data[6] = 0;
     task->data[7] = gBattleAnimArgs[4];
-    task->func = sub_8079814;
+    task->func = AnimTask_BlendMonInAndOutStep;
 }
 
-void sub_8079814(u8 taskId)
+void AnimTask_BlendMonInAndOutStep(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -1596,14 +1605,14 @@ void sub_8079814(u8 taskId)
         if (!task->data[6])
         {
             task->data[2]++;
-            BlendPalette(task->data[0], 0xf, task->data[2], task->data[1]);
+            BlendPalette(task->data[0], 15, task->data[2], task->data[1]);
             if (task->data[2] == task->data[3])
                 task->data[6] = 1;
         }
         else
         {
             task->data[2]--;
-            BlendPalette(task->data[0], 0xf, task->data[2], task->data[1]);
+            BlendPalette(task->data[0], 15, task->data[2], task->data[1]);
             if (!task->data[2])
             {
                 if (--task->data[7])
@@ -1631,7 +1640,7 @@ void sub_80798AC(u8 task)
         return;
     }
     gTasks[task].data[0] = (palette * 0x10) + 0x101;
-    sub_80797EC(&gTasks[task]);
+    AnimTask_BlendMonInAndOutSetup(&gTasks[task]);
 }
 
 void sub_80798F4(struct Task *task, u8 a2, const void *a3)
@@ -1873,26 +1882,26 @@ void sub_8079E24()
     }
 }
 
-u8 sub_8079E90(u8 slot)
+u8 sub_8079E90(u8 bank)
 {
-    u8 status;
+    u8 identity;
     u8 ret;
 
     if (IsContest())
     {
-        if (slot == 2)
+        if (bank == ANIM_BANK_ATK_PARTNER)
             return 30;
         else
             return 40;
     }
     else
     {
-        status = GetBankIdentity(slot);
-        if (status == 0)
+        identity = GetBankIdentity(bank);
+        if (identity == IDENTITY_PLAYER_MON1)
             ret = 30;
-        else if (status == 2)
+        else if (identity == IDENTITY_PLAYER_MON2)
             ret = 20;
-        else if (status == 1)
+        else if (identity == IDENTITY_OPPONENT_MON1)
             ret = 40;
         else
             ret = 50;

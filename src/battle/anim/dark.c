@@ -238,7 +238,7 @@ void sub_80DFFD0(struct Sprite *sprite)
     sprite->data[4] = sprite->pos1.y + 12;
     sprite->data[5] = -12;
 
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = sub_80E00D0;
 }
 

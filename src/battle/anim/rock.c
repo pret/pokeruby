@@ -446,7 +446,7 @@ static void sub_80DD774(struct Task *task)
         gSprites[spriteId].data[5] = -16 - (task->data[1] * 2);
         gSprites[spriteId].oam.tileNum += var0;
 
-        sub_80786EC(&gSprites[spriteId]);
+        InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
         task->data[11]++;
     }
 

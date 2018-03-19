@@ -2627,7 +2627,7 @@ _080DEFAA:
 	bne _080DF00C
 	movs r0, 0x1E
 	strh r0, [r3, 0x2E]
-	ldr r0, _080DF004 @ =sub_80782D8
+	ldr r0, _080DF004 @ =WaitAnimForDuration
 	str r0, [r3, 0x1C]
 	ldr r1, _080DF008 @ =sub_80DF018
 	adds r0, r3, 0
@@ -2636,7 +2636,7 @@ _080DEFAA:
 	.align 2, 0
 _080DEFFC: .4byte 0x000003ff
 _080DF000: .4byte 0xfffffc00
-_080DF004: .4byte sub_80782D8
+_080DF004: .4byte WaitAnimForDuration
 _080DF008: .4byte sub_80DF018
 _080DF00C:
 	movs r0, 0x28
