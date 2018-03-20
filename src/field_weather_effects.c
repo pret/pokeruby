@@ -2292,13 +2292,12 @@ void unc_0807DAB4(struct Sprite *sprite)
 
 //------------------------------------------------------------------------------
 
-u8 TranslateWeatherNum(u8);
-void UpdateRainCounter(u8, u8);
+static u8 TranslateWeatherNum(u8);
+static void UpdateRainCounter(u8, u8);
 
 void SetSav1Weather(u32 weather)
 {
     u8 oldWeather = gSaveBlock1.weather;
-
     gSaveBlock1.weather = TranslateWeatherNum(weather);
     UpdateRainCounter(gSaveBlock1.weather, oldWeather);
 }
@@ -2311,7 +2310,6 @@ u8 GetSav1Weather(void)
 void SetSav1WeatherFromCurrMapHeader(void)
 {
     u8 oldWeather = gSaveBlock1.weather;
-
     gSaveBlock1.weather = TranslateWeatherNum(gMapHeader.weather);
     UpdateRainCounter(gSaveBlock1.weather, oldWeather);
 }
@@ -2338,42 +2336,54 @@ void sub_8080750(void)
     sub_807C988(GetSav1Weather());
 }
 
-static const u8 sWeatherCycle1[] = {2, 3, 5, 3};
-static const u8 sWeatherCycle2[] = {2, 2, 3, 2};
+static const u8 sWeatherCycleRoute119[] =
+{
+    WEATHER_SUNNY,
+    WEATHER_RAIN_LIGHT,
+    WEATHER_RAIN_MED,
+    WEATHER_RAIN_LIGHT,
+};
+static const u8 sWeatherCycleRoute123[] =
+{
+    WEATHER_SUNNY,
+    WEATHER_SUNNY,
+    WEATHER_RAIN_LIGHT,
+    WEATHER_SUNNY,
+};
 
-u8 TranslateWeatherNum(u8 weather)
+static u8 TranslateWeatherNum(u8 weather)
 {
     switch (weather)
     {
-    case 0:  return 0;
-    case 1:  return 1;
-    case 2:  return 2;
-    case 3:  return 3;
-    case 4:  return 4;
-    case 5:  return 5;
-    case 6:  return 6;
-    case 7:  return 7;
-    case 8:  return 8;
-    case 9:  return 9;
-    case 10: return 10;
-    case 11: return 11;
-    case 12: return 12;
-    case 13: return 13;
-    case 14: return 14;
-    case 20: return sWeatherCycle1[gSaveBlock1.filler_2F];
-    case 21: return sWeatherCycle2[gSaveBlock1.filler_2F];
-    default: return 0;
+    case WEATHER_NONE:       return WEATHER_NONE;
+    case WEATHER_CLOUDS:     return WEATHER_CLOUDS;
+    case WEATHER_SUNNY:      return WEATHER_SUNNY;
+    case WEATHER_RAIN_LIGHT: return WEATHER_RAIN_LIGHT;
+    case WEATHER_SNOW:       return WEATHER_SNOW;
+    case WEATHER_RAIN_MED:   return WEATHER_RAIN_MED;
+    case WEATHER_FOG_1:      return WEATHER_FOG_1;
+    case WEATHER_ASH:        return WEATHER_ASH;
+    case WEATHER_SANDSTORM:  return WEATHER_SANDSTORM;
+    case WEATHER_FOG_2:      return WEATHER_FOG_2;
+    case WEATHER_FOG_3:      return WEATHER_FOG_3;
+    case WEATHER_SHADE:      return WEATHER_SHADE;
+    case WEATHER_DROUGHT:    return WEATHER_DROUGHT;
+    case WEATHER_RAIN_HEAVY: return WEATHER_RAIN_HEAVY;
+    case WEATHER_BUBBLES:    return WEATHER_BUBBLES;
+    case WEATHER_ROUTE119_CYCLE: return sWeatherCycleRoute119[gSaveBlock1.weatherCycleStage];
+    case WEATHER_ROUTE123_CYCLE: return sWeatherCycleRoute123[gSaveBlock1.weatherCycleStage];
+    default:                 return WEATHER_NONE;
     }
 }
 
 void UpdateWeatherPerDay(u16 increment)
 {
-    u16 weatherStage = gSaveBlock1.filler_2F + increment;
+    u16 weatherStage = gSaveBlock1.weatherCycleStage + increment;
     weatherStage %= 4;
-    gSaveBlock1.filler_2F = weatherStage;
+    gSaveBlock1.weatherCycleStage = weatherStage;
 }
 
-void UpdateRainCounter(u8 newWeather, u8 oldWeather)
+static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
 {
     if (newWeather != oldWeather
      && (newWeather == WEATHER_RAIN_LIGHT || newWeather == WEATHER_RAIN_MED))
