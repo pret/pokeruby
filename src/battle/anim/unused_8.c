@@ -19,7 +19,7 @@ void sub_80CF458(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, sub_80CF490);
 }
 

@@ -522,7 +522,7 @@ static void sub_80DC1FC(u8 taskId)
                 gSprites[spriteId].data[4] = task->data[14];
                 gSprites[spriteId].data[5] = task->data[10];
 
-                sub_80786EC(&gSprites[spriteId]);
+                InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], task->data[2] & 3);
             }
 

@@ -8,19 +8,21 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80CCB00(struct Sprite* sprite);
+static void AnimSliceStep(struct Sprite* sprite);
 
-// slice (the cutting animation showing as a yellow line drawn diagonally)
-// Used in Cut, Fury Cutter, Aerial Ace, and Air Cutter.
-
-void sub_80CC914(struct Sprite* sprite)
+// Moves the sprite in a diagonally slashing motion across the target mon.
+// Used by moves such as MOVE_CUT and MOVE_AERIAL_ACE. 
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
+void AnimCuttingSlice(struct Sprite* sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
     sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
     if (GetBankSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
-    sprite->callback = sub_80CCB00;
+    sprite->callback = AnimSliceStep;
     if (gBattleAnimArgs[2] == 0)
     {
         sprite->pos1.x += gBattleAnimArgs[0];
@@ -70,7 +72,7 @@ void sub_80CC9BC(struct Sprite* sprite)
     if (GetBankSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
-    sprite->callback = sub_80CCB00;
+    sprite->callback = AnimSliceStep;
     if (gBattleAnimArgs[2] == 0)
     {
         sprite->pos1.x += gBattleAnimArgs[0];
@@ -89,7 +91,7 @@ void sub_80CC9BC(struct Sprite* sprite)
         sprite->data[1] = -sprite->data[1];
 }
 
-void sub_80CCB00(struct Sprite* sprite)
+static void AnimSliceStep(struct Sprite* sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -106,6 +108,6 @@ void sub_80CCB00(struct Sprite* sprite)
     {
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
         sprite->data[0] = 3;
-        sprite->callback = sub_80782D8;
+        sprite->callback = WaitAnimForDuration;
     }
 }

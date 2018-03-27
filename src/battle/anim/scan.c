@@ -26,7 +26,7 @@ void sub_80CD3E0(struct Sprite* sprite)
     sprite->pos1.x -= 32;
     sprite->pos1.y -= 32;
     sprite->data[0] = 20;
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, sub_80CD408);
 }
 
@@ -36,7 +36,7 @@ void sub_80CD408(struct Sprite* sprite)
     {
     case 0:
         sprite->data[0] = 1;
-        sprite->callback = sub_80782D8;
+        sprite->callback = WaitAnimForDuration;
         StoreSpriteCallbackInData(sprite, sub_80CD408);
         break;
     case 1:
@@ -62,7 +62,7 @@ void sub_80CD4B8(struct Sprite* sprite)
     if ((sprite->data[5] >> 8) == 4)
     {
         sprite->data[0] = 10;
-        sprite->callback = sub_80782D8;
+        sprite->callback = WaitAnimForDuration;
         StoreSpriteCallbackInData(sprite, sub_80CD4EC);
     }
     else
@@ -80,7 +80,7 @@ void sub_80CD4EC(struct Sprite* sprite)
         sprite->data[0] = 3;
         sprite->data[1] = 0;
         sprite->data[2] = 0;
-        sprite->callback = sub_80782D8;
+        sprite->callback = WaitAnimForDuration;
         StoreSpriteCallbackInData(sprite, sub_80CD5A8);
     }
     else

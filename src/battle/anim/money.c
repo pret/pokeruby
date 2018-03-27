@@ -26,7 +26,7 @@ void sub_80CFE9C(struct Sprite* sprite)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     r6 += gBattleAnimArgs[2];
-    var = sub_80790F0(r6 - sprite->pos1.x, r7 - sprite->pos1.y);
+    var = ArcTan2Neg(r6 - sprite->pos1.x, r7 - sprite->pos1.y);
     var += 0xC000;
     sub_8078FDC(sprite, 0, 0x100, 0x100, var);
     sprite->data[0] = gBattleAnimArgs[4];

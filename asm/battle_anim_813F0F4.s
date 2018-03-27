@@ -1572,7 +1572,7 @@ sub_813FD90: @ 813FD90
 	ldr r0, _0813FDB8 @ =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _0813FDBC @ =sub_813FDC0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -5508,7 +5508,7 @@ sub_8141C30: @ 8141C30
 	ldr r0, _08141CA8 @ =0x0000ffe0
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r1, _08141CAC @ =gBankSpriteIds
 	ldr r0, _08141CB0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
