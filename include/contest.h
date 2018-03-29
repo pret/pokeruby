@@ -227,9 +227,7 @@ struct UnknownContestStruct7
     u8 unk0[4];
     u16 unk4;
     u16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 fillerA[3];
+    u8 unk8[5];
     u8 unkD[4];
     u8 unk11;
     u8 filler12[2];
