@@ -6,6 +6,7 @@
 u8 sub_80B9120(void);
 bool8 sub_80B90C0(u8);
 void sub_80B9038(u8);
+s16 sub_80B9224(s16);
 
 extern bool8 const gComboStarterLookupTable[];
 
@@ -442,4 +443,65 @@ void ContestEffect_30(void)
         curContestant->appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
         SetContestantStatusUnk13(shared192D0.unk11, 16);
     }
+}
+
+void ContestEffect_31(void)
+{
+    int r1;
+    int r3;
+
+    for (r1 = 0, r3 = 0; r1 < 4; r1++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] > shared192D0.unk0[r1])
+            r3 += sContestantStatus[r1].appeal2;
+    }
+    if (r3 < 0)
+        r3 = 0;
+    if (shared192D0.unk0[shared192D0.unk11] == 0 || r3 == 0)
+        SetContestantStatusUnk13(shared192D0.unk11, 18);
+    else
+    {
+        curContestant->appeal2 += r3 / 2;
+        SetContestantStatusUnk13(shared192D0.unk11, 17);
+    }
+    sContestantStatus[shared192D0.unk11].appeal2 = sub_80B9224(sContestantStatus[shared192D0.unk11].appeal2);
+}
+
+void ContestEffect_32(void)
+{
+    s16 r6 = 0;
+
+    if (shared192D0.unk0[shared192D0.unk11] != 0)
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+        {
+            if (shared192D0.unk0[shared192D0.unk11] - 1 == shared192D0.unk0[i])
+                r6 = sContestantStatus[i].appeal2;
+        }
+    }
+    if (shared192D0.unk0[shared192D0.unk11] == 0 || r6 <= 0)
+        SetContestantStatusUnk13(shared192D0.unk11, 20);
+    else
+    {
+        curContestant->appeal2 += r6;
+        SetContestantStatusUnk13(shared192D0.unk11, 19);
+    }
+}
+
+void ContestEffect_33(void)
+{
+    u8 r3 = shared192D0.unk0[shared192D0.unk11];
+    if (r3 == 0)
+        sContestantStatus[shared192D0.unk11].appeal2 = 10;
+    else
+        sContestantStatus[shared192D0.unk11].appeal2 = 20 * r3;
+    if (r3 == 0)
+        SetContestantStatusUnk13(shared192D0.unk11, 21);
+    else if (r3 == 1)
+        SetContestantStatusUnk13(shared192D0.unk11, 22);
+    else if (r3 == 2)
+        SetContestantStatusUnk13(shared192D0.unk11, 23);
+    else
+        SetContestantStatusUnk13(shared192D0.unk11, 24);
 }
