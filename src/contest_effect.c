@@ -376,3 +376,70 @@ void ContestEffect_26(void)
     if (r9 == 0)
         SetContestantStatusUnk14(shared192D0.unk11, 0x36);
 }
+
+void ContestEffect_27(void)
+{
+    u8 r8 = 0;
+    int r6;
+
+    for (r6 = 0; r6 < 4; r6++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] > shared192D0.unk0[r6] &&
+            sContestantStatus[r6].unkD > 0 &&
+            sub_80B90C0(r6))
+        {
+            sContestantStatus[r6].unkD = 0;
+            sContestantStatus[r6].unk10_4 = 2;
+            SetContestantStatusUnk13(r6, 13);
+            r8++;
+        }
+    }
+
+    SetContestantStatusUnk13(shared192D0.unk11, 12);
+    if (r8 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x39);
+}
+
+void ContestEffect_28(void)
+{
+    u8 r7 = 0;
+    int r5;
+
+    for (r5 = 0; r5 < 4; r5++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] > shared192D0.unk0[r5])
+        {
+            if (sContestantStatus[r5].unkD > 0)
+                shared192D0.unk4 = 40;
+            else
+                shared192D0.unk4 = 10;
+            shared192D0.unk8[0] = r5;
+            shared192D0.unk8[1] = 0xFF;
+            if (sub_80B9120())
+                r7++;
+        }
+    }
+    SetContestantStatusUnk13(shared192D0.unk11, 14);
+    if (r7 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x39);
+}
+
+void ContestEffect_29(void)
+{
+    if (gUnknown_02038696[shared192D0.unk11] == 0)
+    {
+        u16 move = curContestant->currMove;
+        curContestant->appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        SetContestantStatusUnk13(shared192D0.unk11, 15);
+    }
+}
+
+void ContestEffect_30(void)
+{
+    if (gUnknown_02038696[shared192D0.unk11] == 3)
+    {
+        u16 move = curContestant->currMove;
+        curContestant->appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
+        SetContestantStatusUnk13(shared192D0.unk11, 16);
+    }
+}
