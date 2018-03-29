@@ -5,6 +5,7 @@
 
 u8 sub_80B9120(void);
 bool8 sub_80B90C0(u8);
+void sub_80B9038(u8);
 
 extern bool8 const gComboStarterLookupTable[];
 
@@ -117,12 +118,12 @@ void ContestEffect_14(void)
 {
     u8 r0 = Random() % 10;
     int r1 = 20;
-    if (r0 >= 2)
-    {
+    if (r0 < 2)
+        r1 = 20;
+    else if (r0 < 8)
+        r1 = 40;
+    else
         r1 = 60;
-        if (r0 < 8)
-            r1 = 40;
-    }
     shared192D0.unk4 = r1;
     ContestEffect_08();
 }
@@ -143,25 +144,19 @@ void ContestEffect_15(void) {
                 shared192D0.unk8[1] = 0xFF;
                 {
                 u8 r0 = Random() % 10;
-                int r1 = 0;
-                if (r0 > 0)
-                {
+                int r1;
+                if (r0 == 0)
+                    r1 = 0;
+                else if (r0 <= 2)
                     r1 = 10;
-                    if (r0 > 2)
-                    {
-                        r1 = 20;
-                        if (r0 > 4)
-                        {
-                            r1 = 30;
-                            if (r0 > 6)
-                            {
-                                r1 = 60;
-                                if (r0 <= 8)
-                                    r1 = 40;
-                            }
-                        }
-                    }
-                }
+                else if (r0 <= 4)
+                    r1 = 20;
+                else if (r0 <= 6)
+                    r1 = 30;
+                else if (r0 <= 8)
+                    r1 = 40;
+                else
+                    r1 = 60;
                 shared192D0.unk4 = r1;
                 }
                 if (sub_80B9120())
@@ -201,4 +196,77 @@ void ContestEffect_16(void)
     {
         SetContestantStatusUnk14(shared192D0.unk11, 0x36);
     }
+}
+
+void ContestEffect_17(void)
+{
+    u8 r9 = 0;
+    u8 r8 = shared192D0.unk11;
+
+    if (shared192D0.unk0[shared192D0.unk11] != 0)
+    {
+        int r5;
+
+        for (r5 = 0; r5 < 4; r5++)
+        {
+            if (shared192D0.unk0[r8] > shared192D0.unk0[r5])
+            {
+                if (sContestantStatus[r5].unk15_4)
+                    shared192D0.unk4 = 50;
+                else
+                    shared192D0.unk4 = 10;
+                shared192D0.unk8[0] = r5;
+                shared192D0.unk8[1] = 0xFF;
+                if (sub_80B9120())
+                    r9++;
+            }
+        }
+    }
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+    if (r9 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x36);
+}
+
+void ContestEffect_18(void)
+{
+    curContestant->unk11_2 = TRUE;
+    ContestEffect_09();
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_19(void)
+{
+    u16 move = curContestant->currMove;
+    sub_80B9038(gContestMoves[move].contestCategory);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_20(void)
+{
+    sub_80B9038(CONTEST_CATEGORY_COOL);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_21(void)
+{
+    sub_80B9038(CONTEST_CATEGORY_BEAUTY);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_22(void)
+{
+    sub_80B9038(CONTEST_CATEGORY_CUTE);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_23(void)
+{
+    sub_80B9038(CONTEST_CATEGORY_SMART);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_24(void)
+{
+    sub_80B9038(CONTEST_CATEGORY_TOUGH);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
