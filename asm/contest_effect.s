@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start ContestEffect_25
-ContestEffect_25: @ 80B829C
-	push {r4-r7,lr}
-	movs r4, 0
-	ldr r0, _080B82E0 @ =gSharedMem + 0x192D0
-	ldrb r1, [r0, 0x11]
-	adds r1, r0
-	ldrb r1, [r1]
-	adds r7, r0, 0
-	cmp r1, 0x3
-	beq _080B82F4
-	movs r5, 0
-	adds r6, r7, 0
-_080B82B2:
-	ldrb r0, [r6, 0x11]
-	adds r0, r6
-	ldrb r0, [r0]
-	adds r0, 0x1
-	adds r1, r5, r6
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080B82EE
-	lsls r0, r5, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl sub_80B90C0
-	lsls r0, 24
-	cmp r0, 0
-	beq _080B82E4
-	adds r0, r4, 0
-	bl sub_80B157C
-	adds r0, r4, 0
-	movs r1, 0xA
-	b _080B82E8
-	.align 2, 0
-_080B82E0: .4byte gSharedMem + 0x192D0
-_080B82E4:
-	adds r0, r4, 0
-	movs r1, 0x3C
-_080B82E8:
-	bl SetContestantStatusUnk13
-	movs r4, 0x1
-_080B82EE:
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _080B82B2
-_080B82F4:
-	ldrb r0, [r7, 0x11]
-	movs r1, 0x9
-	bl SetContestantStatusUnk13
-	cmp r4, 0
-	bne _080B8308
-	ldrb r0, [r7, 0x11]
-	movs r1, 0x36
-	bl SetContestantStatusUnk14
-_080B8308:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end ContestEffect_25
-
 	thumb_func_start ContestEffect_26
 ContestEffect_26: @ 80B8310
 	push {r4-r7,lr}

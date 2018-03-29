@@ -279,5 +279,6 @@ extern u8 gUnknown_02038696[4];
 extern u8 gUnknown_0203869B;
 void SetContestantStatusUnk13(u8 a, u8 b);
 void SetContestantStatusUnk14(u8 a, u8 b);
+void sub_80B157C(u8 p);
 
 #endif // GUARD_CONTEST_H

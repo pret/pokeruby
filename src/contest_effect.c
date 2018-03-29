@@ -270,3 +270,34 @@ void ContestEffect_24(void)
     sub_80B9038(CONTEST_CATEGORY_TOUGH);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
+
+void ContestEffect_25(void)
+{
+    bool32 r4 = FALSE;
+
+    if (shared192D0.unk0[shared192D0.unk11] != 3)
+    {
+        int r5;
+
+        for (r5 = 0; r5 < 4; r5++)
+        {
+            if (shared192D0.unk0[shared192D0.unk11] + 1 == shared192D0.unk0[r5])
+            {
+                if (sub_80B90C0(r5))
+                {
+                    sub_80B157C(r5);
+                    SetContestantStatusUnk13(r5, 10);
+                    r4 = TRUE;
+                }
+                else
+                {
+                    SetContestantStatusUnk13(r5, 60);
+                    r4 = TRUE;
+                }
+            }
+        }
+    }
+    SetContestantStatusUnk13(shared192D0.unk11, 9);
+    if (!r4)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x36);
+}
