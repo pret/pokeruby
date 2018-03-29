@@ -5,217 +5,6 @@
 
 	.text
 
-	thumb_func_start ContestEffect_02
-ContestEffect_02: @ 80B7DBC
-	push {lr}
-	ldr r3, _080B7DE4 @ =gSharedMem + 0x192D0
-	ldrb r1, [r3, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r3, 0
-	subs r1, 0x70
-	adds r0, r1
-	ldrb r1, [r0, 0x11]
-	movs r2, 0x8
-	orrs r1, r2
-	strb r1, [r0, 0x11]
-	ldrb r0, [r3, 0x11]
-	movs r1, 0x1
-	bl sub_80B13EC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7DE4: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_02
-
-	thumb_func_start ContestEffect_03
-ContestEffect_03: @ 80B7DE8
-	push {r4,lr}
-	ldr r3, _080B7E30 @ =gSharedMem + 0x192D0
-	ldrb r1, [r3, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r4, r3, 0
-	subs r4, 0x70
-	adds r0, r4
-	ldrb r1, [r0, 0x10]
-	movs r2, 0x8
-	orrs r1, r2
-	strb r1, [r0, 0x10]
-	ldrb r0, [r3, 0x11]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrb r2, [r1, 0x15]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x15]
-	ldrb r0, [r3, 0x11]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrb r2, [r1, 0xB]
-	movs r0, 0x71
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0xB]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7E30: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_03
-
-	thumb_func_start ContestEffect_04
-ContestEffect_04: @ 80B7E34
-	push {lr}
-	ldr r2, _080B7E58 @ =gSharedMem + 0x192D0
-	ldrb r1, [r2, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r2, 0
-	subs r1, 0x70
-	adds r0, r1
-	movs r1, 0x1
-	strb r1, [r0, 0x12]
-	ldrb r0, [r2, 0x11]
-	movs r1, 0x2
-	bl sub_80B13EC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7E58: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_04
-
-	thumb_func_start ContestEffect_05
-ContestEffect_05: @ 80B7E5C
-	push {lr}
-	ldr r3, _080B7E84 @ =gSharedMem + 0x192D0
-	ldrb r1, [r3, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r3, 0
-	subs r1, 0x70
-	adds r0, r1
-	ldrb r1, [r0, 0x10]
-	movs r2, 0x2
-	orrs r1, r2
-	strb r1, [r0, 0x10]
-	ldrb r0, [r3, 0x11]
-	movs r1, 0x3
-	bl sub_80B13EC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7E84: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_05
-
-	thumb_func_start ContestEffect_06
-ContestEffect_06: @ 80B7E88
-	push {lr}
-	ldr r2, _080B7EAC @ =gSharedMem + 0x192D0
-	ldrb r1, [r2, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r2, 0
-	subs r1, 0x70
-	adds r0, r1
-	movs r1, 0x14
-	strb r1, [r0, 0xF]
-	ldrb r0, [r2, 0x11]
-	movs r1, 0x4
-	bl sub_80B13EC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7EAC: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_06
-
-	thumb_func_start ContestEffect_07
-ContestEffect_07: @ 80B7EB0
-	push {lr}
-	ldr r3, _080B7ED8 @ =gSharedMem + 0x192D0
-	ldrb r1, [r3, 0x11]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r3, 0
-	subs r1, 0x70
-	adds r0, r1
-	ldrb r1, [r0, 0x10]
-	movs r2, 0x1
-	orrs r1, r2
-	strb r1, [r0, 0x10]
-	ldrb r0, [r3, 0x11]
-	movs r1, 0x5
-	bl sub_80B13EC
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7ED8: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_07
-
-	thumb_func_start ContestEffect_08
-ContestEffect_08: @ 80B7EDC
-	push {r4,lr}
-	movs r2, 0
-	ldr r3, _080B7F38 @ =gSharedMem + 0x192D0
-	ldrb r0, [r3, 0x11]
-	adds r1, r0, r3
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _080B7F1A
-	subs r0, 0x1
-	ldrb r4, [r3]
-	cmp r0, r4
-	beq _080B7F0A
-	adds r4, r3, 0
-	adds r3, r1, 0
-_080B7EF8:
-	adds r2, 0x1
-	cmp r2, 0x3
-	bgt _080B7F0A
-	ldrb r0, [r3]
-	subs r0, 0x1
-	adds r1, r2, r4
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080B7EF8
-_080B7F0A:
-	ldr r1, _080B7F38 @ =gSharedMem + 0x192D0
-	strb r2, [r1, 0x8]
-	movs r0, 0xFF
-	strb r0, [r1, 0x9]
-	bl sub_80B9120
-	lsls r0, 24
-	lsrs r2, r0, 24
-_080B7F1A:
-	cmp r2, 0
-	bne _080B7F28
-	ldr r0, _080B7F38 @ =gSharedMem + 0x192D0
-	ldrb r0, [r0, 0x11]
-	movs r1, 0x36
-	bl sub_80B1404
-_080B7F28:
-	ldr r0, _080B7F38 @ =gSharedMem + 0x192D0
-	ldrb r0, [r0, 0x11]
-	movs r1, 0x30
-	bl sub_80B13EC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080B7F38: .4byte gSharedMem + 0x192D0
-	thumb_func_end ContestEffect_08
-
 	thumb_func_start ContestEffect_09
 ContestEffect_09: @ 80B7F3C
 	push {r4-r6,lr}
@@ -257,12 +46,12 @@ _080B7F7C:
 	ldr r0, _080B7F9C @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B7F8A:
 	ldr r0, _080B7F9C @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -362,13 +151,13 @@ _080B804A:
 	mov r1, r8
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	cmp r7, 0
 	bne _080B8062
 	mov r1, r8
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B8062:
 	pop {r3}
 	mov r8, r3
@@ -429,7 +218,7 @@ _080B8094:
 	strb r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	movs r0, 0x1
 	mov r9, r0
 _080B80D8:
@@ -441,14 +230,14 @@ _080B80E0:
 	mov r1, r10
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x7
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r2, r9
 	cmp r2, 0
 	bne _080B80FA
 	mov r1, r10
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B80FA:
 	pop {r3-r5}
 	mov r8, r3
@@ -525,13 +314,13 @@ _080B8172:
 _080B817C:
 	ldrb r0, [r6, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r0, r9
 	cmp r0, 0
 	bne _080B8192
 	ldrb r0, [r6, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B8192:
 	pop {r3,r4}
 	mov r8, r3
@@ -561,7 +350,7 @@ ContestEffect_18: @ 80B81A4
 	bl ContestEffect_09
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -590,7 +379,7 @@ ContestEffect_19: @ 80B81D4
 	bl sub_80B9038
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -607,7 +396,7 @@ ContestEffect_20: @ 80B8210
 	ldr r0, _080B8228 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -622,7 +411,7 @@ ContestEffect_21: @ 80B822C
 	ldr r0, _080B8244 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -637,7 +426,7 @@ ContestEffect_22: @ 80B8248
 	ldr r0, _080B8260 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -652,7 +441,7 @@ ContestEffect_23: @ 80B8264
 	ldr r0, _080B827C @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -667,7 +456,7 @@ ContestEffect_24: @ 80B8280
 	ldr r0, _080B8298 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -714,7 +503,7 @@ _080B82E4:
 	adds r0, r4, 0
 	movs r1, 0x3C
 _080B82E8:
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	movs r4, 0x1
 _080B82EE:
 	adds r5, 0x1
@@ -723,12 +512,12 @@ _080B82EE:
 _080B82F4:
 	ldrb r0, [r7, 0x11]
 	movs r1, 0x9
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	cmp r4, 0
 	bne _080B8308
 	ldrb r0, [r7, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B8308:
 	pop {r4-r7}
 	pop {r0}
@@ -922,7 +711,7 @@ _080B8442:
 	bl sub_80B157C
 	ldrb r0, [r4]
 	movs r1, 0xA
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -943,7 +732,7 @@ _080B84A2:
 	str r2, [sp, 0x18]
 	ldrb r0, [r4]
 	movs r1, 0x3C
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -963,13 +752,13 @@ _080B84CA:
 	ldr r4, _080B84F4 @ =gSharedMem + 0x192D0
 	ldrb r0, [r4, 0x11]
 	movs r1, 0xB
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r3, r9
 	cmp r3, 0
 	bne _080B84E2
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B84E2:
 	add sp, 0x1C
 	pop {r3-r5}
@@ -1025,7 +814,7 @@ _080B850A:
 	strb r1, [r5, 0x3]
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r0, r8
 	adds r0, 0x1
 	lsls r0, 24
@@ -1039,13 +828,13 @@ _080B8556:
 	ldr r4, _080B8580 @ =gSharedMem + 0x192D0
 	ldrb r0, [r4, 0x11]
 	movs r1, 0xC
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	mov r0, r8
 	cmp r0, 0
 	bne _080B8576
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x39
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B8576:
 	pop {r3}
 	mov r8, r3
@@ -1105,12 +894,12 @@ _080B85CE:
 	ldr r4, _080B85F4 @ =gSharedMem + 0x192D0
 	ldrb r0, [r4, 0x11]
 	movs r1, 0xE
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	cmp r7, 0
 	bne _080B85EC
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x39
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B85EC:
 	pop {r4-r7}
 	pop {r0}
@@ -1150,7 +939,7 @@ ContestEffect_29: @ 80B85F8
 	strh r0, [r1, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0xF
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8636:
 	pop {r4}
 	pop {r0}
@@ -1193,7 +982,7 @@ ContestEffect_30: @ 80B864C
 	strh r0, [r1, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x10
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B868A:
 	pop {r4}
 	pop {r0}
@@ -1246,7 +1035,7 @@ _080B86D2:
 _080B86E2:
 	adds r0, r2, 0
 	movs r1, 0x12
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8710
 	.align 2, 0
 _080B86EC: .4byte gSharedMem + 0x192D0
@@ -1265,7 +1054,7 @@ _080B86F0:
 	strh r0, [r1, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x11
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8710:
 	ldr r4, _080B873C @ =gSharedMem + 0x192D0
 	ldrb r1, [r4, 0x11]
@@ -1334,7 +1123,7 @@ _080B876C:
 _080B8788:
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x14
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B87B2
 	.align 2, 0
 _080B8794: .4byte gSharedMem + 0x192D0
@@ -1350,7 +1139,7 @@ _080B8798:
 	strh r0, [r1, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x13
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B87B2:
 	pop {r4-r7}
 	pop {r0}
@@ -1394,7 +1183,7 @@ _080B87EE:
 	mov r1, r12
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x15
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B882A
 _080B8800:
 	cmp r3, 0x1
@@ -1402,7 +1191,7 @@ _080B8800:
 	mov r1, r12
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x16
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B882A
 _080B8810:
 	cmp r3, 0x2
@@ -1410,13 +1199,13 @@ _080B8810:
 	mov r1, r12
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x17
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B882A
 _080B8820:
 	mov r1, r12
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x18
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B882A:
 	pop {r0}
 	bx r0
@@ -1439,7 +1228,7 @@ ContestEffect_34: @ 80B8830
 	ldr r0, _080B8858 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1A
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B88B0
 	.align 2, 0
 _080B8858: .4byte gSharedMem + 0x192D0
@@ -1450,7 +1239,7 @@ _080B885C:
 	ldr r0, _080B8870 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1B
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B88B0
 	.align 2, 0
 _080B8870: .4byte gSharedMem + 0x192D0
@@ -1461,7 +1250,7 @@ _080B8874:
 	ldr r0, _080B8888 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1C
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B88B0
 	.align 2, 0
 _080B8888: .4byte gSharedMem + 0x192D0
@@ -1472,7 +1261,7 @@ _080B888C:
 	ldr r0, _080B88A0 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1D
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B88B0
 	.align 2, 0
 _080B88A0: .4byte gSharedMem + 0x192D0
@@ -1481,7 +1270,7 @@ _080B88A4:
 	ldr r0, _080B88C8 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1E
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B88B0:
 	ldr r0, _080B88C8 @ =gSharedMem + 0x192D0
 	ldrb r2, [r0, 0x11]
@@ -1603,7 +1392,7 @@ _080B8944:
 	mov r2, r12
 	ldrb r0, [r2, 0x11]
 	movs r1, 0x1F
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8994:
 	pop {r4-r7}
 	pop {r0}
@@ -1679,7 +1468,7 @@ _080B89D4:
 	strh r0, [r1, 0x2]
 	ldrb r0, [r6, 0x11]
 	movs r1, 0x20
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8A3C
 	.align 2, 0
 _080B8A28: .4byte gSharedMem + 0x192D0
@@ -1737,7 +1526,7 @@ _080B8A60:
 	strh r0, [r2, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x21
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8AA8
 	.align 2, 0
 _080B8A94: .4byte gSharedMem + 0x192D0
@@ -1748,7 +1537,7 @@ _080B8A98:
 	strh r0, [r2, 0x2]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x22
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8AA8:
 	adds r6, 0x1C
 	adds r5, 0x1
@@ -1793,14 +1582,14 @@ ContestEffect_38: @ 80B8AB8
 	strb r1, [r0, 0x10]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x23
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8B08
 	.align 2, 0
 _080B8AFC: .4byte gSharedMem + 0x192D0
 _080B8B00:
 	adds r0, r2, 0
 	movs r1, 0x3A
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8B08:
 	pop {r4,r5}
 	pop {r0}
@@ -1834,14 +1623,14 @@ ContestEffect_39: @ 80B8B10
 	beq _080B8B4C
 	adds r0, r1, 0
 	movs r1, 0x24
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8B54
 	.align 2, 0
 _080B8B48: .4byte gSharedMem + 0x192D0
 _080B8B4C:
 	adds r0, r1, 0
 	movs r1, 0x3B
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8B54:
 	pop {r4}
 	pop {r0}
@@ -1996,7 +1785,7 @@ _080B8C32:
 	strb r0, [r1, 0x11]
 	ldrb r0, [r7, 0x11]
 	movs r1, 0x25
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8C76:
 	add sp, 0x4
 	pop {r3}
@@ -2158,7 +1947,7 @@ _080B8D62:
 	strb r0, [r1, 0x11]
 	ldrb r0, [r7, 0x11]
 	movs r1, 0x26
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8DA6:
 	add sp, 0x4
 	pop {r3,r4}
@@ -2301,7 +2090,7 @@ _080B8E66:
 	strb r1, [r0, 0x11]
 	ldrb r0, [r4, 0x11]
 	movs r1, 0x27
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8EAE:
 	add sp, 0x8
 	pop {r4-r7}
@@ -2401,12 +2190,12 @@ _080B8F52:
 	ldr r0, _080B8F78 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B8F68:
 	ldr r0, _080B8F78 @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x30
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2426,7 +2215,7 @@ ContestEffect_46: @ 80B8F7C
 	adds r0, 0xCC
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1A
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8FDE
 	.align 2, 0
 _080B8F98: .4byte gSharedMem + 0x19204
@@ -2437,7 +2226,7 @@ _080B8F9C:
 	adds r0, 0xCC
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1B
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8FDE
 _080B8FAE:
 	cmp r1, 0x2
@@ -2446,7 +2235,7 @@ _080B8FAE:
 	adds r0, 0xCC
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1C
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8FDE
 _080B8FC0:
 	cmp r1, 0x3
@@ -2455,14 +2244,14 @@ _080B8FC0:
 	adds r0, 0xCC
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1D
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B8FDE
 _080B8FD2:
 	movs r4, 0x3C
 	adds r0, 0xCC
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x1E
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B8FDE:
 	ldr r0, _080B8FF4 @ =gSharedMem + 0x192D0
 	ldrb r2, [r0, 0x11]
@@ -2506,7 +2295,7 @@ ContestEffect_47: @ 80B8FF8
 	mov r1, r12
 	ldrb r0, [r1, 0x11]
 	movs r1, 0x3D
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B902E:
 	pop {r0}
 	bx r0
@@ -2575,7 +2364,7 @@ _080B909A:
 	ldr r0, _080B90BC @ =gSharedMem + 0x192D0
 	ldrb r0, [r0, 0x11]
 	movs r1, 0x36
-	bl sub_80B1404
+	bl SetContestantStatusUnk14
 _080B90B0:
 	pop {r3,r4}
 	mov r8, r3
@@ -2635,7 +2424,7 @@ _080B910E:
 	adds r0, r3, 0
 	movs r1, 0x2C
 _080B9116:
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 _080B911A:
 	movs r0, 0
 _080B911C:
@@ -2696,7 +2485,7 @@ _080B9174:
 	strh r0, [r5, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x2F
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B91C8
 	.align 2, 0
 _080B918C: .4byte gSharedMem + 0x192D0
@@ -2712,7 +2501,7 @@ _080B9190:
 	strh r3, [r5, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl sub_80B13EC
+	bl SetContestantStatusUnk13
 	b _080B91C8
 _080B91AC:
 	lsls r1, 24

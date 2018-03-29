@@ -4625,12 +4625,12 @@ void sub_80B114C(u8 contestant)
     }
 }
 
-void sub_80B13EC(u8 a, u8 b)
+void SetContestantStatusUnk13(u8 a, u8 b)
 {
     sContestantStatus[a].unk13 = b;
 }
 
-void sub_80B1404(u8 a, u8 b)
+void SetContestantStatusUnk14(u8 a, u8 b)
 {
     sContestantStatus[a].unk14 = b;
 }
@@ -4638,15 +4638,15 @@ void sub_80B1404(u8 a, u8 b)
 void sub_80B141C(u8 a, u8 b)
 {
     if      (b >= 60)
-        sub_80B13EC(a, 53);
+        SetContestantStatusUnk13(a, 53);
     else if (b >= 40)
-        sub_80B13EC(a, 52);
+        SetContestantStatusUnk13(a, 52);
     else if (b >= 30)
-        sub_80B13EC(a, 51);
+        SetContestantStatusUnk13(a, 51);
     else if (b >= 20)
-        sub_80B13EC(a, 50);
+        SetContestantStatusUnk13(a, 50);
     else if (b >= 10)
-        sub_80B13EC(a, 49);
+        SetContestantStatusUnk13(a, 49);
 }
 
 void sub_80B146C(u8 a, u8 b)
