@@ -505,3 +505,33 @@ void ContestEffect_33(void)
     else
         SetContestantStatusUnk13(shared192D0.unk11, 24);
 }
+
+void ContestEffect_34(void)
+{
+    u8 r0 = Random() % 10;
+    s16 r4;
+
+    if (r0 < 3)
+    {
+        r4 = 10;
+        SetContestantStatusUnk13(shared192D0.unk11, 26);
+    } else if (r0 < 6)
+    {
+        r4 = 20;
+        SetContestantStatusUnk13(shared192D0.unk11, 27);
+    } else if (r0 < 8)
+    {
+        r4 = 40;
+        SetContestantStatusUnk13(shared192D0.unk11, 28);
+    } else if (r0 < 9)
+    {
+        r4 = 60;
+        SetContestantStatusUnk13(shared192D0.unk11, 29);
+    }
+    else
+    {
+        r4 = 80;
+        SetContestantStatusUnk13(shared192D0.unk11, 30);
+    }
+    curContestant->appeal2 = r4;
+}
