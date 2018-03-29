@@ -301,3 +301,78 @@ void ContestEffect_25(void)
     if (!r4)
         SetContestantStatusUnk14(shared192D0.unk11, 0x36);
 }
+
+void ContestEffect_26(void)
+{
+    u8 r9 = 0;
+    bool32 sp18 = FALSE;
+    u8 sp00[5];
+    int r6;
+    int r4;
+    s16 sp08[4];
+    s16 sp10[4];
+
+    memset(sp00, 0xFF, ARRAY_COUNT(sp00));
+    for (r6 = 0, r4 = 0; r6 < 4; r6++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] < shared192D0.unk0[r6] &&
+            !sContestantStatus[r6].unkC_0 && !Contest_IsMonsTurnDisabled(r6))
+            sp00[r4++] = r6;
+    }
+
+    if (r4 == 1)
+    {
+        sp10[0] = 60;
+    }
+    else if (r4 == 2)
+    {
+        sp10[0] = 30;
+        sp10[1] = 30;
+    }
+    else if (r4 == 3)
+    {
+        sp10[0] = 20;
+        sp10[1] = 20;
+        sp10[2] = 20;
+    }
+    else
+    {
+        for (r6 = 0; r6 < 4; r6++)
+            sp10[r6] = 0;
+    }
+    for (r6 = 0; r6 < 4; r6++)
+    {
+        if (sContestantStatus[r6].unk15_4 && sub_80B214C(r6))
+            sp08[r6] = gComboStarterLookupTable[gContestMoves[sContestantStatus[r6].prevMove].comboStarterId] * 10;
+        else
+            sp08[r6] = 0;
+        sp08[r6] -= (sContestantStatus[r6].unkD / 10) * 10;
+    }
+    if (sp10[0] != 0)
+    {
+        for (r6 = 0; sp00[r6] != 0xFF; r6++)
+        {
+            if (Random() % 100 < sp10[r6] + sp08[sp00[r6]])
+            {
+                if (sub_80B90C0(sp00[r6]))
+                {
+                    sub_80B157C(sp00[r6]);
+                    SetContestantStatusUnk13(sp00[r6], 10);
+                    r9++;
+                } else
+                    sp18 = TRUE;
+            } else
+                sp18 = TRUE;
+            if (sp18)
+            {
+                sp18 = FALSE;
+                SetContestantStatusUnk13(sp00[r6], 60);
+                r9++;
+            }
+            shared192D0.unkD[sp00[r6]] = 1;
+        }
+    }
+    SetContestantStatusUnk13(shared192D0.unk11, 11);
+    if (r9 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x36);
+}

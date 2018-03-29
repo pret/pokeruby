@@ -280,5 +280,7 @@ extern u8 gUnknown_0203869B;
 void SetContestantStatusUnk13(u8 a, u8 b);
 void SetContestantStatusUnk14(u8 a, u8 b);
 void sub_80B157C(u8 p);
+bool8 Contest_IsMonsTurnDisabled(u8 a);
+bool8 sub_80B214C(u8 a);
 
 #endif // GUARD_CONTEST_H

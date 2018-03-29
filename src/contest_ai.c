@@ -5,9 +5,6 @@
 #include "contest_effect.h"
 #include "ewram.h"
 
-extern bool8 sub_80B214C(u8);
-extern bool8 Contest_IsMonsTurnDisabled(u8);
-
 extern u16 gSpecialVar_ContestCategory;
 
 extern u8 *gAIScriptPtr;

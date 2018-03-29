@@ -201,7 +201,6 @@ void sub_80AF1B8(void);
 void sub_80AF2A0(u8);
 void sub_80AF2FC(void);
 void sub_80AF3C0(void);
-bool8 Contest_IsMonsTurnDisabled(u8);
 s16 sub_80AF688(u8);
 void DetermineFinalStandings(void);
 bool8 sub_80AF828(s32, s32, struct UnknownContestStruct6 *);
