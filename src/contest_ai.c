@@ -2,9 +2,9 @@
 #include "contest.h"
 #include "random.h"
 #include "contest_ai.h"
+#include "contest_effect.h"
 #include "ewram.h"
 
-extern u8 AreMovesContestCombo(u16, u16);
 extern bool8 sub_80B214C(u8);
 extern bool8 Contest_IsMonsTurnDisabled(u8);
 

@@ -8,6 +8,7 @@
 #include "battle_anim.h"
 #include "blend_palette.h"
 #include "contest.h"
+#include "contest_effect.h"
 #include "contest_link_80C857C.h"
 #include "data2.h"
 #include "decompress.h"
@@ -35,7 +36,6 @@
 
 extern u8 gUnknown_020297ED;
 
-extern u8 AreMovesContestCombo(u16, u16);  // I don't think this is a bool
 extern void sub_80C8A38(u8);
 extern void sub_80C8AD0(u8);
 extern void sub_80C8C80(u8);
