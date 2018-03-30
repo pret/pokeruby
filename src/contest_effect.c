@@ -535,3 +535,147 @@ void ContestEffect_34(void)
     }
     curContestant->appeal2 = r4;
 }
+
+#ifdef NONMATCHING
+// Not even close, send help
+void ContestEffect_35(void)
+{
+    s8 r4;
+
+    for (r4 = shared192D0.unk0[shared192D0.unk11] - 1; r4 >= 0; r4--)
+    {
+        s8 r2;
+        for (r2 = 0; r2 < 4; r2++)
+        {
+            if (shared192D0.unk0[r2] == r4)
+                break;
+        }
+        if (!(sContestantStatus[r2].unkB_7 || sContestantStatus[r2].unkC_0 || sContestantStatus[r2].unkC_1))
+        {
+            u16 move = curContestant->currMove;
+            const struct ContestMove *contestMove = gContestMoves + move;
+            if (contestMove->contestCategory == gContestMoves[sContestantStatus[r2].currMove].contestCategory)
+            {
+                curContestant->appeal2 += gContestEffects[contestMove->effect].appeal * 2;
+                SetContestantStatusUnk13(shared192D0.unk11, 31);
+            }
+            break;
+        }
+    }
+}
+#else
+__attribute__((naked)) void ContestEffect_35(void)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tldr r1, _080B8940 @ =gSharedMem + 0x192D0\n"
+                "\tldrb r0, [r1, 0x11]\n"
+                "\tadds r0, r1\n"
+                "\tmovs r2, 0\n"
+                "\tldrsb r2, [r0, r2]\n"
+                "\tsubs r0, r2, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tmov r12, r1\n"
+                "\tcmp r2, 0\n"
+                "\tbeq _080B8994\n"
+                "\tldrb r5, [r1]\n"
+                "\tmov r6, r12\n"
+                "\tsubs r6, 0x70\n"
+                "_080B88EA:\n"
+                "\tmovs r2, 0\n"
+                "\tlsls r0, r4, 24\n"
+                "\tasrs r1, r0, 24\n"
+                "\tadds r4, r0, 0\n"
+                "\tcmp r5, r1\n"
+                "\tbeq _080B8910\n"
+                "\tldr r3, _080B8940 @ =gSharedMem + 0x192D0\n"
+                "_080B88F8:\n"
+                "\tlsls r0, r2, 24\n"
+                "\tmovs r2, 0x80\n"
+                "\tlsls r2, 17\n"
+                "\tadds r0, r2\n"
+                "\tlsrs r2, r0, 24\n"
+                "\tasrs r0, 24\n"
+                "\tcmp r0, 0x3\n"
+                "\tbgt _080B8910\n"
+                "\tadds r0, r3\n"
+                "\tldrb r0, [r0]\n"
+                "\tcmp r0, r1\n"
+                "\tbne _080B88F8\n"
+                "_080B8910:\n"
+                "\tlsls r2, 24\n"
+                "\tasrs r1, r2, 24\n"
+                "\tlsls r0, r1, 3\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r3, r0, r6\n"
+                "\tldrb r1, [r3, 0xB]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tadds r7, r2, 0\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080B8932\n"
+                "\tldrb r1, [r3, 0xC]\n"
+                "\tmovs r0, 0x7\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080B8944\n"
+                "_080B8932:\n"
+                "\tmovs r1, 0xFF\n"
+                "\tlsls r1, 24\n"
+                "\tadds r0, r4, r1\n"
+                "\tlsrs r4, r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tblt _080B8994\n"
+                "\tb _080B88EA\n"
+                "\t.align 2, 0\n"
+                "_080B8940: .4byte gSharedMem + 0x192D0\n"
+                "_080B8944:\n"
+                "\tmov r2, r12\n"
+                "\tldrb r1, [r2, 0x11]\n"
+                "\tlsls r0, r1, 3\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tmov r3, r12\n"
+                "\tsubs r3, 0x70\n"
+                "\tadds r5, r0, r3\n"
+                "\tldrh r0, [r5, 0x6]\n"
+                "\tldr r4, _080B899C @ =gContestMoves\n"
+                "\tlsls r0, 3\n"
+                "\tadds r6, r0, r4\n"
+                "\tldrb r2, [r6, 0x1]\n"
+                "\tlsls r2, 29\n"
+                "\tasrs r1, r7, 24\n"
+                "\tlsls r0, r1, 3\n"
+                "\tsubs r0, r1\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r3\n"
+                "\tldrh r0, [r0, 0x6]\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r4\n"
+                "\tldrb r0, [r0, 0x1]\n"
+                "\tlsls r0, 29\n"
+                "\tcmp r2, r0\n"
+                "\tbne _080B8994\n"
+                "\tldr r1, _080B89A0 @ =gContestEffects\n"
+                "\tldrb r0, [r6]\n"
+                "\tlsls r0, 2\n"
+                "\tadds r0, r1\n"
+                "\tldrb r0, [r0, 0x1]\n"
+                "\tlsls r0, 1\n"
+                "\tldrh r1, [r5, 0x2]\n"
+                "\tadds r0, r1\n"
+                "\tstrh r0, [r5, 0x2]\n"
+                "\tmov r2, r12\n"
+                "\tldrb r0, [r2, 0x11]\n"
+                "\tmovs r1, 0x1F\n"
+                "\tbl SetContestantStatusUnk13\n"
+                "_080B8994:\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080B899C: .4byte gContestMoves\n"
+                "_080B89A0: .4byte gContestEffects");
+}
+#endif
