@@ -226,7 +226,7 @@ struct UnknownContestStruct7
 {
     u8 unk0[4];
     s16 unk4;
-    u16 unk6;
+    s16 unk6;
     u8 unk8[5];
     u8 unkD[4];
     u8 unk11;
@@ -284,5 +284,6 @@ void SetContestantStatusUnk14(u8 a, u8 b);
 void sub_80B157C(u8 p);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80B214C(u8 a);
+void sub_80B141C(u8 a, u8 b);
 
 #endif // GUARD_CONTEST_H

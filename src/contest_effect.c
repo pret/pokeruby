@@ -3,11 +3,14 @@
 #include "random.h"
 #include "contest.h"
 
-void sub_80B9038(u8);
-bool8 sub_80B90C0(u8);
-u8 sub_80B9120(void);
-s16 sub_80B9224(s16);
-s16 sub_80B9268(s16);
+static void sub_80B9038(u8);
+static bool8 sub_80B90C0(u8);
+static u8 sub_80B9120(void);
+static void sub_80B9200(u8, u8);
+static s16 RoundTowardsZero(s16);
+static s16 RoundUp(s16);
+
+#define abs(x) ((x) >= 0 ? (x) : -(x))
 
 extern bool8 const gComboStarterLookupTable[];
 
@@ -497,7 +500,7 @@ void ContestEffect_31(void)
         curContestant->appeal2 += r3 / 2;
         SetContestantStatusUnk13(shared192D0.unk11, 17);
     }
-    sContestantStatus[shared192D0.unk11].appeal2 = sub_80B9224(sContestantStatus[shared192D0.unk11].appeal2);
+    sContestantStatus[shared192D0.unk11].appeal2 = RoundTowardsZero(sContestantStatus[shared192D0.unk11].appeal2);
 }
 
 void ContestEffect_32(void)
@@ -945,7 +948,7 @@ void ContestEffect_45(void)
             if (sContestantStatus[i].appeal2 > 0)
             {
                 shared192D0.unk4 = sContestantStatus[i].appeal2 / 2;
-                shared192D0.unk4 = sub_80B9268(shared192D0.unk4);
+                shared192D0.unk4 = RoundUp(shared192D0.unk4);
             }
             else
                 shared192D0.unk4 = 10;
@@ -1004,7 +1007,7 @@ void ContestEffect_47(void)
     }
 }
 
-void sub_80B9038(u8 category)
+static void sub_80B9038(u8 category)
 {
     int i;
     int r7 = 0;
@@ -1029,26 +1032,24 @@ void sub_80B9038(u8 category)
 }
 
 #ifdef NONMATCHING
-bool8 sub_80B90C0(u8 i)
+static bool8 sub_80B90C0(u8 i)
 {
     shared192D0.unkD[i] = 1;
     if (sContestantStatus[i].unk10_1)
-        SetContestantStatusUnk13(i, 45);
-    else if (sContestantStatus[i].unk12 == 0)
     {
-        if (sContestantStatus[i].unkB_7 || sContestantStatus[i].unkC_1)
-            return FALSE;
-        return TRUE;
+        SetContestantStatusUnk13(i, 45);
     }
-    else
+    else if (sContestantStatus[i].unk12 != 0)
     {
         sContestantStatus[i].unk12--;
         SetContestantStatusUnk13(i, 44);
     }
+    else if (!sContestantStatus[i].unkB_7 && sContestantStatus[i].unkC_1 == 0)
+        return TRUE;
     return FALSE;
 }
 #else
-__attribute__((naked)) bool8 sub_80B90C0(u8 i)
+static __attribute__((naked)) bool8 sub_80B90C0(u8 i)
 {
     asm_unified("\tpush {lr}\n"
                 "\tlsls r0, 24\n"
@@ -1104,3 +1105,70 @@ __attribute__((naked)) bool8 sub_80B90C0(u8 i)
                 "\tbx r1");
 }
 #endif
+
+static bool8 sub_80B9120(void)
+{
+    s16 sp00[4] = {0};
+    int i;
+
+    for (i = 0; shared192D0.unk8[i] != 0xFF; i++)
+    {
+        u8 r4 = shared192D0.unk8[i];
+        if (sub_80B90C0(r4))
+        {
+            shared192D0.unk6 = shared192D0.unk4;
+            if (sContestantStatus[r4].unk10_2)
+                shared192D0.unk6 *= 2;
+            if (sContestantStatus[r4].unk10_0)
+            {
+                shared192D0.unk6 = 10;
+                SetContestantStatusUnk13(r4, 47);
+            }
+            else if ((shared192D0.unk6 -= sContestantStatus[r4].unkF) <= 0)
+            {
+                shared192D0.unk6 = 0;
+                SetContestantStatusUnk13(r4, 46);
+            }
+            else
+            {
+                sub_80B9200(r4, shared192D0.unk6);
+                sub_80B141C(r4, shared192D0.unk6);
+                sp00[r4] = shared192D0.unk6;
+            }
+        }
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp00[i] != 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void sub_80B9200(u8 i, u8 jam)
+{
+    sContestantStatus[i].appeal2 -= jam;
+    sContestantStatus[i].unkE += jam;
+}
+
+static s16 RoundTowardsZero(s16 score)
+{
+    s16 r1 = abs(score) % 10;
+    if (score < 0)
+    {
+        if (r1 != 0)
+            score -= 10 - r1;
+    }
+    else
+        score -= r1;
+    return score;
+}
+
+static s16 RoundUp(s16 score)
+{
+    s16 r1 = abs(score) % 10;
+    if (r1 != 0)
+        score += 10 - r1;
+    return score;
+}
