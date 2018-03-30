@@ -679,3 +679,60 @@ __attribute__((naked)) void ContestEffect_35(void)
                 "_080B89A0: .4byte gContestEffects");
 }
 #endif
+
+void ContestEffect_36(void)
+{
+    if (shared192D0.unk0[shared192D0.unk11] != 0)
+    {
+        u16 move = curContestant->currMove;
+        int i;
+
+        for (i = 0; i < 4; i++)
+        {
+            if (shared192D0.unk0[shared192D0.unk11] - 1 == shared192D0.unk0[i] &&
+                gContestMoves[move].contestCategory != gContestMoves[sContestantStatus[i].currMove].contestCategory)
+            {
+                curContestant->appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
+                SetContestantStatusUnk13(shared192D0.unk11, 32);
+                break;
+            }
+        }
+    }
+}
+
+void ContestEffect_37(void)
+{
+    if (shared192D0.unk0[shared192D0.unk11] != 0)
+    {
+        int i;
+
+        for (i = 0; i < 4; i++)
+        {
+            if (shared192D0.unk0[shared192D0.unk11] - 1 == shared192D0.unk0[i])
+            {
+                if (curContestant->appeal2 > sContestantStatus[i].appeal2)
+                {
+                    curContestant->appeal2 *= 2;
+                    SetContestantStatusUnk13(shared192D0.unk11, 33);
+                }
+                else if (curContestant->appeal2 < sContestantStatus[i].appeal2)
+                {
+                    curContestant->appeal2 = 0;
+                    SetContestantStatusUnk13(shared192D0.unk11, 34);
+                }
+            }
+        }
+    }
+}
+
+void ContestEffect_38(void)
+{
+    if (curContestant->unkD < 30)
+    {
+        curContestant->unkD += 10;
+        curContestant->unk10_4 = 1;
+        SetContestantStatusUnk13(shared192D0.unk11, 35);
+    }
+    else
+        SetContestantStatusUnk13(shared192D0.unk11, 58);
+}
