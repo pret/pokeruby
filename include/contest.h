@@ -225,7 +225,7 @@ struct UnknownContestStruct5
 struct UnknownContestStruct7
 {
     u8 unk0[4];
-    u16 unk4;
+    s16 unk4;
     u16 unk6;
     u8 unk8[5];
     u8 unkD[4];
@@ -277,6 +277,8 @@ extern u16 gUnknown_02038688[4];
 extern u8 gContestFinalStandings[4];
 extern u8 gUnknown_02038696[4];
 extern u8 gUnknown_0203869B;
+extern u16 gSpecialVar_ContestCategory;
+
 void SetContestantStatusUnk13(u8 a, u8 b);
 void SetContestantStatusUnk14(u8 a, u8 b);
 void sub_80B157C(u8 p);

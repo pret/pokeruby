@@ -7,6 +7,7 @@ u8 sub_80B9120(void);
 bool8 sub_80B90C0(u8);
 void sub_80B9038(u8);
 s16 sub_80B9224(s16);
+s16 sub_80B9268(s16);
 
 extern bool8 const gComboStarterLookupTable[];
 
@@ -919,5 +920,86 @@ void ContestEffect_43(void)
         }
         curContestant->unk11_0 = 3;
         SetContestantStatusUnk13(shared192D0.unk11, 39);
+    }
+}
+
+void ContestEffect_44(void)
+// An appeal that excites the audience in any CONTEST.
+{
+    if (gContestMoves[curContestant->currMove].contestCategory != gSpecialVar_ContestCategory)
+    {
+        curContestant->unk11_4 = TRUE;
+    }
+}
+
+void ContestEffect_45(void)
+// Badly startles all POKéMON that made good appeals.
+{
+    int i;
+    u8 r7 = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] > shared192D0.unk0[i])
+        {
+            if (sContestantStatus[i].appeal2 > 0)
+            {
+                shared192D0.unk4 = sContestantStatus[i].appeal2 / 2;
+                shared192D0.unk4 = sub_80B9268(shared192D0.unk4);
+            }
+            else
+                shared192D0.unk4 = 10;
+            shared192D0.unk8[0] = i;
+            shared192D0.unk8[1] = 0xFF;
+            if (sub_80B9120())
+                r7++;
+        }
+    }
+    if (r7 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x36);
+    SetContestantStatusUnk13(shared192D0.unk11, 48);
+}
+
+void ContestEffect_46(void)
+// The appeal works best the more the crowd is excited.
+{
+    s16 appeal;
+
+    if (sContest.applauseLevel == 0)
+    {
+        appeal = 10;
+        SetContestantStatusUnk13(shared192D0.unk11, 26);
+    }
+    else if (sContest.applauseLevel == 1)
+    {
+        appeal = 20;
+        SetContestantStatusUnk13(shared192D0.unk11, 27);
+    }
+    else if (sContest.applauseLevel == 2)
+    {
+        appeal = 30;
+        SetContestantStatusUnk13(shared192D0.unk11, 28);
+    }
+    else if (sContest.applauseLevel == 3)
+    {
+        appeal = 50;
+        SetContestantStatusUnk13(shared192D0.unk11, 29);
+    }
+    else
+    {
+        appeal = 60;
+        SetContestantStatusUnk13(shared192D0.unk11, 30);
+    }
+    curContestant->appeal2 = appeal;
+}
+
+void ContestEffect_47(void)
+// Temporarily stops the crowd from growing excited.
+{
+    if (!shared19328.bits_8)
+    {
+        shared19328.bits_8 = TRUE;
+        shared19328.bits_9 = shared192D0.unk11;
+        SetContestantStatusUnk13(shared192D0.unk11, 61);
     }
 }
