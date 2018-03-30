@@ -3,9 +3,9 @@
 #include "random.h"
 #include "contest.h"
 
-u8 sub_80B9120(void);
-bool8 sub_80B90C0(u8);
 void sub_80B9038(u8);
+bool8 sub_80B90C0(u8);
+u8 sub_80B9120(void);
 s16 sub_80B9224(s16);
 s16 sub_80B9268(s16);
 
@@ -1003,3 +1003,104 @@ void ContestEffect_47(void)
         SetContestantStatusUnk13(shared192D0.unk11, 61);
     }
 }
+
+void sub_80B9038(u8 category)
+{
+    int i;
+    int r7 = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (shared192D0.unk0[shared192D0.unk11] > shared192D0.unk0[i])
+        {
+            if (category == gContestMoves[sContestantStatus[i].currMove].contestCategory)
+                shared192D0.unk4 = 40;
+            else
+                shared192D0.unk4 = 10;
+            shared192D0.unk8[0] = i;
+            shared192D0.unk8[1] = 0xFF;
+            if (sub_80B9120())
+                r7++;
+        }
+    }
+
+    if (r7 == 0)
+        SetContestantStatusUnk14(shared192D0.unk11, 0x36);
+}
+
+#ifdef NONMATCHING
+bool8 sub_80B90C0(u8 i)
+{
+    shared192D0.unkD[i] = 1;
+    if (sContestantStatus[i].unk10_1)
+        SetContestantStatusUnk13(i, 45);
+    else if (sContestantStatus[i].unk12 == 0)
+    {
+        if (sContestantStatus[i].unkB_7 || sContestantStatus[i].unkC_1)
+            return FALSE;
+        return TRUE;
+    }
+    else
+    {
+        sContestantStatus[i].unk12--;
+        SetContestantStatusUnk13(i, 44);
+    }
+    return FALSE;
+}
+#else
+__attribute__((naked)) bool8 sub_80B90C0(u8 i)
+{
+    asm_unified("\tpush {lr}\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r3, r0, 24\n"
+                "\tldr r2, _080B90EC @ =gSharedMem + 0x192D0\n"
+                "\tadds r0, r2, 0\n"
+                "\tadds r0, 0xD\n"
+                "\tadds r0, r3, r0\n"
+                "\tmovs r1, 0x1\n"
+                "\tstrb r1, [r0]\n"
+                "\tlsls r0, r3, 3\n"
+                "\tsubs r0, r3\n"
+                "\tlsls r0, 2\n"
+                "\tsubs r2, 0x70\n"
+                "\tadds r2, r0, r2\n"
+                "\tldrb r1, [r2, 0x10]\n"
+                "\tmovs r0, 0x2\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbeq _080B90F0\n"
+                "\tadds r0, r3, 0\n"
+                "\tmovs r1, 0x2D\n"
+                "\tb _080B9116\n"
+                "\t.align 2, 0\n"
+                "_080B90EC: .4byte gSharedMem + 0x192D0\n"
+                "_080B90F0:\n"
+                "\tldrb r0, [r2, 0x12]\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080B910E\n"
+                "\tldrb r1, [r2, 0xB]\n"
+                "\tmovs r0, 0x80\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080B911A\n"
+                "\tldrb r1, [r2, 0xC]\n"
+                "\tmovs r0, 0x6\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080B911A\n"
+                "\tmovs r0, 0x1\n"
+                "\tb _080B911C\n"
+                "_080B910E:\n"
+                "\tsubs r0, 0x1\n"
+                "\tstrb r0, [r2, 0x12]\n"
+                "\tadds r0, r3, 0\n"
+                "\tmovs r1, 0x2C\n"
+                "_080B9116:\n"
+                "\tbl SetContestantStatusUnk13\n"
+                "_080B911A:\n"
+                "\tmovs r0, 0\n"
+                "_080B911C:\n"
+                "\tpop {r1}\n"
+                "\tbx r1");
+}
+#endif
