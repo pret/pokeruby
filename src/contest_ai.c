@@ -380,7 +380,7 @@ static u8 sub_8128A7C(u8 var)
     int i;
 
     for(i = 0; i < 4; i++)
-        if(shared192D0.unk0[i] == var)
+        if(shared192D0.turnOrder[i] == var)
             break;
 
     return i;
@@ -494,7 +494,7 @@ static void ContestAICmd_unk_0A(void)
 
 static void ContestAICmd_get_user_order(void)
 {
-    eContestAI->scriptResult = shared192D0.unk0[eContestAI->unk41];
+    eContestAI->scriptResult = shared192D0.turnOrder[eContestAI->unk41];
     gAIScriptPtr += 1;
 }
 
@@ -540,7 +540,7 @@ static void ContestAICmd_unk_0F(void)
 
 static void ContestAICmd_get_user_condition_maybe(void)
 {
-    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].unkD / 10;
+    eContestAI->scriptResult = sContestantStatus[eContestAI->unk41].condition / 10;
     gAIScriptPtr += 1;
 }
 
@@ -1147,7 +1147,7 @@ static void ContestAICmd_get_condition(void)
 {
     int var = sub_8128A7C(gAIScriptPtr[1]);
 
-    eContestAI->scriptResult = sContestantStatus[var].unkD / 10;
+    eContestAI->scriptResult = sContestantStatus[var].condition / 10;
     gAIScriptPtr += 2;
 }
 

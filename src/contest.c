@@ -389,8 +389,8 @@ void ClearContestVars(void)
     for (i = 0; i < 4; i++)
     {
         sContestantStatus[i].unkB_0 = 0;
-        sContestantStatus[i].unk13 = 0xFF;
-        sContestantStatus[i].unk14 = 0xFF;
+        sContestantStatus[i].effectStringId = 0xFF;
+        sContestantStatus[i].effectStringId2 = 0xFF;
     }
 
     memset(&shared192D0, 0, sizeof(shared192D0));
@@ -709,7 +709,7 @@ void sub_80ABCDC(u8 taskId)
         if (sContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
          && sub_80B214C(gContestPlayerMonIndex)
          && AreMovesContestCombo(sContestantStatus[gContestPlayerMonIndex].prevMove, move) != 0
-         && sContestantStatus[gContestPlayerMonIndex].unk15_4)
+         && sContestantStatus[gContestPlayerMonIndex].hasJudgesAttention)
         {
             r5 = StringCopy(sp8, gUnknownText_UnknownFormatting2);
         }
@@ -1090,7 +1090,7 @@ void sub_80AC2CC(u8 taskId)
     {
     case 0:
         sub_80B0D7C();
-        for (i = 0; sContest.unk19214 != shared192D0.unk0[i]; i++)
+        for (i = 0; sContest.unk19214 != shared192D0.turnOrder[i]; i++)
             ;
         sContest.unk19215 = i;
         r7 = sContest.unk19215;
@@ -1117,8 +1117,8 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 2;
         return;
     case 2:
-        if (sContestantStatus[r7].unkC_1 != 0
-         || sContestantStatus[r7].unkB_7)
+        if (sContestantStatus[r7].numTurnsSkipped != 0
+         || sContestantStatus[r7].noMoreTurns)
         {
             gTasks[taskId].data[0] = 31;
         }
@@ -1155,7 +1155,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 5:
-        if (sContestantStatus[r7].unkC_0)
+        if (sContestantStatus[r7].nervous)
         {
             gTasks[taskId].data[0] = 33;
         }
@@ -1202,7 +1202,7 @@ void sub_80AC2CC(u8 taskId)
             }
             else
             {
-                if (!sContestantStatus[r7].unk15_4)
+                if (!sContestantStatus[r7].hasJudgesAttention)
                     sub_80B03A8(r7);
                 sub_80B20C4();
                 gTasks[taskId].data[0] = 23;
@@ -1218,25 +1218,25 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 23:
         gTasks[taskId].data[1] = 0;
-        if (sContestantStatus[r7].unk13 != 0xFF)
+        if (sContestantStatus[r7].effectStringId != 0xFF)
         {
-            sub_80B146C(r7, sContestantStatus[r7].unk13);
-            sContestantStatus[r7].unk13 = 0xFF;
+            sub_80B146C(r7, sContestantStatus[r7].effectStringId);
+            sContestantStatus[r7].effectStringId = 0xFF;
             gTasks[taskId].data[0] = 24;
         }
         else
         {
-            if (sContestantStatus[r7].unk14 != 0xFF)
+            if (sContestantStatus[r7].effectStringId2 != 0xFF)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (i != r7 && sContestantStatus[i].unk13 != 0xFF)
+                    if (i != r7 && sContestantStatus[i].effectStringId != 0xFF)
                         break;
                 }
                 if (i == 4)
                 {
-                    sub_80B146C(r7, sContestantStatus[r7].unk14);
-                    sContestantStatus[r7].unk14 = 0xFF;
+                    sub_80B146C(r7, sContestantStatus[r7].effectStringId2);
+                    sContestantStatus[r7].effectStringId2 = 0xFF;
                     gTasks[taskId].data[0] = 24;
                 }
                 else
@@ -1337,7 +1337,7 @@ void sub_80AC2CC(u8 taskId)
                 for (r2 = 0; r2 < 4; r2++)
                 {
                     if (r2 != r7 && gUnknown_02038696[r2] == i
-                     && sContestantStatus[r2].unk13 != 0xFF)
+                     && sContestantStatus[r2].effectStringId != 0xFF)
                     {
                         r4 = 1;
                         break;
@@ -1349,8 +1349,8 @@ void sub_80AC2CC(u8 taskId)
             if (r4)
             {
                 gTasks[taskId].data[1] = gUnknown_02038696[r2];
-                sub_80B146C(r2, sContestantStatus[r2].unk13);
-                sContestantStatus[r2].unk13 = 0xFF;
+                sub_80B146C(r2, sContestantStatus[r2].effectStringId);
+                sContestantStatus[r2].effectStringId = 0xFF;
                 gTasks[taskId].data[0] = 27;
             }
             else
@@ -1420,8 +1420,8 @@ void sub_80AC2CC(u8 taskId)
         if (gTasks[taskId].data[10]++ > 9)
         {
             gTasks[taskId].data[10] = 0;
-            if (sContestantStatus[r7].unkC_1 != 0
-             || sContestantStatus[r7].unk11_2)
+            if (sContestantStatus[r7].numTurnsSkipped != 0
+             || sContestantStatus[r7].turnSkipped)
             {
                 sub_80AF138();
                 StringCopy(gStringVar1, gContestMons[r7].nickname);
@@ -1478,7 +1478,7 @@ void sub_80AC2CC(u8 taskId)
         {
             if (++gTasks[taskId].data[10] > 50)
             {
-                if (!sContestantStatus[r7].unk15_4)
+                if (!sContestantStatus[r7].hasJudgesAttention)
                 {
                     sub_80AFBA0(
                       sContestantStatus[r7].appeal2,
@@ -1535,7 +1535,7 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 41:
-        if (shared19328.bits_8 && r7 != shared19328.bits_9)
+        if (shared19328.excitementFrozen && r7 != shared19328.excitementFreezer)
         {
             gTasks[taskId].data[0] = 57;
         }
@@ -1679,7 +1679,7 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 57:
         sub_80AF138();
-        StringCopy(gStringVar3, gContestMons[shared19328.bits_9].nickname);
+        StringCopy(gStringVar3, gContestMons[shared19328.excitementFreezer].nickname);
         StringCopy(gStringVar1, gContestMons[r7].nickname);
         StringCopy(gStringVar2, gMoveNames[sContestantStatus[r7].currMove]);
         StringExpandPlaceholders(gStringVar4, ContestString_CrowdWatches);
@@ -1703,8 +1703,8 @@ void sub_80AC2CC(u8 taskId)
         }
         return;
     case 33:
-        if (sContestantStatus[r7].unk15_4)
-            sContestantStatus[r7].unk15_4 = 0;
+        if (sContestantStatus[r7].hasJudgesAttention)
+            sContestantStatus[r7].hasJudgesAttention = 0;
         sub_80B09B0(r7);
         StringCopy(gStringVar1, gContestMons[r7].nickname);
         StringCopy(gStringVar2, gMoveNames[sContestantStatus[r7].currMove]);
@@ -2685,7 +2685,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
     {
         r8 = sub_80AEE4C(a);
         r4 = 0;
-        while (sContestantStatus[a].unkD / 10 > r4)
+        while (sContestantStatus[a].condition / 10 > r4)
         {
             *(u16 *)(VRAM + 0xC026 + (r9 + r4) * 64) = r8;
             r4++;
@@ -2700,7 +2700,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
     {
         r8 = 0;
         r4 = 3;
-        while (sContestantStatus[a].unkD / 10 < r4)
+        while (sContestantStatus[a].condition / 10 < r4)
         {
             *(u16 *)(VRAM + 0xBFE6 + (r9 + r4) * 64) = r8;
             r4--;
@@ -2725,7 +2725,7 @@ void sub_80AEF50(void)
         u16 r6 = sub_80AEE4C(i);
 
         r4 = 0;
-        while (r4 < sContestantStatus[i].unkD / 10)
+        while (r4 < sContestantStatus[i].condition / 10)
         {
             *(u16 *)(VRAM + 0xC026 + (r8 + r4) * 64) = r6;
             r4++;
@@ -2771,11 +2771,11 @@ bool8 sub_80AF038(u8 a)
     u16 r4 = 0;
     u8 r6 = gUnknown_02038696[a] * 5 + 2;
 
-    if (sContestantStatus[a].unk10_0 != 0 || sContestantStatus[a].unk10_1 != 0 || sContestantStatus[a].unk12 != 0 || sContestantStatus[a].unkF != 0)
+    if (sContestantStatus[a].resistant != 0 || sContestantStatus[a].immune != 0 || sContestantStatus[a].jamSafetyCount != 0 || sContestantStatus[a].jamReduction != 0)
         r4 = sub_80AEFE8(a, 0);
-    else if (sContestantStatus[a].unkC_0)
+    else if (sContestantStatus[a].nervous)
         r4 = sub_80AEFE8(a, 1);
-    else if (sContestantStatus[a].unkC_1 != 0 || sContestantStatus[a].unkB_7)
+    else if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
         r4 = sub_80AEFE8(a, 2);
     else
         r5 = FALSE;
@@ -2949,7 +2949,7 @@ void sub_80AF3C0(void)
 
 bool8 sub_80AF404(u8 a)
 {
-    if (sContestantStatus[a].unkC_1 != 0 || sContestantStatus[a].unkB_7)
+    if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
         return FALSE;
     else
         return TRUE;
@@ -2964,32 +2964,32 @@ void sub_80AF438(void)
         // This is bitfield hell...
         sContestantStatus[i].appeal2 = 0;
         sContestantStatus[i].appeal1 = 0;
-        sContestantStatus[i].unk12 = 0;
-        if (sContestantStatus[i].unkC_1 > 0)
-            sContestantStatus[i].unkC_1--;
+        sContestantStatus[i].jamSafetyCount = 0;
+        if (sContestantStatus[i].numTurnsSkipped > 0)
+            sContestantStatus[i].numTurnsSkipped--;
         sContestantStatus[i].unkE = 0;
-        sContestantStatus[i].unk10_0 = 0;
-        sContestantStatus[i].unkF = 0;
-        sContestantStatus[i].unk10_1 = 0;
-        sContestantStatus[i].unk10_2 = 0;
-        sContestantStatus[i].unk10_3 = 0;
-        sContestantStatus[i].unkC_0 = 0;
-        sContestantStatus[i].unk13 = 0xFF;
-        sContestantStatus[i].unk14 = -1;
+        sContestantStatus[i].resistant = 0;
+        sContestantStatus[i].jamReduction = 0;
+        sContestantStatus[i].immune = 0;
+        sContestantStatus[i].moreEasilyStartled = 0;
+        sContestantStatus[i].usedRepeatableMove = 0;
+        sContestantStatus[i].nervous = 0;
+        sContestantStatus[i].effectStringId = 0xFF;
+        sContestantStatus[i].effectStringId2 = -1;
         sContestantStatus[i].unk10_4 = 0;
         sContestantStatus[i].unk15_2 = sContestantStatus[i].disappointedRepeat;
         sContestantStatus[i].disappointedRepeat = FALSE;
         sContestantStatus[i].unk11_0 = 0;
         sContestantStatus[i].unk11_5 = 0;
-        if (sContestantStatus[i].unk11_2)
+        if (sContestantStatus[i].turnSkipped)
         {
-            sContestantStatus[i].unkC_1 = 1;
-            sContestantStatus[i].unk11_2 = 0;
+            sContestantStatus[i].numTurnsSkipped = 1;
+            sContestantStatus[i].turnSkipped = 0;
         }
-        if (sContestantStatus[i].unk11_3)
+        if (sContestantStatus[i].exploded)
         {
-            sContestantStatus[i].unkB_7 = 1;
-            sContestantStatus[i].unk11_3 = 0;
+            sContestantStatus[i].noMoreTurns = 1;
+            sContestantStatus[i].exploded = 0;
         }
         sContestantStatus[i].unk11_4 = 0;
     }
@@ -3000,12 +3000,12 @@ void sub_80AF438(void)
         sContest.unk19248[sContest.turnNumber][i] = Contest_GetMoveExcitement(sContestantStatus[i].currMove);
         sContestantStatus[i].currMove = MOVE_NONE;
     }
-    shared19328.bits_8 = 0;
+    shared19328.excitementFrozen = 0;
 }
 
 bool8 Contest_IsMonsTurnDisabled(u8 a)
 {
-    if (sContestantStatus[a].unkC_1 != 0 || sContestantStatus[a].unkB_7)
+    if (sContestantStatus[a].numTurnsSkipped != 0 || sContestantStatus[a].noMoreTurns)
         return TRUE;
     else
         return FALSE;
@@ -4209,7 +4209,7 @@ void unref_sub_80B0994(u8 a)
 
 void sub_80B09B0(u8 a)
 {
-    if (sContestantStatus[a].unk15_4)
+    if (sContestantStatus[a].hasJudgesAttention)
         sub_80B0368(a);
     else
         sub_80B03A8(a);
@@ -4543,34 +4543,34 @@ void sub_80B114C(u8 contestant)
         }
         sContestantStatus[contestant].appeal1 = gContestEffects[effect].appeal;
         sContestantStatus[contestant].appeal2 = gContestEffects[effect].appeal;
-        shared192D0.unk4 = gContestEffects[effect].jam;
-        shared192D0.unk6 = gContestEffects[effect].jam;
-        shared192D0.unk11 = contestant;
+        shared192D0.jam = gContestEffects[effect].jam;
+        shared192D0.jam2 = gContestEffects[effect].jam;
+        shared192D0.contestant = contestant;
         for (i = 0; i < 4; i++)
         {
             sContestantStatus[i].unkE = 0;
             shared192D0.unkD[i] = 0;
         }
-        if (sContestantStatus[contestant].unk15_4 && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
-            sContestantStatus[contestant].unk15_4 = 0;
+        if (sContestantStatus[contestant].hasJudgesAttention && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
+            sContestantStatus[contestant].hasJudgesAttention = 0;
         gContestEffectFuncs[effect]();
         if (sContestantStatus[contestant].unk10_4 == 1)
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].unkD - 10;
+            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition - 10;
         else if (sContestantStatus[contestant].unk11_5)
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].unkD * 3;
+            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition * 3;
         else
-            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].unkD;
+            sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition;
         sContestantStatus[contestant].unk16 = 0;
         sContestantStatus[contestant].unk15_6 = 0;
         if (sub_80B214C(contestant))
         {
             u8 r2 = AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove);
 
-            if (r2 != 0 && sContestantStatus[contestant].unk15_4)
+            if (r2 != 0 && sContestantStatus[contestant].hasJudgesAttention)
             {
                 sContestantStatus[contestant].unk16 = r2;
                 sContestantStatus[contestant].unk15_6 = 1;
-                sContestantStatus[contestant].unk15_4 = 0;
+                sContestantStatus[contestant].hasJudgesAttention = 0;
                 sContestantStatus[contestant].unk17 = sContestantStatus[contestant].appeal1 * sContestantStatus[contestant].unk16;
                 sContestantStatus[contestant].unk15_3 = 1;
             }
@@ -4578,20 +4578,20 @@ void sub_80B114C(u8 contestant)
             {
                 if (gContestMoves[sContestantStatus[contestant].currMove].comboStarterId != 0)
                 {
-                    sContestantStatus[contestant].unk15_4 = 1;
+                    sContestantStatus[contestant].hasJudgesAttention = 1;
                     sContestantStatus[contestant].unk15_6 = 1;
                 }
                 else
                 {
-                    sContestantStatus[contestant].unk15_4 = 0;
+                    sContestantStatus[contestant].hasJudgesAttention = 0;
                 }
             }
         }
         if (sContestantStatus[contestant].disappointedRepeat)
             sContestantStatus[contestant].unk18 = (sContestantStatus[contestant].moveRepeatCount + 1) * 10;
-        if (sContestantStatus[contestant].unkC_0)
+        if (sContestantStatus[contestant].nervous)
         {
-            sContestantStatus[contestant].unk15_4 = 0;
+            sContestantStatus[contestant].hasJudgesAttention = 0;
             sContestantStatus[contestant].appeal2 = 0;
             sContestantStatus[contestant].appeal1 = 0;
         }
@@ -4624,41 +4624,41 @@ void sub_80B114C(u8 contestant)
     }
 }
 
-void SetContestantStatusUnk13(u8 a, u8 b)
+void SetContestantEffectStringID(u8 a, u8 b)
 {
-    sContestantStatus[a].unk13 = b;
+    sContestantStatus[a].effectStringId = b;
 }
 
-void SetContestantStatusUnk14(u8 a, u8 b)
+void SetContestantEffectStringID2(u8 a, u8 b)
 {
-    sContestantStatus[a].unk14 = b;
+    sContestantStatus[a].effectStringId2 = b;
 }
 
 void sub_80B141C(u8 a, u8 b)
 {
     if      (b >= 60)
-        SetContestantStatusUnk13(a, 53);
+        SetContestantEffectStringID(a, 53);
     else if (b >= 40)
-        SetContestantStatusUnk13(a, 52);
+        SetContestantEffectStringID(a, 52);
     else if (b >= 30)
-        SetContestantStatusUnk13(a, 51);
+        SetContestantEffectStringID(a, 51);
     else if (b >= 20)
-        SetContestantStatusUnk13(a, 50);
+        SetContestantEffectStringID(a, 50);
     else if (b >= 10)
-        SetContestantStatusUnk13(a, 49);
+        SetContestantEffectStringID(a, 49);
 }
 
 void sub_80B146C(u8 a, u8 b)
 {
     StringCopy(gStringVar1, gContestMons[a].nickname);
     StringCopy(gStringVar2, gMoveNames[sContestantStatus[a].currMove]);
-    if      (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_COOL)
+    if      (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
-    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
+    else if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
         StringCopy(gStringVar3, gText_Contest_Anxiety);
-    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
+    else if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_CUTE)
         StringCopy(gStringVar3, gText_Contest_Laziness);
-    else if (gContestMoves[sContestantStatus[shared192D0.unk11].currMove].contestCategory == CONTEST_CATEGORY_SMART)
+    else if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_SMART)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
@@ -4667,9 +4667,9 @@ void sub_80B146C(u8 a, u8 b)
     Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
 }
 
-void sub_80B157C(u8 p)
+void MakeContestantNervous(u8 p)
 {
-    sContestantStatus[p].unkC_0 = 1;
+    sContestantStatus[p].nervous = 1;
     sContestantStatus[p].currMove = MOVE_NONE;
 }
 
@@ -4723,7 +4723,7 @@ void sub_80B159C(void)
 
     for (i = 0; i < 4; i++)
     {
-        shared192D0.unk0[i] = sp0[i];
+        shared192D0.turnOrder[i] = sp0[i];
         sContestantStatus[i].unk19 = 0xFF;
         sContestantStatus[i].unk10_6 = 0;
         gUnknown_02038696[i] = sp0[i];
@@ -5114,7 +5114,7 @@ void sub_80B20C4(void)
 
 bool8 sub_80B214C(u8 a)
 {
-    if (sContestantStatus[a].disappointedRepeat || sContestantStatus[a].unkC_0)
+    if (sContestantStatus[a].disappointedRepeat || sContestantStatus[a].nervous)
         return FALSE;
     else
         return TRUE;

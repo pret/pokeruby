@@ -262,31 +262,31 @@ struct ContestantStatus
  /*0x0B*/ u8 unkB_0:2;
           u8 unkB_2:2;
           u8 moveRepeatCount:3;
-          u8 unkB_7:1;  // used a one-time move?
- /*0x0C*/ u8 unkC_0:1;
-          u8 unkC_1:2;
- /*0x0D*/ s8 unkD;
+          u8 noMoreTurns:1;  // used a one-time move?
+ /*0x0C*/ u8 nervous:1;
+          u8 numTurnsSkipped:2;
+ /*0x0D*/ s8 condition;
  /*0x0E*/ u8 unkE;
- /*0x0F*/ u8 unkF;
- /*0x10*/ u8 unk10_0:1;
-          u8 unk10_1:1;
-          u8 unk10_2:1;
-          u8 unk10_3:1;
+ /*0x0F*/ u8 jamReduction;
+ /*0x10*/ u8 resistant:1;
+          u8 immune:1;
+          u8 moreEasilyStartled:1;
+          u8 usedRepeatableMove:1;
           u8 unk10_4:2;
           u8 unk10_6:2;
  /*0x11*/ u8 unk11_0:2;
-          u8 unk11_2:1;
-          u8 unk11_3:1;
+          u8 turnSkipped:1;
+          u8 exploded:1;
           u8 unk11_4:1;
           u8 unk11_5:1;
- /*0x12*/ u8 unk12;
- /*0x13*/ u8 unk13;   // status action?
- /*0x14*/ u8 unk14;
+ /*0x12*/ u8 jamSafetyCount;
+ /*0x13*/ u8 effectStringId;   // status action?
+ /*0x14*/ u8 effectStringId2;
  /*0x15*/ u8 disappointedRepeat:1;
           u8 unk15_1:1;
           u8 unk15_2:1;
           u8 unk15_3:1;
-          u8 unk15_4:1;
+          u8 hasJudgesAttention:1;
           u8 unk15_5:1;
           u8 unk15_6:1;
  /*0x16*/ u8 unk16;
@@ -321,22 +321,19 @@ struct UnknownContestStruct4
 struct UnknownContestStruct5
 {
     s8 bits_0;  // current move excitement?
-    u8 bits_8:1;
-    u8 bits_9:3;
-    u8 bits_C:4;
+    u8 excitementFrozen:1;
+    u8 excitementFreezer:3;
     s8 unk2;
-    u8 filler3;
 };
 
 struct UnknownContestStruct7
 {
-    u8 unk0[4];
-    s16 unk4;
-    s16 unk6;
+    u8 turnOrder[4];
+    s16 jam;
+    s16 jam2;
     u8 unk8[5];
     u8 unkD[4];
-    u8 unk11;
-    u8 filler12[2];
+    u8 contestant;
 };
 
 struct UnknownContestStruct8
@@ -345,7 +342,6 @@ struct UnknownContestStruct8
     u16 unk2;
     u8 unk4_0:1;
     u8 unk5;
-    u8 filler6[2];
     u32 unk8;
     u32 unkC;
     u32 unk10;
@@ -385,9 +381,9 @@ extern u8 gUnknown_02038696[4];
 extern u8 gUnknown_0203869B;
 extern u16 gSpecialVar_ContestCategory;
 
-void SetContestantStatusUnk13(u8 a, u8 b);
-void SetContestantStatusUnk14(u8 a, u8 b);
-void sub_80B157C(u8 p);
+void SetContestantEffectStringID(u8 a, u8 b);
+void SetContestantEffectStringID2(u8 a, u8 b);
+void MakeContestantNervous(u8 p);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80B214C(u8 a);
 void sub_80B141C(u8 a, u8 b);
