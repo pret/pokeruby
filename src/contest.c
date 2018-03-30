@@ -715,7 +715,7 @@ void sub_80ABCDC(u8 taskId)
         }
         else if (move != 0
          && sContestantStatus[gContestPlayerMonIndex].prevMove == move
-         && gContestMoves[move].effect != CONTEST_EFFECT_REPEATABLE)
+         && gContestMoves[move].effect != CONTEST_EFFECT_REPETITION_NOT_BORING)
         {
             // Gray the text because it is a repeated move
             r5 = StringCopy(sp8, gUnknownText_UnknownFormatting3);
