@@ -30,22 +30,26 @@ bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove) {
 }
 
 void ContestEffect_00(void)
+// A highly appealing move.
 {
 }
 
 void ContestEffect_01(void)
+// After this move, the user is more easily startled.
 {
     curContestant->unk10_2 = TRUE;
     SetContestantStatusUnk13(shared192D0.unk11, 0);
 }
 
 void ContestEffect_02(void)
+// Makes a great appeal, but allows no more to the end.
 {
     curContestant->unk11_3 = TRUE;
     SetContestantStatusUnk13(shared192D0.unk11, 1);
 }
 
 void ContestEffect_03(void)
+// Can be used repeatedly without boring the JUDGE.
 {
     curContestant->unk10_3 = TRUE;
     curContestant->disappointedRepeat = FALSE;
@@ -53,30 +57,35 @@ void ContestEffect_03(void)
 }
 
 void ContestEffect_04(void)
+// Can avoid being startled by others once.
 {
     curContestant->unk12 = 1;
     SetContestantStatusUnk13(shared192D0.unk11, 2);
 }
 
 void ContestEffect_05(void)
+// Can avoid being startled by others.
 {
     curContestant->unk10_1 = TRUE;
     SetContestantStatusUnk13(shared192D0.unk11, 3);
 }
 
 void ContestEffect_06(void)
+// Can avoid being startled by others a little.
 {
     curContestant->unkF = 20;
     SetContestantStatusUnk13(shared192D0.unk11, 4);
 }
 
 void ContestEffect_07(void)
+// After this move, the user is less likely to be startled.
 {
     curContestant->unk10_0 = TRUE;
     SetContestantStatusUnk13(shared192D0.unk11, 5);
 }
 
 void ContestEffect_08(void)
+// Slightly startles the POKéMON in front.
 {
     u8 idx = 0;
     u8 a = shared192D0.unk11;
@@ -84,8 +93,11 @@ void ContestEffect_08(void)
     if (shared192D0.unk0[a] != 0) {
         int i;
 
-        for (i = 0; i < 4 && shared192D0.unk0[a] - 1 != shared192D0.unk0[i]; i++)
-            ;
+        for (i = 0; i < 4; i++)
+        {
+            if (shared192D0.unk0[a] - 1 == shared192D0.unk0[i])
+                break;
+        }
         shared192D0.unk8[0] = i;
         shared192D0.unk8[1] = 0xFF;
         idx = sub_80B9120();
@@ -96,6 +108,7 @@ void ContestEffect_08(void)
 }
 
 void ContestEffect_09(void)
+// Slightly startles those that have made appeals.
 {
     u8 idx = 0;
     u8 a = shared192D0.unk11;
@@ -116,6 +129,7 @@ void ContestEffect_09(void)
 }
 
 void ContestEffect_14(void)
+// Startles the POKéMON that appealed before the user.
 {
     u8 r0 = Random() % 10;
     int r1 = 20;
@@ -129,7 +143,9 @@ void ContestEffect_14(void)
     ContestEffect_08();
 }
 
-void ContestEffect_15(void) {
+void ContestEffect_15(void)
+// Startles all POKéMON that appealed before the user.
+{
     u8 r7 = 0;
     u8 r6 = shared192D0.unk11;
 
@@ -171,6 +187,7 @@ void ContestEffect_15(void) {
 }
 
 void ContestEffect_16(void)
+// Shifts the JUDGE’s attention from others.
 {
     bool32 r9 = FALSE;
     u8 r7 = shared192D0.unk11;
@@ -200,6 +217,7 @@ void ContestEffect_16(void)
 }
 
 void ContestEffect_17(void)
+// Startles the POKéMON that has the JUDGE’s attention.
 {
     u8 r9 = 0;
     u8 r8 = shared192D0.unk11;
@@ -229,6 +247,7 @@ void ContestEffect_17(void)
 }
 
 void ContestEffect_18(void)
+// Jams the others, and misses one turn of appeals.
 {
     curContestant->unk11_2 = TRUE;
     ContestEffect_09();
@@ -236,6 +255,7 @@ void ContestEffect_18(void)
 }
 
 void ContestEffect_19(void)
+// Startles POKéMON that made a same-type appeal.
 {
     u16 move = curContestant->currMove;
     sub_80B9038(gContestMoves[move].contestCategory);
@@ -243,36 +263,42 @@ void ContestEffect_19(void)
 }
 
 void ContestEffect_20(void)
+// Badly startles POKéMON that made COOL appeals.
 {
     sub_80B9038(CONTEST_CATEGORY_COOL);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
 
 void ContestEffect_21(void)
+// Badly startles POKéMON that made BEAUTY appeals.
 {
     sub_80B9038(CONTEST_CATEGORY_BEAUTY);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
 
 void ContestEffect_22(void)
+// Badly startles POKéMON that made CUTE appeals.
 {
     sub_80B9038(CONTEST_CATEGORY_CUTE);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
 
 void ContestEffect_23(void)
+// Badly startles POKéMON that made SMART appeals.
 {
     sub_80B9038(CONTEST_CATEGORY_SMART);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
 
 void ContestEffect_24(void)
+// Badly startles POKéMON that made TOUGH appeals.
 {
     sub_80B9038(CONTEST_CATEGORY_TOUGH);
     SetContestantStatusUnk13(shared192D0.unk11, 48);
 }
 
 void ContestEffect_25(void)
+// Makes one POKéMON after the user nervous.
 {
     bool32 r4 = FALSE;
 
@@ -304,6 +330,7 @@ void ContestEffect_25(void)
 }
 
 void ContestEffect_26(void)
+// Makes all POKéMON after the user nervous.
 {
     u8 r9 = 0;
     bool32 sp18 = FALSE;
@@ -379,6 +406,7 @@ void ContestEffect_26(void)
 }
 
 void ContestEffect_27(void)
+// Worsens the condition of those that made appeals.
 {
     u8 r8 = 0;
     int r6;
@@ -402,6 +430,7 @@ void ContestEffect_27(void)
 }
 
 void ContestEffect_28(void)
+// Badly startles POKéMON in good condition.
 {
     u8 r7 = 0;
     int r5;
@@ -426,6 +455,7 @@ void ContestEffect_28(void)
 }
 
 void ContestEffect_29(void)
+// The appeal works great if performed first.
 {
     if (gUnknown_02038696[shared192D0.unk11] == 0)
     {
@@ -436,6 +466,7 @@ void ContestEffect_29(void)
 }
 
 void ContestEffect_30(void)
+// The appeal works great if performed last.
 {
     if (gUnknown_02038696[shared192D0.unk11] == 3)
     {
@@ -446,6 +477,7 @@ void ContestEffect_30(void)
 }
 
 void ContestEffect_31(void)
+// Makes the appeal as good as those before it.
 {
     int r1;
     int r3;
@@ -468,6 +500,7 @@ void ContestEffect_31(void)
 }
 
 void ContestEffect_32(void)
+// Makes the appeal as good as the one before it.
 {
     s16 r6 = 0;
 
@@ -490,6 +523,7 @@ void ContestEffect_32(void)
 }
 
 void ContestEffect_33(void)
+// The appeal works better the later it is performed.
 {
     u8 r3 = shared192D0.unk0[shared192D0.unk11];
     if (r3 == 0)
@@ -507,6 +541,7 @@ void ContestEffect_33(void)
 }
 
 void ContestEffect_34(void)
+// The appeal’s quality varies depending on its timing.
 {
     u8 r0 = Random() % 10;
     s16 r4;
@@ -539,24 +574,25 @@ void ContestEffect_34(void)
 #ifdef NONMATCHING
 // Not even close, send help
 void ContestEffect_35(void)
+// Works well if it’s the same type as the one before.
 {
     s8 r4;
+    s8 r2;
 
-    for (r4 = shared192D0.unk0[shared192D0.unk11] - 1; r4 >= 0; r4--)
+    for (r4 = shared192D0.unk0[shared192D0.unk11]; r4 > 0; r4--)
     {
-        s8 r2;
         for (r2 = 0; r2 < 4; r2++)
         {
-            if (shared192D0.unk0[r2] == r4)
+            if (shared192D0.unk0[r2] == r4 - 1)
                 break;
         }
         if (!(sContestantStatus[r2].unkB_7 || sContestantStatus[r2].unkC_0 || sContestantStatus[r2].unkC_1))
         {
             u16 move = curContestant->currMove;
-            const struct ContestMove *contestMove = gContestMoves + move;
-            if (contestMove->contestCategory == gContestMoves[sContestantStatus[r2].currMove].contestCategory)
+
+            if (gContestMoves[move].contestCategory == gContestMoves[sContestantStatus[r2].currMove].contestCategory)
             {
-                curContestant->appeal2 += gContestEffects[contestMove->effect].appeal * 2;
+                curContestant->appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
                 SetContestantStatusUnk13(shared192D0.unk11, 31);
             }
             break;
@@ -681,6 +717,7 @@ __attribute__((naked)) void ContestEffect_35(void)
 #endif
 
 void ContestEffect_36(void)
+// Works well if different in type than the one before.
 {
     if (shared192D0.unk0[shared192D0.unk11] != 0)
     {
@@ -701,6 +738,7 @@ void ContestEffect_36(void)
 }
 
 void ContestEffect_37(void)
+// Affected by how well the appeal in front goes.
 {
     if (shared192D0.unk0[shared192D0.unk11] != 0)
     {
@@ -726,6 +764,7 @@ void ContestEffect_37(void)
 }
 
 void ContestEffect_38(void)
+// Ups the user’s condition. Helps prevent nervousness.
 {
     if (curContestant->unkD < 30)
     {
@@ -738,6 +777,7 @@ void ContestEffect_38(void)
 }
 
 void ContestEffect_39(void)
+// The appeal works well if the user’s condition is good.
 {
     curContestant->unk11_5 = TRUE;
     if (curContestant->unkD != 0)
@@ -747,6 +787,7 @@ void ContestEffect_39(void)
 }
 
 void ContestEffect_40(void)
+// The next appeal can be made earlier next turn.
 {
     s8 i;
     s8 j;
@@ -784,5 +825,99 @@ void ContestEffect_40(void)
         }
         curContestant->unk11_0 = 1;
         SetContestantStatusUnk13(shared192D0.unk11, 37);
+    }
+}
+
+void ContestEffect_41(void)
+// The next appeal can be made later next turn.
+{
+    s8 i;
+    s8 j;
+    u8 sp00[4];
+
+    if (sContest.turnNumber != 4)
+    {
+        for (i = 0; i < 4; i++)
+            sp00[i] = sContestantStatus[i].unk19;
+
+        sp00[shared192D0.unk11] = 0xFF;
+
+        for (i = 3; i > -1; i--)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                if (j != shared192D0.unk11 &&
+                    i == sp00[j] &&
+                    sp00[j] == sContestantStatus[j].unk19)
+                {
+                    sp00[j]--;
+                    break;
+                }
+            }
+            if (j == 4)
+                break;
+        }
+
+        sp00[shared192D0.unk11] = 3;
+        curContestant->unk10_6 = 1;
+
+        for (i = 0; i < 4; i++)
+        {
+            sContestantStatus[i].unk19 = sp00[i];
+        }
+        curContestant->unk11_0 = 2;
+        SetContestantStatusUnk13(shared192D0.unk11, 38);
+    }
+}
+
+void ContestEffect_42(void)
+// Makes the next turn’s order more easily scrambled.
+{
+    // dummied out?
+}
+
+void ContestEffect_43(void)
+// Scrambles the order of appeals on the next turn.
+{
+    s8 i;
+    s8 j;
+    u8 sp00[4];
+    u8 sp04[4];
+
+    if (sContest.turnNumber != 4)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            sp00[i] = sContestantStatus[i].unk19;
+            sp04[i] = i;
+        }
+
+        for (i = 0; i < 4; i++)
+        {
+            u8 r4 = Random() % (4 - i);
+
+            for (j = 0; j < 4; j++)
+            {
+                if (sp04[j] != 0xFF)
+                {
+                    if (r4 == 0)
+                    {
+                        sp00[j] = i;
+                        sp04[j] = 0xFF;
+                        break;
+                    }
+                    else
+                        r4--;
+                }
+            }
+        }
+
+        for (i = 0; i < 4; i++)
+        {
+            sContestantStatus[i].unk19 = sp00[i];
+            sContestantStatus[i].unk10_6 = 2;
+        }
+        curContestant->unk11_0 = 3;
+        SetContestantStatusUnk13(shared192D0.unk11, 39);
     }
 }
