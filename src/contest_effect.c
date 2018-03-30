@@ -736,3 +736,53 @@ void ContestEffect_38(void)
     else
         SetContestantStatusUnk13(shared192D0.unk11, 58);
 }
+
+void ContestEffect_39(void)
+{
+    curContestant->unk11_5 = TRUE;
+    if (curContestant->unkD != 0)
+        SetContestantStatusUnk13(shared192D0.unk11, 36);
+    else
+        SetContestantStatusUnk13(shared192D0.unk11, 59);
+}
+
+void ContestEffect_40(void)
+{
+    s8 i;
+    s8 j;
+    u8 sp00[4];
+
+    if (sContest.turnNumber != 4)
+    {
+        for (i = 0; i < 4; i++)
+            sp00[i] = sContestantStatus[i].unk19;
+
+        sp00[shared192D0.unk11] = 0xFF;
+
+        for (i = 0; i < 4; i++)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                if (j != shared192D0.unk11 &&
+                    i == sp00[j] &&
+                    sp00[j] == sContestantStatus[j].unk19)
+                {
+                    sp00[j]++;
+                    break;
+                }
+            }
+            if (j == 4)
+                break;
+        }
+
+        sp00[shared192D0.unk11] = 0;
+        curContestant->unk10_6 = 1;
+
+        for (i = 0; i < 4; i++)
+        {
+            sContestantStatus[i].unk19 = sp00[i];
+        }
+        curContestant->unk11_0 = 1;
+        SetContestantStatusUnk13(shared192D0.unk11, 37);
+    }
+}
