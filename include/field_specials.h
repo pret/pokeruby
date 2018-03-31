@@ -26,5 +26,6 @@ void SetShoalItemFlag(u16);
 u8 GetLeadMonIndex(void);
 void ResetFanClub(void);
 u8 sub_810FB10(u8 a0);
+void sub_810FEFC(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

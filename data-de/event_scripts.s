@@ -3279,6 +3279,7 @@ PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
 Route101_EventScript_1A14DC:: @ 81A14DC
 	return
 
+	.include "data/scripts/debug.inc"
 	.include "data/scripts/berry_tree.inc"
 	.include "data/text/berry_tree.inc"
 

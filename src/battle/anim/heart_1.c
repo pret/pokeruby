@@ -14,7 +14,7 @@ extern u8 gAnimBankTarget;
 void sub_80D1C80(struct Sprite* sprite)
 {
     if (++sprite->data[0] == 1)
-        sub_80787B0(sprite, 0);
+        InitAnimSpritePos(sprite, 0);
 
     sprite->pos2.x = Sin(sprite->data[1], 8);
     sprite->pos2.y = sprite->data[2] >> 8;

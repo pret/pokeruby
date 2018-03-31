@@ -1,14 +1,14 @@
-	.macro loadsprite id
+	.macro loadspritegfx id
 	.byte 0x00
 	.2byte \id
 	.endm
 
-	.macro unloadsprite id
+	.macro unloadspritegfx id
 	.byte 0x01
 	.2byte \id
 	.endm
 
-	.macro sprite template, priority, argv:vararg
+	.macro createsprite template, priority, argv:vararg
 	.byte 0x02
 	.4byte \template
 	.byte \priority
@@ -18,7 +18,7 @@
 .Lsprite_\@_2:
 	.endm
 
-	.macro createtask addr, priority, argv:vararg
+	.macro createvisualtask addr, priority, argv:vararg
 	.byte 0x03
 	.4byte \addr
 	.byte \priority
@@ -28,12 +28,12 @@
 .Lcreatetask_\@_2:
 	.endm
 
-	.macro pause delay
+	.macro delay amount
 	.byte 0x04
-	.byte \delay
+	.byte \amount
 	.endm
 
-	.macro wait
+	.macro waitforvisualfinish
 	.byte 0x05
 	.endm
 
@@ -78,29 +78,29 @@
 	.4byte \addr
 	.endm
 
-	.macro ret
+	.macro return
 	.byte 0x0F
 	.endm
 
-	.macro setvar var_num, value
+	.macro setarg arg_num, value
 	.byte 0x10
-	.byte \var_num
+	.byte \arg_num
 	.2byte \value
 	.endm
 
-	.macro ifelse addr1, addr2
+	.macro choosetwoturnanim addr1, addr2
 	.byte 0x11
 	.4byte \addr1
 	.4byte \addr2
 	.endm
 
-	.macro jumpif cond, addr
+	.macro jumpifmoveturn cond, addr
 	.byte 0x12
 	.byte \cond
 	.4byte \addr
 	.endm
 
-	.macro jump addr
+	.macro goto addr
 	.byte 0x13
 	.4byte \addr
 	.endm
@@ -127,7 +127,7 @@
 	.byte \id
 	.endm
 
-	.macro panse_19 id, pan
+	.macro playsewithpan id, pan
 	.byte 0x19
 	.2byte \id
 	.byte \pan
@@ -147,7 +147,7 @@
 	.byte \delay
 	.endm
 
-	.macro panse_1C id, pan, delay, count
+	.macro loopsewithpan id, pan, delay, count
 	.byte 0x1C
 	.2byte \id
 	.byte \pan
@@ -155,7 +155,7 @@
 	.byte \count
 	.endm
 
-	.macro panse_1D id, pan, count
+	.macro waitplaysewithpan id, pan, count
 	.byte 0x1D
 	.2byte \id
 	.byte \pan
@@ -167,7 +167,7 @@
 	.2byte \bldcnt
 	.endm
 
-	.macro createtask_1F addr, argv:vararg
+	.macro createsoundtask addr, argv:vararg
 	.byte 0x1F
 	.4byte \addr
 	.byte (.Lcreatetask_1F_\@_2 - .Lcreatetask_1F_\@_1) / 2
@@ -180,29 +180,29 @@
 	.byte 0x20
 	.endm
 
-	.macro jumpvareq var_num, value, addr
+	.macro jumpargeq arg_num, value, addr
 	.byte 0x21
-	.byte \var_num
+	.byte \arg_num
 	.2byte \value
 	.4byte \addr
 	.endm
 
-	.macro monbg_22 unk
+	.macro monbg_22 bank
 	.byte 0x22
-	.byte \unk
+	.byte \bank
 	.endm
 
-	.macro clearmonbg_23 unk
+	.macro clearmonbg_23 bank
 	.byte 0x23
-	.byte \unk
+	.byte \bank
 	.endm
 
-	.macro jumpunkcond addr
+	.macro jumpifcontest addr
 	.byte 0x24
 	.4byte \addr
 	.endm
 
-	.macro fadetobg_25 a, b, c
+	.macro fadetobgfromset a, b, c
 	.byte 0x25
 	.byte \a
 	.byte \b
@@ -227,38 +227,38 @@
 	.byte \delay
 	.endm
 
-	.macro monbgprio_28 unk
+	.macro monbgprio_28 bank
 	.byte 0x28
-	.byte \unk
+	.byte \bank
 	.endm
 
 	.macro monbgprio_29
 	.byte 0x29
 	.endm
 
-	.macro monbgprio_2A unk
+	.macro monbgprio_2A bank
 	.byte 0x2A
-	.byte \unk
+	.byte \bank
 	.endm
 
-	.macro invisible side
+	.macro invisible bank
 	.byte 0x2B
-	.byte \side
+	.byte \bank
 	.endm
 
-	.macro visible side
+	.macro visible bank
 	.byte 0x2C
-	.byte \side
+	.byte \bank
 	.endm
 
-	.macro doublebattle_2D unk
+	.macro doublebattle_2D bank
 	.byte 0x2D
-	.byte \unk
+	.byte \bank
 	.endm
 
-	.macro doublebattle_2E unk
+	.macro doublebattle_2E bank
 	.byte 0x2E
-	.byte \unk
+	.byte \bank
 	.endm
 
 	.macro stopsound

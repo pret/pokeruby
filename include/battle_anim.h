@@ -9,14 +9,6 @@
 #define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 #define REG_BG3CNT_BITFIELD REG_BGnCNT_BITFIELD(3)
 
-enum
-{
-    ANIM_BANK_ATTACKER,
-    ANIM_BANK_TARGET,
-    ANIM_BANK_ATK_PARTNER,
-    ANIM_BANK_DEF_PARTNER,
-};
-
 struct BattleAnimBackground
 {
     void *image;
@@ -51,7 +43,7 @@ extern struct DisableStruct *gAnimDisableStructPtr;
 void DoMoveAnim(u16 move);
 void LaunchBattleAnimation(const u8 *const moveAnims[], u16 b, u8 c);
 bool8 IsAnimBankSpriteVisible(u8 a);
-void sub_8076034(u8, u8);
+void MoveBattlerSpriteToBG(u8, u8);
 bool8 IsContest(void);
 void ClearBattleAnimationVars(void);
 void DestroyAnimSprite(struct Sprite *sprite);
@@ -63,5 +55,6 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d);
 s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 s16 sub_8077104(s16 newPan, int oldPan);
 void DestroyAnimSoundTask(u8 taskId);
+void sub_8076464(u8 a);
 
 #endif

@@ -164,7 +164,7 @@ extern const u8 gOtherText_None[];
 
 extern const u8 gOtherText_ThreeQuestions2[];
 
-extern const u8 gOtherText_FiveQuestionsAndSlash[];
+extern const u8 gOtherText_FiveQuestions[];
 
 extern const u8 gOtherText_OneDash[];
 extern const u8 gOtherText_TwoDashes[];

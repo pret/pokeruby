@@ -15,7 +15,7 @@ extern bool8 gAnimScriptActive;
 extern void (*gAnimScriptCallback)(void);
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankTarget;
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
@@ -72,7 +72,7 @@ static void sub_807BDAC(u8);
 
 u8 unref_sub_807B69C(u8 a, u8 b)
 {
-    u8 spriteId1 = gObjectBankIDs[a];
+    u8 spriteId1 = gBankSpriteIds[a];
     u8 taskId = CreateTask(sub_807B7E0, 10);
     u8 spriteId2;
     u8 i;

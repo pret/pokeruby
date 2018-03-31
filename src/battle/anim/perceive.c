@@ -19,6 +19,6 @@ void sub_80D2904(struct Sprite* sprite)
 
 void sub_80D2920(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     sprite->callback = sub_80D2904;
 }

@@ -6,12 +6,17 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 
-static void sub_80CA768(struct Sprite* sprite);
+static void AnimMovePowderParticleStep(struct Sprite* sprite);
 
-// powder
+// Animates the falling particles that horizontally wave back and forth.
 // Used by Sleep Powder, Stun Spore, and Poison Powder.
-
-void sub_80CA710(struct Sprite* sprite)
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: total duration in frames
+// arg 3: vertical movement speed (sub-pixel value)
+// arg 4: wave amplitude
+// arg 5: wave speed
+void AnimMovePowderParticle(struct Sprite* sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -28,10 +33,10 @@ void sub_80CA710(struct Sprite* sprite)
     }
 
     sprite->data[4] = gBattleAnimArgs[5];
-    sprite->callback = sub_80CA768;
+    sprite->callback = AnimMovePowderParticleStep;
 }
 
-void sub_80CA768(struct Sprite* sprite)
+static void AnimMovePowderParticleStep(struct Sprite* sprite)
 {
     if (sprite->data[0] > 0)
     {

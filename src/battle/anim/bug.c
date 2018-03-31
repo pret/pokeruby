@@ -13,7 +13,7 @@ static void sub_80DCA38(struct Sprite *sprite);
 static void sub_80DCAEC(struct Sprite *sprite);
 static void sub_80DCB5C(struct Sprite *sprite);
 static void sub_80DCBB4(struct Sprite *sprite);
-void sub_80DCD78(struct Sprite *sprite);
+static void AnimMissileArcStep(struct Sprite *sprite);
 
 // used in Move_MEGAHORN
 void sub_80DC824(struct Sprite *sprite)
@@ -40,7 +40,7 @@ void sub_80DC824(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -65,7 +65,7 @@ void sub_80DC8F4(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -76,7 +76,7 @@ void sub_80DC9A0(struct Sprite *sprite)
     if (IsContest())
         gBattleAnimArgs[2] /= 2;
 
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
@@ -88,7 +88,7 @@ void sub_80DC9A0(struct Sprite *sprite)
     }
     else
     {
-        sub_807A3FC(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
     }
 
     sub_8078BD4(sprite);
@@ -98,7 +98,7 @@ void sub_80DC9A0(struct Sprite *sprite)
 
 static void sub_80DCA38(struct Sprite *sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
     {
         DestroyAnimSprite(sprite);
         return;
@@ -111,7 +111,7 @@ static void sub_80DCA38(struct Sprite *sprite)
 // used in Move_STRING_SHOT
 void sub_80DCA70(struct Sprite *sprite)
 {
-    sub_807A3FC(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
+    SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
     if (GetBankSide(gAnimBankAttacker))
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
@@ -174,9 +174,15 @@ static void sub_80DCBB4(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-// used in 3 moves:
-//         Move_POISON_STING, Move_TWINEEDLE, Move_SPIKE_CANNON
-void sub_80DCBCC(struct Sprite *sprite)
+// Translates a stinger sprite linearly to a destination location. The sprite is
+// initially rotated so that it appears to be traveling in a straight line.
+// Used by Move_POISON_STING, Move_TWINEEDLE, Move_SPIKE_CANNON
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+void AnimTranslateStinger(struct Sprite *sprite)
 {
     s16 lVarX, lVarY;
     u16 rot;
@@ -212,11 +218,11 @@ void sub_80DCBCC(struct Sprite *sprite)
         }
     }
 
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     lVarX = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     lVarY = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    rot = sub_80790F0(lVarX - sprite->pos1.x, lVarY - sprite->pos1.y);
+    rot = ArcTan2Neg(lVarX - sprite->pos1.x, lVarY - sprite->pos1.y);
     rot += 0xC000;
     sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
 
@@ -224,15 +230,22 @@ void sub_80DCBCC(struct Sprite *sprite)
     sprite->data[2] = lVarX;
     sprite->data[4] = lVarY;
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
 // used in 2 moves:
 //         Move_PIN_MISSILE, Move_ICICLE_SPEAR
-void sub_80DCCFC(struct Sprite *sprite)
+// Rotates sprite and moves it in an arc, so that it appears like a missle or arrow traveling.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+// arg 5: wave amplitude
+void AnimMissileArc(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     if (GetBankSide(gAnimBankAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
@@ -241,17 +254,17 @@ void sub_80DCCFC(struct Sprite *sprite)
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
 
-    sprite->callback = sub_80DCD78;
+    sprite->callback = AnimMissileArcStep;
     sprite->invisible = TRUE;
 }
 
-void sub_80DCD78(struct Sprite *sprite)
+static void AnimMissileArcStep(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
 
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         DestroyAnimSprite(sprite);
     }
@@ -271,12 +284,12 @@ void sub_80DCD78(struct Sprite *sprite)
         x2 += x1;
         y2 += y1;
 
-        if (!sub_8078718(sprite))
+        if (!TranslateAnimSpriteLinearAndSine(sprite))
         {
-            u16 rot = sub_80790F0(sprite->pos1.x + sprite->pos2.x - x2,
+            u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
                                   sprite->pos1.y + sprite->pos2.y - y2);
-            rot += 0xC000;
-            sub_8078FDC(sprite, FALSE, 0x100, 0x100, rot);
+            rotation += 0xC000;
+            sub_8078FDC(sprite, FALSE, 0x100, 0x100, rotation);
 
             for (i = 0; i < 8; i++)
                 data[i] = tempData[i];
