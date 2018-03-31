@@ -388,8 +388,8 @@ void ClearContestVars(void)
     for (i = 0; i < 4; i++)
     {
         sContestantStatus[i].unkB_0 = 0;
-        sContestantStatus[i].effectStringId = 0xFF;
-        sContestantStatus[i].effectStringId2 = 0xFF;
+        sContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
+        sContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
     }
 
     memset(&shared192D0, 0, sizeof(shared192D0));
@@ -1217,25 +1217,25 @@ void sub_80AC2CC(u8 taskId)
         return;
     case 23:
         gTasks[taskId].data[1] = 0;
-        if (sContestantStatus[r7].effectStringId != 0xFF)
+        if (sContestantStatus[r7].effectStringId != CONTEST_STRING_NONE)
         {
             sub_80B146C(r7, sContestantStatus[r7].effectStringId);
-            sContestantStatus[r7].effectStringId = 0xFF;
+            sContestantStatus[r7].effectStringId = CONTEST_STRING_NONE;
             gTasks[taskId].data[0] = 24;
         }
         else
         {
-            if (sContestantStatus[r7].effectStringId2 != 0xFF)
+            if (sContestantStatus[r7].effectStringId2 != CONTEST_STRING_NONE)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (i != r7 && sContestantStatus[i].effectStringId != 0xFF)
+                    if (i != r7 && sContestantStatus[i].effectStringId != CONTEST_STRING_NONE)
                         break;
                 }
                 if (i == 4)
                 {
                     sub_80B146C(r7, sContestantStatus[r7].effectStringId2);
-                    sContestantStatus[r7].effectStringId2 = 0xFF;
+                    sContestantStatus[r7].effectStringId2 = CONTEST_STRING_NONE;
                     gTasks[taskId].data[0] = 24;
                 }
                 else
@@ -1336,7 +1336,7 @@ void sub_80AC2CC(u8 taskId)
                 for (r2 = 0; r2 < 4; r2++)
                 {
                     if (r2 != r7 && gUnknown_02038696[r2] == i
-                     && sContestantStatus[r2].effectStringId != 0xFF)
+                     && sContestantStatus[r2].effectStringId != CONTEST_STRING_NONE)
                     {
                         r4 = 1;
                         break;
@@ -1349,7 +1349,7 @@ void sub_80AC2CC(u8 taskId)
             {
                 gTasks[taskId].data[1] = gUnknown_02038696[r2];
                 sub_80B146C(r2, sContestantStatus[r2].effectStringId);
-                sContestantStatus[r2].effectStringId = 0xFF;
+                sContestantStatus[r2].effectStringId = CONTEST_STRING_NONE;
                 gTasks[taskId].data[0] = 27;
             }
             else
@@ -2973,8 +2973,8 @@ void sub_80AF438(void)
         sContestantStatus[i].moreEasilyStartled = 0;
         sContestantStatus[i].usedRepeatableMove = 0;
         sContestantStatus[i].nervous = 0;
-        sContestantStatus[i].effectStringId = 0xFF;
-        sContestantStatus[i].effectStringId2 = -1;
+        sContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
+        sContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
         sContestantStatus[i].conditionMod = 0;
         sContestantStatus[i].unk15_2 = sContestantStatus[i].disappointedRepeat;
         sContestantStatus[i].disappointedRepeat = FALSE;
