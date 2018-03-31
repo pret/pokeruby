@@ -1368,7 +1368,7 @@ void sub_80AC2CC(u8 taskId)
     case 28:
         for (i = 0; gTasks[taskId].data[1] != gUnknown_02038696[i]; i++)
             ;
-        sub_80AFBA0(sContestantStatus[i].appeal2 + sContestantStatus[i].unkE, -sContestantStatus[i].unkE, i);
+        sub_80AFBA0(sContestantStatus[i].appeal2 + sContestantStatus[i].jam, -sContestantStatus[i].jam, i);
         gTasks[taskId].data[0] = 29;
         return;
     case 29:
@@ -1407,10 +1407,10 @@ void sub_80AC2CC(u8 taskId)
             PlaySE(SE_C_PASI);
         else
             PlaySE(SE_C_SYU);
-        if (sContestantStatus[i].unk15_5)
+        if (sContestantStatus[i].judgesAttentionWasRemoved)
         {
             sub_80B03A8(i);
-            sContestantStatus[i].unk15_5 = 0;
+            sContestantStatus[i].judgesAttentionWasRemoved = 0;
         }
         gTasks[taskId].data[1]++;
         gTasks[taskId].data[0] = 26;
@@ -2966,7 +2966,7 @@ void sub_80AF438(void)
         sContestantStatus[i].jamSafetyCount = 0;
         if (sContestantStatus[i].numTurnsSkipped > 0)
             sContestantStatus[i].numTurnsSkipped--;
-        sContestantStatus[i].unkE = 0;
+        sContestantStatus[i].jam = 0;
         sContestantStatus[i].resistant = 0;
         sContestantStatus[i].jamReduction = 0;
         sContestantStatus[i].immune = 0;
@@ -4547,7 +4547,7 @@ void sub_80B114C(u8 contestant)
         shared192D0.contestant = contestant;
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].unkE = 0;
+            sContestantStatus[i].jam = 0;
             shared192D0.unnervedPokes[i] = 0;
         }
         if (sContestantStatus[contestant].hasJudgesAttention && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)

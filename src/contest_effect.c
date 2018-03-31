@@ -50,7 +50,7 @@ static void ContestEffect_47(void);
 static void JamByMoveCategory(u8);
 static bool8 CanUnnerveContestant(u8);
 static u8 WasAtLeastOneOpponentJammed(void);
-static void sub_80B9200(u8, u8);
+static void JamContestant(u8, u8);
 static s16 RoundTowardsZero(s16);
 static s16 RoundUp(s16);
 
@@ -175,88 +175,88 @@ static void ContestEffect_09(void)
 static void ContestEffect_14(void)
 // Startles the POKéMON that appealed before the user.
 {
-    u8 r0 = Random() % 10;
-    int r1;
+    u8 rval = Random() % 10;
+    int jam;
 
-    if (r0 < 2)
-        r1 = 20;
-    else if (r0 < 8)
-        r1 = 40;
+    if (rval < 2)
+        jam = 20;
+    else if (rval < 8)
+        jam = 40;
     else
-        r1 = 60;
-    shared192D0.jam = r1;
+        jam = 60;
+    shared192D0.jam = jam;
     ContestEffect_08();
 }
 
 static void ContestEffect_15(void)
 // Startles all POKéMON that appealed before the user.
 {
-    u8 r7 = 0;
-    u8 r6 = shared192D0.contestant;
+    u8 numStartled = 0;
+    u8 contestant = shared192D0.contestant;
 
-    if (shared192D0.turnOrder[r6] != 0)
+    if (shared192D0.turnOrder[contestant] != 0)
     {
-        int r5;
+        int i;
 
-        for (r5 = 0; r5 < 4; r5++)
+        for (i = 0; i < 4; i++)
         {
-            if (shared192D0.turnOrder[r6] > shared192D0.turnOrder[r5])
+            if (shared192D0.turnOrder[contestant] > shared192D0.turnOrder[i])
             {
-                shared192D0.jamQueue[0] = r5;
+                shared192D0.jamQueue[0] = i;
                 shared192D0.jamQueue[1] = 0xFF;
                 {
-                u8 r0 = Random() % 10;
-                int r1;
+                u8 rval = Random() % 10;
+                int jam;
 
-                if (r0 == 0)
-                    r1 = 0;
-                else if (r0 <= 2)
-                    r1 = 10;
-                else if (r0 <= 4)
-                    r1 = 20;
-                else if (r0 <= 6)
-                    r1 = 30;
-                else if (r0 <= 8)
-                    r1 = 40;
+                if (rval == 0)
+                    jam = 0;
+                else if (rval <= 2)
+                    jam = 10;
+                else if (rval <= 4)
+                    jam = 20;
+                else if (rval <= 6)
+                    jam = 30;
+                else if (rval <= 8)
+                    jam = 40;
                 else
-                    r1 = 60;
-                shared192D0.jam = r1;
+                    jam = 60;
+                shared192D0.jam = jam;
                 }
                 if (WasAtLeastOneOpponentJammed())
-                    r7++;
+                    numStartled++;
             }
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 48);
-    if (r7 == 0)
+    if (numStartled == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
 }
 
 static void ContestEffect_16(void)
 // Shifts the JUDGE’s attention from others.
 {
-    bool32 r9 = FALSE;
-    u8 r7 = shared192D0.contestant;
+    bool32 hitAny = FALSE;
+    u8 contestant = shared192D0.contestant;
 
     if (shared192D0.turnOrder[shared192D0.contestant] != 0)
     {
-        int r6;
+        int i;
 
-        for (r6 = 0; r6 < 4; r6++)
+        for (i = 0; i < 4; i++)
         {
-            if (shared192D0.turnOrder[r7] > shared192D0.turnOrder[r6] &&
-                sContestantStatus[r6].hasJudgesAttention &&
-                CanUnnerveContestant(r6))
+            if (shared192D0.turnOrder[contestant] > shared192D0.turnOrder[i] &&
+                sContestantStatus[i].hasJudgesAttention &&
+                CanUnnerveContestant(i))
             {
-                sContestantStatus[r6].hasJudgesAttention = FALSE;
-                sContestantStatus[r6].unk15_5 = TRUE;
-                SetContestantEffectStringID(r6, 8);
-                r9 = TRUE;
+                sContestantStatus[i].hasJudgesAttention = FALSE;
+                sContestantStatus[i].judgesAttentionWasRemoved = TRUE;
+                SetContestantEffectStringID(i, 8);
+                hitAny = TRUE;
             }
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 7);
-    if (!r9)
+    if (!hitAny)
     {
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
     }
@@ -265,30 +265,30 @@ static void ContestEffect_16(void)
 static void ContestEffect_17(void)
 // Startles the POKéMON that has the JUDGE’s attention.
 {
-    u8 r9 = 0;
-    u8 r8 = shared192D0.contestant;
+    u8 numStartled = 0;
+    u8 contestant = shared192D0.contestant;
 
     if (shared192D0.turnOrder[shared192D0.contestant] != 0)
     {
-        int r5;
+        int i;
 
-        for (r5 = 0; r5 < 4; r5++)
+        for (i = 0; i < 4; i++)
         {
-            if (shared192D0.turnOrder[r8] > shared192D0.turnOrder[r5])
+            if (shared192D0.turnOrder[contestant] > shared192D0.turnOrder[i])
             {
-                if (sContestantStatus[r5].hasJudgesAttention)
+                if (sContestantStatus[i].hasJudgesAttention)
                     shared192D0.jam = 50;
                 else
                     shared192D0.jam = 10;
-                shared192D0.jamQueue[0] = r5;
+                shared192D0.jamQueue[0] = i;
                 shared192D0.jamQueue[1] = 0xFF;
                 if (WasAtLeastOneOpponentJammed())
-                    r9++;
+                    numStartled++;
             }
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 48);
-    if (r9 == 0)
+    if (numStartled == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
 }
 
@@ -346,157 +346,157 @@ static void ContestEffect_24(void)
 static void ContestEffect_25(void)
 // Makes one POKéMON after the user nervous.
 {
-    bool32 r4 = FALSE;
+    bool32 hitAny = FALSE;
 
     if (shared192D0.turnOrder[shared192D0.contestant] != 3)
     {
-        int r5;
+        int i;
 
-        for (r5 = 0; r5 < 4; r5++)
+        for (i = 0; i < 4; i++)
         {
-            if (shared192D0.turnOrder[shared192D0.contestant] + 1 == shared192D0.turnOrder[r5])
+            if (shared192D0.turnOrder[shared192D0.contestant] + 1 == shared192D0.turnOrder[i])
             {
-                if (CanUnnerveContestant(r5))
+                if (CanUnnerveContestant(i))
                 {
-                    MakeContestantNervous(r5);
-                    SetContestantEffectStringID(r5, 10);
-                    r4 = TRUE;
+                    MakeContestantNervous(i);
+                    SetContestantEffectStringID(i, 10);
+                    hitAny = TRUE;
                 }
                 else
                 {
-                    SetContestantEffectStringID(r5, 60);
-                    r4 = TRUE;
+                    SetContestantEffectStringID(i, 60);
+                    hitAny = TRUE;
                 }
             }
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 9);
-    if (!r4)
+    if (!hitAny)
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
 }
 
 static void ContestEffect_26(void)
 // Makes all POKéMON after the user nervous.
 {
-    u8 r9 = 0;
-    bool32 sp18 = FALSE;
-    u8 sp00[5];
-    int r6;
-    int r4;
-    s16 sp08[4];
-    s16 sp10[4];
+    u8 numUnnerved = 0;
+    bool32 contestantUnnerved = FALSE;
+    u8 contestantIds[5];
+    int i;
+    int numAfter;
+    s16 oddsMod[4];
+    s16 odds[4];
 
-    memset(sp00, 0xFF, ARRAY_COUNT(sp00));
-    for (r6 = 0, r4 = 0; r6 < 4; r6++)
+    memset(contestantIds, 0xFF, ARRAY_COUNT(contestantIds));
+    for (i = 0, numAfter = 0; i < 4; i++)
     {
-        if (shared192D0.turnOrder[shared192D0.contestant] < shared192D0.turnOrder[r6] &&
-            !sContestantStatus[r6].nervous && !Contest_IsMonsTurnDisabled(r6))
-            sp00[r4++] = r6;
+        if (shared192D0.turnOrder[shared192D0.contestant] < shared192D0.turnOrder[i] &&
+            !sContestantStatus[i].nervous && !Contest_IsMonsTurnDisabled(i))
+            contestantIds[numAfter++] = i;
     }
 
-    if (r4 == 1)
+    if (numAfter == 1)
     {
-        sp10[0] = 60;
+        odds[0] = 60;
     }
-    else if (r4 == 2)
+    else if (numAfter == 2)
     {
-        sp10[0] = 30;
-        sp10[1] = 30;
+        odds[0] = 30;
+        odds[1] = 30;
     }
-    else if (r4 == 3)
+    else if (numAfter == 3)
     {
-        sp10[0] = 20;
-        sp10[1] = 20;
-        sp10[2] = 20;
+        odds[0] = 20;
+        odds[1] = 20;
+        odds[2] = 20;
     }
     else
     {
-        for (r6 = 0; r6 < 4; r6++)
-            sp10[r6] = 0;
+        for (i = 0; i < 4; i++)
+            odds[i] = 0;
     }
-    for (r6 = 0; r6 < 4; r6++)
+    for (i = 0; i < 4; i++)
     {
-        if (sContestantStatus[r6].hasJudgesAttention && sub_80B214C(r6))
-            sp08[r6] = gComboStarterLookupTable[gContestMoves[sContestantStatus[r6].prevMove].comboStarterId] * 10;
+        if (sContestantStatus[i].hasJudgesAttention && sub_80B214C(i))
+            oddsMod[i] = gComboStarterLookupTable[gContestMoves[sContestantStatus[i].prevMove].comboStarterId] * 10;
         else
-            sp08[r6] = 0;
-        sp08[r6] -= (sContestantStatus[r6].condition / 10) * 10;
+            oddsMod[i] = 0;
+        oddsMod[i] -= (sContestantStatus[i].condition / 10) * 10;
     }
-    if (sp10[0] != 0)
+    if (odds[0] != 0)
     {
-        for (r6 = 0; sp00[r6] != 0xFF; r6++)
+        for (i = 0; contestantIds[i] != 0xFF; i++)
         {
-            if (Random() % 100 < sp10[r6] + sp08[sp00[r6]])
+            if (Random() % 100 < odds[i] + oddsMod[contestantIds[i]])
             {
-                if (CanUnnerveContestant(sp00[r6]))
+                if (CanUnnerveContestant(contestantIds[i]))
                 {
-                    MakeContestantNervous(sp00[r6]);
-                    SetContestantEffectStringID(sp00[r6], 10);
-                    r9++;
+                    MakeContestantNervous(contestantIds[i]);
+                    SetContestantEffectStringID(contestantIds[i], 10);
+                    numUnnerved++;
                 } else
-                    sp18 = TRUE;
+                    contestantUnnerved = TRUE;
             } else
-                sp18 = TRUE;
-            if (sp18)
+                contestantUnnerved = TRUE;
+            if (contestantUnnerved)
             {
-                sp18 = FALSE;
-                SetContestantEffectStringID(sp00[r6], 60);
-                r9++;
+                contestantUnnerved = FALSE;
+                SetContestantEffectStringID(contestantIds[i], 60);
+                numUnnerved++;
             }
-            shared192D0.unnervedPokes[sp00[r6]] = 1;
+            shared192D0.unnervedPokes[contestantIds[i]] = 1;
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 11);
-    if (r9 == 0)
+    if (numUnnerved == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
 }
 
 static void ContestEffect_27(void)
 // Worsens the condition of those that made appeals.
 {
-    u8 r8 = 0;
-    int r6;
+    u8 numHit = 0;
+    int i;
 
-    for (r6 = 0; r6 < 4; r6++)
+    for (i = 0; i < 4; i++)
     {
-        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[r6] &&
-            sContestantStatus[r6].condition > 0 &&
-            CanUnnerveContestant(r6))
+        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[i] &&
+            sContestantStatus[i].condition > 0 &&
+            CanUnnerveContestant(i))
         {
-            sContestantStatus[r6].condition = 0;
-            sContestantStatus[r6].conditionMod = 2;
-            SetContestantEffectStringID(r6, 13);
-            r8++;
+            sContestantStatus[i].condition = 0;
+            sContestantStatus[i].conditionMod = 2;
+            SetContestantEffectStringID(i, 13);
+            numHit++;
         }
     }
 
     SetContestantEffectStringID(shared192D0.contestant, 12);
-    if (r8 == 0)
+    if (numHit == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x39);
 }
 
 static void ContestEffect_28(void)
 // Badly startles POKéMON in good condition.
 {
-    u8 r7 = 0;
-    int r5;
+    u8 numHit = 0;
+    int i;
 
-    for (r5 = 0; r5 < 4; r5++)
+    for (i = 0; i < 4; i++)
     {
-        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[r5])
+        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[i])
         {
-            if (sContestantStatus[r5].condition > 0)
+            if (sContestantStatus[i].condition > 0)
                 shared192D0.jam = 40;
             else
                 shared192D0.jam = 10;
-            shared192D0.jamQueue[0] = r5;
+            shared192D0.jamQueue[0] = i;
             shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
-                r7++;
+                numHit++;
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 14);
-    if (r7 == 0)
+    if (numHit == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x39);
 }
 
@@ -525,21 +525,21 @@ static void ContestEffect_30(void)
 static void ContestEffect_31(void)
 // Makes the appeal as good as those before it.
 {
-    int r1;
-    int r3;
+    int i;
+    int appealSum;
 
-    for (r1 = 0, r3 = 0; r1 < 4; r1++)
+    for (i = 0, appealSum = 0; i < 4; i++)
     {
-        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[r1])
-            r3 += sContestantStatus[r1].appeal2;
+        if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[i])
+            appealSum += sContestantStatus[i].appeal2;
     }
-    if (r3 < 0)
-        r3 = 0;
-    if (shared192D0.turnOrder[shared192D0.contestant] == 0 || r3 == 0)
+    if (appealSum < 0)
+        appealSum = 0;
+    if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appealSum == 0)
         SetContestantEffectStringID(shared192D0.contestant, 18);
     else
     {
-        sContestantStatus[shared192D0.contestant].appeal2 += r3 / 2;
+        sContestantStatus[shared192D0.contestant].appeal2 += appealSum / 2;
         SetContestantEffectStringID(shared192D0.contestant, 17);
     }
     sContestantStatus[shared192D0.contestant].appeal2 = RoundTowardsZero(sContestantStatus[shared192D0.contestant].appeal2);
@@ -548,7 +548,7 @@ static void ContestEffect_31(void)
 static void ContestEffect_32(void)
 // Makes the appeal as good as the one before it.
 {
-    s16 r6 = 0;
+    s16 appeal = 0;
 
     if (shared192D0.turnOrder[shared192D0.contestant] != 0)
     {
@@ -556,14 +556,14 @@ static void ContestEffect_32(void)
         for (i = 0; i < 4; i++)
         {
             if (shared192D0.turnOrder[shared192D0.contestant] - 1 == shared192D0.turnOrder[i])
-                r6 = sContestantStatus[i].appeal2;
+                appeal = sContestantStatus[i].appeal2;
         }
     }
-    if (shared192D0.turnOrder[shared192D0.contestant] == 0 || r6 <= 0)
+    if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appeal <= 0)
         SetContestantEffectStringID(shared192D0.contestant, 20);
     else
     {
-        sContestantStatus[shared192D0.contestant].appeal2 += r6;
+        sContestantStatus[shared192D0.contestant].appeal2 += appeal;
         SetContestantEffectStringID(shared192D0.contestant, 19);
     }
 }
@@ -571,16 +571,16 @@ static void ContestEffect_32(void)
 static void ContestEffect_33(void)
 // The appeal works better the later it is performed.
 {
-    u8 r3 = shared192D0.turnOrder[shared192D0.contestant];
-    if (r3 == 0)
+    u8 whichTurn = shared192D0.turnOrder[shared192D0.contestant];
+    if (whichTurn == 0)
         sContestantStatus[shared192D0.contestant].appeal2 = 10;
     else
-        sContestantStatus[shared192D0.contestant].appeal2 = 20 * r3;
-    if (r3 == 0)
+        sContestantStatus[shared192D0.contestant].appeal2 = 20 * whichTurn;
+    if (whichTurn == 0)
         SetContestantEffectStringID(shared192D0.contestant, 21);
-    else if (r3 == 1)
+    else if (whichTurn == 1)
         SetContestantEffectStringID(shared192D0.contestant, 22);
-    else if (r3 == 2)
+    else if (whichTurn == 2)
         SetContestantEffectStringID(shared192D0.contestant, 23);
     else
         SetContestantEffectStringID(shared192D0.contestant, 24);
@@ -589,32 +589,32 @@ static void ContestEffect_33(void)
 static void ContestEffect_34(void)
 // The appeal’s quality varies depending on its timing.
 {
-    u8 r0 = Random() % 10;
-    s16 r4;
+    u8 rval = Random() % 10;
+    s16 appeal;
 
-    if (r0 < 3)
+    if (rval < 3)
     {
-        r4 = 10;
+        appeal = 10;
         SetContestantEffectStringID(shared192D0.contestant, 26);
-    } else if (r0 < 6)
+    } else if (rval < 6)
     {
-        r4 = 20;
+        appeal = 20;
         SetContestantEffectStringID(shared192D0.contestant, 27);
-    } else if (r0 < 8)
+    } else if (rval < 8)
     {
-        r4 = 40;
+        appeal = 40;
         SetContestantEffectStringID(shared192D0.contestant, 28);
-    } else if (r0 < 9)
+    } else if (rval < 9)
     {
-        r4 = 60;
+        appeal = 60;
         SetContestantEffectStringID(shared192D0.contestant, 29);
     }
     else
     {
-        r4 = 80;
+        appeal = 80;
         SetContestantEffectStringID(shared192D0.contestant, 30);
     }
-    sContestantStatus[shared192D0.contestant].appeal2 = r4;
+    sContestantStatus[shared192D0.contestant].appeal2 = appeal;
 }
 
 #ifdef NONMATCHING
@@ -837,24 +837,24 @@ static void ContestEffect_40(void)
 {
     s8 i;
     s8 j;
-    u8 sp00[4];
+    u8 turnOrder[4];
 
     if (sContest.turnNumber != 4)
     {
         for (i = 0; i < 4; i++)
-            sp00[i] = sContestantStatus[i].nextTurnOrder;
+            turnOrder[i] = sContestantStatus[i].nextTurnOrder;
 
-        sp00[shared192D0.contestant] = 0xFF;
+        turnOrder[shared192D0.contestant] = 0xFF;
 
         for (i = 0; i < 4; i++)
         {
             for (j = 0; j < 4; j++)
             {
                 if (j != shared192D0.contestant &&
-                    i == sp00[j] &&
-                    sp00[j] == sContestantStatus[j].nextTurnOrder)
+                    i == turnOrder[j] &&
+                    turnOrder[j] == sContestantStatus[j].nextTurnOrder)
                 {
-                    sp00[j]++;
+                    turnOrder[j]++;
                     break;
                 }
             }
@@ -862,12 +862,12 @@ static void ContestEffect_40(void)
                 break;
         }
 
-        sp00[shared192D0.contestant] = 0;
+        turnOrder[shared192D0.contestant] = 0;
         sContestantStatus[shared192D0.contestant].turnOrderMod = 1;
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].nextTurnOrder = sp00[i];
+            sContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 1;
         SetContestantEffectStringID(shared192D0.contestant, 37);
@@ -879,24 +879,24 @@ static void ContestEffect_41(void)
 {
     s8 i;
     s8 j;
-    u8 sp00[4];
+    u8 turnOrder[4];
 
     if (sContest.turnNumber != 4)
     {
         for (i = 0; i < 4; i++)
-            sp00[i] = sContestantStatus[i].nextTurnOrder;
+            turnOrder[i] = sContestantStatus[i].nextTurnOrder;
 
-        sp00[shared192D0.contestant] = 0xFF;
+        turnOrder[shared192D0.contestant] = 0xFF;
 
         for (i = 3; i > -1; i--)
         {
             for (j = 0; j < 4; j++)
             {
                 if (j != shared192D0.contestant &&
-                    i == sp00[j] &&
-                    sp00[j] == sContestantStatus[j].nextTurnOrder)
+                    i == turnOrder[j] &&
+                    turnOrder[j] == sContestantStatus[j].nextTurnOrder)
                 {
-                    sp00[j]--;
+                    turnOrder[j]--;
                     break;
                 }
             }
@@ -904,12 +904,12 @@ static void ContestEffect_41(void)
                 break;
         }
 
-        sp00[shared192D0.contestant] = 3;
+        turnOrder[shared192D0.contestant] = 3;
         sContestantStatus[shared192D0.contestant].turnOrderMod = 1;
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].nextTurnOrder = sp00[i];
+            sContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 2;
         SetContestantEffectStringID(shared192D0.contestant, 38);
@@ -927,15 +927,15 @@ static void ContestEffect_43(void)
 {
     s8 i;
     s8 j;
-    u8 sp00[4];
-    u8 sp04[4];
+    u8 turnOrder[4];
+    u8 unselectedContestants[4];
 
     if (sContest.turnNumber != 4)
     {
         for (i = 0; i < 4; i++)
         {
-            sp00[i] = sContestantStatus[i].nextTurnOrder;
-            sp04[i] = i;
+            turnOrder[i] = sContestantStatus[i].nextTurnOrder;
+            unselectedContestants[i] = i;
         }
 
         for (i = 0; i < 4; i++)
@@ -944,12 +944,12 @@ static void ContestEffect_43(void)
 
             for (j = 0; j < 4; j++)
             {
-                if (sp04[j] != 0xFF)
+                if (unselectedContestants[j] != 0xFF)
                 {
                     if (r4 == 0)
                     {
-                        sp00[j] = i;
-                        sp04[j] = 0xFF;
+                        turnOrder[j] = i;
+                        unselectedContestants[j] = 0xFF;
                         break;
                     }
                     else
@@ -960,7 +960,7 @@ static void ContestEffect_43(void)
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].nextTurnOrder = sp00[i];
+            sContestantStatus[i].nextTurnOrder = turnOrder[i];
             sContestantStatus[i].turnOrderMod = 2;
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 3;
@@ -1052,7 +1052,7 @@ static void ContestEffect_47(void)
 static void JamByMoveCategory(u8 category)
 {
     int i;
-    int r7 = 0;
+    int numJammed = 0;
 
     for (i = 0; i < 4; i++)
     {
@@ -1065,11 +1065,11 @@ static void JamByMoveCategory(u8 category)
             shared192D0.jamQueue[0] = i;
             shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
-                r7++;
+                numJammed++;
         }
     }
 
-    if (r7 == 0)
+    if (numJammed == 0)
         SetContestantEffectStringID2(shared192D0.contestant, 0x36);
 }
 
@@ -1151,7 +1151,7 @@ static __attribute__((naked)) bool8 CanUnnerveContestant(u8 i)
 
 static bool8 WasAtLeastOneOpponentJammed(void)
 {
-    s16 sp00[4] = {0};
+    s16 jamBuffer[4] = {0};
     int i;
 
     for (i = 0; shared192D0.jamQueue[i] != 0xFF; i++)
@@ -1174,25 +1174,25 @@ static bool8 WasAtLeastOneOpponentJammed(void)
             }
             else
             {
-                sub_80B9200(r4, shared192D0.jam2);
+                JamContestant(r4, shared192D0.jam2);
                 sub_80B141C(r4, shared192D0.jam2);
-                sp00[r4] = shared192D0.jam2;
+                jamBuffer[r4] = shared192D0.jam2;
             }
         }
     }
 
     for (i = 0; i < 4; i++)
     {
-        if (sp00[i] != 0)
+        if (jamBuffer[i] != 0)
             return TRUE;
     }
     return FALSE;
 }
 
-static void sub_80B9200(u8 i, u8 jam)
+static void JamContestant(u8 i, u8 jam)
 {
     sContestantStatus[i].appeal2 -= jam;
-    sContestantStatus[i].unkE += jam;
+    sContestantStatus[i].jam += jam;
 }
 
 static s16 RoundTowardsZero(s16 score)

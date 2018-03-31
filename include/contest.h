@@ -266,7 +266,7 @@ struct ContestantStatus
  /*0x0C*/ u8 nervous:1;
           u8 numTurnsSkipped:2;
  /*0x0D*/ s8 condition;
- /*0x0E*/ u8 unkE;
+ /*0x0E*/ u8 jam;
  /*0x0F*/ u8 jamReduction;
 
           // Flags set by move effect
@@ -290,7 +290,7 @@ struct ContestantStatus
           u8 unk15_2:1;
           u8 unk15_3:1;
           u8 hasJudgesAttention:1;
-          u8 unk15_5:1;
+          u8 judgesAttentionWasRemoved:1;
           u8 unk15_6:1;
  /*0x16*/ u8 unk16;
  /*0x17*/ u8 unk17;
