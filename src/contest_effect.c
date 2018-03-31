@@ -54,8 +54,6 @@ static void sub_80B9200(u8, u8);
 static s16 RoundTowardsZero(s16);
 static s16 RoundUp(s16);
 
-#define abs(x) ((x) >= 0 ? (x) : -(x))
-
 #include "data/contest_moves.h"
 
 bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove) {
@@ -144,8 +142,8 @@ static void ContestEffect_08(void)
             if (shared192D0.turnOrder[a] - 1 == shared192D0.turnOrder[i])
                 break;
         }
-        shared192D0.unk8[0] = i;
-        shared192D0.unk8[1] = 0xFF;
+        shared192D0.jamQueue[0] = i;
+        shared192D0.jamQueue[1] = 0xFF;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -165,8 +163,8 @@ static void ContestEffect_09(void)
 
         for (i = 0; i < 4; i++)
             if (shared192D0.turnOrder[a] > shared192D0.turnOrder[i])
-                shared192D0.unk8[j++] = i;
-        shared192D0.unk8[j] = 0xFF;
+                shared192D0.jamQueue[j++] = i;
+        shared192D0.jamQueue[j] = 0xFF;
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
@@ -178,7 +176,8 @@ static void ContestEffect_14(void)
 // Startles the POKéMON that appealed before the user.
 {
     u8 r0 = Random() % 10;
-    int r1 = 20;
+    int r1;
+
     if (r0 < 2)
         r1 = 20;
     else if (r0 < 8)
@@ -203,11 +202,12 @@ static void ContestEffect_15(void)
         {
             if (shared192D0.turnOrder[r6] > shared192D0.turnOrder[r5])
             {
-                shared192D0.unk8[0] = r5;
-                shared192D0.unk8[1] = 0xFF;
+                shared192D0.jamQueue[0] = r5;
+                shared192D0.jamQueue[1] = 0xFF;
                 {
                 u8 r0 = Random() % 10;
                 int r1;
+
                 if (r0 == 0)
                     r1 = 0;
                 else if (r0 <= 2)
@@ -280,8 +280,8 @@ static void ContestEffect_17(void)
                     shared192D0.jam = 50;
                 else
                     shared192D0.jam = 10;
-                shared192D0.unk8[0] = r5;
-                shared192D0.unk8[1] = 0xFF;
+                shared192D0.jamQueue[0] = r5;
+                shared192D0.jamQueue[1] = 0xFF;
                 if (WasAtLeastOneOpponentJammed())
                     r9++;
             }
@@ -489,8 +489,8 @@ static void ContestEffect_28(void)
                 shared192D0.jam = 40;
             else
                 shared192D0.jam = 10;
-            shared192D0.unk8[0] = r5;
-            shared192D0.unk8[1] = 0xFF;
+            shared192D0.jamQueue[0] = r5;
+            shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
                 r7++;
         }
@@ -994,8 +994,8 @@ static void ContestEffect_45(void)
             }
             else
                 shared192D0.jam = 10;
-            shared192D0.unk8[0] = i;
-            shared192D0.unk8[1] = 0xFF;
+            shared192D0.jamQueue[0] = i;
+            shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
                 r7++;
         }
@@ -1062,8 +1062,8 @@ static void JamByMoveCategory(u8 category)
                 shared192D0.jam = 40;
             else
                 shared192D0.jam = 10;
-            shared192D0.unk8[0] = i;
-            shared192D0.unk8[1] = 0xFF;
+            shared192D0.jamQueue[0] = i;
+            shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
                 r7++;
         }
@@ -1153,9 +1153,9 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     s16 sp00[4] = {0};
     int i;
 
-    for (i = 0; shared192D0.unk8[i] != 0xFF; i++)
+    for (i = 0; shared192D0.jamQueue[i] != 0xFF; i++)
     {
-        u8 r4 = shared192D0.unk8[i];
+        u8 r4 = shared192D0.jamQueue[i];
         if (sub_80B90C0(r4))
         {
             shared192D0.jam2 = shared192D0.jam;

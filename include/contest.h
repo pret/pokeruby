@@ -297,16 +297,6 @@ struct ContestantStatus
  /*0x1B*/ u8 unk1B;
 };
 
-struct UnknownContestStruct3
-{
-    u8 unk0;
-    u8 unk1;
-    //u8 unk2_0:1;
-    //u8 unk2_1:1;
-    u8 unk2;  // maybe a bitfield
-    u8 filler3;
-};
-
 // possibly the same as UnknownContestStruct3?
 struct UnknownContestStruct4
 {
@@ -315,7 +305,6 @@ struct UnknownContestStruct4
     u8 unk2_0:1;
     u8 unk2_1:1;
     u8 unk2_2:1;
-    u8 filler3;
 };
 
 struct UnknownContestStruct5
@@ -331,7 +320,7 @@ struct UnknownContestStruct7
     u8 turnOrder[4];
     s16 jam;
     s16 jam2;
-    u8 unk8[5];
+    u8 jamQueue[5];
     u8 unkD[4];
     u8 contestant;
 };
