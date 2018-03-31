@@ -82,14 +82,14 @@ static void ContestEffect_01(void)
 // After this move, the user is more easily startled.
 {
     sContestantStatus[shared192D0.contestant].moreEasilyStartled = TRUE;
-    SetContestantEffectStringID(shared192D0.contestant, 0);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_MORE_CONSCIOUS);
 }
 
 static void ContestEffect_02(void)
 // Makes a great appeal, but allows no more to the end.
 {
     sContestantStatus[shared192D0.contestant].exploded = TRUE;
-    SetContestantEffectStringID(shared192D0.contestant, 1);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_APPEAL);
 }
 
 static void ContestEffect_03(void)
@@ -104,28 +104,28 @@ static void ContestEffect_04(void)
 // Can avoid being startled by others once.
 {
     sContestantStatus[shared192D0.contestant].jamSafetyCount = 1;
-    SetContestantEffectStringID(shared192D0.contestant, 2);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SETTLE_DOWN);
 }
 
 static void ContestEffect_05(void)
 // Can avoid being startled by others.
 {
     sContestantStatus[shared192D0.contestant].immune = TRUE;
-    SetContestantEffectStringID(shared192D0.contestant, 3);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_OBLIVIOUS_TO_OTHERS);
 }
 
 static void ContestEffect_06(void)
 // Can avoid being startled by others a little.
 {
     sContestantStatus[shared192D0.contestant].jamReduction = 20;
-    SetContestantEffectStringID(shared192D0.contestant, 4);
+    SetContestantEffectStringID(shared192D0.contestant,CONTEST_STRING_LESS_AWARE);
 }
 
 static void ContestEffect_07(void)
 // After this move, the user is less likely to be startled.
 {
     sContestantStatus[shared192D0.contestant].resistant = TRUE;
-    SetContestantEffectStringID(shared192D0.contestant, 5);
+    SetContestantEffectStringID(shared192D0.contestant,CONTEST_STRING_STOPPED_CARING);
 }
 
 static void ContestEffect_08(void)
@@ -147,8 +147,8 @@ static void ContestEffect_08(void)
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_09(void)
@@ -168,8 +168,8 @@ static void ContestEffect_09(void)
         idx = WasAtLeastOneOpponentJammed();
     }
     if (idx == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_14(void)
@@ -227,9 +227,9 @@ static void ContestEffect_15(void)
             }
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
     if (numStartled == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
 static void ContestEffect_16(void)
@@ -250,15 +250,15 @@ static void ContestEffect_16(void)
             {
                 sContestantStatus[i].hasJudgesAttention = FALSE;
                 sContestantStatus[i].judgesAttentionWasRemoved = TRUE;
-                SetContestantEffectStringID(i, 8);
+                SetContestantEffectStringID(i, CONTEST_STRING_JUDGE_LOOK_AWAY2);
                 hitAny = TRUE;
             }
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 7);
+    SetContestantEffectStringID(shared192D0.contestant,CONTEST_STRING_DAZZLE_ATTEMPT);
     if (!hitAny)
     {
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
     }
 }
 
@@ -287,9 +287,9 @@ static void ContestEffect_17(void)
             }
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
     if (numStartled == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
 static void ContestEffect_18(void)
@@ -297,7 +297,7 @@ static void ContestEffect_18(void)
 {
     sContestantStatus[shared192D0.contestant].turnSkipped = TRUE;
     ContestEffect_09();
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_19(void)
@@ -305,42 +305,42 @@ static void ContestEffect_19(void)
 {
     u16 move = sContestantStatus[shared192D0.contestant].currMove;
     JamByMoveCategory(gContestMoves[move].contestCategory);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_20(void)
 // Badly startles POKéMON that made COOL appeals.
 {
     JamByMoveCategory(CONTEST_CATEGORY_COOL);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_21(void)
 // Badly startles POKéMON that made BEAUTY appeals.
 {
     JamByMoveCategory(CONTEST_CATEGORY_BEAUTY);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_22(void)
 // Badly startles POKéMON that made CUTE appeals.
 {
     JamByMoveCategory(CONTEST_CATEGORY_CUTE);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_23(void)
 // Badly startles POKéMON that made SMART appeals.
 {
     JamByMoveCategory(CONTEST_CATEGORY_SMART);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_24(void)
 // Badly startles POKéMON that made TOUGH appeals.
 {
     JamByMoveCategory(CONTEST_CATEGORY_TOUGH);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_25(void)
@@ -359,20 +359,20 @@ static void ContestEffect_25(void)
                 if (CanUnnerveContestant(i))
                 {
                     MakeContestantNervous(i);
-                    SetContestantEffectStringID(i, 10);
+                    SetContestantEffectStringID(i, CONTEST_STRING_NERVOUS);
                     hitAny = TRUE;
                 }
                 else
                 {
-                    SetContestantEffectStringID(i, 60);
+                    SetContestantEffectStringID(i, CONTEST_STRING_UNAFFECTED);
                     hitAny = TRUE;
                 }
             }
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 9);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_UNNERVE_ATTEMPT);
     if (!hitAny)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
 static void ContestEffect_26(void)
@@ -431,7 +431,7 @@ static void ContestEffect_26(void)
                 if (CanUnnerveContestant(contestantIds[i]))
                 {
                     MakeContestantNervous(contestantIds[i]);
-                    SetContestantEffectStringID(contestantIds[i], 10);
+                    SetContestantEffectStringID(contestantIds[i], CONTEST_STRING_NERVOUS);
                     numUnnerved++;
                 } else
                     contestantUnnerved = TRUE;
@@ -440,15 +440,15 @@ static void ContestEffect_26(void)
             if (contestantUnnerved)
             {
                 contestantUnnerved = FALSE;
-                SetContestantEffectStringID(contestantIds[i], 60);
+                SetContestantEffectStringID(contestantIds[i], CONTEST_STRING_UNAFFECTED);
                 numUnnerved++;
             }
             shared192D0.unnervedPokes[contestantIds[i]] = 1;
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 11);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_UNNERVE_WAITING);
     if (numUnnerved == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
 static void ContestEffect_27(void)
@@ -465,14 +465,14 @@ static void ContestEffect_27(void)
         {
             sContestantStatus[i].condition = 0;
             sContestantStatus[i].conditionMod = 2;
-            SetContestantEffectStringID(i, 13);
+            SetContestantEffectStringID(i, CONTEST_STRING_REGAINED_FORM);
             numHit++;
         }
     }
 
-    SetContestantEffectStringID(shared192D0.contestant, 12);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_TAUNT_WELL);
     if (numHit == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x39);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_IGNORED);
 }
 
 static void ContestEffect_28(void)
@@ -495,9 +495,9 @@ static void ContestEffect_28(void)
                 numHit++;
         }
     }
-    SetContestantEffectStringID(shared192D0.contestant, 14);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_JAM_WELL);
     if (numHit == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x39);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_IGNORED);
 }
 
 static void ContestEffect_29(void)
@@ -507,7 +507,7 @@ static void ContestEffect_29(void)
     {
         u16 move = sContestantStatus[shared192D0.contestant].currMove;
         sContestantStatus[shared192D0.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
-        SetContestantEffectStringID(shared192D0.contestant, 15);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_HUSTLE_STANDOUT);
     }
 }
 
@@ -518,7 +518,7 @@ static void ContestEffect_30(void)
     {
         u16 move = sContestantStatus[shared192D0.contestant].currMove;
         sContestantStatus[shared192D0.contestant].appeal2 += 2 * gContestEffects[gContestMoves[move].effect].appeal;
-        SetContestantEffectStringID(shared192D0.contestant, 16);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_WORK_HARD_UNNOTICED);
     }
 }
 
@@ -536,11 +536,11 @@ static void ContestEffect_31(void)
     if (appealSum < 0)
         appealSum = 0;
     if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appealSum == 0)
-        SetContestantEffectStringID(shared192D0.contestant, 18);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_WELL);
     else
     {
         sContestantStatus[shared192D0.contestant].appeal2 += appealSum / 2;
-        SetContestantEffectStringID(shared192D0.contestant, 17);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_WORK_BEFORE);
     }
     sContestantStatus[shared192D0.contestant].appeal2 = RoundTowardsZero(sContestantStatus[shared192D0.contestant].appeal2);
 }
@@ -560,11 +560,11 @@ static void ContestEffect_32(void)
         }
     }
     if (shared192D0.turnOrder[shared192D0.contestant] == 0 || appeal <= 0)
-        SetContestantEffectStringID(shared192D0.contestant, 20);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_WELL2);
     else
     {
         sContestantStatus[shared192D0.contestant].appeal2 += appeal;
-        SetContestantEffectStringID(shared192D0.contestant, 19);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_WORK_PRECEDING);
     }
 }
 
@@ -577,13 +577,13 @@ static void ContestEffect_33(void)
     else
         sContestantStatus[shared192D0.contestant].appeal2 = 20 * whichTurn;
     if (whichTurn == 0)
-        SetContestantEffectStringID(shared192D0.contestant, 21);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_SHOWN_WELL);
     else if (whichTurn == 1)
-        SetContestantEffectStringID(shared192D0.contestant, 22);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_SLIGHTLY_WELL);
     else if (whichTurn == 2)
-        SetContestantEffectStringID(shared192D0.contestant, 23);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_PRETTY_WELL);
     else
-        SetContestantEffectStringID(shared192D0.contestant, 24);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY);
 }
 
 static void ContestEffect_34(void)
@@ -595,24 +595,24 @@ static void ContestEffect_34(void)
     if (rval < 3)
     {
         appeal = 10;
-        SetContestantEffectStringID(shared192D0.contestant, 26);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_VERY_WELL);
     } else if (rval < 6)
     {
         appeal = 20;
-        SetContestantEffectStringID(shared192D0.contestant, 27);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_SLIGHTLY_WELL2);
     } else if (rval < 8)
     {
         appeal = 40;
-        SetContestantEffectStringID(shared192D0.contestant, 28);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_PRETTY_WELL2);
     } else if (rval < 9)
     {
         appeal = 60;
-        SetContestantEffectStringID(shared192D0.contestant, 29);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_VERY_WELL);
     }
     else
     {
         appeal = 80;
-        SetContestantEffectStringID(shared192D0.contestant, 30);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY2);
     }
     sContestantStatus[shared192D0.contestant].appeal2 = appeal;
 }
@@ -639,7 +639,7 @@ static void ContestEffect_35(void)
             if (gContestMoves[move].contestCategory == gContestMoves[sContestantStatus[r2].currMove].contestCategory)
             {
                 sContestantStatus[shared192D0.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
-                SetContestantEffectStringID(shared192D0.contestant, 31);
+                SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
             }
             break;
         }
@@ -776,7 +776,7 @@ static void ContestEffect_36(void)
                 gContestMoves[move].contestCategory != gContestMoves[sContestantStatus[i].currMove].contestCategory)
             {
                 sContestantStatus[shared192D0.contestant].appeal2 += gContestEffects[gContestMoves[move].effect].appeal * 2;
-                SetContestantEffectStringID(shared192D0.contestant, 32);
+                SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_DIFF_TYPE_GOOD);
                 break;
             }
         }
@@ -797,12 +797,12 @@ static void ContestEffect_37(void)
                 if (sContestantStatus[shared192D0.contestant].appeal2 > sContestantStatus[i].appeal2)
                 {
                     sContestantStatus[shared192D0.contestant].appeal2 *= 2;
-                    SetContestantEffectStringID(shared192D0.contestant, 33);
+                    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_STOOD_OUT_AS_MUCH);
                 }
                 else if (sContestantStatus[shared192D0.contestant].appeal2 < sContestantStatus[i].appeal2)
                 {
                     sContestantStatus[shared192D0.contestant].appeal2 = 0;
-                    SetContestantEffectStringID(shared192D0.contestant, 34);
+                    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NOT_AS_WELL);
                 }
             }
         }
@@ -816,10 +816,10 @@ static void ContestEffect_38(void)
     {
         sContestantStatus[shared192D0.contestant].condition += 10;
         sContestantStatus[shared192D0.contestant].conditionMod = 1;
-        SetContestantEffectStringID(shared192D0.contestant, 35);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_CONDITION_ROSE);
     }
     else
-        SetContestantEffectStringID(shared192D0.contestant, 58);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_CONDITION_IMPROVE);
 }
 
 static void ContestEffect_39(void)
@@ -827,9 +827,9 @@ static void ContestEffect_39(void)
 {
     sContestantStatus[shared192D0.contestant].appealTripleCondition = TRUE;
     if (sContestantStatus[shared192D0.contestant].condition != 0)
-        SetContestantEffectStringID(shared192D0.contestant, 36);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_HOT_STATUS);
     else
-        SetContestantEffectStringID(shared192D0.contestant, 59);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_BAD_CONDITION_WEAK_APPEAL);
 }
 
 static void ContestEffect_40(void)
@@ -870,7 +870,7 @@ static void ContestEffect_40(void)
             sContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 1;
-        SetContestantEffectStringID(shared192D0.contestant, 37);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_MOVE_UP_LINE);
     }
 }
 
@@ -912,7 +912,7 @@ static void ContestEffect_41(void)
             sContestantStatus[i].nextTurnOrder = turnOrder[i];
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 2;
-        SetContestantEffectStringID(shared192D0.contestant, 38);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_MOVE_BACK_LINE);
     }
 }
 
@@ -964,7 +964,7 @@ static void ContestEffect_43(void)
             sContestantStatus[i].turnOrderMod = 2;
         }
         sContestantStatus[shared192D0.contestant].turnOrderModAction = 3;
-        SetContestantEffectStringID(shared192D0.contestant, 39);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SCRAMBLE_ORDER);
     }
 }
 
@@ -1001,8 +1001,8 @@ static void ContestEffect_45(void)
         }
     }
     if (r7 == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
-    SetContestantEffectStringID(shared192D0.contestant, 48);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
+    SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
 static void ContestEffect_46(void)
@@ -1013,27 +1013,27 @@ static void ContestEffect_46(void)
     if (sContest.applauseLevel == 0)
     {
         appeal = 10;
-        SetContestantEffectStringID(shared192D0.contestant, 26);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_NOT_VERY_WELL);
     }
     else if (sContest.applauseLevel == 1)
     {
         appeal = 20;
-        SetContestantEffectStringID(shared192D0.contestant, 27);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_SLIGHTLY_WELL2);
     }
     else if (sContest.applauseLevel == 2)
     {
         appeal = 30;
-        SetContestantEffectStringID(shared192D0.contestant, 28);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_PRETTY_WELL2);
     }
     else if (sContest.applauseLevel == 3)
     {
         appeal = 50;
-        SetContestantEffectStringID(shared192D0.contestant, 29);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_VERY_WELL);
     }
     else
     {
         appeal = 60;
-        SetContestantEffectStringID(shared192D0.contestant, 30);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY2);
     }
     sContestantStatus[shared192D0.contestant].appeal2 = appeal;
 }
@@ -1045,7 +1045,7 @@ static void ContestEffect_47(void)
     {
         shared19328.excitementFrozen = TRUE;
         shared19328.excitementFreezer = shared192D0.contestant;
-        SetContestantEffectStringID(shared192D0.contestant, 61);
+        SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTRACTED_ATTENTION);
     }
 }
 
@@ -1070,7 +1070,7 @@ static void JamByMoveCategory(u8 category)
     }
 
     if (numJammed == 0)
-        SetContestantEffectStringID2(shared192D0.contestant, 0x36);
+        SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
 #ifdef NONMATCHING
@@ -1080,12 +1080,12 @@ static bool8 CanUnnerveContestant(u8 i)
     shared192D0.unnervedPokes[i] = 1;
     if (sContestantStatus[i].immune)
     {
-        SetContestantEffectStringID(i, 45);
+        SetContestantEffectStringID(i, CONTEST_STRING_AVOID_SEEING);
     }
     else if (sContestantStatus[i].jamSafetyCount != 0)
     {
         sContestantStatus[i].jamSafetyCount--;
-        SetContestantEffectStringID(i, 44);
+        SetContestantEffectStringID(i, CONTEST_STRING_AVERT_GAZE);
     }
     else if (!sContestantStatus[i].noMoreTurns && sContestantStatus[i].numTurnsSkipped == 0)
         return TRUE;
@@ -1165,12 +1165,12 @@ static bool8 WasAtLeastOneOpponentJammed(void)
             if (sContestantStatus[r4].resistant)
             {
                 shared192D0.jam2 = 10;
-                SetContestantEffectStringID(r4, 47);
+                SetContestantEffectStringID(r4, CONTEST_STRING_LITTLE_DISTRACTED);
             }
             else if ((shared192D0.jam2 -= sContestantStatus[r4].jamReduction) <= 0)
             {
                 shared192D0.jam2 = 0;
-                SetContestantEffectStringID(r4, 46);
+                SetContestantEffectStringID(r4, CONTEST_STRING_NOT_FAZED);
             }
             else
             {

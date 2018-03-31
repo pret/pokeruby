@@ -4636,15 +4636,15 @@ void SetContestantEffectStringID2(u8 a, u8 b)
 void sub_80B141C(u8 a, u8 b)
 {
     if      (b >= 60)
-        SetContestantEffectStringID(a, 53);
+        SetContestantEffectStringID(a, CONTEST_STRING_TRIPPED_OVER);
     else if (b >= 40)
-        SetContestantEffectStringID(a, 52);
+        SetContestantEffectStringID(a, CONTEST_STRING_LEAPT_UP);
     else if (b >= 30)
-        SetContestantEffectStringID(a, 51);
+        SetContestantEffectStringID(a, CONTEST_STRING_UTTER_CRY);
     else if (b >= 20)
-        SetContestantEffectStringID(a, 50);
+        SetContestantEffectStringID(a, CONTEST_STRING_TURNED_BACK);
     else if (b >= 10)
-        SetContestantEffectStringID(a, 49);
+        SetContestantEffectStringID(a, CONTEST_STRING_LOOKED_DOWN);
 }
 
 void sub_80B146C(u8 a, u8 b)
