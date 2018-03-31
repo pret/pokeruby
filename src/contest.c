@@ -61,7 +61,6 @@ extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_WIN0H;
-extern u32 gContestRngValue;  // saved RNG value
 
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -401,7 +400,7 @@ void ClearContestVars(void)
         sub_80B0F28(0);
     for (i = 0; i < 4; i++)
     {
-        sContestantStatus[i].unk19 = 0xFF;
+        sContestantStatus[i].nextTurnOrder = 0xFF;
         sContest.unk19218[i] = gUnknown_02038696[i];
     }
     sub_80B159C();
@@ -1255,15 +1254,15 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 23;
         return;
     case 48:
-        if (sContestantStatus[r7].unk11_0 == 1)
+        if (sContestantStatus[r7].turnOrderModAction == 1)
         {
             sub_80B1710(5);
         }
-        else if (sContestantStatus[r7].unk11_0 == 2)
+        else if (sContestantStatus[r7].turnOrderModAction == 2)
         {
             sub_80B1710(6);
         }
-        else if (sContestantStatus[r7].unk11_0 == 3)
+        else if (sContestantStatus[r7].turnOrderModAction == 3)
         {
             sub_80B1710(7);
         }
@@ -1291,7 +1290,7 @@ void sub_80AC2CC(u8 taskId)
             gTasks[taskId].data[0] = 35;
         return;
     case 35:
-        if (sContestantStatus[r7].unk10_4 == 1)
+        if (sContestantStatus[r7].conditionMod == 1)
             sub_80B1710(8);
         gTasks[taskId].data[0] = 36;
         return;
@@ -1542,7 +1541,7 @@ void sub_80AC2CC(u8 taskId)
         else
         {
             r4 = shared19328.bits_0;
-            if (sContestantStatus[r7].unk11_4)
+            if (sContestantStatus[r7].overrideCategoryExcitementMod)
             {
                 r4 = 1;
                 StringCopy(gStringVar3, gMoveNames[sContestantStatus[r7].currMove]);
@@ -2678,10 +2677,10 @@ bool8 sub_80AEE54(u8 a, u8 b)
     u16 r8;
     s32 r4;
 
-    if (sContestantStatus[a].unk10_4 == 0)
+    if (sContestantStatus[a].conditionMod == 0)
         return FALSE;
     r9 = gUnknown_02038696[a] * 5 + 2;
-    if (sContestantStatus[a].unk10_4 == 1)
+    if (sContestantStatus[a].conditionMod == 1)
     {
         r8 = sub_80AEE4C(a);
         r4 = 0;
@@ -2693,7 +2692,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         if (b != 0)
         {
             PlaySE(SE_EXPMAX);
-            sContestantStatus[a].unk10_4 = 0;
+            sContestantStatus[a].conditionMod = 0;
         }
     }
     else
@@ -2708,7 +2707,7 @@ bool8 sub_80AEE54(u8 a, u8 b)
         if (b != 0)
         {
             PlaySE(SE_FU_ZAKU2);
-            sContestantStatus[a].unk10_4 = 0;
+            sContestantStatus[a].conditionMod = 0;
         }
     }
     return TRUE;
@@ -2976,11 +2975,11 @@ void sub_80AF438(void)
         sContestantStatus[i].nervous = 0;
         sContestantStatus[i].effectStringId = 0xFF;
         sContestantStatus[i].effectStringId2 = -1;
-        sContestantStatus[i].unk10_4 = 0;
+        sContestantStatus[i].conditionMod = 0;
         sContestantStatus[i].unk15_2 = sContestantStatus[i].disappointedRepeat;
         sContestantStatus[i].disappointedRepeat = FALSE;
-        sContestantStatus[i].unk11_0 = 0;
-        sContestantStatus[i].unk11_5 = 0;
+        sContestantStatus[i].turnOrderModAction = 0;
+        sContestantStatus[i].appealTripleCondition = 0;
         if (sContestantStatus[i].turnSkipped)
         {
             sContestantStatus[i].numTurnsSkipped = 1;
@@ -2991,7 +2990,7 @@ void sub_80AF438(void)
             sContestantStatus[i].noMoreTurns = 1;
             sContestantStatus[i].exploded = 0;
         }
-        sContestantStatus[i].unk11_4 = 0;
+        sContestantStatus[i].overrideCategoryExcitementMod = 0;
     }
     for (i = 0; i < 4; i++)
     {
@@ -4549,14 +4548,14 @@ void sub_80B114C(u8 contestant)
         for (i = 0; i < 4; i++)
         {
             sContestantStatus[i].unkE = 0;
-            shared192D0.unkD[i] = 0;
+            shared192D0.unnervedPokes[i] = 0;
         }
         if (sContestantStatus[contestant].hasJudgesAttention && AreMovesContestCombo(sContestantStatus[contestant].prevMove, sContestantStatus[contestant].currMove) == 0)
             sContestantStatus[contestant].hasJudgesAttention = 0;
         gContestEffectFuncs[effect]();
-        if (sContestantStatus[contestant].unk10_4 == 1)
+        if (sContestantStatus[contestant].conditionMod == 1)
             sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition - 10;
-        else if (sContestantStatus[contestant].unk11_5)
+        else if (sContestantStatus[contestant].appealTripleCondition)
             sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition * 3;
         else
             sContestantStatus[contestant].appeal2 += sContestantStatus[contestant].condition;
@@ -4596,7 +4595,7 @@ void sub_80B114C(u8 contestant)
             sContestantStatus[contestant].appeal1 = 0;
         }
         shared19328.bits_0 = Contest_GetMoveExcitement(sContestantStatus[contestant].currMove);
-        if (sContestantStatus[contestant].unk11_4)
+        if (sContestantStatus[contestant].overrideCategoryExcitementMod)
             shared19328.bits_0 = 1;
         if (shared19328.bits_0 > 0)
         {
@@ -4692,7 +4691,7 @@ void sub_80B159C(void)
     {
         for (j = 0; j < 4; j++)
         {
-            if (sContestantStatus[j].unk19 == i)
+            if (sContestantStatus[j].nextTurnOrder == i)
             {
                 sp0[j] = i;
                 sp4[j] = 1;
@@ -4703,7 +4702,7 @@ void sub_80B159C(void)
         {
             for (j = 0; j < 4; j++)
             {
-                if (sp4[j] == 0 && sContestantStatus[j].unk19 == 0xFF)
+                if (sp4[j] == 0 && sContestantStatus[j].nextTurnOrder == 0xFF)
                 {
                     r12 = j;
                     j++;
@@ -4712,7 +4711,7 @@ void sub_80B159C(void)
             }
             for (; j < 4; j++)
             {
-                if (sp4[j] == 0 && sContestantStatus[j].unk19 == 0xFF
+                if (sp4[j] == 0 && sContestantStatus[j].nextTurnOrder == 0xFF
                  && gUnknown_02038696[r12] > gUnknown_02038696[j])
                     r12 = j;
             }
@@ -4724,8 +4723,8 @@ void sub_80B159C(void)
     for (i = 0; i < 4; i++)
     {
         shared192D0.turnOrder[i] = sp0[i];
-        sContestantStatus[i].unk19 = 0xFF;
-        sContestantStatus[i].unk10_6 = 0;
+        sContestantStatus[i].nextTurnOrder = 0xFF;
+        sContestantStatus[i].turnOrderMod = 0;
         gUnknown_02038696[i] = sp0[i];
     }
 }
@@ -5068,7 +5067,7 @@ void sub_80B1FD0(bool8 a)
 
     for (i = 0; i < 4; i++)
     {
-        if (sContestantStatus[i].unk10_6 != 0 && a)
+        if (sContestantStatus[i].turnOrderMod != 0 && a)
         {
             CpuCopy32(
               GetTurnOrderNumberGfx(i),
@@ -5086,10 +5085,10 @@ void sub_80B1FD0(bool8 a)
 
 const u8 *GetTurnOrderNumberGfx(u8 contestant)
 {
-    if (sContestantStatus[contestant].unk10_6 != 1)
+    if (sContestantStatus[contestant].turnOrderMod != 1)
         return gContestNextTurnRandomGfx;
     else
-        return gContestNextTurnNumbersGfx + sContestantStatus[contestant].unk19 * 64;
+        return gContestNextTurnNumbersGfx + sContestantStatus[contestant].nextTurnOrder * 64;
 }
 
 void sub_80B20C4(void)
@@ -5098,7 +5097,7 @@ void sub_80B20C4(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (shared192D0.unkD[i] != 0 && !Contest_IsMonsTurnDisabled(i))
+        if (shared192D0.unnervedPokes[i] != 0 && !Contest_IsMonsTurnDisabled(i))
         {
             u8 r4 = gUnknown_02038696[i] * 5 + 2;
             u16 r0 = sub_80AEFE8(i, 3);

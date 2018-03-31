@@ -268,17 +268,20 @@ struct ContestantStatus
  /*0x0D*/ s8 condition;
  /*0x0E*/ u8 unkE;
  /*0x0F*/ u8 jamReduction;
+
+          // Flags set by move effect
  /*0x10*/ u8 resistant:1;
           u8 immune:1;
           u8 moreEasilyStartled:1;
           u8 usedRepeatableMove:1;
-          u8 unk10_4:2;
-          u8 unk10_6:2;
- /*0x11*/ u8 unk11_0:2;
+          u8 conditionMod:2; // 1: just raised condition; 2: appeal greatly improved by condition
+          u8 turnOrderMod:2; // 1: defined; 2: random
+ /*0x11*/ u8 turnOrderModAction:2; // 1: made first; 2: made last; 3: made random
           u8 turnSkipped:1;
           u8 exploded:1;
-          u8 unk11_4:1;
-          u8 unk11_5:1;
+          u8 overrideCategoryExcitementMod:1;
+          u8 appealTripleCondition:1;
+
  /*0x12*/ u8 jamSafetyCount;
  /*0x13*/ u8 effectStringId;   // status action?
  /*0x14*/ u8 effectStringId2;
@@ -292,7 +295,7 @@ struct ContestantStatus
  /*0x16*/ u8 unk16;
  /*0x17*/ u8 unk17;
  /*0x18*/ u8 unk18;
- /*0x19*/ u8 unk19;  // turn position
+ /*0x19*/ u8 nextTurnOrder;  // turn position
  /*0x1A*/ u8 attentionLevel;  // How much the Pokemon "stood out"
  /*0x1B*/ u8 unk1B;
 };
@@ -321,7 +324,7 @@ struct UnknownContestStruct7
     s16 jam;
     s16 jam2;
     u8 jamQueue[5];
-    u8 unkD[4];
+    u8 unnervedPokes[4];
     u8 contestant;
 };
 

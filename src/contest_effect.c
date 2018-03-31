@@ -48,7 +48,7 @@ static void ContestEffect_45(void);
 static void ContestEffect_46(void);
 static void ContestEffect_47(void);
 static void JamByMoveCategory(u8);
-static bool8 sub_80B90C0(u8);
+static bool8 CanUnnerveContestant(u8);
 static u8 WasAtLeastOneOpponentJammed(void);
 static void sub_80B9200(u8, u8);
 static s16 RoundTowardsZero(s16);
@@ -246,7 +246,7 @@ static void ContestEffect_16(void)
         {
             if (shared192D0.turnOrder[r7] > shared192D0.turnOrder[r6] &&
                 sContestantStatus[r6].hasJudgesAttention &&
-                sub_80B90C0(r6))
+                CanUnnerveContestant(r6))
             {
                 sContestantStatus[r6].hasJudgesAttention = FALSE;
                 sContestantStatus[r6].unk15_5 = TRUE;
@@ -356,7 +356,7 @@ static void ContestEffect_25(void)
         {
             if (shared192D0.turnOrder[shared192D0.contestant] + 1 == shared192D0.turnOrder[r5])
             {
-                if (sub_80B90C0(r5))
+                if (CanUnnerveContestant(r5))
                 {
                     MakeContestantNervous(r5);
                     SetContestantEffectStringID(r5, 10);
@@ -428,7 +428,7 @@ static void ContestEffect_26(void)
         {
             if (Random() % 100 < sp10[r6] + sp08[sp00[r6]])
             {
-                if (sub_80B90C0(sp00[r6]))
+                if (CanUnnerveContestant(sp00[r6]))
                 {
                     MakeContestantNervous(sp00[r6]);
                     SetContestantEffectStringID(sp00[r6], 10);
@@ -443,7 +443,7 @@ static void ContestEffect_26(void)
                 SetContestantEffectStringID(sp00[r6], 60);
                 r9++;
             }
-            shared192D0.unkD[sp00[r6]] = 1;
+            shared192D0.unnervedPokes[sp00[r6]] = 1;
         }
     }
     SetContestantEffectStringID(shared192D0.contestant, 11);
@@ -461,10 +461,10 @@ static void ContestEffect_27(void)
     {
         if (shared192D0.turnOrder[shared192D0.contestant] > shared192D0.turnOrder[r6] &&
             sContestantStatus[r6].condition > 0 &&
-            sub_80B90C0(r6))
+            CanUnnerveContestant(r6))
         {
             sContestantStatus[r6].condition = 0;
-            sContestantStatus[r6].unk10_4 = 2;
+            sContestantStatus[r6].conditionMod = 2;
             SetContestantEffectStringID(r6, 13);
             r8++;
         }
@@ -815,7 +815,7 @@ static void ContestEffect_38(void)
     if (sContestantStatus[shared192D0.contestant].condition < 30)
     {
         sContestantStatus[shared192D0.contestant].condition += 10;
-        sContestantStatus[shared192D0.contestant].unk10_4 = 1;
+        sContestantStatus[shared192D0.contestant].conditionMod = 1;
         SetContestantEffectStringID(shared192D0.contestant, 35);
     }
     else
@@ -825,7 +825,7 @@ static void ContestEffect_38(void)
 static void ContestEffect_39(void)
 // The appeal works well if the user’s condition is good.
 {
-    sContestantStatus[shared192D0.contestant].unk11_5 = TRUE;
+    sContestantStatus[shared192D0.contestant].appealTripleCondition = TRUE;
     if (sContestantStatus[shared192D0.contestant].condition != 0)
         SetContestantEffectStringID(shared192D0.contestant, 36);
     else
@@ -842,7 +842,7 @@ static void ContestEffect_40(void)
     if (sContest.turnNumber != 4)
     {
         for (i = 0; i < 4; i++)
-            sp00[i] = sContestantStatus[i].unk19;
+            sp00[i] = sContestantStatus[i].nextTurnOrder;
 
         sp00[shared192D0.contestant] = 0xFF;
 
@@ -852,7 +852,7 @@ static void ContestEffect_40(void)
             {
                 if (j != shared192D0.contestant &&
                     i == sp00[j] &&
-                    sp00[j] == sContestantStatus[j].unk19)
+                    sp00[j] == sContestantStatus[j].nextTurnOrder)
                 {
                     sp00[j]++;
                     break;
@@ -863,13 +863,13 @@ static void ContestEffect_40(void)
         }
 
         sp00[shared192D0.contestant] = 0;
-        sContestantStatus[shared192D0.contestant].unk10_6 = 1;
+        sContestantStatus[shared192D0.contestant].turnOrderMod = 1;
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].unk19 = sp00[i];
+            sContestantStatus[i].nextTurnOrder = sp00[i];
         }
-        sContestantStatus[shared192D0.contestant].unk11_0 = 1;
+        sContestantStatus[shared192D0.contestant].turnOrderModAction = 1;
         SetContestantEffectStringID(shared192D0.contestant, 37);
     }
 }
@@ -884,7 +884,7 @@ static void ContestEffect_41(void)
     if (sContest.turnNumber != 4)
     {
         for (i = 0; i < 4; i++)
-            sp00[i] = sContestantStatus[i].unk19;
+            sp00[i] = sContestantStatus[i].nextTurnOrder;
 
         sp00[shared192D0.contestant] = 0xFF;
 
@@ -894,7 +894,7 @@ static void ContestEffect_41(void)
             {
                 if (j != shared192D0.contestant &&
                     i == sp00[j] &&
-                    sp00[j] == sContestantStatus[j].unk19)
+                    sp00[j] == sContestantStatus[j].nextTurnOrder)
                 {
                     sp00[j]--;
                     break;
@@ -905,13 +905,13 @@ static void ContestEffect_41(void)
         }
 
         sp00[shared192D0.contestant] = 3;
-        sContestantStatus[shared192D0.contestant].unk10_6 = 1;
+        sContestantStatus[shared192D0.contestant].turnOrderMod = 1;
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].unk19 = sp00[i];
+            sContestantStatus[i].nextTurnOrder = sp00[i];
         }
-        sContestantStatus[shared192D0.contestant].unk11_0 = 2;
+        sContestantStatus[shared192D0.contestant].turnOrderModAction = 2;
         SetContestantEffectStringID(shared192D0.contestant, 38);
     }
 }
@@ -934,7 +934,7 @@ static void ContestEffect_43(void)
     {
         for (i = 0; i < 4; i++)
         {
-            sp00[i] = sContestantStatus[i].unk19;
+            sp00[i] = sContestantStatus[i].nextTurnOrder;
             sp04[i] = i;
         }
 
@@ -960,10 +960,10 @@ static void ContestEffect_43(void)
 
         for (i = 0; i < 4; i++)
         {
-            sContestantStatus[i].unk19 = sp00[i];
-            sContestantStatus[i].unk10_6 = 2;
+            sContestantStatus[i].nextTurnOrder = sp00[i];
+            sContestantStatus[i].turnOrderMod = 2;
         }
-        sContestantStatus[shared192D0.contestant].unk11_0 = 3;
+        sContestantStatus[shared192D0.contestant].turnOrderModAction = 3;
         SetContestantEffectStringID(shared192D0.contestant, 39);
     }
 }
@@ -973,7 +973,7 @@ static void ContestEffect_44(void)
 {
     if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory != gSpecialVar_ContestCategory)
     {
-        sContestantStatus[shared192D0.contestant].unk11_4 = TRUE;
+        sContestantStatus[shared192D0.contestant].overrideCategoryExcitementMod = TRUE;
     }
 }
 
@@ -1074,9 +1074,10 @@ static void JamByMoveCategory(u8 category)
 }
 
 #ifdef NONMATCHING
-static bool8 sub_80B90C0(u8 i)
+static bool8 CanUnnerveContestant(u8 i)
 {
-    shared192D0.unkD[i] = 1;
+    // For whatever reason, i is copied to r4.  I cannot optimize this out.
+    shared192D0.unnervedPokes[i] = 1;
     if (sContestantStatus[i].immune)
     {
         SetContestantEffectStringID(i, 45);
@@ -1091,7 +1092,7 @@ static bool8 sub_80B90C0(u8 i)
     return FALSE;
 }
 #else
-static __attribute__((naked)) bool8 sub_80B90C0(u8 i)
+static __attribute__((naked)) bool8 CanUnnerveContestant(u8 i)
 {
     asm_unified("\tpush {lr}\n"
                 "\tlsls r0, 24\n"
@@ -1156,7 +1157,7 @@ static bool8 WasAtLeastOneOpponentJammed(void)
     for (i = 0; shared192D0.jamQueue[i] != 0xFF; i++)
     {
         u8 r4 = shared192D0.jamQueue[i];
-        if (sub_80B90C0(r4))
+        if (CanUnnerveContestant(r4))
         {
             shared192D0.jam2 = shared192D0.jam;
             if (sContestantStatus[r4].moreEasilyStartled)
