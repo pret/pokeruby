@@ -187,7 +187,6 @@ void sub_80AE6E4(u8, u8);
 u8 CreateJudgeSprite(void);
 u8 sub_80AE8B4(void);
 u8 sub_80AE9FC(u16, u32, u32);
-bool8 IsSpeciesNotUnown(u16);
 void sub_80AEB30(void);
 void sub_80AEBEC(u16);
 void sub_80AED58(void);
@@ -246,7 +245,6 @@ void sub_80B146C(u8, u8);
 void sub_80B159C(void);
 void sub_80B1710(u8);
 void sub_80B1928(void);
-s8 Contest_GetMoveExcitement(u16);
 u8 sub_80B1A2C(void);
 void c3_08130B10(u8);
 void sub_80B1B14(void);
@@ -262,7 +260,6 @@ void sub_80B1F4C(u8);
 void sub_80B1FD0(bool8);
 const u8 *GetTurnOrderNumberGfx(u8);
 void sub_80B20C4(void);
-bool8 sub_80B214C(u8);
 void sub_80B2184(void);
 void sub_80B2280(void);
 void sub_80B237C(u8);
@@ -4633,24 +4630,24 @@ void SetContestantEffectStringID2(u8 a, u8 b)
     sContestantStatus[a].effectStringId2 = b;
 }
 
-void sub_80B141C(u8 a, u8 b)
+void SetStartledString(u8 contestant, u8 jam)
 {
-    if      (b >= 60)
-        SetContestantEffectStringID(a, CONTEST_STRING_TRIPPED_OVER);
-    else if (b >= 40)
-        SetContestantEffectStringID(a, CONTEST_STRING_LEAPT_UP);
-    else if (b >= 30)
-        SetContestantEffectStringID(a, CONTEST_STRING_UTTER_CRY);
-    else if (b >= 20)
-        SetContestantEffectStringID(a, CONTEST_STRING_TURNED_BACK);
-    else if (b >= 10)
-        SetContestantEffectStringID(a, CONTEST_STRING_LOOKED_DOWN);
+    if      (jam >= 60)
+        SetContestantEffectStringID(contestant, CONTEST_STRING_TRIPPED_OVER);
+    else if (jam >= 40)
+        SetContestantEffectStringID(contestant, CONTEST_STRING_LEAPT_UP);
+    else if (jam >= 30)
+        SetContestantEffectStringID(contestant, CONTEST_STRING_UTTER_CRY);
+    else if (jam >= 20)
+        SetContestantEffectStringID(contestant, CONTEST_STRING_TURNED_BACK);
+    else if (jam >= 10)
+        SetContestantEffectStringID(contestant, CONTEST_STRING_LOOKED_DOWN);
 }
 
-void sub_80B146C(u8 a, u8 b)
+void sub_80B146C(u8 contestant, u8 stringId)
 {
-    StringCopy(gStringVar1, gContestMons[a].nickname);
-    StringCopy(gStringVar2, gMoveNames[sContestantStatus[a].currMove]);
+    StringCopy(gStringVar1, gContestMons[contestant].nickname);
+    StringCopy(gStringVar2, gMoveNames[sContestantStatus[contestant].currMove]);
     if      (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_COOL)
         StringCopy(gStringVar3, gText_Contest_Shyness);
     else if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory == CONTEST_CATEGORY_BEAUTY)
@@ -4661,7 +4658,7 @@ void sub_80B146C(u8 a, u8 b)
         StringCopy(gStringVar3, gText_Contest_Hesitancy);
     else
         StringCopy(gStringVar3, gText_Contest_Fear);
-    StringExpandPlaceholders(gStringVar4, gUnknown_083CC188[b]);
+    StringExpandPlaceholders(gStringVar4, gUnknown_083CC188[stringId]);
     sub_80AF138();
     Text_InitWindow8002EB0(&gMenuWindow, gStringVar4, 776, 1, 15);
 }

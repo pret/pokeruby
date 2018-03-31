@@ -940,20 +940,20 @@ static void ContestEffect_43(void)
 
         for (i = 0; i < 4; i++)
         {
-            u8 r4 = Random() % (4 - i);
+            u8 rval = Random() % (4 - i);
 
             for (j = 0; j < 4; j++)
             {
                 if (unselectedContestants[j] != 0xFF)
                 {
-                    if (r4 == 0)
+                    if (rval == 0)
                     {
                         turnOrder[j] = i;
                         unselectedContestants[j] = 0xFF;
                         break;
                     }
                     else
-                        r4--;
+                        rval--;
                 }
             }
         }
@@ -981,7 +981,7 @@ static void ContestEffect_45(void)
 // Badly startles all POKéMON that made good appeals.
 {
     int i;
-    u8 r7 = 0;
+    u8 numJammed = 0;
 
     for (i = 0; i < 4; i++)
     {
@@ -997,10 +997,10 @@ static void ContestEffect_45(void)
             shared192D0.jamQueue[0] = i;
             shared192D0.jamQueue[1] = 0xFF;
             if (WasAtLeastOneOpponentJammed())
-                r7++;
+                numJammed++;
         }
     }
-    if (r7 == 0)
+    if (numJammed == 0)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
@@ -1156,27 +1156,27 @@ static bool8 WasAtLeastOneOpponentJammed(void)
 
     for (i = 0; shared192D0.jamQueue[i] != 0xFF; i++)
     {
-        u8 r4 = shared192D0.jamQueue[i];
-        if (CanUnnerveContestant(r4))
+        u8 contestant = shared192D0.jamQueue[i];
+        if (CanUnnerveContestant(contestant))
         {
             shared192D0.jam2 = shared192D0.jam;
-            if (sContestantStatus[r4].moreEasilyStartled)
+            if (sContestantStatus[contestant].moreEasilyStartled)
                 shared192D0.jam2 *= 2;
-            if (sContestantStatus[r4].resistant)
+            if (sContestantStatus[contestant].resistant)
             {
                 shared192D0.jam2 = 10;
-                SetContestantEffectStringID(r4, CONTEST_STRING_LITTLE_DISTRACTED);
+                SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
             }
-            else if ((shared192D0.jam2 -= sContestantStatus[r4].jamReduction) <= 0)
+            else if ((shared192D0.jam2 -= sContestantStatus[contestant].jamReduction) <= 0)
             {
                 shared192D0.jam2 = 0;
-                SetContestantEffectStringID(r4, CONTEST_STRING_NOT_FAZED);
+                SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
             }
             else
             {
-                JamContestant(r4, shared192D0.jam2);
-                sub_80B141C(r4, shared192D0.jam2);
-                jamBuffer[r4] = shared192D0.jam2;
+                JamContestant(contestant, shared192D0.jam2);
+                SetStartledString(contestant, shared192D0.jam2);
+                jamBuffer[contestant] = shared192D0.jam2;
             }
         }
     }
@@ -1197,21 +1197,21 @@ static void JamContestant(u8 i, u8 jam)
 
 static s16 RoundTowardsZero(s16 score)
 {
-    s16 r1 = abs(score) % 10;
+    s16 absScore = abs(score) % 10;
     if (score < 0)
     {
-        if (r1 != 0)
-            score -= 10 - r1;
+        if (absScore != 0)
+            score -= 10 - absScore;
     }
     else
-        score -= r1;
+        score -= absScore;
     return score;
 }
 
 static s16 RoundUp(s16 score)
 {
-    s16 r1 = abs(score) % 10;
-    if (r1 != 0)
-        score += 10 - r1;
+    s16 absScore = abs(score) % 10;
+    if (absScore != 0)
+        score += 10 - absScore;
     return score;
 }

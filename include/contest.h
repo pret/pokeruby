@@ -445,6 +445,6 @@ void SetContestantEffectStringID2(u8 a, u8 b);
 void MakeContestantNervous(u8 p);
 bool8 Contest_IsMonsTurnDisabled(u8 a);
 bool8 sub_80B214C(u8 a);
-void sub_80B141C(u8 a, u8 b);
+void SetStartledString(u8 a, u8 b);
 
 #endif // GUARD_CONTEST_H
