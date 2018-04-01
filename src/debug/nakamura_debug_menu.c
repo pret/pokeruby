@@ -1,11 +1,13 @@
 #if DEBUG
 #include "global.h"
+#include "random.h"
 #include "palette.h"
 #include "main.h"
 #include "overworld.h"
 #include "start_menu.h"
 #include "party_menu.h"
 #include "choose_party.h"
+#include "secret_base.h"
 #include "menu.h"
 
 typedef bool8 (*MenuFunc)(void);
@@ -255,6 +257,60 @@ bool8 debug_sub_815F2B4(void)
     gMain.savedCallback = sub_805469C;
     CreateTask(debug_sub_815F284, 0);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    return TRUE;
+}
+
+bool8 debug_sub_815F2F4(void)
+{
+    u8 i;
+    CloseMenu();
+
+    for (i = 1; i < 20; i++)
+    {
+        if (gSaveBlock1.secretBases[i].secretBaseId == 0)
+        {
+            u8 j;
+
+            for (j = 0; j < 7; j++)
+            {
+                gSaveBlock1.secretBases[i].playerName[j] = gSaveBlock2.playerName[j];
+                if (gSaveBlock1.secretBases[i].playerName[j] == EOS)
+                    break;
+            }
+
+            if (j == 7)
+                gSaveBlock1.secretBases[i].playerName[j - 1] = CHAR_A + i - 1;
+            else
+                gSaveBlock1.secretBases[i].playerName[j] = CHAR_A + i - 1;
+
+            do
+            {
+                gSaveBlock1.secretBases[i].secretBaseId = _843E424[Random() % ARRAY_COUNT(_843E424)][0];
+
+                for (j = 0; j < i; j++)
+                {
+                    if (gSaveBlock1.secretBases[i].secretBaseId == gSaveBlock1.secretBases[j].secretBaseId)
+                        break;
+                }
+            } while (j != i);
+
+            gSaveBlock1.secretBases[i].gender = Random() % 2;
+
+            for (j = 0; j < 4; j++)
+            {
+                gSaveBlock1.secretBases[i].trainerId[j] = Random();
+            }
+
+            for (j = 0; j < 16; j++)
+            {
+                gSaveBlock1.secretBases[i].decorations[j] = 0;
+                gSaveBlock1.secretBases[i].decorationPos[j] = 0;
+            }
+
+            unref_sub_80BCD7C(i);
+        }
+    }
+
     return TRUE;
 }
 

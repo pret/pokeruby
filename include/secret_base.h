@@ -20,5 +20,8 @@ u8 sub_80BCCA4(u8 secretBaseIndex);
 const u8 *GetSecretBaseTrainerLoseText(void);
 void sub_80BCF1C(u8 taskId);
 void sub_80BD674(void *playerRecords, u32 size, u8 c);
+#if DEBUG
+void unref_sub_80BCD7C(u8 secretBaseIndex);
+#endif
 
 #endif // GUARD_SECRET_BASE_H
