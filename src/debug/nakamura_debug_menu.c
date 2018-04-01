@@ -32,13 +32,14 @@ asm(".global _nakamuraStatic0");
 asm(".global _nakamuraStatic18");
 
 bool8 debug_sub_815F214(void);
-bool8 debug_sub_815FC54(void);
 bool8 debug_sub_815F2B4(void);
-bool8 debug_sub_815FC94(void);
-bool8 debug_sub_815FB1C(void);
 bool8 debug_sub_815F2F4(void);
 bool8 debug_sub_815F62C(void);
+bool8 debug_sub_815FA38(void);
+bool8 debug_sub_815FB1C(void);
 bool8 debug_sub_815FBE8(void);
+bool8 debug_sub_815FC54(void);
+bool8 debug_sub_815FC94(void);
 bool8 debug_sub_815FE1C(void);
 bool8 debug_sub_8160D98(void);
 
@@ -467,5 +468,267 @@ void debug_sub_815F7F0(s8 a0)
     otIdPtr[0] = (otId & 0x000000FF) >> 0;
     debug_sub_815F668();
 }
+
+void debug_sub_815F86C(s8 a0)
+{
+    u8 * namePtr = gSaveBlock1.secretBases[_nakamuraData0].playerName;
+    u8 r2 = 0;
+    u8 r3 = 0;
+    u8 i;
+
+    if (a0 == 100)
+    {
+        for (i = _nakamuraData2; i < 7; i++)
+        {
+            namePtr[i] = EOS;
+        }
+    }
+    else
+    {
+        switch (_nakamuraData3)
+        {
+            case 0:
+                r3 = 1;
+                r2 = 80;
+                break;
+            case 1:
+                r3 = 81;
+                r2 = 160;
+                break;
+            case 2:
+                r3 = CHAR_A;
+                r2 = CHAR_Z;
+                break;
+            case 3:
+                r3 = CHAR_a;
+                r2 = CHAR_z;
+                break;
+            case 4:
+                r3 = CHAR_0;
+                r2 = CHAR_0 + 9;
+                break;
+        }
+
+        namePtr[_nakamuraData2] += a0;
+        if (namePtr[_nakamuraData2] < r3)
+            namePtr[_nakamuraData2] = r2;
+        if (namePtr[_nakamuraData2] > r2)
+            namePtr[_nakamuraData2] = r3;
+    }
+    debug_sub_815F6E4();
+}
+
+#ifdef NONMATCHING
+bool8 debug_sub_815F930(void)
+{
+    u32 r4 = _nakamuraData1 == 0 ? 7 : 10;
+
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (_nakamuraData1)
+            debug_sub_815F7F0(1);
+        else
+            debug_sub_815F86C(1);
+    }
+
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (_nakamuraData1)
+            debug_sub_815F7F0(-1);
+        else
+            debug_sub_815F86C(-1);
+    }
+
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (_nakamuraData2 == 0)
+            _nakamuraData2 = r4 - 1;
+        else
+            _nakamuraData2--;
+        debug_sub_815F788();
+    }
+
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (_nakamuraData2 == r4 - 1)
+            _nakamuraData2 = 0;
+        else
+            _nakamuraData2++;
+        debug_sub_815F788();
+    }
+
+    else if (gMain.newKeys & SELECT_BUTTON)
+    {
+        if (_nakamuraData1 == 0)
+            _nakamuraData3 = (_nakamuraData3 + 1) % 5;
+        debug_sub_815F7B4();
+    }
+
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        Menu_BlankWindowRect(2, 5, 11, 6);
+        Menu_BlankWindowRect(11, 1, 11, 2);
+        gMenuCallback = debug_sub_815FA38;
+    }
+
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        if (_nakamuraData1 == 0)
+            debug_sub_815F86C(100);
+    }
+
+    return FALSE;
+}
+#else
+__attribute__((naked)) bool8 debug_sub_815F930(void)
+{
+    asm("\tpush\t{r4, r5, lr}\n"
+        "\tldr\tr0, ._107       @ _nakamuraData1\n"
+        "\tldrb\tr2, [r0]\n"
+        "\tmov\tr4, #0xa\n"
+        "\tcmp\tr2, #0\n"
+        "\tbne\t._103\t@cond_branch\n"
+        "\tmov\tr4, #0x7\n"
+        "._103:\n"
+        "\tldr\tr5, ._107 + 4   @ gMain\n"
+        "\tldrh\tr1, [r5, #0x30]\n"
+        "\tmov\tr0, #0x40\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._104\t@cond_branch\n"
+        "\tcmp\tr2, #0\n"
+        "\tbeq\t._105\t@cond_branch\n"
+        "\tmov\tr0, #0x1\n"
+        "\tbl\tdebug_sub_815F7F0\n"
+        "\tb\t._136\n"
+        "._108:\n"
+        "\t.align\t2, 0\n"
+        "._107:\n"
+        "\t.word\t_nakamuraData1\n"
+        "\t.word\tgMain\n"
+        "._105:\n"
+        "\tmov\tr0, #0x1\n"
+        "\tb\t._113\n"
+        "._104:\n"
+        "\tmov\tr0, #0x80\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._110\t@cond_branch\n"
+        "\tcmp\tr2, #0\n"
+        "\tbeq\t._111\t@cond_branch\n"
+        "\tmov\tr0, #0x1\n"
+        "\tneg\tr0, r0\n"
+        "\tbl\tdebug_sub_815F7F0\n"
+        "\tb\t._136\n"
+        "._111:\n"
+        "\tmov\tr0, #0x1\n"
+        "\tneg\tr0, r0\n"
+        "\tb\t._113\n"
+        "._110:\n"
+        "\tmov\tr0, #0x20\n"
+        "\tand\tr0, r0, r1\n"
+        "\tlsl\tr0, r0, #0x10\n"
+        "\tlsr\tr3, r0, #0x10\n"
+        "\tcmp\tr3, #0\n"
+        "\tbeq\t._114\t@cond_branch\n"
+        "\tldr\tr1, ._117       @ _nakamuraData2\n"
+        "\tldrb\tr0, [r1]\n"
+        "\tcmp\tr0, #0\n"
+        "\tbne\t._115\t@cond_branch\n"
+        "\tsub\tr0, r4, #1\n"
+        "\tb\t._116\n"
+        "._118:\n"
+        "\t.align\t2, 0\n"
+        "._117:\n"
+        "\t.word\t_nakamuraData2\n"
+        "._115:\n"
+        "\tsub\tr0, r0, #0x1\n"
+        "._116:\n"
+        "\tstrb\tr0, [r1]\n"
+        "._125:\n"
+        "\tbl\tdebug_sub_815F788\n"
+        "\tb\t._136\n"
+        "._114:\n"
+        "\tmov\tr0, #0x10\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._120\t@cond_branch\n"
+        "\tldr\tr2, ._123       @ _nakamuraData2\n"
+        "\tldrb\tr1, [r2]\n"
+        "\tsub\tr0, r4, #1\n"
+        "\tcmp\tr1, r0\n"
+        "\tbne\t._121\t@cond_branch\n"
+        "\tstrb\tr3, [r2]\n"
+        "\tb\t._125\n"
+        "._124:\n"
+        "\t.align\t2, 0\n"
+        "._123:\n"
+        "\t.word\t_nakamuraData2\n"
+        "._121:\n"
+        "\tadd\tr0, r1, #1\n"
+        "\tstrb\tr0, [r2]\n"
+        "\tb\t._125\n"
+        "._120:\n"
+        "\tldrh\tr1, [r5, #0x2e]\n"
+        "\tmov\tr0, #0x4\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._126\t@cond_branch\n"
+        "\tcmp\tr2, #0\n"
+        "\tbne\t._127\t@cond_branch\n"
+        "\tldr\tr4, ._129       @ _nakamuraData3\n"
+        "\tldrb\tr0, [r4]\n"
+        "\tadd\tr0, r0, #0x1\n"
+        "\tmov\tr1, #0x5\n"
+        "\tbl\t__modsi3\n"
+        "\tstrb\tr0, [r4]\n"
+        "._127:\n"
+        "\tbl\tdebug_sub_815F7B4\n"
+        "\tb\t._136\n"
+        "._130:\n"
+        "\t.align\t2, 0\n"
+        "._129:\n"
+        "\t.word\t_nakamuraData3\n"
+        "._126:\n"
+        "\tmov\tr0, #0x1\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._131\t@cond_branch\n"
+        "\tmov\tr0, #0x2\n"
+        "\tmov\tr1, #0x5\n"
+        "\tmov\tr2, #0xb\n"
+        "\tmov\tr3, #0x6\n"
+        "\tbl\tMenu_BlankWindowRect\n"
+        "\tmov\tr0, #0xb\n"
+        "\tmov\tr1, #0x1\n"
+        "\tmov\tr2, #0xb\n"
+        "\tmov\tr3, #0x2\n"
+        "\tbl\tMenu_BlankWindowRect\n"
+        "\tldr\tr1, ._133       @ gMenuCallback\n"
+        "\tldr\tr0, ._133 + 4   @ debug_sub_815FA38\n"
+        "\tstr\tr0, [r1]\n"
+        "\tb\t._136\n"
+        "._134:\n"
+        "\t.align\t2, 0\n"
+        "._133:\n"
+        "\t.word\tgMenuCallback\n"
+        "\t.word\tdebug_sub_815FA38+1\n"
+        "._131:\n"
+        "\tmov\tr0, #0x2\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._136\t@cond_branch\n"
+        "\tcmp\tr2, #0\n"
+        "\tbne\t._136\t@cond_branch\n"
+        "\tmov\tr0, #0x64\n"
+        "._113:\n"
+        "\tbl\tdebug_sub_815F86C\n"
+        "._136:\n"
+        "\tmov\tr0, #0x0\n"
+        "\tpop\t{r4, r5}\n"
+        "\tpop\t{r1}\n"
+        "\tbx\tr1");
+}
+#endif // NONMATCHING
 
 #endif // DEBUG
