@@ -58,6 +58,7 @@ struct UnkEwramStruct18018 {
 
 #define eContestLink80C2020Struct2018000 (*(struct UnkEwramStruct18000 *)(gSharedMem + 0x18000))
 #define eContestLink80C2020Struct2018018 (*(struct UnkEwramStruct18018 *)(gSharedMem + 0x18018))
+#define eContestLink80C2020Struct2018068 (gSharedMem + 0x18068)
 
 static void sub_80C2430(void);
 static void sub_80C2448(void);
@@ -895,13 +896,125 @@ static void LoadAllContestMonIcons(u8 srcOffset, bool8 useDmaNow)
         sub_80C3024(gContestMons[i].species, i, srcOffset, useDmaNow, gContestMons[i].personality);
     }
 }
-//
-//void sub_80C310C(void) {
-//    int i;
-//
-//    for (i = 0; i < 4; i++)
-//    {
-//        u16 species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
-//        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[species]], 0xa0 + 0x10 * i, 0x20);
-//    }
-//}
+
+#ifdef NONMATCHING
+void sub_80C310C(void)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 species = mon_icon_convert_unown_species_id(gContestMons[i].species, 0);
+        LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[species]], 0xa0 + 0x10 * i, 0x20);
+    }
+}
+#else
+__attribute__((naked)) void sub_80C310C(void)
+{
+    asm_unified("\tpush {r4-r6,lr}\n"
+                "\tmovs r4, 0\n"
+                "\tldr r6, _080C314C @ =gMonIconPaletteIndices\n"
+                "\tmovs r5, 0xA0\n"
+                "\tlsls r5, 16\n"
+                "_080C3116:\n"
+                "\tldr r1, _080C3150 @ =gContestMons\n"
+                "\tlsls r0, r4, 6\n"
+                "\tadds r0, r1\n"
+                "\tldrh r0, [r0]\n"
+                "\tmovs r1, 0\n"
+                "\tbl mon_icon_convert_unown_species_id\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tadds r0, r6\n"
+                "\tldrb r0, [r0]\n"
+                "\tlsls r0, 5\n"
+                "\tldr r1, _080C3154 @ =gMonIconPalettes\n"
+                "\tadds r0, r1\n"
+                "\tlsrs r1, r5, 16\n"
+                "\tmovs r2, 0x20\n"
+                "\tbl LoadPalette\n"
+                "\tmovs r0, 0x80\n"
+                "\tlsls r0, 13\n"
+                "\tadds r5, r0\n"
+                "\tadds r4, 0x1\n"
+                "\tcmp r4, 0x3\n"
+                "\tble _080C3116\n"
+                "\tpop {r4-r6}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080C314C: .4byte gMonIconPaletteIndices\n"
+                "_080C3150: .4byte gContestMons\n"
+                "_080C3154: .4byte gMonIconPalettes");
+}
+#endif
+
+void sub_80C3158(const u8 *string, u8 spriteId)
+{
+    struct Sprite *sprite = gSprites + spriteId;
+    u16 sp00[4] = {
+        sprite->oam.tileNum,
+        gSprites[sprite->data[0]].oam.tileNum,
+        gSprites[sprite->data[1]].oam.tileNum,
+        gSprites[sprite->data[2]].oam.tileNum
+    };
+    int i;
+    u8 width;
+    u8 * displayedStringBattle;
+    void * dest;
+
+    for (i = 0; i < 4; i++)
+    {
+        DmaFill32(3, 0, BG_CHAR_ADDR(4) + 32 * sp00[i], 0x400);
+    }
+
+    width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
+    displayedStringBattle = gDisplayedStringBattle;
+    displayedStringBattle = StringCopy(displayedStringBattle, gUnknown_083D17E2);
+    if ((~width + 1) & 7)
+    {
+        displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+        displayedStringBattle[1] = 0x11;
+        displayedStringBattle[2] = ((~width + 1) & 7) / 2;
+        displayedStringBattle += 3;
+    }
+    width = (width + 7) & (~8);
+    displayedStringBattle = StringCopy(displayedStringBattle, string);
+
+    displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+    displayedStringBattle[1] = 0x13;
+    displayedStringBattle[2] = width;
+    displayedStringBattle[3] = EOS;
+
+    sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
+
+    CpuCopy32(gUnknown_083D1624, BG_CHAR_ADDR(4) + 32 * sp00[0], 32);
+    CpuCopy32(gUnknown_083D1624 + 0x40, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x100, 32);
+    CpuCopy32(gUnknown_083D1624 + 0x40, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x200, 32);
+    CpuCopy32(gUnknown_083D1624 + 0x20, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x300, 32);
+
+    for (i = 0; i < width / 8; i++)
+    {
+        if (i < 7)
+            dest = (void *)VRAM + 0x10020 + 32 * sp00[0] + 32 * i;
+        else if (i < 15)
+            dest = (void *)VRAM + 0x0FF20 + 32 * sp00[0] + 32 * i;
+        else if (i < 23)
+            dest = (void *)VRAM + 0x0FE20 + 32 * sp00[0] + 32 * i;
+        else
+            dest = (void *)VRAM + 0x0FD20 + 32 * sp00[0] + 32 * i;
+
+        if (i != width / 8)
+        {
+            CpuCopy32(gUnknown_083D16E4, dest, 32);
+            CpuCopy32(gUnknown_083D16E4 + 0x10, dest + 0x300, 32);
+            CpuCopy32(eContestLink80C2020Struct2018068 + 0x40 * i, dest + 0x100, 32);
+            CpuCopy32(eContestLink80C2020Struct2018068 + 0x20 + 0x40 * i, dest + 0x200, 32);
+        }
+    }
+
+    CpuCopy32(gUnknown_083D1644, dest, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x100, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x200, 32);
+    CpuCopy32(gUnknown_083D1644 + 0x20, dest + 0x300, 32);
+}
