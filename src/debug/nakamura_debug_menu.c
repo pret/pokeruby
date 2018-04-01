@@ -158,11 +158,13 @@ const u8 Str_843E556[] = _(
     "♀4\n"
     "♀5");
 const u8 Str_843E574[] = _("ー");
-const u8 Str_843E576[] = _("あ");
-const u8 Str_843E578[] = _("ア");
-const u8 Str_843E57A[] = _("A");
-const u8 Str_843E57C[] = _("a");
-const u8 Str_843E57E[] = _("0");
+const u8 Str_843E576[][2] = {
+    _("あ"),
+    _("ア"),
+    _("A"),
+    _("a"),
+    _("0")
+};
 const u8 Str_843E580[] = _(
     "ADD\n"
     "DEL\n"
@@ -391,6 +393,79 @@ bool8 debug_sub_815F5C4(void)
     }
 
     return FALSE;
+}
+
+bool8 debug_sub_815F62C(void)
+{
+    _nakamuraData0 = 0;
+    gMenuCallback = debug_sub_815F5C4;
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    Menu_DrawStdWindowFrame(0, 0, 11, 11);
+    debug_sub_815F4D8();
+    return FALSE;
+}
+
+void debug_sub_815F668(void)
+{
+    u8 * otIdPtr = gSaveBlock1.secretBases[_nakamuraData0].trainerId;
+    u32 otId = (otIdPtr[3] << 24) | (otIdPtr[2] << 16) | (otIdPtr[1] << 8) | (otIdPtr[0] << 0);
+    ConvertIntToDecimalStringN(gStringVar1, otId / 100000, STR_CONV_MODE_LEADING_ZEROS, 5);
+    Menu_PrintText(gStringVar1, 2, 7);
+    ConvertIntToDecimalStringN(gStringVar1, otId % 100000, STR_CONV_MODE_LEADING_ZEROS, 5);
+    Menu_PrintText(gStringVar1, 7, 7);
+}
+
+void debug_sub_815F6E4(void)
+{
+    Menu_BlankWindowRect(2, 3, 11, 4);
+    *StringCopyN(gStringVar1, gSaveBlock1.secretBases[_nakamuraData0].playerName, 7) = EOS;
+    Menu_PrintText(gStringVar1, 2, 3);
+}
+
+void debug_sub_815F72C(void)
+{
+    Menu_BlankWindowRect(2, 1, 11, 10);
+
+    ConvertIntToDecimalStringN(gStringVar1, _nakamuraData0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    Menu_PrintText(gStringVar1, 2, 1);
+
+    if (gSaveBlock1.secretBases[_nakamuraData0].secretBaseId != 0)
+    {
+        debug_sub_815F6E4();
+        debug_sub_815F668();
+    }
+}
+
+void debug_sub_815F788(void)
+{
+    Menu_BlankWindowRect(2, 5, 11, 6);
+    Menu_PrintText(Str_843E574, _nakamuraData2 + 2, 5);
+}
+
+void debug_sub_815F7B4(void)
+{
+    if (_nakamuraData1)
+        Menu_BlankWindowRect(11, 1, 11, 2);
+    else
+        Menu_PrintText(Str_843E576[_nakamuraData3], 11, 1);
+}
+
+void debug_sub_815F7F0(s8 a0)
+{
+    u8 * otIdPtr = gSaveBlock1.secretBases[_nakamuraData0].trainerId;
+    u32 otId = (otIdPtr[3] << 24) | (otIdPtr[2] << 16) | (otIdPtr[1] << 8) | (otIdPtr[0] << 0);
+    s8 r4;
+    int r1 = a0;
+
+    for (r4 = 9; r4 > _nakamuraData2; r4--)
+        r1 *= 10;
+
+    otId += r1;
+    otIdPtr[3] = (otId & 0xFF000000) >> 24;
+    otIdPtr[2] = (otId & 0x00FF0000) >> 16;
+    otIdPtr[1] = (otId & 0x0000FF00) >> 8;
+    otIdPtr[0] = (otId & 0x000000FF) >> 0;
+    debug_sub_815F668();
 }
 
 #endif // DEBUG
