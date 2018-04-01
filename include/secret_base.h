@@ -22,6 +22,7 @@ void sub_80BCF1C(u8 taskId);
 void sub_80BD674(void *playerRecords, u32 size, u8 c);
 #if DEBUG
 void unref_sub_80BCD7C(u8 secretBaseIndex);
+u8 *sub_80BC190(u8 *dest, u8 arg1);
 #endif
 
 #endif // GUARD_SECRET_BASE_H

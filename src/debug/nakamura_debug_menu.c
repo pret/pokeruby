@@ -3,6 +3,7 @@
 #include "random.h"
 #include "palette.h"
 #include "main.h"
+#include "string_util.h"
 #include "overworld.h"
 #include "start_menu.h"
 #include "party_menu.h"
@@ -64,82 +65,82 @@ const struct MenuAction _843E3DC[] = {
 	{ Str_843E3AF, debug_sub_8160D98 },
 };
 
-const u8 _843E424[][4] = {
-    {    1,   118,    47,    14 },
-    {    2,   125,    53,    10 },
-    {    3,   113,    49,     8 },
-    {  0xB,   118,    67,     6 },
-    {  0xC,   121,    40,    11 },
-    {  0xD,   111,    35,     1 },
-    { 0x15,   115,    20,    53 },
-    { 0x16,   121,    18,    13 },
-    { 0x17,   119,    26,    81 },
-    { 0x1F,   127,    59,    67 },
-    { 0x20,   125,    55,    11 },
-    { 0x21,   111,    27,    27 },
-    { 0x29,   114,     9,    47 },
-    { 0x2A,   115,    32,    39 },
-    { 0x2B,   115,    23,     8 },
-    { 0x33,   114,    30,    51 },
-    { 0x34,   115,    26,    15 },
-    { 0x35,   115,    32,    46 },
-    { 0x3D,   114,    11,    62 },
-    { 0x3E,   115,    21,    18 },
-    { 0x3F,   115,    25,    24 },
-    { 0x47,   114,    19,    70 },
-    { 0x48,   115,    32,     6 },
-    { 0x49,   114,    32,    57 },
-    { 0x51,   116,    71,     4 },
-    { 0x52,   123,    47,     3 },
-    { 0x53,   123,    57,     5 },
-    { 0x5B,   116,    79,    11 },
-    { 0x5C,   123,    49,     3 },
-    { 0x5D,   120,    18,    12 },
-    { 0x65,   120,    28,    62 },
-    { 0x66,   116,    56,     6 },
-    { 0x67,   119,    16,    81 },
-    { 0x6F,   120,    30,    62 },
-    { 0x70,   116,    55,    15 },
-    { 0x71,   119,    16,    28 },
-    { 0x79,   111,    33,    34 },
-    { 0x7A,   118,    29,     5 },
-    { 0x7B,   127,    45,    24 },
-    { 0x83,   111,    24,    36 },
-    { 0x84,   125,     7,    25 },
-    { 0x85,   115,     8,    30 },
-    { 0x8D,   111,    34,    50 },
-    { 0x8E,   127,    59,    72 },
-    { 0x8F,   127,    61,    21 },
-    { 0x97,   127,    67,    63 },
-    { 0x98,   125,    24,    32 },
-    { 0x99,   111,    35,    31 },
-    { 0xA1,   111,    13,    19 },
-    { 0xA2,   121,    43,     7 },
-    { 0xA3,   118,    47,     5 },
-    { 0xA4,   111,    14,    19 },
-    { 0xAB,   118,    46,     5 },
-    { 0xAC,   121,    42,     7 },
-    { 0xAD,   119,    19,    76 },
-    { 0xAE,   115,     7,    20 },
-    { 0xB5,   110,    16,    25 },
-    { 0xB6,   114,    11,    27 },
-    { 0xB7,   115,     8,    20 },
-    { 0xBF,   110,    17,    25 },
-    { 0xC0,   114,    12,    27 },
-    { 0xC1,   119,    18,    76 },
-    { 0xC9,   119,     5,     2 },
-    { 0xCA,   119,     4,    89 },
-    { 0xCB,   120,    38,    54 },
-    { 0xCC,   120,     5,    76 },
-    { 0xD3,   119,     5,    15 },
-    { 0xD4,   119,     7,   101 },
-    { 0xD5,   120,    31,    23 },
-    { 0xDD,   119,    34,    24 },
-    { 0xDE,   120,    26,    10 },
-    { 0xDF,   119,     4,    15 },
-    { 0xE7,   119,    31,    73 },
-    { 0xE8,   120,    29,    85 },
-    { 0xE9,   119,     6,     2 },
+const u8 _843E424[] = {
+        1,   118,    47,    14 ,
+        2,   125,    53,    10 ,
+        3,   113,    49,     8 ,
+      0xB,   118,    67,     6 ,
+      0xC,   121,    40,    11 ,
+      0xD,   111,    35,     1 ,
+     0x15,   115,    20,    53 ,
+     0x16,   121,    18,    13 ,
+     0x17,   119,    26,    81 ,
+     0x1F,   127,    59,    67 ,
+     0x20,   125,    55,    11 ,
+     0x21,   111,    27,    27 ,
+     0x29,   114,     9,    47 ,
+     0x2A,   115,    32,    39 ,
+     0x2B,   115,    23,     8 ,
+     0x33,   114,    30,    51 ,
+     0x34,   115,    26,    15 ,
+     0x35,   115,    32,    46 ,
+     0x3D,   114,    11,    62 ,
+     0x3E,   115,    21,    18 ,
+     0x3F,   115,    25,    24 ,
+     0x47,   114,    19,    70 ,
+     0x48,   115,    32,     6 ,
+     0x49,   114,    32,    57 ,
+     0x51,   116,    71,     4 ,
+     0x52,   123,    47,     3 ,
+     0x53,   123,    57,     5 ,
+     0x5B,   116,    79,    11 ,
+     0x5C,   123,    49,     3 ,
+     0x5D,   120,    18,    12 ,
+     0x65,   120,    28,    62 ,
+     0x66,   116,    56,     6 ,
+     0x67,   119,    16,    81 ,
+     0x6F,   120,    30,    62 ,
+     0x70,   116,    55,    15 ,
+     0x71,   119,    16,    28 ,
+     0x79,   111,    33,    34 ,
+     0x7A,   118,    29,     5 ,
+     0x7B,   127,    45,    24 ,
+     0x83,   111,    24,    36 ,
+     0x84,   125,     7,    25 ,
+     0x85,   115,     8,    30 ,
+     0x8D,   111,    34,    50 ,
+     0x8E,   127,    59,    72 ,
+     0x8F,   127,    61,    21 ,
+     0x97,   127,    67,    63 ,
+     0x98,   125,    24,    32 ,
+     0x99,   111,    35,    31 ,
+     0xA1,   111,    13,    19 ,
+     0xA2,   121,    43,     7 ,
+     0xA3,   118,    47,     5 ,
+     0xA4,   111,    14,    19 ,
+     0xAB,   118,    46,     5 ,
+     0xAC,   121,    42,     7 ,
+     0xAD,   119,    19,    76 ,
+     0xAE,   115,     7,    20 ,
+     0xB5,   110,    16,    25 ,
+     0xB6,   114,    11,    27 ,
+     0xB7,   115,     8,    20 ,
+     0xBF,   110,    17,    25 ,
+     0xC0,   114,    12,    27 ,
+     0xC1,   119,    18,    76 ,
+     0xC9,   119,     5,     2 ,
+     0xCA,   119,     4,    89 ,
+     0xCB,   120,    38,    54 ,
+     0xCC,   120,     5,    76 ,
+     0xD3,   119,     5,    15 ,
+     0xD4,   119,     7,   101 ,
+     0xD5,   120,    31,    23 ,
+     0xDD,   119,    34,    24 ,
+     0xDE,   120,    26,    10 ,
+     0xDF,   119,     4,    15 ,
+     0xE7,   119,    31,    73 ,
+     0xE8,   120,    29,    85 ,
+     0xE9,   119,     6,     2 ,
 };
 
 const u8 Str_843E550[] = _("R");
@@ -285,7 +286,7 @@ bool8 debug_sub_815F2F4(void)
 
             do
             {
-                gSaveBlock1.secretBases[i].secretBaseId = _843E424[Random() % ARRAY_COUNT(_843E424)][0];
+                gSaveBlock1.secretBases[i].secretBaseId = _843E424[(Random() % (ARRAY_COUNT(_843E424) / 4)) * 4];
 
                 for (j = 0; j < i; j++)
                 {
@@ -312,6 +313,84 @@ bool8 debug_sub_815F2F4(void)
     }
 
     return TRUE;
+}
+
+void debug_sub_815F470(u8 * a0, u8 * a1, u8 * a2)
+{
+    u8 i;
+    u8 sbId = gSaveBlock1.secretBases[_nakamuraData0].secretBaseId;
+
+    for (i = 0; i < ARRAY_COUNT(_843E424) / 4; i++)
+    {
+        if (_843E424[i * 4] == sbId)
+        {
+            *a0 = _843E424[i * 4 + 1];
+            *a1 = _843E424[i * 4 + 2];
+            *a2 = _843E424[i * 4 + 3];
+            break;
+        }
+    }
+}
+
+void debug_sub_815F4D8(void)
+{
+    Menu_BlankWindowRect(1, 1, 10, 10);
+    ConvertIntToDecimalStringN(gStringVar1, _nakamuraData0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    Menu_PrintText(gStringVar1, 1, 1);
+
+    if (gSaveBlock1.secretBases[_nakamuraData0].secretBaseId != 0)
+    {
+        u8 a0;
+        u8 a1;
+        u8 a2;
+        debug_sub_815F470(&a0, &a1, &a2);
+
+        sub_80BC190(gStringVar1, _nakamuraData0);
+        Menu_PrintText(gStringVar1, 1, 3);
+
+        Menu_PrintText(Str_843E550, 1, 5);
+        ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_LEFT_ALIGN, 3);
+        Menu_PrintText(gStringVar1, 2, 5);
+
+        Menu_PrintText(Str_843E552, 1, 7);
+        ConvertIntToDecimalStringN(gStringVar1, a1, STR_CONV_MODE_LEFT_ALIGN, 3);
+        Menu_PrintText(gStringVar1, 3, 7);
+
+        Menu_PrintText(Str_843E554, 1, 9);
+        ConvertIntToDecimalStringN(gStringVar1, a2, STR_CONV_MODE_LEFT_ALIGN, 3);
+        Menu_PrintText(gStringVar1, 3, 9);
+    }
+}
+
+bool8 debug_sub_815F5C4(void)
+{
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        if (_nakamuraData0 == 0)
+            _nakamuraData0 = 19;
+        else
+            _nakamuraData0--;
+        debug_sub_815F4D8();
+        return FALSE;
+    }
+
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        if (_nakamuraData0 == 19)
+            _nakamuraData0 = 0;
+        else
+            _nakamuraData0++;
+        debug_sub_815F4D8();
+        return FALSE;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 #endif // DEBUG
