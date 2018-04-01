@@ -1,6 +1,14 @@
 #if DEBUG
 #include "global.h"
+#include "palette.h"
+#include "main.h"
+#include "overworld.h"
+#include "start_menu.h"
+#include "party_menu.h"
+#include "choose_party.h"
 #include "menu.h"
+
+typedef bool8 (*MenuFunc)(void);
 
 EWRAM_DATA u8 _nakamuraData0 = 0;
 EWRAM_DATA u8 _nakamuraData1 = 0;
@@ -20,15 +28,16 @@ __attribute__((unused)) static u8 gDebugFiller3000814[4];
 asm(".global _nakamuraStatic0");
 asm(".global _nakamuraStatic18");
 
-u8 debug_sub_815FC54();
-u8 debug_sub_815F2B4();
-u8 debug_sub_815FC94();
-u8 debug_sub_815FB1C();
-u8 debug_sub_815F2F4();
-u8 debug_sub_815F62C();
-u8 debug_sub_815FBE8();
-u8 debug_sub_815FE1C();
-u8 debug_sub_8160D98();
+bool8 debug_sub_815F214(void);
+bool8 debug_sub_815FC54(void);
+bool8 debug_sub_815F2B4(void);
+bool8 debug_sub_815FC94(void);
+bool8 debug_sub_815FB1C(void);
+bool8 debug_sub_815F2F4(void);
+bool8 debug_sub_815F62C(void);
+bool8 debug_sub_815FBE8(void);
+bool8 debug_sub_815FE1C(void);
+bool8 debug_sub_8160D98(void);
 
 const u8 Str_843E36C[] = _("Berries");
 const u8 Str_843E374[] = _("Goods");
@@ -185,5 +194,68 @@ const u8 Str_843E651[] = _("けっか");
 const u8 Str_843E655[] = _("かい");
 const u8 Str_843E658[] = _("0");
 const u8 Str_843E65A[] = _("はんい");
+
+void debug_sub_815F1B8(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(14, 0, 29, 19);
+    Menu_PrintItems(16, 1, ARRAY_COUNT(_843E3DC), _843E3DC);
+    InitMenu(0, 15, 1, ARRAY_COUNT(_843E3DC), 0, 14);
+}
+
+bool8 InitNakamuraDebugMenu(void)
+{
+    debug_sub_815F1B8();
+    gMenuCallback = debug_sub_815F214;
+    return FALSE;
+}
+
+bool8 debug_sub_815F214(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        Menu_MoveCursor(-1);
+    }
+
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        Menu_MoveCursor(+1);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        MenuFunc func = _843E3DC[Menu_GetCursorPos()].func;
+        Menu_DestroyCursor();
+        return func();
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void debug_sub_815F284(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        debug_sub_81381B4();
+        OpenPartyMenu(5, 0);
+        DestroyTask(taskId);
+    }
+}
+
+bool8 debug_sub_815F2B4(void)
+{
+    CloseMenu();
+    Menu_EraseScreen();
+    gMain.savedCallback = sub_805469C;
+    CreateTask(debug_sub_815F284, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    return TRUE;
+}
 
 #endif // DEBUG
