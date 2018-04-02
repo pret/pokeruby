@@ -6,6 +6,8 @@
 #include "main.h"
 #include "string_util.h"
 #include "overworld.h"
+#include "fieldmap.h"
+#include "metatile_behavior.h"
 #include "start_menu.h"
 #include "party_menu.h"
 #include "choose_party.h"
@@ -729,6 +731,28 @@ bool8 debug_sub_815FC94(void)
     Menu_EraseWindowRect(0, 0, 29, 19);
     CloseMenu();
     return TRUE;
+}
+
+u16 debug_sub_815FCB4(u8 a0)
+{
+    u16 retval = 0;
+    u16 height = gMapHeader.mapData->height / 3;
+    u16 r6;
+    u16 r4;
+    u16 start = height * a0;
+
+    for (r6 = start; r6 < start + height; r6++)
+    {
+        for (r4 = 0; r4 < gMapHeader.mapData->width; r4++)
+        {
+            if (sub_805759C(MapGridGetMetatileBehaviorAt(r4 + 7, r6 + 7)) == TRUE)
+            {
+                retval++;
+            }
+        }
+    }
+
+    return retval;
 }
 
 #endif // DEBUG
