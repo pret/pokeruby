@@ -2,6 +2,8 @@
 #include "global.h"
 #include "constants/items.h"
 #include "constants/species.h"
+#include "data2.h"
+#include "strings.h"
 #include "random.h"
 #include "palette.h"
 #include "main.h"
@@ -34,8 +36,8 @@ EWRAM_DATA u16 _nakamuraDataA = 0;
 EWRAM_DATA u16 _nakamuraDataC = 0;
 
 __attribute__((unused)) static struct {
-    u16 species;
-    u8 level;
+    s16 species;
+    s8 level;
     u8 unk3;
 } _nakamuraStatic0[PARTY_SIZE];
 __attribute__((unused)) static u8 _nakamuraStatic18;
@@ -57,7 +59,9 @@ bool8 debug_sub_815FE1C(void);
 void debug_sub_816009C(u8);
 void debug_sub_81600D0(u8);
 void debug_sub_816013C(u8);
+void debug_sub_81603B8(u8);
 bool8 debug_sub_8160498(void);
+void debug_sub_816062C(u8);
 bool8 debug_sub_8160D98(void);
 
 const u8 Str_843E36C[] = _("Berries");
@@ -201,6 +205,8 @@ const u8 Str_843E5D4[] = _(
     "Aボタン　{ESCAPE}\p"
     "　　Bボタン　ー\n"
     "START　けってい");
+
+// The following may be defined in the functions in which they are invoked
 const u8 Str_843E5F0[] = _("？");
 const u8 Str_843E5F2[] = _("HP　どりょくち");
 const u8 Str_843E5FB[] = _("こうげき　どりょくち");
@@ -884,6 +890,105 @@ void debug_sub_815FFDC(void)
     _nakamuraData4 = 0;
     PrintTriangleCursorWithPalette(15, 1, 0xFF);
     gMenuCallback = debug_sub_8160498;
+}
+
+void debug_sub_816009C(u8 i)
+{
+    Menu_PrintText(gSpeciesNames[_nakamuraStatic0[i].species], 16, 2 * i + 1);
+}
+
+void debug_sub_81600D0(u8 i)
+{
+    // u8 sp0[] = _("？");
+
+    u8 sp0[2];
+    u8 gender;
+
+    memcpy(sp0, Str_843E5F0, sizeof Str_843E5F0);
+    gender = GetMonGender(gPlayerParty + i);
+    if (gender == MON_MALE)
+        Menu_PrintText(gOtherText_MaleSymbol2, 23, 2 * i + 1);
+    else if (gender == MON_FEMALE)
+        Menu_PrintText(gOtherText_FemaleSymbolAndLv, 23, 2 * i + 1);
+    else
+        Menu_PrintText(sp0, 23, 2 * i + 1);
+}
+
+void debug_sub_816013C(u8 i)
+{
+    ConvertIntToDecimalStringN(gStringVar1, _nakamuraStatic0[i].level, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    Menu_PrintText(gStringVar1, 26, 2 * i + 1);
+}
+
+void debug_sub_816017C(u8 i)
+{
+    Menu_BlankWindowRect(16, 2 * i + 1, 28, 2 * i + 2);
+    if (_nakamuraStatic0[i].species != SPECIES_NONE)
+    {
+        debug_sub_816009C(i);
+        debug_sub_81600D0(i);
+        debug_sub_816013C(i);
+    }
+    debug_sub_81603B8(5);
+}
+
+void debug_sub_81601C8(u8 i, s8 dirn)
+{
+    if (_nakamuraStatic0[i].species == SPECIES_NONE && _nakamuraStatic0[i].unk3 == 0 && dirn == 1)
+        _nakamuraStatic0[i].species = SPECIES_TREECKO - 1;
+    _nakamuraStatic0[i].species += dirn;
+    if (_nakamuraStatic0[i].species >= SPECIES_CHIMECHO)
+        _nakamuraStatic0[i].species -= SPECIES_CHIMECHO;
+    if (_nakamuraStatic0[i].species < 0)
+        _nakamuraStatic0[i].species += SPECIES_CHIMECHO;
+    CreateMon(gPlayerParty + i, _nakamuraStatic0[i].species, _nakamuraStatic0[i].level, 0x20, 0, 0, 0, 0);
+    _nakamuraStatic0[i].unk3 = 1;
+}
+
+void debug_sub_8160258(u8 i)
+{
+    if (_nakamuraStatic0[i].species != SPECIES_NONE)
+        debug_sub_816062C(i);
+}
+
+void debug_sub_816027C(u8 i, s8 dirn)
+{
+    if (_nakamuraStatic0[i].species != SPECIES_NONE)
+    {
+        _nakamuraStatic0[i].level += dirn;
+        if (_nakamuraStatic0[i].level > 100)
+            _nakamuraStatic0[i].level = 1;
+        if (_nakamuraStatic0[i].level < 1)
+            _nakamuraStatic0[i].level = 100;
+        SetMonData(gPlayerParty + i, MON_DATA_EXP, gExperienceTables[gBaseStats[_nakamuraStatic0[i].species].growthRate] + _nakamuraStatic0[i].level);
+        debug_sub_803F55C(gPlayerParty + i);
+    }
+}
+
+void debug_sub_8160308(void)
+{
+    u8 i;
+    u8 j;
+
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    for (i = 0; i < 5; i++)
+    {
+        for (j = i + 1; j < 6; j++)
+        {
+            if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            {
+                struct Pokemon tmp = gPlayerParty[i];
+                gPlayerParty[i] = gPlayerParty[j];
+                gPlayerParty[j] = tmp;
+            }
+        }
+    }
+    CalculatePlayerPartyCount();
+    if (gPlayerPartyCount == 0)
+    {
+        CreateMon(gPlayerParty + 0, SPECIES_BULBASAUR, 10, 0x20, 0, 0, 0, 0);
+        gPlayerPartyCount = 1;
+    }
 }
 
 #endif // DEBUG
