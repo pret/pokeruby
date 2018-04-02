@@ -1,12 +1,14 @@
 #if DEBUG
 #include "global.h"
 #include "constants/items.h"
+#include "constants/species.h"
 #include "random.h"
 #include "palette.h"
 #include "main.h"
 #include "string_util.h"
 #include "overworld.h"
 #include "fieldmap.h"
+#include "field_player_avatar.h"
 #include "metatile_behavior.h"
 #include "start_menu.h"
 #include "party_menu.h"
@@ -14,7 +16,9 @@
 #include "secret_base.h"
 #include "roamer.h"
 #include "decoration_inventory.h"
+#include "wild_encounter.h"
 #include "menu.h"
+#include "menu_helpers.h"
 
 typedef bool8 (*MenuFunc)(void);
 
@@ -29,7 +33,11 @@ EWRAM_DATA u16 _nakamuraData8 = 0;
 EWRAM_DATA u16 _nakamuraDataA = 0;
 EWRAM_DATA u16 _nakamuraDataC = 0;
 
-__attribute__((unused)) static u8 _nakamuraStatic0[0x18];
+__attribute__((unused)) static struct {
+    u16 species;
+    u8 level;
+    u8 unk3;
+} _nakamuraStatic0[PARTY_SIZE];
 __attribute__((unused)) static u8 _nakamuraStatic18;
 __attribute__((unused)) static u8 gDebugFiller3000814[4];
 
@@ -46,6 +54,10 @@ bool8 debug_sub_815FBE8(void);
 bool8 debug_sub_815FC54(void);
 bool8 debug_sub_815FC94(void);
 bool8 debug_sub_815FE1C(void);
+void debug_sub_816009C(u8);
+void debug_sub_81600D0(u8);
+void debug_sub_816013C(u8);
+bool8 debug_sub_8160498(void);
 bool8 debug_sub_8160D98(void);
 
 const u8 Str_843E36C[] = _("Berries");
@@ -753,6 +765,125 @@ u16 debug_sub_815FCB4(u8 a0)
     }
 
     return retval;
+}
+
+u16 debug_sub_815FD40(void)
+{
+    u16 retval = 0;
+    s16 x;
+    s16 y;
+    u16 xx;
+    u16 yy;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    x -= 7;
+    y -= 7;
+
+    for (yy = 0; yy < gMapHeader.mapData->height; yy++)
+    {
+        for (xx = 0; xx < gMapHeader.mapData->width; xx++)
+        {
+            if (sub_805759C(MapGridGetMetatileBehaviorAt(xx + 7, yy + 7)) == TRUE)
+            {
+                retval++;
+                if (x == xx && y == yy)
+                    return retval;
+            }
+        }
+    }
+    return retval + 1;
+}
+
+bool8 debug_sub_815FDE4(void)
+{
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 debug_sub_815FE1C(void)
+{
+    u16 r7;
+    u16 r5;
+
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    Menu_DrawStdWindowFrame(0, 0, 16, 19);
+    Menu_PrintText(Str_843E58D, 1, 1);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 5, 3);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 5, 5);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 5, 7);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 11, 3);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 11, 5);
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 11, 7);
+
+    FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
+    r7 = debug_sub_815FCB4(0) + debug_sub_815FCB4(1) + debug_sub_815FCB4(2);
+    r5 = 0;
+
+    while (r5 != 6)
+    {
+        u16 r1 = FeebasRandom() % r7;
+        if (r1 == 0)
+            r1 = r7;
+        if (r1 == 0 || r1 > 3)
+        {
+            ConvertIntToDecimalStringN(gStringVar1, r1, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            Menu_PrintText(gStringVar1, (r5 % 3) * 5 + 2, (r5 / 3) * 2 + 11);
+            r5++;
+        }
+    }
+
+    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FD40(), STR_CONV_MODE_RIGHT_ALIGN, 4);
+    Menu_PrintText(gStringVar1, 2, 17);
+
+    gMenuCallback = debug_sub_815FDE4;
+
+    return FALSE;
+}
+
+void debug_sub_815FFDC(void)
+{
+    u8 i;
+
+    Menu_DrawStdWindowFrame(14, 0, 29, 13);
+    Menu_DrawStdWindowFrame(0, 14, 29, 19);
+    Menu_PrintText(Str_843E5D4, 1, 15);
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        _nakamuraStatic0[i].species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        if (_nakamuraStatic0[i].species != SPECIES_NONE)
+        {
+            _nakamuraStatic0[i].level = GetMonData(gPlayerParty + i, MON_DATA_LEVEL);
+            debug_sub_816009C(i);
+            debug_sub_81600D0(i);
+            debug_sub_816013C(i);
+        }
+        else
+            _nakamuraStatic0[i].level = 1;
+        _nakamuraStatic0[i].unk3 = 0;
+    }
+
+    _nakamuraData4 = 0;
+    PrintTriangleCursorWithPalette(15, 1, 0xFF);
+    gMenuCallback = debug_sub_8160498;
 }
 
 #endif // DEBUG

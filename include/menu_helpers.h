@@ -50,5 +50,8 @@ void StartVerticalScrollIndicators(u8);
 void sub_80F98DC(u8);
 void PauseVerticalScrollIndicator(u8);
 void SetVerticalScrollIndicatorPriority(u8, u8);
+#if DEBUG
+void PrintTriangleCursorWithPalette(u8, u8, u8);
+#endif // DEBUG
 
 #endif // GUARD_MENU_HELPERS_H
