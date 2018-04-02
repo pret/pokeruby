@@ -2,6 +2,8 @@
 #include "global.h"
 #include "constants/items.h"
 #include "constants/species.h"
+#include "constants/songs.h"
+#include "sound.h"
 #include "data2.h"
 #include "strings.h"
 #include "random.h"
@@ -989,6 +991,136 @@ void debug_sub_8160308(void)
         CreateMon(gPlayerParty + 0, SPECIES_BULBASAUR, 10, 0x20, 0, 0, 0, 0);
         gPlayerPartyCount = 1;
     }
+}
+
+void debug_sub_81603B8(u8 i)
+{
+    u8 q;
+    u8 r;
+    PlaySE(SE_SELECT);
+    q = _nakamuraData4 / 6;
+    r = _nakamuraData4 % 6;
+    Menu_BlankWindowRect(_843E5D1[q], r * 2 + 1, _843E5D1[q], r * 2 + 2);
+
+    if (i == 0)
+    {
+        if (r != 0)
+            _nakamuraData4--;
+        else
+            _nakamuraData4 = q * 6 + 5;
+    }
+
+    if (i == 1)
+    {
+        if (r != 5)
+            _nakamuraData4++;
+        else
+            _nakamuraData4 = q * 6;
+    }
+
+    if (i == 2)
+    {
+        if (q != 0)
+            _nakamuraData4 -= 6;
+        else
+            _nakamuraData4 = 12 + r;
+    }
+
+    if (i == 3)
+    {
+        if (q != 2)
+            _nakamuraData4 += 6;
+        else
+            _nakamuraData4 = r;
+    }
+
+    q = _nakamuraData4 / 6;
+    r = _nakamuraData4 % 6;
+    PrintTriangleCursorWithPalette(_843E5D1[q], r * 2 + 1, 0xFF);
+}
+
+bool8 debug_sub_8160498(void)
+{
+    if (gMain.newKeys & DPAD_UP)
+    {
+        debug_sub_81603B8(0);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        debug_sub_81603B8(1);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        debug_sub_81603B8(2);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        debug_sub_81603B8(3);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & A_BUTTON)
+    {
+        if (_nakamuraData4 < 6)
+            debug_sub_81601C8(_nakamuraData4, +1);
+        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
+            debug_sub_8160258(_nakamuraData4 % 6);
+        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
+            debug_sub_816027C(_nakamuraData4 % 6, +1);
+        debug_sub_816017C(_nakamuraData4 % 6);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & B_BUTTON)
+    {
+        if (_nakamuraData4 < 6)
+            debug_sub_81601C8(_nakamuraData4, -1);
+        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
+            debug_sub_8160258(_nakamuraData4 % 6);
+        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
+            debug_sub_816027C(_nakamuraData4 % 6, -1);
+        debug_sub_816017C(_nakamuraData4 % 6);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        if (_nakamuraData4 < 6)
+            debug_sub_81601C8(_nakamuraData4, +10);
+        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
+            debug_sub_8160258(_nakamuraData4 % 6);
+        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
+            debug_sub_816027C(_nakamuraData4 % 6, +1);
+        debug_sub_816017C(_nakamuraData4 % 6);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        if (_nakamuraData4 < 6)
+            debug_sub_81601C8(_nakamuraData4, -10);
+        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
+            debug_sub_8160258(_nakamuraData4 % 6);
+        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
+            debug_sub_816027C(_nakamuraData4 % 6, -1);
+        debug_sub_816017C(_nakamuraData4 % 6);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & START_BUTTON)
+    {
+        debug_sub_8160308();
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 #endif // DEBUG
