@@ -10,4 +10,9 @@ u8 TryStartRoamerEncounter(void);
 void UpdateRoamerHPStatus(struct Pokemon *mon);
 void SetRoamerInactive(void);
 
-#endif
+#if DEBUG
+void debug_sub_814A714(void);
+void debug_sub_814A73C(u8 *);
+#endif // DEBUG
+
+#endif // GUARD_ROAMER_H
