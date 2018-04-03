@@ -41,7 +41,7 @@ Run the Cygwin setup and leave the default settings. At "Select Packages", set t
 - `git`
 - `gcc-core`
 - `gcc-g++`
-- `libpng-dev`
+- `libpng-devel`
 
 In the **Cygwin terminal**, enter these commands:
 
