@@ -208,7 +208,6 @@ const u8 Str_843E5D4[] = _(
     "　　Bボタン　ー\n"
     "START　けってい");
 
-// The following may be defined in the functions in which they are invoked
 const u8 Str_843E5F0[] = _("？");
 const u8 Str_843E5F2[] = _("HP　どりょくち");
 const u8 Str_843E5FB[] = _("こうげき　どりょくち");
@@ -1837,6 +1836,164 @@ void debug_sub_8160C7C(void)
 
     for (i = 0; i < 6; i++)
         debug_sub_8160A80(i);
+}
+
+bool8 debug_sub_8160CF4(void)
+{
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        Menu_MoveCursor(-1);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        Menu_MoveCursor(+1);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        debug_sub_8160B50(Menu_GetCursorPos(), -1);
+        debug_sub_8160A80(Menu_GetCursorPos());
+        debug_sub_8160BB0();
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        debug_sub_8160B50(Menu_GetCursorPos(), +1);
+        debug_sub_8160A80(Menu_GetCursorPos());
+        debug_sub_8160BB0();
+        return FALSE;
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        debug_sub_8160C7C();
+        PlaySE(SE_SELECT);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 debug_sub_8160D98(void)
+{
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    debug_sub_8160BE4();
+    gMenuCallback = debug_sub_8160CF4;
+    return FALSE;
+}
+
+void debug_sub_8160DC0(void)
+{
+    Menu_DrawStdWindowFrame(0, 0, 22, 19);
+    Menu_PrintText(gOtherText_Slash, 11, 1);
+    Menu_PrintText(Str_843E5F2, 2, 3);
+    Menu_PrintText(Str_843E5FB, 2, 5);
+    Menu_PrintText(Str_843E606, 2, 7);
+    Menu_PrintText(Str_843E611, 2, 9);
+    Menu_PrintText(Str_843E61C, 2, 11);
+    Menu_PrintText(Str_843E627, 2, 13);
+    Menu_PrintText(Str_843E637, 2, 15);
+    Menu_PrintText(Str_843E632, 2, 17);
+}
+
+void debug_sub_8160E50(struct Pokemon *pokemon)
+{
+    u16 evTotal;
+    u16 curEv;
+
+    Menu_BlankWindowRect(1, 1, 10, 2);
+    GetMonData(pokemon, MON_DATA_NICKNAME, gStringVar1);
+    Menu_PrintText(gStringVar1, 1, 1);
+
+    Menu_BlankWindowRect(12, 1, 21, 2);
+    Menu_PrintText(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES)], 12, 1);
+
+    curEv = GetMonData(pokemon, MON_DATA_HP_EV);
+    evTotal = curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 3, 17, 4);
+    Menu_PrintText(gStringVar1, 13, 3);
+
+    curEv = GetMonData(pokemon, MON_DATA_ATK_EV);
+    evTotal += curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 5, 17, 6);
+    Menu_PrintText(gStringVar1, 13, 5);
+
+    curEv = GetMonData(pokemon, MON_DATA_DEF_EV);
+    evTotal += curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 7, 17, 8);
+    Menu_PrintText(gStringVar1, 13, 7);
+
+    curEv = GetMonData(pokemon, MON_DATA_SPEED_EV);
+    evTotal += curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 9, 17, 10);
+    Menu_PrintText(gStringVar1, 13, 9);
+
+    curEv = GetMonData(pokemon, MON_DATA_SPATK_EV);
+    evTotal += curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 11, 17, 12);
+    Menu_PrintText(gStringVar1, 13, 11);
+
+    curEv = GetMonData(pokemon, MON_DATA_SPDEF_EV);
+    evTotal += curEv;
+    ConvertIntToDecimalStringN(gStringVar1, curEv, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 13, 17, 14);
+    Menu_PrintText(gStringVar1, 13, 13);
+
+    ConvertIntToDecimalStringN(gStringVar1, evTotal, STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 15, 17, 16);
+    Menu_PrintText(gStringVar1, 13, 15);
+
+    ConvertIntToDecimalStringN(gStringVar1, GetMonData(pokemon, MON_DATA_FRIENDSHIP), STR_CONV_MODE_LEFT_ALIGN, 5);
+    Menu_BlankWindowRect(13, 17, 17, 18);
+    Menu_PrintText(gStringVar1, 13, 17);
+}
+
+void debug_sub_8161028(s8 a0)
+{
+    s16 i;
+    if (a0 == -1)
+    {
+        if (_nakamuraData5 == 0)
+        {
+            for (i = 5; i >= 0; i--)
+            {
+                if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != SPECIES_NONE)
+                {
+                    _nakamuraData5 = i;
+                    return;
+                }
+            }
+        }
+        _nakamuraData5 += a0;
+        return;
+    }
+
+    if (a0 == 1)
+    {
+        _nakamuraData5 += a0;
+        if (_nakamuraData5 == 6)
+            _nakamuraData5 = 0;
+        else if (GetMonData(gPlayerParty + _nakamuraData5, MON_DATA_SPECIES) == SPECIES_NONE)
+            _nakamuraData5 = 0;
+    }
+
+
 }
 
 #endif // DEBUG
