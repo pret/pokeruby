@@ -250,6 +250,7 @@ extern const u8 gContestStatsText_Dry[];
 extern const u8 gContestStatsText_Sweet[];
 extern const u8 gContestStatsText_Bitter[];
 extern const u8 gContestStatsText_Sour[];
+extern const u8 gContestStatsText_Tasty[];
 
 extern const u8 gContestStatsText_StowCase[];
 extern const u8 gContestStatsText_ThrowAwayPrompt[];

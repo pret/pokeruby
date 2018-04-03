@@ -38,13 +38,12 @@ EWRAM_DATA u16 _nakamuraData8 = 0;
 EWRAM_DATA u16 _nakamuraDataA = 0;
 EWRAM_DATA u16 _nakamuraDataC = 0;
 
-__attribute__((unused)) static struct {
+static struct {
     s16 species;
     s8 level;
     u8 unk3;
 } _nakamuraStatic0[PARTY_SIZE];
-__attribute__((unused)) static u8 _nakamuraStatic18;
-__attribute__((unused)) static u8 gDebugFiller3000814[4];
+static struct Pokeblock _nakamuraStatic18;
 
 asm(".global _nakamuraStatic0");
 asm(".global _nakamuraStatic18");
@@ -1671,5 +1670,173 @@ u8 debug_sub_8160714(u8 * dest, struct Pokeblock * pokeblock)
         "\t.word\tgOtherText_FiveQuestions");
 }
 #endif // NONMATCHING
+
+void debug_sub_816097C(u8 * buff, s16 a1)
+{
+    u8 i;
+    s16 divisor;
+    s16 quot;
+    s16 printZero;
+
+    for (i = 0; i < 4; i++)
+        buff[i] = CHAR_SPACE;
+    buff[4] = EOS;
+
+    if (a1 == 0)
+        buff[3] = CHAR_0;
+    else if (a1 > 0)
+    {
+        divisor = 100;
+        printZero = FALSE;
+        for (i = 0; i < 3; i++)
+        {
+            quot = a1 / divisor;
+            if (printZero || i == 2 || quot != 0)
+            {
+                buff[i + 1] = CHAR_0 + quot;
+                printZero = TRUE;
+            }
+            a1 %= divisor;
+            divisor /= 10;
+        }
+    }
+    else if (a1 < 0)
+    {
+        a1 = -a1;
+        divisor = 100;
+        printZero = FALSE;
+        for (i = 0; i < 3; i++)
+        {
+            quot = a1 / divisor;
+            if (printZero || i == 2 || quot != 0)
+            {
+                buff[i + 1] = CHAR_0 + quot;
+                if (!printZero)
+                    buff[i] = CHAR_HYPHEN;
+                printZero = TRUE;
+            }
+            a1 %= divisor;
+            divisor /= 10;
+        }
+    }
+}
+
+void debug_sub_8160A80(u8 a0)
+{
+    struct Pokeblock *pkblk = &_nakamuraStatic18;
+    
+    if (a0 == 0)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->spicy);
+        Menu_PrintText(gStringVar1, 8, 3);
+    }
+    else if (a0 == 1)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->dry);
+        Menu_PrintText(gStringVar1, 8, 5);
+    }
+    else if (a0 == 2)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->sweet);
+        Menu_PrintText(gStringVar1, 8, 7);
+    }
+    else if (a0 == 3)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->bitter);
+        Menu_PrintText(gStringVar1, 8, 9);
+    }
+    else if (a0 == 4)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->sour);
+        Menu_PrintText(gStringVar1, 8, 11);
+    }
+    else if (a0 == 5)
+    {
+        debug_sub_816097C(gStringVar1, pkblk->feel);
+        Menu_PrintText(gStringVar1, 8, 13);
+    }
+}
+
+void debug_sub_8160B50(u8 a0, s8 a1)
+{
+    struct Pokeblock *pkblk = &_nakamuraStatic18;
+
+    if (a0 == 0)
+        pkblk->spicy += a1;
+    else if (a0 == 1)
+        pkblk->dry += a1;
+    else if (a0 == 2)
+        pkblk->sweet += a1;
+    else if (a0 == 3)
+        pkblk->bitter += a1;
+    else if (a0 == 4)
+        pkblk->sour += a1;
+    else if (a0 == 5)
+        pkblk->feel += a1;
+}
+
+void debug_sub_8160BB0(void)
+{
+    _nakamuraStatic18.color = debug_sub_8160714(gStringVar1, &_nakamuraStatic18);
+    Menu_BlankWindowRect(1, 1, 8, 2);
+    Menu_PrintText(gStringVar1, 1, 1);
+}
+
+void debug_sub_8160BE4(void)
+{
+    u8 i;
+
+    Menu_DrawStdWindowFrame(0, 0, 12, 15);
+    debug_sub_8160BB0();
+    Menu_PrintText(gContestStatsText_Spicy, 2, 3);
+    Menu_PrintText(gContestStatsText_Dry, 2, 5);
+    Menu_PrintText(gContestStatsText_Sweet, 2, 7);
+    Menu_PrintText(gContestStatsText_Bitter, 2, 9);
+    Menu_PrintText(gContestStatsText_Sour, 2, 11);
+    Menu_PrintText(gContestStatsText_Tasty, 2, 13);
+
+    for (i = 0; i < 6; i++)
+        debug_sub_8160A80(i);
+
+    InitMenu(0, 1, 3, 6, 0, 11);
+}
+
+void debug_sub_8160C7C(void)
+{
+    struct Pokeblock * pkblk = &_nakamuraStatic18;
+    u8 rval = 0;
+    u8 i;
+
+    if (pkblk->color == PBLOCK_CLR_BLACK)
+    {
+        if (pkblk->spicy == 2)
+            rval++;
+
+        if (pkblk->sweet == 2)
+            rval++;
+
+        if (pkblk->bitter == 2)
+            rval++;
+
+        if (pkblk->dry == 2)
+            rval++;
+
+        if (pkblk->sour == 2)
+            rval++;
+
+        if (rval != 3)
+        {
+            pkblk->spicy = 2;
+            pkblk->sweet = 2;
+            pkblk->bitter = 2;
+        }
+    }
+
+    sub_810CA34(pkblk);
+    debug_sub_8160BB0();
+
+    for (i = 0; i < 6; i++)
+        debug_sub_8160A80(i);
+}
 
 #endif // DEBUG
