@@ -2088,4 +2088,81 @@ void debug_sub_81612B8(u16 * a0, s8 a1, u8 a2)
     Menu_PrintText(gStringVar1, 8, a2);
 }
 
+bool8 debug_sub_81612EC(void)
+{
+    s8 r5 = gMain.heldKeys & R_BUTTON ? 100 : 1;
+    s8 r4;
+
+    if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        Menu_MoveCursor(-1);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        Menu_MoveCursor(+1);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        r4 = Menu_GetCursorPos();
+        if (r4 == 0)
+            debug_sub_81612B8(&_nakamuraData6, -r5, 1);
+        if (r4 == 1)
+            debug_sub_81612B8(&_nakamuraData8, -r5, 3);
+        if (r4 == 2)
+            debug_sub_81612B8(&_nakamuraDataC, -r5, 5);
+        if (r4 == 3)
+            debug_sub_81612B8(&_nakamuraDataA, -r5, 7);
+        return FALSE;
+    }
+
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        r4 = Menu_GetCursorPos();
+        if (r4 == 0)
+            debug_sub_81612B8(&_nakamuraData6, r5, 1);
+        if (r4 == 1)
+            debug_sub_81612B8(&_nakamuraData8, r5, 3);
+        if (r4 == 2)
+            debug_sub_81612B8(&_nakamuraDataC, r5, 5);
+        if (r4 == 3)
+            debug_sub_81612B8(&_nakamuraDataA, r5, 7);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (_nakamuraDataC != 0)
+        {
+            PlaySE(SE_SELECT);
+            debug_sub_8161290(debug_sub_8161160());
+        }
+        return FALSE;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 DebugMenu_RandomNumberTest(void)
+{
+    _nakamuraData6 = 0;
+    _nakamuraData8 = 0;
+    _nakamuraDataC = 0;
+    _nakamuraDataA = 0;
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    debug_sub_81611D8();
+    gMenuCallback = debug_sub_81612EC;
+    return FALSE;
+}
+
 #endif // DEBUG
