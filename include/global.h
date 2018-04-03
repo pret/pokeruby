@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <string.h>
+#include <stdlib.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 
@@ -14,9 +16,6 @@
 #define INCBIN_S8 {0}
 #define INCBIN_S16 {0}
 #define INCBIN_S32 {0}
-void *memcpy (void *, const void *, size_t);
-void *memset (void *, int, size_t);
-int strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
