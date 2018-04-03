@@ -1992,8 +1992,100 @@ void debug_sub_8161028(s8 a0)
         else if (GetMonData(gPlayerParty + _nakamuraData5, MON_DATA_SPECIES) == SPECIES_NONE)
             _nakamuraData5 = 0;
     }
+}
 
+bool8 debug_sub_81610BC(void)
+{
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        debug_sub_8161028(-1);
+        debug_sub_8160E50(gPlayerParty + _nakamuraData5);
+        return FALSE;
+    }
 
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        debug_sub_8161028(+1);
+        debug_sub_8160E50(gPlayerParty + _nakamuraData5);
+        return FALSE;
+    }
+
+    if (gMain.newKeys & B_BUTTON)
+    {
+        Menu_EraseWindowRect(0, 0, 29, 19);
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 DebugMenu_EffortValues(void)
+{
+    Menu_EraseWindowRect(0, 0, 29, 19);
+    _nakamuraData5 = 0;
+    debug_sub_8160DC0();
+    debug_sub_8160E50(gPlayerParty + 0);
+    gMenuCallback = debug_sub_81610BC;
+    return FALSE;
+}
+
+u16 debug_sub_8161160(void)
+{
+    u16 r7 = 0;
+    u16 r6;
+    u16 r5;
+    u32 i;
+
+    if (_nakamuraData6 <= _nakamuraData8)
+    {
+        r6 = _nakamuraData6;
+        r5 = _nakamuraData8;
+    }
+    else
+    {
+        r6 = _nakamuraData8;
+        r5 = _nakamuraData6;
+    }
+
+    for (i = 0; i < _nakamuraDataA; i++)
+    {
+        u16 r0 = Random() % _nakamuraDataC;
+        if (r0 >= r6 && r0 <= r5)
+            r7++;
+    }
+
+    return r7;
+}
+
+void debug_sub_81611D8(void)
+{
+    Menu_DrawStdWindowFrame(0, 0, 15, 11);
+    Menu_PrintText(Str_843E642, 2, 1);
+    Menu_PrintText(Str_843E647, 2, 3);
+    Menu_PrintText(Str_843E65A, 2, 5);
+    Menu_PrintText(Str_843E64C, 2, 7);
+    Menu_PrintText(Str_843E651, 2, 9);
+    Menu_PrintText(Str_843E655, 13, 9);
+    Menu_PrintText(Str_843E658, 12, 1);
+    Menu_PrintText(Str_843E658, 12, 3);
+    Menu_PrintText(Str_843E658, 12, 5);
+    Menu_PrintText(Str_843E658, 12, 7);
+    Menu_PrintText(Str_843E658, 12, 9);
+    InitMenu(0, 1, 1, 4, 0, 14);
+}
+
+void debug_sub_8161290(u16 a0)
+{
+    ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 8, 9);
+}
+
+void debug_sub_81612B8(u16 * a0, s8 a1, u8 a2)
+{
+    *a0 += a1;
+    ConvertIntToDecimalStringN(gStringVar1, *a0, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    Menu_PrintText(gStringVar1, 8, a2);
 }
 
 #endif // DEBUG
