@@ -13,7 +13,7 @@ void sub_8080A3C(void);
 void sub_8080AC4(void);
 void mapldr_default();
 void sub_8080B60(void);
-void atk17_seteffectsecondary(void);
+void sub_8080DEC(void);
 void sub_8080E28(void);
 void sub_8080E44(void);
 bool32 sub_8080E70(void);

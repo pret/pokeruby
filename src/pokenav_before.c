@@ -3239,7 +3239,7 @@ void sub_80EE96C()
         if (!gPaletteFade.active)
         {
 			sub_80F5BDC();
-			sub_805469C();
+			c2_exit_to_overworld_1_sub_8080DEC();
 		}
     }
 }

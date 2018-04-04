@@ -82,7 +82,7 @@ extern const u8 gUnknown_Debug_821F7F3[];
 extern const u8 BattleText_YesNo[];
 extern u8 gStatStageRatios[][2];
 extern u8 gActionsByTurnOrder[4];
-extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
+extern struct UnknownPokemonStruct2 gMultiPartnerParty[];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBank;
 extern u32 gBattleExecBuffer;
@@ -576,23 +576,23 @@ void sub_800F02C(void)
 
     for (i = 0; i < 3; i++)
     {
-        u8 *nickname = gUnknown_02023A00[i].nickname;
+        u8 *nickname = gMultiPartnerParty[i].nickname;
 
-        gUnknown_02023A00[i].species     = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
-        gUnknown_02023A00[i].heldItem    = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        gMultiPartnerParty[i].species     = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        gMultiPartnerParty[i].heldItem    = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
-        gUnknown_02023A00[i].level       = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-        gUnknown_02023A00[i].hp          = GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        gUnknown_02023A00[i].maxhp       = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
-        gUnknown_02023A00[i].status      = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
-        gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-        gUnknown_02023A00[i].gender      = GetMonGender(&gPlayerParty[i]);
+        gMultiPartnerParty[i].level       = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        gMultiPartnerParty[i].hp          = GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        gMultiPartnerParty[i].maxhp       = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+        gMultiPartnerParty[i].status      = GetMonData(&gPlayerParty[i], MON_DATA_STATUS);
+        gMultiPartnerParty[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+        gMultiPartnerParty[i].gender      = GetMonGender(&gPlayerParty[i]);
         Text_StripExtCtrlCodes(nickname);
-        gUnknown_02023A00[i].language    = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
-        if (gUnknown_02023A00[i].language != 1)
+        gMultiPartnerParty[i].language    = GetMonData(&gPlayerParty[i], MON_DATA_LANGUAGE);
+        if (gMultiPartnerParty[i].language != 1)
             PadNameString(nickname, 0);
     }
-    memcpy(gSharedMem, gUnknown_02023A00, 0x60);
+    memcpy(gSharedMem, gMultiPartnerParty, 0x60);
 }
 
 void sub_800F104(void)
@@ -646,7 +646,7 @@ void sub_800F104(void)
                 {
                     if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[playerId].lp_field_18 & 1))
                      || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[playerId].lp_field_18 & 1)))
-                        memcpy(gUnknown_02023A00, gBlockRecvBuffer[i], 0x60);
+                        memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], 0x60);
                 }
             }
             gBattleCommunication[0]++;
@@ -2444,7 +2444,7 @@ void debug_sub_801174C(void)
     AddBagItem(ITEM_POKE_DOLL, 99);
 
     for (i = 0; i < 15; i++)
-        sub_810CA34(&gUnknown_Debug_821F5AC[i]);
+        GivePokeblock(&gUnknown_Debug_821F5AC[i]);
 }
 
 void debug_sub_8011D40(void)

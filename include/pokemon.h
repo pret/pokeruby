@@ -632,7 +632,7 @@ void BoxMonRestorePP(struct BoxPokemon *);
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 
 #if DEBUG
-void debug_sub_803F55C(struct Pokemon *);
+void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *);
 #endif // DEBUG
 
 #endif // GUARD_POKEMON_H

@@ -10,7 +10,7 @@ void HandleLinkMultiBattlePartyMenu(u8 taskId);
 void HandleDaycarePartyMenu(u8 taskId);
 void sub_8123138(u8 taskId);
 #if DEBUG
-void debug_sub_81381B4(void);
+void Debug_CopyLastThreePartyMonsToMultiPartnerParty(void);
 #endif
 
 #endif // GUARD_CHOOSE_PARTY_H

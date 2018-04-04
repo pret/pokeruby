@@ -14,4 +14,7 @@ void debug_nullsub_66(void);
 // sound_check_menu
 void CB2_StartSoundCheckMenu(void);
 
+// nakamura_debug_menu
+void NakaGenderTest(void);
+
 #endif // GUARD_DEBUG_H

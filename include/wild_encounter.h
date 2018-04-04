@@ -36,7 +36,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 #if DEBUG
-u16 debug_sub_8092344(u8 arg0);
+u16 FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(u8 arg0);
 void FeebasSeedRng(u16 seed);
 u16 FeebasRandom(void);
 #endif // DEBUG

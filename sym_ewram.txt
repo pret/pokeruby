@@ -23,7 +23,7 @@ gBattleTypeFlags = .; /* 20239F8 */
 gUnknown_020239FC = .; /* 20239FC */
     . += 0x4;
 
-gUnknown_02023A00 = .; /* 2023A00 */
+gMultiPartnerParty = .; /* 2023A00 */
     . += 0x4;
 
 gUnknown_02023A04 = .; /* 2023A04 */

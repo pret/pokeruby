@@ -64,7 +64,7 @@ bool8 sub_8133FE4(u8 decorIdx)
     return FALSE;
 }
 
-bool8 IsThereStorageSpaceForDecoration(u8 decorIdx)
+bool8 GiveDecoration(u8 decorIdx)
 {
     u8 invIdx;
     s8 invSlot;
@@ -167,11 +167,11 @@ u8 sub_81341D4(void)
 
 
 #if DEBUG
-void debug_sub_814A3A8(void)
+void Debug_GiveAllDecorations(void)
 {
     u8 decor;
 
     for (decor = 0; decor < DECOR_COUNT; decor++)
-        IsThereStorageSpaceForDecoration(decor);
+        GiveDecoration(decor);
 }
 #endif

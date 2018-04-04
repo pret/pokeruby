@@ -25,222 +25,67 @@
 #include "menu_helpers.h"
 #include "pokeblock.h"
 
-typedef bool8 (*MenuFunc)(void);
+static bool8 TopMenu_HandleJoypad(void);
+static bool8 SwitchToPkmnListMenu(void);
+static bool8 MakeBasesToMax(void);
+static bool8 BaseLocation(void);
+static bool8 MoveYourBase_JoypadAction(void);
+static bool8 SwitchToMoveYourBaseSubmenu(void);
+static bool8 MovingPKMN(void);
+static bool8 Give999OfAllBerries(void);
+static bool8 GiveAllDecorations(void);
+static bool8 FishingPoints(void);
+static void NakaGenderTest_PrintSpeciesName(u8);
+static void NakaGenderTest_PrintSpeciesGender(u8);
+static void NakaGenderTest_PrintSpeciesLevel(u8);
+static void NakaGenderTest_JoypadAction(u8);
+static bool8 NakaGenderTest_HandleJoypad(void);
+static u8 NakaGenderTest_ForceRerollPokemon(u8);
+static bool8 SetPokeblock(void);
 
-EWRAM_DATA u8 _nakamuraData0 = 0;
-EWRAM_DATA u8 _nakamuraData1 = 0;
-EWRAM_DATA u8 _nakamuraData2 = 0;
-EWRAM_DATA u8 _nakamuraData3 = 0;
-EWRAM_DATA u8 _nakamuraData4 = 0;
-EWRAM_DATA u8 _nakamuraData5 = 0;
-EWRAM_DATA u16 _nakamuraData6 = 0;
-EWRAM_DATA u16 _nakamuraData8 = 0;
-EWRAM_DATA u16 _nakamuraDataA = 0;
-EWRAM_DATA u16 _nakamuraDataC = 0;
+// =======================================================
+// TOP MENU
+// =======================================================
 
-static struct {
-    s16 species;
-    s8 level;
-    u8 unk3;
-} _nakamuraStatic0[PARTY_SIZE];
-static struct Pokeblock _nakamuraStatic18;
+static const u8 Str_843E36C[] = _("Berries");
+static const u8 Str_843E374[] = _("Goods");
+static const u8 Str_843E37A[] = _("{PKMN} list");
+static const u8 Str_843E382[] = _("トラップ");
+static const u8 Str_843E387[] = _("Move your base");
+static const u8 Str_843E396[] = _("Moving {PKMN}");
+static const u8 Str_843E3A0[] = _("Fishing points");
+static const u8 Str_843E3AF[] = _("Set {POKEBLOCK}");
+static const u8 Str_843E3B9[] = _("Make bases(to max)");
+static const u8 Str_843E3CC[] = _("Base location");
 
-asm(".global _nakamuraStatic0");
-asm(".global _nakamuraStatic18");
-
-bool8 debug_sub_815F214(void);
-bool8 debug_sub_815F2B4(void);
-bool8 debug_sub_815F2F4(void);
-bool8 debug_sub_815F62C(void);
-bool8 debug_sub_815FA38(void);
-bool8 debug_sub_815FB1C(void);
-bool8 debug_sub_815FBE8(void);
-bool8 debug_sub_815FC54(void);
-bool8 debug_sub_815FC94(void);
-bool8 debug_sub_815FE1C(void);
-void debug_sub_816009C(u8);
-void debug_sub_81600D0(u8);
-void debug_sub_816013C(u8);
-void debug_sub_81603B8(u8);
-bool8 debug_sub_8160498(void);
-u8 debug_sub_816062C(u8);
-bool8 debug_sub_8160D98(void);
-
-const u8 Str_843E36C[] = _("Berries");
-const u8 Str_843E374[] = _("Goods");
-const u8 Str_843E37A[] = _("{PKMN} list");
-const u8 Str_843E382[] = _("トラップ");
-const u8 Str_843E387[] = _("Move your base");
-const u8 Str_843E396[] = _("Moving {PKMN}");
-const u8 Str_843E3A0[] = _("Fishing points");
-const u8 Str_843E3AF[] = _("Set {POKEBLOCK}");
-const u8 Str_843E3B9[] = _("Make bases(to max)");
-const u8 Str_843E3CC[] = _("Base location");
-
-const struct MenuAction _843E3DC[] = {
-	{ Str_843E36C, debug_sub_815FC54 },
-	{ Str_843E37A, debug_sub_815F2B4 },
-	{ Str_843E374, debug_sub_815FC94 },
-	{ Str_843E387, debug_sub_815FB1C },
-	{ Str_843E3B9, debug_sub_815F2F4 },
-	{ Str_843E3CC, debug_sub_815F62C },
-	{ Str_843E396, debug_sub_815FBE8 },
-	{ Str_843E3A0, debug_sub_815FE1C },
-	{ Str_843E3AF, debug_sub_8160D98 },
+static const struct MenuAction sNakamuraTopMenuActions[] = {
+	{ Str_843E36C, Give999OfAllBerries },
+	{ Str_843E37A, SwitchToPkmnListMenu },
+	{ Str_843E374, GiveAllDecorations },
+	{ Str_843E387, SwitchToMoveYourBaseSubmenu },
+	{ Str_843E3B9, MakeBasesToMax },
+	{ Str_843E3CC, BaseLocation },
+	{ Str_843E396, MovingPKMN },
+	{ Str_843E3A0, FishingPoints },
+	{ Str_843E3AF, SetPokeblock },
 };
 
-const u8 _843E424[] = {
-        1,   118,    47,    14 ,
-        2,   125,    53,    10 ,
-        3,   113,    49,     8 ,
-      0xB,   118,    67,     6 ,
-      0xC,   121,    40,    11 ,
-      0xD,   111,    35,     1 ,
-     0x15,   115,    20,    53 ,
-     0x16,   121,    18,    13 ,
-     0x17,   119,    26,    81 ,
-     0x1F,   127,    59,    67 ,
-     0x20,   125,    55,    11 ,
-     0x21,   111,    27,    27 ,
-     0x29,   114,     9,    47 ,
-     0x2A,   115,    32,    39 ,
-     0x2B,   115,    23,     8 ,
-     0x33,   114,    30,    51 ,
-     0x34,   115,    26,    15 ,
-     0x35,   115,    32,    46 ,
-     0x3D,   114,    11,    62 ,
-     0x3E,   115,    21,    18 ,
-     0x3F,   115,    25,    24 ,
-     0x47,   114,    19,    70 ,
-     0x48,   115,    32,     6 ,
-     0x49,   114,    32,    57 ,
-     0x51,   116,    71,     4 ,
-     0x52,   123,    47,     3 ,
-     0x53,   123,    57,     5 ,
-     0x5B,   116,    79,    11 ,
-     0x5C,   123,    49,     3 ,
-     0x5D,   120,    18,    12 ,
-     0x65,   120,    28,    62 ,
-     0x66,   116,    56,     6 ,
-     0x67,   119,    16,    81 ,
-     0x6F,   120,    30,    62 ,
-     0x70,   116,    55,    15 ,
-     0x71,   119,    16,    28 ,
-     0x79,   111,    33,    34 ,
-     0x7A,   118,    29,     5 ,
-     0x7B,   127,    45,    24 ,
-     0x83,   111,    24,    36 ,
-     0x84,   125,     7,    25 ,
-     0x85,   115,     8,    30 ,
-     0x8D,   111,    34,    50 ,
-     0x8E,   127,    59,    72 ,
-     0x8F,   127,    61,    21 ,
-     0x97,   127,    67,    63 ,
-     0x98,   125,    24,    32 ,
-     0x99,   111,    35,    31 ,
-     0xA1,   111,    13,    19 ,
-     0xA2,   121,    43,     7 ,
-     0xA3,   118,    47,     5 ,
-     0xA4,   111,    14,    19 ,
-     0xAB,   118,    46,     5 ,
-     0xAC,   121,    42,     7 ,
-     0xAD,   119,    19,    76 ,
-     0xAE,   115,     7,    20 ,
-     0xB5,   110,    16,    25 ,
-     0xB6,   114,    11,    27 ,
-     0xB7,   115,     8,    20 ,
-     0xBF,   110,    17,    25 ,
-     0xC0,   114,    12,    27 ,
-     0xC1,   119,    18,    76 ,
-     0xC9,   119,     5,     2 ,
-     0xCA,   119,     4,    89 ,
-     0xCB,   120,    38,    54 ,
-     0xCC,   120,     5,    76 ,
-     0xD3,   119,     5,    15 ,
-     0xD4,   119,     7,   101 ,
-     0xD5,   120,    31,    23 ,
-     0xDD,   119,    34,    24 ,
-     0xDE,   120,    26,    10 ,
-     0xDF,   119,     4,    15 ,
-     0xE7,   119,    31,    73 ,
-     0xE8,   120,    29,    85 ,
-     0xE9,   119,     6,     2 ,
-};
-
-const u8 Str_843E550[] = _("R");
-const u8 Str_843E552[] = _("X");
-const u8 Str_843E554[] = _("Y");
-const u8 Str_843E556[] = _(
-    "♂1\n"
-    "♂2\n"
-    "♂3\n"
-    "♂4\n"
-    "♂5\n"
-    "♀1\n"
-    "♀2\n"
-    "♀3\n"
-    "♀4\n"
-    "♀5");
-const u8 Str_843E574[] = _("ー");
-const u8 Str_843E576[][2] = {
-    _("あ"),
-    _("ア"),
-    _("A"),
-    _("a"),
-    _("0")
-};
-const u8 Str_843E580[] = _(
-    "ADD\n"
-    "DEL\n"
-    "EXIT");
-const u8 Str_843E58D[] = _(
-    "Fishing location R119\n"
-    " Y1\n"
-    " Y2\n"
-    " Y3\n"
-    "Encounter location\n"
-    "\n"
-    "\n"
-    "front of you");
-const u8 _843E5D1[] = {0x0F, 0x16, 0x19};
-const u8 Str_843E5D4[] = _(
-    "Aボタン　{ESCAPE}\p"
-    "　　Bボタン　ー\n"
-    "START　けってい");
-
-const u8 Str_843E5F0[] = _("？");
-const u8 Str_843E5F2[] = _("HP　どりょくち");
-const u8 Str_843E5FB[] = _("こうげき　どりょくち");
-const u8 Str_843E606[] = _("ぼうぎょ　どりょくち");
-const u8 Str_843E611[] = _("すばやさ　どりょくち");
-const u8 Str_843E61C[] = _("とくこう　どりょくち");
-const u8 Str_843E627[] = _("とくぼう　どりょくち");
-const u8 Str_843E632[] = _("なつきど");
-const u8 Str_843E637[] = _("どりょくち　ごうけい");
-const u8 Str_843E642[] = _("ここから");
-const u8 Str_843E647[] = _("ここまで");
-const u8 Str_843E64C[] = _("かいすう");
-const u8 Str_843E651[] = _("けっか");
-const u8 Str_843E655[] = _("かい");
-const u8 Str_843E658[] = _("0");
-const u8 Str_843E65A[] = _("はんい");
-
-void debug_sub_815F1B8(void)
+static void DrawNakamuraDebugMenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(14, 0, 29, 19);
-    Menu_PrintItems(16, 1, ARRAY_COUNT(_843E3DC), _843E3DC);
-    InitMenu(0, 15, 1, ARRAY_COUNT(_843E3DC), 0, 14);
+    Menu_PrintItems(16, 1, ARRAY_COUNT(sNakamuraTopMenuActions), sNakamuraTopMenuActions);
+    InitMenu(0, 15, 1, ARRAY_COUNT(sNakamuraTopMenuActions), 0, 14);
 }
 
 bool8 InitNakamuraDebugMenu(void)
 {
-    debug_sub_815F1B8();
-    gMenuCallback = debug_sub_815F214;
+    DrawNakamuraDebugMenu();
+    gMenuCallback = TopMenu_HandleJoypad;
     return FALSE;
 }
 
-bool8 debug_sub_815F214(void)
+static bool8 TopMenu_HandleJoypad(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -254,7 +99,7 @@ bool8 debug_sub_815F214(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        MenuFunc func = _843E3DC[Menu_GetCursorPos()].func;
+        MenuFunc func = sNakamuraTopMenuActions[Menu_GetCursorPos()].func;
         Menu_DestroyCursor();
         return func();
     }
@@ -268,27 +113,131 @@ bool8 debug_sub_815F214(void)
     return FALSE;
 }
 
-void debug_sub_815F284(u8 taskId)
+// =======================================================
+// PKMN LIST
+// =======================================================
+
+static void Task_SwitchToPkmnListMenu(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        debug_sub_81381B4();
-        OpenPartyMenu(5, 0);
+        Debug_CopyLastThreePartyMonsToMultiPartnerParty();
+        OpenPartyMenu(PARTY_MENU_TYPE_LINK_MULTI_BATTLE, 0);
         DestroyTask(taskId);
     }
 }
 
-bool8 debug_sub_815F2B4(void)
+static bool8 SwitchToPkmnListMenu(void)
 {
     CloseMenu();
     Menu_EraseScreen();
-    gMain.savedCallback = sub_805469C;
-    CreateTask(debug_sub_815F284, 0);
+    gMain.savedCallback = c2_exit_to_overworld_1_sub_8080DEC;
+    CreateTask(Task_SwitchToPkmnListMenu, 0);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     return TRUE;
 }
 
-bool8 debug_sub_815F2F4(void)
+// =======================================================
+// MAKE BASES TO MAX and BASE LOCATION
+// =======================================================
+
+EWRAM_DATA u8 sSecretBaseIdx = 0;
+
+static const u8 sSecretBaseTemplates[] = {
+    // ID, Route,     X,     Y
+    0x01,   118,    47,    14 ,
+    0x02,   125,    53,    10 ,
+    0x03,   113,    49,     8 ,
+    0x0B,   118,    67,     6 ,
+    0x0C,   121,    40,    11 ,
+    0x0D,   111,    35,     1 ,
+    0x15,   115,    20,    53 ,
+    0x16,   121,    18,    13 ,
+    0x17,   119,    26,    81 ,
+    0x1F,   127,    59,    67 ,
+    0x20,   125,    55,    11 ,
+    0x21,   111,    27,    27 ,
+    0x29,   114,     9,    47 ,
+    0x2A,   115,    32,    39 ,
+    0x2B,   115,    23,     8 ,
+    0x33,   114,    30,    51 ,
+    0x34,   115,    26,    15 ,
+    0x35,   115,    32,    46 ,
+    0x3D,   114,    11,    62 ,
+    0x3E,   115,    21,    18 ,
+    0x3F,   115,    25,    24 ,
+    0x47,   114,    19,    70 ,
+    0x48,   115,    32,     6 ,
+    0x49,   114,    32,    57 ,
+    0x51,   116,    71,     4 ,
+    0x52,   123,    47,     3 ,
+    0x53,   123,    57,     5 ,
+    0x5B,   116,    79,    11 ,
+    0x5C,   123,    49,     3 ,
+    0x5D,   120,    18,    12 ,
+    0x65,   120,    28,    62 ,
+    0x66,   116,    56,     6 ,
+    0x67,   119,    16,    81 ,
+    0x6F,   120,    30,    62 ,
+    0x70,   116,    55,    15 ,
+    0x71,   119,    16,    28 ,
+    0x79,   111,    33,    34 ,
+    0x7A,   118,    29,     5 ,
+    0x7B,   127,    45,    24 ,
+    0x83,   111,    24,    36 ,
+    0x84,   125,     7,    25 ,
+    0x85,   115,     8,    30 ,
+    0x8D,   111,    34,    50 ,
+    0x8E,   127,    59,    72 ,
+    0x8F,   127,    61,    21 ,
+    0x97,   127,    67,    63 ,
+    0x98,   125,    24,    32 ,
+    0x99,   111,    35,    31 ,
+    0xA1,   111,    13,    19 ,
+    0xA2,   121,    43,     7 ,
+    0xA3,   118,    47,     5 ,
+    0xA4,   111,    14,    19 ,
+    0xAB,   118,    46,     5 ,
+    0xAC,   121,    42,     7 ,
+    0xAD,   119,    19,    76 ,
+    0xAE,   115,     7,    20 ,
+    0xB5,   110,    16,    25 ,
+    0xB6,   114,    11,    27 ,
+    0xB7,   115,     8,    20 ,
+    0xBF,   110,    17,    25 ,
+    0xC0,   114,    12,    27 ,
+    0xC1,   119,    18,    76 ,
+    0xC9,   119,     5,     2 ,
+    0xCA,   119,     4,    89 ,
+    0xCB,   120,    38,    54 ,
+    0xCC,   120,     5,    76 ,
+    0xD3,   119,     5,    15 ,
+    0xD4,   119,     7,   101 ,
+    0xD5,   120,    31,    23 ,
+    0xDD,   119,    34,    24 ,
+    0xDE,   120,    26,    10 ,
+    0xDF,   119,     4,    15 ,
+    0xE7,   119,    31,    73 ,
+    0xE8,   120,    29,    85 ,
+    0xE9,   119,     6,     2 ,
+};
+
+static const u8 Str_843E550[] = _("R");
+static const u8 Str_843E552[] = _("X");
+static const u8 Str_843E554[] = _("Y");
+static const u8 Str_843E556[] = _(
+                                    "♂1\n"
+                                    "♂2\n"
+                                    "♂3\n"
+                                    "♂4\n"
+                                    "♂5\n"
+                                    "♀1\n"
+                                    "♀2\n"
+                                    "♀3\n"
+                                    "♀4\n"
+                                    "♀5");
+
+static bool8 MakeBasesToMax(void)
 {
     u8 i;
     CloseMenu();
@@ -313,7 +262,7 @@ bool8 debug_sub_815F2F4(void)
 
             do
             {
-                gSaveBlock1.secretBases[i].secretBaseId = _843E424[(Random() % (ARRAY_COUNT(_843E424) / 4)) * 4];
+                gSaveBlock1.secretBases[i].secretBaseId = sSecretBaseTemplates[(Random() % (ARRAY_COUNT(sSecretBaseTemplates) / 4)) * 4];
 
                 for (j = 0; j < i; j++)
                 {
@@ -342,72 +291,72 @@ bool8 debug_sub_815F2F4(void)
     return TRUE;
 }
 
-void debug_sub_815F470(u8 * a0, u8 * a1, u8 * a2)
+static void BaseLocation_GetCurSecretBaseData(u8 * R, u8 * X, u8 * Y)
 {
     u8 i;
-    u8 sbId = gSaveBlock1.secretBases[_nakamuraData0].secretBaseId;
+    u8 sbId = gSaveBlock1.secretBases[sSecretBaseIdx].secretBaseId;
 
-    for (i = 0; i < ARRAY_COUNT(_843E424) / 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sSecretBaseTemplates) / 4; i++)
     {
-        if (_843E424[i * 4] == sbId)
+        if (sSecretBaseTemplates[i * 4] == sbId)
         {
-            *a0 = _843E424[i * 4 + 1];
-            *a1 = _843E424[i * 4 + 2];
-            *a2 = _843E424[i * 4 + 3];
+            *R = sSecretBaseTemplates[i * 4 + 1];
+            *X = sSecretBaseTemplates[i * 4 + 2];
+            *Y = sSecretBaseTemplates[i * 4 + 3];
             break;
         }
     }
 }
 
-void debug_sub_815F4D8(void)
+static void BaseLocation_Redraw(void)
 {
     Menu_BlankWindowRect(1, 1, 10, 10);
-    ConvertIntToDecimalStringN(gStringVar1, _nakamuraData0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar1, sSecretBaseIdx, STR_CONV_MODE_LEFT_ALIGN, 2);
     Menu_PrintText(gStringVar1, 1, 1);
 
-    if (gSaveBlock1.secretBases[_nakamuraData0].secretBaseId != 0)
+    if (gSaveBlock1.secretBases[sSecretBaseIdx].secretBaseId != 0)
     {
-        u8 a0;
-        u8 a1;
-        u8 a2;
-        debug_sub_815F470(&a0, &a1, &a2);
+        u8 R;
+        u8 X;
+        u8 Y;
+        BaseLocation_GetCurSecretBaseData(&R, &X, &Y);
 
-        sub_80BC190(gStringVar1, _nakamuraData0);
+        sub_80BC190(gStringVar1, sSecretBaseIdx);
         Menu_PrintText(gStringVar1, 1, 3);
 
         Menu_PrintText(Str_843E550, 1, 5);
-        ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, R, STR_CONV_MODE_LEFT_ALIGN, 3);
         Menu_PrintText(gStringVar1, 2, 5);
 
         Menu_PrintText(Str_843E552, 1, 7);
-        ConvertIntToDecimalStringN(gStringVar1, a1, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, X, STR_CONV_MODE_LEFT_ALIGN, 3);
         Menu_PrintText(gStringVar1, 3, 7);
 
         Menu_PrintText(Str_843E554, 1, 9);
-        ConvertIntToDecimalStringN(gStringVar1, a2, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, Y, STR_CONV_MODE_LEFT_ALIGN, 3);
         Menu_PrintText(gStringVar1, 3, 9);
     }
 }
 
-bool8 debug_sub_815F5C4(void)
+static bool8 BaseLocation_HandleJoypad(void)
 {
     if (gMain.newKeys & DPAD_LEFT)
     {
-        if (_nakamuraData0 == 0)
-            _nakamuraData0 = 19;
+        if (sSecretBaseIdx == 0)
+            sSecretBaseIdx = 19;
         else
-            _nakamuraData0--;
-        debug_sub_815F4D8();
+            sSecretBaseIdx--;
+        BaseLocation_Redraw();
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (_nakamuraData0 == 19)
-            _nakamuraData0 = 0;
+        if (sSecretBaseIdx == 19)
+            sSecretBaseIdx = 0;
         else
-            _nakamuraData0++;
-        debug_sub_815F4D8();
+            sSecretBaseIdx++;
+        BaseLocation_Redraw();
         return FALSE;
     }
 
@@ -420,19 +369,36 @@ bool8 debug_sub_815F5C4(void)
     return FALSE;
 }
 
-bool8 debug_sub_815F62C(void)
+static bool8 BaseLocation(void)
 {
-    _nakamuraData0 = 0;
-    gMenuCallback = debug_sub_815F5C4;
+    sSecretBaseIdx = 0;
+    gMenuCallback = BaseLocation_HandleJoypad;
     Menu_EraseWindowRect(0, 0, 29, 19);
     Menu_DrawStdWindowFrame(0, 0, 11, 11);
-    debug_sub_815F4D8();
+    BaseLocation_Redraw();
     return FALSE;
 }
 
-void debug_sub_815F668(void)
+// =======================================================
+// MOVE YOUR BASE
+// =======================================================
+
+EWRAM_DATA u8 sMoveYourBase_CursorPos = 0;
+EWRAM_DATA u8 sMoveYourBase_XCursorPos = 0;
+EWRAM_DATA u8 sSecretBaseNameCharGroup = 0;
+
+static const u8 Str_843E574[] = _("ー");
+static const u8 Str_843E576[][2] = {
+    _("あ"),
+    _("ア"),
+    _("A"),
+    _("a"),
+    _("0")
+};
+
+static void MoveYourBase_PrintSBOwnerID(void)
 {
-    u8 * otIdPtr = gSaveBlock1.secretBases[_nakamuraData0].trainerId;
+    u8 * otIdPtr = gSaveBlock1.secretBases[sSecretBaseIdx].trainerId;
     u32 otId = (otIdPtr[3] << 24) | (otIdPtr[2] << 16) | (otIdPtr[1] << 8) | (otIdPtr[0] << 0);
     ConvertIntToDecimalStringN(gStringVar1, otId / 100000, STR_CONV_MODE_LEADING_ZEROS, 5);
     Menu_PrintText(gStringVar1, 2, 7);
@@ -440,49 +406,49 @@ void debug_sub_815F668(void)
     Menu_PrintText(gStringVar1, 7, 7);
 }
 
-void debug_sub_815F6E4(void)
+static void MoveYourBase_PrintSBOwnerName(void)
 {
     Menu_BlankWindowRect(2, 3, 11, 4);
-    *StringCopyN(gStringVar1, gSaveBlock1.secretBases[_nakamuraData0].playerName, 7) = EOS;
+    *StringCopyN(gStringVar1, gSaveBlock1.secretBases[sSecretBaseIdx].playerName, 7) = EOS;
     Menu_PrintText(gStringVar1, 2, 3);
 }
 
-void debug_sub_815F72C(void)
+static void MoveYourBase_Redraw(void)
 {
     Menu_BlankWindowRect(2, 1, 11, 10);
 
-    ConvertIntToDecimalStringN(gStringVar1, _nakamuraData0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar1, sSecretBaseIdx, STR_CONV_MODE_LEFT_ALIGN, 2);
     Menu_PrintText(gStringVar1, 2, 1);
 
-    if (gSaveBlock1.secretBases[_nakamuraData0].secretBaseId != 0)
+    if (gSaveBlock1.secretBases[sSecretBaseIdx].secretBaseId != 0)
     {
-        debug_sub_815F6E4();
-        debug_sub_815F668();
+        MoveYourBase_PrintSBOwnerName();
+        MoveYourBase_PrintSBOwnerID();
     }
 }
 
-void debug_sub_815F788(void)
+static void MoveYourBase_UpdateXCursorPosition(void)
 {
     Menu_BlankWindowRect(2, 5, 11, 6);
-    Menu_PrintText(Str_843E574, _nakamuraData2 + 2, 5);
+    Menu_PrintText(Str_843E574, sMoveYourBase_XCursorPos + 2, 5);
 }
 
-void debug_sub_815F7B4(void)
+static void MoveYourBase_PrintCharacterSetName(void)
 {
-    if (_nakamuraData1)
+    if (sMoveYourBase_CursorPos)
         Menu_BlankWindowRect(11, 1, 11, 2);
     else
-        Menu_PrintText(Str_843E576[_nakamuraData3], 11, 1);
+        Menu_PrintText(Str_843E576[sSecretBaseNameCharGroup], 11, 1);
 }
 
-void debug_sub_815F7F0(s8 a0)
+static void MoveYourBase_EditOwnerID(s8 direction)
 {
-    u8 * otIdPtr = gSaveBlock1.secretBases[_nakamuraData0].trainerId;
+    u8 * otIdPtr = gSaveBlock1.secretBases[sSecretBaseIdx].trainerId;
     u32 otId = (otIdPtr[3] << 24) | (otIdPtr[2] << 16) | (otIdPtr[1] << 8) | (otIdPtr[0] << 0);
-    s8 r4;
-    int r1 = a0;
+    s8 digit;
+    int r1 = direction;
 
-    for (r4 = 9; r4 > _nakamuraData2; r4--)
+    for (digit = 9; digit > sMoveYourBase_XCursorPos; digit--)
         r1 *= 10;
 
     otId += r1;
@@ -490,105 +456,105 @@ void debug_sub_815F7F0(s8 a0)
     otIdPtr[2] = (otId & 0x00FF0000) >> 16;
     otIdPtr[1] = (otId & 0x0000FF00) >> 8;
     otIdPtr[0] = (otId & 0x000000FF) >> 0;
-    debug_sub_815F668();
+    MoveYourBase_PrintSBOwnerID();
 }
 
-void debug_sub_815F86C(s8 a0)
+static void MoveYourBase_EditOwnerNameChar(s8 a0)
 {
-    u8 * namePtr = gSaveBlock1.secretBases[_nakamuraData0].playerName;
+    u8 * namePtr = gSaveBlock1.secretBases[sSecretBaseIdx].playerName;
     u8 r2 = 0;
     u8 r3 = 0;
     u8 i;
 
     if (a0 == 100)
     {
-        for (i = _nakamuraData2; i < 7; i++)
+        for (i = sMoveYourBase_XCursorPos; i < 7; i++)
         {
             namePtr[i] = EOS;
         }
     }
     else
     {
-        switch (_nakamuraData3)
+        switch (sSecretBaseNameCharGroup)
         {
-            case 0:
+            case 0: // HIRA
                 r3 = 1;
                 r2 = 80;
                 break;
-            case 1:
+            case 1: // KATA
                 r3 = 81;
                 r2 = 160;
                 break;
-            case 2:
+            case 2: // A-Z
                 r3 = CHAR_A;
                 r2 = CHAR_Z;
                 break;
-            case 3:
+            case 3: // a-z
                 r3 = CHAR_a;
                 r2 = CHAR_z;
                 break;
-            case 4:
+            case 4: // 0-9
                 r3 = CHAR_0;
                 r2 = CHAR_0 + 9;
                 break;
         }
 
-        namePtr[_nakamuraData2] += a0;
-        if (namePtr[_nakamuraData2] < r3)
-            namePtr[_nakamuraData2] = r2;
-        if (namePtr[_nakamuraData2] > r2)
-            namePtr[_nakamuraData2] = r3;
+        namePtr[sMoveYourBase_XCursorPos] += a0;
+        if (namePtr[sMoveYourBase_XCursorPos] < r3)
+            namePtr[sMoveYourBase_XCursorPos] = r2;
+        if (namePtr[sMoveYourBase_XCursorPos] > r2)
+            namePtr[sMoveYourBase_XCursorPos] = r3;
     }
-    debug_sub_815F6E4();
+    MoveYourBase_PrintSBOwnerName();
 }
 
-bool8 debug_sub_815F930(void)
+static bool8 MoveYourBase_HandleJoypad_2(void)
 {
-    u32 r4 = _nakamuraData1 == 0 ? 7 : 10;
+    u32 r4 = sMoveYourBase_CursorPos == 0 ? 7 : 10;
 
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
-        if (_nakamuraData1)
-            debug_sub_815F7F0(1);
+        if (sMoveYourBase_CursorPos)
+            MoveYourBase_EditOwnerID(1);
         else
-            debug_sub_815F86C(1);
+            MoveYourBase_EditOwnerNameChar(1);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & DPAD_DOWN)
     {
-        if (_nakamuraData1)
-            debug_sub_815F7F0(-1);
+        if (sMoveYourBase_CursorPos)
+            MoveYourBase_EditOwnerID(-1);
         else
-            debug_sub_815F86C(-1);
+            MoveYourBase_EditOwnerNameChar(-1);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        if (_nakamuraData2 == 0)
-            _nakamuraData2 = r4 - 1;
+        if (sMoveYourBase_XCursorPos == 0)
+            sMoveYourBase_XCursorPos = r4 - 1;
         else
-            _nakamuraData2--;
-        debug_sub_815F788();
+            sMoveYourBase_XCursorPos--;
+        MoveYourBase_UpdateXCursorPosition();
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        if (_nakamuraData2 == r4 - 1)
-            _nakamuraData2 = 0;
+        if (sMoveYourBase_XCursorPos == r4 - 1)
+            sMoveYourBase_XCursorPos = 0;
         else
-            _nakamuraData2++;
-        debug_sub_815F788();
+            sMoveYourBase_XCursorPos++;
+        MoveYourBase_UpdateXCursorPosition();
         return FALSE;
     }
 
     if (gMain.newKeys & SELECT_BUTTON)
     {
-        if (_nakamuraData1 == 0)
-            _nakamuraData3 = (_nakamuraData3 + 1) % 5;
-        debug_sub_815F7B4();
+        if (sMoveYourBase_CursorPos == 0)
+            sSecretBaseNameCharGroup = (sSecretBaseNameCharGroup + 1) % 5;
+        MoveYourBase_PrintCharacterSetName();
         return FALSE;
     }
 
@@ -596,21 +562,21 @@ bool8 debug_sub_815F930(void)
     {
         Menu_BlankWindowRect(2, 5, 11, 6);
         Menu_BlankWindowRect(11, 1, 11, 2);
-        gMenuCallback = debug_sub_815FA38;
+        gMenuCallback = MoveYourBase_JoypadAction;
         return FALSE;
     }
 
     if (gMain.newKeys & B_BUTTON)
     {
-        if (_nakamuraData1 == 0)
-            debug_sub_815F86C(100);
+        if (sMoveYourBase_CursorPos == 0)
+            MoveYourBase_EditOwnerNameChar(100);
         return FALSE;
     }
 
     return FALSE;
 }
 
-bool8 debug_sub_815FA38(void)
+static bool8 MoveYourBase_JoypadAction(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -626,33 +592,33 @@ bool8 debug_sub_815FA38(void)
 
     if (gMain.newKeys & DPAD_LEFT)
     {
-        if (_nakamuraData0 == 0)
-            _nakamuraData0 = 19;
+        if (sSecretBaseIdx == 0)
+            sSecretBaseIdx = 19;
         else
-            _nakamuraData0--;
-        debug_sub_815F72C();
+            sSecretBaseIdx--;
+        MoveYourBase_Redraw();
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (_nakamuraData0 == 19)
-            _nakamuraData0 = 0;
+        if (sSecretBaseIdx == 19)
+            sSecretBaseIdx = 0;
         else
-            _nakamuraData0++;
-        debug_sub_815F72C();
+            sSecretBaseIdx++;
+        MoveYourBase_Redraw();
         return FALSE;
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
-        if (_nakamuraData0 != 0 && gSaveBlock1.secretBases[_nakamuraData0].secretBaseId != 0)
+        if (sSecretBaseIdx != 0 && gSaveBlock1.secretBases[sSecretBaseIdx].secretBaseId != 0)
         {
-            _nakamuraData1 = Menu_GetCursorPos();
-            _nakamuraData2 = 0;
-            debug_sub_815F788();
-            debug_sub_815F7B4();
-            gMenuCallback = debug_sub_815F930;
+            sMoveYourBase_CursorPos = Menu_GetCursorPos();
+            sMoveYourBase_XCursorPos = 0;
+            MoveYourBase_UpdateXCursorPosition();
+            MoveYourBase_PrintCharacterSetName();
+            gMenuCallback = MoveYourBase_HandleJoypad_2;
         }
         return FALSE;
     }
@@ -666,19 +632,28 @@ bool8 debug_sub_815FA38(void)
     return FALSE;
 }
 
-bool8 debug_sub_815FB1C(void)
+static bool8 SwitchToMoveYourBaseSubmenu(void)
 {
-    _nakamuraData0 = 0;
-    _nakamuraData3 = 0;
-    gMenuCallback = debug_sub_815FA38;
+    sSecretBaseIdx = 0;
+    sSecretBaseNameCharGroup = 0;
+    gMenuCallback = MoveYourBase_JoypadAction;
     Menu_EraseWindowRect(0, 0, 29, 19);
     Menu_DrawStdWindowFrame(0, 0, 12, 11);
-    debug_sub_815F72C();
+    MoveYourBase_Redraw();
     InitMenu(0, 1, 3, 3, 0, 11);
     return FALSE;
 }
 
-bool8 debug_sub_815FB78(void)
+// =======================================================
+// MOVING PKMN (aka Roamers)
+// =======================================================
+
+static const u8 Str_843E580[] = _(
+                                    "ADD\n"
+                                    "DEL\n"
+                                    "EXIT");
+
+static bool8 MovingPKMN_HandleJoypad(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
@@ -698,7 +673,7 @@ bool8 debug_sub_815FB78(void)
         switch (Menu_GetCursorPos())
         {
             case 0:
-                debug_sub_814A714();
+                Debug_CreateRoamer();
                 break;
             case 1:
                 ClearRoamerData();
@@ -717,11 +692,11 @@ bool8 debug_sub_815FB78(void)
     return FALSE;
 }
 
-bool8 debug_sub_815FBE8(void)
+static bool8 MovingPKMN(void)
 {
-    gMenuCallback = debug_sub_815FB78;
+    gMenuCallback = MovingPKMN_HandleJoypad;
     Menu_EraseWindowRect(0, 0, 29, 19);
-    debug_sub_814A73C(gStringVar1);
+    Debug_GetRoamerLocation(gStringVar1);
     Menu_DrawStdWindowFrame(0, 0, 11, 9);
     Menu_PrintText(gStringVar1, 1, 1);
     Menu_PrintText(Str_843E580, 2, 3);
@@ -729,7 +704,11 @@ bool8 debug_sub_815FBE8(void)
     return FALSE;
 }
 
-bool8 debug_sub_815FC54(void)
+// =======================================================
+// GIVE ALL BERRIES
+// =======================================================
+
+static bool8 Give999OfAllBerries(void)
 {
     u16 i;
 
@@ -743,28 +722,46 @@ bool8 debug_sub_815FC54(void)
     return TRUE;
 }
 
-bool8 debug_sub_815FC94(void)
+// =======================================================
+// GIVE ALL DECORATIONS
+// =======================================================
+
+static bool8 GiveAllDecorations(void)
 {
     ClearDecorationInventories();
-    debug_sub_814A3A8();
+    Debug_GiveAllDecorations();
     Menu_EraseWindowRect(0, 0, 29, 19);
     CloseMenu();
     return TRUE;
 }
 
-u16 debug_sub_815FCB4(u8 a0)
+// =======================================================
+// FISHING POINTS (Feebas)
+// =======================================================
+
+static const u8 Str_843E58D[] = _(
+                                    "Fishing location R119\n"
+                                    " Y1\n"
+                                    " Y2\n"
+                                    " Y3\n"
+                                    "Encounter location\n"
+                                    "\n"
+                                    "\n"
+                                    "front of you");
+
+static u16 FishingPoints_CountFishingTilesInMapThird(u8 a0)
 {
     u16 retval = 0;
     u16 height = gMapHeader.mapData->height / 3;
-    u16 r6;
-    u16 r4;
+    u16 y;
+    u16 x;
     u16 start = height * a0;
 
-    for (r6 = start; r6 < start + height; r6++)
+    for (y = start; y < start + height; y++)
     {
-        for (r4 = 0; r4 < gMapHeader.mapData->width; r4++)
+        for (x = 0; x < gMapHeader.mapData->width; x++)
         {
-            if (sub_805759C(MapGridGetMetatileBehaviorAt(r4 + 7, r6 + 7)) == TRUE)
+            if (sub_805759C(MapGridGetMetatileBehaviorAt(x + 7, y + 7)) == TRUE)
             {
                 retval++;
             }
@@ -774,7 +771,7 @@ u16 debug_sub_815FCB4(u8 a0)
     return retval;
 }
 
-u16 debug_sub_815FD40(void)
+static u16 FishingPoints_GetIndexOfCurrentFishingSpot(void)
 {
     u16 retval = 0;
     s16 x;
@@ -801,7 +798,7 @@ u16 debug_sub_815FD40(void)
     return retval + 1;
 }
 
-bool8 debug_sub_815FDE4(void)
+static bool8 FishingPoints_HandleJoypad(void)
 {
     if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
     {
@@ -813,59 +810,76 @@ bool8 debug_sub_815FDE4(void)
     return FALSE;
 }
 
-bool8 debug_sub_815FE1C(void)
+static bool8 FishingPoints(void)
 {
-    u16 r7;
-    u16 r5;
+    u16 nWaterTiles;
+    u16 nFeebas;
 
     Menu_EraseWindowRect(0, 0, 29, 19);
     Menu_DrawStdWindowFrame(0, 0, 16, 19);
     Menu_PrintText(Str_843E58D, 1, 1);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FishingPoints_CountFishingTilesInMapThird(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 5, 3);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FishingPoints_CountFishingTilesInMapThird(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 5, 5);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FCB4(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FishingPoints_CountFishingTilesInMapThird(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 5, 7);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(0), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 11, 3);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(1), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 11, 5);
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_8092344(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar1, FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(2), STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 11, 7);
 
     FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
-    r7 = debug_sub_815FCB4(0) + debug_sub_815FCB4(1) + debug_sub_815FCB4(2);
-    r5 = 0;
+    nWaterTiles = FishingPoints_CountFishingTilesInMapThird(0) + FishingPoints_CountFishingTilesInMapThird(1) + FishingPoints_CountFishingTilesInMapThird(2);
+    nFeebas = 0;
 
-    while (r5 != 6)
+    while (nFeebas != 6)
     {
-        u16 r1 = FeebasRandom() % r7;
-        if (r1 == 0)
-            r1 = r7;
-        if (r1 == 0 || r1 > 3)
+        u16 randTile = FeebasRandom() % nWaterTiles;
+        if (randTile == 0)
+            randTile = nWaterTiles;
+        if (randTile == 0 || randTile > 3)
         {
-            ConvertIntToDecimalStringN(gStringVar1, r1, STR_CONV_MODE_RIGHT_ALIGN, 4);
-            Menu_PrintText(gStringVar1, (r5 % 3) * 5 + 2, (r5 / 3) * 2 + 11);
-            r5++;
+            ConvertIntToDecimalStringN(gStringVar1, randTile, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            Menu_PrintText(gStringVar1, (nFeebas % 3) * 5 + 2, (nFeebas / 3) * 2 + 11);
+            nFeebas++;
         }
     }
 
-    ConvertIntToDecimalStringN(gStringVar1, debug_sub_815FD40(), STR_CONV_MODE_RIGHT_ALIGN, 4);
+    ConvertIntToDecimalStringN(gStringVar1, FishingPoints_GetIndexOfCurrentFishingSpot(), STR_CONV_MODE_RIGHT_ALIGN, 4);
     Menu_PrintText(gStringVar1, 2, 17);
 
-    gMenuCallback = debug_sub_815FDE4;
+    gMenuCallback = FishingPoints_HandleJoypad;
 
     return FALSE;
 }
 
-void debug_sub_815FFDC(void)
+// =======================================================
+// GENDER TEST?
+// =======================================================
+
+static struct {
+    s16 species;
+    s8 level;
+    u8 unk3;
+} sNakaGenderTestData[PARTY_SIZE];
+
+EWRAM_DATA u8 sNakaGenderTest_CursorPosition = 0;
+static const u8 _843E5D1[] = {0x0F, 0x16, 0x19};
+static const u8 Str_843E5D4[] = _(
+                                    "Aボタン　{ESCAPE}\p"
+                                    "　　Bボタン　ー\n"
+                                    "START　けってい");
+
+void NakaGenderTest(void)
 {
     u8 i;
 
@@ -875,37 +889,34 @@ void debug_sub_815FFDC(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        _nakamuraStatic0[i].species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
-        if (_nakamuraStatic0[i].species != SPECIES_NONE)
+        sNakaGenderTestData[i].species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        if (sNakaGenderTestData[i].species != SPECIES_NONE)
         {
-            _nakamuraStatic0[i].level = GetMonData(gPlayerParty + i, MON_DATA_LEVEL);
-            debug_sub_816009C(i);
-            debug_sub_81600D0(i);
-            debug_sub_816013C(i);
+            sNakaGenderTestData[i].level = GetMonData(gPlayerParty + i, MON_DATA_LEVEL);
+            NakaGenderTest_PrintSpeciesName(i);
+            NakaGenderTest_PrintSpeciesGender(i);
+            NakaGenderTest_PrintSpeciesLevel(i);
         }
         else
-            _nakamuraStatic0[i].level = 1;
-        _nakamuraStatic0[i].unk3 = 0;
+            sNakaGenderTestData[i].level = 1;
+        sNakaGenderTestData[i].unk3 = 0;
     }
 
-    _nakamuraData4 = 0;
+    sNakaGenderTest_CursorPosition = 0;
     PrintTriangleCursorWithPalette(15, 1, 0xFF);
-    gMenuCallback = debug_sub_8160498;
+    gMenuCallback = NakaGenderTest_HandleJoypad;
 }
 
-void debug_sub_816009C(u8 i)
+static void NakaGenderTest_PrintSpeciesName(u8 i)
 {
-    Menu_PrintText(gSpeciesNames[_nakamuraStatic0[i].species], 16, 2 * i + 1);
+    Menu_PrintText(gSpeciesNames[sNakaGenderTestData[i].species], 16, 2 * i + 1);
 }
 
-void debug_sub_81600D0(u8 i)
+static void NakaGenderTest_PrintSpeciesGender(u8 i)
 {
-    // u8 sp0[] = _("？");
-
-    u8 sp0[2];
+    u8 sp0[] = _("？");
     u8 gender;
 
-    memcpy(sp0, Str_843E5F0, sizeof Str_843E5F0);
     gender = GetMonGender(gPlayerParty + i);
     if (gender == MON_MALE)
         Menu_PrintText(gOtherText_MaleSymbol2, 23, 2 * i + 1);
@@ -915,58 +926,58 @@ void debug_sub_81600D0(u8 i)
         Menu_PrintText(sp0, 23, 2 * i + 1);
 }
 
-void debug_sub_816013C(u8 i)
+static void NakaGenderTest_PrintSpeciesLevel(u8 i)
 {
-    ConvertIntToDecimalStringN(gStringVar1, _nakamuraStatic0[i].level, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, sNakaGenderTestData[i].level, STR_CONV_MODE_RIGHT_ALIGN, 3);
     Menu_PrintText(gStringVar1, 26, 2 * i + 1);
 }
 
-void debug_sub_816017C(u8 i)
+static void NakaGenderTest_RedrawCurrent(u8 i)
 {
     Menu_BlankWindowRect(16, 2 * i + 1, 28, 2 * i + 2);
-    if (_nakamuraStatic0[i].species != SPECIES_NONE)
+    if (sNakaGenderTestData[i].species != SPECIES_NONE)
     {
-        debug_sub_816009C(i);
-        debug_sub_81600D0(i);
-        debug_sub_816013C(i);
+        NakaGenderTest_PrintSpeciesName(i);
+        NakaGenderTest_PrintSpeciesGender(i);
+        NakaGenderTest_PrintSpeciesLevel(i);
     }
-    debug_sub_81603B8(5);
+    NakaGenderTest_JoypadAction(5);
 }
 
-void debug_sub_81601C8(u8 i, s8 dirn)
+static void NakaGenderTest_AdjustSpecies(u8 i, s8 dirn)
 {
-    if (_nakamuraStatic0[i].species == SPECIES_NONE && _nakamuraStatic0[i].unk3 == 0 && dirn == 1)
-        _nakamuraStatic0[i].species = SPECIES_TREECKO - 1;
-    _nakamuraStatic0[i].species += dirn;
-    if (_nakamuraStatic0[i].species >= SPECIES_CHIMECHO)
-        _nakamuraStatic0[i].species -= SPECIES_CHIMECHO;
-    if (_nakamuraStatic0[i].species < 0)
-        _nakamuraStatic0[i].species += SPECIES_CHIMECHO;
-    CreateMon(gPlayerParty + i, _nakamuraStatic0[i].species, _nakamuraStatic0[i].level, 0x20, FALSE, 0, FALSE, 0);
-    _nakamuraStatic0[i].unk3 = 1;
+    if (sNakaGenderTestData[i].species == SPECIES_NONE && sNakaGenderTestData[i].unk3 == 0 && dirn == 1)
+        sNakaGenderTestData[i].species = SPECIES_TREECKO - 1;
+    sNakaGenderTestData[i].species += dirn;
+    if (sNakaGenderTestData[i].species >= SPECIES_CHIMECHO)
+        sNakaGenderTestData[i].species -= SPECIES_CHIMECHO;
+    if (sNakaGenderTestData[i].species < 0)
+        sNakaGenderTestData[i].species += SPECIES_CHIMECHO;
+    CreateMon(gPlayerParty + i, sNakaGenderTestData[i].species, sNakaGenderTestData[i].level, 0x20, FALSE, 0, FALSE, 0);
+    sNakaGenderTestData[i].unk3 = 1;
 }
 
-void debug_sub_8160258(u8 i)
+static void NakaGenderTest_RerollPokemon(u8 i)
 {
-    if (_nakamuraStatic0[i].species != SPECIES_NONE)
-        debug_sub_816062C(i);
+    if (sNakaGenderTestData[i].species != SPECIES_NONE)
+        NakaGenderTest_ForceRerollPokemon(i);
 }
 
-void debug_sub_816027C(u8 i, s8 dirn)
+static void NakaGenderTest_AdjustLevel(u8 i, s8 dirn)
 {
-    if (_nakamuraStatic0[i].species != SPECIES_NONE)
+    if (sNakaGenderTestData[i].species != SPECIES_NONE)
     {
-        _nakamuraStatic0[i].level += dirn;
-        if (_nakamuraStatic0[i].level > 100)
-            _nakamuraStatic0[i].level = 1;
-        if (_nakamuraStatic0[i].level < 1)
-            _nakamuraStatic0[i].level = 100;
-        SetMonData(gPlayerParty + i, MON_DATA_EXP, gExperienceTables[gBaseStats[_nakamuraStatic0[i].species].growthRate] + _nakamuraStatic0[i].level);
-        debug_sub_803F55C(gPlayerParty + i);
+        sNakaGenderTestData[i].level += dirn;
+        if (sNakaGenderTestData[i].level > 100)
+            sNakaGenderTestData[i].level = 1;
+        if (sNakaGenderTestData[i].level < 1)
+            sNakaGenderTestData[i].level = 100;
+        SetMonData(gPlayerParty + i, MON_DATA_EXP, gExperienceTables[gBaseStats[sNakaGenderTestData[i].species].growthRate] + sNakaGenderTestData[i].level);
+        Nakamura_NakaGenderTest_RecalcStats(gPlayerParty + i);
     }
 }
 
-void debug_sub_8160308(void)
+static void NakaGenderTest_PartyCompactionEnsureAtLeastOne(void)
 {
     u8 i;
     u8 j;
@@ -992,129 +1003,129 @@ void debug_sub_8160308(void)
     }
 }
 
-void debug_sub_81603B8(u8 i)
+static void NakaGenderTest_JoypadAction(u8 i)
 {
     u8 q;
     u8 r;
     PlaySE(SE_SELECT);
-    q = _nakamuraData4 / 6;
-    r = _nakamuraData4 % 6;
+    q = sNakaGenderTest_CursorPosition / 6;
+    r = sNakaGenderTest_CursorPosition % 6;
     Menu_BlankWindowRect(_843E5D1[q], r * 2 + 1, _843E5D1[q], r * 2 + 2);
 
     if (i == 0)
     {
         if (r != 0)
-            _nakamuraData4--;
+            sNakaGenderTest_CursorPosition--;
         else
-            _nakamuraData4 = q * 6 + 5;
+            sNakaGenderTest_CursorPosition = q * 6 + 5;
     }
 
     if (i == 1)
     {
         if (r != 5)
-            _nakamuraData4++;
+            sNakaGenderTest_CursorPosition++;
         else
-            _nakamuraData4 = q * 6;
+            sNakaGenderTest_CursorPosition = q * 6;
     }
 
     if (i == 2)
     {
         if (q != 0)
-            _nakamuraData4 -= 6;
+            sNakaGenderTest_CursorPosition -= 6;
         else
-            _nakamuraData4 = 12 + r;
+            sNakaGenderTest_CursorPosition = 12 + r;
     }
 
     if (i == 3)
     {
         if (q != 2)
-            _nakamuraData4 += 6;
+            sNakaGenderTest_CursorPosition += 6;
         else
-            _nakamuraData4 = r;
+            sNakaGenderTest_CursorPosition = r;
     }
 
-    q = _nakamuraData4 / 6;
-    r = _nakamuraData4 % 6;
+    q = sNakaGenderTest_CursorPosition / 6;
+    r = sNakaGenderTest_CursorPosition % 6;
     PrintTriangleCursorWithPalette(_843E5D1[q], r * 2 + 1, 0xFF);
 }
 
-bool8 debug_sub_8160498(void)
+static bool8 NakaGenderTest_HandleJoypad(void)
 {
     if (gMain.newKeys & DPAD_UP)
     {
-        debug_sub_81603B8(0);
+        NakaGenderTest_JoypadAction(0);
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_DOWN)
     {
-        debug_sub_81603B8(1);
+        NakaGenderTest_JoypadAction(1);
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_LEFT)
     {
-        debug_sub_81603B8(2);
+        NakaGenderTest_JoypadAction(2);
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        debug_sub_81603B8(3);
+        NakaGenderTest_JoypadAction(3);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & A_BUTTON)
     {
-        if (_nakamuraData4 < 6)
-            debug_sub_81601C8(_nakamuraData4, +1);
-        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
-            debug_sub_8160258(_nakamuraData4 % 6);
-        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
-            debug_sub_816027C(_nakamuraData4 % 6, +1);
-        debug_sub_816017C(_nakamuraData4 % 6);
+        if (sNakaGenderTest_CursorPosition < 6)
+            NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +1);
+        if (sNakaGenderTest_CursorPosition >= 6 && sNakaGenderTest_CursorPosition < 12)
+            NakaGenderTest_RerollPokemon(sNakaGenderTest_CursorPosition % 6);
+        if (sNakaGenderTest_CursorPosition >= 12 && sNakaGenderTest_CursorPosition < 18)
+            NakaGenderTest_AdjustLevel(sNakaGenderTest_CursorPosition % 6, +1);
+        NakaGenderTest_RedrawCurrent(sNakaGenderTest_CursorPosition % 6);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & B_BUTTON)
     {
-        if (_nakamuraData4 < 6)
-            debug_sub_81601C8(_nakamuraData4, -1);
-        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
-            debug_sub_8160258(_nakamuraData4 % 6);
-        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
-            debug_sub_816027C(_nakamuraData4 % 6, -1);
-        debug_sub_816017C(_nakamuraData4 % 6);
+        if (sNakaGenderTest_CursorPosition < 6)
+            NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -1);
+        if (sNakaGenderTest_CursorPosition >= 6 && sNakaGenderTest_CursorPosition < 12)
+            NakaGenderTest_RerollPokemon(sNakaGenderTest_CursorPosition % 6);
+        if (sNakaGenderTest_CursorPosition >= 12 && sNakaGenderTest_CursorPosition < 18)
+            NakaGenderTest_AdjustLevel(sNakaGenderTest_CursorPosition % 6, -1);
+        NakaGenderTest_RedrawCurrent(sNakaGenderTest_CursorPosition % 6);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & R_BUTTON)
     {
-        if (_nakamuraData4 < 6)
-            debug_sub_81601C8(_nakamuraData4, +10);
-        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
-            debug_sub_8160258(_nakamuraData4 % 6);
-        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
-            debug_sub_816027C(_nakamuraData4 % 6, +1);
-        debug_sub_816017C(_nakamuraData4 % 6);
+        if (sNakaGenderTest_CursorPosition < 6)
+            NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, +10);
+        if (sNakaGenderTest_CursorPosition >= 6 && sNakaGenderTest_CursorPosition < 12)
+            NakaGenderTest_RerollPokemon(sNakaGenderTest_CursorPosition % 6);
+        if (sNakaGenderTest_CursorPosition >= 12 && sNakaGenderTest_CursorPosition < 18)
+            NakaGenderTest_AdjustLevel(sNakaGenderTest_CursorPosition % 6, +1);
+        NakaGenderTest_RedrawCurrent(sNakaGenderTest_CursorPosition % 6);
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & L_BUTTON)
     {
-        if (_nakamuraData4 < 6)
-            debug_sub_81601C8(_nakamuraData4, -10);
-        if (_nakamuraData4 >= 6 && _nakamuraData4 < 12)
-            debug_sub_8160258(_nakamuraData4 % 6);
-        if (_nakamuraData4 >= 12 && _nakamuraData4 < 18)
-            debug_sub_816027C(_nakamuraData4 % 6, -1);
-        debug_sub_816017C(_nakamuraData4 % 6);
+        if (sNakaGenderTest_CursorPosition < 6)
+            NakaGenderTest_AdjustSpecies(sNakaGenderTest_CursorPosition, -10);
+        if (sNakaGenderTest_CursorPosition >= 6 && sNakaGenderTest_CursorPosition < 12)
+            NakaGenderTest_RerollPokemon(sNakaGenderTest_CursorPosition % 6);
+        if (sNakaGenderTest_CursorPosition >= 12 && sNakaGenderTest_CursorPosition < 18)
+            NakaGenderTest_AdjustLevel(sNakaGenderTest_CursorPosition % 6, -1);
+        NakaGenderTest_RedrawCurrent(sNakaGenderTest_CursorPosition % 6);
         return FALSE;
     }
 
     if (gMain.newKeys & START_BUTTON)
     {
-        debug_sub_8160308();
+        NakaGenderTest_PartyCompactionEnsureAtLeastOne();
         CloseMenu();
         return TRUE;
     }
@@ -1122,7 +1133,7 @@ bool8 debug_sub_8160498(void)
     return FALSE;
 }
 
-u8 debug_sub_816062C(u8 i)
+static u8 NakaGenderTest_ForceRerollPokemon(u8 i)
 {
     u16 species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
     u8 gender = GetMonGender(gPlayerParty + i);
@@ -1151,12 +1162,18 @@ u8 debug_sub_816062C(u8 i)
     } while (GetGenderFromSpeciesAndPersonality(species, personality) != ratio);
 
     GetMonData(gPlayerParty + i, MON_DATA_IVS);
-    CreateMon(gPlayerParty + i, _nakamuraStatic0[i].species, _nakamuraStatic0[i].level, 0x20, TRUE, personality, FALSE, 0);
+    CreateMon(gPlayerParty + i, sNakaGenderTestData[i].species, sNakaGenderTestData[i].level, 0x20, TRUE, personality, FALSE, 0);
     return ratio;
 }
 
+// =======================================================
+// SET POKEBLOCK
+// =======================================================
+
+static struct Pokeblock sPokeblock;
+
 #ifdef NONMATCHING
-u8 debug_sub_8160714(u8 * dest, struct Pokeblock * pokeblock)
+static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
 {
     u8 numGoodFlavors = 0;
     u8 numBadFlavors = 0;
@@ -1319,7 +1336,7 @@ u8 debug_sub_8160714(u8 * dest, struct Pokeblock * pokeblock)
 }
 #else
 __attribute__((naked))
-u8 debug_sub_8160714(u8 * dest, struct Pokeblock * pokeblock)
+static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
 {
     asm("\tpush\t{r4, r5, r6, r7, lr}\n"
         "\tmov\tr7, r9\n"
@@ -1670,7 +1687,7 @@ u8 debug_sub_8160714(u8 * dest, struct Pokeblock * pokeblock)
 }
 #endif // NONMATCHING
 
-void debug_sub_816097C(u8 * buff, s16 a1)
+static void NakaDebug_PrintNum3Chars(u8 * buff, s16 a1)
 {
     u8 i;
     s16 divisor;
@@ -1720,45 +1737,45 @@ void debug_sub_816097C(u8 * buff, s16 a1)
     }
 }
 
-void debug_sub_8160A80(u8 a0)
+static void SetPokeblock_PrintFlavorValue(u8 a0)
 {
-    struct Pokeblock *pkblk = &_nakamuraStatic18;
-    
+    struct Pokeblock *pkblk = &sPokeblock;
+
     if (a0 == 0)
     {
-        debug_sub_816097C(gStringVar1, pkblk->spicy);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->spicy);
         Menu_PrintText(gStringVar1, 8, 3);
     }
     else if (a0 == 1)
     {
-        debug_sub_816097C(gStringVar1, pkblk->dry);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->dry);
         Menu_PrintText(gStringVar1, 8, 5);
     }
     else if (a0 == 2)
     {
-        debug_sub_816097C(gStringVar1, pkblk->sweet);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->sweet);
         Menu_PrintText(gStringVar1, 8, 7);
     }
     else if (a0 == 3)
     {
-        debug_sub_816097C(gStringVar1, pkblk->bitter);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->bitter);
         Menu_PrintText(gStringVar1, 8, 9);
     }
     else if (a0 == 4)
     {
-        debug_sub_816097C(gStringVar1, pkblk->sour);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->sour);
         Menu_PrintText(gStringVar1, 8, 11);
     }
     else if (a0 == 5)
     {
-        debug_sub_816097C(gStringVar1, pkblk->feel);
+        NakaDebug_PrintNum3Chars(gStringVar1, pkblk->feel);
         Menu_PrintText(gStringVar1, 8, 13);
     }
 }
 
-void debug_sub_8160B50(u8 a0, s8 a1)
+static void SetPokeblock_AdjustFlavor(u8 a0, s8 a1)
 {
-    struct Pokeblock *pkblk = &_nakamuraStatic18;
+    struct Pokeblock *pkblk = &sPokeblock;
 
     if (a0 == 0)
         pkblk->spicy += a1;
@@ -1774,19 +1791,19 @@ void debug_sub_8160B50(u8 a0, s8 a1)
         pkblk->feel += a1;
 }
 
-void debug_sub_8160BB0(void)
+static void SetPokeblock_RecomputeAndPrintColor(void)
 {
-    _nakamuraStatic18.color = debug_sub_8160714(gStringVar1, &_nakamuraStatic18);
+    sPokeblock.color = SetPokeblock_CalcColor(gStringVar1, &sPokeblock);
     Menu_BlankWindowRect(1, 1, 8, 2);
     Menu_PrintText(gStringVar1, 1, 1);
 }
 
-void debug_sub_8160BE4(void)
+static void SetPokeblock_Init(void)
 {
     u8 i;
 
     Menu_DrawStdWindowFrame(0, 0, 12, 15);
-    debug_sub_8160BB0();
+    SetPokeblock_RecomputeAndPrintColor();
     Menu_PrintText(gContestStatsText_Spicy, 2, 3);
     Menu_PrintText(gContestStatsText_Dry, 2, 5);
     Menu_PrintText(gContestStatsText_Sweet, 2, 7);
@@ -1795,14 +1812,14 @@ void debug_sub_8160BE4(void)
     Menu_PrintText(gContestStatsText_Tasty, 2, 13);
 
     for (i = 0; i < 6; i++)
-        debug_sub_8160A80(i);
+        SetPokeblock_PrintFlavorValue(i);
 
     InitMenu(0, 1, 3, 6, 0, 11);
 }
 
-void debug_sub_8160C7C(void)
+static void SetPokeblock_GivePokeblock(void)
 {
-    struct Pokeblock * pkblk = &_nakamuraStatic18;
+    struct Pokeblock * pkblk = &sPokeblock;
     u8 rval = 0;
     u8 i;
 
@@ -1831,14 +1848,14 @@ void debug_sub_8160C7C(void)
         }
     }
 
-    sub_810CA34(pkblk);
-    debug_sub_8160BB0();
+    GivePokeblock(pkblk);
+    SetPokeblock_RecomputeAndPrintColor();
 
     for (i = 0; i < 6; i++)
-        debug_sub_8160A80(i);
+        SetPokeblock_PrintFlavorValue(i);
 }
 
-bool8 debug_sub_8160CF4(void)
+static bool8 SetPokeblock_HandleJoypad(void)
 {
     if (gMain.newAndRepeatedKeys & DPAD_UP)
     {
@@ -1854,23 +1871,23 @@ bool8 debug_sub_8160CF4(void)
 
     if (gMain.newAndRepeatedKeys & DPAD_LEFT)
     {
-        debug_sub_8160B50(Menu_GetCursorPos(), -1);
-        debug_sub_8160A80(Menu_GetCursorPos());
-        debug_sub_8160BB0();
+        SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), -1);
+        SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
+        SetPokeblock_RecomputeAndPrintColor();
         return FALSE;
     }
 
     if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
     {
-        debug_sub_8160B50(Menu_GetCursorPos(), +1);
-        debug_sub_8160A80(Menu_GetCursorPos());
-        debug_sub_8160BB0();
+        SetPokeblock_AdjustFlavor(Menu_GetCursorPos(), +1);
+        SetPokeblock_PrintFlavorValue(Menu_GetCursorPos());
+        SetPokeblock_RecomputeAndPrintColor();
         return FALSE;
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
-        debug_sub_8160C7C();
+        SetPokeblock_GivePokeblock();
         PlaySE(SE_SELECT);
         return FALSE;
     }
@@ -1885,15 +1902,30 @@ bool8 debug_sub_8160CF4(void)
     return FALSE;
 }
 
-bool8 debug_sub_8160D98(void)
+static bool8 SetPokeblock(void)
 {
     Menu_EraseWindowRect(0, 0, 29, 19);
-    debug_sub_8160BE4();
-    gMenuCallback = debug_sub_8160CF4;
+    SetPokeblock_Init();
+    gMenuCallback = SetPokeblock_HandleJoypad;
     return FALSE;
 }
 
-void debug_sub_8160DC0(void)
+// =======================================================
+// EFFORT VALUES
+// =======================================================
+
+EWRAM_DATA u8 sEVTest_CursorPosition = 0;
+
+static const u8 Str_843E5F2[] = _("HP　どりょくち");
+static const u8 Str_843E5FB[] = _("こうげき　どりょくち");
+static const u8 Str_843E606[] = _("ぼうぎょ　どりょくち");
+static const u8 Str_843E611[] = _("すばやさ　どりょくち");
+static const u8 Str_843E61C[] = _("とくこう　どりょくち");
+static const u8 Str_843E627[] = _("とくぼう　どりょくち");
+static const u8 Str_843E632[] = _("なつきど");
+static const u8 Str_843E637[] = _("どりょくち　ごうけい");
+
+static void EVTest_Init(void)
 {
     Menu_DrawStdWindowFrame(0, 0, 22, 19);
     Menu_PrintText(gOtherText_Slash, 11, 1);
@@ -1907,7 +1939,7 @@ void debug_sub_8160DC0(void)
     Menu_PrintText(Str_843E632, 2, 17);
 }
 
-void debug_sub_8160E50(struct Pokemon *pokemon)
+static void EVTest_PrintMonData(struct Pokemon *pokemon)
 {
     u16 evTotal;
     u16 curEv;
@@ -1964,49 +1996,49 @@ void debug_sub_8160E50(struct Pokemon *pokemon)
     Menu_PrintText(gStringVar1, 13, 17);
 }
 
-void debug_sub_8161028(s8 a0)
+static void EVTest_MovePartyCursor(s8 a0)
 {
     s16 i;
     if (a0 == -1)
     {
-        if (_nakamuraData5 == 0)
+        if (sEVTest_CursorPosition == 0)
         {
             for (i = 5; i >= 0; i--)
             {
                 if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != SPECIES_NONE)
                 {
-                    _nakamuraData5 = i;
+                    sEVTest_CursorPosition = i;
                     return;
                 }
             }
         }
-        _nakamuraData5 += a0;
+        sEVTest_CursorPosition += a0;
         return;
     }
 
     if (a0 == 1)
     {
-        _nakamuraData5 += a0;
-        if (_nakamuraData5 == 6)
-            _nakamuraData5 = 0;
-        else if (GetMonData(gPlayerParty + _nakamuraData5, MON_DATA_SPECIES) == SPECIES_NONE)
-            _nakamuraData5 = 0;
+        sEVTest_CursorPosition += a0;
+        if (sEVTest_CursorPosition == 6)
+            sEVTest_CursorPosition = 0;
+        else if (GetMonData(gPlayerParty + sEVTest_CursorPosition, MON_DATA_SPECIES) == SPECIES_NONE)
+            sEVTest_CursorPosition = 0;
     }
 }
 
-bool8 debug_sub_81610BC(void)
+static bool8 EVTest_HandleJoypad(void)
 {
     if (gMain.newKeys & DPAD_LEFT)
     {
-        debug_sub_8161028(-1);
-        debug_sub_8160E50(gPlayerParty + _nakamuraData5);
+        EVTest_MovePartyCursor(-1);
+        EVTest_PrintMonData(gPlayerParty + sEVTest_CursorPosition);
         return FALSE;
     }
 
     if (gMain.newKeys & DPAD_RIGHT)
     {
-        debug_sub_8161028(+1);
-        debug_sub_8160E50(gPlayerParty + _nakamuraData5);
+        EVTest_MovePartyCursor(+1);
+        EVTest_PrintMonData(gPlayerParty + sEVTest_CursorPosition);
         return FALSE;
     }
 
@@ -2023,42 +2055,59 @@ bool8 debug_sub_81610BC(void)
 bool8 DebugMenu_EffortValues(void)
 {
     Menu_EraseWindowRect(0, 0, 29, 19);
-    _nakamuraData5 = 0;
-    debug_sub_8160DC0();
-    debug_sub_8160E50(gPlayerParty + 0);
-    gMenuCallback = debug_sub_81610BC;
+    sEVTest_CursorPosition = 0;
+    EVTest_Init();
+    EVTest_PrintMonData(gPlayerParty + 0);
+    gMenuCallback = EVTest_HandleJoypad;
     return FALSE;
 }
 
-u16 debug_sub_8161160(void)
+// =======================================================
+// RNG Test
+// =======================================================
+
+EWRAM_DATA u16 sRngLeft = 0;
+EWRAM_DATA u16 sRngRight = 0;
+EWRAM_DATA u16 sNumSamples = 0;
+EWRAM_DATA u16 sRngMax = 0;
+
+static const u8 Str_843E642[] = _("ここから");
+static const u8 Str_843E647[] = _("ここまで");
+static const u8 Str_843E64C[] = _("かいすう");
+static const u8 Str_843E651[] = _("けっか");
+static const u8 Str_843E655[] = _("かい");
+static const u8 Str_843E658[] = _("0");
+static const u8 Str_843E65A[] = _("はんい");
+
+static u16 EVTest_GetDiscreteUniformRandomSamples(void)
 {
-    u16 r7 = 0;
-    u16 r6;
-    u16 r5;
+    u16 sampCount = 0;
+    u16 left;
+    u16 right;
     u32 i;
 
-    if (_nakamuraData6 <= _nakamuraData8)
+    if (sRngLeft <= sRngRight)
     {
-        r6 = _nakamuraData6;
-        r5 = _nakamuraData8;
+        left = sRngLeft;
+        right = sRngRight;
     }
     else
     {
-        r6 = _nakamuraData8;
-        r5 = _nakamuraData6;
+        left = sRngRight;
+        right = sRngLeft;
     }
 
-    for (i = 0; i < _nakamuraDataA; i++)
+    for (i = 0; i < sNumSamples; i++)
     {
-        u16 r0 = Random() % _nakamuraDataC;
-        if (r0 >= r6 && r0 <= r5)
-            r7++;
+        u16 r0 = Random() % sRngMax;
+        if (r0 >= left && r0 <= right)
+            sampCount++;
     }
 
-    return r7;
+    return sampCount;
 }
 
-void debug_sub_81611D8(void)
+static void RNGTest_Init(void)
 {
     Menu_DrawStdWindowFrame(0, 0, 15, 11);
     Menu_PrintText(Str_843E642, 2, 1);
@@ -2075,20 +2124,20 @@ void debug_sub_81611D8(void)
     InitMenu(0, 1, 1, 4, 0, 14);
 }
 
-void debug_sub_8161290(u16 a0)
+static void RNGTest_PrintNum(u16 a0)
 {
     ConvertIntToDecimalStringN(gStringVar1, a0, STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 8, 9);
 }
 
-void debug_sub_81612B8(u16 * a0, s8 a1, u8 a2)
+static void RNGTest_AdjustAndPrintNumAtLine(u16 * a0, s8 a1, u8 a2)
 {
     *a0 += a1;
     ConvertIntToDecimalStringN(gStringVar1, *a0, STR_CONV_MODE_RIGHT_ALIGN, 5);
     Menu_PrintText(gStringVar1, 8, a2);
 }
 
-bool8 debug_sub_81612EC(void)
+static bool8 RNGTest_HandleJoypad(void)
 {
     s8 r5 = gMain.heldKeys & R_BUTTON ? 100 : 1;
     s8 r4;
@@ -2109,13 +2158,13 @@ bool8 debug_sub_81612EC(void)
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)
-            debug_sub_81612B8(&_nakamuraData6, -r5, 1);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngLeft, -r5, 1);
         if (r4 == 1)
-            debug_sub_81612B8(&_nakamuraData8, -r5, 3);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngRight, -r5, 3);
         if (r4 == 2)
-            debug_sub_81612B8(&_nakamuraDataC, -r5, 5);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngMax, -r5, 5);
         if (r4 == 3)
-            debug_sub_81612B8(&_nakamuraDataA, -r5, 7);
+            RNGTest_AdjustAndPrintNumAtLine(&sNumSamples, -r5, 7);
         return FALSE;
     }
 
@@ -2123,22 +2172,22 @@ bool8 debug_sub_81612EC(void)
     {
         r4 = Menu_GetCursorPos();
         if (r4 == 0)
-            debug_sub_81612B8(&_nakamuraData6, r5, 1);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngLeft, r5, 1);
         if (r4 == 1)
-            debug_sub_81612B8(&_nakamuraData8, r5, 3);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngRight, r5, 3);
         if (r4 == 2)
-            debug_sub_81612B8(&_nakamuraDataC, r5, 5);
+            RNGTest_AdjustAndPrintNumAtLine(&sRngMax, r5, 5);
         if (r4 == 3)
-            debug_sub_81612B8(&_nakamuraDataA, r5, 7);
+            RNGTest_AdjustAndPrintNumAtLine(&sNumSamples, r5, 7);
         return FALSE;
     }
 
     if (gMain.newKeys & A_BUTTON)
     {
-        if (_nakamuraDataC != 0)
+        if (sRngMax != 0)
         {
             PlaySE(SE_SELECT);
-            debug_sub_8161290(debug_sub_8161160());
+            RNGTest_PrintNum(EVTest_GetDiscreteUniformRandomSamples());
         }
         return FALSE;
     }
@@ -2155,13 +2204,13 @@ bool8 debug_sub_81612EC(void)
 
 bool8 DebugMenu_RandomNumberTest(void)
 {
-    _nakamuraData6 = 0;
-    _nakamuraData8 = 0;
-    _nakamuraDataC = 0;
-    _nakamuraDataA = 0;
+    sRngLeft = 0;
+    sRngRight = 0;
+    sRngMax = 0;
+    sNumSamples = 0;
     Menu_EraseWindowRect(0, 0, 29, 19);
-    debug_sub_81611D8();
-    gMenuCallback = debug_sub_81612EC;
+    RNGTest_Init();
+    gMenuCallback = RNGTest_HandleJoypad;
     return FALSE;
 }
 
