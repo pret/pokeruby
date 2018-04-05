@@ -3922,8 +3922,8 @@ static void sub_8090B8C(u8 taskId)
         const u8 *lzPaletteData;
 
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
-        CpuCopy16(gUnknown_08D00524, (void *)(VRAM + 0xC000), 0x1000);
-        sub_800D74C();
+        CpuCopy16(gBattleTextboxTilemap, (void *)(VRAM + 0xC000), 0x1000);
+        ApplyPlayerChosenFrameToBattleMenu();
         species = NationalPokedexNumToSpecies(gTasks[taskId].data[1]);
         otId = ((u16)gTasks[taskId].data[13] << 16) | (u16)gTasks[taskId].data[12];
         personality = ((u16)gTasks[taskId].data[15] << 16) | (u16)gTasks[taskId].data[14];

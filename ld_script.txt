@@ -48,8 +48,7 @@ SECTIONS {
         src/rom3.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
-        src/rom_800D42C.o(.text);
-        asm/battle_1.o(.text_800DC24);
+        src/battle/battle_bg.o(.text);
         src/battle/battle_2.o(.text);
         src/battle/battle_util.o(.text);
         src/battle/battle_4.o(.text);

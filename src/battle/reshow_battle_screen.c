@@ -29,7 +29,7 @@ extern u8 gBankSpriteIds[4];
 extern u8 gBattleMonForms[4];
 extern u8 gHealthboxIDs[4];
 
-bool8 sub_800E414(u8 a0);
+bool8 LoadChosenBattleElement(u8 a0);
 bool8 sub_8031C30(u8 a0);
 void sub_8031EE8(void);
 void sub_80327CC(void);
@@ -97,7 +97,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         }
         break;
     case 2:
-        if (!sub_800E414(gHelperState))
+        if (!LoadChosenBattleElement(gHelperState))
         {
             gHelperState++;
             gReshowState--;

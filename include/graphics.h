@@ -2634,9 +2634,9 @@ extern const u16 gUnknown_08EA02C8[];
 extern const u16 gUnknown_08EA0348[];
 extern const u16 gUnknown_08EA15C8[];
 extern const u16 gTradeMonBoxTilemap[];
-extern const u8 gUnknown_08D00000[];
-extern const u16 gUnknown_08D00524[];
-extern const u8 gUnknown_08D004E0[];
+extern const u8 gBattleTextboxTiles[];
+extern const u16 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
 
 extern const u8 gNamingScreenBackButtonTiles[];
 extern const u8 gNamingScreenOKButtonTiles[];

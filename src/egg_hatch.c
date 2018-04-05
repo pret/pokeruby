@@ -40,9 +40,9 @@ struct EggHatchData
 
 struct EggHatchData* gEggHatchData;
 
-extern const u32 gUnknown_08D00000[];
-extern const u32 gUnknown_08D00524[];
-extern const u16 gUnknown_08D004E0[]; //palette
+extern const u32 gBattleTextboxTiles[];
+extern const u32 gBattleTextboxTilemap[];
+extern const u16 gBattleTextboxPalette[]; //palette
 extern const struct SpriteSheet sUnknown_0820A3B0;
 extern const struct SpriteSheet sUnknown_0820A3B8;
 extern const struct SpritePalette sUnknown_0820A3C0;
@@ -478,10 +478,10 @@ static void CB2_EggHatch_0(void)
         gMain.state++;
         break;
     case 2:
-        LZDecompressVram(&gUnknown_08D00000, (void*)(VRAM));
-        CpuSet(&gUnknown_08D00524, ewram0_7, 0x800);
+        LZDecompressVram(&gBattleTextboxTiles, (void*)(VRAM));
+        CpuSet(&gBattleTextboxTilemap, ewram0_7, 0x800);
         DmaCopy16(3, ewram0_7, (void*)(VRAM + 0x2800), 0x500);
-        LoadCompressedPalette(&gUnknown_08D004E0, 0, 0x20);
+        LoadCompressedPalette(&gBattleTextboxPalette, 0, 0x20);
         gMain.state++;
         break;
     case 3:
