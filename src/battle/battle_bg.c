@@ -255,10 +255,20 @@ void DrawMainBattleBackground(void)
 void LoadBattleTextboxAndBackground(void)
 {
     LZDecompressVram(gBattleTextboxTiles, (void*)(BG_VRAM));
-    CpuSet(gBattleTextboxTilemap, (void *)0x600c000, 0x800);
+    CpuSet(gBattleTextboxTilemap, (void *)(VRAM + 0xC000), 0x800);
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
     ApplyPlayerChosenFrameToBattleMenu();
     DrawMainBattleBackground();
+
+    #if DEBUG
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        debug_sub_8008218((void*)(VRAM + 0x600), 0, (void*)(VRAM + 0xC000), 1);
+        debug_sub_8008264(257, 3, 1, 3, 1);
+        debug_sub_8008264(257, 3, 21, 3, 1);
+        debug_sub_8008264(257, 3, 41, 3, 1);
+    }
+    #endif
 }
 
 void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
