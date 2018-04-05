@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_anim.h"
 #include "heated_rock.h"
 #include "rom_8077ABC.h"
@@ -11,24 +12,34 @@ extern u8 gAnimBankTarget;
 extern struct SpriteTemplate gSpriteTemplate_83D96C4;
 extern s16 gHeatedRockCoords[7][2];
 
-void sub_80D5254(struct Sprite *);
-void sub_80D5348(struct Sprite *);
-void sub_80D52AC(struct Sprite *);
-void sub_80D5324(struct Sprite *);
+static void AnimFireRingStep1(struct Sprite *);
+static void UpdateFireRingCircleOffset(struct Sprite *);
+static void AnimFireRingStep2(struct Sprite *);
+static void AnimFireRingStep3(struct Sprite *);
 void sub_80D53F4(struct Sprite *);
 void sub_80D541C(struct Sprite *);
 void sub_80D54E0(u8 taskId);
 void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3);
 
-void sub_80D51A8(struct Sprite *sprite)
+
+// Animates the secondary effect of MOVE_EMBER, where the flames grow and slide
+// horizontally a bit.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+// arg 5: ? (todo: something related to which mon the pixel offsets are based on)
+// arg 6: ? (todo: something related to which mon the pixel offsets are based on)
+void AnimEmberFlare(struct Sprite *sprite)
 {
     if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget)
-        && (gAnimBankAttacker == GetBankByIdentity(2)
-            || gAnimBankAttacker == GetBankByIdentity(3)))
+        && (gAnimBankAttacker == GetBankByIdentity(IDENTITY_PLAYER_MON2)
+            || gAnimBankAttacker == GetBankByIdentity(IDENTITY_OPPONENT_MON2)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = sub_8079534;
-    sub_8079534(sprite);
+    sprite->callback(sprite);
 }
 
 struct Sprite *sub_80D5210(struct Sprite *sprite)
@@ -40,19 +51,26 @@ struct Sprite *sub_80D5210(struct Sprite *sprite)
     return sprite;
 }
 
-void sub_80D522C(struct Sprite *sprite)
+// Animates the a fire sprite in the first-half of the MOVE_FIRE_BLAST
+// animation.  The fire sprite first moves in a circle around the mon,
+// and then it is translated towards the target mon, while still rotating.
+// Lastly, it moves in a circle around the target mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: initial wave offset
+void AnimFireRing(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     sprite->data[7] = gBattleAnimArgs[2];
     sprite->data[0] = 0;
 
-    sprite->callback = sub_80D5254;
+    sprite->callback = AnimFireRingStep1;
 }
 
-void sub_80D5254(struct Sprite *sprite)
+static void AnimFireRingStep1(struct Sprite *sprite)
 {
-    sub_80D5348(sprite);
+    UpdateFireRingCircleOffset(sprite);
 
     if (++sprite->data[0] == 0x12)
     {
@@ -62,15 +80,15 @@ void sub_80D5254(struct Sprite *sprite)
         sprite->data[3] = sprite->pos1.y;
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
 
-        obj_translate_based_on_private_1_2_3_4(sprite);
+        InitAnimSpriteTranslationDeltas(sprite);
 
-        sprite->callback = sub_80D52AC;
+        sprite->callback = AnimFireRingStep2;
     }
 }
 
-void sub_80D52AC(struct Sprite *sprite)
+static void AnimFireRingStep2(struct Sprite *sprite)
 {
-    if (sub_8078B5C(sprite))
+    if (TranslateAnimSpriteByDeltas(sprite))
     {
         sprite->data[0] = 0;
 
@@ -79,8 +97,8 @@ void sub_80D52AC(struct Sprite *sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
-        sprite->callback = sub_80D5324;
-        sub_80D5324(sprite);
+        sprite->callback = AnimFireRingStep3;
+        sprite->callback(sprite);
     }
     else
     {
@@ -91,15 +109,15 @@ void sub_80D52AC(struct Sprite *sprite)
     }
 }
 
-void sub_80D5324(struct Sprite *sprite)
+static void AnimFireRingStep3(struct Sprite *sprite)
 {
-    sub_80D5348(sprite);
+    UpdateFireRingCircleOffset(sprite);
 
     if (++sprite->data[0] == 0x1F)
         DestroyAnimSprite(sprite);
 }
 
-void sub_80D5348(struct Sprite *sprite)
+static void UpdateFireRingCircleOffset(struct Sprite *sprite)
 {
     sprite->pos2.x = Sin(sprite->data[7], 28);
     sprite->pos2.y = Cos(sprite->data[7], 28);
@@ -107,7 +125,12 @@ void sub_80D5348(struct Sprite *sprite)
     sprite->data[7] = (sprite->data[7] + 20) & 0xFF;
 }
 
-void sub_80D5374(struct Sprite *sprite)
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration
+// arg 3: x delta
+// arg 4: y delta 
+void AnimFireCross(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -118,18 +141,18 @@ void sub_80D5374(struct Sprite *sprite)
 
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 
-    sprite->callback = sub_8078364;
+    sprite->callback = TranslateSpriteOverDuration;
 }
 
 void sub_80D53B4(struct Sprite *sprite)
 {
-    sub_80787B0(sprite, 1);
+    InitAnimSpritePos(sprite, 1);
 
     sprite->data[1] = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[3];
 
     sprite->invisible = TRUE;
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
 
     StoreSpriteCallbackInData(sprite, sub_80D53F4);
 }

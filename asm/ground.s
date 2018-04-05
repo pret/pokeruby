@@ -42,7 +42,7 @@ sub_80E0F1C: @ 80E0F1C
 	ldr r0, _080E0F7C @ =0x0000ffd8
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _080E0F80 @ =sub_80E0F84
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -59,7 +59,7 @@ _080E0F80: .4byte sub_80E0F84
 sub_80E0F84: @ 80E0F84
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0FD8
@@ -92,7 +92,7 @@ sub_80E0F84: @ 80E0F84
 	movs r0, 0x28
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _080E0FE4 @ =sub_80E0FE8
 	str r0, [r5, 0x1C]
 _080E0FD8:
@@ -108,7 +108,7 @@ _080E0FE4: .4byte sub_80E0FE8
 sub_80E0FE8: @ 80E0FE8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0FFC
@@ -157,7 +157,7 @@ _080E1024:
 	ldrh r4, [r4, 0x6]
 	adds r0, r4
 	strh r0, [r6, 0x36]
-	ldr r0, _080E1070 @ =sub_8078B34
+	ldr r0, _080E1070 @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r6, 0x1C]
 	ldr r1, _080E1074 @ =DestroyAnimSprite
 	adds r0, r6, 0
@@ -169,7 +169,7 @@ _080E1024:
 _080E1064: .4byte gAnimBankAttacker
 _080E1068: .4byte gBattleAnimArgs
 _080E106C: .4byte gAnimBankTarget
-_080E1070: .4byte sub_8078B34
+_080E1070: .4byte StartTranslateAnimSpriteByDeltas
 _080E1074: .4byte DestroyAnimSprite
 	thumb_func_end sub_80E1004
 
@@ -180,7 +180,7 @@ sub_80E1078: @ 80E1078
 	push {r7}
 	adds r6, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r4, _080E10F8 @ =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -224,7 +224,7 @@ _080E10D0:
 	strh r0, [r6, 0x32]
 	adds r0, r7, r4
 	strh r0, [r6, 0x36]
-	ldr r0, _080E1100 @ =sub_8078B34
+	ldr r0, _080E1100 @ =StartTranslateAnimSpriteByDeltas
 	str r0, [r6, 0x1C]
 	ldr r1, _080E1104 @ =move_anim_8074EE0
 	adds r0, r6, 0
@@ -237,7 +237,7 @@ _080E10D0:
 	.align 2, 0
 _080E10F8: .4byte gAnimBankTarget
 _080E10FC: .4byte gBattleAnimArgs
-_080E1100: .4byte sub_8078B34
+_080E1100: .4byte StartTranslateAnimSpriteByDeltas
 _080E1104: .4byte move_anim_8074EE0
 	thumb_func_end sub_80E1078
 
@@ -1105,7 +1105,7 @@ _080E1762:
 	ldrh r0, [r7, 0x8]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl sub_80786EC
+	bl InitAnimSpriteTranslationOverDuration
 	ldr r0, _080E17AC @ =sub_80E17B0
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
@@ -1120,7 +1120,7 @@ _080E17AC: .4byte sub_80E17B0
 sub_80E17B0: @ 80E17B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078718
+	bl TranslateAnimSpriteLinearAndSine
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E17C4
@@ -1188,7 +1188,7 @@ _080E17EA:
 	bl StoreSpriteCallbackInData
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x2E]
-	ldr r0, _080E1860 @ =sub_80782D8
+	ldr r0, _080E1860 @ =WaitAnimForDuration
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
 	pop {r0}
@@ -1200,7 +1200,7 @@ _080E1850: .4byte gBattleAnimArgs
 _080E1854: .4byte 0x000003ff
 _080E1858: .4byte 0xfffffc00
 _080E185C: .4byte DestroyAnimSprite
-_080E1860: .4byte sub_80782D8
+_080E1860: .4byte WaitAnimForDuration
 	thumb_func_end sub_80E17CC
 
 	thumb_func_start sub_80E1864
@@ -1270,7 +1270,7 @@ _080E18CE:
 	adds r1, r4, 0
 	adds r1, 0x8
 	adds r1, r0
-	ldr r0, _080E1904 @ =gObjectBankIDs
+	ldr r0, _080E1904 @ =gBankSpriteIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	strh r0, [r1]
@@ -1285,7 +1285,7 @@ _080E18F8:
 	bls _080E18CE
 	b _080E1924
 	.align 2, 0
-_080E1904: .4byte gObjectBankIDs
+_080E1904: .4byte gBankSpriteIds
 _080E1908:
 	ldrb r0, [r6]
 	bl GetAnimBankSpriteId

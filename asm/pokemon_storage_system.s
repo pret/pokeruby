@@ -323,6 +323,149 @@ sub_809CA8C: @ 809CA8C
 	bx r0
 	thumb_func_end sub_809CA8C
 
+.if DEBUG
+	thumb_func_start debug_sub_80AA40C
+debug_sub_80AA40C:
+.syntax divided
+	push	{lr}
+	bl	sub_809AB8C
+	lsl	r0, r0, #0x10
+	cmp	r0, #0
+	beq	._2084	@cond_branch
+	bl	sub_809CDCC
+	mov	r0, #0x20
+	bl	sub_809CDEC
+	mov	r0, #0x6
+	bl	sub_809CDEC
+	mov	r0, #0x1
+	b	._2085
+._2084:
+	mov	r0, #0x0
+._2085:
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end debug_sub_80AA40C
+.endif
+
+.if DEBUG
+	thumb_func_start sub_809CAB0
+sub_809CAB0:
+.syntax divided
+	push	{lr}
+	ldr	r0, ._2088      @ unk_2038790
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._2086	@cond_branch
+	bl	debug_sub_80AA40C
+	lsl	r0, r0, #0x18
+	lsr	r0, r0, #0x18
+	b	._2110
+._2089:
+	.align	2, 0
+._2088:
+	.word	unk_2038790
+._2086:
+	bl	sub_809CDCC
+	bl	sub_809AB8C
+	lsl	r0, r0, #0x10
+	lsr	r1, r0, #0x10
+	ldr	r0, ._2094      @ gPokemonStorageSystemPtr
+	ldr	r0, [r0]
+	ldrb	r0, [r0, #0x5]
+	cmp	r0, #0x1
+	beq	._2090	@cond_branch
+	cmp	r0, #0x1
+	bgt	._2091	@cond_branch
+	cmp	r0, #0
+	beq	._2092	@cond_branch
+	b	._2108
+._2095:
+	.align	2, 0
+._2094:
+	.word	gPokemonStorageSystemPtr
+._2091:
+	cmp	r0, #0x2
+	beq	._2096	@cond_branch
+	b	._2108
+._2090:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x1
+	bl	sub_809CDEC
+	b	._2109
+._2092:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x2
+	bl	sub_809CDEC
+	b	._2109
+._2096:
+	ldr	r0, ._2105      @ gUnknown_020384E6
+	ldrb	r0, [r0]
+	cmp	r0, #0
+	beq	._2102	@cond_branch
+	cmp	r1, #0
+	beq	._2103	@cond_branch
+	mov	r0, #0x4
+	bl	sub_809CDEC
+	b	._2109
+._2106:
+	.align	2, 0
+._2105:
+	.word	gUnknown_020384E6
+._2103:
+	mov	r0, #0x5
+	bl	sub_809CDEC
+	b	._2109
+._2102:
+	cmp	r1, #0
+	beq	._2108	@cond_branch
+	mov	r0, #0x3
+	bl	sub_809CDEC
+	b	._2109
+._2108:
+	mov	r0, #0x0
+	b	._2110
+._2109:
+	mov	r0, #0x6
+	bl	sub_809CDEC
+	ldr	r0, ._2114      @ gPokemonStorageSystemPtr
+	ldr	r0, [r0]
+	ldrb	r0, [r0, #0x5]
+	cmp	r0, #0x2
+	bne	._2113	@cond_branch
+	ldr	r0, ._2114 + 4  @ gUnknown_020384E4
+	ldrb	r0, [r0]
+	lsl	r0, r0, #0x18
+	asr	r0, r0, #0x18
+	cmp	r0, #0
+	bne	._2112	@cond_branch
+	mov	r0, #0x2
+	bl	sub_809CDEC
+	b	._2113
+._2115:
+	.align	2, 0
+._2114:
+	.word	gPokemonStorageSystemPtr
+	.word	gUnknown_020384E4
+._2112:
+	mov	r0, #0x1
+	bl	sub_809CDEC
+._2113:
+	mov	r0, #0x8
+	bl	sub_809CDEC
+	mov	r0, #0x7
+	bl	sub_809CDEC
+	mov	r0, #0x0
+	bl	sub_809CDEC
+	mov	r0, #0x1
+._2110:
+	pop	{r1}
+	bx	r1
+.syntax unified
+	thumb_func_end sub_809CAB0
+.else
 	thumb_func_start sub_809CAB0
 sub_809CAB0: @ 809CAB0
 	push {lr}
@@ -418,6 +561,7 @@ _0809CB6E:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_809CAB0
+.endif
 
 	thumb_func_start sub_809CB74
 sub_809CB74: @ 809CB74

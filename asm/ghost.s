@@ -12,7 +12,7 @@ sub_80DDB6C: @ 80DDB6C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _080DDBC8 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
@@ -63,7 +63,7 @@ sub_80DDBD8: @ 80DDBD8
 	adds r4, r0, 0
 	bl sub_80DDCC8
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DDBF8
@@ -123,7 +123,7 @@ sub_80DDC4C: @ 80DDC4C
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	movs r1, 0x38
 	ldrsh r0, [r4, r1]
 	movs r1, 0xA
@@ -2539,7 +2539,7 @@ sub_80DEF3C: @ 80DEF3C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r0, _080DEF68 @ =gAnimBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -2627,7 +2627,7 @@ _080DEFAA:
 	bne _080DF00C
 	movs r0, 0x1E
 	strh r0, [r3, 0x2E]
-	ldr r0, _080DF004 @ =sub_80782D8
+	ldr r0, _080DF004 @ =WaitAnimForDuration
 	str r0, [r3, 0x1C]
 	ldr r1, _080DF008 @ =sub_80DF018
 	adds r0, r3, 0
@@ -2636,7 +2636,7 @@ _080DEFAA:
 	.align 2, 0
 _080DEFFC: .4byte 0x000003ff
 _080DF000: .4byte 0xfffffc00
-_080DF004: .4byte sub_80782D8
+_080DF004: .4byte WaitAnimForDuration
 _080DF008: .4byte sub_80DF018
 _080DF00C:
 	movs r0, 0x28
@@ -3257,7 +3257,7 @@ sub_80DF49C: @ 80DF49C
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r2, _080DF4E0 @ =gObjectBankIDs
+	ldr r2, _080DF4E0 @ =gBankSpriteIds
 	ldr r1, _080DF4E4 @ =gAnimBankAttacker
 	ldrb r1, [r1]
 	adds r1, r2
@@ -3286,7 +3286,7 @@ sub_80DF49C: @ 80DF49C
 	strh r1, [r0, 0x22]
 	bx lr
 	.align 2, 0
-_080DF4E0: .4byte gObjectBankIDs
+_080DF4E0: .4byte gBankSpriteIds
 _080DF4E4: .4byte gAnimBankAttacker
 _080DF4E8: .4byte gBattleAnimArgs
 _080DF4EC: .4byte sub_80DF4F4

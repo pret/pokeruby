@@ -346,4 +346,5 @@ _0800D674:
 	pop {r0}
 	bx r0
 	thumb_func_end unref_sub_800D42C
+
 	.align 2, 0

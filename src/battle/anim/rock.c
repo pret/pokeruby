@@ -38,7 +38,7 @@ static void sub_80DD9FC(struct Sprite *sprite);
 void sub_80DCE9C(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        sub_807A3FC(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
 
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += 14;
@@ -91,7 +91,7 @@ void sub_80DCF60(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
 
-    sub_8078A5C(sprite);
+    InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = 0;
     sprite->data[4] = 0;
 
@@ -102,7 +102,7 @@ void sub_80DCF60(struct Sprite *sprite)
 void sub_80DCFE4(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == 0)
-        sub_80787B0(sprite, 0);
+        InitAnimSpritePos(sprite, 0);
     else
         sub_8078764(sprite, 0);
 
@@ -275,13 +275,13 @@ void sub_80DD3AC(struct Sprite *sprite)
 void sub_80DD490(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[2];
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -446,7 +446,7 @@ static void sub_80DD774(struct Task *task)
         gSprites[spriteId].data[5] = -16 - (task->data[1] * 2);
         gSprites[spriteId].oam.tileNum += var0;
 
-        sub_80786EC(&gSprites[spriteId]);
+        InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
         task->data[11]++;
     }
 
@@ -455,7 +455,7 @@ static void sub_80DD774(struct Task *task)
 
 void sub_80DD87C(struct Sprite *sprite)
 {
-    if (sub_8078718(sprite))
+    if (TranslateAnimSpriteLinearAndSine(sprite))
     {
         u8 taskId = FindTaskIdByFunc(sub_80DD604);
         if (taskId != 0xFF)
@@ -517,7 +517,7 @@ void sub_80DD978(struct Sprite *sprite)
     if (GetBankSide(gAnimBankAttacker) == SIDE_OPPONENT)
         StartSpriteAffineAnim(sprite, 1);
 
-    sub_807941C(sprite);
+    TranslateAnimSpriteToTargetMonLocation(sprite);
 }
 
 void sub_80DD9A4(struct Sprite *sprite)

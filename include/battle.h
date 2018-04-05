@@ -763,6 +763,8 @@ void sub_8012324(void);
 void SwapTurnOrder(u8, u8);
 u8 GetWhoStrikesFirst(u8, u8, u8);
 
+void debug_sub_8010800(void);
+
 // asm/battle_3.o
 u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
 u8 UpdateTurnCounters(void);

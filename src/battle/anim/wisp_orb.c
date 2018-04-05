@@ -21,7 +21,7 @@ void sub_80D5B0C(struct Sprite *sprite)
     switch (sprite->data[0])
     {
     case 0:
-        sub_80787B0(sprite, 0);
+        InitAnimSpritePos(sprite, 0);
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
@@ -86,7 +86,7 @@ static void sub_80D5C5C(struct Sprite *sprite)
     s16 initialData5;
     s16 newData5;
 
-    if (!sub_8078B5C(sprite))
+    if (!TranslateAnimSpriteByDeltas(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 16);
         initialData5 = sprite->data[5];

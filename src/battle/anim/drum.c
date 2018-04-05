@@ -27,6 +27,6 @@ void sub_80CEDF0(struct Sprite* sprite)
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + a;
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + 8;
     sprite->data[0] = 8;
-    sprite->callback = sub_80782D8;
+    sprite->callback = WaitAnimForDuration;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

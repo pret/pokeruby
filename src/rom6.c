@@ -1,14 +1,15 @@
 #include "global.h"
+#include "constants/map_objects.h"
+#include "constants/songs.h"
 #include "rom6.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
-#include "field_map_obj.h"
+#include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "item_use.h"
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -115,6 +116,21 @@ static void sub_810B4CC(u8 taskId)
     gPlayerAvatar.preventStep = FALSE;
     DestroyTask(taskId);
 }
+
+#if DEBUG
+void debug_sub_8120968(void)
+{
+    if (npc_before_player_of_type(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    {
+        gLastFieldPokeMenuOpened = 0;
+        sub_810B53C();
+    }
+    else
+    {
+        ScriptContext2_Disable();
+    }
+}
+#endif
 
 bool8 SetUpFieldMove_RockSmash(void)
 {

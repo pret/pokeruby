@@ -40,9 +40,9 @@ struct Unk2015E00
 
 struct ContestEntry
 {
-    /*0x00*/ u8 var0;
-    /*0x04*/ u32 var4;
-    /*0x08*/ u16 var8;
+    /*0x00*/ u32 personality;
+    /*0x04*/ u32 otId;
+    /*0x08*/ u16 species;
     /*0x0A*/ u8 contestType;
     /*0x0B*/ u8 pokemon_name[POKEMON_NAME_LENGTH];
     /*0x15*/ u8 pad15;

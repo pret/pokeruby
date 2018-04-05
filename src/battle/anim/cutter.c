@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "rom_8077ABC.h"
 #include "trig.h"
 #include "battle_anim.h"
@@ -7,35 +8,42 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80CB09C(struct Sprite* sprite);
-static void sub_80CB1A4(struct Sprite* sprite);
+static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite);
+static void AnimMoveTwisterParticleStep(struct Sprite* sprite);
 
-// cutter (the cresent shaped leaf used in throwing projectiles for the listed moves.)
+// Animates a sprite that moves linearly from one location to another, with a
+// single-cycle sine wave added to the y position along the way.
 // Used by Razor Leaf and Magical Leaf.
-
-void sub_80CAFD0(struct Sprite* sprite)
+// arg 0: initial x offset
+// arg 1: initial y offset
+// arg 2: target x offset
+// arg 3: target y offset
+// arg 4: translation duration
+// arg 5: wave amplitude
+// arg 6: target between double battle opponents (boolean)
+void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
 {
-    sub_80787B0(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker))
+    InitAnimSpritePos(sprite, 1);
+    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    if (!(gBattleAnimArgs[6]))
+    if (!gBattleAnimArgs[6])
     {
         sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
         sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     }
     else
     {
-        sub_807A3FC(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
         sprite->data[2] += gBattleAnimArgs[2];
         sprite->data[4] += gBattleAnimArgs[3];
     }
 
     sprite->data[5] = gBattleAnimArgs[5];
-    sub_80786EC(sprite);
+    InitAnimSpriteTranslationOverDuration(sprite);
     if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
     {
         sprite->data[0] = 1;
@@ -45,18 +53,18 @@ void sub_80CAFD0(struct Sprite* sprite)
         sprite->data[0] = 0;
     }
 
-    sprite->callback = sub_80CB09C;
+    sprite->callback = AnimTranslateLinearSingleSineWaveStep;
 }
 
-void sub_80CB09C(struct Sprite* sprite)
+static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
 {
-    bool8 c = FALSE;
+    bool8 destroy = FALSE;
     s16 a = sprite->data[0];
     s16 b = sprite->data[7];
     s16 r0;
     
     sprite->data[0] = 1;
-    sub_8078718(sprite);
+    TranslateAnimSpriteLinearAndSine(sprite);
     r0 = sprite->data[7];
     sprite->data[0] = a;
     if (b > 0xC8 && r0 <= 0x37 && sprite->oam.affineParam == 0)
@@ -67,24 +75,30 @@ void sub_80CB09C(struct Sprite* sprite)
         sprite->invisible ^= 1;
         sprite->oam.affineParam++;
         if (sprite->oam.affineParam == 0x1E)
-            c = TRUE;
+            destroy = TRUE;
     }
     
-    if (sprite->pos1.x + sprite->pos2.x > 0x100
+    if (sprite->pos1.x + sprite->pos2.x > 256
      || sprite->pos1.x + sprite->pos2.x < -16
-     || sprite->pos1.y + sprite->pos2.y > 0xA0
+     || sprite->pos1.y + sprite->pos2.y > 160
      || sprite->pos1.y + sprite->pos2.y < -16)
-        c = TRUE;
+        destroy = TRUE;
 
-    if (c)
+    if (destroy)
         DestroyAnimSprite(sprite);
 }
 
-void sub_80CB144(struct Sprite* sprite)
+// Animates particles in the Twister move animation.
+// arg 0: duration
+// arg 1: total y delta (the particles rise upward)
+// arg 2: wave period (higher means faster wave)
+// arg 3: wave amplitude
+// arg 4: speedup frame (particles move faster at the end of the animation)
+void AnimMoveTwisterParticle(struct Sprite* sprite)
 {
     if (!IsContest() && IsDoubleBattle() == TRUE)
     {
-        sub_807A3FC(gAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
     }
 
     sprite->pos1.y += 32;
@@ -93,10 +107,10 @@ void sub_80CB144(struct Sprite* sprite)
     sprite->data[2] = gBattleAnimArgs[2];
     sprite->data[3] = gBattleAnimArgs[3];
     sprite->data[4] = gBattleAnimArgs[4];
-    sprite->callback = sub_80CB1A4;
+    sprite->callback = AnimMoveTwisterParticleStep;
 }
 
-void sub_80CB1A4(struct Sprite* sprite)
+static void AnimMoveTwisterParticleStep(struct Sprite* sprite)
 {
     if (sprite->data[1] == 0xFF)
     {

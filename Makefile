@@ -19,9 +19,9 @@ PREPROC   := tools/preproc/preproc
 SCANINC   := tools/scaninc/scaninc
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
-ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1
+ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE)
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG)
 
 
 #### Files ####
@@ -70,6 +70,19 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 
 #### Main Rules ####
 
+ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
+
+# Available targets
+.PHONY: all clean tidy tools $(ALL_BUILDS)
+
+# Build tools when building the rom
+# Disable dependency scanning for clean/tidy/tools
+ifeq (,$(filter-out all,$(MAKECMDGOALS)))
+$(info $(shell $(MAKE) tools))
+else
+NODEP := 1
+endif
+
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
   $(BUILD_DIR)/src/%.o:  C_FILE = $(*D)/$(*F).c
@@ -99,13 +112,28 @@ clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
+	$(MAKE) clean -C tools/gbagfx
+	$(MAKE) clean -C tools/scaninc
+	$(MAKE) clean -C tools/preproc
+	$(MAKE) clean -C tools/bin2c
+	$(MAKE) clean -C tools/rsfont
+	$(MAKE) clean -C tools/aif2pcm
+	$(MAKE) clean -C tools/ramscrgen
 
-ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de
+tools:
+	$(MAKE) -C tools/gbagfx
+	$(MAKE) -C tools/scaninc
+	$(MAKE) -C tools/preproc
+	$(MAKE) -C tools/bin2c
+	$(MAKE) -C tools/rsfont
+	$(MAKE) -C tools/aif2pcm
+	$(MAKE) -C tools/ramscrgen
+
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
 
-%.gba: %.elf
+$(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
@@ -138,6 +166,7 @@ sapphire_rev1: ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_REVISI
 sapphire_rev2: ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) --no-print-directory GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
+ruby_de_debug: ; @$(MAKE) --no-print-directory GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
 
 
 #### Graphics Rules ####
