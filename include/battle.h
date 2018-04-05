@@ -710,11 +710,11 @@ extern u8 gBattleTextBuff1[];
 
 // asm/battle_1.o
 void sub_800D6D4();
-void sub_800D74C();
+void ApplyPlayerChosenFrameToBattleMenu();
 void DrawMainBattleBackground(void);
-void sub_800DAB8();
+void LoadBattleTextboxAndBackground();
 void sub_800DE30(u8);
-void sub_800E23C();
+void LoadBattleEntryBackground();
 
 // src/battle_2.o
 void sub_800E7C4(void);

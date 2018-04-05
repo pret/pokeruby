@@ -29,9 +29,9 @@ extern void sub_8032A38(void);
 //extern u8 GetCurrentMapBattleScene(void);
 
 extern const u8 gGameVersion;
-extern u8 gUnknown_08D00000[];
-extern u16 gUnknown_08D00524[];
-extern u16 gUnknown_08D004E0[];
+extern u8 gBattleTextboxTiles[];
+extern u16 gBattleTextboxTilemap[];
+extern u16 gBattleTextboxPalette[];
 extern u16 gBattleTypeFlags;
 extern struct Trainer gTrainers[];
 extern u16 gTrainerBattleOpponent;
@@ -86,7 +86,6 @@ extern u16 gBattle_BG2_Y;
 extern struct CompressedSpriteSheet gUnknown_081F95A4;
 
 extern u8 sav1_map_get_battletype(void);
-extern void sub_800D74C(void);
 
 struct LinkResultWindow {
     struct Window *window;
@@ -144,8 +143,7 @@ void sub_800D6D4(void)
     REG_DISPCNT = 0xbf40;
 }
 
-// ApplyPlayerChosenFrameToBattleMenu
-void sub_800D74C(void)
+void ApplyPlayerChosenFrameToBattleMenu(void)
 {
     TextWindow_SetBaseTileNum(0x12);
     TextWindow_LoadStdFrameGraphicsOverridePal(&gUnknown_03004210, 1);
@@ -254,14 +252,12 @@ void DrawMainBattleBackground(void)
     }
 }
 
-
-
-void sub_800DAB8(void)
+void LoadBattleTextboxAndBackground(void)
 {
-    LZDecompressVram(gUnknown_08D00000, (void *)0x6000000);
-    CpuSet(gUnknown_08D00524, (void *)0x600c000, 0x800);
-    LoadCompressedPalette(gUnknown_08D004E0, 0, 0x40);
-    sub_800D74C();
+    LZDecompressVram(gBattleTextboxTiles, (void*)(BG_VRAM));
+    CpuSet(gBattleTextboxTilemap, (void *)0x600c000, 0x800);
+    LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
+    ApplyPlayerChosenFrameToBattleMenu();
     DrawMainBattleBackground();
 }
 
@@ -526,7 +522,7 @@ void sub_800DE30(u8 taskId)
     }
 }
 
-void sub_800E23C(void) {
+void LoadBattleEntryBackground(void) {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK) {
         LZDecompressVram(gVersusFrameGfx, (void *)0x6004000);
         LZDecompressVram(gVersusFrameTilemap, (void *)0x600e000);
@@ -574,17 +570,17 @@ void sub_800E23C(void) {
     LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void *)0x600e000);
 }
 
-int sub_800E414(u8 type) {
+int LoadChosenBattleElement(u8 type) {
     int ret = 0;
     switch (type) {
     case 0:
-        LZDecompressVram(&gUnknown_08D00000, (void *)0x6000000);
+        LZDecompressVram(&gBattleTextboxTiles, (void *)0x6000000);
         break;
     case 1:
-        CpuCopy16(gUnknown_08D00524, (void *)0x600c000, 0x1000);
+        CpuCopy16(gBattleTextboxTilemap, (void *)0x600c000, 0x1000);
         break;
     case 2:
-        LoadCompressedPalette(gUnknown_08D004E0, 0, 0x40);
+        LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
         break;
     case 3: // tiles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK))) {
@@ -748,7 +744,7 @@ int sub_800E414(u8 type) {
             break;
         }
     case 6:
-        sub_800D74C();
+        ApplyPlayerChosenFrameToBattleMenu();
         break;
     default:
         ret = 1;
