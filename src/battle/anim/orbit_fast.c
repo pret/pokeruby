@@ -8,12 +8,13 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80D2704(struct Sprite* sprite);
+static void AnimOrbitFastStep(struct Sprite* sprite);
 
-// orbit_fast (a quickly moving fast circular motion of a sprite around an object.)
-// Used by Hidden Power.
-
-void sub_80D26A4(struct Sprite* sprite)
+// Orbits a sphere in an ellipse around the mon.
+// Used by MOVE_HIDDEN_POWER
+// arg 0: duration
+// arg 1: initial wave offset
+void AnimOrbitFast(struct Sprite* sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
@@ -21,11 +22,11 @@ void sub_80D26A4(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[7] = sub_8079E90(gAnimBankAttacker);
-    sprite->callback = sub_80D2704;
-    sub_80D2704(sprite);
+    sprite->callback = AnimOrbitFastStep;
+    sprite->callback(sprite);
 }
 
-void sub_80D2704(struct Sprite* sprite)
+static void AnimOrbitFastStep(struct Sprite* sprite)
 {
     if ((u16)(sprite->data[1] - 0x40) <= 0x7F)
         sprite->subpriority = sprite->data[7] + 1;

@@ -8,8 +8,34 @@
 #include "strings2.h"
 #include "trainer_card.h"
 
+struct DebugStruct1
+{
+    u16 var0;
+    u8 var1[10];
+};
+
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 extern u8 gBattleOutcome;
+
+#if DEBUG
+const struct DebugStruct1 gUnknown_Debug_4245CC[] =
+{
+    { 1, _("NUMBER1") },
+    { 2, _("ナンバー2") },
+    { 3, _("ナンバー3") },
+    { 4, _("ナンバー4") },
+    { 5, _("ナンバー5") },
+    { 6, _("ナンバー6") },
+    { 7, _("ナンバー7") },
+};
+
+const struct {u8 unk0; u8 unk1;} gUnknown_Debug_8424620[] =
+{
+    { 1, 1 },
+    { 2, 1 },
+    { 3, 1 },
+};
+#endif
 
 static void InitLinkBattleRecord(struct LinkBattleRecord *record)
 {
@@ -38,7 +64,7 @@ static int GetLinkBattleRecordTotalBattles(struct LinkBattleRecord *record)
     return record->wins + record->losses + record->draws;
 }
 
-static int FindLinkBattleRecord(struct LinkBattleRecord *records, u8 *name, u16 trainerId)
+static int FindLinkBattleRecord(struct LinkBattleRecord *records, const u8 *name, u16 trainerId)
 {
     int i;
 
@@ -119,7 +145,7 @@ static void UpdateLinkBattleGameStats(int battleOutcome)
         IncrementGameStat(stat);
 }
 
-static void UpdateLinkBattleRecords_(struct LinkBattleRecord *records, u8 *name, u16 trainerId, int battleOutcome, u8 language)
+static void UpdateLinkBattleRecords_(struct LinkBattleRecord *records, const u8 *name, u16 trainerId, int battleOutcome, u8 language)
 {
     int index;
     UpdateLinkBattleGameStats(battleOutcome);
@@ -197,6 +223,26 @@ void UpdateLinkBattleRecords(int id)
         gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
 }
 
+#if DEBUG
+void debug_sub_81257E0(void)
+{
+    u32 i;
+
+    InitLinkBattleRecords();
+    for (i = 0; i < 3; i++)
+    {
+        u32 id = gUnknown_Debug_8424620[i].unk0 - 1;
+
+        UpdateLinkBattleRecords_(
+            gSaveBlock1.linkBattleRecords,
+            gUnknown_Debug_4245CC[id].var1,
+            gUnknown_Debug_4245CC[id].var0,
+            gUnknown_Debug_8424620[i].unk1,
+            gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
+    }
+}
+#endif
+
 static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
 {
     ConvertIntToDecimalStringN_DigitWidth6(gStringVar1, GetGameStat(GAME_STAT_LINK_BATTLE_WINS), STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -240,7 +286,8 @@ static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y)
     }
 }
 
-void ShowLinkBattleRecords(void) {
+void ShowLinkBattleRecords(void)
+{
     s32 i;
     Menu_DrawStdWindowFrame(1, 0, 28, 18);
     sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);

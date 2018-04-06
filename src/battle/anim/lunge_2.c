@@ -8,7 +8,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 
 static void sub_80CDB60(u8 taskId);
 static void sub_80CDD20(u8 taskId);
@@ -20,7 +20,7 @@ void sub_80CDAC8(u8 taskId)
 {
     u8 a;
 
-    gTasks[taskId].data[0] = gObjectBankIDs[gAnimBankAttacker];
+    gTasks[taskId].data[0] = gBankSpriteIds[gAnimBankAttacker];
     a = GetBankSide(gAnimBankAttacker);
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = 0;

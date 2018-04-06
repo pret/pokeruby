@@ -8,21 +8,21 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80D2834(struct Sprite* sprite);
+static void AnimOrbitScatterStep(struct Sprite* sprite);
 
-// orbit_scatter (scatters the objects associated with the fast orbit from the last file.)
-// Used in Hidden Power.
-
-void sub_80D27E0(struct Sprite* sprite)
+// Moves orbs away from the mon, based on where they are in their orbit.
+// Used in MOVE_HIDDEN_POWER.
+// arg 0: initial wave offset
+void AnimOrbitScatter(struct Sprite* sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
     sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
     sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
-    sprite->callback = sub_80D2834;
+    sprite->callback = AnimOrbitScatterStep;
 }
 
-void sub_80D2834(struct Sprite* sprite)
+static void AnimOrbitScatterStep(struct Sprite* sprite)
 {
     sprite->pos2.x += sprite->data[0];
     sprite->pos2.y += sprite->data[1];

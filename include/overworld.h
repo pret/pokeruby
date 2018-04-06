@@ -24,6 +24,8 @@ struct UCoords32
 
 extern const struct UCoords32 gUnknown_0821664C[];
 extern void (*gFieldCallback)(void);
+extern u8 gFieldLinkPlayerCount;
+extern u8 gUnknown_03004860;
 
 // sub_8052F5C
 void Overworld_ResetStateAfterFly(void);
@@ -91,7 +93,7 @@ void sub_8053D14(u16);
 // GetLocationMusic
 // GetCurrLocationDefaultMusic
 // GetWarpDestinationMusic
-// Overworld_ResetMapMusic
+void Overworld_ResetMapMusic(void);
 void Overworld_PlaySpecialMapMusic(void);
 void Overworld_SetSavedMusic(u16);
 void Overworld_ClearSavedMusic(void);
@@ -185,11 +187,11 @@ u16 sub_8055438(u32);
 // sub_80554B8
 // sub_80554BC
 // sub_80554E4
-// sub_80554F8
+s32 sub_80554F8(void);
 // unref_sub_8055568
-// sub_8055574
+u16 sub_8055574(void);
 u16 sub_8055588(void);
-// sub_805559C
+u16 sub_805559C(void);
 void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3);
 bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
@@ -234,5 +236,7 @@ u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
 void CreateLinkPlayerSprite(u8);
 void SpriteCB_LinkPlayer(struct Sprite *);
 void sub_805465C(void);
+
+void CB2_InitTestMenu(void);
 
 #endif // GUARD_ROM4_H

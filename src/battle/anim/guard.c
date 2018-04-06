@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_anim.h"
 #include "rom_8077ABC.h"
 
@@ -12,9 +13,9 @@ extern u16 gBattleTypeFlags;
 
 void sub_80D3014(struct Sprite *sprite)
 {
-    if ((gBattleTypeFlags & 1) && IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
     {
-        sub_807A3FC(gAnimBankAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
+        SetAverageBattlerPositions(gAnimBankAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
         sprite->pos1.y += 40;
 
         StartSpriteAffineAnim(sprite, 1);
@@ -29,6 +30,6 @@ void sub_80D3014(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y - 72;
 
-    sprite->callback = sub_8078B34;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

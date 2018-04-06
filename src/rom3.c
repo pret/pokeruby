@@ -67,6 +67,10 @@ void sub_800B858(void)
     }
 }
 
+#if DEBUG
+extern u8 gUnknown_02023A14_50;
+#endif
+
 void setup_poochyena_battle(void)
 {
     s32 i;
@@ -93,6 +97,16 @@ void setup_poochyena_battle(void)
     }
     gUnknown_020239FC = 0;
     gUnknown_02024C78 = 0;
+
+#if DEBUG
+    if (gUnknown_02023A14_50 & 0x80)
+    {
+        gSharedMem[0x160fd] = 0;
+        gSharedMem[0x160fe] = 0;
+        gSharedMem[0x160ff] = 0;
+        ((u32 *) gBattleBuffersTransferData)[64]++;
+    }
+#endif
 }
 
 void sub_800B950(void)
@@ -463,7 +477,7 @@ void sub_800C1A8(u8 taskId)
         }
         break;
     case 4:
-        if (sub_8007ECC())
+        if (IsLinkTaskFinished())
         {
             var = (ewram14004arr(0, gTasks[taskId].data[15]) | (ewram14004arr(1, gTasks[taskId].data[15]) << 8));
             gTasks[taskId].data[13] = 1;

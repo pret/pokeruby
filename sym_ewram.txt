@@ -1,11 +1,11 @@
-. = ALIGN(4); src/engine/main.o(ewram_data);
-. = ALIGN(4); src/engine/sprite.o(ewram_data);
-. = ALIGN(4); src/engine/text.o(ewram_data);
-. = ALIGN(4); src/engine/string_util.o(ewram_data);
+. = ALIGN(4); src/main.o(ewram_data);
+. = ALIGN(4); src/sprite.o(ewram_data);
+. = ALIGN(4); src/text.o(ewram_data);
+. = ALIGN(4); src/string_util.o(ewram_data);
 
 . += 0x2E8;
 
-. = ALIGN(4); src/engine/link.o(ewram_data);
+. = ALIGN(4); src/link.o(ewram_data);
 . = ALIGN(4); src/rom3.o(ewram_data);
 
 /* battle */
@@ -32,23 +32,31 @@ gUnknown_02023A04 = .; /* 2023A04 */
 gUnknown_02023A14 = .; /* 2023A14 */
     . += 0x4C;
 
-gBattleBufferA = .; /* 2023A60 */
-    . += 0x2;
+#if DEBUG
 
-gUnknown_02023A62 = .; /* 2023A62 */
-    . += 0x1;
-
-gUnknown_02023A63 = .; /* 2023A63 */
-    . += 0x1;
-
-gUnknown_02023A64 = .; /* 2023A64 */
-    . += 0x7FC;
-
-gBattleBufferB = .; /* 2024260 */
+gUnknown_02023A14_4C = .;
     . += 0x4;
 
-gUnknown_02024264 = .; /* 2024264 */
-    . += 0x7FC;
+gUnknown_02023A14_50 = .;
+    . += 0x2;
+
+gUnknown_Debug_2023A76 = .;
+gUnknown_Debug_2023A76_ = .;
+	. += 0x8C;
+
+gUnknown_Debug_2023B02 = .;
+    . += 0x60;
+
+gUnknown_Debug_2023B62 = .;
+    . += 0x1A2;
+
+#endif
+
+gBattleBufferA = .; /* 2023A60 */
+    . += 0x800;
+
+gBattleBufferB = .; /* 2024260 */
+    . += 0x800;
 
 gActiveBank = .; /* 2024A60 */
     . += 0x4;
@@ -98,7 +106,7 @@ gUnknown_02024ACC = .; /* 2024ACC */
 gUnknown_02024AD0 = .; /* 2024AD0 */
     . += 0x110;
 
-gObjectBankIDs = .; /* 2024BE0 */
+gBankSpriteIds = .; /* 2024BE0 */
     . += 0x4;
 
 gCurrMovePos = .; /* 2024BE4 */
@@ -293,172 +301,100 @@ gMoveToLearn = .; /* 2024E82 */
 gBattleMonForms = .; /* 2024E84 */
     . += 0x4;
 
-. = ALIGN(4); src/pokemon/pokemon_1.o(ewram_data);
-. = ALIGN(4); src/pokemon/pokemon_2.o(ewram_data);
-. = ALIGN(4); src/engine/load_save.o(ewram_data);
-. = ALIGN(4); src/engine/trade.o(ewram_data);
-. = ALIGN(4); src/scene/berry_blender.o(ewram_data);
-. = ALIGN(4); src/scene/new_game.o(ewram_data);
-. = ALIGN(4); src/field/overworld.o(ewram_data);
-. = ALIGN(4); src/field/fieldmap.o(ewram_data);
-. = ALIGN(4); src/field/field_camera.o(ewram_data);
-. = ALIGN(4); src/field/field_player_avatar.o(ewram_data);
-. = ALIGN(4); src/field/field_message_box.o(ewram_data);
-. = ALIGN(4); src/engine/script.o(ewram_data);
-. = ALIGN(4); src/field/scrcmd.o(ewram_data);
-. = ALIGN(4); src/field/field_control_avatar.o(ewram_data);
-. = ALIGN(4); src/field/event_data.o(ewram_data);
-. = ALIGN(4); src/field/party_menu.o(ewram_data);
-. = ALIGN(4); src/field/start_menu.o(ewram_data);
-. = ALIGN(4); src/engine/menu.o(ewram_data);
-. = ALIGN(4); src/engine/tileset_anim.o(ewram_data);
-. = ALIGN(4); src/engine/palette.o(ewram_data);
-. = ALIGN(4); src/engine/sound.o(ewram_data);
+. = ALIGN(4); src/pokemon_1.o(ewram_data);
+. = ALIGN(4); src/pokemon_2.o(ewram_data);
+. = ALIGN(4); src/load_save.o(ewram_data);
+. = ALIGN(4); src/trade.o(ewram_data);
+. = ALIGN(4); src/berry_blender.o(ewram_data);
+. = ALIGN(4); src/new_game.o(ewram_data);
+. = ALIGN(4); src/overworld.o(ewram_data);
+. = ALIGN(4); src/fieldmap.o(ewram_data);
+. = ALIGN(4); src/field_camera.o(ewram_data);
+. = ALIGN(4); src/field_player_avatar.o(ewram_data);
+. = ALIGN(4); src/field_message_box.o(ewram_data);
+. = ALIGN(4); src/script.o(ewram_data);
+. = ALIGN(4); src/scrcmd.o(ewram_data);
+. = ALIGN(4); src/field_control_avatar.o(ewram_data);
+. = ALIGN(4); src/event_data.o(ewram_data);
+. = ALIGN(4); src/party_menu.o(ewram_data);
+. = ALIGN(4); src/start_menu.o(ewram_data);
+. = ALIGN(4); src/menu.o(ewram_data);
+. = ALIGN(4); src/tileset_anim.o(ewram_data);
+. = ALIGN(4); src/palette.o(ewram_data);
+. = ALIGN(4); src/sound.o(ewram_data);
 . = ALIGN(4); src/battle/battle_anim.o(ewram_data);
 . = ALIGN(4); src/rom_8077ABC.o(ewram_data);
-. = ALIGN(4); src/scene/title_screen.o(ewram_data);
-. = ALIGN(4); src/field/field_weather.o(ewram_data);
+. = ALIGN(4); src/title_screen.o(ewram_data);
+. = ALIGN(4); src/field_weather.o(ewram_data);
 . = ALIGN(4); src/battle/battle_setup.o(ewram_data);
-. = ALIGN(4); src/field/wild_encounter.o(ewram_data);
-. = ALIGN(4); src/field/field_effect.o(ewram_data);
+. = ALIGN(4); src/cable_club.o(ewram_data);
+. = ALIGN(4); src/debug/taya_debug_window.o(ewram_data);
+. = ALIGN(4); src/wild_encounter.o(ewram_data);
+. = ALIGN(4); src/field_effect.o(ewram_data);
 . = ALIGN(4); src/scanline_effect.o(ewram_data);
-. = ALIGN(4); src/pokemon/pokemon_menu.o(ewram_data);
-. = ALIGN(4); src/pokemon/pokedex.o(ewram_data);
-. = ALIGN(4); src/engine/trainer_card.o(ewram_data);
-. = ALIGN(4); src/pokemon/pokemon_storage_system.o(ewram_data);
-
-/* still pokemon_storage_system */
-
-    . = ALIGN(4);
-gUnknown_02038470 = .; /* 2038470 */
-    . += 0x3;
-
-gUnknown_02038473 = .; /* 2038473 */
-    . += 0x1;
-
-gUnknown_02038474 = .; /* 2038474 */
-    . += 0x4;
-
-gUnknown_02038478 = .; /* 2038478 */
-    . += 0x4;
-
-gUnknown_0203847C = .; /* 203847C */
-    . += 0x1;
-
-gUnknown_0203847D = .; /* 203847D */
-    . += 0x1;
-
-gUnknown_0203847E = .; /* 203847E */
-    . += 0x1;
-
-gUnknown_0203847F = .; /* 203847F */
-    . += 0x1;
-
-gUnknown_02038480 = .; /* 2038480 */
-    . += 0x64;
-
-gUnknown_020384E4 = .; /* 20384E4 */
-    . += 0x1;
-
-gUnknown_020384E5 = .; /* 20384E5 */
-    . += 0x1;
-
-gUnknown_020384E6 = .; /* 20384E6 */
-    . += 0x1;
-
-gUnknown_020384E7 = .; /* 20384E7 */
-    . += 0x1;
-
-gUnknown_020384E8 = .; /* 20384E8 */
-    . += 0x1;
-
-gUnknown_020384E9 = .; /* 20384E9 */
-    . += 0x1;
-
-gUnknown_020384EA = .; /* 20384EA */
-    . += 0x2;
-
-gUnknown_020384EC = .; /* 20384EC */
-    . += 0x4;
-
-. = ALIGN(4); src/pokemon/pokemon_summary_screen.o(ewram_data);
-. = ALIGN(4); src/field/script_movement.o(ewram_data);
-. = ALIGN(4); src/field/map_name_popup.o(ewram_data);
-. = ALIGN(4); src/field/item_menu.o(ewram_data);
+. = ALIGN(4); src/pokemon_menu.o(ewram_data);
+. = ALIGN(4); src/pokedex.o(ewram_data);
+. = ALIGN(4); src/trainer_card.o(ewram_data);
+. = ALIGN(4); src/pokemon_storage_system.o(ewram_data);
+. = ALIGN(4); src/pokemon_storage_system_2.o(ewram_data);
+. = ALIGN(4); src/pokemon_storage_system_3.o(ewram_data);
+. = ALIGN(4); src/pokemon_storage_system_4.o(ewram_data);
+. = ALIGN(4); src/pokemon_storage_system_5.o(ewram_data);
+. = ALIGN(4); src/pokemon_summary_screen.o(ewram_data);
+. = ALIGN(4); src/script_movement.o(ewram_data);
+. = ALIGN(4); src/map_name_popup.o(ewram_data);
+. = ALIGN(4); src/item_menu.o(ewram_data);
 . = ALIGN(4); src/contest.o(ewram_data);
-. = ALIGN(4); src/field/shop.o(ewram_data);
-. = ALIGN(4); src/field/fldeff_escalator.o(ewram_data);
-. = ALIGN(4); src/field/money.o(ewram_data);
-. = ALIGN(4); src/engine/record_mixing.o(ewram_data);
+. = ALIGN(4); src/shop.o(ewram_data);
+. = ALIGN(4); src/fldeff_escalator.o(ewram_data);
+. = ALIGN(4); src/debug/watanabe_debug_menu.o(ewram_data);
+. = ALIGN(4); src/money.o(ewram_data);
+. = ALIGN(4); src/record_mixing.o(ewram_data);
 . = ALIGN(4); src/debug/sound_check_menu.o(ewram_data);
-. = ALIGN(4); src/field/secret_base.o(ewram_data);
-. = ALIGN(4); src/field/tv.o(ewram_data);
-. = ALIGN(4); src/field/pc_screen_effect.o(ewram_data);
-. = ALIGN(4); src/field/rotating_gate.o(ewram_data);
-. = ALIGN(4); src/field/safari_zone.o(ewram_data);
+. = ALIGN(4); src/secret_base.o(ewram_data);
+. = ALIGN(4); src/tv.o(ewram_data);
+. = ALIGN(4); src/pc_screen_effect.o(ewram_data);
+. = ALIGN(4); src/rotating_gate.o(ewram_data);
+. = ALIGN(4); src/safari_zone.o(ewram_data);
 . = ALIGN(4); src/easy_chat_2.o(ewram_data);
-
-/* pokenav */
-
-    . = ALIGN(4);
-gUnknown_020388B0 = .; /* 20388B0 */
-    . += 0x4;
-
-gUnknown_020388B4 = .; /* 20388B4 */
-    . += 0x4;
-
-. = ALIGN(4); src/pokemon/mon_markings.o(ewram_data);
-. = ALIGN(4); src/field/mauville_man.o(ewram_data);
-. = ALIGN(4); src/field/menu_helpers.o(ewram_data);
-. = ALIGN(4); src/field/region_map.o(ewram_data);
-. = ALIGN(4); src/field/decoration.o(ewram_data);
+. = ALIGN(4); src/pokenav.o(ewram_data);
+. = ALIGN(4); src/mon_markings.o(ewram_data);
+. = ALIGN(4); src/mauville_man.o(ewram_data);
+. = ALIGN(4); src/menu_helpers.o(ewram_data);
+. = ALIGN(4); src/region_map.o(ewram_data);
+. = ALIGN(4); src/decoration.o(ewram_data);
 . = ALIGN(4); src/battle/battle_ai.o(ewram_data);
 . = ALIGN(4); src/rom6.o(ewram_data);
-. = ALIGN(4); src/field/pokeblock.o(ewram_data);
-. = ALIGN(4); src/field/field_specials.o(ewram_data);
-
-/* pokedex_area_screen */
-
-    . = ALIGN(4);
-gUnknown_02039260 = .; /* 2039260 */
-    . += 0x2;
-
-gUnknown_02039262 = .; /* 2039262 */
-    . += 0x2;
-
-gUnknown_02039264 = .; /* 2039264 */
-    . += 0x2;
-
-gUnknown_02039266 = .; /* 2039266 */
-    . += 0x2;
-
-gUnknown_02039268 = .; /* 2039268 */
-    . += 0x2;
-
-gUnknown_0203926A = .; /* 203926A */
-    . += 0x2;
-
+. = ALIGN(4); src/pokeblock.o(ewram_data);
+. = ALIGN(4); src/field_specials.o(ewram_data);
+. = ALIGN(4); src/pokedex_area_screen.o(ewram_data);
+. = ALIGN(4); src/roulette.o(ewram_data);
 . = ALIGN(4); src/battle/battle_message.o(ewram_data);
-. = ALIGN(4); src/field/choose_party.o(ewram_data);
-. = ALIGN(4); src/scene/cable_car.o(ewram_data);
-. = ALIGN(4); src/engine/save.o(ewram_data);
-. = ALIGN(4); src/engine/mystery_event_script.o(ewram_data);
-. = ALIGN(4); src/field/roamer.o(ewram_data);
-. = ALIGN(4); src/field/use_pokeblock.o(ewram_data);
-. = ALIGN(4); src/field/player_pc.o(ewram_data);
-. = ALIGN(4); src/scene/intro.o(ewram_data);
-. = ALIGN(4); src/scene/hall_of_fame.o(ewram_data);
-. = ALIGN(4); src/scene/credits.o(ewram_data);
-. = ALIGN(4); src/field/lottery_corner.o(ewram_data);
-. = ALIGN(4); src/field/berry_tag_screen.o(ewram_data);
-. = ALIGN(4); src/engine/mystery_event_menu.o(ewram_data);
-. = ALIGN(4); src/engine/save_failed_screen.o(ewram_data);
-. = ALIGN(4); src/pokemon/pokeblock_feed.o(ewram_data);
-. = ALIGN(4); src/scene/intro_credits_graphics.o(ewram_data);
+. = ALIGN(4); src/choose_party.o(ewram_data);
+. = ALIGN(4); src/cable_car.o(ewram_data);
+. = ALIGN(4); src/save.o(ewram_data);
+. = ALIGN(4); src/mystery_event_script.o(ewram_data);
+. = ALIGN(4); src/roamer.o(ewram_data);
+. = ALIGN(4); src/use_pokeblock.o(ewram_data);
+. = ALIGN(4); src/player_pc.o(ewram_data);
+. = ALIGN(4); src/intro.o(ewram_data);
+. = ALIGN(4); src/hall_of_fame.o(ewram_data);
+. = ALIGN(4); src/credits.o(ewram_data);
+. = ALIGN(4); src/lottery_corner.o(ewram_data);
+. = ALIGN(4); src/berry_tag_screen.o(ewram_data);
+. = ALIGN(4); src/mystery_event_menu.o(ewram_data);
+. = ALIGN(4); src/save_failed_screen.o(ewram_data);
+. = ALIGN(4); src/pokeblock_feed.o(ewram_data);
+. = ALIGN(4); src/debug/nakamura_debug_menu.o(ewram_data);
+. = ALIGN(4); src/intro_credits_graphics.o(ewram_data);
 
 /* ??? */
 
+#if DEBUG
+    . = ALIGN(8);
+#else
     . = ALIGN(16);
+#endif
 gTileBuffer = .; /* 2039360 */
     . += 0x100;
 
@@ -468,4 +404,4 @@ gUnknown_02039460 = .; /* 2039460 */
 gUnknown_02039760 = .; /* 2039760 */
     . += 0xC00;
 
-. = ALIGN(4); src/engine/menu_cursor.o(ewram_data);
+. = ALIGN(4); src/menu_cursor.o(ewram_data);

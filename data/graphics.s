@@ -3,23 +3,26 @@
 	.section gfx_data, "aw", %progbits
 
 	.align 2
-gUnknown_08D00000:: @ 8D00000
+gBattleTextboxTiles:: @ 8D00000
 	.incbin "graphics/interface/menu.4bpp.lz" @ menu window and arrows
 
 	.align 2
-gUnknown_08D004E0:: @ 8D004E0
+gBattleTextboxPalette:: @ 8D004E0
 	.incbin "graphics/interface/menu.gbapal.lz"
 
 	.align 2
-gUnknown_08D00524:: @ 8D00524
+gBattleTextboxTilemap:: @ 8D00524
 	.incbin "graphics/interface/menu_map.bin"
 
 @ 8D01524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
+gUnusedOldCharmap_Gfx_lz::
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
+gUnusedOldCharmap_Tilemap_lz::
 	.incbin "graphics/unused/old_charmap.bin.lz"
+gUnusedOldCharmap_Pal_lz::
 	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2

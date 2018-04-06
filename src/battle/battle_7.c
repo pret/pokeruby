@@ -20,13 +20,14 @@
 #include "text.h"
 #include "gba/m4a_internal.h"
 #include "ewram.h"
+#include "graphics.h"
 
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBank;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gBanksBySide[];
-extern u8 gObjectBankIDs[];
+extern u8 gBankSpriteIds[];
 extern u16 gUnknown_02024DE8;
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
@@ -49,19 +50,47 @@ extern const u8 *const gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
-extern const u8 gSubstituteDollTilemap[];
-extern const u8 gSubstituteDollGfx[];
-extern const u8 gSubstituteDollPal[];
 extern const struct CompressedSpriteSheet gUnknown_081FAF24;
 extern const struct SpriteTemplate gSpriteTemplate_81FAF34;
-extern const struct CompressedSpriteSheet gUnknown_0820A47C;
-extern const struct CompressedSpriteSheet gUnknown_0820A484;
-extern const struct CompressedSpriteSheet gUnknown_0820A48C[];
-extern const struct CompressedSpriteSheet gUnknown_0820A49C[];
-extern const struct CompressedSpriteSheet gUnknown_0820A4AC;
-extern const struct CompressedSpriteSheet gUnknown_0820A4B4[];
-extern const struct SpritePalette gUnknown_0820A4D4[];
-extern const u8 gUnknown_08D09C48[];
+extern const u8 gSubstituteDollTilemap[]; // graphics.s
+extern const u8 gSubstituteDollGfx[]; // graphics.s
+extern const u8 gSubstituteDollPal[]; // graphics.s
+extern const u8 gUnknown_08D09C48[]; // graphics.s
+
+const struct CompressedSpriteSheet gUnknown_0820A47C =
+{ gBattleWindowLargeGfx, 4096, 0xd6ff };
+
+const struct CompressedSpriteSheet gUnknown_0820A484 =
+{ gBattleWindowSmallGfx, 4096, 0xd701 };
+
+const struct CompressedSpriteSheet gUnknown_0820A48C[] =
+{
+    { gBattleWindowSmall2Gfx, 2048, 0xd6ff },
+    { gBattleWindowSmall2Gfx, 2048, 0xd700 },
+};
+
+const struct CompressedSpriteSheet gUnknown_0820A49C[] =
+{
+    { gBattleWindowSmall3Gfx, 2048, 0xd701 },
+    { gBattleWindowSmall3Gfx, 2048, 0xd702 },
+};
+
+const struct CompressedSpriteSheet gUnknown_0820A4AC =
+{ gBattleWindowLarge2Gfx, 4096, 0xd70b };
+
+const struct CompressedSpriteSheet gUnknown_0820A4B4[] =
+{
+    { gBlankGfxCompressed, 256, 0xd704 },
+    { gBlankGfxCompressed, 288, 0xd705 },
+    { gBlankGfxCompressed, 256, 0xd706 },
+    { gBlankGfxCompressed, 288, 0xd707 },
+};
+
+const struct SpritePalette gUnknown_0820A4D4[] =
+{
+    { gUnknown_08D1212C, 0xD6FF },
+    { gUnknown_08D1214C, 0xD704 },
+};
 
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
@@ -169,9 +198,9 @@ bool8 move_anim_start_t3(u8 a, u8 b, u8 c, u8 d, u16 e)
     }
     if (ewram17800[a].substituteSprite && sub_803163C(d) == 0)
         return TRUE;
-    if (ewram17800[a].substituteSprite && d == 2 && gSprites[gObjectBankIDs[a]].invisible)
+    if (ewram17800[a].substituteSprite && d == 2 && gSprites[gBankSpriteIds[a]].invisible)
     {
-        refresh_graphics_maybe(a, 1, gObjectBankIDs[a]);
+        refresh_graphics_maybe(a, 1, gBankSpriteIds[a]);
         sub_80324E0(a);
         return TRUE;
     }
@@ -592,12 +621,12 @@ void sub_8031F24(void)
     s32 i;
 
     for (i = 0; i < gNoOfAllBanks; i++)
-        ewram17800[i].invisible = gSprites[gObjectBankIDs[i]].invisible;
+        ewram17800[i].invisible = gSprites[gBankSpriteIds[i]].invisible;
 }
 
 void sub_8031F88(u8 a)
 {
-    ewram17800[a].invisible = gSprites[gObjectBankIDs[a]].invisible;
+    ewram17800[a].invisible = gSprites[gBankSpriteIds[a]].invisible;
 }
 
 void sub_8031FC4(u8 a, u8 b, bool8 c)
@@ -611,7 +640,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
 
     if (c)
     {
-        StartSpriteAnim(&gSprites[gObjectBankIDs[a]], ewram17840.unk0);
+        StartSpriteAnim(&gSprites[gBankSpriteIds[a]], ewram17840.unk0);
         paletteOffset = 0x100 + a * 16;
         LoadPalette(ewram16400 + ewram17840.unk0 * 32, paletteOffset, 32);
         gBattleMonForms[a] = ewram17840.unk0;
@@ -620,7 +649,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             BlendPalette(paletteOffset, 16, 6, 0x7FFF);
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
-        gSprites[gObjectBankIDs[a]].pos1.y = sub_8077F68(a);
+        gSprites[gBankSpriteIds[a]].pos1.y = sub_8077F68(a);
     }
     else
     {
@@ -673,7 +702,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
                   gTransformedPersonalities[a]);
             }
         }
-        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gObjectBankIDs[a]].oam.tileNum * 32), 0x800);
+        DmaCopy32Defvars(3, gUnknown_081FAF4C[r10], (void *)(VRAM + 0x10000 + gSprites[gBankSpriteIds[a]].oam.tileNum * 32), 0x800);
         paletteOffset = 0x100 + a * 16;
         lzPaletteData = GetMonSpritePalFromOtIdPersonality(species, otId, personalityValue);
         LZDecompressWram(lzPaletteData, gSharedMem);
@@ -692,8 +721,8 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             ewram17800[a].transformedSpecies = species;
             gBattleMonForms[a] = gBattleMonForms[b];
         }
-        gSprites[gObjectBankIDs[a]].pos1.y = sub_8077F68(a);
-        StartSpriteAnim(&gSprites[gObjectBankIDs[a]], gBattleMonForms[a]);
+        gSprites[gBankSpriteIds[a]].pos1.y = sub_8077F68(a);
+        StartSpriteAnim(&gSprites[gBankSpriteIds[a]], gBattleMonForms[a]);
     }
 }
 
@@ -833,15 +862,15 @@ void sub_80326EC(u8 a)
     {
         if (IsBankSpritePresent(i) != 0)
         {
-            gSprites[gObjectBankIDs[i]].oam.affineMode = a;
+            gSprites[gBankSpriteIds[i]].oam.affineMode = a;
             if (a == 0)
             {
-                ewram17810[i].unk6 = gSprites[gObjectBankIDs[i]].oam.matrixNum;
-                gSprites[gObjectBankIDs[i]].oam.matrixNum = 0;
+                ewram17810[i].unk6 = gSprites[gBankSpriteIds[i]].oam.matrixNum;
+                gSprites[gBankSpriteIds[i]].oam.matrixNum = 0;
             }
             else
             {
-                gSprites[gObjectBankIDs[i]].oam.matrixNum = ewram17810[i].unk6;
+                gSprites[gBankSpriteIds[i]].oam.matrixNum = ewram17810[i].unk6;
             }
         }
     }
@@ -867,7 +896,7 @@ void sub_80328A4(struct Sprite *sprite)
 {
     bool8 invisible = FALSE;
     u8 r4 = sprite->data[0];
-    struct Sprite *r7 = &gSprites[gObjectBankIDs[r4]];
+    struct Sprite *r7 = &gSprites[gBankSpriteIds[r4]];
 
     if (!r7->inUse || IsBankSpritePresent(r4) == 0)
     {

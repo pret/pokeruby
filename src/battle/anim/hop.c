@@ -91,7 +91,7 @@ void sub_80CB94C(struct Sprite* sprite)
 {
     s16 e1;
     s16 e2;
-    sub_80787B0(sprite, 0);
+    InitAnimSpritePos(sprite, 0);
     e1 = GetBankPosition(gAnimBankTarget, 0);
     e2 = GetBankPosition(gAnimBankTarget, 1);
     if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)

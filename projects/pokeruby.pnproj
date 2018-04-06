@@ -1,0 +1,12 @@
+<Project name="pokeruby">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="pokeruby" path="..\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="asm" path="asm\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="src" path="src\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="include" path="include\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="constants" path="constants\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="data" path="data\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="data-de" path="data-de\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="graphics" path="graphics\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="graphics-de" path="graphics-de\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="sound" path="sound\">
+<MagicFolder excludeFolders="CVS;.svn;.git;.travis;build;" filter=".c;.txt;.h;.cpp;.s;.inc;.hpp" name="tools" path="tools\">
