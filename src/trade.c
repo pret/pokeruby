@@ -4018,10 +4018,10 @@ static void sub_804B41C(void)
             Menu_EraseScreen();
             gLinkType = 0x1144;
             gMain.state ++;
-            LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
-            CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
+            LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
+            CpuCopy16(gBattleTextboxTilemap, ewram, 0x1000);
             DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
-            LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+            LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
             gUnknown_03004828->unk_00b6 = 0;
             gUnknown_03004828->unk_00c4 = 0;
             gUnknown_03004828->isLinkTrade = TRUE;
@@ -4191,11 +4191,11 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldrb r0, [r1]\n"
                     "\tadds r0, 0x1\n"
                     "\tstrb r0, [r1]\n"
-                    "\tldr r0, _0804B590 @ =gUnknown_08D00000\n"
+                    "\tldr r0, _0804B590 @ =gBattleTextboxTiles\n"
                     "\tmovs r1, 0xC0\n"
                     "\tlsls r1, 19\n"
                     "\tbl LZDecompressVram\n"
-                    "\tldr r0, _0804B594 @ =gUnknown_08D00524\n"
+                    "\tldr r0, _0804B594 @ =gBattleTextboxTilemap\n"
                     "\tldr r1, _0804B598 @ =0xfffe1000\n"
                     "\tadds r5, r1\n"
                     "\tmovs r2, 0x80\n"
@@ -4209,7 +4209,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldr r1, _0804B5A4 @ =0x80000280\n"
                     "\tstr r1, [r0, 0x8]\n"
                     "\tldr r0, [r0, 0x8]\n"
-                    "\tldr r0, _0804B5A8 @ =gUnknown_08D004E0\n"
+                    "\tldr r0, _0804B5A8 @ =gBattleTextboxPalette\n"
                     "\tmovs r1, 0\n"
                     "\tmovs r2, 0x20\n"
                     "\tbl LoadCompressedPalette\n"
@@ -4267,13 +4267,13 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "_0804B584: .4byte 0x00001144\n"
                     "_0804B588: .4byte gMain\n"
                     "_0804B58C: .4byte 0x0000043c\n"
-                    "_0804B590: .4byte gUnknown_08D00000\n"
-                    "_0804B594: .4byte gUnknown_08D00524\n"
+                    "_0804B590: .4byte gBattleTextboxTiles\n"
+                    "_0804B594: .4byte gBattleTextboxTilemap\n"
                     "_0804B598: .4byte 0xfffe1000\n"
                     "_0804B59C: .4byte 0x06002800\n"
                     "_0804B5A0: .4byte 0x040000d4\n"
                     "_0804B5A4: .4byte 0x80000280\n"
-                    "_0804B5A8: .4byte gUnknown_08D004E0\n"
+                    "_0804B5A8: .4byte gBattleTextboxPalette\n"
                     "_0804B5AC_case01:\n"
                     "\tbl OpenLink\n"
                     "\tldr r1, _0804B5C8 @ =gMain\n"
@@ -4709,9 +4709,9 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->bg1vofs = 0;
             gUnknown_03004828->bg1hofs = 0;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5);
-            LZDecompressVram(gUnknown_08D00000, BG_CHAR_ADDR(0));
-            CpuCopy16(gUnknown_08D00524, buffer = (u16 *)gSharedMem, 0x1000);
-            LoadCompressedPalette(gUnknown_08D004E0, 0x70, 0x20);
+            LZDecompressVram(gBattleTextboxTiles, BG_CHAR_ADDR(0));
+            CpuCopy16(gBattleTextboxTilemap, buffer = (u16 *)gSharedMem, 0x1000);
+            LoadCompressedPalette(gBattleTextboxPalette, 0x70, 0x20);
             FillPalette(0, 0, 2);
             for (i = 0; i < 0x280; i ++)
                 buffer[i] |= 0x7000;
@@ -5684,9 +5684,9 @@ static void sub_804E1DC(void)
 
 void sub_804E22C(void)
 {
-    LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
-    CpuCopy16(gUnknown_08D00524, gSharedMem, 0x1000);
+    LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
+    CpuCopy16(gBattleTextboxTilemap, gSharedMem, 0x1000);
     DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
-    LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+    LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
     REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
 }

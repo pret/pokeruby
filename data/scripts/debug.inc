@@ -1,13 +1,13 @@
 .if DEBUG
 
 DebugScript_081C1CFE:: @ 81C1CFE
-	setflag 0x804
+	setflag FLAG_SYS_GAME_CLEAR
 	call EverGrandeCity_HallOfFame_EventScript_19FC13
 	end
 
 DebugScript_081C1D07:: @ 81C1D07
 	checkitem ITEM_COIN_CASE, 1
-	compare 0x800d, 1
+	compare RESULT, 1
 	goto_if_eq DebugScript_081C1D1D
 	giveitem ITEM_COIN_CASE, 1
 	end
@@ -22,7 +22,7 @@ DebugScript_081C1D23:: @ 81C1D23
 	end
 
 DebugScript_081C1D24:: @ 81C1D24
-	setvar 0x40ba, 1
+	setvar VAR_NEW_MAUVILLE_STATE, 1
 	end
 
 DebugScript_081C1D2A:: @ 81C1D2A
@@ -34,7 +34,7 @@ DebugScript_081C1D34:: @ 81C1D34
 
 DebugScript_081C1D35:: @ 81C1D35
 	getpartysize
-	compare 0x800d, 6
+	compare RESULT, 6
 	goto_if_eq DebugScript_081C1D45
 	giveegg SPECIES_KYOGRE
 	end
@@ -451,8 +451,8 @@ DebugScript_081C23E2:: @ 81C23E2
 	end
 
 DebugScript_081C23E6:: @ 81C23E6
-	setflag 0x081
-	setflag 0x071
+	setflag FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN
+	setflag FLAG_LEGENDARY_BATTLE_COMPLETED
 	warp MAP_SOOTOPOLIS_CITY, 0xFF, 31, 33
 	waitstate
 	end
@@ -463,15 +463,15 @@ DebugScript_081C23F6:: @ 81C23F6
 
 DebugScript_081C23FD:: @ 81C23FD
 	getpartysize
-	compare 0x800d, 1
+	compare RESULT, 1
 	goto_if_eq DebugScript_081C2436
-	compare 0x800d, 2
+	compare RESULT, 2
 	goto_if_eq DebugScript_081C2445
-	compare 0x800d, 3
+	compare RESULT, 3
 	goto_if_eq DebugScript_081C2454
-	compare 0x800d, 4
+	compare RESULT, 4
 	goto_if_eq DebugScript_081C2463
-	compare 0x800d, 5
+	compare RESULT, 5
 	goto_if_eq DebugScript_081C2472
 	end
 
@@ -489,15 +489,15 @@ DebugScript_081C2472:
 
 DebugScript_081C2482:: @ 81C2482
 	getpartysize
-	compare 0x800d, 1
+	compare RESULT, 1
 	goto_if_eq DebugScript_081C24BB
-	compare 0x800d, 2
+	compare RESULT, 2
 	goto_if_eq DebugScript_081C24CA
-	compare 0x800d, 3
+	compare RESULT, 3
 	goto_if_eq DebugScript_081C24D9
-	compare 0x800d, 4
+	compare RESULT, 4
 	goto_if_eq DebugScript_081C24E8
-	compare 0x800d, 5
+	compare RESULT, 5
 	goto_if_eq DebugScript_081C24F7
 	end
 
@@ -515,7 +515,7 @@ DebugScript_081C24F7:
 
 DebugScript_081C2507:: @ 81C2507
 	getpartysize
-	compare 0x800d, 6
+	compare RESULT, 6
 	goto_if_eq DebugScript_081C2517
 	giveegg SPECIES_BARBOACH
 	end
@@ -525,7 +525,7 @@ DebugScript_081C2517:: @ 81C2517
 
 DebugScript_081C2518:: @ 81C2518
 	getpartysize
-	compare 0x800d, 6
+	compare RESULT, 6
 	goto_if_eq DebugScript_081C2528
 	giveegg SPECIES_SHROOMISH
 	end

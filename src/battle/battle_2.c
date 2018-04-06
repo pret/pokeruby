@@ -75,7 +75,7 @@ extern void sub_802BBD4();
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern const u8 Str_821F7B8[];
 extern u8 gUnknown_02023A14_50;
-extern const u16 gUnknown_08D004E0[];
+extern const u16 gBattleTextboxPalette[];
 extern const struct MonCoords gCastformFrontSpriteCoords[];
 extern const u8 Str_821F7EA[];
 extern const u8 gUnknown_Debug_821F7F3[];
@@ -269,10 +269,10 @@ void InitBattle(void)
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
     Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
-    sub_800DAB8();
+    LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ResetTasks();
-    sub_800E23C();
+    LoadBattleEntryBackground();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
     SetVBlankCallback(sub_800FCFC);
@@ -788,16 +788,14 @@ void sub_800F298(void)
             ZeroPlayerPartyMons();
             ZeroEnemyPartyMons();
             gBattleCommunication[0]++;
-            goto step_2;
-        }
-        break;
+            // fallthrough
     case 2:
-      step_2:
-        if (IsLinkTaskFinished())
-        {
-            SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
-            gBattleCommunication[0]++;
-        }
+            if (IsLinkTaskFinished())
+            {
+                SendBlock(bitmask_all_link_players_but_self(), ewram1D000, sizeof(struct Pokemon) * 2);
+                gBattleCommunication[0]++;
+            }
+	}
         break;
     case 3:
         if ((GetBlockReceivedStatus() & 0xF) == 0xF)
@@ -1069,7 +1067,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             {
             case 0:
             {
-                struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1080,7 +1078,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 1:
             {
-                struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1097,7 +1095,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 2:
             {
-                struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1110,7 +1108,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 3:
             {
-                struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1309,11 +1307,11 @@ void c2_8011A1C(void)
     Text_InitWindowWithTemplate(&gUnknown_030041D0, &gWindowTemplate_81E71D0);
     Text_InitWindowWithTemplate(&gUnknown_03004250, &gWindowTemplate_81E71EC);
     sub_800D6D4();
-    LoadCompressedPalette(gUnknown_08D004E0, 0, 64);
-    sub_800D74C();
+    LoadCompressedPalette(gBattleTextboxPalette, 0, 64);
+    ApplyPlayerChosenFrameToBattleMenu();
     ResetSpriteData();
     ResetTasks();
-    sub_800E23C();
+    LoadBattleEntryBackground();
     REG_WINOUT = 0x37;
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
@@ -2833,7 +2831,7 @@ void debug_sub_8012688(void)
 	gBattle_BG3_Y = 0;
 	gBattleTerrain = 9;
 	sub_800D6D4();
-	sub_800DAB8();
+	LoadBattleTextboxAndBackground();
 	ResetSpriteData();
 	ResetTasks();
 	FreeAllSpritePalettes();

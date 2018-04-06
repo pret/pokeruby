@@ -1971,7 +1971,7 @@ u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, 
         );
     }
 
-    DmaCopy32Defvars(3, (void *)0x2000000, (void *)(VRAM + 0x10000 + (sheet * 0x20)), 0x800);
+    DmaCopy32Defvars(3, (void *)0x2000000, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800);
 
     if (!isBackpic)
         sprite = CreateSprite(&gSpriteTemplate_837F5B0[a3], a4, a5 + gMonFrontPicCoords[species].y_offset, a6);
