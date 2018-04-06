@@ -1067,7 +1067,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             {
             case 0:
             {
-                struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1078,7 +1078,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 1:
             {
-                struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1095,7 +1095,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 2:
             {
-                struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1108,7 +1108,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
             case 3:
             {
-                struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];

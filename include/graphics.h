@@ -3345,7 +3345,65 @@ extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_17;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_20;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_21;
 
-// data/graphics.s
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_TallGrass[];
+extern const u8 gBattleTerrainTilemap_TallGrass[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_TallGrass[];
+extern const u8 gBattleTerrainAnimTilemap_TallGrass[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_TallGrass[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_LongGrass[];
+extern const u8 gBattleTerrainTilemap_LongGrass[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_LongGrass[];
+extern const u8 gBattleTerrainAnimTilemap_LongGrass[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_LongGrass[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Sand[];
+extern const u8 gBattleTerrainTilemap_Sand[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Sand[];
+extern const u8 gBattleTerrainAnimTilemap_Sand[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Sand[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Underwater[];
+extern const u8 gBattleTerrainTilemap_Underwater[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Underwater[];
+extern const u8 gBattleTerrainAnimTilemap_Underwater[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Underwater[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Water[];
+extern const u8 gBattleTerrainTilemap_Water[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Water[];
+extern const u8 gBattleTerrainAnimTilemap_Water[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Water[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_PondWater[];
+extern const u8 gBattleTerrainTilemap_PondWater[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_PondWater[];
+extern const u8 gBattleTerrainAnimTilemap_PondWater[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_PondWater[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Rock[];
+extern const u8 gBattleTerrainTilemap_Rock[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Rock[];
+extern const u8 gBattleTerrainAnimTilemap_Rock[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Rock[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Cave[];
+extern const u8 gBattleTerrainTilemap_Cave[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Cave[];
+extern const u8 gBattleTerrainAnimTilemap_Cave[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Cave[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Building[];
+extern const u8 gBattleTerrainTilemap_Building[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Building[];
+extern const u8 gBattleTerrainAnimTilemap_Building[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Building[];
+
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Plain[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Stadium[];
+extern const u8 gBattleTerrainTilemap_Stadium[];
+
 extern const u8 gBattleWindowLargeGfx[];
 extern const u8 gBattleWindowSmallGfx[];
 extern const u8 gBattleWindowSmall2Gfx[];
