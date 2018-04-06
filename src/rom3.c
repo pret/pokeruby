@@ -30,7 +30,7 @@ static EWRAM_DATA u8 gUnknown_020238C6 = 0;
 extern u32 gUnknown_020239FC;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gBattleBufferB[][0x200];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
@@ -371,14 +371,14 @@ void PrepareBufferDataTransfer(u8 a, u8 *data, u16 size)
         case 0:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferA[gActiveBank][i] = *data;
+                gBattleBufferA[gActiveBattler][i] = *data;
                 data++;
             }
             break;
         case 1:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferB[gActiveBank][i] = *data;
+                gBattleBufferB[gActiveBattler][i] = *data;
                 data++;
             }
             break;
@@ -416,7 +416,7 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
     }
 
     ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
-    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBank;
+    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBattler;
     ewram14000arr(2, gTasks[gUnknown_020238C4].data[14]) = gBankAttacker;
     ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
     ewram14000arr(4, gTasks[gUnknown_020238C4].data[14]) = r9;

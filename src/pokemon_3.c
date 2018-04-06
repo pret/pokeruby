@@ -28,7 +28,7 @@
 extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 extern struct BattlePokemon gBattleMons[4];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gSpeciesToHoennPokedexNum[];
 extern u16 gSpeciesToNationalPokedexNum[];
@@ -95,7 +95,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     if (itemId == ITEM_ENIGMA_BERRY)
     {
-        temp = gEnigmaBerries[gActiveBank].itemEffect;
+        temp = gEnigmaBerries[gActiveBattler].itemEffect;
     }
 
     itemEffect = temp;

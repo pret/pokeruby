@@ -17,7 +17,7 @@ extern u8 gUnknown_02023A14_50;
 extern u32 gUnknown_02023A14_4C;
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u16 gBattlePartyID[MAX_BANKS_BATTLE];
 extern u16 gCurrentMove;
 extern int gBattleMoveDamage;
@@ -303,7 +303,7 @@ void BattleAI_SetupAIData(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
         AI_THINKING_STRUCT->score[i] = 100;
 
-    limitations = CheckMoveLimitations(gActiveBank, 0, 0xFF);
+    limitations = CheckMoveLimitations(gActiveBattler, 0, 0xFF);
 
     // do not consider moves the AI cannot select
     // also, roll simulated RNG for moves that have a degree of
@@ -318,7 +318,7 @@ void BattleAI_SetupAIData(void)
 
     // clear AI stack.
     AI_STACK->size = 0;
-    gBankAttacker = gActiveBank;
+    gBankAttacker = gActiveBattler;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
@@ -328,7 +328,7 @@ void BattleAI_SetupAIData(void)
             gBankTarget ^= 2;
     }
     else
-        gBankTarget = gActiveBank ^ 1;
+        gBankTarget = gActiveBattler ^ 1;
 
     // special AI flag cases.
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
@@ -1885,7 +1885,7 @@ static void BattleAICmd_if_encored(void)
     switch (gAIScriptPtr[1])
     {
     case 0: // _08109348
-        if (gDisableStructs[gActiveBank].disabledMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBattler].disabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;
@@ -1893,7 +1893,7 @@ static void BattleAICmd_if_encored(void)
         gAIScriptPtr += 6;
         return;
     case 1: // _08109370
-        if (gDisableStructs[gActiveBank].encoredMove == AI_THINKING_STRUCT->moveConsidered)
+        if (gDisableStructs[gActiveBattler].encoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 2);
             return;

@@ -20,7 +20,7 @@ extern u8 gAbsentBankFlags;
 extern u8 gBankInMenu;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gStringBank;
 extern struct BattlePokemon gBattleMons[];
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -78,8 +78,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     gStringBank = gBankInMenu;
     if (gMain.inBattle)
     {
-        gActiveBank = gBankInMenu;
-        cmdIndex = (GetBankSide(gActiveBank) != 0);
+        gActiveBattler = gBankInMenu;
+        cmdIndex = (GetBankSide(gActiveBattler) != 0);
         while (cmdIndex < gNoOfAllBanks)
         {
             if (gBattlePartyID[cmdIndex] == partyIndex)
@@ -92,7 +92,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     }
     else
     {
-        gActiveBank = 0;
+        gActiveBattler = 0;
         sp34 = 4;
     }
 
@@ -104,7 +104,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     if (item == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
-            itemEffect = gEnigmaBerries[gActiveBank].itemEffect;
+            itemEffect = gEnigmaBerries[gActiveBattler].itemEffect;
         else
             itemEffect = gSaveBlock1.enigmaBerry.itemEffect;
     }
@@ -126,63 +126,63 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x30)
-             && !(gBattleMons[gActiveBank].status2 & STATUS2_FOCUS_ENERGY))
+             && !(gBattleMons[gActiveBattler].status2 & STATUS2_FOCUS_ENERGY))
             {
-                gBattleMons[gActiveBank].status2 |= STATUS2_FOCUS_ENERGY;
+                gBattleMons[gActiveBattler].status2 |= STATUS2_FOCUS_ENERGY;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBank].statStages[STAT_STAGE_ATK] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] < 12)
             {
-                gBattleMons[gActiveBank].statStages[STAT_STAGE_ATK] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBank].statStages[STAT_STAGE_ATK] > 12)
-                    gBattleMons[gActiveBank].statStages[STAT_STAGE_ATK] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ATK] = 12;
                 retVal = FALSE;
             }
             break;
         // in-battle stat boosting effects?
         case 1:
             if ((itemEffect[cmdIndex] & 0xF0)
-             && gBattleMons[gActiveBank].statStages[STAT_STAGE_DEF] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] < 12)
             {
-                gBattleMons[gActiveBank].statStages[STAT_STAGE_DEF] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                if (gBattleMons[gActiveBank].statStages[STAT_STAGE_DEF] > 12)
-                    gBattleMons[gActiveBank].statStages[STAT_STAGE_DEF] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] += (itemEffect[cmdIndex] & 0xF0) >> 4;
+                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_DEF] = 12;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBank].statStages[STAT_STAGE_SPEED] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] < 12)
             {
-                gBattleMons[gActiveBank].statStages[STAT_STAGE_SPEED] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBank].statStages[STAT_STAGE_SPEED] > 12)
-                    gBattleMons[gActiveBank].statStages[STAT_STAGE_SPEED] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPEED] = 12;
                 retVal = FALSE;
             }
             break;
         // more stat boosting effects?
         case 2:
             if ((itemEffect[cmdIndex] & 0xF0)
-             && gBattleMons[gActiveBank].statStages[STAT_STAGE_ACC] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] < 12)
             {
-                gBattleMons[gActiveBank].statStages[STAT_STAGE_ACC] += (itemEffect[cmdIndex] & 0xF0) >> 4;
-                if (gBattleMons[gActiveBank].statStages[STAT_STAGE_ACC] > 12)
-                    gBattleMons[gActiveBank].statStages[STAT_STAGE_ACC] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] += (itemEffect[cmdIndex] & 0xF0) >> 4;
+                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_ACC] = 12;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0xF)
-             && gBattleMons[gActiveBank].statStages[STAT_STAGE_SPATK] < 12)
+             && gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] < 12)
             {
-                gBattleMons[gActiveBank].statStages[STAT_STAGE_SPATK] += itemEffect[cmdIndex] & 0xF;
-                if (gBattleMons[gActiveBank].statStages[STAT_STAGE_SPATK] > 12)
-                    gBattleMons[gActiveBank].statStages[STAT_STAGE_SPATK] = 12;
+                gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] += itemEffect[cmdIndex] & 0xF;
+                if (gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] > 12)
+                    gBattleMons[gActiveBattler].statStages[STAT_STAGE_SPATK] = 12;
                 retVal = FALSE;
             }
             break;
         case 3:
             if ((itemEffect[cmdIndex] & 0x80)
-             && gSideTimers[GetBankSide(gActiveBank)].mistTimer == 0)
+             && gSideTimers[GetBankSide(gActiveBattler)].mistTimer == 0)
             {
-                gSideTimers[GetBankSide(gActiveBank)].mistTimer = 5;
+                gSideTimers[GetBankSide(gActiveBattler)].mistTimer = 5;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x40)  // raise level
@@ -280,13 +280,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 {
                                     gAbsentBankFlags &= ~gBitTable[sp34];
                                     CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlePartyID[sp34]));
-                                    if (GetBankSide(gActiveBank) == 0 && gBattleResults.unk4 < 255)
+                                    if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }
                                 else
                                 {
-                                    gAbsentBankFlags &= ~gBitTable[gActiveBank ^ 2];
-                                    if (GetBankSide(gActiveBank) == 0 && gBattleResults.unk4 < 255)
+                                    gAbsentBankFlags &= ~gBitTable[gActiveBattler ^ 2];
+                                    if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }
                             }
@@ -325,16 +325,16 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 if (gMain.inBattle && sp34 != 4)
                                 {
                                     gBattleMons[sp34].hp = data;
-                                    if (!(r10 & 0x10) && GetBankSide(gActiveBank) == 0)
+                                    if (!(r10 & 0x10) && GetBankSide(gActiveBattler) == 0)
                                     {
                                         if (gBattleResults.unk3 < 255)
                                             gBattleResults.unk3++;
                                         // I have to re-use this variable to match.
-                                        r5 = gActiveBank;
-                                        gActiveBank = sp34;
+                                        r5 = gActiveBattler;
+                                        gActiveBattler = sp34;
                                         EmitGetAttributes(0, 0, 0);
-                                        MarkBufferBankForExecution(gActiveBank);
-                                        gActiveBank = r5;
+                                        MarkBufferBankForExecution(gActiveBattler);
+                                        gActiveBattler = r5;
                                     }
                                 }
                             }

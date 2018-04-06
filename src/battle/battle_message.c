@@ -155,7 +155,7 @@ extern const u8* const gBattleStringsTable[BATTLESTRINGS_NO];
 
 extern u16 gLastUsedItem;
 extern u8 gLastUsedAbility;
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gStringBank;
@@ -214,7 +214,7 @@ void BufferStringBattle(u16 stringID)
     int i;
     const u8* stringPtr = NULL;
 
-    gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBank][4]);
+    gStringInfo = (struct StringInfoBattle*)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = gStringInfo->lastItem;
     gLastUsedAbility = gStringInfo->lastAbility;
     gBattleStruct->scriptingActive = gStringInfo->scrActive;
@@ -265,7 +265,7 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case 1: // poke first send-out
-        if (GetBankSide(gActiveBank) == 0)
+        if (GetBankSide(gActiveBattler) == 0)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {
@@ -305,7 +305,7 @@ void BufferStringBattle(u16 stringID)
         }
         break;
     case 2: // sending poke to ball msg
-        if (GetBankSide(gActiveBank) == 0)
+        if (GetBankSide(gActiveBattler) == 0)
         {
             if (gBattleStruct->hpScale == 0)
                 stringPtr = BattleText_ComeBackSingle1;
@@ -377,7 +377,7 @@ void BufferStringBattle(u16 stringID)
         if (gBattleTextBuff1[0] & 0x80)
         {
             gBattleTextBuff1[0] &= ~(0x80);
-            if (GetBankSide(gActiveBank) == 1 && gBattleTextBuff1[0] != 3)
+            if (GetBankSide(gActiveBattler) == 1 && gBattleTextBuff1[0] != 3)
                 gBattleTextBuff1[0] ^= 3;
             if (gBattleTextBuff1[0] == BATTLE_LOST || gBattleTextBuff1[0] == BATTLE_DREW)
                 stringPtr = BattleText_GotAwaySafely;
@@ -391,7 +391,7 @@ void BufferStringBattle(u16 stringID)
         }
         else
         {
-            if (GetBankSide(gActiveBank) == 1 && gBattleTextBuff1[0] != 3)
+            if (GetBankSide(gActiveBattler) == 1 && gBattleTextBuff1[0] != 3)
                 gBattleTextBuff1[0] ^= 3;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
@@ -636,7 +636,7 @@ u32 StrCpyDecodeBattle(const u8* src, u8* dst)
                 HANDLE_NICKNAME_STRING_CASE(gEffectBank, gBattlePartyID[gEffectBank])
                 break;
             case 15: // active bank name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gActiveBank, gBattlePartyID[gActiveBank])
+                HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlePartyID[gActiveBattler])
                 break;
             case 16: // scripting active bank name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattleStruct->scriptingActive, gBattlePartyID[gBattleStruct->scriptingActive])

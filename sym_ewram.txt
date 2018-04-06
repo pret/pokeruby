@@ -58,7 +58,7 @@ gBattleBufferA = .; /* 2023A60 */
 gBattleBufferB = .; /* 2024260 */
     . += 0x800;
 
-gActiveBank = .; /* 2024A60 */
+gActiveBattler = .; /* 2024A60 */
     . += 0x4;
 
 gBattleExecBuffer = .; /* 2024A64 */

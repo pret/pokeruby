@@ -242,8 +242,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160C5*/ u8 unk160C5;
     /*0x160C6*/ u8 unk160C6;
     /*0x160C7*/ u8 unk160C7;
-    /*0x160C8*/ u8 unk160C8;
-    /*0x160C9*/ u8 unk160C9;
+    /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 linkPlayerIndex;
     /*0x160CC*/ u16 usedHeldItems[4];
@@ -352,8 +351,8 @@ struct DisableStruct
     /*0x0D*/ u8 unkD;
     /*0x0E*/ u8 encoreTimer1 : 4;
     /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSong1 : 4;
-    /*0x0F*/ u8 perishSong2 : 4;
+    /*0x0F*/ u8 perishSongTimer1 : 4;
+    /*0x0F*/ u8 perishSongTimer2 : 4;
     /*0x10*/ u8 furyCutterCounter;
     /*0x11*/ u8 rolloutTimer1 : 4;
     /*0x11*/ u8 rolloutTimer2 : 4;

@@ -22,7 +22,7 @@ extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 
 extern u16 gBattleTypeFlags;
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gCurrentMove;
 extern u8 gLastUsedAbility;
@@ -60,7 +60,7 @@ u8 CountAliveMons(u8 a1)
     case 0:
         for (i = 0; i < 4; i++)
         {
-            if (i != gActiveBank && !(gAbsentBankFlags & gBitTable[i]))
+            if (i != gActiveBattler && !(gAbsentBankFlags & gBitTable[i]))
                 retVal++;
         }
         break;

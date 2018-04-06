@@ -23,7 +23,7 @@
 #include "graphics.h"
 
 extern u8 gBattleBufferA[][0x200];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u8 gNoOfAllBanks;
 extern u16 gBattlePartyID[];
 extern u8 gBanksBySide[];
@@ -154,36 +154,36 @@ void sub_80313A0(struct Sprite *sprite)
 
 void move_anim_start_t2_for_situation(u8 a, u32 b)
 {
-    ewram17810[gActiveBank].unk0_4 = 1;
+    ewram17810[gActiveBattler].unk0_4 = 1;
     if (a == 0)
     {
         if (b == 0x20)
-            move_anim_start_t2(gActiveBank, 6);
+            move_anim_start_t2(gActiveBattler, 6);
         else if (b == 8 || (b & 0x80))
-            move_anim_start_t2(gActiveBank, 0);
+            move_anim_start_t2(gActiveBattler, 0);
         else if (b == 0x10)
-            move_anim_start_t2(gActiveBank, 2);
+            move_anim_start_t2(gActiveBattler, 2);
         else if (b & 7)
-            move_anim_start_t2(gActiveBank, 4);
+            move_anim_start_t2(gActiveBattler, 4);
         else if (b == 0x40)
-            move_anim_start_t2(gActiveBank, 5);
+            move_anim_start_t2(gActiveBattler, 5);
         else
-            ewram17810[gActiveBank].unk0_4 = 0;
+            ewram17810[gActiveBattler].unk0_4 = 0;
     }
     else
     {
         if (b & 0x000F0000)
-            move_anim_start_t2(gActiveBank, 3);
+            move_anim_start_t2(gActiveBattler, 3);
         else if (b & 7)
-            move_anim_start_t2(gActiveBank, 1);
+            move_anim_start_t2(gActiveBattler, 1);
         else if (b & 0x10000000)
-            move_anim_start_t2(gActiveBank, 7);
+            move_anim_start_t2(gActiveBattler, 7);
         else if (b & 0x08000000)
-            move_anim_start_t2(gActiveBank, 8);
+            move_anim_start_t2(gActiveBattler, 8);
         else if (b & 0x0000E000)
-            move_anim_start_t2(gActiveBank, 9);
+            move_anim_start_t2(gActiveBattler, 9);
         else
-            ewram17810[gActiveBank].unk0_4 = 0;
+            ewram17810[gActiveBattler].unk0_4 = 0;
     }
 }
 
@@ -274,7 +274,7 @@ bool8 mplay_80342A4(u8 a)
     if (IsSEPlaying())
     {
         ewram17810[a].unk8++;
-        if (ewram17810[gActiveBank].unk8 < 30)
+        if (ewram17810[gActiveBattler].unk8 < 30)
             return TRUE;
         m4aMPlayStop(&gMPlay_SE1);
         m4aMPlayStop(&gMPlay_SE2);

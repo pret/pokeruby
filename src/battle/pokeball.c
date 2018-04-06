@@ -19,7 +19,7 @@
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gBattleTypeFlags;
 extern u8 gBankTarget;
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u16 gBattlePartyID[];
 extern u8 gBankSpriteIds[];
 extern u8 gDoingBattleAnim;
@@ -333,11 +333,11 @@ u8 sub_8046400(u16 a, u8 b)
     u8 taskId;
 
     gDoingBattleAnim = 1;
-    ewram17810[gActiveBank].unk0_3 = 1;
+    ewram17810[gActiveBattler].unk0_3 = 1;
     taskId = CreateTask(sub_8046464, 5);
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = b;
-    gTasks[taskId].data[3] = gActiveBank;
+    gTasks[taskId].data[3] = gActiveBattler;
     return 0;
 }
 
