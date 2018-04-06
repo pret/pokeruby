@@ -1236,7 +1236,6 @@
 	.macro setvaddress long, word
 	.byte 0xb8
 	.4byte \long
-	.2byte \word
 	.endm
 
 	.macro vgoto pointer
