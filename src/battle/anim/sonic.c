@@ -9,14 +9,18 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-// sonic (shoots a projectile towards the target.)
-// Used in Sonic Boom and Air Cutter.
-
-void sub_80CF6DC(struct Sprite* sprite)
+// Moves a projectile towards the target mon. The sprite is rotated to be pointing
+// in the same direction it's moving.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+void AnimSonicBoomProjectile(struct Sprite* sprite)
 {
-    s16 a;
-    s16 b;
-    u16 c;
+    s16 targetXPos;
+    s16 targetYPos;
+    u16 rotation;
 
     if (IsContest())
     {
@@ -29,19 +33,19 @@ void sub_80CF6DC(struct Sprite* sprite)
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
     }
 
-    sub_80787B0(sprite, 1);
-    a = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
-    b = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    c = sub_80790F0(a - sprite->pos1.x, b - sprite->pos1.y);
-    c += 0xF000;
+    InitAnimSpritePos(sprite, 1);
+    targetXPos = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    targetYPos = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+    rotation = ArcTan2Neg(targetXPos - sprite->pos1.x, targetYPos - sprite->pos1.y);
+    rotation += 0xF000;
     if (IsContest())
-        c -= 0x6000;
+        rotation -= 0x6000;
 
-    sub_8078FDC(sprite, 0, 0x100, 0x100, c);
+    sub_8078FDC(sprite, 0, 0x100, 0x100, rotation);
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = a;
-    sprite->data[4] = b;
-    sprite->callback = sub_8078B34;
+    sprite->data[2] = targetXPos;
+    sprite->data[4] = targetYPos;
+    sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 

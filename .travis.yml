@@ -24,7 +24,6 @@ matrix:
     - os: linux
       env: _="Build"
       script:
-        - ./build_tools.sh
         - make -j2 ruby
         - make -j2 ruby_rev1
         - make -j2 ruby_rev2
@@ -52,8 +51,8 @@ matrix:
         - rsync -avhI data-de/ data/
         - rsync -avhI graphics-de/ graphics/
       script:
-        - ./build_tools.sh
         - make -j2 ruby_de
         - make -j2 sapphire_de
+        - make -j2 ruby_de_debug
   allow_failures:
     - env: _="Formatting"

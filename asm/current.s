@@ -12,7 +12,7 @@ sub_80D648C: @ 80D648C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl sub_80787B0
+	bl InitAnimSpritePos
 	ldr r5, _080D6500 @ =gBattleAnimArgs
 	ldrh r0, [r5, 0x6]
 	strh r0, [r4, 0x2E]
@@ -34,7 +34,7 @@ sub_80D648C: @ 80D648C
 	lsrs r0, 24
 	strh r0, [r4, 0x36]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimSpriteTranslationDeltas
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x38]
 	ldrh r0, [r5, 0xA]
@@ -74,7 +74,7 @@ _080D6510: .4byte sub_80D6514
 sub_80D6514: @ 80D6514
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D657E
@@ -442,7 +442,7 @@ _080D67F6:
 	ldr r0, _080D6810 @ =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r4, 0x2E]
-	ldr r0, _080D6814 @ =sub_80782D8
+	ldr r0, _080D6814 @ =WaitAnimForDuration
 	str r0, [r4, 0x1C]
 	ldr r1, _080D6818 @ =DestroyAnimSprite
 	adds r0, r4, 0
@@ -452,7 +452,7 @@ _080D67F6:
 	bx r0
 	.align 2, 0
 _080D6810: .4byte gBattleAnimArgs
-_080D6814: .4byte sub_80782D8
+_080D6814: .4byte WaitAnimForDuration
 _080D6818: .4byte DestroyAnimSprite
 	thumb_func_end sub_80D679C
 
@@ -998,7 +998,7 @@ sub_80D6BB8: @ 80D6BB8
 	strh r0, [r4, 0x36]
 	strh r6, [r4, 0x38]
 	adds r0, r4, 0
-	bl obj_translate_based_on_private_1_2_3_4
+	bl InitAnimSpriteTranslationDeltas
 	ldr r1, _080D6CB0 @ =sub_80D6D00
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData
@@ -1062,7 +1062,7 @@ _080D6CC6:
 sub_80D6CCC: @ 80D6CCC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8078B5C
+	bl TranslateAnimSpriteByDeltas
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D6CF4

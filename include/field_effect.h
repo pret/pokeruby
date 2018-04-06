@@ -103,7 +103,6 @@ void FieldEffectActiveListClear(void);
 void FieldEffectActiveListAdd(u8 id);
 void FieldEffectActiveListRemove(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);
-void sub_807DE38(u8 index);
 
 void SpriteCB_PokeballGlow(struct Sprite *);
 void SpriteCB_PokecenterMonitor(struct Sprite *);

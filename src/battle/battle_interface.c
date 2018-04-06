@@ -443,8 +443,8 @@ extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
 static void sub_8043D5C(struct Sprite *);
 static const void *sub_8043CDC(u8);
-static void sub_8044210(u8, s16, u8);
-static void draw_status_ailment_maybe(u8);
+/*static*/ void sub_8044210(u8, s16, u8);
+/*static*/ void draw_status_ailment_maybe(u8);
 extern void sub_8045180(struct Sprite *);
 static void sub_8045110(struct Sprite *);
 static void sub_8045048(struct Sprite *);
@@ -1015,7 +1015,7 @@ void sub_8043F44(u8 a)
 #define CHAR_LV_SEPARATOR CHAR_PERIOD
 #endif
 
-static void sub_8043FC0(u8 a, u8 b)
+/*static*/ void sub_8043FC0(u8 a, u8 b)
 {
     u8 str[30];
     u8 *const *r7;
@@ -1269,7 +1269,7 @@ _0804420C: .4byte 0x04000008\n\
 }
 #endif
 
-static void sub_8044210(u8 a, s16 b, u8 c)
+/*static*/ void sub_8044210(u8 a, s16 b, u8 c)
 {
     u8 str[0x14];
     u8 *ptr;
@@ -1641,6 +1641,8 @@ _08044548: .4byte 0x04000008\n\
 }
 #endif
 
+extern u8 gUnknown_020297ED;
+
 void sub_804454C(void)
 {
     s32 i;
@@ -1649,7 +1651,11 @@ void sub_804454C(void)
     for (i = 0; i < gNoOfAllBanks; i++)
     {
         if (gSprites[gHealthboxIDs[i]].callback == SpriteCallbackDummy
+#if DEBUG
+         && (gUnknown_020297ED != 0 || GetBankSide(i) != 1)
+#else
          && GetBankSide(i) != 1
+#endif
          && (IsDoubleBattle() || GetBankSide(i) != 0))
         {
             u8 r6;
@@ -2723,7 +2729,7 @@ void sub_8045180(struct Sprite *sprite)
     sprite->pos2.y = gSprites[spriteId].pos2.y;
 }
 
-static void sub_80451A0(u8 a, struct Pokemon *pkmn)
+/*static*/ void sub_80451A0(u8 a, struct Pokemon *pkmn)
 {
     u8 nickname[POKEMON_NAME_LENGTH];
     u8 gender;
@@ -2871,7 +2877,7 @@ static void sub_8045458(u8 a, u8 b)
     }
 }
 
-static void draw_status_ailment_maybe(u8 a)
+/*static*/ void draw_status_ailment_maybe(u8 a)
 {
     s32 r4;
     s32 r4_2;
@@ -3013,7 +3019,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     return ret;
 }
 
-static void sub_80458B0(u8 a)
+/*static*/ void sub_80458B0(u8 a)
 {
     u8 *r6;
     u8 r8;
@@ -3039,7 +3045,7 @@ static void sub_80458B0(u8 a)
 
 }
 
-static void sub_8045998(u8 a)
+/*static*/ void sub_8045998(u8 a)
 {
     u8 *r7;
     u8 status;
@@ -3116,6 +3122,15 @@ void sub_8045A5C(u8 a, struct Pokemon *pkmn, u8 c)
     {
         if (c == 3 || c == 0)
             sub_8043FC0(a, GetMonData(pkmn, MON_DATA_LEVEL));
+#if DEBUG
+        if (gUnknown_020297ED == 1)
+        {
+            if (c == 1 || c == 0)
+                sub_80440EC(a, GetMonData(pkmn, MON_DATA_HP), 0);
+            if (c == 2 || c == 0)
+                sub_80440EC(a, GetMonData(pkmn, MON_DATA_MAX_HP), 1);
+        }
+#endif
         if (c == 5 || c == 0)
         {
             load_gfxc_health_bar(0);

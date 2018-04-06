@@ -47,7 +47,7 @@ BattleAIs:: @ 81DA01C
 AI_CheckBadMove: @ 81DA09C
 	is_most_powerful_move
 	if_equal 0, AI_CheckBadMove_CheckSoundproof
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_ability TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
@@ -58,39 +58,39 @@ AI_CheckBadMove: @ 81DA09C
 
 CheckIfVoltAbsorbCancelsElectric: @ 81DA0CE
 	get_type CURRENT_MOVE
-	if_arg_equal TYPE_ELECTRIC, Score_Down12
+	if_arg_equal TYPE_ELECTRIC, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfWaterAbsorbCancelsWater: @ 81DA0DB
 	get_type CURRENT_MOVE
-	if_arg_equal TYPE_WATER, Score_Down12
+	if_arg_equal TYPE_WATER, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfFlashFireCancelsFire: @ 81DA0E8
 	get_type CURRENT_MOVE
-	if_arg_equal TYPE_FIRE, Score_Down12
+	if_arg_equal TYPE_FIRE, Score_Minus12
 	jump AI_CheckBadMove_CheckSoundproof
 
 CheckIfWonderGuardCancelsMove: @ 81DA0F5
 	if_damage_bonus 80, AI_CheckBadMove_CheckSoundproof
-	jump Score_Down10
+	jump Score_Minus10
 
 CheckIfLevitateCancelsGroundMove: @ 81DA100
 	get_type CURRENT_MOVE
-	if_arg_equal TYPE_GROUND, Score_Down10
+	if_arg_equal TYPE_GROUND, Score_Minus10
 
 AI_CheckBadMove_CheckSoundproof: @ 81DA108
 	get_ability TARGET
 	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
-	if_move MOVE_GROWL, Score_Down10
-	if_move MOVE_ROAR, Score_Down10
-	if_move MOVE_SING, Score_Down10
-	if_move MOVE_SUPERSONIC, Score_Down10
-	if_move MOVE_SCREECH, Score_Down10
-	if_move MOVE_SNORE, Score_Down10
-	if_move MOVE_UPROAR, Score_Down10
-	if_move MOVE_METAL_SOUND, Score_Down10
-	if_move MOVE_GRASS_WHISTLE, Score_Down10
+	if_move MOVE_GROWL, Score_Minus10
+	if_move MOVE_ROAR, Score_Minus10
+	if_move MOVE_SING, Score_Minus10
+	if_move MOVE_SUPERSONIC, Score_Minus10
+	if_move MOVE_SCREECH, Score_Minus10
+	if_move MOVE_SNORE, Score_Minus10
+	if_move MOVE_UPROAR, Score_Minus10
+	if_move MOVE_METAL_SOUND, Score_Minus10
+	if_move MOVE_GRASS_WHISTLE, Score_Minus10
 
 AI_CheckBadMove_CheckEffect: @ 81DA14F
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -173,7 +173,7 @@ AI_CheckBadMove_CheckEffect: @ 81DA14F
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_FUTURE_SIGHT, AI_CBM_FutureSight
-	if_effect EFFECT_TELEPORT, Score_Down10
+	if_effect EFFECT_TELEPORT, Score_Minus10
 	if_effect EFFECT_DEFENSE_CURL, AI_CBM_DefenseUp
 	if_effect EFFECT_FAKE_OUT, AI_CBM_FakeOut
 	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
@@ -206,100 +206,100 @@ AI_CheckBadMove_CheckEffect: @ 81DA14F
 
 AI_CBM_Sleep: @ 81DA3DE
 	get_ability TARGET
-	if_equal ABILITY_INSOMNIA, Score_Down10
-	if_equal ABILITY_VITAL_SPIRIT, Score_Down10
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
+	if_equal ABILITY_INSOMNIA, Score_Minus10
+	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Minus10
 	end
 
 AI_CBM_Explosion: @ 81DA3F7
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_DAMP, Score_Down10
+	if_equal ABILITY_DAMP, Score_Minus10
 	count_alive_pokemon USER
 	if_not_equal 0, AI_CBM_Explosion_End
 	count_alive_pokemon TARGET
-	if_not_equal 0, Score_Down10
-	jump Score_Down1
+	if_not_equal 0, Score_Minus10
+	jump Score_Minus1
 
 AI_CBM_Explosion_End: @ 81DA41A
 	end
 
 AI_CBM_Nightmare: @ 81DA41B
-	if_status2 TARGET, S_NIGHTMARE, Score_Down10
-	if_not_status TARGET, SLP, Score_Down8
+	if_status2 TARGET, S_NIGHTMARE, Score_Minus10
+	if_not_status TARGET, SLP, Score_Minus8
 	end
 
 AI_CBM_DreamEater: @ 81DA430
-	if_not_status TARGET, SLP, Score_Down8
-	if_damage_bonus 0, Score_Down10
+	if_not_status TARGET, SLP, Score_Minus8
+	if_damage_bonus 0, Score_Minus10
 	end
 
 AI_CBM_BellyDrum: @ 81DA441
-	if_hp_less_than USER, 51, Score_Down10
+	if_hp_less_than USER, 51, Score_Minus10
 
 AI_CBM_AttackUp: @ 81DA448
-	if_stat_level_equal USER, ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, ATTACK, 12, Score_Minus10
 	end
 
 AI_CBM_DefenseUp: @ 81DA451
-	if_stat_level_equal USER, DEFENSE, 12, Score_Down10
+	if_stat_level_equal USER, DEFENSE, 12, Score_Minus10
 	end
 
 AI_CBM_SpeedUp: @ 81DA45A
-	if_stat_level_equal USER, SPEED, 12, Score_Down10
+	if_stat_level_equal USER, SPEED, 12, Score_Minus10
 	end
 
 AI_CBM_SpAtkUp: @ 81DA463
-	if_stat_level_equal USER, SP_ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, SP_ATTACK, 12, Score_Minus10
 	end
 
 AI_CBM_SpDefUp: @ 81DA46C
-	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down10
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Minus10
 	end
 
 AI_CBM_AccUp: @ 81DA475
-	if_stat_level_equal USER, ACCURACY, 12, Score_Down10
+	if_stat_level_equal USER, ACCURACY, 12, Score_Minus10
 	end
 
 AI_CBM_EvasionUp: @ 81DA47E
-	if_stat_level_equal USER, EVASION, 12, Score_Down10
+	if_stat_level_equal USER, EVASION, 12, Score_Minus10
 	end
 
 AI_CBM_AttackDown: @ 81DA487
-	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_HYPER_CUTTER, Score_Down10
+	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_DefenseDown: @ 81DA49C
-	if_stat_level_equal TARGET, DEFENSE, 0, Score_Down10
+	if_stat_level_equal TARGET, DEFENSE, 0, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpeedDown: @ 81DA4A9
-	if_stat_level_equal TARGET, SPEED, 0, Score_Down10
+	if_stat_level_equal TARGET, SPEED, 0, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpAtkDown: @ 81DA4B6
-	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Down10
+	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpDefDown: @ 81DA4C3
-	if_stat_level_equal TARGET, SP_DEFENSE, 0, Score_Down10
+	if_stat_level_equal TARGET, SP_DEFENSE, 0, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_AccDown: @ 81DA4D0
-	if_stat_level_equal TARGET, ACCURACY, 0, Score_Down10
+	if_stat_level_equal TARGET, ACCURACY, 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_KEEN_EYE, Score_Down10
+	if_equal ABILITY_KEEN_EYE, Score_Minus10
 	jump CheckIfAbilityBlocksStatChange
 
 AI_CBM_EvasionDown: @ 81DA4E5
-	if_stat_level_equal TARGET, EVASION, 0, Score_Down10
+	if_stat_level_equal TARGET, EVASION, 0, Score_Minus10
 
 CheckIfAbilityBlocksStatChange: @ 81DA4ED
 	get_ability TARGET
-	if_equal ABILITY_CLEAR_BODY, Score_Down10
-	if_equal ABILITY_WHITE_SMOKE, Score_Down10
+	if_equal ABILITY_CLEAR_BODY, Score_Minus10
+	if_equal ABILITY_WHITE_SMOKE, Score_Minus10
 	end
 
 AI_CBM_Haze: @ 81DA4FC
@@ -317,299 +317,299 @@ AI_CBM_Haze: @ 81DA4FC
 	if_stat_level_more_than TARGET, SP_DEFENSE, 6, AI_CBM_Haze_End
 	if_stat_level_more_than TARGET, ACCURACY, 6, AI_CBM_Haze_End
 	if_stat_level_more_than TARGET, EVASION, 6, AI_CBM_Haze_End
-	jump Score_Down10
+	jump Score_Minus10
 
 AI_CBM_Haze_End: @ 81DA571
 	end
 
 AI_CBM_Roar: @ 81DA572
 	count_alive_pokemon TARGET
-	if_equal 0, Score_Down10
+	if_equal 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_SUCTION_CUPS, Score_Down10
+	if_equal ABILITY_SUCTION_CUPS, Score_Minus10
 	end
 
 AI_CBM_Toxic: @ 81DA583
 	get_type ENEMY_TYPE1
-	if_equal TYPE_STEEL, Score_Down10
-	if_equal TYPE_POISON, Score_Down10
+	if_equal TYPE_STEEL, Score_Minus10
+	if_equal TYPE_POISON, Score_Minus10
 	get_type PLAYER_TYPE1
-	if_equal TYPE_STEEL, Score_Down10
-	if_equal TYPE_POISON, Score_Down10
+	if_equal TYPE_STEEL, Score_Minus10
+	if_equal TYPE_POISON, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_IMMUNITY, Score_Down10
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
+	if_equal ABILITY_IMMUNITY, Score_Minus10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Minus10
 	end
 
 AI_CBM_LightScreen: @ 81DA5B2
-	if_status4 USER, S_LIGHT_SCREEN, Score_Down8
+	if_status4 USER, S_LIGHT_SCREEN, Score_Minus8
 	end
 
 AI_CBM_OneHitKO: @ 81DA5BD
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_STURDY, Score_Down10
-	if_target_higher_level Score_Down10
+	if_equal ABILITY_STURDY, Score_Minus10
+	if_target_higher_level Score_Minus10
 	end
 
 AI_CBM_Magnitude: @ 81DA5D2
 	get_ability TARGET
-	if_equal ABILITY_LEVITATE, Score_Down10
+	if_equal ABILITY_LEVITATE, Score_Minus10
 
 AI_CBM_HighRiskForDamage: @ 81DA5DA
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_ability TARGET
 	if_not_equal ABILITY_WONDER_GUARD, AI_CBM_HighRiskForDamage_End
 	if_damage_bonus 80, AI_CBM_HighRiskForDamage_End
-	jump Score_Down10
+	jump Score_Minus10
 
 AI_CBM_HighRiskForDamage_End: @ 81DA5F3
 	end
 
 AI_CBM_Mist: @ 81DA5F4
-	if_status4 USER, S_MIST, Score_Down8
+	if_status4 USER, S_MIST, Score_Minus8
 	end
 
 AI_CBM_FocusEnergy: @ 81DA5FF
-	if_status2 USER, S_FOCUS_ENERGY, Score_Down10
+	if_status2 USER, S_FOCUS_ENERGY, Score_Minus10
 	end
 
 AI_CBM_Confuse: @ 81DA60A
-	if_status2 TARGET, S_CONFUSED, Score_Down5
+	if_status2 TARGET, S_CONFUSED, Score_Minus5
 	get_ability TARGET
-	if_equal ABILITY_OWN_TEMPO, Score_Down10
+	if_equal ABILITY_OWN_TEMPO, Score_Minus10
 	end
 
 AI_CBM_Reflect: @ 81DA61D
-	if_status4 USER, S_REFLECT, Score_Down8
+	if_status4 USER, S_REFLECT, Score_Minus8
 	end
 
 AI_CBM_Paralyze: @ 81DA628
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_LIMBER, Score_Down10
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
+	if_equal ABILITY_LIMBER, Score_Minus10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Minus10
 	end
 
 AI_CBM_Substitute: @ 81DA641
-	if_status2 USER, S_SUBSTITUTE, Score_Down8
-	if_hp_less_than USER, 26, Score_Down10
+	if_status2 USER, S_SUBSTITUTE, Score_Minus8
+	if_hp_less_than USER, 26, Score_Minus10
 	end
 
 AI_CBM_LeechSeed: @ 81DA653
-	if_status3 TARGET, S_LEECH_SEED, Score_Down10
+	if_status3 TARGET, S_LEECH_SEED, Score_Minus10
 	get_type ENEMY_TYPE1
-	if_equal TYPE_GRASS, Score_Down10
+	if_equal TYPE_GRASS, Score_Minus10
 	get_type PLAYER_TYPE1
-	if_equal TYPE_GRASS, Score_Down10
+	if_equal TYPE_GRASS, Score_Minus10
 	end
 
 AI_CBM_Disable: @ 81DA66E
-	if_last_move_did_damage TARGET, 0, Score_Down8
+	if_last_move_did_damage TARGET, 0, Score_Minus8
 	end
 
 AI_CBM_Encore: @ 81DA676
-	if_last_move_did_damage TARGET, 1, Score_Down8
+	if_last_move_did_damage TARGET, 1, Score_Minus8
 	end
 
 AI_CBM_DamageDuringSleep: @ 81DA67E
-	if_not_status USER, SLP, Score_Down8
+	if_not_status USER, SLP, Score_Minus8
 	end
 
 AI_CBM_CantEscape: @ 81DA689
-	if_status2 TARGET, S_MEAN_LOOK, Score_Down10
+	if_status2 TARGET, S_MEAN_LOOK, Score_Minus10
 	end
 
 AI_CBM_Curse: @ 81DA694
-	if_stat_level_equal USER, ATTACK, 12, Score_Down10
-	if_stat_level_equal USER, DEFENSE, 12, Score_Down8
+	if_stat_level_equal USER, ATTACK, 12, Score_Minus10
+	if_stat_level_equal USER, DEFENSE, 12, Score_Minus8
 	end
 
 AI_CBM_Spikes: @ 81DA6A5
-	if_status4 TARGET, S_SPIKES, Score_Down10
+	if_status4 TARGET, S_SPIKES, Score_Minus10
 	end
 
 AI_CBM_Foresight: @ 81DA6B0
-	if_status2 TARGET, S_FORESIGHT, Score_Down10
+	if_status2 TARGET, S_FORESIGHT, Score_Minus10
 	end
 
 AI_CBM_PerishSong: @ 81DA6BB
-	if_status3 TARGET, S_PERISH_SONG, Score_Down10
+	if_status3 TARGET, S_PERISH_SONG, Score_Minus10
 	end
 
 AI_CBM_Sandstorm: @ 81DA6C6
 	get_weather
-	if_equal BATTLE_WEATHER_SANDSTORM, Score_Down8
+	if_equal BATTLE_WEATHER_SANDSTORM, Score_Minus8
 	end
 
 AI_CBM_Attract: @ 81DA6CE
-	if_status2 TARGET, S_INFATUATED, Score_Down10
+	if_status2 TARGET, S_INFATUATED, Score_Minus10
 	get_ability TARGET
-	if_equal ABILITY_OBLIVIOUS, Score_Down10
+	if_equal ABILITY_OBLIVIOUS, Score_Minus10
 	get_gender USER
 	if_equal 0, AI_CBM_Attract_CheckIfTargetIsFemale
 	if_equal 254, AI_CBM_Attract_CheckIfTargetIsMale
-	jump Score_Down10
+	jump Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsFemale: @ 81DA6F3
 	get_gender TARGET
 	if_equal 254, AI_CBM_Attract_End
-	jump Score_Down10
+	jump Score_Minus10
 
 AI_CBM_Attract_CheckIfTargetIsMale: @ 81DA700
 	get_gender TARGET
 	if_equal 0, AI_CBM_Attract_End
-	jump Score_Down10
+	jump Score_Minus10
 
 AI_CBM_Attract_End: @ 81DA70D
 	end
 
 AI_CBM_Safeguard: @ 81DA70E
-	if_status4 USER, S_SAFEGUARD, Score_Down8
+	if_status4 USER, S_SAFEGUARD, Score_Minus8
 	end
 
 AI_CBM_Memento: @ 81DA719
-	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
-	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Down8
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Minus10
+	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Minus8
 
 AI_CBM_BatonPass: @ 81DA729
 	count_alive_pokemon USER
-	if_equal 0, Score_Down10
+	if_equal 0, Score_Minus10
 	end
 
 AI_CBM_RainDance: @ 81DA732
 	get_weather
-	if_equal BATTLE_WEATHER_RAIN, Score_Down8
+	if_equal BATTLE_WEATHER_RAIN, Score_Minus8
 	end
 
 AI_CBM_SunnyDay: @ 81DA73A
 	get_weather
-	if_equal BATTLE_WEATHER_SUN, Score_Down8
+	if_equal BATTLE_WEATHER_SUN, Score_Minus8
 	end
 
 AI_CBM_FutureSight: @ 81DA742
-	if_status4 TARGET, S_FUTURE_SIGHT, Score_Down10
+	if_status4 TARGET, S_FUTURE_SIGHT, Score_Minus10
 	end
 
 AI_CBM_FakeOut: @ 81DA74D
 	is_first_turn USER
-	if_equal 0, Score_Down10
+	if_equal 0, Score_Minus10
 	end
 
 AI_CBM_Stockpile: @ 81DA756
 	get_stockpile_count USER
-	if_equal 3, Score_Down10
+	if_equal 3, Score_Minus10
 	end
 
 AI_CBM_SpitUpAndSwallow: @ 81DA75F
-	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 0, Score_Minus10
 	get_stockpile_count USER
-	if_equal 0, Score_Down10
+	if_equal 0, Score_Minus10
 	end
 
 AI_CBM_Hail: @ 81DA76E
 	get_weather
-	if_equal BATTLE_WEATHER_HAIL, Score_Down8
+	if_equal BATTLE_WEATHER_HAIL, Score_Minus8
 	end
 
 AI_CBM_Torment: @ 81DA776
-	if_status2 TARGET, S_TORMENT, Score_Down10
+	if_status2 TARGET, S_TORMENT, Score_Minus10
 	end
 
 AI_CBM_WillOWisp: @ 81DA781
 	get_ability TARGET
-	if_equal ABILITY_WATER_VEIL, Score_Down10
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
-	if_damage_bonus 0, Score_Down10
-	if_damage_bonus 20, Score_Down10
-	if_damage_bonus 10, Score_Down10
+	if_equal ABILITY_WATER_VEIL, Score_Minus10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Minus10
+	if_damage_bonus 0, Score_Minus10
+	if_damage_bonus 20, Score_Minus10
+	if_damage_bonus 10, Score_Minus10
 	end
 
 AI_CBM_HelpingHand: @ 81DA7A6
 	is_double_battle
-	if_equal 0, Score_Down10
+	if_equal 0, Score_Minus10
 	end
 
 AI_CBM_TrickAndKnockOff: @ 81DA7AE
 	get_ability TARGET
-	if_equal ABILITY_STICKY_HOLD, Score_Down10
+	if_equal ABILITY_STICKY_HOLD, Score_Minus10
 	end
 
 AI_CBM_Ingrain: @ 81DA7B7
-	if_status3 USER, S_ROOTED, Score_Down10
+	if_status3 USER, S_ROOTED, Score_Minus10
 	end
 
 AI_CBM_Recycle: @ 81DA7C2
 	get_item USER
-	if_equal ITEM_NONE, Score_Down10
+	if_equal ITEM_NONE, Score_Minus10
 	end
 
 AI_CBM_Imprison: @ 81DA7CB
-	if_status3 USER, S_IMPRISONED, Score_Down10
+	if_status3 USER, S_IMPRISONED, Score_Minus10
 	end
 
 AI_CBM_Refresh: @ 81DA7D6
-	if_not_status USER, PSN | BRN | PAR | TOX, Score_Down10
+	if_not_status USER, PSN | BRN | PAR | TOX, Score_Minus10
 	end
 
 AI_CBM_MudSport: @ 81DA7E1
-	if_status3 USER, S_MUD_SPORT, Score_Down10
+	if_status3 USER, S_MUD_SPORT, Score_Minus10
 	end
 
 AI_CBM_Tickle: @ 81DA7EC
-	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
-	if_stat_level_equal TARGET, DEFENSE, 0, Score_Down8
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Minus10
+	if_stat_level_equal TARGET, DEFENSE, 0, Score_Minus8
 	end
 
 AI_CBM_CosmicPower: @ 81DA7FD
-	if_stat_level_equal USER, DEFENSE, 12, Score_Down10
-	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down8
+	if_stat_level_equal USER, DEFENSE, 12, Score_Minus10
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Minus8
 	end
 
 AI_CBM_BulkUp: @ 81DA80E
-	if_stat_level_equal USER, ATTACK, 12, Score_Down10
-	if_stat_level_equal USER, DEFENSE, 12, Score_Down8
+	if_stat_level_equal USER, ATTACK, 12, Score_Minus10
+	if_stat_level_equal USER, DEFENSE, 12, Score_Minus8
 	end
 
 AI_CBM_WaterSport: @ 81DA81F
-	if_status3 USER, S_WATER_SPORT, Score_Down10
+	if_status3 USER, S_WATER_SPORT, Score_Minus10
 	end
 
 AI_CBM_CalmMind: @ 81DA82A
-	if_stat_level_equal USER, SP_ATTACK, 12, Score_Down10
-	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down8
+	if_stat_level_equal USER, SP_ATTACK, 12, Score_Minus10
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Minus8
 	end
 
 AI_CBM_DragonDance: @ 81DA83B
-	if_stat_level_equal USER, ATTACK, 12, Score_Down10
-	if_stat_level_equal USER, SPEED, 12, Score_Down8
+	if_stat_level_equal USER, ATTACK, 12, Score_Minus10
+	if_stat_level_equal USER, SPEED, 12, Score_Minus8
 	end
 
-Score_Down1: @ 81DA84C
+Score_Minus1: @ 81DA84C
 	score -1
 	end
 
-Score_Down2: @ 81DA84F
+Score_Minus2: @ 81DA84F
 	score -2
 	end
 
-Score_Down3: @ 81DA852
+Score_Minus3: @ 81DA852
 	score -3
 	end
 
-Score_Down5: @ 81DA855
+Score_Minus5: @ 81DA855
 	score -5
 	end
 
-Score_Down8: @ 81DA858
+Score_Minus8: @ 81DA858
 	score -8
 	end
 
-Score_Down10: @ 81DA85B
+Score_Minus10: @ 81DA85B
 	score -10
 	end
 
-Score_Down12: @ 81DA85E
+Score_Minus12: @ 81DA85E
 	score -12
 	end
 
@@ -788,7 +788,7 @@ AI_CV_SelfKO_Encourage1: @ 81DAB94
 	if_hp_less_than USER, 80, AI_CV_SelfKO_Encourage2
 	if_would_go_first USER, AI_CV_SelfKO_Encourage2
 	if_random_less_than 50, AI_CV_SelfKO_End
-	jump Score_Down3
+	jump Score_Minus3
 
 AI_CV_SelfKO_Encourage2: @ 81DABAC
 	if_hp_more_than USER, 50, AI_CV_SelfKO_Encourage4
@@ -1354,7 +1354,7 @@ AI_CV_Conversion: @ 81DB17A
 AI_CV_Conversion2: @ 81DB183
 	get_turn_count
 	if_equal 0, AI_CV_Conversion_End
-	if_random_less_than 200, Score_Down2
+	if_random_less_than 200, Score_Minus2
 
 AI_CV_Conversion_End: @ 81DB190
 	end
@@ -2695,7 +2695,7 @@ AI_CV_DragonDance_End: @ 81DBE96
 AI_TryToFaint: @ 81DBE97
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	is_most_powerful_move
-	if_equal 1, Score_Down1
+	if_equal 1, Score_Minus1
 	end
 
 AI_TryToFaint_TryToEncourageQuickAttack: @ 81DBEA4

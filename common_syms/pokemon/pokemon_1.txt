@@ -1,4 +1,0 @@
-gPlayerPartyCount
-gPlayerParty
-gEnemyPartyCount
-gEnemyParty

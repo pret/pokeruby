@@ -2634,9 +2634,9 @@ extern const u16 gUnknown_08EA02C8[];
 extern const u16 gUnknown_08EA0348[];
 extern const u16 gUnknown_08EA15C8[];
 extern const u16 gTradeMonBoxTilemap[];
-extern const u8 gUnknown_08D00000[];
-extern const u16 gUnknown_08D00524[];
-extern const u8 gUnknown_08D004E0[];
+extern const u8 gBattleTextboxTiles[];
+extern const u16 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
 
 extern const u8 gNamingScreenBackButtonTiles[];
 extern const u8 gNamingScreenOKButtonTiles[];
@@ -2739,7 +2739,15 @@ extern const u16 gCableCar_Pal[];
 extern const u16 gCableCarBG_Pal[];
 extern const u8 gCableCarBG_Gfx[];
 
-// data/graphics.s
+extern const u8 gPSSMenuHeader_Gfx[];
+extern const u8 gPSSMenuHeader_Tilemap[];
+extern const u16 gPSSMenu1_Pal[];
+extern const u16 gPSSMenu2_Pal[];
+extern const u8 gPSSMenuMisc_Gfx[];
+extern const u8 gPSSMenuMisc_Tilemap[];
+extern const u16 gPSSMenu3_Pal[];
+extern const u16 gPSSMenu4_Pal[];
+
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_000;
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_001;
 extern struct CompressedSpriteSheet gBattleAnimSpriteSheet_002;

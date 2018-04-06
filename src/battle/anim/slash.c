@@ -60,7 +60,7 @@ void sub_80CDE78(struct Sprite* sprite)
         sprite->data[1] = 8;
         sprite->data[2] = 0;
         StoreSpriteCallbackInData(sprite, sub_80CDEB0);
-        sprite->callback = sub_8078364;
+        sprite->callback = TranslateSpriteOverDuration;
     }
 }
 

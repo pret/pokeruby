@@ -65,6 +65,15 @@ enum
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 #define T2_READ_PTR(ptr) (void*) T2_READ_32(ptr)
 
+// Credits to Made (dolphin emoji)
+#define S16TOPOSFLOAT(val)   \
+({                           \
+    s16 v = (val);           \
+    float f = (float)v;      \
+    if(v < 0) f += 65536.0f; \
+    f;                       \
+})
+
 enum
 {
     VERSION_SAPPHIRE = 1,
@@ -623,7 +632,7 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x24*/ struct WarpData warp4;
     /*0x2C*/ u16 savedMusic;
     /*0x2E*/ u8 weather;
-    /*0x2F*/ u8 filler_2F;
+    /*0x2F*/ u8 weatherCycleStage;
     /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest
     /*0x32*/ u16 mapDataId;
     /*0x34*/ u16 mapView[0x100];
@@ -725,46 +734,37 @@ struct Pokedex
 
 struct BattleTowerTrainer
 {
-    u8 trainerClass;
-    u8 name[8];
-    u8 teamFlags;
-    struct {
-        u16 easyChat[6];
-    } greeting;
+    /*0x00*/ u8 trainerClass;
+    /*0x01*/ u8 name[8];
+    /*0x09*/ u8 teamFlags;
+             u8 filler0A[2];
+    /*0x0C*/ u16 greeting[6];
 };
 
 struct BattleTowerRecord // record mixing
 {
-    /*0x00*/u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/u8 trainerClass;
-    /*0x02*/u16 winStreak;
-    /*0x04*/u8 name[8];
-    /*0x0C*/u8 trainerId[4];
-    /*0x10*/struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/struct UnknownPokemonStruct party[3];
-    /*0xA0*/u32 checksum;
+    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ struct UnknownPokemonStruct party[3];
+    /*0xA0*/ u32 checksum;
 };
 
 struct BattleTowerEReaderTrainer
 {
-    /*0x00*/u8 unk0;
-    /*0x01*/u8 trainerClass;
-    /*0x02*/u16 winStreak;
-    /*0x04*/u8 name[8];
-    /*0x0C*/u8 trainerId[4];
-    /*0x10*/struct {
-        u16 easyChat[6];
-    } greeting;
-    /*0x1C*/struct {
-        u16 easyChat[6];
-    } farewellPlayerLost;
-    /*0x28*/struct {
-        u16 easyChat[6];
-    } farewellPlayerWon;
-    /*0x34*/struct UnknownPokemonStruct party[3];
-    /*0xB8*/u32 checksum;
+    /*0x00*/ u8 unk0;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[8];
+    /*0x0C*/ u8 trainerId[4];
+    /*0x10*/ u16 greeting[6];
+    /*0x1C*/ u16 farewellPlayerLost[6];
+    /*0x28*/ u16 farewellPlayerWon[6];
+    /*0x34*/ struct UnknownPokemonStruct party[3];
+    /*0xB8*/ u32 checksum;
 };
 
 struct BattleTowerData
@@ -822,7 +822,7 @@ struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 height;
+    s8 height;
 };
 
 struct UnkStruct_8054FF8
@@ -841,8 +841,6 @@ struct HallOfFame
     u8 filler[0x1F00];
 };
 
-extern struct HallOfFame gHallOfFame;
 extern struct SaveBlock2 gSaveBlock2;
-extern u8 ewram[];
 
 #endif // GUARD_GLOBAL_H

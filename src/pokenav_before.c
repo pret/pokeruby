@@ -20,8 +20,6 @@
 #include "text.h"
 #include "scanline_effect.h"
 
-extern u8 ewram[];
-
 struct UnknownPokenav0
 {
     /* 0x0000 */ u8 var0[0x0300];
@@ -102,7 +100,6 @@ extern const u16 gPokenavConditionSearch2_Pal[];
 extern const u8 gUnknown_083E0334[];
 extern const u16 gUnknown_083E02B4[];
 extern const u8 gPokenavConditionSearch2_Gfx[];
-extern const u8 gUnknownPalette_81E6692[];
 extern const u8 gUnknown_083E0254[];
 extern const u8 gUnknown_08E9FEB4[];
 extern const u8 gUnknown_083E01AC[];
@@ -131,6 +128,10 @@ extern const u8 gPokenavHoennMapMisc_Gfx[];
 extern const u8 gUnknown_08E99FB0[];
 extern const u8 gUnknown_08E9A100[];
 extern const u16 gPokenavHoennMap1_Pal[];
+
+// TODO: decompile the debug code so the compiler doesn't complain about
+// unused static functions
+#define static
 
 static void sub_80EBCA8();
 static void sub_80EEE20();
@@ -296,7 +297,6 @@ extern void sub_80F6F64();
 extern void sub_80F19FC();
 
 extern u16 gKeyRepeatStartDelay;
-
 
 void sub_80EBA5C()
 {
@@ -552,6 +552,10 @@ void sub_80EBDD8()
         {
             sub_80EF428(0, 0);
             sub_80EBDBC(&sub_80EC268);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         }
         break;
     }
@@ -626,6 +630,10 @@ void sub_80EC00C()
         {
             sub_80EF428(0, ewram0_10.var6dad);
 			sub_80EBDBC(&sub_80EC268);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
 		}
 		break;
     }
@@ -827,6 +835,10 @@ void sub_80EC4A0()
         break;
     case 0xD:
         sub_80EED2C(0x1);
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x75E0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         ewram0_10.var304++;
         break;
     case 0xE:
@@ -906,6 +918,10 @@ void sub_80EC67C()
 		}
 		break;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 1, 1, 2, 4);
+#endif
 }
 
 void sub_80EC81C()
@@ -1011,23 +1027,23 @@ void sub_80ECA10()
 			SetVBlankCallback(&sub_80EBD80);
 			sub_80EED1C();
 			ewram0_10.var6dad = ewram0_10.var6df0;
-			ewram0_10.var6dae = 0x3;
+			ewram0_10.var6dae = 3;
 			sub_80EEE08();
 			ewram0_10.var304++;
 		}
         break;
     case 1:
-        sub_80EF248(0x1);
+        sub_80EF248(1);
         ewram0_10.var304++;
     case 2:
-        if (!sub_80EF284(0x1))
+        if (!sub_80EF284(1))
 			ewram0_10.var304++;
         break;
     case 3:
-        sub_80F1B8C(0x1);
+        sub_80F1B8C(1);
         ewram0_10.var304++;
     case 4:
-        if (!sub_80F1BC8(0x1))
+        if (!sub_80F1BC8(1))
 			ewram0_10.var304++;
         break;
     case 5:
@@ -1051,23 +1067,27 @@ void sub_80ECA10()
         if (!gPaletteFade.active)
 			ewram0_10.var304++;
         break;
-    case 0xA:
-        sub_80F2C80(0x1);
+    case 10:
+        sub_80F2C80(1);
         ewram0_10.var304++;
 		// fall through
-    case 0xB:
-        if (!sub_80F2CBC(0x1))
+    case 11:
+        if (!sub_80F2CBC(1))
 			ewram0_10.var304++;
         break;
-    case 0xC:
+    case 12:
         sub_80F1DF0();
         ewram0_10.var304++;
         break;
-    case 0xD:
+    case 13:
         if (!sub_80F1E50())
         {
 			sub_80EF428(1, ewram0_10.var6dad);
 			sub_80EBDBC(&sub_80EC86C);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
 		}
 		break;
     }
@@ -1229,6 +1249,10 @@ void sub_80ECD80()
 		{
 			sub_80EF428(2, ewram0_10.var6dad);
 			sub_80EBDBC(&sub_80ECC08);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
 		}
 		break;
     }
@@ -1338,7 +1362,13 @@ void sub_80ED01C()
         // fall through
     case 19:
         if (!sub_80F2CBC(ewram0_10.var6dfc + 7))
+		{
 			sub_80EBDBC(&sub_80ED31C);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
+		}
         break;
     }
 }
@@ -1353,21 +1383,23 @@ void sub_80ED31C()
         case 1:
             PlaySE(SE_SELECT);
             ShowMapNamePopUpWindow();
-            break;
+            return;
         case 2:
             PlaySE(SE_SELECT);
             ewram0_10.var304++;
-            break;
+            return;
         default:
             if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80ED4D8);
+				return;
             }
             else if (gMain.newKeys & B_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80ECD80);
+				return;
             }
             break;
         }
@@ -1385,6 +1417,10 @@ void sub_80ED31C()
 			ewram0_10.var304 = 0;
         break;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 1, 8, 2, 4);
+#endif
 }
 
 void sub_80ED3D0()
@@ -1425,6 +1461,10 @@ void sub_80ED3D0()
     case 7:
         sub_80EED2C(0x4);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         break;
     case 8:
         if (!gPaletteFade.active)
@@ -1476,6 +1516,10 @@ void sub_80ED4D8()
     case 7:
         sub_80EED2C(0x2);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF000), 4);
+#endif
         break;
     case 8:
         if (!gPaletteFade.active)
@@ -1569,7 +1613,13 @@ void sub_80ED620()
         // fall through
     case 16:
         if (!sub_80F2CBC(0x6))
+		{
 			sub_80EBDBC(&sub_80ED858);
+#if DEBUG
+			if (gLinkOpen == TRUE)
+				debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF000), 4);
+#endif
+		}
         break;
     }
 }
@@ -1742,8 +1792,433 @@ label2:
 
 }
 #else
+#if DEBUG
 __attribute__((naked))
-void sub_80ED858() {
+void sub_80ED858()
+{
+    asm("\
+	push	{r4, r5, lr}\n\
+	add	sp, sp, #0xfffffffc\n\
+	ldr	r1, ._917       @ gSharedMem\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r0, r1, r2\n\
+	ldrh	r0, [r0]\n\
+	add	r5, r1, #0\n\
+	cmp	r0, #0xb\n\
+	bls	._915	@cond_branch\n\
+	b	._999\n\
+._915:\n\
+	lsl	r0, r0, #0x2\n\
+	ldr	r1, ._917 + 4   @ \n\
+	add	r0, r0, r1\n\
+	ldr	r0, [r0]\n\
+	mov	pc, r0\n\
+._918:\n\
+	.align	2, 0\n\
+._917:\n\
+	.word	gSharedMem\n\
+	.word	._919\n\
+._919:\n\
+	.word	._920\n\
+	.word	._921\n\
+	.word	._922\n\
+	.word	._923\n\
+	.word	._924\n\
+	.word	._925\n\
+	.word	._926\n\
+	.word	._927\n\
+	.word	._928\n\
+	.word	._929\n\
+	.word	._999\n\
+	.word	._931\n\
+._920:\n\
+	bl	sub_80F4F78\n\
+	bl	sub_80F5B38\n\
+	ldr	r0, ._933       @ gSharedMem\n\
+	mov	r4, #0xc1\n\
+	lsl	r4, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	mov	r1, #0x1\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._934:\n\
+	.align	2, 0\n\
+._933:\n\
+	.word	gSharedMem\n\
+._921:\n\
+	bl	sub_80F5B50\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._935	@cond_branch\n\
+	b	._999\n\
+._935:\n\
+	ldr	r0, ._938       @ gSharedMem\n\
+	mov	r1, #0xc1\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	mov	r1, #0x2\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._939:\n\
+	.align	2, 0\n\
+._938:\n\
+	.word	gSharedMem\n\
+._922:\n\
+	mov	r0, #0x1\n\
+	bl	sub_80F0174\n\
+	ldr	r0, ._941       @ gSharedMem\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r0, r0, r2\n\
+	mov	r1, #0x3\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._942:\n\
+	.align	2, 0\n\
+._941:\n\
+	.word	gSharedMem\n\
+._923:\n\
+	bl	sub_80F4FB4\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._943	@cond_branch\n\
+	b	._999\n\
+._943:\n\
+	bl	sub_80F3C94\n\
+	bl	sub_80F3D00\n\
+	b	._945\n\
+._924:\n\
+	ldr	r2, ._951       @ gMain\n\
+	ldrh	r1, [r2, #0x2c]\n\
+	mov	r0, #0x40\n\
+	and	r0, r0, r1\n\
+	add	r3, r2, #0\n\
+	cmp	r0, #0\n\
+	beq	._949	@cond_branch\n\
+	ldr	r1, ._951 + 4   @ 0x87cb\n\
+	add	r0, r5, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._949	@cond_branch\n\
+	ldr	r2, ._951 + 8   @ 0x76aa\n\
+	add	r0, r5, r2\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._948	@cond_branch\n\
+	ldr	r4, ._951 + 12  @ 0x87dc\n\
+	add	r0, r5, r4\n\
+	mov	r1, #0x0\n\
+	ldsh	r0, [r0, r1]\n\
+	cmp	r0, #0\n\
+	beq	._949	@cond_branch\n\
+._948:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	mov	r0, #0x1\n\
+	bl	sub_80F5060\n\
+	bl	move_anim_execute\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r1, r5, r2\n\
+	b	._950\n\
+._952:\n\
+	.align	2, 0\n\
+._951:\n\
+	.word	gMain\n\
+	.word	0x87cb\n\
+	.word	0x76aa\n\
+	.word	0x87dc\n\
+._949:\n\
+	ldrh	r1, [r3, #0x2c]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	beq	._956	@cond_branch\n\
+	ldr	r4, ._958       @ 0x87cb\n\
+	add	r0, r5, r4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._956	@cond_branch\n\
+	ldr	r1, ._958 + 4   @ 0x76aa\n\
+	add	r0, r5, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._955	@cond_branch\n\
+	ldr	r2, ._958 + 8   @ 0x87dc\n\
+	add	r0, r5, r2\n\
+	sub	r4, r4, #0x57\n\
+	add	r1, r5, r4\n\
+	mov	r4, #0x0\n\
+	ldsh	r2, [r0, r4]\n\
+	mov	r4, #0x0\n\
+	ldsh	r0, [r1, r4]\n\
+	cmp	r2, r0\n\
+	bge	._956	@cond_branch\n\
+._955:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	mov	r0, #0x0\n\
+	bl	sub_80F5060\n\
+	bl	move_anim_execute\n\
+	mov	r0, #0xc1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r5, r0\n\
+._950:\n\
+	mov	r0, #0x5\n\
+	strh	r0, [r1]\n\
+	b	._999\n\
+._959:\n\
+	.align	2, 0\n\
+._958:\n\
+	.word	0x87cb\n\
+	.word	0x76aa\n\
+	.word	0x87dc\n\
+._956:\n\
+	ldrh	r2, [r3, #0x2e]\n\
+	mov	r0, #0x2\n\
+	and	r0, r0, r2\n\
+	cmp	r0, #0\n\
+	beq	._960	@cond_branch\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	bl	sub_80F4FDC\n\
+	bl	move_anim_execute\n\
+	ldr	r0, ._962       @ gSharedMem\n\
+	mov	r1, #0xc1\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	mov	r1, #0x9\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._963:\n\
+	.align	2, 0\n\
+._962:\n\
+	.word	gSharedMem\n\
+._960:\n\
+	mov	r0, #0x1\n\
+	and	r0, r0, r2\n\
+	cmp	r0, #0\n\
+	bne	._964	@cond_branch\n\
+	b	._999\n\
+._964:\n\
+	add	r4, r5, #0\n\
+	ldr	r2, ._970       @ 0x76aa\n\
+	add	r0, r4, r2\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._966	@cond_branch\n\
+	ldr	r1, ._970 + 4   @ 0x87dc\n\
+	add	r0, r4, r1\n\
+	mov	r2, #0x0\n\
+	ldsh	r1, [r0, r2]\n\
+	ldr	r2, ._970 + 8   @ 0x87da\n\
+	add	r0, r4, r2\n\
+	mov	r2, #0x0\n\
+	ldsh	r0, [r0, r2]\n\
+	sub	r0, r0, #0x1\n\
+	cmp	r1, r0\n\
+	beq	._967	@cond_branch\n\
+	b	._999\n\
+._967:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	mov	r0, #0xc1\n\
+	lsl	r0, r0, #0x2\n\
+	add	r1, r4, r0\n\
+	mov	r0, #0x9\n\
+	strh	r0, [r1]\n\
+	b	._999\n\
+._971:\n\
+	.align	2, 0\n\
+._970:\n\
+	.word	0x76aa\n\
+	.word	0x87dc\n\
+	.word	0x87da\n\
+._966:\n\
+	ldr	r1, ._975       @ 0x6dac\n\
+	add	r0, r5, r1\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	beq	._972	@cond_branch\n\
+	b	._999\n\
+._972:\n\
+	mov	r0, #0x5\n\
+	bl	PlaySE\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r1, r5, r2\n\
+	mov	r0, #0x7\n\
+	strh	r0, [r1]\n\
+	b	._999\n\
+._976:\n\
+	.align	2, 0\n\
+._975:\n\
+	.word	0x6dac\n\
+._925:\n\
+	bl	gpu_sync_bg_show\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	beq	._977	@cond_branch\n\
+	b	._999\n\
+._977:\n\
+	bl	sub_80F3D00\n\
+	ldr	r0, ._980       @ gSharedMem\n\
+	mov	r4, #0xc1\n\
+	lsl	r4, r4, #0x2\n\
+	add	r0, r0, r4\n\
+	mov	r1, #0x6\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._981:\n\
+	.align	2, 0\n\
+._980:\n\
+	.word	gSharedMem\n\
+._926:\n\
+	bl	sub_8055870\n\
+	cmp	r0, #0\n\
+	bne	._999	@cond_branch\n\
+	ldr	r0, ._984       @ gSharedMem\n\
+	mov	r1, #0xc1\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r0, r1\n\
+	b	._983\n\
+._985:\n\
+	.align	2, 0\n\
+._984:\n\
+	.word	gSharedMem\n\
+._927:\n\
+	mov	r0, #0x3\n\
+	bl	sub_80EEFBC\n\
+	bl	sub_80F3668\n\
+	ldr	r0, ._987       @ gSharedMem\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r0, r0, r2\n\
+	mov	r1, #0x8\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._988:\n\
+	.align	2, 0\n\
+._987:\n\
+	.word	gSharedMem\n\
+._928:\n\
+	bl	sub_80F7500\n\
+	lsl	r0, r0, #0x18\n\
+	cmp	r0, #0\n\
+	bne	._999	@cond_branch\n\
+	mov	r0, #0x2\n\
+	bl	sub_80EEFBC\n\
+	bl	sub_80F3698\n\
+._945:\n\
+	ldr	r0, ._991       @ gSharedMem\n\
+	mov	r4, #0xc1\n\
+	lsl	r4, r4, #0x2\n\
+	add	r0, r0, r4\n\
+._983:\n\
+	mov	r1, #0x4\n\
+	strh	r1, [r0]\n\
+	b	._999\n\
+._992:\n\
+	.align	2, 0\n\
+._991:\n\
+	.word	gSharedMem\n\
+._929:\n\
+	bl	sub_80F5038\n\
+	lsl	r0, r0, #0x18\n\
+	lsr	r4, r0, #0x18\n\
+	cmp	r4, #0\n\
+	bne	._999	@cond_branch\n\
+	mov	r0, #0x0\n\
+	bl	sub_80F0174\n\
+	bl	sub_80F2F48\n\
+	ldr	r5, ._995       @ gSharedMem\n\
+	mov	r1, #0xc2\n\
+	lsl	r1, r1, #0x2\n\
+	add	r0, r5, r1\n\
+	ldr	r0, [r0]\n\
+	mov	r1, #0x1\n\
+	neg	r1, r1\n\
+	str	r4, [sp]\n\
+	mov	r2, #0x0\n\
+	mov	r3, #0x10\n\
+	bl	BeginNormalPaletteFade\n\
+	mov	r2, #0xc1\n\
+	lsl	r2, r2, #0x2\n\
+	add	r1, r5, r2\n\
+	mov	r0, #0xb\n\
+	strh	r0, [r1]\n\
+	b	._999\n\
+._996:\n\
+	.align	2, 0\n\
+._995:\n\
+	.word	gSharedMem\n\
+._931:\n\
+	ldr	r0, ._1000      @ gPaletteFade\n\
+	ldrb	r1, [r0, #0x7]\n\
+	mov	r0, #0x80\n\
+	and	r0, r0, r1\n\
+	cmp	r0, #0\n\
+	bne	._999	@cond_branch\n\
+	bl	sub_80F3CE8\n\
+	bl	sub_80F5BDC\n\
+	ldr	r0, ._1000 + 4  @ gSharedMem\n\
+	ldr	r4, ._1000 + 8  @ 0x76aa\n\
+	add	r0, r0, r4\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0\n\
+	bne	._998	@cond_branch\n\
+	bl	sub_80F357C\n\
+	mov	r0, #0x1\n\
+	bl	sub_80F2D6C\n\
+	mov	r0, #0x6\n\
+	bl	sub_80F2D6C\n\
+	ldr	r0, ._1000 + 12 @ sub_80ECA10\n\
+	bl	sub_80EBDBC\n\
+	b	._999\n\
+._1001:\n\
+	.align	2, 0\n\
+._1000:\n\
+	.word	gPaletteFade\n\
+	.word	gSharedMem\n\
+	.word	0x76aa\n\
+	.word	sub_80ECA10+1\n\
+._998:\n\
+	bl	sub_80F3614\n\
+	ldr	r0, ._1003      @ sub_80ED3D0\n\
+	bl	sub_80EBDBC\n\
+._999:\n\
+	ldr	r0, ._1003 + 4  @ gLinkOpen\n\
+	ldrb	r0, [r0]\n\
+	cmp	r0, #0x1\n\
+	bne	._1002	@cond_branch\n\
+	ldr	r0, ._1003 + 8  @ gLink\n\
+	ldr	r1, ._1003 + 12 @ 0xfbd\n\
+	add	r0, r0, r1\n\
+	ldrb	r0, [r0]\n\
+	mov	r1, #0x4\n\
+	str	r1, [sp]\n\
+	mov	r1, #0x9\n\
+	mov	r2, #0x6\n\
+	mov	r3, #0x2\n\
+	bl	debug_sub_8008264\n\
+._1002:\n\
+	add	sp, sp, #0x4\n\
+	pop	{r4, r5}\n\
+	pop	{r0}\n\
+	bx	r0\n\
+._1004:\n\
+	.align	2, 0\n\
+._1003:\n\
+	.word	sub_80ED3D0+1\n\
+	.word	gLinkOpen\n\
+	.word	gLink\n\
+	.word	0xfbd");
+}
+#else
+__attribute__((naked))
+void sub_80ED858()
+{
     asm_unified("push {r4,r5,lr}\n\
     sub sp, 0x4\n\
     ldr r1, _080ED878 @ =gSharedMem\n\
@@ -2114,6 +2589,7 @@ _080EDB7A:\n\
 _080EDB84: .4byte sub_80ED3D0\n");
 }
 #endif
+#endif
 
 void sub_80EDB88()
 {
@@ -2198,6 +2674,10 @@ void sub_80EDB88()
     case 16:
         sub_80EED2C(0x4);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         break;
     case 17:
         if (!gPaletteFade.active)
@@ -2216,21 +2696,23 @@ void sub_80EDDBC()
         case 1:
             PlaySE(SE_SELECT);
             ShowMapNamePopUpWindow();
-            break;
+            return;
         case 2:
             PlaySE(SE_SELECT);
             ewram0_10.var304++;
-            break;
+            return;
         default:
             if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EDEE4);
+				return;
             }
             else if (gMain.newKeys & B_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EDE70);
+				return;
             }
             break;
         }
@@ -2247,8 +2729,11 @@ void sub_80EDDBC()
         if (!sub_8055870())
 			ewram0_10.var304 = 0;
         break;
-
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 1, 8, 2, 4);
+#endif
 }
 
 void sub_80EDE70()
@@ -2320,6 +2805,10 @@ void sub_80EDEE4()
     case 8:
         sub_80EED2C(0x3);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF000), 4);
+#endif
         break;
     case 9:
         if (!gPaletteFade.active)
@@ -2392,7 +2881,7 @@ void sub_80EE06C()
             PlaySE(SE_SELECT);
             sub_80F3B94();
             ewram0_10.var304 = 0x7;
-            break;
+            return;
         default:
         case 0:
             if (gMain.newKeys & B_BUTTON)
@@ -2416,6 +2905,10 @@ void sub_80EE06C()
 		}
         break;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 1, 4, 2, 4);
+#endif
 }
 
 void sub_80EE294()
@@ -2461,6 +2954,10 @@ void sub_80EE294()
     case 7:
         sub_80EED2C(0x4);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         break;
     case 8:
         if (!gPaletteFade.active)
@@ -2537,6 +3034,10 @@ void sub_80EE3D8()
     case 12:
         sub_80EED2C(0x5);
         ewram0_10.var304++;
+#if DEBUG
+		if (gLinkOpen == TRUE)
+			debug_sub_8008218((void *)(VRAM + 0x7DE0), 0, (void *)(VRAM + 0xF800), 4);
+#endif
         break;
     case 13:
         if (!gPaletteFade.active)
@@ -2555,21 +3056,23 @@ void sub_80EE58C()
         case 1:
             PlaySE(SE_SELECT);
             sub_80F0FFC(ewram0_10.var876E);
-            break;
+            return;
         case 2:
             PlaySE(SE_SELECT);
             ewram0_10.var304++;
-            break;
+            return;
         default:
             if (gMain.newKeys & A_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EE658);
+				return;
             }
             else if (gMain.newKeys & B_BUTTON)
             {
                 PlaySE(SE_SELECT);
                 sub_80EBDBC(&sub_80EE8F4);
+				return;
             }
             break;
         }
@@ -2587,6 +3090,10 @@ void sub_80EE58C()
 			ewram0_10.var304 = 0;
         break;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 1, 3, 2, 4);
+#endif
 }
 
 void sub_80EE658()
@@ -3038,6 +3545,10 @@ bool8 sub_80EEC10()
         } while (!ewram0_10.var6db2[ewram0_11.var6dad]);
         return TRUE;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 6, 10, 2, 4);
+#endif
     return FALSE;
 }
 
@@ -3055,6 +3566,10 @@ bool8 sub_80EEC90()
             ewram0_11.var6dad = 0;
         return TRUE;
     }
+#if DEBUG
+	if (gLinkOpen == TRUE)
+		debug_sub_8008264(gLink.recvQueue.count, 6, 10, 2, 4);
+#endif
     return FALSE;
 }
 
