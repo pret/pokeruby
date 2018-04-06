@@ -63,10 +63,12 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
 
+infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
 ifeq (,$(filter-out all,$(MAKECMDGOALS)))
-$(info $(shell $(MAKE) tools))
+$(call infoshell, $(MAKE) tools)
 else
 NODEP := 1
 endif
