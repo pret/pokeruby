@@ -139,7 +139,7 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
 	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
-	@$(AS) $(ASFLAGS) -o $@ $(BUILD_DIR)/$*.s
+	@$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
