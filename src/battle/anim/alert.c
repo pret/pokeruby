@@ -16,7 +16,7 @@ void sub_80CF610(struct Sprite* sprite)
     sub_8078650(sprite);
     sub_807867C(sprite, gBattleAnimArgs[0]);
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->hFlip = 1;
         if (gBattleAnimArgs[2] != 0)

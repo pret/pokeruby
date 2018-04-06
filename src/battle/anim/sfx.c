@@ -175,7 +175,7 @@ void sub_812B18C(u8 taskId)
             }
         }
 
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
             species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], 0xB);
         else
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], 0xB);

@@ -177,7 +177,7 @@ sub_80DA16C: @ 80DA16C
 	bl InitAnimSpritePos
 	ldr r0, _080DA1D8 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA18C
@@ -250,7 +250,7 @@ sub_80DA208: @ 80DA208
 	adds r5, r0, 0
 	ldr r4, _080DA2A4 @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA234
@@ -441,7 +441,7 @@ sub_80DA38C: @ 80DA38C
 	adds r5, r0, 0
 	ldr r0, _080DA3B4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DA3BC
@@ -627,7 +627,7 @@ _080DA500:
 _080DA502:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DA518
@@ -2102,7 +2102,7 @@ _080DB024:
 	bne _080DB03C
 	ldr r0, _080DB090 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB052
@@ -2113,7 +2113,7 @@ _080DB03C:
 	bne _080DB058
 	ldr r0, _080DB094 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB058

@@ -24,7 +24,7 @@ sub_80E1CB4: @ 80E1CB4
 	strh r0, [r4, 0x2E]
 	ldr r0, _080E1CF0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1538,7 +1538,7 @@ sub_80E2838: @ 80E2838
 	adds r4, r0, 0
 	ldr r0, _080E2868 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E285C
@@ -2585,7 +2585,7 @@ _080E3068: .4byte gSharedMem + 0x19348
 _080E306C:
 	ldr r4, _080E308C @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3098
@@ -3119,7 +3119,7 @@ _080E34DC: .4byte gBankSpriteIds
 _080E34E0: .4byte gSharedMem + 0x19348
 _080E34E4:
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3508
@@ -3847,7 +3847,7 @@ sub_80E3A58: @ 80E3A58
 	beq _080E3A94
 	ldr r0, _080E3AC8 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3A94
@@ -3955,7 +3955,7 @@ sub_80E3B4C: @ 80E3B4C
 	lsrs r4, 24
 	ldr r0, _080E3B70 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	ldr r1, _080E3B74 @ =gBattleAnimArgs
 	lsls r0, 24
 	lsrs r0, 24
@@ -3978,7 +3978,7 @@ sub_80E3B78: @ 80E3B78
 	lsrs r4, 24
 	ldr r0, _080E3B9C @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	ldr r1, _080E3BA0 @ =gBattleAnimArgs
 	lsls r0, 24
 	lsrs r0, 24
@@ -4206,7 +4206,7 @@ _080E3D50: .4byte REG_BG1CNT
 _080E3D54: .4byte gSharedMem + 0x19348
 _080E3D58:
 	adds r0, r7, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3D7C
@@ -4861,11 +4861,11 @@ sub_80E4264: @ 80E4264
 	lsrs r5, r0, 24
 	ldr r0, _080E428C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	adds r4, r0, 0
 	ldr r0, _080E4290 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0

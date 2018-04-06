@@ -94,7 +94,7 @@ void sub_80D3698(struct Sprite *sprite)
 
     if (!IsContest())
     {
-        if (GetBankSide(gAnimBankAttacker) == 0)
+        if (GetBattlerSide(gAnimBankAttacker) == 0)
         {
             sprite->pos2.x = 10;
             sprite->subpriority = subpriority + 2;
@@ -126,7 +126,7 @@ void sub_80D3728(struct Sprite *sprite)
 {
     int var1, var2;
 
-    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
+    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
     {
         gBattleAnimArgs[0] *= -1;
 
@@ -149,7 +149,7 @@ void sub_80D3728(struct Sprite *sprite)
 
     InitAnimSpritePos(sprite, var1);
 
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }

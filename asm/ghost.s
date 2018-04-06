@@ -888,7 +888,7 @@ _080DE1E0:
 	strh r1, [r0, 0x2E]
 	ldr r0, _080DE250 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DE258
@@ -2261,7 +2261,7 @@ sub_80DECB0: @ 80DECB0
 	strh r0, [r1]
 	ldr r0, _080DED08 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DECF4
@@ -2542,7 +2542,7 @@ sub_80DEF3C: @ 80DEF3C
 	bl InitAnimSpritePos
 	ldr r0, _080DEF68 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DEF70
@@ -2746,7 +2746,7 @@ sub_80DF0B8: @ 80DF0B8
 	strh r0, [r4, 0x24]
 	ldr r0, _080DF120 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DF0DC
@@ -2993,7 +2993,7 @@ _080DF292:
 	strh r7, [r5, 0x2E]
 	ldr r0, _080DF2FC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0

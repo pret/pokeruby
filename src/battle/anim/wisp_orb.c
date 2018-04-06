@@ -25,7 +25,7 @@ void sub_80D5B0C(struct Sprite *sprite)
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
         {
             sprite->data[4] = 4;
         }
@@ -39,7 +39,7 @@ void sub_80D5B0C(struct Sprite *sprite)
         break;
     case 1:
         sprite->data[1] += 192;
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
         {
             sprite->pos2.y = -(sprite->data[1] >> 8);
         }

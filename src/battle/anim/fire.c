@@ -40,7 +40,7 @@ void sub_80D4F5C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -62,7 +62,7 @@ void sub_80D4F5C(struct Sprite *sprite)
 
 void sub_80D4FCC(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -98,7 +98,7 @@ void sub_80D5074(struct Sprite *sprite)
 {
     sub_8078650(sprite);
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

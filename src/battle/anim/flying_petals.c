@@ -21,7 +21,7 @@ void sub_80CC474(struct Sprite* sprite)
     else
         bank = gAnimBankTarget;
 
-    if (GetBankSide(bank) != 0)
+    if (GetBattlerSide(bank) != 0)
     {
         sprite->data[4] = 0;
         sprite->data[2] = gBattleAnimArgs[3];

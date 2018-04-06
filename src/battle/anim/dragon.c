@@ -27,7 +27,7 @@ void sub_80DF5A0(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
@@ -52,7 +52,7 @@ void sub_80DF63C(struct Sprite *sprite)
     sub_8078650(sprite);
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
     sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[1];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -96,7 +96,7 @@ void sub_80DF6F0(struct Sprite *sprite)
 
 void sub_80DF760(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         StartSpriteAffineAnim(sprite, 1);
     sub_80DF63C(sprite);
 }

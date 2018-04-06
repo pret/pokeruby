@@ -578,7 +578,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
         }
         break;
     case 5:
-        if (GetBankSide(*b) == 0)
+        if (GetBattlerSide(*b) == 0)
         {
             if (!(gBattleTypeFlags & 0x80))
                 sub_8045A5C(gHealthboxIDs[*b], &gPlayerParty[gBattlerPartyIndexes[*b]], 0);
@@ -671,11 +671,11 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         else
         {
             r10 = GetBattlerPosition(a);
-            if (GetBankSide(b) == 1)
+            if (GetBattlerSide(b) == 1)
                 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
             else
                 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
-            if (GetBankSide(a) == 0)
+            if (GetBattlerSide(a) == 0)
             {
                 personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_PERSONALITY);
                 otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_OT_ID);
@@ -742,7 +742,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
             r4 = GetBattlerPosition(a);
         if (IsContest())
             LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
-        else if (GetBankSide(a) != 0)
+        else if (GetBattlerSide(a) != 0)
             LZDecompressVram(gSubstituteDollGfx, gUnknown_081FAF4C[r4]);
         else
             LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
@@ -758,7 +758,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
     {
         if (!IsContest())
         {
-            if (GetBankSide(a) != 0)
+            if (GetBattlerSide(a) != 0)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
             else
                 BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[a]], a);
@@ -921,7 +921,7 @@ void sub_8032978(struct Sprite *sprite)
 
 void sub_8032984(u8 a, u16 b)
 {
-    if (GetBankSide(a) != 0)
+    if (GetBattlerSide(a) != 0)
     {
         if (ewram17800[a].transformedSpecies != 0)
             b = ewram17800[a].transformedSpecies;

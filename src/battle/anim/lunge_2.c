@@ -21,7 +21,7 @@ void sub_80CDAC8(u8 taskId)
     u8 a;
 
     gTasks[taskId].data[0] = gBankSpriteIds[gAnimBankAttacker];
-    a = GetBankSide(gAnimBankAttacker);
+    a = GetBattlerSide(gAnimBankAttacker);
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = 0;
     switch (gBattleAnimArgs[0])

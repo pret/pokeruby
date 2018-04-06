@@ -79,7 +79,7 @@ extern const BattleCmdFunc gBattleScriptingCommandsTable[];
 u8 IsImprisoned(u8 bank, u16 move);
 u8 GetBattlerAtPosition(u8 ID);
 u8 GetBattlerPosition(u8 bank);
-u8 GetBankSide(u8 bank);
+u8 GetBattlerSide(u8 bank);
 void SetMoveEffect(bool8 primary, u8 certainArg);
 bool8 UproarWakeUpCheck(u8 bank);
 bool8 sub_8018018(u8 bank, u8, u8);
@@ -269,11 +269,11 @@ void PressurePPLoseOnUsingImprision(u8 bankAtk)
 {
     s32 i, j;
     s32 imprisionPos = 4;
-    u8 atkSide = GetBankSide(bankAtk);
+    u8 atkSide = GetBattlerSide(bankAtk);
 
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (atkSide != GetBankSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
+        if (atkSide != GetBattlerSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
         {
             for (j = 0; j < 4; j++)
             {
@@ -427,7 +427,7 @@ void sub_8015740(u8 bank)
     s32 i = 0;
     u32 bits = 0;
 
-    if (GetBankSide(bank) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(bank) == B_SIDE_OPPONENT)
     {
         u8 id = ((bank & BIT_FLANK) >> 1);
         gSentPokesToOpponent[id] = 0;
@@ -444,7 +444,7 @@ void sub_8015740(u8 bank)
 
 void sub_80157C4(u8 bank)
 {
-    if (GetBankSide(bank) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(bank) == B_SIDE_OPPONENT)
     {
         sub_8015740(bank);
     }
@@ -582,11 +582,11 @@ bool8 AreAllMovesUnusable(void)
 u8 IsImprisoned(u8 bank, u16 move)
 {
     u8 imprisionedMoves = 0;
-    u8 bankSide = GetBankSide(bank);
+    u8 bankSide = GetBattlerSide(bank);
     s32 i;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (bankSide != GetBankSide(i) && gStatuses3[i] & STATUS3_IMPRISIONED)
+        if (bankSide != GetBattlerSide(i) && gStatuses3[i] & STATUS3_IMPRISIONED)
         {
             s32 j;
             for (j = 0; j < 4; j++)
@@ -1597,7 +1597,7 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         r7 = sub_803FC34(bank);
-        if (GetBankSide(bank) == 0)
+        if (GetBattlerSide(bank) == 0)
             party = gPlayerParty;
         else
             party = gEnemyParty;
@@ -1611,7 +1611,7 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     }
     else
     {
-        if (GetBankSide(bank) == 1)
+        if (GetBattlerSide(bank) == 1)
         {
             r7 = GetBattlerAtPosition(1);
             r6 = GetBattlerAtPosition(3);
@@ -1697,14 +1697,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 
     if (gBankAttacker >= gNoOfAllBanks)
         gBankAttacker = bank;
-    if (GetBankSide(gBankAttacker) == 0)
+    if (GetBattlerSide(gBankAttacker) == 0)
         pokeAtk = &gPlayerParty[gBattlerPartyIndexes[gBankAttacker]];
     else
         pokeAtk = &gEnemyParty[gBattlerPartyIndexes[gBankAttacker]];
 
     if (gBankTarget >= gNoOfAllBanks)
         gBankTarget = bank;
-    if (GetBankSide(gBankTarget) == 0)
+    if (GetBattlerSide(gBankTarget) == 0)
         pokeDef = &gPlayerParty[gBattlerPartyIndexes[gBankTarget]];
     else
         pokeDef = &gEnemyParty[gBattlerPartyIndexes[gBankTarget]];
@@ -2451,10 +2451,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_CHECK_OTHER_SIDE: // 12
-            side = GetBankSide(bank);
+            side = GetBattlerSide(bank);
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (GetBankSide(i) != side && gBattleMons[i].ability == ability)
+                if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
                 {
                     gLastUsedAbility = ability;
                     effect = i + 1;
@@ -2462,10 +2462,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_CHECK_BANK_SIDE: // 13
-            side = GetBankSide(bank);
+            side = GetBattlerSide(bank);
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (GetBankSide(i) == side && gBattleMons[i].ability == ability)
+                if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
                 {
                     gLastUsedAbility = ability;
                     effect = i + 1;
@@ -2522,10 +2522,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_COUNT_OTHER_SIZE: // 16
-            side = GetBankSide(bank);
+            side = GetBattlerSide(bank);
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (GetBankSide(i) != side && gBattleMons[i].ability == ability)
+                if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
                 {
                     gLastUsedAbility = ability;
                     effect++;
@@ -2533,10 +2533,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_COUNT_BANK_SIDE: // 17
-            side = GetBankSide(bank);
+            side = GetBattlerSide(bank);
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (GetBankSide(i) == side && gBattleMons[i].ability == ability)
+                if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
                 {
                     gLastUsedAbility = ability;
                     effect++;
@@ -2692,7 +2692,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     u8 ppBonuses;
                     u16 move;
 
-                    if (GetBankSide(bank) == 0)
+                    if (GetBattlerSide(bank) == 0)
                         poke = &gPlayerParty[gBattlerPartyIndexes[bank]];
                     else
                         poke = &gEnemyParty[gBattlerPartyIndexes[bank]];
@@ -3376,16 +3376,16 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     switch (moveTarget)
     {
     case 0:
-        side = GetBankSide(gBankAttacker) ^ 1;
+        side = GetBattlerSide(gBankAttacker) ^ 1;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else
         {
-            side = GetBankSide(gBankAttacker);
+            side = GetBattlerSide(gBankAttacker);
             do
             {
                 targetBank = Random() % gNoOfAllBanks;
-            } while (targetBank == gBankAttacker || side == GetBankSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
+            } while (targetBank == gBankAttacker || side == GetBattlerSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
                 && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
                 && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
@@ -3405,12 +3405,12 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
             targetBank ^= 2;
         break;
     case 4:
-        side = GetBankSide(gBankAttacker) ^ 1;
+        side = GetBattlerSide(gBankAttacker) ^ 1;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & 4)
         {
-            if (GetBankSide(gBankAttacker) == 0)
+            if (GetBattlerSide(gBankAttacker) == 0)
             {
                 if (Random() & 1)
                     targetBank = GetBattlerAtPosition(1);
@@ -3446,7 +3446,7 @@ u8 IsMonDisobedient(void)
     s32 calc;
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK
-     || GetBankSide(gBankAttacker) == 1
+     || GetBattlerSide(gBankAttacker) == 1
      || !IsOtherTrainer(gBattleMons[gBankAttacker].otId, gBattleMons[gBankAttacker].otName))
 	return 0;
 

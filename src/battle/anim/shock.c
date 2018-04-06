@@ -18,7 +18,7 @@ void sub_80D6294(struct Sprite *sprite)
     sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
 
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y -= gBattleAnimArgs[1];

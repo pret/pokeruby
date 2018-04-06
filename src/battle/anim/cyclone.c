@@ -14,7 +14,7 @@ extern u8 gAnimBankTarget;
 void sub_80D0118(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
         sprite->pos1.y += 16;
 
     sprite->data[0] = gBattleAnimArgs[4];

@@ -207,7 +207,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
 {
     if (bank < gNoOfAllBanks)
     {
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
             if (!ewram17800[bank].substituteSprite)
                 BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[bank]], bank);
@@ -238,7 +238,7 @@ static void sub_807B184(u8 bank)
             posY = sub_8077F7C(bank);
         else
             posY = sub_8077F68(bank);
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
@@ -300,7 +300,7 @@ static void sub_807B508(u8 bank)
         gHealthboxIDs[bank] = healthboxID;
         sub_8043F44(bank);
         sub_8043DFC(healthboxID);
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
             sub_8045A5C(gHealthboxIDs[bank], &gEnemyParty[gBattlerPartyIndexes[bank]], 0);
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlerPartyIndexes[bank]], 10);
@@ -310,7 +310,7 @@ static void sub_807B508(u8 bank)
             nullsub_11(gHealthboxIDs[bank], 1);
         else
             nullsub_11(gHealthboxIDs[bank], 0);
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 sub_8043DB0(healthboxID);

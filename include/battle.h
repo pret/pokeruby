@@ -84,13 +84,13 @@ struct Trainer
     /*0x24*/ const void *party;
 };
 
-struct UnkBattleStruct1 // AI_Opponent_Info?
+struct BattleHistory
 {
-    /*0x00*/ u16 movesUsed[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
-    /*0x20*/ u8 unk20[2];
-    /*0x22*/ u8 unk22[2];
-    /*0x24*/ u16 items[4];
-    /*0x2C*/ u8 numOfItems;
+    /*0x00*/ u16 usedMoves[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
+    /*0x20*/ u8 abilities[MAX_BATTLERS_COUNT / 2];
+    /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT / 2];
+    /*0x24*/ u16 trainerItems[MAX_BATTLERS_COUNT];
+    /*0x2C*/ u8 numItems;
 };
 
 struct AI_Stack
@@ -350,7 +350,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1611F*/ u8 unk1611F;
 
     //u8 filler2[0x72E];
-    /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
+    /* 0x16A00 */ struct BattleHistory unk_2016A00_2;
 };
 
 struct StatsArray
@@ -557,7 +557,7 @@ struct WishFutureKnock
     u8 knockedOffPokes[2];
 };
 
-extern struct UnkBattleStruct1 unk_2016A00;
+extern struct BattleHistory unk_2016A00;
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern struct BattleResults gBattleResults;
 extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
@@ -830,7 +830,6 @@ void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
 void BattleStopLowHpSound(void);
 
-// asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);
 
 #endif // GUARD_BATTLE_H

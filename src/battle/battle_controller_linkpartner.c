@@ -1541,7 +1541,7 @@ void LinkPartnerHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
@@ -1630,7 +1630,7 @@ void sub_812071C(u8 taskId)
 
 void LinkPartnerHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBankSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         LinkPartnerBufferExecCompleted();
         return;

@@ -186,7 +186,7 @@ u8 GetBankPosition(u8 slot, u8 a2)
         }
         else
         {
-            if (GetBankSide(slot))
+            if (GetBattlerSide(slot))
             {
                 transform = &eTransformStatuses[slot];
                 if (!transform->species)
@@ -220,7 +220,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
     u8 ret;
     u16 var;
 
-    if (GetBankSide(slot) == 0 || IsContest())
+    if (GetBattlerSide(slot) == 0 || IsContest())
     {
         if (species == SPECIES_UNOWN)
         {
@@ -294,7 +294,7 @@ u8 sub_8077BFC(u8 slot, u16 species)
 u8 sub_8077DD8(u8 slot, u16 species)
 {
     u8 ret = 0;
-    if (GetBankSide(slot) == 1)
+    if (GetBattlerSide(slot) == 1)
     {
         if (!IsContest())
         {
@@ -314,7 +314,7 @@ u8 sub_8077E44(u8 slot, u16 species, u8 a3)
     u16 offset;
     u8 y;
 
-    if (GetBankSide(slot) == 0 || IsContest())
+    if (GetBattlerSide(slot) == 0 || IsContest())
     {
         offset = sub_8077BFC(slot, species);
     }
@@ -326,7 +326,7 @@ u8 sub_8077E44(u8 slot, u16 species, u8 a3)
     y = offset + gUnknown_0837F578[IS_DOUBLE_BATTLE()][GetBattlerPosition(slot)].field_1;
     if (a3)
     {
-        if (GetBankSide(slot) == 0)
+        if (GetBattlerSide(slot) == 0)
             y += 8;
         if (y > 104)
             y = 104;
@@ -374,7 +374,7 @@ u8 sub_8077F68(u8 slot)
 u8 sub_8077F7C(u8 slot)
 {
     u16 var;
-    if (GetBankSide(slot) != 0)
+    if (GetBattlerSide(slot) != 0)
         var = GetBankPosition(slot, 1) + 16;
     else
         var = GetBankPosition(slot, 1) + 17;
@@ -390,7 +390,7 @@ u8 sub_8077FC0(u8 slot)
     r6 = GetBankPosition(slot, 1);
     if (!IsContest())
     {
-        if (GetBankSide(slot) != 0)
+        if (GetBattlerSide(slot) != 0)
         {
             transform = &eTransformStatuses[slot];
             if (!transform->species) {
@@ -407,7 +407,7 @@ u8 sub_8077FC0(u8 slot)
             else
                 var = transform->species;
         }
-        if (GetBankSide(slot) != 0)
+        if (GetBattlerSide(slot) != 0)
             r6 -= sub_8077DD8(slot, var);
     }
     return r6;
@@ -760,7 +760,7 @@ void sub_807867C(struct Sprite *sprite, s16 a2)
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
             sprite->pos1.x -= a2;
         else
             sprite->pos1.x += a2;
@@ -820,7 +820,7 @@ void InitAnimSpritePos(struct Sprite *sprite, u8 a2)
     sprite->pos1.y += gBattleAnimArgs[1];
 }
 
-u8 GetBankSide(u8 slot)
+u8 GetBattlerSide(u8 slot)
 {
     return gBanksBySide[slot] & 1;
 }
@@ -856,7 +856,7 @@ bool8 IsBankSpritePresent(u8 slot)
     {
         if (gBanksBySide[slot] == 0xff)
             return FALSE;
-        if (GetBankSide(slot) != B_SIDE_PLAYER)
+        if (GetBattlerSide(slot) != B_SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattleMonPartyPositions[slot]], MON_DATA_HP) != 0)
                 return TRUE;
@@ -1421,7 +1421,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
         v2 = 1;
 
     InitAnimSpritePos(sprite, v1);
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];
@@ -1434,7 +1434,7 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite)
 void sub_80794A8(struct Sprite *sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
@@ -1474,7 +1474,7 @@ void sub_8079534(struct Sprite *sprite)
         sub_8078764(sprite, r4);
         slot = gAnimBankTarget;
     }
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     sub_8078764(sprite, r4);
     sprite->data[0] = gBattleAnimArgs[4];
@@ -1767,7 +1767,7 @@ u16 sub_8079B10(u8 sprite)
             }
             else
             {
-                if (!GetBankSide(i))
+                if (!GetBattlerSide(i))
                 {
                     transform = &eTransformStatuses[slot];
                     if (!transform->species)
@@ -2037,7 +2037,7 @@ s16 sub_807A100(u8 slot, u8 a2)
     }
     else
     {
-        if (!GetBankSide(slot))
+        if (!GetBattlerSide(slot))
         {
             transform = &eTransformStatuses[slot];
             if (!transform->species)
@@ -2176,7 +2176,7 @@ u8 sub_807A4A0(int bank, u8 sprite, int species)
 void sub_807A544(struct Sprite *sprite)
 {
     sub_8078650(sprite);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
@@ -2197,7 +2197,7 @@ void sub_807A544(struct Sprite *sprite)
 
 void sub_807A5C4(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         gBattleAnimArgs[3] *= -1;
@@ -2221,7 +2221,7 @@ void sub_807A5C4(struct Sprite *sprite)
 void sub_807A63C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
@@ -2238,7 +2238,7 @@ void sub_807A69C(u8 taskId)
     u16 dest;
     struct Task *task = &gTasks[taskId];
     task->data[0] = GetAnimBankSpriteId(0);
-    task->data[1] = (GetBankSide(gAnimBankAttacker)) ? -8 : 8;
+    task->data[1] = (GetBattlerSide(gAnimBankAttacker)) ? -8 : 8;
     task->data[2] = 0;
     task->data[3] = 0;
     gSprites[task->data[0]].pos2.x -= task->data[0];
@@ -2320,7 +2320,7 @@ void sub_807A8D4(struct Sprite *sprite)
 void sub_807A908(struct Sprite *sprite) {
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
-    if (!GetBankSide(gAnimBankAttacker))
+    if (!GetBattlerSide(gAnimBankAttacker))
         sprite->data[0] = 5;
     else
         sprite->data[0] = -10;
@@ -2346,7 +2346,7 @@ void sub_807A9BC(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[4];
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[5];
-    if (!GetBankSide(gAnimBankTarget))
+    if (!GetBattlerSide(gAnimBankTarget))
     {
         x = (u16)gBattleAnimArgs[4] + 30;
         sprite->pos1.x += x;

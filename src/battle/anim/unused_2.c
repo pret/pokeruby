@@ -49,7 +49,7 @@ void unref_sub_80CCB6C(struct Sprite* sprite)
 void sub_80CCC50(struct Sprite* sprite)
 {
     sprite->data[0] = gBattleAnimArgs[2];
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];

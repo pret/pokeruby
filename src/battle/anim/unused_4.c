@@ -28,7 +28,7 @@ void sub_80CD9D4(struct Sprite* sprite)
     case 0:
         sprite->data[1] = 0;
         sprite->data[2] = gBankSpriteIds[gAnimBankAttacker];
-        sprite->data[3] = GetBankSide(gAnimBankAttacker);
+        sprite->data[3] = GetBattlerSide(gAnimBankAttacker);
         sprite->data[4] = (sprite->data[3] != 0) ? 0x200 : -0x200;
         sprite->data[5] = 0;
         sub_8078E70(sprite->data[2], 0);

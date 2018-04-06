@@ -21,7 +21,7 @@ static void AnimLeechSeedSprouts(struct Sprite* sprite);
 void AnimLeechSeed(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }

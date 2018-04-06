@@ -13,7 +13,7 @@ extern u8 gAnimBankTarget;
 
 void sub_80D0930(struct Sprite* sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
     {
         StartSpriteAnim(sprite, 0);
         sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + 32;

@@ -24,7 +24,7 @@ void sub_80DC824(struct Sprite *sprite)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
     }
-    else if (!GetBankSide(gAnimBankTarget))
+    else if (!GetBattlerSide(gAnimBankTarget))
     {
         StartSpriteAffineAnim(sprite, 1);
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -52,7 +52,7 @@ void sub_80DC8F4(struct Sprite *sprite)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
         StartSpriteAffineAnim(sprite, 2);
     }
-    else if (!GetBankSide(gAnimBankTarget))
+    else if (!GetBattlerSide(gAnimBankTarget))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -112,13 +112,13 @@ static void sub_80DCA38(struct Sprite *sprite)
 void sub_80DCA70(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         sprite->pos1.x -= gBattleAnimArgs[0];
     else
         sprite->pos1.x += gBattleAnimArgs[0];
 
     sprite->pos1.y += gBattleAnimArgs[1];
-    if (!GetBankSide(gAnimBankTarget))
+    if (!GetBattlerSide(gAnimBankTarget))
         sprite->pos1.y += 8;
 
     sprite->callback = sub_80DCAEC;
@@ -193,7 +193,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker))
+        if (GetBattlerSide(gAnimBankAttacker))
         {
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
@@ -203,7 +203,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
 
     if (!IsContest())
     {
-        if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
+        if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
         {
             if (GetBattlerPosition(gAnimBankTarget) == 0 || GetBattlerPosition(gAnimBankTarget) == 1)
             {
@@ -247,7 +247,7 @@ void AnimMissileArc(struct Sprite *sprite)
 {
     InitAnimSpritePos(sprite, 1);
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];

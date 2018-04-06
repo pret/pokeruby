@@ -193,7 +193,7 @@ static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static void CheckWonderGuardAndLevitate(void);
 u8 GetBattlerPosition(u8 bank);
-u8 GetBankSide(u8 bank);
+u8 GetBattlerSide(u8 bank);
 u8 GetBattleBank(u8 bankValue);
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 bank_atk, u8 bank_def);
 static u8 AttacksThisTurn(u8 bank, u16 move); //Note: returns 1 if it's a charging turn, otherwise 2
@@ -1999,7 +1999,7 @@ static void atk0B_healthbarupdate(void)
             EmitHealthBarUpdate(0, gBattleMoveDamage);
             MarkBufferBankForExecution(gActiveBattler);
 
-            if (GetBankSide(gActiveBattler) == B_SIDE_PLAYER && gBattleMoveDamage > 0)
+            if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleMoveDamage > 0)
                 gBattleResults.unk5_0 = 1;
         }
     }
@@ -2729,8 +2729,8 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             break;
         case 31: //item steal
             {
-                u8 side = GetBankSide(gBankAttacker);
-                if (GetBankSide(gBankAttacker) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)) && gTrainerBattleOpponent != 0x400)
+                u8 side = GetBattlerSide(gBankAttacker);
+                if (GetBattlerSide(gBankAttacker) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)) && gTrainerBattleOpponent != 0x400)
                         {gBattlescriptCurrInstr++; return;}
                 if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)) && gTrainerBattleOpponent != 0x400 && (gWishFutureKnock.knockedOffPokes[side] & gBitTable[gBattlerPartyIndexes[gBankAttacker]]))
                         {gBattlescriptCurrInstr++; return;}
@@ -2832,7 +2832,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
                     {gBattlescriptCurrInstr++; return;}
             else
             {
-                u8 side = GetBankSide(gEffectBank);
+                u8 side = GetBattlerSide(gEffectBank);
                 gLastUsedItem = gBattleMons[gEffectBank].item;
                 gBattleMons[gEffectBank].item = 0;
                 gWishFutureKnock.knockedOffPokes[side] |= gBitTable[gBattlerPartyIndexes[gEffectBank]];
@@ -4499,11 +4499,11 @@ _0801F1A0: .4byte gBankAttacker\n\
 _0801F1A4:\n\
     ldr r4, _0801F254 @ =gBankAttacker\n\
     ldrb r0, [r4]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r6, r0, 24\n\
     ldrb r0, [r4]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -4924,7 +4924,7 @@ _0801F540:\n\
     cmp r0, 0\n\
     beq _0801F5DC\n\
     adds r0, r3, 0\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r6, r0, 24\n\
     ldr r1, _0801F5B8 @ =gLastUsedItem\n\
@@ -5090,7 +5090,7 @@ static void atk19_tryfaintmon(void)
 
             BattleScriptPop();
             gBattlescriptCurrInstr = r4;
-            gSideAffecting[GetBankSide(gActiveBattler)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
+            gSideAffecting[GetBattlerSide(gActiveBattler)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
         }
         else
         {
@@ -5126,7 +5126,7 @@ static void atk19_tryfaintmon(void)
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
             gBattlescriptCurrInstr = r4;
-            if (GetBankSide(gActiveBattler) == 0)
+            if (GetBattlerSide(gActiveBattler) == 0)
             {
                 gHitMarker |= HITMARKER_x400000;
                 if (gBattleResults.playerFaintCounter < 0xFF)
@@ -5153,7 +5153,7 @@ static void atk19_tryfaintmon(void)
             }
             if ((gStatuses3[gBankTarget] & STATUS3_GRUDGE)
              && !(gHitMarker & HITMARKER_GRUDGE)
-             && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget)
+             && GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget)
              && gBattleMons[gBankAttacker].hp != 0
              && gCurrentMove != MOVE_STRUGGLE)
             {
@@ -5382,7 +5382,7 @@ static void atk23_getexp(void)
     switch (gBattleStruct->getexpStateTracker)
     {
     case 0: // check if should receive exp at all
-        if (GetBankSide(gBank1) != B_SIDE_OPPONENT || (gBattleTypeFlags &
+        if (GetBattlerSide(gBank1) != B_SIDE_OPPONENT || (gBattleTypeFlags &
              (BATTLE_TYPE_LINK
               | BATTLE_TYPE_SAFARI
               | BATTLE_TYPE_BATTLE_TOWER
@@ -6783,7 +6783,7 @@ static void atk49_moveend(void)
         case 0: //rage check
             if (gBattleMons[gBankTarget].status2 & STATUS2_RAGE
                 && gBattleMons[gBankTarget].hp && gBankAttacker != gBankTarget
-                && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget)
+                && GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget)
                 && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) && TARGET_TURN_DAMAGED
                 && gBattleMoves[gCurrentMove].power && gBattleMons[gBankTarget].statStages[STAT_STAGE_ATK] <= 0xB)
             {
@@ -7070,11 +7070,11 @@ _08021958:\n\
     cmp r1, r4\n\
     beq _080219FE\n\
     adds r0, r1, 0\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     adds r4, r0, 0\n\
     ldr r1, _08021A0C @ =gBankTarget\n\
     ldrb r0, [r1]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r4, 24\n\
     lsls r0, 24\n\
     cmp r4, r0\n\
@@ -8327,7 +8327,7 @@ static void atk4D_switchindataupdate(void)
     gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].altAbility);
 
     // check knocked off item
-    i = GetBankSide(gActiveBattler);
+    i = GetBattlerSide(gActiveBattler);
     if (gWishFutureKnock.knockedOffPokes[i] & gBitTable[gBattlerPartyIndexes[gActiveBattler]])
     {
         gBattleMons[gActiveBattler].item = 0;
@@ -8357,7 +8357,7 @@ static void atk4E_switchinanim(void)
         return;
 
     gActiveBattler = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
-    if (GetBankSide(gActiveBattler) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER)))
+    if (GetBattlerSide(gActiveBattler) == 1 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER)))
     {
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), 2);
     }
@@ -8383,7 +8383,7 @@ static void atk4F_jumpifcantswitch(void)
     }
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (GetBankSide(gActiveBattler) == 1)
+        if (GetBattlerSide(gActiveBattler) == 1)
             party = gEnemyParty;
         else
             party = gPlayerParty;
@@ -8405,7 +8405,7 @@ static void atk4F_jumpifcantswitch(void)
     }
     else
     {
-        if (GetBankSide(gActiveBattler) == 1)
+        if (GetBattlerSide(gActiveBattler) == 1)
         {
             r7 = GetBattlerAtPosition(1);
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -9575,14 +9575,14 @@ static void atk52_switchineffects(void)
     gHitMarker &= ~(HITMARKER_FAINTED(gActiveBattler));
     gSpecialStatuses[gActiveBattler].flag40 = 0;
 
-    if (!(gSideAffecting[GetBankSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED) && (gSideAffecting[GetBankSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
+    if (!(gSideAffecting[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED) && (gSideAffecting[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
         && gBattleMons[gActiveBattler].type1 != TYPE_FLYING && gBattleMons[gActiveBattler].type2 != TYPE_FLYING && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
     {
         u8 spikesDmg;
 
-        gSideAffecting[GetBankSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
+        gSideAffecting[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
 
-        spikesDmg = (5 - gSideTimers[GetBankSide(gActiveBattler)].spikesAmount) * 2;
+        spikesDmg = (5 - gSideTimers[GetBattlerSide(gActiveBattler)].spikesAmount) * 2;
         gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (spikesDmg);
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
@@ -9606,7 +9606,7 @@ static void atk52_switchineffects(void)
 
         if (AbilityBattleEffects(0, gActiveBattler, 0, 0, 0) == 0 && ItemBattleEffects(0, gActiveBattler, 0) == 0)
         {
-            gSideAffecting[GetBankSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
+            gSideAffecting[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
 
             for (i = 0; i < gNoOfAllBanks; i++)
             {
@@ -9616,7 +9616,7 @@ static void atk52_switchineffects(void)
 
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                *(HP_ON_SWITCHOUT + GetBankSide(i)) = gBattleMons[i].hp;
+                *(HP_ON_SWITCHOUT + GetBattlerSide(i)) = gBattleMons[i].hp;
             }
 
             if (T2_READ_8(gBattlescriptCurrInstr + 1) == 5)
@@ -10275,7 +10275,7 @@ static void atk5F_8025B24(void)
 
 static void atk60_incrementgamestat(void)
 {
-    if (GetBankSide(gBankAttacker) == 0)
+    if (GetBattlerSide(gBankAttacker) == 0)
     {
         IncrementGameStat(T2_READ_8(gBattlescriptCurrInstr + 1));
     }
@@ -10291,7 +10291,7 @@ static void atk61_drawpartystatussummary(void)
         return;
 
     gActiveBattler = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -11004,7 +11004,7 @@ static void atk74_hpthresholds2(void)
     {
         gActiveBattler = GetBattleBank(T2_READ_8(gBattlescriptCurrInstr + 1));
         opposing_bank = gActiveBattler ^ 1;
-        hp_switchout = ewram160BCarr(GetBankSide(opposing_bank)); //gBattleStruct->HP_OnSwitchout[GetBankSide(opposing_bank)];
+        hp_switchout = ewram160BCarr(GetBattlerSide(opposing_bank)); //gBattleStruct->HP_OnSwitchout[GetBattlerSide(opposing_bank)];
         result = (hp_switchout - gBattleMons[opposing_bank].hp) * 100 / hp_switchout;
 
         if (gBattleMons[opposing_bank].hp >= hp_switchout)
@@ -11039,7 +11039,7 @@ static void atk76_various(void)
         {
             u8 side;
             gBankAttacker = gBankTarget;
-            side = GetBankSide(gBankAttacker) ^ 1;
+            side = GetBattlerSide(gBankAttacker) ^ 1;
             if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
                 gBankTarget = gSideTimers[side].followmeTarget;
             else
@@ -11757,7 +11757,7 @@ static void atk8F_forcerandomswitch(void)
         struct Pokemon* party;
         u8 valid;
         u8 val;
-        if (!GetBankSide(gBankTarget))
+        if (!GetBattlerSide(gBankTarget))
             party = gPlayerParty;
         else
             party = gEnemyParty;
@@ -12413,12 +12413,12 @@ static void atk97_tryinfatuating(void)
     struct Pokemon *attacker, *target;
     u16 atk_species, def_species;
     u32 atk_pid, def_pid;
-    if (!GetBankSide(gBankAttacker))
+    if (!GetBattlerSide(gBankAttacker))
         attacker = &gPlayerParty[gBattlerPartyIndexes[gBankAttacker]];
     else
         attacker = &gEnemyParty[gBattlerPartyIndexes[gBankAttacker]];
 
-    if (!GetBankSide(gBankTarget))
+    if (!GetBattlerSide(gBankTarget))
         target = &gPlayerParty[gBattlerPartyIndexes[gBankTarget]];
     else
         target = &gEnemyParty[gBattlerPartyIndexes[gBankTarget]];
@@ -12937,8 +12937,8 @@ static void atkA0_psywavedamageeffect(void)
 
 static void atkA1_counterdamagecalculator(void)
 {
-    u8 atk_side = GetBankSide(gBankAttacker);
-    u8 def_side = GetBankSide(gProtectStructs[gBankAttacker].physicalBank);
+    u8 atk_side = GetBattlerSide(gBankAttacker);
+    u8 def_side = GetBattlerSide(gProtectStructs[gBankAttacker].physicalBank);
     if (gProtectStructs[gBankAttacker].physicalDmg && atk_side != def_side && gBattleMons[gProtectStructs[gBankAttacker].physicalBank].hp)
     {
         gBattleMoveDamage = gProtectStructs[gBankAttacker].physicalDmg * 2;
@@ -12957,8 +12957,8 @@ static void atkA1_counterdamagecalculator(void)
 
 static void atkA2_mirrorcoatdamagecalculator(void) //a copy of atkA1 with the physical -> special field changes
 {
-    u8 atk_side = GetBankSide(gBankAttacker);
-    u8 def_side = GetBankSide(gProtectStructs[gBankAttacker].specialBank);
+    u8 atk_side = GetBattlerSide(gBankAttacker);
+    u8 def_side = GetBattlerSide(gProtectStructs[gBankAttacker].specialBank);
     if (gProtectStructs[gBankAttacker].specialDmg && atk_side != def_side && gBattleMons[gProtectStructs[gBankAttacker].specialBank].hp)
     {
         gBattleMoveDamage = gProtectStructs[gBankAttacker].specialDmg * 2;
@@ -13478,8 +13478,8 @@ static void atkAA_setdestinybond(void)
 
 static void TrySetDestinyBondToHappen(void)
 {
-    u8 atk_side = GetBankSide(gBankAttacker);
-    u8 def_side = GetBankSide(gBankTarget);
+    u8 atk_side = GetBattlerSide(gBankAttacker);
+    u8 def_side = GetBattlerSide(gBankTarget);
     if (gBattleMons[gBankTarget].status2 & STATUS2_DESTINY_BOND && atk_side != def_side && !(gHitMarker & HITMARKER_GRUDGE))
         gHitMarker |= HITMARKER_DESTINYBOND;
 }
@@ -13560,7 +13560,7 @@ static void atkAE_healpartystatus(void)
         int i;
 
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-        if (GetBankSide(gBankAttacker) == 0)
+        if (GetBattlerSide(gBankAttacker) == 0)
             party = gPlayerParty;
         else
             party = gEnemyParty;
@@ -13644,7 +13644,7 @@ static void atkAF_cursetarget(void)
 
 static void atkB0_trysetspikes(void)
 {
-    u8 side = GetBankSide(gBankAttacker) ^ 1;
+    u8 side = GetBattlerSide(gBankAttacker) ^ 1;
     if (gSideTimers[side].spikesAmount == 3)
     {
         gSpecialStatuses[gBankAttacker].flag20 = 1;
@@ -13860,14 +13860,14 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
 {
     if (gMultiHitCounter == 1)
     {
-        if (GetBankSide(gBankAttacker) == 0)
+        if (GetBattlerSide(gBankAttacker) == 0)
             gBankTarget = GetBattlerAtPosition(1);
         else
             gBankTarget = GetBattlerAtPosition(0);
     }
     else
     {
-        if (GetBankSide(gBankAttacker) == 0)
+        if (GetBattlerSide(gBankAttacker) == 0)
             gBankTarget = GetBattlerAtPosition(3);
         else
             gBankTarget = GetBattlerAtPosition(2);
@@ -13958,10 +13958,10 @@ static void atkBE_rapidspinfree(void) //rapid spin
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_LeechSeedFree;
     }
-    else if (gSideAffecting[GetBankSide(gBankAttacker)] & SIDE_STATUS_SPIKES)
+    else if (gSideAffecting[GetBattlerSide(gBankAttacker)] & SIDE_STATUS_SPIKES)
     {
-        gSideAffecting[GetBankSide(gBankAttacker)] &= ~(SIDE_STATUS_SPIKES);
-        gSideTimers[GetBankSide(gBankAttacker)].spikesAmount = 0;
+        gSideAffecting[GetBattlerSide(gBankAttacker)] &= ~(SIDE_STATUS_SPIKES);
+        gSideTimers[GetBattlerSide(gBankAttacker)].spikesAmount = 0;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_SpikesFree;
     }
@@ -14189,7 +14189,7 @@ static void atkC3_trysetfutureattack(void)
 static void atkC4_trydobeatup(void)
 {
     register struct Pokemon* party asm("r7");
-    if (GetBankSide(gBankAttacker) == 0)
+    if (GetBattlerSide(gBankAttacker) == 0)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -14241,7 +14241,7 @@ static void atkC4_trydobeatup(void)
     push {r6,r7}\n\
     ldr r0, _08029A8C @ =gBankAttacker\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     ldr r7, _08029A90 @ =gEnemyParty\n\
     cmp r0, 0\n\
@@ -14562,8 +14562,8 @@ static void atkC9_jumpifattackandspecialattackcannotfall(void) //memento
 
 static void atkCA_setforcedtarget(void) //follow me
 {
-    gSideTimers[GetBankSide(gBankAttacker)].followmeTimer = 1;
-    gSideTimers[GetBankSide(gBankAttacker)].followmeTarget = gBankAttacker;
+    gSideTimers[GetBattlerSide(gBankAttacker)].followmeTimer = 1;
+    gSideTimers[GetBattlerSide(gBankAttacker)].followmeTarget = gBankAttacker;
     gBattlescriptCurrInstr++;
 }
 
@@ -14645,9 +14645,9 @@ static void atkD1_trysethelpinghand(void)
 #ifdef NONMATCHING
 static void atkD2_tryswapitems(void)
 {
-    if ((GetBankSide(gBankAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == 0x400))
+    if ((GetBattlerSide(gBankAttacker) != 1 || gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER) || gTrainerBattleOpponent == 0x400))
     {
-        u8 side = GetBankSide(gBankAttacker);
+        u8 side = GetBattlerSide(gBankAttacker);
         if (gBattleTypeFlags)
     }
 
@@ -14667,7 +14667,7 @@ static void atkD2_tryswapitems(void)
     sub sp, 0x4\n\
     ldr r0, _0802A30C @ =gBankAttacker\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -14687,7 +14687,7 @@ static void atkD2_tryswapitems(void)
 _0802A24C:\n\
     ldr r4, _0802A30C @ =gBankAttacker\n\
     ldrb r0, [r4]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r2, r0, 24\n\
     ldr r0, _0802A310 @ =gBattleTypeFlags\n\
@@ -15102,7 +15102,7 @@ static void atkDB_tryimprision(void)
         PressurePPLoseOnUsingImprision(gBankAttacker);
         for (bank = 0; bank < gNoOfAllBanks; bank++)
         {
-            if (r8 != GetBankSide(bank))
+            if (r8 != GetBattlerSide(bank))
             {
                 int j;
                 for (j = 0; j < 4; j++)
@@ -15427,7 +15427,7 @@ static void atkE1_trygetintimidatetarget(void)
     u8 side;
 
     gBattleStruct->scriptingActive = ewram160DD;
-    side = GetBankSide(gBattleStruct->scriptingActive);
+    side = GetBattlerSide(gBattleStruct->scriptingActive);
     gBattleTextBuff1[0] = 0xFD;
     gBattleTextBuff1[1] = 9;
     gBattleTextBuff1[2] = gBattleMons[gBattleStruct->scriptingActive].ability;
@@ -15435,7 +15435,7 @@ static void atkE1_trygetintimidatetarget(void)
 
     for (;gBankTarget < gNoOfAllBanks; gBankTarget++)
     {
-        if (GetBankSide(gBankTarget) == side)
+        if (GetBattlerSide(gBankTarget) == side)
             continue;
         if (!(gAbsentBattlerFlags & gBitTable[gBankTarget]))
             break;
@@ -15665,7 +15665,7 @@ static void atkED_snatchsetbanks(void)
 
 static void atkEE_removelightscreenreflect(void) //brick break
 {
-    u8 side = GetBankSide(gBankAttacker) ^ 1;
+    u8 side = GetBattlerSide(gBankAttacker) ^ 1;
     if (gSideTimers[side].reflectTimer || gSideTimers[side].lightscreenTimer)
     {
         gSideAffecting[side] &= ~(SIDE_STATUS_REFLECT);

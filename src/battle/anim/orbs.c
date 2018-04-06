@@ -117,7 +117,7 @@ void sub_80CAA14(struct Sprite* sprite)
     StartSpriteAnim(sprite, a & 7);
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos1.x -= 20;
     }

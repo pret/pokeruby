@@ -16,7 +16,7 @@ static void sub_80CED78(struct Sprite* sprite);
 void sub_80CECE8(struct Sprite* sprite)
 {
     int a; 
-    if (GetBankSide(gAnimBankAttacker) == 1)
+    if (GetBattlerSide(gAnimBankAttacker) == 1)
     {
         a = gBattleAnimArgs[1]; 
         (u16)gBattleAnimArgs[1] = -a;

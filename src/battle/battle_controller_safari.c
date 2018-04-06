@@ -40,7 +40,7 @@ extern u16 gBattlerPartyIndexes[];
 extern u16 gUnknown_02024DE8;
 extern u8 gBattleOutcome;
 
-extern u8 GetBankSide(u8);
+extern u8 GetBattlerSide(u8);
 extern u8 GetBattlerAtPosition(u8);
 extern u8 GetBattlerPosition(u8);
 extern void LoadPlayerTrainerBankSprite();
@@ -471,7 +471,7 @@ void SafariHandlePrintString(void)
 
 void SafariHandlePrintStringPlayerOnly(void)
 {
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         SafariHandlePrintString();
     else
         SafariBufferExecCompleted();
@@ -629,7 +629,7 @@ void SafariHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;

@@ -25,7 +25,7 @@ void sub_80D1BA8(struct Sprite* sprite, u8 a, u8 b)
 void sub_80D1C08(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];

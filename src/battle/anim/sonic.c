@@ -26,7 +26,7 @@ void AnimSonicBoomProjectile(struct Sprite* sprite)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
-    else if (GetBankSide(gAnimBankAttacker) != 0)
+    else if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];

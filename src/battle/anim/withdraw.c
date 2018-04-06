@@ -25,7 +25,7 @@ void sub_80CF514(u8 taskId)
 {
     u8 a = gBankSpriteIds[gAnimBankAttacker];
     s16 b;
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
     {
         b = -gTasks[taskId].data[0];
     }

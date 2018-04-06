@@ -806,7 +806,7 @@ sub_812C720: @ 812C720
 	bl SetAverageBattlerPositions
 	ldr r0, _0812C788 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812C754
@@ -959,7 +959,7 @@ sub_812C848: @ 812C848
 	bne _0812C89C
 	ldr r0, _0812C888 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812C88C
@@ -1059,7 +1059,7 @@ sub_812C924: @ 812C924
 	lsrs r4, r0, 24
 	ldr r0, _0812C940 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2576,7 +2576,7 @@ sub_812D4B4: @ 812D4B4
 	adds r4, r0, 0
 	ldr r0, _0812D4CC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812D4D4
@@ -2610,7 +2610,7 @@ sub_812D4EC: @ 812D4EC
 	strh r0, [r4, 0x2E]
 	ldr r0, _0812D50C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812D510
@@ -3355,7 +3355,7 @@ _0812DAAE:
 	bne _0812DAF4
 	ldr r4, _0812DB0C @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3573,7 +3573,7 @@ _0812DC98: .4byte gBattle_BG1_Y
 _0812DC9C:
 	ldr r0, _0812DCB4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812DCC0
@@ -4378,7 +4378,7 @@ _0812E300:
 	strh r0, [r5, 0xE]
 	ldr r0, _0812E338 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4644,7 +4644,7 @@ _0812E50E:
 	strh r0, [r4, 0x32]
 	ldr r0, _0812E53C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812E540
@@ -4755,7 +4755,7 @@ _0812E5F8:
 	ldr r0, _0812E630 @ =gAnimBankTarget
 _0812E5FA:
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4972,7 +4972,7 @@ sub_812E7A0: @ 812E7A0
 	adds r4, r0, 0
 	ldr r0, _0812E7BC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -5016,7 +5016,7 @@ sub_812E7F0: @ 812E7F0
 	strh r0, [r4, 0x2E]
 	ldr r0, _0812E830 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812E834
@@ -5517,7 +5517,7 @@ _0812EBC2:
 	cmp r0, 0
 	bne _0812EBE8
 	ldrb r0, [r6, 0x1E]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsls r2, r5, 4
 	cmp r0, 0
@@ -6065,7 +6065,7 @@ _0812F000: .4byte gSharedMem + 0x19348
 _0812F004:
 	ldr r0, _0812F070 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812F0AC
@@ -6101,7 +6101,7 @@ _0812F004:
 	cmp r0, 0
 	bne _0812F0A4
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812F084
@@ -6173,7 +6173,7 @@ _0812F0AC:
 	cmp r0, 0
 	bne _0812F138
 	adds r0, r2, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812F120
@@ -6478,7 +6478,7 @@ _0812F342:
 	movs r0, 0x18
 	strh r0, [r4, 0x18]
 	adds r0, r5, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7251,7 +7251,7 @@ sub_812F948: @ 812F948
 	bl StartSpriteAffineAnim
 	ldr r0, _0812F9A4 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812F96E
@@ -7696,7 +7696,7 @@ sub_812FC68: @ 812FC68
 	strh r0, [r4, 0x14]
 _0812FCAC:
 	ldrb r0, [r2]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812FCDC
@@ -8250,7 +8250,7 @@ sub_81300F4: @ 81300F4
 	adds r5, r0, 0
 	ldr r6, _0813014C @ =gAnimBankAttacker
 	ldrb r0, [r6]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8315,7 +8315,7 @@ _08130172:
 _08130180:
 	ldr r0, _081301AC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _081301A0
@@ -8404,7 +8404,7 @@ _0813021C:
 _08130226:
 	ldr r5, _0813025C @ =gAnimBankAttacker
 	ldrb r0, [r5]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08130260
@@ -8942,7 +8942,7 @@ _081305C6:
 	bl InitAnimSpriteTranslationOverDuration
 	mov r1, r10
 	ldrb r0, [r1]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -9900,7 +9900,7 @@ _08130D88: .4byte 0x0000ffff
 _08130D8C:
 	ldr r0, _08130DA0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08130DA8
@@ -10165,7 +10165,7 @@ _08130F82:
 	ldrh r0, [r4, 0x3C]
 	lsls r0, 24
 	lsrs r0, 24
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -10552,7 +10552,7 @@ sub_8131264: @ 8131264
 	movs r1, 0x3
 	bl GetBankPosition
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08131290
@@ -10933,7 +10933,7 @@ sub_8131564: @ 8131564
 	adds r5, r0, 0
 	ldr r4, _08131588 @ =gAnimBankTarget
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131590
@@ -11490,7 +11490,7 @@ _08131990:
 	strh r0, [r6, 0xA]
 	ldr r0, _081319E0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -11582,7 +11582,7 @@ _08131A70: .4byte gAnimBankAttacker
 _08131A74:
 	ldr r4, _08131AD4 @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131B10
@@ -11795,7 +11795,7 @@ _08131C20:
 	strh r0, [r6, 0xA]
 	ldr r0, _08131C70 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -11852,7 +11852,7 @@ _08131C8E:
 	bne _08131D0E
 	ldr r0, _08131CE4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131CEC
@@ -11936,7 +11936,7 @@ _08131D40:
 	bl sub_807A0F4
 	ldr r0, _08131D94 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -11999,7 +11999,7 @@ _08131DC4:
 	mov r10, r0
 	ldrb r0, [r0]
 	str r2, [sp, 0x10]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	mov r9, r4
 	ldr r2, [sp, 0x10]
@@ -12145,7 +12145,7 @@ _08131ECA:
 	strb r0, [r2]
 	ldr r0, _08131F5C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12219,7 +12219,7 @@ _08131FA6:
 	strh r0, [r4, 0x32]
 	ldr r0, _08131FD0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131FD4
@@ -12480,7 +12480,7 @@ sub_813219C: @ 813219C
 	strh r0, [r4, 0xE]
 	ldr r0, _08132208 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -12663,7 +12663,7 @@ sub_8132318: @ 8132318
 	adds r4, r0, 0
 	ldr r0, _0813236C @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldrh r0, [r4, 0x2E]
 	ldrh r1, [r4, 0x30]
@@ -12707,7 +12707,7 @@ sub_8132370: @ 8132370
 	adds r4, r0, 0
 	ldr r0, _081323A8 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081323B4

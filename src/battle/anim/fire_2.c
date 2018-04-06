@@ -33,7 +33,7 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3);
 // arg 6: ? (todo: something related to which mon the pixel offsets are based on)
 void AnimEmberFlare(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget)
+    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget)
         && (gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
             || gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
@@ -191,7 +191,7 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[4] = gSprites[task->data[15]].pos1.y;
-    task->data[5] = GetBankSide(gAnimBankAttacker);
+    task->data[5] = GetBattlerSide(gAnimBankAttacker);
     task->data[6] = 0;
 
     sub_8078E70(task->data[15], 0);
@@ -317,7 +317,7 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3)
     u16 y = sub_80D5940(spriteId);
     u16 x = gSprites[spriteId].pos1.x;
 
-    if(!GetBankSide(gAnimBankAttacker))
+    if(!GetBattlerSide(gAnimBankAttacker))
     {
         x -= 0xC;
         sign = 1;

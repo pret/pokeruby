@@ -48,7 +48,7 @@ void sub_80D0AB8(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 2;
-    if (GetBankSide(gAnimBankAttacker) == 1)
+    if (GetBattlerSide(gAnimBankAttacker) == 1)
         task->data[2] *= -1;
 
     task->func = sub_80D0B3C;

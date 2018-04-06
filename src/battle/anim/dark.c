@@ -267,7 +267,7 @@ void sub_80E00EC(u8 taskId)
     task->data[14] = pos - 32;
     task->data[15] = pos + 32;
 
-    if (GetBankSide(gAnimBankAttacker) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER)
         task->data[8] = -12;
     else
         task->data[8] = -64;
@@ -442,7 +442,7 @@ void sub_80E03BC(u8 taskId)
         task->data[14] = pos - 4;
         task->data[15] = pos + 4;
 
-        if (GetBankSide(gAnimBankTarget) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
             task->data[8] = -12;
         else
             task->data[8] = -64;
@@ -864,7 +864,7 @@ void sub_80E0A4C(u8 taskId)
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+        if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
             species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gAnimBankAttacker]], MON_DATA_SPECIES);
         else
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gAnimBankAttacker]], MON_DATA_SPECIES);

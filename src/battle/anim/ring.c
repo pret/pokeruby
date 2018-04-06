@@ -38,7 +38,7 @@ void sub_80D0FD8(struct Sprite* sprite)
         else
             r4 = GetBankPosition(bank, 2);
 
-        if (GetBankSide(bank) != 0)
+        if (GetBattlerSide(bank) != 0)
             gBattleAnimArgs[0] -= (sp0 - r4) - gBattleAnimArgs[0];  // This is weird.
         else
             gBattleAnimArgs[0] = sp0 - r4;
@@ -90,7 +90,7 @@ void sub_80D10B8(struct Sprite* sprite)
         sp4 = 3;
     }
 
-    if (GetBankSide(bankr7) != 0)
+    if (GetBattlerSide(bankr7) != 0)
     {
         r9 = GetBankPosition(bankr7, r10) + gBattleAnimArgs[0];
         if (IsAnimBankSpriteVisible(bankr8 ^ 2))
@@ -126,7 +126,7 @@ void sub_80D10B8(struct Sprite* sprite)
         sp1 = GetBankPosition(bankr8, sp4);
     }
 
-    if (GetBankSide(bankr8))
+    if (GetBattlerSide(bankr8))
         sp0 += gBattleAnimArgs[3];
     else
         sp0 -= gBattleAnimArgs[3];

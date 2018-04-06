@@ -3558,7 +3558,7 @@ void sub_8010800(void)
 #if DEBUG
 void debug_sub_80138CC(void)
 {
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
     {
         switch (gSharedMem[0x160FD])
         {
@@ -3755,7 +3755,7 @@ void SwitchInClearSetData(void)
 
         for (i = 0; i < gNoOfAllBanks; i++)
         {
-            if (GetBankSide(gActiveBattler) != GetBankSide(i)
+            if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
              && (gDisableStructs[i].bankWithSureHit == gActiveBattler))
             {
@@ -3924,7 +3924,7 @@ void sub_8011384(void)
         for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
         {
             if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-             && GetBankSide(gActiveBattler) == 0)
+             && GetBattlerSide(gActiveBattler) == 0)
             {
                 MEMSET_ALT(&gBattleMons[gActiveBattler], 0, 0x58, i, ptr);
             }
@@ -3936,7 +3936,7 @@ void sub_8011384(void)
                 gBattleMons[gActiveBattler].type1 = gBaseStats[gBattleMons[gActiveBattler].species].type1;
                 gBattleMons[gActiveBattler].type2 = gBaseStats[gBattleMons[gActiveBattler].species].type2;
                 gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].altAbility);
-                r0 = GetBankSide(gActiveBattler);
+                r0 = GetBattlerSide(gActiveBattler);
                 ewram160BC[r0] = gBattleMons[gActiveBattler].hp;
                 for (i = 0; i < 8; i++)
                     gBattleMons[gActiveBattler].statStages[i] = 6;
@@ -3956,13 +3956,13 @@ void sub_8011384(void)
                     EmitTrainerThrow(0);
                     MarkBufferBankForExecution(gActiveBattler);
                 }
-                if (GetBankSide(gActiveBattler) == 1
+                if (GetBattlerSide(gActiveBattler) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                     GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), 2);
             }
             else
             {
-                if (GetBankSide(gActiveBattler) == 1
+                if (GetBattlerSide(gActiveBattler) == 1
                  && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 {
                     GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), 2);
@@ -4114,7 +4114,7 @@ void bc_801362C(void)
     {
         for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
         {
-            if (GetBankSide(gActiveBattler) == 1
+            if (GetBattlerSide(gActiveBattler) == 1
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
                 GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), 2);
         }
@@ -4169,7 +4169,7 @@ void unref_sub_8011A68(void)
     {
         for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
         {
-            if (GetBankSide(gActiveBattler) == 0)
+            if (GetBattlerSide(gActiveBattler) == 0)
             {
                 EmitSendOutPoke(0, gBattlerPartyIndexes[gActiveBattler], 0);
                 MarkBufferBankForExecution(gActiveBattler);
@@ -4348,10 +4348,10 @@ u8 CanRunFromBattle(void)
         return 0;
     if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
         return 0;
-    r6 = GetBankSide(gActiveBattler);
+    r6 = GetBattlerSide(gActiveBattler);
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (r6 != GetBankSide(i)
+        if (r6 != GetBattlerSide(i)
          && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
         {
             ewram16003 = i;
@@ -4359,7 +4359,7 @@ u8 CanRunFromBattle(void)
             gBattleCommunication[5] = 2;
             return 2;
         }
-        if (r6 != GetBankSide(i)
+        if (r6 != GetBattlerSide(i)
          && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
          && gBattleMons[gActiveBattler].type1 != 2
          && gBattleMons[gActiveBattler].type2 != 2
@@ -6017,7 +6017,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     }
 
     // Only give badge speed boost to the player's mon.
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBankSide(bank1) == 0)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(bank1) == 0)
         bank1AdjustedSpeed = (bank1AdjustedSpeed * 110) / 100;
 
     if (heldItemEffect == HOLD_EFFECT_MACHO_BRACE)
@@ -6045,7 +6045,7 @@ u8 GetWhoStrikesFirst(u8 bank1, u8 bank2, bool8 ignoreMovePriorities)
     }
 
     // Only give badge speed boost to the player's mon.
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBankSide(bank2) == 0)
+    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && FlagGet(FLAG_BADGE03_GET) && GetBattlerSide(bank2) == 0)
     {
         bank2AdjustedSpeed = (bank2AdjustedSpeed * 110) / 100;
     }
@@ -6427,7 +6427,7 @@ void HandleEndTurn_FinishBattle(void)
         {
             for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
             {
-                if (GetBankSide(gActiveBattler) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
                 {
                     if (gBattleResults.poke1Species == SPECIES_NONE)
                     {
@@ -6618,16 +6618,16 @@ void HandleAction_UseMove(void)
         gCurrentMove = gChosenMove = gBattleMons[gBankAttacker].moves[gCurrMovePos];
     }
 
-    if (GetBankSide(gBankAttacker) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gBankAttacker) == B_SIDE_PLAYER)
         gBattleResults.lastUsedMove = gCurrentMove;
     else
         gBattleResults.opponentMove = gCurrentMove;
 
     // choose target
-    side = GetBankSide(gBankAttacker) ^ BIT_SIDE;
+    side = GetBattlerSide(gBankAttacker) ^ BIT_SIDE;
     if (gSideTimers[side].followmeTimer != 0
         && gBattleMoves[gCurrentMove].target == MOVE_TARGET_SELECTED
-        && GetBankSide(gBankAttacker) != GetBankSide(gSideTimers[side].followmeTarget)
+        && GetBattlerSide(gBankAttacker) != GetBattlerSide(gSideTimers[side].followmeTarget)
         && gBattleMons[gSideTimers[side].followmeTarget].hp != 0)
     {
         gBankTarget = gSideTimers[side].followmeTarget;
@@ -6639,10 +6639,10 @@ void HandleAction_UseMove(void)
              && gBattleMons[ewram16010arr(gBankAttacker)].ability != ABILITY_LIGHTNING_ROD
              && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {
-        side = GetBankSide(gBankAttacker);
+        side = GetBattlerSide(gBankAttacker);
         for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
         {
-            if (side != GetBankSide(gActiveBattler)
+            if (side != GetBattlerSide(gActiveBattler)
                 && ewram16010arr(gBankAttacker) != gActiveBattler
                 && gBattleMons[gActiveBattler].ability == ABILITY_LIGHTNING_ROD
                 && BankGetTurnOrder(gActiveBattler) < var)
@@ -6654,7 +6654,7 @@ void HandleAction_UseMove(void)
         {
             if (gBattleMoves[gChosenMove].target & MOVE_TARGET_RANDOM)
             {
-                if (GetBankSide(gBankAttacker) == B_SIDE_PLAYER)
+                if (GetBattlerSide(gBankAttacker) == B_SIDE_PLAYER)
                 {
                     if (Random() & 1)
                         gBankTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -6676,7 +6676,7 @@ void HandleAction_UseMove(void)
 
             if (gAbsentBattlerFlags & gBitTable[gBankTarget])
             {
-                if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+                if (GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget))
                 {
                     gBankTarget = GetBattlerAtPosition(GetBattlerPosition(gBankTarget) ^ BIT_FLANK);
                 }
@@ -6699,7 +6699,7 @@ void HandleAction_UseMove(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
              && gBattleMoves[gChosenMove].target & MOVE_TARGET_RANDOM)
     {
-        if (GetBankSide(gBankAttacker) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gBankAttacker) == B_SIDE_PLAYER)
         {
             if (Random() & 1)
                 gBankTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -6715,7 +6715,7 @@ void HandleAction_UseMove(void)
         }
 
         if (gAbsentBattlerFlags & gBitTable[gBankTarget]
-            && GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+            && GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget))
         {
             gBankTarget = GetBattlerAtPosition(GetBattlerPosition(gBankTarget) ^ BIT_FLANK);
         }
@@ -6725,7 +6725,7 @@ void HandleAction_UseMove(void)
         gBankTarget = ewram16010arr(gBankAttacker);
         if (gAbsentBattlerFlags & gBitTable[gBankTarget])
         {
-            if (GetBankSide(gBankAttacker) != GetBankSide(gBankTarget))
+            if (GetBattlerSide(gBankAttacker) != GetBattlerSide(gBankTarget))
             {
                 gBankTarget = GetBattlerAtPosition(GetBattlerPosition(gBankTarget) ^ BIT_FLANK);
             }
@@ -6777,7 +6777,7 @@ void HandleAction_UseItem(void)
     {
         gBattlescriptCurrInstr = gBattlescriptsForRunningByItem[0];
     }
-    else if (GetBankSide(gBankAttacker) == B_SIDE_PLAYER)
+    else if (GetBattlerSide(gBankAttacker) == B_SIDE_PLAYER)
     {
         gBattlescriptCurrInstr = gBattlescriptsForUsingItem[0];
     }
@@ -6919,7 +6919,7 @@ _08014844: .4byte gBattlescriptCurrInstr\n\
 _08014848: .4byte gBattlescriptsForRunningByItem\n\
 _0801484C:\n\
     ldrb r0, [r4]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0801486C\n\
@@ -7272,7 +7272,7 @@ void HandleAction_Run(void)
 
         for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
         {
-            if (GetBankSide(gActiveBattler) == B_SIDE_PLAYER)
+            if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 if (gActionForBanks[gActiveBattler] == ACTION_RUN)
                     gBattleOutcome |= BATTLE_LOST;
@@ -7288,7 +7288,7 @@ void HandleAction_Run(void)
     }
     else
     {
-        if (GetBankSide(gBankAttacker) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gBankAttacker) == B_SIDE_PLAYER)
         {
             if (!TryRunFromBattle(gBankAttacker)) // failed to run away
             {

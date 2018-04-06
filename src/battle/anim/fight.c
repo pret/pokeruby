@@ -50,7 +50,7 @@ void sub_080B08A0(struct Sprite *sprite)
 
 void sub_80D902C(struct Sprite *sprite)
 {
-    if (gBattleAnimArgs[7] == 1 && GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (gBattleAnimArgs[7] == 1 && GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
@@ -201,7 +201,7 @@ void sub_80D9378(struct Sprite *sprite)
 
     sub_8078764(sprite, 1);
 
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[3];
@@ -538,7 +538,7 @@ void sub_80D9A38(struct Sprite *sprite)
 
     if (IsContest())
         sprite->oam.matrixNum |= 0x8;
-    else if (GetBankSide(bank) == B_SIDE_PLAYER)
+    else if (GetBattlerSide(bank) == B_SIDE_PLAYER)
         sprite->oam.matrixNum |= 0x18;
 
     sprite->data[0] = 16;
@@ -572,7 +572,7 @@ void sub_80D9B48(struct Sprite *sprite)
     sprite->data[4] = gBattleAnimArgs[2];
 
     turn = gAnimMoveTurn;
-    if (GetBankSide(gAnimBankTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
         turn++;
 
     if (turn & 1)
@@ -598,7 +598,7 @@ void sub_80D9BD4(struct Sprite *sprite)
     {
         StartSpriteAnim(sprite, 2);
     }
-    else if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    else if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         StartSpriteAnim(sprite, 1);
     }
@@ -644,7 +644,7 @@ void sub_80D9C80(u8 taskId)
 
     task->data[10] += 2816;
 
-    if (GetBankSide(gAnimBankTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
         gBattle_BG3_X += task->data[9] >> 8;
     else
         gBattle_BG3_X -= task->data[9] >> 8;

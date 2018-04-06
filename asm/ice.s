@@ -335,7 +335,7 @@ sub_80D792C: @ 80D792C
 	strh r0, [r4, 0x32]
 	ldr r0, _080D7964 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D796C
@@ -409,7 +409,7 @@ _080D79D0:
 	bl SetAverageBattlerPositions
 	ldr r0, _080D7A1C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D79F6
@@ -523,7 +523,7 @@ _080D7AB4:
 _080D7AC6:
 	ldr r0, _080D7AE4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7AEC
@@ -649,7 +649,7 @@ sub_80D7BA0: @ 80D7BA0
 	strh r0, [r4, 0x2E]
 	ldr r0, _080D7BFC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldr r1, _080D7C00 @ =0x0000ffec
 	cmp r0, 0
@@ -687,7 +687,7 @@ sub_80D7C08: @ 80D7C08
 	adds r4, r0, 0
 	ldr r0, _080D7C5C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	ldr r1, _080D7C60 @ =0x0000ffec
 	cmp r0, 0
@@ -836,7 +836,7 @@ _080D7D20:
 _080D7D32:
 	ldr r0, _080D7D54 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7D5C
@@ -1039,7 +1039,7 @@ _080D7EAC:
 	bl SetAverageBattlerPositions
 	ldr r0, _080D7EF0 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7ED2
@@ -1108,7 +1108,7 @@ _080D7F34:
 	movs r1, 0
 	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7F60
@@ -1154,7 +1154,7 @@ _080D7F92:
 	movs r1, 0
 	bl SetAverageBattlerPositions
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D7FBC
@@ -1201,7 +1201,7 @@ _080D7FF6:
 	strh r0, [r5, 0x3A]
 	ldr r0, _080D803C @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D800C
@@ -3032,7 +3032,7 @@ _080D8E6A:
 	strh r0, [r5, 0x2E]
 	ldr r0, _080D8ED4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D8E92

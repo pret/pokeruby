@@ -51,7 +51,7 @@ void sub_80D1638(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[12] = 3;
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
     {
         task->data[13] = 0xFFFF;
         task->data[14] = 8;

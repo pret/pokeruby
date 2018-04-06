@@ -1085,7 +1085,7 @@ sub_80D4394: @ 80D4394
 	push {r4,r5,lr}
 	ldr r4, _080D43B8 @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D43C8
@@ -1392,7 +1392,7 @@ sub_80D45D8: @ 80D45D8
 	strh r0, [r4, 0xA]
 	ldr r0, _080D460C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D4610
@@ -1803,7 +1803,7 @@ sub_80D48F4: @ 80D48F4
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2

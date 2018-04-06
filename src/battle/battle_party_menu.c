@@ -145,7 +145,7 @@ static void sub_8094A74(u8 arg[3], u8 player_number, u32 arg3)
 {
     int i, j;
     u8 temp[6];
-    if (!GetBankSide(arg3))
+    if (!GetBattlerSide(arg3))
     {
         i = GetBattlerAtPosition(0);
         j = GetBattlerAtPosition(2);
@@ -664,7 +664,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
     }
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (GetBankSide(i) == 0
+        if (GetBattlerSide(i) == 0
          && sub_8094C20(partySelection) == gBattlerPartyIndexes[i])
         {
             sub_806D5A4();

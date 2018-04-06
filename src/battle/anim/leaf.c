@@ -51,7 +51,7 @@ void sub_80CAF20(struct Sprite* sprite)
 
 void sub_80CAF6C(struct Sprite* sprite)
 {
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos2.x = -Sin(sprite->data[0], 0x19);
     }

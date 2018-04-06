@@ -153,7 +153,7 @@ _080D3920:\n\
     strb r0, [r2]\n\
     ldr r0, _080D39A0 @ =gAnimBankAttacker\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -276,7 +276,7 @@ _080D3A90: .4byte gBattle_BG1_Y\n\
 _080D3A94:\n\
     ldr r0, _080D3AC4 @ =gAnimBankAttacker\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r1, r0, 24\n\
     cmp r1, 0x1\n\

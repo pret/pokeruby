@@ -357,7 +357,7 @@ static void sub_8046464(u8 taskId)
     }
     r8 = gTasks[taskId].data[2];
     r5 = gTasks[taskId].data[3];
-    if (GetBankSide(r5) != 0)
+    if (GetBattlerSide(r5) != 0)
         ball = GetMonData(&gEnemyParty[gBattlerPartyIndexes[r5]], MON_DATA_POKEBALL);
     else
         ball = GetMonData(&gPlayerParty[gBattlerPartyIndexes[r5]], MON_DATA_POKEBALL);
@@ -711,7 +711,7 @@ static void sub_8046C78(struct Sprite *sprite)
         u16 r4_2;
         u8 taskId;
 
-        if (GetBankSide(r5) != 0)
+        if (GetBattlerSide(r5) != 0)
         {
             pkmn = &gEnemyParty[gBattlerPartyIndexes[r5]];
             r8 = 25;
@@ -1102,7 +1102,7 @@ void sub_804777C(u8 a)
     sprite->pos2.x = 0x73;
     sprite->pos2.y = 0;
     sprite->callback = sub_8047830;
-    if (GetBankSide(a) != 0)
+    if (GetBattlerSide(a) != 0)
     {
         sprite->data[0] = -sprite->data[0];
         sprite->data[1] = -sprite->data[1];
@@ -1187,7 +1187,7 @@ void sub_804794C(u8 a)
 
 static u16 sub_8047978(u8 a)
 {
-    if (GetBankSide(a) == 0)
+    if (GetBattlerSide(a) == 0)
         return GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_POKEBALL);
     else
         return GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_POKEBALL);

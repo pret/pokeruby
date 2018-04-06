@@ -16,7 +16,7 @@ void sub_80D2D68(struct Sprite* sprite)
     int var1;
     u8 slot = gBattleAnimArgs[0] == 0 ? gAnimBankAttacker : gAnimBankTarget;
 
-    if (GetBankSide(slot) == 1)
+    if (GetBattlerSide(slot) == 1)
     {
         gBattleAnimArgs[1] *= -1;
     }

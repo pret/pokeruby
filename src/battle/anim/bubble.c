@@ -19,7 +19,7 @@ void sub_80D31C8(struct Sprite* sprite)
 {
     u8 newSpriteId;
 
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) - gBattleAnimArgs[0];
         sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[1];
@@ -32,7 +32,7 @@ void sub_80D31C8(struct Sprite* sprite)
 
     sprite->animPaused = 1;
 
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }

@@ -59,10 +59,10 @@ void unref_sub_80CE260(u8 taskId)
     u8 i;
     for (i = 0; i < gNoOfAllBanks; i++)
     {
-        if (gBattleAnimArgs[0] == 1 && GetBankSide(i) == 0)
+        if (gBattleAnimArgs[0] == 1 && GetBattlerSide(i) == 0)
             sub_8043DB0(gHealthboxIDs[i]);
 
-        if (gBattleAnimArgs[1] == 1 && GetBankSide(i) == 1)
+        if (gBattleAnimArgs[1] == 1 && GetBattlerSide(i) == 1)
             sub_8043DB0(gHealthboxIDs[i]);
     }
 

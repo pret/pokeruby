@@ -19,7 +19,7 @@ void sub_80D09C0(struct Sprite* sprite)
     else
         bank = gAnimBankTarget;
 
-    if (GetBankSide(bank) == 1)
+    if (GetBattlerSide(bank) == 1)
     {
         gBattleAnimArgs[1] *= -1;
     }

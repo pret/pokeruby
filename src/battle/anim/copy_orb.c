@@ -16,7 +16,7 @@ void sub_80CB4CC(struct Sprite* sprite)
     {
     case 0:
     {
-        if (GetBankSide(gAnimBankTarget) == 0)
+        if (GetBattlerSide(gAnimBankTarget) == 0)
         {
             s16 a = gBattleAnimArgs[0];
             gBattleAnimArgs[0] = -a;

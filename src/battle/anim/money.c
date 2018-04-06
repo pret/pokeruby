@@ -22,7 +22,7 @@ void sub_80CFE9C(struct Sprite* sprite)
     InitAnimSpritePos(sprite, 1);
     r6 = GetBankPosition(gAnimBankTarget, 2);
     r7 = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     r6 += gBattleAnimArgs[2];
@@ -47,7 +47,7 @@ void sub_80CFF68(struct Sprite* sprite)
 {
     sprite->data[0] += 0x80;
     sprite->pos2.x = sprite->data[0] >> 8;
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
         sprite->pos2.x = -sprite->pos2.x;
 
     sprite->pos2.y = Sin(sprite->data[1], sprite->data[2]);

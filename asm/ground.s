@@ -128,7 +128,7 @@ sub_80E1004: @ 80E1004
 	bl sub_8078764
 	ldr r0, _080E1064 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E1024

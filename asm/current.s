@@ -188,7 +188,7 @@ sub_80D65DC: @ 80D65DC
 	beq _080D65FE
 	ldr r0, _080D664C @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D6606
@@ -266,7 +266,7 @@ _080D667E:
 	cmp r0, 0
 	beq _080D669C
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D66A4
@@ -1220,7 +1220,7 @@ sub_80D6DD8: @ 80D6DD8
 	movs r0, 0x10
 	strh r0, [r5, 0x3C]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1339,7 +1339,7 @@ _080D6ED0:
 	lsrs r0, 24
 	strh r0, [r5, 0x24]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D6F0C
@@ -1515,7 +1515,7 @@ _080D703A:
 _080D703C:
 	ldr r4, _080D707C @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2

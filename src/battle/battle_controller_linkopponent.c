@@ -92,7 +92,7 @@ extern void sub_8037FAC(void);
 extern void move_anim_start_t2_for_situation();
 extern void dp01t_0F_4_move_anim(void);
 extern void sub_8047858();
-extern u8 GetBankSide(u8);
+extern u8 GetBattlerSide(u8);
 extern void StartBattleIntroAnim();
 extern void sub_803A3A8(struct Sprite *);
 extern void sub_8044CA0(u8);
@@ -1596,7 +1596,7 @@ void LinkOpponentHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
@@ -1678,7 +1678,7 @@ void sub_803A3A8(struct Sprite *sprite)
 
 void LinkOpponentHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBankSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         LinkOpponentBufferExecCompleted();
         return;

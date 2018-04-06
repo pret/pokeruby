@@ -44,7 +44,7 @@ void sub_80D9DF0(struct Sprite *sprite)
     InitAnimSpritePos(sprite, 1);
     SetAverageBattlerPositions(gAnimBankTarget, 1, &l1, &l2);
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         gBattleAnimArgs[4] = -gBattleAnimArgs[4];
 
     sprite->data[0] = gBattleAnimArgs[2];
@@ -94,7 +94,7 @@ void sub_80D9F14(struct Sprite *sprite)
 {
     SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
     sprite->pos1.x += gBattleAnimArgs[0];
@@ -124,7 +124,7 @@ void AnimBubbleEffect(struct Sprite *sprite)
     {
         SetAverageBattlerPositions(gAnimBankTarget, TRUE, &sprite->pos1.x, &sprite->pos1.y);
 
-        if (GetBankSide(gAnimBankAttacker))
+        if (GetBattlerSide(gAnimBankAttacker))
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
         sprite->pos1.x += gBattleAnimArgs[0];

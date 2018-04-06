@@ -38,7 +38,7 @@ void sub_80DC5F4(u8 taskId);
 
 void sub_80DB74C(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) == B_SIDE_PLAYER || IsContest())
+    if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER || IsContest())
     {
         sprite->oam.priority = 2;
         sprite->subpriority = 200;
@@ -62,7 +62,7 @@ void sub_80DB74C(struct Sprite *sprite)
 
     if (!IsContest() && IsDoubleBattle())
     {
-        if (GetBankSide(gAnimBankAttacker) == B_SIDE_PLAYER)
+        if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER)
         {
             sprite->pos1.x = 72;
             sprite->pos1.y = 80;
@@ -75,7 +75,7 @@ void sub_80DB74C(struct Sprite *sprite)
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+        if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
         sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0) + gBattleAnimArgs[0];
@@ -178,7 +178,7 @@ void sub_80DBA4C(struct Sprite *sprite)
 
         if (!IsContest() && IsDoubleBattle())
         {
-            if (GetBankSide(gAnimBankAttacker) == B_SIDE_PLAYER)
+            if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER)
             {
                 sprite->pos1.x = 72 - gBattleAnimArgs[0];
                 sprite->pos1.y = gBattleAnimArgs[1] + 80;
@@ -211,7 +211,7 @@ void sub_80DBAF4(struct Sprite *sprite)
     sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
 
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         StartSpriteAnim(sprite, 1);
         sprite->pos1.x -= 40;
@@ -234,7 +234,7 @@ void sub_80DBB70(struct Sprite *sprite)
     s16 x = sub_807A100(gAnimBankAttacker, 1) /  2;
     s16 y = sub_807A100(gAnimBankAttacker, 0) / -2;
 
-    if (GetBankSide(gAnimBankAttacker) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_OPPONENT)
     {
         x = -x;
     }
@@ -306,7 +306,7 @@ void sub_80DBCFC(u8 taskId)
     task->data[0] = spriteId;
     task->data[1] = 0;
     task->data[2] = 0;
-    task->data[3] = GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER ? 4 : 8;
+    task->data[3] = GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER ? 4 : 8;
 
     sub_80798F4(task, task->data[0], &gUnknown_083DA8C4);
     task->func = sub_80DBD58;

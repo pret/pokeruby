@@ -101,7 +101,7 @@ extern bool8 mplay_80342A4(u8);
 extern void move_anim_start_t2_for_situation();
 extern void bx_blink_t1(void);
 extern void sub_8047858();
-extern u8 GetBankSide(u8);
+extern u8 GetBattlerSide(u8);
 extern void StartBattleIntroAnim();
 extern void oamt_add_pos2_onto_pos1();
 extern void StartTranslateAnimSpriteByDeltas(struct Sprite *);
@@ -2773,7 +2773,7 @@ void PlayerHandlePrintString(void)
 
 void PlayerHandlePrintStringPlayerOnly(void)
 {
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         PlayerHandlePrintString();
     else
         PlayerBufferExecCompleted();
@@ -3041,7 +3041,7 @@ void PlayerHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
@@ -3139,7 +3139,7 @@ void task05_08033660(u8 taskId)
 
 void PlayerHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBankSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         PlayerBufferExecCompleted();
     }

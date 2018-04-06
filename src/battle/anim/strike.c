@@ -37,7 +37,7 @@ void sub_80CE670(struct Sprite* sprite)
         sprite->data[4] = sprite->pos1.y << 7;
         sprite->data[5] = -0xA00 / sprite->data[1];
     }
-    else if (GetBankSide(gAnimBankAttacker) == 0)
+    else if (GetBattlerSide(gAnimBankAttacker) == 0)
     {
         sprite->pos1.x -= 40;
         sprite->pos1.y += 20;

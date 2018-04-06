@@ -35,7 +35,7 @@ void sub_80CB3A8(u8 taskId)
     u8 spriteId = GetAnimBankSpriteId(1);
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
     gSprites[spriteId].pos2.x = gTasks[taskId].data[10] >> 8;
-    if (GetBankSide(gAnimBankTarget))
+    if (GetBattlerSide(gAnimBankTarget))
     {
         gSprites[spriteId].pos2.x = -gSprites[spriteId].pos2.x;
     }

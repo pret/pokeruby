@@ -82,7 +82,7 @@ extern void sub_80326EC();
 extern void sub_8031F24(void);
 extern void sub_80324BC();
 extern void BufferStringBattle();
-extern u8 GetBankSide(u8);
+extern u8 GetBattlerSide(u8);
 extern void sub_80304A8(void);
 extern void sub_8047858();
 extern void StartBattleIntroAnim();
@@ -1252,7 +1252,7 @@ void WallyHandlePrintString(void)
 
 void WallyHandlePrintStringPlayerOnly(void)
 {
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         WallyHandlePrintString();
     else
         WallyBufferExecCompleted();
@@ -1544,7 +1544,7 @@ void sub_8139A2C(u8 taskId)
 
 void WallyHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBankSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         WallyBufferExecCompleted();
     }

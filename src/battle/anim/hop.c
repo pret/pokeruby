@@ -136,7 +136,7 @@ void sub_80CB9C4(struct Sprite* sprite)
 void sub_80CBA28(struct Sprite* sprite)
 {
     s16 e = GetBankPosition(gAnimBankTarget, 1);
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
     {
         sprite->data[6] = 0;
         sprite->data[7] = e + 10;

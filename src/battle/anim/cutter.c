@@ -24,7 +24,7 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite);
 void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
@@ -44,7 +44,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
 
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimSpriteTranslationOverDuration(sprite);
-    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
+    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
     {
         sprite->data[0] = 1;
     }

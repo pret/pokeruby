@@ -427,7 +427,7 @@ static void sub_80A8488(u8 taskId)
 // arg 4: speed (valid values are 0-5)
 void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 {
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     AnimTask_TranslateMonElliptical(taskId);
@@ -440,7 +440,7 @@ void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 static void DoHorizontalLunge(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->data[1] = -gBattleAnimArgs[1];
     else
         sprite->data[1] = gBattleAnimArgs[1];
@@ -572,7 +572,7 @@ static void SlideMonToOffset(struct Sprite *sprite)
         battler = gAnimBankTarget;
 
     monSpriteId = gBankSpriteIds[battler];
-    if (GetBankSide(battler) != B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[3] == 1)
@@ -609,7 +609,7 @@ static void sub_80A8818(struct Sprite *sprite)
         v1 = gAnimBankTarget;
     }
     spriteId = gBankSpriteIds[v1];
-    if (GetBankSide(v1))
+    if (GetBattlerSide(v1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[3] == 1)
@@ -659,7 +659,7 @@ static void sub_80A88F0(struct Sprite *sprite)
 void AnimTask_WindUpLunge(u8 taskId)
 {
     s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
@@ -741,7 +741,7 @@ void sub_80A8A80(u8 taskId)
         return;
     }
     TASK.data[0] = spriteId;
-    if (GetBankSide(gAnimBankTarget))
+    if (GetBattlerSide(gAnimBankTarget))
     {
         TASK.data[1] = gBattleAnimArgs[1];
     }
@@ -774,7 +774,7 @@ static void sub_80A8B3C(u8 taskId)
 void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
-    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+    if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[4]);
@@ -812,7 +812,7 @@ static void AnimTask_SwayMonStep(u8 taskId)
     }
     else
     {
-        if (GetBankSide(TASK.data[5]) == B_SIDE_PLAYER)
+        if (GetBattlerSide(TASK.data[5]) == B_SIDE_PLAYER)
         {
             gSprites[spriteId].pos2.y = (sineValue >= 0) ? sineValue : -sineValue;
         }
@@ -909,11 +909,11 @@ void sub_80A8E04(u8 taskId)
     {
         if (gBattleAnimArgs[2] == 0)
         {
-            TASK.data[7] = !GetBankSide(gAnimBankAttacker);
+            TASK.data[7] = !GetBattlerSide(gAnimBankAttacker);
         }
         else
         {
-            TASK.data[7] = !GetBankSide(gAnimBankTarget);
+            TASK.data[7] = !GetBattlerSide(gAnimBankTarget);
         }
     }
     if (TASK.data[7])
@@ -936,14 +936,14 @@ void sub_80A8EFC(u8 taskId)
     TASK.data[2] = gBattleAnimArgs[0];
     if (gBattleAnimArgs[2] == 0)
     {
-        if (GetBankSide(gAnimBankAttacker))
+        if (GetBattlerSide(gAnimBankAttacker))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }
     }
     else
     {
-        if (GetBankSide(gAnimBankTarget))
+        if (GetBattlerSide(gAnimBankTarget))
         {
             gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         }

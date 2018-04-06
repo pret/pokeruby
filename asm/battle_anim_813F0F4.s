@@ -915,7 +915,7 @@ sub_813F844: @ 813F844
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F88C
@@ -4619,7 +4619,7 @@ _08141562:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _081415A4
@@ -4697,7 +4697,7 @@ _08141606:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814163C
@@ -4739,7 +4739,7 @@ _08141654:
 	strh r1, [r0, 0x8]
 	ldr r0, _08141690 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -5247,7 +5247,7 @@ _08141A44:
 	cmp r0, 0
 	bne _08141A8C
 	mov r0, r8
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0

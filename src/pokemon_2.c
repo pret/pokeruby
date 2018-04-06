@@ -67,14 +67,14 @@ u8 CountAliveMons(u8 a1)
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBankAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBankTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -1226,7 +1226,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    ewram160BC[GetBankSide(battleIndex)] = gBattleMons[battleIndex].hp;
+    ewram160BC[GetBattlerSide(battleIndex)] = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

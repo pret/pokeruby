@@ -108,7 +108,7 @@ void sub_8033494(void);
 extern void move_anim_start_t2_for_situation();
 extern void bx_blink_t7(void);
 extern void sub_8047858();
-extern u8 GetBankSide(u8);
+extern u8 GetBattlerSide(u8);
 extern void StartBattleIntroAnim();
 extern void sub_8044CA0(u8);
 extern void nullsub_45(void);
@@ -2188,7 +2188,7 @@ void OpponentHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBattler) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
@@ -2270,7 +2270,7 @@ void sub_8035C44(u8 taskId)
 
 void OpponentHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBankSide(gActiveBattler) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         OpponentBufferExecCompleted();
         return;

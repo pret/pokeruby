@@ -79,7 +79,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     if (gMain.inBattle)
     {
         gActiveBattler = gBankInMenu;
-        cmdIndex = (GetBankSide(gActiveBattler) != 0);
+        cmdIndex = (GetBattlerSide(gActiveBattler) != 0);
         while (cmdIndex < gNoOfAllBanks)
         {
             if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
@@ -180,9 +180,9 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
             break;
         case 3:
             if ((itemEffect[cmdIndex] & 0x80)
-             && gSideTimers[GetBankSide(gActiveBattler)].mistTimer == 0)
+             && gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer == 0)
             {
-                gSideTimers[GetBankSide(gActiveBattler)].mistTimer = 5;
+                gSideTimers[GetBattlerSide(gActiveBattler)].mistTimer = 5;
                 retVal = FALSE;
             }
             if ((itemEffect[cmdIndex] & 0x40)  // raise level
@@ -280,13 +280,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[sp34];
                                     CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
-                                    if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }
                                 else
                                 {
                                     gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
-                                    if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
+                                    if (GetBattlerSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }
                             }
@@ -325,7 +325,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                                 if (gMain.inBattle && sp34 != 4)
                                 {
                                     gBattleMons[sp34].hp = data;
-                                    if (!(r10 & 0x10) && GetBankSide(gActiveBattler) == 0)
+                                    if (!(r10 & 0x10) && GetBattlerSide(gActiveBattler) == 0)
                                     {
                                         if (gBattleResults.unk3 < 255)
                                             gBattleResults.unk3++;

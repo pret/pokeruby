@@ -272,7 +272,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
     s32 i;
     u8 *data;
 
-    MEMSET_ALT(UNK_2016A00_STRUCT, 0, sizeof(struct UnkBattleStruct1), i, data);
+    MEMSET_ALT(AI_BATTLE_HISTORY, 0, sizeof(struct BattleHistory), i, data);
 
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      && gTrainerBattleOpponent != 0x400
@@ -282,8 +282,8 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
         {
             if (gTrainers[gTrainerBattleOpponent].items[i] != 0)
             {
-                UNK_2016A00_STRUCT->items[UNK_2016A00_STRUCT->numOfItems] = gTrainers[gTrainerBattleOpponent].items[i];
-                UNK_2016A00_STRUCT->numOfItems++;
+                AI_BATTLE_HISTORY->trainerItems[AI_BATTLE_HISTORY->numItems] = gTrainers[gTrainerBattleOpponent].items[i];
+                AI_BATTLE_HISTORY->numItems++;
             }
         }
     }
@@ -446,9 +446,9 @@ void sub_810745C(void)
 
     for (i = 0; i < 8; i++)
     {
-        if (UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i] == 0)
+        if (AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i] == 0)
         {
-            UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i] = gLastUsedMove[gBankTarget];
+            AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i] = gLastUsedMove[gBankTarget];
             return;
         }
     }
@@ -459,19 +459,19 @@ void unref_sub_81074A0(u8 a)
     s32 i;
 
     for (i = 0; i < 8; i++)
-        UNK_2016A00_STRUCT->movesUsed[a / 2][i] = 0;
+        AI_BATTLE_HISTORY->usedMoves[a / 2][i] = 0;
 }
 
 void RecordAbilityBattle(u8 a, u8 b)
 {
-    if (GetBankSide(a) == 0)
-        UNK_2016A00_STRUCT->unk20[GetBattlerPosition(a) & 1] = b;
+    if (GetBattlerSide(a) == 0)
+        AI_BATTLE_HISTORY->abilities[GetBattlerPosition(a) & 1] = b;
 }
 
 void RecordItemBattle(u8 a, u8 b)
 {
-    if (GetBankSide(a) == 0)
-        UNK_2016A00_STRUCT->unk22[GetBattlerPosition(a) & 1] = b;
+    if (GetBattlerSide(a) == 0)
+        AI_BATTLE_HISTORY->itemEffects[GetBattlerPosition(a) & 1] = b;
 }
 
 static void BattleAICmd_if_random_less_than(void)
@@ -1317,7 +1317,7 @@ static void BattleAICmd_count_alive_pokemon(void)
     else
         index = gBankTarget;
 
-    if (GetBankSide(index) == 0)
+    if (GetBattlerSide(index) == 0)
         party = gPlayerParty;
     else
         party = gEnemyParty;
@@ -1370,13 +1370,13 @@ static void BattleAICmd_get_ability(void)
     else
         index = gBankTarget;
 
-    if (GetBankSide(index) == TARGET)
+    if (GetBattlerSide(index) == TARGET)
     {
-        u16 unk = GetBattlerPosition(index) & 1;
+        u16 side = GetBattlerPosition(index) & 1;
 
-        if (UNK_2016A00_STRUCT->unk20[unk] != 0)
+        if (AI_BATTLE_HISTORY->abilities[side] != 0)
         {
-            AI_THINKING_STRUCT->funcResult = UNK_2016A00_STRUCT->unk20[unk];
+            AI_THINKING_STRUCT->funcResult = AI_BATTLE_HISTORY->abilities[side];
             gAIScriptPtr += 2;
             return;
         }
@@ -1745,7 +1745,7 @@ static void BattleAICmd_if_has_move(void)
     case 2:
         for (i = 0; i < 8; i++)
         {
-            if (UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i] == *temp_ptr)
+            if (AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i] == *temp_ptr)
                 break;
         }
         if (i == 8)
@@ -1779,7 +1779,7 @@ static void BattleAICmd_if_dont_have_move(void)
     case 2:
         for (i = 0; i < 8; i++)
         {
-            if (UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i] == *temp_ptr)
+            if (AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i] == *temp_ptr)
                 break;
         }
         if (i != 8)
@@ -1812,7 +1812,7 @@ static void BattleAICmd_if_move_effect(void)
     case 2:
         for (i = 0; i < 8; i++)
         {
-            if (gBattleMons[gBankAttacker].moves[i] != 0 && gBattleMoves[UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i]].effect == gAIScriptPtr[2])
+            if (gBattleMons[gBankAttacker].moves[i] != 0 && gBattleMoves[AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i]].effect == gAIScriptPtr[2])
                 break;
         }
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 3);
@@ -1841,7 +1841,7 @@ static void BattleAICmd_if_not_move_effect(void)
     case 2:
         for (i = 0; i < 8; i++)
         {
-            if (UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i] != 0 && gBattleMoves[UNK_2016A00_STRUCT->movesUsed[gBankTarget >> 1][i]].effect == gAIScriptPtr[2])
+            if (AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i] != 0 && gBattleMoves[AI_BATTLE_HISTORY->usedMoves[gBankTarget >> 1][i]].effect == gAIScriptPtr[2])
                 break;
         }
         gAIScriptPtr += 7;
@@ -1929,17 +1929,17 @@ static void BattleAICmd_watch(void)
 static void BattleAICmd_get_hold_effect(void)
 {
     u8 index;
-    u16 status;
+    u16 side;
 
     if (gAIScriptPtr[1] == USER)
         index = gBankAttacker;
     else
         index = gBankTarget;
 
-    if (GetBankSide(index) == 0)
+    if (GetBattlerSide(index) == 0)
     {
-        status = (GetBattlerPosition(index) & 1);
-        AI_THINKING_STRUCT->funcResult = UNK_2016A00_STRUCT->unk22[status];
+        side = (GetBattlerPosition(index) & 1);
+        AI_THINKING_STRUCT->funcResult = AI_BATTLE_HISTORY->itemEffects[side];
     }
     else
         AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[index].item);

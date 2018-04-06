@@ -43,7 +43,7 @@ void sub_80D23B4(u8 taskId)
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     if (IsContest())
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceContest, subStruct.field_4);
-    else if (GetBankSide(gAnimBankTarget) == 1)
+    else if (GetBattlerSide(gAnimBankTarget) == 1)
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFacePlayer, subStruct.field_4);
     else
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceOpponent, subStruct.field_4);

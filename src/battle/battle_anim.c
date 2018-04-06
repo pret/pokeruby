@@ -1490,7 +1490,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
         UpdateOamPriorityInAllHealthboxes(0);
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) != 0)
+            if (GetBattlerSide(i) != 0)
                 gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
             else
                 gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
@@ -2369,7 +2369,7 @@ static void ScriptCmd_fadetobgfromset(void)
 
     if (IsContest())
         gTasks[taskId].tBackgroundId = bg3;
-    else if (GetBankSide(gAnimBankTarget) == 0)
+    else if (GetBattlerSide(gAnimBankTarget) == 0)
         gTasks[taskId].tBackgroundId = bg2;
     else
         gTasks[taskId].tBackgroundId = bg1;
@@ -2494,7 +2494,7 @@ s8 BattleAnimAdjustPanning(s8 a)
 {
     if (!IsContest() && (EWRAM_17810[gAnimBankAttacker].unk0 & 0x10))
     {
-        a = GetBankSide(gAnimBankAttacker) ? 0xC0 : 0x3F;
+        a = GetBattlerSide(gAnimBankAttacker) ? 0xC0 : 0x3F;
     }
     //_08076FDC
     else
@@ -2513,9 +2513,9 @@ s8 BattleAnimAdjustPanning(s8 a)
         //_08077004
         else
         {
-            if (GetBankSide(gAnimBankAttacker) == 0)
+            if (GetBattlerSide(gAnimBankAttacker) == 0)
             {
-                if (GetBankSide(gAnimBankTarget) == 0)
+                if (GetBattlerSide(gAnimBankTarget) == 0)
             }
             //_08077042
             else
@@ -2552,7 +2552,7 @@ s8 BattleAnimAdjustPanning(s8 a)
     cmp r0, 0\n\
     beq _08076FDC\n\
     adds r0, r2, 0\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     movs r4, 0xC0\n\
     cmp r0, 0\n\
@@ -2584,13 +2584,13 @@ _08077000: .4byte gAnimBankTarget\n\
 _08077004:\n\
     ldr r0, _0807702C @ =gAnimBankAttacker\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _08077042\n\
     ldr r0, _08077030 @ =gAnimBankTarget\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     cmp r0, 0\n\
     bne _0807706E\n\
@@ -2614,7 +2614,7 @@ _08077034:\n\
 _08077042:\n\
     ldr r0, _08077064 @ =gAnimBankTarget\n\
     ldrb r0, [r0]\n\
-    bl GetBankSide\n\
+    bl GetBattlerSide\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x1\n\
@@ -2662,14 +2662,14 @@ s8 BattleAnimAdjustPanning2(s8 pan)
 {
     if (!IsContest() && (EWRAM_17810[gAnimBankAttacker].unk0 & 0x10))
     {
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
             pan = 0x3F;
         else
             pan = 0xC0;
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker) != 0 || IsContest() != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0 || IsContest() != 0)
             pan = -pan;
     }
     return pan;
@@ -3078,7 +3078,7 @@ static void ScriptCmd_monbgprio_2A(void)
 
     wantedBank = T1_READ_8(sBattleAnimScriptPtr + 1);
     sBattleAnimScriptPtr += 2;
-    if (GetBankSide(gAnimBankAttacker) != GetBankSide(gAnimBankTarget))
+    if (GetBattlerSide(gAnimBankAttacker) != GetBattlerSide(gAnimBankTarget))
     {
         if (wantedBank != 0)
             bank = gAnimBankTarget;
@@ -3124,7 +3124,7 @@ static void ScriptCmd_doublebattle_2D(void)
     wantedBank = T1_READ_8(sBattleAnimScriptPtr + 1);
     sBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
+     && GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
     {
         if (wantedBank == 0)
         {
@@ -3158,7 +3158,7 @@ static void ScriptCmd_doublebattle_2E(void)
     wantedBank = T1_READ_8(sBattleAnimScriptPtr  + 1);
     sBattleAnimScriptPtr += 2;
     if (!IsContest() && IsDoubleBattle()
-     && GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
+     && GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
     {
         if (wantedBank == 0)
         {

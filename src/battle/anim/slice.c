@@ -19,7 +19,7 @@ void AnimCuttingSlice(struct Sprite* sprite)
 {
     sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
     sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;
@@ -69,7 +69,7 @@ void sub_80CC9BC(struct Sprite* sprite)
 
     sprite->pos1.x = a;
     sprite->pos1.y = b;
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;

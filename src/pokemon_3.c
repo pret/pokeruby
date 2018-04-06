@@ -1298,7 +1298,7 @@ void sub_8040B8C(void)
     gBattleTextBuff1[1] = 4;
     gBattleTextBuff1[2] = gBattleStruct->unk16054;
     gBattleTextBuff1[4] = EOS;
-    if (!GetBankSide(gBattleStruct->unk16054))
+    if (!GetBattlerSide(gBattleStruct->unk16054))
         gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->unk16054]);
     else
         gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->unk16054];

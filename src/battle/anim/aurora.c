@@ -17,7 +17,7 @@ void sub_80D33B4(struct Sprite *sprite)
     s16 r6;
 
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         r6 = -gBattleAnimArgs[2];
     else
         r6 = gBattleAnimArgs[2];
