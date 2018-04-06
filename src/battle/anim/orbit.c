@@ -64,7 +64,7 @@ void sub_80CACEC(u8 taskId)
     }
     else
     {
-        if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
+        if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
         {
             REG_BG2CNT_BITFIELD.priority = 3;
         }

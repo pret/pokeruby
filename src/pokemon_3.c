@@ -51,7 +51,7 @@ extern const u8 BattleText_Wally[];
 extern s8 gPokeblockFlavorCompatibilityTable[];
 extern u8 gLastUsedAbility;
 extern const u8 BattleText_PreventedSwitch[];
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 
 extern u8 BattleText_Rose[];
 extern u8 BattleText_UnknownString3[];
@@ -1299,13 +1299,13 @@ void sub_8040B8C(void)
     gBattleTextBuff1[2] = gBattleStruct->unk16054;
     gBattleTextBuff1[4] = EOS;
     if (!GetBankSide(gBattleStruct->unk16054))
-        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->unk16054]);
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlerPartyIndexes[gBattleStruct->unk16054]);
     else
-        gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->unk16054];
+        gBattleTextBuff1[3] = gBattlerPartyIndexes[gBattleStruct->unk16054];
     gBattleTextBuff2[0] = 0xFD;
     gBattleTextBuff2[1] = 4;
     gBattleTextBuff2[2] = gBankInMenu;
-    gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
+    gBattleTextBuff2[3] = pokemon_order_func(gBattlerPartyIndexes[gBankInMenu]);
     gBattleTextBuff2[4] = EOS;
     StrCpyDecodeBattle(BattleText_PreventedSwitch, gStringVar4);
 }

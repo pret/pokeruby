@@ -2512,13 +2512,13 @@ _080E2FAC:
 	bne _080E3028
 	ldr r5, _080E305C @ =gAnimBankAttacker
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080E2FDC
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3028
@@ -2589,7 +2589,7 @@ _080E306C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3098
-	ldr r1, _080E3090 @ =gBattlePartyID
+	ldr r1, _080E3090 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -2600,10 +2600,10 @@ _080E306C:
 	b _080E30A8
 	.align 2, 0
 _080E308C: .4byte gAnimBankAttacker
-_080E3090: .4byte gBattlePartyID
+_080E3090: .4byte gBattlerPartyIndexes
 _080E3094: .4byte gEnemyParty
 _080E3098:
-	ldr r1, _080E3160 @ =gBattlePartyID
+	ldr r1, _080E3160 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -2697,7 +2697,7 @@ _080E3106:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E3160: .4byte gBattlePartyID
+_080E3160: .4byte gBattlerPartyIndexes
 _080E3164: .4byte gPlayerParty
 _080E3168: .4byte gAnimBankAttacker
 _080E316C: .4byte 0x040000d4
@@ -3051,13 +3051,13 @@ _080E3432:
 	cmp r0, 0
 	bne _080E34A4
 	adds r0, r5, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080E345E
 	adds r0, r5, 0
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E34A4
@@ -3123,7 +3123,7 @@ _080E34E4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3508
-	ldr r1, _080E3500 @ =gBattlePartyID
+	ldr r1, _080E3500 @ =gBattlerPartyIndexes
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -3132,10 +3132,10 @@ _080E34E4:
 	ldr r1, _080E3504 @ =gEnemyParty
 	b _080E3516
 	.align 2, 0
-_080E3500: .4byte gBattlePartyID
+_080E3500: .4byte gBattlerPartyIndexes
 _080E3504: .4byte gEnemyParty
 _080E3508:
-	ldr r1, _080E3568 @ =gBattlePartyID
+	ldr r1, _080E3568 @ =gBattlerPartyIndexes
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -3182,7 +3182,7 @@ _080E3550:
 	bl LZDecompressVram
 	b _080E3580
 	.align 2, 0
-_080E3568: .4byte gBattlePartyID
+_080E3568: .4byte gBattlerPartyIndexes
 _080E356C: .4byte gPlayerParty
 _080E3570: .4byte gBankSpriteIds
 _080E3574: .4byte gBattleStatMask1_Tilemap
@@ -4210,7 +4210,7 @@ _080E3D58:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3D7C
-	ldr r1, _080E3D74 @ =gBattlePartyID
+	ldr r1, _080E3D74 @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4219,10 +4219,10 @@ _080E3D58:
 	ldr r1, _080E3D78 @ =gEnemyParty
 	b _080E3D8A
 	.align 2, 0
-_080E3D74: .4byte gBattlePartyID
+_080E3D74: .4byte gBattlerPartyIndexes
 _080E3D78: .4byte gEnemyParty
 _080E3D7C:
-	ldr r1, _080E3E48 @ =gBattlePartyID
+	ldr r1, _080E3E48 @ =gBattlerPartyIndexes
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4320,7 +4320,7 @@ _080E3DE6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E3E48: .4byte gBattlePartyID
+_080E3E48: .4byte gBattlerPartyIndexes
 _080E3E4C: .4byte gPlayerParty
 _080E3E50: .4byte gBankSpriteIds
 _080E3E54: .4byte gBattle_BG1_X

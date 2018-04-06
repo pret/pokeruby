@@ -36,13 +36,13 @@ extern u16 gSpecialVar_ItemId;
 extern MainCallback gPreBattleCallback1;
 extern u8 gBankInMenu;
 extern u8 gHealthboxIDs[];
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u16 gUnknown_02024DE8;
 extern u8 gBattleOutcome;
 
 extern u8 GetBankSide(u8);
-extern u8 GetBankByIdentity(u8);
-extern u8 GetBankIdentity(u8);
+extern u8 GetBattlerAtPosition(u8);
+extern u8 GetBattlerPosition(u8);
 extern void LoadPlayerTrainerBankSprite();
 extern u8 sub_8079E90();
 extern void sub_80313A0(struct Sprite *);
@@ -398,7 +398,7 @@ void SafariHandleReturnPokeToBall(void)
 void SafariHandleTrainerThrow(void)
 {
     LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBattler));
+    GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80,
@@ -435,7 +435,7 @@ void SafariHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBankByIdentity(1), 4);
+    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattleBankFunc[gActiveBattler] = bx_wait_t6;
 }
 
@@ -445,7 +445,7 @@ void SafariHandleBallThrow(void)
 
     ewram17840.unk8 = var;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBankByIdentity(1), 4);
+    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
     gBattleBankFunc[gActiveBattler] = bx_wait_t6;
 }
 
@@ -541,7 +541,7 @@ void SafariHandleExpBarUpdate(void)
 
 void SafariHandleStatusIconUpdate(void)
 {
-    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlePartyID[gActiveBattler]], 11);
+    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 11);
     SafariBufferExecCompleted();
 }
 
@@ -645,7 +645,7 @@ void SafariHandlecmd44(void)
 
 void SafariHandleFaintingCry(void)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry1(species, 25);
     SafariBufferExecCompleted();
@@ -660,7 +660,7 @@ void SafariHandleIntroSlide(void)
 
 void SafariHandleTrainerBallThrow(void)
 {
-    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlePartyID[gActiveBattler]], 10);
+    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 10);
     sub_804777C(gActiveBattler);
     sub_8043DFC(gHealthboxIDs[gActiveBattler]);
     SafariBufferExecCompleted();

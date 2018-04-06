@@ -481,7 +481,7 @@ _080E12C4:
 	strh r0, [r4, 0x1C]
 	ldr r0, _080E12EC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1E]
@@ -689,7 +689,7 @@ sub_80E143C: @ 80E143C
 	strh r4, [r1, 0x26]
 	ldr r0, _080E1480 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -854,7 +854,7 @@ _080E15A0:
 	strh r0, [r4, 0x1C]
 	ldr r0, _080E15C4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1E]

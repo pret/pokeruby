@@ -34,8 +34,8 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3);
 void AnimEmberFlare(struct Sprite *sprite)
 {
     if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget)
-        && (gAnimBankAttacker == GetBankByIdentity(IDENTITY_PLAYER_MON2)
-            || gAnimBankAttacker == GetBankByIdentity(IDENTITY_OPPONENT_MON2)))
+        && (gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+            || gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = sub_8079534;

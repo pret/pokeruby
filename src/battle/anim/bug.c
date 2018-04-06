@@ -205,7 +205,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     {
         if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget))
         {
-            if (GetBankIdentity(gAnimBankTarget) == 0 || GetBankIdentity(gAnimBankTarget) == 1)
+            if (GetBattlerPosition(gAnimBankTarget) == 0 || GetBattlerPosition(gAnimBankTarget) == 1)
             {
                 s16 temp1, temp2;
 

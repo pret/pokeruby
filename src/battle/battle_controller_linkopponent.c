@@ -28,7 +28,7 @@ struct MovePpInfo
 extern u8 gActiveBattler;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gBankSpriteIds[];
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
@@ -57,7 +57,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
-extern u8 GetBankIdentity(u8);
+extern u8 GetBattlerPosition(u8);
 extern void BattleLoadOpponentMonSprite(struct Pokemon *, u8);
 extern void sub_8037A74(void);
 extern void sub_8032984(u8, u16);
@@ -311,7 +311,7 @@ void sub_8037680(void)
 
     if (r6)
     {
-        if (GetBankIdentity(gActiveBattler) == 1)
+        if (GetBattlerPosition(gActiveBattler) == 1)
         {
             if (!ewram17810[gActiveBattler].unk1_0 || !ewram17810[gActiveBattler ^ 2].unk1_0)
                 return;
@@ -324,7 +324,7 @@ void sub_8037680(void)
         }
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
-            if (GetBankIdentity(gActiveBattler) == 1)
+            if (GetBattlerPosition(gActiveBattler) == 1)
                 m4aMPlayContinue(&gMPlay_BGM);
         }
         else
@@ -339,12 +339,12 @@ void sub_8037680(void)
 void sub_8037840(void)
 {
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
-        sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+        sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (!ewram17810[gActiveBattler ^ 2].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_7)
-        sub_8141828(gActiveBattler ^ 2, &gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]]);
+        sub_8141828(gActiveBattler ^ 2, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]]);
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_3)
     {
-        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBankIdentity(gActiveBattler) == 3)
+        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(gActiveBattler) == 3)
         {
             if (++ewram17810[gActiveBattler].unk9 == 1)
                 return;
@@ -355,24 +355,24 @@ void sub_8037840(void)
             DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler ^ 2]]);
             sub_8045A5C(
               gHealthboxIDs[gActiveBattler ^ 2],
-              &gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]],
+              &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]],
               0);
             sub_804777C(gActiveBattler ^ 2);
             sub_8043DFC(gHealthboxIDs[gActiveBattler ^ 2]);
             sub_8032984(
               gActiveBattler ^ 2,
-              GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]], MON_DATA_SPECIES));
+              GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], MON_DATA_SPECIES));
         }
         DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
         sub_8045A5C(
           gHealthboxIDs[gActiveBattler],
-          &gEnemyParty[gBattlePartyID[gActiveBattler]],
+          &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]],
           0);
         sub_804777C(gActiveBattler);
         sub_8043DFC(gHealthboxIDs[gActiveBattler]);
         sub_8032984(
           gActiveBattler,
-          GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+          GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
 
         ewram17840.unk9_0 = 0;
         gBattleBankFunc[gActiveBattler] = sub_8037680;
@@ -386,7 +386,7 @@ void sub_8037A74(void)
     {
         if (!ewram17810[gActiveBattler].unk0_7)
         {
-            sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+            sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
             return;
         }
         if (ewram17810[gActiveBattler].unk1_0)
@@ -488,7 +488,7 @@ void sub_8037D64(void)
         StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 0);
         sub_8045A5C(
           gHealthboxIDs[gActiveBattler],
-          &gEnemyParty[gBattlePartyID[gActiveBattler]],
+          &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]],
           0);
         sub_804777C(gActiveBattler);
         sub_8043DFC(gHealthboxIDs[gActiveBattler]);
@@ -500,12 +500,12 @@ void sub_8037D64(void)
 void sub_8037E30(void)
 {
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
-        sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+        sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (gSprites[gUnknown_0300434C[gActiveBattler]].callback == SpriteCallbackDummy
      && !ewram17810[gActiveBattler].unk0_3)
     {
         DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
-        sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+        sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
         gBattleBankFunc[gActiveBattler] = sub_8037D64;
     }
 }
@@ -577,7 +577,7 @@ void LinkOpponentHandleGetAttributes(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        r6 = dp01_getattr_by_ch1_for_player_pokemon__(gBattlePartyID[gActiveBattler], buffer);
+        r6 = dp01_getattr_by_ch1_for_player_pokemon__(gBattlerPartyIndexes[gActiveBattler], buffer);
     }
     else
     {
@@ -907,7 +907,7 @@ void LinkOpponentHandleSetAttributes(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        sub_8038900(gBattlePartyID[gActiveBattler]);
+        sub_8038900(gBattlerPartyIndexes[gActiveBattler]);
     }
     else
     {
@@ -1143,7 +1143,7 @@ void LinkOpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBattler]] + gBattleBufferA[gActiveBattler][1], 
+    MEMSET_ALT(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1], 
         gBattleBufferA[gActiveBattler][3 + i], gBattleBufferA[gActiveBattler][2], i, dst);
 
     LinkOpponentBufferExecCompleted();
@@ -1151,10 +1151,10 @@ void LinkOpponentHandlecmd3(void)
 
 void LinkOpponentHandleLoadPokeSprite(void)
 {
-    u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[gActiveBattler]], gActiveBattler);
-    GetMonSpriteTemplate_803C56C(species, GetBankIdentity(gActiveBattler));
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       GetBankPosition(gActiveBattler, 2),
@@ -1164,13 +1164,13 @@ void LinkOpponentHandleLoadPokeSprite(void)
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
-    sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+    sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
     gBattleBankFunc[gActiveBattler] = sub_8037A74;
 }
 
 void LinkOpponentHandleSendOutPoke(void)
 {
-    gBattlePartyID[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
+    gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
     sub_8039430(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
     gBattleBankFunc[gActiveBattler] = sub_8037E30;
 }
@@ -1180,11 +1180,11 @@ void sub_8039430(u8 a, u8 b)
     u16 species;
 
     sub_8032AA8(a, b);
-    gBattlePartyID[a] = gBattleBufferA[a][1];
-    species = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_SPECIES);
+    gBattlerPartyIndexes[a] = gBattleBufferA[a][1];
+    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_SPECIES);
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
-    GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
+    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBankSpriteIds[a] = CreateSprite(
       &gUnknown_02024E8C,
       GetBankPosition(a, 2),
@@ -1244,7 +1244,7 @@ void LinkOpponentHandleTrainerThrow(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (GetBankIdentity(gActiveBattler) & 2)
+        if (GetBattlerPosition(gActiveBattler) & 2)
             xOffset = -16;
         else
             xOffset = 16;
@@ -1256,7 +1256,7 @@ void LinkOpponentHandleTrainerThrow(void)
         gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
     }
     sub_8031A6C(gender, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(gender, GetBankIdentity(gActiveBattler));
+    GetMonSpriteTemplate_803C5A0(gender, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       176 + xOffset, 40 + 4 * (8 - gTrainerFrontPicCoords[gender].coords),
@@ -1460,14 +1460,14 @@ void LinkOpponentHandleHealthBarUpdate(void)
     r7 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
     if (r7 != 0x7FFF)
     {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 hp = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_HP);
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 hp = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
         sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, hp, r7);
     }
     else
     {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
         sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, 0, r7);
     }
@@ -1483,7 +1483,7 @@ void LinkOpponentHandleStatusIconUpdate(void)
 {
     if (mplay_80342A4(gActiveBattler) == 0)
     {
-        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gEnemyParty[gBattlePartyID[gActiveBattler]], 9);
+        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], 9);
         ewram17810[gActiveBattler].unk0_4 = 0;
         gBattleBankFunc[gActiveBattler] = sub_8037FAC;
     }
@@ -1613,7 +1613,7 @@ void LinkOpponentHandlecmd44(void)
 void LinkOpponentHandleFaintingCry(void)
 {
     PlayCry3(
-      GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES),
+      GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
       25, 5);
     LinkOpponentBufferExecCompleted();
 }
@@ -1651,15 +1651,15 @@ void sub_803A2C4(u8 taskId)
     gActiveBattler = gTasks[taskId].data[0];
     if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_8039430(gActiveBattler, 0);
     }
     else
     {
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_8039430(gActiveBattler, 0);
         gActiveBattler ^= 2;
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_8039430(gActiveBattler, 0);
         gActiveBattler ^= 2;
     }

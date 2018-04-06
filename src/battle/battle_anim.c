@@ -1287,7 +1287,7 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     &gBattleAnimBackgroundImage_04, &gBattleAnimBackgroundPalette_24, &gBattleAnimBackgroundTilemap_06,
 };
 
-extern u16 gBattlePartyID[4];
+extern u16 gBattlerPartyIndexes[4];
 extern u8 gBankSpriteIds[];
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
@@ -1491,9 +1491,9 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
         for (i = 0; i < 4; i++)
         {
             if (GetBankSide(i) != 0)
-                gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_SPECIES);
+                gAnimSpeciesByBanks[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
             else
-                gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_SPECIES);
+                gAnimSpeciesByBanks[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
         }
     }
     else
@@ -1829,7 +1829,7 @@ static void ScriptCmd_monbg(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        identity = GetBankIdentity(bank);
+        identity = GetBattlerPosition(bank);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             toBG_2 = 0;
@@ -1861,7 +1861,7 @@ static void ScriptCmd_monbg(void)
     bank ^= 2;
     if (animBank >= ANIM_BANK_ATK_PARTNER && IsAnimBankSpriteVisible(bank))
     {
-        identity = GetBankIdentity(bank);
+        identity = GetBattlerPosition(bank);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             toBG_2 = 0;
@@ -1947,7 +1947,7 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         if (IsContest() != 0)
             r2 = 0;
         else
-            r2 = GetBankIdentity(bank);
+            r2 = GetBattlerPosition(bank);
         sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (IsContest() != 0)
             sub_8076380();
@@ -1976,7 +1976,7 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
         LoadPalette(gPlttBufferUnfaded + 0x100 + bank * 16, 0x90, 32);
         DmaCopy32Defvars(3, gPlttBufferUnfaded + 0x100 + bank * 16, (void *)(PLTT + 0x120), 32);
 
-        sub_80E4EF8(0, 0, GetBankIdentity(bank), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
+        sub_80E4EF8(0, 0, GetBattlerPosition(bank), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
 }
 
@@ -2119,7 +2119,7 @@ static void sub_807672C(u8 taskId)
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
-        identity = GetBankIdentity(gTasks[taskId].data[2]);
+        identity = GetBattlerPosition(gTasks[taskId].data[2]);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             to_BG2 = 0;
@@ -2163,7 +2163,7 @@ static void ScriptCmd_monbg_22(void)
 
     if (IsAnimBankSpriteVisible(bank))
     {
-        identity = GetBankIdentity(bank);
+        identity = GetBattlerPosition(bank);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             r1 = 0;
@@ -2176,7 +2176,7 @@ static void ScriptCmd_monbg_22(void)
     bank ^= 2;
     if (animBankId > ANIM_BANK_TARGET && IsAnimBankSpriteVisible(bank))
     {
-        identity = GetBankIdentity(bank);
+        identity = GetBattlerPosition(bank);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             r1 = 0;
@@ -2231,7 +2231,7 @@ static void sub_80769A4(u8 taskId)
     if (gTasks[taskId].data[1] != 1)
     {
         bank = gTasks[taskId].data[2];
-        identity = GetBankIdentity(bank);
+        identity = GetBattlerPosition(bank);
         identity += 0xFF;
         if (identity <= 1 || IsContest() != 0)
             toBG_2 = 0;
@@ -3052,7 +3052,7 @@ static void ScriptCmd_monbgprio_28(void)
     else
         bank = gAnimBankAttacker;
 
-    bankIdentity = GetBankIdentity(bank);
+    bankIdentity = GetBattlerPosition(bank);
     if (!IsContest() && (bankIdentity == 0 || bankIdentity == 3))
     {
         REG_BG1CNT_BITFIELD.priority = 1;
@@ -3084,7 +3084,7 @@ static void ScriptCmd_monbgprio_2A(void)
             bank = gAnimBankTarget;
         else
             bank = gAnimBankAttacker;
-        bankIdentity = GetBankIdentity(bank);
+        bankIdentity = GetBattlerPosition(bank);
         if (!IsContest() && (bankIdentity == 0 || bankIdentity == 3))
         {
             REG_BG1CNT_BITFIELD.priority = 1;
@@ -3128,12 +3128,12 @@ static void ScriptCmd_doublebattle_2D(void)
     {
         if (wantedBank == 0)
         {
-            r4 = GetBankIdentity_permutated(gAnimBankAttacker);
+            r4 = GetBattlerPosition_permutated(gAnimBankAttacker);
             spriteId = GetAnimBankSpriteId(0);
         }
         else
         {
-            r4 = GetBankIdentity_permutated(gAnimBankTarget);
+            r4 = GetBattlerPosition_permutated(gAnimBankTarget);
             spriteId = GetAnimBankSpriteId(1);
         }
         if (spriteId != 0xFF)
@@ -3162,12 +3162,12 @@ static void ScriptCmd_doublebattle_2E(void)
     {
         if (wantedBank == 0)
         {
-            r4 = GetBankIdentity_permutated(gAnimBankAttacker);
+            r4 = GetBattlerPosition_permutated(gAnimBankAttacker);
             spriteId = GetAnimBankSpriteId(0);
         }
         else
         {
-            r4 = GetBankIdentity_permutated(gAnimBankTarget);
+            r4 = GetBattlerPosition_permutated(gAnimBankTarget);
             spriteId = GetAnimBankSpriteId(1);
         }
         if (spriteId != 0xFF && r4 == 2)

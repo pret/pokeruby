@@ -24,7 +24,7 @@ static void AnimMoveTwisterParticleStep(struct Sprite* sprite);
 void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }

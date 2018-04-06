@@ -33,7 +33,7 @@ struct MovePpInfo
 extern u8 gUnknown_02023A14_50;
 extern u8 gActiveBattler;
 extern u8 gBattleBufferA[][0x200];
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBankSpriteIds[];
 extern u8 gBattleMonForms[];
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -55,7 +55,7 @@ extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG0_X;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBankTarget;
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern bool8 gDoingBattleAnim;
 extern u16 gUnknown_02024DE8;
 extern u8 gUnknown_02024E68[];
@@ -71,7 +71,7 @@ extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void sub_8033018(void);
 extern void BattleLoadOpponentMonSprite();
-extern u8 GetBankIdentity(u8);
+extern u8 GetBattlerPosition(u8);
 extern void sub_8032984(u8, u16);
 extern void sub_80333D4(void);
 extern void sub_80312F0(struct Sprite *);
@@ -98,9 +98,9 @@ extern void sub_8031F24(void);
 extern void sub_80324BC();
 extern void BufferStringBattle();
 extern void sub_80331D0(void);
-extern void sub_8036B0C(void);
-extern u8 GetBankByIdentity(u8);
-extern u8 sub_8036CD4(void);
+extern void AI_TrySwitchOrUseItem(void);
+extern u8 GetBattlerAtPosition(u8);
+extern u8 GetMostSuitableMonToSwitchInto(void);
 extern void sub_80330C8(void);
 extern void sub_8043D84();
 extern void sub_8045A5C();
@@ -350,9 +350,9 @@ void sub_8032C88(void)
 void sub_8032E2C(void)
 {
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
-        sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+        sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (!ewram17810[gActiveBattler ^ 2].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_7)
-        sub_8141828(gActiveBattler ^ 2, &gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]]);
+        sub_8141828(gActiveBattler ^ 2, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]]);
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler ^ 2].unk0_3)
     {
         if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
@@ -360,24 +360,24 @@ void sub_8032E2C(void)
             DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler ^ 2]]);
             sub_8045A5C(
               gHealthboxIDs[gActiveBattler ^ 2],
-              &gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]],
+              &gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]],
               0);
             sub_804777C(gActiveBattler ^ 2);
             sub_8043DFC(gHealthboxIDs[gActiveBattler ^ 2]);
             sub_8032984(
               gActiveBattler ^ 2,
-              GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler ^ 2]], MON_DATA_SPECIES));
+              GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], MON_DATA_SPECIES));
         }
         DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
         sub_8045A5C(
           gHealthboxIDs[gActiveBattler],
-          &gEnemyParty[gBattlePartyID[gActiveBattler]],
+          &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]],
           0);
         sub_804777C(gActiveBattler);
         sub_8043DFC(gHealthboxIDs[gActiveBattler]);
         sub_8032984(
           gActiveBattler,
-          GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+          GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
 
         ewram17840.unk9_0 = 0;
         gBattleBankFunc[gActiveBattler] = sub_8032C88;
@@ -391,7 +391,7 @@ void sub_8033018(void)
     {
         if (!ewram17810[gActiveBattler].unk0_7)
         {
-            sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+            sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
             return;
         }
         if (ewram17810[gActiveBattler].unk1_0)
@@ -493,7 +493,7 @@ void sub_8033308(void)
         StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 0);
         sub_8045A5C(
           gHealthboxIDs[gActiveBattler],
-          &gEnemyParty[gBattlePartyID[gActiveBattler]],
+          &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]],
           0);
         sub_804777C(gActiveBattler);
         sub_8043DFC(gHealthboxIDs[gActiveBattler]);
@@ -505,12 +505,12 @@ void sub_8033308(void)
 void sub_80333D4(void)
 {
     if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
-        sub_8141828(gActiveBattler, &gEnemyParty[gBattlePartyID[gActiveBattler]]);
+        sub_8141828(gActiveBattler, &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]]);
     if (gSprites[gUnknown_0300434C[gActiveBattler]].callback == SpriteCallbackDummy
      && !ewram17810[gActiveBattler].unk0_3)
     {
         DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
-        sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+        sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
         gBattleBankFunc[gActiveBattler] = sub_8033308;
     }
 }
@@ -541,7 +541,7 @@ void OpponentHandleGetAttributes(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        r6 = sub_8033598(gBattlePartyID[gActiveBattler], buffer);
+        r6 = sub_8033598(gBattlerPartyIndexes[gActiveBattler], buffer);
     }
     else
     {
@@ -864,7 +864,7 @@ void OpponentHandlecmd1(void)
     struct BattlePokemon buffer;
     u8 i;
     // TODO: Maybe fix this. Integrating this into MEMSET_ALT is too hard.
-    u8 *src = (u8 *)&gEnemyParty[gBattlePartyID[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
+    u8 *src = (u8 *)&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 *dst;
 
     MEMSET_ALT(&buffer + gBattleBufferA[gActiveBattler][1], src[i], gBattleBufferA[gActiveBattler][2], i, dst);
@@ -879,7 +879,7 @@ void OpponentHandleSetAttributes(void)
 
     if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        sub_8033E24(gBattlePartyID[gActiveBattler]);
+        sub_8033E24(gBattlerPartyIndexes[gActiveBattler]);
     }
     else
     {
@@ -1115,17 +1115,17 @@ void OpponentHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    MEMSET_ALT(&gEnemyParty[gBattlePartyID[gActiveBattler]] + gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][3 + i], 
+    MEMSET_ALT(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1], gBattleBufferA[gActiveBattler][3 + i], 
         gBattleBufferA[gActiveBattler][2], i, dst);
     OpponentBufferExecCompleted();
 }
 
 void OpponentHandleLoadPokeSprite(void)
 {
-    u16 species = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[gActiveBattler]], gActiveBattler);
-    GetMonSpriteTemplate_803C56C(species, GetBankIdentity(gActiveBattler));
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       GetBankPosition(gActiveBattler, 2),
@@ -1136,13 +1136,13 @@ void OpponentHandleLoadPokeSprite(void)
     gSprites[gBankSpriteIds[gActiveBattler]].data[2] = species;
     gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
-    sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES));
+    sub_8032984(gActiveBattler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
     gBattleBankFunc[gActiveBattler] = sub_8033018;
 }
 
 void OpponentHandleSendOutPoke(void)
 {
-    gBattlePartyID[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
+    gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
 
     sub_803495C(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
     gBattleBankFunc[gActiveBattler] = sub_80333D4;
@@ -1153,11 +1153,11 @@ void sub_803495C(u8 a, u8 b)
     u16 species;
 
     sub_8032AA8(a, b);
-    gBattlePartyID[a] = gBattleBufferA[a][1];
-    species = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_SPECIES);
+    gBattlerPartyIndexes[a] = gBattleBufferA[a][1];
+    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_SPECIES);
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
-    GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
+    BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
+    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBankSpriteIds[a] = CreateSprite(
       &gUnknown_02024E8C,
       GetBankPosition(a, 2),
@@ -1233,7 +1233,7 @@ void OpponentHandleTrainerThrow(void)
     }
 
     sub_8031A6C(trainerPicIndex, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBankIdentity(gActiveBattler));
+    GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       0xB0,
@@ -1263,7 +1263,7 @@ void OpponentHandleTrainerSlide(void)
         trainerPicIndex = gTrainers[gTrainerBattleOpponent].trainerPic;
 
     sub_8031A6C(trainerPicIndex, gActiveBattler);
-    GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBankIdentity(gActiveBattler));
+    GetMonSpriteTemplate_803C5A0(trainerPicIndex, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       0xB0,
@@ -1428,7 +1428,7 @@ void OpponentHandlePrintStringPlayerOnly(void)
 
 void OpponentHandlecmd18(void)
 {
-    sub_8036B0C();
+    AI_TrySwitchOrUseItem();
     OpponentBufferExecCompleted();
 }
 
@@ -1543,7 +1543,7 @@ void OpponentHandlecmd20(void)
     bne ._557   @cond_branch\n\
     mov r1, sl\n\
     ldrb    r0, [r1]\n\
-    bl  GetBankIdentity\n\
+    bl  GetBattlerPosition\n\
     mov r1, #0x2\n\
     eor r0, r0, r1\n\
     lsl r0, r0, #0x18\n\
@@ -1564,7 +1564,7 @@ void OpponentHandlecmd20(void)
 ._557:\n\
     mov r0, #0x0\n\
 ._558:\n\
-    bl  GetBankByIdentity\n\
+    bl  GetBattlerAtPosition\n\
     lsl r0, r0, #0x18\n\
     lsr r0, r0, #0x18\n\
 ._561:\n\
@@ -1635,10 +1635,10 @@ void OpponentHandlecmd20(void)
     cmp r0, #0\n\
     beq ._572   @cond_branch\n\
     mov r0, #0x0\n\
-    bl  GetBankByIdentity\n\
+    bl  GetBattlerAtPosition\n\
     ldr r5, ._574 + 4   @ gBankTarget\n\
     strb    r0, [r5]\n\
-    ldr r0, ._574 + 8   @ gAbsentBankFlags\n\
+    ldr r0, ._574 + 8   @ gAbsentBattlerFlags\n\
     ldrb    r1, [r0]\n\
     ldr r2, ._574 + 12  @ gBitTable\n\
     ldrb    r0, [r5]\n\
@@ -1649,7 +1649,7 @@ void OpponentHandlecmd20(void)
     cmp r1, #0\n\
     beq ._572   @cond_branch\n\
     mov r0, #0x2\n\
-    bl  GetBankByIdentity\n\
+    bl  GetBattlerAtPosition\n\
     strb    r0, [r5]\n\
 ._572:\n\
     ldr r0, ._574 + 4   @ gBankTarget\n\
@@ -1665,7 +1665,7 @@ void OpponentHandlecmd20(void)
 ._574:\n\
     .word   gBattleMoves\n\
     .word   gBankTarget\n\
-    .word   gAbsentBankFlags\n\
+    .word   gAbsentBattlerFlags\n\
     .word   gBitTable\n\
 ._563:\n\
     mov r6, #0x3\n\
@@ -1710,7 +1710,7 @@ void OpponentHandlecmd20(void)
     lsl r1, r1, #0x18\n\
     lsr r1, r1, #0x18\n\
     add r0, r1, #0\n\
-    bl  GetBankByIdentity\n\
+    bl  GetBattlerAtPosition\n\
     add r2, r0, #0\n\
     lsl r2, r2, #0x18\n\
     lsr r2, r2, #0x10\n\
@@ -1726,7 +1726,7 @@ void OpponentHandlecmd20(void)
     .word   gBattleTypeFlags\n\
 ._581:\n\
     mov r0, #0x0\n\
-    bl  GetBankByIdentity\n\
+    bl  GetBattlerAtPosition\n\
     add r2, r0, #0\n\
     lsl r2, r2, #0x18\n\
     lsr r2, r2, #0x10\n\
@@ -1770,9 +1770,9 @@ void OpponentHandlecmd20(void)
                 gBankTarget = gActiveBattler;
             if (gBattleMoves[r5->moves[r4]].target & 8)
             {
-                gBankTarget = GetBankByIdentity(0);
-                if (gAbsentBankFlags & gBitTable[gBankTarget])
-                    gBankTarget = GetBankByIdentity(2);
+                gBankTarget = GetBattlerAtPosition(0);
+                if (gAbsentBattlerFlags & gBitTable[gBankTarget])
+                    gBankTarget = GetBattlerAtPosition(2);
             }
             r4 |= gBankTarget << 8;
             Emitcmd33(1, 10, r4);
@@ -1798,13 +1798,13 @@ void OpponentHandlecmd20(void)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            u16 r2 = GetBankByIdentity(Random() & 2) << 8;
+            u16 r2 = GetBattlerAtPosition(Random() & 2) << 8;
 
             Emitcmd33(1, 10, r4 | r2);
         }
         else
         {
-            u16 r2 = GetBankByIdentity(0) << 8;
+            u16 r2 = GetBattlerAtPosition(0) << 8;
 
             Emitcmd33(1, 10, r4 | r2);
         }
@@ -1880,10 +1880,10 @@ _08035494:\n\
     cmp r0, 0\n\
     beq _080354CE\n\
     movs r0, 0\n\
-    bl GetBankByIdentity\n\
+    bl GetBattlerAtPosition\n\
     ldr r5, _080354EC @ =gBankTarget\n\
     strb r0, [r5]\n\
-    ldr r0, _080354F0 @ =gAbsentBankFlags\n\
+    ldr r0, _080354F0 @ =gAbsentBattlerFlags\n\
     ldrb r1, [r0]\n\
     ldr r2, _080354F4 @ =gBitTable\n\
     ldrb r0, [r5]\n\
@@ -1894,7 +1894,7 @@ _08035494:\n\
     cmp r1, 0\n\
     beq _080354CE\n\
     movs r0, 0x2\n\
-    bl GetBankByIdentity\n\
+    bl GetBattlerAtPosition\n\
     strb r0, [r5]\n\
 _080354CE:\n\
     ldr r0, _080354EC @ =gBankTarget\n\
@@ -1911,7 +1911,7 @@ _080354E0:\n\
     .align 2, 0\n\
 _080354E8: .4byte gBattleMoves\n\
 _080354EC: .4byte gBankTarget\n\
-_080354F0: .4byte gAbsentBankFlags\n\
+_080354F0: .4byte gAbsentBattlerFlags\n\
 _080354F4: .4byte gBitTable\n\
 _080354F8:\n\
     movs r6, 0x3\n\
@@ -1959,7 +1959,7 @@ _0803553C:\n\
     lsls r1, 24\n\
     lsrs r1, 24\n\
     adds r0, r1, 0\n\
-    bl GetBankByIdentity\n\
+    bl GetBattlerAtPosition\n\
     adds r2, r0, 0\n\
     lsls r2, 24\n\
     lsrs r2, 16\n\
@@ -1972,7 +1972,7 @@ _0803553C:\n\
 _0803556C: .4byte gBattleTypeFlags\n\
 _08035570:\n\
     movs r0, 0\n\
-    bl GetBankByIdentity\n\
+    bl GetBattlerAtPosition\n\
     adds r2, r0, 0\n\
     lsls r2, 24\n\
     lsrs r2, 16\n\
@@ -2002,37 +2002,37 @@ void OpponentHandlecmd22(void)
 {
     s32 r4;
 
-    if (ewram160C8arr(GetBankIdentity(gActiveBattler)) == 6)
+    if (ewram160C8arr(GetBattlerPosition(gActiveBattler)) == 6)
     {
         u8 r6;
         u8 r5;
 
-        r4 = sub_8036CD4();
+        r4 = GetMostSuitableMonToSwitchInto();
         if (r4 == 6)
         {
             if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
             {
-                r5 = GetBankByIdentity(1);
+                r5 = GetBattlerAtPosition(1);
                 r6 = r5;
             }
             else
             {
-                r6 = GetBankByIdentity(1);
-                r5 = GetBankByIdentity(3);
+                r6 = GetBattlerAtPosition(1);
+                r5 = GetBattlerAtPosition(3);
             }
             for (r4 = 0; r4 < 6; r4++)
             {
                 if (GetMonData(&gEnemyParty[r4], MON_DATA_HP) != 0
-                 && r4 != gBattlePartyID[r6]
-                 && r4 != gBattlePartyID[r5])
+                 && r4 != gBattlerPartyIndexes[r6]
+                 && r4 != gBattlerPartyIndexes[r5])
                     break;
             }
         }
     }
     else
     {
-        r4 = ewram160C8arr(GetBankIdentity(gActiveBattler));
-        ewram160C8arr(GetBankIdentity(gActiveBattler)) = 6;
+        r4 = ewram160C8arr(GetBattlerPosition(gActiveBattler));
+        ewram160C8arr(GetBattlerPosition(gActiveBattler)) = 6;
     }
     ewram16068arr(gActiveBattler) = r4;
     Emitcmd34(1, r4, 0);
@@ -2052,14 +2052,14 @@ void OpponentHandleHealthBarUpdate(void)
     r7 = (gBattleBufferA[gActiveBattler][3] << 8) | gBattleBufferA[gActiveBattler][2];
     if (r7 != 0x7FFF)
     {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
-        u32 hp = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_HP);
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 hp = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
         sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, hp, r7);
     }
     else
     {
-        u32 maxHP = GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 maxHP = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
         sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, 0, r7);
     }
@@ -2075,7 +2075,7 @@ void OpponentHandleStatusIconUpdate(void)
 {
     if (mplay_80342A4(gActiveBattler) == 0)
     {
-        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gEnemyParty[gBattlePartyID[gActiveBattler]], 9);
+        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], 9);
         ewram17810[gActiveBattler].unk0_4 = 0;
         gBattleBankFunc[gActiveBattler] = sub_8033494;
     }
@@ -2205,7 +2205,7 @@ void OpponentHandlecmd44(void)
 void OpponentHandleFaintingCry(void)
 {
     PlayCry3(
-      GetMonData(&gEnemyParty[gBattlePartyID[gActiveBattler]], MON_DATA_SPECIES),
+      GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
       25, 5);
     OpponentBufferExecCompleted();
 }
@@ -2251,15 +2251,15 @@ void sub_8035C44(u8 taskId)
     gActiveBattler = gTasks[taskId].data[0];
     if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_803495C(gActiveBattler, 0);
     }
     else
     {
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_803495C(gActiveBattler, 0);
         gActiveBattler ^= 2;
-        gBattleBufferA[gActiveBattler][1] = gBattlePartyID[gActiveBattler];
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
         sub_803495C(gActiveBattler, 0);
         gActiveBattler ^= 2;
     }

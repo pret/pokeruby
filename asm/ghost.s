@@ -1127,7 +1127,7 @@ sub_80DE3D4: @ 80DE3D4
 	adds r5, r0, r1
 	ldr r0, _080DE410 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26
@@ -1487,7 +1487,7 @@ sub_80DE6B0: @ 80DE6B0
 	adds r4, r0, r1
 	ldr r0, _080DE6E4 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26

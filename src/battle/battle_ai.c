@@ -18,18 +18,18 @@ extern u32 gUnknown_02023A14_4C;
 extern u16 gBattleTypeFlags;
 extern u16 gBattleWeather;
 extern u8 gActiveBattler;
-extern u16 gBattlePartyID[MAX_BANKS_BATTLE];
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
 extern u16 gCurrentMove;
 extern int gBattleMoveDamage;
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
-extern u8 gAbsentBankFlags;
-extern u8 gBattleMoveFlags;
+extern u8 gAbsentBattlerFlags;
+extern u8 gMoveResultFlags;
 extern u16 gDynamicBasePower;
-extern u16 gLastUsedMove[MAX_BANKS_BATTLE];
-extern u32 gStatuses3[MAX_BANKS_BATTLE];
+extern u16 gLastUsedMove[MAX_BATTLERS_COUNT];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern u16 gSideAffecting[2];
-extern struct BattlePokemon gBattleMons[MAX_BANKS_BATTLE];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u8 *BattleAIs[];
@@ -324,7 +324,7 @@ void BattleAI_SetupAIData(void)
     {
         gBankTarget = Random() & 2; // just pick somebody to target.
 
-        if (gAbsentBankFlags & gBitTable[gBankTarget])
+        if (gAbsentBattlerFlags & gBitTable[gBankTarget])
             gBankTarget ^= 2;
     }
     else
@@ -465,13 +465,13 @@ void unref_sub_81074A0(u8 a)
 void RecordAbilityBattle(u8 a, u8 b)
 {
     if (GetBankSide(a) == 0)
-        UNK_2016A00_STRUCT->unk20[GetBankIdentity(a) & 1] = b;
+        UNK_2016A00_STRUCT->unk20[GetBattlerPosition(a) & 1] = b;
 }
 
 void RecordItemBattle(u8 a, u8 b)
 {
     if (GetBankSide(a) == 0)
-        UNK_2016A00_STRUCT->unk22[GetBankIdentity(a) & 1] = b;
+        UNK_2016A00_STRUCT->unk22[GetBattlerPosition(a) & 1] = b;
 }
 
 static void BattleAICmd_if_random_less_than(void)
@@ -694,7 +694,7 @@ static void BattleAICmd_if_status4(void)
     else
         index = gBankTarget;
 
-    arg1 = GetBankIdentity(index) & 1;
+    arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) != 0)
@@ -713,7 +713,7 @@ static void BattleAICmd_if_not_status4(void)
     else
         index = gBankTarget;
 
-    arg1 = GetBankIdentity(index) & 1;
+    arg1 = GetBattlerPosition(index) & 1;
     arg2 = T1_READ_32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) == 0)
@@ -961,7 +961,7 @@ static void BattleAICmd_is_most_powerful_move(void)
         gDynamicBasePower = 0;
         eDynamicMoveType = 0;
         eDmgMultiplier = 1;
-        gBattleMoveFlags = 0;
+        gMoveResultFlags = 0;
         gCritMultiplier = 1;
 
         for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1072,7 +1072,7 @@ _08108250:\n\
     adds r0, r5, r2\n\
     movs r2, 0x1\n\
     strb r2, [r0]\n\
-    ldr r0, _08108340 @ =gBattleMoveFlags\n\
+    ldr r0, _08108340 @ =gMoveResultFlags\n\
     strb r1, [r0]\n\
     ldr r0, _08108344 @ =gCritMultiplier\n\
     strb r2, [r0]\n\
@@ -1177,7 +1177,7 @@ _08108330: .4byte gBattleMoves\n\
 _08108334: .4byte gSharedMem + 0x16800\n\
 _08108338: .4byte gDynamicBasePower\n\
 _0810833C: .4byte 0xfffff81c\n\
-_08108340: .4byte gBattleMoveFlags\n\
+_08108340: .4byte gMoveResultFlags\n\
 _08108344: .4byte gCritMultiplier\n\
 _08108348: .4byte gBattleMons\n\
 _0810834C: .4byte gBankAttacker\n\
@@ -1325,14 +1325,14 @@ static void BattleAICmd_count_alive_pokemon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         u32 status;
-        var = gBattlePartyID[index];
-        status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlePartyID[GetBankByIdentity(status)];
+        var = gBattlerPartyIndexes[index];
+        status = GetBattlerPosition(index) ^ 2;
+        var2 = gBattlerPartyIndexes[GetBattlerAtPosition(status)];
     }
     else
     {
-        var = gBattlePartyID[index];
-        var2 = gBattlePartyID[index];
+        var = gBattlerPartyIndexes[index];
+        var2 = gBattlerPartyIndexes[index];
     }
 
     for (i = 0; i < 6; i++)
@@ -1372,7 +1372,7 @@ static void BattleAICmd_get_ability(void)
 
     if (GetBankSide(index) == TARGET)
     {
-        u16 unk = GetBankIdentity(index) & 1;
+        u16 unk = GetBattlerPosition(index) & 1;
 
         if (UNK_2016A00_STRUCT->unk20[unk] != 0)
         {
@@ -1430,7 +1430,7 @@ static void BattleAICmd_get_highest_possible_damage(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->dmgMultiplier = 1;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
 
@@ -1453,7 +1453,7 @@ static void BattleAICmd_get_highest_possible_damage(void)
             if (gBattleMoveDamage == 15)
                 gBattleMoveDamage = 10;
 
-            if (gBattleMoveFlags & 8) // if it's a status move, it wont do anything.
+            if (gMoveResultFlags & 8) // if it's a status move, it wont do anything.
                 gBattleMoveDamage = 0;
 
             if (AI_THINKING_STRUCT->funcResult < gBattleMoveDamage)
@@ -1470,7 +1470,7 @@ static void BattleAICmd_if_damage_bonus(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->dmgMultiplier = 1;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gCritMultiplier = 1;
 
     gBattleMoveDamage = 40;
@@ -1487,7 +1487,7 @@ static void BattleAICmd_if_damage_bonus(void)
     if (gBattleMoveDamage == 15)
         gBattleMoveDamage = 10;
 
-    if (gBattleMoveFlags & 8)
+    if (gMoveResultFlags & 8)
         gBattleMoveDamage = 0;
 
     // store gBattleMoveDamage in a u8 variable because gAIScriptPtr[1] is a u8.
@@ -1677,7 +1677,7 @@ static void BattleAICmd_if_can_faint(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->dmgMultiplier = 1;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
     AI_CalcDmg(gBankAttacker, gBankTarget);
@@ -1706,7 +1706,7 @@ static void BattleAICmd_if_cant_faint(void)
     gDynamicBasePower = 0;
     gBattleStruct->dynamicMoveType = 0;
     gBattleStruct->dmgMultiplier = 1;
-    gBattleMoveFlags = 0;
+    gMoveResultFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
     AI_CalcDmg(gBankAttacker, gBankTarget);
@@ -1938,7 +1938,7 @@ static void BattleAICmd_get_hold_effect(void)
 
     if (GetBankSide(index) == 0)
     {
-        status = (GetBankIdentity(index) & 1);
+        status = (GetBattlerPosition(index) & 1);
         AI_THINKING_STRUCT->funcResult = UNK_2016A00_STRUCT->unk22[status];
     }
     else

@@ -21,7 +21,7 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 extern u16 gBattle_WIN0H;
 extern u16 gBattle_WIN0V;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gAnimMoveTurn;
 
 extern const u8 gUnknown_08D1D574[];
@@ -49,7 +49,7 @@ void sub_80DFC24(u8 taskId)
     bank = gAnimBankAttacker;
     gTasks[taskId].data[1] = 16;
     REG_BLDALPHA = 16;
-    if (GetBankIdentity_permutated(bank) == 1)
+    if (GetBattlerPosition_permutated(bank) == 1)
         REG_BLDCNT = 0x3F42;
     else
         REG_BLDCNT = 0x3F44;
@@ -112,7 +112,7 @@ void sub_80DFD58(u8 taskId)
 void sub_80DFDC0(u8 taskId)
 {
     REG_BLDALPHA = 0x1000;
-    if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
         REG_BLDCNT = 0x3F42;
     else
         REG_BLDCNT = 0x3F44;
@@ -267,12 +267,12 @@ void sub_80E00EC(u8 taskId)
     task->data[14] = pos - 32;
     task->data[15] = pos + 32;
 
-    if (GetBankSide(gAnimBankAttacker) == SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) == B_SIDE_PLAYER)
         task->data[8] = -12;
     else
         task->data[8] = -64;
 
-    task->data[3] = GetBankIdentity_permutated(gAnimBankAttacker);
+    task->data[3] = GetBattlerPosition_permutated(gAnimBankAttacker);
     if (task->data[3] == 1)
     {
         sub_8078914(&subStruct);
@@ -403,7 +403,7 @@ void sub_80E03BC(u8 taskId)
         }
         else
         {
-            task->data[3] = GetBankIdentity_permutated(gAnimBankTarget);
+            task->data[3] = GetBattlerPosition_permutated(gAnimBankTarget);
             if (task->data[3] == 1)
             {
                 REG_BLDCNT = 0x3F42;
@@ -442,7 +442,7 @@ void sub_80E03BC(u8 taskId)
         task->data[14] = pos - 4;
         task->data[15] = pos + 4;
 
-        if (GetBankSide(gAnimBankTarget) == SIDE_PLAYER)
+        if (GetBankSide(gAnimBankTarget) == B_SIDE_PLAYER)
             task->data[8] = -12;
         else
             task->data[8] = -64;
@@ -791,7 +791,7 @@ static void sub_80E08CC(u8 priority)
 
 void sub_80E0918(u8 taskId)
 {
-    u8 toBG2 = GetBankIdentity_permutated(gAnimBankAttacker) ^ 1 ? 1 : 0;
+    u8 toBG2 = GetBattlerPosition_permutated(gAnimBankAttacker) ^ 1 ? 1 : 0;
     MoveBattlerSpriteToBG(gAnimBankAttacker, toBG2);
     gSprites[gBankSpriteIds[gAnimBankAttacker]].invisible = 0;
 
@@ -806,7 +806,7 @@ void sub_80E0918(u8 taskId)
 
 void sub_80E09C4(u8 taskId)
 {
-    u8 toBG2 = GetBankIdentity_permutated(gAnimBankAttacker) ^ 1 ? 1 : 0;
+    u8 toBG2 = GetBattlerPosition_permutated(gAnimBankAttacker) ^ 1 ? 1 : 0;
     sub_8076464(toBG2);
 
     if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2))
@@ -847,7 +847,7 @@ void sub_80E0A4C(u8 taskId)
 
     if (IsDoubleBattle() && !IsContest())
     {
-        if (GetBankIdentity(gAnimBankAttacker) == 3 || GetBankIdentity(gAnimBankAttacker) == 0)
+        if (GetBattlerPosition(gAnimBankAttacker) == 3 || GetBattlerPosition(gAnimBankAttacker) == 0)
         {
             if (IsAnimBankSpriteVisible(gAnimBankAttacker ^ 2) == TRUE)
             {
@@ -864,10 +864,10 @@ void sub_80E0A4C(u8 taskId)
     }
     else
     {
-        if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlePartyID[gAnimBankAttacker]], MON_DATA_SPECIES);
+        if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gAnimBankAttacker]], MON_DATA_SPECIES);
         else
-            species = GetMonData(&gPlayerParty[gBattlePartyID[gAnimBankAttacker]], MON_DATA_SPECIES);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gAnimBankAttacker]], MON_DATA_SPECIES);
     }
 
     spriteId = GetAnimBankSpriteId(0);
@@ -961,19 +961,19 @@ void sub_80E0E24(u8 taskId)
         spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
         break;
     case 4:
-        identity = IDENTITY_PLAYER_MON1;
+        identity = B_POSITION_PLAYER_LEFT;
         calcSpriteId = TRUE;
         break;
     case 5:
-        identity = IDENTITY_PLAYER_MON2;
+        identity = B_POSITION_PLAYER_RIGHT;
         calcSpriteId = TRUE;
         break;
     case 6:
-        identity = IDENTITY_OPPONENT_MON1;
+        identity = B_POSITION_OPPONENT_LEFT;
         calcSpriteId = TRUE;
         break;
     case 7:
-        identity = IDENTITY_OPPONENT_MON2;
+        identity = B_POSITION_OPPONENT_RIGHT;
         calcSpriteId = TRUE;
         break;
     default:
@@ -983,7 +983,7 @@ void sub_80E0E24(u8 taskId)
 
     if (calcSpriteId)
     {
-        bank = GetBankByIdentity(identity);
+        bank = GetBattlerAtPosition(identity);
         if (IsAnimBankSpriteVisible(bank))
             spriteId = gBankSpriteIds[bank];
         else

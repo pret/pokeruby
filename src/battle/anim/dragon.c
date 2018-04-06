@@ -169,7 +169,7 @@ void sub_80DF924(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u16 i;
     u8 r1;
-    if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
     {
         sp.dmaDest = &REG_BG1HOFS;
         task->data[2] = gBattle_BG1_X;

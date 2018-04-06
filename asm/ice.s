@@ -2701,7 +2701,7 @@ sub_80D8BA8: @ 80D8BA8
 	ldrh r0, [r4, 0x2]
 	lsls r0, 20
 	lsrs r0, 24
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r5, 0

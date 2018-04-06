@@ -47,7 +47,7 @@ void sub_80CE7E0(u8 taskId)
     }
 
     task->func = sub_80CE910;
-    if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
     {
         REG_DISPCNT &= 0xFDFF;
     }
@@ -62,7 +62,7 @@ void sub_80CE910(u8 taskId)
     struct Task* task = &gTasks[taskId];
     if (!task->data[3])
     {
-        if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+        if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
             REG_DISPCNT |= 0x200;
         else
             REG_DISPCNT |= 0x400;

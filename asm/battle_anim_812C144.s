@@ -1688,7 +1688,7 @@ _0812CDF6:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -3045,7 +3045,7 @@ _0812D834:
 	strh r0, [r1]
 	ldr r0, _0812D854 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3136,7 +3136,7 @@ _0812D8F4: .4byte gAnimBankAttacker
 _0812D8F8: .4byte gAnimBankTarget
 _0812D8FC:
 	ldrb r0, [r5]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0812D906:
@@ -3330,7 +3330,7 @@ _0812DA84:
 	strh r0, [r1]
 	ldr r0, _0812DAA4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4293,7 +4293,7 @@ _0812E25C: .4byte gBattle_BG1_Y
 _0812E260:
 	ldr r0, _0812E2A0 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity
+	bl GetBattlerPosition
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl IsDoubleBattle
@@ -6071,7 +6071,7 @@ _0812F004:
 	beq _0812F0AC
 	movs r0, 0
 	str r0, [sp, 0x14]
-	ldr r6, _0812F074 @ =gBattlePartyID
+	ldr r6, _0812F074 @ =gBattlerPartyIndexes
 	ldr r4, _0812F078 @ =gAnimBankTarget
 	ldrb r0, [r4]
 	lsls r0, 1
@@ -6114,7 +6114,7 @@ _0812F004:
 	b _0812F092
 	.align 2, 0
 _0812F070: .4byte gAnimBankAttacker
-_0812F074: .4byte gBattlePartyID
+_0812F074: .4byte gBattlerPartyIndexes
 _0812F078: .4byte gAnimBankTarget
 _0812F07C: .4byte gPlayerParty
 _0812F080: .4byte gSharedMem + 0x17800
@@ -6143,7 +6143,7 @@ _0812F0A6:
 _0812F0AC:
 	movs r2, 0x1
 	str r2, [sp, 0x14]
-	ldr r6, _0812F10C @ =gBattlePartyID
+	ldr r6, _0812F10C @ =gBattlerPartyIndexes
 	ldr r4, _0812F110 @ =gAnimBankTarget
 	ldrb r0, [r4]
 	lsls r0, 1
@@ -6186,7 +6186,7 @@ _0812F0AC:
 	adds r0, r1
 	b _0812F12C
 	.align 2, 0
-_0812F10C: .4byte gBattlePartyID
+_0812F10C: .4byte gBattlerPartyIndexes
 _0812F110: .4byte gAnimBankTarget
 _0812F114: .4byte gEnemyParty
 _0812F118: .4byte gSharedMem + 0x17800
@@ -6508,7 +6508,7 @@ _0812F388:
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
 	adds r0, r5, 0
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6620,7 +6620,7 @@ sub_812F474: @ 812F474
 	ldr r1, _0812F4A8 @ =gTasks
 	adds r6, r0, r1
 	ldrb r0, [r6, 0x12]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11586,7 +11586,7 @@ _08131A74:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08131B10
-	ldr r7, _08131AD8 @ =gBattlePartyID
+	ldr r7, _08131AD8 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r7
@@ -11626,7 +11626,7 @@ _08131A74:
 	b _08131AE6
 	.align 2, 0
 _08131AD4: .4byte gAnimBankAttacker
-_08131AD8: .4byte gBattlePartyID
+_08131AD8: .4byte gBattlerPartyIndexes
 _08131ADC: .4byte gPlayerParty
 _08131AE0: .4byte gSharedMem + 0x17800
 _08131AE4:
@@ -11653,7 +11653,7 @@ _08131AE6:
 	.align 2, 0
 _08131B0C: .4byte gSprites
 _08131B10:
-	ldr r7, _08131B64 @ =gBattlePartyID
+	ldr r7, _08131B64 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r7
@@ -11692,7 +11692,7 @@ _08131B10:
 	lsrs r5, r0, 16
 	b _08131B72
 	.align 2, 0
-_08131B64: .4byte gBattlePartyID
+_08131B64: .4byte gBattlerPartyIndexes
 _08131B68: .4byte gEnemyParty
 _08131B6C: .4byte gSharedMem + 0x17800
 _08131B70:

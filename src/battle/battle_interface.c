@@ -424,7 +424,7 @@ u8 *const gUnknown_0820A904[10] =
 
 extern u8 gDisplayedStringBattle[];
 extern u8 gNoOfAllBanks;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u8 gHealthboxIDs[];
 
@@ -811,8 +811,8 @@ u8 battle_make_oam_normal_battle(u8 a)
     {
         if (GetBankSide(a) == 0)
         {
-            spriteId1 = CreateSprite(&gSpriteTemplates_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A4EC[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A4EC[GetBattlerPosition(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A4EC[GetBattlerPosition(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data[5] = spriteId1;
@@ -823,8 +823,8 @@ u8 battle_make_oam_normal_battle(u8 a)
         //_08043ACC
         else
         {
-            spriteId1 = CreateSprite(&gSpriteTemplates_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
-            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A51C[GetBankIdentity(a) / 2], 240, 160, 1);
+            spriteId1 = CreateSprite(&gSpriteTemplates_820A51C[GetBattlerPosition(a) / 2], 240, 160, 1);
+            spriteId2 = CreateSpriteAtEnd(&gSpriteTemplates_820A51C[GetBattlerPosition(a) / 2], 240, 160, 1);
 
             gSprites[spriteId1].oam.affineParam = spriteId2;
             gSprites[spriteId2].data[5] = spriteId1;
@@ -986,7 +986,7 @@ void sub_8043F44(u8 a)
     }
     else
     {
-        switch (GetBankIdentity(a))
+        switch (GetBattlerPosition(a))
         {
         case 0:
             x = 159;
@@ -1323,7 +1323,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
 
     // TODO: make this a local variable
     memcpy(str, gUnknown_0820A864, sizeof(str));
-    r6 = ewram520[GetBankIdentity(gSprites[a].data[6])].filler0;
+    r6 = ewram520[GetBattlerPosition(gSprites[a].data[6])].filler0;
     r8 = 5;
     nature = GetNature(pkmn);
     StringCopy(str + 6, gNatureNames[nature]);
@@ -1407,7 +1407,7 @@ void sub_8044338(u8 a, struct Pokemon *pkmn)
     ldrh r0, [r0, 0x3A]\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
-    bl GetBankIdentity\n\
+    bl GetBattlerPosition\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     lsls r1, r0, 1\n\
@@ -1675,13 +1675,13 @@ void sub_804454C(void)
                     spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
                     CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_HP), 0);
-                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
+                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
+                    sub_8044210(gHealthboxIDs[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
                 }
                 else
                 {
                     draw_status_ailment_maybe(gHealthboxIDs[i]);
-                    sub_8045A5C(gHealthboxIDs[i], &gPlayerParty[gBattlePartyID[i]], 5);
+                    sub_8045A5C(gHealthboxIDs[i], &gPlayerParty[gBattlerPartyIndexes[i]], 5);
                     CpuCopy32(sub_8043CDC(0x75), OBJ_VRAM0 + 0x680 + gSprites[gHealthboxIDs[i]].oam.tileNum * 32, 32);
                 }
             }
@@ -1691,23 +1691,23 @@ void sub_804454C(void)
                 {
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     {
-                        sub_8044338(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]]);
+                        sub_8044338(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]]);
                     }
                     else
                     {
                         spriteId = gSprites[gHealthboxIDs[i]].data[5];
 
                         CpuFill32(0, OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * 32, 0x100);
-                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_HP), 0);
-                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlePartyID[i]], MON_DATA_MAX_HP), 1);
+                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), 0);
+                        sub_8044210(gHealthboxIDs[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), 1);
                     }
                 }
                 else
                 {
                     draw_status_ailment_maybe(gHealthboxIDs[i]);
-                    sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]], 5);
+                    sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]], 5);
                     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-                        sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlePartyID[i]], 4);
+                        sub_8045A5C(gHealthboxIDs[i], &gEnemyParty[gBattlerPartyIndexes[i]], 4);
                 }
             }
             gSprites[gHealthboxIDs[i]].data[7] ^= 1;
@@ -1731,7 +1731,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     u8 sp18;
     u8 taskId;
 
-    if (c == 0 || GetBankIdentity(a) != 3)
+    if (c == 0 || GetBattlerPosition(a) != 3)
     {
         if (GetBankSide(a) == 0)
         {
@@ -1947,7 +1947,7 @@ u8 sub_8044804(u8 a, const struct BattleInterfaceStruct2 *b, u8 c, u8 d)
     str r3, [sp, 0x10]\n\
     cmp r4, 0\n\
     beq _08044834\n\
-    bl GetBankIdentity\n\
+    bl GetBattlerPosition\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     cmp r0, 0x3\n\
@@ -2779,7 +2779,7 @@ void sub_8045180(struct Sprite *sprite)
     ptr[1] = 0x13;
     ptr[2] = 0x37;
     ptr[3] = EOS;
-    ptr = ewram520_2 + GetBankIdentity(gSprites[a].data[6]) * 0x180;
+    ptr = ewram520_2 + GetBattlerPosition(gSprites[a].data[6]) * 0x180;
     sub_80034D4(ptr, gDisplayedStringBattle);
 
     i = 0;
@@ -2865,7 +2865,7 @@ static void sub_8045458(u8 a, u8 b)
     r4 = gSprites[a].data[6];
     if (GetBankSide(r4) != 0)
     {
-        u16 species = GetMonData(&gEnemyParty[gBattlePartyID[r4]], MON_DATA_SPECIES);
+        u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[r4]], MON_DATA_SPECIES);
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 1) != 0)
         {
             r4 = gSprites[a].data[5];
@@ -2892,7 +2892,7 @@ static void sub_8045458(u8 a, u8 b)
     r10 = gSprites[a].data[5];
     if (GetBankSide(r7) == 0)
     {
-        r4 = GetMonData(&gPlayerParty[gBattlePartyID[r7]], MON_DATA_STATUS);
+        r4 = GetMonData(&gPlayerParty[gBattlerPartyIndexes[r7]], MON_DATA_STATUS);
         if (!IsDoubleBattle())
             r8 = 0x1A;
         else
@@ -2900,7 +2900,7 @@ static void sub_8045458(u8 a, u8 b)
     }
     else
     {
-        r4 = GetMonData(&gEnemyParty[gBattlePartyID[r7]], MON_DATA_STATUS);
+        r4 = GetMonData(&gEnemyParty[gBattlerPartyIndexes[r7]], MON_DATA_STATUS);
         r8 = 0x11;
     }
     if (r4 & 7)
@@ -3027,7 +3027,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     s32 r7;
     u8 *addr;
 
-    r6 = ewram520_2 + GetBankIdentity(gSprites[a].data[6]) * 0x180;
+    r6 = ewram520_2 + GetBattlerPosition(gSprites[a].data[6]) * 0x180;
     r8 = 7;
     sub_80034D4(r6, BattleText_SafariBalls);
     for (i = 0; i < r8; i++)
@@ -3055,7 +3055,7 @@ static u8 sub_80457E8(u8 a, u8 b)
     r7 = StringCopy(gDisplayedStringBattle, BattleText_SafariBallsLeft);
     r7 = sub_8003504(r7, gNumSafariBalls, 10, 1);
     StringAppend(r7, BattleText_HighlightRed);
-    status = GetBankIdentity(gSprites[a].data[6]);
+    status = GetBattlerPosition(gSprites[a].data[6]);
     r7 = ewram520_2 + status * 0x180;
     r6 = 5;
     sub_80034D4(r7, gDisplayedStringBattle);
@@ -3202,7 +3202,7 @@ static void sub_8045D58(u8 a, u8 b)
         break;
     case 1:
         sub_804602C(ewram17850[a].unk4, ewram17850[a].unk8, ewram17850[a].unkC, &ewram17850[a].unk10, sp8, 8);
-        r0 = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_LEVEL);
+        r0 = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_LEVEL);
         if (r0 == 100)
         {
             for (i = 0; i < 8; i++)

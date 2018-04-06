@@ -20,7 +20,7 @@ extern struct MusicPlayerInfo gMPlay_BGM;
 extern u16 gBattleTypeFlags;
 extern u8 gBankTarget;
 extern u8 gActiveBattler;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBankSpriteIds[];
 extern u8 gDoingBattleAnim;
 extern u8 gHealthboxIDs[];
@@ -358,9 +358,9 @@ static void sub_8046464(u8 taskId)
     r8 = gTasks[taskId].data[2];
     r5 = gTasks[taskId].data[3];
     if (GetBankSide(r5) != 0)
-        ball = GetMonData(&gEnemyParty[gBattlePartyID[r5]], MON_DATA_POKEBALL);
+        ball = GetMonData(&gEnemyParty[gBattlerPartyIndexes[r5]], MON_DATA_POKEBALL);
     else
-        ball = GetMonData(&gPlayerParty[gBattlePartyID[r5]], MON_DATA_POKEBALL);
+        ball = GetMonData(&gPlayerParty[gBattlerPartyIndexes[r5]], MON_DATA_POKEBALL);
     r4 = ball_number_to_ball_processing_index(ball);
     sub_80478DC(r4);
     spriteId = CreateSprite(&gBallSpriteTemplates[r4], 32, 80, 0x1D);
@@ -383,7 +383,7 @@ static void sub_8046464(u8 taskId)
         gSprites[spriteId].callback = sub_8047254;
         break;
     default:
-        gBankTarget = GetBankByIdentity(1);
+        gBankTarget = GetBattlerAtPosition(1);
         sp0 = TRUE;
         break;
     }
@@ -713,16 +713,16 @@ static void sub_8046C78(struct Sprite *sprite)
 
         if (GetBankSide(r5) != 0)
         {
-            pkmn = &gEnemyParty[gBattlePartyID[r5]];
+            pkmn = &gEnemyParty[gBattlerPartyIndexes[r5]];
             r8 = 25;
         }
         else
         {
-            pkmn = &gPlayerParty[gBattlePartyID[r5]];
+            pkmn = &gPlayerParty[gBattlerPartyIndexes[r5]];
             r8 = -25;
         }
         species = GetMonData(pkmn, MON_DATA_SPECIES);
-        if ((r5 == GetBankByIdentity(0) || r5 == GetBankByIdentity(1))
+        if ((r5 == GetBattlerAtPosition(0) || r5 == GetBattlerAtPosition(1))
          && IsDoubleBattle() && ewram17840.unk9_0)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -737,7 +737,7 @@ static void sub_8046C78(struct Sprite *sprite)
         }
         if (!IsDoubleBattle() || !ewram17840.unk9_0)
             r4_2 = 0;
-        else if (r5 == GetBankByIdentity(0) || r5 == GetBankByIdentity(1))
+        else if (r5 == GetBattlerAtPosition(0) || r5 == GetBattlerAtPosition(1))
             r4_2 = 1;
         else
             r4_2 = 2;
@@ -885,7 +885,7 @@ static void sub_80470C4(struct Sprite *sprite)
             sprite->data[6] = sprite->oam.affineParam & 0xFF;
             sprite->data[0] = 0;
             if (IsDoubleBattle() && ewram17840.unk9_0
-             && sprite->data[6] == GetBankByIdentity(2))
+             && sprite->data[6] == GetBattlerAtPosition(2))
                 sprite->callback = sub_8047230;
             else
                 sprite->callback = sub_8046C78;
@@ -910,7 +910,7 @@ static void sub_8047254(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
         if (IsDoubleBattle() && ewram17840.unk9_0
-         && sprite->data[6] == GetBankByIdentity(3))
+         && sprite->data[6] == GetBattlerAtPosition(3))
             sprite->callback = sub_8047230;
         else
             sprite->callback = sub_8046C78;
@@ -1110,7 +1110,7 @@ void sub_804777C(u8 a)
         sprite->pos2.y = -sprite->pos2.y;
     }
     gSprites[sprite->data[5]].callback(&gSprites[sprite->data[5]]);
-    if (GetBankIdentity(a) == 2)
+    if (GetBattlerPosition(a) == 2)
         sprite->callback = sub_804780C;
 }
 
@@ -1188,7 +1188,7 @@ void sub_804794C(u8 a)
 static u16 sub_8047978(u8 a)
 {
     if (GetBankSide(a) == 0)
-        return GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_POKEBALL);
+        return GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_POKEBALL);
     else
-        return GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_POKEBALL);
+        return GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_POKEBALL);
 }

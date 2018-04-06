@@ -13,20 +13,48 @@
 
 #define BATTLE_BANKS_COUNT  4
 
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
+#define B_POSITION_PLAYER_LEFT        0
+#define B_POSITION_OPPONENT_LEFT      1
+#define B_POSITION_PLAYER_RIGHT        2
+#define B_POSITION_OPPONENT_RIGHT      3
 
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
+#define GET_BATTLER_POSITION(bank)((gBanksByIdentity[bank]))
+#define GET_BATTLER_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
+#define GET_BATTLER_SIDE2(bank)((GET_BATTLER_POSITION(bank) & BIT_SIDE))
 
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
+// Battle Actions
+// These determine what each battler will do in a turn
+#define B_ACTION_USE_MOVE               0
+#define B_ACTION_USE_ITEM               1
+#define B_ACTION_SWITCH                 2
+#define B_ACTION_RUN                    3
+#define B_ACTION_SAFARI_WATCH_CAREFULLY 4
+#define B_ACTION_SAFARI_BALL            5
+#define B_ACTION_SAFARI_POKEBLOCK       6
+#define B_ACTION_SAFARI_GO_NEAR         7
+#define B_ACTION_SAFARI_RUN             8
+// The exact purposes of these are unclear
+#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_EXEC_SCRIPT            10 // when executing an action
+#define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
+#define B_ACTION_FINISHED               12 // when executing an action
+#define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
+#define B_ACTION_NONE                   0xFF
 
-#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+// defines for the u8 array gTypeEffectiveness
+#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
+#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
+#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
+
+// defines for the gTypeEffectiveness multipliers
+#define TYPE_MUL_NO_EFFECT          0
+#define TYPE_MUL_NOT_EFFECTIVE      5
+#define TYPE_MUL_NORMAL             10
+#define TYPE_MUL_SUPER_EFFECTIVE    20
+
+// special type table Ids
+#define TYPE_FORESIGHT  0xFE
+#define TYPE_ENDTABLE   0xFF
 
 enum
 {
@@ -179,7 +207,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1605F*/ u8 sentInPokes;
     /*0x16060*/ u8 unk16060[4];
     /*0x16064*/ u8 unk16064[4];
-    /*0x16068*/ u8 unk16068[4];
+    /*0x16068*/ u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     /*0x1606C*/ u8 unk1606C[4][3];
     /*0x16078*/ u8 unk16078;
     /*0x16079*/ u8 caughtNick[11];
@@ -519,21 +547,21 @@ struct sideTimer
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[MAX_BANKS_BATTLE];
-    u8 futureSightAttacker[MAX_BANKS_BATTLE];
-    s32 futureSightDmg[MAX_BANKS_BATTLE];
-    u16 futureSightMove[MAX_BANKS_BATTLE];
-    u8 wishCounter[MAX_BANKS_BATTLE];
-    u8 wishUserID[MAX_BANKS_BATTLE];
+    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u8 futureSightAttacker[MAX_BATTLERS_COUNT];
+    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    u16 futureSightMove[MAX_BATTLERS_COUNT];
+    u8 wishCounter[MAX_BATTLERS_COUNT];
+    u8 wishUserID[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
 
 extern struct UnkBattleStruct1 unk_2016A00;
-extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern struct BattleResults gBattleResults;
-extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
-extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;

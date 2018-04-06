@@ -16,10 +16,10 @@
 #include "util.h"
 
 extern s32 gBattleMoveDamage;
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern u8 gBankInMenu;
 extern u8 gNoOfAllBanks;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gActiveBattler;
 extern u8 gStringBank;
 extern struct BattlePokemon gBattleMons[];
@@ -82,7 +82,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
         cmdIndex = (GetBankSide(gActiveBattler) != 0);
         while (cmdIndex < gNoOfAllBanks)
         {
-            if (gBattlePartyID[cmdIndex] == partyIndex)
+            if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
             {
                 sp34 = cmdIndex;
                 break;
@@ -278,14 +278,14 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                             {
                                 if (sp34 != 4)
                                 {
-                                    gAbsentBankFlags &= ~gBitTable[sp34];
-                                    CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlePartyID[sp34]));
+                                    gAbsentBattlerFlags &= ~gBitTable[sp34];
+                                    CopyPlayerPartyMonToBattleData(sp34, pokemon_order_func(gBattlerPartyIndexes[sp34]));
                                     if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }
                                 else
                                 {
-                                    gAbsentBankFlags &= ~gBitTable[gActiveBattler ^ 2];
+                                    gAbsentBattlerFlags &= ~gBitTable[gActiveBattler ^ 2];
                                     if (GetBankSide(gActiveBattler) == 0 && gBattleResults.unk4 < 255)
                                         gBattleResults.unk4++;
                                 }

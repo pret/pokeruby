@@ -33,7 +33,7 @@ extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
 extern u8 gNoOfAllBanks;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u16 gCurrentMove;
 extern u16 gChosenMove;
@@ -43,7 +43,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gEffectBank;
 extern u8 gStringBank;
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
 extern u8 gUnknown_02024C78;
 extern u8 gBattleOutcome;
@@ -237,12 +237,12 @@ void sub_800BA78(void)
             case 0:
             case 3:
                 gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
-                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                 break;
             case 1:
             case 2:
                 gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
-                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                 break;
             }
         }
@@ -257,12 +257,12 @@ void sub_800BA78(void)
                 case 0:
                 case 3:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
@@ -274,12 +274,12 @@ void sub_800BA78(void)
                 case 0:
                 case 3:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 1;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 3;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
@@ -308,7 +308,7 @@ void sub_800BD54(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -319,7 +319,7 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -332,9 +332,9 @@ void sub_800BD54(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Probably a typo by Game Freak. The rest use SPECIES2
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlePartyID[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -344,9 +344,9 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlePartyID[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -421,7 +421,7 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
     ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
     ewram14000arr(4, gTasks[gUnknown_020238C4].data[14]) = r9;
     ewram14000arr(5, gTasks[gUnknown_020238C4].data[14]) = (r9 & 0x0000FF00) >> 8;
-    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBankFlags;
+    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBattlerFlags;
     ewram14000arr(7, gTasks[gUnknown_020238C4].data[14]) = gEffectBank;
 
     for (i = 0; i < size; i++)
@@ -563,7 +563,7 @@ void sub_800C47C(u8 taskId)
             {
                 gBankAttacker = ewram15000arr(2, gTasks[taskId].data[15]);
                 gBankTarget = ewram15000arr(3, gTasks[taskId].data[15]);
-                gAbsentBankFlags = ewram15000arr(6, gTasks[taskId].data[15]);
+                gAbsentBattlerFlags = ewram15000arr(6, gTasks[taskId].data[15]);
                 gEffectBank = ewram15000arr(7, gTasks[taskId].data[15]);
             }
             break;

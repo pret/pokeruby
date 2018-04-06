@@ -182,17 +182,17 @@ void AnimTask_ShakeMon2(u8 taskId)
         switch (gBattleAnimArgs[0])
         {
         case 4:
-            side = GetBankByIdentity(0);
+            side = GetBattlerAtPosition(0);
             break;
         case 5:
-            side = GetBankByIdentity(2);
+            side = GetBattlerAtPosition(2);
             break;
         case 6:
-            side = GetBankByIdentity(1);
+            side = GetBattlerAtPosition(1);
             break;
         case 7:
         default:
-            side = GetBankByIdentity(3);
+            side = GetBattlerAtPosition(3);
             break;
         }
 
@@ -427,7 +427,7 @@ static void sub_80A8488(u8 taskId)
 // arg 4: speed (valid values are 0-5)
 void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 {
-    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     AnimTask_TranslateMonElliptical(taskId);
@@ -440,7 +440,7 @@ void AnimTask_TranslateMonEllipticalRespectSide(u8 taskId)
 static void DoHorizontalLunge(struct Sprite *sprite)
 {
     sprite->invisible = TRUE;
-    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->data[1] = -gBattleAnimArgs[1];
     else
         sprite->data[1] = gBattleAnimArgs[1];
@@ -572,7 +572,7 @@ static void SlideMonToOffset(struct Sprite *sprite)
         battler = gAnimBankTarget;
 
     monSpriteId = gBankSpriteIds[battler];
-    if (GetBankSide(battler) != SIDE_PLAYER)
+    if (GetBankSide(battler) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         if (gBattleAnimArgs[3] == 1)
@@ -659,7 +659,7 @@ static void sub_80A88F0(struct Sprite *sprite)
 void AnimTask_WindUpLunge(u8 taskId)
 {
     s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
-    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[5] = -gBattleAnimArgs[5];
@@ -774,7 +774,7 @@ static void sub_80A8B3C(u8 taskId)
 void AnimTask_SwayMon(u8 taskId)
 {
     u8 spriteId;
-    if (GetBankSide(gAnimBankAttacker) != SIDE_PLAYER)
+    if (GetBankSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 
     spriteId = GetAnimBankSpriteId(gBattleAnimArgs[4]);
@@ -812,7 +812,7 @@ static void AnimTask_SwayMonStep(u8 taskId)
     }
     else
     {
-        if (GetBankSide(TASK.data[5]) == SIDE_PLAYER)
+        if (GetBankSide(TASK.data[5]) == B_SIDE_PLAYER)
         {
             gSprites[spriteId].pos2.y = (sineValue >= 0) ? sineValue : -sineValue;
         }

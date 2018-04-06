@@ -130,7 +130,7 @@ void sub_80D3728(struct Sprite *sprite)
     {
         gBattleAnimArgs[0] *= -1;
 
-        if (GetBankIdentity(gAnimBankAttacker) == 0 || GetBankIdentity(gAnimBankAttacker) == 1)
+        if (GetBattlerPosition(gAnimBankAttacker) == 0 || GetBattlerPosition(gAnimBankAttacker) == 1)
         {
             gBattleAnimArgs[0] *= -1;
         }

@@ -44,17 +44,17 @@ extern u8 gBanksByTurnOrder[4];
 extern u16 gSideAffecting[2];
 extern u16 gBattleWeather;
 extern void (*gBattleMainFunc)(void);
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern u8 gBattleCommunication[];
 extern u32 gHitMarker;
 extern u8 gEffectBank;
 extern u8 gBank1;
 extern s32 gBattleMoveDamage;
-extern u16 gBattlePartyID[4];
+extern u16 gBattlerPartyIndexes[4];
 extern u16 gChosenMovesByBanks[4];
 extern s32 gTakenDmg[4];
 extern u8 gTakenDmgBanks[4];
-extern u8 gBattleMoveFlags;
+extern u8 gMoveResultFlags;
 extern u8 gLastUsedAbility;
 extern u8 gBattleTextBuff2[];
 extern u8 gCurrentActionFuncId;
@@ -77,8 +77,8 @@ extern const u8 gStatusConditionString_LoveJpn[];
 extern const BattleCmdFunc gBattleScriptingCommandsTable[];
 
 u8 IsImprisoned(u8 bank, u16 move);
-u8 GetBankByIdentity(u8 ID);
-u8 GetBankIdentity(u8 bank);
+u8 GetBattlerAtPosition(u8 ID);
+u8 GetBattlerPosition(u8 bank);
 u8 GetBankSide(u8 bank);
 void SetMoveEffect(bool8 primary, u8 certainArg);
 bool8 UproarWakeUpCheck(u8 bank);
@@ -416,10 +416,10 @@ void ResetSentPokesToOpponentValue(void)
     gSentPokesToOpponent[1] = 0;
 
     for (i = 0; i < gNoOfAllBanks; i += 2)
-        bits |= gBitTable[gBattlePartyID[i]];
+        bits |= gBitTable[gBattlerPartyIndexes[i]];
 
     for (i = 1; i < gNoOfAllBanks; i += 2)
-        gSentPokesToOpponent[(i & BIT_MON) >> 1] = bits;
+        gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
 }
 
 void sub_8015740(u8 bank)
@@ -427,15 +427,15 @@ void sub_8015740(u8 bank)
     s32 i = 0;
     u32 bits = 0;
 
-    if (GetBankSide(bank) == SIDE_OPPONENT)
+    if (GetBankSide(bank) == B_SIDE_OPPONENT)
     {
-        u8 id = ((bank & BIT_MON) >> 1);
+        u8 id = ((bank & BIT_FLANK) >> 1);
         gSentPokesToOpponent[id] = 0;
 
         for (i = 0; i < gNoOfAllBanks; i += 2)
         {
-            if (!(gAbsentBankFlags & gBitTable[i]))
-                bits |= gBitTable[gBattlePartyID[i]];
+            if (!(gAbsentBattlerFlags & gBitTable[i]))
+                bits |= gBitTable[gBattlerPartyIndexes[i]];
         }
 
         gSentPokesToOpponent[id] = bits;
@@ -444,7 +444,7 @@ void sub_8015740(u8 bank)
 
 void sub_80157C4(u8 bank)
 {
-    if (GetBankSide(bank) == SIDE_OPPONENT)
+    if (GetBankSide(bank) == B_SIDE_OPPONENT)
     {
         sub_8015740(bank);
     }
@@ -452,7 +452,7 @@ void sub_80157C4(u8 bank)
     {
         s32 i;
         for (i = 1; i < gNoOfAllBanks; i++)
-            gSentPokesToOpponent[(i & BIT_MON) >> 1] |= gBitTable[gBattlePartyID[bank]];
+            gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlerPartyIndexes[bank]];
     }
 }
 
@@ -570,9 +570,9 @@ bool8 AreAllMovesUnusable(void)
         gProtectStructs[gActiveBattler].onlyStruggle = 1;
         gUnknown_02024C1C[gActiveBattler] = BattleScript_NoMovesLeft;
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            gBattleBufferB[gActiveBattler][3] = GetBankByIdentity((GetBankIdentity(gActiveBattler) ^ 1) | (Random() & 2));
+            gBattleBufferB[gActiveBattler][3] = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) ^ 1) | (Random() & 2));
         else
-            gBattleBufferB[gActiveBattler][3] = GetBankByIdentity(GetBankIdentity(gActiveBattler) ^ 1);
+            gBattleBufferB[gActiveBattler][3] = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ 1);
     }
     else
         gProtectStructs[gActiveBattler].onlyStruggle = 0;
@@ -606,10 +606,10 @@ u8 UpdateTurnCounters(void)
     u8 effect = 0;
     s32 i;
 
-    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks && gAbsentBankFlags & gBitTable[gBankAttacker]; gBankAttacker++)
+    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks && gAbsentBattlerFlags & gBitTable[gBankAttacker]; gBankAttacker++)
     {
     }
-    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks && gAbsentBankFlags & gBitTable[gBankTarget]; gBankTarget++)
+    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks && gAbsentBattlerFlags & gBitTable[gBankTarget]; gBankTarget++)
     {
     }
 
@@ -857,7 +857,7 @@ u8 TurnBasedEffects(void)
     while (gBattleStruct->turnEffectsBank < gNoOfAllBanks && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
         gActiveBattler = gBankAttacker = gBanksByTurnOrder[gBattleStruct->turnEffectsBank];
-        if (gAbsentBankFlags & gBitTable[gActiveBattler])
+        if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
         {
             gBattleStruct->turnEffectsBank++;
         }
@@ -1168,7 +1168,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
         while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
         {
             gActiveBattler = gBattleStruct->sub80170DC_Bank;
-            if (gAbsentBankFlags & gBitTable[gActiveBattler])
+            if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
                 gBattleStruct->sub80170DC_Bank++;
             else
             {
@@ -1199,7 +1199,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
         while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
         {
             gActiveBattler = gBankAttacker = gBanksByTurnOrder[gBattleStruct->sub80170DC_Bank];
-            if (gAbsentBankFlags & gBitTable[gActiveBattler])
+            if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
                 gBattleStruct->sub80170DC_Bank++;
             else
             {
@@ -1250,14 +1250,14 @@ bool8 HandleFaintedMonActions(void)
             gBattleStruct->sub80173A4_Tracker++;
             for (i = 0; i < gNoOfAllBanks; i++)
             {
-                if (gAbsentBankFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
-                    gAbsentBankFlags &= ~(gBitTable[i]);
+                if (gAbsentBattlerFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
+                    gAbsentBattlerFlags &= ~(gBitTable[i]);
             }
         case 1:
             do
             {
                 gBank1 = gBankTarget = gBattleStruct->unk1605A;
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->unk16113 & gBitTable[gBattlePartyID[gBattleStruct->unk1605A]]) && !(gAbsentBankFlags & gBitTable[gBattleStruct->unk1605A]))
+                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gBattleStruct->unk16113 & gBitTable[gBattlerPartyIndexes[gBattleStruct->unk1605A]]) && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
                 {
                     BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->sub80173A4_Tracker = 2;
@@ -1280,7 +1280,7 @@ bool8 HandleFaintedMonActions(void)
             do
             {
                 gBank1 = gBankTarget = gBattleStruct->unk1605A; //or should banks be switched?
-                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gAbsentBankFlags & gBitTable[gBattleStruct->unk1605A]))
+                if (gBattleMons[gBattleStruct->unk1605A].hp == 0 && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->unk1605A]))
                 {
                     BattleScriptExecute(BattleScript_HandleFaintedMon);
                     gBattleStruct->sub80173A4_Tracker = 5;
@@ -1410,7 +1410,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
                 gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
-                gBattleMoveFlags |= MOVESTATUS_MISSED;
+                gMoveResultFlags |= MOVE_RESULT_MISSED;
                 effect = 1;
             }
             gBattleStruct->atkCancellerTracker++;
@@ -1546,7 +1546,7 @@ u8 AtkCanceller_UnableToUseMove(void)
                         gCurrentMove = MOVE_BIDE;
                         *bideDmg = gTakenDmg[gBankAttacker] * 2;
                         gBankTarget = gTakenDmgBanks[gBankAttacker];
-                        if (gAbsentBankFlags & gBitTable[gBankTarget])
+                        if (gAbsentBattlerFlags & gBitTable[gBankTarget])
                             gBankTarget = GetMoveTarget(MOVE_BIDE, 1);
                         gBattlescriptCurrInstr = BattleScript_BideAttack;
                     }
@@ -1613,20 +1613,20 @@ bool8 sub_8018018(u8 bank, u8 r1, u8 r2)
     {
         if (GetBankSide(bank) == 1)
         {
-            r7 = GetBankByIdentity(1);
-            r6 = GetBankByIdentity(3);
+            r7 = GetBattlerAtPosition(1);
+            r6 = GetBattlerAtPosition(3);
             party = gEnemyParty;
         }
         else
         {
-            r7 = GetBankByIdentity(0);
-            r6 = GetBankByIdentity(2);
+            r7 = GetBattlerAtPosition(0);
+            r6 = GetBattlerAtPosition(2);
             party = gPlayerParty;
         }
         if (r1 == 6)
-            r1 = gBattlePartyID[r7];
+            r1 = gBattlerPartyIndexes[r7];
         if (r2 == 6)
-            r2 = gBattlePartyID[r6];
+            r2 = gBattlerPartyIndexes[r6];
         for (i = 0; i < 6; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) && GetMonData(&party[i], MON_DATA_SPECIES2) && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG && i != r1 && i != r2 && i != ewram16068arr(r7) && i != ewram16068arr(r6))
@@ -1698,16 +1698,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
     if (gBankAttacker >= gNoOfAllBanks)
         gBankAttacker = bank;
     if (GetBankSide(gBankAttacker) == 0)
-        pokeAtk = &gPlayerParty[gBattlePartyID[gBankAttacker]];
+        pokeAtk = &gPlayerParty[gBattlerPartyIndexes[gBankAttacker]];
     else
-        pokeAtk = &gEnemyParty[gBattlePartyID[gBankAttacker]];
+        pokeAtk = &gEnemyParty[gBattlerPartyIndexes[gBankAttacker]];
 
     if (gBankTarget >= gNoOfAllBanks)
         gBankTarget = bank;
     if (GetBankSide(gBankTarget) == 0)
-        pokeDef = &gPlayerParty[gBattlePartyID[gBankTarget]];
+        pokeDef = &gPlayerParty[gBattlerPartyIndexes[gBankTarget]];
     else
-        pokeDef = &gEnemyParty[gBattlePartyID[gBankTarget]];
+        pokeDef = &gEnemyParty[gBattlerPartyIndexes[gBankTarget]];
 
     speciesAtk = GetMonData(pokeAtk, MON_DATA_SPECIES);
     pidAtk = GetMonData(pokeAtk, MON_DATA_PERSONALITY);
@@ -2002,7 +2002,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             switch (gLastUsedAbility)
             {
             case ABILITY_COLOR_CHANGE:
-                if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && move != MOVE_STRUGGLE
                  && gBattleMoves[move].power != 0
                  && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2022,7 +2022,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 }
                 break;
             case ABILITY_ROUGH_SKIN:
-                if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                  && gBattleMons[gBankAttacker].hp != 0
                  && !gProtectStructs[gBankAttacker].confusionSelfDmg
                  && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2039,7 +2039,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_EFFECT_SPORE:
 		if (DEBUG && (gUnknown_02023A14_50 & 4))
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		    && gBattleMons[gBankAttacker].hp != 0
 		    && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		    && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2060,7 +2060,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		}
 		else
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		    && gBattleMons[gBankAttacker].hp != 0
 		    && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		    && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2084,7 +2084,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_POISON_POINT:
 		if (DEBUG && (gUnknown_02023A14_50 & 4))
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2099,7 +2099,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		}
 		else
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2117,7 +2117,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_STATIC:
 		if (DEBUG && (gUnknown_02023A14_50 & 4))
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2132,7 +2132,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		}
 		else
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
@@ -2150,7 +2150,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_FLAME_BODY:
 		if (DEBUG && (gUnknown_02023A14_50 & 4))
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
@@ -2165,7 +2165,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		}
 		else
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
@@ -2183,7 +2183,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_CUTE_CHARM:
 		if (DEBUG && (gUnknown_02023A14_50 & 4))
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
@@ -2203,7 +2203,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		}
 		else
 		{
-		    if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
@@ -2376,15 +2376,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                 if (gBattleMons[i].ability == ABILITY_TRACE && (gStatuses3[i] & STATUS3_TRACE))
                 {
                     u8 target2;
-                    side = (GetBankIdentity(i) ^ 1) & 1;
-                    target1 = GetBankByIdentity(side);
-                    target2 = GetBankByIdentity(side + 2);
+                    side = (GetBattlerPosition(i) ^ 1) & 1;
+                    target1 = GetBattlerAtPosition(side);
+                    target2 = GetBattlerAtPosition(side + 2);
                     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
                     {
                         if (gBattleMons[target1].ability != 0 && gBattleMons[target1].hp != 0
                          && gBattleMons[target2].ability != 0 && gBattleMons[target2].hp != 0)
                         {
-                            gActiveBattler = GetBankByIdentity(((Random() & 1) * 2) | side);
+                            gActiveBattler = GetBattlerAtPosition(((Random() & 1) * 2) | side);
                             gBattleMons[i].ability = gBattleMons[gActiveBattler].ability;
                             gLastUsedAbility = gBattleMons[gActiveBattler].ability;
                             effect++;
@@ -2423,7 +2423,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         gBattleTextBuff1[0] = 0xFD;
                         gBattleTextBuff1[1] = 4;
                         gBattleTextBuff1[2] = gActiveBattler;
-                        gBattleTextBuff1[3] = gBattlePartyID[gActiveBattler];
+                        gBattleTextBuff1[3] = gBattlerPartyIndexes[gActiveBattler];
                         gBattleTextBuff1[4] = EOS;
 
                         gBattleTextBuff2[0] = 0xFD;
@@ -2693,9 +2693,9 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     u16 move;
 
                     if (GetBankSide(bank) == 0)
-                        poke = &gPlayerParty[gBattlePartyID[bank]];
+                        poke = &gPlayerParty[gBattlerPartyIndexes[bank]];
                     else
-                        poke = &gEnemyParty[gBattlePartyID[bank]];
+                        poke = &gEnemyParty[gBattlerPartyIndexes[bank]];
                     for (i = 0; i < 4; i++)
                     {
                         move = GetMonData(poke, MON_DATA_MOVE1 + i);
@@ -3268,7 +3268,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
             switch (atkHoldEffect)
             {
             case HOLD_EFFECT_FLINCH:
-                if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
                     && (Random() % 100) < bankQuality
                     && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
@@ -3281,7 +3281,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_SHELL_BELL:
-                if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+                if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && gSpecialStatuses[gBankTarget].moveturnLostHP != 0
                     && gSpecialStatuses[gBankTarget].moveturnLostHP != 0xFFFF
                     && gBankAttacker != gBankTarget
@@ -3331,22 +3331,22 @@ void unref_sub_801B40C(void)
             u8 bank = 0;
             do
             {
-                u8 absent = gAbsentBankFlags;
+                u8 absent = gAbsentBattlerFlags;
                 if (gBitTable[bank] & absent || absent & gBitTable[bank + 2])
                     bank++;
                 else
                 {
                     if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank + 2])
                     {
-                        gSideTimers[GetBankIdentity(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
-                        gSideTimers[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
-                        gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
+                        gSideTimers[GetBattlerPosition(bank) & 1].field3 = (bank) | ((bank + 2) << 4);
+                        gSideTimers[GetBattlerPosition(bank) & 1].field4 = sCombinedMoves[i].newMove;
+                        gSideAffecting[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     if (sCombinedMoves[i].move1 == gChosenMovesByBanks[bank + 2] && sCombinedMoves[i].move2 == gChosenMovesByBanks[bank])
                     {
-                        gSideTimers[GetBankIdentity(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
-                        gSideTimers[GetBankIdentity(bank) & 1].field4 = sCombinedMoves[i].newMove;
-                        gSideAffecting[GetBankIdentity(bank) & 1] |= SIDE_STATUS_X4;
+                        gSideTimers[GetBattlerPosition(bank) & 1].field3 = (bank + 2) | ((bank) << 4);
+                        gSideTimers[GetBattlerPosition(bank) & 1].field4 = sCombinedMoves[i].newMove;
+                        gSideAffecting[GetBattlerPosition(bank) & 1] |= SIDE_STATUS_X4;
                     }
                     bank++;
                 }
@@ -3385,7 +3385,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
             do
             {
                 targetBank = Random() % gNoOfAllBanks;
-            } while (targetBank == gBankAttacker || side == GetBankSide(targetBank) || gAbsentBankFlags & gBitTable[targetBank]);
+            } while (targetBank == gBankAttacker || side == GetBankSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
                 && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
                 && gBattleMons[targetBank].ability != ABILITY_LIGHTNING_ROD)
@@ -3400,8 +3400,8 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
     case 8:
     case 32:
     case 64:
-        targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
-        if (gAbsentBankFlags & gBitTable[targetBank])
+        targetBank = GetBattlerAtPosition((GetBattlerPosition(gBankAttacker) & 1) ^ 1);
+        if (gAbsentBattlerFlags & gBitTable[targetBank])
             targetBank ^= 2;
         break;
     case 4:
@@ -3413,22 +3413,22 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
             if (GetBankSide(gBankAttacker) == 0)
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(1);
+                    targetBank = GetBattlerAtPosition(1);
                 else
-                    targetBank = GetBankByIdentity(3);
+                    targetBank = GetBattlerAtPosition(3);
             }
             else
             {
                 if (Random() & 1)
-                    targetBank = GetBankByIdentity(0);
+                    targetBank = GetBattlerAtPosition(0);
                 else
-                    targetBank = GetBankByIdentity(2);
+                    targetBank = GetBattlerAtPosition(2);
             }
-            if (gAbsentBankFlags & gBitTable[targetBank])
+            if (gAbsentBattlerFlags & gBitTable[targetBank])
                 targetBank ^= 2;
         }
         else
-            targetBank = GetBankByIdentity((GetBankIdentity(gBankAttacker) & 1) ^ 1);
+            targetBank = GetBattlerAtPosition((GetBattlerPosition(gBankAttacker) & 1) ^ 1);
         break;
     case 2:
     case 16:

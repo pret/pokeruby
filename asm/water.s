@@ -1089,7 +1089,7 @@ sub_80D4394: @ 80D4394
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D43C8
-	ldr r1, _080D43BC @ =gBattlePartyID
+	ldr r1, _080D43BC @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -1100,13 +1100,13 @@ sub_80D4394: @ 80D4394
 	b _080D43D8
 	.align 2, 0
 _080D43B8: .4byte gAnimBankAttacker
-_080D43BC: .4byte gBattlePartyID
+_080D43BC: .4byte gBattlerPartyIndexes
 _080D43C0: .4byte gPlayerParty
 _080D43C4:
 	adds r0, r2, 0
 	b _080D440A
 _080D43C8:
-	ldr r1, _080D4410 @ =gBattlePartyID
+	ldr r1, _080D4410 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -1144,7 +1144,7 @@ _080D440A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D4410: .4byte gBattlePartyID
+_080D4410: .4byte gBattlerPartyIndexes
 _080D4414: .4byte gEnemyParty
 	thumb_func_end sub_80D4394
 

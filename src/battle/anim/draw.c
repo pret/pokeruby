@@ -32,7 +32,7 @@ void sub_80D0C88(u8 taskId)
     task->data[5] = 0;
     task->data[15] = sub_807A100(gAnimBankTarget, 0);
 
-    if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
         params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;

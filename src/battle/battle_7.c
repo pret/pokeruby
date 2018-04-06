@@ -25,7 +25,7 @@
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBattler;
 extern u8 gNoOfAllBanks;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u8 gBankSpriteIds[];
 extern u16 gUnknown_02024DE8;
@@ -309,7 +309,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
         r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
-    var = GetBankIdentity(b);
+    var = GetBattlerPosition(b);
     HandleLoadSpecialPokePic(
       &gMonFrontPicTable[species],
       gMonFrontPicCoords[species].coords,
@@ -361,7 +361,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
         r7 = gTransformedPersonalities[b];
     }
     otId = GetMonData(pkmn, MON_DATA_OT_ID);
-    var = GetBankIdentity(b);
+    var = GetBattlerPosition(b);
     HandleLoadSpecialPokePic(
       &gMonBackPicTable[species],
       gMonBackPicCoords[species].coords,
@@ -404,7 +404,7 @@ void sub_8031A6C(u16 a, u8 b)
     u8 status;
     struct CompressedSpriteSheet spriteSheet;
 
-    status = GetBankIdentity(b);
+    status = GetBattlerPosition(b);
     DecompressPicFromTable_2(
       &gTrainerFrontPicTable[a],
       gTrainerFrontPicCoords[a].coords,
@@ -423,7 +423,7 @@ void LoadPlayerTrainerBankSprite(u16 a, u8 b)
 {
     u8 status;
 
-    status = GetBankIdentity(b);
+    status = GetBattlerPosition(b);
     DecompressPicFromTable_2(
       &gTrainerBackPicTable[a],
       gTrainerBackPicCoords[a].coords,
@@ -581,11 +581,11 @@ u8 battle_load_something(u8 *pState, u8 *b)
         if (GetBankSide(*b) == 0)
         {
             if (!(gBattleTypeFlags & 0x80))
-                sub_8045A5C(gHealthboxIDs[*b], &gPlayerParty[gBattlePartyID[*b]], 0);
+                sub_8045A5C(gHealthboxIDs[*b], &gPlayerParty[gBattlerPartyIndexes[*b]], 0);
         }
         else
         {
-            sub_8045A5C(gHealthboxIDs[*b], &gEnemyParty[gBattlePartyID[*b]], 0);
+            sub_8045A5C(gHealthboxIDs[*b], &gEnemyParty[gBattlerPartyIndexes[*b]], 0);
         }
         sub_8043DB0(gHealthboxIDs[*b]);
         (*b)++;
@@ -670,15 +670,15 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         }
         else
         {
-            r10 = GetBankIdentity(a);
+            r10 = GetBattlerPosition(a);
             if (GetBankSide(b) == 1)
-                species = GetMonData(&gEnemyParty[gBattlePartyID[b]], MON_DATA_SPECIES);
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
             else
-                species = GetMonData(&gPlayerParty[gBattlePartyID[b]], MON_DATA_SPECIES);
+                species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[b]], MON_DATA_SPECIES);
             if (GetBankSide(a) == 0)
             {
-                personalityValue = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonBackPicTable[species],
                   gMonBackPicCoords[species].coords,
@@ -690,8 +690,8 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             }
             else
             {
-                personalityValue = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gEnemyParty[gBattlePartyID[a]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_PERSONALITY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[a]], MON_DATA_OT_ID);
                 HandleLoadSpecialPokePic(
                   &gMonFrontPicTable[species],
                   gMonFrontPicCoords[species].coords,
@@ -739,7 +739,7 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
         if (IsContest())
             r4 = 0;
         else
-            r4 = GetBankIdentity(a);
+            r4 = GetBattlerPosition(a);
         if (IsContest())
             LZDecompressVram(gSubstituteDollTilemap, gUnknown_081FAF4C[r4]);
         else if (GetBankSide(a) != 0)
@@ -759,9 +759,9 @@ void BattleLoadSubstituteSprite(u8 a, u8 b)
         if (!IsContest())
         {
             if (GetBankSide(a) != 0)
-                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[a]], a);
+                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[a]], a);
             else
-                BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[a]], a);
+                BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[a]], a);
         }
     }
 }
@@ -819,7 +819,7 @@ void HandleLowHpMusicChange(struct Pokemon *pkmn, u8 b)
 
 void BattleStopLowHpSound(void)
 {
-    u8 r4 = GetBankByIdentity(0);
+    u8 r4 = GetBattlerAtPosition(0);
 
     ewram17800[r4].unk0_1 = 0;
     if (IsDoubleBattle())
@@ -839,10 +839,10 @@ void sub_8032638(void)
 {
     if (gMain.inBattle)
     {
-        u8 r8 = GetBankByIdentity(0);
-        u8 r9 = GetBankByIdentity(2);
-        u8 r4 = pokemon_order_func(gBattlePartyID[r8]);
-        u8 r5 = pokemon_order_func(gBattlePartyID[r9]);
+        u8 r8 = GetBattlerAtPosition(0);
+        u8 r9 = GetBattlerAtPosition(2);
+        u8 r4 = pokemon_order_func(gBattlerPartyIndexes[r8]);
+        u8 r5 = pokemon_order_func(gBattlerPartyIndexes[r9]);
 
         if (GetMonData(&gPlayerParty[r4], MON_DATA_HP) != 0)
             HandleLowHpMusicChange(&gPlayerParty[r4], r8);
@@ -881,12 +881,12 @@ void sub_80327CC(void)
     u8 r5;
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
-    r5 = GetBankByIdentity(1);
+    r5 = GetBattlerAtPosition(1);
     ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
     gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
-        r5 = GetBankByIdentity(3);
+        r5 = GetBattlerAtPosition(3);
         ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
         gSprites[ewram17810[r5].unk7].data[0] = r5;
     }
