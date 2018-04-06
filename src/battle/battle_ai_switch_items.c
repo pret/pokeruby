@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_ai_switch_items.h"
 #include "battle_script_commands.h"
 #include "data2.h"
 #include "ewram.h"
@@ -29,13 +30,12 @@ extern const u8 gTypeEffectiveness[];
 extern struct BattlePokemon gBattleMons[];
 extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 
-/*static*/ bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
-/*static*/ bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);
-/*static*/ bool8 ShouldUseItem(void);
-/*static*/ u8 GetMostSuitableMonToSwitchInto(void);
+static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
+static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);
+static bool8 ShouldUseItem(void);
 
 
-/*static*/ bool8 ShouldSwitchIfPerishSong(void)
+static bool8 ShouldSwitchIfPerishSong(void)
 {
     if (gStatuses3[gActiveBattler] & STATUS3_PERISH_SONG
         && gDisableStructs[gActiveBattler].perishSongTimer1 == 0)
@@ -49,7 +49,7 @@ extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 }
 
 #ifdef NONMATCHING
-/*static*/ bool8 ShouldSwitchIfWonderGuard(void)
+static bool8 ShouldSwitchIfWonderGuard(void)
 {
     u8 opposingBattler;
     u8 moveFlags;
@@ -108,7 +108,7 @@ extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 }
 #else
 __attribute__((naked))
-/*static*/ bool8 ShouldSwitchIfWonderGuard(void)
+static bool8 ShouldSwitchIfWonderGuard(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -306,7 +306,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 }
 #endif // NONMATCHING
 
-/*static*/ bool8 FindMonThatAbsorbsOpponentsMove(void)
+static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
     u8 absorbingTypeAbility;
@@ -385,7 +385,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     return FALSE;
 }
 
-/*static*/ bool8 ShouldSwitchIfNaturalCure(void)
+static bool8 ShouldSwitchIfNaturalCure(void)
 {
     if (!(gBattleMons[gActiveBattler].status1 & STATUS_SLEEP))
         return FALSE;
@@ -421,7 +421,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     return FALSE;
 }
 
-/*static*/ bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
+static bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 {
     u8 opposingBattler;
     s32 i;
@@ -473,7 +473,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     return FALSE;
 }
 
-/*static*/ bool8 AreStatsRaised(void)
+static bool8 AreStatsRaised(void)
 {
     u8 buffedStatsValue = 0;
     s32 i;
@@ -487,7 +487,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     return (buffedStatsValue > 3);
 }
 
-/*static*/ bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
+static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
 {
     u8 battlerIn1, battlerIn2;
     s32 i, j;
@@ -568,7 +568,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     return FALSE;
 }
 
-/*static*/ bool8 ShouldSwitch(void)
+static bool8 ShouldSwitch(void)
 {
     u8 battlerIn1, battlerIn2;
     s32 i;
@@ -708,7 +708,7 @@ void AI_TrySwitchOrUseItem(void)
     Emitcmd33(1, B_ACTION_USE_MOVE, (gActiveBattler ^ BIT_SIDE) << 8);
 }
 
-/*static*/ void ModulateByTypeEffectiveness(u8 attackType, u8 defenseType1, u8 defenseType2, u8 *var)
+static void ModulateByTypeEffectiveness(u8 attackType, u8 defenseType1, u8 defenseType2, u8 *var)
 {
     s32 i = 0;
 
@@ -863,7 +863,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
 }
 
 // TODO: use PokemonItemEffect struct instead of u8 once it's documented
-/*static*/ u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u16 as item Id argument
+static u8 GetAI_ItemType(u8 itemId, const u8 *itemEffect) // NOTE: should take u16 as item Id argument
 {
     if (itemId == ITEM_FULL_RESTORE)
         return AI_ITEM_FULL_RESTORE;
@@ -879,7 +879,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     return AI_ITEM_NOT_RECOGNIZABLE;
 }
 
-/*static*/ bool8 ShouldUseItem(void)
+static bool8 ShouldUseItem(void)
 {
     s32 i;
     u8 validMons = 0;

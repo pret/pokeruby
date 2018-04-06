@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_ai_switch_items.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "data2.h"
@@ -100,7 +101,6 @@ extern void BufferStringBattle();
 extern void sub_80331D0(void);
 extern void AI_TrySwitchOrUseItem(void);
 extern u8 GetBattlerAtPosition(u8);
-extern u8 GetMostSuitableMonToSwitchInto(void);
 extern void sub_80330C8(void);
 extern void sub_8043D84();
 extern void sub_8045A5C();
