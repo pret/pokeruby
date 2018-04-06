@@ -29,28 +29,16 @@ CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno
 ROM := poke$(BUILD_NAME).gba
 MAP := $(ROM:%.gba=%.map)
 
-SUBDIRS := \
-  sound \
-  sound/songs \
-  asm \
-  data \
-  src \
-  src/battle \
-  src/battle/anim \
-  src/field \
-  src/debug \
-  src/scene \
-  src/pokemon \
-  src/engine \
-  src/libs
 BUILD_DIR := build/$(BUILD_NAME)
 
-C_SOURCES    := $(foreach dir, $(SUBDIRS), $(wildcard $(dir)/*.c))
-ASM_SOURCES  := $(foreach dir, $(SUBDIRS), $(wildcard $(dir)/*.s))
+C_SOURCES    := $(wildcard src/*.c src/*/*.c src/*/*/*.c)
+ASM_SOURCES  := $(wildcard src/*.s src/*/*.s asm/*.s data/*.s sound/*.s sound/*/*.s)
 
 C_OBJECTS    := $(addprefix $(BUILD_DIR)/, $(C_SOURCES:%.c=%.o))
 ASM_OBJECTS  := $(addprefix $(BUILD_DIR)/, $(ASM_SOURCES:%.s=%.o))
 ALL_OBJECTS  := $(C_OBJECTS) $(ASM_OBJECTS)
+
+SUBDIRS      := $(sort $(dir $(ALL_OBJECTS)))
 
 LIBC   := tools/agbcc/lib/libc.a
 LIBGCC := tools/agbcc/lib/libgcc.a
@@ -101,7 +89,7 @@ endif
 .DELETE_ON_ERROR:
 
 # Create build subdirectories
-$(shell mkdir -p $(addprefix $(BUILD_DIR)/, $(SUBDIRS)))
+$(shell mkdir -p $(SUBDIRS))
 
 all: $(ROM)
 ifeq ($(COMPARE),1)
