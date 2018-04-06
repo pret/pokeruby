@@ -48,8 +48,7 @@ SECTIONS {
         src/rom3.o(.text);
         src/decompress.o(.text);
         asm/battle_1.o(.text);
-        src/rom_800D42C.o(.text);
-        asm/battle_1.o(.text_800DC24);
+        src/battle/battle_bg.o(.text);
         src/battle/battle_2.o(.text);
         src/battle/battle_util.o(.text);
         src/battle/battle_4.o(.text);
@@ -493,6 +492,8 @@ SECTIONS {
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         data/mon_attrs.o(.rodata);
+        src/battle/battle_1.o(.rodata);
+        src/battle/battle_bg.o(.rodata);
         data/btl_attrs.o(.rodata);
         src/battle/battle_4.o(.rodata);
         src/battle/battle_controller_player.o(.rodata);
@@ -513,7 +514,8 @@ SECTIONS {
         src/util.o(.rodata);
         src/daycare.o(.rodata);
         src/egg_hatch.o(.rodata);
-        data/battle_interface.o(.rodata);
+        src/battle/battle_7.o(.rodata);
+        src/battle/battle_interface.o(.rodata);
         src/battle/pokeball.o(.rodata);
         src/trade.o(.rodata);
         src/berry_blender.o(.rodata);

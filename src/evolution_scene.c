@@ -212,7 +212,7 @@ void EvolutionScene(struct Pokemon* mon, u16 speciesToEvolve, bool8 canStopEvo, 
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
-    sub_800DAB8();
+    LoadBattleTextboxAndBackground();
     ResetSpriteData();
     ScanlineEffect_Stop();
     ResetTasks();
@@ -320,7 +320,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     gBattleTerrain = BATTLE_TERRAIN_PLAIN;
 
     sub_800D6D4();
-    sub_800DAB8();
+    LoadBattleTextboxAndBackground();
     ResetSpriteData();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 4;
