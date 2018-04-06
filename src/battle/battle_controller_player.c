@@ -614,7 +614,7 @@ struct ChooseMoveStruct
     u8 pp[4];
     u8 unkC[0x12-0xC];
     u8 unk12;
-    u8 unk13;
+    u8 effectStringId;
     u8 filler14[0x20-0x14];
 };
 
@@ -637,7 +637,7 @@ void sub_802C68C(void)
         PlaySE(SE_SELECT);
 
         if (r6->moves[gMoveSelectionCursor[gActiveBank]] == MOVE_CURSE)
-            r4 = (r6->unk12 != TYPE_GHOST && (r6->unk13 ^ 7)) ? 0x10 : 0;
+            r4 = (r6->unk12 != TYPE_GHOST && (r6->effectStringId ^ 7)) ? 0x10 : 0;
         else
             r4 = gBattleMoves[r6->moves[gMoveSelectionCursor[gActiveBank]]].target;
 
