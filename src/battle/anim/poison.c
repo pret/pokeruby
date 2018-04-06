@@ -20,8 +20,8 @@ void sub_80D9D70(struct Sprite *sprite)
     InitAnimSpritePos(sprite, 1);
 
     sprite->data[0] = gBattleAnimArgs[2];
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->data[5] = -30;
 
     InitAnimSpriteTranslationOverDuration(sprite);

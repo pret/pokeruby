@@ -21,8 +21,8 @@ void sub_80D2D68(struct Sprite* sprite)
         gBattleAnimArgs[1] *= -1;
     }
 
-    sprite->pos1.x = GetBankPosition(slot, 2)  + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBankPosition(slot, 3) + gBattleAnimArgs[2];
+    sprite->pos1.x = GetBattlerSpriteCoord(slot, 2)  + gBattleAnimArgs[1];
+    sprite->pos1.y = GetBattlerSpriteCoord(slot, 3) + gBattleAnimArgs[2];
     sprite->data[0] = 0;
     sprite->data[1] = (u16)sprite->pos1.x << 3;
     sprite->data[2] = (u16)sprite->pos1.y << 3;

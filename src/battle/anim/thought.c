@@ -20,7 +20,7 @@ void sub_80CEF44(u8 bank, struct Sprite* sprite)
     else
         sprite->pos1.x = sub_807A100(bank, 4) - 8;
 
-    sprite->pos1.y = GetBankPosition(bank, 3) - (s16)sub_807A100(bank, 0) / 4;
+    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) - (s16)sub_807A100(bank, 0) / 4;
 }
 
 void sub_80CEF9C(struct Sprite* sprite)

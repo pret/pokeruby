@@ -16,8 +16,8 @@ static void sub_80CD0CC(struct Sprite* sprite, int unk1, int unk2);
 
 void sub_80CCF04(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3) + 0xFFE8;
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3) + 0xFFE8;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 0;

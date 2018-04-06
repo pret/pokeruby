@@ -22,8 +22,8 @@ void sub_80D3014(struct Sprite *sprite)
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0);
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1) + 40;
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + 40;
     }
 
     sprite->data[0] = 13;

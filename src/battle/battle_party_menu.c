@@ -31,7 +31,7 @@ extern void nullsub_14();
 extern u8 sub_803FBBC(void);
 
 extern u8 gPlayerPartyCount;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBankInMenu;
 extern u8 gUnknown_0202E8F4;
@@ -662,7 +662,7 @@ static void Task_BattlePartyMenuShift(u8 taskId)
         gTasks[taskId].func = Task_80954C0;
         return;
     }
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (GetBattlerSide(i) == 0
          && sub_8094C20(partySelection) == gBattlerPartyIndexes[i])

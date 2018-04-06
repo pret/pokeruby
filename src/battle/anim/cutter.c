@@ -32,8 +32,8 @@ void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     if (!gBattleAnimArgs[6])
     {
-        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
-        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     }
     else
     {

@@ -85,7 +85,7 @@ extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void nullsub_10();
@@ -1106,7 +1106,7 @@ void LinkPartnerHandleLoadPokeSprite(void)
       GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(gActiveBattler, 2),
+      GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       sub_8079E90(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
@@ -1136,7 +1136,7 @@ void sub_811F864(u8 a, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBankSpriteIds[a] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(a, 2),
+      GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
     gSprites[gUnknown_0300434C[a]].data[1] = gBankSpriteIds[a];

@@ -376,8 +376,8 @@ static void sub_8046464(u8 taskId)
         gSprites[spriteId].callback = sub_8047074;
         break;
     case 0xFE:
-        gSprites[spriteId].pos1.x = GetBankPosition(r5, 0);
-        gSprites[spriteId].pos1.y = GetBankPosition(r5, 1) + 24;
+        gSprites[spriteId].pos1.x = GetBattlerSpriteCoord(r5, 0);
+        gSprites[spriteId].pos1.y = GetBattlerSpriteCoord(r5, 1) + 24;
         gBankTarget = r5;
         gSprites[spriteId].data[0] = 0;
         gSprites[spriteId].callback = sub_8047254;
@@ -394,8 +394,8 @@ static void sub_8046464(u8 taskId)
         return;
     }
     gSprites[spriteId].data[0] = 0x22;
-    gSprites[spriteId].data[2] = GetBankPosition(gBankTarget, 0);
-    gSprites[spriteId].data[4] = GetBankPosition(gBankTarget, 1) - 16;
+    gSprites[spriteId].data[2] = GetBattlerSpriteCoord(gBankTarget, 0);
+    gSprites[spriteId].data[4] = GetBattlerSpriteCoord(gBankTarget, 1) - 16;
     gSprites[spriteId].data[5] = -40;
     InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
     gSprites[spriteId].oam.affineParam = taskId;
@@ -830,8 +830,8 @@ static void sub_8046FBC(struct Sprite *sprite)
 static void sub_8047074(struct Sprite *sprite)
 {
     sprite->data[0] = 25;
-    sprite->data[2] = GetBankPosition(sprite->data[6], 2);
-    sprite->data[4] = GetBankPosition(sprite->data[6], 3) + 24;
+    sprite->data[2] = GetBattlerSpriteCoord(sprite->data[6], 2);
+    sprite->data[4] = GetBattlerSpriteCoord(sprite->data[6], 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->data[6];
     InitAnimSpriteTranslationOverDuration(sprite);

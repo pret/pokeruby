@@ -48,12 +48,12 @@ void sub_80CC474(struct Sprite* sprite)
         sprite->oam.priority = sub_8079ED4(bank) + 1;
         break;
     case 2:
-        sprite->pos1.y = GetBankPosition(bank, 3) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[0];
         sprite->oam.priority = sub_8079ED4(bank);
         break;
     case 3:
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[0];
-        GetAnimBankSpriteId(1);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[0];
+        GetAnimBattlerSpriteId(1);
         sprite->oam.priority = sub_8079ED4(bank) + 1;
         break;
     }

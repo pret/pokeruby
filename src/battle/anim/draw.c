@@ -108,7 +108,7 @@ void sub_80D0D68(u8 taskId)
 
 void sub_80D0E30(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) - 16;
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) - 16;
     sprite->pos1.y = sub_8077FC0(gAnimBankTarget) + 16;
     sprite->data[0] = 0;
     sprite->data[1] = 0;

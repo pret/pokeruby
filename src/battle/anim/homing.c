@@ -29,13 +29,13 @@ void sub_80CC6CC(struct Sprite* sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            a = GetBankPosition(gAnimBankAttacker, 2);
-            b = GetBankPosition(gAnimBankAttacker, 3);
+            a = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+            b = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
         }
         else
         {
-            a = GetBankPosition(gAnimBankTarget, 2);
-            b = GetBankPosition(gAnimBankTarget, 3);
+            a = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+            b = GetBattlerSpriteCoord(gAnimBankTarget, 3);
         }
 
         sprite->data[0] = gBattleAnimArgs[4];

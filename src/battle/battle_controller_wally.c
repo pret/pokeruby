@@ -91,7 +91,7 @@ extern void StartTranslateAnimSpriteByDeltas(struct Sprite *);
 extern void sub_8030E38(struct Sprite *);
 extern void StoreSpriteCallbackInData();
 extern u8 sub_8046400();
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void sub_80312F0(struct Sprite *);
@@ -1510,7 +1510,7 @@ void sub_81398BC(u8 bank)
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(bank, 2),
+      GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
     gSprites[gUnknown_0300434C[bank]].data[1] = gBankSpriteIds[bank];

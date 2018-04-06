@@ -34,8 +34,8 @@ void AnimSonicBoomProjectile(struct Sprite* sprite)
     }
 
     InitAnimSpritePos(sprite, 1);
-    targetXPos = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[2];
-    targetYPos = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+    targetXPos = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
+    targetYPos = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     rotation = ArcTan2Neg(targetXPos - sprite->pos1.x, targetYPos - sprite->pos1.y);
     rotation += 0xF000;
     if (IsContest())

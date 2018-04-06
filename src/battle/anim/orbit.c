@@ -84,7 +84,7 @@ void sub_80CAD54(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CADA8;
@@ -121,7 +121,7 @@ void sub_80CAE20(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CAE74;

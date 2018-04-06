@@ -22,8 +22,8 @@ void sub_80CECE8(struct Sprite* sprite)
         (u16)gBattleAnimArgs[1] = -a;
     }
 
-    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
     sprite->data[2] = 0;
     sprite->data[3] = 0;

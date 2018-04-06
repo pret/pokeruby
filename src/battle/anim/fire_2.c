@@ -76,9 +76,9 @@ static void AnimFireRingStep1(struct Sprite *sprite)
     {
         sprite->data[0] = 0x19;
         sprite->data[1] = sprite->pos1.x;
-        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
+        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
         sprite->data[3] = sprite->pos1.y;
-        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
         InitAnimSpriteTranslationDeltas(sprite);
 
@@ -92,8 +92,8 @@ static void AnimFireRingStep2(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
 
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
@@ -184,7 +184,7 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[15] = GetAnimBankSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(0);
 
     task->data[0] = 0;
     task->data[1] = 0;

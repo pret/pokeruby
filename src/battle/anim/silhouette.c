@@ -15,7 +15,7 @@ static void sub_80CB438(u8 taskId);
 
 void sub_80CB340(u8 taskId)
 {
-    u8 spriteId = GetAnimBankSpriteId(1);
+    u8 spriteId = GetAnimBattlerSpriteId(1);
     if (gSprites[spriteId].invisible)
     {
         DestroyAnimVisualTask(taskId);
@@ -32,7 +32,7 @@ void sub_80CB340(u8 taskId)
 
 void sub_80CB3A8(u8 taskId)
 {
-    u8 spriteId = GetAnimBankSpriteId(1);
+    u8 spriteId = GetAnimBattlerSpriteId(1);
     gTasks[taskId].data[10] += gTasks[taskId].data[0];
     gSprites[spriteId].pos2.x = gTasks[taskId].data[10] >> 8;
     if (GetBattlerSide(gAnimBankTarget))
@@ -57,7 +57,7 @@ void sub_80CB438(u8 taskId)
     {
         if (gTasks[taskId].data[0] == 0)
         {
-            u8 spriteId = GetAnimBankSpriteId(1);
+            u8 spriteId = GetAnimBattlerSpriteId(1);
             sub_8078F40(spriteId);
             gSprites[spriteId].pos2.x = 0;
             gSprites[spriteId].pos2.y = 0;

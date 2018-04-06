@@ -23,7 +23,7 @@ extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
 extern u8 gBankInMenu;
 extern u16 gBattlerPartyIndexes[4];
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattleTypeFlags;
 extern u8 gBankSpriteIds[4];
 extern u8 gBattleMonForms[4];
@@ -205,7 +205,7 @@ static void sub_807B06C(void)
 
 static bool8 LoadAppropiateBankSprite(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
         if (GetBattlerSide(bank))
         {
@@ -230,7 +230,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
 
 static void sub_807B184(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
         u8 posY;
 
@@ -243,7 +243,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, sub_8079E90(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBankSpriteIds[bank]].data[0] = bank;
@@ -275,7 +275,7 @@ static void sub_807B184(u8 bank)
             if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
             GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, sub_8079E90(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBankSpriteIds[bank]].data[0] = bank;
@@ -288,7 +288,7 @@ static void sub_807B184(u8 bank)
 
 static void sub_807B508(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
         u8 healthboxID;
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)

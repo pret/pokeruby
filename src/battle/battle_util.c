@@ -36,7 +36,7 @@ extern u16 gLastUsedItem;
 extern u16 gCurrentMove;
 extern const u32 gBitTable[];
 extern u16 gBattleTypeFlags;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u32 gStatuses3[4];
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
@@ -271,7 +271,7 @@ void PressurePPLoseOnUsingImprision(u8 bankAtk)
     s32 imprisionPos = 4;
     u8 atkSide = GetBattlerSide(bankAtk);
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (atkSide != GetBattlerSide(i) && gBattleMons[i].ability == ABILITY_PRESSURE)
         {
@@ -304,7 +304,7 @@ void PressurePPLoseOnUsingPerishSong(u8 bankAtk)
     s32 i, j;
     s32 perishSongPos = 4;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gBattleMons[i].ability == ABILITY_PRESSURE && i != bankAtk)
         {
@@ -339,12 +339,12 @@ void MarkAllBufferBanksForExecution(void) // unused
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             gBattleExecBuffer |= gBitTable[i] << 0x1C;
     }
     else
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             gBattleExecBuffer |= gBitTable[i];
     }
 }
@@ -415,10 +415,10 @@ void ResetSentPokesToOpponentValue(void)
     gSentPokesToOpponent[0] = 0;
     gSentPokesToOpponent[1] = 0;
 
-    for (i = 0; i < gNoOfAllBanks; i += 2)
+    for (i = 0; i < gBattlersCount; i += 2)
         bits |= gBitTable[gBattlerPartyIndexes[i]];
 
-    for (i = 1; i < gNoOfAllBanks; i += 2)
+    for (i = 1; i < gBattlersCount; i += 2)
         gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
 }
 
@@ -432,7 +432,7 @@ void sub_8015740(u8 bank)
         u8 id = ((bank & BIT_FLANK) >> 1);
         gSentPokesToOpponent[id] = 0;
 
-        for (i = 0; i < gNoOfAllBanks; i += 2)
+        for (i = 0; i < gBattlersCount; i += 2)
         {
             if (!(gAbsentBattlerFlags & gBitTable[i]))
                 bits |= gBitTable[gBattlerPartyIndexes[i]];
@@ -451,7 +451,7 @@ void sub_80157C4(u8 bank)
     else
     {
         s32 i;
-        for (i = 1; i < gNoOfAllBanks; i++)
+        for (i = 1; i < gBattlersCount; i++)
             gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlerPartyIndexes[bank]];
     }
 }
@@ -584,7 +584,7 @@ u8 IsImprisoned(u8 bank, u16 move)
     u8 imprisionedMoves = 0;
     u8 bankSide = GetBattlerSide(bank);
     s32 i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (bankSide != GetBattlerSide(i) && gStatuses3[i] & STATUS3_IMPRISIONED)
         {
@@ -606,10 +606,10 @@ u8 UpdateTurnCounters(void)
     u8 effect = 0;
     s32 i;
 
-    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks && gAbsentBattlerFlags & gBitTable[gBankAttacker]; gBankAttacker++)
+    for (gBankAttacker = 0; gBankAttacker < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBankAttacker]; gBankAttacker++)
     {
     }
-    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks && gAbsentBattlerFlags & gBitTable[gBankTarget]; gBankTarget++)
+    for (gBankTarget = 0; gBankTarget < gBattlersCount && gAbsentBattlerFlags & gBitTable[gBankTarget]; gBankTarget++)
     {
     }
 
@@ -620,14 +620,14 @@ u8 UpdateTurnCounters(void)
         switch (gBattleStruct->turncountersTracker)
         {
         case 0:
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 gBanksByTurnOrder[i] = i;
             }
-            for (i = 0; i < gNoOfAllBanks - 1; i++)
+            for (i = 0; i < gBattlersCount - 1; i++)
             {
                 s32 j;
-                for (j = i + 1; j < gNoOfAllBanks; j++)
+                for (j = i + 1; j < gBattlersCount; j++)
                 {
                     if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 0))
                         SwapTurnOrder(i, j);
@@ -744,7 +744,7 @@ u8 UpdateTurnCounters(void)
             }
             break;
         case 5:
-            while (gBattleStruct->turnSideTracker < gNoOfAllBanks)
+            while (gBattleStruct->turnSideTracker < gBattlersCount)
             {
                 gActiveBattler = gBanksByTurnOrder[gBattleStruct->turnSideTracker];
                 if (gWishFutureKnock.wishCounter[gActiveBattler] && --gWishFutureKnock.wishCounter[gActiveBattler] == 0 && gBattleMons[gActiveBattler].hp)
@@ -854,7 +854,7 @@ u8 TurnBasedEffects(void)
     u8 effect = 0;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
-    while (gBattleStruct->turnEffectsBank < gNoOfAllBanks && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
+    while (gBattleStruct->turnEffectsBank < gBattlersCount && gBattleStruct->turnEffectsTracker <= TURNBASED_MAX_CASE)
     {
         gActiveBattler = gBankAttacker = gBanksByTurnOrder[gBattleStruct->turnEffectsBank];
         if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
@@ -1002,7 +1002,7 @@ u8 TurnBasedEffects(void)
             case 10:  // uproar
                 if (gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR)
                 {
-                    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks; gBankAttacker++)
+                    for (gBankAttacker = 0; gBankAttacker < gBattlersCount; gBankAttacker++)
                     {
                         if ((gBattleMons[gBankAttacker].status1 & STATUS_SLEEP)
                          && gBattleMons[gBankAttacker].ability != ABILITY_SOUNDPROOF)
@@ -1017,7 +1017,7 @@ u8 TurnBasedEffects(void)
                             break;
                         }
                     }
-                    if (gBankAttacker != gNoOfAllBanks)
+                    if (gBankAttacker != gBattlersCount)
                     {
                         effect = 2;  // a pokemon was awaken
                         break;
@@ -1165,7 +1165,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
     switch (gBattleStruct->sub80170DC_Tracker)
     {
     case 0: // future sight
-        while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
+        while (gBattleStruct->sub80170DC_Bank < gBattlersCount)
         {
             gActiveBattler = gBattleStruct->sub80170DC_Bank;
             if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
@@ -1196,7 +1196,7 @@ bool8 HandleWishPerishSongOnTurnEnd(void)
         gBattleStruct->sub80170DC_Tracker = 1;
         gBattleStruct->sub80170DC_Bank = 0;
     case 1: // perish song
-        while (gBattleStruct->sub80170DC_Bank < gNoOfAllBanks)
+        while (gBattleStruct->sub80170DC_Bank < gBattlersCount)
         {
             gActiveBattler = gBankAttacker = gBanksByTurnOrder[gBattleStruct->sub80170DC_Bank];
             if (gAbsentBattlerFlags & gBitTable[gActiveBattler])
@@ -1248,7 +1248,7 @@ bool8 HandleFaintedMonActions(void)
         case 0:
             gBattleStruct->unk1605A = 0;
             gBattleStruct->sub80173A4_Tracker++;
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gAbsentBattlerFlags & gBitTable[i] && !sub_8018018(i, 6, 6))
                     gAbsentBattlerFlags &= ~(gBitTable[i]);
@@ -1263,12 +1263,12 @@ bool8 HandleFaintedMonActions(void)
                     gBattleStruct->sub80173A4_Tracker = 2;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gNoOfAllBanks);
+            } while (++gBattleStruct->unk1605A != gBattlersCount);
             gBattleStruct->sub80173A4_Tracker = 3;
             break;
         case 2:
             sub_8015740(gBank1);
-            if (++gBattleStruct->unk1605A == gNoOfAllBanks)
+            if (++gBattleStruct->unk1605A == gBattlersCount)
                 gBattleStruct->sub80173A4_Tracker = 3;
             else
                 gBattleStruct->sub80173A4_Tracker = 1;
@@ -1286,11 +1286,11 @@ bool8 HandleFaintedMonActions(void)
                     gBattleStruct->sub80173A4_Tracker = 5;
                     return 1;
                 }
-            } while (++gBattleStruct->unk1605A != gNoOfAllBanks);
+            } while (++gBattleStruct->unk1605A != gBattlersCount);
             gBattleStruct->sub80173A4_Tracker = 6;
             break;
         case 5:
-            if (++gBattleStruct->unk1605A == gNoOfAllBanks)
+            if (++gBattleStruct->unk1605A == gBattlersCount)
                 gBattleStruct->sub80173A4_Tracker = 6;
             else
                 gBattleStruct->sub80173A4_Tracker = 4;
@@ -1310,7 +1310,7 @@ bool8 HandleFaintedMonActions(void)
 void TryClearRageStatuses(void)
 {
     int i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gBattleMons[i].status2 & STATUS2_RAGE && gChosenMovesByBanks[i] != MOVE_RAGE)
             gBattleMons[i].status2 &= ~(STATUS2_RAGE);
@@ -1695,14 +1695,14 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
     u32 pidAtk;
     u32 pidDef;
 
-    if (gBankAttacker >= gNoOfAllBanks)
+    if (gBankAttacker >= gBattlersCount)
         gBankAttacker = bank;
     if (GetBattlerSide(gBankAttacker) == 0)
         pokeAtk = &gPlayerParty[gBattlerPartyIndexes[gBankAttacker]];
     else
         pokeAtk = &gEnemyParty[gBattlerPartyIndexes[gBankAttacker]];
 
-    if (gBankTarget >= gNoOfAllBanks)
+    if (gBankTarget >= gBattlersCount)
         gBankTarget = bank;
     if (GetBattlerSide(gBankTarget) == 0)
         pokeDef = &gPlayerParty[gBattlerPartyIndexes[gBankTarget]];
@@ -1741,7 +1741,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
         switch (caseID)
         {
         case ABILITYEFFECT_ON_SWITCHIN: // 0
-            if (gBankAttacker >= gNoOfAllBanks)
+            if (gBankAttacker >= gBattlersCount)
                 gBankAttacker = bank;
             switch (gLastUsedAbility)
             {
@@ -1838,7 +1838,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             case ABILITY_AIR_LOCK:
                 {
                     // that's a weird choice for a variable, why not use i or bank?
-                    for (target1 = 0; target1 < gNoOfAllBanks; target1++)
+                    for (target1 = 0; target1 < gBattlersCount; target1++)
                     {
                         effect = CastformDataTypeChange(target1);
                         if (effect != 0)
@@ -2227,7 +2227,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_IMMUNITY: // 5
             {
-                for (bank = 0; bank < gNoOfAllBanks; bank++)
+                for (bank = 0; bank < gBattlersCount; bank++)
                 {
                     switch (gBattleMons[bank].ability)
                     {
@@ -2310,7 +2310,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_FORECAST: // 6
             {
-                for (bank = 0; bank < gNoOfAllBanks; bank++)
+                for (bank = 0; bank < gBattlersCount; bank++)
                 {
                     if (gBattleMons[bank].ability == ABILITY_FORECAST)
                     {
@@ -2357,7 +2357,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_INTIMIDATE1: // 9
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ABILITY_INTIMIDATE && gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
                 {
@@ -2371,7 +2371,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_TRACE: // 11
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ABILITY_TRACE && (gStatuses3[i] & STATUS3_TRACE))
                 {
@@ -2436,7 +2436,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_INTIMIDATE2: // 10
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ABILITY_INTIMIDATE && (gStatuses3[i] & STATUS3_INTIMIDATE_POKES))
                 {
@@ -2452,7 +2452,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_CHECK_OTHER_SIDE: // 12
             side = GetBattlerSide(bank);
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
                 {
@@ -2463,7 +2463,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_CHECK_BANK_SIDE: // 13
             side = GetBattlerSide(bank);
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
                 {
@@ -2476,21 +2476,21 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             switch (gLastUsedAbility)
             {
             case 0xFD:
-                for (i = 0; i < gNoOfAllBanks; i++)
+                for (i = 0; i < gBattlersCount; i++)
                 {
                     if (gStatuses3[i] & STATUS3_MUDSPORT)
                         effect = i + 1;
                 }
                 break;
             case 0xFE:
-                for (i = 0; i < gNoOfAllBanks; i++)
+                for (i = 0; i < gBattlersCount; i++)
                 {
                     if (gStatuses3[i] & STATUS3_WATERSPORT)
                         effect = i + 1;
                 }
                 break;
             default:
-                for (i = 0; i < gNoOfAllBanks; i++)
+                for (i = 0; i < gBattlersCount; i++)
                 {
                     if (gBattleMons[i].ability == ability)
                     {
@@ -2502,7 +2502,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_CHECK_ON_FIELD: // 19
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ability && gBattleMons[i].hp != 0)
                 {
@@ -2512,7 +2512,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK: // 15
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ability && i != bank)
                 {
@@ -2523,7 +2523,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_COUNT_OTHER_SIZE: // 16
             side = GetBattlerSide(bank);
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (GetBattlerSide(i) != side && gBattleMons[i].ability == ability)
                 {
@@ -2534,7 +2534,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             break;
         case ABILITYEFFECT_COUNT_BANK_SIDE: // 17
             side = GetBattlerSide(bank);
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (GetBattlerSide(i) == side && gBattleMons[i].ability == ability)
                 {
@@ -2544,7 +2544,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             }
             break;
         case ABILITYEFFECT_COUNT_ON_FIELD: // 18
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ability && i != bank)
                 {
@@ -3115,7 +3115,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
     case 2:
         break;
     case 3:
-        for (bank = 0; bank < gNoOfAllBanks; bank++)
+        for (bank = 0; bank < gBattlersCount; bank++)
         {
             gLastUsedItem = gBattleMons[bank].item;
             if (gBattleMons[bank].item == ITEM_ENIGMA_BERRY)
@@ -3384,7 +3384,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget) //get move target
             side = GetBattlerSide(gBankAttacker);
             do
             {
-                targetBank = Random() % gNoOfAllBanks;
+                targetBank = Random() % gBattlersCount;
             } while (targetBank == gBankAttacker || side == GetBattlerSide(targetBank) || gAbsentBattlerFlags & gBitTable[targetBank]);
             if (gBattleMoves[move].type == TYPE_ELECTRIC
                 && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
@@ -3519,12 +3519,12 @@ u8 IsMonDisobedient(void)
         {
             // try putting asleep
             int i;
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].status2 & STATUS2_UPROAR)
                     break;
             }
-            if (i == gNoOfAllBanks)
+            if (i == gBattlersCount)
             {
                 gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
                 return 1;

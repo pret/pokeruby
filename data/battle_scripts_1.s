@@ -1653,7 +1653,7 @@ BattleScript_PerishSongLoop: @ 81D7E53
 
 BattleScript_PerishSongLoopIncrement: @ 81D7E5A
 	addbyte sBANK, 1
-	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_PerishSongLoop
+	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_PerishSongLoop
 	goto BattleScript_MoveEnd
 
 BattleScript_1D7E73: @ 81D7E73
@@ -2701,7 +2701,7 @@ BattleScript_TeeterDanceDoMoveEndIncrement: @ 81D8978
 	setbyte sMOVEEND_STATE, 0
 	moveend 2, 16
 	addbyte gBankTarget, 1
-	jumpifbytenotequal gBankTarget, gNoOfAllBanks, BattleScript_TeeterDanceLoop
+	jumpifbytenotequal gBankTarget, gBattlersCount, BattleScript_TeeterDanceLoop
 	end
 
 BattleScript_TeeterDanceLoopIncrement: @ 81D8996
@@ -3034,7 +3034,7 @@ BattleScript_1D8D99: @ 81D8D99
 	switchinanim 3, 0
 	waitstate
 	switchineffects 5
-	jumpifbytenotequal gBank1, gNoOfAllBanks, BattleScript_1D8D99
+	jumpifbytenotequal gBank1, gBattlersCount, BattleScript_1D8D99
 
 BattleScript_1D8DBD: @ 81D8DBD
 	end2
@@ -3264,7 +3264,7 @@ BattleScript_DamagingWeatherLoop: @ 81D8F95
 BattleScript_DamagingWeatherLoopIncrement: @ 81D8FD6
 	jumpifbyte NOT_EQUAL, gBattleOutcome, 0, BattleScript_DamagingWeatherContinuesEnd
 	addbyte gBattleCommunication, 1
-	jumpifbytenotequal gBattleCommunication, gNoOfAllBanks, BattleScript_DamagingWeatherLoop
+	jumpifbytenotequal gBattleCommunication, gBattlersCount, BattleScript_DamagingWeatherLoop
 
 BattleScript_DamagingWeatherContinuesEnd: @ 81D8FF5
 	bicword gHitMarker, HITMARKER_x20 | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_x100000 | HITMARKER_GRUDGE
@@ -4042,7 +4042,7 @@ BattleScript_WeatherFormChanges: @ 81D9761
 BattleScript_WeatherFormChangesLoop: @ 81D9767
 	trycastformdatachange
 	addbyte sBANK, 1
-	jumpifbytenotequal sBANK, gNoOfAllBanks, BattleScript_WeatherFormChangesLoop
+	jumpifbytenotequal sBANK, gBattlersCount, BattleScript_WeatherFormChangesLoop
 	return
 
 BattleScript_CastformChange:: @ 81D977D

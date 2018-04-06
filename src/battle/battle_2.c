@@ -86,7 +86,7 @@ extern struct UnknownPokemonStruct2 gUnknown_02023A00[];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gCurrentActionFuncId;
 extern u8 gBanksByTurnOrder[];
@@ -3604,17 +3604,17 @@ void sub_8010824(void)
 #if DEBUG
     if (gUnknown_02023A14_50 & 0x80)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             debug_sub_80138CC();
         gBattleMainFunc();
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             gBattleBankFunc[gActiveBattler]();
     }
     else
 #endif
     {
         gBattleMainFunc();
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             gBattleBankFunc[gActiveBattler]();
     }
 }
@@ -3735,7 +3735,7 @@ void SwitchInClearSetData(void)
     {
         for (i = 0; i < 8; i++)
             gBattleMons[gActiveBattler].statStages[i] = 6;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             struct UnknownStruct12 *sp20 = &gUnknown_02024AD0[i];
 
@@ -3753,7 +3753,7 @@ void SwitchInClearSetData(void)
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
         gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BANK | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
 
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
              && (gStatuses3[i] & STATUS3_ALWAYS_HITS) != 0
@@ -3770,7 +3770,7 @@ void SwitchInClearSetData(void)
         gStatuses3[gActiveBattler] = 0;
     }
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gUnknown_02024AD0[i].unk0 & (gBitTable[gActiveBattler] << 16))
             gUnknown_02024AD0[i].unk0 &= ~(gBitTable[gActiveBattler] << 16);
@@ -3822,7 +3822,7 @@ void UndoEffectsAfterFainting(void)
         gBattleMons[gActiveBattler].statStages[i] = 6;
     gBattleMons[gActiveBattler].status2 = 0;
     gStatuses3[gActiveBattler] = 0;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if ((gBattleMons[i].status2 & STATUS2_ESCAPE_PREVENTION) && gDisableStructs[i].bankPreventingEscape == gActiveBattler)
             gBattleMons[i].status2 &= ~STATUS2_ESCAPE_PREVENTION;
@@ -3892,7 +3892,7 @@ void bc_8012FAC(void)
         if (gBattleExecBuffer == 0)
         {
             gBattleCommunication[1]++;
-            if (gBattleCommunication[1] == gNoOfAllBanks)
+            if (gBattleCommunication[1] == gBattlersCount)
                 gBattleMainFunc = BattlePrepIntroSlide;
             else
                 gBattleCommunication[0] = 0;
@@ -3921,7 +3921,7 @@ void sub_8011384(void)
 
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
              && GetBattlerSide(gActiveBattler) == 0)
@@ -4090,7 +4090,7 @@ void sub_8011834(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (GetBattlerPosition(gActiveBattler) == 1)
             {
@@ -4112,7 +4112,7 @@ void bc_801362C(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (GetBattlerSide(gActiveBattler) == 1
              && !(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)))
@@ -4142,7 +4142,7 @@ void sub_80119B4(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (GetBattlerPosition(gActiveBattler) == 0)
             {
@@ -4167,7 +4167,7 @@ void unref_sub_8011A68(void)
 {
     if (gBattleExecBuffer == 0)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (GetBattlerSide(gActiveBattler) == 0)
             {
@@ -4192,11 +4192,11 @@ void BattleBeginFirstTurn(void)
     {
         if (ewram16058 == 0)
         {
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
                 gBanksByTurnOrder[i] = i;
-            for (i = 0; i < gNoOfAllBanks - 1; i++)
+            for (i = 0; i < gBattlersCount - 1; i++)
             {
-                for (j = i + 1; j < gNoOfAllBanks; j++)
+                for (j = i + 1; j < gBattlersCount; j++)
                 {
                     if (GetWhoStrikesFirst(gBanksByTurnOrder[i], gBanksByTurnOrder[j], 1) != 0)
                         SwapTurnOrder(i, j);
@@ -4208,7 +4208,7 @@ void BattleBeginFirstTurn(void)
             ewram160E6 = 1;
             return;
         }
-        while (ewram16058 < gNoOfAllBanks)
+        while (ewram16058 < gBattlersCount)
         {
             if (AbilityBattleEffects(0, gBanksByTurnOrder[ewram16058], 0, 0, 0) != 0)
                 r9++;
@@ -4220,7 +4220,7 @@ void BattleBeginFirstTurn(void)
             return;
         if (AbilityBattleEffects(11, 0, 0, 0, 0) != 0)
             return;
-        while (ewram160F9 < gNoOfAllBanks)
+        while (ewram160F9 < gBattlersCount)
         {
             if (ItemBattleEffects(0, gBanksByTurnOrder[ewram160F9], 0) != 0)
                 r9++;
@@ -4229,7 +4229,7 @@ void BattleBeginFirstTurn(void)
                 return;
         }
         // Absolutely pointless for-loop that somehow doesn't get optimized out
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             ;
         for (i = 0; i < 4; i++)
         {
@@ -4244,7 +4244,7 @@ void BattleBeginFirstTurn(void)
         ResetSentPokesToOpponentValue();
         for (i = 0; i < 8; i++)
             gBattleCommunication[i] = 0;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             gBattleMons[i].status2 &= ~8;
         ewram16000 = 0;
         ewram16001 = 0;
@@ -4267,7 +4267,7 @@ void bc_8013B1C(void)
         gBattleMainFunc = BattleTurnPassed;
         for (i = 0; i < 8; i++)
             gBattleCommunication[i] = 0;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             gBattleMons[i].status2 &= ~8;
             if ((gBattleMons[i].status1 & 7) && (gBattleMons[i].status2 & 0x1000))
@@ -4319,7 +4319,7 @@ void BattleTurnPassed(void)
     }
     if (gBattleResults.battleTurnCounter < 0xFF)
         gBattleResults.battleTurnCounter++;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         gActionForBanks[i] = 0xFF;
         gChosenMovesByBanks[i] = 0;
@@ -4349,7 +4349,7 @@ u8 CanRunFromBattle(void)
     if (gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
         return 0;
     r6 = GetBattlerSide(gActiveBattler);
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (r6 != GetBattlerSide(i)
          && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
@@ -4428,7 +4428,7 @@ void sub_8012324(void)
     gBattleCommunication[4] = 0;
     // inverted loop
     //_0801234C
-    for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+    for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
         r5 = GetBattlerPosition(gActiveBattler);
         switch (gBattleCommunication[gActiveBattler])
@@ -4485,12 +4485,12 @@ void sub_8012324(void)
     strb r1, [r0, 0x4]\n\
     ldr r0, _08012344 @ =gActiveBattler\n\
     strb r1, [r0]\n\
-    ldr r0, _08012348 @ =gNoOfAllBanks\n\
+    ldr r0, _08012348 @ =gBattlersCount\n\
     bl _08012F74\n\
     .align 2, 0\n\
 _08012340: .4byte gBattleCommunication\n\
 _08012344: .4byte gActiveBattler\n\
-_08012348: .4byte gNoOfAllBanks\n\
+_08012348: .4byte gBattlersCount\n\
 _0801234C:\n\
     ldr r4, _08012374 @ =gActiveBattler\n\
     ldrb r0, [r4]\n\
@@ -5914,7 +5914,7 @@ _08012F66:\n\
     ldrb r1, [r0]\n\
     adds r1, 0x1\n\
     strb r1, [r0]\n\
-    ldr r0, _08012FB0 @ =gNoOfAllBanks\n\
+    ldr r0, _08012FB0 @ =gBattlersCount\n\
     lsls r1, 24\n\
     lsrs r1, 24\n\
 _08012F74:\n\
@@ -5946,7 +5946,7 @@ _08012FA0: .4byte gBattleExecBuffer\n\
 _08012FA4: .4byte gBitTable\n\
 _08012FA8: .4byte gActiveBattler\n\
 _08012FAC: .4byte gBattleCommunication\n\
-_08012FB0: .4byte gNoOfAllBanks\n\
+_08012FB0: .4byte gBattlersCount\n\
 _08012FB4: .4byte gBattleMainFunc\n\
 _08012FB8: .4byte SetActionsAndBanksTurnOrder\n\
     .syntax divided\n");
@@ -6117,7 +6117,7 @@ void SetActionsAndBanksTurnOrder(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             gActionsByTurnOrder[var] = gActionForBanks[gActiveBattler];
             gBanksByTurnOrder[var] = gActiveBattler;
@@ -6128,7 +6128,7 @@ void SetActionsAndBanksTurnOrder(void)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-            for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (gActionForBanks[gActiveBattler] == ACTION_RUN)
                 {
@@ -6151,7 +6151,7 @@ void SetActionsAndBanksTurnOrder(void)
             gActionsByTurnOrder[0] = gActionForBanks[gActiveBattler];
             gBanksByTurnOrder[0] = gActiveBattler;
             var = 1;
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (i != gActiveBattler)
                 {
@@ -6161,12 +6161,12 @@ void SetActionsAndBanksTurnOrder(void)
                 }
             }
             gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-            eFocusPunchBank = 0;
+            eFocusPunchBattler = 0;
             return;
         }
         else
         {
-            for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (gActionForBanks[gActiveBattler] == ACTION_USE_ITEM || gActionForBanks[gActiveBattler] == ACTION_SWITCH)
                 {
@@ -6175,7 +6175,7 @@ void SetActionsAndBanksTurnOrder(void)
                     var++;
                 }
             }
-            for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (gActionForBanks[gActiveBattler] != ACTION_USE_ITEM && gActionForBanks[gActiveBattler] != ACTION_SWITCH)
                 {
@@ -6184,9 +6184,9 @@ void SetActionsAndBanksTurnOrder(void)
                     var++;
                 }
             }
-            for (i = 0; i < gNoOfAllBanks - 1; i++)
+            for (i = 0; i < gBattlersCount - 1; i++)
             {
-                for (j = i + 1; j < gNoOfAllBanks; j++)
+                for (j = i + 1; j < gBattlersCount; j++)
                 {
                     u8 bank1 = gBanksByTurnOrder[i];
                     u8 bank2 = gBanksByTurnOrder[j];
@@ -6204,7 +6204,7 @@ void SetActionsAndBanksTurnOrder(void)
     }
 
     gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-    eFocusPunchBank = 0;
+    eFocusPunchBattler = 0;
 }
 
 static void TurnValuesCleanUp(bool8 var0)
@@ -6212,7 +6212,7 @@ static void TurnValuesCleanUp(bool8 var0)
     s32 i;
     u8 *dataPtr;
 
-    for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+    for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
         if (var0)
         {
@@ -6246,7 +6246,7 @@ static void TurnValuesCleanUp(bool8 var0)
 
 void SpecialStatusesClear(void)
 {
-    for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+    for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
         s32 i;
         u8 *dataPtr = (u8*)(&gSpecialStatuses[gActiveBattler]);
@@ -6260,10 +6260,10 @@ void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (eFocusPunchBank < gNoOfAllBanks)
+        while (eFocusPunchBattler < gBattlersCount)
         {
-            gActiveBattler = gBankAttacker = eFocusPunchBank;
-            eFocusPunchBank++;
+            gActiveBattler = gBankAttacker = eFocusPunchBattler;
+            eFocusPunchBattler++;
             if (gChosenMovesByBanks[gActiveBattler] == MOVE_FOCUS_PUNCH
                 && !(gBattleMons[gActiveBattler].status1 & STATUS_SLEEP)
                 && !(gDisableStructs[gBankAttacker].truantCounter)
@@ -6300,7 +6300,7 @@ static void RunTurnActionsFunctions(void)
     gBattleStruct->unk16057 = gCurrentTurnActionNumber;
     gUnknown_081FA640[gCurrentActionFuncId]();
 
-    if (gCurrentTurnActionNumber >= gNoOfAllBanks) // everyone did their actions, turn finished
+    if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
         gHitMarker &= ~(HITMARKER_x100000);
         gBattleMainFunc = gUnknown_081FA678[gBattleOutcome & 0x7F];
@@ -6425,7 +6425,7 @@ void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_WALLY_TUTORIAL
                                   | BATTLE_TYPE_BATTLE_TOWER)))
         {
-            for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+            for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
                 {
@@ -6640,7 +6640,7 @@ void HandleAction_UseMove(void)
              && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
     {
         side = GetBattlerSide(gBankAttacker);
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (side != GetBattlerSide(gActiveBattler)
                 && ewram16010arr(gBankAttacker) != gActiveBattler
@@ -7255,7 +7255,7 @@ bool8 TryRunFromBattle(u8 bank)
 
     if (effect)
     {
-        gCurrentTurnActionNumber = gNoOfAllBanks;
+        gCurrentTurnActionNumber = gBattlersCount;
         gBattleOutcome = BATTLE_RAN;
     }
 
@@ -7268,9 +7268,9 @@ void HandleAction_Run(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        gCurrentTurnActionNumber = gNoOfAllBanks;
+        gCurrentTurnActionNumber = gBattlersCount;
 
-        for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+        for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
         {
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
@@ -7308,7 +7308,7 @@ void HandleAction_Run(void)
             }
             else
             {
-                gCurrentTurnActionNumber = gNoOfAllBanks;
+                gCurrentTurnActionNumber = gBattlersCount;
                 gBattleOutcome = BATTLE_POKE_FLED;
             }
         }
@@ -7388,7 +7388,7 @@ void HandleAction_SafriZoneRun(void)
 {
     gBankAttacker = gBanksByTurnOrder[gCurrentTurnActionNumber];
     PlaySE(SE_NIGERU);
-    gCurrentTurnActionNumber = gNoOfAllBanks;
+    gCurrentTurnActionNumber = gBattlersCount;
     gBattleOutcome = BATTLE_RAN;
 }
 

@@ -423,7 +423,7 @@ u8 *const gUnknown_0820A904[10] =
 };
 
 extern u8 gDisplayedStringBattle[];
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u8 gHealthboxIDs[];
@@ -951,7 +951,7 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         u8 spriteId1;
         u8 spriteId2;
@@ -1648,7 +1648,7 @@ void sub_804454C(void)
     s32 i;
     u8 spriteId;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gSprites[gHealthboxIDs[i]].callback == SpriteCallbackDummy
 #if DEBUG

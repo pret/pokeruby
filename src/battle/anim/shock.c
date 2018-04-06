@@ -15,8 +15,8 @@ extern void sub_80DA48C(struct Sprite *);
 
 void sub_80D6294(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
     if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
@@ -77,13 +77,13 @@ void sub_80D6328(struct Sprite *sprite)
 
     if (gBattleAnimArgs[5] == 0)
     {
-        sprite->pos1.x = GetBankPosition(slot, 0);
-        sprite->pos1.y = GetBankPosition(slot, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(slot, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(slot, 1);
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(slot, 2);
-        sprite->pos1.y = GetBankPosition(slot, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(slot, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(slot, 3);
     }
 
     sprite->pos2.x = (gSineTable[gBattleAnimArgs[0]] * gBattleAnimArgs[1]) >> 8;

@@ -133,7 +133,7 @@ extern void sub_802D204(void);
 extern u8 sub_8079E90();
 extern void sub_802DEAC(void);
 extern void sub_80312F0(struct Sprite *);
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
 extern u8 sub_8046400();
 extern void sub_802D798(void);
@@ -149,7 +149,7 @@ extern u8 gActionSelectionCursor[];
 extern u8 gMoveSelectionCursor[];
 extern u8 gAbsentBattlerFlags;
 extern u8 gUnknown_03004344;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG0_X;
@@ -486,14 +486,14 @@ void sub_802C2EC(void)
 
     dp11b_obj_instanciate(gUnknown_03004344, 1, 15, 1);
     i = 0;
-    if (gNoOfAllBanks != 0)
+    if (gBattlersCount != 0)
     {
         do
         {
             if (i != gUnknown_03004344)
                 dp11b_obj_free(i, 1);
             i++;
-        } while (i < gNoOfAllBanks);
+        } while (i < gBattlersCount);
     }
     if (gMain.newKeys & A_BUTTON)
     {
@@ -533,7 +533,7 @@ void sub_802C2EC(void)
                 if (i < 0)
                     i = 3;
                 gUnknown_03004344 = GetBattlerAtPosition(arr[i]);
-            } while(gUnknown_03004344 == gNoOfAllBanks);
+            } while(gUnknown_03004344 == gBattlersCount);
             i = 0;
             switch (GetBattlerPosition(gUnknown_03004344))
             {
@@ -580,7 +580,7 @@ void sub_802C2EC(void)
                 if (i > 3)
                     i = 0;
                 gUnknown_03004344 = GetBattlerAtPosition(arr[i]);
-            } while (gUnknown_03004344 == gNoOfAllBanks);
+            } while (gUnknown_03004344 == gBattlersCount);
             i = 0;
             switch (GetBattlerPosition(gUnknown_03004344))
             {
@@ -2525,7 +2525,7 @@ void sub_802F934(u8 bank, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(bank));
     gBankSpriteIds[bank] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(bank, 2),
+      GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
       sub_8079E90(bank));
     gSprites[gUnknown_0300434C[bank]].data[1] = gBankSpriteIds[bank];

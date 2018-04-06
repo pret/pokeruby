@@ -5421,8 +5421,8 @@ void sub_80B2968(void)
 
     sprite->pos2.x = 0;
     sprite->pos2.y = 0;
-    sprite->pos1.x = GetBankPosition(3, 0);
-    sprite->pos1.y = GetBankPosition(3, 1);
+    sprite->pos1.x = GetBattlerSpriteCoord(3, 0);
+    sprite->pos1.y = GetBattlerSpriteCoord(3, 1);
     sprite->invisible = TRUE;
 }
 

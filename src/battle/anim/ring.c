@@ -34,9 +34,9 @@ void sub_80D0FD8(struct Sprite* sprite)
     {
         SetAverageBattlerPositions(bank, r4, &sp0, &sp1);
         if (r4 == 0)
-            r4 = GetBankPosition(bank, 0);
+            r4 = GetBattlerSpriteCoord(bank, 0);
         else
-            r4 = GetBankPosition(bank, 2);
+            r4 = GetBattlerSpriteCoord(bank, 2);
 
         if (GetBattlerSide(bank) != 0)
             gBattleAnimArgs[0] -= (sp0 - r4) - gBattleAnimArgs[0];  // This is weird.
@@ -92,7 +92,7 @@ void sub_80D10B8(struct Sprite* sprite)
 
     if (GetBattlerSide(bankr7) != 0)
     {
-        r9 = GetBankPosition(bankr7, r10) + gBattleAnimArgs[0];
+        r9 = GetBattlerSpriteCoord(bankr7, r10) + gBattleAnimArgs[0];
         if (IsAnimBankSpriteVisible(bankr8 ^ 2))
             sprite->subpriority = gSprites[gBankSpriteIds[bankr8 ^ 2]].subpriority - 1;
         else
@@ -100,7 +100,7 @@ void sub_80D10B8(struct Sprite* sprite)
     }
     else
     {
-        r9 = GetBankPosition(bankr7, r10) - gBattleAnimArgs[0];
+        r9 = GetBattlerSpriteCoord(bankr7, r10) - gBattleAnimArgs[0];
         if (gMain.inBattle && IsAnimBankSpriteVisible(bankr7 ^ 2))
         {
             if (gSprites[gBankSpriteIds[bankr7]].pos1.x < gSprites[gBankSpriteIds[bankr7 ^ 2]].pos1.x)
@@ -115,15 +115,15 @@ void sub_80D10B8(struct Sprite* sprite)
 
     }
 
-    r6 = GetBankPosition(bankr7, sp4) + gBattleAnimArgs[1];
+    r6 = GetBattlerSpriteCoord(bankr7, sp4) + gBattleAnimArgs[1];
     if (gMain.inBattle && IsAnimBankSpriteVisible(bankr8 ^ 2))
     {
         SetAverageBattlerPositions(bankr8, gBattleAnimArgs[6], &sp0, &sp1);
     }
     else
     {
-        sp0 = GetBankPosition(bankr8, r10);
-        sp1 = GetBankPosition(bankr8, sp4);
+        sp0 = GetBattlerSpriteCoord(bankr8, r10);
+        sp1 = GetBattlerSpriteCoord(bankr8, sp4);
     }
 
     if (GetBattlerSide(bankr8))

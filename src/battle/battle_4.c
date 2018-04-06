@@ -98,17 +98,17 @@ enum
 extern u8 gUnknown_02023A14_50;
 extern u8 gCritMultiplier;
 extern s32 gBattleMoveDamage;
-extern u32 gStatuses3[BATTLE_BANKS_COUNT];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 extern u16 gBattleTypeFlags;
 extern const struct BaseStats gBaseStats[];
-extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
-extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
+extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];
+extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
-extern u8 gNoOfAllBanks;
-extern u16 gBattlerPartyIndexes[BATTLE_BANKS_COUNT];
-extern u8 gBanksByTurnOrder[BATTLE_BANKS_COUNT];
-extern u8 gActionsByTurnOrder[BATTLE_BANKS_COUNT];
+extern u8 gBattlersCount;
+extern u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT];
+extern u8 gBanksByTurnOrder[MAX_BATTLERS_COUNT];
+extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u16 gCurrentMove;
 extern u8 gLastUsedAbility;
 extern u16 gBattleWeather;
@@ -142,8 +142,8 @@ extern const u8 gTypeEffectiveness[];
 extern u16 gLastUsedItem;
 extern u16 gBattleMovePower;
 extern s32 gHpDealt;
-extern s32 gTakenDmg[BATTLE_BANKS_COUNT];
-extern u8 gTakenDmgBanks[BATTLE_BANKS_COUNT];
+extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
+extern u8 gTakenDmgBanks[MAX_BATTLERS_COUNT];
 extern const u16 gMissStringIds[];
 extern u8 gSentPokesToOpponent[2];
 extern u8 gBank1;
@@ -1152,7 +1152,7 @@ static void atk00_attackcanceler(void)
         return;
     }
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if ((gProtectStructs[gBanksByTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
         {
@@ -2352,7 +2352,7 @@ static void atk14_printselectionstringfromtable(void)
 u8 BankGetTurnOrder(u8 bank)
 {
     int i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gBanksByTurnOrder[i] == bank)
             break;
@@ -2406,12 +2406,12 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
             //check active uproar
             if (gBattleMons[gEffectBank].ability != ABILITY_SOUNDPROOF)
             {
-                for (gActiveBattler = 0; gActiveBattler < gNoOfAllBanks && !(gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR); gActiveBattler++) {}
+                for (gActiveBattler = 0; gActiveBattler < gBattlersCount && !(gBattleMons[gActiveBattler].status2 & STATUS2_UPROAR); gActiveBattler++) {}
             }
             else
-                gActiveBattler = gNoOfAllBanks;
+                gActiveBattler = gBattlersCount;
             if (gBattleMons[gEffectBank].status1) {break;}
-            if (gActiveBattler != gNoOfAllBanks) {break;} //nice way of checking uproar...
+            if (gActiveBattler != gBattlersCount) {break;} //nice way of checking uproar...
             if (gBattleMons[gEffectBank].ability == ABILITY_VITAL_SPIRIT) {break;}
             if (gBattleMons[gEffectBank].ability == ABILITY_INSOMNIA) {break;}
 
@@ -3061,7 +3061,7 @@ _0801E57A:\n\
     ldr r0, _0801E5D4 @ =gActiveBattler\n\
     movs r1, 0\n\
     strb r1, [r0]\n\
-    ldr r1, _0801E5D8 @ =gNoOfAllBanks\n\
+    ldr r1, _0801E5D8 @ =gBattlersCount\n\
     ldrb r3, [r1]\n\
     adds r7, r0, 0\n\
     mov r12, r1\n\
@@ -3096,10 +3096,10 @@ _0801E5B4:\n\
     b _0801E5E8\n\
     .align 2, 0\n\
 _0801E5D4: .4byte gActiveBattler\n\
-_0801E5D8: .4byte gNoOfAllBanks\n\
+_0801E5D8: .4byte gBattlersCount\n\
 _0801E5DC:\n\
     ldr r0, _0801E628 @ =gActiveBattler\n\
-    ldr r2, _0801E62C @ =gNoOfAllBanks\n\
+    ldr r2, _0801E62C @ =gBattlersCount\n\
     ldrb r1, [r2]\n\
     strb r1, [r0]\n\
     adds r7, r0, 0\n\
@@ -3142,7 +3142,7 @@ _0801E620:\n\
     b _0801EA04\n\
     .align 2, 0\n\
 _0801E628: .4byte gActiveBattler\n\
-_0801E62C: .4byte gNoOfAllBanks\n\
+_0801E62C: .4byte gBattlersCount\n\
 _0801E630:\n\
     mov r2, r8\n\
     ldrb r1, [r2]\n\
@@ -5662,13 +5662,13 @@ static void atk24(void)
 
         //I can't for the love of god decompile that part
 
-        for (found1 = 0, i = 0; i < gNoOfAllBanks; i += 2)
+        for (found1 = 0, i = 0; i < gBattlersCount; i += 2)
         {
             if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
                 found1++;
         }
 
-        for (found2 = 0, i = 1; i < gNoOfAllBanks; i += 2)
+        for (found2 = 0, i = 1; i < gBattlersCount; i += 2)
         {
             if ((gHitMarker & HITMARKER_UNK(i)) && !gSpecialStatuses[i].flag40)
                 found2++;
@@ -5791,7 +5791,7 @@ _08020A54:\n\
     beq _08020B3E\n\
     movs r2, 0\n\
     movs r5, 0\n\
-    ldr r0, _08020B04 @ =gNoOfAllBanks\n\
+    ldr r0, _08020B04 @ =gBattlersCount\n\
     ldrb r3, [r0]\n\
     mov r12, r0\n\
     ldr r7, _08020B08 @ =gBattlescriptCurrInstr\n\
@@ -5868,7 +5868,7 @@ _08020AF4: .4byte gPlayerParty\n\
 _08020AF8: .4byte gBattleOutcome\n\
 _08020AFC: .4byte gEnemyParty\n\
 _08020B00: .4byte gBattleTypeFlags\n\
-_08020B04: .4byte gNoOfAllBanks\n\
+_08020B04: .4byte gBattlersCount\n\
 _08020B08: .4byte gBattlescriptCurrInstr\n\
 _08020B0C: .4byte gHitMarker\n\
 _08020B10: .4byte gSpecialStatuses\n\
@@ -6844,7 +6844,7 @@ static void atk49_moveend(void)
             gBattleStruct->cmd49StateTracker++;
             break;
         case 7: //changed held items
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 #define CHANGED_ITEM (((*u16)(gSharedMem + 0x160F0)))
                 if (CHANGED_ITEM(i))
@@ -7408,7 +7408,7 @@ _08021C38: .4byte gBattleMons\n\
 _08021C3C: .4byte gBankAttacker\n\
 _08021C40:\n\
     movs r4, 0\n\
-    ldr r0, _08021C6C @ =gNoOfAllBanks\n\
+    ldr r0, _08021C6C @ =gBattlersCount\n\
     ldrb r2, [r0]\n\
     cmp r4, r2\n\
     blt _08021C4C\n\
@@ -7432,7 +7432,7 @@ _08021C5C:\n\
     blt _08021C52\n\
     b _08022244\n\
     .align 2, 0\n\
-_08021C6C: .4byte gNoOfAllBanks\n\
+_08021C6C: .4byte gBattlersCount\n\
 _08021C70: .4byte gSharedMem + 0x160F0\n\
 _08021C74: .4byte gBattleMons\n\
 _08021C78:\n\
@@ -7588,7 +7588,7 @@ _08021DAC:\n\
     lsls r0, 29\n\
     cmp r0, 0\n\
     blt _08021DFA\n\
-    ldr r0, _08021E14 @ =gNoOfAllBanks\n\
+    ldr r0, _08021E14 @ =gBattlersCount\n\
     ldrb r0, [r0]\n\
     cmp r3, r0\n\
     bcs _08021DFA\n\
@@ -7627,7 +7627,7 @@ _08021E00:\n\
     .align 2, 0\n\
 _08021E0C: .4byte gSpecialStatuses\n\
 _08021E10: .4byte gBankTarget\n\
-_08021E14: .4byte gNoOfAllBanks\n\
+_08021E14: .4byte gBattlersCount\n\
 _08021E18: .4byte gStatuses3\n\
 _08021E1C: .4byte 0x000400c0\n\
 _08021E20: .4byte gActiveBattler\n\
@@ -7636,7 +7636,7 @@ _08021E28: .4byte gSharedMem\n\
 _08021E2C: .4byte 0x0001600c\n\
 _08021E30:\n\
     movs r4, 0\n\
-    ldr r0, _08021E60 @ =gNoOfAllBanks\n\
+    ldr r0, _08021E60 @ =gBattlersCount\n\
     ldrb r5, [r0]\n\
     cmp r4, r5\n\
     blt _08021E3C\n\
@@ -7662,7 +7662,7 @@ _08021E50:\n\
     blt _08021E44\n\
     b _08022244\n\
     .align 2, 0\n\
-_08021E60: .4byte gNoOfAllBanks\n\
+_08021E60: .4byte gBattlersCount\n\
 _08021E64: .4byte gDisableStructs\n\
 _08021E68: .4byte 0xfeffffff\n\
 _08021E6C: .4byte gUnknown_02024AD0\n\
@@ -8456,7 +8456,7 @@ static void atk50_openpartyscreen(void)
     {
         if ((gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI)) != BATTLE_TYPE_DOUBLE)
         {
-            for (gActiveBattler = i; gActiveBattler < gNoOfAllBanks; gActiveBattler++)
+            for (gActiveBattler = i; gActiveBattler < gBattlersCount; gActiveBattler++)
             {
                 if (!(gHitMarker & HITMARKER_FAINTED(gActiveBattler)))
                 {
@@ -8538,7 +8538,7 @@ _08022ACE:\n\
     beq _08022BBC\n\
     ldr r1, _08022B4C @ =gActiveBattler\n\
     strb r7, [r1]\n\
-    ldr r0, _08022B50 @ =gNoOfAllBanks\n\
+    ldr r0, _08022B50 @ =gBattlersCount\n\
     ldrb r0, [r0]\n\
     cmp r7, r0\n\
     bcc _08022AE8\n\
@@ -8592,7 +8592,7 @@ _08022AF2:\n\
 _08022B44: .4byte gBattlescriptCurrInstr\n\
 _08022B48: .4byte gBattleTypeFlags\n\
 _08022B4C: .4byte gActiveBattler\n\
-_08022B50: .4byte gNoOfAllBanks\n\
+_08022B50: .4byte gBattlersCount\n\
 _08022B54: .4byte gHitMarker\n\
 _08022B58: .4byte gBitTable\n\
 _08022B5C: .4byte gAbsentBattlerFlags\n\
@@ -8631,7 +8631,7 @@ _08022BA2:\n\
     ldrb r0, [r4]\n\
     adds r0, 0x1\n\
     strb r0, [r4]\n\
-    ldr r1, _08022BB8 @ =gNoOfAllBanks\n\
+    ldr r1, _08022BB8 @ =gBattlersCount\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     ldrb r1, [r1]\n\
@@ -8639,7 +8639,7 @@ _08022BA2:\n\
     bcc _08022AF2\n\
     b _08022F62\n\
     .align 2, 0\n\
-_08022BB8: .4byte gNoOfAllBanks\n\
+_08022BB8: .4byte gBattlersCount\n\
 _08022BBC:\n\
     ands r1, r0\n\
     cmp r1, 0\n\
@@ -9277,7 +9277,7 @@ _08023110:\n\
     ldr r4, _08023168 @ =gBitTable\n\
     ldr r2, [r4]\n\
     ands r2, r5\n\
-    ldr r6, _0802316C @ =gNoOfAllBanks\n\
+    ldr r6, _0802316C @ =gBattlersCount\n\
     cmp r2, 0\n\
     bne _0802314C\n\
     adds r7, r6, 0\n\
@@ -9314,7 +9314,7 @@ _08023156:\n\
 _08023160: .4byte gHitMarker\n\
 _08023164: .4byte gBank1\n\
 _08023168: .4byte gBitTable\n\
-_0802316C: .4byte gNoOfAllBanks\n\
+_0802316C: .4byte gBattlersCount\n\
 _08023170:\n\
     movs r0, 0x80\n\
     ands r0, r2\n\
@@ -9436,7 +9436,7 @@ _0802325A:\n\
     ldr r1, _080232A0 @ =gActiveBattler\n\
     movs r0, 0\n\
     strb r0, [r1]\n\
-    ldr r0, _080232C0 @ =gNoOfAllBanks\n\
+    ldr r0, _080232C0 @ =gBattlersCount\n\
     ldrb r0, [r0]\n\
     cmp r0, 0\n\
     beq _08023302\n\
@@ -9454,7 +9454,7 @@ _0802328A:\n\
     ldrb r0, [r4]\n\
     adds r0, 0x1\n\
     strb r0, [r4]\n\
-    ldr r1, _080232C0 @ =gNoOfAllBanks\n\
+    ldr r1, _080232C0 @ =gBattlersCount\n\
     lsls r0, 24\n\
     lsrs r0, 24\n\
     ldrb r1, [r1]\n\
@@ -9470,7 +9470,7 @@ _080232B0: .4byte 0x00016068\n\
 _080232B4: .4byte 0x0001606c\n\
 _080232B8: .4byte gBattleResults\n\
 _080232BC: .4byte gBattleTypeFlags\n\
-_080232C0: .4byte gNoOfAllBanks\n\
+_080232C0: .4byte gBattlersCount\n\
 _080232C4:\n\
     adds r0, r7, 0\n\
     bl GetBattlerPosition\n\
@@ -9525,7 +9525,7 @@ static void atk51_switchhandleorder(void)
     switch (T2_READ_8(gBattlescriptCurrInstr + 2))
     {
     case 0:
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattleBufferB[i][0] == 0x22)
                 ewram16068arr(i) = gBattleBufferB[i][1];
@@ -9608,13 +9608,13 @@ static void atk52_switchineffects(void)
         {
             gSideAffecting[GetBattlerSide(gActiveBattler)] &= ~(SIDE_STATUS_SPIKES_DAMAGED);
 
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBanksByTurnOrder[i] == gActiveBattler)
                     gActionsByTurnOrder[i] = 0xC;
             }
 
-            for (i = 0; i < gNoOfAllBanks; i++)
+            for (i = 0; i < gBattlersCount; i++)
             {
                 *(HP_ON_SWITCHOUT + GetBattlerSide(i)) = gBattleMons[i].hp;
             }
@@ -9627,7 +9627,7 @@ static void atk52_switchineffects(void)
                 {
                     if (hitmark & gBitTable[gBank1] && !(gAbsentBattlerFlags & gBitTable[gBank1]))
                         break;
-                    if (gBank1 >= gNoOfAllBanks)
+                    if (gBank1 >= gBattlersCount)
                         break;
                     gBank1++;
                 }
@@ -10422,7 +10422,7 @@ static void atk67_yesnobox(void)
 static void atk68_cancelallactions(void)
 {
     int i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         gActionsByTurnOrder[i] = 0xC;
     }
@@ -11100,7 +11100,7 @@ static void atk77_setprotectlike(void) //protect and endure
 
     if (last_move != MOVE_PROTECT && last_move != MOVE_DETECT && last_move != MOVE_ENDURE)
         gDisableStructs[gBankAttacker].protectUses = 0;
-    if (gCurrentTurnActionNumber == (gNoOfAllBanks - 1))
+    if (gCurrentTurnActionNumber == (gBattlersCount - 1))
         not_last_turn = 0;
 
     if (sProtectSuccessRates[gDisableStructs[gBankAttacker].protectUses] > Random() && not_last_turn)
@@ -11132,13 +11132,13 @@ static void atk78_faintifabilitynotdamp(void)
     if (gBattleExecBuffer)
         return;
 
-    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks; gBankTarget++)
+    for (gBankTarget = 0; gBankTarget < gBattlersCount; gBankTarget++)
     {
         if (gBattleMons[gBankTarget].ability == ABILITY_DAMP)
             break;
     }
 
-    if (gBankTarget == gNoOfAllBanks)
+    if (gBankTarget == gBattlersCount)
     {
         gActiveBattler = gBankAttacker;
         gBattleMoveDamage = gBattleMons[gActiveBattler].hp;
@@ -11146,7 +11146,7 @@ static void atk78_faintifabilitynotdamp(void)
         MarkBufferBankForExecution(gActiveBattler);
         gBattlescriptCurrInstr++;
 
-        for (gBankTarget = 0; gBankTarget < gNoOfAllBanks; gBankTarget++)
+        for (gBankTarget = 0; gBankTarget < gBattlersCount; gBankTarget++)
         {
             if (gBankTarget == gBankAttacker)
                 continue;
@@ -11189,7 +11189,7 @@ static void atk7A_jumpifnexttargetvalid(void) //used by intimidate to loop throu
                 break;
         }
 
-        if (gBankTarget >= gNoOfAllBanks)
+        if (gBankTarget >= gBattlersCount)
             gBattlescriptCurrInstr += 5;
         else
             gBattlescriptCurrInstr = jump_loc;
@@ -11378,7 +11378,7 @@ static void atk83_nop(void)
 bool8 UproarWakeUpCheck(u8 bank)
 {
     int i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (!(gBattleMons[i].status2 & STATUS2_UPROAR) || gBattleMons[bank].ability == ABILITY_SOUNDPROOF) //wtf gamefreak, you should check this only once, not every time in a loop...
             continue;
@@ -11391,7 +11391,7 @@ bool8 UproarWakeUpCheck(u8 bank)
             gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         break;
     }
-    if (i == gNoOfAllBanks)
+    if (i == gBattlersCount)
         return 0;
     else
         return 1;
@@ -11677,7 +11677,7 @@ static void atk89_statbuffchange(void)
 static void atk8A_normalisebuffs(void) //haze
 {
     int i, j;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         for (j = 0; j < 8; j++)
         {
@@ -13668,7 +13668,7 @@ static void atkB2_trysetperishsong(void)
 {
     int not_affected_pokes = 0, i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG || gBattleMons[i].ability == ABILITY_SOUNDPROOF)
             not_affected_pokes++;
@@ -13681,7 +13681,7 @@ static void atkB2_trysetperishsong(void)
     }
 
     PressurePPLoseOnUsingPerishSong(gBankAttacker);
-    if (not_affected_pokes == gNoOfAllBanks)
+    if (not_affected_pokes == gBattlersCount)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
@@ -13846,7 +13846,7 @@ static void atkB9_magnitudedamagecalculation(void)
     gBattleTextBuff1[4] = magnitude;
     gBattleTextBuff1[5] = 0xFF;
 
-    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks; gBankTarget++)
+    for (gBankTarget = 0; gBankTarget < gBattlersCount; gBankTarget++)
     {
         if (gBankTarget == gBankAttacker)
             continue;
@@ -13877,7 +13877,7 @@ static void atkBA_jumpifnopursuitswitchdmg(void)
         && gBattleMons[gBankAttacker].hp && !gDisableStructs[gBankTarget].truantCounter && gChosenMovesByBanks[gBankTarget] == MOVE_PURSUIT)
     {
         int i;
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             if (gBanksByTurnOrder[i] == gBankTarget)
                 gActionsByTurnOrder[i] = 11;
@@ -14148,7 +14148,7 @@ _080298A8: .4byte gBattlescriptCurrInstr\n\
 
 static void atkC2_selectfirstvalidtarget(void)
 {
-    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks; gBankTarget++)
+    for (gBankTarget = 0; gBankTarget < gBattlersCount; gBankTarget++)
     {
         if (gBankTarget == gBankAttacker)
             continue;
@@ -15100,7 +15100,7 @@ static void atkDB_tryimprision(void)
     {
         u8 bank;
         PressurePPLoseOnUsingImprision(gBankAttacker);
-        for (bank = 0; bank < gNoOfAllBanks; bank++)
+        for (bank = 0; bank < gBattlersCount; bank++)
         {
             if (r8 != GetBattlerSide(bank))
             {
@@ -15124,7 +15124,7 @@ static void atkDB_tryimprision(void)
                 }
             }
         }
-        if (bank == gNoOfAllBanks)
+        if (bank == gBattlersCount)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     }
 }
@@ -15401,7 +15401,7 @@ static void atkDF_trysetmagiccoat(void)
 {
     gBankTarget = gBankAttacker;
     gSpecialStatuses[gBankAttacker].flag20 = 1;
-    if (gCurrentTurnActionNumber == gNoOfAllBanks - 1) //last turn
+    if (gCurrentTurnActionNumber == gBattlersCount - 1) //last turn
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
     {
@@ -15413,7 +15413,7 @@ static void atkDF_trysetmagiccoat(void)
 static void atkE0_trysetsnatch(void)
 {
     gSpecialStatuses[gBankAttacker].flag20 = 1;
-    if (gCurrentTurnActionNumber == gNoOfAllBanks - 1) //last turn
+    if (gCurrentTurnActionNumber == gBattlersCount - 1) //last turn
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
     {
@@ -15433,7 +15433,7 @@ static void atkE1_trygetintimidatetarget(void)
     gBattleTextBuff1[2] = gBattleMons[gBattleStruct->scriptingActive].ability;
     gBattleTextBuff1[3] = 0xFF;
 
-    for (;gBankTarget < gNoOfAllBanks; gBankTarget++)
+    for (;gBankTarget < gBattlersCount; gBankTarget++)
     {
         if (GetBattlerSide(gBankTarget) == side)
             continue;
@@ -15441,7 +15441,7 @@ static void atkE1_trygetintimidatetarget(void)
             break;
     }
 
-    if (gBankTarget >= gNoOfAllBanks)
+    if (gBankTarget >= gBattlersCount)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
@@ -16061,5 +16061,5 @@ static void atkF6_finishaction(void)
 static void atkF7_finishturn(void)
 {
     gCurrentActionFuncId = 0xC;
-    gCurrentTurnActionNumber = gNoOfAllBanks;
+    gCurrentTurnActionNumber = gBattlersCount;
 }

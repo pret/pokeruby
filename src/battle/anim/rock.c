@@ -295,10 +295,10 @@ void sub_80DD4D4(u8 taskId)
 
     task = &gTasks[taskId];
 
-    var0 = GetBankPosition(gAnimBankAttacker, 2);
-    var1 = GetBankPosition(gAnimBankAttacker, 1) + 24;
-    var2 = GetBankPosition(gAnimBankTarget, 2);
-    var3 = GetBankPosition(gAnimBankTarget, 1) + 24;
+    var0 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    var1 = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + 24;
+    var2 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    var3 = GetBattlerSpriteCoord(gAnimBankTarget, 1) + 24;
 
     if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)
         var3 = var1;
@@ -333,7 +333,7 @@ void sub_80DD4D4(u8 taskId)
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];
     task->data[1] = var4;
-    task->data[15] = GetAnimBankSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(0);
 
     task->func = sub_80DD604;
 }
@@ -522,8 +522,8 @@ void sub_80DD978(struct Sprite *sprite)
 
 void sub_80DD9A4(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1);
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
 

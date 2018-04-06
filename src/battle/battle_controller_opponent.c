@@ -66,7 +66,7 @@ extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u32 gBattleExecBuffer;
 
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void sub_8033018(void);
@@ -1128,7 +1128,7 @@ void OpponentHandleLoadPokeSprite(void)
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(gActiveBattler));
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(gActiveBattler, 2),
+      GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
       sub_8079E90(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
@@ -1160,7 +1160,7 @@ void sub_803495C(u8 a, u8 b)
     GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBankSpriteIds[a] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(a, 2),
+      GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
     gSprites[gBankSpriteIds[a]].data[0] = a;

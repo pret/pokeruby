@@ -60,8 +60,8 @@ void sub_80D5DDC(u8 taskId)
 
     task->data[12] = !GetBattlerSide(gAnimBankAttacker) ? 1 : -1;
     task->data[13] = IsAnimBankSpriteVisible(gAnimBankTarget ^ 2) + 1;
-    task->data[14] = GetAnimBankSpriteId(1);
-    task->data[15] = GetAnimBankSpriteId(3);
+    task->data[14] = GetAnimBattlerSpriteId(1);
+    task->data[15] = GetAnimBattlerSpriteId(3);
 
     task->func = sub_80D5E4C;
 }

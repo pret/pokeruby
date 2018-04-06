@@ -123,10 +123,10 @@ void sub_80DFDC0(u8 taskId)
 
 void sub_80DFE14(struct Sprite *sprite)
 {
-    sprite->data[1] = GetBankPosition(gAnimBankTarget, 2);
-    sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
-    sprite->data[3] = GetBankPosition(gAnimBankTarget, 3);
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
+    sprite->data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    sprite->data[3] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     sprite->data[0] = 0x7E;
     InitSpriteDataForLinearTranslation(sprite);
     sprite->data[3] = -sprite->data[1];
@@ -257,13 +257,13 @@ void sub_80E00EC(u8 taskId)
     int var0;
     struct Task *task = &gTasks[taskId];
 
-    task->data[7] = GetBankPosition(gAnimBankAttacker, 1) + 31;
+    task->data[7] = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + 31;
     task->data[6] = sub_807A100(gAnimBankAttacker, 2) - 7;
     task->data[5] = task->data[7];
     task->data[4] = task->data[6];
     task->data[13] = (task->data[7] - task->data[6]) << 8;
 
-    pos = GetBankPosition(gAnimBankAttacker, 0);
+    pos = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
     task->data[14] = pos - 32;
     task->data[15] = pos + 32;
 
@@ -435,10 +435,10 @@ void sub_80E03BC(u8 taskId)
         task->data[0]++;
         break;
     case 2:
-        task->data[7] = GetBankPosition(gAnimBankTarget, 1) + 31;
+        task->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + 31;
         task->data[6] = sub_807A100(gAnimBankTarget, 2) - 7;
         task->data[13] = (task->data[7] - task->data[6]) << 8;
-        pos = GetBankPosition(gAnimBankTarget, 0);
+        pos = GetBattlerSpriteCoord(gAnimBankTarget, 0);
         task->data[14] = pos - 4;
         task->data[15] = pos + 4;
 
@@ -783,7 +783,7 @@ static void sub_80E08CC(u8 priority)
 
     for (i = 0; i < 4; i++)
     {
-        u8 spriteId = GetAnimBankSpriteId(i);
+        u8 spriteId = GetAnimBattlerSpriteId(i);
         if (spriteId != 0xFF)
             gSprites[spriteId].oam.priority = priority;
     }
@@ -870,7 +870,7 @@ void sub_80E0A4C(u8 taskId)
             species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gAnimBankAttacker]], MON_DATA_SPECIES);
     }
 
-    spriteId = GetAnimBankSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(0);
     newSpriteId = sub_807A4A0(gAnimBankAttacker, spriteId, species);
 
     sub_8078914(&subStruct);
@@ -926,7 +926,7 @@ static void sub_80E0CD0(u8 taskId)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
 
-            spriteId = GetAnimBankSpriteId(0);
+            spriteId = GetAnimBattlerSpriteId(0);
             paletteNum = 16 + gSprites[spriteId].oam.paletteNum;
             if (gTasks[taskIdCopy].data[1] == 0)
                 sub_8079108(paletteNum, 1);
@@ -958,7 +958,7 @@ void sub_80E0E24(u8 taskId)
     case 1:
     case 2:
     case 3:
-        spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+        spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         break;
     case 4:
         identity = B_POSITION_PLAYER_LEFT;

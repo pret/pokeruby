@@ -64,7 +64,7 @@ gActiveBattler = .; /* 2024A60 */
 gBattleExecBuffer = .; /* 2024A64 */
     . += 0x4;
 
-gNoOfAllBanks = .; /* 2024A68 */
+gBattlersCount = .; /* 2024A68 */
     . += 0x2;
 
 gBattlerPartyIndexes = .; /* 2024A6A */

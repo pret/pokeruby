@@ -27,7 +27,7 @@ extern u16 gBattlerPartyIndexes[];
 extern u16 gLastLandedMoves[];
 extern const u8 gTypeEffectiveness[];
 extern struct BattlePokemon gBattleMons[];
-extern u32 gStatuses3[BATTLE_BANKS_COUNT];
+extern u32 gStatuses3[MAX_BATTLERS_COUNT];
 
 /*static*/ bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng);
 /*static*/ bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent);
@@ -51,7 +51,7 @@ extern u32 gStatuses3[BATTLE_BANKS_COUNT];
 #ifdef NONMATCHING
 /*static*/ bool8 ShouldSwitchIfWonderGuard(void)
 {
-    u8 opposingBank;
+    u8 opposingBattler;
     u8 moveFlags;
     s32 i, j;
 
@@ -62,14 +62,14 @@ extern u32 gStatuses3[BATTLE_BANKS_COUNT];
         return FALSE;
 
     // check if pokemon has a super effective move
-    opposingBank = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
     for (i = 0; i < 4; i++)
     {
         u16 move = gBattleMons[gActiveBattler].moves[i];
         if (move == MOVE_NONE)
             continue;
 
-        moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
+        moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
         if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             return FALSE;
     }
@@ -86,14 +86,14 @@ extern u32 gStatuses3[BATTLE_BANKS_COUNT];
         GetMonData(&gEnemyParty[i], MON_DATA_SPECIES); // unused return value
         GetMonData(&gEnemyParty[i], MON_DATA_ALT_ABILITY); // unused return value
 
-        opposingBank = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         for (j = 0; j < 4; j++)
         {
             u16 move = GetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j);
             if (move == MOVE_NONE)
                 continue;
 
-            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
+            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
             if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && (Random() % 3) < 2)
             {
                 // we found a mon
@@ -308,7 +308,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
 /*static*/ bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
-    u8 bankIn1, bankIn2;
+    u8 battlerIn1, battlerIn2;
     u8 absorbingTypeAbility;
     s32 i;
 
@@ -323,16 +323,16 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
-            bankIn2 = gActiveBattler;
+            battlerIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
+            battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
-        bankIn1 = gActiveBattler;
-        bankIn2 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
+        battlerIn2 = gActiveBattler;
     }
 
     if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_FIRE)
@@ -358,13 +358,13 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
             continue;
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlerPartyIndexes[bankIn1])
+        if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
-        if (i == gBattlerPartyIndexes[bankIn2])
+        if (i == gBattlerPartyIndexes[battlerIn2])
             continue;
-        if (i == ewram16068arr(bankIn1))
+        if (i == ewram16068arr(battlerIn1))
             continue;
-        if (i == ewram16068arr(bankIn2))
+        if (i == ewram16068arr(battlerIn2))
             continue;
 
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
@@ -423,13 +423,13 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
 /*static*/ bool8 HasSuperEffectiveMoveAgainstOpponents(bool8 noRng)
 {
-    u8 opposingBank;
+    u8 opposingBattler;
     s32 i;
     u8 moveFlags;
     u16 move;
 
-    opposingBank = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
+    opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
         for (i = 0; i < 4; i++)
         {
@@ -437,7 +437,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
             if (move == MOVE_NONE)
                 continue;
 
-            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
+            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
             if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
                 if (noRng)
@@ -450,8 +450,8 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return FALSE;
 
-    opposingBank = GetBattlerAtPosition(BATTLE_PARTNER(B_POSITION_PLAYER_LEFT));
-    if (!(gAbsentBattlerFlags & gBitTable[opposingBank]))
+    opposingBattler = GetBattlerAtPosition(BATTLE_PARTNER(B_POSITION_PLAYER_LEFT));
+    if (!(gAbsentBattlerFlags & gBitTable[opposingBattler]))
     {
         for (i = 0; i < 4; i++)
         {
@@ -459,7 +459,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
             if (move == MOVE_NONE)
                 continue;
 
-            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBank].species, gBattleMons[opposingBank].ability);
+            moveFlags = AI_TypeCalc(move, gBattleMons[opposingBattler].species, gBattleMons[opposingBattler].ability);
             if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
             {
                 if (noRng)
@@ -489,7 +489,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
 /*static*/ bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
 {
-    u8 bankIn1, bankIn2;
+    u8 battlerIn1, battlerIn2;
     s32 i, j;
     u16 move;
     u8 moveFlags;
@@ -505,16 +505,16 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)))])
-            bankIn2 = gActiveBattler;
+            battlerIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
+            battlerIn2 = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gActiveBattler)));
     }
     else
     {
-        bankIn1 = gActiveBattler;
-        bankIn2 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
+        battlerIn2 = gActiveBattler;
     }
 
     for (i = 0; i < 6; i++)
@@ -528,13 +528,13 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
             continue;
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlerPartyIndexes[bankIn1])
+        if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
-        if (i == gBattlerPartyIndexes[bankIn2])
+        if (i == gBattlerPartyIndexes[battlerIn2])
             continue;
-        if (i == ewram16068arr(bankIn1))
+        if (i == ewram16068arr(battlerIn1))
             continue;
-        if (i == ewram16068arr(bankIn2))
+        if (i == ewram16068arr(battlerIn2))
             continue;
 
         species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
@@ -546,7 +546,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
         moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)
         {
-            bankIn1 = gLastHitBy[gActiveBattler];
+            battlerIn1 = gLastHitBy[gActiveBattler];
 
             for (j = 0; j < 4; j++)
             {
@@ -554,7 +554,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
                 if (move == 0)
                     continue;
 
-                moveFlags = AI_TypeCalc(move, gBattleMons[bankIn1].species, gBattleMons[bankIn1].ability);
+                moveFlags = AI_TypeCalc(move, gBattleMons[battlerIn1].species, gBattleMons[battlerIn1].ability);
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     ewram160C8arr(GetBattlerPosition(gActiveBattler)) = i;
@@ -570,7 +570,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
 /*static*/ bool8 ShouldSwitch(void)
 {
-    u8 bankIn1, bankIn2;
+    u8 battlerIn1, battlerIn2;
     s32 i;
     s32 availableToSwitch;
 
@@ -593,16 +593,16 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
     availableToSwitch = 0;
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK)])
-            bankIn2 = gActiveBattler;
+            battlerIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
+            battlerIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
     }
     else
     {
-        bankIn1 = gActiveBattler;
-        bankIn2 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
+        battlerIn2 = gActiveBattler;
     }
 
     for (i = 0; i < 6; i++)
@@ -613,13 +613,13 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
             continue;
         if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES2) == SPECIES_EGG)
             continue;
-        if (i == gBattlerPartyIndexes[bankIn1])
+        if (i == gBattlerPartyIndexes[battlerIn1])
             continue;
-        if (i == gBattlerPartyIndexes[bankIn2])
+        if (i == gBattlerPartyIndexes[battlerIn2])
             continue;
-        if (i == ewram16068arr(bankIn1))
+        if (i == ewram16068arr(battlerIn1))
             continue;
-        if (i == ewram16068arr(bankIn2))
+        if (i == ewram16068arr(battlerIn2))
             continue;
 
         availableToSwitch++;
@@ -648,7 +648,7 @@ _080361E4: .4byte gBattlerPartyIndexes\n\
 
 void AI_TrySwitchOrUseItem(void)
 {
-    u8 bankIn1, bankIn2;
+    u8 battlerIn1, battlerIn2;
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
@@ -661,26 +661,26 @@ void AI_TrySwitchOrUseItem(void)
                 {
                     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
                     {
-                        bankIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                        bankIn2 = bankIn1;
+                        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+                        battlerIn2 = battlerIn1;
                     }
                     else
                     {
-                        bankIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                        bankIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+                        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+                        battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
                     }
 
                     for (monToSwitchId = 0; monToSwitchId < 6; monToSwitchId++)
                     {
                         if (GetMonData(&gEnemyParty[monToSwitchId], MON_DATA_HP) == 0)
                             continue;
-                        if (monToSwitchId == gBattlerPartyIndexes[bankIn1])
+                        if (monToSwitchId == gBattlerPartyIndexes[battlerIn1])
                             continue;
-                        if (monToSwitchId == gBattlerPartyIndexes[bankIn2])
+                        if (monToSwitchId == gBattlerPartyIndexes[battlerIn2])
                             continue;
-                        if (monToSwitchId == ewram16068arr(bankIn1))
+                        if (monToSwitchId == ewram16068arr(battlerIn1))
                             continue;
-                        if (monToSwitchId == ewram16068arr(bankIn2))
+                        if (monToSwitchId == ewram16068arr(battlerIn2))
                             continue;
 
                         break;
@@ -734,32 +734,32 @@ void AI_TrySwitchOrUseItem(void)
 
 u8 GetMostSuitableMonToSwitchInto(void)
 {
-    u8 opposingBank;
+    u8 opposingBattler;
     u8 bestDmg; // note : should be changed to s32
     u8 bestMonId;
-    u8 bankIn1, bankIn2;
+    u8 battlerIn1, battlerIn2;
     s32 i, j;
     u8 invalidMons;
     u16 move;
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        bankIn1 = gActiveBattler;
+        battlerIn1 = gActiveBattler;
         if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK)])
-            bankIn2 = gActiveBattler;
+            battlerIn2 = gActiveBattler;
         else
-            bankIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
+            battlerIn2 = GetBattlerAtPosition(GetBattlerPosition(gActiveBattler) ^ BIT_FLANK);
 
         // UB: It considers the opponent only player's side even though it can battle alongside player;
-        opposingBank = Random() & BIT_FLANK;
-        if (gAbsentBattlerFlags & gBitTable[opposingBank])
-            opposingBank ^= BIT_FLANK;
+        opposingBattler = Random() & BIT_FLANK;
+        if (gAbsentBattlerFlags & gBitTable[opposingBattler])
+            opposingBattler ^= BIT_FLANK;
     }
     else
     {
-        opposingBank = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        bankIn1 = gActiveBattler;
-        bankIn2 = gActiveBattler;
+        opposingBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        battlerIn1 = gActiveBattler;
+        battlerIn2 = gActiveBattler;
     }
 
     invalidMons = 0;
@@ -775,16 +775,16 @@ u8 GetMostSuitableMonToSwitchInto(void)
             if (species != SPECIES_NONE
                 && GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0
                 && !(gBitTable[i] & invalidMons)
-                && gBattlerPartyIndexes[bankIn1] != i
-                && gBattlerPartyIndexes[bankIn2] != i
-                && i != ewram16068arr(bankIn1)
-                && i != ewram16068arr(bankIn2))
+                && gBattlerPartyIndexes[battlerIn1] != i
+                && gBattlerPartyIndexes[battlerIn2] != i
+                && i != ewram16068arr(battlerIn1)
+                && i != ewram16068arr(battlerIn2))
             {
                 u8 type1 = gBaseStats[species].type1;
                 u8 type2 = gBaseStats[species].type2;
                 u8 typeDmg = 10;
-                ModulateByTypeEffectiveness(gBattleMons[opposingBank].type1, type1, type2, &typeDmg);
-                ModulateByTypeEffectiveness(gBattleMons[opposingBank].type2, type1, type2, &typeDmg);
+                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type1, type1, type2, &typeDmg);
+                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type2, type1, type2, &typeDmg);
                 if (bestDmg < typeDmg)
                 {
                     bestDmg = typeDmg;
@@ -803,7 +803,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
             for (i = 0; i < 4; i++)
             {
                 move = GetMonData(&gEnemyParty[bestMonId], MON_DATA_MOVE1 + i);
-                if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBank) & MOVE_RESULT_SUPER_EFFECTIVE)
+                if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBattler) & MOVE_RESULT_SUPER_EFFECTIVE)
                     break;
             }
 
@@ -833,13 +833,13 @@ u8 GetMostSuitableMonToSwitchInto(void)
             continue;
         if (GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
             continue;
-        if (gBattlerPartyIndexes[bankIn1] == i)
+        if (gBattlerPartyIndexes[battlerIn1] == i)
             continue;
-        if (gBattlerPartyIndexes[bankIn2] == i)
+        if (gBattlerPartyIndexes[battlerIn2] == i)
             continue;
-        if (i == ewram16068arr(bankIn1))
+        if (i == ewram16068arr(battlerIn1))
             continue;
-        if (i == ewram16068arr(bankIn2))
+        if (i == ewram16068arr(battlerIn2))
             continue;
 
         for (j = 0; j < 4; j++)
@@ -848,8 +848,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             gBattleMoveDamage = 0;
             if (move != MOVE_NONE && gBattleMoves[move].power != 1)
             {
-                AI_CalcDmg(gActiveBattler, opposingBank);
-                TypeCalc(move, gActiveBattler, opposingBank);
+                AI_CalcDmg(gActiveBattler, opposingBattler);
+                TypeCalc(move, gActiveBattler, opposingBattler);
             }
             if (bestDmg < gBattleMoveDamage)
             {
@@ -900,7 +900,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
         u16 item;
         const u8 *itemEffects;
         u8 paramOffset;
-        u8 bankSide;
+        u8 battlerSide;
 
         if (i != 0 && validMons > (AI_BATTLE_HISTORY->numItems - i) + 1)
             continue;
@@ -987,8 +987,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
             shouldUse = TRUE;
             break;
         case AI_ITEM_GUARD_SPECS:
-            bankSide = GetBattlerSide(gActiveBattler);
-            if (gDisableStructs[gActiveBattler].isFirstTurn != 0 && gSideTimers[bankSide].mistTimer == 0)
+            battlerSide = GetBattlerSide(gActiveBattler);
+            if (gDisableStructs[gActiveBattler].isFirstTurn != 0 && gSideTimers[battlerSide].mistTimer == 0)
                 shouldUse = TRUE;
             break;
         case AI_ITEM_NOT_RECOGNIZABLE:

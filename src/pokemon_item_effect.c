@@ -18,7 +18,7 @@
 extern s32 gBattleMoveDamage;
 extern u8 gAbsentBattlerFlags;
 extern u8 gBankInMenu;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gActiveBattler;
 extern u8 gStringBank;
@@ -80,7 +80,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
     {
         gActiveBattler = gBankInMenu;
         cmdIndex = (GetBattlerSide(gActiveBattler) != 0);
-        while (cmdIndex < gNoOfAllBanks)
+        while (cmdIndex < gBattlersCount)
         {
             if (gBattlerPartyIndexes[cmdIndex] == partyIndex)
             {

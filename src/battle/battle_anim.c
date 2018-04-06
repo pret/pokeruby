@@ -1679,7 +1679,7 @@ static void ScriptCmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(template, GetBankPosition(gAnimBankTarget, 2), GetBankPosition(gAnimBankTarget, 3), subpriority);
+    CreateSpriteAndAnimate(template, GetBattlerSpriteCoord(gAnimBankTarget, 2), GetBattlerSpriteCoord(gAnimBankTarget, 3), subpriority);
     gAnimVisualTaskCount++;
 }
 
@@ -3097,7 +3097,7 @@ static void ScriptCmd_invisible(void)
 {
     u8 spriteId;
 
-    spriteId = GetAnimBankSpriteId(T1_READ_8(sBattleAnimScriptPtr + 1));
+    spriteId = GetAnimBattlerSpriteId(T1_READ_8(sBattleAnimScriptPtr + 1));
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = TRUE;
 
@@ -3108,7 +3108,7 @@ static void ScriptCmd_visible(void)
 {
     u8 spriteId;
 
-    spriteId = GetAnimBankSpriteId(T1_READ_8(sBattleAnimScriptPtr + 1));
+    spriteId = GetAnimBattlerSpriteId(T1_READ_8(sBattleAnimScriptPtr + 1));
     if (spriteId != 0xFF)
         gSprites[spriteId].invisible = FALSE;
 
@@ -3129,12 +3129,12 @@ static void ScriptCmd_doublebattle_2D(void)
         if (wantedBank == 0)
         {
             r4 = GetBattlerPosition_permutated(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(0);
+            spriteId = GetAnimBattlerSpriteId(0);
         }
         else
         {
             r4 = GetBattlerPosition_permutated(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(1);
+            spriteId = GetAnimBattlerSpriteId(1);
         }
         if (spriteId != 0xFF)
         {
@@ -3163,12 +3163,12 @@ static void ScriptCmd_doublebattle_2E(void)
         if (wantedBank == 0)
         {
             r4 = GetBattlerPosition_permutated(gAnimBankAttacker);
-            spriteId = GetAnimBankSpriteId(0);
+            spriteId = GetAnimBattlerSpriteId(0);
         }
         else
         {
             r4 = GetBattlerPosition_permutated(gAnimBankTarget);
-            spriteId = GetAnimBankSpriteId(1);
+            spriteId = GetAnimBattlerSpriteId(1);
         }
         if (spriteId != 0xFF && r4 == 2)
         {

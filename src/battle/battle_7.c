@@ -24,7 +24,7 @@
 
 extern u8 gBattleBufferA[][0x200];
 extern u8 gActiveBattler;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u8 gBankSpriteIds[];
@@ -96,7 +96,7 @@ extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
 extern void sub_804777C();
 extern void sub_8141828();
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 IsBankSpritePresent(u8);
 extern u8 sub_8077F68(u8);
 extern u8 sub_8077F7C(u8);
@@ -558,7 +558,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
         else
             gHealthboxIDs[*b] = battle_make_oam_normal_battle(*b);
         (*b)++;
-        if (*b == gNoOfAllBanks)
+        if (*b == gBattlersCount)
         {
             *b = 0;
             (*pState)++;
@@ -571,7 +571,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
         else
             nullsub_11(gHealthboxIDs[*b], 1);
         (*b)++;
-        if (*b == gNoOfAllBanks)
+        if (*b == gBattlersCount)
         {
             *b = 0;
             (*pState)++;
@@ -589,7 +589,7 @@ u8 battle_load_something(u8 *pState, u8 *b)
         }
         sub_8043DB0(gHealthboxIDs[*b]);
         (*b)++;
-        if (*b == gNoOfAllBanks)
+        if (*b == gBattlersCount)
         {
             *b = 0;
             (*pState)++;
@@ -620,7 +620,7 @@ void sub_8031F24(void)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
         ewram17800[i].invisible = gSprites[gBankSpriteIds[i]].invisible;
 }
 
@@ -858,7 +858,7 @@ void sub_80326EC(u8 a)
 {
     s32 i;
 
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         if (IsBankSpritePresent(i) != 0)
         {
@@ -882,12 +882,12 @@ void sub_80327CC(void)
 
     LoadCompressedObjectPic(&gUnknown_081FAF24);
     r5 = GetBattlerAtPosition(1);
-    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
+    ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
     gSprites[ewram17810[r5].unk7].data[0] = r5;
     if (IsDoubleBattle())
     {
         r5 = GetBattlerAtPosition(3);
-        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBankPosition(r5, 0), GetBankPosition(r5, 1) + 32, 0xC8);
+        ewram17810[r5].unk7 = CreateSprite(&gSpriteTemplate_81FAF34, GetBattlerSpriteCoord(r5, 0), GetBattlerSpriteCoord(r5, 1) + 32, 0xC8);
         gSprites[ewram17810[r5].unk7].data[0] = r5;
     }
 }

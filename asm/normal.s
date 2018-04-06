@@ -1208,7 +1208,7 @@ _080E25A0:
 	cmp r0, 0x1
 	bhi _080E25F4
 	movs r4, 0
-	ldr r5, _080E2600 @ =gNoOfAllBanks
+	ldr r5, _080E2600 @ =gBattlersCount
 	ldrb r0, [r5]
 	cmp r4, r0
 	bcs _080E25F4
@@ -1243,7 +1243,7 @@ _080E25FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080E2600: .4byte gNoOfAllBanks
+_080E2600: .4byte gBattlersCount
 _080E2604: .4byte gSprites
 _080E2608: .4byte gBankSpriteIds
 	thumb_func_end sub_80E255C
@@ -1636,7 +1636,7 @@ sub_80E2908: @ 80E2908
 	adds r4, r0, 0
 	ldr r5, _080E2968 @ =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
@@ -2619,7 +2619,7 @@ _080E30A8:
 	lsrs r4, r0, 16
 _080E30B4:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, _080E3168 @ =gAnimBankAttacker
@@ -2784,7 +2784,7 @@ _080E3208:
 	adds r0, 0x2
 	strh r5, [r0]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r0, _080E32CC @ =gSprites
 	mov r8, r0
 	movs r2, 0x8

@@ -108,8 +108,8 @@ void sub_80D90F4(struct Sprite *sprite)
         gBattleAnimArgs[2] = Random() % 5;
 
     StartSpriteAnim(sprite, gBattleAnimArgs[2]);
-    sprite->pos1.x = GetBankPosition(bank, 2);
-    sprite->pos1.y = GetBankPosition(bank, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(bank, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3);
 
     xMod = sub_807A100(bank, 1) / 2;
     yMod = sub_807A100(bank, 0) / 4;
@@ -275,8 +275,8 @@ static void AnimStompFootStep(struct Sprite *sprite)
     if (--sprite->data[0] == -1)
     {
         sprite->data[0] = 6;
-        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
-        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
         sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, AnimStompFootEnd);
@@ -319,13 +319,13 @@ void sub_80D95D0(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0);
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1);
     }
 
     sprite->pos1.x += gBattleAnimArgs[1];
@@ -372,13 +372,13 @@ void sub_80D96B8(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[2];
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[3];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[2];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
     }
 
     sprite->oam.tileNum += gBattleAnimArgs[1] * 16;
@@ -423,8 +423,8 @@ void sub_80D97CC(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gBankAttacker, 2);
-        sprite->pos1.y = GetBankPosition(gBankAttacker, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBankAttacker, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBankAttacker, 3);
         sprite->oam.priority = sub_8079ED4(gAnimBankAttacker);
         sprite->data[7] = gAnimBankTarget;
     }
@@ -448,9 +448,9 @@ static void sub_80D986C(struct Sprite *sprite)
 
         sprite->data[0] = 16;
         sprite->data[1] = sprite->pos1.x;
-        sprite->data[2] = GetBankPosition(sprite->data[7], 2);
+        sprite->data[2] = GetBattlerSpriteCoord(sprite->data[7], 2);
         sprite->data[3] = sprite->pos1.y;
-        sprite->data[4] = GetBankPosition(sprite->data[7], 3);
+        sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
 
         InitAnimSpriteTranslationDeltas(sprite);
         StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
@@ -491,10 +491,10 @@ static void sub_80D9934(struct Sprite *sprite)
     }
     else
     {
-        s16 pos0 = GetBankPosition(gAnimBankAttacker, 2);
-        s16 pos1 = GetBankPosition(gAnimBankAttacker, 3);
-        s16 pos2 = GetBankPosition(gAnimBankTarget, 2);
-        s16 pos3 = GetBankPosition(gAnimBankTarget, 3);
+        s16 pos0 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+        s16 pos1 = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+        s16 pos2 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        s16 pos3 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
         sprite->data[0] = pos2 - pos0;
         sprite->data[1] = pos3 - pos1;
@@ -525,8 +525,8 @@ void sub_80D9A38(struct Sprite *sprite)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gBankAttacker, 2);
-        sprite->pos1.y = GetBankPosition(gBankAttacker, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gBankAttacker, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gBankAttacker, 3);
         bank = gAnimBankTarget;
         sprite->oam.priority = sub_8079ED4(gAnimBankAttacker);
     }
@@ -543,9 +543,9 @@ void sub_80D9A38(struct Sprite *sprite)
 
     sprite->data[0] = 16;
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = GetBankPosition(bank, 2);
+    sprite->data[2] = GetBattlerSpriteCoord(bank, 2);
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(bank, 3);
+    sprite->data[4] = GetBattlerSpriteCoord(bank, 3);
 
     InitAnimSpriteTranslationDeltas(sprite);
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -564,8 +564,8 @@ void sub_80D9B48(struct Sprite *sprite)
 {
     u8 turn;
 
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->data[1] = gBattleAnimArgs[3];
     sprite->data[2] = gBattleAnimArgs[0];
     sprite->data[3] = gBattleAnimArgs[1];

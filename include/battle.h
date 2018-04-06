@@ -4,21 +4,7 @@
 #include "sprite.h"
 #include "constants/battle_constants.h"
 
-/*
-    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
-    Each bank has a value consisting of two bits.
-    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
-    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
-*/
-
-#define BATTLE_BANKS_COUNT  4
-
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT        2
-#define B_POSITION_OPPONENT_RIGHT      3
-
-#define GET_BATTLER_POSITION(bank)((gBanksByIdentity[bank]))
+#define GET_BATTLER_POSITION(bank)((gBattlerPositions[bank]))
 #define GET_BATTLER_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
 #define GET_BATTLER_SIDE2(bank)((GET_BATTLER_POSITION(bank) & BIT_SIDE))
 

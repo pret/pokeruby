@@ -32,7 +32,7 @@ extern u8 gBattleBufferA[][0x200];
 extern u8 gBattleBufferB[][0x200];
 extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u16 gCurrentMove;
@@ -120,7 +120,7 @@ void sub_800B950(void)
     sub_800BD54();
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             sub_8094978(i, 0);
     }
 }
@@ -139,7 +139,7 @@ void sub_800B9A8(void)
         gBanksBySide[0] = 0;
         gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
         gBanksBySide[1] = 1;
-        gNoOfAllBanks = 2;
+        gBattlersCount = 2;
     }
     else
     {
@@ -152,7 +152,7 @@ void sub_800B9A8(void)
         gBanksBySide[2] = 2;
         gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
         gBanksBySide[3] = 3;
-        gNoOfAllBanks = 4;
+        gBattlersCount = 4;
     }
 }
 
@@ -170,7 +170,7 @@ void sub_800BA78(void)
             gBanksBySide[0] = 0;
             gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[1] = 1;
-            gNoOfAllBanks = 2;
+            gBattlersCount = 2;
         }
         else
         {
@@ -178,7 +178,7 @@ void sub_800BA78(void)
             gBanksBySide[1] = 0;
             gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[0] = 1;
-            gNoOfAllBanks = 2;
+            gBattlersCount = 2;
         }
         return;
     }
@@ -195,7 +195,7 @@ void sub_800BA78(void)
             gBanksBySide[2] = 2;
             gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[3] = 3;
-            gNoOfAllBanks = 4;
+            gBattlersCount = 4;
         }
         else
         {
@@ -207,7 +207,7 @@ void sub_800BA78(void)
             gBanksBySide[3] = 2;
             gBattleBankFunc[2] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[2] = 3;
-            gNoOfAllBanks = 4;
+            gBattlersCount = 4;
 
         }
         return;
@@ -285,7 +285,7 @@ void sub_800BA78(void)
             }
         }
     }
-    gNoOfAllBanks = 4;
+    gBattlersCount = 4;
 }
 
 void sub_800BD54(void)
@@ -295,7 +295,7 @@ void sub_800BD54(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             for (j = 0; j < 6; j++)
             {
