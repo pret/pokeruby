@@ -3,6 +3,7 @@
 #include "constants/songs.h"
 #include "decompress.h"
 #include "ewram.h"
+#include "graphics.h"
 #include "link.h"
 #include "main.h"
 #include "palette.h"
@@ -29,33 +30,11 @@ extern void sub_8032A38(void);
 //extern u8 GetCurrentMapBattleScene(void);
 
 extern const u8 gGameVersion;
-extern u8 gBattleTextboxTiles[];
-extern u16 gBattleTextboxTilemap[];
-extern u16 gBattleTextboxPalette[];
 extern u16 gBattleTypeFlags;
 extern struct Trainer gTrainers[];
 extern u16 gTrainerBattleOpponent;
 
-struct BattleBackground  {
-    void *tileset;
-    void *tilemap;
-    void *entryTiles;
-    void *entryTilemap;
-    void *palette;
-};
-extern struct BattleBackground gBattleTerrainTable[];
-
 extern u8 gBattleTerrain;
-
-extern u8 gBattleTerrainTiles_Cave[];
-extern u8 gBattleTerrainTiles_Water[];
-extern u8 gBattleTerrainTiles_Building[];
-extern u8 gBattleTerrainTiles_Stadium[];
-
-extern u16 gBattleTerrainTilemap_Cave[];
-extern u16 gBattleTerrainTilemap_Water[];
-extern u16 gBattleTerrainTilemap_Building[];
-extern u16 gBattleTerrainTilemap_Stadium[];
 
 extern u16 gBattleTerrainPalette_Groudon[];
 extern u16 gBattleTerrainPalette_Kyogre[];
@@ -70,20 +49,14 @@ extern u16 gBattleTerrainPalette_StadiumGlacia[];
 extern u16 gBattleTerrainPalette_StadiumDrake[];
 extern u16 gBattleTerrainPalette_BattleTower[];
 
-extern u8 gBattleTerrainAnimTiles_Building[];
-extern u16 gBattleTerrainAnimTilemap_Building[];
-extern u8 gBattleTerrainAnimTiles_Cave[];
-extern u16 gBattleTerrainAnimTilemap_Cave[];
-extern u8 gBattleTerrainAnimTiles_Underwater[];
-extern u16 gBattleTerrainAnimTilemap_Underwater[];
 extern u8 gVersusFrameGfx[];
 extern u16 gVersusFrameTilemap[];
-extern u8 gUnknown_08E5DC2C[];
 extern u16 gVersusFramePal[];
 
+extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
+extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
-extern struct CompressedSpriteSheet gUnknown_081F95A4;
 
 extern u8 sav1_map_get_battletype(void);
 
@@ -97,19 +70,146 @@ struct LinkResultWindow {
 
 #define gLinkResultWindows gUnknown_081F9680
 extern const struct LinkResultWindow gLinkResultWindows[];
-extern void PrintLinkBattleWinLossTie(void);
-extern void sub_800DAF8(u8, u8, u8 *);
 
-extern struct SpriteTemplate gSpriteTemplate_81F9574;
-extern struct SpriteTemplate gSpriteTemplate_81F958C;
 extern struct SpriteTemplate gSpriteTemplate_81F96D0;
 
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG2_X;
+const struct OamData gOamData_81F952C = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 3
+};
 
+const struct OamData gOamData_81F9534 = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .size = 3,
+    .tileNum = 64
+};
 
-void sub_800D6C4(void);
+const union AffineAnimCmd gSpriteAffineAnim_81F953C[] = {
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_END
+};
 
+const union AffineAnimCmd gSpriteAffineAnim_81F954C[] = {
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x18, 0x18, 0, -128),
+    AFFINEANIMCMD_FRAME(0x18, 0x18, 0, -128),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_81F956C[] = {
+    gSpriteAffineAnim_81F953C,
+    gSpriteAffineAnim_81F954C
+};
+
+const struct SpriteTemplate gSpriteTemplate_81F9574 = {
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_81F952C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_81F956C,
+    .callback = nullsub_36
+};
+
+const struct SpriteTemplate gSpriteTemplate_81F958C = {
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_81F9534,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_81F956C,
+    .callback = nullsub_36
+};
+
+extern const u8 gUnknown_08E5DC2C[];
+
+const struct CompressedSpriteSheet gUnknown_081F95A4[] = {
+    {gUnknown_08E5DC2C, 4096, 0x2710},
+};
+
+struct BattleBackground
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *entryTileset;
+    const void *entryTilemap;
+    const void *palette;
+};
+
+const struct BattleBackground gBattleTerrainTable[] = {
+{
+    .tileset = gBattleTerrainTiles_TallGrass,
+    .tilemap = gBattleTerrainTilemap_TallGrass,
+    .entryTileset = gBattleTerrainAnimTiles_TallGrass,
+    .entryTilemap = gBattleTerrainAnimTilemap_TallGrass,
+    .palette = gBattleTerrainPalette_TallGrass
+},
+{
+    .tileset = gBattleTerrainTiles_LongGrass,
+    .tilemap = gBattleTerrainTilemap_LongGrass,
+    .entryTileset = gBattleTerrainAnimTiles_LongGrass,
+    .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
+    .palette = gBattleTerrainPalette_LongGrass
+},
+{
+    .tileset = gBattleTerrainTiles_Sand,
+    .tilemap = gBattleTerrainTilemap_Sand,
+    .entryTileset = gBattleTerrainAnimTiles_Sand,
+    .entryTilemap = gBattleTerrainAnimTilemap_Sand,
+    .palette = gBattleTerrainPalette_Sand
+},
+{
+    .tileset = gBattleTerrainTiles_Underwater,
+    .tilemap = gBattleTerrainTilemap_Underwater,
+    .entryTileset = gBattleTerrainAnimTiles_Underwater,
+    .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
+    .palette = gBattleTerrainPalette_Underwater
+},
+{
+    .tileset = gBattleTerrainTiles_Water,
+    .tilemap = gBattleTerrainTilemap_Water,
+    .entryTileset = gBattleTerrainAnimTiles_Water,
+    .entryTilemap = gBattleTerrainAnimTilemap_Water,
+    .palette = gBattleTerrainPalette_Water
+},
+{
+    .tileset = gBattleTerrainTiles_PondWater,
+    .tilemap = gBattleTerrainTilemap_PondWater,
+    .entryTileset = gBattleTerrainAnimTiles_PondWater,
+    .entryTilemap = gBattleTerrainAnimTilemap_PondWater,
+    .palette = gBattleTerrainPalette_PondWater
+},
+{
+    .tileset = gBattleTerrainTiles_Rock,
+    .tilemap = gBattleTerrainTilemap_Rock,
+    .entryTileset = gBattleTerrainAnimTiles_Rock,
+    .entryTilemap = gBattleTerrainAnimTilemap_Rock,
+    .palette = gBattleTerrainPalette_Rock
+},
+{
+    .tileset = gBattleTerrainTiles_Cave,
+    .tilemap = gBattleTerrainTilemap_Cave,
+    .entryTileset = gBattleTerrainAnimTiles_Cave,
+    .entryTilemap = gBattleTerrainAnimTilemap_Cave,
+    .palette = gBattleTerrainPalette_Cave
+},
+{
+    .tileset = gBattleTerrainTiles_Building,
+    .tilemap = gBattleTerrainTilemap_Building,
+    .entryTileset = gBattleTerrainAnimTiles_Building,
+    .entryTilemap = gBattleTerrainAnimTilemap_Building,
+    .palette = gBattleTerrainPalette_Building
+},
+{
+    .tileset = gBattleTerrainTiles_Building,
+    .tilemap = gBattleTerrainTilemap_Building,
+    .entryTileset = gBattleTerrainAnimTiles_Building,
+    .entryTilemap = gBattleTerrainAnimTilemap_Building,
+    .palette = gBattleTerrainPalette_Plain
+    }
+};
+
+static void sub_800D6C4(void);
 
 void unref_sub_800D684(void)
 {
@@ -120,7 +220,7 @@ void unref_sub_800D684(void)
     SetMainCallback2(sub_800D6C4);
 }
 
-void sub_800D6C4(void)
+static void sub_800D6C4(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -271,7 +371,7 @@ void LoadBattleTextboxAndBackground(void)
     #endif
 }
 
-void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
+static void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
 {
     int i;
     u16 r4 = 0;
@@ -349,7 +449,7 @@ void sub_800DAF8(u8 taskId, u8 windowId, u8 *dest)
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
 #define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset)      PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
 
-void PrintLinkBattleWinLossTie(void)
+static void PrintLinkBattleWinLossTie(void)
 {
 
     if (gBattleOutcome == 3)
@@ -544,7 +644,7 @@ void LoadBattleEntryBackground(void) {
         REG_WINOUT = 0x36;
         gBattle_BG1_Y = 0xff5c;
         gBattle_BG2_Y = 0xff5c;
-        LoadCompressedObjectPic(&gUnknown_081F95A4);
+        LoadCompressedObjectPic(gUnknown_081F95A4);
         return;
     } else if (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK)) {
         LZDecompressVram(gBattleTerrainAnimTiles_Building, (void *)0x6004000);
@@ -572,7 +672,7 @@ void LoadBattleEntryBackground(void) {
         }
     }
     if (sav1_map_get_battletype() == 0) {
-        LZDecompressVram(gBattleTerrainTable[gBattleTerrain].entryTiles, (void *)0x6004000);
+        LZDecompressVram(gBattleTerrainTable[gBattleTerrain].entryTileset, (void *)0x6004000);
         LZDecompressVram(gBattleTerrainTable[gBattleTerrain].entryTilemap, (void *)0x600e000);
         return;
     }

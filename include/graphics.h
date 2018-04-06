@@ -3401,6 +3401,9 @@ extern const struct CompressedSpritePalette gBattleTerrainPalette_Building[];
 
 extern const struct CompressedSpritePalette gBattleTerrainPalette_Plain[];
 
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Stadium[];
+extern const u8 gBattleTerrainTilemap_Stadium[];
+
 extern const u8 gBattleWindowLargeGfx[];
 extern const u8 gBattleWindowSmallGfx[];
 extern const u8 gBattleWindowSmall2Gfx[];
