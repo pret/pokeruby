@@ -292,7 +292,7 @@ SYMBOL(gUnknown_03005D38, 4)
 // mauville_man.c
 SYMBOL(gUnknown_03005DA0, 0x48)
 
-// cute_sketch.c
+// contest_painting_effects.c
 SYMBOL(gUnknown_03005DE8, 4)
 SYMBOL(gUnknown_03005DEC, 4)
 SYMBOL(gUnknown_03005DF0, 4)

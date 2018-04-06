@@ -47,7 +47,7 @@ SECTIONS {
         src/main_menu.o(.text);
         src/rom3.o(.text);
         src/decompress.o(.text);
-        asm/battle_1.o(.text);
+        asm/decompress.o(.text);
         src/battle/battle_bg.o(.text);
         src/battle/battle_2.o(.text);
         src/battle/battle_util.o(.text);
@@ -326,8 +326,8 @@ SECTIONS {
         src/dewford_trend.o(.text);
         src/heal_location.o(.text);
         src/region_map.o(.text);
-        src/cute_sketch.o(.text);
-        asm/cute_sketch.o(.text);
+        src/contest_painting_effects.o(.text);
+        asm/contest_painting_effects.o(.text);
         src/decoration.o(.text);
         src/slot_machine.o(.text);
         src/contest_painting.o(.text);
@@ -624,7 +624,7 @@ SECTIONS {
         src/menu_helpers.o(.rodata);
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
-        data/cute_sketch.o(.rodata);
+        data/contest_painting_effects.o(.rodata);
         src/decoration.o(.rodata);
         src/slot_machine.o(.rodata);
         src/contest_painting.o(.rodata);
