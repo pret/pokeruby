@@ -3,50 +3,50 @@
 #include "random.h"
 #include "contest.h"
 
-static void ContestEffect_00(void);
-static void ContestEffect_01(void);
-static void ContestEffect_02(void);
-static void ContestEffect_03(void);
-static void ContestEffect_04(void);
-static void ContestEffect_05(void);
-static void ContestEffect_06(void);
-static void ContestEffect_07(void);
-static void ContestEffect_08(void);
-static void ContestEffect_09(void);
-static void ContestEffect_14(void);
-static void ContestEffect_15(void);
-static void ContestEffect_16(void);
-static void ContestEffect_17(void);
-static void ContestEffect_18(void);
-static void ContestEffect_19(void);
-static void ContestEffect_20(void);
-static void ContestEffect_21(void);
-static void ContestEffect_22(void);
-static void ContestEffect_23(void);
-static void ContestEffect_24(void);
-static void ContestEffect_25(void);
-static void ContestEffect_26(void);
-static void ContestEffect_27(void);
-static void ContestEffect_28(void);
-static void ContestEffect_29(void);
-static void ContestEffect_30(void);
-static void ContestEffect_31(void);
-static void ContestEffect_32(void);
-static void ContestEffect_33(void);
-static void ContestEffect_34(void);
-static void ContestEffect_35(void);
-static void ContestEffect_36(void);
-static void ContestEffect_37(void);
-static void ContestEffect_38(void);
-static void ContestEffect_39(void);
-static void ContestEffect_40(void);
-static void ContestEffect_41(void);
-static void ContestEffect_42(void);
-static void ContestEffect_43(void);
-static void ContestEffect_44(void);
-static void ContestEffect_45(void);
-static void ContestEffect_46(void);
-static void ContestEffect_47(void);
+static void ContestEffect_HighlyAppealing(void);
+static void ContestEffect_UserMoreEasilyStartled(void);
+static void ContestEffect_GreatAppealButNoMoreMoves(void);
+static void ContestEffect_RepetitionNotBoring(void);
+static void ContestEffect_AvoidStartleOnce(void);
+static void ContestEffect_AvoidStartle(void);
+static void ContestEffect_AvoidStartleSlightly(void);
+static void ContestEffect_UserLessEasilyStartled(void);
+static void ContestEffect_StartleFrontMon(void);
+static void ContestEffect_StartlePrevMons(void);
+static void ContestEffect_StartlePrevMon2(void);
+static void ContestEffect_StartlePrevMons2(void);
+static void ContestEffect_ShiftJudgeAttention(void);
+static void ContestEffect_StartleMonWithJudgesAttention(void);
+static void ContestEffect_JamsOthersButMissOneTurn(void);
+static void ContestEffect_StartleMonsSameTypeAppeal(void);
+static void ContestEffect_StartleMonsCoolAppeal(void);
+static void ContestEffect_StartleMonsBeautyAppeal(void);
+static void ContestEffect_StartleMonsCuteAppeal(void);
+static void ContestEffect_StartleMonsSmartAppeal(void);
+static void ContestEffect_StartleMonsToughAppeal(void);
+static void ContestEffect_MakeFollowingMonNervous(void);
+static void ContestEffect_MakeFollowingMonsNervous(void);
+static void ContestEffect_WorsenConditionOfPrevMons(void);
+static void ContestEffect_BadlyStartlesMonsInGoodCondition(void);
+static void ContestEffect_BetterIfFirst(void);
+static void ContestEffect_BetterIfLast(void);
+static void ContestEffect_AppealAsGoodAsPrevOnes(void);
+static void ContestEffect_AppealAsGoodAsPrevOne(void);
+static void ContestEffect_BetterWhenLater(void);
+static void ContestEffect_QualityDependsOnTiming(void);
+static void ContestEffect_BetterIfSameType(void);
+static void ContestEffect_BetterIfDiffType(void);
+static void ContestEffect_AffectedByPrevAppeal(void);
+static void ContestEffect_ImproveConditionPreventNervousness(void);
+static void ContestEffect_BetterWithGoodCondition(void);
+static void ContestEffect_NextAppealEarlier(void);
+static void ContestEffect_NextAppealLater(void);
+static void ContestEffect_MakeScramblingTurnOrderEasier(void);
+static void ContestEffect_ScrambleNextTurnOrder(void);
+static void ContestEffect_ExciteAudienceInAnyContest(void);
+static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void);
+static void ContestEffect_BetterWhenAudienceExcited(void);
+static void ContestEffect_DontExciteAudience(void);
 static void JamByMoveCategory(u8);
 static bool8 CanUnnerveContestant(u8);
 static u8 WasAtLeastOneOpponentJammed(void);
@@ -73,63 +73,63 @@ bool8 AreMovesContestCombo(u16 lastMove, u16 nextMove) {
     return 0;
 }
 
-static void ContestEffect_00(void)
 // A highly appealing move.
+static void ContestEffect_HighlyAppealing(void)
 {
 }
 
-static void ContestEffect_01(void)
 // After this move, the user is more easily startled.
+static void ContestEffect_UserMoreEasilyStartled(void)
 {
     sContestantStatus[shared192D0.contestant].moreEasilyStartled = TRUE;
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_MORE_CONSCIOUS);
 }
 
-static void ContestEffect_02(void)
 // Makes a great appeal, but allows no more to the end.
+static void ContestEffect_GreatAppealButNoMoreMoves(void)
 {
     sContestantStatus[shared192D0.contestant].exploded = TRUE;
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_APPEAL);
 }
 
-static void ContestEffect_03(void)
 // Can be used repeatedly without boring the JUDGE.
+static void ContestEffect_RepetitionNotBoring(void)
 {
     sContestantStatus[shared192D0.contestant].usedRepeatableMove = TRUE;
     sContestantStatus[shared192D0.contestant].disappointedRepeat = FALSE;
     sContestantStatus[shared192D0.contestant].moveRepeatCount = 0;
 }
 
-static void ContestEffect_04(void)
 // Can avoid being startled by others once.
+static void ContestEffect_AvoidStartleOnce(void)
 {
     sContestantStatus[shared192D0.contestant].jamSafetyCount = 1;
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_SETTLE_DOWN);
 }
 
-static void ContestEffect_05(void)
 // Can avoid being startled by others.
+static void ContestEffect_AvoidStartle(void)
 {
     sContestantStatus[shared192D0.contestant].immune = TRUE;
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_OBLIVIOUS_TO_OTHERS);
 }
 
-static void ContestEffect_06(void)
 // Can avoid being startled by others a little.
+static void ContestEffect_AvoidStartleSlightly(void)
 {
     sContestantStatus[shared192D0.contestant].jamReduction = 20;
     SetContestantEffectStringID(shared192D0.contestant,CONTEST_STRING_LESS_AWARE);
 }
 
-static void ContestEffect_07(void)
 // After this move, the user is less likely to be startled.
+static void ContestEffect_UserLessEasilyStartled(void)
 {
     sContestantStatus[shared192D0.contestant].resistant = TRUE;
     SetContestantEffectStringID(shared192D0.contestant,CONTEST_STRING_STOPPED_CARING);
 }
 
-static void ContestEffect_08(void)
 // Slightly startles the POKéMON in front.
+static void ContestEffect_StartleFrontMon(void)
 {
     u8 idx = 0;
     u8 a = shared192D0.contestant;
@@ -151,8 +151,8 @@ static void ContestEffect_08(void)
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_09(void)
 // Slightly startles those that have made appeals.
+static void ContestEffect_StartlePrevMons(void)
 {
     u8 idx = 0;
     u8 a = shared192D0.contestant;
@@ -172,8 +172,8 @@ static void ContestEffect_09(void)
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_14(void)
 // Startles the POKéMON that appealed before the user.
+static void ContestEffect_StartlePrevMon2(void)
 {
     u8 rval = Random() % 10;
     int jam;
@@ -185,11 +185,11 @@ static void ContestEffect_14(void)
     else
         jam = 60;
     shared192D0.jam = jam;
-    ContestEffect_08();
+    ContestEffect_StartleFrontMon();
 }
 
-static void ContestEffect_15(void)
 // Startles all POKéMON that appealed before the user.
+static void ContestEffect_StartlePrevMons2(void)
 {
     u8 numStartled = 0;
     u8 contestant = shared192D0.contestant;
@@ -232,8 +232,8 @@ static void ContestEffect_15(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-static void ContestEffect_16(void)
 // Shifts the JUDGE’s attention from others.
+static void ContestEffect_ShiftJudgeAttention(void)
 {
     bool32 hitAny = FALSE;
     u8 contestant = shared192D0.contestant;
@@ -262,8 +262,8 @@ static void ContestEffect_16(void)
     }
 }
 
-static void ContestEffect_17(void)
 // Startles the POKéMON that has the JUDGE’s attention.
+static void ContestEffect_StartleMonWithJudgesAttention(void)
 {
     u8 numStartled = 0;
     u8 contestant = shared192D0.contestant;
@@ -292,59 +292,59 @@ static void ContestEffect_17(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-static void ContestEffect_18(void)
 // Jams the others, and misses one turn of appeals.
+static void ContestEffect_JamsOthersButMissOneTurn(void)
 {
     sContestantStatus[shared192D0.contestant].turnSkipped = TRUE;
-    ContestEffect_09();
+    ContestEffect_StartlePrevMons();
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_19(void)
 // Startles POKéMON that made a same-type appeal.
+static void ContestEffect_StartleMonsSameTypeAppeal(void)
 {
     u16 move = sContestantStatus[shared192D0.contestant].currMove;
     JamByMoveCategory(gContestMoves[move].contestCategory);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_20(void)
 // Badly startles POKéMON that made COOL appeals.
+static void ContestEffect_StartleMonsCoolAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_COOL);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_21(void)
 // Badly startles POKéMON that made BEAUTY appeals.
+static void ContestEffect_StartleMonsBeautyAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_BEAUTY);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_22(void)
 // Badly startles POKéMON that made CUTE appeals.
+static void ContestEffect_StartleMonsCuteAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_CUTE);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_23(void)
 // Badly startles POKéMON that made SMART appeals.
+static void ContestEffect_StartleMonsSmartAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_SMART);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_24(void)
 // Badly startles POKéMON that made TOUGH appeals.
+static void ContestEffect_StartleMonsToughAppeal(void)
 {
     JamByMoveCategory(CONTEST_CATEGORY_TOUGH);
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_25(void)
 // Makes one POKéMON after the user nervous.
+static void ContestEffect_MakeFollowingMonNervous(void)
 {
     bool32 hitAny = FALSE;
 
@@ -375,8 +375,8 @@ static void ContestEffect_25(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-static void ContestEffect_26(void)
 // Makes all POKéMON after the user nervous.
+static void ContestEffect_MakeFollowingMonsNervous(void)
 {
     u8 numUnnerved = 0;
     bool32 contestantUnnerved = FALSE;
@@ -451,8 +451,8 @@ static void ContestEffect_26(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_MESSED_UP2);
 }
 
-static void ContestEffect_27(void)
 // Worsens the condition of those that made appeals.
+static void ContestEffect_WorsenConditionOfPrevMons(void)
 {
     u8 numHit = 0;
     int i;
@@ -475,8 +475,8 @@ static void ContestEffect_27(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_IGNORED);
 }
 
-static void ContestEffect_28(void)
 // Badly startles POKéMON in good condition.
+static void ContestEffect_BadlyStartlesMonsInGoodCondition(void)
 {
     u8 numHit = 0;
     int i;
@@ -500,8 +500,8 @@ static void ContestEffect_28(void)
         SetContestantEffectStringID2(shared192D0.contestant, CONTEST_STRING_IGNORED);
 }
 
-static void ContestEffect_29(void)
 // The appeal works great if performed first.
+static void ContestEffect_BetterIfFirst(void)
 {
     if (gUnknown_02038696[shared192D0.contestant] == 0)
     {
@@ -511,8 +511,8 @@ static void ContestEffect_29(void)
     }
 }
 
-static void ContestEffect_30(void)
 // The appeal works great if performed last.
+static void ContestEffect_BetterIfLast(void)
 {
     if (gUnknown_02038696[shared192D0.contestant] == 3)
     {
@@ -522,8 +522,8 @@ static void ContestEffect_30(void)
     }
 }
 
-static void ContestEffect_31(void)
 // Makes the appeal as good as those before it.
+static void ContestEffect_AppealAsGoodAsPrevOnes(void)
 {
     int i;
     int appealSum;
@@ -545,8 +545,8 @@ static void ContestEffect_31(void)
     sContestantStatus[shared192D0.contestant].appeal2 = RoundTowardsZero(sContestantStatus[shared192D0.contestant].appeal2);
 }
 
-static void ContestEffect_32(void)
 // Makes the appeal as good as the one before it.
+static void ContestEffect_AppealAsGoodAsPrevOne(void)
 {
     s16 appeal = 0;
 
@@ -568,8 +568,8 @@ static void ContestEffect_32(void)
     }
 }
 
-static void ContestEffect_33(void)
 // The appeal works better the later it is performed.
+static void ContestEffect_BetterWhenLater(void)
 {
     u8 whichTurn = shared192D0.turnOrder[shared192D0.contestant];
     if (whichTurn == 0)
@@ -586,8 +586,8 @@ static void ContestEffect_33(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_APPEAL_EXCELLENTLY);
 }
 
-static void ContestEffect_34(void)
 // The appeal’s quality varies depending on its timing.
+static void ContestEffect_QualityDependsOnTiming(void)
 {
     u8 rval = Random() % 10;
     s16 appeal;
@@ -619,8 +619,8 @@ static void ContestEffect_34(void)
 
 #ifdef NONMATCHING
 // Not even close, send help
-static void ContestEffect_35(void)
 // Works well if it’s the same type as the one before.
+static void ContestEffect_BetterIfSameType(void)
 {
     s8 r4;
     s8 r2;
@@ -646,7 +646,7 @@ static void ContestEffect_35(void)
     }
 }
 #else
-__attribute__((naked)) void ContestEffect_35(void)
+__attribute__((naked)) void ContestEffect_BetterIfSameType(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tldr r1, _080B8940 @ =gSharedMem + 0x192D0\n"
@@ -762,8 +762,8 @@ __attribute__((naked)) void ContestEffect_35(void)
 }
 #endif
 
-static void ContestEffect_36(void)
 // Works well if different in type than the one before.
+static void ContestEffect_BetterIfDiffType(void)
 {
     if (shared192D0.turnOrder[shared192D0.contestant] != 0)
     {
@@ -783,8 +783,8 @@ static void ContestEffect_36(void)
     }
 }
 
-static void ContestEffect_37(void)
 // Affected by how well the appeal in front goes.
+static void ContestEffect_AffectedByPrevAppeal(void)
 {
     if (shared192D0.turnOrder[shared192D0.contestant] != 0)
     {
@@ -809,8 +809,8 @@ static void ContestEffect_37(void)
     }
 }
 
-static void ContestEffect_38(void)
 // Ups the user’s condition. Helps prevent nervousness.
+static void ContestEffect_ImproveConditionPreventNervousness(void)
 {
     if (sContestantStatus[shared192D0.contestant].condition < 30)
     {
@@ -822,8 +822,8 @@ static void ContestEffect_38(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_NO_CONDITION_IMPROVE);
 }
 
-static void ContestEffect_39(void)
 // The appeal works well if the user’s condition is good.
+static void ContestEffect_BetterWithGoodCondition(void)
 {
     sContestantStatus[shared192D0.contestant].appealTripleCondition = TRUE;
     if (sContestantStatus[shared192D0.contestant].condition != 0)
@@ -832,8 +832,8 @@ static void ContestEffect_39(void)
         SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_BAD_CONDITION_WEAK_APPEAL);
 }
 
-static void ContestEffect_40(void)
 // The next appeal can be made earlier next turn.
+static void ContestEffect_NextAppealEarlier(void)
 {
     s8 i;
     s8 j;
@@ -874,8 +874,8 @@ static void ContestEffect_40(void)
     }
 }
 
-static void ContestEffect_41(void)
 // The next appeal can be made later next turn.
+static void ContestEffect_NextAppealLater(void)
 {
     s8 i;
     s8 j;
@@ -916,14 +916,14 @@ static void ContestEffect_41(void)
     }
 }
 
-static void ContestEffect_42(void)
 // Makes the next turn’s order more easily scrambled.
+static void ContestEffect_MakeScramblingTurnOrderEasier(void)
 {
     // dummied out?
 }
 
-static void ContestEffect_43(void)
 // Scrambles the order of appeals on the next turn.
+static void ContestEffect_ScrambleNextTurnOrder(void)
 {
     s8 i;
     s8 j;
@@ -968,8 +968,8 @@ static void ContestEffect_43(void)
     }
 }
 
-static void ContestEffect_44(void)
 // An appeal that excites the audience in any CONTEST.
+static void ContestEffect_ExciteAudienceInAnyContest(void)
 {
     if (gContestMoves[sContestantStatus[shared192D0.contestant].currMove].contestCategory != gSpecialVar_ContestCategory)
     {
@@ -977,8 +977,8 @@ static void ContestEffect_44(void)
     }
 }
 
-static void ContestEffect_45(void)
 // Badly startles all POKéMON that made good appeals.
+static void ContestEffect_BadlyStartleMonsWithGoodAppeals(void)
 {
     int i;
     u8 numJammed = 0;
@@ -1005,8 +1005,8 @@ static void ContestEffect_45(void)
     SetContestantEffectStringID(shared192D0.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
-static void ContestEffect_46(void)
 // The appeal works best the more the crowd is excited.
+static void ContestEffect_BetterWhenAudienceExcited(void)
 {
     s16 appeal;
 
@@ -1038,8 +1038,8 @@ static void ContestEffect_46(void)
     sContestantStatus[shared192D0.contestant].appeal2 = appeal;
 }
 
-static void ContestEffect_47(void)
 // Temporarily stops the crowd from growing excited.
+static void ContestEffect_DontExciteAudience(void)
 {
     if (!shared19328.excitementFrozen)
     {
