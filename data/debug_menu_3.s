@@ -19,9 +19,9 @@
 
 gUnknown_Debug_845DAE1::
 	me_checkcompat gUnknown_Debug_845DAE1, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845DAFF, gUnknown_Debug_845DDB2
+	me_crc 0x0, _0845DAFF, _0845DAFFEnd
 _0845DAFF:
-	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _845DB56, _0845DD0D
+	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _845DB56, _845DB56End
 	me_setrecordmixinggift 0x1, 0x5, ITEM_EON_TICKET
 	me_runscript _0845DD0D
 	me_end
@@ -80,6 +80,8 @@ _0845DC94:
 	.string "deines BEUTELS ist voll.\p"
 	.string "Lagere einige deiner Basis-Items in\n"
 	.string "deinem PC und komm dann wieder.$"
+_845DB56End:
+	.size _845DB56, _845DB56End - _845DB56
 
 _0845DD0D:
 	setvaddress _0845DD0D
@@ -114,16 +116,20 @@ _0845DD63:
 
 _0845DD95:
     .string "Deine BASIS-TASCHE ist voll.$"
+_0845DAFFEnd:
+	.size _0845DAFF, _0845DAFFEnd - _0845DAFF
 
 gUnknown_Debug_845DDB2::
 	me_checkcompat gUnknown_Debug_845DDB2, 4, 4, 4, 0x80
-	me_checksum 0x0, _0845DDD0, gUnknown_Debug_845E306
+	me_checksum 0x0, _0845DDD0, _0845DDD0End
 _0845DDD0:
 	me_setenigmaberry gUnknown_Debug_845DDD6
 	me_end
 
 gUnknown_Debug_845DDD6::
 	.space 0x530
+_0845DDD0End:
+	.size _0845DDD0, _0845DDD0End - _0845DDD0
 
 gUnknown_Debug_845E306::
 	me_checkcompat gUnknown_Debug_845E306, 0x4, 0x4, 0x4, 0x80
@@ -155,29 +161,35 @@ _0845E387:
 	.string "aufgenommen werden.$"
 
 gUnknown_Debug_845E3E0::
-	me_checkcompat 0x845e3e0, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845E3FE, gUnknown_Debug_845E402
+	me_checkcompat gUnknown_Debug_845E3E0, 0x4, 0x4, 0x4, 0x80
+	me_crc 0x0, _0845E3FE, _0845E3FEEnd
 _0845E3FE:
 	me_giveribbon 0x0, 0x1
 	me_end
+_0845E3FEEnd:
+	.size _0845E3FE, _0845E3FEEnd - _0845E3FE
 
 gUnknown_Debug_845E402::
-	me_checkcompat 0x845e402, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845E420, gUnknown_Debug_845E422
+	me_checkcompat gUnknown_Debug_845E402, 0x4, 0x4, 0x4, 0x80
+	me_crc 0x0, _0845E420, _0845E420End
 _0845E420:
 	me_givenationaldex
 	me_end
+_0845E420End:
+	.size _0845E420, _0845E420End - _0845E420
 
 gUnknown_Debug_845E422::
-	me_checkcompat 0x845e422, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845E440, gUnknown_Debug_845E443
+	me_checkcompat gUnknown_Debug_845E422, 0x4, 0x4, 0x4, 0x80
+	me_crc 0x0, _0845E440, _0845E440End
 _0845E440:
 	me_addrareword 0x1
 	me_end
+_0845E440End:
+	.size _0845E440, _0845E440End - _0845E440
 
 gUnknown_Debug_845E443::
-	me_checkcompat 0x845e443, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845E461, gUnknown_Debug_845E4EF
+	me_checkcompat gUnknown_Debug_845E443, 0x4, 0x4, 0x4, 0x80
+	me_crc 0x0, _0845E461, _0845E461End
 _0845E461:
 	me_givepokemon gUnknown_Debug_845E467
 	me_end
@@ -187,6 +199,8 @@ gUnknown_Debug_845E467::
 
 gUnknown_Debug_845E4CB::
 	.space 36
+_0845E461End:
+	.size _0845E461, _0845E461End - _0845E461
 
 gUnknown_Debug_845E4EF::
 	me_checkcompat gUnknown_Debug_845E4EF, 0x4, 0x4, 0x4, 0x80
@@ -203,9 +217,9 @@ gUnknown_Debug_845E606::
 
 gUnknown_Debug_845E619::
 	me_checkcompat gUnknown_Debug_845E619, 0x4, 0x4, 0x4, 0x80
-	me_checksum 0x0, _0845E637, gUnknown_Debug_845E712
+	me_checksum 0x0, _0845E637, _0845E637End
 _0845E637:
-	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _0845E683, gUnknown_Debug_845E712
+	me_initramscript MAP_PETALBURG_CITY_GYM, 0x1, _0845E683, _0845E683End
 	me_setmsg 0xff, _0845E64C
 	me_setstatus 0x2
 	me_end
@@ -239,13 +253,19 @@ _0845E6C0:
 	.string "VATER: Hi, {PLAYER}!\p"
 	.string "Ich habe gerade diese seltene BEERE\n"
 	.string "erhalten. Ich schenke sie dir!$"
+_0845E637End:
+	.size _0845E637, _0845E637End - _0845E637
+_0845E683End:
+	.size _0845E683, _0845E683End - _0845E683
 
 gUnknown_Debug_845E712::
 	me_checkcompat gUnknown_Debug_845E712, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, _0845E730, gUnknown_Debug_845E797
+	me_crc 0x0, _0845E730, _0845E730End
 _0845E730:
 	me_runscript _0845E736
 	me_end
+_0845E730End:
+	.size _0845E730, _0845E730End - _0845E730
 
 _0845E736:
 	setvaddress _0845E736
@@ -270,10 +290,12 @@ _0845E771:
 
 gUnknown_Debug_845E797::
 	me_checkcompat gUnknown_Debug_845E797, 0x4, 0x4, 0x4, 0x80
-	me_crc 0x0, gUnknown_Debug_845E7B5, gUnknown_Debug_845E7BB
+	me_crc 0x0, gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End
 gUnknown_Debug_845E7B5::
 	me_setrecordmixinggift 0x1, 0x3, ITEM_POTION
 	me_end
+gUnknown_Debug_845E7B5End:
+	.size gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End - gUnknown_Debug_845E7B5
 
 gUnknown_Debug_845E7BB::
 	.byte 0x00
