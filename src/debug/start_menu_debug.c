@@ -1830,7 +1830,7 @@ u8 DebugMenu_EditPKMN()
     asm(
         "	push	{lr}\n"
         "	bl	Menu_EraseScreen\n"
-        "	bl	debug_sub_815FFDC\n"
+        "	bl	NakaGenderTest\n"
         "	mov	r0, #0x0\n"
         "	pop	{r1}\n"
         "	bx	r1\n"

@@ -16,14 +16,14 @@ void sub_80CB4CC(struct Sprite* sprite)
     {
     case 0:
     {
-        if (GetBankSide(gAnimBankTarget) == 0)
+        if (GetBattlerSide(gAnimBankTarget) == 0)
         {
             s16 a = gBattleAnimArgs[0];
             gBattleAnimArgs[0] = -a;
         }
 
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[1];
         sprite->invisible = 1;
         sprite->data[0]++;
         break;
@@ -35,8 +35,8 @@ void sub_80CB4CC(struct Sprite* sprite)
         {
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0] = 25;
-            sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
-            sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
+            sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+            sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
             sprite->callback = sub_8078CC0;
             StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
             break;

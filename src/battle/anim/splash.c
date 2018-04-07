@@ -24,7 +24,7 @@ void sub_80D074C(u8 taskId)
     }
     else
     {
-        u8 spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+        u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
         task->data[0] = spriteId;
         task->data[1] = 0;
         task->data[2] = gBattleAnimArgs[1];

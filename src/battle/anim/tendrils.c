@@ -28,7 +28,7 @@ void sub_80CB298(struct Sprite* sprite)
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
         sprite->affineAnimPaused = 0;
-        GetAnimBankSpriteId(1);
+        GetAnimBattlerSpriteId(1);
         sprite->data[0] = 0x100;
         sprite->callback = sub_80CB2D4;
     }
@@ -36,7 +36,7 @@ void sub_80CB298(struct Sprite* sprite)
 
 void sub_80CB2D4(struct Sprite* sprite)
 {
-    GetAnimBankSpriteId(1);
+    GetAnimBattlerSpriteId(1);
     if (!sprite->data[2])
     {
         sprite->data[0] += 11;

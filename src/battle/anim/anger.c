@@ -19,13 +19,13 @@ void sub_80D09C0(struct Sprite* sprite)
     else
         bank = gAnimBankTarget;
 
-    if (GetBankSide(bank) == 1)
+    if (GetBattlerSide(bank) == 1)
     {
         gBattleAnimArgs[1] *= -1;
     }
 
-    sprite->pos1.x = GetBankPosition(bank, 2) + gBattleAnimArgs[1];
-    sprite->pos1.y = GetBankPosition(bank, 3) + gBattleAnimArgs[2];
+    sprite->pos1.x = GetBattlerSpriteCoord(bank, 2) + gBattleAnimArgs[1];
+    sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[2];
     if (sprite->pos1.y <= 7)
         sprite->pos1.y = 8;
 

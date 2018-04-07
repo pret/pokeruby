@@ -31,8 +31,8 @@ void sub_80D0178(struct Sprite* sprite)
     sprite->pos1.x += r7;
     sprite->pos1.y += r4;
     sprite->data[0] = 6;
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + r8;
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + r6;
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r8;
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + r6;
     sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, sub_80D020C);
 }

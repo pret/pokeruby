@@ -249,7 +249,7 @@ void ScrSpecial_TraderDoDecorationTrade(void)
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
     sub_81340A8(gSpecialVar_0x8006);
-    IsThereStorageSpaceForDecoration(gSpecialVar_0x8004);
+    GiveDecoration(gSpecialVar_0x8004);
     StringCopy(trader->unk5[gSpecialVar_0x8005], gSaveBlock2.playerName);
     trader->unk1[gSpecialVar_0x8005] = gSpecialVar_0x8006;
     sub_810993C();

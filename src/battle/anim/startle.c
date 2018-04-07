@@ -16,10 +16,10 @@ extern struct AffineAnimFrameCmd gUnknown_083D7A98;
 // opponent
 void sub_80D1E38(u8 taskId)
 {
-    u8 spriteId = GetAnimBankSpriteId(1);
+    u8 spriteId = GetAnimBattlerSpriteId(1);
     if (++gTasks[taskId].data[0] == 1)
     {
-        sub_80798F4(&gTasks[taskId], GetAnimBankSpriteId(1), &gUnknown_083D7A98);
+        sub_80798F4(&gTasks[taskId], GetAnimBattlerSpriteId(1), &gUnknown_083D7A98);
         gSprites[spriteId].pos2.x = 4;
     }
     else
@@ -37,10 +37,10 @@ void sub_80D1E38(u8 taskId)
 // player
 void sub_80D1EC8(u8 taskId)
 {
-    u8 spriteId = GetAnimBankSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(0);
     if (++gTasks[taskId].data[0] == 1)
     {
-        sub_80798F4(&gTasks[taskId], GetAnimBankSpriteId(0), &gUnknown_083D7A98);
+        sub_80798F4(&gTasks[taskId], GetAnimBattlerSpriteId(0), &gUnknown_083D7A98);
         gSprites[spriteId].pos2.x = 4;
     }
     else

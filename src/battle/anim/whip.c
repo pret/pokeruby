@@ -20,7 +20,7 @@ void sub_80CC810(struct Sprite* sprite)
 // unused, beta effect for diagonal sprite movement?
 void sub_80CC82C(struct Sprite* sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
@@ -37,7 +37,7 @@ void sub_80CC82C(struct Sprite* sprite)
 
 void sub_80CC884(struct Sprite* sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
         StartSpriteAnim(sprite, 1);
 
     sprite->callback = sub_80CC810;

@@ -548,7 +548,7 @@ bool8 ScrCmd_givedecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = IsThereStorageSpaceForDecoration(decoration);
+    gSpecialVar_Result = GiveDecoration(decoration);
     return FALSE;
 }
 

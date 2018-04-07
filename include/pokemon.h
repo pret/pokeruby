@@ -312,6 +312,8 @@ struct UnknownPokemonStruct
     /*0x2B*/u8 friendship;
 };
 
+#define BATTLE_STATS_NO 8
+
 struct BattlePokemon
 {
     /*0x00*/ u16 species;
@@ -329,7 +331,7 @@ struct BattlePokemon
     /*0x17*/ u32 spDefenseIV:5;
     /*0x17*/ u32 isEgg:1;
     /*0x17*/ u32 altAbility:1;
-    /*0x18*/ s8 statStages[8];
+    /*0x18*/ s8 statStages[BATTLE_STATS_NO];
     /*0x20*/ u8 ability;
     /*0x21*/ u8 type1;
     /*0x22*/ u8 type2;
@@ -630,5 +632,10 @@ struct Sprite *sub_80F7920(u16, u16, const u16 *);
 void BoxMonRestorePP(struct BoxPokemon *);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
+u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
+
+#if DEBUG
+void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *);
+#endif // DEBUG
 
 #endif // GUARD_POKEMON_H

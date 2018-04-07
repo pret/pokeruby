@@ -1912,7 +1912,7 @@ void debug_sub_8110D84(void)
         break;
     case 3:
         if (!UpdatePaletteFade())
-            SetMainCallback2(sub_805469C);
+            SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
         break;
     case 4:
         if (sub_80FAB60() != 0)

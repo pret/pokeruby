@@ -17,13 +17,13 @@ void sub_80CDF0C(struct Sprite* sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[2];
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[2];
     }
 
     sprite->data[0] = 0;

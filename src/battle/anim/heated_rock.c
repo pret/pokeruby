@@ -28,7 +28,7 @@ u16 sub_80D5940(u8 spriteId)
 {
     u16 var1 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y + gSprites[spriteId].centerToCornerVecY;
 
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
     {
         var1 = ((var1 << 16) + 0x4A0000) >> 16;
     }

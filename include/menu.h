@@ -4,10 +4,12 @@
 #include "task.h"
 #include "text.h"
 
+typedef bool8 (*MenuFunc)();
+
 struct MenuAction
 {
    const u8 *text;
-   u8 (*func)();
+   MenuFunc func;
 };
 
 struct MenuAction2

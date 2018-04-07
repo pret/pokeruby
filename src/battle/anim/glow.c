@@ -13,7 +13,7 @@ extern u8 gAnimBankTarget;
 
 extern u16 gUnknown_083D7A5C[5];
 
-extern struct INCBIN_U8 gBattleAnimSpritePalette_206;
+extern const u8 gBattleAnimSpritePalette_206[];
 
 // glow (a whitening effect where the Pokemon glows white in a cycle.)
 // Used in Heal Bell.

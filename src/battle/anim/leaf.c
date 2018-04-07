@@ -15,8 +15,8 @@ static void sub_80CAF6C(struct Sprite* sprite);
 
 void sub_80CAED8(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];
     sprite->data[2] = gBattleAnimArgs[2];
@@ -51,7 +51,7 @@ void sub_80CAF20(struct Sprite* sprite)
 
 void sub_80CAF6C(struct Sprite* sprite)
 {
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->pos2.x = -Sin(sprite->data[0], 0x19);
     }

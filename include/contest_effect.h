@@ -1,0 +1,6 @@
+#ifndef POKERUBY_GBA_CONTEST_EFFECT_H
+#define POKERUBY_GBA_CONTEST_EFFECT_H
+
+extern bool8 AreMovesContestCombo(u16, u16);
+
+#endif //POKERUBY_GBA_CONTEST_EFFECT_H

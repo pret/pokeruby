@@ -19,13 +19,13 @@ void sub_80CDD74(struct Sprite* sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2) + gBattleAnimArgs[1];
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[2];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[1];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[2];
     }
 
     sprite->data[0] = 0;
@@ -36,16 +36,16 @@ void sub_80CDD74(struct Sprite* sprite)
 
 void sub_80CDDDC(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2) + 0xFFD0;
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2) + 0xFFD0;
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     StoreSpriteCallbackInData(sprite, sub_80CDE78);
     sprite->callback = sub_8078600;
 }
 
 void sub_80CDE24(struct Sprite* sprite)
 {
-    sprite->pos1.x = sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2) + 0xFFD0 + gBattleAnimArgs[0];
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+    sprite->pos1.x = sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2) + 0xFFD0 + gBattleAnimArgs[0];
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     StartSpriteAnim(sprite, 1);
     sprite->data[0] = 0;
     sprite->data[1] = 0;

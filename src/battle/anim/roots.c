@@ -18,8 +18,8 @@ void sub_80CB59C(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
         sprite->pos2.x = gBattleAnimArgs[0];
         sprite->pos2.y = gBattleAnimArgs[1];
         sprite->subpriority = gBattleAnimArgs[2] + 30;
@@ -36,10 +36,10 @@ void sub_80CB59C(struct Sprite* sprite)
 
 void sub_80CB620(struct Sprite *sprite)
 {
-    s16 p1 = GetBankPosition(gAnimBankAttacker, 2);
-    s16 p2 = GetBankPosition(gAnimBankAttacker, 3);
-    s16 e1 = GetBankPosition(gAnimBankTarget, 2);
-    s16 e2 = GetBankPosition(gAnimBankTarget, 3);
+    s16 p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    s16 p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    s16 e1 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    s16 e2 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
     e1 -= p1;
     e2 -= p2;

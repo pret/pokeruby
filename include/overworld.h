@@ -138,7 +138,7 @@ void c2_exit_to_overworld_2_switch(void);
 void c2_exit_to_overworld_2_local(void);
 void c2_exit_to_overworld_2_link(void);
 // sub_805465C
-void sub_805469C(void);
+void c2_exit_to_overworld_1_sub_8080DEC(void);
 // sub_80546B8
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 void sub_80546F0(void);

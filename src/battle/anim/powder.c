@@ -23,7 +23,7 @@ void AnimMovePowderParticle(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
 
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         sprite->data[3] = -gBattleAnimArgs[4];
     }

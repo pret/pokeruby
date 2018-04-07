@@ -309,7 +309,7 @@ static void sub_8089E4C(u8 taskID)
     if (!gPaletteFade.active)
     {
         gLastFieldPokeMenuOpened = 0;
-        SetMainCallback2(sub_805469C);
+        SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
         DestroyTask(taskID);
     }
 }

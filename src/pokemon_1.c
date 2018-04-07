@@ -525,7 +525,7 @@ void CalculateMonStats(struct Pokemon *mon)
 }
 
 #if DEBUG
-void debug_sub_803F55C(struct Pokemon *mon)
+void Nakamura_NakaGenderTest_RecalcStats(struct Pokemon *mon)
 {
     s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
     s32 hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);

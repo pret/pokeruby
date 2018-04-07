@@ -1,5 +1,5 @@
 #include "global.h"
-#include "cute_sketch.h"
+#include "contest_painting_effects.h"
 #include "contest_painting.h"
 
 extern u16 (*gUnknown_03005DEC)[][32];

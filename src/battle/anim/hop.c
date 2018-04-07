@@ -92,8 +92,8 @@ void sub_80CB94C(struct Sprite* sprite)
     s16 e1;
     s16 e2;
     InitAnimSpritePos(sprite, 0);
-    e1 = GetBankPosition(gAnimBankTarget, 0);
-    e2 = GetBankPosition(gAnimBankTarget, 1);
+    e1 = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+    e2 = GetBattlerSpriteCoord(gAnimBankTarget, 1);
     if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)
     {
         sprite->data[6] = e1;
@@ -135,8 +135,8 @@ void sub_80CB9C4(struct Sprite* sprite)
 
 void sub_80CBA28(struct Sprite* sprite)
 {
-    s16 e = GetBankPosition(gAnimBankTarget, 1);
-    if (GetBankSide(gAnimBankTarget) == 0)
+    s16 e = GetBattlerSpriteCoord(gAnimBankTarget, 1);
+    if (GetBattlerSide(gAnimBankTarget) == 0)
     {
         sprite->data[6] = 0;
         sprite->data[7] = e + 10;

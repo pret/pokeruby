@@ -15,8 +15,8 @@ void sub_80CE09C(struct Sprite* sprite)
 {
     if (sprite->data[0] == 0)
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 0) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
         if (IsContest())
             sprite->pos1.y += 10;
         sprite->data[0]++;

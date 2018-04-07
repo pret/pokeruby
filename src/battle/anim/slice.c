@@ -17,9 +17,9 @@ static void AnimSliceStep(struct Sprite* sprite);
 // arg 2: slice direction; 0 = right-to-left, 1 = left-to-right
 void AnimCuttingSlice(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 1);
-    if (GetBankSide(gAnimBankTarget) == 0)
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 1);
+    if (GetBattlerSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;
@@ -48,28 +48,28 @@ void sub_80CC9BC(struct Sprite* sprite)
     switch (gBattleAnimArgs[3])
     {
     case 1:
-        a = GetBankPosition(gAnimBankTarget ^ 2, 0);
-        b = GetBankPosition(gAnimBankTarget ^ 2, 1);
+        a = GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 0);
+        b = GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 1);
         break;
     case 2:
-        a = GetBankPosition(gAnimBankTarget, 0);
-        b = GetBankPosition(gAnimBankTarget, 1);
+        a = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+        b = GetBattlerSpriteCoord(gAnimBankTarget, 1);
         if (IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
         {
-            a = (GetBankPosition(gAnimBankTarget ^ 2, 0) + a) / 2;
-            b = (GetBankPosition(gAnimBankTarget ^ 2, 1) + b) / 2;
+            a = (GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 0) + a) / 2;
+            b = (GetBattlerSpriteCoord(gAnimBankTarget ^ 2, 1) + b) / 2;
         }
         break;
     case 0:
     default:
-        a = GetBankPosition(gAnimBankTarget, 0);
-        b = GetBankPosition(gAnimBankTarget, 1);
+        a = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+        b = GetBattlerSpriteCoord(gAnimBankTarget, 1);
         break;
     }
 
     sprite->pos1.x = a;
     sprite->pos1.y = b;
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
         sprite->pos1.y += 8;
 
     sprite->callback = AnimSliceStep;

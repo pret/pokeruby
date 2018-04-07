@@ -915,11 +915,11 @@ sub_813F844: @ 813F844
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F88C
-	ldr r1, _0813F884 @ =gBattlePartyID
+	ldr r1, _0813F884 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -931,10 +931,10 @@ sub_813F844: @ 813F844
 	.align 2, 0
 _0813F87C: .4byte gBankSpriteIds
 _0813F880: .4byte gAnimBankAttacker
-_0813F884: .4byte gBattlePartyID
+_0813F884: .4byte gBattlerPartyIndexes
 _0813F888: .4byte gPlayerParty
 _0813F88C:
-	ldr r1, _0813F8CC @ =gBattlePartyID
+	ldr r1, _0813F8CC @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -965,20 +965,20 @@ _0813F89C:
 	beq _0813F958
 	b _0813F982
 	.align 2, 0
-_0813F8CC: .4byte gBattlePartyID
+_0813F8CC: .4byte gBattlerPartyIndexes
 _0813F8D0: .4byte gEnemyParty
 _0813F8D4: .4byte gTasks
 _0813F8D8:
 	ldr r5, _0813F950 @ =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	adds r1, r0, 0
 	lsls r1, 24
 	ldr r2, _0813F954 @ =gSprites
@@ -1238,14 +1238,14 @@ sub_813FA94: @ 813FA94
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1366,7 +1366,7 @@ _0813FBE0:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8079E90
@@ -1400,14 +1400,14 @@ _0813FBE0:
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x30]
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x10
@@ -1418,7 +1418,7 @@ _0813FBE0:
 	ldr r0, _0813FCAC @ =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _0813FCB0 @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1462,7 +1462,7 @@ sub_813FCBC: @ 813FCBC
 	lsrs r5, r0, 24
 	ldr r6, _0813FD1C @ =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _0813FD20 @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1519,7 +1519,7 @@ sub_813FD34: @ 813FD34
 	lsrs r5, r0, 24
 	ldr r6, _0813FD88 @ =gSprites
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r4, _0813FD8C @ =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
@@ -1535,7 +1535,7 @@ sub_813FD34: @ 813FD34
 	cmp r0, 0
 	bge _0813FD80
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -4619,7 +4619,7 @@ _08141562:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _081415A4
@@ -4697,7 +4697,7 @@ _08141606:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814163C
@@ -4739,7 +4739,7 @@ _08141654:
 	strh r1, [r0, 0x8]
 	ldr r0, _08141690 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -4817,7 +4817,7 @@ _081416EC:
 _081416F2:
 	ldr r0, _08141708 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5124,12 +5124,12 @@ _08141966:
 	ldrb r0, [r4, 0x8]
 	mov r8, r0
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0x1E
@@ -5247,7 +5247,7 @@ _08141A44:
 	cmp r0, 0
 	bne _08141A8C
 	mov r0, r8
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0
@@ -5483,11 +5483,11 @@ sub_8141C30: @ 8141C30
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	ldr r5, _08141CA4 @ =gBattleAnimArgs
 	lsrs r0, 24
@@ -5495,11 +5495,11 @@ sub_8141C30: @ 8141C30
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -5644,11 +5644,11 @@ sub_8141D7C: @ 8141D7C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _08141DA4 @ =gAnimBankAttacker
 	strb r0, [r1]
 	movs r0, 0x1
-	bl GetBankByIdentity
+	bl GetBattlerAtPosition
 	ldr r1, _08141DA8 @ =gAnimBankTarget
 	strb r0, [r1]
 	adds r0, r4, 0

@@ -1415,10 +1415,10 @@ void sub_805465C(void)
     c2_exit_to_overworld_2_switch();
 }
 
-void sub_805469C(void)
+void c2_exit_to_overworld_1_sub_8080DEC(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = atk17_seteffectsecondary;
+    gFieldCallback = sub_8080DEC;
     c2_exit_to_overworld_2_switch();
 }
 
