@@ -118,6 +118,7 @@ _0845DD95:
     .string "Deine BASIS-TASCHE ist voll.$"
 _0845DAFFEnd:
 	.size _0845DAFF, _0845DAFFEnd - _0845DAFF
+gUnknown_Debug_845DAE1End::
 
 gUnknown_Debug_845DDB2::
 	me_checkcompat gUnknown_Debug_845DDB2, 4, 4, 4, 0x80

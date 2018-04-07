@@ -490,7 +490,7 @@ int CountTrailingZeroBits(u32 value)
     return 0;
 }
 
-u16 CalcCRC16(u8 *data, int length)
+u16 CalcCRC16(const u8 *data, int length)
 {
     u16 i, j;
     u16 crc = 0x1121;

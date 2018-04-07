@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start debug_sub_813C404
-debug_sub_813C404:
-	push	{r4, r5, r6, lr}
-	add	r6, r0, #0
-	ldr	r5, ._1         @ gUnknown_Debug_845DDB2
-	ldr	r4, ._1 + 4     @ gUnknown_Debug_845DAE1
-	sub	r5, r5, r4
-	add	r1, r4, #0
-	add	r2, r5, #0
-	bl	memcpy
-	add	r0, r6, #0
-	add	r1, r4, #0
-	bl	unref_sub_812620C
-	add	r0, r5, #0
-	pop	{r4, r5, r6}
-	pop	{r1}
-	bx	r1
-._2:
-	.align	2, 0
-._1:
-	.word	gUnknown_Debug_845DDB2
-	.word	gUnknown_Debug_845DAE1
-
-	thumb_func_end debug_sub_813C404
-
 	thumb_func_start debug_sub_813C430
 debug_sub_813C430:
 	push	{r4, r5, r6, lr}
