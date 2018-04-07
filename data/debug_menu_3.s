@@ -169,6 +169,7 @@ _0845E3FE:
 	me_end
 _0845E3FEEnd:
 	.size _0845E3FE, _0845E3FEEnd - _0845E3FE
+gUnknown_Debug_845E3E0End::
 
 gUnknown_Debug_845E402::
 	me_checkcompat gUnknown_Debug_845E402, 0x4, 0x4, 0x4, 0x80
@@ -178,6 +179,7 @@ _0845E420:
 	me_end
 _0845E420End:
 	.size _0845E420, _0845E420End - _0845E420
+gUnknown_Debug_845E402End::
 
 gUnknown_Debug_845E422::
 	me_checkcompat gUnknown_Debug_845E422, 0x4, 0x4, 0x4, 0x80
@@ -187,6 +189,7 @@ _0845E440:
 	me_end
 _0845E440End:
 	.size _0845E440, _0845E440End - _0845E440
+gUnknown_Debug_845E422End::
 
 gUnknown_Debug_845E443::
 	me_checkcompat gUnknown_Debug_845E443, 0x4, 0x4, 0x4, 0x80
@@ -215,6 +218,7 @@ gUnknown_Debug_845E606::
 	me_checkcompat gUnknown_Debug_845E606, 0x4, 0x4, 0x4, 0x80
 	me_enableresetrtc
 	me_end
+gUnknown_Debug_845E606End::
 
 gUnknown_Debug_845E619::
 	me_checkcompat gUnknown_Debug_845E619, 0x4, 0x4, 0x4, 0x80
@@ -258,6 +262,7 @@ _0845E637End:
 	.size _0845E637, _0845E637End - _0845E637
 _0845E683End:
 	.size _0845E683, _0845E683End - _0845E683
+gUnknown_Debug_845E619End::
 
 gUnknown_Debug_845E712::
 	me_checkcompat gUnknown_Debug_845E712, 0x4, 0x4, 0x4, 0x80
@@ -288,6 +293,7 @@ _0845E75D:
 _0845E771:
 	.string "Es ist kein Platz für {STR_VAR_1}\n"
 	.string "vorhanden...$"
+gUnknown_Debug_845E712End::
 
 gUnknown_Debug_845E797::
 	me_checkcompat gUnknown_Debug_845E797, 0x4, 0x4, 0x4, 0x80
