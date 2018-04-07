@@ -1,8 +1,11 @@
 #include "global.h"
 #include "debug.h"
 #include "constants/items.h"
+#include "string_util.h"
+#include "new_game.h"
 #include "mystery_event_script.h"
 #include "berry.h"
+#include "mail_data.h"
 
 #if DEBUG
 
@@ -146,6 +149,46 @@ size_t debug_sub_813C5B4(u8 * dest)
     ClearEnigmaBerries();
     unref_sub_81261B4(dest, gUnknown_Debug_845DDB2);
     return size;
+}
+
+extern const u8 Str_842E240[];
+extern const u8 Str_842E248[];
+
+void debug_sub_813C638(struct Pokemon * mon, u16 species, u8 level, u16 itemId)
+{
+    u32 _itemId;
+    ZeroMonData(mon);
+    CreateMon(mon, species, level, 32, FALSE, 0, TRUE, 9999);
+    SetMonData(mon, MON_DATA_OT_NAME, Str_842E240);
+    SetMonData(mon, MON_DATA_NICKNAME, Str_842E248);
+    _itemId = itemId;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &_itemId);
+}
+
+void debug_sub_813C6AC(struct Pokemon *mon, struct MailStruct *mail)
+{
+    u16 itemId;
+    ClearMailStruct(mail);
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+    if (ItemIsMail(itemId))
+    {
+        u8 * name = mail->playerName;
+        u8 * id = mail->trainerId;
+        u8 nameBuf[8];
+        int i;
+
+        for (i = 0; i < 9; i++)
+            mail->words[i] = i + 1;
+
+        GetMonData(mon, MON_DATA_OT_NAME, nameBuf);
+        StringCopyN(name, nameBuf, OT_NAME_LENGTH + 1);
+
+        write_word_to_mem(GetMonData(mon, MON_DATA_OT_ID), id);
+
+        mail->species = SpeciesToMailSpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_PERSONALITY));
+        mail->itemId = itemId;
+
+    }
 }
 
 #endif // DEBUG
