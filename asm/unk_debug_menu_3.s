@@ -5,63 +5,6 @@
 
 	.text
 
-	thumb_func_start debug_sub_813C810
-debug_sub_813C810:
-	push	{r4, r5, r6, lr}
-	mov	r6, r8
-	push	{r6}
-	add	sp, sp, #0xffffffdc
-	add	r6, r0, #0
-	ldr	r5, ._31        @ gUnknown_Debug_845E443
-	ldr	r0, ._31 + 4    @ gUnknown_Debug_845E4EF
-	ldr	r4, ._31 + 8    @ gEnemyParty
-	sub	r0, r0, r5
-	mov	r8, r0
-	add	r0, r6, #0
-	add	r1, r5, #0
-	mov	r2, r8
-	bl	memcpy
-	add	r0, r4, #0
-	mov	r1, #0xc9
-	mov	r2, #0x15
-	mov	r3, #0x82
-	bl	debug_sub_813C638
-	add	r0, r4, #0
-	mov	r1, sp
-	bl	debug_sub_813C6AC
-	ldr	r0, ._31 + 12   @ gUnknown_Debug_845E467
-	add	r0, r6, r0
-	sub	r0, r0, r5
-	add	r1, r4, #0
-	mov	r2, #0x64
-	bl	memcpy
-	ldr	r0, ._31 + 16   @ gUnknown_Debug_845E4CB
-	add	r0, r6, r0
-	sub	r0, r0, r5
-	mov	r1, sp
-	mov	r2, #0x24
-	bl	memcpy
-	add	r0, r6, #0
-	add	r1, r5, #0
-	bl	unref_sub_812620C
-	mov	r0, r8
-	add	sp, sp, #0x24
-	pop	{r3}
-	mov	r8, r3
-	pop	{r4, r5, r6}
-	pop	{r1}
-	bx	r1
-._32:
-	.align	2, 0
-._31:
-	.word	gUnknown_Debug_845E443
-	.word	gUnknown_Debug_845E4EF
-	.word	gEnemyParty
-	.word	gUnknown_Debug_845E467
-	.word	gUnknown_Debug_845E4CB
-
-	thumb_func_end debug_sub_813C810
-
 	thumb_func_start debug_sub_813C888
 debug_sub_813C888:
 	push	{r4, r5, r6, lr}

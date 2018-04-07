@@ -322,6 +322,85 @@ __attribute__((naked)) size_t debug_sub_813C740(u8 * dest)
         "\t.word\tgUnknown_Debug_845E467\n"
         "\t.word\tgUnknown_Debug_845E4CB");
 }
-#endif
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+// same reason as before
+size_t debug_sub_813C810(u8 * dest)
+{
+    struct MailStruct mail;
+    size_t size = gUnknown_Debug_845E443End - gUnknown_Debug_845E443;
+    struct Pokemon *mon = gEnemyParty;
+
+    memcpy(dest, gUnknown_Debug_845E443, size);
+    debug_sub_813C638(mon, SPECIES_UNOWN, 5, ITEM_NONE);
+    debug_sub_813C6AC(mon, &mail);
+
+    // nonmatching pointer arithmetic
+    memcpy(gUnknown_Debug_845E467 - gUnknown_Debug_845E443 + dest, mon, sizeof(struct Pokemon));
+
+    memcpy(gUnknown_Debug_845E4CB - gUnknown_Debug_845E443 + dest, &mail, sizeof(struct MailStruct));
+
+    unref_sub_812620C(dest, gUnknown_Debug_845E443);
+
+    return size;
+}
+#else
+__attribute__((naked)) size_t debug_sub_813C810(u8 * dest)
+{
+    asm("\tpush\t{r4, r5, r6, lr}\n"
+        "\tmov\tr6, r8\n"
+        "\tpush\t{r6}\n"
+        "\tadd\tsp, sp, #0xffffffdc\n"
+        "\tadd\tr6, r0, #0\n"
+        "\tldr\tr5, ._31        @ gUnknown_Debug_845E443\n"
+        "\tldr\tr0, ._31 + 4    @ gUnknown_Debug_845E4EF\n"
+        "\tldr\tr4, ._31 + 8    @ gEnemyParty\n"
+        "\tsub\tr0, r0, r5\n"
+        "\tmov\tr8, r0\n"
+        "\tadd\tr0, r6, #0\n"
+        "\tadd\tr1, r5, #0\n"
+        "\tmov\tr2, r8\n"
+        "\tbl\tmemcpy\n"
+        "\tadd\tr0, r4, #0\n"
+        "\tmov\tr1, #0xc9\n"
+        "\tmov\tr2, #0x15\n"
+        "\tmov\tr3, #0x82\n"
+        "\tbl\tdebug_sub_813C638\n"
+        "\tadd\tr0, r4, #0\n"
+        "\tmov\tr1, sp\n"
+        "\tbl\tdebug_sub_813C6AC\n"
+        "\tldr\tr0, ._31 + 12   @ gUnknown_Debug_845E467\n"
+        "\tadd\tr0, r6, r0\n"
+        "\tsub\tr0, r0, r5\n"
+        "\tadd\tr1, r4, #0\n"
+        "\tmov\tr2, #0x64\n"
+        "\tbl\tmemcpy\n"
+        "\tldr\tr0, ._31 + 16   @ gUnknown_Debug_845E4CB\n"
+        "\tadd\tr0, r6, r0\n"
+        "\tsub\tr0, r0, r5\n"
+        "\tmov\tr1, sp\n"
+        "\tmov\tr2, #0x24\n"
+        "\tbl\tmemcpy\n"
+        "\tadd\tr0, r6, #0\n"
+        "\tadd\tr1, r5, #0\n"
+        "\tbl\tunref_sub_812620C\n"
+        "\tmov\tr0, r8\n"
+        "\tadd\tsp, sp, #0x24\n"
+        "\tpop\t{r3}\n"
+        "\tmov\tr8, r3\n"
+        "\tpop\t{r4, r5, r6}\n"
+        "\tpop\t{r1}\n"
+        "\tbx\tr1\n"
+        "._32:\n"
+        "\t.align\t2, 0\n"
+        "._31:\n"
+        "\t.word\tgUnknown_Debug_845E443\n"
+        "\t.word\tgUnknown_Debug_845E4EF\n"
+        "\t.word\tgEnemyParty\n"
+        "\t.word\tgUnknown_Debug_845E467\n"
+        "\t.word\tgUnknown_Debug_845E4CB");
+}
+#endif // NONMATCHING
 
 #endif // DEBUG
