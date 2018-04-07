@@ -1,6 +1,11 @@
 #ifndef GUARD_DEBUG_H
 #define GUARD_DEBUG_H
 
+struct UnkDebugMenu3Items {
+    const u8 * text;
+    size_t (*func)(u8 * dest);
+};
+
 // start_menu_debug
 void DebugMenu_8077048(void);
 
@@ -16,5 +21,9 @@ void CB2_StartSoundCheckMenu(void);
 
 // nakamura_debug_menu
 void NakaGenderTest(void);
+
+// unk debug menu 3
+extern const u8 gUnknown_Debug_842E350;
+extern const struct UnkDebugMenu3Items gUnknown_Debug_842E2D0[];
 
 #endif // GUARD_DEBUG_H

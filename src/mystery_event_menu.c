@@ -15,6 +15,7 @@
 #include "text.h"
 #include "title_screen.h"
 #include "ewram.h"
+#include "debug.h"
 
 static EWRAM_DATA u8 gUnknown_02039338 = 0;
 
@@ -347,8 +348,6 @@ static const u8 Str_843DA84[] = _("LR:　select　A:　send。");
 static const u8 Str_843DA98[] = _("sending。。。");
 static const u8 Str_843DAA3[] = _("completed。");
 
-extern const struct {const u8 *text; void (*func)();} gUnknown_Debug_842E2D0[];
-extern const u8 gUnknown_Debug_842E350;
 
 void debug_sub_815D1D8();
 

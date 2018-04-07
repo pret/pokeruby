@@ -323,10 +323,7 @@ const u8 Str_842E2B7[] = _("ball");
 const u8 Str_842E2BC[] = _("cheri　berry");
 const u8 Str_842E2C8[] = _("TM01");
 
-const struct {
-    const u8 * name;
-    size_t (*func)(u8 * dest);
-} gUnknown_Debug_842E2D0[] = {
+const struct UnkDebugMenu3Items gUnknown_Debug_842E2D0[] = {
     {Str_842E264, debug_sub_813C404},
     {Str_842E26B, debug_sub_813C810},
     {Str_842E26E, debug_sub_813C888},
@@ -347,22 +344,19 @@ const struct {
 
 extern u8 gUnknown_Debug_845E306[];
 
-const struct {
-    u8 unk0;
-    u8 *scripts[10];
-} gUnknown_Debug_842E350 = {
-    0x10, {
-        gUnknown_Debug_845DAE1,
-        gUnknown_Debug_845DDB2,
-        gUnknown_Debug_845E306,
-        gUnknown_Debug_845E3E0,
-        gUnknown_Debug_845E3E0,
-        gUnknown_Debug_845E402,
-        gUnknown_Debug_845E402,
-        gUnknown_Debug_845E422,
-        gUnknown_Debug_845E422,
-        gUnknown_Debug_845E443
-    }
+const u8 gUnknown_Debug_842E350 = 16;
+
+u8 *const gUnknown_Debug_842E354[] = {
+    gUnknown_Debug_845DAE1,
+    gUnknown_Debug_845DDB2,
+    gUnknown_Debug_845E306,
+    gUnknown_Debug_845E3E0,
+    gUnknown_Debug_845E3E0,
+    gUnknown_Debug_845E402,
+    gUnknown_Debug_845E402,
+    gUnknown_Debug_845E422,
+    gUnknown_Debug_845E422,
+    gUnknown_Debug_845E443
 };
 
 #endif // DEBUG
