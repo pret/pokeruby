@@ -10,6 +10,8 @@
 #include "berry.h"
 #include "mail_data.h"
 
+const u8 Str_842E238[] = _("タマゴ");
+
 #if DEBUG
 
 extern u8 gUnknown_Debug_845DAE1[];
@@ -129,7 +131,7 @@ extern u8 gUnknown_Debug_845DDB2[];
 extern u8 gUnknown_Debug_845DDB2End[];
 extern u8 gUnknown_Debug_845DDD6[];
 
-extern const u8 Str_842E23C[]; //static const u8 Str_842E23C[] = _("ガイブ");
+const u8 Str_842E23C[] = _("ガイブ");
 
 size_t debug_sub_813C5B4(u8 * dest)
 {
@@ -154,8 +156,8 @@ size_t debug_sub_813C5B4(u8 * dest)
     return size;
 }
 
-extern const u8 Str_842E240[];
-extern const u8 Str_842E248[];
+const u8 Str_842E240[] = _("ENGLISH");
+const u8 Str_842E248[] = _("TOURNAMENT");
 
 void debug_sub_813C638(struct Pokemon * mon, u16 species, u8 level, u16 itemId)
 {
@@ -198,7 +200,6 @@ extern u8 gUnknown_Debug_845E443[];
 extern u8 gUnknown_Debug_845E443End[];
 extern u8 gUnknown_Debug_845E467[];
 extern u8 gUnknown_Debug_845E4CB[];
-extern const u8 Str_842E238[];
 
 size_t debug_sub_813C740(u8 * dest)
 {
@@ -231,7 +232,6 @@ size_t debug_sub_813C740(u8 * dest)
     return size;
 }
 
-// same reason as before
 size_t debug_sub_813C810(u8 * dest)
 {
     struct MailStruct mail;
@@ -285,7 +285,8 @@ void debug_sub_813C904(void)
 extern u8 gUnknown_Debug_845E4EF[];
 extern u8 gUnknown_Debug_845E4EFEnd[];
 extern u8 gUnknown_Debug_845E506[];
-extern const u8 Str_842E253[];
+
+const u8 Str_842E253[] = _("　そら　　カードイー");
 
 size_t debug_sub_813C93C(u8 * dest)
 {
@@ -303,5 +304,65 @@ size_t debug_sub_813C93C(u8 * dest)
 
     return size;
 }
+
+const u8 Str_842E25E[] = _("ポケコッコ");
+const u8 Str_842E264[] = _("ticket");
+const u8 Str_842E26B[] = _("{PKMN}");
+const u8 Str_842E26E[] = _("wrong　{PKMN}");
+const u8 Str_842E277[] = _("ribbon");
+const u8 Str_842E27E[] = _("DEX");
+const u8 Str_842E282[] = _("message");
+const u8 Str_842E28A[] = _("egg");
+const u8 Str_842E28E[] = _("RAM　seed");
+const u8 Str_842E297[] = _("trainer");
+const u8 Str_842E29F[] = _("clock");
+const u8 Str_842E2A5[] = _("item");
+const u8 Str_842E2AA[] = _("goods");
+const u8 Str_842E2B0[] = _("potion");
+const u8 Str_842E2B7[] = _("ball");
+const u8 Str_842E2BC[] = _("cheri　berry");
+const u8 Str_842E2C8[] = _("TM01");
+
+const struct {
+    const u8 * name;
+    size_t (*func)(u8 * dest);
+} gUnknown_Debug_842E2D0[] = {
+    {Str_842E264, debug_sub_813C404},
+    {Str_842E26B, debug_sub_813C810},
+    {Str_842E26E, debug_sub_813C888},
+    {Str_842E277, debug_sub_813C430},
+    {Str_842E27E, debug_sub_813C488},
+    {Str_842E282, debug_sub_813C45C},
+    {Str_842E28A, debug_sub_813C740},
+    {Str_842E28E, debug_sub_813C5B4},
+    {Str_842E297, debug_sub_813C93C},
+    {Str_842E29F, debug_sub_813C4B4},
+    {Str_842E2A5, debug_sub_813C4D4},
+    {Str_842E2AA, debug_sub_813C500},
+    {Str_842E2B0, debug_sub_813C580},
+    {Str_842E2B7, debug_sub_813C58C},
+    {Str_842E2BC, debug_sub_813C598},
+    {Str_842E2C8, debug_sub_813C5A4}
+};
+
+extern u8 gUnknown_Debug_845E306[];
+
+const struct {
+    u8 unk0;
+    u8 *scripts[10];
+} gUnknown_Debug_842E350 = {
+    0x10, {
+        gUnknown_Debug_845DAE1,
+        gUnknown_Debug_845DDB2,
+        gUnknown_Debug_845E306,
+        gUnknown_Debug_845E3E0,
+        gUnknown_Debug_845E3E0,
+        gUnknown_Debug_845E402,
+        gUnknown_Debug_845E402,
+        gUnknown_Debug_845E422,
+        gUnknown_Debug_845E422,
+        gUnknown_Debug_845E443
+    }
+};
 
 #endif // DEBUG
