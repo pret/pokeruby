@@ -1,6 +1,6 @@
 #include "global.h"
 #include "contest_painting.h"
-#include "cute_sketch.h"
+#include "contest_painting_effects.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"

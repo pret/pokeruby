@@ -10,9 +10,9 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern struct INCBIN_U8 gAttractTilemap;
-extern struct INCBIN_U8 gAttractGfx;
-extern struct INCBIN_U8 gAttractPal;
+extern const u8 gAttractTilemap[];
+extern const u8 gAttractGfx[];
+extern const u8 gAttractPal[];
 
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
