@@ -23,7 +23,7 @@
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;
 extern u8 gUnknown_020384F0;
-extern struct UnknownPokemonStruct2 gUnknown_02023A00[3];
+extern struct UnknownPokemonStruct2 gMultiPartnerParty[3];
 extern u8 gUnknown_0202E8F6;
 extern struct Pokemon gUnknown_030042FC[];
 extern const u16 gBattleTowerBannedSpecies[];
@@ -530,26 +530,26 @@ static void BattleTowerEntryMenuCallback_Exit(u8 taskId)
 
 #if DEBUG
 
-void debug_sub_81381B4(void)
+void Debug_CopyLastThreePartyMonsToMultiPartnerParty(void)
 {
     u8 i;
     
-    memset(gUnknown_02023A00, 0, sizeof(gUnknown_02023A00));
+    memset(gMultiPartnerParty, 0, sizeof(gMultiPartnerParty));
     for (i = 0; i < 3; i++)
     {
-        gUnknown_02023A00[i].species = GetMonData(&gPlayerParty[3 + i], MON_DATA_SPECIES2);
-        if (gUnknown_02023A00[i].species != 0)
+        gMultiPartnerParty[i].species = GetMonData(&gPlayerParty[3 + i], MON_DATA_SPECIES2);
+        if (gMultiPartnerParty[i].species != 0)
         {
-            gUnknown_02023A00[i].level = GetMonData(&gPlayerParty[3 + i], MON_DATA_LEVEL);
-            gUnknown_02023A00[i].hp = GetMonData(&gPlayerParty[3 + i], MON_DATA_HP);
-            gUnknown_02023A00[i].maxhp = GetMonData(&gPlayerParty[3 + i], MON_DATA_MAX_HP);
-            gUnknown_02023A00[i].status = GetMonData(&gPlayerParty[3 + i], MON_DATA_STATUS);
-            gUnknown_02023A00[i].heldItem = GetMonData(&gPlayerParty[3 + i], MON_DATA_HELD_ITEM);
-            gUnknown_02023A00[i].personality = GetMonData(&gPlayerParty[3 + i], MON_DATA_PERSONALITY);
-            gUnknown_02023A00[i].gender = GetMonGender(&gPlayerParty[3 + i]);
-            GetMonData(&gPlayerParty[3 + i], MON_DATA_NICKNAME, gUnknown_02023A00[i].nickname);
-            Text_StripExtCtrlCodes(gUnknown_02023A00[i].nickname);
-            gUnknown_02023A00[i].language = GetMonData(&gPlayerParty[3 + i], MON_DATA_LANGUAGE);
+            gMultiPartnerParty[i].level = GetMonData(&gPlayerParty[3 + i], MON_DATA_LEVEL);
+            gMultiPartnerParty[i].hp = GetMonData(&gPlayerParty[3 + i], MON_DATA_HP);
+            gMultiPartnerParty[i].maxhp = GetMonData(&gPlayerParty[3 + i], MON_DATA_MAX_HP);
+            gMultiPartnerParty[i].status = GetMonData(&gPlayerParty[3 + i], MON_DATA_STATUS);
+            gMultiPartnerParty[i].heldItem = GetMonData(&gPlayerParty[3 + i], MON_DATA_HELD_ITEM);
+            gMultiPartnerParty[i].personality = GetMonData(&gPlayerParty[3 + i], MON_DATA_PERSONALITY);
+            gMultiPartnerParty[i].gender = GetMonGender(&gPlayerParty[3 + i]);
+            GetMonData(&gPlayerParty[3 + i], MON_DATA_NICKNAME, gMultiPartnerParty[i].nickname);
+            Text_StripExtCtrlCodes(gMultiPartnerParty[i].nickname);
+            gMultiPartnerParty[i].language = GetMonData(&gPlayerParty[3 + i], MON_DATA_LANGUAGE);
         }
     }
 }
@@ -591,9 +591,9 @@ static void sub_81228E8(u8 a)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != 0)
             CreatePartyMenuMonIcon(a, i, 3, &gPlayerParty[i]);
-        if (gUnknown_02023A00[i].species != 0)
+        if (gMultiPartnerParty[i].species != 0)
         {
-            CreateMonIcon_LinkMultiBattle(a, i + 3, 3, &gUnknown_02023A00[i]);
+            CreateMonIcon_LinkMultiBattle(a, i + 3, 3, &gMultiPartnerParty[i]);
             sub_806D50C(a, i + 3);
         }
     }
@@ -611,8 +611,8 @@ static void sub_8122950(u8 a)
 
             CreateHeldItemIcon_806DCD4(a, i, item);
         }
-        if (gUnknown_02023A00[i].species != 0)
-            CreateHeldItemIcon_806DCD4(a, i + 3, gUnknown_02023A00[i].heldItem);
+        if (gMultiPartnerParty[i].species != 0)
+            CreateHeldItemIcon_806DCD4(a, i + 3, gMultiPartnerParty[i].heldItem);
     }
 }
 
@@ -644,9 +644,9 @@ void HandleLinkMultiBattlePartyMenu(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].data[0] = 30;
-        sub_806D4AC(taskId, gUnknown_02023A00[0].species, 0);
-        sub_806D4AC(taskId, gUnknown_02023A00[1].species, 1);
-        sub_806D4AC(taskId, gUnknown_02023A00[2].species, 2);
+        sub_806D4AC(taskId, gMultiPartnerParty[0].species, 0);
+        sub_806D4AC(taskId, gMultiPartnerParty[1].species, 1);
+        sub_806D4AC(taskId, gMultiPartnerParty[2].species, 2);
         gTasks[taskId].func = sub_8122AB8;
         ewram1B000.unk261 = 1;
     }
@@ -654,7 +654,7 @@ void HandleLinkMultiBattlePartyMenu(u8 taskId)
 
 static void sub_8122AB8(u8 taskId)
 {
-    sub_806D3B4(taskId, gUnknown_02023A00[1].species, gUnknown_02023A00[2].species);
+    sub_806D3B4(taskId, gMultiPartnerParty[1].species, gMultiPartnerParty[2].species);
     if (gTasks[taskId].data[0] == 0)
     {
         gTasks[taskId].func = sub_8122B10;
@@ -669,25 +669,25 @@ static void sub_8122B10(u8 taskId)
 
     for (i = 0; i < 3; i++)
     {
-        if (gUnknown_02023A00[i].species != 0)
+        if (gMultiPartnerParty[i].species != 0)
         {
             u8 r2;
 
-            PartyMenuDoPrintHP(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
-            if (gUnknown_02023A00[i].hp == 0)
+            PartyMenuDoPrintHP(i + 3, 3, gMultiPartnerParty[i].hp, gMultiPartnerParty[i].maxhp);
+            if (gMultiPartnerParty[i].hp == 0)
                 r2 = 7;
             else
-                r2 = pokemon_ailments_get_primary(gUnknown_02023A00[i].status);
+                r2 = pokemon_ailments_get_primary(gMultiPartnerParty[i].status);
             if (r2 != 0)
                 PartyMenuPutStatusTilemap(i + 3, 3, r2 - 1);
             else
-                PartyMenuDoPrintLevel(i + 3, 3, gUnknown_02023A00[i].level);
-            PartyMenuDoPrintGenderIcon(gUnknown_02023A00[i].species, gUnknown_02023A00[i].gender, 3, i + 3, gUnknown_02023A00[i].nickname);
-            StringCopy(gStringVar1, gUnknown_02023A00[i].nickname);
+                PartyMenuDoPrintLevel(i + 3, 3, gMultiPartnerParty[i].level);
+            PartyMenuDoPrintGenderIcon(gMultiPartnerParty[i].species, gMultiPartnerParty[i].gender, 3, i + 3, gMultiPartnerParty[i].nickname);
+            StringCopy(gStringVar1, gMultiPartnerParty[i].nickname);
             StringGetEnd10(gStringVar1);
             SanitizeNameString(gStringVar1);
             PartyMenuDoPrintMonNickname(i + 3, 3, gStringVar1);
-            PartyMenuDoDrawHPBar(i + 3, 3, gUnknown_02023A00[i].hp, gUnknown_02023A00[i].maxhp);
+            PartyMenuDoDrawHPBar(i + 3, 3, gMultiPartnerParty[i].hp, gMultiPartnerParty[i].maxhp);
         }
     }
     gTasks[taskId].func = sub_8122C18;

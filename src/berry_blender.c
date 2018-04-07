@@ -1921,14 +1921,14 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
             r6++;
     }
     if (r6 == 5 || a3 > 3)
-        return 12;
+        return PBLOCK_CLR_BLACK;
     for (i = 0; i < playersNo; i++)
     {
         for (r6 = 0; r6 < playersNo; r6++)
         {
             if (berries[i].itemID == berries[r6].itemID && i != r6
                 && (berries[i].itemID != ITEM_ENIGMA_BERRY || sub_80502A4(berries, i, r6)))
-                    return 12;
+                    return PBLOCK_CLR_BLACK;
         }
     }
     r2 = 0;
@@ -1938,24 +1938,24 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
             r2++;
     }
     if (r2 > 3)
-        return 13;
+        return PBLOCK_CLR_WHITE;
     if (r2 == 3)
-        return 11;
+        return PBLOCK_CLR_GRAY;
     for (i = 0; i < 5; i++)
     {
         if (vars[i] > 50)
-            return 14;
+            return PBLOCK_CLR_GOLD;
     }
     if (r2 == 1 && vars[0] > 0)
-        return 1;
+        return PBLOCK_CLR_RED;
     if (r2 == 1 && vars[1] > 0)
-        return 2;
+        return PBLOCK_CLR_BLUE;
     if (r2 == 1 && vars[2] > 0)
-        return 3;
+        return PBLOCK_CLR_PINK;
     if (r2 == 1 && vars[3] > 0)
-        return 4;
+        return PBLOCK_CLR_GREEN;
     if (r2 == 1 && vars[4] > 0)
-        return 5;
+        return PBLOCK_CLR_YELLOW;
     if (r2 == 2)
     {
         s32 var = 0;
@@ -1967,28 +1967,28 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
         if (vars[gUnknown_03000520[0]] >= vars[gUnknown_03000520[1]])
         {
             if (gUnknown_03000520[0] == 0)
-                return (gUnknown_03000520[1] << 16) | 6;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_PURPLE;
             if (gUnknown_03000520[0] == 1)
-                return (gUnknown_03000520[1] << 16) | 7;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_INDIGO;
             if (gUnknown_03000520[0] == 2)
-                return (gUnknown_03000520[1] << 16) | 8;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_BROWN;
             if (gUnknown_03000520[0] == 3)
-                return (gUnknown_03000520[1] << 16) | 9;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_LITEBLUE;
             if (gUnknown_03000520[0] == 4)
-                return (gUnknown_03000520[1] << 16) | 10;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_OLIVE;
         }
         else
         {
             if (gUnknown_03000520[1] == 0)
-                return (gUnknown_03000520[0] << 16) | 6;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_PURPLE;
             if (gUnknown_03000520[1] == 1)
-                return (gUnknown_03000520[0] << 16) | 7;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_INDIGO;
             if (gUnknown_03000520[1] == 2)
-                return (gUnknown_03000520[0] << 16) | 8;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_BROWN;
             if (gUnknown_03000520[1] == 3)
-                return (gUnknown_03000520[0] << 16) | 9;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_LITEBLUE;
             if (gUnknown_03000520[1] == 4)
-                return (gUnknown_03000520[0] << 16) | 10;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_OLIVE;
         }
     }
     return 0;
@@ -3108,7 +3108,7 @@ bool8 Blender_PrintBlendingResults(void)
 #endif
         MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        sub_810CA34(&pokeblock);
+        GivePokeblock(&pokeblock);
         gBerryBlenderData->field_0++;
         break;
     case 6:

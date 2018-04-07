@@ -326,7 +326,7 @@ void sub_8080DC4(u8 taskId)
     }
 }
 
-void atk17_seteffectsecondary(void)
+void sub_8080DEC(void)
 {
     pal_fill_black();
     CreateStartMenuTask(sub_8080DC4);

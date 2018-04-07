@@ -3803,7 +3803,7 @@ void FeebasSeedRng(u16 seed)
 }
 
 #if DEBUG
-u16 debug_sub_8092344(u8 arg0)
+u16 FeebasDebug_GetTrueNumberOfWaterTilesInMapThird(u8 arg0)
 {
     if (arg0 == 0)
         return 131;
