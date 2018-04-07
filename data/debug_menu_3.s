@@ -206,6 +206,7 @@ gUnknown_Debug_845E4CB::
 	.space 36
 _0845E461End:
 	.size _0845E461, _0845E461End - _0845E461
+gUnknown_Debug_845E443End::
 
 gUnknown_Debug_845E4EF::
 	me_checkcompat gUnknown_Debug_845E4EF, 0x4, 0x4, 0x4, 0x80
@@ -271,8 +272,6 @@ gUnknown_Debug_845E712::
 _0845E730:
 	me_runscript _0845E736
 	me_end
-_0845E730End:
-	.size _0845E730, _0845E730End - _0845E730
 
 _0845E736:
 	setvaddress _0845E736
@@ -294,6 +293,8 @@ _0845E75D:
 _0845E771:
 	.string "Es ist kein Platz für {STR_VAR_1}\n"
 	.string "vorhanden...$"
+_0845E730End:
+	.size _0845E730, _0845E730End - _0845E730
 gUnknown_Debug_845E712End::
 
 gUnknown_Debug_845E797::
