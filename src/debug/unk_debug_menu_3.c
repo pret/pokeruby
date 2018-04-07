@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "debug.h"
+#include "constants/items.h"
 #include "mystery_event_script.h"
 
 extern const u8 gUnknown_Debug_845DAE1[];
@@ -78,6 +79,43 @@ size_t debug_sub_813C500(void * dest)
     memcpy(dest, gUnknown_Debug_845E712, size);
     unref_sub_812620C(dest, gUnknown_Debug_845E712);
     return size;
+}
+
+extern const u8 gUnknown_Debug_845E797[];
+extern const u8 gUnknown_Debug_845E797End[];
+extern const u8 gUnknown_Debug_845E7B5[];
+
+size_t debug_sub_813C52C(void * dest, u16 itemId)
+{
+    u8 * ptr;
+    size_t size = gUnknown_Debug_845E797End - gUnknown_Debug_845E797;
+    memcpy(dest, gUnknown_Debug_845E797, size);
+    ptr = gUnknown_Debug_845E7B5 - gUnknown_Debug_845E797 + dest;
+    ptr += 3;
+    ptr[0] = itemId;
+    ptr[1] = itemId >> 8;
+    unref_sub_812620C(dest, gUnknown_Debug_845E797);
+    return size;
+}
+
+size_t debug_sub_813C580(void * dest)
+{
+    return debug_sub_813C52C(dest, ITEM_POTION);
+}
+
+size_t debug_sub_813C58C(void * dest)
+{
+    return debug_sub_813C52C(dest, ITEM_POKE_BALL);
+}
+
+size_t debug_sub_813C598(void * dest)
+{
+    return debug_sub_813C52C(dest, ITEM_CHERI_BERRY);
+}
+
+size_t debug_sub_813C5A4(void * dest)
+{
+    return debug_sub_813C52C(dest, ITEM_TM01_FOCUS_PUNCH);
 }
 
 #endif // DEBUG

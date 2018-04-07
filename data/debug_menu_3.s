@@ -303,8 +303,6 @@ gUnknown_Debug_845E7B5::
 	me_end
 gUnknown_Debug_845E7B5End:
 	.size gUnknown_Debug_845E7B5, gUnknown_Debug_845E7B5End - gUnknown_Debug_845E7B5
-
-gUnknown_Debug_845E7BB::
-	.byte 0x00
+gUnknown_Debug_845E797End::
 
 .endif
