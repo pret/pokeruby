@@ -59,7 +59,7 @@ s8 Menu_ProcessInputNoWrap(void);
 void sub_807274C(u8, u8, u8, u8, const struct MenuAction[], u8, u32);
 s8 Menu_ProcessInputGridLayout(void);
 u8 Menu_GetColumnXCoord(u8);
-void Menu_PrintItems(u8, u8, u8, const struct MenuAction[]);
+void Menu_PrintItems(u8, u8, u8, const void *);
 void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order);
 void InitYesNoMenu(u8, u8, u8);
 void DisplayYesNoMenu(u8, u8, u32);

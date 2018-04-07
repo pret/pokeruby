@@ -485,201 +485,72 @@ void DebugMenu_8076D6C(u8 taskId)
     }
 }
 
-__attribute__((naked))
-u8 DebugMenu_8076E18()
+u8 DebugMenu_8076E18(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8076B4C\n"
-        "	ldr	r0, ._67        @ DebugMenu_8076D6C\n"
-        "	mov	r1, #0xa\n"
-        "	bl	CreateTask\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._68:\n"
-        "	.align	2, 0\n"
-        "._67:\n"
-        "	.word	DebugMenu_8076D6C+1\n"
-        "\n"
-    );
+    debug_sub_8076B4C();
+    CreateTask(DebugMenu_8076D6C, 10);
+    return 0;
 }
 
-__attribute__((naked))
-void DebugMenu_8076E30()
+void DebugMenu_8076E30(u8 taskId)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r3, r0, #0x18\n"
-        "	lsl	r0, r3, #0x2\n"
-        "	add	r0, r0, r3\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._73        @ gTasks\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r1, [r4, r0]\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._69	@cond_branch\n"
-        "	cmp	r1, #0x1\n"
-        "	bgt	._70	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	beq	._71	@cond_branch\n"
-        "	b	._86\n"
-        "._74:\n"
-        "	.align	2, 0\n"
-        "._73:\n"
-        "	.word	gTasks+0x8\n"
-        "._70:\n"
-        "	cmp	r1, #0x2\n"
-        "	beq	._75	@cond_branch\n"
-        "	b	._86\n"
-        "._71:\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._78        @ Str_839BD5A\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	b	._77\n"
-        "._79:\n"
-        "	.align	2, 0\n"
-        "._78:\n"
-        "	.word	Str_839BD5A\n"
-        "._69:\n"
-        "	ldr	r0, ._82        @ gMain\n"
-        "	ldrh	r2, [r0, #0x2e]\n"
-        "	and	r1, r1, r2\n"
-        "	cmp	r1, #0\n"
-        "	beq	._80	@cond_branch\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	bl	sub_813B79C\n"
-        "	ldr	r0, ._82 + 4    @ Str_839BD7D\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0x49\n"
-        "	bl	PlaySE\n"
-        "._77:\n"
-        "	ldrh	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r4]\n"
-        "	b	._86\n"
-        "._83:\n"
-        "	.align	2, 0\n"
-        "._82:\n"
-        "	.word	gMain\n"
-        "	.word	Str_839BD7D\n"
-        "._80:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	._86	@cond_branch\n"
-        "	add	r0, r3, #0\n"
-        "	bl	DestroyTask\n"
-        "	bl	DoSoftReset\n"
-        "	b	._86\n"
-        "._75:\n"
-        "	ldr	r0, ._87        @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._86	@cond_branch\n"
-        "	add	r0, r3, #0\n"
-        "	bl	DestroyTask\n"
-        "	bl	DoSoftReset\n"
-        "._86:\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._88:\n"
-        "	.align	2, 0\n"
-        "._87:\n"
-        "	.word	gMain\n"
-        "\n"
-    );
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+        case 0:
+            Menu_DisplayDialogueFrame();
+            Menu_PrintText(Str_839BD5A, 2, 15);
+            data[0]++;
+            break;
+        case 1:
+            if (gMain.newKeys & A_BUTTON)
+            {
+                Menu_DisplayDialogueFrame();
+                sub_813B79C();
+                Menu_PrintText(Str_839BD7D, 2, 15);
+                PlaySE(SE_PINPON);
+                data[0]++;
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                DestroyTask(taskId);
+                DoSoftReset(); // noreturn
+            }
+            break;
+        case 2:
+            if (gMain.newKeys & A_BUTTON)
+            {
+                DestroyTask(taskId);
+                DoSoftReset(); // noreturn
+            }
+            break;
+    }
 }
 
-__attribute__((naked))
-u8 DebugMenu_8076EDC()
+u8 DebugMenu_8076EDC(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8076B4C\n"
-        "	ldr	r0, ._89        @ DebugMenu_8076E30\n"
-        "	mov	r1, #0xa\n"
-        "	bl	CreateTask\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._90:\n"
-        "	.align	2, 0\n"
-        "._89:\n"
-        "	.word	DebugMenu_8076E30+1\n"
-        "\n"
-    );
+    debug_sub_8076B4C();
+    CreateTask(DebugMenu_8076E30, 10);
+    return 0;
 }
 
-__attribute__((naked))
-void DebugMenu_8076EF4()
+extern const struct {
+    const u8 * text;
+    u32 flags;
+} gUnknown_Debug_839BDC4[8];
+
+void DebugMenu_8076EF4(void)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0xb\n"
-        "	mov	r3, #0x11\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r4, ._93        @ gUnknown_Debug_839BDC4\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x8\n"
-        "	add	r3, r4, #0\n"
-        "	bl	Menu_PrintItems\n"
-        "	mov	r5, #0x0\n"
-        "	add	r4, r4, #0x4\n"
-        "._92:\n"
-        "	lsl	r0, r5, #0x3\n"
-        "	add	r0, r0, r4\n"
-        "	ldr	r1, [r0]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r1, r1, r0\n"
-        "	mov	r0, #0xb6\n"
-        "	cmp	r1, #0\n"
-        "	bne	._91	@cond_branch\n"
-        "	mov	r0, #0xb5\n"
-        "._91:\n"
-        "	lsl	r2, r5, #0x1\n"
-        "	add	r2, r2, #0x1\n"
-        "	lsl	r2, r2, #0x18\n"
-        "	lsr	r2, r2, #0x18\n"
-        "	mov	r1, #0xa\n"
-        "	bl	sub_8071F60\n"
-        "	add	r0, r5, #1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	cmp	r5, #0x7\n"
-        "	bls	._92	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x9\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x8\n"
-        "	bl	InitMenu\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._94:\n"
-        "	.align	2, 0\n"
-        "._93:\n"
-        "	.word	gUnknown_Debug_839BDC4\n"
-        "\n"
-    );
+    u8 i;
+
+    Menu_DrawStdWindowFrame(0, 0, 11, 17);
+    Menu_PrintItems(2, 1, ARRAY_COUNT(gUnknown_Debug_839BDC4), gUnknown_Debug_839BDC4);
+    for (i = 0; i < ARRAY_COUNT(gUnknown_Debug_839BDC4); i++)
+    {
+        sub_8071F60((gUnknown_Debug_839BDC4[i].flags & 1) == MALE ? CHAR_MALE : CHAR_FEMALE, 10, 2 * i + 1);
+    }
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_839BDC4), 0, 9);
 }
 
 __attribute__((naked))

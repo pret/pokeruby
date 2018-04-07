@@ -581,12 +581,12 @@ u8 Menu_GetColumnXCoord(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
+void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const void * menuItems)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[i].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[i].text, left, top + 2 * i);
 }
 
 void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
