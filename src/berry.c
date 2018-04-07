@@ -1085,7 +1085,7 @@ extern u8 gUnknown_Debug_839B6CE[];
 static const u8 gUnknown_Debug_083F7F84[] = _("そとから　きた　きのみ");
 static const u8 gUnknown_Debug_083F7F90[] = _("ただいま　かいはつちゅう");
 
-void debug_sub_80C2C18(u8 *name, u8 holdEffect, u8 holdEffectParam)
+void debug_sub_80C2C18(const u8 *name, u8 holdEffect, u8 holdEffectParam)
 {
     s32 i;
 

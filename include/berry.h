@@ -23,6 +23,8 @@ enum
     BERRY_STAGE_SPARKLING = 0xFF,
 };
 
+void ClearEnigmaBerries(void);
+void debug_sub_80C2C18(const u8 *name, u8 holdEffect, u8 holdEffectParam);
 void SetEnigmaBerry(u8 *src);
 bool32 IsEnigmaBerryValid(void);
 const struct Berry *GetBerryInfo(u8 berry);

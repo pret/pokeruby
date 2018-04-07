@@ -131,6 +131,7 @@ gUnknown_Debug_845DDD6::
 	.space 0x530
 _0845DDD0End:
 	.size _0845DDD0, _0845DDD0End - _0845DDD0
+gUnknown_Debug_845DDB2End::
 
 gUnknown_Debug_845E306::
 	me_checkcompat gUnknown_Debug_845E306, 0x4, 0x4, 0x4, 0x80
