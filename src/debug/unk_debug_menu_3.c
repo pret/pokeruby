@@ -4,6 +4,8 @@
 #include "constants/items.h"
 #include "string_util.h"
 #include "new_game.h"
+#include "load_save.h"
+#include "start_menu.h"
 #include "mystery_event_script.h"
 #include "berry.h"
 #include "mail_data.h"
@@ -222,7 +224,6 @@ size_t debug_sub_813C740(u8 * dest)
     dataBuffer[0] = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_LANGUAGE, dataBuffer);
 
-    // nonmatching pointer arithmetic
     memcpy(gUnknown_Debug_845E467 - src + dest, mon, sizeof(struct Pokemon));
 
     memcpy(gUnknown_Debug_845E4CB - src + dest, &mail, sizeof(struct MailStruct));
@@ -243,7 +244,6 @@ size_t debug_sub_813C810(u8 * dest)
     debug_sub_813C638(mon, SPECIES_UNOWN, 21, ITEM_DREAM_MAIL);
     debug_sub_813C6AC(mon, &mail);
 
-    // nonmatching pointer arithmetic
     memcpy(gUnknown_Debug_845E467 - src + dest, mon, sizeof(struct Pokemon));
 
     memcpy(gUnknown_Debug_845E4CB - src + dest, &mail, sizeof(struct MailStruct));
@@ -266,12 +266,40 @@ size_t debug_sub_813C888(u8 * dest)
     debug_sub_813C6AC(mon, &mail);
     mon->box.checksum = 0;
 
-    // nonmatching pointer arithmetic
     memcpy(gUnknown_Debug_845E467 - src + dest, mon, sizeof(struct Pokemon));
 
     memcpy(gUnknown_Debug_845E4CB - src + dest, &mail, sizeof(struct MailStruct));
 
     unref_sub_812620C(dest, src);
+
+    return size;
+}
+
+void debug_sub_813C904(void)
+{
+    debug_sub_813C638(gPlayerParty + 0, SPECIES_CHARMELEON, 50, ITEM_QUICK_CLAW);
+    debug_sub_813C638(gPlayerParty + 1, SPECIES_WARTORTLE, 50, ITEM_FOCUS_BAND);
+    debug_sub_813C638(gPlayerParty + 2, SPECIES_IVYSAUR, 50, ITEM_LUM_BERRY);
+}
+
+extern u8 gUnknown_Debug_845E4EF[];
+extern u8 gUnknown_Debug_845E4EFEnd[];
+extern u8 gUnknown_Debug_845E506[];
+extern const u8 Str_842E253[];
+
+size_t debug_sub_813C93C(u8 * dest)
+{
+    u8 * src = gUnknown_Debug_845E4EF;
+    size_t size = gUnknown_Debug_845E4EFEnd - src;
+    struct BattleTowerEReaderTrainer ereaderTrainer;
+
+    memcpy(dest, src, size);
+    SavePlayerParty();
+    debug_sub_813C904();
+    debug_sub_8075DB4(&ereaderTrainer, Str_842E253 + 5, 9999);
+    LoadPlayerParty();
+
+    memcpy(gUnknown_Debug_845E506 - src + dest, &ereaderTrainer, sizeof(ereaderTrainer));
 
     return size;
 }

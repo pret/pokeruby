@@ -215,6 +215,7 @@ gUnknown_Debug_845E4EF::
 
 gUnknown_Debug_845E506::
 	.space 256
+gUnknown_Debug_845E4EFEnd::
 
 gUnknown_Debug_845E606::
 	me_checkcompat gUnknown_Debug_845E606, 0x4, 0x4, 0x4, 0x80
