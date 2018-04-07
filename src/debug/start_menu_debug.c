@@ -16,12 +16,21 @@
 #include "task.h"
 #include "text.h"
 #include "trade.h"
+#include "start_menu.h"
+#include "string_util.h"
+#include "new_game.h"
+#include "script.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
 
 void debug_sub_8076BB4(u8);
 void debug_sub_8077CF4();
+u8 DebugMenu_807706C(void);
+u8 DebugMenu_807709C(void);
+void DebugMenu_807719C(void);
+void DebugMenu_80771EC(void);
+void DebugMenu_8077238(void);
 
 u8 DebugMenu_Exit(void);
 u8 DebugMenu_OpenWatanabe(void);
@@ -553,329 +562,114 @@ void DebugMenu_8076EF4(void)
     InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_839BDC4), 0, 9);
 }
 
-__attribute__((naked))
-void DebugMenu_8076F60()
+void DebugMenu_8076F60(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	bl	Menu_ProcessInput\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	bl	Menu_GetCursorPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r2, r0, #0x18\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	asr	r4, r4, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	cmp	r4, r0\n"
-        "	beq	._97	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "	cmp	r4, r0\n"
-        "	bne	._96	@cond_branch\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	debug_sub_8076B68\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DestroyTask\n"
-        "	b	._97\n"
-        "._96:\n"
-        "	ldr	r3, ._100       @ gUnknown_Debug_839BDC4\n"
-        "	lsl	r2, r2, #0x18\n"
-        "	asr	r2, r2, #0x15\n"
-        "	add	r0, r3, #4\n"
-        "	add	r0, r2, r0\n"
-        "	ldrb	r4, [r0]\n"
-        "	ldr	r0, ._100 + 4   @ gSaveBlock2\n"
-        "	mov	r1, #0x1\n"
-        "	and	r1, r1, r4\n"
-        "	strb	r1, [r0, #0x8]\n"
-        "	add	r2, r2, r3\n"
-        "	ldr	r1, [r2]\n"
-        "	bl	StringCopy\n"
-        "	mov	r0, #0x80\n"
-        "	and	r4, r4, r0\n"
-        "	cmp	r4, #0\n"
-        "	bne	._98	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	bl	debug_sub_8057508\n"
-        "	b	._99\n"
-        "._101:\n"
-        "	.align	2, 0\n"
-        "._100:\n"
-        "	.word	gUnknown_Debug_839BDC4\n"
-        "	.word	gSaveBlock2\n"
-        "._98:\n"
-        "	mov	r0, #0x1\n"
-        "	bl	debug_sub_8057508\n"
-        "._99:\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DestroyTask\n"
-        "	ldr	r0, ._102       @ debug_sub_8058C00\n"
-        "	bl	SetMainCallback2\n"
-        "._97:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._103:\n"
-        "	.align	2, 0\n"
-        "._102:\n"
-        "	.word	debug_sub_8058C00+1\n"
-        "\n"
-    );
+    s8 input = Menu_ProcessInput();
+    s8 cursorPos = Menu_GetCursorPos();
+
+    switch (input)
+    {
+        case -2:
+            break;
+        case -1:
+            Menu_EraseScreen();
+            debug_sub_8076B68();
+            DestroyTask(taskId);
+            break;
+        default:
+        {
+            u8 flags = gUnknown_Debug_839BDC4[cursorPos].flags;
+            gSaveBlock2.playerGender = flags & 1;
+            StringCopy(gSaveBlock2.playerName, gUnknown_Debug_839BDC4[cursorPos].text);
+            if ((flags & 0x80) == 0)
+                debug_sub_8057508(FALSE);
+            else
+                debug_sub_8057508(TRUE);
+            DestroyTask(taskId);
+            SetMainCallback2(debug_sub_8058C00);
+            break;
+        }
+    }
 }
 
-__attribute__((naked))
-void DebugMenu_8076FEC()
+void DebugMenu_8076FEC(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	DebugMenu_8076EF4\n"
-        "	ldr	r0, ._104       @ DebugMenu_8076F60\n"
-        "	mov	r1, #0xa\n"
-        "	bl	CreateTask\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._105:\n"
-        "	.align	2, 0\n"
-        "._104:\n"
-        "	.word	DebugMenu_8076F60+1\n"
-        "\n"
-    );
+    DebugMenu_8076EF4();
+    CreateTask(DebugMenu_8076F60, 10);
 }
 
-__attribute__((naked))
 void DebugMenu_8077004()
 {
-    asm(
-        "	ldr	r2, ._106       @ gUnknown_030006C4\n"
-        "	ldr	r0, ._106 + 4   @ gUnknown_030006C1\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._106 + 8   @ gUnknown_Debug_839BB64\n"
-        "	add	r0, r0, r1\n"
-        "	str	r0, [r2]\n"
-        "	bx	lr\n"
-        "._107:\n"
-        "	.align	2, 0\n"
-        "._106:\n"
-        "	.word	gUnknown_030006C4 \n"
-        "	.word	gUnknown_030006C1 \n"
-        "	.word	gUnknown_Debug_839BB64\n"
-        "\n"
-    );
+    gUnknown_030006C4 = gUnknown_Debug_839BB64 + gUnknown_030006C1 * 8;
 }
 
-__attribute__((naked))
-void DebugMenu_8077020()
+void DebugMenu_8077020(u8 taskId)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r4, r0, #0x18\n"
-        "	ldr	r0, ._109       @ gMenuCallback\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._108	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	bl	DestroyTask\n"
-        "._108:\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._110:\n"
-        "	.align	2, 0\n"
-        "._109:\n"
-        "	.word	gMenuCallback\n"
-        "\n"
-    );
+    if (gMenuCallback() == TRUE)
+        DestroyTask(taskId);
 }
 
-__attribute__((naked))
 void DebugMenu_8077048()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._111       @ gMenuCallback\n"
-        "	ldr	r1, ._111 + 4   @ DebugMenu_807706C\n"
-        "	str	r1, [r0]\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	ldr	r0, ._111 + 8   @ DebugMenu_8077020\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._112:\n"
-        "	.align	2, 0\n"
-        "._111:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_807706C+1\n"
-        "	.word	DebugMenu_8077020+1\n"
-        "\n"
-    );
+    gMenuCallback = DebugMenu_807706C;
+    ScriptContext2_Enable();
+    CreateTask(DebugMenu_8077020, 80);
 }
 
-__attribute__((naked))
-void DebugMenu_807706C()
+u8 DebugMenu_807706C(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._113       @ gWindowTemplate_81E6CE4\n"
-        "	bl	InitMenuWindow\n"
-        "	bl	DebugMenu_8077004\n"
-        "	bl	DebugMenu_807719C\n"
-        "	bl	DebugMenu_80771EC\n"
-        "	bl	DebugMenu_8077238\n"
-        "	ldr	r1, ._113 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._113 + 8   @ DebugMenu_807709C\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._114:\n"
-        "	.align	2, 0\n"
-        "._113:\n"
-        "	.word	gWindowTemplate_81E6CE4\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_807709C+1\n"
-        "\n"
-    );
+    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    DebugMenu_8077004();
+    DebugMenu_807719C();
+    DebugMenu_80771EC();
+    DebugMenu_8077238();
+    gMenuCallback = DebugMenu_807709C;
+    return FALSE;
 }
 
-__attribute__((naked))
-void DebugMenu_807709C()
+u8 DebugMenu_807709C(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r4, ._120       @ gMain\n"
-        "	ldrh	r1, [r4, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._115	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	bl	Menu_MoveCursor\n"
-        "	ldr	r1, ._120 + 4   @ gUnknown_030006C0\n"
-        "	strb	r0, [r1]\n"
-        "._115:\n"
-        "	ldrh	r1, [r4, #0x2e]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._116	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	mov	r0, #0x1\n"
-        "	bl	Menu_MoveCursor\n"
-        "	ldr	r1, ._120 + 4   @ gUnknown_030006C0\n"
-        "	strb	r0, [r1]\n"
-        "._116:\n"
-        "	ldrh	r1, [r4, #0x2e]\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._117	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._120 + 8   @ gUnknown_030006C1\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._118	@cond_branch\n"
-        "	mov	r0, #0x7\n"
-        "	b	._119\n"
-        "._121:\n"
-        "	.align	2, 0\n"
-        "._120:\n"
-        "	.word	gMain\n"
-        "	.word	gUnknown_030006C0 \n"
-        "	.word	gUnknown_030006C1 \n"
-        "._118:\n"
-        "	sub	r0, r0, #0x1\n"
-        "._119:\n"
-        "	strb	r0, [r1]\n"
-        "	bl	DebugMenu_8077004\n"
-        "	bl	DebugMenu_807719C\n"
-        "._117:\n"
-        "	ldr	r0, ._125       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._122	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._125 + 4   @ gUnknown_030006C1\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0x7\n"
-        "	bne	._123	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	b	._124\n"
-        "._126:\n"
-        "	.align	2, 0\n"
-        "._125:\n"
-        "	.word	gMain\n"
-        "	.word	gUnknown_030006C1 \n"
-        "._123:\n"
-        "	add	r0, r0, #0x1\n"
-        "._124:\n"
-        "	strb	r0, [r1]\n"
-        "	bl	DebugMenu_8077004\n"
-        "	bl	DebugMenu_807719C\n"
-        "._122:\n"
-        "	ldr	r0, ._129       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._127	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r1, ._129 + 4   @ gDebug0x839B9BC\n"
-        "	ldr	r0, ._129 + 8   @ gUnknown_030006C0\n"
-        "	ldrb	r2, [r0]\n"
-        "	ldr	r0, ._129 + 12  @ gUnknown_030006C4\n"
-        "	ldr	r0, [r0]\n"
-        "	add	r0, r0, r2\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r1, r1, #0x4\n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	bl	_call_via_r0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	b	._132\n"
-        "._130:\n"
-        "	.align	2, 0\n"
-        "._129:\n"
-        "	.word	gMain\n"
-        "	.word	gDebug0x839B9BC\n"
-        "	.word	gUnknown_030006C0 \n"
-        "	.word	gUnknown_030006C4 \n"
-        "._127:\n"
-        "	mov	r0, #0xa\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._131	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	b	._132\n"
-        "._131:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "._132:\n"
-        "	pop	{r4}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_030006C0 = Menu_MoveCursor(-1);
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_030006C0 = Menu_MoveCursor(+1);
+    }
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        PlaySE(SE_SELECT);
+        if (gUnknown_030006C1 == 0)
+            gUnknown_030006C1 = 7;
+        else
+            gUnknown_030006C1--;
+        DebugMenu_8077004();
+        DebugMenu_807719C();
+    }
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        PlaySE(SE_SELECT);
+        if (gUnknown_030006C1 == 7)
+            gUnknown_030006C1 = 0;
+        else
+            gUnknown_030006C1++;
+        DebugMenu_8077004();
+        DebugMenu_807719C();
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        return gDebug0x839B9BC[gUnknown_030006C4[gUnknown_030006C0]].func();
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
 __attribute__((naked))

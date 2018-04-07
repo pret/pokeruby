@@ -238,5 +238,6 @@ void SpriteCB_LinkPlayer(struct Sprite *);
 void sub_805465C(void);
 
 void CB2_InitTestMenu(void);
+void debug_sub_8058C00(void);
 
 #endif // GUARD_ROM4_H
