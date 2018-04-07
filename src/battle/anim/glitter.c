@@ -43,13 +43,13 @@ void sub_80CD190(struct Sprite* sprite)
     {
         if (!gBattleAnimArgs[6])
         {
-            sprite->pos1.x = GetBankPosition(bank, 0);
-            sprite->pos1.y = GetBankPosition(bank, 1) + gBattleAnimArgs[1];
+            sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
+            sprite->pos1.y = GetBattlerSpriteCoord(bank, 1) + gBattleAnimArgs[1];
         }
         else
         {
-            sprite->pos1.x = GetBankPosition(bank, 2);
-            sprite->pos1.y = GetBankPosition(bank, 3) + gBattleAnimArgs[1];
+            sprite->pos1.x = GetBattlerSpriteCoord(bank, 2);
+            sprite->pos1.y = GetBattlerSpriteCoord(bank, 3) + gBattleAnimArgs[1];
         }
 
         sub_807867C(sprite, gBattleAnimArgs[0]);

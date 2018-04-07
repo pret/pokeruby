@@ -16,7 +16,7 @@ static void sub_80CD2D4(struct Sprite* sprite);
 void sub_80CD274(struct Sprite* sprite)
 {
     sub_8078650(sprite);
-    if (GetBankSide(gAnimBankAttacker) == 0)
+    if (GetBattlerSide(gAnimBankAttacker) == 0)
     {
         sprite->pos1.x += gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];

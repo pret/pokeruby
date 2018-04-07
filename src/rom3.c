@@ -30,10 +30,10 @@ static EWRAM_DATA u8 gUnknown_020238C6 = 0;
 extern u32 gUnknown_020239FC;
 extern u8 gBattleBufferA[][0x200];
 extern u8 gBattleBufferB[][0x200];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
-extern u8 gNoOfAllBanks;
-extern u16 gBattlePartyID[];
+extern u8 gBattlersCount;
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBanksBySide[];
 extern u16 gCurrentMove;
 extern u16 gChosenMove;
@@ -43,7 +43,7 @@ extern u8 gBankAttacker;
 extern u8 gBankTarget;
 extern u8 gEffectBank;
 extern u8 gStringBank;
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern u8 gMultiHitCounter;
 extern u8 gUnknown_02024C78;
 extern u8 gBattleOutcome;
@@ -120,7 +120,7 @@ void sub_800B950(void)
     sub_800BD54();
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
             sub_8094978(i, 0);
     }
 }
@@ -139,7 +139,7 @@ void sub_800B9A8(void)
         gBanksBySide[0] = 0;
         gBattleBankFunc[1] = SetBankFuncToOpponentBufferRunCommand;
         gBanksBySide[1] = 1;
-        gNoOfAllBanks = 2;
+        gBattlersCount = 2;
     }
     else
     {
@@ -152,7 +152,7 @@ void sub_800B9A8(void)
         gBanksBySide[2] = 2;
         gBattleBankFunc[3] = SetBankFuncToOpponentBufferRunCommand;
         gBanksBySide[3] = 3;
-        gNoOfAllBanks = 4;
+        gBattlersCount = 4;
     }
 }
 
@@ -170,7 +170,7 @@ void sub_800BA78(void)
             gBanksBySide[0] = 0;
             gBattleBankFunc[1] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[1] = 1;
-            gNoOfAllBanks = 2;
+            gBattlersCount = 2;
         }
         else
         {
@@ -178,7 +178,7 @@ void sub_800BA78(void)
             gBanksBySide[1] = 0;
             gBattleBankFunc[0] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[0] = 1;
-            gNoOfAllBanks = 2;
+            gBattlersCount = 2;
         }
         return;
     }
@@ -195,7 +195,7 @@ void sub_800BA78(void)
             gBanksBySide[2] = 2;
             gBattleBankFunc[3] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[3] = 3;
-            gNoOfAllBanks = 4;
+            gBattlersCount = 4;
         }
         else
         {
@@ -207,7 +207,7 @@ void sub_800BA78(void)
             gBanksBySide[3] = 2;
             gBattleBankFunc[2] = SetBankFuncToLinkOpponentBufferRunCommand;
             gBanksBySide[2] = 3;
-            gNoOfAllBanks = 4;
+            gBattlersCount = 4;
 
         }
         return;
@@ -237,12 +237,12 @@ void sub_800BA78(void)
             case 0:
             case 3:
                 gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
-                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                 break;
             case 1:
             case 2:
                 gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
-                gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                 break;
             }
         }
@@ -257,12 +257,12 @@ void sub_800BA78(void)
                 case 0:
                 case 3:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 0;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 2;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
@@ -274,18 +274,18 @@ void sub_800BA78(void)
                 case 0:
                 case 3:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 1;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 0;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
                     gBanksBySide[gLinkPlayers[i].lp_field_18] = 3;
-                    gBattlePartyID[gLinkPlayers[i].lp_field_18] = 3;
+                    gBattlerPartyIndexes[gLinkPlayers[i].lp_field_18] = 3;
                     break;
                 }
             }
         }
     }
-    gNoOfAllBanks = 4;
+    gBattlersCount = 4;
 }
 
 void sub_800BD54(void)
@@ -295,7 +295,7 @@ void sub_800BD54(void)
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        for (i = 0; i < gNoOfAllBanks; i++)
+        for (i = 0; i < gBattlersCount; i++)
         {
             for (j = 0; j < 6; j++)
             {
@@ -308,7 +308,7 @@ void sub_800BD54(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -319,7 +319,7 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -332,9 +332,9 @@ void sub_800BD54(void)
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Probably a typo by Game Freak. The rest use SPECIES2
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlePartyID[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -344,9 +344,9 @@ void sub_800BD54(void)
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
-                         && gBattlePartyID[i - 2] != j)
+                         && gBattlerPartyIndexes[i - 2] != j)
                         {
-                            gBattlePartyID[i] = j;
+                            gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
@@ -371,14 +371,14 @@ void PrepareBufferDataTransfer(u8 a, u8 *data, u16 size)
         case 0:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferA[gActiveBank][i] = *data;
+                gBattleBufferA[gActiveBattler][i] = *data;
                 data++;
             }
             break;
         case 1:
             for (i = 0; i < size; i++)
             {
-                gBattleBufferB[gActiveBank][i] = *data;
+                gBattleBufferB[gActiveBattler][i] = *data;
                 data++;
             }
             break;
@@ -416,12 +416,12 @@ void PrepareBufferDataTransferLink(u8 a, u16 size, u8 *data)
     }
 
     ewram14000arr(0, gTasks[gUnknown_020238C4].data[14]) = a;
-    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBank;
+    ewram14000arr(1, gTasks[gUnknown_020238C4].data[14]) = gActiveBattler;
     ewram14000arr(2, gTasks[gUnknown_020238C4].data[14]) = gBankAttacker;
     ewram14000arr(3, gTasks[gUnknown_020238C4].data[14]) = gBankTarget;
     ewram14000arr(4, gTasks[gUnknown_020238C4].data[14]) = r9;
     ewram14000arr(5, gTasks[gUnknown_020238C4].data[14]) = (r9 & 0x0000FF00) >> 8;
-    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBankFlags;
+    ewram14000arr(6, gTasks[gUnknown_020238C4].data[14]) = gAbsentBattlerFlags;
     ewram14000arr(7, gTasks[gUnknown_020238C4].data[14]) = gEffectBank;
 
     for (i = 0; i < size; i++)
@@ -563,7 +563,7 @@ void sub_800C47C(u8 taskId)
             {
                 gBankAttacker = ewram15000arr(2, gTasks[taskId].data[15]);
                 gBankTarget = ewram15000arr(3, gTasks[taskId].data[15]);
-                gAbsentBankFlags = ewram15000arr(6, gTasks[taskId].data[15]);
+                gAbsentBattlerFlags = ewram15000arr(6, gTasks[taskId].data[15]);
                 gEffectBank = ewram15000arr(7, gTasks[taskId].data[15]);
             }
             break;

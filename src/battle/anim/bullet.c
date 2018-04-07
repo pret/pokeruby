@@ -19,8 +19,8 @@ void sub_80CFFD8(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = 20;
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->callback = StartTranslateAnimSpriteByDeltas;
     sprite->affineAnimPaused = 1;
     StoreSpriteCallbackInData(sprite, sub_80D0030);

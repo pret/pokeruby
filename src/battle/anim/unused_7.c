@@ -30,10 +30,10 @@ void sub_80CF374(struct Sprite* sprite)
 void sub_80CF3C4(struct Sprite* sprite)
 {
     u8 a;
-    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     a = gBankSpriteIds[gAnimBankTarget];
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

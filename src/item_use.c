@@ -48,7 +48,7 @@ extern u8 gBankInMenu;
 extern u8 gUnknown_081A1654[];
 extern u8 gUnknown_081A168F[];
 
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 
 extern u16 gBattleTypeFlags;
 
@@ -1044,7 +1044,7 @@ void sub_80CA2BC(u8 taskId)
 
 void ItemUseInBattle_StatIncrease(u8 taskId)
 {
-    u16 partyId = gBattlePartyID[gBankInMenu];
+    u16 partyId = gBattlerPartyIndexes[gBankInMenu];
 
     Menu_EraseWindowRect(0, 0xD, 0xD, 0x14);
 

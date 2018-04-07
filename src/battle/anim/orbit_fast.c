@@ -16,8 +16,8 @@ static void AnimOrbitFastStep(struct Sprite* sprite);
 // arg 1: initial wave offset
 void AnimOrbitFast(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     sprite->affineAnimPaused = 1;
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = gBattleAnimArgs[1];

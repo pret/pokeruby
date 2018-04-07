@@ -25,12 +25,12 @@ void sub_80D1BA8(struct Sprite* sprite, u8 a, u8 b)
 void sub_80D1C08(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 0);
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBankPosition(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
     sprite->callback = StartTranslateAnimSpriteByDeltas;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sub_80D1BA8(sprite, gBattleAnimArgs[5], gBattleAnimArgs[6]);

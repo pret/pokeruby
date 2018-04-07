@@ -82,8 +82,8 @@ void sub_80CFB04(u8 taskId)
                 gBattleAnimArgs[2] |= 1;
         }
     }
-    r6 = gTasks[taskId].data[9] = GetBankPosition(gAnimBankAttacker, 0);
-    r9 = gTasks[taskId].data[10] = GetBankPosition(gAnimBankAttacker, 1);
+    r6 = gTasks[taskId].data[9] = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
+    r9 = gTasks[taskId].data[10] = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         && IsAnimBankSpriteVisible(gAnimBankTarget ^ 2))
     {
@@ -91,8 +91,8 @@ void sub_80CFB04(u8 taskId)
     }
     else
     {
-        sp1 = GetBankPosition(gAnimBankTarget, 0);
-        sp2 = GetBankPosition(gAnimBankTarget, 1);
+        sp1 = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+        sp2 = GetBattlerSpriteCoord(gAnimBankTarget, 1);
     }
 
     sp1 = gTasks[taskId].data[11] = sp1 + gBattleAnimArgs[0];

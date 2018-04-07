@@ -24,7 +24,7 @@ void sub_80CF1C8(struct Sprite* sprite)
         bank = gAnimBankTarget;
 
     sub_80CEF44(bank, sprite);
-    if (GetBankSide(bank) == 0)
+    if (GetBattlerSide(bank) == 0)
     {
         StartSpriteAnim(sprite, 0);
         sprite->data[0] = 2;

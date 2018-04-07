@@ -23,7 +23,7 @@ void sub_80D1368(struct Sprite* sprite)
 {
     s16 r1;
     InitAnimSpritePos(sprite, 0);
-    r1 = (GetBankSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
+    r1 = (GetBattlerSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
     sprite->data[0] = 0x380;
     sprite->data[1] = r1;
     sprite->data[7] = gBattleAnimArgs[2];
@@ -36,7 +36,7 @@ void sub_80D13AC(struct Sprite* sprite)
     sprite->pos2.y -= (sprite->data[0] >> 8);
     sprite->pos2.x = sprite->data[1] >> 8;
     sprite->data[0] -= 32;
-    add = (GetBankSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
+    add = (GetBattlerSide(gAnimBankAttacker)) ? -0xA0 : 0xA0;
     sprite->data[1] += add;
     if (sprite->pos2.y > 0)
     {

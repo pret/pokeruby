@@ -13,7 +13,7 @@ static void sub_80D6278(struct Sprite *);
 
 void sub_80D6234(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

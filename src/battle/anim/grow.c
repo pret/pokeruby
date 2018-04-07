@@ -18,7 +18,7 @@ static void sub_80D0904(u8 taskId);
 void sub_80D08C8(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    u8 spriteId = GetAnimBankSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(0);
     sub_80798F4(task, spriteId, &gUnknown_083D7714);
     task->func = sub_80D0904;
 }

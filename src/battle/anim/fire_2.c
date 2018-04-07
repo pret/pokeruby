@@ -33,9 +33,9 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3);
 // arg 6: ? (todo: something related to which mon the pixel offsets are based on)
 void AnimEmberFlare(struct Sprite *sprite)
 {
-    if (GetBankSide(gAnimBankAttacker) == GetBankSide(gAnimBankTarget)
-        && (gAnimBankAttacker == GetBankByIdentity(IDENTITY_PLAYER_MON2)
-            || gAnimBankAttacker == GetBankByIdentity(IDENTITY_OPPONENT_MON2)))
+    if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget)
+        && (gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)
+            || gAnimBankAttacker == GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 
     sprite->callback = sub_8079534;
@@ -76,9 +76,9 @@ static void AnimFireRingStep1(struct Sprite *sprite)
     {
         sprite->data[0] = 0x19;
         sprite->data[1] = sprite->pos1.x;
-        sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
+        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
         sprite->data[3] = sprite->pos1.y;
-        sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
         InitAnimSpriteTranslationDeltas(sprite);
 
@@ -92,8 +92,8 @@ static void AnimFireRingStep2(struct Sprite *sprite)
     {
         sprite->data[0] = 0;
 
-        sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-        sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
@@ -184,14 +184,14 @@ void sub_80D5470(u8 taskId) // initialize animation task for Move_ERUPTION?
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[15] = GetAnimBankSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(0);
 
     task->data[0] = 0;
     task->data[1] = 0;
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[4] = gSprites[task->data[15]].pos1.y;
-    task->data[5] = GetBankSide(gAnimBankAttacker);
+    task->data[5] = GetBattlerSide(gAnimBankAttacker);
     task->data[6] = 0;
 
     sub_8078E70(task->data[15], 0);
@@ -317,7 +317,7 @@ void sub_80D57C4(u8 spriteId, u8 taskId, u8 a3)
     u16 y = sub_80D5940(spriteId);
     u16 x = gSprites[spriteId].pos1.x;
 
-    if(!GetBankSide(gAnimBankAttacker))
+    if(!GetBattlerSide(gAnimBankAttacker))
     {
         x -= 0xC;
         sign = 1;

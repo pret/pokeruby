@@ -17,15 +17,15 @@ void sub_80D33B4(struct Sprite *sprite)
     s16 r6;
 
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         r6 = -gBattleAnimArgs[2];
     else
         r6 = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + r6;
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r6;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->callback = sub_80D344C;
     sprite->affineAnimPaused = TRUE;

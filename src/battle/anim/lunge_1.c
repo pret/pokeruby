@@ -44,7 +44,7 @@ void sub_80CD774(struct Sprite* sprite)
 void sub_80CD7CC(struct Sprite* sprite)
 {
     sprite->data[0] = 6;
-    sprite->data[1] = (GetBankSide(gAnimBankAttacker)) ? 2 : -2;
+    sprite->data[1] = (GetBattlerSide(gAnimBankAttacker)) ? 2 : -2;
     sprite->data[2] = 0;
     sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
     StoreSpriteCallbackInData(sprite, sub_80CD81C);
@@ -57,7 +57,7 @@ void sub_80CD81C(struct Sprite* sprite)
     {
         sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
         sub_8078E70(sprite->data[3], 0);
-        sprite->data[4] = (sprite->data[6] = GetBankSide(gAnimBankAttacker)) ? 0x300 : 0xFFFFFD00;
+        sprite->data[4] = (sprite->data[6] = GetBattlerSide(gAnimBankAttacker)) ? 0x300 : 0xFFFFFD00;
         sprite->data[5] = 0;
     }
 
@@ -74,7 +74,7 @@ void sub_80CD81C(struct Sprite* sprite)
 void sub_80CD8A8(struct Sprite* sprite)
 {
     sprite->data[0] = 4;
-    sprite->data[1] = (GetBankSide(gAnimBankAttacker)) ? -3 : 3;
+    sprite->data[1] = (GetBattlerSide(gAnimBankAttacker)) ? -3 : 3;
     sprite->data[2] = 0;
     sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
     StoreSpriteCallbackInData(sprite, sub_80CD9B8);
@@ -95,8 +95,8 @@ void sub_80CD91C(struct Sprite* sprite)
     if (sprite->data[0] == 0)
     {
         sprite->data[3] = gBankSpriteIds[gAnimBankAttacker];
-        sprite->data[6] = GetBankSide(gAnimBankAttacker);
-        if (GetBankSide(gAnimBankAttacker))
+        sprite->data[6] = GetBattlerSide(gAnimBankAttacker);
+        if (GetBattlerSide(gAnimBankAttacker))
         {
             sprite->data[4] = 0xFC00;
             sprite->data[5] = 0xC00;

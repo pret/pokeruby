@@ -22,7 +22,7 @@ extern const u8 *const gBattleAnims_StatusConditions[];
 extern const struct OamData gOamData_837E05C;
 extern const struct OamData gOamData_837DF24;
 
-extern u8 GetBankPosition(u8, u8);
+extern u8 GetBattlerSpriteCoord(u8, u8);
 extern void sub_80E32E0(u8);
 
 
@@ -180,8 +180,8 @@ static void sub_807B8A4(struct Sprite *sprite)
 
 void sub_807B920(u8 taskId)
 {
-    s16 x = GetBankPosition(gAnimBankTarget, 2) - 32;
-    s16 y = GetBankPosition(gAnimBankTarget, 3) - 36;
+    s16 x = GetBattlerSpriteCoord(gAnimBankTarget, 2) - 32;
+    s16 y = GetBattlerSpriteCoord(gAnimBankTarget, 3) - 36;
     u8 spriteId;
 
     if (IsContest())

@@ -23,7 +23,7 @@ void sub_80CF0BC(struct Sprite* sprite)
     else
         bank = gAnimBankTarget;
 
-    sprite->pos1.x = GetBankPosition(bank, 0);
+    sprite->pos1.x = GetBattlerSpriteCoord(bank, 0);
     sprite->pos1.y = sub_807A100(bank, 2);
     if (sprite->pos1.y <= 9)
         sprite->pos1.y = 10;

@@ -12,7 +12,7 @@ void sub_80D2D3C(u8);
 
 void sub_80D2CF8(u8 taskId)
 {
-    u8 spriteId = GetAnimBankSpriteId(gBattleAnimArgs[0]);
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
 
     sub_80798F4(&gTasks[taskId], spriteId, gUnknown_083D7CA8);
     gTasks[taskId].func = sub_80D2D3C;

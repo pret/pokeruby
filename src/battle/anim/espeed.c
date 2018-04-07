@@ -25,7 +25,7 @@ static void sub_80D1930(u8 taskId);
 void sub_80D15A4(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    u8 spriteId = GetAnimBankSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
     sub_80798F4(task, spriteId, &gUnknown_083D79BC);
     task->func = sub_80D15E0;
@@ -51,7 +51,7 @@ void sub_80D1638(u8 taskId)
     task->data[2] = 0;
     task->data[3] = 0;
     task->data[12] = 3;
-    if (GetBankSide(gAnimBankTarget) == 0)
+    if (GetBattlerSide(gAnimBankTarget) == 0)
     {
         task->data[13] = 0xFFFF;
         task->data[14] = 8;
@@ -62,7 +62,7 @@ void sub_80D1638(u8 taskId)
         task->data[14] = -8;
     }
 
-    task->data[15] = GetAnimBankSpriteId(1);
+    task->data[15] = GetAnimBattlerSpriteId(1);
     task->func = sub_80D16A0;
 }
 
@@ -123,7 +123,7 @@ void sub_80D17C4(u8 taskId)
     task->data[4] = 1;
     task->data[13] = 14;
     task->data[14] = 2;
-    task->data[15] = GetAnimBankSpriteId(0);
+    task->data[15] = GetAnimBattlerSpriteId(0);
     task->func = sub_80D1808;
 }
 
@@ -169,8 +169,8 @@ void sub_80D18D4(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[13] = 0;
-    task->data[14] = GetBankPosition(gAnimBankAttacker, 0);
-    task->data[15] = GetBankPosition(gAnimBankAttacker, 1);
+    task->data[14] = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
+    task->data[15] = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     task->func = sub_80D1930;
 }
 

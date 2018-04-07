@@ -81,8 +81,8 @@ void sub_80CEB0C(struct Sprite* sprite)
     }
     else
     {
-        a = GetBankPosition(gAnimBankTarget, 2);
-        b = GetBankPosition(gAnimBankTarget, 3);
+        a = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+        b = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     }
 
     sprite->data[4] = sprite->pos1.x << 4;

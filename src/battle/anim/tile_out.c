@@ -9,7 +9,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u8 gNoOfAllBanks;
+extern u8 gBattlersCount;
 extern u8 gHealthboxIDs[];
 
 static void sub_80CE1AC(struct Sprite* sprite);
@@ -35,8 +35,8 @@ void sub_80CE1AC(struct Sprite* sprite)
     {
         sprite->animPaused = 0;
         sprite->data[0] = 30;
-        sprite->data[2] = GetBankPosition(gAnimBankAttacker, 2);
-        sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3);
+        sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
         sprite->callback = StartTranslateAnimSpriteByDeltas;
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
@@ -57,12 +57,12 @@ void sub_80CE210(u8 taskId)
 void unref_sub_80CE260(u8 taskId)
 {
     u8 i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
-        if (gBattleAnimArgs[0] == 1 && GetBankSide(i) == 0)
+        if (gBattleAnimArgs[0] == 1 && GetBattlerSide(i) == 0)
             sub_8043DB0(gHealthboxIDs[i]);
 
-        if (gBattleAnimArgs[1] == 1 && GetBankSide(i) == 1)
+        if (gBattleAnimArgs[1] == 1 && GetBattlerSide(i) == 1)
             sub_8043DB0(gHealthboxIDs[i]);
     }
 
@@ -72,7 +72,7 @@ void unref_sub_80CE260(u8 taskId)
 void unref_sub_80CE2D4(u8 taskId)
 {
     u8 i;
-    for (i = 0; i < gNoOfAllBanks; i++)
+    for (i = 0; i < gBattlersCount; i++)
     {
         sub_8043DFC(gHealthboxIDs[i]);
     }

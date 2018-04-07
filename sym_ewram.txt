@@ -58,16 +58,16 @@ gBattleBufferA = .; /* 2023A60 */
 gBattleBufferB = .; /* 2024260 */
     . += 0x800;
 
-gActiveBank = .; /* 2024A60 */
+gActiveBattler = .; /* 2024A60 */
     . += 0x4;
 
 gBattleExecBuffer = .; /* 2024A64 */
     . += 0x4;
 
-gNoOfAllBanks = .; /* 2024A68 */
+gBattlersCount = .; /* 2024A68 */
     . += 0x2;
 
-gBattlePartyID = .; /* 2024A6A */
+gBattlerPartyIndexes = .; /* 2024A6A */
     . += 0x8;
 
 gBanksBySide = .; /* 2024A72 */
@@ -154,7 +154,7 @@ gEffectBank = .; /* 2024C0A */
 gStringBank = .; /* 2024C0B */
     . += 0x1;
 
-gAbsentBankFlags = .; /* 2024C0C */
+gAbsentBattlerFlags = .; /* 2024C0C */
     . += 0x1;
 
 gCritMultiplier = .; /* 2024C0D */
@@ -190,13 +190,13 @@ gUnknown_02024C4C = .; /* 2024C4C */
 gLockedMoves = .; /* 2024C54 */
     . += 0x8;
 
-gUnknown_02024C5C = .; /* 2024C5C */
+gLastHitBy = .; /* 2024C5C */
     . += 0x4;
 
 gChosenMovesByBanks = .; /* 2024C60 */
     . += 0x8;
 
-gBattleMoveFlags = .; /* 2024C68 */
+gMoveResultFlags = .; /* 2024C68 */
     . += 0x4;
 
 gHitMarker = .; /* 2024C6C */
