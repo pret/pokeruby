@@ -450,8 +450,8 @@ struct Unk201C000
 {
     /*0x00*/ struct Pokemon *pokemon;
     /*0x04*/ u8 unk4;
-    /*0x05*/ u8 unk5;
-    /*0x06*/ u16 unk6;
+    /*0x05*/ u8 primarySelectedMonIndex;
+    /*0x06*/ u16 secondarySelectedIndex;
     /*0x08*/ u16 unk8;
     /*0x0A*/ u8 pad_0A[2];
     /*0x0C*/ s32 unkC;
@@ -3601,9 +3601,9 @@ void sub_806E8D0(u8 taskId, u16 b, TaskFunc c)
 {
     ewram1C000.unk10 = c;
     ewram1C000.unk4 = taskId;
-    ewram1C000.unk5 = sub_806CA38(taskId);
-    ewram1C000.unk6 = b;
-    ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
+    ewram1C000.primarySelectedMonIndex = sub_806CA38(taskId);
+    ewram1C000.secondarySelectedIndex = b;
+    ewram1C000.pokemon = &gPlayerParty[ewram1C000.primarySelectedMonIndex];
 }
 
 bool8 PartyMenuUpdateMonHeldItem(struct Pokemon *pkmn, u16 item)
@@ -3664,7 +3664,7 @@ void PartyMenuTryGiveMonHeldItem(u8 taskId, u16 newItem, TaskFunc c)
         }
         else
         {
-            DisplayGiveHeldItemMessage(ewram1C000.unk5, newItem, 1);
+            DisplayGiveHeldItemMessage(ewram1C000.primarySelectedMonIndex, newItem, 1);
             CreateTask(party_menu_link_mon_held_item_object, 5);
         }
     }
@@ -3674,7 +3674,7 @@ void party_menu_link_mon_held_item_object(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 0)
     {
-        SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.unk5);
+        SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.primarySelectedMonIndex);
         gTasks[ewram1C000.unk4].func = ewram1C000.unk10;
         DestroyTask(taskId);
     }
@@ -3690,17 +3690,17 @@ void PartyMenuTryGiveMonHeldItem_806EACC(u8 taskId)
 
         Menu_EraseWindowRect(23, 8, 29, 13);
         currentItem = GetMonData(ewram1C000.pokemon, MON_DATA_HELD_ITEM);
-        RemoveBagItem(ewram1C000.unk6, 1);
+        RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
         if (AddBagItem(currentItem, 1) == TRUE)
         {
-            PartyMenuUpdateMonHeldItem(ewram1C000.pokemon, ewram1C000.unk6);
-            if (ItemIsMail(ewram1C000.unk6))
+            PartyMenuUpdateMonHeldItem(ewram1C000.pokemon, ewram1C000.secondarySelectedIndex);
+            if (ItemIsMail(ewram1C000.secondarySelectedIndex))
             {
-                DisplayTakeHeldItemMessage(ewram1C000.unk5, currentItem, 1);
+                DisplayTakeHeldItemMessage(ewram1C000.primarySelectedMonIndex, currentItem, 1);
             }
             else
             {
-                CopyItemName(ewram1C000.unk6, gStringVar1);
+                CopyItemName(ewram1C000.secondarySelectedIndex, gStringVar1);
                 StringExpandPlaceholders(gStringVar4, gOtherText_TakenAndReplaced);
                 sub_806E834(gStringVar4, 1);
             }
@@ -3708,7 +3708,7 @@ void PartyMenuTryGiveMonHeldItem_806EACC(u8 taskId)
         else
         {
             sub_806E834(gOtherText_BagFullCannotRemoveItem, 0);
-            AddBagItem(ewram1C000.unk6, 1);
+            AddBagItem(ewram1C000.secondarySelectedIndex, 1);
         }
     }
     else
@@ -3789,7 +3789,7 @@ void PartyMenuTryGiveMonHeldItem_806ECE8(u8 taskId, TaskFunc func)
         {
             if (ItemIsMail(currentItem) == TRUE)
                 TakeMailFromMon(ewram1C000.pokemon);
-            DisplayTakeHeldItemMessage(ewram1C000.unk5, currentItem, 0);
+            DisplayTakeHeldItemMessage(ewram1C000.primarySelectedMonIndex, currentItem, 0);
             SetMonData(ewram1C000.pokemon, MON_DATA_HELD_ITEM, itemData);
         }
         else
@@ -3812,7 +3812,7 @@ void DoTakeMail(u8 taskId, TaskFunc func)
 {
     gTasks[taskId].func = TaskDummy;
     sub_806E8D0(taskId, 0, func);
-    ewram1C000.unk6 = GetMonData(ewram1C000.pokemon, MON_DATA_HELD_ITEM);
+    ewram1C000.secondarySelectedIndex = GetMonData(ewram1C000.pokemon, MON_DATA_HELD_ITEM);
     sub_806E834(gOtherText_SendRemovedMailPrompt, 1);
     CreateTask(Task_ConfirmTakeHeldMail, 5);
 }
@@ -3823,7 +3823,7 @@ void Task_LoseMailMessage(u8 taskId)
 
     if (selection == 0)
     {
-        if (AddBagItem(ewram1C000.unk6, 1) == TRUE)
+        if (AddBagItem(ewram1C000.secondarySelectedIndex, 1) == TRUE)
         {
             TakeMailFromMon(ewram1C000.pokemon);
             sub_806E834(gOtherText_MailTaken, 0);
@@ -3923,7 +3923,7 @@ extern u8 gUnknown_020297ED;
 void Task_TeamMonTMMove(u8 taskId)
 {
     GetMonNickname(ewram1C000.pokemon, gStringVar1);
-    ewram1C000.unk8 = ItemIdToBattleMoveId(ewram1C000.unk6);
+    ewram1C000.unk8 = ItemIdToBattleMoveId(ewram1C000.secondarySelectedIndex);
     StringCopy(gStringVar2, gMoveNames[ewram1C000.unk8]);
     ewram1B000.unk282 = 0;
     if (pokemon_has_move(ewram1C000.pokemon, ewram1C000.unk8))
@@ -3938,7 +3938,7 @@ void Task_TeamMonTMMove(u8 taskId)
 #if DEBUG
          !gUnknown_020297ED &&
 #endif
-         !CanMonLearnTMHM(ewram1C000.pokemon, ewram1C000.unk6 - 33))
+         !CanMonLearnTMHM(ewram1C000.pokemon, ewram1C000.secondarySelectedIndex - 33))
         {
             StringExpandPlaceholders(gStringVar4, gOtherText_NotCompatible);
             sub_806E834(gStringVar4, 1);
@@ -3965,9 +3965,9 @@ void Task_TeamMonTMMove2(u8 taskId)
     StringCopy(gStringVar2, gMoveNames[ewram1C000.unk8]);
     StringExpandPlaceholders(gStringVar4, gOtherText_LearnedMove);
     sub_806E834(gStringVar4, 1);
-    AdjustFriendship(ewram1C000.pokemon, 4);
-    if (ewram1B000.unk282 == 0 && ewram1C000.unk6 <= 0x152)
-        RemoveBagItem(ewram1C000.unk6, 1);
+    AdjustFriendship(ewram1C000.pokemon, FRIENDSHIP_EVENT_LEARN_TMHM);
+    if (ewram1B000.unk282 == 0 && ewram1C000.secondarySelectedIndex < ITEM_HM01_CUT)
+        RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
     gTasks[taskId].func = Task_TeamMonTMMove3;
 }
 
@@ -3986,7 +3986,7 @@ void Task_TeamMonTMMove4(u8 taskId)
     {
         if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & B_BUTTON))
         {
-            SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.unk5);
+            SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.primarySelectedMonIndex);
             if (ewram1B000.unk282 == 1)
             {
                 TeachMonMoveInPartyMenu(taskId);
@@ -4004,7 +4004,7 @@ void sub_806F2FC(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 0)
     {
-        SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.unk5);
+        SetHeldItemIconVisibility(ewram1C000.unk4, ewram1C000.primarySelectedMonIndex);
         if (ewram1B000.unk282 == 1)
         {
             TeachMonMoveInPartyMenu(taskId);
@@ -4050,7 +4050,7 @@ void sub_806F3FC(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        ShowSelectMovePokemonSummaryScreen(gPlayerParty, ewram1C000.unk5, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
+        ShowSelectMovePokemonSummaryScreen(gPlayerParty, ewram1C000.primarySelectedMonIndex, gPlayerPartyCount - 1, sub_808B564, ewram1C000.unk8);
         DestroyTask(taskId);
     }
 }
@@ -4184,7 +4184,7 @@ s16 sub_806F7E8(u8 taskId, struct BattleInterfaceStruct1 *b, s8 c)
         b->unkC_0 = 5;
     if (hpBarLevel < 2)
         b->unkC_0 = 6;
-    vramPtr = gUnknown_08376858[IsDoubleBattle()][ewram1C000.unk5];
+    vramPtr = gUnknown_08376858[IsDoubleBattle()][ewram1C000.primarySelectedMonIndex];
     return sub_80460C8(b, &ewram1C000.unkC, vramPtr, 0);
 }
 
@@ -4208,19 +4208,19 @@ void sub_806F8AC(u8 taskId)
             StringExpandPlaceholders(gStringVar4, gOtherText_HPRestoredBy);
         else
             StringExpandPlaceholders(gStringVar4, gOtherText_RegainedHealth);
-        SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram1C000.unk5), ewram1C000.pokemon);
-        task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.unk5 * 2], 7);
+        SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram1C000.primarySelectedMonIndex), ewram1C000.pokemon);
+        task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.primarySelectedMonIndex * 2], 7);
         ewram1B000.unk261 = 2;
         sub_806E834(gStringVar4, 1);
         sp14 += sp0.unk4;
         SetMonData(ewram1C000.pokemon, MON_DATA_HP, &sp14);
-        RemoveBagItem(ewram1C000.unk6, 1);
+        RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
         sub_8032638();
         gTasks[taskId].func = sub_806FB44;
     }
     else
     {
-        PartyMenuDoPrintHP(ewram1C000.unk5, IsDoubleBattle(), ewram1B000.unk282, sp0.unk0);
+        PartyMenuDoPrintHP(ewram1C000.primarySelectedMonIndex, IsDoubleBattle(), ewram1B000.unk282, sp0.unk0);
     }
 }
 
@@ -4236,8 +4236,8 @@ void sub_806FA18(u8 taskId)
         gTasks[taskId].data[11] -= gTasks[taskId].data[12];
         SetMonData(ewram1C000.pokemon, MON_DATA_HP, &gTasks[taskId].data[11]);
         SetMonIconAnim(GetMonIconSpriteId(ewram1C000.unk4, ewram01000.unk1), ewram1C000.pokemon);
-        ewram1C000.unk5 = gSprites[ewram01000.unk2].data[0];
-        ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
+        ewram1C000.primarySelectedMonIndex = gSprites[ewram01000.unk2].data[0];
+        ewram1C000.pokemon = &gPlayerParty[ewram1C000.primarySelectedMonIndex];
         gTasks[taskId].data[10] = GetMonData(ewram1C000.pokemon, MON_DATA_MAX_HP);
         gTasks[taskId].data[11] = GetMonData(ewram1C000.pokemon, MON_DATA_HP);
         ewram1C000.unkC = -32768;
@@ -4247,7 +4247,7 @@ void sub_806FA18(u8 taskId)
     }
     else
     {
-        PartyMenuDoPrintHP(ewram1C000.unk5, IsDoubleBattle(), ewram1B000.unk282, sp0.unk0);
+        PartyMenuDoPrintHP(ewram1C000.primarySelectedMonIndex, IsDoubleBattle(), ewram1B000.unk282, sp0.unk0);
     }
 }
 
@@ -4364,12 +4364,12 @@ bool8 IsMedicineIneffective(struct Pokemon *pkmn, u16 item)
         return FALSE;
 }
 
-bool8 ExecuteTableBasedItemEffect__(u8 a, u16 b, u8 c)
+bool8 ExecuteTableBasedItemEffect__(u8 monIndex, u16 item, u8 moveIndex)
 {
     if (gMain.inBattle)
-        return ExecuteTableBasedItemEffect_(&gPlayerParty[a], b, sub_8094C20(a), c);
+        return ExecuteTableBasedItemEffect_(&gPlayerParty[monIndex], item, sub_8094C20(monIndex), moveIndex);
     else
-        return ExecuteTableBasedItemEffect_(&gPlayerParty[a], b, a, c);
+        return ExecuteTableBasedItemEffect_(&gPlayerParty[monIndex], item, monIndex, moveIndex);
 }
 
 void UseMedicine(u8 taskId, u16 item, TaskFunc func)
@@ -4395,7 +4395,7 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
                 gTasks[r7].data[11] = 0;
             }
         }
-        r0 = ExecuteTableBasedItemEffect__(ewram1C000.unk5, item, 0);
+        r0 = ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, item, 0);
     }
     else
     {
@@ -4420,7 +4420,7 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
             PlaySE(SE_BIDORO);
         statusAndPkrs = GetMonStatusAndPokerus(ewram1C000.pokemon);
         if (statusAndPkrs == 6 || statusAndPkrs == 0)
-            PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.unk5);
+            PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.primarySelectedMonIndex);
         if (r9 == TRUE)
         {
             gTasks[r7].data[12] = GetMonData(ewram1C000.pokemon, MON_DATA_HP) - gTasks[r7].data[11];
@@ -4439,7 +4439,7 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
             if (!IsBlueYellowRedFlute(item))
                 RemoveBagItem(item, 1);
             GetMedicineItemEffectMessage(item);
-            TryPrintPartyMenuMonNickname(ewram1C000.unk5, ewram1C000.pokemon);
+            TryPrintPartyMenuMonNickname(ewram1C000.primarySelectedMonIndex, ewram1C000.pokemon);
             sub_806E834(gStringVar4, 1);
             gTasks[r7].func = sub_806FB0C;
         }
@@ -4460,8 +4460,8 @@ void sub_8070048(u8 taskId, u16 item, TaskFunc func)
 {
     ewram1C000.unk10 = func;
     ewram1C000.unk4 = taskId;
-    ewram1C000.unk6 = item;
-    ewram1C000.unk5 = 0;
+    ewram1C000.secondarySelectedIndex = item;
+    ewram1C000.primarySelectedMonIndex = 0;
     ewram1C000.unk14 = sub_80701DC;
     ewram1B000.unk27E = 0;
     ewram1B000.unk280 = 0;
@@ -4473,7 +4473,7 @@ void sub_8070088(u8 taskId)
     u8 taskId2;
 
     gTasks[taskId].func = TaskDummy;
-    if (GetMonData(&gPlayerParty[ewram1C000.unk5], MON_DATA_SPECIES) == 0)
+    if (GetMonData(&gPlayerParty[ewram1C000.primarySelectedMonIndex], MON_DATA_SPECIES) == 0)
     {
         gTasks[taskId].func = sub_80701DC;
     }
@@ -4483,10 +4483,10 @@ void sub_8070088(u8 taskId)
 
         taskId2 = CreateTask(TaskDummy, 5);
         taskData = gTasks[taskId2].data;
-        ewram1C000.pokemon = &gPlayerParty[ewram1C000.unk5];
+        ewram1C000.pokemon = &gPlayerParty[ewram1C000.primarySelectedMonIndex];
         taskData[10] = GetMonData(ewram1C000.pokemon, MON_DATA_MAX_HP);
         taskData[11] = GetMonData(ewram1C000.pokemon, MON_DATA_HP);
-        if (ExecuteTableBasedItemEffect__(ewram1C000.unk5, ewram1C000.unk6, 0))
+        if (ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, ewram1C000.secondarySelectedIndex, 0))
         {
             DestroyTask(taskId2);
             gTasks[taskId].func = sub_80701DC;
@@ -4496,8 +4496,8 @@ void sub_8070088(u8 taskId)
             gUnknown_0202E8F4 = 1;
             Menu_EraseWindowRect(WINDOW_LEFT, 14, WINDOW_RIGHT, 19);
             PlaySE(SE_KAIFUKU);
-            PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.unk5);
-            task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.unk5 * 2], 9);
+            PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.primarySelectedMonIndex);
+            task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.primarySelectedMonIndex * 2], 9);
             ewram1B000.unk261 = 2;
             taskData[12] = GetMonData(ewram1C000.pokemon, MON_DATA_HP) - taskData[11];
             taskData[14] = 1;
@@ -4514,16 +4514,16 @@ void sub_80701DC(u8 taskId)
 {
     if (ewram1B000.unk27E == 1)
     {
-        AddBagItem(ewram1C000.unk6, 1);
-        if (GetMonData(&gPlayerParty[ewram1C000.unk5], MON_DATA_SPECIES) != 0)
+        AddBagItem(ewram1C000.secondarySelectedIndex, 1);
+        if (GetMonData(&gPlayerParty[ewram1C000.primarySelectedMonIndex], MON_DATA_SPECIES) != 0)
         {
-            task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.unk5 * 2], 3);
+            task_pc_turn_off(&gUnknown_083769A8[IsDoubleBattle() * 12 + ewram1C000.primarySelectedMonIndex * 2], 3);
             ewram1B000.unk261 = 2;
         }
         ewram1B000.unk27E = 0;
     }
-    ewram1C000.unk5++;
-    if (ewram1C000.unk5 == 6)
+    ewram1C000.primarySelectedMonIndex++;
+    if (ewram1C000.primarySelectedMonIndex == 6)
     {
         gUnknown_0202E8F4 = 0;
         if (ewram1B000.unk280 == 0)
@@ -4534,7 +4534,7 @@ void sub_80701DC(u8 taskId)
         }
         else
         {
-            RemoveBagItem(ewram1C000.unk6, 1);
+            RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
             gTasks[taskId].func = ewram1C000.unk10;
         }
         gLastFieldPokeMenuOpened = 0;
@@ -4607,7 +4607,7 @@ void DoPPRecoveryItemEffect(u8 taskId, u16 item, TaskFunc c)
     {
         PlaySE(SE_SELECT);
         PrintPartyMenuPromptText(10, 3);
-        CreateItemUseMoveMenu(ewram1C000.unk5);
+        CreateItemUseMoveMenu(ewram1C000.primarySelectedMonIndex);
         gTasks[taskId2].func = Task_HandleItemUseMoveMenuInput;
         gMain.newKeys = 0;
     }
@@ -4638,7 +4638,7 @@ void DoRecoverPP(u8 taskId)
 {
     u16 r5 = 0;
 
-    if (ExecuteTableBasedItemEffect__(ewram1C000.unk5, ewram1C000.unk6, gTasks[taskId].data[11]))
+    if (ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, ewram1C000.secondarySelectedIndex, gTasks[taskId].data[11]))
     {
         gUnknown_0202E8F4 = r5;
         PlaySE(SE_SELECT);
@@ -4648,10 +4648,10 @@ void DoRecoverPP(u8 taskId)
     {
         gUnknown_0202E8F4 = 1;
         PlaySE(SE_KAIFUKU);
-        RemoveBagItem(ewram1C000.unk6, 1);
+        RemoveBagItem(ewram1C000.secondarySelectedIndex, 1);
         r5 = GetMonData(ewram1C000.pokemon, MON_DATA_MOVE1 + gTasks[taskId].data[11]);
         StringCopy(gStringVar1, gMoveNames[r5]);
-        GetMedicineItemEffectMessage(ewram1C000.unk6);
+        GetMedicineItemEffectMessage(ewram1C000.secondarySelectedIndex);
         sub_806E834(gStringVar4, 1);
     }
     gTasks[taskId].func = sub_806FB0C;
@@ -4663,7 +4663,7 @@ void DoPPUpItemEffect(u8 taskId, u16 b, TaskFunc c)
     sub_806E8D0(taskId, b, c);
     PlaySE(SE_SELECT);
     PrintPartyMenuPromptText(11, 3);
-    CreateItemUseMoveMenu(ewram1C000.unk5);
+    CreateItemUseMoveMenu(ewram1C000.primarySelectedMonIndex);
     CreateTask(Task_HandleItemUseMoveMenuInput, 5);
     gMain.newKeys = 0;
 }
@@ -4698,24 +4698,24 @@ const u8 gUnknown_Debug_839B6D8[] = _(
 
 #endif
 
-void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
+void DoRareCandyItemEffect(u8 taskId, u16 item, TaskFunc c)
 {
     u8 i;
-    bool8 r0;
+    bool8 noEffect;
 
     gTasks[taskId].func = TaskDummy;
-    sub_806E8D0(taskId, b, c);
+    sub_806E8D0(taskId, item, c);
 
     if (GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL) != 100)
     {
-        for (i = 0; i < 6; i++)
+        for (i = 0; i < NUM_STATS; i++)
             ewram1B000.statGrowths[i] = GetMonData(ewram1C000.pokemon, StatDataTypes[i]);
-        r0 = ExecuteTableBasedItemEffect__(ewram1C000.unk5, b, 0);
+        noEffect = ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, item, 0);
     }
     else
-        r0 = TRUE;
+        noEffect = TRUE;
 
-    if (r0)
+    if (noEffect)
     {
         gUnknown_0202E8F4 = 0;
         PlaySE(SE_SELECT);
@@ -4728,8 +4728,8 @@ void DoRareCandyItemEffect(u8 taskId, u16 b, TaskFunc c)
 
         gUnknown_0202E8F4 = 1;
         PlayFanfareByFanfareNum(0);
-        RedrawPokemonInfoInMenu(ewram1C000.unk5, ewram1C000.pokemon);
-        RemoveBagItem(b, 1);
+        RedrawPokemonInfoInMenu(ewram1C000.primarySelectedMonIndex, ewram1C000.pokemon);
+        RemoveBagItem(item, 1);
         GetMonNickname(ewram1C000.pokemon, gStringVar1);
         level = GetMonData(ewram1C000.pokemon, MON_DATA_LEVEL);
         ConvertIntToDecimalStringN(gStringVar2, level, 0, 3);
@@ -4878,7 +4878,7 @@ void Task_RareCandy3(u8 taskId)
                 if (evolutionSpecies != 0)
                 {
                     gCB2_AfterEvolution = sub_80A53F8;
-                    BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+                    BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.primarySelectedMonIndex);
                     DestroyTask(taskId);
                 }
                 else
@@ -4930,7 +4930,7 @@ void TeachMonMoveInPartyMenu(u8 taskId)
         if (evolutionSpecies != 0)
         {
             gCB2_AfterEvolution = sub_80A53F8;
-            BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.unk5);
+            BeginEvolutionScene(ewram1C000.pokemon, evolutionSpecies, TRUE, ewram1C000.primarySelectedMonIndex);
             DestroyTask(taskId);
         }
         else
@@ -4981,7 +4981,7 @@ void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
 
     gCB2_AfterEvolution = sub_80A53F8;
 
-    if (ExecuteTableBasedItemEffect__(ewram1C000.unk5, evolutionStoneItem, 0))
+    if (ExecuteTableBasedItemEffect__(ewram1C000.primarySelectedMonIndex, evolutionStoneItem, 0))
     {
         gUnknown_0202E8F4 = 0;
         sub_806E834(gOtherText_WontHaveAnyEffect, 1);

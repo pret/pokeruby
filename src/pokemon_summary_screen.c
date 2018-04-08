@@ -4823,20 +4823,20 @@ void sub_80A1C30(u8 a)
     }
 }
 
-u8 pokemon_ailments_get_primary(u32 status)
+u8 GetPrimaryStatus(u32 status)
 {
-    if (status & 0x88)
-        return 1;
-    if (status & 0x40)
-        return 2;
-    if (status & 0x7)
-        return 3;
-    if (status & 0x20)
-        return 4;
-    if (status & 0x10)
-        return 5;
+    if (status & (STATUS_POISON | STATUS_TOXIC_POISON))
+        return STATUS_PRIMARY_POISON;
+    if (status & STATUS_PARALYSIS)
+        return STATUS_PRIMARY_PARALYSIS;
+    if (status & STATUS_SLEEP)
+        return STATUS_PRIMARY_SLEEP;
+    if (status & STATUS_FREEZE)
+        return STATUS_PRIMARY_FREEZE;
+    if (status & STATUS_BURN)
+        return STATUS_PRIMARY_BURN;
 
-    return 0;
+    return STATUS_PRIMARY_NONE;
 }
 
 u8 GetMonStatusAndPokerus(struct Pokemon *mon)
@@ -4846,8 +4846,8 @@ u8 GetMonStatusAndPokerus(struct Pokemon *mon)
     if (GetMonData(mon, MON_DATA_HP) == 0)
         return 7;
 
-    statusAilment = pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS));
-    if (statusAilment == 0)
+    statusAilment = GetPrimaryStatus(GetMonData(mon, MON_DATA_STATUS));
+    if (statusAilment == STATUS_PRIMARY_NONE)
     {
         if (!CheckPartyPokerus(mon, 0))
             return 0;
