@@ -33,6 +33,9 @@ int unref_sub_814A414(void);
 
 // kagaya_debug_menu
 bool8 InitKagayaDebugMenu_A(void);
+bool8 debug_sub_80B0770(void);
+bool8 debug_sub_80B07B0(void);
+bool8 debug_sub_80B0800(void);
 
 // nohara_debug_menu
 bool8 InitNoharaDebugMenu(void);

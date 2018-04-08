@@ -7,16 +7,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_Debug_839BF94:: @ 0x839BF94
-	.4byte gMoveNames + 13 * MOVE_CUT, DebugMenu_8077BB4+1
-	.4byte gMoveNames + 13 * MOVE_FLASH, DebugMenu_8077BC0+1
-	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, DebugMenu_8077BCC+1
-	.4byte gMoveNames + 13 * MOVE_STRENGTH, DebugMenu_8077BD8+1
-	.4byte gMoveNames + 13 * MOVE_SURF, debug_sub_80B0770+1
-	.4byte gMoveNames + 13 * MOVE_FLY, debug_sub_80B07B0+1
-	.4byte gMoveNames + 13 * MOVE_WATERFALL, DebugMenu_8077BE4+1
-	.4byte gMoveNames + 13 * MOVE_DIVE, debug_sub_80B0800+1
-	.4byte gMoveNames + 13 * MOVE_SECRET_POWER, DebugMenu_8077BF4+1
 
 Str_839BFDC:: @ 0x839BFDC
 	.string "　じかん　ふん　びょう$"
