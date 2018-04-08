@@ -6,11 +6,6 @@
 
 	.section .rodata
 
-gUnknown_Debug_839C3FC:: @ 0x839C3FC
-	.4byte Str_839C08E, DebugMenu_8078774+1
-	.4byte Str_839C09B, DebugMenu_8078788+1
-	.4byte Str_839C0A5, DebugMenu_807879C+1
-
 Str_839C414:: @ 0x839C414
 	.string "ATTR:{STR_VAR_1}　HEIGHT:{STR_VAR_3}\n"
 	.string "CODE:{STR_VAR_2}$"
