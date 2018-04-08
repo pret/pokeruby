@@ -923,7 +923,7 @@ static int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
     return 1;
 }
 #else
-__attribute__((naked))
+NAKED
 static int RotatingGate_CanRotate(u8 a, int puzzleType)
 {
     asm(".syntax unified\n\

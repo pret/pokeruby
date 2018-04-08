@@ -4470,7 +4470,7 @@ void sub_8012324(void)
     }
 }
 */
-__attribute__((naked))
+NAKED
 void sub_8012324(void)
 {
     asm(".syntax unified\n\
@@ -6839,7 +6839,7 @@ void HandleAction_UseItem(void)
     gCurrentActionFuncId = ACTION_RUN_BATTLESCRIPT;
 }
 #else
-__attribute__((naked))
+NAKED
 void HandleAction_UseItem(void)
 {
     asm(".syntax unified\n\

@@ -1856,7 +1856,7 @@ void sub_80FECE0(u8 decoCat)
     sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 void sub_80FECE0(u8 decoCat)
 {
     asm(".syntax unified\n\
@@ -2575,7 +2575,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     asm(".syntax unified\n"
@@ -4036,7 +4036,7 @@ void sub_8101460(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8101460(u8 taskId)
 {
     asm(".syntax unified\n"

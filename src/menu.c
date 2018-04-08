@@ -644,7 +644,7 @@ int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
         Menu_BlankWindowRect(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     asm(".syntax unified\n\

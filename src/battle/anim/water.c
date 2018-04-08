@@ -51,7 +51,7 @@ static void sub_80D3874(struct Sprite *sprite)
     }
 }
 
-__attribute__((naked))
+NAKED
 void sub_80D38BC(u8 taskId)
 {
     asm(".syntax unified\n\

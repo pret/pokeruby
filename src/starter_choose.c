@@ -548,7 +548,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     REG_WIN0V = WIN_RANGE(labelTop, labelBottom);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
 {
     asm(".syntax unified\n\

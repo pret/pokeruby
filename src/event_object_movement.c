@@ -8145,7 +8145,7 @@ void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\

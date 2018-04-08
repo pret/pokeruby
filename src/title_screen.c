@@ -437,7 +437,7 @@ static void CreatePressStartBanner(s16 x, s16 y)
     }
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 static void CreatePressStartBanner(s16 x, s16 y)
 {
     asm(".syntax unified\n\

@@ -1511,7 +1511,7 @@ void unref_sub_8113B50(u8 *a, u8 *b)
 #undef sp4
 }
 */
-__attribute__((naked))
+NAKED
 void unref_sub_8113B50()
 {
     asm(".syntax unified\n\
@@ -2436,7 +2436,7 @@ void sub_811430C(u32 a, u32 b)
     sEvoInfo.unk90C4[b][a] = r7 * 16;
 }
 
-__attribute__((naked))
+NAKED
 void unref_sub_81143CC()
 {
     asm(".syntax unified\n\
@@ -3688,7 +3688,7 @@ void sub_8114DF0(u32 a, u8 b)
     }
 }
 
-__attribute__((naked))
+NAKED
 void sub_8114E48()
 {
     asm(".syntax unified\n\

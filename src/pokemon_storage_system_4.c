@@ -519,7 +519,7 @@ void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
     }
 }
 #else
-__attribute__((naked)) void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
+NAKED void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -808,7 +808,7 @@ void sub_809A14C(u16 *vdest)
     }
 }
 #else
-__attribute__((naked)) void sub_809A14C(u16 *vdest)
+NAKED void sub_809A14C(u16 *vdest)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tadds r2, r0, 0\n"
@@ -2214,7 +2214,7 @@ u8 sub_809C464(void)
     return r9;
 }
 #else
-__attribute__((naked)) u8 sub_809C464(void)
+NAKED u8 sub_809C464(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"
@@ -2584,7 +2584,7 @@ u8 sub_809C664(void)
     return r8;
 }
 #else
-__attribute__((naked)) u8 sub_809C664(void)
+NAKED u8 sub_809C664(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"

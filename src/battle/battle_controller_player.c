@@ -1459,7 +1459,7 @@ void sub_802DB6C(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_802DB6C(u8 taskId)
 {
     asm_unified("push {r4-r7,lr}\n\

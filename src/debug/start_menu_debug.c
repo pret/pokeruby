@@ -300,12 +300,12 @@ const u8 Str_839BD7D[] = _("へんかんが　しゅうりょう　しました�
 extern const u8 Str_839BD2C[];
 extern const u8 Str_839BD4C[];
 
-__attribute__((unused)) static u8 gUnknown_030006B8[4];
-__attribute__((unused)) static u8 gUnknown_030006BC[4];
-__attribute__((unused)) static u8 gUnknown_030006C0;
-__attribute__((unused)) static u8 gUnknown_030006C1;
+static u8 gUnknown_030006B8;
+UNUSED static u32 gUnknown_030006BC;
+static u8 gUnknown_030006C0;
+static u8 gUnknown_030006C1;
 static const u8 *gUnknown_030006C4;
-__attribute__((unused)) static u8 gUnknown_030006C8;
+static u8 gUnknown_030006C8;
 
 void debug_sub_8076AC8(u8 a)
 {
@@ -997,285 +997,83 @@ u8 DebugMenu_EditPKMN(void)
     return FALSE;
 }
 
-__attribute__((naked))
-void DebugMenu_80776B4()
+void DebugMenu_80776B4(u8 bgNum)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	ldr	r1, ._183       @ Str_839BE4C\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x7\n"
-        "	bl	memcpy\n"
-        "	lsl	r3, r4, #0x1\n"
-        "	lsl	r5, r4, #0x19\n"
-        "	lsr	r5, r5, #0x18\n"
-        "	add	r3, r3, #0x1\n"
-        "	lsl	r3, r3, #0x18\n"
-        "	lsr	r3, r3, #0x18\n"
-        "	mov	r0, #0x19\n"
-        "	add	r1, r5, #0\n"
-        "	mov	r2, #0x1d\n"
-        "	bl	Menu_BlankWindowRect\n"
-        "	ldr	r0, ._183 + 4   @ gUnknown_030006C8\n"
-        "	ldrb	r0, [r0]\n"
-        "	ASR	r0, r4\n"
-        "	mov	r1, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	add r0, r0, sp\n"
-        "	mov	r1, #0x19\n"
-        "	add	r2, r5, #0\n"
-        "	bl	Menu_PrintText\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._184:\n"
-        "	.align	2, 0\n"
-        "._183:\n"
-        "	.word	Str_839BE4C\n"
-        "	.word	gUnknown_030006C8 \n"
-        "\n"
-    );
+    u8 sp00[] = __("OFF$"
+                   "ON$");
+    Menu_BlankWindowRect(25, bgNum * 2, 29, bgNum * 2 + 1);
+    Menu_PrintText(sp00 + 4 * ((gUnknown_030006C8 >> bgNum) & 1), 25, bgNum * 2);
 }
 
-__attribute__((naked))
-void DebugMenu_8077704()
+void DebugMenu_8077704(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	add	sp, sp, #0xffffffec\n"
-        "	ldr	r1, ._185       @ Str_839BE53\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x11\n"
-        "	bl	memcpy\n"
-        "	mov	r0, #0x13\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x8\n"
-        "	bl	Menu_BlankWindowRect\n"
-        "	mov	r0, sp\n"
-        "	mov	r1, #0x15\n"
-        "	mov	r2, #0x0\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r2, ._185 + 4   @ gUnknown_030006C8\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x13\n"
-        "	ldrh	r0, [r0]\n"
-        "	lsr	r0, r0, #0x8\n"
-        "	mov	r1, #0xf\n"
-        "	and	r0, r0, r1\n"
-        "	strb	r0, [r2]\n"
-        "	mov	r0, #0x0\n"
-        "	bl	DebugMenu_80776B4\n"
-        "	mov	r0, #0x1\n"
-        "	bl	DebugMenu_80776B4\n"
-        "	mov	r0, #0x2\n"
-        "	bl	DebugMenu_80776B4\n"
-        "	mov	r0, #0x3\n"
-        "	bl	DebugMenu_80776B4\n"
-        "	add	sp, sp, #0x14\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._186:\n"
-        "	.align	2, 0\n"
-        "._185:\n"
-        "	.word	Str_839BE53\n"
-        "	.word	gUnknown_030006C8 \n"
-        "\n"
-    );
+    u8 sp00[] = _("BG0\n"
+                  "BG1\n"
+                  "BG2\n"
+                  "BG3\n");
+    Menu_BlankWindowRect(19, 0, 29, 8);
+    Menu_PrintText(sp00, 21, 0);
+    gUnknown_030006C8 = (REG_DISPCNT >> 8) & 0x0F;
+    DebugMenu_80776B4(0);
+    DebugMenu_80776B4(1);
+    DebugMenu_80776B4(2);
+    DebugMenu_80776B4(3);
 }
 
-__attribute__((naked))
-u8 DebugMenu_8077760()
+u8 DebugMenu_8077760(void)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	ldr	r2, ._190       @ gMain\n"
-        "	ldrh	r1, [r2, #0x2e]\n"
-        "	mov	r0, #0x40\n"
-        "	and	r0, r0, r1\n"
-        "	add	r5, r2, #0\n"
-        "	cmp	r0, #0\n"
-        "	beq	._187	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	bl	Menu_MoveCursor\n"
-        "	ldr	r1, ._190 + 4   @ gUnknown_030006B8\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._188	@cond_branch\n"
-        "	sub	r0, r0, #0x1\n"
-        "	b	._189\n"
-        "._191:\n"
-        "	.align	2, 0\n"
-        "._190:\n"
-        "	.word	gMain\n"
-        "	.word	gUnknown_030006B8 \n"
-        "._188:\n"
-        "	mov	r0, #0x3\n"
-        "._189:\n"
-        "	strb	r0, [r1]\n"
-        "._187:\n"
-        "	ldrh	r1, [r5, #0x2e]\n"
-        "	mov	r0, #0x80\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._192	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	mov	r0, #0x1\n"
-        "	bl	Menu_MoveCursor\n"
-        "	ldr	r1, ._195       @ gUnknown_030006B8\n"
-        "	ldrb	r0, [r1]\n"
-        "	cmp	r0, #0x3\n"
-        "	beq	._193	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "	b	._194\n"
-        "._196:\n"
-        "	.align	2, 0\n"
-        "._195:\n"
-        "	.word	gUnknown_030006B8 \n"
-        "._193:\n"
-        "	mov	r0, #0x0\n"
-        "._194:\n"
-        "	strb	r0, [r1]\n"
-        "._192:\n"
-        "	ldrh	r1, [r5, #0x2e]\n"
-        "	mov	r0, #0x30\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._197	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r4, ._201       @ gUnknown_030006C8\n"
-        "	bl	Menu_GetCursorPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r1, #0x1\n"
-        "	LSL	r1, r0\n"
-        "	ldrb	r0, [r4]\n"
-        "	eor	r1, r1, r0\n"
-        "	strb	r1, [r4]\n"
-        "	bl	Menu_GetCursorPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	DebugMenu_80776B4\n"
-        "._197:\n"
-        "	ldrh	r2, [r5, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	bne	._198	@cond_branch\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r2\n"
-        "	cmp	r0, #0\n"
-        "	beq	._199	@cond_branch\n"
-        "._198:\n"
-        "	mov	r2, #0x80\n"
-        "	lsl	r2, r2, #0x13\n"
-        "	ldrh	r0, [r2]\n"
-        "	ldr	r1, ._201 + 4   @ 0xf0ff\n"
-        "	and	r1, r1, r0\n"
-        "	ldr	r0, ._201       @ gUnknown_030006C8\n"
-        "	ldrb	r0, [r0]\n"
-        "	lsl	r0, r0, #0x8\n"
-        "	add	r1, r1, r0\n"
-        "	strh	r1, [r2]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	b	._200\n"
-        "._202:\n"
-        "	.align	2, 0\n"
-        "._201:\n"
-        "	.word	gUnknown_030006C8 \n"
-        "	.word	0xf0ff\n"
-        "._199:\n"
-        "	mov	r0, #0x0\n"
-        "._200:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (gMain.newKeys & DPAD_UP)
+    {
+        PlaySE(SE_SELECT);
+        Menu_MoveCursor(-1);
+        if (gUnknown_030006B8 != 0)
+            gUnknown_030006B8--;
+        else
+            gUnknown_030006B8 = 3;
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        PlaySE(SE_SELECT);
+        Menu_MoveCursor(+1);
+        if (gUnknown_030006B8 != 3)
+            gUnknown_030006B8++;
+        else
+            gUnknown_030006B8 = 0;
+    }
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    {
+        PlaySE(SE_SELECT);
+        gUnknown_030006C8 ^= (1 << Menu_GetCursorPos());
+        DebugMenu_80776B4(Menu_GetCursorPos());
+    }
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        REG_DISPCNT = (REG_DISPCNT & 0xF0FF) + (gUnknown_030006C8 << 8);
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_SwitchBG()
+u8 DebugMenu_SwitchBG(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	DebugMenu_8077704\n"
-        "	mov	r0, #0x0\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x6\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x4\n"
-        "	bl	InitMenu\n"
-        "	ldr	r1, ._203       @ gMenuCallback\n"
-        "	ldr	r0, ._203 + 4   @ DebugMenu_8077760\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._204:\n"
-        "	.align	2, 0\n"
-        "._203:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077760+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_8077704();
+    InitMenu(0, 20, 0, 4, 0, 6);
+    gMenuCallback = DebugMenu_8077760;
+    return FALSE;
 }
 
-__attribute__((naked))
-void DebugMenu_807786C()
+void DebugMenu_807786C(u8 a0)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	ldr	r1, ._205       @ Str_839BE64\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x7\n"
-        "	bl	memcpy\n"
-        "	mov	r0, #0x19\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x3\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	lsl	r0, r4, #0x1\n"
-        "	add	r0, r0, r4\n"
-        "	add r0, r0, sp\n"
-        "	mov	r1, #0x1a\n"
-        "	mov	r2, #0x1\n"
-        "	bl	Menu_PrintText\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._206:\n"
-        "	.align	2, 0\n"
-        "._205:\n"
-        "	.word	Str_839BE64\n"
-        "\n"
-    );
+    u8 sp00[] = __("ON$"
+                   "OFF$");
+
+    Menu_DrawStdWindowFrame(25, 0, 29, 3);
+    Menu_PrintText(sp00 + 3 * a0, 26, 1);
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80778A8()
 {
     asm(
@@ -1324,7 +1122,7 @@ void DebugMenu_80778A8()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_ControlEncounter()
 {
     asm(
@@ -1349,7 +1147,7 @@ u8 DebugMenu_ControlEncounter()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_UseHM()
 {
     asm(
@@ -1367,7 +1165,7 @@ u8 DebugMenu_UseHM()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077934()
 {
     asm(
@@ -1393,7 +1191,7 @@ void DebugMenu_8077934()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077954()
 {
     asm(
@@ -1419,7 +1217,12 @@ void DebugMenu_8077954()
     );
 }
 
-__attribute__((naked))
+const u8 Str_839BE6B[] = _("さいせんかのうトレーナー:{STR_VAR_1}\n"
+                           "さいせんじょうたいトレーナー:{STR_VAR_2}");
+const u8 Str_839BE8D[] = _("いる");
+const u8 Str_839BE90[] = _("いない");
+
+NAKED
 void DebugMenu_8077974()
 {
     asm(
@@ -1503,7 +1306,7 @@ void DebugMenu_8077974()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077A20()
 {
     asm(
@@ -1526,7 +1329,7 @@ void DebugMenu_8077A20()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077A40()
 {
     asm(
@@ -1549,7 +1352,7 @@ void DebugMenu_8077A40()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_8077A60()
 {
     asm(
@@ -1568,7 +1371,7 @@ u8 DebugMenu_8077A60()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_RematchTrainers()
 {
     asm(
@@ -1594,7 +1397,7 @@ u8 DebugMenu_RematchTrainers()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077A9C()
 {
     asm(
@@ -1614,7 +1417,7 @@ void DebugMenu_8077A9C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077AB4()
 {
     asm(
@@ -1634,7 +1437,7 @@ void DebugMenu_8077AB4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077ACC()
 {
     asm(
@@ -1656,7 +1459,7 @@ void DebugMenu_8077ACC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077AE8()
 {
     asm(
@@ -1676,7 +1479,7 @@ void DebugMenu_8077AE8()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077B00()
 {
     asm(
@@ -1712,7 +1515,7 @@ void DebugMenu_8077B00()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077B3C()
 {
     asm(
@@ -1731,7 +1534,7 @@ void DebugMenu_8077B3C()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_Safari()
 {
     asm(
@@ -1779,7 +1582,7 @@ u8 DebugMenu_Safari()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BB4()
 {
     asm(
@@ -1792,7 +1595,7 @@ void DebugMenu_8077BB4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BC0()
 {
     asm(
@@ -1805,7 +1608,7 @@ void DebugMenu_8077BC0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BCC()
 {
     asm(
@@ -1818,7 +1621,7 @@ void DebugMenu_8077BCC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BD8()
 {
     asm(
@@ -1831,7 +1634,7 @@ void DebugMenu_8077BD8()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BE4()
 {
     asm(
@@ -1845,7 +1648,7 @@ void DebugMenu_8077BE4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077BF4()
 {
     asm(
@@ -1858,7 +1661,7 @@ void DebugMenu_8077BF4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077C00()
 {
     asm(
@@ -1877,7 +1680,7 @@ void DebugMenu_8077C00()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077C14()
 {
     asm(
@@ -1903,7 +1706,7 @@ void DebugMenu_8077C14()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077C3C()
 {
     asm(
@@ -2006,7 +1809,7 @@ void DebugMenu_8077C3C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void debug_sub_8077CF4()
 {
     asm(
@@ -2037,7 +1840,7 @@ void debug_sub_8077CF4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 a1, u8 a2)
 {
     asm(
@@ -2082,7 +1885,7 @@ void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 a1, u8 a2)
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_8077D78(const struct MenuAction *menuActions)
 {
     asm(
@@ -2122,7 +1925,7 @@ u8 DebugMenu_8077D78(const struct MenuAction *menuActions)
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077DB4()
 {
     asm(
@@ -2149,7 +1952,7 @@ void DebugMenu_8077DB4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077DD8()
 {
     asm(
@@ -2216,7 +2019,7 @@ void DebugMenu_8077DD8()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077E40()
 {
     asm(
@@ -2269,7 +2072,7 @@ void DebugMenu_8077E40()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_MakeItems()
 {
     asm(
@@ -2284,7 +2087,7 @@ u8 DebugMenu_MakeItems()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077EAC()
 {
     asm(
@@ -2316,7 +2119,7 @@ void DebugMenu_8077EAC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077EE0()
 {
     asm(
@@ -2367,7 +2170,7 @@ void DebugMenu_8077EE0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077F40()
 {
     asm(
@@ -2402,7 +2205,7 @@ void DebugMenu_8077F40()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077F7C()
 {
     asm(
@@ -2471,7 +2274,7 @@ void DebugMenu_8077F7C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8077FFC()
 {
     asm(
@@ -2537,7 +2340,7 @@ void DebugMenu_8077FFC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_807806C()
 {
     asm(
@@ -2557,7 +2360,7 @@ void DebugMenu_807806C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_807808C()
 {
     asm(
@@ -2677,7 +2480,7 @@ void DebugMenu_807808C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_807817C()
 {
     asm(
@@ -2706,7 +2509,7 @@ void DebugMenu_807817C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80781A8()
 {
     asm(
@@ -2788,7 +2591,7 @@ void DebugMenu_80781A8()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_ViewPortraits()
 {
     asm(
@@ -2809,7 +2612,7 @@ u8 DebugMenu_ViewPortraits()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078254()
 {
     asm(
@@ -2821,7 +2624,7 @@ void DebugMenu_8078254()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_AllBadges()
 {
     asm(
@@ -2861,7 +2664,7 @@ u8 DebugMenu_AllBadges()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_TimeRecords()
 {
     asm(
@@ -2882,7 +2685,7 @@ u8 DebugMenu_TimeRecords()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_SetTime()
 {
     asm(
@@ -2897,7 +2700,7 @@ u8 DebugMenu_SetTime()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80782EC()
 {
     asm(
@@ -2922,7 +2725,7 @@ void DebugMenu_80782EC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078310()
 {
     asm(
@@ -3010,7 +2813,7 @@ void DebugMenu_8078310()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_MiragaIslandRND()
 {
     asm(
@@ -3031,7 +2834,7 @@ u8 DebugMenu_MiragaIslandRND()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80783C8()
 {
     asm(
@@ -3094,7 +2897,7 @@ void DebugMenu_80783C8()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_ToggleClearFlag()
 {
     asm(
@@ -3123,7 +2926,7 @@ u8 DebugMenu_ToggleClearFlag()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078464()
 {
     asm(
@@ -3173,7 +2976,7 @@ void DebugMenu_8078464()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenWeatherEvents()
 {
     asm(
@@ -3205,7 +3008,7 @@ u8 DebugMenu_OpenWeatherEvents()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80784E8()
 {
     asm(
@@ -3244,7 +3047,7 @@ void DebugMenu_80784E8()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenMysteryEvent()
 {
     asm(
@@ -3273,7 +3076,7 @@ u8 DebugMenu_OpenMysteryEvent()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078550()
 {
     asm(
@@ -3367,7 +3170,7 @@ void DebugMenu_8078550()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_807860C()
 {
     asm(
@@ -3472,7 +3275,7 @@ void DebugMenu_807860C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80786C0()
 {
     asm(
@@ -3486,7 +3289,7 @@ void DebugMenu_80786C0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80786D0()
 {
     asm(
@@ -3527,7 +3330,7 @@ void DebugMenu_80786D0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078714()
 {
     asm(
@@ -3568,7 +3371,7 @@ void DebugMenu_8078714()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078758()
 {
     asm(
@@ -3587,7 +3390,7 @@ void DebugMenu_8078758()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078774()
 {
     asm(
@@ -3606,7 +3409,7 @@ void DebugMenu_8078774()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078788()
 {
     asm(
@@ -3625,7 +3428,7 @@ void DebugMenu_8078788()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_807879C()
 {
     asm(
@@ -3644,7 +3447,7 @@ void DebugMenu_807879C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80787B0()
 {
     asm(
@@ -3663,7 +3466,7 @@ void DebugMenu_80787B0()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenLegendsRecord()
 {
     asm(
@@ -3689,7 +3492,7 @@ u8 DebugMenu_OpenLegendsRecord()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80787EC()
 {
     asm(
@@ -3759,7 +3562,7 @@ void DebugMenu_80787EC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078880()
 {
     asm(
@@ -3828,7 +3631,7 @@ void DebugMenu_8078880()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_CellInfo()
 {
     asm(
@@ -3850,7 +3653,7 @@ u8 DebugMenu_CellInfo()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenBerryInfo()
 {
     asm(
@@ -3889,7 +3692,7 @@ u8 DebugMenu_OpenBerryInfo()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078950()
 {
     asm(
@@ -3909,7 +3712,7 @@ void DebugMenu_8078950()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078968()
 {
     asm(
@@ -3948,7 +3751,7 @@ void DebugMenu_8078968()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80789A4()
 {
     asm(
@@ -3976,7 +3779,7 @@ void DebugMenu_80789A4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_80789CC()
 {
     asm(
@@ -4016,7 +3819,7 @@ void DebugMenu_80789CC()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078A14()
 {
     asm(
@@ -4100,7 +3903,7 @@ void DebugMenu_8078A14()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078AA4()
 {
     asm(
@@ -4183,7 +3986,7 @@ void DebugMenu_8078AA4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078B38()
 {
     asm(
@@ -4202,7 +4005,7 @@ void DebugMenu_8078B38()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_BattleTowerStages()
 {
     asm(
@@ -4223,7 +4026,7 @@ u8 DebugMenu_BattleTowerStages()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078B70()
 {
     asm(
@@ -4248,7 +4051,7 @@ void DebugMenu_8078B70()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078B94()
 {
     asm(
@@ -4291,7 +4094,7 @@ void DebugMenu_8078B94()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078BD4()
 {
     asm(
@@ -4367,7 +4170,7 @@ void DebugMenu_8078BD4()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_CheckPKBLCK()
 {
     asm(
@@ -4388,7 +4191,7 @@ u8 DebugMenu_CheckPKBLCK()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078C80()
 {
     asm(
@@ -4414,7 +4217,7 @@ void DebugMenu_8078C80()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078CA8()
 {
     asm(
@@ -4453,7 +4256,7 @@ void DebugMenu_8078CA8()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078CE4()
 {
     asm(
@@ -4497,7 +4300,7 @@ void DebugMenu_8078CE4()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078D30()
 {
     asm(
@@ -4539,7 +4342,7 @@ void DebugMenu_8078D30()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078D7C()
 {
     asm(
@@ -4565,7 +4368,7 @@ void DebugMenu_8078D7C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078DA4()
 {
     asm(
@@ -4592,7 +4395,7 @@ void DebugMenu_8078DA4()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_MeTooBackupMan()
 {
     asm(
@@ -4618,7 +4421,7 @@ u8 DebugMenu_MeTooBackupMan()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078DF0()
 {
     asm(
@@ -4637,7 +4440,7 @@ void DebugMenu_8078DF0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078E04()
 {
     asm(
@@ -4680,7 +4483,7 @@ void DebugMenu_8078E04()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078E40()
 {
     asm(
@@ -4705,7 +4508,7 @@ void DebugMenu_8078E40()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078E68()
 {
     asm(
@@ -4724,7 +4527,7 @@ void DebugMenu_8078E68()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078E80()
 {
     asm(
@@ -4755,7 +4558,7 @@ void DebugMenu_8078E80()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078EB0()
 {
     asm(
@@ -4811,7 +4614,7 @@ void DebugMenu_8078EB0()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078F1C()
 {
     asm(
@@ -4854,7 +4657,7 @@ void DebugMenu_8078F1C()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8078F68()
 {
     asm(
@@ -4959,7 +4762,7 @@ void DebugMenu_8078F68()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8079020()
 {
     asm(
@@ -4978,7 +4781,7 @@ void DebugMenu_8079020()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_PTime()
 {
     asm(
@@ -4999,7 +4802,7 @@ u8 DebugMenu_PTime()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8079058()
 {
     asm(
@@ -5093,7 +4896,7 @@ void DebugMenu_8079058()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenMurakawa()
 {
     asm(
@@ -5114,7 +4917,7 @@ u8 DebugMenu_OpenMurakawa()
     );
 }
 
-__attribute__((naked))
+NAKED
 void DebugMenu_8079110()
 {
     asm(
@@ -5187,7 +4990,7 @@ void DebugMenu_8079110()
     );
 }
 
-__attribute__((naked))
+NAKED
 u8 DebugMenu_OpenKiwa()
 {
     asm(

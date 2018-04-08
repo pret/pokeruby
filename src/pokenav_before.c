@@ -1793,7 +1793,7 @@ label2:
 }
 #else
 #if DEBUG
-__attribute__((naked))
+NAKED
 void sub_80ED858()
 {
     asm("\
@@ -2216,7 +2216,7 @@ void sub_80ED858()
 	.word	0xfbd");
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80ED858()
 {
     asm_unified("push {r4,r5,lr}\n\
@@ -3277,7 +3277,7 @@ bool8 sub_80EEA0C() {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80EEA0C() {
     asm_unified(
     "push {r4,lr}\n\
@@ -3969,7 +3969,7 @@ void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
 {
     asm(".syntax unified\n\
@@ -4713,7 +4713,7 @@ bool8 sub_80F02A0(void)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80F02A0(void)
 {
     asm(".syntax unified\n\

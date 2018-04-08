@@ -611,7 +611,7 @@ static void sub_80E0620(u8 taskId)
 //     }
 // }
 
-__attribute__((naked))
+NAKED
 static void sub_80E079C(struct Task *task)
 {
     asm(".syntax unified\n\

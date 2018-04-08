@@ -1492,7 +1492,7 @@ static void sub_8048B0C(u8 a0)
 #pragma pop_macro("BLOCKSIZE")
 #else
 asm(".include \"constants/gba_constants.inc\"");
-__attribute__((naked))
+NAKED
 static void sub_8048B0C(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -2488,7 +2488,7 @@ static void sub_8049ED4(u8 a0)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8049ED4(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3055,7 +3055,7 @@ static void sub_804A41C(u8 whichParty)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_804A41C(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3250,7 +3250,7 @@ static void sub_804A6DC(u8 whichParty)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_804A6DC(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3561,7 +3561,7 @@ static void sub_804ACF4(u8 who)
     }
 }
 #else
-static __attribute__((naked)) void sub_804ACF4(u8 who)
+static NAKED void sub_804ACF4(u8 who)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"
@@ -3869,7 +3869,7 @@ static void sub_804B1BC(void)
     }
 }
 #else
-__attribute__((naked)) static void sub_804B1BC(void)
+NAKED static void sub_804B1BC(void)
 {
     asm_unified("\tpush {lr}\n"
                     "\tldr r1, _0804B1FC @ =REG_BG1VOFS\n"
@@ -4113,7 +4113,7 @@ static void sub_804B41C(void)
     UpdatePaletteFade();
 }
 #else
-static __attribute__((naked)) void sub_804B41C(void)
+static NAKED void sub_804B41C(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tsub sp, 0x4\n"

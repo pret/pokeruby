@@ -1278,7 +1278,7 @@ static void sub_80A4548(u16 a, int b, int c, int d)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A4548(u16 a, int b, int c, int d)
 {
     asm(".syntax unified\n\
@@ -2102,7 +2102,7 @@ static void sub_80A5414(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A5414(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -2337,7 +2337,7 @@ _080A55FA:\n\
 }
 #endif
 
-__attribute__((naked))
+NAKED
 static void sub_80A5600(u8 taskId)
 {
     asm(".syntax unified\n\

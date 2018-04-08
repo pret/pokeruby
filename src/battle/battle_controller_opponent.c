@@ -1438,7 +1438,7 @@ void OpponentHandlecmd19(void)
 }
 
 #if DEBUG
-__attribute__((naked))
+NAKED
 void OpponentHandlecmd20(void)
 {
     asm("\
@@ -1812,7 +1812,7 @@ void OpponentHandlecmd20(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void OpponentHandlecmd20(void)
 {
     asm(".syntax unified\n\

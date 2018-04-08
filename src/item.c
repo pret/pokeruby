@@ -239,7 +239,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
     return TRUE;
 }
 //#else
-//__attribute__((naked))
+//NAKED
 //bool8 AddBagItem(u16 itemId, u16 count)
 //{
 //    asm(".syntax unified\n\

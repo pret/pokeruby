@@ -6,37 +6,6 @@
 
 	.section .rodata
 
-	.align 2
-
-Str_839BE4C:: @ 0x839BE4C
-	.string "OFF$"
-
-Str_839BE50:: @ 0x839BE50
-	.string "ON$"
-
-Str_839BE53:: @ 0x839BE53
-	.string "BG0\n"
-	.string "BG1\n"
-	.string "BG2\n"
-	.string "BG3\n"
-	.string "$"
-
-Str_839BE64:: @ 0x839BE64
-	.string "ON$"
-
-Str_839BE67:: @ 0x839BE67
-	.string "OFF$"
-
-Str_839BE6B:: @ 0x839BE6B
-	.string "さいせんかのうトレーナー:{STR_VAR_1}\n"
-	.string "さいせんじょうたいトレーナー:{STR_VAR_2}$"
-
-Str_839BE8D:: @ 0x839BE8D
-	.string "いる$"
-
-Str_839BE90:: @ 0x839BE90
-	.string "いない$"
-
 Str_839BE94:: @ 0x839BE94
 	.string "Max num of steps$"
 

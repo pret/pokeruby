@@ -4161,7 +4161,7 @@ static void PicTest_Redraw(u8 a0)
     }
 }
 #else
-__attribute__((naked)) void PicTest_Redraw(u8 a0)
+NAKED void PicTest_Redraw(u8 a0)
 {
     asm("\tpush\t{r4, r5, r6, r7, lr}\n"
         "\tmov\tr7, r8\n"

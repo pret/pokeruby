@@ -697,7 +697,7 @@ static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 statID, s16 a2)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void Pokeblock_BufferEnhancedStatText(u8 *dest, u8 a1, s16 a2)
 {
     asm_unified("\tpush {r4,lr}\n"

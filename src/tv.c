@@ -2435,7 +2435,7 @@ void sub_80C01D4(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80C01D4(void) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\

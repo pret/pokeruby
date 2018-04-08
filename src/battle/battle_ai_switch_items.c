@@ -107,7 +107,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     return FALSE; // at this point there is not a single pokemon in the party that has a super effective move against a pokemon with wonder guard
 }
 #else
-__attribute__((naked))
+NAKED
 static bool8 ShouldSwitchIfWonderGuard(void)
 {
     asm(".syntax unified\n\

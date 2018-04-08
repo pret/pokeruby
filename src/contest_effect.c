@@ -646,7 +646,7 @@ static void ContestEffect_BetterIfSameType(void)
     }
 }
 #else
-__attribute__((naked)) void ContestEffect_BetterIfSameType(void)
+NAKED void ContestEffect_BetterIfSameType(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tldr r1, _080B8940 @ =gSharedMem + 0x192D0\n"
