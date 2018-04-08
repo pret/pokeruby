@@ -3376,7 +3376,7 @@ void PartyMenuPrintMonLevelOrStatus(u8 monIndex, struct Pokemon *pokemon)
         else
             menuLayout = IsDoubleBattle();
 
-        if (statusAndPkrs != 0 && statusAndPkrs != 6)
+        if (statusAndPkrs && statusAndPkrs != STATUS_PRIMARY_POKERUS)
             PartyMenuPutStatusTilemap(monIndex, menuLayout, statusAndPkrs - 1);
         else
             PartyMenuPrintLevel(monIndex, menuLayout, pokemon);
@@ -4419,7 +4419,7 @@ void UseMedicine(u8 taskId, u16 item, TaskFunc func)
         else
             PlaySE(SE_BIDORO);
         statusAndPkrs = GetMonStatusAndPokerus(ewram1C000.pokemon);
-        if (statusAndPkrs == 6 || statusAndPkrs == 0)
+        if (statusAndPkrs == STATUS_PRIMARY_POKERUS || statusAndPkrs == STATUS_PRIMARY_NONE)
             PartyMenuUpdateLevelOrStatus(ewram1C000.pokemon, ewram1C000.primarySelectedMonIndex);
         if (r9 == TRUE)
         {
@@ -4843,7 +4843,7 @@ void RedrawPokemonInfoInMenu(u8 monIndex, struct Pokemon *pokemon)
     u8 statusAndPkrs = GetMonStatusAndPokerus(pokemon);
     u8 icon;
 
-    if (statusAndPkrs == 0 || statusAndPkrs == 6)
+    if (statusAndPkrs == STATUS_PRIMARY_NONE || statusAndPkrs == STATUS_PRIMARY_POKERUS)
         PartyMenuUpdateLevelOrStatus(pokemon, monIndex);
 
     PartyMenuDoPrintHP(monIndex, IsDoubleBattle(), GetMonData(pokemon, MON_DATA_HP), GetMonData(pokemon, MON_DATA_MAX_HP));

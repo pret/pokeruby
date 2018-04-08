@@ -4844,15 +4844,15 @@ u8 GetMonStatusAndPokerus(struct Pokemon *mon)
     u8 statusAilment;
 
     if (GetMonData(mon, MON_DATA_HP) == 0)
-        return 7;
+        return STATUS_PRIMARY_FAINTED;
 
     statusAilment = GetPrimaryStatus(GetMonData(mon, MON_DATA_STATUS));
     if (statusAilment == STATUS_PRIMARY_NONE)
     {
         if (!CheckPartyPokerus(mon, 0))
-            return 0;
+            return STATUS_PRIMARY_NONE;
         else
-            return 6;
+            return STATUS_PRIMARY_POKERUS;
     }
 
     return statusAilment;

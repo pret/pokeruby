@@ -628,7 +628,7 @@ static void sub_81229B8(void)
 
             PartyMenuPrintHP(i, 3, &gPlayerParty[i]);
             status = GetMonStatusAndPokerus(&gPlayerParty[i]);
-            if (status != 0 && status != 6)
+            if (status && status != STATUS_PRIMARY_POKERUS)
                 PartyMenuPutStatusTilemap(i, 3, status - 1);
             else
                 PartyMenuPrintLevel(i, 3, &gPlayerParty[i]);
@@ -675,7 +675,7 @@ static void sub_8122B10(u8 taskId)
 
             PartyMenuDoPrintHP(i + 3, 3, gMultiPartnerParty[i].hp, gMultiPartnerParty[i].maxhp);
             if (gMultiPartnerParty[i].hp == 0)
-                primaryStatus = 7;
+                primaryStatus = STATUS_PRIMARY_FAINTED;
             else
                 primaryStatus = GetPrimaryStatus(gMultiPartnerParty[i].status);
 
