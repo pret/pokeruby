@@ -314,10 +314,10 @@ extern const u8 Str_839BD2C[];
 extern const u8 Str_839BD4C[];
 
 static u8 gUnknown_030006B8;
-UNUSED static u32 gUnknown_030006BC;
+UNUSED static const s32 * gUnknown_030006BC;
 static u8 gUnknown_030006C0;
 static u8 gUnknown_030006C1;
-static const u8 *gUnknown_030006C4;
+static const u8 * gUnknown_030006C4;
 static u8 gUnknown_030006C8;
 
 void debug_sub_8076AC8(u8 a)
@@ -1341,108 +1341,142 @@ u8 DebugMenu_8077C14(void)
     return FALSE;
 }
 
-NAKED
-void DebugMenu_8077C3C()
+const u8 Str_839BFDC[] = _("　じかん　ふん　びょう");
+
+const s32 gUnknown_Debug_839BFE8[] = {
+    99, 10, 2, 23,
+    99, 10, 2, 26
+};
+
+#ifdef NONMATCHING
+void DebugMenu_8077C3C(const char * a0, u8 * a1)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xfffffffc\n"
-        "	mov	sl, r0\n"
-        "	add	r7, r1, #0\n"
-        "	ldr	r0, ._271       @ gUnknown_030006BC\n"
-        "	ldr	r1, ._271 + 4   @ gUnknown_Debug_839BFE8\n"
-        "	str	r1, [r0]\n"
-        "	mov	r1, #0x0\n"
-        "	strb	r1, [r7]\n"
-        "	add	r7, r7, #0x1\n"
-        "	strb	r1, [r7]\n"
-        "	add	r7, r7, #0x1\n"
-        "	mov	r3, #0x0\n"
-        "	mov	r8, r0\n"
-        "._269:\n"
-        "	mov	r5, #0x0\n"
-        "	ldr	r1, ._271       @ gUnknown_030006BC\n"
-        "	ldr	r0, [r1]\n"
-        "	ldr	r2, [r0, #0x4]\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r1, [r0, #0x8]\n"
-        "	add	r3, r3, #0x1\n"
-        "	mov	r9, r3\n"
-        "	cmp	r5, r1\n"
-        "	bge	._266	@cond_branch\n"
-        "	add	r3, r0, #0\n"
-        "	add	r6, r1, #0\n"
-        "._267:\n"
-        "	ldr	r0, [r3, #0xc]\n"
-        "	add	r0, r0, r4\n"
-        "	add r0, r0, sl\n"
-        "	ldrb	r0, [r0]\n"
-        "	sub	r0, r0, #0x30\n"
-        "	mul	r0, r0, r2\n"
-        "	add	r5, r5, r0\n"
-        "	add	r4, r4, #0x1\n"
-        "	add	r0, r2, #0\n"
-        "	mov	r1, #0xa\n"
-        "	str	r3, [sp]\n"
-        "	bl	__divsi3\n"
-        "	add	r2, r0, #0\n"
-        "	ldr	r3, [sp]\n"
-        "	cmp	r4, r6\n"
-        "	blt	._267	@cond_branch\n"
-        "._266:\n"
-        "	mov	r0, r8\n"
-        "	ldr	r1, [r0]\n"
-        "	ldr	r0, [r1]\n"
-        "	cmp	r0, r5\n"
-        "	bcs	._268	@cond_branch\n"
-        "	add	r5, r0, #0\n"
-        "._268:\n"
-        "	ldrb	r3, [r1, #0x8]\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	mov	r2, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r7, r0, #0\n"
-        "	mov	r3, r9\n"
-        "	mov	r1, r8\n"
-        "	ldr	r0, [r1]\n"
-        "	add	r0, r0, #0x10\n"
-        "	str	r0, [r1]\n"
-        "	cmp	r3, #0x1\n"
-        "	ble	._269	@cond_branch\n"
-        "	mov	r1, sl\n"
-        "	ldrb	r0, [r1, #0x1d]\n"
-        "	add	r0, r0, #0x7a\n"
-        "	strb	r0, [r7]\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0xf6\n"
-        "	bls	._270	@cond_branch\n"
-        "	mov	r0, #0xf6\n"
-        "	strb	r0, [r7]\n"
-        "._270:\n"
-        "	mov	r0, #0xff\n"
-        "	strb	r0, [r7, #0x1]\n"
-        "	add	sp, sp, #0x4\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._272:\n"
-        "	.align	2, 0\n"
-        "._271:\n"
-        "	.word	gUnknown_030006BC \n"
-        "	.word	gUnknown_Debug_839BFE8\n"
-        "\n"
-    );
+    // Register allocation swap
+    // Intended: r7 = a1, r6 = gUnknown_030006BC[2]
+    // Observed: r6 = a1, r7 = gUnknown_030006BC[2]
+
+    int i;
+
+    gUnknown_030006BC = gUnknown_Debug_839BFE8;
+    *a1++ = CHAR_SPACE;
+    *a1++ = CHAR_SPACE;
+
+    for (i = 0; i < 2; i++, gUnknown_030006BC += 4)
+    {
+        u32 r5 = 0;
+        int r2;
+        int r4;
+        for (r2 = gUnknown_030006BC[1], r4 = 0; r4 < gUnknown_030006BC[2]; r4++, r2 /= 10)
+            r5 += (a0[gUnknown_030006BC[3] + r4] - '0') * r2;
+        if (gUnknown_030006BC[0] < r5)
+            r5 = gUnknown_030006BC[0];
+        a1 = ConvertIntToDecimalStringN(a1, r5, STR_CONV_MODE_LEADING_ZEROS, gUnknown_030006BC[2]);
+    }
+    a1[0] = a0[29] - 'A' + CHAR_A;
+    if (a1[0] > 0xf6)
+        a1[0] = 0xf6;
+    a1[1] = EOS;
 }
+#else
+NAKED void DebugMenu_8077C3C(const char * a0, u8 * a1)
+{
+    asm("\tpush\t{r4, r5, r6, r7, lr}\n"
+        "\tmov\tr7, sl\n"
+        "\tmov\tr6, r9\n"
+        "\tmov\tr5, r8\n"
+        "\tpush\t{r5, r6, r7}\n"
+        "\tadd\tsp, sp, #0xfffffffc\n"
+        "\tmov\tsl, r0\n"
+        "\tadd\tr7, r1, #0\n"
+        "\tldr\tr0, ._271       @ gUnknown_030006BC\n"
+        "\tldr\tr1, ._271 + 4   @ gUnknown_Debug_839BFE8\n"
+        "\tstr\tr1, [r0]\n"
+        "\tmov\tr1, #0x0\n"
+        "\tstrb\tr1, [r7]\n"
+        "\tadd\tr7, r7, #0x1\n"
+        "\tstrb\tr1, [r7]\n"
+        "\tadd\tr7, r7, #0x1\n"
+        "\tmov\tr3, #0x0\n"
+        "\tmov\tr8, r0\n"
+        "._269:\n"
+        "\tmov\tr5, #0x0\n"
+        "\tldr\tr1, ._271       @ gUnknown_030006BC\n"
+        "\tldr\tr0, [r1]\n"
+        "\tldr\tr2, [r0, #0x4]\n"
+        "\tmov\tr4, #0x0\n"
+        "\tldr\tr1, [r0, #0x8]\n"
+        "\tadd\tr3, r3, #0x1\n"
+        "\tmov\tr9, r3\n"
+        "\tcmp\tr5, r1\n"
+        "\tbge\t._266\t@cond_branch\n"
+        "\tadd\tr3, r0, #0\n"
+        "\tadd\tr6, r1, #0\n"
+        "._267:\n"
+        "\tldr\tr0, [r3, #0xc]\n"
+        "\tadd\tr0, r0, r4\n"
+        "\tadd r0, r0, sl\n"
+        "\tldrb\tr0, [r0]\n"
+        "\tsub\tr0, r0, #0x30\n"
+        "\tmul\tr0, r0, r2\n"
+        "\tadd\tr5, r5, r0\n"
+        "\tadd\tr4, r4, #0x1\n"
+        "\tadd\tr0, r2, #0\n"
+        "\tmov\tr1, #0xa\n"
+        "\tstr\tr3, [sp]\n"
+        "\tbl\t__divsi3\n"
+        "\tadd\tr2, r0, #0\n"
+        "\tldr\tr3, [sp]\n"
+        "\tcmp\tr4, r6\n"
+        "\tblt\t._267\t@cond_branch\n"
+        "._266:\n"
+        "\tmov\tr0, r8\n"
+        "\tldr\tr1, [r0]\n"
+        "\tldr\tr0, [r1]\n"
+        "\tcmp\tr0, r5\n"
+        "\tbcs\t._268\t@cond_branch\n"
+        "\tadd\tr5, r0, #0\n"
+        "._268:\n"
+        "\tldrb\tr3, [r1, #0x8]\n"
+        "\tadd\tr0, r7, #0\n"
+        "\tadd\tr1, r5, #0\n"
+        "\tmov\tr2, #0x2\n"
+        "\tbl\tConvertIntToDecimalStringN\n"
+        "\tadd\tr7, r0, #0\n"
+        "\tmov\tr3, r9\n"
+        "\tmov\tr1, r8\n"
+        "\tldr\tr0, [r1]\n"
+        "\tadd\tr0, r0, #0x10\n"
+        "\tstr\tr0, [r1]\n"
+        "\tcmp\tr3, #0x1\n"
+        "\tble\t._269\t@cond_branch\n"
+        "\tmov\tr1, sl\n"
+        "\tldrb\tr0, [r1, #0x1d]\n"
+        "\tadd\tr0, r0, #0x7a\n"
+        "\tstrb\tr0, [r7]\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr0, r0, #0x18\n"
+        "\tcmp\tr0, #0xf6\n"
+        "\tbls\t._270\t@cond_branch\n"
+        "\tmov\tr0, #0xf6\n"
+        "\tstrb\tr0, [r7]\n"
+        "._270:\n"
+        "\tmov\tr0, #0xff\n"
+        "\tstrb\tr0, [r7, #0x1]\n"
+        "\tadd\tsp, sp, #0x4\n"
+        "\tpop\t{r3, r4, r5}\n"
+        "\tmov\tr8, r3\n"
+        "\tmov\tr9, r4\n"
+        "\tmov\tsl, r5\n"
+        "\tpop\t{r4, r5, r6, r7}\n"
+        "\tpop\t{r0}\n"
+        "\tbx\tr0\n"
+        "._272:\n"
+        "\t.align\t2, 0\n"
+        "._271:\n"
+        "\t.word\tgUnknown_030006BC \n"
+        "\t.word\tgUnknown_Debug_839BFE8\n");
+}
+#endif
 
 NAKED
 void debug_sub_8077CF4()
