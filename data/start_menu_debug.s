@@ -6,30 +6,6 @@
 
 	.section .rodata
 
-	.align 2
-
-Str_839C008: @ 0x839C008
-gDebug0x839C008::
-	.string "Which item?$"
-
-Str_839C014:: @ 0x839C014
-	.string "How　many？$"
-
-Str_839C01E:: @ 0x839C01E
-	.string "にがおえ　ばんごう\n"
-	.string "ポケモンナンバー\n"
-	.string "ポケモンめい\n"
-	.string "ブリーダーめい\n"
-	.string "しゅるい\n"
-	.string "こせいらんすう$"
-
-Str_839C04D:: @ 0x839C04D
-	.string "データなし$"
-
-Str_839C053:: @ 0x839C053
-	.string "Miracle Island emerged\n"
-	.string "Random numbers:{STR_VAR_1}$"
-
 Str_839C07C:: @ 0x839C07C
 	.string "{STR_VAR_1}:{STR_VAR_2}\n"
 	.string "{STR_VAR_3}$"

@@ -64,4 +64,6 @@ void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 
+extern const char BuildDateTime[];
+
 #endif // GUARD_MAIN_H

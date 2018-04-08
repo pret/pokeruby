@@ -612,8 +612,8 @@ struct ContestWinner
     /*0x04*/ u32 otId;  // otId
     /*0x08*/ u16 species;  // species
     /*0x0A*/ u8 contestCategory;
-    /*0x0B*/ u8 nickname[0x16-0xB];
-    /*0x16*/ u8 trainerName[0x20-0x16];
+    /*0x0B*/ u8 nickname[11];
+    /*0x16*/ u8 trainerName[8];
 };
 
 // there should be enough flags for all 412 slots
