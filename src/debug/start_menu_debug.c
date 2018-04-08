@@ -42,6 +42,7 @@
 #include "fldeff_secretpower.h"
 #include "data2.h"
 #include "item.h"
+#include "reset_rtc_screen.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
@@ -1753,553 +1754,298 @@ void DebugMenu_8078254(u32 a0)
     DebugMenu_807808C(a0);
 }
 
-NAKED
-u8 DebugMenu_AllBadges()
+u8 DebugMenu_AllBadges(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._355       @ 0x807\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 4   @ 0x808\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 8   @ 0x809\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 12  @ 0x80a\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 16  @ 0x80b\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 20  @ 0x80c\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 24  @ 0x80d\n"
-        "	bl	FlagSet\n"
-        "	ldr	r0, ._355 + 28  @ 0x80e\n"
-        "	bl	FlagSet\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._356:\n"
-        "	.align	2, 0\n"
-        "._355:\n"
-        "	.word	0x807\n"
-        "	.word	0x808\n"
-        "	.word	0x809\n"
-        "	.word	0x80a\n"
-        "	.word	0x80b\n"
-        "	.word	0x80c\n"
-        "	.word	0x80d\n"
-        "	.word	0x80e\n"
-        "\n"
-    );
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_BADGE02_GET);
+    FlagSet(FLAG_BADGE03_GET);
+    FlagSet(FLAG_BADGE04_GET);
+    FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_BADGE06_GET);
+    FlagSet(FLAG_BADGE07_GET);
+    FlagSet(FLAG_BADGE08_GET);
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-u8 DebugMenu_TimeRecords()
+u8 DebugMenu_TimeRecords(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._357       @ debug_sub_806F9E4\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._358:\n"
-        "	.align	2, 0\n"
-        "._357:\n"
-        "	.word	debug_sub_806F9E4+1\n"
-        "\n"
-    );
+    CloseMenu();
+    CreateTask(debug_sub_806F9E4, 80);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-NAKED
-u8 DebugMenu_SetTime()
+u8 DebugMenu_SetTime(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	debug_sub_806F99C\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    debug_sub_806F99C();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
 const u8 Str_839C053[] = _("Miracle Island emerged\n"
                            "Random numbers:{STR_VAR_1}");
 
-NAKED
-void DebugMenu_80782EC()
+void DebugMenu_80782EC(u16 rnums)
 {
-    asm(
-        "	push	{lr}\n"
-        "	add	r1, r0, #0\n"
-        "	lsl	r1, r1, #0x10\n"
-        "	lsr	r1, r1, #0x10\n"
-        "	ldr	r0, ._359       @ gStringVar1\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x4\n"
-        "	bl	ConvertIntToHexStringN\n"
-        "	ldr	r0, ._359 + 4   @ Str_839C053\n"
-        "	bl	sub_8071F40\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._360:\n"
-        "	.align	2, 0\n"
-        "._359:\n"
-        "	.word	gStringVar1\n"
-        "	.word	Str_839C053\n"
-        "\n"
-    );
+    ConvertIntToHexStringN(gStringVar1, rnums, STR_CONV_MODE_LEFT_ALIGN, 4);
+    sub_8071F40(Str_839C053);
 }
 
-NAKED
-void DebugMenu_8078310()
+void DebugMenu_8078310(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	ldr	r1, ._364       @ gTasks\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r4, r1]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._361	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._362	@cond_branch\n"
-        "	b	._375\n"
-        "._365:\n"
-        "	.align	2, 0\n"
-        "._364:\n"
-        "	.word	gTasks+0x8\n"
-        "._361:\n"
-        "	ldr	r0, ._367       @ 0x4024\n"
-        "	bl	VarGet\n"
-        "	strh	r0, [r4, #0x2]\n"
-        "	ldrh	r0, [r4, #0x2]\n"
-        "	bl	DebugMenu_80782EC\n"
-        "	ldrh	r0, [r4]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r4]\n"
-        "	b	._375\n"
-        "._368:\n"
-        "	.align	2, 0\n"
-        "._367:\n"
-        "	.word	0x4024\n"
-        "._362:\n"
-        "	ldr	r3, ._371       @ gMain\n"
-        "	ldrh	r1, [r3, #0x2e]\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._369	@cond_branch\n"
-        "	mov	r0, #0x49\n"
-        "	bl	PlaySE\n"
-        "	ldr	r0, ._371 + 4   @ 0x4024\n"
-        "	bl	GetVarPointer\n"
-        "	ldrh	r1, [r4, #0x2]\n"
-        "	strh	r1, [r0]\n"
-        "	b	._370\n"
-        "._372:\n"
-        "	.align	2, 0\n"
-        "._371:\n"
-        "	.word	gMain\n"
-        "	.word	0x4024\n"
-        "._369:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._373	@cond_branch\n"
-        "._370:\n"
-        "	bl	Menu_EraseScreen\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DestroyTask\n"
-        "	bl	ScriptContext2_Disable\n"
-        "	b	._375\n"
-        "._373:\n"
-        "	add	r0, r4, #2\n"
-        "	ldr	r2, ._376       @ 0xffff\n"
-        "	ldrh	r3, [r3, #0x30]\n"
-        "	mov	r1, #0x0\n"
-        "	bl	DebugMenu_8077DD8\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._375	@cond_branch\n"
-        "	ldrh	r0, [r4, #0x2]\n"
-        "	bl	DebugMenu_80782EC\n"
-        "._375:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._377:\n"
-        "	.align	2, 0\n"
-        "._376:\n"
-        "	.word	0xffff\n"
-        "\n"
-    );
+    s16 * data = gTasks[taskId].data;
+
+    switch (data[0])
+    {
+        case 0:
+            data[1] = VarGet(VAR_MIRAGE_RND_H);
+            DebugMenu_80782EC(data[1]);
+            data[0]++;
+            break;
+        case 1:
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_PINPON);
+                *GetVarPointer(VAR_MIRAGE_RND_H) = data[1];
+                Menu_EraseScreen();
+                DestroyTask(taskId);
+                ScriptContext2_Disable();
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                Menu_EraseScreen();
+                DestroyTask(taskId);
+                ScriptContext2_Disable();
+            }
+            else if (DebugMenu_8077DD8(data + 1, 0, 0xFFFF, gMain.newAndRepeatedKeys) == TRUE)
+                DebugMenu_80782EC(data[1]);
+            break;
+    }
 }
 
-NAKED
-u8 DebugMenu_MiragaIslandRND()
+u8 DebugMenu_MiragaIslandRND(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._378       @ DebugMenu_8078310\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._379:\n"
-        "	.align	2, 0\n"
-        "._378:\n"
-        "	.word	DebugMenu_8078310+1\n"
-        "\n"
-    );
+    CloseMenu();
+    CreateTask(DebugMenu_8078310, 80);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-NAKED
-bool8 DebugMenu_80783C8()
+bool8 DebugMenu_80783C8(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r0, ._383       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x30\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._382	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r4, ._383 + 4   @ 0x804\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagGet\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._381	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagSet\n"
-        "	mov	r0, #0x0\n"
-        "	bl	DebugMenu_807786C\n"
-        "	b	._382\n"
-        "._384:\n"
-        "	.align	2, 0\n"
-        "._383:\n"
-        "	.word	gMain\n"
-        "	.word	0x804\n"
-        "._381:\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagClear\n"
-        "	mov	r0, #0x1\n"
-        "	bl	DebugMenu_807786C\n"
-        "._382:\n"
-        "	ldr	r0, ._388       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._385	@cond_branch\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._386	@cond_branch\n"
-        "._385:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	b	._387\n"
-        "._389:\n"
-        "	.align	2, 0\n"
-        "._388:\n"
-        "	.word	gMain\n"
-        "._386:\n"
-        "	mov	r0, #0x0\n"
-        "._387:\n"
-        "	pop	{r4}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    {
+        PlaySE(SE_SELECT);
+        if (!FlagGet(FLAG_SYS_GAME_CLEAR))
+        {
+            FlagSet(FLAG_SYS_GAME_CLEAR);
+            DebugMenu_807786C(0);
+        }
+        else
+        {
+            FlagClear(FLAG_SYS_GAME_CLEAR);
+            DebugMenu_807786C(1);
+        }
+    }
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
-NAKED
-u8 DebugMenu_ToggleClearFlag()
+u8 DebugMenu_ToggleClearFlag(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._390       @ 0x804\n"
-        "	bl	FlagGet\n"
-        "	mov	r1, #0x1\n"
-        "	eor	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	DebugMenu_807786C\n"
-        "	ldr	r1, ._390 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._390 + 8   @ DebugMenu_80783C8\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._391:\n"
-        "	.align	2, 0\n"
-        "._390:\n"
-        "	.word	0x804\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_80783C8+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_807786C(FlagGet(FLAG_SYS_GAME_CLEAR) ^ 1);
+    gMenuCallback = DebugMenu_80783C8;
+    return FALSE;
 }
 
-NAKED
-bool8 DebugMenu_8078464()
+bool8 DebugMenu_8078464(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r4, ._396       @ 0x82a\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagGet\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	DebugMenu_8077E40\n"
-        "	add	r1, r0, #0\n"
-        "	cmp	r1, #0\n"
-        "	beq	._392	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	bgt	._393	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	cmp	r1, r0\n"
-        "	beq	._394	@cond_branch\n"
-        "	b	._401\n"
-        "._397:\n"
-        "	.align	2, 0\n"
-        "._396:\n"
-        "	.word	0x82a\n"
-        "._393:\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._398	@cond_branch\n"
-        "	b	._401\n"
-        "._392:\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagClear\n"
-        "	b	._401\n"
-        "._398:\n"
-        "	add	r0, r4, #0\n"
-        "	bl	FlagSet\n"
-        "	b	._401\n"
-        "._394:\n"
-        "	mov	r0, #0x1\n"
-        "	b	._402\n"
-        "._401:\n"
-        "	mov	r0, #0x0\n"
-        "._402:\n"
-        "	pop	{r4}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    switch (DebugMenu_8077E40(FlagGet(FLAG_SYS_WEATHER_CTRL)))
+    {
+        case 0:
+            FlagClear(FLAG_SYS_WEATHER_CTRL);
+            return FALSE;
+        case 1:
+            FlagSet(FLAG_SYS_WEATHER_CTRL);
+            return FALSE;
+        case -1:
+            return TRUE;
+    }
+    return FALSE;
 }
 
-NAKED
-u8 DebugMenu_OpenWeatherEvents()
+u8 DebugMenu_OpenWeatherEvents(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._404       @ 0x82a\n"
-        "	bl	FlagGet\n"
-        "	mov	r1, #0x0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	bne	._403	@cond_branch\n"
-        "	mov	r1, #0x1\n"
-        "._403:\n"
-        "	add	r0, r1, #0\n"
-        "	bl	DebugMenu_807786C\n"
-        "	ldr	r1, ._404 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._404 + 8   @ DebugMenu_8078464\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._405:\n"
-        "	.align	2, 0\n"
-        "._404:\n"
-        "	.word	0x82a\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8078464+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_807786C(FlagGet(FLAG_SYS_WEATHER_CTRL) ? FALSE : TRUE);
+    gMenuCallback = DebugMenu_8078464;
+    return FALSE;
 }
 
-NAKED
-bool8 DebugMenu_80784E8()
+bool8 DebugMenu_80784E8(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	IsMysteryGiftEnabled\n"
-        "	bl	DebugMenu_8077E40\n"
-        "	add	r1, r0, #0\n"
-        "	cmp	r1, #0\n"
-        "	beq	._406	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	bgt	._407	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	neg	r0, r0\n"
-        "	cmp	r1, r0\n"
-        "	beq	._408	@cond_branch\n"
-        "	b	._413\n"
-        "._407:\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._410	@cond_branch\n"
-        "	b	._413\n"
-        "._406:\n"
-        "	bl	DisableMysteryGift\n"
-        "	b	._413\n"
-        "._410:\n"
-        "	bl	EnableMysteryGift\n"
-        "	b	._413\n"
-        "._408:\n"
-        "	mov	r0, #0x1\n"
-        "	b	._414\n"
-        "._413:\n"
-        "	mov	r0, #0x0\n"
-        "._414:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    switch (DebugMenu_8077E40(IsMysteryGiftEnabled()))
+    {
+        case 0:
+            DisableMysteryGift();
+            return FALSE;
+        case 1:
+            EnableMysteryGift();
+            return FALSE;
+        case -1:
+            return TRUE;
+    }
+    return FALSE;
 }
 
-NAKED
-u8 DebugMenu_OpenMysteryEvent()
+u8 DebugMenu_OpenMysteryEvent(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	IsMysteryGiftEnabled\n"
-        "	mov	r1, #0x0\n"
-        "	cmp	r0, #0\n"
-        "	bne	._415	@cond_branch\n"
-        "	mov	r1, #0x1\n"
-        "._415:\n"
-        "	add	r0, r1, #0\n"
-        "	bl	DebugMenu_807786C\n"
-        "	ldr	r1, ._416       @ gMenuCallback\n"
-        "	ldr	r0, ._416 + 4   @ DebugMenu_80784E8\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._417:\n"
-        "	.align	2, 0\n"
-        "._416:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_80784E8+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_807786C(IsMysteryGiftEnabled() ? FALSE : TRUE);
+    gMenuCallback = DebugMenu_80784E8;
+    return FALSE;
 }
 
-NAKED
-void DebugMenu_8078550()
+const u8 Str_839C07C[] = _("{STR_VAR_1}:{STR_VAR_2}\n"
+                           "{STR_VAR_3}");
+const u8 Str_839C085[] = _("みしよう　データ");
+const u8 Str_839C08E[] = _("Confirmation");
+const u8 Str_839C09B[] = _("Max-1 set");
+const u8 Str_839C0A5[] = _("Zero clear");
+const u8 Str_839C0B0[] = _("レポート");
+const u8 Str_839C0B5[] = _("クリア　じかん");
+const u8 Str_839C0BD[] = _("りゅうこう　さくせい");
+const u8 Str_839C0C8[] = _("きのみを　うえたかいすう");
+const u8 Str_839C0D5[] = _("じてんしゃこうかん");
+const u8 Str_839C0DF[] = _("ほすう");
+const u8 Str_839C0E3[] = _("インタビュー");
+const u8 Str_839C0EA[] = _("バトル");
+const u8 Str_839C0EE[] = _("やせいバトル");
+const u8 Str_839C0F5[] = _("トレーナーバトル");
+const u8 Str_839C0FE[] = _("でんどういり");
+const u8 Str_839C105[] = _("ポケモンほかく");
+const u8 Str_839C10D[] = _("つった　かいすう");
+const u8 Str_839C116[] = _("タマゴかえった");
+const u8 Str_839C11E[] = _("しんかした");
+const u8 Str_839C124[] = _("ポケセン　かいふく");
+const u8 Str_839C12E[] = _("じたく　かいふく");
+const u8 Str_839C137[] = _("サファリ　りよう");
+const u8 Str_839C140[] = _("ひでん:いあいぎり");
+const u8 Str_839C14A[] = _("ひでん:いわくだき");
+const u8 Str_839C154[] = _("きち　ひっこし");
+const u8 Str_839C15C[] = _("つうしんこうかん");
+const u8 Str_839C165[] = _("つうしんたいせん");
+const u8 Str_839C16E[] = _("つうしん　かち");
+const u8 Str_839C176[] = _("つうしん　まけ");
+const u8 Str_839C17E[] = _("つうしん　ひきわけ");
+const u8 Str_839C188[] = _("わざ:はねる");
+const u8 Str_839C18F[] = _("わざ:わるあがき");
+const u8 Str_839C198[] = _("スロットおおあたりかいすう");
+const u8 Str_839C1A6[] = _("ルーレット　れんしょう");
+const u8 Str_839C1B2[] = _("バトルタワー");
+const u8 Str_839C1B9[] = _("バトルタワーかち");
+const u8 Str_839C1C2[] = _("バトルタワーれんしょう");
+const u8 Str_839C1CE[] = _("ポロックさくせい");
+const u8 Str_839C1D7[] = _("つうしんでポロックつくった");
+const u8 Str_839C1E5[] = _("つうしんコンテストかち");
+const u8 Str_839C1F1[] = _("CPUコンテストさんか");
+const u8 Str_839C1FD[] = _("CPUコンテストかち");
+const u8 Str_839C208[] = _("かいもの");
+const u8 Str_839C20D[] = _("ダウジングマシン");
+const u8 Str_839C216[] = _("あめふり");
+const u8 Str_839C21B[] = _("ずかんをみた");
+const u8 Str_839C222[] = _("リボン　もらった");
+const u8 Str_839C22B[] = _("だんさ　とびおり");
+const u8 Str_839C234[] = _("TVを　みた");
+const u8 Str_839C23B[] = _("とけいを　みた");
+const u8 Str_839C243[] = _("くじが　あたった");
+const u8 Str_839C24C[] = _("ポケモンあずけた");
+const u8 Str_839C255[] = _("ロープウェイりよう");
+const u8 Str_839C25F[] = _("おんせん　はいった");
+
+const struct {
+    u32 maxVal;
+    const u8 * name;
+} gUnknown_Debug_839C26C[] = {
+    {0xFFFFFF, Str_839C0B0},
+    {65485627, Str_839C0B5},
+    {0xFFFFFF, Str_839C0BD},
+    {0xFFFFFF, Str_839C0C8},
+    {0xFFFFFF, Str_839C0D5},
+    {0xFFFFFF, Str_839C0DF},
+    {0xFFFFFF, Str_839C0E3},
+    {0xFFFFFF, Str_839C0EA},
+    {0xFFFFFF, Str_839C0EE},
+    {0xFFFFFF, Str_839C0F5},
+    {999,      Str_839C0FE},
+    {0xFFFFFF, Str_839C105},
+    {0xFFFFFF, Str_839C10D},
+    {0xFFFFFF, Str_839C116},
+    {0xFFFFFF, Str_839C11E},
+    {0xFFFFFF, Str_839C124},
+    {0xFFFFFF, Str_839C12E},
+    {0xFFFFFF, Str_839C137},
+    {0xFFFFFF, Str_839C140},
+    {0xFFFFFF, Str_839C14A},
+    {0xFFFFFF, Str_839C154},
+    {0xFFFFFF, Str_839C15C},
+    {0xFFFFFF, Str_839C165},
+    {9999,     Str_839C16E},
+    {9999,     Str_839C176},
+    {9999,     Str_839C17E},
+    {0xFFFFFF, Str_839C188},
+    {0xFFFFFF, Str_839C18F},
+    {0xFFFFFF, Str_839C198},
+    {0xFFFFFF, Str_839C1A6},
+    {0xFFFFFF, Str_839C1B2},
+    {0x0,      Str_839C1B9},
+    {0x0,      Str_839C1C2},
+    {0xFFFFFF, Str_839C1CE},
+    {0xFFFFFF, Str_839C1D7},
+    {0xFFFFFF, Str_839C1E5},
+    {0xFFFFFF, Str_839C1F1},
+    {0xFFFFFF, Str_839C1FD},
+    {0xFFFFFF, Str_839C208},
+    {0xFFFFFF, Str_839C20D},
+    {0xFFFFFF, Str_839C216},
+    {0xFFFFFF, Str_839C21B},
+    {0xFFFFFF, Str_839C222},
+    {0xFFFFFF, Str_839C22B},
+    {0xFFFFFF, Str_839C234},
+    {0xFFFFFF, Str_839C23B},
+    {0xFFFFFF, Str_839C243},
+    {0xFFFFFF, Str_839C24C},
+    {0xFFFFFF, Str_839C255},
+    {0xFFFFFF, Str_839C25F}
+};
+
+void DebugMenu_8078550(u16 gameStat)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r6, r0, #0x10\n"
-        "	lsl	r0, r6, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	bl	GetGameStat\n"
-        "	add	r7, r0, #0\n"
-        "	ldr	r0, ._420       @ gStringVar1\n"
-        "	add	r1, r6, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	ldr	r0, ._420 + 4   @ gStringVar2\n"
-        "	ldr	r5, ._420 + 8   @ gUnknown_Debug_839C26C\n"
-        "	lsl	r4, r6, #0x3\n"
-        "	add	r1, r5, #4\n"
-        "	add	r1, r4, r1\n"
-        "	ldr	r1, [r1]\n"
-        "	bl	StringCopy\n"
-        "	add	r4, r4, r5\n"
-        "	ldr	r0, [r4]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._418	@cond_branch\n"
-        "	ldr	r0, ._420 + 12  @ gStringVar3\n"
-        "	ldr	r1, ._420 + 16  @ Str_839C085\n"
-        "	bl	StringCopy\n"
-        "	b	._423\n"
-        "._421:\n"
-        "	.align	2, 0\n"
-        "._420:\n"
-        "	.word	gStringVar1\n"
-        "	.word	gStringVar2\n"
-        "	.word	gUnknown_Debug_839C26C\n"
-        "	.word	gStringVar3\n"
-        "	.word	Str_839C085\n"
-        "._418:\n"
-        "	cmp	r6, #0x1\n"
-        "	beq	._422	@cond_branch\n"
-        "	ldr	r0, ._424       @ gStringVar3\n"
-        "	add	r1, r7, #0\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0xa\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	b	._423\n"
-        "._425:\n"
-        "	.align	2, 0\n"
-        "._424:\n"
-        "	.word	gStringVar3\n"
-        "._422:\n"
-        "	ldr	r4, ._426       @ gStringVar3\n"
-        "	lsr	r1, r7, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r6, #0xf0\n"
-        "	strb	r6, [r4, #0x3]\n"
-        "	add	r0, r4, #4\n"
-        "	lsr	r1, r7, #0x8\n"
-        "	mov	r5, #0xff\n"
-        "	and	r1, r1, r5\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	strb	r6, [r4, #0x6]\n"
-        "	add	r4, r4, #0x7\n"
-        "	and	r7, r7, r5\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r7, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "._423:\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._426 + 4   @ Str_839C07C\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._427:\n"
-        "	.align	2, 0\n"
-        "._426:\n"
-        "	.word	gStringVar3\n"
-        "	.word	Str_839C07C\n"
-        "\n"
-    );
+    u32 value = GetGameStat(gameStat);
+
+    ConvertIntToDecimalStringN(gStringVar1, gameStat, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopy(gStringVar2, gUnknown_Debug_839C26C[gameStat].name);
+    if (gUnknown_Debug_839C26C[gameStat].maxVal == 0)
+        StringCopy(gStringVar3, Str_839C085);
+    else if (gameStat != GAME_STAT_FIRST_HOF_PLAY_TIME)
+        ConvertIntToDecimalStringN(gStringVar3, value, STR_CONV_MODE_RIGHT_ALIGN, 10);
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar3, value >> 16, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        gStringVar3[3] = CHAR_COLON;
+        ConvertIntToDecimalStringN(gStringVar3 + 4, (value >> 8) & 0xff, STR_CONV_MODE_LEADING_ZEROS, 2);
+        gStringVar3[6] = CHAR_COLON;
+        ConvertIntToDecimalStringN(gStringVar3 + 7, value & 0xff, STR_CONV_MODE_LEADING_ZEROS, 2);
+    }
+    Menu_DisplayDialogueFrame();
+    Menu_PrintText(Str_839C07C, 2, 15);
 }
 
 NAKED
