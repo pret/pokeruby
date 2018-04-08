@@ -24,6 +24,11 @@
 #include "field_player_avatar.h"
 #include "credits.h"
 #include "event_data.h"
+#include "berry.h"
+#include "pokedex.h"
+#include "mori_debug_menu.h"
+#include "cable_club.h"
+#include "field_fadetransition.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
@@ -35,6 +40,8 @@ u8 DebugMenu_807709C(void);
 void DebugMenu_807719C(void);
 void DebugMenu_80771EC(void);
 void DebugMenu_8077238(void);
+u8 DebugMenu_8077D78(const struct MenuAction *menuActions);
+void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 a1, u8 a2);
 
 u8 DebugMenu_Exit(void);
 u8 DebugMenu_OpenWatanabe(void);
@@ -758,27 +765,27 @@ u8 DebugMenu_OpenSogabe(void)
     return unref_sub_814A414();
 }
 
-u8 DebugMenu_OpenTamada()
+u8 DebugMenu_OpenTamada(void)
 {
     return debug_sub_8075C30();
 }
 
-u8 DebugMenu_OpenKagaya()
+u8 DebugMenu_OpenKagaya(void)
 {
     return InitKagayaDebugMenu_A();
 }
 
-u8 DebugMenu_OpenMatsuda()
+u8 DebugMenu_OpenMatsuda(void)
 {
     return unref_sub_80A9B28();
 }
 
-u8 DebugMenu_OpenNohara()
+u8 DebugMenu_OpenNohara(void)
 {
     return InitNoharaDebugMenu();
 }
 
-u8 DebugMenu_OpenWatanabe()
+u8 DebugMenu_OpenWatanabe(void)
 {
     CloseMenu();
     SetMainCallback2(InitWatanabeDebugMenu);
@@ -786,7 +793,7 @@ u8 DebugMenu_OpenWatanabe()
     return TRUE;
 }
 
-u8 DebugMenu_EndSequenceDemo()
+u8 DebugMenu_EndSequenceDemo(void)
 {
     CloseMenu();
     SetMainCallback2(sub_81439D0);
@@ -794,7 +801,7 @@ u8 DebugMenu_EndSequenceDemo()
     return TRUE;
 }
 
-u8 DebugMenu_HallOfFame()
+u8 DebugMenu_HallOfFame(void)
 {
     CloseMenu();
     GameClear();
@@ -802,7 +809,7 @@ u8 DebugMenu_HallOfFame()
     return TRUE;
 }
 
-u8 DebugMenu_OpenSizeComparison()
+u8 DebugMenu_OpenSizeComparison(void)
 {
     CloseMenu();
     InitSizeComparison();
@@ -810,7 +817,7 @@ u8 DebugMenu_OpenSizeComparison()
     return TRUE;
 }
 
-u8 DebugMenu_HoennNationalDex()
+u8 DebugMenu_HoennNationalDex(void)
 {
     if (IsNationalPokedexEnabled())
         DisableNationalPokedex();
@@ -820,129 +827,40 @@ u8 DebugMenu_HoennNationalDex()
     return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_8077434()
-{
-    asm(
-        "	push	{lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	bl	Menu_GetCursorPos\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	cmp	r0, #0x4\n"
-        "	bhi	._165	@cond_branch\n"
-        "	lsl	r0, r0, #0x2\n"
-        "	ldr	r1, ._149       @ \n"
-        "	add	r0, r0, r1\n"
-        "	ldr	r0, [r0]\n"
-        "	mov	pc, r0\n"
-        "._150:\n"
-        "	.align	2, 0\n"
-        "._149:\n"
-        "	.word	._148\n"
-        "._148:\n"
-        "	.word	._151\n"
-        "	.word	._152\n"
-        "	.word	._153\n"
-        "	.word	._154\n"
-        "	.word	._155\n"
-        "._151:\n"
-        "	ldr	r0, ._157       @ Str_839BE0F\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x4\n"
-        "	bl	debug_sub_80C2C18\n"
-        "	mov	r0, #0xff\n"
-        "	str	r0, [sp]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r1, #0xff\n"
-        "	mov	r2, #0xff\n"
-        "	mov	r3, #0x0\n"
-        "	bl	debug_sub_80C2D24\n"
-        "	b	._165\n"
-        "._158:\n"
-        "	.align	2, 0\n"
-        "._157:\n"
-        "	.word	Str_839BE0F\n"
-        "._152:\n"
-        "	ldr	r0, ._160       @ Str_839BE12\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0x0\n"
-        "	bl	debug_sub_80C2C18\n"
-        "	mov	r0, #0xff\n"
-        "	str	r0, [sp]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r1, #0xff\n"
-        "	mov	r2, #0x0\n"
-        "	b	._159\n"
-        "._161:\n"
-        "	.align	2, 0\n"
-        "._160:\n"
-        "	.word	Str_839BE12\n"
-        "._153:\n"
-        "	ldr	r0, ._163       @ Str_839BE16\n"
-        "	mov	r1, #0x3\n"
-        "	mov	r2, #0x0\n"
-        "	bl	debug_sub_80C2C18\n"
-        "	mov	r0, #0xff\n"
-        "	str	r0, [sp]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r1, #0x0\n"
-        "	b	._162\n"
-        "._164:\n"
-        "	.align	2, 0\n"
-        "._163:\n"
-        "	.word	Str_839BE16\n"
-        "._154:\n"
-        "	ldr	r0, ._166       @ Str_839BE1A\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0x0\n"
-        "	bl	debug_sub_80C2C18\n"
-        "	mov	r0, #0xff\n"
-        "	str	r0, [sp]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0xff\n"
-        "._162:\n"
-        "	mov	r2, #0xff\n"
-        "._159:\n"
-        "	mov	r3, #0xff\n"
-        "	bl	debug_sub_80C2D24\n"
-        "	b	._165\n"
-        "._167:\n"
-        "	.align	2, 0\n"
-        "._166:\n"
-        "	.word	Str_839BE1A\n"
-        "._155:\n"
-        "	ldr	r0, ._168       @ Str_839BE1E\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0x0\n"
-        "	bl	debug_sub_80C2C18\n"
-        "	mov	r0, #0xff\n"
-        "	str	r0, [sp]\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r1, #0xff\n"
-        "	mov	r2, #0xff\n"
-        "	mov	r3, #0xff\n"
-        "	bl	debug_sub_80C2D24\n"
-        "._165:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._169:\n"
-        "	.align	2, 0\n"
-        "._168:\n"
-        "	.word	Str_839BE1E\n"
-        "\n"
-    );
-}
-
 const u8 Str_839BE0F[] = _("HP");
 const u8 Str_839BE12[] = _("PAR");
 const u8 Str_839BE16[] = _("SLP");
 const u8 Str_839BE1A[] = _("PSN");
 const u8 Str_839BE1E[] = _("ウマイ");
+
+u8 DebugMenu_8077434(void)
+{
+    switch (Menu_GetCursorPos())
+    {
+        case 0:
+            debug_sub_80C2C18(Str_839BE0F, 1, 4);
+            debug_sub_80C2D24(0xff, 0xff, 0xff, 0, 0xff, 0xff);
+            break;
+        case 1:
+            debug_sub_80C2C18(Str_839BE12, 2, 0);
+            debug_sub_80C2D24(0xff, 0xff, 0, 0xff, 0xff, 0xff);
+            break;
+        case 2:
+            debug_sub_80C2C18(Str_839BE16, 3, 0);
+            debug_sub_80C2D24(0xff, 0, 0xff, 0xff, 0xff, 0xff);
+            break;
+        case 3:
+            debug_sub_80C2C18(Str_839BE1A, 4, 0);
+            debug_sub_80C2D24(0, 0xff, 0xff, 0xff, 0xff, 0xff);
+            break;
+        case 4:
+            debug_sub_80C2C18(Str_839BE1E, 4, 0);
+            debug_sub_80C2D24(0xff, 0xff, 0xff, 0xff, 0xff, 0xff);
+            break;
+    }
+    CloseMenu();
+    return TRUE;
+}
 
 const struct MenuAction gUnknown_Debug_839BE24[] = {
     {Str_839BE0F, DebugMenu_8077434},
@@ -952,321 +870,131 @@ const struct MenuAction gUnknown_Debug_839BE24[] = {
     {Str_839BE1E, DebugMenu_8077434}
 };
 
-__attribute__((naked))
-u8 DebugMenu_807750C()
+u8 DebugMenu_807750C(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._170       @ gUnknown_Debug_839BE24\n"
-        "	bl	DebugMenu_8077D78\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._171:\n"
-        "	.align	2, 0\n"
-        "._170:\n"
-        "	.word	gUnknown_Debug_839BE24\n"
-        "\n"
-    );
+    return DebugMenu_8077D78(gUnknown_Debug_839BE24);
 }
 
-__attribute__((naked))
-u8 DebugMenu_SetRamBerry()
+u8 DebugMenu_SetRamBerry(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._172       @ gUnknown_Debug_839BE24\n"
-        "	mov	r1, #0xc\n"
-        "	mov	r2, #0x5\n"
-        "	bl	DebugMenu_8077D24\n"
-        "	ldr	r1, ._172 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._172 + 8   @ DebugMenu_807750C\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._173:\n"
-        "	.align	2, 0\n"
-        "._172:\n"
-        "	.word	gUnknown_Debug_839BE24\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_807750C+1\n"
-        "\n"
-    );
+    DebugMenu_8077D24(gUnknown_Debug_839BE24, 12, 5);
+    gMenuCallback = DebugMenu_807750C;
+    return FALSE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_ToggleBGM()
+u8 DebugMenu_ToggleBGM(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r2, ._175       @ gDisableMusic\n"
-        "	mov	r1, #0x0\n"
-        "	ldrb	r0, [r2]\n"
-        "	cmp	r0, #0\n"
-        "	bne	._174	@cond_branch\n"
-        "	mov	r1, #0x1\n"
-        "._174:\n"
-        "	strb	r1, [r2]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._176:\n"
-        "	.align	2, 0\n"
-        "._175:\n"
-        "	.word	gDisableMusic\n"
-        "\n"
-    );
+    gDisableMusic = gDisableMusic ? FALSE : TRUE;
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_BattleForDebug()
+u8 DebugMenu_BattleForDebug(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	InitBattleForDebug\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    InitBattleForDebug();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_NationalDex()
+u8 DebugMenu_NationalDex(void)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	mov	r4, #0x0\n"
-        "	ldr	r5, ._178       @ 0x181\n"
-        "._177:\n"
-        "	add	r4, r4, #0x1\n"
-        "	lsl	r4, r4, #0x10\n"
-        "	lsr	r4, r4, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x2\n"
-        "	bl	GetSetPokedexFlag\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetSetPokedexFlag\n"
-        "	cmp	r4, r5\n"
-        "	bls	._177	@cond_branch\n"
-        "	ldr	r1, ._178 + 4   @ gUnknown_03005CE8\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._179:\n"
-        "	.align	2, 0\n"
-        "._178:\n"
-        "	.word	0x181\n"
-        "	.word	gUnknown_03005CE8\n"
-        "\n"
-    );
+    u16 i;
+
+    for (i = 0; i < 386; i++)
+    {
+        GetSetPokedexFlag(i + 1, 2);
+        GetSetPokedexFlag(i + 1, 3);
+    }
+    gUnknown_03005CE8 = TRUE;
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_HoennDex()
+u8 DebugMenu_HoennDex(void)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	mov	r5, #0x0\n"
-        "._180:\n"
-        "	add	r5, r5, #0x1\n"
-        "	lsl	r5, r5, #0x10\n"
-        "	lsr	r5, r5, #0x10\n"
-        "	add	r0, r5, #0\n"
-        "	bl	HoennToNationalOrder\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x10\n"
-        "	lsr	r4, r4, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x2\n"
-        "	bl	GetSetPokedexFlag\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x3\n"
-        "	bl	GetSetPokedexFlag\n"
-        "	cmp	r5, #0xc9\n"
-        "	bls	._180	@cond_branch\n"
-        "	ldr	r1, ._181       @ gUnknown_03005CE8\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._182:\n"
-        "	.align	2, 0\n"
-        "._181:\n"
-        "	.word	gUnknown_03005CE8\n"
-        "\n"
-    );
+    u16 i;
+
+    for (i = 0; i < 202; i++)
+    {
+        u16 nati = HoennToNationalOrder(i + 1);
+        GetSetPokedexFlag(nati, 2);
+        GetSetPokedexFlag(nati, 3);
+    }
+    gUnknown_03005CE8 = TRUE;
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_CreatePKMN()
+u8 DebugMenu_CreatePKMN(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	InitCreatePokemon\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    InitCreatePokemon();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_ViewPokemonGraphics()
+u8 DebugMenu_ViewPokemonGraphics(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	InitSeePokemonGraphics\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    InitSeePokemonGraphics();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenSeeTrainers()
+u8 DebugMenu_OpenSeeTrainers(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	InitSeeTrainers\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    InitSeeTrainers();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenMori()
+u8 DebugMenu_OpenMori(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitMoriDebugMenu\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitMoriDebugMenu();
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenTomomichi()
+u8 DebugMenu_OpenTomomichi(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitTomomichiDebugWindow\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitTomomichiDebugWindow();
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenAoki()
+u8 DebugMenu_OpenAoki(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenTaya()
+u8 DebugMenu_OpenTaya(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitTayaDebugWindow\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitTayaDebugWindow();
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenNakamura()
+u8 DebugMenu_OpenNakamura(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitNakamuraDebugMenu\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitNakamuraDebugMenu();
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenIwasawa()
+u8 DebugMenu_OpenIwasawa(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8138CC4\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return debug_sub_8138CC4();
 }
 
-__attribute__((naked))
-u8 DebugMenu_Teleport()
+u8 DebugMenu_Teleport(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Overworld_SetWarpDestToLastHealLoc\n"
-        "	bl	sub_8080E88\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    Overworld_SetWarpDestToLastHealLoc();
+    sub_8080E88();
+    ScriptContext2_Enable();
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_EditPKMN()
+u8 DebugMenu_EditPKMN(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	NakaGenderTest\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    NakaGenderTest();
+    return FALSE;
 }
 
 __attribute__((naked))
@@ -1822,7 +1550,7 @@ void DebugMenu_8077A40()
 }
 
 __attribute__((naked))
-void DebugMenu_8077A60()
+u8 DebugMenu_8077A60()
 {
     asm(
         "	push	{lr}\n"
@@ -2310,7 +2038,7 @@ void debug_sub_8077CF4()
 }
 
 __attribute__((naked))
-void DebugMenu_8077D24()
+void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 a1, u8 a2)
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -2355,7 +2083,7 @@ void DebugMenu_8077D24()
 }
 
 __attribute__((naked))
-void DebugMenu_8077D78()
+u8 DebugMenu_8077D78(const struct MenuAction *menuActions)
 {
     asm(
         "	push	{r4, r5, lr}\n"

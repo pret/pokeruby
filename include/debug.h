@@ -16,6 +16,7 @@ bool8 unref_sub_80A9B28(void);
 
 // tomomichi_debug_menu
 void debug_nullsub_66(void);
+bool8 InitTomomichiDebugWindow(void);
 
 // sound_check_menu
 void CB2_StartSoundCheckMenu(void);
@@ -39,5 +40,15 @@ bool8 InitNoharaDebugMenu(void);
 // watanabe_debug_menu
 void InitWatanabeDebugMenu(void);
 void InitSizeComparison(void);
+void InitBattleForDebug(void);
+void InitCreatePokemon(void);
+void InitSeePokemonGraphics(void);
+void InitSeeTrainers(void);
+
+// taya_debug_menu
+bool8 InitTayaDebugWindow(void);
+
+// nakamura_debug_menu
+bool8 InitNakamuraDebugMenu(void);
 
 #endif // GUARD_DEBUG_H
