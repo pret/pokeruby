@@ -6,75 +6,7 @@
 
 	.section .rodata
 
-Str_839BD90:: @ 0x839BD90
-	.string "ジュンイチ$"
-
-Str_839BD96:: @ 0x839BD96
-	.string "ダイゴロウ$"
-
-Str_839BD9C:: @ 0x839BD9C
-	.string "テツジ$"
-
-Str_839BDA0:: @ 0x839BDA0
-	.string "バレンシア$"
-
-Str_839BDA6:: @ 0x839BDA6
-	.string "ハルコマチ$"
-
-Str_839BDAC:: @ 0x839BDAC
-	.string "RAYMOND$"
-
-Str_839BDB4:: @ 0x839BDB4
-	.string "TIFFANY$"
-
-Str_839BDBC:: @ 0x839BDBC
-	.string "くまxちえ$"
-
 	.align 2
-gUnknown_Debug_839BDC4:: @ 0x839BDC4
-	.4byte Str_839BD90, 0x0
-	.4byte Str_839BD96, 0x0
-	.4byte Str_839BDA0, 0x1
-	.4byte Str_839BDA6, 0x1
-	.4byte Str_839BDAC, 0x80
-	.4byte Str_839BDB4, 0x81
-	.4byte Str_839BD9C, 0x0
-	.4byte Str_839BDBC, 0x1
-
-Str_839BE04:: @ 0x839BE04
-	.string "ID$"
-
-Str_839BE07:: @ 0x839BE07
-	.string "X$"
-
-Str_839BE09:: @ 0x839BE09
-	.string " Y$"
-
-Str_839BE0C:: @ 0x839BE0C
-	.string " H$"
-
-Str_839BE0F:: @ 0x839BE0F
-	.string "HP$"
-
-Str_839BE12:: @ 0x839BE12
-	.string "PAR$"
-
-Str_839BE16:: @ 0x839BE16
-	.string "SLP$"
-
-Str_839BE1A:: @ 0x839BE1A
-	.string "PSN$"
-
-Str_839BE1E:: @ 0x839BE1E
-	.string "ウマイ$"
-
-	.align 2
-gUnknown_Debug_839BE24:: @ 0x839BE24
-	.4byte Str_839BE0F, DebugMenu_8077434+1
-	.4byte Str_839BE12, DebugMenu_8077434+1
-	.4byte Str_839BE16, DebugMenu_8077434+1
-	.4byte Str_839BE1A, DebugMenu_8077434+1
-	.4byte Str_839BE1E, DebugMenu_8077434+1
 
 Str_839BE4C:: @ 0x839BE4C
 	.string "OFF$"

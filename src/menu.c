@@ -589,12 +589,12 @@ void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const void * menuItems)
         Menu_PrintText(((const struct MenuAction *)menuItems)[i].text, left, top + 2 * i);
 }
 
-void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
+void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const void * menuItems, const u8 *order)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[order[i]].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[order[i]].text, left, top + 2 * i);
 }
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)

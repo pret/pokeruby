@@ -10,5 +10,6 @@ void sub_8071310(void);
 void ScrSpecial_DoSaveDialog(void);
 void sub_8071B28(void);
 void debug_sub_8075DB4(struct BattleTowerEReaderTrainer *ereaderTrainer, const u8 *b, u32 trainerId);
+bool8 debug_sub_8075C30(void);
 
 #endif // GUARD_STARTER_CHOOSE_H

@@ -20,6 +20,10 @@
 #include "string_util.h"
 #include "new_game.h"
 #include "script.h"
+#include "fieldmap.h"
+#include "field_player_avatar.h"
+#include "credits.h"
+#include "event_data.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
@@ -544,10 +548,28 @@ u8 DebugMenu_8076EDC(void)
     return 0;
 }
 
-extern const struct {
+const u8 Str_839BD90[] = _("ジュンイチ");
+const u8 Str_839BD96[] = _("ダイゴロウ");
+const u8 Str_839BD9C[] = _("テツジ");
+const u8 Str_839BDA0[] = _("バレンシア");
+const u8 Str_839BDA6[] = _("ハルコマチ");
+const u8 Str_839BDAC[] = _("RAYMOND");
+const u8 Str_839BDB4[] = _("TIFFANY");
+const u8 Str_839BDBC[] = _("くまxちえ");
+
+const struct {
     const u8 * text;
     u32 flags;
-} gUnknown_Debug_839BDC4[8];
+} gUnknown_Debug_839BDC4[] = {
+    {Str_839BD90, 0x0},
+    {Str_839BD96, 0x0},
+    {Str_839BDA0, 0x1},
+    {Str_839BDA6, 0x1},
+    {Str_839BDAC, 0x80},
+    {Str_839BDB4, 0x81},
+    {Str_839BD9C, 0x0},
+    {Str_839BDBC, 0x1}
+};
 
 void DebugMenu_8076EF4(void)
 {
@@ -598,7 +620,7 @@ void DebugMenu_8076FEC(void)
     CreateTask(DebugMenu_8076F60, 10);
 }
 
-void DebugMenu_8077004()
+void DebugMenu_8077004(void)
 {
     gUnknown_030006C4 = gUnknown_Debug_839BB64 + gUnknown_030006C1 * 8;
 }
@@ -609,7 +631,7 @@ void DebugMenu_8077020(u8 taskId)
         DestroyTask(taskId);
 }
 
-void DebugMenu_8077048()
+void DebugMenu_8077048(void)
 {
     gMenuCallback = DebugMenu_807706C;
     ScriptContext2_Enable();
@@ -672,400 +694,130 @@ u8 DebugMenu_807709C(void)
     return FALSE;
 }
 
-__attribute__((naked))
-void DebugMenu_807719C()
+void DebugMenu_807719C(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	sp, sp, #0xfffffff8\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x0\n"
-        "	mov	r2, #0xe\n"
-        "	mov	r3, #0x11\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r3, ._133       @ gDebug0x839B9BC\n"
-        "	ldr	r0, ._133 + 4   @ gUnknown_030006C4\n"
-        "	ldr	r0, [r0]\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0x1\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x8\n"
-        "	bl	Menu_PrintItemsReordered\n"
-        "	ldr	r4, ._133 + 8   @ gUnknown_030006C0\n"
-        "	ldrb	r0, [r4]\n"
-        "	str	r0, [sp]\n"
-        "	mov	r0, #0xd\n"
-        "	str	r0, [sp, #0x4]\n"
-        "	mov	r0, #0x0\n"
-        "	mov	r1, #0x1\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x8\n"
-        "	bl	InitMenu\n"
-        "	strb	r0, [r4]\n"
-        "	add	sp, sp, #0x8\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._134:\n"
-        "	.align	2, 0\n"
-        "._133:\n"
-        "	.word	gDebug0x839B9BC\n"
-        "	.word	gUnknown_030006C4 \n"
-        "	.word	gUnknown_030006C0 \n"
-        "\n"
-    );
+    Menu_DrawStdWindowFrame(0, 0, 14, 17);
+    Menu_PrintItemsReordered(1, 1, 8, gDebug0x839B9BC, gUnknown_030006C4);
+    gUnknown_030006C0 = InitMenu(0, 1, 1, 8, gUnknown_030006C0, 13);
 }
 
-__attribute__((naked))
-void DebugMenu_80771EC()
+const u8 Str_839BE04[] = _("ID");
+
+void DebugMenu_80771EC(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r0, ._135       @ gStringVar4\n"
-        "	ldr	r1, ._135 + 4   @ Str_839BE04\n"
-        "	bl	StringCopy\n"
-        "	ldr	r4, ._135 + 8   @ gSaveBlock1\n"
-        "	mov	r1, #0x4\n"
-        "	ldsb	r1, [r4, r1]\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r1, #0x5\n"
-        "	ldsb	r1, [r4, r1]\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	mov	r0, #0x13\n"
-        "	mov	r1, #0xc\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0xf\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._135       @ gStringVar4\n"
-        "	mov	r1, #0x14\n"
-        "	mov	r2, #0xd\n"
-        "	bl	Menu_PrintText\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._136:\n"
-        "	.align	2, 0\n"
-        "._135:\n"
-        "	.word	gStringVar4\n"
-        "	.word	Str_839BE04\n"
-        "	.word	gSaveBlock1\n"
-        "\n"
-    );
+    u8 * buf = gStringVar4;
+    buf = StringCopy(buf, Str_839BE04);
+    buf = ConvertIntToDecimalStringN(buf, gSaveBlock1.location.mapGroup, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    buf = ConvertIntToDecimalStringN(buf, gSaveBlock1.location.mapNum, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    Menu_DrawStdWindowFrame(19, 12, 29, 15);
+    Menu_PrintText(gStringVar4, 20, 13);
 }
 
-__attribute__((naked))
-void DebugMenu_8077238()
+void DebugMenu_8077238(void)
 {
-    asm(
-        "	push	{r4, r5, r6, r7, lr}\n"
-        "	mov	r7, sl\n"
-        "	mov	r6, r9\n"
-        "	mov	r5, r8\n"
-        "	push	{r5, r6, r7}\n"
-        "	add	sp, sp, #0xffffffe8\n"
-        "	ldr	r1, ._139       @ Str_839BE07\n"
-        "	mov	r0, sp\n"
-        "	mov	r2, #0x2\n"
-        "	bl	memcpy\n"
-        "	add	r0, sp, #0x4\n"
-        "	mov	r9, r0\n"
-        "	ldr	r1, ._139 + 4   @ Str_839BE09\n"
-        "	mov	r2, #0x3\n"
-        "	bl	memcpy\n"
-        "	add	r1, sp, #0x8\n"
-        "	mov	sl, r1\n"
-        "	ldr	r1, ._139 + 8   @ Str_839BE0C\n"
-        "	mov	r0, sl\n"
-        "	mov	r2, #0x3\n"
-        "	bl	memcpy\n"
-        "	mov	r2, #0x0\n"
-        "	str	r2, [sp, #0x14]\n"
-        "	add	r4, sp, #0x10\n"
-        "	mov	r6, sp\n"
-        "	add	r6, r6, #0x12\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	PlayerGetDestCoords\n"
-        "	mov	r1, #0x0\n"
-        "	ldsh	r0, [r4, r1]\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r6, r2]\n"
-        "	bl	MapGridGetZCoordAt\n"
-        "	mov	r8, r0\n"
-        "	mov	r0, r8\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r8, r0\n"
-        "	ldrh	r0, [r4]\n"
-        "	sub	r0, r0, #0x7\n"
-        "	strh	r0, [r4]\n"
-        "	ldrh	r0, [r6]\n"
-        "	sub	r0, r0, #0x7\n"
-        "	strh	r0, [r6]\n"
-        "	ldr	r7, ._139 + 12  @ gStringVar4\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r1, sp\n"
-        "	bl	StringCopy\n"
-        "	add	r5, sp, #0xc\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r1, [r4, r2]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	StringAppend\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r1, r9\n"
-        "	bl	StringAppend\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r1, [r6, r0]\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	StringAppend\n"
-        "	add	r0, r7, #0\n"
-        "	mov	r1, sl\n"
-        "	bl	StringAppend\n"
-        "	add	r0, r5, #0\n"
-        "	mov	r1, r8\n"
-        "	mov	r2, #0x0\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r7, #0\n"
-        "	add	r1, r5, #0\n"
-        "	bl	StringAppend\n"
-        "	ldrb	r0, [r7]\n"
-        "	cmp	r0, #0xff\n"
-        "	beq	._137	@cond_branch\n"
-        "	add	r1, r7, #0\n"
-        "._138:\n"
-        "	ldr	r0, [sp, #0x14]\n"
-        "	add	r0, r0, #0x1\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	str	r0, [sp, #0x14]\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r0, [r0]\n"
-        "	cmp	r0, #0xff\n"
-        "	bne	._138	@cond_branch\n"
-        "._137:\n"
-        "	mov	r0, #0x1c\n"
-        "	ldr	r1, [sp, #0x14]\n"
-        "	sub	r0, r0, r1\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r1, #0x10\n"
-        "	mov	r2, #0x1d\n"
-        "	mov	r3, #0x13\n"
-        "	bl	Menu_DrawStdWindowFrame\n"
-        "	ldr	r0, ._139 + 12  @ gStringVar4\n"
-        "	mov	r1, #0x1d\n"
-        "	ldr	r2, [sp, #0x14]\n"
-        "	sub	r1, r1, r2\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	lsr	r1, r1, #0x18\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	add	sp, sp, #0x18\n"
-        "	pop	{r3, r4, r5}\n"
-        "	mov	r8, r3\n"
-        "	mov	r9, r4\n"
-        "	mov	sl, r5\n"
-        "	pop	{r4, r5, r6, r7}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._140:\n"
-        "	.align	2, 0\n"
-        "._139:\n"
-        "	.word	Str_839BE07\n"
-        "	.word	Str_839BE09\n"
-        "	.word	Str_839BE0C\n"
-        "	.word	gStringVar4\n"
-        "\n"
-    );
+    u8 sp00[] = _("X");
+    u8 sp04[] = _(" Y");
+    u8 sp08[] = _(" H");
+    u8 sp0c[4];
+
+    s16 x;
+    s16 y;
+    u8 z;
+    u16 sp14 = 0;
+
+    PlayerGetDestCoords(&x, &y);
+    z = MapGridGetZCoordAt(x, y);
+    x -= 7;
+    y -= 7;
+
+    StringCopy(gStringVar4, sp00);
+    ConvertIntToDecimalStringN(sp0c, x, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar4, sp0c);
+    StringAppend(gStringVar4, sp04);
+    ConvertIntToDecimalStringN(sp0c, y, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(gStringVar4, sp0c);
+    StringAppend(gStringVar4, sp08);
+    ConvertIntToDecimalStringN(sp0c, z, STR_CONV_MODE_LEFT_ALIGN, 2);
+    StringAppend(gStringVar4, sp0c);
+
+    for (sp14 = 0; gStringVar4[sp14] != EOS; sp14++)
+        ;
+
+    Menu_DrawStdWindowFrame(28 - sp14, 16, 29, 19);
+    Menu_PrintText(gStringVar4, 29 - sp14, 17);
 }
 
-__attribute__((naked))
-u8 DebugMenu_Exit()
+u8 DebugMenu_Exit(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    return TRUE;
 }
 
-__attribute__((naked))
-u8 DebugMenu_OpenSogabe()
+u8 DebugMenu_OpenSogabe(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	unref_sub_814A414\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return unref_sub_814A414();
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenTamada()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	debug_sub_8075C30\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return debug_sub_8075C30();
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenKagaya()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitKagayaDebugMenu_A\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitKagayaDebugMenu_A();
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenMatsuda()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	unref_sub_80A9B28\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return unref_sub_80A9B28();
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenNohara()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	InitNoharaDebugMenu\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    return InitNoharaDebugMenu();
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenWatanabe()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._141       @ InitWatanabeDebugMenu\n"
-        "	bl	SetMainCallback2\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._142:\n"
-        "	.align	2, 0\n"
-        "._141:\n"
-        "	.word	InitWatanabeDebugMenu+1\n"
-        "\n"
-    );
+    CloseMenu();
+    SetMainCallback2(InitWatanabeDebugMenu);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
 u8 DebugMenu_EndSequenceDemo()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._143       @ sub_81439D0\n"
-        "	bl	SetMainCallback2\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._144:\n"
-        "	.align	2, 0\n"
-        "._143:\n"
-        "	.word	sub_81439D0+1\n"
-        "\n"
-    );
+    CloseMenu();
+    SetMainCallback2(sub_81439D0);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
 u8 DebugMenu_HallOfFame()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	GameClear\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    GameClear();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
 u8 DebugMenu_OpenSizeComparison()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	bl	InitSizeComparison\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    CloseMenu();
+    InitSizeComparison();
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-__attribute__((naked))
 u8 DebugMenu_HoennNationalDex()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	IsNationalPokedexEnabled\n"
-        "	cmp	r0, #0\n"
-        "	beq	._145	@cond_branch\n"
-        "	bl	DisableNationalPokedex\n"
-        "	b	._146\n"
-        "._145:\n"
-        "	bl	EnableNationalPokedex\n"
-        "._146:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (IsNationalPokedexEnabled())
+        DisableNationalPokedex();
+    else
+        EnableNationalPokedex();
+    CloseMenu();
+    return TRUE;
 }
 
 __attribute__((naked))
@@ -1185,6 +937,20 @@ u8 DebugMenu_8077434()
         "\n"
     );
 }
+
+const u8 Str_839BE0F[] = _("HP");
+const u8 Str_839BE12[] = _("PAR");
+const u8 Str_839BE16[] = _("SLP");
+const u8 Str_839BE1A[] = _("PSN");
+const u8 Str_839BE1E[] = _("ウマイ");
+
+const struct MenuAction gUnknown_Debug_839BE24[] = {
+    {Str_839BE0F, DebugMenu_8077434},
+    {Str_839BE12, DebugMenu_8077434},
+    {Str_839BE16, DebugMenu_8077434},
+    {Str_839BE1A, DebugMenu_8077434},
+    {Str_839BE1E, DebugMenu_8077434}
+};
 
 __attribute__((naked))
 u8 DebugMenu_807750C()
