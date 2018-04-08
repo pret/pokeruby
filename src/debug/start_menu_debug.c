@@ -29,6 +29,9 @@
 #include "mori_debug_menu.h"
 #include "cable_club.h"
 #include "field_fadetransition.h"
+#include "wild_encounter.h"
+#include "battle_setup.h"
+#include "safari_zone.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
@@ -42,6 +45,8 @@ void DebugMenu_80771EC(void);
 void DebugMenu_8077238(void);
 u8 DebugMenu_8077D78(const struct MenuAction *menuActions);
 void DebugMenu_8077D24(const struct MenuAction *menuAction, u8 a1, u8 a2);
+u8 DebugMenu_8077C14(void);
+bool8 DebugMenu_8077DB4(void);
 
 u8 DebugMenu_Exit(void);
 u8 DebugMenu_OpenWatanabe(void);
@@ -1073,148 +1078,54 @@ void DebugMenu_807786C(u8 a0)
     Menu_PrintText(sp00 + 3 * a0, 26, 1);
 }
 
-NAKED
-void DebugMenu_80778A8()
+u8 DebugMenu_80778A8(void)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	ldr	r4, ._211       @ gMain\n"
-        "	ldrh	r1, [r4, #0x2e]\n"
-        "	mov	r0, #0x30\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._207	@cond_branch\n"
-        "	mov	r0, #0x5\n"
-        "	bl	PlaySE\n"
-        "	ldr	r2, ._211 + 4   @ sWildEncountersDisabled\n"
-        "	ldrb	r0, [r2]\n"
-        "	mov	r1, #0x1\n"
-        "	eor	r0, r0, r1\n"
-        "	strb	r0, [r2]\n"
-        "	ldrb	r0, [r2]\n"
-        "	bl	DebugMenu_807786C\n"
-        "._207:\n"
-        "	ldrh	r1, [r4, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._208	@cond_branch\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._209	@cond_branch\n"
-        "._208:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	b	._210\n"
-        "._212:\n"
-        "	.align	2, 0\n"
-        "._211:\n"
-        "	.word	gMain\n"
-        "	.word	sWildEncountersDisabled\n"
-        "._209:\n"
-        "	mov	r0, #0x0\n"
-        "._210:\n"
-        "	pop	{r4}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (gMain.newKeys & (DPAD_LEFT | DPAD_RIGHT))
+    {
+        PlaySE(SE_SELECT);
+        gWildEncountersDisabled ^= 1;
+        DebugMenu_807786C(gWildEncountersDisabled);
+    }
+    if (gMain.newKeys & A_BUTTON || gMain.newKeys & B_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
-NAKED
-u8 DebugMenu_ControlEncounter()
+u8 DebugMenu_ControlEncounter(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._213       @ sWildEncountersDisabled\n"
-        "	ldrb	r0, [r0]\n"
-        "	bl	DebugMenu_807786C\n"
-        "	ldr	r1, ._213 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._213 + 8   @ DebugMenu_80778A8\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._214:\n"
-        "	.align	2, 0\n"
-        "._213:\n"
-        "	.word	sWildEncountersDisabled\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_80778A8+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_807786C(gWildEncountersDisabled);
+    gMenuCallback = DebugMenu_80778A8;
+    return FALSE;
 }
 
-NAKED
 u8 DebugMenu_UseHM()
 {
-    asm(
-        "	ldr	r1, ._215       @ gMenuCallback\n"
-        "	ldr	r0, ._215 + 4   @ DebugMenu_8077C14\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	bx	lr\n"
-        "._216:\n"
-        "	.align	2, 0\n"
-        "._215:\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077C14+1\n"
-        "\n"
-    );
+    gMenuCallback = DebugMenu_8077C14;
+    return FALSE;
 }
 
-NAKED
-void DebugMenu_8077934()
+u8 DebugMenu_8077934(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	mov	r1, #0x0\n"
-        "	ldr	r3, ._218       @ gSaveBlock1\n"
-        "	mov	r2, #0x1\n"
-        "._217:\n"
-        "	add	r0, r1, r3\n"
-        "	strb	r2, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, #0x63\n"
-        "	bls	._217	@cond_branch\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._219:\n"
-        "	.align	2, 0\n"
-        "._218:\n"
-        "	.word	gSaveBlock1+0x97a\n"
-        "\n"
-    );
+    int i;
+
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1.trainerRematches); i++)
+        gSaveBlock1.trainerRematches[i] = 1;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077954()
+u8 DebugMenu_8077954(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	mov	r1, #0x0\n"
-        "	ldr	r3, ._222       @ gSaveBlock1\n"
-        "	mov	r2, #0x0\n"
-        "._221:\n"
-        "	add	r0, r1, r3\n"
-        "	strb	r2, [r0]\n"
-        "	add	r1, r1, #0x1\n"
-        "	cmp	r1, #0x63\n"
-        "	bls	._221	@cond_branch\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._223:\n"
-        "	.align	2, 0\n"
-        "._222:\n"
-        "	.word	gSaveBlock1+0x97a\n"
-        "\n"
-    );
+    int i;
+
+    for (i = 0; i < ARRAY_COUNT(gSaveBlock1.trainerRematches); i++)
+        gSaveBlock1.trainerRematches[i] = 0;
+    CloseMenu();
+    return TRUE;
 }
 
 const u8 Str_839BE6B[] = _("さいせんかのうトレーナー:{STR_VAR_1}\n"
@@ -1222,368 +1133,146 @@ const u8 Str_839BE6B[] = _("さいせんかのうトレーナー:{STR_VAR_1}\n"
 const u8 Str_839BE8D[] = _("いる");
 const u8 Str_839BE90[] = _("いない");
 
-NAKED
-void DebugMenu_8077974()
+bool8 DebugMenu_8077974(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r1, ._226       @ gSaveBlock1\n"
-        "	mov	r0, #0x4\n"
-        "	ldsb	r0, [r1, r0]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	ldrb	r1, [r1, #0x5]\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	asr	r1, r1, #0x18\n"
-        "	lsl	r1, r1, #0x10\n"
-        "	lsr	r1, r1, #0x10\n"
-        "	bl	IsRematchTrainerIn\n"
-        "	cmp	r0, #0\n"
-        "	beq	._224	@cond_branch\n"
-        "	ldr	r0, ._226 + 4   @ gStringVar1\n"
-        "	ldr	r1, ._226 + 8   @ Str_839BE8D\n"
-        "	bl	StringCopy\n"
-        "	b	._225\n"
-        "._227:\n"
-        "	.align	2, 0\n"
-        "._226:\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	gStringVar1\n"
-        "	.word	Str_839BE8D\n"
-        "._224:\n"
-        "	ldr	r0, ._230       @ gStringVar1\n"
-        "	ldr	r1, ._230 + 4   @ Str_839BE90\n"
-        "	bl	StringCopy\n"
-        "._225:\n"
-        "	ldr	r1, ._230 + 8   @ gSaveBlock1\n"
-        "	mov	r0, #0x4\n"
-        "	ldsb	r0, [r1, r0]\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r0, r0, #0x10\n"
-        "	ldrb	r1, [r1, #0x5]\n"
-        "	lsl	r1, r1, #0x18\n"
-        "	asr	r1, r1, #0x18\n"
-        "	lsl	r1, r1, #0x10\n"
-        "	lsr	r1, r1, #0x10\n"
-        "	bl	DoesSomeoneWantRematchIn\n"
-        "	cmp	r0, #0\n"
-        "	beq	._228	@cond_branch\n"
-        "	ldr	r0, ._230 + 12  @ gStringVar2\n"
-        "	ldr	r1, ._230 + 16  @ Str_839BE8D\n"
-        "	bl	StringCopy\n"
-        "	b	._229\n"
-        "._231:\n"
-        "	.align	2, 0\n"
-        "._230:\n"
-        "	.word	gStringVar1\n"
-        "	.word	Str_839BE90\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	gStringVar2\n"
-        "	.word	Str_839BE8D\n"
-        "._228:\n"
-        "	ldr	r0, ._232       @ gStringVar2\n"
-        "	ldr	r1, ._232 + 4   @ Str_839BE90\n"
-        "	bl	StringCopy\n"
-        "._229:\n"
-        "	ldr	r0, ._232 + 8   @ Str_839BE6B\n"
-        "	bl	sub_8071F40\n"
-        "	ldr	r1, ._232 + 12  @ gMenuCallback\n"
-        "	ldr	r0, ._232 + 16  @ DebugMenu_8077DB4\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._233:\n"
-        "	.align	2, 0\n"
-        "._232:\n"
-        "	.word	gStringVar2\n"
-        "	.word	Str_839BE90\n"
-        "	.word	Str_839BE6B\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077DB4+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    if (IsRematchTrainerIn(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum))
+        StringCopy(gStringVar1, Str_839BE8D);
+    else
+        StringCopy(gStringVar1, Str_839BE90);
+    if (DoesSomeoneWantRematchIn(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum))
+        StringCopy(gStringVar2, Str_839BE8D);
+    else
+        StringCopy(gStringVar2, Str_839BE90);
+    sub_8071F40(Str_839BE6B);
+    gMenuCallback = DebugMenu_8077DB4;
+    return FALSE;
 }
 
-NAKED
-void DebugMenu_8077A20()
+bool8 DebugMenu_8077A20(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._234       @ gSaveBlock1\n"
-        "	ldr	r1, ._234 + 4   @ 0x978\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0xff\n"
-        "	strh	r1, [r0]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._235:\n"
-        "	.align	2, 0\n"
-        "._234:\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	0x978\n"
-        "\n"
-    );
+    gSaveBlock1.trainerRematchStepCounter = 255;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077A40()
+bool8 DebugMenu_8077A40(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._236       @ gSaveBlock1\n"
-        "	ldr	r1, ._236 + 4   @ 0x978\n"
-        "	add	r0, r0, r1\n"
-        "	mov	r1, #0x0\n"
-        "	strh	r1, [r0]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._237:\n"
-        "	.align	2, 0\n"
-        "._236:\n"
-        "	.word	gSaveBlock1\n"
-        "	.word	0x978\n"
-        "\n"
-    );
+    gSaveBlock1.trainerRematchStepCounter = 0;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-u8 DebugMenu_8077A60()
+const u8 Str_839BE94[] = _("Max num of steps");
+const u8 Str_839BEA5[] = _("Clear num of steps");
+const u8 Str_839BEB8[] = _("See trainers");
+const u8 Str_839BEC5[] = _("Flag all clear");
+const u8 Str_839BED4[] = _("Flag all set");
+
+const struct MenuAction gUnknown_Debug_839BEE4[] = {
+    {Str_839BEB8, DebugMenu_8077974},
+    {Str_839BE94, DebugMenu_8077A20},
+    {Str_839BEA5, DebugMenu_8077A40},
+    {Str_839BED4, DebugMenu_8077934},
+    {Str_839BEC5, DebugMenu_8077954}
+};
+
+u8 DebugMenu_8077A60(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._238       @ gUnknown_Debug_839BEE4\n"
-        "	bl	DebugMenu_8077D78\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._239:\n"
-        "	.align	2, 0\n"
-        "._238:\n"
-        "	.word	gUnknown_Debug_839BEE4\n"
-        "\n"
-    );
+    return DebugMenu_8077D78(gUnknown_Debug_839BEE4);
 }
 
-NAKED
-u8 DebugMenu_RematchTrainers()
+u8 DebugMenu_RematchTrainers(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._240       @ gUnknown_Debug_839BEE4\n"
-        "	mov	r1, #0xd\n"
-        "	mov	r2, #0x5\n"
-        "	bl	DebugMenu_8077D24\n"
-        "	ldr	r1, ._240 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._240 + 8   @ DebugMenu_8077A60\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._241:\n"
-        "	.align	2, 0\n"
-        "._240:\n"
-        "	.word	gUnknown_Debug_839BEE4\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077A60+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_8077D24(gUnknown_Debug_839BEE4, 13, 5);
+    gMenuCallback = DebugMenu_8077A60;
+    return FALSE;
 }
 
-NAKED
-void DebugMenu_8077A9C()
+bool8 DebugMenu_8077A9C(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r1, ._242       @ gNumSafariBalls\n"
-        "	mov	r0, #0x1e\n"
-        "	strb	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._243:\n"
-        "	.align	2, 0\n"
-        "._242:\n"
-        "	.word	gNumSafariBalls\n"
-        "\n"
-    );
+    gNumSafariBalls = 30;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077AB4()
+bool8 DebugMenu_8077AB4()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r1, ._244       @ gNumSafariBalls\n"
-        "	mov	r0, #0x1\n"
-        "	strb	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._245:\n"
-        "	.align	2, 0\n"
-        "._244:\n"
-        "	.word	gNumSafariBalls\n"
-        "\n"
-    );
+    gNumSafariBalls = 1;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077ACC()
+bool8 DebugMenu_8077ACC()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r1, ._246       @ gSafariZoneStepCounter\n"
-        "	mov	r2, #0xfa\n"
-        "	lsl	r2, r2, #0x1\n"
-        "	add	r0, r2, #0\n"
-        "	strh	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._247:\n"
-        "	.align	2, 0\n"
-        "._246:\n"
-        "	.word	gSafariZoneStepCounter\n"
-        "\n"
-    );
+    gSafariZoneStepCounter = 500;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077AE8()
+bool8 DebugMenu_8077AE8()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r1, ._248       @ gSafariZoneStepCounter\n"
-        "	mov	r0, #0x1\n"
-        "	strh	r0, [r1]\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._249:\n"
-        "	.align	2, 0\n"
-        "._248:\n"
-        "	.word	gSafariZoneStepCounter\n"
-        "\n"
-    );
+    gSafariZoneStepCounter = 1;
+    CloseMenu();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8077B00()
+const u8 Str_839BF0C[] = _("のこり　{STR_VAR_1}ほ");
+const u8 Str_839BF14[] = _("{STR_VAR_1}\n"
+                           "のこり　{STR_VAR_2}ほ");
+const u8 Str_839BF1F[] = _("めのまえには\n"
+                           "キューブが　ありません！");
+
+bool8 DebugMenu_8077B00()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	unref_sub_80C853C\n"
-        "	cmp	r0, #0\n"
-        "	beq	._250	@cond_branch\n"
-        "	ldr	r0, ._252       @ Str_839BF14\n"
-        "	bl	sub_8071F40\n"
-        "	b	._251\n"
-        "._253:\n"
-        "	.align	2, 0\n"
-        "._252:\n"
-        "	.word	Str_839BF14\n"
-        "._250:\n"
-        "	ldr	r0, ._254       @ Str_839BF1F\n"
-        "	bl	sub_8071F40\n"
-        "._251:\n"
-        "	ldr	r1, ._254 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._254 + 8   @ DebugMenu_8077DB4\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._255:\n"
-        "	.align	2, 0\n"
-        "._254:\n"
-        "	.word	Str_839BF1F\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077DB4+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    if (unref_sub_80C853C())
+        sub_8071F40(Str_839BF14);
+    else
+        sub_8071F40(Str_839BF1F);
+    gMenuCallback = DebugMenu_8077DB4;
+    return FALSE;
 }
 
-NAKED
-void DebugMenu_8077B3C()
+const u8 Str_839BF33[] = _("ほすうをのこり1にする");
+const u8 Str_839BF3F[] = _("ボールをのこり1にする");
+const u8 Str_839BF4B[] = _("キューブおきば");
+const u8 Str_839BF53[] = _("ボールをのこり30に");
+const u8 Str_839BF5E[] = _("ほすうをのこり500に");
+
+const struct MenuAction gUnknown_Debug_839BF6C[] = {
+    {Str_839BF4B, DebugMenu_8077B00},
+    {Str_839BF5E, DebugMenu_8077ACC},
+    {Str_839BF33, DebugMenu_8077AE8},
+    {Str_839BF53, DebugMenu_8077A9C},
+    {Str_839BF3F, DebugMenu_8077AB4}
+};
+
+bool8 DebugMenu_8077B3C()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._256       @ gUnknown_Debug_839BF6C\n"
-        "	bl	DebugMenu_8077D78\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._257:\n"
-        "	.align	2, 0\n"
-        "._256:\n"
-        "	.word	gUnknown_Debug_839BF6C\n"
-        "\n"
-    );
+    return DebugMenu_8077D78(gUnknown_Debug_839BF6C);
 }
 
-NAKED
 u8 DebugMenu_Safari()
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	GetSafariZoneFlag\n"
-        "	cmp	r0, #0\n"
-        "	beq	._258	@cond_branch\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._260       @ gUnknown_Debug_839BF6C\n"
-        "	mov	r1, #0xe\n"
-        "	mov	r2, #0x5\n"
-        "	bl	DebugMenu_8077D24\n"
-        "	ldr	r0, ._260 + 4   @ gStringVar1\n"
-        "	ldr	r1, ._260 + 8   @ gSafariZoneStepCounter\n"
-        "	ldrh	r1, [r1]\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	ldr	r0, ._260 + 12  @ Str_839BF0C\n"
-        "	bl	sub_8071F40\n"
-        "	ldr	r1, ._260 + 16  @ gMenuCallback\n"
-        "	ldr	r0, ._260 + 20  @ DebugMenu_8077B3C\n"
-        "	str	r0, [r1]\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x0\n"
-        "	b	._259\n"
-        "._261:\n"
-        "	.align	2, 0\n"
-        "._260:\n"
-        "	.word	gUnknown_Debug_839BF6C\n"
-        "	.word	gStringVar1\n"
-        "	.word	gSafariZoneStepCounter\n"
-        "	.word	Str_839BF0C\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8077B3C+1\n"
-        "._258:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x16\n"
-        "	bl	PlaySE\n"
-        "	mov	r0, #0x1\n"
-        "._259:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (!GetSafariZoneFlag())
+    {
+        CloseMenu();
+        PlaySE(SE_BOO);
+        return TRUE;
+    }
+    Menu_EraseScreen();
+    DebugMenu_8077D24(gUnknown_Debug_839BF6C, 14, 5);
+    ConvertIntToDecimalStringN(gStringVar1, gSafariZoneStepCounter, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    sub_8071F40(Str_839BF0C);
+    gMenuCallback = DebugMenu_8077B3C;
+    ScriptContext2_Enable();
+    return FALSE;
 }
 
 NAKED
-void DebugMenu_8077BB4()
+bool8 DebugMenu_8077BB4()
 {
     asm(
         "	push	{lr}\n"
@@ -1596,7 +1285,7 @@ void DebugMenu_8077BB4()
 }
 
 NAKED
-void DebugMenu_8077BC0()
+bool8 DebugMenu_8077BC0()
 {
     asm(
         "	push	{lr}\n"
@@ -1609,7 +1298,7 @@ void DebugMenu_8077BC0()
 }
 
 NAKED
-void DebugMenu_8077BCC()
+bool8 DebugMenu_8077BCC()
 {
     asm(
         "	push	{lr}\n"
@@ -1622,7 +1311,7 @@ void DebugMenu_8077BCC()
 }
 
 NAKED
-void DebugMenu_8077BD8()
+bool8 DebugMenu_8077BD8()
 {
     asm(
         "	push	{lr}\n"
@@ -1635,7 +1324,7 @@ void DebugMenu_8077BD8()
 }
 
 NAKED
-void DebugMenu_8077BE4()
+bool8 DebugMenu_8077BE4()
 {
     asm(
         "	push	{lr}\n"
@@ -1649,7 +1338,7 @@ void DebugMenu_8077BE4()
 }
 
 NAKED
-void DebugMenu_8077BF4()
+bool8 DebugMenu_8077BF4()
 {
     asm(
         "	push	{lr}\n"
@@ -1662,7 +1351,7 @@ void DebugMenu_8077BF4()
 }
 
 NAKED
-void DebugMenu_8077C00()
+bool8 DebugMenu_8077C00()
 {
     asm(
         "	push	{lr}\n"
@@ -1681,7 +1370,7 @@ void DebugMenu_8077C00()
 }
 
 NAKED
-void DebugMenu_8077C14()
+u8 DebugMenu_8077C14(void)
 {
     asm(
         "	push	{lr}\n"
@@ -1926,7 +1615,7 @@ u8 DebugMenu_8077D78(const struct MenuAction *menuActions)
 }
 
 NAKED
-void DebugMenu_8077DB4()
+bool8 DebugMenu_8077DB4(void)
 {
     asm(
         "	push	{lr}\n"
@@ -1953,7 +1642,7 @@ void DebugMenu_8077DB4()
 }
 
 NAKED
-void DebugMenu_8077DD8()
+bool8 DebugMenu_8077DD8()
 {
     asm(
         "	push	{r4, r5, lr}\n"
@@ -2020,7 +1709,7 @@ void DebugMenu_8077DD8()
 }
 
 NAKED
-void DebugMenu_8077E40()
+bool8 DebugMenu_8077E40()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -2835,7 +2524,7 @@ u8 DebugMenu_MiragaIslandRND()
 }
 
 NAKED
-void DebugMenu_80783C8()
+bool8 DebugMenu_80783C8()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -2927,7 +2616,7 @@ u8 DebugMenu_ToggleClearFlag()
 }
 
 NAKED
-void DebugMenu_8078464()
+bool8 DebugMenu_8078464()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -3009,7 +2698,7 @@ u8 DebugMenu_OpenWeatherEvents()
 }
 
 NAKED
-void DebugMenu_80784E8()
+bool8 DebugMenu_80784E8()
 {
     asm(
         "	push	{lr}\n"
@@ -3171,7 +2860,7 @@ void DebugMenu_8078550()
 }
 
 NAKED
-void DebugMenu_807860C()
+bool8 DebugMenu_807860C()
 {
     asm(
         "	push	{r4, r5, lr}\n"
@@ -3372,7 +3061,7 @@ void DebugMenu_8078714()
 }
 
 NAKED
-void DebugMenu_8078758()
+bool8 DebugMenu_8078758()
 {
     asm(
         "	push	{r4, lr}\n"
@@ -3391,7 +3080,7 @@ void DebugMenu_8078758()
 }
 
 NAKED
-void DebugMenu_8078774()
+bool8 DebugMenu_8078774()
 {
     asm(
         "	push	{lr}\n"
@@ -3410,7 +3099,7 @@ void DebugMenu_8078774()
 }
 
 NAKED
-void DebugMenu_8078788()
+bool8 DebugMenu_8078788()
 {
     asm(
         "	push	{lr}\n"
@@ -3429,7 +3118,7 @@ void DebugMenu_8078788()
 }
 
 NAKED
-void DebugMenu_807879C()
+bool8 DebugMenu_807879C()
 {
     asm(
         "	push	{lr}\n"
@@ -3448,7 +3137,7 @@ void DebugMenu_807879C()
 }
 
 NAKED
-void DebugMenu_80787B0()
+bool8 DebugMenu_80787B0()
 {
     asm(
         "	push	{lr}\n"
@@ -4192,7 +3881,7 @@ u8 DebugMenu_CheckPKBLCK()
 }
 
 NAKED
-void DebugMenu_8078C80()
+bool8 DebugMenu_8078C80()
 {
     asm(
         "	push	{lr}\n"
@@ -4218,7 +3907,7 @@ void DebugMenu_8078C80()
 }
 
 NAKED
-void DebugMenu_8078CA8()
+bool8 DebugMenu_8078CA8()
 {
     asm(
         "	push	{lr}\n"
@@ -4257,7 +3946,7 @@ void DebugMenu_8078CA8()
 }
 
 NAKED
-void DebugMenu_8078CE4()
+bool8 DebugMenu_8078CE4()
 {
     asm(
         "	push	{lr}\n"
@@ -4301,7 +3990,7 @@ void DebugMenu_8078CE4()
 }
 
 NAKED
-void DebugMenu_8078D30()
+bool8 DebugMenu_8078D30()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -4343,7 +4032,7 @@ void DebugMenu_8078D30()
 }
 
 NAKED
-void DebugMenu_8078D7C()
+bool8 DebugMenu_8078D7C()
 {
     asm(
         "	push	{lr}\n"
@@ -4369,7 +4058,7 @@ void DebugMenu_8078D7C()
 }
 
 NAKED
-void DebugMenu_8078DA4()
+bool8 DebugMenu_8078DA4()
 {
     asm(
         "	push	{lr}\n"
@@ -4422,7 +4111,7 @@ u8 DebugMenu_MeTooBackupMan()
 }
 
 NAKED
-void DebugMenu_8078DF0()
+bool8 DebugMenu_8078DF0()
 {
     asm(
         "	push	{lr}\n"
@@ -4441,7 +4130,7 @@ void DebugMenu_8078DF0()
 }
 
 NAKED
-void DebugMenu_8078E04()
+bool8 DebugMenu_8078E04()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"
@@ -4484,7 +4173,7 @@ void DebugMenu_8078E04()
 }
 
 NAKED
-void DebugMenu_8078E40()
+bool8 DebugMenu_8078E40()
 {
     asm(
         "	push	{r4, r5, r6, lr}\n"

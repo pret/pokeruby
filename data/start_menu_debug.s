@@ -6,63 +6,7 @@
 
 	.section .rodata
 
-Str_839BE94:: @ 0x839BE94
-	.string "Max num of steps$"
-
-Str_839BEA5:: @ 0x839BEA5
-	.string "Clear num of steps$"
-
-Str_839BEB8:: @ 0x839BEB8
-	.string "See trainers$"
-
-Str_839BEC5:: @ 0x839BEC5
-	.string "Flag all clear$"
-
-Str_839BED4:: @ 0x839BED4
-	.string "Flag all set$"
-
 	.align 2
-gUnknown_Debug_839BEE4:: @ 0x839BEE4
-	.4byte Str_839BEB8, DebugMenu_8077974+1
-	.4byte Str_839BE94, DebugMenu_8077A20+1
-	.4byte Str_839BEA5, DebugMenu_8077A40+1
-	.4byte Str_839BED4, DebugMenu_8077934+1
-	.4byte Str_839BEC5, DebugMenu_8077954+1
-
-Str_839BF0C:: @ 0x839BF0C
-	.string "のこり　{STR_VAR_1}ほ$"
-
-Str_839BF14:: @ 0x839BF14
-	.string "{STR_VAR_1}\n"
-	.string "のこり　{STR_VAR_2}ほ$"
-
-Str_839BF1F:: @ 0x839BF1F
-	.string "めのまえには\n"
-	.string "キューブが　ありません！$"
-
-Str_839BF33:: @ 0x839BF33
-	.string "ほすうをのこり1にする$"
-
-Str_839BF3F:: @ 0x839BF3F
-	.string "ボールをのこり1にする$"
-
-Str_839BF4B:: @ 0x839BF4B
-	.string "キューブおきば$"
-
-Str_839BF53:: @ 0x839BF53
-	.string "ボールをのこり30に$"
-
-Str_839BF5E:: @ 0x839BF5E
-	.string "ほすうをのこり500に$"
-
-	.align 2
-gUnknown_Debug_839BF6C:: @ 0x839BF6C
-	.4byte Str_839BF4B, DebugMenu_8077B00+1
-	.4byte Str_839BF5E, DebugMenu_8077ACC+1
-	.4byte Str_839BF33, DebugMenu_8077AE8+1
-	.4byte Str_839BF53, DebugMenu_8077A9C+1
-	.4byte Str_839BF3F, DebugMenu_8077AB4+1
-
 gUnknown_Debug_839BF94:: @ 0x839BF94
 	.4byte gMoveNames + 13 * MOVE_CUT, DebugMenu_8077BB4+1
 	.4byte gMoveNames + 13 * MOVE_FLASH, DebugMenu_8077BC0+1
