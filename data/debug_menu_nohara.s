@@ -39,10 +39,14 @@ gUnknown_Debug_083C4CA1:: @ 0x83C4CA1
 
 	.align 2
 gUnknown_Debug_083C4CA8:: @ 0x83C4CA8
-	.4byte gUnknown_Debug_083C4C77, gUnknown_Debug_083C4C7D
-	.4byte gUnknown_Debug_083C4C83, gUnknown_Debug_083C4C89
-	.4byte gUnknown_Debug_083C4C8F, gUnknown_Debug_083C4C95
-	.4byte gUnknown_Debug_083C4C9B, gUnknown_Debug_083C4CA1
+	.4byte gUnknown_Debug_083C4C77
+	.4byte gUnknown_Debug_083C4C7D
+	.4byte gUnknown_Debug_083C4C83
+	.4byte gUnknown_Debug_083C4C89
+	.4byte gUnknown_Debug_083C4C8F
+	.4byte gUnknown_Debug_083C4C95
+	.4byte gUnknown_Debug_083C4C9B
+	.4byte gUnknown_Debug_083C4CA1
 
 gUnknown_Debug_083C4CC8:: @ 0x83C4CC8
 	.string "Start$"

@@ -1,5 +1,7 @@
 #if DEBUG
 #include "global.h"
+#include "constants/flags.h"
+#include "constants/songs.h"
 #include "main.h"
 #include "menu.h"
 #include "start_menu.h"
@@ -7,9 +9,10 @@
 #include "event_data.h"
 #include "string_util.h"
 #include "field_specials.h"
+#include "sound.h"
 
-__attribute__((unused)) static u8 gDebug_03000724;
-__attribute__((unused)) static u8 gDebug_03000725;
+static u8 gDebug_03000724;
+static u8 gDebug_03000725;
 static u8 gDebug_03000726;
 
 asm(".global gDebug_03000724");
@@ -24,7 +27,15 @@ bool8 debug_sub_808F560(void);
 bool8 debug_sub_808F594(void);
 bool8 debug_sub_808F5D8(void);
 bool8 debug_sub_808F648(void);
-bool8 debug_sub_808F7B4(void);
+void debug_sub_808F6BC(void);
+void debug_sub_808F7B4(void);
+bool8 debug_sub_808F8AC(void);
+void debug_sub_808F8CC(void);
+bool8 debug_sub_808F93C(void);
+void debug_sub_808FA88(u8, u8);
+void debug_sub_808FEBC(void);
+void debug_sub_808FECC(void);
+void debug_sub_80900AC(void);
 bool8 debug_sub_8090278(void);
 bool8 NoharaDebugMenu_Fan(void);
 bool8 NoharaDebugMenu_BattleVSDad(void);
@@ -34,12 +45,6 @@ bool8 NoharaDebugMenu_Embark(void);
 bool8 NoharaDebugMenu_Yes9999(void);
 bool8 NoharaDebugMenu_LegendsFlagOn(void);
 bool8 NoharaDebugMenu_AddNumWinningStreaks(void);
-void debug_sub_808F6BC(void);
-void debug_sub_808F8AC(void);
-void debug_sub_808F8CC(void);
-void debug_sub_808FEBC(void);
-void debug_sub_808FECC(void);
-void debug_sub_80900AC(void);
 
 const u8 gUnknown_Debug_083C48C4[] = _("TV");
 const u8 gUnknown_Debug_083C48C7[] = _("Fan");
@@ -310,6 +315,141 @@ bool8 debug_sub_808F648(void)
                 return TRUE;
         }
     }
+}
+
+void debug_sub_808F6BC(void)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.tvShows[i].common.kind, STR_CONV_MODE_LEFT_ALIGN, 2);
+        Menu_PrintText(gStringVar1, i * 2 + 10, 0);
+    }
+
+    for (i = 5; i < 24; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.tvShows[i].common.kind, STR_CONV_MODE_LEFT_ALIGN, 2);
+        if (i < 15)
+            Menu_PrintText(gStringVar1, i * 2, 3);
+        else
+            Menu_PrintText(gStringVar1, i * 2 - 20, 6);
+    }
+
+    for (i = 0; i < 16; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.pokeNews[i].kind, STR_CONV_MODE_LEFT_ALIGN, 2);
+        if (i < 8)
+            Menu_PrintText(gStringVar1, i * 2 + 10, 9);
+        else
+            Menu_PrintText(gStringVar1, i * 2 - 6, 12);
+    }
+}
+
+void debug_sub_808F7B4(void)
+{
+    u8 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.tvShows[i].common.active, STR_CONV_MODE_LEFT_ALIGN, 2);
+        Menu_PrintText(gStringVar1, i * 2 + 10, 0);
+    }
+
+    for (i = 5; i < 24; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.tvShows[i].common.active, STR_CONV_MODE_LEFT_ALIGN, 2);
+        if (i < 15)
+            Menu_PrintText(gStringVar1, i * 2, 3);
+        else
+            Menu_PrintText(gStringVar1, i * 2 - 20, 6);
+    }
+
+    for (i = 0; i < 16; i++)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.pokeNews[i].state, STR_CONV_MODE_LEFT_ALIGN, 2);
+        if (i < 8)
+            Menu_PrintText(gStringVar1, i * 2 + 10, 9);
+        else
+            Menu_PrintText(gStringVar1, i * 2 - 6, 12);
+    }
+}
+
+bool8 debug_sub_808F8AC(void)
+{
+    FlagSet(FLAG_SYS_TV_START);
+    FlagSet(FLAG_VISITED_MAUVILLE_CITY);
+    CloseMenu();
+    return TRUE;
+}
+
+void debug_sub_808F8CC(void)
+{
+    gDebug_03000724 = 0;
+    sub_8071F40(gUnknown_Debug_083C49CA);
+    Menu_BlankWindowRect(13, 6, 26, 8);
+    Menu_PrintText(gUnknown_Debug_083C4ACC[0], 14, 7);
+    Menu_BlankWindowRect(22, 1, 24, 2);
+    ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    Menu_PrintText(gStringVar1, 23, 1);
+    gMenuCallback = debug_sub_808F93C;
+}
+
+bool8 debug_sub_808F93C(void)
+{
+    bool8 updateDisplay = FALSE;
+    if (gMain.newKeys & DPAD_UP)
+    {
+        gDebug_03000725++;
+        if (gDebug_03000725 == 24)
+            gDebug_03000725 = 0;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        if (gDebug_03000725 == 0)
+            gDebug_03000725 = 24;
+        gDebug_03000725--;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        gDebug_03000724++;
+        if (gDebug_03000724 == 12)
+            gDebug_03000724 = 0;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        if (gDebug_03000724 == 0)
+            gDebug_03000724 = 12;
+        gDebug_03000724--;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+    if (updateDisplay)
+    {
+        Menu_BlankWindowRect(13, 6, 26, 8);
+        Menu_PrintText(gUnknown_Debug_083C4ACC[gDebug_03000724], 14, 7);
+        Menu_BlankWindowRect(22, 1, 24, 2);
+        ConvertIntToDecimalStringN(gStringVar1, gDebug_03000725, STR_CONV_MODE_LEFT_ALIGN, 2);
+        Menu_PrintText(gStringVar1, 23, 1);
+    }
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_PIN);
+        debug_sub_808FA88(gDebug_03000725, gUnknown_Debug_083C4ABD[gDebug_03000724]);
+    }
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        sub_80BF588(gSaveBlock1.tvShows);
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
 #endif
