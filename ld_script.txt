@@ -538,7 +538,6 @@ SECTIONS {
         src/start_menu.o(.rodata);
         src/debug/start_menu_debug.o(.data);
         src/debug/start_menu_debug.o(.rodata);
-        data/start_menu_debug.o(.rodata);
         src/menu.o(.rodata);
         src/tileset_anim.o(.rodata);
         src/palette.o(.rodata);

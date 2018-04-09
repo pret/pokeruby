@@ -45,6 +45,8 @@
 #include "reset_rtc_screen.h"
 #include "pokeblock.h"
 #include "ewram.h"
+#include "gba/flash_internal.h"
+#include "gba/m4a_internal.h"
 
 // berry_blender.c
 extern void unref_sub_80524BC(void);
@@ -73,8 +75,12 @@ bool8 DebugMenu_8078CA8(void);
 bool8 DebugMenu_8078CE4(void);
 bool8 DebugMenu_8078D30(void);
 bool8 DebugMenu_8078D7C(void);
+bool8 DebugMenu_8078DA4(void);
+bool8 DebugMenu_8078DF0(void);
 bool32 DebugMenu_8078E40(u8 a0, u8 * a1, u32 a2);
 void DebugMenu_8078E68(u8 a0, u8 * a1, u32 a2);
+void DebugMenu_8078F68(u8 taskId);
+void DebugMenu_8079020(u8 taskId);
 
 u8 DebugMenu_Exit(void);
 u8 DebugMenu_OpenWatanabe(void);
@@ -2498,672 +2504,247 @@ bool8 DebugMenu_8078D30(void)
     return FALSE;
 }
 
-NAKED
-bool8 DebugMenu_8078D7C()
+bool8 DebugMenu_8078D7C(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	ldr	r0, ._565       @ gStringVar4\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	ldr	r1, ._565 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._565 + 8   @ DebugMenu_8078DA4\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._566:\n"
-        "	.align	2, 0\n"
-        "._565:\n"
-        "	.word	gStringVar4\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8078DA4+1\n"
-        "\n"
-    );
+    Menu_DisplayDialogueFrame();
+    Menu_PrintText(gStringVar4, 2, 15);
+    gMenuCallback = DebugMenu_8078DA4;
+    return FALSE;
 }
 
-NAKED
-bool8 DebugMenu_8078DA4()
+bool8 DebugMenu_8078DA4(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._569       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	bne	._567	@cond_branch\n"
-        "	mov	r0, #0x0\n"
-        "	b	._568\n"
-        "._570:\n"
-        "	.align	2, 0\n"
-        "._569:\n"
-        "	.word	gMain\n"
-        "._567:\n"
-        "	bl	CloseMenu\n"
-        "	mov	r0, #0x1\n"
-        "._568:\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    if (gMain.newKeys & A_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+    return FALSE;
 }
 
-NAKED
-u8 DebugMenu_MeTooBackupMan()
+u8 DebugMenu_MeTooBackupMan(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	Menu_EraseScreen\n"
-        "	ldr	r0, ._571       @ gUnknown_Debug_839C594\n"
-        "	mov	r1, #0xc\n"
-        "	mov	r2, #0x2\n"
-        "	bl	DebugMenu_8077D24\n"
-        "	ldr	r1, ._571 + 4   @ gMenuCallback\n"
-        "	ldr	r0, ._571 + 8   @ DebugMenu_8078DF0\n"
-        "	str	r0, [r1]\n"
-        "	mov	r0, #0x0\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._572:\n"
-        "	.align	2, 0\n"
-        "._571:\n"
-        "	.word	gUnknown_Debug_839C594\n"
-        "	.word	gMenuCallback\n"
-        "	.word	DebugMenu_8078DF0+1\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    DebugMenu_8077D24(gUnknown_Debug_839C594, 12, ARRAY_COUNT(gUnknown_Debug_839C594));
+    gMenuCallback = DebugMenu_8078DF0;
+    return FALSE;
 }
 
-NAKED
 bool8 DebugMenu_8078DF0()
 {
-    asm(
-        "	push	{lr}\n"
-        "	ldr	r0, ._573       @ gUnknown_Debug_839C594\n"
-        "	bl	DebugMenu_8077D78\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._574:\n"
-        "	.align	2, 0\n"
-        "._573:\n"
-        "	.word	gUnknown_Debug_839C594\n"
-        "\n"
-    );
+    return DebugMenu_8077D78(gUnknown_Debug_839C594);
 }
 
-NAKED
 bool32 DebugMenu_8078E04(u16 a0, u8 * a1, u32 a2)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r6, r1, #0\n"
-        "	add	r5, r2, #0\n"
-        "	b	._575\n"
-        "._577:\n"
-        "	ldr	r0, ._579       @ 0xfffff000\n"
-        "	add	r5, r5, r0\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x5\n"
-        "	add	r6, r6, r0\n"
-        "	add	r0, r4, #1\n"
-        "._575:\n"
-        "	lsl	r0, r0, #0x10\n"
-        "	lsr	r4, r0, #0x10\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r6, #0\n"
-        "	bl	ProgramFlashSectorAndVerify\n"
-        "	cmp	r0, #0\n"
-        "	bne	._576	@cond_branch\n"
-        "	mov	r0, #0x80\n"
-        "	lsl	r0, r0, #0x5\n"
-        "	cmp	r5, r0\n"
-        "	bhi	._577	@cond_branch\n"
-        "	mov	r0, #0x1\n"
-        "	b	._578\n"
-        "._580:\n"
-        "	.align	2, 0\n"
-        "._579:\n"
-        "	.word	0xfffff000\n"
-        "._576:\n"
-        "	mov	r0, #0x0\n"
-        "._578:\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    while (1)
+    {
+        if (ProgramFlashSectorAndVerify(a0, a1))
+            return FALSE;
+        if (a2 <= 0x1000)
+            break;
+        a2 -= 0x1000;
+        a1 += 0x1000;
+        a0++;
+    }
+    return TRUE;
 }
 
-NAKED
 bool32 DebugMenu_8078E40(u8 a0, u8 * a1, u32 a2)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	add	r4, r0, #0\n"
-        "	add	r5, r1, #0\n"
-        "	add	r6, r2, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	bl	m4aSoundVSyncOff\n"
-        "	add	r0, r4, #0\n"
-        "	add	r1, r5, #0\n"
-        "	add	r2, r6, #0\n"
-        "	bl	DebugMenu_8078E04\n"
-        "	add	r4, r0, #0\n"
-        "	bl	m4aSoundVSyncOn\n"
-        "	add	r0, r4, #0\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "\n"
-    );
+    bool32 result;
+    m4aSoundVSyncOff();
+    result = DebugMenu_8078E04(a0, a1, a2);
+    m4aSoundVSyncOn();
+    return result;
 }
 
-NAKED
 void DebugMenu_8078E68(u8 a0, u8 * a1, u32 a2)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	r4, r1, #0\n"
-        "	add	r3, r2, #0\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	mov	r1, #0x0\n"
-        "	add	r2, r4, #0\n"
-        "	bl	ReadFlash\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    ReadFlash(a0, 0, a1, a2);
 }
 
-NAKED
-void DebugMenu_8078E80()
+struct GameTimeDebugMenuStruct {
+    u16 unk0;
+    u16 unk2;
+    u8 unk4;
+    u8 unk5;
+};
+
+const struct GameTimeDebugMenuStruct gUnknown_Debug_839C5F4[] = {
+    {0, 999, 2, 1},
+    {0,  59, 6, 2},
+    {0,  59, 9, 3}
+};
+
+void DebugMenu_8078E80(s16 * a0)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	r4, r0, #0\n"
-        "	mov	r0, #0x2\n"
-        "	mov	r1, #0xf\n"
-        "	mov	r2, #0x16\n"
-        "	mov	r3, #0x10\n"
-        "	bl	Menu_BlankWindowRect\n"
-        "	ldr	r1, ._581       @ gUnknown_Debug_839C5F4\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r0, [r4, r2]\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r0, r0, r1\n"
-        "	ldrb	r1, [r0, #0x4]\n"
-        "	mov	r0, #0xd0\n"
-        "	mov	r2, #0xf\n"
-        "	bl	sub_8071F60\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._582:\n"
-        "	.align	2, 0\n"
-        "._581:\n"
-        "	.word	gUnknown_Debug_839C5F4\n"
-        "\n"
-    );
+    Menu_BlankWindowRect(2, 15, 22, 16);
+    sub_8071F60(0xd0, gUnknown_Debug_839C5F4[*a0].unk4, 15);
 }
 
-NAKED
-void DebugMenu_8078EB0()
+void DebugMenu_8078EB0(s16 * a0)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	add	r5, r0, #0\n"
-        "	ldr	r4, ._583       @ gStringVar1\n"
-        "	mov	r0, #0x2\n"
-        "	ldsh	r1, [r5, r0]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r2, #0x1\n"
-        "	mov	r3, #0x3\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0xf0\n"
-        "	mov	r1, #0x5\n"
-        "	mov	r2, #0x11\n"
-        "	bl	sub_8071F60\n"
-        "	mov	r0, #0x4\n"
-        "	ldsh	r1, [r5, r0]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x6\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0xf0\n"
-        "	mov	r1, #0x8\n"
-        "	mov	r2, #0x11\n"
-        "	bl	sub_8071F60\n"
-        "	mov	r0, #0x6\n"
-        "	ldsh	r1, [r5, r0]\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r2, #0x2\n"
-        "	mov	r3, #0x2\n"
-        "	bl	ConvertIntToDecimalStringN\n"
-        "	add	r0, r4, #0\n"
-        "	mov	r1, #0x9\n"
-        "	mov	r2, #0x11\n"
-        "	bl	Menu_PrintText\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._584:\n"
-        "	.align	2, 0\n"
-        "._583:\n"
-        "	.word	gStringVar1\n"
-        "\n"
-    );
+    ConvertIntToDecimalStringN(gStringVar1, a0[1], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    Menu_PrintText(gStringVar1, 2, 17);
+    sub_8071F60(0xf0, 5, 17);
+    ConvertIntToDecimalStringN(gStringVar1, a0[2], STR_CONV_MODE_LEADING_ZEROS, 2);
+    Menu_PrintText(gStringVar1, 6, 17);
+    sub_8071F60(0xf0, 8, 17);
+    ConvertIntToDecimalStringN(gStringVar1, a0[3], STR_CONV_MODE_LEADING_ZEROS, 2);
+    Menu_PrintText(gStringVar1, 9, 17);
 }
 
-NAKED
-void DebugMenu_8078F1C()
+void DebugMenu_8078F1C(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	lsl	r4, r0, #0x2\n"
-        "	add	r4, r4, r0\n"
-        "	lsl	r4, r4, #0x3\n"
-        "	ldr	r6, ._585       @ gTasks\n"
-        "	add	r5, r4, r6\n"
-        "	mov	r0, #0x0\n"
-        "	strh	r0, [r5]\n"
-        "	ldr	r1, ._585 + 4   @ gSaveBlock2\n"
-        "	ldrh	r0, [r1, #0xe]\n"
-        "	strh	r0, [r5, #0x2]\n"
-        "	ldrb	r0, [r1, #0x10]\n"
-        "	strh	r0, [r5, #0x4]\n"
-        "	ldrb	r0, [r1, #0x11]\n"
-        "	strh	r0, [r5, #0x6]\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DebugMenu_8078EB0\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DebugMenu_8078E80\n"
-        "	sub	r6, r6, #0x8\n"
-        "	add	r4, r4, r6\n"
-        "	ldr	r0, ._585 + 8   @ DebugMenu_8078F68\n"
-        "	str	r0, [r4]\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._586:\n"
-        "	.align	2, 0\n"
-        "._585:\n"
-        "	.word	gTasks+0x8\n"
-        "	.word	gSaveBlock2\n"
-        "	.word	DebugMenu_8078F68+1\n"
-        "\n"
-    );
+    s16 * data = gTasks[taskId].data;
+
+    data[0] = 0;
+    data[1] = gSaveBlock2.playTimeHours;
+    data[2] = gSaveBlock2.playTimeMinutes;
+    data[3] = gSaveBlock2.playTimeSeconds;
+
+    Menu_DisplayDialogueFrame();
+    DebugMenu_8078EB0(data);
+    DebugMenu_8078E80(data);
+    gTasks[taskId].func = DebugMenu_8078F68;
 }
 
-NAKED
-void DebugMenu_8078F68()
+void DebugMenu_8078F68(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, r6, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r0, r0, #0x18\n"
-        "	lsl	r1, r0, #0x2\n"
-        "	add	r1, r1, r0\n"
-        "	lsl	r5, r1, #0x3\n"
-        "	ldr	r6, ._589       @ gTasks\n"
-        "	add	r4, r5, r6\n"
-        "	ldr	r3, ._589 + 4   @ gMain\n"
-        "	ldrh	r1, [r3, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._587	@cond_branch\n"
-        "	ldr	r1, ._589 + 8   @ gSaveBlock2\n"
-        "	ldrh	r0, [r4, #0x2]\n"
-        "	strh	r0, [r1, #0xe]\n"
-        "	ldrh	r0, [r4, #0x4]\n"
-        "	strb	r0, [r1, #0x10]\n"
-        "	ldrh	r0, [r4, #0x6]\n"
-        "	strb	r0, [r1, #0x11]\n"
-        "	mov	r0, #0x49\n"
-        "	bl	PlaySE\n"
-        "	b	._588\n"
-        "._590:\n"
-        "	.align	2, 0\n"
-        "._589:\n"
-        "	.word	gTasks+0x8\n"
-        "	.word	gMain\n"
-        "	.word	gSaveBlock2\n"
-        "._587:\n"
-        "	mov	r0, #0x2\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._591	@cond_branch\n"
-        "._588:\n"
-        "	add	r0, r6, #0\n"
-        "	sub	r0, r0, #0x8\n"
-        "	add	r0, r5, r0\n"
-        "	ldr	r1, ._593       @ DebugMenu_8079020\n"
-        "	str	r1, [r0]\n"
-        "	b	._601\n"
-        "._594:\n"
-        "	.align	2, 0\n"
-        "._593:\n"
-        "	.word	DebugMenu_8079020+1\n"
-        "._591:\n"
-        "	mov	r0, #0x20\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._595	@cond_branch\n"
-        "	ldrh	r1, [r4]\n"
-        "	mov	r2, #0x0\n"
-        "	ldsh	r0, [r4, r2]\n"
-        "	cmp	r0, #0\n"
-        "	beq	._601	@cond_branch\n"
-        "	sub	r0, r1, #1\n"
-        "	b	._597\n"
-        "._595:\n"
-        "	mov	r0, #0x10\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._598	@cond_branch\n"
-        "	ldrh	r0, [r4]\n"
-        "	cmp	r0, #0x1\n"
-        "	bhi	._601	@cond_branch\n"
-        "	add	r0, r0, #0x1\n"
-        "._597:\n"
-        "	strh	r0, [r4]\n"
-        "	add	r0, r4, #0\n"
-        "	bl	DebugMenu_8078E80\n"
-        "	b	._601\n"
-        "._598:\n"
-        "	mov	r0, #0x0\n"
-        "	ldsh	r2, [r4, r0]\n"
-        "	lsl	r2, r2, #0x3\n"
-        "	ldr	r0, ._602       @ gUnknown_Debug_839C5F4\n"
-        "	add	r2, r2, r0\n"
-        "	ldrb	r0, [r2, #0x5]\n"
-        "	lsl	r0, r0, #0x1\n"
-        "	add	r0, r4, r0\n"
-        "	ldrh	r1, [r2]\n"
-        "	ldrh	r2, [r2, #0x2]\n"
-        "	ldrh	r3, [r3, #0x30]\n"
-        "	bl	DebugMenu_8077DD8\n"
-        "	cmp	r0, #0x1\n"
-        "	bne	._601	@cond_branch\n"
-        "	add	r0, r4, #0\n"
-        "	bl	DebugMenu_8078EB0\n"
-        "._601:\n"
-        "	pop	{r4, r5, r6}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._603:\n"
-        "	.align	2, 0\n"
-        "._602:\n"
-        "	.word	gUnknown_Debug_839C5F4\n"
-        "\n"
-    );
+    s16 * data = gTasks[taskId].data;
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gSaveBlock2.playTimeHours = data[1];
+        gSaveBlock2.playTimeMinutes = data[2];
+        gSaveBlock2.playTimeSeconds = data[3];
+        PlaySE(SE_PINPON);
+        gTasks[taskId].func = DebugMenu_8079020;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].func = DebugMenu_8079020;
+    }
+    else if (gMain.newKeys & DPAD_LEFT)
+    {
+        if ((u16)data[0] > 0)
+        {
+            data[0]--;
+            DebugMenu_8078E80(data);
+        }
+    }
+    else if (gMain.newKeys & DPAD_RIGHT)
+    {
+        if ((u16)data[0] < 2)
+        {
+            data[0]++;
+            DebugMenu_8078E80(data);
+        }
+    }
+    else
+    {
+        const struct GameTimeDebugMenuStruct *r2 = gUnknown_Debug_839C5F4 + data[0];
+        if (DebugMenu_8077DD8(data + r2->unk5, r2->unk0, r2->unk2, gMain.newAndRepeatedKeys) == TRUE)
+            DebugMenu_8078EB0(data);
+    }
 }
 
-NAKED
-void DebugMenu_8079020()
+void DebugMenu_8079020(u8 taskId)
 {
-    asm(
-        "	push	{r4, lr}\n"
-        "	add	r4, r0, #0\n"
-        "	lsl	r4, r4, #0x18\n"
-        "	lsr	r4, r4, #0x18\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	ScriptContext2_Disable\n"
-        "	add	r0, r4, #0\n"
-        "	bl	DestroyTask\n"
-        "	pop	{r4}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "\n"
-    );
+    Menu_EraseScreen();
+    ScriptContext2_Disable();
+    DestroyTask(taskId);
 }
 
-NAKED
-u8 DebugMenu_PTime()
+u8 DebugMenu_PTime(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._604       @ DebugMenu_8078F1C\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._605:\n"
-        "	.align	2, 0\n"
-        "._604:\n"
-        "	.word	DebugMenu_8078F1C+1\n"
-        "\n"
-    );
+    CloseMenu();
+    CreateTask(DebugMenu_8078F1C, 80);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8079058()
+const u8 gDebug0x839C60C[] = _("Set FLASH ERR");
+
+void DebugMenu_8079058(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	ldr	r1, ._610       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r0, #0x8\n"
-        "	ldsh	r1, [r4, r0]\n"
-        "	cmp	r1, #0x1\n"
-        "	beq	._606	@cond_branch\n"
-        "	cmp	r1, #0x1\n"
-        "	bgt	._607	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	beq	._608	@cond_branch\n"
-        "	b	._620\n"
-        "._611:\n"
-        "	.align	2, 0\n"
-        "._610:\n"
-        "	.word	gTasks\n"
-        "._607:\n"
-        "	cmp	r1, #0x2\n"
-        "	beq	._612	@cond_branch\n"
-        "	b	._620\n"
-        "._608:\n"
-        "	ldr	r0, ._615       @ gUnknown_Debug_03004BD0\n"
-        "	str	r1, [r0]\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	b	._614\n"
-        "._616:\n"
-        "	.align	2, 0\n"
-        "._615:\n"
-        "	.word	gUnknown_Debug_03004BD0\n"
-        "._606:\n"
-        "	ldr	r0, ._618       @ gDebug0x839C60C\n"
-        "	mov	r1, #0x4\n"
-        "	mov	r2, #0xf\n"
-        "	bl	Menu_PrintText\n"
-        "	mov	r0, #0x14\n"
-        "	mov	r1, #0x8\n"
-        "	mov	r2, #0x1\n"
-        "	bl	DisplayYesNoMenu\n"
-        "._614:\n"
-        "	ldrh	r0, [r4, #0x8]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r4, #0x8]\n"
-        "	b	._620\n"
-        "._619:\n"
-        "	.align	2, 0\n"
-        "._618:\n"
-        "	.word	gDebug0x839C60C\n"
-        "._612:\n"
-        "	bl	Menu_ProcessInputNoWrap_\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	asr	r1, r0, #0x18\n"
-        "	mov	r0, #0x2\n"
-        "	neg	r0, r0\n"
-        "	cmp	r1, r0\n"
-        "	beq	._620	@cond_branch\n"
-        "	cmp	r1, #0\n"
-        "	bne	._621	@cond_branch\n"
-        "	ldr	r1, ._623       @ gUnknown_Debug_03004BD0\n"
-        "	mov	r0, #0x1\n"
-        "	b	._622\n"
-        "._624:\n"
-        "	.align	2, 0\n"
-        "._623:\n"
-        "	.word	gUnknown_Debug_03004BD0\n"
-        "._621:\n"
-        "	ldr	r1, ._625       @ gUnknown_Debug_03004BD0\n"
-        "	mov	r0, #0x0\n"
-        "._622:\n"
-        "	str	r0, [r1]\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	ScriptContext2_Disable\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DestroyTask\n"
-        "._620:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._626:\n"
-        "	.align	2, 0\n"
-        "._625:\n"
-        "	.word	gUnknown_Debug_03004BD0\n"
-        "\n"
-    );
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            gUnknown_Debug_03004BD0 = 0;
+            Menu_DisplayDialogueFrame();
+            gTasks[taskId].data[0]++;
+            break;
+        case 1:
+            Menu_PrintText(gDebug0x839C60C, 4, 15);
+            DisplayYesNoMenu(20, 8, 1);
+            gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            switch (Menu_ProcessInputNoWrap_())
+            {
+                case -2:
+                    return;
+                case 0:
+                    gUnknown_Debug_03004BD0 = 1;
+                    break;
+                default:
+                    gUnknown_Debug_03004BD0 = 0;
+                    break;
+            }
+            Menu_EraseScreen();
+            ScriptContext2_Disable();
+            DestroyTask(taskId);
+            break;
+    }
 }
 
-NAKED
-u8 DebugMenu_OpenMurakawa()
+u8 DebugMenu_OpenMurakawa(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._627       @ DebugMenu_8079058\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	mov	r0, #0x1\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._628:\n"
-        "	.align	2, 0\n"
-        "._627:\n"
-        "	.word	DebugMenu_8079058+1\n"
-        "\n"
-    );
+    CloseMenu();
+    CreateTask(DebugMenu_8079058, 80);
+    ScriptContext2_Enable();
+    return TRUE;
 }
 
-NAKED
-void DebugMenu_8079110()
+const u8 Str_839C61A[] = _("abcde;　abcde:　ABCDE;　ABCDE:\p"
+                           "Tableaux　des　verbes　du　2{SUPER_E}　groupe.\p"
+                           "La1{SUPER_RE}　chose　à apprendre　c’est　de　lire.\p"
+                           "Tableaux　des　verbes　du　1{SUPER_ER}　groupe.\p"
+                           "“あいうえおかきくけコさしすせそたちつてとな”\n"
+                           "<にぬネのはひふへほマみむめもやゆよらりるれろわャッ>\p"
+                           "をんゃゅょアイウエオカキクケサシスルレロワ,");
+
+void DebugMenu_8079110(u8 taskId)
 {
-    asm(
-        "	push	{r4, r5, lr}\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	lsr	r5, r0, #0x18\n"
-        "	ldr	r1, ._633       @ gTasks\n"
-        "	lsl	r0, r5, #0x2\n"
-        "	add	r0, r0, r5\n"
-        "	lsl	r0, r0, #0x3\n"
-        "	add	r4, r0, r1\n"
-        "	mov	r1, #0x8\n"
-        "	ldsh	r0, [r4, r1]\n"
-        "	cmp	r0, #0x1\n"
-        "	beq	._629	@cond_branch\n"
-        "	cmp	r0, #0x1\n"
-        "	bgt	._630	@cond_branch\n"
-        "	cmp	r0, #0\n"
-        "	beq	._631	@cond_branch\n"
-        "	b	._642\n"
-        "._634:\n"
-        "	.align	2, 0\n"
-        "._633:\n"
-        "	.word	gTasks\n"
-        "._630:\n"
-        "	cmp	r0, #0x2\n"
-        "	beq	._635	@cond_branch\n"
-        "	b	._642\n"
-        "._631:\n"
-        "	bl	Menu_DisplayDialogueFrame\n"
-        "	b	._637\n"
-        "._629:\n"
-        "	ldr	r0, ._639       @ Str_839C61A\n"
-        "	mov	r1, #0x2\n"
-        "	mov	r2, #0xf\n"
-        "	bl	MenuPrintMessage\n"
-        "._637:\n"
-        "	ldrh	r0, [r4, #0x8]\n"
-        "	add	r0, r0, #0x1\n"
-        "	strh	r0, [r4, #0x8]\n"
-        "	b	._642\n"
-        "._640:\n"
-        "	.align	2, 0\n"
-        "._639:\n"
-        "	.word	Str_839C61A\n"
-        "._635:\n"
-        "	bl	Menu_UpdateWindowText\n"
-        "	lsl	r0, r0, #0x18\n"
-        "	cmp	r0, #0\n"
-        "	beq	._642	@cond_branch\n"
-        "	ldr	r0, ._643       @ gMain\n"
-        "	ldrh	r1, [r0, #0x2e]\n"
-        "	mov	r0, #0x1\n"
-        "	and	r0, r0, r1\n"
-        "	cmp	r0, #0\n"
-        "	beq	._642	@cond_branch\n"
-        "	bl	Menu_EraseScreen\n"
-        "	bl	ScriptContext2_Disable\n"
-        "	add	r0, r5, #0\n"
-        "	bl	DestroyTask\n"
-        "._642:\n"
-        "	pop	{r4, r5}\n"
-        "	pop	{r0}\n"
-        "	bx	r0\n"
-        "._644:\n"
-        "	.align	2, 0\n"
-        "._643:\n"
-        "	.word	gMain\n"
-        "\n"
-    );
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            Menu_DisplayDialogueFrame();
+            gTasks[taskId].data[0]++;
+            break;
+        case 1:
+            MenuPrintMessage(Str_839C61A, 2, 15);
+            gTasks[taskId].data[0]++;
+            break;
+        case 2:
+            if (Menu_UpdateWindowText() && gMain.newKeys & A_BUTTON)
+            {
+                Menu_EraseScreen();
+                ScriptContext2_Disable();
+                DestroyTask(taskId);
+            }
+            break;
+    }
 }
 
-NAKED
-u8 DebugMenu_OpenKiwa()
+u8 DebugMenu_OpenKiwa(void)
 {
-    asm(
-        "	push	{lr}\n"
-        "	bl	CloseMenu\n"
-        "	ldr	r0, ._645       @ DebugMenu_8079110\n"
-        "	mov	r1, #0x50\n"
-        "	bl	CreateTask\n"
-        "	bl	ScriptContext2_Enable\n"
-        "	pop	{r1}\n"
-        "	bx	r1\n"
-        "._646:\n"
-        "	.align	2, 0\n"
-        "._645:\n"
-        "	.word	DebugMenu_8079110+1\n"
-        "\n"
-    );
+    CloseMenu();
+    CreateTask(DebugMenu_8079110, 80);
+    ScriptContext2_Enable();
+    // return TRUE;
 }
 
 #endif
