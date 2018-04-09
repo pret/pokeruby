@@ -581,20 +581,20 @@ u8 Menu_GetColumnXCoord(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
+void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const void * menuItems)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[i].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[i].text, left, top + 2 * i);
 }
 
-void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
+void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const void * menuItems, const u8 *order)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[order[i]].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[order[i]].text, left, top + 2 * i);
 }
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
@@ -644,7 +644,7 @@ int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
         Menu_BlankWindowRect(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     asm(".syntax unified\n\

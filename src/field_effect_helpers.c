@@ -1024,7 +1024,7 @@ static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
     }
 }
 #else
-__attribute__((naked)) static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
+NAKED static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r8\n"
@@ -1496,7 +1496,7 @@ static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
     }
 }
 #else
-__attribute__((naked)) static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
+NAKED static void sub_812882C(struct Sprite *sprite /*r6*/, u8 z, u8 offset)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tadds r6, r0, 0\n"

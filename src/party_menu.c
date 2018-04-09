@@ -1007,7 +1007,7 @@ void sub_806B908(void)
     ewram1B000.unk261 = 2;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_806B908(void)
 {
     asm(".syntax unified\n\
@@ -1326,7 +1326,7 @@ u16 HandleDefaultPartyMenuInput(u8 taskId)
     return gMain.newAndRepeatedKeys;
 }
 #else
-__attribute__((naked))
+NAKED
 u16 HandleDefaultPartyMenuInput(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -1810,7 +1810,7 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
 }
 
 #else
-__attribute__((naked))
+NAKED
 void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed)
 {
     asm(".syntax unified\n\
@@ -2408,7 +2408,7 @@ void sub_806CF04(void)
     gSprites[ewram01000.unk4].callback = SpriteCB_sub_806D37C;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_806CF04(void)
 {
     asm(".syntax unified\n\
@@ -2986,7 +2986,7 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
     gSprites[heldItemSpriteId].callback(&gSprites[heldItemSpriteId]);
 }
 #else
-__attribute__((naked))
+NAKED
 void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
     asm(".syntax unified\n\
@@ -3172,7 +3172,7 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void SetHeldItemIconVisibility(u8 a, u8 monIndex)
 {
     asm(".syntax unified\n\
@@ -5111,7 +5111,7 @@ u8 GetItemEffectType(u16 item)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 u8 GetItemEffectType(u16 item)
 {
     asm(".syntax unified\n\

@@ -2733,7 +2733,7 @@ void sub_811952C(struct Sprite *sprite)
     sprite->callback = sub_8118CEC;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_811952C(struct Sprite *sprite)
 {
     asm_unified("push {r4-r7,lr}\n"

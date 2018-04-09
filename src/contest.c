@@ -3891,7 +3891,7 @@ void sub_80B0748(u8 taskId)
     #undef i
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80B0748(u8 taskId)
 {
     asm(".syntax unified\n\

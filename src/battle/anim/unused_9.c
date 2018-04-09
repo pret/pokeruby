@@ -45,7 +45,7 @@ void sub_80CFE2C(struct Sprite* sprite)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80CFE2C(struct Sprite* sprite)
 {
     asm(".syntax unified\n\

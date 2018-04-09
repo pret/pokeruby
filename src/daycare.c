@@ -592,7 +592,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1119,7 +1119,7 @@ static bool8 _ShouldEggHatch(struct DayCare *daycare)
     return FALSE;
 }
 #else
-__attribute__((naked))
+NAKED
 static bool8 _ShouldEggHatch(struct DayCare *daycare)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1398,7 +1398,7 @@ static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 {
     asm_unified("\tpush {r4-r7,lr}\n"

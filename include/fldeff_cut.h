@@ -9,5 +9,6 @@ void sub_80A28F4(s16, s16);
 void objc_8097BBC(struct Sprite *sprite);
 void sub_80A2AB8(void);
 void sub_80A2B00(void); // unknown args
+void debug_sub_80AFEE4(void);
 
 #endif // GUARD_FLDEFF_CUT_H

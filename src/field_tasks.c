@@ -213,7 +213,7 @@ void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8069638(const struct MetatileOffset offsets[][2], s16 x, s16 y, bool32 flag)
 {
     asm_unified("\tpush {r4-r7,lr}\n"

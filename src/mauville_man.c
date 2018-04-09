@@ -557,7 +557,7 @@ static const u16 gUnknown_083E53C8[][2] =
     {0x15, 0},
 };
 
-__attribute__((naked))
+NAKED
 static void sub_80F7DC0(void)
 {
     asm(".syntax unified\n\

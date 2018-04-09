@@ -930,7 +930,7 @@ void ScriptMenu_CreatePCMenu(void)
     StartScriptMenuTask(0, 0, width + 2, 2 * numChoices + 1, 0, numChoices);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 void ScriptMenu_CreatePCMenu(void) {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

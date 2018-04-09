@@ -64,7 +64,7 @@ void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *b
     }
 }
 #else
-__attribute__((naked)) void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *buffer)
+NAKED void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *buffer)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"

@@ -236,7 +236,7 @@ static void DecrementFeederStepCounters(void)
     }
 }
 
-bool8 unref_sub_80C853C(void)
+bool32 debug_sub_80C853C(void)
 {
     SafariZoneGetPokeblockNameInFeeder();
 

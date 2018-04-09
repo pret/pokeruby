@@ -106,7 +106,7 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_1598BA
-	goto_if_set FLAG_ECOUNTERED_LATIAS_OR_LATIOS, LilycoveCity_Harbor_EventScript_1598BA
+	goto_if_set FLAG_ENCOUNTERED_LATIAS_OR_LATIOS, LilycoveCity_Harbor_EventScript_1598BA
 	goto_if_unset FLAG_SYS_HAS_EON_TICKET, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closemessage

@@ -1564,7 +1564,7 @@ const struct SpriteTemplate gSpriteTemplate_83B6DDC = {
     0x0002, 0xdac7, &gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-__attribute__((naked)) void sub_80980D4(void)
+NAKED void sub_80980D4(void)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tsub sp, 0x28\n"

@@ -204,8 +204,7 @@ SYMBOL(gPokemonItemUseCallback, 4)
 SYMBOL(gMenuCallback, 4)
 
 #if DEBUG
-gUnknown_Debug_03004BD0 = .;
-. += 0x4;
+SYMBOL(gUnknown_Debug_03004BD0, 4)
 #endif
 
 // sound.c

@@ -2133,7 +2133,7 @@ u16 sub_80EAE88(u8 group)
 }
 
 #if GERMAN
-__attribute__((naked))
+NAKED
 void sub_80EAECC(void)
 {
     asm(".syntax unified\n\

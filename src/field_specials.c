@@ -1172,7 +1172,7 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
     return flag;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1630,7 +1630,7 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
     return flag;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
     asm_unified("\tpush {r4-r7,lr}\n"

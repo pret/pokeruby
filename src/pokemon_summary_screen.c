@@ -1227,7 +1227,7 @@ static void sub_809E83C(u8 taskId, s8 b)
     sub_80A2078(taskId);
 }
 
-__attribute__((naked))
+NAKED
 static void sub_809E8F0(/*u8 taskId, s8 direction, u8 *c*/)
 {
     asm(".syntax unified\n\
@@ -1766,7 +1766,7 @@ static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 {
     asm(".syntax unified\n\
@@ -1897,7 +1897,7 @@ s8 sub_809F284(s8 a)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 s8 sub_809F284(s8 a)
 {
     asm(".syntax unified\n\
@@ -2316,7 +2316,7 @@ u8 sub_809FA30(void)
 //     vramAddr[(d * 32) + c] = (b * 0x1000) + (a * 2) + 0x200 + 0x80;
 //     vramAddr[(d * 32) + c + 32] = (b * 0x1000) + (a * 2) + 0x200 + 0x81;
 // }
-__attribute__((naked))
+NAKED
 void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
@@ -2840,7 +2840,7 @@ static void sub_80A057C(u16 move)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A057C(u16 move)
 {
     asm(".syntax unified\n\
@@ -3463,7 +3463,7 @@ static void DrawSummaryScreenNavigationDots(void)
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 #else
-__attribute__((naked))
+NAKED
 static void DrawSummaryScreenNavigationDots(void)
 {
     asm(".syntax unified\n\
@@ -3646,7 +3646,7 @@ _080A1044: .4byte 0x0600e056\n\
 }
 #endif // NONMATCHING
 
-__attribute__((naked))
+NAKED
 void sub_80A1048(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4049,7 +4049,7 @@ static void sub_80A12D0(s8 a)
 //         DestroyTask(taskId);
 //     }
 // }
-__attribute__((naked))
+NAKED
 static void sub_80A1334(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4245,7 +4245,7 @@ static void sub_80A1488(s8 a, u8 b)
     gTasks[taskId].data[3] = b;
 }
 
-__attribute__((naked))
+NAKED
 static void sub_80A1500(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4487,7 +4487,7 @@ static void sub_80A16CC(u8 a)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A16CC(u8 a)
 {
     asm(".syntax unified\n\
@@ -4884,7 +4884,7 @@ void sub_80A1D18(void)
     StartSpriteAnim(&gSprites[ewram1A000[29]], statusAndPkrs2);
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80A1D18(void)
 {
     asm(".syntax unified\n\

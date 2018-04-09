@@ -1335,7 +1335,7 @@ static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
     return 0; // PBLOCK_CLR_UNKNOWN
 }
 #else
-__attribute__((naked))
+NAKED
 static u8 SetPokeblock_CalcColor(u8 * dest, struct Pokeblock * pokeblock)
 {
     asm("\tpush\t{r4, r5, r6, r7, lr}\n"

@@ -818,4 +818,6 @@ void BattleStopLowHpSound(void);
 
 void SetBankFuncToLinkOpponentBufferRunCommand(void);
 
+void GameClear(void);
+
 #endif // GUARD_BATTLE_H

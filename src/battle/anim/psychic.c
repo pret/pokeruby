@@ -690,7 +690,7 @@ void sub_80DC4F4(u8 taskId)
     task->func = sub_80DC5F4;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80DC4F4(u8 taskId)
 {
     asm(".syntax unified\n\

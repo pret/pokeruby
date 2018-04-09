@@ -514,7 +514,7 @@ bool8 sub_81346F4(void)
 //     }
 // }
 
-__attribute__((naked))
+NAKED
 void sub_81347F8(void)
 {
     asm(".syntax unified\n\
@@ -906,7 +906,7 @@ void SetEReaderTrainerGfxId(void)
 
 //     gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
 // }
-__attribute__((naked))
+NAKED
 void sub_8134AC0(struct BattleTowerRecord *record)
 {
     asm(".syntax unified\n\

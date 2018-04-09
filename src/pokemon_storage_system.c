@@ -405,7 +405,7 @@ void ResetPokemonStorageSystem(void)
 }
 
 #if DEBUG
-__attribute__((naked))
+NAKED
 void debug_sub_80A3904(void)
 {
 	asm("\

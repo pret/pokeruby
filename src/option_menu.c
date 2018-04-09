@@ -463,7 +463,7 @@ static void FrameType_DrawChoices(u8 selection)
     Menu_PrintText(text, 18, 15);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 static void FrameType_DrawChoices(u8 selection)
 {
     asm(".syntax unified\n\

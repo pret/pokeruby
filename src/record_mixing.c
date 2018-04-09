@@ -635,7 +635,7 @@ void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
     SeedRng(sp40);
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80B9C6C(u8 *a, u32 b, u8 c, void *d)
 {
     asm(".syntax unified\n\

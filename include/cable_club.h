@@ -22,6 +22,7 @@ bool32 sub_8083BF4(u8 linkPlayerIndex);
 void sub_8083C50(u8 taskId);
 #if DEBUG
 void debug_sub_808B838(u8);
+bool8 debug_sub_8138CC4(void);
 #endif
 
 #endif // GUARD_CABLE_CLUB_H

@@ -694,7 +694,7 @@ void sub_80BC300(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80BC300(void)
 {
     asm(".syntax unified\n\

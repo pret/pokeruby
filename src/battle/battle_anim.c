@@ -2528,7 +2528,7 @@ s8 BattleAnimAdjustPanning(s8 a)
     //_0807706E
 }
 */
-__attribute__((naked))
+NAKED
 s8 BattleAnimAdjustPanning(s8 a)
 {
     asm(".syntax unified\n\

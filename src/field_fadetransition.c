@@ -512,7 +512,7 @@ void sub_80810DC(void)
 
 #if DEBUG
 
-__attribute__((naked))
+NAKED
 void debug_sub_80888D8()
 {
     asm("\

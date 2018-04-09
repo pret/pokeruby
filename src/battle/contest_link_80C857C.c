@@ -107,7 +107,7 @@ u8 sub_80C86A0(const u8 *string)
     return language;
 }
 #else
-__attribute__((naked)) u8 sub_80C86A0(const u8 *string)
+NAKED u8 sub_80C86A0(const u8 *string)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tadds r4, r0, 0\n"

@@ -317,7 +317,7 @@ static bool8 sub_8042ABC(void* a, u8 b)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static bool8 sub_8042ABC(void* a, u8 b)
 {
     asm(".syntax unified\n\

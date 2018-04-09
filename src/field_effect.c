@@ -601,7 +601,7 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     gPlttBufferFaded[i] = RGB(curRed, curGreen, curBlue);
 }
 #else
-__attribute__((naked))
+NAKED
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     asm(".syntax unified\n"
@@ -676,7 +676,7 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     ".syntax divided");
 }
 
-__attribute__((naked))
+NAKED
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 {
     asm(".syntax unified\n"
@@ -2607,7 +2607,7 @@ bool8 sub_8088708(struct Task *task)
     return FALSE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_8088708(struct Task *task)
 {
     asm_unified("\tpush {r4-r7,lr}\n"

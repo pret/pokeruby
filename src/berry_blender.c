@@ -3276,7 +3276,7 @@ static bool8 Blender_PrintBlendingRanking(void)
 
 // debug menu goes here
 
-void unref_sub_80524BC(void)
+void debug_sub_80524BC(void)
 {
     ResetSpriteData();
     FreeAllSpritePalettes();

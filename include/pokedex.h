@@ -25,4 +25,6 @@ u16 GetHoennPokedexCount(u8);
 bool8 CompletedHoennPokedex(void);
 bool16 CompletedNationalPokedex(void);
 
+extern bool8 gUnknown_03005CE8;
+
 #endif // GUARD_POKEDEX_H

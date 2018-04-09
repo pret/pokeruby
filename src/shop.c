@@ -811,7 +811,7 @@ static void Shop_MoveItemListUp(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void Shop_MoveItemListUp(void)
 {
     asm(".syntax unified\n\
@@ -950,7 +950,7 @@ static void Shop_MoveItemListDown(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void Shop_MoveItemListDown(void)
 {
     asm(".syntax unified\n\

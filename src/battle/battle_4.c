@@ -2850,7 +2850,7 @@ void SetMoveEffect(bool8 primary, u8 certainArg)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void SetMoveEffect(bool8 primary, u8 certainArg)
 {
     asm(".syntax unified\n\
@@ -5694,7 +5694,7 @@ static void atk24(void)
 
 }
 #else
-__attribute__((naked))
+NAKED
 static void atk24(void)
 {
     asm(".syntax unified\n\
@@ -6484,7 +6484,7 @@ static void atk48_playstatchangeanimation(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atk48_playstatchangeanimation(void)
 {
     asm(".syntax unified\n\
@@ -6892,7 +6892,7 @@ static void atk49_moveend(void)
     } while (effect == 0)
 }
 #else
-__attribute__((naked))
+NAKED
 void atk49_moveend(void)
 {
     asm(".syntax unified\n\
@@ -8498,7 +8498,7 @@ static void atk50_openpartyscreen(void)
 }
 */
 
-__attribute__((naked))
+NAKED
 static void atk50_openpartyscreen(void)
 {
     asm(".syntax unified\n\
@@ -9965,7 +9965,7 @@ static void atk5D_getmoneyreward(void)
     gBattlescriptCurrInstr += 1;
 }
 #else
-__attribute__((naked))
+NAKED
 static void atk5D_getmoneyreward(void)
 {
     asm(".syntax unified\n\
@@ -10508,7 +10508,7 @@ static void atk6C_drawlvlupbox(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atk6C_drawlvlupbox(void)
 {
     asm(".syntax unified\n\
@@ -12631,7 +12631,7 @@ static void atk9D_mimicattackcopy(void)
 }
 
 #if DEBUG
-__attribute__((naked))
+NAKED
 static void atk9E_metronome(void)
 {
     asm("\
@@ -12834,7 +12834,7 @@ static void atk9E_metronome(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atk9E_metronome(void)
 {
     asm(".syntax unified\n\
@@ -13097,7 +13097,7 @@ static void atkA6_settypetorandomresistance(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atkA6_settypetorandomresistance(void)
 {
     asm(".syntax unified\n\
@@ -13997,7 +13997,7 @@ static void atkC0_recoverbasedonsunlight(void)
     }
 }
 
-__attribute__((naked))
+NAKED
 static void atkC1_hiddenpowercalc(void)
 {
     asm(".syntax unified\n\
@@ -14231,7 +14231,7 @@ static void atkC4_trydobeatup(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void atkC4_trydobeatup(void)
 {
     asm(".syntax unified\n\
@@ -14655,7 +14655,7 @@ static void atkD2_tryswapitems(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atkD2_tryswapitems(void)
 {
     asm(".syntax unified\n\
@@ -15210,7 +15210,7 @@ static void atkDE_asistattackselect(void)
 }
 
 #else
-__attribute__((naked))
+NAKED
 static void atkDE_asistattackselect(void)
 {
     asm(".syntax unified\n\
@@ -15875,7 +15875,7 @@ static void atkF2_displaydexinfo(void)
     }
 }
 
-__attribute__((naked))
+NAKED
 void sub_802BBD4(u8 r0, u8 r1, u8 r2, u8 r3, u8 sp0)
 {
     asm(".syntax unified\n\
