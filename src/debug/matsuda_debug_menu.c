@@ -76,7 +76,7 @@ const struct MenuAction gMatsudaDebugMenuActions[] =
     {gMatsudaDebugMenu_ActionSetAllArtMuseumText, MatsudaDebugMenu_SetArtMuseumItems},
 };
 
-u8 unref_sub_80A9B28(void)
+u8 InitMatsudaDebugMenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 17, 18);

@@ -47,9 +47,7 @@
 #include "ewram.h"
 #include "gba/flash_internal.h"
 #include "gba/m4a_internal.h"
-
-// berry_blender.c
-extern void unref_sub_80524BC(void);
+#include "berry_blender.h"
 
 void debug_sub_8076BB4(u8);
 void debug_sub_8077CF4(u8 x, u8 y);
@@ -461,7 +459,7 @@ u8 DebugMenu_8076CD4(void)
 
 u8 DebugMenu_8076CD8(void)
 {
-    SetMainCallback2(unref_sub_80524BC);
+    SetMainCallback2(debug_sub_80524BC);
     return 0;
 }
 
@@ -801,7 +799,7 @@ u8 DebugMenu_Exit(void)
 
 u8 DebugMenu_OpenSogabe(void)
 {
-    return unref_sub_814A414();
+    return InitSogabeDebugMenu();
 }
 
 u8 DebugMenu_OpenTamada(void)
@@ -816,7 +814,7 @@ u8 DebugMenu_OpenKagaya(void)
 
 u8 DebugMenu_OpenMatsuda(void)
 {
-    return unref_sub_80A9B28();
+    return InitMatsudaDebugMenu();
 }
 
 u8 DebugMenu_OpenNohara(void)
@@ -1261,7 +1259,7 @@ const u8 Str_839BF1F[] = _("めのまえには\n"
 bool8 DebugMenu_8077B00(void)
 {
     Menu_EraseScreen();
-    if (unref_sub_80C853C())
+    if (debug_sub_80C853C())
         sub_8071F40(Str_839BF14);
     else
         sub_8071F40(Str_839BF1F);

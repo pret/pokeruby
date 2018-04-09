@@ -21,7 +21,7 @@ size_t debug_sub_813C404(u8 * dest)
 {
     size_t size = gUnknown_Debug_845DAE1End - gUnknown_Debug_845DAE1;
     memcpy(dest, gUnknown_Debug_845DAE1, size);
-    unref_sub_812620C(dest, gUnknown_Debug_845DAE1);
+    debug_sub_812620C(dest, gUnknown_Debug_845DAE1);
     return size;
 }
 
@@ -32,7 +32,7 @@ size_t debug_sub_813C430(u8 * dest)
 {
     size_t size = gUnknown_Debug_845E3E0End - gUnknown_Debug_845E3E0;
     memcpy(dest, gUnknown_Debug_845E3E0, size);
-    unref_sub_812620C(dest, gUnknown_Debug_845E3E0);
+    debug_sub_812620C(dest, gUnknown_Debug_845E3E0);
     return size;
 }
 
@@ -43,7 +43,7 @@ size_t debug_sub_813C45C(u8 * dest)
 {
     size_t size = gUnknown_Debug_845E422End - gUnknown_Debug_845E422;
     memcpy(dest, gUnknown_Debug_845E422, size);
-    unref_sub_812620C(dest, gUnknown_Debug_845E422);
+    debug_sub_812620C(dest, gUnknown_Debug_845E422);
     return size;
 }
 
@@ -54,7 +54,7 @@ size_t debug_sub_813C488(u8 * dest)
 {
     size_t size = gUnknown_Debug_845E402End - gUnknown_Debug_845E402;
     memcpy(dest, gUnknown_Debug_845E402, size);
-    unref_sub_812620C(dest, gUnknown_Debug_845E402);
+    debug_sub_812620C(dest, gUnknown_Debug_845E402);
     return size;
 }
 
@@ -75,7 +75,7 @@ size_t debug_sub_813C4D4(u8 * dest)
 {
     size_t size = gUnknown_Debug_845E619End - gUnknown_Debug_845E619;
     memcpy(dest, gUnknown_Debug_845E619, size);
-    unref_sub_81261B4(dest, gUnknown_Debug_845E619);
+    debug_sub_81261B4(dest, gUnknown_Debug_845E619);
     return size;
 }
 
@@ -86,7 +86,7 @@ size_t debug_sub_813C500(u8 * dest)
 {
     size_t size = gUnknown_Debug_845E712End - gUnknown_Debug_845E712;
     memcpy(dest, gUnknown_Debug_845E712, size);
-    unref_sub_812620C(dest, gUnknown_Debug_845E712);
+    debug_sub_812620C(dest, gUnknown_Debug_845E712);
     return size;
 }
 
@@ -103,7 +103,7 @@ size_t debug_sub_813C52C(u8 * dest, u16 itemId)
     ptr += 3;
     ptr[0] = itemId;
     ptr[1] = itemId >> 8;
-    unref_sub_812620C(dest, gUnknown_Debug_845E797);
+    debug_sub_812620C(dest, gUnknown_Debug_845E797);
     return size;
 }
 
@@ -152,7 +152,7 @@ size_t debug_sub_813C5B4(u8 * dest)
         berry[i] = saveBerry[i];
 
     ClearEnigmaBerries();
-    unref_sub_81261B4(dest, gUnknown_Debug_845DDB2);
+    debug_sub_81261B4(dest, gUnknown_Debug_845DDB2);
     return size;
 }
 
@@ -248,7 +248,7 @@ size_t debug_sub_813C810(u8 * dest)
 
     memcpy(gUnknown_Debug_845E4CB - src + dest, &mail, sizeof(struct MailStruct));
 
-    unref_sub_812620C(dest, src);
+    debug_sub_812620C(dest, src);
 
     return size;
 }
@@ -270,7 +270,7 @@ size_t debug_sub_813C888(u8 * dest)
 
     memcpy(gUnknown_Debug_845E4CB - src + dest, &mail, sizeof(struct MailStruct));
 
-    unref_sub_812620C(dest, src);
+    debug_sub_812620C(dest, src);
 
     return size;
 }
