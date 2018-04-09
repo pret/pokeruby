@@ -203,7 +203,6 @@ void PlayBGM(u16 songID);
 void MonGainEVs(struct Pokemon*, u16 defeatedSpecies);
 extern u8 gBattleBufferB[4][0x200];
 void HandleLowHpMusicChange(struct Pokemon*, u8 bank);
-void AdjustFriendship(struct Pokemon*, u8 value);
 bool8 IsTradedMon(struct Pokemon*);
 void BattleScriptPop(void);
 void SwitchInClearSetData(void);
@@ -5133,10 +5132,10 @@ static void atk19_tryfaintmon(void)
                     gBattleResults.playerFaintCounter++;
                 if (gBattleMons[bank].level > gBattleMons[gActiveBattler].level)
                 {
-                    if (gBattleMons[bank].level - gBattleMons[gActiveBattler].level > 0x1D)
-                        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 8);
+                    if (gBattleMons[bank].level - gBattleMons[gActiveBattler].level > 29)
+                        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], FRIENDSHIP_EVENT_FAINT_LARGE);
                     else
-                        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 6);
+                        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], FRIENDSHIP_EVENT_FAINT_SMALL);
                 }
             }
             else
@@ -5569,7 +5568,7 @@ static void atk23_getexp(void)
                 gLeveledUpInBattle |= gBitTable[gBattleStruct->expGetterID];
                 gBattlescriptCurrInstr = BattleScript_LevelUp;
                 gBattleMoveDamage = (gBattleBufferB[gActiveBattler][2] | (gBattleBufferB[gActiveBattler][3] << 8));
-                AdjustFriendship(&gPlayerParty[gBattleStruct->expGetterID], 0);
+                AdjustFriendship(&gPlayerParty[gBattleStruct->expGetterID], FRIENDSHIP_EVENT_GROW_LEVEL);
 
                 // update battle mon structure after level up
                 if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterID && gBattleMons[0].hp)

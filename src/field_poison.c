@@ -8,53 +8,54 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "constants/species.h"
 
 extern u16 gSpecialVar_Result;
 extern u8 fieldPoisonText_PokemonFainted[];
 
-bool32 CheckMonIsValid(struct Pokemon *pkmn)
+static bool32 IsMonValidSpecies(struct Pokemon *mon)
 {
     // UB: Too few arguments for function 'GetMonData'
-    u16 species2 = GetMonData(pkmn, MON_DATA_SPECIES2);
-
-    if (species2 == 0 || species2 == 0x19C)
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2);
+    if (species == SPECIES_NONE || species == SPECIES_EGG)
         return FALSE;
     else
         return TRUE;
 }
 
-bool32 AllMonsFainted(void)
+static bool32 AllMonsFainted(void)
 {
-    struct Pokemon *pkmn = &gPlayerParty[0];
     int i;
+    struct Pokemon *mon = gPlayerParty;
 
-    for (i = 0; i < 6; i++, pkmn++)
+    for (i = 0; i < PARTY_SIZE; i++, mon++)
     {
         // UB: Too few arguments for function 'GetMonData'
-        if (CheckMonIsValid(pkmn) && GetMonData(pkmn, MON_DATA_HP) != 0)
+        if (IsMonValidSpecies(mon) && GetMonData(mon, MON_DATA_HP) != 0)
             return FALSE;
     }
+
     return TRUE;
 }
 
-void MonFaintFromPoisonOnField(u8 partyMember)
+static void FaintFromFieldPoison(u8 monIndex)
 {
-    struct Pokemon *pkmn = &gPlayerParty[partyMember];
-    u32 val = 0;
+    struct Pokemon *mon = &gPlayerParty[monIndex];
+    u32 status = 0;
 
-    AdjustFriendship(pkmn, 7);
-    SetMonData(pkmn, MON_DATA_STATUS, &val);
-    GetMonData(pkmn, MON_DATA_NICKNAME, gStringVar1);
+    AdjustFriendship(mon, FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE);
+    SetMonData(mon, MON_DATA_STATUS, &status);
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
     StringGetEnd10(gStringVar1);
 }
 
-bool32 CheckMonFaintedFromPoison(u8 partyMember)
+static bool32 MonFaintedFromPoison(u8 monIndex)
 {
-    struct Pokemon *pkmn = &gPlayerParty[partyMember];
+    struct Pokemon *mon = &gPlayerParty[monIndex];
 
     // UB: Too few arguments for function 'GetMonData'
-    if (CheckMonIsValid(pkmn) && GetMonData(pkmn, MON_DATA_HP) == 0
-     && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
+    if (IsMonValidSpecies(mon) && GetMonData(mon, MON_DATA_HP) == 0
+     && GetPrimaryStatus(GetMonData(mon, MON_DATA_STATUS)) == STATUS_PRIMARY_POISON)
         return TRUE;
     else
         return FALSE;
@@ -63,7 +64,7 @@ bool32 CheckMonFaintedFromPoison(u8 partyMember)
 #define tState       data[0]
 #define tPartyMember data[1]
 
-void Task_WhiteOut(u8 taskId)
+static void Task_WhiteOut(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -71,12 +72,12 @@ void Task_WhiteOut(u8 taskId)
     {
     case 0:
         // Check if any Pokemon have fainted due to poison
-        while (tPartyMember < 6)
+        while (tPartyMember < PARTY_SIZE)
         {
-            if (CheckMonFaintedFromPoison(tPartyMember))
+            if (MonFaintedFromPoison(tPartyMember))
             {
                 // Show message about fainted mon
-                MonFaintFromPoisonOnField(tPartyMember);
+                FaintFromFieldPoison(tPartyMember);
                 ShowFieldMessage(fieldPoisonText_PokemonFainted);
                 tState++;
                 return;
@@ -111,30 +112,30 @@ void ExecuteWhiteOut(void)
 
 s32 DoPoisonFieldEffect(void)
 {
-    struct Pokemon *pkmn = &gPlayerParty[0];
+    struct Pokemon *mon = &gPlayerParty[0];
     u32 numPoisoned = 0;
     u32 numFainting = 0;
     int i;
 
     // count the number of mons that are poisoned and fainting from poison,
     // and decrement HP of all poisoned mons
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         u32 hp;
 
-        if (GetMonData(pkmn, MON_DATA_SANITY_BIT2) != 0
-         && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
+        if (GetMonData(mon, MON_DATA_SANITY_BIT2) != 0
+         && GetPrimaryStatus(GetMonData(mon, MON_DATA_STATUS)) == STATUS_PRIMARY_POISON)
         {
             // decrement HP of poisoned mon
-            hp = GetMonData(pkmn, MON_DATA_HP);
+            hp = GetMonData(mon, MON_DATA_HP);
             if (hp != 0)
                 hp--;
             if (hp == 0)
                 numFainting++;
-            SetMonData(pkmn, MON_DATA_HP, &hp);
+            SetMonData(mon, MON_DATA_HP, &hp);
             numPoisoned++;
         }
-        pkmn++;
+        mon++;
     }
     if (numFainting != 0 || numPoisoned != 0)
         FldeffPoison_Start();

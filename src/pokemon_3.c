@@ -22,6 +22,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "text.h"
+#include "trainer.h"
 #include "util.h"
 #include "ewram.h"
 
@@ -643,18 +644,19 @@ u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex)
     return n;
 }
 
-const s8 gUnknown_082082FE[][3] =
-{
-    // Happiness deltas
-    { 5,  3,   2},
-    { 5,  3,   2},
-    { 1,  1,   0},
-    { 3,  2,   1},
-    { 1,  1,   0},
-    { 1,  1,   1},
-    {-1, -1,  -1},
-    {-5, -5, -10},
-    {-5, -5, -10}
+// Friendship deltas. Each event has 3 separate values, depending on the mon's
+// current friendship value. In general, a mon's friendship grows faster if
+// its current friendship is lower. The 3 tiers are 0-99, 100-199, and 200-255.
+static const s8 sFriendshipEventDeltas[][3] = {
+    { 5,  3,   2}, // FRIENDSHIP_EVENT_GROW_LEVEL
+    { 5,  3,   2}, // FRIENDSHIP_EVENT_VITAMIN
+    { 1,  1,   0}, // FRIENDSHIP_EVENT_BATTLE_ITEM
+    { 3,  2,   1}, // FRIENDSHIP_EVENT_LEAGUE_BATTLE
+    { 1,  1,   0}, // FRIENDSHIP_EVENT_LEARN_TMHM
+    { 1,  1,   1}, // FRIENDSHIP_EVENT_WALKING
+    {-1, -1,  -1}, // FRIENDSHIP_EVENT_FAINT_SMALL
+    {-5, -5, -10}, // FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE
+    {-5, -5, -10}, // FRIENDSHIP_EVENT_FAINT_LARGE
 };
 
 void AdjustFriendship(struct Pokemon *mon, u8 event)
@@ -683,28 +685,32 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             friendshipLevel++;
         if (friendship > 199)
             friendshipLevel++;
-        if ((event != 5 || !(Random() & 1))
-         && (event != 3
+
+        if ((event != FRIENDSHIP_EVENT_WALKING || !(Random() & 1))
+         && (event != FRIENDSHIP_EVENT_LEAGUE_BATTLE
           || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-           && (gTrainers[gTrainerBattleOpponent].trainerClass == 24
-            || gTrainers[gTrainerBattleOpponent].trainerClass == 25
-            || gTrainers[gTrainerBattleOpponent].trainerClass == 32))))
+           && (gTrainers[gTrainerBattleOpponent].trainerClass == TRAINER_CLASS_ELITE_FOUR
+            || gTrainers[gTrainerBattleOpponent].trainerClass == TRAINER_CLASS_LEADER
+            || gTrainers[gTrainerBattleOpponent].trainerClass == TRAINER_CLASS_CHAMPION))))
         {
-            s8 mod = gUnknown_082082FE[event][friendshipLevel];
-            if (mod > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
-                mod = (150 * mod) / 100;
-            friendship += mod;
-            if (mod > 0)
+            s8 delta = sFriendshipEventDeltas[event][friendshipLevel];
+            if (delta > 0 && holdEffect == HOLD_EFFECT_HAPPINESS_UP)
+                delta = (150 * delta) / 100;
+
+            friendship += delta;
+            if (delta > 0)
             {
                 if (GetMonData(mon, MON_DATA_POKEBALL, 0) == ITEM_LUXURY_BALL)
                     friendship++;
                 if (GetMonData(mon, MON_DATA_MET_LOCATION, 0) == sav1_map_get_name())
                     friendship++;
             }
+
             if (friendship < 0)
                 friendship = 0;
             if (friendship > 255)
                 friendship = 255;
+
             SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
         }
     }

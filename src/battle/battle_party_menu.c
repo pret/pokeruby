@@ -232,16 +232,16 @@ void sub_8094B6C(u8 a, u8 b, u8 c)
     }
 }
 
-u8 sub_8094C20(u8 a)
+u8 sub_8094C20(u8 monIndex)
 {
     u8 retVal;
-    u8 val = a & 1;
+    u8 val = monIndex & 1;
 
-    a /= 2;
+    monIndex /= 2;
     if (val)
-        retVal = gUnknown_02038470[a] & 0xF;
+        retVal = gUnknown_02038470[monIndex] & 0xF;
     else
-        retVal = gUnknown_02038470[a] >> 4;
+        retVal = gUnknown_02038470[monIndex] >> 4;
     return retVal;
 }
 
