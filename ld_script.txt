@@ -363,7 +363,7 @@ SECTIONS {
         src/unused_8124F94.o(.text);
         src/save.o(.text);
         src/mystery_event_script.o(.text);
-        src/debug/unk_debug_menu_3.o(.text);
+        src/debug/ereader_debug_menu.o(.text);
         src/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/unused_81258BC.o(.text);
@@ -646,7 +646,7 @@ SECTIONS {
         src/choose_party.o(.rodata);
         src/cable_car.o(.rodata);
         src/save.o(.rodata);
-        src/debug/unk_debug_menu_3.o(.rodata);
+        src/debug/ereader_debug_menu.o(.rodata);
         src/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
