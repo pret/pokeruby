@@ -2,6 +2,8 @@
 #include "global.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
+#include "constants/species.h"
+#include "constants/items.h"
 #include "main.h"
 #include "menu.h"
 #include "start_menu.h"
@@ -451,5 +453,197 @@ bool8 debug_sub_808F93C(void)
     }
     return FALSE;
 }
+
+void debug_sub_808FA88(u8 a0, u8 a1)
+{
+    u8 i;
+    u8 leadMonIndex = GetLeadMonIndex();
+    u8 channel;
+
+    gSaveBlock1.tvShows[a0].common.kind = a1;
+    gSaveBlock1.tvShows[a0].common.active = TRUE;
+    for (i = 0; i < 0x22; i++)
+        gSaveBlock1.tvShows[a0].common.pad02[i] = 1;
+
+    channel = GetTVChannelByShowType(a1);
+    switch (channel)
+    {
+        case 2:
+        case 4:
+            sub_80BE160(gSaveBlock1.tvShows + a0);
+            break;
+        case 3:
+            sub_80BE138(gSaveBlock1.tvShows + a0);
+            break;
+    }
+
+    switch (a1)
+    {
+        case TVSHOW_FAN_CLUB_LETTER:
+        case TVSHOW_RECENT_HAPPENINGS:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            
+            show->fanclubLetter.species = SPECIES_BULBASAUR;
+            StringCopy(gSaveBlock1.tvShows[a0].fanclubLetter.playerName, gSaveBlock2.playerName);
+            show->fanclubLetter.language = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            
+            show->fanclubOpinions.var02 = 1;
+            StringCopy(gSaveBlock1.tvShows[a0].fanclubOpinions.playerName, gSaveBlock2.playerName);
+            GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].fanclubOpinions.var10);
+            show->fanclubOpinions.language = LANGUAGE_GERMAN;
+            show->fanclubOpinions.var0E = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
+            break;
+        }
+        case TVSHOW_UNKN_SHOWTYPE_04:
+        {
+            break;
+        }
+        case TVSHOW_NAME_RATER_SHOW:
+        {
+            u16 species = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_SPECIES);
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            
+            show->nameRaterShow.species = species;
+            show->nameRaterShow.var1C = 1;
+            StringCopy(gSaveBlock1.tvShows[a0].nameRaterShow.trainerName, gSaveBlock2.playerName);
+            GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].nameRaterShow.pokemonName);
+            show->nameRaterShow.language = LANGUAGE_GERMAN;
+            show->nameRaterShow.pokemonNameLanguage = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
+            break;
+        }
+        case TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            
+            show->bravoTrainer.species = SPECIES_BULBASAUR;
+            StringCopy(gSaveBlock1.tvShows[a0].bravoTrainer.playerName, gSaveBlock2.playerName);
+            GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].bravoTrainer.pokemonNickname);
+            show->bravoTrainer.language = LANGUAGE_GERMAN;
+            show->bravoTrainer.var1f = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
+            break;
+        }
+        case TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            
+            show->bravoTrainerTower.species = SPECIES_BULBASAUR;
+            show->bravoTrainerTower.defeatedSpecies = SPECIES_BULBASAUR;
+            StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.trainerName, gSaveBlock2.playerName);
+            StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.pokemonName, gSaveBlock2.playerName);
+            show->bravoTrainerTower.language = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_MASS_OUTBREAK:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+
+            show->massOutbreak.species = SPECIES_BULBASAUR;
+            show->massOutbreak.daysLeft = 1;
+            break;
+        }
+        case TVSHOW_POKEMON_TODAY_CAUGHT:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            u8 gUnknown_Debug_083C4C64[] = _("TERUKUN");
+            u8 gUnknown_Debug_083C4C6C[] = _("TERUTERUDA");
+
+            show->pokemonToday.var12 = 255;
+            StringCopy(show->pokemonToday.playerName, gUnknown_Debug_083C4C64);
+            StringCopy(show->pokemonToday.nickname, gUnknown_Debug_083C4C6C);
+            show->pokemonToday.ball = ITEM_PREMIER_BALL;
+            show->pokemonToday.species = SPECIES_WIGGLYTUFF;
+            show->pokemonToday.language = LANGUAGE_GERMAN;
+            show->pokemonToday.language2 = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_SMART_SHOPPER:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            u8 gUnknown_Debug_083C4C64[] = _("TERUKUN");
+            int ii;
+
+            for (ii = 0; ii < 3; ii++)
+                show->smartshopperShow.itemAmounts[ii] = 254;
+            show->smartshopperShow.priceReduced = TRUE;
+            show->smartshopperShow.shopLocation = 40;
+            for (ii = 0; ii < 3; ii++)
+                show->smartshopperShow.itemIds[ii] = ITEM_ENERGY_POWDER;
+            StringCopy(show->smartshopperShow.playerName, gUnknown_Debug_083C4C64);
+            show->smartshopperShow.language = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_POKEMON_TODAY_FAILED:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            u8 gUnknown_Debug_083C4C64[] = _("TERUKUN");
+
+            show->pokemonTodayFailed.species = SPECIES_WIGGLYTUFF;
+            show->pokemonTodayFailed.species2 = SPECIES_WIGGLYTUFF;
+            show->pokemonTodayFailed.var12 = 3;
+            show->pokemonTodayFailed.var10 = 0xff;
+            show->pokemonTodayFailed.var11 = 1;
+            StringCopy(show->pokemonTodayFailed.playerName, gUnknown_Debug_083C4C64);
+            show->pokemonTodayFailed.language = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_FISHING_ADVICE:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            u8 gUnknown_Debug_083C4C64[] = _("TERUKUN");
+
+            show->pokemonAngler.var02 = 0xff;
+            show->pokemonAngler.var03 = 0;
+            show->pokemonAngler.var04 = 40;
+            StringCopy(show->pokemonAngler.playerName, gUnknown_Debug_083C4C64);
+            show->pokemonAngler.language = LANGUAGE_GERMAN;
+            break;
+        }
+        case TVSHOW_WORLD_OF_MASTERS:
+        {
+            TVShow * show = gSaveBlock1.tvShows + a0;
+            u8 gUnknown_Debug_083C4C64[] = _("TERUKUN");
+
+            show->worldOfMasters.var02 = 0xffff;
+            show->worldOfMasters.var06 = 0xffff;
+            show->worldOfMasters.var04 = 40;
+            show->worldOfMasters.var08 = 40;
+            show->worldOfMasters.var0a = 3;
+            StringCopy(show->worldOfMasters.playerName, gUnknown_Debug_083C4C64);
+            show->worldOfMasters.language = LANGUAGE_GERMAN;
+            break;
+        }
+
+    }
+}
+
+// debug_sub_80901F8
+
+const u8 gUnknown_Debug_083C4C77[] = _("1　スクル");
+const u8 gUnknown_Debug_083C4C7D[] = _("2　ミドル");
+const u8 gUnknown_Debug_083C4C83[] = _("3　オジヨ");
+const u8 gUnknown_Debug_083C4C89[] = _("4　ボーヤ");
+const u8 gUnknown_Debug_083C4C8F[] = _("5　ボーイ");
+const u8 gUnknown_Debug_083C4C95[] = _("6　ヤング");
+const u8 gUnknown_Debug_083C4C9B[] = _("7　ヲーカ");
+const u8 gUnknown_Debug_083C4CA1[] = _("8　オルド");
+
+const u8 *const gUnknown_Debug_083C4CA8[] = {
+    gUnknown_Debug_083C4C77,
+    gUnknown_Debug_083C4C7D,
+    gUnknown_Debug_083C4C83,
+    gUnknown_Debug_083C4C89,
+    gUnknown_Debug_083C4C8F,
+    gUnknown_Debug_083C4C95,
+    gUnknown_Debug_083C4C9B,
+    gUnknown_Debug_083C4CA1
+};
+
+// debug_sub_8090238
 
 #endif

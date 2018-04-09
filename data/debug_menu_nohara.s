@@ -7,47 +7,6 @@
 
 	.align 2
 
-gUnknown_Debug_083C4C64:: @ 0x83C4C64
-	.string "TERUKUN$"
-
-gUnknown_Debug_083C4C6C:: @ 0x83C4C6C
-	.string "TERUTERUDA$"
-
-gUnknown_Debug_083C4C77:: @ 0x83C4C77
-	.string "1　スクル$"
-
-gUnknown_Debug_083C4C7D:: @ 0x83C4C7D
-	.string "2　ミドル$"
-
-gUnknown_Debug_083C4C83:: @ 0x83C4C83
-	.string "3　オジヨ$"
-
-gUnknown_Debug_083C4C89:: @ 0x83C4C89
-	.string "4　ボーヤ$"
-
-gUnknown_Debug_083C4C8F:: @ 0x83C4C8F
-	.string "5　ボーイ$"
-
-gUnknown_Debug_083C4C95:: @ 0x83C4C95
-	.string "6　ヤング$"
-
-gUnknown_Debug_083C4C9B:: @ 0x83C4C9B
-	.string "7　ヲーカ$"
-
-gUnknown_Debug_083C4CA1:: @ 0x83C4CA1
-	.string "8　オルド$"
-
-	.align 2
-gUnknown_Debug_083C4CA8:: @ 0x83C4CA8
-	.4byte gUnknown_Debug_083C4C77
-	.4byte gUnknown_Debug_083C4C7D
-	.4byte gUnknown_Debug_083C4C83
-	.4byte gUnknown_Debug_083C4C89
-	.4byte gUnknown_Debug_083C4C8F
-	.4byte gUnknown_Debug_083C4C95
-	.4byte gUnknown_Debug_083C4C9B
-	.4byte gUnknown_Debug_083C4CA1
-
 gUnknown_Debug_083C4CC8:: @ 0x83C4CC8
 	.string "Start$"
 
