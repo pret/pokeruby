@@ -17,10 +17,6 @@ static u8 gDebug_03000724;
 static u8 gDebug_03000725;
 static u8 gDebug_03000726;
 
-asm(".global gDebug_03000724");
-asm(".global gDebug_03000725");
-asm(".global gDebug_03000726");
-
 bool8 debug_sub_808F414(void);
 bool8 NoharaDebugMenu_TV(void);
 bool8 debug_sub_808F4AC(void);
@@ -35,11 +31,23 @@ bool8 debug_sub_808F8AC(void);
 void debug_sub_808F8CC(void);
 bool8 debug_sub_808F93C(void);
 void debug_sub_808FA88(u8, u8);
-void debug_sub_808FEBC(void);
+bool8 debug_sub_808FEBC(void);
 void debug_sub_808FECC(void);
-void debug_sub_80900AC(void);
-bool8 debug_sub_8090278(void);
+bool8 debug_sub_808FF3C(void);
+void debug_sub_8090080(u8, u8);
+bool8 debug_sub_80900AC(void);
 bool8 NoharaDebugMenu_Fan(void);
+bool8 debug_sub_80901A4(void);
+bool8 debug_sub_80901E4(void);
+bool8 debug_sub_80901F8(void);
+bool8 debug_sub_8090238(void);
+bool8 debug_sub_809029C(void);
+bool8 debug_sub_80902E4(void);
+bool8 debug_sub_80902FC(void);
+bool8 debug_sub_8090310(void);
+bool8 debug_sub_8090324(void);
+bool8 debug_sub_8090338(void);
+bool8 debug_sub_8090278(void);
 bool8 NoharaDebugMenu_BattleVSDad(void);
 bool8 NoharaDebugMenu_DadAfterBattle(void);
 bool8 NoharaDebugMenu_SootopolisCity(void);
@@ -622,7 +630,130 @@ void debug_sub_808FA88(u8 a0, u8 a1)
     }
 }
 
-// debug_sub_80901F8
+bool8 debug_sub_808FEBC(void)
+{
+    ClearTVShowData();
+    CloseMenu();
+    return TRUE;
+}
+
+void debug_sub_808FECC(void)
+{
+    gDebug_03000724 = 0;
+    sub_8071F40(gUnknown_Debug_083C49CA);
+    Menu_BlankWindowRect(13, 6, 23, 8);
+    Menu_PrintText(gUnknown_Debug_083C4B24[0], 14, 7);
+    Menu_BlankWindowRect(22, 1, 24, 2);
+    ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEFT_ALIGN, 2);
+    Menu_PrintText(gStringVar1, 23, 1);
+    gMenuCallback = debug_sub_808FF3C;
+}
+
+bool8 debug_sub_808FF3C(void)
+{
+    bool8 updateDisplay = FALSE;
+
+    if (gMain.newKeys & DPAD_UP)
+    {
+        gDebug_03000725++;
+        if (gDebug_03000725 == 16)
+            gDebug_03000725 = 0;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+
+    if (gMain.newKeys & DPAD_DOWN)
+    {
+        if (gDebug_03000725 == 0)
+            gDebug_03000725 = 16;
+        gDebug_03000725--;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+
+    if (gMain.newKeys & DPAD_RIGHT)
+    {
+        gDebug_03000724++;
+        if (gDebug_03000724 == 3)
+            gDebug_03000724 = 0;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+
+    if (gMain.newKeys & DPAD_LEFT)
+    {
+        if (gDebug_03000724 == 0)
+            gDebug_03000724 = 3;
+        gDebug_03000724--;
+        PlaySE(SE_SELECT);
+        updateDisplay = TRUE;
+    }
+
+    if (updateDisplay)
+    {
+        Menu_BlankWindowRect(13, 6, 23, 8);
+        Menu_PrintText(gUnknown_Debug_083C4B24[gDebug_03000724], 14, 7);
+        Menu_BlankWindowRect(22, 1, 24, 2);
+        ConvertIntToDecimalStringN(gStringVar1, gDebug_03000725, STR_CONV_MODE_LEFT_ALIGN, 2);
+        Menu_PrintText(gStringVar1, 23, 1);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_PIN);
+        debug_sub_8090080(gDebug_03000725, gUnknown_Debug_083C4B20[gDebug_03000724]);
+    }
+
+    if (gMain.newKeys & (B_BUTTON | START_BUTTON))
+    {
+        sub_80BEC40();
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void debug_sub_8090080(u8 a0, u8 a1)
+{
+    gSaveBlock1.pokeNews[a0].kind = a1;
+    gSaveBlock1.pokeNews[a0].state = 1;
+    gSaveBlock1.pokeNews[a0].days = 4;
+}
+
+bool8 debug_sub_80900AC(void)
+{
+    u8 i;
+    u8 j;
+
+    j = 0;
+    for (i = 0; i < 24; i++)
+    {
+        if (gSaveBlock1.tvShows[i].common.kind == 0)
+        {
+            if (j == 12)
+                j = 0;
+            debug_sub_808FA88(i, gUnknown_Debug_083C4ABD[j]);
+            gSaveBlock1.tvShows[i].common.active = FALSE;
+            j++;
+        }
+    }
+
+    j = 0;
+    for (i = 0; i < 16; i++)
+    {
+        if (gSaveBlock1.pokeNews[i].kind == 0)
+        {
+            if (j == 3)
+                j = 0;
+            debug_sub_8090080(i, gUnknown_Debug_083C4B20[j]);
+            j++;
+        }
+    }
+
+    CloseMenu();
+    return TRUE;
+}
 
 const u8 gUnknown_Debug_083C4C77[] = _("1　スクル");
 const u8 gUnknown_Debug_083C4C7D[] = _("2　ミドル");
@@ -644,6 +775,191 @@ const u8 *const gUnknown_Debug_083C4CA8[] = {
     gUnknown_Debug_083C4CA1
 };
 
-// debug_sub_8090238
+const u8 gUnknown_Debug_083C4CC8[] = _("Start");
+const u8 gUnknown_Debug_083C4CCE[] = _("Increase");
+const u8 gUnknown_Debug_083C4CD7[] = _("Reduce");
+const u8 gUnknown_Debug_083C4CDE[] = _("Points");
+const u8 gUnknown_Debug_083C4CE5[] = _("Play　time　6");
+const u8 gUnknown_Debug_083C4CF1[] = _("P　ELITE　FOUR");
+const u8 gUnknown_Debug_083C4CFE[] = _("P　SECRET　BASE");
+const u8 gUnknown_Debug_083C4D0C[] = _("P　CONTEST");
+const u8 gUnknown_Debug_083C4D16[] = _("P　BATTLE　TOWER");
+
+const struct MenuAction gUnknown_Debug_083C4D28[] = {
+    {gUnknown_Debug_083C4CC8, debug_sub_80901E4},
+    {gUnknown_Debug_083C4CCE, debug_sub_80901F8},
+    {gUnknown_Debug_083C4CD7, debug_sub_8090238},
+    {gUnknown_Debug_083C4CDE, debug_sub_809029C},
+    {gUnknown_Debug_083C4CE5, debug_sub_80902E4},
+    {gUnknown_Debug_083C4CF1, debug_sub_80902FC},
+    {gUnknown_Debug_083C4CFE, debug_sub_8090310},
+    {gUnknown_Debug_083C4D0C, debug_sub_8090324},
+    {gUnknown_Debug_083C4D16, debug_sub_8090338}
+};
+
+bool8 NoharaDebugMenu_Fan(void)
+{
+    Menu_EraseScreen();
+    Menu_DrawStdWindowFrame(0, 0, 11, 19);
+    Menu_PrintItems(1, 1, ARRAY_COUNT(gUnknown_Debug_083C4D28), gUnknown_Debug_083C4D28);
+    InitMenu(0, 1, 1, ARRAY_COUNT(gUnknown_Debug_083C4D28), 0, 10);
+    gMenuCallback = debug_sub_80901A4;
+    return FALSE;
+}
+
+bool8 debug_sub_80901A4(void)
+{
+    s8 input = Menu_ProcessInput();
+    switch (input)
+    {
+        default:
+            gMenuCallback = gUnknown_Debug_083C4D28[input].func;
+            return FALSE;
+        case -2:
+            return FALSE;
+        case -1:
+            CloseMenu();
+            return TRUE;
+    }
+}
+
+bool8 debug_sub_80901E4(void)
+{
+    ResetFanClub();
+    sub_810FAA0();
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_80901F8(void)
+{
+    u8 r0 = sub_810FB9C();
+    Menu_PrintText(gUnknown_Debug_083C4CA8[gUnknown_083F8408[r0] - 8], 14, 7);
+    gMenuCallback = debug_sub_8090278;
+    return FALSE;
+}
+
+bool8 debug_sub_8090238(void)
+{
+    u8 r0 = sub_810FC18();
+    Menu_PrintText(gUnknown_Debug_083C4CA8[gUnknown_083F8410[r0] - 8], 14, 7);
+    gMenuCallback = debug_sub_8090278;
+    return FALSE;
+}
+
+bool8 debug_sub_8090278(void)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        CloseMenu();
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 debug_sub_809029C(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1.vars[VAR_FANCLUB_UNKNOWN_1 - VARS_START] & 0x7F, STR_CONV_MODE_LEFT_ALIGN, 2);
+    Menu_PrintText(gStringVar1, 16, 7);
+    gMenuCallback = debug_sub_8090278;
+    return FALSE;
+}
+
+bool8 debug_sub_80902E4(void)
+{
+    gSaveBlock2.playTimeHours += 6;
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_80902FC(void)
+{
+    sub_810FB10(0);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_8090310(void)
+{
+    sub_810FB10(1);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_8090324(void)
+{
+    sub_810FB10(2);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 debug_sub_8090338(void)
+{
+    sub_810FB10(3);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_BattleVSDad(void)
+{
+    VarSet(VAR_PETALBURG_GYM_STATE, 6);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_DadAfterBattle(void)
+{
+    VarSet(VAR_PETALBURG_GYM_STATE, 7);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_SootopolisCity(void)
+{
+    FlagSet(FLAG_LEGEND_ESCAPED_SEAFLOOR_CAVERN);
+    FlagSet(FLAG_LEGENDARY_BATTLE_COMPLETED);
+    FlagClear(FLAG_HIDE_WALLACE_SOOTOPOLIS_GYM);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_Embark(void)
+{
+    FlagClear(FLAG_HIDE_MR_BRINEY_ROUTE104_HOUSE);
+    VarSet(VAR_BRINEY_HOUSE_STATE, 1);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_Yes9999(void)
+{
+    VarSet(VAR_ASH_GATHER_COUNT, 9999);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_LegendsFlagOn(void)
+{
+    FlagSet(FLAG_REGI_DOORS_OPENED);
+    CloseMenu();
+    return TRUE;
+}
+
+bool8 NoharaDebugMenu_AddNumWinningStreaks(void)
+{
+    if (gSaveBlock2.battleTower.bestBattleTowerWinStreak < 50)
+        gSaveBlock2.battleTower.bestBattleTowerWinStreak = 50;
+    else if (gSaveBlock2.battleTower.bestBattleTowerWinStreak < 100)
+        gSaveBlock2.battleTower.bestBattleTowerWinStreak = 100;
+    else if (gSaveBlock2.battleTower.bestBattleTowerWinStreak < 1000)
+        gSaveBlock2.battleTower.bestBattleTowerWinStreak = 1000;
+    else if (gSaveBlock2.battleTower.bestBattleTowerWinStreak < 5000)
+        gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9990;
+    else if (gSaveBlock2.battleTower.bestBattleTowerWinStreak < 9990)
+        gSaveBlock2.battleTower.bestBattleTowerWinStreak = 9999;
+    CloseMenu();
+    return TRUE;
+}
 
 #endif

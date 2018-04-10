@@ -17,6 +17,9 @@ extern u8 gUnknown_0203925A;
 extern u8 gUnknown_0203925B;
 extern u8 gUnknown_0203925C;
 
+extern const u8 gUnknown_083F8408[];
+extern const u8 gUnknown_083F8410[];
+
 void ResetCyclingRoadChallengeData(void);
 bool32 CountSSTidalStep(u16);
 u8 GetSSTidalLocation(s8 *, s8 *, s16 *, s16 *);
@@ -28,5 +31,8 @@ void ResetFanClub(void);
 u8 sub_810FB10(u8 a0);
 void sub_810FEFC(void);
 u16 GetSlotMachineId(void);
+void sub_810FAA0(void);
+int sub_810FB9C(void);
+int sub_810FC18(void);
 
 #endif // GUARD_FIELD_SPECIALS_H
