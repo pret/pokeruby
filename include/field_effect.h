@@ -126,11 +126,6 @@ void sub_8087914(struct Task *);
 void sub_8087AA4(struct Task *);
 void sub_8087AC8(struct Task *);
 
-void sub_8087BEC(struct Task *);
-void sub_8087C14(struct Task *);
-void sub_8087CA4(struct Task *);
-void sub_8087D78(struct Task *);
-
 void sub_8087E4C(struct Task *);
 void sub_8087ED8(struct Task *);
 void sub_8087FDC(struct Task *);
@@ -182,7 +177,7 @@ u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
 void sub_80878A8(void);
-void sub_8087BA8(void);
+void CreateTeleportFieldEffectTask(void);
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 
 extern s32 gFieldEffectArguments[8];

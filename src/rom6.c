@@ -198,7 +198,7 @@ int FldEff_UseDig(void)
     gTasks[taskId].data[8] = (u32)sub_810B634 >> 16;
     gTasks[taskId].data[9] = (u32)sub_810B634;
     if (!ShouldDoBrailleDigEffect())
-        SetPlayerAvatarTransitionFlags(1);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return 0;
 }
 
