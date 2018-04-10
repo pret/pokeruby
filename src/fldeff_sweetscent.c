@@ -10,11 +10,12 @@
 #include "task.h"
 #include "wild_encounter.h"
 #include "constants/field_effects.h"
+#include "constants/songs.h"
 
-static void sub_812BFD4(void);
-static void sub_812C01C(void);
-static void sub_812C084(u8);
-static void sub_812C118(u8);
+static void FieldCallback_SweetScent(void);
+static void StartSweetScentFieldEffect(void);
+static void TrySweetScentEncounter(u8);
+static void FailSweetScentEncounter(u8);
 
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gFieldCallback)(void);
@@ -25,11 +26,11 @@ extern u8 SweetScentNothingHereScript[];
 bool8 SetUpFieldMove_SweetScent(void)
 {
     gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
-    gPostMenuFieldCallback = sub_812BFD4;
+    gPostMenuFieldCallback = FieldCallback_SweetScent;
     return TRUE;
 }
 
-static void sub_812BFD4(void)
+static void FieldCallback_SweetScent(void)
 {
     FieldEffectStart(FLDEFF_SWEET_SCENT);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
@@ -39,23 +40,23 @@ bool8 FldEff_SweetScent()
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_812C01C >> 16;
-    gTasks[taskId].data[9] = (u32)sub_812C01C;
+    gTasks[taskId].data[8] = (u32)StartSweetScentFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartSweetScentFieldEffect;
     return FALSE;
 }
 
-static void sub_812C01C(void)
+static void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
 
-    PlaySE(0xEC);
+    PlaySE(SE_W230);
     BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 0, 8, 0x1F);
-    taskId = CreateTask(sub_812C084, 0);
+    taskId = CreateTask(TrySweetScentEncounter, 0);
     gTasks[taskId].data[0] = 0;
     FieldEffectActiveListRemove(FLDEFF_SWEET_SCENT);
 }
 
-static void sub_812C084(u8 taskId)
+static void TrySweetScentEncounter(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -68,7 +69,7 @@ static void sub_812C084(u8 taskId)
             }
             else
             {
-                gTasks[taskId].func = sub_812C118;
+                gTasks[taskId].func = FailSweetScentEncounter;
                 BeginNormalPaletteFade(~(1 << (gSprites[GetPlayerAvatarObjectId()].oam.paletteNum + 16)), 4, 8, 0, 0x1F);
             }
         }
@@ -79,7 +80,7 @@ static void sub_812C084(u8 taskId)
     }
 }
 
-static void sub_812C118(u8 taskId)
+static void FailSweetScentEncounter(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
