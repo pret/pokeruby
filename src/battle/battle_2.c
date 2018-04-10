@@ -291,8 +291,8 @@ void InitBattle(void)
         SetWildMonHeldItem();
     }
     gMain.inBattle = TRUE;
-    for (i = 0; i < 6; i++)
-        AdjustFriendship(&gPlayerParty[i], 3);
+    for (i = 0; i < PARTY_SIZE; i++)
+        AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
     gBattleCommunication[0] = 0;
 }
 
@@ -304,7 +304,7 @@ void sub_800E9EC(void)
     u32 status;
     s32 i;
 
-    for (i = 0; i < 6; i++)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         hp = GetMonData(&gPlayerParty[i], MON_DATA_HP);

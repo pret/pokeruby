@@ -587,12 +587,11 @@ static void happiness_algorithm_step(void)
     (*ptr) %= 128;
     if (*ptr == 0)
     {
-        struct Pokemon *pkmn = gPlayerParty;
-
-        for (i = 0; i < 6; i++)
+        struct Pokemon *mon = gPlayerParty;
+        for (i = 0; i < PARTY_SIZE; i++)
         {
-            AdjustFriendship(pkmn, 5);
-            pkmn++;
+            AdjustFriendship(mon, FRIENDSHIP_EVENT_WALKING);
+            mon++;
         }
     }
 }
