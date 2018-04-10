@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "wild_encounter.h"
+#include "constants/field_effects.h"
 
 static void sub_812BFD4(void);
 static void sub_812C01C(void);
@@ -17,14 +18,14 @@ static void sub_812C118(u8);
 
 extern u8 gLastFieldPokeMenuOpened;
 extern void (*gFieldCallback)(void);
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 
 extern u8 SweetScentNothingHereScript[];
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
-    gFieldCallback = FieldCallback_Teleport;
-    gUnknown_03005CE4 = sub_812BFD4;
+    gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+    gPostMenuFieldCallback = sub_812BFD4;
     return TRUE;
 }
 

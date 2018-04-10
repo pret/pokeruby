@@ -15,7 +15,7 @@ gSpecials::
 	def_special sub_80839A4
 	def_special sub_80839D0
 	def_special sub_80BB8CC
-	def_special sub_80BB63C
+	def_special CheckPlayerHasSecretBase
 	def_special sub_80BBAF0
 	def_special sub_80BC440
 	def_special SecretBasePC_PackUp

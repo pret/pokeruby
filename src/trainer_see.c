@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "util.h"
+#include "constants/field_effects.h"
 
 static bool8 CheckTrainer(u8);
 static void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);

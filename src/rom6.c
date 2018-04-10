@@ -13,14 +13,15 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/field_effects.h"
 
 extern u16 gSpecialVar_LastTalked;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 extern u8 S_UseRockSmash[];
 
-EWRAM_DATA struct MapPosition gUnknown_0203923C = {0};
+EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void task08_080C9820(u8);
 static void sub_810B3DC(u8);
@@ -35,9 +36,9 @@ bool8 npc_before_player_of_type(u8 a)
 {
     u8 mapObjId;
 
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-    gUnknown_0203923C.height = PlayerGetZCoord();
-    mapObjId = GetFieldObjectIdByXYZ(gUnknown_0203923C.x, gUnknown_0203923C.y, gUnknown_0203923C.height);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    gPlayerFacingPosition.height = PlayerGetZCoord();
+    mapObjId = GetFieldObjectIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
     if (gMapObjects[mapObjId].graphicsId != a)
     {
         return FALSE;
@@ -51,7 +52,7 @@ bool8 npc_before_player_of_type(u8 a)
 
 u8 oei_task_add(void)
 {
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     return CreateTask(task08_080C9820, 8);
 }
 
@@ -136,8 +137,8 @@ bool8 SetUpFieldMove_RockSmash(void)
 {
     if (npc_before_player_of_type(0x56) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_810B53C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_810B53C;
         return TRUE;
     }
     else
@@ -173,8 +174,8 @@ int SetUpFieldMove_Dig(void)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_810B5D8;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_810B5D8;
         return TRUE;
     }
     else

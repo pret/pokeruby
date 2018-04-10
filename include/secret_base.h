@@ -5,13 +5,13 @@
 #define MAX_SECRET_BASES 20
 
 void ResetSecretBases(void);
-void sub_80BB5E4(void);
-void sub_80BB63C(void);
-void sub_80BB800(void);
+void SetCurrentSecretBaseVar(void);
+void CheckPlayerHasSecretBase(void);
+void SetOpenedSecretBaseMetatile(void);
 void sub_80BB970(struct MapEvents *events);
 u8 sub_80BBB24(void);
 void sub_80BBCCC(u8 flagIn);
-void sub_80BBFD8(struct MapPosition *, struct MapEvents *);
+void SetCurrentSecretBaseFromPosition(struct MapPosition *, struct MapEvents *);
 void sub_80BC038(struct MapPosition *, struct MapEvents *);
 u8 sub_80BC050();
 u8 *GetSecretBaseMapName(u8 *dest);

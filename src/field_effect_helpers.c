@@ -2,13 +2,14 @@
 #include "sprite.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_weather.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 static void sub_81269E0(struct Sprite *);
 static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite);

@@ -4,18 +4,19 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "fieldmap.h"
-#include "constants/flags.h"
 #include "main.h"
-#include "constants/maps.h"
 #include "map_obj_lock.h"
 #include "menu.h"
 #include "rom6.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "task.h"
 #include "text.h"
+#include "constants/field_effects.h"
+#include "constants/flags.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gLastFieldPokeMenuOpened;

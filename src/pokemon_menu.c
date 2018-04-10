@@ -6,13 +6,11 @@
 #include "palette.h"
 #include "menu.h"
 #include "mail_data.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "main.h"
 #include "overworld.h"
 #include "menu_helpers.h"
 #include "pokemon_summary_screen.h"
-#include "constants/moves.h"
 #include "data2.h"
 #include "strings.h"
 #include "item_use.h"
@@ -32,6 +30,9 @@
 #include "player_pc.h"
 #include "ewram.h"
 #include "script.h"
+#include "constants/field_effects.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
 
 /*
 Pokemon menu:
@@ -84,7 +85,7 @@ static void sub_808A848(u8 taskID);
 static void sub_808AAF0(u8 taskID);
 static void sub_808ABF4(u8 taskID);
 static void sub_808AB34(u8 taskID);
-static void sub_808ABA8(u8 taskID);
+static void FieldCallback_AfterFadeInFromMenu(u8 taskID);
 static void sub_808B224(u8 taskID);
 static void sub_808B2EC(u8 taskID);
 static void sub_808B2B4(u8 taskID);
@@ -118,7 +119,7 @@ EWRAM_DATA static u8 sPokeMenuOptionsOrder[8] = {0}; // 4 possible field moves a
 
 // iwram common
 u8 gLastFieldPokeMenuOpened;
-void (*gUnknown_03005CE4)(void);
+void (*gPostMenuFieldCallback)(void);
 
 // const data
 
@@ -780,18 +781,18 @@ static void sub_808AB34(u8 taskID)
 
 #undef tFieldMoveId
 
-void FieldCallback_Teleport(void)
+void FieldCallback_PrepareFadeInFromMenu(void)
 {
     pal_fill_black();
-    CreateTask(sub_808ABA8, 8);
+    CreateTask(FieldCallback_AfterFadeInFromMenu, 8);
 }
 
-static void sub_808ABA8(u8 taskID)
+static void FieldCallback_AfterFadeInFromMenu(u8 taskID)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
         gFieldEffectArguments[0] = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES);
-        gUnknown_03005CE4();
+        gPostMenuFieldCallback();
         DestroyTask(taskID);
     }
 }
@@ -815,8 +816,8 @@ static bool8 SetUpFieldMove_Surf(void)
 {
     if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AC2C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AC2C;
         return TRUE;
     }
     else
@@ -833,14 +834,14 @@ static bool8 SetUpFieldMove_Fly(void)
 {
     if (ShouldDoBrailleFlyEffect())
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = DoBrailleFlyEffect;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = DoBrailleFlyEffect;
         return TRUE;
     }
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AC8C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AC8C;
         return TRUE;
     }
     return FALSE;
@@ -885,8 +886,8 @@ static bool8 SetUpFieldMove_Dive(void)
     gFieldEffectArguments[1] = sub_8068F18();
     if (gFieldEffectArguments[1])
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808ADAC;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808ADAC;
         return TRUE;
     }
     else
@@ -907,8 +908,8 @@ static bool8 SetUpFieldMove_Waterfall(void)
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
      && IsPlayerSurfingNorth() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AE08;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AE08;
         return TRUE;
     }
     else

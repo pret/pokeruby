@@ -12,15 +12,16 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "ewram.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 extern void (*gFieldCallback)(void);
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 
 extern const u8 S_UseCut[];
@@ -87,14 +88,14 @@ void debug_sub_80AFEE4(void)
         return;
     }
 
-    PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+    PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     for (i = 0; i < 3; i++)
     {
-        y = i - 1 + gUnknown_0203923C.y;
+        y = i - 1 + gPlayerFacingPosition.y;
         for (j = 0; j < 3; j++)
         {
-            x = j - 1 + gUnknown_0203923C.x;
-            if (MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
+            x = j - 1 + gPlayerFacingPosition.x;
+            if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
             {
                 metatile = MapGridGetMetatileBehaviorAt(x, y);
                 if (MetatileBehavior_IsPokeGrass(metatile) == TRUE
@@ -120,27 +121,27 @@ bool8 SetUpFieldMove_Cut(void)
 
     if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_80A2634;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_80A2634;
         return TRUE;
     }
     else // is in ash or grass to cut?
     {
-        PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+        PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
         for(i = 0; i < 3; i++)
         {
-            y = i - 1 + gUnknown_0203923C.y;
+            y = i - 1 + gPlayerFacingPosition.y;
             for(j = 0; j < 3; j++)
             {
-                x = j - 1 + gUnknown_0203923C.x;
-                if(MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
+                x = j - 1 + gPlayerFacingPosition.x;
+                if(MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                     || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
-                        gFieldCallback = FieldCallback_Teleport;
-                        gUnknown_03005CE4 = sub_80A25E8;
+                        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+                        gPostMenuFieldCallback = sub_80A25E8;
                         return TRUE;
                     }
                 }
@@ -194,13 +195,13 @@ bool8 FldEff_CutGrass(void)
     u8 tileBehavior;
     u8 i, j; // not in for loop?
 
-    for(i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
+    for(i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y); i < 3; i++)
     {
-        y = i - 1 + gUnknown_0203923C.y;
+        y = i - 1 + gPlayerFacingPosition.y;
         for(j = 0; j < 3; j++)
         {
-            x = j - 1 + gUnknown_0203923C.x;
-            if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
+            x = j - 1 + gPlayerFacingPosition.x;
+            if(MapGridGetZCoordAt(x, y) == (s8)gPlayerFacingPosition.height)
             {
                 tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                 if(MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
@@ -211,7 +212,7 @@ bool8 FldEff_CutGrass(void)
             }
         }
     }
-    sub_80A28F4(gUnknown_0203923C.x - 1, gUnknown_0203923C.y - 2);
+    sub_80A28F4(gPlayerFacingPosition.x - 1, gPlayerFacingPosition.y - 2);
     DrawWholeMapView();
 
     // populate sprite ID array

@@ -12,9 +12,10 @@
 #include "overworld.h"
 #include "sprite.h"
 #include "metatile_behavior.h"
+#include "trainer_see.h"
+#include "constants/field_effects.h"
 #include "constants/maps.h"
 #include "constants/map_objects.h"
-#include "trainer_see.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 

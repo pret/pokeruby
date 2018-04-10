@@ -3,6 +3,7 @@
 #include "script.h"
 #include "trig.h"
 #include "main.h"
+#include "field_effect_helpers.h"
 #include "field_weather.h"
 #include "decompress.h"
 #include "sprite.h"
@@ -12,7 +13,6 @@
 #include "overworld.h"
 #include "task.h"
 #include "sound.h"
-#include "constants/songs.h"
 #include "decoration.h"
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
@@ -22,8 +22,9 @@
 #include "field_fadetransition.h"
 #include "fieldmap.h"
 #include "util.h"
-#include "field_effect_helpers.h"
 #include "pokemon_storage_system.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 

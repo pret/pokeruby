@@ -1336,7 +1336,7 @@ bool8 DebugMenu_8077BE4(void)
 
 bool8 DebugMenu_8077BF4(void)
 {
-    debug_sub_80D93F4();
+    Debug_SetUpFieldMove_SecretPower();
     return TRUE;
 }
 

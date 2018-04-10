@@ -6,17 +6,18 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "task.h"
+#include "constants/field_effects.h"
 
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 
 bool8 SetUpFieldMove_Teleport(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = hm_teleport_run_dp02scr;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = hm_teleport_run_dp02scr;
         return TRUE;
     }
 
