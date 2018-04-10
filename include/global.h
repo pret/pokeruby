@@ -337,7 +337,7 @@ struct TVShowBravoTrainerBattleTowerSpotlight
     /*0x01*/ bool8 active;
     /*0x02*/ u8 trainerName[8];
     /*0x0A*/ u16 species;
-    /*0x0C*/ u8 pokemonName[8]; // TODO: rename this
+    /*0x0C*/ u8 enemyTrainerName[8];
     /*0x14*/ u16 defeatedSpecies;
     /*0x16*/ u16 var16;
     /*0x18*/ u16 var18[1];

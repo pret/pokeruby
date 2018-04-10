@@ -543,7 +543,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->bravoTrainerTower.species = SPECIES_BULBASAUR;
             show->bravoTrainerTower.defeatedSpecies = SPECIES_BULBASAUR;
             StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.trainerName, gSaveBlock2.playerName);
-            StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.pokemonName, gSaveBlock2.playerName);
+            StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.enemyTrainerName, gSaveBlock2.playerName);
             show->bravoTrainerTower.language = GAME_LANGUAGE;
             break;
         }
