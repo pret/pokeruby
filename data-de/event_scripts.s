@@ -1,4 +1,5 @@
 #include "constants/decorations.h"
+#include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
