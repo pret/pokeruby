@@ -240,10 +240,10 @@ Route120_EventScript_151908:: @ 8151908
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject 31
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	setmetatile 13, 15, 663, 0
 	setmetatile 12, 16, 671, 0
 	setmetatile 12, 17, 161, 0

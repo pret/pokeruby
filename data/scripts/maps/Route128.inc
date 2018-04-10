@@ -52,8 +52,8 @@ Route128_EventScript_15213F:: @ 815213F
 	removeobject 4
 	delay 100
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
-	waitfieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	addobject 3
 	applymovement 3, Route128_Movement_15226F
 	waitmovement 0
@@ -77,10 +77,10 @@ Route128_EventScript_15213F:: @ 815213F
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject 3
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	setvar VAR_ROUTE128_STATE, 2
 	releaseall
 	end

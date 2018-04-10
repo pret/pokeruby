@@ -39,8 +39,8 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	setfieldeffectargument 0, 9
 	setfieldeffectargument 1, 13
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	.ifdef SAPPHIRE
 	setvar RESULT, 3
 	.else
