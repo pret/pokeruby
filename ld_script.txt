@@ -116,7 +116,6 @@ SECTIONS {
         src/cable_club.o(.text);
         src/debug/tomomichi_debug_menu.o(.text);
         src/debug/nohara_debug_menu.o(.text);
-        asm/nohara_debug_menu.o(.text);
         src/debug/mori_debug_menu.o(.text);
         asm/taya_debug_window.o(.text);
         src/debug/taya_debug_window.o(.text);
@@ -560,7 +559,7 @@ SECTIONS {
         src/battle/battle_setup.o(.rodata);
         src/cable_club.o(.rodata);
         src/debug/tomomichi_debug_menu.o(.rodata);
-        data/debug_menu_nohara.o(.rodata);
+        src/debug/nohara_debug_menu.o(.rodata);
         src/debug/mori_debug_menu.o(.rodata);
         data/debug_menu_taya.o(.rodata);
         src/trainer_see.o(.rodata);

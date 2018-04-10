@@ -1004,7 +1004,7 @@ void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     bravoTrainerTower->kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     bravoTrainerTower->active = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
-    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
+    StringCopy(bravoTrainerTower->enemyTrainerName, gSaveBlock2.battleTower.defeatedByTrainerName);
     bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
     bravoTrainerTower->defeatedSpecies = gSaveBlock2.battleTower.defeatedBySpecies;
     bravoTrainerTower->var16 = GetCurrentBattleTowerWinStreak(gSaveBlock2.battleTower.lastStreakLevelType);
@@ -2968,7 +2968,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 4;
         break;
     case 2:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sub_80BF088(1, bravoTrainerTower->var16 + 1);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2976,7 +2976,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 3:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2984,7 +2984,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 4:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2992,11 +2992,11 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 5:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 11;
         break;
     case 6:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 11;
         break;
     case 7:
@@ -3019,7 +3019,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
     case 13:
         EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         TVShowConvertInternationalString(gStringVar2, bravoTrainerTower->trainerName, bravoTrainerTower->language);
-        TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 14;
         break;
     case 14:
