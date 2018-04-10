@@ -494,7 +494,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             
             show->fanclubLetter.species = SPECIES_BULBASAUR;
             StringCopy(gSaveBlock1.tvShows[a0].fanclubLetter.playerName, gSaveBlock2.playerName);
-            show->fanclubLetter.language = LANGUAGE_GERMAN;
+            show->fanclubLetter.language = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_PKMN_FAN_CLUB_OPINIONS:
@@ -504,7 +504,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->fanclubOpinions.var02 = 1;
             StringCopy(gSaveBlock1.tvShows[a0].fanclubOpinions.playerName, gSaveBlock2.playerName);
             GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].fanclubOpinions.var10);
-            show->fanclubOpinions.language = LANGUAGE_GERMAN;
+            show->fanclubOpinions.language = GAME_LANGUAGE;
             show->fanclubOpinions.var0E = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
             break;
         }
@@ -521,7 +521,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->nameRaterShow.var1C = 1;
             StringCopy(gSaveBlock1.tvShows[a0].nameRaterShow.trainerName, gSaveBlock2.playerName);
             GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].nameRaterShow.pokemonName);
-            show->nameRaterShow.language = LANGUAGE_GERMAN;
+            show->nameRaterShow.language = GAME_LANGUAGE;
             show->nameRaterShow.pokemonNameLanguage = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
             break;
         }
@@ -532,7 +532,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->bravoTrainer.species = SPECIES_BULBASAUR;
             StringCopy(gSaveBlock1.tvShows[a0].bravoTrainer.playerName, gSaveBlock2.playerName);
             GetMonData(gPlayerParty + leadMonIndex, MON_DATA_NICKNAME, gSaveBlock1.tvShows[a0].bravoTrainer.pokemonNickname);
-            show->bravoTrainer.language = LANGUAGE_GERMAN;
+            show->bravoTrainer.language = GAME_LANGUAGE;
             show->bravoTrainer.var1f = GetMonData(gPlayerParty + leadMonIndex, MON_DATA_LANGUAGE);
             break;
         }
@@ -544,7 +544,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->bravoTrainerTower.defeatedSpecies = SPECIES_BULBASAUR;
             StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.trainerName, gSaveBlock2.playerName);
             StringCopy(gSaveBlock1.tvShows[a0].bravoTrainerTower.pokemonName, gSaveBlock2.playerName);
-            show->bravoTrainerTower.language = LANGUAGE_GERMAN;
+            show->bravoTrainerTower.language = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_MASS_OUTBREAK:
@@ -566,8 +566,8 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             StringCopy(show->pokemonToday.nickname, gUnknown_Debug_083C4C6C);
             show->pokemonToday.ball = ITEM_PREMIER_BALL;
             show->pokemonToday.species = SPECIES_WIGGLYTUFF;
-            show->pokemonToday.language = LANGUAGE_GERMAN;
-            show->pokemonToday.language2 = LANGUAGE_GERMAN;
+            show->pokemonToday.language = GAME_LANGUAGE;
+            show->pokemonToday.language2 = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_SMART_SHOPPER:
@@ -583,7 +583,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             for (ii = 0; ii < 3; ii++)
                 show->smartshopperShow.itemIds[ii] = ITEM_ENERGY_POWDER;
             StringCopy(show->smartshopperShow.playerName, gUnknown_Debug_083C4C64);
-            show->smartshopperShow.language = LANGUAGE_GERMAN;
+            show->smartshopperShow.language = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_POKEMON_TODAY_FAILED:
@@ -597,7 +597,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->pokemonTodayFailed.var10 = 0xff;
             show->pokemonTodayFailed.var11 = 1;
             StringCopy(show->pokemonTodayFailed.playerName, gUnknown_Debug_083C4C64);
-            show->pokemonTodayFailed.language = LANGUAGE_GERMAN;
+            show->pokemonTodayFailed.language = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_FISHING_ADVICE:
@@ -609,7 +609,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->pokemonAngler.var03 = 0;
             show->pokemonAngler.var04 = 40;
             StringCopy(show->pokemonAngler.playerName, gUnknown_Debug_083C4C64);
-            show->pokemonAngler.language = LANGUAGE_GERMAN;
+            show->pokemonAngler.language = GAME_LANGUAGE;
             break;
         }
         case TVSHOW_WORLD_OF_MASTERS:
@@ -623,7 +623,7 @@ void debug_sub_808FA88(u8 a0, u8 a1)
             show->worldOfMasters.var08 = 40;
             show->worldOfMasters.var0a = 3;
             StringCopy(show->worldOfMasters.playerName, gUnknown_Debug_083C4C64);
-            show->worldOfMasters.language = LANGUAGE_GERMAN;
+            show->worldOfMasters.language = GAME_LANGUAGE;
             break;
         }
 
