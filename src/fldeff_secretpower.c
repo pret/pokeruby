@@ -164,7 +164,7 @@ const struct SpriteFrameImage gSpriteImageTable_83D25EC[] =
 };
 
 static void CaveEntranceSpriteCallback1(struct Sprite *);
-static const struct SpriteTemplate sCaveEntranceSpriteTemplate =
+static const struct SpriteTemplate sSpriteTemplate_CaveEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4099,
@@ -176,7 +176,7 @@ static const struct SpriteTemplate sCaveEntranceSpriteTemplate =
 };
 
 static void TreeEntranceSpriteCallback1(struct Sprite *);
-const struct SpriteTemplate sTreeEntranceSpriteTemplate =
+const struct SpriteTemplate sSpriteTemplate_TreeEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4104,
@@ -188,7 +188,7 @@ const struct SpriteTemplate sTreeEntranceSpriteTemplate =
 };
 
 static void ShrubEntranceSpriteCallback1(struct Sprite *);
-const struct SpriteTemplate sShrubEntranceSpriteTemplate =
+const struct SpriteTemplate sSpriteTemplate_ShrubEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4104,
@@ -350,7 +350,7 @@ bool8 FldEff_SecretPowerCave(void)
 {
     AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &sCaveEntranceSpriteTemplate,
+        &sSpriteTemplate_CaveEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);
@@ -419,7 +419,7 @@ bool8 FldEff_SecretPowerTree(void)
 
     AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &sTreeEntranceSpriteTemplate,
+        &sSpriteTemplate_TreeEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);
@@ -484,7 +484,7 @@ bool8 FldEff_SecretPowerShrub(void)
 {
     AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &sShrubEntranceSpriteTemplate,
+        &sSpriteTemplate_ShrubEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);

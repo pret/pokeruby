@@ -34,12 +34,10 @@
 #include "wild_encounter.h"
 #include "battle_setup.h"
 #include "safari_zone.h"
-#include "fldeff_cut.h"
 #include "fldeff_flash.h"
 #include "rom6.h"
 #include "fldeff_strength.h"
 #include "pokemon_menu.h"
-#include "fldeff_secretpower.h"
 #include "data2.h"
 #include "item.h"
 #include "reset_rtc_screen.h"
@@ -48,6 +46,9 @@
 #include "gba/flash_internal.h"
 #include "gba/m4a_internal.h"
 #include "berry_blender.h"
+
+extern void Debug_SetUpFieldMove_Cut(void);
+extern void Debug_SetUpFieldMove_SecretPower(void);
 
 void debug_sub_8076BB4(u8);
 void debug_sub_8077CF4(u8 x, u8 y);
@@ -1305,7 +1306,7 @@ u8 DebugMenu_Safari(void)
 
 bool8 DebugMenu_8077BB4(void)
 {
-    debug_sub_80AFEE4();
+    Debug_SetUpFieldMove_Cut();
     return TRUE;
 }
 

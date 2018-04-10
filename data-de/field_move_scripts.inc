@@ -17,7 +17,7 @@ S_CuttableTree:: @ 81B0DCC
 	goto DoTreeCutMovement
 	end
 
-S_UseCut:: @ 81B0E16
+DoCutFieldEffectScript:: @ 81B0E16
 	lockall
 	dofieldeffect 2
 	waitstate

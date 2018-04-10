@@ -31,7 +31,7 @@ void debug_sub_8130318(void)
         gSpecialVar_Result = 0;
         sub_811AA38();
     }
-    else if (npc_before_player_of_type(MAP_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
+    else if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         gSpecialVar_Result = 0;
@@ -54,7 +54,7 @@ bool8 SetUpFieldMove_Strength(void)
     }
     else
     {
-        if (npc_before_player_of_type(87) != TRUE)
+        if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_PUSHABLE_BOULDER) != TRUE)
             return 0;
         gSpecialVar_Result = gLastFieldPokeMenuOpened;
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
