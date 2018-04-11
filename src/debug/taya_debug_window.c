@@ -34,24 +34,24 @@ bool8 TayaDebugMenu_PokenavD(void);
 void debug_sub_80915BC(void);
 void debug_sub_80916AC(void);
 
-EWRAM_DATA s8 unk_2030224 = 0;
+EWRAM_DATA s8 sTayaTopMenuPage = 0;
 
 struct TayaLuckyNumberEwramStruct {
-    u8 unk0;
-    u8 unk1[7];
-    u16 unk8;
-    s32 unkc;
-    u16 unk10;
+    u8 digit;
+    u8 charbuf[7];
+    u16 curLuckyId;
+    s32 tempLuckyId;
+    u16 digitDeltaMagnitude;
 };
 
 struct TayaMonDataEwramStruct {
-    u8 unk00[6][3];
-    u8 fill12[0x40];
-    u8 unk52;
-    u8 unk53;
-    u8 unk54;
-    u8 unk55;
-    u8 unk56;
+    u8 data[6][3];
+    u8 charbuf[0x40];
+    u8 state;
+    u8 x;
+    u8 y;
+    u8 redraw;
+    u8 maxVal;
 };
 
 #define eTayaLuckyNumber (*(struct TayaLuckyNumberEwramStruct *)gSharedMem)
@@ -432,11 +432,11 @@ bool8 TayaDebugMenu_AwardARibbon(void)
 
 void debug_sub_8090C44(void)
 {
-    ConvertIntToDecimalStringN(eTayaLuckyNumber.unk1, eTayaLuckyNumber.unk8, STR_CONV_MODE_LEADING_ZEROS, 5);
-    Menu_PrintText(eTayaLuckyNumber.unk1, 1, 1);
-    StringFill(eTayaLuckyNumber.unk1, CHAR_SPACE, 5);
-    eTayaLuckyNumber.unk1[eTayaLuckyNumber.unk0] = 0x79;
-    Menu_PrintText(eTayaLuckyNumber.unk1, 1, 3);
+    ConvertIntToDecimalStringN(eTayaLuckyNumber.charbuf, eTayaLuckyNumber.curLuckyId, STR_CONV_MODE_LEADING_ZEROS, 5);
+    Menu_PrintText(eTayaLuckyNumber.charbuf, 1, 1);
+    StringFill(eTayaLuckyNumber.charbuf, CHAR_SPACE, 5);
+    eTayaLuckyNumber.charbuf[eTayaLuckyNumber.digit] = 0x79;
+    Menu_PrintText(eTayaLuckyNumber.charbuf, 1, 3);
 }
 
 #ifdef NONMATCHING
@@ -445,13 +445,13 @@ bool8 debug_sub_8090C88(void)
 {
     bool8 r8 = TRUE;
 
-    if (gMain.newKeys & DPAD_LEFT && eTayaLuckyNumber.unk0 != 0)
+    if (gMain.newKeys & DPAD_LEFT && eTayaLuckyNumber.digit != 0)
     {
-        eTayaLuckyNumber.unk0--;
+        eTayaLuckyNumber.digit--;
     }
-    else if (gMain.newKeys & DPAD_RIGHT && eTayaLuckyNumber.unk0 < 4)
+    else if (gMain.newKeys & DPAD_RIGHT && eTayaLuckyNumber.digit < 4)
     {
-        eTayaLuckyNumber.unk0++;
+        eTayaLuckyNumber.digit++;
     }
     else
     {
@@ -459,16 +459,16 @@ bool8 debug_sub_8090C88(void)
         {
             u8 r4;
 
-            eTayaLuckyNumber.unkc = eTayaLuckyNumber.unk8;
-            eTayaLuckyNumber.unk10 = 10000;
-            for (r4 = 0; r4 < eTayaLuckyNumber.unk0; r4++)
-                eTayaLuckyNumber.unk10 /= 10;
-            eTayaLuckyNumber.unkc += eTayaLuckyNumber.unk10;
-            if (eTayaLuckyNumber.unkc > 0xFFFF)
-                eTayaLuckyNumber.unkc = 0xFFFF;
-            if (eTayaLuckyNumber.unk8 != eTayaLuckyNumber.unkc)
+            eTayaLuckyNumber.tempLuckyId = eTayaLuckyNumber.curLuckyId;
+            eTayaLuckyNumber.charbuf0 = 10000;
+            for (r4 = 0; r4 < eTayaLuckyNumber.digit; r4++)
+                eTayaLuckyNumber.charbuf0 /= 10;
+            eTayaLuckyNumber.tempLuckyId += eTayaLuckyNumber.charbuf0;
+            if (eTayaLuckyNumber.tempLuckyId > 0xFFFF)
+                eTayaLuckyNumber.tempLuckyId = 0xFFFF;
+            if (eTayaLuckyNumber.curLuckyId != eTayaLuckyNumber.tempLuckyId)
             {
-                eTayaLuckyNumber.unk8 = eTayaLuckyNumber.unkc;
+                eTayaLuckyNumber.curLuckyId = eTayaLuckyNumber.tempLuckyId;
                 goto check;
             }
         }
@@ -476,16 +476,16 @@ bool8 debug_sub_8090C88(void)
         {
             u8 r4;
 
-            eTayaLuckyNumber.unkc = eTayaLuckyNumber.unk8;
-            eTayaLuckyNumber.unk10 = 10000;
-            for (r4 = 0; r4 < eTayaLuckyNumber.unk0; r4++)
-                eTayaLuckyNumber.unk10 /= 10;
-            eTayaLuckyNumber.unkc -= eTayaLuckyNumber.unk10;
-            if (eTayaLuckyNumber.unkc < 0)
-                eTayaLuckyNumber.unkc = 0;
-            if (eTayaLuckyNumber.unk8 != eTayaLuckyNumber.unkc)
+            eTayaLuckyNumber.tempLuckyId = eTayaLuckyNumber.curLuckyId;
+            eTayaLuckyNumber.charbuf0 = 10000;
+            for (r4 = 0; r4 < eTayaLuckyNumber.digit; r4++)
+                eTayaLuckyNumber.charbuf0 /= 10;
+            eTayaLuckyNumber.tempLuckyId -= eTayaLuckyNumber.charbuf0;
+            if (eTayaLuckyNumber.tempLuckyId < 0)
+                eTayaLuckyNumber.tempLuckyId = 0;
+            if (eTayaLuckyNumber.curLuckyId != eTayaLuckyNumber.tempLuckyId)
             {
-                eTayaLuckyNumber.unk8 = eTayaLuckyNumber.unkc;
+                eTayaLuckyNumber.curLuckyId = eTayaLuckyNumber.tempLuckyId;
                 goto check;
             }
         }
@@ -496,7 +496,7 @@ bool8 debug_sub_8090C88(void)
         }
         if (gMain.newKeys & A_BUTTON)
         {
-            SetLotteryNumber16_Unused(eTayaLuckyNumber.unk8);
+            SetLotteryNumber16_Unused(eTayaLuckyNumber.curLuckyId);
             CloseMenu();
             return TRUE;
         }
@@ -693,8 +693,8 @@ bool8 TayaDebugMenu_PKMNLottery(void)
 {
     Menu_DrawStdWindowFrame(0, 0, 6, 5);
     RetrieveLotteryNumber();
-    eTayaLuckyNumber.unk8 = gSpecialVar_Result;
-    eTayaLuckyNumber.unk0 = 0;
+    eTayaLuckyNumber.curLuckyId = gSpecialVar_Result;
+    eTayaLuckyNumber.digit = 0;
     debug_sub_8090C44();
     gMenuCallback = debug_sub_8090C88;
     return FALSE;
@@ -835,29 +835,29 @@ bool8 TayaDebugMenu_8091190(void)
     switch (input)
     {
         default:
-            gMenuCallback = gUnknown_Debug_83C5068[unk_2030224].menuActions[input].func;
+            gMenuCallback = gUnknown_Debug_83C5068[sTayaTopMenuPage].menuActions[input].func;
             return FALSE;
         case -2:
-            r4 = unk_2030224;
+            r4 = sTayaTopMenuPage;
             if (gMain.newKeys & DPAD_LEFT)
             {
-                unk_2030224--;
-                if (unk_2030224 < 0)
-                    unk_2030224 = 1;
+                sTayaTopMenuPage--;
+                if (sTayaTopMenuPage < 0)
+                    sTayaTopMenuPage = 1;
             }
 
             if (gMain.newKeys & DPAD_RIGHT)
             {
-                unk_2030224++;
-                if ((u8)unk_2030224 > 1)
-                    unk_2030224 = 0;
+                sTayaTopMenuPage++;
+                if ((u8)sTayaTopMenuPage > 1)
+                    sTayaTopMenuPage = 0;
             }
-            if (r4 != unk_2030224)
+            if (r4 != sTayaTopMenuPage)
             {
                 Menu_EraseScreen();
                 Menu_DrawStdWindowFrame(0, 0, 11, 19);
-                Menu_PrintItems(1, 1, gUnknown_Debug_83C5068[unk_2030224].nitems, gUnknown_Debug_83C5068[unk_2030224].menuActions);
-                InitMenu(0, 1, 1, gUnknown_Debug_83C5068[unk_2030224].nitems, 0, 10);
+                Menu_PrintItems(1, 1, gUnknown_Debug_83C5068[sTayaTopMenuPage].nitems, gUnknown_Debug_83C5068[sTayaTopMenuPage].menuActions);
+                InitMenu(0, 1, 1, gUnknown_Debug_83C5068[sTayaTopMenuPage].nitems, 0, 10);
             }
             return FALSE;
         case -1:
@@ -868,7 +868,7 @@ bool8 TayaDebugMenu_8091190(void)
 
 bool8 InitTayaDebugWindow(void)
 {
-    unk_2030224 = 0;
+    sTayaTopMenuPage = 0;
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 11, 19);
     Menu_PrintItems(1, 1, 9, gUnknown_Debug_83C5068[0].menuActions);
@@ -906,76 +906,76 @@ void debug_sub_8091334(void)
     AnimateSprites();
     BuildOamBuffer();
 
-    switch (eTayaMonData.unk52)
+    switch (eTayaMonData.state)
     {
         case 0:
-            eTayaMonData.unk55 = 0;
+            eTayaMonData.redraw = 0;
             if (gMain.newKeys & DPAD_UP)
             {
-                if (eTayaMonData.unk54 != 0)
+                if (eTayaMonData.y != 0)
                 {
-                    eTayaMonData.unk54--;
-                    eTayaMonData.unk55 = 1;
+                    eTayaMonData.y--;
+                    eTayaMonData.redraw = 1;
                 }
             }
             if (gMain.newKeys & DPAD_DOWN)
             {
-                if (eTayaMonData.unk53 != 2)
+                if (eTayaMonData.x != 2)
                 {
-                    if (eTayaMonData.unk54 < 5)
+                    if (eTayaMonData.y < 5)
                     {
-                        eTayaMonData.unk54++;
-                        eTayaMonData.unk55 = 1;
+                        eTayaMonData.y++;
+                        eTayaMonData.redraw = 1;
                     }
                 }
                 else
                 {
-                    if (eTayaMonData.unk54 < 4)
+                    if (eTayaMonData.y < 4)
                     {
-                        eTayaMonData.unk54++;
-                        eTayaMonData.unk55 = 1;
+                        eTayaMonData.y++;
+                        eTayaMonData.redraw = 1;
                     }
                 }
             }
             if (gMain.newKeys & DPAD_LEFT)
             {
-                if (eTayaMonData.unk53 != 0)
+                if (eTayaMonData.x != 0)
                 {
-                    eTayaMonData.unk53--;
-                    eTayaMonData.unk55 = 1;
+                    eTayaMonData.x--;
+                    eTayaMonData.redraw = 1;
                 }
             }
             if (gMain.newKeys & DPAD_RIGHT)
             {
-                if (eTayaMonData.unk54 != 5)
+                if (eTayaMonData.y != 5)
                 {
-                    if (eTayaMonData.unk53 < 2)
+                    if (eTayaMonData.x < 2)
                     {
-                        eTayaMonData.unk53++;
-                        eTayaMonData.unk55 = 1;
+                        eTayaMonData.x++;
+                        eTayaMonData.redraw = 1;
                     }
                 }
                 else
                 {
-                    if (eTayaMonData.unk53 < 1)
+                    if (eTayaMonData.x < 1)
                     {
-                        eTayaMonData.unk53++;
-                        eTayaMonData.unk55 = 1;
+                        eTayaMonData.x++;
+                        eTayaMonData.redraw = 1;
                     }
                 }
             }
-            if (eTayaMonData.unk55)
+            if (eTayaMonData.redraw)
             {
                 debug_sub_80916AC();
             }
             else if (gMain.newKeys & A_BUTTON)
             {
-                u16 param = gUnknown_Debug_083C50EC[eTayaMonData.unk54][eTayaMonData.unk53].param;
+                u16 param = gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param;
                 if (param >= MON_DATA_COOL_RIBBON && param <= MON_DATA_TOUGH_RIBBON)
-                    eTayaMonData.unk56 = 4;
+                    eTayaMonData.maxVal = 4;
                 else
-                    eTayaMonData.unk56 = 1;
-                eTayaMonData.unk52 = 1;
+                    eTayaMonData.maxVal = 1;
+                eTayaMonData.state = 1;
             }
             else if (gMain.newKeys & B_BUTTON)
             {
@@ -984,24 +984,24 @@ void debug_sub_8091334(void)
             }
             break;
         case 1:
-            eTayaMonData.unk55 = 0;
+            eTayaMonData.redraw = 0;
             if (gMain.newKeys & DPAD_UP)
             {
-                if (eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53] < eTayaMonData.unk56)
+                if (eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] < eTayaMonData.maxVal)
                 {
-                    eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53]++;
-                    eTayaMonData.unk55 = 1;
+                    eTayaMonData.data[eTayaMonData.y][eTayaMonData.x]++;
+                    eTayaMonData.redraw = 1;
                 }
             }
             if (gMain.newKeys & DPAD_DOWN)
             {
-                if (eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53] != 0)
+                if (eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] != 0)
                 {
-                    eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53]--;
-                    eTayaMonData.unk55 = 1;
+                    eTayaMonData.data[eTayaMonData.y][eTayaMonData.x]--;
+                    eTayaMonData.redraw = 1;
                 }
             }
-            if (eTayaMonData.unk55)
+            if (eTayaMonData.redraw)
             {
                 debug_sub_80916AC();
             }
@@ -1009,15 +1009,15 @@ void debug_sub_8091334(void)
             {
                 if (gMain.newKeys & B_BUTTON)
                 {
-                    eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53] = GetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.unk54][eTayaMonData.unk53].param);
+                    eTayaMonData.data[eTayaMonData.y][eTayaMonData.x] = GetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param);
                     debug_sub_80916AC();
-                    eTayaMonData.unk52 = 0;
+                    eTayaMonData.state = 0;
                 }
                 if (gMain.newKeys & A_BUTTON)
                 {
-                    if (gUnknown_Debug_083C50EC[eTayaMonData.unk54][eTayaMonData.unk53].param)
-                        SetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.unk54][eTayaMonData.unk53].param, &eTayaMonData.unk00[eTayaMonData.unk54][eTayaMonData.unk53]);
-                    eTayaMonData.unk52 = 0;
+                    if (gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param)
+                        SetMonData(gPlayerParty, gUnknown_Debug_083C50EC[eTayaMonData.y][eTayaMonData.x].param, &eTayaMonData.data[eTayaMonData.y][eTayaMonData.x]);
+                    eTayaMonData.state = 0;
                 }
             }
             break;
@@ -1036,9 +1036,9 @@ void debug_sub_80915BC(void)
         {
             u16 param = gUnknown_Debug_083C50EC[i][j].param;
             if (param)
-                eTayaMonData.unk00[i][j] = GetMonData(gPlayerParty, param);
+                eTayaMonData.data[i][j] = GetMonData(gPlayerParty, param);
             else
-                eTayaMonData.unk00[i][j] = 0;
+                eTayaMonData.data[i][j] = 0;
         }
     }
     Text_LoadWindowTemplate(&gWindowTemplate_81E7224);
@@ -1049,9 +1049,9 @@ void debug_sub_80915BC(void)
     Menu_DrawStdWindowFrame(0, 4, 29, 17);
     Menu_DrawStdWindowFrame(0, 18, 29, 21);
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON;
-    eTayaMonData.unk53 = 0;
-    eTayaMonData.unk54 = 0;
-    eTayaMonData.unk52 = 0;
+    eTayaMonData.x = 0;
+    eTayaMonData.y = 0;
+    eTayaMonData.state = 0;
     debug_sub_80916AC();
     SetVBlankCallback(debug_sub_8091320);
     SetMainCallback2(debug_sub_8091334);
@@ -1064,10 +1064,10 @@ void debug_sub_80916AC(void)
 
     for (i = 0; i < 6; i++)
     {
-        u8 * buffer = eTayaMonData.fill12;
+        u8 * buffer = eTayaMonData.charbuf;
         for (j = 0; j < 3 && !(i == 5 && j == 2); j++)
         {
-            if (eTayaMonData.unk53 == j && eTayaMonData.unk54 == i)
+            if (eTayaMonData.x == j && eTayaMonData.y == i)
                 *buffer++ = 0xEF;
             else
             {
@@ -1076,11 +1076,11 @@ void debug_sub_80916AC(void)
             }
             buffer = StringCopy(buffer, gUnknown_Debug_083C50EC[i][j].text);
             *buffer++ = CHAR_SPACE;
-            buffer = ConvertIntToDecimalStringN(buffer, eTayaMonData.unk00[i][j], STR_CONV_MODE_LEFT_ALIGN, 1);
+            buffer = ConvertIntToDecimalStringN(buffer, eTayaMonData.data[i][j], STR_CONV_MODE_LEFT_ALIGN, 1);
             *buffer++ = CHAR_SPACE;
         }
         buffer[-1] = EOS;
-        Menu_PrintText(eTayaMonData.fill12, 1, i * 2 + 5);
+        Menu_PrintText(eTayaMonData.charbuf, 1, i * 2 + 5);
     }
 }
 
