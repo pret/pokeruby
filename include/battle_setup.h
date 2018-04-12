@@ -47,6 +47,8 @@ struct TrainerEyeTrainer
    u16 mapNum;
 };
 
+extern const struct TrainerEyeTrainer gTrainerEyeTrainers[56];
+
 void BattleSetup_StartWildBattle(void);
 void BattleSetup_StartRoamerBattle(void);
 void BattleSetup_StartScriptedWildBattle(void);
