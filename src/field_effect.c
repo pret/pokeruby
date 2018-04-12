@@ -3,6 +3,7 @@
 #include "script.h"
 #include "trig.h"
 #include "main.h"
+#include "field_effect_helpers.h"
 #include "field_weather.h"
 #include "decompress.h"
 #include "sprite.h"
@@ -12,7 +13,6 @@
 #include "overworld.h"
 #include "task.h"
 #include "sound.h"
-#include "constants/songs.h"
 #include "decoration.h"
 #include "field_player_avatar.h"
 #include "event_object_movement.h"
@@ -22,8 +22,9 @@
 #include "field_fadetransition.h"
 #include "fieldmap.h"
 #include "util.h"
-#include "field_effect_helpers.h"
 #include "pokemon_storage_system.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 #define subsprite_table(ptr) {.subsprites = ptr, .subspriteCount = (sizeof ptr) / (sizeof(struct Subsprite))}
 
@@ -2080,27 +2081,31 @@ void sub_8087AC8(struct Task *task)
     mapObject->mapobj_bit_13 ^= 1;
 }
 
-void sub_8087BBC(u8);
-void mapldr_08085D88(void);
+static void ExecuteTeleportFieldEffectTask(u8);
+static void TeleportFieldEffectTask1(struct Task*);
+static void TeleportFieldEffectTask2(struct Task*);
+static void TeleportFieldEffectTask3(struct Task*);
+static void TeleportFieldEffectTask4(struct Task*);
+static void mapldr_08085D88(void);
 
-void sub_8087BA8(void)
+void CreateTeleportFieldEffectTask(void)
 {
-    CreateTask(sub_8087BBC, 0);
+    CreateTask(ExecuteTeleportFieldEffectTask, 0);
 }
 
-void (*const gUnknown_0839F390[])(struct Task *) = {
-    sub_8087BEC,
-    sub_8087C14,
-    sub_8087CA4,
-    sub_8087D78
+static void (*const sTeleportFieldEffectTasks[])(struct Task *) = {
+    TeleportFieldEffectTask1,
+    TeleportFieldEffectTask2,
+    TeleportFieldEffectTask3,
+    TeleportFieldEffectTask4
 };
 
-void sub_8087BBC(u8 taskId)
+static void ExecuteTeleportFieldEffectTask(u8 taskId)
 {
-    gUnknown_0839F390[gTasks[taskId].data[0]](&gTasks[taskId]);
+    sTeleportFieldEffectTasks[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_8087BEC(struct Task *task)
+static void TeleportFieldEffectTask1(struct Task *task)
 {
     ScriptContext2_Enable();
     FreezeMapObjects();
@@ -2109,13 +2114,13 @@ void sub_8087BEC(struct Task *task)
     task->data[0]++;
 }
 
-void sub_8087C14(struct Task *task)
+static void TeleportFieldEffectTask2(struct Task *task)
 {
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+        FieldObjectTurn(mapObject, spinDirections[mapObject->mapobj_unk_18]);
         task->data[1] = 8;
         task->data[2]++;
     }
@@ -2129,15 +2134,15 @@ void sub_8087C14(struct Task *task)
     }
 }
 
-void sub_8087CA4(struct Task *task)
+static void TeleportFieldEffectTask3(struct Task *task)
 {
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((--task->data[1]) <= 0)
     {
         task->data[1] = 4;
-        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->mapobj_unk_18]);
+        FieldObjectTurn(mapObject, spinDirections[mapObject->mapobj_unk_18]);
     }
     sprite->pos1.y -= task->data[3];
     task->data[4] += task->data[3];
@@ -2157,7 +2162,7 @@ void sub_8087CA4(struct Task *task)
     }
 }
 
-void sub_8087D78(struct Task *task)
+static void TeleportFieldEffectTask4(struct Task *task)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
@@ -2165,13 +2170,13 @@ void sub_8087D78(struct Task *task)
         warp_in();
         SetMainCallback2(CB2_LoadMap);
         gFieldCallback = mapldr_08085D88;
-        DestroyTask(FindTaskIdByFunc(sub_8087BBC));
+        DestroyTask(FindTaskIdByFunc(ExecuteTeleportFieldEffectTask));
     }
 }
 
 void sub_8087E1C(u8);
 
-void mapldr_08085D88(void)
+static void mapldr_08085D88(void)
 {
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
@@ -3002,7 +3007,7 @@ void sub_8088D94(struct Task *task)
     {
         task->data[0]++;
         task->data[2] = 16;
-        SetPlayerAvatarTransitionFlags(0x01);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
         FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], 0x02);
     }
 }

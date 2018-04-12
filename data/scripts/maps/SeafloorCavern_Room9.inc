@@ -82,8 +82,8 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	setfieldeffectargument 0, 16
 	setfieldeffectargument 1, 42
 	setfieldeffectargument 2, 0
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	.ifdef SAPPHIRE
 	setvar RESULT, 0
 	.else

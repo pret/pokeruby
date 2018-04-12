@@ -10,11 +10,12 @@
 #include "random.h"
 #include "sprite.h"
 #include "sound.h"
-#include "constants/songs.h"
 #include "trainer.h"
 #include "field_camera.h"
 #include "ewram.h"
 #include "scanline_effect.h"
+#include "constants/songs.h"
+#include "constants/field_effects.h"
 
 void ScanlineEffect_Clear(void);
 

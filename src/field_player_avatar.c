@@ -7,7 +7,6 @@
 #include "event_object_movement.h"
 #include "fieldmap.h"
 #include "main.h"
-#include "constants/map_objects.h"
 #include "menu.h"
 #include "metatile_behavior.h"
 #include "new_game.h"
@@ -22,6 +21,8 @@
 #include "task.h"
 #include "tv.h"
 #include "wild_encounter.h"
+#include "constants/field_effects.h"
+#include "constants/map_objects.h"
 
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {0};
 

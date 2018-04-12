@@ -753,7 +753,7 @@ Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
 	setfieldeffectargument 0, 32772
 	setfieldeffectargument 1, 32773
 	setfieldeffectargument 2, 32774
-	dofieldeffect 54
-	waitfieldeffect 54
+	dofieldeffect FLDEFF_SPARKLE
+	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return

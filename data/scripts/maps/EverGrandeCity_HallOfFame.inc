@@ -38,8 +38,8 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	applymovement 255, EverGrandeCity_HallOfFame_Movement_1A0841
 	waitmovement 0
 	delay 20
-	dofieldeffect 62
-	waitfieldeffect 62
+	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
+	waitfieldeffect FLDEFF_HALL_OF_FAME_RECORD
 	delay 40
 	setvar VAR_TEMP_1, 1
 	call EverGrandeCity_HallOfFame_EventScript_19FC13

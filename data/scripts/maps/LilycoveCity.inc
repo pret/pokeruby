@@ -397,10 +397,10 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject LAST_TALKED
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	savebgm 0
 	fadedefaultbgm
 	setflag FLAG_MET_RIVAL_LILYCOVE

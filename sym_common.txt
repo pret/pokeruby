@@ -241,7 +241,7 @@ SYMBOL(gScanlineEffectRegBuffers, 3840)
 
 // pokemon_menu.c
 SYMBOL(gLastFieldPokeMenuOpened, 4)
-SYMBOL(gUnknown_03005CE4, 4)
+SYMBOL(gPostMenuFieldCallback, 4)
 
 // pokedex.c
 SYMBOL(gUnknown_03005CE8, 4)

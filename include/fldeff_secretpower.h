@@ -1,6 +1,0 @@
-#ifndef GUARD_FLDEFF_SECRETPOWER_H
-#define GUARD_FLDEFF_SECRETPOWER_H
-
-void debug_sub_80D93F4(void);
-
-#endif //GUARD_FLDEFF_SECRETPOWER_H

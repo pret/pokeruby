@@ -13,14 +13,15 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/field_effects.h"
 
 extern u16 gSpecialVar_LastTalked;
 extern void (*gFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 extern u8 S_UseRockSmash[];
 
-EWRAM_DATA struct MapPosition gUnknown_0203923C = {0};
+EWRAM_DATA struct MapPosition gPlayerFacingPosition = {0};
 
 static void task08_080C9820(u8);
 static void sub_810B3DC(u8);
@@ -31,14 +32,14 @@ static void sub_810B58C(void);
 static void sub_810B5D8(void);
 static void sub_810B634(void);
 
-bool8 npc_before_player_of_type(u8 a)
+bool8 SetLastTalkedObjectInFrontOfPlayer(u8 graphicsId)
 {
     u8 mapObjId;
 
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-    gUnknown_0203923C.height = PlayerGetZCoord();
-    mapObjId = GetFieldObjectIdByXYZ(gUnknown_0203923C.x, gUnknown_0203923C.y, gUnknown_0203923C.height);
-    if (gMapObjects[mapObjId].graphicsId != a)
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    gPlayerFacingPosition.height = PlayerGetZCoord();
+    mapObjId = GetFieldObjectIdByXYZ(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.height);
+    if (gMapObjects[mapObjId].graphicsId != graphicsId)
     {
         return FALSE;
     }
@@ -51,7 +52,7 @@ bool8 npc_before_player_of_type(u8 a)
 
 u8 oei_task_add(void)
 {
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     return CreateTask(task08_080C9820, 8);
 }
 
@@ -120,7 +121,7 @@ static void sub_810B4CC(u8 taskId)
 #if DEBUG
 void debug_sub_8120968(void)
 {
-    if (npc_before_player_of_type(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         sub_810B53C();
@@ -134,10 +135,10 @@ void debug_sub_8120968(void)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (npc_before_player_of_type(0x56) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_810B53C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_810B53C;
         return TRUE;
     }
     else
@@ -173,8 +174,8 @@ int SetUpFieldMove_Dig(void)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_810B5D8;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_810B5D8;
         return TRUE;
     }
     else
@@ -197,7 +198,7 @@ int FldEff_UseDig(void)
     gTasks[taskId].data[8] = (u32)sub_810B634 >> 16;
     gTasks[taskId].data[9] = (u32)sub_810B634;
     if (!ShouldDoBrailleDigEffect())
-        SetPlayerAvatarTransitionFlags(1);
+        SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     return 0;
 }
 

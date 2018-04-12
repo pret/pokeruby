@@ -450,9 +450,9 @@ SootopolisCity_EventScript_14D4AD:: @ 814D4AD
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
-	dofieldeffect 30
+	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
 	removeobject LAST_TALKED
-	waitfieldeffect 30
+	waitfieldeffect FLDEFF_NPCFLY_OUT
 	release
 	end

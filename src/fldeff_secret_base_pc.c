@@ -5,9 +5,10 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "task.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 static void Task_SecretBasePCTurnOn(u8);
 

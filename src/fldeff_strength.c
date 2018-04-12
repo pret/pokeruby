@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/map_objects.h"
 #include "braille_puzzles.h"
 #include "field_effect.h"
 #include "party_menu.h"
@@ -9,6 +8,8 @@
 #include "script.h"
 #include "task.h"
 #include "text.h"
+#include "constants/field_effects.h"
+#include "constants/map_objects.h"
 
 static void sub_811AA18(void);
 static void sub_811AA38(void);
@@ -17,7 +18,7 @@ static void sub_811AA9C(void);
 extern u8 gLastFieldPokeMenuOpened;
 extern u16 gSpecialVar_Result;
 extern void (*gFieldCallback)(void);
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 
 extern u8 S_UseStrength[];
 
@@ -30,7 +31,7 @@ void debug_sub_8130318(void)
         gSpecialVar_Result = 0;
         sub_811AA38();
     }
-    else if (npc_before_player_of_type(MAP_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
+    else if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_PUSHABLE_BOULDER) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         gSpecialVar_Result = 0;
@@ -48,16 +49,16 @@ bool8 SetUpFieldMove_Strength(void)
     if (ShouldDoBrailleStrengthEffect())
     {
         gSpecialVar_Result = gLastFieldPokeMenuOpened;
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_811AA38;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_811AA38;
     }
     else
     {
-        if (npc_before_player_of_type(87) != TRUE)
+        if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_PUSHABLE_BOULDER) != TRUE)
             return 0;
         gSpecialVar_Result = gLastFieldPokeMenuOpened;
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_811AA18;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_811AA18;
     }
 
     return TRUE;

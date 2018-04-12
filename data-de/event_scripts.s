@@ -1,4 +1,5 @@
 #include "constants/decorations.h"
+#include "constants/field_effects.h"
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
@@ -399,7 +400,7 @@ gUnknown_0815F36C:: @ 815F36C
 	lockall
 	playse SE_PC_LOGON
 	message UnknownString_81A3A72
-	dofieldeffect 61
+	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
@@ -459,7 +460,7 @@ gUnknown_0815F43A:: @ 815F43A
 	lockall
 	message UnknownString_81A3A72
 	playse SE_PC_LOGON
-	dofieldeffect 61
+	dofieldeffect FLDEFF_SECRET_BASE_PC_TURN_ON
 	waitstate
 	waitmessage
 	waitbuttonpress
@@ -530,7 +531,7 @@ EventScript_15F51D:
 	end
 
 gUnknown_0815F523:: @ 815F523
-	dofieldeffect 52
+	dofieldeffect FLDEFF_SAND_PILLAR
 	waitstate
 	end
 
@@ -1450,8 +1451,8 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	waitmessage
 	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_1A083F
 	waitmovement 0
-	dofieldeffect 25
-	waitfieldeffect 25
+	dofieldeffect FLDEFF_POKECENTER_HEAL
+	waitfieldeffect FLDEFF_POKECENTER_HEAL
 	applymovement VAR_SPECIAL_B, OldaleTown_PokemonCenter_1F_Movement_1A0845
 	waitmovement 0
 	special ScrSpecial_HealPlayerParty
@@ -1821,7 +1822,7 @@ UseSurfScript:: @ 81A0117
 	compare RESULT, NO
 	goto_if_eq UseSurfScript_No
 	msgbox UsedSurfText, 4
-	dofieldeffect 9
+	dofieldeffect FLDEFF_USE_SURF
 UseSurfScript_No: @ 81A014C
 	releaseall
 UseSurfScript_NoMon: @ 81A014D
@@ -3613,9 +3614,9 @@ SecretBase_RedCave1_Text_1A2BA4:: @ 81A2BA4
 
 gUnknown_081A2C51:: @ 81A2C51
 	special sub_80BB70C
-	special sub_80BB63C
+	special CheckPlayerHasSecretBase
 	compare RESULT, 1
-	goto_if_eq EventScript_1A2E45
+	goto_if_eq AskToMoveSecretBase
 	checkpartymove MOVE_SECRET_POWER
 	setfieldeffectargument 0, RESULT
 	buffermovename 1, MOVE_SECRET_POWER
@@ -3643,14 +3644,14 @@ EventScript_1A2CB0:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	dofieldeffect 11
+	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto EventScript_1A2CFA
 	end
 
-gUnknown_081A2CE6:: @ 81A2CE6
+DoSecretBaseCaveFieldEffectScript:: @ 81A2CE6
 	lockall
-	dofieldeffect 11
+	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto EventScript_1A2CFA
 	end
@@ -3674,14 +3675,14 @@ EventScript_1A2D08:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	dofieldeffect 26
+	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto EventScript_1A2D52
 	end
 
-gUnknown_081A2D3E:: @ 81A2D3E
+DoSecretBaseTreeFieldEffectScript:: @ 81A2D3E
 	lockall
-	dofieldeffect 26
+	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto EventScript_1A2D52
 	end
@@ -3705,14 +3706,14 @@ EventScript_1A2D60:
 	goto_if_eq EventScript_1A2F3A
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	dofieldeffect 27
+	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto EventScript_1A2DAA
 	end
 
-gUnknown_081A2D96:: @ 81A2D96
+DoSecretBaseShrubFieldEffectScript:: @ 81A2D96
 	lockall
-	dofieldeffect 27
+	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto EventScript_1A2DAA
 	end
@@ -3784,7 +3785,7 @@ EventScript_1A2E38:
 	waitstate
 	end
 
-EventScript_1A2E45:
+AskToMoveSecretBase:
 	checkpartymove MOVE_SECRET_POWER
 	compare RESULT, 6
 	goto_if_eq EventScript_1A2EF7
@@ -3811,17 +3812,17 @@ EventScript_1A2E45:
 	closemessage
 	closemessage
 	compare VAR_SPECIAL_7, 1
-	goto_if_eq gUnknown_081A2CE6
+	goto_if_eq DoSecretBaseCaveFieldEffectScript
 	compare VAR_SPECIAL_7, 2
-	goto_if_eq gUnknown_081A2CE6
+	goto_if_eq DoSecretBaseCaveFieldEffectScript
 	compare VAR_SPECIAL_7, 3
-	goto_if_eq gUnknown_081A2CE6
+	goto_if_eq DoSecretBaseCaveFieldEffectScript
 	compare VAR_SPECIAL_7, 4
-	goto_if_eq gUnknown_081A2CE6
+	goto_if_eq DoSecretBaseCaveFieldEffectScript
 	compare VAR_SPECIAL_7, 5
-	goto_if_eq gUnknown_081A2D3E
+	goto_if_eq DoSecretBaseTreeFieldEffectScript
 	compare VAR_SPECIAL_7, 6
-	goto_if_eq gUnknown_081A2D96
+	goto_if_eq DoSecretBaseShrubFieldEffectScript
 	releaseall
 	end
 

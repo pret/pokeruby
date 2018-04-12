@@ -6,12 +6,13 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 extern const u8 gSpriteImage_83D21EC[];
 extern const u8 gSpriteImage_83D22EC[];

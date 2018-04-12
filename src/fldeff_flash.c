@@ -22,7 +22,7 @@ struct FlashStruct
 };
 
 extern u8 gLastFieldPokeMenuOpened;
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 
 extern u8 gUnknown_081B694A[];
 
@@ -87,8 +87,8 @@ bool8 SetUpFieldMove_Flash(void)
 {
     if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH))
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_810CBFC;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_810CBFC;
         return TRUE;
     }
 

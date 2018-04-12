@@ -52,7 +52,7 @@ static void Task_SecretBasePC_Registry(u8 taskId);
 
 extern u8 gUnknown_0815F399[];
 extern u8 gUnknown_0815F49A[];
-EWRAM_DATA u8 gUnknown_020387DC = 0;
+EWRAM_DATA u8 gCurrentSecretBaseId = 0;
 
 const struct
 {
@@ -172,17 +172,17 @@ void ResetSecretBases(void)
 
 void sub_80BB5D0(void)
 {
-    gUnknown_020387DC = gSpecialVar_0x8004;
+    gCurrentSecretBaseId = gSpecialVar_0x8004;
 }
 
-void sub_80BB5E4(void)
+void SetCurrentSecretBaseVar(void)
 {
     u16 i;
 
     gSpecialVar_Result = 0;
     for (i = 0; i < MAX_SECRET_BASES; i++)
     {
-        if (gUnknown_020387DC == gSaveBlock1.secretBases[i].secretBaseId)
+        if (gCurrentSecretBaseId == gSaveBlock1.secretBases[i].secretBaseId)
         {
             gSpecialVar_Result = 1;
             VarSet(VAR_CURRENT_SECRET_BASE, i);
@@ -191,7 +191,7 @@ void sub_80BB5E4(void)
     }
 }
 
-void sub_80BB63C(void)
+void CheckPlayerHasSecretBase(void)
 {
     if (gSaveBlock1.secretBases[0].secretBaseId)
         gSpecialVar_Result = 1;
@@ -255,7 +255,7 @@ void sub_80BB764(s16 *arg1, s16 *arg2, u16 arg3)
     }
 }
 
-void sub_80BB800(void)
+void SetOpenedSecretBaseMetatile(void)
 {
     s16 x, y;
     s16 tile_id;
@@ -300,7 +300,7 @@ void sub_80BB8CC(void)
     u8 nameLength;
     u16 idx;
 
-    gSaveBlock1.secretBases[0].secretBaseId = gUnknown_020387DC;
+    gSaveBlock1.secretBases[0].secretBaseId = gCurrentSecretBaseId;
     for (idx=0; idx<4; idx++)
         gSaveBlock1.secretBases[0].trainerId[idx] = gSaveBlock2.playerTrainerId[idx];
     VarSet(VAR_CURRENT_SECRET_BASE, 0);
@@ -342,7 +342,7 @@ void sub_80BB970(struct MapEvents *events)
 
 void sub_80BBA14(void)
 {
-    s8 idx = 4 * (gUnknown_020387DC / 10);
+    s8 idx = 4 * (gCurrentSecretBaseId / 10);
     warp1_set_2(MAP_GROUP(SECRET_BASE_RED_CAVE1), gUnknown_083D1374[idx], gUnknown_083D1374[idx + 1]);
 }
 
@@ -414,7 +414,7 @@ void sub_80BBBEC(u8 taskid)
 
     if (!gPaletteFade.active)
     {
-        idx = 4 * (gUnknown_020387DC / 10);
+        idx = 4 * (gCurrentSecretBaseId / 10);
         Overworld_SetWarpDestination(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gUnknown_083D1374[idx + 2], gUnknown_083D1374[idx + 3]);
         warp_in();
         gFieldCallback = sub_80BBB90;
@@ -533,16 +533,16 @@ void sub_80BBFA4(void)
     VarSet(VAR_OBJ_GFX_ID_F, gUnknown_083D13EC[sub_80BCCA4(curBase)]);
 }
 
-void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)
+void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEvents *events)
 {
-    s16 bgevtidx;
+    s16 i;
 
-    for (bgevtidx = 0; bgevtidx < events->bgEventCount; bgevtidx++)
+    for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[bgevtidx].kind == 8 && position->x == events->bgEvents[bgevtidx].x + 7
-         && position->y == events->bgEvents[bgevtidx].y + 7)
+        if (events->bgEvents[i].kind == 8 && position->x == events->bgEvents[i].x + 7
+         && position->y == events->bgEvents[i].y + 7)
         {
-            gUnknown_020387DC = events->bgEvents[bgevtidx].bgUnion.secretBaseId;
+            gCurrentSecretBaseId = events->bgEvents[i].bgUnion.secretBaseId;
             break;
         }
     }
@@ -550,15 +550,15 @@ void sub_80BBFD8(struct MapPosition *position, struct MapEvents *events)
 
 void sub_80BC038(struct MapPosition *position, struct MapEvents *events)
 {
-    sub_80BBFD8(position, events);
-    sub_80BB5E4();
+    SetCurrentSecretBaseFromPosition(position, events);
+    SetCurrentSecretBaseVar();
     ScriptContext1_SetupScript(gUnknown_081A2E14);
 }
 
 bool8 sub_80BC050(void)
 {
     sub_80BB5D0();
-    sub_80BB5E4();
+    SetCurrentSecretBaseVar();
     if (gSpecialVar_Result == 1)
         return FALSE;
     return TRUE;
@@ -595,7 +595,7 @@ void sub_80BC0F8(void)
 
 void sub_80BC114(void)
 {
-    if (gSaveBlock1.secretBases[0].secretBaseId != gUnknown_020387DC)
+    if (gSaveBlock1.secretBases[0].secretBaseId != gCurrentSecretBaseId)
         gSpecialVar_Result = 1;
     else
         gSpecialVar_Result = 0;
@@ -632,7 +632,7 @@ u8 *sub_80BC190(u8 *dest, u8 arg1)
 
 u8 *GetSecretBaseMapName(u8 *dest)
 {
-    gUnknown_020387DC = gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].secretBaseId;
+    gCurrentSecretBaseId = gSaveBlock1.secretBases[VarGet(VAR_CURRENT_SECRET_BASE)].secretBaseId;
     return sub_80BC190(dest, VarGet(VAR_CURRENT_SECRET_BASE));
 }
 
@@ -922,7 +922,7 @@ u8 sub_80BC538(void)
 
 void sub_80BC56C(void)
 {
-    if (sub_80BC268(sub_80BC14C(gUnknown_020387DC)) == TRUE)
+    if (sub_80BC268(sub_80BC14C(gCurrentSecretBaseId)) == TRUE)
         gSpecialVar_Result = 1;
     else if (sub_80BC538() > 9)
         gSpecialVar_Result = 2;
@@ -932,7 +932,7 @@ void sub_80BC56C(void)
 
 void sub_80BC5BC(void)
 {
-    gSaveBlock1.secretBases[sub_80BC14C(gUnknown_020387DC)].sbr_field_1_6 ^= 1;
+    gSaveBlock1.secretBases[sub_80BC14C(gCurrentSecretBaseId)].sbr_field_1_6 ^= 1;
     FlagSet(FLAG_DECORATION_16);
 }
 
