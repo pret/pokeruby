@@ -587,6 +587,7 @@ SECTIONS {
         src/shop.o(.rodata);
         src/fldeff_escalator.o(.rodata);
         src/berry.o(.rodata);
+        src/debug/watanabe_debug_menu.o(.rodata);
         data/debug_menu_watanabe.o(.rodata);
         src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
