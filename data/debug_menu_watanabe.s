@@ -9,7 +9,10 @@ gUnknown_Debug_083F7FD4:: @ 0x83F7FD4
 	.string "▶$"
 
 gUnknown_Debug_083F7FD6:: @ 0x83F7FD6
-	.string "ゆみあくひりつ$"
+	.string "ゆみあく"
+
+gUnknown_Debug_083F7FDA::
+	.string "ひりつ$"
 
 gUnknown_Debug_083F7FDE:: @ 0x83F7FDE
 	.string "たかさ$"

@@ -94,20 +94,6 @@ enum
     SIZE_SCREEN
 };
 
-struct PokedexEntry
-{
-    /*0x00*/ u8 categoryName[12];
-    /*0x0C*/ u16 height; //in decimeters
-    /*0x0E*/ u16 weight; //in hectograms
-    /*0x10*/ const u8 *descriptionPage1;
-    /*0x14*/ const u8 *descriptionPage2;
-    /*0x18*/ u16 unused;
-    /*0x1A*/ u16 pokemonScale;
-    /*0x1C*/ u16 pokemonOffset;
-    /*0x1E*/ u16 trainerScale;
-    /*0x20*/ u16 trainerOffset;
-};  /*size = 0x24*/
-
 struct UnknownStruct2
 {
     const u8 *text1;
@@ -1277,7 +1263,6 @@ void sub_8091738(u16, u16, u16);
 static void sub_80917CC(u16 i, u16 i1);
 static u16 sub_8091818(u8, u16, u16, u16);
 u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
-u8 sub_8091A4C(u16 gender, s16, s16, u16);
 static void sub_8091E54(u8);
 static void sub_809204C(u8);
 static void sub_809207C(u8);
@@ -4584,7 +4569,7 @@ u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum)
     return spriteId;
 }
 
-u8 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
+u16 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum)
 {
     u8 spriteId;
 
