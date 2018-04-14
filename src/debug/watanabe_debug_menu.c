@@ -26,6 +26,10 @@ EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
 
 u8 byte_3005E30[0x20];
 
+void debug_80C3A50(u8 taskId);
+void debug_80C3D2C(u8 taskId);
+void debug_80C68CC(u16, u8, u8, u8);
+
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
 extern const u8 gUnknown_Debug_083F7FD6[4]; // = {0x25, 0x20, 0x01, 0x08};
 extern const u8 gUnknown_Debug_083F7FDA[4]; // = _("ひりつ");
@@ -41,9 +45,6 @@ extern const u8 gUnknown_Debug_083F8028[6]; // = _(":セレクト");
 
 extern const struct SpriteSheet stru_83F8828[2];
 extern const struct SpritePalette stru_83F8838[2];
-
-void debug_80C3A50(u8 taskId);
-void debug_80C3D2C(u8 taskId);
 
 void debug_69(struct Sprite *sprite)
 {
@@ -666,5 +667,123 @@ NAKED void debug_80C3A50(u8 taskId)
         "\t.word\tdebug_80C3D2C+1");
 }
 #endif // NONMATCHING
+
+void debug_80C3D2C(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        SetMainCallback2(debug_80C370C);
+        gTasks[taskId].func = debug_80C373C;
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gTasks[taskId].data[8] ^= 1;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        if (gTasks[taskId].data[8])
+        {
+            if (gMain.heldKeys & R_BUTTON)
+                gTasks[taskId].data[6] += 16;
+            else
+                gTasks[taskId].data[6] += 1;
+            if ((u16)gTasks[taskId].data[6] > 0x8000)
+                gTasks[taskId].data[6] = 0x8000;
+        }
+        else
+        {
+            if (gMain.heldKeys & R_BUTTON)
+                gTasks[taskId].data[7] += 16;
+            else
+                gTasks[taskId].data[7] += 1;
+            if ((u16)gTasks[taskId].data[7] > 0x8000)
+                gTasks[taskId].data[7] = 0x8000;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        if (gTasks[taskId].data[8])
+        {
+            if (gMain.heldKeys & R_BUTTON)
+                gTasks[taskId].data[6] -= 16;
+            else
+                gTasks[taskId].data[6] -= 1;
+            if (gTasks[taskId].data[6] < 0x100)
+                gTasks[taskId].data[6] = 0x100;
+        }
+        else
+        {
+            if (gMain.heldKeys & R_BUTTON)
+                gTasks[taskId].data[7] -= 16;
+            else
+                gTasks[taskId].data[7] -= 1;
+            if (gTasks[taskId].data[7] < 0x100)
+                gTasks[taskId].data[7] = 0x100;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (gTasks[taskId].data[8])
+        {
+            gTasks[taskId].data[4]--;
+        }
+        else
+        {
+            gTasks[taskId].data[5]--;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        if (gTasks[taskId].data[8])
+        {
+            gTasks[taskId].data[4]++;
+        }
+        else
+        {
+            gTasks[taskId].data[5]++;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & START_BUTTON)
+    {
+        if (gTasks[taskId].data[0] < 0x182)
+            gTasks[taskId].data[0]++;
+        else
+            gTasks[taskId].data[0] = 1;
+        DestroySprite(gSprites + gTasks[taskId].data[2]);
+        DestroySprite(gSprites + gTasks[taskId].data[3]);
+        gTasks[taskId].func = debug_80C3A50;
+    }
+    else if (gMain.newAndRepeatedKeys & SELECT_BUTTON)
+    {
+        if (gTasks[taskId].data[0] > 1)
+            gTasks[taskId].data[0]--;
+        else
+            gTasks[taskId].data[0] = 0x182;
+        DestroySprite(gSprites + gTasks[taskId].data[2]);
+        DestroySprite(gSprites + gTasks[taskId].data[3]);
+        gTasks[taskId].func = debug_80C3A50;
+    }
+    else
+    {
+        u16 scale = gTasks[taskId].data[7];
+        u16 offset = gTasks[taskId].data[5];
+        SetOamMatrix(1, scale, 0, 0, scale);
+        debug_80C68CC(scale, 1, 3, 4);
+        debug_80C68CC(offset, 1, 7, 4);
+        gSprites[gTasks[taskId].data[2]].pos2.y = offset;
+
+        scale = gTasks[taskId].data[6];
+        offset = gTasks[taskId].data[4];
+        SetOamMatrix(2, scale, 0, 0, scale);
+        debug_80C68CC(scale, 25, 3, 4);
+        debug_80C68CC(offset, 25, 7, 4);
+        gSprites[gTasks[taskId].data[3]].pos2.y = offset;
+
+        REG_WIN0H = ((gTasks[taskId].data[8] * 64 + 0x38) << 8) + (gTasks[taskId].data[8] * 64 + 0x78);
+    }
+}
 
 #endif // DEBUG
