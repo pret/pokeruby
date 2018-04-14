@@ -18,16 +18,24 @@
 #include "save.h"
 #include "sound.h"
 #include "pokedex.h"
+#include "load_save.h"
 
 EWRAM_DATA u8 gUnknown_Debug_20389EC[0x20] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A0C[0x10] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A1C[4] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
 
-u8 byte_3005E30[0x20];
+u32 byte_3005E30;
 
 void debug_80C3A50(u8 taskId);
 void debug_80C3D2C(u8 taskId);
+void debug_80C4214(u8);
+void debug_80C42B8(u8 taskId);
+void debug_80C4348(u8 taskId);
+void debug_80C44EC(u8 taskId);
+void debug_80C4694(void);
+void debug_80C4704(void);
+void debug_80C47BC(u8 taskId);
 void debug_80C68CC(u16, u8, u8, u8);
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
@@ -42,6 +50,8 @@ extern const u8 gUnknown_Debug_083F800C[13]; // = _("Aボタン▶そうさき�
 extern const u8 gUnknown_Debug_083F8019[9]; // = _("Bボタン▶やめる");
 extern const u8 gUnknown_Debug_083F8022[6]; // = _("スタート:");
 extern const u8 gUnknown_Debug_083F8028[6]; // = _(":セレクト");
+extern const u8 gUnknown_Debug_083F8194[12]; // = _("ポケモンを　えらんでね");
+extern const u8 gUnknown_Debug_083F81A0[13]; // = _("{COLOR RED}START:つぎへ");
 
 extern const struct SpriteSheet stru_83F8828[2];
 extern const struct SpritePalette stru_83F8838[2];
@@ -209,7 +219,7 @@ u16 debug_80C38B4(u8 a0, u16 a1)
 void debug_80C38E4(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
 {
     // u8 sp00[] = _("▶");
-    u8 sp00[2];
+    u8 sp00[sizeof(gUnknown_Debug_083F7FD4)];
 
     memcpy(sp00, gUnknown_Debug_083F7FD4, ARRAY_COUNT(gUnknown_Debug_083F7FD4));
     Menu_BlankWindowRect(a1, a2, a1, a3);
@@ -784,6 +794,149 @@ void debug_80C3D2C(u8 taskId)
 
         REG_WIN0H = ((gTasks[taskId].data[8] * 64 + 0x38) << 8) + (gTasks[taskId].data[8] * 64 + 0x78);
     }
+}
+
+void debug_80C405C(u8 * dest, u16 species)
+{
+    u8 i;
+
+    for (i = 0; i < 10; i++)
+        dest[i] = CHAR_SPACE;
+    dest[i] = EOS;
+
+    dest[0] = CHAR_HYPHEN;
+
+    if (species != SPECIES_NONE)
+    {
+        for (i = 0; gSpeciesNames[species][i] != EOS && i < 10; i++)
+            dest[i] = gSpeciesNames[species][i];
+    }
+}
+
+void debug_80C40C4(bool8 who)
+{
+    u8 i;
+    u16 maxHp;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (who)
+        {
+            struct Pokemon *pokemon = gEnemyParty + i;
+            if (GetMonData(pokemon, MON_DATA_SPECIES) != SPECIES_NONE)
+            {
+                CalculateMonStats(pokemon);
+                maxHp = GetMonData(pokemon, MON_DATA_MAX_HP);
+                SetMonData(pokemon, MON_DATA_HP, &maxHp);
+            }
+        }
+        else
+        {
+            struct Pokemon *pokemon = gPlayerParty + i;
+            if (GetMonData(pokemon, MON_DATA_SPECIES) != SPECIES_NONE)
+            {
+                CalculateMonStats(pokemon);
+                maxHp = GetMonData(pokemon, MON_DATA_MAX_HP);
+                SetMonData(pokemon, MON_DATA_HP, &maxHp);
+            }
+        }
+    }
+}
+
+void InitBattleForDebug(void)
+{
+    SavePlayerParty();
+    gUnknown_Debug_2038A0C[13] = gSaveBlock2.playerGender;
+    gUnknown_Debug_2038A0C[0] = 0;
+    gUnknown_Debug_2038A0C[1] = 0;
+    gUnknown_Debug_2038A0C[2] = 0;
+    gUnknown_Debug_2038A0C[3] = 0;
+    gUnknown_Debug_2038A0C[4] = 0;
+    gUnknown_Debug_2038A0C[5] = 0;
+    gUnknown_Debug_2038A0C[6] = 0;
+    gUnknown_Debug_2038A0C[7] = 0;
+    gUnknown_Debug_2038A0C[8] = 0;
+    gUnknown_Debug_2038A0C[12] = 0;
+    byte_3005E30 = 0;
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    debug_80C4214(0);
+    CreateTask(debug_80C47BC, 0);
+}
+
+void debug_80C41A8(void)
+{
+    gUnknown_Debug_2038A0C[1] = 0;
+    gUnknown_Debug_2038A0C[2] = 0;
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    debug_80C4214(0);
+    CreateTask(debug_80C47BC, 0);
+}
+
+void debug_80C41D4(void)
+{
+    debug_80C40C4(0);
+    debug_80C4214(0);
+    CreateTask(debug_80C42B8, 0);
+}
+
+void debug_80C41F4(void)
+{
+    debug_80C40C4(1);
+    debug_80C4214(1);
+    CreateTask(debug_80C42B8, 0);
+}
+
+void debug_80C4214(UNUSED u8 a0)
+{
+    debug_80C35DC();
+    REG_WIN0H = 0;
+    REG_WIN0V = 0;
+    REG_WIN1H = 0;
+    REG_WIN1V = 0;
+    REG_WININ = 0x1111;
+    REG_WINOUT = 0x0031;
+    REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 7;
+
+    {
+        u16 imeBak = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = imeBak;
+    }
+
+    SetVBlankCallback(debug_80C3758);
+    SetMainCallback2(debug_80C370C);
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
+    REG_WIN0H = 0x01EF;
+    REG_WIN0V = 0x819F;
+}
+
+void debug_80C42B8(u8 taskId)
+{
+    u8 sp00[sizeof(gUnknown_Debug_083F8194)];
+    u8 sp0c[sizeof(gUnknown_Debug_083F81A0)];
+
+    memcpy(sp00, gUnknown_Debug_083F8194, sizeof(gUnknown_Debug_083F8194));
+    memcpy(sp0c, gUnknown_Debug_083F81A0, sizeof(gUnknown_Debug_083F81A0));
+
+    // u8 sp00[] = _("ポケモンを　えらんでね");
+    // u8 sp0c[] = _("{COLOR RED}START:つぎへ");
+
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
+    Menu_PrintText(sp00, 1, 17);
+    Menu_PrintText(sp0c, 20, 17);
+
+    debug_80C4694();
+    debug_80C4704();
+
+    if (gUnknown_Debug_2038A0C[0])
+        gTasks[taskId].func = debug_80C44EC;
+    else
+        gTasks[taskId].func = debug_80C4348;
 }
 
 #endif // DEBUG
