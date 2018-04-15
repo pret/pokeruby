@@ -35,6 +35,7 @@ void debug_80C42B8(u8 taskId);
 void debug_80C4348(u8 taskId);
 void debug_80C43A8(u8 taskId);
 void debug_80C44EC(u8 taskId);
+void debug_80C4550(u8 taskId);
 void debug_80C4694(void);
 void debug_80C4704(void);
 bool8 debug_80C4774(void);
@@ -57,6 +58,8 @@ extern const u8 gUnknown_Debug_083F8022[6]; // = _("スタート:");
 extern const u8 gUnknown_Debug_083F8028[6]; // = _(":セレクト");
 extern const u8 gUnknown_Debug_083F8194[12]; // = _("ポケモンを　えらんでね");
 extern const u8 gUnknown_Debug_083F81A0[13]; // = _("{COLOR RED}START:つぎへ");
+extern const u8 gUnknown_Debug_083F81AD[13]; // = _("{COLOR RED}じぶんの　ポケモン");
+extern const u8 gUnknown_Debug_083F81BA[13]; // = _("{COLOR RED}あいての　ポケモン");
 
 extern const struct SpriteSheet stru_83F8828[2];
 extern const struct SpritePalette stru_83F8838[2];
@@ -224,9 +227,9 @@ u16 debug_80C38B4(u8 a0, u16 a1)
 void debug_80C38E4(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4)
 {
     // u8 sp00[] = _("▶");
-    u8 sp00[sizeof(gUnknown_Debug_083F7FD4)];
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F7FD4)];
 
-    memcpy(sp00, gUnknown_Debug_083F7FD4, ARRAY_COUNT(gUnknown_Debug_083F7FD4));
+    memcpy(sp00, gUnknown_Debug_083F7FD4, sizeof(gUnknown_Debug_083F7FD4));
     Menu_BlankWindowRect(a1, a2, a1, a3);
     if (a4)
         Menu_PrintText(sp00, a1, a0);
@@ -922,8 +925,8 @@ void debug_80C4214(UNUSED u8 a0)
 
 void debug_80C42B8(u8 taskId)
 {
-    u8 sp00[sizeof(gUnknown_Debug_083F8194)];
-    u8 sp0c[sizeof(gUnknown_Debug_083F81A0)];
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F8194)];
+    u8 sp0c[ARRAY_COUNT(gUnknown_Debug_083F81A0)];
 
     memcpy(sp00, gUnknown_Debug_083F8194, sizeof(gUnknown_Debug_083F8194));
     memcpy(sp0c, gUnknown_Debug_083F81A0, sizeof(gUnknown_Debug_083F81A0));
@@ -989,6 +992,95 @@ void debug_80C43A8(u8 taskId)
         gUnknown_Debug_2038A0C[1]++;
         gTasks[taskId].func = debug_80C4348;
     }
+}
+
+void debug_80C44EC(u8 taskId)
+{
+    debug_80C38E4(gUnknown_Debug_2038A0C[2] * 2 + 3, 16, 1, 14, 1);
+    REG_WIN1H = 0x79EF;
+    REG_WIN1V = 0x017F;
+    gTasks[taskId].func = debug_80C4550;
+}
+
+void debug_80C4550(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        debug_sub_80A433C(gEnemyParty + gUnknown_Debug_2038A0C[2], debug_80C41F4);
+        DestroyTask(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].func = debug_80C4F48;
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        if (debug_80C4774())
+        {
+            PlaySE(SE_SELECT);
+            CalculatePlayerPartyCount();
+            CalculateEnemyPartyCount();
+            gTasks[taskId].func = debug_80C4D14;
+        }
+    }
+    else if (gMain.newKeys & (L_BUTTON | DPAD_LEFT))
+    {
+        debug_80C38E4(0, 16, 1, 14, 0);
+        gTasks[taskId].func = debug_80C4348;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[2] != 0)
+    {
+        gUnknown_Debug_2038A0C[2]--;
+        gTasks[taskId].func = debug_80C44EC;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[2] < 5 && GetMonData(gEnemyParty + gUnknown_Debug_2038A0C[2], MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        gUnknown_Debug_2038A0C[2]++;
+        gTasks[taskId].func = debug_80C44EC;
+    }
+}
+
+void debug_80C4694(void)
+{
+    u8 i;
+    // u8 sp00[] = _("{COLOR RED}じぶんの　ポケモン");
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F81AD)];
+    u8 sp10[POKEMON_NAME_LENGTH + 1];
+    memcpy(sp00, gUnknown_Debug_083F81AD, sizeof(gUnknown_Debug_083F81AD));
+
+    Menu_DrawStdWindowFrame(0, 0, 14, 15);
+    Menu_PrintText(sp00, 2, 1);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        debug_80C405C(sp10, GetMonData(gPlayerParty + i, MON_DATA_SPECIES));
+        Menu_PrintText(sp10, 2, 2 * i + 3);
+    }
+}
+
+void debug_80C4704(void)
+{
+    u8 i;
+    // u8 sp00[] = _("{COLOR RED}あいての　ポケモン");
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F81BA)];
+    u8 sp10[POKEMON_NAME_LENGTH + 1];
+    memcpy(sp00, gUnknown_Debug_083F81BA, sizeof(gUnknown_Debug_083F81BA));
+
+    Menu_DrawStdWindowFrame(15, 0, 29, 15);
+    Menu_PrintText(sp00, 17, 1);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        debug_80C405C(sp10, GetMonData(gEnemyParty + i, MON_DATA_SPECIES));
+        Menu_PrintText(sp10, 17, 2 * i + 3);
+    }
+}
+
+bool8 debug_80C4774(void)
+{
+    u8 i = gUnknown_Debug_2038A0C[12] - 1;
+    if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(gEnemyParty + i, MON_DATA_SPECIES) != SPECIES_NONE)
+        return TRUE;
+    return FALSE;
 }
 
 #endif // DEBUG
