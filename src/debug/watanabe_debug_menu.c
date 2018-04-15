@@ -19,6 +19,7 @@
 #include "sound.h"
 #include "pokedex.h"
 #include "load_save.h"
+#include "pokemon_storage_system.h"
 
 EWRAM_DATA u8 gUnknown_Debug_20389EC[0x20] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A0C[0x10] = { 0 };
@@ -32,10 +33,14 @@ void debug_80C3D2C(u8 taskId);
 void debug_80C4214(u8);
 void debug_80C42B8(u8 taskId);
 void debug_80C4348(u8 taskId);
+void debug_80C43A8(u8 taskId);
 void debug_80C44EC(u8 taskId);
 void debug_80C4694(void);
 void debug_80C4704(void);
+bool8 debug_80C4774(void);
 void debug_80C47BC(u8 taskId);
+void debug_80C4D14(u8 taskId);
+void debug_80C4F48(u8 taskId);
 void debug_80C68CC(u16, u8, u8, u8);
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
@@ -937,6 +942,53 @@ void debug_80C42B8(u8 taskId)
         gTasks[taskId].func = debug_80C44EC;
     else
         gTasks[taskId].func = debug_80C4348;
+}
+
+void debug_80C4348(u8 taskId)
+{
+    debug_80C38E4(gUnknown_Debug_2038A0C[1] * 2 + 3, 1, 1, 14, 1);
+    REG_WIN1H = 0x0177;
+    REG_WIN1V = 0x017F;
+    gTasks[taskId].func = debug_80C43A8;
+}
+
+void debug_80C43A8(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        debug_sub_80A433C(gPlayerParty + gUnknown_Debug_2038A0C[1], debug_80C41D4);
+        DestroyTask(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gTasks[taskId].func = debug_80C4F48;
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        if (debug_80C4774())
+        {
+            PlaySE(SE_SELECT);
+            CalculatePlayerPartyCount();
+            CalculateEnemyPartyCount();
+            gTasks[taskId].func = debug_80C4D14;
+        }
+    }
+    else if (gMain.newKeys & (R_BUTTON | DPAD_RIGHT))
+    {
+        debug_80C38E4(0, 1, 1, 14, 0);
+        gTasks[taskId].func = debug_80C44EC;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[1] != 0)
+    {
+        gUnknown_Debug_2038A0C[1]--;
+        gTasks[taskId].func = debug_80C4348;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[1] < 5 && GetMonData(gPlayerParty + gUnknown_Debug_2038A0C[1], MON_DATA_SPECIES) != SPECIES_NONE)
+    {
+        gUnknown_Debug_2038A0C[1]++;
+        gTasks[taskId].func = debug_80C4348;
+    }
 }
 
 #endif // DEBUG

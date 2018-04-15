@@ -335,11 +335,11 @@ void debug_sub_80A4300(void)
 }
 
 extern void (*unk_2038794)(void);
-extern u32 unk_2038798;
+extern struct Pokemon * unk_2038798;
 
-extern void unref_sub_809CB94();
+extern void debug_sub_809CB94(struct Pokemon *);
 
-void debug_sub_80A433C(u32 a, void (*b)(void))
+void debug_sub_80A433C(struct Pokemon * a, void (*b)(void))
 {
     unk_2038794 = b;
     unk_2038798 = a;
@@ -351,7 +351,7 @@ void debug_sub_80A435C(void)
     switch (gPokemonStorageSystemPtr->unk_0004)
     {
     case 0:
-        unref_sub_809CB94(unk_2038798);
+        debug_sub_809CB94(unk_2038798);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         gPokemonStorageSystemPtr->unk_0004++;
         break;

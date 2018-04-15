@@ -582,8 +582,8 @@ sub_809CB74: @ 809CB74
 _0809CB90: .4byte gPokemonStorageSystemPtr
 	thumb_func_end sub_809CB74
 
-	thumb_func_start unref_sub_809CB94
-unref_sub_809CB94: @ 809CB94
+	thumb_func_start debug_sub_809CB94
+debug_sub_809CB94: @ 809CB94
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _0809CBBC @ =gUnknown_020384E4
@@ -636,7 +636,7 @@ _0809CBF6:
 	.align 2, 0
 _0809CBFC: .4byte gPokemonStorage
 _0809CC00: .4byte gUnknown_020384E5
-	thumb_func_end unref_sub_809CB94
+	thumb_func_end debug_sub_809CB94
 
 	thumb_func_start sub_809CC04
 sub_809CC04: @ 809CC04
