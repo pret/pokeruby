@@ -26,6 +26,11 @@ EWRAM_DATA u8 gUnknown_Debug_2038A0C[0x10] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A1C[4] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
 
+struct WatanabeDebugMenuItem {
+    const u8 * text;
+    u32 value;
+};
+
 u32 byte_3005E30;
 
 void debug_80C3A50(u8 taskId);
@@ -40,9 +45,14 @@ void debug_80C4694(void);
 void debug_80C4704(void);
 bool8 debug_80C4774(void);
 void debug_80C47BC(u8 taskId);
+void debug_80C48A0(u8 taskId);
+void debug_80C4900(u8 taskId);
+void debug_80C4C44(u8);
 void debug_80C4D14(u8 taskId);
 void debug_80C4F48(u8 taskId);
 void debug_80C68CC(u16, u8, u8, u8);
+
+extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
 extern const u8 gUnknown_Debug_083F7FD6[4]; // = {0x25, 0x20, 0x01, 0x08};
@@ -60,6 +70,9 @@ extern const u8 gUnknown_Debug_083F8194[12]; // = _("ポケモンを　えらん
 extern const u8 gUnknown_Debug_083F81A0[13]; // = _("{COLOR RED}START:つぎへ");
 extern const u8 gUnknown_Debug_083F81AD[13]; // = _("{COLOR RED}じぶんの　ポケモン");
 extern const u8 gUnknown_Debug_083F81BA[13]; // = _("{COLOR RED}あいての　ポケモン");
+extern const u8 gUnknown_Debug_083F81C7[15]; // = _("たいせんモードを　えらんでね");
+extern const u8 gUnknown_Debug_083F81D6[15]; // = _("{COLOR RED}バトルモード　せんたく");
+extern const u8 gUnknown_Debug_083F81E5[16]; // = _("{COLOR RED}トレーナーAI　せんたく");
 
 extern const struct SpriteSheet stru_83F8828[2];
 extern const struct SpritePalette stru_83F8838[2];
@@ -1081,6 +1094,51 @@ bool8 debug_80C4774(void)
     if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES) != SPECIES_NONE && GetMonData(gEnemyParty + i, MON_DATA_SPECIES) != SPECIES_NONE)
         return TRUE;
     return FALSE;
+}
+
+void debug_80C47BC(u8 taskId)
+{
+    u8 i;
+
+    // u8 sp00[] = _("{COLOR RED}あいての　ポケモン");
+    // u8 sp10[] = _("たいせんモードを　えらんでね");
+    // u8 sp20[] = _("{COLOR RED}バトルモード　せんたく");
+    // u8 sp30[] = _("{COLOR RED}トレーナーAI　せんたく");
+
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F81C7)];
+    u8 sp10[ARRAY_COUNT(gUnknown_Debug_083F81A0)];
+    u8 sp20[ARRAY_COUNT(gUnknown_Debug_083F81D6)];
+    u8 sp30[ARRAY_COUNT(gUnknown_Debug_083F81E5)];
+
+    memcpy(sp00, gUnknown_Debug_083F81C7, sizeof(gUnknown_Debug_083F81C7));
+    memcpy(sp10, gUnknown_Debug_083F81A0, sizeof(gUnknown_Debug_083F81A0));
+    memcpy(sp20, gUnknown_Debug_083F81D6, sizeof(gUnknown_Debug_083F81D6));
+    memcpy(sp30, gUnknown_Debug_083F81E5, sizeof(gUnknown_Debug_083F81E5));
+
+    Menu_DrawStdWindowFrame(0, 16, 29, 19);
+    Menu_PrintText(sp00, 1, 17);
+    Menu_PrintText(sp10, 20, 17);
+
+    Menu_DrawStdWindowFrame(0, 0, 14, 15);
+    Menu_PrintText(sp20, 2, 1);
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_Debug_083F8068); i++)
+        Menu_PrintText(gUnknown_Debug_083F8068[i].text, 2, 2 * i + 3);
+
+    Menu_DrawStdWindowFrame(15, 0, 29, 15);
+    Menu_PrintText(sp30, 17, 1);
+
+    debug_80C4C44(gUnknown_Debug_2038A0C[4]);
+
+    gTasks[taskId].func = debug_80C48A0;
+}
+
+void debug_80C48A0(u8 taskId)
+{
+    debug_80C38E4(2 * gUnknown_Debug_2038A0C[3] + 3, 1, 1, 14, 1);
+    REG_WIN1H = 0x0177;
+    REG_WIN1V = 0x017F;
+    gTasks[taskId].func = debug_80C4900;
 }
 
 #endif // DEBUG
