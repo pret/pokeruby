@@ -1,5 +1,6 @@
 #if DEBUG
 #include "global.h"
+#include "ewram.h"
 #include "gba/flash_internal.h"
 #include "constants/species.h"
 #include "constants/songs.h"
@@ -20,15 +21,22 @@
 #include "pokedex.h"
 #include "load_save.h"
 #include "pokemon_storage_system.h"
+#include "battle.h"
 
 EWRAM_DATA u8 gUnknown_Debug_20389EC[0x20] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A0C[0x10] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A1C[4] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
 
-struct WatanabeDebugMenuItem {
+struct WatanabeDebugMenuItem1 {
     const u8 * text;
-    u32 value;
+    u8 battleTypeFlags;
+    u8 unk5;
+};
+
+struct WatanabeDebugMenuItem2 {
+    const u8 * text;
+    u32 mask;
 };
 
 u32 byte_3005E30;
@@ -47,12 +55,15 @@ bool8 debug_80C4774(void);
 void debug_80C47BC(u8 taskId);
 void debug_80C48A0(u8 taskId);
 void debug_80C4900(u8 taskId);
+void debug_80C4A60(u8 taskId);
+void debug_80C4AC4(u8 taskId);
 void debug_80C4C44(u8);
 void debug_80C4D14(u8 taskId);
 void debug_80C4F48(u8 taskId);
 void debug_80C68CC(u16, u8, u8, u8);
 
-extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
+extern const struct WatanabeDebugMenuItem1 gUnknown_Debug_083F8068[5];
+extern const struct WatanabeDebugMenuItem2 gUnknown_Debug_083F80D8[10];
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
 extern const u8 gUnknown_Debug_083F7FD6[4]; // = {0x25, 0x20, 0x01, 0x08};
@@ -1139,6 +1150,127 @@ void debug_80C48A0(u8 taskId)
     REG_WIN1H = 0x0177;
     REG_WIN1V = 0x017F;
     gTasks[taskId].func = debug_80C4900;
+}
+
+void debug_80C4900(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        SetMainCallback2(debug_80C370C);
+        LoadPlayerParty();
+        gSaveBlock2.playerGender = gUnknown_Debug_2038A0C[13];
+        gBattleTypeFlags = 0;
+        gUnknown_02023A14_50 = 0;
+        gTasks[taskId].func = debug_80C373C;
+    }
+    else if (gMain.newKeys & START_BUTTON || gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gBattleTypeFlags = gUnknown_Debug_083F8068[gUnknown_Debug_2038A0C[3]].battleTypeFlags;
+        gUnknown_02023A14_50 = 8;
+        gUnknown_Debug_2038A0C[12] = gUnknown_Debug_083F8068[gUnknown_Debug_2038A0C[3]].unk5;
+        if (gUnknown_Debug_2038A0C[3] == 1 || gUnknown_Debug_2038A0C[3] == 2)
+        {
+            debug_80C38E4(0, 1, 1, 14, 0);
+            gTasks[taskId].func = debug_80C4A60;
+        }
+        else
+        {
+            gTasks[taskId].func = debug_80C4F48;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A0C[3] > 0)
+    {
+        gUnknown_Debug_2038A0C[3]--;
+        gTasks[taskId].func = debug_80C48A0;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[3] < 2)
+    {
+        gUnknown_Debug_2038A0C[3]++;
+        gTasks[taskId].func = debug_80C48A0;
+    }
+}
+
+void debug_80C4A60(u8 taskId)
+{
+    debug_80C38E4(gUnknown_Debug_2038A0C[5] * 2 + 3, 16, 1, 14, 1);
+    REG_WIN1H = 0x79EF;
+    REG_WIN1V = 0x017F;
+    gTasks[taskId].func = debug_80C4AC4;
+}
+
+struct WatanabeEwram17000 {
+    u8 fill0;
+    u8 unk1_0:4;
+    u8 unk1_4:1;
+    u8 unk1_5:3;
+    u8 unk2;
+    u8 unk3;
+    u8 fill4[5];
+    u8 unk9;
+    u8 unkA;
+    u8 unkB;
+    u8 unkC;
+};
+
+#define eWatanabe17000 (*(struct WatanabeEwram17000 *)(gSharedMem + 0x17000))
+
+void debug_80C4AC4(u8 taskId)
+{
+    u8 r1 = gUnknown_Debug_2038A0C[4] + gUnknown_Debug_2038A0C[5];
+    
+    if (gMain.newKeys & A_BUTTON)
+    {
+        u32 mask = gUnknown_Debug_083F80D8[r1].mask;
+        if (byte_3005E30 & mask)
+            byte_3005E30 &= (mask ^ 0xFFFF);
+        else
+            byte_3005E30 |= mask;
+        debug_80C4C44(gUnknown_Debug_2038A0C[4]);
+        gTasks[taskId].func = debug_80C4A60;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        debug_80C38E4(0, 16, 1, 14, 0);
+        gTasks[taskId].func = debug_80C48A0;
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        gTrainerBattleOpponent = 0x400;
+        eWatanabe17000.unk1_4 = 0;
+        eWatanabe17000.unk2 = 0xAC;
+        eWatanabe17000.unk3 = 0xFF;
+        eWatanabe17000.unk9 = 0;
+        eWatanabe17000.unkA = 0;
+        eWatanabe17000.unkB = 0;
+        eWatanabe17000.unkC = 0;
+        gTasks[taskId].func = debug_80C4F48;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        if (gUnknown_Debug_2038A0C[5] > 0)
+            gUnknown_Debug_2038A0C[5]--;
+        else if (gUnknown_Debug_2038A0C[4] > 0)
+        {
+            gUnknown_Debug_2038A0C[4]--;
+            debug_80C4C44(gUnknown_Debug_2038A0C[4]);
+        }
+        gTasks[taskId].func = debug_80C4A60;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A0C[5] < 9)
+    {
+        if (gUnknown_Debug_2038A0C[5] < 5)
+            gUnknown_Debug_2038A0C[5]++;
+        else if (gUnknown_Debug_2038A0C[4] < 4)
+        {
+            gUnknown_Debug_2038A0C[4]++;
+            debug_80C4C44(gUnknown_Debug_2038A0C[4]);
+        }
+        gTasks[taskId].func = debug_80C4A60;
+    }
 }
 
 #endif // DEBUG

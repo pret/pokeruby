@@ -56,12 +56,23 @@ gUnknown_Debug_083F8048:: @ 0x83F8048
 gUnknown_Debug_083F8058:: @ 0x83F8058
 	.string "{COLOR BLUE}2VS2つうしんたいせん$"
 
+	.align 2
 gUnknown_Debug_083F8068:: @ 0x83F8068
-	.4byte gUnknown_Debug_083F802E, 0x100
-	.4byte gUnknown_Debug_083F8036, 0x108
-	.4byte gUnknown_Debug_083F803F, 0x209
-	.4byte gUnknown_Debug_083F8048, 0x10A
-	.4byte gUnknown_Debug_083F8058, 0x20B
+	.4byte gUnknown_Debug_083F802E
+	.byte 0x00, 0x01
+	.align 2
+	.4byte gUnknown_Debug_083F8036
+	.byte 0x08, 0x01
+	.align 2
+	.4byte gUnknown_Debug_083F803F
+	.byte 0x09, 0x02
+	.align 2
+	.4byte gUnknown_Debug_083F8048
+	.byte 0x0A, 0x01
+	.align 2
+	.4byte gUnknown_Debug_083F8058
+	.byte 0x0B, 0x02
+	.align 2
 
 gUnknown_Debug_083F8090:: @ 0x83F8090
 	.string "きほんタイプ$"
