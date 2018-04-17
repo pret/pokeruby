@@ -724,7 +724,6 @@ extern u8 gBattleTextBuff1[];
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02023A14_50;
 extern u16 gTrainerBattleOpponent;
-extern u8 gBattleTerrain;
 
 // src/battle_bg.o
 void sub_800D6D4();

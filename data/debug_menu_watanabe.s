@@ -568,7 +568,10 @@ gUnknown_Debug_083F867F:: @ 0x83F867F
 	.string "$"
 
 gUnknown_Debug_083F8687:: @ 0x83F8687
-	.string "てとなにぬね{STRING 255}のはひふへほ$"
+	.string "てとなにぬね{STRING}$"
+
+gUnknown_Debug_083F868F:: @ 0x83F8687
+	.string "のはひふへほ$"
 
 	.align 2
 gUnknown_Debug_083F8698:: @ 0x83F8698
@@ -577,7 +580,7 @@ gUnknown_Debug_083F8698:: @ 0x83F8698
 	.4byte gUnknown_Debug_083F8678, 0x6
 	.4byte gUnknown_Debug_083F867F, 0x6
 	.4byte gUnknown_Debug_083F8687, 0x6
-	.4byte 0x83F868F, 0x6
+	.4byte gUnknown_Debug_083F868F, 0x6
 
 gUnknown_Debug_083F86C8:: @ 0x83F86C8
 	.string "ーーー$"

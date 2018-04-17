@@ -35,8 +35,12 @@ struct WatanabeDebugMenuItem {
 };
 
 struct WatanabeEwram18000 {
-    u8 filler_00[0x64];
+    struct Pokemon pokemon;
     u32 unk64[0x40];
+    u32 unk164;
+    u8 unk168;
+    u8 unk169;
+    u8 unk16a;
 };
 
 #define eWatanabe18000 (*(struct WatanabeEwram18000 *)(gSharedMem + 0x18000))
@@ -47,6 +51,8 @@ EWRAM_DATA struct WatanabeEwram18000 * gUnknown_Debug_2038A1C = NULL;
 EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
 
 u32 byte_3005E30;
+
+extern s8 gBattleTerrain;
 
 void debug_80C3A50(u8 taskId);
 void debug_80C3D2C(u8 taskId);
@@ -78,13 +84,23 @@ void debug_80C5190(u8 taskId);
 void debug_80C51AC(u8 taskId);
 void debug_80C51C8(u8 taskId);
 void debug_80C51E4(u8 taskId);
+void debug_80C53A4(u8 taskId);
+void debug_80C53C0(u8 taskId);
+void debug_80C53F0(u8 taskId);
+void debug_80C55E4(u8 taskId);
+void debug_80C5708(u8 taskId);
 void debug_80C5C94(void);
+void debug_80C5FFC(void);
+void debug_80C627C(u8);
+void debug_80C6384(void);
+void debug_80C643C(void);
 void debug_80C68CC(u16, u8, u8, u8);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[10];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F814C[9];
+extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8698[6];
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
 extern const u8 gUnknown_Debug_083F7FD6[4]; // = {0x25, 0x20, 0x01, 0x08};
@@ -111,6 +127,9 @@ extern const u8 gUnknown_Debug_083F8211[17]; // = _("じぶんの　せいべつ
 extern const u8 gUnknown_Debug_083F8222[13]; // = _("{COLOR RED}せいべつ　せんたく");
 extern const u8 gUnknown_Debug_083F822F[4]; // = _("おとこ");
 extern const u8 gUnknown_Debug_083F8233[4]; // = _("おんな");
+extern const u8 gUnknown_Debug_083F8720[10];
+extern const u8 gUnknown_Debug_083F872A[9];
+extern const u8 gUnknown_Debug_083F8733[37]; // = _("Create　POKひMON　　　LR:Shift　　START:Add");
 
 #define SPRITETAG_WATANABE 0x1000
 
@@ -1576,6 +1595,126 @@ void debug_80C5208(void)
     gUnknown_Debug_2038A1C->unk64[1] = 1;
     gUnknown_Debug_2038A1C->unk64[2] = 1;
     debug_80C5C94();
+}
+
+bool8 debug_80C527C(struct Pokemon *pokemon)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(gPlayerParty + i, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+        {
+            gPlayerParty[i] = *pokemon;
+            gPlayerPartyCount = i + 1;
+            return FALSE;
+        }
+    }
+    SendMonToPC(&gUnknown_Debug_2038A1C->pokemon);
+    return TRUE;
+}
+
+void InitCreatePokemon(void)
+{
+    // u8 sp04[] = _("Create　POKひMON　　　LR:Shift　　START:Add");
+    u8 sp04[ARRAY_COUNT(gUnknown_Debug_083F8733)];
+
+    memcpy(sp04, gUnknown_Debug_083F8733, sizeof(gUnknown_Debug_083F8733));
+
+    debug_80C35DC();
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    REG_BLDCNT = 0x0000;
+    REG_BLDALPHA = 0x0000;
+    REG_BLDY = 0x0000;
+
+    {
+        u16 imeBak = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = imeBak;
+    }
+
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+
+    SetVBlankCallback(debug_80C3758);
+    SetMainCallback2(debug_80C370C);
+
+    Menu_DrawStdWindowFrame(0, 0, 29, 3);
+    Menu_PrintText(sp04, 1, 1);
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON;
+    CreateTask(debug_80C53A4, 0);
+    debug_80C5208();
+    gUnknown_Debug_2038A1C->unk168 = 0;
+    gUnknown_Debug_2038A1C->unk169 = 0;
+}
+
+void debug_80C53A4(u8 taskId)
+{
+    gTasks[taskId].func = debug_80C53C0;
+}
+
+void debug_80C53C0(u8 taskId)
+{
+    debug_80C6384();
+    debug_80C627C(0);
+    gTasks[taskId].func = debug_80C53F0;
+}
+
+void debug_80C53F0(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gUnknown_Debug_2038A1C->unk164 = gUnknown_Debug_2038A1C->unk64[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]];
+        gUnknown_Debug_2038A1C->unk16a = 0;
+        debug_80C643C();
+        gTasks[taskId].func = debug_80C55E4;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        SetMainCallback2(debug_80C370C);
+        gTasks[taskId].func = debug_80C373C;
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        bool8 r4;
+        PlaySE(SE_SELECT);
+        debug_80C5FFC();
+        r4 = debug_80C527C(&gUnknown_Debug_2038A1C->pokemon);
+        Menu_DrawStdWindowFrame(3, 8, 26, 11);
+        if (r4)
+            Menu_PrintText(gUnknown_Debug_083F872A, 4, 9);
+        else
+            Menu_PrintText(gUnknown_Debug_083F8720, 4, 9);
+        gTasks[taskId].func = debug_80C5708;
+    }
+    else if (gMain.newKeys & SELECT_BUTTON)
+    {
+        u32 r4 = gUnknown_Debug_2038A1C->unk64[0];
+        GetSetPokedexFlag(r4, 2);
+        GetSetPokedexFlag(r4, 3);
+        PlaySE(SE_SELECT);
+    }
+    else if (gMain.newKeys & DPAD_UP)
+    {
+        debug_80C627C(2);
+    }
+    else if (gMain.newKeys & DPAD_DOWN)
+    {
+        debug_80C627C(1);
+    }
+    else if (gMain.newKeys & L_BUTTON && gUnknown_Debug_2038A1C->unk168 > 0)
+    {
+        gUnknown_Debug_2038A1C->unk168--;
+        gUnknown_Debug_2038A1C->unk169 = 0;
+        gTasks[taskId].func = debug_80C53C0;
+    }
+    else if (gMain.newKeys & R_BUTTON && gUnknown_Debug_2038A1C->unk168 < 5)
+    {
+        gUnknown_Debug_2038A1C->unk168++;
+        gUnknown_Debug_2038A1C->unk169 = 0;
+        gTasks[taskId].func = debug_80C53C0;
+    }
 }
 
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
