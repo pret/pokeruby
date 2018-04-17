@@ -589,6 +589,7 @@ SECTIONS {
         src/berry.o(.rodata);
         src/debug/watanabe_debug_menu.o(.rodata);
         data/debug_menu_watanabe.o(.rodata);
+        src/debug/watanabe_debug_menu.o(.data);
         src/script_menu.o(.rodata);
         src/naming_screen.o(.rodata);
         src/money.o(.rodata);

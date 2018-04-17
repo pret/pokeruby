@@ -716,43 +716,4 @@ gUnknown_Debug_083F8815::
     .byte 0x20
     .byte 0x21
 
-	.align 2
-stru_83F8828::
-	obj_tiles byte_83F88EC, 0x800, 0x1000
-	null_obj_tiles
-
-stru_83F8838::
-	obj_pal word_83F888C, 0x1000
-	null_obj_pal
-
-gOamData_83F8848:
-	.2byte 0x00a0
-	.2byte 0x0000
-	.2byte 0x0000
-
-	.align 2
-gSpriteAnim_83F8850:
-    obj_image_anim_frame 38, 30
-    obj_image_anim_end
-
-gSpriteAnim_83F8858:
-    obj_image_anim_frame 39, 30
-    obj_image_anim_end
-
-gSpriteAnim_83F8860:
-    obj_image_anim_frame 40, 30
-    obj_image_anim_end
-
-gSpriteAnimTable_83F8868::
-	.4byte gSpriteAnim_83F8850, gSpriteAnim_83F8858, gSpriteAnim_83F8860
-
-gSpriteTemplate_83F8874::
-	spr_template 0x1000, 0x1000, gOamData_83F8848, gSpriteAnimTable_83F8868, 0, gDummySpriteAffineAnimTable, debug_80C7584
-
-word_83F888C::
-	.incbin "graphics/debug/sprite_browser.gbapal"
-
-byte_83F88EC::
-	.incbin "graphics/debug/sprite_browser.4bpp"
-
 	.endif
