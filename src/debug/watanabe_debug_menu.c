@@ -104,6 +104,8 @@ void debug_80C53F0(u8 taskId);
 void debug_80C55E4(u8 taskId);
 void debug_80C5708(u8 taskId);
 void debug_80C5C94(void);
+void debug_80C5DEC(void);
+void debug_80C5EF4(void);
 void debug_80C5FFC(void);
 void debug_80C627C(u8);
 void debug_80C6384(void);
@@ -1901,6 +1903,111 @@ u8 debug_80C5738(u8 * a0, u8 a1, u8 a2)
             break;
     }
     return 0;
+}
+
+u32 debug_80C5B60(u8 a0)
+{
+    return gUnknown_Debug_2038A1C->unk64[a0];
+}
+
+void debug_80C5B74(u32 a0, u8 a1)
+{
+    switch (a1)
+    {
+        default:
+            gUnknown_Debug_2038A1C->unk64[a1] = a0;
+            break;
+        case 0:
+        case 3:
+        case 4:
+            gUnknown_Debug_2038A1C->unk64[a1] = a0;
+            debug_80C5C94();
+            break;
+        case 1:
+            gUnknown_Debug_2038A1C->unk64[a1] = a0;
+            gUnknown_Debug_2038A1C->unk64[2] = gExperienceTables[gBaseStats[NationalPokedexNumToSpecies(gUnknown_Debug_2038A1C->unk64[0])].growthRate][a0];
+            debug_80C5C94();
+            break;
+        case 2:
+            gUnknown_Debug_2038A1C->unk64[a1] = a0;
+            debug_80C5DEC();
+            break;
+        case 13 ... 24:
+            gUnknown_Debug_2038A1C->unk64[a1] = a0;
+            debug_80C5EF4();
+            break;
+    }
+}
+
+void debug_80C5C94(void)
+{
+    u32 ivs = gUnknown_Debug_2038A1C->unk64[13] & 0x1f;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[15] & 0x1f) << 5;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[17] & 0x1f) << 10;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[19] & 0x1f) << 15;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[21] & 0x1f) << 20;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[23] & 0x1f) << 25;
+    CreateMon(&gUnknown_Debug_2038A1C->pokemon, NationalPokedexNumToSpecies(gUnknown_Debug_2038A1C->unk64[0]), gUnknown_Debug_2038A1C->unk64[1], ivs, TRUE, gUnknown_Debug_2038A1C->unk64[4], TRUE, gUnknown_Debug_2038A1C->unk64[3]);
+    gUnknown_Debug_2038A1C->unk64[5] = (u8)(GetMonGender(&gUnknown_Debug_2038A1C->pokemon) + 2);
+    gUnknown_Debug_2038A1C->unk64[6] = GetNature(&gUnknown_Debug_2038A1C->pokemon);
+    gUnknown_Debug_2038A1C->unk64[7] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE1);
+    gUnknown_Debug_2038A1C->unk64[8] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE2);
+    gUnknown_Debug_2038A1C->unk64[9] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE3);
+    gUnknown_Debug_2038A1C->unk64[10] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE4);
+    gUnknown_Debug_2038A1C->unk64[2] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_EXP);
+    gUnknown_Debug_2038A1C->unk64[35] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MAX_HP);
+    gUnknown_Debug_2038A1C->unk64[36] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK);
+    gUnknown_Debug_2038A1C->unk64[37] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF);
+    gUnknown_Debug_2038A1C->unk64[38] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED);
+    gUnknown_Debug_2038A1C->unk64[39] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK);
+    gUnknown_Debug_2038A1C->unk64[40] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF);
+}
+
+void debug_80C5DEC(void)
+{
+    u32 zero = 0;
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_EXP, gUnknown_Debug_2038A1C->unk64 + 2);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE1, &zero);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE2, &zero);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE3, &zero);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE4, &zero);
+    CalculateMonStats(&gUnknown_Debug_2038A1C->pokemon);
+    GiveMonInitialMoveset(&gUnknown_Debug_2038A1C->pokemon);
+    gUnknown_Debug_2038A1C->unk64[1] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_LEVEL);
+    gUnknown_Debug_2038A1C->unk64[7] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE1);
+    gUnknown_Debug_2038A1C->unk64[8] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE2);
+    gUnknown_Debug_2038A1C->unk64[9] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE3);
+    gUnknown_Debug_2038A1C->unk64[10] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MOVE4);
+    gUnknown_Debug_2038A1C->unk64[35] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MAX_HP);
+    gUnknown_Debug_2038A1C->unk64[36] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK);
+    gUnknown_Debug_2038A1C->unk64[37] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF);
+    gUnknown_Debug_2038A1C->unk64[38] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED);
+    gUnknown_Debug_2038A1C->unk64[39] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK);
+    gUnknown_Debug_2038A1C->unk64[40] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF);
+}
+
+void debug_80C5EF4(void)
+{
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_HP_IV, gUnknown_Debug_2038A1C->unk64 + 13);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_HP_EV, gUnknown_Debug_2038A1C->unk64 + 14);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK_IV, gUnknown_Debug_2038A1C->unk64 + 15);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK_EV, gUnknown_Debug_2038A1C->unk64 + 16);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF_IV, gUnknown_Debug_2038A1C->unk64 + 17);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF_EV, gUnknown_Debug_2038A1C->unk64 + 18);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED_IV, gUnknown_Debug_2038A1C->unk64 + 19);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED_EV, gUnknown_Debug_2038A1C->unk64 + 20);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK_IV, gUnknown_Debug_2038A1C->unk64 + 21);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK_EV, gUnknown_Debug_2038A1C->unk64 + 22);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF_IV, gUnknown_Debug_2038A1C->unk64 + 23);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF_EV, gUnknown_Debug_2038A1C->unk64 + 24);
+    CalculateMonStats(&gUnknown_Debug_2038A1C->pokemon);
+    gUnknown_Debug_2038A1C->unk64[35] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MAX_HP);
+    gUnknown_Debug_2038A1C->unk64[36] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK);
+    gUnknown_Debug_2038A1C->unk64[37] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF);
+    gUnknown_Debug_2038A1C->unk64[38] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED);
+    gUnknown_Debug_2038A1C->unk64[39] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK);
+    gUnknown_Debug_2038A1C->unk64[40] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF);
+
 }
 
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
