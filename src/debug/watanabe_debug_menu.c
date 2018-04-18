@@ -3,6 +3,7 @@
 #include "ewram.h"
 #include "random.h"
 #include "gba/flash_internal.h"
+#include "constants/items.h"
 #include "constants/species.h"
 #include "constants/songs.h"
 #include "debug.h"
@@ -24,6 +25,14 @@
 #include "pokemon_storage_system.h"
 #include "battle.h"
 #include "battle_bg.h"
+#include "item.h"
+#include "pokemon_summary_screen.h"
+
+struct WatanabeDebugMenuItemSubstruct {
+    u32 unk0;
+    u8 fill4[5];
+    u8 unk9;
+};
 
 struct WatanabeDebugMenuItem {
     const u8 * text;
@@ -31,6 +40,7 @@ struct WatanabeDebugMenuItem {
         u8 type1[2];
         u32 type2;
         u8 type3;
+        const struct WatanabeDebugMenuItemSubstruct *type4;
     } data;
 };
 
@@ -41,6 +51,10 @@ struct WatanabeEwram18000 {
     u8 unk168;
     u8 unk169;
     u8 unk16a;
+    u8 unk16b;
+    u8 unk16c;
+    u8 unk16d;
+    u8 unk16e[256];
 };
 
 #define eWatanabe18000 (*(struct WatanabeEwram18000 *)(gSharedMem + 0x18000))
@@ -94,13 +108,18 @@ void debug_80C5FFC(void);
 void debug_80C627C(u8);
 void debug_80C6384(void);
 void debug_80C643C(void);
+void debug_80C6544(u8);
+void debug_80C689C(u8 *, const u8 *, u8);
+void debug_80C6678(u8 *, u32, u8, u8);
 void debug_80C68CC(u16, u8, u8, u8);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[10];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F814C[9];
+extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8554[35];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8698[6];
+extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F86E8[7];
 
 extern const u8 gUnknown_Debug_083F7FD4[2]; // = _("▶");
 extern const u8 gUnknown_Debug_083F7FD6[4]; // = {0x25, 0x20, 0x01, 0x08};
@@ -130,6 +149,17 @@ extern const u8 gUnknown_Debug_083F8233[4]; // = _("おんな");
 extern const u8 gUnknown_Debug_083F8720[10];
 extern const u8 gUnknown_Debug_083F872A[9];
 extern const u8 gUnknown_Debug_083F8733[37]; // = _("Create　POKひMON　　　LR:Shift　　START:Add");
+extern const u8 gUnknown_Debug_083F850A[10]; // = _("{COLOR RED}HP　　");
+extern const u8 gUnknown_Debug_083F8514[8]; // = _("{COLOR RED}ATK　");
+extern const u8 gUnknown_Debug_083F851C[8]; // = _("{COLOR RED}DEF　");
+extern const u8 gUnknown_Debug_083F8524[9]; // = _("{COLOR RED}SPEED");
+extern const u8 gUnknown_Debug_083F852D[10]; // = _("{COLOR RED}SP。ATK");
+extern const u8 gUnknown_Debug_083F8537[10]; // = _("{COLOR RED}SP。DEF");
+extern const u8 gUnknown_Debug_083F8541[3]; // = _("なし");
+extern const u8 gUnknown_Debug_083F8544[2]; // = _("♂");
+extern const u8 gUnknown_Debug_083F8546[2]; // = _("♀");
+extern const u8 gUnknown_Debug_083F854A[3]; // = _("ON");
+extern const u8 gUnknown_Debug_083F854D[4]; // = _("OFF");
 
 #define SPRITETAG_WATANABE 0x1000
 
@@ -1715,6 +1745,162 @@ void debug_80C53F0(u8 taskId)
         gUnknown_Debug_2038A1C->unk169 = 0;
         gTasks[taskId].func = debug_80C53C0;
     }
+}
+
+void debug_80C55E4(u8 taskId)
+{
+    u8 r7 = gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169];
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].func = debug_80C53C0;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gUnknown_Debug_2038A1C->unk64[r7] = gUnknown_Debug_2038A1C->unk164;
+        gTasks[taskId].func = debug_80C53C0;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+    {
+        debug_80C6544(1);
+        debug_80C643C();
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+    {
+        debug_80C6544(2);
+        debug_80C643C();
+    }
+    else if (gUnknown_Debug_083F8554[r7].data.type4->unk9 != 0xFF)
+    {
+        if (gMain.newKeys & DPAD_LEFT && gUnknown_Debug_2038A1C->unk16a < gUnknown_Debug_083F8554[r7].data.type4->unk9 - 1)
+        {
+            gUnknown_Debug_2038A1C->unk16a++;
+            debug_80C643C();
+        }
+        else if (gMain.newKeys & DPAD_RIGHT && gUnknown_Debug_2038A1C->unk16a > 0)
+        {
+            gUnknown_Debug_2038A1C->unk16a--;
+            debug_80C643C();
+        }
+    }
+}
+
+void debug_80C5708(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gTasks[taskId].func = debug_80C53C0;
+    }
+}
+
+u8 debug_80C5738(u8 * a0, u8 a1, u8 a2)
+{
+    u16 i;
+    u8 r5;
+    u8 r2;
+
+    if (a1 == 0xfe)
+    {
+        debug_80C689C(a0, gUnknown_Debug_083F850A, 7);
+        debug_80C6678(a0 + 7, gUnknown_Debug_2038A1C->unk64[35], 3, 1);
+        a0[19] = CHAR_SPACE;
+        a0[20] = CHAR_SPACE;
+        debug_80C689C(a0 + 21, gUnknown_Debug_083F8514, 7);
+        debug_80C6678(a0 + 28, gUnknown_Debug_2038A1C->unk64[36], 3, 1);
+        a0[40] = CHAR_SPACE;
+        a0[41] = CHAR_SPACE;
+        debug_80C689C(a0 + 42, gUnknown_Debug_083F851C, 9);
+        debug_80C6678(a0 + 49, gUnknown_Debug_2038A1C->unk64[37], 3, 1);
+        return 0;
+    }
+    if (a1 == 0xfd)
+    {
+        debug_80C689C(a0, gUnknown_Debug_083F8524, 9);
+        debug_80C6678(a0 + 9, gUnknown_Debug_2038A1C->unk64[38], 3, 1);
+        a0[21] = CHAR_SPACE;
+        a0[22] = CHAR_SPACE;
+        debug_80C689C(a0 + 23, gUnknown_Debug_083F852D, 9);
+        debug_80C6678(a0 + 32, gUnknown_Debug_2038A1C->unk64[39], 3, 1);
+        a0[44] = CHAR_SPACE;
+        a0[45] = CHAR_SPACE;
+        debug_80C689C(a0 + 46, gUnknown_Debug_083F8537, 9);
+        debug_80C6678(a0 + 55, gUnknown_Debug_2038A1C->unk64[40], 3, 1);
+        return 0;
+    }
+    for (i = 0; i < 12; i++)
+        a0[i] = CHAR_SPACE;
+    debug_80C689C(a0, gUnknown_Debug_083F8554[a1].text, 11);
+    for (i = 12; i < 256; i++)
+        a0[i] = EOS;
+    r2 = gUnknown_Debug_083F8554[a1].data.type4->unk9;
+    r5 = r2 * 4;
+    switch (a1)
+    {
+        default:
+            a0[0] = EOS;
+            break;
+        case 0:
+            debug_80C6678(a0 + 10, gUnknown_Debug_2038A1C->unk64[a1], r2, a2);
+            a0[10 + r5] = CHAR_SPACE;
+            a0[11 + r5] = EXT_CTRL_CODE_BEGIN;
+            a0[12 + r5] = 0x01;
+            a0[13 + r5] = a2;
+            debug_80C689C(a0 + 14 + r5, gSpeciesNames[NationalPokedexNumToSpecies(gUnknown_Debug_2038A1C->unk64[a1])], 10);
+            break;
+        case 5:
+            switch (gUnknown_Debug_2038A1C->unk64[a1])
+            {
+                case 0:
+                    debug_80C689C(a0 + 10, gUnknown_Debug_083F8546, 2);
+                    break;
+                case 1:
+                    debug_80C689C(a0 + 10, gUnknown_Debug_083F8541, 2);
+                    break;
+                case 2:
+                    debug_80C689C(a0 + 10, gUnknown_Debug_083F8544, 2);
+                    break;
+            }
+            break;
+        case 7 ... 10:
+            debug_80C6678(a0 + 10, gUnknown_Debug_2038A1C->unk64[a1], r2, a2);
+            a0[10 + r5] = CHAR_SPACE;
+            a0[11 + r5] = EXT_CTRL_CODE_BEGIN;
+            a0[12 + r5] = 0x01;
+            a0[13 + r5] = a2;
+            debug_80C689C(a0 + 14 + r5, gMoveNames[gUnknown_Debug_2038A1C->unk64[a1]], 12);
+            break;
+        case 11:
+            debug_80C6678(a0 + 10, gUnknown_Debug_2038A1C->unk64[a1], r2, a2);
+            a0[10 + r5] = CHAR_SPACE;
+            a0[11 + r5] = EXT_CTRL_CODE_BEGIN;
+            a0[12 + r5] = 0x01;
+            a0[13 + r5] = a2;
+            if (gUnknown_Debug_2038A1C->unk64[a1] != ITEM_NONE)
+                debug_80C689C(a0 + 14 + r5, ItemId_GetName(gUnknown_Debug_2038A1C->unk64[a1]), 9);
+            else
+                debug_80C689C(a0 + 14 + r5, gUnknown_Debug_083F8541, 9);
+            break;
+        case 12:
+            a0 += 12;
+            debug_80C689C(a0, gAbilityNames[GetAbilityBySpecies(NationalPokedexNumToSpecies(gUnknown_Debug_2038A1C->unk64[0]), gUnknown_Debug_2038A1C->unk64[a1])], 12);
+            break;
+        case 34:
+            debug_80C689C(a0 + 10, gUnknown_Debug_083F86E8[gUnknown_Debug_2038A1C->unk64[a1]].text, 4);
+            break;
+        case 1 ... 4:
+        case 13 ... 32:
+            debug_80C6678(a0 + 12, gUnknown_Debug_2038A1C->unk64[a1], r2, a2);
+            break;
+        case 33:
+            if (gUnknown_Debug_2038A1C->unk64[a1])
+                debug_80C689C(a0 + 10, gUnknown_Debug_083F854A, 4);
+            else
+                debug_80C689C(a0 + 10, gUnknown_Debug_083F854D, 4);
+            break;
+        case 6:
+            debug_80C689C(a0 + 10, gNatureNames[gUnknown_Debug_2038A1C->unk64[a1]], 5);
+            break;
+    }
+    return 0;
 }
 
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
