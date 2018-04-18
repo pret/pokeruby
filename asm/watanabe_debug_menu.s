@@ -5,297 +5,6 @@
 
 	.text
 
-	thumb_func_start debug_80C5FFC
-debug_80C5FFC:
-	push	{r4, r5, r6, r7, lr}
-	add	sp, sp, #0xffffffe0
-	ldr	r1, ._578       @ gUnknown_Debug_083F8758
-	add	r0, sp, #0x10
-	mov	r2, #0x4
-	bl	memcpy
-	add	r7, sp, #0x14
-	ldr	r1, ._578 + 4   @ gUnknown_Debug_083F875C
-	add	r0, r7, #0
-	mov	r2, #0x8
-	bl	memcpy
-	ldr	r5, ._578 + 8   @ gUnknown_Debug_2038A1C
-	ldr	r2, [r5]
-	add	r0, r2, #0
-	add	r0, r0, #0x98
-	ldr	r4, [r0]
-	mov	r1, #0x1f
-	and	r4, r4, r1
-	add	r0, r0, #0x8
-	ldr	r0, [r0]
-	and	r0, r0, r1
-	lsl	r0, r0, #0x5
-	orr	r4, r4, r0
-	add	r0, r2, #0
-	add	r0, r0, #0xa8
-	ldr	r0, [r0]
-	and	r0, r0, r1
-	lsl	r0, r0, #0xa
-	orr	r4, r4, r0
-	add	r0, r2, #0
-	add	r0, r0, #0xb0
-	ldr	r0, [r0]
-	and	r0, r0, r1
-	lsl	r0, r0, #0xf
-	orr	r4, r4, r0
-	add	r0, r2, #0
-	add	r0, r0, #0xb8
-	ldr	r0, [r0]
-	and	r0, r0, r1
-	lsl	r0, r0, #0x14
-	orr	r4, r4, r0
-	add	r0, r2, #0
-	add	r0, r0, #0xc0
-	ldr	r0, [r0]
-	and	r0, r0, r1
-	lsl	r0, r0, #0x19
-	orr	r4, r4, r0
-	ldr	r0, [r2, #0x64]
-	lsl	r0, r0, #0x10
-	lsr	r0, r0, #0x10
-	bl	NationalPokedexNumToSpecies
-	add	r1, r0, #0
-	lsl	r1, r1, #0x10
-	lsr	r1, r1, #0x10
-	ldr	r0, [r5]
-	ldr	r2, [r0, #0x68]
-	lsl	r2, r2, #0x18
-	lsr	r2, r2, #0x18
-	lsl	r4, r4, #0x18
-	lsr	r4, r4, #0x18
-	mov	r6, #0x1
-	str	r6, [sp]
-	ldr	r3, [r0, #0x74]
-	str	r3, [sp, #0x4]
-	str	r6, [sp, #0x8]
-	ldr	r3, [r0, #0x70]
-	str	r3, [sp, #0xc]
-	add	r3, r4, #0
-	bl	CreateMon
-	ldr	r2, [r5]
-	add	r0, r2, #0
-	add	r0, r0, #0x80
-	ldr	r0, [r0]
-	cmp	r0, #0
-	beq	._573	@cond_branch
-	lsl	r1, r0, #0x10
-	lsr	r1, r1, #0x10
-	add	r0, r2, #0
-	mov	r2, #0x0
-	bl	SetMonMoveSlot
-._573:
-	ldr	r2, [r5]
-	add	r0, r2, #0
-	add	r0, r0, #0x84
-	ldr	r0, [r0]
-	cmp	r0, #0
-	beq	._574	@cond_branch
-	lsl	r1, r0, #0x10
-	lsr	r1, r1, #0x10
-	add	r0, r2, #0
-	mov	r2, #0x1
-	bl	SetMonMoveSlot
-._574:
-	ldr	r2, [r5]
-	add	r0, r2, #0
-	add	r0, r0, #0x88
-	ldr	r0, [r0]
-	cmp	r0, #0
-	beq	._575	@cond_branch
-	lsl	r1, r0, #0x10
-	lsr	r1, r1, #0x10
-	add	r0, r2, #0
-	mov	r2, #0x2
-	bl	SetMonMoveSlot
-._575:
-	ldr	r2, [r5]
-	add	r0, r2, #0
-	add	r0, r0, #0x8c
-	ldr	r0, [r0]
-	cmp	r0, #0
-	beq	._576	@cond_branch
-	lsl	r1, r0, #0x10
-	lsr	r1, r1, #0x10
-	add	r0, r2, #0
-	mov	r2, #0x3
-	bl	SetMonMoveSlot
-._576:
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0x6c
-	mov	r1, #0x19
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0x98
-	mov	r1, #0x27
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0x9c
-	mov	r1, #0x1a
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xa0
-	mov	r1, #0x28
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xa4
-	mov	r1, #0x1b
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xa8
-	mov	r1, #0x29
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xac
-	mov	r1, #0x1c
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xb0
-	mov	r1, #0x2a
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xb4
-	mov	r1, #0x1d
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xb8
-	mov	r1, #0x2b
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xbc
-	mov	r1, #0x1e
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xc0
-	mov	r1, #0x2c
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xc4
-	mov	r1, #0x1f
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xc8
-	mov	r1, #0x16
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xcc
-	mov	r1, #0x17
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xd0
-	mov	r1, #0x18
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xd4
-	mov	r1, #0x21
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xd8
-	mov	r1, #0x2f
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xdc
-	mov	r1, #0x30
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xe0
-	mov	r1, #0x20
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xe4
-	mov	r1, #0x22
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0x90
-	mov	r1, #0xc
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0x94
-	mov	r1, #0x2e
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r1, r0, #0
-	add	r1, r1, #0xec
-	ldr	r2, [r1]
-	lsl	r2, r2, #0x3
-	ldr	r1, ._578 + 12  @ gUnknown_Debug_083F86E8
-	add	r2, r2, r1
-	mov	r1, #0x37
-	bl	SetMonData
-	ldr	r0, [r5]
-	add	r2, r0, #0
-	add	r2, r2, #0xe8
-	mov	r1, #0x2d
-	bl	SetMonData
-	ldr	r1, [r5]
-	add	r0, r1, #0
-	add	r0, r0, #0xe8
-	ldr	r0, [r0]
-	cmp	r0, #0
-	beq	._577	@cond_branch
-	add	r0, r1, #0
-	mov	r1, #0x2
-	add	r2, sp, #0x10
-	bl	SetMonData
-	add	r2, sp, #0x1c
-	strb	r6, [r2]
-	ldr	r0, [r5]
-	mov	r1, #0x3
-	bl	SetMonData
-._577:
-	ldr	r0, [r5]
-	mov	r1, #0x7
-	add	r2, r7, #0
-	bl	SetMonData
-	mov	r2, sp
-	add	r2, r2, #0x1e
-	mov	r0, #0xff
-	strh	r0, [r2]
-	ldr	r0, [r5]
-	mov	r1, #0x23
-	bl	SetMonData
-	ldr	r0, [r5]
-	bl	CalculateMonStats
-	add	sp, sp, #0x20
-	pop	{r4, r5, r6, r7}
-	pop	{r0}
-	bx	r0
-._579:
-	.align	2, 0
-._578:
-	.word	gUnknown_Debug_083F8758
-	.word	gUnknown_Debug_083F875C
-	.word	gUnknown_Debug_2038A1C
-	.word	gUnknown_Debug_083F86E8+0x4
-
-	thumb_func_end debug_80C5FFC
-
 	thumb_func_start debug_80C627C
 debug_80C627C:
 	push	{r4, r5, r6, lr}
@@ -2054,7 +1763,7 @@ debug_80C6FA8:
 	cmp	r0, #0xd
 	bhi	._689	@cond_branch
 	lsl	r0, r0, #0x1
-	ldr	r2, ._691 + 4   @ 0x5000102
+	ldr	r2, ._691 + 4   @ PLTT + 0x102
 	add	r0, r0, r2
 	strh	r3, [r0]
 	ldr	r1, [r1]
@@ -2066,7 +1775,7 @@ debug_80C6FA8:
 	.align	2, 0
 ._691:
 	.word	gUnknown_Debug_2038A20
-	.word	0x5000102
+	.word	PLTT + 0x102
 ._689:
 	ldrh	r1, [r4, #0x30]
 	mov	r0, #0x20
@@ -2202,7 +1911,7 @@ debug_80C6FA8:
 	ldr	r0, [r2]
 	ldrb	r1, [r0, #0x7]
 	lsl	r1, r1, #0x1
-	ldr	r2, ._707 + 4   @ 0x5000142
+	ldr	r2, ._707 + 4   @ PLTT + 0x142
 	add	r1, r1, r2
 	ldr	r2, ._707 + 8   @ gUnknown_Debug_083F8790
 	ldrb	r0, [r0, #0x8]
@@ -2219,7 +1928,7 @@ debug_80C6FA8:
 	.align	2, 0
 ._707:
 	.word	gUnknown_Debug_2038A20
-	.word	0x5000142
+	.word	PLTT + 0x142
 	.word	gUnknown_Debug_083F8790
 
 	thumb_func_end debug_80C6FA8

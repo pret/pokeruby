@@ -630,19 +630,19 @@ gUnknown_Debug_083F875C:: @ 0x83F875C
 
 gUnknown_Debug_083F8764::
 	.string " $"
-	.byte 0, 0
 
+	.align 2
 gUnknown_Debug_083F8768::
-	.4byte 0x00000001
-	.4byte 0x0000000a
-    .4byte 0x00000064
-    .4byte 0x000003e8
-    .4byte 0x00002710
-    .4byte 0x000186a0
-    .4byte 0x000f4240
-    .4byte 0x00989680
-	.4byte 0x05f5e100
-	.4byte 0x3b9aca00
+	.4byte 1
+	.4byte 10
+    .4byte 100
+    .4byte 1000
+    .4byte 10000
+    .4byte 100000
+    .4byte 1000000
+    .4byte 10000000
+	.4byte 100000000
+	.4byte 1000000000
 
 gUnknown_Debug_083F8790::
 	.2byte 0x0000

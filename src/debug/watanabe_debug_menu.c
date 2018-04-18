@@ -5,6 +5,7 @@
 #include "gba/flash_internal.h"
 #include "constants/items.h"
 #include "constants/species.h"
+#include "constants/moves.h"
 #include "constants/songs.h"
 #include "debug.h"
 #include "palette.h"
@@ -162,6 +163,8 @@ extern const u8 gUnknown_Debug_083F8544[2]; // = _("♂");
 extern const u8 gUnknown_Debug_083F8546[2]; // = _("♀");
 extern const u8 gUnknown_Debug_083F854A[3]; // = _("ON");
 extern const u8 gUnknown_Debug_083F854D[4]; // = _("OFF");
+extern const u8 gUnknown_Debug_083F8758[4]; // = _("たまご");
+extern const u8 gUnknown_Debug_083F875C[8]; // = _("DebugーG");
 
 #define SPRITETAG_WATANABE 0x1000
 
@@ -2007,7 +2010,80 @@ void debug_80C5EF4(void)
     gUnknown_Debug_2038A1C->unk64[38] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED);
     gUnknown_Debug_2038A1C->unk64[39] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK);
     gUnknown_Debug_2038A1C->unk64[40] = GetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF);
+}
 
+void debug_80C5FFC(void)
+{
+    u32 ivs;
+    // u8 sp10[] = _("たまご");
+    // u8 sp14[] = _("DebugーG");
+
+    u8 sp10[ARRAY_COUNT(gUnknown_Debug_083F8758)];
+    u8 sp14[ARRAY_COUNT(gUnknown_Debug_083F875C)];
+    u8 one;
+    u16 ff;
+
+    memcpy(sp10, gUnknown_Debug_083F8758, sizeof(gUnknown_Debug_083F8758));
+    memcpy(sp14, gUnknown_Debug_083F875C, sizeof(gUnknown_Debug_083F875C));
+
+    ivs = gUnknown_Debug_2038A1C->unk64[13] & 0x1f;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[15] & 0x1f) << 5;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[17] & 0x1f) << 10;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[19] & 0x1f) << 15;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[21] & 0x1f) << 20;
+    ivs |= (gUnknown_Debug_2038A1C->unk64[23] & 0x1f) << 25;
+
+    CreateMon(&gUnknown_Debug_2038A1C->pokemon, NationalPokedexNumToSpecies(gUnknown_Debug_2038A1C->unk64[0]), gUnknown_Debug_2038A1C->unk64[1], ivs, TRUE, gUnknown_Debug_2038A1C->unk64[4], TRUE, gUnknown_Debug_2038A1C->unk64[3]);
+
+    if (gUnknown_Debug_2038A1C->unk64[7] != MOVE_NONE)
+        SetMonMoveSlot(&gUnknown_Debug_2038A1C->pokemon, gUnknown_Debug_2038A1C->unk64[7], 0);
+    if (gUnknown_Debug_2038A1C->unk64[8] != MOVE_NONE)
+        SetMonMoveSlot(&gUnknown_Debug_2038A1C->pokemon, gUnknown_Debug_2038A1C->unk64[8], 1);
+    if (gUnknown_Debug_2038A1C->unk64[9] != MOVE_NONE)
+        SetMonMoveSlot(&gUnknown_Debug_2038A1C->pokemon, gUnknown_Debug_2038A1C->unk64[9], 2);
+    if (gUnknown_Debug_2038A1C->unk64[10] != MOVE_NONE)
+        SetMonMoveSlot(&gUnknown_Debug_2038A1C->pokemon, gUnknown_Debug_2038A1C->unk64[10], 3);
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_EXP, gUnknown_Debug_2038A1C->unk64 + 2);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_HP_IV, gUnknown_Debug_2038A1C->unk64 + 13);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_HP_EV, gUnknown_Debug_2038A1C->unk64 + 14);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK_IV, gUnknown_Debug_2038A1C->unk64 + 15);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ATK_EV, gUnknown_Debug_2038A1C->unk64 + 16);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF_IV, gUnknown_Debug_2038A1C->unk64 + 17);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_DEF_EV, gUnknown_Debug_2038A1C->unk64 + 18);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED_IV, gUnknown_Debug_2038A1C->unk64 + 19);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPEED_EV, gUnknown_Debug_2038A1C->unk64 + 20);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK_IV, gUnknown_Debug_2038A1C->unk64 + 21);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPATK_EV, gUnknown_Debug_2038A1C->unk64 + 22);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF_IV, gUnknown_Debug_2038A1C->unk64 + 23);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SPDEF_EV, gUnknown_Debug_2038A1C->unk64 + 24);
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_COOL, gUnknown_Debug_2038A1C->unk64 + 25);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_BEAUTY, gUnknown_Debug_2038A1C->unk64 + 26);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_CUTE, gUnknown_Debug_2038A1C->unk64 + 27);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SMART, gUnknown_Debug_2038A1C->unk64 + 28);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_TOUGH, gUnknown_Debug_2038A1C->unk64 + 29);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_SHEEN, gUnknown_Debug_2038A1C->unk64 + 30);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_FRIENDSHIP, gUnknown_Debug_2038A1C->unk64 + 31);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_POKERUS, gUnknown_Debug_2038A1C->unk64 + 32);
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_HELD_ITEM, gUnknown_Debug_2038A1C->unk64 + 11);
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_ALT_ABILITY, gUnknown_Debug_2038A1C->unk64 + 12);
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_STATUS, &gUnknown_Debug_083F86E8[gUnknown_Debug_2038A1C->unk64[34]].data.type3);
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_IS_EGG, gUnknown_Debug_2038A1C->unk64 + 33);
+    if (gUnknown_Debug_2038A1C->unk64[33])
+    {
+        SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_NICKNAME, sp10);
+        one = LANGUAGE_JAPANESE;
+        SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_LANGUAGE, &one);
+    }
+
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_OT_NAME, sp14);
+    ff = 0xff;
+    SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MET_LOCATION, &ff);
+    CalculateMonStats(&gUnknown_Debug_2038A1C->pokemon);
 }
 
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
