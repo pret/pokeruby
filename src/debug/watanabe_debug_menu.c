@@ -28,6 +28,7 @@
 #include "battle_bg.h"
 #include "item.h"
 #include "pokemon_summary_screen.h"
+#include "pokemon_icon.h"
 
 struct WatanabeDebugMenuItemSubstruct {
     u32 unk0;
@@ -56,12 +57,26 @@ struct WatanabeEwram18000 {
     u8 unk16b[259];
 };
 
+struct WatanabeEwram18000_2 {
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+    u8 unk6;
+    u8 unk7;
+    u8 unk8;
+    u8 unk9;
+    u8 unkA;
+};
+
 #define eWatanabe18000 (*(struct WatanabeEwram18000 *)(gSharedMem + 0x18000))
+#define eWatanabe18000_2 (*(struct WatanabeEwram18000_2 *)(gSharedMem + 0x18000))
 
 EWRAM_DATA u8 gUnknown_Debug_20389EC[0x20] = { 0 };
 EWRAM_DATA u8 gUnknown_Debug_2038A0C[0x10] = { 0 };
 EWRAM_DATA struct WatanabeEwram18000 * gUnknown_Debug_2038A1C = NULL;
-EWRAM_DATA u8 gUnknown_Debug_2038A20[4] = { 0 };
+EWRAM_DATA struct WatanabeEwram18000_2 * gUnknown_Debug_2038A20 = NULL;
 
 u32 byte_3005E30;
 
@@ -113,6 +128,7 @@ void debug_80C6544(u8);
 void debug_80C689C(u8 *, const u8 *, u8);
 void debug_80C6678(u8 *, u32, u8, u8);
 void debug_80C68CC(u16, u8, u8, u8);
+void debug_80C6B00(u8 taskId);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
@@ -2265,7 +2281,91 @@ void debug_80C689C(u8 * a0, const u8 * a1, u8 a2)
         a0[i] = a1[i];
 }
 
+void debug_80C68CC(u16 a0, u8 a1, u8 a2, u8 a3)
+{
+    u8 sp00[5];
+    u8 i;
+
+    for (i = 0; i < 4; i++)
+        sp00[i] = 0;
+    sp00[4] = EOS;
+
+    switch (a3)
+    {
+        default:
+            sp00[0] = a0 >> 12;
+        case 3:
+            sp00[1] = (a0 & 0x0F00) >> 8;
+        case 2:
+            sp00[2] = (a0 & 0x00F0) >> 4;
+        case 1:
+            sp00[3] = (a0 & 0x000F);
+            break;
+    }
+
+    for (i = 0; i < 4; i++)
+    {
+        if (sp00[i] < 10)
+            sp00[i] += CHAR_0;
+        else
+            sp00[i] += CHAR_A - 10;
+    }
+
+    Menu_PrintText(sp00 + (u8)(4 - a3), a1, a2);
+}
+
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
 u8 byte_83F88EC[] = INCBIN_U8("graphics/debug/sprite_browser.4bpp");
+
+void InitSeePokemonGraphics(void)
+{
+    u16 pal;
+    u8 spriteId;
+    debug_80C35DC();
+    DmaCopy16Defvars(3, byte_83F88EC, BG_SCREEN_ADDR(28), sizeof(byte_83F88EC));
+    LoadPalette(word_83F888C, 0x80, sizeof(word_83F888C));
+    pal = RGB(31, 31, 31);
+    LoadPalette(&pal, 0, sizeof(pal));
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    REG_WIN0H = 0;
+    REG_WIN0V = 0;
+    REG_WIN1H = 0;
+    REG_WIN1V = 0;
+    REG_WININ = 0x3F;
+    REG_WINOUT = 0x1F;
+    REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 0x07;
+    {
+        u16 imeBak = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = imeBak;
+    }
+    SetVBlankCallback(debug_80C3758);
+    SetMainCallback2(debug_80C370C);
+    sub_809D51C();
+    REG_BG0CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(31);
+    REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30);
+    REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
+    CreateTask(debug_80C6B00, 0);
+    gUnknown_Debug_2038A20 = &eWatanabe18000_2;
+    gUnknown_Debug_2038A20->unk0 = 0x115;
+    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->unk3 = 0;
+    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->unk7 = 0;
+    gUnknown_Debug_2038A20->unkA = 0;
+    gUnknown_Debug_2038A20->unk8 = 0;
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
+    gSprites[spriteId].data[0] = 0;
+    StartSpriteAnim(gSprites + spriteId, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
+    gSprites[spriteId].data[0] = 1;
+    StartSpriteAnim(gSprites + spriteId, 1);
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
+    gSprites[spriteId].data[0] = 2;
+    StartSpriteAnim(gSprites + spriteId, 2);
+}
 
 #endif // DEBUG
