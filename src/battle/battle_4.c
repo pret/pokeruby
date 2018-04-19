@@ -10981,11 +10981,11 @@ static void atk73_hpthresholds(void)
         if (result == 0)
             result = 1;
 
-        if (result > 69 || !gBattleMons[opposing_bank].hp)
+        if (result >= 70 || !gBattleMons[opposing_bank].hp)
             gBattleStruct->hpScale = 0;
-        else if (result > 39)
+        else if (result >= 40)
             gBattleStruct->hpScale = 1;
-        else if (result > 9)
+        else if (result >= 10)
             gBattleStruct->hpScale = 2;
         else
             gBattleStruct->hpScale = 3;
