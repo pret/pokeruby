@@ -170,7 +170,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == gHoldEffectToType[i][0]
             && type == gHoldEffectToType[i][1])
         {
-            if (type <= 8)
+            if (type < TYPE_MYSTERY)
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
             else
                 spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
