@@ -43,8 +43,8 @@
 #define TYPE_ENDTABLE   0xFF
 
 // physical/special types
-#define TYPE_IS_PHYSICAL(type) (type < TYPE_MYSTERY)
-#define TYPE_IS_SPECIAL(type) (type > TYPE_MYSTERY)
+#define TYPE_IS_PHYSICAL(type) ((type) < TYPE_MYSTERY)
+#define TYPE_IS_SPECIAL(type) ((type) > TYPE_MYSTERY)
 
 enum
 {
