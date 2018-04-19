@@ -2026,7 +2026,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                  && gBattleMons[gBankAttacker].hp != 0
                  && !gProtectStructs[gBankAttacker].confusionSelfDmg
                  && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-                 && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+                 && (gBattleMoves[move].flags & F_MAKES_CONTACT))
                 {
                     gBattleMoveDamage = gBattleMons[gBankAttacker].maxHP / 16;
                     if (gBattleMoveDamage == 0)
@@ -2043,7 +2043,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    && gBattleMons[gBankAttacker].hp != 0
 		    && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		    && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		    && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+		    && (gBattleMoves[move].flags & F_MAKES_CONTACT))
 		    {
 			do
 			{
@@ -2064,7 +2064,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    && gBattleMons[gBankAttacker].hp != 0
 		    && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		    && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		    && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		    && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		    && (Random() % 10) == 0)
 		    {
 			do
@@ -2088,7 +2088,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT))
 		    {
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
 			BattleScriptPushCursor();
@@ -2103,7 +2103,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (Random() % 3) == 0)
 		    {
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x42;
@@ -2121,7 +2121,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT))
 		    {
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
 			BattleScriptPushCursor();
@@ -2136,7 +2136,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (Random() % 3) == 0)
 		    {
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x45;
@@ -2153,7 +2153,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special))
 		    {
 			gBattleCommunication[MOVE_EFFECT_BYTE] = 0x43;
@@ -2168,7 +2168,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
 		     && (Random() % 3) == 0)
 		    {
@@ -2186,7 +2186,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
 		     && gBattleMons[gBankTarget].hp != 0
 		     && gBattleMons[gBankAttacker].ability != ABILITY_OBLIVIOUS
@@ -2206,7 +2206,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 		    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
 		     && gBattleMons[gBankAttacker].hp != 0
 		     && !gProtectStructs[gBankAttacker].confusionSelfDmg
-		     && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT)
+		     && (gBattleMoves[move].flags & F_MAKES_CONTACT)
 		     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
 		     && gBattleMons[gBankTarget].hp != 0
 		     && (Random() % 3) == 0
@@ -3271,7 +3271,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                 if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                     && (gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_special)
                     && (Random() % 100) < bankQuality
-                    && gBattleMoves[gCurrentMove].flags & FLAG_KINGSROCK_AFFECTED
+                    && gBattleMoves[gCurrentMove].flags & F_AFFECTED_BY_KINGS_ROCK
                     && gBattleMons[gBankTarget].hp)
                 {
                     gBattleCommunication[MOVE_EFFECT_BYTE] = 8;

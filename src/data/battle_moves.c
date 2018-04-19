@@ -1,7 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "pokemon.h"
-#include "constants/battle_constants.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
 
