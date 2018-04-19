@@ -46,4 +46,6 @@ extern const struct PokedexEntry gPokedexEntries[];
 u16 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum);
 u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum);
 
+void sub_8091738(u16, u16, u16);
+
 #endif // GUARD_POKEDEX_H

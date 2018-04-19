@@ -1,5 +1,6 @@
 #if DEBUG
 #include "global.h"
+#include "decompress.h"
 #include "ewram.h"
 #include "random.h"
 #include "gba/flash_internal.h"
@@ -29,6 +30,7 @@
 #include "item.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_icon.h"
+#include "field_effect.h"
 
 struct WatanabeDebugMenuItemSubstruct {
     u32 unk0;
@@ -129,6 +131,8 @@ void debug_80C689C(u8 *, const u8 *, u8);
 void debug_80C6678(u8 *, u32, u8, u8);
 void debug_80C68CC(u16, u8, u8, u8);
 void debug_80C6B00(u8 taskId);
+void debug_80C6CB8(u8 taskId);
+void debug_80C6EE8(u8 taskId);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
@@ -2366,6 +2370,94 @@ void InitSeePokemonGraphics(void)
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6C, 0x74, 0);
     gSprites[spriteId].data[0] = 2;
     StartSpriteAnim(gSprites + spriteId, 2);
+}
+
+extern const u8 gUnknown_Debug_083F8815[18]; // = {0x00, 0x10, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21};
+extern const u8 gUnknown_Debug_083F87D0[];
+extern const u8 gUnknown_Debug_083F87D8[];
+extern const u8 gUnknown_Debug_083F87E0[];
+extern const u8 gUnknown_Debug_083F87F4[];
+extern const u8 gUnknown_Debug_083F8801[];
+
+void debug_80C6B00(u8 taskId)
+{
+    // u8 sp00[] = {0x00, 0x10, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21};
+    u8 i;
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F8815)];
+    memcpy(sp00, gUnknown_Debug_083F8815, sizeof(gUnknown_Debug_083F8815));
+
+    Menu_DrawStdWindowFrame(10, 0, 15, 7);
+    Menu_DrawStdWindowFrame(0, 0, 9, 9);
+    Menu_DrawStdWindowFrame(0, 10, 9, 19);
+    Menu_DrawStdWindowFrame(16, 0, 29, 7);
+    Menu_PrintText(gUnknown_Debug_083F87D0, 17, 1);
+    Menu_PrintText(gUnknown_Debug_083F87D8, 27, 1);
+    Menu_PrintText(gUnknown_Debug_083F87E0, 17, 5);
+
+    Menu_DrawStdWindowFrame(10, 8, 29, 12);
+    for (i = 0; i < 15; i++)
+        ((u16 *)(VRAM + 0xFA56))[i] = 0xA311 + i;
+    for (i = 0; i < 15; i++)
+        ((u16 *)(VRAM + 0xF256))[i] = 0x8301 + i;
+
+    Menu_PrintText(gUnknown_Debug_083F87F4, 20, 10);
+    Menu_DrawStdWindowFrame(10, 13, 29, 19);
+
+    sp00[0] = 0x23;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF396))[i] = 0x9300 + sp00[i];
+    sp00[0] = 0x24;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF3D6))[i] = 0x9300 + sp00[i];
+    sp00[0] = 0x25;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF416))[i] = 0x9300 + sp00[i];
+
+    Menu_PrintText(gUnknown_Debug_083F8801, 15, 17);
+
+    REG_WIN0H = 0x51EF;
+    REG_WIN0V = 0x699F;
+
+    gTasks[taskId].func = debug_80C6CB8;
+}
+
+void debug_80C6CB8(u8 taskId)
+{
+    DecompressPicFromTable_2(gMonFrontPicTable + gUnknown_Debug_2038A20->unk0, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 1);
+    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+
+    DecompressPicFromTable_2(gMonBackPicTable + gUnknown_Debug_2038A20->unk0, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].coords, gMonBackPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[2], gUnknown_Debug_2038A20->unk0);
+    LoadCompressedObjectPalette(gMonPaletteTable + gUnknown_Debug_2038A20->unk0);
+    GetMonSpriteTemplate_803C56C(gUnknown_Debug_2038A20->unk0, 2);
+    gUnknown_Debug_2038A20->unk3 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x78, 0);
+    gSprites[gUnknown_Debug_2038A20->unk3].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->unk3].oam.priority = 0;
+
+    gUnknown_Debug_2038A20->unk4 = CreateMonIcon(gUnknown_Debug_2038A20->unk0, sub_809D62C, 0x68, 0x2C, 0, 0);
+
+    sub_8091738(SpeciesToNationalPokedexNum(gUnknown_Debug_2038A20->unk0), 2, 0x3fc);
+
+    ((u16 *)(VRAM + 0xF858))[0] = 0xF3FC;
+    ((u16 *)(VRAM + 0xF858))[1] = 0xF3FD;
+    ((u16 *)(VRAM + 0xF858))[32] = 0xF3FE;
+    ((u16 *)(VRAM + 0xF858))[33] = 0xF3FF;
+
+    debug_80C3800(gUnknown_Debug_2038A20->unk0, 17, 3);
+    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
+    CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
+
+    gTasks[taskId].func = debug_80C6EE8;
+
+    gUnknown_Debug_2038A20->unk9 = 0;
+    StopCryAndClearCrySongs();
+    PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
 }
 
 #endif // DEBUG
