@@ -31,7 +31,8 @@
 
 struct WatanabeDebugMenuItemSubstruct {
     u32 unk0;
-    u8 fill4[5];
+    u32 unk4;
+    u8 unk8;
     u8 unk9;
 };
 
@@ -52,10 +53,7 @@ struct WatanabeEwram18000 {
     u8 unk168;
     u8 unk169;
     u8 unk16a;
-    u8 unk16b;
-    u8 unk16c;
-    u8 unk16d;
-    u8 unk16e[256];
+    u8 unk16b[259];
 };
 
 #define eWatanabe18000 (*(struct WatanabeEwram18000 *)(gSharedMem + 0x18000))
@@ -165,6 +163,9 @@ extern const u8 gUnknown_Debug_083F854A[3]; // = _("ON");
 extern const u8 gUnknown_Debug_083F854D[4]; // = _("OFF");
 extern const u8 gUnknown_Debug_083F8758[4]; // = _("たまご");
 extern const u8 gUnknown_Debug_083F875C[8]; // = _("DebugーG");
+extern const u8 gUnknown_Debug_083F8764[2]; // = _(" ");
+
+extern const u32 gUnknown_Debug_083F8768[10];
 
 #define SPRITETAG_WATANABE 0x1000
 
@@ -2084,6 +2085,184 @@ void debug_80C5FFC(void)
     ff = 0xff;
     SetMonData(&gUnknown_Debug_2038A1C->pokemon, MON_DATA_MET_LOCATION, &ff);
     CalculateMonStats(&gUnknown_Debug_2038A1C->pokemon);
+}
+
+void debug_80C627C(u8 a0)
+{
+    // u8 sp00[] = _("▶");
+    // u8 sp04[] = _(" ");
+
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F7FD4)];
+    u8 sp04[ARRAY_COUNT(gUnknown_Debug_083F8764)];
+
+    memcpy(sp00, gUnknown_Debug_083F7FD4, sizeof(gUnknown_Debug_083F7FD4));
+    memcpy(sp04, gUnknown_Debug_083F8764, sizeof(gUnknown_Debug_083F8764));
+
+    switch (a0)
+    {
+        case 0:
+            Menu_PrintText(sp00, 1, 2 * gUnknown_Debug_2038A1C->unk169 + 5);
+            break;
+        case 1:
+            if (gUnknown_Debug_2038A1C->unk169 < gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].data.type3 - 1)
+            {
+                Menu_PrintText(sp04, 1, 2 * gUnknown_Debug_2038A1C->unk169 + 5);
+                gUnknown_Debug_2038A1C->unk169++;
+                Menu_PrintText(sp00, 1, 2 * gUnknown_Debug_2038A1C->unk169 + 5);
+            }
+            break;
+        case 2:
+            if (gUnknown_Debug_2038A1C->unk169 > 0)
+            {
+                Menu_PrintText(sp04, 1, 2 * gUnknown_Debug_2038A1C->unk169 + 5);
+                gUnknown_Debug_2038A1C->unk169--;
+                Menu_PrintText(sp00, 1, 2 * gUnknown_Debug_2038A1C->unk169 + 5);
+            }
+            break;
+    }
+}
+
+void debug_80C6384(void)
+{
+    u16 i;
+
+    Menu_DrawStdWindowFrame(0, 4, 29, 19);
+    for (i = 0; gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[i] != EOS; i++)
+    {
+        gUnknown_Debug_2038A1C->unk16b[0] = EXT_CTRL_CODE_BEGIN;
+        gUnknown_Debug_2038A1C->unk16b[1] = 0x01;
+        gUnknown_Debug_2038A1C->unk16b[2] = 0x01;
+        debug_80C5738(gUnknown_Debug_2038A1C->unk16b + 3, gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[i], 1);
+        Menu_PrintText(gUnknown_Debug_2038A1C->unk16b, 2, 2 * i + 5);
+    }
+}
+
+void debug_80C643C(void)
+{
+    u16 i;
+
+    Menu_BlankWindowRect(2, 5, 28, 18);
+    for (i = 0; gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[i] != EOS; i++)
+    {
+        gUnknown_Debug_2038A1C->unk16b[0] = EXT_CTRL_CODE_BEGIN;
+        gUnknown_Debug_2038A1C->unk16b[1] = 0x01;
+        if (i == gUnknown_Debug_2038A1C->unk169)
+        {
+            gUnknown_Debug_2038A1C->unk16b[2] = 0x02;
+            debug_80C5738(gUnknown_Debug_2038A1C->unk16b + 3, gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[i], 2);
+        }
+        else
+        {
+            gUnknown_Debug_2038A1C->unk16b[2] = 0x01;
+            debug_80C5738(gUnknown_Debug_2038A1C->unk16b + 3, gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[i], 1);
+        }
+        Menu_PrintText(gUnknown_Debug_2038A1C->unk16b, 2, 2 * i + 5);
+    }
+}
+
+void debug_80C6544(u8 a0)
+{
+    u32 r7 = debug_80C5B60(gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]);
+    u32 r5 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk0;
+    u32 r4 = gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk4;
+    u32 r3 = gUnknown_Debug_083F8768[gUnknown_Debug_2038A1C->unk16a];
+
+    if (gUnknown_Debug_083F8554[gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]].data.type4->unk8 == 0)
+    {
+        switch (a0)
+        {
+            case 1:
+                if (r7 < r4 - r3)
+                    r7 += r3;
+                else if (r7 < r4)
+                    r7 = r4;
+                else
+                    r7 = r5;
+                break;
+            case 2:
+                if (r7 > r5 + r3)
+                    r7 -= r3;
+                else if (r7 > r5)
+                    r7 = r5;
+                else
+                    r7 = r4;
+                break;
+        }
+    }
+    debug_80C5B74(r7, gUnknown_Debug_083F8698[gUnknown_Debug_2038A1C->unk168].text[gUnknown_Debug_2038A1C->unk169]);
+}
+
+void debug_80C6630(u8 * a0, u8 a1, u8 a2, u8 a3)
+{
+    *a0++ = EXT_CTRL_CODE_BEGIN;
+    *a0++ = 0x01;
+    if (a2 == 2)
+    {
+        if (a3 != gUnknown_Debug_2038A1C->unk16a)
+            *a0 = 0x02;
+        else
+            *a0 = 0x04;
+    }
+    else
+        *a0 = 0x01;
+    a0[1] = a1 + CHAR_0;
+}
+
+void debug_80C6678(u8 * a0, u32 a1, u8 a2, u8 a3)
+{
+    u8 r7 = 0;
+
+    switch (a2)
+    {
+        default:
+        case 10:
+            debug_80C6630(a0 + r7, a1 / 1000000000, a3, 9);
+            a1 %= 1000000000;
+            r7 += 4;
+        case  9:
+            debug_80C6630(a0 + r7, a1 / 100000000, a3, 8);
+            a1 %= 100000000;
+            r7 += 4;
+        case  8:
+            debug_80C6630(a0 + r7, a1 / 10000000, a3, 7);
+            a1 %= 10000000;
+            r7 += 4;
+        case  7:
+            debug_80C6630(a0 + r7, a1 / 1000000, a3, 6);
+            a1 %= 1000000;
+            r7 += 4;
+        case  6:
+            debug_80C6630(a0 + r7, a1 / 100000, a3, 5);
+            a1 %= 100000;
+            r7 += 4;
+        case  5:
+            debug_80C6630(a0 + r7, a1 / 10000, a3, 4);
+            a1 %= 10000;
+            r7 += 4;
+        case  4:
+            debug_80C6630(a0 + r7, a1 / 1000, a3, 3);
+            a1 %= 1000;
+            r7 += 4;
+        case  3:
+            debug_80C6630(a0 + r7, a1 / 100, a3, 2);
+            a1 %= 100;
+            r7 += 4;
+        case  2:
+            debug_80C6630(a0 + r7, a1 / 10, a3, 1);
+            a1 %= 10;
+            r7 += 4;
+        case  1:
+            debug_80C6630(a0 + r7, a1, a3, 0);
+            break;
+    }
+}
+
+void debug_80C689C(u8 * a0, const u8 * a1, u8 a2)
+{
+    u8 i;
+
+    for (i = 0; a1[i] != EOS && i < a2; i++)
+        a0[i] = a1[i];
 }
 
 u16 word_83F888C[] = INCBIN_U16("graphics/debug/sprite_browser.gbapal");
