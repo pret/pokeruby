@@ -460,13 +460,13 @@ u16 HoennToNationalOrder(u16 hoennNum)
 
 u16 SpeciesToCryId(u16 species)
 {
-    if (species <= 250)
+    if (species < SPECIES_OLD_UNOWN_B - 1)
         return species;
 
-    if (species < 276)
-        return 200;
+    if (species <= SPECIES_OLD_UNOWN_Z - 1)
+        return SPECIES_UNOWN - 1;
 
-    return gSpeciesIdToCryId[species - 276];
+    return gSpeciesIdToCryId[species - ((SPECIES_OLD_UNOWN_Z + 1) - 1)];
 }
 
 void unref_sub_803F938(u16 species, u32 personality, u8 *dest)
