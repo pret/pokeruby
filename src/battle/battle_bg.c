@@ -211,7 +211,7 @@ const struct BattleBackground gBattleTerrainTable[] = {
 
 static void sub_800D6C4(void);
 
-void unref_sub_800D684(void)
+void debug_sub_800D684(void)
 {
     u8 spriteId;
     ResetSpriteData();

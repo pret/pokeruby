@@ -70,6 +70,8 @@ struct WatanabeEwram18000_2 {
     u8 unk8;
     u8 unk9;
     u8 unkA;
+    struct PlttData unkC;
+    u16 unk10[16];
 };
 
 #define eWatanabe18000 (*(struct WatanabeEwram18000 *)(gSharedMem + 0x18000))
@@ -133,6 +135,9 @@ void debug_80C68CC(u16, u8, u8, u8);
 void debug_80C6B00(u8 taskId);
 void debug_80C6CB8(u8 taskId);
 void debug_80C6EE8(u8 taskId);
+void debug_80C6FA8(u8 taskId);
+void debug_80C71FC(u8 taskId);
+void debug_80C7294(u8 taskId);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
@@ -184,6 +189,7 @@ extern const u8 gUnknown_Debug_083F854D[4]; // = _("OFF");
 extern const u8 gUnknown_Debug_083F8758[4]; // = _("たまご");
 extern const u8 gUnknown_Debug_083F875C[8]; // = _("DebugーG");
 extern const u8 gUnknown_Debug_083F8764[2]; // = _(" ");
+extern const u8 gUnknown_Debug_083F8813[2]; // = _(":");
 
 extern const u32 gUnknown_Debug_083F8768[10];
 
@@ -1631,7 +1637,7 @@ void debug_80C51E4(u8 taskId)
 {
     sub_80408BC();
     gMain.savedCallback = debug_80C41A8;
-    SetMainCallback2(unref_sub_800D684);
+    SetMainCallback2(debug_sub_800D684);
 }
 
 void debug_80C5208(void)
@@ -2460,4 +2466,382 @@ void debug_80C6CB8(u8 taskId)
     PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
 }
 
+void debug_80C6EE8(u8 taskId)
+{
+    u16 hue;
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
+    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
+    debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
+    Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
+    debug_80C68CC(hue, 14, 10, 4);
+    gTasks[taskId].func = debug_80C6FA8;
+}
+
+extern const u16 gUnknown_Debug_083F8790[32];
+
+#ifdef NONMATCHING
+void debug_80C6FA8(u8 taskId)
+{
+    if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        SetMainCallback2(debug_80C370C);
+        gTasks[taskId].func = debug_80C373C;
+    }
+    else if (gMain.newAndRepeatedKeys & R_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk0 = debug_80C3878(0, gUnknown_Debug_2038A20->unk0);
+        gTasks[taskId].func = debug_80C71FC;
+    }
+    else if (gMain.newAndRepeatedKeys & L_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk0 = debug_80C3878(1, gUnknown_Debug_2038A20->unk0);
+        gTasks[taskId].func = debug_80C71FC;
+    }
+    else if (gMain.newKeys & A_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk5 = 1;
+        REG_WIN0H = 0x51EF;
+        REG_WIN0V = 0x4167;
+        gTasks[taskId].func = debug_80C7294;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT && gUnknown_Debug_2038A20->unk7 < 14)
+    {
+        ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
+        gUnknown_Debug_2038A20->unk7++;
+        gTasks[taskId].func = debug_80C6EE8;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT && gUnknown_Debug_2038A20->unk7 > 0)
+    {
+        ((u16 *)PLTT)[0x81 + gUnknown_Debug_2038A20->unk7] = 0;
+        gUnknown_Debug_2038A20->unk7--;
+        gTasks[taskId].func = debug_80C6EE8;
+    }
+    else if (gMain.newKeys & START_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk9 ^= 1;
+        if (gUnknown_Debug_2038A20->unk9)
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 0), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+        else
+            LoadCompressedPalette(GetMonSpritePalFromOtIdPersonality(gUnknown_Debug_2038A20->unk0, 0, 9), gUnknown_Debug_2038A20->unk6 * 16 + 0x100, 0x20);
+        CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 32);
+        gTasks[taskId].func = debug_80C6EE8;
+    }
+    else
+    {
+        if (gMain.newKeys & SELECT_BUTTON)
+        {
+            StopCryAndClearCrySongs();
+            PlayCry1(gUnknown_Debug_2038A20->unk0, 0);
+        }
+        gUnknown_Debug_2038A20->unk8 += 4;
+        gUnknown_Debug_2038A20->unk8 &= 0x1f;
+        ((u16 *)PLTT)[0xa1 + gUnknown_Debug_2038A20->unk7] = gUnknown_Debug_083F8790[gUnknown_Debug_2038A20->unk8];
+    }
+}
+#else
+NAKED void debug_80C6FA8(u8 taskId)
+{
+    asm(".equiv PLTT, 0x05000000\n"
+        "\tpush\t{r4, r5, r6, lr}\n"
+        "\tadd\tsp, sp, #0xfffffffc\n"
+        "\tlsl\tr0, r0, #0x18\n"
+        "\tlsr\tr6, r0, #0x18\n"
+        "\tldr\tr1, ._674       @ gMain\n"
+        "\tldrh\tr2, [r1, #0x2e]\n"
+        "\tmov\tr0, #0x2\n"
+        "\tand\tr0, r0, r2\n"
+        "\tadd\tr4, r1, #0\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._672\t@cond_branch\n"
+        "\tmov\tr0, #0x5\n"
+        "\tbl\tPlaySE\n"
+        "\tmov\tr0, #0x1\n"
+        "\tneg\tr0, r0\n"
+        "\tmov\tr1, #0x0\n"
+        "\tstr\tr1, [sp]\n"
+        "\tmov\tr2, #0x0\n"
+        "\tmov\tr3, #0x10\n"
+        "\tbl\tBeginNormalPaletteFade\n"
+        "\tldr\tr0, ._674 + 4   @ debug_80C370C\n"
+        "\tbl\tSetMainCallback2\n"
+        "\tldr\tr1, ._674 + 8   @ gTasks\n"
+        "\tlsl\tr0, r6, #0x2\n"
+        "\tadd\tr0, r0, r6\n"
+        "\tlsl\tr0, r0, #0x3\n"
+        "\tadd\tr0, r0, r1\n"
+        "\tldr\tr1, ._674 + 12  @ debug_80C373C\n"
+        "\tstr\tr1, [r0]\n"
+        "\tb\t._703\n"
+        "._675:\n"
+        "\t.align\t2, 0\n"
+        "._674:\n"
+        "\t.word\tgMain\n"
+        "\t.word\tdebug_80C370C+1\n"
+        "\t.word\tgTasks\n"
+        "\t.word\tdebug_80C373C+1\n"
+        "._672:\n"
+        "\tldrh\tr1, [r4, #0x30]\n"
+        "\tmov\tr0, #0x80\n"
+        "\tlsl\tr0, r0, #0x1\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._676\t@cond_branch\n"
+        "\tldr\tr4, ._678       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr0, [r4]\n"
+        "\tldrh\tr1, [r0]\n"
+        "\tmov\tr0, #0x0\n"
+        "\tb\t._677\n"
+        "._679:\n"
+        "\t.align\t2, 0\n"
+        "._678:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "._676:\n"
+        "\tmov\tr0, #0x80\n"
+        "\tlsl\tr0, r0, #0x2\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._680\t@cond_branch\n"
+        "\tldr\tr4, ._682       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr0, [r4]\n"
+        "\tldrh\tr1, [r0]\n"
+        "\tmov\tr0, #0x1\n"
+        "._677:\n"
+        "\tbl\tdebug_80C3878\n"
+        "\tldr\tr1, [r4]\n"
+        "\tstrh\tr0, [r1]\n"
+        "\tldr\tr1, ._682 + 4   @ gTasks\n"
+        "\tlsl\tr0, r6, #0x2\n"
+        "\tadd\tr0, r0, r6\n"
+        "\tlsl\tr0, r0, #0x3\n"
+        "\tadd\tr0, r0, r1\n"
+        "\tldr\tr1, ._682 + 8   @ debug_80C71FC\n"
+        "\tstr\tr1, [r0]\n"
+        "\tb\t._703\n"
+        "._683:\n"
+        "\t.align\t2, 0\n"
+        "._682:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\tgTasks\n"
+        "\t.word\tdebug_80C71FC+1\n"
+        "._680:\n"
+        "\tmov\tr3, #0x1\n"
+        "\tand\tr3, r3, r2\n"
+        "\tcmp\tr3, #0\n"
+        "\tbeq\t._684\t@cond_branch\n"
+        "\tldr\tr0, ._686       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr1, [r0]\n"
+        "\tmov\tr0, #0x1\n"
+        "\tstrb\tr0, [r1, #0x5]\n"
+        "\tldr\tr1, ._686 + 4   @ 0x4000040\n"
+        "\tldr\tr2, ._686 + 8   @ 0x51ef\n"
+        "\tadd\tr0, r2, #0\n"
+        "\tstrh\tr0, [r1]\n"
+        "\tadd\tr1, r1, #0x4\n"
+        "\tldr\tr2, ._686 + 12  @ 0x4167\n"
+        "\tadd\tr0, r2, #0\n"
+        "\tstrh\tr0, [r1]\n"
+        "\tldr\tr1, ._686 + 16  @ gTasks\n"
+        "\tlsl\tr0, r6, #0x2\n"
+        "\tadd\tr0, r0, r6\n"
+        "\tlsl\tr0, r0, #0x3\n"
+        "\tadd\tr0, r0, r1\n"
+        "\tldr\tr1, ._686 + 20  @ debug_80C7294\n"
+        "\tstr\tr1, [r0]\n"
+        "\tb\t._703\n"
+        "._687:\n"
+        "\t.align\t2, 0\n"
+        "._686:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\t0x4000040\n"
+        "\t.word\t0x51ef\n"
+        "\t.word\t0x4167\n"
+        "\t.word\tgTasks\n"
+        "\t.word\tdebug_80C7294+1\n"
+        "._684:\n"
+        "\tmov\tr0, #0x10\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._689\t@cond_branch\n"
+        "\tldr\tr1, ._691       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr2, [r1]\n"
+        "\tldrb\tr0, [r2, #0x7]\n"
+        "\tcmp\tr0, #0xd\n"
+        "\tbhi\t._689\t@cond_branch\n"
+        "\tlsl\tr0, r0, #0x1\n"
+        "\tldr\tr2, ._691 + 4   @ PLTT + 0x102\n"
+        "\tadd\tr0, r0, r2\n"
+        "\tstrh\tr3, [r0]\n"
+        "\tldr\tr1, [r1]\n"
+        "\tldrb\tr0, [r1, #0x7]\n"
+        "\tadd\tr0, r0, #0x1\n"
+        "\tstrb\tr0, [r1, #0x7]\n"
+        "\tb\t._695\n"
+        "._692:\n"
+        "\t.align\t2, 0\n"
+        "._691:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\tPLTT + 0x102\n"
+        "._689:\n"
+        "\tldrh\tr1, [r4, #0x30]\n"
+        "\tmov\tr0, #0x20\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._694\t@cond_branch\n"
+        "\tldr\tr2, ._696       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr1, [r2]\n"
+        "\tldrb\tr0, [r1, #0x7]\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._694\t@cond_branch\n"
+        "\tlsl\tr0, r0, #0x1\n"
+        "\tldr\tr1, ._696 + 4   @ PLTT + 0x102\n"
+        "\tadd\tr0, r0, r1\n"
+        "\tmov\tr1, #0x0\n"
+        "\tstrh\tr1, [r0]\n"
+        "\tldr\tr1, [r2]\n"
+        "\tldrb\tr0, [r1, #0x7]\n"
+        "\tsub\tr0, r0, #0x1\n"
+        "\tstrb\tr0, [r1, #0x7]\n"
+        "\tb\t._695\n"
+        "._697:\n"
+        "\t.align\t2, 0\n"
+        "._696:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\tPLTT + 0x102\n"
+        "._694:\n"
+        "\tldrh\tr1, [r4, #0x2e]\n"
+        "\tmov\tr0, #0x8\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._698\t@cond_branch\n"
+        "\tldr\tr4, ._701       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr2, [r4]\n"
+        "\tldrb\tr0, [r2, #0x9]\n"
+        "\tmov\tr1, #0x1\n"
+        "\teor\tr0, r0, r1\n"
+        "\tstrb\tr0, [r2, #0x9]\n"
+        "\tldr\tr1, [r4]\n"
+        "\tldrb\tr0, [r1, #0x9]\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._699\t@cond_branch\n"
+        "\tldrh\tr0, [r1]\n"
+        "\tmov\tr1, #0x0\n"
+        "\tmov\tr2, #0x0\n"
+        "\tbl\tGetMonSpritePalFromOtIdPersonality\n"
+        "\tldr\tr1, [r4]\n"
+        "\tldrb\tr1, [r1, #0x6]\n"
+        "\tlsl\tr1, r1, #0x14\n"
+        "\tmov\tr2, #0x80\n"
+        "\tlsl\tr2, r2, #0x11\n"
+        "\tadd\tr1, r1, r2\n"
+        "\tlsr\tr1, r1, #0x10\n"
+        "\tmov\tr2, #0x20\n"
+        "\tbl\tLoadCompressedPalette\n"
+        "\tb\t._700\n"
+        "._702:\n"
+        "\t.align\t2, 0\n"
+        "._701:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "._699:\n"
+        "\tldrh\tr0, [r1]\n"
+        "\tmov\tr1, #0x0\n"
+        "\tmov\tr2, #0x9\n"
+        "\tbl\tGetMonSpritePalFromOtIdPersonality\n"
+        "\tldr\tr1, [r4]\n"
+        "\tldrb\tr1, [r1, #0x6]\n"
+        "\tlsl\tr1, r1, #0x14\n"
+        "\tmov\tr2, #0x80\n"
+        "\tlsl\tr2, r2, #0x11\n"
+        "\tadd\tr1, r1, r2\n"
+        "\tlsr\tr1, r1, #0x10\n"
+        "\tmov\tr2, #0x20\n"
+        "\tbl\tLoadCompressedPalette\n"
+        "._700:\n"
+        "\tldr\tr5, ._704       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr0, [r5]\n"
+        "\tldrb\tr0, [r0, #0x6]\n"
+        "\tlsl\tr0, r0, #0x5\n"
+        "\tldr\tr4, ._704 + 4   @ gPlttBufferUnfaded\n"
+        "\tadd\tr0, r0, r4\n"
+        "\tldr\tr2, ._704 + 8   @ 0xffffff00\n"
+        "\tadd\tr1, r4, r2\n"
+        "\tmov\tr2, #0x10\n"
+        "\tbl\tCpuSet\n"
+        "\tldr\tr0, [r5]\n"
+        "\tldrb\tr0, [r0, #0x6]\n"
+        "\tlsl\tr0, r0, #0x5\n"
+        "\tadd\tr0, r0, r4\n"
+        "\tldr\tr1, ._704 + 12  @ gPlttBufferFaded\n"
+        "\tmov\tr2, #0x10\n"
+        "\tbl\tCpuSet\n"
+        "._695:\n"
+        "\tldr\tr1, ._704 + 16  @ gTasks\n"
+        "\tlsl\tr0, r6, #0x2\n"
+        "\tadd\tr0, r0, r6\n"
+        "\tlsl\tr0, r0, #0x3\n"
+        "\tadd\tr0, r0, r1\n"
+        "\tldr\tr1, ._704 + 20  @ debug_80C6EE8\n"
+        "\tstr\tr1, [r0]\n"
+        "\tb\t._703\n"
+        "._705:\n"
+        "\t.align\t2, 0\n"
+        "._704:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\tgPlttBufferUnfaded+0x200\n"
+        "\t.word\t0xffffff00\n"
+        "\t.word\tgPlttBufferFaded+0x100\n"
+        "\t.word\tgTasks\n"
+        "\t.word\tdebug_80C6EE8+1\n"
+        "._698:\n"
+        "\tmov\tr0, #0x4\n"
+        "\tand\tr0, r0, r1\n"
+        "\tcmp\tr0, #0\n"
+        "\tbeq\t._706\t@cond_branch\n"
+        "\tbl\tStopCryAndClearCrySongs\n"
+        "\tldr\tr0, ._707       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr0, [r0]\n"
+        "\tldrh\tr0, [r0]\n"
+        "\tmov\tr1, #0x0\n"
+        "\tbl\tPlayCry1\n"
+        "._706:\n"
+        "\tldr\tr2, ._707       @ gUnknown_Debug_2038A20\n"
+        "\tldr\tr1, [r2]\n"
+        "\tldrb\tr0, [r1, #0x8]\n"
+        "\tadd\tr0, r0, #0x4\n"
+        "\tstrb\tr0, [r1, #0x8]\n"
+        "\tldr\tr3, [r2]\n"
+        "\tldrb\tr1, [r3, #0x8]\n"
+        "\tmov\tr0, #0x1f\n"
+        "\tand\tr0, r0, r1\n"
+        "\tstrb\tr0, [r3, #0x8]\n"
+        "\tldr\tr0, [r2]\n"
+        "\tldrb\tr1, [r0, #0x7]\n"
+        "\tlsl\tr1, r1, #0x1\n"
+        "\tldr\tr2, ._707 + 4   @ PLTT + 0x142\n"
+        "\tadd\tr1, r1, r2\n"
+        "\tldr\tr2, ._707 + 8   @ gUnknown_Debug_083F8790\n"
+        "\tldrb\tr0, [r0, #0x8]\n"
+        "\tlsl\tr0, r0, #0x1\n"
+        "\tadd\tr0, r0, r2\n"
+        "\tldrh\tr0, [r0]\n"
+        "\tstrh\tr0, [r1]\n"
+        "._703:\n"
+        "\tadd\tsp, sp, #0x4\n"
+        "\tpop\t{r4, r5, r6}\n"
+        "\tpop\t{r0}\n"
+        "\tbx\tr0\n"
+        "._708:\n"
+        "\t.align\t2, 0\n"
+        "._707:\n"
+        "\t.word\tgUnknown_Debug_2038A20\n"
+        "\t.word\tPLTT + 0x142\n"
+        "\t.word\tgUnknown_Debug_083F8790");
+}
+#endif
 #endif // DEBUG

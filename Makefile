@@ -3,6 +3,8 @@ include config.mk
 
 ifeq ($(OS),Windows_NT)
 EXE := .exe
+else
+EXE :=
 endif
 
 
