@@ -138,6 +138,7 @@ void debug_80C6EE8(u8 taskId);
 void debug_80C6FA8(u8 taskId);
 void debug_80C71FC(u8 taskId);
 void debug_80C7294(u8 taskId);
+void debug_80C74E4(u8 taskId);
 void debug_80C7584(struct Sprite *);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
@@ -2843,5 +2844,99 @@ NAKED void debug_80C6FA8(u8 taskId)
         "\t.word\tPLTT + 0x142\n"
         "\t.word\tgUnknown_Debug_083F8790");
 }
-#endif
+#endif // NONMATCHING
+
+void debug_80C71FC(u8 taskId)
+{
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk2);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gUnknown_Debug_2038A20->unk3].oam.paletteNum));
+    DestroySprite(gSprites + gUnknown_Debug_2038A20->unk3);
+    sub_809D510(gSprites + gUnknown_Debug_2038A20->unk4);
+    gTasks[taskId].func = debug_80C6CB8;
+}
+
+void debug_80C7294(u8 taskId)
+{
+    if (gMain.newKeys & A_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk5 = 0;
+        REG_WIN0H = 0x51EF;
+        REG_WIN0V = 0x699F;
+        gTasks[taskId].func = debug_80C6EE8;
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        gUnknown_Debug_2038A20->unk5 = 0;
+        REG_WIN0H = 0x51EF;
+        REG_WIN0V = 0x699F;
+        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x80, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferUnfaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        CpuCopy16(gUnknown_Debug_2038A20->unk10, gPlttBufferFaded + 0x100 + gUnknown_Debug_2038A20->unk6 * 16, 32);
+        gTasks[taskId].func = debug_80C6EE8;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN && gUnknown_Debug_2038A20->unkA < 2)
+    {
+        gUnknown_Debug_2038A20->unkA++;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_UP && gUnknown_Debug_2038A20->unkA > 0)
+    {
+        gUnknown_Debug_2038A20->unkA--;
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+    {
+        switch (gUnknown_Debug_2038A20->unkA)
+        {
+            case 0:
+                if (gUnknown_Debug_2038A20->unkC.r < 31)
+                    gUnknown_Debug_2038A20->unkC.r++;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+            case 1:
+                if (gUnknown_Debug_2038A20->unkC.g < 31)
+                    gUnknown_Debug_2038A20->unkC.g++;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+            case 2:
+                if (gUnknown_Debug_2038A20->unkC.b < 31)
+                    gUnknown_Debug_2038A20->unkC.b++;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+        }
+    }
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+    {
+        switch (gUnknown_Debug_2038A20->unkA)
+        {
+            case 0:
+                if (gUnknown_Debug_2038A20->unkC.r > 0)
+                    gUnknown_Debug_2038A20->unkC.r--;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+            case 1:
+                if (gUnknown_Debug_2038A20->unkC.g > 0)
+                    gUnknown_Debug_2038A20->unkC.g--;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+            case 2:
+                if (gUnknown_Debug_2038A20->unkC.b > 0)
+                    gUnknown_Debug_2038A20->unkC.b--;
+                gTasks[taskId].func = debug_80C74E4;
+                break;
+        }
+    }
+}
+
+void debug_80C74E4(u8 taskId)
+{
+    u16 pal = (gUnknown_Debug_2038A20->unkC.r & 0x001f) + ((gUnknown_Debug_2038A20->unkC.g << 5) & 0x03e0) + ((gUnknown_Debug_2038A20->unkC.b << 10) & 0x7c00);
+    gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
+    gPlttBufferFaded[gUnknown_Debug_2038A20->unk7 + 0x81] = pal;
+    gPlttBufferUnfaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;
+    gPlttBufferFaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;
+    debug_80C68CC(pal, 14, 10, 4);
+    gTasks[taskId].func = debug_80C7294;
+}
+
 #endif // DEBUG
