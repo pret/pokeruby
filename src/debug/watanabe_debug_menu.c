@@ -1259,8 +1259,8 @@ bool8 debug_80C4774(void)
 void debug_80C47BC(u8 taskId)
 {
     u8 i;
-    u8 sp00[] = _("{COLOR RED}あいての　ポケモン");
-    u8 sp10[] = _("たいせんモードを　えらんでね");
+    u8 sp00[] = _("たいせんモードを　えらんでね");
+    u8 sp10[] = _("{COLOR RED}START:つぎへ");
     u8 sp20[] = _("{COLOR RED}バトルモード　せんたく");
     u8 sp30[] = _("{COLOR RED}トレーナーAI　せんたく");
 
