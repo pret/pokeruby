@@ -3410,9 +3410,9 @@ u8 GetHPBarLevel(s16 hp, s16 maxhp)
     else
     {
         u8 fraction = GetScaledHPFraction(hp, maxhp, 48);
-        if (fraction > 24)
+        if (fraction >= 25)
             result = 3;
-        else if (fraction > 9)
+        else if (fraction >= 10)
             result = 2;
         else if (fraction > 0)
             result = 1;

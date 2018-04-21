@@ -14,7 +14,7 @@ The rest of the `.s` files in `asm/` are fair game.
 The basic decompilation process is:
 * Choose a file in `asm/`, i.e. `asm/x.s`. Create a C file called `src/x.c`.
 * Translate the first function in `asm/x.s` to C in `src/x.c`.
-* `make compare`, and tweak the function until it matches.
+* `make`, and tweak the function until it matches.
 * Clean up the code and comment.
 * Repeat for each function until `asm/x.s` is empty.
 
@@ -260,7 +260,7 @@ But what about `sub_8123244`? It's still not obvious what that function does. We
 ## 5. Build
 
 ```sh
-make compare
+make
 ```
 ```gcc
 src/cable_car.c: In function `sub_81231EC':
@@ -308,7 +308,7 @@ void sub_81231EC(u8 taskId) {
 
 Build again, and we get:
 ```sh
-make compare
+make
 ```
 ```sha1sum
 pokeruby.gba: OK
