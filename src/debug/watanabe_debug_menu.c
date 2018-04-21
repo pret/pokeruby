@@ -141,6 +141,9 @@ void debug_80C7294(u8 taskId);
 void debug_80C74E4(u8 taskId);
 void debug_80C7584(struct Sprite *);
 void debug_80C777C(u8 taskId);
+void debug_80C7934(u8 taskId);
+void debug_80C7A54(u8 taskId);
+void debug_80C7B14(u8 taskId);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[10];
@@ -3015,6 +3018,83 @@ void InitSeeTrainers(void)
     spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
     gSprites[spriteId].data[0] = 2;
     StartSpriteAnim(gSprites + spriteId, 2);
+}
+
+void debug_80C777C(u8 taskId)
+{
+    // u8 sp00[] = {0x00, 0x10, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21, 0x20, 0x20, 0x20, 0x21};
+    u8 i;
+    u8 sp00[ARRAY_COUNT(gUnknown_Debug_083F8815)];
+    memcpy(sp00, gUnknown_Debug_083F8815, sizeof(gUnknown_Debug_083F8815));
+
+    Menu_DrawStdWindowFrame(9, 0, 14, 7);
+    Menu_DrawStdWindowFrame(0, 0, 9, 9);
+    Menu_DrawStdWindowFrame(0, 10, 9, 19);
+    Menu_DrawStdWindowFrame(14, 0, 29, 7);
+    Menu_PrintText(gUnknown_Debug_083F87D0, 15, 1);
+    Menu_PrintText(gUnknown_Debug_083F87D8, 25, 1);
+    Menu_PrintText(gUnknown_Debug_083F87E0, 15, 5);
+
+    Menu_DrawStdWindowFrame(10, 8, 29, 12);
+    for (i = 0; i < 15; i++)
+        ((u16 *)(VRAM + 0xFA56))[i] = 0xA311 + i;
+    for (i = 0; i < 15; i++)
+        ((u16 *)(VRAM + 0xF256))[i] = 0x8301 + i;
+
+    Menu_PrintText(gUnknown_Debug_083F87F4, 20, 10);
+    Menu_DrawStdWindowFrame(10, 13, 29, 19);
+
+    sp00[0] = 0x23;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF396))[i] = 0x9300 + sp00[i];
+    sp00[0] = 0x24;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF3D6))[i] = 0x9300 + sp00[i];
+    sp00[0] = 0x25;
+    for (i = 0; i < 18; i++)
+        ((u16 *)(VRAM + 0xF416))[i] = 0x9300 + sp00[i];
+
+    Menu_PrintText(gUnknown_Debug_083F8801, 15, 17);
+
+    REG_WIN0H = 0x51EF;
+    REG_WIN0V = 0x699F;
+
+    gTasks[taskId].func = debug_80C7934;
+}
+
+void debug_80C7934(u8 taskId)
+{
+    DecompressPicFromTable_2(gTrainerFrontPicTable + gUnknown_Debug_2038A20->unk0, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].coords, gTrainerFrontPicCoords[gUnknown_Debug_2038A20->unk0].y_offset, gUnknown_081FAF4C[0], gUnknown_081FAF4C[1], gUnknown_Debug_2038A20->unk0);
+    LoadCompressedObjectPalette(gTrainerFrontPicPaletteTable + gUnknown_Debug_2038A20->unk0);
+    GetMonSpriteTemplate_803C5A0(gUnknown_Debug_2038A20->unk0, 1);
+    gUnknown_Debug_2038A20->unk2 = CreateSprite(&gUnknown_02024E8C, 0x28, 0x28, 0);
+    gSprites[gUnknown_Debug_2038A20->unk2].callback = debug_69;
+    gSprites[gUnknown_Debug_2038A20->unk2].oam.priority = 0;
+
+    debug_80C376C(gUnknown_Debug_2038A20->unk0, 26, 5);
+
+    gUnknown_Debug_2038A20->unk6 = gSprites[gUnknown_Debug_2038A20->unk2].oam.paletteNum;
+    CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferUnfaded + 0x80, 0x20);
+    CpuCopy16(gPlttBufferUnfaded + gUnknown_Debug_2038A20->unk6 * 16 + 0x100, gPlttBufferFaded + 0x80, 0x20);
+
+    gTasks[taskId].func = debug_80C7A54;
+
+    gUnknown_Debug_2038A20->unk9 = 0;
+}
+
+void debug_80C7A54(u8 taskId)
+{
+    u16 hue;
+    CpuCopy16(gPlttBufferUnfaded + 0x80, gUnknown_Debug_2038A20->unk10, 32);
+    hue = gPlttBufferUnfaded[gUnknown_Debug_2038A20->unk7 + 0x81];
+    gUnknown_Debug_2038A20->unkC.r = hue & 0x1f;
+    gUnknown_Debug_2038A20->unkC.g = (hue & 0x3e0) >> 5;
+    gUnknown_Debug_2038A20->unkC.b = (hue & 0x7c00) >> 10;
+    gUnknown_Debug_2038A20->unkC.unused_15 = 0;
+    debug_80C68CC(gUnknown_Debug_2038A20->unk7 + 1, 11, 10, 2);
+    Menu_PrintText(gUnknown_Debug_083F8813, 13, 10);
+    debug_80C68CC(hue, 14, 10, 4);
+    gTasks[taskId].func = debug_80C7B14;
 }
 
 #endif // DEBUG
