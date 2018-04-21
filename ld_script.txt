@@ -152,7 +152,6 @@ SECTIONS {
         src/fldeff_escalator.o(.text);
         src/berry.o(.text);
         src/debug/watanabe_debug_menu.o(.text);
-        asm/watanabe_debug_menu.o(.text);
         src/script_menu.o(.text);
         src/naming_screen.o(.text);
         src/money.o(.text);
