@@ -140,6 +140,7 @@ void debug_80C71FC(u8 taskId);
 void debug_80C7294(u8 taskId);
 void debug_80C74E4(u8 taskId);
 void debug_80C7584(struct Sprite *);
+void debug_80C777C(u8 taskId);
 
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F8068[5];
 extern const struct WatanabeDebugMenuItem gUnknown_Debug_083F80D8[10];
@@ -2937,6 +2938,83 @@ void debug_80C74E4(u8 taskId)
     gPlttBufferFaded[0x101 + gUnknown_Debug_2038A20->unk6 * 16 + gUnknown_Debug_2038A20->unk7] = pal;
     debug_80C68CC(pal, 14, 10, 4);
     gTasks[taskId].func = debug_80C7294;
+}
+
+void debug_80C7584(struct Sprite *sprite)
+{
+    if (!gUnknown_Debug_2038A20->unk5)
+        sprite->invisible = TRUE;
+    else
+    {
+        u8 shade;
+        switch (sprite->data[0])
+        {
+            default:
+            case 0:
+                shade = gUnknown_Debug_2038A20->unkC.r;
+                break;
+            case 1:
+                shade = gUnknown_Debug_2038A20->unkC.g;
+                break;
+            case 2:
+                shade = gUnknown_Debug_2038A20->unkC.b;
+                break;
+        }
+        sprite->pos2.x = 4 * shade;
+        sprite->pos2.y = 8 * sprite->data[0];
+        sprite->data[1]++;
+        if (sprite->data[0] == gUnknown_Debug_2038A20->unkA && !(sprite->data[1] & 0x08))
+            sprite->invisible = TRUE;
+        else
+            sprite->invisible = FALSE;
+    }
+}
+
+void InitSeeTrainers(void)
+{
+    u8 spriteId;
+    debug_80C35DC();
+    DmaCopy16Defvars(3, byte_83F88EC, VRAM + 0xe000, 0x800);
+    LoadPalette(word_83F888C, 0x80, 0x60);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    REG_WIN0H = 0;
+    REG_WIN0V = 0;
+    REG_WIN1H = 0;
+    REG_WIN1V = 0;
+    REG_WININ = 0x3F;
+    REG_WINOUT = 0x1F;
+    REG_BLDCNT = 0xF1;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 7;
+    {
+        u16 imeBak = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = imeBak;
+    }
+    SetVBlankCallback(debug_80C3758);
+    SetMainCallback2(debug_80C370C);
+    REG_BG0CNT = 0x1F0B;
+    REG_BG1CNT = 0x1E0A;
+    REG_DISPCNT = 0x3340;
+    CreateTask(debug_80C777C, 0);
+    gUnknown_Debug_2038A20 = &eWatanabe18000_2;
+    gUnknown_Debug_2038A20->unk0 = 0;
+    gUnknown_Debug_2038A20->unk2 = 0;
+    gUnknown_Debug_2038A20->unk3 = 0;
+    gUnknown_Debug_2038A20->unk5 = 0;
+    gUnknown_Debug_2038A20->unk7 = 0;
+    gUnknown_Debug_2038A20->unkA = 0;
+    gUnknown_Debug_2038A20->unk8 = 0;
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
+    gSprites[spriteId].data[0] = 0;
+    StartSpriteAnim(gSprites + spriteId, 0);
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
+    gSprites[spriteId].data[0] = 1;
+    StartSpriteAnim(gSprites + spriteId, 1);
+    spriteId = CreateSprite(&gSpriteTemplate_83F8874, 0x6c, 0x74, 0);
+    gSprites[spriteId].data[0] = 2;
+    StartSpriteAnim(gSprites + spriteId, 2);
 }
 
 #endif // DEBUG
