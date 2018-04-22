@@ -1,23 +1,29 @@
 
 include config.mk
 
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
 
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
 AS        := $(DEVKITARM)/bin/arm-none-eabi-as
-CC1       := tools/agbcc/bin/agbcc
+CC1       := tools/agbcc/bin/agbcc$(EXE)
 CPP       := $(DEVKITARM)/bin/arm-none-eabi-cpp
 LD        := $(DEVKITARM)/bin/arm-none-eabi-ld
 OBJCOPY   := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 SHA1SUM   := sha1sum -c
-GBAGFX    := tools/gbagfx/gbagfx
-RSFONT    := tools/rsfont/rsfont
-AIF2PCM   := tools/aif2pcm/aif2pcm
-MID2AGB   := tools/mid2agb/mid2agb
-PREPROC   := tools/preproc/preproc
-SCANINC   := tools/scaninc/scaninc
-RAMSCRGEN := tools/ramscrgen/ramscrgen
+GBAGFX    := tools/gbagfx/gbagfx$(EXE)
+RSFONT    := tools/rsfont/rsfont$(EXE)
+AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
+MID2AGB   := tools/mid2agb/mid2agb$(EXE)
+PREPROC   := tools/preproc/preproc$(EXE)
+SCANINC   := tools/scaninc/scaninc$(EXE)
+RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -50,9 +56,9 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/agb_flash.o:    CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_1m.o: CC1FLAGS := -O1 -mthumb-interwork
 %src/libs/agb_flash_mx.o: CC1FLAGS := -O1 -mthumb-interwork
-%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
-%src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc
+%src/libs/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
+%src/libs/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
+%src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o: CC1FLAGS := -mthumb-interwork
 
 

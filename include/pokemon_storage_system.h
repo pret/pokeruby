@@ -300,4 +300,6 @@ void sub_809D104(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u1
 void sub_809D16C(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height);
 void ShowPokemonStorageSystem(void);
 
+void debug_sub_80A433C(struct Pokemon *pokemon, void (*func)(void));
+
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H
