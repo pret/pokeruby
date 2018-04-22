@@ -383,17 +383,15 @@ void InitWatanabeDebugMenu(void)
 void InitSizeComparison(void)
 {
     u8 taskId;
+    u16 imeBak;
     debug_80C35DC();
     gReservedSpritePaletteCount = 1;
     LoadPalette(gUnknown_Debug_20389EC, 0x100, 0x20);
 
-    {
-        u16 imeBak = REG_IME;
-        REG_IME = 0;
-        REG_IE |= INTR_FLAG_VBLANK;
-        REG_IME = imeBak;
-    }
-
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = imeBak;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
     SetVBlankCallback(debug_80C3758);
     SetMainCallback2(debug_80C370C);
@@ -1081,6 +1079,7 @@ void debug_80C41F4(void)
 
 void debug_80C4214(UNUSED u8 a0)
 {
+    u16 imeBak;
     debug_80C35DC();
     REG_WIN0H = 0;
     REG_WIN0V = 0;
@@ -1092,12 +1091,10 @@ void debug_80C4214(UNUSED u8 a0)
     REG_BLDALPHA = 0;
     REG_BLDY = 7;
 
-    {
-        u16 imeBak = REG_IME;
-        REG_IME = 0;
-        REG_IE |= INTR_FLAG_VBLANK;
-        REG_IME = imeBak;
-    }
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = imeBak;
 
     SetVBlankCallback(debug_80C3758);
     SetMainCallback2(debug_80C370C);
@@ -3194,6 +3191,7 @@ void debug_80C7584(struct Sprite *sprite)
 void InitSeeTrainers(void)
 {
     u8 spriteId;
+    u16 imeBak;
     debug_80C35DC();
     DmaCopy16Defvars(3, byte_83F88EC, VRAM + 0xe000, 0x800);
     LoadPalette(word_83F888C, 0x80, 0x60);
@@ -3207,12 +3205,10 @@ void InitSeeTrainers(void)
     REG_BLDCNT = 0xF1;
     REG_BLDALPHA = 0;
     REG_BLDY = 7;
-    {
-        u16 imeBak = REG_IME;
-        REG_IME = 0;
-        REG_IE |= INTR_FLAG_VBLANK;
-        REG_IME = imeBak;
-    }
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = imeBak;
     SetVBlankCallback(debug_80C3758);
     SetMainCallback2(debug_80C370C);
     REG_BG0CNT = 0x1F0B;
