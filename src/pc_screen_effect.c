@@ -30,39 +30,22 @@ u8 gUnknownGfx_083D190C[] = INCBIN_U8("graphics/unknown/unknown_3D190C.4bpp");
 
 EWRAM_DATA struct PCScreenEffectStruct *gUnknown_020387EC = NULL;
 
-const struct SpriteSheet gUnknown_083D1898 = { gUnknownGfx_083D190C, sizeof(gUnknownGfx_083D190C), 0 };
-
-const struct SpritePalette gUnknown_083D18A0 = { gUnknownPal_083D18EC, 0 };
-
-const struct SpriteTemplate gSpriteTemplate_83D18A8 =
-{
-    0,
-    0,
-    &gOamData_83D18D8,
-    gSpriteAnimTable_83D18E8,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_80C60CC,
-};
-
-const struct SpriteTemplate gSpriteTemplate_83D18C0 =
-{
-    0,
-    0,
-    &gOamData_83D18D8,
-    gSpriteAnimTable_83D18E8,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    sub_80C6130,
-};
-
 void sub_80C5CD4(struct PCScreenEffectStruct *unkStruct)
 {
     u16 i;
 
-    struct SpriteSheet sprSheet = gUnknown_083D1898;
-    struct SpritePalette sprPalette = gUnknown_083D18A0;
-    struct SpriteTemplate sprTemplate = gSpriteTemplate_83D18A8;
+    struct SpriteSheet sprSheet = { gUnknownGfx_083D190C, sizeof(gUnknownGfx_083D190C), 0 };
+    struct SpritePalette sprPalette = { gUnknownPal_083D18EC, 0 };
+    struct SpriteTemplate sprTemplate =
+        {
+            0,
+            0,
+            &gOamData_83D18D8,
+            gSpriteAnimTable_83D18E8,
+            NULL,
+            gDummySpriteAffineAnimTable,
+            sub_80C60CC,
+        };
 
     sprSheet.tag = unkStruct->tileTag;
     sprTemplate.tileTag =  unkStruct->tileTag;
@@ -123,4 +106,68 @@ bool8 sub_80C5DCC(void)
     {
         return FALSE;
     }
+}
+
+void sub_80C5E38(struct PCScreenEffectStruct * a0)
+{
+    u16 i;
+    u8 spriteId;
+
+    struct SpriteSheet spriteSheet = { gUnknownGfx_083D190C, sizeof(gUnknownGfx_083D190C), 0 };
+    struct SpritePalette spritePalette = { gUnknownPal_083D18EC, 0 };
+    struct SpriteTemplate spriteTemplate =
+        {
+            0,
+            0,
+            &gOamData_83D18D8,
+            gSpriteAnimTable_83D18E8,
+            NULL,
+            gDummySpriteAffineAnimTable,
+            sub_80C6130,
+        };
+
+    spriteSheet.tag = a0->tileTag;
+    spriteTemplate.tileTag = a0->tileTag;
+    spritePalette.tag = a0->paletteTag;
+    spriteTemplate.paletteTag = a0->paletteTag;
+
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+
+    a0->unk0C = 0x50;
+    a0->unk08 = 0;
+    a0->unk0A = 0;
+    a0->selectedPalettes = 0xffff0000 & ~(0x10000 << IndexOfSpritePaletteTag(a0->paletteTag));
+    if (a0->unk04 == 0)
+        a0->unk04 = 16;
+    if (a0->unk06 == 0)
+        a0->unk06 = 20;
+    gUnknown_020387EC = a0;
+
+    for (i = 0; i < 8; i++)
+    {
+        if (i < 4)
+        {
+            spriteId = CreateSprite(&spriteTemplate, i * 32 - 0x70, 0x50, 0);
+            if (spriteId == MAX_SPRITES)
+                break;
+            gSprites[spriteId].data[0] = a0->unk04;
+            gSprites[spriteId].data[1] = 1;
+        }
+        else
+        {
+            // Fakematching
+            spriteId = CreateSprite(&spriteTemplate, ((i << 21) + (0x80 << 16)) >> 16, 0x50, 0);
+            if (spriteId == MAX_SPRITES)
+                break;
+            gSprites[spriteId].data[0] = -a0->unk04;
+            gSprites[spriteId].data[1] = -1;
+        }
+        gSprites[spriteId].data[2] = i * 32 + 8;
+        gSprites[spriteId].data[4] = 0;
+        gSprites[spriteId].invisible = TRUE;
+    }
+    REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+    REG_BLDY = 16;
+    sub_80C61B0(sub_80C6078);
 }
