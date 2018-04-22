@@ -251,7 +251,7 @@ static void sub_80E00D0(struct Sprite *sprite)
 void sub_80E00EC(u8 taskId)
 {
     struct ScanlineEffectParams scanlineParams;
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
     u16 i;
     u8 pos;
     int var0;
@@ -278,7 +278,7 @@ void sub_80E00EC(u8 taskId)
         sub_8078914(&subStruct);
         task->data[10] = gBattle_BG1_Y;
         REG_BLDCNT = 0x3F42;
-        FillPalette(0, subStruct.field_8 << 4, 32);
+        FillPalette(0, subStruct.unk8 << 4, 32);
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = 2;
 
@@ -384,7 +384,7 @@ static void sub_80E02A4(u8 taskId)
 
 void sub_80E03BC(u8 taskId)
 {
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
     struct ScanlineEffectParams scanlineParams;
     u8 pos;
     u16 i;
@@ -423,7 +423,7 @@ void sub_80E03BC(u8 taskId)
         {
             sub_8078914(&subStruct);
             task->data[10] = gBattle_BG1_Y;
-            FillPalette(0, subStruct.field_8 << 4, 32);
+            FillPalette(0, subStruct.unk8 << 4, 32);
         }
         else
         {
@@ -830,7 +830,7 @@ void sub_80E0A4C(u8 taskId)
     u8 spriteId;
     u8 newSpriteId;
     u16 paletteNum;
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
     int var0 = 0;
 
     gBattle_WIN0H = var0;
@@ -874,10 +874,10 @@ void sub_80E0A4C(u8 taskId)
     newSpriteId = sub_807A4A0(gAnimBankAttacker, spriteId, species);
 
     sub_8078914(&subStruct);
-    DmaClear32(3, subStruct.field_4, 0x1000);
-    LZDecompressVram(&gUnknown_08D1D574, subStruct.field_4);
-    LZDecompressVram(&gUnknown_08D1D410, subStruct.field_0);
-    LoadCompressedPalette(&gUnknown_08D1D54C, subStruct.field_8 << 4, 32);
+    DmaClear32(3, subStruct.unk4, 0x1000);
+    LZDecompressVram(&gUnknown_08D1D574, subStruct.unk4);
+    LZDecompressVram(&gUnknown_08D1D410, subStruct.unk0);
+    LoadCompressedPalette(&gUnknown_08D1D54C, subStruct.unk8 << 4, 32);
 
     gBattle_BG1_X = -gSprites[spriteId].pos1.x + 96;
     gBattle_BG1_Y = -gSprites[spriteId].pos1.y + 32;
@@ -898,7 +898,7 @@ void sub_80E0A4C(u8 taskId)
 
 static void sub_80E0CD0(u8 taskId)
 {
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
     u16 paletteNum;
     u8 spriteId;
     u8 taskIdCopy = taskId;
@@ -933,7 +933,7 @@ static void sub_80E0CD0(u8 taskId)
 
             DestroySprite(&gSprites[gTasks[taskIdCopy].data[0]]);
             sub_8078914(&subStruct);
-            DmaClear32(3, subStruct.field_4, 0x800);
+            DmaClear32(3, subStruct.unk4, 0x800);
 
             if (gTasks[taskIdCopy].data[6] == 1)
             {

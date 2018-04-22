@@ -10,6 +10,8 @@ struct Struct_sub_8078914 {
     u8 field_8;
 };
 
+struct UnknownStruct2;
+
 u8 GetBattlerSpriteCoord(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBattlerSpriteId(u8 bank);
@@ -32,7 +34,7 @@ bool8 IsBankSpritePresent(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
 bool8 IsDoubleBattle(void);
-void sub_8078914();
+void sub_8078914(struct UnknownStruct2 *);
 u8 sub_80789BC();
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimSpriteTranslationDeltas(struct Sprite *sprite);

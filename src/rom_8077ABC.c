@@ -875,41 +875,41 @@ bool8 IsDoubleBattle()
     return IS_DOUBLE_BATTLE();
 }
 
-void sub_8078914(struct Struct_sub_8078914 *unk)
+void sub_8078914(struct UnknownStruct2 *unk)
 {
     if (IsContest())
     {
-        unk->field_0 = (u8 *)(VRAM + 0x8000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
-        unk->field_8 = 0xe;
+        unk->unk0 = (u8 *)(VRAM + 0x8000);
+        unk->unk4 = (u16 *)(VRAM + 0xf000);
+        unk->unk8 = 14;
     }
     else
     {
-        unk->field_0 = (u8 *)(VRAM + 0x4000);
-        unk->field_4 = (u8 *)(VRAM + 0xe000);
-        unk->field_8 = 0x8;
+        unk->unk0 = (u8 *)(VRAM + 0x4000);
+        unk->unk4 = (u16 *)(VRAM + 0xe000);
+        unk->unk8 = 8;
     }
 }
 
-void sub_8078954(struct Struct_sub_8078914 *unk)
+void sub_8078954(struct UnknownStruct2 *unk)
 {
     if (IsContest())
     {
-        unk->field_0 = (u8 *)(VRAM + 0x8000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
-        unk->field_8 = 0xe;
+        unk->unk0 = (u8 *)(VRAM + 0x8000);
+        unk->unk4 = (u16 *)(VRAM + 0xf000);
+        unk->unk8 = 14;
     }
     else if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
     {
-        unk->field_0 = (u8 *)(VRAM + 0x4000);
-        unk->field_4 = (u8 *)(VRAM + 0xe000);
-        unk->field_8 = 0x8;
+        unk->unk0 = (u8 *)(VRAM + 0x4000);
+        unk->unk4 = (u16 *)(VRAM + 0xe000);
+        unk->unk8 = 8;
     }
     else
     {
-        unk->field_0 = (u8 *)(VRAM + 0x6000);
-        unk->field_4 = (u8 *)(VRAM + 0xf000);
-        unk->field_8 = 0x9;
+        unk->unk0 = (u8 *)(VRAM + 0x6000);
+        unk->unk4 = (u16 *)(VRAM + 0xf000);
+        unk->unk8 = 9;
     }
 }
 

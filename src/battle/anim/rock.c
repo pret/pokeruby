@@ -129,7 +129,7 @@ static void sub_80DD02C(struct Sprite *sprite)
 
 void do_boulder_dust(u8 taskId)
 {
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
     int var0 = 0;
 
     REG_BLDCNT = 0x3F42;
@@ -146,13 +146,13 @@ void do_boulder_dust(u8 taskId)
     REG_BG1VOFS = 0;
 
     sub_8078914(&subStruct);
-    DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
-    LZDecompressVram(&gBattleAnimBackgroundTilemap_SandstormBrew, subStruct.field_4);
-    LZDecompressVram(&gBattleAnimBackgroundImage_SandstormBrew, subStruct.field_0);
-    LoadCompressedPalette(&gBattleAnimSpritePalette_261, subStruct.field_8 << 4, 32);
+    DmaFill32Defvars(3, 0, subStruct.unk4, 0x1000);
+    LZDecompressVram(&gBattleAnimBackgroundTilemap_SandstormBrew, subStruct.unk4);
+    LZDecompressVram(&gBattleAnimBackgroundImage_SandstormBrew, subStruct.unk0);
+    LoadCompressedPalette(&gBattleAnimSpritePalette_261, subStruct.unk8 << 4, 32);
 
     if (IsContest())
-        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0);
+        sub_80763FC(subStruct.unk8, subStruct.unk4, 0, 0);
 
     if (gBattleAnimArgs[0] != 0 && GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         var0 = 1;
@@ -163,7 +163,7 @@ void do_boulder_dust(u8 taskId)
 
 static void sub_80DD190(u8 taskId)
 {    
-    struct Struct_sub_8078914 subStruct;
+    struct UnknownStruct2 subStruct;
 
     if (gTasks[taskId].data[0] == 0)
         gBattle_BG1_X += 0xFFFA;
@@ -209,8 +209,8 @@ static void sub_80DD190(u8 taskId)
         break;
     case 3:
         sub_8078914(&subStruct);
-        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
-        DmaClear32(3, subStruct.field_4, 0x800);
+        DmaFill32Large(3, 0, subStruct.unk0, 0x2000, 0x1000);
+        DmaClear32(3, subStruct.unk4, 0x800);
         if (!IsContest())
             REG_BG1CNT_BITFIELD.charBaseBlock = 0;
 

@@ -155,9 +155,9 @@ void sub_80D5E4C(u8 taskId)
 
 void sub_80D6080(u8 taskId)
 {
-    struct Struct_sub_8078914 unk;
+    struct UnknownStruct2 unk;
     sub_8078914(&unk);
-    BlendPalette(unk.field_8 << 4, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]); // u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor
+    BlendPalette(unk.unk8 << 4, 16, gBattleAnimArgs[0], gBattleAnimArgs[1]); // u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor
     DestroyAnimVisualTask(taskId);
 }
 
