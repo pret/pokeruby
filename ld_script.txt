@@ -165,7 +165,6 @@ SECTIONS {
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         src/pc_screen_effect.o(.text);
-        asm/pc_screen_effect.o(.text);
         src/fldeff_secretpower.o(.text);
         src/fldeff_secret_base_pc.o(.text);
         src/fldeff_decoration.o(.text);

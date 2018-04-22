@@ -4,12 +4,12 @@
 #include "sprite.h"
 #include "pc_screen_effect.h"
 
-void sub_80C603C(void);
-void sub_80C6078(void);
-void sub_80C60CC(struct Sprite *);
-void sub_80C6130(struct Sprite *);
-void sub_80C61B0(IntrFunc);
-void ClearGpuRegBits(void);
+static void sub_80C603C(void);
+static void sub_80C6078(void);
+static void sub_80C60CC(struct Sprite *);
+static void sub_80C6130(struct Sprite *);
+static void HBlankIntrOn(IntrFunc);
+static void HBlankIntrOff(void);
 
 struct OamData gOamData_83D18D8 = {
     .shape = ST_OAM_H_RECTANGLE,
@@ -85,7 +85,7 @@ bool8 sub_80C5DCC(void)
     if (gUnknown_020387EC->unk08 == 0)
     {
         BlendPalettes(gUnknown_020387EC->selectedPalettes, 0x10, 0xFFFF);
-        sub_80C61B0(sub_80C603C);
+        HBlankIntrOn(sub_80C603C);
         gUnknown_020387EC->unk08++;
     }
 
@@ -99,7 +99,7 @@ bool8 sub_80C5DCC(void)
         gUnknown_020387EC->unk0C = 80;
         REG_BLDCNT = 0;
         REG_BLDY = 0;
-        ClearGpuRegBits();
+        HBlankIntrOff();
         return TRUE;
     }
     else
@@ -169,5 +169,126 @@ void sub_80C5E38(struct PCScreenEffectStruct * a0)
     }
     REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     REG_BLDY = 16;
-    sub_80C61B0(sub_80C6078);
+    HBlankIntrOn(sub_80C6078);
+}
+
+bool8 sub_80C5F98(void)
+{
+    switch (gUnknown_020387EC->unk08)
+    {
+        case 0:
+            gUnknown_020387EC->unk0C -= gUnknown_020387EC->unk06;
+            if (gUnknown_020387EC->unk0C < 2)
+            {
+                BlendPalettes(gUnknown_020387EC->selectedPalettes, 0x10, 0xFFFF);
+                SetHBlankCallback(sub_80C603C);
+                gUnknown_020387EC->unk0C = 1;
+                gUnknown_020387EC->unk08++;
+            }
+            break;
+        case 1:
+            if (gUnknown_020387EC->unk0A == 8)
+            {
+                BlendPalettes(0xFFFFFFFF, 16, 0);
+                gUnknown_020387EC->unk08++;
+            }
+            break;
+        case 2:
+            REG_BLDCNT = 0;
+            REG_BLDY = 0;
+            FreeSpriteTilesByTag(gUnknown_020387EC->tileTag);
+            FreeSpritePaletteByTag(gUnknown_020387EC->paletteTag);
+            HBlankIntrOff();
+            gUnknown_020387EC->unk08++;
+            return TRUE;
+        default:
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void sub_80C603C(void)
+{
+    vu16 vcount = REG_VCOUNT & 0xFF;
+    if (vcount == 0x50)
+        REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_EFFECT_LIGHTEN;
+    else
+        REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
+}
+
+static void sub_80C6078(void)
+{
+    vu16 vcount = REG_VCOUNT & 0xFF;
+    if (vcount > 0x50 - gUnknown_020387EC->unk0C && vcount < 0x50 + gUnknown_020387EC->unk0C)
+        REG_BLDY = 0;
+    else
+        REG_BLDY = 16;
+}
+
+static void sub_80C60CC(struct Sprite *sprite)
+{
+    sprite->pos1.x += sprite->data[0];
+    if (sprite->pos1.x < -0x08 || sprite->pos1.x > 0xf8)
+    {
+        DestroySprite(sprite);
+        gUnknown_020387EC->unk0A++;
+        if (gUnknown_020387EC->unk0A == 8)
+        {
+            FreeSpriteTilesByTag(gUnknown_020387EC->tileTag);
+            FreeSpritePaletteByTag(gUnknown_020387EC->paletteTag);
+            BlendPalettes(gUnknown_020387EC->selectedPalettes, 0, 0xffff);
+            SetHBlankCallback(sub_80C6078);
+        }
+    }
+}
+
+static void sub_80C6130(struct Sprite *sprite)
+{
+    if (sprite->data[4] == 0 && gUnknown_020387EC->unk0C == 1)
+    {
+        sprite->pos1.x += sprite->data[0];
+        if (sprite->pos1.x > -0x10 && sprite->pos1.x < 0x100)
+            sprite->invisible = FALSE;
+        if (sprite->data[1] > 0)
+        {
+            if (sprite->pos1.x >= sprite->data[2])
+                sprite->data[4] = 1;
+        }
+        else
+        {
+            if (sprite->pos1.x <= sprite->data[2])
+                sprite->data[4] = 1;
+        }
+        if (sprite->data[4])
+        {
+            gUnknown_020387EC->unk0A++;
+            sprite->pos1.x = sprite->data[2];
+        }
+    }
+}
+
+static void HBlankIntrOn(IntrFunc cb)
+{
+    u16 imeBak;
+    INTR_CHECK |= INTR_FLAG_HBLANK;
+    REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_HBLANK;
+    REG_IME = imeBak;
+    gMain.intrCheck |= INTR_FLAG_HBLANK;
+    SetHBlankCallback(cb);
+}
+
+static void HBlankIntrOff(void)
+{
+    u16 imeBak;
+    INTR_CHECK &= ~INTR_FLAG_HBLANK;
+    REG_DISPSTAT &= ~DISPSTAT_HBLANK_INTR;
+    imeBak = REG_IME;
+    REG_IME = 0;
+    REG_IE &= ~INTR_FLAG_HBLANK;
+    REG_IME = imeBak;
+    gMain.intrCheck &= ~INTR_FLAG_HBLANK;
+    SetHBlankCallback(NULL);
 }
