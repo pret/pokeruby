@@ -11,13 +11,22 @@ void sub_80C6130(struct Sprite *);
 void sub_80C61B0(IntrFunc);
 void ClearGpuRegBits(void);
 
-extern const struct OamData gOamData_83D18D8;
+struct OamData gOamData_83D18D8 = {
+    .shape = ST_OAM_H_RECTANGLE,
+    .size = 1
+};
 
-extern const union AnimCmd *const gSpriteAnimTable_83D18E8[];
+union AnimCmd gSpriteAnim_83D18E0[] = {
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END
+};
 
-extern const u16 gUnknownPal_083D18EC[16];
+const union AnimCmd *gSpriteAnimTable_83D18E8[] = {
+    gSpriteAnim_83D18E0
+};
 
-extern const u8 gUnknownGfx_083D190C[128];
+u16 gUnknownPal_083D18EC[] = INCBIN_U16("graphics/unknown/unknown_3D18EC.gbapal");
+u8 gUnknownGfx_083D190C[] = INCBIN_U8("graphics/unknown/unknown_3D190C.4bpp");
 
 EWRAM_DATA struct PCScreenEffectStruct *gUnknown_020387EC = NULL;
 

@@ -600,7 +600,7 @@ SECTIONS {
         data/contest_link_80C2020.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         src/pc_screen_effect.o(.rodata);
-        data/pc_screen_effect.o(.rodata);
+        src/pc_screen_effect.o(.data);
         src/fldeff_secretpower.o(.rodata);
         src/fldeff_decoration.o(.rodata);
         src/fldeff_recordmixing.o(.rodata);
