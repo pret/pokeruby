@@ -200,7 +200,7 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
 
     if (index < 11 && ribbonId < 65)
     {
-        gSaveBlock1.giftRibbons[index] = ribbonId;
+        gSaveBlock1.externalReservedData.giftRibbons[index] = ribbonId;
         for (i = 0; i < 6; i++)
         {
             struct Pokemon *pkmn = &gPlayerParty[i];
