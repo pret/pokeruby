@@ -1,6 +1,8 @@
 
 // Includes
 #include "global.h"
+#include "constants/species.h"
+#include "constants/maps.h"
 #include "ewram.h"
 #include "main.h"
 #include "palette.h"
@@ -9,17 +11,32 @@
 #include "region_map.h"
 #include "string_util.h"
 #include "text.h"
+#include "wild_encounter.h"
+#include "roamer.h"
+#include "overworld.h"
 
 // Static type declarations
 
+struct PokedexAreaScreenSubstruct0010
+{
+    u8 mapGroup;
+    u8 mapNum;
+    u16 regionMapSectionId;
+};
+
 struct PokedexAreaScreenEwramStruct
 {
-    u8 filler_0000[4];
+    void (*unk0000)(void);
     u32 unk0004;
     u32 unk0008;
-    u8 filler_000C[2];
+    u16 unk000C;
     u16 unk000E;
-    u8 filler_0010[0x6d8];
+    struct PokedexAreaScreenSubstruct0010 unk0010[0x40];
+    u16 unk0110;
+    u16 unk0112;
+    u16 unk0114;
+    u8 unk0116[0x500];
+    u8 filler_0616[0xD2];
     struct RegionMap unk06E8;
     u8 unk0F68[16];
 };
@@ -42,11 +59,22 @@ void sub_81107DC(void);
 void sub_81107F0(void);
 void sub_8110814(void (*func)(void));
 void sub_8110824(void);
-void sub_8111084(void);
 bool8 DrawAreaGlow(void);
+void FindMapsWithMon(u16 mon);
+void sub_8111084(void);
+void sub_8111110(void);
 void sub_8111288(void);
+void BuildAreaGlowTilemap(void);
+bool8 MapHasMon(const struct WildPokemonHeader *header, u16 mon);
+void SetAreaHasMon(u16 mapGroup, u16 mapNum);
+void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum);
 
 // .rodata
+
+extern const u16 gUnknown_083F8418[];
+extern const u8 gUnknown_083F8438[];
+extern const u16 gUnknown_083F856C[];
+extern const u16 gUnknown_083F856E[][3];
 
 // .text
 
@@ -107,4 +135,134 @@ void CB2_UnusedPokedexAreaScreen(void)
             return;
     }
     gMain.state++;
+}
+
+void sub_81107DC(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_81107F0(void)
+{
+    ePokedexAreaScreen.unk0000();
+    sub_8111110();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+void sub_8110814(void (*func)(void))
+{
+    ePokedexAreaScreen.unk0000 = func;
+    ePokedexAreaScreen.unk000C = 0;
+}
+
+void sub_8110824(void)
+{
+    ePokedexAreaScreen.unk0114 = 0;
+}
+
+bool8 DrawAreaGlow(void)
+{
+    switch (ePokedexAreaScreen.unk0114)
+    {
+        case 0:
+            FindMapsWithMon(ePokedexAreaScreen.unk000E);
+            break;
+        case 1:
+            BuildAreaGlowTilemap();
+            break;
+        case 2:
+            LZ77UnCompVram(gUnknown_083F8438, BG_CHAR_ADDR(3));
+            break;
+        case 3:
+            DmaCopy16(3, ePokedexAreaScreen.unk0116, BG_SCREEN_ADDR(30), 0x500);
+            break;
+        case 4:
+            LoadPalette(gUnknown_083F8418, 0, 32);
+            break;
+        case 5:
+            REG_BG0CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256;
+            ePokedexAreaScreen.unk0114++;
+            return FALSE;
+        default:
+            return FALSE;
+    }
+    ePokedexAreaScreen.unk0114++;
+    return TRUE;
+}
+
+void FindMapsWithMon(u16 mon)
+{
+    u16 i;
+    struct Roamer *roamer;
+
+    if (mon != ROAMER_SPECIES)
+    {
+        ePokedexAreaScreen.unk0110 = 0;
+        ePokedexAreaScreen.unk0112 = 0;
+        for (i = 0; i < 1; i++)
+        {
+            if (gUnknown_083F856C[i] == mon)
+                return;
+        }
+        for (i = 0; gUnknown_083F856E[i][0] != NUM_SPECIES; i++)
+        {
+            if (mon == gUnknown_083F856E[i][0])
+            {
+                switch (gUnknown_083F856E[i][1])
+                {
+                    case MAP_GROUP(PETALBURG_CITY):
+                        SetAreaHasMon(gUnknown_083F856E[i][1], gUnknown_083F856E[i][2]);
+                        break;
+                    case MAP_GROUP(METEOR_FALLS_1F_1R):
+                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                        SetSpecialMapHasMon(gUnknown_083F856E[i][1], gUnknown_083F856E[i][2]);
+                        break;
+                }
+            }
+        }
+        for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
+        {
+            if (MapHasMon(gWildMonHeaders + i, mon))
+            {
+                switch (gWildMonHeaders[i].mapGroup)
+                {
+                    case MAP_GROUP(PETALBURG_CITY):
+                        SetAreaHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                        break;
+                    case MAP_GROUP(METEOR_FALLS_1F_1R):
+                    case MAP_GROUP(SAFARI_ZONE_NORTHWEST):
+                        SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                        break;
+                }
+            }
+        }
+    }
+    else
+    {
+        ePokedexAreaScreen.unk0112 = 0;
+        roamer = &gSaveBlock1.roamer;
+        if (roamer->active)
+        {
+            GetRoamerLocation(&ePokedexAreaScreen.unk0010[0].mapGroup, &ePokedexAreaScreen.unk0010[0].mapNum);
+            ePokedexAreaScreen.unk0010[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(ePokedexAreaScreen.unk0010[0].mapGroup, ePokedexAreaScreen.unk0010[0].mapNum)->regionMapSectionId;
+            ePokedexAreaScreen.unk0110 = 1;
+        }
+        else
+            ePokedexAreaScreen.unk0110 = 0;
+    }
+}
+
+void SetAreaHasMon(u16 mapGroup, u16 mapNum)
+{
+    if (ePokedexAreaScreen.unk0110 < 0x40)
+    {
+        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].mapGroup = mapGroup;
+        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].mapNum = mapNum;
+        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
+        ePokedexAreaScreen.unk0110++;
+    }
 }
