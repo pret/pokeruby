@@ -340,6 +340,7 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle/battle_records.o(.text);
+        src/pokedex_area_screen.o(.text);
         asm/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         src/roulette.o(.text);

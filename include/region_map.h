@@ -51,7 +51,7 @@ struct RegionMap
     /*0x080*/ u8 filler80[0x100];
     /*0x180*/ u8 cursorSmallImage[0x100];
     /*0x280*/ u8 cursorLargeImage[0x600];
-};
+}; // size: 0x880
 
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed);
 void sub_80FA904(struct RegionMap *regionMap, bool8 zoomed);

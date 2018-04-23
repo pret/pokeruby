@@ -26,6 +26,7 @@ gUnknown_083F857A:: @ 83F857A
 
 @ XXX: what is this?
 	.align 2
+gUnknown_083F8588::
 	.4byte gSharedMem
 
 	.align 2
