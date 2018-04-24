@@ -68,6 +68,8 @@ static void sub_80D3874(struct Sprite *sprite)
     }
 }
 
+// The following functions are nonmatching because of unexplained behavior regarding gBattle_BG1_X and gBattle_BG1_Y.  They are therefore on the most wanted list.
+
 #ifdef NONMATCHING
 void sub_80D38BC(u8 taskId)
 {
@@ -457,5 +459,324 @@ NAKED void sub_80D38BC(u8 taskId)
                 "    bx r0\n"
                 "    .align 2, 0\n"
                 "_080D3B5C: .4byte sub_80D3B60");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING
+void sub_80D3B60(u8 taskId)
+{
+    vu8 sp0;
+    struct UnknownStruct2 substruct;
+    u8 i;
+    u16 tmp;
+
+    // Desired output: *gBattle_BG1_X is loaded into r1, then gBattle_BG1_X is loaded into r2 almost immediately after.  Similar with gBattle_BG1_Y in the next line.
+    gBattle_BG1_X += gTasks[taskId].data[0];
+    gBattle_BG1_Y += gTasks[taskId].data[1];
+    sub_8078914(&substruct);
+    gTasks[taskId].data[2] += gTasks[taskId].data[1];
+    gTasks[taskId].data[5]++;
+    if (gTasks[taskId].data[5] == 4)
+    {
+        tmp = gPlttBufferFaded[16 * substruct.unk8 + 7];
+        for (i = 6; i > 0; i--)
+        {
+            gPlttBufferFaded[((16 * substruct.unk8 + 1) + i)] = gPlttBufferFaded[((16 * substruct.unk8 + 1) + i) - 1];
+        }
+        gPlttBufferFaded[16 * substruct.unk8 + 1] = tmp;
+        gTasks[taskId].data[5] = 0;
+    }
+    gTasks[taskId].data[6]++;
+    if (gTasks[taskId].data[6] > 1)
+    {
+        gTasks[taskId].data[6] = 0;
+        gTasks[taskId].data[3]++;
+        if (gTasks[taskId].data[3] < 14)
+        {
+            gTasks[gTasks[taskId].data[15]].data[1] = ((16 - gTasks[taskId].data[3]) << 8) | gTasks[taskId].data[3];
+            gTasks[taskId].data[4]++;
+        }
+        if (gTasks[taskId].data[3] > 54)
+        {
+            gTasks[taskId].data[4]--;
+            gTasks[gTasks[taskId].data[15]].data[1] = ((16 - gTasks[taskId].data[4]) << 8) | gTasks[taskId].data[4];
+        }
+    }
+    if ((gTasks[gTasks[taskId].data[15]].data[1] & 0x1F) == 0)
+    {
+        DmaFill32Large(3, 0, substruct.unk0, 0x10000, 0x1000);
+        sp0 = 0;
+        sp0 = 0;
+        DmaFill32Defvars(3, 0, substruct.unk4, 0x1000);
+        if (!IsContest())
+        {
+            ((volatile struct BgCnt *)REG_ADDR_BG1CNT)->charBaseBlock = 0;
+        }
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        gTasks[gTasks[taskId].data[15]].data[1] = -1;
+        DestroyAnimVisualTask(taskId);
+    }
+}
+#else
+NAKED void sub_80D3B60(u8 taskId)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0x18\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r7, r0, 24\n"
+                "\tldr r0, _080D3D44 @ =gTasks\n"
+                "\tlsls r4, r7, 2\n"
+                "\tadds r4, r7\n"
+                "\tlsls r4, 3\n"
+                "\tadds r4, r0\n"
+                "\tldrh r0, [r4, 0x8]\n"
+                "\tldr r1, _080D3D48 @ =gBattle_BG1_X\n"
+                "\tldrh r1, [r1]\n"
+                "\tadds r0, r1\n"
+                "\tldr r2, _080D3D48 @ =gBattle_BG1_X\n"
+                "\tstrh r0, [r2]\n"
+                "\tldrh r0, [r4, 0xA]\n"
+                "\tldr r3, _080D3D4C @ =gBattle_BG1_Y\n"
+                "\tldrh r3, [r3]\n"
+                "\tadds r0, r3\n"
+                "\tldr r1, _080D3D4C @ =gBattle_BG1_Y\n"
+                "\tstrh r0, [r1]\n"
+                "\tadd r5, sp, 0x4\n"
+                "\tadds r0, r5, 0\n"
+                "\tbl sub_8078914\n"
+                "\tldrh r0, [r4, 0xA]\n"
+                "\tldrh r2, [r4, 0xC]\n"
+                "\tadds r0, r2\n"
+                "\tstrh r0, [r4, 0xC]\n"
+                "\tldrh r0, [r4, 0x12]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r4, 0x12]\n"
+                "\tlsls r0, 16\n"
+                "\tasrs r0, 16\n"
+                "\tmov r10, r5\n"
+                "\tcmp r0, 0x4\n"
+                "\tbne _080D3C02\n"
+                "\tldr r1, _080D3D50 @ =gPlttBufferFaded\n"
+                "\tldrb r0, [r5, 0x8]\n"
+                "\tlsls r0, 4\n"
+                "\tadds r0, 0x7\n"
+                "\tlsls r0, 1\n"
+                "\tadds r0, r1\n"
+                "\tldrh r6, [r0]\n"
+                "\tmovs r2, 0x6\n"
+                "\tadds r5, r1, 0\n"
+                "\tadds r3, r5, 0\n"
+                "\tmov r4, r10\n"
+                "_080D3BC8:\n"
+                "\tldrb r0, [r4, 0x8]\n"
+                "\tlsls r0, 4\n"
+                "\tadds r1, r2, 0x1\n"
+                "\tadds r0, r1\n"
+                "\tlsls r1, r0, 1\n"
+                "\tadds r1, r3\n"
+                "\tsubs r0, 0x1\n"
+                "\tlsls r0, 1\n"
+                "\tadds r0, r3\n"
+                "\tldrh r0, [r0]\n"
+                "\tstrh r0, [r1]\n"
+                "\tsubs r0, r2, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r2, r0, 24\n"
+                "\tcmp r2, 0\n"
+                "\tbne _080D3BC8\n"
+                "\tmov r3, r10\n"
+                "\tldrb r0, [r3, 0x8]\n"
+                "\tlsls r0, 4\n"
+                "\tadds r0, 0x1\n"
+                "\tlsls r0, 1\n"
+                "\tadds r0, r5\n"
+                "\tstrh r6, [r0]\n"
+                "\tldr r1, _080D3D44 @ =gTasks\n"
+                "\tlsls r0, r7, 2\n"
+                "\tadds r0, r7\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r1\n"
+                "\tstrh r2, [r0, 0x12]\n"
+                "_080D3C02:\n"
+                "\tldr r1, _080D3D44 @ =gTasks\n"
+                "\tlsls r2, r7, 2\n"
+                "\tadds r0, r2, r7\n"
+                "\tlsls r0, 3\n"
+                "\tadds r3, r0, r1\n"
+                "\tldrh r0, [r3, 0x14]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r3, 0x14]\n"
+                "\tlsls r0, 16\n"
+                "\tasrs r0, 16\n"
+                "\tadds r4, r1, 0\n"
+                "\tstr r2, [sp, 0x14]\n"
+                "\tcmp r0, 0x1\n"
+                "\tble _080D3C70\n"
+                "\tmovs r0, 0\n"
+                "\tstrh r0, [r3, 0x14]\n"
+                "\tldrh r0, [r3, 0xE]\n"
+                "\tadds r2, r0, 0x1\n"
+                "\tstrh r2, [r3, 0xE]\n"
+                "\tlsls r0, r2, 16\n"
+                "\tasrs r0, 16\n"
+                "\tcmp r0, 0xD\n"
+                "\tbgt _080D3C4C\n"
+                "\tmovs r1, 0x26\n"
+                "\tldrsh r0, [r3, r1]\n"
+                "\tlsls r1, r0, 2\n"
+                "\tadds r1, r0\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tmovs r0, 0x10\n"
+                "\tsubs r0, r2\n"
+                "\tlsls r0, 8\n"
+                "\torrs r2, r0\n"
+                "\tstrh r2, [r1, 0xA]\n"
+                "\tldrh r0, [r3, 0x10]\n"
+                "\tadds r0, 0x1\n"
+                "\tstrh r0, [r3, 0x10]\n"
+                "_080D3C4C:\n"
+                "\tmovs r2, 0xE\n"
+                "\tldrsh r0, [r3, r2]\n"
+                "\tcmp r0, 0x36\n"
+                "\tble _080D3C70\n"
+                "\tldrh r2, [r3, 0x10]\n"
+                "\tsubs r2, 0x1\n"
+                "\tstrh r2, [r3, 0x10]\n"
+                "\tmovs r1, 0x26\n"
+                "\tldrsh r0, [r3, r1]\n"
+                "\tlsls r1, r0, 2\n"
+                "\tadds r1, r0\n"
+                "\tlsls r1, 3\n"
+                "\tadds r1, r4\n"
+                "\tmovs r0, 0x10\n"
+                "\tsubs r0, r2\n"
+                "\tlsls r0, 8\n"
+                "\torrs r2, r0\n"
+                "\tstrh r2, [r1, 0xA]\n"
+                "_080D3C70:\n"
+                "\tldr r2, [sp, 0x14]\n"
+                "\tadds r0, r2, r7\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r4\n"
+                "\tmovs r3, 0x26\n"
+                "\tldrsh r1, [r0, r3]\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r4\n"
+                "\tldrh r1, [r0, 0xA]\n"
+                "\tmovs r0, 0x1F\n"
+                "\tands r0, r1\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080D3D32\n"
+                "\tldr r2, [sp, 0x4]\n"
+                "\tmovs r3, 0x80\n"
+                "\tlsls r3, 6\n"
+                "\tadd r6, sp, 0x10\n"
+                "\tmovs r5, 0\n"
+                "\tldr r1, _080D3D54 @ =0x040000d4\n"
+                "\tmovs r4, 0x80\n"
+                "\tlsls r4, 5\n"
+                "\tmov r8, r6\n"
+                "\tldr r0, _080D3D58 @ =0x85000400\n"
+                "\tmov r12, r0\n"
+                "\tmovs r0, 0x85\n"
+                "\tlsls r0, 24\n"
+                "\tmov r9, r0\n"
+                "_080D3CAA:\n"
+                "\tstr r5, [sp, 0x10]\n"
+                "\tmov r0, r8\n"
+                "\tstr r0, [r1]\n"
+                "\tstr r2, [r1, 0x4]\n"
+                "\tmov r0, r12\n"
+                "\tstr r0, [r1, 0x8]\n"
+                "\tldr r0, [r1, 0x8]\n"
+                "\tadds r2, r4\n"
+                "\tsubs r3, r4\n"
+                "\tcmp r3, r4\n"
+                "\tbhi _080D3CAA\n"
+                "\tstr r5, [sp, 0x10]\n"
+                "\tstr r6, [r1]\n"
+                "\tstr r2, [r1, 0x4]\n"
+                "\tlsrs r0, r3, 2\n"
+                "\tmov r2, r9\n"
+                "\torrs r0, r2\n"
+                "\tstr r0, [r1, 0x8]\n"
+                "\tldr r0, [r1, 0x8]\n"
+                "\tmov r0, sp\n"
+                "\tmovs r1, 0\n"
+                "\tstrb r1, [r0]\n"
+                "\tstrb r1, [r0]\n"
+                "\tmov r3, r10\n"
+                "\tldr r1, [r3, 0x4]\n"
+                "\tmovs r4, 0\n"
+                "\tstr r4, [sp, 0x10]\n"
+                "\tldr r0, _080D3D54 @ =0x040000d4\n"
+                "\tstr r6, [r0]\n"
+                "\tstr r1, [r0, 0x4]\n"
+                "\tldr r1, _080D3D58 @ =0x85000400\n"
+                "\tstr r1, [r0, 0x8]\n"
+                "\tldr r0, [r0, 0x8]\n"
+                "\tbl IsContest\n"
+                "\tlsls r0, 24\n"
+                "\tcmp r0, 0\n"
+                "\tbne _080D3D02\n"
+                "\tldr r2, _080D3D5C @ =REG_BG1CNT\n"
+                "\tldrb r1, [r2]\n"
+                "\tmovs r0, 0xD\n"
+                "\tnegs r0, r0\n"
+                "\tands r0, r1\n"
+                "\tstrb r0, [r2]\n"
+                "_080D3D02:\n"
+                "\tldr r0, _080D3D48 @ =gBattle_BG1_X\n"
+                "\tstrh r4, [r0]\n"
+                "\tldr r1, _080D3D4C @ =gBattle_BG1_Y\n"
+                "\tstrh r4, [r1]\n"
+                "\tldr r0, _080D3D60 @ =REG_BLDCNT\n"
+                "\tstrh r4, [r0]\n"
+                "\tadds r0, 0x2\n"
+                "\tstrh r4, [r0]\n"
+                "\tldr r2, _080D3D44 @ =gTasks\n"
+                "\tldr r3, [sp, 0x14]\n"
+                "\tadds r0, r3, r7\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r2\n"
+                "\tmovs r3, 0x26\n"
+                "\tldrsh r1, [r0, r3]\n"
+                "\tlsls r0, r1, 2\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 3\n"
+                "\tadds r0, r2\n"
+                "\tldr r1, _080D3D64 @ =0x0000ffff\n"
+                "\tstrh r1, [r0, 0x26]\n"
+                "\tadds r0, r7, 0\n"
+                "\tbl DestroyAnimVisualTask\n"
+                "_080D3D32:\n"
+                "\tadd sp, 0x18\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_080D3D44: .4byte gTasks\n"
+                "_080D3D48: .4byte gBattle_BG1_X\n"
+                "_080D3D4C: .4byte gBattle_BG1_Y\n"
+                "_080D3D50: .4byte gPlttBufferFaded\n"
+                "_080D3D54: .4byte 0x040000d4\n"
+                "_080D3D58: .4byte 0x85000400\n"
+                "_080D3D5C: .4byte REG_BG1CNT\n"
+                "_080D3D60: .4byte REG_BLDCNT\n"
+                "_080D3D64: .4byte 0x0000ffff");
 }
 #endif // NONMATCHING
