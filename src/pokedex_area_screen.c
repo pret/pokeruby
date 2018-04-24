@@ -19,6 +19,7 @@
 #include "overworld.h"
 #include "event_data.h"
 #include "trig.h"
+#include "graphics.h"
 
 // Static type declarations
 
@@ -1379,6 +1380,60 @@ void DestroyAreaSprites(void)
         if (gPokedexAreaScreenPtr->unk0FA8[i] != NULL)
         {
             DestroySprite(gPokedexAreaScreenPtr->unk0FA8[i]);
+        }
+    }
+}
+
+const struct SpritePalette gUnknown_083F865C = {gAreaUnknownPalette, 3};
+
+void LoadAreaUnknownGraphics(void)
+{
+    struct SpriteSheet spriteSheet = {gPokedexAreaScreenPtr->unk0FB4, 0x600, 3};
+
+    LZ77UnCompWram(gAreaUnknownTiles, gPokedexAreaScreenPtr->unk0FB4);
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&gUnknown_083F865C);
+}
+
+const struct OamData gOamData_83F866C = {
+    .size = 2,
+    .priority = 1
+};
+
+const struct SpriteTemplate gSpriteTemplate_83F8674 = {
+    3,
+    3,
+    &gOamData_83F866C,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+void CreateAreaUnknownSprites(void)
+{
+    u16 i;
+    u8 spriteId;
+
+    if (gPokedexAreaScreenPtr->unk0110 != 0 || gPokedexAreaScreenPtr->unk0112 != 0)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            gPokedexAreaScreenPtr->unk0FA8[i] = NULL;
+        }
+    }
+    else
+    {
+        for (i = 0; i < 3; i++)
+        {
+            spriteId = CreateSprite(&gSpriteTemplate_83F8674, i * 32 + 0xa0, 0x8c, 0);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].oam.tileNum += i * 16;
+                gPokedexAreaScreenPtr->unk0FA8[i] = gSprites + spriteId;
+            }
+            else
+                gPokedexAreaScreenPtr->unk0FA8[i] = NULL;
         }
     }
 }
