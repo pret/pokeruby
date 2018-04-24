@@ -9,11 +9,13 @@
 #include "task.h"
 #include "sprite.h"
 #include "region_map.h"
+#include "region_map_sections.h"
 #include "string_util.h"
 #include "text.h"
 #include "wild_encounter.h"
 #include "roamer.h"
 #include "overworld.h"
+#include "event_data.h"
 
 // Static type declarations
 
@@ -36,7 +38,9 @@ struct PokedexAreaScreenEwramStruct
     u16 unk0112;
     u16 unk0114;
     u8 unk0116[0x500];
-    u8 filler_0616[0xD2];
+    u8 filler_0616[0x0A];
+    u16 unk0620[0x20];
+    u8 filler_0660[0x88];
     struct RegionMap unk06E8;
     u8 unk0F68[16];
 };
@@ -61,13 +65,14 @@ void sub_8110814(void (*func)(void));
 void sub_8110824(void);
 bool8 DrawAreaGlow(void);
 void FindMapsWithMon(u16 mon);
+void SetAreaHasMon(u16 mapGroup, u16 mapNum);
+void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum);
+bool8 MapHasMon(const struct WildPokemonHeader *header, u16 mon);
+bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 mon, u16 size);
+void BuildAreaGlowTilemap(void);
 void sub_8111084(void);
 void sub_8111110(void);
 void sub_8111288(void);
-void BuildAreaGlowTilemap(void);
-bool8 MapHasMon(const struct WildPokemonHeader *header, u16 mon);
-void SetAreaHasMon(u16 mapGroup, u16 mapNum);
-void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum);
 
 // .rodata
 
@@ -75,6 +80,7 @@ extern const u16 gUnknown_083F8418[];
 extern const u8 gUnknown_083F8438[];
 extern const u16 gUnknown_083F856C[];
 extern const u16 gUnknown_083F856E[][3];
+extern const u16 gUnknown_083F857A[][2];
 
 // .text
 
@@ -265,4 +271,60 @@ void SetAreaHasMon(u16 mapGroup, u16 mapNum)
         ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
         ePokedexAreaScreen.unk0110++;
     }
+}
+
+void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
+{
+    const struct MapHeader *mapHeader;
+    u16 i;
+
+    if (ePokedexAreaScreen.unk0112 < 0x20)
+    {
+        mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+        if (mapHeader->regionMapSectionId < MAPSEC_Nothing)
+        {
+            for (i = 0; gUnknown_083F857A[i][0] != MAPSEC_Nothing; i++)
+            {
+                if (mapHeader->regionMapSectionId == gUnknown_083F857A[i][0] && !FlagGet(gUnknown_083F857A[i][1]))
+                    return;
+            }
+            for (i = 0; i < ePokedexAreaScreen.unk0112; i++)
+            {
+                if (ePokedexAreaScreen.unk0620[i] == mapHeader->regionMapSectionId)
+                    break;
+            }
+            if (i == ePokedexAreaScreen.unk0112)
+            {
+                ePokedexAreaScreen.unk0620[i] = mapHeader->regionMapSectionId;
+                ePokedexAreaScreen.unk0112++;
+            }
+        }
+    }
+}
+
+bool8 MapHasMon(const struct WildPokemonHeader *header, u16 mon)
+{
+    if (MonListHasMon(header->landMonsInfo, mon, 12))
+        return TRUE;
+    if (MonListHasMon(header->waterMonsInfo, mon, 5))
+        return TRUE;
+    if (MonListHasMon(header->fishingMonsInfo, mon, 12))
+        return TRUE;
+    if (MonListHasMon(header->rockSmashMonsInfo, mon, 5))
+        return TRUE;
+    return FALSE;
+}
+
+bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 mon, u16 size)
+{
+    u16 i;
+    if (info != NULL)
+    {
+        for (i = 0; i < size; i++)
+        {
+            if (info->wildPokemon[i].species == mon)
+                return TRUE;
+        }
+    }
+    return FALSE;
 }
