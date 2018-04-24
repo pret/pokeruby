@@ -16,6 +16,7 @@
 #include "roamer.h"
 #include "overworld.h"
 #include "event_data.h"
+#include "trig.h"
 
 // Static type declarations
 
@@ -29,8 +30,8 @@ struct PokedexAreaScreenSubstruct0010
 struct PokedexAreaScreenEwramStruct
 {
     void (*unk0000)(void);
-    u32 unk0004;
-    u32 unk0008;
+    MainCallback unk0004;
+    MainCallback unk0008;
     u16 unk000C;
     u16 unk000E;
     struct PokedexAreaScreenSubstruct0010 unk0010[0x40];
@@ -38,11 +39,19 @@ struct PokedexAreaScreenEwramStruct
     u16 unk0112;
     u16 unk0114;
     u16 unk0116[0x280];
-    u8 filler_0616[0x0A];
+    u16 unk0616;
+    u16 unk0618;
+    u16 unk061A;
+    u16 unk061C;
+    u8 unk061E;
+    u8 unk061F;
     u16 unk0620[0x20];
-    u8 filler_0660[0x88];
+    struct Sprite * unk0660[0x20];
+    u8 filler_06E0[8];
     struct RegionMap unk06E8;
     u8 unk0F68[16];
+    u8 filler_0F78[0x3C];
+    u8 unk0FB4[0x600];
 };
 
 #define ePokedexAreaScreen (*(struct PokedexAreaScreenEwramStruct *)gSharedMem)
@@ -66,6 +75,9 @@ void BuildAreaGlowTilemap(void);
 void sub_8111084(void);
 void sub_8111110(void);
 void sub_8111288(void);
+void sub_81112BC(void);
+void sub_8111314(void);
+void sub_8111360(void);
 
 // .rodata
 
@@ -86,15 +98,15 @@ const u16 gUnknown_083F857A[][2] = {
     {MAPSEC_Nothing}
 };
 
-struct PokedexAreaScreenEwramStruct *const gUnknown_083F8588 = &ePokedexAreaScreen;
+struct PokedexAreaScreenEwramStruct *const gPokedexAreaScreenPtr = &ePokedexAreaScreen;
 
 // .text
 
-void UnusedPokedexAreaScreen(u16 a0, u32 a1, u32 a2)
+void UnusedPokedexAreaScreen(u16 a0, MainCallback a1, MainCallback a2)
 {
-    gUnknown_083F8588->unk0004 = a1;
-    gUnknown_083F8588->unk0008 = a2;
-    gUnknown_083F8588->unk000E = a0;
+    gPokedexAreaScreenPtr->unk0004 = a1;
+    gPokedexAreaScreenPtr->unk0008 = a2;
+    gPokedexAreaScreenPtr->unk000E = a0;
     SetMainCallback2(CB2_UnusedPokedexAreaScreen);
 }
 
@@ -118,8 +130,8 @@ void CB2_UnusedPokedexAreaScreen(void)
             REG_BG3VOFS = 0;
             break;
         case 1:
-            InitRegionMap(&gUnknown_083F8588->unk06E8, FALSE);
-            StringFill(gUnknown_083F8588->unk0F68, CHAR_SPACE, 16);
+            InitRegionMap(&gPokedexAreaScreenPtr->unk06E8, FALSE);
+            StringFill(gPokedexAreaScreenPtr->unk0F68, CHAR_SPACE, 16);
             break;
         case 2:
             sub_8110824();
@@ -158,7 +170,7 @@ void sub_81107DC(void)
 
 void sub_81107F0(void)
 {
-    gUnknown_083F8588->unk0000();
+    gPokedexAreaScreenPtr->unk0000();
     sub_8111110();
     AnimateSprites();
     BuildOamBuffer();
@@ -167,21 +179,21 @@ void sub_81107F0(void)
 
 void sub_8110814(void (*func)(void))
 {
-    gUnknown_083F8588->unk0000 = func;
-    gUnknown_083F8588->unk000C = 0;
+    gPokedexAreaScreenPtr->unk0000 = func;
+    gPokedexAreaScreenPtr->unk000C = 0;
 }
 
 void sub_8110824(void)
 {
-    gUnknown_083F8588->unk0114 = 0;
+    gPokedexAreaScreenPtr->unk0114 = 0;
 }
 
 bool8 DrawAreaGlow(void)
 {
-    switch (gUnknown_083F8588->unk0114)
+    switch (gPokedexAreaScreenPtr->unk0114)
     {
         case 0:
-            FindMapsWithMon(gUnknown_083F8588->unk000E);
+            FindMapsWithMon(gPokedexAreaScreenPtr->unk000E);
             break;
         case 1:
             BuildAreaGlowTilemap();
@@ -190,19 +202,19 @@ bool8 DrawAreaGlow(void)
             LZ77UnCompVram(gUnknown_083F8438, BG_CHAR_ADDR(3));
             break;
         case 3:
-            DmaCopy16(3, gUnknown_083F8588->unk0116, BG_SCREEN_ADDR(30), 0x500);
+            DmaCopy16(3, gPokedexAreaScreenPtr->unk0116, BG_SCREEN_ADDR(30), 0x500);
             break;
         case 4:
             LoadPalette(gUnknown_083F8418, 0, 32);
             break;
         case 5:
             REG_BG0CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256;
-            gUnknown_083F8588->unk0114++;
+            gPokedexAreaScreenPtr->unk0114++;
             return FALSE;
         default:
             return FALSE;
     }
-    gUnknown_083F8588->unk0114++;
+    gPokedexAreaScreenPtr->unk0114++;
     return TRUE;
 }
 
@@ -213,8 +225,8 @@ void FindMapsWithMon(u16 mon)
 
     if (mon != ROAMER_SPECIES)
     {
-        gUnknown_083F8588->unk0110 = 0;
-        gUnknown_083F8588->unk0112 = 0;
+        gPokedexAreaScreenPtr->unk0110 = 0;
+        gPokedexAreaScreenPtr->unk0112 = 0;
         for (i = 0; i < 1; i++)
         {
             if (gUnknown_083F856C[i] == mon)
@@ -255,27 +267,27 @@ void FindMapsWithMon(u16 mon)
     }
     else
     {
-        gUnknown_083F8588->unk0112 = 0;
+        gPokedexAreaScreenPtr->unk0112 = 0;
         roamer = &gSaveBlock1.roamer;
         if (roamer->active)
         {
-            GetRoamerLocation(&gUnknown_083F8588->unk0010[0].mapGroup, &gUnknown_083F8588->unk0010[0].mapNum);
-            gUnknown_083F8588->unk0010[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(gUnknown_083F8588->unk0010[0].mapGroup, gUnknown_083F8588->unk0010[0].mapNum)->regionMapSectionId;
-            gUnknown_083F8588->unk0110 = 1;
+            GetRoamerLocation(&gPokedexAreaScreenPtr->unk0010[0].mapGroup, &gPokedexAreaScreenPtr->unk0010[0].mapNum);
+            gPokedexAreaScreenPtr->unk0010[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(gPokedexAreaScreenPtr->unk0010[0].mapGroup, gPokedexAreaScreenPtr->unk0010[0].mapNum)->regionMapSectionId;
+            gPokedexAreaScreenPtr->unk0110 = 1;
         }
         else
-            gUnknown_083F8588->unk0110 = 0;
+            gPokedexAreaScreenPtr->unk0110 = 0;
     }
 }
 
 void SetAreaHasMon(u16 mapGroup, u16 mapNum)
 {
-    if (gUnknown_083F8588->unk0110 < 0x40)
+    if (gPokedexAreaScreenPtr->unk0110 < 0x40)
     {
-        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].mapGroup = mapGroup;
-        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].mapNum = mapNum;
-        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
-        gUnknown_083F8588->unk0110++;
+        gPokedexAreaScreenPtr->unk0010[gPokedexAreaScreenPtr->unk0110].mapGroup = mapGroup;
+        gPokedexAreaScreenPtr->unk0010[gPokedexAreaScreenPtr->unk0110].mapNum = mapNum;
+        gPokedexAreaScreenPtr->unk0010[gPokedexAreaScreenPtr->unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
+        gPokedexAreaScreenPtr->unk0110++;
     }
 }
 
@@ -284,7 +296,7 @@ void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     const struct MapHeader *mapHeader;
     u16 i;
 
-    if (gUnknown_083F8588->unk0112 < 0x20)
+    if (gPokedexAreaScreenPtr->unk0112 < 0x20)
     {
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
         if (mapHeader->regionMapSectionId < MAPSEC_Nothing)
@@ -294,15 +306,15 @@ void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
                 if (mapHeader->regionMapSectionId == gUnknown_083F857A[i][0] && !FlagGet(gUnknown_083F857A[i][1]))
                     return;
             }
-            for (i = 0; i < gUnknown_083F8588->unk0112; i++)
+            for (i = 0; i < gPokedexAreaScreenPtr->unk0112; i++)
             {
-                if (gUnknown_083F8588->unk0620[i] == mapHeader->regionMapSectionId)
+                if (gPokedexAreaScreenPtr->unk0620[i] == mapHeader->regionMapSectionId)
                     break;
             }
-            if (i == gUnknown_083F8588->unk0112)
+            if (i == gPokedexAreaScreenPtr->unk0112)
             {
-                gUnknown_083F8588->unk0620[i] = mapHeader->regionMapSectionId;
-                gUnknown_083F8588->unk0112++;
+                gPokedexAreaScreenPtr->unk0620[i] = mapHeader->regionMapSectionId;
+                gPokedexAreaScreenPtr->unk0112++;
             }
         }
     }
@@ -347,18 +359,18 @@ void BuildAreaGlowTilemap(void)
     u32 r3;
 
     for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++)
-        gUnknown_083F8588->unk0116[gUnknown_02039260] = 0;
+        gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] = 0;
 
-    for (gUnknown_02039260 = 0; gUnknown_02039260 < gUnknown_083F8588->unk0110; gUnknown_02039260++)
+    for (gUnknown_02039260 = 0; gUnknown_02039260 < gPokedexAreaScreenPtr->unk0110; gUnknown_02039260++)
     {
         gUnknown_02039266 = 0;
         for (gUnknown_02039264 = 0; gUnknown_02039264 < 20; gUnknown_02039264++)
         {
             for (gUnknown_02039262 = 0; gUnknown_02039262 < 32; gUnknown_02039262++)
             {
-                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) == gUnknown_083F8588->unk0010[gUnknown_02039260].regionMapSectionId)
+                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) == gPokedexAreaScreenPtr->unk0010[gUnknown_02039260].regionMapSectionId)
                 {
-                    gUnknown_083F8588->unk0116[gUnknown_02039266] = 0xFFFF;
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266] = 0xFFFF;
                 }
                 gUnknown_02039266++;
             }
@@ -370,24 +382,24 @@ void BuildAreaGlowTilemap(void)
     {
         for (gUnknown_02039262 = 0; gUnknown_02039262 < 32; gUnknown_02039262++)
         {
-            if (gUnknown_083F8588->unk0116[gUnknown_02039266] == 0xFFFF)
+            if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039266] == 0xFFFF)
             {
-                if (gUnknown_02039262 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 1] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 1] |= 0x02;
-                if (gUnknown_02039262 != 31 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 1] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 1] |= 0x01;
-                if (gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 32] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 32] |= 0x08;
-                if (gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 32] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 32] |= 0x04;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 33] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 33] |= 0x10;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 31] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 31] |= 0x40;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 31] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 31] |= 0x20;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 33] != 0xFFFF)
-                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 33] |= 0x80;
+                if (gUnknown_02039262 != 0 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 1] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 1] |= 0x02;
+                if (gUnknown_02039262 != 31 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 1] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 1] |= 0x01;
+                if (gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 32] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 32] |= 0x08;
+                if (gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 32] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 32] |= 0x04;
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 33] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 33] |= 0x10;
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 31] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 - 31] |= 0x40;
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 31] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 31] |= 0x20;
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 && gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 33] != 0xFFFF)
+                    gPokedexAreaScreenPtr->unk0116[gUnknown_02039266 + 33] |= 0x80;
             }
             gUnknown_02039266++;
         }
@@ -395,36 +407,36 @@ void BuildAreaGlowTilemap(void)
 
     for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++) // Register difference on induction: expected r3, got r1
     {
-        if (gUnknown_083F8588->unk0116[gUnknown_02039260] == 0xFFFF)
-            gUnknown_083F8588->unk0116[gUnknown_02039260] = 0x10;
-        else if (gUnknown_083F8588->unk0116[gUnknown_02039260] != 0)
+        if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] == 0xFFFF)
+            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] = 0x10;
+        else if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] != 0)
         {
-            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x02)
-                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFFCF;
-            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x01)
-                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFF3F;
-            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x08)
-                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFFAF;
-            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x04)
-                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFF5F;
-            gUnknown_02039268 = gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x0F;
-            gUnknown_0203926A = gUnknown_083F8588->unk0116[gUnknown_02039260] & 0xF0;
+            if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0x02)
+                gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] &= 0xFFCF;
+            if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0x01)
+                gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] &= 0xFF3F;
+            if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0x08)
+                gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] &= 0xFFAF;
+            if (gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0x04)
+                gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] &= 0xFF5F;
+            gUnknown_02039268 = gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0x0F;
+            gUnknown_0203926A = gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] & 0xF0;
             if (gUnknown_0203926A)
             {
-                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0x0F;
+                gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] &= 0x0F;
                 switch (gUnknown_02039268)
                 {
                     case 0:
                         if (gUnknown_0203926A != 0)
-                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x10;
+                            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x10;
                         break;
                     case 2:
                         if (gUnknown_0203926A != 0)
-                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x1E;
+                            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x1E;
                         break;
                     case 1:
                         if (gUnknown_0203926A != 0)
-                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 6) + 0x20;
+                            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 6) + 0x20;
                         break;
                     case 8:
                         if (gUnknown_0203926A != 0)
@@ -434,7 +446,7 @@ void BuildAreaGlowTilemap(void)
                                 r3 |= 1;
                             if (gUnknown_0203926A & 0x20)
                                 r3 |= 2;
-                            gUnknown_083F8588->unk0116[gUnknown_02039260] += r3 + 0x20;
+                            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += r3 + 0x20;
                         }
                         break;
                     case 4:
@@ -445,16 +457,16 @@ void BuildAreaGlowTilemap(void)
                                 r3 |= 1;
                             if (gUnknown_0203926A & 0x10)
                                 r3 |= 2;
-                            gUnknown_083F8588->unk0116[gUnknown_02039260] += r3 + 0x21;
+                            gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += r3 + 0x21;
                         }
                         break;
                     case 5:
                     case 6:
-                        gUnknown_083F8588->unk0116[gUnknown_02039260] += 0x27;
+                        gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += 0x27;
                         break;
                     case 9:
                     case 10:
-                        gUnknown_083F8588->unk0116[gUnknown_02039260] += 0x25;
+                        gPokedexAreaScreenPtr->unk0116[gUnknown_02039260] += 0x25;
                         break;
                 }
             }
@@ -1039,3 +1051,138 @@ NAKED void BuildAreaGlowTilemap(void)
                 "_08111080: .4byte 0x027f0000");
 }
 #endif // NONMATCHING
+
+void sub_8111084(void)
+{
+    if (gPokedexAreaScreenPtr->unk0112 != 0 && gPokedexAreaScreenPtr->unk0110 == 0)
+        gPokedexAreaScreenPtr->unk061E = 1;
+    else
+        gPokedexAreaScreenPtr->unk061E = 0;
+    gPokedexAreaScreenPtr->unk0616 = 0;
+    gPokedexAreaScreenPtr->unk0618 = 0;
+    gPokedexAreaScreenPtr->unk061A = 0;
+    gPokedexAreaScreenPtr->unk061C = 0x40;
+    gPokedexAreaScreenPtr->unk061F = 1;
+    REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
+    REG_BLDALPHA = 0x1000;
+    sub_8111110();
+}
+
+void sub_8111110(void)
+{
+    u16 x;
+    u16 y;
+    u16 i;
+
+    if (gPokedexAreaScreenPtr->unk061E == 0)
+    {
+        if (gPokedexAreaScreenPtr->unk0616 == 0)
+        {
+            gPokedexAreaScreenPtr->unk0618++;
+            if (gPokedexAreaScreenPtr->unk0618 & 1)
+                gPokedexAreaScreenPtr->unk061A = (gPokedexAreaScreenPtr->unk061A + 4) & 0x7f;
+            else
+                gPokedexAreaScreenPtr->unk061C = (gPokedexAreaScreenPtr->unk061C + 4) & 0x7f;
+            x = gSineTable[gPokedexAreaScreenPtr->unk061A] >> 4;
+            y = gSineTable[gPokedexAreaScreenPtr->unk061C] >> 4;
+            REG_BLDALPHA = x | (y << 8);
+            gPokedexAreaScreenPtr->unk0616 = 0;
+            if (gPokedexAreaScreenPtr->unk0618 == 0x40)
+            {
+                gPokedexAreaScreenPtr->unk0618 = 0;
+                if (gPokedexAreaScreenPtr->unk0112 != 0)
+                    gPokedexAreaScreenPtr->unk061E = 1;
+            }
+        }
+        else
+            gPokedexAreaScreenPtr->unk0616--;
+    }
+    else
+    {
+        gPokedexAreaScreenPtr->unk0616++;
+        if (gPokedexAreaScreenPtr->unk0616 > 12)
+        {
+            gPokedexAreaScreenPtr->unk0616 = 0;
+            gPokedexAreaScreenPtr->unk061F++;
+            for (i = 0; i < gPokedexAreaScreenPtr->unk0112; i++)
+            {
+                gPokedexAreaScreenPtr->unk0660[i]->invisible = gPokedexAreaScreenPtr->unk061F & 1;
+            }
+            if (gPokedexAreaScreenPtr->unk061F > 4)
+            {
+                gPokedexAreaScreenPtr->unk061F = 1;
+                if (gPokedexAreaScreenPtr->unk0110 != 0)
+                    gPokedexAreaScreenPtr->unk061E = 0;
+            }
+        }
+    }
+}
+
+void sub_8111288(void)
+{
+    switch (gPokedexAreaScreenPtr->unk000C)
+    {
+        case 0:
+            gPokedexAreaScreenPtr->unk000C = 1;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                sub_8110814(sub_81112BC);
+            }
+            break;
+    }
+}
+
+void sub_81112BC(void)
+{
+    switch (gPokedexAreaScreenPtr->unk000C)
+    {
+        case 0:
+            if (gMain.newKeys & B_BUTTON)
+            {
+                sub_8110814(sub_8111314);
+            }
+            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            {
+                sub_8110814(sub_8111360);
+            }
+            break;
+    }
+}
+
+void sub_8111314(void)
+{
+    switch (gPokedexAreaScreenPtr->unk000C)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            gPokedexAreaScreenPtr->unk000C++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                FreeRegionMapIconResources();
+                SetMainCallback2(gPokedexAreaScreenPtr->unk0004);
+            }
+            break;
+    }
+}
+
+void sub_8111360(void)
+{
+    switch (gPokedexAreaScreenPtr->unk000C)
+    {
+        case 0:
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            gPokedexAreaScreenPtr->unk000C++;
+            break;
+        case 1:
+            if (!UpdatePaletteFade())
+            {
+                FreeRegionMapIconResources();
+                SetMainCallback2(gPokedexAreaScreenPtr->unk0008);
+            }
+            break;
+    }
+}
