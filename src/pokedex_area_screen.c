@@ -69,19 +69,32 @@ void sub_8111288(void);
 
 // .rodata
 
-extern const u16 gUnknown_083F8418[];
-extern const u8 gUnknown_083F8438[];
-extern const u16 gUnknown_083F856C[];
-extern const u16 gUnknown_083F856E[][3];
-extern const u16 gUnknown_083F857A[][2];
+const u16 gUnknown_083F8418[] = INCBIN_U16("graphics/pokedex/area_glow.gbapal");
+
+const u8 gUnknown_083F8438[] = INCBIN_U8("graphics/pokedex/area_glow.4bpp.lz");
+
+const u16 gUnknown_083F856C[] = {SPECIES_WYNAUT};
+
+const u16 gUnknown_083F856E[][3] = {
+    {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
+    {NUM_SPECIES}
+};
+
+const u16 gUnknown_083F857A[][2] = {
+    {MAPSEC_SkyPillar,      FLAG_LANDMARK_SKY_PILLAR},
+    {MAPSEC_SeafloorCavern, FLAG_LANDMARK_SEAFLOOR_CAVERN},
+    {MAPSEC_Nothing}
+};
+
+struct PokedexAreaScreenEwramStruct *const gUnknown_083F8588 = &ePokedexAreaScreen;
 
 // .text
 
 void UnusedPokedexAreaScreen(u16 a0, u32 a1, u32 a2)
 {
-    ePokedexAreaScreen.unk0004 = a1;
-    ePokedexAreaScreen.unk0008 = a2;
-    ePokedexAreaScreen.unk000E = a0;
+    gUnknown_083F8588->unk0004 = a1;
+    gUnknown_083F8588->unk0008 = a2;
+    gUnknown_083F8588->unk000E = a0;
     SetMainCallback2(CB2_UnusedPokedexAreaScreen);
 }
 
@@ -105,8 +118,8 @@ void CB2_UnusedPokedexAreaScreen(void)
             REG_BG3VOFS = 0;
             break;
         case 1:
-            InitRegionMap(&ePokedexAreaScreen.unk06E8, FALSE);
-            StringFill(ePokedexAreaScreen.unk0F68, CHAR_SPACE, 16);
+            InitRegionMap(&gUnknown_083F8588->unk06E8, FALSE);
+            StringFill(gUnknown_083F8588->unk0F68, CHAR_SPACE, 16);
             break;
         case 2:
             sub_8110824();
@@ -145,7 +158,7 @@ void sub_81107DC(void)
 
 void sub_81107F0(void)
 {
-    ePokedexAreaScreen.unk0000();
+    gUnknown_083F8588->unk0000();
     sub_8111110();
     AnimateSprites();
     BuildOamBuffer();
@@ -154,21 +167,21 @@ void sub_81107F0(void)
 
 void sub_8110814(void (*func)(void))
 {
-    ePokedexAreaScreen.unk0000 = func;
-    ePokedexAreaScreen.unk000C = 0;
+    gUnknown_083F8588->unk0000 = func;
+    gUnknown_083F8588->unk000C = 0;
 }
 
 void sub_8110824(void)
 {
-    ePokedexAreaScreen.unk0114 = 0;
+    gUnknown_083F8588->unk0114 = 0;
 }
 
 bool8 DrawAreaGlow(void)
 {
-    switch (ePokedexAreaScreen.unk0114)
+    switch (gUnknown_083F8588->unk0114)
     {
         case 0:
-            FindMapsWithMon(ePokedexAreaScreen.unk000E);
+            FindMapsWithMon(gUnknown_083F8588->unk000E);
             break;
         case 1:
             BuildAreaGlowTilemap();
@@ -177,19 +190,19 @@ bool8 DrawAreaGlow(void)
             LZ77UnCompVram(gUnknown_083F8438, BG_CHAR_ADDR(3));
             break;
         case 3:
-            DmaCopy16(3, ePokedexAreaScreen.unk0116, BG_SCREEN_ADDR(30), 0x500);
+            DmaCopy16(3, gUnknown_083F8588->unk0116, BG_SCREEN_ADDR(30), 0x500);
             break;
         case 4:
             LoadPalette(gUnknown_083F8418, 0, 32);
             break;
         case 5:
             REG_BG0CNT = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT256x256;
-            ePokedexAreaScreen.unk0114++;
+            gUnknown_083F8588->unk0114++;
             return FALSE;
         default:
             return FALSE;
     }
-    ePokedexAreaScreen.unk0114++;
+    gUnknown_083F8588->unk0114++;
     return TRUE;
 }
 
@@ -200,8 +213,8 @@ void FindMapsWithMon(u16 mon)
 
     if (mon != ROAMER_SPECIES)
     {
-        ePokedexAreaScreen.unk0110 = 0;
-        ePokedexAreaScreen.unk0112 = 0;
+        gUnknown_083F8588->unk0110 = 0;
+        gUnknown_083F8588->unk0112 = 0;
         for (i = 0; i < 1; i++)
         {
             if (gUnknown_083F856C[i] == mon)
@@ -242,27 +255,27 @@ void FindMapsWithMon(u16 mon)
     }
     else
     {
-        ePokedexAreaScreen.unk0112 = 0;
+        gUnknown_083F8588->unk0112 = 0;
         roamer = &gSaveBlock1.roamer;
         if (roamer->active)
         {
-            GetRoamerLocation(&ePokedexAreaScreen.unk0010[0].mapGroup, &ePokedexAreaScreen.unk0010[0].mapNum);
-            ePokedexAreaScreen.unk0010[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(ePokedexAreaScreen.unk0010[0].mapGroup, ePokedexAreaScreen.unk0010[0].mapNum)->regionMapSectionId;
-            ePokedexAreaScreen.unk0110 = 1;
+            GetRoamerLocation(&gUnknown_083F8588->unk0010[0].mapGroup, &gUnknown_083F8588->unk0010[0].mapNum);
+            gUnknown_083F8588->unk0010[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(gUnknown_083F8588->unk0010[0].mapGroup, gUnknown_083F8588->unk0010[0].mapNum)->regionMapSectionId;
+            gUnknown_083F8588->unk0110 = 1;
         }
         else
-            ePokedexAreaScreen.unk0110 = 0;
+            gUnknown_083F8588->unk0110 = 0;
     }
 }
 
 void SetAreaHasMon(u16 mapGroup, u16 mapNum)
 {
-    if (ePokedexAreaScreen.unk0110 < 0x40)
+    if (gUnknown_083F8588->unk0110 < 0x40)
     {
-        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].mapGroup = mapGroup;
-        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].mapNum = mapNum;
-        ePokedexAreaScreen.unk0010[ePokedexAreaScreen.unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
-        ePokedexAreaScreen.unk0110++;
+        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].mapGroup = mapGroup;
+        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].mapNum = mapNum;
+        gUnknown_083F8588->unk0010[gUnknown_083F8588->unk0110].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
+        gUnknown_083F8588->unk0110++;
     }
 }
 
@@ -271,7 +284,7 @@ void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     const struct MapHeader *mapHeader;
     u16 i;
 
-    if (ePokedexAreaScreen.unk0112 < 0x20)
+    if (gUnknown_083F8588->unk0112 < 0x20)
     {
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
         if (mapHeader->regionMapSectionId < MAPSEC_Nothing)
@@ -281,15 +294,15 @@ void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
                 if (mapHeader->regionMapSectionId == gUnknown_083F857A[i][0] && !FlagGet(gUnknown_083F857A[i][1]))
                     return;
             }
-            for (i = 0; i < ePokedexAreaScreen.unk0112; i++)
+            for (i = 0; i < gUnknown_083F8588->unk0112; i++)
             {
-                if (ePokedexAreaScreen.unk0620[i] == mapHeader->regionMapSectionId)
+                if (gUnknown_083F8588->unk0620[i] == mapHeader->regionMapSectionId)
                     break;
             }
-            if (i == ePokedexAreaScreen.unk0112)
+            if (i == gUnknown_083F8588->unk0112)
             {
-                ePokedexAreaScreen.unk0620[i] = mapHeader->regionMapSectionId;
-                ePokedexAreaScreen.unk0112++;
+                gUnknown_083F8588->unk0620[i] = mapHeader->regionMapSectionId;
+                gUnknown_083F8588->unk0112++;
             }
         }
     }
@@ -334,18 +347,18 @@ void BuildAreaGlowTilemap(void)
     u32 r3;
 
     for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++)
-        ePokedexAreaScreen.unk0116[gUnknown_02039260] = 0;
+        gUnknown_083F8588->unk0116[gUnknown_02039260] = 0;
 
-    for (gUnknown_02039260 = 0; gUnknown_02039260 < ePokedexAreaScreen.unk0110; gUnknown_02039260++)
+    for (gUnknown_02039260 = 0; gUnknown_02039260 < gUnknown_083F8588->unk0110; gUnknown_02039260++)
     {
         gUnknown_02039266 = 0;
         for (gUnknown_02039264 = 0; gUnknown_02039264 < 20; gUnknown_02039264++)
         {
             for (gUnknown_02039262 = 0; gUnknown_02039262 < 32; gUnknown_02039262++)
             {
-                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) == ePokedexAreaScreen.unk0010[gUnknown_02039260].regionMapSectionId)
+                if (GetRegionMapSectionAt_(gUnknown_02039262, gUnknown_02039264) == gUnknown_083F8588->unk0010[gUnknown_02039260].regionMapSectionId)
                 {
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266] = 0xFFFF;
+                    gUnknown_083F8588->unk0116[gUnknown_02039266] = 0xFFFF;
                 }
                 gUnknown_02039266++;
             }
@@ -357,24 +370,24 @@ void BuildAreaGlowTilemap(void)
     {
         for (gUnknown_02039262 = 0; gUnknown_02039262 < 32; gUnknown_02039262++)
         {
-            if (ePokedexAreaScreen.unk0116[gUnknown_02039266] == 0xFFFF)
+            if (gUnknown_083F8588->unk0116[gUnknown_02039266] == 0xFFFF)
             {
-                if (gUnknown_02039262 != 0 && ePokedexAreaScreen.unk0116[gUnknown_02039266 - 1] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 - 1] |= 0x02;
-                if (gUnknown_02039262 != 31 && ePokedexAreaScreen.unk0116[gUnknown_02039266 + 1] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 + 1] |= 0x01;
-                if (gUnknown_02039264 != 0 && ePokedexAreaScreen.unk0116[gUnknown_02039266 - 32] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 - 32] |= 0x08;
-                if (gUnknown_02039264 != 19 && ePokedexAreaScreen.unk0116[gUnknown_02039266 + 32] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 + 32] |= 0x04;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 && ePokedexAreaScreen.unk0116[gUnknown_02039266 - 33] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 - 33] |= 0x10;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 && ePokedexAreaScreen.unk0116[gUnknown_02039266 - 31] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 - 31] |= 0x40;
-                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 && ePokedexAreaScreen.unk0116[gUnknown_02039266 + 31] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 + 31] |= 0x20;
-                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 && ePokedexAreaScreen.unk0116[gUnknown_02039266 + 33] != 0xFFFF)
-                    ePokedexAreaScreen.unk0116[gUnknown_02039266 + 33] |= 0x80;
+                if (gUnknown_02039262 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 1] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 1] |= 0x02;
+                if (gUnknown_02039262 != 31 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 1] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 1] |= 0x01;
+                if (gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 32] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 32] |= 0x08;
+                if (gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 32] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 32] |= 0x04;
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 33] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 33] |= 0x10;
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 0 && gUnknown_083F8588->unk0116[gUnknown_02039266 - 31] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 - 31] |= 0x40;
+                if (gUnknown_02039262 != 0 && gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 31] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 31] |= 0x20;
+                if (gUnknown_02039262 != 31 && gUnknown_02039264 != 19 && gUnknown_083F8588->unk0116[gUnknown_02039266 + 33] != 0xFFFF)
+                    gUnknown_083F8588->unk0116[gUnknown_02039266 + 33] |= 0x80;
             }
             gUnknown_02039266++;
         }
@@ -382,36 +395,36 @@ void BuildAreaGlowTilemap(void)
 
     for (gUnknown_02039260 = 0; gUnknown_02039260 < 0x280; gUnknown_02039260++) // Register difference on induction: expected r3, got r1
     {
-        if (ePokedexAreaScreen.unk0116[gUnknown_02039260] == 0xFFFF)
-            ePokedexAreaScreen.unk0116[gUnknown_02039260] = 0x10;
-        else if (ePokedexAreaScreen.unk0116[gUnknown_02039260] != 0)
+        if (gUnknown_083F8588->unk0116[gUnknown_02039260] == 0xFFFF)
+            gUnknown_083F8588->unk0116[gUnknown_02039260] = 0x10;
+        else if (gUnknown_083F8588->unk0116[gUnknown_02039260] != 0)
         {
-            if (ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0x02)
-                ePokedexAreaScreen.unk0116[gUnknown_02039260] &= 0xFFCF;
-            if (ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0x01)
-                ePokedexAreaScreen.unk0116[gUnknown_02039260] &= 0xFF3F;
-            if (ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0x08)
-                ePokedexAreaScreen.unk0116[gUnknown_02039260] &= 0xFFAF;
-            if (ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0x04)
-                ePokedexAreaScreen.unk0116[gUnknown_02039260] &= 0xFF5F;
-            gUnknown_02039268 = ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0x0F;
-            gUnknown_0203926A = ePokedexAreaScreen.unk0116[gUnknown_02039260] & 0xF0;
+            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x02)
+                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFFCF;
+            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x01)
+                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFF3F;
+            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x08)
+                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFFAF;
+            if (gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x04)
+                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0xFF5F;
+            gUnknown_02039268 = gUnknown_083F8588->unk0116[gUnknown_02039260] & 0x0F;
+            gUnknown_0203926A = gUnknown_083F8588->unk0116[gUnknown_02039260] & 0xF0;
             if (gUnknown_0203926A)
             {
-                ePokedexAreaScreen.unk0116[gUnknown_02039260] &= 0x0F;
+                gUnknown_083F8588->unk0116[gUnknown_02039260] &= 0x0F;
                 switch (gUnknown_02039268)
                 {
                     case 0:
                         if (gUnknown_0203926A != 0)
-                            ePokedexAreaScreen.unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x10;
+                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x10;
                         break;
                     case 2:
                         if (gUnknown_0203926A != 0)
-                            ePokedexAreaScreen.unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x1E;
+                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 4) + 0x1E;
                         break;
                     case 1:
                         if (gUnknown_0203926A != 0)
-                            ePokedexAreaScreen.unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 6) + 0x20;
+                            gUnknown_083F8588->unk0116[gUnknown_02039260] += (gUnknown_0203926A >> 6) + 0x20;
                         break;
                     case 8:
                         if (gUnknown_0203926A != 0)
@@ -421,7 +434,7 @@ void BuildAreaGlowTilemap(void)
                                 r3 |= 1;
                             if (gUnknown_0203926A & 0x20)
                                 r3 |= 2;
-                            ePokedexAreaScreen.unk0116[gUnknown_02039260] += r3 + 0x20;
+                            gUnknown_083F8588->unk0116[gUnknown_02039260] += r3 + 0x20;
                         }
                         break;
                     case 4:
@@ -432,16 +445,16 @@ void BuildAreaGlowTilemap(void)
                                 r3 |= 1;
                             if (gUnknown_0203926A & 0x10)
                                 r3 |= 2;
-                            ePokedexAreaScreen.unk0116[gUnknown_02039260] += r3 + 0x21;
+                            gUnknown_083F8588->unk0116[gUnknown_02039260] += r3 + 0x21;
                         }
                         break;
                     case 5:
                     case 6:
-                        ePokedexAreaScreen.unk0116[gUnknown_02039260] += 0x27;
+                        gUnknown_083F8588->unk0116[gUnknown_02039260] += 0x27;
                         break;
                     case 9:
                     case 10:
-                        ePokedexAreaScreen.unk0116[gUnknown_02039260] += 0x25;
+                        gUnknown_083F8588->unk0116[gUnknown_02039260] += 0x25;
                         break;
                 }
             }

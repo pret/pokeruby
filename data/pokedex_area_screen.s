@@ -3,32 +3,6 @@
 
 	.section .rodata
 
-gUnknown_083F8418:: @ 83F8418
-	.incbin "graphics/pokedex/area_glow.gbapal"
-
-gUnknown_083F8438:: @ 83F8438
-	.incbin "graphics/pokedex/area_glow.4bpp.lz"
-
-	.align 1
-gUnknown_083F856C:: @ 83F856C
-	.2byte 360
-
-	.align 1
-gUnknown_083F856E:: @ 83F856E
-	.2byte 328, 0, 34
-	.2byte 412, 0,  0
-
-	.align 1
-gUnknown_083F857A:: @ 83F857A
-	.2byte 85, 2142 @ FLAG_LANDMARK_SKY_PILLAR
-	.2byte 68, 2119 @ FLAG_LANDMARK_SEAFLOOR_CAVERN
-	.2byte 88,    0
-
-@ XXX: what is this?
-	.align 2
-gUnknown_083F8588::
-	.4byte gSharedMem
-
 	.align 2
 gUnknown_083F858C:: @ 83F858C
 	obj_tiles AreaMarkerTiles, 0x80, 2
