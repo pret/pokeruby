@@ -1,6 +1,13 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
+struct RegionMapLocation
+{
+    u8 x, y;
+    u8 width, height;
+    const u8 *regionMapSectionId;
+};
+
 struct RegionMap
 {
     u8 mapSectionName[20];
@@ -71,5 +78,7 @@ const u8 *CopyLocationName(u8 *dest, u16 b);
 void CB2_InitFlyRegionMap(void);
 void debug_sub_8110F28(void);
 u16 GetRegionMapSectionAt_(u16 x, u16 y);
+
+extern const struct RegionMapLocation gRegionMapLocations[];
 
 #endif // GUARD_REGION_MAP_H

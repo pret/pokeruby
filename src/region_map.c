@@ -149,13 +149,6 @@ static const u8 sRegionMapBkgnd_TilemapLZ[] = INCBIN_U8("graphics/pokenav/region
 #include "data/region_map_names_de.h"
 #endif
 
-struct RegionMapLocation
-{
-    u8 x, y;
-    u8 width, height;
-    const u8 *regionMapSectionId;
-};
-
 const struct RegionMapLocation gRegionMapLocations[] =
 {
     { 4, 11, 1, 1, gMapName_LittlerootTown},

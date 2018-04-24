@@ -4,32 +4,6 @@
 	.section .rodata
 
 	.align 2
-gUnknown_083F858C:: @ 83F858C
-	obj_tiles AreaMarkerTiles, 0x80, 2
-
-	.align 2
-gUnknown_083F8594:: @ 83F8594
-	obj_pal AreaMarkerPalette, 2
-
-	.align 2
-gOamData_83F859C:: @ 83F859C
-	.2byte 0x0000
-	.2byte 0x4000
-	.2byte 0x0400
-
-	.align 2
-gSpriteTemplate_83F85A4:: @ 83F85A4
-	spr_template 2, 2, gOamData_83F859C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
-
-	.align 2
-AreaMarkerPalette:
-	.incbin "graphics/pokedex/area_marker.gbapal"
-
-	.align 2
-AreaMarkerTiles:
-	.incbin "graphics/pokedex/area_marker.4bpp"
-
-	.align 2
 gUnknown_083F865C:: @ 83F865C
 	obj_pal gAreaUnknownPalette, 3
 

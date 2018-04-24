@@ -49,11 +49,12 @@ struct PokedexAreaScreenEwramStruct
     u8 unk061F;
     u16 unk0620[0x20];
     struct Sprite * unk0660[0x20];
-    u8 filler_06E0[4];
+    u16 unk06E0;
     u8 * unk06E4;
     struct RegionMap unk06E8;
     u8 unk0F68[16];
-    u8 filler_0F78[0x3C];
+    u8 filler_0F78[0x30];
+    struct Sprite * unk0FA8[3];
     u8 unk0FB4[0x600];
 };
 
@@ -1193,9 +1194,9 @@ void sub_8111360(void)
 void Task_PokedexAreaScreen_0(u8 taskId);
 void Task_PokedexAreaScreen_1(u8 taskId);
 void CreateAreaMarkerSprites(void);
+void DestroyAreaSprites(void);
 void LoadAreaUnknownGraphics(void);
 void CreateAreaUnknownSprites(void);
-void DestroyAreaSprites(void);
 
 void ShowPokedexAreaScreen(u16 species, u8 * a1)
 {
@@ -1302,4 +1303,82 @@ void Task_PokedexAreaScreen_1(u8 taskId)
             return;
     }
     gTasks[taskId].data[0]++;
+}
+
+const u16 AreaMarkerPalette[];
+const u8 AreaMarkerTiles[];
+
+const struct SpriteSheet gUnknown_083F858C = {
+    AreaMarkerTiles, 0x80, 2
+};
+
+const struct SpritePalette gUnknown_083F8594 = {
+    AreaMarkerPalette, 2
+};
+
+const struct OamData gOamData_83F859C = {
+    .size = 1,
+    .priority = 1
+};
+
+const struct SpriteTemplate gSpriteTemplate_83F85A4 = {
+    2,
+    2,
+    &gOamData_83F859C,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const u16 AreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
+const u8 AreaMarkerTiles[] = INCBIN_U8("graphics/pokedex/area_marker.4bpp");
+
+void CreateAreaMarkerSprites(void)
+{
+    s16 i;
+    u8 spriteId;
+    s16 x;
+    s16 y;
+    s16 cnt;
+    s16 mapSecId;
+
+    LoadSpriteSheet(&gUnknown_083F858C);
+    LoadSpritePalette(&gUnknown_083F8594);
+    cnt = 0;
+    for (i = 0; i < gPokedexAreaScreenPtr->unk0112; i++)
+    {
+        mapSecId = gPokedexAreaScreenPtr->unk0620[i];
+        x = 8 * (gRegionMapLocations[mapSecId].x + 1) + 4;
+        y = 8 * (gRegionMapLocations[mapSecId].y) + 28;
+        x += 4 * (gRegionMapLocations[mapSecId].width - 1);
+        y += 4 * (gRegionMapLocations[mapSecId].height - 1);
+        spriteId = CreateSprite(&gSpriteTemplate_83F85A4, x, y, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].invisible = TRUE;
+            gPokedexAreaScreenPtr->unk0660[cnt++] = gSprites + spriteId;
+        }
+    }
+    gPokedexAreaScreenPtr->unk06E0 = cnt;
+}
+
+void DestroyAreaSprites(void)
+{
+    u16 i;
+    FreeSpriteTilesByTag(2);
+    FreeSpritePaletteByTag(2);
+    for (i = 0; i < gPokedexAreaScreenPtr->unk06E0; i++)
+    {
+        DestroySprite(gPokedexAreaScreenPtr->unk0660[i]);
+    }
+    FreeSpriteTilesByTag(3);
+    FreeSpritePaletteByTag(3);
+    for (i = 0; i < 3; i++)
+    {
+        if (gPokedexAreaScreenPtr->unk0FA8[i] != NULL)
+        {
+            DestroySprite(gPokedexAreaScreenPtr->unk0FA8[i]);
+        }
+    }
 }
