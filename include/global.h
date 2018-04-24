@@ -698,9 +698,16 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2EFC*/ struct ContestWinner museumPortraits[5];
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x3108*/ u8 filler_3108[8];
-    /*0x3110*/ u8 giftRibbons[11];
-    /*0x3117*/ u8 filler_311B[0x29];
+    struct {
+        /*0x3108*/ u8 unknown1[8];
+        /*0x3110*/ u8 giftRibbons[11];
+        /*0x311B*/ u8 unknown2[8];
+        /*0x3123*/ u32 currentPokeCoupons;
+        /*0x3127*/ u32 totalEarnedPokeCoupons;
+        /*0x312B*/ u8 unknown3[6];
+        /*0x3131*/ u8 receivedWishmakerJirachi;
+        /*0x3132*/ u8 unknown4[18];
+    } __attribute__((packed)) externalReservedData;
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;
