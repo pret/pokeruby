@@ -3,6 +3,8 @@
 #include "global.h"
 #include "constants/species.h"
 #include "constants/maps.h"
+#include "constants/songs.h"
+#include "sound.h"
 #include "ewram.h"
 #include "main.h"
 #include "palette.h"
@@ -47,7 +49,8 @@ struct PokedexAreaScreenEwramStruct
     u8 unk061F;
     u16 unk0620[0x20];
     struct Sprite * unk0660[0x20];
-    u8 filler_06E0[8];
+    u8 filler_06E0[4];
+    u8 * unk06E4;
     struct RegionMap unk06E8;
     u8 unk0F68[16];
     u8 filler_0F78[0x3C];
@@ -1185,4 +1188,118 @@ void sub_8111360(void)
             }
             break;
     }
+}
+
+void Task_PokedexAreaScreen_0(u8 taskId);
+void Task_PokedexAreaScreen_1(u8 taskId);
+void CreateAreaMarkerSprites(void);
+void LoadAreaUnknownGraphics(void);
+void CreateAreaUnknownSprites(void);
+void DestroyAreaSprites(void);
+
+void ShowPokedexAreaScreen(u16 species, u8 * a1)
+{
+    u8 taskId;
+    gPokedexAreaScreenPtr->unk000E = species;
+    gPokedexAreaScreenPtr->unk06E4 = a1;
+    a1[0] = 0;
+    taskId = CreateTask(Task_PokedexAreaScreen_0, 0);
+    gTasks[taskId].data[0] = 0;
+}
+
+void Task_PokedexAreaScreen_0(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+        case 0:
+            REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG1_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
+            REG_BG0HOFS = 0;
+            REG_BG0VOFS = -8;
+            REG_BG2VOFS = 0;
+            REG_BG2HOFS = 0;
+            REG_BG3HOFS = 0;
+            REG_BG3VOFS = 0;
+            break;
+        case 1:
+            ResetPaletteFade();
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            break;
+        case 2:
+            InitRegionMap(&gPokedexAreaScreenPtr->unk06E8, FALSE);
+            StringFill(gPokedexAreaScreenPtr->unk0F68, CHAR_SPACE, 16);
+            break;
+        case 3:
+            sub_8110824();
+            break;
+        case 4:
+            if (DrawAreaGlow())
+                return;
+            break;
+        case 5:
+            CreateRegionMapPlayerIcon(1, 1);
+            sub_80FB2A4(0, -8);
+            break;
+        case 6:
+            CreateAreaMarkerSprites();
+            break;
+        case 7:
+            LoadAreaUnknownGraphics();
+            break;
+        case 8:
+            CreateAreaUnknownSprites();
+            break;
+        case 9:
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, 0);
+            break;
+        case 10:
+            REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
+            sub_8111084();
+            REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON;
+            break;
+        case 11:
+            gTasks[taskId].func = Task_PokedexAreaScreen_1;
+            gTasks[taskId].data[0] = 0;
+            return;
+    }
+    gTasks[taskId].data[0]++;
+}
+
+void Task_PokedexAreaScreen_1(u8 taskId)
+{
+    sub_8111110();
+    switch (gTasks[taskId].data[0])
+    {
+        default:
+            gTasks[taskId].data[0] = 0;
+        case 0:
+            if (gPaletteFade.active)
+                return;
+            break;
+        case 1:
+            if (gMain.newKeys & B_BUTTON)
+            {
+                gTasks[taskId].data[1] = 1;
+                PlaySE(SE_PC_OFF);
+            }
+            else if (gMain.newKeys & DPAD_RIGHT || (gMain.newKeys & R_BUTTON && gSaveBlock2.optionsButtonMode == OPTIONS_BUTTON_MODE_LR))
+            {
+                gTasks[taskId].data[1] = 2;
+                PlaySE(SE_Z_PAGE);
+            }
+            else
+                return;
+            break;
+        case 2:
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            break;
+        case 3:
+            if (gPaletteFade.active)
+                return;
+            DestroyAreaSprites();
+            gPokedexAreaScreenPtr->unk06E4[0] = gTasks[taskId].data[1];
+            DestroyTask(taskId);
+            return;
+    }
+    gTasks[taskId].data[0]++;
 }
