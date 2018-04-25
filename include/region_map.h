@@ -69,7 +69,7 @@ void sub_80FAEC4(void);
 u8 sub_80FAFC0(void);
 void UpdateRegionMapVideoRegs(void);
 void RegionMapDefaultZoomOffsetPlayerSprite(s16, s16);
-u16 sub_80FBA04(u16 mapSectionId);
+u16 GetOverworldMapFromUnderwaterMap(u16 mapSectionId);
 void CreateRegionMapCursor(u16, u16);
 void CreateRegionMapPlayerIcon(u16, u16);
 const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length);

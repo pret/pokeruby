@@ -1,4 +1,3 @@
-
 // Includes
 #include "global.h"
 #include "constants/species.h"
@@ -290,7 +289,7 @@ static void SetAreaHasMon(u16 mapGroup, u16 mapNum)
     {
         gPokedexAreaScreenPtr->overworldAreasWithMons[gPokedexAreaScreenPtr->numOverworldAreas].mapGroup = mapGroup;
         gPokedexAreaScreenPtr->overworldAreasWithMons[gPokedexAreaScreenPtr->numOverworldAreas].mapNum = mapNum;
-        gPokedexAreaScreenPtr->overworldAreasWithMons[gPokedexAreaScreenPtr->numOverworldAreas].regionMapSectionId = sub_80FBA04(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
+        gPokedexAreaScreenPtr->overworldAreasWithMons[gPokedexAreaScreenPtr->numOverworldAreas].regionMapSectionId = GetOverworldMapFromUnderwaterMap(Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum)->regionMapSectionId);
         gPokedexAreaScreenPtr->numOverworldAreas++;
     }
 }

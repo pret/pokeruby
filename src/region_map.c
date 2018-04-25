@@ -151,7 +151,7 @@ const struct RegionMapLocation gRegionMapLocations[] =
     { 0,  0, 1, 1, gMapName_None},
 };
 
-static const u16 gUnknown_083E7684[][2] =
+static const u16 sUnderwaterMaps[][2] =
 {
     {MAPSEC_Underwater124,       MAPSEC_Route124},
     {MAPSEC_Underwater125,       MAPSEC_Route126},
@@ -179,7 +179,7 @@ static u16 GetRegionMapSectionAt(u16, u16);
 static void InitializeCursorPosition(void);
 static void sub_80FB600(void);
 static u16 sub_80FB758(u16);
-static u16 sub_80FB9C0(u16);
+static u16 GetOverworldMapFromUnderwaterMap_(u16);
 static void sub_80FBA18(void);
 static bool8 sub_80FBAA0(u16);
 void CreateRegionMapCursor(u16, u16);
@@ -241,7 +241,7 @@ bool8 sub_80FA940(void)
         gRegionMap->unk74 = gRegionMap->cursorPosX;
         gRegionMap->unk76 = gRegionMap->cursorPosY;
         gRegionMap->unk16 = sub_80FB758(gRegionMap->mapSectionId);
-        gRegionMap->mapSectionId = sub_80FB9C0(gRegionMap->mapSectionId);
+        gRegionMap->mapSectionId = GetOverworldMapFromUnderwaterMap_(gRegionMap->mapSectionId);
         GetMapSectionName(gRegionMap->mapSectionName, gRegionMap->mapSectionId, 16);
         break;
     case 6:
@@ -832,21 +832,21 @@ u16 GetRegionMapSectionAt_(u16 x, u16 y)
     return GetRegionMapSectionAt(x, y);
 }
 
-static u16 sub_80FB9C0(u16 mapSectionId)
+static u16 GetOverworldMapFromUnderwaterMap_(u16 mapSectionId)
 {
     u16 i;
 
-    for (i = 0; gUnknown_083E7684[i][0] != MAPSEC_Nothing; i++)
+    for (i = 0; sUnderwaterMaps[i][0] != MAPSEC_Nothing; i++)
     {
-        if (gUnknown_083E7684[i][0] == mapSectionId)
-            return gUnknown_083E7684[i][1];
+        if (sUnderwaterMaps[i][0] == mapSectionId)
+            return sUnderwaterMaps[i][1];
     }
     return mapSectionId;
 }
 
-u16 sub_80FBA04(u16 mapSectionId)
+u16 GetOverworldMapFromUnderwaterMap(u16 mapSectionId)
 {
-    return sub_80FB9C0(mapSectionId);
+    return GetOverworldMapFromUnderwaterMap_(mapSectionId);
 }
 
 static void sub_80FBA18(void)
