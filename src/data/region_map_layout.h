@@ -1,26 +1,26 @@
 // Abbreviated definitions to make the map layout more visual
-#define R(routeNum) MAPSEC_ROUTE_##routeNum
-#define LITT_T      MAPSEC_LITTLEROOT_TOWN
-#define OLDA_T      MAPSEC_OLDALE_TOWN
-#define DEWF_T      MAPSEC_DEWFORD_TOWN
-#define LAVA_T      MAPSEC_LAVARIDGE_TOWN
-#define FALL_T      MAPSEC_FALLARBOR_TOWN
-#define VERD_T      MAPSEC_VERDANTURF_TOWN
-#define PACI_T      MAPSEC_PACIFIDLOG_TOWN
-#define PETA_C      MAPSEC_PETALBURG_CITY
-#define SLAT_C      MAPSEC_SLATEPORT_CITY
-#define MAUV_C      MAPSEC_MAUVILLE_CITY
-#define RUST_C      MAPSEC_RUSTBORO_CITY
-#define FORT_C      MAPSEC_FORTREE_CITY
-#define LILY_C      MAPSEC_LILYCOVE_CITY
-#define MOSS_C      MAPSEC_MOSSDEEP_CITY
-#define SOOT_C      MAPSEC_SOOTOPOLIS_CITY
-#define EVER_C      MAPSEC_EVER_GRANDE_CITY
-#define MTCHIM      MAPSEC_MT_CHIMNEY
-#define SAFARI      MAPSEC_SAFARI_ZONE
-#define BTLTWR      MAPSEC_BATTLE_TOWER
-#define S_ISLD      MAPSEC_SOUTHERN_ISLAND
-#define ______      MAPSEC_NONE
+#define R(routeNum) MAPSEC_Route##routeNum
+#define LITT_T      MAPSEC_LittlerootTown
+#define OLDA_T      MAPSEC_OldaleTown
+#define DEWF_T      MAPSEC_DewfordTown
+#define LAVA_T      MAPSEC_LavaridgeTown
+#define FALL_T      MAPSEC_FallarborTown
+#define VERD_T      MAPSEC_VerdanturfTown
+#define PACI_T      MAPSEC_PacifidlogTown
+#define PETA_C      MAPSEC_PetalburgCity
+#define SLAT_C      MAPSEC_SlateportCity
+#define MAUV_C      MAPSEC_MauvilleCity
+#define RUST_C      MAPSEC_RustboroCity
+#define FORT_C      MAPSEC_FortreeCity
+#define LILY_C      MAPSEC_LilycoveCity
+#define MOSS_C      MAPSEC_MossdeepCity
+#define SOOT_C      MAPSEC_SootopolisCity
+#define EVER_C      MAPSEC_EverGrandeCity
+#define MTCHIM      MAPSEC_MtChimney
+#define SAFARI      MAPSEC_SafariZone
+#define BTLTWR      MAPSEC_BattleTower
+#define S_ISLD      MAPSEC_SouthernIsland
+#define ______      MAPSEC_Nothing
 
 static const u8 sRegionMapLayout[] =
 {

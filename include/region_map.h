@@ -68,7 +68,7 @@ u8 sub_80FAB60(void);
 void sub_80FAEC4(void);
 u8 sub_80FAFC0(void);
 void UpdateRegionMapVideoRegs(void);
-void sub_80FB2A4(s16, s16);
+void RegionMapDefaultZoomOffsetPlayerSprite(s16, s16);
 u16 sub_80FBA04(u16 mapSectionId);
 void CreateRegionMapCursor(u16, u16);
 void CreateRegionMapPlayerIcon(u16, u16);

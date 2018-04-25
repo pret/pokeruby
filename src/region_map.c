@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/region_map_sections.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_specials.h"
@@ -18,97 +19,6 @@
 #include "text.h"
 #include "trig.h"
 #include "ewram.h"
-
-// Map Section IDs
-#define MAPSEC_LITTLEROOT_TOWN 0
-#define MAPSEC_OLDALE_TOWN 1
-#define MAPSEC_DEWFORD_TOWN 2
-#define MAPSEC_LAVARIDGE_TOWN 3
-#define MAPSEC_FALLARBOR_TOWN 4
-#define MAPSEC_VERDANTURF_TOWN 5
-#define MAPSEC_PACIFIDLOG_TOWN 6
-#define MAPSEC_PETALBURG_CITY 7
-#define MAPSEC_SLATEPORT_CITY 8
-#define MAPSEC_MAUVILLE_CITY 9
-#define MAPSEC_RUSTBORO_CITY 10
-#define MAPSEC_FORTREE_CITY 11
-#define MAPSEC_LILYCOVE_CITY 12
-#define MAPSEC_MOSSDEEP_CITY 13
-#define MAPSEC_SOOTOPOLIS_CITY 14
-#define MAPSEC_EVER_GRANDE_CITY 15
-#define MAPSEC_ROUTE_101 0x10
-#define MAPSEC_ROUTE_102 0x11
-#define MAPSEC_ROUTE_103 0x12
-#define MAPSEC_ROUTE_104 0x13
-#define MAPSEC_ROUTE_105 0x14
-#define MAPSEC_ROUTE_106 0x15
-#define MAPSEC_ROUTE_107 0x16
-#define MAPSEC_ROUTE_108 0x17
-#define MAPSEC_ROUTE_109 0x18
-#define MAPSEC_ROUTE_110 0x19
-#define MAPSEC_ROUTE_111 0x1A
-#define MAPSEC_ROUTE_112 0x1B
-#define MAPSEC_ROUTE_113 0x1C
-#define MAPSEC_ROUTE_114 0x1D
-#define MAPSEC_ROUTE_115 0x1E
-#define MAPSEC_ROUTE_116 0x1F
-#define MAPSEC_ROUTE_117 0x20
-#define MAPSEC_ROUTE_118 0x21
-#define MAPSEC_ROUTE_119 0x22
-#define MAPSEC_ROUTE_120 0x23
-#define MAPSEC_ROUTE_121 0x24
-#define MAPSEC_ROUTE_122 0x25
-#define MAPSEC_ROUTE_123 0x26
-#define MAPSEC_ROUTE_124 0x27
-#define MAPSEC_ROUTE_125 0x28
-#define MAPSEC_ROUTE_126 0x29
-#define MAPSEC_ROUTE_127 0x2A
-#define MAPSEC_ROUTE_128 0x2B
-#define MAPSEC_ROUTE_129 0x2C
-#define MAPSEC_ROUTE_130 0x2D
-#define MAPSEC_ROUTE_131 0x2E
-#define MAPSEC_ROUTE_132 0x2F
-#define MAPSEC_ROUTE_133 0x30
-#define MAPSEC_ROUTE_134 0x31
-#define MAPSEC_UNDERWATER1 0x32
-#define MAPSEC_UNDERWATER2 0x33
-#define MAPSEC_UNDERWATER3 0x34
-#define MAPSEC_UNDERWATER4 0x35
-#define MAPSEC_UNDERWATER5 0x36
-#define MAPSEC_GRANITE_CAVE 0x37
-#define MAPSEC_MT_CHIMNEY 0x38
-#define MAPSEC_SAFARI_ZONE 0x39
-#define MAPSEC_BATTLE_TOWER 0x3A
-#define MAPSEC_PETALBURG_WOODS 0x3B
-#define MAPSEC_RUSTURF_TUNNEL 0x3C
-#define MAPSEC_ABANDONED_SHIP 0x3D
-#define MAPSEC_NEW_MAUVILLE 0x3E
-#define MAPSEC_METEOR_FALLS_1 0x3F
-#define MAPSEC_METEOR_FALLS_2 0x40
-#define MAPSEC_MT_PYRE 0x41
-#define MAPSEC_EVIL_TEAM_HIDEOUT 0x42
-#define MAPSEC_SHOAL_CAVE 0x43
-#define MAPSEC_SEAFLOOR_CAVERN 0x44
-#define MAPSEC_UNDERWATER6 0x45
-#define MAPSEC_VICTORY_ROAD 0x46
-#define MAPSEC_MIRAGE_ISLAND 0x47
-#define MAPSEC_CAVE_OF_ORIGIN 0x48
-#define MAPSEC_SOUTHERN_ISLAND 0x49
-#define MAPSEC_FIERY_PATH_1 0x4A
-#define MAPSEC_FIERY_PATH_2 0x4B
-#define MAPSEC_JAGGED_PASS_1 0x4C
-#define MAPSEC_JAGGED_PASS_2 0x4D
-#define MAPSEC_SEALED_CHAMBER 0x4E
-#define MAPSEC_UNDERWATER7 0x4F
-#define MAPSEC_SCORCHED_SLAB 0x50
-#define MAPSEC_ISLAND_CAVE 0x51
-#define MAPSEC_DESERT_RUINS 0x52
-#define MAPSEC_ANCIENT_TOMB 0x53
-#define MAPSEC_INSIDE_OF_TRUCK 0x54
-#define MAPSEC_SKY_PILLAR 0x55
-#define MAPSEC_SECRET_BASE 0x56
-#define MAPSEC_UNK_0x57 0x57
-#define MAPSEC_NONE 0x58
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
@@ -243,19 +153,19 @@ const struct RegionMapLocation gRegionMapLocations[] =
 
 static const u16 gUnknown_083E7684[][2] =
 {
-    {MAPSEC_UNDERWATER1,       MAPSEC_ROUTE_124},
-    {MAPSEC_UNDERWATER2,       MAPSEC_ROUTE_126},
-    {MAPSEC_UNDERWATER3,       MAPSEC_ROUTE_127},
-    {MAPSEC_UNDERWATER4,       MAPSEC_ROUTE_128},
-    {MAPSEC_UNDERWATER5,       MAPSEC_SOOTOPOLIS_CITY},
-    {MAPSEC_UNDERWATER6,       MAPSEC_ROUTE_128},
-    {MAPSEC_EVIL_TEAM_HIDEOUT, MAPSEC_LILYCOVE_CITY},
-    {MAPSEC_UNDERWATER7,       MAPSEC_ROUTE_134},
-    {MAPSEC_PETALBURG_WOODS,   MAPSEC_ROUTE_104},
-    {MAPSEC_JAGGED_PASS_1,     MAPSEC_ROUTE_112},
-    {MAPSEC_MT_PYRE,           MAPSEC_ROUTE_122},
-    {MAPSEC_SKY_PILLAR,        MAPSEC_ROUTE_131},
-    {MAPSEC_NONE,              MAPSEC_NONE},
+    {MAPSEC_Underwater124,       MAPSEC_Route124},
+    {MAPSEC_Underwater125,       MAPSEC_Route126},
+    {MAPSEC_Underwater126,       MAPSEC_Route127},
+    {MAPSEC_Underwater127,       MAPSEC_Route128},
+    {MAPSEC_UnderwaterSootopolis,       MAPSEC_SootopolisCity},
+    {MAPSEC_Underwater128,       MAPSEC_Route128},
+    {MAPSEC_EvilTeamHideout, MAPSEC_LilycoveCity},
+    {MAPSEC_UnderwaterSealedChamber,       MAPSEC_Route134},
+    {MAPSEC_PetalburgWoods,   MAPSEC_Route104},
+    {MAPSEC_JaggedPass,     MAPSEC_Route112},
+    {MAPSEC_MtPyre,           MAPSEC_Route122},
+    {MAPSEC_SkyPillar,        MAPSEC_Route131},
+    {MAPSEC_Nothing,              MAPSEC_Nothing},
 };
 
 static u8 sub_80FAB78(void);
@@ -669,7 +579,7 @@ void UpdateRegionMapVideoRegs(void)
     }
 }
 
-void sub_80FB2A4(s16 a, s16 b)
+void RegionMapDefaultZoomOffsetPlayerSprite(s16 a, s16 b)
 {
     CalcZoomScrollParams(a, b, 0x38, 0x48, 0x100, 0x100, 0);
     UpdateRegionMapVideoRegs();
@@ -683,7 +593,7 @@ void sub_80FB2A4(s16 a, s16 b)
 static u16 GetRegionMapSectionAt(u16 x, u16 y)
 {
     if (y < MAPCURSOR_Y_MIN || y > MAPCURSOR_Y_MAX || x < MAPCURSOR_X_MIN || x > MAPCURSOR_X_MAX)
-        return MAPSEC_NONE;
+        return MAPSEC_Nothing;
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
     return sRegionMapLayout[x + y * 28];
@@ -722,7 +632,7 @@ static void InitializeCursorPosition(void)
         mapHeight = gMapHeader.mapData->height;
         x = gSaveBlock1.pos.x;
         y = gSaveBlock1.pos.y;
-        if (gRegionMap->mapSectionId == MAPSEC_UNDERWATER6)
+        if (gRegionMap->mapSectionId == MAPSEC_Underwater128)
             gRegionMap->playerIsInCave = TRUE;
         break;
     case 3:
@@ -749,7 +659,7 @@ static void InitializeCursorPosition(void)
             struct WarpData *r4;
 
             gRegionMap->mapSectionId = gMapHeader.regionMapSectionId;
-            if (gRegionMap->mapSectionId != MAPSEC_UNK_0x57)
+            if (gRegionMap->mapSectionId != MAPSEC_Dynamic)
             {
                 r4 = &gSaveBlock1.warp4;
                 mapHeader = Overworld_GetMapHeaderByGroupAndId(r4->mapGroup, r4->mapNum);
@@ -787,12 +697,12 @@ static void InitializeCursorPosition(void)
 
     switch (gRegionMap->mapSectionId)
     {
-    case MAPSEC_ROUTE_114:
+    case MAPSEC_Route114:
         if (y != 0)
             x = 0;
         break;
-    case MAPSEC_ROUTE_126:
-    case MAPSEC_UNDERWATER2:
+    case MAPSEC_Route126:
+    case MAPSEC_Underwater125:
         x = 0;
         if (gSaveBlock1.pos.x > 32)
             x = 1;
@@ -804,7 +714,7 @@ static void InitializeCursorPosition(void)
         if (gSaveBlock1.pos.y > 0x38)
             y++;
         break;
-    case MAPSEC_ROUTE_121:
+    case MAPSEC_Route121:
         x = 0;
         if (r9 > 14)
             x = 1;
@@ -830,16 +740,16 @@ static void sub_80FB600(void)
     switch (GetSSTidalLocation(&mapGroup, &mapNum, &sp2, &sp4))
     {
     case 1:
-        gRegionMap->mapSectionId = MAPSEC_SLATEPORT_CITY;
+        gRegionMap->mapSectionId = MAPSEC_SlateportCity;
         break;
     case 2:
-        gRegionMap->mapSectionId = MAPSEC_LILYCOVE_CITY;
+        gRegionMap->mapSectionId = MAPSEC_LilycoveCity;
         break;
     case 3:
-        gRegionMap->mapSectionId = MAPSEC_ROUTE_124;
+        gRegionMap->mapSectionId = MAPSEC_Route124;
         break;
     case 4:
-        gRegionMap->mapSectionId = MAPSEC_ROUTE_131;
+        gRegionMap->mapSectionId = MAPSEC_Route131;
         break;
     default:
     case 0:
@@ -873,44 +783,44 @@ static u16 sub_80FB758(u16 mapSectionId)
 {
     switch (mapSectionId)
     {
-    case MAPSEC_NONE:
+    case MAPSEC_Nothing:
         return 0;
-    case MAPSEC_LITTLEROOT_TOWN:
+    case MAPSEC_LittlerootTown:
         return FlagGet(FLAG_VISITED_LITTLEROOT_TOWN) ? 2 : 3;
-    case MAPSEC_OLDALE_TOWN:
+    case MAPSEC_OldaleTown:
         return FlagGet(FLAG_VISITED_OLDALE_TOWN) ? 2 : 3;
-    case MAPSEC_DEWFORD_TOWN:
+    case MAPSEC_DewfordTown:
         return FlagGet(FLAG_VISITED_DEWFORD_TOWN) ? 2 : 3;
-    case MAPSEC_LAVARIDGE_TOWN:
+    case MAPSEC_LavaridgeTown:
         return FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) ? 2 : 3;
-    case MAPSEC_FALLARBOR_TOWN:
+    case MAPSEC_FallarborTown:
         return FlagGet(FLAG_VISITED_FALLARBOR_TOWN) ? 2 : 3;
-    case MAPSEC_VERDANTURF_TOWN:
+    case MAPSEC_VerdanturfTown:
         return FlagGet(FLAG_VISITED_VERDANTURF_TOWN) ? 2 : 3;
-    case MAPSEC_PACIFIDLOG_TOWN:
+    case MAPSEC_PacifidlogTown:
         return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? 2 : 3;
-    case MAPSEC_PETALBURG_CITY:
+    case MAPSEC_PetalburgCity:
         return FlagGet(FLAG_VISITED_PETALBURG_CITY) ? 2 : 3;
-    case MAPSEC_SLATEPORT_CITY:
+    case MAPSEC_SlateportCity:
         return FlagGet(FLAG_VISITED_SLATEPORT_CITY) ? 2 : 3;
-    case MAPSEC_MAUVILLE_CITY:
+    case MAPSEC_MauvilleCity:
         return FlagGet(FLAG_VISITED_MAUVILLE_CITY) ? 2 : 3;
-    case MAPSEC_RUSTBORO_CITY:
+    case MAPSEC_RustboroCity:
         return FlagGet(FLAG_VISITED_RUSTBORO_CITY) ? 2 : 3;
-    case MAPSEC_FORTREE_CITY:
+    case MAPSEC_FortreeCity:
         return FlagGet(FLAG_VISITED_FORTREE_CITY) ? 2 : 3;
-    case MAPSEC_LILYCOVE_CITY:
+    case MAPSEC_LilycoveCity:
         return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? 2 : 3;
-    case MAPSEC_MOSSDEEP_CITY:
+    case MAPSEC_MossdeepCity:
         return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? 2 : 3;
-    case MAPSEC_SOOTOPOLIS_CITY:
+    case MAPSEC_SootopolisCity:
         return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? 2 : 3;
-    case MAPSEC_EVER_GRANDE_CITY:
+    case MAPSEC_EverGrandeCity:
         return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? 2 : 3;
 
-    case MAPSEC_BATTLE_TOWER:
+    case MAPSEC_BattleTower:
         return FlagGet(FLAG_LANDMARK_BATTLE_TOWER) ? 4 : 0;
-    case MAPSEC_SOUTHERN_ISLAND:
+    case MAPSEC_SouthernIsland:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? 1 : 0;
     default:
         return 1;
@@ -926,7 +836,7 @@ static u16 sub_80FB9C0(u16 mapSectionId)
 {
     u16 i;
 
-    for (i = 0; gUnknown_083E7684[i][0] != MAPSEC_NONE; i++)
+    for (i = 0; gUnknown_083E7684[i][0] != MAPSEC_Nothing; i++)
     {
         if (gUnknown_083E7684[i][0] == mapSectionId)
             return gUnknown_083E7684[i][1];
@@ -945,7 +855,7 @@ static void sub_80FBA18(void)
     u16 y;
     u16 i;
 
-    if (gRegionMap->mapSectionId == MAPSEC_NONE)
+    if (gRegionMap->mapSectionId == MAPSEC_Nothing)
     {
         gRegionMap->everGrandeCityArea = 0;
         return;
@@ -1298,9 +1208,9 @@ void sub_80FBF94(void)
 
 const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length)
 {
-    if (mapSectionId == MAPSEC_SECRET_BASE)
+    if (mapSectionId == MAPSEC_SecretBase)
         return GetSecretBaseMapName(dest);
-    if (mapSectionId < MAPSEC_NONE)
+    if (mapSectionId < MAPSEC_Nothing)
         return StringCopy(dest, gRegionMapLocations[mapSectionId].regionMapSectionId);
     if (length == 0)
         length = 18;
@@ -1311,9 +1221,9 @@ const u8 *CopyMapName(u8 *dest, u16 mapSectionId)
 {
     switch (mapSectionId)
     {
-    case MAPSEC_UNK_0x57:
+    case MAPSEC_Dynamic:
         return StringCopy(dest, gOtherText_Ferry);
-    case MAPSEC_SECRET_BASE:
+    case MAPSEC_SecretBase:
         return StringCopy(dest, gOtherText_SecretBase);
     default:
         return GetMapSectionName(dest, mapSectionId, 0);
@@ -1322,7 +1232,7 @@ const u8 *CopyMapName(u8 *dest, u16 mapSectionId)
 
 const u8 *CopyLocationName(u8 *dest, u16 mapSectionId)
 {
-    if (mapSectionId == MAPSEC_EVIL_TEAM_HIDEOUT)
+    if (mapSectionId == MAPSEC_EvilTeamHideout)
         return StringCopy(dest, gOtherText_Hideout);
     else
         return CopyMapName(dest, mapSectionId);
@@ -1420,7 +1330,7 @@ struct MultiPartMapSection
 // Map sections that are divided into multiple parts. Ever Grande City is the only one.
 static const struct MultiPartMapSection sMultiPartMapSections[1] =
 {
-    {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
+    {sEverGrandeCityAreaNames, MAPSEC_EverGrandeCity, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
 static struct UnknownStruct3 *const sFlyDataPtr = (struct UnknownStruct3 *)gSharedMem;
@@ -1431,8 +1341,8 @@ static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons
 static const u16 sSpecialFlyAreas[][2] =
 {
     // flag, mapSectionId
-    {0x848, MAPSEC_BATTLE_TOWER},
-    {0xFFFF, MAPSEC_NONE},
+    {0x848, MAPSEC_BattleTower},
+    {0xFFFF, MAPSEC_Nothing},
 };
 
 static const struct OamData sFlyTargetOamData =
@@ -1697,7 +1607,7 @@ static void CreateSpecialAreaFlyTargetIcons(void)
 {
     u16 i;
 
-    for (i = 0; sSpecialFlyAreas[i][1] != MAPSEC_NONE; i++)
+    for (i = 0; sSpecialFlyAreas[i][1] != MAPSEC_Nothing; i++)
     {
         u16 x;
         u16 y;
@@ -1806,16 +1716,16 @@ void sub_80FC69C(void)
         {
             switch (sFlyDataPtr->regionMap.mapSectionId)
             {
-            case MAPSEC_SOUTHERN_ISLAND:
+            case MAPSEC_SouthernIsland:
                 sub_8053538(22);
                 break;
-            case MAPSEC_BATTLE_TOWER:
+            case MAPSEC_BattleTower:
                 sub_8053538(21);
                 break;
-            case MAPSEC_LITTLEROOT_TOWN:
+            case MAPSEC_LittlerootTown:
                 sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
                 break;
-            case MAPSEC_EVER_GRANDE_CITY:
+            case MAPSEC_EverGrandeCity:
                 sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? 20 : 11);
                 break;
             default:

@@ -40,7 +40,7 @@
 #include "text.h"
 #include "ewram.h"
 #include "constants/moves.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 
 struct UnkTvStruct
 {

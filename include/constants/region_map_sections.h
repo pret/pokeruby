@@ -61,7 +61,7 @@ enum
     MAPSEC_GraniteCave,             // 0x37
     MAPSEC_MtChimney,               // 0x38
     MAPSEC_SafariZone,              // 0x39
-    MAPSEC_BattleFrontier,          // 0x3A
+    MAPSEC_BattleTower,             // 0x3A
     MAPSEC_PetalburgWoods,          // 0x3B
     MAPSEC_RusturfTunnel,           // 0x3C
     MAPSEC_AbandonedShip,           // 0x3D
@@ -69,7 +69,7 @@ enum
     MAPSEC_MeteorFalls,             // 0x3F
     MAPSEC_MeteorFalls2,            // 0x40
     MAPSEC_MtPyre,                  // 0x41
-    MAPSEC_AquaHideoutOld,          // 0x42
+    MAPSEC_EvilTeamHideout,         // 0x42
     MAPSEC_ShoalCave,               // 0x43
     MAPSEC_SeafloorCavern,          // 0x44
     MAPSEC_Underwater128,           // 0x45
