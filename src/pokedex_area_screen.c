@@ -96,9 +96,9 @@ static const u16 sFeebasData[][3] = {
 };
 
 static const u16 sLandmarkData[][2] = {
-    {MAPSEC_SkyPillar,      FLAG_LANDMARK_SKY_PILLAR},
-    {MAPSEC_SeafloorCavern, FLAG_LANDMARK_SEAFLOOR_CAVERN},
-    {MAPSEC_Nothing}
+    {MAPSEC_SKY_PILLAR,      FLAG_LANDMARK_SKY_PILLAR},
+    {MAPSEC_SEAFLOOR_CAVERN, FLAG_LANDMARK_SEAFLOOR_CAVERN},
+    {MAPSEC_NOTHING}
 };
 
 static struct PokedexAreaScreenEwramStruct *const gPokedexAreaScreenPtr = &ePokedexAreaScreen;
@@ -302,9 +302,9 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
     if (gPokedexAreaScreenPtr->numSpecialAreas < 0x20)
     {
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
-        if (mapHeader->regionMapSectionId < MAPSEC_Nothing)
+        if (mapHeader->regionMapSectionId < MAPSEC_NOTHING)
         {
-            for (i = 0; sLandmarkData[i][0] != MAPSEC_Nothing; i++)
+            for (i = 0; sLandmarkData[i][0] != MAPSEC_NOTHING; i++)
             {
                 if (mapHeader->regionMapSectionId == sLandmarkData[i][0] && !FlagGet(sLandmarkData[i][1]))
                     return;
