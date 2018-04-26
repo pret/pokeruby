@@ -88,7 +88,7 @@ static const u16 gUnknown_083F8418[] = INCBIN_U16("graphics/pokedex/area_glow.gb
 
 static const u8 gUnknown_083F8438[] = INCBIN_U8("graphics/pokedex/area_glow.4bpp.lz");
 
-static const u16 sWynautData[] = {SPECIES_WYNAUT};
+static const u16 sSpeciesHiddenFromAreaScreen[] = {SPECIES_WYNAUT};
 
 static const u16 sFeebasData[][3] = {
     {SPECIES_FEEBAS, MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119)},
@@ -230,9 +230,9 @@ static void FindMapsWithMon(u16 mon)
     {
         gPokedexAreaScreenPtr->numOverworldAreas = 0;
         gPokedexAreaScreenPtr->numSpecialAreas = 0;
-        for (i = 0; i < 1; i++)
+        for (i = 0; i < ARRAY_COUNT(sSpeciesHiddenFromAreaScreen); i++)
         {
-            if (sWynautData[i] == mon)
+            if (sSpeciesHiddenFromAreaScreen[i] == mon)
                 return;
         }
         for (i = 0; sFeebasData[i][0] != NUM_SPECIES; i++)
