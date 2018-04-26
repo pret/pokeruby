@@ -1341,7 +1341,7 @@ static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons
 static const u16 sSpecialFlyAreas[][2] =
 {
     // flag, mapSectionId
-    {0x848, MAPSEC_BATTLE_TOWER},
+    {FLAG_LANDMARK_BATTLE_TOWER, MAPSEC_BATTLE_TOWER},
     {0xFFFF, MAPSEC_NOTHING},
 };
 
@@ -1565,7 +1565,7 @@ static void CreateFlyTargetGraphics(void)
 // Draws a light overlay on cities and towns that the player can fly to
 static void CreateCityTownFlyTargetIcons(void)
 {
-    u16 canFlyFlag = 0x80F;
+    u16 canFlyFlag = FLAG_VISITED_LITTLEROOT_TOWN;
     u16 i;
 
     for (i = 0; i < 16; i++)
