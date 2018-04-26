@@ -611,7 +611,7 @@ SECTIONS {
         src/bike.o(.rodata);
         src/easy_chat_1.o(.rodata);
         src/easy_chat_2.o(.rodata);
-        data/easy_chat.o(.rodata);
+        src/easy_chat_2.o(.data);
         data/pokenav.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_man.o(.rodata);
