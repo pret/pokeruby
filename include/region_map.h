@@ -1,6 +1,13 @@
 #ifndef GUARD_REGION_MAP_H
 #define GUARD_REGION_MAP_H
 
+struct RegionMapLocation
+{
+    u8 x, y;
+    u8 width, height;
+    const u8 *regionMapSectionId;
+};
+
 struct RegionMap
 {
     u8 mapSectionName[20];
@@ -51,7 +58,7 @@ struct RegionMap
     /*0x080*/ u8 filler80[0x100];
     /*0x180*/ u8 cursorSmallImage[0x100];
     /*0x280*/ u8 cursorLargeImage[0x600];
-};
+}; // size: 0x880
 
 void InitRegionMap(struct RegionMap *regionMap, bool8 zoomed);
 void sub_80FA904(struct RegionMap *regionMap, bool8 zoomed);
@@ -61,8 +68,8 @@ u8 sub_80FAB60(void);
 void sub_80FAEC4(void);
 u8 sub_80FAFC0(void);
 void UpdateRegionMapVideoRegs(void);
-void sub_80FB2A4(s16, s16);
-u16 sub_80FBA04(u16 mapSectionId);
+void RegionMapDefaultZoomOffsetPlayerSprite(s16, s16);
+u16 GetOverworldMapFromUnderwaterMap(u16 mapSectionId);
 void CreateRegionMapCursor(u16, u16);
 void CreateRegionMapPlayerIcon(u16, u16);
 const u8 *GetMapSectionName(u8 *dest, u16 mapSectionId, u16 length);
@@ -70,5 +77,8 @@ const u8 *CopyMapName(u8 *dest, u16 b);
 const u8 *CopyLocationName(u8 *dest, u16 b);
 void CB2_InitFlyRegionMap(void);
 void debug_sub_8110F28(void);
+u16 GetRegionMapSectionAt_(u16 x, u16 y);
+
+extern const struct RegionMapLocation gRegionMapLocations[];
 
 #endif // GUARD_REGION_MAP_H

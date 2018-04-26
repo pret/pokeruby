@@ -40,7 +40,7 @@
 #include "text.h"
 #include "ewram.h"
 #include "constants/moves.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 
 struct UnkTvStruct
 {
@@ -90,31 +90,31 @@ const struct OutbreakPokemon gPokeOutbreakSpeciesList[5] =
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 3,
-        .location = MAPSEC_Route102,
+        .location = MAPSEC_ROUTE_102,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route114,
+        .location = MAPSEC_ROUTE_114,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route117,
+        .location = MAPSEC_ROUTE_117,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 28,
-        .location = MAPSEC_Route120,
+        .location = MAPSEC_ROUTE_120,
     },
     {
         .species = SPECIES_SKITTY,
         .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route116,
+        .location = MAPSEC_ROUTE_116,
     },
 };
 

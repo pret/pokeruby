@@ -6,12 +6,6 @@
 #include "region_map.h"
 #include "constants/species.h"
 
-#ifdef SAPPHIRE
-#define ROAMER_SPECIES SPECIES_LATIAS
-#else
-#define ROAMER_SPECIES SPECIES_LATIOS
-#endif
-
 enum
 {
     MAP_GRP = 0, // map group

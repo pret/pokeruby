@@ -340,7 +340,7 @@ SECTIONS {
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
         src/battle/battle_records.o(.text);
-        asm/pokedex_area_screen.o(.text);
+        src/pokedex_area_screen.o(.text);
         src/evolution_scene.o(.text);
         src/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
@@ -632,7 +632,7 @@ SECTIONS {
         src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle/battle_records.o(.rodata);
-        data/pokedex_area_screen.o(.rodata);
+        src/pokedex_area_screen.o(.rodata);
         src/evolution_scene.o(.rodata);
         data/roulette.o(.rodata);
         data/pokedex_cry_screen.o(.rodata);
