@@ -7,8 +7,33 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-// osmose (I didn't want to use "absorb" as thats confusing)
+void sub_80CB768(struct Sprite* sprite);
+
+// osmose
 // Used by Ingrain.
+
+const union AnimCmd gSpriteAnim_83D6688[] =
+{
+    ANIMCMD_FRAME(3, 3),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6694[] =
+{
+    gSpriteAnim_83D6688,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6698 =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D6694,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CB768,
+};
 
 void sub_80CB768(struct Sprite* sprite)
 {

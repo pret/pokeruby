@@ -8,10 +8,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CC6CC(struct Sprite* sprite);
 static void sub_80CC7D4(struct Sprite* sprite);
 
 // homing (the spinning effect of sprites going inward in a static rotation.)
 // Used by Needle Arm.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6994 =
+{
+    .tileTag = 10266,
+    .paletteTag = 10266,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CC6CC,
+};
 
 void sub_80CC6CC(struct Sprite* sprite)
 {
@@ -69,7 +81,7 @@ void sub_80CC6CC(struct Sprite* sprite)
     }
 }
 
-void sub_80CC7D4(struct Sprite* sprite)
+static void sub_80CC7D4(struct Sprite* sprite)
 {
     if (sprite->data[0])
     {

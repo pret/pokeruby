@@ -7,8 +7,39 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+extern const union AnimCmd *const gSpriteAnimTable_83D62D4[];
+
+void sub_80CB4CC(struct Sprite* sprite);
+
 // copy_orb
 // Used in Mimic.
+
+const union AffineAnimCmd gSpriteAffineAnim_83D65B8[] = {
+    AFFINEANIMCMD_FRAME(0, 0, 0, 0),
+    AFFINEANIMCMD_FRAME(48, 48, 0, 14),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D65D0[] = {
+    AFFINEANIMCMD_FRAME(-16, -16, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D65E0[] = {
+    gSpriteAffineAnim_83D65B8,
+    gSpriteAffineAnim_83D65D0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65E8 =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DFEC,
+    .anims = gSpriteAnimTable_83D62D4,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D65E0,
+    .callback = sub_80CB4CC,
+};
 
 void sub_80CB4CC(struct Sprite* sprite)
 {

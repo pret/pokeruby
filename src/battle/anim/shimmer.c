@@ -9,10 +9,19 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern u16 gUnknown_083D6984[];
-
 // shimmer
 // Used by Magical Leaf.
+
+static const u16 sMagicalLeafBlendColors[] =
+{
+    RGB(31, 0, 0),
+    RGB(31, 19, 0),
+    RGB(31, 31, 0),
+    RGB(0, 31, 0),
+    RGB(5, 14, 31),
+    RGB(22, 10, 31),
+    RGB(22, 21, 31),
+};
 
 void sub_80CC5F8(u8 taskId)
 {
@@ -29,8 +38,8 @@ void sub_80CC5F8(u8 taskId)
         if (task->data[9] >= 0)
         {
             task->data[9] = 0;
-            BlendPalette(task->data[8], 0x10, task->data[10], gUnknown_083D6984[task->data[11]]);
-            BlendPalette(task->data[12], 0x10, task->data[10], gUnknown_083D6984[task->data[11]]);
+            BlendPalette(task->data[8], 0x10, task->data[10], sMagicalLeafBlendColors[task->data[11]]);
+            BlendPalette(task->data[12], 0x10, task->data[10], sMagicalLeafBlendColors[task->data[11]]);
             task->data[10]++;
             if (task->data[10] == 17)
             {
