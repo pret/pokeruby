@@ -344,8 +344,6 @@ SECTIONS {
         src/evolution_scene.o(.text);
         src/roulette.o(.text);
         src/pokedex_cry_screen.o(.text);
-        asm/pokedex_cry_screen.o(.text);
-        src/pokedex_cry_screen.o(.text.ShowPokedexCryScreen);
         src/coins.o(.text);
         src/landmark.o(.text);
         src/fldeff_strength.o(.text);

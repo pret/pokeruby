@@ -44,7 +44,7 @@ void sub_811A124(void);
 void sub_811A15C(u8);
 void sub_811A1C8(u8, u8);
 void sub_811A324(void);
-void sub_811A350(u8, u8, u8);
+void sub_811A350(u8, u16, u8);
 void sub_811A6D8(s8);
 
 extern u8 gUnknown_03005E98;
@@ -653,7 +653,41 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
 }
 #endif // NONMATCHING
 
-asm(".section .text.ShowPokedexCryScreen");
+void sub_811A324(void)
+{
+    DmaCopy16(3, ePokedexCryScreenGfx.unk0000, VRAM + ePokedexCryScreen.unk0014, 0x1c00);
+}
+
+void sub_811A350(u8 a0, u16 a1, u8 a2)
+{
+    switch (a0)
+    {
+        case 0:
+            if (a2)
+                REG_BG0VOFS = a1;
+            else
+                REG_BG0HOFS = a1;
+            break;
+        case 1:
+            if (a2)
+                REG_BG1VOFS = a1;
+            else
+                REG_BG1HOFS = a1;
+            break;
+        case 2:
+            if (a2)
+                REG_BG2VOFS = a1;
+            else
+                REG_BG2HOFS = a1;
+            break;
+        case 3:
+            if (a2)
+                REG_BG3VOFS = a1;
+            else
+                REG_BG3HOFS = a1;
+            break;
+    }
+}
 
 u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
     int returnVal = FALSE;
