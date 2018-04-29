@@ -36,7 +36,6 @@ struct PokedexCryScreen_201C000
 };
 
 #define ePokedexCryScreenGfx (*(struct Unk2000000 *)gSharedMem)
-#define ePokedexCryScreen (*(struct PokedexCryScreen_201C000 *)(gSharedMem + 0x1C000))
 
 void sub_811A0A0(u16 species);
 void sub_811A0C0(void);
@@ -45,19 +44,81 @@ void sub_811A15C(u8);
 void sub_811A1C8(u8, u8);
 void sub_811A324(void);
 void sub_811A350(u8, u16, u8);
+void sub_811A534(struct Sprite *);
 void sub_811A6D8(s8);
 
 extern u8 gUnknown_03005E98;
 
 // data/pokedex_cry_screen.o
-extern const u16 gUnknown_083FB6F8[];
-extern const u16 gUnknown_083FB718[];
-extern const u16 gUnknown_083FAE7C[];
-extern const u16 gUnknown_083FAF1C[];
-extern const u8 gUnknown_083FAF3C[];
-extern struct SpriteTemplate gSpriteTemplate_83FB774;
-extern const struct SpriteSheet gCryMeterNeedleSpriteSheets[];
-extern const struct SpritePalette gCryMeterNeedleSpritePalettes[];
+
+const u16 CryMeterNeedlePalette[] = INCBIN_U16("graphics/pokedex/cry_meter_needle.gbapal");
+const u8 CryMeterNeedleTiles[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4bpp");
+
+#if ENGLISH
+const u16 gUnknown_083FAE7C[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
+const u16 gUnknown_083FAF1C[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
+const u8 gUnknown_083FAF3C[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+#endif // ENGLISH
+
+const u16 gUnknown_083FB274[][72] = {
+    {0x0,0x4,0x8,0xC,0x10,0x14,0x18,0x1C,0x400,0x404,0x408,0x40C,0x410,0x414,0x418,0x41C,0x800,0x804,0x808,0x80C,0x810,0x814,0x818,0x81C,0xC00,0xC04,0xC08,0xC0C,0xC10,0xC14,0xC18,0xC1C,0x1000,0x1004,0x1008,0x100C,0x1010,0x1014,0x1018,0x101C,0x1400,0x1404,0x1408,0x140C,0x1410,0x1414,0x1418,0x141C,0x1800,0x1804,0x1808,0x180C,0x1810,0x1814,0x1818,0x181C,0x1C00,0x1C04,0x1C08,0x1C0C,0x1C10,0x1C14,0x1C18,0x1C1C,0x2000,0x2004,0x2008,0x200C,0x2010,0x2014,0x2018,0x201C},
+    {0x0,0x4,0x8,0xC,0x10,0x14,0x18,0x1C,0x400,0x404,0x408,0x40C,0x410,0x414,0x418,0x41C,0x800,0x804,0x808,0x80C,0x810,0x814,0x818,0x81C,0xC00,0xC04,0xC08,0xC0C,0xC10,0xC14,0xC18,0xC1C,0x1000,0x1004,0x1008,0x100C,0x1010,0x1014,0x1018,0x101C,0x1400,0x1404,0x1408,0x140C,0x1410,0x1414,0x1418,0x141C,0x1800,0x1804,0x1808,0x180C,0x1810,0x1814,0x1818,0x181C,0x1C00,0x1C04,0x1C08,0x1C0C,0x1C10,0x1C14,0x1C18,0x1C1C,0x2000,0x2004,0x2008,0x200C,0x2010,0x2014,0x2018,0x201C},
+    {0x1,0x5,0x9,0xD,0x11,0x15,0x19,0x1D,0x401,0x405,0x409,0x40D,0x411,0x415,0x419,0x41D,0x801,0x805,0x809,0x80D,0x811,0x815,0x819,0x81D,0xC01,0xC05,0xC09,0xC0D,0xC11,0xC15,0xC19,0xC1D,0x1001,0x1005,0x1009,0x100D,0x1011,0x1015,0x1019,0x101D,0x1401,0x1405,0x1409,0x140D,0x1411,0x1415,0x1419,0x141D,0x1801,0x1805,0x1809,0x180D,0x1811,0x1815,0x1819,0x181D,0x1C01,0x1C05,0x1C09,0x1C0D,0x1C11,0x1C15,0x1C19,0x1C1D,0x2001,0x2005,0x2009,0x200D,0x2011,0x2015,0x2019,0x201D},
+    {0x1,0x5,0x9,0xD,0x11,0x15,0x19,0x1D,0x401,0x405,0x409,0x40D,0x411,0x415,0x419,0x41D,0x801,0x805,0x809,0x80D,0x811,0x815,0x819,0x81D,0xC01,0xC05,0xC09,0xC0D,0xC11,0xC15,0xC19,0xC1D,0x1001,0x1005,0x1009,0x100D,0x1011,0x1015,0x1019,0x101D,0x1401,0x1405,0x1409,0x140D,0x1411,0x1415,0x1419,0x141D,0x1801,0x1805,0x1809,0x180D,0x1811,0x1815,0x1819,0x181D,0x1C01,0x1C05,0x1C09,0x1C0D,0x1C11,0x1C15,0x1C19,0x1C1D,0x2001,0x2005,0x2009,0x200D,0x2011,0x2015,0x2019,0x201D},
+    {0x2,0x6,0xA,0xE,0x12,0x16,0x1A,0x1E,0x402,0x406,0x40A,0x40E,0x412,0x416,0x41A,0x41E,0x802,0x806,0x80A,0x80E,0x812,0x816,0x81A,0x81E,0xC02,0xC06,0xC0A,0xC0E,0xC12,0xC16,0xC1A,0xC1E,0x1002,0x1006,0x100A,0x100E,0x1012,0x1016,0x101A,0x101E,0x1402,0x1406,0x140A,0x140E,0x1412,0x1416,0x141A,0x141E,0x1802,0x1806,0x180A,0x180E,0x1812,0x1816,0x181A,0x181E,0x1C02,0x1C06,0x1C0A,0x1C0E,0x1C12,0x1C16,0x1C1A,0x1C1E,0x2002,0x2006,0x200A,0x200E,0x2012,0x2016,0x201A,0x201E},
+    {0x2,0x6,0xA,0xE,0x12,0x16,0x1A,0x1E,0x402,0x406,0x40A,0x40E,0x412,0x416,0x41A,0x41E,0x802,0x806,0x80A,0x80E,0x812,0x816,0x81A,0x81E,0xC02,0xC06,0xC0A,0xC0E,0xC12,0xC16,0xC1A,0xC1E,0x1002,0x1006,0x100A,0x100E,0x1012,0x1016,0x101A,0x101E,0x1402,0x1406,0x140A,0x140E,0x1412,0x1416,0x141A,0x141E,0x1802,0x1806,0x180A,0x180E,0x1812,0x1816,0x181A,0x181E,0x1C02,0x1C06,0x1C0A,0x1C0E,0x1C12,0x1C16,0x1C1A,0x1C1E,0x2002,0x2006,0x200A,0x200E,0x2012,0x2016,0x201A,0x201E},
+    {0x3,0x7,0xB,0xF,0x13,0x17,0x1B,0x1F,0x403,0x407,0x40B,0x40F,0x413,0x417,0x41B,0x41F,0x803,0x807,0x80B,0x80F,0x813,0x817,0x81B,0x81F,0xC03,0xC07,0xC0B,0xC0F,0xC13,0xC17,0xC1B,0xC1F,0x1003,0x1007,0x100B,0x100F,0x1013,0x1017,0x101B,0x101F,0x1403,0x1407,0x140B,0x140F,0x1413,0x1417,0x141B,0x141F,0x1803,0x1807,0x180B,0x180F,0x1813,0x1817,0x181B,0x181F,0x1C03,0x1C07,0x1C0B,0x1C0F,0x1C13,0x1C17,0x1C1B,0x1C1F,0x2003,0x2007,0x200B,0x200F,0x2013,0x2017,0x201B,0x201F},
+    {0x3,0x7,0xB,0xF,0x13,0x17,0x1B,0x1F,0x403,0x407,0x40B,0x40F,0x413,0x417,0x41B,0x41F,0x803,0x807,0x80B,0x80F,0x813,0x817,0x81B,0x81F,0xC03,0xC07,0xC0B,0xC0F,0xC13,0xC17,0xC1B,0xC1F,0x1003,0x1007,0x100B,0x100F,0x1013,0x1017,0x101B,0x101F,0x1403,0x1407,0x140B,0x140F,0x1413,0x1417,0x141B,0x141F,0x1803,0x1807,0x180B,0x180F,0x1813,0x1817,0x181B,0x181F,0x1C03,0x1C07,0x1C0B,0x1C0F,0x1C13,0x1C17,0x1C1B,0x1C1F,0x2003,0x2007,0x200B,0x200F,0x2013,0x2017,0x201B,0x201F}
+};
+
+struct PokedexCryScreen_201C000 * const gPokedexCryScreenPtr = (struct PokedexCryScreen_201C000 *)(gSharedMem + 0x1c000);
+
+const u16 gUnknown_083FB6F8[] = INCBIN_U16("graphics/pokedex/83FB6F8.gbapal");
+const u16 gUnknown_083FB718[] = INCBIN_U16("graphics/pokedex/83FB718.4bpp");
+
+const u8 gUnknown_083FB738[] = {0xF0, 0x0F};
+const u8 gUnknown_083FB73A[][16] = {
+    {0x0F,0x0E,0x0D,0x0C,0x0B,0x0A,0x09,0x08,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F},
+    {0xF0,0xE0,0xD0,0xC0,0xB0,0xA0,0x90,0x80,0x80,0x90,0xA0,0xB0,0xC0,0xD0,0xE0,0xF0}
+};
+
+struct Unk201C800 * const gPokedexCryScreenPtr2 = (struct Unk201C800 *)(gSharedMem + 0x1c800);
+
+union AnimCmd gSpriteAnim_83FB760[] = {
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END
+};
+
+const union AnimCmd * gSpriteAnimTable_83FB768[] = {
+    gSpriteAnim_83FB760
+};
+
+struct OamData gOamData_83FB76C = {
+    .y = 160,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .size = 3,
+    .priority = 1
+};
+
+struct SpriteTemplate gSpriteTemplate_83FB774 = {
+    0x2000,
+    0x2000,
+    &gOamData_83FB76C,
+    gSpriteAnimTable_83FB768,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    sub_811A534
+};
+
+struct SpriteSheet gCryMeterNeedleSpriteSheets[] = {
+    {CryMeterNeedleTiles, 0x800, 0x2000},
+    {}
+};
+
+struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
+    {CryMeterNeedlePalette, 0x2000},
+    {}
+};
 
 #if ENGLISH
 #define CRY_METER_MAP_WIDTH 10
@@ -78,13 +139,13 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
     switch (gUnknown_03005E98)
     {
         case 0:
-            ePokedexCryScreen.unk0014 = cry->unk0;
-            ePokedexCryScreen.unk0016 = cry->yPos;
-            ePokedexCryScreen.unk001A = 0;
-            ePokedexCryScreen.unk001B = 0;
-            ePokedexCryScreen.unk0010 = 0;
-            ePokedexCryScreen.unk0012 = 28;
-            ePokedexCryScreen.unk0011 = 0;
+            gPokedexCryScreenPtr->unk0014 = cry->unk0;
+            gPokedexCryScreenPtr->unk0016 = cry->yPos;
+            gPokedexCryScreenPtr->unk001A = 0;
+            gPokedexCryScreenPtr->unk001B = 0;
+            gPokedexCryScreenPtr->unk0010 = 0;
+            gPokedexCryScreenPtr->unk0012 = 28;
+            gPokedexCryScreenPtr->unk0011 = 0;
             sub_811A350(arg1, -8 * cry->xPos, 0);
             for (i = 0; i < 7; i++)
             {
@@ -108,7 +169,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
                     *((u16 *)(VRAM + offset)) = r6++;
                 }
             }
-            for (i = 0; i < ePokedexCryScreen.unk0016 * 8; i++)
+            for (i = 0; i < gPokedexCryScreenPtr->unk0016 * 8; i++)
             {
                 sub_811A1C8(i, 0);
             }
@@ -300,52 +361,52 @@ void sub_8119F88(u8 a0)
     u8 r4;
     sub_811A324();
     sub_811A15C(a0);
-    if (ePokedexCryScreen.unk001B)
-        ePokedexCryScreen.unk001B--;
-    if (ePokedexCryScreen.unk001A && !--ePokedexCryScreen.unk001A)
+    if (gPokedexCryScreenPtr->unk001B)
+        gPokedexCryScreenPtr->unk001B--;
+    if (gPokedexCryScreenPtr->unk001A && !--gPokedexCryScreenPtr->unk001A)
     {
-        sub_811A0A0(ePokedexCryScreen.species);
+        sub_811A0A0(gPokedexCryScreenPtr->species);
         sub_811A124();
         return;
     }
-    if (ePokedexCryScreen.unk0010 == 0)
+    if (gPokedexCryScreenPtr->unk0010 == 0)
     {
         sub_811A124();
         return;
     }
-    if (ePokedexCryScreen.unk0010 == 1)
+    if (gPokedexCryScreenPtr->unk0010 == 1)
     {
         sub_811A0C0();
     }
-    else if (ePokedexCryScreen.unk0010 > 8)
+    else if (gPokedexCryScreenPtr->unk0010 > 8)
     {
         if (!IsCryPlaying())
         {
             sub_811A124();
-            ePokedexCryScreen.unk0010 = 0;
+            gPokedexCryScreenPtr->unk0010 = 0;
             return;
         }
         sub_811A0C0();
-        ePokedexCryScreen.unk0010 = 1;
+        gPokedexCryScreenPtr->unk0010 = 1;
     }
-    r4 = 2 * (ePokedexCryScreen.unk0010 - 1);
-    sub_811A1C8(ePokedexCryScreen.unk0016 * 8 + ePokedexCryScreen.unk0011 - 2, ePokedexCryScreen.unk0000[r4]);
-    sub_811A1C8(ePokedexCryScreen.unk0016 * 8 + ePokedexCryScreen.unk0011 - 1, ePokedexCryScreen.unk0000[r4 + 1]);
-    ePokedexCryScreen.unk0010++;
+    r4 = 2 * (gPokedexCryScreenPtr->unk0010 - 1);
+    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 2, gPokedexCryScreenPtr->unk0000[r4]);
+    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 1, gPokedexCryScreenPtr->unk0000[r4 + 1]);
+    gPokedexCryScreenPtr->unk0010++;
 }
 
 void sub_811A050(u16 species)
 {
-    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE && !ePokedexCryScreen.unk001A)
+    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE && !gPokedexCryScreenPtr->unk001A)
     {
-        if (!ePokedexCryScreen.unk001B)
+        if (!gPokedexCryScreenPtr->unk001B)
         {
-            ePokedexCryScreen.unk001B = 4;
+            gPokedexCryScreenPtr->unk001B = 4;
             if (IsCryPlaying() == TRUE)
             {
                 StopCry();
-                ePokedexCryScreen.species = species;
-                ePokedexCryScreen.unk001A = 2;
+                gPokedexCryScreenPtr->species = species;
+                gPokedexCryScreenPtr->unk001A = 2;
             }
             else
                 sub_811A0A0(species);
@@ -356,7 +417,7 @@ void sub_811A050(u16 species)
 void sub_811A0A0(u16 species)
 {
     PlayCry2(species, 0, 0x7d, 10);
-    ePokedexCryScreen.unk0010 = 1;
+    gPokedexCryScreenPtr->unk0010 = 1;
 }
 
 #ifdef NONMATCHING
@@ -370,7 +431,7 @@ void sub_811A0C0(void)
         src = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank;
     src += PCM_DMA_BUF_SIZE;
     for (i = 0; i < 16; i++)
-        ePokedexCryScreen.unk0000[i] = src[i * 2] * 2;
+        gPokedexCryScreenPtr->unk0000[i] = src[i * 2] * 2;
 }
 #else
 NAKED void sub_811A0C0(void)
@@ -430,26 +491,22 @@ NAKED void sub_811A0C0(void)
 
 void sub_811A124(void)
 {
-    sub_811A1C8(ePokedexCryScreen.unk0016 * 8 + ePokedexCryScreen.unk0011 - 2, 0);
-    sub_811A1C8(ePokedexCryScreen.unk0016 * 8 + ePokedexCryScreen.unk0011 - 1, 0);
+    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 2, 0);
+    sub_811A1C8(gPokedexCryScreenPtr->unk0016 * 8 + gPokedexCryScreenPtr->unk0011 - 1, 0);
 }
 
 void sub_811A15C(u8 a0)
 {
     u8 i;
     u16 r3;
-    sub_811A350(a0, ePokedexCryScreen.unk0011, 0);
-    ePokedexCryScreen.unk0011 += 2;
-    r3 = (ePokedexCryScreen.unk0011 / 8 + ePokedexCryScreen.unk0016 + 1) % 32;
+    sub_811A350(a0, gPokedexCryScreenPtr->unk0011, 0);
+    gPokedexCryScreenPtr->unk0011 += 2;
+    r3 = (gPokedexCryScreenPtr->unk0011 / 8 + gPokedexCryScreenPtr->unk0016 + 1) % 32;
     for (i = 0; i < 7; i++)
     {
         DmaCopy16(3, gUnknown_083FB718, &ePokedexCryScreenGfx.unk0000[32 * (32 * i + r3)], 32);
     }
 }
-
-extern const u16 gUnknown_083FB274[8][72];
-extern const u8 gUnknown_083FB738[2];
-extern const u8 gUnknown_083FB73A[2][16];
 
 #ifdef NONMATCHING
 void sub_811A1C8(u8 a0, u8 a1)
@@ -464,14 +521,14 @@ void sub_811A1C8(u8 a0, u8 a1)
     sp0 = i;
     r7 = a0 % 2;
     r8 = a0 / 8;
-    if (i > ePokedexCryScreen.unk0012)
+    if (i > gPokedexCryScreenPtr->unk0012)
     {
         do
         {
             ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
             ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
             i--;
-        } while (i > ePokedexCryScreen.unk0012);
+        } while (i > gPokedexCryScreenPtr->unk0012);
     }
     else
     {
@@ -480,9 +537,9 @@ void sub_811A1C8(u8 a0, u8 a1)
             ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
             ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
             i++;
-        } while (i < ePokedexCryScreen.unk0012);
+        } while (i < gPokedexCryScreenPtr->unk0012);
     }
-    ePokedexCryScreen.unk0012 = sp0;
+    gPokedexCryScreenPtr->unk0012 = sp0;
 }
 #else
 NAKED void sub_811A1C8(u8 a0, u8 a1)
@@ -655,7 +712,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
 
 void sub_811A324(void)
 {
-    DmaCopy16(3, ePokedexCryScreenGfx.unk0000, VRAM + ePokedexCryScreen.unk0014, 0x1c00);
+    DmaCopy16(3, ePokedexCryScreenGfx.unk0000, VRAM + gPokedexCryScreenPtr->unk0014, 0x1c00);
 }
 
 void sub_811A350(u8 a0, u16 a1, u8 a2)
@@ -729,10 +786,10 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
     {
         LoadSpriteSheets(gCryMeterNeedleSpriteSheets);
         LoadSpritePalettes(gCryMeterNeedleSpritePalettes);
-        EWRAM_1C800.unk_4 = CreateSprite(&gSpriteTemplate_83FB774, 40 + cry->xPos * 8, 56 + cry->yPos * 8, 1);
-        EWRAM_1C800.unk_0 = 0x20;
-        EWRAM_1C800.unk_1 = 0x20;
-        EWRAM_1C800.unk_2 = 0;
+        gPokedexCryScreenPtr2->unk_4 = CreateSprite(&gSpriteTemplate_83FB774, 40 + cry->xPos * 8, 56 + cry->yPos * 8, 1);
+        gPokedexCryScreenPtr2->unk_0 = 0x20;
+        gPokedexCryScreenPtr2->unk_1 = 0x20;
+        gPokedexCryScreenPtr2->unk_2 = 0;
 
         returnVal = TRUE;
         break;
@@ -744,8 +801,8 @@ u8 ShowPokedexCryScreen(struct CryRelatedStruct *cry, u8 arg1) {
 
 void DestroyCryMeterNeedleSprite(void)
 {
-    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[EWRAM_1C800.unk_4].oam.paletteNum));
-    DestroySprite(gSprites + EWRAM_1C800.unk_4);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[gPokedexCryScreenPtr2->unk_4].oam.paletteNum));
+    DestroySprite(gSprites + gPokedexCryScreenPtr2->unk_4);
 }
 
 void sub_811A534(struct Sprite * sprite)
@@ -758,59 +815,59 @@ void sub_811A534(struct Sprite * sprite)
     struct OamMatrix sp0c;
     u8 * r0;
 
-    gSprites[EWRAM_1C800.unk_4].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-    gSprites[EWRAM_1C800.unk_4].oam.affineParam = 0;
-    switch (ePokedexCryScreen.unk0010)
+    gSprites[gPokedexCryScreenPtr2->unk_4].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[gPokedexCryScreenPtr2->unk_4].oam.affineParam = 0;
+    switch (gPokedexCryScreenPtr->unk0010)
     {
         case 0:
-            EWRAM_1C800.unk_1 = 0x20;
-            if (EWRAM_1C800.unk_0 > 0)
+            gPokedexCryScreenPtr2->unk_1 = 0x20;
+            if (gPokedexCryScreenPtr2->unk_0 > 0)
             {
-                if (EWRAM_1C800.unk_2 != 1)
-                    EWRAM_1C800.unk_2--;
+                if (gPokedexCryScreenPtr2->unk_2 != 1)
+                    gPokedexCryScreenPtr2->unk_2--;
             }
             else
-                EWRAM_1C800.unk_2 = 5;
+                gPokedexCryScreenPtr2->unk_2 = 5;
             break;
         case 2:
             r3 = 0;
             for (i = 0; i < 16; i++)
             {
-                if (r3 < ePokedexCryScreen.unk0000[i])
-                    r3 = ePokedexCryScreen.unk0000[i];
+                if (r3 < gPokedexCryScreenPtr->unk0000[i])
+                    r3 = gPokedexCryScreenPtr->unk0000[i];
             }
             sub_811A6D8(r3 * 0xd0 / 0x100);
             break;
         case 6:
-            r0 = &ePokedexCryScreen.unk0000[10];
+            r0 = &gPokedexCryScreenPtr->unk0000[10];
             sub_811A6D8(*r0 * 0xd0 / 0x100);
             break;
     }
-    if (EWRAM_1C800.unk_0 == EWRAM_1C800.unk_1)
+    if (gPokedexCryScreenPtr2->unk_0 == gPokedexCryScreenPtr2->unk_1)
         ;
-    else if (EWRAM_1C800.unk_0 < EWRAM_1C800.unk_1)
+    else if (gPokedexCryScreenPtr2->unk_0 < gPokedexCryScreenPtr2->unk_1)
     {
-        if ((EWRAM_1C800.unk_0 += EWRAM_1C800.unk_2) > EWRAM_1C800.unk_1)
+        if ((gPokedexCryScreenPtr2->unk_0 += gPokedexCryScreenPtr2->unk_2) > gPokedexCryScreenPtr2->unk_1)
         {
-            EWRAM_1C800.unk_0 = EWRAM_1C800.unk_1;
-            EWRAM_1C800.unk_1 = 0;
+            gPokedexCryScreenPtr2->unk_0 = gPokedexCryScreenPtr2->unk_1;
+            gPokedexCryScreenPtr2->unk_1 = 0;
         }
     }
     else
     {
-        if ((EWRAM_1C800.unk_0 -= EWRAM_1C800.unk_2) < EWRAM_1C800.unk_1)
+        if ((gPokedexCryScreenPtr2->unk_0 -= gPokedexCryScreenPtr2->unk_2) < gPokedexCryScreenPtr2->unk_1)
         {
-            EWRAM_1C800.unk_0 = EWRAM_1C800.unk_1;
-            EWRAM_1C800.unk_1 = 0;
+            gPokedexCryScreenPtr2->unk_0 = gPokedexCryScreenPtr2->unk_1;
+            gPokedexCryScreenPtr2->unk_1 = 0;
         }
     }
     sp04.xScale = 0x100;
     sp04.yScale = 0x100;
-    sp04.rotation = EWRAM_1C800.unk_0 * 256;
+    sp04.rotation = gPokedexCryScreenPtr2->unk_0 * 256;
     ObjAffineSet(&sp04, &sp0c, 1, 2);
     SetOamMatrix(0, sp0c.a, sp0c.b, sp0c.c, sp0c.d);
-    x = gSineTable[((EWRAM_1C800.unk_0 + 0x7F) & 0xFF)];
-    y = gSineTable[((EWRAM_1C800.unk_0 + 0x7F) & 0xFF) + 0x40];
+    x = gSineTable[((gPokedexCryScreenPtr2->unk_0 + 0x7F) & 0xFF)];
+    y = gSineTable[((gPokedexCryScreenPtr2->unk_0 + 0x7F) & 0xFF) + 0x40];
     sprite->pos2.x = x * 24 / 256;
     sprite->pos2.y = y * 24 / 256;
 }
@@ -820,6 +877,6 @@ void sub_811A6D8(s8 a0)
     u16 r2 = (0x20 - a0) & 0xff;
     if (r2 > 0x20 && r2 < 0xe0)
         r2 = 0xe0;
-    EWRAM_1C800.unk_1 = r2;
-    EWRAM_1C800.unk_2 = 5;
+    gPokedexCryScreenPtr2->unk_1 = r2;
+    gPokedexCryScreenPtr2->unk_2 = 5;
 }

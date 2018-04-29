@@ -10,12 +10,12 @@
 #if defined(__APPLE__) || defined(__CYGWIN__)
 #define _(x) x
 #define __(x) x
-#define INCBIN_U8 {0}
-#define INCBIN_U16 {0}
-#define INCBIN_U32 {0}
-#define INCBIN_S8 {0}
-#define INCBIN_S16 {0}
-#define INCBIN_S32 {0}
+#define INCBIN_U8(...) {0}
+#define INCBIN_U16(...) {0}
+#define INCBIN_U32(...) {0}
+#define INCBIN_S8(...) {0}
+#define INCBIN_S16(...) {0}
+#define INCBIN_S32(...) {0}
 #endif
 
 // Prevent cross-jump optimization.
