@@ -9,10 +9,46 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CDFB0(struct Sprite* sprite);
 static void sub_80CE000(struct Sprite* sprite);
 
 // cube (shows a sphere sharpening into a cube.)
 // Used in Sharpen.
+
+const union AnimCmd gSpriteAnim_83D6EB0[] =
+{
+    ANIMCMD_FRAME(0, 18),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(16, 18),
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(16, 6),
+    ANIMCMD_FRAME(32, 18),
+    ANIMCMD_FRAME(16, 6),
+    ANIMCMD_FRAME(32, 6),
+    ANIMCMD_FRAME(48, 18),
+    ANIMCMD_FRAME(32, 6),
+    ANIMCMD_FRAME(48, 6),
+    ANIMCMD_FRAME(64, 18),
+    ANIMCMD_FRAME(48, 6),
+    ANIMCMD_FRAME(64, 54),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6EEC[] =
+{
+    gSpriteAnim_83D6EB0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6EF0 =
+{
+    .tileTag = 10185,
+    .paletteTag = 10185,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6EEC,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CDFB0,
+};
 
 void sub_80CDFB0(struct Sprite* sprite)
 {
@@ -27,7 +63,7 @@ void sub_80CDFB0(struct Sprite* sprite)
     sprite->callback = sub_80CE000;
 }
 
-void sub_80CE000(struct Sprite* sprite)
+static void sub_80CE000(struct Sprite* sprite)
 {
     if (++sprite->data[0] >= sprite->data[1])
     {

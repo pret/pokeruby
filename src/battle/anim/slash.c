@@ -8,12 +8,69 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CDD74(struct Sprite* sprite);
+void sub_80CDDDC(struct Sprite* sprite);
+void sub_80CDE24(struct Sprite* sprite);
 static void sub_80CDE78(struct Sprite* sprite);
 static void sub_80CDEB0(struct Sprite* sprite);
 static void sub_80CDEC0(struct Sprite* sprite);
 
 // slash (a cutting animation)
 // Used in Slash and False Swipe.
+
+const union AnimCmd gSpriteAnim_83D6E14[] =
+{
+    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(32, 4),
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6E28[] =
+{
+    ANIMCMD_FRAME(48, 4),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6E30[] =
+{
+    gSpriteAnim_83D6E14,
+    gSpriteAnim_83D6E28,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6E38 =
+{
+    .tileTag = 10183,
+    .paletteTag = 10183,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6E30,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CDD74,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6E50 =
+{
+    .tileTag = 10286,
+    .paletteTag = 10286,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6E30,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CDDDC,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6E68 =
+{
+    .tileTag = 10286,
+    .paletteTag = 10286,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6E30,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CDE24,
+};
 
 void sub_80CDD74(struct Sprite* sprite)
 {
@@ -52,7 +109,7 @@ void sub_80CDE24(struct Sprite* sprite)
     sprite->callback = sub_80CDEC0;
 }
 
-void sub_80CDE78(struct Sprite* sprite)
+static void sub_80CDE78(struct Sprite* sprite)
 {
     if (++sprite->data[0] > 8)
     {
@@ -64,14 +121,14 @@ void sub_80CDE78(struct Sprite* sprite)
     }
 }
 
-void sub_80CDEB0(struct Sprite* sprite)
+static void sub_80CDEB0(struct Sprite* sprite)
 {
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->callback = sub_80CDEC0;
 }
 
-void sub_80CDEC0(struct Sprite* sprite)
+static void sub_80CDEC0(struct Sprite* sprite)
 {
     if (++sprite->data[0] > 1)
     {

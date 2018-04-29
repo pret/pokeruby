@@ -8,11 +8,45 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CCF04(struct Sprite* sprite);
 static void sub_80CCF70(struct Sprite* sprite);
 static void sub_80CD0CC(struct Sprite* sprite, int unk1, int unk2);
 
 // bottle (shows a bottle swinging back and forth.)
 // Used by Milk Drink.
+
+const union AffineAnimCmd gSpriteAffineAnim_83D6C00[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D6C10[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 2, 12),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 6),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -2, 24),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 6),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 2, 12),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6C40[] =
+{
+    gSpriteAffineAnim_83D6C00,
+    gSpriteAffineAnim_83D6C10,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6C48 =
+{
+    .tileTag = 10099,
+    .paletteTag = 10099,
+    .oam = &gOamData_837E0B4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D6C40,
+    .callback = sub_80CCF04,
+};
 
 void sub_80CCF04(struct Sprite* sprite)
 {
@@ -30,7 +64,7 @@ void sub_80CCF04(struct Sprite* sprite)
     sprite->callback = sub_80CCF70;
 }
 
-void sub_80CCF70(struct Sprite* sprite)
+static void sub_80CCF70(struct Sprite* sprite)
 {
     switch (sprite->data[0])
     {
@@ -103,7 +137,7 @@ void sub_80CCF70(struct Sprite* sprite)
     }
 }
 
-void sub_80CD0CC(struct Sprite* sprite, int unk1, int unk2)
+static void sub_80CD0CC(struct Sprite* sprite, int unk1, int unk2)
 {
     if (sprite->data[3] <= 11)
         sprite->data[4] += 2;

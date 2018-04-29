@@ -9,8 +9,8 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern s8 gUnknown_083D6DDC[4][2];
-
+void sub_80CD3E0(struct Sprite* sprite);
+void sub_80CD6CC(struct Sprite* sprite);
 static void sub_80CD408(struct Sprite* sprite);
 static void sub_80CD4B8(struct Sprite* sprite);
 static void sub_80CD4EC(struct Sprite* sprite);
@@ -21,6 +21,36 @@ static void sub_80CD67C(struct Sprite* sprite);
 // scan
 // Used by Lock-On.
 
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DAC =
+{
+    .tileTag = 10014,
+    .paletteTag = 10014,
+    .oam = &gOamData_837DF34,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CD3E0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DC4 =
+{
+    .tileTag = 10014,
+    .paletteTag = 10014,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CD6CC,
+};
+
+const s8 gUnknown_083D6DDC[][2] =
+{
+    { 64,  64},
+    {  0, -64},
+    {-64,  64},
+    { 32, -32},
+};
+
 void sub_80CD3E0(struct Sprite* sprite)
 {
     sprite->pos1.x -= 32;
@@ -30,7 +60,7 @@ void sub_80CD3E0(struct Sprite* sprite)
     StoreSpriteCallbackInData(sprite, sub_80CD408);
 }
 
-void sub_80CD408(struct Sprite* sprite)
+static void sub_80CD408(struct Sprite* sprite)
 {
     switch (sprite->data[5] & 1)
     {
@@ -57,7 +87,7 @@ void sub_80CD408(struct Sprite* sprite)
     sprite->data[5] ^= 1;
 }
 
-void sub_80CD4B8(struct Sprite* sprite)
+static void sub_80CD4B8(struct Sprite* sprite)
 {
     if ((sprite->data[5] >> 8) == 4)
     {
@@ -71,7 +101,7 @@ void sub_80CD4B8(struct Sprite* sprite)
     }
 }
 
-void sub_80CD4EC(struct Sprite* sprite)
+static void sub_80CD4EC(struct Sprite* sprite)
 {
     s16 a;
     s16 b;
@@ -117,7 +147,7 @@ void sub_80CD4EC(struct Sprite* sprite)
     }
 }
 
-void sub_80CD5A8(struct Sprite* sprite)
+static void sub_80CD5A8(struct Sprite* sprite)
 {
     if (sprite->data[2] == 0)
     {
@@ -144,7 +174,7 @@ void sub_80CD5A8(struct Sprite* sprite)
     }
 }
 
-void sub_80CD654(struct Sprite* sprite)
+static void sub_80CD654(struct Sprite* sprite)
 {
     if ((u16)gBattleAnimArgs[7] == 0xFFFF)
     {
@@ -154,7 +184,7 @@ void sub_80CD654(struct Sprite* sprite)
     }
 }
 
-void sub_80CD67C(struct Sprite* sprite)
+static void sub_80CD67C(struct Sprite* sprite)
 {
     if (sprite->data[0] % 3 == 0)
     {
