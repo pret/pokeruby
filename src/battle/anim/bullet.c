@@ -9,11 +9,34 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CFFD8(struct Sprite* sprite);
 static void sub_80D0030(struct Sprite* sprite);
 static void sub_80D00B4(struct Sprite* sprite);
 
 // bullet (shoot seeds as ammunition.)
 // Used by Bullet Seed.
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7614[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 20, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7624[] =
+{
+    gSpriteAffineAnim_83D7614,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7628 =
+{
+    .tileTag = 10006,
+    .paletteTag = 10006,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D7624,
+    .callback = sub_80CFFD8,
+};
 
 void sub_80CFFD8(struct Sprite* sprite)
 {
@@ -26,7 +49,7 @@ void sub_80CFFD8(struct Sprite* sprite)
     StoreSpriteCallbackInData(sprite, sub_80D0030);
 }
 
-void sub_80D0030(struct Sprite* sprite)
+static void sub_80D0030(struct Sprite* sprite)
 {
     int i;
     u16 rand;
@@ -50,7 +73,7 @@ void sub_80D0030(struct Sprite* sprite)
     sprite->affineAnimPaused = 0;
 }
 
-void sub_80D00B4(struct Sprite* sprite)
+static void sub_80D00B4(struct Sprite* sprite)
 {
     sprite->data[0] += sprite->data[7];
     sprite->pos2.x = sprite->data[0] >> 8;

@@ -8,12 +8,49 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D31C8(struct Sprite* sprite);
 static void sub_80D32E8(struct Sprite *sprite);
 static void sub_80D3370(struct Sprite *sprite);
 static void sub_80D3398(struct Sprite *sprite);
 
 // bubble (indidivual bubble that floats around)
 // Used in Bubble and Bubblebeam
+
+const union AffineAnimCmd gSpriteAffineAnim_83D9148[] =
+{
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 10),
+    AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9160[] =
+{
+    gSpriteAffineAnim_83D9148,
+};
+
+const union AnimCmd gSpriteAnim_83D9164[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D9174[] =
+{
+    gSpriteAnim_83D9164,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9178 =
+{
+    .tileTag = 10146,
+    .paletteTag = 10146,
+    .oam = &gOamData_837E0AC,
+    .anims = gSpriteAnimTable_83D9174,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D9160,
+    .callback = sub_80D31C8,
+};
 
 void sub_80D31C8(struct Sprite* sprite)
 {

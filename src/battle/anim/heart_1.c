@@ -8,8 +8,21 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D1C80(struct Sprite* sprite);
+
 // heart_1 (a floating heart in a wave pattern upward.)
 // Used in Charm, Covet, and when a Pokemon is infatuated.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7A80 =
+{
+    .tileTag = 10210,
+    .paletteTag = 10210,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D1C80,
+};
 
 void sub_80D1C80(struct Sprite* sprite)
 {

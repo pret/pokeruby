@@ -8,10 +8,44 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D0178(struct Sprite* sprite);
 static void sub_80D020C(struct Sprite* sprite);
 
 // grip (does a slash which is capable of mirroring for the effect of "gripping".)
 // Used in Vice Grip.
+
+const union AnimCmd gSpriteAnim_83D7674[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_FRAME(32, 20),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D7684[] =
+{
+    ANIMCMD_FRAME(0, 3, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 3, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 20, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D7694[] =
+{
+    gSpriteAnim_83D7674,
+    gSpriteAnim_83D7684,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D769C =
+{
+    .tileTag = 10138,
+    .paletteTag = 10138,
+    .oam = &gOamData_837E054,
+    .anims = gSpriteAnimTable_83D7694,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D0178,
+};
 
 void sub_80D0178(struct Sprite* sprite)
 {
@@ -37,7 +71,7 @@ void sub_80D0178(struct Sprite* sprite)
     StoreSpriteCallbackInData(sprite, sub_80D020C);
 }
 
-void sub_80D020C(struct Sprite* sprite)
+static void sub_80D020C(struct Sprite* sprite)
 {
     if (sprite->animEnded == 1)
         DestroyAnimSprite(sprite);

@@ -8,10 +8,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D2064(struct Sprite* sprite);
 static void sub_80D2094(struct Sprite* sprite);
 
 // flying_hearts (hearts float upward from the bottom of the screen.)
 // Used in Attract.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7AE0 =
+{
+    .tileTag = 10216,
+    .paletteTag = 10216,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D2064,
+};
 
 void sub_80D2064(struct Sprite* sprite)
 {
@@ -23,7 +35,7 @@ void sub_80D2064(struct Sprite* sprite)
     StoreSpriteCallbackInData(sprite, sub_80D2094);
 }
 
-void sub_80D2094(struct Sprite* sprite)
+static void sub_80D2094(struct Sprite* sprite)
 {
     s16 y;
     sprite->data[2] += sprite->data[1];

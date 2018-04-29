@@ -8,7 +8,20 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CF280(struct Sprite* sprite);
+
 // unused_5
+
+const struct SpriteTemplate gSpriteTemplate_83D7370 =
+{
+    .tileTag = 10064,
+    .paletteTag = 10064,
+    .oam = &gOamData_837DF34,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CF280,
+};
 
 void sub_80CF280(struct Sprite* sprite)
 {
