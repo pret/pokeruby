@@ -52,6 +52,10 @@ const u8 CryMeterNeedleTiles[] = INCBIN_U8("graphics/pokedex/cry_meter_needle.4b
 const u16 gUnknown_083FAE7C[] = INCBIN_U16("graphics/pokedex/cry_meter_map.bin");
 const u16 gUnknown_083FAF1C[] = INCBIN_U16("graphics/pokedex/cry_meter.gbapal");
 const u8 gUnknown_083FAF3C[] = INCBIN_U8("graphics/pokedex/cry_meter.4bpp.lz");
+#else
+extern const u16 gUnknown_083FAE7C[];
+extern const u16 gUnknown_083FAF1C[];
+extern const u8 gUnknown_083FAF3C[];
 #endif // ENGLISH
 
 const u16 gUnknown_083FB274[][72] = {
