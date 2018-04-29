@@ -11,10 +11,6 @@
 extern struct SoundInfo gSoundInfo;
 extern struct MusicPlayerInfo gMPlay_BGM;
 
-struct Unk2000000 {
-    u8 unk0000[7 * 32 * 32];
-};
-
 struct Unk201C800 {
     s8 unk_0;
     s8 unk_1;
@@ -34,8 +30,6 @@ struct PokedexCryScreen_201C000
     u8 unk001A;
     u8 unk001B;
 };
-
-#define ePokedexCryScreenGfx (*(struct Unk2000000 *)gSharedMem)
 
 void sub_811A0A0(u16 species);
 void sub_811A0C0(void);
@@ -151,7 +145,7 @@ u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
             {
                 for (j = 0; j < 32; j++)
                 {
-                    DmaCopy16(3, gUnknown_083FB718, ePokedexCryScreenGfx.unk0000[32 * i + j], 32);
+                    DmaCopy16(3, gUnknown_083FB718, gSharedMem[32 * i + j], 32);
                 }
             }
             gUnknown_03005E98++;
@@ -504,7 +498,7 @@ void sub_811A15C(u8 a0)
     r3 = (gPokedexCryScreenPtr->unk0011 / 8 + gPokedexCryScreenPtr->unk0016 + 1) % 32;
     for (i = 0; i < 7; i++)
     {
-        DmaCopy16(3, gUnknown_083FB718, &ePokedexCryScreenGfx.unk0000[32 * (32 * i + r3)], 32);
+        DmaCopy16(3, gUnknown_083FB718, &gSharedMem[32 * (32 * i + r3)], 32);
     }
 }
 
@@ -525,8 +519,8 @@ void sub_811A1C8(u8 a0, u8 a1)
     {
         do
         {
-            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
-            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
             i--;
         } while (i > gPokedexCryScreenPtr->unk0012);
     }
@@ -534,8 +528,8 @@ void sub_811A1C8(u8 a0, u8 a1)
     {
         do
         {
-            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
-            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
+            gSharedMem[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
             i++;
         } while (i < gPokedexCryScreenPtr->unk0012);
     }
@@ -712,7 +706,7 @@ NAKED void sub_811A1C8(u8 a0, u8 a1)
 
 void sub_811A324(void)
 {
-    DmaCopy16(3, ePokedexCryScreenGfx.unk0000, VRAM + gPokedexCryScreenPtr->unk0014, 0x1c00);
+    DmaCopy16(3, gSharedMem, VRAM + gPokedexCryScreenPtr->unk0014, 0x1c00);
 }
 
 void sub_811A350(u8 a0, u16 a1, u8 a2)
