@@ -2,9 +2,10 @@
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
-
 Then run the following commands.
+
+	export DEVKITARM=/opt/devkitPro/devkitARM
+	echo "export DEVKITARM=/opt/devkitPro/devkitARM" >> ~/.bashrc
 
 	git clone https://github.com/pret/pokeruby
 	git clone https://github.com/pret/agbcc
@@ -22,11 +23,27 @@ To build **pokeruby.gba**:
 
 # Mac
 
-In **Terminal**, run the following command:
+Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+
+Then in **Terminal**, run the following commands.
 
 	xcode-select --install
 
-Then follow the Linux instructions.
+	export DEVKITARM=${HOME}/devkitPro/devkitARM
+	echo "export DEVKITARM=${HOME}/devkitPro/devkitARM" >> ~/.bashrc
+
+	git clone https://github.com/pret/pokeruby
+	git clone https://github.com/pret/agbcc
+
+	cd agbcc
+	./build.sh
+	./install.sh ../pokeruby
+
+	cd ../pokeruby
+
+To build **pokeruby.gba**:
+
+	make -j4
 
 
 # Windows
