@@ -7,41 +7,6 @@
 
 	@ ice
 
-	thumb_func_start sub_80D76C4
-sub_80D76C4: @ 80D76C4
-	push {r4,lr}
-	adds r4, r0, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _080D76F8
-	ldr r3, _080D7700 @ =gTasks
-	movs r0, 0x3C
-	ldrsh r1, [r4, r0]
-	lsls r1, 1
-	movs r0, 0x3A
-	ldrsh r2, [r4, r0]
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0
-	adds r3, 0x8
-	adds r1, r3
-	ldrh r0, [r1]
-	subs r0, 0x1
-	strh r0, [r1]
-	adds r0, r4, 0
-	bl DestroySprite
-_080D76F8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080D7700: .4byte gTasks
-	thumb_func_end sub_80D76C4
-
 	thumb_func_start sub_80D7704
 sub_80D7704: @ 80D7704
 	push {r4-r7,lr}

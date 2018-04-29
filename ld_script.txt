@@ -293,7 +293,7 @@ SECTIONS {
         src/battle/anim/thunder.o(.text);
         src/battle/anim/beta_beat_up.o(.text);
         src/battle/anim/shock.o(.text);
-        asm/current.o(.text);
+        src/battle/anim/current.o(.text);
         asm/ice.o(.text);
         src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
