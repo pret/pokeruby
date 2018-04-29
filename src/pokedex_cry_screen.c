@@ -12,7 +12,7 @@ extern struct SoundInfo gSoundInfo;
 extern struct MusicPlayerInfo gMPlay_BGM;
 
 struct Unk2000000 {
-    u16 unk0000[7 * 32][16];
+    u8 unk0000[7 * 32 * 32];
 };
 
 struct Unk201C800 {
@@ -443,9 +443,215 @@ void sub_811A15C(u8 a0)
     r3 = (ePokedexCryScreen.unk0011 / 8 + ePokedexCryScreen.unk0016 + 1) % 32;
     for (i = 0; i < 7; i++)
     {
-        DmaCopy16(3, gUnknown_083FB718, ePokedexCryScreenGfx.unk0000[32 * i + r3], 32);
+        DmaCopy16(3, gUnknown_083FB718, &ePokedexCryScreenGfx.unk0000[32 * (32 * i + r3)], 32);
     }
 }
+
+extern const u16 gUnknown_083FB274[8][72];
+extern const u8 gUnknown_083FB738[2];
+extern const u8 gUnknown_083FB73A[2][16];
+
+#ifdef NONMATCHING
+void sub_811A1C8(u8 a0, u8 a1)
+{
+    u8 sp0;
+    u8 r7;
+    u8 r8;
+    u16 r1 = (a1 + 127) << 8;
+    u8 i = r1 / 1152.0;
+    if (i > 71 - 16)
+        i = 71 - 16;
+    sp0 = i;
+    r7 = a0 % 2;
+    r8 = a0 / 8;
+    if (i > ePokedexCryScreen.unk0012)
+    {
+        do
+        {
+            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
+            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            i--;
+        } while (i > ePokedexCryScreen.unk0012);
+    }
+    else
+    {
+        do
+        {
+            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] &= gUnknown_083FB738[r7];
+            ePokedexCryScreenGfx.unk0000[(u16)(r8 * 32 + gUnknown_083FB274[a0 % 8][i])] |= gUnknown_083FB73A[r7][((i / 3) - 1) & 0x0F];
+            i++;
+        } while (i < ePokedexCryScreen.unk0012);
+    }
+    ePokedexCryScreen.unk0012 = sp0;
+}
+#else
+NAKED void sub_811A1C8(u8 a0, u8 a1)
+{
+    asm_unified("\tpush {r4-r7,lr}\n"
+                "\tmov r7, r10\n"
+                "\tmov r6, r9\n"
+                "\tmov r5, r8\n"
+                "\tpush {r5-r7}\n"
+                "\tsub sp, 0xC\n"
+                "\tlsls r5, r0, 24\n"
+                "\tlsrs r4, r5, 24\n"
+                "\tlsls r1, 24\n"
+                "\tmovs r0, 0xFE\n"
+                "\tlsls r0, 23\n"
+                "\tadds r1, r0\n"
+                "\tlsrs r1, 16\n"
+                "\tadds r0, r1, 0\n"
+                "\tbl __floatsidf\n"
+                "\tldr r3, _0811A280 @ =0x00000000\n"
+                "\tldr r2, _0811A27C @ =0x40920000\n"
+                "\tbl __divdf3\n"
+                "\tbl __fixunsdfsi\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r6, r0, 24\n"
+                "\tcmp r6, 0x37\n"
+                "\tbls _0811A1FE\n"
+                "\tmovs r6, 0x37\n"
+                "_0811A1FE:\n"
+                "\tstr r6, [sp]\n"
+                "\tmovs r7, 0x1\n"
+                "\tands r7, r4\n"
+                "\tldr r0, _0811A284 @ =gSharedMem + 0x1C000\n"
+                "\tmov r10, r0\n"
+                "\tlsrs r5, 27\n"
+                "\tmov r8, r5\n"
+                "\tldr r0, _0811A288 @ =gUnknown_083FB738\n"
+                "\tmov r1, r10\n"
+                "\tldrb r1, [r1, 0x12]\n"
+                "\tcmp r6, r1\n"
+                "\tbls _0811A298\n"
+                "\tadds r0, r7, r0\n"
+                "\tldrb r0, [r0]\n"
+                "\tmov r9, r0\n"
+                "\tmovs r2, 0x7\n"
+                "\tands r2, r4\n"
+                "_0811A220:\n"
+                "\tlsls r1, r6, 1\n"
+                "\tlsls r0, r2, 3\n"
+                "\tadds r0, r2\n"
+                "\tlsls r0, 4\n"
+                "\tadds r1, r0\n"
+                "\tldr r3, _0811A28C @ =gUnknown_083FB274\n"
+                "\tadds r1, r3\n"
+                "\tmov r3, r8\n"
+                "\tlsls r0, r3, 5\n"
+                "\tldrh r1, [r1]\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tldr r1, _0811A290 @ =gSharedMem\n"
+                "\tadds r5, r0, r1\n"
+                "\tldrb r4, [r5]\n"
+                "\tmov r3, r9\n"
+                "\tands r4, r3\n"
+                "\tstrb r4, [r5]\n"
+                "\tadds r0, r6, 0\n"
+                "\tmovs r1, 0x3\n"
+                "\tstr r2, [sp, 0x8]\n"
+                "\tbl __udivsi3\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tsubs r0, 0x1\n"
+                "\tmovs r1, 0xF\n"
+                "\tands r0, r1\n"
+                "\tlsls r1, r7, 4\n"
+                "\tadds r0, r1\n"
+                "\tldr r1, _0811A294 @ =gUnknown_083FB73A\n"
+                "\tadds r0, r1\n"
+                "\tldrb r0, [r0]\n"
+                "\torrs r4, r0\n"
+                "\tstrb r4, [r5]\n"
+                "\tsubs r0, r6, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r6, r0, 24\n"
+                "\tldr r2, [sp, 0x8]\n"
+                "\tldr r3, _0811A284 @ =gSharedMem + 0x1C000\n"
+                "\tldrb r3, [r3, 0x12]\n"
+                "\tcmp r6, r3\n"
+                "\tbhi _0811A220\n"
+                "\tb _0811A2FA\n"
+                "\t.align 2, 0\n"
+                "_0811A27C: .4byte 0x40920000\n"
+                "_0811A280: .4byte 0x00000000\n"
+                "_0811A284: .4byte gSharedMem + 0x1C000\n"
+                "_0811A288: .4byte gUnknown_083FB738\n"
+                "_0811A28C: .4byte gUnknown_083FB274\n"
+                "_0811A290: .4byte gSharedMem\n"
+                "_0811A294: .4byte gUnknown_083FB73A\n"
+                "_0811A298:\n"
+                "\tlsls r1, r7, 4\n"
+                "\tstr r1, [sp, 0x4]\n"
+                "\tadds r0, r7, r0\n"
+                "\tldrb r0, [r0]\n"
+                "\tmov r9, r0\n"
+                "\tmovs r7, 0x7\n"
+                "\tands r7, r4\n"
+                "_0811A2A6:\n"
+                "\tlsls r1, r6, 1\n"
+                "\tlsls r0, r7, 3\n"
+                "\tadds r0, r7\n"
+                "\tlsls r0, 4\n"
+                "\tadds r1, r0\n"
+                "\tldr r2, _0811A314 @ =gUnknown_083FB274\n"
+                "\tadds r1, r2\n"
+                "\tmov r3, r8\n"
+                "\tlsls r0, r3, 5\n"
+                "\tldrh r1, [r1]\n"
+                "\tadds r0, r1\n"
+                "\tlsls r0, 16\n"
+                "\tlsrs r0, 16\n"
+                "\tldr r1, _0811A318 @ =gSharedMem\n"
+                "\tadds r5, r0, r1\n"
+                "\tldrb r4, [r5]\n"
+                "\tmov r2, r9\n"
+                "\tands r4, r2\n"
+                "\tstrb r4, [r5]\n"
+                "\tadds r0, r6, 0\n"
+                "\tmovs r1, 0x3\n"
+                "\tbl __udivsi3\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r0, 24\n"
+                "\tsubs r0, 0x1\n"
+                "\tmovs r1, 0xF\n"
+                "\tands r0, r1\n"
+                "\tldr r3, [sp, 0x4]\n"
+                "\tadds r0, r3\n"
+                "\tldr r1, _0811A31C @ =gUnknown_083FB73A\n"
+                "\tadds r0, r1\n"
+                "\tldrb r0, [r0]\n"
+                "\torrs r4, r0\n"
+                "\tstrb r4, [r5]\n"
+                "\tadds r0, r6, 0x1\n"
+                "\tlsls r0, 24\n"
+                "\tlsrs r6, r0, 24\n"
+                "\tldr r2, _0811A320 @ =gSharedMem + 0x1C000\n"
+                "\tldrb r2, [r2, 0x12]\n"
+                "\tcmp r6, r2\n"
+                "\tbcc _0811A2A6\n"
+                "_0811A2FA:\n"
+                "\tmov r3, sp\n"
+                "\tldrb r0, [r3]\n"
+                "\tmov r3, r10\n"
+                "\tstrb r0, [r3, 0x12]\n"
+                "\tadd sp, 0xC\n"
+                "\tpop {r3-r5}\n"
+                "\tmov r8, r3\n"
+                "\tmov r9, r4\n"
+                "\tmov r10, r5\n"
+                "\tpop {r4-r7}\n"
+                "\tpop {r0}\n"
+                "\tbx r0\n"
+                "\t.align 2, 0\n"
+                "_0811A314: .4byte gUnknown_083FB274\n"
+                "_0811A318: .4byte gSharedMem\n"
+                "_0811A31C: .4byte gUnknown_083FB73A\n"
+                "_0811A320: .4byte gSharedMem + 0x1C000");
+}
+#endif // NONMATCHING
 
 asm(".section .text.ShowPokedexCryScreen");
 
