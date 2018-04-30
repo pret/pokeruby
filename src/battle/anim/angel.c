@@ -8,8 +8,32 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D2938(struct Sprite* sprite);
+
 // angel (a little angel descends from somewhere towards a position)
 // Used in Sweet Kiss.
+
+const union AnimCmd gSpriteAnim_83D7BAC[] =
+{
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D7BB4[] =
+{
+    gSpriteAnim_83D7BAC,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7BB8 =
+{
+    .tileTag = 10220,
+    .paletteTag = 10220,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D7BB4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D2938,
+};
 
 void sub_80D2938(struct Sprite* sprite)
 {

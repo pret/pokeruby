@@ -7,6 +7,37 @@
 extern s16 gBattleAnimArgs[8];
 extern u8 gAnimBankTarget;
 
+void sub_80D2ABC(struct Sprite *sprite);
+
+const union AnimCmd gSpriteAnim_83D7BE8[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gSpriteAnim_83D7BF0[] =
+{
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D7BF8[] =
+{
+    gSpriteAnim_83D7BE8,
+    gSpriteAnim_83D7BF0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7C00 =
+{
+    .tileTag = 10221,
+    .paletteTag = 10221,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D7BF8,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D2ABC,
+};
+
 void sub_80D2ABC(struct Sprite *sprite)
 {
     if (sprite->data[3] == 0)

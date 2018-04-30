@@ -8,11 +8,184 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CA7B0(struct Sprite* sprite);
+void sub_80CA800(struct Sprite* sprite);
+void sub_80CA858(struct Sprite* sprite);
+void sub_80CA9A8(struct Sprite* sprite);
+void sub_80CAA14(struct Sprite* sprite);
 static void sub_80CA8B4(struct Sprite* sprite);
 static void sub_80CA9F8(struct Sprite* sprite);
 static void sub_80CAACC(struct Sprite* sprite);
 
-extern struct SpriteTemplate gSpriteTemplate_83D631C;
+const union AnimCmd gSpriteAnim_83D626C[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6274[] =
+{
+    ANIMCMD_FRAME(1, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D627C[] =
+{
+    ANIMCMD_FRAME(2, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6284[] =
+{
+    ANIMCMD_FRAME(3, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D628C[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6294[] =
+{
+    ANIMCMD_FRAME(5, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D629C[] =
+{
+    ANIMCMD_FRAME(6, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D62A4[] =
+{
+    ANIMCMD_FRAME(7, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D62AC[] =
+{
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D62B4[] =
+{
+    gSpriteAnim_83D626C,
+    gSpriteAnim_83D6274,
+    gSpriteAnim_83D627C,
+    gSpriteAnim_83D6284,
+    gSpriteAnim_83D628C,
+    gSpriteAnim_83D6294,
+    gSpriteAnim_83D629C,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D62D0[] =
+{
+    gSpriteAnim_83D62A4,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D62D4[] =
+{
+    gSpriteAnim_83D62AC,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D62D8[] = {
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D62E8[] = {
+    gSpriteAffineAnim_83D62D8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D62EC =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837E0AC,
+    .anims = gSpriteAnimTable_83D62D4,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D62E8,
+    .callback = sub_80CA7B0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6304 =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D62B4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CA800,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83D631C =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D62D0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CA858,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D6334[] = {
+    AFFINEANIMCMD_FRAME(320, 320, 0, 0),
+    AFFINEANIMCMD_FRAME(-14, -14, 0, 1),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D634C[] = {
+    gSpriteAffineAnim_83D6334,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6350 =
+{
+    .tileTag = 10235,
+    .paletteTag = 10235,
+    .oam = &gOamData_837DFE4,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D634C,
+    .callback = sub_80CA7B0,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D6368[] = {
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6378[] = {
+    gSpriteAffineAnim_83D6368,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D637C =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837E0AC,
+    .anims = gSpriteAnimTable_83D62D4,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D6378,
+    .callback = sub_80CA9A8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6394 =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D62B4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CAA14,
+};
+
 
 // orbs
 // Used by Solar Beam, Absorb, Hyper Beam, and Leech Seed.
@@ -52,7 +225,7 @@ void sub_80CA858(struct Sprite* sprite)
     sub_80CA8B4(sprite);
 }
 
-void sub_80CA8B4(struct Sprite* sprite)
+static void sub_80CA8B4(struct Sprite* sprite)
 {
     if (TranslateAnimSpriteByDeltas(sprite))
     {
@@ -103,7 +276,7 @@ void sub_80CA9A8(struct Sprite* sprite)
     sprite->callback = sub_80CA9F8;
 }
 
-void sub_80CA9F8(struct Sprite* sprite)
+static void sub_80CA9F8(struct Sprite* sprite)
 {
     if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
@@ -139,7 +312,7 @@ void sub_80CAA14(struct Sprite* sprite)
     sub_80CAACC(sprite);
 }
 
-void sub_80CAACC(struct Sprite* sprite)
+static void sub_80CAACC(struct Sprite* sprite)
 {
     if (sub_8078CE8(sprite))
     {

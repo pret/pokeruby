@@ -8,10 +8,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D1F58(struct Sprite* sprite);
 static void sub_80D1FA4(struct Sprite* sprite);
 
 // blow_kiss (a heart floating across the screen.)
 // Used in Attract.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7AB0 =
+{
+    .tileTag = 10216,
+    .paletteTag = 10216,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D1F58,
+};
 
 void sub_80D1F58(struct Sprite* sprite)
 {
@@ -25,7 +37,7 @@ void sub_80D1F58(struct Sprite* sprite)
     sprite->callback = sub_80D1FA4;
 }
 
-void sub_80D1FA4(struct Sprite* sprite)
+static void sub_80D1FA4(struct Sprite* sprite)
 {
     if (TranslateAnimSpriteByDeltas(sprite) == 0)
     {

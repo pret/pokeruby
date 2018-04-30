@@ -8,8 +8,39 @@ extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern u16 gBattleTypeFlags;
 
+void sub_80D3014(struct Sprite *sprite);
+
 // guard (moves guard rings upwards)
 // Used in Safeguard.
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7D4C[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7D5C[] =
+{
+    AFFINEANIMCMD_FRAME(0x200, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7D6C[] =
+{
+    gSpriteAffineAnim_83D7D4C,
+    gSpriteAffineAnim_83D7D5C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D74 =
+{
+    .tileTag = 10244,
+    .paletteTag = 10244,
+    .oam = &gOamData_837E13C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D7D6C,
+    .callback = sub_80D3014,
+};
 
 void sub_80D3014(struct Sprite *sprite)
 {

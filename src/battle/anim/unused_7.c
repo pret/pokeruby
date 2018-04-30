@@ -10,9 +10,22 @@ extern u8 gAnimBankTarget;
 
 extern u8 gBankSpriteIds[];
 
+void sub_80CF3C4(struct Sprite* sprite);
+
 // unused_7
 
-void sub_80CF374(struct Sprite* sprite)
+const struct SpriteTemplate gSpriteTemplate_83D73AC =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CF3C4,
+};
+
+static void sub_80CF374(struct Sprite* sprite)
 {
     s16 temp;
     gSprites[sprite->data[2]].pos2.x += sprite->data[1];

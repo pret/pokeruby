@@ -8,8 +8,11 @@
 extern s16 gBattleAnimArgs[8];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern const struct SpriteTemplate gSpriteTemplate_83D9130[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83D752C[];
 
+void sub_80D3554(struct Sprite *sprite);
+void sub_80D3698(struct Sprite *sprite);
+void sub_80D3728(struct Sprite *sprite);
 static void sub_80D35DC(struct Sprite *);
 static void sub_80D365C(u8);
 static void sub_80D370C(struct Sprite *);
@@ -17,6 +20,145 @@ static void sub_80D370C(struct Sprite *);
 // energy_wave (animates steady "waves" of energy)
 // Used in Hydro Pump, Mud Shot, Signal Beam, Flamethrower, Psywave, and
 // Hydro Cannon.
+
+const union AnimCmd gSpriteAnim_83D91DC[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_FRAME(12, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D91F0[] =
+{
+    gSpriteAnim_83D91DC,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D91F4 =
+{
+    .tileTag = 10149,
+    .paletteTag = 10149,
+    .oam = &gOamData_837E04C,
+    .anims = gSpriteAnimTable_83D91F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D3554,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D920C =
+{
+    .tileTag = 10259,
+    .paletteTag = 10259,
+    .oam = &gOamData_837E04C,
+    .anims = gSpriteAnimTable_83D91F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D3554,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9224 =
+{
+    .tileTag = 10264,
+    .paletteTag = 10264,
+    .oam = &gOamData_837DF24,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D3554,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D923C =
+{
+    .tileTag = 10265,
+    .paletteTag = 10265,
+    .oam = &gOamData_837DF24,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D3554,
+};
+
+const union AnimCmd gSpriteAnim_83D9254[] =
+{
+    ANIMCMD_FRAME(16, 2),
+    ANIMCMD_FRAME(32, 2),
+    ANIMCMD_FRAME(48, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D9264[] =
+{
+    gSpriteAnim_83D9254,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9268 =
+{
+    .tileTag = 10029,
+    .paletteTag = 10029,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D9264,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D3554,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9280 =
+{
+    .tileTag = 10165,
+    .paletteTag = 10165,
+    .oam = &gOamData_837E034,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D752C,
+    .callback = sub_80D3554,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D9298[] =
+{
+    AFFINEANIMCMD_FRAME(0x3, 0x3, 10, 50),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 10),
+    AFFINEANIMCMD_FRAME(0xFFEC, 0xFFEC, -10, 20),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D92B8[] =
+{
+    AFFINEANIMCMD_FRAME(0x150, 0x150, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D92C8[] =
+{
+    gSpriteAffineAnim_83D9298,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D92CC[] =
+{
+    gSpriteAffineAnim_83D92B8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D92D0 =
+{
+    .tileTag = 10149,
+    .paletteTag = 10149,
+    .oam = &gOamData_837E10C,
+    .anims = gSpriteAnimTable_83D91F0,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D92C8,
+    .callback = sub_80D3698,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D92E8 =
+{
+    .tileTag = 10149,
+    .paletteTag = 10149,
+    .oam = &gOamData_837E10C,
+    .anims = gSpriteAnimTable_83D91F0,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D92CC,
+    .callback = sub_80D3728,
+};
 
 void sub_80D3554(struct Sprite *sprite)
 {

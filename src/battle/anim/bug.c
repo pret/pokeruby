@@ -3,17 +3,201 @@
 #include "contest.h"
 #include "rom_8077ABC.h"
 #include "trig.h"
-// #include "util.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80DC824(struct Sprite *sprite);
+void sub_80DC8F4(struct Sprite *sprite);
+void sub_80DC9A0(struct Sprite *sprite);
+void sub_80DCA70(struct Sprite *sprite);
+void sub_80DCB38(struct Sprite *sprite);
+void AnimTranslateStinger(struct Sprite *sprite);
+void AnimMissileArc(struct Sprite *sprite);
+void sub_80DCE40(struct Sprite *sprite);
 static void sub_80DCA38(struct Sprite *sprite);
 static void sub_80DCAEC(struct Sprite *sprite);
 static void sub_80DCB5C(struct Sprite *sprite);
 static void sub_80DCBB4(struct Sprite *sprite);
 static void AnimMissileArcStep(struct Sprite *sprite);
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAA80[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 30, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAA90[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, -99, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAAA0[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 94, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAAB0[] =
+{
+    gSpriteAffineAnim_83DAA80,
+    gSpriteAffineAnim_83DAA90,
+    gSpriteAffineAnim_83DAAA0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAABC =
+{
+    .tileTag = 10153,
+    .paletteTag = 10153,
+    .oam = &gOamData_837E014,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DAAB0,
+    .callback = sub_80DC824,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAAD4[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -33, 1),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAAE4[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 96, 1),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAAF4[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -96, 1),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAB04[] =
+{
+    gSpriteAffineAnim_83DAAD4,
+    gSpriteAffineAnim_83DAAE4,
+    gSpriteAffineAnim_83DAAF4,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAB10 =
+{
+    .tileTag = 10161,
+    .paletteTag = 10161,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DAB04,
+    .callback = sub_80DC8F4,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAB28 =
+{
+    .tileTag = 10180,
+    .paletteTag = 10180,
+    .oam = &gOamData_837DF24,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DC9A0,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAB40 =
+{
+    .tileTag = 10179,
+    .paletteTag = 10179,
+    .oam = &gOamData_837DF5C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DCA70,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAB58[] =
+{
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+    AFFINEANIMCMD_FRAME(0x6, 0x6, 0, 1),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAB70[] =
+{
+    gSpriteAffineAnim_83DAB58,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAB74 =
+{
+    .tileTag = 10181,
+    .paletteTag = 10181,
+    .oam = &gOamData_837E11C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DAB70,
+    .callback = sub_80DCB38,
+};
+
+const struct SpriteTemplate gLinearStingerSpriteTemplate =
+{
+    .tileTag = 10161,
+    .paletteTag = 10161,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimTranslateStinger,
+};
+
+const struct SpriteTemplate gPinMissileSpriteTemplate =
+{
+    .tileTag = 10161,
+    .paletteTag = 10161,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMissileArc,
+};
+
+const struct SpriteTemplate gIcicleSpearSpriteTemplate =
+{
+    .tileTag = 10262,
+    .paletteTag = 10262,
+    .oam = &gOamData_837DF94,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMissileArc,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DABD4[] =
+{
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 0),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 18),
+    AFFINEANIMCMD_LOOP(0),
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 8),
+    AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 8),
+    AFFINEANIMCMD_LOOP(5),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAC0C[] =
+{
+    gSpriteAffineAnim_83DABD4,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC10 =
+{
+    .tileTag = 10212,
+    .paletteTag = 10212,
+    .oam = &gOamData_837E0BC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DAC0C,
+    .callback = sub_80DCE40,
+};
 
 // used in Move_MEGAHORN
 void sub_80DC824(struct Sprite *sprite)

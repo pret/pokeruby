@@ -12,11 +12,23 @@ extern u8 gAnimBankTarget;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG1_X;
 
+void sub_80D0E30(struct Sprite* sprite);
 static void sub_80D0D68(u8 taskId);
 static void sub_80D0E8C(struct Sprite* sprite);
 
 // draw (draws the Pokemon into the world using a pencil.)
 // Used in Sketch.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D77E0 =
+{
+    .tileTag = 10002,
+    .paletteTag = 10002,
+    .oam = &gOamData_837DF34,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D0E30,
+};
 
 void sub_80D0C88(u8 taskId)
 {
@@ -59,7 +71,7 @@ void sub_80D0C88(u8 taskId)
     task->func = sub_80D0D68;
 }
 
-void sub_80D0D68(u8 taskId)
+static void sub_80D0D68(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
 
@@ -120,7 +132,7 @@ void sub_80D0E30(struct Sprite* sprite)
     sprite->callback = sub_80D0E8C;
 }
 
-void sub_80D0E8C(struct Sprite* sprite)
+static void sub_80D0E8C(struct Sprite* sprite)
 {
     switch (sprite->data[0])
     {

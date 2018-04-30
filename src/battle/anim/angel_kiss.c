@@ -9,10 +9,23 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D2A38(struct Sprite* sprite);
+
 // angel_kiss (a different variation of kiss_fountain.)
 // Used in Sweet Kiss.
 
-void sub_80D29CC(struct Sprite* sprite)
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7BD0 =
+{
+    .tileTag = 10219,
+    .paletteTag = 10219,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D2A38,
+};
+
+static void sub_80D29CC(struct Sprite* sprite)
 {
     sprite->data[5]++;
     sprite->pos2.x = Sin(sprite->data[3], 5);
@@ -50,38 +63,3 @@ void sub_80D2A38(struct Sprite* sprite)
         }
     }
 }
-
-// this is for the next file, but i didnt feel like deleting it from the original 80C file.
-/* void sub_80D2ABC(struct Sprite* sprite)
-{
-    int var;
-    s16 var2;
-    int var3;
-    if (sprite->data[3] == 0)
-    {
-        sprite->pos1.x += gBattleAnimArgs[0];
-        sprite->pos1.y += gBattleAnimArgs[1];
-        StartSpriteAnim(sprite, 0);
-        sprite->subpriority = sub_8079E90(gAnimBankTarget) - 1;
-        sprite->data[2] = 1;
-    }
-
-    sprite->data[0] += sprite->data[2];
-    var = sprite->data[0] * 4;
-    if (var < 0)
-        var += 0xFF;
-
-    sprite->data[1] = (sprite->data[0] * 4) -(((var) >> 8) << 8);
-    if (sprite->data[1] < 0)
-        sprite->data[1] = 0;
-
-    var3 = sprite->data[1];
-    var2 = sprite->data[0];
-    var2 /= 4;
-    sprite->pos2.x = Cos(var3, 30 - var2);
-    var3 = sprite->data[1];
-    var2 = sprite->data[0] / 8;
-    sprite->pos2.x = Sin(var3, 10 - var2);
-    if (sprite->data[1] > 0x80 && sprite->data[2] > 0)
-        sprite->data[2] = 0xFFFF;
-} */
