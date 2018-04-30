@@ -16,12 +16,13 @@ extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG2_X;
 extern u8 gBankSpriteIds[];
 
-extern const union AffineAnimCmd *const gUnknown_083DA888[];
-extern struct AffineAnimFrameCmd gUnknown_083DA8A4;
-extern struct AffineAnimFrameCmd gUnknown_083DA8C4;
-extern const struct SpriteTemplate gSpriteTemplate_83DA8DC;
-extern const struct SpriteTemplate gSpriteTemplate_83DA9AC;
-
+void sub_80DB74C(struct Sprite *sprite);
+void sub_80DBA4C(struct Sprite *sprite);
+void sub_80DBAF4(struct Sprite *sprite);
+void sub_80DBB70(struct Sprite *sprite);
+void sub_80DC068(struct Sprite *sprite);
+void sub_80DC2B0(struct Sprite *sprite);
+void sub_80DC700(struct Sprite *sprite);
 static void sub_80DB88C(struct Sprite *sprite);
 static void sub_80DB8C0(struct Sprite *sprite);
 static void sub_80DB92C(struct Sprite *sprite);
@@ -35,6 +36,395 @@ static void sub_80DC1FC(u8 taskId);
 static void sub_80DC3F4(u8 taskId);
 void sub_80DC5F4(u8 taskId);
 
+const union AffineAnimCmd gSpriteAffineAnim_83DA674[] =
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFFE, 0xFFFE, -10, 120),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA68C[] =
+{
+    gSpriteAffineAnim_83DA674,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA690 =
+{
+    .tileTag = 10196,
+    .paletteTag = 10196,
+    .oam = &gOamData_837E0BC,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DA68C,
+    .callback = sub_80793C4,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA6A8 =
+{
+    .tileTag = 10166,
+    .paletteTag = 10166,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DB74C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA6C0 =
+{
+    .tileTag = 10167,
+    .paletteTag = 10167,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DB74C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA6D8 =
+{
+    .tileTag = 10168,
+    .paletteTag = 10168,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DB74C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA6F0 =
+{
+    .tileTag = 10169,
+    .paletteTag = 10169,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DB74C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA708 =
+{
+    .tileTag = 10170,
+    .paletteTag = 10170,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DB74C,
+};
+
+const union AnimCmd gSpriteAnim_83DA720[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(16, 3),
+    ANIMCMD_FRAME(32, 3),
+    ANIMCMD_FRAME(48, 3),
+    ANIMCMD_FRAME(64, 3),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83DA738[] =
+{
+    gSpriteAnim_83DA720,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA73C =
+{
+    .tileTag = 10071,
+    .paletteTag = 10071,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83DA738,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DBA4C,
+};
+
+const union AnimCmd gSpriteAnim_83DA754[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83DA768[] =
+{
+    gSpriteAnim_83DA754,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA76C =
+{
+    .tileTag = 10070,
+    .paletteTag = 10070,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83DA768,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DBA4C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA784 =
+{
+    .tileTag = 10163,
+    .paletteTag = 10163,
+    .oam = &gOamData_837DF74,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = TranslateAnimSpriteToTargetMonLocation,
+};
+
+const union AnimCmd gSpriteAnim_83DA79C[] =
+{
+    ANIMCMD_FRAME(8, 60, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 22, .hFlip = TRUE),
+    ANIMCMD_LOOP(0),
+    ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 5, .hFlip = TRUE),
+    ANIMCMD_FRAME(8, 5, .hFlip = TRUE),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(8, 22, .hFlip = TRUE),
+    ANIMCMD_FRAME(24, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(40, 22, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83DA7DC[] =
+{
+    ANIMCMD_FRAME(8, 60),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(8, 22),
+    ANIMCMD_LOOP(0),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_LOOP(1),
+    ANIMCMD_FRAME(8, 22),
+    ANIMCMD_FRAME(24, 3),
+    ANIMCMD_FRAME(32, 3),
+    ANIMCMD_FRAME(40, 22),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83DA81C[] =
+{
+    gSpriteAnim_83DA79C,
+    gSpriteAnim_83DA7DC,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA824 =
+{
+    .tileTag = 10097,
+    .paletteTag = 10097,
+    .oam = &gOamData_837DF74,
+    .anims = gSpriteAnimTable_83DA81C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DBAF4,
+};
+
+const union AnimCmd gSpriteAnim_83DA83C[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(16, 6),
+    ANIMCMD_FRAME(32, 6),
+    ANIMCMD_FRAME(48, 6),
+    ANIMCMD_FRAME(64, 6),
+    ANIMCMD_FRAME(80, 6),
+    ANIMCMD_FRAME(96, 18),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83DA85C[] =
+{
+    gSpriteAnim_83DA83C,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_3DA860[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 4, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 8),
+    AFFINEANIMCMD_FRAME(0, 0, 4, 4),
+    AFFINEANIMCMD_LOOP(2),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_083DA888[] =
+{
+    gSpriteAffineAnim_3DA860,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA88C =
+{
+    .tileTag = 10093,
+    .paletteTag = 10093,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83DA85C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DBB70,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_083DA8A4[] =
+{
+    AFFINEANIMCMD_FRAME(-8, 10, 0, 16),
+    AFFINEANIMCMD_FRAME(18, -18, 0, 16),
+    AFFINEANIMCMD_FRAME(-20, 16, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_083DA8C4[] =
+{
+    AFFINEANIMCMD_FRAME(64, -4, 0, 20),
+    AFFINEANIMCMD_FRAME(0, 0, 0, -56),
+    AFFINEANIMCMD_END,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83DA8DC =
+{
+    .tileTag = 10249,
+    .paletteTag = 10249,
+    .oam = &gOamData_837E04C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA8F4 =
+{
+    .tileTag = 10250,
+    .paletteTag = 10250,
+    .oam = &gOamData_837DF3C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80DC068,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA90C[] =
+{
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 8),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA924[] =
+{
+    AFFINEANIMCMD_FRAME(0xF0, 0xF0, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 6),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 2),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA94C[] =
+{
+    AFFINEANIMCMD_FRAME(0xD0, 0xD0, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 4),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 4),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA974[] =
+{
+    AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 2),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 8),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 6),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA99C[] =
+{
+    gSpriteAffineAnim_83DA90C,
+    gSpriteAffineAnim_83DA924,
+    gSpriteAffineAnim_83DA94C,
+    gSpriteAffineAnim_83DA974,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83DA9AC =
+{
+    .tileTag = 10251,
+    .paletteTag = 10251,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DA99C,
+    .callback = sub_80DC2B0,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA9C4[] =
+{
+    AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
+    AFFINEANIMCMD_FRAME(0x4, 0x4, 0, 120),
+    AFFINEANIMCMD_END_ALT(1),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA9DC[] =
+{
+    gSpriteAffineAnim_83DA9C4,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA9E0 =
+{
+    .tileTag = 10267,
+    .paletteTag = 10267,
+    .oam = &gOamData_837E11C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DA9DC,
+    .callback = sub_80793C4,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DA9F8[] =
+{
+    AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 0),
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 17),
+    AFFINEANIMCMD_LOOP(0),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 10),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 10),
+    AFFINEANIMCMD_LOOP(4),
+    AFFINEANIMCMD_LOOP(0),
+    AFFINEANIMCMD_FRAME(0xFFF0, 0xFFF0, 0, 5),
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 5),
+    AFFINEANIMCMD_LOOP(7),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83DAA50[] =
+{
+    AFFINEANIMCMD_FRAME(0xFFEC, 0x18, 0, 15),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAA60[] =
+{
+    gSpriteAffineAnim_83DA9F8,
+    gSpriteAffineAnim_83DAA50,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAA68 =
+{
+    .tileTag = 10212,
+    .paletteTag = 10212,
+    .oam = &gOamData_837E11C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83DAA60,
+    .callback = sub_80DC700,
+};
 
 void sub_80DB74C(struct Sprite *sprite)
 {
@@ -254,7 +644,7 @@ void sub_80DBB70(struct Sprite *sprite)
 static void sub_80DBC00(struct Sprite *sprite)
 {
     sprite->oam.affineMode = 1;
-    sprite->affineAnims = gUnknown_083DA888;
+    sprite->affineAnims = gSpriteAffineAnimTable_083DA888;
     sprite->data[0] = 0;
     InitSpriteAffineAnim(sprite);
     sprite->callback = sub_80DBC34;
@@ -287,7 +677,7 @@ void sub_80DBC94(u8 taskId)
     struct Task *task = &gTasks[taskId];
     u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
-    sub_80798F4(task, spriteId, &gUnknown_083DA8A4);
+    sub_80798F4(task, spriteId, &gSpriteAffineAnim_083DA8A4);
     task->func = sub_80DBCD0;
 }
 
@@ -308,7 +698,7 @@ void sub_80DBCFC(u8 taskId)
     task->data[2] = 0;
     task->data[3] = GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER ? 4 : 8;
 
-    sub_80798F4(task, task->data[0], &gUnknown_083DA8C4);
+    sub_80798F4(task, task->data[0], &gSpriteAffineAnim_083DA8C4);
     task->func = sub_80DBD58;
 }
 
