@@ -33,7 +33,7 @@ extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
 extern u8 gBattleMonForms[];
 extern void (*gBattleBankFunc[])(void);
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;

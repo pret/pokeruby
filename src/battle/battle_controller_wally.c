@@ -38,7 +38,7 @@ extern u16 gBattlerPartyIndexes[];
 extern u8 gHealthboxIDs[];
 extern u16 gBattleTypeFlags;
 extern u16 gAnimMovePower;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u32 gTransformedPersonalities[];
