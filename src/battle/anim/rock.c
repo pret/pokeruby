@@ -12,7 +12,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG3_Y;
@@ -833,11 +833,11 @@ static void sub_80DD9FC(struct Sprite *sprite)
 
 void sub_80DDA4C(u8 taskId)
 {
-    if ((s32)gAnimMoveDmg < 33)
+    if (gAnimMoveDmg < 33)
         gBattleAnimArgs[7] = 0;
-    if (gAnimMoveDmg - 33 < 33)
+    if ((u32)gAnimMoveDmg - 33 < 33)
         gBattleAnimArgs[7] = 1;
-    if ((s32)gAnimMoveDmg > 65)
+    if (gAnimMoveDmg > 65)
         gBattleAnimArgs[7] = 2;
 
     DestroyAnimVisualTask(taskId);

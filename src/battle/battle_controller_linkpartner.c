@@ -42,7 +42,7 @@ extern u8 gUnknown_02024E68[];
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;

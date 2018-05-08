@@ -354,6 +354,7 @@ SECTIONS {
         src/battle/anim/sfx.o(.text);
         src/battle/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
+        src/battle/battle_anim_812C144.o(.text);
         asm/battle_anim_812C144.o(.text);
         src/learn_move.o(.text);
         src/fldeff_softboiled.o(.text);

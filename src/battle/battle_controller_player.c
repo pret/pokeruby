@@ -61,7 +61,7 @@ extern u8 gBattleOutcome;
 extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u16 gAnimMovePower;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
 extern u32 gTransformedPersonalities[];
