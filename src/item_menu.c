@@ -139,7 +139,7 @@ EWRAM_DATA static u8 gUnknown_0203855A = 0;
 EWRAM_DATA static s8 gUnknown_0203855B = 0;
 EWRAM_DATA static s8 gUnknown_0203855C = 0;
 EWRAM_DATA u16 gSpecialVar_ItemId = 0;
-EWRAM_DATA u8 gUnknown_02038560 = 0;
+EWRAM_DATA u8 gCurSelectedItemSlotIndex = 0;
 EWRAM_DATA u8 gUnknown_02038561 = 0;
 EWRAM_DATA static u8 gUnknown_02038562 = 0;
 EWRAM_DATA static u8 gUnknown_02038563 = 0;
@@ -268,7 +268,7 @@ static void OnItemSelect_PC(u8);
 static void OnItemSelect_Battle(u8);
 static void OnBagClose_Battle(u8);
 
-static const struct {TaskFunc onItemSelect; TaskFunc onBagClose;} gUnknown_083C16BC[] =
+static const struct {TaskFunc onItemSelect; TaskFunc onBagClose;} sItemSelectFuncs[] =
 {
     [RETURN_TO_FIELD_0]   = {OnItemSelect_Field05, OnBagClose_Field0},
     [RETURN_TO_BATTLE]    = {OnItemSelect_Battle, OnBagClose_Battle},
@@ -1192,30 +1192,30 @@ static void sub_80A444C(u16 a, int b, int c, int d)
 
     for (i = b; i <= c; i++)
     {
-        u8 r4;
+        u8 slot;
         u8 r5;
         u8 *text;
 
         if (sub_80A42B0(i, d) == TRUE)
             break;
-        r4 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + i;
+        slot = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + i;
         r5 = i * 2 + 2;
         text = gStringVar1;
         text = sub_80A425C(a, text, i);
 #if ENGLISH
-        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x60, 0);
+        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x60, 0);
 #else
-        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x63, 0);
+        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x63, 0);
 #endif
         Menu_PrintText(gStringVar1, 14, r5);
-        if (gUnknown_02038558 != 0)
+        if (gUnknown_02038558)
         {
-            if (gCurrentBagPocketItemSlots[r4].itemId == gSaveBlock1.registeredItem)
+            if (gCurrentBagPocketItemSlots[slot].itemId == gSaveBlock1.registeredItem)
                 DrawSelectIcon(i);
         }
         else
         {
-            if (gCurrentBagPocketItemSlots[r4].itemId == gSaveBlock1.registeredItem)
+            if (gCurrentBagPocketItemSlots[slot].itemId == gSaveBlock1.registeredItem)
                 MoveSelectIcon(i);
             else
                 EraseSelectIcon(i);
@@ -1838,7 +1838,7 @@ static bool8 sub_80A4F74(u8 a)
 
 static void sub_80A50C8(u8 taskId)
 {
-    s16 *r5 = gTasks[taskId].data;
+    s16 *taskData = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
     {
@@ -1852,7 +1852,7 @@ static void sub_80A50C8(u8 taskId)
          && !(sCurrentBagPocket == BAG_POCKET_BERRIES || sCurrentBagPocket == BAG_POCKET_TMs_HMs)
          && (sReturnLocation == RETURN_TO_FIELD_0 || sReturnLocation == RETURN_TO_BATTLE))
         {
-            if (r5[10] == 0)
+            if (taskData[10] == 0)
             {
                 if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos != gBagPocketScrollStates[sCurrentBagPocket].numSlots)
                 {
@@ -1881,10 +1881,10 @@ static void sub_80A50C8(u8 taskId)
         {
             if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos == gBagPocketScrollStates[sCurrentBagPocket].numSlots)
             {
-                if (r5[10] == 0)
+                if (taskData[10] == 0)
                 {
                     gSpecialVar_ItemId = 0;
-                    gUnknown_083C16BC[sReturnLocation].onBagClose(taskId);
+                    sItemSelectFuncs[sReturnLocation].onBagClose(taskId);
                 }
                 else
                 {
@@ -1894,12 +1894,12 @@ static void sub_80A50C8(u8 taskId)
             }
             else
             {
-                if (r5[10] == 0)
+                if (taskData[10] == 0)
                 {
                     PlaySE(SE_SELECT);
-                    gUnknown_02038560 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos;
-                    gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gUnknown_02038560].itemId;
-                    gUnknown_083C16BC[sReturnLocation].onItemSelect(taskId);
+                    gCurSelectedItemSlotIndex = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + gBagPocketScrollStates[sCurrentBagPocket].cursorPos;
+                    gSpecialVar_ItemId = gCurrentBagPocketItemSlots[gCurSelectedItemSlotIndex].itemId;
+                    sItemSelectFuncs[sReturnLocation].onItemSelect(taskId);
                     StopVerticalScrollIndicators(TOP_ARROW);
                     StopVerticalScrollIndicators(BOTTOM_ARROW);
                     StopVerticalScrollIndicators(LEFT_ARROW);
@@ -1917,12 +1917,12 @@ static void sub_80A50C8(u8 taskId)
 
         if (gMain.newKeys & B_BUTTON)
         {
-            if (r5[10] == 0)
+            if (taskData[10] == 0)
             {
                 if (sReturnLocation != RETURN_TO_FIELD_5)
                 {
                     gSpecialVar_ItemId = 0;
-                    gUnknown_083C16BC[sReturnLocation].onBagClose(taskId);
+                    sItemSelectFuncs[sReturnLocation].onBagClose(taskId);
                 }
             }
             else
@@ -1982,7 +1982,7 @@ static bool8 sub_80A5350(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
 
-    if (SellMenu_QuantityRoller(taskId, gCurrentBagPocketItemSlots[gUnknown_02038560].quantity) == TRUE)
+    if (SellMenu_QuantityRoller(taskId, gCurrentBagPocketItemSlots[gCurSelectedItemSlotIndex].quantity) == TRUE)
     {
         // if (sCurrentBagPocket == BAG_POCKET_BERRIES)  Can't get it to match this way
         if (sCurrentBagPocket + 1 == BAG_POCKET_BERRIES + 1)
