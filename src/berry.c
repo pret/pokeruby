@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/items.h"
 #include "berry.h"
 #include "field_control_avatar.h"
 #include "event_object_movement.h"
@@ -6,23 +7,11 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "constants/items.h"
 #include "main.h"
 #include "menu.h"
 #include "random.h"
 #include "task.h"
 #include "text.h"
-
-#define BERRY_NAME_LENGTH 6
-#define BERRY_REGROW_LIMIT 10
-#define MAX_BERRY_TREES 128
-
-#define BERRY_NONE 0
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
-
-#define GETBERRYID(berry) ((berry - FIRST_BERRY) + 1)
-#define GETITEMID(berry) ((berry + FIRST_BERRY) - 1)
 
 #ifdef ENGLISH
 #define NAME_CHERI_BERRY   _("CHERI")

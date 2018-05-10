@@ -1,6 +1,17 @@
 #ifndef GUARD_BERRY_H
 #define GUARD_BERRY_H
 
+#define BERRY_NAME_LENGTH 6
+#define BERRY_REGROW_LIMIT 10
+#define MAX_BERRY_TREES 128
+
+#define BERRY_NONE 0
+#define FIRST_BERRY ITEM_CHERI_BERRY
+#define LAST_BERRY  ITEM_ENIGMA_BERRY
+
+#define GETBERRYID(berry) ((berry - FIRST_BERRY) + 1)
+#define GETITEMID(berry) ((berry + FIRST_BERRY) - 1)
+
 enum
 {
     BERRY_FIRMNESS_UNKNOWN,
