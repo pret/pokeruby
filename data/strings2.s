@@ -432,6 +432,9 @@ gOtherText_Egg2:: @ 842D0FB
 gOtherText_ObtainedInTrade:: @ 842D103
 	.string "obtained in a trade.$"
 
+gOtherText_MetDistantLand::
+	.string "met in a distant land.$"
+
 gOtherText_FatefulEncounter:: @ 842D118
 	.string "fateful encounter.$"
 
