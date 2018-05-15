@@ -6,10 +6,7 @@ SRCS = scaninc.cpp c_file.cpp asm_file.cpp
 
 HEADERS := scaninc.h asm_file.h c_file.h
 
-.PHONY: all clean
-
-all: scaninc
-	@:
+.PHONY: clean
 
 scaninc: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
