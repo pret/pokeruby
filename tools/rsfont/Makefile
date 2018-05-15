@@ -6,10 +6,7 @@ LIBS = -lpng -lz
 
 SRCS = main.c convert_png.c util.c font.c
 
-.PHONY: all clean
-
-all: rsfont
-	@:
+.PHONY: clean
 
 rsfont: $(SRCS) convert_png.h gfx.h global.h util.h font.h
 	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS) $(LIBS)

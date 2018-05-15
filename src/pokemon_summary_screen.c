@@ -30,6 +30,11 @@
 #include "task.h"
 #include "tv.h"
 #include "scanline_effect.h"
+#include "orre_met_location_strings.h"
+
+#define VERSION_GAMECUBE 15
+#define VERSION_FIRERED 4
+#define VERSION_LEAFGREEN 5
 
 static void sub_809FC0C(void);
 static void sub_809FEB8(void);
@@ -153,6 +158,7 @@ extern const u16 gUnknown_08E94510[];
 extern const u16 gUnknown_08E94550[];
 extern const u16 gUnknown_08E94590[];
 extern const u8 gUnknown_08E73E88[];
+extern u8* DetermineOrreMetLocation(struct Pokemon *);
 
 EWRAM_DATA u8 gUnknown_020384F0 = 0;
 EWRAM_DATA struct Sprite *gUnknown_020384F4 = NULL;
@@ -2520,12 +2526,12 @@ static void sub_809FE6C(struct Pokemon *mon)
     sub_809FC34(mon);
 }
 
-static void sub_809FE80(void)
+static void sub_809FE80(void) //erases first page of summary screen when switching between Pokemon
 {
     Menu_EraseWindowRect(14, 4, 18, 5);
     Menu_EraseWindowRect(25, 4, 30, 5);
     Menu_EraseWindowRect(11, 9, 28, 12);
-    Menu_EraseWindowRect(11, 14, 28, 17);
+    Menu_EraseWindowRect(11, 14, 29, 19);
 }
 
 static void sub_809FEB8(void)
@@ -3034,6 +3040,8 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
     u8 gameMet;
     u8 *ptr = gStringVar4;
     u8 nature = GetNature(mon);
+    u8 *orreMetLocationString; //receives the string pointer returned from DetermineOrreMetLocation
+    u16 species; //needed to check for starter Eeveelutions and Plusle, which are special cases
 
 #if ENGLISH
     ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
@@ -3060,7 +3068,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
             ptr = sub_80A1E9C(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Egg2);
         }
-        else if (locationMet >= 88)
+        else if (locationMet >= 213)
         {
             *ptr = CHAR_NEWLINE;
             ptr++;
@@ -3084,7 +3092,28 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
     {
         gameMet = GetMonData(mon, MON_DATA_MET_GAME);
 
-        if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD))
+        if(gameMet == VERSION_GAMECUBE) //Colosseum and XD Location Handling
+        {
+        	 u8 levelMet = GetMonData(mon, MON_DATA_MET_LEVEL);
+
+        	 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
+        	 *ptr = CHAR_NEWLINE;
+        	 ptr++;
+
+        	 orreMetLocationString = DetermineOrreMetLocation(mon);
+        	 species = GetMonData(mon, MON_DATA_SPECIES);
+        	 if((species >= SPECIES_EEVEE && species <= SPECIES_FLAREON) || species == SPECIES_ESPEON || species == SPECIES_UMBREON || species == SPECIES_PLUSLE)
+        	 {
+            	 GetMonData(mon, MON_DATA_OT_NAME, gStringVar2); //used for Eeveelution strings and Duking's Plusle
+        		 StringCopy(ptr, orreMetLocationString);
+        	 }
+        	 else
+        	 {
+        		 ptr = sub_80A1E9C(ptr, orreMetLocationString, 14);
+        		 StringCopy(ptr, gOtherText_Met);
+        	 }
+        }
+        else if(!(gameMet >= VERSION_SAPPHIRE || gameMet <= VERSION_LEAFGREEN)) //If gameMet is not a valid GBA version
         {
             *ptr = CHAR_NEWLINE;
             ptr++;
@@ -3104,7 +3133,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
 
                 StringCopy(ptr, gOtherText_FatefulEncounter);
             }
-            else if (locationMet >= 88)
+            else if (locationMet >= 213)
             {
                 *ptr = CHAR_NEWLINE;
                 ptr++;

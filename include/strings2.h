@@ -266,6 +266,7 @@ extern const u8 gOtherText_Comma[];
 extern const u8 gOtherText_Met[];
 extern const u8 gOtherText_Egg2[];
 extern const u8 gOtherText_ObtainedInTrade[];
+extern const u8 gOtherText_MetDistantLand[];
 extern const u8 gOtherText_FatefulEncounter[];
 extern const u8 gOtherText_Met2[];
 extern const u8 gOtherText_EggDayCare[];
