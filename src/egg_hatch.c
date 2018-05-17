@@ -244,7 +244,7 @@ static void CreatedHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     markings = GetMonData(egg, MON_DATA_MARKINGS);
     pokerus = GetMonData(egg, MON_DATA_POKERUS);
 
-    CreateMon(temp, species, 5, 32, TRUE, personality, 0, 0);
+    CreateMon(temp, species, EGG_HATCH_LEVEL, 32, TRUE, personality, 0, 0);
 
     for (i = 0; i < 4; i++)
     {
