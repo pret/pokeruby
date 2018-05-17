@@ -30,6 +30,7 @@
 #include "task.h"
 #include "tv.h"
 #include "scanline_effect.h"
+#include "daycare.h"
 
 static void sub_809FC0C(void);
 static void sub_809FEB8(void);
@@ -3052,7 +3053,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
 
         if (GetMonData(mon, MON_DATA_MET_LEVEL) == 0)
         {
-            ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, 5);
+            ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, EGG_HATCH_LEVEL);
             *ptr = CHAR_NEWLINE;
             ptr++;
 
