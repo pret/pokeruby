@@ -6,10 +6,7 @@ SRCS := main.cpp sym_file.cpp elf.cpp
 
 HEADERS := ramscrgen.h sym_file.h elf.h char_util.h
 
-.PHONY: all clean
-
-all: ramscrgen
-	@:
+.PHONY: clean
 
 ramscrgen: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
