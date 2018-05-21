@@ -523,7 +523,7 @@ bool8 sub_8031C30(u8 a)
     return retVal;
 }
 
-void load_gfxc_health_bar(void)
+void load_gfxc_health_bar(u8 a)
 {
     LZDecompressWram(gUnknown_08D09C48, eVoidSharedArr);
 }
