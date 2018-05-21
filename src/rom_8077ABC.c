@@ -2252,7 +2252,7 @@ void sub_807A69C(u8 taskId)
     else
         task->data[6] = 3;
     CpuCopy32(&gPlttBufferUnfaded[src], &gPlttBufferFaded[dest], 0x20);
-    BlendPalette(dest, 0x10, gBattleAnimArgs[1], gBattleAnimArgs[0]);
+    BlendPalette(dest, 16, gBattleAnimArgs[1], gBattleAnimArgs[0]);
     task->func = sub_807A784;
 }
 

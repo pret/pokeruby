@@ -400,7 +400,7 @@ bool8 sub_8099E08(void)
     switch (gPokemonStorageSystemPtr->unk_1032)
     {
         case 0:
-            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 0x10, 0xffff);
+            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 16, FADE_COLOR_WHITE);
             gPokemonStorageSystemPtr->unk_1032++;
             break;
         case 1:
@@ -409,7 +409,7 @@ bool8 sub_8099E08(void)
                 u8 curBox = get_preferred_box();
                 sub_8099EB0(curBox, 0);
                 sub_809A654();
-                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0x10, 0, 0xffff);
+                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 16, 0, FADE_COLOR_WHITE);
                 gPokemonStorageSystemPtr->unk_1032++;
             }
             break;

@@ -365,7 +365,7 @@ static bool8 sub_810B6C0(void)
             }
             break;
         case 18:
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gPaletteFade.bufferTransferDisabled = FALSE;
             SetMainCallback2(sub_810B674);
             return TRUE;
@@ -813,7 +813,7 @@ static void sub_810C2C8(u8 taskId)
 
 static void sub_810C31C(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     if (gUnknown_02039244 > 1)
     {
         gSpecialVar_ItemId = ITEM_NONE;
@@ -878,7 +878,7 @@ static void sub_810C4C4(u8 taskId)
 
 static void sub_810C508(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_810C4C4;
 }
 
@@ -971,7 +971,7 @@ static void sub_810C788(u8 taskId)
     {
         gSpecialVar_ItemId += 3;
     }
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_810C2C8;
 }
 
@@ -981,7 +981,7 @@ static void sub_810C854(u8 taskId)
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[gSpecialVar_ItemId].color]);
     gSpecialVar_Result = gSpecialVar_ItemId;
     PokeblockClearIfExists(gSpecialVar_ItemId);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_810C2C8;
 }
 

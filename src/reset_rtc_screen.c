@@ -504,7 +504,7 @@ void Task_ResetRtcScreen(u8 taskId)
     switch (data[0])
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 1, 16, 0, FADE_COLOR_WHITE);
         data[0] = 1;
         break;
     case 1:
@@ -574,7 +574,7 @@ void Task_ResetRtcScreen(u8 taskId)
     case 5:
         if (gMain.newKeys & A_BUTTON)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, 0xFFFF);
+            BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 16, FADE_COLOR_WHITE);
             data[0] = 6;
         }
         else

@@ -394,7 +394,7 @@ static void Task_NamingScreenMain(u8 taskId)
 
 static bool8 MainState_BeginFadeIn(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     namingScreenDataPtr->state++;
     return 0;
 }
@@ -495,7 +495,7 @@ static bool8 MainState_UpdateSentToPCMessage(struct Task *task)
 
 static bool8 MainState_BeginFadeInOut(struct Task *task)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     namingScreenDataPtr->state++;
     return FALSE;
 }

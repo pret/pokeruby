@@ -643,7 +643,7 @@ static bool8 Phase2_Transition_Blur_Func2(struct Task* task)
     {
         task->data[1] = 4;
         if (++task->data[2] == 10)
-            BeginNormalPaletteFade(-1, -1, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB(0, 0, 0));
         REG_MOSAIC = (task->data[2] & 15) * 17;
         if (task->data[2] > 14)
             task->tState++;
@@ -672,7 +672,7 @@ static bool8 Phase2_Transition_Swirl_Func1(struct Task* task)
 
     sub_811D658();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, RGB(0, 0, 0));
     sub_811D6E8(gScanlineEffectRegBuffers[1], TRANSITION_STRUCT.field_14, 0, 2, 0, 160);
 
     SetVBlankCallback(VBlankCB_Phase2_Transition_Swirl);
@@ -733,7 +733,7 @@ static bool8 Phase2_Transition_Shuffle_Func1(struct Task* task)
     sub_811D658();
     ScanlineEffect_Clear();
 
-    BeginNormalPaletteFade(-1, 4, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 16, RGB(0, 0, 0));
     memset(gScanlineEffectRegBuffers[1], TRANSITION_STRUCT.field_16, 0x140);
 
     SetVBlankCallback(VBlankCB_Phase2_Transition_Shuffle);
@@ -1314,7 +1314,7 @@ static bool8 Phase2_Transition_Ripple_Func2(struct Task* task)
     if (++task->data[3] == 81)
     {
         task->data[4]++;
-        BeginNormalPaletteFade(-1, -2, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, -2, 0, 16, RGB(0, 0, 0));
     }
 
     if (task->data[4] != 0 && !gPaletteFade.active)
@@ -1664,7 +1664,7 @@ static bool8 Phase2_Mugshot_Func7(struct Task* task)
 static bool8 Phase2_Mugshot_Func8(struct Task* task)
 {
     TRANSITION_STRUCT.VBlank_DMA = 0;
-    BlendPalettes(-1, 0x10, 0x7FFF);
+    BlendPalettes(0xFFFFFFFF, 16, RGB(31, 31, 31));
     TRANSITION_STRUCT.BLDCNT = 0xFF;
     task->data[3] = 0;
 
@@ -1993,7 +1993,7 @@ static bool8 Phase2_Transition_WhiteFade_Func3(struct Task* task)
     TRANSITION_STRUCT.VBlank_DMA = 0;
     if (TRANSITION_STRUCT.field_20 > 7)
     {
-        BlendPalettes(-1, 0x10, 0x7FFF);
+        BlendPalettes(0xFFFFFFFF, 16, RGB(31, 31, 31));
         task->tState++;
     }
     return FALSE;
@@ -2302,7 +2302,7 @@ static bool8 Phase1_TransitionAll_Func1(struct Task* task)
         task->data[7] += task->data[4];
         if (task->data[7] > 16)
             task->data[7] = 16;
-        BlendPalettes(-1, task->data[7], 0x2D6B);
+        BlendPalettes(0xFFFFFFFF, task->data[7], RGB(11, 11, 11));
     }
     if (task->data[7] > 15)
     {
@@ -2320,7 +2320,7 @@ static bool8 Phase1_TransitionAll_Func2(struct Task* task)
         task->data[7] -= task->data[5];
         if (task->data[7] < 0)
             task->data[7] = 0;
-        BlendPalettes(-1, task->data[7], 0x2D6B);
+        BlendPalettes(0xFFFFFFFF, task->data[7], RGB(11, 11, 11));
     }
     if (task->data[7] == 0)
     {
@@ -2379,7 +2379,7 @@ static void sub_811D6A8(u16** a0, u16** a1)
 
 static void sub_811D6D4(void)
 {
-    BlendPalettes(-1, 0x10, 0);
+    BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
 }
 
 static void sub_811D6E8(s16* array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)

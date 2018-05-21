@@ -212,7 +212,7 @@ static void HoldContestPainting(void)
             u8 two = 2;  //needed to make the asm match
 
             gUnknown_03000750 = two;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         if (gUnknown_03000756 != 0)
             gUnknown_03000754 = 0;

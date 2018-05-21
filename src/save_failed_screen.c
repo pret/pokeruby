@@ -126,7 +126,7 @@ static void CB2_SaveFailedScreen(void)
         Menu_DrawStdWindowFrame(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
         Menu_DrawStdWindowFrame(1, MSG_WIN_TOP, 28, 19); // message window
         Menu_PrintText(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         ime = REG_IME;
         REG_IME = 0;
         REG_IE |= INTR_FLAG_VBLANK;
@@ -224,7 +224,7 @@ static void CB2_FadeAndReturnToTitleScreen(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(CB2_ReturnToTitleScreen);
     }

@@ -74,7 +74,7 @@ u8 debug_sub_80B061C(void)
 
 u8 KagayaDebugMenu_TrainerCard(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_80B068C;
     return 0;
 }
@@ -93,7 +93,7 @@ u8 debug_sub_80B068C(void)
 
 u8 KagayaDebugMenu_CardToExchange(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_80B06E0;
     return 0;
 }
@@ -112,7 +112,7 @@ u8 debug_sub_80B06E0(void)
 
 u8 KagayaDebugMenu_SlotMachine(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = Kagaya_80B0734;
     return 0;
 }
@@ -149,7 +149,7 @@ u8 debug_sub_80B0770(void)
 
 u8 debug_sub_80B07B0(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_80B07DC;
     return 0;
 }

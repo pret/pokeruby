@@ -514,7 +514,7 @@ void SafariHandlecmd20(void)
 
 void SafariHandleOpenBag(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gBattleBankFunc[gActiveBattler] = sub_812B724;
     gBankInMenu = gActiveBattler;
 }

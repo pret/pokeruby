@@ -487,7 +487,7 @@ void sub_81439D0(void)
     gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
     gTasks[taskIdA].data[TDA_TASK_B_ID] = taskIdB;
 
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
     savedIme = REG_IME;
     REG_IME = 0;
@@ -541,14 +541,14 @@ static void task_a_8143B68(u8 taskIdA)
     {
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskIdA].func = task_a_8143BFC;
     }
     else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
         gTasks[taskIdA].data[TDA_13] = data1;
         gTasks[taskIdA].data[TDA_11] = 0;
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskIdA].func = task_a_8143CC0;
     }
 }
@@ -571,7 +571,7 @@ static void task_a_80C9BFC(u8 taskIdA)
 
     if (sub_8144ECC(gTasks[taskIdA].data[TDA_7], taskIdA))
     {
-        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
         backup = REG_IME;
         REG_IME = 0;
@@ -634,7 +634,7 @@ void task_a_8143D04(u8 taskIdA)
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_TASK_A_ID] = taskIdA;
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_2] = gTasks[taskIdA].data[TDA_7];
 
-        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         REG_BG3HOFS = 0;
         REG_BG3VOFS = 32;
         REG_BG3CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
@@ -655,7 +655,7 @@ static void task_a_8143EBC(u8 taskIdA)
         return;
     }
 
-    BeginNormalPaletteFade(-1, 12, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 12, 0, 16, RGB(0, 0, 0));
     gTasks[taskIdA].func = task_a_8143F04;
 }
 
@@ -677,7 +677,7 @@ static void task_a_8143F3C(u8 taskIdA)
     sub_8145128(0, 0x3800, 0);
     ResetSpriteData();
     FreeAllSpritePalettes();
-    BeginNormalPaletteFade(-1, 8, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 8, 16, 0, RGB(0, 0, 0));
 
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     backup = REG_IME;
@@ -699,7 +699,7 @@ static void task_a_8143FDC(u8 taskIdA)
         return;
     }
 
-    BeginNormalPaletteFade(-1, 6, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 6, 0, 16, RGB(0, 0, 0));
     gTasks[taskIdA].func = task_a_8144024;
 }
 
@@ -709,7 +709,7 @@ static void task_a_8144024(u8 taskIdA)
     {
         sub_81452D0(0x3800, 0);
 
-        BeginNormalPaletteFade(-1, 0, 0, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0, RGB(0, 0, 0));
         gTasks[taskIdA].data[TDA_0] = 7200;
         gTasks[taskIdA].func = task_a_8144080;
     }
@@ -722,7 +722,7 @@ static void task_a_8144080(u8 taskIdA)
         if (gTasks[taskIdA].data[TDA_0] == 0)
         {
             FadeOutBGM(4);
-            BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
+            BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, FADE_COLOR_WHITE);
             gTasks[taskIdA].func = task_a_8144114;
             return;
         }
@@ -730,7 +730,7 @@ static void task_a_8144080(u8 taskIdA)
         if (gMain.newKeys)
         {
             FadeOutBGM(4);
-            BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
+            BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, FADE_COLOR_WHITE);
             gTasks[taskIdA].func = task_a_8144114;
             return;
         }

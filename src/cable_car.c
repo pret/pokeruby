@@ -275,7 +275,7 @@ void CableCar(void)
 {
     ScriptContext2_Enable();
     CreateTask(CableCarTask1, 1);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 #if DEBUG
@@ -385,7 +385,7 @@ static void CableCarMainCallback_Setup(void)
             gMain.state++;
             break;
         case 7:
-            BeginNormalPaletteFade(-1, 3, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 3, 16, 0, RGB(0, 0, 0));
             FadeInNewBGM(BGM_ROPEWAY, 1);
             sub_8123FBC(1);
             gMain.state++;
@@ -497,7 +497,7 @@ static void sub_8123878(u8 taskId)
             if (sCableCarPtr->unk_0006 == 570)
             {
                 sCableCarPtr->unk_0001 = 3;
-                BeginNormalPaletteFade(-1, 3, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 3, 0, 16, RGB(0, 0, 0));
                 FadeOutBGM(4);
             }
             break;

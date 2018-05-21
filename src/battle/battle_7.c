@@ -334,7 +334,7 @@ void BattleLoadOpponentMonSprite(struct Pokemon *pkmn, u8 b)
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
-        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
     }
 }
@@ -386,7 +386,7 @@ void BattleLoadPlayerMonSprite(struct Pokemon *pkmn, u8 b)
     }
     if (ewram17800[b].transformedSpecies != 0)
     {
-        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
     }
 }
@@ -646,7 +646,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
         gBattleMonForms[a] = ewram17840.unk0;
         if (ewram17800[a].transformedSpecies != 0)
         {
-            BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+            BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
             CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         }
         gSprites[gBankSpriteIds[a]].pos1.y = sub_8077F68(a);
@@ -714,7 +714,7 @@ void sub_8031FC4(u8 a, u8 b, bool8 c)
             LZDecompressWram(lzPaletteData, paletteSrc);
             LoadPalette(paletteSrc + gBattleMonForms[b] * 16, paletteOffset, 32);
         }
-        BlendPalette(paletteOffset, 16, 6, 0x7FFF);
+        BlendPalette(paletteOffset, 16, 6, RGB(31, 31, 31));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, 32);
         if (!IsContest())
         {

@@ -134,7 +134,7 @@ void CB2_StartSoundCheckMenu(void)
     ResetSpriteData();
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_WIN0H = WIN_RANGE(0, 0);
     REG_WIN0V = WIN_RANGE(0, 0);
     REG_WIN1H = WIN_RANGE(0, 0);
@@ -267,7 +267,7 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         m4aSongNumStart(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_80BA68C;
     }
     else if (gMain.newAndRepeatedKeys & DPAD_UP)
@@ -1249,7 +1249,7 @@ void Task_InitCryTest(u8 taskId)
 
     Menu_DrawStdWindowFrame(0, 16, 5, 19);
     PrintCryNumber();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_BG2HOFS = 0;
     REG_BG2VOFS = 0;
     REG_BG2CNT = 0xF01;

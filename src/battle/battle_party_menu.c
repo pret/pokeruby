@@ -515,7 +515,7 @@ void HandleBattlePartyMenu(u8 taskId)
 
 static void Task_809527C(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_80952B4;
 }
 
@@ -535,7 +535,7 @@ static void Task_80952E4(u8 taskId)
         Task_809527C(taskId);
     else
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = Task_8095330;
     }
 }
@@ -633,7 +633,7 @@ static void Task_BattlePartyMenuSummary(u8 taskId)
 {
     sub_806CA38(taskId);  //an unused variable was probably set with this.
     gTasks[taskId].func = Task_ShowSummaryScreen;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 static void Task_BattlePartyMenuShift(u8 taskId)

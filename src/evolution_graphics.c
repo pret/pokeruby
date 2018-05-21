@@ -271,7 +271,7 @@ static void EvoTask_BeginPreSet1_FadeAndPlaySE(u8 taskID)
 {
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
-    BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 0xA, 0, 0x10, 0x7FFF);
+    BeginNormalPaletteFade(3 << gTasks[taskID].data[1], 10, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePreEvoSparkleSet1;
     PlaySE(SE_W025);
 }
@@ -389,7 +389,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
-    BeginNormalPaletteFade(0xFFF9001C, 0, 0, 0x10, 0x7FFF);
+    BeginNormalPaletteFade(0xFFF9001C, 0, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash;
     PlaySE(SE_W080);
 }
@@ -410,7 +410,7 @@ static void EvoTask_CreatePostEvoSparklesSet2_AndFlash(u8 taskID)
                 CreatePostEvoSparkleSet2(i);
             break;
         case 32:
-            BeginNormalPaletteFade(0xFFFF001C, 0x10, 0x10, 0, 0x7FFF);
+            BeginNormalPaletteFade(0xFFFF001C, 16, 16, 0, RGB(31, 31, 31));
             break;
         }
         gTasks[taskID].tFrameCounter++;
@@ -437,7 +437,7 @@ static void EvoTask_BeginPostSparklesSet2_AndFlash_Trade(u8 taskID)
     SetEvoSparklesMatrices();
     gTasks[taskID].tFrameCounter = 0;
     CpuSet(&gPlttBufferFaded[0x20], &gPlttBufferUnfaded[0x20], 0x30);
-    BeginNormalPaletteFade(0xFFF90001, 0, 0, 0x10, 0x7FFF);
+    BeginNormalPaletteFade(0xFFF90001, 0, 0, 16, RGB(31, 31, 31));
     gTasks[taskID].func = EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade;
     PlaySE(SE_W080);
 }
@@ -458,7 +458,7 @@ static void EvoTask_CreatePostEvoSparklesSet2_AndFlash_Trade(u8 taskID)
                 CreatePostEvoSparkleSet2(i);
             break;
         case 32:
-            BeginNormalPaletteFade(0xFFFF0001, 0x10, 0x10, 0, 0x7FFF);
+            BeginNormalPaletteFade(0xFFFF0001, 16, 16, 0, RGB(31, 31, 31));
             break;
         }
         gTasks[taskID].tFrameCounter++;

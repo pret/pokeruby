@@ -1127,7 +1127,7 @@ void CB2_InitTestMenu(void)
     Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
     debug_sub_8076B68();
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_IE |= 1;
     REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP;
     m4aSoundVSyncOn();

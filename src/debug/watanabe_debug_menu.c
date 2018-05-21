@@ -392,7 +392,7 @@ void InitSizeComparison(void)
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = imeBak;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     SetVBlankCallback(debug_80C3758);
     SetMainCallback2(debug_80C370C);
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_OBJ_ON;
@@ -812,7 +812,7 @@ void debug_80C3D2C(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
@@ -1292,7 +1292,7 @@ void debug_80C4900(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         LoadPlayerParty();
         gSaveBlock2.playerGender = gUnknown_Debug_2038A0C[13];
@@ -1835,7 +1835,7 @@ void InitCreatePokemon(void)
     u8 sp04[] = _("Create　POKひMON　　　LR:Shift　　START:Add");
 
     debug_80C35DC();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_BLDCNT = 0x0000;
     REG_BLDALPHA = 0x0000;
     REG_BLDY = 0x0000;
@@ -1884,7 +1884,7 @@ void debug_80C53F0(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
@@ -2523,7 +2523,7 @@ void InitSeePokemonGraphics(void)
     LoadPalette(word_83F888C, 0x80, sizeof(word_83F888C));
     pal = RGB(31, 31, 31);
     LoadPalette(&pal, 0, sizeof(pal));
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WIN1H = 0;
@@ -2707,7 +2707,7 @@ void debug_80C6FA8(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }
@@ -3195,7 +3195,7 @@ void InitSeeTrainers(void)
     debug_80C35DC();
     DmaCopy16Defvars(3, byte_83F88EC, VRAM + 0xe000, 0x800);
     LoadPalette(word_83F888C, 0x80, 0x60);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WIN1H = 0;
@@ -3315,7 +3315,7 @@ void debug_80C7B14(u8 taskId)
     if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         SetMainCallback2(debug_80C370C);
         gTasks[taskId].func = debug_80C373C;
     }

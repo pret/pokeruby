@@ -1312,7 +1312,7 @@ void WallyHandlecmd20(void)
 
 void WallyHandleOpenBag(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gBattleBankFunc[gActiveBattler] = sub_81374C4;
     gBankInMenu = gActiveBattler;
 }

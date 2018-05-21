@@ -32,7 +32,7 @@ void sub_80CE7E0(u8 taskId)
         gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
     }
 
-    BlendPalette(r3, 16, 11, 0);
+    BlendPalette(r3, 16, 11, RGB(0, 0, 0));
     task->data[3] = 0;
     i = 0;
     while (i <= 1 && (obj = duplicate_obj_of_side_rel2move_in_transparent_mode(0)) >= 0)

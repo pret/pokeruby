@@ -133,7 +133,7 @@ static bool8 SwitchToPkmnListMenu(void)
     Menu_EraseScreen();
     gMain.savedCallback = c2_exit_to_overworld_1_sub_8080DEC;
     CreateTask(Task_SwitchToPkmnListMenu, 0);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     return TRUE;
 }
 

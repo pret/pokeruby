@@ -424,7 +424,7 @@ bool8 TayaDebugMenu_TownFlags(void)
 
 bool8 TayaDebugMenu_AwardARibbon(void)
 {
-    BlendPalettes(0xFFFFFFFF, 16, 0);
+    BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
     SetMainCallback2(debug_sub_80915BC);
     CloseMenu();
     return TRUE;
@@ -979,7 +979,7 @@ void debug_sub_8091334(void)
             }
             else if (gMain.newKeys & B_BUTTON)
             {
-                BlendPalettes(0xFFFFFFFF, 16, 0);
+                BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
                 SetMainCallback2(sub_80546F0);
             }
             break;

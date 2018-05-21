@@ -305,7 +305,7 @@ void HandleBattleTowerPartyMenu(u8 taskId)
         case B_BUTTON:
             PlaySE(SE_SELECT);
             ClearPartySelection();
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].func = sub_8122450;
             break;
         }
@@ -386,7 +386,7 @@ static void sub_81224A8(u8 taskId)
     {
         if (gSelectedOrderFromParty[0] != 0)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].func = sub_8122450;
         }
         else
@@ -441,7 +441,7 @@ static void sub_81225D4(u8 taskId)
 // Summary callback?
 static void BattleTowerEntryMenuCallback_Summary(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_81225D4;
 }
 
@@ -700,7 +700,7 @@ static void sub_8122C18(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] == 256)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_8122450;
     }
 }
@@ -919,7 +919,7 @@ static void sub_8123034(u8 taskId)
 
 static void DaycareStorageMenuCallback_Summary(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_8123034;
 }
 
@@ -934,7 +934,7 @@ static void DaycareStorageMenuCallback_Exit(u8 taskId)
 
 void sub_8123138(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_8123170;
 }
 

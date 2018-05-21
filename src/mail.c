@@ -514,7 +514,7 @@ static u8 sub_80F8A28(void)
         REG_BG2CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(9)  | BGCNT_16COLOR | BGCNT_TXT256x256;
         REG_BLDCNT = 0;
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = 0;
         ewram0_4.varF0 = sub_80F8F58;
         return TRUE;
@@ -639,7 +639,7 @@ static void sub_80F8F78(void)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         ewram0_4.varF0 = sub_80F8FB4;
     }
 }
@@ -701,7 +701,7 @@ void debug_sub_810C990(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = debug_sub_810C910;
     }
     else if (gMain.newKeys & B_BUTTON)
@@ -1100,7 +1100,7 @@ void debug_sub_810D388(void)
             ScanlineEffect_Stop();
             ResetPaletteFade();
             SetVBlankCallback(sub_80F8F18);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 1:
@@ -1139,7 +1139,7 @@ void debug_sub_810D388(void)
         REG_BLDCNT = 0;
         REG_DISPCNT = 0x0340;
         debug_sub_810D340();
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(sub_80F8F18);
         break;
     case 7:

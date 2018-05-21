@@ -243,7 +243,7 @@ void TeachMoveTutorMove(void)
 {
     ScriptContext2_Enable();
     CreateTask(sub_813269C, 10);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void sub_813269C(u8 taskId)
@@ -368,7 +368,7 @@ void LearnMoveMain(void)
         sub_8133800();
         gSprites[1].pos1.x = 0x48;
         sLearnMoveStruct->unk2C3 = TRUE;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         REG_DISPCNT = 0x1340;
         break;
     case 1:
@@ -536,7 +536,7 @@ void LearnMoveMain(void)
         if (Menu_UpdateWindowText())
         {
             sLearnMoveStruct->state = 20;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 20:
@@ -551,10 +551,10 @@ void LearnMoveMain(void)
             sLearnMoveStruct->state = 14;
         break;
     case 22:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         break;
     case 14:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         sLearnMoveStruct->state++;
         break;
     case 15:
@@ -562,7 +562,7 @@ void LearnMoveMain(void)
             SetMainCallback2(c2_exit_to_overworld_2_switch);
         break;
     case 28:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         sLearnMoveStruct->state++;
         DrawLearnMoveMenuWindow();
         sub_8133800();

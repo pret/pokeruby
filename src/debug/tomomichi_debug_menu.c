@@ -2365,7 +2365,7 @@ static bool8 CallScript_GiveShroomishEgg(void)
 
 static bool8 ContestGraphics_Show(void)
 {
-    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_808C280;
     return FALSE;
 }
@@ -2385,7 +2385,7 @@ static bool8 debug_sub_808C280(void)
 
 static bool8 MuseumGraphics_Show(void)
 {
-    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_808C2E4;
     return FALSE;
 }
@@ -3927,7 +3927,7 @@ static bool8 debug_sub_808EC5C(void)
 
 static bool8 PreviewGraphics_Show(void)
 {
-    BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gMenuCallback = debug_sub_808ECD0;
     return FALSE;
 }

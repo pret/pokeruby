@@ -478,7 +478,7 @@ static bool8 SetupBagMultistep(void)
         REG_IE |= INTR_FLAG_VBLANK;
         REG_IME = savedIme;
         REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;
@@ -2647,7 +2647,7 @@ static void OnItemSelect_Field05(u8 taskId)
 
 static void sub_80A5AAC(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = HandleItemMenuPaletteFade;
 }
 
@@ -2926,7 +2926,7 @@ static void HandlePopupMenuAction_Give(u8 taskId)
             gTasks[taskId].data[9] = (u32)sub_808B020;
             gTasks[taskId].func = HandleItemMenuPaletteFade;
             gUnknown_02038561 = 1;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
     }
     else
@@ -3477,7 +3477,7 @@ void sub_80A7094(u8 taskId)
     gTasks[taskId].data[8] = (u32)sub_802E424 >> 16;
     gTasks[taskId].data[9] = (u32)sub_802E424;
     gTasks[taskId].func = HandleItemMenuPaletteFade;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 static void OnBagClose_Battle(u8 taskId)
@@ -3578,7 +3578,7 @@ static void sub_80A7230(u8 taskId)
         taskData[8] = (u32)sub_802E424 >> 16;
         taskData[9] = (u32)sub_802E424;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         return;
     }
     taskData[15]++;

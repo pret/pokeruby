@@ -873,7 +873,7 @@ static bool32 sub_80719FC(u8 *step)
     {
         u32 savedIme;
 
-        BlendPalettes(-1, 0x10, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
         SetVBlankCallback(sub_80719F0);
         savedIme = REG_IME;
         REG_IME = 0;
@@ -914,7 +914,7 @@ static void Task_8071B64(u8 taskId)
         case 0:
             Menu_DisplayDialogueFrame();
             Menu_PrintText(gSystemText_Saving, 2, 15);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             (*step)++;
             break;
         case 1:
@@ -929,7 +929,7 @@ static void Task_8071B64(u8 taskId)
             (*step)++;
             break;
         case 3:
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             (*step)++;
             break;
         case 4:

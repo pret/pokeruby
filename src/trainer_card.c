@@ -673,7 +673,7 @@ bool8 TrainerCard_Init(struct Task *task)
     ewram0_2.showColon = gSaveBlock2.playTimeSeconds & 1;
     ewram0_2.frameCounter = gSaveBlock2.playTimeVBlanks;
     TrainerCard_CreatePrintPlayTimeTask();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     ewram0_2.current_state++; /* Advance state machine */
     return FALSE;
 }
@@ -740,7 +740,7 @@ bool8 TrainerCard_WaitForFlipToFinish(struct Task *task)
 bool8 TrainerCard_FadeOut(struct Task *task)
 {
     TrainerCard_DestoryPlayTimeTask();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     ewram0_2.current_state++; /* Advance state machine */
     return FALSE;
 }
