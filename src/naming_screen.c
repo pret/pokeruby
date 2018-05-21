@@ -130,9 +130,9 @@ static void sub_80B76E0();
 static void nullsub_20(u8, u8);
 static void PrintKeyboardCharacters(u8);
 
-void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 c, u16 d, u32 e, MainCallback returnCallback)
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 speciesOrPlayerGender, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
-    StoreNamingScreenParameters(templateNum, destBuffer, c, d, e, returnCallback);
+    StoreNamingScreenParameters(templateNum, destBuffer, speciesOrPlayerGender, monGender, monPersonality, returnCallback);
     SetMainCallback2(C2_NamingScreen);
 }
 
@@ -199,17 +199,17 @@ static void VBlankCB_NamingScreen(void)
     REG_BG2CNT |= namingScreenDataPtr->unkA;
 }
 
-static void StoreNamingScreenParameters(u8 templateNum, u8 *destBuffer, u16 c, u16 d, u32 e, MainCallback returnCallback)
+static void StoreNamingScreenParameters(u8 templateNum, u8 *destBuffer, u16 speciesOrPlayerGender, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
     struct Task *task;
 
     //Create a task that does nothing, and use it as a temporary space to store parameters
     task = &gTasks[CreateTask(Task_DoNothing, 0xFF)];
     task->data[0] = templateNum;
-    task->data[1] = c;
-    task->data[2] = d;
-    task->data[3] = e >> 16;
-    task->data[4] = e;
+    task->data[1] = speciesOrPlayerGender;
+    task->data[2] = monGender;
+    task->data[3] = monPersonality >> 16;
+    task->data[4] = monPersonality;
     StoreWordInTwoHalfwords(&task->data[5], (u32)destBuffer);
     StoreWordInTwoHalfwords(&task->data[7], (u32)returnCallback);
 }
@@ -222,9 +222,9 @@ static void GetNamingScreenParameters(void)
     taskId = FindTaskIdByFunc(Task_DoNothing);
     task = &gTasks[taskId];
     namingScreenDataPtr->templateNum = task->data[0];
-    namingScreenDataPtr->unk3E = task->data[1];
-    namingScreenDataPtr->unk40 = task->data[2];
-    namingScreenDataPtr->unk42 = (task->data[3] << 16) | (u16)task->data[4];
+    namingScreenDataPtr->speciesOrPlayerGender = task->data[1];
+    namingScreenDataPtr->monGender = task->data[2];
+    namingScreenDataPtr->monPersonality = (task->data[3] << 16) | (u16)task->data[4];
     LoadWordFromTwoHalfwords(&task->data[5], (u32 *)&namingScreenDataPtr->destBuffer);
     LoadWordFromTwoHalfwords(&task->data[7], (u32 *)&namingScreenDataPtr->returnCallback);
     DestroyTask(taskId);
@@ -1304,7 +1304,7 @@ static void sub_80B6E68(void)
     u8 rivalGfxId;
     u8 spriteId;
 
-    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, namingScreenDataPtr->unk3E);
+    rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, namingScreenDataPtr->speciesOrPlayerGender);
     spriteId = AddPseudoFieldObject(rivalGfxId, SpriteCallbackDummy, 0x38, 0x18, 0);
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], 4);
@@ -1324,7 +1324,7 @@ static void sub_80B6EFC(void)
     u8 spriteId;
 
     sub_809D51C();
-    spriteId = CreateMonIcon(namingScreenDataPtr->unk3E, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenDataPtr->unk42);
+    spriteId = CreateMonIcon(namingScreenDataPtr->speciesOrPlayerGender, SpriteCallbackDummy, 0x34, 0x18, 0, namingScreenDataPtr->monPersonality);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1832,7 +1832,7 @@ static void nullsub_61(void)
 
 static void sub_80B78F8(void)
 {
-    StringCopy(gStringVar1, gSpeciesNames[(s16)namingScreenDataPtr->unk3E]);
+    StringCopy(gStringVar1, gSpeciesNames[(s16)namingScreenDataPtr->speciesOrPlayerGender]);
 }
 
 static void nullsub_62(void)
@@ -1843,9 +1843,9 @@ static void sub_80B7924(void)
 {
     u8 genderSymbol[2] = _("♂");
 
-    if ((s16)namingScreenDataPtr->unk40 != MON_GENDERLESS)
+    if ((s16)namingScreenDataPtr->monGender != MON_GENDERLESS)
     {
-        if ((s16)namingScreenDataPtr->unk40 == MON_FEMALE)
+        if ((s16)namingScreenDataPtr->monGender == MON_FEMALE)
             genderSymbol[0] = 0xB6;  //female symbol
         Menu_PrintText(genderSymbol, 0x14, 4);
     }

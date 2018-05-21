@@ -2859,7 +2859,7 @@ void sub_8088A78(struct Task *task)
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(3));
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         FieldObjectClearAnimIfSpecialAnimFinished(mapObject);
         FieldObjectSetSpecialAnim(mapObject, sub_80608D0(mapObject->placeholder18));
         gFieldEffectArguments[0] = task->data[1];
@@ -3030,7 +3030,7 @@ void sub_8088E2C(struct Task *task)
     if ((++task->data[2]) >= 8)
     {
         mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(0x03));
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
         mapObject->mapobj_bit_12 = 1;
         FieldObjectSetSpecialAnim(mapObject, 0x48);
@@ -3270,7 +3270,7 @@ void sub_80892A0(struct Task *task)
         {
             sub_8127ED0(mapObject->mapobj_unk_1A, 0);
         }
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(0x3));
+        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         CameraObjectReset2();
         FieldObjectTurn(mapObject, DIR_WEST);
         StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
@@ -3374,10 +3374,10 @@ void fishE(struct Task *task)
     if ((--task->data[1]) == 0)
     {
         mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        state = 0;
+        state = PLAYER_AVATAR_STATE_NORMAL;
         if (task->data[15] & 0x08)
         {
-            state = 3;
+            state = PLAYER_AVATAR_STATE_SURFING;
             sub_8127ED0(mapObject->mapobj_unk_1A, 1);
         }
         sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(state));

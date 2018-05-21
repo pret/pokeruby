@@ -648,14 +648,14 @@ void nullsub_49(struct MapObject *a)
 
 void PlayerAvatarTransition_Normal(struct MapObject *a)
 {
-    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(0));
+    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(1);
 }
 
 void PlayerAvatarTransition_MachBike(struct MapObject *a)
 {
-    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(1));
+    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_MACH_BIKE));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(2);
     BikeClearState(0, 0);
@@ -663,7 +663,7 @@ void PlayerAvatarTransition_MachBike(struct MapObject *a)
 
 void PlayerAvatarTransition_AcroBike(struct MapObject *a)
 {
-    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(2));
+    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(4);
     BikeClearState(0, 0);
@@ -674,7 +674,7 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
 {
     u8 unk;
 
-    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(3));
+    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(8);
     gFieldEffectArguments[0] = a->coords2.x;
@@ -687,7 +687,7 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a)
 
 void PlayerAvatarTransition_Underwater(struct MapObject *a)
 {
-    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(4));
+    sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_UNDERWATER));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(16);
     a->mapobj_unk_1A = sub_8128124(a->spriteId);
@@ -1129,7 +1129,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     struct MapObject *mapObject;
 
     playerMapObjTemplate.localId = 0xFF;
-    playerMapObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, gender);
+    playerMapObjTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gender);
     playerMapObjTemplate.x = x - 7;
     playerMapObjTemplate.y = y - 7;
     playerMapObjTemplate.elevation = 0;
@@ -1163,27 +1163,27 @@ void sub_8059B88(u8 a)
 
 void sub_8059BF4(void)
 {
-    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(5));
+    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
 void sub_8059C3C(u8 a)
 {
-    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(6));
+    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDE8(a));
 }
 
-void sub_8059C94(u8 a)
+void sub_8059C94(u8 direction)
 {
-    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(2));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FD98(a));
+    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FD98(direction));
     SeekSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 1);
 }
 
-void sub_8059D08(u8 a)
+void sub_8059D08(u8 direction)
 {
-    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(7));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], FieldObjectDirectionToImageAnimId(a));
+    sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], FieldObjectDirectionToImageAnimId(direction));
 }
 
 static void sub_8059D60(struct MapObject *a)
@@ -1413,7 +1413,7 @@ static void sub_805A2D0(u8 taskId)
 
     if (FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
     {
-        sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(0));
+        sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
         FieldObjectSetSpecialAnim(playerMapObj, GetFaceDirectionAnimId(playerMapObj->mapobj_unk_18));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();

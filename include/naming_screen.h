@@ -48,9 +48,9 @@ struct NamingScreenData
             const struct NamingScreenTemplate *template;
  /*0x38*/ u8 *destBuffer;
  /*0x3C*/ u16 unk3C;  //savedKeyRepeatStartDelay
- /*0x3E*/ u16 unk3E;
- /*0x40*/ u16 unk40;
- /*0x42*/ u32 unk42;
+ /*0x3E*/ u16 speciesOrPlayerGender;
+ /*0x40*/ u16 monGender;
+ /*0x42*/ u32 monPersonality;
  /*0x46*/ MainCallback returnCallback;
 };
 
