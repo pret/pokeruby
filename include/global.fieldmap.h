@@ -226,10 +226,10 @@ struct MapObject
     /*0x19*/ union __attribute__((packed)) {
         u8 as_byte;
         struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } __attribute((aligned (1))) as_nybbles;
-    } __attribute((aligned (1))) range;
+            u16 x:4;
+            u16 y:4;
+        } as_nybbles;
+    }  range;
     // /*0x19*/ u8 mapobj_unk_19;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
