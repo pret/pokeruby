@@ -93,7 +93,7 @@ void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 void ItemMenu_ConfirmNormalFade(u8 var)
 {
     ExecuteSwitchToOverworldFromItemUse(var);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void ItemMenu_ConfirmComplexFade(u8 var)
@@ -165,7 +165,7 @@ void ItemMenu_ReadMail(u8 taskId)
 
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = ItemMenu_ReadMail;
 }
 
@@ -220,7 +220,7 @@ bool32 CanFish(void)
     if (MetatileBehavior_IsWaterfall(tileBehavior))
         return FALSE;
 
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_UNDERWATER))
         return FALSE;
 
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
@@ -787,7 +787,7 @@ void sub_80C9C7C(u8 taskId)
         gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
         gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
         gTasks[taskId].func = HandleItemMenuPaletteFade;
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, RGB(0, 0, 0));
     }
     else
     {
@@ -1072,7 +1072,7 @@ void sub_80CA394(u8 taskId)
 void sub_80CA3C0(u8 taskId)
 {
     gTasks[taskId].func = sub_80CA394;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void ItemUseInBattle_Medicine(u8 var)

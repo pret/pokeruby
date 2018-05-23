@@ -3,6 +3,17 @@
 
 #include "task.h"
 
+enum {
+    PLAYER_AVATAR_STATE_NORMAL,
+    PLAYER_AVATAR_STATE_MACH_BIKE,
+    PLAYER_AVATAR_STATE_ACRO_BIKE,
+    PLAYER_AVATAR_STATE_SURFING,
+    PLAYER_AVATAR_STATE_UNDERWATER,
+    PLAYER_AVATAR_STATE_FIELD_MOVE,
+    PLAYER_AVATAR_STATE_FISHING,
+    PLAYER_AVATAR_STATE_WATERING,
+};
+
 // sub_80587B4
 void player_step(u8 a, u16 b, u16 c);
 u8 ForcedMovement_None(void);
@@ -69,7 +80,7 @@ u8 GetPlayerAvatarObjectId(void);
 void sub_80597E8(void);
 void sub_80597F4(void);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b);
-u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
+u8 GetPlayerAvatarGraphicsIdByStateId(u8);
 u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerSurfingNorth(void);

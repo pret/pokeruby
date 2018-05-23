@@ -936,7 +936,7 @@ static void sub_809E044(void)
 static void SummaryScreenExit(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_809E13C;
 }
 

@@ -718,7 +718,7 @@ bool8 InitPartyMenu(void)
         gMain.state++;
         break;
     case 16:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = 0;
         gMain.state++;
         break;
@@ -4059,7 +4059,7 @@ void sub_806F44C(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 0)
     {
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = sub_806F3FC;
     }
 }

@@ -328,7 +328,7 @@ void sub_80E62F8(void)
         SetVBlankCallback(sub_80E6A6C);
         break;
     case 7:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         break;
     case 8:
         REG_DISPCNT = 0x1F40;
@@ -1227,7 +1227,7 @@ void sub_80E752C(void)
     switch (gEasyChatStruct->unk24)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gEasyChatStruct->unk24++;
         break;
     case 1:

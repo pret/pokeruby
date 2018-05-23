@@ -1475,7 +1475,7 @@ void CB2_InitFlyRegionMap(void)
         CreateFlyTargetGraphics();
         break;
     case 8:
-        BlendPalettes(0xFFFFFFFF, 16, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
         SetVBlankCallback(VBlankCB_FlyRegionMap);
         break;
     case 9:
@@ -1659,7 +1659,7 @@ static void sub_80FC5B4(void)
     switch (sFlyDataPtr->unk4)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         sFlyDataPtr->unk4++;
         break;
     case 1:
@@ -1705,7 +1705,7 @@ void sub_80FC69C(void)
     switch (sFlyDataPtr->unk4)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         sFlyDataPtr->unk4++;
         break;
     case 1:
@@ -1783,7 +1783,7 @@ void debug_sub_8110D84(void)
     switch (sFlyDataPtr->unk4)
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         sFlyDataPtr->unk4++;
         break;
     case 1:
@@ -1808,7 +1808,7 @@ void debug_sub_8110D84(void)
             break;
         case 5:
             m4aSongNumStart(SE_SELECT);
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             sFlyDataPtr->unk4++;
             break;
         }

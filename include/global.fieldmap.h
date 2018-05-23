@@ -178,37 +178,32 @@ struct MapHeader
 struct MapObject
 {
     /*0x00*/ u32 active:1;
-             u32 mapobj_bit_1:1;
-             u32 mapobj_bit_2:1;
-             u32 mapobj_bit_3:1;
-             u32 mapobj_bit_4:1;
-             u32 mapobj_bit_5:1;
-             u32 mapobj_bit_6:1;
-             u32 mapobj_bit_7:1;
-    /*0x01*/ u32 mapobj_bit_8:1;
-             u32 mapobj_bit_9:1;
-             u32 mapobj_bit_10:1;
-             u32 mapobj_bit_11:1;
-             u32 mapobj_bit_12:1;
-             u32 mapobj_bit_13:1;
-             u32 mapobj_bit_14:1;
-             u32 mapobj_bit_15:1;
-    /*0x02*/ u32 mapobj_bit_16:1;
-             u32 mapobj_bit_17:1;
-             u32 mapobj_bit_18:1;
-             u32 mapobj_bit_19:1;
-             u32 mapobj_bit_20:1;
-             u32 mapobj_bit_21:1;
-             u32 mapobj_bit_22:1;
-             u32 mapobj_bit_23:1;
-    /*0x03*/ u32 mapobj_bit_24:1;
-             u32 mapobj_bit_25:1;
-             u32 mapobj_bit_26:1;
-             u32 mapobj_bit_27:1;
-             u32 mapobj_bit_28:1;
-             u32 mapobj_bit_29:1;
-             u32 mapobj_bit_30:1;
-             u32 mapobj_bit_31:1;
+             u32 regularAnimActive:1;
+             u32 triggerGroundEffectsOnMove:1;
+             u32 triggerGroundEffectsOnStop:1;
+             u32 disableCoveringGroundEffects:1; // disables ground effects that cover parts of the object's sprite
+             u32 landingJump:1;
+             u32 specialAnimActive:1;
+             u32 specialAnimFinished:1;
+    /*0x01*/ u32 frozen:1;
+             u32 facingDirectionLocked:1;
+             u32 disableAnim:1; // used to disable forced movement sliding animations (like on ice)
+             u32 enableAnim:1;
+             u32 inanimate:1;
+             u32 invisible:1;
+             u32 offScreen:1;
+             u32 trackedByCamera:1; // only set for the player object
+    /*0x02*/ u32 isPlayer:1;
+             u32 hasReflection:1;
+             u32 inShortGrass:1;
+             u32 inShallowFlowingWater:1;
+             u32 inSandPile:1;
+             u32 inHotSprings:1;
+             u32 hasShadow:1;
+             u32 spriteAnimPausedBackup:1;
+    /*0x03*/ u32 spriteAffineAnimPausedBackup:1;
+             u32 disableJumpLandingGroundEffect:1;
+             u32 fixedPriority:1;
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 graphicsId;
     /*0x06*/ u8 animPattern;
@@ -216,30 +211,29 @@ struct MapObject
     /*0x08*/ u8 localId;
     /*0x09*/ u8 mapNum;
     /*0x0A*/ u8 mapGroup;
-    /*0x0B*/ u8 mapobj_unk_0B_0:4;
-             u8 elevation:4;
-    /*0x0C*/ struct Coords16 coords1;
-    /*0x10*/ struct Coords16 coords2;
-    /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
-    /*0x18*/ u8 placeholder18:4;
+    /*0x0B*/ u8 currentElevation:4;
+             u8 previousElevation:4;
+    /*0x0C*/ struct Coords16 initialCoords;
+    /*0x10*/ struct Coords16 currentCoords;
+    /*0x14*/ struct Coords16 previousCoords;
+    /*0x18*/ u8 facingDirection:4;
+    /*0x18*/ u8 movementDirection:4;
     /*0x19*/ union __attribute__((packed)) {
         u8 as_byte;
         struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } __attribute((aligned (1))) as_nybbles;
-    } __attribute((aligned (1))) range;
-    // /*0x19*/ u8 mapobj_unk_19;
-    /*0x1A*/ u8 mapobj_unk_1A;
-    /*0x1B*/ u8 mapobj_unk_1B;
-    /*0x1C*/ u8 mapobj_unk_1C;
+            u16 x:4;
+            u16 y:4;
+        } as_nybbles;
+    }  range;
+    /*0x1A*/ u8 fieldEffectSpriteId;
+    /*0x1B*/ u8 warpArrowSpriteId;
+    /*0x1C*/ u8 animId;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 mapobj_unk_1E;
-    /*0x1F*/ u8 mapobj_unk_1F;
-    /*0x20*/ u8 mapobj_unk_20;
-    /*0x21*/ u8 mapobj_unk_21;
-    /*0x22*/ u8 animId;
+    /*0x1E*/ u8 currentMetatileBehavior;
+    /*0x1F*/ u8 previousMetatileBehavior;
+    /*0x20*/ u8 previousMovementDirection;
+    /*0x21*/ u8 directionSequenceIndex;
+    /*0x22*/ u8 playerAnimId;
     /*size = 0x24*/
 };
 
@@ -263,14 +257,14 @@ struct MapObjectGraphicsInfo
     /*0x20*/ const union AffineAnimCmd *const *affineAnims;
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE (1 << 1)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
-#define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
-#define PLAYER_AVATAR_FLAG_4         (1 << 4)
-#define PLAYER_AVATAR_FLAG_5         (1 << 5)
-#define PLAYER_AVATAR_FLAG_6         (1 << 6)
-#define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT    (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE  (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE  (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING    (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << 4)
+#define PLAYER_AVATAR_FLAG_5          (1 << 5)
+#define PLAYER_AVATAR_FLAG_6          (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH       (1 << 7)
 
 enum
 {

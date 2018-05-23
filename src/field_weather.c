@@ -782,7 +782,7 @@ void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
     u8 bBlend;
     u16 curPalIndex;
 
-    BlendPalette(0, 0x100, blendCoeff, blendColor);
+    BlendPalette(0, 256, blendCoeff, blendColor);
     color = *(struct RGBColor *)&blendColor;
     rBlend = color.r;
     gBlend = color.g;
@@ -970,7 +970,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
         else
         {
             paletteIndex *= 16;
-            BlendPalette(paletteIndex, 16, 12, 0x73FC);
+            BlendPalette(paletteIndex, 16, 12, RGB(28, 31, 28));
         }
         break;
     }

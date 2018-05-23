@@ -149,7 +149,7 @@ static void CB2_UnusedPokedexAreaScreen(void)
             SetVBlankCallback(VBlankCB_AreaScren);
             break;
         case 5:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, RGB(0, 0, 0));
             break;
         case 6:
             REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
@@ -1159,7 +1159,7 @@ static void DebugCB_GoBack(void)
     switch (gPokedexAreaScreenPtr->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
             gPokedexAreaScreenPtr->state++;
             break;
         case 1:
@@ -1177,7 +1177,7 @@ static void DebugCB_GoNext(void)
     switch (gPokedexAreaScreenPtr->state)
     {
         case 0:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
             gPokedexAreaScreenPtr->state++;
             break;
         case 1:
@@ -1250,7 +1250,7 @@ static void Task_PokedexAreaScreen_0(u8 taskId)
             CreateAreaUnknownSprites();
             break;
         case 9:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 16, 0, RGB(0, 0, 0));
             break;
         case 10:
             REG_BLDCNT = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD;
@@ -1291,7 +1291,7 @@ static void Task_PokedexAreaScreen_1(u8 taskId)
                 return;
             break;
         case 2:
-            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 16, RGB(0, 0, 0));
             break;
         case 3:
             if (gPaletteFade.active)

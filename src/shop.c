@@ -299,7 +299,7 @@ static void BuyMenuDrawGraphics(void)
     DrawFirstMartScrollIndicators();
     CreateTask(Shop_DoCursorAction, 0x8);
     sub_80B3240();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     gPaletteFade.bufferTransferDisabled = 0;
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
@@ -459,13 +459,13 @@ static void Shop_LoadViewportObjects(void)
                 gMartViewportObjects[r8][MAP_OBJ_ID] = mapObjId;
                 gMartViewportObjects[r8][X_COORD] = x;
                 gMartViewportObjects[r8][Y_COORD] = y;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 1)
+                if (gMapObjects[mapObjId].facingDirection == DIR_SOUTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 0;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 2)
+                if (gMapObjects[mapObjId].facingDirection == DIR_NORTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 1;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 3)
+                if (gMapObjects[mapObjId].facingDirection == DIR_WEST)
                     gMartViewportObjects[r8][ANIM_NUM] = 2;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 4)
+                if (gMapObjects[mapObjId].facingDirection == DIR_EAST)
                     gMartViewportObjects[r8][ANIM_NUM] = 3;
                 r8++;
             }
@@ -1168,7 +1168,7 @@ static void Task_ReturnToBuyMenu(u8 taskId)
 static void Task_ExitBuyMenu(u8 taskId)
 {
     gFieldCallback = Shop_FadeReturnToMartMenu;
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_ExitBuyMenuDoFade;
 }
 

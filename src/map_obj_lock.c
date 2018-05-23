@@ -52,7 +52,7 @@ void sub_8064D38(u8 taskId)
         sub_80594C0();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[gSelectedMapObject].mapobj_bit_1)
+    if (!task->data[1] && !gMapObjects[gSelectedMapObject].regularAnimActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         task->data[1] = 1;
@@ -79,7 +79,7 @@ void LockSelectedMapObject(void)
     u8 taskId;
     FreezeMapObjectsExceptOne(gSelectedMapObject);
     taskId = CreateTask(sub_8064D38, 80);
-    if (!gMapObjects[gSelectedMapObject].mapobj_bit_1)
+    if (!gMapObjects[gSelectedMapObject].regularAnimActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         gTasks[taskId].data[1] = 1;

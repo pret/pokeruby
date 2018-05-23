@@ -6,6 +6,8 @@
 #define gPaletteFade_delay            (gPaletteFade.multipurpose2) // normal and hardware fade
 #define gPaletteFade_submode          (gPaletteFade.multipurpose2) // fast fade
 
+#define FADE_COLOR_WHITE (RGB(31, 31, 31) | 0x8000)
+
 enum
 {
     FAST_FADE_IN_FROM_WHITE,
@@ -48,7 +50,6 @@ u8 UpdatePaletteFade(void);
 void ResetPaletteFade(void);
 void ReadPlttIntoBuffers(void);
 bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
-bool8 unref_sub_8073D3C(u32, u8, u8, u8, u16);
 void unref_sub_8073D84(u8, u32 *);
 void ResetPaletteStructByUid(u16);
 void ResetPaletteStruct(u8);

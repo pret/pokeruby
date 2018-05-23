@@ -945,7 +945,7 @@ static void sub_804E56C(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         sub_8051474();
         gBerryBlenderData->field_0++;
         break;
@@ -965,7 +965,7 @@ static void sub_804E56C(void)
         if (Menu_UpdateWindowText())
         {
             gBerryBlenderData->field_0++;
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 6:
@@ -1137,7 +1137,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->field_0++;
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gBerryBlenderData->field_0++;
         break;
     case 4:
@@ -1432,7 +1432,7 @@ static void sub_804F378(void)
         gBerryBlenderData->field_0++;
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gBerryBlenderData->field_0++;
         gBerryBlenderData->framesToWait = 0;
         break;
@@ -2479,7 +2479,7 @@ static void sub_8050E30(void)
     case 9:
         if (IsLinkTaskFinished())
         {
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gBerryBlenderData->field_6F++;
         }
         break;

@@ -143,7 +143,7 @@ static void Task_BeginEvolutionScene(u8 taskID)
     switch (gTasks[taskID].tState)
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskID].tState++;
         break;
     case 1:
@@ -344,7 +344,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     SetHBlankCallback(EvoDummyFunc);
     SetVBlankCallback(VBlankCB_EvolutionScene);
     SetMainCallback2(CB2_EvolutionSceneUpdate);
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 }
 
 static void CB2_TradeEvolutionSceneLoadGraphics(void)
@@ -419,7 +419,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         }
         break;
     case 6:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
         REG_DISPCNT = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP;
         break;
@@ -545,7 +545,7 @@ static void Task_EvolutionScene(u8 taskID)
     switch (gTasks[taskID].tState)
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gSprites[sEvoInfo.preEvoSpriteID].invisible = 0;
         gTasks[taskID].tState++;
         break;
@@ -576,7 +576,7 @@ static void Task_EvolutionScene(u8 taskID)
         {
             PlayNewMapMusic(BGM_SHINKA);
             gTasks[taskID].tState++;
-            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
+            BeginNormalPaletteFade(0x1C, 4, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 5: // after screen fade, preapre evo sparkles
@@ -633,7 +633,7 @@ static void Task_EvolutionScene(u8 taskID)
             m4aMPlayAllStop();
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
-            BeginNormalPaletteFade(0x1C, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0x1C, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
         }
         break;
@@ -675,7 +675,7 @@ static void Task_EvolutionScene(u8 taskID)
             }
             else // no move to learn
             {
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 gTasks[taskID].tState++;
             }
         }
@@ -695,7 +695,7 @@ static void Task_EvolutionScene(u8 taskID)
         if (!gTasks[sEvoGraphicsTaskID].isActive)
         {
             m4aMPlayAllStop();
-            BeginNormalPaletteFade(0x6001C, 0, 0x10, 0, 0x7FFF);
+            BeginNormalPaletteFade(0x6001C, 0, 16, 0, RGB(31, 31, 31));
             gTasks[taskID].tState++;
         }
         break;
@@ -797,7 +797,7 @@ static void Task_EvolutionScene(u8 taskID)
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
                     if (gTasks[taskID].tLearnMoveState == 5)
-                        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 }
             }
             if (gMain.newKeys & B_BUTTON)
@@ -918,7 +918,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         {
             PlayBGM(BGM_SHINKA);
             gTasks[taskID].tState++;
-            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, 0);
+            BeginNormalPaletteFade(0x1C, 4, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 4:
@@ -975,7 +975,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
         {
             PlayCry1(gTasks[taskID].tPostEvoSpecies, 0);
             memcpy(&gPlttBufferUnfaded[0x20], ewram9000_hack, 0x60);
-            BeginNormalPaletteFade(1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0x1, 0, 16, 0, RGB(0, 0, 0));
             gTasks[taskID].tState++;
         }
         break;
@@ -1116,7 +1116,7 @@ static void Task_TradeEvolutionScene(u8 taskID)
                 {
                     gTasks[taskID].tLearnMoveState = gTasks[taskID].tData9;
                     if (gTasks[taskID].tLearnMoveState == 5)
-                        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 }
             }
             if (gMain.newKeys & B_BUTTON)

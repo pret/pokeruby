@@ -815,7 +815,7 @@ void sub_802E424(void);
 void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);
 void nullsub_9(u16);
 void nullsub_10(int);
-void load_gfxc_health_bar();
+void load_gfxc_health_bar(u8);
 u8 battle_load_something();
 void sub_8031F88(u8);
 void HandleLowHpMusicChange(struct Pokemon *, u8);

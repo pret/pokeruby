@@ -356,7 +356,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     {
         if (myLinkPlayerNumber != i)
         {
-            rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gLinkPlayers[i].gender);
+            rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gLinkPlayers[i].gender);
             SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
             j++;
             if (j == 4)
@@ -1759,7 +1759,7 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 void SpawnCameraDummy(void)
 {
     u8 mapObjectId = SpawnSpecialFieldObjectParametrized(7, 8, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
-    gMapObjects[mapObjectId].mapobj_bit_13 = 1;
+    gMapObjects[mapObjectId].invisible = 1;
     CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
 }
 

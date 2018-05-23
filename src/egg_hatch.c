@@ -441,7 +441,7 @@ void EggHatch(void)
 {
     ScriptContext2_Enable();
     CreateTask(Task_EggHatch, 10);
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 static void Task_EggHatch(u8 taskID)
@@ -554,7 +554,7 @@ static void CB2_EggHatch_1(void)
     switch (gEggHatchData->CB2_state)
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         REG_DISPCNT = 0x1740;
         gEggHatchData->CB2_state++;
         CreateTask(Task_EggHatchPlayBGM, 5);
@@ -629,7 +629,7 @@ static void CB2_EggHatch_1(void)
         }
         break;
     case 10:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gEggHatchData->CB2_state++;
         break;
     case 11:
@@ -730,7 +730,7 @@ static void SpriteCB_Egg_4(struct Sprite* sprite)
 {
     s16 i;
     if (sprite->data[0] == 0)
-        BeginNormalPaletteFade(-1, -1, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, FADE_COLOR_WHITE);
     if (sprite->data[0] < 4u)
     {
         for (i = 0; i <= 3; i++)
@@ -754,7 +754,7 @@ static void SpriteCB_Egg_5(struct Sprite* sprite)
         StartSpriteAffineAnim(&gSprites[gEggHatchData->pokeSpriteID], 1);
     }
     if (sprite->data[0] == 8)
-        BeginNormalPaletteFade(-1, -1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, FADE_COLOR_WHITE);
     if (sprite->data[0] <= 9)
         gSprites[gEggHatchData->pokeSpriteID].pos1.y -= 1;
     if (sprite->data[0] > 40)

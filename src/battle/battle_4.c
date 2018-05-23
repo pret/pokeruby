@@ -9766,7 +9766,7 @@ static void atk5A_yesnoboxlearnmove(void)
             if (gBattleCommunication[1] == 0)
             {
                 sub_8023AD8();
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 gBattleStruct->atk5A_StateTracker++;
                 return;
             }
@@ -15845,7 +15845,7 @@ static void atkF2_displaydexinfo(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gBattleCommunication[0]++;
         break;
     case 1:
@@ -15863,7 +15863,7 @@ static void atkF2_displaydexinfo(void)
             LoadCompressedPalette(gBattleTerrainPalette_BattleTower, 0x20, 0x60);
             REG_BG3CNT = 0x5a0b;
             gBattle_BG3_X = 0x100;
-            BeginNormalPaletteFade(0xfffc, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFC, 0, 16, 0, RGB(0, 0, 0));
             gBattleCommunication[0]++;
         }
         break;

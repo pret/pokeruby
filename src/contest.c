@@ -2042,7 +2042,7 @@ void sub_80ADEEC(u8 taskId)
         }
         else
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskId].func = sub_80ADFD8;
         }
     }
@@ -2061,7 +2061,7 @@ void sub_80ADF4C(u8 taskId)
 void sub_80ADF98(u8 taskId)
 {
     DestroyTask(taskId);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[sContest.mainTaskId].func = sub_80ADFD8;
 }
 
@@ -3638,7 +3638,7 @@ void sub_80B03D8(u8 taskId)
     {
         gTasks[sContest.unk19211].data[r4 * 4 + 0] = 0xFF;
         gTasks[sContest.unk19211].data[r4 * 4 + 1] = 0;
-        BlendPalette((sContest.unk19218[r4] + 5) * 16 + 6, 2, 0, 0x4BFF);
+        BlendPalette((sContest.unk19218[r4] + 5) * 16 + 6, 2, 0, RGB(31, 31, 18));
         DestroyTask(taskId);
     }
 }
@@ -3666,7 +3666,7 @@ void sub_80B0458(u8 taskId)
               (sContest.unk19218[i] + 5) * 16 + 6,
               2,
               gTasks[taskId].data[r3 + 0],
-              0x4BFF);
+              RGB(31, 31, 18));
         }
     }
 }
@@ -3746,8 +3746,8 @@ void sub_80B05FC(u8 taskId)
                  || gTasks[taskId].data[r3 + 0] == 0)
                     gTasks[taskId].data[r3 + 1] ^= 1;
 
-                BlendPalette((i + 5) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], 0x4BFF);
-                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], 0x4BFF);
+                BlendPalette((i + 5) * 16 + 10, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
+                BlendPalette((i + 5) * 16 + 12 + i, 1, gTasks[taskId].data[r3 + 0], RGB(31, 31, 18));
             }
         }
     }
@@ -3798,7 +3798,7 @@ void sub_80B0748(u8 taskId)
                 {
                     //_080B07D2
                     r6 = 0;
-                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, 0x7FFF);
+                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(31, 31, 31));
                     if (r5 == 0 && r8 == 4)
                     {
                         gTasks[taskId].data[r1 + 0] = 0;
@@ -3839,8 +3839,8 @@ void sub_80B0748(u8 taskId)
                             r8++;
                             if (r7 == 4 && r8 == 1)
                             {
-                                BlendPalette((r4 + 9) * 16 + 2, 1, 4, 0);
-                                BlendPalette((r4 + 9) * 16 + 5, 1, 4, 0);
+                                BlendPalette((r4 + 9) * 16 + 2, 1, 4, RGB(0, 0, 0));
+                                BlendPalette((r4 + 9) * 16 + 5, 1, 4, RGB(0, 0, 0));
                             }
                         }
                     }
@@ -3854,7 +3854,7 @@ void sub_80B0748(u8 taskId)
                 if (r6 == 12)
                 {
                     r6 = 0;
-                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, 0);
+                    BlendPalette((r4 + 5) * 16 + 1, 3, r5, RGB(0, 0, 0));
                     r5 += 1;
                     if (r5 == 5)
                     {
@@ -4834,13 +4834,13 @@ void c3_08130B10(u8 taskId)
             gTasks[taskId].data[4]++;
         else
             gTasks[taskId].data[4]--;
-        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], 0x7FFF);
+        BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, gTasks[taskId].data[4], RGB(31, 31, 31));
         if (gTasks[taskId].data[4] == 0 || gTasks[taskId].data[4] == 16)
         {
             gTasks[taskId].data[3] ^= 1;
             if (sContest.applauseLevel < 5)
             {
-                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, 31);
+                BlendPalette(264 + gTasks[taskId].data[2] * 16, 1, 0, RGB(31, 0, 0));
                 DestroyTask(taskId);
             }
         }

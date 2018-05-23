@@ -1346,7 +1346,7 @@ void c2_081284E0(void)
         gBattleCommunication[1]--;
         if (gBattleCommunication[1] == 0)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gBattleCommunication[0]++;
         }
         break;
@@ -3280,7 +3280,7 @@ void oac_poke_opponent(struct Sprite *sprite)
 {
     sprite->callback = sub_8010278;
     StartSpriteAnimIfDifferent(sprite, 0);
-    BeginNormalPaletteFade(0x00020000, 0, 10, 10, 0x3DEF);
+    BeginNormalPaletteFade(0x00020000, 0, 10, 10, RGB(15, 15, 15));
 }
 
 void sub_8010278(struct Sprite *sprite)
@@ -3304,7 +3304,7 @@ void sub_80102AC(struct Sprite *sprite)
         sub_8043DFC(gHealthboxIDs[sprite->data[0]]);
         sprite->callback = nullsub_37;
         StartSpriteAnimIfDifferent(sprite, 0);
-        BeginNormalPaletteFade(0x00020000, 0, 10, 0, 0x3DEF);
+        BeginNormalPaletteFade(0x00020000, 0, 10, 0, RGB(15, 15, 15));
     }
 }
 

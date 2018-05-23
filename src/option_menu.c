@@ -116,7 +116,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gMain.state++;
         break;
     case 7:
@@ -262,7 +262,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2.optionsButtonMode      = gTasks[taskId].tOptButtonMode;
     gSaveBlock2.optionsWindowFrameType = gTasks[taskId].tOptFrameType;
 
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 

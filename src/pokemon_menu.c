@@ -268,7 +268,7 @@ void HandleDefaultPartyMenu(u8 taskID)
             break;
         case B_BUTTON:
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskID].func = sub_8089E4C;
             break;
         }
@@ -359,7 +359,7 @@ static void sub_8089F44(u8 taskID)
 
 static void PokemonMenu_Summary(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_8089F44;
 }
 
@@ -440,7 +440,7 @@ static void sub_808A228(u8 taskID)
 {
     if (ItemIsMail(gSpecialVar_ItemId) && gUnknown_0202E8F4 != 0)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskID].func = sub_808A180;
     }
     else
@@ -592,7 +592,7 @@ static void sub_808A604(u8 taskID)
 static void PokemonMenu_GiveItem(u8 taskID)
 {
     gUnknown_0202E8F5 = sub_806CA38(taskID);
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808A604;
 }
 
@@ -658,7 +658,7 @@ static void sub_808A73C(u8 taskID)
 
 static void PokemonMenu_ReadMail(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808A848;
 }
 
@@ -741,7 +741,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
             if (!IS_SOFTBOILED_MILKDRINK(tFieldMoveId))
             {
                 gTasks[taskID].func = sub_808AB34;
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             }
             else
                 sub_8133D28(taskID);
@@ -1051,7 +1051,7 @@ void sub_808B0C0(u8 taskID)
         case B_BUTTON:
             gLastFieldPokeMenuOpened = sub_806CA38(taskID);
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             if (gUnknown_02038561 == 0 || gUnknown_02038561 == 1)
                 gTasks[taskID].func = sub_808B25C;
             if (gUnknown_02038561 == 3)
@@ -1069,7 +1069,7 @@ static void sub_808B1EC(u8 taskID)
 
 static void sub_808B224(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808B25C;
 }
 
@@ -1093,7 +1093,7 @@ static void sub_808B288(u8 taskID)
 
 static void sub_808B2B4(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808B288;
 }
 
@@ -1101,7 +1101,7 @@ static void sub_808B2EC(u8 taskID)
 {
     if (gUnknown_0202E8F4 == 2)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskID].func = sub_808B338;
     }
     else

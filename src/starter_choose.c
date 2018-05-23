@@ -296,7 +296,7 @@ void CB2_ChooseStarter(void)
     LoadSpritePalettes(gUnknown_083F77B4);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
     InitMenuWindow(&gWindowTemplate_81E6CE4);
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
     savedIme = REG_IME;
     REG_IME = 0;

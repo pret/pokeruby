@@ -65,7 +65,6 @@ extern void sub_8030E38(struct Sprite *);
 extern void StartBattleIntroAnim();
 extern void sub_8047858();
 extern void move_anim_start_t2_for_situation();
-extern void load_gfxc_health_bar();
 extern void sub_8043D84();
 extern void BufferStringBattle();
 extern void sub_8031F24(void);

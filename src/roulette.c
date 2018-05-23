@@ -1547,7 +1547,7 @@ void sub_811755C(u8 taskid)
 {
     Menu_EraseWindowRect(0x14, 0x8, 0x1A, 0xD);
     Menu_EraseScreen();
-    BeginNormalPaletteFade(-0x1, 0x0, 0x0, 0x10, 0x0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
     gTasks[taskid].func = &sub_8117528;

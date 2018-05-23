@@ -89,7 +89,7 @@ static void CB2_MysteryEventMenu(void)
     {
     case 0:
         Menu_DrawStdWindowFrame(0, 14, 29, 19);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gMain.state++;
         break;
     case 1:
@@ -314,7 +314,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 15:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gMain.state++;
         break;
     case 16:
@@ -416,7 +416,7 @@ void debug_sub_815D1D8(void)
     {
     case 0:
         Menu_DrawStdWindowFrame(3, 14, 27, 19);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gMain.state++;
         break;
     case 1:
@@ -475,7 +475,7 @@ void debug_sub_815D1D8(void)
     case 10:
         if (gMain.newKeys & A_BUTTON)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gMain.state++;
         }
         break;

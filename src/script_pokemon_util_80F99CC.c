@@ -36,7 +36,7 @@ void sub_80F99CC(void)
     ScriptContext2_Enable();
     taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_CONTEST;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void SelectMonForNPCTrade(void)
@@ -46,7 +46,7 @@ void SelectMonForNPCTrade(void)
     ScriptContext2_Enable();
     taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_IN_GAME_TRADE;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void SelectMoveTutorMon(void)
@@ -56,7 +56,7 @@ void SelectMoveTutorMon(void)
     ScriptContext2_Enable();
     taskId = CreateTask((void *)OpenPartyMenuFromScriptContext, 0xA);
     gTasks[taskId].data[0] = PARTY_MENU_TYPE_MOVE_TUTOR;
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 void OpenPartyMenuFromScriptContext(u8 taskId)

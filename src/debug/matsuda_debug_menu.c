@@ -105,7 +105,7 @@ static bool8 sub_80A9B78(void)
 
 u8 MatsudaDebugMenu_ContestResults(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     CreateTask(sub_80A9BE4, 0xFF);
     return 1;
 }
@@ -878,7 +878,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
     {
         eMatsudaDebugVar = sprite->data[3];
         SetMainCallback2(sub_80AACC4);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     }
 }
 
