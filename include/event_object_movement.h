@@ -3,6 +3,27 @@
 
 #include "sprite.h"
 
+#define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
+#define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
+#define GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN   (1 << 2)
+#define GROUND_EFFECT_FLAG_LONG_GRASS_ON_MOVE    (1 << 3)
+#define GROUND_EFFECT_FLAG_ICE_REFLECTION        (1 << 4)
+#define GROUND_EFFECT_FLAG_REFLECTION            (1 << 5)
+#define GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER (1 << 6)
+#define GROUND_EFFECT_FLAG_SAND                  (1 << 7)
+#define GROUND_EFFECT_FLAG_DEEP_SAND             (1 << 8)
+#define GROUND_EFFECT_FLAG_RIPPLES               (1 << 9)
+#define GROUND_EFFECT_FLAG_PUDDLE                (1 << 10)
+#define GROUND_EFFECT_FLAG_SAND_PILE             (1 << 11)
+#define GROUND_EFFECT_FLAG_LAND_IN_TALL_GRASS    (1 << 12)
+#define GROUND_EFFECT_FLAG_LAND_IN_LONG_GRASS    (1 << 13)
+#define GROUND_EFFECT_FLAG_LAND_IN_SHALLOW_WATER (1 << 14)
+#define GROUND_EFFECT_FLAG_LAND_IN_DEEP_WATER    (1 << 15)
+#define GROUND_EFFECT_FLAG_LAND_ON_NORMAL_GROUND (1 << 16)
+#define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
+#define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
+#define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+
 extern const u8 gUnknown_0830FD14[];
 
 #define fieldmap_object_cb(setup, callback, table) \

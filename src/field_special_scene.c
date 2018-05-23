@@ -365,7 +365,7 @@ void sub_80C78A0(void)
 void sub_80C791C(void)
 {
     sub_80C78A0();
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = TRUE;
+    gMapObjects[gPlayerAvatar.mapObjectId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();

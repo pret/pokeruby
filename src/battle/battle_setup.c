@@ -1045,7 +1045,7 @@ void sub_8082524(void)
 {
     struct MapObject *mapObject = &gMapObjects[gSelectedMapObject];
 
-    npc_set_running_behaviour_etc(mapObject, npc_running_behaviour_by_direction(mapObject->mapobj_unk_18));
+    npc_set_running_behaviour_etc(mapObject, npc_running_behaviour_by_direction(mapObject->facingDirection));
 }
 
 u8 ScrSpecial_GetTrainerBattleMode(void)

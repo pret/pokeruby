@@ -62,7 +62,7 @@ static void npc_pal_op(struct MapObject *mapObject, struct Sprite *sprite)
     u8 whichElement;
     u16 unk_8041e2c[] = {0x0c, 0x1c, 0x2c};
     sprite->data[2] = 0;
-    if (!GetFieldObjectGraphicsInfo(mapObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = sub_8057450(mapObject->mapobj_unk_1F)) || (whichElement = sub_8057450(mapObject->mapobj_unk_1E))))
+    if (!GetFieldObjectGraphicsInfo(mapObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = sub_8057450(mapObject->previousMetatileBehavior)) || (whichElement = sub_8057450(mapObject->currentMetatileBehavior))))
     {
         sprite->data[2] = unk_8041e2c[whichElement - 1];
         npc_pal_op_A(mapObject, sprite->oam.paletteNum);
@@ -115,7 +115,7 @@ static void sub_81269E0(struct Sprite *sprite)
 
     mapObject = &gMapObjects[sprite->data[0]];
     oldSprite = &gSprites[mapObject->spriteId];
-    if (!mapObject->active || !mapObject->mapobj_bit_17 || mapObject->localId != sprite->data[1])
+    if (!mapObject->active || !mapObject->hasReflection || mapObject->localId != sprite->data[1])
     {
         sprite->inUse = FALSE;
     }
@@ -239,7 +239,7 @@ void oamc_shadow(struct Sprite *sprite)
         sprite->oam.priority = linkedSprite->oam.priority;
         sprite->pos1.x = linkedSprite->pos1.x;
         sprite->pos1.y = linkedSprite->pos1.y + sprite->data[3];
-        if (!mapObject->active || !mapObject->mapobj_bit_22 || MetatileBehavior_IsPokeGrass(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1E) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->mapobj_unk_1F) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1E) || MetatileBehavior_IsReflective(mapObject->mapobj_unk_1F))
+        if (!mapObject->active || !mapObject->hasShadow || MetatileBehavior_IsPokeGrass(mapObject->currentMetatileBehavior) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->currentMetatileBehavior) || MetatileBehavior_IsSurfableWaterOrUnderwater(mapObject->previousMetatileBehavior) || MetatileBehavior_IsReflective(mapObject->currentMetatileBehavior) || MetatileBehavior_IsReflective(mapObject->previousMetatileBehavior))
         {
             FieldEffectStop(sprite, FLDEFF_SHADOW);
         }
@@ -304,7 +304,7 @@ void unc_grass_normal(struct Sprite *sprite)
     else
     {
         mapObject = &gMapObjects[mapObjectId];
-        if ((mapObject->coords2.x != sprite->data[1] || mapObject->coords2.y != sprite->data[2]) && (mapObject->coords3.x != sprite->data[1] || mapObject->coords3.y != sprite->data[2]))
+        if ((mapObject->currentCoords.x != sprite->data[1] || mapObject->currentCoords.y != sprite->data[2]) && (mapObject->previousCoords.x != sprite->data[1] || mapObject->previousCoords.y != sprite->data[2]))
         {
             sprite->data[7] = TRUE;
         }
@@ -413,7 +413,7 @@ void unc_grass_tall(struct Sprite *sprite)
     else
     {
         mapObject = &gMapObjects[mapObjectId];
-        if ((mapObject->coords2.x != sprite->data[1] || mapObject->coords2.y != sprite->data[2]) && (mapObject->coords3.x != sprite->data[1] || mapObject->coords3.y != sprite->data[2]))
+        if ((mapObject->currentCoords.x != sprite->data[1] || mapObject->currentCoords.y != sprite->data[2]) && (mapObject->previousCoords.x != sprite->data[1] || mapObject->previousCoords.y != sprite->data[2]))
         {
             sprite->data[7] = TRUE;
         }
@@ -472,7 +472,7 @@ void sub_8127334(struct Sprite *sprite)
     const struct MapObjectGraphicsInfo *graphicsInfo;
     struct Sprite *linkedSprite;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_18)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].inShortGrass)
     {
         FieldEffectStop(sprite, FLDEFF_SHORT_GRASS);
     }
@@ -699,7 +699,7 @@ static void sub_81278D8(struct Sprite *sprite)
     struct Sprite *linkedSprite;
     struct MapObject *mapObject;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_19)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].inShallowFlowingWater)
     {
         FieldEffectStop(sprite, FLDEFF_FEET_IN_FLOWING_WATER);
     }
@@ -711,10 +711,10 @@ static void sub_81278D8(struct Sprite *sprite)
         sprite->pos1.y = linkedSprite->pos1.y;
         sprite->subpriority = linkedSprite->subpriority;
         sub_806487C(sprite, FALSE);
-        if (mapObject->coords2.x != sprite->data[3] || mapObject->coords2.y != sprite->data[4])
+        if (mapObject->currentCoords.x != sprite->data[3] || mapObject->currentCoords.y != sprite->data[4])
         {
-            sprite->data[3] = mapObject->coords2.x;
-            sprite->data[4] = mapObject->coords2.y;
+            sprite->data[3] = mapObject->currentCoords.x;
+            sprite->data[4] = mapObject->currentCoords.y;
             if (!sprite->invisible)
             {
                 PlaySE(SE_MIZU);
@@ -769,7 +769,7 @@ void sub_8127A7C(struct Sprite *sprite)
     const struct MapObjectGraphicsInfo *graphicsInfo;
     struct Sprite *linkedSprite;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_21)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].inHotSprings)
     {
         FieldEffectStop(sprite, FLDEFF_HOT_SPRINGS_WATER);
     }
@@ -914,7 +914,7 @@ static void sub_8127DD0(struct Sprite *sprite)
     sprite->animPaused = FALSE;
     MapGridSetMetatileIdAt(sprite->data[1], sprite->data[2], sprite->data[3]);
     CurrentMapDrawMetatileAt(sprite->data[1], sprite->data[2]);
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_2 = TRUE;
+    gMapObjects[gPlayerAvatar.mapObjectId].triggerGroundEffectsOnMove = TRUE;
     sprite->data[0] = 2;
 }
 
@@ -997,7 +997,7 @@ static void sub_8127FD4(struct MapObject *mapObject, struct Sprite *sprite)
     u8 unk_8041E54[] = {0, 0, 1, 2, 3};
     if (sub_8127F64(sprite) == 0)
     {
-        StartSpriteAnimIfDifferent(sprite, unk_8041E54[mapObject->placeholder18]);
+        StartSpriteAnimIfDifferent(sprite, unk_8041E54[mapObject->movementDirection]);
     }
 }
 
@@ -1008,8 +1008,8 @@ static void sub_812800C(struct MapObject *mapObject, struct Sprite *sprite)
     s16 y;
     u8 i;
 
-    x = mapObject->coords2.x;
-    y = mapObject->coords2.y;
+    x = mapObject->currentCoords.x;
+    y = mapObject->currentCoords.y;
     if (sprite->pos2.y == 0 && (x != sprite->data[6] || y != sprite->data[7]))
     {
         sprite->data[5] = sprite->pos2.y;
@@ -1217,7 +1217,7 @@ void sub_81282E0(struct Sprite *sprite)
     s16 x;
     s16 y;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].mapobj_bit_20)
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data[0], sprite->data[1], sprite->data[2], &mapObjectId) || !gMapObjects[mapObjectId].inSandPile)
     {
         FieldEffectStop(sprite, FLDEFF_SAND_PILE);
     }
@@ -1338,7 +1338,7 @@ void sub_81285AC(struct Sprite *sprite)
     {
         FieldEffectStop(sprite, sprite->data[1]);
     }
-    // else {
+
     graphicsInfo = GetFieldObjectGraphicsInfo(gMapObjects[mapObjectId].graphicsId);
     linkedSprite = &gSprites[gMapObjects[mapObjectId].spriteId];
     sprite->invisible = linkedSprite->invisible;
@@ -1358,14 +1358,13 @@ void sub_81285AC(struct Sprite *sprite)
     {
         FieldEffectStop(sprite, sprite->data[1]);
     }
-    // }
 }
 
 void sub_812869C(struct MapObject *mapObject)
 {
-    if (mapObject->mapobj_unk_21 == 1)
+    if (mapObject->directionSequenceIndex == 1)
     {
-        gSprites[mapObject->mapobj_unk_1A].data[0] ++;
+        gSprites[mapObject->fieldEffectSpriteId].data[0] ++;
     }
 }
 
@@ -1373,18 +1372,18 @@ bool8 sub_81286C4(struct MapObject *mapObject)
 {
     struct Sprite *sprite;
 
-    if (mapObject->mapobj_unk_21 == 2)
+    if (mapObject->directionSequenceIndex == 2)
     {
         return TRUE;
     }
-    if (mapObject->mapobj_unk_21 == 0)
+    if (mapObject->directionSequenceIndex == 0)
     {
         return TRUE;
     }
-    sprite = &gSprites[mapObject->mapobj_unk_1A];
+    sprite = &gSprites[mapObject->fieldEffectSpriteId];
     if (sprite->data[7])
     {
-        mapObject->mapobj_unk_21 = 2;
+        mapObject->directionSequenceIndex = 2;
         sprite->data[0] ++;
         return TRUE;
     }

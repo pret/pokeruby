@@ -459,13 +459,13 @@ static void Shop_LoadViewportObjects(void)
                 gMartViewportObjects[r8][MAP_OBJ_ID] = mapObjId;
                 gMartViewportObjects[r8][X_COORD] = x;
                 gMartViewportObjects[r8][Y_COORD] = y;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 1)
+                if (gMapObjects[mapObjId].facingDirection == DIR_SOUTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 0;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 2)
+                if (gMapObjects[mapObjId].facingDirection == DIR_NORTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 1;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 3)
+                if (gMapObjects[mapObjId].facingDirection == DIR_WEST)
                     gMartViewportObjects[r8][ANIM_NUM] = 2;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 4)
+                if (gMapObjects[mapObjId].facingDirection == DIR_EAST)
                     gMartViewportObjects[r8][ANIM_NUM] = 3;
                 r8++;
             }
