@@ -1543,7 +1543,7 @@ void ResetBerryTreeSparkleFlags(void)
     bottom = top + 8;
     for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1.mapObjects); i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].animPattern == 12) // is the object an active berry tree?
+        if (gMapObjects[i].active && gMapObjects[i].movementType == 12) // is the object an active berry tree?
         {
             cam_left = gMapObjects[i].currentCoords.x;
             cam_top = gMapObjects[i].currentCoords.y;

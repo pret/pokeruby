@@ -231,7 +231,7 @@ void sub_8080B9C(u8 taskId)
             u8 mapObjId;
             sub_8080958(1);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], 8);
+            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], 8);
             task->data[0] = 2;
         }
         break;
@@ -241,7 +241,7 @@ void sub_8080B9C(u8 taskId)
             u8 mapObjId;
             task->data[1] = FieldAnimateDoorClose(*x, *y);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]);
+            FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]);
             task->data[0] = 3;
         }
         break;
@@ -279,7 +279,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
             u8 mapObjId;
             sub_8080958(1);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], GetGoSpeed0AnimId(player_get_direction_lower_nybble()));
+            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], GetGoSpeed0AnimId(player_get_direction_lower_nybble()));
             task->data[0] = 2;
         }
         break;
@@ -571,9 +571,9 @@ void sub_808115C(u8 taskId)
         {
             u8 mapObjId;
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearAnimIfSpecialAnimActive(&gMapObjects[mapObjId]);
+            FieldObjectClearHeldMovementIfActive(&gMapObjects[mapObjId]);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], 9);
+            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], 9);
             task->data[0] = 2;
         }
         break;
@@ -583,7 +583,7 @@ void sub_808115C(u8 taskId)
             u8 mapObjId;
             task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]);
+            FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]);
             sub_8080958(0);
             task->data[0] = 3;
         }

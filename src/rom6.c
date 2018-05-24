@@ -63,8 +63,8 @@ static void task08_080C9820(u8 taskId)
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
     mapObjId = gPlayerAvatar.mapObjectId;
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(&gMapObjects[mapObjId])
-     || FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
+    if (!FieldObjectIsMovementOverridden(&gMapObjects[mapObjId])
+     || FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]))
     {
         if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         {
@@ -74,7 +74,7 @@ static void task08_080C9820(u8 taskId)
         else
         {
             sub_8059BF4();
-            FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], 0x39);
+            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], 0x39);
             gTasks[taskId].func = sub_810B3DC;
         }
     }
@@ -82,7 +82,7 @@ static void task08_080C9820(u8 taskId)
 
 static void sub_810B3DC(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[gPlayerAvatar.mapObjectId]) == TRUE)
+    if (FieldObjectCheckHeldMovementStatus(&gMapObjects[gPlayerAvatar.mapObjectId]) == TRUE)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = sub_810B428;

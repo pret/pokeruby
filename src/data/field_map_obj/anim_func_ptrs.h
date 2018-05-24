@@ -548,10 +548,10 @@ u8 (*const Unknown_8375FF0[])(struct MapObject *, struct Sprite *);
 u8 (*const Unknown_8375FFC[])(struct MapObject *, struct Sprite *);
 
 u8 (*const *const gUnknown_08375778[])(struct MapObject *, struct Sprite *) = {
-    Unknown_83759A0,
-    Unknown_83759A8,
-    Unknown_83759B0,
-    Unknown_83759B8,
+    Unknown_83759A0, // face south
+    Unknown_83759A8, // face north
+    Unknown_83759B0, // face west
+    Unknown_83759B8, // face east
     Unknown_83759D4,
     Unknown_83759E0,
     Unknown_83759EC,

@@ -206,8 +206,8 @@ static void sub_80A2490(u8 taskId, u8 b, u8 mapObjId, const u8 *d)
 {
     u8 var;
 
-    if (FieldObjectIsSpecialAnimActive(&gMapObjects[mapObjId])
-     && !FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[mapObjId]))
+    if (FieldObjectIsHeldMovementActive(&gMapObjects[mapObjId])
+     && !FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]))
         return;
 
     var = *d;
@@ -218,7 +218,7 @@ static void sub_80A2490(u8 taskId, u8 b, u8 mapObjId, const u8 *d)
     }
     else
     {
-        if (!FieldObjectSetSpecialAnim(&gMapObjects[mapObjId], var))
+        if (!FieldObjectSetHeldMovement(&gMapObjects[mapObjId], var))
         {
             d++;
             npc_obj_offscreen_culling_and_flag_update(b, d);

@@ -178,13 +178,13 @@ struct MapHeader
 struct MapObject
 {
     /*0x00*/ u32 active:1;
-             u32 regularAnimActive:1;
+             u32 singleMovementActive:1;
              u32 triggerGroundEffectsOnMove:1;
              u32 triggerGroundEffectsOnStop:1;
              u32 disableCoveringGroundEffects:1; // disables ground effects that cover parts of the object's sprite
              u32 landingJump:1;
-             u32 specialAnimActive:1;
-             u32 specialAnimFinished:1;
+             u32 heldMovementActive:1;
+             u32 heldMovementFinished:1;
     /*0x01*/ u32 frozen:1;
              u32 facingDirectionLocked:1;
              u32 disableAnim:1; // used to disable forced movement sliding animations (like on ice)
@@ -206,7 +206,7 @@ struct MapObject
              u32 fixedPriority:1;
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 graphicsId;
-    /*0x06*/ u8 animPattern;
+    /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;
     /*0x08*/ u8 localId;
     /*0x09*/ u8 mapNum;
@@ -227,13 +227,13 @@ struct MapObject
     }  range;
     /*0x1A*/ u8 fieldEffectSpriteId;
     /*0x1B*/ u8 warpArrowSpriteId;
-    /*0x1C*/ u8 animId;
+    /*0x1C*/ u8 movementActionId;
     /*0x1D*/ u8 trainerRange_berryTreeId;
     /*0x1E*/ u8 currentMetatileBehavior;
     /*0x1F*/ u8 previousMetatileBehavior;
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerAnimId;
+    /*0x22*/ u8 playerMovementActionId;
     /*size = 0x24*/
 };
 

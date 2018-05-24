@@ -1205,7 +1205,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[objectId]);
     sub_80A2178();
     UnfreezeMapObjects();
     return FALSE;
@@ -1217,9 +1217,9 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 
     HideFieldMessageBox();
     if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
+        FieldObjectClearHeldMovementIfFinished(&gMapObjects[gSelectedMapObject]);
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[objectId]);
     sub_80A2178();
     UnfreezeMapObjects();
     return FALSE;

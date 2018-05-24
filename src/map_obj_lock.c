@@ -52,7 +52,7 @@ void sub_8064D38(u8 taskId)
         sub_80594C0();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[gSelectedMapObject].regularAnimActive)
+    if (!task->data[1] && !gMapObjects[gSelectedMapObject].singleMovementActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         task->data[1] = 1;
@@ -79,7 +79,7 @@ void LockSelectedMapObject(void)
     u8 taskId;
     FreezeMapObjectsExceptOne(gSelectedMapObject);
     taskId = CreateTask(sub_8064D38, 80);
-    if (!gMapObjects[gSelectedMapObject].regularAnimActive)
+    if (!gMapObjects[gSelectedMapObject].singleMovementActive)
     {
         FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         gTasks[taskId].data[1] = 1;
@@ -89,7 +89,7 @@ void LockSelectedMapObject(void)
 void sub_8064E2C(void)
 {
     u8 objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[objectId]);
     sub_80A2178();
     UnfreezeMapObjects();
 }
@@ -99,9 +99,9 @@ void unref_sub_8064E5C(void)
     u8 objectId;
 
     if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
+        FieldObjectClearHeldMovementIfFinished(&gMapObjects[gSelectedMapObject]);
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[objectId]);
     sub_80A2178();
     UnfreezeMapObjects();
 }
@@ -113,5 +113,5 @@ void sub_8064EAC(void)
 
 void sub_8064ED4(void)
 {
-    FieldObjectClearAnimIfSpecialAnimActive(&gMapObjects[gSelectedMapObject]);
+    FieldObjectClearHeldMovementIfActive(&gMapObjects[gSelectedMapObject]);
 }

@@ -688,15 +688,15 @@ u8 GetPlayerDirectionTowardsHiddenItem(s16 itemX, s16 itemY)
 
 void SetPlayerDirectionTowardsItem(u8 direction)
 {
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
-    FieldObjectClearAnim(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    FieldObjectClearHeldMovementIfFinished(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
+    FieldObjectClearHeldMovement(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
     UnfreezeMapObject(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]);
     PlayerTurnInPlace(direction);
 }
 
 void DisplayItemRespondingMessageAndExitItemfinder(u8 taskId)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
+    if (FieldObjectCheckHeldMovementStatus(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE)
         DisplayItemMessageOnField(taskId, gOtherText_ItemfinderResponding, ExitItemfinder, 0);
 }
 
@@ -704,7 +704,7 @@ void RotatePlayerAndExitItemfinder(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
+    if (FieldObjectCheckHeldMovementStatus(&gMapObjects[GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0)]) == TRUE
     || data[2] == FALSE)
     {
         SetPlayerDirectionTowardsItem(gItemFinderDirections[data[5]]);

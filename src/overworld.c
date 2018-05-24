@@ -1825,7 +1825,7 @@ void sub_8054D90(void)
     gUnknown_0300489C = 0;
     gUnknown_03004898 = 0;
     sub_805AA98();
-    sub_805B55C(0, 0);
+    TrySpawnFieldObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
 
@@ -1841,7 +1841,7 @@ void mli4_mapscripts_and_other(void)
     InitPlayerAvatar(x, y, player->player_field_1, gSaveBlock2.playerGender);
     SetPlayerAvatarTransitionFlags(player->player_field_0);
     player_avatar_init_params_reset();
-    sub_805B55C(0, 0);
+    TrySpawnFieldObjects(0, 0);
     ResetBerryTreeSparkleFlags();
     mapheader_run_first_tag4_script_list_match();
 }
@@ -2505,7 +2505,7 @@ void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
     linkPlayerMapObj->mode = 0;
 
     mapObj->active = 1;
-    mapObj->regularAnimActive = a4;
+    mapObj->singleMovementActive = a4;
     mapObj->range.as_byte = 2;
     mapObj->spriteId = 64;
 
@@ -2720,7 +2720,7 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
 
     if (linkPlayerMapObj->active)
     {
-        u8 val = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, mapObj->regularAnimActive);
+        u8 val = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, mapObj->singleMovementActive);
         mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
         sprite = &gSprites[mapObj->spriteId];
         sprite->coordOffsetEnabled = TRUE;

@@ -266,7 +266,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
     FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
     direction = GetFaceDirectionAnimId(trainerObj->facingDirection);
-    FieldObjectSetSpecialAnim(trainerObj, direction);
+    FieldObjectSetHeldMovement(trainerObj, direction);
     task->data[0]++;
     return TRUE;
 }
@@ -280,9 +280,9 @@ static bool8 sub_80843DC(u8 taskId, struct Task *task, struct MapObject *trainer
     else
     {
         task->data[0]++;
-        if (trainerObj->animPattern == 57 || trainerObj->animPattern == 58)
+        if (trainerObj->movementType == 57 || trainerObj->movementType == 58)
             task->data[0] = 6;
-        if (trainerObj->animPattern == 63)
+        if (trainerObj->movementType == 63)
             task->data[0] = 8;
         return TRUE;
     }
@@ -290,16 +290,16 @@ static bool8 sub_80843DC(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_808441C(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!(FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)) || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!(FieldObjectIsMovementOverridden(trainerObj)) || FieldObjectClearHeldMovementIfFinished(trainerObj))
     {
         if (task->data[3])
         {
-            FieldObjectSetSpecialAnim(trainerObj, GetGoSpeed0AnimId(trainerObj->facingDirection));
+            FieldObjectSetHeldMovement(trainerObj, GetGoSpeed0AnimId(trainerObj->facingDirection));
             task->data[3]--;
         }
         else
         {
-            FieldObjectSetSpecialAnim(trainerObj, 0x3E);
+            FieldObjectSetHeldMovement(trainerObj, 0x3E);
             task->data[0]++;
         }
     }
@@ -310,7 +310,7 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
 {
     struct MapObject *playerObj;
 
-    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) && !FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (FieldObjectIsMovementOverridden(trainerObj) && !FieldObjectClearHeldMovementIfFinished(trainerObj))
         return FALSE;
 
     npc_set_running_behaviour_etc(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
@@ -318,11 +318,11 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
     sub_805C754(trainerObj);
 
     playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj) && !FieldObjectClearAnimIfSpecialAnimFinished(playerObj))
+    if (FieldObjectIsMovementOverridden(playerObj) && !FieldObjectClearHeldMovementIfFinished(playerObj))
         return FALSE;
 
     sub_80597E8();
-    FieldObjectSetSpecialAnim(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection)));
+    FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection)));
     task->data[0]++;
     return FALSE;
 }
@@ -331,18 +331,18 @@ static bool8 sub_8084534(u8 taskId, struct Task *task, struct MapObject *trainer
 {
     struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj)
-     || FieldObjectClearAnimIfSpecialAnimFinished(playerObj))
+    if (!FieldObjectIsMovementOverridden(playerObj)
+     || FieldObjectClearHeldMovementIfFinished(playerObj))
         SwitchTaskToFollowupFunc(taskId);
     return FALSE;
 }
 
 static bool8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-     || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!FieldObjectIsMovementOverridden(trainerObj)
+     || FieldObjectClearHeldMovementIfFinished(trainerObj))
     {
-        FieldObjectSetSpecialAnim(trainerObj, 0x59);
+        FieldObjectSetHeldMovement(trainerObj, 0x59);
         task->data[0]++;
     }
     return FALSE;
@@ -350,7 +350,7 @@ static bool8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (FieldObjectClearHeldMovementIfFinished(trainerObj))
         task->data[0] = 3;
 
     return FALSE;
@@ -358,10 +358,10 @@ static bool8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
-     || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
+    if (!FieldObjectIsMovementOverridden(trainerObj)
+     || FieldObjectClearHeldMovementIfFinished(trainerObj))
     {
-        FieldObjectSetSpecialAnim(trainerObj, 0x3E);
+        FieldObjectSetHeldMovement(trainerObj, 0x3E);
         task->data[0]++;
     }
     return FALSE;
@@ -369,7 +369,7 @@ static bool8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_80845FC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (FieldObjectCheckIfSpecialAnimFinishedOrInactive(trainerObj))
+    if (FieldObjectCheckHeldMovementStatus(trainerObj))
     {
         gFieldEffectArguments[0] = trainerObj->currentCoords.x;
         gFieldEffectArguments[1] = trainerObj->currentCoords.y;
@@ -392,8 +392,8 @@ static bool8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainer
 
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
-        FieldObjectClearAnimIfSpecialAnimFinished(trainerObj);
-        FieldObjectSetSpecialAnim(trainerObj, sub_806084C(trainerObj->facingDirection));
+        FieldObjectClearHeldMovementIfFinished(trainerObj);
+        FieldObjectSetHeldMovement(trainerObj, sub_806084C(trainerObj->facingDirection));
         task->data[0]++;
     }
     return FALSE;
@@ -424,7 +424,7 @@ void sub_80846E4(u8 taskId)
     LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&mapObj);
     if (!task->data[7])
     {
-        FieldObjectClearAnim(mapObj);
+        FieldObjectClearHeldMovement(mapObj);
         task->data[7]++;
     }
     gTrainerSeeFuncList2[task->data[0]](taskId, task, mapObj);
@@ -436,7 +436,7 @@ void sub_80846E4(u8 taskId)
     }
     else
     {
-        mapObj->specialAnimFinished = 0;
+        mapObj->heldMovementFinished = 0;
     }
 }
 

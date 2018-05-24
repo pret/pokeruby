@@ -37,7 +37,7 @@ static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
     return table[sprite->data[1]](mapObject, sprite);\
 }
 
-#define fieldmap_object_null_cb(setup, callback) \
+#define fieldmap_object_empty_callback(setup, callback) \
 static u8 callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
@@ -101,7 +101,7 @@ void FieldObjectCB_Hidden1(struct Sprite *);
 void FieldObjectCB_MountainDisguise(struct Sprite *);
 void FieldObjectCB_TreeDisguise(struct Sprite *);
 void sub_80587B4(struct Sprite *);
-void sub_805C884(struct Sprite *);
+void MovementType_None(struct Sprite *);
 void sub_805C8AC(struct Sprite *);
 void sub_805CDE8(struct Sprite *);
 void sub_805CF28(struct Sprite *);
@@ -360,7 +360,7 @@ u8 show_sprite(u8, u8, u8);
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
 u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority);
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
-void sub_805B55C(s16 a, s16 b);
+void TrySpawnFieldObjects(s16, s16);
 void sub_805B710(u16 i, u16 i1);
 void sub_805B980(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
@@ -411,15 +411,15 @@ void sub_8060388(s16, s16, s16 *, s16 *);
 void sub_80603CC(s16 x, s16 y, s16 *pInt, s16 *pInt1);
 void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 void FieldObjectMoveDestCoords(struct MapObject *pObject, u32 unk_19, s16 *pInt, s16 *pInt1);
-bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
-bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
-bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
-void FieldObjectForceSetSpecialAnim(struct MapObject *pObject, u8 a);
-void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
-void FieldObjectClearAnim(struct MapObject *);
-bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
-u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
-u8 FieldObjectGetSpecialAnim(struct MapObject *);
+bool8 FieldObjectIsMovementOverridden(struct MapObject *);
+bool8 FieldObjectIsHeldMovementActive(struct MapObject *);
+bool8 FieldObjectSetHeldMovement(struct MapObject *, u8);
+void FieldObjectForceSetHeldMovement(struct MapObject *pObject, u8 a);
+void FieldObjectClearHeldMovementIfActive(struct MapObject *);
+void FieldObjectClearHeldMovement(struct MapObject *);
+bool8 FieldObjectCheckHeldMovementStatus(struct MapObject *);
+u8 FieldObjectClearHeldMovementIfFinished(struct MapObject *);
+u8 FieldObjectGetHeldMovementActionId(struct MapObject *);
 u8 GetFaceDirectionAnimId(u32);
 u8 GetSimpleGoAnimId(u32);
 u8 GetGoSpeed0AnimId(u32);
