@@ -1509,7 +1509,7 @@ static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
     MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_DOWN
     MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_LEFT
     MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_RIGHT
-    MovementType_None2,                       // MOVEMENT_TYPE_NONE_2
+    MovementType_Player,                      // MOVEMENT_TYPE_PLAYER
     MovementType_BerryTreeGrowth,             // MOVEMENT_TYPE_BERRY_TREE_GROWTH
     MovementType_FaceDownAndUp,               // MOVEMENT_TYPE_FACE_DOWN_AND_UP
     MovementType_FaceLeftAndRight,            // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
@@ -1589,7 +1589,7 @@ const u8 gRangedMovementTypes[] = {
     0, // MOVEMENT_TYPE_FACE_DOWN
     0, // MOVEMENT_TYPE_FACE_LEFT
     0, // MOVEMENT_TYPE_FACE_RIGHT
-    0, // MOVEMENT_TYPE_NONE_2
+    0, // MOVEMENT_TYPE_PLAYER
     0, // MOVEMENT_TYPE_BERRY_TREE_GROWTH
     0, // MOVEMENT_TYPE_FACE_DOWN_AND_UP
     0, // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
@@ -1669,7 +1669,7 @@ const u8 gInitialMovementTypeFacingDirections[] = {
     DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN
     DIR_WEST,  // MOVEMENT_TYPE_FACE_LEFT
     DIR_EAST,  // MOVEMENT_TYPE_FACE_RIGHT
-    DIR_SOUTH, // MOVEMENT_TYPE_NONE_2
+    DIR_SOUTH, // MOVEMENT_TYPE_PLAYER
     DIR_SOUTH, // MOVEMENT_TYPE_BERRY_TREE_GROWTH
     DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_AND_UP
     DIR_WEST,  // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
@@ -2212,8 +2212,8 @@ u8 TryInitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 ma
     mapObj->previousCoords.y = initialY;
     mapObj->currentElevation = template->elevation;
     mapObj->previousElevation = template->elevation;
-    mapObj->range.as_nybbles.x = template->unkA_0;
-    mapObj->range.as_nybbles.y = template->unkA_4;
+    mapObj->range.as_nybbles.x = template->movementRangeX;
+    mapObj->range.as_nybbles.y = template->movementRangeY;
     mapObj->trainerType = template->unkC;
     mapObj->trainerRange_berryTreeId = template->unkE;
     mapObj->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
@@ -2329,7 +2329,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
         npc_load_two_palettes__no_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
     else if (gfxInfo->paletteSlot == 10)
         npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
-    if (mapObject->movementType == 0x4C)
+    if (mapObject->movementType == MOVEMENT_TYPE_INVISIBLE)
         mapObject->invisible = TRUE;
 
 #ifdef NONMATCHING
@@ -2394,21 +2394,21 @@ u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjTemplate)
     return TrySpawnFieldObject(mapObjTemplate, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, x, y);
 }
 
-u8 SpawnSpecialFieldObjectParametrized(u8 a, u8 b, u8 c, s16 d, s16 e, u8 f)
+u8 SpawnSpecialFieldObjectParametrized(u8 graphicsId, u8 movementType, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct MapObjectTemplate mapObjTemplate;
 
-    d -= 7;
-    e -= 7;
-    mapObjTemplate.localId = c;
-    mapObjTemplate.graphicsId = a;
+    x -= 7;
+    y -= 7;
+    mapObjTemplate.localId = localId;
+    mapObjTemplate.graphicsId = graphicsId;
     mapObjTemplate.unk2 = 0;
-    mapObjTemplate.x = d;
-    mapObjTemplate.y = e;
-    mapObjTemplate.elevation = f;
-    mapObjTemplate.movementType = b;
-    mapObjTemplate.unkA_0 = 0;
-    mapObjTemplate.unkA_4 = 0;
+    mapObjTemplate.x = x;
+    mapObjTemplate.y = y;
+    mapObjTemplate.elevation = elevation;
+    mapObjTemplate.movementType = movementType;
+    mapObjTemplate.movementRangeX = 0;
+    mapObjTemplate.movementRangeY = 0;
     mapObjTemplate.unkC = 0;
     mapObjTemplate.unkE = 0;
     return SpawnSpecialFieldObject(&mapObjTemplate);
@@ -2441,9 +2441,9 @@ void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callba
     *subspriteTables = gfxInfo->subspriteTables;
 }
 
-void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 movementType, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
-    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, sMovementTypeCallbacks[callbackIndex], sprTemplate, subspriteTables);
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, sMovementTypeCallbacks[movementType], sprTemplate, subspriteTables);
 }
 
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
@@ -2609,7 +2609,7 @@ void sub_805B710(u16 a, u16 b)
 extern void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 extern void sub_805B914(struct MapObject *);
 
-void sub_805B75C(u8 a, s16 b, s16 c)
+void sub_805B75C(u8 mapObjectId, s16 b, s16 c)
 {
     struct SpriteTemplate sp0;
     struct SpriteFrameImage sp18;
@@ -2621,12 +2621,12 @@ void sub_805B75C(u8 a, s16 b, s16 c)
     #define i spriteId
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayerMapObjects[i].active && a == gLinkPlayerMapObjects[i].mapObjId)
+        if (gLinkPlayerMapObjects[i].active && mapObjectId == gLinkPlayerMapObjects[i].mapObjId)
             return;
     }
     #undef i
 
-    mapObject = &gMapObjects[a];
+    mapObject = &gMapObjects[mapObjectId];
     asm("":::"r5");
     subspriteTables = NULL;
     gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
@@ -2650,18 +2650,18 @@ void sub_805B75C(u8 a, s16 b, s16 c)
         sprite->pos1.x += 8;
         sprite->pos1.y += 16 + sprite->centerToCornerVecY;
         sprite->images = gfxInfo->images;
-        if (mapObject->movementType == 11)
+        if (mapObject->movementType == MOVEMENT_TYPE_PLAYER)
         {
-            SetPlayerAvatarFieldObjectIdAndObjectId(a, spriteId);
+            SetPlayerAvatarFieldObjectIdAndObjectId(mapObjectId, spriteId);
             mapObject->warpArrowSpriteId = sub_8126B54();
         }
         if (subspriteTables != NULL)
             SetSubspriteTables(sprite, subspriteTables);
         sprite->oam.paletteNum = gfxInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
-        sprite->data[0] = a;
+        sprite->data[0] = mapObjectId;
         mapObject->spriteId = spriteId;
-        if (!mapObject->inanimate && mapObject->movementType != 11)
+        if (!mapObject->inanimate && mapObject->movementType != MOVEMENT_TYPE_PLAYER)
             StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->facingDirection));
         sub_805B914(mapObject);
         SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
@@ -7408,12 +7408,12 @@ bool8 sub_8062704(struct MapObject *, struct Sprite *);
 
 bool8 sub_80626C0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (mapObject->movementType == 0x3F)
+    if (mapObject->movementType == MOVEMENT_TYPE_HIDDEN)
     {
         sub_8084794(mapObject);
         return FALSE;
     }
-    else if (mapObject->movementType != 0x39 && mapObject->movementType != 0x3A)
+    else if (mapObject->movementType != MOVEMENT_TYPE_TREE_DISGUISE && mapObject->movementType != MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
     {
         sprite->data[2] = 2;
         return TRUE;

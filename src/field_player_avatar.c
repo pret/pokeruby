@@ -196,7 +196,7 @@ static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
     sub_805A1B8,
 };
 
-fieldmap_object_empty_callback(MovementType_None2, MovementType_None2_Callback);
+fieldmap_object_empty_callback(MovementType_Player, MovementType_Player_Callback);
 
 void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
@@ -1132,9 +1132,9 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerMapObjTemplate.x = x - 7;
     playerMapObjTemplate.y = y - 7;
     playerMapObjTemplate.elevation = 0;
-    playerMapObjTemplate.movementType = 11;
-    playerMapObjTemplate.unkA_0 = 0;
-    playerMapObjTemplate.unkA_4 = 0;
+    playerMapObjTemplate.movementType = MOVEMENT_TYPE_PLAYER;
+    playerMapObjTemplate.movementRangeX = 0;
+    playerMapObjTemplate.movementRangeY = 0;
     playerMapObjTemplate.unkC = 0;
     playerMapObjTemplate.unkE = 0;
     playerMapObjTemplate.script = NULL;

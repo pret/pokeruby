@@ -280,9 +280,9 @@ static bool8 sub_80843DC(u8 taskId, struct Task *task, struct MapObject *trainer
     else
     {
         task->data[0]++;
-        if (trainerObj->movementType == 57 || trainerObj->movementType == 58)
+        if (trainerObj->movementType == MOVEMENT_TYPE_TREE_DISGUISE || trainerObj->movementType == MOVEMENT_TYPE_MOUNTAIN_DISGUISE)
             task->data[0] = 6;
-        if (trainerObj->movementType == 63)
+        if (trainerObj->movementType == MOVEMENT_TYPE_HIDDEN)
             task->data[0] = 8;
         return TRUE;
     }

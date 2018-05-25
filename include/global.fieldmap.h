@@ -79,9 +79,8 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u8 unkA_0:4;
-             u8 unkA_4:4;
-    ///*0x0B*/ u8 fillerB[1];
+    /*0x0A*/ u8 movementRangeX:4;
+             u8 movementRangeY:4;
     /*0x0C*/ u16 unkC;
     /*0x0E*/ u16 unkE;
     /*0x10*/ u8 *script;
