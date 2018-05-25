@@ -235,7 +235,7 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 	step_end
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
-	specialvar RESULT, player_get_direction_lower_nybble
+	specialvar RESULT, GetPlayerFacingDirection
 	compare RESULT, 1
 	goto_if_eq LavaridgeTown_EventScript_14E721
 	end

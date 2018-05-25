@@ -290,7 +290,7 @@ void RunItemfinderResults(u8 taskId)
             }
             else // player is above hidden item.
             {
-                playerDir = player_get_direction_lower_nybble();
+                playerDir = GetPlayerFacingDirection();
 
                 // rotate player clockwise depending on current direction.
                 for (i = 0; i < 4; i++)

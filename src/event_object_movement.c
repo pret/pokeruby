@@ -1498,87 +1498,244 @@ const u32 gFieldEffectPic_Bird[] = INCBIN_U32("graphics/field_effect_objects/pic
 // movement type callbacks
 static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
 {
-    MovementType_None, // MOVEMENT_TYPE_NONE
-    sub_805CDE8, // MOVEMENT_TYPE_LOOK_AROUND
-    sub_805C8AC,
-    sub_805CF28,
-    sub_805CF28,
-    sub_805D0AC,
-    sub_805D0AC,
-    sub_805D230,
-    sub_805D230,
-    sub_805D230,
-    sub_805D230,
-    sub_80587B4,
-    FieldObjectCB_BerryTree,
-    sub_805D4F4,
-    sub_805D634,
-    sub_805D774,
-    sub_805D8B4,
-    sub_805D9F4,
-    sub_805DB34,
-    sub_805DC74,
-    sub_805DDB4,
-    sub_805DEF4,
-    sub_805E034,
-    sub_805E174,
-    sub_805E278,
-    sub_805E37C,
-    sub_805E37C,
-    sub_805E37C,
-    sub_805E37C,
-    sub_805E5DC,
-    sub_805E668,
-    sub_805E6F4,
-    sub_805E780,
-    sub_805E80C,
-    sub_805E898,
-    sub_805E924,
-    sub_805E9B0,
-    sub_805EA3C,
-    sub_805EAC8,
-    sub_805EB54,
-    sub_805EBE0,
-    sub_805EC6C,
-    sub_805ECF8,
-    sub_805ED84,
-    sub_805EE10,
-    sub_805EE9C,
-    sub_805EF28,
-    sub_805EFB4,
-    sub_805F040,
-    sub_805F0CC,
-    sub_805F158,
-    sub_805F1E4,
-    sub_805F270,
-    sub_805F2FC,
-    sub_805F2FC,
-    sub_805F2FC,
-    sub_805F2FC,
-    FieldObjectCB_TreeDisguise,
-    FieldObjectCB_MountainDisguise,
-    sub_805F8E0,
-    sub_805F8E0,
-    sub_805F8E0,
-    sub_805F8E0,
-    FieldObjectCB_Hidden1,
-    sub_805FB20,
-    sub_805FB20,
-    sub_805FB20,
-    sub_805FB20,
-    sub_805FB90,
-    sub_805FB90,
-    sub_805FB90,
-    sub_805FB90,
-    sub_805FC00,
-    sub_805FC00,
-    sub_805FC00,
-    sub_805FC00,
-    sub_805FC70,
+    MovementType_None,                        // MOVEMENT_TYPE_NONE
+    MovementType_LookAround,                  // MOVEMENT_TYPE_LOOK_AROUND
+    MovementType_WanderAround,                // MOVEMENT_TYPE_WANDER_AROUND
+    MovementType_WanderUpAndDown,             // MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+    MovementType_WanderUpAndDown,             // MOVEMENT_TYPE_WANDER_DOWN_AND_UP
+    MovementType_WanderLeftAndRight,          // MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT
+    MovementType_WanderLeftAndRight,          // MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT
+    MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_UP
+    MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_DOWN
+    MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_LEFT
+    MovementType_FaceDirection,               // MOVEMENT_TYPE_FACE_RIGHT
+    MovementType_None2,                       // MOVEMENT_TYPE_NONE_2
+    MovementType_BerryTreeGrowth,             // MOVEMENT_TYPE_BERRY_TREE_GROWTH
+    MovementType_FaceDownAndUp,               // MOVEMENT_TYPE_FACE_DOWN_AND_UP
+    MovementType_FaceLeftAndRight,            // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
+    MovementType_FaceUpAndLeft,               // MOVEMENT_TYPE_FACE_UP_AND_LEFT
+    MovementType_FaceUpAndRight,              // MOVEMENT_TYPE_FACE_UP_AND_RIGHT
+    MovementType_FaceDownAndLeft,             // MOVEMENT_TYPE_FACE_DOWN_AND_LEFT
+    MovementType_FaceDownAndRight,            // MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT
+    MovementType_FaceDownUpAndLeft,           // MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT
+    MovementType_FaceDownUpAndRight,          // MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT
+    MovementType_FaceUpLeftAndRight,          // MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT
+    MovementType_FaceDownLeftAndRight,        // MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT
+    MovementType_RotateCounterclockwise,      // MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE
+    MovementType_RotateClockwise,             // MOVEMENT_TYPE_ROTATE_CLOCKWISE
+    MovementType_WalkBackAndForth,            // MOVEMENT_TYPE_WALK_UP_AND_DOWN
+    MovementType_WalkBackAndForth,            // MOVEMENT_TYPE_WALK_DOWN_AND_UP
+    MovementType_WalkBackAndForth,            // MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT
+    MovementType_WalkBackAndForth,            // MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT
+    MovementType_WalkSequenceUpRightLeftDown, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN
+    MovementType_WalkSequenceRightLeftDownUp, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP
+    MovementType_WalkSequenceDownUpRightLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT
+    MovementType_WalkSequenceLeftDownUpRight, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT
+    MovementType_WalkSequenceUpLeftRightDown, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN
+    MovementType_WalkSequenceLeftRightDownUp, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP
+    MovementType_WalkSequenceDownUpLeftRight, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT
+    MovementType_WalkSequenceRightDownUpLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT
+    MovementType_WalkSequenceLeftUpDownRight, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT
+    MovementType_WalkSequenceUpDownRightLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT
+    MovementType_WalkSequenceRightLeftUpDown, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN
+    MovementType_WalkSequenceDownRightLeftUp, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP
+    MovementType_WalkSequenceRightUpDownLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT
+    MovementType_WalkSequenceUpDownLeftRight, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT
+    MovementType_WalkSequenceLeftRightUpDown, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN
+    MovementType_WalkSequenceDownLeftRightUp, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP
+    MovementType_WalkSequenceUpLeftDownRight, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT
+    MovementType_WalkSequenceDownRightUpLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT
+    MovementType_WalkSequenceLeftDownRightUp, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP
+    MovementType_WalkSequenceRightUpLeftDown, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN
+    MovementType_WalkSequenceUpRightDownLeft, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT
+    MovementType_WalkSequenceDownLeftUpRight, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT
+    MovementType_WalkSequenceLeftUpRightDown, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
+    MovementType_WalkSequenceRightDownLeftUp, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP
+    MovementType_CopyPlayer,                  // MOVEMENT_TYPE_COPY_PLAYER
+    MovementType_CopyPlayer,                  // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE
+    MovementType_CopyPlayer,                  // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE
+    MovementType_CopyPlayer,                  // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE
+    MovementType_TreeDisguise,                // MOVEMENT_TYPE_TREE_DISGUISE
+    MovementType_MountainDisguise,            // MOVEMENT_TYPE_MOUNTAIN_DISGUISE
+    MovementType_CopyPlayerInGrass,           // MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS
+    MovementType_CopyPlayerInGrass,           // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS
+    MovementType_CopyPlayerInGrass,           // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS
+    MovementType_CopyPlayerInGrass,           // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS
+    MovementType_Hidden,                      // MOVEMENT_TYPE_HIDDEN
+    MovementType_WalkInPlace,                 // MOVEMENT_TYPE_WALK_IN_PLACE_DOWN
+    MovementType_WalkInPlace,                 // MOVEMENT_TYPE_WALK_IN_PLACE_UP
+    MovementType_WalkInPlace,                 // MOVEMENT_TYPE_WALK_IN_PLACE_LEFT
+    MovementType_WalkInPlace,                 // MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT
+    MovementType_JogInPlace,                  // MOVEMENT_TYPE_JOG_IN_PLACE_DOWN
+    MovementType_JogInPlace,                  // MOVEMENT_TYPE_JOG_IN_PLACE_UP
+    MovementType_JogInPlace,                  // MOVEMENT_TYPE_JOG_IN_PLACE_LEFT
+    MovementType_JogInPlace,                  // MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT
+    MovementType_RunInPlace,                  // MOVEMENT_TYPE_RUN_IN_PLACE_DOWN
+    MovementType_RunInPlace,                  // MOVEMENT_TYPE_RUN_IN_PLACE_UP
+    MovementType_RunInPlace,                  // MOVEMENT_TYPE_RUN_IN_PLACE_LEFT
+    MovementType_RunInPlace,                  // MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT
+    MovementType_Invisible,                   // MOVEMENT_TYPE_INVISIBLE
 };
 
-const u8 gUnknown_0836DBBC[] = {0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-const u8 gUnknown_0836DC09[] = {DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_EAST, DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH};
+const u8 gRangedMovementTypes[] = {
+    0, // MOVEMENT_TYPE_NONE
+    0, // MOVEMENT_TYPE_LOOK_AROUND
+    1, // MOVEMENT_TYPE_WANDER_AROUND
+    1, // MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+    1, // MOVEMENT_TYPE_WANDER_DOWN_AND_UP
+    1, // MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT
+    1, // MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT
+    0, // MOVEMENT_TYPE_FACE_UP
+    0, // MOVEMENT_TYPE_FACE_DOWN
+    0, // MOVEMENT_TYPE_FACE_LEFT
+    0, // MOVEMENT_TYPE_FACE_RIGHT
+    0, // MOVEMENT_TYPE_NONE_2
+    0, // MOVEMENT_TYPE_BERRY_TREE_GROWTH
+    0, // MOVEMENT_TYPE_FACE_DOWN_AND_UP
+    0, // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
+    0, // MOVEMENT_TYPE_FACE_UP_AND_LEFT
+    0, // MOVEMENT_TYPE_FACE_UP_AND_RIGHT
+    0, // MOVEMENT_TYPE_FACE_DOWN_AND_LEFT
+    0, // MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT
+    0, // MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT
+    0, // MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT
+    0, // MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT
+    0, // MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT
+    0, // MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE
+    0, // MOVEMENT_TYPE_ROTATE_CLOCKWISE
+    1, // MOVEMENT_TYPE_WALK_UP_AND_DOWN
+    1, // MOVEMENT_TYPE_WALK_DOWN_AND_UP
+    1, // MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT
+    1, // MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
+    1, // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP
+    1, // MOVEMENT_TYPE_COPY_PLAYER
+    1, // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE
+    1, // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE
+    1, // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE
+    0, // MOVEMENT_TYPE_TREE_DISGUISE
+    0, // MOVEMENT_TYPE_MOUNTAIN_DISGUISE
+    1, // MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS
+    1, // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS
+    1, // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS
+    1, // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS
+    0, // MOVEMENT_TYPE_HIDDEN
+    0, // MOVEMENT_TYPE_WALK_IN_PLACE_DOWN
+    0, // MOVEMENT_TYPE_WALK_IN_PLACE_UP
+    0, // MOVEMENT_TYPE_WALK_IN_PLACE_LEFT
+    0, // MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT
+    0, // MOVEMENT_TYPE_JOG_IN_PLACE_DOWN
+    0, // MOVEMENT_TYPE_JOG_IN_PLACE_UP
+    0, // MOVEMENT_TYPE_JOG_IN_PLACE_LEFT
+    0, // MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT
+    0, // MOVEMENT_TYPE_RUN_IN_PLACE_DOWN
+    0, // MOVEMENT_TYPE_RUN_IN_PLACE_UP
+    0, // MOVEMENT_TYPE_RUN_IN_PLACE_LEFT
+    0, // MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT
+    0, // MOVEMENT_TYPE_INVISIBLE
+};
+
+const u8 gInitialMovementTypeFacingDirections[] = {
+    DIR_SOUTH, // MOVEMENT_TYPE_NONE
+    DIR_SOUTH, // MOVEMENT_TYPE_LOOK_AROUND
+    DIR_SOUTH, // MOVEMENT_TYPE_WANDER_AROUND
+    DIR_NORTH, // MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+    DIR_SOUTH, // MOVEMENT_TYPE_WANDER_DOWN_AND_UP
+    DIR_WEST,  // MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT
+    DIR_EAST,  // MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT
+    DIR_NORTH, // MOVEMENT_TYPE_FACE_UP
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN
+    DIR_WEST,  // MOVEMENT_TYPE_FACE_LEFT
+    DIR_EAST,  // MOVEMENT_TYPE_FACE_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_NONE_2
+    DIR_SOUTH, // MOVEMENT_TYPE_BERRY_TREE_GROWTH
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_AND_UP
+    DIR_WEST,  // MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT
+    DIR_NORTH, // MOVEMENT_TYPE_FACE_UP_AND_LEFT
+    DIR_NORTH, // MOVEMENT_TYPE_FACE_UP_AND_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_AND_LEFT
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_UP_AND_LEFT
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_UP_AND_RIGHT
+    DIR_NORTH, // MOVEMENT_TYPE_FACE_UP_LEFT_AND_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE
+    DIR_SOUTH, // MOVEMENT_TYPE_ROTATE_CLOCKWISE
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_UP_AND_DOWN
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_DOWN_AND_UP
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_LEFT_DOWN
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_DOWN_UP
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_RIGHT_LEFT
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_UP_RIGHT
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_RIGHT_DOWN
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_DOWN_UP
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_UP_LEFT_RIGHT
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_UP_LEFT
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_DOWN_RIGHT
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_RIGHT_LEFT
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_LEFT_UP_DOWN
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_LEFT_UP
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_DOWN_LEFT
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_DOWN_LEFT_RIGHT
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_RIGHT_UP_DOWN
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_RIGHT_UP
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_DOWN_RIGHT_UP
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_UP_LEFT_DOWN
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_SEQUENCE_UP_RIGHT_DOWN_LEFT
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_LEFT_UP_RIGHT
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_SEQUENCE_LEFT_UP_RIGHT_DOWN
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP
+    DIR_NORTH, // MOVEMENT_TYPE_COPY_PLAYER
+    DIR_SOUTH, // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE
+    DIR_WEST,  // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE
+    DIR_EAST,  // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE
+    DIR_SOUTH, // MOVEMENT_TYPE_TREE_DISGUISE
+    DIR_SOUTH, // MOVEMENT_TYPE_MOUNTAIN_DISGUISE
+    DIR_NORTH, // MOVEMENT_TYPE_COPY_PLAYER_IN_GRASS
+    DIR_SOUTH, // MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS
+    DIR_WEST,  // MOVEMENT_TYPE_COPY_PLAYER_COUNTERCLOCKWISE_IN_GRASS
+    DIR_EAST,  // MOVEMENT_TYPE_COPY_PLAYER_CLOCKWISE_IN_GRASS
+    DIR_SOUTH, // MOVEMENT_TYPE_HIDDEN
+    DIR_SOUTH, // MOVEMENT_TYPE_WALK_IN_PLACE_DOWN
+    DIR_NORTH, // MOVEMENT_TYPE_WALK_IN_PLACE_UP
+    DIR_WEST,  // MOVEMENT_TYPE_WALK_IN_PLACE_LEFT
+    DIR_EAST,  // MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_JOG_IN_PLACE_DOWN
+    DIR_NORTH, // MOVEMENT_TYPE_JOG_IN_PLACE_UP
+    DIR_WEST,  // MOVEMENT_TYPE_JOG_IN_PLACE_LEFT
+    DIR_EAST,  // MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_RUN_IN_PLACE_DOWN
+    DIR_NORTH, // MOVEMENT_TYPE_RUN_IN_PLACE_UP
+    DIR_WEST,  // MOVEMENT_TYPE_RUN_IN_PLACE_LEFT
+    DIR_EAST,  // MOVEMENT_TYPE_RUN_IN_PLACE_RIGHT
+    DIR_SOUTH, // MOVEMENT_TYPE_INVISIBLE
+};
 
 #include "data/field_map_obj/map_object_graphics_info_pointers.h"
 #include "data/field_map_obj/field_effect_object_template_pointers.h"
@@ -1795,9 +1952,9 @@ const u16 *const gUnknown_0837399C[] = {
 #include "data/field_map_obj/berry_tree_graphics_tables.h"
 #include "data/field_map_obj/field_effect_objects.h"
 
-const s16 gUnknown_0837520C[] = {0x20, 0x40, 0x60, 0x80};
-const s16 gUnknown_08375204[] = {0x20, 0x40, 0x80, 0xc0};
-const s16 gUnknown_0837521C[] = {0x20, 0x30, 0x40, 0x50};
+const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
+const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
+const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
 #include "data/field_map_obj/callback_subroutine_pointers.h"
 
@@ -2059,11 +2216,11 @@ u8 TryInitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 ma
     mapObj->range.as_nybbles.y = template->unkA_4;
     mapObj->trainerType = template->unkC;
     mapObj->trainerRange_berryTreeId = template->unkE;
-    mapObj->previousMovementDirection = gUnknown_0836DC09[template->movementType];
+    mapObj->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
     FieldObjectSetDirection((struct MapObject *)mapObj, mapObj->previousMovementDirection);
     asm("":::"r5","r6");
 	FieldObjectHandleDynamicGraphicsId((struct MapObject *)mapObj);
-    if (gUnknown_0836DBBC[mapObj->movementType] != 0)
+    if (gRangedMovementTypes[mapObj->movementType] != 0)
     {
         if (mapObj->range.as_nybbles.x == 0)
             mapObj->range.as_nybbles.x++;
@@ -3190,9 +3347,9 @@ u16 npc_paltag_by_palslot(u8 a)
 }
 
 fieldmap_object_empty_callback(MovementType_None, MovementType_None_Callback);
-fieldmap_object_cb(sub_805C8AC, sub_805C8D0, gUnknown_08375224);
+fieldmap_object_cb(MovementType_WanderAround, MovementType_WanderAround_Callback, gMovementTypeFuncs_WanderAround);
 
-u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
@@ -3201,32 +3358,32 @@ u8 sub_805C8F0(struct MapObject *mapObject, struct Sprite *sprite)
 
 extern void FieldObjectSetSingleMovement(struct MapObject *, struct Sprite *, u8);
 
-u8 sub_805C904(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
 extern u8 FieldObjectExecSingleMovementAction(struct MapObject *, struct Sprite *);
-void sub_8064820(struct Sprite *, s16);
+static void SetMovementDelay(struct Sprite *, s16);
 
-u8 sub_805C930(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) == 0)
     {
         return 0;
     }
-    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
     sprite->data[1] = 3;
     return 1;
 }
 
-extern u8 sub_8064824(struct Sprite *);
+static u8 WaitForMovementDelay(struct Sprite *);
 
-u8 sub_805C96C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) != 0)
+    if (WaitForMovementDelay(sprite))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3234,32 +3391,32 @@ u8 sub_805C96C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-extern u8 sub_805FF20(struct MapObject *, u8);
+extern u8 GetCollisionInDirection(struct MapObject *, u8);
 
-u8 sub_805C98C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_08375240, 4);
+    memcpy(directions, gStandardDirections, 4);
     direction = directions[Random() & 3];
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 5;
-    if (sub_805FF20(mapObject, direction) != 0)
+    if (GetCollisionInDirection(mapObject, direction) != 0)
     {
         sprite->data[1] = 1;
     }
     return 1;
 }
 
-u8 sub_805C9D8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step5(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0MovementActionId(mapObject->movementDirection));
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 6;
     return 1;
 }
 
-u8 sub_805CA08(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderAround_Step6(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) != 0)
     {
@@ -3506,36 +3663,36 @@ u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
     return gUnknown_08375244[a1](x, y, x2, y2);
 }
 
-fieldmap_object_cb(sub_805CDE8, sub_805CE0c, gUnknown_08375270);
+fieldmap_object_cb(MovementType_LookAround, MovementType_LookAround_Callback, gMovementTypeFuncs_LookAround);
 
-u8 sub_805CE2C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_LookAround_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805CE40(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_LookAround_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805CE6C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_LookAround_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (FieldObjectExecSingleMovementAction(mapObject, sprite) != 0)
+    if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805CEB0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_LookAround_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3543,51 +3700,50 @@ u8 sub_805CEB0(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805CEE0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_LookAround_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_08375240, 4);
+    memcpy(directions, gStandardDirections, 4);
     direction = sub_805CD60(mapObject, 0);
     if (direction == 0)
-    {
         direction = directions[Random() & 3];
-    }
+
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(sub_805CF28, sub_805CF4C, gUnknown_08375284);
+fieldmap_object_cb(MovementType_WanderUpAndDown, MovementType_WanderUpAndDown_Callback, gMovementTypeFuncs_WanderUpAndDown);
 
-u8 sub_805CF6C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805CF80(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805CFAC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) == 0)
     {
         return 0;
     }
-    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
     sprite->data[1] = 3;
     return 1;
 }
 
-u8 sub_805CFE8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) != 0)
+    if (WaitForMovementDelay(sprite))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3595,30 +3751,30 @@ u8 sub_805CFE8(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D008(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_083752A0, 2);
+    memcpy(directions, gUpAndDownDirections, 2);
     direction = directions[Random() & 1];
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 5;
-    if (sub_805FF20(mapObject, direction) != 0)
+    if (GetCollisionInDirection(mapObject, direction) != 0)
     {
         sprite->data[1] = 1;
     }
     return 1;
 }
 
-u8 sub_805D054(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step5(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0MovementActionId(mapObject->movementDirection));
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 6;
     return 1;
 }
 
-u8 sub_805D084(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderUpAndDown_Step6(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) != 0)
     {
@@ -3628,36 +3784,36 @@ u8 sub_805D084(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-fieldmap_object_cb(sub_805D0AC, sub_805D0D0, gUnknown_083752A4);
+fieldmap_object_cb(MovementType_WanderLeftAndRight, MovementType_WanderLeftAndRight_Callback, gMovementTypeFuncs_WanderLeftAndRight);
 
-u8 sub_805D0F0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D104(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805D130(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) == 0)
     {
         return 0;
     }
-    sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+    SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
     sprite->data[1] = 3;
     return 1;
 }
 
-u8 sub_805D16C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) != 0)
+    if (WaitForMovementDelay(sprite))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3665,30 +3821,30 @@ u8 sub_805D16C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D18C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_083752C0, 2);
+    memcpy(directions, gLeftAndRightDirections, 2);
     direction = directions[Random() & 1];
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[1] = 5;
-    if (sub_805FF20(mapObject, direction) != 0)
+    if (GetCollisionInDirection(mapObject, direction) != 0)
     {
         sprite->data[1] = 1;
     }
     return 1;
 }
 
-u8 sub_805D1D8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step5(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0AnimId(mapObject->movementDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0MovementActionId(mapObject->movementDirection));
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 6;
     return 1;
 }
 
-u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WanderLeftAndRight_Step6(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) != 0)
     {
@@ -3698,17 +3854,17 @@ u8 sub_805D208(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-fieldmap_object_cb(sub_805D230, sub_805D254, gUnknown_083752C4);
+fieldmap_object_cb(MovementType_FaceDirection, MovementType_FaceDirection_Callback, gMovementTypeFuncs_FaceDirection);
 
-u8 sub_805D274(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D2A0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDirection_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite) != 0)
     {
@@ -3718,15 +3874,15 @@ u8 sub_805D2A0(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D2C0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDirection_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->singleMovementActive = 0;
     return 0;
 }
 
-u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite);
+u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Sprite *sprite);
 
-void FieldObjectCB_BerryTree(struct Sprite *sprite)
+void MovementType_BerryTreeGrowth(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
     mapObject = &gMapObjects[sprite->data[0]];
@@ -3735,15 +3891,15 @@ void FieldObjectCB_BerryTree(struct Sprite *sprite)
         get_berry_tree_graphics(mapObject, sprite);
         sprite->data[7] |= 1;
     }
-    meta_step(mapObject, sprite, sub_805D314);
+    meta_step(mapObject, sprite, MovementType_BerryTreeGrowth_Callback);
 }
 
-u8 sub_805D314(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    return gUnknown_083752D0[sprite->data[1]](mapObject, sprite);
+    return gMovementTypeFuncs_BerryTreeGrowth[sprite->data[1]](mapObject, sprite);
 }
 
-u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 berryTreeStage;
     npc_reset(mapObject, sprite);
@@ -3777,7 +3933,7 @@ u8 do_berry_tree_growth_sparkle_1(struct MapObject *mapObject, struct Sprite *sp
     return 1;
 }
 
-u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -3787,7 +3943,7 @@ u8 sub_805D3EC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 3;
@@ -3801,7 +3957,7 @@ u8 do_berry_tree_growth_sparkle_2(struct MapObject *mapObject, struct Sprite *sp
     return 1;
 }
 
-u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->data[2]++;
     mapObject->invisible = ((sprite->data[2] & 0x2) >> 1);
@@ -3816,7 +3972,7 @@ u8 sub_805D458(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_BerryTreeGrowth_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->data[2]++;
     mapObject->invisible = ((sprite->data[2] & 0x2) >> 1);
@@ -3830,36 +3986,36 @@ u8 sub_805D4A8(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-fieldmap_object_cb(sub_805D4F4, sub_805D518, gUnknown_083752E4);
+fieldmap_object_cb(MovementType_FaceDownAndUp, MovementType_FaceDownAndUp_Callback, gMovementTypeFuncs_FaceDownAndUp);
 
-u8 sub_805D538(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D54C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805D578(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndUp_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805D5BC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndUp_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3867,11 +4023,11 @@ u8 sub_805D5BC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndUp_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_083752A0, 2);
+    memcpy(directions, gUpAndDownDirections, 2);
     direction = sub_805CD60(mapObject, 1);
     if (direction == 0)
     {
@@ -3882,36 +4038,36 @@ u8 sub_805D5EC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805D634, sub_805D658, gUnknown_083752F8);
+fieldmap_object_cb(MovementType_FaceLeftAndRight, MovementType_FaceLeftAndRight_Callback, gMovementTypeFuncs_FaceLeftAndRight);
 
-u8 sub_805D678(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D68C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceLeftAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805D6B8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceLeftAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837520C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysMedium[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805D6FC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceLeftAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3919,11 +4075,11 @@ u8 sub_805D6FC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceLeftAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_083752C0, 2);
+    memcpy(directions, gLeftAndRightDirections, 2);
     direction = sub_805CD60(mapObject, 2);
     if (direction == 0)
     {
@@ -3934,36 +4090,36 @@ u8 sub_805D72C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805D774, sub_805D798, gUnknown_0837530C);
+fieldmap_object_cb(MovementType_FaceUpAndLeft, MovementType_FaceUpAndLeft_Callback, gMovementTypeFuncs_FaceUpAndLeft);
 
-u8 sub_805D7B8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D7CC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805D7F8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndLeft_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805D83C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndLeft_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -3971,11 +4127,11 @@ u8 sub_805D83C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D86C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndLeft_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_08375320, 2);
+    memcpy(directions, gUpAndLeftDirections, 2);
     direction = sub_805CD60(mapObject, 3);
     if (direction == 0)
     {
@@ -3986,36 +4142,36 @@ u8 sub_805D86C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805D8B4, sub_805D8D8, gUnknown_08375324);
+fieldmap_object_cb(MovementType_FaceUpAndRight, MovementType_FaceUpAndRight_Callback, gMovementTypeFuncs_FaceUpAndRight);
 
-u8 sub_805D8F8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805D90C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805D938(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805D97C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4023,11 +4179,11 @@ u8 sub_805D97C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805D9AC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_08375338, 2);
+    memcpy(directions, gUpAndRightDirections, 2);
     direction = sub_805CD60(mapObject, 4);
     if (direction == 0)
     {
@@ -4038,36 +4194,36 @@ u8 sub_805D9AC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805D9F4, sub_805DA18, gUnknown_0837533C);
+fieldmap_object_cb(MovementType_FaceDownAndLeft, MovementType_FaceDownAndLeft_Callback, gMovementTypeFuncs_FaceDownAndLeft);
 
-u8 sub_805DA38(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805DA4C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805DA78(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndLeft_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805DABC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndLeft_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4075,11 +4231,11 @@ u8 sub_805DABC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805DAEC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndLeft_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_08375350, 2);
+    memcpy(directions, gDownAndLeftDirections, 2);
     direction = sub_805CD60(mapObject, 5);
     if (direction == 0)
     {
@@ -4090,36 +4246,36 @@ u8 sub_805DAEC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805DB34, sub_805DB58, gUnknown_08375354);
+fieldmap_object_cb(MovementType_FaceDownAndRight, MovementType_FaceDownAndRight_Callback, gMovementTypeFuncs_FaceDownAndRight);
 
-u8 sub_805DB78(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805DB8C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805DBB8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805DBFC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4127,11 +4283,11 @@ u8 sub_805DBFC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805DC2C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[2];
-    memcpy(directions, gUnknown_08375368, 2);
+    memcpy(directions, gDownAndRightDirections, 2);
     direction = sub_805CD60(mapObject, 6);
     if (direction == 0)
     {
@@ -4142,36 +4298,36 @@ u8 sub_805DC2C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805DC74, sub_805DC98, gUnknown_0837536C);
+fieldmap_object_cb(MovementType_FaceDownUpAndLeft, MovementType_FaceDownUpAndLeft_Callback, gMovementTypeFuncs_FaceDownUpAndLeft);
 
-u8 sub_805DCB8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805DCCC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805DCF8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndLeft_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805DD3C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndLeft_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4179,11 +4335,11 @@ u8 sub_805DD3C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805DD6C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndLeft_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_08375380, 4);
+    memcpy(directions, gDownUpAndLeftDirections, 4);
     direction = sub_805CD60(mapObject, 7);
     if (direction == 0)
     {
@@ -4194,36 +4350,36 @@ u8 sub_805DD6C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805DDB4, sub_805DDD8, gUnknown_08375384);
+fieldmap_object_cb(MovementType_FaceDownUpAndRight, MovementType_FaceDownUpAndRight_Callback, gMovementTypeFuncs_FaceDownUpAndRight);
 
-u8 sub_805DDF8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805DE0C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805DE38(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805DE7C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4231,11 +4387,11 @@ u8 sub_805DE7C(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805DEAC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownUpAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_08375398, 4);
+    memcpy(directions, gDownUpAndRightDirections, 4);
     direction = sub_805CD60(mapObject, 8);
     if (direction == 0)
     {
@@ -4246,36 +4402,36 @@ u8 sub_805DEAC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805DEF4, sub_805DF18, gUnknown_0837539C);
+fieldmap_object_cb(MovementType_FaceUpLeftAndRight, MovementType_FaceUpLeftAndRight_Callback, gMovementTypeFuncs_FaceUpLeftAndRight);
 
-u8 sub_805DF38(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805DF4C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpLeftAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805DF78(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpLeftAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805DFBC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpLeftAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4283,11 +4439,11 @@ u8 sub_805DFBC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805DFEC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceUpLeftAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_083753B0, 4);
+    memcpy(directions, gUpLeftAndRightDirections, 4);
     direction = sub_805CD60(mapObject, 9);
     if (direction == 0)
     {
@@ -4298,36 +4454,36 @@ u8 sub_805DFEC(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805E034, sub_805E058, gUnknown_083753B4);
+fieldmap_object_cb(MovementType_FaceDownLeftAndRight, MovementType_FaceDownLeftAndRight_Callback, gMovementTypeFuncs_FaceDownLeftAndRight);
 
-u8 sub_805E078(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805E08C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownLeftAndRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805E0B8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownLeftAndRight_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, gUnknown_0837521C[Random() & 3]);
+        SetMovementDelay(sprite, gMovementDelaysShort[Random() & 3]);
         mapObject->singleMovementActive = 0;
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805E0FC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownLeftAndRight_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 4;
         return 1;
@@ -4335,11 +4491,11 @@ u8 sub_805E0FC(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805E12C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_FaceDownLeftAndRight_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
-    memcpy(directions, gUnknown_083753C8, 4);
+    memcpy(directions, gDownLeftAndRightDirections, 4);
     direction = sub_805CD60(mapObject, 10);
     if (direction == 0)
     {
@@ -4350,40 +4506,40 @@ u8 sub_805E12C(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805E174, sub_805E198, gUnknown_083753CC);
+fieldmap_object_cb(MovementType_RotateCounterclockwise, MovementType_RotateCounterclockwise_Callback, gMovementTypeFuncs_RotateCounterclockwise);
 
-u8 sub_805E1B8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateCounterclockwise_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805E1E4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateCounterclockwise_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, 0x30);
+        SetMovementDelay(sprite, 48);
         sprite->data[1] = 2;
     }
     return 0;
 }
 
-u8 sub_805E208(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateCounterclockwise_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805E234(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateCounterclockwise_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[5];
-    memcpy(directions, gUnknown_083753DC, 5);
+    memcpy(directions, gCounterclockwiseDirections, 5);
     direction = sub_805CD60(mapObject, 0);
     if (direction == 0)
     {
@@ -4394,40 +4550,40 @@ u8 sub_805E234(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805E278, sub_803E29C, gUnknown_083753E4);
+fieldmap_object_cb(MovementType_RotateClockwise, MovementType_RotateClockwise_Callback, gMovementTypeFuncs_RotateClockwise);
 
-u8 sub_805E2BC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateClockwise_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805E2E8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateClockwise_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
-        sub_8064820(sprite, 0x30);
+        SetMovementDelay(sprite, 0x30);
         sprite->data[1] = 2;
     }
     return 0;
 }
 
-u8 sub_805E30C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateClockwise_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_8064824(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (WaitForMovementDelay(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data[1] = 3;
     }
     return 0;
 }
 
-u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RotateClockwise_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[5];
-    memcpy(directions, gUnknown_083753F4, 5);
+    memcpy(directions, gClockwiseDirections, 5);
     direction = sub_805CD60(mapObject, 0);
     if (direction == 0)
     {
@@ -4438,19 +4594,19 @@ u8 sub_805E338(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805E37C, sub_805E3A0, gUnknown_083753FC);
+fieldmap_object_cb(MovementType_WalkBackAndForth, MovementType_WalkBackAndForth_Callback, gMovementTypeFuncs_WalkBackAndForth);
 
-u8 sub_805E3C0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkBackAndForth_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805E3D4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkBackAndForth_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
-    direction = gUnknown_0836DC09[mapObject->movementType];
+    direction = gInitialMovementTypeFacingDirections[mapObject->movementType];
     if (mapObject->directionSequenceIndex != 0)
     {
         direction = GetOppositeDirection(direction);
@@ -4460,35 +4616,35 @@ u8 sub_805E3D4(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-u8 sub_805E40C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkBackAndForth_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    u8 v0;
-    u8 goSpeed0AnimId;
+    u8 collisionState;
+    u8 movementActionId;
     if (mapObject->directionSequenceIndex && mapObject->initialCoords.x == mapObject->currentCoords.x && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 0;
         FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
     }
-    v0 = sub_805FF20(mapObject, mapObject->movementDirection);
-    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->movementDirection);
-    if (v0 == 1)
+    collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
+    movementActionId = GetGoSpeed0MovementActionId(mapObject->movementDirection);
+    if (collisionState == 1)
     {
-        mapObject->directionSequenceIndex ++;
+        mapObject->directionSequenceIndex++;
         FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
-        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->movementDirection);
-        v0 = sub_805FF20(mapObject, mapObject->movementDirection);
+        movementActionId = GetGoSpeed0MovementActionId(mapObject->movementDirection);
+        collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     }
-    if (v0 != 0)
+    if (collisionState != 0)
     {
-        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->facingDirection);
+        movementActionId = GetStepInPlaceDelay16MovementActionId(mapObject->facingDirection);
     }
-    FieldObjectSetSingleMovement(mapObject, sprite, goSpeed0AnimId);
+    FieldObjectSetSingleMovement(mapObject, sprite, movementActionId);
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 3;
     return 1;
 }
 
-u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkBackAndForth_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -4498,42 +4654,42 @@ u8 sub_805E4C4(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805E4EC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequence_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprite, u8 *directionSequence)
+u8 MoveNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprite, u8 *directionSequence)
 {
-    u8 v0;
-    u8 goSpeed0AnimId;
+    u8 collisionState;
+    u8 movementActionId;
     if (mapObject->directionSequenceIndex == 3 && mapObject->initialCoords.x == mapObject->currentCoords.x && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 0;
     }
     FieldObjectSetDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
-    goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->movementDirection);
-    v0 = sub_805FF20(mapObject, mapObject->movementDirection);
-    if (v0 == 1)
+    movementActionId = GetGoSpeed0MovementActionId(mapObject->movementDirection);
+    collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
+    if (collisionState == 1)
     {
         mapObject->directionSequenceIndex++;
         FieldObjectSetDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
-        goSpeed0AnimId = GetGoSpeed0AnimId(mapObject->movementDirection);
-        v0 = sub_805FF20(mapObject, mapObject->movementDirection);
+        movementActionId = GetGoSpeed0MovementActionId(mapObject->movementDirection);
+        collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     }
-    if (v0 != 0)
+    if (collisionState != 0)
     {
-        goSpeed0AnimId = GetStepInPlaceDelay16AnimId(mapObject->facingDirection);
+        movementActionId = GetStepInPlaceDelay16MovementActionId(mapObject->facingDirection);
     }
-    FieldObjectSetSingleMovement(mapObject, sprite, goSpeed0AnimId);
+    FieldObjectSetSingleMovement(mapObject, sprite, movementActionId);
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 2;
     return 1;
 }
 
-u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequence_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -4543,343 +4699,341 @@ u8 sub_805E5B4(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-fieldmap_object_cb(sub_805E5DC, sub_805E600, gUnknown_0837540C);
+fieldmap_object_cb(MovementType_WalkSequenceUpRightLeftDown, MovementType_WalkSequenceUpRightLeftDown_Callback, gMovementTypeFuncs_WalkSequenceUpRightLeftDown);
 
-u8 sub_805E620(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpRightLeftDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375418, 4);
+    memcpy(directions, gUpRightLeftDownDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E668, sub_805E68C, gUnknown_0837541C);
+fieldmap_object_cb(MovementType_WalkSequenceRightLeftDownUp, MovementType_WalkSequenceRightLeftDownUp_Callback, gMovementTypeFuncs_WalkSequenceRightLeftDownUp);
 
-u8 sub_805E6AC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightLeftDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375428, 4);
+    memcpy(directions, gRightLeftDownUpDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E6F4, sub_805E718, gUnknown_0837542C);
+fieldmap_object_cb(MovementType_WalkSequenceDownUpRightLeft, MovementType_WalkSequenceDownUpRightLeft_Callback, gMovementTypeFuncs_WalkSequenceDownUpRightLeft);
 
-u8 sub_805E738(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownUpRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375438, 4);
+    memcpy(directions, gDownUpRightLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E780, sub_805E7A4, gUnknown_0837543C);
+fieldmap_object_cb(MovementType_WalkSequenceLeftDownUpRight, MovementType_WalkSequenceLeftDownUpRight_Callback, gMovementTypeFuncs_WalkSequenceLeftDownUpRight);
 
-u8 sub_805E7C4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftDownUpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375448, 4);
+    memcpy(directions, gLeftDownUpRightDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
+fieldmap_object_cb(MovementType_WalkSequenceUpLeftRightDown, MovementType_WalkSequenceUpLeftRightDown_Callback, gMovementTypeFuncs_WalkSequenceUpLeftRightDown);
 
-
-fieldmap_object_cb(sub_805E80C, sub_805E830, gUnknown_0837544C);
-
-u8 sub_805E850(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpLeftRightDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375458, 4);
+    memcpy(directions, gUpLeftRightDownDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E898, sub_805E8BC, gUnknown_0837545C);
+fieldmap_object_cb(MovementType_WalkSequenceLeftRightDownUp, MovementType_WalkSequenceLeftRightDownUp_Callback, gMovementTypeFuncs_WalkSequenceLeftRightDownUp);
 
-u8 sub_805E8DC(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftRightDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375468, 4);
+    memcpy(directions, gLeftRightDownUpDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E924, sub_805E948, gUnknown_0837546C);
+fieldmap_object_cb(MovementType_WalkSequenceDownUpLeftRight, MovementType_WalkSequenceDownUpLeftRight_Callback, gMovementTypeFuncs_WalkSequenceDownUpLeftRight);
 
-u8 sub_805E968(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownUpLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375240, 4);
+    memcpy(directions, gStandardDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805E9B0, sub_805E9D4, gUnknown_08375478);
+fieldmap_object_cb(MovementType_WalkSequenceRightDownUpLeft, MovementType_WalkSequenceRightDownUpLeft_Callback, gMovementTypeFuncs_WalkSequenceRightDownUpLeft);
 
-u8 sub_805E9F4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightDownUpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375484, 4);
+    memcpy(directions, gRightDownUpLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EA3C, sub_805EA60, gUnknown_08375488);
+fieldmap_object_cb(MovementType_WalkSequenceLeftUpDownRight, MovementType_WalkSequenceLeftUpDownRight_Callback, gMovementTypeFuncs_WalkSequenceLeftUpDownRight);
 
-u8 sub_805EA80(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftUpDownRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375494, 4);
+    memcpy(directions, gLeftUpDownRightDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EAC8, sub_805EAEC, gUnknown_08375498);
+fieldmap_object_cb(MovementType_WalkSequenceUpDownRightLeft, MovementType_WalkSequenceUpDownRightLeft_Callback, gMovementTypeFuncs_WalkSequenceUpDownRightLeft);
 
-u8 sub_805EB0C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpDownRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754A4, 4);
+    memcpy(directions, gUpDownRightLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EB54, sub_805EB78, gUnknown_083754A8);
+fieldmap_object_cb(MovementType_WalkSequenceRightLeftUpDown, MovementType_WalkSequenceRightLeftUpDown_Callback, gMovementTypeFuncs_WalkSequenceRightLeftUpDown);
 
-u8 sub_805EB98(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightLeftUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754B4, 4);
+    memcpy(directions, gRightLeftUpDownDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EBE0, sub_805EC04, gUnknown_083754B8);
+fieldmap_object_cb(MovementType_WalkSequenceDownRightLeftUp, MovementType_WalkSequenceDownRightLeftUp_Callback, gMovementTypeFuncs_WalkSequenceDownRightLeftUp);
 
-u8 sub_805EC24(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownRightLeftUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754C4, 4);
+    memcpy(directions, gDownRightLeftUpDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EC6C, sub_805EC90, gUnknown_083754C8);
+fieldmap_object_cb(MovementType_WalkSequenceRightUpDownLeft, MovementType_WalkSequenceRightUpDownLeft_Callback, gMovementTypeFuncs_WalkSequenceRightUpDownLeft);
 
-u8 sub_805ECB0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightUpDownLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754D4, 4);
+    memcpy(directions, gRightUpDownLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805ECF8, sub_805ED1C, gUnknown_083754D8);
+fieldmap_object_cb(MovementType_WalkSequenceUpDownLeftRight, MovementType_WalkSequenceUpDownLeftRight_Callback, gMovementTypeFuncs_WalkSequenceUpDownLeftRight);
 
-u8 sub_805ED3C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpDownLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754E4, 4);
+    memcpy(directions, gUpDownLeftRightDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805ED84, sub_805EDA8, gUnknown_083754E8);
+fieldmap_object_cb(MovementType_WalkSequenceLeftRightUpDown, MovementType_WalkSequenceLeftRightUpDown_Callback, gMovementTypeFuncs_WalkSequenceLeftRightUpDown);
 
-u8 sub_805EDC8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftRightUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_083754F4, 4);
+    memcpy(directions, gLeftRightUpDownDirections, 4);
     if (mapObject->directionSequenceIndex == 1 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 2;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EE10, sub_805EE34, gUnknown_083754F8);
+fieldmap_object_cb(MovementType_WalkSequenceDownLeftRightUp, MovementType_WalkSequenceDownLeftRightUp_Callback, gMovementTypeFuncs_WalkSequenceDownLeftRightUp);
 
-u8 sub_805EE54(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownLeftRightUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375504, 4);
+    memcpy(directions, gDownLeftRightUpDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EE9C, sub_805EEC0, gUnknown_08375508);
+fieldmap_object_cb(MovementType_WalkSequenceUpLeftDownRight, MovementType_WalkSequenceUpLeftDownRight_Callback, gMovementTypeFuncs_WalkSequenceUpLeftDownRight);
 
-u8 sub_805EEE0(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpLeftDownRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375514, 4);
+    memcpy(directions, gUpLeftDownRightDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EF28, sub_805EF4C, gUnknown_08375518);
+fieldmap_object_cb(MovementType_WalkSequenceDownRightUpLeft, MovementType_WalkSequenceDownRightUpLeft_Callback, gMovementTypeFuncs_WalkSequenceDownRightUpLeft);
 
-u8 sub_805EF6C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownRightUpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375524, 4);
+    memcpy(directions, gDownRightUpLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805EFB4, sub_805EFD8, gUnknown_08375528);
+fieldmap_object_cb(MovementType_WalkSequenceLeftDownRightUp, MovementType_WalkSequenceLeftDownRightUp_Callback, gMovementTypeFuncs_WalkSequenceLeftDownRightUp);
 
-u8 sub_805EFF8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftDownRightUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375534, 4);
+    memcpy(directions, gLeftDownRightUpDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805F040, sub_805F064, gUnknown_08375538);
+fieldmap_object_cb(MovementType_WalkSequenceRightUpLeftDown, MovementType_WalkSequenceRightUpLeftDown_Callback, gMovementTypeFuncs_WalkSequenceRightUpLeftDown);
 
-u8 sub_805F084(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightUpLeftDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375544, 4);
+    memcpy(directions, gRightUpLeftDownDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805F0CC, sub_805F0F0, gUnknown_08375548);
+fieldmap_object_cb(MovementType_WalkSequenceUpRightDownLeft, MovementType_WalkSequenceUpRightDownLeft_Callback, gMovementTypeFuncs_WalkSequenceUpRightDownLeft);
 
-u8 sub_805F110(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375554, 4);
+    memcpy(directions, gUpRightDownLeftDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805F158, sub_805F17C, gUnknown_08375558);
+fieldmap_object_cb(MovementType_WalkSequenceDownLeftUpRight, MovementType_WalkSequenceDownLeftUpRight_Callback, gMovementTypeFuncs_WalkSequenceDownLeftUpRight);
 
-u8 sub_805F19C(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375564, 4);
+    memcpy(directions, gDownLeftUpRightDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805F1E4, sub_805F208, gUnknown_08375568);
+fieldmap_object_cb(MovementType_WalkSequenceLeftUpRightDown, MovementType_WalkSequenceLeftUpRightDown_Callback, gMovementTypeFuncs_WalkSequenceLeftUpRightDown);
 
-u8 sub_805F228(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375574, 4);
+    memcpy(directions, gLeftUpRightDownDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(sub_805F270, sub_805F294, gUnknown_08375578);
+fieldmap_object_cb(MovementType_WalkSequenceRightDownLeftUp, MovementType_WalkSequenceRightDownLeftUp_Callback, gMovementTypeFuncs_WalkSequenceRightDownLeftUp);
 
-u8 sub_805F2B4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 directions[4];
-    memcpy(directions, gUnknown_08375584, 4);
+    memcpy(directions, gRightDownLeftUpDirections, 4);
     if (mapObject->directionSequenceIndex == 2 && mapObject->initialCoords.x == mapObject->currentCoords.x)
     {
         mapObject->directionSequenceIndex = 3;
     }
-    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, directions);
+    return MoveNextDirectionInSequence(mapObject, sprite, directions);
 };
 
-fieldmap_object_cb(sub_805F2FC, sub_805F320, gUnknown_08375588);
+fieldmap_object_cb(MovementType_CopyPlayer, MovementType_CopyPlayer_Callback, gMovementTypeFuncs_CopyPlayer);
 
-u8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_CopyPlayer_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     if (mapObject->directionSequenceIndex == 0)
     {
-        mapObject->directionSequenceIndex = player_get_direction_lower_nybble();
+        mapObject->directionSequenceIndex = GetPlayerFacingDirection();
     }
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805F364(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_CopyPlayer_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gMapObjects[gPlayerAvatar.mapObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
     {
         return 0;
     }
-    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), NULL);
+    return gCopyPlayerMovementFuncs[PlayerGetCopyableMovement()](mapObject, sprite, GetPlayerMovementDirection(), NULL);
 }
 
-u8 sub_805F3C4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_CopyPlayer_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -4889,161 +5043,161 @@ u8 sub_805F3C4(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-bool8 sub_805F3EC(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, bool8 a3(u8))
+bool8 CopyablePlayerMovement_None(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     return 0;
 }
 
-bool8 sub_805F3F0(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, bool8 a3(u8))
+bool8 CopyablePlayerMovement_FaceDirection(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, a2)));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, playerDirection)));
     mapObject->singleMovementActive = 1;
     sprite->data[1] = 2;
     return 1;
 }
 
-bool8 sub_805F438(struct MapObject *mapObject, struct Sprite *sprite, u8 a2, bool8 a3(u8))
-{
-    u32 direction;
-    s16 x;
-    s16 y;
-
-    direction = a2;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
-    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0AnimId(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (a3 != NULL && !a3(MapGridGetMetatileBehaviorAt(x, y))))
-    {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
-    }
-    mapObject->singleMovementActive = 1;
-    sprite->data[1] = 2;
-    return 1;
-}
-
-bool8 sub_805F4F0(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 CopyablePlayerMovement_GoSpeed0(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetSingleMovement(mapObject, sprite, GetGoSpeed0MovementActionId(direction));
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
+    }
+    mapObject->singleMovementActive = 1;
+    sprite->data[1] = 2;
+    return 1;
+}
+
+bool8 CopyablePlayerMovement_GoSpeed1(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetSingleMovement(mapObject, sprite, sub_8060744(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
     }
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-bool8 sub_805F5A8(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 CopyablePlayerMovement_GoSpeed2(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetSingleMovement(mapObject, sprite, sub_806079C(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
     }
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-bool8 sub_805F660(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 CopyablePlayerMovement_GoSpeed3(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetSingleMovement(mapObject, sprite, sub_80607C8(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
     }
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectSetSingleMovement(mapObject, sprite, sub_806084C(direction));
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-bool8 sub_805F760(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 CopyablePlayerMovement_GoSpeed4(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
     FieldObjectSetSingleMovement(mapObject, sprite, sub_80608A4(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
     }
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-bool8 oac_hopping(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+bool8 CopyablePlayerMovement_Jump(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = state_to_direction(gUnknown_0836DC09[mapObject->movementType], mapObject->directionSequenceIndex, direction);
+    direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     x = mapObject->currentCoords.x;
     y = mapObject->currentCoords.y;
     sub_8060320(direction, &x, &y, 2, 2);
     FieldObjectSetSingleMovement(mapObject, sprite, GetJumpLedgeAnimId(direction));
-    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
-        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(direction));
+        FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(direction));
     }
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
 }
 
-fieldmap_object_cb(sub_805F8E0, sub_805F904, gUnknown_083755C0);
+fieldmap_object_cb(MovementType_CopyPlayerInGrass, sub_805F904, gMovementTypeFuncs_CopyPlayerInGrass);
 
-u8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_CopyPlayerInGrass_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gMapObjects[gPlayerAvatar.mapObjectId].movementActionId == 0xFF || gPlayerAvatar.tileTransitionState == T_TILE_CENTER)
     {
         return 0;
     }
-    return gUnknown_08375594[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), MetatileBehavior_IsPokeGrass);
+    return gCopyPlayerMovementFuncs[PlayerGetCopyableMovement()](mapObject, sprite, GetPlayerMovementDirection(), MetatileBehavior_IsPokeGrass);
 }
 
-u8 sub_805F9F8(struct MapObject *, struct Sprite *);
+static u8 MovementType_Disguise_Callback(struct MapObject *, struct Sprite *);
 
-void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
+void MovementType_TreeDisguise(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
     mapObject = &gMapObjects[sprite->data[0]];
@@ -5054,16 +5208,16 @@ void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
         mapObject->directionSequenceIndex = 1;
         sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805F9F8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-u8 sub_805F9F8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Disguise_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     return 0;
 }
 
-void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
+void MovementType_MountainDisguise(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
     mapObject = &gMapObjects[sprite->data[0]];
@@ -5074,12 +5228,12 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
         mapObject->directionSequenceIndex = 1;
         sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805F9F8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite);
+u8 MovementType_Hidden_Callback(struct MapObject *mapObject, struct Sprite *sprite);
 
-void FieldObjectCB_Hidden1(struct Sprite *sprite)
+void MovementType_Hidden(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
     {
@@ -5088,21 +5242,21 @@ void FieldObjectCB_Hidden1(struct Sprite *sprite)
         sprite->oam.priority = 3;
         sprite->data[7] ++;
     }
-    meta_step(&gMapObjects[sprite->data[0]], sprite, sub_805FAD8);
+    meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Hidden_Callback);
 }
 
-u8 sub_805FAD8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Hidden_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    return gUnknown_083755CC[sprite->data[1]](mapObject, sprite);
+    return gMovementTypeFuncs_Hidden[sprite->data[1]](mapObject, sprite);
 }
 
-u8 sub_805FAF8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Hidden_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     return 0;
 }
 
-u8 sub_805FB04(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkInPlace_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -5111,19 +5265,19 @@ u8 sub_805FB04(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-fieldmap_object_cb(sub_805FB20, sub_805FB44, gUnknown_083755D0);
+fieldmap_object_cb(MovementType_WalkInPlace, MovementType_WalkInPlace_Callback, gMovementTypeFuncs_WalkInPlace);
 
-u8 sub_805FB64(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_WalkInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetStepInPlaceDelay16MovementActionId(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(sub_805FB90, sub_805FBB4, gUnknown_083755D8);
+fieldmap_object_cb(MovementType_JogInPlace, MovementType_JogInPlace_Callback, gMovementTypeFuncs_JogInPlace);
 
-u8 sub_805FBD4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_JogInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->facingDirection));
@@ -5131,9 +5285,9 @@ u8 sub_805FBD4(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805FC00, sub_805FC24, gUnknown_083755E0);
+fieldmap_object_cb(MovementType_RunInPlace, MovementType_RunInPlace_Callback, gMovementTypeFuncs_RunInPlace);
 
-u8 sub_805FC44(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_RunInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->facingDirection));
@@ -5141,18 +5295,18 @@ u8 sub_805FC44(struct MapObject *mapObject, struct Sprite *sprite)
     return 1;
 }
 
-fieldmap_object_cb(sub_805FC70, sub_805FC94, gUnknown_083755E8);
+fieldmap_object_cb(MovementType_Invisible, MovementType_Invisible_Callback, gMovementTypeFuncs_Invisible);
 
-u8 sub_805FCB4(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Invisible_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     npc_reset(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionAnimId(mapObject->facingDirection));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementActionId(mapObject->facingDirection));
     mapObject->invisible = 1;
     sprite->data[1] = 1;
     return 1;
 }
 
-u8 sub_805FCE8(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Invisible_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecSingleMovementAction(mapObject, sprite))
     {
@@ -5162,13 +5316,11 @@ u8 sub_805FCE8(struct MapObject *mapObject, struct Sprite *sprite)
     return 0;
 }
 
-u8 sub_805FD08(struct MapObject *mapObject, struct Sprite *sprite)
+u8 MovementType_Invisible_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->singleMovementActive = 0;
     return 0;
 }
-
-void sub_805FC70(struct Sprite *sprite);
 
 void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5306,7 +5458,7 @@ void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType)
 {
     mapObject->movementType = movementType;
     mapObject->directionSequenceIndex = 0;
-    mapObject->playerMovementActionId = 0;
+    mapObject->playerCopyableMovement = 0;
     gSprites[mapObject->spriteId].callback = sMovementTypeCallbacks[movementType];
     gSprites[mapObject->spriteId].data[1] = 0;
 }
@@ -5316,21 +5468,21 @@ u8 npc_running_behaviour_by_direction(u8 direction)
     return gUnknown_0837567B[direction];
 }
 
-u8 sub_805FF20(struct MapObject *mapObject, u8 direction)
+u8 GetCollisionInDirection(struct MapObject *mapObject, u8 direction)
 {
     s16 x;
     s16 y;
     x = mapObject->currentCoords.x;
     y = mapObject->currentCoords.y;
     MoveCoords(direction, &x, &y);
-    return npc_block_way(mapObject, x, y, direction);
+    return GetCollisionAtCoords(mapObject, x, y, direction);
 }
 
 bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y);
 static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
 
-u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
+u8 GetCollisionAtCoords(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
 {
     u8 direction;
     direction = dirn;
@@ -5656,9 +5808,9 @@ u8 name(u32 idx)\
     return animIds[direction];\
 }
 
-dirn_to_anim(GetFaceDirectionAnimId, gUnknown_083756C8)
+dirn_to_anim(GetFaceDirectionMovementActionId, gUnknown_083756C8)
 dirn_to_anim(GetSimpleGoAnimId, gUnknown_083756CD)
-dirn_to_anim(GetGoSpeed0AnimId, gUnknown_083756D2)
+dirn_to_anim(GetGoSpeed0MovementActionId, gUnknown_083756D2)
 dirn_to_anim(sub_8060744, gUnknown_083756D7)
 dirn_to_anim(d2s_08064034, gUnknown_083756DC)
 dirn_to_anim(sub_806079C, gUnknown_083756E1)
@@ -5670,13 +5822,13 @@ dirn_to_anim(sub_8060878, gUnknown_083756FA)
 dirn_to_anim(sub_80608A4, gUnknown_083756FF)
 dirn_to_anim(sub_80608D0, gUnknown_08375704)
 dirn_to_anim(GetStepInPlaceDelay32AnimId, gUnknown_08375709)
-dirn_to_anim(GetStepInPlaceDelay16AnimId, gUnknown_0837570E)
+dirn_to_anim(GetStepInPlaceDelay16MovementActionId, gUnknown_0837570E)
 dirn_to_anim(GetStepInPlaceDelay8AnimId, gUnknown_08375713)
 dirn_to_anim(GetStepInPlaceDelay4AnimId, gUnknown_08375718)
 
 u8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
 {
-    return FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
+    return FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(GetOppositeDirection(direction)));
 }
 
 u8 sub_80609D8(u8 index)
@@ -7176,7 +7328,7 @@ bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_80625B0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    an_look_any(mapObject, sprite, gUnknown_0836DC09[mapObject->movementType]);
+    an_look_any(mapObject, sprite, gInitialMovementTypeFacingDirections[mapObject->movementType]);
     return TRUE;
 }
 
@@ -7295,7 +7447,7 @@ bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064864(sprite))
     {
-        sub_8064820(sprite, 0x20);
+        SetMovementDelay(sprite, 0x20);
         sprite->data[2] = 2;
     }
     return FALSE;
@@ -7304,7 +7456,7 @@ bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible ^= 1;
-    if (sub_8064824(sprite))
+    if (WaitForMovementDelay(sprite))
     {
         mapObject->invisible = 1;
         sprite->data[2] = 3;
@@ -7323,7 +7475,7 @@ bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8064864(sprite))
     {
-        sub_8064820(sprite, 0x20);
+        SetMovementDelay(sprite, 0x20);
         sprite->data[2] = 2;
     }
     return FALSE;
@@ -7332,7 +7484,7 @@ bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible ^= 1;
-    if (sub_8064824(sprite))
+    if (WaitForMovementDelay(sprite))
     {
         mapObject->invisible = 1;
         sprite->data[2] = 3;
@@ -9260,12 +9412,12 @@ u8 sub_806478C(struct Sprite *sprite)
     return v2;
 }
 
-void sub_8064820(struct Sprite *sprite, s16 a2)
+static void SetMovementDelay(struct Sprite *sprite, s16 a2)
 {
     sprite->data[3] = a2;
 }
 
-bool8 sub_8064824(struct Sprite *sprite)
+static bool8 WaitForMovementDelay(struct Sprite *sprite)
 {
     sprite->data[3]--;
 

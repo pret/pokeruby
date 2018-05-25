@@ -196,7 +196,7 @@ static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
     sub_805A1B8,
 };
 
-fieldmap_object_empty_callback(sub_80587B4, sub_80587D8);
+fieldmap_object_empty_callback(MovementType_None2, MovementType_None2_Callback);
 
 void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
@@ -457,7 +457,7 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
         gPlayerAvatar.runningState = NOT_MOVING;
         return 0;
     }
-    else if (direction != player_get_direction_upper_nybble() && gPlayerAvatar.runningState != MOVING)
+    else if (direction != GetPlayerMovementDirection() && gPlayerAvatar.runningState != MOVING)
     {
         gPlayerAvatar.runningState = TURN_DIRECTION;
         return 1;
@@ -471,7 +471,7 @@ static u8 CheckMovementInputNotOnBike(u8 direction)
 
 void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys)
 {
-    PlayerFaceDirection(player_get_direction_lower_nybble());
+    PlayerFaceDirection(GetPlayerFacingDirection());
 }
 
 void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys)
@@ -527,7 +527,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 x, s16 y, u8 direction,
 {
     u8 collision;
 
-    collision = npc_block_way(a, x, y, direction);
+    collision = GetCollisionAtCoords(a, x, y, direction);
     if (collision == 3 && sub_8058EF0(x, y, direction))
         return 5;
     if (ShouldJumpLedge(x, y, direction))
@@ -583,7 +583,7 @@ static u8 sub_8058F6C(s16 a, s16 b, u8 c)
                 a = gMapObjects[mapObjectId].currentCoords.x;
                 b = gMapObjects[mapObjectId].currentCoords.y;
                 MoveCoords(c, &a, &b);
-                if (npc_block_way(&gMapObjects[mapObjectId], a, b, c) == 0
+                if (GetCollisionAtCoords(&gMapObjects[mapObjectId], a, b, c) == 0
                  && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(a, b)) == 0)
                 {
                     StartStrengthAnim(mapObjectId, c);
@@ -747,14 +747,14 @@ static bool8 PlayerCheckIfAnimFinishedOrInactive(void)
     return FieldObjectCheckHeldMovementStatus(&gMapObjects[gPlayerAvatar.mapObjectId]);
 }
 
-static void player_set_x22(u8 a)
+static void PlayerSetCopyableMovement(u8 a)
 {
-    gMapObjects[gPlayerAvatar.mapObjectId].playerMovementActionId = a;
+    gMapObjects[gPlayerAvatar.mapObjectId].playerCopyableMovement = a;
 }
 
-u8 player_get_x22(void)
+u8 PlayerGetCopyableMovement(void)
 {
-    return gMapObjects[gPlayerAvatar.mapObjectId].playerMovementActionId;
+    return gMapObjects[gPlayerAvatar.mapObjectId].playerCopyableMovement;
 }
 
 static void sub_8059348(u8 a)
@@ -762,11 +762,11 @@ static void sub_8059348(u8 a)
     FieldObjectForceSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], a);
 }
 
-void PlayerSetAnimId(u8 movementActionId, u8 b)
+void PlayerSetAnimId(u8 movementActionId, u8 copyableMovement)
 {
     if (!PlayerIsAnimActive())
     {
-        player_set_x22(b);
+        PlayerSetCopyableMovement(copyableMovement);
         FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], movementActionId);
     }
 }
@@ -774,7 +774,7 @@ void PlayerSetAnimId(u8 movementActionId, u8 b)
 // normal speed (1 speed)
 void PlayerGoSpeed1(u8 a)
 {
-    PlayerSetAnimId(GetGoSpeed0AnimId(a), 2);
+    PlayerSetAnimId(GetGoSpeed0MovementActionId(a), 2);
 }
 
 // fast speed (2 speed)
@@ -802,7 +802,7 @@ void sub_805940C(u8 a)
 void PlayerOnBikeCollide(u8 a)
 {
     PlayCollisionSoundIfNotFacingWarp(a);
-    PlayerSetAnimId(GetStepInPlaceDelay16AnimId(a), 2);
+    PlayerSetAnimId(GetStepInPlaceDelay16MovementActionId(a), 2);
 }
 
 static void PlayerNotOnBikeCollide(u8 a)
@@ -813,7 +813,7 @@ static void PlayerNotOnBikeCollide(u8 a)
 
 void PlayerFaceDirection(u8 direction)
 {
-    PlayerSetAnimId(GetFaceDirectionAnimId(direction), 1);
+    PlayerSetAnimId(GetFaceDirectionMovementActionId(direction), 1);
 }
 
 void PlayerTurnInPlace(u8 direction)
@@ -832,7 +832,7 @@ void sub_80594C0(void)
     if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
     {
         if (player_should_look_direction_be_enforced_upon_movement())
-            sub_8059348(GetFaceDirectionAnimId(gMapObjects[gPlayerAvatar.mapObjectId].facingDirection));
+            sub_8059348(GetFaceDirectionMovementActionId(gMapObjects[gPlayerAvatar.mapObjectId].facingDirection));
     }
 }
 
@@ -925,7 +925,7 @@ void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y)
 {
     *x = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.x;
     *y = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.y;
-    MoveCoords(player_get_direction_lower_nybble(), x, y);
+    MoveCoords(GetPlayerFacingDirection(), x, y);
 }
 
 void PlayerGetDestCoords(s16 *x, s16 *y)
@@ -934,12 +934,12 @@ void PlayerGetDestCoords(s16 *x, s16 *y)
     *y = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.y;
 }
 
-u8 player_get_direction_lower_nybble(void)
+u8 GetPlayerFacingDirection(void)
 {
     return gMapObjects[gPlayerAvatar.mapObjectId].facingDirection;
 }
 
-u8 player_get_direction_upper_nybble(void)
+u8 GetPlayerMovementDirection(void)
 {
     return gMapObjects[gPlayerAvatar.mapObjectId].movementDirection;
 }
@@ -1057,7 +1057,7 @@ bool8 PartyHasMonWithSurf(void)
 
 bool8 IsPlayerSurfingNorth(void)
 {
-    if (player_get_direction_upper_nybble() == DIR_NORTH && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+    if (GetPlayerMovementDirection() == DIR_NORTH && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return TRUE;
     else
         return FALSE;
@@ -1070,7 +1070,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
     s16 y = playerMapObj->currentCoords.y;
 
     MoveCoords(playerMapObj->facingDirection, &x, &y);
-    if (npc_block_way(playerMapObj, x, y, playerMapObj->facingDirection) == 3 && PlayerGetZCoord() == 3
+    if (GetCollisionAtCoords(playerMapObj, x, y, playerMapObj->facingDirection) == 3 && PlayerGetZCoord() == 3
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
         return TRUE;
     else
@@ -1242,7 +1242,7 @@ u8 sub_8059EA4(struct Task *task, struct MapObject *playerObject, struct MapObje
     {
         FieldObjectClearHeldMovementIfFinished(playerObject);
         FieldObjectClearHeldMovementIfFinished(strengthObject);
-        FieldObjectSetHeldMovement(playerObject, GetStepInPlaceDelay16AnimId((u8)task->data[2]));
+        FieldObjectSetHeldMovement(playerObject, GetStepInPlaceDelay16MovementActionId((u8)task->data[2]));
         FieldObjectSetHeldMovement(strengthObject, GetSimpleGoAnimId((u8)task->data[2]));
         gFieldEffectArguments[0] = strengthObject->currentCoords.x;
         gFieldEffectArguments[1] = strengthObject->currentCoords.y;
@@ -1338,7 +1338,7 @@ u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
     {
         u8 direction;
 
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(direction = directions[mapObject->movementDirection - 1]));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(direction = directions[mapObject->movementDirection - 1]));
         if (direction == (u8)task->data[1])
             task->data[2]++;
         task->data[0]++;
@@ -1413,7 +1413,7 @@ static void sub_805A2D0(u8 taskId)
     if (FieldObjectClearHeldMovementIfFinished(playerMapObj))
     {
         sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
-        FieldObjectSetHeldMovement(playerMapObj, GetFaceDirectionAnimId(playerMapObj->facingDirection));
+        FieldObjectSetHeldMovement(playerMapObj, GetFaceDirectionMovementActionId(playerMapObj->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
         DestroySprite(&gSprites[playerMapObj->fieldEffectSpriteId]);
@@ -1574,7 +1574,7 @@ u8 Fishing6(struct Task *task)
     if (!DoesCurrentMapHaveFishingMons() || (Random() & 1))
         task->tStep = FISHING_NO_BITE;
     else
-        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FE08(player_get_direction_lower_nybble()));
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FE08(GetPlayerFacingDirection()));
     return 1;
 }
 
@@ -1677,7 +1677,7 @@ u8 Fishing11(struct Task *task)
 u8 Fishing12(struct Task *task)
 {
     sub_805A954();
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(GetPlayerFacingDirection()));
     MenuPrintMessageDefaultCoords(gOtherText_NotEvenANibble);
     task->tStep = FISHING_SHOW_RESULT;
     return 1;
@@ -1687,7 +1687,7 @@ u8 Fishing12(struct Task *task)
 u8 Fishing13(struct Task *task)
 {
     sub_805A954();
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(GetPlayerFacingDirection()));
     MenuPrintMessageDefaultCoords(gOtherText_ItGotAway);
     task->tStep++;
     return 1;
@@ -1762,7 +1762,7 @@ static void sub_805A954(void)
     if (animType == 1 || animType == 2 || animType == 3)
     {
         playerSprite->pos2.x = 8;
-        if (player_get_direction_lower_nybble() == 3)
+        if (GetPlayerFacingDirection() == 3)
             playerSprite->pos2.x = -8;
     }
     if (animType == 5)

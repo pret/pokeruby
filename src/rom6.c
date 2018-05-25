@@ -93,7 +93,7 @@ static void sub_810B428(u8 taskId)
 {
     if (!FieldEffectActiveListContains(6))
     {
-        gFieldEffectArguments[1] = player_get_direction_lower_nybble();
+        gFieldEffectArguments[1] = GetPlayerFacingDirection();
         if (gFieldEffectArguments[1] == 1)
             gFieldEffectArguments[2] = 0;
         if (gFieldEffectArguments[1] == 2)

@@ -1118,7 +1118,7 @@ bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
     if (gMapObjects[gSelectedMapObject].active)
     {
         FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject],
-          player_get_direction_lower_nybble());
+          GetPlayerFacingDirection());
     }
     return FALSE;
 }

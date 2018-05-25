@@ -19,8 +19,8 @@ static void Task_WateringBerryTreeAnim_1(u8 taskId)
     if (!FieldObjectIsMovementOverridden(playerMapObj)
         || FieldObjectClearHeldMovementIfFinished(playerMapObj))
     {
-        sub_8059D08(player_get_direction_lower_nybble());
-        FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16AnimId(player_get_direction_lower_nybble()));
+        sub_8059D08(GetPlayerFacingDirection());
+        FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16MovementActionId(GetPlayerFacingDirection()));
         gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
@@ -34,7 +34,7 @@ static void Task_WateringBerryTreeAnim_2(u8 taskId)
         
         if (value < 10)
         {
-            FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16AnimId(player_get_direction_lower_nybble()));
+            FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16MovementActionId(GetPlayerFacingDirection()));
         }
         else
         {

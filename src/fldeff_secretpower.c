@@ -252,7 +252,7 @@ void Debug_SetUpFieldMove_SecretPower(void)
 
     CheckPlayerHasSecretBase();
 
-    if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
+    if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
     {
         ScriptContext2_Disable();
         return;
@@ -291,7 +291,7 @@ bool8 SetUpFieldMove_SecretPower(void)
     u8 behavior;
 
     CheckPlayerHasSecretBase();
-    if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
+    if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
         return FALSE;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);

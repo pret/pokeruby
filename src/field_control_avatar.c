@@ -197,7 +197,7 @@ int sub_8068024(struct FieldInput *input)
     u8 r6;
     u16 r4;
 
-    r6 = player_get_direction_lower_nybble();
+    r6 = GetPlayerFacingDirection();
     player_get_pos_to_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
 #if DEBUG
@@ -916,7 +916,7 @@ u8 *GetFieldObjectScriptPointerPlayerFacing(void)
     u8 r4;
     struct MapPosition position;
 
-    r4 = player_get_direction_upper_nybble();
+    r4 = GetPlayerMovementDirection();
     player_get_next_pos_and_height(&position);
     return sub_8068364(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), r4);
 }
@@ -925,7 +925,7 @@ int SetCableClubWarp(void)
 {
     struct MapPosition position;
 
-    player_get_direction_upper_nybble();  //unnecessary
+    GetPlayerMovementDirection();  //unnecessary
     player_get_pos_to_and_height(&position);
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
     sub_8068C30(&gMapHeader, map_warp_check_packed(&gMapHeader, &position), &position);

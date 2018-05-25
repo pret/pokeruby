@@ -1180,7 +1180,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
     CameraObjectReset2();
     gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
     gPlayerAvatar.preventStep = TRUE;
-    FieldObjectSetHeldMovement(playerObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
+    FieldObjectSetHeldMovement(playerObject, GetFaceDirectionMovementActionId(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
@@ -1330,7 +1330,7 @@ bool8 sub_8086AC0(struct Task *task)
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
     {
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(player_get_direction_lower_nybble()));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(GetPlayerFacingDirection()));
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -1447,7 +1447,7 @@ bool8 sub_8086CF4(struct Task *task)
     u8 behavior;
     CameraObjectReset2();
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(DIR_EAST));
+    FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     task->data[0]++;
@@ -1545,7 +1545,7 @@ bool8 sub_8086ED4(struct Task *task)
     {
         CameraObjectReset1();
         ScriptContext2_Disable();
-        FieldObjectSetHeldMovement(mapObject, GetGoSpeed0AnimId(DIR_EAST));
+        FieldObjectSetHeldMovement(mapObject, GetGoSpeed0MovementActionId(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_8086CBC));
     }
     return FALSE;
@@ -1986,7 +1986,7 @@ void sub_80878F4(struct Task *task)
 {
     task->data[0]++;
     task->data[14] = 64;
-    task->data[15] = player_get_direction_lower_nybble();
+    task->data[15] = GetPlayerFacingDirection();
 }
 
 void sub_8087914(struct Task *task)
@@ -2011,7 +2011,7 @@ void sub_8087914(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_80878C4));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(unknown_0839F380[mapObject->facingDirection]));
+            FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(unknown_0839F380[mapObject->facingDirection]));
             if (task->data[2] < 12)
             {
                 task->data[2]++;
@@ -2049,7 +2049,7 @@ void sub_8087AA4(struct Task *task)
     if (IsWeatherNotFadingIn())
     {
         task->data[0]++;
-        task->data[15] = player_get_direction_lower_nybble();
+        task->data[15] = GetPlayerFacingDirection();
     }
 }
 
@@ -2063,7 +2063,7 @@ void sub_8087AC8(struct Task *task)
         {
             return;
         }
-        if (task->data[2] >= 32 && task->data[15] == player_get_direction_lower_nybble())
+        if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
             mapObject->invisible = 0;
             ScriptContext2_Disable();
@@ -2071,7 +2071,7 @@ void sub_8087AC8(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
             return;
         }
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(unknown_0839F380[mapObject->facingDirection]));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(unknown_0839F380[mapObject->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
@@ -2110,7 +2110,7 @@ static void TeleportFieldEffectTask1(struct Task *task)
     ScriptContext2_Enable();
     FreezeMapObjects();
     CameraObjectReset2();
-    task->data[15] = player_get_direction_lower_nybble();
+    task->data[15] = GetPlayerFacingDirection();
     task->data[0]++;
 }
 
@@ -2213,7 +2213,7 @@ void sub_8087E4C(struct Task *task)
         task->data[1] = 8;
         task->data[2] = 1;
         task->data[14] = sprite->subspriteMode;
-        task->data[15] = player_get_direction_lower_nybble();
+        task->data[15] = GetPlayerFacingDirection();
         PlaySE(SE_TK_WARPIN);
     }
 }
@@ -2878,7 +2878,7 @@ void sub_8088AF4(struct Task *task)
     {
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionAnimId(mapObject->movementDirection));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(mapObject->movementDirection));
         sub_8127ED0(mapObject->fieldEffectSpriteId, 1);
         UnfreezeMapObjects();
         ScriptContext2_Disable();

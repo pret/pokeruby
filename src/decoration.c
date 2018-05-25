@@ -3760,7 +3760,7 @@ bool8 sub_8100D38(u8 taskId)
 
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
-    player_get_direction_lower_nybble();
+    GetPlayerFacingDirection();
     Menu_EraseWindowRect(0, 0, 29, 19);
     gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
     sub_81016C8();

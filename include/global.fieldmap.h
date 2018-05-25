@@ -233,7 +233,7 @@ struct MapObject
     /*0x1F*/ u8 previousMetatileBehavior;
     /*0x20*/ u8 previousMovementDirection;
     /*0x21*/ u8 directionSequenceIndex;
-    /*0x22*/ u8 playerMovementActionId;
+    /*0x22*/ u8 playerCopyableMovement; // used as an index to gCopyPlayerMovementFuncs for the "copy player" movement types
     /*size = 0x24*/
 };
 

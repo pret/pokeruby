@@ -330,7 +330,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 i;
 
     myLinkPlayerNumber = sub_8008218();
-    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_WEST:
@@ -795,7 +795,7 @@ static void PCTurnOffEffect_0(struct Task *task)
     if (task->data[3] == 6)
     {
         task->data[3] = 0;
-        playerDirectionLowerNybble = player_get_direction_lower_nybble();
+        playerDirectionLowerNybble = GetPlayerFacingDirection();
         switch (playerDirectionLowerNybble)
         {
             case DIR_NORTH:
@@ -868,7 +868,7 @@ static void PCTurnOffEffect(void)
     s8 dx = 0;
     s8 dy = 0;
     u16 tileId = 0;
-    u8 playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    u8 playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_NORTH:

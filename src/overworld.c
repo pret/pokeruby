@@ -663,7 +663,7 @@ void player_avatar_init_params_reset(void)
 
 void walkrun_find_lowest_active_bit_in_bitfield(void)
 {
-    gUnknown_02029810.player_field_1 = player_get_direction_lower_nybble();
+    gUnknown_02029810.player_field_1 = GetPlayerFacingDirection();
 
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
         gUnknown_02029810.player_field_0 = 2;

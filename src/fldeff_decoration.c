@@ -164,7 +164,7 @@ static void sub_80C6A14(u8 taskId)
 
 void sub_80C6A54(s16 x, s16 y)
 {
-    u8 dir = player_get_direction_lower_nybble();
+    u8 dir = GetPlayerFacingDirection();
     if (dir == DIR_SOUTH)
     {
         sub_80C69C4(x, y);
@@ -261,7 +261,7 @@ bool8 FldEff_SandPillar(void)
     gFieldEffectArguments[5] = x;
     gFieldEffectArguments[6] = y;
 
-    switch (player_get_direction_lower_nybble())
+    switch (GetPlayerFacingDirection())
     {
     case DIR_SOUTH:
         CreateSprite(

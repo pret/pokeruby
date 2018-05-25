@@ -14,7 +14,7 @@ enum {
     PLAYER_AVATAR_STATE_WATERING,
 };
 
-// sub_80587B4
+// MovementType_None2
 void player_step(u8 a, u16 b, u16 c);
 u8 ForcedMovement_None(void);
 u8 ForcedMovement_Slip(void);
@@ -46,7 +46,7 @@ void PlayerAvatarTransition_Surfing(struct MapObject *a);
 void PlayerAvatarTransition_Underwater(struct MapObject *a);
 void sub_80591F4(struct MapObject *a);
 void sub_8059204(void);
-u8 player_get_x22(void);
+u8 PlayerGetCopyableMovement(void);
 void PlayerSetAnimId(u8 a, u8 b);
 void PlayerGoSpeed1(u8 a);
 void PlayerGoSpeed2(u8 a);
@@ -71,8 +71,8 @@ void sub_8059618(u8 a);
 void sub_8059630(u8 a);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y);
 void PlayerGetDestCoords(s16 *, s16 *);
-u8 player_get_direction_lower_nybble(void);
-u8 player_get_direction_upper_nybble(void);
+u8 GetPlayerFacingDirection(void);
+u8 GetPlayerMovementDirection(void);
 u8 PlayerGetZCoord(void);
 u8 TestPlayerAvatarFlags(u8);
 u8 sub_80597D0(void);

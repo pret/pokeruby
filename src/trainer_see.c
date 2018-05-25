@@ -176,7 +176,7 @@ static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 a
     trainerObj->range.as_nybbles.x = 0;
     trainerObj->range.as_nybbles.y = 0;
 
-    collision = npc_block_way((struct MapObject *)trainerObj, x, y, direction);
+    collision = GetCollisionAtCoords((struct MapObject *)trainerObj, x, y, direction);
 
     trainerObj->range.as_nybbles.x = unk19_temp;
     trainerObj->range.as_nybbles.y = unk19b_temp;
@@ -265,7 +265,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
 
     FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
-    direction = GetFaceDirectionAnimId(trainerObj->facingDirection);
+    direction = GetFaceDirectionMovementActionId(trainerObj->facingDirection);
     FieldObjectSetHeldMovement(trainerObj, direction);
     task->data[0]++;
     return TRUE;
@@ -294,7 +294,7 @@ static bool8 sub_808441C(u8 taskId, struct Task *task, struct MapObject *trainer
     {
         if (task->data[3])
         {
-            FieldObjectSetHeldMovement(trainerObj, GetGoSpeed0AnimId(trainerObj->facingDirection));
+            FieldObjectSetHeldMovement(trainerObj, GetGoSpeed0MovementActionId(trainerObj->facingDirection));
             task->data[3]--;
         }
         else
@@ -322,7 +322,7 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
         return FALSE;
 
     sub_80597E8();
-    FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionAnimId(GetOppositeDirection(trainerObj->facingDirection)));
+    FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionMovementActionId(GetOppositeDirection(trainerObj->facingDirection)));
     task->data[0]++;
     return FALSE;
 }
