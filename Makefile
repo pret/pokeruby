@@ -1,4 +1,4 @@
-
+include $(DEVKITARM)/base_tools
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -11,11 +11,11 @@ endif
 #### Tools ####
 
 SHELL     := /bin/bash -o pipefail
-AS        := $(DEVKITARM)/bin/arm-none-eabi-as
+AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc$(EXE)
-CPP       := $(DEVKITARM)/bin/arm-none-eabi-cpp
-LD        := $(DEVKITARM)/bin/arm-none-eabi-ld
-OBJCOPY   := $(DEVKITARM)/bin/arm-none-eabi-objcopy
+CPP       := $(PREFIX)cpp
+LD        := $(PREFIX)ld
+OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
