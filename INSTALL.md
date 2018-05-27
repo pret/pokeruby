@@ -62,8 +62,10 @@ Run the Cygwin setup and leave the default settings. At "Select Packages", set t
 
 In the **Cygwin terminal**, enter these commands:
 
+	export DEVKITPRO=/cygdrive/c/devkitpro
+	echo export DEVKITPRO=$DEVKITPRO >> ~/.bashrc
 	export DEVKITARM=/cygdrive/c/devkitpro/devkitARM
-	echo export DEVKITARM=/cygdrive/c/devkitpro/devkitARM >> ~/.bashrc
+	echo export DEVKITARM=$DEVKITARM >> ~/.bashrc
 
 	git clone https://github.com/pret/pokeruby
 	git clone https://github.com/pret/agbcc
