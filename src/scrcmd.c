@@ -1156,10 +1156,10 @@ bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
 
 bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
+    u8 mapObjectId = ScriptReadByte(ctx);
     u8 direction = ScriptReadByte(ctx);
 
-    sub_8064990(v1, direction);
+    TurnMapObject(mapObjectId, direction);
     return FALSE;
 }
 

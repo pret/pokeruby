@@ -20,7 +20,7 @@ static void Task_WateringBerryTreeAnim_1(u8 taskId)
         || FieldObjectClearHeldMovementIfFinished(playerMapObj))
     {
         sub_8059D08(GetPlayerFacingDirection());
-        FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16MovementActionId(GetPlayerFacingDirection()));
+        FieldObjectSetHeldMovement(playerMapObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         gTasks[taskId].func = Task_WateringBerryTreeAnim_2;
     }
 }
@@ -34,7 +34,7 @@ static void Task_WateringBerryTreeAnim_2(u8 taskId)
         
         if (value < 10)
         {
-            FieldObjectSetHeldMovement(playerMapObj, GetStepInPlaceDelay16MovementActionId(GetPlayerFacingDirection()));
+            FieldObjectSetHeldMovement(playerMapObj, GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
         }
         else
         {

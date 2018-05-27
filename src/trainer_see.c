@@ -265,7 +265,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
 
     FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
-    direction = GetFaceDirectionMovementActionId(trainerObj->facingDirection);
+    direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
     FieldObjectSetHeldMovement(trainerObj, direction);
     task->data[0]++;
     return TRUE;
@@ -294,7 +294,7 @@ static bool8 sub_808441C(u8 taskId, struct Task *task, struct MapObject *trainer
     {
         if (task->data[3])
         {
-            FieldObjectSetHeldMovement(trainerObj, GetGoSpeed0MovementActionId(trainerObj->facingDirection));
+            FieldObjectSetHeldMovement(trainerObj, GetWalkNormalMovementAction(trainerObj->facingDirection));
             task->data[3]--;
         }
         else
@@ -322,7 +322,7 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
         return FALSE;
 
     sub_80597E8();
-    FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionMovementActionId(GetOppositeDirection(trainerObj->facingDirection)));
+    FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], GetFaceDirectionMovementAction(GetOppositeDirection(trainerObj->facingDirection)));
     task->data[0]++;
     return FALSE;
 }

@@ -1180,7 +1180,7 @@ bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
     CameraObjectReset2();
     gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
     gPlayerAvatar.preventStep = TRUE;
-    FieldObjectSetHeldMovement(playerObject, GetFaceDirectionMovementActionId(GetPlayerFacingDirection()));
+    FieldObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
@@ -1330,7 +1330,7 @@ bool8 sub_8086AC0(struct Task *task)
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
     {
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(GetPlayerFacingDirection()));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -1447,7 +1447,7 @@ bool8 sub_8086CF4(struct Task *task)
     u8 behavior;
     CameraObjectReset2();
     mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(DIR_EAST));
+    FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     task->data[0]++;
@@ -1545,7 +1545,7 @@ bool8 sub_8086ED4(struct Task *task)
     {
         CameraObjectReset1();
         ScriptContext2_Disable();
-        FieldObjectSetHeldMovement(mapObject, GetGoSpeed0MovementActionId(DIR_EAST));
+        FieldObjectSetHeldMovement(mapObject, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_8086CBC));
     }
     return FALSE;
@@ -1600,7 +1600,7 @@ bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct MapObject 
 
 bool8 sub_8087030(struct Task *task, struct MapObject *mapObject)
 {
-    FieldObjectSetHeldMovement(mapObject, GetSimpleGoAnimId(DIR_NORTH));
+    FieldObjectSetHeldMovement(mapObject, GetWalkSlowMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
@@ -1909,7 +1909,7 @@ bool8 sub_80876F8(struct Task *task, struct MapObject *mapObject, struct Sprite 
         } else
         {
             task->data[1]++;
-            FieldObjectSetHeldMovement(mapObject, GetStepInPlaceDelay4AnimId(mapObject->facingDirection));
+            FieldObjectSetHeldMovement(mapObject, GetWalkInPlaceFastestMovementAction(mapObject->facingDirection));
             PlaySE(SE_FU_ZUZUZU);
         }
     }
@@ -2011,7 +2011,7 @@ void sub_8087914(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_80878C4));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(unknown_0839F380[mapObject->facingDirection]));
+            FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(unknown_0839F380[mapObject->facingDirection]));
             if (task->data[2] < 12)
             {
                 task->data[2]++;
@@ -2071,7 +2071,7 @@ void sub_8087AC8(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
             return;
         }
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(unknown_0839F380[mapObject->facingDirection]));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(unknown_0839F380[mapObject->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
@@ -2878,7 +2878,7 @@ void sub_8088AF4(struct Task *task)
     {
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementActionId(mapObject->movementDirection));
+        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(mapObject->movementDirection));
         sub_8127ED0(mapObject->fieldEffectSpriteId, 1);
         UnfreezeMapObjects();
         ScriptContext2_Disable();

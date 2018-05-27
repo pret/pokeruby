@@ -313,7 +313,7 @@ void unc_grass_normal(struct Sprite *sprite)
         {
             metatileBehavior = 4;
         }
-        sub_806487C(sprite, 0);
+        UpdateFieldSpriteVisibility(sprite, 0);
         sub_812882C(sprite, sprite->data[0], metatileBehavior);
     }
 }
@@ -417,7 +417,7 @@ void unc_grass_tall(struct Sprite *sprite)
         {
             sprite->data[7] = TRUE;
         }
-        sub_806487C(sprite, 0);
+        UpdateFieldSpriteVisibility(sprite, 0);
         sub_812882C(sprite, sprite->data[0], 0);
     }
 }
@@ -496,7 +496,7 @@ void sub_8127334(struct Sprite *sprite)
         sprite->pos2.y = (graphicsInfo->height >> 1) - 8;
         sprite->subpriority = linkedSprite->subpriority - 1;
         sprite->oam.priority = linkedSprite->oam.priority;
-        sub_806487C(sprite, linkedSprite->invisible);
+        UpdateFieldSpriteVisibility(sprite, linkedSprite->invisible);
     }
 }
 
@@ -570,14 +570,14 @@ static void sub_81275A0(struct Sprite *sprite)
     {
         sprite->data[0] = 1;
     }
-    sub_806487C(sprite, FALSE);
+    UpdateFieldSpriteVisibility(sprite, FALSE);
 }
 
 static void sub_81275C4(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
     sprite->data[1] ++;
-    sub_806487C(sprite, sprite->invisible);
+    UpdateFieldSpriteVisibility(sprite, sprite->invisible);
     if (sprite->data[1] > 56)
     {
         FieldEffectStop(sprite, sprite->data[7]);
@@ -624,7 +624,7 @@ void sub_81276B4(struct Sprite *sprite)
     {
         sprite->pos1.x = gSprites[gMapObjects[mapObjectId].spriteId].pos1.x;
         sprite->pos1.y = gSprites[gMapObjects[mapObjectId].spriteId].pos1.y;
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
     }
 }
 
@@ -710,7 +710,7 @@ static void sub_81278D8(struct Sprite *sprite)
         sprite->pos1.x = linkedSprite->pos1.x;
         sprite->pos1.y = linkedSprite->pos1.y;
         sprite->subpriority = linkedSprite->subpriority;
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
         if (mapObject->currentCoords.x != sprite->data[3] || mapObject->currentCoords.y != sprite->data[4])
         {
             sprite->data[3] = mapObject->currentCoords.x;
@@ -780,7 +780,7 @@ void sub_8127A7C(struct Sprite *sprite)
         sprite->pos1.x = linkedSprite->pos1.x;
         sprite->pos1.y = (graphicsInfo->height >> 1) + linkedSprite->pos1.y - 8;
         sprite->subpriority = linkedSprite->subpriority - 1;
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
     }
 }
 
@@ -920,7 +920,7 @@ static void sub_8127DD0(struct Sprite *sprite)
 
 static void sub_8127E30(struct Sprite *sprite)
 {
-    sub_806487C(sprite, FALSE);
+    UpdateFieldSpriteVisibility(sprite, FALSE);
     if (sprite->animEnded)
     {
         FieldEffectStop(sprite, FLDEFF_ASH);
@@ -1237,7 +1237,7 @@ void sub_81282E0(struct Sprite *sprite)
         sprite->pos1.x = x;
         sprite->pos1.y = y;
         sprite->subpriority = gSprites[gMapObjects[mapObjectId].spriteId].subpriority;
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
     }
 }
 
@@ -1262,7 +1262,7 @@ void sub_8128410(struct Sprite *sprite)
     sprite->data[0] += 0x80;
     sprite->data[0] &= 0x100;
     sprite->pos1.y -= sprite->data[0] >> 8;
-    sub_806487C(sprite, FALSE);
+    UpdateFieldSpriteVisibility(sprite, FALSE);
     if (sprite->invisible || sprite->animEnded)
     {
         FieldEffectStop(sprite, FLDEFF_BUBBLES);
@@ -1434,7 +1434,7 @@ void sub_81287C4(struct Sprite *sprite)
     }
     else
     {
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
         SetObjectSubpriorityByZCoord(sprite->data[0], sprite, 0);
     }
 }
@@ -1447,7 +1447,7 @@ void sub_8128800(struct Sprite *sprite)
     }
     else
     {
-        sub_806487C(sprite, FALSE);
+        UpdateFieldSpriteVisibility(sprite, FALSE);
     }
 }
 

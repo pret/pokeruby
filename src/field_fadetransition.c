@@ -279,7 +279,7 @@ void task_map_chg_seq_0807E20C(u8 taskId)
             u8 mapObjId;
             sub_8080958(1);
             mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], GetGoSpeed0MovementActionId(GetPlayerFacingDirection()));
+            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;

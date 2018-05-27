@@ -83,6 +83,58 @@ enum {
     MOVEMENT_TYPE_INVISIBLE,
 };
 
+enum {
+    MOVEMENT_ACTION_FACE_DOWN,
+    MOVEMENT_ACTION_FACE_UP,
+    MOVEMENT_ACTION_FACE_LEFT,
+    MOVEMENT_ACTION_FACE_RIGHT,
+    MOVEMENT_ACTION_WALK_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_SLOW_UP,
+    MOVEMENT_ACTION_WALK_SLOW_LEFT,
+    MOVEMENT_ACTION_WALK_SLOW_RIGHT,
+    MOVEMENT_ACTION_WALK_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_NORMAL_UP,
+    MOVEMENT_ACTION_WALK_NORMAL_LEFT,
+    MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
+    MOVEMENT_ACTION_JUMP_2_DOWN,
+    MOVEMENT_ACTION_JUMP_2_UP,
+    MOVEMENT_ACTION_JUMP_2_LEFT,
+    MOVEMENT_ACTION_JUMP_2_RIGHT,
+    MOVEMENT_ACTION_DELAY_1,
+    MOVEMENT_ACTION_DELAY_2,
+    MOVEMENT_ACTION_DELAY_4,
+    MOVEMENT_ACTION_DELAY_8,
+    MOVEMENT_ACTION_DELAY_16,
+    MOVEMENT_ACTION_WALK_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_FAST_UP,
+    MOVEMENT_ACTION_WALK_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_LEFT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT,
+    MOVEMENT_ACTION_WALK_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
+};
+
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_MOVE    (1 << 1)
 #define GROUND_EFFECT_FLAG_LONG_GRASS_ON_SPAWN   (1 << 2)
@@ -415,11 +467,11 @@ u8 MovementType_Invisible_Step0(struct MapObject *, struct Sprite *);
 u8 MovementType_Invisible_Step1(struct MapObject *, struct Sprite *);
 u8 MovementType_Invisible_Step2(struct MapObject *, struct Sprite *);
 
-u8 get_go_image_anim_num(u8);
-u8 get_go_fast_image_anim_num(u8);
-u8 get_go_fast_image_anim_num(u8);
-u8 get_go_faster_image_anim_num(u8);
-u8 sub_805FD78(u8);
+u8 GetWalkSlowMovementAction_Extended(u8);
+u8 GetWalkNormalMovementAction_Extended(u8);
+u8 GetWalkNormalMovementAction_Extended(u8);
+u8 GetJump2MovementAction_Extended(u8);
+u8 GetDelayMovementAction_Extended(u8);
 
 u32 state_to_direction(u8, u32, u32);
 
@@ -474,9 +526,9 @@ void sub_805C754(struct MapObject *pObject);
 void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(u8 i);
-u8 FieldObjectDirectionToImageAnimId(u8);
-u8 get_go_image_anim_num(u8 unk_19);
-u8 sub_805FD98(u8);
+u8 GetFaceDirectionMovementAction_Extended(u8);
+u8 GetWalkSlowMovementAction_Extended(u8 unk_19);
+u8 GetWalkFastMovementAction_Extended2(u8);
 u8 sub_805FDE8(u8);
 u8 sub_805FDF8(u8);
 u8 sub_805FE08(u8);
@@ -499,23 +551,23 @@ void FieldObjectClearHeldMovement(struct MapObject *);
 bool8 FieldObjectCheckHeldMovementStatus(struct MapObject *);
 u8 FieldObjectClearHeldMovementIfFinished(struct MapObject *);
 u8 FieldObjectGetHeldMovementActionId(struct MapObject *);
-u8 GetFaceDirectionMovementActionId(u32);
-u8 GetSimpleGoAnimId(u32);
-u8 GetGoSpeed0MovementActionId(u32);
-u8 sub_8060744(u32);
-u8 d2s_08064034(u32);
-u8 sub_806079C(u32);
+u8 GetFaceDirectionMovementAction(u32);
+u8 GetWalkSlowMovementAction(u32);
+u8 GetWalkNormalMovementAction(u32);
+u8 GetWalkFastMovementAction(u32);
+u8 GetRideWaterCurrentMovementAction(u32);
+u8 GetWalkFastestMovementAction(u32);
 u8 sub_80607C8(u32);
 u8 sub_80607F4(u32);
-u8 GetJumpLedgeAnimId(u32);
+u8 GetJump2MovementAction(u32);
 u8 sub_806084C(u32);
 u8 sub_8060878(u32);
 u8 sub_80608A4(u32);
 u8 sub_80608D0(u32);
-u8 GetStepInPlaceDelay32AnimId(u32);
-u8 GetStepInPlaceDelay16MovementActionId(u32);
-u8 GetStepInPlaceDelay8AnimId(u32);
-u8 GetStepInPlaceDelay4AnimId(u32);
+u8 GetWalkInPlaceSlowMovementAction(u32);
+u8 GetWalkInPlaceNormalMovementAction(u32);
+u8 GetWalkInPlaceFastMovementAction(u32);
+u8 GetWalkInPlaceFastestMovementAction(u32);
 u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
 u8 sub_80609D8(u8);
 u8 sub_8060A04(u8);
@@ -540,8 +592,8 @@ bool8 FreezeMapObject(struct MapObject *);
 void FreezeMapObjects(void);
 void FreezeMapObjectsExceptOne(u8);
 void UnfreezeMapObjects(void);
-void sub_806487C(struct Sprite *sprite, bool8 invisible);
-void sub_8064990(u8, u8);
+void UpdateFieldSpriteVisibility(struct Sprite *sprite, bool8 invisible);
+void TurnMapObject(u8, u8);
 void UnfreezeMapObject(struct MapObject *mapObject);
 void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3);
 void sub_806467C(struct Sprite *sprite, u8 direction);

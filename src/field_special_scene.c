@@ -354,11 +354,11 @@ void sub_80C78A0(void)
 
     if (VarGet(VAR_PORTHOLE_STATE) == 2)
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(4));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionMovementAction_Extended(4));
     }
     else
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(3));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionMovementAction_Extended(3));
     }
 }
 
