@@ -1,5 +1,5 @@
-#ifndef POKERUBY_ANIM_FUNC_PTRS_H
-#define POKERUBY_ANIM_FUNC_PTRS_H
+#ifndef POKERUBY_MOVEMENT_ACTION_FUNC_TABLES_H
+#define POKERUBY_MOVEMENT_ACTION_FUNC_TABLES_H
 
 u8 MovementAction_FaceDown_Step0(struct MapObject *, struct Sprite *);
 u8 MovementAction_PauseSpriteAnim(struct MapObject *, struct Sprite *);
@@ -1353,4 +1353,4 @@ u8 (*const gMovementActionFuncs_AcroEndWheelieMoveRight[])(struct MapObject *, s
     MovementAction_PauseSpriteAnim
 };
 
-#endif //POKERUBY_ANIM_FUNC_PTRS_H
+#endif //POKERUBY_MOVEMENT_ACTION_FUNC_TABLES_H

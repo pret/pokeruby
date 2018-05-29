@@ -1,10 +1,5 @@
-//
-
-//
-
-#ifndef POKERUBY_CALLBACK_SUBROUTINE_POINTERS_H
-#define POKERUBY_CALLBACK_SUBROUTINE_POINTERS_H
-
+#ifndef POKERUBY_MOVEMENT_TYPE_FUNC_TABLES_H
+#define POKERUBY_MOVEMENT_TYPE_FUNC_TABLES_H
 
 u8 (*const gMovementTypeFuncs_WanderAround[])(struct MapObject *, struct Sprite *) = {
     MovementType_WanderAround_Step0,
@@ -440,4 +435,4 @@ u8 (*const gMovementTypeFuncs_Invisible[])(struct MapObject *, struct Sprite *) 
     MovementType_Invisible_Step2
 };
 
-#endif //POKERUBY_CALLBACK_SUBROUTINE_POINTERS_H
+#endif //POKERUBY_MOVEMENT_TYPE_FUNC_TABLES_H

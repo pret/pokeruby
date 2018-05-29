@@ -1956,7 +1956,7 @@ const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
 const s16 gMovementDelaysLong[] =   {32, 64, 128, 192};
 const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
-#include "data/field_map_obj/callback_subroutine_pointers.h"
+#include "data/field_map_obj/movement_type_func_tables.h"
 
 const u8 gFaceDirectionAnimNums[] = {
     0, // DIR_NONE
@@ -2377,7 +2377,7 @@ const u8 gUnknown_08375767[][4] = {
     {3, 4, 2, 1}
 };
 
-#include "data/field_map_obj/anim_func_ptrs.h"
+#include "data/field_map_obj/movement_action_func_tables.h"
 
 // text
 
