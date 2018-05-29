@@ -2738,9 +2738,9 @@ void SpriteCB_LinkPlayer(struct Sprite *sprite)
     SetObjectSubpriorityByZCoord(mapObj->previousElevation, sprite, 1);
     sprite->oam.priority = ZCoordToPriority(mapObj->previousElevation);
     if (!linkPlayerMapObj->mode)
-        StartSpriteAnim(sprite, GetFaceDirectionMovementAction_Extended(mapObj->range.as_byte));
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(mapObj->range.as_byte));
     else
-        StartSpriteAnimIfDifferent(sprite, GetWalkSlowMovementAction_Extended(mapObj->range.as_byte));
+        StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(mapObj->range.as_byte));
     UpdateFieldSpriteVisibility(sprite, 0);
     if (mapObj->triggerGroundEffectsOnMove)
     {

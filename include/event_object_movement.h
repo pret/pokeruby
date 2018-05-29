@@ -84,31 +84,31 @@ enum {
 };
 
 enum {
-    MOVEMENT_ACTION_FACE_DOWN,        // 0x0
-    MOVEMENT_ACTION_FACE_UP,          // 0x1
-    MOVEMENT_ACTION_FACE_LEFT,        // 0x2
-    MOVEMENT_ACTION_FACE_RIGHT,       // 0x3
-    MOVEMENT_ACTION_WALK_SLOW_DOWN,   // 0x4
-    MOVEMENT_ACTION_WALK_SLOW_UP,     // 0x5
-    MOVEMENT_ACTION_WALK_SLOW_LEFT,   // 0x6
-    MOVEMENT_ACTION_WALK_SLOW_RIGHT,  // 0x7
-    MOVEMENT_ACTION_WALK_NORMAL_DOWN, // 0x8
-    MOVEMENT_ACTION_WALK_NORMAL_UP,   // 0x9
-    MOVEMENT_ACTION_WALK_NORMAL_LEFT, // 0xA
-    MOVEMENT_ACTION_WALK_NORMAL_RIGHT,// 0xB
-    MOVEMENT_ACTION_JUMP_2_DOWN,      // 0xC
-    MOVEMENT_ACTION_JUMP_2_UP,        // 0xD
-    MOVEMENT_ACTION_JUMP_2_LEFT,      // 0xE
-    MOVEMENT_ACTION_JUMP_2_RIGHT,     // 0xF
-    MOVEMENT_ACTION_DELAY_1,          // 0x10
-    MOVEMENT_ACTION_DELAY_2,          // 0x11
-    MOVEMENT_ACTION_DELAY_4,          // 0x12
-    MOVEMENT_ACTION_DELAY_8,          // 0x13
-    MOVEMENT_ACTION_DELAY_16,         // 0x14
-    MOVEMENT_ACTION_WALK_FAST_DOWN,   // 0x15
-    MOVEMENT_ACTION_WALK_FAST_UP,     // 0x16
-    MOVEMENT_ACTION_WALK_FAST_LEFT,   // 0x17
-    MOVEMENT_ACTION_WALK_FAST_RIGHT,  // 0x18
+    MOVEMENT_ACTION_FACE_DOWN,                  // 0x0
+    MOVEMENT_ACTION_FACE_UP,                    // 0x1
+    MOVEMENT_ACTION_FACE_LEFT,                  // 0x2
+    MOVEMENT_ACTION_FACE_RIGHT,                 // 0x3
+    MOVEMENT_ACTION_WALK_SLOW_DOWN,             // 0x4
+    MOVEMENT_ACTION_WALK_SLOW_UP,               // 0x5
+    MOVEMENT_ACTION_WALK_SLOW_LEFT,             // 0x6
+    MOVEMENT_ACTION_WALK_SLOW_RIGHT,            // 0x7
+    MOVEMENT_ACTION_WALK_NORMAL_DOWN,           // 0x8
+    MOVEMENT_ACTION_WALK_NORMAL_UP,             // 0x9
+    MOVEMENT_ACTION_WALK_NORMAL_LEFT,           // 0xA
+    MOVEMENT_ACTION_WALK_NORMAL_RIGHT,          // 0xB
+    MOVEMENT_ACTION_JUMP_2_DOWN,                // 0xC
+    MOVEMENT_ACTION_JUMP_2_UP,                  // 0xD
+    MOVEMENT_ACTION_JUMP_2_LEFT,                // 0xE
+    MOVEMENT_ACTION_JUMP_2_RIGHT,               // 0xF
+    MOVEMENT_ACTION_DELAY_1,                    // 0x10
+    MOVEMENT_ACTION_DELAY_2,                    // 0x11
+    MOVEMENT_ACTION_DELAY_4,                    // 0x12
+    MOVEMENT_ACTION_DELAY_8,                    // 0x13
+    MOVEMENT_ACTION_DELAY_16,                   // 0x14
+    MOVEMENT_ACTION_WALK_FAST_DOWN,             // 0x15
+    MOVEMENT_ACTION_WALK_FAST_UP,               // 0x16
+    MOVEMENT_ACTION_WALK_FAST_LEFT,             // 0x17
+    MOVEMENT_ACTION_WALK_FAST_RIGHT,            // 0x18
     MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,    // 0x19
     MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,      // 0x1A
     MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_LEFT,    // 0x1B
@@ -141,7 +141,7 @@ enum {
     MOVEMENT_ACTION_PLAYER_RUN_UP,              // 0x36
     MOVEMENT_ACTION_PLAYER_RUN_LEFT,            // 0x37
     MOVEMENT_ACTION_PLAYER_RUN_RIGHT,           // 0x38
-    MOVEMENT_ACTION_UNKNOWN,                    // 0x39 // todo:
+    MOVEMENT_ACTION_START_ANIM_IN_DIRECTION,    // 0x39
     MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,          // 0x3A
     MOVEMENT_ACTION_JUMP_SPECIAL_UP,            // 0x3B
     MOVEMENT_ACTION_JUMP_SPECIAL_LEFT ,         // 0x3C
@@ -190,10 +190,10 @@ enum {
     MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,        // 0x67
     MOVEMENT_ACTION_ACRO_POP_WHEELIE_LEFT,      // 0x68
     MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,     // 0x69
-    MOVEMENT_ACTION_ACRO_BUMP_FACE_DOWN,        // 0x6A
-    MOVEMENT_ACTION_ACRO_BUMP_FACE_UP,          // 0x6B
-    MOVEMENT_ACTION_ACRO_BUMP_FACE_LEFT,        // 0x6C
-    MOVEMENT_ACTION_ACRO_BUMP_FACE_RIGHT,       // 0x6D
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN, // 0x6A
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,   // 0x6B
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_LEFT, // 0x6C
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,// 0x6D
     MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN, // 0x6E
     MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,   // 0x6F
     MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_LEFT, // 0x70
@@ -218,10 +218,10 @@ enum {
     MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,       // 0x83
     MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT,     // 0x84
     MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,    // 0x85
-    MOVEMENT_ACTION_ACRO_BUMP_MOVE_DOWN,        // 0x86
-    MOVEMENT_ACTION_ACRO_BUMP_MOVE_UP,          // 0x87
-    MOVEMENT_ACTION_ACRO_BUMP_MOVE_LEFT,        // 0x88
-    MOVEMENT_ACTION_ACRO_BUMP_MOVE_RIGHT,       // 0x89
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN, // 0x86
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,   // 0x87
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT, // 0x88
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,// 0x89
 };
 
 #define GROUND_EFFECT_FLAG_TALL_GRASS_ON_SPAWN   (1 << 0)
@@ -556,11 +556,11 @@ u8 MovementType_Invisible_Step0(struct MapObject *, struct Sprite *);
 u8 MovementType_Invisible_Step1(struct MapObject *, struct Sprite *);
 u8 MovementType_Invisible_Step2(struct MapObject *, struct Sprite *);
 
-u8 GetWalkSlowMovementAction_Extended(u8);
-u8 GetWalkNormalMovementAction_Extended(u8);
-u8 GetWalkNormalMovementAction_Extended(u8);
-u8 GetJump2MovementAction_Extended(u8);
-u8 GetDelayMovementAction_Extended(u8);
+u8 GetMoveDirectionAnimNum(u8);
+u8 GetMoveDirectionFastAnimNum(u8);
+u8 GetMoveDirectionFastAnimNum(u8);
+u8 GetMoveDirectionFasterAnimNum(u8);
+u8 GetMoveDirectionFastestAnimNum(u8);
 
 u32 state_to_direction(u8, u32, u32);
 
@@ -615,14 +615,14 @@ void sub_805C754(struct MapObject *pObject);
 void sub_805C774(struct MapObject *, u8);
 void sub_805C78C(u8, u8, u8);
 void sub_805C7C4(u8 i);
-u8 GetFaceDirectionMovementAction_Extended(u8);
-u8 GetWalkSlowMovementAction_Extended(u8 unk_19);
-u8 GetWalkFastMovementAction_Extended2(u8);
-u8 sub_805FDE8(u8);
-u8 sub_805FDF8(u8);
-u8 sub_805FE08(u8);
-void npc_set_running_behaviour_etc(struct MapObject *, u8);
-u8 npc_running_behaviour_by_direction(u8);
+u8 GetFaceDirectionAnimNum(u8);
+u8 GetMoveDirectionAnimNum(u8 unk_19);
+u8 GetAcroWheelieDirectionAnimNum(u8);
+u8 GetFishingDirectionAnimNum(u8);
+u8 GetFishingNoCatchDirectionAnimNum(u8);
+u8 GetFishingBiteDirectionAnimNum(u8);
+void SetTrainerMovementType(struct MapObject *, u8);
+u8 GetTrainerFacingDirectionMovementType(u8);
 u8 GetCollisionAtCoords(struct MapObject *, s16, s16, u32);
 u8 sub_8060024(struct MapObject *, s16, s16, u8);
 bool8 IsBerryTreeSparkling(u8, u8, u8);
@@ -658,16 +658,16 @@ u8 GetWalkInPlaceNormalMovementAction(u32);
 u8 GetWalkInPlaceFastMovementAction(u32);
 u8 GetWalkInPlaceFastestMovementAction(u32);
 u8 FieldObjectFaceOppositeDirection(struct MapObject *, u8);
-u8 sub_80609D8(u8);
-u8 sub_8060A04(u8);
-u8 sub_8060A30(u8);
-u8 sub_8060A5C(u8);
-u8 sub_8060A88(u8);
-u8 sub_8060AB4(u8);
-u8 sub_8060AE0(u8);
-u8 sub_8060B0C(u8);
-u8 sub_8060B38(u8);
-u8 sub_8060B64(u8);
+u8 GetAcroWheelieFaceDirectionMovementAction(u8);
+u8 GetAcroPopWheelieFaceDirectionMovementAction(u8);
+u8 GetAcroEndWheelieFaceDirectionMovementAction(u8);
+u8 GetAcroWheelieHopFaceDirectionMovementAction(u8);
+u8 GetAcroWheelieHopDirectionMovementAction(u8);
+u8 GetAcroWheelieJumpDirectionMovementAction(u8);
+u8 GetAcroWheelieInPlaceDirectionMovementAction(u8);
+u8 GetAcroPopWheelieMoveDirectionMovementAction(u8);
+u8 GetAcroWheelieMoveDirectionMovementAction(u8);
+u8 GetAcroEndWheelieMoveDirectionMovementAction(u8);
 u8 GetOppositeDirection(u8);
 void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);

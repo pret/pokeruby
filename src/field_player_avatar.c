@@ -837,42 +837,42 @@ void sub_80594C0(void)
 }
 
 // wheelie idle
-void PlayerIdleWheelie(u8 a)
+void PlayerIdleWheelie(u8 direction)
 {
-    PlayerSetAnimId(sub_80609D8(a), 1);
+    PlayerSetAnimId(GetAcroWheelieFaceDirectionMovementAction(direction), 1);
 }
 
 // normal to wheelie
-void PlayerStartWheelie(u8 a)
+void PlayerStartWheelie(u8 direction)
 {
-    PlayerSetAnimId(sub_8060A04(a), 1);
+    PlayerSetAnimId(GetAcroPopWheelieFaceDirectionMovementAction(direction), 1);
 }
 
 // wheelie to normal
-void PlayerEndWheelie(u8 a)
+void PlayerEndWheelie(u8 direction)
 {
-    PlayerSetAnimId(sub_8060A30(a), 1);
+    PlayerSetAnimId(GetAcroEndWheelieFaceDirectionMovementAction(direction), 1);
 }
 
 // wheelie hopping standing
 void PlayerStandingHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    PlayerSetAnimId(sub_8060A5C(a), 1);
+    PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(a), 1);
 }
 
 // wheelie hopping moving
 void PlayerMovingHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    PlayerSetAnimId(sub_8060A88(a), 2);
+    PlayerSetAnimId(GetAcroWheelieHopDirectionMovementAction(a), 2);
 }
 
 // wheelie hopping ledge
 void PlayerLedgeHoppingWheelie(u8 a)
 {
     PlaySE(SE_JITE_PYOKO);
-    PlayerSetAnimId(sub_8060AB4(a), 8);
+    PlayerSetAnimId(GetAcroWheelieJumpDirectionMovementAction(a), 8);
 }
 
 // acro turn jump
@@ -885,22 +885,22 @@ void PlayerAcroTurnJump(u8 direction)
 void sub_80595DC(u8 direction)
 {
     PlaySE(SE_WALL_HIT);
-    PlayerSetAnimId(sub_8060AE0(direction), 2);
+    PlayerSetAnimId(GetAcroWheelieInPlaceDirectionMovementAction(direction), 2);
 }
 
-void sub_8059600(u8 a)
+void sub_8059600(u8 direction)
 {
-    PlayerSetAnimId(sub_8060B0C(a), 2);
+    PlayerSetAnimId(GetAcroPopWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_8059618(u8 a)
+void sub_8059618(u8 direction)
 {
-    PlayerSetAnimId(sub_8060B38(a), 2);
+    PlayerSetAnimId(GetAcroWheelieMoveDirectionMovementAction(direction), 2);
 }
 
-void sub_8059630(u8 a)
+void sub_8059630(u8 direction)
 {
-    PlayerSetAnimId(sub_8060B64(a), 2);
+    PlayerSetAnimId(GetAcroEndWheelieMoveDirectionMovementAction(direction), 2);
 }
 
 static void PlayCollisionSoundIfNotFacingWarp(u8 a)
@@ -1166,23 +1166,23 @@ void sub_8059BF4(void)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
-void sub_8059C3C(u8 a)
+void sub_8059C3C(u8 direction)
 {
     sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDE8(a));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
 }
 
 void sub_8059C94(u8 direction)
 {
     sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetWalkFastMovementAction_Extended2(direction));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetAcroWheelieDirectionAnimNum(direction));
     SeekSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 1);
 }
 
 void sub_8059D08(u8 direction)
 {
     sub_805B980(&gMapObjects[gPlayerAvatar.mapObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFaceDirectionMovementAction_Extended(direction));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFaceDirectionAnimNum(direction));
 }
 
 static void sub_8059D60(struct MapObject *mapObject)
@@ -1574,7 +1574,7 @@ u8 Fishing6(struct Task *task)
     if (!DoesCurrentMapHaveFishingMons() || (Random() & 1))
         task->tStep = FISHING_NO_BITE;
     else
-        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FE08(GetPlayerFacingDirection()));
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingBiteDirectionAnimNum(GetPlayerFacingDirection()));
     return 1;
 }
 
@@ -1677,7 +1677,7 @@ u8 Fishing11(struct Task *task)
 u8 Fishing12(struct Task *task)
 {
     sub_805A954();
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(GetPlayerFacingDirection()));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     MenuPrintMessageDefaultCoords(gOtherText_NotEvenANibble);
     task->tStep = FISHING_SHOW_RESULT;
     return 1;
@@ -1687,7 +1687,7 @@ u8 Fishing12(struct Task *task)
 u8 Fishing13(struct Task *task)
 {
     sub_805A954();
-    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(GetPlayerFacingDirection()));
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     MenuPrintMessageDefaultCoords(gOtherText_ItGotAway);
     task->tStep++;
     return 1;

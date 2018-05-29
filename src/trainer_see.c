@@ -313,8 +313,8 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
     if (FieldObjectIsMovementOverridden(trainerObj) && !FieldObjectClearHeldMovementIfFinished(trainerObj))
         return FALSE;
 
-    npc_set_running_behaviour_etc(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
-    sub_805C774(trainerObj, npc_running_behaviour_by_direction(trainerObj->facingDirection));
+    SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    sub_805C774(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
     sub_805C754(trainerObj);
 
     playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
@@ -430,8 +430,8 @@ void sub_80846E4(u8 taskId)
     gTrainerSeeFuncList2[task->data[0]](taskId, task, mapObj);
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
-        npc_set_running_behaviour_etc(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
-        sub_805C774(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
+        SetTrainerMovementType(mapObj, GetTrainerFacingDirectionMovementType(mapObj->facingDirection));
+        sub_805C774(mapObj, GetTrainerFacingDirectionMovementType(mapObj->facingDirection));
         DestroyTask(taskId);
     }
     else

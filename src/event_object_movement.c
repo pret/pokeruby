@@ -1958,82 +1958,183 @@ const s16 gMovementDelaysShort[] =  {32, 48,  64,  80};
 
 #include "data/field_map_obj/callback_subroutine_pointers.h"
 
-const u8 gFaceDirectionMovementActions_Extended[] = {
-    MOVEMENT_ACTION_FACE_DOWN,  // DIR_NONE
-    MOVEMENT_ACTION_FACE_DOWN,  // DIR_SOUTH
-    MOVEMENT_ACTION_FACE_UP,    // DIR_NORTH
-    MOVEMENT_ACTION_FACE_LEFT,  // DIR_WEST
-    MOVEMENT_ACTION_FACE_RIGHT, // DIR_EAST
-    MOVEMENT_ACTION_FACE_DOWN,  // DIR_SOUTHWEST
-    MOVEMENT_ACTION_FACE_DOWN,  // DIR_SOUTHEAST
-    MOVEMENT_ACTION_FACE_UP,    // DIR_NORTHWEST
-    MOVEMENT_ACTION_FACE_UP,    // DIR_NORTHEAST
+const u8 gFaceDirectionAnimNums[] = {
+    0, // DIR_NONE
+    0, // DIR_SOUTH
+    1, // DIR_NORTH
+    2, // DIR_WEST
+    3, // DIR_EAST
+    0, // DIR_SOUTHWEST
+    0, // DIR_SOUTHEAST
+    1, // DIR_NORTHWEST
+    1, // DIR_NORTHEAST
 };
-const u8 gWalkSlowMovementActions_Extended[] = {
-    MOVEMENT_ACTION_WALK_SLOW_DOWN,  // DIR_NONE
-    MOVEMENT_ACTION_WALK_SLOW_DOWN,  // DIR_SOUTH
-    MOVEMENT_ACTION_WALK_SLOW_UP,    // DIR_NORTH
-    MOVEMENT_ACTION_WALK_SLOW_LEFT,  // DIR_WEST
-    MOVEMENT_ACTION_WALK_SLOW_RIGHT, // DIR_EAST
-    MOVEMENT_ACTION_WALK_SLOW_DOWN,  // DIR_SOUTHWEST
-    MOVEMENT_ACTION_WALK_SLOW_DOWN,  // DIR_SOUTHEAST
-    MOVEMENT_ACTION_WALK_SLOW_UP,    // DIR_NORTHWEST
-    MOVEMENT_ACTION_WALK_SLOW_UP,    // DIR_NORTHEAST
+const u8 gMoveDirectionAnimNums[] = {
+    4, // DIR_NONE
+    4, // DIR_SOUTH
+    5, // DIR_NORTH
+    6, // DIR_WEST
+    7, // DIR_EAST
+    4, // DIR_SOUTHWEST
+    4, // DIR_SOUTHEAST
+    5, // DIR_NORTHWEST
+    5, // DIR_NORTHEAST
 };
-const u8 gWalkNormalMovementActions_Extended[] = {
-    MOVEMENT_ACTION_WALK_NORMAL_DOWN,  // DIR_NONE
-    MOVEMENT_ACTION_WALK_NORMAL_DOWN,  // DIR_SOUTH
-    MOVEMENT_ACTION_WALK_NORMAL_UP,    // DIR_NORTH
-    MOVEMENT_ACTION_WALK_NORMAL_LEFT,  // DIR_WEST
-    MOVEMENT_ACTION_WALK_NORMAL_RIGHT, // DIR_EAST
-    MOVEMENT_ACTION_WALK_NORMAL_DOWN,  // DIR_SOUTHWEST
-    MOVEMENT_ACTION_WALK_NORMAL_DOWN,  // DIR_SOUTHEAST
-    MOVEMENT_ACTION_WALK_NORMAL_UP,    // DIR_NORTHWEST
-    MOVEMENT_ACTION_WALK_NORMAL_UP,    // DIR_NORTHEAST
+const u8 gMoveDirectionFastAnimNums[] = {
+    8,  // DIR_NONE
+    8,  // DIR_SOUTH
+    9,  // DIR_NORTH
+    10, // DIR_WEST
+    11, // DIR_EAST
+    8,  // DIR_SOUTHWEST
+    8,  // DIR_SOUTHEAST
+    9,  // DIR_NORTHWEST
+    9,  // DIR_NORTHEAST
 };
-const u8 gJump2MovementActions_Extended[] = {
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_UP,
-	MOVEMENT_ACTION_JUMP_2_LEFT,
-	MOVEMENT_ACTION_JUMP_2_RIGHT,
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_UP,
-	MOVEMENT_ACTION_JUMP_2_UP,
+const u8 gMoveDirectionFasterAnimNums[] = {
+	12, // DIR_NONE
+	12, // DIR_SOUTH
+	13, // DIR_NORTH
+	14, // DIR_WEST
+	15, // DIR_EAST
+	12, // DIR_SOUTHWEST
+	12, // DIR_SOUTHEAST
+	13, // DIR_NORTHWEST
+	13, // DIR_NORTHEAST
 };
-const u8 gDelayMovementActions_Extended[] = { // TODO: why would delays be mapped to directions?
-	MOVEMENT_ACTION_DELAY_1,
-	MOVEMENT_ACTION_DELAY_1,
-	MOVEMENT_ACTION_DELAY_2,
-	MOVEMENT_ACTION_DELAY_4,
-	MOVEMENT_ACTION_DELAY_8,
-	MOVEMENT_ACTION_DELAY_1,
-	MOVEMENT_ACTION_DELAY_1,
-	MOVEMENT_ACTION_DELAY_2,
-	MOVEMENT_ACTION_DELAY_2,
+const u8 gMoveDirectionFastestAnimNums[] = {
+	16, // DIR_NONE
+	16, // DIR_SOUTH
+	17, // DIR_NORTH
+	18, // DIR_WEST
+	19, // DIR_EAST
+	16, // DIR_SOUTHWEST
+	16, // DIR_SOUTHEAST
+	17, // DIR_NORTHWEST
+	17, // DIR_NORTHEAST
 };
-const u8 gWalkFastMovementActions_Extended[] = { // TODO: this is broken. It appears like an additional Delay movement type was added late into development, which shifted these arrays off, but they were hardcoded.
-	MOVEMENT_ACTION_DELAY_16,
-	MOVEMENT_ACTION_DELAY_16,
-	MOVEMENT_ACTION_WALK_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_FAST_UP,
-	MOVEMENT_ACTION_WALK_FAST_LEFT,
-	MOVEMENT_ACTION_DELAY_16,
-	MOVEMENT_ACTION_DELAY_16,
-	MOVEMENT_ACTION_WALK_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_FAST_DOWN,
+const u8 gJumpSpecialDirectionAnimNums[] = { // used for jumping onto surf mon
+	20, // DIR_NONE
+	20, // DIR_SOUTH
+	21, // DIR_NORTH
+	22, // DIR_WEST
+	23, // DIR_EAST
+	20, // DIR_SOUTHWEST
+	20, // DIR_SOUTHEAST
+	21, // DIR_NORTHWEST
+	21, // DIR_NORTHEAST
 };
-const u8 gWalkFastMovementActions_Extended2[] = {0x14, 0x14, 0x15, 0x16, 0x17, 0x14, 0x14, 0x15, 0x15};
-const u8 gUnknown_08375633[] = {0x18, 0x18, 0x19, 0x1A, 0x1B, 0x18, 0x18, 0x19, 0x19};
-const u8 gUnknown_0837563C[] = {0x1C, 0x1C, 0x1D, 0x1E, 0x1F, 0x1C, 0x1C, 0x1D, 0x1D};
-const u8 gUnknown_08375645[] = {0x20, 0x20, 0x21, 0x22, 0x23, 0x20, 0x20, 0x21, 0x21};
-const u8 gUnknown_0837564E[] = {0x24, 0x24, 0x25, 0x26, 0x27, 0x24, 0x24, 0x25, 0x25};
-const u8 gUnknown_08375657[] = {0x00, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x01, 0x01};
-const u8 gUnknown_08375660[] = {0x04, 0x04, 0x05, 0x06, 0x07, 0x04, 0x04, 0x05, 0x05};
-const u8 gUnknown_08375669[] = {0x08, 0x08, 0x09, 0x0A, 0x0B, 0x08, 0x08, 0x09, 0x09};
-const u8 gUnknown_08375672[] = {0x14, 0x14, 0x15, 0x16, 0x17, 0x14, 0x14, 0x15, 0x15};
-const u8 gUnknown_0837567B[] = {0x08, 0x08, 0x07, 0x09, 0x0A, 0x08, 0x08, 0x07, 0x07};
+const u8 gAcroWheelieDirectionAnimNums[] = {
+	20, // DIR_NONE
+	20, // DIR_SOUTH
+	21, // DIR_NORTH
+	22, // DIR_WEST
+	23, // DIR_EAST
+	20, // DIR_SOUTHWEST
+	20, // DIR_SOUTHEAST
+	21, // DIR_NORTHWEST
+	21, // DIR_NORTHEAST
+};
+const u8 gUnrefAnimNums_08375633[] = {
+	24, // DIR_NONE
+	24, // DIR_SOUTH
+	25, // DIR_NORTH
+	26, // DIR_WEST
+	27, // DIR_EAST
+	24, // DIR_SOUTHWEST
+	24, // DIR_SOUTHEAST
+	25, // DIR_NORTHWEST
+	25, // DIR_NORTHEAST
+};
+const u8 gAcroEndWheelieDirectionAnimNums[] = {
+	28, // DIR_NONE
+	28, // DIR_SOUTH
+	29, // DIR_NORTH
+	30, // DIR_WEST
+	31, // DIR_EAST
+	28, // DIR_SOUTHWEST
+	28, // DIR_SOUTHEAST
+	29, // DIR_NORTHWEST
+	29, // DIR_NORTHEAST
+};
+const u8 gAcroUnusedActionDirectionAnimNums[] = {
+	32, // DIR_NONE
+	32, // DIR_SOUTH
+	33, // DIR_NORTH
+	34, // DIR_WEST
+	35, // DIR_EAST
+	32, // DIR_SOUTHWEST
+	32, // DIR_SOUTHEAST
+	33, // DIR_NORTHWEST
+	33, // DIR_NORTHEAST
+};
+const u8 gAcroWheeliePedalDirectionAnimNums[] = {
+	36, // DIR_NONE
+	36, // DIR_SOUTH
+	37, // DIR_NORTH
+	38, // DIR_WEST
+	39, // DIR_EAST
+	36, // DIR_SOUTHWEST
+	36, // DIR_SOUTHEAST
+	37, // DIR_NORTHWEST
+	37, // DIR_NORTHEAST
+};
+const u8 gFishingDirectionAnimNums[] = {
+	0, // DIR_NONE
+	0, // DIR_SOUTH
+	1, // DIR_NORTH
+	2, // DIR_WEST
+	3, // DIR_EAST
+	0, // DIR_SOUTHWEST
+	0, // DIR_SOUTHEAST
+	1, // DIR_NORTHWEST
+	1, // DIR_NORTHEAST
+};
+const u8 gFishingNoCatchDirectionAnimNums[] = {
+	4, // DIR_NONE
+	4, // DIR_SOUTH
+	5, // DIR_NORTH
+	6, // DIR_WEST
+	7, // DIR_EAST
+	4, // DIR_SOUTHWEST
+	4, // DIR_SOUTHEAST
+	5, // DIR_NORTHWEST
+	5, // DIR_NORTHEAST
+};
+const u8 gFishingBiteDirectionAnimNums[] = {
+	8,  // DIR_NONE
+	8,  // DIR_SOUTH
+	9,  // DIR_NORTH
+	10, // DIR_WEST
+	11, // DIR_EAST
+	8,  // DIR_SOUTHWEST
+	8,  // DIR_SOUTHEAST
+	9,  // DIR_NORTHWEST
+	9,  // DIR_NORTHEAST
+};
+const u8 gRunningDirectionAnimNums[] = {
+	20, // DIR_NONE
+	20, // DIR_SOUTH
+	21, // DIR_NORTH
+	22, // DIR_WEST
+	23, // DIR_EAST
+	20, // DIR_SOUTHWEST
+	20, // DIR_SOUTHEAST
+	21, // DIR_NORTHWEST
+	21, // DIR_NORTHEAST
+};
+
+const u8 gTrainerFacingDirectionMovementTypes[] = {
+	MOVEMENT_TYPE_FACE_DOWN,  // DIR_NONE
+	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTH
+	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTH
+	MOVEMENT_TYPE_FACE_LEFT,  // DIR_WEST
+	MOVEMENT_TYPE_FACE_RIGHT, // DIR_EAST
+	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHWEST
+	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHEAST
+	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHWEST
+	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHEAST
+};
 
 bool8 (*const gOppositeDirectionBlockedMetatileFuncs[])(u8) = {
     MetatileBehavior_IsSouthBlocked,
@@ -2180,16 +2281,76 @@ const u8 gWalkInPlaceFastestMovementActions[] = {
 	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
 	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
 };
-const u8 gUnknown_0837571D[] = {0x62, 0x62, 0x63, 0x64, 0x65};
-const u8 gUnknown_08375722[] = {0x66, 0x66, 0x67, 0x68, 0x69};
-const u8 gUnknown_08375727[] = {0x6A, 0x6A, 0x6B, 0x6C, 0x6D};
-const u8 gUnknown_0837572C[] = {0x6E, 0x6E, 0x6F, 0x70, 0x71};
-const u8 gUnknown_08375731[] = {0x72, 0x72, 0x73, 0x74, 0x75};
-const u8 gUnknown_08375736[] = {0x76, 0x76, 0x77, 0x78, 0x79};
-const u8 gUnknown_0837573B[] = {0x7A, 0x7A, 0x7B, 0x7C, 0x7D};
-const u8 gUnknown_08375740[] = {0x7E, 0x7E, 0x7F, 0x80, 0x81};
-const u8 gUnknown_08375745[] = {0x82, 0x82, 0x83, 0x84, 0x85};
-const u8 gUnknown_0837574A[] = {0x86, 0x86, 0x87, 0x88, 0x89};
+const u8 gAcroWheelieFaceDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
+};
+const u8 gAcroPopWheelieFaceDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_LEFT,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
+};
+const u8 gAcroEndWheelieFaceDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_LEFT,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
+};
+const u8 gAcroWheelieHopFaceDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
+};
+const u8 gAcroWheelieHopDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
+};
+const u8 gAcroWheelieJumpDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
+};
+const u8 gAcroWheelieInPlaceDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
+};
+const u8 gAcroPopWheelieMoveDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_LEFT,
+	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
+};
+const u8 gAcroWheelieMoveDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
+	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT,
+	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,
+};
+const u8 gAcroEndWheelieMoveDirectionMovementActions[] = {
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT,
+	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,
+};
 
 const u8 gOppositeDirections[] = {
     DIR_NORTH,
@@ -2529,7 +2690,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     mapObject->spriteId = spriteId;
     mapObject->inanimate = gfxInfo->inanimate;
     if (!mapObject->inanimate)
-        StartSpriteAnim(sprite, GetFaceDirectionMovementAction_Extended(mapObject->facingDirection));
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(mapObject->facingDirection));
     SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
     sub_80634D0(mapObject, sprite);
     return mapObjectId;
@@ -2682,7 +2843,7 @@ u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
         }
         InitObjectPriorityByZCoord(sprite, elevation);
         SetObjectSubpriorityByZCoord(elevation, sprite, 1);
-        StartSpriteAnim(sprite, GetFaceDirectionMovementAction_Extended(direction));
+        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(direction));
     }
     return spriteId;
 }
@@ -2833,7 +2994,7 @@ void sub_805B75C(u8 mapObjectId, s16 b, s16 c)
         sprite->data[0] = mapObjectId;
         mapObject->spriteId = spriteId;
         if (!mapObject->inanimate && mapObject->movementType != MOVEMENT_TYPE_PLAYER)
-            StartSpriteAnim(sprite, GetFaceDirectionMovementAction_Extended(mapObject->facingDirection));
+            StartSpriteAnim(sprite, GetFaceDirectionAnimNum(mapObject->facingDirection));
         sub_805B914(mapObject);
         SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
     }
@@ -2901,7 +3062,7 @@ void FieldObjectTurn(struct MapObject *mapObject, u8 direction)
     FieldObjectSetDirection(mapObject, direction);
     if (!mapObject->inanimate)
     {
-        StartSpriteAnim(&gSprites[mapObject->spriteId], GetFaceDirectionMovementAction_Extended(mapObject->facingDirection));
+        StartSpriteAnim(&gSprites[mapObject->spriteId], GetFaceDirectionAnimNum(mapObject->facingDirection));
         SeekSpriteAnim(&gSprites[mapObject->spriteId], 0);
     }
 }
@@ -4099,7 +4260,7 @@ u8 MovementType_BerryTreeGrowth_Step0(struct MapObject *mapObject, struct Sprite
         return 1;
     }
     get_berry_tree_graphics(mapObject, sprite);
-    FieldObjectSetSingleMovement(mapObject, sprite, 0x39);
+    FieldObjectSetSingleMovement(mapObject, sprite, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
     sprite->data[1] = 1;
     return 1;
 }
@@ -5502,86 +5663,86 @@ void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data[1] = 0;
 }
 
-u8 GetFaceDirectionMovementAction_Extended(u8 direction)
+u8 GetFaceDirectionAnimNum(u8 direction)
 {
-    return gFaceDirectionMovementActions_Extended[direction];
+    return gFaceDirectionAnimNums[direction];
 }
 
-u8 GetWalkSlowMovementAction_Extended(u8 direction)
+u8 GetMoveDirectionAnimNum(u8 direction)
 {
-    return gWalkSlowMovementActions_Extended[direction];
+    return gMoveDirectionAnimNums[direction];
 }
 
-u8 GetWalkNormalMovementAction_Extended(u8 direction)
+u8 GetMoveDirectionFastAnimNum(u8 direction)
 {
-    return gWalkNormalMovementActions_Extended[direction];
+    return gMoveDirectionFastAnimNums[direction];
 }
 
-u8 GetJump2MovementAction_Extended(u8 direction)
+u8 GetMoveDirectionFasterAnimNum(u8 direction)
 {
-    return gJump2MovementActions_Extended[direction];
+    return gMoveDirectionFasterAnimNums[direction];
 }
 
-u8 GetDelayMovementAction_Extended(u8 direction)
+u8 GetMoveDirectionFastestAnimNum(u8 direction)
 {
-    return gDelayMovementActions_Extended[direction];
+    return gMoveDirectionFastestAnimNums[direction];
 }
 
-u8 GetWalkFastMovementAction_Extended(u8 direction)
+u8 GetJumpSpecialDirectionAnimNum(u8 direction)
 {
-    return gWalkFastMovementActions_Extended[direction];
+    return gJumpSpecialDirectionAnimNums[direction];
 }
 
-u8 GetWalkFastMovementAction_Extended2(u8 direction)
+u8 GetAcroWheelieDirectionAnimNum(u8 direction)
 {
-    return gWalkFastMovementActions_Extended2[direction];
+    return gAcroWheelieDirectionAnimNums[direction];
 }
 
-u8 unref_sub_805FDA8(u8 direction)
+u8 Unref_GetAnimNums_08375633(u8 direction)
 {
-    return gUnknown_08375633[direction];
+    return gUnrefAnimNums_08375633[direction];
 }
 
-u8 sub_805FDB8(u8 direction)
+u8 GetAcroEndWheelieDirectionAnimNum(u8 direction)
 {
-    return gUnknown_0837563C[direction];
+    return gAcroEndWheelieDirectionAnimNums[direction];
 }
 
-u8 sub_805FDC8(u8 direction)
+u8 GetAcroUnusedActionDirectionAnimNum(u8 direction)
 {
-    return gUnknown_08375645[direction];
+    return gAcroUnusedActionDirectionAnimNums[direction];
 }
 
-u8 sub_805FDD8(u8 direction)
+u8 GetAcroWheeliePedalDirectionAnimNum(u8 direction)
 {
-    return gUnknown_0837564E[direction];
+    return gAcroWheeliePedalDirectionAnimNums[direction];
 }
 
-u8 sub_805FDE8(u8 direction)
+u8 GetFishingDirectionAnimNum(u8 direction)
 {
-    return gUnknown_08375657[direction];
+    return gFishingDirectionAnimNums[direction];
 }
 
-u8 sub_805FDF8(u8 direction)
+u8 GetFishingNoCatchDirectionAnimNum(u8 direction)
 {
-    return gUnknown_08375660[direction];
+    return gFishingNoCatchDirectionAnimNums[direction];
 }
 
-u8 sub_805FE08(u8 direction)
+u8 GetFishingBiteDirectionAnimNum(u8 direction)
 {
-    return gUnknown_08375669[direction];
+    return gFishingBiteDirectionAnimNums[direction];
 }
 
-u8 get_run_image_anim_num(u8 direction)
+u8 GetRunningDirectionAnimNum(u8 direction)
 {
-    return gUnknown_08375672[direction];
+    return gRunningDirectionAnimNums[direction];
 }
 
-void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 movementActionId)
+void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
 {
     if (!mapObject->inanimate)
     {
-        sprite->animNum = movementActionId;
+        sprite->animNum = animNum;
         if (sprite->animCmdIndex == 1)
         {
             sprite->animCmdIndex = 2;
@@ -5593,12 +5754,12 @@ void sub_805FE28(struct MapObject *mapObject, struct Sprite *sprite, u8 movement
     }
 }
 
-void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 movementActionId)
+void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
 {
     u8 animCmdIndex;
     if (!mapObject->inanimate)
     {
-        sprite->animNum = movementActionId;
+        sprite->animNum = animNum;
         animCmdIndex = 3;
         if (sprite->animCmdIndex < 2)
         {
@@ -5619,7 +5780,7 @@ static u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2)
     return DIR_SOUTH;
 }
 
-void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType)
+void SetTrainerMovementType(struct MapObject *mapObject, u8 movementType)
 {
     mapObject->movementType = movementType;
     mapObject->directionSequenceIndex = 0;
@@ -5628,9 +5789,9 @@ void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType)
     gSprites[mapObject->spriteId].data[1] = 0;
 }
 
-u8 npc_running_behaviour_by_direction(u8 direction)
+u8 GetTrainerFacingDirectionMovementType(u8 direction)
 {
-    return gUnknown_0837567B[direction];
+    return gTrainerFacingDirectionMovementTypes[direction];
 }
 
 u8 GetCollisionInDirection(struct MapObject *mapObject, u8 direction)
@@ -5997,114 +6158,114 @@ u8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
     return FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(GetOppositeDirection(direction)));
 }
 
-u8 sub_80609D8(u8 index)
+u8 GetAcroWheelieFaceDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_0837571D, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieFaceDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060A04(u8 index)
+u8 GetAcroPopWheelieFaceDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375722, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroPopWheelieFaceDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060A30(u8 index)
+u8 GetAcroEndWheelieFaceDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375727, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroEndWheelieFaceDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060A5C(u8 index)
+u8 GetAcroWheelieHopFaceDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_0837572C, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieHopFaceDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060A88(u8 index)
+u8 GetAcroWheelieHopDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375731, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieHopDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060AB4(u8 index)
+u8 GetAcroWheelieJumpDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375736, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieJumpDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060AE0(u8 index)
+u8 GetAcroWheelieInPlaceDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_0837573B, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieInPlaceDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060B0C(u8 index)
+u8 GetAcroPopWheelieMoveDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375740, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroPopWheelieMoveDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060B38(u8 index)
+u8 GetAcroWheelieMoveDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_08375745, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroWheelieMoveDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
-u8 sub_8060B64(u8 index)
+u8 GetAcroEndWheelieMoveDirectionMovementAction(u8 direction)
 {
-    u8 directions[5];
-    memcpy(directions, gUnknown_0837574A, 5);
-    if (index >= 5)
+    u8 movementActions[5];
+    memcpy(movementActions, gAcroEndWheelieMoveDirectionMovementActions, 5);
+    if (direction >= 5)
     {
-        index = 0;
+        direction = 0;
     }
-    return directions[index];
+    return movementActions[direction];
 }
 
 u8 GetOppositeDirection(u8 direction)
@@ -6166,7 +6327,7 @@ void FaceDirection(struct MapObject *mapObject, struct Sprite *sprite, u8 direct
 {
     FieldObjectSetDirection(mapObject, direction);
     npc_coords_shift_still(mapObject);
-    sub_805FE64(mapObject, sprite, GetWalkSlowMovementAction_Extended(mapObject->facingDirection));
+    sub_805FE64(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
     sprite->animPaused = 1;
     sprite->data[2] = 1;
 }
@@ -6220,10 +6381,10 @@ void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction
     sub_805FE28(mapObject, sprite, functions[a3](mapObject->facingDirection));
 }
 
-void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+void StartRunningAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
     sub_8060D20(mapObject, sprite, direction, 1);
-    sub_805FE28(mapObject, sprite, get_run_image_anim_num(mapObject->facingDirection));
+    sub_805FE28(mapObject, sprite, GetRunningDirectionAnimNum(mapObject->facingDirection));
 }
 
 bool8 obj_npc_ministep(struct Sprite *);
@@ -6258,7 +6419,7 @@ void sub_8060E68(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 void sub_8060ED8(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
     sub_8060E68(mapObject, sprite, direction);
-    sub_805FE28(mapObject, sprite, GetWalkSlowMovementAction_Extended(mapObject->facingDirection));
+    sub_805FE28(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
 }
 
 bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
@@ -6438,7 +6599,7 @@ void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a4, u8 a5)
 {
     sub_806113C(mapObject, sprite, direction, a4, a5);
-    sub_805FE28(mapObject, sprite, GetWalkSlowMovementAction_Extended(mapObject->facingDirection));
+    sub_805FE28(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
     DoShadowFieldEffect(mapObject);
 }
 
@@ -6510,7 +6671,7 @@ bool8 sub_8061358(struct MapObject *mapObject, struct Sprite *sprite)
         return FALSE;
     }
     FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
-    sub_805FE64(mapObject, sprite, GetWalkSlowMovementAction_Extended(mapObject->facingDirection));
+    sub_805FE64(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
     return FALSE;
 }
 
@@ -6700,10 +6861,10 @@ bool8 MovementAction_WalkFastRight_Step1(struct MapObject *mapObject, struct Spr
     return FALSE;
 }
 
-void sub_80616CC(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 movementAction, u16 duration)
+void sub_80616CC(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum, u16 duration)
 {
     FieldObjectSetDirection(mapObject, direction);
-    sub_805FE28(mapObject, sprite, movementAction);
+    sub_805FE28(mapObject, sprite, animNum);
     sprite->animPaused = 0;
     sprite->data[2] = 1;
     sprite->data[3] = duration;
@@ -6732,97 +6893,97 @@ bool8 MovementAction_WalkInPlaceSlow_Step1(struct MapObject *mapObject, struct S
 
 bool8 MovementAction_WalkInPlaceSlowDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetWalkSlowMovementAction_Extended(DIR_SOUTH), 32);
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetMoveDirectionAnimNum(DIR_SOUTH), 32);
     return MovementAction_WalkInPlaceSlow_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceSlowUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_NORTH, GetWalkSlowMovementAction_Extended(DIR_NORTH), 32);
+    sub_80616CC(mapObject, sprite, DIR_NORTH, GetMoveDirectionAnimNum(DIR_NORTH), 32);
     return MovementAction_WalkInPlaceSlow_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceSlowLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_WEST, GetWalkSlowMovementAction_Extended(DIR_WEST), 32);
+    sub_80616CC(mapObject, sprite, DIR_WEST, GetMoveDirectionAnimNum(DIR_WEST), 32);
     return MovementAction_WalkInPlaceSlow_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceSlowRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_EAST, GetWalkSlowMovementAction_Extended(DIR_EAST), 32);
+    sub_80616CC(mapObject, sprite, DIR_EAST, GetMoveDirectionAnimNum(DIR_EAST), 32);
     return MovementAction_WalkInPlaceSlow_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceNormalDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetWalkSlowMovementAction_Extended(DIR_SOUTH), 16);
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetMoveDirectionAnimNum(DIR_SOUTH), 16);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceNormalUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_NORTH, GetWalkSlowMovementAction_Extended(DIR_NORTH), 16);
+    sub_80616CC(mapObject, sprite, DIR_NORTH, GetMoveDirectionAnimNum(DIR_NORTH), 16);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceNormalLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_WEST, GetWalkSlowMovementAction_Extended(DIR_WEST), 16);
+    sub_80616CC(mapObject, sprite, DIR_WEST, GetMoveDirectionAnimNum(DIR_WEST), 16);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceNormalRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_EAST, GetWalkSlowMovementAction_Extended(DIR_EAST), 16);
+    sub_80616CC(mapObject, sprite, DIR_EAST, GetMoveDirectionAnimNum(DIR_EAST), 16);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetWalkNormalMovementAction_Extended(DIR_SOUTH), 8);
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetMoveDirectionFastAnimNum(DIR_SOUTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_NORTH, GetWalkNormalMovementAction_Extended(DIR_NORTH), 8);
+    sub_80616CC(mapObject, sprite, DIR_NORTH, GetMoveDirectionFastAnimNum(DIR_NORTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_WEST, GetWalkNormalMovementAction_Extended(DIR_WEST), 8);
+    sub_80616CC(mapObject, sprite, DIR_WEST, GetMoveDirectionFastAnimNum(DIR_WEST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_EAST, GetWalkNormalMovementAction_Extended(DIR_EAST), 8);
+    sub_80616CC(mapObject, sprite, DIR_EAST, GetMoveDirectionFastAnimNum(DIR_EAST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastestDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetJump2MovementAction_Extended(DIR_SOUTH), 4);
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetMoveDirectionFasterAnimNum(DIR_SOUTH), 4);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastestUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_NORTH, GetJump2MovementAction_Extended(DIR_NORTH), 4);
+    sub_80616CC(mapObject, sprite, DIR_NORTH, GetMoveDirectionFasterAnimNum(DIR_NORTH), 4);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastestLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_WEST, GetJump2MovementAction_Extended(DIR_WEST), 4);
+    sub_80616CC(mapObject, sprite, DIR_WEST, GetMoveDirectionFasterAnimNum(DIR_WEST), 4);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_WalkInPlaceFastestRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_EAST, GetJump2MovementAction_Extended(DIR_EAST), 4);
+    sub_80616CC(mapObject, sprite, DIR_EAST, GetMoveDirectionFasterAnimNum(DIR_EAST), 4);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
@@ -7053,7 +7214,7 @@ bool8 MovementAction_PlayerRunDown_Step1(struct MapObject *, struct Sprite *);
 
 bool8 MovementAction_PlayerRunDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    do_run_anim(mapObject, sprite, DIR_SOUTH);
+    StartRunningAnim(mapObject, sprite, DIR_SOUTH);
     return MovementAction_PlayerRunDown_Step1(mapObject, sprite);
 }
 
@@ -7071,7 +7232,7 @@ bool8 MovementAction_PlayerRunUp_Step1(struct MapObject *, struct Sprite *);
 
 bool8 MovementAction_PlayerRunUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    do_run_anim(mapObject, sprite, DIR_NORTH);
+    StartRunningAnim(mapObject, sprite, DIR_NORTH);
     return MovementAction_PlayerRunUp_Step1(mapObject, sprite);
 }
 
@@ -7089,7 +7250,7 @@ bool8 MovementAction_PlayerRunLeft_Step1(struct MapObject *, struct Sprite *);
 
 bool8 MovementAction_PlayerRunLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    do_run_anim(mapObject, sprite, DIR_WEST);
+    StartRunningAnim(mapObject, sprite, DIR_WEST);
     return MovementAction_PlayerRunLeft_Step1(mapObject, sprite);
 }
 
@@ -7107,7 +7268,7 @@ bool8 MovementAction_PlayerRunRight_Step1(struct MapObject *, struct Sprite *);
 
 bool8 MovementAction_PlayerRunRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    do_run_anim(mapObject, sprite, DIR_EAST);
+    StartRunningAnim(mapObject, sprite, DIR_EAST);
     return MovementAction_PlayerRunRight_Step1(mapObject, sprite);
 }
 
@@ -7128,7 +7289,7 @@ void StartSpriteAnimInDirection(struct MapObject *mapObject, struct Sprite *spri
     sprite->data[2] = 1;
 }
 
-bool8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_StartAnimInDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     StartSpriteAnimInDirection(mapObject, sprite, mapObject->movementDirection, sprite->animNum);
     return FALSE;
@@ -7149,7 +7310,7 @@ bool8 MovementAction_WaitSpriteAnim(struct MapObject *mapObject, struct Sprite *
 void sub_8061F5C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
     sub_806113C(mapObject, sprite, direction, 1, 0);
-    StartSpriteAnim(sprite, GetWalkFastMovementAction_Extended(direction));
+    StartSpriteAnim(sprite, GetJumpSpecialDirectionAnimNum(direction));
 }
 
 bool8 MovementAction_JumpSpecialDown_Step1(struct MapObject *, struct Sprite *);
@@ -7735,7 +7896,7 @@ void sub_806295C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 {
     FieldObjectSetDirection(mapObject, direction);
     npc_coords_shift_still(mapObject);
-    sub_805FE64(mapObject, sprite, sub_805FDD8(direction));
+    sub_805FE64(mapObject, sprite, GetAcroWheeliePedalDirectionAnimNum(direction));
     sprite->animPaused = 1;
     sprite->data[2] = 1;
 }
@@ -7766,80 +7927,80 @@ bool8 MovementAction_AcroWheelieFaceRight_Step0(struct MapObject *mapObject, str
 
 bool8 MovementAction_AcroPopWheelieDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, GetWalkFastMovementAction_Extended2(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, GetAcroWheelieDirectionAnimNum(DIR_SOUTH));
     return FALSE;
 }
 
 bool8 MovementAction_AcroPopWheelieUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, GetWalkFastMovementAction_Extended2(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, GetAcroWheelieDirectionAnimNum(DIR_NORTH));
     return FALSE;
 }
 
 bool8 MovementAction_AcroPopWheelieLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, GetWalkFastMovementAction_Extended2(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, GetAcroWheelieDirectionAnimNum(DIR_WEST));
     return FALSE;
 }
 
 bool8 MovementAction_AcroPopWheelieRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, GetWalkFastMovementAction_Extended2(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, GetAcroWheelieDirectionAnimNum(DIR_EAST));
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpFaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieFaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, sub_805FDB8(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, GetAcroEndWheelieDirectionAnimNum(DIR_SOUTH));
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpFaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieFaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, sub_805FDB8(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, GetAcroEndWheelieDirectionAnimNum(DIR_NORTH));
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpFaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieFaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, sub_805FDB8(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, GetAcroEndWheelieDirectionAnimNum(DIR_WEST));
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpFaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieFaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, sub_805FDB8(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, GetAcroEndWheelieDirectionAnimNum(DIR_EAST));
     return FALSE;
 }
 
-bool8 sub_8062AFC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_UnusedAcroActionDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, sub_805FDC8(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, GetAcroUnusedActionDirectionAnimNum(DIR_SOUTH));
     return FALSE;
 }
 
-bool8 sub_8062B20(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_UnusedAcroActionUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, sub_805FDC8(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, GetAcroUnusedActionDirectionAnimNum(DIR_NORTH));
     return FALSE;
 }
 
-bool8 sub_8062B44(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_UnusedAcroActionLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, sub_805FDC8(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, GetAcroUnusedActionDirectionAnimNum(DIR_WEST));
     return FALSE;
 }
 
-bool8 sub_8062B68(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_UnusedAcroActionRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, sub_805FDC8(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, GetAcroUnusedActionDirectionAnimNum(DIR_EAST));
     return FALSE;
 }
 
 void sub_8062B8C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3, u8 a4)
 {
     sub_806113C(mapObject, sprite, direction, a3, a4);
-    StartSpriteAnimIfDifferent(sprite, GetWalkFastMovementAction_Extended2(direction));
+    StartSpriteAnimIfDifferent(sprite, GetAcroWheelieDirectionAnimNum(direction));
     DoShadowFieldEffect(mapObject);
 }
 
@@ -8073,32 +8234,32 @@ bool8 MovementAction_AcroWheelieJumpRight_Step1(struct MapObject *mapObject, str
 
 bool8 MovementAction_AcroWheelieInPlaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_SOUTH, sub_805FDD8(DIR_SOUTH), 8);
+    sub_80616CC(mapObject, sprite, DIR_SOUTH, GetAcroWheeliePedalDirectionAnimNum(DIR_SOUTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_AcroWheelieInPlaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_NORTH, sub_805FDD8(DIR_NORTH), 8);
+    sub_80616CC(mapObject, sprite, DIR_NORTH, GetAcroWheeliePedalDirectionAnimNum(DIR_NORTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_AcroWheelieInPlaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_WEST, sub_805FDD8(DIR_WEST), 8);
+    sub_80616CC(mapObject, sprite, DIR_WEST, GetAcroWheeliePedalDirectionAnimNum(DIR_WEST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 bool8 MovementAction_AcroWheelieInPlaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80616CC(mapObject, sprite, DIR_EAST, sub_805FDD8(DIR_EAST), 8);
+    sub_80616CC(mapObject, sprite, DIR_EAST, GetAcroWheeliePedalDirectionAnimNum(DIR_EAST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
 void sub_80630D0(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
     sub_8060D20(mapObject, sprite, direction, a3);
-    StartSpriteAnim(sprite, GetWalkFastMovementAction_Extended2(mapObject->facingDirection));
+    StartSpriteAnim(sprite, GetAcroWheelieDirectionAnimNum(mapObject->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
 
@@ -8177,7 +8338,7 @@ bool8 MovementAction_AcroPopWheelieMoveRight_Step1(struct MapObject *mapObject, 
 void sub_8063208(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
     sub_8060D20(mapObject, sprite, direction, a3);
-    sub_805FE28(mapObject, sprite, sub_805FDD8(mapObject->facingDirection));
+    sub_805FE28(mapObject, sprite, GetAcroWheeliePedalDirectionAnimNum(mapObject->facingDirection));
 }
 
 bool8 MovementAction_AcroWheelieMoveDown_Step1(struct MapObject *, struct Sprite *);
@@ -8255,19 +8416,19 @@ bool8 MovementAction_AcroWheelieMoveRight_Step1(struct MapObject *mapObject, str
 void sub_8063338(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 a3)
 {
     sub_8060D20(mapObject, sprite, direction, a3);
-    StartSpriteAnim(sprite, sub_805FDB8(mapObject->facingDirection));
+    StartSpriteAnim(sprite, GetAcroEndWheelieDirectionAnimNum(mapObject->facingDirection));
     SeekSpriteAnim(sprite, 0);
 }
 
-bool8 MovementAction_AcroBumpMoveDown_Step1(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroEndWheelieMoveDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 MovementAction_AcroBumpMoveDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_SOUTH, 1);
-    return MovementAction_AcroBumpMoveDown_Step1(mapObject, sprite);
+    return MovementAction_AcroEndWheelieMoveDown_Step1(mapObject, sprite);
 }
 
-bool8 MovementAction_AcroBumpMoveDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8277,15 +8438,15 @@ bool8 MovementAction_AcroBumpMoveDown_Step1(struct MapObject *mapObject, struct 
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpMoveUp_Step1(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroEndWheelieMoveUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 MovementAction_AcroBumpMoveUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_NORTH, 1);
-    return MovementAction_AcroBumpMoveUp_Step1(mapObject, sprite);
+    return MovementAction_AcroEndWheelieMoveUp_Step1(mapObject, sprite);
 }
 
-bool8 MovementAction_AcroBumpMoveUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8295,15 +8456,15 @@ bool8 MovementAction_AcroBumpMoveUp_Step1(struct MapObject *mapObject, struct Sp
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpMoveLeft_Step1(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroEndWheelieMoveLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 MovementAction_AcroBumpMoveLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_WEST, 1);
-    return MovementAction_AcroBumpMoveLeft_Step1(mapObject, sprite);
+    return MovementAction_AcroEndWheelieMoveLeft_Step1(mapObject, sprite);
 }
 
-bool8 MovementAction_AcroBumpMoveLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8313,15 +8474,15 @@ bool8 MovementAction_AcroBumpMoveLeft_Step1(struct MapObject *mapObject, struct 
     return FALSE;
 }
 
-bool8 MovementAction_AcroBumpMoveRight_Step1(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroEndWheelieMoveRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 MovementAction_AcroBumpMoveRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_EAST, 1);
-    return MovementAction_AcroBumpMoveRight_Step1(mapObject, sprite);
+    return MovementAction_AcroEndWheelieMoveRight_Step1(mapObject, sprite);
 }
 
-bool8 MovementAction_AcroBumpMoveRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroEndWheelieMoveRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -9593,11 +9754,11 @@ static bool8 WaitForMovementDelay(struct Sprite *sprite)
         return FALSE;
 }
 
-void SetAndStartSpriteAnim(struct Sprite *sprite, u8 a2, u8 a3)
+void SetAndStartSpriteAnim(struct Sprite *sprite, u8 animNum, u8 animCmdIndex)
 {
-    sprite->animNum = a2;
-    sprite->animPaused = 0 ;
-    SeekSpriteAnim(sprite, a3);
+    sprite->animNum = animNum;
+    sprite->animPaused = 0;
+    SeekSpriteAnim(sprite, animCmdIndex);
 }
 
 bool8 SpriteAnimEnded(struct Sprite *sprite)
@@ -9649,7 +9810,7 @@ void TurnMapObject(u8 mapObjectId, u8 direction)
         struct Sprite *sprite = &gSprites[i];
         if (sprite->inUse && sprite->callback == UpdateFieldSpriteSubpriorityAndVisibility && (u8)sprite->data[0] == mapObjectId)
         {
-            u8 animNum = GetFaceDirectionMovementAction_Extended(direction);
+            u8 animNum = GetFaceDirectionAnimNum(direction);
             StartSpriteAnim(sprite, animNum);
             break;
         }
