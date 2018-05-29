@@ -1,11 +1,11 @@
-SlateportCity_OceanicMuseum_2F_MapObjects:: @ 8387D70
-	object_event 1, MAP_OBJ_GFX_SCIENTIST_1, 0, 13, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155CE6, FLAG_HIDE_STERN_OCEANIC_MUSEUM_2F, 0, 0
-	object_event 2, MAP_OBJ_GFX_VAR_6, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_LEADER_OCEANIC_MUSEUM_2F, 0, 0
-	object_event 3, MAP_OBJ_GFX_VAR_1, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_1_OCEANIC_MUSEUM_2F, 0, 0
-	object_event 4, MAP_OBJ_GFX_VAR_1, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_2_OCEANIC_MUSEUM_2F, 0, 0
-	object_event 5, MAP_OBJ_GFX_OLD_MAN_2, 0, 12, 0, 7, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F34, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
-	object_event 6, MAP_OBJ_GFX_WOMAN_2, 0, 9, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F3D, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
-	object_event 7, MAP_OBJ_GFX_LITTLE_BOY_1, 0, 1, 0, 3, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F46, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
+SlateportCity_OceanicMuseum_2F_EventObjects:: @ 8387D70
+	object_event 1, EVENT_OBJ_GFX_SCIENTIST_1, 0, 13, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155CE6, FLAG_HIDE_STERN_OCEANIC_MUSEUM_2F, 0, 0
+	object_event 2, EVENT_OBJ_GFX_VAR_6, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_LEADER_OCEANIC_MUSEUM_2F, 0, 0
+	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_1_OCEANIC_MUSEUM_2F, 0, 0
+	object_event 4, EVENT_OBJ_GFX_VAR_1, 0, 6, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_2_OCEANIC_MUSEUM_2F, 0, 0
+	object_event 5, EVENT_OBJ_GFX_OLD_MAN_2, 0, 12, 0, 7, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F34, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
+	object_event 6, EVENT_OBJ_GFX_WOMAN_2, 0, 9, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F3D, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
+	object_event 7, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 1, 0, 3, 0, 3, 10, 17, 0, 0, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F46, FLAG_HIDE_OCEANIC_MUSEUM_VISITORS, 0, 0
 
 SlateportCity_OceanicMuseum_2F_MapWarps:: @ 8387E18
 	warp_def 6, 1, 0, 2, MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_1F
@@ -34,4 +34,4 @@ SlateportCity_OceanicMuseum_2F_MapBGEvents:: @ 8387E20
 	bg_event 4, 7, 0, 0, 0, SlateportCity_OceanicMuseum_2F_EventScript_155F10
 
 SlateportCity_OceanicMuseum_2F_MapEvents:: @ 8387F1C
-	map_events SlateportCity_OceanicMuseum_2F_MapObjects, SlateportCity_OceanicMuseum_2F_MapWarps, 0x0, SlateportCity_OceanicMuseum_2F_MapBGEvents
+	map_events SlateportCity_OceanicMuseum_2F_EventObjects, SlateportCity_OceanicMuseum_2F_MapWarps, 0x0, SlateportCity_OceanicMuseum_2F_MapBGEvents

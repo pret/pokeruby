@@ -11,7 +11,7 @@ enum
 // shop view window NPC info enum
 enum
 {
-    MAP_OBJ_ID,
+    EVENT_OBJ_ID,
     X_COORD,
     Y_COORD,
     ANIM_NUM

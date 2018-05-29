@@ -736,7 +736,7 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     return 0;
 }
 
-void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
+void GabbyAndTySetScriptVarsToEventObjectLocalIds(void)
 {
     switch (GabbyAndTyGetBattleNum())
     {
@@ -2201,7 +2201,7 @@ void GetMomOrDadStringForTVMessage(void)
 void sub_80BFD20(void)
 {
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
-    RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 typedef union ewramStruct_02007000

@@ -11,7 +11,7 @@
 #include "fldeff_flash.h"
 #include "link.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "palette.h"
 #include "overworld.h"
@@ -220,7 +220,7 @@ void sub_8080B9C(u8 taskId)
     {
     case 0:
         sub_8080958(0);
-        FreezeMapObjects();
+        FreezeEventObjects();
         PlayerGetDestCoords(x, y);
         FieldSetDoorOpened(*x, *y);
         task->data[0] = 1;
@@ -228,27 +228,27 @@ void sub_8080B9C(u8 taskId)
     case 1:
         if (sub_8080E70())
         {
-            u8 mapObjId;
+            u8 eventObjId;
             sub_8080958(1);
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], 8);
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 8);
             task->data[0] = 2;
         }
         break;
     case 2:
         if (walkrun_is_standing_still())
         {
-            u8 mapObjId;
+            u8 eventObjId;
             task->data[1] = FieldAnimateDoorClose(*x, *y);
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]);
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]);
             task->data[0] = 3;
         }
         break;
     case 3:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            UnfreezeMapObjects();
+            UnfreezeEventObjects();
             task->data[0] = 4;
         }
         break;
@@ -269,24 +269,24 @@ void task_map_chg_seq_0807E20C(u8 taskId)
     {
     case 0:
         sub_8080958(0);
-        FreezeMapObjects();
+        FreezeEventObjects();
         PlayerGetDestCoords(x, y);
         task->data[0] = 1;
         break;
     case 1:
         if (sub_8080E70())
         {
-            u8 mapObjId;
+            u8 eventObjId;
             sub_8080958(1);
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;
     case 2:
         if (walkrun_is_standing_still())
         {
-            UnfreezeMapObjects();
+            UnfreezeEventObjects();
             task->data[0] = 3;
         }
         break;
@@ -302,14 +302,14 @@ void task_map_chg_seq_0807E2CC(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        FreezeMapObjects();
+        FreezeEventObjects();
         ScriptContext2_Enable();
         gTasks[taskId].data[0]++;
         break;
     case 1:
         if (sub_8080E70())
         {
-            UnfreezeMapObjects();
+            UnfreezeEventObjects();
             ScriptContext2_Disable();
             DestroyTask(taskId);
         }
@@ -533,7 +533,7 @@ void task0A_fade_n_map_maybe(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeMapObjects();
+        FreezeEventObjects();
         ScriptContext2_Enable();
         task->data[0]++;
         break;
@@ -560,7 +560,7 @@ void sub_808115C(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeMapObjects();
+        FreezeEventObjects();
         PlayerGetDestCoords(x, y);
         PlaySE(GetDoorSoundEffect(*x, *y - 1));
         task->data[1] = FieldAnimateDoorOpen(*x, *y - 1);
@@ -569,21 +569,21 @@ void sub_808115C(u8 taskId)
     case 1:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            u8 mapObjId;
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearHeldMovementIfActive(&gMapObjects[mapObjId]);
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectSetHeldMovement(&gMapObjects[mapObjId], 9);
+            u8 eventObjId;
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectClearHeldMovementIfActive(&gEventObjects[eventObjId]);
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 9);
             task->data[0] = 2;
         }
         break;
     case 2:
         if (walkrun_is_standing_still())
         {
-            u8 mapObjId;
+            u8 eventObjId;
             task->data[1] = FieldAnimateDoorClose(*x, *y - 1);
-            mapObjId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            FieldObjectClearHeldMovementIfFinished(&gMapObjects[mapObjId]);
+            eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+            EventObjectClearHeldMovementIfFinished(&gEventObjects[eventObjId]);
             sub_8080958(0);
             task->data[0] = 3;
         }
@@ -611,7 +611,7 @@ void sub_80812C8(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        FreezeMapObjects();
+        FreezeEventObjects();
         ScriptContext2_Enable();
         task->data[0]++;
         break;

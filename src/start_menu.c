@@ -9,7 +9,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu.h"
 #include "new_game.h"
 #include "option_menu.h"
@@ -405,7 +405,7 @@ void sub_8071310(void)
 {
     if (!is_c1_link_related_active())
     {
-        FreezeMapObjects();
+        FreezeEventObjects();
         sub_80594C0();
         sub_80597F4();
     }

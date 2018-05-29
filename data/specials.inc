@@ -51,12 +51,12 @@ gSpecials::
 	def_special LoadPlayerParty
 	def_special sub_80C5568
 	def_special sub_8083BDC
-	def_special FieldObjectInteractionGetBerryTreeData
+	def_special EventObjectInteractionGetBerryTreeData
 	def_special Berry_FadeAndGoToBerryBagMenu
-	def_special FieldObjectInteractionPlantBerryTree
-	def_special FieldObjectInteractionPickBerryTree
-	def_special FieldObjectInteractionRemoveBerryTree
-	def_special FieldObjectInteractionWaterBerryTree
+	def_special EventObjectInteractionPlantBerryTree
+	def_special EventObjectInteractionPickBerryTree
+	def_special EventObjectInteractionRemoveBerryTree
+	def_special EventObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
@@ -187,7 +187,7 @@ gSpecials::
 	def_special IsTVShowInSearchOfTrainersAiring
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	def_special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -337,7 +337,7 @@ gSpecials::
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
-	def_special TryInitBattleTowerAwardManMapObject
+	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveSecretBase
 	def_special LoadPlayerBag
 	def_special sub_8081924

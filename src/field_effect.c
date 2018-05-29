@@ -267,7 +267,7 @@ bool8 (*const gUnknown_0839F300[])(struct Task *) = {
     sub_8086ED4
 };
 
-bool8 (*const gUnknown_0839F31C[])(struct Task *, struct MapObject *) = {
+bool8 (*const gUnknown_0839F31C[])(struct Task *, struct EventObject *) = {
     sub_8086FB0,
     waterfall_1_do_anim_probably,
     waterfall_2_wait_anim_finish_probably,
@@ -281,7 +281,7 @@ bool8 (*const gUnknown_0839F330[])(struct Task *) = {
     dive_3_unknown
 };
 
-bool8 (*const gUnknown_0839F33C[])(struct Task *, struct MapObject *, struct Sprite *) = {
+bool8 (*const gUnknown_0839F33C[])(struct Task *, struct EventObject *, struct Sprite *) = {
     sub_808722C,
     sub_8087264,
     sub_8087298,
@@ -290,14 +290,14 @@ bool8 (*const gUnknown_0839F33C[])(struct Task *, struct MapObject *, struct Spr
     sub_80873F4
 };
 
-bool8 (*const gUnknown_0839F354[])(struct Task *, struct MapObject *, struct Sprite *) = {
+bool8 (*const gUnknown_0839F354[])(struct Task *, struct EventObject *, struct Sprite *) = {
     sub_80874CC,
     sub_80874FC,
     sub_8087548,
     sub_808759C
 };
 
-bool8 (*const gUnknown_0839F364[])(struct Task *, struct MapObject *, struct Sprite *) = {
+bool8 (*const gUnknown_0839F364[])(struct Task *, struct EventObject *, struct Sprite *) = {
     sub_80876C8,
     sub_80876F8,
     sub_8087774,
@@ -1081,7 +1081,7 @@ void mapldr_080842E8(void)
     pal_fill_black();
     CreateTask(task00_8084310, 0);
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gFieldCallback = NULL;
 }
 
@@ -1118,13 +1118,13 @@ void mapldr_08084390(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_black();
     CreateTask(c3_080843F8, 0);
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
     if (gPlayerAvatar.flags & 0x08)
     {
-        FieldObjectTurn(&gMapObjects[gPlayerAvatar.mapObjectId], DIR_WEST);
+        EventObjectTurn(&gEventObjects[gPlayerAvatar.eventObjectId], DIR_WEST);
     }
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gFieldCallback = NULL;
 }
 
@@ -1144,7 +1144,7 @@ void c3_080843F8(u8 taskId)
     if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
     {
         ScriptContext2_Disable();
-        UnfreezeMapObjects();
+        UnfreezeEventObjects();
         DestroyTask(taskId);
     }
 }
@@ -1159,7 +1159,7 @@ void sub_8086748(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     CreateTask(sub_8086774, 0);
     gFieldCallback = NULL;
 }
@@ -1173,14 +1173,14 @@ void sub_8086774(u8 taskId)
 
 bool8 sub_80867AC(struct Task *task) // gUnknown_0839F2CC[0]
 {
-    struct MapObject *playerObject;
+    struct EventObject *playerObject;
     struct Sprite *playerSprite;
-    playerObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    playerObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     playerSprite = &gSprites[gPlayerAvatar.spriteId];
     CameraObjectReset2();
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
     gPlayerAvatar.preventStep = TRUE;
-    FieldObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+    EventObjectSetHeldMovement(playerObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
     task->data[4] = playerSprite->subspriteMode;
     playerObject->fixedPriority = 1;
     playerSprite->oam.priority = 1;
@@ -1207,7 +1207,7 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
     sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
     task->data[1] = 1;
     task->data[2] = 0;
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = 0;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 0;
     PlaySE(SE_RU_HYUU);
     task->data[0]++;
     return FALSE;
@@ -1215,10 +1215,10 @@ bool8 sub_8086870(struct Task *task) // gUnknown_0839F2CC[2]
 
 bool8 sub_80868E4(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     struct Sprite *sprite;
 
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     sprite = &gSprites[gPlayerAvatar.spriteId];
     sprite->pos2.y += task->data[1];
     if (task->data[1] < 8)
@@ -1232,15 +1232,15 @@ bool8 sub_80868E4(struct Task *task)
     if (task->data[3] == 0 && sprite->pos2.y >= -16)
     {
         task->data[3]++;
-        mapObject->fixedPriority = 0;
+        eventObject->fixedPriority = 0;
         sprite->subspriteMode = task->data[4];
-        mapObject->triggerGroundEffectsOnMove = 1;
+        eventObject->triggerGroundEffectsOnMove = 1;
     }
     if (sprite->pos2.y >= 0)
     {
         PlaySE(SE_W070);
-        mapObject->triggerGroundEffectsOnStop = 1;
-        mapObject->landingJump = 1;
+        eventObject->triggerGroundEffectsOnStop = 1;
+        eventObject->landingJump = 1;
         sprite->pos2.y = 0;
         task->data[0]++;
     }
@@ -1277,7 +1277,7 @@ bool8 sub_80869F8(struct Task *task)
     gPlayerAvatar.preventStep = FALSE;
     ScriptContext2_Disable();
     CameraObjectReset1();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     InstallCameraPanAheadCallback();
     DestroyTask(FindTaskIdByFunc(sub_8086774));
     return FALSE;
@@ -1317,7 +1317,7 @@ void sub_8086A68(u8 taskId)
 
 bool8 sub_8086AA0(struct Task *task)
 {
-    FreezeMapObjects();
+    FreezeEventObjects();
     CameraObjectReset2();
     sub_80B4824(task->data[1]);
     task->data[0]++;
@@ -1326,11 +1326,11 @@ bool8 sub_8086AA0(struct Task *task)
 
 bool8 sub_8086AC0(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(GetPlayerFacingDirection()));
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
@@ -1441,13 +1441,13 @@ void sub_8086CBC(u8 taskId)
 
 bool8 sub_8086CF4(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     s16 x;
     s16 y;
     u8 behavior;
     CameraObjectReset2();
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(DIR_EAST));
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
     task->data[0]++;
@@ -1539,13 +1539,13 @@ bool8 sub_8086EB0(struct Task *task)
 
 bool8 sub_8086ED4(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         CameraObjectReset1();
         ScriptContext2_Disable();
-        FieldObjectSetHeldMovement(mapObject, GetWalkNormalMovementAction(DIR_EAST));
+        EventObjectSetHeldMovement(eventObject, GetWalkNormalMovementAction(DIR_EAST));
         DestroyTask(FindTaskIdByFunc(sub_8086CBC));
     }
     return FALSE;
@@ -1564,10 +1564,10 @@ bool8 FldEff_UseWaterfall(void)
 
 void sub_8086F64(u8 taskId)
 {
-    while (gUnknown_0839F31C[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId]));
+    while (gUnknown_0839F31C[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId]));
 }
 
-bool8 sub_8086FB0(struct Task *task, struct MapObject *mapObject)
+bool8 sub_8086FB0(struct Task *task, struct EventObject *eventObject)
 {
     ScriptContext2_Enable();
     gPlayerAvatar.preventStep = TRUE;
@@ -1575,12 +1575,12 @@ bool8 sub_8086FB0(struct Task *task, struct MapObject *mapObject)
     return FALSE;
 }
 
-bool8 waterfall_1_do_anim_probably(struct Task *task, struct MapObject *mapObject)
+bool8 waterfall_1_do_anim_probably(struct Task *task, struct EventObject *eventObject)
 {
     ScriptContext2_Enable();
-    if (!FieldObjectIsMovementOverridden(mapObject))
+    if (!EventObjectIsMovementOverridden(eventObject))
     {
-        FieldObjectClearHeldMovementIfFinished(mapObject);
+        EventObjectClearHeldMovementIfFinished(eventObject);
         gFieldEffectArguments[0] = task->data[1];
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
@@ -1588,7 +1588,7 @@ bool8 waterfall_1_do_anim_probably(struct Task *task, struct MapObject *mapObjec
     return FALSE;
 }
 
-bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct MapObject *mapObject)
+bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct EventObject *eventObject)
 {
     if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
@@ -1598,20 +1598,20 @@ bool8 waterfall_2_wait_anim_finish_probably(struct Task *task, struct MapObject 
     return TRUE;
 }
 
-bool8 sub_8087030(struct Task *task, struct MapObject *mapObject)
+bool8 sub_8087030(struct Task *task, struct EventObject *eventObject)
 {
-    FieldObjectSetHeldMovement(mapObject, GetWalkSlowMovementAction(DIR_NORTH));
+    EventObjectSetHeldMovement(eventObject, GetWalkSlowMovementAction(DIR_NORTH));
     task->data[0]++;
     return FALSE;
 }
 
-bool8 sub_8087058(struct Task *task, struct MapObject *mapObject)
+bool8 sub_8087058(struct Task *task, struct EventObject *eventObject)
 {
-    if (!FieldObjectClearHeldMovementIfFinished(mapObject))
+    if (!EventObjectClearHeldMovementIfFinished(eventObject))
     {
         return FALSE;
     }
-    if (MetatileBehavior_IsWaterfall(mapObject->currentMetatileBehavior))
+    if (MetatileBehavior_IsWaterfall(eventObject->currentMetatileBehavior))
     {
         task->data[0] = 3;
         return TRUE;
@@ -1663,7 +1663,7 @@ bool8 dive_3_unknown(struct Task *task)
     PlayerGetDestCoords(&mapPosition.x, &mapPosition.y);
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        dive_warp(&mapPosition, gMapObjects[gPlayerAvatar.mapObjectId].currentMetatileBehavior);
+        dive_warp(&mapPosition, gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior);
         DestroyTask(FindTaskIdByFunc(Task_Dive));
         FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
     }
@@ -1680,22 +1680,22 @@ void sub_80871B8(u8 priority)
 
 void sub_80871D0(u8 taskId)
 {
-    while (gUnknown_0839F33C[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while (gUnknown_0839F33C[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-bool8 sub_808722C(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_808722C(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    FreezeMapObjects();
+    FreezeEventObjects();
     CameraObjectReset2();
     SetCameraPanningCallback(NULL);
     gPlayerAvatar.preventStep = TRUE;
-    mapObject->fixedPriority = 1;
+    eventObject->fixedPriority = 1;
     task->data[1] = 1;
     task->data[0]++;
     return TRUE;
 }
 
-bool8 sub_8087264(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8087264(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     SetCameraPanning(0, task->data[1]);
     task->data[1] = -task->data[1];
@@ -1708,12 +1708,12 @@ bool8 sub_8087264(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return FALSE;
 }
 
-bool8 sub_8087298(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8087298(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     sprite->pos2.y = 0;
     task->data[3] = 1;
-    gFieldEffectArguments[0] = mapObject->currentCoords.x;
-    gFieldEffectArguments[1] = mapObject->currentCoords.y;
+    gFieldEffectArguments[0] = eventObject->currentCoords.x;
+    gFieldEffectArguments[1] = eventObject->currentCoords.y;
     gFieldEffectArguments[2] = sprite->subpriority - 1;
     gFieldEffectArguments[3] = sprite->oam.priority;
     FieldEffectStart(FLDEFF_LAVARIDGE_GYM_WARP);
@@ -1722,7 +1722,7 @@ bool8 sub_8087298(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return TRUE;
 }
 
-bool8 sub_80872E4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80872E4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     s16 centerToCornerVecY;
     SetCameraPanning(0, task->data[1]);
@@ -1754,7 +1754,7 @@ bool8 sub_80872E4(struct Task *task, struct MapObject *mapObject, struct Sprite 
     if (task->data[5] == 0 && sprite->pos2.y < -0x10)
     {
         task->data[5]++;
-        mapObject->fixedPriority = 1;
+        eventObject->fixedPriority = 1;
         sprite->oam.priority = 1;
         sprite->subspriteMode = 2;
     }
@@ -1765,7 +1765,7 @@ bool8 sub_80872E4(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return FALSE;
 }
 
-bool8 sub_80873D8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80873D8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     sub_8053FF8();
     fade_8080918();
@@ -1773,7 +1773,7 @@ bool8 sub_80873D8(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return FALSE;
 }
 
-bool8 sub_80873F4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80873F4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
@@ -1798,25 +1798,25 @@ void mapldr_080851BC(void)
 
 void sub_8087470(u8 taskId)
 {
-    while (gUnknown_0839F354[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while (gUnknown_0839F354[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-bool8 sub_80874CC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80874CC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     CameraObjectReset2();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gPlayerAvatar.preventStep = TRUE;
-    mapObject->invisible = 1;
+    eventObject->invisible = 1;
     task->data[0]++;
     return FALSE;
 }
 
-bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80874FC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     if (IsWeatherNotFadingIn())
     {
-        gFieldEffectArguments[0] = mapObject->currentCoords.x;
-        gFieldEffectArguments[1] = mapObject->currentCoords.y;
+        gFieldEffectArguments[0] = eventObject->currentCoords.x;
+        gFieldEffectArguments[1] = eventObject->currentCoords.y;
         gFieldEffectArguments[2] = sprite->subpriority - 1;
         gFieldEffectArguments[3] = sprite->oam.priority;
         task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
@@ -1825,27 +1825,27 @@ bool8 sub_80874FC(struct Task *task, struct MapObject *mapObject, struct Sprite 
     return FALSE;
 }
 
-bool8 sub_8087548(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8087548(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     sprite = &gSprites[task->data[1]];
     if (sprite->animCmdIndex > 1)
     {
         task->data[0]++;
-        mapObject->invisible = 0;
+        eventObject->invisible = 0;
         CameraObjectReset1();
         PlaySE(SE_W091);
-        FieldObjectSetHeldMovement(mapObject, sub_80608A4(DIR_EAST));
+        EventObjectSetHeldMovement(eventObject, sub_80608A4(DIR_EAST));
     }
     return FALSE;
 }
 
-bool8 sub_808759C(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_808759C(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (FieldObjectClearHeldMovementIfFinished(mapObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
-        UnfreezeMapObjects();
+        UnfreezeEventObjects();
         DestroyTask(FindTaskIdByFunc(sub_8087470));
     }
     return FALSE;
@@ -1881,27 +1881,27 @@ void sub_8087654(u8 priority)
 
 void sub_808766C(u8 taskId)
 {
-    while(gUnknown_0839F364[gTasks[taskId].data[0]](&gTasks[taskId], &gMapObjects[gPlayerAvatar.mapObjectId], &gSprites[gPlayerAvatar.spriteId]));
+    while(gUnknown_0839F364[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId], &gSprites[gPlayerAvatar.spriteId]));
 }
 
-bool8 sub_80876C8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80876C8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    FreezeMapObjects();
+    FreezeEventObjects();
     CameraObjectReset2();
     gPlayerAvatar.preventStep = TRUE;
-    mapObject->fixedPriority = 1;
+    eventObject->fixedPriority = 1;
     task->data[0]++;
     return FALSE;
 }
 
-bool8 sub_80876F8(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80876F8(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
-    if (FieldObjectClearHeldMovementIfFinished(mapObject))
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         if (task->data[1] > 3)
         {
-            gFieldEffectArguments[0] = mapObject->currentCoords.x;
-            gFieldEffectArguments[1] = mapObject->currentCoords.y;
+            gFieldEffectArguments[0] = eventObject->currentCoords.x;
+            gFieldEffectArguments[1] = eventObject->currentCoords.y;
             gFieldEffectArguments[2] = sprite->subpriority - 1;
             gFieldEffectArguments[3] = sprite->oam.priority;
             task->data[1] = FieldEffectStart(FLDEFF_POP_OUT_OF_ASH);
@@ -1909,24 +1909,24 @@ bool8 sub_80876F8(struct Task *task, struct MapObject *mapObject, struct Sprite 
         } else
         {
             task->data[1]++;
-            FieldObjectSetHeldMovement(mapObject, GetWalkInPlaceFastestMovementAction(mapObject->facingDirection));
+            EventObjectSetHeldMovement(eventObject, GetWalkInPlaceFastestMovementAction(eventObject->facingDirection));
             PlaySE(SE_FU_ZUZUZU);
         }
     }
     return FALSE;
 }
 
-bool8 sub_8087774(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8087774(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     if (gSprites[task->data[1]].animCmdIndex == 2)
     {
-        mapObject->invisible = 1;
+        eventObject->invisible = 1;
         task->data[0]++;
     }
     return FALSE;
 }
 
-bool8 sub_80877AC(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80877AC(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
@@ -1940,7 +1940,7 @@ bool8 sub_80877AC(struct Task *task, struct MapObject *mapObject, struct Sprite 
 void sub_80878C4(u8);
 void mapldr_080859D4(void);
 
-bool8 sub_80877D4(struct Task *task, struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_80877D4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
 {
     if (!gPaletteFade.active && sub_8054034() == TRUE)
     {
@@ -1973,7 +1973,7 @@ void sub_808788C(struct Sprite *sprite)
 void sub_80878A8(void)
 {
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     CreateTask(sub_80878C4, 0x50);
 }
 
@@ -1991,19 +1991,19 @@ void sub_80878F4(struct Task *task)
 
 void sub_8087914(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
         sub_8053FF8();
         fade_8080918();
     }
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         if (task->data[14] == 0 && !gPaletteFade.active && sub_8054034() == TRUE)
         {
-            SetFieldObjectDirection(mapObject, task->data[15]);
+            SetEventObjectDirection(eventObject, task->data[15]);
             sub_8053678();
             warp_in();
             gFieldCallback = mapldr_080859D4;
@@ -2011,7 +2011,7 @@ void sub_8087914(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_80878C4));
         } else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(unknown_0839F380[mapObject->facingDirection]));
+            EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(unknown_0839F380[eventObject->facingDirection]));
             if (task->data[2] < 12)
             {
                 task->data[2]++;
@@ -2033,9 +2033,9 @@ void mapldr_080859D4(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gFieldCallback = NULL;
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
     CreateTask(sub_8087A74, 0);
 }
 
@@ -2056,29 +2056,29 @@ void sub_8087AA4(struct Task *task)
 void sub_8087AC8(struct Task *task)
 {
     u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        if (FieldObjectIsMovementOverridden(mapObject) && !FieldObjectClearHeldMovementIfFinished(mapObject))
+        if (EventObjectIsMovementOverridden(eventObject) && !EventObjectClearHeldMovementIfFinished(eventObject))
         {
             return;
         }
         if (task->data[2] >= 32 && task->data[15] == GetPlayerFacingDirection())
         {
-            mapObject->invisible = 0;
+            eventObject->invisible = 0;
             ScriptContext2_Disable();
-            UnfreezeMapObjects();
+            UnfreezeEventObjects();
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
             return;
         }
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(unknown_0839F380[mapObject->facingDirection]));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(unknown_0839F380[eventObject->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
         }
         task->data[1] = task->data[2] >> 2;
     }
-    mapObject->invisible ^= 1;
+    eventObject->invisible ^= 1;
 }
 
 static void ExecuteTeleportFieldEffectTask(u8);
@@ -2108,7 +2108,7 @@ static void ExecuteTeleportFieldEffectTask(u8 taskId)
 static void TeleportFieldEffectTask1(struct Task *task)
 {
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     CameraObjectReset2();
     task->data[15] = GetPlayerFacingDirection();
     task->data[0]++;
@@ -2117,14 +2117,14 @@ static void TeleportFieldEffectTask1(struct Task *task)
 static void TeleportFieldEffectTask2(struct Task *task)
 {
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
-        FieldObjectTurn(mapObject, spinDirections[mapObject->facingDirection]);
+        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
         task->data[1] = 8;
         task->data[2]++;
     }
-    if (task->data[2] > 7 && task->data[15] == mapObject->facingDirection)
+    if (task->data[2] > 7 && task->data[15] == eventObject->facingDirection)
     {
         task->data[0]++;
         task->data[1] = 4;
@@ -2137,12 +2137,12 @@ static void TeleportFieldEffectTask2(struct Task *task)
 static void TeleportFieldEffectTask3(struct Task *task)
 {
     u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((--task->data[1]) <= 0)
     {
         task->data[1] = 4;
-        FieldObjectTurn(mapObject, spinDirections[mapObject->facingDirection]);
+        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
     }
     sprite->pos1.y -= task->data[3];
     task->data[4] += task->data[3];
@@ -2181,9 +2181,9 @@ static void mapldr_08085D88(void)
     Overworld_PlaySpecialMapMusic();
     pal_fill_for_map_transition();
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gFieldCallback = NULL;
-    gMapObjects[gPlayerAvatar.mapObjectId].invisible = 1;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = 1;
     CameraObjectReset2();
     CreateTask(sub_8087E1C, 0);
 }
@@ -2208,7 +2208,7 @@ void sub_8087E4C(struct Task *task)
         sprite = &gSprites[gPlayerAvatar.spriteId];
         centerToCornerVecY = -(sprite->centerToCornerVecY << 1);
         sprite->pos2.y = -(sprite->pos1.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY + centerToCornerVecY);
-        gMapObjects[gPlayerAvatar.mapObjectId].invisible = 0;
+        gEventObjects[gPlayerAvatar.eventObjectId].invisible = 0;
         task->data[0]++;
         task->data[1] = 8;
         task->data[2] = 1;
@@ -2221,14 +2221,14 @@ void sub_8087E4C(struct Task *task)
 void sub_8087ED8(struct Task *task)
 {
     u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
     {
         if (task->data[13] == 0)
         {
             task->data[13]++;
-            mapObject->triggerGroundEffectsOnMove = 1;
+            eventObject->triggerGroundEffectsOnMove = 1;
             sprite->subspriteMode = task->data[14];
         }
     } else
@@ -2246,7 +2246,7 @@ void sub_8087ED8(struct Task *task)
     if ((--task->data[2]) == 0)
     {
         task->data[2] = 4;
-        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->facingDirection]);
+        EventObjectTurn(eventObject, unknown_0839F380[eventObject->facingDirection]);
     }
     if (sprite->pos2.y >= 0)
     {
@@ -2260,16 +2260,16 @@ void sub_8087ED8(struct Task *task)
 void sub_8087FDC(struct Task *task)
 {
     u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
-    struct MapObject *mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+    struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if ((--task->data[1]) == 0)
     {
-        FieldObjectTurn(mapObject, unknown_0839F380[mapObject->facingDirection]);
+        EventObjectTurn(eventObject, unknown_0839F380[eventObject->facingDirection]);
         task->data[1] = 8;
-        if ((++task->data[2]) > 4 && task->data[14] == mapObject->facingDirection)
+        if ((++task->data[2]) > 4 && task->data[14] == eventObject->facingDirection)
         {
             ScriptContext2_Disable();
             CameraObjectReset1();
-            UnfreezeMapObjects();
+            UnfreezeEventObjects();
             DestroyTask(FindTaskIdByFunc(sub_8087E1C));
         }
     }
@@ -2821,31 +2821,31 @@ void sub_8088954(u8 taskId)
 void sub_8088984(struct Task *task)
 {
     ScriptContext2_Enable();
-    FreezeMapObjects();
+    FreezeEventObjects();
     gPlayerAvatar.preventStep = TRUE;
     SetPlayerAvatarStateMask(8);
     PlayerGetDestCoords(&task->data[1], &task->data[2]);
-    MoveCoords(gMapObjects[gPlayerAvatar.mapObjectId].movementDirection, &task->data[1], &task->data[2]);
+    MoveCoords(gEventObjects[gPlayerAvatar.eventObjectId].movementDirection, &task->data[1], &task->data[2]);
     task->data[0]++;
 }
 
 void sub_80889E4(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         sub_8059BF4();
-        FieldObjectSetHeldMovement(mapObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
 
 void sub_8088A30(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectCheckHeldMovementStatus(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectCheckHeldMovementStatus(eventObject))
     {
         gFieldEffectArguments[0] = task->data[15] | 0x80000000;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -2855,32 +2855,32 @@ void sub_8088A30(struct Task *task)
 
 void sub_8088A78(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
-        FieldObjectClearHeldMovementIfFinished(mapObject);
-        FieldObjectSetHeldMovement(mapObject, GetJumpSpecialMovementAction(mapObject->movementDirection));
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        EventObjectClearHeldMovementIfFinished(eventObject);
+        EventObjectSetHeldMovement(eventObject, GetJumpSpecialMovementAction(eventObject->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
         gFieldEffectArguments[1] = task->data[2];
-        gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;
-        mapObject->fieldEffectSpriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
+        gFieldEffectArguments[2] = gPlayerAvatar.eventObjectId;
+        eventObject->fieldEffectSpriteId = FieldEffectStart(FLDEFF_SURF_BLOB);
         task->data[0]++;
     }
 }
 
 void sub_8088AF4(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         gPlayerAvatar.preventStep = FALSE;
         gPlayerAvatar.flags &= 0xdf;
-        FieldObjectSetHeldMovement(mapObject, GetFaceDirectionMovementAction(mapObject->movementDirection));
-        sub_8127ED0(mapObject->fieldEffectSpriteId, 1);
-        UnfreezeMapObjects();
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(eventObject->movementDirection));
+        sub_8127ED0(eventObject->fieldEffectSpriteId, 1);
+        UnfreezeEventObjects();
         ScriptContext2_Disable();
         FieldEffectActiveListRemove(FLDEFF_USE_SURF);
         DestroyTask(FindTaskIdByFunc(sub_8088954));
@@ -2960,24 +2960,24 @@ void sub_8088C70(u8 taskId)
 
 void sub_8088CA0(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[15] = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_8059BF4();
-        FieldObjectSetHeldMovement(mapObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
 
 void sub_8088CF8(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         gFieldEffectArguments[0] = task->data[1];
@@ -2987,14 +2987,14 @@ void sub_8088CF8(struct Task *task)
 
 void sub_8088D3C(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         if (task->data[15] & 0x08)
         {
-            sub_8127ED0(mapObject->fieldEffectSpriteId, 2);
-            sub_8127EFC(mapObject->fieldEffectSpriteId, 0);
+            sub_8127ED0(eventObject->fieldEffectSpriteId, 2);
+            sub_8127EFC(eventObject->fieldEffectSpriteId, 0);
         }
         task->data[1] = sub_8088F60();
         task->data[0]++;
@@ -3008,15 +3008,15 @@ void sub_8088D94(struct Task *task)
         task->data[0]++;
         task->data[2] = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        FieldObjectSetHeldMovement(&gMapObjects[gPlayerAvatar.mapObjectId], 0x02);
+        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], 0x02);
     }
 }
 
 void sub_8088DD8(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if ((task->data[2] == 0 || (--task->data[2]) == 0) && FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if ((task->data[2] == 0 || (--task->data[2]) == 0) && EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         PlaySE(SE_W019);
@@ -3026,17 +3026,17 @@ void sub_8088DD8(struct Task *task)
 
 void sub_8088E2C(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     if ((++task->data[2]) >= 8)
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
-        StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
-        mapObject->inanimate = 1;
-        FieldObjectSetHeldMovement(mapObject, 0x48);
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
+        eventObject->inanimate = 1;
+        EventObjectSetHeldMovement(eventObject, 0x48);
         if (task->data[15] & 0x08)
         {
-            DestroySprite(&gSprites[mapObject->fieldEffectSpriteId]);
+            DestroySprite(&gSprites[eventObject->fieldEffectSpriteId]);
         }
         task->data[0]++;
         task->data[2] = 0;
@@ -3045,14 +3045,14 @@ void sub_8088E2C(struct Task *task)
 
 void sub_8088EB4(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     if ((++task->data[2]) >= 10)
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        FieldObjectClearHeldMovementIfActive(mapObject);
-        mapObject->inanimate = 0;
-        mapObject->hasShadow = 0;
-        sub_8088FFC(task->data[1], mapObject->spriteId);
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        EventObjectClearHeldMovementIfActive(eventObject);
+        eventObject->inanimate = 0;
+        eventObject->hasShadow = 0;
+        sub_8088FFC(task->data[1], eventObject->spriteId);
         CameraObjectReset2();
         task->data[0]++;
     }
@@ -3257,9 +3257,9 @@ void sub_8089270(u8 taskId)
 
 void sub_80892A0(struct Task *task)
 {
-    struct MapObject *mapObject;
-    mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-    if (!FieldObjectIsMovementOverridden(mapObject) || FieldObjectClearHeldMovementIfFinished(mapObject))
+    struct EventObject *eventObject;
+    eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+    if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         task->data[0]++;
         task->data[2] = 17;
@@ -3268,27 +3268,27 @@ void sub_80892A0(struct Task *task)
         SetPlayerAvatarStateMask(0x01);
         if (task->data[15] & 0x08)
         {
-            sub_8127ED0(mapObject->fieldEffectSpriteId, 0);
+            sub_8127ED0(eventObject->fieldEffectSpriteId, 0);
         }
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         CameraObjectReset2();
-        FieldObjectTurn(mapObject, DIR_WEST);
-        StartSpriteAnim(&gSprites[mapObject->spriteId], 0x16);
-        mapObject->invisible = 0;
+        EventObjectTurn(eventObject, DIR_WEST);
+        StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
+        eventObject->invisible = 0;
         task->data[1] = sub_8088F60();
         sub_8088FC0(task->data[1]);
-        sub_8088FFC(task->data[1], mapObject->spriteId);
+        sub_8088FFC(task->data[1], eventObject->spriteId);
     }
 }
 
 void sub_8089354(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     struct Sprite *sprite;
     if (task->data[2] == 0 || (--task->data[2]) == 0)
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sprite = &gSprites[mapObject->spriteId];
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        sprite = &gSprites[eventObject->spriteId];
         sub_8088FFC(task->data[1], 0x40);
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
@@ -3331,26 +3331,26 @@ void sub_80893C0(struct Task *task)
 
 void sub_8089414(struct Task *task)
 {
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     struct Sprite *sprite;
     if (sub_8088FA4(task->data[1]))
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
-        sprite = &gSprites[mapObject->spriteId];
-        mapObject->inanimate = 0;
-        sub_805C058(mapObject, mapObject->currentCoords.x, mapObject->currentCoords.y);
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
+        sprite = &gSprites[eventObject->spriteId];
+        eventObject->inanimate = 0;
+        sub_805C058(eventObject, eventObject->currentCoords.x, eventObject->currentCoords.y);
         sprite->pos2.x = 0;
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
         sub_8059BF4();
-        FieldObjectSetHeldMovement(mapObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, 0x39);
         task->data[0]++;
     }
 }
 
 void sub_808948C(struct Task *task)
 {
-    if (FieldObjectClearHeldMovementIfFinished(&gMapObjects[gPlayerAvatar.mapObjectId]))
+    if (EventObjectClearHeldMovementIfFinished(&gEventObjects[gPlayerAvatar.eventObjectId]))
     {
         task->data[0]++;
         sub_8089230(task->data[1]);
@@ -3370,18 +3370,18 @@ void sub_80894C4(struct Task *task)
 void fishE(struct Task *task)
 {
     u8 state;
-    struct MapObject *mapObject;
+    struct EventObject *eventObject;
     if ((--task->data[1]) == 0)
     {
-        mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
+        eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
         state = PLAYER_AVATAR_STATE_NORMAL;
         if (task->data[15] & 0x08)
         {
             state = PLAYER_AVATAR_STATE_SURFING;
-            sub_8127ED0(mapObject->fieldEffectSpriteId, 1);
+            sub_8127ED0(eventObject->fieldEffectSpriteId, 1);
         }
-        sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(state));
-        FieldObjectTurn(mapObject, DIR_SOUTH);
+        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(state));
+        EventObjectTurn(eventObject, DIR_SOUTH);
         gPlayerAvatar.flags = task->data[15];
         gPlayerAvatar.preventStep = FALSE;
         FieldEffectActiveListRemove(FLDEFF_FLY_IN);

@@ -14,7 +14,7 @@ struct DebugStruct1
     u8 var1[10];
 };
 
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+extern struct LinkPlayerEventObject gLinkPlayerEventObjects[4];
 extern u8 gBattleOutcome;
 
 #if DEBUG
@@ -220,7 +220,7 @@ void UpdateLinkBattleRecords(int id)
         gTrainerCards[id].playerName,
         gTrainerCards[id].trainerId,
         gBattleOutcome,
-        gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
+        gLinkPlayers[gLinkPlayerEventObjects[id].linkPlayerId].language);
 }
 
 #if DEBUG
@@ -238,7 +238,7 @@ void debug_sub_81257E0(void)
             gUnknown_Debug_4245CC[id].var1,
             gUnknown_Debug_4245CC[id].var0,
             gUnknown_Debug_8424620[i].unk1,
-            gLinkPlayers[gLinkPlayerMapObjects[id].linkPlayerId].language);
+            gLinkPlayers[gLinkPlayerEventObjects[id].linkPlayerId].language);
     }
 }
 #endif

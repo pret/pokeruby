@@ -33,7 +33,7 @@ struct Coords32
 
 extern u16 gSpecialVar_LastTalked;
 extern u16 gSpecialVar_Facing;
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
+extern struct LinkPlayerEventObject gLinkPlayerEventObjects[];
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_020297ED;
@@ -41,7 +41,7 @@ extern u8 gUnknown_020297ED;
 static EWRAM_DATA u8 gUnknown_0202E8C0 = 0;
 static EWRAM_DATA u16 gUnknown_0202E8C2 = 0;
 
-u8 gSelectedMapObject;
+u8 gSelectedEventObject;
 
 //scripts
 extern u8 gUnknown_081A2C51[];
@@ -88,7 +88,7 @@ static u16 cur_mapdata_block_role_at_player_pos(int);
 static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
 static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c);
 static u8 *sub_8068364(struct MapPosition *, u8, u8);
-static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *, u8, u8 c);
+static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *, u8, u8 c);
 static u8 *sub_8068500(struct MapPosition *, u8, u8);
 static u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
 static bool32 sub_8068770(void);
@@ -105,7 +105,7 @@ static void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
 static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
 static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
 static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
-static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);;
+static struct BgEvent *FindInvisibleEventObjectByPosition(struct MapHeader *, u16, u16, u8);;
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {
@@ -322,7 +322,7 @@ static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
     script = sub_8068364(position, b, c);
     if (script != NULL)
         return script;
-    script = TryGetInvisibleMapObjectScript(position, b, c);
+    script = TryGetInvisibleEventObjectScript(position, b, c);
     if (script != NULL)
         return script;
     script = sub_8068500(position, b, c);
@@ -341,20 +341,20 @@ u8 *sub_80682A8(struct MapPosition *position, u8 unused, u8 c)
     s32 i;
 
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
-        r3 = GetFieldObjectIdByXYZ(position->x, position->y, position->height);
+        r3 = GetEventObjectIdByXYZ(position->x, position->y, position->height);
     else
-        r3 = GetFieldObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
-    if (r3 == 16 || gMapObjects[r3].localId == 0xFF)
+        r3 = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
+    if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
         return NULL;
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayerMapObjects[i].active == TRUE && gLinkPlayerMapObjects[i].mapObjId == r3)
+        if (gLinkPlayerEventObjects[i].active == TRUE && gLinkPlayerEventObjects[i].eventObjId == r3)
             return NULL;
     }
-    gSelectedMapObject = r3;
-    gSpecialVar_LastTalked = gMapObjects[r3].localId;
+    gSelectedEventObject = r3;
+    gSpecialVar_LastTalked = gEventObjects[r3].localId;
     gSpecialVar_Facing = c;
-    return GetFieldObjectScriptPointerByFieldObjectId(r3);
+    return GetEventObjectScriptPointerByEventObjectId(r3);
 }
 
 static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
@@ -362,27 +362,27 @@ static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
     u8 r3;
     u8 *script;
 
-    r3 = GetFieldObjectIdByXYZ(position->x, position->y, position->height);
-    if (r3 == 16 || gMapObjects[r3].localId == 0xFF)
+    r3 = GetEventObjectIdByXYZ(position->x, position->y, position->height);
+    if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
     {
         if (MetatileBehavior_IsCounter(b) != TRUE)
             return NULL;
-        r3 = GetFieldObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
-        if (r3 == 16 || gMapObjects[r3].localId == 0xFF)
+        r3 = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
+        if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
             return NULL;
     }
     //_080683E8
-    gSelectedMapObject = r3;
-    gSpecialVar_LastTalked = gMapObjects[r3].localId;
+    gSelectedEventObject = r3;
+    gSpecialVar_LastTalked = gEventObjects[r3].localId;
     gSpecialVar_Facing = c;
-    script = GetFieldObjectScriptPointerByFieldObjectId(r3);
+    script = GetEventObjectScriptPointerByEventObjectId(r3);
     script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
 }
 
-static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unused, u8 c)
+static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *position, u8 unused, u8 c)
 {
-    struct BgEvent *bgEvent = FindInvisibleMapObjectByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
+    struct BgEvent *bgEvent = FindInvisibleEventObjectByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
 
     if (bgEvent == NULL)
         return NULL;
@@ -849,7 +849,7 @@ u8 *sub_8068E24(struct MapPosition *position)
     return mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static struct BgEvent *FindInvisibleEventObjectByPosition(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
 {
     u8 i;
     struct BgEvent *bgEvents = mapHeader->events->bgEvents;
@@ -911,7 +911,7 @@ u8 sub_8068F18(void)
     return 0;
 }
 
-u8 *GetFieldObjectScriptPointerPlayerFacing(void)
+u8 *GetEventObjectScriptPointerPlayerFacing(void)
 {
     u8 r4;
     struct MapPosition position;

@@ -1,6 +1,6 @@
 #include "global.h"
 #include "constants/easy_chat.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "data2.h"
 #include "decompress.h"
 #include "easy_chat.h"
@@ -740,10 +740,10 @@ void sub_80E8BF4(u8 reporter, u8 b)
     {
     case 0:  // Gabby
     default:
-        gabbyTyGfxId = MAP_OBJ_GFX_REPORTER_M;
+        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_M;
         break;
     case 1:  // Ty
-        gabbyTyGfxId = MAP_OBJ_GFX_REPORTER_F;
+        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_F;
         break;
     }
 
@@ -751,8 +751,8 @@ void sub_80E8BF4(u8 reporter, u8 b)
     LoadSpritePalette(&gUnknown_083DBD38);
     CreateSprite(&gSpriteTemplate_83DBD48, x, y, 1);
 
-    spriteId = AddPseudoFieldObject(
-      (gSaveBlock2.playerGender == MALE) ? MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL : MAP_OBJ_GFX_RIVAL_MAY_NORMAL,
+    spriteId = AddPseudoEventObject(
+      (gSaveBlock2.playerGender == MALE) ? EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL : EVENT_OBJ_GFX_RIVAL_MAY_NORMAL,
       SpriteCallbackDummy, x - 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -760,7 +760,7 @@ void sub_80E8BF4(u8 reporter, u8 b)
         StartSpriteAnim(&gSprites[spriteId], 3);
     }
 
-    spriteId = AddPseudoFieldObject(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
+    spriteId = AddPseudoEventObject(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.priority = 0;

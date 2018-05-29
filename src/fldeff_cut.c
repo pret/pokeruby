@@ -4,7 +4,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "metatile_behavior.h"
 #include "metatile_behaviors.h"
 #include "pokemon_menu.h"
@@ -17,7 +17,7 @@
 #include "trig.h"
 #include "ewram.h"
 #include "constants/field_effects.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 
 extern void (*gFieldCallback)(void);
@@ -91,7 +91,7 @@ void Debug_SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 metatile;
 
-    if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         FieldCallback_CutTree();
@@ -130,7 +130,7 @@ bool8 SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 tileBehavior;
 
-    if (SetLastTalkedObjectInFrontOfPlayer(MAP_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;

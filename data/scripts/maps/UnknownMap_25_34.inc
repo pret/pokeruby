@@ -421,9 +421,9 @@ VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3
-	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF9:: @ 815FBF9
-	setvar VAR_OBJ_GFX_ID_3, MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_3, EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
 	return

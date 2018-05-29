@@ -236,8 +236,8 @@ void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
 
 void DoYellowCave4Sparkle(void)
 {
-    s16 x = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.x;
-    s16 y = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.y;
+    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
+    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
     u8 spriteId;
 
     sub_8060470(&x, &y, 8, 4);

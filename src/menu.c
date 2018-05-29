@@ -1,7 +1,7 @@
 #include "global.h"
 #include "menu.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu_cursor.h"
 #include "script.h"
 #include "constants/songs.h"
