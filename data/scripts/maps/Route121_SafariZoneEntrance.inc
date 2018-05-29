@@ -16,15 +16,15 @@ Route121_SafariZoneEntrance_EventScript_15C333:: @ 815C333
 	end
 
 Route121_SafariZoneEntrance_Movement_15C348:: @ 815C348
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route121_SafariZoneEntrance_EventScript_15C351:: @ 815C351
 	msgbox Route121_SafariZoneEntrance_Text_1C35D0, 2
@@ -119,19 +119,19 @@ Route121_SafariZoneEntrance_EventScript_15C46C:: @ 815C46C
 	end
 
 Route121_SafariZoneEntrance_Movement_15C47C:: @ 815C47C
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 Route121_SafariZoneEntrance_Movement_15C47E:: @ 815C47E
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_14
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	delay_16
+	end_movement
 
 Route121_SafariZoneEntrance_EventScript_15C487:: @ 815C487
 	msgbox Route121_SafariZoneEntrance_Text_1C3E4B, 3

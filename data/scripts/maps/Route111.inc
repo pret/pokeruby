@@ -92,28 +92,28 @@ Route111_EventScript_1500A5:: @ 81500A5
 	end
 
 Route111_Movement_1500AF:: @ 81500AF
-	step_55
-	step_12
-	step_54
-	step_12
-	step_55
-	step_12
-	step_54
-	step_12
-	step_55
-	step_13
-	step_54
-	step_13
-	step_55
-	step_13
-	step_54
-	step_13
-	step_55
-	step_14
-	step_54
-	step_14
-	step_55
-	step_end
+	set_visible
+	delay_4
+	set_invisible
+	delay_4
+	set_visible
+	delay_4
+	set_invisible
+	delay_4
+	set_visible
+	delay_8
+	set_invisible
+	delay_8
+	set_visible
+	delay_8
+	set_invisible
+	delay_8
+	set_visible
+	delay_16
+	set_invisible
+	delay_16
+	set_visible
+	end_movement
 
 Route111_EventScript_1500C5:: @ 81500C5
 	lock
@@ -202,20 +202,20 @@ Route111_EventScript_1501A9:: @ 81501A9
 	return
 
 Route111_Movement_1501B4:: @ 81501B4
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 Route111_Movement_1501B6:: @ 81501B6
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 Route111_Movement_1501B8:: @ 81501B8
-	step_left
-	step_end
+	walk_left
+	end_movement
 
 Route111_Movement_1501BA:: @ 81501BA
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 Route111_EventScript_1501BC:: @ 81501BC
 	setweather WEATHER_SUNNY
@@ -321,19 +321,19 @@ Route111_EventScript_15034F:: @ 815034F
 	return
 
 Route111_Movement_150356:: @ 8150356
-	step_26
-	step_up
-	step_end
+	walk_in_place_fastest_up
+	walk_up
+	end_movement
 
 Route111_Movement_150359:: @ 8150359
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 Route111_Movement_15035B:: @ 815035B
-	step_14
-	step_14
-	step_14
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	end_movement
 
 Route111_EventScript_15035F:: @ 815035F
 	msgbox Route111_Text_16FC9C, 3

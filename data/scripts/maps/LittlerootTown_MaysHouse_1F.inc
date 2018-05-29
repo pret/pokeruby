@@ -70,8 +70,8 @@ LittlerootTown_MaysHouse_1F_EventScript_152938:: @ 8152938
 	end
 
 LittlerootTown_MaysHouse_1F_Movement_15295E:: @ 815295E
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 LittlerootTown_MaysHouse_1F_EventScript_152960:: @ 8152960
 	lockall
@@ -105,13 +105,13 @@ LittlerootTown_MaysHouse_1F_EventScript_152982:: @ 8152982
 	end
 
 LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 @ 81529C7
 	lockall

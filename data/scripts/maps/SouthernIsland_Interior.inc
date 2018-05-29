@@ -76,35 +76,35 @@ SouthernIsland_Interior_EventScript_160C08:: @ 8160C08
 	end
 
 SouthernIsland_Interior_Movement_160C12:: @ 8160C12
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 SouthernIsland_Interior_Movement_160C16:: @ 8160C16
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_26
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 SouthernIsland_Interior_Movement_160C22:: @ 8160C22
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_14
-	step_14
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement

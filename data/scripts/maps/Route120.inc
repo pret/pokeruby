@@ -263,9 +263,9 @@ Route120_EventScript_15198A:: @ 815198A
 	return
 
 Route120_Movement_151995:: @ 8151995
-	step_down
-	step_left
-	step_end
+	walk_down
+	walk_left
+	end_movement
 
 Route120_EventScript_151998:: @ 8151998
 	msgbox Route120_Text_171B93, 2

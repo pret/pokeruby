@@ -33,25 +33,25 @@ BattleTower_Elevator_EventScript_16082B:: @ 816082B
 	end
 
 BattleTower_Elevator_Movement_160835:: @ 8160835
-	step_up
-	step_right
-	step_00
-	step_end
+	walk_up
+	walk_right
+	face_down
+	end_movement
 
 BattleTower_Elevator_Movement_160839:: @ 8160839
-	step_up
-	step_up
-	step_00
-	step_end
+	walk_up
+	walk_up
+	face_down
+	end_movement
 
 BattleTower_Elevator_Movement_16083D:: @ 816083D
-	step_down
-	step_down
-	step_54
-	step_end
+	walk_down
+	walk_down
+	set_invisible
+	end_movement
 
 BattleTower_Elevator_Movement_160841:: @ 8160841
-	step_right
-	step_down
-	step_down
-	step_end
+	walk_right
+	walk_down
+	walk_down
+	end_movement

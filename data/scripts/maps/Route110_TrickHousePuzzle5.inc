@@ -646,80 +646,80 @@ Route110_TrickHousePuzzle5_EventScript_163082:: @ 8163082
 	return
 
 Route110_TrickHousePuzzle5_Movement_16308D:: @ 816308D
-	step_left
-	step_end
+	walk_left
+	end_movement
 
 Route110_TrickHousePuzzle5_Movement_16308F:: @ 816308F
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	end_movement
 
 Route110_TrickHousePuzzle5_Movement_163092:: @ 8163092
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 Route110_TrickHousePuzzle5_Movement_163096:: @ 8163096
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 Route110_TrickHousePuzzle5_Movement_163098:: @ 8163098
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	end_movement
 
 Route110_TrickHousePuzzle5_Movement_16309B:: @ 816309B
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route110_TrickHouseEntrance_Movement_16309F:: @ 816309F
 Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_00
-	step_end
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_left
+	delay_2
+	face_right
+	delay_2
+	face_down
+	end_movement

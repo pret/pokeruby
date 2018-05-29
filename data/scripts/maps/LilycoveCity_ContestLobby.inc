@@ -145,46 +145,46 @@ LilycoveCity_ContestLobby_EventScript_158A37:: @ 8158A37
 	return
 
 LilycoveCity_ContestLobby_Movement_158A3B:: @ 8158A3B
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158A43:: @ 8158A43
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158A4C:: @ 8158A4C
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158A4E:: @ 8158A4E
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
-	step_14
-	step_14
-	step_14
-	step_14
-	step_16
-	step_16
-	step_16
-	step_28
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_in_place_fastest_right
+	end_movement
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_158A6A
@@ -258,47 +258,47 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	return
 
 LilycoveCity_ContestLobby_Movement_158B64:: @ 8158B64
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158B6D:: @ 8158B6D
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158B76:: @ 8158B76
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158B78:: @ 8158B78
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158B7C:: @ 8158B7C
-	step_14
-	step_14
-	step_14
-	step_14
-	step_16
-	step_16
-	step_16
-	step_27
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_in_place_fastest_left
+	end_movement
 
 LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	lockall
@@ -518,50 +518,50 @@ LilycoveCity_ContestLobby_EventScript_158E0B:: @ 8158E0B
 	return
 
 LilycoveCity_ContestLobby_Movement_158E8E:: @ 8158E8E
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158E99:: @ 8158E99
-	step_28
-	step_right
-	step_end
+	walk_in_place_fastest_right
+	walk_right
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158E9C:: @ 8158E9C
-	step_right
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158EA0:: @ 8158EA0
-	step_down
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158EA4:: @ 8158EA4
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	specialvar RESULT, sub_80C5044
@@ -655,48 +655,48 @@ LilycoveCity_ContestLobby_EventScript_158F86:: @ 8158F86
 	return
 
 LilycoveCity_ContestLobby_Movement_158FFE:: @ 8158FFE
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_159008:: @ 8159008
-	step_27
-	step_left
-	step_end
+	walk_in_place_fastest_left
+	walk_left
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_15900B:: @ 815900B
-	step_left
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_15900F:: @ 815900F
-	step_down
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_159013:: @ 8159013
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 LilycoveCity_ContestLobby_Movement_15901C:: @ 815901C
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 	msgbox LilycoveCity_ContestLobby_Text_188D3C, 2

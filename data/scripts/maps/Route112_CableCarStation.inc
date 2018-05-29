@@ -60,29 +60,29 @@ Route112_CableCarStation_EventScript_15C0DC:: @ 815C0DC
 	end
 
 Route112_CableCarStation_Movement_15C0E6:: @ 815C0E6
-	step_up
-	step_up
-	step_right
-	step_27
-	step_end
+	walk_up
+	walk_up
+	walk_right
+	walk_in_place_fastest_left
+	end_movement
 
 Route112_CableCarStation_Movement_15C0EB:: @ 815C0EB
-	step_14
-	step_left
-	step_down
-	step_down
-	step_end
+	delay_16
+	walk_left
+	walk_down
+	walk_down
+	end_movement
 
 Route112_CableCarStation_Movement_15C0F0:: @ 815C0F0
-	step_up
-	step_up
-	step_up
-	step_14
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	delay_16
+	end_movement
 
 Route112_CableCarStation_Movement_15C0F5:: @ 815C0F5
-	step_down
-	step_down
-	step_down
-	step_14
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	delay_16
+	end_movement

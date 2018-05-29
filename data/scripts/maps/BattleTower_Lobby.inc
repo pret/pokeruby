@@ -304,30 +304,30 @@ BattleTower_Lobby_EventScript_160664:: @ 8160664
 	return
 
 BattleTower_Lobby_Movement_160693:: @ 8160693
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 BattleTower_Lobby_Movement_160697:: @ 8160697
-	step_up
-	step_54
-	step_end
+	walk_up
+	set_invisible
+	end_movement
 
 BattleTower_Lobby_Movement_16069A:: @ 816069A
-	step_up
-	step_up
-	step_54
-	step_end
+	walk_up
+	walk_up
+	set_invisible
+	end_movement
 
 @ 816069E
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_54
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	set_invisible
+	end_movement
 
 BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 	lock

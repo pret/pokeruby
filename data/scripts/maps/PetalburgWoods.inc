@@ -116,119 +116,119 @@ PetalburgWoods_EventScript_15CE69:: @ 815CE69
 	end
 
 PetalburgWoods_Movement_15CE73:: @ 815CE73
-	step_01
-	step_14
-	step_03
-	step_14
-	step_02
-	step_14
-	step_00
-	step_14
-	step_03
-	step_14
-	step_01
-	step_14
-	step_end
+	face_up
+	delay_16
+	face_right
+	delay_16
+	face_left
+	delay_16
+	face_down
+	delay_16
+	face_right
+	delay_16
+	face_up
+	delay_16
+	end_movement
 
 PetalburgWoods_Movement_15CE80:: @ 815CE80
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 PetalburgWoods_Movement_15CE89:: @ 815CE89
-	step_14
-	step_3e
-	step_down
-	step_down
-	step_end
+	delay_16
+	face_player
+	walk_down
+	walk_down
+	end_movement
 
 PetalburgWoods_Movement_15CE8E:: @ 815CE8E
-	step_14
-	step_3e
-	step_down
-	step_down
-	step_down
-	step_28
-	step_end
+	delay_16
+	face_player
+	walk_down
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
+	end_movement
 
 PetalburgWoods_Movement_15CE95:: @ 815CE95
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 PetalburgWoods_Movement_15CE9E:: @ 815CE9E
-	step_18
-	step_15
-	step_15
-	step_17
-	step_26
-	step_end
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_in_place_fastest_up
+	end_movement
 
 PetalburgWoods_Movement_15CEA4:: @ 815CEA4
-	step_15
-	step_18
-	step_26
-	step_end
+	walk_fast_down
+	walk_fast_right
+	walk_in_place_fastest_up
+	end_movement
 
 PetalburgWoods_Movement_15CEA8:: @ 815CEA8
-	step_25
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_01
-	step_end
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_up
+	end_movement
 
 PetalburgWoods_Movement_15CEB0:: @ 815CEB0
-	step_15
-	step_15
-	step_end
+	walk_fast_down
+	walk_fast_down
+	end_movement
 
 PetalburgWoods_Movement_15CEB3:: @ 815CEB3
-	step_40
-	step_up
-	step_41
-	step_end
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
+	end_movement
 
 PetalburgWoods_Movement_15CEB7:: @ 815CEB7
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_14
-	step_14
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	delay_16
+	delay_16
+	end_movement
 
 PetalburgWoods_Movement_15CEBF:: @ 815CEBF
-	step_15
-	step_15
-	step_15
-	step_end
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	end_movement
 
 PetalburgWoods_Movement_15CEC3:: @ 815CEC3
-	step_down
-	step_down
-	step_14
-	step_14
-	step_end
+	walk_down
+	walk_down
+	delay_16
+	delay_16
+	end_movement
 
 PetalburgWoods_Movement_15CEC8:: @ 815CEC8
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 PetalburgWoods_EventScript_15CECA:: @ 815CECA
 	msgbox PetalburgWoods_Text_1953AC, 2

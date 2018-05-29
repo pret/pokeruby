@@ -46,46 +46,46 @@ VerdanturfTown_ContestLobby_EventScript_153DA1:: @ 8153DA1
 	return
 
 VerdanturfTown_ContestLobby_Movement_153E19:: @ 8153E19
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 VerdanturfTown_ContestLobby_Movement_153E23:: @ 8153E23
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 VerdanturfTown_ContestLobby_Movement_153E25:: @ 8153E25
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 VerdanturfTown_ContestLobby_Movement_153E28:: @ 8153E28
-	step_down
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 VerdanturfTown_ContestLobby_Movement_153E2C:: @ 8153E2C
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 VerdanturfTown_ContestLobby_Movement_153E35:: @ 8153E35
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 VerdanturfTown_ContestLobby_EventScript_153E37:: @ 8153E37
 	lockall

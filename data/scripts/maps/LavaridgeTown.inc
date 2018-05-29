@@ -185,54 +185,54 @@ LavaridgeTown_EventScript_14E6DD:: @ 814E6DD
 	return
 
 LavaridgeTown_Movement_14E6E8:: @ 814E6E8
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 LavaridgeTown_Movement_14E6EF:: @ 814E6EF
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 LavaridgeTown_Movement_14E6FA:: @ 814E6FA
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 LavaridgeTown_Movement_14E703:: @ 814E703
-	step_15
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_down
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 LavaridgeTown_Movement_14E70E:: @ 814E70E
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 LavaridgeTown_EventScript_14E710:: @ 814E710
 	specialvar RESULT, GetPlayerFacingDirection

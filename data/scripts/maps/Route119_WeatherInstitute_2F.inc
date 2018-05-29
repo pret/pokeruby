@@ -79,10 +79,10 @@ Route119_WeatherInstitute_2F_EventScript_163DBE:: @ 8163DBE
 	end
 
 Route119_WeatherInstitute_2F_Movement_163DC8:: @ 8163DC8
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock

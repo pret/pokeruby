@@ -34,37 +34,37 @@ Route121_EventScript_151B25:: @ 8151B25
 	end
 
 Route121_Movement_151B57:: @ 8151B57
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 Route121_Movement_151B60:: @ 8151B60
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 Route121_Movement_151B69:: @ 8151B69
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 Route121_EventScript_151B72:: @ 8151B72
 	trainerbattle 0, OPPONENT_VANESSA, 0, Route121_Text_1BF96E, Route121_Text_1BF9A1

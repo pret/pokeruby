@@ -86,98 +86,98 @@ Route128_EventScript_15213F:: @ 815213F
 	end
 
 @ 815225E
-	step_17
-	step_end
+	walk_fast_left
+	end_movement
 
 @ 8152260
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 Route128_Movement_15226D:: @ 815226D
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 Route128_Movement_15226F:: @ 815226F
-	step_17
-	step_end
+	walk_fast_left
+	end_movement
 
 Route128_Movement_152271:: @ 8152271
-	step_15
-	step_27
-	step_14
-	step_28
-	step_14
-	step_14
-	step_25
-	step_end
+	walk_fast_down
+	walk_in_place_fastest_left
+	delay_16
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
+	end_movement
 
 Route128_Movement_152279:: @ 8152279
-	step_40
-	slow_step_up
-	step_14
-	step_41
-	step_end
+	lock_facing_direction
+	walk_slow_up
+	delay_16
+	unlock_facing_direction
+	end_movement
 
 Route128_Movement_15227E:: @ 815227E
-	step_17
-	step_17
-	step_17
-	step_28
-	step_end
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_in_place_fastest_right
+	end_movement
 
 Route128_Movement_152283:: @ 8152283
-	step_14
-	step_14
-	step_16
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	delay_16
+	delay_16
+	walk_fast_up
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route128_Movement_152290:: @ 8152290
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	end_movement
 
 Route128_Movement_152293:: @ 8152293
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 Route128_Movement_152296:: @ 8152296
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route128_Movement_1522A1:: @ 81522A1
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95

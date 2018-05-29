@@ -1152,184 +1152,184 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	return
 
 LinkContestRoom1_Movement_1A5D85:: @ 81A5D85
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5D87:: @ 81A5D87
-	step_40
-	step_up
-	step_41
-	step_end
+	lock_facing_direction
+	walk_up
+	unlock_facing_direction
+	end_movement
 
 LinkContestRoom1_Movement_1A5D8B:: @ 81A5D8B
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 LinkContestRoom1_Movement_1A5D8D:: @ 81A5D8D
-	step_58
-	step_end
+	emote_heart
+	end_movement
 
 LinkContestRoom1_Movement_1A5D8F:: @ 81A5D8F
-	step_25
-	step_end
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5D91:: @ 81A5D91
-	step_left
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5D95:: @ 81A5D95
-	step_right
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5D99:: @ 81A5D99
-	step_up
-	step_25
-	step_end
+	walk_up
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5D9C:: @ 81A5D9C
-	step_14
-	step_14
-	step_end
+	delay_16
+	delay_16
+	end_movement
 
 LinkContestRoom1_Movement_1A5D9F:: @ 81A5D9F
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 LinkContestRoom1_Movement_1A5DA1:: @ 81A5DA1
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 LinkContestRoom1_Movement_1A5DA3:: @ 81A5DA3
-	step_25
-	step_end
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5DA5:: @ 81A5DA5
-	step_left
-	step_left
-	step_up
-	step_end
+	walk_left
+	walk_left
+	walk_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DA9:: @ 81A5DA9
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DAF:: @ 81A5DAF
-	step_02
-	step_14
-	step_4e
-	step_end
+	face_left
+	delay_16
+	face_original_direction
+	end_movement
 
 LinkContestRoom1_Movement_1A5DB3:: @ 81A5DB3
-	step_01
-	step_14
-	step_4e
-	step_end
+	face_up
+	delay_16
+	face_original_direction
+	end_movement
 
 LinkContestRoom1_Movement_1A5DB7:: @ 81A5DB7
-	step_03
-	step_14
-	step_4e
-	step_end
+	face_right
+	delay_16
+	face_original_direction
+	end_movement
 
 LinkContestRoom1_Movement_1A5DBB:: @ 81A5DBB
-	step_00
-	step_14
-	step_4e
-	step_end
+	face_down
+	delay_16
+	face_original_direction
+	end_movement
 
 LinkContestRoom1_Movement_1A5DBF:: @ 81A5DBF
-	step_01
-	step_end
+	face_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DC1:: @ 81A5DC1
-	step_01
-	step_14
-	step_28
-	step_end
+	face_up
+	delay_16
+	walk_in_place_fastest_right
+	end_movement
 
 LinkContestRoom1_Movement_1A5DC5:: @ 81A5DC5
-	step_27
-	step_14
-	step_14
-	step_25
-	step_end
+	walk_in_place_fastest_left
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5DCA:: @ 81A5DCA
-	step_14
-	step_14
-	step_25
-	step_end
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
+	end_movement
 
 LinkContestRoom1_Movement_1A5DCE:: @ 81A5DCE
-	step_up
-	step_right
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DD4:: @ 81A5DD4
-	step_17
-	step_17
-	step_17
-	step_15
-	step_26
-	step_end
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DDA:: @ 81A5DDA
-	step_up
-	step_right
-	step_26
-	step_end
+	walk_up
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DDE:: @ 81A5DDE
-	step_17
-	step_15
-	step_26
-	step_end
+	walk_fast_left
+	walk_fast_down
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DE2:: @ 81A5DE2
-	step_up
-	step_left
-	step_26
-	step_end
+	walk_up
+	walk_left
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DE6:: @ 81A5DE6
-	step_18
-	step_15
-	step_26
-	step_end
+	walk_fast_right
+	walk_fast_down
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DEA:: @ 81A5DEA
-	step_up
-	step_left
-	step_left
-	step_left
-	step_26
-	step_end
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DF0:: @ 81A5DF0
-	step_18
-	step_18
-	step_18
-	step_15
-	step_26
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_in_place_fastest_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DF6:: @ 81A5DF6
-	step_right
-	step_right
-	step_up
-	step_end
+	walk_right
+	walk_right
+	walk_up
+	end_movement
 
 LinkContestRoom1_Movement_1A5DFA:: @ 81A5DFA
-	step_up
-	step_end
+	walk_up
+	end_movement

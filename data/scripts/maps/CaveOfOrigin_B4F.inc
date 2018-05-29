@@ -89,9 +89,9 @@ CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
 	return
 
 CaveOfOrigin_B4F_Movement_15DE7D:: @ 815DE7D
-	step_5e
-	step_60
-	step_14
-	step_14
-	step_61
-	step_end
+	init_affine_anim
+	walk_down_affine_0
+	delay_16
+	delay_16
+	walk_down_affine_1
+	end_movement

@@ -182,8 +182,8 @@ FallarborTown_ContestLobby_Movement_1B7821:: @ 81B7821
 LilycoveCity_ContestLobby_Movement_1B7821:: @ 81B7821
 SlateportCity_ContestLobby_Movement_1B7821:: @ 81B7821
 VerdanturfTown_ContestLobby_Movement_1B7821:: @ 81B7821
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 FallarborTown_ContestLobby_EventScript_1B7823:: @ 81B7823
 	goto FallarborTown_ContestLobby_EventScript_1B783B

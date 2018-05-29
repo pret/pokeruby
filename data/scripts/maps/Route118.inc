@@ -109,54 +109,54 @@ Route118_EventScript_15105E:: @ 815105E
 	return
 
 Route118_Movement_151069:: @ 8151069
-	step_left
-	step_end
+	walk_left
+	end_movement
 
 Route118_Movement_15106B:: @ 815106B
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 Route118_Movement_15106D:: @ 815106D
-	fast_step_down
-	step_14
-	step_down
-	step_end
+	jump_2_down
+	delay_16
+	walk_down
+	end_movement
 
 Route118_Movement_151071:: @ 8151071
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route118_Movement_15107C:: @ 815107C
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route118_Movement_151086:: @ 8151086
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 Route118_EventScript_15108F:: @ 815108F
 	trainerbattle 0, OPPONENT_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C

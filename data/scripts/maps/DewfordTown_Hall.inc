@@ -241,12 +241,12 @@ DewfordTown_Hall_EventScript_153583:: @ 8153583
 	return
 
 DewfordTown_Hall_Movement_153599:: @ 8153599
-	step_1f
-	step_end
+	walk_in_place_left
+	end_movement
 
 DewfordTown_Hall_Movement_15359B:: @ 815359B
-	step_20
-	step_end
+	walk_in_place_right
+	end_movement
 
 DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	lock

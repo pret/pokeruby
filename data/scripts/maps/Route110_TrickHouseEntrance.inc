@@ -298,27 +298,27 @@ Route110_TrickHouseEntrance_EventScript_16130C:: @ 816130C
 
 Route110_TrickHouseEnd_Movement_161315:: @ 8161315
 Route110_TrickHouseEntrance_Movement_161315:: @ 8161315
-	step_01
-	step_12
-	step_02
-	step_12
-	step_00
-	step_12
-	step_03
-	step_12
-	step_end
+	face_up
+	delay_4
+	face_left
+	delay_4
+	face_down
+	delay_4
+	face_right
+	delay_4
+	end_movement
 
 Route110_TrickHouseEnd_Movement_16131E:: @ 816131E
 Route110_TrickHouseEntrance_Movement_16131E:: @ 816131E
-	step_01
-	step_52
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_end
+	face_up
+	disable_anim
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	slide_up
+	end_movement
 
 Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
 	msgbox Route110_TrickHouseEntrance_Text_19BCFD, 4
@@ -513,8 +513,8 @@ Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
 	end
 
 Route110_TrickHouseEntrance_Movement_16165E:: @ 816165E
-	step_54
-	step_end
+	set_invisible
+	end_movement
 
 Route110_TrickHouseEntrance_EventScript_161660:: @ 8161660
 	warp MAP_ROUTE110_TRICK_HOUSE_PUZZLE1, 255, 0, 21

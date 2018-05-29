@@ -73,13 +73,13 @@ MossdeepCity_GameCorner_1F_EventScript_15AD34:: @ 815AD34
 	return
 
 MossdeepCity_GameCorner_1F_Movement_15AD3D:: @ 815AD3D
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 MossdeepCity_GameCorner_1F_Movement_15AD3F:: @ 815AD3F
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	lock
@@ -154,32 +154,32 @@ MossdeepCity_GameCorner_1F_EventScript_15AE28:: @ 815AE28
 	return
 
 MossdeepCity_GameCorner_1F_Movement_15AE3A:: @ 815AE3A
-	step_14
-	step_up
-	step_up
-	step_end
+	delay_16
+	walk_up
+	walk_up
+	end_movement
 
 MossdeepCity_GameCorner_1F_Movement_15AE3E:: @ 815AE3E
-	step_14
-	step_right
-	step_up
-	step_end
+	delay_16
+	walk_right
+	walk_up
+	end_movement
 
 MossdeepCity_GameCorner_1F_Movement_15AE42:: @ 815AE42
-	step_14
-	step_left
-	step_up
-	step_end
+	delay_16
+	walk_left
+	walk_up
+	end_movement
 
 MossdeepCity_GameCorner_1F_Movement_15AE46:: @ 815AE46
-	step_left
-	step_28
-	step_end
+	walk_left
+	walk_in_place_fastest_right
+	end_movement
 
 MossdeepCity_GameCorner_1F_Movement_15AE49:: @ 815AE49
-	step_right
-	step_27
-	step_end
+	walk_right
+	walk_in_place_fastest_left
+	end_movement
 
 MossdeepCity_GameCorner_1F_EventScript_15AE4C:: @ 815AE4C
 	msgbox MossdeepCity_GameCorner_1F_Text_18E631, 3

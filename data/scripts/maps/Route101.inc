@@ -69,138 +69,138 @@ Route101_EventScript_14E9E4:: @ 814E9E4
 	end
 
 Route101_Movement_14E9FA:: @ 814E9FA
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 Route101_Movement_14E9FC:: @ 814E9FC
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 Route101_Movement_14E9FE:: @ 814E9FE
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 Route101_Movement_14EA00:: @ 814EA00
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	end_movement
 
 Route101_Movement_14EA1F:: @ 814EA1F
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_end
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	end_movement
 
 @ 814EA26
-	step_end
+	end_movement
 
 Route101_Movement_14EA27:: @ 814EA27
-	step_23
-	step_23
-	step_23
-	step_23
-	step_end
+	walk_in_place_fast_left
+	walk_in_place_fast_left
+	walk_in_place_fast_left
+	walk_in_place_fast_left
+	end_movement
 
 Route101_Movement_14EA2C:: @ 814EA2C
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route101_Movement_14EA31:: @ 814EA31
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_15
-	step_15
-	step_17
-	step_17
-	step_17
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	end_movement
 
 Route101_Movement_14EA50:: @ 814EA50
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 @ 814EA57
-	step_end
+	end_movement
 
 Route101_Movement_14EA58:: @ 814EA58
-	step_24
-	step_24
-	step_24
-	step_24
-	step_end
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	walk_in_place_fast_right
+	end_movement
 
 @ 814EA5D
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	end_movement
 
 @ 814EA60
-	step_up
-	step_left
-	step_up
-	step_end
+	walk_up
+	walk_left
+	walk_up
+	end_movement
 
 Route101_EventScript_14EA64:: @ 814EA64
 	msgbox Route101_Text_16D25E, 2
@@ -242,5 +242,5 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 	end
 
 Route101_Movement_14EAD7:: @ 814EAD7
-	step_right
-	step_end
+	walk_right
+	end_movement

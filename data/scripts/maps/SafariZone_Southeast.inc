@@ -29,13 +29,13 @@ SafariZone_Southeast_EventScript_16007F:: @ 816007F
 	return
 
 SafariZone_Southeast_Movement_160087:: @ 8160087
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 SafariZone_Southeast_Movement_160089:: @ 8160089
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 SafariZone_Southeast_EventScript_16008C:: @ 816008C
 	msgbox SafariZone_Southeast_Text_1C3B71, 2
@@ -99,20 +99,20 @@ SafariZone_Southeast_EventScript_160139:: @ 8160139
 	end
 
 SafariZone_Southeast_Movement_16014B:: @ 816014B
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 SafariZone_Southeast_Movement_16014D:: @ 816014D
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 SafariZone_Southeast_Movement_160150:: @ 8160150
-	step_left
-	step_28
-	step_end
+	walk_left
+	walk_in_place_fastest_right
+	end_movement
 
 SafariZone_Southeast_Movement_160153:: @ 8160153
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_in_place_fastest_up
+	end_movement

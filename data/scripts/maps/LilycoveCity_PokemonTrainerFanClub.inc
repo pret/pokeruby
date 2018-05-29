@@ -29,36 +29,36 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_15939F:: @ 815939F
 	end
 
 LilycoveCity_PokemonTrainerFanClub_Movement_1593FA:: @ 81593FA
-	step_13
-	step_25
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_end
+	delay_8
+	walk_in_place_fastest_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	end_movement
 
 LilycoveCity_PokemonTrainerFanClub_Movement_159402:: @ 8159402
-	step_17
-	step_17
-	step_15
-	step_15
-	step_17
-	step_15
-	step_end
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
+	end_movement
 
 LilycoveCity_PokemonTrainerFanClub_Movement_159409:: @ 8159409
-	step_down
-	step_28
-	step_end
+	walk_down
+	walk_in_place_fastest_right
+	end_movement
 
 LilycoveCity_PokemonTrainerFanClub_Movement_15940C:: @ 815940C
-	step_49
-	step_16
-	step_16
-	step_18
-	step_25
-	step_end
+	jump_in_place_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_in_place_fastest_down
+	end_movement
 
 LilycoveCity_PokemonTrainerFanClub_MapScript1_159412:: @ 8159412
 	compare VAR_LILYCOVE_FAN_CLUB_STATE, 1

@@ -73,14 +73,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_152D5B:: @ 8152D5B
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	lock
@@ -174,9 +174,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E8E:: @ 8152E8E
 	return
 
 LittlerootTown_ProfessorBirchsLab_Movement_152E97:: @ 8152E97
-	step_down
-	step_27
-	step_end
+	walk_down
+	walk_in_place_fastest_left
+	end_movement
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E9A:: @ 8152E9A
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1746A2, 3

@@ -86,5 +86,5 @@ FortreeCity_EventScript_14C9E4:: @ 814C9E4
 	end
 
 FortreeCity_Movement_14CA13:: @ 814CA13
-	step_right
-	step_end
+	walk_right
+	end_movement

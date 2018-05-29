@@ -138,52 +138,52 @@ LittlerootTown_BrendansHouse_2F_EventScript_152C08:: @ 8152C08
 	return
 
 LittlerootTown_BrendansHouse_2F_Movement_152C11:: @ 8152C11
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	delay_8
+	end_movement
 
 LittlerootTown_BrendansHouse_2F_Movement_152C1C:: @ 8152C1C
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_13
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	delay_8
+	end_movement
 
 LittlerootTown_BrendansHouse_2F_Movement_152C25:: @ 8152C25
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	delay_8
+	end_movement
 
 LittlerootTown_BrendansHouse_2F_Movement_152C30:: @ 8152C30
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_13
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	delay_8
+	end_movement
 
 gUnknown_08152C39:: @ 8152C39
 

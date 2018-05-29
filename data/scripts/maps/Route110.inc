@@ -492,48 +492,48 @@ Route110_EventScript_14FF66:: @ 814FF66
 	return
 
 Route110_Movement_14FF6E:: @ 814FF6E
-	step_down
-	step_left
-	step_25
-	step_end
+	walk_down
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 Route110_Movement_14FF72:: @ 814FF72
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 Route110_Movement_14FF74:: @ 814FF74
-	step_down
-	step_right
-	step_25
-	step_end
+	walk_down
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 Route110_Movement_14FF78:: @ 814FF78
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route110_Movement_14FF80:: @ 814FF80
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_15
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_down
+	end_movement
 
 Route110_Movement_14FF89:: @ 814FF89
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement

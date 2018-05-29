@@ -79,28 +79,28 @@ Route116_EventScript_150B12:: @ 8150B12
 	end
 
 Route116_Movement_150B1C:: @ 8150B1C
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 Route116_Movement_150B25:: @ 8150B25
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 Route116_EventScript_150B30:: @ 8150B30
 	msgbox Route116_Text_170A46, 3
@@ -200,29 +200,29 @@ Route116_EventScript_150C42:: @ 8150C42
 	return
 
 Route116_Movement_150C4D:: @ 8150C4D
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 Route116_Movement_150C57:: @ 8150C57
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 Route116_EventScript_150C62:: @ 8150C62
 	trainerbattle 0, OPPONENT_JOEY, 0, Route116_Text_1BD02B, Route116_Text_1BD04C

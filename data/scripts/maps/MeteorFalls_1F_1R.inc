@@ -83,134 +83,134 @@ MeteorFalls_1F_1R_EventScript_15C49C:: @ 815C49C
 	end
 
 MeteorFalls_1F_1R_Movement_15C5EE:: @ 815C5EE
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C5F1:: @ 815C5F1
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C5FC:: @ 815C5FC
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C608:: @ 815C608
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C60F:: @ 815C60F
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C617:: @ 815C617
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C61F:: @ 815C61F
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C628:: @ 815C628
-	step_right
-	step_right
-	step_up
-	step_up
-	step_27
-	step_end
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C62E:: @ 815C62E
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C639:: @ 815C639
-	step_right
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C63E:: @ 815C63E
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C64A:: @ 815C64A
-	step_right
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 MeteorFalls_1F_1R_Movement_15C64F:: @ 815C64F
-	step_25
-	step_12
-	step_28
-	step_40
-	step_left
-	step_41
-	step_end
+	walk_in_place_fastest_down
+	delay_4
+	walk_in_place_fastest_right
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
+	end_movement
 
 MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	lock
