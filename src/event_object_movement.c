@@ -19,1481 +19,58 @@
 
 // this file was known as evobjmv.c in Game Freak's original source
 
-// rodata
+static u8 MovementType_BerryTreeGrowth_Callback(struct MapObject*, struct Sprite*);
+static u8 MovementType_Disguise_Callback(struct MapObject*, struct Sprite*);
+static u8 MovementType_Hidden_Callback(struct MapObject*, struct Sprite*);
+static bool8 IsCoordOutsideFieldObjectMovementRange(struct MapObject*, s16, s16);
+static bool8 DoesObjectCollideWithObjectAt(struct MapObject*, s16, s16);
+static bool8 IsMetatileDirectionallyImpassable(struct MapObject*, s16, s16, u8);
+static void ClearMapObjectMovement(struct MapObject*, struct Sprite *sprite);
+static void FieldObjectSetSingleMovement(struct MapObject*, struct Sprite*, u8);
+static u8 FieldObjectExecSingleMovementAction(struct MapObject*, struct Sprite*);
+static void SetMovementDelay(struct Sprite*, s16);
+static u8 WaitForMovementDelay(struct Sprite*);
+static u8 GetCollisionInDirection(struct MapObject*, u8);
+static void MoveCoordsInDirection(u32, s16 *, s16 *, s16, s16);
+static void DoGroundEffects_OnSpawn(struct MapObject*, struct Sprite*);
+static void DoGroundEffects_OnBeginStep(struct MapObject*, struct Sprite*);
+static void DoGroundEffects_OnFinishStep(struct MapObject*, struct Sprite*);
+static void UpdateMapObjectSpriteAnimPause(struct MapObject*, struct Sprite*);
+static void TryEnableMapObjectAnim(struct MapObject*, struct Sprite*);
+static void FieldObjectExecHeldMovementAction(struct MapObject*, struct Sprite*);
+static void FieldObjectUpdateSubpriority(struct MapObject*, struct Sprite*);
+static void UpdateMapObjectVisibility(struct MapObject*, struct Sprite*);
+static void UpdateMapObjectIsOffscreen(struct MapObject*, struct Sprite*);
+static void UpdateMapObjSpriteVisibility(struct MapObject*, struct Sprite*);
+static void nullsub(struct MapObject*, struct Sprite*, u8);
+static void DoTracksGroundEffect_Footprints(struct MapObject*, struct Sprite*, u8);
+static void DoTracksGroundEffect_BikeTireTracks(struct MapObject*, struct Sprite*, u8);
+static u8 GetReflectionTypeByMetatileBehavior(u32);
+static void Step1(struct Sprite *sprite, u8 direction);
+static void Step2(struct Sprite *sprite, u8 direction);
+static void Step3(struct Sprite *sprite, u8 direction);
+static void Step4(struct Sprite *sprite, u8 direction);
+static void Step8(struct Sprite *sprite, u8 direction);
+static void oamt_npc_ministep_reset(struct Sprite*, u8, u8);
+static void CameraObject_0(struct Sprite *);
+static void CameraObject_1(struct Sprite *);
+static void CameraObject_2(struct Sprite *);
+static void ObjectCB_CameraObject(struct Sprite *sprite);
+static bool8 MapObjectZCoordIsCompatible(struct MapObject*, u8);
+static struct MapObjectTemplate *FindFieldObjectTemplateByLocalId(u8, struct MapObjectTemplate*, u8);
 
 const u8 gUnknown_0830FD14[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
-void ObjectCB_CameraObject(struct Sprite *sprite);
-const struct SpriteTemplate gSpriteTemplate_830FD24 = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
+const struct SpriteTemplate gCameraSpriteTemplate = {0, 0xFFFF, &gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject};
 
-void CameraObject_0(struct Sprite *);
-void CameraObject_1(struct Sprite *);
-void CameraObject_2(struct Sprite *);
 void (*const gCameraObjectFuncs[])(struct Sprite *) = {
     CameraObject_0,
     CameraObject_1,
     CameraObject_2,
 };
 
-const u32 gMapObjectPic_BrendanNormal_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/00.4bpp");
-const u32 gMapObjectPic_BrendanNormal_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/01.4bpp");
-const u32 gMapObjectPic_BrendanNormal_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/02.4bpp");
-const u32 gMapObjectPic_BrendanNormal_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/03.4bpp");
-const u32 gMapObjectPic_BrendanNormal_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/04.4bpp");
-const u32 gMapObjectPic_BrendanNormal_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/05.4bpp");
-const u32 gMapObjectPic_BrendanNormal_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/06.4bpp");
-const u32 gMapObjectPic_BrendanNormal_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/07.4bpp");
-const u32 gMapObjectPic_BrendanNormal_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/08.4bpp");
-const u32 gMapObjectPic_BrendanNormal_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/09.4bpp");
-const u32 gMapObjectPic_BrendanNormal_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/10.4bpp");
-const u32 gMapObjectPic_BrendanNormal_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/11.4bpp");
-const u32 gMapObjectPic_BrendanNormal_12[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/12.4bpp");
-const u32 gMapObjectPic_BrendanNormal_13[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/13.4bpp");
-const u32 gMapObjectPic_BrendanNormal_14[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/14.4bpp");
-const u32 gMapObjectPic_BrendanNormal_15[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/15.4bpp");
-const u32 gMapObjectPic_BrendanNormal_16[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/16.4bpp");
-const u32 gMapObjectPic_BrendanNormal_17[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/normal/17.4bpp");
-const u16 gMapObjectPalette8[] = INCBIN_U16("graphics/map_objects/palettes/08.gbapal");
-const u16 NullPalette_8310F68[16] = {};
-const u16 NullPalette_8310F88[16] = {};
-const u16 NullPalette_8310FA8[16] = {};
-const u16 NullPalette_8310FC8[16] = {};
-const u16 NullPalette_8310FE8[16] = {};
-const u16 NullPalette_8311008[16] = {};
-const u16 NullPalette_8311028[16] = {};
-const u16 NullPalette_8311048[16] = {};
-const u16 NullPalette_8311068[16] = {};
-const u16 NullPalette_8311088[16] = {};
-const u16 NullPalette_83110A8[16] = {};
-const u16 NullPalette_83110C8[16] = {};
-const u16 NullPalette_83110E8[16] = {};
-const u16 NullPalette_8311108[16] = {};
-const u16 NullPalette_8311128[16] = {};
-const u16 gMapObjectPalette9[] = INCBIN_U16("graphics/map_objects/palettes/09.gbapal");
-const u16 gMapObjectPalette10[] = INCBIN_U16("graphics/map_objects/palettes/10.gbapal");
-const u32 gMapObjectPic_BrendanFieldMove_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/0.4bpp");
-const u32 gMapObjectPic_BrendanFieldMove_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/1.4bpp");
-const u32 gMapObjectPic_BrendanFieldMove_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/2.4bpp");
-const u32 gMapObjectPic_BrendanFieldMove_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/3.4bpp");
-const u32 gMapObjectPic_BrendanFieldMove_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/field_move/4.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/0.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/3.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/1.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/4.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/2.4bpp");
-const u32 gMapObjectPic_BrendanSurfing_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/surfing/5.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/0.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/1.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/2.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/3.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/4.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/5.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/6.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/7.4bpp");
-const u32 gMapObjectPic_BrendanMachBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/mach_bike/8.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/00.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/01.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/02.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/03.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/04.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/05.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/06.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/07.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/08.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/09.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/10.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/11.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_12[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/12.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_13[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/13.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_14[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/14.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_15[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/15.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_16[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/16.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_17[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/17.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_18[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/18.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_19[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/19.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_20[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/20.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_21[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/21.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_22[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/22.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_23[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/23.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_24[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/24.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_25[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/25.4bpp");
-const u32 gMapObjectPic_BrendanAcroBike_26[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/acro_bike/26.4bpp");
-const u32 gMapObjectPic_BrendanFishing_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/00.4bpp");
-const u32 gMapObjectPic_BrendanFishing_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/01.4bpp");
-const u32 gMapObjectPic_BrendanFishing_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/02.4bpp");
-const u32 gMapObjectPic_BrendanFishing_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/03.4bpp");
-const u32 gMapObjectPic_BrendanFishing_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/04.4bpp");
-const u32 gMapObjectPic_BrendanFishing_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/05.4bpp");
-const u32 gMapObjectPic_BrendanFishing_6[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/06.4bpp");
-const u32 gMapObjectPic_BrendanFishing_7[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/07.4bpp");
-const u32 gMapObjectPic_BrendanFishing_8[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/08.4bpp");
-const u32 gMapObjectPic_BrendanFishing_9[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/09.4bpp");
-const u32 gMapObjectPic_BrendanFishing_10[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/10.4bpp");
-const u32 gMapObjectPic_BrendanFishing_11[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/fishing/11.4bpp");
-const u32 gMapObjectPic_BrendanWatering_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/0.4bpp");
-const u32 gMapObjectPic_BrendanWatering_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/3.4bpp");
-const u32 gMapObjectPic_BrendanWatering_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/1.4bpp");
-const u32 gMapObjectPic_BrendanWatering_4[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/4.4bpp");
-const u32 gMapObjectPic_BrendanWatering_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/2.4bpp");
-const u32 gMapObjectPic_BrendanWatering_5[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/watering/5.4bpp");
-const u32 gMapObjectPic_BrendanDecorating[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/decorating.4bpp");
-const u32 gMapObjectPic_MayDecorating[] = INCBIN_U32("graphics/map_objects/pics/people/may/decorating.4bpp");
-const u32 gMapObjectPic_BrendanUnderwater_0[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/0.4bpp");
-const u32 gMapObjectPic_BrendanUnderwater_1[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/1.4bpp");
-const u32 gMapObjectPic_BrendanUnderwater_2[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/2.4bpp");
-const u32 gMapObjectPic_BrendanUnderwater_3[] = INCBIN_U32("graphics/map_objects/pics/people/brendan/underwater/3.4bpp");
-const u32 gMapObjectPic_MayUnderwater_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/0.4bpp");
-const u32 gMapObjectPic_MayUnderwater_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/1.4bpp");
-const u32 gMapObjectPic_MayUnderwater_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/2.4bpp");
-const u32 gMapObjectPic_MayUnderwater_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/underwater/3.4bpp");
-const u16 gMapObjectPalette11[] = INCBIN_U16("graphics/map_objects/palettes/11.gbapal");
-const u32 gMapObjectPic_MayNormal_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/00.4bpp");
-const u32 gMapObjectPic_MayNormal_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/01.4bpp");
-const u32 gMapObjectPic_MayNormal_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/02.4bpp");
-const u32 gMapObjectPic_MayNormal_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/03.4bpp");
-const u32 gMapObjectPic_MayNormal_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/04.4bpp");
-const u32 gMapObjectPic_MayNormal_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/05.4bpp");
-const u32 gMapObjectPic_MayNormal_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/06.4bpp");
-const u32 gMapObjectPic_MayNormal_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/07.4bpp");
-const u32 gMapObjectPic_MayNormal_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/08.4bpp");
-const u32 gMapObjectPic_MayNormal_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/09.4bpp");
-const u32 gMapObjectPic_MayNormal_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/10.4bpp");
-const u32 gMapObjectPic_MayNormal_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/11.4bpp");
-const u32 gMapObjectPic_MayNormal_12[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/12.4bpp");
-const u32 gMapObjectPic_MayNormal_13[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/13.4bpp");
-const u32 gMapObjectPic_MayNormal_14[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/14.4bpp");
-const u32 gMapObjectPic_MayNormal_15[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/15.4bpp");
-const u32 gMapObjectPic_MayNormal_16[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/16.4bpp");
-const u32 gMapObjectPic_MayNormal_17[] = INCBIN_U32("graphics/map_objects/pics/people/may/normal/17.4bpp");
-const u16 gMapObjectPalette17[] = INCBIN_U16("graphics/map_objects/palettes/17.gbapal");
-const u16 gMapObjectPalette18[] = INCBIN_U16("graphics/map_objects/palettes/18.gbapal");
-const u16 NullPalette_831B7E8[16] = {};
-const u16 NullPalette_831B808[16] = {};
-const u16 NullPalette_831B828[16] = {};
-const u16 NullPalette_831B848[16] = {};
-const u16 NullPalette_831B868[16] = {};
-const u16 NullPalette_831B888[16] = {};
-const u16 NullPalette_831B8A8[16] = {};
-const u16 NullPalette_831B8C8[16] = {};
-const u16 NullPalette_831B8E8[16] = {};
-const u16 NullPalette_831B908[16] = {};
-const u16 NullPalette_831B928[16] = {};
-const u16 NullPalette_831B948[16] = {};
-const u16 NullPalette_831B968[16] = {};
-const u16 NullPalette_831B988[16] = {};
-const u32 gMapObjectPic_MayMachBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/0.4bpp");
-const u32 gMapObjectPic_MayMachBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/1.4bpp");
-const u32 gMapObjectPic_MayMachBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/2.4bpp");
-const u32 gMapObjectPic_MayMachBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/3.4bpp");
-const u32 gMapObjectPic_MayMachBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/4.4bpp");
-const u32 gMapObjectPic_MayMachBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/5.4bpp");
-const u32 gMapObjectPic_MayMachBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/6.4bpp");
-const u32 gMapObjectPic_MayMachBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/7.4bpp");
-const u32 gMapObjectPic_MayMachBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/mach_bike/8.4bpp");
-const u32 gMapObjectPic_MayAcroBike_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/00.4bpp");
-const u32 gMapObjectPic_MayAcroBike_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/01.4bpp");
-const u32 gMapObjectPic_MayAcroBike_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/02.4bpp");
-const u32 gMapObjectPic_MayAcroBike_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/03.4bpp");
-const u32 gMapObjectPic_MayAcroBike_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/04.4bpp");
-const u32 gMapObjectPic_MayAcroBike_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/05.4bpp");
-const u32 gMapObjectPic_MayAcroBike_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/06.4bpp");
-const u32 gMapObjectPic_MayAcroBike_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/07.4bpp");
-const u32 gMapObjectPic_MayAcroBike_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/08.4bpp");
-const u32 gMapObjectPic_MayAcroBike_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/09.4bpp");
-const u32 gMapObjectPic_MayAcroBike_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/10.4bpp");
-const u32 gMapObjectPic_MayAcroBike_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/11.4bpp");
-const u32 gMapObjectPic_MayAcroBike_12[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/12.4bpp");
-const u32 gMapObjectPic_MayAcroBike_13[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/13.4bpp");
-const u32 gMapObjectPic_MayAcroBike_14[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/14.4bpp");
-const u32 gMapObjectPic_MayAcroBike_15[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/15.4bpp");
-const u32 gMapObjectPic_MayAcroBike_16[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/16.4bpp");
-const u32 gMapObjectPic_MayAcroBike_17[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/17.4bpp");
-const u32 gMapObjectPic_MayAcroBike_18[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/18.4bpp");
-const u32 gMapObjectPic_MayAcroBike_19[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/19.4bpp");
-const u32 gMapObjectPic_MayAcroBike_20[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/20.4bpp");
-const u32 gMapObjectPic_MayAcroBike_21[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/21.4bpp");
-const u32 gMapObjectPic_MayAcroBike_22[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/22.4bpp");
-const u32 gMapObjectPic_MayAcroBike_23[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/23.4bpp");
-const u32 gMapObjectPic_MayAcroBike_24[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/24.4bpp");
-const u32 gMapObjectPic_MayAcroBike_25[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/25.4bpp");
-const u32 gMapObjectPic_MayAcroBike_26[] = INCBIN_U32("graphics/map_objects/pics/people/may/acro_bike/26.4bpp");
-const u32 gMapObjectPic_MaySurfing_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/0.4bpp");
-const u32 gMapObjectPic_MaySurfing_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/3.4bpp");
-const u32 gMapObjectPic_MaySurfing_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/1.4bpp");
-const u32 gMapObjectPic_MaySurfing_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/4.4bpp");
-const u32 gMapObjectPic_MaySurfing_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/2.4bpp");
-const u32 gMapObjectPic_MaySurfing_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/surfing/5.4bpp");
-const u32 gMapObjectPic_MayFieldMove_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/0.4bpp");
-const u32 gMapObjectPic_MayFieldMove_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/1.4bpp");
-const u32 gMapObjectPic_MayFieldMove_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/2.4bpp");
-const u32 gMapObjectPic_MayFieldMove_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/3.4bpp");
-const u32 gMapObjectPic_MayFieldMove_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/field_move/4.4bpp");
-const u32 gMapObjectPic_MayFishing_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/00.4bpp");
-const u32 gMapObjectPic_MayFishing_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/01.4bpp");
-const u32 gMapObjectPic_MayFishing_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/02.4bpp");
-const u32 gMapObjectPic_MayFishing_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/03.4bpp");
-const u32 gMapObjectPic_MayFishing_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/04.4bpp");
-const u32 gMapObjectPic_MayFishing_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/05.4bpp");
-const u32 gMapObjectPic_MayFishing_6[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/06.4bpp");
-const u32 gMapObjectPic_MayFishing_7[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/07.4bpp");
-const u32 gMapObjectPic_MayFishing_8[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/08.4bpp");
-const u32 gMapObjectPic_MayFishing_9[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/09.4bpp");
-const u32 gMapObjectPic_MayFishing_10[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/10.4bpp");
-const u32 gMapObjectPic_MayFishing_11[] = INCBIN_U32("graphics/map_objects/pics/people/may/fishing/11.4bpp");
-const u32 gMapObjectPic_MayWatering_0[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/0.4bpp");
-const u32 gMapObjectPic_MayWatering_3[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/3.4bpp");
-const u32 gMapObjectPic_MayWatering_1[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/1.4bpp");
-const u32 gMapObjectPic_MayWatering_4[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/4.4bpp");
-const u32 gMapObjectPic_MayWatering_2[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/2.4bpp");
-const u32 gMapObjectPic_MayWatering_5[] = INCBIN_U32("graphics/map_objects/pics/people/may/watering/5.4bpp");
-const u16 gMapObjectPalette0[] = INCBIN_U16("graphics/map_objects/palettes/00.gbapal");
-const u16 gMapObjectPalette1[] = INCBIN_U16("graphics/map_objects/palettes/01.gbapal");
-const u16 gMapObjectPalette2[] = INCBIN_U16("graphics/map_objects/palettes/02.gbapal");
-const u16 gMapObjectPalette3[] = INCBIN_U16("graphics/map_objects/palettes/03.gbapal");
-const u16 gMapObjectPalette4[] = INCBIN_U16("graphics/map_objects/palettes/04.gbapal");
-const u16 gMapObjectPalette5[] = INCBIN_U16("graphics/map_objects/palettes/05.gbapal");
-const u16 gMapObjectPalette6[] = INCBIN_U16("graphics/map_objects/palettes/06.gbapal");
-const u16 gMapObjectPalette7[] = INCBIN_U16("graphics/map_objects/palettes/07.gbapal");
-const u32 gMapObjectPic_LittleBoy1_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/0.4bpp");
-const u32 gMapObjectPic_LittleBoy1_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/1.4bpp");
-const u32 gMapObjectPic_LittleBoy1_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/2.4bpp");
-const u32 gMapObjectPic_LittleBoy1_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/3.4bpp");
-const u32 gMapObjectPic_LittleBoy1_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/4.4bpp");
-const u32 gMapObjectPic_LittleBoy1_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/5.4bpp");
-const u32 gMapObjectPic_LittleBoy1_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/6.4bpp");
-const u32 gMapObjectPic_LittleBoy1_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/7.4bpp");
-const u32 gMapObjectPic_LittleBoy1_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_1/8.4bpp");
-const u32 gMapObjectPic_LittleGirl1_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/0.4bpp");
-const u32 gMapObjectPic_LittleGirl1_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/1.4bpp");
-const u32 gMapObjectPic_LittleGirl1_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/2.4bpp");
-const u32 gMapObjectPic_LittleGirl1_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/3.4bpp");
-const u32 gMapObjectPic_LittleGirl1_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/4.4bpp");
-const u32 gMapObjectPic_LittleGirl1_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/5.4bpp");
-const u32 gMapObjectPic_LittleGirl1_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/6.4bpp");
-const u32 gMapObjectPic_LittleGirl1_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/7.4bpp");
-const u32 gMapObjectPic_LittleGirl1_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_1/8.4bpp");
-const u32 gMapObjectPic_Boy1_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/0.4bpp");
-const u32 gMapObjectPic_Boy1_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/1.4bpp");
-const u32 gMapObjectPic_Boy1_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/2.4bpp");
-const u32 gMapObjectPic_Boy1_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/3.4bpp");
-const u32 gMapObjectPic_Boy1_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/4.4bpp");
-const u32 gMapObjectPic_Boy1_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/5.4bpp");
-const u32 gMapObjectPic_Boy1_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/6.4bpp");
-const u32 gMapObjectPic_Boy1_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/7.4bpp");
-const u32 gMapObjectPic_Boy1_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_1/8.4bpp");
-const u32 gMapObjectPic_Girl1_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/0.4bpp");
-const u32 gMapObjectPic_Girl1_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/1.4bpp");
-const u32 gMapObjectPic_Girl1_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/2.4bpp");
-const u32 gMapObjectPic_Girl1_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/3.4bpp");
-const u32 gMapObjectPic_Girl1_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/4.4bpp");
-const u32 gMapObjectPic_Girl1_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/5.4bpp");
-const u32 gMapObjectPic_Girl1_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/6.4bpp");
-const u32 gMapObjectPic_Girl1_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/7.4bpp");
-const u32 gMapObjectPic_Girl1_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_1/8.4bpp");
-const u32 gMapObjectPic_Boy2_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/0.4bpp");
-const u32 gMapObjectPic_Boy2_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/1.4bpp");
-const u32 gMapObjectPic_Boy2_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/2.4bpp");
-const u32 gMapObjectPic_Boy2_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/3.4bpp");
-const u32 gMapObjectPic_Boy2_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/4.4bpp");
-const u32 gMapObjectPic_Boy2_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/5.4bpp");
-const u32 gMapObjectPic_Boy2_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/6.4bpp");
-const u32 gMapObjectPic_Boy2_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/7.4bpp");
-const u32 gMapObjectPic_Boy2_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_2/8.4bpp");
-const u32 gMapObjectPic_Girl2_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/0.4bpp");
-const u32 gMapObjectPic_Girl2_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/1.4bpp");
-const u32 gMapObjectPic_Girl2_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/2.4bpp");
-const u32 gMapObjectPic_Girl2_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/3.4bpp");
-const u32 gMapObjectPic_Girl2_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/4.4bpp");
-const u32 gMapObjectPic_Girl2_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/5.4bpp");
-const u32 gMapObjectPic_Girl2_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/6.4bpp");
-const u32 gMapObjectPic_Girl2_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/7.4bpp");
-const u32 gMapObjectPic_Girl2_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_2/8.4bpp");
-const u32 gMapObjectPic_LittleBoy2_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/0.4bpp");
-const u32 gMapObjectPic_LittleBoy2_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/1.4bpp");
-const u32 gMapObjectPic_LittleBoy2_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/2.4bpp");
-const u32 gMapObjectPic_LittleBoy2_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/3.4bpp");
-const u32 gMapObjectPic_LittleBoy2_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/4.4bpp");
-const u32 gMapObjectPic_LittleBoy2_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/5.4bpp");
-const u32 gMapObjectPic_LittleBoy2_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/6.4bpp");
-const u32 gMapObjectPic_LittleBoy2_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/7.4bpp");
-const u32 gMapObjectPic_LittleBoy2_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_2/8.4bpp");
-const u32 gMapObjectPic_LittleGirl2_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/0.4bpp");
-const u32 gMapObjectPic_LittleGirl2_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/1.4bpp");
-const u32 gMapObjectPic_LittleGirl2_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/2.4bpp");
-const u32 gMapObjectPic_LittleGirl2_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/3.4bpp");
-const u32 gMapObjectPic_LittleGirl2_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/4.4bpp");
-const u32 gMapObjectPic_LittleGirl2_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/5.4bpp");
-const u32 gMapObjectPic_LittleGirl2_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/6.4bpp");
-const u32 gMapObjectPic_LittleGirl2_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/7.4bpp");
-const u32 gMapObjectPic_LittleGirl2_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_girl_2/8.4bpp");
-const u32 gMapObjectPic_Boy3_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/0.4bpp");
-const u32 gMapObjectPic_Boy3_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/1.4bpp");
-const u32 gMapObjectPic_Boy3_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/2.4bpp");
-const u32 gMapObjectPic_Boy3_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/3.4bpp");
-const u32 gMapObjectPic_Boy3_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/4.4bpp");
-const u32 gMapObjectPic_Boy3_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/5.4bpp");
-const u32 gMapObjectPic_Boy3_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/6.4bpp");
-const u32 gMapObjectPic_Boy3_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/7.4bpp");
-const u32 gMapObjectPic_Boy3_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_3/8.4bpp");
-const u32 gMapObjectPic_Girl3_0[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/0.4bpp");
-const u32 gMapObjectPic_Girl3_1[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/1.4bpp");
-const u32 gMapObjectPic_Girl3_2[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/2.4bpp");
-const u32 gMapObjectPic_Girl3_3[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/3.4bpp");
-const u32 gMapObjectPic_Girl3_4[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/4.4bpp");
-const u32 gMapObjectPic_Girl3_5[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/5.4bpp");
-const u32 gMapObjectPic_Girl3_6[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/6.4bpp");
-const u32 gMapObjectPic_Girl3_7[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/7.4bpp");
-const u32 gMapObjectPic_Girl3_8[] = INCBIN_U32("graphics/map_objects/pics/people/girl_3/8.4bpp");
-const u32 gMapObjectPic_Boy4_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/0.4bpp");
-const u32 gMapObjectPic_Boy4_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/1.4bpp");
-const u32 gMapObjectPic_Boy4_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/2.4bpp");
-const u32 gMapObjectPic_Boy4_3[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/3.4bpp");
-const u32 gMapObjectPic_Boy4_4[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/4.4bpp");
-const u32 gMapObjectPic_Boy4_5[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/5.4bpp");
-const u32 gMapObjectPic_Boy4_6[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/6.4bpp");
-const u32 gMapObjectPic_Boy4_7[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/7.4bpp");
-const u32 gMapObjectPic_Boy4_8[] = INCBIN_U32("graphics/map_objects/pics/people/boy_4/8.4bpp");
-const u32 gMapObjectPic_Woman1_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/0.4bpp");
-const u32 gMapObjectPic_Woman1_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/1.4bpp");
-const u32 gMapObjectPic_Woman1_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/2.4bpp");
-const u32 gMapObjectPic_Woman1_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/3.4bpp");
-const u32 gMapObjectPic_Woman1_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/4.4bpp");
-const u32 gMapObjectPic_Woman1_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/5.4bpp");
-const u32 gMapObjectPic_Woman1_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/6.4bpp");
-const u32 gMapObjectPic_Woman1_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/7.4bpp");
-const u32 gMapObjectPic_Woman1_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_1/8.4bpp");
-const u32 gMapObjectPic_FatMan_0[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/0.4bpp");
-const u32 gMapObjectPic_FatMan_1[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/1.4bpp");
-const u32 gMapObjectPic_FatMan_2[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/2.4bpp");
-const u32 gMapObjectPic_FatMan_3[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/3.4bpp");
-const u32 gMapObjectPic_FatMan_4[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/4.4bpp");
-const u32 gMapObjectPic_FatMan_5[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/5.4bpp");
-const u32 gMapObjectPic_FatMan_6[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/6.4bpp");
-const u32 gMapObjectPic_FatMan_7[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/7.4bpp");
-const u32 gMapObjectPic_FatMan_8[] = INCBIN_U32("graphics/map_objects/pics/people/fat_man/8.4bpp");
-const u32 gMapObjectPic_Woman2_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/0.4bpp");
-const u32 gMapObjectPic_Woman2_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/1.4bpp");
-const u32 gMapObjectPic_Woman2_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/2.4bpp");
-const u32 gMapObjectPic_Woman2_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/3.4bpp");
-const u32 gMapObjectPic_Woman2_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/4.4bpp");
-const u32 gMapObjectPic_Woman2_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/5.4bpp");
-const u32 gMapObjectPic_Woman2_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/6.4bpp");
-const u32 gMapObjectPic_Woman2_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/7.4bpp");
-const u32 gMapObjectPic_Woman2_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_2/8.4bpp");
-const u32 gMapObjectPic_Man1_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/0.4bpp");
-const u32 gMapObjectPic_Man1_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/1.4bpp");
-const u32 gMapObjectPic_Man1_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/2.4bpp");
-const u32 gMapObjectPic_Man1_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/3.4bpp");
-const u32 gMapObjectPic_Man1_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/4.4bpp");
-const u32 gMapObjectPic_Man1_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/5.4bpp");
-const u32 gMapObjectPic_Man1_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/6.4bpp");
-const u32 gMapObjectPic_Man1_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/7.4bpp");
-const u32 gMapObjectPic_Man1_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_1/8.4bpp");
-const u32 gMapObjectPic_Woman3_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/0.4bpp");
-const u32 gMapObjectPic_Woman3_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/1.4bpp");
-const u32 gMapObjectPic_Woman3_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/2.4bpp");
-const u32 gMapObjectPic_Woman3_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/3.4bpp");
-const u32 gMapObjectPic_Woman3_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/4.4bpp");
-const u32 gMapObjectPic_Woman3_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/5.4bpp");
-const u32 gMapObjectPic_Woman3_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/6.4bpp");
-const u32 gMapObjectPic_Woman3_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/7.4bpp");
-const u32 gMapObjectPic_Woman3_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_3/8.4bpp");
-const u32 gMapObjectPic_OldMan1_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/0.4bpp");
-const u32 gMapObjectPic_OldMan1_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/1.4bpp");
-const u32 gMapObjectPic_OldMan1_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/2.4bpp");
-const u32 gMapObjectPic_OldMan1_3[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/3.4bpp");
-const u32 gMapObjectPic_OldMan1_4[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/4.4bpp");
-const u32 gMapObjectPic_OldMan1_5[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/5.4bpp");
-const u32 gMapObjectPic_OldMan1_6[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/6.4bpp");
-const u32 gMapObjectPic_OldMan1_7[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/7.4bpp");
-const u32 gMapObjectPic_OldMan1_8[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_1/8.4bpp");
-const u32 gMapObjectPic_OldWoman1_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/0.4bpp");
-const u32 gMapObjectPic_OldWoman1_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/1.4bpp");
-const u32 gMapObjectPic_OldWoman1_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/2.4bpp");
-const u32 gMapObjectPic_OldWoman1_3[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/3.4bpp");
-const u32 gMapObjectPic_OldWoman1_4[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/4.4bpp");
-const u32 gMapObjectPic_OldWoman1_5[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/5.4bpp");
-const u32 gMapObjectPic_OldWoman1_6[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/6.4bpp");
-const u32 gMapObjectPic_OldWoman1_7[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/7.4bpp");
-const u32 gMapObjectPic_OldWoman1_8[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_1/8.4bpp");
-const u32 gMapObjectPic_Man2_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/0.4bpp");
-const u32 gMapObjectPic_Man2_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/1.4bpp");
-const u32 gMapObjectPic_Man2_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/2.4bpp");
-const u32 gMapObjectPic_Man2_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/3.4bpp");
-const u32 gMapObjectPic_Man2_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/4.4bpp");
-const u32 gMapObjectPic_Man2_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/5.4bpp");
-const u32 gMapObjectPic_Man2_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/6.4bpp");
-const u32 gMapObjectPic_Man2_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/7.4bpp");
-const u32 gMapObjectPic_Man2_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_2/8.4bpp");
-const u32 gMapObjectPic_Woman4_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/0.4bpp");
-const u32 gMapObjectPic_Woman4_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/1.4bpp");
-const u32 gMapObjectPic_Woman4_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/2.4bpp");
-const u32 gMapObjectPic_Woman4_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/3.4bpp");
-const u32 gMapObjectPic_Woman4_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/4.4bpp");
-const u32 gMapObjectPic_Woman4_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/5.4bpp");
-const u32 gMapObjectPic_Woman4_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/6.4bpp");
-const u32 gMapObjectPic_Woman4_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/7.4bpp");
-const u32 gMapObjectPic_Woman4_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_4/8.4bpp");
-const u32 gMapObjectPic_Man3_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/0.4bpp");
-const u32 gMapObjectPic_Man3_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/1.4bpp");
-const u32 gMapObjectPic_Man3_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/2.4bpp");
-const u32 gMapObjectPic_Man3_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/3.4bpp");
-const u32 gMapObjectPic_Man3_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/4.4bpp");
-const u32 gMapObjectPic_Man3_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/5.4bpp");
-const u32 gMapObjectPic_Man3_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/6.4bpp");
-const u32 gMapObjectPic_Man3_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/7.4bpp");
-const u32 gMapObjectPic_Man3_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_3/8.4bpp");
-const u32 gMapObjectPic_Woman5_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/0.4bpp");
-const u32 gMapObjectPic_Woman5_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/1.4bpp");
-const u32 gMapObjectPic_Woman5_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/2.4bpp");
-const u32 gMapObjectPic_Woman5_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/3.4bpp");
-const u32 gMapObjectPic_Woman5_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/4.4bpp");
-const u32 gMapObjectPic_Woman5_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/5.4bpp");
-const u32 gMapObjectPic_Woman5_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/6.4bpp");
-const u32 gMapObjectPic_Woman5_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/7.4bpp");
-const u32 gMapObjectPic_Woman5_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_5/8.4bpp");
-const u32 gMapObjectPic_Cook_0[] = INCBIN_U32("graphics/map_objects/pics/people/cook/0.4bpp");
-const u32 gMapObjectPic_Cook_1[] = INCBIN_U32("graphics/map_objects/pics/people/cook/1.4bpp");
-const u32 gMapObjectPic_Cook_2[] = INCBIN_U32("graphics/map_objects/pics/people/cook/2.4bpp");
-const u32 gMapObjectPic_Woman6_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/0.4bpp");
-const u32 gMapObjectPic_Woman6_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/1.4bpp");
-const u32 gMapObjectPic_Woman6_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/2.4bpp");
-const u32 gMapObjectPic_Woman6_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/3.4bpp");
-const u32 gMapObjectPic_Woman6_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/4.4bpp");
-const u32 gMapObjectPic_Woman6_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/5.4bpp");
-const u32 gMapObjectPic_Woman6_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/6.4bpp");
-const u32 gMapObjectPic_Woman6_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/7.4bpp");
-const u32 gMapObjectPic_Woman6_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_6/8.4bpp");
-const u32 gMapObjectPic_OldMan2_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/0.4bpp");
-const u32 gMapObjectPic_OldMan2_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/1.4bpp");
-const u32 gMapObjectPic_OldMan2_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_man_2/2.4bpp");
-const u32 gMapObjectPic_OldWoman2_0[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/0.4bpp");
-const u32 gMapObjectPic_OldWoman2_1[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/1.4bpp");
-const u32 gMapObjectPic_OldWoman2_2[] = INCBIN_U32("graphics/map_objects/pics/people/old_woman_2/2.4bpp");
-const u32 gMapObjectPic_Camper_0[] = INCBIN_U32("graphics/map_objects/pics/people/camper/0.4bpp");
-const u32 gMapObjectPic_Camper_1[] = INCBIN_U32("graphics/map_objects/pics/people/camper/1.4bpp");
-const u32 gMapObjectPic_Camper_2[] = INCBIN_U32("graphics/map_objects/pics/people/camper/2.4bpp");
-const u32 gMapObjectPic_Camper_3[] = INCBIN_U32("graphics/map_objects/pics/people/camper/3.4bpp");
-const u32 gMapObjectPic_Camper_4[] = INCBIN_U32("graphics/map_objects/pics/people/camper/4.4bpp");
-const u32 gMapObjectPic_Camper_5[] = INCBIN_U32("graphics/map_objects/pics/people/camper/5.4bpp");
-const u32 gMapObjectPic_Camper_6[] = INCBIN_U32("graphics/map_objects/pics/people/camper/6.4bpp");
-const u32 gMapObjectPic_Camper_7[] = INCBIN_U32("graphics/map_objects/pics/people/camper/7.4bpp");
-const u32 gMapObjectPic_Camper_8[] = INCBIN_U32("graphics/map_objects/pics/people/camper/8.4bpp");
-const u32 gMapObjectPic_Picnicker_0[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/0.4bpp");
-const u32 gMapObjectPic_Picnicker_1[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/1.4bpp");
-const u32 gMapObjectPic_Picnicker_2[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/2.4bpp");
-const u32 gMapObjectPic_Picnicker_3[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/3.4bpp");
-const u32 gMapObjectPic_Picnicker_4[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/4.4bpp");
-const u32 gMapObjectPic_Picnicker_5[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/5.4bpp");
-const u32 gMapObjectPic_Picnicker_6[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/6.4bpp");
-const u32 gMapObjectPic_Picnicker_7[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/7.4bpp");
-const u32 gMapObjectPic_Picnicker_8[] = INCBIN_U32("graphics/map_objects/pics/people/picnicker/8.4bpp");
-const u32 gMapObjectPic_Man4_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/0.4bpp");
-const u32 gMapObjectPic_Man4_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/1.4bpp");
-const u32 gMapObjectPic_Man4_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/2.4bpp");
-const u32 gMapObjectPic_Man4_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/3.4bpp");
-const u32 gMapObjectPic_Man4_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/4.4bpp");
-const u32 gMapObjectPic_Man4_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/5.4bpp");
-const u32 gMapObjectPic_Man4_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/6.4bpp");
-const u32 gMapObjectPic_Man4_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/7.4bpp");
-const u32 gMapObjectPic_Man4_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_4/8.4bpp");
-const u32 gMapObjectPic_Woman7_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/0.4bpp");
-const u32 gMapObjectPic_Woman7_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/1.4bpp");
-const u32 gMapObjectPic_Woman7_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/2.4bpp");
-const u32 gMapObjectPic_Woman7_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/3.4bpp");
-const u32 gMapObjectPic_Woman7_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/4.4bpp");
-const u32 gMapObjectPic_Woman7_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/5.4bpp");
-const u32 gMapObjectPic_Woman7_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/6.4bpp");
-const u32 gMapObjectPic_Woman7_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/7.4bpp");
-const u32 gMapObjectPic_Woman7_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_7/8.4bpp");
-const u32 gMapObjectPic_Youngster_0[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/0.4bpp");
-const u32 gMapObjectPic_Youngster_1[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/1.4bpp");
-const u32 gMapObjectPic_Youngster_2[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/2.4bpp");
-const u32 gMapObjectPic_Youngster_3[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/3.4bpp");
-const u32 gMapObjectPic_Youngster_4[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/4.4bpp");
-const u32 gMapObjectPic_Youngster_5[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/5.4bpp");
-const u32 gMapObjectPic_Youngster_6[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/6.4bpp");
-const u32 gMapObjectPic_Youngster_7[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/7.4bpp");
-const u32 gMapObjectPic_Youngster_8[] = INCBIN_U32("graphics/map_objects/pics/people/youngster/8.4bpp");
-const u32 gMapObjectPic_BugCatcher_0[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/0.4bpp");
-const u32 gMapObjectPic_BugCatcher_1[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/1.4bpp");
-const u32 gMapObjectPic_BugCatcher_2[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/2.4bpp");
-const u32 gMapObjectPic_BugCatcher_3[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/3.4bpp");
-const u32 gMapObjectPic_BugCatcher_4[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/4.4bpp");
-const u32 gMapObjectPic_BugCatcher_5[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/5.4bpp");
-const u32 gMapObjectPic_BugCatcher_6[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/6.4bpp");
-const u32 gMapObjectPic_BugCatcher_7[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/7.4bpp");
-const u32 gMapObjectPic_BugCatcher_8[] = INCBIN_U32("graphics/map_objects/pics/people/bug_catcher/8.4bpp");
-const u32 gMapObjectPic_PsychicM_0[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/0.4bpp");
-const u32 gMapObjectPic_PsychicM_1[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/1.4bpp");
-const u32 gMapObjectPic_PsychicM_2[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/2.4bpp");
-const u32 gMapObjectPic_PsychicM_3[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/3.4bpp");
-const u32 gMapObjectPic_PsychicM_4[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/4.4bpp");
-const u32 gMapObjectPic_PsychicM_5[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/5.4bpp");
-const u32 gMapObjectPic_PsychicM_6[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/6.4bpp");
-const u32 gMapObjectPic_PsychicM_7[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/7.4bpp");
-const u32 gMapObjectPic_PsychicM_8[] = INCBIN_U32("graphics/map_objects/pics/people/psychic_m/8.4bpp");
-const u32 gMapObjectPic_SchoolKidM_0[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/0.4bpp");
-const u32 gMapObjectPic_SchoolKidM_1[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/1.4bpp");
-const u32 gMapObjectPic_SchoolKidM_2[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/2.4bpp");
-const u32 gMapObjectPic_SchoolKidM_3[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/3.4bpp");
-const u32 gMapObjectPic_SchoolKidM_4[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/4.4bpp");
-const u32 gMapObjectPic_SchoolKidM_5[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/5.4bpp");
-const u32 gMapObjectPic_SchoolKidM_6[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/6.4bpp");
-const u32 gMapObjectPic_SchoolKidM_7[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/7.4bpp");
-const u32 gMapObjectPic_SchoolKidM_8[] = INCBIN_U32("graphics/map_objects/pics/people/school_kid_m/8.4bpp");
-const u32 gMapObjectPic_Maniac_0[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/0.4bpp");
-const u32 gMapObjectPic_Maniac_1[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/1.4bpp");
-const u32 gMapObjectPic_Maniac_2[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/2.4bpp");
-const u32 gMapObjectPic_Maniac_3[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/3.4bpp");
-const u32 gMapObjectPic_Maniac_4[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/4.4bpp");
-const u32 gMapObjectPic_Maniac_5[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/5.4bpp");
-const u32 gMapObjectPic_Maniac_6[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/6.4bpp");
-const u32 gMapObjectPic_Maniac_7[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/7.4bpp");
-const u32 gMapObjectPic_Maniac_8[] = INCBIN_U32("graphics/map_objects/pics/people/maniac/8.4bpp");
-const u32 gMapObjectPic_HexManiac_0[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/0.4bpp");
-const u32 gMapObjectPic_HexManiac_1[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/1.4bpp");
-const u32 gMapObjectPic_HexManiac_2[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/2.4bpp");
-const u32 gMapObjectPic_HexManiac_3[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/3.4bpp");
-const u32 gMapObjectPic_HexManiac_4[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/4.4bpp");
-const u32 gMapObjectPic_HexManiac_5[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/5.4bpp");
-const u32 gMapObjectPic_HexManiac_6[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/6.4bpp");
-const u32 gMapObjectPic_HexManiac_7[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/7.4bpp");
-const u32 gMapObjectPic_HexManiac_8[] = INCBIN_U32("graphics/map_objects/pics/people/hex_maniac/8.4bpp");
-const u32 gMapObjectPic_Woman8_0[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/0.4bpp");
-const u32 gMapObjectPic_Woman8_1[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/1.4bpp");
-const u32 gMapObjectPic_Woman8_2[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/2.4bpp");
-const u32 gMapObjectPic_Woman8_3[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/3.4bpp");
-const u32 gMapObjectPic_Woman8_4[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/4.4bpp");
-const u32 gMapObjectPic_Woman8_5[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/5.4bpp");
-const u32 gMapObjectPic_Woman8_6[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/6.4bpp");
-const u32 gMapObjectPic_Woman8_7[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/7.4bpp");
-const u32 gMapObjectPic_Woman8_8[] = INCBIN_U32("graphics/map_objects/pics/people/woman_8/8.4bpp");
-const u32 gMapObjectPic_SwimmerM_0[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/0.4bpp");
-const u32 gMapObjectPic_SwimmerM_1[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/1.4bpp");
-const u32 gMapObjectPic_SwimmerM_2[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/2.4bpp");
-const u32 gMapObjectPic_SwimmerM_3[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/3.4bpp");
-const u32 gMapObjectPic_SwimmerM_4[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/4.4bpp");
-const u32 gMapObjectPic_SwimmerM_5[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/5.4bpp");
-const u32 gMapObjectPic_SwimmerM_6[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/6.4bpp");
-const u32 gMapObjectPic_SwimmerM_7[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/7.4bpp");
-const u32 gMapObjectPic_SwimmerM_8[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_m/8.4bpp");
-const u32 gMapObjectPic_SwimmerF_0[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/0.4bpp");
-const u32 gMapObjectPic_SwimmerF_1[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/1.4bpp");
-const u32 gMapObjectPic_SwimmerF_2[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/2.4bpp");
-const u32 gMapObjectPic_SwimmerF_3[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/3.4bpp");
-const u32 gMapObjectPic_SwimmerF_4[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/4.4bpp");
-const u32 gMapObjectPic_SwimmerF_5[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/5.4bpp");
-const u32 gMapObjectPic_SwimmerF_6[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/6.4bpp");
-const u32 gMapObjectPic_SwimmerF_7[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/7.4bpp");
-const u32 gMapObjectPic_SwimmerF_8[] = INCBIN_U32("graphics/map_objects/pics/people/swimmer_f/8.4bpp");
-const u32 gMapObjectPic_BlackBelt_0[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/0.4bpp");
-const u32 gMapObjectPic_BlackBelt_1[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/1.4bpp");
-const u32 gMapObjectPic_BlackBelt_2[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/2.4bpp");
-const u32 gMapObjectPic_BlackBelt_3[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/3.4bpp");
-const u32 gMapObjectPic_BlackBelt_4[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/4.4bpp");
-const u32 gMapObjectPic_BlackBelt_5[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/5.4bpp");
-const u32 gMapObjectPic_BlackBelt_6[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/6.4bpp");
-const u32 gMapObjectPic_BlackBelt_7[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/7.4bpp");
-const u32 gMapObjectPic_BlackBelt_8[] = INCBIN_U32("graphics/map_objects/pics/people/black_belt/8.4bpp");
-const u32 gMapObjectPic_Beauty_0[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/0.4bpp");
-const u32 gMapObjectPic_Beauty_1[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/1.4bpp");
-const u32 gMapObjectPic_Beauty_2[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/2.4bpp");
-const u32 gMapObjectPic_Beauty_3[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/3.4bpp");
-const u32 gMapObjectPic_Beauty_4[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/4.4bpp");
-const u32 gMapObjectPic_Beauty_5[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/5.4bpp");
-const u32 gMapObjectPic_Beauty_6[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/6.4bpp");
-const u32 gMapObjectPic_Beauty_7[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/7.4bpp");
-const u32 gMapObjectPic_Beauty_8[] = INCBIN_U32("graphics/map_objects/pics/people/beauty/8.4bpp");
-const u32 gMapObjectPic_Scientist1_0[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/0.4bpp");
-const u32 gMapObjectPic_Scientist1_1[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/1.4bpp");
-const u32 gMapObjectPic_Scientist1_2[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/2.4bpp");
-const u32 gMapObjectPic_Scientist1_3[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/3.4bpp");
-const u32 gMapObjectPic_Scientist1_4[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/4.4bpp");
-const u32 gMapObjectPic_Scientist1_5[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/5.4bpp");
-const u32 gMapObjectPic_Scientist1_6[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/6.4bpp");
-const u32 gMapObjectPic_Scientist1_7[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/7.4bpp");
-const u32 gMapObjectPic_Scientist1_8[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_1/8.4bpp");
-const u32 gMapObjectPic_Lass_0[] = INCBIN_U32("graphics/map_objects/pics/people/lass/0.4bpp");
-const u32 gMapObjectPic_Lass_1[] = INCBIN_U32("graphics/map_objects/pics/people/lass/1.4bpp");
-const u32 gMapObjectPic_Lass_2[] = INCBIN_U32("graphics/map_objects/pics/people/lass/2.4bpp");
-const u32 gMapObjectPic_Lass_3[] = INCBIN_U32("graphics/map_objects/pics/people/lass/3.4bpp");
-const u32 gMapObjectPic_Lass_4[] = INCBIN_U32("graphics/map_objects/pics/people/lass/4.4bpp");
-const u32 gMapObjectPic_Lass_5[] = INCBIN_U32("graphics/map_objects/pics/people/lass/5.4bpp");
-const u32 gMapObjectPic_Lass_6[] = INCBIN_U32("graphics/map_objects/pics/people/lass/6.4bpp");
-const u32 gMapObjectPic_Lass_7[] = INCBIN_U32("graphics/map_objects/pics/people/lass/7.4bpp");
-const u32 gMapObjectPic_Lass_8[] = INCBIN_U32("graphics/map_objects/pics/people/lass/8.4bpp");
-const u32 gMapObjectPic_Gentleman_0[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/0.4bpp");
-const u32 gMapObjectPic_Gentleman_1[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/1.4bpp");
-const u32 gMapObjectPic_Gentleman_2[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/2.4bpp");
-const u32 gMapObjectPic_Gentleman_3[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/3.4bpp");
-const u32 gMapObjectPic_Gentleman_4[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/4.4bpp");
-const u32 gMapObjectPic_Gentleman_5[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/5.4bpp");
-const u32 gMapObjectPic_Gentleman_6[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/6.4bpp");
-const u32 gMapObjectPic_Gentleman_7[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/7.4bpp");
-const u32 gMapObjectPic_Gentleman_8[] = INCBIN_U32("graphics/map_objects/pics/people/gentleman/8.4bpp");
-const u32 gMapObjectPic_Sailor_0[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/0.4bpp");
-const u32 gMapObjectPic_Sailor_1[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/1.4bpp");
-const u32 gMapObjectPic_Sailor_2[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/2.4bpp");
-const u32 gMapObjectPic_Sailor_3[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/3.4bpp");
-const u32 gMapObjectPic_Sailor_4[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/4.4bpp");
-const u32 gMapObjectPic_Sailor_5[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/5.4bpp");
-const u32 gMapObjectPic_Sailor_6[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/6.4bpp");
-const u32 gMapObjectPic_Sailor_7[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/7.4bpp");
-const u32 gMapObjectPic_Sailor_8[] = INCBIN_U32("graphics/map_objects/pics/people/sailor/8.4bpp");
-const u32 gMapObjectPic_Fisherman_0[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/0.4bpp");
-const u32 gMapObjectPic_Fisherman_1[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/1.4bpp");
-const u32 gMapObjectPic_Fisherman_2[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/2.4bpp");
-const u32 gMapObjectPic_Fisherman_3[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/3.4bpp");
-const u32 gMapObjectPic_Fisherman_4[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/4.4bpp");
-const u32 gMapObjectPic_Fisherman_5[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/5.4bpp");
-const u32 gMapObjectPic_Fisherman_6[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/6.4bpp");
-const u32 gMapObjectPic_Fisherman_7[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/7.4bpp");
-const u32 gMapObjectPic_Fisherman_8[] = INCBIN_U32("graphics/map_objects/pics/people/fisherman/8.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_0[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/0.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_1[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/1.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_2[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/2.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_3[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/3.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_4[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/4.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_5[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/5.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_6[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/6.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_7[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/7.4bpp");
-const u32 gMapObjectPic_RunningTriathleteM_8[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_m/8.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_0[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/0.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_1[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/1.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_2[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/2.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_3[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/3.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_4[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/4.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_5[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/5.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_6[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/6.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_7[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/7.4bpp");
-const u32 gMapObjectPic_RunningTriathleteF_8[] = INCBIN_U32("graphics/map_objects/pics/people/running_triathlete_f/8.4bpp");
-const u32 gMapObjectPic_TuberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/0.4bpp");
-const u32 gMapObjectPic_TuberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/1.4bpp");
-const u32 gMapObjectPic_TuberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/2.4bpp");
-const u32 gMapObjectPic_TuberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/3.4bpp");
-const u32 gMapObjectPic_TuberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/4.4bpp");
-const u32 gMapObjectPic_TuberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/5.4bpp");
-const u32 gMapObjectPic_TuberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/6.4bpp");
-const u32 gMapObjectPic_TuberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/7.4bpp");
-const u32 gMapObjectPic_TuberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_f/8.4bpp");
-const u32 gMapObjectPic_TuberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/0.4bpp");
-const u32 gMapObjectPic_TuberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/1.4bpp");
-const u32 gMapObjectPic_TuberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/2.4bpp");
-const u32 gMapObjectPic_TuberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/3.4bpp");
-const u32 gMapObjectPic_TuberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/4.4bpp");
-const u32 gMapObjectPic_TuberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/5.4bpp");
-const u32 gMapObjectPic_TuberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/6.4bpp");
-const u32 gMapObjectPic_TuberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/7.4bpp");
-const u32 gMapObjectPic_TuberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m/8.4bpp");
-const u32 gMapObjectPic_Hiker_0[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/0.4bpp");
-const u32 gMapObjectPic_Hiker_1[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/1.4bpp");
-const u32 gMapObjectPic_Hiker_2[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/2.4bpp");
-const u32 gMapObjectPic_Hiker_3[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/3.4bpp");
-const u32 gMapObjectPic_Hiker_4[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/4.4bpp");
-const u32 gMapObjectPic_Hiker_5[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/5.4bpp");
-const u32 gMapObjectPic_Hiker_6[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/6.4bpp");
-const u32 gMapObjectPic_Hiker_7[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/7.4bpp");
-const u32 gMapObjectPic_Hiker_8[] = INCBIN_U32("graphics/map_objects/pics/people/hiker/8.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_0[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/0.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_1[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/1.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_2[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/2.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_3[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/3.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_4[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/4.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_5[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/5.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_6[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/6.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_7[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/7.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteM_8[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_m/8.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_0[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/0.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_1[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/1.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_2[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/2.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_3[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/3.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_4[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/4.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_5[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/5.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_6[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/6.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_7[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/7.4bpp");
-const u32 gMapObjectPic_CyclingTriathleteF_8[] = INCBIN_U32("graphics/map_objects/pics/people/cycling_triathlete_f/8.4bpp");
-const u32 gMapObjectPic_Man5_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/0.4bpp");
-const u32 gMapObjectPic_Man5_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/1.4bpp");
-const u32 gMapObjectPic_Man5_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/2.4bpp");
-const u32 gMapObjectPic_Man5_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/3.4bpp");
-const u32 gMapObjectPic_Man5_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/4.4bpp");
-const u32 gMapObjectPic_Man5_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/5.4bpp");
-const u32 gMapObjectPic_Man5_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/6.4bpp");
-const u32 gMapObjectPic_Man5_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/7.4bpp");
-const u32 gMapObjectPic_Man5_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_5/8.4bpp");
-const u32 gMapObjectPic_Man6_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/0.4bpp");
-const u32 gMapObjectPic_Man6_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/1.4bpp");
-const u32 gMapObjectPic_Man6_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/2.4bpp");
-const u32 gMapObjectPic_Man6_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/3.4bpp");
-const u32 gMapObjectPic_Man6_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/4.4bpp");
-const u32 gMapObjectPic_Man6_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/5.4bpp");
-const u32 gMapObjectPic_Man6_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/6.4bpp");
-const u32 gMapObjectPic_Man6_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/7.4bpp");
-const u32 gMapObjectPic_Man6_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_6/8.4bpp");
-const u32 gMapObjectPic_Nurse_0[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/0.4bpp");
-const u32 gMapObjectPic_Nurse_1[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/1.4bpp");
-const u32 gMapObjectPic_Nurse_2[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/2.4bpp");
-const u32 gMapObjectPic_Nurse_3[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/3.4bpp");
-const u32 gMapObjectPic_Nurse_4[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/4.4bpp");
-const u32 gMapObjectPic_Nurse_5[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/5.4bpp");
-const u32 gMapObjectPic_Nurse_6[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/6.4bpp");
-const u32 gMapObjectPic_Nurse_7[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/7.4bpp");
-const u32 gMapObjectPic_Nurse_8[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/8.4bpp");
-const u32 gMapObjectPic_Nurse_9[] = INCBIN_U32("graphics/map_objects/pics/people/nurse/9.4bpp");
-const u32 gMapObjectPic_ItemBall[] = INCBIN_U32("graphics/map_objects/pics/misc/item_ball.4bpp");
-const u32 gMapObjectPic_ProfBirch_0[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/0.4bpp");
-const u32 gMapObjectPic_ProfBirch_1[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/1.4bpp");
-const u32 gMapObjectPic_ProfBirch_2[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/2.4bpp");
-const u32 gMapObjectPic_ProfBirch_3[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/3.4bpp");
-const u32 gMapObjectPic_ProfBirch_4[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/4.4bpp");
-const u32 gMapObjectPic_ProfBirch_5[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/5.4bpp");
-const u32 gMapObjectPic_ProfBirch_6[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/6.4bpp");
-const u32 gMapObjectPic_ProfBirch_7[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/7.4bpp");
-const u32 gMapObjectPic_ProfBirch_8[] = INCBIN_U32("graphics/map_objects/pics/people/prof_birch/8.4bpp");
-const u32 gMapObjectPic_ReporterM_0[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/0.4bpp");
-const u32 gMapObjectPic_ReporterM_1[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/1.4bpp");
-const u32 gMapObjectPic_ReporterM_2[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/2.4bpp");
-const u32 gMapObjectPic_ReporterM_3[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/3.4bpp");
-const u32 gMapObjectPic_ReporterM_4[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/4.4bpp");
-const u32 gMapObjectPic_ReporterM_5[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/5.4bpp");
-const u32 gMapObjectPic_ReporterM_6[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/6.4bpp");
-const u32 gMapObjectPic_ReporterM_7[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/7.4bpp");
-const u32 gMapObjectPic_ReporterM_8[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_m/8.4bpp");
-const u32 gMapObjectPic_ReporterF_0[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/0.4bpp");
-const u32 gMapObjectPic_ReporterF_1[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/1.4bpp");
-const u32 gMapObjectPic_ReporterF_2[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/2.4bpp");
-const u32 gMapObjectPic_ReporterF_3[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/3.4bpp");
-const u32 gMapObjectPic_ReporterF_4[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/4.4bpp");
-const u32 gMapObjectPic_ReporterF_5[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/5.4bpp");
-const u32 gMapObjectPic_ReporterF_6[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/6.4bpp");
-const u32 gMapObjectPic_ReporterF_7[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/7.4bpp");
-const u32 gMapObjectPic_ReporterF_8[] = INCBIN_U32("graphics/map_objects/pics/people/reporter_f/8.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_0[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/0.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_1[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/1.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_2[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/2.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_3[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/3.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_4[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/4.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_5[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/5.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_6[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/6.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_7[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/7.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan1_8[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_1/8.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_0[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/0.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_1[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/1.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_2[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/2.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_3[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/3.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_4[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/4.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_5[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/5.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_6[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/6.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_7[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/7.4bpp");
-const u32 gMapObjectPic_MauvilleOldMan2_8[] = INCBIN_U32("graphics/map_objects/pics/people/mauville_old_man_2/8.4bpp");
-const u32 gMapObjectPic_MartEmployee_0[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/0.4bpp");
-const u32 gMapObjectPic_MartEmployee_1[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/1.4bpp");
-const u32 gMapObjectPic_MartEmployee_2[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/2.4bpp");
-const u32 gMapObjectPic_MartEmployee_3[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/3.4bpp");
-const u32 gMapObjectPic_MartEmployee_4[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/4.4bpp");
-const u32 gMapObjectPic_MartEmployee_5[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/5.4bpp");
-const u32 gMapObjectPic_MartEmployee_6[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/6.4bpp");
-const u32 gMapObjectPic_MartEmployee_7[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/7.4bpp");
-const u32 gMapObjectPic_MartEmployee_8[] = INCBIN_U32("graphics/map_objects/pics/people/mart_employee/8.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_0[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/0.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_1[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/1.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_2[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/2.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_3[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/3.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_4[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/4.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_5[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/5.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_6[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/6.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_7[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/7.4bpp");
-const u32 gMapObjectPic_RooftopSaleWoman_8[] = INCBIN_U32("graphics/map_objects/pics/people/rooftop_sale_woman/8.4bpp");
-const u32 gMapObjectPic_Teala_0[] = INCBIN_U32("graphics/map_objects/pics/people/teala/0.4bpp");
-const u32 gMapObjectPic_Teala_1[] = INCBIN_U32("graphics/map_objects/pics/people/teala/1.4bpp");
-const u32 gMapObjectPic_Teala_2[] = INCBIN_U32("graphics/map_objects/pics/people/teala/2.4bpp");
-const u32 gMapObjectPic_Teala_3[] = INCBIN_U32("graphics/map_objects/pics/people/teala/3.4bpp");
-const u32 gMapObjectPic_Teala_4[] = INCBIN_U32("graphics/map_objects/pics/people/teala/4.4bpp");
-const u32 gMapObjectPic_Teala_5[] = INCBIN_U32("graphics/map_objects/pics/people/teala/5.4bpp");
-const u32 gMapObjectPic_Teala_6[] = INCBIN_U32("graphics/map_objects/pics/people/teala/6.4bpp");
-const u32 gMapObjectPic_Teala_7[] = INCBIN_U32("graphics/map_objects/pics/people/teala/7.4bpp");
-const u32 gMapObjectPic_Teala_8[] = INCBIN_U32("graphics/map_objects/pics/people/teala/8.4bpp");
-const u32 gMapObjectPic_Artist_0[] = INCBIN_U32("graphics/map_objects/pics/people/artist/0.4bpp");
-const u32 gMapObjectPic_Artist_1[] = INCBIN_U32("graphics/map_objects/pics/people/artist/1.4bpp");
-const u32 gMapObjectPic_Artist_2[] = INCBIN_U32("graphics/map_objects/pics/people/artist/2.4bpp");
-const u32 gMapObjectPic_Artist_3[] = INCBIN_U32("graphics/map_objects/pics/people/artist/3.4bpp");
-const u32 gMapObjectPic_Artist_4[] = INCBIN_U32("graphics/map_objects/pics/people/artist/4.4bpp");
-const u32 gMapObjectPic_Artist_5[] = INCBIN_U32("graphics/map_objects/pics/people/artist/5.4bpp");
-const u32 gMapObjectPic_Artist_6[] = INCBIN_U32("graphics/map_objects/pics/people/artist/6.4bpp");
-const u32 gMapObjectPic_Artist_7[] = INCBIN_U32("graphics/map_objects/pics/people/artist/7.4bpp");
-const u32 gMapObjectPic_Artist_8[] = INCBIN_U32("graphics/map_objects/pics/people/artist/8.4bpp");
-const u32 gMapObjectPic_Cameraman_0[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/0.4bpp");
-const u32 gMapObjectPic_Cameraman_1[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/1.4bpp");
-const u32 gMapObjectPic_Cameraman_2[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/2.4bpp");
-const u32 gMapObjectPic_Cameraman_3[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/3.4bpp");
-const u32 gMapObjectPic_Cameraman_4[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/4.4bpp");
-const u32 gMapObjectPic_Cameraman_5[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/5.4bpp");
-const u32 gMapObjectPic_Cameraman_6[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/6.4bpp");
-const u32 gMapObjectPic_Cameraman_7[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/7.4bpp");
-const u32 gMapObjectPic_Cameraman_8[] = INCBIN_U32("graphics/map_objects/pics/people/cameraman/8.4bpp");
-const u32 gMapObjectPic_Scientist2_0[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/0.4bpp");
-const u32 gMapObjectPic_Scientist2_1[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/1.4bpp");
-const u32 gMapObjectPic_Scientist2_2[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/2.4bpp");
-const u32 gMapObjectPic_Scientist2_3[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/3.4bpp");
-const u32 gMapObjectPic_Scientist2_4[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/4.4bpp");
-const u32 gMapObjectPic_Scientist2_5[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/5.4bpp");
-const u32 gMapObjectPic_Scientist2_6[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/6.4bpp");
-const u32 gMapObjectPic_Scientist2_7[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/7.4bpp");
-const u32 gMapObjectPic_Scientist2_8[] = INCBIN_U32("graphics/map_objects/pics/people/scientist_2/8.4bpp");
-const u32 gMapObjectPic_Man7_0[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/0.4bpp");
-const u32 gMapObjectPic_Man7_1[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/1.4bpp");
-const u32 gMapObjectPic_Man7_2[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/2.4bpp");
-const u32 gMapObjectPic_Man7_3[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/3.4bpp");
-const u32 gMapObjectPic_Man7_4[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/4.4bpp");
-const u32 gMapObjectPic_Man7_5[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/5.4bpp");
-const u32 gMapObjectPic_Man7_6[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/6.4bpp");
-const u32 gMapObjectPic_Man7_7[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/7.4bpp");
-const u32 gMapObjectPic_Man7_8[] = INCBIN_U32("graphics/map_objects/pics/people/man_7/8.4bpp");
-const u32 gMapObjectPic_AquaMemberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/0.4bpp");
-const u32 gMapObjectPic_AquaMemberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/1.4bpp");
-const u32 gMapObjectPic_AquaMemberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/2.4bpp");
-const u32 gMapObjectPic_AquaMemberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/3.4bpp");
-const u32 gMapObjectPic_AquaMemberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/4.4bpp");
-const u32 gMapObjectPic_AquaMemberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/5.4bpp");
-const u32 gMapObjectPic_AquaMemberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/6.4bpp");
-const u32 gMapObjectPic_AquaMemberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/7.4bpp");
-const u32 gMapObjectPic_AquaMemberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_m/8.4bpp");
-const u32 gMapObjectPic_AquaMemberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/0.4bpp");
-const u32 gMapObjectPic_AquaMemberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/1.4bpp");
-const u32 gMapObjectPic_AquaMemberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/2.4bpp");
-const u32 gMapObjectPic_AquaMemberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/3.4bpp");
-const u32 gMapObjectPic_AquaMemberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/4.4bpp");
-const u32 gMapObjectPic_AquaMemberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/5.4bpp");
-const u32 gMapObjectPic_AquaMemberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/6.4bpp");
-const u32 gMapObjectPic_AquaMemberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/7.4bpp");
-const u32 gMapObjectPic_AquaMemberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/aqua_member_f/8.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_0[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/0.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_1[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/1.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_2[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/2.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_3[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/3.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_4[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/4.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_5[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/5.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_6[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/6.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_7[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/7.4bpp");
-const u32 gMapObjectPic_MagmaMemberM_8[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_m/8.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_0[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/0.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_1[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/1.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_2[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/2.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_3[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/3.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_4[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/4.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_5[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/5.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_6[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/6.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_7[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/7.4bpp");
-const u32 gMapObjectPic_MagmaMemberF_8[] = INCBIN_U32("graphics/map_objects/pics/people/magma_member_f/8.4bpp");
-const u32 gMapObjectPic_Sidney_0[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/0.4bpp");
-const u32 gMapObjectPic_Sidney_1[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/1.4bpp");
-const u32 gMapObjectPic_Sidney_2[] = INCBIN_U32("graphics/map_objects/pics/people/sidney/2.4bpp");
-const u32 gMapObjectPic_Phoebe_0[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/0.4bpp");
-const u32 gMapObjectPic_Phoebe_1[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/1.4bpp");
-const u32 gMapObjectPic_Phoebe_2[] = INCBIN_U32("graphics/map_objects/pics/people/phoebe/2.4bpp");
-const u32 gMapObjectPic_Glacia_0[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/0.4bpp");
-const u32 gMapObjectPic_Glacia_1[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/1.4bpp");
-const u32 gMapObjectPic_Glacia_2[] = INCBIN_U32("graphics/map_objects/pics/people/glacia/2.4bpp");
-const u32 gMapObjectPic_Drake_0[] = INCBIN_U32("graphics/map_objects/pics/people/drake/0.4bpp");
-const u32 gMapObjectPic_Drake_1[] = INCBIN_U32("graphics/map_objects/pics/people/drake/1.4bpp");
-const u32 gMapObjectPic_Drake_2[] = INCBIN_U32("graphics/map_objects/pics/people/drake/2.4bpp");
-const u32 gMapObjectPic_Roxanne_0[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/0.4bpp");
-const u32 gMapObjectPic_Roxanne_1[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/1.4bpp");
-const u32 gMapObjectPic_Roxanne_2[] = INCBIN_U32("graphics/map_objects/pics/people/roxanne/2.4bpp");
-const u32 gMapObjectPic_Brawly_0[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/0.4bpp");
-const u32 gMapObjectPic_Brawly_1[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/1.4bpp");
-const u32 gMapObjectPic_Brawly_2[] = INCBIN_U32("graphics/map_objects/pics/people/brawly/2.4bpp");
-const u32 gMapObjectPic_Wattson_0[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/0.4bpp");
-const u32 gMapObjectPic_Wattson_1[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/1.4bpp");
-const u32 gMapObjectPic_Wattson_2[] = INCBIN_U32("graphics/map_objects/pics/people/wattson/2.4bpp");
-const u32 gMapObjectPic_Flannery_0[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/0.4bpp");
-const u32 gMapObjectPic_Flannery_1[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/1.4bpp");
-const u32 gMapObjectPic_Flannery_2[] = INCBIN_U32("graphics/map_objects/pics/people/flannery/2.4bpp");
-const u32 gMapObjectPic_Norman_0[] = INCBIN_U32("graphics/map_objects/pics/people/norman/0.4bpp");
-const u32 gMapObjectPic_Norman_1[] = INCBIN_U32("graphics/map_objects/pics/people/norman/1.4bpp");
-const u32 gMapObjectPic_Norman_2[] = INCBIN_U32("graphics/map_objects/pics/people/norman/2.4bpp");
-const u32 gMapObjectPic_Norman_3[] = INCBIN_U32("graphics/map_objects/pics/people/norman/3.4bpp");
-const u32 gMapObjectPic_Norman_4[] = INCBIN_U32("graphics/map_objects/pics/people/norman/4.4bpp");
-const u32 gMapObjectPic_Norman_5[] = INCBIN_U32("graphics/map_objects/pics/people/norman/5.4bpp");
-const u32 gMapObjectPic_Norman_6[] = INCBIN_U32("graphics/map_objects/pics/people/norman/6.4bpp");
-const u32 gMapObjectPic_Norman_7[] = INCBIN_U32("graphics/map_objects/pics/people/norman/7.4bpp");
-const u32 gMapObjectPic_Norman_8[] = INCBIN_U32("graphics/map_objects/pics/people/norman/8.4bpp");
-const u32 gMapObjectPic_Winona_0[] = INCBIN_U32("graphics/map_objects/pics/people/winona/0.4bpp");
-const u32 gMapObjectPic_Winona_1[] = INCBIN_U32("graphics/map_objects/pics/people/winona/1.4bpp");
-const u32 gMapObjectPic_Winona_2[] = INCBIN_U32("graphics/map_objects/pics/people/winona/2.4bpp");
-const u32 gMapObjectPic_Liza_0[] = INCBIN_U32("graphics/map_objects/pics/people/liza/0.4bpp");
-const u32 gMapObjectPic_Liza_1[] = INCBIN_U32("graphics/map_objects/pics/people/liza/1.4bpp");
-const u32 gMapObjectPic_Liza_2[] = INCBIN_U32("graphics/map_objects/pics/people/liza/2.4bpp");
-const u32 gMapObjectPic_Tate_0[] = INCBIN_U32("graphics/map_objects/pics/people/tate/0.4bpp");
-const u32 gMapObjectPic_Tate_1[] = INCBIN_U32("graphics/map_objects/pics/people/tate/1.4bpp");
-const u32 gMapObjectPic_Tate_2[] = INCBIN_U32("graphics/map_objects/pics/people/tate/2.4bpp");
-const u32 gMapObjectPic_Wallace_0[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/0.4bpp");
-const u32 gMapObjectPic_Wallace_1[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/1.4bpp");
-const u32 gMapObjectPic_Wallace_2[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/2.4bpp");
-const u32 gMapObjectPic_Wallace_3[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/3.4bpp");
-const u32 gMapObjectPic_Wallace_4[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/4.4bpp");
-const u32 gMapObjectPic_Wallace_5[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/5.4bpp");
-const u32 gMapObjectPic_Wallace_6[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/6.4bpp");
-const u32 gMapObjectPic_Wallace_7[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/7.4bpp");
-const u32 gMapObjectPic_Wallace_8[] = INCBIN_U32("graphics/map_objects/pics/people/wallace/8.4bpp");
-const u32 gMapObjectPic_Steven_0[] = INCBIN_U32("graphics/map_objects/pics/people/steven/0.4bpp");
-const u32 gMapObjectPic_Steven_1[] = INCBIN_U32("graphics/map_objects/pics/people/steven/1.4bpp");
-const u32 gMapObjectPic_Steven_2[] = INCBIN_U32("graphics/map_objects/pics/people/steven/2.4bpp");
-const u32 gMapObjectPic_Steven_3[] = INCBIN_U32("graphics/map_objects/pics/people/steven/3.4bpp");
-const u32 gMapObjectPic_Steven_4[] = INCBIN_U32("graphics/map_objects/pics/people/steven/4.4bpp");
-const u32 gMapObjectPic_Steven_5[] = INCBIN_U32("graphics/map_objects/pics/people/steven/5.4bpp");
-const u32 gMapObjectPic_Steven_6[] = INCBIN_U32("graphics/map_objects/pics/people/steven/6.4bpp");
-const u32 gMapObjectPic_Steven_7[] = INCBIN_U32("graphics/map_objects/pics/people/steven/7.4bpp");
-const u32 gMapObjectPic_Steven_8[] = INCBIN_U32("graphics/map_objects/pics/people/steven/8.4bpp");
-const u32 gMapObjectPic_Wally_0[] = INCBIN_U32("graphics/map_objects/pics/people/wally/0.4bpp");
-const u32 gMapObjectPic_Wally_1[] = INCBIN_U32("graphics/map_objects/pics/people/wally/1.4bpp");
-const u32 gMapObjectPic_Wally_2[] = INCBIN_U32("graphics/map_objects/pics/people/wally/2.4bpp");
-const u32 gMapObjectPic_Wally_3[] = INCBIN_U32("graphics/map_objects/pics/people/wally/3.4bpp");
-const u32 gMapObjectPic_Wally_4[] = INCBIN_U32("graphics/map_objects/pics/people/wally/4.4bpp");
-const u32 gMapObjectPic_Wally_5[] = INCBIN_U32("graphics/map_objects/pics/people/wally/5.4bpp");
-const u32 gMapObjectPic_Wally_6[] = INCBIN_U32("graphics/map_objects/pics/people/wally/6.4bpp");
-const u32 gMapObjectPic_Wally_7[] = INCBIN_U32("graphics/map_objects/pics/people/wally/7.4bpp");
-const u32 gMapObjectPic_Wally_8[] = INCBIN_U32("graphics/map_objects/pics/people/wally/8.4bpp");
-const u32 gMapObjectPic_LittleBoy3_0[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/0.4bpp");
-const u32 gMapObjectPic_LittleBoy3_1[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/1.4bpp");
-const u32 gMapObjectPic_LittleBoy3_2[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/2.4bpp");
-const u32 gMapObjectPic_LittleBoy3_3[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/3.4bpp");
-const u32 gMapObjectPic_LittleBoy3_4[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/4.4bpp");
-const u32 gMapObjectPic_LittleBoy3_5[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/5.4bpp");
-const u32 gMapObjectPic_LittleBoy3_6[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/6.4bpp");
-const u32 gMapObjectPic_LittleBoy3_7[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/7.4bpp");
-const u32 gMapObjectPic_LittleBoy3_8[] = INCBIN_U32("graphics/map_objects/pics/people/little_boy_3/8.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_0[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/0.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_1[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/1.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_2[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/2.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_3[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/3.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_4[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/4.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_5[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/5.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_6[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/6.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_7[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/7.4bpp");
-const u32 gMapObjectPic_HotSpringsOldWoman_8[] = INCBIN_U32("graphics/map_objects/pics/people/hot_springs_old_woman/8.4bpp");
-const u32 gMapObjectPic_LatiasLatios_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/0.4bpp");
-const u32 gMapObjectPic_LatiasLatios_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/1.4bpp");
-const u32 gMapObjectPic_LatiasLatios_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/latias_latios/2.4bpp");
-const u32 gMapObjectPic_Boy5_0[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/0.4bpp");
-const u32 gMapObjectPic_Boy5_1[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/1.4bpp");
-const u32 gMapObjectPic_Boy5_2[] = INCBIN_U32("graphics/map_objects/pics/people/boy_5/2.4bpp");
-const u32 gMapObjectPic_ContestJudge_0[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/0.4bpp");
-const u32 gMapObjectPic_ContestJudge_1[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/1.4bpp");
-const u32 gMapObjectPic_ContestJudge_2[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/2.4bpp");
-const u32 gMapObjectPic_ContestJudge_3[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/3.4bpp");
-const u32 gMapObjectPic_ContestJudge_4[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/4.4bpp");
-const u32 gMapObjectPic_ContestJudge_5[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/5.4bpp");
-const u32 gMapObjectPic_ContestJudge_6[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/6.4bpp");
-const u32 gMapObjectPic_ContestJudge_7[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/7.4bpp");
-const u32 gMapObjectPic_ContestJudge_8[] = INCBIN_U32("graphics/map_objects/pics/people/contest_judge/8.4bpp");
-const u32 gMapObjectPic_Archie_0[] = INCBIN_U32("graphics/map_objects/pics/people/archie/0.4bpp");
-const u32 gMapObjectPic_Archie_1[] = INCBIN_U32("graphics/map_objects/pics/people/archie/1.4bpp");
-const u32 gMapObjectPic_Archie_2[] = INCBIN_U32("graphics/map_objects/pics/people/archie/2.4bpp");
-const u32 gMapObjectPic_Archie_3[] = INCBIN_U32("graphics/map_objects/pics/people/archie/3.4bpp");
-const u32 gMapObjectPic_Archie_4[] = INCBIN_U32("graphics/map_objects/pics/people/archie/4.4bpp");
-const u32 gMapObjectPic_Archie_5[] = INCBIN_U32("graphics/map_objects/pics/people/archie/5.4bpp");
-const u32 gMapObjectPic_Archie_6[] = INCBIN_U32("graphics/map_objects/pics/people/archie/6.4bpp");
-const u32 gMapObjectPic_Archie_7[] = INCBIN_U32("graphics/map_objects/pics/people/archie/7.4bpp");
-const u32 gMapObjectPic_Archie_8[] = INCBIN_U32("graphics/map_objects/pics/people/archie/8.4bpp");
-const u32 gMapObjectPic_Maxie_0[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/0.4bpp");
-const u32 gMapObjectPic_Maxie_1[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/1.4bpp");
-const u32 gMapObjectPic_Maxie_2[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/2.4bpp");
-const u32 gMapObjectPic_Maxie_3[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/3.4bpp");
-const u32 gMapObjectPic_Maxie_4[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/4.4bpp");
-const u32 gMapObjectPic_Maxie_5[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/5.4bpp");
-const u32 gMapObjectPic_Maxie_6[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/6.4bpp");
-const u32 gMapObjectPic_Maxie_7[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/7.4bpp");
-const u32 gMapObjectPic_Maxie_8[] = INCBIN_U32("graphics/map_objects/pics/people/maxie/8.4bpp");
-const u32 gMapObjectPic_Kyogre_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kyogre/0.4bpp");
-const u32 gMapObjectPic_Kyogre_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kyogre/1.4bpp");
-const u32 gMapObjectPic_Groudon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/groudon/0.4bpp");
-const u32 gMapObjectPic_Groudon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/groudon/1.4bpp");
-const u32 gMapObjectPic_Regi[] = INCBIN_U32("graphics/map_objects/pics/pokemon/regi.4bpp");
-const u32 gMapObjectPic_Skitty_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/0.4bpp");
-const u32 gMapObjectPic_Skitty_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/1.4bpp");
-const u32 gMapObjectPic_Skitty_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/skitty/2.4bpp");
-const u32 gMapObjectPic_Kecleon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/0.4bpp");
-const u32 gMapObjectPic_Kecleon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/1.4bpp");
-const u32 gMapObjectPic_Kecleon_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/kecleon/2.4bpp");
-const u32 gMapObjectPic_Rayquaza_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/rayquaza/0.4bpp");
-const u32 gMapObjectPic_Rayquaza_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/rayquaza/1.4bpp");
-const u32 gMapObjectPic_Zigzagoon_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/0.4bpp");
-const u32 gMapObjectPic_Zigzagoon_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/1.4bpp");
-const u32 gMapObjectPic_Zigzagoon_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/zigzagoon/2.4bpp");
-const u32 gMapObjectPic_Pikachu_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/0.4bpp");
-const u32 gMapObjectPic_Pikachu_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/1.4bpp");
-const u32 gMapObjectPic_Pikachu_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/pikachu/2.4bpp");
-const u32 gMapObjectPic_Azumarill_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/0.4bpp");
-const u32 gMapObjectPic_Azumarill_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/1.4bpp");
-const u32 gMapObjectPic_Azumarill_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azumarill/2.4bpp");
-const u32 gMapObjectPic_Wingull_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/0.4bpp");
-const u32 gMapObjectPic_Wingull_3[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/3.4bpp");
-const u32 gMapObjectPic_Wingull_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/1.4bpp");
-const u32 gMapObjectPic_Wingull_4[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/4.4bpp");
-const u32 gMapObjectPic_Wingull_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/2.4bpp");
-const u32 gMapObjectPic_Wingull_5[] = INCBIN_U32("graphics/map_objects/pics/pokemon/wingull/5.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_0[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/0.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_1[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/1.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_2[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/2.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_3[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/3.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_4[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/4.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_5[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/5.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_6[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/6.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_7[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/7.4bpp");
-const u32 gMapObjectPic_TuberMSwimming_8[] = INCBIN_U32("graphics/map_objects/pics/people/tuber_m_swimming/8.4bpp");
-const u32 gMapObjectPic_Azurill_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/0.4bpp");
-const u32 gMapObjectPic_Azurill_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/1.4bpp");
-const u32 gMapObjectPic_Azurill_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/azurill/2.4bpp");
-const u32 gMapObjectPic_Mom_0[] = INCBIN_U32("graphics/map_objects/pics/people/mom/0.4bpp");
-const u32 gMapObjectPic_Mom_1[] = INCBIN_U32("graphics/map_objects/pics/people/mom/1.4bpp");
-const u32 gMapObjectPic_Mom_2[] = INCBIN_U32("graphics/map_objects/pics/people/mom/2.4bpp");
-const u32 gMapObjectPic_Mom_3[] = INCBIN_U32("graphics/map_objects/pics/people/mom/3.4bpp");
-const u32 gMapObjectPic_Mom_4[] = INCBIN_U32("graphics/map_objects/pics/people/mom/4.4bpp");
-const u32 gMapObjectPic_Mom_5[] = INCBIN_U32("graphics/map_objects/pics/people/mom/5.4bpp");
-const u32 gMapObjectPic_Mom_6[] = INCBIN_U32("graphics/map_objects/pics/people/mom/6.4bpp");
-const u32 gMapObjectPic_Mom_7[] = INCBIN_U32("graphics/map_objects/pics/people/mom/7.4bpp");
-const u32 gMapObjectPic_Mom_8[] = INCBIN_U32("graphics/map_objects/pics/people/mom/8.4bpp");
-const u16 gMapObjectPalette22[] = INCBIN_U16("graphics/map_objects/palettes/22.gbapal");
-const u16 gMapObjectPalette23[] = INCBIN_U16("graphics/map_objects/palettes/23.gbapal");
-const u16 gMapObjectPalette24[] = INCBIN_U16("graphics/map_objects/palettes/24.gbapal");
-const u16 gMapObjectPalette25[] = INCBIN_U16("graphics/map_objects/palettes/25.gbapal");
-const u32 gMapObjectPic_UnusedNatuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_natu_doll.4bpp");
-const u32 gMapObjectPic_UnusedMagnemiteDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_magnemite_doll.4bpp");
-const u32 gMapObjectPic_UnusedSquirtleDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_squirtle_doll.4bpp");
-const u32 gMapObjectPic_UnusedWooperDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_wooper_doll.4bpp");
-const u32 gMapObjectPic_UnusedPikachuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_pikachu_doll.4bpp");
-const u32 gMapObjectPic_UnusedPorygon2Doll[] = INCBIN_U32("graphics/map_objects/pics/dolls/unused_porygon2_doll.4bpp");
-const u32 gMapObjectPic_PichuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/pichu_doll.4bpp");
-const u32 gMapObjectPic_PikachuDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/pikachu_doll.4bpp");
-const u32 gMapObjectPic_MarillDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/marill_doll.4bpp");
-const u32 gMapObjectPic_TogepiDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/togepi_doll.4bpp");
-const u32 gMapObjectPic_CyndaquilDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/cyndaquil_doll.4bpp");
-const u32 gMapObjectPic_ChikoritaDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/chikorita_doll.4bpp");
-const u32 gMapObjectPic_TotodileDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/totodile_doll.4bpp");
-const u32 gMapObjectPic_JigglypuffDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/jigglypuff_doll.4bpp");
-const u32 gMapObjectPic_MeowthDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/meowth_doll.4bpp");
-const u32 gMapObjectPic_ClefairyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/clefairy_doll.4bpp");
-const u32 gMapObjectPic_DittoDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/ditto_doll.4bpp");
-const u32 gMapObjectPic_SmoochumDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/smoochum_doll.4bpp");
-const u32 gMapObjectPic_TreeckoDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/treecko_doll.4bpp");
-const u32 gMapObjectPic_TorchicDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/torchic_doll.4bpp");
-const u32 gMapObjectPic_MudkipDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/mudkip_doll.4bpp");
-const u32 gMapObjectPic_DuskullDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/duskull_doll.4bpp");
-const u32 gMapObjectPic_WynautDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/wynaut_doll.4bpp");
-const u32 gMapObjectPic_BaltoyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/baltoy_doll.4bpp");
-const u32 gMapObjectPic_KecleonDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/kecleon_doll.4bpp");
-const u32 gMapObjectPic_AzurillDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/azurill_doll.4bpp");
-const u32 gMapObjectPic_SkittyDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/skitty_doll.4bpp");
-const u32 gMapObjectPic_SwabluDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/swablu_doll.4bpp");
-const u32 gMapObjectPic_GulpinDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/gulpin_doll.4bpp");
-const u32 gMapObjectPic_LotadDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/lotad_doll.4bpp");
-const u32 gMapObjectPic_SeedotDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/seedot_doll.4bpp");
-const u32 gMapObjectPic_PikaCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/pika_cushion.4bpp");
-const u32 gMapObjectPic_RoundCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/round_cushion.4bpp");
-const u32 gMapObjectPic_KissCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/kiss_cushion.4bpp");
-const u32 gMapObjectPic_ZigzagCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/zigzag_cushion.4bpp");
-const u32 gMapObjectPic_SpinCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/spin_cushion.4bpp");
-const u32 gMapObjectPic_DiamondCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/diamond_cushion.4bpp");
-const u32 gMapObjectPic_BallCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/ball_cushion.4bpp");
-const u32 gMapObjectPic_GrassCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/grass_cushion.4bpp");
-const u32 gMapObjectPic_FireCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/fire_cushion.4bpp");
-const u32 gMapObjectPic_WaterCushion[] = INCBIN_U32("graphics/map_objects/pics/cushions/water_cushion.4bpp");
-const u32 gMapObjectPic_BigSnorlaxDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_snorlax_doll.4bpp");
-const u32 gMapObjectPic_BigRhydonDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_rhydon_doll.4bpp");
-const u32 gMapObjectPic_BigLaprasDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_lapras_doll.4bpp");
-const u32 gMapObjectPic_BigVenusaurDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_venusaur_doll.4bpp");
-const u32 gMapObjectPic_BigCharizardDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_charizard_doll.4bpp");
-const u32 gMapObjectPic_BigBlastoiseDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_blastoise_doll.4bpp");
-const u32 gMapObjectPic_BigWailmerDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_wailmer_doll.4bpp");
-const u32 gMapObjectPic_BigRegirockDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_regirock_doll.4bpp");
-const u32 gMapObjectPic_BigRegiceDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_regice_doll.4bpp");
-const u32 gMapObjectPic_BigRegisteelDoll[] = INCBIN_U32("graphics/map_objects/pics/dolls/big_registeel_doll.4bpp");
-const u32 gMapObjectPic_CuttableTree_0[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/0.4bpp");
-const u32 gMapObjectPic_CuttableTree_1[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/1.4bpp");
-const u32 gMapObjectPic_CuttableTree_2[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/2.4bpp");
-const u32 gMapObjectPic_CuttableTree_3[] = INCBIN_U32("graphics/map_objects/pics/misc/cuttable_tree/3.4bpp");
-const u32 gMapObjectPic_BreakableRock_0[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/0.4bpp");
-const u32 gMapObjectPic_BreakableRock_1[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/1.4bpp");
-const u32 gMapObjectPic_BreakableRock_2[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/2.4bpp");
-const u32 gMapObjectPic_BreakableRock_3[] = INCBIN_U32("graphics/map_objects/pics/misc/breakable_rock/3.4bpp");
-const u32 gMapObjectPic_PushableBoulder[] = INCBIN_U32("graphics/map_objects/pics/misc/pushable_boulder.4bpp");
-const u32 gMapObjectPic_MrBrineysBoat_0[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/0.4bpp");
-const u32 gMapObjectPic_MrBrineysBoat_1[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/1.4bpp");
-const u32 gMapObjectPic_MrBrineysBoat_2[] = INCBIN_U32("graphics/map_objects/pics/misc/mr_brineys_boat/2.4bpp");
-const u32 gMapObjectPic_Fossil[] = INCBIN_U32("graphics/map_objects/pics/misc/fossil.4bpp");
-const u32 gMapObjectPic_SubmarineShadow[] = INCBIN_U32("graphics/map_objects/pics/misc/submarine_shadow.4bpp");
-const u16 gMapObjectPalette26[] = INCBIN_U16("graphics/map_objects/palettes/26.gbapal");
-const u32 gMapObjectPic_Truck[] = INCBIN_U32("graphics/map_objects/pics/misc/truck.4bpp");
-const u16 gMapObjectPalette14[] = INCBIN_U16("graphics/map_objects/palettes/14.gbapal");
-const u32 gMapObjectPic_MachokeCarryingBox_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/0.4bpp");
-const u32 gMapObjectPic_MachokeCarryingBox_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/1.4bpp");
-const u32 gMapObjectPic_MachokeCarryingBox_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_carrying_box/2.4bpp");
-const u32 gMapObjectPic_MachokeFacingAway_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_facing_away/0.4bpp");
-const u32 gMapObjectPic_MachokeFacingAway_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/machoke_facing_away/1.4bpp");
-const u16 gMapObjectPalette15[] = INCBIN_U16("graphics/map_objects/palettes/15.gbapal");
-const u32 gMapObjectPic_BirchsBag[] = INCBIN_U32("graphics/map_objects/pics/misc/birchs_bag.4bpp");
-const u32 gMapObjectPic_Poochyena_0[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/0.4bpp");
-const u32 gMapObjectPic_Poochyena_1[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/1.4bpp");
-const u32 gMapObjectPic_Poochyena_2[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/2.4bpp");
-const u32 gMapObjectPic_Poochyena_3[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/3.4bpp");
-const u32 gMapObjectPic_Poochyena_4[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/4.4bpp");
-const u32 gMapObjectPic_Poochyena_5[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/5.4bpp");
-const u32 gMapObjectPic_Poochyena_6[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/6.4bpp");
-const u32 gMapObjectPic_Poochyena_7[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/7.4bpp");
-const u32 gMapObjectPic_Poochyena_8[] = INCBIN_U32("graphics/map_objects/pics/pokemon/poochyena/8.4bpp");
-const u16 gMapObjectPalette16[] = INCBIN_U16("graphics/map_objects/palettes/16.gbapal");
-const u32 gMapObjectPic_CableCar[] = INCBIN_U32("graphics/map_objects/pics/misc/cable_car.4bpp");
-const u16 gMapObjectPalette20[] = INCBIN_U16("graphics/map_objects/palettes/20.gbapal");
-const u32 gMapObjectPic_SSTidal[] = INCBIN_U32("graphics/map_objects/pics/misc/ss_tidal.4bpp");
-const u16 gMapObjectPalette21[] = INCBIN_U16("graphics/map_objects/palettes/21.gbapal");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_0[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/0.4bpp");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_1[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/1.4bpp");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_2[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/2.4bpp");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_3[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/3.4bpp");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_4[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/4.4bpp");
-const u32 gFieldEffectPic_BerryTreeGrowthSparkle_5[] = INCBIN_U32("graphics/field_effect_objects/pics/berry_tree_growth_sparkle/5.4bpp");
-const u32 gMapObjectPic_BerryTreeDirtPile[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/dirt_pile.4bpp");
-const u32 gMapObjectPic_BerryTreeSprout_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sprout/0.4bpp");
-const u32 gMapObjectPic_BerryTreeSprout_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sprout/1.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/0.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/1.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/2.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/3.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/4.4bpp");
-const u32 gMapObjectPic_PechaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pecha/5.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/0.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/1.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/2.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/3.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/4.4bpp");
-const u32 gMapObjectPic_KelpsyBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/kelpsy/5.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/0.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/1.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/2.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/3.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/4.4bpp");
-const u32 gMapObjectPic_WepearBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wepear/5.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/0.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/1.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/2.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/3.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/4.4bpp");
-const u32 gMapObjectPic_IapapaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/iapapa/5.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/0.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/1.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/2.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/3.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/4.4bpp");
-const u32 gMapObjectPic_CheriBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cheri/5.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/0.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/1.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/2.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/3.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/4.4bpp");
-const u32 gMapObjectPic_FigyBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/figy/5.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/0.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/1.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/2.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/3.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/4.4bpp");
-const u32 gMapObjectPic_MagoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/mago/5.4bpp");
-const u32 gMapObjectPic_LumBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/0.4bpp");
-const u32 gMapObjectPic_LumBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/1.4bpp");
-const u32 gMapObjectPic_LumBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/2.4bpp");
-const u32 gMapObjectPic_LumBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/3.4bpp");
-const u32 gMapObjectPic_LumBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/4.4bpp");
-const u32 gMapObjectPic_LumBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lum/5.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/0.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/1.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/2.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/3.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/4.4bpp");
-const u32 gMapObjectPic_RazzBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/razz/5.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/0.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/1.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/2.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/3.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/4.4bpp");
-const u32 gMapObjectPic_GrepaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/grepa/5.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/0.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/1.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/2.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/3.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/4.4bpp");
-const u32 gMapObjectPic_RabutaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rabuta/5.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/0.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/1.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/2.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/3.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/4.4bpp");
-const u32 gMapObjectPic_NomelBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/nomel/5.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/0.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/1.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/2.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/3.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/4.4bpp");
-const u32 gMapObjectPic_LeppaBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/leppa/5.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/0.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/1.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/2.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/3.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/4.4bpp");
-const u32 gMapObjectPic_LiechiBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/liechi/5.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/0.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/1.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/2.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/3.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/4.4bpp");
-const u32 gMapObjectPic_HondewBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/hondew/5.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/0.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/1.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/2.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/3.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/4.4bpp");
-const u32 gMapObjectPic_AguavBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aguav/5.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/0.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/1.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/2.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/3.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/4.4bpp");
-const u32 gMapObjectPic_WikiBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/wiki/5.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/0.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/1.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/2.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/3.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/4.4bpp");
-const u32 gMapObjectPic_PomegBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pomeg/5.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/0.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/1.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/2.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/3.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/4.4bpp");
-const u32 gMapObjectPic_RawstBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/rawst/5.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/0.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/1.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/2.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/3.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/4.4bpp");
-const u32 gMapObjectPic_SpelonBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/spelon/5.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/0.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/1.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/2.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/3.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/4.4bpp");
-const u32 gMapObjectPic_ChestoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/chesto/5.4bpp");
-const u32 gMapObjectPic_OranBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/0.4bpp");
-const u32 gMapObjectPic_OranBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/1.4bpp");
-const u32 gMapObjectPic_OranBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/2.4bpp");
-const u32 gMapObjectPic_OranBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/3.4bpp");
-const u32 gMapObjectPic_OranBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/4.4bpp");
-const u32 gMapObjectPic_OranBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/oran/5.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/0.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/1.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/2.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/3.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/4.4bpp");
-const u32 gMapObjectPic_PersimBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/persim/5.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/0.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/1.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/2.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/3.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/4.4bpp");
-const u32 gMapObjectPic_SitrusBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/sitrus/5.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/0.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/1.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/2.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/3.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/4.4bpp");
-const u32 gMapObjectPic_AspearBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/aspear/5.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/0.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/1.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/2.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/3.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/4.4bpp");
-const u32 gMapObjectPic_PamtreBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/pamtre/5.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/0.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/1.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/2.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/3.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/4.4bpp");
-const u32 gMapObjectPic_CornnBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/cornn/5.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/0.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/1.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/2.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/3.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/4.4bpp");
-const u32 gMapObjectPic_LansatBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/lansat/5.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/0.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/1.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/2.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/3.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/4.4bpp");
-const u32 gMapObjectPic_DurinBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/durin/5.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_0[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/0.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_1[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/1.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_2[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/2.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_3[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/3.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_4[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/4.4bpp");
-const u32 gMapObjectPic_TamatoBerryTree_5[] = INCBIN_U32("graphics/map_objects/pics/berry_trees/tamato/5.4bpp");
-const u32 gFieldEffectPic_SurfBlob_0[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/0.4bpp");
-const u32 gFieldEffectPic_SurfBlob_1[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/1.4bpp");
-const u32 gFieldEffectPic_SurfBlob_2[] = INCBIN_U32("graphics/field_effect_objects/pics/surf_blob/2.4bpp");
-const u32 gMapObjectPic_QuintyPlump_0[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/0.4bpp");
-const u32 gMapObjectPic_QuintyPlump_1[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/1.4bpp");
-const u32 gMapObjectPic_QuintyPlump_2[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/2.4bpp");
-const u32 gMapObjectPic_QuintyPlump_3[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/3.4bpp");
-const u32 gMapObjectPic_QuintyPlump_4[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/4.4bpp");
-const u32 gMapObjectPic_QuintyPlump_5[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/5.4bpp");
-const u32 gMapObjectPic_QuintyPlump_6[] = INCBIN_U32("graphics/map_objects/pics/people/quinty_plump/6.4bpp");
-const u16 gMapObjectPalette12[] = INCBIN_U16("graphics/map_objects/palettes/12.gbapal");
-const u16 gMapObjectPalette13[] = INCBIN_U16("graphics/map_objects/palettes/13.gbapal");
-
-const u32 gFieldEffectPic_ShadowSmall[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_small.4bpp");
-const u32 gFieldEffectPic_ShadowMedium[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_medium.4bpp");
-const u32 gFieldEffectPic_ShadowLarge[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_large.4bpp");
-const u32 gFieldEffectPic_ShadowExtraLarge[] = INCBIN_U32("graphics/field_effect_objects/pics/shadow_extra_large.4bpp");
-const u32 filler_8368A08[0x48] = {};
-const u8 gFieldEffectPic_CutGrass[] = INCBIN_U8("graphics/field_effect_objects/pics/cut_grass.4bpp");
-const u32 FieldEffectPic_CutGrass_Copy[] = INCBIN_U32("graphics/field_effect_objects/pics/cut_grass.4bpp");
-const u16 gFieldEffectObjectPalette6[] = INCBIN_U16("graphics/field_effect_objects/palettes/06.gbapal");
-const u32 gFieldEffectPic_Ripple_0[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/0.4bpp");
-const u32 gFieldEffectPic_Ripple_1[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/1.4bpp");
-const u32 gFieldEffectPic_Ripple_2[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/2.4bpp");
-const u32 gFieldEffectPic_Ripple_3[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/3.4bpp");
-const u32 gFieldEffectPic_Ripple_4[] = INCBIN_U32("graphics/field_effect_objects/pics/ripple/4.4bpp");
-const u32 gFieldEffectPic_Ash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/0.4bpp");
-const u32 gFieldEffectPic_Ash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/1.4bpp");
-const u32 gFieldEffectPic_Ash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/2.4bpp");
-const u32 gFieldEffectPic_Ash_3[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/3.4bpp");
-const u32 gFieldEffectPic_Ash_4[] = INCBIN_U32("graphics/field_effect_objects/pics/ash/4.4bpp");
-const u32 gFieldEffectPic_Arrow_0[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/0.4bpp");
-const u32 gFieldEffectPic_Arrow_1[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/1.4bpp");
-const u32 gFieldEffectPic_Arrow_2[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/2.4bpp");
-const u32 gFieldEffectPic_Arrow_3[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/3.4bpp");
-const u32 gFieldEffectPic_Arrow_4[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/4.4bpp");
-const u32 gFieldEffectPic_Arrow_5[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/5.4bpp");
-const u32 gFieldEffectPic_Arrow_6[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/6.4bpp");
-const u32 gFieldEffectPic_Arrow_7[] = INCBIN_U32("graphics/field_effect_objects/pics/arrow/7.4bpp");
-const u16 gFieldEffectObjectPalette0[] = INCBIN_U16("graphics/field_effect_objects/palettes/00.gbapal");
-const u16 gFieldEffectObjectPalette1[] = INCBIN_U16("graphics/field_effect_objects/palettes/01.gbapal");
-const u32 gFieldEffectPic_Dust_0[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/0.4bpp");
-const u32 gFieldEffectPic_Dust_1[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/1.4bpp");
-const u32 gFieldEffectPic_Dust_2[] = INCBIN_U32("graphics/field_effect_objects/pics/dust/2.4bpp");
-const u32 unknown_8369588[] = INCBIN_U32("graphics/field_effect_objects/unknown.bin");
-const u32 gFieldEffectPic_JumpTallGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/0.4bpp");
-const u32 gFieldEffectPic_JumpTallGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/1.4bpp");
-const u32 gFieldEffectPic_JumpTallGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/2.4bpp");
-const u32 gFieldEffectPic_JumpTallGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_tall_grass/3.4bpp");
-const u32 UnusedGrass0[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/0.4bpp");
-const u32 UnusedGrass1[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/1.4bpp");
-const u32 UnusedGrass2[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/2.4bpp");
-const u32 UnusedGrass3[] = INCBIN_U32("graphics/field_effect_objects/pics/unused_grass/3.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/0.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/1.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/2.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/3.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_4[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/4.4bpp");
-const u32 UnusedGrassLong[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/unused.4bpp");
-const u32 gFieldEffectPic_JumpLongGrass_5[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_long_grass/5.4bpp");
-const u32 gFieldEffectPic_Unknown17_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/0.4bpp");
-const u32 gFieldEffectPic_Unknown17_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/1.4bpp");
-const u32 gFieldEffectPic_Unknown17_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/2.4bpp");
-const u32 gFieldEffectPic_Unknown17_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/3.4bpp");
-const u32 gFieldEffectPic_Unknown17_4[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/4.4bpp");
-const u32 gFieldEffectPic_Unknown17_5[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/5.4bpp");
-const u32 gFieldEffectPic_Unknown17_6[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/6.4bpp");
-const u32 gFieldEffectPic_Unknown17_7[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_17/7.4bpp");
-const u32 gFieldEffectPic_Unknown18_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/0.4bpp");
-const u32 gFieldEffectPic_Unknown18_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/1.4bpp");
-const u32 gFieldEffectPic_Unknown18_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/2.4bpp");
-const u32 gFieldEffectPic_Unknown18_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_18/3.4bpp");
-const u32 gFieldEffectPic_LongGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/0.4bpp");
-const u32 gFieldEffectPic_LongGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/1.4bpp");
-const u32 gFieldEffectPic_LongGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/2.4bpp");
-const u32 gFieldEffectPic_LongGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/long_grass/3.4bpp");
-const u32 gFieldEffectPic_TallGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/0.4bpp");
-const u32 gFieldEffectPic_TallGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/1.4bpp");
-const u32 gFieldEffectPic_TallGrass_2[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/2.4bpp");
-const u32 gFieldEffectPic_TallGrass_3[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/3.4bpp");
-const u32 gFieldEffectPic_TallGrass_4[] = INCBIN_U32("graphics/field_effect_objects/pics/tall_grass/4.4bpp");
-const u32 gFieldEffectPic_ShortGrass_0[] = INCBIN_U32("graphics/field_effect_objects/pics/short_grass/0.4bpp");
-const u32 gFieldEffectPic_ShortGrass_1[] = INCBIN_U32("graphics/field_effect_objects/pics/short_grass/1.4bpp");
-const u32 gFieldEffectPic_SandFootprints_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_footprints/0.4bpp");
-const u32 gFieldEffectPic_SandFootprints_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_footprints/1.4bpp");
-const u32 gFieldEffectPic_DeepSandFootprints_0[] = INCBIN_U32("graphics/field_effect_objects/pics/deep_sand_footprints/0.4bpp");
-const u32 gFieldEffectPic_DeepSandFootprints_1[] = INCBIN_U32("graphics/field_effect_objects/pics/deep_sand_footprints/1.4bpp");
-const u32 gFieldEffectPic_BikeTireTracks_0[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/0.4bpp");
-const u32 gFieldEffectPic_BikeTireTracks_1[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/1.4bpp");
-const u32 gFieldEffectPic_BikeTireTracks_2[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/2.4bpp");
-const u32 gFieldEffectPic_BikeTireTracks_3[] = INCBIN_U32("graphics/field_effect_objects/pics/bike_tire_tracks/3.4bpp");
-const u32 gFieldEffectPic_Unknown19_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/0.4bpp");
-const u32 gFieldEffectPic_Unknown19_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/1.4bpp");
-const u32 gFieldEffectPic_Unknown19_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/2.4bpp");
-const u32 gFieldEffectPic_Unknown19_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_19/3.4bpp");
-const u32 gFieldEffectPic_SandPile_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/0.4bpp");
-const u32 gFieldEffectPic_SandPile_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/1.4bpp");
-const u32 gFieldEffectPic_SandPile_2[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_pile/2.4bpp");
-const u32 gFieldEffectPic_JumpBigSplash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/0.4bpp");
-const u32 gFieldEffectPic_JumpBigSplash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/1.4bpp");
-const u32 gFieldEffectPic_JumpBigSplash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/2.4bpp");
-const u32 gFieldEffectPic_JumpBigSplash_3[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_big_splash/3.4bpp");
-const u32 gFieldEffectPic_Splash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/splash/0.4bpp");
-const u32 gFieldEffectPic_Splash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/splash/1.4bpp");
-const u32 gFieldEffectPic_JumpSmallSplash_0[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/0.4bpp");
-const u32 gFieldEffectPic_JumpSmallSplash_1[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/1.4bpp");
-const u32 gFieldEffectPic_JumpSmallSplash_2[] = INCBIN_U32("graphics/field_effect_objects/pics/jump_small_splash/2.4bpp");
-const u32 gFieldEffectPic_Unknown20_0[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/0.4bpp");
-const u32 gFieldEffectPic_Unknown20_1[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/1.4bpp");
-const u32 gFieldEffectPic_Unknown20_2[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/2.4bpp");
-const u32 gFieldEffectPic_Unknown20_3[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/3.4bpp");
-const u32 gFieldEffectPic_Unknown20_4[] = INCBIN_U32("graphics/field_effect_objects/pics/unknown_20/4.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/0.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/1.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/2.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/3.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/4.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/5.4bpp");
-const u32 gFieldEffectPic_TreeDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/tree_disguise/6.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/0.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/1.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/2.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/3.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/4.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/5.4bpp");
-const u32 gFieldEffectPic_MountainDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/mountain_disguise/6.4bpp");
-const u32 gFieldEffectPic_SandDisguise_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/0.4bpp");
-const u32 gFieldEffectPic_SandDisguise_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/1.4bpp");
-const u32 gFieldEffectPic_SandDisguise_2[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/2.4bpp");
-const u32 gFieldEffectPic_SandDisguise_3[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/3.4bpp");
-const u32 gFieldEffectPic_SandDisguise_4[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/4.4bpp");
-const u32 gFieldEffectPic_SandDisguise_5[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/5.4bpp");
-const u32 gFieldEffectPic_SandDisguise_6[] = INCBIN_U32("graphics/field_effect_objects/pics/sand_disguise/6.4bpp");
-const u32 gFieldEffectPic_HotSpringsWater[] = INCBIN_U32("graphics/field_effect_objects/pics/hot_springs_water.4bpp");
-const u16 gFieldEffectObjectPalette2[] = INCBIN_U16("graphics/field_effect_objects/palettes/02.gbapal");
-const u32 gFieldEffectPic_PopOutOfAsh_0[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/0.4bpp");
-const u32 gFieldEffectPic_PopOutOfAsh_1[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/1.4bpp");
-const u32 gFieldEffectPic_PopOutOfAsh_2[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/2.4bpp");
-const u32 gFieldEffectPic_PopOutOfAsh_3[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/3.4bpp");
-const u32 gFieldEffectPic_PopOutOfAsh_4[] = INCBIN_U32("graphics/field_effect_objects/pics/pop_out_of_ash/4.4bpp");
-const u32 gFieldEffectPic_LavaridgeGymWarp_0[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/0.4bpp");
-const u32 gFieldEffectPic_LavaridgeGymWarp_1[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/1.4bpp");
-const u32 gFieldEffectPic_LavaridgeGymWarp_2[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/2.4bpp");
-const u32 gFieldEffectPic_LavaridgeGymWarp_3[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/3.4bpp");
-const u32 gFieldEffectPic_LavaridgeGymWarp_4[] = INCBIN_U32("graphics/field_effect_objects/pics/lavaridge_gym_warp/4.4bpp");
-const u32 gFieldEffectPic_Bubbles_0[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/0.4bpp");
-const u32 gFieldEffectPic_Bubbles_1[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/1.4bpp");
-const u32 gFieldEffectPic_Bubbles_2[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/2.4bpp");
-const u32 gFieldEffectPic_Bubbles_3[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/3.4bpp");
-const u32 gFieldEffectPic_Bubbles_4[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/4.4bpp");
-const u32 gFieldEffectPic_Bubbles_5[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/5.4bpp");
-const u32 gFieldEffectPic_Bubbles_6[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/6.4bpp");
-const u32 gFieldEffectPic_Bubbles_7[] = INCBIN_U32("graphics/field_effect_objects/pics/bubbles/7.4bpp");
-const u32 gFieldEffectPic_Sparkle_0[] = INCBIN_U32("graphics/field_effect_objects/pics/sparkle/0.4bpp");
-const u32 gFieldEffectPic_Sparkle_1[] = INCBIN_U32("graphics/field_effect_objects/pics/sparkle/1.4bpp");
-const u16 gFieldEffectObjectPalette3[] = INCBIN_U16("graphics/field_effect_objects/palettes/03.gbapal");
-const u32 gFieldEffectPic_Bird[] = INCBIN_U32("graphics/field_effect_objects/pics/bird.4bpp");
+#include "data/field_map_obj/map_object_graphics.h"
+#include "data/field_map_obj/field_effect_object_graphics.h"
 
 // movement type callbacks
 static void (*const sMovementTypeCallbacks[])(struct Sprite *) =
@@ -1992,148 +569,148 @@ const u8 gMoveDirectionFastAnimNums[] = {
     9,  // DIR_NORTHEAST
 };
 const u8 gMoveDirectionFasterAnimNums[] = {
-	12, // DIR_NONE
-	12, // DIR_SOUTH
-	13, // DIR_NORTH
-	14, // DIR_WEST
-	15, // DIR_EAST
-	12, // DIR_SOUTHWEST
-	12, // DIR_SOUTHEAST
-	13, // DIR_NORTHWEST
-	13, // DIR_NORTHEAST
+    12, // DIR_NONE
+    12, // DIR_SOUTH
+    13, // DIR_NORTH
+    14, // DIR_WEST
+    15, // DIR_EAST
+    12, // DIR_SOUTHWEST
+    12, // DIR_SOUTHEAST
+    13, // DIR_NORTHWEST
+    13, // DIR_NORTHEAST
 };
 const u8 gMoveDirectionFastestAnimNums[] = {
-	16, // DIR_NONE
-	16, // DIR_SOUTH
-	17, // DIR_NORTH
-	18, // DIR_WEST
-	19, // DIR_EAST
-	16, // DIR_SOUTHWEST
-	16, // DIR_SOUTHEAST
-	17, // DIR_NORTHWEST
-	17, // DIR_NORTHEAST
+    16, // DIR_NONE
+    16, // DIR_SOUTH
+    17, // DIR_NORTH
+    18, // DIR_WEST
+    19, // DIR_EAST
+    16, // DIR_SOUTHWEST
+    16, // DIR_SOUTHEAST
+    17, // DIR_NORTHWEST
+    17, // DIR_NORTHEAST
 };
 const u8 gJumpSpecialDirectionAnimNums[] = { // used for jumping onto surf mon
-	20, // DIR_NONE
-	20, // DIR_SOUTH
-	21, // DIR_NORTH
-	22, // DIR_WEST
-	23, // DIR_EAST
-	20, // DIR_SOUTHWEST
-	20, // DIR_SOUTHEAST
-	21, // DIR_NORTHWEST
-	21, // DIR_NORTHEAST
+    20, // DIR_NONE
+    20, // DIR_SOUTH
+    21, // DIR_NORTH
+    22, // DIR_WEST
+    23, // DIR_EAST
+    20, // DIR_SOUTHWEST
+    20, // DIR_SOUTHEAST
+    21, // DIR_NORTHWEST
+    21, // DIR_NORTHEAST
 };
 const u8 gAcroWheelieDirectionAnimNums[] = {
-	20, // DIR_NONE
-	20, // DIR_SOUTH
-	21, // DIR_NORTH
-	22, // DIR_WEST
-	23, // DIR_EAST
-	20, // DIR_SOUTHWEST
-	20, // DIR_SOUTHEAST
-	21, // DIR_NORTHWEST
-	21, // DIR_NORTHEAST
+    20, // DIR_NONE
+    20, // DIR_SOUTH
+    21, // DIR_NORTH
+    22, // DIR_WEST
+    23, // DIR_EAST
+    20, // DIR_SOUTHWEST
+    20, // DIR_SOUTHEAST
+    21, // DIR_NORTHWEST
+    21, // DIR_NORTHEAST
 };
 const u8 gUnrefAnimNums_08375633[] = {
-	24, // DIR_NONE
-	24, // DIR_SOUTH
-	25, // DIR_NORTH
-	26, // DIR_WEST
-	27, // DIR_EAST
-	24, // DIR_SOUTHWEST
-	24, // DIR_SOUTHEAST
-	25, // DIR_NORTHWEST
-	25, // DIR_NORTHEAST
+    24, // DIR_NONE
+    24, // DIR_SOUTH
+    25, // DIR_NORTH
+    26, // DIR_WEST
+    27, // DIR_EAST
+    24, // DIR_SOUTHWEST
+    24, // DIR_SOUTHEAST
+    25, // DIR_NORTHWEST
+    25, // DIR_NORTHEAST
 };
 const u8 gAcroEndWheelieDirectionAnimNums[] = {
-	28, // DIR_NONE
-	28, // DIR_SOUTH
-	29, // DIR_NORTH
-	30, // DIR_WEST
-	31, // DIR_EAST
-	28, // DIR_SOUTHWEST
-	28, // DIR_SOUTHEAST
-	29, // DIR_NORTHWEST
-	29, // DIR_NORTHEAST
+    28, // DIR_NONE
+    28, // DIR_SOUTH
+    29, // DIR_NORTH
+    30, // DIR_WEST
+    31, // DIR_EAST
+    28, // DIR_SOUTHWEST
+    28, // DIR_SOUTHEAST
+    29, // DIR_NORTHWEST
+    29, // DIR_NORTHEAST
 };
 const u8 gAcroUnusedActionDirectionAnimNums[] = {
-	32, // DIR_NONE
-	32, // DIR_SOUTH
-	33, // DIR_NORTH
-	34, // DIR_WEST
-	35, // DIR_EAST
-	32, // DIR_SOUTHWEST
-	32, // DIR_SOUTHEAST
-	33, // DIR_NORTHWEST
-	33, // DIR_NORTHEAST
+    32, // DIR_NONE
+    32, // DIR_SOUTH
+    33, // DIR_NORTH
+    34, // DIR_WEST
+    35, // DIR_EAST
+    32, // DIR_SOUTHWEST
+    32, // DIR_SOUTHEAST
+    33, // DIR_NORTHWEST
+    33, // DIR_NORTHEAST
 };
 const u8 gAcroWheeliePedalDirectionAnimNums[] = {
-	36, // DIR_NONE
-	36, // DIR_SOUTH
-	37, // DIR_NORTH
-	38, // DIR_WEST
-	39, // DIR_EAST
-	36, // DIR_SOUTHWEST
-	36, // DIR_SOUTHEAST
-	37, // DIR_NORTHWEST
-	37, // DIR_NORTHEAST
+    36, // DIR_NONE
+    36, // DIR_SOUTH
+    37, // DIR_NORTH
+    38, // DIR_WEST
+    39, // DIR_EAST
+    36, // DIR_SOUTHWEST
+    36, // DIR_SOUTHEAST
+    37, // DIR_NORTHWEST
+    37, // DIR_NORTHEAST
 };
 const u8 gFishingDirectionAnimNums[] = {
-	0, // DIR_NONE
-	0, // DIR_SOUTH
-	1, // DIR_NORTH
-	2, // DIR_WEST
-	3, // DIR_EAST
-	0, // DIR_SOUTHWEST
-	0, // DIR_SOUTHEAST
-	1, // DIR_NORTHWEST
-	1, // DIR_NORTHEAST
+    0, // DIR_NONE
+    0, // DIR_SOUTH
+    1, // DIR_NORTH
+    2, // DIR_WEST
+    3, // DIR_EAST
+    0, // DIR_SOUTHWEST
+    0, // DIR_SOUTHEAST
+    1, // DIR_NORTHWEST
+    1, // DIR_NORTHEAST
 };
 const u8 gFishingNoCatchDirectionAnimNums[] = {
-	4, // DIR_NONE
-	4, // DIR_SOUTH
-	5, // DIR_NORTH
-	6, // DIR_WEST
-	7, // DIR_EAST
-	4, // DIR_SOUTHWEST
-	4, // DIR_SOUTHEAST
-	5, // DIR_NORTHWEST
-	5, // DIR_NORTHEAST
+    4, // DIR_NONE
+    4, // DIR_SOUTH
+    5, // DIR_NORTH
+    6, // DIR_WEST
+    7, // DIR_EAST
+    4, // DIR_SOUTHWEST
+    4, // DIR_SOUTHEAST
+    5, // DIR_NORTHWEST
+    5, // DIR_NORTHEAST
 };
 const u8 gFishingBiteDirectionAnimNums[] = {
-	8,  // DIR_NONE
-	8,  // DIR_SOUTH
-	9,  // DIR_NORTH
-	10, // DIR_WEST
-	11, // DIR_EAST
-	8,  // DIR_SOUTHWEST
-	8,  // DIR_SOUTHEAST
-	9,  // DIR_NORTHWEST
-	9,  // DIR_NORTHEAST
+    8,  // DIR_NONE
+    8,  // DIR_SOUTH
+    9,  // DIR_NORTH
+    10, // DIR_WEST
+    11, // DIR_EAST
+    8,  // DIR_SOUTHWEST
+    8,  // DIR_SOUTHEAST
+    9,  // DIR_NORTHWEST
+    9,  // DIR_NORTHEAST
 };
 const u8 gRunningDirectionAnimNums[] = {
-	20, // DIR_NONE
-	20, // DIR_SOUTH
-	21, // DIR_NORTH
-	22, // DIR_WEST
-	23, // DIR_EAST
-	20, // DIR_SOUTHWEST
-	20, // DIR_SOUTHEAST
-	21, // DIR_NORTHWEST
-	21, // DIR_NORTHEAST
+    20, // DIR_NONE
+    20, // DIR_SOUTH
+    21, // DIR_NORTH
+    22, // DIR_WEST
+    23, // DIR_EAST
+    20, // DIR_SOUTHWEST
+    20, // DIR_SOUTHEAST
+    21, // DIR_NORTHWEST
+    21, // DIR_NORTHEAST
 };
 
 const u8 gTrainerFacingDirectionMovementTypes[] = {
-	MOVEMENT_TYPE_FACE_DOWN,  // DIR_NONE
-	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTH
-	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTH
-	MOVEMENT_TYPE_FACE_LEFT,  // DIR_WEST
-	MOVEMENT_TYPE_FACE_RIGHT, // DIR_EAST
-	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHWEST
-	MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHEAST
-	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHWEST
-	MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHEAST
+    MOVEMENT_TYPE_FACE_DOWN,  // DIR_NONE
+    MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTH
+    MOVEMENT_TYPE_FACE_UP,    // DIR_NORTH
+    MOVEMENT_TYPE_FACE_LEFT,  // DIR_WEST
+    MOVEMENT_TYPE_FACE_RIGHT, // DIR_EAST
+    MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHWEST
+    MOVEMENT_TYPE_FACE_DOWN,  // DIR_SOUTHEAST
+    MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHWEST
+    MOVEMENT_TYPE_FACE_UP,    // DIR_NORTHEAST
 };
 
 bool8 (*const gOppositeDirectionBlockedMetatileFuncs[])(u8) = {
@@ -2184,172 +761,172 @@ const u8 gWalkNormalMovementActions[] = {
     MOVEMENT_ACTION_WALK_NORMAL_RIGHT,
 };
 const u8 gWalkFastMovementActions[] = {
-	MOVEMENT_ACTION_WALK_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_FAST_UP,
-	MOVEMENT_ACTION_WALK_FAST_LEFT,
-	MOVEMENT_ACTION_WALK_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_FAST_UP,
+    MOVEMENT_ACTION_WALK_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_FAST_RIGHT,
 };
 const u8 gRideWaterCurrentMovementActions[] = {
-	MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
-	MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
-	MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP,
-	MOVEMENT_ACTION_RIDE_WATER_CURRENT_LEFT,
-	MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_DOWN,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_UP,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_LEFT,
+    MOVEMENT_ACTION_RIDE_WATER_CURRENT_RIGHT,
 };
 const u8 gWalkFastestMovementActions[] = {
-	MOVEMENT_ACTION_WALK_FASTEST_DOWN,
-	MOVEMENT_ACTION_WALK_FASTEST_DOWN,
-	MOVEMENT_ACTION_WALK_FASTEST_UP,
-	MOVEMENT_ACTION_WALK_FASTEST_LEFT,
-	MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
+    MOVEMENT_ACTION_WALK_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
 };
 const u8 gSlideMovementActions[] = {
-	MOVEMENT_ACTION_SLIDE_DOWN,
-	MOVEMENT_ACTION_SLIDE_DOWN,
-	MOVEMENT_ACTION_SLIDE_UP,
-	MOVEMENT_ACTION_SLIDE_LEFT,
-	MOVEMENT_ACTION_SLIDE_RIGHT,
+    MOVEMENT_ACTION_SLIDE_DOWN,
+    MOVEMENT_ACTION_SLIDE_DOWN,
+    MOVEMENT_ACTION_SLIDE_UP,
+    MOVEMENT_ACTION_SLIDE_LEFT,
+    MOVEMENT_ACTION_SLIDE_RIGHT,
 };
 const u8 gPlayerRunMovementActions[] = {
-	MOVEMENT_ACTION_PLAYER_RUN_DOWN,
-	MOVEMENT_ACTION_PLAYER_RUN_DOWN,
-	MOVEMENT_ACTION_PLAYER_RUN_UP,
-	MOVEMENT_ACTION_PLAYER_RUN_LEFT,
-	MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
+    MOVEMENT_ACTION_PLAYER_RUN_DOWN,
+    MOVEMENT_ACTION_PLAYER_RUN_DOWN,
+    MOVEMENT_ACTION_PLAYER_RUN_UP,
+    MOVEMENT_ACTION_PLAYER_RUN_LEFT,
+    MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
 };
 const u8 gJump2MovementActions[] = {
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_DOWN,
-	MOVEMENT_ACTION_JUMP_2_UP,
-	MOVEMENT_ACTION_JUMP_2_LEFT,
-	MOVEMENT_ACTION_JUMP_2_RIGHT,
+    MOVEMENT_ACTION_JUMP_2_DOWN,
+    MOVEMENT_ACTION_JUMP_2_DOWN,
+    MOVEMENT_ACTION_JUMP_2_UP,
+    MOVEMENT_ACTION_JUMP_2_LEFT,
+    MOVEMENT_ACTION_JUMP_2_RIGHT,
 };
 const u8 gJumpInPlaceMovementActions[] = {
-	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
 };
 const u8 gJumpInPlaceTurnAroundMovementActions[] = {
-	MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT_LEFT,
-	MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT_LEFT,
+    MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
 };
 const u8 gJumpMovementActions[] = {
-	MOVEMENT_ACITON_JUMP_DOWN,
-	MOVEMENT_ACITON_JUMP_DOWN,
-	MOVEMENT_ACITON_JUMP_UP,
-	MOVEMENT_ACITON_JUMP_LEFT,
-	MOVEMENT_ACITON_JUMP_RIGHT,
+    MOVEMENT_ACITON_JUMP_DOWN,
+    MOVEMENT_ACITON_JUMP_DOWN,
+    MOVEMENT_ACITON_JUMP_UP,
+    MOVEMENT_ACITON_JUMP_LEFT,
+    MOVEMENT_ACITON_JUMP_RIGHT,
 };
 const u8 gJumpSpecialMovementActions[] = {
-	MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
-	MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
-	MOVEMENT_ACTION_JUMP_SPECIAL_UP,
-	MOVEMENT_ACTION_JUMP_SPECIAL_LEFT,
-	MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
+    MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
+    MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
+    MOVEMENT_ACTION_JUMP_SPECIAL_UP,
+    MOVEMENT_ACTION_JUMP_SPECIAL_LEFT,
+    MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
 };
 const u8 gWalkInPlaceSlowMovementActions[] = {
-	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
-	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_LEFT,
-	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_RIGHT,
 };
 const u8 gWalkInPlaceNormalMovementActions[] = {
-	MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
-	MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_LEFT,
-	MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_NORMAL_RIGHT,
 };
 const u8 gWalkInPlaceFastMovementActions[] = {
-	MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FAST_LEFT,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FAST_RIGHT,
 };
 const u8 gWalkInPlaceFastestMovementActions[] = {
-	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
-	MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_DOWN,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_UP,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_LEFT,
+    MOVEMENT_ACTION_WALK_IN_PLACE_FASTEST_RIGHT,
 };
 const u8 gAcroWheelieFaceDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_FACE_RIGHT,
 };
 const u8 gAcroPopWheelieFaceDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_LEFT,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_UP,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_LEFT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_RIGHT,
 };
 const u8 gAcroEndWheelieFaceDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_LEFT,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_UP,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_FACE_RIGHT,
 };
 const u8 gAcroWheelieHopFaceDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_FACE_RIGHT,
 };
 const u8 gAcroWheelieHopDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_HOP_RIGHT,
 };
 const u8 gAcroWheelieJumpDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_JUMP_RIGHT,
 };
 const u8 gAcroWheelieInPlaceDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_IN_PLACE_RIGHT,
 };
 const u8 gAcroPopWheelieMoveDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_LEFT,
-	MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_POP_WHEELIE_MOVE_RIGHT,
 };
 const u8 gAcroWheelieMoveDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
-	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT,
-	MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_WHEELIE_MOVE_RIGHT,
 };
 const u8 gAcroEndWheelieMoveDirectionMovementActions[] = {
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT,
-	MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_DOWN,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_UP,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_LEFT,
+    MOVEMENT_ACTION_ACRO_END_WHEELIE_MOVE_RIGHT,
 };
 
 const u8 gOppositeDirections[] = {
@@ -2379,30 +956,18 @@ const u8 gUnknown_08375767[][4] = {
 
 #include "data/field_map_obj/movement_action_func_tables.h"
 
-// text
-
-extern void strange_npc_table_clear(void);
-extern void ClearPlayerAvatarInfo(void);
-extern void npc_load_two_palettes__no_record(u16, u8);
-extern void npc_load_two_palettes__and_record(u16, u8);
-extern void sub_8060388(s16, s16, s16 *, s16 *);
-void sub_80634D0(struct MapObject *, struct Sprite *);
-extern void pal_patch_for_npc(u16, u16);
-extern void CameraObjectReset1(void);
+static u8 gUnknown_030005A4;
+static u16 gUnknown_030005A6;
 
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern u8 gReservedSpritePaletteCount;
 extern struct Camera gCamera;
-
-static u8 gUnknown_030005A4;
-static u16 gUnknown_030005A6;
-
-struct MapObject gMapObjects[16];
+extern struct MapObject gMapObjects[16];
 #if DEBUG
 u8 gUnknown_Debug_03004BC0;
 #endif
 
-void npc_clear_ids_and_state(struct MapObject *mapObj)
+static void ClearMapObject(struct MapObject *mapObj)
 {
     memset(mapObj, 0, sizeof(struct MapObject));
     mapObj->localId = 0xFF;
@@ -2411,53 +976,49 @@ void npc_clear_ids_and_state(struct MapObject *mapObj)
     mapObj->movementActionId = 0xFF;
 }
 
-void npcs_clear_ids_and_state(void)
+static void ClearAllMapObjects(void)
 {
     u8 i;
 
     for (i = 0; i < 16; i++)
-        npc_clear_ids_and_state(&gMapObjects[i]);
+        ClearMapObject(&gMapObjects[i]);
 #if DEBUG
-	gUnknown_Debug_03004BC0 = 0;
+    gUnknown_Debug_03004BC0 = 0;
 #endif
 }
 
 void sub_805AA98(void)
 {
-    strange_npc_table_clear();
-    npcs_clear_ids_and_state();
+    ClearLinkPlayerMapObjects();
+    ClearAllMapObjects();
     ClearPlayerAvatarInfo();
     sub_805AAB0();
 }
 
 void sub_805AAB0(void)
 {
-    u8 spriteId;
-
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
-
+    u8 spriteId = spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
     gSprites[spriteId].invisible = 1;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
-
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
     gSprites[spriteId].invisible = 1;
 }
 
-u8 sub_805AB54(void)
+u8 GetFirstInactiveMapObjectId(void)
 {
     u8 i;
-
     for (i = 0; i < 16; i++)
     {
         if (!gMapObjects[i].active)
             break;
     }
+
     return i;
 }
 
@@ -2481,51 +1042,51 @@ bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 
 u8 GetFieldObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
-
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y)
             break;
     }
+
     return i;
 }
 
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 i;
-
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
             return i;
     }
+
     return 16;
 }
 
 u8 GetFieldObjectIdByLocalId(u8 localId)
 {
     u8 i;
-
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId)
             return i;
     }
+
     return 16;
 }
 
 u8 TryInitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct MapObject *mapObj;
-    u8 var;
+    u8 mapObjectId;
     s16 initialX;
     s16 initialY;
 
-    if (GetAvailableFieldObjectSlot(template->localId, mapNum, mapGroup, &var) != 0)
+    if (GetAvailableMapObjectId(template->localId, mapNum, mapGroup, &mapObjectId) != 0)
         return 16;
 
-    mapObj = (void *)&gMapObjects[var];
-    npc_clear_ids_and_state((struct MapObject *)mapObj);
+    mapObj = (void *)&gMapObjects[mapObjectId];
+    ClearMapObject((struct MapObject *)mapObj);
     initialX = template->x + 7;
     initialY = template->y + 7;
     mapObj->active = TRUE;
@@ -2534,7 +1095,7 @@ u8 TryInitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 ma
     mapObj->movementType = template->movementType;
     mapObj->localId = template->localId;
     mapObj->mapNum = mapNum;
-	asm("":::"r6");
+    asm("":::"r6");
     mapObj->mapGroup = mapGroup;
     mapObj->initialCoords.x = initialX;
     mapObj->initialCoords.y = initialY;
@@ -2546,58 +1107,62 @@ u8 TryInitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 ma
     mapObj->previousElevation = template->elevation;
     mapObj->range.as_nybbles.x = template->movementRangeX;
     mapObj->range.as_nybbles.y = template->movementRangeY;
-    mapObj->trainerType = template->unkC;
-    mapObj->trainerRange_berryTreeId = template->unkE;
+    mapObj->trainerType = template->trainerType;
+    mapObj->trainerRange_berryTreeId = template->trainerRange_berryTreeId;
     mapObj->previousMovementDirection = gInitialMovementTypeFacingDirections[template->movementType];
-    FieldObjectSetDirection((struct MapObject *)mapObj, mapObj->previousMovementDirection);
+    SetFieldObjectDirection((struct MapObject *)mapObj, mapObj->previousMovementDirection);
     asm("":::"r5","r6");
-	FieldObjectHandleDynamicGraphicsId((struct MapObject *)mapObj);
-    if (gRangedMovementTypes[mapObj->movementType] != 0)
+    SetFieldObjectDynamicGraphicsId((struct MapObject *)mapObj);
+
+    if (gRangedMovementTypes[mapObj->movementType])
     {
+        // Ensure a ranged movement type has at least 1 tile of room to move.
         if (mapObj->range.as_nybbles.x == 0)
             mapObj->range.as_nybbles.x++;
         if (mapObj->range.as_nybbles.y == 0)
             mapObj->range.as_nybbles.y++;
     }
+
 #if DEBUG
-	gUnknown_Debug_03004BC0++;
+    gUnknown_Debug_03004BC0++;
 #endif
-    return var;
+    return mapObjectId;
 }
 
-u8 sub_805ADDC(u8 localId)
+u8 TryInitLocalFieldObject(u8 localId)
 {
-    u8 objectCount;
+    u8 mapObjectCount;
     u8 i;
 
     if (gMapHeader.events == NULL)
         return 16;
-    objectCount = gMapHeader.events->mapObjectCount;
-    for (i = 0; i < objectCount; i++)
+
+    mapObjectCount = gMapHeader.events->mapObjectCount;
+    for (i = 0; i < mapObjectCount; i++)
     {
         struct MapObjectTemplate *template = &gSaveBlock1.mapObjectTemplates[i];
-
         if (template->localId == localId && !FlagGet(template->flagId))
             return TryInitFieldObjectStateFromTemplate(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
+
     return 16;
 }
 
-u8 GetAvailableFieldObjectSlot(u16 a, u8 b, u8 c, u8 *d)
+u8 GetAvailableMapObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *mapObjectId)
 {
     u8 i = 0;
 
     for (i = 0; i < 16 && gMapObjects[i].active; i++)
     {
-        if (gMapObjects[i].localId == a && gMapObjects[i].mapNum == b && gMapObjects[i].mapGroup == c)
+        if (gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
             return 1;
     }
     if (i >= 16)
         return 1;
-    *d = i;
+    *mapObjectId = i;
     for (; i < 16; i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].localId == a && gMapObjects[i].mapNum == b && gMapObjects[i].mapGroup == c)
+        if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
             return 1;
     }
     return 0;
@@ -2608,7 +1173,7 @@ void RemoveFieldObject(struct MapObject *mapObject)
     mapObject->active = FALSE;
     RemoveFieldObjectInternal(mapObject);
 #if DEBUG
-	gUnknown_Debug_03004BC0--;
+    gUnknown_Debug_03004BC0--;
 #endif
 }
 
@@ -2632,7 +1197,7 @@ void RemoveFieldObjectInternal(struct MapObject *mapObject)
     DestroySprite(&gSprites[mapObject->spriteId]);
 }
 
-void npc_hide_all_but_player(void)
+void RemoveAllMapObjectsExceptPlayer(void)
 {
     u8 i;
 
@@ -2643,7 +1208,7 @@ void npc_hide_all_but_player(void)
     }
 }
 
-u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, u8 mapNum, u8 mapGroup, s16 e, s16 f)
+static u8 TrySetupMapObjectSprite(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *sprTemplate, u8 mapNum, u8 mapGroup, s16 cameraDeltaX, s16 cameraDeltaY)
 {
     u8 mapObjectId;
     u8 spriteId;
@@ -2661,6 +1226,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
         npc_load_two_palettes__no_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
     else if (gfxInfo->paletteSlot == 10)
         npc_load_two_palettes__and_record(gfxInfo->paletteTag1, gfxInfo->paletteSlot);
+
     if (mapObject->movementType == MOVEMENT_TYPE_INVISIBLE)
         mapObject->invisible = TRUE;
 
@@ -2679,7 +1245,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
         return 16;
     }
     sprite = &gSprites[spriteId];
-    sub_8060388(e + mapObject->currentCoords.x, f + mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
+    sub_8060388(cameraDeltaX + mapObject->currentCoords.x, cameraDeltaY + mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
     sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
     sprite->pos1.x += 8;
@@ -2692,7 +1258,7 @@ u8 sub_805AFCC(struct MapObjectTemplate *mapObjTemplate, struct SpriteTemplate *
     if (!mapObject->inanimate)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(mapObject->facingDirection));
     SetObjectSubpriorityByZCoord(mapObject->previousElevation, sprite, 1);
-    sub_80634D0(mapObject, sprite);
+    UpdateMapObjectVisibility(mapObject, sprite);
     return mapObjectId;
 }
 
@@ -2708,7 +1274,7 @@ u8 TrySpawnFieldObject(struct MapObjectTemplate *mapObjTemplate, u8 mapNum, u8 m
     MakeObjectTemplateFromFieldObjectTemplate(mapObjTemplate, &spriteTemplate, &subspriteTables);
     spriteFrameImage.size = gfxInfo->size;
     spriteTemplate.images = &spriteFrameImage;
-    mapObjectId = sub_805AFCC(mapObjTemplate, &spriteTemplate, mapNum, mapGroup, cameraDeltaX, cameraDeltaY);
+    mapObjectId = TrySetupMapObjectSprite(mapObjTemplate, &spriteTemplate, mapNum, mapGroup, cameraDeltaX, cameraDeltaY);
     if (mapObjectId == 16)
         return 16;
     gSprites[gMapObjects[mapObjectId].spriteId].images = gfxInfo->images;
@@ -2741,8 +1307,8 @@ u8 SpawnSpecialFieldObjectParametrized(u8 graphicsId, u8 movementType, u8 localI
     mapObjTemplate.movementType = movementType;
     mapObjTemplate.movementRangeX = 0;
     mapObjTemplate.movementRangeY = 0;
-    mapObjTemplate.unkC = 0;
-    mapObjTemplate.unkE = 0;
+    mapObjTemplate.trainerType = 0;
+    mapObjTemplate.trainerRange_berryTreeId = 0;
     return SpawnSpecialFieldObject(&mapObjTemplate);
 }
 
@@ -3059,7 +1625,7 @@ void unref_sub_805BA80(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
 
 void FieldObjectTurn(struct MapObject *mapObject, u8 direction)
 {
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     if (!mapObject->inanimate)
     {
         StartSpriteAnim(&gSprites[mapObject->spriteId], GetFaceDirectionAnimNum(mapObject->facingDirection));
@@ -3112,7 +1678,7 @@ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8 graphicsId)
     return gMapObjectGraphicsInfoPointers[graphicsId];
 }
 
-void FieldObjectHandleDynamicGraphicsId(struct MapObject *mapObject)
+void SetFieldObjectDynamicGraphicsId(struct MapObject *mapObject)
 {
     if (mapObject->graphicsId > 0xEF)
         mapObject->graphicsId = VarGetFieldObjectGraphicsId(mapObject->graphicsId + 16);
@@ -3217,12 +1783,12 @@ u8 sub_805BE58(const struct SpritePalette *palette)
         return LoadSpritePalette(palette);
 }
 
-void pal_patch_for_npc(u16 a, u16 b)
+void pal_patch_for_npc(u16 paletteTag, u16 paletteIndex)
 {
-    u8 var = b;
-    u8 paletteIndex = FindFieldObjectPaletteIndexByTag(a);
+    u8 index = paletteIndex;
+    u8 tagPaletteIndex = FindFieldObjectPaletteIndexByTag(paletteTag);
 
-    LoadPalette(gUnknown_0837377C[paletteIndex].data, var * 16 + 0x100, 0x20);
+    LoadPalette(gUnknown_0837377C[tagPaletteIndex].data, index * 16 + 0x100, 0x20);
 }
 
 void pal_patch_for_npc_range(const u16 *arr, u8 b, u8 c)
@@ -3243,32 +1809,32 @@ u8 FindFieldObjectPaletteIndexByTag(u16 tag)
     return 0xFF;
 }
 
-void npc_load_two_palettes__no_record(u16 a, u8 b)
+void npc_load_two_palettes__no_record(u16 paletteTag, u8 paletteIndex)
 {
     u8 i;
 
-    pal_patch_for_npc(a, b);
+    pal_patch_for_npc(paletteTag, paletteIndex);
     for (i = 0; gUnknown_08373874[i].tag != 0x11FF; i++)
     {
-        if (gUnknown_08373874[i].tag == a)
+        if (gUnknown_08373874[i].tag == paletteTag)
         {
-            pal_patch_for_npc(gUnknown_08373874[i].data[gUnknown_030005A4], gUnknown_0830FD14[b]);
+            pal_patch_for_npc(gUnknown_08373874[i].data[gUnknown_030005A4], gUnknown_0830FD14[paletteIndex]);
             break;
         }
     }
 }
 
-void npc_load_two_palettes__and_record(u16 a, u8 b)
+void npc_load_two_palettes__and_record(u16 paletteTag, u8 paletteIndex)
 {
     u8 i;
 
-    gUnknown_030005A6 = a;
-    pal_patch_for_npc(a, b);
+    gUnknown_030005A6 = paletteTag;
+    pal_patch_for_npc(paletteTag, paletteIndex);
     for (i = 0; gUnknown_083738E4[i].tag != 0x11FF; i++)
     {
-        if (gUnknown_083738E4[i].tag == a)
+        if (gUnknown_083738E4[i].tag == paletteTag)
         {
-            pal_patch_for_npc(gUnknown_083738E4[i].data[gUnknown_030005A4], gUnknown_0830FD14[b]);
+            pal_patch_for_npc(gUnknown_083738E4[i].data[gUnknown_030005A4], gUnknown_0830FD14[paletteIndex]);
             break;
         }
     }
@@ -3282,7 +1848,7 @@ void unref_sub_805C014(struct MapObject *mapObject, s16 x, s16 y)
     mapObject->currentCoords.y += y;
 }
 
-void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
+void ShiftMapObjectCoords(struct MapObject *mapObject, s16 x, s16 y)
 {
     mapObject->previousCoords.x = mapObject->currentCoords.x;
     mapObject->previousCoords.y = mapObject->currentCoords.y;
@@ -3290,7 +1856,7 @@ void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
     mapObject->currentCoords.y = y;
 }
 
-void npc_coords_set(struct MapObject *mapObject, s16 x, s16 y)
+void SetMapObjectCoords(struct MapObject *mapObject, s16 x, s16 y)
 {
     mapObject->previousCoords.x = x;
     mapObject->previousCoords.y = y;
@@ -3303,7 +1869,7 @@ void sub_805C058(struct MapObject *mapObject, s16 x, s16 y)
     struct Sprite *sprite = &gSprites[mapObject->spriteId];
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
 
-    npc_coords_set(mapObject, x, y);
+    SetMapObjectCoords(mapObject, x, y);
     sub_80603CC(mapObject->currentCoords.x, mapObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
     sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
     sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
@@ -3326,9 +1892,9 @@ void sub_805C0F8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     }
 }
 
-void npc_coords_shift_still(struct MapObject *mapObject)
+void ShiftStillMapObjectCoords(struct MapObject *mapObject)
 {
-    npc_coords_shift(mapObject, mapObject->currentCoords.x, mapObject->currentCoords.y);
+    ShiftMapObjectCoords(mapObject, mapObject->currentCoords.x, mapObject->currentCoords.y);
 }
 
 void UpdateFieldObjectCoordsForCameraUpdate(void)
@@ -3343,7 +1909,6 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
         deltaY = gCamera.y;
         for (i = 0; i < 16; i++)
         {
-
             if (gMapObjects[i].active)
             {
                 gMapObjects[i].initialCoords.x -= deltaX;
@@ -3357,8 +1922,6 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     }
 }
 
-bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
-
 u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 {
     u8 i;
@@ -3366,13 +1929,13 @@ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
     for (i = 0; i < 16; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].currentCoords.x == x && gMapObjects[i].currentCoords.y == y
-         && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
+         && MapObjectZCoordIsCompatible(&gMapObjects[i], z))
             return i;
     }
     return 16;
 }
 
-bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
+static bool8 MapObjectZCoordIsCompatible(struct MapObject *mapObject, u8 z)
 {
     if (mapObject->currentElevation != 0 && z != 0
      && mapObject->currentElevation != z)
@@ -3381,7 +1944,7 @@ bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
         return TRUE;
 }
 
-void UpdateFieldObjectsForCameraUpdate(s16 cameraDeltaX, s16 cameraDeltaY)
+void UpdateMapObjectsForCameraUpdate(s16 cameraDeltaX, s16 cameraDeltaY)
 {
     UpdateFieldObjectCoordsForCameraUpdate();
     TrySpawnFieldObjects(cameraDeltaX, cameraDeltaY);
@@ -3390,21 +1953,21 @@ void UpdateFieldObjectsForCameraUpdate(s16 cameraDeltaX, s16 cameraDeltaY)
 
 u8 AddCameraObject(u8 a)
 {
-    u8 spriteId = CreateSprite(&gSpriteTemplate_830FD24, 0, 0, 4);
+    u8 spriteId = CreateSprite(&gCameraSpriteTemplate, 0, 0, 4);
 
     gSprites[spriteId].invisible = TRUE;
     gSprites[spriteId].data[0] = a;
     return spriteId;
 }
 
-void ObjectCB_CameraObject(struct Sprite *sprite)
+static void ObjectCB_CameraObject(struct Sprite *sprite)
 {
     void (*cameraObjectFuncs[3])(struct Sprite *);
-    memcpy(cameraObjectFuncs, gCameraObjectFuncs, sizeof gCameraObjectFuncs);
+    memcpy(cameraObjectFuncs, gCameraObjectFuncs, sizeof(gCameraObjectFuncs));
     cameraObjectFuncs[sprite->data[1]](sprite);
 }
 
-void CameraObject_0(struct Sprite *sprite)
+static void CameraObject_0(struct Sprite *sprite)
 {
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
     sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
@@ -3413,7 +1976,7 @@ void CameraObject_0(struct Sprite *sprite)
     CameraObject_1(sprite);
 }
 
-void CameraObject_1(struct Sprite *sprite)
+static void CameraObject_1(struct Sprite *sprite)
 {
     s16 x = gSprites[sprite->data[0]].pos1.x;
     s16 y = gSprites[sprite->data[0]].pos1.y;
@@ -3424,7 +1987,7 @@ void CameraObject_1(struct Sprite *sprite)
     sprite->pos1.y = y;
 }
 
-void CameraObject_2(struct Sprite *sprite)
+static void CameraObject_2(struct Sprite *sprite)
 {
     sprite->pos1.x = gSprites[sprite->data[0]].pos1.x;
     sprite->pos1.y = gSprites[sprite->data[0]].pos1.y;
@@ -3436,7 +1999,7 @@ struct Sprite *FindCameraObject(void)
 {
     u8 i;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < MAX_SPRITES; i++)
     {
         if (gSprites[i].inUse && gSprites[i].callback == ObjectCB_CameraObject)
             return &gSprites[i];
@@ -3519,7 +2082,7 @@ u8 obj_unfreeze(struct Sprite *src, s16 x, s16 y, u8 subpriority)
     return 64;
 }
 
-void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
+void SetFieldObjectDirection(struct MapObject *mapObject, u8 direction)
 {
     mapObject->previousMovementDirection = mapObject->facingDirection;
     if (!mapObject->facingDirectionLocked)
@@ -3584,21 +2147,19 @@ u8 FieldObjectGetBerryTreeId(u8 mapObjectId)
     return gMapObjects[mapObjectId].trainerRange_berryTreeId;
 }
 
-struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8, struct MapObjectTemplate *, u8);
-
 struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
     if (gSaveBlock1.location.mapNum == mapNum && gSaveBlock1.location.mapGroup == mapGroup)
-        return FindFieldObjectTemplateInArrayByLocalId(localId, gSaveBlock1.mapObjectTemplates, gMapHeader.events->mapObjectCount);
+        return FindFieldObjectTemplateByLocalId(localId, gSaveBlock1.mapObjectTemplates, gMapHeader.events->mapObjectCount);
     else
     {
         struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
 
-        return FindFieldObjectTemplateInArrayByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
+        return FindFieldObjectTemplateByLocalId(localId, mapHeader->events->mapObjects, mapHeader->events->mapObjectCount);
     }
 }
 
-struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
+static struct MapObjectTemplate *FindFieldObjectTemplateByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
 {
     u8 i;
 
@@ -3610,7 +2171,7 @@ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, st
     return NULL;
 }
 
-struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
+static struct MapObjectTemplate *GetBaseTemplateForMapObject(struct MapObject *mapObject)
 {
     s32 i;
 
@@ -3626,9 +2187,9 @@ struct MapObjectTemplate *sub_805C700(struct MapObject *mapObject)
     return NULL;
 }
 
-void sub_805C754(struct MapObject *mapObject)
+void OverrideTemplateCoordsForMapObject(struct MapObject *mapObject)
 {
-    struct MapObjectTemplate *template = sub_805C700(mapObject);
+    struct MapObjectTemplate *template = GetBaseTemplateForMapObject(mapObject);
 
     if (template != NULL)
     {
@@ -3637,20 +2198,20 @@ void sub_805C754(struct MapObject *mapObject)
     }
 }
 
-void sub_805C774(struct MapObject *mapObject, u8 movementType)
+void OverrideMovementTypeForMapObject(struct MapObject *mapObject, u8 movementType)
 {
-    struct MapObjectTemplate *template = sub_805C700(mapObject);
+    struct MapObjectTemplate *template = GetBaseTemplateForMapObject(mapObject);
 
     if (template != NULL)
         template->movementType = movementType;
 }
 
-void sub_805C78C(u8 localId, u8 mapNum, u8 mapGroup)
+void TryOverrideTemplateCoordsForMapObject(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
-        sub_805C754(&gMapObjects[mapObjectId]);
+        OverrideTemplateCoordsForMapObject(&gMapObjects[mapObjectId]);
 }
 
 void sub_805C7C4(u8 a)
@@ -3678,17 +2239,15 @@ u16 npc_paltag_by_palslot(u8 a)
     return 0x11FF;
 }
 
-fieldmap_object_empty_callback(MovementType_None, MovementType_None_Callback);
-fieldmap_object_cb(MovementType_WanderAround, MovementType_WanderAround_Callback, gMovementTypeFuncs_WanderAround);
+movement_type_empty_callback(MovementType_None);
+movement_type_def(MovementType_WanderAround, gMovementTypeFuncs_WanderAround);
 
 u8 MovementType_WanderAround_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
-
-extern void FieldObjectSetSingleMovement(struct MapObject *, struct Sprite *, u8);
 
 u8 MovementType_WanderAround_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -3696,9 +2255,6 @@ u8 MovementType_WanderAround_Step1(struct MapObject *mapObject, struct Sprite *s
     sprite->data[1] = 2;
     return 1;
 }
-
-extern u8 FieldObjectExecSingleMovementAction(struct MapObject *, struct Sprite *);
-static void SetMovementDelay(struct Sprite *, s16);
 
 u8 MovementType_WanderAround_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -3711,8 +2267,6 @@ u8 MovementType_WanderAround_Step2(struct MapObject *mapObject, struct Sprite *s
     return 1;
 }
 
-static u8 WaitForMovementDelay(struct Sprite *);
-
 u8 MovementType_WanderAround_Step3(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (WaitForMovementDelay(sprite))
@@ -3723,15 +2277,13 @@ u8 MovementType_WanderAround_Step3(struct MapObject *mapObject, struct Sprite *s
     return 0;
 }
 
-extern u8 GetCollisionInDirection(struct MapObject *, u8);
-
 u8 MovementType_WanderAround_Step4(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 direction;
     u8 directions[4];
     memcpy(directions, gStandardDirections, 4);
     direction = directions[Random() & 3];
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(mapObject, direction) != 0)
     {
@@ -3790,191 +2342,189 @@ u8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
     return 1;
 }
 
-u8 sub_805CAAC(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetVectorDirection(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    if (a2 > a3)
+    u8 direction;
+    if (xAbs > yAbs)
     {
-        dirn = DIR_EAST;
-        if (a0 < 0)
+        direction = DIR_EAST;
+        if (x < 0)
         {
-            dirn = DIR_WEST;
+            direction = DIR_WEST;
         }
     }
     else
     {
-        dirn = DIR_SOUTH;
-        if (a1 < 0)
+        direction = DIR_SOUTH;
+        if (y < 0)
         {
-            dirn = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CADC(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_SouthNorth(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = DIR_SOUTH;
-    if (a1 < 0)
+    u8 direction;
+    direction = DIR_SOUTH;
+    if (y < 0)
     {
-        dirn = DIR_NORTH;
+        direction = DIR_NORTH;
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CAEC(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_WestEast(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = DIR_EAST;
-    if (a0 < 0)
+    u8 direction;
+    direction = DIR_EAST;
+    if (x < 0)
     {
-        dirn = DIR_WEST;
+        direction = DIR_WEST;
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_WestNorth(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_SOUTH)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_SOUTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
-        if (dirn == DIR_EAST)
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
+        if (direction == DIR_EAST)
         {
-            dirn = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    else if (dirn == DIR_EAST)
+    else if (direction == DIR_EAST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
-        if (dirn == DIR_SOUTH)
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
+        if (direction == DIR_SOUTH)
         {
-            dirn = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_EastNorth(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_SOUTH)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_SOUTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
-        if (dirn == DIR_WEST)
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
+        if (direction == DIR_WEST)
         {
-            dirn = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    else if (dirn == DIR_WEST)
+    else if (direction == DIR_WEST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
-        if (dirn == DIR_SOUTH)
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
+        if (direction == DIR_SOUTH)
         {
-            dirn = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_WestSouth(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_NORTH)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_NORTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
-        if (dirn == DIR_EAST)
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
+        if (direction == DIR_EAST)
         {
-            dirn = DIR_SOUTH;
+            direction = DIR_SOUTH;
         }
     }
-    else if (dirn == DIR_EAST)
+    else if (direction == DIR_EAST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
-        if (dirn == DIR_NORTH)
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
+        if (direction == DIR_NORTH)
         {
-            dirn = DIR_SOUTH;
+            direction = DIR_SOUTH;
         }
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3) {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_NORTH)
+u8 GetLimitedVectorDirection_EastSouth(s16 x, s16 y, s16 xAbs, s16 yAbs) {
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_NORTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
-        if (dirn == DIR_WEST)
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
+        if (direction == DIR_WEST)
         {
-            dirn = DIR_SOUTH;
+            direction = DIR_SOUTH;
         }
     }
-    else if (dirn == DIR_WEST)
+    else if (direction == DIR_WEST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
-        if (dirn == DIR_NORTH)
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
+        if (direction == DIR_NORTH)
         {
-            dirn = DIR_SOUTH;
+            direction = DIR_SOUTH;
         }
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_SouthNorthWest(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_EAST)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_EAST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_SouthNorthEast(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_WEST)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_WEST)
     {
-        dirn = sub_805CADC(a0, a1, a2, a3);
+        direction = GetLimitedVectorDirection_SouthNorth(x, y, xAbs, yAbs);
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_NorthWestEast(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_SOUTH)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_SOUTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3)
+u8 GetLimitedVectorDirection_SouthWestEast(s16 x, s16 y, s16 xAbs, s16 yAbs)
 {
-    u8 dirn;
-    dirn = sub_805CAAC(a0, a1, a2, a3);
-    if (dirn == DIR_NORTH)
+    u8 direction;
+    direction = GetVectorDirection(x, y, xAbs, yAbs);
+    if (direction == DIR_NORTH)
     {
-        dirn = sub_805CAEC(a0, a1, a2, a3);
+        direction = GetLimitedVectorDirection_WestEast(x, y, xAbs, yAbs);
     }
-    return dirn;
+    return direction;
 }
 
-u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
+u8 TryGetTrainerEncounterDirection(struct MapObject *mapObject, u8 directionFuncIndex)
 {
-    s16 x;
-    s16 y;
-    s16 x2;
-    s16 y2;
+    s16 x, y;
+    s16 xAbs, yAbs;
     if (!FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         return 0;
@@ -3982,24 +2532,21 @@ u8 sub_805CD60(struct MapObject *mapObject, u8 a1)
     PlayerGetDestCoords(&x, &y);
     x -= mapObject->currentCoords.x;
     y -= mapObject->currentCoords.y;
-    x2 = x;
-    y2 = y;
-    if (x2 < 0)
-    {
-        x2 = -x2;
-    }
-    if (y2 < 0)
-    {
-        y2 = -y2;
-    }
-    return gUnknown_08375244[a1](x, y, x2, y2);
+    xAbs = x;
+    yAbs = y;
+    if (xAbs < 0)
+        xAbs = -xAbs;
+    if (yAbs < 0)
+        yAbs = -yAbs;
+
+    return gGetVectorDirectionFuncs[directionFuncIndex](x, y, xAbs, yAbs);
 }
 
-fieldmap_object_cb(MovementType_LookAround, MovementType_LookAround_Callback, gMovementTypeFuncs_LookAround);
+movement_type_def(MovementType_LookAround, gMovementTypeFuncs_LookAround);
 
 u8 MovementType_LookAround_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4037,20 +2584,20 @@ u8 MovementType_LookAround_Step4(struct MapObject *mapObject, struct Sprite *spr
     u8 direction;
     u8 directions[4];
     memcpy(directions, gStandardDirections, 4);
-    direction = sub_805CD60(mapObject, 0);
+    direction = TryGetTrainerEncounterDirection(mapObject, 0);
     if (direction == DIR_NONE)
         direction = directions[Random() & 3];
 
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_WanderUpAndDown, MovementType_WanderUpAndDown_Callback, gMovementTypeFuncs_WanderUpAndDown);
+movement_type_def(MovementType_WanderUpAndDown, gMovementTypeFuncs_WanderUpAndDown);
 
 u8 MovementType_WanderUpAndDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4089,7 +2636,7 @@ u8 MovementType_WanderUpAndDown_Step4(struct MapObject *mapObject, struct Sprite
     u8 directions[2];
     memcpy(directions, gUpAndDownDirections, 2);
     direction = directions[Random() & 1];
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(mapObject, direction) != 0)
     {
@@ -4116,11 +2663,11 @@ u8 MovementType_WanderUpAndDown_Step6(struct MapObject *mapObject, struct Sprite
     return 0;
 }
 
-fieldmap_object_cb(MovementType_WanderLeftAndRight, MovementType_WanderLeftAndRight_Callback, gMovementTypeFuncs_WanderLeftAndRight);
+movement_type_def(MovementType_WanderLeftAndRight, gMovementTypeFuncs_WanderLeftAndRight);
 
 u8 MovementType_WanderLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4159,7 +2706,7 @@ u8 MovementType_WanderLeftAndRight_Step4(struct MapObject *mapObject, struct Spr
     u8 directions[2];
     memcpy(directions, gLeftAndRightDirections, 2);
     direction = directions[Random() & 1];
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 5;
     if (GetCollisionInDirection(mapObject, direction) != 0)
     {
@@ -4186,11 +2733,11 @@ u8 MovementType_WanderLeftAndRight_Step6(struct MapObject *mapObject, struct Spr
     return 0;
 }
 
-fieldmap_object_cb(MovementType_FaceDirection, MovementType_FaceDirection_Callback, gMovementTypeFuncs_FaceDirection);
+movement_type_def(MovementType_FaceDirection, gMovementTypeFuncs_FaceDirection);
 
 u8 MovementType_FaceDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
@@ -4212,8 +2759,6 @@ u8 MovementType_FaceDirection_Step2(struct MapObject *mapObject, struct Sprite *
     return 0;
 }
 
-u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Sprite *sprite);
-
 void MovementType_BerryTreeGrowth(struct Sprite *sprite)
 {
     struct MapObject *mapObject;
@@ -4226,7 +2771,7 @@ void MovementType_BerryTreeGrowth(struct Sprite *sprite)
     meta_step(mapObject, sprite, MovementType_BerryTreeGrowth_Callback);
 }
 
-u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Sprite *sprite)
+static u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return gMovementTypeFuncs_BerryTreeGrowth[sprite->data[1]](mapObject, sprite);
 }
@@ -4234,7 +2779,7 @@ u8 MovementType_BerryTreeGrowth_Callback(struct MapObject *mapObject, struct Spr
 u8 MovementType_BerryTreeGrowth_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 berryTreeStage;
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     mapObject->invisible = 1;
     sprite->invisible = 1;
     berryTreeStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
@@ -4318,11 +2863,11 @@ u8 MovementType_BerryTreeGrowth_Step4(struct MapObject *mapObject, struct Sprite
     return 0;
 }
 
-fieldmap_object_cb(MovementType_FaceDownAndUp, MovementType_FaceDownAndUp_Callback, gMovementTypeFuncs_FaceDownAndUp);
+movement_type_def(MovementType_FaceDownAndUp, gMovementTypeFuncs_FaceDownAndUp);
 
 u8 MovementType_FaceDownAndUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4360,21 +2905,21 @@ u8 MovementType_FaceDownAndUp_Step4(struct MapObject *mapObject, struct Sprite *
     u8 direction;
     u8 directions[2];
     memcpy(directions, gUpAndDownDirections, 2);
-    direction = sub_805CD60(mapObject, 1);
+    direction = TryGetTrainerEncounterDirection(mapObject, 1);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceLeftAndRight, MovementType_FaceLeftAndRight_Callback, gMovementTypeFuncs_FaceLeftAndRight);
+movement_type_def(MovementType_FaceLeftAndRight, gMovementTypeFuncs_FaceLeftAndRight);
 
 u8 MovementType_FaceLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4412,21 +2957,21 @@ u8 MovementType_FaceLeftAndRight_Step4(struct MapObject *mapObject, struct Sprit
     u8 direction;
     u8 directions[2];
     memcpy(directions, gLeftAndRightDirections, 2);
-    direction = sub_805CD60(mapObject, 2);
+    direction = TryGetTrainerEncounterDirection(mapObject, 2);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceUpAndLeft, MovementType_FaceUpAndLeft_Callback, gMovementTypeFuncs_FaceUpAndLeft);
+movement_type_def(MovementType_FaceUpAndLeft, gMovementTypeFuncs_FaceUpAndLeft);
 
 u8 MovementType_FaceUpAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4464,21 +3009,21 @@ u8 MovementType_FaceUpAndLeft_Step4(struct MapObject *mapObject, struct Sprite *
     u8 direction;
     u8 directions[2];
     memcpy(directions, gUpAndLeftDirections, 2);
-    direction = sub_805CD60(mapObject, 3);
+    direction = TryGetTrainerEncounterDirection(mapObject, 3);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceUpAndRight, MovementType_FaceUpAndRight_Callback, gMovementTypeFuncs_FaceUpAndRight);
+movement_type_def(MovementType_FaceUpAndRight, gMovementTypeFuncs_FaceUpAndRight);
 
 u8 MovementType_FaceUpAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4516,21 +3061,21 @@ u8 MovementType_FaceUpAndRight_Step4(struct MapObject *mapObject, struct Sprite 
     u8 direction;
     u8 directions[2];
     memcpy(directions, gUpAndRightDirections, 2);
-    direction = sub_805CD60(mapObject, 4);
+    direction = TryGetTrainerEncounterDirection(mapObject, 4);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceDownAndLeft, MovementType_FaceDownAndLeft_Callback, gMovementTypeFuncs_FaceDownAndLeft);
+movement_type_def(MovementType_FaceDownAndLeft, gMovementTypeFuncs_FaceDownAndLeft);
 
 u8 MovementType_FaceDownAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4568,21 +3113,21 @@ u8 MovementType_FaceDownAndLeft_Step4(struct MapObject *mapObject, struct Sprite
     u8 direction;
     u8 directions[2];
     memcpy(directions, gDownAndLeftDirections, 2);
-    direction = sub_805CD60(mapObject, 5);
+    direction = TryGetTrainerEncounterDirection(mapObject, 5);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceDownAndRight, MovementType_FaceDownAndRight_Callback, gMovementTypeFuncs_FaceDownAndRight);
+movement_type_def(MovementType_FaceDownAndRight, gMovementTypeFuncs_FaceDownAndRight);
 
 u8 MovementType_FaceDownAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4620,21 +3165,21 @@ u8 MovementType_FaceDownAndRight_Step4(struct MapObject *mapObject, struct Sprit
     u8 direction;
     u8 directions[2];
     memcpy(directions, gDownAndRightDirections, 2);
-    direction = sub_805CD60(mapObject, 6);
+    direction = TryGetTrainerEncounterDirection(mapObject, 6);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 1];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceDownUpAndLeft, MovementType_FaceDownUpAndLeft_Callback, gMovementTypeFuncs_FaceDownUpAndLeft);
+movement_type_def(MovementType_FaceDownUpAndLeft, gMovementTypeFuncs_FaceDownUpAndLeft);
 
 u8 MovementType_FaceDownUpAndLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4672,21 +3217,21 @@ u8 MovementType_FaceDownUpAndLeft_Step4(struct MapObject *mapObject, struct Spri
     u8 direction;
     u8 directions[4];
     memcpy(directions, gDownUpAndLeftDirections, 4);
-    direction = sub_805CD60(mapObject, 7);
+    direction = TryGetTrainerEncounterDirection(mapObject, 7);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 3];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceDownUpAndRight, MovementType_FaceDownUpAndRight_Callback, gMovementTypeFuncs_FaceDownUpAndRight);
+movement_type_def(MovementType_FaceDownUpAndRight, gMovementTypeFuncs_FaceDownUpAndRight);
 
 u8 MovementType_FaceDownUpAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4724,21 +3269,21 @@ u8 MovementType_FaceDownUpAndRight_Step4(struct MapObject *mapObject, struct Spr
     u8 direction;
     u8 directions[4];
     memcpy(directions, gDownUpAndRightDirections, 4);
-    direction = sub_805CD60(mapObject, 8);
+    direction = TryGetTrainerEncounterDirection(mapObject, 8);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 3];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceUpLeftAndRight, MovementType_FaceUpLeftAndRight_Callback, gMovementTypeFuncs_FaceUpLeftAndRight);
+movement_type_def(MovementType_FaceUpLeftAndRight, gMovementTypeFuncs_FaceUpLeftAndRight);
 
 u8 MovementType_FaceUpLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4776,21 +3321,21 @@ u8 MovementType_FaceUpLeftAndRight_Step4(struct MapObject *mapObject, struct Spr
     u8 direction;
     u8 directions[4];
     memcpy(directions, gUpLeftAndRightDirections, 4);
-    direction = sub_805CD60(mapObject, 9);
+    direction = TryGetTrainerEncounterDirection(mapObject, 9);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 3];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_FaceDownLeftAndRight, MovementType_FaceDownLeftAndRight_Callback, gMovementTypeFuncs_FaceDownLeftAndRight);
+movement_type_def(MovementType_FaceDownLeftAndRight, gMovementTypeFuncs_FaceDownLeftAndRight);
 
 u8 MovementType_FaceDownLeftAndRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4828,21 +3373,21 @@ u8 MovementType_FaceDownLeftAndRight_Step4(struct MapObject *mapObject, struct S
     u8 direction;
     u8 directions[4];
     memcpy(directions, gDownLeftAndRightDirections, 4);
-    direction = sub_805CD60(mapObject, 10);
+    direction = TryGetTrainerEncounterDirection(mapObject, 10);
     if (direction == DIR_NONE)
     {
         direction = directions[Random() & 3];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_RotateCounterclockwise, MovementType_RotateCounterclockwise_Callback, gMovementTypeFuncs_RotateCounterclockwise);
+movement_type_def(MovementType_RotateCounterclockwise, gMovementTypeFuncs_RotateCounterclockwise);
 
 u8 MovementType_RotateCounterclockwise_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
@@ -4872,21 +3417,21 @@ u8 MovementType_RotateCounterclockwise_Step3(struct MapObject *mapObject, struct
     u8 direction;
     u8 directions[5];
     memcpy(directions, gCounterclockwiseDirections, 5);
-    direction = sub_805CD60(mapObject, 0);
+    direction = TryGetTrainerEncounterDirection(mapObject, 0);
     if (direction == DIR_NONE)
     {
         direction = directions[mapObject->facingDirection];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 0;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_RotateClockwise, MovementType_RotateClockwise_Callback, gMovementTypeFuncs_RotateClockwise);
+movement_type_def(MovementType_RotateClockwise, gMovementTypeFuncs_RotateClockwise);
 
 u8 MovementType_RotateClockwise_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
@@ -4916,21 +3461,21 @@ u8 MovementType_RotateClockwise_Step3(struct MapObject *mapObject, struct Sprite
     u8 direction;
     u8 directions[5];
     memcpy(directions, gClockwiseDirections, 5);
-    direction = sub_805CD60(mapObject, 0);
+    direction = TryGetTrainerEncounterDirection(mapObject, 0);
     if (direction == DIR_NONE)
     {
         direction = directions[mapObject->facingDirection];
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 0;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_WalkBackAndForth, MovementType_WalkBackAndForth_Callback, gMovementTypeFuncs_WalkBackAndForth);
+movement_type_def(MovementType_WalkBackAndForth, gMovementTypeFuncs_WalkBackAndForth);
 
 u8 MovementType_WalkBackAndForth_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -4943,7 +3488,7 @@ u8 MovementType_WalkBackAndForth_Step1(struct MapObject *mapObject, struct Sprit
     {
         direction = GetOppositeDirection(direction);
     }
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[1] = 2;
     return 1;
 }
@@ -4955,14 +3500,14 @@ u8 MovementType_WalkBackAndForth_Step2(struct MapObject *mapObject, struct Sprit
     if (mapObject->directionSequenceIndex && mapObject->initialCoords.x == mapObject->currentCoords.x && mapObject->initialCoords.y == mapObject->currentCoords.y)
     {
         mapObject->directionSequenceIndex = 0;
-        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
+        SetFieldObjectDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
     }
     collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     movementActionId = GetWalkNormalMovementAction(mapObject->movementDirection);
     if (collisionState == 1)
     {
         mapObject->directionSequenceIndex++;
-        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
+        SetFieldObjectDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
         movementActionId = GetWalkNormalMovementAction(mapObject->movementDirection);
         collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     }
@@ -4988,7 +3533,7 @@ u8 MovementType_WalkBackAndForth_Step3(struct MapObject *mapObject, struct Sprit
 
 u8 MovementType_WalkSequence_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     sprite->data[1] = 1;
     return 1;
 }
@@ -5001,13 +3546,13 @@ u8 MoveNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprit
     {
         mapObject->directionSequenceIndex = 0;
     }
-    FieldObjectSetDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
+    SetFieldObjectDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
     movementActionId = GetWalkNormalMovementAction(mapObject->movementDirection);
     collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     if (collisionState == 1)
     {
         mapObject->directionSequenceIndex++;
-        FieldObjectSetDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
+        SetFieldObjectDirection(mapObject, directionSequence[mapObject->directionSequenceIndex]);
         movementActionId = GetWalkNormalMovementAction(mapObject->movementDirection);
         collisionState = GetCollisionInDirection(mapObject, mapObject->movementDirection);
     }
@@ -5031,7 +3576,7 @@ u8 MovementType_WalkSequence_Step2(struct MapObject *mapObject, struct Sprite *s
     return 0;
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpRightLeftDown, MovementType_WalkSequenceUpRightLeftDown_Callback, gMovementTypeFuncs_WalkSequenceUpRightLeftDown);
+movement_type_def(MovementType_WalkSequenceUpRightLeftDown, gMovementTypeFuncs_WalkSequenceUpRightLeftDown);
 
 u8 MovementType_WalkSequenceUpRightLeftDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5044,7 +3589,7 @@ u8 MovementType_WalkSequenceUpRightLeftDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightLeftDownUp, MovementType_WalkSequenceRightLeftDownUp_Callback, gMovementTypeFuncs_WalkSequenceRightLeftDownUp);
+movement_type_def(MovementType_WalkSequenceRightLeftDownUp, gMovementTypeFuncs_WalkSequenceRightLeftDownUp);
 
 u8 MovementType_WalkSequenceRightLeftDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5057,7 +3602,7 @@ u8 MovementType_WalkSequenceRightLeftDownUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownUpRightLeft, MovementType_WalkSequenceDownUpRightLeft_Callback, gMovementTypeFuncs_WalkSequenceDownUpRightLeft);
+movement_type_def(MovementType_WalkSequenceDownUpRightLeft, gMovementTypeFuncs_WalkSequenceDownUpRightLeft);
 
 u8 MovementType_WalkSequenceDownUpRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5070,7 +3615,7 @@ u8 MovementType_WalkSequenceDownUpRightLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftDownUpRight, MovementType_WalkSequenceLeftDownUpRight_Callback, gMovementTypeFuncs_WalkSequenceLeftDownUpRight);
+movement_type_def(MovementType_WalkSequenceLeftDownUpRight, gMovementTypeFuncs_WalkSequenceLeftDownUpRight);
 
 u8 MovementType_WalkSequenceLeftDownUpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5083,7 +3628,7 @@ u8 MovementType_WalkSequenceLeftDownUpRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpLeftRightDown, MovementType_WalkSequenceUpLeftRightDown_Callback, gMovementTypeFuncs_WalkSequenceUpLeftRightDown);
+movement_type_def(MovementType_WalkSequenceUpLeftRightDown, gMovementTypeFuncs_WalkSequenceUpLeftRightDown);
 
 u8 MovementType_WalkSequenceUpLeftRightDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5096,7 +3641,7 @@ u8 MovementType_WalkSequenceUpLeftRightDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftRightDownUp, MovementType_WalkSequenceLeftRightDownUp_Callback, gMovementTypeFuncs_WalkSequenceLeftRightDownUp);
+movement_type_def(MovementType_WalkSequenceLeftRightDownUp, gMovementTypeFuncs_WalkSequenceLeftRightDownUp);
 
 u8 MovementType_WalkSequenceLeftRightDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5109,7 +3654,7 @@ u8 MovementType_WalkSequenceLeftRightDownUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownUpLeftRight, MovementType_WalkSequenceDownUpLeftRight_Callback, gMovementTypeFuncs_WalkSequenceDownUpLeftRight);
+movement_type_def(MovementType_WalkSequenceDownUpLeftRight, gMovementTypeFuncs_WalkSequenceDownUpLeftRight);
 
 u8 MovementType_WalkSequenceDownUpLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5122,7 +3667,7 @@ u8 MovementType_WalkSequenceDownUpLeftRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightDownUpLeft, MovementType_WalkSequenceRightDownUpLeft_Callback, gMovementTypeFuncs_WalkSequenceRightDownUpLeft);
+movement_type_def(MovementType_WalkSequenceRightDownUpLeft, gMovementTypeFuncs_WalkSequenceRightDownUpLeft);
 
 u8 MovementType_WalkSequenceRightDownUpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5135,7 +3680,7 @@ u8 MovementType_WalkSequenceRightDownUpLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftUpDownRight, MovementType_WalkSequenceLeftUpDownRight_Callback, gMovementTypeFuncs_WalkSequenceLeftUpDownRight);
+movement_type_def(MovementType_WalkSequenceLeftUpDownRight, gMovementTypeFuncs_WalkSequenceLeftUpDownRight);
 
 u8 MovementType_WalkSequenceLeftUpDownRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5148,7 +3693,7 @@ u8 MovementType_WalkSequenceLeftUpDownRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpDownRightLeft, MovementType_WalkSequenceUpDownRightLeft_Callback, gMovementTypeFuncs_WalkSequenceUpDownRightLeft);
+movement_type_def(MovementType_WalkSequenceUpDownRightLeft, gMovementTypeFuncs_WalkSequenceUpDownRightLeft);
 
 u8 MovementType_WalkSequenceUpDownRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5161,7 +3706,7 @@ u8 MovementType_WalkSequenceUpDownRightLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightLeftUpDown, MovementType_WalkSequenceRightLeftUpDown_Callback, gMovementTypeFuncs_WalkSequenceRightLeftUpDown);
+movement_type_def(MovementType_WalkSequenceRightLeftUpDown, gMovementTypeFuncs_WalkSequenceRightLeftUpDown);
 
 u8 MovementType_WalkSequenceRightLeftUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5174,7 +3719,7 @@ u8 MovementType_WalkSequenceRightLeftUpDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownRightLeftUp, MovementType_WalkSequenceDownRightLeftUp_Callback, gMovementTypeFuncs_WalkSequenceDownRightLeftUp);
+movement_type_def(MovementType_WalkSequenceDownRightLeftUp, gMovementTypeFuncs_WalkSequenceDownRightLeftUp);
 
 u8 MovementType_WalkSequenceDownRightLeftUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5187,7 +3732,7 @@ u8 MovementType_WalkSequenceDownRightLeftUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightUpDownLeft, MovementType_WalkSequenceRightUpDownLeft_Callback, gMovementTypeFuncs_WalkSequenceRightUpDownLeft);
+movement_type_def(MovementType_WalkSequenceRightUpDownLeft, gMovementTypeFuncs_WalkSequenceRightUpDownLeft);
 
 u8 MovementType_WalkSequenceRightUpDownLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5200,7 +3745,7 @@ u8 MovementType_WalkSequenceRightUpDownLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpDownLeftRight, MovementType_WalkSequenceUpDownLeftRight_Callback, gMovementTypeFuncs_WalkSequenceUpDownLeftRight);
+movement_type_def(MovementType_WalkSequenceUpDownLeftRight, gMovementTypeFuncs_WalkSequenceUpDownLeftRight);
 
 u8 MovementType_WalkSequenceUpDownLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5213,7 +3758,7 @@ u8 MovementType_WalkSequenceUpDownLeftRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftRightUpDown, MovementType_WalkSequenceLeftRightUpDown_Callback, gMovementTypeFuncs_WalkSequenceLeftRightUpDown);
+movement_type_def(MovementType_WalkSequenceLeftRightUpDown, gMovementTypeFuncs_WalkSequenceLeftRightUpDown);
 
 u8 MovementType_WalkSequenceLeftRightUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5226,7 +3771,7 @@ u8 MovementType_WalkSequenceLeftRightUpDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownLeftRightUp, MovementType_WalkSequenceDownLeftRightUp_Callback, gMovementTypeFuncs_WalkSequenceDownLeftRightUp);
+movement_type_def(MovementType_WalkSequenceDownLeftRightUp, gMovementTypeFuncs_WalkSequenceDownLeftRightUp);
 
 u8 MovementType_WalkSequenceDownLeftRightUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5239,7 +3784,7 @@ u8 MovementType_WalkSequenceDownLeftRightUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpLeftDownRight, MovementType_WalkSequenceUpLeftDownRight_Callback, gMovementTypeFuncs_WalkSequenceUpLeftDownRight);
+movement_type_def(MovementType_WalkSequenceUpLeftDownRight, gMovementTypeFuncs_WalkSequenceUpLeftDownRight);
 
 u8 MovementType_WalkSequenceUpLeftDownRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5252,7 +3797,7 @@ u8 MovementType_WalkSequenceUpLeftDownRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownRightUpLeft, MovementType_WalkSequenceDownRightUpLeft_Callback, gMovementTypeFuncs_WalkSequenceDownRightUpLeft);
+movement_type_def(MovementType_WalkSequenceDownRightUpLeft, gMovementTypeFuncs_WalkSequenceDownRightUpLeft);
 
 u8 MovementType_WalkSequenceDownRightUpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5265,7 +3810,7 @@ u8 MovementType_WalkSequenceDownRightUpLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftDownRightUp, MovementType_WalkSequenceLeftDownRightUp_Callback, gMovementTypeFuncs_WalkSequenceLeftDownRightUp);
+movement_type_def(MovementType_WalkSequenceLeftDownRightUp, gMovementTypeFuncs_WalkSequenceLeftDownRightUp);
 
 u8 MovementType_WalkSequenceLeftDownRightUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5278,7 +3823,7 @@ u8 MovementType_WalkSequenceLeftDownRightUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightUpLeftDown, MovementType_WalkSequenceRightUpLeftDown_Callback, gMovementTypeFuncs_WalkSequenceRightUpLeftDown);
+movement_type_def(MovementType_WalkSequenceRightUpLeftDown, gMovementTypeFuncs_WalkSequenceRightUpLeftDown);
 
 u8 MovementType_WalkSequenceRightUpLeftDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5291,7 +3836,7 @@ u8 MovementType_WalkSequenceRightUpLeftDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceUpRightDownLeft, MovementType_WalkSequenceUpRightDownLeft_Callback, gMovementTypeFuncs_WalkSequenceUpRightDownLeft);
+movement_type_def(MovementType_WalkSequenceUpRightDownLeft, gMovementTypeFuncs_WalkSequenceUpRightDownLeft);
 
 u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5304,7 +3849,7 @@ u8 MovementType_WalkSequenceUpRightDownLeft_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceDownLeftUpRight, MovementType_WalkSequenceDownLeftUpRight_Callback, gMovementTypeFuncs_WalkSequenceDownLeftUpRight);
+movement_type_def(MovementType_WalkSequenceDownLeftUpRight, gMovementTypeFuncs_WalkSequenceDownLeftUpRight);
 
 u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5317,7 +3862,7 @@ u8 MovementType_WalkSequenceDownLeftUpRight_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceLeftUpRightDown, MovementType_WalkSequenceLeftUpRightDown_Callback, gMovementTypeFuncs_WalkSequenceLeftUpRightDown);
+movement_type_def(MovementType_WalkSequenceLeftUpRightDown, gMovementTypeFuncs_WalkSequenceLeftUpRightDown);
 
 u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5330,7 +3875,7 @@ u8 MovementType_WalkSequenceLeftUpRightDown_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 }
 
-fieldmap_object_cb(MovementType_WalkSequenceRightDownLeftUp, MovementType_WalkSequenceRightDownLeftUp_Callback, gMovementTypeFuncs_WalkSequenceRightDownLeftUp);
+movement_type_def(MovementType_WalkSequenceRightDownLeftUp, gMovementTypeFuncs_WalkSequenceRightDownLeftUp);
 
 u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5343,11 +3888,11 @@ u8 MovementType_WalkSequenceRightDownLeftUp_Step1(struct MapObject *mapObject, s
     return MoveNextDirectionInSequence(mapObject, sprite, directions);
 };
 
-fieldmap_object_cb(MovementType_CopyPlayer, MovementType_CopyPlayer_Callback, gMovementTypeFuncs_CopyPlayer);
+movement_type_def(MovementType_CopyPlayer, gMovementTypeFuncs_CopyPlayer);
 
 u8 MovementType_CopyPlayer_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     if (mapObject->directionSequenceIndex == 0)
     {
         mapObject->directionSequenceIndex = GetPlayerFacingDirection();
@@ -5505,7 +4050,7 @@ bool8 CopyablePlayerMovement_Jump(struct MapObject *mapObject, struct Sprite *sp
     direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     x = mapObject->currentCoords.x;
     y = mapObject->currentCoords.y;
-    sub_8060320(direction, &x, &y, 2, 2);
+    MoveCoordsInDirection(direction, &x, &y, 2, 2);
     FieldObjectSetSingleMovement(mapObject, sprite, GetJump2MovementAction(direction));
     if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
@@ -5516,7 +4061,7 @@ bool8 CopyablePlayerMovement_Jump(struct MapObject *mapObject, struct Sprite *sp
     return TRUE;
 }
 
-fieldmap_object_cb(MovementType_CopyPlayerInGrass, sub_805F904, gMovementTypeFuncs_CopyPlayerInGrass);
+movement_type_def(MovementType_CopyPlayerInGrass, gMovementTypeFuncs_CopyPlayerInGrass);
 
 u8 MovementType_CopyPlayerInGrass_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -5526,8 +4071,6 @@ u8 MovementType_CopyPlayerInGrass_Step1(struct MapObject *mapObject, struct Spri
     }
     return gCopyPlayerMovementFuncs[PlayerGetCopyableMovement()](mapObject, sprite, GetPlayerMovementDirection(), MetatileBehavior_IsPokeGrass);
 }
-
-static u8 MovementType_Disguise_Callback(struct MapObject *, struct Sprite *);
 
 void MovementType_TreeDisguise(struct Sprite *sprite)
 {
@@ -5543,9 +4086,9 @@ void MovementType_TreeDisguise(struct Sprite *sprite)
     meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-u8 MovementType_Disguise_Callback(struct MapObject *mapObject, struct Sprite *sprite)
+static u8 MovementType_Disguise_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     return 0;
 }
 
@@ -5563,8 +4106,6 @@ void MovementType_MountainDisguise(struct Sprite *sprite)
     meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Disguise_Callback);
 }
 
-u8 MovementType_Hidden_Callback(struct MapObject *mapObject, struct Sprite *sprite);
-
 void MovementType_Hidden(struct Sprite *sprite)
 {
     if (sprite->data[7] == 0)
@@ -5577,14 +4118,14 @@ void MovementType_Hidden(struct Sprite *sprite)
     meta_step(&gMapObjects[sprite->data[0]], sprite, MovementType_Hidden_Callback);
 }
 
-u8 MovementType_Hidden_Callback(struct MapObject *mapObject, struct Sprite *sprite)
+static u8 MovementType_Hidden_Callback(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return gMovementTypeFuncs_Hidden[sprite->data[1]](mapObject, sprite);
 }
 
 u8 MovementType_Hidden_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     return 0;
 }
 
@@ -5597,41 +4138,41 @@ u8 MovementType_WalkInPlace_Step1(struct MapObject *mapObject, struct Sprite *sp
     return 0;
 }
 
-fieldmap_object_cb(MovementType_WalkInPlace, MovementType_WalkInPlace_Callback, gMovementTypeFuncs_WalkInPlace);
+movement_type_def(MovementType_WalkInPlace, gMovementTypeFuncs_WalkInPlace);
 
 u8 MovementType_WalkInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetWalkInPlaceNormalMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_JogInPlace, MovementType_JogInPlace_Callback, gMovementTypeFuncs_JogInPlace);
+movement_type_def(MovementType_JogInPlace, gMovementTypeFuncs_JogInPlace);
 
 u8 MovementType_JogInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetWalkInPlaceFastMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_RunInPlace, MovementType_RunInPlace_Callback, gMovementTypeFuncs_RunInPlace);
+movement_type_def(MovementType_RunInPlace, gMovementTypeFuncs_RunInPlace);
 
 u8 MovementType_RunInPlace_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetWalkInPlaceFastestMovementAction(mapObject->facingDirection));
     sprite->data[1] = 1;
     return 1;
 }
 
-fieldmap_object_cb(MovementType_Invisible, MovementType_Invisible_Callback, gMovementTypeFuncs_Invisible);
+movement_type_def(MovementType_Invisible, gMovementTypeFuncs_Invisible);
 
 u8 MovementType_Invisible_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_reset(mapObject, sprite);
+    ClearMapObjectMovement(mapObject, sprite);
     FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementAction(mapObject->facingDirection));
     mapObject->invisible = 1;
     sprite->data[1] = 1;
@@ -5654,7 +4195,7 @@ u8 MovementType_Invisible_Step2(struct MapObject *mapObject, struct Sprite *spri
     return 0;
 }
 
-void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
+static void ClearMapObjectMovement(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->singleMovementActive = 0;
     mapObject->heldMovementActive = 0;
@@ -5794,7 +4335,7 @@ u8 GetTrainerFacingDirectionMovementType(u8 direction)
     return gTrainerFacingDirectionMovementTypes[direction];
 }
 
-u8 GetCollisionInDirection(struct MapObject *mapObject, u8 direction)
+static u8 GetCollisionInDirection(struct MapObject *mapObject, u8 direction)
 {
     s16 x;
     s16 y;
@@ -5804,15 +4345,11 @@ u8 GetCollisionInDirection(struct MapObject *mapObject, u8 direction)
     return GetCollisionAtCoords(mapObject, x, y, direction);
 }
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y);
-static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s16 y);
-bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction);
-
 u8 GetCollisionAtCoords(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
 {
     u8 direction;
     direction = dirn;
-    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRange(mapObject, x, y))
         return 1;
     else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
         return 2;
@@ -5825,11 +4362,11 @@ u8 GetCollisionAtCoords(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
     return 0;
 }
 
-u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+u8 GetCollisionFlagsAtCoords(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     u8 flags = 0;
 
-    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRange(mapObject, x, y))
         flags |= 1;
     if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->trackedByCamera && !CanCameraMoveInDirection(direction)))
         flags |= 2;
@@ -5840,7 +4377,7 @@ u8 sub_8060024(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     return flags;
 }
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y)
+static bool8 IsCoordOutsideFieldObjectMovementRange(struct MapObject *mapObject, s16 x, s16 y)
 {
     s16 minv;
     s16 maxv;
@@ -5862,7 +4399,7 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, 
     return FALSE;
 }
 
-bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+static bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     if (gOppositeDirectionBlockedMetatileFuncs[direction - 1](mapObject->currentMetatileBehavior)
         || gDirectionBlockedMetatileFuncs[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
@@ -5890,7 +4427,6 @@ static bool8 DoesObjectCollideWithObjectAt(struct MapObject *mapObject, s16 x, s
     return 0;
 }
 
-// this function is only used in berry.c, but its unknown whether its intended context is the berry tree check or if its checking for the flickering.
 bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 mapObjectId;
@@ -5917,33 +4453,25 @@ void MoveCoords(u8 direction, s16 *x, s16 *y)
     *y += gDirectionToVectors[direction].y;
 }
 
-void unref_sub_80602F8(u8 direction, s16 *x, s16 *y)
+void Unref_MovePixelCoords(u8 direction, s16 *x, s16 *y)
 {
     *x += gDirectionToVectors[direction].x << 4;
     *y += gDirectionToVectors[direction].y << 4;
 }
 
-void sub_8060320(u32 dirn, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
+static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
 {
-    u8 direction = dirn;
-    s16 dx2 = deltaX;
-    s16 dy2 = deltaY;
+    u8 direction = dir;
+    s16 dx2 = (u16)deltaX;
+    s16 dy2 = (u16)deltaY;
     if (gDirectionToVectors[direction].x > 0)
-    {
         *x += dx2;
-    }
     if (gDirectionToVectors[direction].x < 0)
-    {
         *x -= dx2;
-    }
     if (gDirectionToVectors[direction].y > 0)
-    {
         *y += dy2;
-    }
     if (gDirectionToVectors[direction].y < 0)
-    {
         *y -= dy2;
-    }
 }
 
 void sub_8060388(s16 x1, s16 y1, s16 *x2, s16 *y2)
@@ -6028,9 +4556,8 @@ bool8 FieldObjectIsMovementOverridden(struct MapObject *mapObject)
 bool8 FieldObjectIsHeldMovementActive(struct MapObject *mapObject)
 {
     if (mapObject->heldMovementActive && mapObject->movementActionId != 0xff)
-    {
         return TRUE;
-    }
+
     return FALSE;
 }
 
@@ -6056,9 +4583,7 @@ void FieldObjectForceSetHeldMovement(struct MapObject *mapObject, u8 movementAct
 void FieldObjectClearHeldMovementIfActive(struct MapObject *mapObject)
 {
     if (mapObject->heldMovementActive)
-    {
         FieldObjectClearHeldMovement(mapObject);
-    }
 }
 
 void FieldObjectClearHeldMovement(struct MapObject *mapObject)
@@ -6075,14 +4600,14 @@ bool8 FieldObjectCheckHeldMovementStatus(struct MapObject *mapObject)
     if (mapObject->heldMovementActive)
         return mapObject->heldMovementFinished;
 
-    return 0x10;
+    return 16;
 }
 
 bool8 FieldObjectClearHeldMovementIfFinished(struct MapObject *mapObject)
 {
     u8 heldMovementStatus;
     heldMovementStatus = FieldObjectCheckHeldMovementStatus(mapObject);
-    if (heldMovementStatus != 0 && heldMovementStatus != 0x10)
+    if (heldMovementStatus != 0 && heldMovementStatus != 16)
         FieldObjectClearHeldMovementIfActive(mapObject);
 
     return heldMovementStatus;
@@ -6096,18 +4621,10 @@ u8 FieldObjectGetHeldMovementActionId(struct MapObject *mapObject)
     return 0xFF;
 }
 
-extern void DoGroundEffects_OnSpawn(struct MapObject *mapObject, struct Sprite *sprite);
-extern void DoGroundEffects_OnBeginStep(struct MapObject *mapObject, struct Sprite *sprite);
-extern void DoGroundEffects_OnFinishStep(struct MapObject *mapObject, struct Sprite *sprite);
-void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite);
-void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite);
-void FieldObjectExecHeldMovementAction(struct MapObject *mapObject, struct Sprite *sprite);
-void FieldObjectUpdateSubpriority(struct MapObject *mapObject, struct Sprite *sprite);
-
 void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback)(struct MapObject *, struct Sprite *))
 {
     DoGroundEffects_OnSpawn(mapObject, sprite);
-    sub_80634A0(mapObject, sprite);
+    TryEnableMapObjectAnim(mapObject, sprite);
     if (FieldObjectIsHeldMovementActive(mapObject))
     {
         FieldObjectExecHeldMovementAction(mapObject, sprite);
@@ -6119,8 +4636,8 @@ void meta_step(struct MapObject *mapObject, struct Sprite *sprite, u8 (*callback
 
     DoGroundEffects_OnBeginStep(mapObject, sprite);
     DoGroundEffects_OnFinishStep(mapObject, sprite);
-    npc_obj_transfer_image_anim_pause_flag(mapObject, sprite);
-    sub_80634D0(mapObject, sprite);
+    UpdateMapObjectSpriteAnimPause(mapObject, sprite);
+    UpdateMapObjectVisibility(mapObject, sprite);
     FieldObjectUpdateSubpriority(mapObject, sprite);
 }
 
@@ -6297,7 +4814,7 @@ u32 state_to_direction(u8 a0, u32 a1, u32 a2)
     return gUnknown_08375767[a0 - 1][zffuOffset - 1];
 }
 
-void FieldObjectExecHeldMovementAction(struct MapObject *mapObject, struct Sprite *sprite)
+static void FieldObjectExecHeldMovementAction(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gMovementActionFuncs[mapObject->movementActionId][sprite->data[2]](mapObject, sprite))
     {
@@ -6305,7 +4822,7 @@ void FieldObjectExecHeldMovementAction(struct MapObject *mapObject, struct Sprit
     }
 }
 
-bool8 FieldObjectExecSingleMovementAction(struct MapObject *mapObject, struct Sprite *sprite)
+static bool8 FieldObjectExecSingleMovementAction(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gMovementActionFuncs[mapObject->movementActionId][sprite->data[2]](mapObject, sprite))
     {
@@ -6317,7 +4834,7 @@ bool8 FieldObjectExecSingleMovementAction(struct MapObject *mapObject, struct Sp
     return 0;
 }
 
-void FieldObjectSetSingleMovement(struct MapObject *mapObject, struct Sprite *sprite, u8 movementActionId)
+static void FieldObjectSetSingleMovement(struct MapObject *mapObject, struct Sprite *sprite, u8 movementActionId)
 {
     mapObject->movementActionId = movementActionId;
     sprite->data[2] = 0;
@@ -6325,8 +4842,8 @@ void FieldObjectSetSingleMovement(struct MapObject *mapObject, struct Sprite *sp
 
 void FaceDirection(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
-    FieldObjectSetDirection(mapObject, direction);
-    npc_coords_shift_still(mapObject);
+    SetFieldObjectDirection(mapObject, direction);
+    ShiftStillMapObjectCoords(mapObject);
     sub_805FE64(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
     sprite->animPaused = 1;
     sprite->data[2] = 1;
@@ -6362,9 +4879,9 @@ void sub_8060D20(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     s16 y;
     x = mapObject->currentCoords.x;
     y = mapObject->currentCoords.y;
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     MoveCoords(direction, &x, &y);
-    npc_coords_shift(mapObject, x, y);
+    ShiftMapObjectCoords(mapObject, x, y);
     oamt_npc_ministep_reset(sprite, direction, a3);
     sprite->animPaused = 0;
     mapObject->triggerGroundEffectsOnMove = 1;
@@ -6393,7 +4910,7 @@ bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprit
 {
     if (obj_npc_ministep(sprite))
     {
-        npc_coords_shift_still(mapObject);
+        ShiftStillMapObjectCoords(mapObject);
         mapObject->triggerGroundEffectsOnStop = 1;
         sprite->animPaused = 1;
         return 1;
@@ -6407,9 +4924,9 @@ void sub_8060E68(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     s16 y;
     x = mapObject->currentCoords.x;
     y = mapObject->currentCoords.y;
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     MoveCoords(direction, &x, &y);
-    npc_coords_shift(mapObject, x, y);
+    ShiftMapObjectCoords(mapObject, x, y);
     sub_806467C(sprite, direction);
     sprite->animPaused = 0;
     mapObject->triggerGroundEffectsOnMove = 1;
@@ -6426,7 +4943,7 @@ bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_806468C(sprite))
     {
-        npc_coords_shift_still(mapObject);
+        ShiftStillMapObjectCoords(mapObject);
         mapObject->triggerGroundEffectsOnStop = 1;
         sprite->animPaused = 1;
         return TRUE;
@@ -6586,9 +5103,9 @@ void sub_806113C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     memcpy(vSPp4, gUnknown_08375A34, sizeof gUnknown_08375A34);
     x = 0;
     y = 0;
-    FieldObjectSetDirection(mapObject, direction);
-    sub_8060320(direction, &x, &y, vSPp4[a4], vSPp4[a4]);
-    npc_coords_shift(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
+    SetFieldObjectDirection(mapObject, direction);
+    MoveCoordsInDirection(direction, &x, &y, vSPp4[a4], vSPp4[a4]);
+    ShiftMapObjectCoords(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
     sub_80646E4(sprite, direction, a4, a5);
     sprite->data[2] = 1;
     sprite->animPaused = 0;
@@ -6615,13 +5132,13 @@ u8 sub_806123C(struct MapObject *mapObject, struct Sprite *sprite, u8 (*const ca
     {
         x = 0;
         y = 0;
-        sub_8060320(mapObject->movementDirection, &x, &y, vSPp4[sprite->data[4]], vSPp4[sprite->data[4]]);
-        npc_coords_shift(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
+        MoveCoordsInDirection(mapObject->movementDirection, &x, &y, vSPp4[sprite->data[4]], vSPp4[sprite->data[4]]);
+        ShiftMapObjectCoords(mapObject, mapObject->currentCoords.x + x, mapObject->currentCoords.y + y);
         mapObject->triggerGroundEffectsOnMove = 1;
         mapObject->disableCoveringGroundEffects = 1;
     } else if (retval == 0xff)
     {
-        npc_coords_shift_still(mapObject);
+        ShiftStillMapObjectCoords(mapObject);
         mapObject->triggerGroundEffectsOnStop = 1;
         mapObject->landingJump = 1;
         sprite->animPaused = 1;
@@ -6670,7 +5187,7 @@ bool8 sub_8061358(struct MapObject *mapObject, struct Sprite *sprite)
         }
         return FALSE;
     }
-    FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
+    SetFieldObjectDirection(mapObject, GetOppositeDirection(mapObject->movementDirection));
     sub_805FE64(mapObject, sprite, GetMoveDirectionAnimNum(mapObject->facingDirection));
     return FALSE;
 }
@@ -6863,7 +5380,7 @@ bool8 MovementAction_WalkFastRight_Step1(struct MapObject *mapObject, struct Spr
 
 void sub_80616CC(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum, u16 duration)
 {
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sub_805FE28(mapObject, sprite, animNum);
     sprite->animPaused = 0;
     sprite->data[2] = 1;
@@ -7285,7 +5802,7 @@ bool8 MovementAction_PlayerRunRight_Step1(struct MapObject *mapObject, struct Sp
 void StartSpriteAnimInDirection(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum)
 {
     SetAndStartSpriteAnim(sprite, animNum, 0);
-    FieldObjectSetDirection(mapObject, direction);
+    SetFieldObjectDirection(mapObject, direction);
     sprite->data[2] = 1;
 }
 
@@ -7894,8 +6411,8 @@ bool8 MovementAction_WalkDownAffine1_Step1(struct MapObject *mapObject, struct S
 
 void sub_806295C(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
 {
-    FieldObjectSetDirection(mapObject, direction);
-    npc_coords_shift_still(mapObject);
+    SetFieldObjectDirection(mapObject, direction);
+    ShiftStillMapObjectCoords(mapObject);
     sub_805FE64(mapObject, sprite, GetAcroWheeliePedalDirectionAnimNum(direction));
     sprite->animPaused = 1;
     sprite->data[2] = 1;
@@ -8503,15 +7020,13 @@ bool8 MovementAction_PauseSpriteAnim(struct MapObject *mapObject, struct Sprite 
     return TRUE;
 }
 
-void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite)
+static void UpdateMapObjectSpriteAnimPause(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (mapObject->disableAnim)
-    {
         sprite->animPaused = 1;
-    }
 }
 
-void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite)
+static void TryEnableMapObjectAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (mapObject->enableAnim)
     {
@@ -8521,22 +7036,16 @@ void sub_80634A0(struct MapObject *mapObject, struct Sprite *sprite)
     }
 }
 
-void sub_80634E8(struct MapObject *, struct Sprite *);
-static void UpdateMapObjSpriteVisibility(struct MapObject *, struct Sprite *);
-
-void sub_80634D0(struct MapObject *mapObject, struct Sprite *sprite)
+static void UpdateMapObjectVisibility(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sub_80634E8(mapObject, sprite);
+    UpdateMapObjectIsOffscreen(mapObject, sprite);
     UpdateMapObjSpriteVisibility(mapObject, sprite);
 }
 
-#ifdef NONMATCHING
-void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
+static void UpdateMapObjectIsOffscreen(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    u16 x;
-    u16 y;
-    s16 x2;
-    s16 y2;
+    u16 x, y;
+    s16 x2, y2;
     const struct MapObjectGraphicsInfo *graphicsInfo;
     mapObject->offScreen = 0;
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
@@ -8544,13 +7053,15 @@ void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
     {
         x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
         y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
-    } else
+    }
+    else
     {
         x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
         y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
     }
-    x2 = graphicsInfo->width + x; // offending line
-    y2 = graphicsInfo->height + y; // similarly offending line
+
+    x2 = graphicsInfo->width + (s16)x;
+    y2 = graphicsInfo->height + (s16)y;
     if ((s16)x >= 0x100 || x2 < -0x10)
     {
         mapObject->offScreen = 1;
@@ -8560,130 +7071,8 @@ void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite)
         mapObject->offScreen = 1;
     }
 }
-#else
-NAKED
-void sub_80634E8(struct MapObject *mapObject, struct Sprite *sprite) {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    adds r5, r0, 0\n\
-    adds r4, r1, 0\n\
-    ldrb r1, [r5, 0x1]\n\
-    movs r0, 0x41\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r5, 0x1]\n\
-    ldrb r0, [r5, 0x5]\n\
-    bl GetFieldObjectGraphicsInfo\n\
-    adds r6, r0, 0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x3E\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x2\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _0806354C\n\
-    ldrh r1, [r4, 0x24]\n\
-    ldrh r0, [r4, 0x20]\n\
-    adds r1, r0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x28\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    ldr r2, _08063544 @ =gSpriteCoordOffsetX\n\
-    adds r0, r1\n\
-    ldrh r2, [r2]\n\
-    adds r0, r2\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    ldrh r1, [r4, 0x26]\n\
-    ldrh r0, [r4, 0x22]\n\
-    adds r1, r0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x29\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    ldr r2, _08063548 @ =gSpriteCoordOffsetY\n\
-    adds r0, r1\n\
-    ldrh r2, [r2]\n\
-    adds r0, r2\n\
-    b _08063574\n\
-    .align 2, 0\n\
-_08063544: .4byte gSpriteCoordOffsetX\n\
-_08063548: .4byte gSpriteCoordOffsetY\n\
-_0806354C:\n\
-    ldrh r1, [r4, 0x24]\n\
-    ldrh r0, [r4, 0x20]\n\
-    adds r1, r0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x28\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    adds r0, r1\n\
-    lsls r0, 16\n\
-    lsrs r3, r0, 16\n\
-    ldrh r1, [r4, 0x26]\n\
-    ldrh r0, [r4, 0x22]\n\
-    adds r1, r0\n\
-    adds r0, r4, 0\n\
-    adds r0, 0x29\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    adds r0, r1\n\
-_08063574:\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    ldrh r0, [r6, 0x8]\n\
-    adds r0, r3\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    ldrh r0, [r6, 0xA]\n\
-    adds r0, r2\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    lsls r0, r3, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0xFF\n\
-    bgt _0806359C\n\
-    lsls r0, r1, 16\n\
-    asrs r0, 16\n\
-    movs r1, 0x10\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    bge _080635A4\n\
-_0806359C:\n\
-    ldrb r0, [r5, 0x1]\n\
-    movs r1, 0x40\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x1]\n\
-_080635A4:\n\
-    lsls r0, r2, 16\n\
-    asrs r0, 16\n\
-    cmp r0, 0xAF\n\
-    bgt _080635B8\n\
-    lsls r0, r4, 16\n\
-    asrs r0, 16\n\
-    movs r1, 0x10\n\
-    negs r1, r1\n\
-    cmp r0, r1\n\
-    bge _080635C0\n\
-_080635B8:\n\
-    ldrb r0, [r5, 0x1]\n\
-    movs r1, 0x40\n\
-    orrs r0, r1\n\
-    strb r0, [r5, 0x1]\n\
-_080635C0:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-.syntax divided\n");
-}
-#endif
 
-void UpdateMapObjSpriteVisibility(struct MapObject *mapObject, struct Sprite *sprite)
+static void UpdateMapObjSpriteVisibility(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sprite->invisible = 0;
     if (mapObject->invisible || mapObject->offScreen)
@@ -8691,32 +7080,6 @@ void UpdateMapObjSpriteVisibility(struct MapObject *mapObject, struct Sprite *sp
         sprite->invisible = 1;
     }
 }
-
-static void nullsub(struct MapObject *mapObj, struct Sprite *sprite, u8);
-static void DoTracksGroundEffect_Footprints(struct MapObject *mapObj, struct Sprite *sprite, u8);
-static void DoTracksGroundEffect_BikeTireTracks(
-struct MapObject *mapObj, struct Sprite *sprite, u8);
-void GroundEffect_SpawnOnTallGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_MoveOnTallGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_SpawnOnLongGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_MoveOnLongGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_WaterReflection(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_IceReflection(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_FlowingWater(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_SandTracks(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_DeepSandTracks(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_Ripple(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_StepOnPuddle(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_SandPile(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_JumpOnTallGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_JumpOnLongGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_JumpOnShallowWater(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_JumpOnWater(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_JumpLandingDust(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_ShortGrass(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_HotSprings(struct MapObject *mapObj, struct Sprite *sprite);
-void GroundEffect_Seaweed(struct MapObject *mapObj, struct Sprite *sprite);
-u8 GetReflectionTypeByMetatileBehavior(u32 behavior);
 
 static void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {
@@ -8988,7 +7351,7 @@ u8 FieldObjectCheckForReflectiveSurface(struct MapObject *mapObj)
 #undef RETURN_REFLECTION_TYPE_AT
 }
 
-u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
+static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
     if (MetatileBehavior_IsIce(behavior))
         return 1;
@@ -9024,7 +7387,7 @@ u8 GetLedgeJumpDirection(s16 x, s16 y, u8 z)
     return 0;
 }
 
-void FieldObjectSetSpriteOamTableForLongGrass(struct MapObject *mapObj, struct Sprite *sprite)
+void SetMapObjectSpriteOamTableForLongGrass(struct MapObject *mapObj, struct Sprite *sprite)
 {
     if (mapObj->disableCoveringGroundEffects)
         return;
@@ -9077,7 +7440,7 @@ static const u8 sFieldObjectPriorities_08376070[] = {
     1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
-void FieldObjectUpdateZCoordAndPriority(struct MapObject *mapObj, struct Sprite *sprite)
+void UpdateMapObjectZCoordAndPriority(struct MapObject *mapObj, struct Sprite *sprite)
 {
     if (mapObj->fixedPriority)
         return;
@@ -9123,7 +7486,7 @@ void SetObjectSubpriorityByZCoord(u8 a, struct Sprite *sprite, u8 b)
     sprite->subpriority = tmp3 + sUnknown_08376050[a] + b;
 }
 
-void FieldObjectUpdateSubpriority(struct MapObject *mapObj, struct Sprite *sprite)
+static void FieldObjectUpdateSubpriority(struct MapObject *mapObj, struct Sprite *sprite)
 {
     if (mapObj->fixedPriority)
         return;
@@ -9209,20 +7572,20 @@ void GroundEffect_FlowingWater(struct MapObject *mapObj, struct Sprite *sprite)
     StartFieldEffectForMapObject(FLDEFF_FEET_IN_FLOWING_WATER, mapObj);
 }
 
-static void (*const gUnknown_08376080[])(struct MapObject *mapObj, struct Sprite *sprite, u8 a) = {
+static void (*const sGroundEffectTracksFuncs[])(struct MapObject *mapObj, struct Sprite *sprite, u8 a) = {
     nullsub, DoTracksGroundEffect_Footprints, DoTracksGroundEffect_BikeTireTracks,
 };
 
 void GroundEffect_SandTracks(struct MapObject *mapObj, struct Sprite *sprite)
 {
     const struct MapObjectGraphicsInfo *info = GetFieldObjectGraphicsInfo(mapObj->graphicsId);
-    gUnknown_08376080[info->tracks](mapObj, sprite, 0);
+    sGroundEffectTracksFuncs[info->tracks](mapObj, sprite, 0);
 }
 
 void GroundEffect_DeepSandTracks(struct MapObject *mapObj, struct Sprite *sprite)
 {
     const struct MapObjectGraphicsInfo *info = GetFieldObjectGraphicsInfo(mapObj->graphicsId);
-    gUnknown_08376080[info->tracks](mapObj, sprite, 1);
+    sGroundEffectTracksFuncs[info->tracks](mapObj, sprite, 1);
 }
 
 static void nullsub(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
@@ -9245,8 +7608,7 @@ static void DoTracksGroundEffect_Footprints(struct MapObject *mapObj, struct Spr
     FieldEffectStart(sandFootprints_FieldEffectData[a]);
 }
 
-static void DoTracksGroundEffect_BikeTireTracks(
-    struct MapObject *mapObj, struct Sprite *sprite, u8 a)
+static void DoTracksGroundEffect_BikeTireTracks(struct MapObject *mapObj, struct Sprite *sprite, u8 a)
 {
     //  Specifies which bike track shape to show next.
     //  For example, when the bike turns from up to right, it will show
@@ -9389,7 +7751,7 @@ static void StartTriggeredGroundEffects(struct MapObject *mapObj, struct Sprite 
             sGroundEffectFuncs[i](mapObj, sprite);
 }
 
-void filters_out_some_ground_effects(struct MapObject *mapObj, u32 *flags)
+void FilterOutDisabledCoveringGroundEffects(struct MapObject *mapObj, u32 *flags)
 {
     if (mapObj->disableCoveringGroundEffects)
     {
@@ -9411,144 +7773,55 @@ void FilterOutStepOnPuddleGroundEffectIfJumping(struct MapObject *mapObj, u32 *f
         *flags &= ~GROUND_EFFECT_FLAG_PUDDLE;
 }
 
-void DoGroundEffects_OnSpawn(struct MapObject *mapObj, struct Sprite *sprite)
+static void DoGroundEffects_OnSpawn(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u32 flags;
 
     if (mapObj->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        FieldObjectUpdateZCoordAndPriority(mapObj, sprite);
+        UpdateMapObjectZCoordAndPriority(mapObj, sprite);
         GetAllGroundEffectFlags_OnSpawn(mapObj, &flags);
-        FieldObjectSetSpriteOamTableForLongGrass(mapObj, sprite);
+        SetMapObjectSpriteOamTableForLongGrass(mapObj, sprite);
         StartTriggeredGroundEffects(mapObj, sprite, flags);
         mapObj->triggerGroundEffectsOnMove = 0;
         mapObj->disableCoveringGroundEffects = 0;
     }
 }
 
-void DoGroundEffects_OnBeginStep(struct MapObject *mapObj, struct Sprite *sprite)
+static void DoGroundEffects_OnBeginStep(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u32 flags;
 
     if (mapObj->triggerGroundEffectsOnMove)
     {
         flags = 0;
-        FieldObjectUpdateZCoordAndPriority(mapObj, sprite);
+        UpdateMapObjectZCoordAndPriority(mapObj, sprite);
         GetAllGroundEffectFlags_OnBeginStep(mapObj, &flags);
-        FieldObjectSetSpriteOamTableForLongGrass(mapObj, sprite);
-        filters_out_some_ground_effects(mapObj, &flags);
+        SetMapObjectSpriteOamTableForLongGrass(mapObj, sprite);
+        FilterOutDisabledCoveringGroundEffects(mapObj, &flags);
         StartTriggeredGroundEffects(mapObj, sprite, flags);
         mapObj->triggerGroundEffectsOnMove = 0;
         mapObj->disableCoveringGroundEffects = 0;
     }
 }
 
-void DoGroundEffects_OnFinishStep(struct MapObject *mapObj, struct Sprite *sprite)
+static void DoGroundEffects_OnFinishStep(struct MapObject *mapObj, struct Sprite *sprite)
 {
     u32 flags;
 
     if (mapObj->triggerGroundEffectsOnStop)
     {
         flags = 0;
-        FieldObjectUpdateZCoordAndPriority(mapObj, sprite);
+        UpdateMapObjectZCoordAndPriority(mapObj, sprite);
         GetAllGroundEffectFlags_OnFinishStep(mapObj, &flags);
-        FieldObjectSetSpriteOamTableForLongGrass(mapObj, sprite);
+        SetMapObjectSpriteOamTableForLongGrass(mapObj, sprite);
         FilterOutStepOnPuddleGroundEffectIfJumping(mapObj, &flags);
         StartTriggeredGroundEffects(mapObj, sprite, flags);
         mapObj->triggerGroundEffectsOnStop = 0;
         mapObj->landingJump = 0;
     }
 }
-
-typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
-
-void Step1(struct Sprite *sprite, u8 dir);
-void Step2(struct Sprite *sprite, u8 dir);
-void Step3(struct Sprite *sprite, u8 dir);
-void Step4(struct Sprite *sprite, u8 dir);
-void Step8(struct Sprite *sprite, u8 dir);
-
-const SpriteStepFunc Unknown_83760F0[] = {
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1,
-    Step1
-};
-
-const SpriteStepFunc Unknown_8376130[] = {
-    Step2,
-    Step2,
-    Step2,
-    Step2,
-    Step2,
-    Step2,
-    Step2,
-    Step2
-};
-
-const SpriteStepFunc Unknown_8376150[] = {
-    Step2,
-    Step3,
-    Step3,
-    Step2,
-    Step3,
-    Step3
-};
-
-const SpriteStepFunc Unknown_8376168[] = {
-    Step4,
-    Step4,
-    Step4,
-    Step4
-};
-
-const SpriteStepFunc Unknown_8376178[] = {
-    Step8,
-    Step8
-};
-
-const SpriteStepFunc *const gUnknown_08376180[] = {
-    Unknown_83760F0,
-    Unknown_8376130,
-    Unknown_8376150,
-    Unknown_8376168,
-    Unknown_8376178
-};
-
-const s16 gUnknown_08376194[] = {
-    16, 8, 6, 4, 2
-};
-
-const s8 Unknown_837619E[] = {
-     -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
-};
-
-const s8 Unknown_83761AE[] = {
-      0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
-};
-
-const s8 Unknown_83761BE[] = {
-     -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
-};
-
-const s8 *const gUnknown_083761D0[] = {
-    Unknown_837619E,
-    Unknown_83761AE,
-    Unknown_83761BE
-};
 
 bool8 FreezeMapObject(struct MapObject *mapObject)
 {
@@ -9575,11 +7848,11 @@ void FreezeMapObjects(void)
             FreezeMapObject(&gMapObjects[i]);
 }
 
-void FreezeMapObjectsExceptOne(u8 a1)
+void FreezeMapObjectsExceptOne(u8 mapObjectId)
 {
     u8 i;
     for (i = 0; i < 16; i++)
-        if (i != a1 && gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
+        if (i != mapObjectId && gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
             FreezeMapObject(&gMapObjects[i]);
 }
 
@@ -9601,42 +7874,107 @@ void UnfreezeMapObjects(void)
             UnfreezeMapObject(&gMapObjects[i]);
 }
 
-void Step1(struct Sprite *sprite, u8 dir)
+static void Step1(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += gDirectionToVectors[dir].x;
     sprite->pos1.y += gDirectionToVectors[dir].y;
 }
 
-void Step2(struct Sprite *sprite, u8 dir)
+static void Step2(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x;
     sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y;
 }
 
-void Step3(struct Sprite *sprite, u8 dir)
+static void Step3(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x + (u16) gDirectionToVectors[dir].x;
     sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y + (u16) gDirectionToVectors[dir].y;
 }
 
-void Step4(struct Sprite *sprite, u8 dir)
+static void Step4(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 4 * (u16) gDirectionToVectors[dir].x;
     sprite->pos1.y += 4 * (u16) gDirectionToVectors[dir].y;
 }
 
-void Step8(struct Sprite *sprite, u8 dir)
+static void Step8(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 8 * (u16) gDirectionToVectors[dir].x;
     sprite->pos1.y += 8 * (u16) gDirectionToVectors[dir].y;
 }
 
-void oamt_npc_ministep_reset(struct Sprite *sprite, u8 direction, u8 a3)
+static void oamt_npc_ministep_reset(struct Sprite *sprite, u8 direction, u8 a3)
 {
     sprite->data[3] = direction;
     sprite->data[4] = a3;
     sprite->data[5] = 0;
 }
+
+typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 direction);
+
+static const SpriteStepFunc Unknown_83760F0[] = {
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1,
+    Step1
+};
+
+static const SpriteStepFunc Unknown_8376130[] = {
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2,
+    Step2
+};
+
+static const SpriteStepFunc Unknown_8376150[] = {
+    Step2,
+    Step3,
+    Step3,
+    Step2,
+    Step3,
+    Step3
+};
+
+static const SpriteStepFunc Unknown_8376168[] = {
+    Step4,
+    Step4,
+    Step4,
+    Step4
+};
+
+static const SpriteStepFunc Unknown_8376178[] = {
+    Step8,
+    Step8
+};
+
+static const SpriteStepFunc *const gUnknown_08376180[] = {
+    Unknown_83760F0,
+    Unknown_8376130,
+    Unknown_8376150,
+    Unknown_8376168,
+    Unknown_8376178
+};
+
+static const s16 gUnknown_08376194[] = {
+    16, 8, 6, 4, 2
+};
 
 bool8 obj_npc_ministep(struct Sprite *sprite)
 {
@@ -9675,6 +8013,24 @@ bool8 sub_806468C(struct Sprite *sprite)
     else
         return FALSE;
 }
+
+static const s8 Unknown_837619E[] = {
+     -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
+};
+
+static const s8 Unknown_83761AE[] = {
+      0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
+};
+
+static const s8 Unknown_83761BE[] = {
+     -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
+};
+
+static const s8 *const gUnknown_083761D0[] = {
+    Unknown_837619E,
+    Unknown_83761AE,
+    Unknown_83761BE
+};
 
 s16 sub_80646C8(s16 a1, u8 a2)
 {

@@ -337,7 +337,7 @@ gSpecials::
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
-	def_special sub_810F8FC
+	def_special TryInitBattleTowerAwardManMapObject
 	def_special MoveSecretBase
 	def_special LoadPlayerBag
 	def_special sub_8081924

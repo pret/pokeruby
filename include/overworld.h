@@ -209,8 +209,8 @@ bool32 sub_8055870(void);
 u32 sub_80558AC(void);
 u32 sub_8055910(void);
 u32 sub_8055940(void);
-// ZeroLinkPlayerMapObject
-void strange_npc_table_clear(void);
+// ClearLinkPlayerMapObject
+void ClearLinkPlayerMapObjects(void);
 // ZeroMapObject
 void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
 void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);

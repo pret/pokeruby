@@ -532,7 +532,7 @@ static u8 AcroBikeHandleInputSidewaysJump(u8 *ptr, u16 newKeys, u16 heldKeys)
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     playerMapObj->facingDirectionLocked = 0;
-    FieldObjectSetDirection(playerMapObj, playerMapObj->facingDirection);
+    SetFieldObjectDirection(playerMapObj, playerMapObj->facingDirection);
     gPlayerAvatar.acroBikeState = ACRO_STATE_NORMAL;
     return CheckMovementInputAcroBike(ptr, newKeys, heldKeys);
 }

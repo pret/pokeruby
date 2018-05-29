@@ -165,7 +165,7 @@ static bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 a
 
     for (i = 0; i <= approachDistance - 1; i++, MoveCoords(direction, &x, &y))
     {
-        collision = sub_8060024(trainerObj, x, y, direction);
+        collision = GetCollisionFlagsAtCoords(trainerObj, x, y, direction);
         if (collision != 0 && (collision & COLLISION_MASK))
             return FALSE;
     }
@@ -314,8 +314,8 @@ static bool8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainer
         return FALSE;
 
     SetTrainerMovementType(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-    sub_805C774(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
-    sub_805C754(trainerObj);
+    OverrideMovementTypeForMapObject(trainerObj, GetTrainerFacingDirectionMovementType(trainerObj->facingDirection));
+    OverrideTemplateCoordsForMapObject(trainerObj);
 
     playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     if (FieldObjectIsMovementOverridden(playerObj) && !FieldObjectClearHeldMovementIfFinished(playerObj))
@@ -431,7 +431,7 @@ void sub_80846E4(u8 taskId)
     if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
         SetTrainerMovementType(mapObj, GetTrainerFacingDirectionMovementType(mapObj->facingDirection));
-        sub_805C774(mapObj, GetTrainerFacingDirectionMovementType(mapObj->facingDirection));
+        OverrideMovementTypeForMapObject(mapObj, GetTrainerFacingDirectionMovementType(mapObj->facingDirection));
         DestroyTask(taskId);
     }
     else

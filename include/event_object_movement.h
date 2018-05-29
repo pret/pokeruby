@@ -247,24 +247,24 @@ enum {
 
 extern const u8 gUnknown_0830FD14[];
 
-#define fieldmap_object_cb(setup, callback, table) \
-static u8 callback(struct MapObject *, struct Sprite *);\
+#define movement_type_def(setup, table) \
+static u8 setup##_callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, setup##_callback);\
 }\
-static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
+static u8 setup##_callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     return table[sprite->data[1]](mapObject, sprite);\
 }
 
-#define fieldmap_object_empty_callback(setup, callback) \
-static u8 callback(struct MapObject *, struct Sprite *);\
+#define movement_type_empty_callback(setup) \
+static u8 setup##_callback(struct MapObject *, struct Sprite *);\
 void setup(struct Sprite *sprite)\
 {\
-    meta_step(&gMapObjects[sprite->data[0]], sprite, callback);\
+    meta_step(&gMapObjects[sprite->data[0]], sprite, setup##_callback);\
 }\
-static u8 callback(struct MapObject *mapObject, struct Sprite *sprite)\
+static u8 setup##_callback(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     return 0;\
 }
@@ -284,22 +284,21 @@ extern const u8 gFieldEffectPic_CutGrass[];
 extern const u16 gFieldEffectObjectPalette6[];
 
 void sub_805C058(struct MapObject *mapObject, s16 a, s16 b);
-void FieldObjectSetDirection(struct MapObject *pObject, u8 unk_18);
+void SetFieldObjectDirection(struct MapObject *pObject, u8 unk_18);
 void MoveCoords(u8 direction, s16 *x, s16 *y);
 void meta_step(struct MapObject *pObject,  struct Sprite *pSprite,  u8 (*d8)(struct MapObject *, struct Sprite *));
-void npc_reset(struct MapObject *mapObject, struct Sprite *sprite);
 
-u8 sub_805CAAC(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CADC(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CAEC(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CB00(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CB5C(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CBB8(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CC14(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CC70(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CCAC(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CCE8(s16 a0, s16 a1, s16 a2, s16 a3);
-u8 sub_805CD24(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetVectorDirection(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_SouthNorth(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_WestEast(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_WestNorth(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_EastNorth(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_WestSouth(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_EastSouth(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_SouthNorthWest(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_SouthNorthEast(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_NorthWestEast(s16 a0, s16 a1, s16 a2, s16 a3);
+u8 GetLimitedVectorDirection_SouthWestEast(s16 a0, s16 a1, s16 a2, s16 a3);
 
 u8 CopyablePlayerMovement_None(struct MapObject *, struct Sprite *, u8, bool8(u8));
 u8 CopyablePlayerMovement_FaceDirection(struct MapObject *, struct Sprite *, u8, bool8(u8));
@@ -566,13 +565,13 @@ u32 state_to_direction(u8, u32, u32);
 
 void sub_805AA98();
 void sub_805AAB0(void);
-u8 sub_805AB54(void);
+u8 GetFirstInactiveMapObjectId(void);
 u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
 u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 u8 GetFieldObjectIdByLocalId(u8);
-u8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
+u8 GetAvailableMapObjectId(u16, u8, u8, u8 *);
 void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
 void RemoveFieldObjectInternal(struct MapObject *);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
@@ -586,7 +585,7 @@ void sub_805B980(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
-void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
+void SetFieldObjectDynamicGraphicsId(struct MapObject *);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, void *, void *, void *);
 void sub_805BCC0(s16 x, s16 y);
@@ -600,20 +599,20 @@ void pal_patch_for_npc(u16, u16);
 u8 FindFieldObjectPaletteIndexByTag(u16);
 void npc_load_two_palettes__no_record(u16, u8);
 void npc_load_two_palettes__and_record(u16, u8);
-void npc_coords_shift(struct MapObject *pObject, s16 x, s16 y);
+void ShiftMapObjectCoords(struct MapObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
-void npc_coords_shift_still(struct MapObject *pObject);
+void ShiftStillMapObjectCoords(struct MapObject *pObject);
 u8 GetFieldObjectIdByXYZ(u16, u16, u8);
-void UpdateFieldObjectsForCameraUpdate(s16, s16);
+void UpdateMapObjectsForCameraUpdate(s16, s16);
 u8 AddCameraObject(u8);
 void CameraObjectReset1(void);
 u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 u8 FieldObjectGetBerryTreeId(u8);
 struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
-void sub_805C754(struct MapObject *pObject);
-void sub_805C774(struct MapObject *, u8);
-void sub_805C78C(u8, u8, u8);
+void OverrideTemplateCoordsForMapObject(struct MapObject *pObject);
+void OverrideMovementTypeForMapObject(struct MapObject *, u8);
+void TryOverrideTemplateCoordsForMapObject(u8, u8, u8);
 void sub_805C7C4(u8 i);
 u8 GetFaceDirectionAnimNum(u8);
 u8 GetMoveDirectionAnimNum(u8 unk_19);
@@ -624,7 +623,7 @@ u8 GetFishingBiteDirectionAnimNum(u8);
 void SetTrainerMovementType(struct MapObject *, u8);
 u8 GetTrainerFacingDirectionMovementType(u8);
 u8 GetCollisionAtCoords(struct MapObject *, s16, s16, u32);
-u8 sub_8060024(struct MapObject *, s16, s16, u8);
+u8 GetCollisionFlagsAtCoords(struct MapObject *, s16, s16, u8);
 bool8 IsBerryTreeSparkling(u8, u8, u8);
 void sub_8060288(u8, u8, u8);
 void sub_8060388(s16, s16, s16 *, s16 *);
@@ -669,11 +668,9 @@ u8 GetAcroPopWheelieMoveDirectionMovementAction(u8);
 u8 GetAcroWheelieMoveDirectionMovementAction(u8);
 u8 GetAcroEndWheelieMoveDirectionMovementAction(u8);
 u8 GetOppositeDirection(u8);
-void sub_80634D0(struct MapObject *, struct Sprite *);
 u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
-u8 sub_805ADDC(u8);
-void sub_8060320(u32, s16 *, s16 *, s16, s16);
+u8 TryInitLocalFieldObject(u8);
 u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
 u16 npc_paltag_by_palslot(u8);
 void sub_8060470(s16 *, s16 *, s16, s16);
@@ -684,7 +681,6 @@ void UnfreezeMapObjects(void);
 void UpdateFieldSpriteVisibility(struct Sprite *sprite, bool8 invisible);
 void TurnMapObject(u8, u8);
 void UnfreezeMapObject(struct MapObject *mapObject);
-void oamt_npc_ministep_reset(struct Sprite *sprite, u8 a2, u8 a3);
 void sub_806467C(struct Sprite *sprite, u8 direction);
 bool8 sub_806468C(struct Sprite *sprite);
 void sub_80646E4(struct Sprite *sprite, u8 a2, u8 a3, u8 a4);

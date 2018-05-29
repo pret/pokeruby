@@ -1068,7 +1068,7 @@ bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    sub_805C78C(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    TryOverrideTemplateCoordsForMapObject(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     return FALSE;
 }
 

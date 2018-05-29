@@ -2475,29 +2475,29 @@ bool32 sub_8055940(void)
     return TRUE;
 }
 
-void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
+void ClearLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
 {
     memset(linkPlayerMapObj, 0, sizeof(struct LinkPlayerMapObject));
 }
 
-void strange_npc_table_clear(void)
+void ClearLinkPlayerMapObjects(void)
 {
     memset(gLinkPlayerMapObjects, 0, sizeof(gLinkPlayerMapObjects));
 }
 
-void ZeroMapObject(struct MapObject *mapObj)
+static void ClearMapObject(struct MapObject *mapObj)
 {
     memset(mapObj, 0, sizeof(struct MapObject));
 }
 
 void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 {
-    u8 mapObjId = sub_805AB54();
+    u8 mapObjId = GetFirstInactiveMapObjectId();
     struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
     struct MapObject *mapObj = &gMapObjects[mapObjId];
 
-    ZeroLinkPlayerMapObject(linkPlayerMapObj);
-    ZeroMapObject(mapObj);
+    ClearLinkPlayerMapObject(linkPlayerMapObj);
+    ClearMapObject(mapObj);
 
     linkPlayerMapObj->active = 1;
     linkPlayerMapObj->linkPlayerId = linkPlayerId;
@@ -2645,7 +2645,7 @@ static u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapOb
     else
     {
         mapObj->directionSequenceIndex = 16;
-        npc_coords_shift(mapObj, x, y);
+        ShiftMapObjectCoords(mapObj, x, y);
         FieldObjectUpdateZCoord(mapObj);
         return 1;
     }
@@ -2669,7 +2669,7 @@ static void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct Map
     MoveCoords(mapObj->range.as_byte, &mapObj->initialCoords.x, &mapObj->initialCoords.y);
     if (!mapObj->directionSequenceIndex)
     {
-        npc_coords_shift_still(mapObj);
+        ShiftStillMapObjectCoords(mapObj);
         linkPlayerMapObj->mode = 2;
     }
 }

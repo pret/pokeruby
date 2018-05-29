@@ -196,7 +196,7 @@ static u8 (*const gUnknown_0830FC98[])(struct Task *, struct MapObject *) =
     sub_805A1B8,
 };
 
-fieldmap_object_empty_callback(MovementType_Player, MovementType_Player_Callback);
+movement_type_empty_callback(MovementType_Player);
 
 void player_step(u8 direction, u16 newKeys, u16 heldKeys)
 {
@@ -295,7 +295,7 @@ bool8 ForcedMovement_None(void)
 
         playerMapObj->facingDirectionLocked = 0;
         playerMapObj->enableAnim = 1;
-        FieldObjectSetDirection(playerMapObj, playerMapObj->facingDirection);
+        SetFieldObjectDirection(playerMapObj, playerMapObj->facingDirection);
         gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_6;
     }
     return FALSE;
@@ -979,7 +979,7 @@ void sub_80597F4(void)
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
 
     npc_clear_strange_bits(playerMapObj);
-    FieldObjectSetDirection(playerMapObj, playerMapObj->facingDirection);
+    SetFieldObjectDirection(playerMapObj, playerMapObj->facingDirection);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         Bike_HandleBumpySlopeJump();
@@ -1135,8 +1135,8 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerMapObjTemplate.movementType = MOVEMENT_TYPE_PLAYER;
     playerMapObjTemplate.movementRangeX = 0;
     playerMapObjTemplate.movementRangeY = 0;
-    playerMapObjTemplate.unkC = 0;
-    playerMapObjTemplate.unkE = 0;
+    playerMapObjTemplate.trainerType = 0;
+    playerMapObjTemplate.trainerRange_berryTreeId = 0;
     playerMapObjTemplate.script = NULL;
     playerMapObjTemplate.flagId = 0;
     mapObjectId = SpawnSpecialFieldObject(&playerMapObjTemplate);

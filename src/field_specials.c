@@ -2040,9 +2040,9 @@ u16 ScriptGetPartyMonSpecies(void)
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
 }
 
-void sub_810F8FC(void)
+void TryInitBattleTowerAwardManMapObject(void)
 {
-    sub_805ADDC(6);
+    TryInitLocalFieldObject(6);
 }
 
 u16 GetDaysUntilPacifidlogTMAvailable(void)

@@ -13,18 +13,18 @@ u8 (*const gMovementTypeFuncs_WanderAround[])(struct MapObject *, struct Sprite 
 
 const u8 gStandardDirections[] = {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST};
 
-u8 (*const gUnknown_08375244[])(s16, s16, s16, s16) = {
-    sub_805CAAC,
-    sub_805CADC,
-    sub_805CAEC,
-    sub_805CB00,
-    sub_805CB5C,
-    sub_805CBB8,
-    sub_805CC14,
-    sub_805CC70,
-    sub_805CCAC,
-    sub_805CCE8,
-    sub_805CD24
+u8 (*const gGetVectorDirectionFuncs[])(s16, s16, s16, s16) = {
+    GetVectorDirection,
+    GetLimitedVectorDirection_SouthNorth,
+    GetLimitedVectorDirection_WestEast,
+    GetLimitedVectorDirection_WestNorth,
+    GetLimitedVectorDirection_EastNorth,
+    GetLimitedVectorDirection_WestSouth,
+    GetLimitedVectorDirection_EastSouth,
+    GetLimitedVectorDirection_SouthNorthWest,
+    GetLimitedVectorDirection_SouthNorthEast,
+    GetLimitedVectorDirection_NorthWestEast,
+    GetLimitedVectorDirection_SouthWestEast
 };
 
 u8 (*const gMovementTypeFuncs_LookAround[])(struct MapObject *, struct Sprite *) = {

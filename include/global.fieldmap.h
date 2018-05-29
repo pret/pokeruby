@@ -81,12 +81,11 @@ struct MapObjectTemplate
     /*0x09*/ u8 movementType;
     /*0x0A*/ u8 movementRangeX:4;
              u8 movementRangeY:4;
-    /*0x0C*/ u16 unkC;
-    /*0x0E*/ u16 unkE;
+    /*0x0C*/ u16 trainerType;
+    /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ u8 *script;
     /*0x14*/ u16 flagId;
-    /*0x16*/ u8 filler_16[2];
-};  /*size = 0x18*/
+};
 
 struct WarpEvent
 {

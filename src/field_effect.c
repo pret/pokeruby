@@ -2003,7 +2003,7 @@ void sub_8087914(struct Task *task)
     {
         if (task->data[14] == 0 && !gPaletteFade.active && sub_8054034() == TRUE)
         {
-            FieldObjectSetDirection(mapObject, task->data[15]);
+            SetFieldObjectDirection(mapObject, task->data[15]);
             sub_8053678();
             warp_in();
             gFieldCallback = mapldr_080859D4;
