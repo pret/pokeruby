@@ -796,7 +796,7 @@ void PlayerGoSpeed4(u8 a)
 
 void sub_805940C(u8 a)
 {
-    PlayerSetAnimId(sub_80607F4(a), 2);
+    PlayerSetAnimId(GetPlayerRunMovementAction(a), 2);
 }
 
 void PlayerOnBikeCollide(u8 a)
@@ -879,7 +879,7 @@ void PlayerLedgeHoppingWheelie(u8 a)
 void PlayerAcroTurnJump(u8 direction)
 {
     PlaySE(SE_JITE_PYOKO);
-    PlayerSetAnimId(sub_8060878(direction), 1);
+    PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
 }
 
 void sub_80595DC(u8 direction)
@@ -1291,7 +1291,7 @@ u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct MapObject *mapObje
     if (FieldObjectClearHeldMovementIfFinished(mapObject))
     {
         PlaySE(SE_DANSA);
-        FieldObjectSetHeldMovement(mapObject, sub_806084C(mapObject->facingDirection));
+        FieldObjectSetHeldMovement(mapObject, GetJumpInPlaceMovementAction(mapObject->facingDirection));
         task->data[1]++;
         if (task->data[1] > 1)
         {
@@ -1402,7 +1402,7 @@ static void taskFF_0805D1D4(u8 taskId)
             return;
     }
     sub_8127ED0(playerMapObj->fieldEffectSpriteId, 2);
-    FieldObjectSetHeldMovement(playerMapObj, sub_80608D0((u8)gTasks[taskId].data[0]));
+    FieldObjectSetHeldMovement(playerMapObj, GetJumpSpecialMovementAction((u8)gTasks[taskId].data[0]));
     gTasks[taskId].func = sub_805A2D0;
 }
 

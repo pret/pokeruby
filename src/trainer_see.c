@@ -264,7 +264,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
     u8 direction;
 
     FieldObjectGetLocalIdAndMap(trainerObj, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
     direction = GetFaceDirectionMovementAction(trainerObj->facingDirection);
     FieldObjectSetHeldMovement(trainerObj, direction);
     task->data[0]++;
@@ -273,7 +273,7 @@ static bool8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_80843DC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (FieldEffectActiveListContains(0))
+    if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
     {
         return FALSE;
     }
@@ -342,7 +342,7 @@ static bool8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainer
     if (!FieldObjectIsMovementOverridden(trainerObj)
      || FieldObjectClearHeldMovementIfFinished(trainerObj))
     {
-        FieldObjectSetHeldMovement(trainerObj, 0x59);
+        FieldObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_REVEAL_TRAINER);
         task->data[0]++;
     }
     return FALSE;
@@ -361,7 +361,7 @@ static bool8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainer
     if (!FieldObjectIsMovementOverridden(trainerObj)
      || FieldObjectClearHeldMovementIfFinished(trainerObj))
     {
-        FieldObjectSetHeldMovement(trainerObj, 0x3E);
+        FieldObjectSetHeldMovement(trainerObj, MOVEMENT_ACITON_FACE_PLAYER);
         task->data[0]++;
     }
     return FALSE;
@@ -393,7 +393,7 @@ static bool8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainer
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
         FieldObjectClearHeldMovementIfFinished(trainerObj);
-        FieldObjectSetHeldMovement(trainerObj, sub_806084C(trainerObj->facingDirection));
+        FieldObjectSetHeldMovement(trainerObj, GetJumpInPlaceMovementAction(trainerObj->facingDirection));
         task->data[0]++;
     }
     return FALSE;
@@ -401,7 +401,7 @@ static bool8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainer
 
 static bool8 sub_80846C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if (!FieldEffectActiveListContains(49))
+    if (!FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
         task->data[0] = 3;
 
     return FALSE;
@@ -428,7 +428,7 @@ void sub_80846E4(u8 taskId)
         task->data[7]++;
     }
     gTrainerSeeFuncList2[task->data[0]](taskId, task, mapObj);
-    if (task->data[0] == 3 && !FieldEffectActiveListContains(49))
+    if (task->data[0] == 3 && !FieldEffectActiveListContains(FLDEFF_POP_OUT_OF_ASH))
     {
         npc_set_running_behaviour_etc(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
         sub_805C774(mapObj, npc_running_behaviour_by_direction(mapObj->facingDirection));
@@ -493,7 +493,7 @@ static const struct SpriteTemplate gSpriteTemplate_839B528 = {
     0xffff, 4100, &gOamData_839B4D8, gSpriteAnimTable_839B508, gSpriteImageTable_839B4F0, gDummySpriteAffineAnimTable, objc_exclamation_mark_probably
 };
 
-u8 FldEff_ExclamationMarkIcon1(void)
+u8 FldEff_ExclamationMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x53);
 
@@ -503,7 +503,7 @@ u8 FldEff_ExclamationMarkIcon1(void)
     return 0;
 }
 
-u8 FldEff_ExclamationMarkIcon2(void)
+u8 FldEff_QuestionMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x52);
 

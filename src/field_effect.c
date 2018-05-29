@@ -2861,7 +2861,7 @@ void sub_8088A78(struct Task *task)
         mapObject = &gMapObjects[gPlayerAvatar.mapObjectId];
         sub_805B980(mapObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         FieldObjectClearHeldMovementIfFinished(mapObject);
-        FieldObjectSetHeldMovement(mapObject, sub_80608D0(mapObject->movementDirection));
+        FieldObjectSetHeldMovement(mapObject, GetJumpSpecialMovementAction(mapObject->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
         gFieldEffectArguments[1] = task->data[2];
         gFieldEffectArguments[2] = gPlayerAvatar.mapObjectId;

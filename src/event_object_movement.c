@@ -2103,8 +2103,20 @@ const u8 gWalkFastestMovementActions[] = {
 	MOVEMENT_ACTION_WALK_FASTEST_LEFT,
 	MOVEMENT_ACTION_WALK_FASTEST_RIGHT,
 };
-const u8 gUnknown_083756E6[] = {0x31, 0x31, 0x32, 0x33, 0x34};
-const u8 gUnknown_083756EB[] = {0x35, 0x35, 0x36, 0x37, 0x38};
+const u8 gSlideMovementActions[] = {
+	MOVEMENT_ACTION_SLIDE_DOWN,
+	MOVEMENT_ACTION_SLIDE_DOWN,
+	MOVEMENT_ACTION_SLIDE_UP,
+	MOVEMENT_ACTION_SLIDE_LEFT,
+	MOVEMENT_ACTION_SLIDE_RIGHT,
+};
+const u8 gPlayerRunMovementActions[] = {
+	MOVEMENT_ACTION_PLAYER_RUN_DOWN,
+	MOVEMENT_ACTION_PLAYER_RUN_DOWN,
+	MOVEMENT_ACTION_PLAYER_RUN_UP,
+	MOVEMENT_ACTION_PLAYER_RUN_LEFT,
+	MOVEMENT_ACTION_PLAYER_RUN_RIGHT,
+};
 const u8 gJump2MovementActions[] = {
 	MOVEMENT_ACTION_JUMP_2_DOWN,
 	MOVEMENT_ACTION_JUMP_2_DOWN,
@@ -2112,10 +2124,34 @@ const u8 gJump2MovementActions[] = {
 	MOVEMENT_ACTION_JUMP_2_LEFT,
 	MOVEMENT_ACTION_JUMP_2_RIGHT,
 };
-const u8 gUnknown_083756F5[] = {0x46, 0x46, 0x47, 0x48, 0x49};
-const u8 gUnknown_083756FA[] = {0x4B, 0x4B, 0x4A, 0x4D, 0x4C};
-const u8 gUnknown_083756FF[] = {0x42, 0x42, 0x43, 0x44, 0x45};
-const u8 gUnknown_08375704[] = {0x3A, 0x3A, 0x3B, 0x3C, 0x3D};
+const u8 gJumpInPlaceMovementActions[] = {
+	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT,
+};
+const u8 gJumpInPlaceTurnAroundMovementActions[] = {
+	MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_UP_DOWN,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN_UP,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_RIGHT_LEFT,
+	MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT,
+};
+const u8 gJumpMovementActions[] = {
+	MOVEMENT_ACITON_JUMP_DOWN,
+	MOVEMENT_ACITON_JUMP_DOWN,
+	MOVEMENT_ACITON_JUMP_UP,
+	MOVEMENT_ACITON_JUMP_LEFT,
+	MOVEMENT_ACITON_JUMP_RIGHT,
+};
+const u8 gJumpSpecialMovementActions[] = {
+	MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
+	MOVEMENT_ACTION_JUMP_SPECIAL_DOWN,
+	MOVEMENT_ACTION_JUMP_SPECIAL_UP,
+	MOVEMENT_ACTION_JUMP_SPECIAL_LEFT,
+	MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
+};
 const u8 gWalkInPlaceSlowMovementActions[] = {
 	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
 	MOVEMENT_ACTION_WALK_IN_PLACE_SLOW_DOWN,
@@ -5248,7 +5284,7 @@ bool8 CopyablePlayerMovement_GoSpeed2(struct MapObject *mapObject, struct Sprite
     return TRUE;
 }
 
-bool8 CopyablePlayerMovement_GoSpeed3(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
+bool8 CopyablePlayerMovement_Slide(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
     s16 x;
@@ -5257,7 +5293,7 @@ bool8 CopyablePlayerMovement_GoSpeed3(struct MapObject *mapObject, struct Sprite
     direction = playerDirection;
     direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
     FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
-    FieldObjectSetSingleMovement(mapObject, sprite, sub_80607C8(direction));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetSlideMovementAction(direction));
     if (GetCollisionAtCoords(mapObject, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))
     {
         FieldObjectSetSingleMovement(mapObject, sprite, GetFaceDirectionMovementAction(direction));
@@ -5273,7 +5309,7 @@ bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 pl
 
     direction = playerDirection;
     direction = state_to_direction(gInitialMovementTypeFacingDirections[mapObject->movementType], mapObject->directionSequenceIndex, direction);
-    FieldObjectSetSingleMovement(mapObject, sprite, sub_806084C(direction));
+    FieldObjectSetSingleMovement(mapObject, sprite, GetJumpInPlaceMovementAction(direction));
     mapObject->singleMovementActive = TRUE;
     sprite->data[1] = 2;
     return TRUE;
@@ -5572,21 +5608,15 @@ void sub_805FE64(struct MapObject *mapObject, struct Sprite *sprite, u8 movement
     }
 }
 
-u8 sub_805FE90(s16 a0, s16 a1, s16 a2, s16 a3)
+static u8 GetDirectionToFace(s16 x1, s16 y1, s16 x2, s16 y2)
 {
-    if (a0 > a2)
-    {
+    if (x1 > x2)
         return DIR_WEST;
-    } else if (a0 < a2)
-    {
+    if (x1 < x2)
         return DIR_EAST;
-    } else if (a1 > a3)
-    {
+    if (y1 > y2)
         return DIR_NORTH;
-    } else
-    {
-        return DIR_SOUTH;
-    }
+    return DIR_SOUTH;
 }
 
 void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 movementType)
@@ -5950,13 +5980,13 @@ dirn_to_anim(GetWalkNormalMovementAction, gWalkNormalMovementActions)
 dirn_to_anim(GetWalkFastMovementAction, gWalkFastMovementActions)
 dirn_to_anim(GetRideWaterCurrentMovementAction, gRideWaterCurrentMovementActions)
 dirn_to_anim(GetWalkFastestMovementAction, gWalkFastestMovementActions)
-dirn_to_anim(sub_80607C8, gUnknown_083756E6)
-dirn_to_anim(sub_80607F4, gUnknown_083756EB)
+dirn_to_anim(GetSlideMovementAction, gSlideMovementActions)
+dirn_to_anim(GetPlayerRunMovementAction, gPlayerRunMovementActions)
 dirn_to_anim(GetJump2MovementAction, gJump2MovementActions)
-dirn_to_anim(sub_806084C, gUnknown_083756F5)
-dirn_to_anim(sub_8060878, gUnknown_083756FA)
-dirn_to_anim(sub_80608A4, gUnknown_083756FF)
-dirn_to_anim(sub_80608D0, gUnknown_08375704)
+dirn_to_anim(GetJumpInPlaceMovementAction, gJumpInPlaceMovementActions)
+dirn_to_anim(GetJumpInPlaceTurnAroundMovementAction, gJumpInPlaceTurnAroundMovementActions)
+dirn_to_anim(sub_80608A4, gJumpMovementActions)
+dirn_to_anim(GetJumpSpecialMovementAction, gJumpSpecialMovementActions)
 dirn_to_anim(GetWalkInPlaceSlowMovementAction, gWalkInPlaceSlowMovementActions)
 dirn_to_anim(GetWalkInPlaceNormalMovementAction, gWalkInPlaceNormalMovementActions)
 dirn_to_anim(GetWalkInPlaceFastMovementAction, gWalkInPlaceFastMovementActions)
@@ -6945,15 +6975,15 @@ bool8 MovementAction_WalkFastestRight_Step1(struct MapObject *mapObject, struct 
     return FALSE;
 }
 
-bool8 sub_8061D18(struct MapObject *, struct Sprite *);
+bool8 MovementAction_SlideDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061CF8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_go_anim(mapObject, sprite, DIR_SOUTH, 4);
-    return sub_8061D18(mapObject, sprite);
+    return MovementAction_SlideDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061D18(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -6963,15 +6993,15 @@ bool8 sub_8061D18(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061D58(struct MapObject *, struct Sprite *);
+bool8 MovementAction_SlideUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061D38(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_go_anim(mapObject, sprite, DIR_NORTH, 4);
-    return sub_8061D58(mapObject, sprite);
+    return MovementAction_SlideUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061D58(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -6982,15 +7012,15 @@ bool8 sub_8061D58(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 
-bool8 sub_8061D98(struct MapObject *, struct Sprite *);
+bool8 MovementAction_SlideLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061D78(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_go_anim(mapObject, sprite, DIR_WEST, 4);
-    return sub_8061D98(mapObject, sprite);
+    return MovementAction_SlideLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061D98(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7001,15 +7031,15 @@ bool8 sub_8061D98(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 
-bool8 sub_8061DD8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_SlideRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061DB8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_go_anim(mapObject, sprite, DIR_EAST, 4);
-    return sub_8061DD8(mapObject, sprite);
+    return MovementAction_SlideRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061DD8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SlideRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7019,15 +7049,15 @@ bool8 sub_8061DD8(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061E18(struct MapObject *, struct Sprite *);
+bool8 MovementAction_PlayerRunDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 do_run_south_anim(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_run_anim(mapObject, sprite, DIR_SOUTH);
-    return sub_8061E18(mapObject, sprite);
+    return MovementAction_PlayerRunDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061E18(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7037,15 +7067,15 @@ bool8 sub_8061E18(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061E58(struct MapObject *, struct Sprite *);
+bool8 MovementAction_PlayerRunUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 do_run_north_anim(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_run_anim(mapObject, sprite, DIR_NORTH);
-    return sub_8061E58(mapObject, sprite);
+    return MovementAction_PlayerRunUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061E58(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7055,15 +7085,15 @@ bool8 sub_8061E58(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061E98(struct MapObject *, struct Sprite *);
+bool8 MovementAction_PlayerRunLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 do_run_west_anim(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_run_anim(mapObject, sprite, DIR_WEST);
-    return sub_8061E98(mapObject, sprite);
+    return MovementAction_PlayerRunLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061E98(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7073,15 +7103,15 @@ bool8 sub_8061E98(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061ED8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_PlayerRunRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 do_run_east_anim(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     do_run_anim(mapObject, sprite, DIR_EAST);
-    return sub_8061ED8(mapObject, sprite);
+    return MovementAction_PlayerRunRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061ED8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_PlayerRunRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -7091,22 +7121,22 @@ bool8 sub_8061ED8(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum)
+void StartSpriteAnimInDirection(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum)
 {
-    obj_anim_image_set_and_seek(sprite, animNum, 0);
+    SetAndStartSpriteAnim(sprite, animNum, 0);
     FieldObjectSetDirection(mapObject, direction);
     sprite->data[2] = 1;
 }
 
 bool8 sub_8061F24(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->movementDirection, sprite->animNum);
+    StartSpriteAnimInDirection(mapObject, sprite, mapObject->movementDirection, sprite->animNum);
     return FALSE;
 }
 
 bool8 SpriteAnimEnded(struct Sprite *);
 
-bool8 sub_8061F3C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_WaitSpriteAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (SpriteAnimEnded(sprite))
     {
@@ -7122,15 +7152,15 @@ void sub_8061F5C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     StartSpriteAnim(sprite, GetWalkFastMovementAction_Extended(direction));
 }
 
-bool8 sub_8061FB0(struct MapObject *, struct Sprite *);
+bool8 MovementAction_JumpSpecialDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061F90(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8061F5C(mapObject, sprite, DIR_SOUTH);
-    return sub_8061FB0(mapObject, sprite);
+    return MovementAction_JumpSpecialDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061FB0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
@@ -7141,15 +7171,15 @@ bool8 sub_8061FB0(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8061FF8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_JumpSpecialUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8061FD8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8061F5C(mapObject, sprite, DIR_NORTH);
-    return sub_8061FF8(mapObject, sprite);
+    return MovementAction_JumpSpecialUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8061FF8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
@@ -7160,15 +7190,15 @@ bool8 sub_8061FF8(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062040(struct MapObject *, struct Sprite *);
+bool8 MovementAction_JumpSpecialLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062020(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8061F5C(mapObject, sprite, DIR_WEST);
-    return sub_8062040(mapObject, sprite);
+    return MovementAction_JumpSpecialLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062040(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
@@ -7179,15 +7209,15 @@ bool8 sub_8062040(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062088(struct MapObject *, struct Sprite *);
+bool8 MovementAction_JumpSpecialRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062068(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8061F5C(mapObject, sprite, DIR_EAST);
-    return sub_8062088(mapObject, sprite);
+    return MovementAction_JumpSpecialRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062088(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpSpecialRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061340(mapObject, sprite))
     {
@@ -7198,51 +7228,51 @@ bool8 sub_8062088(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80620B0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_FacePlayer_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    u8 objectId;
-    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), &objectId))
+    u8 playerObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &playerObjectId))
     {
-        FaceDirection(mapObject, sprite, sub_805FE90(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[objectId].currentCoords.x, gMapObjects[objectId].currentCoords.y));
+        FaceDirection(mapObject, sprite, GetDirectionToFace(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[playerObjectId].currentCoords.x, gMapObjects[playerObjectId].currentCoords.y));
     }
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_806210C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_FaceAwayPlayer_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    u8 objectId;
-    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), &objectId))
+    u8 playerObjectId;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &playerObjectId))
     {
-        FaceDirection(mapObject, sprite, GetOppositeDirection(sub_805FE90(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[objectId].currentCoords.x, gMapObjects[objectId].currentCoords.y)));
+        FaceDirection(mapObject, sprite, GetOppositeDirection(GetDirectionToFace(mapObject->currentCoords.x, mapObject->currentCoords.y, gMapObjects[playerObjectId].currentCoords.x, gMapObjects[playerObjectId].currentCoords.y)));
     }
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_8062170(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_LockFacingDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->facingDirectionLocked = 1;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_8062180(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_UnlockFacingDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->facingDirectionLocked = 0;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062190(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 1, 2);
-    return sub_80621BC(mapObject, sprite);
+    return MovementAction_JumpDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7253,15 +7283,15 @@ bool8 sub_80621BC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpUp_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_80621E8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_NORTH, 1, 2);
-    return sub_8062214(mapObject, sprite);
+    return MovementAction_JumpUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7272,15 +7302,15 @@ bool8 sub_8062214(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062240(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_WEST, 1, 2);
-    return sub_806226C(mapObject, sprite);
+    return MovementAction_JumpLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7291,15 +7321,15 @@ bool8 sub_806226C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062298(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_EAST, 1, 2);
-    return sub_80622C4(mapObject, sprite);
+    return MovementAction_JumpRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7310,15 +7340,15 @@ bool8 sub_80622C4(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceDown_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_80622F0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 0, 0);
-    return sub_806231C(mapObject, sprite);
+    return MovementAction_JumpInPlaceDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7329,15 +7359,15 @@ bool8 sub_806231C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceUp_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062348(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_NORTH, 0, 0);
-    return sub_8062374(mapObject, sprite);
+    return MovementAction_JumpInPlaceUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7348,15 +7378,15 @@ bool8 sub_8062374(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_80623A0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_WEST, 0, 0);
-    return sub_80623CC(mapObject, sprite);
+    return MovementAction_JumpInPlaceLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7367,15 +7397,15 @@ bool8 sub_80623CC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceRight_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_80623F8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_EAST, 0, 0);
-    return sub_8062424(mapObject, sprite);
+    return MovementAction_JumpInPlaceRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7386,15 +7416,15 @@ bool8 sub_8062424(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062450(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceDownUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_SOUTH, 0, 2);
-    return sub_806247C(mapObject, sprite);
+    return MovementAction_JumpInPlaceDownUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceDownUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061358(mapObject, sprite))
     {
@@ -7405,15 +7435,15 @@ bool8 sub_806247C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_80624A8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceUpDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_NORTH, 0, 2);
-    return sub_80624D4(mapObject, sprite);
+    return MovementAction_JumpInPlaceUpDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceUpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061358(mapObject, sprite))
     {
@@ -7424,15 +7454,15 @@ bool8 sub_80624D4(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062500(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceLeftRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_WEST, 0, 2);
-    return sub_806252C(mapObject, sprite);
+    return MovementAction_JumpInPlaceLeftRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceLeftRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061358(mapObject, sprite))
     {
@@ -7443,15 +7473,15 @@ bool8 sub_806252C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite);
+bool8 MovementAction_JumpInPlaceRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite);
 
-bool8 sub_8062558(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceRightLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     maybe_shadow_1(mapObject, sprite, DIR_EAST, 0, 2);
-    return sub_8062584(mapObject, sprite);
+    return MovementAction_JumpInPlaceRightLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_JumpInPlaceRightLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061358(mapObject, sprite))
     {
@@ -7462,77 +7492,77 @@ bool8 sub_8062584(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80625B0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_FaceOriginalDirection_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FaceDirection(mapObject, sprite, gInitialMovementTypeFacingDirections[mapObject->movementType]);
     return TRUE;
 }
 
-bool8 sub_80625C8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_NurseJoyBowDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, 0x14);
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, 0x14);
     return FALSE;
 }
 
-bool8 sub_80625D8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_EnableJumpLandingGroundEffect_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->disableJumpLandingGroundEffect = 0;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_80625E8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_DisableJumpLandingGroundEffect_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->disableJumpLandingGroundEffect = 1;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_80625F8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_DisableAnimation_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->inanimate = 1;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_8062608(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RestoreAnimation_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->inanimate = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_8062634(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SetInvisible_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible = 1;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_8062644(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SetVisible_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible = 0;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_EmoteExclamationMark_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_EmoteQuestionMark_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_2);
+    FieldEffectStart(FLDEFF_QUESTION_MARK_ICON);
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_EmoteHeart_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     FieldEffectStart(FLDEFF_HEART_ICON);
@@ -7540,9 +7570,9 @@ bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
     return TRUE;
 }
 
-bool8 sub_8062704(struct MapObject *, struct Sprite *);
+bool8 MovementAction_RevealTrainer_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80626C0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RevealTrainer_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (mapObject->movementType == MOVEMENT_TYPE_HIDDEN)
     {
@@ -7558,11 +7588,11 @@ bool8 sub_80626C0(struct MapObject *mapObject, struct Sprite *sprite)
     {
         sub_812869C(mapObject);
         sprite->data[2] = 1;
-        return sub_8062704(mapObject, sprite);
+        return MovementAction_RevealTrainer_Step1(mapObject, sprite);
     }
 }
 
-bool8 sub_8062704(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RevealTrainer_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_81286C4(mapObject))
     {
@@ -7572,14 +7602,14 @@ bool8 sub_8062704(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062724(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RockSmashBreak_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    obj_anim_image_set_and_seek(sprite, 1, 0);
+    SetAndStartSpriteAnim(sprite, 1, 0);
     sprite->data[2] = 1;
     return FALSE;
 }
 
-bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RockSmashBreak_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (SpriteAnimEnded(sprite))
     {
@@ -7589,7 +7619,7 @@ bool8 sub_8062740(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_RockSmashBreak_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible ^= 1;
     if (WaitForMovementDelay(sprite))
@@ -7600,14 +7630,14 @@ bool8 sub_8062764(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80627A0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_CutTree_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    obj_anim_image_set_and_seek(sprite, 1, 0);
+    SetAndStartSpriteAnim(sprite, 1, 0);
     sprite->data[2] = 1;
     return FALSE;
 }
 
-bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_CutTree_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (SpriteAnimEnded(sprite))
     {
@@ -7617,7 +7647,7 @@ bool8 sub_80627BC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_CutTree_Step2(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->invisible ^= 1;
     if (WaitForMovementDelay(sprite))
@@ -7628,48 +7658,48 @@ bool8 sub_80627E0(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_806281C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_SetFixedPriority_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->fixedPriority = 1;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_806282C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_ClearFixedPriority_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->fixedPriority = 0;
     sprite->data[2] = 1;
     return TRUE;
 }
 
-bool8 sub_806283C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_InitAffineAnim_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    sprite->oam.affineMode = 3;
+    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
     InitSpriteAffineAnim(sprite);
     sprite->affineAnimPaused = 1;
     sprite->subspriteMode = 0;
     return TRUE;
 }
 
-bool8 sub_806286C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_ClearAffineAnim_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FreeOamMatrix(sprite->oam.matrixNum);
-    sprite->oam.affineMode = 0;
+    sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
     CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
     return TRUE;
 }
 
-bool8 sub_80628D0(struct MapObject *, struct Sprite *);
+bool8 MovementAction_WalkDownAffine0_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_806289C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_WalkDownAffine0_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8060ED8(mapObject, sprite, DIR_SOUTH);
     sprite->affineAnimPaused = 0;
     StartSpriteAffineAnimIfDifferent(sprite, 0);
-    return sub_80628D0(mapObject, sprite);
+    return MovementAction_WalkDownAffine0_Step1(mapObject, sprite);
 }
 
-bool8 sub_80628D0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_WalkDownAffine0_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
@@ -7680,17 +7710,17 @@ bool8 sub_80628D0(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062930(struct MapObject *, struct Sprite *);
+bool8 MovementAction_WalkDownAffine1_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80628FC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_WalkDownAffine1_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8060ED8(mapObject, sprite, DIR_SOUTH);
     sprite->affineAnimPaused = 0;
     ChangeSpriteAffineAnimIfDifferent(sprite, 1);
-    return sub_8062930(mapObject, sprite);
+    return MovementAction_WalkDownAffine1_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062930(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_WalkDownAffine1_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (an_walk_any_2(mapObject, sprite))
     {
@@ -7710,99 +7740,99 @@ void sub_806295C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     sprite->data[2] = 1;
 }
 
-bool8 sub_806299C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieFaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_806295C(mapObject, sprite, DIR_SOUTH);
     return TRUE;
 }
 
-bool8 sub_80629AC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieFaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_806295C(mapObject, sprite, DIR_NORTH);
     return TRUE;
 }
 
-bool8 sub_80629BC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieFaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_806295C(mapObject, sprite, DIR_WEST);
     return TRUE;
 }
 
-bool8 sub_80629CC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieFaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_806295C(mapObject, sprite, DIR_EAST);
     return TRUE;
 }
 
-bool8 sub_80629DC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, GetWalkFastMovementAction_Extended2(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, GetWalkFastMovementAction_Extended2(DIR_SOUTH));
     return FALSE;
 }
 
-bool8 sub_8062A00(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, GetWalkFastMovementAction_Extended2(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, GetWalkFastMovementAction_Extended2(DIR_NORTH));
     return FALSE;
 }
 
-bool8 sub_8062A24(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, GetWalkFastMovementAction_Extended2(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, GetWalkFastMovementAction_Extended2(DIR_WEST));
     return FALSE;
 }
 
-bool8 sub_8062A48(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, GetWalkFastMovementAction_Extended2(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, GetWalkFastMovementAction_Extended2(DIR_EAST));
     return FALSE;
 }
 
-bool8 sub_8062A6C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpFaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, sub_805FDB8(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, sub_805FDB8(DIR_SOUTH));
     return FALSE;
 }
 
-bool8 sub_8062A90(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpFaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, sub_805FDB8(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, sub_805FDB8(DIR_NORTH));
     return FALSE;
 }
 
-bool8 sub_8062AB4(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpFaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, sub_805FDB8(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, sub_805FDB8(DIR_WEST));
     return FALSE;
 }
 
-bool8 sub_8062AD8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpFaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, sub_805FDB8(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, sub_805FDB8(DIR_EAST));
     return FALSE;
 }
 
 bool8 sub_8062AFC(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, sub_805FDC8(DIR_SOUTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_SOUTH, sub_805FDC8(DIR_SOUTH));
     return FALSE;
 }
 
 bool8 sub_8062B20(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_NORTH, sub_805FDC8(DIR_NORTH));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_NORTH, sub_805FDC8(DIR_NORTH));
     return FALSE;
 }
 
 bool8 sub_8062B44(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_WEST, sub_805FDC8(DIR_WEST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_WEST, sub_805FDC8(DIR_WEST));
     return FALSE;
 }
 
 bool8 sub_8062B68(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_EAST, sub_805FDC8(DIR_EAST));
+    StartSpriteAnimInDirection(mapObject, sprite, DIR_EAST, sub_805FDC8(DIR_EAST));
     return FALSE;
 }
 
@@ -7813,15 +7843,15 @@ void sub_8062B8C(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     DoShadowFieldEffect(mapObject);
 }
 
-bool8 sub_8062BFC(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopFaceDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062BD0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_SOUTH, 0, 1);
-    return sub_8062BFC(mapObject, sprite);
+    return MovementAction_AcroWheelieHopFaceDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062BFC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7832,15 +7862,15 @@ bool8 sub_8062BFC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062C54(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopFaceUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062C28(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_NORTH, 0, 1);
-    return sub_8062C54(mapObject, sprite);
+    return MovementAction_AcroWheelieHopFaceUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062C54(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7851,15 +7881,15 @@ bool8 sub_8062C54(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062CAC(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopFaceLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062C80(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_WEST, 0, 1);
-    return sub_8062CAC(mapObject, sprite);
+    return MovementAction_AcroWheelieHopFaceLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062CAC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7870,15 +7900,15 @@ bool8 sub_8062CAC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062D04(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopFaceRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062CD8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_EAST, 0, 1);
-    return sub_8062D04(mapObject, sprite);
+    return MovementAction_AcroWheelieHopFaceRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062D04(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopFaceRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7889,15 +7919,15 @@ bool8 sub_8062D04(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062D5C(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062D30(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_SOUTH, 1, 1);
-    return sub_8062D5C(mapObject, sprite);
+    return MovementAction_AcroWheelieHopDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062D5C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7908,15 +7938,15 @@ bool8 sub_8062D5C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062DB4(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062D88(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_NORTH, 1, 1);
-    return sub_8062DB4(mapObject, sprite);
+    return MovementAction_AcroWheelieHopUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062DB4(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7927,15 +7957,15 @@ bool8 sub_8062DB4(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062E0C(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062DE0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_WEST, 1, 1);
-    return sub_8062E0C(mapObject, sprite);
+    return MovementAction_AcroWheelieHopLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062E0C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7946,15 +7976,15 @@ bool8 sub_8062E0C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062E64(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieHopRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062E38(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_EAST, 1, 1);
-    return sub_8062E64(mapObject, sprite);
+    return MovementAction_AcroWheelieHopRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062E64(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieHopRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7965,15 +7995,15 @@ bool8 sub_8062E64(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062EBC(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieJumpDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062E90(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_SOUTH, 2, 0);
-    return sub_8062EBC(mapObject, sprite);
+    return MovementAction_AcroWheelieJumpDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062EBC(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -7984,15 +8014,15 @@ bool8 sub_8062EBC(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062F14(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieJumpUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062EE8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_NORTH, 2, 0);
-    return sub_8062F14(mapObject, sprite);
+    return MovementAction_AcroWheelieJumpUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062F14(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -8003,15 +8033,15 @@ bool8 sub_8062F14(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062F6C(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieJumpLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062F40(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_WEST, 2, 0);
-    return sub_8062F6C(mapObject, sprite);
+    return MovementAction_AcroWheelieJumpLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062F6C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -8022,15 +8052,15 @@ bool8 sub_8062F6C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062FC4(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieJumpRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8062F98(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8062B8C(mapObject, sprite, DIR_EAST, 2, 0);
-    return sub_8062FC4(mapObject, sprite);
+    return MovementAction_AcroWheelieJumpRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8062FC4(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieJumpRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8061328(mapObject, sprite))
     {
@@ -8041,25 +8071,25 @@ bool8 sub_8062FC4(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8062FF0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieInPlaceDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80616CC(mapObject, sprite, DIR_SOUTH, sub_805FDD8(DIR_SOUTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063028(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieInPlaceUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80616CC(mapObject, sprite, DIR_NORTH, sub_805FDD8(DIR_NORTH), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063060(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieInPlaceLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80616CC(mapObject, sprite, DIR_WEST, sub_805FDD8(DIR_WEST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063098(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieInPlaceRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80616CC(mapObject, sprite, DIR_EAST, sub_805FDD8(DIR_EAST), 8);
     return MovementAction_WalkInPlace_Step1(mapObject, sprite);
@@ -8072,15 +8102,15 @@ void sub_80630D0(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     SeekSpriteAnim(sprite, 0);
 }
 
-bool8 sub_8063128(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroPopWheelieMoveDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063108(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80630D0(mapObject, sprite, DIR_SOUTH, 1);
-    return sub_8063128(mapObject, sprite);
+    return MovementAction_AcroPopWheelieMoveDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063128(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8090,15 +8120,15 @@ bool8 sub_8063128(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8063168(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroPopWheelieMoveUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063148(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80630D0(mapObject, sprite, DIR_NORTH, 1);
-    return sub_8063168(mapObject, sprite);
+    return MovementAction_AcroPopWheelieMoveUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063168(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8108,15 +8138,15 @@ bool8 sub_8063168(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80631A8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroPopWheelieMoveLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063188(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80630D0(mapObject, sprite, DIR_WEST, 1);
-    return sub_80631A8(mapObject, sprite);
+    return MovementAction_AcroPopWheelieMoveLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_80631A8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8126,15 +8156,15 @@ bool8 sub_80631A8(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80631E8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroPopWheelieMoveRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80631C8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_80630D0(mapObject, sprite, DIR_EAST, 1);
-    return sub_80631E8(mapObject, sprite);
+    return MovementAction_AcroPopWheelieMoveRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_80631E8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroPopWheelieMoveRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8150,15 +8180,15 @@ void sub_8063208(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     sub_805FE28(mapObject, sprite, sub_805FDD8(mapObject->facingDirection));
 }
 
-bool8 sub_8063258(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieMoveDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063238(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063208(mapObject, sprite, DIR_SOUTH, 1);
-    return sub_8063258(mapObject, sprite);
+    return MovementAction_AcroWheelieMoveDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063258(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8168,15 +8198,15 @@ bool8 sub_8063258(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8063298(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieMoveUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063278(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063208(mapObject, sprite, DIR_NORTH, 1);
-    return sub_8063298(mapObject, sprite);
+    return MovementAction_AcroWheelieMoveUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063298(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8186,15 +8216,15 @@ bool8 sub_8063298(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80632D8(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieMoveLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80632B8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063208(mapObject, sprite, DIR_WEST, 1);
-    return sub_80632D8(mapObject, sprite);
+    return MovementAction_AcroWheelieMoveLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_80632D8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8204,15 +8234,15 @@ bool8 sub_80632D8(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8063318(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroWheelieMoveRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80632F8(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063208(mapObject, sprite, DIR_EAST, 1);
-    return sub_8063318(mapObject, sprite);
+    return MovementAction_AcroWheelieMoveRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063318(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroWheelieMoveRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8229,15 +8259,15 @@ void sub_8063338(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
     SeekSpriteAnim(sprite, 0);
 }
 
-bool8 sub_8063390(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroBumpMoveDown_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063370(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveDown_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_SOUTH, 1);
-    return sub_8063390(mapObject, sprite);
+    return MovementAction_AcroBumpMoveDown_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063390(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveDown_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8247,15 +8277,15 @@ bool8 sub_8063390(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_80633D0(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroBumpMoveUp_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80633B0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveUp_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_NORTH, 1);
-    return sub_80633D0(mapObject, sprite);
+    return MovementAction_AcroBumpMoveUp_Step1(mapObject, sprite);
 }
 
-bool8 sub_80633D0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveUp_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8265,15 +8295,15 @@ bool8 sub_80633D0(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8063410(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroBumpMoveLeft_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_80633F0(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveLeft_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_WEST, 1);
-    return sub_8063410(mapObject, sprite);
+    return MovementAction_AcroBumpMoveLeft_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063410(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveLeft_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -8283,15 +8313,15 @@ bool8 sub_8063410(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8063450(struct MapObject *, struct Sprite *);
+bool8 MovementAction_AcroBumpMoveRight_Step1(struct MapObject *, struct Sprite *);
 
-bool8 sub_8063430(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveRight_Step0(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8063338(mapObject, sprite, DIR_EAST, 1);
-    return sub_8063450(mapObject, sprite);
+    return MovementAction_AcroBumpMoveRight_Step1(mapObject, sprite);
 }
 
-bool8 sub_8063450(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 MovementAction_AcroBumpMoveRight_Step1(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))
     {
@@ -9563,7 +9593,7 @@ static bool8 WaitForMovementDelay(struct Sprite *sprite)
         return FALSE;
 }
 
-void obj_anim_image_set_and_seek(struct Sprite *sprite, u8 a2, u8 a3)
+void SetAndStartSpriteAnim(struct Sprite *sprite, u8 a2, u8 a3)
 {
     sprite->animNum = a2;
     sprite->animPaused = 0 ;

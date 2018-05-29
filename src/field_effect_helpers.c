@@ -1364,7 +1364,7 @@ void sub_812869C(struct MapObject *mapObject)
 {
     if (mapObject->directionSequenceIndex == 1)
     {
-        gSprites[mapObject->fieldEffectSpriteId].data[0] ++;
+        gSprites[mapObject->fieldEffectSpriteId].data[0]++;
     }
 }
 
@@ -1384,7 +1384,7 @@ bool8 sub_81286C4(struct MapObject *mapObject)
     if (sprite->data[7])
     {
         mapObject->directionSequenceIndex = 2;
-        sprite->data[0] ++;
+        sprite->data[0]++;
         return TRUE;
     }
     return FALSE;

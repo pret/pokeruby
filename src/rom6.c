@@ -91,7 +91,7 @@ static void sub_810B3DC(u8 taskId)
 
 static void sub_810B428(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(6))
+    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         gFieldEffectArguments[1] = GetPlayerFacingDirection();
         if (gFieldEffectArguments[1] == 1)
