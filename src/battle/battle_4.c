@@ -15770,8 +15770,8 @@ void atkEF_handleballthrow(void)
             }
             else
             {
-                if (gBattleResults.unk36[gLastUsedItem - ITEM_ULTRA_BALL] < 0xFF)
-                    gBattleResults.unk36[gLastUsedItem - ITEM_ULTRA_BALL]++;
+                if (gBattleResults.usedBalls[gLastUsedItem - ITEM_ULTRA_BALL] < 0xFF)
+                    gBattleResults.usedBalls[gLastUsedItem - ITEM_ULTRA_BALL]++;
             }
         }
         if (odds > 254) //poke caught

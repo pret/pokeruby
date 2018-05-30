@@ -127,17 +127,9 @@ gUnknown_Debug_030043A8 = .;
 #endif
 
 SYMBOL(gPreBattleCallback1, 4)
-gBattleMainFunc = .;
-. += 0xC;
-gBattleResults = .;
-. += 0x1C;
-// Why is this not aligned?
-gUnknown_030042FC = .;
-. += 0x1A;
-gUnknown_03004316 = .;
-. += 0xE;
-gLeveledUpInBattle = .;
-. += 0xC;
+SYMBOL(gBattleMainFunc, 4)
+SYMBOL(gBattleResults, 68)
+SYMBOL(gLeveledUpInBattle, 4)
 SYMBOL(gBattleBankFunc, 16)
 SYMBOL(gHealthboxIDs, 4)
 SYMBOL(gUnknown_03004344, 4)

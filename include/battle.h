@@ -411,7 +411,7 @@ struct BattleResults
     u16 caughtPoke;           // 0x28
     u8 caughtNick[10];        // 0x2A
     u8 filler34[2];
-    u8 unk36[10];  // usedBalls?
+    u8 usedBalls[11];
 };
 
 struct Struct2017100
