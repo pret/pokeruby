@@ -175,7 +175,11 @@ void sub_80FE948(u8);
 void sub_80FEABC(u8, u8);
 void sub_80FEC94(u8);
 void sub_80FECB8(u8);
+#ifdef GERMAN
+int sub_80FECE0(u8);
+#else
 void sub_80FECE0(u8);
+#endif
 void sub_80FEF50(u8);
 bool8 sub_80FEFA4(void);
 void sub_80FF394(u16, u16, u16);
