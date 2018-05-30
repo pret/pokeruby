@@ -284,7 +284,6 @@ extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
 extern u8 gSelectedOrderFromParty[];
 extern u8 gBattleOutcome;
-extern struct Pokemon gUnknown_030042FC[];
 extern struct BattlePokemon gBattleMons[];
 
 void sub_8134548(void)
@@ -1795,7 +1794,7 @@ void sub_8135AC4(void)
         playerRecord->greeting[i] = gSaveBlock1.easyChats.unk2B28[i];
 
     for (i = 0; i < 3; i++)
-        sub_803AF78(&gUnknown_030042FC[gSaveBlock2.battleTower.selectedPartyMons[i]], &playerRecord->party[i]);
+        sub_803AF78(&gPlayerParty[gSaveBlock2.battleTower.selectedPartyMons[i] - 1], &playerRecord->party[i]);
 
     SetBattleTowerRecordChecksum(&gSaveBlock2.battleTower.playerRecord);
     SaveCurrentWinStreak();

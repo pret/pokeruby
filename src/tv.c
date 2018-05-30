@@ -70,7 +70,6 @@ extern u16 gSpecialVar_LastTalked;
 
 extern u8 gSpecialVar_ContestCategory;
 extern u8 gSpecialVar_ContestRank;
-extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
 extern u16 gLastUsedItem;
@@ -447,7 +446,6 @@ bool8 sub_80BF1B4(u8);
 void sub_80BF20C(void);
 extern u8 gSpecialVar_ContestCategory;
 extern u8 gSpecialVar_ContestRank;
-extern u8 gUnknown_03004316[11];
 extern u8 gBattleOutcome;
 
 void InterviewBefore_FanClubLetter(void);
@@ -667,7 +665,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         for (i=0; i<11; i++)
         {
-            if (gBattleResults.unk36[i] != 0)
+            if (gBattleResults.usedBalls[i] != 0)
             {
                 gSaveBlock1.gabbyAndTyData.valA_3 = 1;
                 break;
@@ -832,7 +830,7 @@ void PutPokemonTodayCaughtOnAir(void)
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1)
             {
                 for (i = 0; i < 11; i++)
-                    total += gBattleResults.unk36[i];
+                    total += gBattleResults.usedBalls[i];
                 if (total != 0 || gBattleResults.unk5_1 != 0)
                 {
                     struct TVShowPokemonToday *pokemonToday;
@@ -849,7 +847,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     else
                     {
                         for (i = 0; i < 11; i++)
-                            total += gBattleResults.unk36[i];
+                            total += gBattleResults.usedBalls[i];
                         if (total > 0xff)
                             total = 0xff;
                         item = gLastUsedItem;
@@ -893,8 +891,8 @@ void sub_80BE074(void)
 
     if (sub_80BF77C(0xffff) == 0)
     {
-        for (i = 0, total = 0; i < ARRAY_COUNT(gUnknown_03004316); i++)
-            total += gUnknown_03004316[i];
+        for (i = 0, total = 0; i < 11; i++)
+            total += gBattleResults.usedBalls[i];
         if (total > 0xff)
             total = 0xff;
         if (total > 2 && gBattleOutcome == 1)

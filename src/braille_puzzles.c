@@ -84,7 +84,7 @@ bool8 ShouldDoBrailleStrengthEffect(void)
 
 void DoBrailleStrengthEffect(void)
 {
-    FieldEffectActiveListRemove(0x28);
+    FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
     MapGridSetMetatileIdAt(14, 26, 554);
     MapGridSetMetatileIdAt(15, 26, 555);
     MapGridSetMetatileIdAt(16, 26, 556);
