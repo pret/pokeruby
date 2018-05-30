@@ -1,52 +1,27 @@
 #include "global.h"
-#include "decompress.h"
-#include "palette.h"
-#include "event_data.h"
-#include "main.h"
-#include "text_window.h"
-#include "menu.h"
-#include "strings2.h"
-#include "sound.h"
-#include "constants/songs.h"
 #include "berry.h"
-#include "string_util.h"
-#include "link.h"
-#include "task.h"
-#include "overworld.h"
+#include "decompress.h"
+#include "event_data.h"
+#include "ewram.h"
 #include "item.h"
-#include "constants/items.h"
+#include "link.h"
+#include "m4a.h"
+#include "main.h"
+#include "menu.h"
+#include "menu_cursor.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokeblock.h"
 #include "random.h"
 #include "save.h"
-#include "menu_cursor.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings2.h"
+#include "task.h"
+#include "text_window.h"
 #include "trig.h"
-#include "pokeblock.h"
-#include "ewram.h"
-
-//needed to match Blender_ControlHitPitch
-struct MusicPlayerInfo
-{
-    struct SongHeader *songHeader;
-    u32 status;
-    u8 trackCount;
-    u8 priority;
-    u8 cmd;
-    u8 unk_B;
-    u32 clock;
-    u8 gap[8];
-    u8 *memAccArea;
-    u16 tempoD;
-    u16 tempoU;
-    u16 tempoI;
-    u16 tempoC;
-    u16 fadeOI;
-    u16 fadeOC;
-    u16 fadeOV;
-    struct MusicPlayerTrack *tracks;
-    struct ToneData *tone;
-    u32 ident;
-    u32 func;
-    u32 intp;
-};
+#include "constants/songs.h"
+#include "constants/items.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
