@@ -67,7 +67,7 @@ u8 CountPokemonInDaycare(struct DayCare *daycare)
     u8 i, count;
     count = 0;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         if (GetBoxMonData(&daycare->mons[i], MON_DATA_SPECIES) != 0)
             count++;
@@ -81,7 +81,7 @@ void InitDaycareMailRecordMixing(struct BoxPokemon * daycareMons, struct RecordM
     u8 i;
     u8 numDaycareMons = 0;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         if (GetBoxMonData(&daycareMons[i], MON_DATA_SPECIES) != SPECIES_NONE)
         {
@@ -108,7 +108,7 @@ static s8 Daycare_FindEmptySpot(struct BoxPokemon * daycareMons)
 {
     u8 i;
 
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         if (GetBoxMonData(&daycareMons[i], MON_DATA_SPECIES) == 0)
             return i;
@@ -466,12 +466,9 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 }
 
-#ifdef NONMATCHING
-static
-#endif
 // Counts the number of egg moves a pokemon learns and stores the moves in
 // the given array.
-u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
+static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
 {
     u16 eggMoveIdx;
     u16 numEggMoves;
@@ -505,11 +502,10 @@ u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
     return numEggMoves;
 }
 
-#ifdef NONMATCHING
 void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
 {
     u16 numSharedParentMoves;
-    u8 numLevelUpMoves;
+    u32 numLevelUpMoves;
     u16 numEggMoves;
     u16 i, j;
 
@@ -549,8 +545,11 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
             }
         }
         else
+        {
             break;
+        }
     }
+
     for (i = 0; i < 4; i++)
     {
         if (gHatchedEggFatherMoves[i] != MOVE_NONE)
@@ -565,10 +564,9 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
             }
         }
     }
-    for (i = 0; i < 4; i++)
+
+    for (i = 0; i < 4 && gHatchedEggFatherMoves[i] != MOVE_NONE; i++)
     {
-        if (gHatchedEggFatherMoves[i] == MOVE_NONE)
-            break;
         for (j = 0; j < 4; j++)
         {
             if (gHatchedEggFatherMoves[i] == gHatchedEggMotherMoves[j] && gHatchedEggFatherMoves[i] != MOVE_NONE)
@@ -576,10 +574,8 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
         }
     }
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4 && gHatchedEggFinalMoves[i] != MOVE_NONE; i++)
     {
-        if (gHatchedEggFinalMoves[i] == MOVE_NONE)
-            break;
         for (j = 0; j < numLevelUpMoves; j++)
         {
             if (gHatchedEggLevelUpMoves[j] != MOVE_NONE && gHatchedEggFinalMoves[i] == gHatchedEggLevelUpMoves[j])
@@ -591,346 +587,6 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
         }
     }
 }
-#else
-NAKED
-void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxPokemon *mother)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0xC\n"
-                    "\tadds r7, r0, 0\n"
-                    "\tmov r10, r1\n"
-                    "\tmov r9, r2\n"
-                    "\tmovs r0, 0\n"
-                    "\tstr r0, [sp]\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r5, _08041CC8 @ =gHatchedEggMotherMoves\n"
-                    "\tmovs r2, 0\n"
-                    "\tldr r4, _08041CCC @ =gHatchedEggFatherMoves\n"
-                    "\tldr r3, _08041CD0 @ =gHatchedEggFinalMoves\n"
-                    "_08041BE4:\n"
-                    "\tlsls r1, r6, 1\n"
-                    "\tadds r0, r1, r5\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tadds r0, r1, r4\n"
-                    "\tstrh r2, [r0]\n"
-                    "\tadds r1, r3\n"
-                    "\tstrh r2, [r1]\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbls _08041BE4\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r2, _08041CD4 @ =gHatchedEggEggMoves\n"
-                    "\tmovs r1, 0\n"
-                    "_08041C02:\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tadds r0, r2\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x9\n"
-                    "\tbls _08041C02\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r2, _08041CD8 @ =gHatchedEggLevelUpMoves\n"
-                    "\tmovs r1, 0\n"
-                    "_08041C18:\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tadds r0, r2\n"
-                    "\tstrh r1, [r0]\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x31\n"
-                    "\tbls _08041C18\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetMonData\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tldr r1, _08041CD8 @ =gHatchedEggLevelUpMoves\n"
-                    "\tbl GetLevelUpMovesBySpecies\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tstr r0, [sp, 0x4]\n"
-                    "\tmovs r6, 0\n"
-                    "\tldr r1, _08041CCC @ =gHatchedEggFatherMoves\n"
-                    "\tmov r8, r1\n"
-                    "_08041C46:\n"
-                    "\tadds r5, r6, 0\n"
-                    "\tadds r5, 0xD\n"
-                    "\tmov r0, r10\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tlsls r4, r6, 1\n"
-                    "\tmov r2, r8\n"
-                    "\tadds r1, r4, r2\n"
-                    "\tstrh r0, [r1]\n"
-                    "\tmov r0, r9\n"
-                    "\tadds r1, r5, 0\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tldr r1, _08041CC8 @ =gHatchedEggMotherMoves\n"
-                    "\tadds r4, r1\n"
-                    "\tstrh r0, [r4]\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbls _08041C46\n"
-                    "\tldr r1, _08041CD4 @ =gHatchedEggEggMoves\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl GetEggMoves\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r8, r0\n"
-                    "\tmovs r6, 0\n"
-                    "_08041C82:\n"
-                    "\tldr r0, _08041CCC @ =gHatchedEggFatherMoves\n"
-                    "\tlsls r1, r6, 1\n"
-                    "\tadds r2, r1, r0\n"
-                    "\tldrh r1, [r2]\n"
-                    "\tmov r9, r0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _08041CF8\n"
-                    "\tmovs r5, 0\n"
-                    "\tcmp r5, r8\n"
-                    "\tbcs _08041CEA\n"
-                    "\tadds r4, r2, 0\n"
-                    "\tldr r2, _08041CDC @ =0x0000ffff\n"
-                    "_08041C9A:\n"
-                    "\tldr r0, _08041CD4 @ =gHatchedEggEggMoves\n"
-                    "\tlsls r1, r5, 1\n"
-                    "\tadds r1, r0\n"
-                    "\tldrh r0, [r4]\n"
-                    "\tldrh r1, [r1]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbne _08041CE0\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tstr r2, [sp, 0x8]\n"
-                    "\tbl GiveMoveToMon\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tldr r2, [sp, 0x8]\n"
-                    "\tcmp r0, r2\n"
-                    "\tbne _08041CEA\n"
-                    "\tldrh r1, [r4]\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl DeleteFirstMoveAndGiveMoveToMon\n"
-                    "\tb _08041CEA\n"
-                    "\t.align 2, 0\n"
-                    "_08041CC8: .4byte gHatchedEggMotherMoves\n"
-                    "_08041CCC: .4byte gHatchedEggFatherMoves\n"
-                    "_08041CD0: .4byte gHatchedEggFinalMoves\n"
-                    "_08041CD4: .4byte gHatchedEggEggMoves\n"
-                    "_08041CD8: .4byte gHatchedEggLevelUpMoves\n"
-                    "_08041CDC: .4byte 0x0000ffff\n"
-                    "_08041CE0:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tcmp r5, r8\n"
-                    "\tbcc _08041C9A\n"
-                    "_08041CEA:\n"
-                    "\tadds r0, r6, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tldr r3, _08041E14 @ =gHatchedEggFatherMoves\n"
-                    "\tmov r9, r3\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbls _08041C82\n"
-                    "_08041CF8:\n"
-                    "\tmovs r6, 0\n"
-                    "_08041CFA:\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tmov r2, r9\n"
-                    "\tadds r1, r0, r2\n"
-                    "\tldrh r1, [r1]\n"
-                    "\tadds r2, r0, 0\n"
-                    "\tadds r6, 0x1\n"
-                    "\tmov r8, r6\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _08041D5C\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r0, _08041E14 @ =gHatchedEggFatherMoves\n"
-                    "\tadds r4, r2, r0\n"
-                    "\tldr r6, _08041E18 @ =0x0000ffff\n"
-                    "\tmov r9, r0\n"
-                    "_08041D16:\n"
-                    "\tldr r3, _08041E1C @ =0x00000121\n"
-                    "\tadds r0, r5, r3\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tbl ItemIdToBattleMoveId\n"
-                    "\tldrh r1, [r4]\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tcmp r1, r0\n"
-                    "\tbne _08041D52\n"
-                    "\tlsls r1, r5, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl CanMonLearnTMHM\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08041D52\n"
-                    "\tldrh r1, [r4]\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl GiveMoveToMon\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tcmp r0, r6\n"
-                    "\tbne _08041D52\n"
-                    "\tldrh r1, [r4]\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl DeleteFirstMoveAndGiveMoveToMon\n"
-                    "_08041D52:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tcmp r5, 0x39\n"
-                    "\tbls _08041D16\n"
-                    "_08041D5C:\n"
-                    "\tmov r1, r8\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbls _08041CFA\n"
-                    "\tmovs r6, 0\n"
-                    "\tmov r2, r9\n"
-                    "\tldrh r0, [r2]\n"
-                    "\tldr r3, _08041E20 @ =gHatchedEggFinalMoves\n"
-                    "\tmov r10, r3\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08041DC6\n"
-                    "\tmov r4, r9\n"
-                    "\tldr r0, _08041E24 @ =gHatchedEggMotherMoves\n"
-                    "\tmov r9, r0\n"
-                    "\tmov r12, r10\n"
-                    "_08041D7C:\n"
-                    "\tmovs r5, 0\n"
-                    "\tlsls r2, r6, 1\n"
-                    "\tadds r6, 0x1\n"
-                    "\tmov r8, r6\n"
-                    "\tadds r3, r2, r4\n"
-                    "_08041D86:\n"
-                    "\tlsls r0, r5, 1\n"
-                    "\tadd r0, r9\n"
-                    "\tldrh r2, [r3]\n"
-                    "\tadds r1, r2, 0\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r1, r0\n"
-                    "\tbne _08041DA8\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _08041DA8\n"
-                    "\tldr r1, [sp]\n"
-                    "\tadds r0, r1, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tstr r0, [sp]\n"
-                    "\tlsls r1, 1\n"
-                    "\tadd r1, r12\n"
-                    "\tstrh r2, [r1]\n"
-                    "_08041DA8:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tcmp r5, 0x3\n"
-                    "\tbls _08041D86\n"
-                    "\tmov r1, r8\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbhi _08041DC6\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tadds r0, r4\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _08041D7C\n"
-                    "_08041DC6:\n"
-                    "\tmovs r6, 0\n"
-                    "\tmov r2, r10\n"
-                    "\tldrh r0, [r2]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08041E50\n"
-                    "_08041DD0:\n"
-                    "\tmovs r5, 0\n"
-                    "\tadds r3, r6, 0x1\n"
-                    "\tmov r8, r3\n"
-                    "\tldr r0, [sp, 0x4]\n"
-                    "\tcmp r5, r0\n"
-                    "\tbcs _08041E38\n"
-                    "\tldr r2, _08041E18 @ =0x0000ffff\n"
-                    "_08041DDE:\n"
-                    "\tldr r1, _08041E28 @ =gHatchedEggLevelUpMoves\n"
-                    "\tlsls r0, r5, 1\n"
-                    "\tadds r0, r1\n"
-                    "\tldrh r1, [r0]\n"
-                    "\tcmp r1, 0\n"
-                    "\tbeq _08041E2C\n"
-                    "\tlsls r0, r6, 1\n"
-                    "\tmov r3, r10\n"
-                    "\tadds r4, r0, r3\n"
-                    "\tldrh r0, [r4]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbne _08041E2C\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tstr r2, [sp, 0x8]\n"
-                    "\tbl GiveMoveToMon\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tldr r2, [sp, 0x8]\n"
-                    "\tcmp r0, r2\n"
-                    "\tbne _08041E38\n"
-                    "\tldrh r1, [r4]\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl DeleteFirstMoveAndGiveMoveToMon\n"
-                    "\tb _08041E38\n"
-                    "\t.align 2, 0\n"
-                    "_08041E14: .4byte gHatchedEggFatherMoves\n"
-                    "_08041E18: .4byte 0x0000ffff\n"
-                    "_08041E1C: .4byte 0x00000121\n"
-                    "_08041E20: .4byte gHatchedEggFinalMoves\n"
-                    "_08041E24: .4byte gHatchedEggMotherMoves\n"
-                    "_08041E28: .4byte gHatchedEggLevelUpMoves\n"
-                    "_08041E2C:\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r5, r0, 16\n"
-                    "\tldr r0, [sp, 0x4]\n"
-                    "\tcmp r5, r0\n"
-                    "\tbcc _08041DDE\n"
-                    "_08041E38:\n"
-                    "\tmov r1, r8\n"
-                    "\tlsls r0, r1, 16\n"
-                    "\tlsrs r6, r0, 16\n"
-                    "\tcmp r6, 0x3\n"
-                    "\tbhi _08041E50\n"
-                    "\tldr r0, _08041E60 @ =gHatchedEggFinalMoves\n"
-                    "\tlsls r1, r6, 1\n"
-                    "\tadds r1, r0\n"
-                    "\tldrh r1, [r1]\n"
-                    "\tmov r10, r0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbne _08041DD0\n"
-                    "_08041E50:\n"
-                    "\tadd sp, 0xC\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_08041E60: .4byte gHatchedEggFinalMoves");
-}
-#endif
 
 static void RemoveEggFromDayCare(struct DayCare *daycare)
 {
@@ -971,7 +627,7 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     // Determine which of the daycare mons is the mother and father of the egg.
     // The 0th index of the parentSlots array is considered the mother slot, and the
     // 1st index is the father slot.
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         species[i] = GetBoxMonData(&daycare->mons[i], MON_DATA_SPECIES);
         if (species[i] == SPECIES_DITTO)
@@ -1079,169 +735,47 @@ void GiveEggFromDaycare(void)
     _GiveEggFromDaycare(&gSaveBlock1.daycare);
 }
 
-#ifdef NONMATCHING
 static bool8 _ShouldEggHatch(struct DayCare *daycare)
 {
     struct BoxPokemon *parent;
     u32 i;
-    int v0;
-    int steps;
-    v0 = 0;
-    for (i=0, parent=&daycare->mons[0]; i<2; parent++, i++)
+    int numParents;
+
+    numParents = 0;
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        if (GetBoxMonData(parent, MON_DATA_SANITY_BIT2, v0))
+        parent = &daycare->mons[i];
+        if (GetBoxMonData(parent, MON_DATA_SANITY_BIT2))
         {
             daycare->misc.countersEtc.steps[i]++;
-            v0++;
+            numParents++;
         }
     }
-    if (daycare->misc.countersEtc.pendingEggPersonality == 0 && v0 == 2 && daycare->misc.extra.misc[4] == 0xff && GetDaycareCompatibilityScore(daycare) > (u32)((u32)(Random() * 100) / 0xffff))
-    {
+
+    if (daycare->misc.countersEtc.pendingEggPersonality == 0 && numParents == 2 && (daycare->misc.countersEtc.steps[1] % 256) == 255 && GetDaycareCompatibilityScore(daycare) > (u32)(Random() * 100) / 0xffff)
         TriggerPendingDaycareEgg();
-    }
-    if ((++daycare->misc.countersEtc.eggCycleStepsRemaining) == 0xff)
+
+    if (++daycare->misc.countersEtc.eggCycleStepsRemaining == 255)
     {
-        for (i=0; i<gPlayerPartyCount; i++)
+        for (i = 0; i < gPlayerPartyCount; i++)
         {
             if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             {
-                steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
-                if (steps == 0)
+                int friendship = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+                if (friendship == 0)
                 {
                     gSpecialVar_0x8004 = i;
                     return TRUE;
                 }
-                steps--;
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &steps);
+
+                friendship--;
+                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
             }
         }
     }
+
     return FALSE;
 }
-#else
-NAKED
-static bool8 _ShouldEggHatch(struct DayCare *daycare)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tsub sp, 0x8\n"
-                    "\tadds r7, r0, 0\n"
-                    "\tmovs r2, 0\n"
-                    "\tmovs r6, 0\n"
-                    "\tadds r5, r7, 0\n"
-                    "_080421BC:\n"
-                    "\tlsls r4, r6, 2\n"
-                    "\tadds r0, r5, 0\n"
-                    "\tmovs r1, 0x5\n"
-                    "\tstr r2, [sp, 0x4]\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tldr r2, [sp, 0x4]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _080421DE\n"
-                    "\tmovs r0, 0x88\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r1, r7, r0\n"
-                    "\tadds r1, r4\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstr r0, [r1]\n"
-                    "\tadds r2, 0x1\n"
-                    "_080421DE:\n"
-                    "\tadds r5, 0x50\n"
-                    "\tadds r6, 0x1\n"
-                    "\tcmp r6, 0x1\n"
-                    "\tbls _080421BC\n"
-                    "\tmovs r1, 0x8C\n"
-                    "\tlsls r1, 1\n"
-                    "\tadds r0, r7, r1\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _08042226\n"
-                    "\tcmp r2, 0x2\n"
-                    "\tbne _08042226\n"
-                    "\tsubs r1, 0x4\n"
-                    "\tadds r0, r7, r1\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0xFF\n"
-                    "\tbne _08042226\n"
-                    "\tadds r0, r7, 0\n"
-                    "\tbl GetDaycareCompatibilityScore\n"
-                    "\tadds r4, r0, 0\n"
-                    "\tlsls r4, 24\n"
-                    "\tlsrs r4, 24\n"
-                    "\tbl Random\n"
-                    "\tlsls r0, 16\n"
-                    "\tlsrs r0, 16\n"
-                    "\tmovs r1, 0x64\n"
-                    "\tmuls r0, r1\n"
-                    "\tldr r1, _08042240 @ =0x0000ffff\n"
-                    "\tbl __udivsi3\n"
-                    "\tcmp r4, r0\n"
-                    "\tbls _08042226\n"
-                    "\tbl TriggerPendingDaycareEgg\n"
-                    "_08042226:\n"
-                    "\tmovs r0, 0x8D\n"
-                    "\tlsls r0, 1\n"
-                    "\tadds r1, r7, r0\n"
-                    "\tldrb r0, [r1]\n"
-                    "\tadds r0, 0x1\n"
-                    "\tstrb r0, [r1]\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tcmp r0, 0xFF\n"
-                    "\tbne _08042290\n"
-                    "\tmovs r6, 0\n"
-                    "\tb _08042288\n"
-                    "\t.align 2, 0\n"
-                    "_08042240: .4byte 0x0000ffff\n"
-                    "_08042244:\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r1, r6, 0\n"
-                    "\tmuls r1, r0\n"
-                    "\tldr r0, _08042270 @ =gPlayerParty\n"
-                    "\tadds r4, r1, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2D\n"
-                    "\tbl GetMonData\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08042286\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x20\n"
-                    "\tbl GetMonData\n"
-                    "\tstr r0, [sp]\n"
-                    "\tcmp r0, 0\n"
-                    "\tbne _08042278\n"
-                    "\tldr r0, _08042274 @ =gSpecialVar_0x8004\n"
-                    "\tstrh r6, [r0]\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tb _08042292\n"
-                    "\t.align 2, 0\n"
-                    "_08042270: .4byte gPlayerParty\n"
-                    "_08042274: .4byte gSpecialVar_0x8004\n"
-                    "_08042278:\n"
-                    "\tsubs r0, 0x1\n"
-                    "\tstr r0, [sp]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x20\n"
-                    "\tmov r2, sp\n"
-                    "\tbl SetMonData\n"
-                    "_08042286:\n"
-                    "\tadds r6, 0x1\n"
-                    "_08042288:\n"
-                    "\tldr r0, _0804229C @ =gPlayerPartyCount\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r6, r0\n"
-                    "\tbcc _08042244\n"
-                    "_08042290:\n"
-                    "\tmovs r0, 0\n"
-                    "_08042292:\n"
-                    "\tadd sp, 0x8\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "_0804229C: .4byte gPlayerPartyCount");
-}
-#endif
 
 bool8 ShouldEggHatch(void)
 {
@@ -1305,21 +839,17 @@ u8 GetDaycareState(void)
     return 0;
 }
 
-#ifdef NONMATCHING
-static
-#endif
-bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
+static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 {
     // Determine if the two given egg group lists contain any of the
     // same egg groups.
     s32 i, j;
-    u16 *v0, *v1, v2;
 
-    for (i = 0, v0 = eggGroups1; i < 2; v0++, i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        for (j = 0, v2 = *v0, v1 = eggGroups2; j < 2; v1++, j++)
+        for (j = 0; j < DAYCARE_MON_COUNT; j++)
         {
-            if (v2 == *v1)
+            if (eggGroups1[i] == eggGroups2[j])
             {
                 return TRUE;
             }
@@ -1329,226 +859,58 @@ bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 {
-    u16 species[2];
-    u32 otIds[2];
-    u32 genders[2];
+    u32 i;
     u16 eggGroups[2][2];
-    int i;
-    u16 *spc;
-    u32 *ids;
-    u32 *gnd;
-    u16 *egg1;
-    u16 *egg2;
-    struct BoxPokemon *parent;
+    u16 species[2];
+    u32 genders[2];
+    u32 otIds[2];
+    u32 personality;
 
-    for (i=0, parent=&daycare->mons[0], spc=species, ids=otIds, gnd=genders, egg1=&eggGroups[0][0], egg2=&eggGroups[0][1]; i<2; spc++, egg1+=2, egg2+=2, parent++, i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        *spc = GetBoxMonData(parent, MON_DATA_SPECIES);
-        *ids++ = GetBoxMonData(parent, MON_DATA_OT_ID);
-        *gnd++ = GetGenderFromSpeciesAndPersonality(*spc, GetBoxMonData(parent, MON_DATA_PERSONALITY));
-        *egg1 = gBaseStats[*spc].eggGroup1;
-        *egg2 = gBaseStats[*spc].eggGroup2;
+        species[i] = GetBoxMonData(&daycare->mons[i], MON_DATA_SPECIES);
+        otIds[i] = GetBoxMonData(&daycare->mons[i], MON_DATA_OT_ID);
+        personality = GetBoxMonData(&daycare->mons[i], MON_DATA_PERSONALITY);
+        genders[i] = GetGenderFromSpeciesAndPersonality(species[i], personality);
+        eggGroups[i][0] = gBaseStats[species[i]].eggGroup1;
+        eggGroups[i][1] = gBaseStats[species[i]].eggGroup2;
     }
-    if (eggGroups[0][0] == 0xf)
-    {
+
+    if (eggGroups[0][0] == EGG_GROUP_UNDISCOVERED || eggGroups[1][0] == EGG_GROUP_UNDISCOVERED)
         return 0;
-    }
-    if (eggGroups[1][0] == 0xf)
-    {
+
+    if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
         return 0;
-    }
-    if (eggGroups[0][0] == 0xd && eggGroups[1][0] == 0xd)
-    {
-        return 0;
-    }
-    else if (eggGroups[0][0] == 0xd || eggGroups[1][0] == 0xd)
+
+    if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
     {
         if (otIds[0] == otIds[1])
-        {
             return 20;
-        }
-        return 50;
+        else
+            return 50;
     }
+
     if (genders[0] == genders[1] || genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
-    {
         return 0;
-    }
+
     if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
-    {
         return 0;
-    }
+
     if (species[0] == species[1])
     {
         if (otIds[0] == otIds[1])
-        {
             return 50;
-        }
-        return 70;
+        else
+            return 70;
     }
+
+    if (otIds[0] != otIds[1])
+        return 50;
     else
-    {
-        if (otIds[0] != otIds[1])
-        {
-            return 50;
-        }
         return 20;
-    }
 }
-#else
-NAKED
-static u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r10\n"
-                    "\tmov r6, r9\n"
-                    "\tmov r5, r8\n"
-                    "\tpush {r5-r7}\n"
-                    "\tsub sp, 0x2C\n"
-                    "\tmovs r1, 0\n"
-                    "\tmov r8, r1\n"
-                    "\tmov r2, sp\n"
-                    "\tadds r2, 0x8\n"
-                    "\tstr r2, [sp, 0x1C]\n"
-                    "\tadd r1, sp, 0xC\n"
-                    "\tmov r10, r1\n"
-                    "\tadds r2, 0xC\n"
-                    "\tstr r2, [sp, 0x20]\n"
-                    "\tmov r1, sp\n"
-                    "\tadds r1, 0x2\n"
-                    "\tldr r2, _08042488 @ =gBaseStats\n"
-                    "\tmov r9, r2\n"
-                    "\tldr r5, [sp, 0x1C]\n"
-                    "\tadds r7, r1, 0\n"
-                    "\tmov r6, sp\n"
-                    "\tldr r1, [sp, 0x20]\n"
-                    "\tstr r1, [sp, 0x24]\n"
-                    "\tmov r2, r10\n"
-                    "\tstr r2, [sp, 0x28]\n"
-                    "\tadds r4, r0, 0\n"
-                    "_0804240E:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0xB\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tstrh r0, [r5]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tldr r1, [sp, 0x28]\n"
-                    "\tstm r1!, {r0}\n"
-                    "\tstr r1, [sp, 0x28]\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0\n"
-                    "\tbl GetBoxMonData\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tldrh r0, [r5]\n"
-                    "\tbl GetGenderFromSpeciesAndPersonality\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tldr r2, [sp, 0x24]\n"
-                    "\tstm r2!, {r0}\n"
-                    "\tstr r2, [sp, 0x24]\n"
-                    "\tldrh r1, [r5]\n"
-                    "\tlsls r0, r1, 3\n"
-                    "\tsubs r0, r1\n"
-                    "\tlsls r0, 2\n"
-                    "\tadd r0, r9\n"
-                    "\tldrb r0, [r0, 0x14]\n"
-                    "\tstrh r0, [r6]\n"
-                    "\tldrh r1, [r5]\n"
-                    "\tlsls r0, r1, 3\n"
-                    "\tsubs r0, r1\n"
-                    "\tlsls r0, 2\n"
-                    "\tadd r0, r9\n"
-                    "\tldrb r0, [r0, 0x15]\n"
-                    "\tstrh r0, [r7]\n"
-                    "\tadds r5, 0x2\n"
-                    "\tadds r7, 0x4\n"
-                    "\tadds r6, 0x4\n"
-                    "\tadds r4, 0x50\n"
-                    "\tmovs r0, 0x1\n"
-                    "\tadd r8, r0\n"
-                    "\tmov r1, r8\n"
-                    "\tcmp r1, 0x1\n"
-                    "\tbls _0804240E\n"
-                    "\tmov r0, sp\n"
-                    "\tldrh r1, [r0]\n"
-                    "\tcmp r1, 0xF\n"
-                    "\tbeq _08042484\n"
-                    "\tldrh r0, [r0, 0x4]\n"
-                    "\tcmp r0, 0xF\n"
-                    "\tbeq _08042484\n"
-                    "\tcmp r1, 0xD\n"
-                    "\tbne _0804248C\n"
-                    "\tcmp r0, 0xD\n"
-                    "\tbne _08042490\n"
-                    "_08042484:\n"
-                    "\tmovs r0, 0\n"
-                    "\tb _080424E4\n"
-                    "\t.align 2, 0\n"
-                    "_08042488: .4byte gBaseStats\n"
-                    "_0804248C:\n"
-                    "\tcmp r0, 0xD\n"
-                    "\tbne _0804249C\n"
-                    "_08042490:\n"
-                    "\tldr r1, [sp, 0xC]\n"
-                    "\tmov r2, r10\n"
-                    "\tldr r0, [r2, 0x4]\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _080424DE\n"
-                    "\tb _080424E2\n"
-                    "_0804249C:\n"
-                    "\tldr r0, [sp, 0x14]\n"
-                    "\tldr r2, [sp, 0x20]\n"
-                    "\tldr r1, [r2, 0x4]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbeq _08042484\n"
-                    "\tcmp r0, 0xFF\n"
-                    "\tbeq _08042484\n"
-                    "\tcmp r1, 0xFF\n"
-                    "\tbeq _08042484\n"
-                    "\tadd r1, sp, 0x4\n"
-                    "\tmov r0, sp\n"
-                    "\tbl EggGroupsOverlap\n"
-                    "\tlsls r0, 24\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _08042484\n"
-                    "\tldr r0, [sp, 0x1C]\n"
-                    "\tldrh r1, [r0, 0x2]\n"
-                    "\tldrh r0, [r0]\n"
-                    "\tcmp r0, r1\n"
-                    "\tbne _080424D4\n"
-                    "\tldr r1, [sp, 0xC]\n"
-                    "\tmov r2, r10\n"
-                    "\tldr r0, [r2, 0x4]\n"
-                    "\tcmp r1, r0\n"
-                    "\tbeq _080424E2\n"
-                    "\tmovs r0, 0x46\n"
-                    "\tb _080424E4\n"
-                    "_080424D4:\n"
-                    "\tldr r1, [sp, 0xC]\n"
-                    "\tmov r2, r10\n"
-                    "\tldr r0, [r2, 0x4]\n"
-                    "\tcmp r1, r0\n"
-                    "\tbne _080424E2\n"
-                    "_080424DE:\n"
-                    "\tmovs r0, 0x14\n"
-                    "\tb _080424E4\n"
-                    "_080424E2:\n"
-                    "\tmovs r0, 0x32\n"
-                    "_080424E4:\n"
-                    "\tadd sp, 0x2C\n"
-                    "\tpop {r3-r5}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tmov r10, r5\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1");
-}
-#endif
 
 u8 GetDaycareCompatibilityScoreFromSave(void)
 {
@@ -1619,7 +981,7 @@ static void GetDaycareLevelMenuText(struct DayCare *daycare, u8 *dest)
     u8 i;
 
     *dest = EOS;
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         GetBoxMonNick(&daycare->mons[i], monNames[i]);
         AppendMonGenderSymbol(monNames[i], &daycare->mons[i]);
@@ -1638,7 +1000,7 @@ static void GetDaycareLevelMenuLevelText(struct DayCare *daycare, u8 *dest)
     u8 level;
 
     *dest = EOS;
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         level = GetLevelAfterDaycareSteps(&daycare->mons[i], daycare->misc.countersEtc.steps[i]);
         dest[0] = 0x34;
