@@ -1,14 +1,6 @@
 #include "global.h"
 #include "cable_car_util.h"
 
-// static types
-
-// static declarations
-
-// rodata
-
-// text
-
 void CableCarUtil_FillWrapped(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;

@@ -872,18 +872,14 @@ static void RotatingGate_DestroyGatesOutsideViewport(void)
     }
 }
 
-#ifdef NONMATCHING
-static int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
+int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
 {
     const struct Coords8 *armPos;
     u8 orientation;
-    s16 x;
-    s16 y;
-    int shape;
-    int i;
-    int j;
+    s16 x, y;
+    u8 shape;
+    int i, j;
     int armOrientation;
-    const u8 *gateArmCollisionData;
     u8 armIndex;
 
     if (rotationDirection == ROTATE_ANTICLOCKWISE)
@@ -902,146 +898,22 @@ static int RotatingGate_CanRotate(u8 gateId, int rotationDirection)
     // Loop through the gate's "arms" clockwise (north, south, east, west)
     for (i = GATE_ARM_NORTH; i <= GATE_ARM_WEST; i++)
     {
-        armOrientation = orientation + i;
-        gateArmCollisionData = sRotatingGate_ArmLayout[shape][i];
-
         // Ensure that no part of the arm collides with the map
         for (j = 0; j < GATE_ARM_MAX_LENGTH; j++)
         {
+            armOrientation = orientation + i;
             armIndex = 2 * (armOrientation % 4) + j;
 
-            if (*gateArmCollisionData)
+            if (sRotatingGate_ArmLayout[shape][i * 2 + j])
             {
-                if (MapGridIsImpassableAt(
-                        armPos[armIndex].deltaX + x, armPos[armIndex].deltaY + y) == 1)
+                if (MapGridIsImpassableAt(x + armPos[armIndex].deltaX, y + armPos[armIndex].deltaY) == 1)
                     return 0;
             }
-            gateArmCollisionData++;
         }
     }
 
     return 1;
 }
-#else
-NAKED
-static int RotatingGate_CanRotate(u8 a, int puzzleType)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    cmp r1, 0x1\n\
-    bne _080C7EAC\n\
-    ldr r0, _080C7EA8 @ =sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
-    mov r10, r0\n\
-    b _080C7EB8\n\
-    .align 2, 0\n\
-_080C7EA8: .4byte sRotatingGate_ArmPositionsAntiClockwiseRotation\n\
-_080C7EAC:\n\
-    cmp r1, 0x2\n\
-    beq _080C7EB4\n\
-_080C7EB0:\n\
-    movs r0, 0\n\
-    b _080C7F48\n\
-_080C7EB4:\n\
-    ldr r1, _080C7F58 @ =sRotatingGate_ArmPositionsClockwiseRotation\n\
-    mov r10, r1\n\
-_080C7EB8:\n\
-    adds r0, r4, 0\n\
-    bl RotatingGate_GetGateOrientation\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp]\n\
-    ldr r0, _080C7F5C @ =gRotatingGate_PuzzleConfig\n\
-    ldr r1, [r0]\n\
-    lsls r0, r4, 3\n\
-    adds r0, r1\n\
-    ldrb r2, [r0, 0x4]\n\
-    ldrh r1, [r0]\n\
-    adds r1, 0x7\n\
-    ldrh r0, [r0, 0x2]\n\
-    adds r0, 0x7\n\
-    movs r3, 0\n\
-    lsls r2, 3\n\
-    str r2, [sp, 0x4]\n\
-    lsls r1, 16\n\
-    asrs r1, 16\n\
-    mov r9, r1\n\
-    lsls r0, 16\n\
-    asrs r0, 16\n\
-    mov r8, r0\n\
-_080C7EE8:\n\
-    movs r6, 0\n\
-    ldr r2, [sp]\n\
-    adds r7, r2, r3\n\
-    lsls r0, r3, 1\n\
-    adds r5, r7, 0\n\
-    ldr r1, [sp, 0x4]\n\
-    adds r0, r1\n\
-    ldr r2, _080C7F60 @ =sRotatingGate_ArmLayout\n\
-    adds r4, r0, r2\n\
-_080C7EFA:\n\
-    adds r0, r5, 0\n\
-    cmp r5, 0\n\
-    bge _080C7F02\n\
-    adds r0, r7, 0x3\n\
-_080C7F02:\n\
-    asrs r0, 2\n\
-    lsls r0, 2\n\
-    subs r0, r5, r0\n\
-    lsls r0, 1\n\
-    adds r0, r6\n\
-    lsls r0, 24\n\
-    lsrs r1, r0, 24\n\
-    ldrb r0, [r4]\n\
-    cmp r0, 0\n\
-    beq _080C7F38\n\
-    lsls r1, 2\n\
-    add r1, r10\n\
-    movs r0, 0\n\
-    ldrsb r0, [r1, r0]\n\
-    add r0, r9\n\
-    ldrb r1, [r1, 0x1]\n\
-    lsls r1, 24\n\
-    asrs r1, 24\n\
-    add r1, r8\n\
-    str r3, [sp, 0x8]\n\
-    bl MapGridIsImpassableAt\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    ldr r3, [sp, 0x8]\n\
-    cmp r0, 0x1\n\
-    beq _080C7EB0\n\
-_080C7F38:\n\
-    adds r4, 0x1\n\
-    adds r6, 0x1\n\
-    cmp r6, 0x1\n\
-    ble _080C7EFA\n\
-    adds r3, 0x1\n\
-    cmp r3, 0x3\n\
-    ble _080C7EE8\n\
-    movs r0, 0x1\n\
-_080C7F48:\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .align 2, 0\n\
-_080C7F58: .4byte sRotatingGate_ArmPositionsClockwiseRotation\n\
-_080C7F5C: .4byte gRotatingGate_PuzzleConfig\n\
-_080C7F60: .4byte sRotatingGate_ArmLayout\n\
-.syntax divided\n");
-}
-#endif
 
 static int RotatingGate_HasArm(u8 gateId, u8 armInfo)
 {
