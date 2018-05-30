@@ -48,43 +48,43 @@ VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	end
 
 VictoryRoad_1F_Movement_15DF07:: @ 815DF07
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	end_movement
 
 VictoryRoad_1F_Movement_15DF13:: @ 815DF13
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	end_movement
 
 VictoryRoad_1F_Movement_15DF1E:: @ 815DF1E
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_right
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	end_movement
 
 VictoryRoad_1F_EventScript_15DF28:: @ 815DF28
 	msgbox VictoryRoad_1F_Text_197967, 2

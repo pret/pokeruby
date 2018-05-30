@@ -40,19 +40,19 @@ BattleTower_Corridor_EventScript_1608C2:: @ 81608C2
 	end
 
 BattleTower_Corridor_Movement_1608D1:: @ 81608D1
-	step_right
+	walk_right
 
 BattleTower_Corridor_Movement_1608D2:: @ 81608D2
-	step_right
-	step_right
+	walk_right
+	walk_right
 
 BattleTower_Corridor_Movement_1608D4:: @ 81608D4
-	step_right
+	walk_right
 
 BattleTower_Corridor_Movement_1608D5:: @ 81608D5
-	step_right
-	step_right
-	step_right
-	step_up
-	step_54
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	set_invisible
+	end_movement

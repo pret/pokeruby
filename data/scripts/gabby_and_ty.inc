@@ -201,7 +201,7 @@ Route120_EventScript_1AE582:: @ 81AE582
 
 Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	compare FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
 	compare FACING, 1
@@ -234,7 +234,7 @@ Route111_EventScript_1AE60F:: @ 81AE60F
 Route118_EventScript_1AE60F:: @ 81AE60F
 Route120_EventScript_1AE60F:: @ 81AE60F
 	special GabbyAndTyBeforeInterview
-	special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	compare FACING, 2
 	call_if_eq Route111_EventScript_1AE5E0
 	compare FACING, 1
@@ -256,16 +256,16 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	end
 
 Route111_Movement_1AE699:: @ 81AE699
-	step_1d
-	step_end
+	walk_in_place_down
+	end_movement
 
 Route111_Movement_1AE69B:: @ 81AE69B
-	step_1e
-	step_end
+	walk_in_place_up
+	end_movement
 
 Route111_Movement_1AE69D:: @ 81AE69D
-	step_1f
-	step_end
+	walk_in_place_left
+	end_movement
 
 Route111_EventScript_1AE69F:: @ 81AE69F
 	msgbox Route111_Text_1AC60B, MSGBOX_YESNO

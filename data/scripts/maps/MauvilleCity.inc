@@ -186,96 +186,96 @@ MauvilleCity_EventScript_14C292:: @ 814C292
 	end
 
 MauvilleCity_Movement_14C2AA:: @ 814C2AA
-	step_left
-	step_left
-	step_down
-	step_down
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2B0:: @ 814C2B0
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2B6:: @ 814C2B6
-	step_14
-	step_14
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2C1:: @ 814C2C1
-	step_14
-	step_14
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2CC:: @ 814C2CC
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	end_movement
 
 MauvilleCity_Movement_14C2D2:: @ 814C2D2
-	step_left
-	step_down
-	step_down
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2D8:: @ 814C2D8
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 MauvilleCity_Movement_14C2DC:: @ 814C2DC
-	step_right
-	step_up
-	step_end
+	walk_right
+	walk_up
+	end_movement
 
 MauvilleCity_Movement_14C2DF:: @ 814C2DF
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_Movement_14C2E8:: @ 814C2E8
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock

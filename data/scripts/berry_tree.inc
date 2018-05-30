@@ -1,5 +1,5 @@
 S_BerryTree:: @ 81A14DD
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	switch VAR_SPECIAL_4
 	case 255, Route102_EventScript_1A1533
 	case 0, Route102_EventScript_1A153D
@@ -108,10 +108,10 @@ Route102_EventScript_1A15F9:: @ 81A15F9
 	goto_if_eq Route102_EventScript_1A164B
 
 Route102_EventScript_1A161D:: @ 81A161D
-	special FieldObjectInteractionPickBerryTree
+	special EventObjectInteractionPickBerryTree
 	compare VAR_SPECIAL_4, 0
 	goto_if_eq Route102_EventScript_1A1642
-	special FieldObjectInteractionRemoveBerryTree
+	special EventObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
 	playfanfare BGM_ME_KINOMI
 	waitmessage
@@ -139,7 +139,7 @@ Route102_EventScript_1A164B:: @ 81A164B
 
 gUnknown_081A1654:: @ 81A1654
 	lockall
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	call Route102_EventScript_1A16A9
 	releaseall
 	end
@@ -159,13 +159,13 @@ Route102_EventScript_1A168D:: @ 81A168D
 	end
 
 gUnknown_081A168F:: @ 81A168F
-	special FieldObjectInteractionGetBerryTreeData
+	special EventObjectInteractionGetBerryTreeData
 	lockall
 
 Route102_EventScript_1A1693:: @ 81A1693
 	message Route102_Text_1A1912
 	waitmessage
-	special FieldObjectInteractionWaterBerryTree
+	special EventObjectInteractionWaterBerryTree
 	special DoWateringBerryTreeAnim
 	waitstate
 	message Route102_Text_1A1925
@@ -175,7 +175,7 @@ Route102_EventScript_1A1693:: @ 81A1693
 	end
 
 Route102_EventScript_1A16A9:: @ 81A16A9
-	special FieldObjectInteractionPlantBerryTree
+	special EventObjectInteractionPlantBerryTree
 	incrementgamestat GAME_STAT_PLANTED_BERRIES
 	message Route102_Text_1A16FB
 	waitmessage

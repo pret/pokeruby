@@ -69,79 +69,79 @@ RustboroCity_DevonCorp_3F_EventScript_157752:: @ 8157752
 	end
 
 @ 81577FE
-	step_up
-	step_up
-	step_up
-	step_27
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_left
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_157803:: @ 8157803
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_27
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_left
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_157812:: @ 8157812
-	step_14
-	step_25
-	step_end
+	delay_16
+	walk_in_place_fastest_down
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_157815:: @ 8157815
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_15781E:: @ 815781E
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_157827:: @ 8157827
-	step_right
-	step_right
-	step_right
-	step_right
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_DevonCorp_3F_Movement_157835:: @ 8157835
-	step_14
-	step_14
-	step_down
-	step_down
-	step_28
-	step_end
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_in_place_fastest_right
+	end_movement
 
 RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock

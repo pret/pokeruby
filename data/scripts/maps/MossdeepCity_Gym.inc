@@ -212,9 +212,9 @@ MossdeepCity_Gym_EventScript_15A7ED:: @ 815A7ED
 	end
 
 MossdeepCity_Gym_Movement_15A7F7:: @ 815A7F7
-	step_14
-	step_14
-	step_end
+	delay_16
+	delay_16
+	end_movement
 
 MossdeepCity_Gym_EventScript_15A7FA:: @ 815A7FA
 	lockall

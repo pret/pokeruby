@@ -9,11 +9,11 @@ struct UnkPlayerStruct
     u8 player_field_1;
 };
 
-struct LinkPlayerMapObject
+struct LinkPlayerEventObject
 {
     u8 active;
     u8 linkPlayerId;
-    u8 mapObjId;
+    u8 eventObjId;
     u8 mode;
 };
 
@@ -37,10 +37,10 @@ void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
 void SetGameStat(u8, u32);
-// LoadMapObjTemplatesFromHeader
-// LoadSaveblockMapObjScripts
-void Overworld_SetMapObjTemplateCoords(u8, s16, s16);
-void Overworld_SetMapObjTemplateMovementType(u8, u8);
+// LoadEventObjTemplatesFromHeader
+// LoadSaveblockEventObjScripts
+void Overworld_SetEventObjTemplateCoords(u8, s16, s16);
+void Overworld_SetEventObjTemplateMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
 // get_mapdata_header
 // ApplyCurrentWarp
@@ -209,11 +209,11 @@ bool32 sub_8055870(void);
 u32 sub_80558AC(void);
 u32 sub_8055910(void);
 u32 sub_8055940(void);
-// ZeroLinkPlayerMapObject
-void strange_npc_table_clear(void);
-// ZeroMapObject
-void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
-void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);
+// ClearLinkPlayerEventObject
+void ClearLinkPlayerEventObjects(void);
+// ZeroEventObject
+void SpawnLinkPlayerEventObject(u8, s16, s16, u8);
+void InitLinkPlayerEventObjectPos(struct EventObject *, s16, s16);
 // unref_sub_8055A6C
 // unref_sub_8055A9C
 u8 sub_8055AE8(u8);

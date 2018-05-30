@@ -70,8 +70,8 @@ LittlerootTown_BrendansHouse_1F_EventScript_1526FA:: @ 81526FA
 	end
 
 LittlerootTown_BrendansHouse_1F_Movement_152720:: @ 8152720
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 LittlerootTown_BrendansHouse_1F_EventScript_152722:: @ 8152722
 	lockall
@@ -105,13 +105,13 @@ LittlerootTown_BrendansHouse_1F_EventScript_152744:: @ 8152744
 	end
 
 LittlerootTown_BrendansHouse_1F_Movement_152782:: @ 8152782
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 LittlerootTown_BrendansHouse_1F_EventScript_152789:: @ 8152789
 	lockall

@@ -224,101 +224,101 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	return
 
 @ 814C5B0
-	step_30
-	step_30
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fastest_right
+	walk_fastest_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 RustboroCity_Movement_14C5C2:: @ 814C5C2
-	step_30
-	step_30
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fastest_right
+	walk_fastest_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 RustboroCity_Movement_14C5D3:: @ 814C5D3
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 RustboroCity_Movement_14C5DB:: @ 814C5DB
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 RustboroCity_Movement_14C5E3:: @ 814C5E3
-	step_down
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_Movement_14C5E7:: @ 814C5E7
-	step_down
-	step_down
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_Movement_14C5EC:: @ 814C5EC
-	step_down
-	step_down
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_Movement_14C5F1:: @ 814C5F1
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	end_movement
 
 RustboroCity_Movement_14C5F7:: @ 814C5F7
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_25
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock
@@ -425,8 +425,8 @@ RustboroCity_EventScript_14C715:: @ 814C715
 	return
 
 RustboroCity_Movement_14C74B:: @ 814C74B
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 RustboroCity_EventScript_14C74D:: @ 814C74D
 	lockall

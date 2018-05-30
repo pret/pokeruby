@@ -114,104 +114,104 @@ SlateportCity_OceanicMuseum_2F_EventScript_155E83:: @ 8155E83
 	return
 
 SlateportCity_OceanicMuseum_2F_Movement_155E8E:: @ 8155E8E
-	step_left
-	step_down
-	step_27
-	step_end
+	walk_left
+	walk_down
+	walk_in_place_fastest_left
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155E92:: @ 8155E92
-	step_up
-	step_left
-	step_left
-	step_down
-	step_27
-	step_end
+	walk_up
+	walk_left
+	walk_left
+	walk_down
+	walk_in_place_fastest_left
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155E98:: @ 8155E98
-	step_up
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_left
-	step_left
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	delay_8
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EA6:: @ 8155EA6
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EA8:: @ 8155EA8
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB2:: @ 8155EB2
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB4:: @ 8155EB4
-	step_down
-	step_right
-	step_25
-	step_end
+	walk_down
+	walk_right
+	walk_in_place_fastest_down
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EB8:: @ 8155EB8
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EBF:: @ 8155EBF
-	step_40
-	step_left
-	step_41
-	step_end
+	lock_facing_direction
+	walk_left
+	unlock_facing_direction
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EC3:: @ 8155EC3
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155EC5:: @ 8155EC5
-	step_down
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_Movement_155ECE:: @ 8155ECE
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_13
-	step_15
-	step_26
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_8
+	walk_fast_down
+	walk_in_place_fastest_up
+	end_movement
 
 SlateportCity_OceanicMuseum_2F_EventScript_155EDA:: @ 8155EDA
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17F572, 3

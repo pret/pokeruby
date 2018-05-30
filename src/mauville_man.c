@@ -10,7 +10,7 @@
 #include "overworld.h"
 #include "random.h"
 #include "script.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
@@ -806,7 +806,7 @@ static void Task_BardSong(u8 taskId)
 
 void sub_80F83D0(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BARD + GetCurrentMauvilleOldMan());
+    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD + GetCurrentMauvilleOldMan());
 }
 
 struct Story

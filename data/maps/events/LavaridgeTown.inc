@@ -1,13 +1,13 @@
-LavaridgeTown_MapObjects:: @ 8380C78
-	object_event 1, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 8, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E751, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 5, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E724, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_OLD_MAN_2, 0, 5, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E72D, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_LITTLE_GIRL_1, 0, 10, 0, 13, 0, 3, 3, 32, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E736, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 4, 0, 4, 0, 3, 18, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E73F, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 5, 0, 4, 0, 3, 17, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E748, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_VAR_3, 0, 6, 0, 16, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_LAVARIDGE_2, 0, 0
-	object_event 8, MAP_OBJ_GFX_VAR_0, 0, 12, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E575, FLAG_HIDE_RIVAL_LAVARIDGE_1, 0, 0
-	object_event 9, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 4, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E75A, 0, 0, 0
+LavaridgeTown_EventObjects:: @ 8380C78
+	object_event 1, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 8, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E751, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 5, 0, 1, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E724, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN_2, 0, 5, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E72D, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 10, 0, 13, 0, 3, 3, 32, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E736, 0, 0, 0
+	object_event 5, EVENT_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 4, 0, 4, 0, 3, 18, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E73F, 0, 0, 0
+	object_event 6, EVENT_OBJ_GFX_HOT_SPRINGS_OLD_WOMAN, 0, 5, 0, 4, 0, 3, 17, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E748, 0, 0, 0
+	object_event 7, EVENT_OBJ_GFX_VAR_3, 0, 6, 0, 16, 0, 3, 9, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_LAVARIDGE_2, 0, 0
+	object_event 8, EVENT_OBJ_GFX_VAR_0, 0, 12, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E575, FLAG_HIDE_RIVAL_LAVARIDGE_1, 0, 0
+	object_event 9, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 4, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, LavaridgeTown_EventScript_14E75A, 0, 0, 0
 
 LavaridgeTown_MapWarps:: @ 8380D50
 	warp_def 12, 15, 0, 0, MAP_LAVARIDGE_TOWN_HERB_SHOP
@@ -31,4 +31,4 @@ LavaridgeTown_MapBGEvents:: @ 8380D90
 	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, FLAG_HIDDEN_ITEM_0
 
 LavaridgeTown_MapEvents:: @ 8380DF0
-	map_events LavaridgeTown_MapObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents
+	map_events LavaridgeTown_EventObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents

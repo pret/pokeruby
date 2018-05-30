@@ -1,5 +1,5 @@
 #include "global.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "script_movement.h"
@@ -37,9 +37,9 @@ bool8 sub_8064CFC(void)
     }
 }
 
-void ScriptFreezeMapObjects(void)
+void ScriptFreezeEventObjects(void)
 {
-    FreezeMapObjects();
+    FreezeEventObjects();
     CreateTask(sub_8064CDC, 80);
 }
 
@@ -52,9 +52,9 @@ void sub_8064D38(u8 taskId)
         sub_80594C0();
         task->data[0] = 1;
     }
-    if (!task->data[1] && !gMapObjects[gSelectedMapObject].regularAnimActive)
+    if (!task->data[1] && !gEventObjects[gSelectedEventObject].singleMovementActive)
     {
-        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
+        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -74,44 +74,44 @@ bool8 sub_8064DB4(void)
     }
 }
 
-void LockSelectedMapObject(void)
+void LockSelectedEventObject(void)
 {
     u8 taskId;
-    FreezeMapObjectsExceptOne(gSelectedMapObject);
+    FreezeEventObjectsExceptOne(gSelectedEventObject);
     taskId = CreateTask(sub_8064D38, 80);
-    if (!gMapObjects[gSelectedMapObject].regularAnimActive)
+    if (!gEventObjects[gSelectedEventObject].singleMovementActive)
     {
-        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
+        FreezeEventObject(&gEventObjects[gSelectedEventObject]);
         gTasks[taskId].data[1] = 1;
     }
 }
 
 void sub_8064E2C(void)
 {
-    u8 objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80A2178();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
 }
 
 void unref_sub_8064E5C(void)
 {
     u8 objectId;
 
-    if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    if (gEventObjects[gSelectedEventObject].active)
+        EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80A2178();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
 }
 
 void sub_8064EAC(void)
 {
-    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gSpecialVar_Facing);
+    EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject], gSpecialVar_Facing);
 }
 
 void sub_8064ED4(void)
 {
-    FieldObjectClearAnimIfSpecialAnimActive(&gMapObjects[gSelectedMapObject]);
+    EventObjectClearHeldMovementIfActive(&gEventObjects[gSelectedEventObject]);
 }

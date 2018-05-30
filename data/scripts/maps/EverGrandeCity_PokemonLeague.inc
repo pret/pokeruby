@@ -99,23 +99,23 @@ EverGrandeCity_PokemonLeague_EventScript_15BB57:: @ 815BB57
 	end
 
 EverGrandeCity_PokemonLeague_Movement_15BB76:: @ 815BB76
-	step_down
-	step_left
-	step_26
-	step_end
+	walk_down
+	walk_left
+	walk_in_place_fastest_up
+	end_movement
 
 EverGrandeCity_PokemonLeague_Movement_15BB7A:: @ 815BB7A
-	step_down
-	step_right
-	step_26
-	step_end
+	walk_down
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 EverGrandeCity_PokemonLeague_Movement_15BB7E:: @ 815BB7E
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 EverGrandeCity_PokemonLeague_Movement_15BB81:: @ 815BB81
-	step_right
-	step_25
-	step_end
+	walk_right
+	walk_in_place_fastest_down
+	end_movement

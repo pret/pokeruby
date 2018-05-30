@@ -1,8 +1,8 @@
-FallarborTown_MapObjects:: @ 8380E04
-	object_event 1, MAP_OBJ_GFX_GIRL_1, 0, 8, 0, 11, 0, 3, 8, 16, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E814, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 11, 0, 9, 0, 3, 5, 1, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E7F5, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_GENTLEMAN, 0, 11, 0, 15, 0, 3, 3, 17, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E81D, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_AZURILL, 0, 8, 0, 12, 0, 3, 1, 1, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E826, FLAG_HIDE_AZURILL_FALLARBOR, 0, 0
+FallarborTown_EventObjects:: @ 8380E04
+	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 8, 0, 11, 0, 3, 8, 16, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E814, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 0, 9, 0, 3, 5, 1, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E7F5, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 0, 15, 0, 3, 3, 17, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E81D, 0, 0, 0
+	object_event 4, EVENT_OBJ_GFX_AZURILL, 0, 8, 0, 12, 0, 3, 1, 1, 0, 0, 0, 0, 0, FallarborTown_EventScript_14E826, FLAG_HIDE_AZURILL_FALLARBOR, 0, 0
 
 FallarborTown_MapWarps:: @ 8380E64
 	warp_def 15, 15, 0, 0, MAP_FALLARBOR_TOWN_MART
@@ -22,4 +22,4 @@ FallarborTown_MapBGEvents:: @ 8380E8C
 	bg_hidden_item_event 2, 15, 3, ITEM_NUGGET, FLAG_HIDDEN_ITEM_1C
 
 FallarborTown_MapEvents:: @ 8380EEC
-	map_events FallarborTown_MapObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents
+	map_events FallarborTown_EventObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents

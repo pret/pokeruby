@@ -164,7 +164,7 @@ static void sub_80C6A14(u8 taskId)
 
 void sub_80C6A54(s16 x, s16 y)
 {
-    u8 dir = player_get_direction_lower_nybble();
+    u8 dir = GetPlayerFacingDirection();
     if (dir == DIR_SOUTH)
     {
         sub_80C69C4(x, y);
@@ -236,8 +236,8 @@ void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
 
 void DoYellowCave4Sparkle(void)
 {
-    s16 x = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.x;
-    s16 y = gMapObjects[gPlayerAvatar.mapObjectId].currentCoords.y;
+    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
+    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
     u8 spriteId;
 
     sub_8060470(&x, &y, 8, 4);
@@ -261,7 +261,7 @@ bool8 FldEff_SandPillar(void)
     gFieldEffectArguments[5] = x;
     gFieldEffectArguments[6] = y;
 
-    switch (player_get_direction_lower_nybble())
+    switch (GetPlayerFacingDirection())
     {
     case DIR_SOUTH:
         CreateSprite(

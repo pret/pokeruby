@@ -67,18 +67,18 @@ EverGrandeCity_HallOfFame_EventScript_15BC4D:: @ 815BC4D
 	end
 
 EverGrandeCity_HallOfFame_Movement_15BC59:: @ 815BC59
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement

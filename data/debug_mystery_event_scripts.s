@@ -3,7 +3,7 @@
 #include "constants/flags.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/opponents.h"

@@ -46,46 +46,46 @@ SlateportCity_ContestLobby_EventScript_155448:: @ 8155448
 	return
 
 SlateportCity_ContestLobby_Movement_1554C0:: @ 81554C0
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 SlateportCity_ContestLobby_Movement_1554CA:: @ 81554CA
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 SlateportCity_ContestLobby_Movement_1554CC:: @ 81554CC
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 SlateportCity_ContestLobby_Movement_1554CF:: @ 81554CF
-	step_down
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 SlateportCity_ContestLobby_Movement_1554D3:: @ 81554D3
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 SlateportCity_ContestLobby_Movement_1554DC:: @ 81554DC
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 SlateportCity_ContestLobby_EventScript_1554DE:: @ 81554DE
 	msgbox SlateportCity_ContestLobby_Text_17C937, 2

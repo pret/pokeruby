@@ -51,22 +51,22 @@ MossdeepCity_StevensHouse_EventScript_15AA0B:: @ 815AA0B
 	end
 
 MossdeepCity_StevensHouse_Movement_15AA6E:: @ 815AA6E
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 MossdeepCity_StevensHouse_Movement_15AA76:: @ 815AA76
-	step_up
-	step_right
-	step_right
-	step_right
-	step_26
-	step_end
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall

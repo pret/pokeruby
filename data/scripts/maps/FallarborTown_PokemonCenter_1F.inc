@@ -53,29 +53,29 @@ FallarborTown_PokemonCenter_1F_EventScript_153B69:: @ 8153B69
 	end
 
 FallarborTown_PokemonCenter_1F_Movement_153B74:: @ 8153B74
-	step_right
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
-	step_end
+	walk_right
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	end_movement
 
 FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_13
-	step_end
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	delay_8
+	end_movement

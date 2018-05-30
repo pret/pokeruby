@@ -317,7 +317,12 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 j = 0;
     s16 x = 0;
     s16 y = 0;
-    u8 unknown_083F8358[] = {7, 9, 8, 10};
+    u8 facingDirectionMovementTypes[] = {
+        MOVEMENT_TYPE_FACE_UP,
+        MOVEMENT_TYPE_FACE_LEFT,
+        MOVEMENT_TYPE_FACE_DOWN,
+        MOVEMENT_TYPE_FACE_RIGHT,
+    };
     s8 unknown_083F835C[][2] = {
         { 0,  1},
         { 1,  0},
@@ -330,7 +335,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 i;
 
     myLinkPlayerNumber = sub_8008218();
-    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_WEST:
@@ -357,7 +362,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
         if (myLinkPlayerNumber != i)
         {
             rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gLinkPlayers[i].gender);
-            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
+            SpawnSpecialEventObjectParametrized(rivalAvatarGraphicsId, facingDirectionMovementTypes[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
             j++;
             if (j == 4)
             {
@@ -795,7 +800,7 @@ static void PCTurnOffEffect_0(struct Task *task)
     if (task->data[3] == 6)
     {
         task->data[3] = 0;
-        playerDirectionLowerNybble = player_get_direction_lower_nybble();
+        playerDirectionLowerNybble = GetPlayerFacingDirection();
         switch (playerDirectionLowerNybble)
         {
             case DIR_NORTH:
@@ -868,7 +873,7 @@ static void PCTurnOffEffect(void)
     s8 dx = 0;
     s8 dy = 0;
     u16 tileId = 0;
-    u8 playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    u8 playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_NORTH:
@@ -1117,7 +1122,7 @@ void sub_810E984(u8 taskId)
             gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
             ShakeScreenInElevator();
-            FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
+            EventObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             Menu_EraseScreen();
             DestroyTask(taskId);
@@ -1758,15 +1763,15 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 
 void SpawnCameraDummy(void)
 {
-    u8 mapObjectId = SpawnSpecialFieldObjectParametrized(7, 8, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
-    gMapObjects[mapObjectId].invisible = 1;
-    CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
+    u8 eventObjectId = SpawnSpecialEventObjectParametrized(7, MOVEMENT_TYPE_FACE_DOWN, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
+    gEventObjects[eventObjectId].invisible = 1;
+    CameraObjectSetFollowedObjectId(gEventObjects[eventObjectId].spriteId);
 }
 
 void RemoveCameraDummy(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveFieldObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
@@ -2035,9 +2040,9 @@ u16 ScriptGetPartyMonSpecies(void)
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
 }
 
-void sub_810F8FC(void)
+void TryInitBattleTowerAwardManEventObject(void)
 {
-    sub_805ADDC(6);
+    TryInitLocalEventObject(6);
 }
 
 u16 GetDaysUntilPacifidlogTMAvailable(void)

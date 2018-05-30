@@ -4,11 +4,11 @@ SlateportCity_MapScripts:: @ 814BA36
 
 SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	.ifdef SAPPHIRE
-	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_14BA5C
@@ -537,96 +537,96 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	end
 
 SlateportCity_Movement_14BFCD:: @ 814BFCD
-	step_14
-	step_14
-	step_57
-	step_28
-	step_14
-	step_14
-	step_27
-	step_end
+	delay_16
+	delay_16
+	emote_question_mark
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
+	end_movement
 
 SlateportCity_Movement_14BFD5:: @ 814BFD5
-	step_57
-	step_26
-	step_14
-	step_25
-	step_14
-	step_14
-	step_27
-	step_end
+	emote_question_mark
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_down
+	delay_16
+	delay_16
+	walk_in_place_fastest_left
+	end_movement
 
 SlateportCity_Movement_14BFDD:: @ 814BFDD
-	step_14
-	step_left
-	step_left
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	delay_16
+	walk_left
+	walk_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 SlateportCity_Movement_14BFEA:: @ 814BFEA
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 @ 814BFF8
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 SlateportCity_Movement_14BFFB:: @ 814BFFB
-	step_right
-	step_up
-	step_up
-	step_54
-	step_end
+	walk_right
+	walk_up
+	walk_up
+	set_invisible
+	end_movement
 
 SlateportCity_Movement_14C000:: @ 814C000
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_down
-	step_left
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	walk_left
+	end_movement
 
 SlateportCity_Movement_14C008:: @ 814C008
-	step_28
-	step_14
-	step_14
-	step_right
-	step_up
-	step_end
+	walk_in_place_fastest_right
+	delay_16
+	delay_16
+	walk_right
+	walk_up
+	end_movement
 
 SlateportCity_Movement_14C00E:: @ 814C00E
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_25
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_in_place_fastest_down
+	end_movement
 
 SlateportCity_EventScript_14C017:: @ 814C017
 	msgbox SlateportCity_Text_165425, 3

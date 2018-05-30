@@ -4,11 +4,11 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 8155ACA
 
 SlateportCity_OceanicMuseum_1F_MapScript1_155AD0:: @ 8155AD0
 	.ifdef SAPPHIRE
-	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_AQUA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_AQUA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_AQUA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_AQUA_MEMBER_M
 	.else
-	setvar VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_MAGMA_MEMBER_F
-	setvar VAR_OBJ_GFX_ID_1, MAP_OBJ_GFX_MAGMA_MEMBER_M
+	setvar VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_MAGMA_MEMBER_F
+	setvar VAR_OBJ_GFX_ID_1, EVENT_OBJ_GFX_MAGMA_MEMBER_M
 	.endif
 	end
 
@@ -74,8 +74,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B7B:: @ 8155B7B
 	end
 
 SlateportCity_OceanicMuseum_1F_Movement_155B8D:: @ 8155B8D
-	step_down
-	step_end
+	walk_down
+	end_movement
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B8F:: @ 8155B8F
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E2BB, 2
@@ -199,19 +199,19 @@ SlateportCity_OceanicMuseum_1F_EventScript_155CC2:: @ 8155CC2
 	end
 
 SlateportCity_OceanicMuseum_1F_Movement_155CCC:: @ 8155CCC
-	step_00
-	step_15
-	step_15
-	step_15
-	step_15
-	step_13
-	step_end
+	face_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
+	end_movement
 
 SlateportCity_OceanicMuseum_1F_Movement_155CD3:: @ 8155CD3
-	step_18
-	step_15
-	step_15
-	step_15
-	step_15
-	step_13
-	step_end
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
+	end_movement

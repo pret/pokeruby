@@ -1,7 +1,7 @@
-SlateportCity_PokemonCenter_2F_MapObjects:: @ 838812C
-	object_event 1, MAP_OBJ_GFX_TEALA, 0, 4, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_1563FE, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_TEALA, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_156404, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_TEALA, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_15640A, 0, 0, 0
+SlateportCity_PokemonCenter_2F_EventObjects:: @ 838812C
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_1563FE, 0, 0, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_156404, 0, 0, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, SlateportCity_PokemonCenter_2F_EventScript_15640A, 0, 0, 0
 
 SlateportCity_PokemonCenter_2F_MapWarps:: @ 8388174
 	warp_def 1, 5, 4, 2, MAP_SLATEPORT_CITY_POKEMON_CENTER_1F
@@ -11,4 +11,4 @@ SlateportCity_PokemonCenter_2F_MapWarps:: @ 8388174
 	warp_def 0, 0, 0, 0, MAP_DOUBLE_BATTLE_COLOSSEUM
 
 SlateportCity_PokemonCenter_2F_MapEvents:: @ 838819C
-	map_events SlateportCity_PokemonCenter_2F_MapObjects, SlateportCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
+	map_events SlateportCity_PokemonCenter_2F_EventObjects, SlateportCity_PokemonCenter_2F_MapWarps, 0x0, 0x0

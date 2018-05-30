@@ -18,7 +18,7 @@
 #include "scanline_effect.h"
 #include "event_data.h"
 #include "cable_car_util.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/weather.h"
 
 extern u8 (*gMenuCallback)(void);
@@ -818,15 +818,15 @@ static void LoadSprites(void)
     u8 i;
 
     u8 playerGraphicsIds[2] = {
-        MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
-        MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+        EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL,
+        EVENT_OBJ_GFX_RIVAL_MAY_NORMAL
     };
     u16 rval = Random();
     u8 hikerGraphicsIds[4] = {
-        MAP_OBJ_GFX_HIKER,
-        MAP_OBJ_GFX_CAMPER,
-        MAP_OBJ_GFX_PICNICKER,
-        MAP_OBJ_GFX_POOCHYENA
+        EVENT_OBJ_GFX_HIKER,
+        EVENT_OBJ_GFX_CAMPER,
+        EVENT_OBJ_GFX_PICNICKER,
+        EVENT_OBJ_GFX_POOCHYENA
     };
     s16 hikerCoords[2][2] = {
         {   0,  80 },
@@ -847,7 +847,7 @@ static void LoadSprites(void)
     {
         case 0:
         default:
-            spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0xc8, 0x49, 0x66);
+            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0xc8, 0x49, 0x66);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -871,7 +871,7 @@ static void LoadSprites(void)
             break;
         case 1:
             CableCarUtil_CopyWrapped(sCableCarPtr->unk_00fc, eCableCar2->mtChimneyTilemap + 0x24, 0x18, 0x1a, 0x0c, 0x03);
-            spriteId = AddPseudoFieldObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
+            spriteId = AddPseudoEventObject(playerGraphicsIds[gSaveBlock2.playerGender], sub_8123D98, 0x80, 0x27, 0x66);
             if (spriteId != MAX_SPRITES)
             {
                 gSprites[spriteId].oam.priority = 2;
@@ -902,7 +902,7 @@ static void LoadSprites(void)
     }
     if ((rval % 64) == 0)
     {
-        spriteId = AddPseudoFieldObject(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
+        spriteId = AddPseudoEventObject(hikerGraphicsIds[rval % 3], callbacks[gSpecialVar_0x8004], hikerCoords[gSpecialVar_0x8004][0], hikerCoords[gSpecialVar_0x8004][1], 0x6a);
         if (spriteId != MAX_SPRITES)
         {
             gSprites[spriteId].oam.priority = 2;

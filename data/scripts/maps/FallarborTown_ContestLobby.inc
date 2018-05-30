@@ -46,46 +46,46 @@ FallarborTown_ContestLobby_EventScript_1539F8:: @ 81539F8
 	return
 
 FallarborTown_ContestLobby_Movement_153A70:: @ 8153A70
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 FallarborTown_ContestLobby_Movement_153A7A:: @ 8153A7A
-	step_27
-	step_end
+	walk_in_place_fastest_left
+	end_movement
 
 FallarborTown_ContestLobby_Movement_153A7C:: @ 8153A7C
-	step_left
-	step_25
-	step_end
+	walk_left
+	walk_in_place_fastest_down
+	end_movement
 
 FallarborTown_ContestLobby_Movement_153A7F:: @ 8153A7F
-	step_down
-	step_down
-	step_26
-	step_end
+	walk_down
+	walk_down
+	walk_in_place_fastest_up
+	end_movement
 
 FallarborTown_ContestLobby_Movement_153A83:: @ 8153A83
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 FallarborTown_ContestLobby_Movement_153A8C:: @ 8153A8C
-	step_28
-	step_end
+	walk_in_place_fastest_right
+	end_movement
 
 FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 	msgbox FallarborTown_ContestLobby_Text_177141, 2

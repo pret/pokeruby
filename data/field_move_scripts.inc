@@ -32,8 +32,8 @@ DoTreeCutMovement: @ 81B0E21
 	end
 
 TreeCutMovement: @ 81B0E30
-	step_5b
-	step_end
+	cut_tree
+	end_movement
 
 CannotUseCut: @ 81B0E32
 	msgbox CannotUseCutText, 3
@@ -100,8 +100,8 @@ DoRockSmashMovement_Done: @ 81B0F3A
 	end
 
 RockSmashMovement: @ 81B0F3C
-	step_5a
-	step_end
+	rock_smash_break
+	end_movement
 
 CannotUseRockSmash: @ 81B0F3E
 	msgbox CannotUseRockSmashText, 3

@@ -38,17 +38,17 @@ MossdeepCity_House2_EventScript_15A8B9:: @ 815A8B9
 	return
 
 MossdeepCity_House2_Movement_15A8C4:: @ 815A8C4
-	step_18
-	step_15
-	step_15
-	step_17
-	step_15
-	step_13
-	step_end
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_down
+	delay_8
+	end_movement
 
 MossdeepCity_House2_Movement_15A8CB:: @ 815A8CB
-	step_15
-	step_15
-	step_15
-	step_13
-	step_end
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	delay_8
+	end_movement

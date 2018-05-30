@@ -101,59 +101,59 @@ SlateportCity_Harbor_EventScript_156086:: @ 8156086
 	return
 
 SlateportCity_Harbor_Movement_15609B:: @ 815609B
-	step_14
-	step_14
-	step_43
-	step_54
-	step_end
+	delay_16
+	delay_16
+	jump_up
+	set_invisible
+	end_movement
 
 @ 81560A0
-	step_14
-	step_14
-	step_43
-	step_54
-	step_end
+	delay_16
+	delay_16
+	jump_up
+	set_invisible
+	end_movement
 
 SlateportCity_Harbor_Movement_1560A5:: @ 81560A5
-	step_14
-	step_14
-	step_14
-	step_14
-	step_right
-	step_right
-	step_right
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_right
+	walk_right
+	walk_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 SlateportCity_Harbor_Movement_1560B3:: @ 81560B3
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	end_movement
 
 SlateportCity_Harbor_Movement_1560B9:: @ 81560B9
-	step_left
-	step_left
-	step_up
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_up
+	walk_left
+	end_movement
 
 SlateportCity_Harbor_Movement_1560BE:: @ 81560BE
-	step_left
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	walk_left
+	end_movement
 
 SlateportCity_Harbor_Movement_1560C2:: @ 81560C2
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
@@ -247,13 +247,13 @@ SlateportCity_Harbor_EventScript_1561EF:: @ 81561EF
 	return
 
 SlateportCity_Harbor_Movement_1561FA:: @ 81561FA
-	step_right
-	step_26
-	step_end
+	walk_right
+	walk_in_place_fastest_up
+	end_movement
 
 SlateportCity_Harbor_Movement_1561FD:: @ 81561FD
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 SlateportCity_Harbor_EventScript_1561FF:: @ 81561FF
 	msgbox SlateportCity_Harbor_Text_17FC07, 2

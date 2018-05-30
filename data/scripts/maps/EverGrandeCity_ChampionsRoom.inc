@@ -33,9 +33,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	end
 
 EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	end_movement
 
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
 	playbgm BGM_DAIGO, FALSE
@@ -163,64 +163,64 @@ EverGrandeCity_ChampionsRoom_EventScript_15B9D2:: @ 815B9D2
 	return
 
 EverGrandeCity_ChampionsRoom_Movement_15B9DD:: @ 815B9DD
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9E0:: @ 815B9E0
-	step_up
-	step_14
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_up
+	delay_16
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9E6:: @ 815B9E6
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_left
-	step_up
-	step_28
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
+	walk_up
+	walk_in_place_fastest_right
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9EF:: @ 815B9EF
-	step_26
-	step_14
-	step_28
-	step_14
-	step_26
-	step_13
-	step_28
-	step_14
-	step_end
+	walk_in_place_fastest_up
+	delay_16
+	walk_in_place_fastest_right
+	delay_16
+	walk_in_place_fastest_up
+	delay_8
+	walk_in_place_fastest_right
+	delay_16
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9F8:: @ 815B9F8
-	step_right
-	step_up
-	step_end
+	walk_right
+	walk_up
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9FB:: @ 815B9FB
-	step_up
-	step_up
-	step_25
-	step_end
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15B9FF:: @ 815B9FF
-	step_up
-	step_13
-	step_54
-	step_end
+	walk_up
+	delay_8
+	set_invisible
+	end_movement
 
 EverGrandeCity_ChampionsRoom_Movement_15BA03:: @ 815BA03
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_27
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_in_place_fastest_left
+	end_movement

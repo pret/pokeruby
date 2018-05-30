@@ -216,76 +216,76 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	end
 
 SeafloorCavern_Room9_Movement_15DD36:: @ 815DD36
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	end_movement
 
 @ 815DD3E
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD41:: @ 815DD41
-	step_left
-	step_14
-	step_end
+	walk_left
+	delay_16
+	end_movement
 
 @ 815DD44
-	step_right
-	step_end
+	walk_right
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD46:: @ 815DD46
-	step_01
-	step_40
-	step_down
-	step_41
-	step_28
-	step_end
+	face_up
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	walk_in_place_fastest_right
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD4C:: @ 815DD4C
-	step_14
-	step_14
-	slow_step_down
-	step_14
-	step_14
-	step_14
-	slow_step_down
-	step_14
-	step_14
-	step_14
-	step_end
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
+	walk_slow_down
+	delay_16
+	delay_16
+	delay_16
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD57:: @ 815DD57
-	step_32
-	step_32
-	step_end
+	slide_up
+	slide_up
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD5A:: @ 815DD5A
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD60:: @ 815DD60
-	step_right
-	step_right
-	step_end
+	walk_right
+	walk_right
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD63:: @ 815DD63
-	step_18
-	step_18
-	step_18
-	step_18
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	end_movement
 
 SeafloorCavern_Room9_Movement_15DD68:: @ 815DD68
-	step_14
-	step_14
-	step_end
+	delay_16
+	delay_16
+	end_movement

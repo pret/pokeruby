@@ -129,30 +129,30 @@ Route103_EventScript_14ED46:: @ 814ED46
 	end
 
 Route103_Movement_14ED67:: @ 814ED67
-	step_left
-	step_down
-	step_down
-	step_end
+	walk_left
+	walk_down
+	walk_down
+	end_movement
 
 Route103_Movement_14ED6B:: @ 814ED6B
-	fast_step_down
-	step_14
-	step_down
-	step_down
-	step_down
-	step_end
+	jump_2_down
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 Route103_Movement_14ED71:: @ 814ED71
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	end_movement
 
 Route103_Movement_14ED74:: @ 814ED74
-	fast_step_down
-	step_14
-	step_down
-	step_down
-	step_end
+	jump_2_down
+	delay_16
+	walk_down
+	walk_down
+	end_movement
 
 Route103_EventScript_14ED79:: @ 814ED79
 	msgbox Route103_Text_16D950, 2

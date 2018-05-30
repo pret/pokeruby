@@ -59,19 +59,19 @@ MossdeepCity_GameCorner_B1F_EventScript_15AEEE:: @ 815AEEE
 	return
 
 MossdeepCity_GameCorner_B1F_Movement_15AEF9:: @ 815AEF9
-	step_down
-	step_down
-	step_down
-	step_right
-	step_right
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	end_movement
 
 MossdeepCity_GameCorner_B1F_Movement_15AEFF:: @ 815AEFF
-	step_left
-	step_left
-	step_up
-	step_up
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	end_movement

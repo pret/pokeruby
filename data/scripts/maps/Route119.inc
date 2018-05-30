@@ -202,54 +202,54 @@ Route119_EventScript_1513E1:: @ 81513E1
 	return
 
 Route119_Movement_1513F0:: @ 81513F0
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	end_movement
 
 Route119_Movement_1513FA:: @ 81513FA
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_18
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	end_movement
 
 Route119_Movement_151405:: @ 8151405
-	step_18
-	step_16
-	step_16
-	step_16
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route119_Movement_15140F:: @ 815140F
-	step_17
-	step_16
-	step_16
-	step_16
-	step_18
-	step_18
-	step_16
-	step_16
-	step_16
-	step_16
-	step_end
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	end_movement
 
 Route119_EventScript_15141A:: @ 815141A
 	msgbox Route119_Text_171698, 2

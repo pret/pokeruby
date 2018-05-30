@@ -3356,7 +3356,7 @@ bool32 sub_80A6D1C(void)
             u8 taskId;
 
             ScriptContext2_Enable();
-            FreezeMapObjects();
+            FreezeEventObjects();
             sub_80594C0();
             sub_80597F4();
             gSpecialVar_ItemId = gSaveBlock1.registeredItem;

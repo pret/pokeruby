@@ -91,101 +91,101 @@ OldaleTown_EventScript_14DE83:: @ 814DE83
 	end
 
 OldaleTown_Movement_14DE8E:: @ 814DE8E
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	end_movement
 
 OldaleTown_Movement_14DE97:: @ 814DE97
-	step_left
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
-	step_end
+	walk_left
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	end_movement
 
 OldaleTown_Movement_14DEA2:: @ 814DEA2
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_25
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_in_place_fastest_down
+	end_movement
 
 @ 814DEAB
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_13
-	step_25
-	step_end
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	walk_in_place_fastest_down
+	end_movement
 
 OldaleTown_Movement_14DEB9:: @ 814DEB9
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 OldaleTown_Movement_14DEC1:: @ 814DEC1
-	step_14
-	step_14
-	step_14
-	step_14
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 OldaleTown_Movement_14DECB:: @ 814DECB
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 @ 814DED3
-	step_left
-	step_up
-	step_up
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_left
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
@@ -278,41 +278,41 @@ OldaleTown_EventScript_14DFC6:: @ 814DFC6
 	end
 
 OldaleTown_Movement_14DFDE:: @ 814DFDE
-	step_left
-	step_left
-	step_end
+	walk_left
+	walk_left
+	end_movement
 
 OldaleTown_Movement_14DFE1:: @ 814DFE1
-	step_left
-	step_end
+	walk_left
+	end_movement
 
 OldaleTown_Movement_14DFE3:: @ 814DFE3
-	step_02
-	step_end
+	face_left
+	end_movement
 
 OldaleTown_Movement_14DFE5:: @ 814DFE5
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	end_movement
 
 OldaleTown_Movement_14DFEC:: @ 814DFEC
-	step_13
-	step_right
-	step_end
+	delay_8
+	walk_right
+	end_movement
 
 OldaleTown_Movement_14DFEF:: @ 814DFEF
-	step_16
-	step_27
-	step_40
-	step_right
-	step_41
-	step_end
+	walk_fast_up
+	walk_in_place_fastest_left
+	lock_facing_direction
+	walk_right
+	unlock_facing_direction
+	end_movement
 
 OldaleTown_Movement_14DFF5:: @ 814DFF5
-	step_down
-	step_left
-	step_end
+	walk_down
+	walk_left
+	end_movement

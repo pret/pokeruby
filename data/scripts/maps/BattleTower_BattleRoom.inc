@@ -120,46 +120,46 @@ BattleTower_BattleRoom_EventScript_160AB1:: @ 8160AB1
 	end
 
 BattleTower_BattleRoom_Movement_160AB7:: @ 8160AB7
-	step_up
-	step_up
-	step_up
-	step_03
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	face_right
+	end_movement
 
 BattleTower_BattleRoom_Movement_160ABC:: @ 8160ABC
-	step_00
-	step_end
+	face_down
+	end_movement
 
 BattleTower_BattleRoom_Movement_160ABE:: @ 8160ABE
-	step_03
-	step_end
+	face_right
+	end_movement
 
 BattleTower_BattleRoom_Movement_160AC0:: @ 8160AC0
-	step_down
-	step_down
-	step_down
-	step_down
-	step_02
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	face_left
+	end_movement
 
 BattleTower_BattleRoom_Movement_160AC6:: @ 8160AC6
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	end_movement
 
 BattleTower_BattleRoom_Movement_160ACB:: @ 8160ACB
-	step_right
-	step_right
-	step_right
-	step_up
-	step_end
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	end_movement
 
 BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
-	step_down
-	step_left
-	step_left
-	step_left
-	step_03
-	step_end
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	face_right
+	end_movement

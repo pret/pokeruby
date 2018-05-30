@@ -46,12 +46,12 @@ FortreeCity_House4_EventScript_158204:: @ 8158204
 	end
 
 FortreeCity_House4_Movement_158218:: @ 8158218
-	step_15
-	step_15
-	step_18
-	step_25
-	step_13
-	step_end
+	walk_fast_down
+	walk_fast_down
+	walk_fast_right
+	walk_in_place_fastest_down
+	delay_8
+	end_movement
 
 FortreeCity_House4_EventScript_15821E:: @ 815821E
 	lock

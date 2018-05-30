@@ -42,21 +42,21 @@ GraniteCave_StevensRoom_EventScript_15CC83:: @ 815CC83
 	return
 
 GraniteCave_StevensRoom_Movement_15CC8C:: @ 815CC8C
-	step_up
-	step_up
-	step_up
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	delay_8
+	end_movement
 
 GraniteCave_StevensRoom_Movement_15CC93:: @ 815CC93
-	step_left
-	step_up
-	step_up
-	step_up
-	step_right
-	step_up
-	step_up
-	step_13
-	step_end
+	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_up
+	walk_up
+	delay_8
+	end_movement
