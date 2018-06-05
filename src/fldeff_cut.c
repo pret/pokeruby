@@ -374,7 +374,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     for (i = 1; i < 8; i++)
         DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
     FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 

@@ -86,22 +86,22 @@ void LockSelectedEventObject(void)
     }
 }
 
-void sub_8064E2C(void)
+void ScriptUnfreezeEventObjects(void)
 {
-    u8 objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    u8 playerObjectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80A2178();
     UnfreezeEventObjects();
 }
 
 void unref_sub_8064E5C(void)
 {
-    u8 objectId;
+    u8 playerObjectId;
 
     if (gEventObjects[gSelectedEventObject].active)
         EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
-    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
+    playerObjectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[playerObjectId]);
     sub_80A2178();
     UnfreezeEventObjects();
 }

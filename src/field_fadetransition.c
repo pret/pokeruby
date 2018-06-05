@@ -339,7 +339,7 @@ void task_mpl_807E3C8(u8 taskId)
     {
         ScriptContext2_Disable();
         DestroyTask(taskId);
-        sub_8064E2C();
+        ScriptUnfreezeEventObjects();
     }
 }
 

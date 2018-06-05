@@ -72,9 +72,8 @@ void sub_8053720(s16, s16);
 void sub_80537CC(u8);
 void gpu_sync_bg_hide();
 // GetMapConnection
-// sub_8053850
-bool8 sub_80538B0(u16 x, u16 y);
-bool8 sub_80538D0(u16 x, u16 y);
+bool8 SetDiveWarpEmerge(u16 x, u16 y);
+bool8 SetDiveWarpDive(u16 x, u16 y);
 void sub_80538F0(u8 mapGroup, u8 mapNum);
 // sub_8053994
 void player_avatar_init_params_reset(void);

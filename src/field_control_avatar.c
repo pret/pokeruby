@@ -38,8 +38,8 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u8 gUnknown_020297ED;
 
-static EWRAM_DATA u8 gUnknown_0202E8C0 = 0;
-static EWRAM_DATA u16 gUnknown_0202E8C2 = 0;
+static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
+static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
 
 u8 gSelectedEventObject;
 
@@ -82,40 +82,44 @@ extern u8 S_EggHatch[];
 extern u8 gUnknown_0815FD0D[];
 extern u8 gUnknown_081C6BDE[];
 
-static void player_get_pos_to_and_height(struct MapPosition *);
-static void player_get_next_pos_and_height(struct MapPosition *);
-static u16 cur_mapdata_block_role_at_player_pos(int);
-static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
-static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c);
-static u8 *sub_8068364(struct MapPosition *, u8, u8);
-static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *, u8, u8 c);
-static u8 *sub_8068500(struct MapPosition *, u8, u8);
-static u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
-static bool32 sub_8068770(void);
-static bool32 sub_80687A4(void);
-static bool8 sub_80687E4(struct MapPosition *, u16, u16);
-static void happiness_algorithm_step(void);
-static bool8 overworld_poison_step(void);
-static bool8 is_it_battle_time_3(u16);
+static void GetPlayerPosition(struct MapPosition *);
+static void GetInFrontOfPlayerPosition(struct MapPosition *);
+static u16 GetPlayerCurMetatileBehavior(int);
+static bool8 TryStartInteractionScript(struct MapPosition*, u16, u8);
+static u8 *GetInteractionScript(struct MapPosition*, u8, u8);
+static u8 *GetInteractedEventObjectScript(struct MapPosition *, u8, u8);
+static u8 *GetInteractedBackgroundEventScript(struct MapPosition *, u8, u8);
+static u8 *GetInteractedMetatileScript(struct MapPosition *, u8, u8);
+static u8 *GetInteractedWaterScript(struct MapPosition *, u8, u8);
+static bool32 TrySetupDiveDownScript(void);
+static bool32 TrySetupDiveEmergeScript(void);
+static bool8 TryStartStepBasedScript(struct MapPosition *, u16, u16);
+static void UpdateHappinessStep(void);
+static bool8 UpdatePoisonStepCounter(void);
+static bool8 CheckStandardWildEncounter(u16);
 static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
-static bool8 sub_8068B30(u16);
-static bool8 is_non_stair_warp_tile(u16, u8);
-static s8 map_warp_check_packed(struct MapHeader *, struct MapPosition *);
+static bool8 IsWarpMetatileBehavior(u16);
+static bool8 IsArrowWarpMetatileBehavior(u16, u8);
+static s8 FindWarpEventByPosition(struct MapHeader *, struct MapPosition *);
 static void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
 static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
-static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
-static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
-static struct BgEvent *FindInvisibleEventObjectByPosition(struct MapHeader *, u16, u16, u8);;
+static s8 FindWarpEventByCoordsAndId(struct MapHeader *, u16, u16, u8);
+static u8 *GetCoordEventScriptAtPosition(struct MapHeader *, u16, u16, u8);
+static struct BgEvent *FindBackgroundEventByPosition(struct MapHeader *, u16, u16, u8);
+static bool8 TryStartCoordEventScript(struct MapPosition *);
+static bool8 TryStartWarpEventScript(struct MapPosition *, u16);
+static bool8 TryStartCrackedFloorHoleScript(u16);
+static bool8 TryStartStepCountScript(void);
 
-void FieldClearPlayerInput(struct FieldInput *input)
+void ClearPlayerFieldInput(struct FieldInput *input)
 {
     input->pressedAButton = 0;
-    input->input_field_0_1 = 0;
+    input->checkStandardWildEncounter = 0;
     input->pressedStartButton = 0;
     input->pressedSelectButton = 0;
     input->input_field_0_4 = 0;
     input->input_field_0_5 = 0;
-    input->input_field_0_6 = 0;
+    input->tookStep = 0;
     input->pressedBButton = 0;
     input->input_field_1_0 = 0;
     input->input_field_1_1 = 0;
@@ -124,13 +128,13 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->dpadDirection = 0;
 }
 
-void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
+void GetPlayerFieldInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
-    u8 r6 = gPlayerAvatar.tileTransitionState;
-    u8 r9 = gPlayerAvatar.runningState;
-    bool8 forcedMove = MetatileBehavior_IsMoveTile(cur_mapdata_block_role_at_player_pos(r9));
+    u8 tileTransitionState = gPlayerAvatar.tileTransitionState;
+    u8 runningState = gPlayerAvatar.runningState;
+    bool8 forcedMove = MetatileBehavior_IsMoveTile(GetPlayerCurMetatileBehavior(runningState));
 
-    if ((r6 == 2 && forcedMove == FALSE) || r6 == 0)
+    if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
         if (GetPlayerSpeed() != 4)
         {
@@ -143,19 +147,22 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
         }
+
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
         {
             input->input_field_0_4 = TRUE;
             input->input_field_0_5 = TRUE;
         }
     }
+
     if (forcedMove == FALSE)
     {
-        if (r6 == 2 && r9 == 2)
-            input->input_field_0_6 = TRUE;
-        if (forcedMove == FALSE && r6 == 2)
-            input->input_field_0_1 = TRUE;
+        if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
+            input->tookStep = TRUE;
+        if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
+            input->checkStandardWildEncounter = TRUE;
     }
+
     if (heldKeys & DPAD_UP)
         input->dpadDirection = DIR_NORTH;
     else if (heldKeys & DPAD_DOWN)
@@ -164,19 +171,21 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_WEST;
     else if (heldKeys & DPAD_RIGHT)
         input->dpadDirection = DIR_EAST;
+
 #if DEBUG
     if ((heldKeys & R_BUTTON) && input->pressedStartButton)
     {
         input->input_field_1_2 = TRUE;
         input->pressedStartButton = FALSE;
     }
+
     if (gUnknown_020297ED)
     {
         if (heldKeys & R_BUTTON)
         {
             input->input_field_1_1 = TRUE;
-            input->input_field_0_6 = FALSE;
-            input->input_field_0_1 = FALSE;
+            input->tookStep = FALSE;
+            input->checkStandardWildEncounter = FALSE;
             input->input_field_0_4 = FALSE;
             input->input_field_0_5 = FALSE;
             if (newKeys & SELECT_BUTTON)
@@ -185,23 +194,24 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedSelectButton = FALSE;
             }
         }
+
         if (heldKeys & L_BUTTON)
             input->input_field_1_3 = TRUE;
     }
 #endif
 }
 
-int sub_8068024(struct FieldInput *input)
+int ProcessPlayerFieldInput(struct FieldInput *input)
 {
     struct MapPosition position;
-    u8 r6;
-    u16 r4;
+    u8 playerDirection;
+    u16 metatileBehavior;
 
-    r6 = GetPlayerFacingDirection();
-    player_get_pos_to_and_height(&position);
-    r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
+    playerDirection = GetPlayerFacingDirection();
+    GetPlayerPosition(&position);
+    metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 #if DEBUG
-    if (input->input_field_1_3 && dive_warp(&position, r4) == TRUE)
+    if (input->input_field_1_3 && dive_warp(&position, metatileBehavior) == TRUE)
         return TRUE;
 #endif
 
@@ -219,31 +229,33 @@ int sub_8068024(struct FieldInput *input)
      mapheader_run_first_tag2_script_list_match() == 1)
         return TRUE;
 
-    if (input->pressedBButton && sub_80687A4() == 1)
+    if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
-    if (input->input_field_0_6)
+    if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
-        if (sub_80687E4(&position, r4, r6) == 1)
+        if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
-    if (input->input_field_0_1 && is_it_battle_time_3(r4) == 1)
+    if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
         return TRUE;
-    if (input->input_field_0_4 && input->dpadDirection == r6)
+    if (input->input_field_0_4 && input->dpadDirection == playerDirection)
     {
-        if (mapheader_run_first_tag2_script_list_match_conditionally(&position, r4, r6) == 1)
+        if (mapheader_run_first_tag2_script_list_match_conditionally(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
-    player_get_next_pos_and_height(&position);
-    r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
-    if (input->pressedAButton && sub_80681F0(&position, r4, r6) == 1)
+
+    GetInFrontOfPlayerPosition(&position);
+    metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
+    if (input->pressedAButton && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
         return TRUE;
-    if (input->input_field_0_5 && input->dpadDirection == r6)
+
+    if (input->input_field_0_5 && input->dpadDirection == playerDirection)
     {
-        if (map_warp_consider_2_to_inside(&position, r4, r6) == 1)
+        if (map_warp_consider_2_to_inside(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
     }
-    if (input->pressedAButton && sub_8068770() == 1)
+    if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
         return TRUE;
     if (input->pressedStartButton)
     {
@@ -251,7 +263,7 @@ int sub_8068024(struct FieldInput *input)
         sub_8071310();
         return TRUE;
     }
-    if (input->pressedSelectButton && sub_80A6D1C() == TRUE)
+    if (input->pressedSelectButton && UseRegisteredKeyItem() == TRUE)
         return TRUE;
 
 #if DEBUG
@@ -271,13 +283,13 @@ int sub_8068024(struct FieldInput *input)
     return FALSE;
 }
 
-static void player_get_pos_to_and_height(struct MapPosition *position)
+static void GetPlayerPosition(struct MapPosition *position)
 {
     PlayerGetDestCoords(&position->x, &position->y);
     position->height = PlayerGetZCoord();
 }
 
-static void player_get_next_pos_and_height(struct MapPosition *position)
+static void GetInFrontOfPlayerPosition(struct MapPosition *position)
 {
     s16 x, y;
 
@@ -289,7 +301,7 @@ static void player_get_next_pos_and_height(struct MapPosition *position)
         position->height = 0;
 }
 
-static u16 cur_mapdata_block_role_at_player_pos(int unused)
+static u16 GetPlayerCurMetatileBehavior(int runningState)
 {
     s16 x, y;
 
@@ -297,13 +309,13 @@ static u16 cur_mapdata_block_role_at_player_pos(int unused)
     return MapGridGetMetatileBehaviorAt(x, y);
 }
 
-static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
+static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
-    u8 *script = TryGetScriptOnPressingA(position, b, c);
-
+    u8 *script = GetInteractionScript(position, metatileBehavior, direction);
     if (script == NULL)
         return FALSE;
 
+    // Play computer noise for PC-related scripts.
     if (script != gUnknown_0815281E
      && script != gUnknown_08152C39
      && script != gUnknown_0815F36C
@@ -315,98 +327,105 @@ static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
     return TRUE;
 }
 
-static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
+static u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 *script;
+    u8 *script = GetInteractedEventObjectScript(position, metatileBehavior, direction);
+    if (script != NULL)
+        return script;
 
-    script = sub_8068364(position, b, c);
+    script = GetInteractedBackgroundEventScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
-    script = TryGetInvisibleEventObjectScript(position, b, c);
+
+    script = GetInteractedMetatileScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
-    script = sub_8068500(position, b, c);
-    if (script != NULL)
-        return script;
-    script = TryGetFieldMoveScript(position, b, c);
+
+    script = GetInteractedWaterScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
 
     return NULL;
 }
 
-u8 *sub_80682A8(struct MapPosition *position, u8 unused, u8 c)
+u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 r3;
+    u8 eventObjectId;
     s32 i;
 
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
-        r3 = GetEventObjectIdByXYZ(position->x, position->y, position->height);
+        eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
     else
-        r3 = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
-    if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
+        eventObjectId = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[direction].x, position->y + gUnknown_0821664C[direction].y, position->height);
+
+    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
         return NULL;
+
     for (i = 0; i < 4; i++)
     {
-        if (gLinkPlayerEventObjects[i].active == TRUE && gLinkPlayerEventObjects[i].eventObjId == r3)
+        if (gLinkPlayerEventObjects[i].active == TRUE && gLinkPlayerEventObjects[i].eventObjId == eventObjectId)
             return NULL;
     }
-    gSelectedEventObject = r3;
-    gSpecialVar_LastTalked = gEventObjects[r3].localId;
-    gSpecialVar_Facing = c;
-    return GetEventObjectScriptPointerByEventObjectId(r3);
+
+    gSelectedEventObject = eventObjectId;
+    gSpecialVar_LastTalked = gEventObjects[eventObjectId].localId;
+    gSpecialVar_Facing = direction;
+    return GetEventObjectScriptPointerByEventObjectId(eventObjectId);
 }
 
-static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
+static u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 r3;
+    u8 eventObjectId;
     u8 *script;
 
-    r3 = GetEventObjectIdByXYZ(position->x, position->y, position->height);
-    if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
+    eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
+    if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
     {
-        if (MetatileBehavior_IsCounter(b) != TRUE)
+        if (MetatileBehavior_IsCounter(metatileBehavior) != TRUE)
             return NULL;
-        r3 = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[c].x, position->y + gUnknown_0821664C[c].y, position->height);
-        if (r3 == 16 || gEventObjects[r3].localId == 0xFF)
+
+        // Look for an event object on the other side of the counter.
+        eventObjectId = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[direction].x, position->y + gUnknown_0821664C[direction].y, position->height);
+        if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
             return NULL;
     }
-    //_080683E8
-    gSelectedEventObject = r3;
-    gSpecialVar_LastTalked = gEventObjects[r3].localId;
-    gSpecialVar_Facing = c;
-    script = GetEventObjectScriptPointerByEventObjectId(r3);
+
+    gSelectedEventObject = eventObjectId;
+    gSpecialVar_LastTalked = gEventObjects[eventObjectId].localId;
+    gSpecialVar_Facing = direction;
+    script = GetEventObjectScriptPointerByEventObjectId(eventObjectId);
     script = GetRamScript(gSpecialVar_LastTalked, script);
     return script;
 }
 
-static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *position, u8 unused, u8 c)
+static u8 *GetInteractedBackgroundEventScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    struct BgEvent *bgEvent = FindInvisibleEventObjectByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
+    struct BgEvent *bgEvent = FindBackgroundEventByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
 
     if (bgEvent == NULL)
         return NULL;
     if (bgEvent->bgUnion.script == NULL)
         return gUnknown_081C6C02;
+
     switch (bgEvent->kind)
     {
     case 0:
     default:
         return bgEvent->bgUnion.script;
     case 1:
-        if (c != 2)
+        if (direction != DIR_NORTH)
             return NULL;
         break;
     case 2:
-        if (c != 1)
+        if (direction != DIR_SOUTH)
             return NULL;
         break;
     case 3:
-        if (c != 4)
+        if (direction != DIR_EAST)
             return NULL;
         break;
     case 4:
-        if (c != 3)
+        if (direction != DIR_WEST)
             return NULL;
         break;
     case 5:
@@ -418,7 +437,7 @@ static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *position, u8 unu
             return NULL;
         return HiddenItemScript;
     case 8:
-        if (c == 2)
+        if (direction == DIR_NORTH)
         {
             gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
             if (sub_80BC050())
@@ -426,63 +445,67 @@ static u8 *TryGetInvisibleEventObjectScript(struct MapPosition *position, u8 unu
         }
         return NULL;
     }
+
     return bgEvent->bgUnion.script;
 }
 
-static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
+static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     s8 height;
 
-    if (MetatileBehavior_IsPlayerFacingTVScreen(b, c) == TRUE)
+    if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
         return Event_TV;
-    if (MetatileBehavior_IsPC(b) == TRUE)
+    if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return gUnknown_081A0009;
-    if (MetatileBehavior_IsClosedSootopolisGymDoor(b) == TRUE)
+    if (MetatileBehavior_IsClosedSootopolisGymDoor(metatileBehavior) == TRUE)
         return ClosedSootopolisGymDoorScript;
-    if (is_tile_x84(b) == TRUE)
+    if (is_tile_x84(metatileBehavior) == TRUE)
         return gUnknown_081A4363;
-    if (MetatileBehavior_IsPokeblockFeeder(b) == TRUE)
+    if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
         return gUnknown_081C346A;
-    if (MetatileBehavior_IsTrickHousePuzzleDoor(b) == TRUE)
+    if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
         return gUnknown_081616E1;
-    if (MetatileBehavior_IsRegionMap(b) == TRUE)
+    if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return Event_WorldMap;
-    if (sub_805791C(b) == TRUE)
+    if (sub_805791C(metatileBehavior) == TRUE)
         return S_RunningShoesManual;
-    if (MetatileBehavior_IsPictureBookShelf(b) == TRUE)
+    if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)
         return PictureBookShelfScript;
-    if (MetatileBehavior_IsBookShelf(b) == TRUE)
+    if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
         return BookshelfScript;
-    if (MetatileBehavior_IsPokeCenterBookShelf(b) == TRUE)
+    if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
         return PokemonCenterBookshelfScript;
-    if (MetatileBehavior_IsVase(b) == TRUE)
+    if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)
         return VaseScript;
-    if (MetatileBehavior_IsTrashCan(b) == TRUE)
+    if (MetatileBehavior_IsTrashCan(metatileBehavior) == TRUE)
         return TrashCanScript;
-    if (MetatileBehavior_IsShopShelf(b) == TRUE)
+    if (MetatileBehavior_IsShopShelf(metatileBehavior) == TRUE)
         return ShopShelfScript;
-    if (MetatileBehavior_IsBlueprint(b) == TRUE)
+    if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
         return BlueprintScript;
+
     height = position->height;
     if (height == MapGridGetZCoordAt(position->x, position->y))
     {
-        if (MetatileBehavior_IsSecretBasePC(b) == TRUE)
+        if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
             return gUnknown_0815F36C;
-        if (sub_805724C(b) == TRUE)
+        if (sub_805724C(metatileBehavior) == TRUE)
             return gUnknown_0815F43A;
-        if (sub_8057364(b) == TRUE)
+        if (sub_8057364(metatileBehavior) == TRUE)
             return gUnknown_0815F523;
-        if (sub_8057378(b) == TRUE)
+        if (sub_8057378(metatileBehavior) == TRUE)
             return gUnknown_0815F528;
     }
+
     return NULL;
 }
 
-static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
+static u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
     if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
         return UseSurfScript;
-    if (MetatileBehavior_IsWaterfall(b) == TRUE)
+
+    if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
         if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
             return S_UseWaterfall;
@@ -492,9 +515,9 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     return NULL;
 }
 
-static bool32 sub_8068770(void)
+static bool32 TrySetupDiveDownScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && sub_8068F18() == 2)
+    if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2)
     {
         ScriptContext1_SetupScript(UseDiveScript);
         return TRUE;
@@ -502,9 +525,9 @@ static bool32 sub_8068770(void)
     return FALSE;
 }
 
-static bool32 sub_80687A4(void)
+static bool32 TrySetupDiveEmergeScript(void)
 {
-    if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_8068F18() == 1)
+    if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
         ScriptContext1_SetupScript(S_UseDiveUnderwater);
         return TRUE;
@@ -512,24 +535,24 @@ static bool32 sub_80687A4(void)
     return FALSE;
 }
 
-static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
+static bool8 TryStartStepBasedScript(struct MapPosition *position, u16 metatileBehavior, u16 direction)
 {
-    if (mapheader_trigger_activate_at__run_now(position) == TRUE)
+    if (TryStartCoordEventScript(position) == TRUE)
         return TRUE;
-    if (sub_8068A64(position, b) == TRUE)
+    if (TryStartWarpEventScript(position, metatileBehavior) == TRUE)
         return TRUE;
-    if (sub_8068870(b) == TRUE)
+    if (TryStartCrackedFloorHoleScript(metatileBehavior) == TRUE)
         return TRUE;
-    if (sub_8068894() == TRUE)
+    if (TryStartStepCountScript() == TRUE)
         return TRUE;
     if (UpdateRepelCounter() == TRUE)
         return TRUE;
     return FALSE;
 }
 
-bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
+bool8 TryStartCoordEventScript(struct MapPosition *position)
 {
-    u8 *script = mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
+    u8 *script = GetCoordEventScriptAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
 
     if (script == NULL)
         return FALSE;
@@ -537,10 +560,9 @@ bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
     return TRUE;
 }
 
-//can be u8, u16, or u32
-bool8 sub_8068870(u16 a)
+bool8 TryStartCrackedFloorHoleScript(u16 metatileBehavior)
 {
-    if (MetatileBehavior_IsCrackedFloorHole(a))
+    if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
         ScriptContext1_SetupScript(S_FallDownHole);
         return TRUE;
@@ -548,11 +570,11 @@ bool8 sub_8068870(u16 a)
     return FALSE;
 }
 
-bool8 sub_8068894(void)
+bool8 TryStartStepCountScript(void)
 {
     IncrementRematchStepCounter();
-    happiness_algorithm_step();
-    if (overworld_poison_step() == TRUE)
+    UpdateHappinessStep();
+    if (UpdatePoisonStepCounter() == TRUE)
     {
         ScriptContext1_SetupScript(gUnknown_081A14B8);
         return TRUE;
@@ -573,12 +595,12 @@ bool8 sub_8068894(void)
     return FALSE;
 }
 
-void unref_sub_80688F8(void)
+void Unref_ClearHappinessStepCounter(void)
 {
     VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
 }
 
-static void happiness_algorithm_step(void)
+static void UpdateHappinessStep(void)
 {
     u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
     int i;
@@ -596,12 +618,12 @@ static void happiness_algorithm_step(void)
     }
 }
 
-void overworld_poison_timer_set(void)
+void ClearPoisonStepCounter(void)
 {
     VarSet(VAR_POISON_STEP_COUNTER, 0);
 }
 
-static bool8 overworld_poison_step(void)
+static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
@@ -626,75 +648,75 @@ static bool8 overworld_poison_step(void)
     return FALSE;
 }
 
-void prev_quest_postbuffer_cursor_backup_reset(void)
+void RestartWildEncounterImmunitySteps(void)
 {
-    gUnknown_0202E8C0 = 0;
+    // Starts at 0 and counts up to 4 steps.
+    sWildEncounterImmunitySteps = 0;
 }
 
-static bool8 is_it_battle_time_3(u16 a)
+static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-    if (gUnknown_0202E8C0 < 4)
+    if (sWildEncounterImmunitySteps < 4)
     {
-        gUnknown_0202E8C0++;
-        gUnknown_0202E8C2 = a;
+        sWildEncounterImmunitySteps++;
+        sPreviousPlayerMetatileBehavior = metatileBehavior;
         return FALSE;
     }
-    if (StandardWildEncounter(a, gUnknown_0202E8C2) == TRUE)
+
+    if (StandardWildEncounter(metatileBehavior, sPreviousPlayerMetatileBehavior) == TRUE)
     {
-        gUnknown_0202E8C0 = 0;
-        gUnknown_0202E8C2 = a;
+        sWildEncounterImmunitySteps = 0;
+        sPreviousPlayerMetatileBehavior = metatileBehavior;
         return TRUE;
     }
-    else
-    {
-        gUnknown_0202E8C2 = a;
-        return FALSE;
-    }
+
+    sPreviousPlayerMetatileBehavior = metatileBehavior;
+    return FALSE;
 }
 
-static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
+static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
-    s8 r6 = map_warp_check_packed(&gMapHeader, position);
+    s8 warpEventId = FindWarpEventByPosition(&gMapHeader, position);
 
-    if (is_non_stair_warp_tile(b, c) == TRUE && r6 != -1)
+    if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE && warpEventId != -1)
     {
         walkrun_find_lowest_active_bit_in_bitfield();
-        sub_8068C30(&gMapHeader, r6, position);
+        sub_8068C30(&gMapHeader, warpEventId, position);
         sub_8080E88();
         return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_8068A64(struct MapPosition *position, u16 b)
+bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior)
 {
-    s8 r4 = map_warp_check_packed(&gMapHeader, position);
+    s8 warpEventId = FindWarpEventByPosition(&gMapHeader, position);
 
-    if (r4 != -1 && sub_8068B30(b) == TRUE)
+    if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
     {
         walkrun_find_lowest_active_bit_in_bitfield();
-        sub_8068C30(&gMapHeader, r4, position);
-        if (MetatileBehavior_IsEscalator(b) == TRUE)
+        sub_8068C30(&gMapHeader, warpEventId, position);
+        if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         {
-            sub_8080F2C(b);
+            sub_8080F2C(metatileBehavior);
             return TRUE;
         }
-        if (MetatileBehavior_IsLavaridgeB1FWarp(b) == TRUE)
+        if (MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) == TRUE)
         {
             sub_8080F48();
             return TRUE;
         }
-        if (MetatileBehavior_IsLavaridge1FWarp(b) == TRUE)
+        if (MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) == TRUE)
         {
             sub_8080F58();
             return TRUE;
         }
-        if (MetatileBehavior_IsAquaHideoutWarp(b) == TRUE)
+        if (MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) == TRUE)
         {
             sub_8080F68();
             return TRUE;
         }
-        if (MetatileBehavior_IsMtPyreHole(b) == TRUE)
+        if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
             ScriptContext1_SetupScript(gUnknown_081C6BDE);
             return TRUE;
@@ -705,44 +727,44 @@ bool8 sub_8068A64(struct MapPosition *position, u16 b)
     return FALSE;
 }
 
-static bool8 sub_8068B30(u16 a)
+static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
 {
-    if (MetatileBehavior_IsWarpDoor(a) != TRUE
-     && MetatileBehavior_IsLadder(a) != TRUE
-     && MetatileBehavior_IsEscalator(a) != TRUE
-     && MetatileBehavior_IsNonAnimDoor(a) != TRUE
-     && MetatileBehavior_IsLavaridgeB1FWarp(a) != TRUE
-     && MetatileBehavior_IsLavaridge1FWarp(a) != TRUE
-     && MetatileBehavior_IsAquaHideoutWarp(a) != TRUE
-     && MetatileBehavior_IsMtPyreHole(a) != TRUE)
+    if (MetatileBehavior_IsWarpDoor(metatileBehavior) != TRUE
+     && MetatileBehavior_IsLadder(metatileBehavior) != TRUE
+     && MetatileBehavior_IsEscalator(metatileBehavior) != TRUE
+     && MetatileBehavior_IsNonAnimDoor(metatileBehavior) != TRUE
+     && MetatileBehavior_IsLavaridgeB1FWarp(metatileBehavior) != TRUE
+     && MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) != TRUE
+     && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
+     && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }
 
-static bool8 is_non_stair_warp_tile(u16 a, u8 b)
+static bool8 IsArrowWarpMetatileBehavior(u16 metatileBehavior, u8 direction)
 {
-    switch (b)
+    switch (direction)
     {
-    case 2:
-        return MetatileBehavior_IsNorthArrowWarp(a);
-    case 1:
-        return MetatileBehavior_IsSouthArrowWarp(a);
-    case 3:
-        return MetatileBehavior_IsWestArrowWarp(a);
-    case 4:
-        return MetatileBehavior_IsEastArrowWarp(a);
+    case DIR_NORTH:
+        return MetatileBehavior_IsNorthArrowWarp(metatileBehavior);
+    case DIR_SOUTH:
+        return MetatileBehavior_IsSouthArrowWarp(metatileBehavior);
+    case DIR_WEST:
+        return MetatileBehavior_IsWestArrowWarp(metatileBehavior);
+    case DIR_EAST:
+        return MetatileBehavior_IsEastArrowWarp(metatileBehavior);
     }
     return FALSE;
 }
 
-static s8 map_warp_check_packed(struct MapHeader *mapHeader, struct MapPosition *position)
+static s8 FindWarpEventByPosition(struct MapHeader *mapHeader, struct MapPosition *position)
 {
-    return map_warp_check(mapHeader, position->x - 7, position->y - 7, position->height);
+    return FindWarpEventByCoordsAndId(mapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *position)
+static void sub_8068C30(struct MapHeader *unused, s8 warpEventId, struct MapPosition *position)
 {
-    struct WarpEvent *warpEvent = &gMapHeader.events->warps[b];
+    struct WarpEvent *warpEvent = &gMapHeader.events->warps[warpEventId];
 
     if (warpEvent->mapNum == 0x7F)
     {
@@ -756,28 +778,28 @@ static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *posi
         sub_80535C4(position->x, position->y);
         mapHeader = Overworld_GetMapHeaderByGroupAndId(warpEvent->unk7, warpEvent->mapNum);
         if (mapHeader->events->warps[warpEvent->mapGroup].mapNum == 0x7F)
-            saved_warp2_set(mapHeader->events->warps[b].mapGroup, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, b);
+            saved_warp2_set(mapHeader->events->warps[warpEventId].mapGroup, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, warpEventId);
     }
 }
 
-static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
+static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
-    s8 r4;
+    s8 warpEventId;
 
-    if (c == 2)
+    if (direction == DIR_NORTH)
     {
-        if (sub_80571C0(b) == TRUE)
+        if (sub_80571C0(metatileBehavior) == TRUE)
         {
             sub_80BC038(position, gMapHeader.events);
             return TRUE;
         }
-        if (MetatileBehavior_IsWarpDoor(b) == TRUE)
+        if (MetatileBehavior_IsWarpDoor(metatileBehavior) == TRUE)
         {
-            r4 = map_warp_check_packed(&gMapHeader, position);
-            if (r4 != -1 && sub_8068B30(b) == TRUE)
+            warpEventId = FindWarpEventByPosition(&gMapHeader, position);
+            if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
             {
                 walkrun_find_lowest_active_bit_in_bitfield();
-                sub_8068C30(&gMapHeader, r4, position);
+                sub_8068C30(&gMapHeader, warpEventId, position);
                 sub_8080EF0();
                 return TRUE;
             }
@@ -786,7 +808,7 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, 
     return FALSE;
 }
 
-static s8 map_warp_check(struct MapHeader *mapHeader, u16 x, u16 y, u8 warpId)
+static s8 FindWarpEventByCoordsAndId(struct MapHeader *mapHeader, u16 x, u16 y, u8 warpId)
 {
     s32 i;
     struct WarpEvent *warpEvent = mapHeader->events->warps;
@@ -803,7 +825,7 @@ static s8 map_warp_check(struct MapHeader *mapHeader, u16 x, u16 y, u8 warpId)
     return -1;
 }
 
-static u8 *trigger_activate(struct CoordEvent *coordEvent)
+static u8 *TryRunCoordEventScript(struct CoordEvent *coordEvent)
 {
     if (coordEvent != NULL)
     {
@@ -823,7 +845,7 @@ static u8 *trigger_activate(struct CoordEvent *coordEvent)
     return NULL;
 }
 
-static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
+static u8 *GetCoordEventScriptAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     s32 i;
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
@@ -835,7 +857,7 @@ static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16
         {
             if (coordEvents[i].elevation == elevation || coordEvents[i].elevation == 0)
             {
-                u8 *script = trigger_activate(&coordEvents[i]);
+                u8 *script = TryRunCoordEventScript(&coordEvents[i]);
                 if (script != NULL)
                     return script;
             }
@@ -844,12 +866,12 @@ static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 x, u16
     return NULL;
 }
 
-u8 *sub_8068E24(struct MapPosition *position)
+u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position)
 {
-    return mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
+    return GetCoordEventScriptAtPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-static struct BgEvent *FindInvisibleEventObjectByPosition(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static struct BgEvent *FindBackgroundEventByPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     u8 i;
     struct BgEvent *bgEvents = mapHeader->events->bgEvents;
@@ -857,20 +879,20 @@ static struct BgEvent *FindInvisibleEventObjectByPosition(struct MapHeader *mapH
 
     for (i = 0; i < bgEventCount; i++)
     {
-        if ((u16)bgEvents[i].x == b && (u16)bgEvents[i].y == c)
+        if ((u16)bgEvents[i].x == x && (u16)bgEvents[i].y == y)
         {
-            if (bgEvents[i].unk4 == d || bgEvents[i].unk4 == 0)
+            if (bgEvents[i].elevation == elevation || bgEvents[i].elevation == 0)
                 return &bgEvents[i];
         }
     }
     return NULL;
 }
 
-bool8 dive_warp(struct MapPosition *position, u16 b)
+bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
 {
-    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(b) == 0)
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsNotSurfacable(metatileBehavior))
     {
-        if (sub_80538B0(position->x - 7, position->y - 7))
+        if (SetDiveWarpEmerge(position->x - 7, position->y - 7))
         {
             walkrun_find_lowest_active_bit_in_bitfield();
             sp13E_warp_to_last_warp();
@@ -878,9 +900,9 @@ bool8 dive_warp(struct MapPosition *position, u16 b)
             return TRUE;
         }
     }
-    else if (sub_80574EC(b) == TRUE)
+    else if (MetatileBehavior_IsDiveable(metatileBehavior) == TRUE)
     {
-        if (sub_80538D0(position->x - 7, position->y - 7))
+        if (SetDiveWarpDive(position->x - 7, position->y - 7))
         {
             walkrun_find_lowest_active_bit_in_bitfield();
             sp13E_warp_to_last_warp();
@@ -891,21 +913,21 @@ bool8 dive_warp(struct MapPosition *position, u16 b)
     return FALSE;
 }
 
-u8 sub_8068F18(void)
+u8 TrySetDiveWarp(void)
 {
     s16 x, y;
-    u8 r5;
+    u8 metatileBehavior;
 
     PlayerGetDestCoords(&x, &y);
-    r5 = MapGridGetMetatileBehaviorAt(x, y);
-    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && sub_805750C(r5) == 0)
+    metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsNotSurfacable(metatileBehavior))
     {
-        if (sub_80538B0(x - 7, y - 7) == TRUE)
+        if (SetDiveWarpEmerge(x - 7, y - 7) == TRUE)
             return 1;
     }
-    else if (sub_80574EC(r5) == TRUE)
+    else if (MetatileBehavior_IsDiveable(metatileBehavior) == TRUE)
     {
-        if (sub_80538D0(x - 7, y - 7) == TRUE)
+        if (SetDiveWarpDive(x - 7, y - 7) == TRUE)
             return 2;
     }
     return 0;
@@ -913,12 +935,12 @@ u8 sub_8068F18(void)
 
 u8 *GetEventObjectScriptPointerPlayerFacing(void)
 {
-    u8 r4;
+    u8 direction;
     struct MapPosition position;
 
-    r4 = GetPlayerMovementDirection();
-    player_get_next_pos_and_height(&position);
-    return sub_8068364(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), r4);
+    direction = GetPlayerMovementDirection();
+    GetInFrontOfPlayerPosition(&position);
+    return GetInteractedEventObjectScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
 }
 
 int SetCableClubWarp(void)
@@ -926,8 +948,8 @@ int SetCableClubWarp(void)
     struct MapPosition position;
 
     GetPlayerMovementDirection();  //unnecessary
-    player_get_pos_to_and_height(&position);
+    GetPlayerPosition(&position);
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
-    sub_8068C30(&gMapHeader, map_warp_check_packed(&gMapHeader, &position), &position);
+    sub_8068C30(&gMapHeader, FindWarpEventByPosition(&gMapHeader, &position), &position);
     return 0;
 }

@@ -18,6 +18,7 @@
 #include "event_object_movement.h"
 #include "metatile_behavior.h"
 #include "field_camera.h"
+#include "field_control_avatar.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
 #include "fieldmap.h"
@@ -1623,8 +1624,7 @@ bool8 sub_8087058(struct Task *task, struct EventObject *eventObject)
     return FALSE;
 }
 
-void Task_Dive(u8);
-extern int dive_warp(struct MapPosition *, u16);
+static void Task_Dive(u8);
 
 bool8 FldEff_UseDive(void)
 {

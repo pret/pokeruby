@@ -170,7 +170,7 @@ u8 debug_sub_80B0800(void)
     u8 r2;
 
     CloseMenu();
-    r2 = sub_8068F18();
+    r2 = TrySetDiveWarp();
     if (r2 != 0)
     {
         gFieldEffectArguments[0] = 0;

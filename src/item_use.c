@@ -204,7 +204,7 @@ void ItemUseOnFieldCB_Bike(u8 taskId)
     if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == 1)
         GetOnOffBike(4);
 
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
@@ -312,7 +312,7 @@ void RunItemfinderResults(u8 taskId)
 void ExitItemfinder(u8 taskId)
 {
     Menu_EraseWindowRect(0, 14, 29, 19);
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     DestroyTask(taskId);
 }
