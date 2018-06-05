@@ -883,7 +883,7 @@ static void sub_808ADAC(void)
 
 static bool8 SetUpFieldMove_Dive(void)
 {
-    gFieldEffectArguments[1] = sub_8068F18();
+    gFieldEffectArguments[1] = TrySetDiveWarp();
     if (gFieldEffectArguments[1])
     {
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;

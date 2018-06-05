@@ -891,15 +891,17 @@ bool8 sub_80574D8(u8 var)
         return FALSE;
 }
 
-bool8 sub_80574EC(u8 var)
+bool8 MetatileBehavior_IsDiveable(u8 metatileBehavior)
 {
-    if (var == MB_SEMI_DEEP_WATER || var == MB_DEEP_WATER || var == MB_SOOTOPOLIS_DEEP_WATER)
+    if (metatileBehavior == MB_SEMI_DEEP_WATER
+     || metatileBehavior == MB_DEEP_WATER
+     || metatileBehavior == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 sub_805750C(u8 var)
+bool8 MetatileBehavior_IsNotSurfacable(u8 var)
 {
     if (var == MB_NO_SURFACING || var == MB_SEAWEED_NO_SURFACING)
         return TRUE;

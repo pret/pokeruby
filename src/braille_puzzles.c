@@ -185,7 +185,7 @@ void Task_BrailleWait(u8 taskId)
                 data[0] = 4;
             break;
         }
-        sub_8064E2C();
+        ScriptUnfreezeEventObjects();
         DestroyTask(taskId);
         ScriptContext2_Disable();
         break;
@@ -195,7 +195,7 @@ void Task_BrailleWait(u8 taskId)
             data[0] = 4;
         break;
     case 4:
-        sub_8064E2C();
+        ScriptUnfreezeEventObjects();
         ScriptContext1_SetupScript(S_OpenRegiceChamber);
         DestroyTask(taskId);
         break;

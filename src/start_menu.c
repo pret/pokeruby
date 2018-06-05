@@ -588,7 +588,7 @@ static u8 SaveCallback2(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:
         Menu_EraseScreen();
-        sub_8064E2C();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         return TRUE;
     }

@@ -4603,8 +4603,7 @@ bool8 EventObjectCheckHeldMovementStatus(struct EventObject *eventObject)
 
 bool8 EventObjectClearHeldMovementIfFinished(struct EventObject *eventObject)
 {
-    u8 heldMovementStatus;
-    heldMovementStatus = EventObjectCheckHeldMovementStatus(eventObject);
+    u8 heldMovementStatus = EventObjectCheckHeldMovementStatus(eventObject);
     if (heldMovementStatus != 0 && heldMovementStatus != 16)
         EventObjectClearHeldMovementIfActive(eventObject);
 

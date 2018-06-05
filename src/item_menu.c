@@ -54,7 +54,7 @@ extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
 extern void sub_802E424(u8);
-extern void sub_8064E2C(void);
+extern void ScriptUnfreezeEventObjects(void);
 
 struct UnknownStruct2
 {
@@ -2733,7 +2733,7 @@ void CleanUpOverworldMessage(u8 taskId)
 {
     Menu_EraseWindowRect(0, 13, 29, 19);
     DestroyTask(taskId);
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 
@@ -3346,10 +3346,10 @@ static void OnItemSelect_PC(u8 taskId)
     }
 }
 
-bool32 sub_80A6D1C(void)
+bool32 UseRegisteredKeyItem(void)
 {
     HideMapNamePopup();
-    if (gSaveBlock1.registeredItem != 0)
+    if (gSaveBlock1.registeredItem != ITEM_NONE)
     {
         if (CheckBagHasItem(gSaveBlock1.registeredItem, 1) == TRUE)
         {

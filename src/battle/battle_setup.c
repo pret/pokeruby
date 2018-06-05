@@ -484,8 +484,8 @@ static void Task_BattleStart(u8 taskId)
         if (IsBattleTransitionDone() == TRUE)
         {
             SetMainCallback2(sub_800E7C4);
-            prev_quest_postbuffer_cursor_backup_reset();
-            overworld_poison_timer_set();
+            RestartWildEncounterImmunitySteps();
+            ClearPoisonStepCounter();
             DestroyTask(taskId);
         }
         break;
@@ -876,8 +876,8 @@ static void CB2_StartFirstBattle(void)
         gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
         gMain.savedCallback = CB2_EndFirstBattle;
         SetMainCallback2(sub_800E7C4);
-        prev_quest_postbuffer_cursor_backup_reset();
-        overworld_poison_timer_set();
+        RestartWildEncounterImmunitySteps();
+        ClearPoisonStepCounter();
         IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
         IncrementGameStat(GAME_STAT_WILD_BATTLES);
     }

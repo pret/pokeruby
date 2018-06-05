@@ -560,9 +560,9 @@ struct MapConnection *GetMapConnection(u8 dir)
     return NULL;
 }
 
-bool8 sub_8053850(u8 dir, u16 x, u16 y)
+static bool8 SetDiveWarp(u8 direction, u16 x, u16 y)
 {
-    struct MapConnection *connection = GetMapConnection(dir);
+    struct MapConnection *connection = GetMapConnection(direction);
 
     if (connection != NULL)
     {
@@ -578,14 +578,14 @@ bool8 sub_8053850(u8 dir, u16 x, u16 y)
     return TRUE;
 }
 
-bool8 sub_80538B0(u16 x, u16 y)
+bool8 SetDiveWarpEmerge(u16 x, u16 y)
 {
-    return sub_8053850(CONNECTION_EMERGE, x, y);
+    return SetDiveWarp(CONNECTION_EMERGE, x, y);
 }
 
-bool8 sub_80538D0(u16 x, u16 y)
+bool8 SetDiveWarpDive(u16 x, u16 y)
 {
-    return sub_8053850(CONNECTION_DIVE, x, y);
+    return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
 void sub_80538F0(u8 mapGroup, u8 mapNum)
@@ -599,7 +599,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     LoadEventObjTemplatesFromHeader();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
-    prev_quest_postbuffer_cursor_backup_reset();
+    RestartWildEncounterImmunitySteps();
     TryUpdateRandomTrainerRematches(mapGroup, mapNum);
     DoTimeBasedEvents();
     SetSav1WeatherFromCurrMapHeader();
@@ -634,7 +634,7 @@ void sub_8053994(u32 a1)
     v3 = Overworld_MapTypeIsIndoors(gMapHeader.mapType);
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
-    prev_quest_postbuffer_cursor_backup_reset();
+    RestartWildEncounterImmunitySteps();
     TryUpdateRandomTrainerRematches(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
         DoTimeBasedEvents();
@@ -1183,21 +1183,21 @@ bool32 is_c1_link_related_active(void)
 
 void c1_overworld_normal(u16 newKeys, u16 heldKeys)
 {
-    struct FieldInput inputStruct;
+    struct FieldInput fieldInput;
 
     sub_8059204();
-    FieldClearPlayerInput(&inputStruct);
-    FieldGetPlayerInput(&inputStruct, newKeys, heldKeys);
+    ClearPlayerFieldInput(&fieldInput);
+    GetPlayerFieldInput(&fieldInput, newKeys, heldKeys);
     if (!ScriptContext2_IsEnabled())
     {
-        if (sub_8068024(&inputStruct) == 1)
+        if (ProcessPlayerFieldInput(&fieldInput) == 1)
         {
             ScriptContext2_Enable();
             HideMapNamePopup();
         }
         else
         {
-            player_step(inputStruct.dpadDirection, newKeys, heldKeys);
+            player_step(fieldInput.dpadDirection, newKeys, heldKeys);
         }
     }
 }
@@ -2304,7 +2304,7 @@ u8 *sub_8055648(struct UnkStruct_8054FF8 *a1)
 {
     if (a1->c != 2)
         return 0;
-    return sub_8068E24(&a1->sub);
+    return GetCoordEventScriptAtMapPosition(&a1->sub);
 }
 
 bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
@@ -2344,7 +2344,7 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
             return TradeRoom_ReadTrainerCard2;
     }
 
-    return sub_80682A8(&unkStruct, a1->field_C, a1->d);
+    return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->d);
 }
 
 u16 sub_8055758(u8 *script)
