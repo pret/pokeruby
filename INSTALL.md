@@ -4,8 +4,10 @@ Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Then run the following commands.
 
-	export DEVKITARM=/opt/devkitPro/devkitARM
-	echo "export DEVKITARM=/opt/devkitPro/devkitARM" >> ~/.bashrc
+	export DEVKITPRO=/opt/devkitPro
+	echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+	export DEVKITARM=$DEVKITPRO/devkitARM
+	echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
 	git clone https://github.com/pret/pokeruby
 	git clone https://github.com/pret/agbcc
@@ -29,8 +31,10 @@ Then in **Terminal**, run the following commands.
 
 	xcode-select --install
 
-	export DEVKITARM=${HOME}/devkitPro/devkitARM
-	echo "export DEVKITARM=${HOME}/devkitPro/devkitARM" >> ~/.bashrc
+	export DEVKITPRO=${HOME}/devkitPro
+	echo "export DEVKITPRO=${DEVKITPRO}" >> ~/.bashrc
+	export DEVKITARM=${DEVKITPRO}/devkitARM
+	echo "export DEVKITARM=${DEVKITARM}" >> ~/.bashrc
 
 	git clone https://github.com/pret/pokeruby
 	git clone https://github.com/pret/agbcc
@@ -64,7 +68,7 @@ In the **Cygwin terminal**, enter these commands:
 
 	export DEVKITPRO=/cygdrive/c/devkitpro
 	echo export DEVKITPRO=$DEVKITPRO >> ~/.bashrc
-	export DEVKITARM=/cygdrive/c/devkitpro/devkitARM
+	export DEVKITARM=$DEVKITPRO/devkitARM
 	echo export DEVKITARM=$DEVKITARM >> ~/.bashrc
 
 	git clone https://github.com/pret/pokeruby
