@@ -3,7 +3,8 @@ dist: trusty
 sudo: false
 env:
   global:
-    - DEVKITARM=$HOME/devkitARM
+    - DEVKITPRO=$HOME
+    - DEVKITARM=$DEVKITPRO/devkitARM
 addons:
   apt:
     packages:
@@ -13,12 +14,11 @@ cache:
   apt: true
 install:
   - pushd $HOME
-  - travis_retry wget http://download.sourceforge.net/devkitpro/devkitARM_r46-x86_64-linux.tar.bz2
-  - tar xf devkitARM*.tar.bz2
+  - travis_retry wget https://github.com/devkitPro/buildscripts/releases/download/devkitARM_r48/devkitARM_r48-linux.tar.xz
+  - tar xJf devkitARM*.tar.xz
   - travis_retry git clone https://github.com/pret/agbcc.git
   - cd agbcc && ./build.sh && ./install.sh $TRAVIS_BUILD_DIR
   - popd
-
 matrix:
   include:
     - os: linux
@@ -31,20 +31,6 @@ matrix:
         - make -j2 sapphire_rev1
         - make -j2 sapphire_rev2
     - os: linux
-      env: _="Formatting"
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty
-          packages:
-            - clang-format-5.0
-            - colordiff
-      install: [ ]
-      before_script:
-        - cp .travis/colordiffrc ~/.colordiffrc
-      script:
-        .travis/check-git-clang-format-output.sh
-    - os: linux
       env: _="Build German"
       before_script:
         - cp override-de.mk override.mk
@@ -54,5 +40,3 @@ matrix:
         - make -j2 ruby_de
         - make -j2 sapphire_de
         - make -j2 ruby_de_debug
-  allow_failures:
-    - env: _="Formatting"
