@@ -1,3 +1,4 @@
+
 #include "global.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -6,7 +7,6 @@
 #include "fieldmap.h"
 #include "event_obj_lock.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "rom6.h"
@@ -18,6 +18,7 @@
 #include "ewram.h"
 #include "constants/field_effects.h"
 #include "constants/event_objects.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 
 extern void (*gFieldCallback)(void);

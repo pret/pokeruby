@@ -1,10 +1,10 @@
+
 #include "global.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "overworld.h"
 #include "pokemon_menu.h"
 #include "rom6.h"
@@ -12,6 +12,7 @@
 #include "secret_base.h"
 #include "sound.h"
 #include "constants/field_effects.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 
 extern u8 DoSecretBaseCaveFieldEffectScript[];
