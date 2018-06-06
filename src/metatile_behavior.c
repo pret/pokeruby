@@ -1,6 +1,6 @@
 #include "global.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
+#include "constants/metatile_behaviors.h"
 
 #define TILE_ATTRIBUTES(three, two, one) (((one) ? 1 : 0) | ((two) ? 2 : 0) | ((three) ? 4 : 0))
 
