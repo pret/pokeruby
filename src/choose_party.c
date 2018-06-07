@@ -31,7 +31,7 @@ EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 
 extern u8 sub_806BD58(u8, u8);
 extern void PartyMenuPrintMonsLevelOrStatus(void);
-extern void sub_806BC3C(u8, u8);
+extern void DrawMonDescriptorStatus(u8, u8);
 extern u8 GetMonStatusAndPokerus();
 extern void PartyMenuPrintHP();
 extern bool8 sub_80F9344(void); 
@@ -130,16 +130,16 @@ bool8 SetupBattleTowerPartyMenu(void)
             {
                 if (gSelectedOrderFromParty[j] == i + 1)
                 {
-                    sub_806BC3C(i, j * 14 + 0x1C);
+                    DrawMonDescriptorStatus(i, j * 14 + 0x1C);
                     break;
                 }
             }
             if (j == 3)
             {
                 if (IsMonAllowedInBattleTower(&gPlayerParty[i]) == TRUE)
-                    sub_806BC3C(i, 0x70);
+                    DrawMonDescriptorStatus(i, 0x70);
                 else
-                    sub_806BC3C(i, 0x7E);
+                    DrawMonDescriptorStatus(i, 0x7E);
             }
         }
         ewram1B000_alt.setupState++;
@@ -453,7 +453,7 @@ static void BattleTowerEntryMenuCallback_Enter(u8 taskId)
         if (gSelectedOrderFromParty[i] == 0)
         {
             gSelectedOrderFromParty[i] = gLastFieldPokeMenuOpened + 1;
-            sub_806BC3C(gLastFieldPokeMenuOpened, i * 14 + 0x1C);
+            DrawMonDescriptorStatus(gLastFieldPokeMenuOpened, i * 14 + 0x1C);
             if (i == 2)
                 SelectBattleTowerOKButton(taskId);
             BattleTowerEntryMenuCallback_Exit(taskId);
@@ -505,11 +505,11 @@ static void BattleTowerEntryMenuCallback_NoEntry(u8 taskId)
             break;  // exit loop
         }
     }
-    sub_806BC3C(gLastFieldPokeMenuOpened, 0x70);
+    DrawMonDescriptorStatus(gLastFieldPokeMenuOpened, 0x70);
     if (gSelectedOrderFromParty[0] != 0)
-        sub_806BC3C(gSelectedOrderFromParty[0] - 1, 0x1C);
+        DrawMonDescriptorStatus(gSelectedOrderFromParty[0] - 1, 0x1C);
     if (gSelectedOrderFromParty[1] != 0)
-        sub_806BC3C(gSelectedOrderFromParty[1] - 1, 0x2A);
+        DrawMonDescriptorStatus(gSelectedOrderFromParty[1] - 1, 0x2A);
     BattleTowerEntryMenuCallback_Exit(taskId);
 }
 

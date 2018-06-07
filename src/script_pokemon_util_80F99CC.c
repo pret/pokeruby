@@ -144,11 +144,11 @@ void sub_80F9C00(void)
         case 0:
         case 3:
         case 4:
-            sub_806BC3C(i, 0x7E);
+            DrawMonDescriptorStatus(i, 0x7E);
             break;
         case 1:
         case 2:
-            sub_806BC3C(i, 0x70);
+            DrawMonDescriptorStatus(i, 0x70);
             break;
         }
     }
@@ -246,9 +246,9 @@ void sub_80F9E1C(void)
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         if (!sub_8040574(&gPlayerParty[i]))
-            sub_806BC3C(i, 0x9A);
+            DrawMonDescriptorStatus(i, 0x9A);
         else
-            sub_806BC3C(i, 0x8C);
+            DrawMonDescriptorStatus(i, 0x8C);
     }
 }
 

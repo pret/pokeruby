@@ -1213,29 +1213,29 @@ void sub_806BBEC(u8 a)
     }
 }
 
-void sub_806BC3C(u8 monIndex, u8 b)
+// Draws the descriptor text in the mon's party bubble.
+// Descriptor texts are things like "ABLE", "NOT ABLE", "LEARNED", etc.
+void DrawMonDescriptorStatus(u8 monIndex, u8 descriptorOffset)
 {
-    u16 *vramPtr = gUnknown_08376918[IsDoubleBattle()][monIndex];
     u8 i;
-    u16 var1;
+    u32 offset;
+    u16 *vramPtr = gUnknown_08376918[IsDoubleBattle()][monIndex];
+    int paletteNum = 0;
 
-    for (i = 0, var1 = (b / 7) * 32; i <= PARTY_SIZE; i++)
+    for (i = 0; i < 7; i++)
     {
-        u32 offset = i + var1;
-        vramPtr[i] = gUnknown_08E9A300[offset] + 0x10C;
-        vramPtr[i + 0x20] = gUnknown_08E9A300[offset + 0x20] + 0x10C;
+        offset = i + (descriptorOffset / 7) * 32;
+        vramPtr[i] = paletteNum | (gUnknown_08E9A300[offset] + 0x10C);
+        vramPtr[i + 0x20] = paletteNum | (gUnknown_08E9A300[offset + 0x20] + 0x10C);
     }
-
-    // Some dead code was likely optimized out, but the compiler still think r8 was used.
-    asm("":::"r8");
 }
 
-void unref_sub_806BCB8(u8 a)
+void unref_sub_806BCB8(u8 descriptorOffset)
 {
     u8 i;
 
     for (i = 0; i < gPlayerPartyCount; i++)
-        sub_806BC3C(i, a);
+        DrawMonDescriptorStatus(i, descriptorOffset);
 }
 
 // This is ultimately unreferenced, since it's caller is unreferenced.
@@ -1250,19 +1250,19 @@ void sub_806BCE8()
             switch (GetMonGender(&gPlayerParty[i]))
             {
             case MON_MALE:
-                sub_806BC3C(i, 0x54);
+                DrawMonDescriptorStatus(i, 0x54);
                 break;
             case MON_FEMALE:
-                sub_806BC3C(i, 0x62);
+                DrawMonDescriptorStatus(i, 0x62);
                 break;
             default:
-                sub_806BC3C(i, 0x46);
+                DrawMonDescriptorStatus(i, 0x46);
                 break;
             }
         }
         else
         {
-            sub_806BC3C(i, 0x46);
+            DrawMonDescriptorStatus(i, 0x46);
         }
     }    
 }

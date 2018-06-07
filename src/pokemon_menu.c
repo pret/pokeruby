@@ -944,11 +944,11 @@ static void sub_808AE8C(void)
              gUnknown_020297ED == 0 &&
 #endif
              (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg)))
-                sub_806BC3C(i, 0x9A);
+                DrawMonDescriptorStatus(i, 0x9A);
             else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gSpecialVar_ItemId)))
-                sub_806BC3C(i, 0xA8);
+                DrawMonDescriptorStatus(i, 0xA8);
             else
-                sub_806BC3C(i, 0x8C);
+                DrawMonDescriptorStatus(i, 0x8C);
         }
     }
 }
@@ -963,7 +963,7 @@ static void sub_808AF20(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !GetEvolutionTargetSpecies(&gPlayerParty[i], 3, gSpecialVar_ItemId))
             {
                 sub_806D668(i);
-                sub_806BC3C(i, 0);
+                DrawMonDescriptorStatus(i, 0);
             }
         }
     }
