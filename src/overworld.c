@@ -62,8 +62,8 @@ struct UnkTVStruct
 };
 
 extern u8 gUnknown_020297ED;
-extern u16 gUnknown_03004898;
-extern u16 gUnknown_0300489C;
+extern u16 gTotalCameraPixelOffsetY;
+extern u16 gTotalCameraPixelOffsetX;
 
 extern u8 S_WhiteOut[];
 extern u8 gUnknown_0819FC9F[];
@@ -1822,8 +1822,8 @@ void sub_8054D4C(u32 a1)
 
 void sub_8054D90(void)
 {
-    gUnknown_0300489C = 0;
-    gUnknown_03004898 = 0;
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
     sub_805AA98();
     TrySpawnEventObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
@@ -1833,8 +1833,8 @@ void mli4_mapscripts_and_other(void)
 {
     s16 x, y;
     struct UnkPlayerStruct *player;
-    gUnknown_0300489C = 0;
-    gUnknown_03004898 = 0;
+    gTotalCameraPixelOffsetX = 0;
+    gTotalCameraPixelOffsetY = 0;
     sub_805AA98();
     sav1_camera_get_focus_coords(&x, &y);
     player = sub_8053AA8();

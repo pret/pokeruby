@@ -9,62 +9,62 @@
 
 EWRAM_DATA bool8 gUnusedBikeCameraAheadPanback = FALSE;
 
-struct UnknownStruct
+struct FieldCameraOffset
 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    bool8 unk4;
+    u8 xPixelOffset;
+    u8 yPixelOffset;
+    u8 xTileOffset;
+    u8 yTileOffset;
+    bool8 copyBGToVRAM;
 };
 
-static struct UnknownStruct gUnknown_03000590;
-static u16 gUnknown_03000598;
-static s16 gUnknown_0300059A;
+static struct FieldCameraOffset sFieldCameraOffset;
+static u16 sHorizontalCameraPan;
+static s16 sVerticalCameraPan;
 static u8 gUnknown_0300059C;
-static void (*gUnknown_030005A0)(void);
+static void (*sFieldCameraPanningCallback)(void);
 
-struct CameraSomething gUnknown_03004880;
-u16 gUnknown_03004898;
-u16 gUnknown_0300489C;
+struct FieldCamera gFieldCamera;
+u16 gTotalCameraPixelOffsetY;
+u16 gTotalCameraPixelOffsetX;
 
-static void RedrawMapSliceNorth(struct UnknownStruct *a, struct MapData *mapData);
-static void RedrawMapSliceSouth(struct UnknownStruct *a, struct MapData *mapData);
-static void RedrawMapSliceEast(struct UnknownStruct *a, struct MapData *mapData);
-static void RedrawMapSliceWest(struct UnknownStruct *a, struct MapData *mapData);
-static s32 MapPosToBgTilemapOffset(struct UnknownStruct *a, s32 x, s32 y);
+static void RedrawMapSliceNorth(struct FieldCameraOffset*, struct MapData*);
+static void RedrawMapSliceSouth(struct FieldCameraOffset*, struct MapData*);
+static void RedrawMapSliceEast(struct FieldCameraOffset*, struct MapData*);
+static void RedrawMapSliceWest(struct FieldCameraOffset*, struct MapData*);
+static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset*, s32, s32);
 
-static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData);
-static void DrawMetatileAt(struct MapData *mapData, u16, int, int);
-static void DrawMetatile(s32 a, u16 *b, u16 c);
+static void DrawWholeMapViewInternal(int x, int y, struct MapData*);
+static void DrawMetatileAt(struct MapData*, u16, int, int);
+static void DrawMetatile(s32, u16*, u16);
 static void CameraPanningCB_PanAhead(void);
 
-static void move_tilemap_camera_to_upper_left_corner_(struct UnknownStruct *a)
+static void move_tilemap_camera_to_upper_left_corner_(struct FieldCameraOffset *cameraOffset)
 {
-    a->unk2 = 0;
-    a->unk3 = 0;
-    a->unk0 = 0;
-    a->unk1 = 0;
-    a->unk4 = TRUE;
+    cameraOffset->xTileOffset = 0;
+    cameraOffset->yTileOffset = 0;
+    cameraOffset->xPixelOffset = 0;
+    cameraOffset->yPixelOffset = 0;
+    cameraOffset->copyBGToVRAM = TRUE;
 }
 
-static void tilemap_move_something(struct UnknownStruct *a, u32 b, u32 c)
+static void tilemap_move_something(struct FieldCameraOffset *cameraOffset, u32 b, u32 c)
 {
-    a->unk2 += b;
-    a->unk2 %= 32;
-    a->unk3 += c;
-    a->unk3 %= 32;
+    cameraOffset->xTileOffset += b;
+    cameraOffset->xTileOffset %= 32;
+    cameraOffset->yTileOffset += c;
+    cameraOffset->yTileOffset %= 32;
 }
 
-static void coords8_add(struct UnknownStruct *a, u32 b, u32 c)
+static void coords8_add(struct FieldCameraOffset *cameraOffset, u32 b, u32 c)
 {
-    a->unk0 += b;
-    a->unk1 += c;
+    cameraOffset->xPixelOffset += b;
+    cameraOffset->yPixelOffset += c;
 }
 
 void move_tilemap_camera_to_upper_left_corner(void)
 {
-    move_tilemap_camera_to_upper_left_corner_(&gUnknown_03000590);
+    move_tilemap_camera_to_upper_left_corner_(&sFieldCameraOffset);
     CpuFill16(0, gBGTilemapBuffers[2], 0x800);
     CpuFill16(0, gBGTilemapBuffers[1], 0x800);
     CpuFill16(0x3014, gBGTilemapBuffers[3], 0x800);
@@ -72,32 +72,32 @@ void move_tilemap_camera_to_upper_left_corner(void)
 
 void sub_8057A58(void)
 {
-    *gBGHOffsetRegs[1] = gUnknown_03000590.unk0 + gUnknown_03000598;
-    *gBGVOffsetRegs[1] = gUnknown_03000590.unk1 + gUnknown_0300059A + 8;
-    *gBGHOffsetRegs[2] = gUnknown_03000590.unk0 + gUnknown_03000598;
-    *gBGVOffsetRegs[2] = gUnknown_03000590.unk1 + gUnknown_0300059A + 8;
-    *gBGHOffsetRegs[3] = gUnknown_03000590.unk0 + gUnknown_03000598;
-    *gBGVOffsetRegs[3] = gUnknown_03000590.unk1 + gUnknown_0300059A + 8;
+    *gBGHOffsetRegs[1] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *gBGVOffsetRegs[1] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+    *gBGHOffsetRegs[2] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *gBGVOffsetRegs[2] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
+    *gBGHOffsetRegs[3] = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *gBGVOffsetRegs[3] = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
 
-    if (gUnknown_03000590.unk4)
+    if (sFieldCameraOffset.copyBGToVRAM)
     {
         DmaCopy16(3, gBGTilemapBuffers[1], (void *)(VRAM + 0xE800), 0x800);
         DmaCopy16(3, gBGTilemapBuffers[2], (void *)(VRAM + 0xE000), 0x800);
         DmaCopy16(3, gBGTilemapBuffers[3], (void *)(VRAM + 0xF000), 0x800);
-        gUnknown_03000590.unk4 = FALSE;
+        sFieldCameraOffset.copyBGToVRAM = FALSE;
     }
 }
 
 void sub_8057B14(u16 *a, u16 *b)
 {
-    *a = gUnknown_03000590.unk0 + gUnknown_03000598;
-    *b = gUnknown_03000590.unk1 + gUnknown_0300059A + 8;
+    *a = sFieldCameraOffset.xPixelOffset + sHorizontalCameraPan;
+    *b = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
 }
 
 void DrawWholeMapView(void)
 {
     DrawWholeMapViewInternal(gSaveBlock1.pos.x, gSaveBlock1.pos.y, gMapHeader.mapData);
-    gUnknown_03000590.unk4 = TRUE;
+    sFieldCameraOffset.copyBGToVRAM = TRUE;
 }
 
 static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
@@ -109,13 +109,13 @@ static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
 
     for (i = 0; i < 32; i += 2)
     {
-        temp = gUnknown_03000590.unk3 + i;
+        temp = sFieldCameraOffset.yTileOffset + i;
         if (temp >= 32)
             temp -= 32;
         r6 = temp * 32;
         for (j = 0; j < 32; j += 2)
         {
-            temp = gUnknown_03000590.unk2 + j;
+            temp = sFieldCameraOffset.xTileOffset + j;
             if (temp >= 32)
                 temp -= 32;
             DrawMetatileAt(mapData, r6 + temp, x + j / 2, y + i / 2);
@@ -123,81 +123,81 @@ static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
     }
 }
 
-static void RedrawMapSlicesForCameraUpdate(struct UnknownStruct *a, int x, int y)
+static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffset, int x, int y)
 {
     struct MapData *mapData = gMapHeader.mapData;
 
     if (x > 0)
-        RedrawMapSliceWest(a, mapData);
+        RedrawMapSliceWest(cameraOffset, mapData);
     if (x < 0)
-        RedrawMapSliceEast(a, mapData);
+        RedrawMapSliceEast(cameraOffset, mapData);
     if (y > 0)
-        RedrawMapSliceNorth(a, mapData);
+        RedrawMapSliceNorth(cameraOffset, mapData);
     if (y < 0)
-        RedrawMapSliceSouth(a, mapData);
-    a->unk4 = TRUE;
+        RedrawMapSliceSouth(cameraOffset, mapData);
+    cameraOffset->copyBGToVRAM = TRUE;
 }
 
-static void RedrawMapSliceNorth(struct UnknownStruct *a, struct MapData *mapData)
+static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
 {
     u8 i;
     u8 temp;
     u32 r7;
 
-    temp = a->unk3 + 28;
+    temp = cameraOffset->yTileOffset + 28;
     if (temp >= 32)
         temp -= 32;
     r7 = temp * 32;
     for (i = 0; i < 32; i += 2)
     {
-        temp = a->unk2 + i;
+        temp = cameraOffset->xTileOffset + i;
         if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y + 14);
     }
 }
 
-static void RedrawMapSliceSouth(struct UnknownStruct *a, struct MapData *mapData)
+static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
 {
     u8 i;
     u8 temp;
-    u32 r7 = a->unk3 * 32;
+    u32 r7 = cameraOffset->yTileOffset * 32;
 
     for (i = 0; i < 32; i += 2)
     {
-        temp = a->unk2 + i;
+        temp = cameraOffset->xTileOffset + i;
         if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y);
     }
 }
 
-static void RedrawMapSliceEast(struct UnknownStruct *a, struct MapData *mapData)
+static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
 {
     u8 i;
     u8 temp;
-    u32 r6 = a->unk2;
+    u32 r6 = cameraOffset->xTileOffset;
 
     for (i = 0; i < 32; i += 2)
     {
-        temp = a->unk3 + i;
+        temp = cameraOffset->yTileOffset + i;
         if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, temp * 32 + r6, gSaveBlock1.pos.x, gSaveBlock1.pos.y + i / 2);
     }
 }
 
-static void RedrawMapSliceWest(struct UnknownStruct *a, struct MapData *mapData)
+static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
 {
     u8 i;
     u8 temp;
-    u8 r5 = a->unk2 + 28;
+    u8 r5 = cameraOffset->xTileOffset + 28;
 
     if (r5 >= 32)
         r5 -= 32;
     for (i = 0; i < 32; i += 2)
     {
-        temp = a->unk3 + i;
+        temp = cameraOffset->yTileOffset + i;
         if (temp >= 32)
             temp -= 32;
         DrawMetatileAt(mapData, temp * 32 + r5, gSaveBlock1.pos.x + 14, gSaveBlock1.pos.y + i / 2);
@@ -206,23 +206,23 @@ static void RedrawMapSliceWest(struct UnknownStruct *a, struct MapData *mapData)
 
 void CurrentMapDrawMetatileAt(int x, int y)
 {
-    int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, x, y);
+    int offset = MapPosToBgTilemapOffset(&sFieldCameraOffset, x, y);
 
     if (offset >= 0)
     {
         DrawMetatileAt(gMapHeader.mapData, offset, x, y);
-        gUnknown_03000590.unk4 = TRUE;
+        sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
 
 void DrawDoorMetatileAt(int x, int y, u16 *arr)
 {
-    int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, x, y);
+    int offset = MapPosToBgTilemapOffset(&sFieldCameraOffset, x, y);
 
     if (offset >= 0)
     {
         DrawMetatile(1, arr, offset);
-        gUnknown_03000590.unk4 = TRUE;
+        sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
 
@@ -311,51 +311,52 @@ static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
     }
 }
 
-static s32 MapPosToBgTilemapOffset(struct UnknownStruct *a, s32 x, s32 y)
+static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset *cameraOffset, s32 x, s32 y)
 {
     x -= gSaveBlock1.pos.x;
     x *= 2;
     if (x >= 32 || x < 0)
         return -1;
-    x = x + a->unk2;
+    x = x + cameraOffset->xTileOffset;
     if (x >= 32)
         x -= 32;
 
     y = (y - gSaveBlock1.pos.y) * 2;
     if (y >= 32 || y < 0)
         return -1;
-    y = y + a->unk3;
+    y = y + cameraOffset->yTileOffset;
     if (y >= 32)
         y -= 32;
 
     return y * 32 + x;
 }
 
-static void CameraUpdateCallback(struct CameraSomething *a)
+static void CameraUpdateCallback(struct FieldCamera *fieldCamera)
 {
-    if (a->unk4 != 0)
+    if (fieldCamera->trackedSpriteId != 0)
     {
-        a->unk8 = gSprites[a->unk4].data[2];
-        a->unkC = gSprites[a->unk4].data[3];
+        fieldCamera->movementSpeedX = gSprites[fieldCamera->trackedSpriteId].data[2];
+        fieldCamera->movementSpeedY = gSprites[fieldCamera->trackedSpriteId].data[3];
     }
 }
 
 void ResetCameraUpdateInfo(void)
 {
-    gUnknown_03004880.unk8 = 0;
-    gUnknown_03004880.unkC = 0;
-    gUnknown_03004880.unk10 = 0;
-    gUnknown_03004880.unk14 = 0;
-    gUnknown_03004880.unk4 = 0;
-    gUnknown_03004880.callback = NULL;
+    gFieldCamera.movementSpeedX = 0;
+    gFieldCamera.movementSpeedY = 0;
+    gFieldCamera.curMovementOffsetX = 0;
+    gFieldCamera.curMovementOffsetY = 0;
+    gFieldCamera.trackedSpriteId = 0;
+    gFieldCamera.callback = NULL;
 }
 
-u32 InitCameraUpdateCallback(u8 a)
+u32 InitCameraUpdateCallback(u8 trackedSpriteId)
 {
-    if (gUnknown_03004880.unk4 != 0)
-        DestroySprite(&gSprites[gUnknown_03004880.unk4]);
-    gUnknown_03004880.unk4 = AddCameraObject(a);
-    gUnknown_03004880.callback = CameraUpdateCallback;
+    if (gFieldCamera.trackedSpriteId != 0)
+        DestroySprite(&gSprites[gFieldCamera.trackedSpriteId]);
+
+    gFieldCamera.trackedSpriteId = AddCameraObject(trackedSpriteId);
+    gFieldCamera.callback = CameraUpdateCallback;
     return 0;
 }
 
@@ -363,54 +364,54 @@ void CameraUpdate(void)
 {
     int deltaX;
     int deltaY;
-    int r0;
-    int r1;
-    int r7;
-    int r8;
+    int curMovementOffsetY;
+    int curMovementOffsetX;
+    int movementSpeedX;
+    int movementSpeedY;
 
-    if (gUnknown_03004880.callback != NULL)
-        gUnknown_03004880.callback(&gUnknown_03004880);
-    r7 = gUnknown_03004880.unk8;
-    r8 = gUnknown_03004880.unkC;
+    if (gFieldCamera.callback != NULL)
+        gFieldCamera.callback(&gFieldCamera);
+    movementSpeedX = gFieldCamera.movementSpeedX;
+    movementSpeedY = gFieldCamera.movementSpeedY;
     deltaX = 0;
     deltaY = 0;
-    r1 = gUnknown_03004880.unk10;
-    r0 = gUnknown_03004880.unk14;
+    curMovementOffsetX = gFieldCamera.curMovementOffsetX;
+    curMovementOffsetY = gFieldCamera.curMovementOffsetY;
 
 
-    if (r1 == 0 && r7 != 0)
+    if (curMovementOffsetX == 0 && movementSpeedX != 0)
     {
-        if (r7 > 0)
+        if (movementSpeedX > 0)
             deltaX = 1;
         else
             deltaX = -1;
     }
-    if (r0 == 0 && r8 != 0)
+    if (curMovementOffsetY == 0 && movementSpeedY != 0)
     {
-        if (r8 > 0)
+        if (movementSpeedY > 0)
             deltaY = 1;
         else
             deltaY = -1;
     }
-    if (r1 != 0 && r1 == -r7)
+    if (curMovementOffsetX != 0 && curMovementOffsetX == -movementSpeedX)
     {
-        if (r7 > 0)
+        if (movementSpeedX > 0)
             deltaX = 1;
         else
             deltaX = -1;
     }
-    if (r0 != 0 && r0 == -r8)
+    if (curMovementOffsetY != 0 && curMovementOffsetY == -movementSpeedY)
     {
-        if (r8 > 0)
+        if (movementSpeedY > 0)
             deltaX = 1;
         else
             deltaX = -1;
     }
 
-    gUnknown_03004880.unk10 += r7;
-    gUnknown_03004880.unk10 = gUnknown_03004880.unk10 - 16 * (gUnknown_03004880.unk10 / 16);
-    gUnknown_03004880.unk14 += r8;
-    gUnknown_03004880.unk14 = gUnknown_03004880.unk14 - 16 * (gUnknown_03004880.unk14 / 16);
+    gFieldCamera.curMovementOffsetX += movementSpeedX;
+    gFieldCamera.curMovementOffsetX = gFieldCamera.curMovementOffsetX - 16 * (gFieldCamera.curMovementOffsetX / 16);
+    gFieldCamera.curMovementOffsetY += movementSpeedY;
+    gFieldCamera.curMovementOffsetY = gFieldCamera.curMovementOffsetY - 16 * (gFieldCamera.curMovementOffsetY / 16);
 
     if (deltaX != 0 || deltaY != 0)
     {
@@ -418,50 +419,50 @@ void CameraUpdate(void)
         UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
         RotatingGatePuzzleCameraUpdate(deltaX, deltaY);
         ResetBerryTreeSparkleFlags();
-        tilemap_move_something(&gUnknown_03000590, deltaX * 2, deltaY * 2);
-        RedrawMapSlicesForCameraUpdate(&gUnknown_03000590, deltaX * 2, deltaY * 2);
+        tilemap_move_something(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
+        RedrawMapSlicesForCameraUpdate(&sFieldCameraOffset, deltaX * 2, deltaY * 2);
     }
 
-    coords8_add(&gUnknown_03000590, r7, r8);
-    gUnknown_0300489C -= r7;
-    gUnknown_03004898 -= r8;
+    coords8_add(&sFieldCameraOffset, movementSpeedX, movementSpeedY);
+    gTotalCameraPixelOffsetX -= movementSpeedX;
+    gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
-void camera_move_and_redraw(int a, int b)
+void MoveCameraAndRedrawMap(int deltaX, int deltaY)
 {
-    CameraMove(a, b);
-    UpdateEventObjectsForCameraUpdate(a, b);
+    CameraMove(deltaX, deltaY);
+    UpdateEventObjectsForCameraUpdate(deltaX, deltaY);
     DrawWholeMapView();
-    gUnknown_0300489C -= a * 16;
-    gUnknown_03004898 -= b * 16;
+    gTotalCameraPixelOffsetX -= deltaX * 16;
+    gTotalCameraPixelOffsetY -= deltaY * 16;
 }
 
-void SetCameraPanningCallback(void (*a)(void))
+void SetCameraPanningCallback(void (*callback)(void))
 {
-    gUnknown_030005A0 = a;
+    sFieldCameraPanningCallback = callback;
 }
 
 void SetCameraPanning(s16 a, s16 b)
 {
-    gUnknown_03000598 = a;
-    gUnknown_0300059A = b + 32;
+    sHorizontalCameraPan = a;
+    sVerticalCameraPan = b + 32;
 }
 
 void InstallCameraPanAheadCallback(void)
 {
-    gUnknown_030005A0 = CameraPanningCB_PanAhead;
+    sFieldCameraPanningCallback = CameraPanningCB_PanAhead;
     gUnknown_0300059C = 0;
-    gUnknown_03000598 = 0;
-    gUnknown_0300059A = 32;
+    sHorizontalCameraPan = 0;
+    sVerticalCameraPan = 32;
 }
 
 void UpdateCameraPanning(void)
 {
-    if (gUnknown_030005A0 != NULL)
-        gUnknown_030005A0();
+    if (sFieldCameraPanningCallback != NULL)
+        sFieldCameraPanningCallback();
     //Update sprite offset of overworld objects
-    gSpriteCoordOffsetX = gUnknown_0300489C - gUnknown_03000598;
-    gSpriteCoordOffsetY = gUnknown_03004898 - gUnknown_0300059A - 8;
+    gSpriteCoordOffsetX = gTotalCameraPixelOffsetX - sHorizontalCameraPan;
+    gSpriteCoordOffsetY = gTotalCameraPixelOffsetY - sVerticalCameraPan - 8;
 }
 
 static void CameraPanningCB_PanAhead(void)
@@ -489,21 +490,21 @@ static void CameraPanningCB_PanAhead(void)
         var = GetPlayerMovementDirection();
         if (var == 2)
         {
-            if (gUnknown_0300059A > -8)
-                gUnknown_0300059A -= 2;
+            if (sVerticalCameraPan > -8)
+                sVerticalCameraPan -= 2;
         }
         else if (var == 1)
         {
-            if (gUnknown_0300059A < 72)
-                gUnknown_0300059A += 2;
+            if (sVerticalCameraPan < 72)
+                sVerticalCameraPan += 2;
         }
-        else if (gUnknown_0300059A < 32)
+        else if (sVerticalCameraPan < 32)
         {
-            gUnknown_0300059A += 2;
+            sVerticalCameraPan += 2;
         }
-        else if (gUnknown_0300059A > 32)
+        else if (sVerticalCameraPan > 32)
         {
-            gUnknown_0300059A -= 2;
+            sVerticalCameraPan -= 2;
         }
     }
 }

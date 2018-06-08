@@ -174,9 +174,9 @@ gUnknown_03004870 = .;
 . += 0xC;
 
 // field_camera.c
-SYMBOL(gUnknown_03004880, 24)
-SYMBOL(gUnknown_03004898, 4)
-SYMBOL(gUnknown_0300489C, 4)
+SYMBOL(gFieldCamera, 24)
+SYMBOL(gTotalCameraPixelOffsetY, 4)
+SYMBOL(gTotalCameraPixelOffsetX, 4)
 
 // event_object_movement.c
 SYMBOL(gEventObjects, 576)

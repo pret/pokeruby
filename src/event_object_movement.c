@@ -1949,12 +1949,12 @@ void UpdateEventObjectsForCameraUpdate(s16 cameraDeltaX, s16 cameraDeltaY)
     RemoveEventObjectsOutsideView();
 }
 
-u8 AddCameraObject(u8 a)
+u8 AddCameraObject(u8 trackedSpriteId)
 {
     u8 spriteId = CreateSprite(&gCameraSpriteTemplate, 0, 0, 4);
 
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].data[0] = a;
+    gSprites[spriteId].data[0] = trackedSpriteId;
     return spriteId;
 }
 
@@ -4476,29 +4476,29 @@ void sub_8060388(s16 x1, s16 y1, s16 *x2, s16 *y2)
 {
     *x2 = (x1 - gSaveBlock1.pos.x) << 4;
     *y2 = (y1 - gSaveBlock1.pos.y) << 4;
-    *x2 -= gUnknown_0300489C;
-    *y2 -= gUnknown_03004898;
+    *x2 -= gTotalCameraPixelOffsetX;
+    *y2 -= gTotalCameraPixelOffsetY;
 }
 
 void sub_80603CC(s16 x1, s16 y1, s16 *x2, s16 *y2)
 {
     s16 x3;
     s16 y3;
-    x3 = -gUnknown_0300489C - gUnknown_03004880.unk10;
-    y3 = -gUnknown_03004898 - gUnknown_03004880.unk14;
-    if (gUnknown_03004880.unk10 > 0)
+    x3 = -gTotalCameraPixelOffsetX - gFieldCamera.curMovementOffsetX;
+    y3 = -gTotalCameraPixelOffsetY - gFieldCamera.curMovementOffsetY;
+    if (gFieldCamera.curMovementOffsetX > 0)
     {
         x3 += 0x10;
     }
-    if (gUnknown_03004880.unk10 < 0)
+    if (gFieldCamera.curMovementOffsetX < 0)
     {
         x3 -= 0x10;
     }
-    if (gUnknown_03004880.unk14 > 0)
+    if (gFieldCamera.curMovementOffsetY > 0)
     {
         y3 += 0x10;
     }
-    if (gUnknown_03004880.unk14 < 0)
+    if (gFieldCamera.curMovementOffsetY < 0)
     {
         y3 -= 0x10;
     }
@@ -4517,19 +4517,19 @@ void GetEventObjectMovingCameraOffset(s16 *x, s16 *y)
 {
     *x = 0;
     *y = 0;
-    if (gUnknown_03004880.unk10 > 0)
+    if (gFieldCamera.curMovementOffsetX > 0)
     {
         (*x)++;
     }
-    if (gUnknown_03004880.unk10 < 0)
+    if (gFieldCamera.curMovementOffsetX < 0)
     {
         (*x)--;
     }
-    if (gUnknown_03004880.unk14 > 0)
+    if (gFieldCamera.curMovementOffsetY > 0)
     {
         (*y)++;
     }
-    if (gUnknown_03004880.unk14 < 0)
+    if (gFieldCamera.curMovementOffsetY < 0)
     {
         (*y)--;
     }

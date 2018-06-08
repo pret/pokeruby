@@ -310,9 +310,9 @@ u8 cph_IM_DIFFERENT(struct EventObject *, struct Sprite *, u8, bool8(u8));
 u8 CopyablePlayerMovement_GoSpeed4(struct EventObject *, struct Sprite *, u8, bool8(u8));
 u8 CopyablePlayerMovement_Jump(struct EventObject *, struct Sprite *, u8, bool8(u8));
 
-extern struct CameraSomething gUnknown_03004880;
-extern u16 gUnknown_03004898;
-extern u16 gUnknown_0300489C;
+extern struct FieldCamera gFieldCamera;
+extern u16 gTotalCameraPixelOffsetY;
+extern u16 gTotalCameraPixelOffsetX;
 
 extern const struct Coords16 gDirectionToVector[];
 
