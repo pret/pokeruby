@@ -1,14 +1,14 @@
 #ifndef GUARD_FIELD_CAMERA_H
 #define GUARD_FIELD_CAMERA_H
 
-struct CameraSomething
+struct FieldCamera
 {
-    void (*callback)(struct CameraSomething *);
-    u32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
+    void (*callback)(struct FieldCamera *);
+    u32 trackedSpriteId;
+    s32 movementSpeedX;
+    s32 movementSpeedY;
+    s32 curMovementOffsetX;
+    s32 curMovementOffsetY;
 };
 
 extern struct Camera gCamera;
