@@ -204,13 +204,13 @@ static void RedrawMapSliceWest(struct UnknownStruct *a, struct MapData *mapData)
     }
 }
 
-void CurrentMapDrawMetatileAt(int a, int b)
+void CurrentMapDrawMetatileAt(int x, int y)
 {
-    int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, a, b);
+    int offset = MapPosToBgTilemapOffset(&gUnknown_03000590, x, y);
 
     if (offset >= 0)
     {
-        DrawMetatileAt(gMapHeader.mapData, offset, a, b);
+        DrawMetatileAt(gMapHeader.mapData, offset, x, y);
         gUnknown_03000590.unk4 = TRUE;
     }
 }
@@ -226,74 +226,87 @@ void DrawDoorMetatileAt(int x, int y, u16 *arr)
     }
 }
 
-static void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
+static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
 {
-    u16 metatileId = MapGridGetMetatileIdAt(c, d);
     u16 *metatiles;
+    u16 metatileId = MapGridGetMetatileIdAt(x, y);
 
-    if (metatileId > 1024)
+    if (metatileId > 0x400)
         metatileId = 0;
-    if (metatileId < 512)
+
+    if (metatileId < 0x200)
+    {
         metatiles = mapData->primaryTileset->metatiles;
+    }
     else
     {
         metatiles = mapData->secondaryTileset->metatiles;
-        metatileId -= 512;
+        metatileId -= 0x200;
     }
-    DrawMetatile(MapGridGetMetatileLayerTypeAt(c, d), metatiles + metatileId * 8, b);
+
+    DrawMetatile(MapGridGetMetatileLayerTypeAt(x, y), metatiles + metatileId * 8, offset);
 }
 
-static void DrawMetatile(s32 a, u16 *b, u16 c)
+static void DrawMetatile(s32 metatileLayerType, u16 *metatiles, u16 offset)
 {
-    switch (a)
+    switch (metatileLayerType)
     {
-    case 2:
-        gBGTilemapBuffers[3][c] = b[0];
-        gBGTilemapBuffers[3][c + 1] = b[1];
-        gBGTilemapBuffers[3][c + 0x20] = b[2];
-        gBGTilemapBuffers[3][c + 0x21] = b[3];
+    case 2: // LAYER_TYPE_
+        // Draw metatile's bottom layer to the bottom background layer.
+        gBGTilemapBuffers[3][offset] = metatiles[0];
+        gBGTilemapBuffers[3][offset + 1] = metatiles[1];
+        gBGTilemapBuffers[3][offset + 0x20] = metatiles[2];
+        gBGTilemapBuffers[3][offset + 0x21] = metatiles[3];
 
-        gBGTilemapBuffers[2][c] = 0;
-        gBGTilemapBuffers[2][c + 1] = 0;
-        gBGTilemapBuffers[2][c + 0x20] = 0;
-        gBGTilemapBuffers[2][c + 0x21] = 0;
+        // Draw transparent tiles to the middle background layer.
+        gBGTilemapBuffers[2][offset] = 0;
+        gBGTilemapBuffers[2][offset + 1] = 0;
+        gBGTilemapBuffers[2][offset + 0x20] = 0;
+        gBGTilemapBuffers[2][offset + 0x21] = 0;
 
-        gBGTilemapBuffers[1][c] = b[4];
-        gBGTilemapBuffers[1][c + 1] = b[5];
-        gBGTilemapBuffers[1][c + 0x20] = b[6];
-        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        // Draw metatile's top layer to the top background layer.
+        gBGTilemapBuffers[1][offset] = metatiles[4];
+        gBGTilemapBuffers[1][offset + 1] = metatiles[5];
+        gBGTilemapBuffers[1][offset + 0x20] = metatiles[6];
+        gBGTilemapBuffers[1][offset + 0x21] = metatiles[7];
         break;
-    case 1:
-        gBGTilemapBuffers[3][c] = b[0];
-        gBGTilemapBuffers[3][c + 1] = b[1];
-        gBGTilemapBuffers[3][c + 0x20] = b[2];
-        gBGTilemapBuffers[3][c + 0x21] = b[3];
+    case 1: // LAYER_TYPE_COVERED_BY_OBJECTS
+        // Draw metatile's bottom layer to the bottom background layer.
+        gBGTilemapBuffers[3][offset] = metatiles[0];
+        gBGTilemapBuffers[3][offset + 1] = metatiles[1];
+        gBGTilemapBuffers[3][offset + 0x20] = metatiles[2];
+        gBGTilemapBuffers[3][offset + 0x21] = metatiles[3];
 
-        gBGTilemapBuffers[2][c] = b[4];
-        gBGTilemapBuffers[2][c + 1] = b[5];
-        gBGTilemapBuffers[2][c + 0x20] = b[6];
-        gBGTilemapBuffers[2][c + 0x21] = b[7];
+        // Draw metatile's top layer to the middle background layer.
+        gBGTilemapBuffers[2][offset] = metatiles[4];
+        gBGTilemapBuffers[2][offset + 1] = metatiles[5];
+        gBGTilemapBuffers[2][offset + 0x20] = metatiles[6];
+        gBGTilemapBuffers[2][offset + 0x21] = metatiles[7];
 
-        gBGTilemapBuffers[1][c] = 0;
-        gBGTilemapBuffers[1][c + 1] = 0;
-        gBGTilemapBuffers[1][c + 0x20] = 0;
-        gBGTilemapBuffers[1][c + 0x21] = 0;
+        // Draw transparent tiles to the top background layer.
+        gBGTilemapBuffers[1][offset] = 0;
+        gBGTilemapBuffers[1][offset + 1] = 0;
+        gBGTilemapBuffers[1][offset + 0x20] = 0;
+        gBGTilemapBuffers[1][offset + 0x21] = 0;
         break;
-    case 0:
-        gBGTilemapBuffers[3][c] = 0x3014;
-        gBGTilemapBuffers[3][c + 1] = 0x3014;
-        gBGTilemapBuffers[3][c + 0x20] = 0x3014;
-        gBGTilemapBuffers[3][c + 0x21] = 0x3014;
+    case 0: // LAYER_TYPE_NORMAL
+        // Draw garbage to the bottom background layer.
+        gBGTilemapBuffers[3][offset] = 0x3014;
+        gBGTilemapBuffers[3][offset + 1] = 0x3014;
+        gBGTilemapBuffers[3][offset + 0x20] = 0x3014;
+        gBGTilemapBuffers[3][offset + 0x21] = 0x3014;
 
-        gBGTilemapBuffers[2][c] = b[0];
-        gBGTilemapBuffers[2][c + 1] = b[1];
-        gBGTilemapBuffers[2][c + 0x20] = b[2];
-        gBGTilemapBuffers[2][c + 0x21] = b[3];
+        // Draw metatile's bottom layer to the middle background layer.
+        gBGTilemapBuffers[2][offset] = metatiles[0];
+        gBGTilemapBuffers[2][offset + 1] = metatiles[1];
+        gBGTilemapBuffers[2][offset + 0x20] = metatiles[2];
+        gBGTilemapBuffers[2][offset + 0x21] = metatiles[3];
 
-        gBGTilemapBuffers[1][c] = b[4];
-        gBGTilemapBuffers[1][c + 1] = b[5];
-        gBGTilemapBuffers[1][c + 0x20] = b[6];
-        gBGTilemapBuffers[1][c + 0x21] = b[7];
+        // Draw metatile's top layer to the top background layer, which covers event object sprites.
+        gBGTilemapBuffers[1][offset] = metatiles[4];
+        gBGTilemapBuffers[1][offset + 1] = metatiles[5];
+        gBGTilemapBuffers[1][offset + 0x20] = metatiles[6];
+        gBGTilemapBuffers[1][offset + 0x21] = metatiles[7];
         break;
     }
 }

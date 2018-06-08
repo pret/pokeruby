@@ -54,7 +54,7 @@ extern u8 gUnknown_081C6C02[];
 extern u8 HiddenItemScript[];
 extern u8 Event_TV[];
 extern u8 gUnknown_081A0009[];
-extern u8 ClosedSootopolisGymDoorScript[];
+extern u8 ClosedSootopolisDoorScript[];
 extern u8 gUnknown_081A4363[];
 extern u8 gUnknown_081C346A[];
 extern u8 gUnknown_081616E1[];
@@ -132,7 +132,7 @@ void GetPlayerFieldInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
 {
     u8 tileTransitionState = gPlayerAvatar.tileTransitionState;
     u8 runningState = gPlayerAvatar.runningState;
-    bool8 forcedMove = MetatileBehavior_IsMoveTile(GetPlayerCurMetatileBehavior(runningState));
+    bool8 forcedMove = MetatileBehavior_IsForcedMovementTile(GetPlayerCurMetatileBehavior(runningState));
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
@@ -457,9 +457,9 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
         return Event_TV;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return gUnknown_081A0009;
-    if (MetatileBehavior_IsClosedSootopolisGymDoor(metatileBehavior) == TRUE)
-        return ClosedSootopolisGymDoorScript;
-    if (is_tile_x84(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
+        return ClosedSootopolisDoorScript;
+    if (MetatileBehavior_IsLinkBattleRecords(metatileBehavior) == TRUE)
         return gUnknown_081A4363;
     if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
         return gUnknown_081C346A;
@@ -467,7 +467,7 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
         return gUnknown_081616E1;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return Event_WorldMap;
-    if (sub_805791C(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
         return S_RunningShoesManual;
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)
         return PictureBookShelfScript;
@@ -489,11 +489,11 @@ static u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatile
     {
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
             return gUnknown_0815F36C;
-        if (sub_805724C(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsRecordMixingSecretBasePC(metatileBehavior) == TRUE)
             return gUnknown_0815F43A;
-        if (sub_8057364(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
             return gUnknown_0815F523;
-        if (sub_8057378(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
             return gUnknown_0815F528;
     }
 
@@ -788,7 +788,7 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 met
 
     if (direction == DIR_NORTH)
     {
-        if (sub_80571C0(metatileBehavior) == TRUE)
+        if (MetatileBehavior_IsOpenSecretBaseDoor(metatileBehavior) == TRUE)
         {
             sub_80BC038(position, gMapHeader.events);
             return TRUE;

@@ -12,7 +12,6 @@ extern u8 gUnknown_02039250;
 extern u8 gUnknown_02039251;
 extern u32 gUnknown_02039254;
 extern u8 gUnknown_02039258;
-extern u8 gUnknown_02039259;
 extern u8 gUnknown_0203925A;
 extern u8 gUnknown_0203925B;
 extern u8 gUnknown_0203925C;

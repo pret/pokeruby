@@ -171,19 +171,19 @@ void DummyPerStepCallback(u8 taskId) {}
 
 const struct MetatileOffset *sub_80695E0(const struct MetatileOffset a0[][2], s8 a1)
 {
-    if (sub_80576A0(a1))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(a1))
     {
         return a0[0];
     }
-    else if (sub_80576B4(a1))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(a1))
     {
         return a0[1];
     }
-    else if (sub_80576C8(a1))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(a1))
     {
         return a0[2];
     }
-    else if (sub_80576DC(a1))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(a1))
     {
         return a0[3];
     }
@@ -301,28 +301,28 @@ void sub_8069708(s16 x, s16 y, bool32 flag)
 bool32 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x2, y2);
-    if (sub_80576A0(metatileBehavior))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(metatileBehavior))
     {
         if (y1 > y2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576B4(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(metatileBehavior))
     {
         if (y1 < y2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576C8(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(metatileBehavior))
     {
         if (x1 > x2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576DC(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(metatileBehavior))
     {
         if (x1 < x2)
         {
@@ -335,28 +335,28 @@ bool32 sub_806972C(s16 x1, s16 y1, s16 x2, s16 y2)
 bool32 sub_80697C8(s16 x1, s16 y1, s16 x2, s16 y2)
 {
     s8 metatileBehavior = MapGridGetMetatileBehaviorAt(x1, y1);
-    if (sub_80576A0(metatileBehavior))
+    if (MetatileBehavior_IsPacifidlogVerticalLog1(metatileBehavior))
     {
         if (y1 < y2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576B4(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogVerticalLog2(metatileBehavior))
     {
         if (y1 > y2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576C8(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog1(metatileBehavior))
     {
         if (x1 < x2)
         {
             return FALSE;
         }
     }
-    else if (sub_80576DC(metatileBehavior))
+    else if (MetatileBehavior_IsPacifidlogHorizontalLog2(metatileBehavior))
     {
         if (x1 > x2)
         {

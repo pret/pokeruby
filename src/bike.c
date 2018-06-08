@@ -577,7 +577,7 @@ static void AcroBikeTransition_Moving(u8 direction)
     }
     else
     {
-        npc_use_some_d2s(direction);
+        PlayerRideWaterCurrent(direction);
     }
 }
 

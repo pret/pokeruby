@@ -299,7 +299,7 @@ static bool8 sub_808441C(u8 taskId, struct Task *task, struct EventObject *train
         }
         else
         {
-            EventObjectSetHeldMovement(trainerObj, 0x3E);
+            EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACITON_FACE_PLAYER);
             task->data[0]++;
         }
     }

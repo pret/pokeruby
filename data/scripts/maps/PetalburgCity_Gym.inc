@@ -983,12 +983,12 @@ PetalburgCity_Gym_EventScript_15516F:: @ 815516F
 	return
 
 PetalburgCity_Gym_EventScript_155182:: @ 8155182
-	special PetalburgGymSpecial1
+	special PetalburgGymSlideOpenDoors
 	waitstate
 	return
 
 PetalburgCity_Gym_EventScript_155187:: @ 8155187
-	special PetalburgGymSpecial2
+	special PetalburgGymOpenDoorsInstantly
 	return
 
 PetalburgCity_Gym_EventScript_15518B:: @ 815518B

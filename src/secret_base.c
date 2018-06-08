@@ -510,7 +510,7 @@ void sub_80BBDD0(void)
                     gSpecialVar_0x8006 = roomdecorpos[decidx] >> 4;
                     gSpecialVar_0x8007 = roomdecorpos[decidx] & 0xF;
                     metatile = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + 7, gSpecialVar_0x8007 + 7);
-                    if (sub_80572D8(metatile) == TRUE || sub_80572EC(metatile) == TRUE)
+                    if (MetatileBehavior_IsSecretBaseLargeMatEdge(metatile) == TRUE || MetatileBehavior_IsLargeMatCenter(metatile) == TRUE)
                     {
                         gSpecialVar_Result = gMapHeader.events->eventObjects[objid].graphicsId + VAR_0x3F20;
                         VarSet(gSpecialVar_Result, gDecorations[roomdecor[decidx]].tiles[0]);
@@ -1309,7 +1309,7 @@ void sub_80BCE90()
 void sub_80BCF1C(u8 taskId)
 {
     s16 x, y;
-    u32 behavior;
+    u32 metatileBehavior;
     s16 *taskData = gTasks[taskId].data;
 
     switch (taskData[1])
@@ -1325,15 +1325,15 @@ void sub_80BCF1C(u8 taskId)
             taskData[2] = x;
             taskData[3] = y;
 
-            behavior = MapGridGetMetatileBehaviorAt(x, y);
-            if (sub_8057350(behavior) == TRUE)
-                DoYellowCave4Sparkle();
-            else if (sub_8057314(behavior) == TRUE)
-                sub_80C68A4(MapGridGetMetatileIdAt(x, y), x, y);
-            else if (sub_8057328(behavior) == TRUE)
-                sub_80C6A54(x, y);
-            else if (sub_805733C(behavior) == TRUE)
-                DoDecorationSoundEffect(MapGridGetMetatileIdAt(x, y));
+            metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+            if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
+                DoSecretBaseGlitterMatSparkle();
+            else if (MetatileBehavior_IsSecretBaseBalloon(metatileBehavior) == TRUE)
+                PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
+            else if (MetatileBehavior_IsSecretBaseBreakableDoor(metatileBehavior) == TRUE)
+                ShatterSecretBaseBreakableDoor(x, y);
+            else if (MetatileBehavior_IsSecretBaseMusicNoteMat(metatileBehavior) == TRUE)
+                PlaySecretBaseMusicNoteMatSound(MapGridGetMetatileIdAt(x, y));
         }
         break;
     case 2:

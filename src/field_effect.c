@@ -2836,7 +2836,7 @@ void sub_80889E4(struct Task *task)
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
         sub_8059BF4();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
@@ -2968,7 +2968,7 @@ void sub_8088CA0(struct Task *task)
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(1);
         sub_8059BF4();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
@@ -3008,7 +3008,7 @@ void sub_8088D94(struct Task *task)
         task->data[0]++;
         task->data[2] = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], 0x02);
+        EventObjectSetHeldMovement(&gEventObjects[gPlayerAvatar.eventObjectId], MOVEMENT_ACTION_FACE_LEFT);
     }
 }
 
@@ -3033,7 +3033,7 @@ void sub_8088E2C(struct Task *task)
         sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
         eventObject->inanimate = 1;
-        EventObjectSetHeldMovement(eventObject, 0x48);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
         if (task->data[15] & 0x08)
         {
             DestroySprite(&gSprites[eventObject->fieldEffectSpriteId]);
@@ -3343,7 +3343,7 @@ void sub_8089414(struct Task *task)
         sprite->pos2.y = 0;
         sprite->coordOffsetEnabled = 1;
         sub_8059BF4();
-        EventObjectSetHeldMovement(eventObject, 0x39);
+        EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
         task->data[0]++;
     }
 }
