@@ -196,8 +196,8 @@ SootopolisCity_EventScript_14D2F6:: @ 814D2F6
 	msgbox SootopolisCity_Text_16A711, 3
 	end
 
-ClosedSootopolisGymDoorScript:: @ 814D2FF
-	msgbox ClosedSootopolisGymDoorText, 3
+ClosedSootopolisDoorScript:: @ 814D2FF
+	msgbox ClosedSootopolisDoorText, 3
 	end
 
 SootopolisCity_EventScript_14D308:: @ 814D308

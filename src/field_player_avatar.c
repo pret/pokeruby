@@ -50,11 +50,11 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a);
 static void sub_8059D60(struct EventObject *a);
 static void StartStrengthAnim(u8 a, u8 b);
 static void DoPlayerMatJump(void);
-static void sub_805A06C(void);
+static void DoPlayerMatSpin(void);
 u8 debug_sub_805F2B0(u8);
 u8 debug_sub_805F2DC(u8);
 
-static bool8 (*const gUnknown_0830FB58[])(u8) =
+static bool8 (*const sForcedMovementTestFuncs[])(u8) =
 {
     MetatileBehavior_IsTrickHouseSlipperyFloor,
     MetatileBehavior_IsIce_2,
@@ -71,30 +71,30 @@ static bool8 (*const gUnknown_0830FB58[])(u8) =
     MetatileBehavior_IsSlideWest,
     MetatileBehavior_IsSlideEast,
     MetatileBehavior_IsWaterfall,
-    MetatileBehavior_0xBB,
-    MetatileBehavior_0xBC,
+    MetatileBehavior_IsSecretBaseJumpMat,
+    MetatileBehavior_IsSecretBaseSpinMat,
     MetatileBehavior_IsMuddySlope,
 };
-static bool8 (*const gUnknown_0830FBA0[])(void) =
+static bool8 (*const sForcedMovementFuncs[])(void) =
 {
     ForcedMovement_None,
     ForcedMovement_Slip,
     ForcedMovement_Slip,
-    sub_8058AAC,
-    sub_8058AC4,
-    sub_8058ADC,
-    sub_8058AF4,
-    sub_8058B0C,
-    sub_8058B24,
-    sub_8058B3C,
-    sub_8058B54,
+    ForcedMovement_WalkSouth,
+    ForcedMovement_WalkNorth,
+    ForcedMovement_WalkWest,
+    ForcedMovement_WalkEast,
+    ForcedMovement_RideCurrentSouth,
+    ForcedMovement_RideCurrentNorth,
+    ForcedMovement_RideCurrentWest,
+    ForcedMovement_RideCurrentEast,
     ForcedMovement_SlideSouth,
     ForcedMovement_SlideNorth,
     ForcedMovement_SlideWest,
     ForcedMovement_SlideEast,
-    sub_8058B0C,
-    ForcedMovement_MatJump,
-    sub_8058C10,
+    ForcedMovement_RideCurrentSouth,
+    ForcedMovement_SecretBaseJumpMat,
+    ForcedMovement_SecretBaseSpinMat,
     ForcedMovement_MuddySlope,
 };
 static void (*const gUnknown_0830FBEC[])(u8, u16) =
@@ -188,12 +188,12 @@ static u8 (*const sPlayerAvatarSecretBaseMatJump[])(struct Task *, struct EventO
 {
     PlayerAvatar_DoSecretBaseMatJump,
 };
-static u8 (*const gUnknown_0830FC98[])(struct Task *, struct EventObject *) =
+static u8 (*const sPlayerAvatarSecretBaseMatSpin[])(struct Task *, struct EventObject *) =
 {
-    sub_805A0D8,
-    sub_805A100,
-    sub_805A178,
-    sub_805A1B8,
+    PlayerAvatar_SecretBaseMatSpinStep0,
+    PlayerAvatar_SecretBaseMatSpinStep1,
+    PlayerAvatar_SecretBaseMatSpinStep2,
+    PlayerAvatar_SecretBaseMatSpinStep3,
 };
 
 movement_type_empty_callback(MovementType_Player);
@@ -267,7 +267,7 @@ static bool8 TryDoMetatileBehaviorForcedMovement(void)
     if (gUnknown_020297ED != 0 && (gMain.heldKeys & R_BUTTON))
         return 0;
 #endif
-    return gUnknown_0830FBA0[GetForcedMovementByMetatileBehavior()]();
+    return sForcedMovementFuncs[GetForcedMovementByMetatileBehavior()]();
 }
 
 static u8 GetForcedMovementByMetatileBehavior(void)
@@ -276,11 +276,11 @@ static u8 GetForcedMovementByMetatileBehavior(void)
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_5))
     {
-        u8 r5 = gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior;
+        u8 metatileBehavior = gEventObjects[gPlayerAvatar.eventObjectId].currentMetatileBehavior;
 
         for (i = 0; i < 18; i++)
         {
-            if (gUnknown_0830FB58[i](r5))
+            if (sForcedMovementTestFuncs[i](metatileBehavior))
                 return i + 1;
         }
     }
@@ -344,44 +344,44 @@ bool8 ForcedMovement_Slip(void)
     return DoForcedMovementInCurrentDirection(PlayerGoSpeed2);
 }
 
-bool8 sub_8058AAC(void)
+bool8 ForcedMovement_WalkSouth(void)
 {
     return DoForcedMovement(DIR_SOUTH, PlayerGoSpeed1);
 }
 
-bool8 sub_8058AC4(void)
+bool8 ForcedMovement_WalkNorth(void)
 {
     return DoForcedMovement(DIR_NORTH, PlayerGoSpeed1);
 }
 
-bool8 sub_8058ADC(void)
+bool8 ForcedMovement_WalkWest(void)
 {
     return DoForcedMovement(DIR_WEST, PlayerGoSpeed1);
 }
 
-bool8 sub_8058AF4(void)
+bool8 ForcedMovement_WalkEast(void)
 {
     return DoForcedMovement(DIR_EAST, PlayerGoSpeed1);
 }
 
-bool8 sub_8058B0C(void)
+bool8 ForcedMovement_RideCurrentSouth(void)
 {
-    return DoForcedMovement(DIR_SOUTH, npc_use_some_d2s);
+    return DoForcedMovement(DIR_SOUTH, PlayerRideWaterCurrent);
 }
 
-bool8 sub_8058B24(void)
+bool8 ForcedMovement_RideCurrentNorth(void)
 {
-    return DoForcedMovement(DIR_NORTH, npc_use_some_d2s);
+    return DoForcedMovement(DIR_NORTH, PlayerRideWaterCurrent);
 }
 
-bool8 sub_8058B3C(void)
+bool8 ForcedMovement_RideCurrentWest(void)
 {
-    return DoForcedMovement(DIR_WEST, npc_use_some_d2s);
+    return DoForcedMovement(DIR_WEST, PlayerRideWaterCurrent);
 }
 
-bool8 sub_8058B54(void)
+bool8 ForcedMovement_RideCurrentEast(void)
 {
-    return DoForcedMovement(DIR_EAST, npc_use_some_d2s);
+    return DoForcedMovement(DIR_EAST, PlayerRideWaterCurrent);
 }
 
 static u8 ForcedMovement_Slide(u8 direction, void (*b)(u8))
@@ -413,15 +413,15 @@ bool8 ForcedMovement_SlideEast(void)
     return ForcedMovement_Slide(DIR_EAST, PlayerGoSpeed2);
 }
 
-bool8 ForcedMovement_MatJump(void)
+bool8 ForcedMovement_SecretBaseJumpMat(void)
 {
     DoPlayerMatJump();
     return TRUE;
 }
 
-bool8 sub_8058C10(void)
+bool8 ForcedMovement_SecretBaseSpinMat(void)
 {
-    sub_805A06C();
+    DoPlayerMatSpin();
     return TRUE;
 }
 
@@ -783,7 +783,7 @@ void PlayerGoSpeed2(u8 a)
     PlayerSetAnimId(GetWalkFastMovementAction(a), 2);
 }
 
-void npc_use_some_d2s(u8 a)
+void PlayerRideWaterCurrent(u8 a)
 {
     PlayerSetAnimId(GetRideWaterCurrentMovementAction(a), 2);
 }
@@ -1305,22 +1305,22 @@ u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct EventObject *event
 
 /* Some field effect */
 
-static void sub_805A08C(u8 taskId);
+static void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId);
 
-static void sub_805A06C(void)
+static void DoPlayerMatSpin(void)
 {
-    u8 taskId = CreateTask(sub_805A08C, 0xFF);
+    u8 taskId = CreateTask(PlayerAvatar_DoSecretBaseMatSpin, 0xFF);
 
-    sub_805A08C(taskId);
+    PlayerAvatar_DoSecretBaseMatSpin(taskId);
 }
 
-static void sub_805A08C(u8 taskId)
+static void PlayerAvatar_DoSecretBaseMatSpin(u8 taskId)
 {
-    while (gUnknown_0830FC98[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId]))
+    while (sPlayerAvatarSecretBaseMatSpin[gTasks[taskId].data[0]](&gTasks[taskId], &gEventObjects[gPlayerAvatar.eventObjectId]))
         ;
 }
 
-u8 sub_805A0D8(struct Task *task, struct EventObject *eventObject)
+u8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct EventObject *eventObject)
 {
     task->data[0]++;
     task->data[1] = eventObject->movementDirection;
@@ -1330,7 +1330,7 @@ u8 sub_805A0D8(struct Task *task, struct EventObject *eventObject)
     return 1;
 }
 
-u8 sub_805A100(struct Task *task, struct EventObject *eventObject)
+u8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct EventObject *eventObject)
 {
     u8 directions[] = {DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
 
@@ -1348,26 +1348,32 @@ u8 sub_805A100(struct Task *task, struct EventObject *eventObject)
     return 0;
 }
 
-u8 sub_805A178(struct Task *task, struct EventObject *eventObject)
+u8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct EventObject *eventObject)
 {
-    const u8 arr[] = {16, 16, 17, 18, 19};
+    const u8 actions[] = {
+        MOVEMENT_ACTION_DELAY_1,
+        MOVEMENT_ACTION_DELAY_1,
+        MOVEMENT_ACTION_DELAY_2,
+        MOVEMENT_ACTION_DELAY_4,
+        MOVEMENT_ACTION_DELAY_8,
+    };
 
     if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
-        EventObjectSetHeldMovement(eventObject, arr[task->data[2]]);
+        EventObjectSetHeldMovement(eventObject, actions[task->data[2]]);
         task->data[0] = 1;
     }
     return 0;
 }
 
-u8 sub_805A1B8(struct Task *task, struct EventObject *eventObject)
+u8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct EventObject *eventObject)
 {
     if (EventObjectClearHeldMovementIfFinished(eventObject))
     {
         EventObjectSetHeldMovement(eventObject, GetWalkSlowMovementAction(GetOppositeDirection(task->data[1])));
         ScriptContext2_Disable();
         gPlayerAvatar.preventStep = FALSE;
-        DestroyTask(FindTaskIdByFunc(sub_805A08C));
+        DestroyTask(FindTaskIdByFunc(PlayerAvatar_DoSecretBaseMatSpin));
     }
     return 0;
 }

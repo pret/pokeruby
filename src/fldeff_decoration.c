@@ -78,7 +78,7 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36]
 static void sub_80C68EC(u8);
 static void DoBalloonSoundEffect(s16);
 
-void sub_80C68A4(s16 metatileId, s16 x, s16 y)
+void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
 {
     u8 taskId = CreateTask(sub_80C68EC, 0);
 
@@ -162,7 +162,7 @@ static void sub_80C6A14(u8 taskId)
     }
 }
 
-void sub_80C6A54(s16 x, s16 y)
+void ShatterSecretBaseBreakableDoor(s16 x, s16 y)
 {
     u8 dir = GetPlayerFacingDirection();
     if (dir == DIR_SOUTH)
@@ -178,11 +178,11 @@ void sub_80C6A54(s16 x, s16 y)
     }
 }
 
-static void Task_DecorationSoundEffect(u8 taskId)
+static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
 {
     if (gTasks[taskId].data[1] == 7)
     {
-        switch (gTasks[taskId].data[0])
+        switch (gTasks[taskId].data[0]) // metatileId
         {
         case 632:
             PlaySE(SE_TOY_C);
@@ -218,14 +218,14 @@ static void Task_DecorationSoundEffect(u8 taskId)
     }
 }
 
-void DoDecorationSoundEffect(s16 arg)
+void PlaySecretBaseMusicNoteMatSound(s16 metatileId)
 {
-    u8 taskId = CreateTask(Task_DecorationSoundEffect, 5);
-    gTasks[taskId].data[0] = arg;
+    u8 taskId = CreateTask(Task_SecretBaseMusicNoteMatSound, 5);
+    gTasks[taskId].data[0] = metatileId;
     gTasks[taskId].data[1] = 0;
 }
 
-void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
+void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] == 8)
@@ -234,7 +234,7 @@ void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void DoYellowCave4Sparkle(void)
+void DoSecretBaseGlitterMatSparkle(void)
 {
     s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
     s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
@@ -247,7 +247,7 @@ void DoYellowCave4Sparkle(void)
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].oam.priority = 1;
         gSprites[spriteId].oam.paletteNum = 5;
-        gSprites[spriteId].callback = SpriteCB_YellowCave4Sparkle;
+        gSprites[spriteId].callback = SpriteCB_GlitterMatSparkle;
         gSprites[spriteId].data[0] = 0;
     }
 }

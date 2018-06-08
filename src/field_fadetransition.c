@@ -231,7 +231,7 @@ void sub_8080B9C(u8 taskId)
             u8 eventObjId;
             sub_8080958(1);
             eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 8);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 2;
         }
         break;
@@ -573,7 +573,7 @@ void sub_808115C(u8 taskId)
             eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
             EventObjectClearHeldMovementIfActive(&gEventObjects[eventObjId]);
             eventObjId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
-            EventObjectSetHeldMovement(&gEventObjects[eventObjId], 9);
+            EventObjectSetHeldMovement(&gEventObjects[eventObjId], MOVEMENT_ACTION_WALK_NORMAL_UP);
             task->data[0] = 2;
         }
         break;

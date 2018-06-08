@@ -90,7 +90,7 @@ void Debug_SetUpFieldMove_Cut(void)
 {
     s16 x, y;
     u8 i, j;
-    u8 metatile;
+    u8 metatileBehavior;
 
     if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
@@ -108,9 +108,9 @@ void Debug_SetUpFieldMove_Cut(void)
             x = j - 1 + gPlayerFacingPosition.x;
             if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
             {
-                metatile = MapGridGetMetatileBehaviorAt(x, y);
-                if (MetatileBehavior_IsPokeGrass(metatile) == TRUE
-                 || MetatileBehavior_IsAshGrass(metatile) == TRUE)
+                metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+                if (MetatileBehavior_IsPokeGrass(metatileBehavior) == TRUE
+                 || MetatileBehavior_IsAshGrass(metatileBehavior) == TRUE)
                 {
                     gLastFieldPokeMenuOpened = 0;
                     FieldCallback_CutGrass();

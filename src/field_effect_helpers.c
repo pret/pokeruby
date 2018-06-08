@@ -62,7 +62,7 @@ static void npc_pal_op(struct EventObject *eventObject, struct Sprite *sprite)
     u8 whichElement;
     u16 unk_8041e2c[] = {0x0c, 0x1c, 0x2c};
     sprite->data[2] = 0;
-    if (!GetEventObjectGraphicsInfo(eventObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = sub_8057450(eventObject->previousMetatileBehavior)) || (whichElement = sub_8057450(eventObject->currentMetatileBehavior))))
+    if (!GetEventObjectGraphicsInfo(eventObject->graphicsId)->disableReflectionPaletteLoad && ((whichElement = MetatileBehavior_GetBridgeType(eventObject->previousMetatileBehavior)) || (whichElement = MetatileBehavior_GetBridgeType(eventObject->currentMetatileBehavior))))
     {
         sprite->data[2] = unk_8041e2c[whichElement - 1];
         npc_pal_op_A(eventObject, sprite->oam.paletteNum);
