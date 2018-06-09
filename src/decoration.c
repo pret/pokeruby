@@ -19,6 +19,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "decoration_inventory.h"
 #include "shop.h"
 #include "ewram.h"
 
@@ -1555,7 +1556,7 @@ void sub_80FE470(u8 decoCat, u8 left, u8 top, u8 palIdx) // PrintDecorationCateg
     strptr[2] = palIdx;
     strptr += 3;
     strptr = StringCopy(strptr, gUnknown_083EC5E4[decoCat]);
-    strptr = sub_8072C14(strptr, sub_8134194(decoCat), 0x56, 1);
+    strptr = sub_8072C14(strptr, GetNumDecorationsInInventoryCategory(decoCat), 0x56, 1);
     *strptr++ = 0xba;
     strptr = sub_8072C14(strptr, gDecorationInventories[decoCat].size, 0x68, 1);
     strptr[0] = EXT_CTRL_CODE_BEGIN;
@@ -1609,10 +1610,10 @@ void sub_80FE604(u8 taskId)
             gUnknown_020388F6 = Menu_GetCursorPos();
             if (gUnknown_020388F6 != 8)
             {
-                gUnknown_020388D5 = sub_8134194(gUnknown_020388F6);
+                gUnknown_020388D5 = GetNumDecorationsInInventoryCategory(gUnknown_020388F6);
                 if (gUnknown_020388D5)
                 {
-                    sub_8134104(gUnknown_020388F6);
+                    SortDecorationInventory(gUnknown_020388F6);
                     gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
                     ClearVerticalScrollIndicatorPalettes();
@@ -2022,7 +2023,7 @@ void sub_80FF098(u8 taskId)
     {
         gUnknown_020388F4--;
     }
-    sub_8134104(gUnknown_020388F6);
+    SortDecorationInventory(gUnknown_020388F6);
     sub_80FED90(taskId);
     sub_80FEF28();
 }
@@ -2042,7 +2043,7 @@ void sub_80FF114(u8 taskId)
 }
 void sub_80FF160(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else
@@ -4190,7 +4191,7 @@ void sub_81016F4(void)
 
 void sub_8101700(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else
@@ -4203,7 +4204,7 @@ void sub_8101700(u8 taskId)
 
 void sub_8101750(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else

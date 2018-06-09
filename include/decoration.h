@@ -152,9 +152,6 @@ extern const struct YesNoFuncTable gUnknown_083EC9CC;
 extern const struct YesNoFuncTable gUnknown_083EC9D4;
 extern const struct YesNoFuncTable gUnknown_083ECAA0;
 
-extern u8 sub_8134194(u8); // src/decoration_inventory
-extern bool8 sub_81341D4(void); // src/decoration_inventory
-extern void sub_8134104(u8); // src/decoration_inventory
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
 void Task_SecretBasePC_Decoration(u8);

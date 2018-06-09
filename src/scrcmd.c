@@ -556,7 +556,7 @@ bool8 ScrCmd_takedecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_81340A8(decoration);
+    gSpecialVar_Result = RemoveDecorationFromInventory(decoration);
     return FALSE;
 }
 
@@ -564,7 +564,7 @@ bool8 ScrCmd_checkdecorspace(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_8134074(decorId);
+    gSpecialVar_Result = CheckDecorationInventoryHasSpace(decorId);
     return FALSE;
 }
 
@@ -572,7 +572,7 @@ bool8 ScrCmd_checkdecor(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_8133FE4(decorId);
+    gSpecialVar_Result = InventoryContainsDecoration(decorId);
     return FALSE;
 }
 
