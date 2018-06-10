@@ -134,7 +134,7 @@ static u8 InitClearSaveDataScreen(void)
         ResetSpriteData();
 
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, FADE_COLOR_WHITE);
 
         ime = REG_IME;

@@ -622,7 +622,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ig
 static u16 GetStringWidthInTilesForScriptMenu(const u8 *str)
 {
     // each tile on screen is 8x8, so it needs the number of tiles and not pixels, hence the division by 8.
-    return (Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowTemplate_81E6CE4, str) + 7) / 8;
+    return (Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gMenuTextWindowTemplate, str) + 7) / 8;
 }
 
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress, u8 cursorPos)

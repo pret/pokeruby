@@ -2,7 +2,7 @@
 #include "mori_debug_menu.h"
 #include "data2.h"
 #include "daycare.h"
-#include "learn_move.h"
+#include "move_tutor_menu.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -136,7 +136,7 @@ u8 MoriDebugMenu_10000Steps(void)
 
 u8 MoriDebugMenu_MoveTutor(void)
 {
-    TeachMoveTutorMove();
+    DisplayMoveTutorMenu();
     CloseMenu();
     return 1;
 }

@@ -232,7 +232,7 @@ gSpecials::
 	def_special DeleteMonMove
 	def_special ScrSpecial_GetPokemonNicknameAndMoveName
 	def_special ScrSpecial_CountPokemonMoves
-	def_special TeachMoveTutorMove
+	def_special DisplayMoveTutorMenu
 	def_special GetRecordedCyclingRoadResults
 	def_special ScrSpecial_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike

@@ -3427,10 +3427,10 @@ void PartyMenuDoPrintHP(u8 monIndex, u8 b, u16 currentHP, u16 maxHP)
 {
     u32 *var;
     register u8 *stringVar1 asm("r2") = gStringVar1;
-    register u8 *textPtr asm("r2") = sub_8072C14(stringVar1, currentHP, 15, 1);
+    register u8 *textPtr asm("r2") = AlignInt1InMenuWindow(stringVar1, currentHP, 15, 1);
     textPtr[0] = CHAR_SLASH;
 
-    sub_8072C14(++textPtr, maxHP, 35, 1);
+    AlignInt1InMenuWindow(++textPtr, maxHP, 35, 1);
     var = 0;
 
     CpuFastSet(&var, gUnknown_02039460, 0x1000040);

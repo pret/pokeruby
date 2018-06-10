@@ -912,7 +912,7 @@ void sub_809A23C(u8 boxId)
     gPokemonStorageSystemPtr->unk_0d08 |= 0x10000 << tagIdx;
     sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
     LoadSpriteSheet(&spriteSheet);
-    r6 = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    r6 = sub_809A6D0(GetStringWidthInMenuWindow(gPokemonStorage.boxNames[boxId]));
     for (i = 0; i < 2; i++)
     {
         u8 spriteId = CreateSprite(&gSpriteTemplate_83BB2B8, r6 + i * 32, 0x1c, 23);
@@ -947,7 +947,7 @@ void sub_809A3D0(u8 boxId, s8 a1)
     sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_083BB0A8[gPokemonStorage.wallpaper[boxId]], r8, 0x04);
-    x = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    x = sub_809A6D0(GetStringWidthInMenuWindow(gPokemonStorage.boxNames[boxId]));
     x2 = x + a1 * 192;
     for (i = 0; i < 2; i++)
     {
@@ -2061,7 +2061,7 @@ void sub_809C04C(void *pokemon, u8 a1)
         buf = gPokemonStorageSystemPtr->unk_1259 + 8;
         buf[0] = 0x34; // LV
         buf = gPokemonStorageSystemPtr->unk_1259 + 9;
-        buf = sub_8072C14(buf, gPokemonStorageSystemPtr->unk_11f8, 0x22, STR_CONV_MODE_RIGHT_ALIGN);
+        buf = AlignInt1InMenuWindow(buf, gPokemonStorageSystemPtr->unk_11f8, 0x22, STR_CONV_MODE_RIGHT_ALIGN);
         buf[0] = EXT_CTRL_CODE_BEGIN;
         buf[1] = 0x11; // CLEAR
         buf[2] = 8;

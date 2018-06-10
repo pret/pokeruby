@@ -37,7 +37,7 @@ FallarborTown_House2_EventScript_153CE4:: @ 8153CE4
 
 FallarborTown_House2_EventScript_153D1A:: @ 8153D1A
 	msgbox FallarborTown_House2_Text_177C5D, 4
-	special TeachMoveTutorMove
+	special DisplayMoveTutorMenu
 	waitstate
 	compare VAR_SPECIAL_4, 0
 	goto_if_eq FallarborTown_House2_EventScript_153CE4

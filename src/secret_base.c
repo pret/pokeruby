@@ -98,7 +98,7 @@ const u8 gUnknown_083D1374[] = {
 
 const struct MenuAction2 gUnknown_083D13D4[] = {
     {SecretBaseText_DelRegist, sub_80BCA84},
-    {gUnknownText_Exit, sub_80BCBF8}
+    {gOtherText_Exit, sub_80BCBF8}
 };
 
 const struct YesNoFuncTable gUnknown_083D13E4 = {
@@ -1011,7 +1011,7 @@ void sub_80BC6B0(u8 taskId)
     if (n < 8)
     {
         Menu_BlankWindowRect(18, 2 * n + 2, 28, 2 * n + 3);
-        Menu_PrintText(gUnknownText_Exit, 18, 2 * n + 2);
+        Menu_PrintText(gOtherText_Exit, 18, 2 * n + 2);
         DestroyVerticalScrollIndicator(BOTTOM_ARROW);
         if (n != 7)
             Menu_BlankWindowRect(18, ((n << 25) + (1 << 26)) >> 24, 28, 18); // the shifts are needed to match

@@ -436,7 +436,7 @@ void sub_8115384(void)
         break;
     case 0x2:
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         LoadPalette(&gUnknown_083F86BC, 0x0, 0x1C0);
         gMain.state++;
         break;

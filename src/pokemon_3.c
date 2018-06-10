@@ -10,6 +10,7 @@
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
+#include "move_tutor_menu.h"
 #include "pokemon.h"
 #include "random.h"
 #include "overworld.h"
@@ -993,18 +994,18 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     }
 }
 
-u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
+u8 GetMoveTutorMoves(struct Pokemon *mon, u16 *moves)
 {
-    u16 learnedMoves[4];
+    u16 knownMoves[4];
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     int i, j, k;
 
     for (i = 0; i < 4; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+        knownMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
 
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < MAX_MOVE_TUTOR_MOVES; i++)
     {
         u16 moveLevel;
 
@@ -1012,10 +1013,9 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & 0xFE00;
-
         if (moveLevel <= (level << 9))
         {
-            for (j = 0; j < 4 && learnedMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
+            for (j = 0; j < 4 && knownMoves[j] != (gLevelUpLearnsets[species][i] & 0x1FF); j++)
                 ;
 
             if (j == 4)

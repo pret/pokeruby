@@ -133,7 +133,7 @@ void CB2_StartSoundCheckMenu(void)
     ResetTasks();
     ResetSpriteData();
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_WIN0H = WIN_RANGE(0, 0);
     REG_WIN0V = WIN_RANGE(0, 0);
@@ -1218,7 +1218,7 @@ void Task_InitCryTest(u8 taskId)
     u8 zero;
 
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     gSoundTestCryNum = 1;
     ResetSpriteData();
     FreeAllSpritePalettes();

@@ -896,7 +896,7 @@ sub_809CDEC: @ 809CDEC
 	ldr r0, [r0]
 	str r0, [r1]
 	str r3, [r1, 0x4]
-	bl sub_8072CA4
+	bl GetStringWidthInMenuWindow
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0x7

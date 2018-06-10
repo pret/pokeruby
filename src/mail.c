@@ -1124,8 +1124,8 @@ void debug_sub_810D388(void)
         FreeAllSpritePalettes();
         break;
     case 4:
-        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         Menu_EraseScreen();
         break;
     case 5:

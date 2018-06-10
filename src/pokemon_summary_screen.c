@@ -9,12 +9,12 @@
 #include "event_data.h"
 #include "ewram.h"
 #include "item.h"
-#include "learn_move.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "move_tutor_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -2577,9 +2577,9 @@ static void sub_809FF64(struct Pokemon *mon)
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPEED));
     sub_8072BD8(buffer, 27, 11, 18);
 
-    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
+    buffer = AlignInt1InMenuWindow(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
     *buffer++ = CHAR_SLASH;
-    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
+    buffer = AlignInt1InMenuWindow(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
 
     Menu_PrintTextPixelCoords(gStringVar1, 126, 56, 1);
 }
@@ -2651,9 +2651,9 @@ static void sub_80A015C(struct Pokemon *mon)
             maxPP = CalculatePPWithBonus(move, ppBonuses, i);
 
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, curPP, 14, 1);
+            buffer = AlignInt1InMenuWindow(buffer, curPP, 14, 1);
             *buffer++ = CHAR_SLASH;
-            sub_8072C14(buffer, maxPP, 32, 1);
+            AlignInt1InMenuWindow(buffer, maxPP, 32, 1);
             Menu_PrintText(gStringVar1, 25, (2 * i) + 4);
         }
     }
@@ -2687,9 +2687,9 @@ static void sub_80A029C(struct Pokemon *mon)
 
     buffer = gStringVar1;
     pp = gBattleMoves[move].pp;
-    buffer = sub_8072C14(buffer, pp, 14, 1);
+    buffer = AlignInt1InMenuWindow(buffer, pp, 14, 1);
     *buffer++ = CHAR_SLASH;
-    buffer = sub_8072C14(buffer, pp, 32, 1);
+    buffer = AlignInt1InMenuWindow(buffer, pp, 32, 1);
     Menu_PrintText(gStringVar1, 25, 12);
 }
 
@@ -2769,26 +2769,26 @@ static void sub_80A04CC(u16 move)
         if (gBattleMoves[move].power <= 1)
         {
             buffer = gStringVar1;
-            buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+            buffer = AlignStringInMenuWindow(buffer, gOtherText_ThreeDashes2, 21, 1);
             Menu_PrintText(gStringVar1, 7, 15);
         }
         else
         {
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, gBattleMoves[move].power, 21, 1);
+            buffer = AlignInt1InMenuWindow(buffer, gBattleMoves[move].power, 21, 1);
             Menu_PrintText(gStringVar1, 7, 15);
         }
 
         if (gBattleMoves[move].accuracy == 0)
         {
             buffer = gStringVar1;
-            buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+            buffer = AlignStringInMenuWindow(buffer, gOtherText_ThreeDashes2, 21, 1);
             Menu_PrintText(gStringVar1, 7, 17);
         }
         else
         {
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, gBattleMoves[move].accuracy, 21, 1);
+            buffer = AlignInt1InMenuWindow(buffer, gBattleMoves[move].accuracy, 21, 1);
             Menu_PrintText(gStringVar1, 7, 17);
         }
     }

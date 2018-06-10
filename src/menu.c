@@ -441,7 +441,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
+        u8 width = (GetStringWidthInMenuWindow(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -498,7 +498,7 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, const struct MenuActi
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
+        u8 width = (GetStringWidthInMenuWindow(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -733,11 +733,11 @@ void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
     Text_InitWindow8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
+void sub_8072B80(const u8 *src, u8 a2, u8 a3, const u8 *a4)
 {
     u8 buffer[64];
     u8 width = GetStringWidth(gMenuWindowPtr, a4);
-    AlignString(gMenuWindowPtr, buffer, a1, width, 1);
+    AlignString(gMenuWindowPtr, buffer, src, width, 1);
     Text_InitWindowAndPrintText(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
@@ -746,22 +746,22 @@ void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
     Text_InitWindow8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
 
-u8 *sub_8072C14(u8 *a1, s32 a2, u8 a3, u8 a4)
+u8 *AlignInt1InMenuWindow(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    return AlignInt1(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignInt1(gMenuWindowPtr, dest, value, alignAmount, alignType);
 }
 
-u8 *sub_8072C44(u8 *a1, s32 a2, u8 a3, u8 a4)
+u8 *AlignInt2InMenuWindow(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    return AlignInt2(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignInt2(gMenuWindowPtr, dest, value, alignAmount, alignType);
 }
 
-u8 *sub_8072C74(u8 *a1, const u8 *a2, u8 a3, u8 a4)
+u8 *AlignStringInMenuWindow(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
-    return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignString(gMenuWindowPtr, dest, src, alignAmount, alignType);
 }
 
-u8 sub_8072CA4(const u8 *str)
+u8 GetStringWidthInMenuWindow(const u8 *str)
 {
     return GetStringWidth(gMenuWindowPtr, str);
 }

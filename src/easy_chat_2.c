@@ -1182,7 +1182,7 @@ void sub_80E9368(u8 a)
     gEasyChatStruct->unk9F8E[2] = 1;
     if (r4 != NULL)
     {
-        sub_8072C74(gEasyChatStruct->unk9F8E + 3, r4, 240, 2);
+        AlignStringInMenuWindow(gEasyChatStruct->unk9F8E + 3, r4, 240, 2);
         Menu_PrintText(gEasyChatStruct->unk9F8E, 0, 0);
     }
     else

@@ -685,7 +685,7 @@ void DebugMenu_8077048(void)
 
 u8 DebugMenu_807706C(void)
 {
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     DebugMenu_8077004();
     DebugMenu_807719C();
     DebugMenu_80771EC();

@@ -141,7 +141,7 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
     u8 stringWidth;
 
     GetMoneyAmountText(buffer, amount, size);
-    stringWidth = sub_8072CA4(buffer);
+    stringWidth = GetStringWidthInMenuWindow(buffer);
 
     if (stringWidth >= (size + 1) * 8)
     {

@@ -1089,7 +1089,7 @@ static void sub_8047EC0(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            InitMenuWindow(&gMenuTextWindowTemplate);
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
@@ -1269,7 +1269,7 @@ static void sub_80484F4(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            InitMenuWindow(&gMenuTextWindowTemplate);
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);

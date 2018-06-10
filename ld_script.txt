@@ -356,7 +356,7 @@ SECTIONS {
         src/fldeff_sweetscent.o(.text);
         src/battle/battle_anim_812C144.o(.text);
         asm/battle_anim_812C144.o(.text);
-        src/learn_move.o(.text);
+        src/move_tutor_menu.o(.text);
         src/fldeff_softboiled.o(.text);
         src/decoration_inventory.o(.text);
         src/roamer.o(.text);
@@ -742,7 +742,7 @@ SECTIONS {
         src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
         data/battle_anim_812C144.o(.rodata);
-        src/learn_move.o(.rodata);
+        src/move_tutor_menu.o(.rodata);
         src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
