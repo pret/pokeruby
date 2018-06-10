@@ -1452,7 +1452,7 @@ static void TrainerCard_Front_GetPlayTimeString(u8 *arg1, s16 colon)
         playTimeMinutes = ewram0_2.displayedCard.playTimeMinutes;
     }
     FormatPlayTime(buffer, playTimeHours, playTimeMinutes, colon);
-    sub_8072C74(arg1, buffer, 48, 1);
+    AlignStringInMenuWindow(arg1, buffer, 48, 1);
 }
 
 static void TrainerCard_PrintEasyChatPhrase(void)
@@ -1548,10 +1548,10 @@ static void TrainerCard_Back_PrintBattleTower(void)
 
     if (ewram0_2.showBattleTowerStatus != 0)
     {
-        sub_8072C44(buffer, ewram0_2.displayedCard.battleTowerWins, 24, 1);
+        AlignInt2InMenuWindow(buffer, ewram0_2.displayedCard.battleTowerWins, 24, 1);
         Menu_PrintTextPixelCoords(buffer, 112, 120, 0);
 
-        sub_8072C44(buffer, ewram0_2.displayedCard.battleTowerLosses, 24, 1);
+        AlignInt2InMenuWindow(buffer, ewram0_2.displayedCard.battleTowerLosses, 24, 1);
         Menu_PrintTextPixelCoords(buffer, 149, 120, 0);
     }
 }

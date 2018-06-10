@@ -265,7 +265,7 @@ static void sub_80816A8(u8 taskId)
         break;
     case 5:
         Menu_EraseWindowRect(0, 0, 29, 19);
-        LoadFontDefaultPalette(&gWindowTemplate_81E6CE4);
+        LoadFontDefaultPalette(&gMenuTextWindowTemplate);
         REG_WIN0H = 255;
         REG_DISPCNT = data[6];
         REG_BLDCNT = data[7];

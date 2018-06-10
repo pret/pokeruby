@@ -230,7 +230,7 @@ static const struct MenuAction2 sBattleTowerEntryMenuItems[] =
     {OtherText_Summary, BattleTowerEntryMenuCallback_Summary},
     {OtherText_Enter2, BattleTowerEntryMenuCallback_Enter},
     {OtherText_NoEntry, BattleTowerEntryMenuCallback_NoEntry},
-    {gUnknownText_Exit, BattleTowerEntryMenuCallback_Exit},
+    {gOtherText_Exit, BattleTowerEntryMenuCallback_Exit},
 };
 
 static const u8 gUnknown_084017D0[] = {1, 0, 3};
@@ -780,7 +780,7 @@ static const struct MenuAction2 sDaycareStorageMenuItems[] =
 {
     {OtherText_Store, DaycareStorageMenuCallback_Store},
     {OtherText_Summary, DaycareStorageMenuCallback_Summary},
-    {gUnknownText_Exit, DaycareStorageMenuCallback_Exit},
+    {gOtherText_Exit, DaycareStorageMenuCallback_Exit},
 };
 
 static const u8 gUnknown_08401808[] = {0, 1, 2};

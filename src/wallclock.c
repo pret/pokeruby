@@ -222,7 +222,7 @@ static void LoadWallClockGraphics(void)
     LoadCompressedObjectPic(&gUnknown_083F7A90[0]);
     LoadSpritePalettes(gUnknown_083F7AA0);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
 }
 
 static void WallClockInit(void)

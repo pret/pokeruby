@@ -150,7 +150,7 @@ extern const u8 OtherText_CheckTag[];
 extern const u8 OtherText_Confirm[];
 extern const u8 gOtherText_Walk[];
 
-extern const u8 gUnknownText_Exit[];
+extern const u8 gOtherText_Exit[];
 extern const u8 gOtherText_CancelNoTerminator[];
 extern const u8 gOtherText_CancelWithTerminator[];
 

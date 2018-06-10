@@ -335,7 +335,7 @@ static void PrintWinStreak(const u8 *str, u16 streak, u8 left, u8 top)
     Menu_PrintText(str, left, top);
     if (streak > 9999)
         streak = 9999;
-    sub_8072C14(gStringVar1, streak, 24, 1);
+    AlignInt1InMenuWindow(gStringVar1, streak, 24, 1);
     Menu_PrintText(gOtherText_WinStreak, left + 7, top);
 }
 

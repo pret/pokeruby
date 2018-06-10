@@ -295,7 +295,7 @@ void CB2_ChooseStarter(void)
     LoadCompressedObjectPic(&gUnknown_083F77A4[0]);
     LoadSpritePalettes(gUnknown_083F77B4);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
     savedIme = REG_IME;
@@ -534,7 +534,7 @@ static void CreateStarterPokemonLabel(u8 prevSelection, u8 selection)
     AddTextColorCtrlCode(labelText, 0, 15, 8);
 
     //Copy Pokemon name to label
-    sub_8072C74(labelText + 5, gSpeciesNames[species], 0x6B, 1);
+    AlignStringInMenuWindow(labelText + 5, gSpeciesNames[species], 0x6B, 1);
     Menu_PrintText(
       labelText,
       gStarterChoose_LabelCoords[selection][0],
@@ -663,7 +663,7 @@ _0810A8CA:\n\
     adds r0, r7, 0\n\
     movs r2, 0x70\n\
     movs r3, 0x2\n\
-    bl sub_8072C74\n\
+    bl AlignStringInMenuWindow\n\
     adds r2, r5, 0x2\n\
     lsls r2, 24\n\
     lsrs r2, 24\n\

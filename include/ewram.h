@@ -191,7 +191,7 @@ extern u8 gSharedMem[];
 #define AI_ARRAY_160CC(i)               (gSharedMem[0x160CC + i * 2])
 #define ewram16800                      (&gSharedMem[0x16800])
 #define ewram17000                      (&gSharedMem[0x17000])
-#define eLearnMoveStruct                (struct LearnMoveStruct *)(gSharedMem + 0x17000)
+#define eMoveTutorMenu                  (struct MoveTutorMenu *)(gSharedMem + 0x17000)
 #define eSecretBaseRecord               ((struct SecretBaseRecord *)(gSharedMem + 0x17000))
 #define eCableCar1                      ((struct CableCarEwramStruct1 *)(gSharedMem + 0x17000))
 #define ewram17002                      (&gSharedMem[0x17002])

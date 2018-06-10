@@ -210,7 +210,7 @@ void debug_80C35DC(void)
     LoadSpriteSheet(stru_83F8828);
     LoadSpritePalette(stru_83F8838);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
 }
 
 void debug_80C36F4(void)

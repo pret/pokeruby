@@ -3014,24 +3014,24 @@ bool8 Blender_PrintBlendingResults(void)
                 textPtr[1] = CHAR_PERIOD;
                 textPtr[2] = CHAR_SPACE;
                 textPtr += 3;
-                textPtr = sub_8072C74(textPtr, gLinkPlayers[place].name, 88, 0);
-                sub_8072C74(textPtr, text[0], 157, 0);
+                textPtr = AlignStringInMenuWindow(textPtr, gLinkPlayers[place].name, 88, 0);
+                AlignStringInMenuWindow(textPtr, text[0], 157, 0);
                 Menu_PrintText(gBerryBlenderData->stringVar, 5, gUnknown_082165E9[gBerryBlenderData->playersNo] + (i * gUnknown_082165EE[gBerryBlenderData->playersNo]));
             }
             ConvertIntToDecimalStringN(text[0], gBerryBlenderData->max_RPM % 100, 2, 2);
             textPtr = gBerryBlenderData->stringVar;
             textPtr = StringCopy(textPtr, gOtherText_MaxSpeed);
-            textPtr = sub_8072C14(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
+            textPtr = AlignInt1InMenuWindow(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
 
 #ifdef ENGLISH
             textPtr[0] = CHAR_SPACE;
             textPtr[1] = CHAR_PERIOD;
             textPtr[2] = CHAR_SPACE;
             textPtr += 3;
-            textPtr = sub_8072C74(textPtr, text[0], 142, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 142, 1);
 #else
             *textPtr++ = CHAR_COMMA;
-            textPtr = sub_8072C74(textPtr, text[0], 136, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 136, 1);
 #endif
             StringCopy(textPtr, gOtherText_RPM);
             Menu_PrintText(gBerryBlenderData->stringVar, 5, 13);
@@ -3045,13 +3045,13 @@ bool8 Blender_PrintBlendingResults(void)
             textPtr = StringCopy(textPtr, gOtherText_RequiredTime);
 
 #ifdef ENGLISH
-            textPtr = sub_8072C74(textPtr, text[0], 102, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 102, 1);
 #else
-            textPtr = sub_8072C74(textPtr, text[0], 99, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 99, 1);
 #endif
             textPtr = StringAppend(textPtr, gOtherText_Min);
 
-            textPtr = sub_8072C74(textPtr, text[1], 136, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[1], 136, 1);
             StringCopy(textPtr, gOtherText_Sec);
 
             Menu_PrintText(gBerryBlenderData->stringVar, 5, 15);
@@ -3222,9 +3222,9 @@ static bool8 Blender_PrintBlendingRanking(void)
 
             txtPtr = StringCopy(txtPtr, gLinkPlayers[place].name);
 
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
 
             Menu_PrintText(gBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[gBerryBlenderData->playersNo] + 8);
         }
@@ -3257,8 +3257,8 @@ void debug_sub_80524BC(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB1_BerryBlender);
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     SeedRng(gMain.vblankCounter1);
     REG_DISPCNT = 0x1540;
     RunTasks();
@@ -3503,7 +3503,7 @@ void ShowBerryBlenderRecordWindow(void)
     for (i = 0; i < 3; i++)
     {
         u32 record = gSaveBlock1.berryBlenderRecords[i];
-        u8* txtPtr = sub_8072C14(text, record / 100, 18, 1);
+        u8* txtPtr = AlignInt1InMenuWindow(text, record / 100, 18, 1);
 
 #ifdef ENGLISH
         txtPtr[0] = CHAR_SPACE;

@@ -241,8 +241,8 @@ void LinkTestScreen(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();

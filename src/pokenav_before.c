@@ -3851,7 +3851,7 @@ void sub_80EF428(u8 a, u8 b)
     }
 
     tileBuffer = gUnknown_083DFEC8;
-    sub_8072C74(&tileBuffer[0x800], pcText, 0xC0, 2);
+    AlignStringInMenuWindow(&tileBuffer[0x800], pcText, 0xC0, 2);
     Menu_PrintText(&tileBuffer[0x800], 3, 17);
 }
 

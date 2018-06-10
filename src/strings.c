@@ -159,7 +159,7 @@ const u8 OtherText_CheckTag[] = _("CHECK TAG");
 const u8 OtherText_Confirm[] = _("CONFIRM");
 const u8 gOtherText_Walk[] = _("WALK");
 
-const u8 gUnknownText_Exit[] = _("EXIT");
+const u8 gOtherText_Exit[] = _("EXIT");
 const u8 gOtherText_CancelNoTerminator[] = _("CANCEL");
 const u8 gOtherText_CancelWithTerminator[] = _("$CANCEL"); // with terminator at beginning?
 
@@ -1085,7 +1085,7 @@ const u8 OtherText_CheckTag[] = _("PRÜFEN");
 const u8 OtherText_Confirm[] = _("O.K.");
 const u8 gOtherText_Walk[] = _("LAUFEN");
 
-const u8 gUnknownText_Exit[] = _("BEENDEN");
+const u8 gOtherText_Exit[] = _("BEENDEN");
 const u8 gOtherText_CancelNoTerminator[] = _("ZURÜCK");
 const u8 gOtherText_CancelWithTerminator[] = _("$ZURÜCK");
 

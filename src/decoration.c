@@ -1411,7 +1411,7 @@ const struct MenuAction2 gUnknown_083EC604[] = {
     {SecretBaseText_Decorate, sub_80FF160},
     {SecretBaseText_PutAway, sub_8100A0C},
     {SecretBaseText_Toss, sub_8101700},
-    {gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload}
+    {gOtherText_Exit, gpu_pal_decompress_alloc_tag_and_upload}
 };
 
 const u8 *const gUnknown_083EC624[] = {
@@ -1556,9 +1556,9 @@ void sub_80FE470(u8 decoCat, u8 left, u8 top, u8 palIdx) // PrintDecorationCateg
     strptr[2] = palIdx;
     strptr += 3;
     strptr = StringCopy(strptr, gUnknown_083EC5E4[decoCat]);
-    strptr = sub_8072C14(strptr, GetNumDecorationsInInventoryCategory(decoCat), 0x56, 1);
+    strptr = AlignInt1InMenuWindow(strptr, GetNumDecorationsInInventoryCategory(decoCat), 0x56, 1);
     *strptr++ = 0xba;
-    strptr = sub_8072C14(strptr, gDecorationInventories[decoCat].size, 0x68, 1);
+    strptr = AlignInt1InMenuWindow(strptr, gDecorationInventories[decoCat].size, 0x68, 1);
     strptr[0] = EXT_CTRL_CODE_BEGIN;
     strptr[1] = 5;
     strptr[2] = v0;
@@ -1580,7 +1580,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
             sub_80FE470(decoCat, 1, 2 * decoCat + 1, 255); // Unselectable
         }
     }
-    Menu_PrintText(gUnknownText_Exit, 1, 17);
+    Menu_PrintText(gOtherText_Exit, 1, 17);
 }
 
 void sub_80FE5AC(u8 taskId)
@@ -1806,7 +1806,7 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
         }
         if (i == gUnknown_020388D5)
         {
-            sub_8072A18(gUnknownText_Exit, 0x08, 8 * ni, 0x68, 1);
+            sub_8072A18(gOtherText_Exit, 0x08, 8 * ni, 0x68, 1);
             break;
         }
         if (gUnknown_020388D0[i])

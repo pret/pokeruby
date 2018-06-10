@@ -135,7 +135,7 @@ static const struct MenuAction2 gPCText_ItemPCOptionsText[] =
     { PCText_WithdrawItem, ItemStorage_Withdraw },
     { PCText_DepositItem, ItemStorage_Deposit },
     { PCText_TossItem, ItemStorage_Toss },
-    { gUnknownText_Exit, ItemStorage_Exit }
+    { gOtherText_Exit, ItemStorage_Exit }
 };
 
 static const struct YesNoFuncTable ResumeFromTossYesNoFuncList[] = // ResumeFromTossYesNoFuncList

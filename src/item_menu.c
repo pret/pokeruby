@@ -1115,9 +1115,9 @@ static void sub_80A41E0(u8 *a, u16 b, const u8 *c, u16 d, u8 e)
     a[1] = 0x13;
     a[2] = 0x18;
     a += 3;
-    a = sub_8072C74(a, c, 0x78 - (e + 1) * 6, 0);
+    a = AlignStringInMenuWindow(a, c, 0x78 - (e + 1) * 6, 0);
     *a++ = CHAR_MULT_SIGN;
-    sub_8072C14(a, d, 0x78, 1);
+    AlignInt1InMenuWindow(a, d, 0x78, 1);
 }
 
 static u8 *sub_80A425C(u8 taskId, u8 *text, u8 c)
@@ -1145,7 +1145,7 @@ static bool8 sub_80A42B0(u8 itemPos, int b)
         if (sReturnLocation == RETURN_TO_FIELD_5)
             return TRUE;
         r5 = itemPos * 2 + 2;
-        sub_8072C74(gStringVar1, gOtherText_CloseBag, 0x78, 0);
+        AlignStringInMenuWindow(gStringVar1, gOtherText_CloseBag, 0x78, 0);
         Menu_PrintText(gStringVar1, 14, r5);
         ptr = gBGTilemapBuffers[2] + 14 + r5 * 32;
         ptr[0] = 0x4F;
@@ -1179,9 +1179,9 @@ static void sub_80A4380(u16 a, int b, int c, int d)
         r5 = i * 2 + 2;
         text = gStringVar1;
         text = sub_80A425C(a, text, i);
-        text = sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x66, 0);
+        text = AlignStringInMenuWindow(text, ItemId_GetName(gCurrentBagPocketItemSlots[r4].itemId), 0x66, 0);
         *text++ = CHAR_MULT_SIGN;
-        sub_8072C14(text, gCurrentBagPocketItemSlots[r4].quantity, 0x78, 1);
+        AlignInt1InMenuWindow(text, gCurrentBagPocketItemSlots[r4].quantity, 0x78, 1);
         Menu_PrintText(gStringVar1, 14, r5);
     }
 }
@@ -1203,9 +1203,9 @@ static void sub_80A444C(u16 a, int b, int c, int d)
         text = gStringVar1;
         text = sub_80A425C(a, text, i);
 #if ENGLISH
-        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x60, 0);
+        AlignStringInMenuWindow(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x60, 0);
 #else
-        sub_8072C74(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x63, 0);
+        AlignStringInMenuWindow(text, ItemId_GetName(gCurrentBagPocketItemSlots[slot].itemId), 0x63, 0);
 #endif
         Menu_PrintText(gStringVar1, 14, r5);
         if (gUnknown_02038558)
@@ -1272,7 +1272,7 @@ static void sub_80A4548(u16 a, int b, int c, int d)
             text[2] = 0x18;
             text += 3;
             moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[r4].itemId)];
-            sub_8072C74(text, moveName, 0x78, 0);
+            AlignStringInMenuWindow(text, moveName, 0x78, 0);
         }
         Menu_PrintText(gStringVar1, 14, sp10);
     }
@@ -1450,7 +1450,7 @@ _080A4634:\n\
     adds r0, r6, 0\n\
     movs r2, 0x78\n\
     movs r3, 0\n\
-    bl sub_8072C74\n\
+    bl AlignStringInMenuWindow\n\
 _080A46AE:\n\
     ldr r0, _080A46F8 @ =gStringVar1\n\
     movs r1, 0xE\n\

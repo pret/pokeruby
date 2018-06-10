@@ -300,7 +300,7 @@ static void BuildStartMenuActions_Link(void)
 //Show number of safari balls left
 static void DisplaySafariBallsWindow(void)
 {
-    sub_8072C44(gStringVar1, gNumSafariBalls, 12, 1);
+    AlignInt2InMenuWindow(gStringVar1, gNumSafariBalls, 12, 1);
     Menu_DrawStdWindowFrame(0, 0, 10, 5);
     Menu_PrintText(gOtherText_SafariStock, 1, 1);
 }
@@ -379,7 +379,7 @@ void CreateStartMenuTask(void (*func)(u8))
 {
     u8 taskId;
 
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     taskId = CreateTask(Task_StartMenu, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
 }
@@ -865,8 +865,8 @@ static bool32 sub_80719FC(u8 *step)
         ScanlineEffect_Clear();
         break;
     case 2:
-        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
         break;
     case 3:

@@ -1026,7 +1026,7 @@ _080F0E42:
 	adds r0, r4, 0
 	movs r2, 0x88
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	lsls r2, r5, 3
 	adds r0, r4, 0
 _080F0E54:
@@ -1049,7 +1049,7 @@ _080F0E6C:
 	adds r0, r4, 0
 	movs r2, 0x88
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	lsls r2, r5, 3
 	adds r0, r4, 0
 	movs r1, 0x61
@@ -1270,7 +1270,7 @@ sub_80F0FFC: @ 80F0FFC
 	adds r1, r5, 0
 	movs r2, 0x58
 	movs r3, 0x2
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x5
@@ -1880,7 +1880,7 @@ _080F152E:
 	adds r0, r6, 0
 	movs r2, 0x80
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	ldrh r0, [r5]
 	lsls r0, 3
 	adds r4, 0x4
@@ -1889,7 +1889,7 @@ _080F152E:
 	adds r0, r7, 0
 	movs r2, 0x80
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	b _080F158A
 	.align 2, 0
 _080F1558: .4byte gUnknown_020388B4
@@ -1904,12 +1904,12 @@ _080F1570:
 	adds r1, r4, 0
 	movs r2, 0x80
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0x80
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 _080F158A:
 	adds r0, r6, 0
 	movs r1, 0xC
@@ -2398,7 +2398,7 @@ sub_80F1934: @ 80F1934
 	adds r0, r5, 0
 	movs r2, 0x57
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	b _080F19B8
 	.align 2, 0
 _080F1990: .4byte gUnknown_083DFEC4
@@ -2413,7 +2413,7 @@ _080F19AC:
 	adds r0, r5, 0
 	movs r2, 0x57
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 _080F19B8:
 	ldr r0, _080F19D4 @ =gUnknown_083DFEC4
 	ldr r0, [r0]
@@ -7975,7 +7975,7 @@ sub_80F443C: @ 80F443C
 	adds r1, r4, 0
 	movs r2, 0x38
 	movs r3, 0x1
-	bl sub_8072C14
+	bl AlignInt1InMenuWindow
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -7990,7 +7990,7 @@ sub_80F445C: @ 80F445C
 	lsrs r1, 16
 	movs r2, 0x17
 	movs r3, 0x1
-	bl sub_8072C14
+	bl AlignInt1InMenuWindow
 	adds r4, r0, 0
 	movs r3, 0xFC
 	strb r3, [r4]
@@ -8016,7 +8016,7 @@ sub_80F445C: @ 80F445C
 	adds r0, r4, 0
 	movs r2, 0x32
 	movs r3, 0x1
-	bl sub_8072C14
+	bl AlignInt1InMenuWindow
 	adds r4, r0, 0
 	pop {r4}
 	pop {r1}
@@ -8190,7 +8190,7 @@ sub_80F45A0: @ 80F45A0
 	ldr r1, _080F4604 @ =gOtherText_InParty
 	movs r2, 0x40
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	b _080F4624
 	.align 2, 0
 _080F45F0: .4byte gUnknown_083DFEC4
@@ -8212,7 +8212,7 @@ _080F4608:
 	adds r1, r2
 	movs r2, 0x40
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 _080F4624:
 	ldr r0, _080F463C @ =gUnknown_083DFEC4
 	ldr r0, [r0]
@@ -8236,7 +8236,7 @@ _080F4644:
 	adds r1, r4, 0
 	movs r2, 0x68
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 3
@@ -8246,7 +8246,7 @@ _080F4644:
 	adds r1, r4, 0
 	movs r2, 0x40
 	movs r3, 0
-	bl sub_8072C74
+	bl AlignStringInMenuWindow
 	ldr r1, _080F4688 @ =0x00008937
 	adds r0, r5, r1
 	adds r0, r6
@@ -12397,7 +12397,7 @@ _080F6656:
 	adds r0, r5, 0
 	movs r2, 0x80
 	movs r3, 0x1
-	bl sub_8072C14
+	bl AlignInt1InMenuWindow
 	adds r5, r0, 0
 	b _080F66CE
 	.align 2, 0

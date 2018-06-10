@@ -233,7 +233,7 @@ u32 InitMainMenu(u8 a1)
     ResetSpriteData();
     FreeAllSpritePalettes();
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
 
     if (a1)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
@@ -704,12 +704,12 @@ void PrintPlayTime(void)
 #if defined(ENGLISH)
     Menu_PrintText(gMainMenuString_Time, 16, 3);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-    sub_8072C74(alignedPlayTime, playTime, 48, 1);
+    AlignStringInMenuWindow(alignedPlayTime, playTime, 48, 1);
     Menu_PrintText(alignedPlayTime, 22, 3);
 #elif defined(GERMAN)
     Menu_PrintTextPixelCoords(gMainMenuString_Time, 124, 24, TRUE);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-    sub_8072C74(alignedPlayTime, playTime, 40, 1);
+    AlignStringInMenuWindow(alignedPlayTime, playTime, 40, 1);
     Menu_PrintText(alignedPlayTime, 23, 3);
 #endif
 }
@@ -719,7 +719,7 @@ void PrintPokedexCount(void)
     u8 buffer[16];
 
     Menu_PrintText(gMainMenuString_Pokedex, 2, 5);
-    sub_8072C14(buffer, GetPokedexSeenCount(), 18, 0);
+    AlignInt1InMenuWindow(buffer, GetPokedexSeenCount(), 18, 0);
     Menu_PrintText(buffer, 9, 5);
 }
 
@@ -749,7 +749,7 @@ void PrintBadgeCount(void)
 static void Task_NewGameSpeech1(u8 taskId)
 {
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -1372,7 +1372,7 @@ void CB_ContinueNewGameSpeechPart2()
     AddBirchSpeechObjects(taskId);
 
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
 
     if (gSaveBlock2.playerGender != MALE)
     {

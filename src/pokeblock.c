@@ -486,7 +486,7 @@ static void sub_810BB88(u8 a0)
         y = (i - a0) << 1;
         if (i == gUnknown_02039248.unk2)
         {
-            buf = sub_8072C74(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
+            buf = AlignStringInMenuWindow(gStringVar1, gContestStatsText_StowCase, 0x78, 0);
             Menu_PrintText(gStringVar1, 15, y + 1);
             if (i != a0 + 8)
             {
@@ -494,7 +494,7 @@ static void sub_810BB88(u8 a0)
             }
             break;
         }
-        buf = sub_8072C74(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[i].color], 0x5e, 0);
+        buf = AlignStringInMenuWindow(gStringVar1, gPokeblockNames[gSaveBlock1.pokeblocks[i].color], 0x5e, 0);
         buf[0] = EXT_CTRL_CODE_BEGIN;
         buf[1] = 0x14;
         buf[2] = 0x06;
@@ -615,7 +615,7 @@ static void sub_810BDAC(bool8 flag)
     BasicInitMenuWindow(&gWindowTemplate_81E6E34);
     if (gUnknown_02039248.unk0 + gUnknown_02039248.unk1 != gUnknown_02039248.unk2)
     {
-        sub_8072C14(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
+        AlignInt1InMenuWindow(gStringVar1, sub_810C9E8(&gSaveBlock1.pokeblocks[gUnknown_02039248.unk0 + gUnknown_02039248.unk1]), 16, 1);
         Menu_PrintText(gStringVar1, 11, 17);
     }
     else
