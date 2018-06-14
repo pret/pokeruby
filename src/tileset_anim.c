@@ -196,7 +196,7 @@ static const u8 *const gTilesetAnims_Pacifidlog1[] =
     gTilesetAnims_Pacifidlog1_Frame4,
     gTilesetAnims_Pacifidlog1_Frame5,
     gTilesetAnims_Pacifidlog1_Frame6,
-    gTilesetAnims_Pacifidlog1_Frame7,
+    gTilesetAnims_Pacifidlog1_Frame7
 };
 
 static const u8 gTilesetAnims_Mauville0a_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/0.4bpp");
