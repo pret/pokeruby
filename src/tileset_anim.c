@@ -99,7 +99,7 @@ static const u8 gTilesetAnims_General2_Frame1[] = INCBIN_U8("data/tilesets/prima
 static const u8 gTilesetAnims_General2_Frame2[] = INCBIN_U8("data/tilesets/primary/general/anim/2/2.4bpp");
 static const u8 gTilesetAnims_General2_Frame3[] = INCBIN_U8("data/tilesets/primary/general/anim/2/3.4bpp");
 static const u8 gTilesetAnims_General2_Frame4[] = INCBIN_U8("data/tilesets/primary/general/anim/2/4.4bpp");
-static const u8 TilesetAnimTiles_General_2_5[] = INCBIN_U8("data/tilesets/primary/general/anim/2/5.4bpp");
+static const u8 gTilesetAnims_General2_Frame5[] = INCBIN_U8("data/tilesets/primary/general/anim/2/5.4bpp");
 static const u8 gTilesetAnims_General2_Frame6[] = INCBIN_U8("data/tilesets/primary/general/anim/2/6.4bpp");
 
 static const u8 *const gTilesetAnims_General2[] =
@@ -109,7 +109,7 @@ static const u8 *const gTilesetAnims_General2[] =
     gTilesetAnims_General2_Frame2,
     gTilesetAnims_General2_Frame3,
     gTilesetAnims_General2_Frame4,
-    TilesetAnimTiles_General_2_5, 
+    gTilesetAnims_General2_Frame5, 
     gTilesetAnims_General2_Frame6,
     gTilesetAnims_General2_Frame0,
 };
@@ -178,23 +178,17 @@ static const u8 *const gTilesetAnims_Underwater0[] =
     gTilesetAnims_Underwater0_Frame3
 };
 
-const u16 gTilesetAnims_Pacifidlog1_Frame0[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame0[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/0.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame1[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame2[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame3[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame4[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame5[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame6[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
+static const u8 gTilesetAnims_Pacifidlog1_Frame7[] = INCBIN_U8("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
 
-const u16 gTilesetAnims_Pacifidlog1_Frame1[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/1.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame2[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/2.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame3[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/3.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame4[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/4.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame5[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/5.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame6[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/6.4bpp");
-
-const u16 gTilesetAnims_Pacifidlog1_Frame7[] = INCBIN_U16("data/tilesets/secondary/pacifidlog/anim/1/7.4bpp");
-
-const u16 *const gTilesetAnims_Pacifidlog1[] = {
+static const u8 *const gTilesetAnims_Pacifidlog1[] =
+{
     gTilesetAnims_Pacifidlog1_Frame0,
     gTilesetAnims_Pacifidlog1_Frame1,
     gTilesetAnims_Pacifidlog1_Frame2,
@@ -202,7 +196,7 @@ const u16 *const gTilesetAnims_Pacifidlog1[] = {
     gTilesetAnims_Pacifidlog1_Frame4,
     gTilesetAnims_Pacifidlog1_Frame5,
     gTilesetAnims_Pacifidlog1_Frame6,
-    gTilesetAnims_Pacifidlog1_Frame7
+    gTilesetAnims_Pacifidlog1_Frame7,
 };
 
 static const u8 gTilesetAnims_Mauville0a_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/0.4bpp");
@@ -851,7 +845,7 @@ static void sub_80736DC(u8 a1)
 {
     int v1;
     v1 = a1 % 8;
-    QueueTilesetAnimDma(gTilesetAnimTable_Pacifidlog_1[v1], BG_TILE_ADDR(252), 0x100);
+    QueueTilesetAnimDma(gTilesetAnims_Pacifidlog1[v1], BG_TILE_ADDR(252), 0x100);
 }
 
 static void sub_8073704(u16 a1, u8 a2)
