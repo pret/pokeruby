@@ -40,3 +40,5 @@ matrix:
         - make -j2 ruby_de
         - make -j2 sapphire_de
         - make -j2 ruby_de_debug
+after_success:
+  - .travis/calcrom/webhook.sh pokeruby
