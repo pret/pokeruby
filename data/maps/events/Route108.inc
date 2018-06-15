@@ -1,8 +1,8 @@
 Route108_EventObjects:: @ 8381A74
-	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 17, 13, 1, 45, 51, 1, 3, Route108_EventScript_14F476, 0
-	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 8, 6, 1, 13, 17, 1, 3, Route108_EventScript_14F4A4, 0
-	object_event 3, EVENT_OBJ_GFX_SWIMMER_M, 0, 50, 10, 1, 24, 0, 1, 3, Route108_EventScript_14F48D, 0
-	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 36, 12, 1, 51, 54, 1, 3, Route108_EventScript_14F4BB, 0
+	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 17, 13, 1, 45, 3, 3, 1, 3, Route108_EventScript_14F476, 0
+	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 8, 6, 1, 13, 1, 1, 1, 3, Route108_EventScript_14F4A4, 0
+	object_event 3, EVENT_OBJ_GFX_SWIMMER_M, 0, 50, 10, 1, 24, 0, 0, 1, 3, Route108_EventScript_14F48D, 0
+	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 36, 12, 1, 51, 6, 3, 1, 3, Route108_EventScript_14F4BB, 0
 
 Route108_MapWarps:: @ 8381AD4
 	warp_def 29, 6, 3, 0, MAP_ABANDONED_SHIP_DECK

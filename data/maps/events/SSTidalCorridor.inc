@@ -1,8 +1,8 @@
 SSTidalCorridor_EventObjects:: @ 83916F8
-	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 1, 11, 3, 7, 0, 0, 0, SSTidalCorridor_EventScript_15FDD6, 0
-	object_event 2, EVENT_OBJ_GFX_SAILOR, 0, 16, 7, 3, 3, 32, 0, 0, SSTidalCorridor_EventScript_15FE60, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 9, 2, 3, 8, 17, 0, 0, SSTidalCorridor_EventScript_15FD96, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
-	object_event 4, EVENT_OBJ_GFX_WINGULL, 0, 7, 2, 3, 1, 17, 0, 0, SSTidalCorridor_EventScript_15FD9F, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
+	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 1, 11, 3, 7, 0, 0, 0, 0, SSTidalCorridor_EventScript_15FDD6, 0
+	object_event 2, EVENT_OBJ_GFX_SAILOR, 0, 16, 7, 3, 3, 0, 2, 0, 0, SSTidalCorridor_EventScript_15FE60, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 9, 2, 3, 8, 1, 1, 0, 0, SSTidalCorridor_EventScript_15FD96, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
+	object_event 4, EVENT_OBJ_GFX_WINGULL, 0, 7, 2, 3, 1, 1, 1, 0, 0, SSTidalCorridor_EventScript_15FD9F, FLAG_HIDE_BRINEY_AND_PEEKO_SS_TIDAL
 
 SSTidalCorridor_MapWarps:: @ 8391758
 	warp_def 4, 9, 3, 0, MAP_SS_TIDAL_ROOMS

@@ -1,12 +1,12 @@
 SSTidalRooms_EventObjects:: @ 839189C
-	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 4, 7, 3, 10, 0, 1, 0, SSTidalRooms_EventScript_15FF5D, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 34, 11, 3, 9, 0, 1, 3, SSTidalRooms_EventScript_15FF74, 0
-	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 21, 5, 3, 10, 0, 1, 0, SSTidalRooms_EventScript_15FF8B, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_5, 0, 7, 13, 3, 8, 0, 1, 0, SSTidalRooms_EventScript_15FFA2, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 13, 3, 8, 0, 1, 0, SSTidalRooms_EventScript_15FFBD, 0
-	object_event 6, EVENT_OBJ_GFX_BOY_4, 0, 22, 11, 3, 8, 17, 1, 3, SSTidalRooms_EventScript_15FFD8, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 15, 6, 3, 9, 0, 1, 0, SSTidalRooms_EventScript_15FFEF, 0
-	object_event 8, EVENT_OBJ_GFX_MANIAC, 0, 28, 5, 3, 7, 17, 0, 0, SSTidalRooms_EventScript_15FF06, FLAG_HIDE_TM_49_GIVER_SS_TIDAL
+	object_event 1, EVENT_OBJ_GFX_MAN_3, 0, 4, 7, 3, 10, 0, 0, 1, 0, SSTidalRooms_EventScript_15FF5D, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 34, 11, 3, 9, 0, 0, 1, 3, SSTidalRooms_EventScript_15FF74, 0
+	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 21, 5, 3, 10, 0, 0, 1, 0, SSTidalRooms_EventScript_15FF8B, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_5, 0, 7, 13, 3, 8, 0, 0, 1, 0, SSTidalRooms_EventScript_15FFA2, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 13, 3, 8, 0, 0, 1, 0, SSTidalRooms_EventScript_15FFBD, 0
+	object_event 6, EVENT_OBJ_GFX_BOY_4, 0, 22, 11, 3, 8, 1, 1, 1, 3, SSTidalRooms_EventScript_15FFD8, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_3, 0, 15, 6, 3, 9, 0, 0, 1, 0, SSTidalRooms_EventScript_15FFEF, 0
+	object_event 8, EVENT_OBJ_GFX_MANIAC, 0, 28, 5, 3, 7, 1, 1, 0, 0, SSTidalRooms_EventScript_15FF06, FLAG_HIDE_TM_49_GIVER_SS_TIDAL
 
 SSTidalRooms_MapWarps:: @ 839195C
 	warp_def 4, 16, 0, 0, MAP_SS_TIDAL_CORRIDOR

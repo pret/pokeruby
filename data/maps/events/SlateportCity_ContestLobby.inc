@@ -1,12 +1,12 @@
 SlateportCity_ContestLobby_EventObjects:: @ 8387788
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 2, 3, 8, 48, 0, 0, SlateportCity_ContestLobby_EventScript_15541D, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 5, 3, 10, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1B7795, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 0, 3, 3, 3, 16, 0, 0, SlateportCity_ContestLobby_EventScript_1554DE, 0
-	object_event 4, EVENT_OBJ_GFX_GIRL_1, 0, 9, 6, 3, 2, 17, 0, 0, SlateportCity_ContestLobby_EventScript_1554E7, 0
-	object_event 5, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 5, 3, 9, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1AE0B6, FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
-	object_event 6, EVENT_OBJ_GFX_BOY_1, 0, 13, 5, 3, 9, 0, 0, 0, SlateportCity_ContestLobby_EventScript_155536, 0
-	object_event 7, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 1, 5, 3, 8, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1554F9, 0
-	object_event 8, EVENT_OBJ_GFX_WOMAN_3, 0, 12, 2, 3, 8, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1554F0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 2, 3, 8, 0, 3, 0, 0, SlateportCity_ContestLobby_EventScript_15541D, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 5, 3, 10, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1B7795, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 0, 3, 3, 3, 0, 1, 0, 0, SlateportCity_ContestLobby_EventScript_1554DE, 0
+	object_event 4, EVENT_OBJ_GFX_GIRL_1, 0, 9, 6, 3, 2, 1, 1, 0, 0, SlateportCity_ContestLobby_EventScript_1554E7, 0
+	object_event 5, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 5, 3, 9, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1AE0B6, FLAG_HIDE_CONTEST_REPORTER_SLATEPORT
+	object_event 6, EVENT_OBJ_GFX_BOY_1, 0, 13, 5, 3, 9, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_155536, 0
+	object_event 7, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 1, 5, 3, 8, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1554F9, 0
+	object_event 8, EVENT_OBJ_GFX_WOMAN_3, 0, 12, 2, 3, 8, 0, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1554F0, 0
 
 SlateportCity_ContestLobby_MapWarps:: @ 8387848
 	warp_def 5, 6, 0, 3, MAP_SLATEPORT_CITY

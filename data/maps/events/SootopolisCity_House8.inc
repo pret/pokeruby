@@ -1,6 +1,6 @@
 SootopolisCity_House8_EventObjects:: @ 838B1D8
-	object_event 1, EVENT_OBJ_GFX_FISHERMAN, 0, 2, 4, 3, 10, 0, 0, 0, SootopolisCity_House8_EventScript_15B492, 0
-	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 5, 4, 3, 9, 0, 0, 0, SootopolisCity_House8_EventScript_15B401, 0
+	object_event 1, EVENT_OBJ_GFX_FISHERMAN, 0, 2, 4, 3, 10, 0, 0, 0, 0, SootopolisCity_House8_EventScript_15B492, 0
+	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 5, 4, 3, 9, 0, 0, 0, 0, SootopolisCity_House8_EventScript_15B401, 0
 
 SootopolisCity_House8_MapWarps:: @ 838B208
 	warp_def 3, 6, 0, 11, MAP_SOOTOPOLIS_CITY

@@ -1,5 +1,5 @@
 EverGrandeCity_SidneysRoom_EventObjects:: @ 838B244
-	object_event 1, EVENT_OBJ_GFX_SIDNEY, 0, 6, 5, 3, 8, 0, 0, 0, EverGrandeCity_SidneysRoom_EventScript_15B596, 0
+	object_event 1, EVENT_OBJ_GFX_SIDNEY, 0, 6, 5, 3, 8, 0, 0, 0, 0, EverGrandeCity_SidneysRoom_EventScript_15B596, 0
 
 EverGrandeCity_SidneysRoom_MapWarps:: @ 838B25C
 	warp_def 6, 13, 3, 1, MAP_EVER_GRANDE_CITY_CORRIDOR5

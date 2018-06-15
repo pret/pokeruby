@@ -1,8 +1,8 @@
 RustboroCity_Mart_EventObjects:: @ 8388C34
-	object_event 1, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 1, 3, 3, 10, 0, 0, 0, RustboroCity_Mart_EventScript_157BD4, 0
-	object_event 2, EVENT_OBJ_GFX_BOY_1, 0, 2, 5, 3, 7, 0, 0, 0, RustboroCity_Mart_EventScript_157C4D, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 8, 4, 3, 3, 16, 0, 0, RustboroCity_Mart_EventScript_157C44, 0
-	object_event 4, EVENT_OBJ_GFX_BUG_CATCHER, 0, 8, 2, 3, 7, 17, 0, 0, RustboroCity_Mart_EventScript_157C56, 0
+	object_event 1, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 1, 3, 3, 10, 0, 0, 0, 0, RustboroCity_Mart_EventScript_157BD4, 0
+	object_event 2, EVENT_OBJ_GFX_BOY_1, 0, 2, 5, 3, 7, 0, 0, 0, 0, RustboroCity_Mart_EventScript_157C4D, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 8, 4, 3, 3, 0, 1, 0, 0, RustboroCity_Mart_EventScript_157C44, 0
+	object_event 4, EVENT_OBJ_GFX_BUG_CATCHER, 0, 8, 2, 3, 7, 1, 1, 0, 0, RustboroCity_Mart_EventScript_157C56, 0
 
 RustboroCity_Mart_MapWarps:: @ 8388C94
 	warp_def 3, 7, 0, 2, MAP_RUSTBORO_CITY

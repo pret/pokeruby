@@ -1,8 +1,8 @@
 MossdeepCity_StevensHouse_EventObjects:: @ 838AA44
-	object_event 1, EVENT_OBJ_GFX_STEVEN, 0, 9, 6, 3, 10, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_15AAF9, FLAG_HIDE_STEVEN_STEVENS_HOUSE
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 3, 3, 1, 17, 0, 0, MossdeepCity_StevensHouse_EventScript_15AA7C, FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 5, 3, 3, 1, 17, 0, 0, MossdeepCity_StevensHouse_EventScript_15AB20, FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1
-	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 6, 4, 3, 76, 17, 0, 0, MossdeepCity_StevensHouse_EventScript_15AB02, FLAG_HIDE_STEVENS_LETTER
+	object_event 1, EVENT_OBJ_GFX_STEVEN, 0, 9, 6, 3, 10, 0, 0, 0, 0, MossdeepCity_StevensHouse_EventScript_15AAF9, FLAG_HIDE_STEVEN_STEVENS_HOUSE
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 3, 3, 1, 1, 1, 0, 0, MossdeepCity_StevensHouse_EventScript_15AA7C, FLAG_HIDE_BELDUM_BALL_STEVENS_HOUSE
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 5, 3, 3, 1, 1, 1, 0, 0, MossdeepCity_StevensHouse_EventScript_15AB20, FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_1
+	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 6, 4, 3, 76, 1, 1, 0, 0, MossdeepCity_StevensHouse_EventScript_15AB02, FLAG_HIDE_STEVENS_LETTER
 
 MossdeepCity_StevensHouse_MapWarps:: @ 838AAA4
 	warp_def 3, 7, 0, 6, MAP_MOSSDEEP_CITY

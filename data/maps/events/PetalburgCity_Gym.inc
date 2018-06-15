@@ -1,14 +1,14 @@
 PetalburgCity_Gym_EventObjects:: @ 8387168
-	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 3, 3, 8, 0, 0, 0, PetalburgCity_Gym_EventScript_1545B9, FLAG_HIDE_NORMAN_PETALBURG_GYM
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154EE6, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154DF6, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 4, 42, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154E32, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 55, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154F22, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 4, 68, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154E6E, 0
-	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154F5E, 0
-	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, 8, 0, 1, 0, PetalburgCity_Gym_EventScript_154EAA, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, 8, 0, 0, 0, PetalburgCity_Gym_EventScript_15518B, FLAG_HIDE_PETALBURG_GYM_GUIDE
-	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, 7, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG_GYM
+	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 3, 3, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_1545B9, FLAG_HIDE_NORMAN_PETALBURG_GYM
+	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154EE6, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154DF6, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 4, 42, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154E32, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 55, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154F22, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 4, 68, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154E6E, 0
+	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154F5E, 0
+	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, 8, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154EAA, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, 8, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_15518B, FLAG_HIDE_PETALBURG_GYM_GUIDE
+	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, 7, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG_GYM
 
 PetalburgCity_Gym_MapWarps:: @ 8387258
 	warp_def 4, 111, 3, 2, MAP_PETALBURG_CITY

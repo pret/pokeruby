@@ -1,9 +1,9 @@
 LilycoveCity_DepartmentStore_2F_EventObjects:: @ 838A2E8
-	object_event 1, EVENT_OBJ_GFX_COOK, 0, 8, 2, 3, 8, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F0F, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 0, 5, 3, 2, 17, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F18, 0
-	object_event 3, EVENT_OBJ_GFX_SAILOR, 0, 13, 5, 3, 2, 17, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F21, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_4, 0, 10, 6, 3, 7, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F5E, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_4, 0, 7, 6, 3, 7, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F2A, 0
+	object_event 1, EVENT_OBJ_GFX_COOK, 0, 8, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F0F, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 0, 5, 3, 2, 1, 1, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F18, 0
+	object_event 3, EVENT_OBJ_GFX_SAILOR, 0, 13, 5, 3, 2, 1, 1, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F21, 0
+	object_event 4, EVENT_OBJ_GFX_WOMAN_4, 0, 10, 6, 3, 7, 0, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F5E, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_4, 0, 7, 6, 3, 7, 0, 0, 0, 0, LilycoveCity_DepartmentStore_2F_EventScript_159F2A, 0
 
 LilycoveCity_DepartmentStore_2F_MapWarps:: @ 838A360
 	warp_def 16, 1, 0, 2, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F

@@ -1,7 +1,7 @@
 VerdanturfTown_PokemonCenter_1F_EventObjects:: @ 8386BF4
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F18, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 4, 5, 3, 5, 1, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F26, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 2, 3, 7, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F2F, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F18, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 4, 5, 3, 5, 1, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F26, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 2, 3, 7, 0, 0, 0, 0, VerdanturfTown_PokemonCenter_1F_EventScript_153F2F, 0
 
 VerdanturfTown_PokemonCenter_1F_MapWarps:: @ 8386C3C
 	warp_def 7, 8, 3, 2, MAP_VERDANTURF_TOWN

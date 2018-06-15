@@ -1,6 +1,6 @@
 LilycoveCity_House1_EventObjects:: @ 838A080
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 4, 5, 3, 9, 17, 0, 0, LilycoveCity_House1_EventScript_159B86, 0
-	object_event 2, EVENT_OBJ_GFX_KECLEON_1, 0, 4, 4, 3, 8, 0, 0, 0, LilycoveCity_House1_EventScript_159B8F, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 4, 5, 3, 9, 1, 1, 0, 0, LilycoveCity_House1_EventScript_159B86, 0
+	object_event 2, EVENT_OBJ_GFX_KECLEON_1, 0, 4, 4, 3, 8, 0, 0, 0, 0, LilycoveCity_House1_EventScript_159B8F, 0
 
 LilycoveCity_House1_MapWarps:: @ 838A0B0
 	warp_def 3, 8, 0, 8, MAP_LILYCOVE_CITY

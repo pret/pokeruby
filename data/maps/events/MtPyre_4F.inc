@@ -1,6 +1,6 @@
 MtPyre_4F_EventObjects:: @ 838C9E0
-	object_event 1, EVENT_OBJ_GFX_BLACK_BELT, 0, 11, 7, 3, 24, 17, 1, 2, MtPyre_4F_EventScript_15D418, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 11, 3, 1, 17, 0, 0, MtPyre_4F_EventScript_1B194D, FLAG_ITEM_MT_PYRE_4F_1
+	object_event 1, EVENT_OBJ_GFX_BLACK_BELT, 0, 11, 7, 3, 24, 1, 1, 1, 2, MtPyre_4F_EventScript_15D418, 0
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 11, 3, 1, 1, 1, 0, 0, MtPyre_4F_EventScript_1B194D, FLAG_ITEM_MT_PYRE_4F_1
 
 MtPyre_4F_MapWarps:: @ 838CA10
 	warp_def 10, 1, 3, 1, MAP_MT_PYRE_5F

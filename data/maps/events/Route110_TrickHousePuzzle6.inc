@@ -1,8 +1,8 @@
 Route110_TrickHousePuzzle6_EventObjects:: @ 8392A2C
-	object_event 1, EVENT_OBJ_GFX_PICNICKER, 0, 10, 9, 3, 9, 0, 1, 2, Route110_TrickHousePuzzle6_EventScript_163107, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 14, 12, 3, 9, 0, 1, 2, Route110_TrickHousePuzzle6_EventScript_16311E, 0
-	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 0, 3, 3, 10, 0, 1, 4, Route110_TrickHousePuzzle6_EventScript_163135, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 2, 3, 1, 0, 0, 0, Route110_TrickHousePuzzle6_EventScript_1B1A9F, FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_1
+	object_event 1, EVENT_OBJ_GFX_PICNICKER, 0, 10, 9, 3, 9, 0, 0, 1, 2, Route110_TrickHousePuzzle6_EventScript_163107, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 14, 12, 3, 9, 0, 0, 1, 2, Route110_TrickHousePuzzle6_EventScript_16311E, 0
+	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 0, 3, 3, 10, 0, 0, 1, 4, Route110_TrickHousePuzzle6_EventScript_163135, 0
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 2, 3, 1, 0, 0, 0, 0, Route110_TrickHousePuzzle6_EventScript_1B1A9F, FLAG_ITEM_TRICK_HOUSE_PUZZLE_6_1
 
 Route110_TrickHousePuzzle6_MapWarps:: @ 8392A8C
 	warp_def 0, 21, 3, 2, MAP_ROUTE110_TRICK_HOUSE_ENTRANCE

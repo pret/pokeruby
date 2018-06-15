@@ -1,9 +1,9 @@
 LittlerootTown_MaysHouse_1F_EventObjects:: @ 83858C4
-	object_event 1, EVENT_OBJ_GFX_MOM, 0, 8, 6, 3, 9, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6BE9, FLAG_HIDE_MAY_MOM_DOWNSTAIRS
-	object_event 2, EVENT_OBJ_GFX_MACHOKE_FACING_AWAY, 0, 6, 5, 3, 65, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6CA6, FLAG_HIDE_MACHOKE_MOVER_1
-	object_event 3, EVENT_OBJ_GFX_MACHOKE_CARRYING_BOX, 0, 9, 3, 3, 27, 3, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6CB9, FLAG_HIDE_MACHOKE_MOVER_2
-	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 7, 3, 9, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1529EB, FLAG_HIDE_MAY_MOM
-	object_event 5, EVENT_OBJ_GFX_NORMAN, 0, 5, 6, 3, 10, 17, 0, 0, 0x0, FLAG_HIDE_NORMAN_LITTLEROOT
+	object_event 1, EVENT_OBJ_GFX_MOM, 0, 8, 6, 3, 9, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6BE9, FLAG_HIDE_MAY_MOM_DOWNSTAIRS
+	object_event 2, EVENT_OBJ_GFX_MACHOKE_FACING_AWAY, 0, 6, 5, 3, 65, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6CA6, FLAG_HIDE_MACHOKE_MOVER_1
+	object_event 3, EVENT_OBJ_GFX_MACHOKE_CARRYING_BOX, 0, 9, 3, 3, 27, 3, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1B6CB9, FLAG_HIDE_MACHOKE_MOVER_2
+	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 7, 3, 9, 0, 0, 0, 0, LittlerootTown_MaysHouse_1F_EventScript_1529EB, FLAG_HIDE_MAY_MOM
+	object_event 5, EVENT_OBJ_GFX_NORMAN, 0, 5, 6, 3, 10, 1, 1, 0, 0, 0x0, FLAG_HIDE_NORMAN_LITTLEROOT
 
 LittlerootTown_MaysHouse_1F_MapWarps:: @ 838593C
 	warp_def 1, 8, 0, 0, MAP_LITTLEROOT_TOWN

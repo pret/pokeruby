@@ -1,8 +1,8 @@
 LilycoveCity_LilycoveMuseum_2F_EventObjects:: @ 8389740
-	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 10, 8, 3, 7, 0, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8, 0
-	object_event 2, EVENT_OBJ_GFX_GIRL_2, 0, 19, 10, 3, 2, 17, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_158805, FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 7, 3, 3, 2, 17, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_15880E, FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
-	object_event 4, EVENT_OBJ_GFX_BOY_4, 0, 14, 6, 3, 2, 17, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_158817, FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
+	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 10, 8, 3, 7, 0, 0, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8, 0
+	object_event 2, EVENT_OBJ_GFX_GIRL_2, 0, 19, 10, 3, 2, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_158805, FLAG_HIDE_LILYCOVE_MUSEUM_PAINTING_GIRL
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 7, 3, 3, 2, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_15880E, FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
+	object_event 4, EVENT_OBJ_GFX_BOY_4, 0, 14, 6, 3, 2, 1, 1, 0, 0, LilycoveCity_LilycoveMuseum_2F_EventScript_158817, FLAG_HIDE_LILYCOVE_MUSEUM_VISITORS
 
 LilycoveCity_LilycoveMuseum_2F_MapWarps:: @ 83897A0
 	warp_def 13, 1, 0, 2, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F

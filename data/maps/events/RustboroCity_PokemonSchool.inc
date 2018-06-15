@@ -1,10 +1,10 @@
 RustboroCity_PokemonSchool_EventObjects:: @ 8388A34
-	object_event 1, EVENT_OBJ_GFX_BOY_5, 0, 8, 6, 3, 10, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157A98, 0
-	object_event 2, EVENT_OBJ_GFX_BOY_5, 0, 9, 6, 3, 9, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AA1, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_4, 0, 3, 8, 3, 7, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AAA, 0
-	object_event 4, EVENT_OBJ_GFX_LASS, 0, 10, 8, 3, 7, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AB3, 0
-	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 3, 6, 3, 8, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157ABC, 0
-	object_event 6, EVENT_OBJ_GFX_GENTLEMAN, 0, 5, 3, 3, 8, 17, 0, 0, RustboroCity_PokemonSchool_EventScript_157ACE, 0
+	object_event 1, EVENT_OBJ_GFX_BOY_5, 0, 8, 6, 3, 10, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157A98, 0
+	object_event 2, EVENT_OBJ_GFX_BOY_5, 0, 9, 6, 3, 9, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AA1, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_4, 0, 3, 8, 3, 7, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AAA, 0
+	object_event 4, EVENT_OBJ_GFX_LASS, 0, 10, 8, 3, 7, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AB3, 0
+	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 3, 6, 3, 8, 0, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157ABC, 0
+	object_event 6, EVENT_OBJ_GFX_GENTLEMAN, 0, 5, 3, 3, 8, 1, 1, 0, 0, RustboroCity_PokemonSchool_EventScript_157ACE, 0
 
 RustboroCity_PokemonSchool_MapWarps:: @ 8388AC4
 	warp_def 5, 10, 0, 4, MAP_RUSTBORO_CITY

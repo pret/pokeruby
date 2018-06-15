@@ -1,7 +1,7 @@
 FortreeCity_House1_EventObjects:: @ 8388FAC
-	object_event 1, EVENT_OBJ_GFX_WOMAN_1, 0, 1, 3, 3, 10, 0, 0, 0, FortreeCity_House1_EventScript_157E13, 0
-	object_event 2, EVENT_OBJ_GFX_ZIGZAGOON, 0, 2, 3, 3, 9, 0, 0, 0, FortreeCity_House1_EventScript_157EC0, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 7, 4, 3, 1, 17, 0, 0, FortreeCity_House1_EventScript_157EB7, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_1, 0, 1, 3, 3, 10, 0, 0, 0, 0, FortreeCity_House1_EventScript_157E13, 0
+	object_event 2, EVENT_OBJ_GFX_ZIGZAGOON, 0, 2, 3, 3, 9, 0, 0, 0, 0, FortreeCity_House1_EventScript_157EC0, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 7, 4, 3, 1, 1, 1, 0, 0, FortreeCity_House1_EventScript_157EB7, 0
 
 FortreeCity_House1_MapWarps:: @ 8388FF4
 	warp_def 3, 5, 0, 1, MAP_FORTREE_CITY

@@ -1,5 +1,5 @@
 AncientTomb_EventObjects:: @ 838E6DC
-	object_event 1, EVENT_OBJ_GFX_REGISTEEL, 0, 8, 7, 3, 8, 0, 0, 0, AncientTomb_EventScript_15F050, FLAG_HIDE_REGISTEEL
+	object_event 1, EVENT_OBJ_GFX_REGISTEEL, 0, 8, 7, 3, 8, 0, 0, 0, 0, AncientTomb_EventScript_15F050, FLAG_HIDE_REGISTEEL
 
 AncientTomb_MapWarps:: @ 838E6F4
 	warp_def 8, 29, 3, 0, MAP_ROUTE120
