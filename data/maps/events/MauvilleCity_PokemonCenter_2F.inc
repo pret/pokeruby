@@ -1,8 +1,8 @@
 MauvilleCity_PokemonCenter_2F_EventObjects:: @ 8388704
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573A2, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573A8, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573AE, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 6, 0, 7, 0, 3, 5, 1, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573B4, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573A2, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573A8, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573AE, 0
+	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 6, 7, 3, 5, 1, 0, 0, MauvilleCity_PokemonCenter_2F_EventScript_1573B4, 0
 
 MauvilleCity_PokemonCenter_2F_MapWarps:: @ 8388764
 	warp_def 1, 5, 4, 2, MAP_MAUVILLE_CITY_POKEMON_CENTER_1F

@@ -1,5 +1,5 @@
 IslandCave_EventObjects:: @ 838E674
-	object_event 1, EVENT_OBJ_GFX_REGICE, 0, 8, 0, 7, 0, 3, 8, 0, 0, 0, 0, 0, 0, IslandCave_EventScript_15EF9D, FLAG_HIDE_REGICE, 0, 0
+	object_event 1, EVENT_OBJ_GFX_REGICE, 0, 8, 7, 3, 8, 0, 0, 0, IslandCave_EventScript_15EF9D, FLAG_HIDE_REGICE
 
 IslandCave_MapWarps:: @ 838E68C
 	warp_def 8, 29, 3, 0, MAP_ROUTE105

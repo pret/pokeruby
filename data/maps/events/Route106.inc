@@ -1,9 +1,9 @@
 Route106_EventObjects:: @ 838190C
-	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 29, 0, 11, 0, 1, 27, 4, 0, 1, 0, 3, 0, Route106_EventScript_14F338, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 18, 0, 5, 0, 3, 1, 0, 0, 1, 0, 3, 0, Route106_EventScript_14F34F, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_FISHERMAN, 0, 51, 0, 14, 0, 3, 10, 0, 0, 1, 0, 4, 0, Route106_EventScript_14F366, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_FISHERMAN, 0, 65, 0, 14, 0, 3, 1, 0, 0, 1, 0, 3, 0, Route106_EventScript_14F3A4, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 29, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route106_EventScript_1B1494, FLAG_ITEM_ROUTE106_1, 0, 0
+	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 29, 11, 1, 27, 4, 1, 3, Route106_EventScript_14F338, 0
+	object_event 2, EVENT_OBJ_GFX_SWIMMER_F, 0, 18, 5, 3, 1, 0, 1, 3, Route106_EventScript_14F34F, 0
+	object_event 3, EVENT_OBJ_GFX_FISHERMAN, 0, 51, 14, 3, 10, 0, 1, 4, Route106_EventScript_14F366, 0
+	object_event 4, EVENT_OBJ_GFX_FISHERMAN, 0, 65, 14, 3, 1, 0, 1, 3, Route106_EventScript_14F3A4, 0
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 29, 14, 3, 1, 0, 0, 0, Route106_EventScript_1B1494, FLAG_ITEM_ROUTE106_1
 
 Route106_MapWarps:: @ 8381984
 	warp_def 48, 16, 0, 0, MAP_GRANITE_CAVE_1F

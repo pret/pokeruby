@@ -1,9 +1,9 @@
 VictoryRoad_B2F_EventObjects:: @ 838DC18
-	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 15, 0, 6, 0, 3, 8, 17, 0, 1, 0, 2, 0, VictoryRoad_B2F_EventScript_15DFFB, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_4, 0, 43, 0, 14, 0, 3, 7, 17, 0, 1, 0, 4, 0, VictoryRoad_B2F_EventScript_15E012, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 2, 0, 17, 0, 3, 8, 17, 0, 1, 0, 2, 0, VictoryRoad_B2F_EventScript_15E029, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 35, 0, 22, 0, 3, 9, 17, 0, 1, 0, 2, 0, VictoryRoad_B2F_EventScript_15E040, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 13, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, VictoryRoad_B2F_EventScript_1B1AFA, FLAG_ITEM_VICTORY_ROAD_B2F_1, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_4, 0, 15, 6, 3, 8, 17, 1, 2, VictoryRoad_B2F_EventScript_15DFFB, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_4, 0, 43, 14, 3, 7, 17, 1, 4, VictoryRoad_B2F_EventScript_15E012, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_7, 0, 2, 17, 3, 8, 17, 1, 2, VictoryRoad_B2F_EventScript_15E029, 0
+	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 35, 22, 3, 9, 17, 1, 2, VictoryRoad_B2F_EventScript_15E040, 0
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 13, 8, 3, 1, 17, 0, 0, VictoryRoad_B2F_EventScript_1B1AFA, FLAG_ITEM_VICTORY_ROAD_B2F_1
 
 VictoryRoad_B2F_MapWarps:: @ 838DC90
 	warp_def 30, 25, 3, 0, MAP_VICTORY_ROAD_B1F

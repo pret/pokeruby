@@ -1,24 +1,24 @@
 Route118_EventObjects:: @ 8383684
-	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 35, 0, 5, 0, 3, 12, 0, 0, 0, 0, 31, 0, S_BerryTree, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 36, 0, 5, 0, 3, 12, 0, 0, 0, 0, 32, 0, S_BerryTree, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 37, 0, 5, 0, 3, 12, 0, 0, 0, 0, 33, 0, S_BerryTree, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_6, 0, 64, 0, 10, 0, 3, 8, 0, 0, 1, 0, 3, 0, Route118_EventScript_151139, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE462, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1, 0, 0
-	object_event 6, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE482, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1, 0, 0
-	object_event 7, EVENT_OBJ_GFX_GIRL_2, 0, 12, 0, 8, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route118_EventScript_150F93, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE522, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2, 0, 0
-	object_event 9, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE542, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2, 0, 0
-	object_event 10, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE562, FLAG_HIDE_GABBY_AND_TY_ROUTE118_3, 0, 0
-	object_event 11, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 0, 8, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route118_EventScript_1AE582, FLAG_HIDE_GABBY_AND_TY_ROUTE118_3, 0, 0
-	object_event 12, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 38, 0, 8, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11, 0, 0
-	object_event 13, EVENT_OBJ_GFX_FISHERMAN, 0, 28, 0, 8, 0, 3, 9, 0, 0, 0, 0, 0, 0, Route118_EventScript_150F34, 0, 0, 0
-	object_event 14, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 0, 10, 0, 3, 24, 0, 0, 1, 0, 4, 0, Route118_EventScript_15108F, 0, 0, 0
-	object_event 15, EVENT_OBJ_GFX_FISHERMAN, 0, 14, 0, 14, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route118_EventScript_1510E4, 0, 0, 0
-	object_event 16, EVENT_OBJ_GFX_MAN_6, 0, 56, 0, 7, 0, 3, 16, 0, 0, 1, 0, 3, 0, Route118_EventScript_151150, 0, 0, 0
-	object_event 17, EVENT_OBJ_GFX_FISHERMAN, 0, 39, 0, 15, 0, 3, 1, 0, 0, 1, 0, 2, 0, Route118_EventScript_1510CD, 0, 0, 0
-	object_event 18, EVENT_OBJ_GFX_MAN_6, 0, 17, 0, 11, 0, 3, 15, 17, 0, 1, 0, 3, 0, Route118_EventScript_1510FB, 0, 0, 0
-	object_event 19, EVENT_OBJ_GFX_STEVEN, 0, 44, 0, 7, 0, 3, 8, 17, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_STEVEN_ROUTE118, 0, 0
-	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 69, 0, 7, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route118_EventScript_1B15B2, FLAG_ITEM_ROUTE118_1, 0, 0
+	object_event 1, EVENT_OBJ_GFX_BERRY_TREE, 0, 35, 5, 3, 12, 0, 0, 31, S_BerryTree, 0
+	object_event 2, EVENT_OBJ_GFX_BERRY_TREE, 0, 36, 5, 3, 12, 0, 0, 32, S_BerryTree, 0
+	object_event 3, EVENT_OBJ_GFX_BERRY_TREE, 0, 37, 5, 3, 12, 0, 0, 33, S_BerryTree, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_6, 0, 64, 10, 3, 8, 0, 1, 3, Route118_EventScript_151139, 0
+	object_event 5, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE462, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
+	object_event 6, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE482, FLAG_HIDE_GABBY_AND_TY_ROUTE118_1
+	object_event 7, EVENT_OBJ_GFX_GIRL_2, 0, 12, 8, 3, 2, 17, 0, 0, Route118_EventScript_150F93, 0
+	object_event 8, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE522, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
+	object_event 9, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE542, FLAG_HIDE_GABBY_AND_TY_ROUTE118_2
+	object_event 10, EVENT_OBJ_GFX_REPORTER_F, 0, 33, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE562, FLAG_HIDE_GABBY_AND_TY_ROUTE118_3
+	object_event 11, EVENT_OBJ_GFX_CAMERAMAN, 0, 34, 8, 3, 8, 0, 0, 0, Route118_EventScript_1AE582, FLAG_HIDE_GABBY_AND_TY_ROUTE118_3
+	object_event 12, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 38, 8, 3, 1, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11
+	object_event 13, EVENT_OBJ_GFX_FISHERMAN, 0, 28, 8, 3, 9, 0, 0, 0, Route118_EventScript_150F34, 0
+	object_event 14, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 10, 3, 24, 0, 1, 4, Route118_EventScript_15108F, 0
+	object_event 15, EVENT_OBJ_GFX_FISHERMAN, 0, 14, 14, 3, 8, 0, 1, 0, Route118_EventScript_1510E4, 0
+	object_event 16, EVENT_OBJ_GFX_MAN_6, 0, 56, 7, 3, 16, 0, 1, 3, Route118_EventScript_151150, 0
+	object_event 17, EVENT_OBJ_GFX_FISHERMAN, 0, 39, 15, 3, 1, 0, 1, 2, Route118_EventScript_1510CD, 0
+	object_event 18, EVENT_OBJ_GFX_MAN_6, 0, 17, 11, 3, 15, 17, 1, 3, Route118_EventScript_1510FB, 0
+	object_event 19, EVENT_OBJ_GFX_STEVEN, 0, 44, 7, 3, 8, 17, 0, 0, 0x0, FLAG_HIDE_STEVEN_ROUTE118
+	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 69, 7, 3, 1, 17, 0, 0, Route118_EventScript_1B15B2, FLAG_ITEM_ROUTE118_1
 
 Route118_MapCoordEvents:: @ 8383864
 	coord_event 43, 11, 3, 0, VAR_ROUTE118_STATE, 0, 0, Route118_EventScript_150FAE

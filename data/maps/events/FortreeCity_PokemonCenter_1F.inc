@@ -1,8 +1,8 @@
 FortreeCity_PokemonCenter_1F_EventObjects:: @ 83890E4
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_15801B, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 4, 0, 7, 0, 3, 1, 0, 0, 0, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_158029, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 8, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_158032, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_BOY_3, 0, 2, 0, 3, 0, 3, 8, 17, 0, 0, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_15803B, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_15801B, 0
+	object_event 2, EVENT_OBJ_GFX_GENTLEMAN, 0, 4, 7, 3, 1, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_158029, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 8, 5, 3, 1, 0, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_158032, 0
+	object_event 4, EVENT_OBJ_GFX_BOY_3, 0, 2, 3, 3, 8, 17, 0, 0, FortreeCity_PokemonCenter_1F_EventScript_15803B, 0
 
 FortreeCity_PokemonCenter_1F_MapWarps:: @ 8389144
 	warp_def 7, 8, 3, 0, MAP_FORTREE_CITY

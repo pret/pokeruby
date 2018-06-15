@@ -1,13 +1,13 @@
 PetalburgCity_EventObjects:: @ 837F5F0
-	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 16, 0, 18, 0, 3, 2, 17, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7C3, FLAG_HIDE_WALLY_MOM_PETALBURG_1, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 0, 10, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG, 0, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 8, 0, 22, 0, 3, 8, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B7AC, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_GENTLEMAN, 0, 20, 0, 10, 0, 3, 3, 16, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14B824, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_MAN_1, 0, 15, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_FATHER_PETALBURG, 0, 0
-	object_event 6, EVENT_OBJ_GFX_WOMAN_2, 0, 14, 0, 11, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_MOTHER_PETALBURG, 0, 0
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1704, FLAG_ITEM_PETALBURG_1, 0, 0
-	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 0, 28, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_1B1711, FLAG_ITEM_PETALBURG_2, 0, 0
-	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 12, 0, 15, 0, 3, 1, 0, 0, 0, 0, 0, 0, PetalburgCity_EventScript_14BA2D, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 16, 18, 3, 2, 17, 0, 0, PetalburgCity_EventScript_14B7C3, FLAG_HIDE_WALLY_MOM_PETALBURG_1
+	object_event 2, EVENT_OBJ_GFX_WALLY, 0, 15, 10, 3, 7, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG
+	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 8, 22, 3, 8, 0, 0, 0, PetalburgCity_EventScript_14B7AC, 0
+	object_event 4, EVENT_OBJ_GFX_GENTLEMAN, 0, 20, 10, 3, 3, 16, 0, 0, PetalburgCity_EventScript_14B824, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_1, 0, 15, 11, 3, 7, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_FATHER_PETALBURG
+	object_event 6, EVENT_OBJ_GFX_WOMAN_2, 0, 14, 11, 3, 7, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_MOTHER_PETALBURG
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 2, 3, 1, 0, 0, 0, PetalburgCity_EventScript_1B1704, FLAG_ITEM_PETALBURG_1
+	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 3, 28, 3, 1, 0, 0, 0, PetalburgCity_EventScript_1B1711, FLAG_ITEM_PETALBURG_2
+	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 12, 15, 3, 1, 0, 0, 0, PetalburgCity_EventScript_14BA2D, 0
 
 PetalburgCity_MapWarps:: @ 837F6C8
 	warp_def 10, 19, 0, 0, MAP_PETALBURG_CITY_HOUSE1

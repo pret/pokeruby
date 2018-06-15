@@ -1,10 +1,10 @@
 MtPyre_2F_EventObjects:: @ 838C888
-	object_event 1, EVENT_OBJ_GFX_MANIAC, 0, 6, 0, 6, 0, 3, 17, 17, 0, 1, 0, 2, 0, MtPyre_2F_EventScript_15D39B, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 0, 10, 0, 3, 1, 17, 0, 0, 0, 0, 0, MtPyre_2F_EventScript_1B1933, FLAG_ITEM_MT_PYRE_2F_1, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_1, 0, 5, 0, 3, 0, 3, 10, 17, 0, 0, 0, 0, 0, MtPyre_2F_EventScript_15D389, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_3, 0, 7, 0, 11, 0, 3, 8, 17, 0, 0, 0, 0, 0, MtPyre_2F_EventScript_15D392, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 2, 0, 8, 0, 3, 8, 17, 0, 1, 0, 0, 0, MtPyre_2F_EventScript_15D3CD, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_5, 0, 3, 0, 8, 0, 3, 8, 17, 0, 1, 0, 0, 0, MtPyre_2F_EventScript_15D3B2, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MANIAC, 0, 6, 6, 3, 17, 17, 1, 2, MtPyre_2F_EventScript_15D39B, 0
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 10, 3, 1, 17, 0, 0, MtPyre_2F_EventScript_1B1933, FLAG_ITEM_MT_PYRE_2F_1
+	object_event 3, EVENT_OBJ_GFX_WOMAN_1, 0, 5, 3, 3, 10, 17, 0, 0, MtPyre_2F_EventScript_15D389, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_3, 0, 7, 11, 3, 8, 17, 0, 0, MtPyre_2F_EventScript_15D392, 0
+	object_event 5, EVENT_OBJ_GFX_WOMAN_5, 0, 2, 8, 3, 8, 17, 1, 0, MtPyre_2F_EventScript_15D3CD, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_5, 0, 3, 8, 3, 8, 17, 1, 0, MtPyre_2F_EventScript_15D3B2, 0
 
 MtPyre_2F_MapWarps:: @ 838C918
 	warp_def 2, 1, 3, 4, MAP_MT_PYRE_1F

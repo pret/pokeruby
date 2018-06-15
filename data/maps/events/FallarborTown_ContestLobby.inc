@@ -1,10 +1,10 @@
 FallarborTown_ContestLobby_EventObjects:: @ 83866F0
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1539CD, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 2, 0, 6, 0, 3, 5, 1, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A8E, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_LASS, 0, 0, 0, 4, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153AB2, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 0, 5, 0, 3, 10, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B778A, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1AE0B6, FLAG_HIDE_CONTEST_REPORTER_FALLARBOR, 0, 0
-	object_event 6, EVENT_OBJ_GFX_ARTIST, 0, 12, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A97, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 5, 2, 3, 8, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1539CD, 0
+	object_event 2, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 2, 6, 3, 5, 1, 0, 0, FallarborTown_ContestLobby_EventScript_153A8E, 0
+	object_event 3, EVENT_OBJ_GFX_LASS, 0, 0, 4, 3, 8, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153AB2, 0
+	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 5, 3, 10, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B778A, 0
+	object_event 5, EVENT_OBJ_GFX_REPORTER_M, 0, 7, 5, 3, 9, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1AE0B6, FLAG_HIDE_CONTEST_REPORTER_FALLARBOR
+	object_event 6, EVENT_OBJ_GFX_ARTIST, 0, 12, 2, 3, 8, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153A97, 0
 
 FallarborTown_ContestLobby_MapWarps:: @ 8386780
 	warp_def 5, 6, 0, 1, MAP_FALLARBOR_TOWN

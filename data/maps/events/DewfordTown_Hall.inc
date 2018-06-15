@@ -1,13 +1,13 @@
 DewfordTown_Hall_EventObjects:: @ 8386088
-	object_event 1, EVENT_OBJ_GFX_GIRL_2, 0, 4, 0, 6, 0, 0, 7, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_153293, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_3, 0, 1, 0, 5, 0, 0, 10, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1532BC, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_1, 0, 5, 0, 4, 0, 0, 9, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1532CD, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 9, 0, 3, 0, 0, 7, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_15330A, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 5, 0, 2, 0, 3, 7, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_153326, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 14, 0, 7, 0, 0, 5, 1, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_153342, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 12, 0, 3, 0, 3, 10, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1533F2, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_PSYCHIC_M, 0, 15, 0, 3, 0, 3, 9, 0, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_1533FE, 0, 0, 0
-	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 8, 0, 6, 0, 3, 5, 1, 0, 0, 0, 0, 0, DewfordTown_Hall_EventScript_15359D, FLAG_HIDE_SLUDGE_BOMB_MAN_DEWFORD_HALL, 0, 0
+	object_event 1, EVENT_OBJ_GFX_GIRL_2, 0, 4, 6, 0, 7, 0, 0, 0, DewfordTown_Hall_EventScript_153293, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_3, 0, 1, 5, 0, 10, 0, 0, 0, DewfordTown_Hall_EventScript_1532BC, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_1, 0, 5, 4, 0, 9, 0, 0, 0, DewfordTown_Hall_EventScript_1532CD, 0
+	object_event 4, EVENT_OBJ_GFX_OLD_MAN_1, 0, 9, 3, 0, 7, 0, 0, 0, DewfordTown_Hall_EventScript_15330A, 0
+	object_event 5, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 5, 2, 3, 7, 0, 0, 0, DewfordTown_Hall_EventScript_153326, 0
+	object_event 6, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 14, 7, 0, 5, 1, 0, 0, DewfordTown_Hall_EventScript_153342, 0
+	object_event 7, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 12, 3, 3, 10, 0, 0, 0, DewfordTown_Hall_EventScript_1533F2, 0
+	object_event 8, EVENT_OBJ_GFX_PSYCHIC_M, 0, 15, 3, 3, 9, 0, 0, 0, DewfordTown_Hall_EventScript_1533FE, 0
+	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 8, 6, 3, 5, 1, 0, 0, DewfordTown_Hall_EventScript_15359D, FLAG_HIDE_SLUDGE_BOMB_MAN_DEWFORD_HALL
 
 DewfordTown_Hall_MapWarps:: @ 8386160
 	warp_def 5, 8, 0, 0, MAP_DEWFORD_TOWN

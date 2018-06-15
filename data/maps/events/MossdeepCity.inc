@@ -1,13 +1,13 @@
 MossdeepCity_EventObjects:: @ 838042C
-	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 42, 0, 24, 0, 5, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFB7, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 50, 0, 34, 0, 5, 5, 1, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFC9, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 32, 0, 12, 0, 5, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFAE, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 26, 0, 21, 0, 5, 3, 16, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFC0, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_GIRL_1, 0, 45, 0, 18, 0, 7, 9, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFD2, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 62, 0, 35, 0, 5, 1, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_1B1745, FLAG_ITEM_MOSSDEEP_1, 0, 0
-	object_event 7, EVENT_OBJ_GFX_MAN_1, 0, 53, 0, 5, 0, 7, 7, 0, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14D011, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_GIRL_1, 0, 56, 0, 21, 0, 7, 10, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14CFDB, 0, 0, 0
-	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 23, 0, 13, 0, 5, 2, 17, 0, 0, 0, 0, 0, MossdeepCity_EventScript_14D027, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_SAILOR, 0, 42, 24, 5, 2, 17, 0, 0, MossdeepCity_EventScript_14CFB7, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 50, 34, 5, 5, 1, 0, 0, MossdeepCity_EventScript_14CFC9, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_2, 0, 32, 12, 5, 2, 17, 0, 0, MossdeepCity_EventScript_14CFAE, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 26, 21, 5, 3, 16, 0, 0, MossdeepCity_EventScript_14CFC0, 0
+	object_event 5, EVENT_OBJ_GFX_GIRL_1, 0, 45, 18, 7, 9, 0, 0, 0, MossdeepCity_EventScript_14CFD2, 0
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 62, 35, 5, 1, 0, 0, 0, MossdeepCity_EventScript_1B1745, FLAG_ITEM_MOSSDEEP_1
+	object_event 7, EVENT_OBJ_GFX_MAN_1, 0, 53, 5, 7, 7, 0, 0, 0, MossdeepCity_EventScript_14D011, 0
+	object_event 8, EVENT_OBJ_GFX_GIRL_1, 0, 56, 21, 7, 10, 17, 0, 0, MossdeepCity_EventScript_14CFDB, 0
+	object_event 9, EVENT_OBJ_GFX_BOY_2, 0, 23, 13, 5, 2, 17, 0, 0, MossdeepCity_EventScript_14D027, 0
 
 MossdeepCity_MapWarps:: @ 8380504
 	warp_def 28, 9, 0, 0, MAP_MOSSDEEP_CITY_HOUSE1

@@ -1,8 +1,8 @@
 MossdeepCity_PokemonCenter_2F_EventObjects:: @ 838A8E8
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A913, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A919, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A91F, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 10, 0, 6, 0, 3, 5, 18, 0, 0, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A90A, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A913, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A919, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A91F, 0
+	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 10, 6, 3, 5, 18, 0, 0, MossdeepCity_PokemonCenter_2F_EventScript_15A90A, 0
 
 MossdeepCity_PokemonCenter_2F_MapWarps:: @ 838A948
 	warp_def 1, 5, 4, 2, MAP_MOSSDEEP_CITY_POKEMON_CENTER_1F

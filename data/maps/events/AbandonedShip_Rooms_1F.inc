@@ -1,6 +1,6 @@
 AbandonedShip_Rooms_1F_EventObjects:: @ 838E1C4
-	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 0, 6, 0, 3, 2, 17, 0, 0, 0, 0, 0, AbandonedShip_Rooms_1F_EventScript_15E986, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 0, 5, 0, 3, 1, 17, 0, 0, 0, 0, 0, AbandonedShip_Rooms_1F_EventScript_1B187D, FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_1, 0, 0
+	object_event 1, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 6, 3, 2, 17, 0, 0, AbandonedShip_Rooms_1F_EventScript_15E986, 0
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 5, 3, 1, 17, 0, 0, AbandonedShip_Rooms_1F_EventScript_1B187D, FLAG_ITEM_ABANDONED_SHIP_ROOMS_1F_1
 
 AbandonedShip_Rooms_1F_MapWarps:: @ 838E1F4
 	warp_def 4, 16, 3, 4, MAP_ABANDONED_SHIP_CORRIDORS_1F

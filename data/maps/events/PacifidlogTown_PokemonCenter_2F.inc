@@ -1,7 +1,7 @@
 PacifidlogTown_PokemonCenter_2F_EventObjects:: @ 8386EBC
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_153F48, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_153F4E, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_15414E, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_153F48, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_153F4E, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, PacifidlogTown_PokemonCenter_2F_EventScript_15414E, 0
 
 PacifidlogTown_PokemonCenter_2F_MapWarps:: @ 8386F04
 	warp_def 1, 5, 4, 2, MAP_PACIFIDLOG_TOWN_POKEMON_CENTER_1F
