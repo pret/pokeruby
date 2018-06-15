@@ -1,10 +1,10 @@
 Route105_EventObjects:: @ 8381854
-	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 18, 60, 1, 10, 0, 1, 6, Route105_EventScript_14F2D2, 0
-	object_event 2, EVENT_OBJ_GFX_SWIMMER_M, 0, 10, 44, 1, 27, 7, 1, 3, Route105_EventScript_14F2E9, 0
-	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 26, 36, 1, 25, 112, 1, 3, Route105_EventScript_14F300, 0
-	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 19, 9, 1, 24, 80, 1, 3, Route105_EventScript_14F317, 0
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 73, 3, 1, 0, 0, 0, Route105_EventScript_1B1487, FLAG_ITEM_ROUTE105_1
-	object_event 6, EVENT_OBJ_GFX_HIKER, 0, 12, 51, 3, 13, 0, 1, 3, Route105_EventScript_14F2BB, 0
+	object_event 1, EVENT_OBJ_GFX_SWIMMER_M, 0, 18, 60, 1, 10, 0, 0, 1, 6, Route105_EventScript_14F2D2, 0
+	object_event 2, EVENT_OBJ_GFX_SWIMMER_M, 0, 10, 44, 1, 27, 7, 0, 1, 3, Route105_EventScript_14F2E9, 0
+	object_event 3, EVENT_OBJ_GFX_SWIMMER_F, 0, 26, 36, 1, 25, 0, 7, 1, 3, Route105_EventScript_14F300, 0
+	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 19, 9, 1, 24, 0, 5, 1, 3, Route105_EventScript_14F317, 0
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 8, 73, 3, 1, 0, 0, 0, 0, Route105_EventScript_1B1487, FLAG_ITEM_ROUTE105_1
+	object_event 6, EVENT_OBJ_GFX_HIKER, 0, 12, 51, 3, 13, 0, 0, 1, 3, Route105_EventScript_14F2BB, 0
 
 Route105_MapWarps:: @ 83818E4
 	warp_def 9, 20, 0, 0, MAP_ISLAND_CAVE

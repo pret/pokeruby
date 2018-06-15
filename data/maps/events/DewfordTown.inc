@@ -1,9 +1,9 @@
 DewfordTown_EventObjects:: @ 8380B88
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 12, 3, 5, 1, 0, 0, DewfordTown_EventScript_14E0A2, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 9, 3, 9, 16, 0, 3, DewfordTown_EventScript_14E002, FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
-	object_event 3, EVENT_OBJ_GFX_FISHERMAN, 0, 12, 14, 3, 5, 1, 0, 0, DewfordTown_EventScript_14E0C6, 0
-	object_event 4, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 8, 1, 8, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
-	object_event 5, EVENT_OBJ_GFX_BOY_1, 0, 1, 6, 3, 1, 0, 0, 0, DewfordTown_EventScript_14E413, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 7, 12, 3, 5, 1, 0, 0, 0, DewfordTown_EventScript_14E0A2, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 12, 9, 3, 9, 0, 1, 0, 3, DewfordTown_EventScript_14E002, FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
+	object_event 3, EVENT_OBJ_GFX_FISHERMAN, 0, 12, 14, 3, 5, 1, 0, 0, 0, DewfordTown_EventScript_14E0C6, 0
+	object_event 4, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 12, 8, 1, 8, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD
+	object_event 5, EVENT_OBJ_GFX_BOY_1, 0, 1, 6, 3, 1, 0, 0, 0, 0, DewfordTown_EventScript_14E413, 0
 
 DewfordTown_MapWarps:: @ 8380C00
 	warp_def 3, 3, 0, 0, MAP_DEWFORD_TOWN_HALL

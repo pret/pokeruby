@@ -1,10 +1,10 @@
 MauvilleCity_Gym_EventObjects:: @ 838821C
-	object_event 1, EVENT_OBJ_GFX_WATTSON, 0, 4, 3, 3, 8, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, FLAG_HIDE_WATTSON_MAUVILLE_GYM
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 6, 9, 3, 9, 0, 1, 2, MauvilleCity_Gym_EventScript_1566FD, 0
-	object_event 3, EVENT_OBJ_GFX_GIRL_3, 0, 7, 11, 3, 8, 0, 1, 1, MauvilleCity_Gym_EventScript_15672B, 0
-	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 1, 13, 3, 10, 0, 1, 1, MauvilleCity_Gym_EventScript_156714, 0
-	object_event 5, EVENT_OBJ_GFX_MAN_6, 0, 2, 15, 3, 8, 0, 1, 2, MauvilleCity_Gym_EventScript_1566E6, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_2, 0, 7, 20, 3, 9, 0, 0, 0, MauvilleCity_Gym_EventScript_156742, 0
+	object_event 1, EVENT_OBJ_GFX_WATTSON, 0, 4, 3, 3, 8, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_1565AB, FLAG_HIDE_WATTSON_MAUVILLE_GYM
+	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 6, 9, 3, 9, 0, 0, 1, 2, MauvilleCity_Gym_EventScript_1566FD, 0
+	object_event 3, EVENT_OBJ_GFX_GIRL_3, 0, 7, 11, 3, 8, 0, 0, 1, 1, MauvilleCity_Gym_EventScript_15672B, 0
+	object_event 4, EVENT_OBJ_GFX_YOUNGSTER, 0, 1, 13, 3, 10, 0, 0, 1, 1, MauvilleCity_Gym_EventScript_156714, 0
+	object_event 5, EVENT_OBJ_GFX_MAN_6, 0, 2, 15, 3, 8, 0, 0, 1, 2, MauvilleCity_Gym_EventScript_1566E6, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_2, 0, 7, 20, 3, 9, 0, 0, 0, 0, MauvilleCity_Gym_EventScript_156742, 0
 
 MauvilleCity_Gym_MapWarps:: @ 83882AC
 	warp_def 4, 20, 0, 0, MAP_MAUVILLE_CITY

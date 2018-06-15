@@ -1,20 +1,20 @@
 Route115_EventObjects:: @ 8382F2C
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 18, 68, 3, 2, 17, 0, 0, Route115_EventScript_15092E, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 5, 15, 3, 10, 0, 1, 6, Route115_EventScript_150949, 0
-	object_event 3, EVENT_OBJ_GFX_BLACK_BELT, 0, 27, 53, 3, 15, 17, 1, 4, Route115_EventScript_15099E, 0
-	object_event 4, EVENT_OBJ_GFX_BERRY_TREE, 0, 11, 5, 3, 12, 0, 0, 69, S_BerryTree, 0
-	object_event 5, EVENT_OBJ_GFX_BERRY_TREE, 0, 12, 5, 3, 12, 0, 0, 70, S_BerryTree, 0
-	object_event 6, EVENT_OBJ_GFX_BERRY_TREE, 0, 13, 5, 3, 12, 0, 0, 71, S_BerryTree, 0
-	object_event 7, EVENT_OBJ_GFX_GIRL_3, 0, 15, 50, 3, 64, 0, 1, 3, Route115_EventScript_1509DC, 0
-	object_event 8, EVENT_OBJ_GFX_BLACK_BELT, 0, 17, 17, 3, 50, 51, 1, 2, Route115_EventScript_150987, 0
-	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 25, 61, 3, 14, 0, 1, 3, Route115_EventScript_150A1A, 0
-	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 20, 60, 3, 1, 0, 0, 0, Route115_EventScript_1B1530, FLAG_ITEM_ROUTE115_1
-	object_event 11, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 5, 3, 1, 0, 0, 0, Route115_EventScript_1B153D, FLAG_ITEM_ROUTE115_2
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 29, 3, 1, 0, 0, 0, Route115_EventScript_1B154A, FLAG_ITEM_ROUTE115_3
-	object_event 13, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 64, 3, 12, 0, 0, 55, S_BerryTree, 0
-	object_event 14, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 65, 3, 12, 0, 0, 56, S_BerryTree, 0
-	object_event 15, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 29, 50, 3, 1, 17, 0, 0, S_BreakableRock, FLAG_TEMP_11
-	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 31, 56, 3, 1, 17, 0, 0, Route115_EventScript_1B1557, FLAG_ITEM_ROUTE115_4
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 18, 68, 3, 2, 1, 1, 0, 0, Route115_EventScript_15092E, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 5, 15, 3, 10, 0, 0, 1, 6, Route115_EventScript_150949, 0
+	object_event 3, EVENT_OBJ_GFX_BLACK_BELT, 0, 27, 53, 3, 15, 1, 1, 1, 4, Route115_EventScript_15099E, 0
+	object_event 4, EVENT_OBJ_GFX_BERRY_TREE, 0, 11, 5, 3, 12, 0, 0, 0, 69, S_BerryTree, 0
+	object_event 5, EVENT_OBJ_GFX_BERRY_TREE, 0, 12, 5, 3, 12, 0, 0, 0, 70, S_BerryTree, 0
+	object_event 6, EVENT_OBJ_GFX_BERRY_TREE, 0, 13, 5, 3, 12, 0, 0, 0, 71, S_BerryTree, 0
+	object_event 7, EVENT_OBJ_GFX_GIRL_3, 0, 15, 50, 3, 64, 0, 0, 1, 3, Route115_EventScript_1509DC, 0
+	object_event 8, EVENT_OBJ_GFX_BLACK_BELT, 0, 17, 17, 3, 50, 3, 3, 1, 2, Route115_EventScript_150987, 0
+	object_event 9, EVENT_OBJ_GFX_MANIAC, 0, 25, 61, 3, 14, 0, 0, 1, 3, Route115_EventScript_150A1A, 0
+	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 20, 60, 3, 1, 0, 0, 0, 0, Route115_EventScript_1B1530, FLAG_ITEM_ROUTE115_1
+	object_event 11, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 5, 3, 1, 0, 0, 0, 0, Route115_EventScript_1B153D, FLAG_ITEM_ROUTE115_2
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 29, 3, 1, 0, 0, 0, 0, Route115_EventScript_1B154A, FLAG_ITEM_ROUTE115_3
+	object_event 13, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 64, 3, 12, 0, 0, 0, 55, S_BerryTree, 0
+	object_event 14, EVENT_OBJ_GFX_BERRY_TREE, 0, 31, 65, 3, 12, 0, 0, 0, 56, S_BerryTree, 0
+	object_event 15, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 29, 50, 3, 1, 1, 1, 0, 0, S_BreakableRock, FLAG_TEMP_11
+	object_event 16, EVENT_OBJ_GFX_ITEM_BALL, 0, 31, 56, 3, 1, 1, 1, 0, 0, Route115_EventScript_1B1557, FLAG_ITEM_ROUTE115_4
 
 Route115_MapWarps:: @ 83830AC
 	warp_def 27, 37, 0, 1, MAP_METEOR_FALLS_1F_1R

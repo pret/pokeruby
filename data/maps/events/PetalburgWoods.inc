@@ -1,17 +1,17 @@
 PetalburgWoods_EventObjects:: @ 838C14C
-	object_event 1, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 10, 3, 1, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11
-	object_event 2, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 11, 3, 1, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12
-	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 26, 17, 3, 10, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_PETALBURG_WOODS
-	object_event 4, EVENT_OBJ_GFX_MAN_2, 0, 26, 20, 3, 1, 0, 0, 0, 0x0, FLAG_HIDE_DEVON_PETALBURG_WOODS
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 45, 7, 3, 8, 0, 0, 0, PetalburgWoods_EventScript_1B175F, FLAG_ITEM_PETALBURG_WOODS_2
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 35, 20, 3, 8, 0, 0, 0, PetalburgWoods_EventScript_1B1752, FLAG_ITEM_PETALBURG_WOODS_1
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 8, 3, 1, 0, 0, 0, PetalburgWoods_EventScript_1B176C, FLAG_ITEM_PETALBURG_WOODS_3
-	object_event 8, EVENT_OBJ_GFX_BOY_2, 0, 15, 19, 3, 3, 33, 0, 0, PetalburgWoods_EventScript_15CECA, 0
-	object_event 9, EVENT_OBJ_GFX_BUG_CATCHER, 0, 7, 32, 3, 22, 0, 1, 3, PetalburgWoods_EventScript_15CF27, 0
-	object_event 10, EVENT_OBJ_GFX_BUG_CATCHER, 0, 4, 14, 3, 20, 0, 1, 3, PetalburgWoods_EventScript_15CF3E, 0
-	object_event 11, EVENT_OBJ_GFX_BOY_3, 0, 30, 34, 3, 2, 18, 0, 0, PetalburgWoods_EventScript_15CED3, 0
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 26, 3, 1, 17, 0, 0, PetalburgWoods_EventScript_1B1779, FLAG_ITEM_PETALBURG_WOODS_4
-	object_event 13, EVENT_OBJ_GFX_GIRL_2, 0, 33, 5, 3, 1, 17, 0, 0, PetalburgWoods_EventScript_15CEDC, 0
+	object_event 1, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 10, 3, 1, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_11
+	object_event 2, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 19, 11, 3, 1, 0, 0, 0, 0, S_CuttableTree, FLAG_TEMP_12
+	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 26, 17, 3, 10, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_PETALBURG_WOODS
+	object_event 4, EVENT_OBJ_GFX_MAN_2, 0, 26, 20, 3, 1, 0, 0, 0, 0, 0x0, FLAG_HIDE_DEVON_PETALBURG_WOODS
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 45, 7, 3, 8, 0, 0, 0, 0, PetalburgWoods_EventScript_1B175F, FLAG_ITEM_PETALBURG_WOODS_2
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 35, 20, 3, 8, 0, 0, 0, 0, PetalburgWoods_EventScript_1B1752, FLAG_ITEM_PETALBURG_WOODS_1
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 8, 3, 1, 0, 0, 0, 0, PetalburgWoods_EventScript_1B176C, FLAG_ITEM_PETALBURG_WOODS_3
+	object_event 8, EVENT_OBJ_GFX_BOY_2, 0, 15, 19, 3, 3, 1, 2, 0, 0, PetalburgWoods_EventScript_15CECA, 0
+	object_event 9, EVENT_OBJ_GFX_BUG_CATCHER, 0, 7, 32, 3, 22, 0, 0, 1, 3, PetalburgWoods_EventScript_15CF27, 0
+	object_event 10, EVENT_OBJ_GFX_BUG_CATCHER, 0, 4, 14, 3, 20, 0, 0, 1, 3, PetalburgWoods_EventScript_15CF3E, 0
+	object_event 11, EVENT_OBJ_GFX_BOY_3, 0, 30, 34, 3, 2, 2, 1, 0, 0, PetalburgWoods_EventScript_15CED3, 0
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 4, 26, 3, 1, 1, 1, 0, 0, PetalburgWoods_EventScript_1B1779, FLAG_ITEM_PETALBURG_WOODS_4
+	object_event 13, EVENT_OBJ_GFX_GIRL_2, 0, 33, 5, 3, 1, 1, 1, 0, 0, PetalburgWoods_EventScript_15CEDC, 0
 
 PetalburgWoods_MapWarps:: @ 838C284
 	warp_def 14, 5, 0, 2, MAP_ROUTE104

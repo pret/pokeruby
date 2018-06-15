@@ -1,5 +1,5 @@
 SeafloorCavern_Room4_EventObjects:: @ 838D384
-	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 4, 8, 3, 23, 17, 1, 3, SeafloorCavern_Room4_EventScript_15DACB, FLAG_HIDE_EVIL_TEAM_GRUNTS_SEAFLOOR_CAVERN
+	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 4, 8, 3, 23, 1, 1, 1, 3, SeafloorCavern_Room4_EventScript_15DACB, FLAG_HIDE_EVIL_TEAM_GRUNTS_SEAFLOOR_CAVERN
 
 SeafloorCavern_Room4_MapWarps:: @ 838D39C
 	warp_def 13, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM2

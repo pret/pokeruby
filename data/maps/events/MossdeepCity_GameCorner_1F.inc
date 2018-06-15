@@ -1,5 +1,5 @@
 MossdeepCity_GameCorner_1F_EventObjects:: @ 838AC6C
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 4, 4, 3, 10, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_15AD42, 0
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN_1, 0, 4, 4, 3, 10, 0, 0, 0, 0, MossdeepCity_GameCorner_1F_EventScript_15AD42, 0
 
 MossdeepCity_GameCorner_1F_MapWarps:: @ 838AC84
 	warp_def 3, 7, 0, 9, MAP_MOSSDEEP_CITY

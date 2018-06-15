@@ -1,18 +1,18 @@
 RustboroCity_EventObjects:: @ 837FD14
-	object_event 1, EVENT_OBJ_GFX_WOMAN_7, 0, 22, 34, 3, 3, 16, 0, 0, RustboroCity_EventScript_14C3B1, 0
-	object_event 2, EVENT_OBJ_GFX_FAT_MAN, 0, 19, 13, 3, 1, 17, 0, 0, RustboroCity_EventScript_14C386, 0
-	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 25, 37, 3, 7, 0, 0, 0, RustboroCity_EventScript_14C401, 0
-	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 21, 46, 3, 3, 16, 0, 0, RustboroCity_EventScript_14C3F8, 0
-	object_event 5, EVENT_OBJ_GFX_BOY_2, 0, 12, 45, 3, 1, 0, 0, 0, RustboroCity_EventScript_14C3D9, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 26, 23, 3, 1, 17, 0, 0, RustboroCity_EventScript_14C3BA, 0
-	object_event 7, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 24, 51, 3, 10, 0, 0, 0, RustboroCity_EventScript_14C449, 0
-	object_event 8, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 25, 51, 3, 9, 0, 0, 0, RustboroCity_EventScript_14C45F, 0
-	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 30, 10, 3, 10, 17, 0, 0, RustboroCity_EventScript_14C5FF, FLAG_HIDE_DEVON_RUSTBORO
-	object_event 10, EVENT_OBJ_GFX_VAR_1, 0, 13, 21, 3, 10, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_RUSTBORO
-	object_event 11, EVENT_OBJ_GFX_MAN_7, 0, 13, 34, 3, 2, 17, 0, 0, RustboroCity_EventScript_14C3A5, 0
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 36, 51, 3, 1, 0, 0, 0, RustboroCity_EventScript_1B172B, FLAG_ITEM_RUSTBORO_1
-	object_event 13, EVENT_OBJ_GFX_MAN_5, 0, 19, 27, 3, 8, 16, 0, 0, RustboroCity_EventScript_14C475, 0
-	object_event 14, EVENT_OBJ_GFX_VAR_0, 0, 16, 50, 3, 1, 17, 0, 0, RustboroCity_EventScript_14C8DA, FLAG_HIDE_RIVAL_RUSTBORO
+	object_event 1, EVENT_OBJ_GFX_WOMAN_7, 0, 22, 34, 3, 3, 0, 1, 0, 0, RustboroCity_EventScript_14C3B1, 0
+	object_event 2, EVENT_OBJ_GFX_FAT_MAN, 0, 19, 13, 3, 1, 1, 1, 0, 0, RustboroCity_EventScript_14C386, 0
+	object_event 3, EVENT_OBJ_GFX_LITTLE_BOY_1, 0, 25, 37, 3, 7, 0, 0, 0, 0, RustboroCity_EventScript_14C401, 0
+	object_event 4, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 21, 46, 3, 3, 0, 1, 0, 0, RustboroCity_EventScript_14C3F8, 0
+	object_event 5, EVENT_OBJ_GFX_BOY_2, 0, 12, 45, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_14C3D9, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_4, 0, 26, 23, 3, 1, 1, 1, 0, 0, RustboroCity_EventScript_14C3BA, 0
+	object_event 7, EVENT_OBJ_GFX_LITTLE_BOY_2, 0, 24, 51, 3, 10, 0, 0, 0, 0, RustboroCity_EventScript_14C449, 0
+	object_event 8, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 25, 51, 3, 9, 0, 0, 0, 0, RustboroCity_EventScript_14C45F, 0
+	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 30, 10, 3, 10, 1, 1, 0, 0, RustboroCity_EventScript_14C5FF, FLAG_HIDE_DEVON_RUSTBORO
+	object_event 10, EVENT_OBJ_GFX_VAR_1, 0, 13, 21, 3, 10, 0, 0, 0, 0, 0x0, FLAG_HIDE_GRUNT_RUSTBORO
+	object_event 11, EVENT_OBJ_GFX_MAN_7, 0, 13, 34, 3, 2, 1, 1, 0, 0, RustboroCity_EventScript_14C3A5, 0
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 36, 51, 3, 1, 0, 0, 0, 0, RustboroCity_EventScript_1B172B, FLAG_ITEM_RUSTBORO_1
+	object_event 13, EVENT_OBJ_GFX_MAN_5, 0, 19, 27, 3, 8, 0, 1, 0, 0, RustboroCity_EventScript_14C475, 0
+	object_event 14, EVENT_OBJ_GFX_VAR_0, 0, 16, 50, 3, 1, 1, 1, 0, 0, RustboroCity_EventScript_14C8DA, FLAG_HIDE_RIVAL_RUSTBORO
 
 RustboroCity_MapWarps:: @ 837FE64
 	warp_def 27, 19, 0, 0, MAP_RUSTBORO_CITY_GYM

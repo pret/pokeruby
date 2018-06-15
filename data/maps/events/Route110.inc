@@ -1,35 +1,35 @@
 Route110_EventObjects:: @ 8381D58
-	object_event 1, EVENT_OBJ_GFX_CAMPER, 0, 17, 90, 3, 8, 0, 0, 0, Route110_EventScript_14F9D4, 0
-	object_event 2, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 29, 79, 4, 8, 0, 0, 0, Route110_EventScript_14F9CB, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 14, 69, 3, 3, 16, 0, 0, Route110_EventScript_14F9C2, 0
-	object_event 4, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 9, 57, 4, 2, 17, 0, 0, Route110_EventScript_14F9B0, 0
-	object_event 5, EVENT_OBJ_GFX_OLD_MAN_1, 0, 10, 11, 3, 2, 17, 0, 0, Route110_EventScript_14F9B9, 0
-	object_event 6, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 27, 24, 4, 2, 49, 0, 0, Route110_EventScript_14F9A7, 0
-	object_event 7, EVENT_OBJ_GFX_BOY_3, 0, 15, 7, 3, 2, 17, 0, 0, Route110_EventScript_14F99E, 0
-	object_event 8, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 16, 73, 4, 49, 226, 1, 3, Route110_EventScript_14FB7D, 0
-	object_event 9, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 19, 31, 4, 51, 26, 1, 3, Route110_EventScript_14FB28, 0
-	object_event 10, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 30, 31, 4, 9, 17, 1, 4, Route110_EventScript_14FB94, 0
-	object_event 11, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 16, 55, 4, 45, 68, 1, 3, Route110_EventScript_14FB3F, 0
-	object_event 12, EVENT_OBJ_GFX_PSYCHIC_M, 0, 5, 39, 3, 23, 0, 1, 3, Route110_EventScript_14FA8E, 0
-	object_event 13, EVENT_OBJ_GFX_LASS, 0, 33, 15, 3, 9, 0, 1, 1, Route110_EventScript_14FAA5, 0
-	object_event 14, EVENT_OBJ_GFX_MANIAC, 0, 23, 40, 3, 20, 0, 1, 3, Route110_EventScript_14FABC, 0
-	object_event 15, EVENT_OBJ_GFX_FISHERMAN, 0, 10, 19, 3, 8, 0, 1, 1, Route110_EventScript_14FAFA, 0
-	object_event 16, EVENT_OBJ_GFX_BERRY_TREE, 0, 5, 11, 3, 12, 0, 0, 16, S_BerryTree, 0
-	object_event 17, EVENT_OBJ_GFX_BERRY_TREE, 0, 6, 11, 3, 12, 0, 0, 17, S_BerryTree, 0
-	object_event 18, EVENT_OBJ_GFX_BERRY_TREE, 0, 7, 11, 3, 12, 0, 0, 18, S_BerryTree, 0
-	object_event 19, EVENT_OBJ_GFX_ITEM_BALL, 0, 30, 69, 3, 1, 0, 0, 0, Route110_EventScript_1B14BB, FLAG_ITEM_ROUTE110_2
-	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 47, 3, 1, 0, 0, 0, Route110_EventScript_1B14AE, FLAG_ITEM_ROUTE110_1
-	object_event 21, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 27, 92, 3, 8, 0, 0, 0, Route110_EventScript_14FA53, 0
-	object_event 22, EVENT_OBJ_GFX_VAR_1, 0, 7, 83, 3, 7, 0, 0, 0, Route110_EventScript_14F946, FLAG_HIDE_EVIL_TEAM_ROUTE110
-	object_event 23, EVENT_OBJ_GFX_VAR_1, 0, 8, 83, 3, 7, 0, 0, 0, Route110_EventScript_14F95C, FLAG_HIDE_EVIL_TEAM_ROUTE110
-	object_event 24, EVENT_OBJ_GFX_VAR_1, 0, 9, 83, 3, 7, 0, 0, 0, Route110_EventScript_14F972, FLAG_HIDE_EVIL_TEAM_ROUTE110
-	object_event 25, EVENT_OBJ_GFX_VAR_1, 0, 10, 83, 3, 7, 0, 0, 0, Route110_EventScript_14F988, FLAG_HIDE_EVIL_TEAM_ROUTE110
-	object_event 26, EVENT_OBJ_GFX_VAR_1, 0, 8, 82, 0, 8, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_ROUTE110
-	object_event 27, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 21, 78, 4, 51, 23, 1, 2, Route110_EventScript_14FB11, 0
-	object_event 28, EVENT_OBJ_GFX_VAR_0, 0, 34, 54, 3, 14, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE110
-	object_event 29, EVENT_OBJ_GFX_VAR_3, 0, 34, 54, 3, 8, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ON_BIKE_ROUTE110
-	object_event 30, EVENT_OBJ_GFX_YOUNGSTER, 0, 33, 69, 3, 14, 0, 1, 3, Route110_EventScript_14FC10, 0
-	object_event 31, EVENT_OBJ_GFX_WOMAN_2, 0, 11, 73, 3, 9, 0, 1, 4, Route110_EventScript_14FBD2, 0
+	object_event 1, EVENT_OBJ_GFX_CAMPER, 0, 17, 90, 3, 8, 0, 0, 0, 0, Route110_EventScript_14F9D4, 0
+	object_event 2, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 29, 79, 4, 8, 0, 0, 0, 0, Route110_EventScript_14F9CB, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 14, 69, 3, 3, 0, 1, 0, 0, Route110_EventScript_14F9C2, 0
+	object_event 4, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 9, 57, 4, 2, 1, 1, 0, 0, Route110_EventScript_14F9B0, 0
+	object_event 5, EVENT_OBJ_GFX_OLD_MAN_1, 0, 10, 11, 3, 2, 1, 1, 0, 0, Route110_EventScript_14F9B9, 0
+	object_event 6, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 27, 24, 4, 2, 1, 3, 0, 0, Route110_EventScript_14F9A7, 0
+	object_event 7, EVENT_OBJ_GFX_BOY_3, 0, 15, 7, 3, 2, 1, 1, 0, 0, Route110_EventScript_14F99E, 0
+	object_event 8, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 16, 73, 4, 49, 2, 14, 1, 3, Route110_EventScript_14FB7D, 0
+	object_event 9, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 19, 31, 4, 51, 10, 1, 1, 3, Route110_EventScript_14FB28, 0
+	object_event 10, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F, 0, 30, 31, 4, 9, 1, 1, 1, 4, Route110_EventScript_14FB94, 0
+	object_event 11, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 16, 55, 4, 45, 4, 4, 1, 3, Route110_EventScript_14FB3F, 0
+	object_event 12, EVENT_OBJ_GFX_PSYCHIC_M, 0, 5, 39, 3, 23, 0, 0, 1, 3, Route110_EventScript_14FA8E, 0
+	object_event 13, EVENT_OBJ_GFX_LASS, 0, 33, 15, 3, 9, 0, 0, 1, 1, Route110_EventScript_14FAA5, 0
+	object_event 14, EVENT_OBJ_GFX_MANIAC, 0, 23, 40, 3, 20, 0, 0, 1, 3, Route110_EventScript_14FABC, 0
+	object_event 15, EVENT_OBJ_GFX_FISHERMAN, 0, 10, 19, 3, 8, 0, 0, 1, 1, Route110_EventScript_14FAFA, 0
+	object_event 16, EVENT_OBJ_GFX_BERRY_TREE, 0, 5, 11, 3, 12, 0, 0, 0, 16, S_BerryTree, 0
+	object_event 17, EVENT_OBJ_GFX_BERRY_TREE, 0, 6, 11, 3, 12, 0, 0, 0, 17, S_BerryTree, 0
+	object_event 18, EVENT_OBJ_GFX_BERRY_TREE, 0, 7, 11, 3, 12, 0, 0, 0, 18, S_BerryTree, 0
+	object_event 19, EVENT_OBJ_GFX_ITEM_BALL, 0, 30, 69, 3, 1, 0, 0, 0, 0, Route110_EventScript_1B14BB, FLAG_ITEM_ROUTE110_2
+	object_event 20, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 47, 3, 1, 0, 0, 0, 0, Route110_EventScript_1B14AE, FLAG_ITEM_ROUTE110_1
+	object_event 21, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 27, 92, 3, 8, 0, 0, 0, 0, Route110_EventScript_14FA53, 0
+	object_event 22, EVENT_OBJ_GFX_VAR_1, 0, 7, 83, 3, 7, 0, 0, 0, 0, Route110_EventScript_14F946, FLAG_HIDE_EVIL_TEAM_ROUTE110
+	object_event 23, EVENT_OBJ_GFX_VAR_1, 0, 8, 83, 3, 7, 0, 0, 0, 0, Route110_EventScript_14F95C, FLAG_HIDE_EVIL_TEAM_ROUTE110
+	object_event 24, EVENT_OBJ_GFX_VAR_1, 0, 9, 83, 3, 7, 0, 0, 0, 0, Route110_EventScript_14F972, FLAG_HIDE_EVIL_TEAM_ROUTE110
+	object_event 25, EVENT_OBJ_GFX_VAR_1, 0, 10, 83, 3, 7, 0, 0, 0, 0, Route110_EventScript_14F988, FLAG_HIDE_EVIL_TEAM_ROUTE110
+	object_event 26, EVENT_OBJ_GFX_VAR_1, 0, 8, 82, 0, 8, 0, 0, 0, 0, 0x0, FLAG_HIDE_EVIL_TEAM_ROUTE110
+	object_event 27, EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 21, 78, 4, 51, 7, 1, 1, 2, Route110_EventScript_14FB11, 0
+	object_event 28, EVENT_OBJ_GFX_VAR_0, 0, 34, 54, 3, 14, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ROUTE110
+	object_event 29, EVENT_OBJ_GFX_VAR_3, 0, 34, 54, 3, 8, 0, 0, 0, 0, 0x0, FLAG_HIDE_RIVAL_ON_BIKE_ROUTE110
+	object_event 30, EVENT_OBJ_GFX_YOUNGSTER, 0, 33, 69, 3, 14, 0, 0, 1, 3, Route110_EventScript_14FC10, 0
+	object_event 31, EVENT_OBJ_GFX_WOMAN_2, 0, 11, 73, 3, 9, 0, 0, 1, 4, Route110_EventScript_14FBD2, 0
 
 Route110_MapWarps:: @ 8382040
 	warp_def 35, 24, 3, 0, MAP_NEW_MAUVILLE_ENTRANCE

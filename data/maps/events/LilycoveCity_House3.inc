@@ -1,10 +1,10 @@
 LilycoveCity_House3_EventObjects:: @ 838A110
-	object_event 1, EVENT_OBJ_GFX_BOY_5, 0, 3, 4, 3, 8, 17, 0, 0, LilycoveCity_House3_EventScript_159CE5, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 7, 4, 3, 9, 0, 0, 0, LilycoveCity_House3_EventScript_159BF3, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_5, 0, 1, 4, 3, 8, 17, 0, 0, LilycoveCity_House3_EventScript_159C7D, 0
-	object_event 4, EVENT_OBJ_GFX_BOY_5, 0, 2, 5, 3, 7, 17, 0, 0, LilycoveCity_House3_EventScript_159CB1, 0
-	object_event 5, EVENT_OBJ_GFX_BOY_5, 0, 2, 3, 3, 8, 17, 0, 0, LilycoveCity_House3_EventScript_159C49, 0
-	object_event 6, EVENT_OBJ_GFX_MAN_1, 0, 7, 5, 3, 9, 17, 0, 0, LilycoveCity_House3_EventScript_159C32, 0
+	object_event 1, EVENT_OBJ_GFX_BOY_5, 0, 3, 4, 3, 8, 1, 1, 0, 0, LilycoveCity_House3_EventScript_159CE5, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 7, 4, 3, 9, 0, 0, 0, 0, LilycoveCity_House3_EventScript_159BF3, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_5, 0, 1, 4, 3, 8, 1, 1, 0, 0, LilycoveCity_House3_EventScript_159C7D, 0
+	object_event 4, EVENT_OBJ_GFX_BOY_5, 0, 2, 5, 3, 7, 1, 1, 0, 0, LilycoveCity_House3_EventScript_159CB1, 0
+	object_event 5, EVENT_OBJ_GFX_BOY_5, 0, 2, 3, 3, 8, 1, 1, 0, 0, LilycoveCity_House3_EventScript_159C49, 0
+	object_event 6, EVENT_OBJ_GFX_MAN_1, 0, 7, 5, 3, 9, 1, 1, 0, 0, LilycoveCity_House3_EventScript_159C32, 0
 
 LilycoveCity_House3_MapWarps:: @ 838A1A0
 	warp_def 3, 7, 0, 10, MAP_LILYCOVE_CITY

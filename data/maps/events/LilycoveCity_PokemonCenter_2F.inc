@@ -1,7 +1,7 @@
 LilycoveCity_PokemonCenter_2F_EventObjects:: @ 8389E08
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_159377, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_15937D, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_159383, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_159377, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_15937D, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, LilycoveCity_PokemonCenter_2F_EventScript_159383, 0
 
 LilycoveCity_PokemonCenter_2F_MapWarps:: @ 8389E50
 	warp_def 1, 5, 4, 2, MAP_LILYCOVE_CITY_POKEMON_CENTER_1F

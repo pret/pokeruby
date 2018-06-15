@@ -1,13 +1,13 @@
 MauvilleCity_EventObjects:: @ 837FB90
-	object_event 1, EVENT_OBJ_GFX_BOY_3, 0, 29, 16, 3, 5, 17, 0, 0, MauvilleCity_EventScript_14C05A, 0
-	object_event 2, EVENT_OBJ_GFX_BOY_4, 0, 24, 10, 3, 5, 1, 0, 0, MauvilleCity_EventScript_14C075, 0
-	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 14, 11, 3, 10, 0, 0, 0, MauvilleCity_EventScript_14C063, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 18, 6, 3, 1, 0, 0, 0, MauvilleCity_EventScript_14C06C, 0
-	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 17, 14, 3, 8, 0, 0, 0, MauvilleCity_EventScript_14C0A2, 0
-	object_event 6, EVENT_OBJ_GFX_WALLY, 0, 8, 6, 3, 7, 0, 0, 0, MauvilleCity_EventScript_14C0F9, FLAG_HIDE_WALLY_MAUVILLE
-	object_event 7, EVENT_OBJ_GFX_MAN_3, 0, 9, 6, 3, 9, 0, 0, 0, MauvilleCity_EventScript_14C0C4, FLAG_HIDE_WALLY_FATHER_MAUVILLE
-	object_event 8, EVENT_OBJ_GFX_WATTSON, 0, 29, 9, 3, 1, 0, 0, 0, MauvilleCity_EventScript_14C2F2, FLAG_HIDE_WATTSON_MAUVILLE
-	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 28, 19, 3, 1, 17, 0, 0, MauvilleCity_EventScript_1B171E, FLAG_ITEM_MAUVILLE_1
+	object_event 1, EVENT_OBJ_GFX_BOY_3, 0, 29, 16, 3, 5, 1, 1, 0, 0, MauvilleCity_EventScript_14C05A, 0
+	object_event 2, EVENT_OBJ_GFX_BOY_4, 0, 24, 10, 3, 5, 1, 0, 0, 0, MauvilleCity_EventScript_14C075, 0
+	object_event 3, EVENT_OBJ_GFX_MANIAC, 0, 14, 11, 3, 10, 0, 0, 0, 0, MauvilleCity_EventScript_14C063, 0
+	object_event 4, EVENT_OBJ_GFX_WOMAN_5, 0, 18, 6, 3, 1, 0, 0, 0, 0, MauvilleCity_EventScript_14C06C, 0
+	object_event 5, EVENT_OBJ_GFX_SCHOOL_KID_M, 0, 17, 14, 3, 8, 0, 0, 0, 0, MauvilleCity_EventScript_14C0A2, 0
+	object_event 6, EVENT_OBJ_GFX_WALLY, 0, 8, 6, 3, 7, 0, 0, 0, 0, MauvilleCity_EventScript_14C0F9, FLAG_HIDE_WALLY_MAUVILLE
+	object_event 7, EVENT_OBJ_GFX_MAN_3, 0, 9, 6, 3, 9, 0, 0, 0, 0, MauvilleCity_EventScript_14C0C4, FLAG_HIDE_WALLY_FATHER_MAUVILLE
+	object_event 8, EVENT_OBJ_GFX_WATTSON, 0, 29, 9, 3, 1, 0, 0, 0, 0, MauvilleCity_EventScript_14C2F2, FLAG_HIDE_WATTSON_MAUVILLE
+	object_event 9, EVENT_OBJ_GFX_ITEM_BALL, 0, 28, 19, 3, 1, 1, 1, 0, 0, MauvilleCity_EventScript_1B171E, FLAG_ITEM_MAUVILLE_1
 
 MauvilleCity_MapWarps:: @ 837FC68
 	warp_def 8, 5, 0, 0, MAP_MAUVILLE_CITY_GYM

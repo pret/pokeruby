@@ -1,8 +1,8 @@
 JaggedPass_EventObjects:: @ 838C61C
-	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 8, 18, 3, 8, 0, 1, 3, JaggedPass_EventScript_15D285, 0
-	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 16, 22, 3, 14, 0, 1, 2, JaggedPass_EventScript_15D2DA, 0
-	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 24, 3, 1, 0, 0, 0, JaggedPass_EventScript_1B17D4, FLAG_ITEM_JAGGED_PASS_1
-	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 13, 35, 3, 15, 17, 1, 3, JaggedPass_EventScript_15D29C, 0
+	object_event 1, EVENT_OBJ_GFX_HIKER, 0, 8, 18, 3, 8, 0, 0, 1, 3, JaggedPass_EventScript_15D285, 0
+	object_event 2, EVENT_OBJ_GFX_CAMPER, 0, 16, 22, 3, 14, 0, 0, 1, 2, JaggedPass_EventScript_15D2DA, 0
+	object_event 3, EVENT_OBJ_GFX_ITEM_BALL, 0, 23, 24, 3, 1, 0, 0, 0, 0, JaggedPass_EventScript_1B17D4, FLAG_ITEM_JAGGED_PASS_1
+	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 13, 35, 3, 15, 1, 1, 1, 3, JaggedPass_EventScript_15D29C, 0
 
 JaggedPass_MapWarps:: @ 838C67C
 	warp_def 14, 40, 3, 2, MAP_ROUTE112
