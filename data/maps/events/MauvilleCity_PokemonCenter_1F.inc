@@ -1,9 +1,9 @@
 MauvilleCity_PokemonCenter_1F_EventObjects:: @ 8388660
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157369, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 2, 0, 3, 0, 3, 9, 1, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_1AE744, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WOMAN_1, 0, 8, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157377, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 11, 0, 4, 0, 3, 3, 16, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157380, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_YOUNGSTER, 0, 2, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157389, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157369, 0
+	object_event 2, EVENT_OBJ_GFX_VAR_0, 0, 2, 3, 3, 9, 1, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_1AE744, 0
+	object_event 3, EVENT_OBJ_GFX_WOMAN_1, 0, 8, 6, 3, 1, 0, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157377, 0
+	object_event 4, EVENT_OBJ_GFX_WOMAN_7, 0, 11, 4, 3, 3, 16, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157380, 0
+	object_event 5, EVENT_OBJ_GFX_YOUNGSTER, 0, 2, 8, 3, 1, 17, 0, 0, MauvilleCity_PokemonCenter_1F_EventScript_157389, 0
 
 MauvilleCity_PokemonCenter_1F_MapWarps:: @ 83886D8
 	warp_def 7, 8, 3, 1, MAP_MAUVILLE_CITY

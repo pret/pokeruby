@@ -1,24 +1,24 @@
 Route109_EventObjects:: @ 8381AFC
-	object_event 1, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 21, 0, 26, 0, 1, 7, 0, 0, 0, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109, 0, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 21, 0, 24, 0, 3, 7, 0, 0, 0, 0, 0, 0, Route109_EventScript_14F680, FLAG_HIDE_MR_BRINEY_ROUTE109, 0, 0
-	object_event 3, EVENT_OBJ_GFX_SWIMMER_M, 0, 12, 0, 36, 0, 3, 10, 0, 0, 1, 0, 5, 0, Route109_EventScript_14F7AD, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 25, 0, 42, 0, 3, 15, 0, 0, 1, 0, 5, 0, Route109_EventScript_14F7C4, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_SAILOR, 0, 19, 0, 19, 0, 3, 10, 0, 0, 1, 0, 4, 0, Route109_EventScript_14F7DB, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_SAILOR, 0, 14, 0, 11, 0, 4, 8, 0, 0, 1, 0, 1, 0, Route109_EventScript_14F7F2, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_TUBER_M, 0, 21, 0, 11, 0, 3, 23, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F809, 0, 0, 0
-	object_event 8, EVENT_OBJ_GFX_TUBER_F, 0, 28, 0, 8, 0, 3, 10, 0, 0, 1, 0, 4, 0, Route109_EventScript_14F847, 0, 0, 0
-	object_event 9, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 11, 0, 6, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route109_EventScript_14F705, 0, 0, 0
-	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 0, 48, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route109_EventScript_1B14A1, FLAG_ITEM_ROUTE109_1, 0, 0
-	object_event 11, EVENT_OBJ_GFX_TUBER_F, 0, 29, 0, 32, 0, 3, 13, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F89C, 0, 0, 0
-	object_event 12, EVENT_OBJ_GFX_TUBER_F, 0, 28, 0, 31, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route109_EventScript_14F885, 0, 0, 0
-	object_event 13, EVENT_OBJ_GFX_FISHERMAN, 0, 15, 0, 52, 0, 3, 10, 0, 0, 1, 0, 0, 0, Route109_EventScript_14F8B3, 0, 0, 0
-	object_event 14, EVENT_OBJ_GFX_TUBER_M, 0, 24, 0, 17, 0, 3, 10, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F70E, 0, 0, 0
-	object_event 15, EVENT_OBJ_GFX_TUBER_F, 0, 25, 0, 17, 0, 3, 9, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F725, 0, 0, 0
-	object_event 16, EVENT_OBJ_GFX_WOMAN_2, 0, 30, 0, 32, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F776, 0, 0, 0
-	object_event 17, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 0, 41, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route109_EventScript_14F8E5, 0, 0, 0
-	object_event 18, EVENT_OBJ_GFX_MAN_5, 0, 9, 0, 41, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route109_EventScript_14F8CA, 0, 0, 0
-	object_event 19, EVENT_OBJ_GFX_OLD_MAN_2, 0, 33, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F77F, 0, 0, 0
-	object_event 20, EVENT_OBJ_GFX_ZIGZAGOON, 0, 32, 0, 6, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route109_EventScript_14F788, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MR_BRINEYS_BOAT, 0, 21, 26, 1, 7, 0, 0, 0, 0x0, FLAG_HIDE_MR_BRINEY_BOAT_ROUTE109
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 21, 24, 3, 7, 0, 0, 0, Route109_EventScript_14F680, FLAG_HIDE_MR_BRINEY_ROUTE109
+	object_event 3, EVENT_OBJ_GFX_SWIMMER_M, 0, 12, 36, 3, 10, 0, 1, 5, Route109_EventScript_14F7AD, 0
+	object_event 4, EVENT_OBJ_GFX_SWIMMER_F, 0, 25, 42, 3, 15, 0, 1, 5, Route109_EventScript_14F7C4, 0
+	object_event 5, EVENT_OBJ_GFX_SAILOR, 0, 19, 19, 3, 10, 0, 1, 4, Route109_EventScript_14F7DB, 0
+	object_event 6, EVENT_OBJ_GFX_SAILOR, 0, 14, 11, 4, 8, 0, 1, 1, Route109_EventScript_14F7F2, 0
+	object_event 7, EVENT_OBJ_GFX_TUBER_M, 0, 21, 11, 3, 23, 0, 1, 3, Route109_EventScript_14F809, 0
+	object_event 8, EVENT_OBJ_GFX_TUBER_F, 0, 28, 8, 3, 10, 0, 1, 4, Route109_EventScript_14F847, 0
+	object_event 9, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 11, 6, 3, 8, 0, 0, 0, Route109_EventScript_14F705, 0
+	object_event 10, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 48, 3, 1, 0, 0, 0, Route109_EventScript_1B14A1, FLAG_ITEM_ROUTE109_1
+	object_event 11, EVENT_OBJ_GFX_TUBER_F, 0, 29, 32, 3, 13, 0, 1, 3, Route109_EventScript_14F89C, 0
+	object_event 12, EVENT_OBJ_GFX_TUBER_F, 0, 28, 31, 3, 17, 0, 1, 3, Route109_EventScript_14F885, 0
+	object_event 13, EVENT_OBJ_GFX_FISHERMAN, 0, 15, 52, 3, 10, 0, 1, 0, Route109_EventScript_14F8B3, 0
+	object_event 14, EVENT_OBJ_GFX_TUBER_M, 0, 24, 17, 3, 10, 17, 0, 0, Route109_EventScript_14F70E, 0
+	object_event 15, EVENT_OBJ_GFX_TUBER_F, 0, 25, 17, 3, 9, 17, 0, 0, Route109_EventScript_14F725, 0
+	object_event 16, EVENT_OBJ_GFX_WOMAN_2, 0, 30, 32, 3, 8, 17, 0, 0, Route109_EventScript_14F776, 0
+	object_event 17, EVENT_OBJ_GFX_WOMAN_5, 0, 8, 41, 3, 8, 17, 1, 0, Route109_EventScript_14F8E5, 0
+	object_event 18, EVENT_OBJ_GFX_MAN_5, 0, 9, 41, 3, 8, 17, 1, 0, Route109_EventScript_14F8CA, 0
+	object_event 19, EVENT_OBJ_GFX_OLD_MAN_2, 0, 33, 6, 3, 1, 17, 0, 0, Route109_EventScript_14F77F, 0
+	object_event 20, EVENT_OBJ_GFX_ZIGZAGOON, 0, 32, 6, 3, 1, 17, 0, 0, Route109_EventScript_14F788, 0
 
 Route109_MapWarps:: @ 8381CDC
 	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE

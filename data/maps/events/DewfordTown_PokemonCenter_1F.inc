@@ -1,7 +1,7 @@
 DewfordTown_PokemonCenter_1F_EventObjects:: @ 8385EC4
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_153023, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 10, 0, 6, 0, 3, 10, 0, 0, 0, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_153031, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 5, 0, 5, 0, 0, 5, 18, 0, 0, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_15303A, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_153023, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_2, 0, 10, 6, 3, 10, 0, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_153031, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 5, 5, 0, 5, 18, 0, 0, DewfordTown_PokemonCenter_1F_EventScript_15303A, 0
 
 DewfordTown_PokemonCenter_1F_MapWarps:: @ 8385F0C
 	warp_def 7, 8, 3, 1, MAP_DEWFORD_TOWN

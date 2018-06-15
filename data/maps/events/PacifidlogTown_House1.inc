@@ -1,6 +1,6 @@
 PacifidlogTown_House1_EventObjects:: @ 8386F40
-	object_event 1, EVENT_OBJ_GFX_MAN_6, 0, 3, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, PacifidlogTown_House1_EventScript_154155, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 0, 4, 0, 3, 9, 0, 0, 0, 0, 0, 0, PacifidlogTown_House1_EventScript_15415E, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_6, 0, 3, 5, 3, 8, 0, 0, 0, PacifidlogTown_House1_EventScript_154155, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 6, 4, 3, 9, 0, 0, 0, PacifidlogTown_House1_EventScript_15415E, 0
 
 PacifidlogTown_House1_MapWarps:: @ 8386F70
 	warp_def 4, 8, 0, 1, MAP_PACIFIDLOG_TOWN

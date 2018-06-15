@@ -1,7 +1,7 @@
 EverGrandeCity_PokemonCenter_1F_EventObjects:: @ 838B55C
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC70, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 5, 0, 5, 0, 3, 8, 0, 0, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC7E, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 10, 0, 7, 0, 3, 10, 0, 0, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC87, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 7, 2, 3, 8, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC70, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 5, 5, 3, 8, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC7E, 0
+	object_event 3, EVENT_OBJ_GFX_OLD_MAN_1, 0, 10, 7, 3, 10, 0, 0, 0, EverGrandeCity_PokemonCenter_1F_EventScript_15BC87, 0
 
 EverGrandeCity_PokemonCenter_1F_MapWarps:: @ 838B5A4
 	warp_def 7, 8, 3, 1, MAP_EVER_GRANDE_CITY

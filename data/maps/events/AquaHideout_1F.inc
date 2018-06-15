@@ -1,7 +1,7 @@
 AquaHideout_1F_EventObjects:: @ 838CD0C
-	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 13, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7CE, FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT, 0, 0
-	object_event 2, EVENT_OBJ_GFX_VAR_1, 0, 14, 0, 11, 0, 3, 8, 0, 0, 0, 0, 0, 0, AquaHideout_1F_EventScript_15D7ED, FLAG_HIDE_GRUNT_2_BLOCKING_HIDEOUT, 0, 0
-	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 20, 0, 4, 0, 3, 50, 93, 0, 1, 0, 3, 0, AquaHideout_1F_EventScript_15D80C, FLAG_HIDE_GRUNTS_HIDEOUTS, 0, 0
+	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 13, 11, 3, 8, 0, 0, 0, AquaHideout_1F_EventScript_15D7CE, FLAG_HIDE_GRUNT_1_BLOCKING_HIDEOUT
+	object_event 2, EVENT_OBJ_GFX_VAR_1, 0, 14, 11, 3, 8, 0, 0, 0, AquaHideout_1F_EventScript_15D7ED, FLAG_HIDE_GRUNT_2_BLOCKING_HIDEOUT
+	object_event 3, EVENT_OBJ_GFX_VAR_1, 0, 20, 4, 3, 50, 93, 1, 3, AquaHideout_1F_EventScript_15D80C, FLAG_HIDE_GRUNTS_HIDEOUTS
 
 AquaHideout_1F_MapWarps:: @ 838CD54
 	warp_def 13, 27, 1, 6, MAP_LILYCOVE_CITY

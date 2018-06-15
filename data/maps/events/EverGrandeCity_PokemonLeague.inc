@@ -1,8 +1,8 @@
 EverGrandeCity_PokemonLeague_EventObjects:: @ 838B494
-	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 3, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BA9A, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 16, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAA8, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 8, 0, 2, 0, 3, 8, 17, 0, 0, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAD2, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 11, 0, 2, 0, 3, 8, 17, 0, 0, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAD2, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_NURSE, 0, 3, 2, 3, 8, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BA9A, 0
+	object_event 2, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 16, 2, 3, 8, 0, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAA8, 0
+	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 8, 2, 3, 8, 17, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAD2, 0
+	object_event 4, EVENT_OBJ_GFX_MAN_4, 0, 11, 2, 3, 8, 17, 0, 0, EverGrandeCity_PokemonLeague_EventScript_15BAD2, 0
 
 EverGrandeCity_PokemonLeague_MapWarps:: @ 838B4F4
 	warp_def 9, 11, 3, 0, MAP_EVER_GRANDE_CITY

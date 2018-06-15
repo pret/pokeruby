@@ -1,11 +1,11 @@
 Route119_House_EventObjects:: @ 8392F40
-	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route119_House_EventScript_163DDE, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_WINGULL, 0, 1, 0, 6, 0, 3, 2, 34, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
-	object_event 3, EVENT_OBJ_GFX_WINGULL, 0, 0, 0, 4, 0, 3, 2, 19, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
-	object_event 4, EVENT_OBJ_GFX_WINGULL, 0, 2, 0, 2, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
-	object_event 5, EVENT_OBJ_GFX_WINGULL, 0, 8, 0, 5, 0, 3, 2, 35, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
-	object_event 6, EVENT_OBJ_GFX_WINGULL, 0, 6, 0, 6, 0, 3, 2, 34, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
-	object_event 7, EVENT_OBJ_GFX_WINGULL, 0, 5, 0, 3, 0, 3, 2, 49, 0, 0, 0, 0, 0, Route119_House_EventScript_163DE7, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_5, 0, 7, 2, 3, 8, 0, 0, 0, Route119_House_EventScript_163DDE, 0
+	object_event 2, EVENT_OBJ_GFX_WINGULL, 0, 1, 6, 3, 2, 34, 0, 0, Route119_House_EventScript_163DE7, 0
+	object_event 3, EVENT_OBJ_GFX_WINGULL, 0, 0, 4, 3, 2, 19, 0, 0, Route119_House_EventScript_163DE7, 0
+	object_event 4, EVENT_OBJ_GFX_WINGULL, 0, 2, 2, 3, 2, 17, 0, 0, Route119_House_EventScript_163DE7, 0
+	object_event 5, EVENT_OBJ_GFX_WINGULL, 0, 8, 5, 3, 2, 35, 0, 0, Route119_House_EventScript_163DE7, 0
+	object_event 6, EVENT_OBJ_GFX_WINGULL, 0, 6, 6, 3, 2, 34, 0, 0, Route119_House_EventScript_163DE7, 0
+	object_event 7, EVENT_OBJ_GFX_WINGULL, 0, 5, 3, 3, 2, 49, 0, 0, Route119_House_EventScript_163DE7, 0
 
 Route119_House_MapWarps:: @ 8392FE8
 	warp_def 3, 8, 0, 1, MAP_ROUTE119

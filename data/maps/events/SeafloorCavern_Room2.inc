@@ -1,13 +1,13 @@
 SeafloorCavern_Room2_EventObjects:: @ 838D15C
-	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11, 0, 0
-	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_12, 0, 0
-	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_13, 0, 0
-	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_14, 0, 0
-	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 0, 10, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_15, 0, 0
-	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 0, 14, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_16, 0, 0
-	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 11, 0, 9, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_18, 0, 0
-	object_event 8, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 7, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_19, 0, 0
-	object_event 9, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 15, 0, 11, 0, 3, 1, 0, 0, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_17, 0, 0
+	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 14, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11
+	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 10, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_12
+	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 6, 6, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_13
+	object_event 4, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 6, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_14
+	object_event 5, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 10, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_15
+	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 14, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_16
+	object_event 7, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 11, 9, 3, 1, 0, 0, 0, S_BreakableRock, FLAG_TEMP_18
+	object_event 8, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 7, 6, 3, 1, 0, 0, 0, S_BreakableRock, FLAG_TEMP_19
+	object_event 9, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 15, 11, 3, 1, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_17
 
 SeafloorCavern_Room2_MapWarps:: @ 838D234
 	warp_def 12, 19, 3, 2, MAP_SEAFLOOR_CAVERN_ROOM1

@@ -1,5 +1,5 @@
 MauvilleCity_House2_EventObjects:: @ 8388624
-	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 4, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, MauvilleCity_House2_EventScript_1572C0, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_4, 0, 4, 5, 3, 9, 0, 0, 0, MauvilleCity_House2_EventScript_1572C0, 0
 
 MauvilleCity_House2_MapWarps:: @ 838863C
 	warp_def 3, 8, 0, 6, MAP_MAUVILLE_CITY

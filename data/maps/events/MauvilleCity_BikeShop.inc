@@ -1,6 +1,6 @@
 MauvilleCity_BikeShop_EventObjects:: @ 8388318
-	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 2, 0, 5, 0, 3, 9, 0, 0, 0, 0, 0, 0, MauvilleCity_BikeShop_EventScript_156796, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 7, 0, 6, 0, 3, 2, 17, 0, 0, 0, 0, 0, MauvilleCity_BikeShop_EventScript_15690B, 0, 0, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 2, 5, 3, 9, 0, 0, 0, MauvilleCity_BikeShop_EventScript_156796, 0
+	object_event 2, EVENT_OBJ_GFX_MAN_6, 0, 7, 6, 3, 2, 17, 0, 0, MauvilleCity_BikeShop_EventScript_15690B, 0
 
 MauvilleCity_BikeShop_MapWarps:: @ 8388348
 	warp_def 3, 8, 0, 2, MAP_MAUVILLE_CITY

@@ -1,6 +1,6 @@
 SafariZone_Southwest_EventObjects:: @ 8391B18
-	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 22, 0, 9, 0, 3, 8, 0, 0, 0, 0, 0, 0, SafariZone_Southwest_EventScript_160024, 0, 0, 0
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 0, 37, 0, 3, 1, 17, 0, 0, 0, 0, 0, SafariZone_Southwest_EventScript_1B1926, FLAG_ITEM_SAFARI_ZONE_SOUTHWEST, 0, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_3, 0, 22, 9, 3, 8, 0, 0, 0, SafariZone_Southwest_EventScript_160024, 0
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 0, 37, 3, 1, 17, 0, 0, SafariZone_Southwest_EventScript_1B1926, FLAG_ITEM_SAFARI_ZONE_SOUTHWEST
 
 SafariZone_Southwest_MapWarps:: @ 8391B48
 	warp_def 29, 7, 3, 0, MAP_SAFARI_ZONE_REST_HOUSE
