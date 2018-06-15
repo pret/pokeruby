@@ -1834,7 +1834,7 @@ bool8 sub_8087548(struct Task *task, struct EventObject *eventObject, struct Spr
         eventObject->invisible = 0;
         CameraObjectReset1();
         PlaySE(SE_W091);
-        EventObjectSetHeldMovement(eventObject, sub_80608A4(DIR_EAST));
+        EventObjectSetHeldMovement(eventObject, GetJumpMovementAction(DIR_EAST));
     }
     return FALSE;
 }

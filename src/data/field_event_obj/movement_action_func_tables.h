@@ -156,10 +156,10 @@ u8 MovementAction_SetFixedPriority_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_ClearFixedPriority_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_InitAffineAnim_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_ClearAffineAnim_Step0(struct EventObject *, struct Sprite *);
-u8 MovementAction_WalkDownAffine0_Step0(struct EventObject *, struct Sprite *);
-u8 MovementAction_WalkDownAffine0_Step1(struct EventObject *, struct Sprite *);
-u8 MovementAction_WalkDownAffine1_Step0(struct EventObject *, struct Sprite *);
-u8 MovementAction_WalkDownAffine1_Step1(struct EventObject *, struct Sprite *);
+u8 MovementAction_WalkDownStartAffine_Step0(struct EventObject *, struct Sprite *);
+u8 MovementAction_WalkDownStartAffine_Step1(struct EventObject *, struct Sprite *);
+u8 MovementAction_WalkDownAffine_Step0(struct EventObject *, struct Sprite *);
+u8 MovementAction_WalkDownAffine_Step1(struct EventObject *, struct Sprite *);
 u8 MovementAction_AcroWheelieFaceDown_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_AcroWheelieFaceUp_Step0(struct EventObject *, struct Sprite *);
 u8 MovementAction_AcroWheelieFaceLeft_Step0(struct EventObject *, struct Sprite *);
@@ -329,8 +329,8 @@ u8 (*const gMovementActionFuncs_SetFixedPriority[])(struct EventObject *, struct
 u8 (*const gMovementActionFuncs_ClearFixedPriority[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_InitAffineAnim[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_ClearAffineAnim[])(struct EventObject *, struct Sprite *);
-u8 (*const gMovementActionFuncs_WalkDownAffine0[])(struct EventObject *, struct Sprite *);
-u8 (*const gMovementActionFuncs_WalkDownAffine1[])(struct EventObject *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkDownStartAffine[])(struct EventObject *, struct Sprite *);
+u8 (*const gMovementActionFuncs_WalkDownAffine[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroWheelieFaceDown[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroWheelieFaceUp[])(struct EventObject *, struct Sprite *);
 u8 (*const gMovementActionFuncs_AcroWheelieFaceLeft[])(struct EventObject *, struct Sprite *);
@@ -422,10 +422,10 @@ u8 (*const *const gMovementActionFuncs[])(struct EventObject *, struct Sprite *)
     gMovementActionFuncs_WalkFastestUp,           // MOVEMENT_ACTION_WALK_FASTEST_UP
     gMovementActionFuncs_WalkFastestLeft,         // MOVEMENT_ACTION_WALK_FASTEST_LEFT
     gMovementActionFuncs_WalkFastestRight,        // MOVEMENT_ACTION_WALK_FASTEST_RIGHT
-    gMovementActionFuncs_SlideDown,               // MOVEMENT_ACITON_SLIDE_DOWN
-    gMovementActionFuncs_SlideUp,                 // MOVEMENT_ACITON_SLIDE_UP
-    gMovementActionFuncs_SlideLeft,               // MOVEMENT_ACITON_SLIDE_LEFT
-    gMovementActionFuncs_SlideRight,              // MOVEMENT_ACITON_SLIDE_RIGHT
+    gMovementActionFuncs_SlideDown,               // MOVEMENT_ACTION_SLIDE_DOWN
+    gMovementActionFuncs_SlideUp,                 // MOVEMENT_ACTION_SLIDE_UP
+    gMovementActionFuncs_SlideLeft,               // MOVEMENT_ACTION_SLIDE_LEFT
+    gMovementActionFuncs_SlideRight,              // MOVEMENT_ACTION_SLIDE_RIGHT
     gMovementActionFuncs_PlayerRunDown,           // MOVEMENT_ACTION_PLAYER_RUN_DOWN
     gMovementActionFuncs_PlayerRunUp,             // MOVEMENT_ACTION_PLAYER_RUN_UP
     gMovementActionFuncs_PlayerRunLeft,           // MOVEMENT_ACTION_PLAYER_RUN_LEFT
@@ -439,10 +439,10 @@ u8 (*const *const gMovementActionFuncs[])(struct EventObject *, struct Sprite *)
     gMovementActionFuncs_FaceAwayPlayer,          // MOVEMENT_ACTION_FACE_AWAY_PLAYER
     gMovementActionFuncs_LockFacingDirection,     // MOVEMENT_ACTION_LOCK_FACING_DIRECTION
     gMovementActionFuncs_UnlockFacingDirection,   // MOVEMENT_ACTION_UNLOCK_FACING_DIRECTION
-    gMovementActionFuncs_JumpDown,                // MOVEMENT_ACITON_JUMP_DOWN
-    gMovementActionFuncs_JumpUp,                  // MOVEMENT_ACITON_JUMP_UP
-    gMovementActionFuncs_JumpLeft,                // MOVEMENT_ACITON_JUMP_LEFT
-    gMovementActionFuncs_JumpRight,               // MOVEMENT_ACITON_JUMP_RIGHT
+    gMovementActionFuncs_JumpDown,                // MOVEMENT_ACTION_JUMP_DOWN
+    gMovementActionFuncs_JumpUp,                  // MOVEMENT_ACTION_JUMP_UP
+    gMovementActionFuncs_JumpLeft,                // MOVEMENT_ACTION_JUMP_LEFT
+    gMovementActionFuncs_JumpRight,               // MOVEMENT_ACTION_JUMP_RIGHT
     gMovementActionFuncs_JumpInPlaceDown,         // MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN
     gMovementActionFuncs_JumpInPlaceUp,           // MOVEMENT_ACTION_JUMP_IN_PLACE_UP
     gMovementActionFuncs_JumpInPlaceLeft,         // MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT
@@ -469,8 +469,8 @@ u8 (*const *const gMovementActionFuncs[])(struct EventObject *, struct Sprite *)
     gMovementActionFuncs_ClearFixedPriority,      // MOVEMENT_ACTION_CLEAR_FIXED_PRIORITY
     gMovementActionFuncs_InitAffineAnim,          // MOVEMENT_ACTION_INIT_AFFINE_ANIM
     gMovementActionFuncs_ClearAffineAnim,         // MOVEMENT_ACTION_CLEAR_AFFINE_ANIM
-    gMovementActionFuncs_WalkDownAffine0,         // MOVEMENT_ACTION_WALK_DOWN_AFFINE_0
-    gMovementActionFuncs_WalkDownAffine1,         // MOVEMENT_ACTION_WALK_DOWN_AFFINE_1
+    gMovementActionFuncs_WalkDownStartAffine,         // MOVEMENT_ACTION_WALK_DOWN_START_AFFINE
+    gMovementActionFuncs_WalkDownAffine,         // MOVEMENT_ACTION_WALK_DOWN_AFFINE_1
     gMovementActionFuncs_AcroWheelieFaceDown,     // MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN
     gMovementActionFuncs_AcroWheelieFaceUp,       // MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP
     gMovementActionFuncs_AcroWheelieFaceLeft,     // MOVEMENT_ACTION_ACRO_WHEELIE_FACE_LEFT
@@ -1081,15 +1081,15 @@ u8 (*const gMovementActionFuncs_ClearAffineAnim[])(struct EventObject *, struct 
     MovementAction_Finish
 };
 
-u8 (*const gMovementActionFuncs_WalkDownAffine0[])(struct EventObject *, struct Sprite *) = {
-    MovementAction_WalkDownAffine0_Step0,
-    MovementAction_WalkDownAffine0_Step1,
+u8 (*const gMovementActionFuncs_WalkDownStartAffine[])(struct EventObject *, struct Sprite *) = {
+    MovementAction_WalkDownStartAffine_Step0,
+    MovementAction_WalkDownStartAffine_Step1,
     MovementAction_PauseSpriteAnim
 };
 
-u8 (*const gMovementActionFuncs_WalkDownAffine1[])(struct EventObject *, struct Sprite *) = {
-    MovementAction_WalkDownAffine1_Step0,
-    MovementAction_WalkDownAffine1_Step1,
+u8 (*const gMovementActionFuncs_WalkDownAffine[])(struct EventObject *, struct Sprite *) = {
+    MovementAction_WalkDownAffine_Step0,
+    MovementAction_WalkDownAffine_Step1,
     MovementAction_PauseSpriteAnim
 };
 
