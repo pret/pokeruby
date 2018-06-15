@@ -14,8 +14,8 @@
 	.4byte \address
 	.endm
 
-	.macro object_event byte1, word1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, script, word2, byte15, byte16
-	.byte \byte1
+	.macro object_event index, word1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, script, word2, byte15, byte16
+	.byte \index
 	.2byte \word1
 	.byte \byte2, \byte3, \byte4, \byte5, \byte6, \byte7, \byte8, \byte9, \byte10, \byte11, \byte12, \byte13, \byte14
 	.4byte \script

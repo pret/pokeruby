@@ -146,14 +146,14 @@ enum {
     MOVEMENT_ACTION_JUMP_SPECIAL_UP,
     MOVEMENT_ACTION_JUMP_SPECIAL_LEFT ,
     MOVEMENT_ACTION_JUMP_SPECIAL_RIGHT,
-    MOVEMENT_ACITON_FACE_PLAYER,
-    MOVEMENT_ACITON_FACE_AWAY_PLAYER,
+    MOVEMENT_ACTION_FACE_PLAYER,
+    MOVEMENT_ACTION_FACE_AWAY_PLAYER,
     MOVEMENT_ACTION_LOCK_FACING_DIRECTION,
     MOVEMENT_ACTION_UNLOCK_FACING_DIRECTION,
-    MOVEMENT_ACITON_JUMP_DOWN,
-    MOVEMENT_ACITON_JUMP_UP,
-    MOVEMENT_ACITON_JUMP_LEFT,
-    MOVEMENT_ACITON_JUMP_RIGHT,
+    MOVEMENT_ACTION_JUMP_DOWN,
+    MOVEMENT_ACTION_JUMP_UP,
+    MOVEMENT_ACTION_JUMP_LEFT,
+    MOVEMENT_ACTION_JUMP_RIGHT,
     MOVEMENT_ACTION_JUMP_IN_PLACE_DOWN,
     MOVEMENT_ACTION_JUMP_IN_PLACE_UP,
     MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT,
@@ -180,7 +180,7 @@ enum {
     MOVEMENT_ACTION_CLEAR_FIXED_PRIORITY,
     MOVEMENT_ACTION_INIT_AFFINE_ANIM,
     MOVEMENT_ACTION_CLEAR_AFFINE_ANIM,
-    MOVEMENT_ACTION_WALK_DOWN_AFFINE_0,
+    MOVEMENT_ACTION_WALK_DOWN_START_AFFINE,
     MOVEMENT_ACTION_WALK_DOWN_AFFINE_1,
     MOVEMENT_ACTION_ACRO_WHEELIE_FACE_DOWN,
     MOVEMENT_ACTION_ACRO_WHEELIE_FACE_UP,
@@ -546,11 +546,11 @@ u8 MovementType_CopyPlayerInGrass_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_CopyPlayer_Step2(struct EventObject *, struct Sprite *);
 u8 MovementType_Hidden_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_WalkInPlace_Step0(struct EventObject *, struct Sprite *);
-u8 MovementType_WalkInPlace_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_MoveInPlace_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_JogInPlace_Step0(struct EventObject *, struct Sprite *);
-u8 MovementType_WalkInPlace_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_MoveInPlace_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_RunInPlace_Step0(struct EventObject *, struct Sprite *);
-u8 MovementType_WalkInPlace_Step1(struct EventObject *, struct Sprite *);
+u8 MovementType_MoveInPlace_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step0(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step1(struct EventObject *, struct Sprite *);
 u8 MovementType_Invisible_Step2(struct EventObject *, struct Sprite *);
@@ -650,7 +650,7 @@ u8 GetPlayerRunMovementAction(u32);
 u8 GetJump2MovementAction(u32);
 u8 GetJumpInPlaceMovementAction(u32);
 u8 GetJumpInPlaceTurnAroundMovementAction(u32);
-u8 sub_80608A4(u32);
+u8 GetJumpMovementAction(u32);
 u8 GetJumpSpecialMovementAction(u32);
 u8 GetWalkInPlaceSlowMovementAction(u32);
 u8 GetWalkInPlaceNormalMovementAction(u32);

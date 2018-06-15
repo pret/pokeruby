@@ -416,17 +416,17 @@ u8 (*const gMovementTypeFuncs_Hidden[])(struct EventObject *, struct Sprite *) =
 
 u8 (*const gMovementTypeFuncs_WalkInPlace[])(struct EventObject *, struct Sprite *) = {
     MovementType_WalkInPlace_Step0,
-    MovementType_WalkInPlace_Step1
+    MovementType_MoveInPlace_Step1
 };
 
 u8 (*const gMovementTypeFuncs_JogInPlace[])(struct EventObject *, struct Sprite *) = {
     MovementType_JogInPlace_Step0,
-    MovementType_WalkInPlace_Step1
+    MovementType_MoveInPlace_Step1
 };
 
 u8 (*const gMovementTypeFuncs_RunInPlace[])(struct EventObject *, struct Sprite *) = {
     MovementType_RunInPlace_Step0,
-    MovementType_WalkInPlace_Step1
+    MovementType_MoveInPlace_Step1
 };
 
 u8 (*const gMovementTypeFuncs_Invisible[])(struct EventObject *, struct Sprite *) = {

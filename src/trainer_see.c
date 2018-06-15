@@ -299,7 +299,7 @@ static bool8 sub_808441C(u8 taskId, struct Task *task, struct EventObject *train
         }
         else
         {
-            EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACITON_FACE_PLAYER);
+            EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
             task->data[0]++;
         }
     }
@@ -361,7 +361,7 @@ static bool8 sub_80845C8(u8 taskId, struct Task *task, struct EventObject *train
     if (!EventObjectIsMovementOverridden(trainerObj)
      || EventObjectClearHeldMovementIfFinished(trainerObj))
     {
-        EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACITON_FACE_PLAYER);
+        EventObjectSetHeldMovement(trainerObj, MOVEMENT_ACTION_FACE_PLAYER);
         task->data[0]++;
     }
     return FALSE;
