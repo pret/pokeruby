@@ -42,6 +42,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "tv.h"
+#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -725,7 +726,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080E88();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -739,7 +740,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sp13E_warp_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -753,7 +754,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080EF0();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -765,12 +766,12 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == 0xFF && mapNum == 0xFF)
-        sub_8053720(x - 7, y - 7);
+    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
+        SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
     sp13F_fall_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -784,7 +785,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080F68();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -820,7 +821,7 @@ bool8 ScrCmd_setdivewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8053690(mapGroup, mapNum, warpId, x, y);
+    SetFixedDiveWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -832,7 +833,7 @@ bool8 ScrCmd_setholewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_80536E4(mapGroup, mapNum, warpId, x, y);
+    SetFixedHoleWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 

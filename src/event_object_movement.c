@@ -729,7 +729,7 @@ bool8 (*const gDirectionBlockedMetatileFuncs[])(u8) = {
     MetatileBehavior_IsWestBlocked
 };
 
-const struct Coords16 gDirectionToVectors[] = {
+static const struct Coords16 sDirectionToVectors[] = {
     { 0,  0},
     { 0,  1},
     { 0, -1},
@@ -4445,14 +4445,14 @@ void sub_8060288(u8 localId, u8 mapNum, u8 mapGroup)
 
 void MoveCoords(u8 direction, s16 *x, s16 *y)
 {
-    *x += gDirectionToVectors[direction].x;
-    *y += gDirectionToVectors[direction].y;
+    *x += sDirectionToVectors[direction].x;
+    *y += sDirectionToVectors[direction].y;
 }
 
 void Unref_MovePixelCoords(u8 direction, s16 *x, s16 *y)
 {
-    *x += gDirectionToVectors[direction].x << 4;
-    *y += gDirectionToVectors[direction].y << 4;
+    *x += sDirectionToVectors[direction].x << 4;
+    *y += sDirectionToVectors[direction].y << 4;
 }
 
 static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 deltaY)
@@ -4460,13 +4460,13 @@ static void MoveCoordsInDirection(u32 dir, s16 *x, s16 *y, s16 deltaX, s16 delta
     u8 direction = dir;
     s16 dx2 = (u16)deltaX;
     s16 dy2 = (u16)deltaY;
-    if (gDirectionToVectors[direction].x > 0)
+    if (sDirectionToVectors[direction].x > 0)
         *x += dx2;
-    if (gDirectionToVectors[direction].x < 0)
+    if (sDirectionToVectors[direction].x < 0)
         *x -= dx2;
-    if (gDirectionToVectors[direction].y > 0)
+    if (sDirectionToVectors[direction].y > 0)
         *y += dy2;
-    if (gDirectionToVectors[direction].y < 0)
+    if (sDirectionToVectors[direction].y < 0)
         *y -= dy2;
 }
 
@@ -7871,32 +7871,32 @@ void UnfreezeEventObjects(void)
 
 static void Step1(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += gDirectionToVectors[dir].x;
-    sprite->pos1.y += gDirectionToVectors[dir].y;
+    sprite->pos1.x += sDirectionToVectors[dir].x;
+    sprite->pos1.y += sDirectionToVectors[dir].y;
 }
 
 static void Step2(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x;
-    sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y;
+    sprite->pos1.x += 2 * (u16) sDirectionToVectors[dir].x;
+    sprite->pos1.y += 2 * (u16) sDirectionToVectors[dir].y;
 }
 
 static void Step3(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 2 * (u16) gDirectionToVectors[dir].x + (u16) gDirectionToVectors[dir].x;
-    sprite->pos1.y += 2 * (u16) gDirectionToVectors[dir].y + (u16) gDirectionToVectors[dir].y;
+    sprite->pos1.x += 2 * (u16) sDirectionToVectors[dir].x + (u16) sDirectionToVectors[dir].x;
+    sprite->pos1.y += 2 * (u16) sDirectionToVectors[dir].y + (u16) sDirectionToVectors[dir].y;
 }
 
 static void Step4(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 4 * (u16) gDirectionToVectors[dir].x;
-    sprite->pos1.y += 4 * (u16) gDirectionToVectors[dir].y;
+    sprite->pos1.x += 4 * (u16) sDirectionToVectors[dir].x;
+    sprite->pos1.y += 4 * (u16) sDirectionToVectors[dir].y;
 }
 
 static void Step8(struct Sprite *sprite, u8 dir)
 {
-    sprite->pos1.x += 8 * (u16) gDirectionToVectors[dir].x;
-    sprite->pos1.y += 8 * (u16) gDirectionToVectors[dir].y;
+    sprite->pos1.x += 8 * (u16) sDirectionToVectors[dir].x;
+    sprite->pos1.y += 8 * (u16) sDirectionToVectors[dir].y;
 }
 
 static void oamt_npc_ministep_reset(struct Sprite *sprite, u8 direction, u8 a3)

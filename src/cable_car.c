@@ -439,7 +439,7 @@ static void sub_8123740(void)
     DmaFill16Large(3, 0, VRAM, VRAM_SIZE, 0x1000);
     DmaFill32Defvars(3, 0, OAM, OAM_SIZE);
     DmaFill16Defvars(3, 0, PLTT, PLTT_SIZE);
-    warp_in();
+    WarpIntoMap();
     gFieldCallback = NULL;
     SetMainCallback2(CB2_LoadMap);
 }
