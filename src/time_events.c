@@ -81,7 +81,7 @@ void UpdateShoalTideFlag(void)
         1,
     };
 
-    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()))
+    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()))
     {
         RtcCalcLocalTime();
         if (tide[gLocalTime.hours])

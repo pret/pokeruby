@@ -137,7 +137,7 @@ void debug_sub_8052E04()
 void WarpToTruck(void)
 {
     Overworld_SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), -1, -1, -1);
-    warp_in();
+    WarpIntoMap();
 }
 
 void ClearSav2(void)

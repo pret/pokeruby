@@ -102,7 +102,7 @@ void sub_80C824C(void)
     else if (gBattleOutcome == 8)
     {
         ScriptContext2_RunNewScript(&gUnknown_081C340A);
-        warp_in();
+        WarpIntoMap();
         gFieldCallback = sub_8080E44;
         SetMainCallback2(CB2_LoadMap);
     }

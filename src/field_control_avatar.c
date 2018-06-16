@@ -356,7 +356,7 @@ u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehav
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
         eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
     else
-        eventObjectId = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[direction].x, position->y + gUnknown_0821664C[direction].y, position->height);
+        eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
 
     if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
         return NULL;
@@ -385,7 +385,7 @@ static u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8 metat
             return NULL;
 
         // Look for an event object on the other side of the counter.
-        eventObjectId = GetEventObjectIdByXYZ(position->x + gUnknown_0821664C[direction].x, position->y + gUnknown_0821664C[direction].y, position->height);
+        eventObjectId = GetEventObjectIdByXYZ(position->x + gDirectionToVectors[direction].x, position->y + gDirectionToVectors[direction].y, position->height);
         if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
             return NULL;
     }
@@ -680,7 +680,7 @@ static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct Map
 
     if (IsArrowWarpMetatileBehavior(metatileBehavior, direction) == TRUE && warpEventId != -1)
     {
-        walkrun_find_lowest_active_bit_in_bitfield();
+        StoreInitialPlayerAvatarState();
         sub_8068C30(&gMapHeader, warpEventId, position);
         sub_8080E88();
         return TRUE;
@@ -694,7 +694,7 @@ bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileBehavior
 
     if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
     {
-        walkrun_find_lowest_active_bit_in_bitfield();
+        StoreInitialPlayerAvatarState();
         sub_8068C30(&gMapHeader, warpEventId, position);
         if (MetatileBehavior_IsEscalator(metatileBehavior) == TRUE)
         {
@@ -798,7 +798,7 @@ static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 met
             warpEventId = FindWarpEventByPosition(&gMapHeader, position);
             if (warpEventId != -1 && IsWarpMetatileBehavior(metatileBehavior) == TRUE)
             {
-                walkrun_find_lowest_active_bit_in_bitfield();
+                StoreInitialPlayerAvatarState();
                 sub_8068C30(&gMapHeader, warpEventId, position);
                 sub_8080EF0();
                 return TRUE;
@@ -894,7 +894,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
     {
         if (SetDiveWarpEmerge(position->x - 7, position->y - 7))
         {
-            walkrun_find_lowest_active_bit_in_bitfield();
+            StoreInitialPlayerAvatarState();
             sp13E_warp_to_last_warp();
             PlaySE(SE_W291);
             return TRUE;
@@ -904,7 +904,7 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
     {
         if (SetDiveWarpDive(position->x - 7, position->y - 7))
         {
-            walkrun_find_lowest_active_bit_in_bitfield();
+            StoreInitialPlayerAvatarState();
             sp13E_warp_to_last_warp();
             PlaySE(SE_W291);
             return TRUE;
