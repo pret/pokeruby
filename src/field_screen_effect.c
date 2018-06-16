@@ -20,7 +20,7 @@ const static struct ScanlineEffectParams sFlashEffectParams =
     1
 };
 
-static void SetFlashScanlineffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
+static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
 {
     if (y <= 160)
     {
@@ -43,10 +43,10 @@ static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 c
     s32 v3 = 0;
     while (r >= v3)
     {
-        SetFlashScanlineffectWindowBoundary(dest, centerY - v3, centerX - r, centerX + r);
-        SetFlashScanlineffectWindowBoundary(dest, centerY + v3, centerX - r, centerX + r);
-        SetFlashScanlineffectWindowBoundary(dest, centerY - r, centerX - v3, centerX + v3);
-        SetFlashScanlineffectWindowBoundary(dest, centerY + r, centerX - v3, centerX + v3);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY - v3, centerX - r, centerX + r);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY + v3, centerX - r, centerX + r);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY - r, centerX - v3, centerX + v3);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY + r, centerX - v3, centerX + v3);
         v2 -= (v3 * 2) - 1;
         v3++;
         if (v2 < 0)
