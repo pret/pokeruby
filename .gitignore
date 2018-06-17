@@ -41,3 +41,4 @@ build/
 *.pl
 .vs/
 .projects/ARM/
+*.json.inc

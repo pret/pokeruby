@@ -24,6 +24,7 @@ MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
+JSON2S    := tools/json2s/json2s$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -108,7 +109,7 @@ endif
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.json.inc' \) -exec rm {} +
 	$(MAKE) clean -C tools/gbagfx
 	$(MAKE) clean -C tools/scaninc
 	$(MAKE) clean -C tools/preproc
@@ -116,6 +117,7 @@ clean: tidy
 	$(MAKE) clean -C tools/rsfont
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
+	$(MAKE) clean -C tools/json2s
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -125,6 +127,7 @@ tools:
 	@$(MAKE) -C tools/rsfont
 	@$(MAKE) -C tools/aif2pcm
 	@$(MAKE) -C tools/ramscrgen
+	@$(MAKE) -C tools/json2s
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
@@ -194,3 +197,7 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+#### JSON Rules ####
+
+%.json.inc: %.json ; $(JSON2S) $<

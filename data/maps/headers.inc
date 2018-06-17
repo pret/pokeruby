@@ -7,7 +7,7 @@
 	.include "data/maps/MossdeepCity/header.inc"
 	.include "data/maps/SootopolisCity/header.inc"
 	.include "data/maps/EverGrandeCity/header.inc"
-	.include "data/maps/LittlerootTown/header.inc"
+	.include "data/maps/LittlerootTown/header.mapheader.json.inc"
 	.include "data/maps/OldaleTown/header.inc"
 	.include "data/maps/DewfordTown/header.inc"
 	.include "data/maps/LavaridgeTown/header.inc"
