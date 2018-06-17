@@ -7,28 +7,6 @@
 
 	@ flying
 
-	thumb_func_start sub_80DA034
-sub_80DA034: @ 80DA034
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0
-	bl sub_8078764
-	ldrh r0, [r4, 0x22]
-	adds r0, 0x14
-	strh r0, [r4, 0x22]
-	movs r0, 0xBF
-	strh r0, [r4, 0x30]
-	ldr r1, _080DA058 @ =sub_80DA05C
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA058: .4byte sub_80DA05C
-	thumb_func_end sub_80DA034
-
 	thumb_func_start sub_80DA05C
 sub_80DA05C: @ 80DA05C
 	push {r4,lr}
