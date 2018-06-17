@@ -7,65 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDBD8
-sub_80DDBD8: @ 80DDBD8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80DDCC8
-	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DDBF8
-	ldr r0, _080DDBF4 @ =sub_80DDC4C
-	str r0, [r4, 0x1C]
-	b _080DDC42
-	.align 2, 0
-_080DDBF4: .4byte sub_80DDC4C
-_080DDBF8:
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xA
-	bl Sin
-	ldrh r1, [r4, 0x24]
-	adds r0, r1
-	strh r0, [r4, 0x24]
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xF
-	bl Cos
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r2, [r4, 0x38]
-	adds r0, r2, 0x5
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x38]
-	ldrh r0, [r4, 0x38]
-	lsls r2, 16
-	asrs r2, 16
-	cmp r2, 0
-	beq _080DDC30
-	cmp r2, 0xC4
-	ble _080DDC42
-_080DDC30:
-	lsls r0, 16
-	cmp r0, 0
-	ble _080DDC42
-	ldr r0, _080DDC48 @ =gUnknown_0202F7D2
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	movs r0, 0xC4
-	bl PlaySE12WithPanning
-_080DDC42:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDC48: .4byte gUnknown_0202F7D2
-	thumb_func_end sub_80DDBD8
-
 	thumb_func_start sub_80DDC4C
 sub_80DDC4C: @ 80DDC4C
 	push {r4,lr}

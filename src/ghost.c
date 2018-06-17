@@ -1,10 +1,15 @@
 #include "global.h"
 #include "rom_8077ABC.h"
+#include "sound.h"
+#include "trig.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankTarget;
+extern u8 gUnknown_0202F7D2;
 
 void sub_80DDBD8(struct Sprite *);
+void sub_80DDC4C(struct Sprite *);
+void sub_80DDCC8(struct Sprite *);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -18,4 +23,26 @@ void sub_80DDB6C(struct Sprite *sprite) {
     sprite->data[6] = 0x10;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = sprite->data[6];
+}
+
+void sub_80DDBD8(struct Sprite *sprite) {
+    s16 r0;
+    s16 r2;
+    sub_80DDCC8(sprite);
+    if (TranslateAnimSpriteByDeltas(sprite)) {
+        sprite->callback = sub_80DDC4C;
+        return;
+    }
+    sprite->pos2.x += Sin(sprite->data[5], 10);
+    sprite->pos2.y += Cos(sprite->data[5], 15);
+    r2 = sprite->data[5];
+    sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
+    r0 = sprite->data[5];
+    if (r2 != 0) {
+        if (r2 <= 0xC4)
+            return;
+    }
+    if (r0 <= 0)
+        return;
+    PlaySE12WithPanning(0xC4, gUnknown_0202F7D2);
 }
