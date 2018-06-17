@@ -7,56 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDB6C
-sub_80DDB6C: @ 80DDB6C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl InitAnimSpritePos
-	ldr r0, _080DDBC8 @ =gBattleAnimArgs
-	ldrh r0, [r0, 0x4]
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x20]
-	strh r0, [r4, 0x30]
-	ldr r5, _080DDBCC @ =gAnimBankTarget
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x32]
-	ldrh r0, [r4, 0x22]
-	strh r0, [r4, 0x34]
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl GetBattlerSpriteCoord
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x36]
-	adds r0, r4, 0
-	bl sub_8078BD4
-	ldr r0, _080DDBD0 @ =sub_80DDBD8
-	str r0, [r4, 0x1C]
-	movs r0, 0x10
-	strh r0, [r4, 0x3A]
-	ldr r1, _080DDBD4 @ =REG_BLDCNT
-	movs r2, 0xFD
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	ldrh r0, [r4, 0x3A]
-	strh r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDBC8: .4byte gBattleAnimArgs
-_080DDBCC: .4byte gAnimBankTarget
-_080DDBD0: .4byte sub_80DDBD8
-_080DDBD4: .4byte REG_BLDCNT
-	thumb_func_end sub_80DDB6C
-
 	thumb_func_start sub_80DDBD8
 sub_80DDBD8: @ 80DDBD8
 	push {r4,lr}
