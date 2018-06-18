@@ -6,7 +6,6 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-void sub_80DA05C(struct Sprite *sprite);
 void sub_80DA034(struct Sprite *sprite);
 void sub_80DA16C(struct Sprite *sprite);
 void sub_80DA208(struct Sprite *sprite);
@@ -31,6 +30,18 @@ void sub_80DA034(struct Sprite *sprite)
     sprite->data[1] = 0xBF;
     sprite->callback = sub_80DA05C;
     sub_80DA05C(sprite);
+}
+
+void sub_80DA05C(struct Sprite *sprite)
+{
+    sprite->pos2.x = Sin(sprite->data[1], 0x20);
+    sprite->pos2.y = Cos(sprite->data[1], 0x8);
+    sprite->data[1] = (sprite->data[1] + 5) & 0xFF;
+    ++sprite->data[0];
+    if(sprite->data[0]  == 0x47 )
+    {
+        DestroyAnimSprite(sprite);
+    }
 }
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA380 =
