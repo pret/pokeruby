@@ -7,23 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDD58
-sub_80DDD58: @ 80DDD58
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl sub_8078764
-	ldr r1, _080DDD74 @ =sub_80DDD78
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDD74: .4byte sub_80DDD78
-	thumb_func_end sub_80DDD58
-
 	thumb_func_start sub_80DDD78
 sub_80DDD78: @ 80DDD78
 	push {r4,lr}

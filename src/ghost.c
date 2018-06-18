@@ -10,6 +10,7 @@ extern u8 gUnknown_0202F7D2;
 void sub_80DDBD8(struct Sprite *);
 void sub_80DDC4C(struct Sprite *);
 void sub_80DDCC8(struct Sprite *);
+void sub_80DDD78(struct Sprite *);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -107,4 +108,11 @@ void sub_80DDCC8(struct Sprite *sprite)
 	}	
 	if(sprite->data[6] == 0)
 		sprite->data[6] = 0x100;
+}
+
+void sub_80DDD58(struct Sprite *sprite)
+{
+	sub_8078764(sprite, 1);
+	sprite->callback = sub_80DDD78;
+	sub_80DDD78(sprite);
 }
