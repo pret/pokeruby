@@ -12,6 +12,7 @@ void sub_80DDBD8(struct Sprite *);
 void sub_80DDC4C(struct Sprite *);
 void sub_80DDCC8(struct Sprite *);
 void sub_80DDD78(struct Sprite *);
+void sub_80DDE7C(u8 taskId);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -135,4 +136,19 @@ void sub_80DDD78(struct Sprite *sprite) {
     if (sprite->data[7] == 0x3D) {
         DestroyAnimSprite(sprite);
     }
+}
+
+void sub_80DDDF0(u8 r5) {
+	u8 r4;
+	REG_BLDCNT = 0x3F40;
+	REG_BLDALPHA = 0x1000;
+	r4 = GetAnimBattlerSpriteId(0);
+	sub_8078E70(r4, 1);
+	obj_id_set_rotscale(r4, 0x80, 0x80, 0);
+	gSprites[r4].invisible = FALSE;
+	gTasks[r5].data[0] = 0x80;
+	gTasks[r5].data[1] = *gBattleAnimArgs;
+	gTasks[r5].data[2] = 0;
+	gTasks[r5].data[3] = 0x10;
+	gTasks[r5].func = &sub_80DDE7C;
 }
