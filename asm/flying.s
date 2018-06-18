@@ -7,40 +7,6 @@
 
 	@ flying
 
-	thumb_func_start sub_80DA05C
-sub_80DA05C: @ 80DA05C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	movs r1, 0x20
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	movs r1, 0x8
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x5
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x30]
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0x1
-	strh r0, [r4, 0x2E]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x47
-	bne _080DA096
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DA096:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DA05C
-
 	thumb_func_start sub_80DA09C
 sub_80DA09C: @ 80DA09C
 	push {r4,lr}
