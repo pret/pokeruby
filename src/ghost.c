@@ -74,3 +74,37 @@ void sub_80DDC4C(struct Sprite *sprite)
 	else
 		sub_80DDCC8(sprite);
 }
+
+void sub_80DDCC8(struct Sprite *sprite)
+{
+	
+	s16 r0; 
+	if(sprite->data[6] > 0xFF)
+	{
+		if(++sprite->data[6] == 0x10d)
+			sprite->data[6] = 0;
+		return;	
+	}
+	
+	r0 = sprite->data[7];
+	sprite->data[7]++;
+	
+	if((r0 & 0xFF) == 0)
+	{
+		sprite->data[7] &= 0xff00;
+		if((sprite->data[7] & 0x100) != 0)
+			sprite->data[6]++;
+		else
+			sprite->data[6]--;
+	}
+	else
+		return;
+	
+	REG_BLDALPHA = ((16 - sprite->data[6]) << 8) | sprite->data[6];
+	if(sprite->data[6] == 0 || sprite->data[6] == 16)
+	{
+		sprite->data[7] ^= 0x100;
+	}	
+	if(sprite->data[6] == 0)
+		sprite->data[6] = 0x100;
+}
