@@ -7,69 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDD78
-sub_80DDD78: @ 80DDD78
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r1, 0x20
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r1, 0x8
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x2E]
-	subs r0, 0x41
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x82
-	bhi _080DDDAC
-	ldrb r0, [r4, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x8
-	b _080DDDB6
-_080DDDAC:
-	ldrb r0, [r4, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x4
-_080DDDB6:
-	orrs r1, r0
-	strb r1, [r4, 0x5]
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0x13
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x50
-	strh r0, [r4, 0x32]
-	lsls r0, 16
-	asrs r0, 24
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x3C]
-	adds r0, 0x1
-	strh r0, [r4, 0x3C]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3D
-	bne _080DDDE8
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DDDE8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DDD78
-
 	thumb_func_start sub_80DDDF0
 sub_80DDDF0: @ 80DDDF0
 	push {r4,r5,lr}

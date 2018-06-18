@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_anim.h"
 #include "rom_8077ABC.h"
 #include "sound.h"
 #include "trig.h"
@@ -115,4 +116,23 @@ void sub_80DDD58(struct Sprite *sprite)
 	sub_8078764(sprite, 1);
 	sprite->callback = sub_80DDD78;
 	sub_80DDD78(sprite);
+}
+
+void sub_80DDD78(struct Sprite *sprite) {
+    u16 temp1;
+    sprite->pos2.x = Sin(sprite->data[0], 32);
+    sprite->pos2.y = Cos(sprite->data[0], 8);
+    temp1 = sprite->data[0] - 65;
+    if (temp1 <= 130) {
+        sprite->oam.priority = 2;
+    } else {
+        sprite->oam.priority = 1;
+    }
+    sprite->data[0] = (sprite->data[0] + 0x13) & 0xFF;
+    sprite->data[2] += 80;
+    sprite->pos2.y += sprite->data[2] >> 8;
+    sprite->data[7] += 1;
+    if (sprite->data[7] == 0x3D) {
+        DestroyAnimSprite(sprite);
+    }
 }
