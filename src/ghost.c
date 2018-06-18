@@ -46,3 +46,31 @@ void sub_80DDBD8(struct Sprite *sprite) {
         return;
     PlaySE12WithPanning(0xC4, gUnknown_0202F7D2);
 }
+
+void sub_80DDC4C(struct Sprite *sprite)
+{
+	s16 r2;
+	s16 r0;
+	sprite->data[0] = 1;
+	TranslateAnimSpriteByDeltas(sprite);
+	sprite->pos2.x += Sin(sprite->data[5],10);
+	sprite->pos2.y += Cos(sprite->data[5],15);
+	
+	r2 = sprite->data[5];
+	sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
+	r0 = sprite->data[5];
+	
+	if(r2 == 0 || r2 > 0xC4)
+	{
+		if(r0 > 0)
+			PlaySE(0xC4);
+	}
+	
+	if(sprite->data[6] == 0)
+	{
+		sprite->invisible = TRUE; 
+		sprite->callback = sub_807861C;
+	}
+	else
+		sub_80DDCC8(sprite);
+}
