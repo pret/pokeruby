@@ -13,6 +13,7 @@ void sub_80DDC4C(struct Sprite *);
 void sub_80DDCC8(struct Sprite *);
 void sub_80DDD78(struct Sprite *);
 void sub_80DDE7C(u8 taskId);
+void sub_80DDED0(u8 taskId);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -151,4 +152,17 @@ void sub_80DDDF0(u8 r5) {
 	gTasks[r5].data[2] = 0;
 	gTasks[r5].data[3] = 0x10;
 	gTasks[r5].func = &sub_80DDE7C;
+}
+
+void sub_80DDE7C(u8 taskId) {
+	gTasks[taskId].data[10] += 1;
+	if (gTasks[taskId].data[10] == 3) {
+		gTasks[taskId].data[10] = 0;
+		gTasks[taskId].data[2] += 1;
+		gTasks[taskId].data[3] -= 1;
+		REG_BLDALPHA = gTasks[taskId].data[3] << 8 | gTasks[taskId].data[2];
+		if (gTasks[taskId].data[2] != 9)
+			return;
+		gTasks[taskId].func = &sub_80DDED0;
+	}
 }

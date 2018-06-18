@@ -7,50 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDE7C
-sub_80DDE7C: @ 80DDE7C
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _080DDEC4 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, r1, r2
-	ldrh r0, [r3, 0x1C]
-	adds r0, 0x1
-	strh r0, [r3, 0x1C]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3
-	bne _080DDEBE
-	movs r0, 0
-	strh r0, [r3, 0x1C]
-	ldrh r1, [r3, 0xC]
-	adds r1, 0x1
-	strh r1, [r3, 0xC]
-	ldrh r0, [r3, 0xE]
-	subs r0, 0x1
-	strh r0, [r3, 0xE]
-	ldr r2, _080DDEC8 @ =REG_BLDALPHA
-	lsls r0, 8
-	orrs r1, r0
-	strh r1, [r2]
-	movs r1, 0xC
-	ldrsh r0, [r3, r1]
-	cmp r0, 0x9
-	bne _080DDEBE
-	ldr r0, _080DDECC @ =sub_80DDED0
-	str r0, [r3]
-_080DDEBE:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDEC4: .4byte gTasks
-_080DDEC8: .4byte REG_BLDALPHA
-_080DDECC: .4byte sub_80DDED0
-	thumb_func_end sub_80DDE7C
-
 	thumb_func_start sub_80DDED0
 sub_80DDED0: @ 80DDED0
 	push {r4-r6,lr}
