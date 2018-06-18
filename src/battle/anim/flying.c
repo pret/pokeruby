@@ -1,12 +1,14 @@
 #include "global.h"
+#include "sprite.h"
 #include "rom_8077ABC.h"
 #include "battle_anim.h"
+#include "trig.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-void sub_80DA034(struct Sprite *sprite);
+void sub_80DA05C(struct Sprite *sprite);
 void sub_80DA16C(struct Sprite *sprite);
 void sub_80DA208(struct Sprite *sprite);
 void sub_80DA300(struct Sprite *sprite);
