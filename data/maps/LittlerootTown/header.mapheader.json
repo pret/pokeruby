@@ -1,0 +1,15 @@
+{
+    "name": "LittlerootTown",
+    "mapData": "LittlerootTown_MapAttributes",
+    "events": "LittlerootTown_MapEvents",
+    "mapScripts": "LittlerootTown_MapScripts",
+    "connections": "LittlerootTown_MapConnections",
+    "music": "BGM_MISHIRO",
+    "mapDataId": 10,
+    "regionMapSectionId": 0,
+    "cave": 0,
+    "weather": 2,
+    "mapType": 1,
+    "flags": 1,
+    "battleType": 0
+}
