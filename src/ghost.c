@@ -7,6 +7,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankTarget;
 extern u8 gUnknown_0202F7D2;
+extern u8 gAnimBankAttacker;
 
 void sub_80DDBD8(struct Sprite *);
 void sub_80DDC4C(struct Sprite *);
@@ -14,6 +15,7 @@ void sub_80DDCC8(struct Sprite *);
 void sub_80DDD78(struct Sprite *);
 void sub_80DDE7C(u8 taskId);
 void sub_80DDED0(u8 taskId);
+void sub_80DDFE8(struct Sprite *);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -183,4 +185,21 @@ void sub_80DDED0(u8 taskId) {
 	DestroyAnimVisualTask(taskId);
 	REG_BLDCNT = 0;
 	REG_BLDALPHA = 0;
+}
+
+void sub_80DDF40(struct Sprite *sprite) {
+	u16 r5, r6;
+	r5 = sprite->pos1.x;
+	r6 = sprite->pos1.y;
+	sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+	sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+	sprite->data[0] = 0;
+	sprite->data[1] = gBattleAnimArgs[0];
+	sprite->data[2] = gBattleAnimArgs[1];
+	sprite->data[3] = gBattleAnimArgs[2];
+	sprite->data[4] = sprite->pos1.x << 4;
+	sprite->data[5] = sprite->pos1.y << 4;
+	sprite->data[6] = (((s16)r5 - sprite->pos1.x) << 4) / (gBattleAnimArgs[0] << 1);
+	sprite->data[7] = (((s16)r6 - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
+	sprite->callback = &sub_80DDFE8;
 }
