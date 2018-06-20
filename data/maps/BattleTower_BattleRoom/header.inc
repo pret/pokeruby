@@ -1,5 +1,5 @@
 BattleTower_BattleRoom:: @ 8307C88
-	.4byte BattleTower_BattleRoom_MapAttributes
+	.4byte BattleTower_BattleRoom_Layout
 	.4byte BattleTower_BattleRoom_MapEvents
 	.4byte BattleTower_BattleRoom_MapScripts
 	.4byte 0x0

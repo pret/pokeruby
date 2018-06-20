@@ -1,5 +1,5 @@
 LilycoveCity_MoveDeletersHouse:: @ 8306670
-	.4byte House12_MapAttributes
+	.4byte House2_Layout
 	.4byte LilycoveCity_MoveDeletersHouse_MapEvents
 	.4byte LilycoveCity_MoveDeletersHouse_MapScripts
 	.4byte 0x0

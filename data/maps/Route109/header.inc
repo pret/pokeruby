@@ -1,5 +1,5 @@
 Route109:: @ 83056E8
-	.4byte Route109_MapAttributes
+	.4byte Route109_Layout
 	.4byte Route109_MapEvents
 	.4byte Route109_MapScripts
 	.4byte Route109_MapConnections

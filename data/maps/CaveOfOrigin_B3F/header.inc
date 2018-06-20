@@ -1,5 +1,5 @@
 CaveOfOrigin_B3F:: @ 83071EC
-	.4byte CaveOfOrigin_B3F_MapAttributes
+	.4byte CaveOfOrigin_B3F_Layout
 	.4byte CaveOfOrigin_B3F_MapEvents
 	.4byte CaveOfOrigin_B3F_MapScripts
 	.4byte 0x0

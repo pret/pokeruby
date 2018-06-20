@@ -1,5 +1,5 @@
 ShoalCave_LowTideInnerRoom:: @ 8307294
-	.4byte ShoalCave_LowTideInnerRoom_MapAttributes
+	.4byte ShoalCave_LowTideInnerRoom_Layout
 	.4byte ShoalCave_LowTideInnerRoom_MapEvents
 	.4byte ShoalCave_LowTideInnerRoom_MapScripts
 	.4byte 0x0

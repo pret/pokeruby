@@ -1,5 +1,5 @@
 Route112:: @ 830573C
-	.4byte Route112_MapAttributes
+	.4byte Route112_Layout
 	.4byte Route112_MapEvents
 	.4byte Route112_MapScripts
 	.4byte Route112_MapConnections

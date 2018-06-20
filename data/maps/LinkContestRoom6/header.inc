@@ -1,5 +1,5 @@
 LinkContestRoom6:: @ 8307B1C
-	.4byte LinkContestRoom6_MapAttributes
+	.4byte LinkContestRoom6_Layout
 	.4byte LinkContestRoom6_MapEvents
 	.4byte LinkContestRoom6_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 BattleTower_Elevator:: @ 8307C50
-	.4byte BattleTower_Elevator_MapAttributes
+	.4byte BattleTower_Elevator_Layout
 	.4byte BattleTower_Elevator_MapEvents
 	.4byte BattleTower_Elevator_MapScripts
 	.4byte 0x0

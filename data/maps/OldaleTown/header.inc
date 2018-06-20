@@ -1,5 +1,5 @@
 OldaleTown:: @ 8305560
-	.4byte OldaleTown_MapAttributes
+	.4byte OldaleTown_Layout
 	.4byte OldaleTown_MapEvents
 	.4byte OldaleTown_MapScripts
 	.4byte OldaleTown_MapConnections

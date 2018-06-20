@@ -1,5 +1,5 @@
 Route120:: @ 830581C
-	.4byte Route120_MapAttributes
+	.4byte Route120_Layout
 	.4byte Route120_MapEvents
 	.4byte Route120_MapScripts
 	.4byte Route120_MapConnections

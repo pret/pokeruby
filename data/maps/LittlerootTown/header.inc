@@ -1,5 +1,5 @@
 LittlerootTown:: @ 8305544
-	.4byte LittlerootTown_MapAttributes
+	.4byte LittlerootTown_Layout
 	.4byte LittlerootTown_MapEvents
 	.4byte LittlerootTown_MapScripts
 	.4byte LittlerootTown_MapConnections

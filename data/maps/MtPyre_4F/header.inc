@@ -1,5 +1,5 @@
 MtPyre_4F:: @ 8306F68
-	.4byte MtPyre_4F_MapAttributes
+	.4byte MtPyre_4F_Layout
 	.4byte MtPyre_4F_MapEvents
 	.4byte MtPyre_4F_MapScripts
 	.4byte 0x0

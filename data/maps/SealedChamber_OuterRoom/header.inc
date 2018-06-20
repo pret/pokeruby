@@ -1,5 +1,5 @@
 SealedChamber_OuterRoom:: @ 8307534
-	.4byte SealedChamber_OuterRoom_MapAttributes
+	.4byte SealedChamber_OuterRoom_Layout
 	.4byte SealedChamber_OuterRoom_MapEvents
 	.4byte SealedChamber_OuterRoom_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 MossdeepCity:: @ 83054F0
-	.4byte MossdeepCity_MapAttributes
+	.4byte MossdeepCity_Layout
 	.4byte MossdeepCity_MapEvents
 	.4byte MossdeepCity_MapScripts
 	.4byte MossdeepCity_MapConnections

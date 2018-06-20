@@ -1,5 +1,5 @@
 MossdeepCity_StevensHouse:: @ 8306884
-	.4byte MossdeepCity_StevensHouse_MapAttributes
+	.4byte MossdeepCity_StevensHouse_Layout
 	.4byte MossdeepCity_StevensHouse_MapEvents
 	.4byte MossdeepCity_StevensHouse_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 IslandCave:: @ 83074C4
-	.4byte IslandCave_MapAttributes
+	.4byte IslandCave_Layout
 	.4byte IslandCave_MapEvents
 	.4byte IslandCave_MapScripts
 	.4byte 0x0

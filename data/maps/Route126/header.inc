@@ -1,5 +1,5 @@
 Route126:: @ 83058C4
-	.4byte Route126_MapAttributes
+	.4byte Route126_Layout
 	.4byte Route126_MapEvents
 	.4byte Route126_MapScripts
 	.4byte Route126_MapConnections

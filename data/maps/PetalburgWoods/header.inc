@@ -1,5 +1,5 @@
 PetalburgWoods:: @ 8306EA4
-	.4byte PetalburgWoods_MapAttributes
+	.4byte PetalburgWoods_Layout
 	.4byte PetalburgWoods_MapEvents
 	.4byte PetalburgWoods_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 BattleTower_Outside:: @ 8307C18
-	.4byte BattleTower_Outside_MapAttributes
+	.4byte BattleTower_Outside_Layout
 	.4byte BattleTower_Outside_MapEvents
 	.4byte BattleTower_Outside_MapScripts
 	.4byte 0x0

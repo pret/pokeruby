@@ -1,5 +1,5 @@
 EverGrandeCity_GlaciasRoom:: @ 8306AD0
-	.4byte EverGrandeCity_GlaciasRoom_MapAttributes
+	.4byte EverGrandeCity_GlaciasRoom_Layout
 	.4byte EverGrandeCity_GlaciasRoom_MapEvents
 	.4byte EverGrandeCity_GlaciasRoom_MapScripts
 	.4byte 0x0

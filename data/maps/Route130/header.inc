@@ -1,5 +1,5 @@
 Route130:: @ 8305934
-	.4byte Route130_MapAttributes
+	.4byte Route130_Layout
 	.4byte Route130_MapEvents
 	.4byte Route130_MapScripts
 	.4byte Route130_MapConnections

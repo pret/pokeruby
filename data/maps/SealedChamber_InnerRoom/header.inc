@@ -1,5 +1,5 @@
 SealedChamber_InnerRoom:: @ 8307550
-	.4byte SealedChamber_InnerRoom_MapAttributes
+	.4byte SealedChamber_InnerRoom_Layout
 	.4byte SealedChamber_InnerRoom_MapEvents
 	.4byte SealedChamber_InnerRoom_MapScripts
 	.4byte 0x0

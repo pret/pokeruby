@@ -1,5 +1,5 @@
 FallarborTown_Mart:: @ 8305CB4
-	.4byte PokeMart_MapAttributes
+	.4byte PokeMart_Layout
 	.4byte FallarborTown_Mart_MapEvents
 	.4byte FallarborTown_Mart_MapScripts
 	.4byte 0x0

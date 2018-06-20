@@ -1,5 +1,5 @@
 EverGrandeCity_ChampionsRoom:: @ 8306B08
-	.4byte EverGrandeCity_ChampionsRoom_MapAttributes
+	.4byte EverGrandeCity_ChampionsRoom_Layout
 	.4byte EverGrandeCity_ChampionsRoom_MapEvents
 	.4byte EverGrandeCity_ChampionsRoom_MapScripts
 	.4byte 0x0

@@ -1,5 +1,5 @@
 FallarborTown_ContestLobby:: @ 8305CD0
-	.4byte FallarborTown_ContestLobby_MapAttributes
+	.4byte ContestLobby_Layout
 	.4byte FallarborTown_ContestLobby_MapEvents
 	.4byte FallarborTown_ContestLobby_MapScripts
 	.4byte 0x0

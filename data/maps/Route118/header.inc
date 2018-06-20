@@ -1,5 +1,5 @@
 Route118:: @ 83057E4
-	.4byte Route118_MapAttributes
+	.4byte Route118_Layout
 	.4byte Route118_MapEvents
 	.4byte Route118_MapScripts
 	.4byte Route118_MapConnections

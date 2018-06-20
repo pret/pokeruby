@@ -1,5 +1,5 @@
 ShoalCave_LowTideLowerRoom:: @ 83072CC
-	.4byte ShoalCave_LowTideLowerRoom_MapAttributes
+	.4byte ShoalCave_LowTideLowerRoom_Layout
 	.4byte ShoalCave_LowTideLowerRoom_MapEvents
 	.4byte ShoalCave_LowTideLowerRoom_MapScripts
 	.4byte 0x0

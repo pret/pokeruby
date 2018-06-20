@@ -1,5 +1,5 @@
 Route127:: @ 83058E0
-	.4byte Route127_MapAttributes
+	.4byte Route127_Layout
 	.4byte Route127_MapEvents
 	.4byte Route127_MapScripts
 	.4byte Route127_MapConnections

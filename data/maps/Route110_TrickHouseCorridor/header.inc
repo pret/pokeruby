@@ -1,5 +1,5 @@
 Route110_TrickHouseCorridor:: @ 8307D84
-	.4byte Route110_TrickHouseCorridor_MapAttributes
+	.4byte Route110_TrickHouseCorridor_Layout
 	.4byte Route110_TrickHouseCorridor_MapEvents
 	.4byte Route110_TrickHouseCorridor_MapScripts
 	.4byte 0x0

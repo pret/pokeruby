@@ -1,5 +1,5 @@
 SSTidalRooms:: @ 8307B8C
-	.4byte SSTidalRooms_MapAttributes
+	.4byte SSTidalRooms_Layout
 	.4byte SSTidalRooms_MapEvents
 	.4byte SSTidalRooms_MapScripts
 	.4byte 0x0

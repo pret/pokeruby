@@ -1,5 +1,5 @@
 SSTidalCorridor:: @ 8307B54
-	.4byte SSTidalCorridor_MapAttributes
+	.4byte SSTidalCorridor_Layout
 	.4byte SSTidalCorridor_MapEvents
 	.4byte SSTidalCorridor_MapScripts
 	.4byte 0x0
