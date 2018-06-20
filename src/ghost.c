@@ -16,6 +16,7 @@ void sub_80DDD78(struct Sprite *);
 void sub_80DDE7C(u8 taskId);
 void sub_80DDED0(u8 taskId);
 void sub_80DDFE8(struct Sprite *);
+void sub_80DE114(struct Sprite *);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -243,4 +244,9 @@ void sub_80DDFE8(struct Sprite *sprite) {
 	case 3:
 		move_anim_8074EE0(sprite);
 	}
+}
+
+void sub_80DE0FC(struct Sprite *sprite) {
+	sub_8078764(sprite, 1);
+	sprite->callback = &sub_80DE114;
 }
