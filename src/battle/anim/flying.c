@@ -313,11 +313,6 @@ void sub_80DA48C(struct Sprite *sprite)
     }
 }
 
-void sub_80DA4D8(struct Sprite *sprite)
-{
-    
-}
-
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA380 =
 {
     .tileTag = 10009,
