@@ -19,7 +19,7 @@
 // window selections
 enum
 {
-    BGM_WINDOW,
+    MUS_WINDOW,
     SE_WINDOW
 };
 
@@ -151,7 +151,7 @@ void CB2_StartSoundCheckMenu(void)
     SetMainCallback2(CB2_SoundCheckMenu);
     REG_DISPCNT = 0x7140;
     taskId = CreateTask(Task_InitSoundCheckMenu, 0);
-    gTasks[taskId].tWindowSelected = BGM_WINDOW;
+    gTasks[taskId].tWindowSelected = MUS_WINDOW;
     gTasks[taskId].tBgmIndex = 0;
     gTasks[taskId].tSeIndex = 0;
     gTasks[taskId].data[3] = 0;
@@ -196,7 +196,7 @@ extern const u8 *const gSENames[];
 void sub_80BA384(u8 taskId) // Task_HandleDrawingSoundCheckMenuText
 {
     HighlightSelectedWindow(gTasks[taskId].tWindowSelected);
-    PrintSoundNumber(gTasks[taskId].tBgmIndex + BGM_STOP, 7, 8); // print by BGM index
+    PrintSoundNumber(gTasks[taskId].tBgmIndex + MUS_STOP, 7, 8); // print by BGM index
     sub_80BA79C(gBGMNames[gTasks[taskId].tBgmIndex], 11, 8);
     PrintSoundNumber(gTasks[taskId].tSeIndex, 7, 15);
     sub_80BA79C(gSENames[gTasks[taskId].tSeIndex], 11, 15);
@@ -247,19 +247,19 @@ bool8 Task_ProcessSoundCheckMenuInput(u8 taskId)
             {
                 if (gTasks[taskId].tBgmIndex != 0)
                 {
-                    m4aSongNumStop(gTasks[taskId].data[3] + BGM_STOP);
-                    m4aSongNumStart(gTasks[taskId].tBgmIndex + BGM_STOP);
+                    m4aSongNumStop(gTasks[taskId].data[3] + MUS_STOP);
+                    m4aSongNumStart(gTasks[taskId].tBgmIndex + MUS_STOP);
                     gTasks[taskId].data[3] = gTasks[taskId].tBgmIndex;
                 }
                 else
                 {
-                    m4aSongNumStop(gTasks[taskId].data[3] + BGM_STOP);
+                    m4aSongNumStop(gTasks[taskId].data[3] + MUS_STOP);
                     gTasks[taskId].data[3] = 0;
                 }
             }
             else if (gTasks[taskId].tBgmIndex != 0)
             {
-                m4aSongNumStart(gTasks[taskId].tBgmIndex + BGM_STOP);
+                m4aSongNumStart(gTasks[taskId].tBgmIndex + MUS_STOP);
                 gTasks[taskId].data[3] = gTasks[taskId].tBgmIndex;
             }
         }
@@ -346,7 +346,7 @@ void HighlightSelectedWindow(u8 windowType)
 {
     switch (windowType)
     {
-    case BGM_WINDOW:
+    case MUS_WINDOW:
     default:
         REG_WIN1H = WIN_RANGE(17, 223);
         REG_WIN1V = WIN_RANGE(41, 87);
@@ -819,124 +819,124 @@ void sub_80BB1D4(void)
 }
 
 #define SOUND_LIST_BGM \
-	X(BGM_STOP, "STOP") \
-	X(BGM_TETSUJI, "TETSUJI") \
-	X(BGM_FIELD13, "FIELD13") \
-	X(BGM_KACHI22, "KACHI22") \
-	X(BGM_KACHI2, "KACHI2") \
-	X(BGM_KACHI3, "KACHI3") \
-	X(BGM_KACHI5, "KACHI5") \
-	X(BGM_PCC, "PCC") \
-	X(BGM_NIBI, "NIBI") \
-	X(BGM_SUIKUN, "SUIKUN") \
-	X(BGM_DOORO1, "DOORO1") \
-	X(BGM_DOORO_X1, "DOORO-X1") \
-	X(BGM_DOORO_X3, "DOORO-X3") \
-	X(BGM_MACHI_S2, "MACHI-S2") \
-	X(BGM_MACHI_S4, "MACHI-S4") \
-	X(BGM_GIM, "GIM") \
-	X(BGM_NAMINORI, "NAMINORI") \
-	X(BGM_DAN01, "DAN01") \
-	X(BGM_FANFA1, "FANFA1") \
-	X(BGM_ME_ASA, "ME-ASA") \
-	X(BGM_ME_BACHI, "ME-BACHI") \
-	X(BGM_FANFA4, "FANFA4") \
-	X(BGM_FANFA5, "FANFA5") \
-	X(BGM_ME_WAZA, "ME-WAZA") \
-	X(BGM_BIJYUTU, "BIJYUTU") \
-	X(BGM_DOORO_X4, "DOORO-X4") \
-	X(BGM_FUNE_KAN, "FUNE-KAN") \
-	X(BGM_ME_SHINKA, "ME-SHINKA") \
-	X(BGM_SHINKA, "SHINKA") \
-	X(BGM_ME_WASURE, "ME-WASURE") \
-	X(BGM_SYOUJOEYE, "SYOUJOEYE") \
-	X(BGM_BOYEYE, "BOYEYE") \
-	X(BGM_DAN02, "DAN02") \
-	X(BGM_MACHI_S3, "MACHI-S3") \
-	X(BGM_ODAMAKI, "ODAMAKI") \
-	X(BGM_B_TOWER, "B-TOWER") \
-	X(BGM_SWIMEYE, "SWIMEYE") \
-	X(BGM_DAN03, "DAN03") \
-	X(BGM_ME_KINOMI, "ME-KINOMI") \
-	X(BGM_ME_TAMA, "ME-TAMA") \
-	X(BGM_ME_B_BIG, "ME-B-BIG") \
-	X(BGM_ME_B_SMALL, "ME-B-SMALL") \
-	X(BGM_ME_ZANNEN, "ME-ZANNEN") \
-	X(BGM_BD_TIME, "BD-TIME") \
-	X(BGM_TEST1, "TEST1") \
-	X(BGM_TEST2, "TEST2") \
-	X(BGM_TEST3, "TEST3") \
-	X(BGM_TEST4, "TEST4") \
-	X(BGM_TEST, "TEST") \
-	X(BGM_GOMACHI0, "GOMACHI0") \
-	X(BGM_GOTOWN, "GOTOWN") \
-	X(BGM_POKECEN, "POKECEN") \
-	X(BGM_NEXTROAD, "NEXTROAD") \
-	X(BGM_GRANROAD, "GRANROAD") \
-	X(BGM_CYCLING, "CYCLING") \
-	X(BGM_FRIENDLY, "FRIENDLY") \
-	X(BGM_MISHIRO, "MISHIRO") \
-	X(BGM_TOZAN, "TOZAN") \
-	X(BGM_GIRLEYE, "GIRLEYE") \
-	X(BGM_MINAMO, "MINAMO") \
-	X(BGM_ASHROAD, "ASHROAD") \
-	X(BGM_EVENT0, "EVENT0") \
-	X(BGM_DEEPDEEP, "DEEPDEEP") \
-	X(BGM_KACHI1, "KACHI1") \
-	X(BGM_TITLE3, "TITLE3") \
-	X(BGM_DEMO1, "DEMO1") \
-	X(BGM_GIRL_SUP, "GIRL-SUP") \
-	X(BGM_HAGESHII, "HAGESHII") \
-	X(BGM_KAKKOII, "KAKKOII") \
-	X(BGM_KAZANBAI, "KAZANBAI") \
-	X(BGM_AQA_0, "AQA-0") \
-	X(BGM_TSURETEK, "TSURETEK") \
-	X(BGM_BOY_SUP, "BOY-SUP") \
-	X(BGM_RAINBOW, "RAINBOW") \
-	X(BGM_AYASII, "AYASII") \
-	X(BGM_KACHI4, "KACHI4") \
-	X(BGM_ROPEWAY, "ROPEWAY") \
-	X(BGM_CASINO, "CASINO") \
-	X(BGM_HIGHTOWN, "HIGHTOWN") \
-	X(BGM_SAFARI, "SAFARI") \
-	X(BGM_C_ROAD, "C-ROAD") \
-	X(BGM_AJITO, "AJITO") \
-	X(BGM_M_BOAT, "M-BOAT") \
-	X(BGM_M_DUNGON, "M-DUNGON") \
-	X(BGM_FINECITY, "FINECITY") \
-	X(BGM_MACHUPI, "MACHUPI") \
-	X(BGM_P_SCHOOL, "P-SCHOOL") \
-	X(BGM_DENDOU, "DENDOU") \
-	X(BGM_TONEKUSA, "TONEKUSA") \
-	X(BGM_MABOROSI, "MABOROSI") \
-	X(BGM_CON_FAN, "CON-FAN") \
-	X(BGM_CONTEST0, "CONTEST0") \
-	X(BGM_MGM0, "MGM0") \
-	X(BGM_T_BATTLE, "T-BATTLE") \
-	X(BGM_OOAME, "OOAME") \
-	X(BGM_HIDERI, "HIDERI") \
-	X(BGM_RUNECITY, "RUNECITY") \
-	X(BGM_CON_K, "CON-K") \
-	X(BGM_EIKOU_R, "EIKOU-R") \
-	X(BGM_KARAKURI, "KARAKURI") \
-	X(BGM_HUTAGO, "HUTAGO") \
-	X(BGM_SITENNOU, "SITENNOU") \
-	X(BGM_YAMA_EYE, "YAMA-EYE") \
-	X(BGM_CONLOBBY, "CONLOBBY") \
-	X(BGM_INTER_V, "INTER-V") \
-	X(BGM_DAIGO, "DAIGO") \
-	X(BGM_THANKFOR, "THANKFOR") \
-	X(BGM_END, "END") \
-	X(BGM_BATTLE27, "BATTLE27") \
-	X(BGM_BATTLE31, "BATTLE31") \
-	X(BGM_BATTLE20, "BATTLE20") \
-	X(BGM_BATTLE32, "BATTLE32") \
-	X(BGM_BATTLE33, "BATTLE33") \
-	X(BGM_BATTLE36, "BATTLE36") \
-	X(BGM_BATTLE34, "BATTLE34") \
-	X(BGM_BATTLE35, "BATTLE35") \
-	X(BGM_BATTLE38, "BATTLE38") \
-	X(BGM_BATTLE30, "BATTLE30")
+	X(MUS_STOP, "STOP") \
+	X(MUS_TETSUJI, "TETSUJI") \
+	X(MUS_FIELD13, "FIELD13") \
+	X(MUS_KACHI22, "KACHI22") \
+	X(MUS_KACHI2, "KACHI2") \
+	X(MUS_KACHI3, "KACHI3") \
+	X(MUS_KACHI5, "KACHI5") \
+	X(MUS_PCC, "PCC") \
+	X(MUS_NIBI, "NIBI") \
+	X(MUS_SUIKUN, "SUIKUN") \
+	X(MUS_DOORO1, "DOORO1") \
+	X(MUS_DOORO_X1, "DOORO-X1") \
+	X(MUS_DOORO_X3, "DOORO-X3") \
+	X(MUS_MACHI_S2, "MACHI-S2") \
+	X(MUS_MACHI_S4, "MACHI-S4") \
+	X(MUS_GIM, "GIM") \
+	X(MUS_NAMINORI, "NAMINORI") \
+	X(MUS_DAN01, "DAN01") \
+	X(MUS_FANFA1, "FANFA1") \
+	X(MUS_ME_ASA, "ME-ASA") \
+	X(MUS_ME_BACHI, "ME-BACHI") \
+	X(MUS_FANFA4, "FANFA4") \
+	X(MUS_FANFA5, "FANFA5") \
+	X(MUS_ME_WAZA, "ME-WAZA") \
+	X(MUS_BIJYUTU, "BIJYUTU") \
+	X(MUS_DOORO_X4, "DOORO-X4") \
+	X(MUS_FUNE_KAN, "FUNE-KAN") \
+	X(MUS_ME_SHINKA, "ME-SHINKA") \
+	X(MUS_SHINKA, "SHINKA") \
+	X(MUS_ME_WASURE, "ME-WASURE") \
+	X(MUS_SYOUJOEYE, "SYOUJOEYE") \
+	X(MUS_BOYEYE, "BOYEYE") \
+	X(MUS_DAN02, "DAN02") \
+	X(MUS_MACHI_S3, "MACHI-S3") \
+	X(MUS_ODAMAKI, "ODAMAKI") \
+	X(MUS_B_TOWER, "B-TOWER") \
+	X(MUS_SWIMEYE, "SWIMEYE") \
+	X(MUS_DAN03, "DAN03") \
+	X(MUS_ME_KINOMI, "ME-KINOMI") \
+	X(MUS_ME_TAMA, "ME-TAMA") \
+	X(MUS_ME_B_BIG, "ME-B-BIG") \
+	X(MUS_ME_B_SMALL, "ME-B-SMALL") \
+	X(MUS_ME_ZANNEN, "ME-ZANNEN") \
+	X(MUS_BD_TIME, "BD-TIME") \
+	X(MUS_TEST1, "TEST1") \
+	X(MUS_TEST2, "TEST2") \
+	X(MUS_TEST3, "TEST3") \
+	X(MUS_TEST4, "TEST4") \
+	X(MUS_TEST, "TEST") \
+	X(MUS_GOMACHI0, "GOMACHI0") \
+	X(MUS_GOTOWN, "GOTOWN") \
+	X(MUS_POKECEN, "POKECEN") \
+	X(MUS_NEXTROAD, "NEXTROAD") \
+	X(MUS_GRANROAD, "GRANROAD") \
+	X(MUS_CYCLING, "CYCLING") \
+	X(MUS_FRIENDLY, "FRIENDLY") \
+	X(MUS_MISHIRO, "MISHIRO") \
+	X(MUS_TOZAN, "TOZAN") \
+	X(MUS_GIRLEYE, "GIRLEYE") \
+	X(MUS_MINAMO, "MINAMO") \
+	X(MUS_ASHROAD, "ASHROAD") \
+	X(MUS_EVENT0, "EVENT0") \
+	X(MUS_DEEPDEEP, "DEEPDEEP") \
+	X(MUS_KACHI1, "KACHI1") \
+	X(MUS_TITLE3, "TITLE3") \
+	X(MUS_DEMO1, "DEMO1") \
+	X(MUS_GIRL_SUP, "GIRL-SUP") \
+	X(MUS_HAGESHII, "HAGESHII") \
+	X(MUS_KAKKOII, "KAKKOII") \
+	X(MUS_KAZANBAI, "KAZANBAI") \
+	X(MUS_AQA_0, "AQA-0") \
+	X(MUS_TSURETEK, "TSURETEK") \
+	X(MUS_BOY_SUP, "BOY-SUP") \
+	X(MUS_RAINBOW, "RAINBOW") \
+	X(MUS_AYASII, "AYASII") \
+	X(MUS_KACHI4, "KACHI4") \
+	X(MUS_ROPEWAY, "ROPEWAY") \
+	X(MUS_CASINO, "CASINO") \
+	X(MUS_HIGHTOWN, "HIGHTOWN") \
+	X(MUS_SAFARI, "SAFARI") \
+	X(MUS_C_ROAD, "C-ROAD") \
+	X(MUS_AJITO, "AJITO") \
+	X(MUS_M_BOAT, "M-BOAT") \
+	X(MUS_M_DUNGON, "M-DUNGON") \
+	X(MUS_FINECITY, "FINECITY") \
+	X(MUS_MACHUPI, "MACHUPI") \
+	X(MUS_P_SCHOOL, "P-SCHOOL") \
+	X(MUS_DENDOU, "DENDOU") \
+	X(MUS_TONEKUSA, "TONEKUSA") \
+	X(MUS_MABOROSI, "MABOROSI") \
+	X(MUS_CON_FAN, "CON-FAN") \
+	X(MUS_CONTEST0, "CONTEST0") \
+	X(MUS_MGM0, "MGM0") \
+	X(MUS_T_BATTLE, "T-BATTLE") \
+	X(MUS_OOAME, "OOAME") \
+	X(MUS_HIDERI, "HIDERI") \
+	X(MUS_RUNECITY, "RUNECITY") \
+	X(MUS_CON_K, "CON-K") \
+	X(MUS_EIKOU_R, "EIKOU-R") \
+	X(MUS_KARAKURI, "KARAKURI") \
+	X(MUS_HUTAGO, "HUTAGO") \
+	X(MUS_SITENNOU, "SITENNOU") \
+	X(MUS_YAMA_EYE, "YAMA-EYE") \
+	X(MUS_CONLOBBY, "CONLOBBY") \
+	X(MUS_INTER_V, "INTER-V") \
+	X(MUS_DAIGO, "DAIGO") \
+	X(MUS_THANKFOR, "THANKFOR") \
+	X(MUS_END, "END") \
+	X(MUS_BATTLE27, "BATTLE27") \
+	X(MUS_BATTLE31, "BATTLE31") \
+	X(MUS_BATTLE20, "BATTLE20") \
+	X(MUS_BATTLE32, "BATTLE32") \
+	X(MUS_BATTLE33, "BATTLE33") \
+	X(MUS_BATTLE36, "BATTLE36") \
+	X(MUS_BATTLE34, "BATTLE34") \
+	X(MUS_BATTLE35, "BATTLE35") \
+	X(MUS_BATTLE38, "BATTLE38") \
+	X(MUS_BATTLE30, "BATTLE30")
 
 #define SOUND_LIST_SE \
 	X(SE_STOP, "STOP") \

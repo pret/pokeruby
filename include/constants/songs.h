@@ -249,125 +249,125 @@
 #define SE_W287B 245            // Stat Decreased
 #define SE_W114 246             // Haze
 #define SE_W063B 247            // Hyper Beam 2
-#define BGM_STOP 349
-#define BGM_TETSUJI 350         // Littleroot Town Test 'TETSUJI'
-#define BGM_FIELD13 351         // GSC - Route 38
-#define BGM_KACHI22 352         // Wild Pokémon Defeated
-#define BGM_KACHI2 353          // Wild Pokémon Defeated with Intro
-#define BGM_KACHI3 354          // Gym Leader Defeated
-#define BGM_KACHI5 355          // Victory! Elite Four
-#define BGM_PCC 356             // Crystal - Pokémon Communication Center
-#define BGM_NIBI 357            // GSC - Viridian/Saffron/Pewter/etc
-#define BGM_SUIKUN 358          // Crystal - Battle! Legendary Beasts
-#define BGM_DOORO1 359          // Route 101
-#define BGM_DOORO_X1 360        // Route 110
-#define BGM_DOORO_X3 361        // Route 120
-#define BGM_MACHI_S2 362        // Petalburg City
-#define BGM_MACHI_S4 363        // Oldale Town
-#define BGM_GIM 364             // Gym
-#define BGM_NAMINORI 365        // Surfing
-#define BGM_DAN01 366           // Caves and Darkness
-#define BGM_FANFA1 367          // Level Up!
-#define BGM_ME_ASA 368          // Pokémon Healed
-#define BGM_ME_BACHI 369        // Obtained a Badge!
-#define BGM_FANFA4 370          // Obtained an Item!
-#define BGM_FANFA5 371          // Your Pokémon Just Evolved!
-#define BGM_ME_WAZA 372         // Obtained a TM/HM!
-#define BGM_BIJYUTU 373         // Lilycove Musseum
-#define BGM_DOORO_X4 374        // Route 122/Intro
-#define BGM_FUNE_KAN 375        // Slateport Museum
-#define BGM_ME_SHINKA 376       // Evolution Intro
-#define BGM_SHINKA 377          // Evolution
-#define BGM_ME_WASURE 378       // Move Deleted
-#define BGM_SYOUJOEYE 379       // Encounter! Tuber
-#define BGM_BOYEYE 380          // Encounter! Boy
-#define BGM_DAN02 381           // Abandoned Ship
-#define BGM_MACHI_S3 382        // Fortree City
-#define BGM_ODAMAKI 383         // Professor Birch's Lab
-#define BGM_B_TOWER 384         // Battle Tower (RS)
-#define BGM_SWIMEYE 385         // Encounter! Swimmer
-#define BGM_DAN03 386           // Meteor Falls
-#define BGM_ME_KINOMI 387       // Obtained a Berry!
-#define BGM_ME_TAMA 388         // Awakening the Super-Ancient Pokémon
-#define BGM_ME_B_BIG 389        // Slots Jackpot!
-#define BGM_ME_B_SMALL 390      // Slots Victory!
-#define BGM_ME_ZANNEN 391       // Too bad!
-#define BGM_BD_TIME 392         // Roulette!
-#define BGM_TEST1 393           // Contest Test 1
-#define BGM_TEST2 394           // Contest Test 2
-#define BGM_TEST3 395           // Contest Test 3
-#define BGM_TEST4 396           // Contest Test 4
-#define BGM_TEST 397            // Encounter! Gentleman (Test?)
-#define BGM_GOMACHI0 398        // Verdanturf Town
-#define BGM_GOTOWN 399          // Rustboro City
-#define BGM_POKECEN 400         // Pokémon Center
-#define BGM_NEXTROAD 401        // Route 104
-#define BGM_GRANROAD 402        // Route 119
-#define BGM_CYCLING 403         // Cycling
-#define BGM_FRIENDLY 404        // Pokémart
-#define BGM_MISHIRO 405         // Littleroot Town
-#define BGM_TOZAN 406           // Sky Pillar
-#define BGM_GIRLEYE 407         // Encounter! Girl
-#define BGM_MINAMO 408          // Lilycove City
-#define BGM_ASHROAD 409         // Route 111
-#define BGM_EVENT0 410          // Help me!
-#define BGM_DEEPDEEP 411        // Underwater
-#define BGM_KACHI1 412          // Victory! Trainer
-#define BGM_TITLE3 413          // Title Screen
-#define BGM_DEMO1 414           // Opening Movie
-#define BGM_GIRL_SUP 415        // Encounter! May
-#define BGM_HAGESHII 416        // Encounter! Biker
-#define BGM_KAKKOII 417         // Encounter! Electric Trainer
-#define BGM_KAZANBAI 418        // Route 113
-#define BGM_AQA_0 419           // Encounter! Team Aqua
-#define BGM_TSURETEK 420        // Follow Me!
-#define BGM_BOY_SUP 421         // Encounter! Brendan
-#define BGM_RAINBOW 422         // Ever Grande City
-#define BGM_AYASII 423          // Encounter! Psychic
-#define BGM_KACHI4 424          // Victory! Aqua/Magma Grunt
-#define BGM_ROPEWAY 425         // Cable Car
-#define BGM_CASINO 426          // Game Corner
-#define BGM_HIGHTOWN 427        // Dewford Town
-#define BGM_SAFARI 428          // Safari Zone
-#define BGM_C_ROAD 429          // Victory Toad
-#define BGM_AJITO 430           // Aqua/Magma Hideout
-#define BGM_M_BOAT 431          // Sailing
-#define BGM_M_DUNGON 432        // Mt. Pyre (Inside)
-#define BGM_FINECITY 433        // Slateport City
-#define BGM_MACHUPI 434         // Mt. Pyre (Outside)
-#define BGM_P_SCHOOL 435        // Pokémon Trainer's School
-#define BGM_DENDOU 436          // Hall of Fame
-#define BGM_TONEKUSA 437        // Lavaridge Town
-#define BGM_MABOROSI 438        // Sealed Chamber
-#define BGM_CON_FAN 439         // You are the Champion!
-#define BGM_CONTEST0 440        // Pokémon Contest
-#define BGM_MGM0 441            // Encounter! Team Magma
-#define BGM_T_BATTLE 442        // Opening Battle
-#define BGM_OOAME 443           // The Flood
-#define BGM_HIDERI 444          // The Drought
-#define BGM_RUNECITY 445        // Sootopolis City
-#define BGM_CON_K 446           // Berry Blending Results
-#define BGM_EIKOU_R 447         // Hall of Fame
-#define BGM_KARAKURI 448        // Trick House
-#define BGM_HUTAGO 449          // Encounter! Kid
-#define BGM_SITENNOU 450        // Encounter! Elite Four
-#define BGM_YAMA_EYE 451        // Encounter! Hiker
-#define BGM_CONLOBBY 452        // Contest Lobby
-#define BGM_INTER_V 453         // Encounter! Gabby and Ty
-#define BGM_DAIGO 454           // Encounter! Wallace
-#define BGM_THANKFOR 455        // Credits
-#define BGM_END 456             // The End
-#define BGM_BATTLE27 457        // Battle! Wild Pokémon
-#define BGM_BATTLE31 458        // Battle! Team Aqua/Magma
-#define BGM_BATTLE20 459        // Battle! Trainer
-#define BGM_BATTLE32 460        // Battle! Gym Leader
-#define BGM_BATTLE33 461        // Battle! Champion
-#define BGM_BATTLE36 462        // Battle! Regi Trio
-#define BGM_BATTLE34 463        // Battle! Legendary Pokémon
-#define BGM_BATTLE35 464        // Battle! Rival
-#define BGM_BATTLE38 465        // Battle! Elite Four
-#define BGM_BATTLE30 466        // Battle! Archie/Maxie
+#define MUS_STOP 349
+#define MUS_TETSUJI 350         // Littleroot Town Test 'TETSUJI'
+#define MUS_FIELD13 351         // GSC - Route 38
+#define MUS_KACHI22 352         // Wild Pokémon Defeated
+#define MUS_KACHI2 353          // Wild Pokémon Defeated with Intro
+#define MUS_KACHI3 354          // Gym Leader Defeated
+#define MUS_KACHI5 355          // Victory! Elite Four
+#define MUS_PCC 356             // Crystal - Pokémon Communication Center
+#define MUS_NIBI 357            // GSC - Viridian/Saffron/Pewter/etc
+#define MUS_SUIKUN 358          // Crystal - Battle! Legendary Beasts
+#define MUS_DOORO1 359          // Route 101
+#define MUS_DOORO_X1 360        // Route 110
+#define MUS_DOORO_X3 361        // Route 120
+#define MUS_MACHI_S2 362        // Petalburg City
+#define MUS_MACHI_S4 363        // Oldale Town
+#define MUS_GIM 364             // Gym
+#define MUS_NAMINORI 365        // Surfing
+#define MUS_DAN01 366           // Caves and Darkness
+#define MUS_FANFA1 367          // Level Up!
+#define MUS_ME_ASA 368          // Pokémon Healed
+#define MUS_ME_BACHI 369        // Obtained a Badge!
+#define MUS_FANFA4 370          // Obtained an Item!
+#define MUS_FANFA5 371          // Your Pokémon Just Evolved!
+#define MUS_ME_WAZA 372         // Obtained a TM/HM!
+#define MUS_BIJYUTU 373         // Lilycove Musseum
+#define MUS_DOORO_X4 374        // Route 122/Intro
+#define MUS_FUNE_KAN 375        // Slateport Museum
+#define MUS_ME_SHINKA 376       // Evolution Intro
+#define MUS_SHINKA 377          // Evolution
+#define MUS_ME_WASURE 378       // Move Deleted
+#define MUS_SYOUJOEYE 379       // Encounter! Tuber
+#define MUS_BOYEYE 380          // Encounter! Boy
+#define MUS_DAN02 381           // Abandoned Ship
+#define MUS_MACHI_S3 382        // Fortree City
+#define MUS_ODAMAKI 383         // Professor Birch's Lab
+#define MUS_B_TOWER 384         // Battle Tower (RS)
+#define MUS_SWIMEYE 385         // Encounter! Swimmer
+#define MUS_DAN03 386           // Meteor Falls
+#define MUS_ME_KINOMI 387       // Obtained a Berry!
+#define MUS_ME_TAMA 388         // Awakening the Super-Ancient Pokémon
+#define MUS_ME_B_BIG 389        // Slots Jackpot!
+#define MUS_ME_B_SMALL 390      // Slots Victory!
+#define MUS_ME_ZANNEN 391       // Too bad!
+#define MUS_BD_TIME 392         // Roulette!
+#define MUS_TEST1 393           // Contest Test 1
+#define MUS_TEST2 394           // Contest Test 2
+#define MUS_TEST3 395           // Contest Test 3
+#define MUS_TEST4 396           // Contest Test 4
+#define MUS_TEST 397            // Encounter! Gentleman (Test?)
+#define MUS_GOMACHI0 398        // Verdanturf Town
+#define MUS_GOTOWN 399          // Rustboro City
+#define MUS_POKECEN 400         // Pokémon Center
+#define MUS_NEXTROAD 401        // Route 104
+#define MUS_GRANROAD 402        // Route 119
+#define MUS_CYCLING 403         // Cycling
+#define MUS_FRIENDLY 404        // Pokémart
+#define MUS_MISHIRO 405         // Littleroot Town
+#define MUS_TOZAN 406           // Sky Pillar
+#define MUS_GIRLEYE 407         // Encounter! Girl
+#define MUS_MINAMO 408          // Lilycove City
+#define MUS_ASHROAD 409         // Route 111
+#define MUS_EVENT0 410          // Help me!
+#define MUS_DEEPDEEP 411        // Underwater
+#define MUS_KACHI1 412          // Victory! Trainer
+#define MUS_TITLE3 413          // Title Screen
+#define MUS_DEMO1 414           // Opening Movie
+#define MUS_GIRL_SUP 415        // Encounter! May
+#define MUS_HAGESHII 416        // Encounter! Biker
+#define MUS_KAKKOII 417         // Encounter! Electric Trainer
+#define MUS_KAZANBAI 418        // Route 113
+#define MUS_AQA_0 419           // Encounter! Team Aqua
+#define MUS_TSURETEK 420        // Follow Me!
+#define MUS_BOY_SUP 421         // Encounter! Brendan
+#define MUS_RAINBOW 422         // Ever Grande City
+#define MUS_AYASII 423          // Encounter! Psychic
+#define MUS_KACHI4 424          // Victory! Aqua/Magma Grunt
+#define MUS_ROPEWAY 425         // Cable Car
+#define MUS_CASINO 426          // Game Corner
+#define MUS_HIGHTOWN 427        // Dewford Town
+#define MUS_SAFARI 428          // Safari Zone
+#define MUS_C_ROAD 429          // Victory Toad
+#define MUS_AJITO 430           // Aqua/Magma Hideout
+#define MUS_M_BOAT 431          // Sailing
+#define MUS_M_DUNGON 432        // Mt. Pyre (Inside)
+#define MUS_FINECITY 433        // Slateport City
+#define MUS_MACHUPI 434         // Mt. Pyre (Outside)
+#define MUS_P_SCHOOL 435        // Pokémon Trainer's School
+#define MUS_DENDOU 436          // Hall of Fame
+#define MUS_TONEKUSA 437        // Lavaridge Town
+#define MUS_MABOROSI 438        // Sealed Chamber
+#define MUS_CON_FAN 439         // You are the Champion!
+#define MUS_CONTEST0 440        // Pokémon Contest
+#define MUS_MGM0 441            // Encounter! Team Magma
+#define MUS_T_BATTLE 442        // Opening Battle
+#define MUS_OOAME 443           // The Flood
+#define MUS_HIDERI 444          // The Drought
+#define MUS_RUNECITY 445        // Sootopolis City
+#define MUS_CON_K 446           // Berry Blending Results
+#define MUS_EIKOU_R 447         // Hall of Fame
+#define MUS_KARAKURI 448        // Trick House
+#define MUS_HUTAGO 449          // Encounter! Kid
+#define MUS_SITENNOU 450        // Encounter! Elite Four
+#define MUS_YAMA_EYE 451        // Encounter! Hiker
+#define MUS_CONLOBBY 452        // Contest Lobby
+#define MUS_INTER_V 453         // Encounter! Gabby and Ty
+#define MUS_DAIGO 454           // Encounter! Wallace
+#define MUS_THANKFOR 455        // Credits
+#define MUS_END 456             // The End
+#define MUS_BATTLE27 457        // Battle! Wild Pokémon
+#define MUS_BATTLE31 458        // Battle! Team Aqua/Magma
+#define MUS_BATTLE20 459        // Battle! Trainer
+#define MUS_BATTLE32 460        // Battle! Gym Leader
+#define MUS_BATTLE33 461        // Battle! Champion
+#define MUS_BATTLE36 462        // Battle! Regi Trio
+#define MUS_BATTLE34 463        // Battle! Legendary Pokémon
+#define MUS_BATTLE35 464        // Battle! Rival
+#define MUS_BATTLE38 465        // Battle! Elite Four
+#define MUS_BATTLE30 466        // Battle! Archie/Maxie
 
-#define BGM_ROUTE_118 0x7FFF  // What is this for?
+#define MUS_ROUTE_118 0x7FFF  // What is this for?
 
 #endif  // GUARD_CONSTANTS_SONGS_H

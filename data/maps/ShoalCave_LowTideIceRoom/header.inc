@@ -3,7 +3,7 @@ ShoalCave_LowTideIceRoom:: @ 8307684
 	.4byte ShoalCave_LowTideIceRoom_MapEvents
 	.4byte ShoalCave_LowTideIceRoom_MapScripts
 	.4byte 0x0
-	.2byte BGM_M_DUNGON
+	.2byte MUS_M_DUNGON
 	.2byte 329
 	.byte 67
 	.byte 0

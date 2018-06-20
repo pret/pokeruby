@@ -27,7 +27,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	bufferleadmonspeciesname 0
 	message LittlerootTown_ProfessorBirchsLab_Text_173D94
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, MSGBOX_YESNO
 	compare RESULT, YES
@@ -153,7 +153,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152E6D:: @ 8152E6D
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_ProfessorBirchsLab_Text_17422F
 	waitfanfare
 	waitmessage

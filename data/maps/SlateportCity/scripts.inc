@@ -73,7 +73,7 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	compare RESULT, 0
 	call_if_eq SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message SlateportCity_Text_1646DD
 	waitfanfare
 	waitmessage
@@ -501,7 +501,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	applymovement 11, SlateportCity_Movement_1A0841
 	waitmovement 0
 	msgbox SlateportCity_Text_1655E7, 4
-	playbgm BGM_EVIL_TEAM, FALSE
+	playbgm MUS_EVIL_TEAM, FALSE
 	msgbox SlateportCity_Text_1656BC, 4
 	applymovement 6, SlateportCity_Movement_1A083F
 	applymovement 1, SlateportCity_Movement_1A083F

@@ -865,7 +865,7 @@ LittlerootTown_EventScript_14DD2B:: @ 814DD2B
 
 LittlerootTown_EventScript_14DD38:: @ 814DD38
 	msgbox LittlerootTown_Text_16A8FD, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message LittlerootTown_Text_16AA32
 	waitfanfare
 	waitmessage

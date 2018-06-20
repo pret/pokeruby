@@ -3,7 +3,7 @@ SootopolisCity_House8:: @ 8306A7C
 	.4byte SootopolisCity_House8_MapEvents
 	.4byte SootopolisCity_House8_MapScripts
 	.4byte 0x0
-	.2byte BGM_RUNECITY
+	.2byte MUS_RUNECITY
 	.2byte 298
 	.byte 14
 	.byte 0

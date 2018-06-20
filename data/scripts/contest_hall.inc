@@ -803,7 +803,7 @@ LinkContestRoom1_EventScript_1A594A:: @ 81A594A
 	setvar VAR_TEMP_9, 1
 	showcontestresults
 	setvar VAR_TEMP_9, 0
-	playbgm BGM_CON_FAN, FALSE
+	playbgm MUS_CON_FAN, FALSE
 	return
 
 LinkContestRoom1_EventScript_1A5984:: @ 81A5984
@@ -1143,7 +1143,7 @@ LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	setflag FLAG_SYS_RIBBON_GET
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	msgbox LinkContestRoom1_Text_1A6D96, 4
 	waitfanfare
 	special sub_80C4858

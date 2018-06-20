@@ -41,7 +41,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_15B78B
-	playbgm BGM_SITENNOU, FALSE
+	playbgm MUS_SITENNOU, FALSE
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42
 	goto EverGrandeCity_DrakesRoom_EventScript_15B795

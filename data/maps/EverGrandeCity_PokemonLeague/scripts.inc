@@ -61,7 +61,7 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	applymovement 4, EverGrandeCity_PokemonLeague_Movement_15BB81
 	waitmovement 0
 	delay 10
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	message EverGrandeCity_PokemonLeague_Text_191804
 	waitmessage
 	waitfanfare

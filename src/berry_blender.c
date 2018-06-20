@@ -1245,7 +1245,7 @@ static void sub_804E9F8(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         break;
     case 100:
         Menu_DrawStdWindowFrame(0, 13, 29, 19);
@@ -1507,7 +1507,7 @@ static void sub_804F378(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         PlaySE(SE_MOTER);
         Blender_ControlHitPitch();
         break;
@@ -3524,7 +3524,7 @@ static void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {
-        PlayFanfare(BGM_FANFA1);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskID].data[0]++;
     }
     if (IsFanfareTaskInactive())

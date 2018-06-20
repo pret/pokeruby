@@ -707,7 +707,7 @@ Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
 Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Route110_TrickHousePuzzle1_Text_19C1B8
 	waitfanfare
 	waitmessage

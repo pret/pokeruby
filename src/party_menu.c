@@ -3975,7 +3975,7 @@ void Task_TeamMonTMMove3(u8 taskId)
 {
     if (gUnknown_0202E8F6 == 0)
     {
-        PlayFanfare(BGM_FANFA1);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskId].func = Task_TeamMonTMMove4;
     }
 }

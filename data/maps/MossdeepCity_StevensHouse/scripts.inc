@@ -78,7 +78,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	goto_if_eq MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar VAR_SPECIAL_4, RESULT
 	removeobject 2
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message MossdeepCity_StevensHouse_Text_18DD61
 	waitfanfare
 	waitmessage

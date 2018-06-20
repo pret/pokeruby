@@ -451,7 +451,7 @@ static bool8 sub_8141E64(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(BGM_DENDOU);
+            PlayBGM(MUS_DENDOU);
             return 0;
         }
         break;

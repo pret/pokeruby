@@ -11,7 +11,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_155CE6:: @ 8155CE6
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_17ECFD, 4
 	closemessage
-	playbgm BGM_EVIL_TEAM, TRUE
+	playbgm MUS_EVIL_TEAM, TRUE
 	addobject 3
 	applymovement 3, SlateportCity_OceanicMuseum_2F_Movement_155EB4
 	waitmovement 0

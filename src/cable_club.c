@@ -766,9 +766,9 @@ static void sub_808382C(u8 taskId)
         break;
     case 5:
         if (gLinkPlayers[0].trainerId & 1)
-            current_map_music_set__default_for_battle(BGM_BATTLE32);
+            current_map_music_set__default_for_battle(MUS_BATTLE32);
         else
-            current_map_music_set__default_for_battle(BGM_BATTLE20);
+            current_map_music_set__default_for_battle(MUS_BATTLE20);
 
         switch (gSpecialVar_0x8004)
         {

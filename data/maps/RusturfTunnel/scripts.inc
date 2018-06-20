@@ -308,7 +308,7 @@ RusturfTunnel_EventScript_15C9D7:: @ 815C9D7
 RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	lock
 	faceplayer
-	playbgm BGM_EVIL_TEAM, FALSE
+	playbgm MUS_EVIL_TEAM, FALSE
 	msgbox RusturfTunnel_Text_19419B, 4
 	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4

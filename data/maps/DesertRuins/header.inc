@@ -3,7 +3,7 @@ DesertRuins:: @ 8306E18
 	.4byte DesertRuins_MapEvents
 	.4byte DesertRuins_MapScripts
 	.4byte 0x0
-	.2byte BGM_MABOROSI
+	.2byte MUS_MABOROSI
 	.2byte 132
 	.byte 82
 	.byte 0

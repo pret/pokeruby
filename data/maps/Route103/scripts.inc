@@ -18,7 +18,7 @@ Route103_EventScript_14EB92:: @ 814EB92
 
 Route103_EventScript_14EBAB:: @ 814EBAB
 	msgbox Route103_Text_16D57A, 4
-	playbgm BGM_GIRL_SUP, TRUE
+	playbgm MUS_GIRL_SUP, TRUE
 	applymovement 2, Route103_Movement_1A0839
 	waitmovement 0
 	applymovement 2, Route103_Movement_1A0833
@@ -34,7 +34,7 @@ Route103_EventScript_14EBAB:: @ 814EBAB
 
 Route103_EventScript_14EC04:: @ 814EC04
 	msgbox Route103_Text_16D762, 4
-	playbgm BGM_BOY_SUP, TRUE
+	playbgm MUS_BOY_SUP, TRUE
 	applymovement 2, Route103_Movement_1A0839
 	waitmovement 0
 	applymovement 2, Route103_Movement_1A0833

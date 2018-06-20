@@ -82,7 +82,7 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	goto_if_eq BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	msgbox BattleTower_Lobby_Text_19A719, 4
 
@@ -112,7 +112,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	case 0, BattleTower_Lobby_EventScript_160408
 	message BattleTower_Lobby_Text_19A506
 	waitmessage
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	waitfanfare
 	setvar VAR_SPECIAL_4, 9
 	special BattleTowerUtil

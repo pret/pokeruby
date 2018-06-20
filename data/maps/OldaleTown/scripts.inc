@@ -38,7 +38,7 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_14DE79
 	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_14DE79
 	setflag FLAG_TEMP_1
-	playbgm BGM_TSURETEK, FALSE
+	playbgm MUS_TSURETEK, FALSE
 	msgbox OldaleTown_Text_16AEF2, 4
 	closemessage
 	switch FACING

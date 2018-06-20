@@ -1108,48 +1108,48 @@ void ClearBattleMonForms(void)
         gBattleMonForms[i] = 0;
 }
 
-u16 GetBGM_ForBattle(void)
+u16 GetMUS_ForBattle(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return BGM_BATTLE34;
+        return MUS_BATTLE34;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return BGM_BATTLE36;
+        return MUS_BATTLE36;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return BGM_BATTLE20;
+        return MUS_BATTLE20;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         switch (gTrainers[gTrainerBattleOpponent].trainerClass)
         {
         case 2:
         case 0x31:
-            return BGM_BATTLE30;
+            return MUS_BATTLE30;
         case 3:
         case 4:
         case 0x32:
         case 0x33:
-            return BGM_BATTLE31;
+            return MUS_BATTLE31;
         case 0x19:
-            return BGM_BATTLE32;
+            return MUS_BATTLE32;
         case 0x20:
-            return BGM_BATTLE33;
+            return MUS_BATTLE33;
         case 0x2E:
             if (!StringCompare(gTrainers[gTrainerBattleOpponent].trainerName, BattleText_Wally))
-                return BGM_BATTLE20;
-            return BGM_BATTLE35;
+                return MUS_BATTLE20;
+            return MUS_BATTLE35;
         case 0x18:
-            return BGM_BATTLE38;
+            return MUS_BATTLE38;
         default:
-            return BGM_BATTLE20;
+            return MUS_BATTLE20;
         }
     }
-    return BGM_BATTLE27;
+    return MUS_BATTLE27;
 }
 
 void sub_80408BC(void)
 {
     ResetMapMusic();
     m4aMPlayAllStop();
-    PlayBGM(GetBGM_ForBattle());
+    PlayBGM(GetMUS_ForBattle());
 }
 
 void current_map_music_set__default_for_battle(u16 song)
@@ -1159,7 +1159,7 @@ void current_map_music_set__default_for_battle(u16 song)
     if (song)
         PlayNewMapMusic(song);
     else
-        PlayNewMapMusic(GetBGM_ForBattle());
+        PlayNewMapMusic(GetMUS_ForBattle());
 }
 
 const u8 *GetMonSpritePal(struct Pokemon *mon)

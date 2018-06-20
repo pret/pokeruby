@@ -3,7 +3,7 @@ GraniteCave_StevensRoom:: @ 8306E88
 	.4byte GraniteCave_StevensRoom_MapEvents
 	.4byte GraniteCave_StevensRoom_MapScripts
 	.4byte 0x0
-	.2byte BGM_DAN01
+	.2byte MUS_DAN01
 	.2byte 289
 	.byte 55
 	.byte 0

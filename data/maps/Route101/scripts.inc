@@ -18,7 +18,7 @@ Route101_EventScript_14E93F:: @ 814E93F
 
 Route101_EventScript_14E948:: @ 814E948
 	lockall
-	playbgm BGM_EVENT0, TRUE
+	playbgm MUS_EVENT0, TRUE
 	msgbox Route101_Text_16D10E, 4
 	closemessage
 	setobjectxy 2, 0, 15

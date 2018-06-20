@@ -1561,11 +1561,11 @@ Std_ObtainItem_Fail: @ 819FECC
 	return
 
 PlayGetItemFanfare:
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	return
 
 PlayGetTMHMFanfare:
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	return
 
 Std_ObtainDecoration: @ 819FEDA
@@ -1583,7 +1583,7 @@ Std_ObtainDecoration_: @ 819FEE8
 	return
 
 Std_ObtainDecoration_Success: @ 819FF03
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message Message_ObtainedDecoration
 	waitfanfare
 	waitmessage
@@ -2097,7 +2097,7 @@ MossdeepCity_Gym_EventScript_1A02C5:: @ 81A02C5
 PetalburgCity_Gym_EventScript_1A02C5:: @ 81A02C5
 RustboroCity_Gym_EventScript_1A02C5:: @ 81A02C5
 SootopolisCity_Gym_1F_EventScript_1A02C5:: @ 81A02C5
-	playfanfare BGM_ME_BACHI
+	playfanfare MUS_ME_BACHI
 	waitfanfare
 	return
 
@@ -2106,7 +2106,7 @@ Route111_OldLadysRestStop_EventScript_1A02CA:: @ 81A02CA
 Route119_WeatherInstitute_1F_EventScript_1A02CA:: @ 81A02CA
 SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 1
-	playfanfare BGM_ME_ASA
+	playfanfare MUS_ME_ASA
 	waitfanfare
 	special ScrSpecial_HealPlayerParty
 	fadescreen 0
@@ -2125,7 +2125,7 @@ DewfordTown_EventScript_1A02E7:: @ 81A02E7
 Route104_EventScript_1A02E7:: @ 81A02E7
 Route109_EventScript_1A02E7:: @ 81A02E7
 	setflag FLAG_SPECIAL_FLAG_1
-	playbgm BGM_M_BOAT, FALSE
+	playbgm MUS_M_BOAT, FALSE
 	return
 
 DewfordTown_EventScript_1A02EF:: @ 81A02EF
@@ -2539,7 +2539,7 @@ GraniteCave_StevensRoom_EventScript_1A067F:: @ 81A067F
 MtPyre_Summit_EventScript_1A067F:: @ 81A067F
 SlateportCity_OceanicMuseum_2F_EventScript_1A067F:: @ 81A067F
 	bufferitemname 0, VAR_SPECIAL_4
-	playfanfare BGM_ME_WAZA
+	playfanfare MUS_ME_WAZA
 	message FallarborTown_House1_Text_1A1498
 	waitmessage
 	waitfanfare

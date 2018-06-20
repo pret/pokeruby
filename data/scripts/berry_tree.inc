@@ -113,7 +113,7 @@ Route102_EventScript_1A161D:: @ 81A161D
 	goto_if_eq Route102_EventScript_1A1642
 	special EventObjectInteractionRemoveBerryTree
 	message Route102_Text_1A17FD
-	playfanfare BGM_ME_KINOMI
+	playfanfare MUS_ME_KINOMI
 	waitmessage
 	waitfanfare
 	waitbuttonpress

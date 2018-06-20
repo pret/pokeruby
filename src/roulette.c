@@ -1055,13 +1055,13 @@ void sub_8116638(u8 taskid)
     case 0x2:
         if (gTasks[taskid].data[0x2] == 0xC)
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
             Menu_PrintText(&gUnknown_081C41A5, 0x1, 0xF);
         }
         else
         {
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
             Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
             Menu_PrintText(&gUnknown_081C4199, 0x1, 0xF);
         }

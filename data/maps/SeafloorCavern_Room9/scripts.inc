@@ -89,7 +89,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	.else
 	setvar RESULT, 1
 	.endif
-	playfanfare BGM_ME_TAMA
+	playfanfare MUS_ME_TAMA
 	playse SE_TAMA
 	special sub_80818A4
 	applymovement VAR_SPECIAL_4, SeafloorCavern_Room9_Movement_1A0841

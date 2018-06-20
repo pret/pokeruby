@@ -1584,7 +1584,7 @@ void sub_80AC2CC(u8 taskId)
         {
         case 0:
             sub_80B1EA8(-1, 1);
-            PlayFanfare(BGM_ME_ZANNEN);
+            PlayFanfare(MUS_ME_ZANNEN);
             gTasks[taskId].data[10]++;
             break;
         case 1:

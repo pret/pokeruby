@@ -138,7 +138,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	copyvar VAR_SPECIAL_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage
@@ -158,7 +158,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	copyvar VAR_SPECIAL_4, RESULT
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_FOSSIL_MON
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	message RustboroCity_DevonCorp_2F_Text_18319E
 	waitfanfare
 	waitmessage

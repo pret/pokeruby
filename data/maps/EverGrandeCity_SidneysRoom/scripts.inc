@@ -42,7 +42,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_SYDNEY, EverGrandeCity_SidneysRoom_EventScript_15B5BD
-	playbgm BGM_SITENNOU, FALSE
+	playbgm MUS_SITENNOU, FALSE
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
 	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823
 	goto EverGrandeCity_SidneysRoom_EventScript_15B5C7

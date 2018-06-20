@@ -26,23 +26,23 @@ LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	return
 
 LinkContestRoom1_EventScript_15F5E0:: @ 815F5E0
-	savebgm BGM_TEST1
+	savebgm MUS_TEST1
 	return
 
 LinkContestRoom1_EventScript_15F5E4:: @ 815F5E4
-	savebgm BGM_TEST2
+	savebgm MUS_TEST2
 	return
 
 LinkContestRoom1_EventScript_15F5E8:: @ 815F5E8
-	savebgm BGM_TEST3
+	savebgm MUS_TEST3
 	return
 
 LinkContestRoom1_EventScript_15F5EC:: @ 815F5EC
-	savebgm BGM_TEST4
+	savebgm MUS_TEST4
 	return
 
 LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
-	savebgm BGM_CONTEST0
+	savebgm MUS_CONTEST0
 	return
 
 LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4

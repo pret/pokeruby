@@ -36,7 +36,7 @@ Route117_EventScript_1B2298:: @ 81B2298
 
 Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
-	playfanfare BGM_FANFA1
+	playfanfare MUS_FANFA1
 	waitfanfare
 	waitmessage
 	waitbuttonpress

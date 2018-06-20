@@ -3,7 +3,7 @@ Underwater_SeafloorCavern:: @ 8307048
 	.4byte Underwater_SeafloorCavern_MapEvents
 	.4byte Underwater_SeafloorCavern_MapScripts
 	.4byte 0x0
-	.2byte BGM_DEEPDEEP
+	.2byte MUS_DEEPDEEP
 	.2byte 147
 	.byte 69
 	.byte 0

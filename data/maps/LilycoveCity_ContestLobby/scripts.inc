@@ -77,7 +77,7 @@ LilycoveCity_ContestLobby_EventScript_158948:: @ 8158948
 	applymovement 4, LilycoveCity_ContestLobby_Movement_158A52
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4
@@ -249,7 +249,7 @@ LilycoveCity_ContestLobby_EventScript_158B18:: @ 8158B18
 	applymovement 11, LilycoveCity_ContestLobby_Movement_158B7C
 	waitmovement 0
 	msgbox LilycoveCity_ContestLobby_Text_188BB5, 4
-	playfanfare BGM_FANFA4
+	playfanfare MUS_FANFA4
 	msgbox LilycoveCity_ContestLobby_Text_188C03, 4
 	waitfanfare
 	msgbox LilycoveCity_ContestLobby_Text_188C19, 4

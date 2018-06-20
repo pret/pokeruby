@@ -815,7 +815,7 @@ static void sub_8046FBC(struct Sprite *sprite)
     {
         gDoingBattleAnim = 0;
         m4aMPlayAllStop();
-        PlaySE(BGM_FANFA5);
+        PlaySE(MUS_FANFA5);
     }
     else if (sprite->data[4] == 315)
     {

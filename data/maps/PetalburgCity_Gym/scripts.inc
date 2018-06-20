@@ -187,7 +187,7 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closemessage
 	setflag FLAG_SPECIAL_FLAG_1
-	playbgm BGM_TSURETEK, FALSE
+	playbgm MUS_TSURETEK, FALSE
 	compare VAR_SPECIAL_8, 0
 	call_if_eq PetalburgCity_Gym_EventScript_154835
 	compare VAR_SPECIAL_8, 1
