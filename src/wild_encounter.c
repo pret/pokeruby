@@ -3725,7 +3725,7 @@ static u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
 
     for (yCur = yMin; yCur <= yMax; yCur++)
     {
-        for (xCur = 0; xCur < gMapHeader.mapData->width; xCur++)
+        for (xCur = 0; xCur < gMapHeader.mapLayout->width; xCur++)
         {
             if (MetatileBehavior_IsFeebasEncounterable(MapGridGetMetatileBehaviorAt(xCur + 7, yCur + 7)) == TRUE)
             {

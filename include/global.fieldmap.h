@@ -53,7 +53,7 @@ struct Tileset
     /*0x14*/ TilesetCB callback;
 };
 
-struct MapData
+struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
@@ -63,7 +63,7 @@ struct MapData
     /*0x14*/ struct Tileset *secondaryTileset;
 };
 
-struct BackupMapData
+struct BackupMapLayout
 {
     s32 width;
     s32 height;
@@ -157,12 +157,12 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ struct MapData *mapData;
+    /* 0x00 */ struct MapLayout *mapLayout;
     /* 0x04 */ struct MapEvents *events;
     /* 0x08 */ u8 *mapScripts;
     /* 0x0C */ struct MapConnections *connections;
     /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapDataId;
+    /* 0x12 */ u16 mapLayoutId;
     /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;

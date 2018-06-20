@@ -611,8 +611,8 @@ bool32 sub_8069D34(s16 x, s16 y)
 void SetSootopolisGymCrackedIceMetatiles(void)
 {
     s32 x, y;
-    s32 width = gMapHeader.mapData->width;
-    s32 height = gMapHeader.mapData->height;
+    s32 width = gMapHeader.mapLayout->width;
+    s32 height = gMapHeader.mapLayout->height;
     for (x = 0; x < width; x++)
     {
         for (y = 0; y < height; y++)

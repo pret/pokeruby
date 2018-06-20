@@ -42,7 +42,6 @@ void SetGameStat(u8, u32);
 void Overworld_SetEventObjTemplateCoords(u8, s16, s16);
 void Overworld_SetEventObjTemplateMovementType(u8, u8);
 // mapdata_load_assets_to_gpu_and_full_redraw
-// get_mapdata_header
 // ApplyCurrentWarp
 // SetWarpData
 // warp_data_is_not_neg_1

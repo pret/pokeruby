@@ -2271,7 +2271,7 @@ void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 * unk_0203
         sub_81008BC(unk_02038900);
         sub_8100930(unk_02038900->decoration->shape);
         sub_8100874(unk_02038900);
-        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
+        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
         gUnknown_020391A8 = gSprites[gFieldCamera.trackedSpriteId].data[0];
         gFieldCamera.trackedSpriteId = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
@@ -3206,7 +3206,7 @@ bool8 sub_810038C(u8 taskId)
     {
         data[1]++;
         return FALSE;
-    } else if (gUnknown_020391AA == DIR_NORTH && data[1] - 7 >= gMapHeader.mapData->height)
+    } else if (gUnknown_020391AA == DIR_NORTH && data[1] - 7 >= gMapHeader.mapLayout->height)
     {
         data[1]--;
         return FALSE;
@@ -3214,7 +3214,7 @@ bool8 sub_810038C(u8 taskId)
     {
         data[0]++;
         return FALSE;
-    } else if (gUnknown_020391AA == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapData->width)
+    } else if (gUnknown_020391AA == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapLayout->width)
     {
         data[0]--;
         return FALSE;
@@ -3336,7 +3336,7 @@ void sub_810070C(u16 *a0, u16 a1)
     u16 i;
     for (i=0; i<16; i++)
     {
-        a0[i] = ((u16 *)gMapHeader.mapData->primaryTileset->palettes)[16 * a1 + i];
+        a0[i] = ((u16 *)gMapHeader.mapLayout->primaryTileset->palettes)[16 * a1 + i];
     }
 }
 
@@ -3352,7 +3352,7 @@ void sub_8100740(u8 *dest, u16 flags)
     }
     for (i=0; i<32; i++)
     {
-        buffer[i] = ((u8 *)gMapHeader.mapData->primaryTileset->tiles)[flags * 32 + i];
+        buffer[i] = ((u8 *)gMapHeader.mapLayout->primaryTileset->tiles)[flags * 32 + i];
     }
     switch (mode)
     {
@@ -3398,7 +3398,7 @@ void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
 
 u16 sub_810089C(u16 a0)
 {
-    return ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles)[a0] & 0xfff;
+    return ((u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles)[a0] & 0xfff;
 }
 
 const u8 Unknown_3EC660[] = {0, 1, 2, 3};
@@ -3665,7 +3665,7 @@ void sub_8100B6C(void)
             {
                 for (k=0; k<gUnknown_020391B4[i].width; k++)
                 {
-                    MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
+                    MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapLayout->map)[(x + k) + gMapHeader.mapLayout->width * (y - j)] | 0x3000);
                 }
             }
             sub_8100A60(gUnknown_020391B4[i].decorId);

@@ -241,11 +241,11 @@ void sub_80BB764(s16 *arg1, s16 *arg2, u16 arg3)
 {
     s16 x, y;
 
-    for (y=0; y<gMapHeader.mapData->height; y++)
+    for (y=0; y<gMapHeader.mapLayout->height; y++)
     {
-        for (x=0; x<gMapHeader.mapData->width; x++)
+        for (x=0; x<gMapHeader.mapLayout->width; x++)
         {
-            if ((gMapHeader.mapData->map[y * gMapHeader.mapData->width + x] & 0x3ff) == arg3)
+            if ((gMapHeader.mapLayout->map[y * gMapHeader.mapLayout->width + x] & 0x3ff) == arg3)
             {
                 *arg1 = x;
                 *arg2 = y;

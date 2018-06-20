@@ -1,5 +1,5 @@
 	.align 2
-gMapAttributes:: @ 8304F18
+gMapLayouts:: @ 8304F18
 	.4byte PetalburgCity_Layout
 	.4byte SlateportCity_Layout
 	.4byte MauvilleCity_Layout
