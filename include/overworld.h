@@ -3,10 +3,10 @@
 
 #include "sprite.h"
 
-struct UnkPlayerStruct
+struct InitialPlayerAvatarState
 {
-    u8 player_field_0;
-    u8 player_field_1;
+    u8 transitionFlags;
+    u8 direction;
 };
 
 struct LinkPlayerEventObject
@@ -22,7 +22,7 @@ struct UCoords32
     u32 x, y;
 };
 
-extern const struct UCoords32 gUnknown_0821664C[];
+extern const struct UCoords32 gDirectionToVectors[];
 extern void (*gFieldCallback)(void);
 extern u8 gFieldLinkPlayerCount;
 extern u8 gUnknown_03004860;
@@ -32,7 +32,6 @@ void Overworld_ResetStateAfterFly(void);
 void Overworld_ResetStateAfterTeleport(void);
 void Overworld_ResetStateAfterDigEscRope(void);
 void Overworld_ResetStateAfterWhiteOut(void);
-// sub_805308C
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
@@ -46,11 +45,9 @@ void Overworld_SetEventObjTemplateMovementType(u8, u8);
 // SetWarpData
 // warp_data_is_not_neg_1
 struct MapHeader * const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);
-struct MapHeader * const warp1_get_mapheader(void);
-// set_current_map_header_from_sav1_save_old_name
+struct MapHeader * const GetDestinationWarpMapHeader(void);
 // LoadSaveblockMapHeader
-// sub_80533CC
-void warp_in(void);
+void WarpIntoMap(void);
 void Overworld_SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
@@ -62,10 +59,10 @@ void Overworld_SetHealLocationWarp(u8);
 void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 void sub_8053678(void);
-void sub_8053690(s8, s8, s8, s8, s8);
+void SetFixedDiveWarp(s8, s8, s8, s8, s8);
 // warp1_set_to_warp2
-void sub_80536E4(s8, s8, s8, s8, s8);
-void sub_8053720(s16, s16);
+void SetFixedHoleWarp(s8, s8, s8, s8, s8);
+void SetFixedHoleWarpAsDestination(s16, s16);
 // sub_8053778
 // unref_sub_8053790
 void sub_80537CC(u8);
@@ -75,12 +72,9 @@ bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
 void sub_80538F0(u8 mapGroup, u8 mapNum);
 // sub_8053994
-void player_avatar_init_params_reset(void);
-void walkrun_find_lowest_active_bit_in_bitfield(void);
-// sub_8053AA8
-u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
-u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
-u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
+void ResetInitialPlayerAvatarState(void);
+void StoreInitialPlayerAvatarState(void);
+u16 GetCenterScreenMetatileBehavior(void);
 bool32 Overworld_IsBikingAllowed(void);
 void SetDefaultFlashLevel(void);
 void Overworld_SetFlashLevel(s32 a1);
@@ -99,8 +93,8 @@ void sub_8053F0C(void);
 void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 // GetMapMusicFadeoutSpeed
-void sub_8053FF8(void);
-bool8 sub_8054034(void);
+void TryFadeOutOldMapMusic(void);
+bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 // PlayAmbientCry
 void UpdateAmbientCry(s16 *, u16 *);
@@ -108,7 +102,7 @@ void ChooseAmbientCrySpecies(void);
 u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 // GetMapTypeByWarpData
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
-u8 get_map_type_from_warp0(void);
+u8 GetLastUsedWarpMapType(void);
 bool8 is_map_type_1_2_3_5_or_6(u8 a1);
 bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 a1);
 u8 Overworld_MapTypeIsIndoors(u8);
@@ -124,14 +118,12 @@ void CB2_OverworldBasic(void);
 void c2_overworld(void);
 // set_callback1
 // sub_80543DC
-// sub_80543E8
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
 void sub_8054534(void);
 void sub_8054588(void);
-void c2_80567AC(void);
 void c2_exit_to_overworld_2_switch(void);
 void c2_exit_to_overworld_2_local(void);
 void c2_exit_to_overworld_2_link(void);
@@ -145,15 +137,12 @@ void CB2_ContinueSavedGame(void);
 void FieldClearVBlankHBlankCallbacks(void);
 void SetFieldVBlankCallback(void);
 void VBlankCB_Field(void);
-// sub_8054814
-bool32 sub_805483C(u8 *);
 bool32 sub_805493C(u8 *, u32);
 bool32 sub_8054A4C(u8 *);
 bool32 sub_8054A9C(u8 *a1);
 void do_load_map_stuff_loop(u8 *a1);
 void sub_8054BA8(void);
 void sub_8054C2C(void);
-void sub_8054C54(void);
 void sub_8054D4C(u32 a1);
 void sub_8054D90(void);
 void mli4_mapscripts_and_other(void);

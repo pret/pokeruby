@@ -9,71 +9,78 @@
 #include "text.h"
 #include "scanline_effect.h"
 
-const static u16 gUnknown_0839ACDC[] = { 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0 };
+const static u16 sFlashLevelPixelRadii[] = { 200, 72, 56, 40, 24, 0 };
 
 const s32 gMaxFlashLevel = 4;
 
-const static struct ScanlineEffectParams gUnknown_0839ACEC =
+const static struct ScanlineEffectParams sFlashEffectParams =
 {
     (void *)REG_ADDR_WIN0H,
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1
 };
 
-static void sub_808136C(u16 *dest, u32 a2, s32 a3, s32 a4)
+static void SetFlashScanlineEffectWindowBoundary(u16 *dest, u32 y, s32 left, s32 right)
 {
-    if (a2 <= 0xA0)
+    if (y <= 160)
     {
-        if (a3 < 0)
-            a3 = 0;
-        if (a3 > 255)
-            a3 = 255;
-        if (a4 < 0)
-            a4 = 0;
-        if (a4 > 255)
-            a4 = 255;
-        dest[a2] = (a3 << 8) | a4;
+        if (left < 0)
+            left = 0;
+        if (left > 255)
+            left = 255;
+        if (right < 0)
+            right = 0;
+        if (right > 255)
+            right = 255;
+        dest[y] = (left << 8) | right;
     }
 }
 
-static void sub_8081398(u16 *dest, s32 a2, s32 a3, s32 a4)
+static void SetFlashScanlineEffectWindowBoundaries(u16 *dest, s32 centerX, s32 centerY, s32 radius)
 {
-    s32 v1 = a4;
-    s32 v2 = a4;
+    s32 r = radius;
+    s32 v2 = radius;
     s32 v3 = 0;
-    while (v1 >= v3)
+    while (r >= v3)
     {
-        sub_808136C(dest, a3 - v3, a2 - v1, a2 + v1);
-        sub_808136C(dest, a3 + v3, a2 - v1, a2 + v1);
-        sub_808136C(dest, a3 - v1, a2 - v3, a2 + v3);
-        sub_808136C(dest, a3 + v1, a2 - v3, a2 + v3);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY - v3, centerX - r, centerX + r);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY + v3, centerX - r, centerX + r);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY - r, centerX - v3, centerX + v3);
+        SetFlashScanlineEffectWindowBoundary(dest, centerY + r, centerX - v3, centerX + v3);
         v2 -= (v3 * 2) - 1;
         v3++;
         if (v2 < 0)
         {
-            v2 += 2 * (v1 - 1);
-            v1--;
+            v2 += 2 * (r - 1);
+            r--;
         }
     }
 }
 
-static void sub_8081424(u8 taskId)
+#define tFlashCenterX        data[1]
+#define tFlashCenterY        data[2]
+#define tCurFlashRadius      data[3]
+#define tDestFlashRadius     data[4]
+#define tFlashRadiusDelta    data[5]
+#define tClearScanlineEffect data[6]
+
+static void UpdateFlashLevelEffect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     switch (data[0])
     {
     case 0:
-        sub_8081398(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], data[1], data[2], data[3]);
+        SetFlashScanlineEffectWindowBoundaries(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius);
         data[0] = 1;
         break;
     case 1:
-        sub_8081398(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], data[1], data[2], data[3]);
+        SetFlashScanlineEffectWindowBoundaries(gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer], tFlashCenterX, tFlashCenterY, tCurFlashRadius);
         data[0] = 0;
-        data[3] += data[5];
-        if (data[3] > data[4])
+        tCurFlashRadius += tFlashRadiusDelta;
+        if (tCurFlashRadius > tDestFlashRadius)
         {
-            if (data[6] == 1)
+            if (tClearScanlineEffect == 1)
             {
                 ScanlineEffect_Stop();
                 data[0] = 2;
@@ -93,7 +100,7 @@ static void sub_8081424(u8 taskId)
 
 static void sub_80814E8(u8 taskId)
 {
-    if (!FuncIsActiveTask(sub_8081424))
+    if (!FuncIsActiveTask(UpdateFlashLevelEffect))
     {
         EnableBothScriptContexts();
         DestroyTask(taskId);
@@ -106,41 +113,46 @@ static void sub_8081510(void)
         CreateTask(sub_80814E8, 80);
 }
 
-static u8 sub_8081534(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, u8 a6)
+static u8 sub_8081534(s32 centerX, s32 centerY, s32 initialFlashRadius, s32 destFlashRadius, s32 clearScanlineEffect, u8 delta)
 {
-    u8 taskId = CreateTask(sub_8081424, 80);
+    u8 taskId = CreateTask(UpdateFlashLevelEffect, 80);
     s16 *data = gTasks[taskId].data;
 
-    data[3] = a3;
-    data[4] = a4;
-    data[1] = a1;
-    data[2] = a2;
-    data[6] = a5;
+    tCurFlashRadius = initialFlashRadius;
+    tDestFlashRadius = destFlashRadius;
+    tFlashCenterX = centerX;
+    tFlashCenterY = centerY;
+    tClearScanlineEffect = clearScanlineEffect;
 
-    if (a3 < a4)
-        data[5] = a6;
+    if (initialFlashRadius < destFlashRadius)
+        tFlashRadiusDelta = delta;
     else
-        data[5] = -a6;
+        tFlashRadiusDelta = -delta;
 
     return taskId;
 }
 
-void sub_8081594(u8 a1)
+#undef tCurFlashRadius
+#undef tDestFlashRadius
+#undef tFlashRadiusDelta
+#undef tClearScanlineEffect
+
+void sub_8081594(u8 flashLevel)
 {
-    u8 flashLevel = Overworld_GetFlashLevel();
+    u8 curFlashLevel = Overworld_GetFlashLevel();
     u8 value = 0;
-    if (!a1)
+    if (!flashLevel)
         value = 1;
-    sub_8081534(120, 80, gUnknown_0839ACDC[flashLevel], gUnknown_0839ACDC[a1], value, 1);
+    sub_8081534(120, 80, sFlashLevelPixelRadii[curFlashLevel], sFlashLevelPixelRadii[flashLevel], value, 1);
     sub_8081510();
     ScriptContext2_Enable();
 }
 
-void sub_80815E0(u8 a1)
+void WriteFlashScanlineEffectBuffer(u8 flashLevel)
 {
-    if (a1)
+    if (flashLevel)
     {
-        sub_8081398(&gScanlineEffectRegBuffers[0][0], 120, 80, gUnknown_0839ACDC[a1]);
+        SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], 120, 80, sFlashLevelPixelRadii[flashLevel]);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
     }
 }
@@ -208,10 +220,9 @@ static void sub_80816A8(u8 taskId)
         REG_BLDALPHA = 1804;
         REG_WININ = 63;
         REG_WINOUT = 30;
-        sub_8081398(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);
+        SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], data[2], data[3], 1);
         CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
-        //ScanlineEffect_SetParams(gUnknown_0839ACEC[0], gUnknown_0839ACEC[1], gUnknown_0839ACEC[2]);
-        ScanlineEffect_SetParams(gUnknown_0839ACEC);
+        ScanlineEffect_SetParams(sFlashEffectParams);
         data[0] = 1;
         break;
     case 1:
@@ -221,7 +232,7 @@ static void sub_80816A8(u8 taskId)
         data[0] = 2;
         break;
     case 2:
-        if (!FuncIsActiveTask(sub_8081424))
+        if (!FuncIsActiveTask(UpdateFlashLevelEffect))
         {
             EnableBothScriptContexts();
             data[0] = 3;
@@ -323,7 +334,7 @@ void sub_8081924(void)
 
 static void task50_0807F0C8(u8 taskId)
 {
-    if (sub_8054034() == TRUE)
+    if (BGMusicStopped() == TRUE)
     {
         DestroyTask(taskId);
         EnableBothScriptContexts();

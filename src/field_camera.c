@@ -24,9 +24,9 @@ static s16 sVerticalCameraPan;
 static u8 gUnknown_0300059C;
 static void (*sFieldCameraPanningCallback)(void);
 
-struct FieldCamera gFieldCamera;
-u16 gTotalCameraPixelOffsetY;
-u16 gTotalCameraPixelOffsetX;
+extern struct FieldCamera gFieldCamera;
+extern u16 gTotalCameraPixelOffsetY;
+extern u16 gTotalCameraPixelOffsetX;
 
 static void RedrawMapSliceNorth(struct FieldCameraOffset*, struct MapLayout*);
 static void RedrawMapSliceSouth(struct FieldCameraOffset*, struct MapLayout*);

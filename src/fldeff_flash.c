@@ -12,12 +12,12 @@
 #include "sprite.h"
 #include "task.h"
 
-struct FlashStruct
+struct MapTypeFadePairs
 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
+    u8 mapTypeA;
+    u8 mapTypeB;
+    u8 fadeToType;   // 0 = fade to black,   1 = fade to white
+    u8 fadeFromType; // 0 = fade from black, 1 = fade from white
     void (*func)(void);
 };
 
@@ -26,39 +26,39 @@ extern void (*gPostMenuFieldCallback)(void);
 
 extern u8 gUnknown_081B694A[];
 
-void sub_810CBFC(void);
-void sub_810CC34(void);
-bool8 sub_810CD5C(void);
-void sub_810CE5C(u8);
-void sub_810CE78(u8);
-void sub_810CF18(u8);
-void sub_810CF5C(u8);
-void sub_810CFC4(u8);
-void sub_810D00C(u8);
-void sub_810D028(u8);
-void sub_810D0C4(u8);
-void sub_810D128(u8);
-void sub_810CFF8(void);
-void sub_810CE48(void);
+static void sub_810CBFC(void);
+static void sub_810CC34(void);
+static bool8 sub_810CD5C(void);
+static void sub_810CE5C(u8);
+static void sub_810CE78(u8);
+static void sub_810CF18(u8);
+static void sub_810CF5C(u8);
+static void sub_810CFC4(u8);
+static void sub_810D00C(u8);
+static void sub_810D028(u8);
+static void sub_810D0C4(u8);
+static void sub_810D128(u8);
+static void CreateEnterUndergroundEffectTask(void);
+static void CreateExitUndergroundTask(void);
 
-static const struct FlashStruct gUnknown_083F7FC4[] =
+static const struct MapTypeFadePairs gMapTypeFadePairs[] =
 {
-    {1, 4, 1, 0, sub_810CFF8},
-    {2, 4, 1, 0, sub_810CFF8},
-    {3, 4, 1, 0, sub_810CFF8},
-    {5, 4, 1, 0, sub_810CFF8},
-    {6, 4, 1, 0, sub_810CFF8},
-    {7, 4, 1, 0, sub_810CFF8},
-    {8, 4, 1, 0, sub_810CFF8},
-    {9, 4, 1, 0, sub_810CFF8},
-    {4, 1, 0, 1, sub_810CE48},
-    {4, 2, 0, 1, sub_810CE48},
-    {4, 3, 0, 1, sub_810CE48},
-    {4, 5, 0, 1, sub_810CE48},
-    {4, 6, 0, 1, sub_810CE48},
-    {4, 7, 0, 1, sub_810CE48},
-    {4, 8, 0, 1, sub_810CE48},
-    {4, 9, 0, 1, sub_810CE48},
+    {MAP_TYPE_TOWN,        MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_CITY,        MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_ROUTE,       MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_UNDERWATER,  MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_6,           MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_7,           MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_INDOOR,      MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_SECRET_BASE, MAP_TYPE_UNDERGROUND, 1, 0, CreateEnterUndergroundEffectTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_TOWN,        0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_CITY,        0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_ROUTE,       0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_UNDERWATER,  0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_6,           0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_7,           0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_INDOOR,      0, 1, CreateExitUndergroundTask},
+    {MAP_TYPE_UNDERGROUND, MAP_TYPE_SECRET_BASE, 0, 1, CreateExitUndergroundTask},
     {0, 0, 0, 0, NULL},
 };
 
@@ -95,7 +95,7 @@ bool8 SetUpFieldMove_Flash(void)
     return FALSE;
 }
 
-void sub_810CBFC(void)
+static void sub_810CBFC(void)
 {
     u8 taskId = oei_task_add();
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
@@ -103,7 +103,7 @@ void sub_810CBFC(void)
     gTasks[taskId].data[9] = (uintptr_t)sub_810CC34;
 }
 
-void sub_810CC34(void)
+static void sub_810CC34(void)
 {
     PlaySE(SE_W115);
     FlagSet(FLAG_SYS_USE_FLASH);
@@ -156,17 +156,17 @@ void sub_810CC80(void)
         SetMainCallback2(gMain.savedCallback);
 }
 
-bool8 sub_810CD5C(void)
+static bool8 sub_810CD5C(void)
 {
     u8 i;
-    u8 v0 = get_map_type_from_warp0();
-    u8 v1 = Overworld_GetMapTypeOfSaveblockLocation();
+    u8 prevMapType = GetLastUsedWarpMapType();
+    u8 curMapType = Overworld_GetMapTypeOfSaveblockLocation();
 
-    for (i = 0; gUnknown_083F7FC4[i].unk0; i++)
+    for (i = 0; gMapTypeFadePairs[i].mapTypeA; i++)
     {
-        if (gUnknown_083F7FC4[i].unk0 == v0 && gUnknown_083F7FC4[i].unk1 == v1)
+        if (gMapTypeFadePairs[i].mapTypeA == prevMapType && gMapTypeFadePairs[i].mapTypeB == curMapType)
         {
-            gUnknown_083F7FC4[i].func();
+            gMapTypeFadePairs[i].func();
             return TRUE;
         }
     }
@@ -174,51 +174,49 @@ bool8 sub_810CD5C(void)
     return FALSE;
 }
 
-u8 sub_810CDB8(u8 a1, u8 a2)
+u8 GetMapPairFadeToType(u8 currentMapType, u8 destinationMapType)
 {
     u8 i;
-    u8 v0 = a1;
-    u8 v1 = a2;
+    u8 curMapType = currentMapType;
+    u8 destMapType = destinationMapType;
 
-    for (i = 0; gUnknown_083F7FC4[i].unk0; i++)
+    for (i = 0; gMapTypeFadePairs[i].mapTypeA; i++)
     {
-        if (gUnknown_083F7FC4[i].unk0 == v0 && gUnknown_083F7FC4[i].unk1 == v1)
+        if (gMapTypeFadePairs[i].mapTypeA == curMapType && gMapTypeFadePairs[i].mapTypeB == destMapType)
+            return gMapTypeFadePairs[i].fadeToType;
+    }
+
+    return FALSE;
+}
+
+u8 GetMapPairFadeFromType(u8 currentMapType, u8 destinationMapType)
+{
+    u8 i;
+    u8 curMapType = currentMapType;
+    u8 destMapType = destinationMapType;
+
+    for (i = 0; gMapTypeFadePairs[i].mapTypeA; i++)
+    {
+        if (gMapTypeFadePairs[i].mapTypeA == curMapType && gMapTypeFadePairs[i].mapTypeB == destMapType)
         {
-            return gUnknown_083F7FC4[i].unk2;
+            return gMapTypeFadePairs[i].fadeFromType;
         }
     }
 
     return FALSE;
 }
 
-u8 fade_type_for_given_maplight_pair(u8 a1, u8 a2)
-{
-    u8 i;
-    u8 v0 = a1;
-    u8 v1 = a2;
-
-    for (i = 0; gUnknown_083F7FC4[i].unk0; i++)
-    {
-        if (gUnknown_083F7FC4[i].unk0 == v0 && gUnknown_083F7FC4[i].unk1 == v1)
-        {
-            return gUnknown_083F7FC4[i].unk3;
-        }
-    }
-
-    return FALSE;
-}
-
-void sub_810CE48(void)
+static void CreateExitUndergroundTask(void)
 {
     CreateTask(sub_810CE5C, 0);
 }
 
-void sub_810CE5C(u8 taskId)
+static void sub_810CE5C(u8 taskId)
 {
     gTasks[taskId].func = sub_810CE78;
 }
 
-void sub_810CE78(u8 taskId)
+static void sub_810CE78(u8 taskId)
 {
     REG_DISPCNT = 0;
     LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
@@ -235,7 +233,7 @@ void sub_810CE78(u8 taskId)
     gTasks[taskId].data[1] = 0;
 }
 
-void sub_810CF18(u8 taskId)
+static void sub_810CF18(u8 taskId)
 {
     u16 count = gTasks[taskId].data[1];
     u16 blend = count + 0x1000;
@@ -251,7 +249,7 @@ void sub_810CF18(u8 taskId)
     }
 }
 
-void sub_810CF5C(u8 taskId)
+static void sub_810CF5C(u8 taskId)
 {
     u16 count;
 
@@ -272,7 +270,7 @@ void sub_810CF5C(u8 taskId)
     }
 }
 
-void sub_810CFC4(u8 taskId)
+static void sub_810CFC4(u8 taskId)
 {
     if (gTasks[taskId].data[2])
         gTasks[taskId].data[2]--;
@@ -280,17 +278,17 @@ void sub_810CFC4(u8 taskId)
         SetMainCallback2(gMain.savedCallback);
 }
 
-void sub_810CFF8(void)
+static void CreateEnterUndergroundEffectTask(void)
 {
     CreateTask(sub_810D00C, 0);
 }
 
-void sub_810D00C(u8 taskId)
+static void sub_810D00C(u8 taskId)
 {
     gTasks[taskId].func = sub_810D028;
 }
 
-void sub_810D028(u8 taskId)
+static void sub_810D028(u8 taskId)
 {
     REG_DISPCNT = 0;
     LZ77UnCompVram(gCaveTransitionTiles, (void *)0x600C000);
@@ -308,7 +306,7 @@ void sub_810D028(u8 taskId)
     gTasks[taskId].data[2] = 0;
 }
 
-void sub_810D0C4(u8 taskId)
+static void sub_810D0C4(u8 taskId)
 {
     u16 count = gTasks[taskId].data[2];
     if (count < 16)
@@ -325,7 +323,7 @@ void sub_810D0C4(u8 taskId)
     }
 }
 
-void sub_810D128(u8 taskId)
+static void sub_810D128(u8 taskId)
 {
     u16 count = 16 - gTasks[taskId].data[1];
     u16 blend = count + 0x1000;

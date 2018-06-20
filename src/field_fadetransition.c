@@ -39,35 +39,35 @@ void palette_bg_fill_black(void)
 
 void pal_fill_for_map_transition(void)
 {
-    u8 map_light = get_map_type_from_warp0();
-    switch (fade_type_for_given_maplight_pair(map_light, Overworld_GetMapTypeOfSaveblockLocation()))
+    u8 previousMapType = GetLastUsedWarpMapType();
+    switch (GetMapPairFadeFromType(previousMapType, Overworld_GetMapTypeOfSaveblockLocation()))
     {
     case 0:
-        FadeScreen(0, 0);
+        FadeScreen(FADE_FROM_BLACK, 0);
         palette_bg_fill_black();
         break;
     case 1:
-        FadeScreen(2, 0);
+        FadeScreen(FADE_FROM_WHITE, 0);
         palette_bg_fill_white();
     }
 }
 
 void pal_fill_black(void)
 {
-    FadeScreen(0, 0);
+    FadeScreen(FADE_FROM_BLACK, 0);
     palette_bg_fill_black();
 }
 
-void fade_8080918(void)
+void WarpFadeScreen(void)
 {
-    u8 light_level = Overworld_GetMapTypeOfSaveblockLocation();
-    switch (sub_810CDB8(light_level, warp1_get_mapheader()->mapType))
+    u8 currentMapType = Overworld_GetMapTypeOfSaveblockLocation();
+    switch (GetMapPairFadeToType(currentMapType, GetDestinationWarpMapHeader()->mapType))
     {
     case 0:
-        FadeScreen(1, 0);
+        FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
-        FadeScreen(3, 0);
+        FadeScreen(FADE_TO_WHITE, 0);
     }
 }
 
@@ -358,7 +358,7 @@ void sub_8080E44(void)
     CreateTask(task_mpl_807E3C8, 10);
 }
 
-bool32 sub_8080E64(void)
+static bool32 PaletteFadeActive(void)
 {
     return gPaletteFade.active;
 }
@@ -374,8 +374,8 @@ bool32 sub_8080E70(void)
 void sub_8080E88(void)
 {
     ScriptContext2_Enable();
-    sub_8053FF8();
-    fade_8080918();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     PlayRainSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = mapldr_default;
@@ -385,8 +385,8 @@ void sub_8080E88(void)
 void sp13E_warp_to_last_warp(void)
 {
     ScriptContext2_Enable();
-    sub_8053FF8();
-    fade_8080918();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     PlayRainSoundEffect();
     gFieldCallback = mapldr_default;
     CreateTask(task0A_fade_n_map_maybe, 10);
@@ -426,8 +426,8 @@ void sub_8080F58(void)
 void sub_8080F68(void)
 {
     ScriptContext2_Enable();
-    sub_8053FF8();
-    fade_8080918();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     PlaySE(SE_TK_WARPIN);
     CreateTask(task0A_fade_n_map_maybe, 10);
     gFieldCallback = sub_8080B78;
@@ -436,12 +436,12 @@ void sub_8080F68(void)
 void sub_8080F9C(void)
 {
     ScriptContext2_Enable();
-    fade_8080918();
+    WarpFadeScreen();
     CreateTask(task0A_fade_n_map_maybe, 10);
     gFieldCallback = sub_80C791C;
 }
 
-void sub_8080FC4(u8 taskId)
+static void WaitCableClubWarp(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
@@ -452,13 +452,11 @@ void sub_8080FC4(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_8080E64() && sub_8054034())
-        {
+        if (!PaletteFadeActive() && BGMusicStopped())
             task->data[0]++;
-        }
         break;
     case 2:
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(sub_8054588);
         DestroyTask(taskId);
         break;
@@ -468,10 +466,10 @@ void sub_8080FC4(u8 taskId)
 void DoCableClubWarp(void)
 {
     ScriptContext2_Enable();
-    sub_8053FF8();
-    fade_8080918();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     PlaySE(SE_KAIDAN);
-    CreateTask(sub_8080FC4, 10);
+    CreateTask(WaitCableClubWarp, 10);
 }
 
 void sub_8081050(u8 taskId)
@@ -482,13 +480,13 @@ void sub_8081050(u8 taskId)
     {
     case 0:
         ClearLinkCallback_2();
-        FadeScreen(1, 0);
-        sub_8053FF8();
+        FadeScreen(FADE_TO_BLACK, 0);
+        TryFadeOutOldMapMusic();
         PlaySE(SE_KAIDAN);
         data[0]++;
         break;
     case 1:
-        if (!sub_8080E64() && sub_8054034())
+        if (!PaletteFadeActive() && BGMusicStopped())
         {
             sub_800832C();
             data[0]++;
@@ -497,7 +495,7 @@ void sub_8081050(u8 taskId)
     case 2:
         if (!gReceivedRemoteLinkPlayers)
         {
-            warp_in();
+            WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             DestroyTask(taskId);
         }
@@ -538,13 +536,13 @@ void task0A_fade_n_map_maybe(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_8080E64() && sub_8054034())
+        if (!PaletteFadeActive() && BGMusicStopped())
         {
             task->data[0]++;
         }
         break;
     case 2:
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(CB2_LoadMap);
         DestroyTask(taskId);
         break;
@@ -595,8 +593,8 @@ void sub_808115C(u8 taskId)
         }
         break;
     case 4:
-        sub_8053FF8();
-        fade_8080918();
+        TryFadeOutOldMapMusic();
+        WarpFadeScreen();
         PlayRainSoundEffect();
         task->data[0] = 0;
         task->func = task0A_fade_n_map_maybe;
@@ -616,13 +614,13 @@ void sub_80812C8(u8 taskId)
         task->data[0]++;
         break;
     case 1:
-        if (!sub_8080E64() && sub_8054034())
+        if (!PaletteFadeActive() && BGMusicStopped())
         {
             task->data[0]++;
         }
         break;
     case 2:
-        warp_in();
+        WarpIntoMap();
         SetMainCallback2(sub_8054534);
         DestroyTask(taskId);
         break;
@@ -632,8 +630,8 @@ void sub_80812C8(u8 taskId)
 void sub_8081334(void)
 {
     ScriptContext2_Enable();
-    sub_8053FF8();
-    fade_8080918();
+    TryFadeOutOldMapMusic();
+    WarpFadeScreen();
     PlayRainSoundEffect();
     PlaySE(SE_KAIDAN);
     gFieldCallback = sub_8080B60;

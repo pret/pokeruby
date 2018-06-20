@@ -972,7 +972,7 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
 
 void task08_080A1C44(u8 taskId)
 {
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     sub_80878A8();
     DestroyTask(taskId);
 }
