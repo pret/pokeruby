@@ -7,64 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDED0
-sub_80DDED0: @ 80DDED0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r5, r0, 0
-	ldr r1, _080DDEF4 @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	ldrh r1, [r4, 0xA]
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080DDEF8
-	subs r0, r1, 0x1
-	strh r0, [r4, 0xA]
-	b _080DDF36
-	.align 2, 0
-_080DDEF4: .4byte gTasks
-_080DDEF8:
-	movs r0, 0
-	bl GetAnimBattlerSpriteId
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x8
-	movs r6, 0
-	strh r0, [r4, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	bgt _080DDF22
-	movs r0, 0x8
-	ldrsh r2, [r4, r0]
-	adds r0, r1, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl obj_id_set_rotscale
-	b _080DDF36
-_080DDF22:
-	adds r0, r1, 0
-	bl sub_8078F40
-	adds r0, r5, 0
-	bl DestroyAnimVisualTask
-	ldr r0, _080DDF3C @ =REG_BLDCNT
-	strh r6, [r0]
-	adds r0, 0x2
-	strh r6, [r0]
-_080DDF36:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDF3C: .4byte REG_BLDCNT
-	thumb_func_end sub_80DDED0
-
 	thumb_func_start sub_80DDF40
 sub_80DDF40: @ 80DDF40
 	push {r4-r6,lr}

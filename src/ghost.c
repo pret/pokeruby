@@ -166,3 +166,21 @@ void sub_80DDE7C(u8 taskId) {
 		gTasks[taskId].func = &sub_80DDED0;
 	}
 }
+
+void sub_80DDED0(u8 taskId) {
+	u8 r1;
+	if (gTasks[taskId].data[1] > 0) {
+		gTasks[taskId].data[1] -= 1;
+		return;
+	}
+	r1 = GetAnimBattlerSpriteId(0);
+	gTasks[taskId].data[0] += 8;
+	if (gTasks[taskId].data[0] <= 0xFF) {
+		obj_id_set_rotscale(r1, gTasks[taskId].data[0], gTasks[taskId].data[0], 0);
+		return;
+	}
+	sub_8078F40(r1);
+	DestroyAnimVisualTask(taskId);
+	REG_BLDCNT = 0;
+	REG_BLDALPHA = 0;
+}
