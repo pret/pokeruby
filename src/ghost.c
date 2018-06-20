@@ -203,3 +203,44 @@ void sub_80DDF40(struct Sprite *sprite) {
 	sprite->data[7] = (((s16)r6 - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
 	sprite->callback = &sub_80DDFE8;
 }
+
+void sub_80DDFE8(struct Sprite *sprite) {
+	switch (sprite->data[0]) {
+	case 0:
+		sprite->data[4] += sprite->data[6];
+		sprite->data[5] += sprite->data[7];
+		sprite->pos1.x = sprite->data[4] >> 4;
+		sprite->pos1.y = sprite->data[5] >> 4;
+		sprite->data[1] -= 1;
+		if (sprite->data[1] > 0)
+			break;
+		sprite->data[0] += 1;
+		break;
+	case 1:
+		sprite->data[2] -= 1;
+		if (sprite->data[2] > 0)
+			break;
+		sprite->data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+		sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+		sprite->data[4] = sprite->pos1.x << 4;
+		sprite->data[5] = sprite->pos1.y << 4;
+		sprite->data[6] = ((sprite->data[1] - sprite->pos1.x) << 4) / sprite->data[3];
+		sprite->data[7] = ((sprite->data[2] - sprite->pos1.y) << 4) / sprite->data[3];
+		sprite->data[0] += 1;
+		break;
+	case 2:
+		sprite->data[4] += sprite->data[6];
+		sprite->data[5] += sprite->data[7];
+		sprite->pos1.x = sprite->data[4] >> 4;
+		sprite->pos1.y = sprite->data[5] >> 4;
+		sprite->data[3] -= 1;
+		if (sprite->data[3] > 0)
+			break;
+		sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+		sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+		sprite->data[0] += 1;
+		break;
+	case 3:
+		move_anim_8074EE0(sprite);
+	}
+}
