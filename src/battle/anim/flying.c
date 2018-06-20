@@ -11,6 +11,7 @@ extern u8 gAnimBankTarget;
 extern u8 gAnimVisualTaskCount;
 
 void sub_80785E4(struct Sprite *sprite);
+void sub_80DA034(struct Sprite *sprite);
 void sub_80DA05C(struct Sprite *sprite);
 void sub_80DA16C(struct Sprite *sprite);
 void sub_80DA1EC(struct Sprite *sprite);
