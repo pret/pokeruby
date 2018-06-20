@@ -1,5 +1,5 @@
 MossdeepCity_House1:: @ 83067DC
-	.4byte House2_MapAttributes
+	.4byte House12_MapAttributes
 	.4byte MossdeepCity_House1_MapEvents
 	.4byte MossdeepCity_House1_MapScripts
 	.4byte 0x0

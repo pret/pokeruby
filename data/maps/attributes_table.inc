@@ -58,8 +58,8 @@ gMapAttributes:: @ 8304F18
 	.4byte LittlerootTown_MaysHouse_1F_MapAttributes
 	.4byte LittlerootTown_MaysHouse_2F_MapAttributes
 	.4byte LittlerootTown_ProfessorBirchsLab_MapAttributes
-	.4byte House1_MapAttributes
-	.4byte House2_MapAttributes
+	.4byte House11_MapAttributes
+	.4byte House12_MapAttributes
 	.4byte PokemonCenter_1F_MapAttributes
 	.4byte PokemonCenter_2F_MapAttributes
 	.4byte PokeMart_MapAttributes

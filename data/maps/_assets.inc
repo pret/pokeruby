@@ -868,33 +868,33 @@ LittlerootTown_ProfessorBirchsLab_MapAttributes:: @ 82CDEA8
 	.4byte gTileset_Building
 	.4byte gTileset_Lab
 
-House1_MapBorder:: @ 82CDEC0
-	.incbin "data/maps/House1/border.bin"
+House11_MapBorder:: @ 82CDEC0
+	.incbin "data/maps/House11/border.bin"
 
-House1_MapBlockdata:: @ 82CDEC8
-	.incbin "data/maps/House1/map.bin"
+House11_MapBlockdata:: @ 82CDEC8
+	.incbin "data/maps/House11/map.bin"
 
 	.align 2
-House1_MapAttributes:: @ 82CDF7C
+House11_MapAttributes:: @ 82CDF7C
 	.4byte 0xa
 	.4byte 0x9
-	.4byte House1_MapBorder
-	.4byte House1_MapBlockdata
+	.4byte House11_MapBorder
+	.4byte House11_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
-House2_MapBorder:: @ 82CDF94
-	.incbin "data/maps/House2/border.bin"
+House12_MapBorder:: @ 82CDF94
+	.incbin "data/maps/House12/border.bin"
 
-House2_MapBlockdata:: @ 82CDF9C
-	.incbin "data/maps/House2/map.bin"
+House12_MapBlockdata:: @ 82CDF9C
+	.incbin "data/maps/House12/map.bin"
 
 	.align 2
-House2_MapAttributes:: @ 82CE04C
+House12_MapAttributes:: @ 82CE04C
 	.4byte 0xb
 	.4byte 0x8
-	.4byte House2_MapBorder
-	.4byte House2_MapBlockdata
+	.4byte House12_MapBorder
+	.4byte House12_MapBlockdata
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 

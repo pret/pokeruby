@@ -1,5 +1,5 @@
 MauvilleCity_House1:: @ 8306184
-	.4byte House2_MapAttributes
+	.4byte House12_MapAttributes
 	.4byte MauvilleCity_House1_MapEvents
 	.4byte MauvilleCity_House1_MapScripts
 	.4byte 0x0

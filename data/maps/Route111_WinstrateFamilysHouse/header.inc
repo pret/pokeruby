@@ -1,5 +1,5 @@
 Route111_WinstrateFamilysHouse:: @ 8306C58
-	.4byte House2_MapAttributes
+	.4byte House12_MapAttributes
 	.4byte Route111_WinstrateFamilysHouse_MapEvents
 	.4byte Route111_WinstrateFamilysHouse_MapScripts
 	.4byte 0x0
