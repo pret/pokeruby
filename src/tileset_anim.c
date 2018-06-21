@@ -199,17 +199,17 @@ static const u8 *const gTilesetAnims_Pacifidlog1[] =
     gTilesetAnims_Pacifidlog1_Frame7
 };
 
-static const u8 gTilesetAnims_Mauville0a_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/0.4bpp");
-static const u8 gTilesetAnims_Mauville0a_Frame1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/1.4bpp");
-static const u8 gTilesetAnims_Mauville0a_Frame2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/2.4bpp");
-static const u8 gTilesetAnims_Mauville0a_Frame3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/3.4bpp");
-static const u8 gTilesetAnims_Mauville0a_Frame4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/4.4bpp");
+static const u8 gTilesetAnims_Mauville0_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/0.4bpp");
+static const u8 gTilesetAnims_Mauville0_Frame1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/1.4bpp");
+static const u8 gTilesetAnims_Mauville0_Frame2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/2.4bpp");
+static const u8 gTilesetAnims_Mauville0_Frame3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/3.4bpp");
+static const u8 gTilesetAnims_Mauville0_Frame4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/0/4.4bpp");
 
-static const u8 gTilesetAnims_Mauville0b_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/0.4bpp");
-static const u8 gTilesetAnims_Mauville0b_Frame1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/1.4bpp");
-static const u8 gTilesetAnims_Mauville0b_Frame2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/2.4bpp");
-static const u8 gTilesetAnims_Mauville0b_Frame3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/3.4bpp");
-static const u8 gTilesetAnims_Mauville0b_Frame4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/4.4bpp");
+static const u8 gTilesetAnims_Mauville1_Frame0[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/0.4bpp");
+static const u8 gTilesetAnims_Mauville1_Frame1[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/1.4bpp");
+static const u8 gTilesetAnims_Mauville1_Frame2[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/2.4bpp");
+static const u8 gTilesetAnims_Mauville1_Frame3[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/3.4bpp");
+static const u8 gTilesetAnims_Mauville1_Frame4[] = INCBIN_U8("data/tilesets/secondary/mauville/anim/1/4.4bpp");
 
 static const void *const gTilesetAnims_MauvilleVDests0[] =
 {
@@ -235,52 +235,52 @@ static const void *const gTilesetAnims_MauvilleVDests1[] =
     (void *)(VRAM + 0x5380),
 };
 
-static const u8 *const gTilesetAnimTable_Mauville_0A[] =
+static const u8 *const gTilesetAnims_Mauville0[] =
 {
-    gTilesetAnims_Mauville0a_Frame0,
-    gTilesetAnims_Mauville0a_Frame0,
-    gTilesetAnims_Mauville0a_Frame1,
-    gTilesetAnims_Mauville0a_Frame2,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame3,
-    gTilesetAnims_Mauville0a_Frame2,
-    gTilesetAnims_Mauville0a_Frame1,
+    gTilesetAnims_Mauville0_Frame0,
+    gTilesetAnims_Mauville0_Frame0,
+    gTilesetAnims_Mauville0_Frame1,
+    gTilesetAnims_Mauville0_Frame2,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame3,
+    gTilesetAnims_Mauville0_Frame2,
+    gTilesetAnims_Mauville0_Frame1,
 };
 
-static const u8 *const gTilesetAnimTable_Mauville_1A[] =
+static const u8 *const gTilesetAnims_Mauville1[] =
 {
-    gTilesetAnims_Mauville0b_Frame0,
-    gTilesetAnims_Mauville0b_Frame0,
-    gTilesetAnims_Mauville0b_Frame1,
-    gTilesetAnims_Mauville0b_Frame2,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame3,
-    gTilesetAnims_Mauville0b_Frame2,
-    gTilesetAnims_Mauville0b_Frame1,
+    gTilesetAnims_Mauville1_Frame0,
+    gTilesetAnims_Mauville1_Frame0,
+    gTilesetAnims_Mauville1_Frame1,
+    gTilesetAnims_Mauville1_Frame2,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame3,
+    gTilesetAnims_Mauville1_Frame2,
+    gTilesetAnims_Mauville1_Frame1,
 };
 
-static const u8 *const gTilesetAnimTable_Mauville_0B[] =
+static const u8 *const gTilesetAnims_Mauville2[] =
 {
-    gTilesetAnims_Mauville0a_Frame0,
-    gTilesetAnims_Mauville0a_Frame0,
-    gTilesetAnims_Mauville0a_Frame4,
-    gTilesetAnims_Mauville0a_Frame4,
+    gTilesetAnims_Mauville0_Frame0,
+    gTilesetAnims_Mauville0_Frame0,
+    gTilesetAnims_Mauville0_Frame4,
+    gTilesetAnims_Mauville0_Frame4,
 };
 
-static const u8 *const gTilesetAnimTable_Mauville_1B[] =
+static const u8 *const gTilesetAnims_Mauville3[] =
 {
-    gTilesetAnims_Mauville0b_Frame0,
-    gTilesetAnims_Mauville0b_Frame0,
-    gTilesetAnims_Mauville0b_Frame4,
-    gTilesetAnims_Mauville0b_Frame4,
+    gTilesetAnims_Mauville1_Frame0,
+    gTilesetAnims_Mauville1_Frame0,
+    gTilesetAnims_Mauville1_Frame4,
+    gTilesetAnims_Mauville1_Frame4,
 };
 
 static const u8 gTilesetAnims_Rustboro0_Frame0[] = INCBIN_U8("data/tilesets/secondary/rustboro/anim/0/0.4bpp");
@@ -855,14 +855,14 @@ static void sub_8073704(u16 a1, u8 a2)
     if (a1 < 12)
     {
         v1 = a1 % 12;
-        QueueTilesetAnimDma(gTilesetAnimTable_Mauville_0A[v1], gTilesetAnims_MauvilleVDests0[a2], 0x80);
-        QueueTilesetAnimDma(gTilesetAnimTable_Mauville_1A[v1], gTilesetAnims_MauvilleVDests1[a2], 0x80);
+        QueueTilesetAnimDma(gTilesetAnims_Mauville0[v1], gTilesetAnims_MauvilleVDests0[a2], 0x80);
+        QueueTilesetAnimDma(gTilesetAnims_Mauville1[v1], gTilesetAnims_MauvilleVDests1[a2], 0x80);
     }
     else
     {
         v1 = a1 % 4;
-        QueueTilesetAnimDma(gTilesetAnimTable_Mauville_0B[v1], gTilesetAnims_MauvilleVDests0[a2], 0x80);
-        QueueTilesetAnimDma(gTilesetAnimTable_Mauville_1B[v1], gTilesetAnims_MauvilleVDests1[a2], 0x80);
+        QueueTilesetAnimDma(gTilesetAnims_Mauville2[v1], gTilesetAnims_MauvilleVDests0[a2], 0x80);
+        QueueTilesetAnimDma(gTilesetAnims_Mauville3[v1], gTilesetAnims_MauvilleVDests1[a2], 0x80);
     }
 }
 
