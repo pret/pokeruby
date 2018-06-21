@@ -1,9 +1,9 @@
 Underwater2:: @ 83059DC
-	.4byte Underwater2_MapAttributes
+	.4byte Underwater2_Layout
 	.4byte Underwater2_MapEvents
 	.4byte Underwater2_MapScripts
 	.4byte Underwater2_MapConnections
-	.2byte BGM_DEEPDEEP
+	.2byte MUS_DEEPDEEP
 	.2byte 51
 	.byte 51
 	.byte 0

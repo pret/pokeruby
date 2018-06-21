@@ -3191,7 +3191,7 @@ BattleScript_Pausex20:: @ 81D8EEF
 	return
 
 BattleScript_LevelUp:: @ 81D8EF3
-	fanfare BGM_FANFA1
+	fanfare MUS_FANFA1
 	printstring BATTLE_TEXT_GrewLevel 
 	setbyte sLVLBOX_STATE, 0
 	drawlvlupbox
@@ -3223,7 +3223,7 @@ BattleScript_ForgotAndLearnedNewMove: @ 81D8F46
 
 BattleScript_LearnedNewMove: @ 81D8F4F
 	buffermovetolearn
-	fanfare BGM_FANFA1
+	fanfare MUS_FANFA1
 	printstring BATTLE_TEXT_LearnedMove
 	waitmessage 64
 	updatechoicemoveonlvlup USER

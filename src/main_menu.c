@@ -774,7 +774,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tFrameCounter = 216;  //Wait 3.6 seconds (216 frames) before starting speech
 
-    PlayBGM(BGM_DOORO_X4);
+    PlayBGM(MUS_DOORO_X4);
 }
 
 static void Task_NewGameSpeech2(u8 taskId)

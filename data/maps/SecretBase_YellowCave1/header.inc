@@ -1,9 +1,9 @@
 SecretBase_YellowCave1:: @ 830772C
-	.4byte SecretBase_YellowCave1_MapAttributes
+	.4byte SecretBase_YellowCave1_Layout
 	.4byte SecretBase_YellowCave1_MapEvents
 	.4byte SecretBase_YellowCave1_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S3
+	.2byte MUS_MACHI_S3
 	.2byte 201
 	.byte 86
 	.byte 0

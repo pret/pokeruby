@@ -50,9 +50,9 @@
 #include "wild_encounter.h"
 
 #ifdef SAPPHIRE
-#define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
+#define LEGENDARY_MUSIC MUS_OOAME  // Heavy Rain
 #else
-#define LEGENDARY_MUSIC BGM_HIDERI // Drought
+#define LEGENDARY_MUSIC MUS_HIDERI // Drought
 #endif
 
 extern u8 gUnknown_020297ED;
@@ -80,7 +80,7 @@ extern u8 TradeRoom_PromptToCancelLink[];
 extern u8 TradeRoom_TerminateLink[];
 extern u8 gUnknown_081A4508[];
 
-extern struct MapData * const gMapAttributes[];
+extern struct MapLayout * const gMapLayouts[];
 extern struct MapHeader * const * const gMapGroups[];
 extern s32 gMaxFlashLevel;
 
@@ -336,17 +336,17 @@ void Overworld_SetEventObjTemplateMovementType(u8 localId, u8 movementType)
 static void mapdata_load_assets_to_gpu_and_full_redraw(void)
 {
     move_tilemap_camera_to_upper_left_corner();
-    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapData);
-    apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+    copy_map_tileset1_tileset2_to_vram(gMapHeader.mapLayout);
+    apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
     DrawWholeMapView();
     cur_mapheader_run_tileset_funcs_after_some_cpuset();
 }
 
-static struct MapData *GetCurrentMapData(void)
+static struct MapLayout *GetMapLayout(void)
 {
-    u16 mapDataId = gSaveBlock1.mapDataId;
-    if (mapDataId)
-        return gMapAttributes[mapDataId - 1];
+    u16 mapLayoutId = gSaveBlock1.mapLayoutId;
+    if (mapLayoutId)
+        return gMapLayouts[mapLayoutId - 1];
     return NULL;
 }
 
@@ -395,14 +395,14 @@ struct MapHeader *const GetDestinationWarpMapHeader(void)
 static void LoadCurrentMapData(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
-    gSaveBlock1.mapDataId = gMapHeader.mapDataId;
-    gMapHeader.mapData = GetCurrentMapData();
+    gSaveBlock1.mapLayoutId = gMapHeader.mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 static void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
-    gMapHeader.mapData = GetCurrentMapData();
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 static void SetPlayerCoordsFromWarp(void)
@@ -419,8 +419,8 @@ static void SetPlayerCoordsFromWarp(void)
     }
     else
     {
-        gSaveBlock1.pos.x = gMapHeader.mapData->width / 2;
-        gSaveBlock1.pos.y = gMapHeader.mapData->height / 2;
+        gSaveBlock1.pos.x = gMapHeader.mapLayout->width / 2;
+        gSaveBlock1.pos.y = gMapHeader.mapLayout->height / 2;
     }
 }
 
@@ -605,8 +605,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     Overworld_ClearSavedMusic();
     mapheader_run_script_with_tag_x3();
     not_trainer_hill_battle_pyramid();
-    sub_8056D38(gMapHeader.mapData);
-    apply_map_tileset2_palette(gMapHeader.mapData);
+    sub_8056D38(gMapHeader.mapLayout);
+    apply_map_tileset2_palette(gMapHeader.mapLayout);
 
     for (paletteIndex = 6; paletteIndex < 12; paletteIndex++)
         ApplyWeatherGammaShiftToPal(paletteIndex);
@@ -781,10 +781,10 @@ u8 Overworld_GetFlashLevel(void)
     return gSaveBlock1.flashLevel;
 }
 
-void sub_8053D14(u16 mapDataId)
+void sub_8053D14(u16 mapLayoutId)
 {
-    gSaveBlock1.mapDataId = mapDataId;
-    gMapHeader.mapData = GetCurrentMapData();
+    gSaveBlock1.mapLayoutId = mapLayoutId;
+    gMapHeader.mapLayout = GetMapLayout();
 }
 
 static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
@@ -828,7 +828,7 @@ static u16 GetLocationMusic(struct WarpData *warp)
     if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
         return LEGENDARY_MUSIC;
     else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
-        return BGM_TOZAN;
+        return MUS_TOZAN;
     else
         return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
 }
@@ -841,7 +841,7 @@ u16 GetCurrLocationDefaultMusic(void)
     if (gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE111)
      && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE111)
      && GetSav1Weather() == 8)
-        return BGM_ASHROAD;
+        return MUS_ASHROAD;
 
     music = GetLocationMusic(&gSaveBlock1.location);
     if (music != 0x7FFF)
@@ -851,9 +851,9 @@ u16 GetCurrLocationDefaultMusic(void)
     else
     {
         if (gSaveBlock1.pos.x < 24)
-            return BGM_DOORO_X1;
+            return MUS_DOORO_X1;
         else
-            return BGM_GRANROAD;
+            return MUS_GRANROAD;
     }
 }
 
@@ -868,9 +868,9 @@ u16 GetWarpDestinationMusic(void)
     {
         if (gSaveBlock1.location.mapGroup == MAP_GROUP(MAUVILLE_CITY)
          && gSaveBlock1.location.mapNum == MAP_NUM(MAUVILLE_CITY))
-            return BGM_DOORO_X1;
+            return MUS_DOORO_X1;
         else
-            return BGM_GRANROAD;
+            return MUS_GRANROAD;
     }
 }
 
@@ -888,9 +888,9 @@ void Overworld_PlaySpecialMapMusic(void)
         if (gSaveBlock1.savedMusic)
             music = gSaveBlock1.savedMusic;
         else if (Overworld_GetMapTypeOfSaveblockLocation() == MAP_TYPE_UNDERWATER)
-            music = BGM_DEEPDEEP;
+            music = MUS_DEEPDEEP;
         else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-            music = BGM_NAMINORI;
+            music = MUS_NAMINORI;
     }
 
     if (music != GetCurrentMapMusic())
@@ -915,10 +915,10 @@ void sub_8053F0C(void)
         u16 currentMusic = GetCurrentMapMusic();
         if (newMusic != LEGENDARY_MUSIC)
         {
-            if (currentMusic == BGM_DEEPDEEP || currentMusic == BGM_NAMINORI)
+            if (currentMusic == MUS_DEEPDEEP || currentMusic == MUS_NAMINORI)
                 return;
             if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-                newMusic = BGM_NAMINORI;
+                newMusic = MUS_NAMINORI;
         }
         if (newMusic != currentMusic)
         {
@@ -1553,15 +1553,15 @@ static bool32 sub_805483C(u8 *state)
         (*state)++;
         break;
     case 6:
-        sub_8056D28(gMapHeader.mapData);
+        sub_8056D28(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        sub_8056D38(gMapHeader.mapData);
+        sub_8056D38(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 9:
@@ -1619,15 +1619,15 @@ bool32 sub_805493C(u8 *state, u32 a2)
         (*state)++;
         break;
     case 6:
-        sub_8056D28(gMapHeader.mapData);
+        sub_8056D28(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        sub_8056D38(gMapHeader.mapData);
+        sub_8056D38(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 9:
@@ -1709,15 +1709,15 @@ bool32 sub_8054A9C(u8 *state)
         (*state)++;
         break;
     case 5:
-        sub_8056D28(gMapHeader.mapData);
+        sub_8056D28(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 6:
-        sub_8056D38(gMapHeader.mapData);
+        sub_8056D38(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 7:
-        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapLayout);
         (*state)++;
         break;
     case 8:

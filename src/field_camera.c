@@ -28,14 +28,14 @@ extern struct FieldCamera gFieldCamera;
 extern u16 gTotalCameraPixelOffsetY;
 extern u16 gTotalCameraPixelOffsetX;
 
-static void RedrawMapSliceNorth(struct FieldCameraOffset*, struct MapData*);
-static void RedrawMapSliceSouth(struct FieldCameraOffset*, struct MapData*);
-static void RedrawMapSliceEast(struct FieldCameraOffset*, struct MapData*);
-static void RedrawMapSliceWest(struct FieldCameraOffset*, struct MapData*);
+static void RedrawMapSliceNorth(struct FieldCameraOffset*, struct MapLayout*);
+static void RedrawMapSliceSouth(struct FieldCameraOffset*, struct MapLayout*);
+static void RedrawMapSliceEast(struct FieldCameraOffset*, struct MapLayout*);
+static void RedrawMapSliceWest(struct FieldCameraOffset*, struct MapLayout*);
 static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset*, s32, s32);
 
-static void DrawWholeMapViewInternal(int x, int y, struct MapData*);
-static void DrawMetatileAt(struct MapData*, u16, int, int);
+static void DrawWholeMapViewInternal(int x, int y, struct MapLayout*);
+static void DrawMetatileAt(struct MapLayout*, u16, int, int);
 static void DrawMetatile(s32, u16*, u16);
 static void CameraPanningCB_PanAhead(void);
 
@@ -96,11 +96,11 @@ void sub_8057B14(u16 *a, u16 *b)
 
 void DrawWholeMapView(void)
 {
-    DrawWholeMapViewInternal(gSaveBlock1.pos.x, gSaveBlock1.pos.y, gMapHeader.mapData);
+    DrawWholeMapViewInternal(gSaveBlock1.pos.x, gSaveBlock1.pos.y, gMapHeader.mapLayout);
     sFieldCameraOffset.copyBGToVRAM = TRUE;
 }
 
-static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
+static void DrawWholeMapViewInternal(int x, int y, struct MapLayout *mapLayout)
 {
     u8 i;
     u8 j;
@@ -118,27 +118,27 @@ static void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData)
             temp = sFieldCameraOffset.xTileOffset + j;
             if (temp >= 32)
                 temp -= 32;
-            DrawMetatileAt(mapData, r6 + temp, x + j / 2, y + i / 2);
+            DrawMetatileAt(mapLayout, r6 + temp, x + j / 2, y + i / 2);
         }
     }
 }
 
 static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffset, int x, int y)
 {
-    struct MapData *mapData = gMapHeader.mapData;
+    struct MapLayout *mapLayout = gMapHeader.mapLayout;
 
     if (x > 0)
-        RedrawMapSliceWest(cameraOffset, mapData);
+        RedrawMapSliceWest(cameraOffset, mapLayout);
     if (x < 0)
-        RedrawMapSliceEast(cameraOffset, mapData);
+        RedrawMapSliceEast(cameraOffset, mapLayout);
     if (y > 0)
-        RedrawMapSliceNorth(cameraOffset, mapData);
+        RedrawMapSliceNorth(cameraOffset, mapLayout);
     if (y < 0)
-        RedrawMapSliceSouth(cameraOffset, mapData);
+        RedrawMapSliceSouth(cameraOffset, mapLayout);
     cameraOffset->copyBGToVRAM = TRUE;
 }
 
-static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
+static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -153,11 +153,11 @@ static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, struct M
         temp = cameraOffset->xTileOffset + i;
         if (temp >= 32)
             temp -= 32;
-        DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y + 14);
+        DrawMetatileAt(mapLayout, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y + 14);
     }
 }
 
-static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
+static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -168,11 +168,11 @@ static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, struct M
         temp = cameraOffset->xTileOffset + i;
         if (temp >= 32)
             temp -= 32;
-        DrawMetatileAt(mapData, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y);
+        DrawMetatileAt(mapLayout, r7 + temp, gSaveBlock1.pos.x + i / 2, gSaveBlock1.pos.y);
     }
 }
 
-static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
+static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -183,11 +183,11 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, struct Ma
         temp = cameraOffset->yTileOffset + i;
         if (temp >= 32)
             temp -= 32;
-        DrawMetatileAt(mapData, temp * 32 + r6, gSaveBlock1.pos.x, gSaveBlock1.pos.y + i / 2);
+        DrawMetatileAt(mapLayout, temp * 32 + r6, gSaveBlock1.pos.x, gSaveBlock1.pos.y + i / 2);
     }
 }
 
-static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, struct MapData *mapData)
+static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, struct MapLayout *mapLayout)
 {
     u8 i;
     u8 temp;
@@ -200,7 +200,7 @@ static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, struct Ma
         temp = cameraOffset->yTileOffset + i;
         if (temp >= 32)
             temp -= 32;
-        DrawMetatileAt(mapData, temp * 32 + r5, gSaveBlock1.pos.x + 14, gSaveBlock1.pos.y + i / 2);
+        DrawMetatileAt(mapLayout, temp * 32 + r5, gSaveBlock1.pos.x + 14, gSaveBlock1.pos.y + i / 2);
     }
 }
 
@@ -210,7 +210,7 @@ void CurrentMapDrawMetatileAt(int x, int y)
 
     if (offset >= 0)
     {
-        DrawMetatileAt(gMapHeader.mapData, offset, x, y);
+        DrawMetatileAt(gMapHeader.mapLayout, offset, x, y);
         sFieldCameraOffset.copyBGToVRAM = TRUE;
     }
 }
@@ -226,7 +226,7 @@ void DrawDoorMetatileAt(int x, int y, u16 *arr)
     }
 }
 
-static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
+static void DrawMetatileAt(struct MapLayout *mapLayout, u16 offset, int x, int y)
 {
     u16 *metatiles;
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
@@ -236,11 +236,11 @@ static void DrawMetatileAt(struct MapData *mapData, u16 offset, int x, int y)
 
     if (metatileId < 0x200)
     {
-        metatiles = mapData->primaryTileset->metatiles;
+        metatiles = mapLayout->primaryTileset->metatiles;
     }
     else
     {
-        metatiles = mapData->secondaryTileset->metatiles;
+        metatiles = mapLayout->secondaryTileset->metatiles;
         metatileId -= 0x200;
     }
 

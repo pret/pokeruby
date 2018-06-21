@@ -927,17 +927,17 @@ bool8 sub_81020C8(struct Task *task)
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             sub_8104CAC(6);
         }
         else if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_MIXED))
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             sub_8104CAC(5);
         }
         else
         {
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
             sub_8104CAC(2);
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
@@ -2682,7 +2682,7 @@ static void sub_810437C(struct Task *task)
     sub_810545C();
     sub_8102680();
     StopMapMusic();
-    PlayNewMapMusic(BGM_BD_TIME);
+    PlayNewMapMusic(MUS_BD_TIME);
 }
 
 static void sub_81043EC(struct Task *task)
@@ -2818,7 +2818,7 @@ static void sub_81046C0(struct Task *task)
         {
             task->data[4] = 0xa0;
             StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
-            PlayFanfare(BGM_ME_ZANNEN);
+            PlayFanfare(MUS_ME_ZANNEN);
         }
         else
         {
@@ -2830,7 +2830,7 @@ static void sub_81046C0(struct Task *task)
                 sub_8104098();
                 eSlotMachine->pikaPower = 0;
             }
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
         }
     }
 }
@@ -2906,7 +2906,7 @@ static void sub_81048CC(struct Task *task)
     task->data[4] = 4;
     task->data[5] = 0;
     StopMapMusic();
-    PlayFanfare(BGM_ME_ZANNEN);
+    PlayFanfare(MUS_ME_ZANNEN);
     PlaySE(SE_W153);
 }
 

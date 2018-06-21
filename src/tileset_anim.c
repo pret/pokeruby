@@ -518,11 +518,11 @@ static void StartTileset1Animation(void)
     gTileset1AnimFrame = 0;
     gTileset1AnimLength = 0;
     gTileset1AnimCallback = 0;
-    if (gMapHeader.mapData->primaryTileset)
+    if (gMapHeader.mapLayout->primaryTileset)
     {
-        if (gMapHeader.mapData->primaryTileset->callback)
+        if (gMapHeader.mapLayout->primaryTileset->callback)
         {
-            gMapHeader.mapData->primaryTileset->callback();
+            gMapHeader.mapLayout->primaryTileset->callback();
         }
     }
 }
@@ -532,11 +532,11 @@ static void StartTileset2Animation(void)
     gTileset2AnimFrame = 0;
     gTileset2AnimLength = 0;
     gTileset2AnimCallback = 0;
-    if (gMapHeader.mapData->secondaryTileset)
+    if (gMapHeader.mapLayout->secondaryTileset)
     {
-        if (gMapHeader.mapData->secondaryTileset->callback)
+        if (gMapHeader.mapLayout->secondaryTileset->callback)
         {
-            gMapHeader.mapData->secondaryTileset->callback();
+            gMapHeader.mapLayout->secondaryTileset->callback();
         }
     }
 }

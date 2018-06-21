@@ -1,0 +1,14 @@
+SecretBase_Tree4_MapBorder:: @ 82E8F50
+	.incbin "data/layouts/SecretBase_Tree4/border.bin"
+
+SecretBase_Tree4_MapBlockdata:: @ 82E8F58
+	.incbin "data/layouts/SecretBase_Tree4/map.bin"
+
+	.align 2
+SecretBase_Tree4_Layout:: @ 82E90E0
+	.4byte 0xe
+	.4byte 0xe
+	.4byte SecretBase_Tree4_MapBorder
+	.4byte SecretBase_Tree4_MapBlockdata
+	.4byte gTileset_SecretBase
+	.4byte gTileset_SecretBaseTree

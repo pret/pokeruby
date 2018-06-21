@@ -1,9 +1,9 @@
 Route126:: @ 83058C4
-	.4byte Route126_MapAttributes
+	.4byte Route126_Layout
 	.4byte Route126_MapEvents
 	.4byte Route126_MapScripts
 	.4byte Route126_MapConnections
-	.2byte BGM_DOORO_X3
+	.2byte MUS_DOORO_X3
 	.2byte 42
 	.byte 41
 	.byte 0

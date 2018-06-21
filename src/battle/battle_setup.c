@@ -587,7 +587,7 @@ void ScrSpecial_StartRayquazaBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
-    CreateBattleStartTask(B_TRANSITION_BLUR, BGM_BATTLE34);
+    CreateBattleStartTask(B_TRANSITION_BLUR, MUS_BATTLE34);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -598,9 +598,9 @@ void ScrSpecial_StartGroudonKyogreBattle(void)
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == VERSION_RUBY)
-        CreateBattleStartTask(B_TRANSITION_SHARDS, BGM_BATTLE34); // GROUDON
+        CreateBattleStartTask(B_TRANSITION_SHARDS, MUS_BATTLE34); // GROUDON
     else
-        CreateBattleStartTask(B_TRANSITION_RIPPLE, BGM_BATTLE34); // KYOGRE
+        CreateBattleStartTask(B_TRANSITION_RIPPLE, MUS_BATTLE34); // KYOGRE
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -610,7 +610,7 @@ void ScrSpecial_StartRegiBattle(void)
     ScriptContext2_Enable();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
-    CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, BGM_BATTLE36);
+    CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_BATTLE36);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -1172,46 +1172,46 @@ void PlayTrainerEncounterMusic(void)
         switch (sub_803FC58(gTrainerBattleOpponent))
         {
         case TRAINER_ENCOUNTER_MUSIC_MALE:
-            music = BGM_BOYEYE;
+            music = MUS_BOYEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_FEMALE:
-            music = BGM_GIRLEYE;
+            music = MUS_GIRLEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_GIRL:
-            music = BGM_SYOUJOEYE;
+            music = MUS_SYOUJOEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_INTENSE:
-            music = BGM_HAGESHII;
+            music = MUS_HAGESHII;
             break;
         case TRAINER_ENCOUNTER_MUSIC_COOL:
-            music = BGM_KAKKOII;
+            music = MUS_KAKKOII;
             break;
         case TRAINER_ENCOUNTER_MUSIC_AQUA:
-            music = BGM_AQA_0;
+            music = MUS_AQA_0;
             break;
         case TRAINER_ENCOUNTER_MUSIC_MAGMA:
-            music = BGM_MGM0;
+            music = MUS_MGM0;
             break;
         case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
-            music = BGM_SWIMEYE;
+            music = MUS_SWIMEYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_TWINS:
-            music = BGM_HUTAGO;
+            music = MUS_HUTAGO;
             break;
         case TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR:
-            music = BGM_SITENNOU;
+            music = MUS_SITENNOU;
             break;
         case TRAINER_ENCOUNTER_MUSIC_HIKER:
-            music = BGM_YAMA_EYE;
+            music = MUS_YAMA_EYE;
             break;
         case TRAINER_ENCOUNTER_MUSIC_INTERVIEWER:
-            music = BGM_INTER_V;
+            music = MUS_INTER_V;
             break;
         case TRAINER_ENCOUNTER_MUSIC_RICH:
-            music = BGM_TEST;
+            music = MUS_TEST;
             break;
         default:
-            music = BGM_AYASII;
+            music = MUS_AYASII;
         }
         PlayNewMapMusic(music);
     }

@@ -918,7 +918,7 @@ void PokeballGlowEffect_1(struct Sprite *sprite)
         sprite->data[3] = 0;
         if (sprite->data[5])
         {
-            PlayFanfare(BGM_ME_ASA);
+            PlayFanfare(MUS_ME_ASA);
         }
     }
 }

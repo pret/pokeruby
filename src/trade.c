@@ -1208,7 +1208,7 @@ static void sub_8047EC0(void)
             sub_8048C70();
             gMain.state ++;
             nullsub_5(7, 0);
-            PlayBGM(BGM_P_SCHOOL);
+            PlayBGM(MUS_P_SCHOOL);
             break;
         case 14:
             sub_804ACF4(1);
@@ -4812,7 +4812,7 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[0]].y_offset;
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_0124 = GetCurrentMapMusic();
-            PlayBGM(BGM_SHINKA);
+            PlayBGM(MUS_SHINKA);
             break;
         case 1:
             if (gUnknown_03004828->bg2hofs > 0)
@@ -5195,7 +5195,7 @@ static bool8 sub_804C29C(void)
         case 68:
             if (++ gUnknown_03004828->unk_00c0 == 4)
             {
-                PlayFanfare(BGM_FANFA5);
+                PlayFanfare(MUS_FANFA5);
             }
             if (gUnknown_03004828->unk_00c0 == 0xf0)
             {

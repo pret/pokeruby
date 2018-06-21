@@ -745,7 +745,7 @@ static void Task_BardSong(u8 taskId)
     case 3:
         if (gStringVar4[task->tCharIndex] == EOS)
         {
-            FadeInNewBGM(BGM_POKECEN, 6);
+            FadeInNewBGM(MUS_POKECEN, 6);
             m4aMPlayFadeOutTemporarily(&gMPlay_SE2, 2);
             EnableBothScriptContexts();
             DestroyTask(taskId);

@@ -5,11 +5,11 @@
 	.endif
 
 	.ifdef SAPPHIRE
-	.set BGM_EVIL_TEAM, BGM_AQA_0
-	.set BGM_GOOD_TEAM, BGM_MGM0
+	.set MUS_EVIL_TEAM, MUS_AQA_0
+	.set MUS_GOOD_TEAM, MUS_MGM0
 	.else
-	.set BGM_EVIL_TEAM, BGM_MGM0
-	.set BGM_GOOD_TEAM, BGM_AQA_0
+	.set MUS_EVIL_TEAM, MUS_MGM0
+	.set MUS_GOOD_TEAM, MUS_AQA_0
 	.endc
 
 	.ifdef SAPPHIRE

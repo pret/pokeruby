@@ -1,9 +1,9 @@
 Route110:: @ 8305704
-	.4byte Route110_MapAttributes
+	.4byte Route110_Layout
 	.4byte Route110_MapEvents
 	.4byte Route110_MapScripts
 	.4byte Route110_MapConnections
-	.2byte BGM_DOORO_X1
+	.2byte MUS_DOORO_X1
 	.2byte 26
 	.byte 25
 	.byte 0
