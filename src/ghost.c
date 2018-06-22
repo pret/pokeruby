@@ -374,3 +374,40 @@ void sub_80DE1B0(u8 taskId) {
 	gSprites[task->data[0]].callback = &sub_8078394;
 	task->func = &sub_80DE2DC;
 }
+
+void sub_80DE2DC(u8 taskId) {
+	struct Task *task;
+	
+	task = &gTasks[taskId];
+	switch (task->data[4]) {
+	case 0:
+		task->data[1] += 1;
+		task->data[5] = task->data[1] & 3;
+		if (task->data[5] == 1) {
+			if (task->data[2] > 0)
+				task->data[2] -= 1;
+		}
+		if (task->data[5] == 3) {
+			if (task->data[3] <= 15)
+				task->data[3] += 1;
+		}
+		REG_BLDALPHA = (task->data[3] << 8) | task->data[2];
+		if (task->data[3] != 16 || task->data[2] != 0)
+			break;
+		if (task->data[1] <= 80)
+			break;
+		obj_delete_but_dont_free_vram(&gSprites[task->data[0]]);
+		task->data[4] = 1;
+		break;
+	case 1:
+		task->data[6] += 1;
+		if (task->data[6] <= 1)
+			break;
+		REG_BLDCNT = 0;
+		REG_BLDALPHA = 0;
+		task->data[4] += 1;
+		break;
+	case 2:
+		DestroyAnimVisualTask(taskId);
+	}
+}
