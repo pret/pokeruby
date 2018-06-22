@@ -18,6 +18,7 @@ void sub_80DDED0(u8 taskId);
 void sub_80DDFE8(struct Sprite *);
 void sub_80DE114(struct Sprite *);
 void sub_80DE2DC(u8 taskId);
+void sub_80DE3D4(u8 taskId);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -410,4 +411,13 @@ void sub_80DE2DC(u8 taskId) {
 	case 2:
 		DestroyAnimVisualTask(taskId);
 	}
+}
+
+void sub_80DE3AC(u8 taskId) {
+	struct Task *task;
+
+	task = &gTasks[taskId];
+	task->data[15] = 0;
+	task->func = &sub_80DE3D4;
+	sub_80DE3D4(taskId);
 }

@@ -7,28 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DE3AC
-sub_80DE3AC: @ 80DE3AC
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r2, _080DE3CC @ =gTasks
-	adds r1, r2
-	movs r2, 0
-	strh r2, [r1, 0x26]
-	ldr r2, _080DE3D0 @ =sub_80DE3D4
-	str r2, [r1]
-	bl _call_via_r2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DE3CC: .4byte gTasks
-_080DE3D0: .4byte sub_80DE3D4
-	thumb_func_end sub_80DE3AC
-
 	thumb_func_start sub_80DE3D4
 sub_80DE3D4: @ 80DE3D4
 	push {r4-r7,lr}
