@@ -17,6 +17,7 @@ void sub_80DDE7C(u8 taskId);
 void sub_80DDED0(u8 taskId);
 void sub_80DDFE8(struct Sprite *);
 void sub_80DE114(struct Sprite *);
+void sub_80DE2DC(u8 taskId);
 
 void sub_80DDB6C(struct Sprite *sprite) {
     InitAnimSpritePos(sprite, 1);
@@ -343,3 +344,33 @@ void sub_80DE114(struct Sprite *sprite) {
 				"\tbx r0\n");
 }
 #endif
+
+void sub_80DE1B0(u8 taskId) {
+	struct Task *task;
+	
+	task = &gTasks[taskId];
+	task->data[0] = duplicate_obj_of_side_rel2move_in_transparent_mode(1);
+	if (task->data[0] < 0) {
+		DestroyAnimVisualTask(taskId);
+		return;
+	}
+	task->data[1] = 0;
+	task->data[2] = 15;
+	task->data[3] = 2;
+	task->data[4] = 0;
+	REG_BLDCNT = 0x3F40;
+	REG_BLDALPHA = (task->data[3] << 8) | task->data[2];
+	gSprites[task->data[0]].data[0] = 80;
+	if (GetBattlerSide(gAnimBankTarget) == 0) {
+		gSprites[task->data[0]].data[1] = 0xff70;
+		gSprites[task->data[0]].data[2] = 0x70;
+	} else {
+		gSprites[task->data[0]].data[1] = 0x90;
+		gSprites[task->data[0]].data[2] = 0xff90;
+	}
+	gSprites[task->data[0]].data[3] = 0;
+	gSprites[task->data[0]].data[4] = 0;
+	StoreSpriteCallbackInData(&gSprites[task->data[0]], SpriteCallbackDummy);
+	gSprites[task->data[0]].callback = &sub_8078394;
+	task->func = &sub_80DE2DC;
+}
