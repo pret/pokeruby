@@ -1,12 +1,17 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "contest.h"
+#include "data2.h"
+#include "decompress.h"
+#include "ewram.h"
 #include "palette.h"
 #include "random.h"
 #include "rom_8077ABC.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "trig.h"
+#include "constants/songs.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
@@ -18,15 +23,25 @@ extern u16 gBattle_WIN0V;
 extern u16 gBattle_WIN1H;
 extern u16 gBattle_WIN1V;
 extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG2_X;
+extern u16 gBattle_BG2_Y;
 
 extern const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7220;
 extern const struct SpriteTemplate gSpriteTemplate_8402500;
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
 extern const union AffineAnimCmd gUnknown_08402400[];
 extern const union AffineAnimCmd gUnknown_084024B0[];
 extern const union AffineAnimCmd gUnknown_08402518[];
 extern const union AffineAnimCmd gUnknown_08402540[];
 extern const union AffineAnimCmd gUnknown_08402590[];
+extern const u32 gUnknown_08D2AA98[];
+extern const u32 gUnknown_08D2A9E0[];
+extern const u16 gUnknown_08D2AA80[];
+extern const s8 gUnknown_084025C0[];
+extern u8 gBattleMonForms[];
+extern u8 gBankSpriteIds[];
 
 extern u8 sub_8046234(s16 x, s16 y, u8 a3);
 
@@ -1122,5 +1137,228 @@ void sub_812D790(u8 taskId)
     {
         if (sub_807992C(&gTasks[taskId]) == 0)
             DestroyAnimVisualTask(taskId);
+    }
+}
+
+void sub_812D7E8(u8 taskId)
+{
+    int i, j;
+    u8 position;
+    struct Struct_sub_8078914 subStruct;
+    u8 *dest;
+    u8 *src;
+    u16 *field_4;
+    u16 *ptr;
+    u16 stretch;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        REG_MOSAIC = 0;
+        if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
+            REG_BG1CNT_BITFIELD.mosaic = 1;
+        else
+            REG_BG2CNT_BITFIELD.mosaic = 1;
+
+        gTasks[taskId].data[10] = gBattleAnimArgs[0];
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        if (gTasks[taskId].data[2]++ > 1)
+        {
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].data[1]++;
+            stretch = gTasks[taskId].data[1];
+            REG_MOSAIC = (stretch << 4) | stretch;
+            if (stretch == 15)
+                gTasks[taskId].data[0]++;
+        }
+        break;
+    case 2:
+        sub_8031FC4(gAnimBankAttacker, gAnimBankTarget, gTasks[taskId].data[10]);
+        sub_8078954(&subStruct, gAnimBankAttacker);
+
+        if (IsContest())
+            position = 0;
+        else
+            position = GetBattlerPosition(gAnimBankAttacker);
+
+        dest = gUnknown_081FAF4C[position] + (gBattleMonForms[gAnimBankAttacker] << 11);
+        src = subStruct.field_0;
+        DmaCopy32(3, dest, src, 0x800);
+
+        if (IsContest())
+        {
+            if (IsSpeciesNotUnown(EWRAM_19348[0]) != IsSpeciesNotUnown(EWRAM_19348[1]))
+            {
+                field_4 = (u16 *)subStruct.field_4;
+                for (i = 0; i < 8; i++)
+                {
+                    for (j = 0; j < 4; j++)
+                    {
+                        u16 temp = field_4[j + i * 0x20];
+                        field_4[j + i * 0x20] = field_4[(7 - j) + i * 0x20];
+                        field_4[(7 - j) + i * 0x20] = temp;
+                    }
+                }
+
+                for (i = 0; i < 8; i++)
+                {
+                    for (j = 0; j < 8; j++)
+                    {
+                       field_4[j + i * 0x20] ^= 0x400;
+                    }
+                }
+            }
+
+            ptr = EWRAM_19348;
+            if (IsSpeciesNotUnown(ptr[1]))
+                gSprites[gBankSpriteIds[gAnimBankAttacker]].affineAnims = gSpriteAffineAnimTable_81E7C18;
+            else
+                gSprites[gBankSpriteIds[gAnimBankAttacker]].affineAnims = gSpriteAffineAnimTable_81E7BEC;
+
+            StartSpriteAffineAnim(&gSprites[gBankSpriteIds[gAnimBankAttacker]], 0);
+        }
+
+        gTasks[taskId].data[0]++;
+        break;
+    case 3:
+        if (gTasks[taskId].data[2]++ > 1)
+        {
+            gTasks[taskId].data[2] = 0;
+            gTasks[taskId].data[1]--;
+            stretch = gTasks[taskId].data[1];
+            REG_MOSAIC = (stretch << 4) | stretch;
+
+            if (stretch == 0)
+                gTasks[taskId].data[0]++;
+        }
+        break;
+    case 4:
+        REG_MOSAIC = 0;
+        if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
+            REG_BG1CNT_BITFIELD.mosaic = 0;
+        else
+            REG_BG2CNT_BITFIELD.mosaic = 0;
+
+        if (!IsContest())
+        {
+            if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_OPPONENT)
+            {
+                if (gTasks[taskId].data[10] == 0)
+                    sub_8032984(gAnimBankAttacker, eTransformStatuses[gAnimBankAttacker].species);
+            }
+        }
+
+        DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+void c3_80DFBE4(u8 taskId)
+{
+    gBattleAnimArgs[7] = gSprites[gBankSpriteIds[gAnimBankAttacker]].invisible;
+    DestroyAnimVisualTask(taskId);
+}
+
+void sub_812DB58(u8 taskId)
+{
+    sub_8031FC4(gAnimBankAttacker, gAnimBankTarget, 1);
+    DestroyAnimVisualTask(taskId);
+}
+
+void sub_812DB84(u8 taskId)
+{
+    struct Struct_sub_8078914 subStruct;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        REG_BLDCNT = BLDCNT_TGT2_BD | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1
+                   | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG1;
+        REG_BLDALPHA = 0x1000;
+        REG_BG1CNT_BITFIELD.screenSize = 0;
+        REG_BG1CNT_BITFIELD.priority = 1;
+        if (!IsContest())
+            REG_BG1CNT_BITFIELD.charBaseBlock = 1;
+
+        sub_8078914(&subStruct);
+        DmaClear32(3, subStruct.field_4, 0x1000);
+        LZDecompressVram(gUnknown_08D2AA98, subStruct.field_4);
+        LZDecompressVram(gUnknown_08D2A9E0, subStruct.field_0);
+        LoadCompressedPalette(gUnknown_08D2AA80, subStruct.field_8 * 16, 32);
+        if (IsContest())
+        {
+            sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0);
+            gBattle_BG1_X = -56;
+            gBattle_BG1_Y = 0;
+        }
+        else
+        {
+            if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
+                gBattle_BG1_X = -135;
+            else
+                gBattle_BG1_X = -10;
+
+            gBattle_BG1_Y = 0;
+        }
+
+        gTasks[taskId].data[10] = gBattle_BG1_X;
+        gTasks[taskId].data[11] = gBattle_BG1_Y;
+
+        gTasks[taskId].data[0]++;
+        PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(-64));
+        break;
+    case 1:
+        if (gTasks[taskId].data[4]++ > 0)
+        {
+            gTasks[taskId].data[4] = 0;
+            if (++gTasks[taskId].data[1] > 12)
+                gTasks[taskId].data[1] = 12;
+            
+            REG_BLDALPHA = ((16 - gTasks[taskId].data[1]) << 8) | gTasks[taskId].data[1];
+
+            if (gTasks[taskId].data[1] == 12)
+                gTasks[taskId].data[0]++;
+        }
+        break;
+    case 2:
+        if (--gTasks[taskId].data[1] < 0)
+            gTasks[taskId].data[1] = 0;
+
+        REG_BLDALPHA = ((16 - gTasks[taskId].data[1]) << 8) | gTasks[taskId].data[1];
+
+        if (gTasks[taskId].data[1] == 0)
+        {
+            gBattle_BG1_X = gUnknown_084025C0[gTasks[taskId].data[2]] + gTasks[taskId].data[10];
+            if (++gTasks[taskId].data[2] == 4)
+                gTasks[taskId].data[0] = 4;
+            else
+                gTasks[taskId].data[0] = 3;
+        }
+        break;
+    case 3:
+        if (++gTasks[taskId].data[3] == 4)
+        {
+            gTasks[taskId].data[3] = 0;
+            gTasks[taskId].data[0] = 1;
+            PlaySE12WithPanning(SE_W234, BattleAnimAdjustPanning(-64));
+        }
+        break;
+    case 4:
+        sub_8078914(&subStruct);
+        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
+        DmaClear32(3, subStruct.field_4, 0x800);
+
+        if (!IsContest())
+            REG_BG1CNT_BITFIELD.charBaseBlock = 0;
+
+        REG_BG1CNT_BITFIELD.priority = 1;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        DestroyAnimVisualTask(taskId);
+        break;
     }
 }

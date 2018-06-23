@@ -1499,7 +1499,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
     else
     {
         for (i = 0; i < 4; i++)
-            gAnimSpeciesByBanks[i] = EWRAM_19348;
+            gAnimSpeciesByBanks[i] = EWRAM_19348[0];
     }
 
     if (isMoveAnim == 0)
@@ -1933,7 +1933,7 @@ void MoveBattlerSpriteToBG(u8 bank, u8 toBG_2)
 
         spriteId = gBankSpriteIds[bank];
         gBattle_BG1_X = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
-        if (IsContest() != 0 && IsSpeciesNotUnown(EWRAM_19348) != 0)
+        if (IsContest() != 0 && IsSpeciesNotUnown(EWRAM_19348[0]) != 0)
             gBattle_BG1_X--;
         gBattle_BG1_Y = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
         gSprites[gBankSpriteIds[bank]].invisible = TRUE;
@@ -1987,7 +1987,7 @@ static void sub_8076380(void)
     struct UnknownStruct2 s;
     u16 *ptr;
 
-    if (IsSpeciesNotUnown(EWRAM_19348))
+    if (IsSpeciesNotUnown(EWRAM_19348[0]))
     {
         sub_8078914(&s);
         ptr = s.unk4;
