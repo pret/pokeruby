@@ -436,9 +436,7 @@ void sub_80DE0FC(struct Sprite *sprite) {
     sprite->callback = &sub_80DE114;
 }
 
-#ifdef NONMATCHING /* I couldn't do this one. */
-void sub_80DE114(struct Sprite *sprite) {}
-#else
+/* NONMATCHING */
 NAKED
 void sub_80DE114(struct Sprite *sprite) {
     asm_unified("\tpush {r4-r6,lr}\n"
@@ -527,7 +525,6 @@ void sub_80DE114(struct Sprite *sprite) {
                 "\tpop {r0}\n"
                 "\tbx r0\n");
 }
-#endif
 
 void sub_80DE1B0(u8 taskId) {
     struct Task *task;
