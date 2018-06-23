@@ -245,7 +245,7 @@ enum {
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
 
-extern const u8 gUnknown_0830FD14[];
+extern const u8 gReflectionEffectPaletteMap[];
 
 #define movement_type_def(setup, table) \
 static u8 setup##_callback(struct EventObject *, struct Sprite *);\
@@ -269,10 +269,10 @@ static u8 setup##_callback(struct EventObject *eventObject, struct Sprite *sprit
     return 0;\
 }
 
-struct PairedPalettes
+struct ReflectionPaletteSet
 {
-    u16 tag;
-    const u16 *data;
+    u16 mainPaletteTag;
+    const u16 *reflectionPaletteTags;
 };
 
 extern const u16 gEventObjectPalette19[];
@@ -563,8 +563,7 @@ u8 GetMoveDirectionFastestAnimNum(u8);
 
 u32 state_to_direction(u8, u32, u32);
 
-void sub_805AA98();
-void sub_805AAB0(void);
+void ResetEventObjects();
 u8 GetFirstInactiveEventObjectId(void);
 u8 GetEventObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
@@ -592,13 +591,13 @@ void sub_805BCC0(s16 x, s16 y);
 void sub_805BCF0(u8, u8, u8, u8);
 void sub_805BD48(u8, u8, u8);
 void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
-void gpu_pal_allocator_reset__manage_upper_four(void);
+void FreeAndReserveObjectSpritePalettes(void);
 void sub_805BDF8(u16);
 u8 sub_805BE58(const struct SpritePalette *);
-void pal_patch_for_npc(u16, u16);
+void PatchObjectPalette(u16, u16);
 u8 FindEventObjectPaletteIndexByTag(u16);
-void npc_load_two_palettes__no_record(u16, u8);
-void npc_load_two_palettes__and_record(u16, u8);
+void LoadPlayerObjectReflectionPalette(u16, u8);
+void LoadSpecialObjectReflectionPalette(u16, u8);
 void ShiftEventObjectCoords(struct EventObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void ShiftStillEventObjectCoords(struct EventObject *pObject);
@@ -613,7 +612,7 @@ struct EventObjectTemplate *GetEventObjectTemplateByLocalIdAndMap(u8, u8, u8);
 void OverrideTemplateCoordsForEventObject(struct EventObject *pObject);
 void OverrideMovementTypeForEventObject(struct EventObject *, u8);
 void TryOverrideTemplateCoordsForEventObject(u8, u8, u8);
-void sub_805C7C4(u8 i);
+void InitEventObjectPalettes(u8);
 u8 GetFaceDirectionAnimNum(u8);
 u8 GetMoveDirectionAnimNum(u8 unk_19);
 u8 GetAcroWheelieDirectionAnimNum(u8);
@@ -671,8 +670,8 @@ u8 GetOppositeDirection(u8);
 u8 SpawnSpecialEventObjectParametrized(u8, u8, u8, s16, s16, u8);
 void CameraObjectSetFollowedObjectId(u8);
 u8 TryInitLocalEventObject(u8);
-u8 obj_unfreeze(struct Sprite *, s16, s16, u8);
-u16 npc_paltag_by_palslot(u8);
+u8 CreateCopySpriteAt(struct Sprite *, s16, s16, u8);
+u16 GetObjectPaletteTag(u8);
 void sub_8060470(s16 *, s16 *, s16, s16);
 bool8 FreezeEventObject(struct EventObject *);
 void FreezeEventObjects(void);
