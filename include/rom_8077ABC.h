@@ -10,6 +10,12 @@ struct Struct_sub_8078914 {
     u8 field_8;
 };
 
+struct TransformStatus
+{
+    u16 unknown;
+    u16 species;
+};
+
 u8 GetBattlerSpriteCoord(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
 u8 GetAnimBattlerSpriteId(u8 bank);
@@ -108,5 +114,6 @@ void sub_8079AB8(u8 sprite, u8 sprite2);
 u8 sub_807A4A0(int bank, u8 sprite, int species);
 void sub_80794A8(struct Sprite *sprite);
 void sub_807A9BC(struct Sprite *sprite);
+void sub_8078954(struct Struct_sub_8078914*, u8);
 
 #endif // GUARD_ROM_8077ABC_H
