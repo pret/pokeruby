@@ -52,7 +52,7 @@ extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
-extern u8 gUnknown_02038561;
+extern u8 gPokemonItemUseType;
 extern u16 gUnknown_0202E8F8;
 extern void (*gPokemonItemUseCallback)(u8 taskID, u16 itemID, TaskFunc func);
 extern TaskFunc gUnknown_03005CF0;
@@ -975,7 +975,7 @@ static void sub_808AF80(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            if (gUnknown_02038561 == 0)
+            if (gPokemonItemUseType == ITEM_USE_SINGLE_MON)
             {
                 switch (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId))
                 {
@@ -1002,19 +1002,19 @@ static void sub_808AF80(void)
 void sub_808B020(void)
 {
     gPaletteFade.bufferTransferDisabled = 1;
-    switch (gUnknown_02038561)
+    switch (gPokemonItemUseType)
     {
-    case 0:
+    case ITEM_USE_SINGLE_MON:
         if (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId) == 1)
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 20);
         else
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 3);
         break;
-    case 4:
+    case ITEM_USE_ALL_MONS:
         SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B1EC, 0xFF);
         break;
-    case 1:
-    case 3:
+    case ITEM_USE_GIVE_ITEM:
+    case ITEM_USE_GIVE_MAIL:
         SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 4);
         break;
     }
@@ -1034,14 +1034,14 @@ void sub_808B0C0(u8 taskID)
             else
             {
                 sub_806D5A4();
-                if (gUnknown_02038561 == 0)
+                if (gPokemonItemUseType == ITEM_USE_SINGLE_MON)
                     gPokemonItemUseCallback(taskID, gSpecialVar_ItemId, sub_808B224);
-                if (gUnknown_02038561 == 1)
+                if (gPokemonItemUseType == ITEM_USE_GIVE_ITEM)
                 {
                     PlaySE(SE_SELECT);
                     PartyMenuTryGiveMonHeldItem(taskID, gSpecialVar_ItemId, sub_808B2EC);
                 }
-                if (gUnknown_02038561 == 3)
+                if (gPokemonItemUseType == ITEM_USE_GIVE_MAIL)
                 {
                     PlaySE(SE_SELECT);
                     PartyMenuTryGiveMonMail(taskID, sub_808B2B4);
@@ -1052,9 +1052,9 @@ void sub_808B0C0(u8 taskID)
             gLastFieldPokeMenuOpened = sub_806CA38(taskID);
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-            if (gUnknown_02038561 == 0 || gUnknown_02038561 == 1)
+            if (gPokemonItemUseType == ITEM_USE_SINGLE_MON || gPokemonItemUseType == ITEM_USE_GIVE_ITEM)
                 gTasks[taskID].func = sub_808B25C;
-            if (gUnknown_02038561 == 3)
+            if (gPokemonItemUseType == ITEM_USE_GIVE_MAIL)
                 gTasks[taskID].func = sub_808B2B4;
             break;
         }

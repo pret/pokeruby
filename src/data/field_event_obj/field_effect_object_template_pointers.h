@@ -26,7 +26,7 @@ const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown17;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown18;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown19;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown20;
-const struct SpriteTemplate gFieldEffectSpriteTemplate_Unknown21;
+const struct SpriteTemplate gFieldEffectSpriteTemplate_Reflection;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_DeepSandFootprints;
 const struct SpriteTemplate gFieldEffectSpriteTemplate_TreeDisguise;
@@ -64,7 +64,7 @@ const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[] = {
     &gFieldEffectSpriteTemplate_Unknown18,
     &gFieldEffectSpriteTemplate_Unknown19,
     &gFieldEffectSpriteTemplate_Unknown20,
-    &gFieldEffectSpriteTemplate_Unknown21,
+    &gFieldEffectSpriteTemplate_Reflection,
     &gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle,
     &gFieldEffectSpriteTemplate_DeepSandFootprints,
     &gFieldEffectSpriteTemplate_TreeDisguise,

@@ -713,11 +713,11 @@ void PerStepCallback_8069F64(u8 taskId)
         {
             if (MapGridGetMetatileIdAt(x, y) == 0x20a)
             {
-                ash(x, y, 0x212, 4);
+                StartAshFieldEffect(x, y, 0x212, 4);
             }
             else
             {
-                ash(x, y, 0x206, 4);
+                StartAshFieldEffect(x, y, 0x206, 4);
             }
             if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
             {
@@ -782,24 +782,29 @@ void PerStepCallback_806A07C(u8 taskId)
     }
 }
 
-const u16 gUnknown_08376418[] = {0xe8, 0xeb, 0xea, 0xe9};
+static const u16 sMuddySlopeAnimationMetatiles[] = {0xe8, 0xeb, 0xea, 0xe9};
 
-void sub_806A18C(s16 *data, s16 x, s16 y)
+static void SetMuddySlopeAnimatedMetatile(s16 *counter, s16 x, s16 y)
 {
     u16 tile;
-    if ((--data[0]) == 0)
-    {
+    if (--(*counter) == 0)
         tile = 0xe8;
-    }
     else
-    {
-        tile = gUnknown_08376418[data[0] / 8];
-    }
+        tile = sMuddySlopeAnimationMetatiles[*counter / 8];
+
     MapGridSetMetatileIdAt(x, y, tile);
     CurrentMapDrawMetatileAt(x, y);
+
+    // Immediately set the metatile back to the original muddy slope metatile
+    // but don't actualy draw it on the screen. This is so the underlying metatile
+    // behvior on the map is not changed.
     MapGridSetMetatileIdAt(x, y, 0xe8);
 }
 
+// Checks for the player traversing on muddy slope metatiles.
+// When the player walks or slides on one, it executes a short animation to
+// make it look like a small mudslide. A maximum of 4 mudslide animations can
+// exist simultaneously.
 void Task_MuddySlope(u8 taskId)
 {
     s16 x, y, x2, y2;
@@ -827,7 +832,7 @@ void Task_MuddySlope(u8 taskId)
                 data[3] = y;
                 if (MetatileBehavior_IsMuddySlope(MapGridGetMetatileBehaviorAt(x, y)))
                 {
-                    for (i=4; i<14; i+=3)
+                    for (i = 4; i < 14; i += 3)
                     {
                         if (data[i] == 0)
                         {
@@ -841,6 +846,7 @@ void Task_MuddySlope(u8 taskId)
             }
             break;
     }
+
     if (gCamera.field_0 && mapIndices != data[0])
     {
         data[0] = mapIndices;
@@ -852,13 +858,14 @@ void Task_MuddySlope(u8 taskId)
         x2 = 0;
         y2 = 0;
     }
-    for (i=4; i<14; i+=3)
+
+    for (i = 4; i < 14; i += 3)
     {
         if (data[i])
         {
             data[i + 1] -= x2;
             data[i + 2] -= y2;
-            sub_806A18C(&data[i], data[i + 1], data[i + 2]);
+            SetMuddySlopeAnimatedMetatile(&data[i], data[i + 1], data[i + 2]);
         }
     }
 }

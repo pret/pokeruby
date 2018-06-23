@@ -238,7 +238,7 @@ static void sub_814640C(u8 taskId)
     {
         SetMainCallback2(sub_80A5B40);
         sub_80A7DD4();
-        gpu_pal_allocator_reset__manage_upper_four();
+        FreeAndReserveObjectSpritePalettes();
         DestroyTask(taskId);
     }
 }

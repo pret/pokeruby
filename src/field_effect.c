@@ -306,9 +306,11 @@ bool8 (*const gUnknown_0839F364[])(struct Task *, struct EventObject *, struct S
     sub_80877D4
 };
 
-void (*const gUnknown_0839F378[])(struct Task *) = {
-    sub_80878F4,
-    sub_8087914
+static void EscapeRopeFieldEffect_Step0(struct Task *);
+static void EscapeRopeFieldEffect_Step1(struct Task *);
+void (*const gEscapeRopeFieldEffectFuncs[])(struct Task *) = {
+    EscapeRopeFieldEffect_Step0,
+    EscapeRopeFieldEffect_Step1
 };
 
 static u8 sActiveList[32];
@@ -1935,7 +1937,7 @@ bool8 sub_80877AC(struct Task *task, struct EventObject *eventObject, struct Spr
     return FALSE;
 }
 
-void sub_80878C4(u8);
+static void DoEscapeRopeFieldEffect(u8);
 void mapldr_080859D4(void);
 
 bool8 sub_80877D4(struct Task *task, struct EventObject *eventObject, struct Sprite *sprite)
@@ -1968,34 +1970,42 @@ void sub_808788C(struct Sprite *sprite)
     }
 }
 
-void sub_80878A8(void)
+void StartEscapeRopeFieldEffect(void)
 {
     ScriptContext2_Enable();
     FreezeEventObjects();
-    CreateTask(sub_80878C4, 0x50);
+    CreateTask(DoEscapeRopeFieldEffect, 0x50);
 }
 
-void sub_80878C4(u8 taskId)
+static void DoEscapeRopeFieldEffect(u8 taskId)
 {
-    gUnknown_0839F378[gTasks[taskId].data[0]](&gTasks[taskId]);
+    gEscapeRopeFieldEffectFuncs[gTasks[taskId].data[0]](&gTasks[taskId]);
 }
 
-void sub_80878F4(struct Task *task)
+static void EscapeRopeFieldEffect_Step0(struct Task *task)
 {
     task->data[0]++;
     task->data[14] = 64;
     task->data[15] = GetPlayerFacingDirection();
 }
 
-void sub_8087914(struct Task *task)
+static void EscapeRopeFieldEffect_Step1(struct Task *task)
 {
     struct EventObject *eventObject;
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 clockwiseDirections[5] = {
+        DIR_SOUTH,
+        DIR_WEST,
+        DIR_EAST,
+        DIR_NORTH,
+        DIR_SOUTH,
+    };
+
     if (task->data[14] != 0 && (--task->data[14]) == 0)
     {
         TryFadeOutOldMapMusic();
         WarpFadeScreen();
     }
+
     eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (!EventObjectIsMovementOverridden(eventObject) || EventObjectClearHeldMovementIfFinished(eventObject))
     {
@@ -2006,14 +2016,14 @@ void sub_8087914(struct Task *task)
             WarpIntoMap();
             gFieldCallback = mapldr_080859D4;
             SetMainCallback2(CB2_LoadMap);
-            DestroyTask(FindTaskIdByFunc(sub_80878C4));
-        } else if (task->data[1] == 0 || (--task->data[1]) == 0)
+            DestroyTask(FindTaskIdByFunc(DoEscapeRopeFieldEffect));
+        }
+        else if (task->data[1] == 0 || (--task->data[1]) == 0)
         {
-            EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(unknown_0839F380[eventObject->facingDirection]));
+            EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(clockwiseDirections[eventObject->facingDirection]));
             if (task->data[2] < 12)
-            {
                 task->data[2]++;
-            }
+
             task->data[1] = 8 >> (task->data[2] >> 2);
         }
     }

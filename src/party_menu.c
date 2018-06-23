@@ -4456,7 +4456,7 @@ bool8 IsBlueYellowRedFlute(u16 item)
         return FALSE;
 }
 
-void sub_8070048(u8 taskId, u16 item, TaskFunc func)
+void DoSacredAshItemEffect(u8 taskId, u16 item, TaskFunc func)
 {
     ewram1C000.unk10 = func;
     ewram1C000.unk4 = taskId;
@@ -4473,7 +4473,7 @@ void sub_8070088(u8 taskId)
     u8 taskId2;
 
     gTasks[taskId].func = TaskDummy;
-    if (GetMonData(&gPlayerParty[ewram1C000.primarySelectedMonIndex], MON_DATA_SPECIES) == 0)
+    if (GetMonData(&gPlayerParty[ewram1C000.primarySelectedMonIndex], MON_DATA_SPECIES) == SPECIES_NONE)
     {
         gTasks[taskId].func = sub_80701DC;
     }
