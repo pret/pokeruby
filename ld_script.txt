@@ -289,7 +289,6 @@ SECTIONS {
         src/battle/anim/bug.o(.text);
         src/battle/anim/rock.o(.text);
         src/battle/anim/ghost.o(.text);
-        src/ghost.o(.text);
         asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
