@@ -120,9 +120,6 @@ bool8 sub_8087774(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80877AC(struct Task *, struct EventObject *, struct Sprite *);
 bool8 sub_80877D4(struct Task *, struct EventObject *, struct Sprite *);
 
-void sub_80878F4(struct Task *);
-void sub_8087914(struct Task *);
-
 void sub_8087AA4(struct Task *);
 void sub_8087AC8(struct Task *);
 
@@ -176,7 +173,7 @@ u8 CreateBirchSprite(s16 x, s16 y, u8 subpriority);
 u8 CreateMonSprite_PicBox(u16, s16, s16, u8);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite);
 void MultiplyInvertedPaletteRGBComponents(u16, u8, u8, u8);
-void sub_80878A8(void);
+void StartEscapeRopeFieldEffect(void);
 void CreateTeleportFieldEffectTask(void);
 void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 

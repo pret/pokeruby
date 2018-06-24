@@ -110,7 +110,6 @@ const u8 gUnknown_083D13EC[] = {
     0x23,0x24,0xF,0x1F,0x21,0x2F,0xE,0x14,0x20,0x22,0x0,0x0
 };
 
-extern void *gUnknown_0300485C;
 extern u8 gUnknown_081A2E14[];
 extern u8 UnknownString_81A1BB2[];
 extern u8 UnknownString_81A1F67[];

@@ -1805,7 +1805,7 @@ void sub_8054D4C(u32 a1)
     ScanlineEffect_Clear();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    sub_805C7C4(0);
+    InitEventObjectPalettes(0);
     FieldEffectActiveListClear();
     InitFieldMessageBox();
     StartWeather();
@@ -1819,7 +1819,7 @@ void sub_8054D90(void)
 {
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
-    sub_805AA98();
+    ResetEventObjects();
     TrySpawnEventObjects(0, 0);
     mapheader_run_first_tag4_script_list_match();
 }
@@ -1830,7 +1830,7 @@ void mli4_mapscripts_and_other(void)
     struct InitialPlayerAvatarState *initialPlayerAvatarState;
     gTotalCameraPixelOffsetX = 0;
     gTotalCameraPixelOffsetY = 0;
-    sub_805AA98();
+    ResetEventObjects();
     sav1_camera_get_focus_coords(&x, &y);
     initialPlayerAvatarState = GetInitialPlayerAvatarState();
     InitPlayerAvatar(x, y, initialPlayerAvatarState->direction, gSaveBlock2.playerGender);

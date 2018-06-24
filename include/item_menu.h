@@ -3,6 +3,15 @@
 
 #include "string_util.h"
 
+enum
+{
+	ITEM_USE_SINGLE_MON,
+	ITEM_USE_GIVE_ITEM,
+	ITEM_USE_UNUSED,
+	ITEM_USE_GIVE_MAIL,
+	ITEM_USE_ALL_MONS,
+};
+
 struct PocketScrollState
 {
     u8 cursorPos;

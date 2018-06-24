@@ -33,12 +33,6 @@
 #define gTransformPersonalities gTransformedPersonalities
 #define gBattleMonSprites gBankSpriteIds
 
-struct TransformStatus
-{
-    u16 unknown;
-    u16 species;
-};
-
 struct Struct_gUnknown_0837F578
 {
     u8 field_0;
@@ -890,7 +884,7 @@ void sub_8078914(struct Struct_sub_8078914 *unk)
     }
 }
 
-void sub_8078954(struct Struct_sub_8078914 *unk)
+void sub_8078954(struct Struct_sub_8078914 *unk, u8 b)
 {
     if (IsContest())
     {
