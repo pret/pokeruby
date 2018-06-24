@@ -1,5 +1,6 @@
 #include "global.h"
 #include "sound.h"
+#include "constants/songs.h"
 #include "trig.h"
 #include "rom_8077ABC.h"
 #include "battle_anim.h"
@@ -203,7 +204,8 @@ const struct SpriteTemplate gSpriteTemplate_83DAF98 =
     .callback = sub_80DF49C,
 };
 
-void sub_80DDB6C(struct Sprite *sprite) {
+void sub_80DDB6C(struct Sprite *sprite)
+{
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = sprite->pos1.x;
@@ -212,16 +214,18 @@ void sub_80DDB6C(struct Sprite *sprite) {
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sub_8078BD4(sprite);
     sprite->callback = sub_80DDBD8;
-    sprite->data[6] = 0x10;
+    sprite->data[6] = 16;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = sprite->data[6];
 }
 
-void sub_80DDBD8(struct Sprite *sprite) {
+void sub_80DDBD8(struct Sprite *sprite)
+{
     s16 r0;
     s16 r2;
     sub_80DDCC8(sprite);
-    if (TranslateAnimSpriteByDeltas(sprite)) {
+    if (TranslateAnimSpriteByDeltas(sprite))
+    {
         sprite->callback = sub_80DDC4C;
         return;
     }
@@ -230,13 +234,11 @@ void sub_80DDBD8(struct Sprite *sprite) {
     r2 = sprite->data[5];
     sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     r0 = sprite->data[5];
-    if (r2 != 0) {
-        if (r2 <= 0xC4)
-            return;
-    }
+    if (r2 != 0 && r2 <= 196)
+        return;
     if (r0 <= 0)
         return;
-    PlaySE12WithPanning(0xC4, gUnknown_0202F7D2);
+    PlaySE12WithPanning(SE_W109, gUnknown_0202F7D2);
 }
 
 void sub_80DDC4C(struct Sprite *sprite)
@@ -252,11 +254,9 @@ void sub_80DDC4C(struct Sprite *sprite)
     sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
     r0 = sprite->data[5];
     
-    if(r2 == 0 || r2 > 0xC4)
-    {
+    if(r2 == 0 || r2 > 196)
         if(r0 > 0)
-            PlaySE(0xC4);
-    }
+            PlaySE(SE_W109);
     
     if(sprite->data[6] == 0)
     {
@@ -292,11 +292,9 @@ void sub_80DDCC8(struct Sprite *sprite)
     else
         return;
     
-    REG_BLDALPHA = ((16 - sprite->data[6]) << 8) | sprite->data[6];
+    REG_BLDALPHA = BLDALPHA_BLEND(sprite->data[6], 16 - sprite->data[6]);
     if(sprite->data[6] == 0 || sprite->data[6] == 16)
-    {
         sprite->data[7] ^= 0x100;
-    }
     if(sprite->data[6] == 0)
         sprite->data[6] = 0x100;
 }
@@ -308,72 +306,78 @@ void sub_80DDD58(struct Sprite *sprite)
     sub_80DDD78(sprite);
 }
 
-void sub_80DDD78(struct Sprite *sprite) {
+void sub_80DDD78(struct Sprite *sprite)
+{
     u16 temp1;
     sprite->pos2.x = Sin(sprite->data[0], 32);
     sprite->pos2.y = Cos(sprite->data[0], 8);
     temp1 = sprite->data[0] - 65;
-    if (temp1 <= 130) {
+    if (temp1 <= 130)
         sprite->oam.priority = 2;
-    } else {
+    else
         sprite->oam.priority = 1;
-    }
-    sprite->data[0] = (sprite->data[0] + 0x13) & 0xFF;
+    sprite->data[0] = (sprite->data[0] + 19) & 0xFF;
     sprite->data[2] += 80;
     sprite->pos2.y += sprite->data[2] >> 8;
     sprite->data[7] += 1;
-    if (sprite->data[7] == 0x3D) {
+    if (sprite->data[7] == 61)
         DestroyAnimSprite(sprite);
-    }
 }
 
-void sub_80DDDF0(u8 r5) {
-    u8 r4;
+void sub_80DDDF0(u8 taskId)
+{
+    u8 spriteId;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;
-    r4 = GetAnimBattlerSpriteId(0);
-    sub_8078E70(r4, 1);
-    obj_id_set_rotscale(r4, 0x80, 0x80, 0);
-    gSprites[r4].invisible = FALSE;
-    gTasks[r5].data[0] = 0x80;
-    gTasks[r5].data[1] = *gBattleAnimArgs;
-    gTasks[r5].data[2] = 0;
-    gTasks[r5].data[3] = 0x10;
-    gTasks[r5].func = &sub_80DDE7C;
+    spriteId = GetAnimBattlerSpriteId(0);
+    sub_8078E70(spriteId, 1);
+    obj_id_set_rotscale(spriteId, 128, 128, 0);
+    gSprites[spriteId].invisible = FALSE;
+    gTasks[taskId].data[0] = 128;
+    gTasks[taskId].data[1] = *gBattleAnimArgs;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 16;
+    gTasks[taskId].func = sub_80DDE7C;
 }
 
-void sub_80DDE7C(u8 taskId) {
+void sub_80DDE7C(u8 taskId)
+{
     gTasks[taskId].data[10] += 1;
-    if (gTasks[taskId].data[10] == 3) {
+    if (gTasks[taskId].data[10] == 3)
+    {
         gTasks[taskId].data[10] = 0;
         gTasks[taskId].data[2] += 1;
         gTasks[taskId].data[3] -= 1;
         REG_BLDALPHA = gTasks[taskId].data[3] << 8 | gTasks[taskId].data[2];
         if (gTasks[taskId].data[2] != 9)
             return;
-        gTasks[taskId].func = &sub_80DDED0;
+        gTasks[taskId].func = sub_80DDED0;
     }
 }
 
-void sub_80DDED0(u8 taskId) {
-    u8 r1;
-    if (gTasks[taskId].data[1] > 0) {
+void sub_80DDED0(u8 taskId)
+{
+    u8 spriteId;
+    if (gTasks[taskId].data[1] > 0)
+    {
         gTasks[taskId].data[1] -= 1;
         return;
     }
-    r1 = GetAnimBattlerSpriteId(0);
+    spriteId = GetAnimBattlerSpriteId(0);
     gTasks[taskId].data[0] += 8;
-    if (gTasks[taskId].data[0] <= 0xFF) {
-        obj_id_set_rotscale(r1, gTasks[taskId].data[0], gTasks[taskId].data[0], 0);
+    if (gTasks[taskId].data[0] <= 0xFF)
+    {
+        obj_id_set_rotscale(spriteId, gTasks[taskId].data[0], gTasks[taskId].data[0], 0);
         return;
     }
-    sub_8078F40(r1);
+    sub_8078F40(spriteId);
     DestroyAnimVisualTask(taskId);
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
 }
 
-void sub_80DDF40(struct Sprite *sprite) {
+void sub_80DDF40(struct Sprite *sprite)
+{
     u16 r5, r6;
     r5 = sprite->pos1.x;
     r6 = sprite->pos1.y;
@@ -387,11 +391,13 @@ void sub_80DDF40(struct Sprite *sprite) {
     sprite->data[5] = sprite->pos1.y << 4;
     sprite->data[6] = (((s16)r5 - sprite->pos1.x) << 4) / (gBattleAnimArgs[0] << 1);
     sprite->data[7] = (((s16)r6 - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
-    sprite->callback = &sub_80DDFE8;
+    sprite->callback = sub_80DDFE8;
 }
 
-void sub_80DDFE8(struct Sprite *sprite) {
-    switch (sprite->data[0]) {
+void sub_80DDFE8(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
     case 0:
         sprite->data[4] += sprite->data[6];
         sprite->data[5] += sprite->data[7];
@@ -428,17 +434,20 @@ void sub_80DDFE8(struct Sprite *sprite) {
         break;
     case 3:
         move_anim_8074EE0(sprite);
+        break;
     }
 }
 
-void sub_80DE0FC(struct Sprite *sprite) {
+void sub_80DE0FC(struct Sprite *sprite)
+{
     sub_8078764(sprite, 1);
-    sprite->callback = &sub_80DE114;
+    sprite->callback = sub_80DE114;
 }
 
 /* NONMATCHING */
 NAKED
-void sub_80DE114(struct Sprite *sprite) {
+void sub_80DE114(struct Sprite *sprite)
+{
     asm_unified("\tpush {r4-r6,lr}\n"
                 "\tadds r3, r0, 0\n"
                 "\tmovs r5, 0\n"
@@ -526,12 +535,14 @@ void sub_80DE114(struct Sprite *sprite) {
                 "\tbx r0\n");
 }
 
-void sub_80DE1B0(u8 taskId) {
+void sub_80DE1B0(u8 taskId)
+{
     struct Task *task;
     
     task = &gTasks[taskId];
     task->data[0] = duplicate_obj_of_side_rel2move_in_transparent_mode(1);
-    if (task->data[0] < 0) {
+    if (task->data[0] < 0)
+    {
         DestroyAnimVisualTask(taskId);
         return;
     }
@@ -542,36 +553,39 @@ void sub_80DE1B0(u8 taskId) {
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = (task->data[3] << 8) | task->data[2];
     gSprites[task->data[0]].data[0] = 80;
-    if (GetBattlerSide(gAnimBankTarget) == 0) {
-        gSprites[task->data[0]].data[1] = 0xff70;
-        gSprites[task->data[0]].data[2] = 0x70;
-    } else {
-        gSprites[task->data[0]].data[1] = 0x90;
-        gSprites[task->data[0]].data[2] = 0xff90;
+    if (GetBattlerSide(gAnimBankTarget) == 0)
+    {
+        gSprites[task->data[0]].data[1] = -144;
+        gSprites[task->data[0]].data[2] = 112;
+    }
+    else
+    {
+        gSprites[task->data[0]].data[1] = 144;
+        gSprites[task->data[0]].data[2] = -112;
     }
     gSprites[task->data[0]].data[3] = 0;
     gSprites[task->data[0]].data[4] = 0;
     StoreSpriteCallbackInData(&gSprites[task->data[0]], SpriteCallbackDummy);
-    gSprites[task->data[0]].callback = &sub_8078394;
-    task->func = &sub_80DE2DC;
+    gSprites[task->data[0]].callback = sub_8078394;
+    task->func = sub_80DE2DC;
 }
 
-void sub_80DE2DC(u8 taskId) {
+void sub_80DE2DC(u8 taskId)
+{
     struct Task *task;
 
     task = &gTasks[taskId];
-    switch (task->data[4]) {
+    switch (task->data[4])
+    {
     case 0:
         task->data[1] += 1;
         task->data[5] = task->data[1] & 3;
-        if (task->data[5] == 1) {
+        if (task->data[5] == 1)
             if (task->data[2] > 0)
                 task->data[2] -= 1;
-        }
-        if (task->data[5] == 3) {
+        if (task->data[5] == 3)
             if (task->data[3] <= 15)
                 task->data[3] += 1;
-        }
         REG_BLDALPHA = (task->data[3] << 8) | task->data[2];
         if (task->data[3] != 16 || task->data[2] != 0)
             break;
@@ -581,8 +595,7 @@ void sub_80DE2DC(u8 taskId) {
         task->data[4] = 1;
         break;
     case 1:
-        task->data[6] += 1;
-        if (task->data[6] <= 1)
+        if (++task->data[6] <= 1)
             break;
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
@@ -593,11 +606,12 @@ void sub_80DE2DC(u8 taskId) {
     }
 }
 
-void sub_80DE3AC(u8 taskId) {
+void sub_80DE3AC(u8 taskId)
+{
     struct Task *task;
 
     task = &gTasks[taskId];
     task->data[15] = 0;
-    task->func = &sub_80DE3D4;
+    task->func = sub_80DE3D4;
     sub_80DE3D4(taskId);
 }
