@@ -293,7 +293,6 @@ SECTIONS {
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
         src/battle/anim/ground.o(.text);
-        asm/ground.o(.text);
         src/battle/anim/normal.o(.text);
         asm/normal.o(.text);
         src/battle/anim/battle_intro.o(.text);
