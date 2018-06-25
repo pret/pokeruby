@@ -1,6 +1,6 @@
 #include "global.h"
 #include "constants/easy_chat.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "data2.h"
 #include "decompress.h"
 #include "easy_chat.h"
@@ -18,6 +18,12 @@
 #include "strings2.h"
 #include "trig.h"
 #include "scanline_effect.h"
+
+#include "data/text/easy_chat/group_words.h"
+#include "data/text/easy_chat/words_by_letter.h"
+#include "data/text/easy_chat/group_sizes.h"
+#include "data/text/easy_chat/group_orders.h"
+#include "data/text/easy_chat/group_name_table.h"
 
 extern void sub_8095C8C();
 extern void sub_809D104(void *, u16, u16, const void *, u16, u16, u16, u16);
@@ -734,10 +740,10 @@ void sub_80E8BF4(u8 reporter, u8 b)
     {
     case 0:  // Gabby
     default:
-        gabbyTyGfxId = MAP_OBJ_GFX_REPORTER_M;
+        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_M;
         break;
     case 1:  // Ty
-        gabbyTyGfxId = MAP_OBJ_GFX_REPORTER_F;
+        gabbyTyGfxId = EVENT_OBJ_GFX_REPORTER_F;
         break;
     }
 
@@ -745,8 +751,8 @@ void sub_80E8BF4(u8 reporter, u8 b)
     LoadSpritePalette(&gUnknown_083DBD38);
     CreateSprite(&gSpriteTemplate_83DBD48, x, y, 1);
 
-    spriteId = AddPseudoFieldObject(
-      (gSaveBlock2.playerGender == MALE) ? MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL : MAP_OBJ_GFX_RIVAL_MAY_NORMAL,
+    spriteId = AddPseudoEventObject(
+      (gSaveBlock2.playerGender == MALE) ? EVENT_OBJ_GFX_RIVAL_BRENDAN_NORMAL : EVENT_OBJ_GFX_RIVAL_MAY_NORMAL,
       SpriteCallbackDummy, x - 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
@@ -754,7 +760,7 @@ void sub_80E8BF4(u8 reporter, u8 b)
         StartSpriteAnim(&gSprites[spriteId], 3);
     }
 
-    spriteId = AddPseudoFieldObject(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
+    spriteId = AddPseudoEventObject(gabbyTyGfxId, SpriteCallbackDummy, x + 12, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.priority = 0;
@@ -1176,7 +1182,7 @@ void sub_80E9368(u8 a)
     gEasyChatStruct->unk9F8E[2] = 1;
     if (r4 != NULL)
     {
-        sub_8072C74(gEasyChatStruct->unk9F8E + 3, r4, 240, 2);
+        AlignStringInMenuWindow(gEasyChatStruct->unk9F8E + 3, r4, 240, 2);
         Menu_PrintText(gEasyChatStruct->unk9F8E, 0, 0);
     }
     else
@@ -2067,11 +2073,6 @@ void sub_80EAD08(void)
     }
 }
 
-extern const u8 *const gEasyChatGroupNames[];
-extern const u8 gEasyChatGroupSizes[];
-extern const u16 gEasyChatWordsByLetter[];
-extern const u16 gEasyChatWordsAlphabetized[];
-
 u8 *CopyEasyChatGroupName(u8 *dest, u8 group, int unused)
 {
     return StringCopy(dest, gEasyChatGroupNames[group]);
@@ -2133,7 +2134,7 @@ u16 sub_80EAE88(u8 group)
 }
 
 #if GERMAN
-__attribute__((naked))
+NAKED
 void sub_80EAECC(void)
 {
     asm(".syntax unified\n\
@@ -2368,10 +2369,6 @@ void sub_80EAECC(void)
     }
 }
 #endif
-
-extern const u8 *const gEasyChatGroupWords[];
-extern const u16 *const gEasyChatGroupOrders[];
-extern const u8 gEasyChatGroupSizes[];
 
 // loads strings of all easy chat words except for the species and move names.
 void LoadEasyChatStrings(void)
@@ -3011,6 +3008,7 @@ static u16 sub_80EB9D8(void)
     u16 *speciesList;
     u16 local1;
     u16 i;
+    u8 topsize;
 
     local1 = sub_80EAE88(0);
 
@@ -3019,7 +3017,7 @@ static u16 sub_80EB9D8(void)
 
     local1 = Random() % local1;
     speciesList = (u16 *)gEasyChatGroupWords[EC_GROUP_POKEMON_1];
-    for (i = 0; i < gEasyChatGroupSizes[EC_GROUP_POKEMON_1]; i++)
+    for (i = 0, topsize = gEasyChatGroupSizes[EC_GROUP_POKEMON_1]; i < topsize; i++)
     {
         const u16 dexNum = SpeciesToNationalPokedexNum(*speciesList);
         const u8 local2 = GetSetPokedexFlag(dexNum, 0);

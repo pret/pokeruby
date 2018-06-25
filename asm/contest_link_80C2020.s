@@ -5,6 +5,305 @@
 
 	.text
 
+	thumb_func_start sub_80C3158
+sub_80C3158: @ 80C3158
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x1C
+	mov r9, r0
+	lsls r1, 24
+	lsrs r1, 24
+	lsls r2, r1, 4
+	adds r2, r1
+	lsls r2, 2
+	ldr r3, _080C32C0 @ =gSprites
+	adds r2, r3
+	mov r1, sp
+	ldrh r0, [r2, 0x4]
+	lsls r0, 22
+	lsrs r0, 22
+	strh r0, [r1]
+	mov r4, sp
+	movs r0, 0x2E
+	ldrsh r1, [r2, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	ldrh r0, [r0, 0x4]
+	lsls r0, 22
+	lsrs r0, 22
+	strh r0, [r4, 0x2]
+	movs r0, 0x30
+	ldrsh r1, [r2, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	ldrh r0, [r0, 0x4]
+	lsls r0, 22
+	lsrs r0, 22
+	strh r0, [r4, 0x4]
+	movs r0, 0x32
+	ldrsh r1, [r2, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r3
+	ldrh r0, [r0, 0x4]
+	lsls r0, 22
+	lsrs r0, 22
+	strh r0, [r4, 0x6]
+	ldr r1, _080C32C4 @ =gWindowTemplate_81E7278
+	mov r8, r1
+	ldr r7, _080C32C8 @ =0x06010000
+	ldr r2, _080C32CC @ =0x040000d4
+	ldr r6, _080C32D0 @ =0x85000100
+	mov r1, sp
+	movs r5, 0
+	add r3, sp, 0x8
+	movs r4, 0x3
+_080C31CE:
+	ldrh r0, [r1]
+	lsls r0, 5
+	adds r0, r7
+	str r5, [sp, 0x8]
+	str r3, [r2]
+	str r0, [r2, 0x4]
+	str r6, [r2, 0x8]
+	ldr r0, [r2, 0x8]
+	adds r1, 0x2
+	subs r4, 0x1
+	cmp r4, 0
+	bge _080C31CE
+	mov r0, r8
+	mov r1, r9
+	bl Text_GetStringWidthFromWindowTemplate
+	lsls r0, 24
+	lsrs r5, r0, 24
+	ldr r2, _080C32D4 @ =gDisplayedStringBattle
+	ldr r1, _080C32D8 @ =gUnknown_083D17E2
+	adds r0, r2, 0
+	bl StringCopy
+	adds r2, r0, 0
+	mvns r0, r5
+	adds r1, r0, 0x1
+	movs r0, 0x7
+	ands r1, r0
+	cmp r1, 0
+	beq _080C3218
+	movs r0, 0xFC
+	strb r0, [r2]
+	movs r0, 0x11
+	strb r0, [r2, 0x1]
+	lsrs r0, r1, 1
+	strb r0, [r2, 0x2]
+	adds r2, 0x3
+_080C3218:
+	adds r6, r5, 0x7
+	movs r1, 0x8
+	negs r1, r1
+	adds r0, r1, 0
+	ands r6, r0
+	lsls r6, 24
+	lsrs r5, r6, 24
+	adds r0, r2, 0
+	mov r1, r9
+	bl StringCopy
+	adds r2, r0, 0
+	movs r0, 0xFC
+	strb r0, [r2]
+	movs r0, 0x13
+	strb r0, [r2, 0x1]
+	strb r5, [r2, 0x2]
+	movs r0, 0xFF
+	strb r0, [r2, 0x3]
+	ldr r0, _080C32DC @ =gSharedMem + 0x18068
+	mov r10, r0
+	ldr r1, _080C32D4 @ =gDisplayedStringBattle
+	bl sub_80034D4
+	mov r0, sp
+	ldrh r4, [r0]
+	lsls r4, 5
+	ldr r1, _080C32C8 @ =0x06010000
+	adds r7, r4, r1
+	ldr r0, _080C32E0 @ =gUnknown_083D1624
+	mov r9, r0
+	ldr r1, _080C32E4 @ =REG_BG0CNT
+	mov r8, r1
+	adds r1, r7, 0
+	mov r2, r8
+	bl CpuSet
+	mov r5, r9
+	adds r5, 0x80
+	ldr r0, _080C32E8 @ =0x06010100
+	adds r1, r4, r0
+	adds r0, r5, 0
+	mov r2, r8
+	bl CpuSet
+	ldr r0, _080C32EC @ =0x06010200
+	adds r1, r4, r0
+	adds r0, r5, 0
+	mov r2, r8
+	bl CpuSet
+	mov r0, r9
+	adds r0, 0x40
+	ldr r1, _080C32F0 @ =0x06010300
+	adds r4, r1
+	adds r1, r4, 0
+	mov r2, r8
+	bl CpuSet
+	lsrs r5, r6, 27
+	movs r4, 0
+	cmp r4, r5
+	bgt _080C3382
+	mov r6, sp
+	mov r0, r10
+	adds r0, 0x20
+	str r0, [sp, 0xC]
+	mov r1, r10
+	str r1, [sp, 0x10]
+	ldr r0, _080C32F4 @ =0x0600fd20
+	str r0, [sp, 0x14]
+	ldr r1, _080C32F8 @ =0x0600fe20
+	str r1, [sp, 0x18]
+	ldr r0, _080C32FC @ =0x0600ff20
+	mov r10, r0
+	ldr r1, _080C3300 @ =0x06010020
+	mov r9, r1
+_080C32B2:
+	cmp r4, 0x6
+	bgt _080C3304
+	ldrh r0, [r6]
+	lsls r0, 5
+	mov r1, r9
+	b _080C3322
+	.align 2, 0
+_080C32C0: .4byte gSprites
+_080C32C4: .4byte gWindowTemplate_81E7278
+_080C32C8: .4byte 0x06010000
+_080C32CC: .4byte 0x040000d4
+_080C32D0: .4byte 0x85000100
+_080C32D4: .4byte gDisplayedStringBattle
+_080C32D8: .4byte gUnknown_083D17E2
+_080C32DC: .4byte gSharedMem + 0x18068
+_080C32E0: .4byte gUnknown_083D1624
+_080C32E4: .4byte REG_BG0CNT
+_080C32E8: .4byte 0x06010100
+_080C32EC: .4byte 0x06010200
+_080C32F0: .4byte 0x06010300
+_080C32F4: .4byte 0x0600fd20
+_080C32F8: .4byte 0x0600fe20
+_080C32FC: .4byte 0x0600ff20
+_080C3300: .4byte 0x06010020
+_080C3304:
+	cmp r4, 0xE
+	bgt _080C3310
+	ldrh r0, [r6, 0x2]
+	lsls r0, 5
+	mov r1, r10
+	b _080C3322
+_080C3310:
+	cmp r4, 0x16
+	bgt _080C331C
+	ldrh r0, [r6, 0x4]
+	lsls r0, 5
+	ldr r1, [sp, 0x18]
+	b _080C3322
+_080C331C:
+	ldrh r0, [r6, 0x6]
+	lsls r0, 5
+	ldr r1, [sp, 0x14]
+_080C3322:
+	adds r7, r0, r1
+	cmp r4, r5
+	beq _080C3382
+	ldr r0, _080C33D0 @ =gUnknown_083D16E4
+	adds r1, r7, 0
+	mov r2, r8
+	bl CpuSet
+	movs r0, 0xC0
+	lsls r0, 2
+	adds r1, r7, r0
+	ldr r0, _080C33D0 @ =gUnknown_083D16E4
+	adds r0, 0x20
+	mov r2, r8
+	bl CpuSet
+	movs r0, 0x80
+	lsls r0, 1
+	adds r1, r7, r0
+	ldr r0, [sp, 0x10]
+	mov r2, r8
+	bl CpuSet
+	movs r0, 0x80
+	lsls r0, 2
+	adds r1, r7, r0
+	ldr r0, [sp, 0xC]
+	mov r2, r8
+	bl CpuSet
+	ldr r1, [sp, 0xC]
+	adds r1, 0x40
+	str r1, [sp, 0xC]
+	ldr r0, [sp, 0x10]
+	adds r0, 0x40
+	str r0, [sp, 0x10]
+	ldr r1, [sp, 0x14]
+	adds r1, 0x20
+	str r1, [sp, 0x14]
+	ldr r0, [sp, 0x18]
+	adds r0, 0x20
+	str r0, [sp, 0x18]
+	movs r1, 0x20
+	add r10, r1
+	add r9, r1
+	adds r4, 0x1
+	cmp r4, r5
+	ble _080C32B2
+_080C3382:
+	ldr r4, _080C33D4 @ =gUnknown_083D1644
+	ldr r5, _080C33D8 @ =REG_BG0CNT
+	adds r0, r4, 0
+	adds r1, r7, 0
+	adds r2, r5, 0
+	bl CpuSet
+	adds r6, r4, 0
+	adds r6, 0x80
+	movs r0, 0x80
+	lsls r0, 1
+	adds r1, r7, r0
+	adds r0, r6, 0
+	adds r2, r5, 0
+	bl CpuSet
+	movs r0, 0x80
+	lsls r0, 2
+	adds r1, r7, r0
+	adds r0, r6, 0
+	adds r2, r5, 0
+	bl CpuSet
+	adds r4, 0x40
+	movs r0, 0xC0
+	lsls r0, 2
+	adds r1, r7, r0
+	adds r0, r4, 0
+	adds r2, r5, 0
+	bl CpuSet
+	add sp, 0x1C
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080C33D0: .4byte gUnknown_083D16E4
+_080C33D4: .4byte gUnknown_083D1644
+_080C33D8: .4byte REG_BG0CNT
+	thumb_func_end sub_80C3158
+
 	thumb_func_start sub_80C33DC
 sub_80C33DC: @ 80C33DC
 	push {r4-r6,lr}

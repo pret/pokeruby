@@ -1,9 +1,9 @@
 PetalburgCity_House2:: @ 8305F70
-	.4byte PetalburgCity_House2_MapAttributes
+	.4byte HouseWithBed_Layout
 	.4byte PetalburgCity_House2_MapEvents
 	.4byte PetalburgCity_House2_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S2
+	.2byte MUS_MACHI_S2
 	.2byte 80
 	.byte 7
 	.byte 0

@@ -42,29 +42,29 @@ Route111_EventScript_1A38D9:: @ 81A38D9
 	end
 
 Route111_Movement_1A38E3:: @ 81A38E3
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	end_movement
 
 Route111_Movement_1A38EF:: @ 81A38EF
-	step_left
-	step_down
-	step_down
-	step_down
-	step_down
-	step_down
-	step_left
-	step_left
-	step_left
-	step_down
-	step_down
-	step_end
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	walk_down
+	end_movement

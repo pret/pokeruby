@@ -11,10 +11,57 @@ extern u8 gAnimBankTarget;
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_0202F7D2;
 
+void sub_80D5B0C(struct Sprite *sprite);
 static void sub_80D5C5C(struct Sprite *);
 
 // wisp_orb (animates the wisp orbs)
 // Used in Will-O-Wisp
+
+const union AnimCmd gSpriteAnim_83D9710[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd gSpriteAnim_83D9724[] =
+{
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D972C[] =
+{
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D9734[] =
+{
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D973C[] =
+{
+    gSpriteAnim_83D9710,
+    gSpriteAnim_83D9724,
+    gSpriteAnim_83D972C,
+    gSpriteAnim_83D9734,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D974C =
+{
+    .tileTag = 10231,
+    .paletteTag = 10231,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83D973C,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5B0C,
+};
 
 void sub_80D5B0C(struct Sprite *sprite)
 {
@@ -25,7 +72,7 @@ void sub_80D5B0C(struct Sprite *sprite)
         StartSpriteAnim(sprite, gBattleAnimArgs[2]);
         sprite->data[7] = gBattleAnimArgs[2];
 
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
         {
             sprite->data[4] = 4;
         }
@@ -39,7 +86,7 @@ void sub_80D5B0C(struct Sprite *sprite)
         break;
     case 1:
         sprite->data[1] += 192;
-        if (GetBankSide(gAnimBankAttacker) != 0)
+        if (GetBattlerSide(gAnimBankAttacker) != 0)
         {
             sprite->pos2.y = -(sprite->data[1] >> 8);
         }
@@ -70,9 +117,9 @@ void sub_80D5B0C(struct Sprite *sprite)
 
             sprite->data[0] = 256;
             sprite->data[1] = sprite->pos1.x;
-            sprite->data[2] = GetBankPosition(gAnimBankTarget, 2);
+            sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
             sprite->data[3] = sprite->pos1.y;
-            sprite->data[4] = GetBankPosition(gAnimBankTarget, 3);
+            sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
             sub_8078BD4(sprite);
             sprite->callback = sub_80D5C5C;

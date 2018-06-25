@@ -236,7 +236,7 @@ void sub_814A958(u8 a)
         SetSubspriteTables(&gSprites[gUnknown_0203A3D1], gSubspriteTables_842F5C0 + r7);
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_814A958(u8 a1)
 {
     asm(".syntax unified\n\
@@ -419,7 +419,7 @@ _0814AAB8: .4byte gUnknown_0203A3D1\n\
 }
 #endif
 #elif GERMAN
-__attribute__((naked))
+NAKED
 void sub_814A958(u8 a1)
 {
     asm(".syntax unified\n\

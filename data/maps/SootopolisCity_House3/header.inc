@@ -1,9 +1,9 @@
 SootopolisCity_House3:: @ 83069F0
-	.4byte SootopolisCity_House3_MapAttributes
+	.4byte SootopolisCity_House3_Layout
 	.4byte SootopolisCity_House3_MapEvents
 	.4byte SootopolisCity_House3_MapScripts
 	.4byte 0x0
-	.2byte BGM_RUNECITY
+	.2byte MUS_RUNECITY
 	.2byte 310
 	.byte 14
 	.byte 0

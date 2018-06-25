@@ -12,11 +12,23 @@ extern u8 gAnimBankTarget;
 extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG1_X;
 
+void sub_80D0E30(struct Sprite* sprite);
 static void sub_80D0D68(u8 taskId);
 static void sub_80D0E8C(struct Sprite* sprite);
 
 // draw (draws the Pokemon into the world using a pencil.)
 // Used in Sketch.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D77E0 =
+{
+    .tileTag = 10002,
+    .paletteTag = 10002,
+    .oam = &gOamData_837DF34,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D0E30,
+};
 
 void sub_80D0C88(u8 taskId)
 {
@@ -32,7 +44,7 @@ void sub_80D0C88(u8 taskId)
     task->data[5] = 0;
     task->data[15] = sub_807A100(gAnimBankTarget, 0);
 
-    if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
     {
         task->data[6] = gBattle_BG1_X;
         params.dmaDest = (u16 *)REG_ADDR_BG1HOFS;
@@ -59,7 +71,7 @@ void sub_80D0C88(u8 taskId)
     task->func = sub_80D0D68;
 }
 
-void sub_80D0D68(u8 taskId)
+static void sub_80D0D68(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
 
@@ -108,7 +120,7 @@ void sub_80D0D68(u8 taskId)
 
 void sub_80D0E30(struct Sprite* sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 0) - 16;
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0) - 16;
     sprite->pos1.y = sub_8077FC0(gAnimBankTarget) + 16;
     sprite->data[0] = 0;
     sprite->data[1] = 0;
@@ -120,7 +132,7 @@ void sub_80D0E30(struct Sprite* sprite)
     sprite->callback = sub_80D0E8C;
 }
 
-void sub_80D0E8C(struct Sprite* sprite)
+static void sub_80D0E8C(struct Sprite* sprite)
 {
     switch (sprite->data[0])
     {

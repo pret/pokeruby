@@ -7,8 +7,39 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void AnimLeechSeed(struct Sprite* sprite);
 static void AnimLeechSeedStep(struct Sprite* sprite);
 static void AnimLeechSeedSprouts(struct Sprite* sprite);
+
+const union AnimCmd gSpriteAnim_83D63AC[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D63B4[] =
+{
+    ANIMCMD_FRAME(4, 7),
+    ANIMCMD_FRAME(8, 7),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D63C0[] =
+{
+    gSpriteAnim_83D63AC,
+    gSpriteAnim_83D63B4,
+};
+
+const struct SpriteTemplate gLeechSeedSpriteTemplate =
+{
+    .tileTag = 10006,
+    .paletteTag = 10006,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83D63C0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimLeechSeed,
+};
 
 // seed (sprouts a sapling from a seed.)
 // Used by Leech Seed.
@@ -21,14 +52,14 @@ static void AnimLeechSeedSprouts(struct Sprite* sprite);
 void AnimLeechSeed(struct Sprite* sprite)
 {
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker))
+    if (GetBattlerSide(gAnimBankAttacker))
     {
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
 
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 0) + gBattleAnimArgs[2];
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 1) + gBattleAnimArgs[3];
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimSpriteTranslationOverDuration(sprite);
     sprite->callback = AnimLeechSeedStep;

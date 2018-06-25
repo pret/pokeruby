@@ -1,6 +1,6 @@
 #include "global.h"
 #include "contest_painting.h"
-#include "cute_sketch.h"
+#include "contest_painting_effects.h"
 #include "data2.h"
 #include "decompress.h"
 #include "main.h"
@@ -104,7 +104,7 @@ static void VBlankCB_ContestPainting(void);
 void sub_8106B90();  //should be static
 static void sub_8107090(u8 arg0, u8 arg1);
 
-__attribute__((naked))
+NAKED
 void sub_8106630(u32 arg0)
 {
     asm(".syntax unified\n\
@@ -212,7 +212,7 @@ static void HoldContestPainting(void)
             u8 two = 2;  //needed to make the asm match
 
             gUnknown_03000750 = two;
-            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         if (gUnknown_03000756 != 0)
             gUnknown_03000754 = 0;
@@ -333,8 +333,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
 {
     void *pal;
 
-    // Unsure what gUnknown_03005E8C->var0 is supposed to be.
-    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->var4, gUnknown_03005E8C->var0);
+    pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->otId, gUnknown_03005E8C->personality);
     LZDecompressVram(pal, gUnknown_03005E90);
 
     if (arg1 == 1)
@@ -346,7 +345,7 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[1],
             species,
-            (u32)gUnknown_03005E8C->var0
+            (u32)gUnknown_03005E8C->personality
         );
         sub_8106B90(gUnknown_081FAF4C[1], gUnknown_03005E90, gUnknown_03005E10);
     }
@@ -359,13 +358,13 @@ static void sub_8106AC4(u16 species, u8 arg1)
             0x2000000,
             gUnknown_081FAF4C[0],
             species,
-            (u32)gUnknown_03005E8C->var0
+            (u32)gUnknown_03005E8C->personality
         );
         sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8106AC4(u16 arg0, u8 arg2)
 {
     asm(".syntax unified\n\
@@ -498,7 +497,7 @@ void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8106B90()
 {
     asm(".syntax unified\n\
@@ -743,7 +742,7 @@ static void sub_8106F6C(u8 arg0)
     gUnknown_03005E20.var_4 = gUnknown_03005E10;
     gUnknown_03005E20.var_8 = gUnknown_03005E90;
     gUnknown_03005E20.var_18 = 0;
-    gUnknown_03005E20.var_1F = gUnknown_03005E8C->var0;
+    gUnknown_03005E20.var_1F = gUnknown_03005E8C->personality % 256;
     gUnknown_03005E20.var_19 = 0;
     gUnknown_03005E20.var_1A = 0;
     gUnknown_03005E20.var_1B = 64;
@@ -779,7 +778,7 @@ static void sub_8106F6C(u8 arg0)
 static void sub_8107090(u8 arg0, u8 arg1)
 {
     sub_8106F4C();
-    sub_8106AC4(gUnknown_03005E8C->var8, 0);
+    sub_8106AC4(gUnknown_03005E8C->species, 0);
     sub_8106F6C(sub_8106EE0(arg0));
     sub_8106E98(arg0);
     sub_8106C40(arg0, arg1);

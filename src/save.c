@@ -927,3 +927,6 @@ u8 unref_sub_8126080(u8 sector, u8 *data)
     ReadFlash(sector, 0, data, sizeof(struct SaveSector));
     return 1;
 }
+
+asm(".section .rodata\n"
+    "\t.align 2");

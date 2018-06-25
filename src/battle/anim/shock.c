@@ -8,17 +8,68 @@ extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern struct OamMatrix gOamMatrices[];
 
+void sub_80D6294(struct Sprite *sprite);
+void sub_80D6328(struct Sprite *sprite);
 extern void sub_80DA48C(struct Sprite *);
 
 // shock (moves the little electricity lines)
 // Used in Shock.
 
+const union AnimCmd gSpriteAnim_83D9824[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_FRAME(48, 5),
+    ANIMCMD_FRAME(64, 5),
+    ANIMCMD_FRAME(80, 5),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D9840[] =
+{
+    gSpriteAnim_83D9824,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83D9844 =
+{
+    .tileTag = 10079,
+    .paletteTag = 10079,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D9840,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D6294,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D985C =
+{
+    .tileTag = 10011,
+    .paletteTag = 10011,
+    .oam = &gOamData_837DF8C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D6328,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9874 =
+{
+    .tileTag = 10171,
+    .paletteTag = 10171,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = TranslateAnimSpriteToTargetMonLocation,
+};
+
 void sub_80D6294(struct Sprite *sprite)
 {
-    sprite->pos1.x = GetBankPosition(gAnimBankTarget, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankTarget, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
         sprite->pos1.y -= gBattleAnimArgs[1];
@@ -77,13 +128,13 @@ void sub_80D6328(struct Sprite *sprite)
 
     if (gBattleAnimArgs[5] == 0)
     {
-        sprite->pos1.x = GetBankPosition(slot, 0);
-        sprite->pos1.y = GetBankPosition(slot, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(slot, 0);
+        sprite->pos1.y = GetBattlerSpriteCoord(slot, 1);
     }
     else
     {
-        sprite->pos1.x = GetBankPosition(slot, 2);
-        sprite->pos1.y = GetBankPosition(slot, 3);
+        sprite->pos1.x = GetBattlerSpriteCoord(slot, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(slot, 3);
     }
 
     sprite->pos2.x = (gSineTable[gBattleAnimArgs[0]] * gBattleAnimArgs[1]) >> 8;

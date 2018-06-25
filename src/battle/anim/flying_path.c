@@ -8,8 +8,6 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern struct SpriteTemplate gSpriteTemplate_83D6884;
-
 static void sub_80CBF5C(u8 taskId);
 static s16 sub_80CC338(struct Sprite* sprite);
 static void sub_80CC358(struct Task* task, u8 taskId);
@@ -18,16 +16,80 @@ static void sub_80CC408(struct Sprite* sprite);
 // flying_path (guides a sprite along a specific path.)
 // Used by Leaf Blade.
 
+const union AnimCmd gSpriteAnim_83D6830[] =
+{
+    ANIMCMD_FRAME(28, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6838[] =
+{
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6840[] =
+{
+    ANIMCMD_FRAME(20, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6848[] =
+{
+    ANIMCMD_FRAME(28, 1, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6850[] =
+{
+    ANIMCMD_FRAME(16, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6858[] =
+{
+    ANIMCMD_FRAME(16, 1, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6860[] =
+{
+    ANIMCMD_FRAME(28, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6868[] =
+{
+    gSpriteAnim_83D6830,
+    gSpriteAnim_83D6838,
+    gSpriteAnim_83D6840,
+    gSpriteAnim_83D6848,
+    gSpriteAnim_83D6850,
+    gSpriteAnim_83D6858,
+    gSpriteAnim_83D6860,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83D6884 =
+{
+    .tileTag = 10063,
+    .paletteTag = 10063,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83D6868,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 void sub_80CBDF4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
     task->data[4] = sub_8079E90(gAnimBankTarget) - 1;
-    task->data[6] = GetBankPosition(gAnimBankTarget, 2);
-    task->data[7] = GetBankPosition(gAnimBankTarget, 3);
+    task->data[6] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    task->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     task->data[10] = sub_807A100(gAnimBankTarget, 1);
     task->data[11] = sub_807A100(gAnimBankTarget, 0);
-    task->data[5] = (GetBankSide(gAnimBankTarget) == 1) ? 1 : -1;
+    task->data[5] = (GetBattlerSide(gAnimBankTarget) == 1) ? 1 : -1;
     task->data[9] = 0x38 - (task->data[5] * 64);
     task->data[8] = task->data[7] - task->data[9] + task->data[6];
     task->data[2] = CreateSprite(&gSpriteTemplate_83D6884, task->data[8], task->data[9], task->data[4]);
@@ -44,7 +106,7 @@ void sub_80CBDF4(u8 taskId)
     task->func = sub_80CBF5C;
 }
 
-void sub_80CBF5C(u8 taskId)
+static void sub_80CBF5C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     struct Sprite* sprite = &gSprites[task->data[2]];
@@ -244,7 +306,7 @@ void sub_80CBF5C(u8 taskId)
     }
 }
 
-s16 sub_80CC338(struct Sprite* sprite)
+static s16 sub_80CC338(struct Sprite* sprite)
 {
     s16 var = 8;
     if (sprite->data[4] < sprite->pos1.y)
@@ -253,7 +315,7 @@ s16 sub_80CC338(struct Sprite* sprite)
     return var;
 }
 
-void sub_80CC358(struct Task* task, u8 taskId)
+static void sub_80CC358(struct Task* task, u8 taskId)
 {
     task->data[14]++;
     if (task->data[14] > 0)
@@ -279,7 +341,7 @@ void sub_80CC358(struct Task* task, u8 taskId)
     }
 }
 
-void sub_80CC408(struct Sprite* sprite)
+static void sub_80CC408(struct Sprite* sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] > 1)

@@ -8,26 +8,34 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern struct AffineAnimFrameCmd gUnknown_083D77B0;
-
 static void sub_80D0A8C(u8 taskId);
 static void sub_80D0B3C(u8 taskId);
 
 // thrashing (the movement of the Pokemon left/right repeatedly, with up/down movements below.)
 // Used by Thrash.
 
+const union AffineAnimCmd gSpriteAffineAnim_83D77B0[] =
+{
+    AFFINEANIMCMD_FRAME(-10, 9, 0, 7),
+    AFFINEANIMCMD_FRAME(20, -20, 0, 7),
+    AFFINEANIMCMD_FRAME(-20, 20, 0, 7),
+    AFFINEANIMCMD_FRAME(10, -9, 0, 7),
+    AFFINEANIMCMD_LOOP(2),
+    AFFINEANIMCMD_END,
+};
+
 // left/right movements
 void sub_80D0A4C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    u8 spriteId = GetAnimBankSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
     task->data[1] = 0;
-    sub_80798F4(task, spriteId, &gUnknown_083D77B0);
+    sub_80798F4(task, spriteId, &gSpriteAffineAnim_83D77B0);
     task->func = sub_80D0A8C;
 }
 
-void sub_80D0A8C(u8 taskId)
+static void sub_80D0A8C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     if (!sub_807992C(task))
@@ -38,7 +46,7 @@ void sub_80D0A8C(u8 taskId)
 void sub_80D0AB8(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    task->data[0] = GetAnimBankSpriteId(0);
+    task->data[0] = GetAnimBattlerSpriteId(0);
     task->data[1] = 0;
     task->data[2] = 4;
     task->data[3] = 7;
@@ -48,13 +56,13 @@ void sub_80D0AB8(u8 taskId)
     task->data[7] = 0;
     task->data[8] = 0;
     task->data[9] = 2;
-    if (GetBankSide(gAnimBankAttacker) == 1)
+    if (GetBattlerSide(gAnimBankAttacker) == 1)
         task->data[2] *= -1;
 
     task->func = sub_80D0B3C;
 }
 
-void sub_80D0B3C(u8 taskId)
+static void sub_80D0B3C(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     if (++task->data[7] > 2)

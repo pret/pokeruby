@@ -524,7 +524,7 @@ void sub_80EBDD8()
         ewram0_10.var304++;
         break;
     case 11:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 12:
@@ -597,7 +597,7 @@ void sub_80EC00C()
 			ewram0_10.var304++;
         break;
     case 6:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -784,7 +784,7 @@ void sub_80EC4A0()
     case 2:
         if (!sub_80EEF34())
         {
-            BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 0x10, 0);
+            BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
             ewram0_10.var304++;
         }
         break;
@@ -830,7 +830,7 @@ void sub_80EC4A0()
 			ewram0_10.var304++;
         break;
     case 0xC:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 0xD:
@@ -905,7 +905,7 @@ void sub_80EC67C()
 		}
         break;
     case 4:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 5:
@@ -1051,7 +1051,7 @@ void sub_80ECA10()
         ewram0_10.var304++;
         break;
     case 6:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -1152,7 +1152,7 @@ void sub_80ECD80()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -1206,7 +1206,7 @@ void sub_80ECD80()
 			ewram0_10.var304++;
         break;
     case 12:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -1278,7 +1278,7 @@ void sub_80ED01C()
     case 2:
         if (!sub_80EEF34())
         {
-			BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 0x10, 0);
+			BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
 			ewram0_10.var304++;
 		}
         break;
@@ -1330,7 +1330,7 @@ void sub_80ED01C()
 			ewram0_10.var304++;
         break;
     case 13:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -1454,7 +1454,7 @@ void sub_80ED3D0()
         break;
     case 6:
         sub_80F3008(0);
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -1478,7 +1478,7 @@ void sub_80ED4D8()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -1509,7 +1509,7 @@ void sub_80ED4D8()
     case 6:
         sub_80F35B4();
         sub_80EEFBC(0x2);
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(sub_80EBD4C);
         ewram0_10.var304++;
         break;
@@ -1547,7 +1547,7 @@ void sub_80ED620()
     case 2:
         if (!sub_80EEF34())
         {
-            BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 0x10, 0);
+            BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 16, RGB(0, 0, 0));
             ewram0_10.var304++;
         }
         break;
@@ -1588,7 +1588,7 @@ void sub_80ED620()
         break;
     case 10:
         sub_80F33A8();
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD4C);
         ewram0_10.var304++;
         break;
@@ -1793,7 +1793,7 @@ label2:
 }
 #else
 #if DEBUG
-__attribute__((naked))
+NAKED
 void sub_80ED858()
 {
     asm("\
@@ -2216,7 +2216,7 @@ void sub_80ED858()
 	.word	0xfbd");
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80ED858()
 {
     asm_unified("push {r4,r5,lr}\n\
@@ -2610,7 +2610,7 @@ void sub_80EDB88()
     case 2:
         if (!sub_80EEF34())
         {
-            BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 0x10, 0);
+            BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
             ewram0_10.var304++;
         }
         break;
@@ -2667,7 +2667,7 @@ void sub_80EDB88()
 			ewram0_10.var304++;
         break;
     case 15:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -2741,7 +2741,7 @@ void sub_80EDE70()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -2764,7 +2764,7 @@ void sub_80EDEE4()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -2798,7 +2798,7 @@ void sub_80EDEE4()
 			ewram0_10.var304++;
         break;
     case 7:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD18);
         ewram0_10.var304++;
         break;
@@ -2916,7 +2916,7 @@ void sub_80EE294()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -2948,7 +2948,7 @@ void sub_80EE294()
 			ewram0_10.var304++;
         break;
     case 6:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 7:
@@ -2985,7 +2985,7 @@ void sub_80EE3D8()
     case 2:
         if (!sub_80EEF34())
         {
-            BeginNormalPaletteFade(ewram0_10.var308, -1, 0x0, 0x10, 0);
+            BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
             ewram0_10.var304++;
         }
         break;
@@ -3027,7 +3027,7 @@ void sub_80EE3D8()
         break;
     case 11:
         sub_80F6F10();
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0x10, 0, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(&sub_80EBD68);
         ewram0_10.var304++;
         break;
@@ -3208,7 +3208,7 @@ void sub_80EE8F4()
     switch (ewram0_10.var304)
     {
     case 0:
-        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 0x10, 0);
+        BeginNormalPaletteFade(ewram0_10.var308, -1, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
         break;
     case 1:
@@ -3231,7 +3231,7 @@ void sub_80EE96C()
     if (!ewram0_10.var304)
     {
         PlaySE(0x6F);
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         ewram0_10.var304++;
     }
     else
@@ -3239,7 +3239,7 @@ void sub_80EE96C()
         if (!gPaletteFade.active)
         {
 			sub_80F5BDC();
-			sub_805469C();
+			c2_exit_to_overworld_1_sub_8080DEC();
 		}
     }
 }
@@ -3277,7 +3277,7 @@ bool8 sub_80EEA0C() {
     }
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80EEA0C() {
     asm_unified(
     "push {r4,lr}\n\
@@ -3851,7 +3851,7 @@ void sub_80EF428(u8 a, u8 b)
     }
 
     tileBuffer = gUnknown_083DFEC8;
-    sub_8072C74(&tileBuffer[0x800], pcText, 0xC0, 2);
+    AlignStringInMenuWindow(&tileBuffer[0x800], pcText, 0xC0, 2);
     Menu_PrintText(&tileBuffer[0x800], 3, 17);
 }
 
@@ -3969,7 +3969,7 @@ void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80EF624(const u16 *a, const u16 *b, u8 c, u8 d, u16 *palettes)
 {
     asm(".syntax unified\n\
@@ -4713,7 +4713,7 @@ bool8 sub_80F02A0(void)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80F02A0(void)
 {
     asm(".syntax unified\n\

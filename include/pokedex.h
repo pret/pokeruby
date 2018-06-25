@@ -25,4 +25,27 @@ u16 GetHoennPokedexCount(u8);
 bool8 CompletedHoennPokedex(void);
 bool16 CompletedNationalPokedex(void);
 
+extern bool8 gUnknown_03005CE8;
+
+struct PokedexEntry
+{
+    /*0x00*/ u8 categoryName[12];
+    /*0x0C*/ u16 height; //in decimeters
+    /*0x0E*/ u16 weight; //in hectograms
+    /*0x10*/ const u8 *descriptionPage1;
+    /*0x14*/ const u8 *descriptionPage2;
+    /*0x18*/ u16 unused;
+    /*0x1A*/ u16 pokemonScale;
+    /*0x1C*/ u16 pokemonOffset;
+    /*0x1E*/ u16 trainerScale;
+    /*0x20*/ u16 trainerOffset;
+};  /*size = 0x24*/
+
+extern const struct PokedexEntry gPokedexEntries[];
+
+u16 sub_8091A4C(u16 gender, s16 x, s16 y, u16 paletteNum);
+u16 sub_80918EC(u16 num, s16 x, s16 y, u16 paletteNum);
+
+void sub_8091738(u16, u16, u16);
+
 #endif // GUARD_POKEDEX_H

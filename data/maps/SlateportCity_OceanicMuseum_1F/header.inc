@@ -1,9 +1,9 @@
 SlateportCity_OceanicMuseum_1F:: @ 8306088
-	.4byte SlateportCity_OceanicMuseum_1F_MapAttributes
+	.4byte SlateportCity_OceanicMuseum_1F_Layout
 	.4byte SlateportCity_OceanicMuseum_1F_MapEvents
 	.4byte SlateportCity_OceanicMuseum_1F_MapScripts
 	.4byte 0x0
-	.2byte BGM_FUNE_KAN
+	.2byte MUS_FUNE_KAN
 	.2byte 86
 	.byte 8
 	.byte 0

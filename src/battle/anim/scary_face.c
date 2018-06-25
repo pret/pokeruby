@@ -10,11 +10,11 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern struct INCBIN_U8 gBattleAnimBackgroundTilemap_ScaryFaceContest;
-extern struct INCBIN_U8 gBattleAnimBackgroundTilemap_ScaryFacePlayer;
-extern struct INCBIN_U8 gBattleAnimBackgroundTilemap_ScaryFaceOpponent;
-extern struct INCBIN_U8 gBattleAnimBackgroundImage_ScaryFace;
-extern struct INCBIN_U8 gBattleAnimBackgroundPalette_ScaryFace;
+extern const u8 gBattleAnimBackgroundTilemap_ScaryFaceContest[];
+extern const u8 gBattleAnimBackgroundTilemap_ScaryFacePlayer[];
+extern const u8 gBattleAnimBackgroundTilemap_ScaryFaceOpponent[];
+extern const u8 gBattleAnimBackgroundImage_ScaryFace[];
+extern const u8 gBattleAnimBackgroundPalette_ScaryFace[];
 
 extern u16 gBattle_BG1_Y;
 extern u16 gBattle_BG1_X;
@@ -43,7 +43,7 @@ void sub_80D23B4(u8 taskId)
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     if (IsContest())
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceContest, subStruct.field_4);
-    else if (GetBankSide(gAnimBankTarget) == 1)
+    else if (GetBattlerSide(gAnimBankTarget) == 1)
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFacePlayer, subStruct.field_4);
     else
         LZDecompressVram(&gBattleAnimBackgroundTilemap_ScaryFaceOpponent, subStruct.field_4);

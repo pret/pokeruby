@@ -49,7 +49,7 @@ struct Struct2000000
     /*0x9C*/ u8 language; // 0x9C
 };
 
-extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
+extern struct LinkPlayerEventObject gLinkPlayerEventObjects[];
 
 EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
 
@@ -225,7 +225,7 @@ void TrainerCard_ShowLinkCard(u8 playerIndex, Callback arg2)
 #endif
     TrainerCard_InitScreenForLinkPlayer(playerIndex, arg2);
     SetMainCallback2(sub_8093174);
-    ewram0_2.language = gLinkPlayers[gLinkPlayerMapObjects[playerIndex].linkPlayerId].language;
+    ewram0_2.language = gLinkPlayers[gLinkPlayerEventObjects[playerIndex].linkPlayerId].language;
 }
 
 #if DEBUG
@@ -673,7 +673,7 @@ bool8 TrainerCard_Init(struct Task *task)
     ewram0_2.showColon = gSaveBlock2.playTimeSeconds & 1;
     ewram0_2.frameCounter = gSaveBlock2.playTimeVBlanks;
     TrainerCard_CreatePrintPlayTimeTask();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     ewram0_2.current_state++; /* Advance state machine */
     return FALSE;
 }
@@ -740,7 +740,7 @@ bool8 TrainerCard_WaitForFlipToFinish(struct Task *task)
 bool8 TrainerCard_FadeOut(struct Task *task)
 {
     TrainerCard_DestoryPlayTimeTask();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     ewram0_2.current_state++; /* Advance state machine */
     return FALSE;
 }
@@ -864,7 +864,7 @@ bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
 }
 */
 
-__attribute__((naked))
+NAKED
 bool8 TrainerCard_ScaleDownFlipAnimation(struct Task *task)
 {
     asm(".syntax unified\n\
@@ -1028,7 +1028,7 @@ bool8 TrainerCard_SwitchToNewSide(struct Task *task)
     return TRUE;
 }
 
-__attribute__((naked))
+NAKED
 bool8 TrainerCard_ScaleUpFlipAnimation(struct Task *task)
 {
     asm(".syntax unified\n\
@@ -1452,7 +1452,7 @@ static void TrainerCard_Front_GetPlayTimeString(u8 *arg1, s16 colon)
         playTimeMinutes = ewram0_2.displayedCard.playTimeMinutes;
     }
     FormatPlayTime(buffer, playTimeHours, playTimeMinutes, colon);
-    sub_8072C74(arg1, buffer, 48, 1);
+    AlignStringInMenuWindow(arg1, buffer, 48, 1);
 }
 
 static void TrainerCard_PrintEasyChatPhrase(void)
@@ -1548,10 +1548,10 @@ static void TrainerCard_Back_PrintBattleTower(void)
 
     if (ewram0_2.showBattleTowerStatus != 0)
     {
-        sub_8072C44(buffer, ewram0_2.displayedCard.battleTowerWins, 24, 1);
+        AlignInt2InMenuWindow(buffer, ewram0_2.displayedCard.battleTowerWins, 24, 1);
         Menu_PrintTextPixelCoords(buffer, 112, 120, 0);
 
-        sub_8072C44(buffer, ewram0_2.displayedCard.battleTowerLosses, 24, 1);
+        AlignInt2InMenuWindow(buffer, ewram0_2.displayedCard.battleTowerLosses, 24, 1);
         Menu_PrintTextPixelCoords(buffer, 149, 120, 0);
     }
 }

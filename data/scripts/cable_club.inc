@@ -566,31 +566,31 @@ OldaleTown_PokemonCenter_2F_EventScript_1A434B:: @ 81A434B
 	end
 
 OldaleTown_PokemonCenter_2F_Movement_1A4354:: @ 81A4354
-	step_00
-	step_end
+	face_down
+	end_movement
 
 OldaleTown_PokemonCenter_2F_Movement_1A4356:: @ 81A4356
-	step_03
-	step_end
+	face_right
+	end_movement
 
 OldaleTown_PokemonCenter_2F_Movement_1A4358:: @ 81A4358
-	step_down
-	step_down
-	step_end
+	walk_down
+	walk_down
+	end_movement
 
 OldaleTown_PokemonCenter_2F_Movement_1A435B:: @ 81A435B
-	step_right
-	step_up
-	step_up
-	step_end
+	walk_right
+	walk_up
+	walk_up
+	end_movement
 
 OldaleTown_PokemonCenter_2F_Movement_1A435F:: @ 81A435F
-	step_up
-	step_end
+	walk_up
+	end_movement
 
 OldaleTown_PokemonCenter_2F_Movement_1A4361:: @ 81A4361
-	step_02
-	step_end
+	face_left
+	end_movement
 
 gUnknown_081A4363:: @ 81A4363
 	lockall

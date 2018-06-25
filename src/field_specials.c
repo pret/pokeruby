@@ -21,6 +21,7 @@
 #include "constants/species.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
+#include "constants/weather.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
@@ -42,7 +43,7 @@
 #define CHAR_DECIMAL_SEPARATOR CHAR_COMMA
 #endif
 
-extern struct WarpData gUnknown_020297F0;
+extern struct WarpData gLastUsedWarp;
 extern u8 gBattleOutcome;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
@@ -54,7 +55,7 @@ EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
 EWRAM_DATA u32 gBikeCyclingTimer = 0;
 EWRAM_DATA u8 gUnknown_02039258 = 0;
-EWRAM_DATA u8 gUnknown_02039259 = 0;
+EWRAM_DATA u8 gPetalburgGymSlidingDoorIndex = 0;
 EWRAM_DATA u8 gUnknown_0203925A = 0;
 EWRAM_DATA u8 gUnknown_0203925B = 0;
 EWRAM_DATA u8 gUnknown_0203925C = 0;
@@ -207,7 +208,7 @@ u16 GetRecordedCyclingRoadResults(void) {
 }
 
 void UpdateCyclingRoadState(void) {
-    if (gUnknown_020297F0.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gUnknown_020297F0.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
+    if (gLastUsedWarp.mapNum == MAP_NUM(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE) && gLastUsedWarp.mapGroup == MAP_GROUP(ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE))
     {
         return;
     }
@@ -317,7 +318,12 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 j = 0;
     s16 x = 0;
     s16 y = 0;
-    u8 unknown_083F8358[] = {7, 9, 8, 10};
+    u8 facingDirectionMovementTypes[] = {
+        MOVEMENT_TYPE_FACE_UP,
+        MOVEMENT_TYPE_FACE_LEFT,
+        MOVEMENT_TYPE_FACE_DOWN,
+        MOVEMENT_TYPE_FACE_RIGHT,
+    };
     s8 unknown_083F835C[][2] = {
         { 0,  1},
         { 1,  0},
@@ -330,7 +336,7 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     u8 i;
 
     myLinkPlayerNumber = sub_8008218();
-    playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_WEST:
@@ -356,8 +362,8 @@ void SpawnBerryBlenderLinkPlayerSprites(void)
     {
         if (myLinkPlayerNumber != i)
         {
-            rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(0, gLinkPlayers[i].gender);
-            SpawnSpecialFieldObjectParametrized(rivalAvatarGraphicsId, unknown_083F8358[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
+            rivalAvatarGraphicsId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gLinkPlayers[i].gender);
+            SpawnSpecialEventObjectParametrized(rivalAvatarGraphicsId, facingDirectionMovementTypes[j], 0xf0 - i, unknown_083F835C[j][0] + x + 7, unknown_083F835C[j][1] + y + 7, 0);
             j++;
             if (j == 4)
             {
@@ -547,26 +553,26 @@ void MauvilleGymSpecial3(void)
     }
 }
 
-static void Task_PetalburgGym(u8);
-static void PetalburgGymFunc(u8, u16);
+static void Task_SlideOpenPetalburgGymDoors(u8);
+static void SetPetalburgGymDoorTiles(u8, u16);
 const u8 gUnknown_083F8370[] = {0, 1, 1, 1, 1};
-const u16 gUnknown_083F8376[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
+const u16 gPetalburgGymSlidingDoorMetatiles[] = {0x218, 0x219, 0x21a, 0x21b, 0x21c};
 
-void PetalburgGymSpecial1(void)
+void PetalburgGymSlideOpenDoors(void)
 {
     gUnknown_02039258 = 0;
-    gUnknown_02039259 = 0;
+    gPetalburgGymSlidingDoorIndex = 0;
     PlaySE(SE_KI_GASYAN);
-    CreateTask(Task_PetalburgGym, 8);
+    CreateTask(Task_SlideOpenPetalburgGymDoors, 8);
 }
 
-static void Task_PetalburgGym(u8 taskId)
+static void Task_SlideOpenPetalburgGymDoors(u8 taskId)
 {
-    if (gUnknown_083F8370[gUnknown_02039259] == gUnknown_02039258)
+    if (gUnknown_083F8370[gPetalburgGymSlidingDoorIndex] == gUnknown_02039258)
     {
-        PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_083F8376[gUnknown_02039259]);
+        SetPetalburgGymDoorTiles(gSpecialVar_0x8004, gPetalburgGymSlidingDoorMetatiles[gPetalburgGymSlidingDoorIndex]);
         gUnknown_02039258 = 0;
-        if ((++gUnknown_02039259) == 5)
+        if ((++gPetalburgGymSlidingDoorIndex) == 5)
         {
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -578,74 +584,76 @@ static void Task_PetalburgGym(u8 taskId)
     }
 }
 
-static void PetalburgGymFunc(u8 a0, u16 a1)
+static void SetPetalburgGymDoorTiles(u8 roomIndex, u16 metatile)
 {
     u16 x[4];
     u16 y[4];
     u8 i;
-    u8 nDoors = 0;
-    switch (a0)
+    u8 numDoors = 0;
+    switch (roomIndex)
     {
         case 1:
-            nDoors = 2;
+            numDoors = 2;
             x[0] = 1;
             x[1] = 7;
             y[0] = 0x68;
             y[1] = 0x68;
             break;
         case 2:
-            nDoors = 2;
+            numDoors = 2;
             x[0] = 1;
             x[1] = 7;
             y[0] = 0x4e;
             y[1] = 0x4e;
             break;
         case 3:
-            nDoors = 2;
+            numDoors = 2;
             x[0] = 1;
             x[1] = 7;
             y[0] = 0x5b;
             y[1] = 0x5b;
             break;
         case 4:
-            nDoors = 1;
+            numDoors = 1;
             x[0] = 7;
             y[0] = 0x27;
             break;
         case 5:
-            nDoors = 2;
+            numDoors = 2;
             x[0] = 1;
             x[1] = 7;
             y[0] = 0x34;
             y[1] = 0x34;
             break;
         case 6:
-            nDoors = 1;
+            numDoors = 1;
             x[0] = 1;
             y[0] = 0x41;
             break;
         case 7:
-            nDoors = 1;
+            numDoors = 1;
             x[0] = 7;
             y[0] = 0xd;
             break;
         case 8:
-            nDoors = 1;
+            numDoors = 1;
             x[0] = 1;
             y[0] = 0x1a;
             break;
     }
-    for (i=0; i<nDoors; i++)
+
+    for (i = 0; i < numDoors; i++)
     {
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, a1 | 0xc00);
-        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (a1 + 8) | 0xc00);
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 7, metatile | 0xc00);
+        MapGridSetMetatileIdAt(x[i] + 7, y[i] + 8, (metatile + 8) | 0xc00);
     }
+
     DrawWholeMapView();
 }
 
-void PetalburgGymSpecial2(void)
+void PetalburgGymOpenDoorsInstantly(void)
 {
-    PetalburgGymFunc(gSpecialVar_0x8004, gUnknown_083F8376[4]);
+    SetPetalburgGymDoorTiles(gSpecialVar_0x8004, gPetalburgGymSlidingDoorMetatiles[4]);
 }
 
 void ShowFieldMessageStringVar4(void)
@@ -795,7 +803,7 @@ static void PCTurnOffEffect_0(struct Task *task)
     if (task->data[3] == 6)
     {
         task->data[3] = 0;
-        playerDirectionLowerNybble = player_get_direction_lower_nybble();
+        playerDirectionLowerNybble = GetPlayerFacingDirection();
         switch (playerDirectionLowerNybble)
         {
             case DIR_NORTH:
@@ -868,7 +876,7 @@ static void PCTurnOffEffect(void)
     s8 dx = 0;
     s8 dy = 0;
     u16 tileId = 0;
-    u8 playerDirectionLowerNybble = player_get_direction_lower_nybble();
+    u8 playerDirectionLowerNybble = GetPlayerFacingDirection();
     switch (playerDirectionLowerNybble)
     {
         case DIR_NORTH:
@@ -1117,7 +1125,7 @@ void sub_810E984(u8 taskId)
             gSpecialVar_Result = 1;
             gSpecialVar_0x8005 = gUnknown_0203925B;
             ShakeScreenInElevator();
-            FieldObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
+            EventObjectTurnByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, DIR_SOUTH);
             sub_810EEDC();
             Menu_EraseScreen();
             DestroyTask(taskId);
@@ -1172,7 +1180,7 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
     return flag;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1630,7 +1638,7 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
     return flag;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1758,15 +1766,15 @@ void GlassWorkshopUpdateScrollIndicators(u8 newPos, u8 maxItems)
 
 void SpawnCameraDummy(void)
 {
-    u8 mapObjectId = SpawnSpecialFieldObjectParametrized(7, 8, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
-    gMapObjects[mapObjectId].mapobj_bit_13 = 1;
-    CameraObjectSetFollowedObjectId(gMapObjects[mapObjectId].spriteId);
+    u8 eventObjectId = SpawnSpecialEventObjectParametrized(7, MOVEMENT_TYPE_FACE_DOWN, 0x7f, gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7, 3);
+    gEventObjects[eventObjectId].invisible = 1;
+    CameraObjectSetFollowedObjectId(gEventObjects[eventObjectId].spriteId);
 }
 
 void RemoveCameraDummy(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-    RemoveFieldObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(0x7f, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
@@ -1793,7 +1801,7 @@ const u8 gUnknown_083F83E0[] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};
 const u8 gUnknown_083F83EC[] = {0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5};
 const u8 gUnknown_083F83F8[] = {3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5};
 
-u8 GetSlotMachineId(void)
+u16 GetSlotMachineId(void)
 {
     u32 v0 = gSaveBlock1.easyChatPairs[0].unk0_0 + gSaveBlock1.easyChatPairs[0].unk2 + gUnknown_083F83E0[gSpecialVar_0x8004];
     if (GetPriceReduction(2))
@@ -2002,17 +2010,17 @@ bool8 FoundBlackGlasses(void)
 
 void SetRoute119Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
     {
-        SetSav1Weather(0x14);
+        SetSav1Weather(WEATHER_ROUTE119_CYCLE);
     }
 }
 
 void SetRoute123Weather(void)
 {
-    if (is_map_type_1_2_3_5_or_6(get_map_type_from_warp0()) != TRUE)
+    if (is_map_type_1_2_3_5_or_6(GetLastUsedWarpMapType()) != TRUE)
     {
-        SetSav1Weather(0x15);
+        SetSav1Weather(WEATHER_ROUTE123_CYCLE);
     }
 }
 
@@ -2020,13 +2028,12 @@ u8 GetLeadMonIndex(void)
 {
     u8 i;
     u8 partyCount = CalculatePlayerPartyCount();
-    for (i=0; i<partyCount; i++)
+    for (i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 0)
-        {
             return i;
-        }
     }
+
     return 0;
 }
 
@@ -2035,9 +2042,9 @@ u16 ScriptGetPartyMonSpecies(void)
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES2, NULL);
 }
 
-void sub_810F8FC(void)
+void TryInitBattleTowerAwardManEventObject(void)
 {
-    sub_805ADDC(6);
+    TryInitLocalEventObject(6);
 }
 
 u16 GetDaysUntilPacifidlogTMAvailable(void)

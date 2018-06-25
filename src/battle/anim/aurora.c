@@ -9,23 +9,65 @@ extern s16 gBattleAnimArgs[8];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D33B4(struct Sprite *sprite);
 static void sub_80D344C(struct Sprite *);
 static void sub_80D34D4(u8);
+
+const union AnimCmd gSpriteAnim_83D9190[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D9198[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D91A0[] =
+{
+    gSpriteAnim_83D9190,
+    gSpriteAnim_83D9198,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D91A8[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 1),
+    AFFINEANIMCMD_FRAME(0x60, 0x60, 0, 1),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D91C0[] =
+{
+    gSpriteAffineAnim_83D91A8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D91C4 =
+{
+    .tileTag = 10140,
+    .paletteTag = 10140,
+    .oam = &gOamData_837E024,
+    .anims = gSpriteAnimTable_83D91A0,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D91C0,
+    .callback = sub_80D33B4,
+};
 
 void sub_80D33B4(struct Sprite *sprite)
 {
     s16 r6;
 
     InitAnimSpritePos(sprite, 1);
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
         r6 = -gBattleAnimArgs[2];
     else
         r6 = gBattleAnimArgs[2];
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = sprite->pos1.x;
-    sprite->data[2] = GetBankPosition(gAnimBankTarget, 2) + r6;
+    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r6;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankTarget, 3) + gBattleAnimArgs[3];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->callback = sub_80D344C;
     sprite->affineAnimPaused = TRUE;

@@ -20,7 +20,7 @@ extern u8 gDisplayedStringBattle[];
 extern u8 gActionSelectionCursor[];
 
 extern const u8 BattleText_PlayerMenu[];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern const u8 BattleText_MenuOptionsSafari[];
 
 extern void *gBattleBankFunc[];
@@ -34,13 +34,13 @@ extern u16 gSpecialVar_ItemId;
 extern MainCallback gPreBattleCallback1;
 extern u8 gBankInMenu;
 extern u8 gHealthboxIDs[];
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u16 gUnknown_02024DE8;
 extern u8 gBattleOutcome;
 
-extern u8 GetBankSide(u8);
-extern u8 GetBankByIdentity(u8);
-extern u8 GetBankIdentity(u8);
+extern u8 GetBattlerSide(u8);
+extern u8 GetBattlerAtPosition(u8);
+extern u8 GetBattlerPosition(u8);
 extern void LoadPlayerTrainerBankSprite();
 extern u8 sub_8079E90();
 extern void sub_80313A0(struct Sprite *);
@@ -192,15 +192,15 @@ void unref_sub_812B464(void)
 
 void SetBankFuncToSafariBufferRunCommand(void)
 {
-    gBattleBankFunc[gActiveBank] = SafariBufferRunCommand;
+    gBattleBankFunc[gActiveBattler] = SafariBufferRunCommand;
 }
 
 void SafariBufferRunCommand(void)
 {
-    if (gBattleExecBuffer & gBitTable[gActiveBank])
+    if (gBattleExecBuffer & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBank][0] < 0x39)
-            gSafariBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBattler][0] < 0x39)
+            gSafariBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             SafariBufferExecCompleted();
     }
@@ -214,7 +214,7 @@ void bx_battle_menu_t6_2(void)
         DestroyMenuCursor();
 
         // Useless switch statement.
-        switch (gActionSelectionCursor[gActiveBank])
+        switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
             Emitcmd33(1, 5, 0);
@@ -233,49 +233,49 @@ void bx_battle_menu_t6_2(void)
     }
     else if (gMain.newKeys & DPAD_LEFT)
     {
-        if (gActionSelectionCursor[gActiveBank] & 1)
+        if (gActionSelectionCursor[gActiveBattler] & 1)
         {
             PlaySE(SE_SELECT);
-            nullsub_8(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
+            nullsub_8(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 1;
+            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
-        if (!(gActionSelectionCursor[gActiveBank] & 1))
+        if (!(gActionSelectionCursor[gActiveBattler] & 1))
         {
             PlaySE(SE_SELECT);
-            nullsub_8(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 1;
-            sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
+            nullsub_8(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 1;
+            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_UP)
     {
-        if (gActionSelectionCursor[gActiveBank] & 2)
+        if (gActionSelectionCursor[gActiveBattler] & 2)
         {
             PlaySE(SE_SELECT);
-            nullsub_8(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
+            nullsub_8(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 2;
+            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (!(gActionSelectionCursor[gActiveBank] & 2))
+        if (!(gActionSelectionCursor[gActiveBattler] & 2))
         {
             PlaySE(SE_SELECT);
-            nullsub_8(gActionSelectionCursor[gActiveBank]);
-            gActionSelectionCursor[gActiveBank] ^= 2;
-            sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
+            nullsub_8(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] ^= 2;
+            sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
         }
     }
 #if DEBUG
     else if (gMain.newKeys & R_BUTTON)
     {
-        if (!ewram17810[gActiveBank].unk0_5)
-            move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, 4, 0);
+        if (!ewram17810[gActiveBattler].unk0_5)
+            move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, 4, 0);
     }
     else if (gMain.newKeys & START_BUTTON)
     {
@@ -286,7 +286,7 @@ void bx_battle_menu_t6_2(void)
 
 void sub_812B65C(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted();
 }
 
@@ -308,7 +308,7 @@ void sub_812B6AC(void)
 
 void bx_wait_t6(void)
 {
-    if (!gDoingBattleAnim || !ewram17810[gActiveBank].unk0_6)
+    if (!gDoingBattleAnim || !ewram17810[gActiveBattler].unk0_6)
         SafariBufferExecCompleted();
 }
 
@@ -316,7 +316,7 @@ void sub_812B724(void)
 {
     if (!gPaletteFade.active)
     {
-        gBattleBankFunc[gActiveBank] = sub_812B758;
+        gBattleBankFunc[gActiveBattler] = sub_812B758;
         sub_810BADC();
     }
 }
@@ -332,29 +332,29 @@ void sub_812B758(void)
 
 void sub_812B794(void)
 {
-    if (!ewram17810[gActiveBank].unk0_5)
+    if (!ewram17810[gActiveBattler].unk0_5)
         SafariBufferExecCompleted();
 }
 
 void SafariBufferExecCompleted(void)
 {
-    gBattleBankFunc[gActiveBank] = SafariBufferRunCommand;
+    gBattleBankFunc[gActiveBattler] = SafariBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 playerId = GetMultiplayerId();
 
         PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBank][0] = 0x38;
+        gBattleBufferA[gActiveBattler][0] = 0x38;
     }
     else
     {
-        gBattleExecBuffer &= ~gBitTable[gActiveBank];
+        gBattleExecBuffer &= ~gBitTable[gActiveBattler];
     }
 }
 
 void unref_sub_812B838(void)
 {
-    if (!ewram17810[gActiveBank].unk0_4)
+    if (!ewram17810[gActiveBattler].unk0_4)
         SafariBufferExecCompleted();
 }
 
@@ -395,18 +395,18 @@ void SafariHandleReturnPokeToBall(void)
 
 void SafariHandleTrainerThrow(void)
 {
-    LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBank);
-    GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(gActiveBank));
-    gBankSpriteIds[gActiveBank] = CreateSprite(
+    LoadPlayerTrainerBankSprite(gSaveBlock2.playerGender, gActiveBattler);
+    GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(gActiveBattler));
+    gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80,
       (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
       30);
-    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80313A0;
-    gBattleBankFunc[gActiveBank] = sub_812B65C;
+    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gBattleBankFunc[gActiveBattler] = sub_812B65C;
 }
 
 void SafariHandleTrainerSlide(void)
@@ -433,18 +433,18 @@ void SafariHandlecmd12(void)
 {
     ewram17840.unk8 = 4;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
-    gBattleBankFunc[gActiveBank] = bx_wait_t6;
+    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    gBattleBankFunc[gActiveBattler] = bx_wait_t6;
 }
 
 void SafariHandleBallThrow(void)
 {
-    u8 var = gBattleBufferA[gActiveBank][1];
+    u8 var = gBattleBufferA[gActiveBattler][1];
 
     ewram17840.unk8 = var;
     gDoingBattleAnim = 1;
-    move_anim_start_t4(gActiveBank, gActiveBank, GetBankByIdentity(1), 4);
-    gBattleBankFunc[gActiveBank] = bx_wait_t6;
+    move_anim_start_t4(gActiveBattler, gActiveBattler, GetBattlerAtPosition(1), 4);
+    gBattleBankFunc[gActiveBattler] = bx_wait_t6;
 }
 
 // TODO: spell Pause correctly
@@ -462,14 +462,14 @@ void SafariHandlePrintString(void)
 {
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
+    BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
     Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
-    gBattleBankFunc[gActiveBank] = sub_812B694;
+    gBattleBankFunc[gActiveBattler] = sub_812B694;
 }
 
 void SafariHandlePrintStringPlayerOnly(void)
 {
-    if (GetBankSide(gActiveBank) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         SafariHandlePrintString();
     else
         SafariBufferExecCompleted();
@@ -484,7 +484,7 @@ void SafariHandlecmd18(void)
     gUnknown_03004210.paletteNum = 0;
     Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 15, 27, 18);
     Text_FillWindowRectDefPalette(&gUnknown_03004210, 10, 2, 35, 16, 36);
-    gBattleBankFunc[gActiveBank] = bx_battle_menu_t6_2;
+    gBattleBankFunc[gActiveBattler] = bx_battle_menu_t6_2;
 
     Text_InitWindow(&gUnknown_03004210, BattleText_MenuOptionsSafari, 400, 18, 35);
     Text_PrintWindow8002F44(&gUnknown_03004210);
@@ -493,7 +493,7 @@ void SafariHandlecmd18(void)
     for (i = 0; i < 4; i++)
         nullsub_8(i);
 
-    sub_802E3E4(gActionSelectionCursor[gActiveBank], 0);
+    sub_802E3E4(gActionSelectionCursor[gActiveBattler], 0);
     StrCpyDecodeToDisplayedStringBattle(BattleText_PlayerMenu);
 
     Text_InitWindow(&gUnknown_03004210, gDisplayedStringBattle, SUB_812BB10_TILE_DATA_OFFSET, 2, 35);
@@ -512,9 +512,9 @@ void SafariHandlecmd20(void)
 
 void SafariHandleOpenBag(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-    gBattleBankFunc[gActiveBank] = sub_812B724;
-    gBankInMenu = gActiveBank;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+    gBattleBankFunc[gActiveBattler] = sub_812B724;
+    gBankInMenu = gActiveBattler;
 }
 
 void SafariHandlecmd22(void)
@@ -539,7 +539,7 @@ void SafariHandleExpBarUpdate(void)
 
 void SafariHandleStatusIconUpdate(void)
 {
-    sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 11);
+    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 11);
     SafariBufferExecCompleted();
 }
 
@@ -627,23 +627,23 @@ void SafariHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBank) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
-    PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
+    PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     SafariBufferExecCompleted();
 }
 
 void SafariHandlecmd44(void)
 {
-    PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+    PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     SafariBufferExecCompleted();
 }
 
 void SafariHandleFaintingCry(void)
 {
-    u16 species = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES);
+    u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry1(species, 25);
     SafariBufferExecCompleted();
@@ -651,16 +651,16 @@ void SafariHandleFaintingCry(void)
 
 void SafariHandleIntroSlide(void)
 {
-    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
     gUnknown_02024DE8 |= 1;
     SafariBufferExecCompleted();
 }
 
 void SafariHandleTrainerBallThrow(void)
 {
-    sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 10);
-    sub_804777C(gActiveBank);
-    sub_8043DFC(gHealthboxIDs[gActiveBank]);
+    sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 10);
+    sub_804777C(gActiveBattler);
+    sub_8043DFC(gHealthboxIDs[gActiveBattler]);
     SafariBufferExecCompleted();
 }
 
@@ -686,13 +686,13 @@ void SafariHandleSpriteInvisibility(void)
 
 void SafariHandleBattleAnimation(void)
 {
-    u8 r3 = gBattleBufferA[gActiveBank][1];
-    u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+    u8 r3 = gBattleBufferA[gActiveBattler][1];
+    u16 r4 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-    if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
+    if (move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, r3, r4) != 0)
         SafariBufferExecCompleted();
     else
-        gBattleBankFunc[gActiveBank] = sub_812B794;
+        gBattleBankFunc[gActiveBattler] = sub_812B794;
 }
 
 void SafariHandleLinkStandbyMsg(void)
@@ -707,12 +707,12 @@ void SafariHandleResetActionMoveSelection(void)
 
 void SafariHandlecmd55(void)
 {
-    gBattleOutcome = gBattleBufferA[gActiveBank][1];
+    gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     SafariBufferExecCompleted();
     if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_WILD))
-        gBattleBankFunc[gActiveBank] = sub_812B6AC;
+        gBattleBankFunc[gActiveBattler] = sub_812B6AC;
 }
 
 void SafariHandlecmd56(void)

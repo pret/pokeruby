@@ -9,12 +9,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-extern struct SpriteTemplate gSpriteTemplate_83D75AC;
-
+void sub_80CFDFC(struct Sprite* sprite);
 static void sub_80CFE2C(struct Sprite* sprite);
 
 // unused_9? (Most likely an unused effect.)
 // I cannot find any reference to this sprite template used to call this.
+
+const struct SpriteTemplate gSpriteTemplate_83D75AC =
+{
+    .tileTag = 10178,
+    .paletteTag = 10178,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CFDFC,
+};
 
 void sub_80CFDFC(struct Sprite* sprite)
 {
@@ -24,7 +34,7 @@ void sub_80CFDFC(struct Sprite* sprite)
 }
 
 #ifdef NONMATCHING
-void sub_80CFE2C(struct Sprite* sprite)
+static void sub_80CFE2C(struct Sprite* sprite)
 {
     u16 r7;
     u16 r5;
@@ -45,8 +55,8 @@ void sub_80CFE2C(struct Sprite* sprite)
     }
 }
 #else
-__attribute__((naked))
-void sub_80CFE2C(struct Sprite* sprite)
+NAKED
+static void sub_80CFE2C(struct Sprite* sprite)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

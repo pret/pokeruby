@@ -1,12 +1,47 @@
 #ifndef GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 #define GUARD_CONSTANTS_BATTLE_CONSTANTS_H
 
-// Bank sides
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
+/*
+ * A battler may be in one of four positions on the field. The first bit determines
+ * what side the battler is on, either the player's side or the opponent's side.
+ * The second bit determines what flank the battler is on, either the left or right.
+ * Note that the opponent's flanks are drawn corresponding to their perspective, so
+ * their right mon appears on the left, and their left mon appears on the right.
+ * The battler ID is usually the same as the position, except in the case of link battles.
+ *
+ *   + ------------------------- +
+ *   |           Opponent's side |
+ *   |            Right    Left  |
+ *   |              3       1    |
+ *   |                           |
+ *   | Player's side             |
+ *   |  Left   Right             |
+ *   |   0       2               |
+ *   ----------------------------+
+ *   |                           |
+ *   |                           |
+ *   +---------------------------+
+ */
 
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
+#define MAX_BATTLERS_COUNT  4
+
+#define B_POSITION_PLAYER_LEFT        0
+#define B_POSITION_OPPONENT_LEFT      1
+#define B_POSITION_PLAYER_RIGHT       2
+#define B_POSITION_OPPONENT_RIGHT     3
+
+// These macros can be used with either battler ID or positions to get the partner or the opposite mon
+#define BATTLE_OPPOSITE(id) ((id) ^ 1)
+#define BATTLE_PARTNER(id) ((id) ^ 2)
+
+#define B_SIDE_PLAYER     0
+#define B_SIDE_OPPONENT   1
+
+#define B_FLANK_LEFT 0
+#define B_FLANK_RIGHT 1
+
+#define BIT_SIDE        1
+#define BIT_FLANK       2
 
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
@@ -88,19 +123,16 @@
 #define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
 #define HITMARKER_UNK(bank)             ((0x10000000 << bank))
 
-#define MOVESTATUS_MISSED             (1 << 0)
-#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
-#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
-#define MOVESTATUS_NOTAFFECTED        (1 << 3)
-#define MOVESTATUS_ONEHITKO           (1 << 4)
-#define MOVESTATUS_FAILED             (1 << 5)
-#define MOVESTATUS_ENDURED            (1 << 6)
-#define MOVESTATUS_HUNGON             (1 << 7)
-
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
+// Flags describing move's result
+#define MOVE_RESULT_MISSED             (1 << 0)
+#define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
+#define MOVE_RESULT_NOT_VERY_EFFECTIVE (1 << 2)
+#define MOVE_RESULT_DOESNT_AFFECT_FOE  (1 << 3)
+#define MOVE_RESULT_ONE_HIT_KO         (1 << 4)
+#define MOVE_RESULT_FAILED             (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED        (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
+#define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
@@ -206,11 +238,8 @@
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 
-#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
-
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
-#define MAX_BANKS_BATTLE 4
 
 #define WEATHER_RAIN_TEMPORARY      (1 << 0)
 #define WEATHER_RAIN_DOWNPOUR       (1 << 1)

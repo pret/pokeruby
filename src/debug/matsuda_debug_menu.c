@@ -68,7 +68,7 @@ const struct MenuAction gMatsudaDebugMenuActions[] =
     {gMatsudaDebugMenu_ActionSetAllArtMuseumText, MatsudaDebugMenu_SetArtMuseumItems},
 };
 
-u8 unref_sub_80A9B28(void)
+u8 InitMatsudaDebugMenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 17, 18);
@@ -97,7 +97,7 @@ static bool8 sub_80A9B78(void)
 
 u8 MatsudaDebugMenu_ContestResults(void)
 {
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     CreateTask(sub_80A9BE4, 0xFF);
     return 1;
 }
@@ -465,7 +465,7 @@ static void sub_80AA064(void)
     RunTasks();
     UpdatePaletteFade();
     if (gMain.newKeys == 4)
-        SetMainCallback2(sub_805469C);
+        SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
 }
 
 static void sub_80AA090(void)
@@ -870,7 +870,7 @@ void sub_80AAD08(struct Sprite *sprite, s8 var2)
     {
         eMatsudaDebugVar = sprite->data[3];
         SetMainCallback2(sub_80AACC4);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     }
 }
 
@@ -883,7 +883,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
             gUnknown_02038670[i] = sub_80AE770(i, gSpecialVar_ContestCategory);
-        SetMainCallback2(sub_805469C);
+        SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
     }
 }
 

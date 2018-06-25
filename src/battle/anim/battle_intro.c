@@ -461,7 +461,7 @@ void sub_80E4EF8(u8 left, u8 top, u8 c, u8 paletteNum, u16 e, u8 bgMap, u8 g)
     u32 tileNum;
     s32 x;
     s32 y;
-    u8 bank = GetBankByIdentity(c);
+    u8 bank = GetBattlerAtPosition(c);
 
     DmaCopy16(3, gUnknown_081FAF4C[c] + gBattleMonForms[bank] * 0x800, (void *)(VRAM + e), 0x800);
     tileNum = e / 32 - g * 512;

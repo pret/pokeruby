@@ -437,7 +437,7 @@ static void CreatePressStartBanner(s16 x, s16 y)
     }
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 static void CreatePressStartBanner(s16 x, s16 y)
 {
     asm(".syntax unified\n\
@@ -673,7 +673,7 @@ void CB2_InitTitleScreen(void)
         break;
     }
     case 3:
-        BeginNormalPaletteFade(-1, 1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 1, 16, 0, FADE_COLOR_WHITE);
         SetVBlankCallback(VBlankCB);
         gMain.state = 4;
         break;
@@ -819,7 +819,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & START_BUTTON))
     {
         FadeOutBGM(4);
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
         SetMainCallback2(CB2_GoToMainMenu);
     }
     else
@@ -830,13 +830,13 @@ static void Task_TitleScreenPhase3(u8 taskId)
           && CanResetRTC() == 1)
         {
             FadeOutBGM(4);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             SetMainCallback2(CB2_GoToResetRtcScreen);
         }
 #if DEBUG
         else if (gMain.heldKeys == SELECT_BUTTON)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             SetMainCallback2(CB2_GoToTestMenu);
         }
 #endif
@@ -853,7 +853,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
             UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
             if ((gMPlay_BGM.status & 0xFFFF) == 0)
             {
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xFFFF);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
                 SetMainCallback2(CB2_GoToCopyrightScreen);
             }
         }

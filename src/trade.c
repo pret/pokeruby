@@ -207,7 +207,7 @@ static void sub_804E1DC(void);
 static void sub_804BBCC(void);
 static void sub_804D8E4(void);
 static void sub_804C164(void);
-static void sub_804C1A8(void);
+static void SetTradeSceneStrings(void);
 #ifdef NONMATCHING
 static
 #endif
@@ -1089,7 +1089,7 @@ static void sub_8047EC0(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            InitMenuWindow(&gMenuTextWindowTemplate);
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
@@ -1208,7 +1208,7 @@ static void sub_8047EC0(void)
             sub_8048C70();
             gMain.state ++;
             nullsub_5(7, 0);
-            PlayBGM(BGM_P_SCHOOL);
+            PlayBGM(MUS_P_SCHOOL);
             break;
         case 14:
             sub_804ACF4(1);
@@ -1224,7 +1224,7 @@ static void sub_8047EC0(void)
             gMain.state ++;
             break;
         case 17:
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gMain.state ++;
             break;
         case 18:
@@ -1269,7 +1269,7 @@ static void sub_80484F4(void)
             ResetTasks();
             sub_804A964(&gUnknown_03004824->unk_00c8, BG_SCREEN_ADDR(5));
             SetVBlankCallback(sub_80489F4);
-            InitMenuWindow(&gWindowTemplate_81E6CE4);
+            InitMenuWindow(&gMenuTextWindowTemplate);
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004824->window, &gWindowTemplate_81E6F84);
             gUnknown_03004824->unk_007a = TextWindow_SetBaseTileNum(20);
@@ -1369,7 +1369,7 @@ static void sub_80484F4(void)
             gMain.state ++;
             break;
         case 17:
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gMain.state ++;
             break;
         case 18:
@@ -1409,7 +1409,7 @@ static void sub_80489F4(void)
 {
     if (++gUnknown_03004824->unk_00b4 >= 16)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gUnknown_03004824->unk_007b = 10;
     }
 }
@@ -1492,7 +1492,7 @@ static void sub_8048B0C(u8 a0)
 #pragma pop_macro("BLOCKSIZE")
 #else
 asm(".include \"constants/gba_constants.inc\"");
-__attribute__((naked))
+NAKED
 static void sub_8048B0C(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -1797,7 +1797,7 @@ static bool8 sub_8048D44(void)
             }
             break;
         case 13:
-            Trade_Memcpy(gBlockSendBuffer, gSaveBlock1.giftRibbons, 11);
+            Trade_Memcpy(gBlockSendBuffer, gSaveBlock1.externalReservedData.giftRibbons, 11);
             gUnknown_03004824->unk_0075 ++;
             break;
         case 14:
@@ -1889,7 +1889,7 @@ static void sub_80491E4(u8 mpId, u8 status)
         switch (gBlockRecvBuffer[0][0])
         {
             case 0xeebb:
-                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 sub_804AA0C(4);
                 gUnknown_03004824->unk_007b = 11;
                 break;
@@ -1904,7 +1904,7 @@ static void sub_80491E4(u8 mpId, u8 status)
                 gUnknown_03004824->unk_007b = 7;
                 break;
             case 0xccdd:
-                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 gUnknown_03004824->unk_007b = 10;
                 break;
             case 0xddee:
@@ -1957,7 +1957,7 @@ static void sub_80492D8(void)
             gUnknown_03004824->linkData[0] = 0xeebb;
             gUnknown_03004824->linkData[1] = 0;
             sub_804AADC(5, 0);
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004824->unk_0084 = gUnknown_03004824->unk_0085 = 0;
             gUnknown_03004824->unk_007b = 11;
         }
@@ -2086,7 +2086,7 @@ static void sub_8049680(void)
         }
         else if (gUnknown_03004824->tradeMenuCursorPosition < 2 * PARTY_SIZE)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004824->unk_007b = 2;
         }
         else if (gUnknown_03004824->tradeMenuCursorPosition == 2 * PARTY_SIZE)
@@ -2133,7 +2133,7 @@ static void sub_8049860(void)
         PlaySE(SE_SELECT);
         if (Menu_GetCursorPos() == 0)
         {
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004824->unk_007b = 2;
         }
         else if (sub_80499F0(gUnknown_03004824->unk_0051[0], gUnknown_03004824->partyCounts[0], gUnknown_03004824->tradeMenuCursorPosition) == 0)
@@ -2488,7 +2488,7 @@ static void sub_8049ED4(u8 a0)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_8049ED4(u8 a0)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3055,7 +3055,7 @@ static void sub_804A41C(u8 whichParty)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_804A41C(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3250,7 +3250,7 @@ static void sub_804A6DC(u8 whichParty)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_804A6DC(u8 whichParty)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -3561,7 +3561,7 @@ static void sub_804ACF4(u8 who)
     }
 }
 #else
-static __attribute__((naked)) void sub_804ACF4(u8 who)
+static NAKED void sub_804ACF4(u8 who)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"
@@ -3777,8 +3777,8 @@ static void sub_804AF84(void)
 {
     int i;
     for (i = 0; i < 11; i ++)
-        if (gSaveBlock1.giftRibbons[i] == 0 && gUnknown_03004824->unk_00b5[i] != 0)
-            gSaveBlock1.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
+        if (gSaveBlock1.externalReservedData.giftRibbons[i] == 0 && gUnknown_03004824->unk_00b5[i] != 0)
+            gSaveBlock1.externalReservedData.giftRibbons[i] = gUnknown_03004824->unk_00b5[i];
 }
 
 static void sub_804AFB8(const struct WindowTemplate *windowConfig, u8 *dest, const u8 *src, u8 size)
@@ -3869,7 +3869,7 @@ static void sub_804B1BC(void)
     }
 }
 #else
-__attribute__((naked)) static void sub_804B1BC(void)
+NAKED static void sub_804B1BC(void)
 {
     asm_unified("\tpush {lr}\n"
                     "\tldr r1, _0804B1FC @ =REG_BG1VOFS\n"
@@ -4018,10 +4018,10 @@ static void sub_804B41C(void)
             Menu_EraseScreen();
             gLinkType = 0x1144;
             gMain.state ++;
-            LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
-            CpuCopy16(gUnknown_08D00524, ewram, 0x1000);
+            LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
+            CpuCopy16(gBattleTextboxTilemap, ewram, 0x1000);
             DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
-            LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+            LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
             gUnknown_03004828->unk_00b6 = 0;
             gUnknown_03004828->unk_00c4 = 0;
             gUnknown_03004828->isLinkTrade = TRUE;
@@ -4096,8 +4096,8 @@ static void sub_804B41C(void)
         case 11:
             sub_804BBE8(5);
             sub_804BBE8(0);
-            sub_804C1A8();
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            SetTradeSceneStrings();
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gMain.state ++;
             break;
         case 12:
@@ -4113,7 +4113,7 @@ static void sub_804B41C(void)
     UpdatePaletteFade();
 }
 #else
-static __attribute__((naked)) void sub_804B41C(void)
+static NAKED void sub_804B41C(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tsub sp, 0x4\n"
@@ -4191,11 +4191,11 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldrb r0, [r1]\n"
                     "\tadds r0, 0x1\n"
                     "\tstrb r0, [r1]\n"
-                    "\tldr r0, _0804B590 @ =gUnknown_08D00000\n"
+                    "\tldr r0, _0804B590 @ =gBattleTextboxTiles\n"
                     "\tmovs r1, 0xC0\n"
                     "\tlsls r1, 19\n"
                     "\tbl LZDecompressVram\n"
-                    "\tldr r0, _0804B594 @ =gUnknown_08D00524\n"
+                    "\tldr r0, _0804B594 @ =gBattleTextboxTilemap\n"
                     "\tldr r1, _0804B598 @ =0xfffe1000\n"
                     "\tadds r5, r1\n"
                     "\tmovs r2, 0x80\n"
@@ -4209,7 +4209,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tldr r1, _0804B5A4 @ =0x80000280\n"
                     "\tstr r1, [r0, 0x8]\n"
                     "\tldr r0, [r0, 0x8]\n"
-                    "\tldr r0, _0804B5A8 @ =gUnknown_08D004E0\n"
+                    "\tldr r0, _0804B5A8 @ =gBattleTextboxPalette\n"
                     "\tmovs r1, 0\n"
                     "\tmovs r2, 0x20\n"
                     "\tbl LoadCompressedPalette\n"
@@ -4267,13 +4267,13 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "_0804B584: .4byte 0x00001144\n"
                     "_0804B588: .4byte gMain\n"
                     "_0804B58C: .4byte 0x0000043c\n"
-                    "_0804B590: .4byte gUnknown_08D00000\n"
-                    "_0804B594: .4byte gUnknown_08D00524\n"
+                    "_0804B590: .4byte gBattleTextboxTiles\n"
+                    "_0804B594: .4byte gBattleTextboxTilemap\n"
                     "_0804B598: .4byte 0xfffe1000\n"
                     "_0804B59C: .4byte 0x06002800\n"
                     "_0804B5A0: .4byte 0x040000d4\n"
                     "_0804B5A4: .4byte 0x80000280\n"
-                    "_0804B5A8: .4byte gUnknown_08D004E0\n"
+                    "_0804B5A8: .4byte gBattleTextboxPalette\n"
                     "_0804B5AC_case01:\n"
                     "\tbl OpenLink\n"
                     "\tldr r1, _0804B5C8 @ =gMain\n"
@@ -4451,7 +4451,7 @@ static __attribute__((naked)) void sub_804B41C(void)
                     "\tbl sub_804BBE8\n"
                     "\tmovs r0, 0\n"
                     "\tbl sub_804BBE8\n"
-                    "\tbl sub_804C1A8\n"
+                    "\tbl SetTradeSceneStrings\n"
                     "\tmovs r0, 0x1\n"
                     "\tnegs r0, r0\n"
                     "\tmovs r1, 0\n"
@@ -4563,8 +4563,8 @@ void sub_804B790(void)
         case 11:
             sub_804BBE8(5);
             sub_804BBE8(0);
-            sub_804C1A8();
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            SetTradeSceneStrings();
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gMain.state ++;
             break;
         case 12:
@@ -4709,9 +4709,9 @@ static void sub_804BBE8(u8 a0)
             gUnknown_03004828->bg1vofs = 0;
             gUnknown_03004828->bg1hofs = 0;
             REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(5);
-            LZDecompressVram(gUnknown_08D00000, BG_CHAR_ADDR(0));
-            CpuCopy16(gUnknown_08D00524, buffer = (u16 *)gSharedMem, 0x1000);
-            LoadCompressedPalette(gUnknown_08D004E0, 0x70, 0x20);
+            LZDecompressVram(gBattleTextboxTiles, BG_CHAR_ADDR(0));
+            CpuCopy16(gBattleTextboxTilemap, buffer = (u16 *)gSharedMem, 0x1000);
+            LoadCompressedPalette(gBattleTextboxPalette, 0x70, 0x20);
             FillPalette(0, 0, 2);
             for (i = 0; i < 0x280; i ++)
                 buffer[i] |= 0x7000;
@@ -4772,8 +4772,12 @@ static void sub_804C164(void)
     LoadSpritePalette(&gUnknown_082159B4);
 }
 
-static void sub_804C1A8(void)
+static void SetTradeSceneStrings(void)
 {
+    /*Sets the variable strings printed on the
+     *actual trading screen. For use in strings
+     *like "[Pokemon] will be sent to [Trainer]."
+     */
     u8 mpId;
     u8 string[20];
     const struct InGameTrade *ingameTrade;
@@ -4808,7 +4812,7 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].pos2.y = gMonFrontPicCoords[gUnknown_03004828->tradeSpecies[0]].y_offset;
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_0124 = GetCurrentMapMusic();
-            PlayBGM(BGM_SHINKA);
+            PlayBGM(MUS_SHINKA);
             break;
         case 1:
             if (gUnknown_03004828->bg2hofs > 0)
@@ -4853,7 +4857,7 @@ static bool8 sub_804C29C(void)
             // The game waits here for the sprite to finish its animation sequence.
             break;
         case 14:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 = 20;
             break;
 
@@ -4865,7 +4869,7 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 21:
-            BeginNormalPaletteFade(-1, -1, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 22:
@@ -4940,7 +4944,7 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 29:
-            BeginNormalPaletteFade(-1, -1, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 = 30;
             break;
         case 30:
@@ -4953,7 +4957,7 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 31:
-            BeginNormalPaletteFade(-1, -1, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB(0, 0, 0));
             gUnknown_03004828->unk_00ba = CreateSprite(&gSpriteTemplate_82159FC, 0x6f, 0xaa, 0);
             gUnknown_03004828->unk_00bb = CreateSprite(&gSpriteTemplate_82159FC, 0x81, -0xa, 0);
             gUnknown_03004828->unk_00c4 ++;
@@ -4978,15 +4982,15 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 34:
-            BlendPalettes(1, 16, 0xffff);
+            BlendPalettes(0x1, 16, FADE_COLOR_WHITE);
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 35:
-            BlendPalettes(1,  0, 0xffff);
+            BlendPalettes(0x1,  0, FADE_COLOR_WHITE);
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 36:
-            BlendPalettes(1, 16, 0xffff);
+            BlendPalettes(0x1, 16, FADE_COLOR_WHITE);
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 37:
@@ -5024,7 +5028,7 @@ static bool8 sub_804C29C(void)
                 gUnknown_03004828->unk_00c4 ++;
                 gSprites[gUnknown_03004828->pokePicSpriteIdxs[0]].invisible = TRUE;
                 gSprites[gUnknown_03004828->pokePicSpriteIdxs[1]].invisible = TRUE;
-                BlendPalettes(1,  0, 0xffff);
+                BlendPalettes(0x1, 0, FADE_COLOR_WHITE);
             }
             break;
         case 39:
@@ -5032,7 +5036,7 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->unk_00bb].pos2.y += 3;
             if (gSprites[gUnknown_03004828->unk_00ba].pos2.y <= -0xde)
             {
-                BeginNormalPaletteFade(-1, -1, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB(0, 0, 0));
                 gUnknown_03004828->unk_00c4 ++;
                 DestroySprite(&gSprites[gUnknown_03004828->unk_00ba]);
                 DestroySprite(&gSprites[gUnknown_03004828->unk_00bb]);
@@ -5050,7 +5054,7 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 41:
-            BeginNormalPaletteFade(-1, -1, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 42:
@@ -5127,7 +5131,7 @@ static bool8 sub_804C29C(void)
             gUnknown_03004828->unk_0118 = 0x8000 / gUnknown_03004828->unk_011a;
             break;
         case 52:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 = 60;
             break;
 
@@ -5140,7 +5144,7 @@ static bool8 sub_804C29C(void)
             }
             break;
         case 61:
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 62:
@@ -5156,12 +5160,12 @@ static bool8 sub_804C29C(void)
             gSprites[gUnknown_03004828->unk_0103].callback = sub_804D80C;
             StartSpriteAnim(&gSprites[gUnknown_03004828->unk_0103], 1);
             StartSpriteAffineAnim(&gSprites[gUnknown_03004828->unk_0103], 2);
-            BlendPalettes(1 << (16 + gSprites[gUnknown_03004828->unk_0103].oam.paletteNum), 16, 0xffff);
+            BlendPalettes(1 << (16 + gSprites[gUnknown_03004828->unk_0103].oam.paletteNum), 16, FADE_COLOR_WHITE);
             gUnknown_03004828->unk_00c4 ++;
             gUnknown_03004828->unk_00c0 = 0;
             break;
         case 64:
-            BeginNormalPaletteFade(1 << (16 + gSprites[gUnknown_03004828->unk_0103].oam.paletteNum), 1, 16, 0, 0xffff);
+            BeginNormalPaletteFade(1 << (16 + gSprites[gUnknown_03004828->unk_0103].oam.paletteNum), 1, 16, 0, FADE_COLOR_WHITE);
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 65:
@@ -5191,7 +5195,7 @@ static bool8 sub_804C29C(void)
         case 68:
             if (++ gUnknown_03004828->unk_00c0 == 4)
             {
-                PlayFanfare(BGM_FANFA5);
+                PlayFanfare(MUS_FANFA5);
             }
             if (gUnknown_03004828->unk_00c0 == 0xf0)
             {
@@ -5231,7 +5235,7 @@ static bool8 sub_804C29C(void)
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 73:
-            BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gUnknown_03004828->unk_00c4 ++;
             break;
         case 74:
@@ -5330,7 +5334,7 @@ static void sub_804D738(struct Sprite *sprite)
         PlaySE(SE_W025);
         sprite->callback = sub_804D7AC;
         sprite->data[0] = 0;
-        BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, -1);
+        BeginNormalPaletteFade(1 << (16 + sprite->oam.paletteNum), -1, 0, 16, FADE_COLOR_WHITE);
     }
 }
 
@@ -5609,7 +5613,7 @@ static void sub_804DC88(void)
         case 6:
             if (IsLinkTaskFinished())
             {
-                BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
                 gMain.state ++;
             }
             break;
@@ -5657,7 +5661,7 @@ void DoInGameTradeScene(void)
 {
     ScriptContext2_Enable();
     CreateTask(sub_804E1A0, 10);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
 }
 
 static void sub_804E1A0(u8 taskId)
@@ -5684,9 +5688,9 @@ static void sub_804E1DC(void)
 
 void sub_804E22C(void)
 {
-    LZDecompressVram(gUnknown_08D00000, (void *)VRAM);
-    CpuCopy16(gUnknown_08D00524, gSharedMem, 0x1000);
+    LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
+    CpuCopy16(gBattleTextboxTilemap, gSharedMem, 0x1000);
     DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
-    LoadCompressedPalette(gUnknown_08D004E0, 0, 32);
+    LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
     REG_BG1CNT = BGCNT_PRIORITY(2) | BGCNT_SCREENBASE(5);
 }

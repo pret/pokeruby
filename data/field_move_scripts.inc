@@ -12,14 +12,14 @@ S_CuttableTree:: @ 81B0DCC
 	goto_if_eq Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	dofieldeffect 2
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto DoTreeCutMovement
 	end
 
-S_UseCut:: @ 81B0E16
+DoCutFieldEffectScript:: @ 81B0E16
 	lockall
-	dofieldeffect 2
+	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 	goto DoTreeCutMovement
 	end
@@ -32,8 +32,8 @@ DoTreeCutMovement: @ 81B0E21
 	end
 
 TreeCutMovement: @ 81B0E30
-	step_5b
-	step_end
+	cut_tree
+	end_movement
 
 CannotUseCut: @ 81B0E32
 	msgbox CannotUseCutText, 3
@@ -69,14 +69,14 @@ S_BreakableRock:: @ 81B0EB7
 	goto_if_eq RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closemessage
-	dofieldeffect 37
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto DoRockSmashMovement
 	end
 
 S_UseRockSmash:: @ 81B0F01
 	lockall
-	dofieldeffect 37
+	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 	goto DoRockSmashMovement
 	end
@@ -100,8 +100,8 @@ DoRockSmashMovement_Done: @ 81B0F3A
 	end
 
 RockSmashMovement: @ 81B0F3C
-	step_5a
-	step_end
+	rock_smash_break
+	end_movement
 
 CannotUseRockSmash: @ 81B0F3E
 	msgbox CannotUseRockSmashText, 3
@@ -133,14 +133,14 @@ S_PushableBoulder:: @ 81B0FCB
 	compare RESULT, NO
 	goto_if_eq Strength_ChoseNo
 	closemessage
-	dofieldeffect 40
+	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto UsedStrength
 	end
 
 S_UseStrength:: @ 81B100E
 	lockall
-	dofieldeffect 40
+	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
 	goto UsedStrength
 	end
@@ -195,7 +195,7 @@ S_UseWaterfall:: @ 81B115A
 	compare RESULT, NO
 	goto_if_eq Waterfall_Done
 	msgbox UsedWaterfallText, 4
-	dofieldeffect 43
+	dofieldeffect FLDEFF_USE_WATERFALL
 	goto Waterfall_Done
 
 S_CannotUseWaterfall:: @ 81B1194
@@ -229,7 +229,7 @@ UseDiveScript:: @ 81B1220
 	compare RESULT, NO
 	goto_if_eq Dive_Done
 	msgbox UsedDiveText, 4
-	dofieldeffect 44
+	dofieldeffect FLDEFF_USE_DIVE
 	goto Dive_Done
 	lockall
 
@@ -252,7 +252,7 @@ S_UseDiveUnderwater:: @ 81B1269
 	compare RESULT, NO
 	goto_if_eq UnderwaterDive_Done
 	msgbox UsedDiveText, 4
-	dofieldeffect 44
+	dofieldeffect FLDEFF_USE_DIVE
 	goto UnderwaterDive_Done
 
 UnderwaterCannotUseDive: @ 81B12A7

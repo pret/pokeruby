@@ -10,24 +10,30 @@ struct Struct_sub_8078914 {
     u8 field_8;
 };
 
-u8 GetBankPosition(u8, u8);
+struct TransformStatus
+{
+    u16 unknown;
+    u16 species;
+};
+
+u8 GetBattlerSpriteCoord(u8, u8);
 u8 sub_8077E44(u8 slot, u16 species, u8 a3);
-u8 GetAnimBankSpriteId(u8 bank);
+u8 GetAnimBattlerSpriteId(u8 bank);
 void StoreSpriteCallbackInData(struct Sprite *sprite, void(*callback)(struct Sprite *));
 void sub_8078314(struct Sprite *sprite);
 void TranslateSpriteOverDuration(struct Sprite *sprite);
 void TranslateMonBGUntil(struct Sprite *sprite);
 void TranslateMonBGSubPixelUntil(struct Sprite *sprite);
-u8 GetBankSide(u8);
-u8 GetBankSide(u8);
-u8 GetBankSide(u8 side);
-u8 GetBankSide(u8 slot);
-u8 GetBankSide(u8);
-u8 GetBankIdentity(u8);
-u8 GetBankIdentity(u8 slot);
-u8 GetBankByIdentity(u8);
-u8 GetBankByIdentity(u8);
-u8 GetBankByIdentity(u8 state);
+u8 GetBattlerSide(u8);
+u8 GetBattlerSide(u8);
+u8 GetBattlerSide(u8 side);
+u8 GetBattlerSide(u8 slot);
+u8 GetBattlerSide(u8);
+u8 GetBattlerPosition(u8);
+u8 GetBattlerPosition(u8 slot);
+u8 GetBattlerAtPosition(u8);
+u8 GetBattlerAtPosition(u8);
+u8 GetBattlerAtPosition(u8 state);
 bool8 IsBankSpritePresent(u8);
 bool8 IsDoubleBattle();
 u8 IsDoubleBattle(void);
@@ -58,7 +64,7 @@ void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a
 u8 sub_8079C74(struct Task *task);
 void sub_8079E24();
 u8 sub_8079E90(u8 slot);
-u8 GetBankIdentity_permutated(u8 slot);
+u8 GetBattlerPosition_permutated(u8 slot);
 void sub_807A784(u8 taskId);
 void sub_807A850(struct Task *task, u8 taskId);
 void sub_807A8D4(struct Sprite *sprite);
@@ -106,5 +112,8 @@ void TranslateAnimSpriteToTargetMonLocation(struct Sprite *sprite);
 void sub_80789D4(bool8 a1);
 void sub_8079AB8(u8 sprite, u8 sprite2);
 u8 sub_807A4A0(int bank, u8 sprite, int species);
+void sub_80794A8(struct Sprite *sprite);
+void sub_807A9BC(struct Sprite *sprite);
+void sub_8078954(struct Struct_sub_8078914*, u8);
 
 #endif // GUARD_ROM_8077ABC_H

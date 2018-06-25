@@ -26,8 +26,8 @@ enum
     STEP_END = 0xFE,
 };
 
-const u32 gMapObjectPic_MovingBox[] = INCBIN_U32("graphics/map_objects/pics/misc/moving_box.4bpp");
-const u16 gMapObjectPalette19[] = INCBIN_U16("graphics/map_objects/palettes/19.gbapal");
+const u32 gEventObjectPic_MovingBox[] = INCBIN_U32("graphics/event_objects/pics/misc/moving_box.4bpp");
+const u16 gEventObjectPalette19[] = INCBIN_U16("graphics/event_objects/palettes/19.gbapal");
 
 static const s8 gTruckCamera_HorizontalTable[] =
 {
@@ -348,24 +348,24 @@ void Task_HandlePorthole(u8 taskId)
 
 void sub_80C78A0(void)
 {
-    u8 spriteId = AddPseudoFieldObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
+    u8 spriteId = AddPseudoEventObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
 
     gSprites[spriteId].coordOffsetEnabled = FALSE;
 
     if (VarGet(VAR_PORTHOLE_STATE) == 2)
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(4));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(4));
     }
     else
     {
-        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(3));
+        StartSpriteAnim(&gSprites[spriteId], GetFaceDirectionAnimNum(3));
     }
 }
 
 void sub_80C791C(void)
 {
     sub_80C78A0();
-    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = TRUE;
+    gEventObjects[gPlayerAvatar.eventObjectId].invisible = TRUE;
     pal_fill_black();
     CreateTask(Task_HandlePorthole, 80);
     ScriptContext2_Enable();

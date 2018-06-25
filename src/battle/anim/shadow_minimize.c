@@ -18,7 +18,7 @@ void sub_80D0704(struct Sprite* sprite);
 void sub_80D0488(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    u8 spriteId = GetAnimBankSpriteId(0);
+    u8 spriteId = GetAnimBattlerSpriteId(0);
     task->data[0] = spriteId;
     sub_8078E70(spriteId, 0);
     task->data[1] = 0;
@@ -129,7 +129,7 @@ void sub_80D0614(struct Task* task, u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80D0614(struct Task* task, u8 taskId)
 {
     asm(".syntax unified\n\

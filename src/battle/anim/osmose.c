@@ -7,15 +7,40 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-// osmose (I didn't want to use "absorb" as thats confusing)
+void sub_80CB768(struct Sprite* sprite);
+
+// osmose
 // Used by Ingrain.
+
+const union AnimCmd gSpriteAnim_83D6688[] =
+{
+    ANIMCMD_FRAME(3, 3),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6694[] =
+{
+    gSpriteAnim_83D6688,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6698 =
+{
+    .tileTag = 10147,
+    .paletteTag = 10147,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D6694,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CB768,
+};
 
 void sub_80CB768(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2) + gBattleAnimArgs[0];
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[0];
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
         sprite->data[1] = gBattleAnimArgs[2];
         sprite->data[2] = gBattleAnimArgs[3];
         sprite->data[3] = gBattleAnimArgs[4];

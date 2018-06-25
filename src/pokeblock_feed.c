@@ -579,7 +579,7 @@ static bool8 TransitionToPokeblockFeedScene(void)
             gMain.state++;
         }
     case 13:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(CB2_PokeblockFeed);
         return TRUE;
@@ -751,7 +751,7 @@ static void Task_ReturnAfterPaletteFade(u8 taskID)
 
 static void Task_PaletteFadeToReturn(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = Task_ReturnAfterPaletteFade;
 }
 

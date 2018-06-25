@@ -39,7 +39,7 @@ void sub_80CE3EC(u8 taskId)
     sub_8079BF4(&gTasks[taskId].data[14], &gTasks[taskId].data[15], (void*)c);
     b = b | (0x10000 << IndexOfSpritePaletteTag(0x27D2));
     d = IndexOfSpritePaletteTag(0x27D3);
-    BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 0x10, 32699);
+    BeginNormalPaletteFade((0x10000 << d) | b, 0, 0, 16, RGB(27, 29, 31));
     gTasks[taskId].func = sub_80CE4D4;
     sub_80CE4D4(taskId);
 }

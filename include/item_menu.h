@@ -3,6 +3,15 @@
 
 #include "string_util.h"
 
+enum
+{
+	ITEM_USE_SINGLE_MON,
+	ITEM_USE_GIVE_ITEM,
+	ITEM_USE_UNUSED,
+	ITEM_USE_GIVE_MAIL,
+	ITEM_USE_ALL_MONS,
+};
+
 struct PocketScrollState
 {
     u8 cursorPos;
@@ -30,7 +39,7 @@ void sub_80A5D04(void);
 void ItemMenu_LoadSellMenu(void);
 void sub_80A68CC();
 void sub_80A6A30(void);
-bool32 sub_80A6D1C(void);
+bool32 UseRegisteredKeyItem(void);
 void sub_80A6DCC(void);
 void sub_80A7094(u8);
 u8 CreateBerrySprite(u8, s16, s16);

@@ -6,12 +6,13 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "constants/field_effects.h"
+#include "constants/songs.h"
 
 extern const u8 gSpriteImage_83D21EC[];
 extern const u8 gSpriteImage_83D22EC[];
@@ -77,7 +78,7 @@ extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[36]
 static void sub_80C68EC(u8);
 static void DoBalloonSoundEffect(s16);
 
-void sub_80C68A4(s16 metatileId, s16 x, s16 y)
+void PopSecretBaseBalloon(s16 metatileId, s16 x, s16 y)
 {
     u8 taskId = CreateTask(sub_80C68EC, 0);
 
@@ -161,9 +162,9 @@ static void sub_80C6A14(u8 taskId)
     }
 }
 
-void sub_80C6A54(s16 x, s16 y)
+void ShatterSecretBaseBreakableDoor(s16 x, s16 y)
 {
-    u8 dir = player_get_direction_lower_nybble();
+    u8 dir = GetPlayerFacingDirection();
     if (dir == DIR_SOUTH)
     {
         sub_80C69C4(x, y);
@@ -177,11 +178,11 @@ void sub_80C6A54(s16 x, s16 y)
     }
 }
 
-static void Task_DecorationSoundEffect(u8 taskId)
+static void Task_SecretBaseMusicNoteMatSound(u8 taskId)
 {
     if (gTasks[taskId].data[1] == 7)
     {
-        switch (gTasks[taskId].data[0])
+        switch (gTasks[taskId].data[0]) // metatileId
         {
         case 632:
             PlaySE(SE_TOY_C);
@@ -217,14 +218,14 @@ static void Task_DecorationSoundEffect(u8 taskId)
     }
 }
 
-void DoDecorationSoundEffect(s16 arg)
+void PlaySecretBaseMusicNoteMatSound(s16 metatileId)
 {
-    u8 taskId = CreateTask(Task_DecorationSoundEffect, 5);
-    gTasks[taskId].data[0] = arg;
+    u8 taskId = CreateTask(Task_SecretBaseMusicNoteMatSound, 5);
+    gTasks[taskId].data[0] = metatileId;
     gTasks[taskId].data[1] = 0;
 }
 
-void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
+void SpriteCB_GlitterMatSparkle(struct Sprite *sprite)
 {
     sprite->data[0]++;
     if (sprite->data[0] == 8)
@@ -233,10 +234,10 @@ void SpriteCB_YellowCave4Sparkle(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-void DoYellowCave4Sparkle(void)
+void DoSecretBaseGlitterMatSparkle(void)
 {
-    s16 x = gMapObjects[gPlayerAvatar.mapObjectId].coords2.x;
-    s16 y = gMapObjects[gPlayerAvatar.mapObjectId].coords2.y;
+    s16 x = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.x;
+    s16 y = gEventObjects[gPlayerAvatar.eventObjectId].currentCoords.y;
     u8 spriteId;
 
     sub_8060470(&x, &y, 8, 4);
@@ -246,7 +247,7 @@ void DoYellowCave4Sparkle(void)
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].oam.priority = 1;
         gSprites[spriteId].oam.paletteNum = 5;
-        gSprites[spriteId].callback = SpriteCB_YellowCave4Sparkle;
+        gSprites[spriteId].callback = SpriteCB_GlitterMatSparkle;
         gSprites[spriteId].data[0] = 0;
     }
 }
@@ -260,7 +261,7 @@ bool8 FldEff_SandPillar(void)
     gFieldEffectArguments[5] = x;
     gFieldEffectArguments[6] = y;
 
-    switch (player_get_direction_lower_nybble())
+    switch (GetPlayerFacingDirection())
     {
     case DIR_SOUTH:
         CreateSprite(

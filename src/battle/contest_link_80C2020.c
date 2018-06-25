@@ -303,7 +303,7 @@ void sub_80C2358(void)
     gBattle_WIN1V = 0x80a0;
     CreateTask(sub_80C2F28, 20);
     sub_80C3F00();
-    PlayBGM(BGM_CON_K);
+    PlayBGM(MUS_CON_K);
     SetVBlankCallback(sub_80C2448);
 }
 
@@ -949,72 +949,96 @@ __attribute__((naked)) void sub_80C310C(void)
 }
 #endif
 
-void sub_80C3158(const u8 *string, u8 spriteId)
-{
-    struct Sprite *sprite = gSprites + spriteId;
-    u16 sp00[4] = {
-        sprite->oam.tileNum,
-        gSprites[sprite->data[0]].oam.tileNum,
-        gSprites[sprite->data[1]].oam.tileNum,
-        gSprites[sprite->data[2]].oam.tileNum
-    };
-    int i;
-    u8 width;
-    u8 * displayedStringBattle;
-    void * dest;
+// void sub_80C3158(const u8 *string, u8 spriteId)
+// {
+//     int i, j;
+//     u8 width;
+//     u8 * displayedStringBattle;
+//     void * dest;
+//     u8 * d1;
+//     u8 * d2;
+//     void *d3;
+//     void *d4;
+//     void *d5;
+//     void *d6;
+//     int w;
+//     u16 sp00[4];
+//     struct Sprite *sprite = &gSprites[spriteId];
+//     sp00[0] = gSprites[spriteId].oam.tileNum;
+//     sp00[1] = gSprites[sprite->data[0]].oam.tileNum;
+//     sp00[2] = gSprites[sprite->data[1]].oam.tileNum;
+//     sp00[3] = gSprites[sprite->data[2]].oam.tileNum;
 
-    for (i = 0; i < 4; i++)
-    {
-        DmaFill32(3, 0, BG_CHAR_ADDR(4) + 32 * sp00[i], 0x400);
-    }
+//     for (i = 0; i < 4; i++)
+//     {
+//         DmaClear32(3, (void *)VRAM + 0x10000 + 32 * sp00[i], 0x400);
+//     }
 
-    width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
-    displayedStringBattle = gDisplayedStringBattle;
-    displayedStringBattle = StringCopy(displayedStringBattle, gUnknown_083D17E2);
-    if ((~width + 1) & 7)
-    {
-        displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
-        displayedStringBattle[1] = 0x11;
-        displayedStringBattle[2] = ((~width + 1) & 7) / 2;
-        displayedStringBattle += 3;
-    }
-    width = (width + 7) & (~8);
-    displayedStringBattle = StringCopy(displayedStringBattle, string);
+//     width = Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7278, string);
+//     displayedStringBattle = gDisplayedStringBattle;
+//     displayedStringBattle = StringCopy(displayedStringBattle, gUnknown_083D17E2);
+//     if ((~width + 1) & 7)
+//     {
+//         displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+//         displayedStringBattle[1] = 0x11;
+//         displayedStringBattle[2] = ((~width + 1) & 7) / 2;
+//         displayedStringBattle += 3;
+//     }
 
-    displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
-    displayedStringBattle[1] = 0x13;
-    displayedStringBattle[2] = width;
-    displayedStringBattle[3] = EOS;
+//     width += -8 & (width + 7);
+//     displayedStringBattle = StringCopy(displayedStringBattle, string);
 
-    sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
+//     displayedStringBattle[0] = EXT_CTRL_CODE_BEGIN;
+//     displayedStringBattle[1] = 0x13;
+//     displayedStringBattle[2] = width;
+//     displayedStringBattle[3] = EOS;
 
-    CpuCopy32(gUnknown_083D1624, BG_CHAR_ADDR(4) + 32 * sp00[0], 32);
-    CpuCopy32(gUnknown_083D1624 + 0x40, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x100, 32);
-    CpuCopy32(gUnknown_083D1624 + 0x40, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x200, 32);
-    CpuCopy32(gUnknown_083D1624 + 0x20, BG_CHAR_ADDR(4) + 32 * sp00[0] + 0x300, 32);
+//     sub_80034D4(eContestLink80C2020Struct2018068, gDisplayedStringBattle);
 
-    for (i = 0; i < width / 8; i++)
-    {
-        if (i < 7)
-            dest = (void *)VRAM + 0x10020 + 32 * sp00[0] + 32 * i;
-        else if (i < 15)
-            dest = (void *)VRAM + 0x0FF20 + 32 * sp00[0] + 32 * i;
-        else if (i < 23)
-            dest = (void *)VRAM + 0x0FE20 + 32 * sp00[0] + 32 * i;
-        else
-            dest = (void *)VRAM + 0x0FD20 + 32 * sp00[0] + 32 * i;
+//     CpuSet(&gUnknown_083D1624[0x0], (void *)0x6010000 + 32 * sp00[0], 0x4000008);
+//     CpuSet(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x100, 0x4000008);
+//     CpuSet(&gUnknown_083D1624[0x40], (void *)0x6010000 + 32 * sp00[0] + 0x200, 0x4000008);
+//     CpuSet(&gUnknown_083D1624[0x20], (void *)0x6010000 + 32 * sp00[0] + 0x300, 0x4000008);
 
-        if (i != width / 8)
-        {
-            CpuCopy32(gUnknown_083D16E4, dest, 32);
-            CpuCopy32(gUnknown_083D16E4 + 0x10, dest + 0x300, 32);
-            CpuCopy32(eContestLink80C2020Struct2018068 + 0x40 * i, dest + 0x100, 32);
-            CpuCopy32(eContestLink80C2020Struct2018068 + 0x20 + 0x40 * i, dest + 0x200, 32);
-        }
-    }
+//     w = width / 8;
+//     j = 0;
+//     if (j <= w)
+//     {
+//         d2 = eContestLink80C2020Struct2018068 + 0x20;
+//         d1 = eContestLink80C2020Struct2018068;
+//         d3 = (void *)VRAM + 0x0FD20;
+//         d4 = (void *)VRAM + 0x0FE20;
+//         d5 = (void *)VRAM + 0x0FF20;
+//         d6 = (void *)VRAM + 0x10020;
+//         while (j <= w)
+//         {
+//             if (j < 7)
+//                 dest = 32 * sp00[0] + d6;
+//             else if (j < 15)
+//                 dest = 32 * sp00[1] + d5;
+//             else if (j < 23)
+//                 dest = 32 * sp00[2] + d4;
+//             else
+//                 dest = 32 * sp00[3] + d3;
 
-    CpuCopy32(gUnknown_083D1644, dest, 32);
-    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x100, 32);
-    CpuCopy32(gUnknown_083D1644 + 0x40, dest + 0x200, 32);
-    CpuCopy32(gUnknown_083D1644 + 0x20, dest + 0x300, 32);
-}
+//             if (j == w)
+//                 break;
+
+//             CpuSet(gUnknown_083D16E4, dest, 0x4000008);
+//             CpuSet(gUnknown_083D16E4 + 0x10, dest + 0x300, 0x4000008);
+//             CpuSet(j * 0x40 + d2, dest + 0x100, 0x4000008);
+//             CpuSet(j * 0x40 + d1, dest + 0x200, 0x4000008);
+
+//             d3 += 0x20;
+//             d4 += 0x20;
+//             d5 += 0x20;
+//             d6 += 0x20;
+//             j++;
+//         }
+//     }
+
+//     CpuSet(gUnknown_083D1644, dest, 0x4000008);
+//     CpuSet(gUnknown_083D1644 + 0x40, dest + 0x100, 0x4000008);
+//     CpuSet(gUnknown_083D1644 + 0x40, dest + 0x200, 0x4000008);
+//     CpuSet(gUnknown_083D1644 + 0x20, dest + 0x300, 0x4000008);
+// }

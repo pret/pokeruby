@@ -23,7 +23,7 @@ void sub_80CE7E0(u8 taskId)
     u16 r3;
     u16 r4;
     struct Task* task = &gTasks[taskId];
-    task->data[0] = GetAnimBankSpriteId(0);
+    task->data[0] = GetAnimBattlerSpriteId(0);
     task->data[1] = AllocSpritePalette(0x2771);
     r3 = (task->data[1] * 16) + 0x100;
     r4 = (gSprites[task->data[0]].oam.paletteNum + 16) << 4;
@@ -32,7 +32,7 @@ void sub_80CE7E0(u8 taskId)
         gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
     }
 
-    BlendPalette(r3, 16, 11, 0);
+    BlendPalette(r3, 16, 11, RGB(0, 0, 0));
     task->data[3] = 0;
     i = 0;
     while (i <= 1 && (obj = duplicate_obj_of_side_rel2move_in_transparent_mode(0)) >= 0)
@@ -47,7 +47,7 @@ void sub_80CE7E0(u8 taskId)
     }
 
     task->func = sub_80CE910;
-    if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+    if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
     {
         REG_DISPCNT &= 0xFDFF;
     }
@@ -62,7 +62,7 @@ void sub_80CE910(u8 taskId)
     struct Task* task = &gTasks[taskId];
     if (!task->data[3])
     {
-        if (GetBankIdentity_permutated(gAnimBankAttacker) == 1)
+        if (GetBattlerPosition_permutated(gAnimBankAttacker) == 1)
             REG_DISPCNT |= 0x200;
         else
             REG_DISPCNT |= 0x400;

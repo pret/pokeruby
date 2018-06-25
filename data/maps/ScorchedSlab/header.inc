@@ -1,9 +1,9 @@
 ScorchedSlab:: @ 830756C
-	.4byte ScorchedSlab_MapAttributes
+	.4byte ScorchedSlab_Layout
 	.4byte ScorchedSlab_MapEvents
 	.4byte ScorchedSlab_MapScripts
 	.4byte 0x0
-	.2byte BGM_DAN01
+	.2byte MUS_DAN01
 	.2byte 312
 	.byte 80
 	.byte 0

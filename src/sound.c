@@ -44,18 +44,18 @@ extern struct ToneData voicegroup_84549C0[];
 
 static const struct Fanfare sFanfares[] =
 {
-    { BGM_FANFA1,      80 },
-    { BGM_FANFA4,     160 },
-    { BGM_FANFA5,     220 },
-    { BGM_ME_WAZA,    220 },
-    { BGM_ME_ASA,     160 },
-    { BGM_ME_BACHI,   340 },
-    { BGM_ME_WASURE,  180 },
-    { BGM_ME_KINOMI,  120 },
-    { BGM_ME_TAMA,    710 },
-    { BGM_ME_B_BIG,   250 },
-    { BGM_ME_B_SMALL, 150 },
-    { BGM_ME_ZANNEN,  160 },
+    { MUS_FANFA1,      80 },
+    { MUS_FANFA4,     160 },
+    { MUS_FANFA5,     220 },
+    { MUS_ME_WAZA,    220 },
+    { MUS_ME_ASA,     160 },
+    { MUS_ME_BACHI,   340 },
+    { MUS_ME_WASURE,  180 },
+    { MUS_ME_KINOMI,  120 },
+    { MUS_ME_TAMA,    710 },
+    { MUS_ME_B_BIG,   250 },
+    { MUS_ME_B_SMALL, 150 },
+    { MUS_ME_ZANNEN,  160 },
 };
 
 static void Task_Fanfare(u8 taskId);

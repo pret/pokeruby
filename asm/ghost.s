@@ -7,1111 +7,6 @@
 
 	@ ghost
 
-	thumb_func_start sub_80DDB6C
-sub_80DDB6C: @ 80DDB6C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl InitAnimSpritePos
-	ldr r0, _080DDBC8 @ =gBattleAnimArgs
-	ldrh r0, [r0, 0x4]
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x20]
-	strh r0, [r4, 0x30]
-	ldr r5, _080DDBCC @ =gAnimBankTarget
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x32]
-	ldrh r0, [r4, 0x22]
-	strh r0, [r4, 0x34]
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x36]
-	adds r0, r4, 0
-	bl sub_8078BD4
-	ldr r0, _080DDBD0 @ =sub_80DDBD8
-	str r0, [r4, 0x1C]
-	movs r0, 0x10
-	strh r0, [r4, 0x3A]
-	ldr r1, _080DDBD4 @ =REG_BLDCNT
-	movs r2, 0xFD
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	ldrh r0, [r4, 0x3A]
-	strh r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDBC8: .4byte gBattleAnimArgs
-_080DDBCC: .4byte gAnimBankTarget
-_080DDBD0: .4byte sub_80DDBD8
-_080DDBD4: .4byte REG_BLDCNT
-	thumb_func_end sub_80DDB6C
-
-	thumb_func_start sub_80DDBD8
-sub_80DDBD8: @ 80DDBD8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_80DDCC8
-	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DDBF8
-	ldr r0, _080DDBF4 @ =sub_80DDC4C
-	str r0, [r4, 0x1C]
-	b _080DDC42
-	.align 2, 0
-_080DDBF4: .4byte sub_80DDC4C
-_080DDBF8:
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xA
-	bl Sin
-	ldrh r1, [r4, 0x24]
-	adds r0, r1
-	strh r0, [r4, 0x24]
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xF
-	bl Cos
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r2, [r4, 0x38]
-	adds r0, r2, 0x5
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x38]
-	ldrh r0, [r4, 0x38]
-	lsls r2, 16
-	asrs r2, 16
-	cmp r2, 0
-	beq _080DDC30
-	cmp r2, 0xC4
-	ble _080DDC42
-_080DDC30:
-	lsls r0, 16
-	cmp r0, 0
-	ble _080DDC42
-	ldr r0, _080DDC48 @ =gUnknown_0202F7D2
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	movs r0, 0xC4
-	bl PlaySE12WithPanning
-_080DDC42:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDC48: .4byte gUnknown_0202F7D2
-	thumb_func_end sub_80DDBD8
-
-	thumb_func_start sub_80DDC4C
-sub_80DDC4C: @ 80DDC4C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x1
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xA
-	bl Sin
-	ldrh r1, [r4, 0x24]
-	adds r0, r1
-	strh r0, [r4, 0x24]
-	movs r1, 0x38
-	ldrsh r0, [r4, r1]
-	movs r1, 0xF
-	bl Cos
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r2, [r4, 0x38]
-	adds r0, r2, 0x5
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x38]
-	ldrh r0, [r4, 0x38]
-	lsls r2, 16
-	asrs r2, 16
-	cmp r2, 0
-	beq _080DDC92
-	cmp r2, 0xC4
-	ble _080DDC9E
-_080DDC92:
-	lsls r0, 16
-	cmp r0, 0
-	ble _080DDC9E
-	movs r0, 0xC4
-	bl PlaySE
-_080DDC9E:
-	movs r1, 0x3A
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _080DDCBC
-	adds r2, r4, 0
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r0, _080DDCB8 @ =sub_807861C
-	str r0, [r4, 0x1C]
-	b _080DDCC2
-	.align 2, 0
-_080DDCB8: .4byte sub_807861C
-_080DDCBC:
-	adds r0, r4, 0
-	bl sub_80DDCC8
-_080DDCC2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DDC4C
-
-	thumb_func_start sub_80DDCC8
-sub_80DDCC8: @ 80DDCC8
-	push {r4,lr}
-	adds r3, r0, 0
-	ldrh r2, [r3, 0x3A]
-	movs r1, 0x3A
-	ldrsh r0, [r3, r1]
-	cmp r0, 0xFF
-	ble _080DDCEC
-	adds r0, r2, 0x1
-	strh r0, [r3, 0x3A]
-	lsls r0, 16
-	ldr r1, _080DDCE8 @ =0x010d0000
-	cmp r0, r1
-	bne _080DDD4C
-	movs r0, 0
-	b _080DDD4A
-	.align 2, 0
-_080DDCE8: .4byte 0x010d0000
-_080DDCEC:
-	ldrh r1, [r3, 0x3C]
-	adds r4, r1, 0x1
-	strh r4, [r3, 0x3C]
-	movs r0, 0xFF
-	ands r0, r1
-	cmp r0, 0
-	bne _080DDD4C
-	ldr r1, _080DDD10 @ =0xffffff00
-	ands r1, r4
-	strh r1, [r3, 0x3C]
-	movs r0, 0x80
-	lsls r0, 1
-	ands r0, r1
-	cmp r0, 0
-	beq _080DDD14
-	adds r0, r2, 0x1
-	b _080DDD16
-	.align 2, 0
-_080DDD10: .4byte 0xffffff00
-_080DDD14:
-	subs r0, r2, 0x1
-_080DDD16:
-	strh r0, [r3, 0x3A]
-	ldr r2, _080DDD54 @ =REG_BLDALPHA
-	ldrh r1, [r3, 0x3A]
-	movs r0, 0x10
-	subs r0, r1
-	lsls r0, 8
-	orrs r0, r1
-	strh r0, [r2]
-	movs r2, 0x3A
-	ldrsh r0, [r3, r2]
-	cmp r0, 0
-	beq _080DDD32
-	cmp r0, 0x10
-	bne _080DDD3E
-_080DDD32:
-	ldrh r0, [r3, 0x3C]
-	movs r2, 0x80
-	lsls r2, 1
-	adds r1, r2, 0
-	eors r0, r1
-	strh r0, [r3, 0x3C]
-_080DDD3E:
-	movs r1, 0x3A
-	ldrsh r0, [r3, r1]
-	cmp r0, 0
-	bne _080DDD4C
-	movs r0, 0x80
-	lsls r0, 1
-_080DDD4A:
-	strh r0, [r3, 0x3A]
-_080DDD4C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDD54: .4byte REG_BLDALPHA
-	thumb_func_end sub_80DDCC8
-
-	thumb_func_start sub_80DDD58
-sub_80DDD58: @ 80DDD58
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl sub_8078764
-	ldr r1, _080DDD74 @ =sub_80DDD78
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDD74: .4byte sub_80DDD78
-	thumb_func_end sub_80DDD58
-
-	thumb_func_start sub_80DDD78
-sub_80DDD78: @ 80DDD78
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r1, 0x20
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x2E
-	ldrsh r0, [r4, r1]
-	movs r1, 0x8
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x2E]
-	subs r0, 0x41
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x82
-	bhi _080DDDAC
-	ldrb r0, [r4, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x8
-	b _080DDDB6
-_080DDDAC:
-	ldrb r0, [r4, 0x5]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	movs r0, 0x4
-_080DDDB6:
-	orrs r1, r0
-	strb r1, [r4, 0x5]
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0x13
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r4, 0x32]
-	adds r0, 0x50
-	strh r0, [r4, 0x32]
-	lsls r0, 16
-	asrs r0, 24
-	ldrh r1, [r4, 0x26]
-	adds r0, r1
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x3C]
-	adds r0, 0x1
-	strh r0, [r4, 0x3C]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3D
-	bne _080DDDE8
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DDDE8:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DDD78
-
-	thumb_func_start sub_80DDDF0
-sub_80DDDF0: @ 80DDDF0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r1, _080DDE68 @ =REG_BLDCNT
-	movs r2, 0xFD
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r2, 0x80
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r0, 0
-	bl GetAnimBankSpriteId
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_8078E70
-	adds r0, r4, 0
-	movs r1, 0x80
-	movs r2, 0x80
-	movs r3, 0
-	bl obj_id_set_rotscale
-	ldr r1, _080DDE6C @ =gSprites
-	lsls r0, r4, 4
-	adds r0, r4
-	lsls r0, 2
-	adds r0, r1
-	adds r0, 0x3E
-	ldrb r2, [r0]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r0]
-	ldr r1, _080DDE70 @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r2, 0
-	movs r1, 0x80
-	strh r1, [r0, 0x8]
-	ldr r1, _080DDE74 @ =gBattleAnimArgs
-	ldrh r1, [r1]
-	strh r1, [r0, 0xA]
-	strh r2, [r0, 0xC]
-	movs r1, 0x10
-	strh r1, [r0, 0xE]
-	ldr r1, _080DDE78 @ =sub_80DDE7C
-	str r1, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDE68: .4byte REG_BLDCNT
-_080DDE6C: .4byte gSprites
-_080DDE70: .4byte gTasks
-_080DDE74: .4byte gBattleAnimArgs
-_080DDE78: .4byte sub_80DDE7C
-	thumb_func_end sub_80DDDF0
-
-	thumb_func_start sub_80DDE7C
-sub_80DDE7C: @ 80DDE7C
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _080DDEC4 @ =gTasks
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, r1, r2
-	ldrh r0, [r3, 0x1C]
-	adds r0, 0x1
-	strh r0, [r3, 0x1C]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x3
-	bne _080DDEBE
-	movs r0, 0
-	strh r0, [r3, 0x1C]
-	ldrh r1, [r3, 0xC]
-	adds r1, 0x1
-	strh r1, [r3, 0xC]
-	ldrh r0, [r3, 0xE]
-	subs r0, 0x1
-	strh r0, [r3, 0xE]
-	ldr r2, _080DDEC8 @ =REG_BLDALPHA
-	lsls r0, 8
-	orrs r1, r0
-	strh r1, [r2]
-	movs r1, 0xC
-	ldrsh r0, [r3, r1]
-	cmp r0, 0x9
-	bne _080DDEBE
-	ldr r0, _080DDECC @ =sub_80DDED0
-	str r0, [r3]
-_080DDEBE:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDEC4: .4byte gTasks
-_080DDEC8: .4byte REG_BLDALPHA
-_080DDECC: .4byte sub_80DDED0
-	thumb_func_end sub_80DDE7C
-
-	thumb_func_start sub_80DDED0
-sub_80DDED0: @ 80DDED0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r5, r0, 0
-	ldr r1, _080DDEF4 @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	ldrh r1, [r4, 0xA]
-	movs r2, 0xA
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080DDEF8
-	subs r0, r1, 0x1
-	strh r0, [r4, 0xA]
-	b _080DDF36
-	.align 2, 0
-_080DDEF4: .4byte gTasks
-_080DDEF8:
-	movs r0, 0
-	bl GetAnimBankSpriteId
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldrh r0, [r4, 0x8]
-	adds r0, 0x8
-	movs r6, 0
-	strh r0, [r4, 0x8]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0xFF
-	bgt _080DDF22
-	movs r0, 0x8
-	ldrsh r2, [r4, r0]
-	adds r0, r1, 0
-	adds r1, r2, 0
-	movs r3, 0
-	bl obj_id_set_rotscale
-	b _080DDF36
-_080DDF22:
-	adds r0, r1, 0
-	bl sub_8078F40
-	adds r0, r5, 0
-	bl DestroyAnimVisualTask
-	ldr r0, _080DDF3C @ =REG_BLDCNT
-	strh r6, [r0]
-	adds r0, 0x2
-	strh r6, [r0]
-_080DDF36:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDF3C: .4byte REG_BLDCNT
-	thumb_func_end sub_80DDED0
-
-	thumb_func_start sub_80DDF40
-sub_80DDF40: @ 80DDF40
-	push {r4-r6,lr}
-	mov r6, r9
-	mov r5, r8
-	push {r5,r6}
-	sub sp, 0x4
-	adds r4, r0, 0
-	ldrh r5, [r4, 0x20]
-	ldrh r6, [r4, 0x22]
-	ldr r0, _080DDFDC @ =gAnimBankAttacker
-	mov r8, r0
-	ldrb r0, [r0]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0
-	mov r9, r1
-	strh r0, [r4, 0x20]
-	mov r1, r8
-	ldrb r0, [r1]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0x22]
-	mov r1, r9
-	strh r1, [r4, 0x2E]
-	ldr r2, _080DDFE0 @ =gBattleAnimArgs
-	ldrh r1, [r2]
-	strh r1, [r4, 0x30]
-	ldrh r1, [r2, 0x2]
-	strh r1, [r4, 0x32]
-	ldrh r1, [r2, 0x4]
-	strh r1, [r4, 0x34]
-	ldrh r1, [r4, 0x20]
-	lsls r1, 4
-	strh r1, [r4, 0x36]
-	lsls r0, 4
-	strh r0, [r4, 0x38]
-	lsls r5, 16
-	asrs r5, 16
-	movs r1, 0x20
-	ldrsh r0, [r4, r1]
-	subs r5, r0
-	lsls r5, 4
-	movs r0, 0
-	ldrsh r1, [r2, r0]
-	lsls r1, 1
-	adds r0, r5, 0
-	str r2, [sp]
-	bl __divsi3
-	strh r0, [r4, 0x3A]
-	lsls r6, 16
-	asrs r6, 16
-	movs r1, 0x22
-	ldrsh r0, [r4, r1]
-	subs r6, r0
-	lsls r6, 4
-	ldr r2, [sp]
-	movs r0, 0
-	ldrsh r1, [r2, r0]
-	lsls r1, 1
-	adds r0, r6, 0
-	bl __divsi3
-	strh r0, [r4, 0x3C]
-	ldr r0, _080DDFE4 @ =sub_80DDFE8
-	str r0, [r4, 0x1C]
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DDFDC: .4byte gAnimBankAttacker
-_080DDFE0: .4byte gBattleAnimArgs
-_080DDFE4: .4byte sub_80DDFE8
-	thumb_func_end sub_80DDF40
-
-	thumb_func_start sub_80DDFE8
-sub_80DDFE8: @ 80DDFE8
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r1, 0x2E
-	ldrsh r0, [r5, r1]
-	cmp r0, 0x1
-	beq _080DE032
-	cmp r0, 0x1
-	bgt _080DDFFE
-	cmp r0, 0
-	beq _080DE008
-	b _080DE0F6
-_080DDFFE:
-	cmp r0, 0x2
-	beq _080DE09C
-	cmp r0, 0x3
-	beq _080DE0F0
-	b _080DE0F6
-_080DE008:
-	ldrh r0, [r5, 0x3A]
-	ldrh r2, [r5, 0x36]
-	adds r0, r2
-	strh r0, [r5, 0x36]
-	ldrh r1, [r5, 0x3C]
-	ldrh r2, [r5, 0x38]
-	adds r1, r2
-	strh r1, [r5, 0x38]
-	lsls r0, 16
-	asrs r0, 20
-	strh r0, [r5, 0x20]
-	lsls r1, 16
-	asrs r1, 20
-	strh r1, [r5, 0x22]
-	ldrh r0, [r5, 0x30]
-	subs r0, 0x1
-	strh r0, [r5, 0x30]
-	lsls r0, 16
-	cmp r0, 0
-	bgt _080DE0F6
-	b _080DE0E2
-_080DE032:
-	ldrh r0, [r5, 0x32]
-	subs r0, 0x1
-	strh r0, [r5, 0x32]
-	lsls r0, 16
-	cmp r0, 0
-	bgt _080DE0F6
-	ldr r4, _080DE098 @ =gAnimBankTarget
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x30]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x32]
-	ldrh r0, [r5, 0x20]
-	lsls r0, 4
-	strh r0, [r5, 0x36]
-	ldrh r0, [r5, 0x22]
-	lsls r0, 4
-	strh r0, [r5, 0x38]
-	movs r1, 0x30
-	ldrsh r0, [r5, r1]
-	movs r2, 0x20
-	ldrsh r1, [r5, r2]
-	subs r0, r1
-	lsls r0, 4
-	movs r2, 0x34
-	ldrsh r1, [r5, r2]
-	bl __divsi3
-	strh r0, [r5, 0x3A]
-	movs r1, 0x32
-	ldrsh r0, [r5, r1]
-	movs r2, 0x22
-	ldrsh r1, [r5, r2]
-	subs r0, r1
-	lsls r0, 4
-	movs r2, 0x34
-	ldrsh r1, [r5, r2]
-	bl __divsi3
-	strh r0, [r5, 0x3C]
-	b _080DE0E2
-	.align 2, 0
-_080DE098: .4byte gAnimBankTarget
-_080DE09C:
-	ldrh r0, [r5, 0x3A]
-	ldrh r1, [r5, 0x36]
-	adds r0, r1
-	strh r0, [r5, 0x36]
-	ldrh r1, [r5, 0x3C]
-	ldrh r2, [r5, 0x38]
-	adds r1, r2
-	strh r1, [r5, 0x38]
-	lsls r0, 16
-	asrs r0, 20
-	strh r0, [r5, 0x20]
-	lsls r1, 16
-	asrs r1, 20
-	strh r1, [r5, 0x22]
-	ldrh r0, [r5, 0x34]
-	subs r0, 0x1
-	strh r0, [r5, 0x34]
-	lsls r0, 16
-	cmp r0, 0
-	bgt _080DE0F6
-	ldr r4, _080DE0EC @ =gAnimBankTarget
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x20]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x22]
-_080DE0E2:
-	ldrh r0, [r5, 0x2E]
-	adds r0, 0x1
-	strh r0, [r5, 0x2E]
-	b _080DE0F6
-	.align 2, 0
-_080DE0EC: .4byte gAnimBankTarget
-_080DE0F0:
-	adds r0, r5, 0
-	bl move_anim_8074EE0
-_080DE0F6:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DDFE8
-
-	thumb_func_start sub_80DE0FC
-sub_80DE0FC: @ 80DE0FC
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl sub_8078764
-	ldr r0, _080DE110 @ =sub_80DE114
-	str r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DE110: .4byte sub_80DE114
-	thumb_func_end sub_80DE0FC
-
-	thumb_func_start sub_80DE114
-sub_80DE114: @ 80DE114
-	push {r4-r6,lr}
-	adds r3, r0, 0
-	movs r5, 0
-	movs r6, 0
-	adds r0, 0x3F
-	ldrb r1, [r0]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _080DE1AA
-	adds r1, r3, 0
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	movs r0, 0x4
-	ands r0, r2
-	adds r4, r1, 0
-	cmp r0, 0
-	bne _080DE13E
-	movs r0, 0x4
-	orrs r0, r2
-	strb r0, [r4]
-_080DE13E:
-	movs r1, 0x2E
-	ldrsh r0, [r3, r1]
-	cmp r0, 0
-	beq _080DE14E
-	cmp r0, 0x1
-	beq _080DE158
-	movs r6, 0x1
-	b _080DE162
-_080DE14E:
-	movs r1, 0x30
-	ldrsh r0, [r3, r1]
-	cmp r0, 0x2
-	bne _080DE162
-	b _080DE166
-_080DE158:
-	movs r1, 0x30
-	ldrsh r0, [r3, r1]
-	cmp r0, 0x4
-	bne _080DE162
-	movs r5, 0x1
-_080DE162:
-	cmp r5, 0
-	beq _080DE198
-_080DE166:
-	ldrb r2, [r4]
-	lsls r0, r2, 29
-	lsrs r0, 31
-	movs r1, 0x1
-	eors r1, r0
-	lsls r1, 2
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r4]
-	ldrh r0, [r3, 0x32]
-	adds r0, 0x1
-	movs r1, 0
-	strh r0, [r3, 0x32]
-	strh r1, [r3, 0x30]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x5
-	bne _080DE1AA
-	strh r1, [r3, 0x32]
-	ldrh r0, [r3, 0x2E]
-	adds r0, 0x1
-	strh r0, [r3, 0x2E]
-	b _080DE1AA
-_080DE198:
-	cmp r6, 0
-	beq _080DE1A4
-	adds r0, r3, 0
-	bl DestroyAnimSprite
-	b _080DE1AA
-_080DE1A4:
-	ldrh r0, [r3, 0x30]
-	adds r0, 0x1
-	strh r0, [r3, 0x30]
-_080DE1AA:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DE114
-
-	thumb_func_start sub_80DE1B0
-sub_80DE1B0: @ 80DE1B0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	ldr r1, _080DE1DC @ =gTasks
-	adds r5, r0, r1
-	movs r0, 0x1
-	bl duplicate_obj_of_side_rel2move_in_transparent_mode
-	movs r6, 0
-	movs r1, 0
-	strh r0, [r5, 0x8]
-	lsls r0, 16
-	cmp r0, 0
-	bge _080DE1E0
-	adds r0, r4, 0
-	bl DestroyAnimVisualTask
-	b _080DE2C0
-	.align 2, 0
-_080DE1DC: .4byte gTasks
-_080DE1E0:
-	strh r1, [r5, 0xA]
-	movs r0, 0xF
-	strh r0, [r5, 0xC]
-	movs r0, 0x2
-	strh r0, [r5, 0xE]
-	strh r1, [r5, 0x10]
-	ldr r1, _080DE244 @ =REG_BLDCNT
-	movs r2, 0xFD
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r2, _080DE248 @ =REG_BLDALPHA
-	ldrh r0, [r5, 0xE]
-	lsls r0, 8
-	ldrh r1, [r5, 0xC]
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r4, _080DE24C @ =gSprites
-	movs r0, 0x8
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x50
-	strh r1, [r0, 0x2E]
-	ldr r0, _080DE250 @ =gAnimBankTarget
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _080DE258
-	movs r2, 0x8
-	ldrsh r1, [r5, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldr r1, _080DE254 @ =0x0000ff70
-	strh r1, [r0, 0x30]
-	movs r0, 0x8
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x70
-	b _080DE276
-	.align 2, 0
-_080DE244: .4byte REG_BLDCNT
-_080DE248: .4byte REG_BLDALPHA
-_080DE24C: .4byte gSprites
-_080DE250: .4byte gAnimBankTarget
-_080DE254: .4byte 0x0000ff70
-_080DE258:
-	movs r2, 0x8
-	ldrsh r1, [r5, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x90
-	strh r1, [r0, 0x30]
-	movs r0, 0x8
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldr r1, _080DE2C8 @ =0x0000ff90
-_080DE276:
-	strh r1, [r0, 0x32]
-	ldr r4, _080DE2CC @ =gSprites
-	movs r2, 0x8
-	ldrsh r1, [r5, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r2, 0
-	strh r2, [r0, 0x34]
-	movs r0, 0x8
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	strh r2, [r0, 0x36]
-	movs r2, 0x8
-	ldrsh r1, [r5, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldr r1, _080DE2D0 @ =SpriteCallbackDummy
-	bl StoreSpriteCallbackInData
-	movs r0, 0x8
-	ldrsh r1, [r5, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r4, 0x1C
-	adds r0, r4
-	ldr r1, _080DE2D4 @ =sub_8078394
-	str r1, [r0]
-	ldr r0, _080DE2D8 @ =sub_80DE2DC
-	str r0, [r5]
-_080DE2C0:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DE2C8: .4byte 0x0000ff90
-_080DE2CC: .4byte gSprites
-_080DE2D0: .4byte SpriteCallbackDummy
-_080DE2D4: .4byte sub_8078394
-_080DE2D8: .4byte sub_80DE2DC
-	thumb_func_end sub_80DE1B0
-
-	thumb_func_start sub_80DE2DC
-sub_80DE2DC: @ 80DE2DC
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	ldr r1, _080DE300 @ =gTasks
-	adds r4, r0, r1
-	movs r1, 0x10
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x1
-	beq _080DE37C
-	cmp r0, 0x1
-	bgt _080DE304
-	cmp r0, 0
-	beq _080DE30A
-	b _080DE3A6
-	.align 2, 0
-_080DE300: .4byte gTasks
-_080DE304:
-	cmp r0, 0x2
-	beq _080DE3A0
-	b _080DE3A6
-_080DE30A:
-	ldrh r1, [r4, 0xA]
-	adds r1, 0x1
-	strh r1, [r4, 0xA]
-	movs r0, 0x3
-	ands r0, r1
-	strh r0, [r4, 0x12]
-	cmp r0, 0x1
-	bne _080DE328
-	ldrh r1, [r4, 0xC]
-	movs r2, 0xC
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	ble _080DE328
-	subs r0, r1, 0x1
-	strh r0, [r4, 0xC]
-_080DE328:
-	movs r1, 0x12
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x3
-	bne _080DE33E
-	ldrh r1, [r4, 0xE]
-	movs r2, 0xE
-	ldrsh r0, [r4, r2]
-	cmp r0, 0xF
-	bgt _080DE33E
-	adds r0, r1, 0x1
-	strh r0, [r4, 0xE]
-_080DE33E:
-	ldr r2, _080DE374 @ =REG_BLDALPHA
-	ldrh r0, [r4, 0xE]
-	lsls r0, 8
-	ldrh r1, [r4, 0xC]
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r1, [r4, 0xC]
-	movs r0, 0x80
-	lsls r0, 13
-	cmp r1, r0
-	bne _080DE3A6
-	movs r1, 0xA
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x50
-	ble _080DE3A6
-	movs r2, 0x8
-	ldrsh r1, [r4, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, _080DE378 @ =gSprites
-	adds r0, r1
-	bl obj_delete_but_dont_free_vram
-	movs r0, 0x1
-	strh r0, [r4, 0x10]
-	b _080DE3A6
-	.align 2, 0
-_080DE374: .4byte REG_BLDALPHA
-_080DE378: .4byte gSprites
-_080DE37C:
-	ldrh r0, [r4, 0x14]
-	adds r0, 0x1
-	movs r1, 0
-	strh r0, [r4, 0x14]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x1
-	ble _080DE3A6
-	ldr r0, _080DE39C @ =REG_BLDCNT
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	ldrh r0, [r4, 0x10]
-	adds r0, 0x1
-	strh r0, [r4, 0x10]
-	b _080DE3A6
-	.align 2, 0
-_080DE39C: .4byte REG_BLDCNT
-_080DE3A0:
-	adds r0, r2, 0
-	bl DestroyAnimVisualTask
-_080DE3A6:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DE2DC
-
-	thumb_func_start sub_80DE3AC
-sub_80DE3AC: @ 80DE3AC
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r2, _080DE3CC @ =gTasks
-	adds r1, r2
-	movs r2, 0
-	strh r2, [r1, 0x26]
-	ldr r2, _080DE3D0 @ =sub_80DE3D4
-	str r2, [r1]
-	bl _call_via_r2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DE3CC: .4byte gTasks
-_080DE3D0: .4byte sub_80DE3D4
-	thumb_func_end sub_80DE3AC
-
 	thumb_func_start sub_80DE3D4
 sub_80DE3D4: @ 80DE3D4
 	push {r4-r7,lr}
@@ -1127,7 +22,7 @@ sub_80DE3D4: @ 80DE3D4
 	adds r5, r0, r1
 	ldr r0, _080DE410 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26
@@ -1219,7 +114,7 @@ _080DE464:
 	movs r0, 0x10
 	strh r0, [r5, 0xE]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -1487,7 +382,7 @@ sub_80DE6B0: @ 80DE6B0
 	adds r4, r0, r1
 	ldr r0, _080DE6E4 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankIdentity_permutated
+	bl GetBattlerPosition_permutated
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0x26
@@ -1511,7 +406,7 @@ _080DE6EE:
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -1620,12 +515,12 @@ sub_80DE7B8: @ 80DE7B8
 	ldr r4, _080DE7F8 @ =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -1642,12 +537,12 @@ _080DE800:
 	ldr r4, _080DE8C8 @ =gAnimBankTarget
 	ldrb r0, [r4]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r2, 0xE0
@@ -1658,13 +553,13 @@ _080DE800:
 _080DE824:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 8
 	movs r1, 0xE0
@@ -1816,7 +711,7 @@ sub_80DE918: @ 80DE918
 	ldr r4, _080DEA74 @ =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -1868,7 +763,7 @@ _080DE98A:
 	beq _080DEA56
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -2261,7 +1156,7 @@ sub_80DECB0: @ 80DECB0
 	strh r0, [r1]
 	ldr r0, _080DED08 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DECF4
@@ -2542,7 +1437,7 @@ sub_80DEF3C: @ 80DEF3C
 	bl InitAnimSpritePos
 	ldr r0, _080DEF68 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DEF70
@@ -2746,7 +1641,7 @@ sub_80DF0B8: @ 80DF0B8
 	strh r0, [r4, 0x24]
 	ldr r0, _080DF120 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DF0DC
@@ -2880,7 +1775,7 @@ sub_80DF1A4: @ 80DF1A4
 	ldr r5, _080DF240 @ =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
@@ -2993,7 +1888,7 @@ _080DF292:
 	strh r7, [r5, 0x2E]
 	ldr r0, _080DF2FC @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0

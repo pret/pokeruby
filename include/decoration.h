@@ -152,9 +152,6 @@ extern const struct YesNoFuncTable gUnknown_083EC9CC;
 extern const struct YesNoFuncTable gUnknown_083EC9D4;
 extern const struct YesNoFuncTable gUnknown_083ECAA0;
 
-extern u8 sub_8134194(u8); // src/decoration_inventory
-extern bool8 sub_81341D4(void); // src/decoration_inventory
-extern void sub_8134104(u8); // src/decoration_inventory
 extern void sub_8109DAC(u8); // src/trader
 extern void ReshowPlayerPC(u8); // src/player_pc
 void Task_SecretBasePC_Decoration(u8);
@@ -175,13 +172,17 @@ void sub_80FE948(u8);
 void sub_80FEABC(u8, u8);
 void sub_80FEC94(u8);
 void sub_80FECB8(u8);
+#ifdef GERMAN
+int sub_80FECE0(u8);
+#else
 void sub_80FECE0(u8);
+#endif
 void sub_80FEF50(u8);
 bool8 sub_80FEFA4(void);
 void sub_80FF394(u16, u16, u16);
 void sub_80FF6AC(u8);
 void sub_80FF960(u8);
-void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 *, u8);
+void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 *, u8);
 void SetUpPlacingDecorationPlayerAvatar(u8, struct UnkStruct_02038900 *);
 void sub_8100038(u8);
 void sub_81000A0(u8);

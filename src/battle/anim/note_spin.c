@@ -7,11 +7,62 @@ extern s16 gBattleAnimArgs[8];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+extern const union AnimCmd *const gSpriteAnimTable_83D70D8[];
+
+void sub_80D2E68(struct Sprite *sprite);
+void sub_80D2EC8(struct Sprite *sprite);
 static void sub_80D2F80(struct Sprite *);
 static void sub_80D2FA4(struct Sprite *);
 
 // note_spin (spins music notes around, and rotates them)
 // Used in Perish Song.
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7CE0[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 5),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7CF0[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, -8, 16),
+    AFFINEANIMCMD_END_ALT(1),
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D7D00[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 8, 16),
+    AFFINEANIMCMD_END_ALT(1),
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7D10[] =
+{
+    gSpriteAffineAnim_83D7CE0,
+    gSpriteAffineAnim_83D7CF0,
+    gSpriteAffineAnim_83D7D00,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D1C =
+{
+    .tileTag = 10206,
+    .paletteTag = 10206,
+    .oam = &gOamData_837DF8C,
+    .anims = gSpriteAnimTable_83D70D8,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D7D10,
+    .callback = sub_80D2EC8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7D34 =
+{
+    .tileTag = 10206,
+    .paletteTag = 10206,
+    .oam = &gOamData_837DF8C,
+    .anims = gSpriteAnimTable_83D70D8,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D7D10,
+    .callback = sub_80D2E68,
+};
 
 void sub_80D2E68(struct Sprite *sprite)
 {

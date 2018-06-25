@@ -9,7 +9,7 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u16 gAnimSpeciesByBanks[];
 extern u8 gUnknown_0202F7D2;
 
@@ -175,10 +175,10 @@ void sub_812B18C(u8 taskId)
             }
         }
 
-        if (GetBankSide(bank))
-            species = GetMonData(&gEnemyParty[gBattlePartyID[bank]], 0xB);
+        if (GetBattlerSide(bank))
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], 0xB);
         else
-            species = GetMonData(&gPlayerParty[gBattlePartyID[bank]], 0xB);
+            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], 0xB);
     }
 
     if (species != 0)

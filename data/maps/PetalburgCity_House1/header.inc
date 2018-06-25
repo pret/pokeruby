@@ -1,9 +1,9 @@
 PetalburgCity_House1:: @ 8305F54
-	.4byte House1_MapAttributes
+	.4byte House1_Layout
 	.4byte PetalburgCity_House1_MapEvents
 	.4byte PetalburgCity_House1_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S2
+	.2byte MUS_MACHI_S2
 	.2byte 59
 	.byte 7
 	.byte 0

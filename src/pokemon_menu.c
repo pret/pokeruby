@@ -6,13 +6,11 @@
 #include "palette.h"
 #include "menu.h"
 #include "mail_data.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "main.h"
 #include "overworld.h"
 #include "menu_helpers.h"
 #include "pokemon_summary_screen.h"
-#include "constants/moves.h"
 #include "data2.h"
 #include "strings.h"
 #include "item_use.h"
@@ -32,6 +30,9 @@
 #include "player_pc.h"
 #include "ewram.h"
 #include "script.h"
+#include "constants/field_effects.h"
+#include "constants/moves.h"
+#include "constants/songs.h"
 
 /*
 Pokemon menu:
@@ -51,7 +52,7 @@ extern u8 gUnknown_020384F0;
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F5;
 extern u8 gUnknown_0202E8F6;
-extern u8 gUnknown_02038561;
+extern u8 gPokemonItemUseType;
 extern u16 gUnknown_0202E8F8;
 extern void (*gPokemonItemUseCallback)(u8 taskID, u16 itemID, TaskFunc func);
 extern TaskFunc gUnknown_03005CF0;
@@ -84,7 +85,7 @@ static void sub_808A848(u8 taskID);
 static void sub_808AAF0(u8 taskID);
 static void sub_808ABF4(u8 taskID);
 static void sub_808AB34(u8 taskID);
-static void sub_808ABA8(u8 taskID);
+static void FieldCallback_AfterFadeInFromMenu(u8 taskID);
 static void sub_808B224(u8 taskID);
 static void sub_808B2EC(u8 taskID);
 static void sub_808B2B4(u8 taskID);
@@ -118,7 +119,7 @@ EWRAM_DATA static u8 sPokeMenuOptionsOrder[8] = {0}; // 4 possible field moves a
 
 // iwram common
 u8 gLastFieldPokeMenuOpened;
-void (*gUnknown_03005CE4)(void);
+void (*gPostMenuFieldCallback)(void);
 
 // const data
 
@@ -267,7 +268,7 @@ void HandleDefaultPartyMenu(u8 taskID)
             break;
         case B_BUTTON:
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gTasks[taskID].func = sub_8089E4C;
             break;
         }
@@ -309,7 +310,7 @@ static void sub_8089E4C(u8 taskID)
     if (!gPaletteFade.active)
     {
         gLastFieldPokeMenuOpened = 0;
-        SetMainCallback2(sub_805469C);
+        SetMainCallback2(c2_exit_to_overworld_1_sub_8080DEC);
         DestroyTask(taskID);
     }
 }
@@ -358,7 +359,7 @@ static void sub_8089F44(u8 taskID)
 
 static void PokemonMenu_Summary(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_8089F44;
 }
 
@@ -439,7 +440,7 @@ static void sub_808A228(u8 taskID)
 {
     if (ItemIsMail(gSpecialVar_ItemId) && gUnknown_0202E8F4 != 0)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskID].func = sub_808A180;
     }
     else
@@ -591,7 +592,7 @@ static void sub_808A604(u8 taskID)
 static void PokemonMenu_GiveItem(u8 taskID)
 {
     gUnknown_0202E8F5 = sub_806CA38(taskID);
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808A604;
 }
 
@@ -657,7 +658,7 @@ static void sub_808A73C(u8 taskID)
 
 static void PokemonMenu_ReadMail(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808A848;
 }
 
@@ -740,7 +741,7 @@ static void PokemonMenu_FieldMove(u8 taskID)
             if (!IS_SOFTBOILED_MILKDRINK(tFieldMoveId))
             {
                 gTasks[taskID].func = sub_808AB34;
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             }
             else
                 sub_8133D28(taskID);
@@ -780,18 +781,18 @@ static void sub_808AB34(u8 taskID)
 
 #undef tFieldMoveId
 
-void FieldCallback_Teleport(void)
+void FieldCallback_PrepareFadeInFromMenu(void)
 {
     pal_fill_black();
-    CreateTask(sub_808ABA8, 8);
+    CreateTask(FieldCallback_AfterFadeInFromMenu, 8);
 }
 
-static void sub_808ABA8(u8 taskID)
+static void FieldCallback_AfterFadeInFromMenu(u8 taskID)
 {
     if (IsWeatherNotFadingIn() == TRUE)
     {
         gFieldEffectArguments[0] = GetMonData(&gPlayerParty[gLastFieldPokeMenuOpened], MON_DATA_SPECIES);
-        gUnknown_03005CE4();
+        gPostMenuFieldCallback();
         DestroyTask(taskID);
     }
 }
@@ -815,8 +816,8 @@ static bool8 SetUpFieldMove_Surf(void)
 {
     if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AC2C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AC2C;
         return TRUE;
     }
     else
@@ -833,14 +834,14 @@ static bool8 SetUpFieldMove_Fly(void)
 {
     if (ShouldDoBrailleFlyEffect())
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = DoBrailleFlyEffect;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = DoBrailleFlyEffect;
         return TRUE;
     }
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AC8C;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AC8C;
         return TRUE;
     }
     return FALSE;
@@ -882,11 +883,11 @@ static void sub_808ADAC(void)
 
 static bool8 SetUpFieldMove_Dive(void)
 {
-    gFieldEffectArguments[1] = sub_8068F18();
+    gFieldEffectArguments[1] = TrySetDiveWarp();
     if (gFieldEffectArguments[1])
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808ADAC;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808ADAC;
         return TRUE;
     }
     else
@@ -907,8 +908,8 @@ static bool8 SetUpFieldMove_Waterfall(void)
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE
      && IsPlayerSurfingNorth() == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_808AE08;
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = sub_808AE08;
         return TRUE;
     }
     else
@@ -943,11 +944,11 @@ static void sub_808AE8C(void)
              gUnknown_020297ED == 0 &&
 #endif
              (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !CanMonLearnTMHM(&gPlayerParty[i], arg)))
-                sub_806BC3C(i, 0x9A);
+                DrawMonDescriptorStatus(i, 0x9A);
             else if (pokemon_has_move(&gPlayerParty[i], ItemIdToBattleMoveId(gSpecialVar_ItemId)))
-                sub_806BC3C(i, 0xA8);
+                DrawMonDescriptorStatus(i, 0xA8);
             else
-                sub_806BC3C(i, 0x8C);
+                DrawMonDescriptorStatus(i, 0x8C);
         }
     }
 }
@@ -962,7 +963,7 @@ static void sub_808AF20(void)
             if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || !GetEvolutionTargetSpecies(&gPlayerParty[i], 3, gSpecialVar_ItemId))
             {
                 sub_806D668(i);
-                sub_806BC3C(i, 0);
+                DrawMonDescriptorStatus(i, 0);
             }
         }
     }
@@ -974,7 +975,7 @@ static void sub_808AF80(void)
     {
         if (InitPartyMenu() == TRUE)
         {
-            if (gUnknown_02038561 == 0)
+            if (gPokemonItemUseType == ITEM_USE_SINGLE_MON)
             {
                 switch (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId))
                 {
@@ -1001,19 +1002,19 @@ static void sub_808AF80(void)
 void sub_808B020(void)
 {
     gPaletteFade.bufferTransferDisabled = 1;
-    switch (gUnknown_02038561)
+    switch (gPokemonItemUseType)
     {
-    case 0:
+    case ITEM_USE_SINGLE_MON:
         if (CheckIfItemIsTMHMOrEvolutionStone(gSpecialVar_ItemId) == 1)
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 20);
         else
             SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 3);
         break;
-    case 4:
+    case ITEM_USE_ALL_MONS:
         SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B1EC, 0xFF);
         break;
-    case 1:
-    case 3:
+    case ITEM_USE_GIVE_ITEM:
+    case ITEM_USE_GIVE_MAIL:
         SetPartyMenuSettings(PARTY_MENU_TYPE_STANDARD, 0, sub_808B0C0, 4);
         break;
     }
@@ -1033,14 +1034,14 @@ void sub_808B0C0(u8 taskID)
             else
             {
                 sub_806D5A4();
-                if (gUnknown_02038561 == 0)
+                if (gPokemonItemUseType == ITEM_USE_SINGLE_MON)
                     gPokemonItemUseCallback(taskID, gSpecialVar_ItemId, sub_808B224);
-                if (gUnknown_02038561 == 1)
+                if (gPokemonItemUseType == ITEM_USE_GIVE_ITEM)
                 {
                     PlaySE(SE_SELECT);
                     PartyMenuTryGiveMonHeldItem(taskID, gSpecialVar_ItemId, sub_808B2EC);
                 }
-                if (gUnknown_02038561 == 3)
+                if (gPokemonItemUseType == ITEM_USE_GIVE_MAIL)
                 {
                     PlaySE(SE_SELECT);
                     PartyMenuTryGiveMonMail(taskID, sub_808B2B4);
@@ -1050,10 +1051,10 @@ void sub_808B0C0(u8 taskID)
         case B_BUTTON:
             gLastFieldPokeMenuOpened = sub_806CA38(taskID);
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-            if (gUnknown_02038561 == 0 || gUnknown_02038561 == 1)
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+            if (gPokemonItemUseType == ITEM_USE_SINGLE_MON || gPokemonItemUseType == ITEM_USE_GIVE_ITEM)
                 gTasks[taskID].func = sub_808B25C;
-            if (gUnknown_02038561 == 3)
+            if (gPokemonItemUseType == ITEM_USE_GIVE_MAIL)
                 gTasks[taskID].func = sub_808B2B4;
             break;
         }
@@ -1068,7 +1069,7 @@ static void sub_808B1EC(u8 taskID)
 
 static void sub_808B224(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808B25C;
 }
 
@@ -1092,7 +1093,7 @@ static void sub_808B288(u8 taskID)
 
 static void sub_808B2B4(u8 taskID)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_808B288;
 }
 
@@ -1100,7 +1101,7 @@ static void sub_808B2EC(u8 taskID)
 {
     if (gUnknown_0202E8F4 == 2)
     {
-        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskID].func = sub_808B338;
     }
     else

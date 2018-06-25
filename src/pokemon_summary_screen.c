@@ -9,12 +9,12 @@
 #include "event_data.h"
 #include "ewram.h"
 #include "item.h"
-#include "learn_move.h"
 #include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "move_tutor_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -30,6 +30,7 @@
 #include "task.h"
 #include "tv.h"
 #include "scanline_effect.h"
+#include "daycare.h"
 
 static void sub_809FC0C(void);
 static void sub_809FEB8(void);
@@ -929,7 +930,7 @@ static void sub_809E044(void)
 static void SummaryScreenExit(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_809E13C;
 }
 
@@ -1221,7 +1222,7 @@ static void sub_809E83C(u8 taskId, s8 b)
     sub_80A2078(taskId);
 }
 
-__attribute__((naked))
+NAKED
 static void sub_809E8F0(/*u8 taskId, s8 direction, u8 *c*/)
 {
     asm(".syntax unified\n\
@@ -1760,7 +1761,7 @@ static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 {
     asm(".syntax unified\n\
@@ -1891,7 +1892,7 @@ s8 sub_809F284(s8 a)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 s8 sub_809F284(s8 a)
 {
     asm(".syntax unified\n\
@@ -2310,7 +2311,7 @@ u8 sub_809FA30(void)
 //     vramAddr[(d * 32) + c] = (b * 0x1000) + (a * 2) + 0x200 + 0x80;
 //     vramAddr[(d * 32) + c + 32] = (b * 0x1000) + (a * 2) + 0x200 + 0x81;
 // }
-__attribute__((naked))
+NAKED
 void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
 {
     asm(".syntax unified\n\
@@ -2570,9 +2571,9 @@ static void sub_809FF64(struct Pokemon *mon)
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPEED));
     sub_8072BD8(buffer, 27, 11, 18);
 
-    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
+    buffer = AlignInt1InMenuWindow(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
     *buffer++ = CHAR_SLASH;
-    buffer = sub_8072C14(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
+    buffer = AlignInt1InMenuWindow(buffer, GetMonData(mon, MON_DATA_MAX_HP), 48, 1);
 
     Menu_PrintTextPixelCoords(gStringVar1, 126, 56, 1);
 }
@@ -2644,9 +2645,9 @@ static void sub_80A015C(struct Pokemon *mon)
             maxPP = CalculatePPWithBonus(move, ppBonuses, i);
 
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, curPP, 14, 1);
+            buffer = AlignInt1InMenuWindow(buffer, curPP, 14, 1);
             *buffer++ = CHAR_SLASH;
-            sub_8072C14(buffer, maxPP, 32, 1);
+            AlignInt1InMenuWindow(buffer, maxPP, 32, 1);
             Menu_PrintText(gStringVar1, 25, (2 * i) + 4);
         }
     }
@@ -2680,9 +2681,9 @@ static void sub_80A029C(struct Pokemon *mon)
 
     buffer = gStringVar1;
     pp = gBattleMoves[move].pp;
-    buffer = sub_8072C14(buffer, pp, 14, 1);
+    buffer = AlignInt1InMenuWindow(buffer, pp, 14, 1);
     *buffer++ = CHAR_SLASH;
-    buffer = sub_8072C14(buffer, pp, 32, 1);
+    buffer = AlignInt1InMenuWindow(buffer, pp, 32, 1);
     Menu_PrintText(gStringVar1, 25, 12);
 }
 
@@ -2762,26 +2763,26 @@ static void sub_80A04CC(u16 move)
         if (gBattleMoves[move].power <= 1)
         {
             buffer = gStringVar1;
-            buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+            buffer = AlignStringInMenuWindow(buffer, gOtherText_ThreeDashes2, 21, 1);
             Menu_PrintText(gStringVar1, 7, 15);
         }
         else
         {
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, gBattleMoves[move].power, 21, 1);
+            buffer = AlignInt1InMenuWindow(buffer, gBattleMoves[move].power, 21, 1);
             Menu_PrintText(gStringVar1, 7, 15);
         }
 
         if (gBattleMoves[move].accuracy == 0)
         {
             buffer = gStringVar1;
-            buffer = sub_8072C74(buffer, gOtherText_ThreeDashes2, 21, 1);
+            buffer = AlignStringInMenuWindow(buffer, gOtherText_ThreeDashes2, 21, 1);
             Menu_PrintText(gStringVar1, 7, 17);
         }
         else
         {
             buffer = gStringVar1;
-            buffer = sub_8072C14(buffer, gBattleMoves[move].accuracy, 21, 1);
+            buffer = AlignInt1InMenuWindow(buffer, gBattleMoves[move].accuracy, 21, 1);
             Menu_PrintText(gStringVar1, 7, 17);
         }
     }
@@ -2834,7 +2835,7 @@ static void sub_80A057C(u16 move)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A057C(u16 move)
 {
     asm(".syntax unified\n\
@@ -3046,7 +3047,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
 
         if (GetMonData(mon, MON_DATA_MET_LEVEL) == 0)
         {
-            ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, 5);
+            ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, EGG_HATCH_LEVEL);
             *ptr = CHAR_NEWLINE;
             ptr++;
 
@@ -3457,7 +3458,7 @@ static void DrawSummaryScreenNavigationDots(void)
     DmaCopy16Defvars(3, arr, (void *)(VRAM + 0xE056), 16);
 }
 #else
-__attribute__((naked))
+NAKED
 static void DrawSummaryScreenNavigationDots(void)
 {
     asm(".syntax unified\n\
@@ -3640,7 +3641,7 @@ _080A1044: .4byte 0x0600e056\n\
 }
 #endif // NONMATCHING
 
-__attribute__((naked))
+NAKED
 void sub_80A1048(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4043,7 +4044,7 @@ static void sub_80A12D0(s8 a)
 //         DestroyTask(taskId);
 //     }
 // }
-__attribute__((naked))
+NAKED
 static void sub_80A1334(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4239,7 +4240,7 @@ static void sub_80A1488(s8 a, u8 b)
     gTasks[taskId].data[3] = b;
 }
 
-__attribute__((naked))
+NAKED
 static void sub_80A1500(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -4481,7 +4482,7 @@ static void sub_80A16CC(u8 a)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void sub_80A16CC(u8 a)
 {
     asm(".syntax unified\n\
@@ -4817,20 +4818,20 @@ void sub_80A1C30(u8 a)
     }
 }
 
-u8 pokemon_ailments_get_primary(u32 status)
+u8 GetPrimaryStatus(u32 status)
 {
-    if (status & 0x88)
-        return 1;
-    if (status & 0x40)
-        return 2;
-    if (status & 0x7)
-        return 3;
-    if (status & 0x20)
-        return 4;
-    if (status & 0x10)
-        return 5;
+    if (status & (STATUS_POISON | STATUS_TOXIC_POISON))
+        return STATUS_PRIMARY_POISON;
+    if (status & STATUS_PARALYSIS)
+        return STATUS_PRIMARY_PARALYSIS;
+    if (status & STATUS_SLEEP)
+        return STATUS_PRIMARY_SLEEP;
+    if (status & STATUS_FREEZE)
+        return STATUS_PRIMARY_FREEZE;
+    if (status & STATUS_BURN)
+        return STATUS_PRIMARY_BURN;
 
-    return 0;
+    return STATUS_PRIMARY_NONE;
 }
 
 u8 GetMonStatusAndPokerus(struct Pokemon *mon)
@@ -4838,15 +4839,15 @@ u8 GetMonStatusAndPokerus(struct Pokemon *mon)
     u8 statusAilment;
 
     if (GetMonData(mon, MON_DATA_HP) == 0)
-        return 7;
+        return STATUS_PRIMARY_FAINTED;
 
-    statusAilment = pokemon_ailments_get_primary(GetMonData(mon, MON_DATA_STATUS));
-    if (statusAilment == 0)
+    statusAilment = GetPrimaryStatus(GetMonData(mon, MON_DATA_STATUS));
+    if (statusAilment == STATUS_PRIMARY_NONE)
     {
         if (!CheckPartyPokerus(mon, 0))
-            return 0;
+            return STATUS_PRIMARY_NONE;
         else
-            return 6;
+            return STATUS_PRIMARY_POKERUS;
     }
 
     return statusAilment;
@@ -4878,7 +4879,7 @@ void sub_80A1D18(void)
     StartSpriteAnim(&gSprites[ewram1A000[29]], statusAndPkrs2);
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80A1D18(void)
 {
     asm(".syntax unified\n\

@@ -8,7 +8,6 @@
 #include "task.h"
 
 extern void (*gFieldCallback)(void);
-extern void (*gUnknown_0300485C)(void);
 
 static void ReshowPCMenuAfterHallOfFamePC(void);
 static void Task_WaitForPaletteFade(u8);
@@ -29,7 +28,7 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
 {
     ScriptContext2_Enable();
     Overworld_PlaySpecialMapMusic();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     ScrSpecial_CreatePCMenu();
     ScriptMenu_DisplayPCStartupPrompt();
     CreateTask(Task_WaitForPaletteFade, 10);

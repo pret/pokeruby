@@ -1,7 +1,7 @@
 #include "global.h"
 #include "constants/decorations.h"
 #include "main.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "overworld.h"
 #include "sound.h"
 #include "constants/songs.h"
@@ -19,6 +19,7 @@
 #include "event_data.h"
 #include "field_weather.h"
 #include "decoration.h"
+#include "decoration_inventory.h"
 #include "shop.h"
 #include "ewram.h"
 
@@ -1088,183 +1089,183 @@ const u16 DecorGfx_KISS_POSTER[] = {
 };
 
 const u16 DecorGfx_PICHU_DOLL[] = {
-    MAP_OBJ_GFX_PICHU_DOLL
+    EVENT_OBJ_GFX_PICHU_DOLL
 };
 
 const u16 DecorGfx_PIKACHU_DOLL[] = {
-    MAP_OBJ_GFX_PIKACHU_DOLL
+    EVENT_OBJ_GFX_PIKACHU_DOLL
 };
 
 const u16 DecorGfx_MARILL_DOLL[] = {
-    MAP_OBJ_GFX_MARILL_DOLL
+    EVENT_OBJ_GFX_MARILL_DOLL
 };
 
 const u16 DecorGfx_TOGEPI_DOLL[] = {
-    MAP_OBJ_GFX_TOGEPI_DOLL
+    EVENT_OBJ_GFX_TOGEPI_DOLL
 };
 
 const u16 DecorGfx_CYNDAQUIL_DOLL[] = {
-    MAP_OBJ_GFX_CYNDAQUIL_DOLL
+    EVENT_OBJ_GFX_CYNDAQUIL_DOLL
 };
 
 const u16 DecorGfx_CHIKORITA_DOLL[] = {
-    MAP_OBJ_GFX_CHIKORITA_DOLL
+    EVENT_OBJ_GFX_CHIKORITA_DOLL
 };
 
 const u16 DecorGfx_TOTODILE_DOLL[] = {
-    MAP_OBJ_GFX_TOTODILE_DOLL
+    EVENT_OBJ_GFX_TOTODILE_DOLL
 };
 
 const u16 DecorGfx_JIGGLYPUFF_DOLL[] = {
-    MAP_OBJ_GFX_JIGGLYPUFF_DOLL
+    EVENT_OBJ_GFX_JIGGLYPUFF_DOLL
 };
 
 const u16 DecorGfx_MEOWTH_DOLL[] = {
-    MAP_OBJ_GFX_MEOWTH_DOLL
+    EVENT_OBJ_GFX_MEOWTH_DOLL
 };
 
 const u16 DecorGfx_CLEFAIRY_DOLL[] = {
-    MAP_OBJ_GFX_CLEFAIRY_DOLL
+    EVENT_OBJ_GFX_CLEFAIRY_DOLL
 };
 
 const u16 DecorGfx_DITTO_DOLL[] = {
-    MAP_OBJ_GFX_DITTO_DOLL
+    EVENT_OBJ_GFX_DITTO_DOLL
 };
 
 const u16 DecorGfx_SMOOCHUM_DOLL[] = {
-    MAP_OBJ_GFX_SMOOCHUM_DOLL
+    EVENT_OBJ_GFX_SMOOCHUM_DOLL
 };
 
 const u16 DecorGfx_TREECKO_DOLL[] = {
-    MAP_OBJ_GFX_TREECKO_DOLL
+    EVENT_OBJ_GFX_TREECKO_DOLL
 };
 
 const u16 DecorGfx_TORCHIC_DOLL[] = {
-    MAP_OBJ_GFX_TORCHIC_DOLL
+    EVENT_OBJ_GFX_TORCHIC_DOLL
 };
 
 const u16 DecorGfx_MUDKIP_DOLL[] = {
-    MAP_OBJ_GFX_MUDKIP_DOLL
+    EVENT_OBJ_GFX_MUDKIP_DOLL
 };
 
 const u16 DecorGfx_DUSKULL_DOLL[] = {
-    MAP_OBJ_GFX_DUSKULL_DOLL
+    EVENT_OBJ_GFX_DUSKULL_DOLL
 };
 
 const u16 DecorGfx_WYNAUT_DOLL[] = {
-    MAP_OBJ_GFX_WYNAUT_DOLL
+    EVENT_OBJ_GFX_WYNAUT_DOLL
 };
 
 const u16 DecorGfx_BALTOY_DOLL[] = {
-    MAP_OBJ_GFX_BALTOY_DOLL
+    EVENT_OBJ_GFX_BALTOY_DOLL
 };
 
 const u16 DecorGfx_KECLEON_DOLL[] = {
-    MAP_OBJ_GFX_KECLEON_DOLL
+    EVENT_OBJ_GFX_KECLEON_DOLL
 };
 
 const u16 DecorGfx_AZURILL_DOLL[] = {
-    MAP_OBJ_GFX_AZURILL_DOLL
+    EVENT_OBJ_GFX_AZURILL_DOLL
 };
 
 const u16 DecorGfx_SKITTY_DOLL[] = {
-    MAP_OBJ_GFX_SKITTY_DOLL
+    EVENT_OBJ_GFX_SKITTY_DOLL
 };
 
 const u16 DecorGfx_SWABLU_DOLL[] = {
-    MAP_OBJ_GFX_SWABLU_DOLL
+    EVENT_OBJ_GFX_SWABLU_DOLL
 };
 
 const u16 DecorGfx_GULPIN_DOLL[] = {
-    MAP_OBJ_GFX_GULPIN_DOLL
+    EVENT_OBJ_GFX_GULPIN_DOLL
 };
 
 const u16 DecorGfx_LOTAD_DOLL[] = {
-    MAP_OBJ_GFX_LOTAD_DOLL
+    EVENT_OBJ_GFX_LOTAD_DOLL
 };
 
 const u16 DecorGfx_SEEDOT_DOLL[] = {
-    MAP_OBJ_GFX_SEEDOT_DOLL
+    EVENT_OBJ_GFX_SEEDOT_DOLL
 };
 
 const u16 DecorGfx_PIKA_CUSHION[] = {
-    MAP_OBJ_GFX_PIKA_CUSHION
+    EVENT_OBJ_GFX_PIKA_CUSHION
 };
 
 const u16 DecorGfx_ROUND_CUSHION[] = {
-    MAP_OBJ_GFX_ROUND_CUSHION
+    EVENT_OBJ_GFX_ROUND_CUSHION
 };
 
 const u16 DecorGfx_KISS_CUSHION[] = {
-    MAP_OBJ_GFX_KISS_CUSHION
+    EVENT_OBJ_GFX_KISS_CUSHION
 };
 
 const u16 DecorGfx_ZIGZAG_CUSHION[] = {
-    MAP_OBJ_GFX_ZIGZAG_CUSHION
+    EVENT_OBJ_GFX_ZIGZAG_CUSHION
 };
 
 const u16 DecorGfx_SPIN_CUSHION[] = {
-    MAP_OBJ_GFX_SPIN_CUSHION
+    EVENT_OBJ_GFX_SPIN_CUSHION
 };
 
 const u16 DecorGfx_DIAMOND_CUSHION[] = {
-    MAP_OBJ_GFX_DIAMOND_CUSHION
+    EVENT_OBJ_GFX_DIAMOND_CUSHION
 };
 
 const u16 DecorGfx_BALL_CUSHION[] = {
-    MAP_OBJ_GFX_BALL_CUSHION
+    EVENT_OBJ_GFX_BALL_CUSHION
 };
 
 const u16 DecorGfx_GRASS_CUSHION[] = {
-    MAP_OBJ_GFX_GRASS_CUSHION
+    EVENT_OBJ_GFX_GRASS_CUSHION
 };
 
 const u16 DecorGfx_FIRE_CUSHION[] = {
-    MAP_OBJ_GFX_FIRE_CUSHION
+    EVENT_OBJ_GFX_FIRE_CUSHION
 };
 
 const u16 DecorGfx_WATER_CUSHION[] = {
-    MAP_OBJ_GFX_WATER_CUSHION
+    EVENT_OBJ_GFX_WATER_CUSHION
 };
 
 const u16 DecorGfx_SNORLAX_DOLL[] = {
-    MAP_OBJ_GFX_BIG_SNORLAX_DOLL
+    EVENT_OBJ_GFX_BIG_SNORLAX_DOLL
 };
 
 const u16 DecorGfx_RHYDON_DOLL[] = {
-    MAP_OBJ_GFX_BIG_RHYDON_DOLL
+    EVENT_OBJ_GFX_BIG_RHYDON_DOLL
 };
 
 const u16 DecorGfx_LAPRAS_DOLL[] = {
-    MAP_OBJ_GFX_BIG_LAPRAS_DOLL
+    EVENT_OBJ_GFX_BIG_LAPRAS_DOLL
 };
 
 const u16 DecorGfx_VENUSAUR_DOLL[] = {
-    MAP_OBJ_GFX_BIG_VENUSAUR_DOLL
+    EVENT_OBJ_GFX_BIG_VENUSAUR_DOLL
 };
 
 const u16 DecorGfx_CHARIZARD_DOLL[] = {
-    MAP_OBJ_GFX_BIG_CHARIZARD_DOLL
+    EVENT_OBJ_GFX_BIG_CHARIZARD_DOLL
 };
 
 const u16 DecorGfx_BLASTOISE_DOLL[] = {
-    MAP_OBJ_GFX_BIG_BLASTOISE_DOLL
+    EVENT_OBJ_GFX_BIG_BLASTOISE_DOLL
 };
 
 const u16 DecorGfx_WAILMER_DOLL[] = {
-    MAP_OBJ_GFX_BIG_WAILMER_DOLL
+    EVENT_OBJ_GFX_BIG_WAILMER_DOLL
 };
 
 const u16 DecorGfx_REGIROCK_DOLL[] = {
-    MAP_OBJ_GFX_BIG_REGIROCK_DOLL
+    EVENT_OBJ_GFX_BIG_REGIROCK_DOLL
 };
 
 const u16 DecorGfx_REGICE_DOLL[] = {
-    MAP_OBJ_GFX_BIG_REGICE_DOLL
+    EVENT_OBJ_GFX_BIG_REGICE_DOLL
 };
 
 const u16 DecorGfx_REGISTEEL_DOLL[] = {
-    MAP_OBJ_GFX_BIG_REGISTEEL_DOLL
+    EVENT_OBJ_GFX_BIG_REGISTEEL_DOLL
 };
 
 #if ENGLISH
@@ -1410,7 +1411,7 @@ const struct MenuAction2 gUnknown_083EC604[] = {
     {SecretBaseText_Decorate, sub_80FF160},
     {SecretBaseText_PutAway, sub_8100A0C},
     {SecretBaseText_Toss, sub_8101700},
-    {gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload}
+    {gOtherText_Exit, gpu_pal_decompress_alloc_tag_and_upload}
 };
 
 const u8 *const gUnknown_083EC624[] = {
@@ -1555,9 +1556,9 @@ void sub_80FE470(u8 decoCat, u8 left, u8 top, u8 palIdx) // PrintDecorationCateg
     strptr[2] = palIdx;
     strptr += 3;
     strptr = StringCopy(strptr, gUnknown_083EC5E4[decoCat]);
-    strptr = sub_8072C14(strptr, sub_8134194(decoCat), 0x56, 1);
+    strptr = AlignInt1InMenuWindow(strptr, GetNumDecorationsInInventoryCategory(decoCat), 0x56, 1);
     *strptr++ = 0xba;
-    strptr = sub_8072C14(strptr, gDecorationInventories[decoCat].size, 0x68, 1);
+    strptr = AlignInt1InMenuWindow(strptr, gDecorationInventories[decoCat].size, 0x68, 1);
     strptr[0] = EXT_CTRL_CODE_BEGIN;
     strptr[1] = 5;
     strptr[2] = v0;
@@ -1579,7 +1580,7 @@ void sub_80FE528(u8 taskId) // PrintDecorationCategorySelectionMenuStrings
             sub_80FE470(decoCat, 1, 2 * decoCat + 1, 255); // Unselectable
         }
     }
-    Menu_PrintText(gUnknownText_Exit, 1, 17);
+    Menu_PrintText(gOtherText_Exit, 1, 17);
 }
 
 void sub_80FE5AC(u8 taskId)
@@ -1609,10 +1610,10 @@ void sub_80FE604(u8 taskId)
             gUnknown_020388F6 = Menu_GetCursorPos();
             if (gUnknown_020388F6 != 8)
             {
-                gUnknown_020388D5 = sub_8134194(gUnknown_020388F6);
+                gUnknown_020388D5 = GetNumDecorationsInInventoryCategory(gUnknown_020388F6);
                 if (gUnknown_020388D5)
                 {
-                    sub_8134104(gUnknown_020388F6);
+                    SortDecorationInventory(gUnknown_020388F6);
                     gUnknown_020388D0 = gDecorationInventories[gUnknown_020388F6].items;
                     sub_80FEF50(taskId);
                     ClearVerticalScrollIndicatorPalettes();
@@ -1805,7 +1806,7 @@ void sub_80FEABC(u8 taskId, u8 dummy1)
         }
         if (i == gUnknown_020388D5)
         {
-            sub_8072A18(gUnknownText_Exit, 0x08, 8 * ni, 0x68, 1);
+            sub_8072A18(gOtherText_Exit, 0x08, 8 * ni, 0x68, 1);
             break;
         }
         if (gUnknown_020388D0[i])
@@ -1856,48 +1857,13 @@ void sub_80FECE0(u8 decoCat)
     sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
 }
 #elif GERMAN
-__attribute__((naked))
-void sub_80FECE0(u8 decoCat)
+int sub_80FECE0(u8 decoCat)
 {
-    asm(".syntax unified\n\
-    push {lr}\n\
-    sub sp, 0x8\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    ldr r0, _080FED18 @ =gUnknown_020388D5\n\
-    ldrb r0, [r0]\n\
-    cmp r2, r0\n\
-    beq _080FED24\n\
-    ldr r1, _080FED1C @ =gDecorations\n\
-    ldr r0, _080FED20 @ =gUnknown_020388D0\n\
-    ldr r0, [r0]\n\
-    adds r0, r2\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 5\n\
-    adds r1, 0x18\n\
-    adds r0, r1\n\
-    ldr r0, [r0]\n\
-    movs r1, 0x30\n\
-    str r1, [sp]\n\
-    movs r1, 0x1\n\
-    str r1, [sp, 0x4]\n\
-    movs r1, 0x80\n\
-    movs r2, 0x68\n\
-    movs r3, 0x68\n\
-    bl sub_8072AB0\n\
-    movs r0, 0x1\n\
-    b _080FED26\n\
-    .align 2, 0\n\
-_080FED18: .4byte gUnknown_020388D5\n\
-_080FED1C: .4byte gDecorations\n\
-_080FED20: .4byte gUnknown_020388D0\n\
-_080FED24:\n\
-    movs r0, 0\n\
-_080FED26:\n\
-    add sp, 0x8\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
+    if (decoCat == gUnknown_020388D5)
+        return FALSE;
+
+    sub_8072AB0(gDecorations[gUnknown_020388D0[decoCat]].description, 0x80, 0x68, 0x68, 0x30, 0x1);
+    return TRUE;
 }
 #endif
 
@@ -2057,7 +2023,7 @@ void sub_80FF098(u8 taskId)
     {
         gUnknown_020388F4--;
     }
-    sub_8134104(gUnknown_020388F6);
+    SortDecorationInventory(gUnknown_020388F6);
     sub_80FED90(taskId);
     sub_80FEF28();
 }
@@ -2073,11 +2039,11 @@ void sub_80FF114(u8 taskId)
 {
     DrawWholeMapView();
     Overworld_SetWarpDestination(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1, gTasks[taskId].data[3], gTasks[taskId].data[4]);
-    warp_in();
+    WarpIntoMap();
 }
 void sub_80FF160(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else
@@ -2109,9 +2075,9 @@ u16 sub_80FF1B0(u8 decoId, u8 a1)
 void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
 {
     u16 i;
-    u16 j; // r10
+    u16 j;
     u16 behavior;
-    u16 flags; // r8
+    u16 collision;
     u16 v0;
     u16 v1;
     s16 x;
@@ -2124,27 +2090,23 @@ void sub_80FF1EC(u16 mapX, u16 mapY, u8 decWidth, u8 decHeight, u16 decIdx)
         {
             x = mapX + j;
             behavior = GetBehaviorByMetatileId(0x200 + gDecorations[decIdx].tiles[i * decWidth + j]);
-            if (sub_8057288(behavior) == 1 || (gDecorations[decIdx].permission != DECORPERM_PASS_FLOOR && (behavior >> 12)))
-            {
-                flags = 0xc00;
-            } else
-            {
-                flags = 0x000;
-            }
-            if (gDecorations[decIdx].permission != DECORPERM_NA_WALL && sub_80572B0(MapGridGetMetatileBehaviorAt(x, decBottom)) == 1)
-            {
+            if (MetatileBehavior_IsSecretBaseImpassable(behavior) == TRUE || (gDecorations[decIdx].permission != DECORPERM_PASS_FLOOR && (behavior >> 12) != 0))
+                collision = 0xc00; // impassable collision
+            else
+                collision = 0x000; // passable collision
+
+            if (gDecorations[decIdx].permission != DECORPERM_NA_WALL && MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(x, decBottom)) == 1)
                 v0 = 1;
-            } else
-            {
+            else
                 v0 = 0;
-            }
+
             v1 = sub_80FF1B0(gDecorations[decIdx].id, i * decWidth + j);
             if (v1 != 0xffff)
             {
-                MapGridSetMetatileEntryAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | flags | v1);
+                MapGridSetMetatileEntryAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | collision | v1);
             } else
             {
-                MapGridSetMetatileIdAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | flags);
+                MapGridSetMetatileIdAt(x, decBottom, (gDecorations[decIdx].tiles[i * decWidth + j] + (0x200 | v0)) | collision);
             }
         }
     }
@@ -2196,20 +2158,20 @@ void sub_80FF474(void)
         if (FlagGet(i + FLAG_DECORATION_2) == 1)
         {
             FlagClear(i + FLAG_DECORATION_2);
-            for (j=0; j<gMapHeader.events->mapObjectCount; j++)
+            for (j=0; j<gMapHeader.events->eventObjectCount; j++)
             {
-                if (gMapHeader.events->mapObjects[j].flagId == i + FLAG_DECORATION_2)
+                if (gMapHeader.events->eventObjects[j].flagId == i + FLAG_DECORATION_2)
                 {
                     break;
                 }
             }
-            VarSet(0x3f20 + gMapHeader.events->mapObjects[j].graphicsId, gUnknown_02038900.decoration->tiles[0]);
-            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[j].localId;
+            VarSet(0x3f20 + gMapHeader.events->eventObjects[j].graphicsId, gUnknown_02038900.decoration->tiles[0]);
+            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[j].localId;
             gSpecialVar_0x8006 = gUnknown_020391A4;
             gSpecialVar_0x8007 = gUnknown_020391A6;
             show_sprite(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
             sub_805C0F8(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-            sub_805C78C(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+            TryOverrideTemplateCoordsForEventObject(gSpecialVar_0x8005, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
             break;
         }
     }
@@ -2281,7 +2243,7 @@ void sub_80FF6AC(u8 taskId)
             break;
         case 1:
             gPaletteFade.bufferTransferDisabled = 1;
-            AddDecorationIconObjectFromFieldObject(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
+            AddDecorationIconObjectFromEventObject(&gUnknown_02038900, gUnknown_020388D0[gUnknown_020388F5]);
             sub_80FF960(taskId);
             SetUpPlacingDecorationPlayerAvatar(taskId, &gUnknown_02038900);
             pal_fill_black();
@@ -2298,7 +2260,7 @@ void sub_80FF6AC(u8 taskId)
     }
 }
 
-void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_02038900, u8 decoIdx)
+void AddDecorationIconObjectFromEventObject(struct UnkStruct_02038900 * unk_02038900, u8 decoIdx)
 {
     sub_80FEF74();
     sub_80FED1C();
@@ -2309,15 +2271,15 @@ void AddDecorationIconObjectFromFieldObject(struct UnkStruct_02038900 * unk_0203
         sub_81008BC(unk_02038900);
         sub_8100930(unk_02038900->decoration->shape);
         sub_8100874(unk_02038900);
-        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
+        sub_810070C(unk_02038900->palette, ((u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles + 8 * unk_02038900->decoration->tiles[0])[7] >> 12);
         LoadSpritePalette(&gUnknown_083EC954);
-        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
-        gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
+        gUnknown_020391A8 = gSprites[gFieldCamera.trackedSpriteId].data[0];
+        gFieldCamera.trackedSpriteId = CreateSprite(&gSpriteTemplate_83EC93C, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 0);
     } else
     {
-        gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
-        gUnknown_03004880.unk4 = AddPseudoFieldObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
-        gSprites[gUnknown_03004880.unk4].oam.priority = 1;
+        gUnknown_020391A8 = gSprites[gFieldCamera.trackedSpriteId].data[0];
+        gFieldCamera.trackedSpriteId = AddPseudoEventObject(unk_02038900->decoration->tiles[0], sub_81009A8, gUnknown_083EC900[unk_02038900->decoration->shape].x,  gUnknown_083EC900[unk_02038900->decoration->shape].y, 1);
+        gSprites[gFieldCamera.trackedSpriteId].oam.priority = 1;
     }
 }
 
@@ -2331,14 +2293,14 @@ void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct UnkStruct_02038900 *un
     }
     if (gSaveBlock2.playerGender == MALE)
     {
-        gUnknown_020391A9 = AddPseudoFieldObject(0xc1, SpriteCallbackDummy, v0, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoEventObject(0xc1, SpriteCallbackDummy, v0, 0x48, 0);
     } else
     {
-        gUnknown_020391A9 = AddPseudoFieldObject(0xc2, SpriteCallbackDummy, v0, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoEventObject(0xc2, SpriteCallbackDummy, v0, 0x48, 0);
     }
     gSprites[gUnknown_020391A9].oam.priority = 1;
     DestroySprite(&gSprites[gUnknown_020391A8]);
-    gUnknown_020391A8 = gUnknown_03004880.unk4;
+    gUnknown_020391A8 = gFieldCamera.trackedSpriteId;
 }
 
 void sub_80FF960(u8 taskId)
@@ -2407,9 +2369,9 @@ void sub_80FFB08(u8 taskId)
     DisplayItemMessageOnField(taskId, gSecretBaseText_CancelDecorating, sub_8100248, 0);
 }
 
-bool8 sub_80FFB6C(u8 a0, u16 a1)
+bool8 sub_80FFB6C(u8 metatileBehavior, u16 layerType)
 {
-    if (sub_8057274(a0) != 1 || a1 != 0)
+    if (MetatileBehavior_IsBlockDecoration(metatileBehavior) != TRUE || layerType != 0)
     {
         return FALSE;
     }
@@ -2425,15 +2387,15 @@ bool8 sub_80FFB94(u8 taskId, s16 x, s16 y, u16 decoId)
     return TRUE;
 }
 
-bool8 sub_80FFBDC(u16 a0, const struct Decoration *decoration)
+bool8 sub_80FFBDC(u16 metatileBehavior, const struct Decoration *decoration)
 {
-    if (sub_8057274(a0) != 1)
+    if (MetatileBehavior_IsBlockDecoration(metatileBehavior) != TRUE)
     {
-        if (decoration->id == DECOR_SOLID_BOARD && sub_8057300(a0) == 1)
+        if (decoration->id == DECOR_SOLID_BOARD && MetatileBehavior_IsSecretBaseHole(metatileBehavior) == TRUE)
         {
             return TRUE;
         }
-        if (sub_805729C(a0))
+        if (MetatileBehavior_IsNormal(metatileBehavior))
         {
             return TRUE;
         }
@@ -2448,7 +2410,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     u8 i;
     u8 j;
     u8 behaviorAt;
-    u16 behaviorBy;
+    u16 layerType;
     u8 mapY;
     u8 mapX;
     s16 curY;
@@ -2466,16 +2428,16 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
                     if (!sub_80FFBDC(behaviorAt, decoration))
                     {
                         return FALSE;
                     }
-                    if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                    if (!sub_80FFB94(taskId, curX, curY, layerType))
                     {
                         return FALSE;
                     }
-                    behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                    behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
                     if (behaviorAt != 0 && behaviorAt != 16)
                     {
                         return FALSE;
@@ -2491,16 +2453,16 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 {
                     curX = gTasks[taskId].data[0] + j;
                     behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                    behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
-                    if (!sub_805729C(behaviorAt) && !sub_80FFB6C(behaviorAt, behaviorBy))
+                    layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[(mapY - 1 - i) * mapX + j]) & 0xf000;
+                    if (!MetatileBehavior_IsNormal(behaviorAt) && !sub_80FFB6C(behaviorAt, layerType))
                     {
                         return FALSE;
                     }
-                    if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                    if (!sub_80FFB94(taskId, curX, curY, layerType))
                     {
                         return FALSE;
                     }
-                    if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                    if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
                     {
                         return FALSE;
                     }
@@ -2511,16 +2473,16 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
             {
                 curX = gTasks[taskId].data[0] + j;
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-                behaviorBy = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
-                if (!sub_805729C(behaviorAt) && !sub_80572B0(behaviorAt))
+                layerType = GetBehaviorByMetatileId(0x200 + decoration->tiles[j]) & 0xf000;
+                if (!MetatileBehavior_IsNormal(behaviorAt) && !MetatileBehavior_IsSecretBaseNorthWall(behaviorAt))
                 {
                     return FALSE;
                 }
-                if (!sub_80FFB94(taskId, curX, curY, behaviorBy))
+                if (!sub_80FFB94(taskId, curX, curY, layerType))
                 {
                     return FALSE;
                 }
-                behaviorAt = GetFieldObjectIdByXYZ(curX, curY, 0);
+                behaviorAt = GetEventObjectIdByXYZ(curX, curY, 0);
                 if (behaviorAt != 0 && behaviorAt != 16)
                 {
                     return FALSE;
@@ -2534,7 +2496,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 for (j=0; j<mapX; j++)
                 {
                     curX = gTasks[taskId].data[0] + j;
-                    if (!sub_80572B0(MapGridGetMetatileBehaviorAt(curX, curY)))
+                    if (!MetatileBehavior_IsSecretBaseNorthWall(MapGridGetMetatileBehaviorAt(curX, curY)))
                     {
                         return FALSE;
                     }
@@ -2553,19 +2515,19 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
                 behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
                 if (decoration->shape == DECORSHAPE_1x2)
                 {
-                    if (!sub_80572EC(behaviorAt))
+                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
                     {
                         return FALSE;
                     }
                 }
-                else if (!sub_80572D8(behaviorAt))
+                else if (!MetatileBehavior_IsSecretBaseLargeMatEdge(behaviorAt))
                 {
-                    if (!sub_80572EC(behaviorAt))
+                    if (!MetatileBehavior_IsLargeMatCenter(behaviorAt))
                     {
                         return FALSE;
                     }
                 }
-                if (GetFieldObjectIdByXYZ(curX, curY, 0) != 16)
+                if (GetEventObjectIdByXYZ(curX, curY, 0) != 16)
                 {
                     return FALSE;
                 }
@@ -2575,7 +2537,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     return TRUE;
 }
 #else
-__attribute__((naked))
+NAKED
 bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
 {
     asm(".syntax unified\n"
@@ -2716,7 +2678,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0xC]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tbl GetEventObjectIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r4, r0, 24\n"
     "\tcmp r4, 0\n"
@@ -2811,7 +2773,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tadds r5, r1, 0\n"
     "\tands r5, r0\n"
     "\tadds r0, r4, 0\n"
-    "\tbl sub_805729C\n"
+    "\tbl MetatileBehavior_IsNormal\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbne _080FFE0C\n"
@@ -2839,7 +2801,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tbl GetEventObjectIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r0, 24\n"
     "\tcmp r0, 0x10\n"
@@ -2916,12 +2878,12 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tadds r5, r1, 0\n"
     "\tands r5, r0\n"
     "\tadds r0, r4, 0\n"
-    "\tbl sub_805729C\n"
+    "\tbl MetatileBehavior_IsNormal\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbne _080FFEDA\n"
     "\tadds r0, r4, 0\n"
-    "\tbl sub_80572B0\n"
+    "\tbl MetatileBehavior_IsSecretBaseNorthWall\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbne _080FFEDA\n"
@@ -2943,7 +2905,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tbl GetEventObjectIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r4, r0, 24\n"
     "\tcmp r4, 0\n"
@@ -2999,7 +2961,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tbl MapGridGetMetatileBehaviorAt\n"
     "\tlsls r0, 24\n"
     "\tlsrs r0, 24\n"
-    "\tbl sub_80572B0\n"
+    "\tbl MetatileBehavior_IsSecretBaseNorthWall\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbeq _080FFFF4\n"
@@ -3065,7 +3027,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tbne _080FFFF8\n"
     "_080FFFE8:\n"
     "\tadds r0, r4, 0\n"
-    "\tbl sub_80572EC\n"
+    "\tbl MetatileBehavior_IsLargeMatCenter\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbne _08100004\n"
@@ -3074,7 +3036,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tb _08100026\n"
     "_080FFFF8:\n"
     "\tadds r0, r4, 0\n"
-    "\tbl sub_80572D8\n"
+    "\tbl MetatileBehavior_IsSecretBaseLargeMatEdge\n"
     "\tlsls r0, 24\n"
     "\tcmp r0, 0\n"
     "\tbeq _080FFFE8\n"
@@ -3083,7 +3045,7 @@ bool8 sub_80FFC24(u8 taskId, const struct Decoration *decoration)
     "\tldr r2, [sp, 0x20]\n"
     "\tlsrs r1, r2, 16\n"
     "\tmovs r2, 0\n"
-    "\tbl GetFieldObjectIdByXYZ\n"
+    "\tbl GetEventObjectIdByXYZ\n"
     "\tlsls r0, 24\n"
     "\tlsrs r0, 24\n"
     "\tcmp r0, 0x10\n"
@@ -3244,7 +3206,7 @@ bool8 sub_810038C(u8 taskId)
     {
         data[1]++;
         return FALSE;
-    } else if (gUnknown_020391AA == DIR_NORTH && data[1] - 7 >= gMapHeader.mapData->height)
+    } else if (gUnknown_020391AA == DIR_NORTH && data[1] - 7 >= gMapHeader.mapLayout->height)
     {
         data[1]--;
         return FALSE;
@@ -3252,7 +3214,7 @@ bool8 sub_810038C(u8 taskId)
     {
         data[0]++;
         return FALSE;
-    } else if (gUnknown_020391AA == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapData->width)
+    } else if (gUnknown_020391AA == DIR_EAST && data[0] + data[5] - 8 >= gMapHeader.mapLayout->width)
     {
         data[0]--;
         return FALSE;
@@ -3374,7 +3336,7 @@ void sub_810070C(u16 *a0, u16 a1)
     u16 i;
     for (i=0; i<16; i++)
     {
-        a0[i] = ((u16 *)gMapHeader.mapData->primaryTileset->palettes)[16 * a1 + i];
+        a0[i] = ((u16 *)gMapHeader.mapLayout->primaryTileset->palettes)[16 * a1 + i];
     }
 }
 
@@ -3390,7 +3352,7 @@ void sub_8100740(u8 *dest, u16 flags)
     }
     for (i=0; i<32; i++)
     {
-        buffer[i] = ((u8 *)gMapHeader.mapData->primaryTileset->tiles)[flags * 32 + i];
+        buffer[i] = ((u8 *)gMapHeader.mapLayout->primaryTileset->tiles)[flags * 32 + i];
     }
     switch (mode)
     {
@@ -3436,7 +3398,7 @@ void sub_8100874(struct UnkStruct_02038900 *unk_02038900)
 
 u16 sub_810089C(u16 a0)
 {
-    return ((u16 *)gMapHeader.mapData->secondaryTileset->metatiles)[a0] & 0xfff;
+    return ((u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles)[a0] & 0xfff;
 }
 
 const u8 Unknown_3EC660[] = {0, 1, 2, 3};
@@ -3656,11 +3618,11 @@ void sub_8100A7C(void)
     {
         gSpecialVar_0x8005 = gUnknown_020391B4[gSpecialVar_0x8004].flagId;
         sub_8100A60(gUnknown_020391B4[gSpecialVar_0x8004].decorId);
-        for (i=0; i<gMapHeader.events->mapObjectCount; i++)
+        for (i=0; i<gMapHeader.events->eventObjectCount; i++)
         {
-            if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8005)
+            if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8005)
             {
-                gSpecialVar_0x8006 = gMapHeader.events->mapObjects[i].localId;
+                gSpecialVar_0x8006 = gMapHeader.events->eventObjects[i].localId;
                 break;
             }
         }
@@ -3670,11 +3632,11 @@ void sub_8100A7C(void)
 void sub_8100B20(void)
 {
     u8 i;
-    for (i=0; i<gMapHeader.events->mapObjectCount; i++)
+    for (i=0; i<gMapHeader.events->eventObjectCount; i++)
     {
-        if (gMapHeader.events->mapObjects[i].flagId == gSpecialVar_0x8004)
+        if (gMapHeader.events->eventObjects[i].flagId == gSpecialVar_0x8004)
         {
-            gSpecialVar_0x8005 = gMapHeader.events->mapObjects[i].localId;
+            gSpecialVar_0x8005 = gMapHeader.events->eventObjects[i].localId;
             break;
         }
     }
@@ -3703,7 +3665,7 @@ void sub_8100B6C(void)
             {
                 for (k=0; k<gUnknown_020391B4[i].width; k++)
                 {
-                    MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapData->map)[(x + k) + gMapHeader.mapData->width * (y - j)] | 0x3000);
+                    MapGridSetMetatileEntryAt(x + 7 + k, y + 7 - j, ((u16 *)gMapHeader.mapLayout->map)[(x + k) + gMapHeader.mapLayout->width * (y - j)] | 0x3000);
                 }
             }
             sub_8100A60(gUnknown_020391B4[i].decorId);
@@ -3760,21 +3722,21 @@ bool8 sub_8100D38(u8 taskId)
 
 void SetUpPuttingAwayDecorationPlayerAvatar(void)
 {
-    player_get_direction_lower_nybble();
+    GetPlayerFacingDirection();
     Menu_EraseWindowRect(0, 0, 29, 19);
-    gUnknown_020391A8 = gSprites[gUnknown_03004880.unk4].data[0];
+    gUnknown_020391A8 = gSprites[gFieldCamera.trackedSpriteId].data[0];
     sub_81016C8();
-    gUnknown_03004880.unk4 = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
+    gFieldCamera.trackedSpriteId = CreateSprite(&gSpriteTemplate_83ECA88, 0x78, 0x50, 0);
     if (gSaveBlock2.playerGender == MALE)
     {
-        gUnknown_020391A9 = AddPseudoFieldObject(0xc1, SpriteCallbackDummy, 0x88, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoEventObject(0xc1, SpriteCallbackDummy, 0x88, 0x48, 0);
     } else
     {
-        gUnknown_020391A9 = AddPseudoFieldObject(0xc2, SpriteCallbackDummy, 0x88, 0x48, 0);
+        gUnknown_020391A9 = AddPseudoEventObject(0xc2, SpriteCallbackDummy, 0x88, 0x48, 0);
     }
     gSprites[gUnknown_020391A9].oam.priority = 1;
     DestroySprite(&gSprites[gUnknown_020391A8]);
-    gUnknown_020391A8 = gUnknown_03004880.unk4;
+    gUnknown_020391A8 = gFieldCamera.trackedSpriteId;
     gSprites[gUnknown_020391A8].oam.priority = 1;
 }
 
@@ -3839,7 +3801,7 @@ void sub_8100FB4(u8 taskId)
 
 void sub_8101024(u8 taskId)
 {
-    u8 mtBehavior;
+    u8 metatileBehavior;
     s16 *data;
     sub_8101460(taskId);
     if (gUnknown_02039234 != 0)
@@ -3848,8 +3810,9 @@ void sub_8101024(u8 taskId)
     } else
     {
         data = gTasks[taskId].data;
-        mtBehavior = MapGridGetMetatileBehaviorAt(data[0], data[1]);
-        if (MetatileBehavior_IsSecretBasePC(mtBehavior) == TRUE || sub_805738C(mtBehavior) == TRUE)
+        metatileBehavior = MapGridGetMetatileBehaviorAt(data[0], data[1]);
+        if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE
+         || MetatileBehavior_IsPlayerRoomPCOn(metatileBehavior) == TRUE)
         {
             gSprites[gUnknown_020391A8].invisible = 0;
             gSprites[gUnknown_020391A8].callback = SpriteCallbackDummy;
@@ -3953,9 +3916,9 @@ void sub_81012A0(void)
     yOff = ewram_1f000.pos[gUnknown_020391B4[gUnknown_02039234].decorId] & 0xf;
     for (i=0; i<0x40; i++)
     {
-        if (gSaveBlock1.mapObjectTemplates[i].x == xOff && gSaveBlock1.mapObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1.mapObjectTemplates[i].flagId))
+        if (gSaveBlock1.eventObjectTemplates[i].x == xOff && gSaveBlock1.eventObjectTemplates[i].y == yOff && !FlagGet(gSaveBlock1.eventObjectTemplates[i].flagId))
         {
-            gUnknown_020391B4[gUnknown_02039234].flagId = gSaveBlock1.mapObjectTemplates[i].flagId;
+            gUnknown_020391B4[gUnknown_02039234].flagId = gSaveBlock1.eventObjectTemplates[i].flagId;
             break;
         }
     }
@@ -4036,7 +3999,7 @@ void sub_8101460(u8 taskId)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_8101460(u8 taskId)
 {
     asm(".syntax unified\n"
@@ -4228,7 +4191,7 @@ void sub_81016F4(void)
 
 void sub_8101700(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else
@@ -4241,7 +4204,7 @@ void sub_8101700(u8 taskId)
 
 void sub_8101750(u8 taskId)
 {
-    if (!sub_81341D4())
+    if (!GetNumDecorationsInInventory())
     {
         DisplayItemMessageOnField(taskId, gSecretBaseText_NoDecors, sub_80FE428, 0);
     } else

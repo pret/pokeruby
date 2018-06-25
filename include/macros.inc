@@ -2,8 +2,8 @@
 	.include "include/macros/function.inc"
 	.include "include/macros/movement.inc"
 	.include "include/macros/pokemon_data.inc"
-	.include "include/macros/ec.inc"
 	.include "include/macros/map.inc"
+	.include "include/macros/mystery_event_script.inc"
 
 	.macro region_map_location x, y, width, height, name
 	.byte \x

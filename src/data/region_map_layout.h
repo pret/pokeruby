@@ -20,7 +20,7 @@
 #define SAFARI      MAPSEC_SAFARI_ZONE
 #define BTLTWR      MAPSEC_BATTLE_TOWER
 #define S_ISLD      MAPSEC_SOUTHERN_ISLAND
-#define ______      MAPSEC_NONE
+#define ______      MAPSEC_NOTHING
 
 static const u8 sRegionMapLayout[] =
 {

@@ -32,9 +32,9 @@ struct MovePpInfo
 extern u16 gBattleTypeFlags;
 extern u8 gDisplayedStringBattle[];
 extern u8 gBattleBufferA[][0x200];
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern u32 gBattleExecBuffer;
-extern u16 gBattlePartyID[];
+extern u16 gBattlerPartyIndexes[];
 extern u8 gBankSpriteIds[];
 extern u8 gBattleOutcome;
 extern u16 gUnknown_02024DE8;
@@ -42,7 +42,7 @@ extern u8 gUnknown_02024E68[];
 extern u8 gDoingBattleAnim;
 extern u32 gTransformedPersonalities[];
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u32 gAnimMoveDmg;
+extern s32 gAnimMoveDmg;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
@@ -63,7 +63,6 @@ extern void sub_8030E38(struct Sprite *);
 extern void StartBattleIntroAnim();
 extern void sub_8047858();
 extern void move_anim_start_t2_for_situation();
-extern void load_gfxc_health_bar();
 extern void sub_8043D84();
 extern void BufferStringBattle();
 extern void sub_8031F24(void);
@@ -83,7 +82,7 @@ extern u8 sub_8046400();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
-extern u8 GetBankPosition();
+extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
 extern u8 sub_8079E90();
 extern void nullsub_10();
@@ -242,15 +241,15 @@ void nullsub_74(void)
 
 void SetBankFuncToLinkPartnerBufferRunCommand(void)
 {
-    gBattleBankFunc[gActiveBank] = LinkPartnerBufferRunCommand;
+    gBattleBankFunc[gActiveBattler] = LinkPartnerBufferRunCommand;
 }
 
 void LinkPartnerBufferRunCommand(void)
 {
-    if (gBattleExecBuffer & gBitTable[gActiveBank])
+    if (gBattleExecBuffer & gBitTable[gActiveBattler])
     {
-        if (gBattleBufferA[gActiveBank][0] <= 0x38)
-            gLinkPartnerBufferCommands[gBattleBufferA[gActiveBank][0]]();
+        if (gBattleBufferA[gActiveBattler][0] <= 0x38)
+            gLinkPartnerBufferCommands[gBattleBufferA[gActiveBattler][0]]();
         else
             LinkPartnerBufferExecCompleted();
     }
@@ -258,26 +257,26 @@ void LinkPartnerBufferRunCommand(void)
 
 void sub_811DAE4(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
         LinkPartnerBufferExecCompleted();
 }
 
 void sub_811DB1C(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
         nullsub_10(0);
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
         LinkPartnerBufferExecCompleted();
     }
 }
 
 void sub_811DB84(void)
 {
-    if ((--ewram17810[gActiveBank].unk9) == 0xFF)
+    if ((--ewram17810[gActiveBattler].unk9) == 0xFF)
     {
-        ewram17810[gActiveBank].unk9 = 0;
+        ewram17810[gActiveBattler].unk9 = 0;
         LinkPartnerBufferExecCompleted();
     }
 }
@@ -288,21 +287,21 @@ void sub_811DBC0(void)
 
     if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & 0x40)))
     {
-        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
+        if (gSprites[gHealthboxIDs[gActiveBattler]].callback == SpriteCallbackDummy)
             r6 = TRUE;
     }
     else
     {
-        if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy
-         && gSprites[gHealthboxIDs[gActiveBank ^ 2]].callback == SpriteCallbackDummy)
+        if (gSprites[gHealthboxIDs[gActiveBattler]].callback == SpriteCallbackDummy
+         && gSprites[gHealthboxIDs[gActiveBattler ^ 2]].callback == SpriteCallbackDummy)
             r6 = TRUE;
     }
     if (IsCryPlayingOrClearCrySongs())
         r6 = FALSE;
     if (r6)
     {
-        ewram17810[gActiveBank].unk9 = 3;
-        gBattleBankFunc[gActiveBank] = sub_811DB84;
+        ewram17810[gActiveBattler].unk9 = 3;
+        gBattleBankFunc[gActiveBattler] = sub_811DB84;
     }
 }
 
@@ -310,34 +309,34 @@ void sub_811DCA0(void)
 {
     u8 r2;
 
-    if (!ewram17810[gActiveBank].unk0_3)
+    if (!ewram17810[gActiveBattler].unk0_3)
     {
         // I couldn't get it to work as a bitfield here
-        r2 = *((u8 *)&ewram17810[gActiveBank ^ 2]) & 8;
-        if (!r2 && (++ewram17810[gActiveBank].unk9) != 1)
+        r2 = *((u8 *)&ewram17810[gActiveBattler ^ 2]) & 8;
+        if (!r2 && (++ewram17810[gActiveBattler].unk9) != 1)
         {
-            ewram17810[gActiveBank].unk9 = r2;
+            ewram17810[gActiveBattler].unk9 = r2;
             if (IsDoubleBattle() && !(gBattleTypeFlags & 0x40))
             {
-                DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank ^ 2]]);
-                sub_8045A5C(gHealthboxIDs[gActiveBank ^ 2], &gPlayerParty[gBattlePartyID[gActiveBank ^ 2]], 0);
-                sub_804777C(gActiveBank ^ 2);
-                sub_8043DFC(gHealthboxIDs[gActiveBank ^ 2]);
+                DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler ^ 2]]);
+                sub_8045A5C(gHealthboxIDs[gActiveBattler ^ 2], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler ^ 2]], 0);
+                sub_804777C(gActiveBattler ^ 2);
+                sub_8043DFC(gHealthboxIDs[gActiveBattler ^ 2]);
             }
-            DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
-            sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 0);
-            sub_804777C(gActiveBank);
-            sub_8043DFC(gHealthboxIDs[gActiveBank]);
+            DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
+            sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
+            sub_804777C(gActiveBattler);
+            sub_8043DFC(gHealthboxIDs[gActiveBattler]);
             (s8)ewram17810[4].unk9 &= ~1;
-            gBattleBankFunc[gActiveBank] = sub_811DBC0;
+            gBattleBankFunc[gActiveBattler] = sub_811DBC0;
         }
     }
 }
 
 void sub_811DDE8(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].animEnded
-     && gSprites[gBankSpriteIds[gActiveBank]].pos2.x == 0)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].animEnded
+     && gSprites[gBankSpriteIds[gActiveBattler]].pos2.x == 0)
         LinkPartnerBufferExecCompleted();
 }
 
@@ -345,38 +344,38 @@ void bx_t3_healthbar_update(void)
 {
     s16 r4;
 
-    r4 = sub_8045C78(gActiveBank, gHealthboxIDs[gActiveBank], 0, 0);
-    sub_8043DFC(gHealthboxIDs[gActiveBank]);
+    r4 = sub_8045C78(gActiveBattler, gHealthboxIDs[gActiveBattler], 0, 0);
+    sub_8043DFC(gHealthboxIDs[gActiveBattler]);
     if (r4 != -1)
     {
-        sub_80440EC(gHealthboxIDs[gActiveBank], r4, 0);
+        sub_80440EC(gHealthboxIDs[gActiveBattler], r4, 0);
     }
     else
     {
-        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
         LinkPartnerBufferExecCompleted();
     }
 }
 
 void sub_811DE98(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].pos1.y + gSprites[gBankSpriteIds[gActiveBank]].pos2.y > 160)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].pos1.y + gSprites[gBankSpriteIds[gActiveBattler]].pos2.y > 160)
     {
-        nullsub_9(GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES));
-        FreeOamMatrix(gSprites[gBankSpriteIds[gActiveBank]].oam.matrixNum);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
-        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        nullsub_9(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES));
+        FreeOamMatrix(gSprites[gBankSpriteIds[gActiveBattler]].oam.matrixNum);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        sub_8043DB0(gHealthboxIDs[gActiveBattler]);
         LinkPartnerBufferExecCompleted();
     }
 }
 
 void sub_811DF34(void)
 {
-    if (!ewram17810[gActiveBank].unk0_6)
+    if (!ewram17810[gActiveBattler].unk0_6)
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
-        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        sub_8043DB0(gHealthboxIDs[gActiveBattler]);
         LinkPartnerBufferExecCompleted();
     }
 }
@@ -389,7 +388,7 @@ void sub_811DFA0(void)
 
 void bx_blink_t3(void)
 {
-    u8 spriteId = gBankSpriteIds[gActiveBank];
+    u8 spriteId = gBankSpriteIds[gActiveBattler];
     if (gSprites[spriteId].data[1] == 32)
     {
         gSprites[spriteId].data[1] = 0;
@@ -409,48 +408,48 @@ void bx_blink_t3(void)
 
 void sub_811E034(void)
 {
-    if (gSprites[gHealthboxIDs[gActiveBank]].callback == SpriteCallbackDummy)
+    if (gSprites[gHealthboxIDs[gActiveBattler]].callback == SpriteCallbackDummy)
     {
-        if (ewram17800[gActiveBank].substituteSprite)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
-        gBattleBankFunc[gActiveBank] = sub_811E0A0;
+        if (ewram17800[gActiveBattler].substituteSprite)
+            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
+        gBattleBankFunc[gActiveBattler] = sub_811E0A0;
     }
 }
 
 void sub_811E0A0(void)
 {
-    if (!ewram17810[gActiveBank].unk0_6)
+    if (!ewram17810[gActiveBattler].unk0_6)
         LinkPartnerBufferExecCompleted();
 }
 
 void sub_811E0CC(void)
 {
-    if (ewram17810[gActiveBank].unk1_0)
+    if (ewram17810[gActiveBattler].unk1_0)
     {
-        ewram17810[gActiveBank].unk0_7 = 0;
-        ewram17810[gActiveBank].unk1_0 = 0;
+        ewram17810[gActiveBattler].unk0_7 = 0;
+        ewram17810[gActiveBattler].unk1_0 = 0;
         FreeSpriteTilesByTag(0x27F9);
         FreeSpritePaletteByTag(0x27F9);
         CreateTask(c3_0802FDF4, 10);
-        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-        StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 0);
-        sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 0);
-        sub_804777C(gActiveBank);
-        sub_8043DFC(gHealthboxIDs[gActiveBank]);
-        sub_8031F88(gActiveBank);
-        gBattleBankFunc[gActiveBank] = sub_811E034;
+        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+        StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 0);
+        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 0);
+        sub_804777C(gActiveBattler);
+        sub_8043DFC(gHealthboxIDs[gActiveBattler]);
+        sub_8031F88(gActiveBattler);
+        gBattleBankFunc[gActiveBattler] = sub_811E034;
     }
 }
 
 void sub_811E1BC(void)
 {
-    if (!ewram17810[gActiveBank].unk0_3 && !ewram17810[gActiveBank].unk0_7)
-        sub_8141828(gActiveBank, &gPlayerParty[gBattlePartyID[gActiveBank]]);
-    if (gSprites[gUnknown_0300434C[gActiveBank]].callback == SpriteCallbackDummy
-     && !ewram17810[gActiveBank].unk0_3)
+    if (!ewram17810[gActiveBattler].unk0_3 && !ewram17810[gActiveBattler].unk0_7)
+        sub_8141828(gActiveBattler, &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]]);
+    if (gSprites[gUnknown_0300434C[gActiveBattler]].callback == SpriteCallbackDummy
+     && !ewram17810[gActiveBattler].unk0_3)
     {
-        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBank]]);
-        gBattleBankFunc[gActiveBank] = sub_811E0CC;
+        DestroySprite(&gSprites[gUnknown_0300434C[gActiveBattler]]);
+        gBattleBankFunc[gActiveBattler] = sub_811E0CC;
     }
 }
 
@@ -472,7 +471,7 @@ void sub_811E29C(void)
         if (gBattleTypeFlags & 2)
         {
             sub_800832C();
-            gBattleBankFunc[gActiveBank] = sub_811E258;
+            gBattleBankFunc[gActiveBattler] = sub_811E258;
         }
         else
         {
@@ -488,28 +487,28 @@ void LinkPartnerBufferExecCompleted(void)
 {
     u8 multiplayerId;
 
-    gBattleBankFunc[gActiveBank] = LinkPartnerBufferRunCommand;
+    gBattleBankFunc[gActiveBattler] = LinkPartnerBufferRunCommand;
     if (gBattleTypeFlags & 2)
     {
         multiplayerId = GetMultiplayerId();
         PrepareBufferDataTransferLink(2, 4, &multiplayerId);
-        gBattleBufferA[gActiveBank][0] = 0x38;
+        gBattleBufferA[gActiveBattler][0] = 0x38;
     }
     else
     {
-        gBattleExecBuffer &= ~gBitTable[gActiveBank];
+        gBattleExecBuffer &= ~gBitTable[gActiveBattler];
     }
 }
 
 void sub_811E38C(void)
 {
-    if (!ewram17810[gActiveBank].unk0_4)
+    if (!ewram17810[gActiveBattler].unk0_4)
         LinkPartnerBufferExecCompleted();
 }
 
 void sub_811E3B8(void)
 {
-    if (!ewram17810[gActiveBank].unk0_5)
+    if (!ewram17810[gActiveBattler].unk0_5)
         LinkPartnerBufferExecCompleted();
 }
 
@@ -519,13 +518,13 @@ void LinkPartnerHandleGetAttributes(void)
     int r6 = 0;
     s32 i;
 
-    if (gBattleBufferA[gActiveBank][2] == 0)
+    if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        r6 = dp01_getattr_by_ch1_for_player_pokemon(gBattlePartyID[gActiveBank], unk);
+        r6 = dp01_getattr_by_ch1_for_player_pokemon(gBattlerPartyIndexes[gActiveBattler], unk);
     }
     else
     {
-        u8 r4 = gBattleBufferA[gActiveBank][2];
+        u8 r4 = gBattleBufferA[gActiveBattler][2];
 
         for (i = 0; i < 6; i++)
         {
@@ -549,7 +548,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     u32 data32;
     s32 size = 0;
 
-    switch (gBattleBufferA[gActiveBank][1])
+    switch (gBattleBufferA[gActiveBattler][1])
     {
     case 0:
         battlePokemon.species = GetMonData(&gPlayerParty[a], MON_DATA_SPECIES);
@@ -611,7 +610,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     case 5:
     case 6:
     case 7:
-        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBank][1] - 4);
+        data16 = GetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - 4);
         buffer[0] = data16;
         buffer[1] = data16 >> 8;
         size = 2;
@@ -626,7 +625,7 @@ u32 dp01_getattr_by_ch1_for_player_pokemon(u8 a, u8 *buffer)
     case 10:
     case 11:
     case 12:
-        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBank][1] - 9);
+        buffer[0] = GetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - 9);
         size = 1;
         break;
     case 17:
@@ -850,13 +849,13 @@ void LinkPartnerHandleSetAttributes(void)
     u8 i;
     u8 r4;
 
-    if (gBattleBufferA[gActiveBank][2] == 0)
+    if (gBattleBufferA[gActiveBattler][2] == 0)
     {
-        sub_811EC68(gBattlePartyID[gActiveBank]);
+        sub_811EC68(gBattlerPartyIndexes[gActiveBattler]);
     }
     else
     {
-        r4 = gBattleBufferA[gActiveBank][2];
+        r4 = gBattleBufferA[gActiveBattler][2];
         for (i = 0; i < 6; i++)
         {
             if (r4 & 1)
@@ -870,11 +869,11 @@ void LinkPartnerHandleSetAttributes(void)
 // Duplicate of dp01_setattr_by_ch1_for_player_pokemon
 void sub_811EC68(u8 a)
 {
-    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBank][3];
-    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBank][3];
+    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[gActiveBattler][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[gActiveBattler][3];
     s32 i;
 
-    switch (gBattleBufferA[gActiveBank][1])
+    switch (gBattleBufferA[gActiveBattler][1])
     {
     case 0:
         {
@@ -915,10 +914,10 @@ void sub_811EC68(u8 a)
         }
         break;
     case 1:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPECIES, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 2:
-        SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_HELD_ITEM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 3:
         for (i = 0; i < 4; i++)
@@ -932,157 +931,157 @@ void sub_811EC68(u8 a)
     case 5:
     case 6:
     case 7:
-        SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBank][1] - 4, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_MOVE1 + gBattleBufferA[gActiveBattler][1] - 4, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 8:
-        SetMonData(&gPlayerParty[a], MON_DATA_PP1, &gBattleBufferA[gActiveBank][3]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP2, &gBattleBufferA[gActiveBank][4]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP3, &gBattleBufferA[gActiveBank][5]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP4, &gBattleBufferA[gActiveBank][6]);
-        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &gBattleBufferA[gActiveBank][7]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1, &gBattleBufferA[gActiveBattler][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP2, &gBattleBufferA[gActiveBattler][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP3, &gBattleBufferA[gActiveBattler][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP4, &gBattleBufferA[gActiveBattler][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP_BONUSES, &gBattleBufferA[gActiveBattler][7]);
         break;
     case 9:
     case 10:
     case 11:
     case 12:
-        SetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBank][1] - 9, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PP1 + gBattleBufferA[gActiveBattler][1] - 9, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 17:
-        SetMonData(&gPlayerParty[a], MON_DATA_OT_ID, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_OT_ID, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 18:
-        SetMonData(&gPlayerParty[a], MON_DATA_EXP, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_EXP, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 19:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 20:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 21:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 22:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 23:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 24:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_EV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 25:
-        SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_FRIENDSHIP, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 26:
-        SetMonData(&gPlayerParty[a], MON_DATA_POKERUS, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_POKERUS, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 27:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LOCATION, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 28:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_LEVEL, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 29:
-        SetMonData(&gPlayerParty[a], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_MET_GAME, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 30:
-        SetMonData(&gPlayerParty[a], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_POKEBALL, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 31:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][4]);
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][5]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][6]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][7]);
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][8]);
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][4]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][5]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][6]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][7]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][8]);
         break;
     case 32:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_HP_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 33:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 34:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 35:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 36:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 37:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF_IV, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 38:
-        SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_PERSONALITY, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 39:
-        SetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_CHECKSUM, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 40:
-        SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_STATUS, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 41:
-        SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_LEVEL, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 42:
-        SetMonData(&gPlayerParty[a], MON_DATA_HP, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_HP, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 43:
-        SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_MAX_HP, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 44:
-        SetMonData(&gPlayerParty[a], MON_DATA_ATK, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_ATK, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 45:
-        SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_DEF, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 46:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPEED, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 47:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPATK, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 48:
-        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SPDEF, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 49:
-        SetMonData(&gPlayerParty[a], MON_DATA_COOL, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 50:
-        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 51:
-        SetMonData(&gPlayerParty[a], MON_DATA_CUTE, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 52:
-        SetMonData(&gPlayerParty[a], MON_DATA_SMART, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 53:
-        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 54:
-        SetMonData(&gPlayerParty[a], MON_DATA_SHEEN, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SHEEN, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 55:
-        SetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_COOL_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 56:
-        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 57:
-        SetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_CUTE_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 58:
-        SetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_SMART_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     case 59:
-        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBank][3]);
+        SetMonData(&gPlayerParty[a], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[gActiveBattler][3]);
         break;
     }
-    HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 }
 
 void LinkPartnerHandlecmd3(void)
@@ -1090,37 +1089,37 @@ void LinkPartnerHandlecmd3(void)
     u8 *dst;
     u8 i;
 
-    MEMSET_ALT(&gPlayerParty[gBattlePartyID[gActiveBank]] + gBattleBufferA[gActiveBank][1],
-        gBattleBufferA[gActiveBank][3 + i], gBattleBufferA[gActiveBank][2], i, dst);
+    MEMSET_ALT(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1],
+        gBattleBufferA[gActiveBattler][3 + i], gBattleBufferA[gActiveBattler][2], i, dst);
 
     LinkPartnerBufferExecCompleted();
 }
 
 void LinkPartnerHandleLoadPokeSprite(void)
 {
-    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     GetMonSpriteTemplate_803C56C(
-      GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
-      GetBankIdentity(gActiveBank));
-    gBankSpriteIds[gActiveBank] = CreateSprite(
+      GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
+      GetBattlerPosition(gActiveBattler));
+    gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(gActiveBank, 2),
-      sub_8077F68(gActiveBank),
-      sub_8079E90(gActiveBank));
-    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = -240;
-    gSprites[gBankSpriteIds[gActiveBank]].data[0] = gActiveBank;
-    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
-    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], gBattleMonForms[gActiveBank]);
-    gBattleBankFunc[gActiveBank] = sub_811DDE8;
+      GetBattlerSpriteCoord(gActiveBattler, 2),
+      sub_8077F68(gActiveBattler),
+      sub_8079E90(gActiveBattler));
+    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
+    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], gBattleMonForms[gActiveBattler]);
+    gBattleBankFunc[gActiveBattler] = sub_811DDE8;
 }
 
 void LinkPartnerHandleSendOutPoke(void)
 {
-    sub_8032AA8(gActiveBank, gBattleBufferA[gActiveBank][2]);
-    gBattlePartyID[gActiveBank] = gBattleBufferA[gActiveBank][1];
-    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-    sub_811F864(gActiveBank, gBattleBufferA[gActiveBank][2]);
-    gBattleBankFunc[gActiveBank] = sub_811E1BC;
+    sub_8032AA8(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
+    gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
+    BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+    sub_811F864(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
+    gBattleBankFunc[gActiveBattler] = sub_811E1BC;
 }
 
 void sub_811F864(u8 a, u8 b)
@@ -1128,13 +1127,13 @@ void sub_811F864(u8 a, u8 b)
     u16 species;
 
     sub_8032AA8(a, b);
-    gBattlePartyID[a] = gBattleBufferA[a][1];
-    species = GetMonData(&gPlayerParty[gBattlePartyID[a]], MON_DATA_SPECIES);
+    gBattlerPartyIndexes[a] = gBattleBufferA[a][1];
+    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[a]], MON_DATA_SPECIES);
     gUnknown_0300434C[a] = CreateInvisibleSpriteWithCallback(sub_80312F0);
-    GetMonSpriteTemplate_803C56C(species, GetBankIdentity(a));
+    GetMonSpriteTemplate_803C56C(species, GetBattlerPosition(a));
     gBankSpriteIds[a] = CreateSprite(
       &gUnknown_02024E8C,
-      GetBankPosition(a, 2),
+      GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
       sub_8079E90(a));
     gSprites[gUnknown_0300434C[a]].data[1] = gBankSpriteIds[a];
@@ -1149,35 +1148,35 @@ void sub_811F864(u8 a, u8 b)
 
 void LinkPartnerHandleReturnPokeToBall(void)
 {
-    if (gBattleBufferA[gActiveBank][1] == 0)
+    if (gBattleBufferA[gActiveBattler][1] == 0)
     {
-        ewram17810[gActiveBank].unk4 = 0;
-        gBattleBankFunc[gActiveBank] = sub_811FA5C;
+        ewram17810[gActiveBattler].unk4 = 0;
+        gBattleBankFunc[gActiveBattler] = sub_811FA5C;
     }
     else
     {
-        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBank]]);
-        DestroySprite(&gSprites[gBankSpriteIds[gActiveBank]]);
-        sub_8043DB0(gHealthboxIDs[gActiveBank]);
+        FreeSpriteOamMatrix(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        DestroySprite(&gSprites[gBankSpriteIds[gActiveBattler]]);
+        sub_8043DB0(gHealthboxIDs[gActiveBattler]);
         LinkPartnerBufferExecCompleted();
     }
 }
 
 void sub_811FA5C(void)
 {
-    switch (ewram17810[gActiveBank].unk4)
+    switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].substituteSprite)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
-        ewram17810[gActiveBank].unk4 = 1;
+        if (ewram17800[gActiveBattler].substituteSprite)
+            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
+        ewram17810[gActiveBattler].unk4 = 1;
         break;
     case 1:
-        if (!ewram17810[gActiveBank].unk0_6)
+        if (!ewram17810[gActiveBattler].unk0_6)
         {
-            ewram17810[gActiveBank].unk4 = 0;
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 1);
-            gBattleBankFunc[gActiveBank] = sub_811DF34;
+            ewram17810[gActiveBattler].unk4 = 0;
+            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 1);
+            gBattleBankFunc[gActiveBattler] = sub_811DF34;
         }
         break;
     }
@@ -1190,28 +1189,28 @@ void LinkPartnerHandleTrainerThrow(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (GetBankIdentity(gActiveBank) & 2)
+        if (GetBattlerPosition(gActiveBattler) & 2)
             xOffset = 16;
         else
             xOffset = -16;
-        gender = gLinkPlayers[sub_803FC34(gActiveBank)].gender;
+        gender = gLinkPlayers[sub_803FC34(gActiveBattler)].gender;
     }
     else
     {
         xOffset = 0;
         gender = gLinkPlayers[GetMultiplayerId() ^ 1].gender;
     }
-    LoadPlayerTrainerBankSprite(gender, gActiveBank);
-    GetMonSpriteTemplate_803C5A0(gender, GetBankIdentity(gActiveBank));
-    gBankSpriteIds[gActiveBank] = CreateSprite(
+    LoadPlayerTrainerBankSprite(gender, gActiveBattler);
+    GetMonSpriteTemplate_803C5A0(gender, GetBattlerPosition(gActiveBattler));
+    gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80 + xOffset, 80 + 4 * (8 - gTrainerBackPicCoords[gender].coords),
-      sub_8079E90(gActiveBank));
-    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = gActiveBank;
-    gSprites[gBankSpriteIds[gActiveBank]].pos2.x = 240;
-    gSprites[gBankSpriteIds[gActiveBank]].data[0] = -2;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80313A0;
-    gBattleBankFunc[gActiveBank] = sub_811DAE4;
+      sub_8079E90(gActiveBattler));
+    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
+    gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = 240;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = -2;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80313A0;
+    gBattleBankFunc[gActiveBattler] = sub_811DAE4;
 }
 
 void LinkPartnerHandleTrainerSlide(void)
@@ -1221,32 +1220,32 @@ void LinkPartnerHandleTrainerSlide(void)
 
 void LinkPartnerHandleTrainerSlideBack(void)
 {
-    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
-    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 35;
-    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
-    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = StartTranslateAnimSpriteByDeltas;
-    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBank]], SpriteCallbackDummy);
-    gBattleBankFunc[gActiveBank] = sub_811DB1C;
+    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBattler]]);
+    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 35;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartTranslateAnimSpriteByDeltas;
+    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBattler]], SpriteCallbackDummy);
+    gBattleBankFunc[gActiveBattler] = sub_811DB1C;
 }
 
 void LinkPartnerHandlecmd10(void)
 {
-    if (ewram17810[gActiveBank].unk4 == 0)
+    if (ewram17810[gActiveBattler].unk4 == 0)
     {
-        if (ewram17800[gActiveBank].substituteSprite)
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
-        ewram17810[gActiveBank].unk4++;
+        if (ewram17800[gActiveBattler].substituteSprite)
+            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
+        ewram17810[gActiveBattler].unk4++;
     }
-    else if (!ewram17810[gActiveBank].unk0_6)
+    else if (!ewram17810[gActiveBattler].unk0_6)
     {
-        ewram17810[gActiveBank].unk4 = 0;
-        HandleLowHpMusicChange(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
+        ewram17810[gActiveBattler].unk4 = 0;
+        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
         PlaySE12WithPanning(SE_POKE_DEAD, -64);
-        gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
-        gSprites[gBankSpriteIds[gActiveBank]].data[2] = 5;
-        gSprites[gBankSpriteIds[gActiveBank]].callback = sub_80105EC;
-        gBattleBankFunc[gActiveBank] = sub_811DE98;
+        gSprites[gBankSpriteIds[gActiveBattler]].data[1] = 0;
+        gSprites[gBankSpriteIds[gActiveBattler]].data[2] = 5;
+        gSprites[gBankSpriteIds[gActiveBattler]].callback = sub_80105EC;
+        gBattleBankFunc[gActiveBattler] = sub_811DE98;
     }
 }
 
@@ -1272,56 +1271,56 @@ void LinkPartnerHandlePuase(void)
 
 void LinkPartnerHandleMoveAnimation(void)
 {
-    if (!mplay_80342A4(gActiveBank))
+    if (!mplay_80342A4(gActiveBattler))
     {
-        u32 r0 = gBattleBufferA[gActiveBank][1]
-               | (gBattleBufferA[gActiveBank][2] << 8);
+        u32 r0 = gBattleBufferA[gActiveBattler][1]
+               | (gBattleBufferA[gActiveBattler][2] << 8);
 
-        gAnimMoveTurn = gBattleBufferA[gActiveBank][3];
-        gAnimMovePower = gBattleBufferA[gActiveBank][4]
-                          | (gBattleBufferA[gActiveBank][5] << 8);
-        gAnimMoveDmg = gBattleBufferA[gActiveBank][6]
-                          | (gBattleBufferA[gActiveBank][7] << 8)
-                          | (gBattleBufferA[gActiveBank][8] << 16)
-                          | (gBattleBufferA[gActiveBank][9] << 24);
-        gAnimFriendship = gBattleBufferA[gActiveBank][10];
-        gWeatherMoveAnim = gBattleBufferA[gActiveBank][12]
-                          | (gBattleBufferA[gActiveBank][13] << 8);
-        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBank][16];
-        gTransformedPersonalities[gActiveBank] = gAnimDisableStructPtr->transformedMonPersonality;
+        gAnimMoveTurn = gBattleBufferA[gActiveBattler][3];
+        gAnimMovePower = gBattleBufferA[gActiveBattler][4]
+                          | (gBattleBufferA[gActiveBattler][5] << 8);
+        gAnimMoveDmg = gBattleBufferA[gActiveBattler][6]
+                          | (gBattleBufferA[gActiveBattler][7] << 8)
+                          | (gBattleBufferA[gActiveBattler][8] << 16)
+                          | (gBattleBufferA[gActiveBattler][9] << 24);
+        gAnimFriendship = gBattleBufferA[gActiveBattler][10];
+        gWeatherMoveAnim = gBattleBufferA[gActiveBattler][12]
+                          | (gBattleBufferA[gActiveBattler][13] << 8);
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[gActiveBattler][16];
+        gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
 
         if (sub_8031720(r0, gAnimMoveTurn) != 0)
             LinkPartnerBufferExecCompleted();
         else
         {
-            ewram17810[gActiveBank].unk4 = 0;
-            gBattleBankFunc[gActiveBank] = sub_811FF30;
+            ewram17810[gActiveBattler].unk4 = 0;
+            gBattleBankFunc[gActiveBattler] = sub_811FF30;
         }
     }
 }
 
 void sub_811FF30(void)
 {
-    u16 r4 = gBattleBufferA[gActiveBank][1]
-           | (gBattleBufferA[gActiveBank][2] << 8);
-    u8 r7 = gBattleBufferA[gActiveBank][11];
+    u16 r4 = gBattleBufferA[gActiveBattler][1]
+           | (gBattleBufferA[gActiveBattler][2] << 8);
+    u8 r7 = gBattleBufferA[gActiveBattler][11];
 
-    switch (ewram17810[gActiveBank].unk4)
+    switch (ewram17810[gActiveBattler].unk4)
     {
     case 0:
-        if (ewram17800[gActiveBank].substituteSprite && !ewram17800[gActiveBank].unk0_3)
+        if (ewram17800[gActiveBattler].substituteSprite && !ewram17800[gActiveBattler].unk0_3)
         {
-            ewram17800[gActiveBank].unk0_3 = 1;
-            move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 5);
+            ewram17800[gActiveBattler].unk0_3 = 1;
+            move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 5);
         }
-        ewram17810[gActiveBank].unk4 = 1;
+        ewram17810[gActiveBattler].unk4 = 1;
         break;
     case 1:
-        if (!ewram17810[gActiveBank].unk0_6)
+        if (!ewram17810[gActiveBattler].unk0_6)
         {
             sub_80326EC(0);
             DoMoveAnim(r4);
-            ewram17810[gActiveBank].unk4 = 2;
+            ewram17810[gActiveBattler].unk4 = 2;
         }
         break;
     case 2:
@@ -1329,22 +1328,22 @@ void sub_811FF30(void)
         if (!gAnimScriptActive)
         {
             sub_80326EC(1);
-            if ((ewram17800[gActiveBank].substituteSprite) && r7 <= 1)
+            if ((ewram17800[gActiveBattler].substituteSprite) && r7 <= 1)
             {
-                move_anim_start_t4(gActiveBank, gActiveBank, gActiveBank, 6);
-                ewram17800[gActiveBank].unk0_3 = 0;
+                move_anim_start_t4(gActiveBattler, gActiveBattler, gActiveBattler, 6);
+                ewram17800[gActiveBattler].unk0_3 = 0;
             }
-            ewram17810[gActiveBank].unk4 = 3;
+            ewram17810[gActiveBattler].unk4 = 3;
         }
         break;
     case 3:
-        if (!ewram17810[gActiveBank].unk0_6)
+        if (!ewram17810[gActiveBattler].unk0_6)
         {
             sub_8031F24();
             sub_80324BC(
-              gActiveBank,
-              gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
-            ewram17810[gActiveBank].unk4 = 0;
+              gActiveBattler,
+              gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
+            ewram17810[gActiveBattler].unk4 = 0;
             LinkPartnerBufferExecCompleted();
         }
         break;
@@ -1355,9 +1354,9 @@ void LinkPartnerHandlePrintString(void)
 {
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBank][2]);
+    BufferStringBattle(*(u16 *)&gBattleBufferA[gActiveBattler][2]);
     Text_InitWindow8002EB0(&gUnknown_03004210, gDisplayedStringBattle, 144, 2, 15);
-    gBattleBankFunc[gActiveBank] = sub_811DFA0;
+    gBattleBankFunc[gActiveBattler] = sub_811DFA0;
 }
 
 void LinkPartnerHandlePrintStringPlayerOnly(void)
@@ -1400,21 +1399,21 @@ void LinkPartnerHandleHealthBarUpdate(void)
     s16 r7;
 
     load_gfxc_health_bar(0);
-    r7 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+    r7 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
     if (r7 != 0x7FFF)
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
-        u32 hp = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_HP);
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
+        u32 hp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_HP);
 
-        sub_8043D84(gActiveBank, gHealthboxIDs[gActiveBank], maxHP, hp, r7);
+        sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, hp, r7);
     }
     else
     {
-        u32 maxHP = GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_MAX_HP);
+        u32 maxHP = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MAX_HP);
 
-        sub_8043D84(gActiveBank, gHealthboxIDs[gActiveBank], maxHP, 0, r7);
+        sub_8043D84(gActiveBattler, gHealthboxIDs[gActiveBattler], maxHP, 0, r7);
     }
-    gBattleBankFunc[gActiveBank] = bx_t3_healthbar_update;
+    gBattleBankFunc[gActiveBattler] = bx_t3_healthbar_update;
 }
 
 void LinkPartnerHandleExpBarUpdate(void)
@@ -1424,25 +1423,25 @@ void LinkPartnerHandleExpBarUpdate(void)
 
 void LinkPartnerHandleStatusIconUpdate(void)
 {
-    if (mplay_80342A4(gActiveBank) == 0)
+    if (mplay_80342A4(gActiveBattler) == 0)
     {
-        sub_8045A5C(gHealthboxIDs[gActiveBank], &gPlayerParty[gBattlePartyID[gActiveBank]], 9);
-        ewram17810[gActiveBank].unk0_4 = 0;
-        gBattleBankFunc[gActiveBank] = sub_811E38C;
+        sub_8045A5C(gHealthboxIDs[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], 9);
+        ewram17810[gActiveBattler].unk0_4 = 0;
+        gBattleBankFunc[gActiveBattler] = sub_811E38C;
     }
 }
 
 void LinkPartnerHandleStatusAnimation(void)
 {
-    if (mplay_80342A4(gActiveBank) == 0)
+    if (mplay_80342A4(gActiveBattler) == 0)
     {
         move_anim_start_t2_for_situation(
-          gBattleBufferA[gActiveBank][1],
-          gBattleBufferA[gActiveBank][2]
-          | (gBattleBufferA[gActiveBank][3] << 8)
-          | (gBattleBufferA[gActiveBank][4] << 16)
-          | (gBattleBufferA[gActiveBank][5] << 24));
-        gBattleBankFunc[gActiveBank] = sub_811E38C;
+          gBattleBufferA[gActiveBattler][1],
+          gBattleBufferA[gActiveBattler][2]
+          | (gBattleBufferA[gActiveBattler][3] << 8)
+          | (gBattleBufferA[gActiveBattler][4] << 16)
+          | (gBattleBufferA[gActiveBattler][5] << 24));
+        gBattleBankFunc[gActiveBattler] = sub_811E38C;
     }
 }
 
@@ -1499,7 +1498,7 @@ void LinkPartnerHandlecmd37(void)
 
 void LinkPartnerHandlecmd38(void)
 {
-    gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBank][1];
+    gUnknown_020238C8.unk0_0 = gBattleBufferA[gActiveBattler][1];
     LinkPartnerBufferExecCompleted();
 }
 
@@ -1517,16 +1516,16 @@ void LinkPartnerHandlecmd40(void)
 
 void LinkPartnerHandleHitAnimation(void)
 {
-    if (gSprites[gBankSpriteIds[gActiveBank]].invisible == TRUE)
+    if (gSprites[gBankSpriteIds[gActiveBattler]].invisible == TRUE)
     {
         LinkPartnerBufferExecCompleted();
     }
     else
     {
         gDoingBattleAnim = TRUE;
-        gSprites[gBankSpriteIds[gActiveBank]].data[1] = 0;
-        sub_8047858(gActiveBank);
-        gBattleBankFunc[gActiveBank] = bx_blink_t3;
+        gSprites[gBankSpriteIds[gActiveBattler]].data[1] = 0;
+        sub_8047858(gActiveBattler);
+        gBattleBankFunc[gActiveBattler] = bx_blink_t3;
     }
 }
 
@@ -1539,31 +1538,31 @@ void LinkPartnerHandleEffectivenessSound(void)
 {
     s8 pan;
 
-    if (GetBankSide(gActiveBank) == 0)
+    if (GetBattlerSide(gActiveBattler) == 0)
         pan = -64;
     else
         pan = 63;
-    PlaySE12WithPanning(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8), pan);
+    PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
     LinkPartnerBufferExecCompleted();
 }
 
 void LinkPartnerHandlecmd44(void)
 {
-    PlayFanfare(gBattleBufferA[gActiveBank][1] | (gBattleBufferA[gActiveBank][2] << 8));
+    PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     LinkPartnerBufferExecCompleted();
 }
 
 void LinkPartnerHandleFaintingCry(void)
 {
     PlayCry3(
-      GetMonData(&gPlayerParty[gBattlePartyID[gActiveBank]], MON_DATA_SPECIES),
+      GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES),
       -25, 5);
     LinkPartnerBufferExecCompleted();
 }
 
 void LinkPartnerHandleIntroSlide(void)
 {
-    StartBattleIntroAnim(gBattleBufferA[gActiveBank][1]);
+    StartBattleIntroAnim(gBattleBufferA[gActiveBattler][1]);
     gUnknown_02024DE8 |= 1;
     LinkPartnerBufferExecCompleted();
 }
@@ -1573,25 +1572,25 @@ void LinkPartnerHandleTrainerBallThrow(void)
     u8 r4;
     u8 taskId;
 
-    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBank]]);
-    gSprites[gBankSpriteIds[gActiveBank]].data[0] = 50;
-    gSprites[gBankSpriteIds[gActiveBank]].data[2] = -40;
-    gSprites[gBankSpriteIds[gActiveBank]].data[4] = gSprites[gBankSpriteIds[gActiveBank]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBank]].callback = StartTranslateAnimSpriteByDeltas;
-    gSprites[gBankSpriteIds[gActiveBank]].data[5] = gActiveBank;
-    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBank]], sub_8030E38);
-    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBank]], 1);
+    oamt_add_pos2_onto_pos1(&gSprites[gBankSpriteIds[gActiveBattler]]);
+    gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 50;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[2] = -40;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartTranslateAnimSpriteByDeltas;
+    gSprites[gBankSpriteIds[gActiveBattler]].data[5] = gActiveBattler;
+    StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBattler]], sub_8030E38);
+    StartSpriteAnim(&gSprites[gBankSpriteIds[gActiveBattler]], 1);
     r4 = AllocSpritePalette(0xD6F9);
     LoadCompressedPalette(
-      gTrainerBackPicPaletteTable[gLinkPlayers[sub_803FC34(gActiveBank)].gender].data,
+      gTrainerBackPicPaletteTable[gLinkPlayers[sub_803FC34(gActiveBattler)].gender].data,
       0x100 + r4 * 16, 0x20);
-    gSprites[gBankSpriteIds[gActiveBank]].oam.paletteNum = r4;
+    gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = r4;
     taskId = CreateTask(sub_812071C, 5);
-    gTasks[taskId].data[0] = gActiveBank;
-    if (ewram17810[gActiveBank].unk0_0)
-        gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
+    gTasks[taskId].data[0] = gActiveBattler;
+    if (ewram17810[gActiveBattler].unk0_0)
+        gTasks[gUnknown_02024E68[gActiveBattler]].func = sub_8044CA0;
     ewram17840.unk9_0 = 1;
-    gBattleBankFunc[gActiveBank] = nullsub_74;
+    gBattleBankFunc[gActiveBattler] = nullsub_74;
 }
 
 void sub_812071C(u8 taskId)
@@ -1604,61 +1603,61 @@ void sub_812071C(u8 taskId)
         return;
     }
 
-    r9 = gActiveBank;
-    gActiveBank = gTasks[taskId].data[0];
+    r9 = gActiveBattler;
+    gActiveBattler = gTasks[taskId].data[0];
     if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        sub_811F864(gActiveBank, 0);
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        sub_811F864(gActiveBattler, 0);
     }
     else
     {
-        gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        sub_811F864(gActiveBank, 0);
-        gActiveBank ^= 2;
-        gBattleBufferA[gActiveBank][1] = gBattlePartyID[gActiveBank];
-        BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[gActiveBank]], gActiveBank);
-        sub_811F864(gActiveBank, 0);
-        gActiveBank ^= 2;
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        sub_811F864(gActiveBattler, 0);
+        gActiveBattler ^= 2;
+        gBattleBufferA[gActiveBattler][1] = gBattlerPartyIndexes[gActiveBattler];
+        BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
+        sub_811F864(gActiveBattler, 0);
+        gActiveBattler ^= 2;
     }
-    gBattleBankFunc[gActiveBank] = sub_811DCA0;
-    gActiveBank = r9;
+    gBattleBankFunc[gActiveBattler] = sub_811DCA0;
+    gActiveBattler = r9;
     DestroyTask(taskId);
 }
 
 void LinkPartnerHandlecmd48(void)
 {
-    if (gBattleBufferA[gActiveBank][1] != 0 && GetBankSide(gActiveBank) == 0)
+    if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == 0)
     {
         LinkPartnerBufferExecCompleted();
         return;
     }
 
-    ewram17810[gActiveBank].unk0_0 = 1;
-    gUnknown_02024E68[gActiveBank] = sub_8044804(
-      gActiveBank,
-      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBank][4],
-      gBattleBufferA[gActiveBank][1],
-      gBattleBufferA[gActiveBank][2]);
-    ewram17810[gActiveBank].unk5 = 0;
-    if (gBattleBufferA[gActiveBank][2] != 0)
-        ewram17810[gActiveBank].unk5 = 0x5D;
-    gBattleBankFunc[gActiveBank] = sub_81208E0;
+    ewram17810[gActiveBattler].unk0_0 = 1;
+    gUnknown_02024E68[gActiveBattler] = sub_8044804(
+      gActiveBattler,
+      (struct BattleInterfaceStruct2 *)&gBattleBufferA[gActiveBattler][4],
+      gBattleBufferA[gActiveBattler][1],
+      gBattleBufferA[gActiveBattler][2]);
+    ewram17810[gActiveBattler].unk5 = 0;
+    if (gBattleBufferA[gActiveBattler][2] != 0)
+        ewram17810[gActiveBattler].unk5 = 0x5D;
+    gBattleBankFunc[gActiveBattler] = sub_81208E0;
 }
 
 void sub_81208E0(void)
 {
-    if (ewram17810[gActiveBank].unk5++ >= 93)
+    if (ewram17810[gActiveBattler].unk5++ >= 93)
     {
-        ewram17810[gActiveBank].unk5 = 0;
+        ewram17810[gActiveBattler].unk5 = 0;
         LinkPartnerBufferExecCompleted();
     }
 }
 
 void LinkPartnerHandlecmd49(void)
 {
-    if (ewram17810[gActiveBank].unk0_0)
-        gTasks[gUnknown_02024E68[gActiveBank]].func = sub_8044CA0;
+    if (ewram17810[gActiveBattler].unk0_0)
+        gTasks[gUnknown_02024E68[gActiveBattler]].func = sub_8044CA0;
     LinkPartnerBufferExecCompleted();
 }
 
@@ -1669,25 +1668,25 @@ void LinkPartnerHandlecmd50(void)
 
 void LinkPartnerHandleSpriteInvisibility(void)
 {
-    if (IsBankSpritePresent(gActiveBank) != 0)
+    if (IsBankSpritePresent(gActiveBattler) != 0)
     {
-        gSprites[gBankSpriteIds[gActiveBank]].invisible = gBattleBufferA[gActiveBank][1];
-        sub_8031F88(gActiveBank);
+        gSprites[gBankSpriteIds[gActiveBattler]].invisible = gBattleBufferA[gActiveBattler][1];
+        sub_8031F88(gActiveBattler);
     }
     LinkPartnerBufferExecCompleted();
 }
 
 void LinkPartnerHandleBattleAnimation(void)
 {
-    if (mplay_80342A4(gActiveBank) == 0)
+    if (mplay_80342A4(gActiveBattler) == 0)
     {
-        u8 r3 = gBattleBufferA[gActiveBank][1];
-        u16 r4 = gBattleBufferA[gActiveBank][2] | (gBattleBufferA[gActiveBank][3] << 8);
+        u8 r3 = gBattleBufferA[gActiveBattler][1];
+        u16 r4 = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
-        if (move_anim_start_t3(gActiveBank, gActiveBank, gActiveBank, r3, r4) != 0)
+        if (move_anim_start_t3(gActiveBattler, gActiveBattler, gActiveBattler, r3, r4) != 0)
             LinkPartnerBufferExecCompleted();
         else
-            gBattleBankFunc[gActiveBank] = sub_811E3B8;
+            gBattleBankFunc[gActiveBattler] = sub_811E3B8;
     }
 }
 
@@ -1703,11 +1702,11 @@ void LinkPartnerHandleResetActionMoveSelection(void)
 
 void LinkPartnerHandlecmd55(void)
 {
-    gBattleOutcome = gBattleBufferA[gActiveBank][1];
+    gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     LinkPartnerBufferExecCompleted();
-    gBattleBankFunc[gActiveBank] = sub_811E29C;
+    gBattleBankFunc[gActiveBattler] = sub_811E29C;
 }
 
 void LinkPartnerHandlecmd56(void)

@@ -30,7 +30,7 @@ const struct MenuAction gUnknown_0842C29C[] = {
     {UnknownString_8thRound, sub_814A4B8}
 };
 
-int unref_sub_814A414(void)
+int InitSogabeDebugMenu(void)
 {
     Menu_EraseScreen();
     Menu_DrawStdWindowFrame(0, 0, 16, 18);

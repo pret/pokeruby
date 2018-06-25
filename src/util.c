@@ -231,7 +231,7 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 
 #else
 
-__attribute__((naked)) void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
+NAKED void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 {
     asm("\n"
     "    .syntax unified\n"
@@ -490,7 +490,7 @@ int CountTrailingZeroBits(u32 value)
     return 0;
 }
 
-u16 CalcCRC16(u8 *data, int length)
+u16 CalcCRC16(const u8 *data, int length)
 {
     u16 i, j;
     u16 crc = 0x1121;

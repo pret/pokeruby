@@ -192,10 +192,10 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
     }
 }
 
-bool8 unref_sub_8073D3C(u32 a1, u8 a2, u8 a3, u8 a4, u16 a5)
+bool8 unref_sub_8073D3C(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
 {
     ReadPlttIntoBuffers();
-    return BeginNormalPaletteFade(a1, a2, a3, a4, a5);
+    return BeginNormalPaletteFade(selectedPalettes, delay, startY, targetY, blendColor);
 }
 
 void unref_sub_8073D84(u8 a1, u32 *a2)

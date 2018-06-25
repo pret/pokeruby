@@ -2634,9 +2634,9 @@ extern const u16 gUnknown_08EA02C8[];
 extern const u16 gUnknown_08EA0348[];
 extern const u16 gUnknown_08EA15C8[];
 extern const u16 gTradeMonBoxTilemap[];
-extern const u8 gUnknown_08D00000[];
-extern const u16 gUnknown_08D00524[];
-extern const u8 gUnknown_08D004E0[];
+extern const u8 gBattleTextboxTiles[];
+extern const u16 gBattleTextboxTilemap[];
+extern const u8 gBattleTextboxPalette[];
 
 extern const u8 gNamingScreenBackButtonTiles[];
 extern const u8 gNamingScreenOKButtonTiles[];
@@ -3347,5 +3347,78 @@ extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_21;
 
 extern const u8 gContestConfetti_Gfx[];
 extern const u8 gContestConfetti_Pal[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_TallGrass[];
+extern const u8 gBattleTerrainTilemap_TallGrass[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_TallGrass[];
+extern const u8 gBattleTerrainAnimTilemap_TallGrass[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_TallGrass[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_LongGrass[];
+extern const u8 gBattleTerrainTilemap_LongGrass[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_LongGrass[];
+extern const u8 gBattleTerrainAnimTilemap_LongGrass[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_LongGrass[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Sand[];
+extern const u8 gBattleTerrainTilemap_Sand[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Sand[];
+extern const u8 gBattleTerrainAnimTilemap_Sand[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Sand[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Underwater[];
+extern const u8 gBattleTerrainTilemap_Underwater[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Underwater[];
+extern const u8 gBattleTerrainAnimTilemap_Underwater[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Underwater[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Water[];
+extern const u8 gBattleTerrainTilemap_Water[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Water[];
+extern const u8 gBattleTerrainAnimTilemap_Water[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Water[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_PondWater[];
+extern const u8 gBattleTerrainTilemap_PondWater[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_PondWater[];
+extern const u8 gBattleTerrainAnimTilemap_PondWater[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_PondWater[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Rock[];
+extern const u8 gBattleTerrainTilemap_Rock[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Rock[];
+extern const u8 gBattleTerrainAnimTilemap_Rock[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Rock[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Cave[];
+extern const u8 gBattleTerrainTilemap_Cave[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Cave[];
+extern const u8 gBattleTerrainAnimTilemap_Cave[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Cave[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Building[];
+extern const u8 gBattleTerrainTilemap_Building[];
+extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_Building[];
+extern const u8 gBattleTerrainAnimTilemap_Building[];
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Building[];
+
+extern const struct CompressedSpritePalette gBattleTerrainPalette_Plain[];
+
+extern const struct CompressedSpriteSheet gBattleTerrainTiles_Stadium[];
+extern const u8 gBattleTerrainTilemap_Stadium[];
+
+extern const u8 gBattleWindowLargeGfx[];
+extern const u8 gBattleWindowSmallGfx[];
+extern const u8 gBattleWindowSmall2Gfx[];
+extern const u8 gBattleWindowSmall3Gfx[];
+extern const u8 gBattleWindowLarge2Gfx[];
+extern const u8 gBlankGfxCompressed[];
+extern const u8 gBattleGfx_BallStatusBar[];
+extern const u16 gUnknown_08D1212C[];
+extern const u16 gUnknown_08D1214C[];
+extern const u8 Tiles_D129AC[];
+
+extern const u8 gAreaUnknownTiles[];
+extern const u16 gAreaUnknownPalette[];
 
 #endif  // GUARD_GRAPHICS_H

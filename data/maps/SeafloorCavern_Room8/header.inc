@@ -1,9 +1,9 @@
 SeafloorCavern_Room8:: @ 8307144
-	.4byte SeafloorCavern_Room8_MapAttributes
+	.4byte SeafloorCavern_Room8_Layout
 	.4byte SeafloorCavern_Room8_MapEvents
 	.4byte SeafloorCavern_Room8_MapScripts
 	.4byte 0x0
-	.2byte BGM_TOZAN
+	.2byte MUS_TOZAN
 	.2byte 156
 	.byte 68
 	.byte 0

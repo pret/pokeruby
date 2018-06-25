@@ -1,9 +1,9 @@
 PetalburgCity_WallysHouse:: @ 8305F1C
-	.4byte House2_MapAttributes
+	.4byte House2_Layout
 	.4byte PetalburgCity_WallysHouse_MapEvents
 	.4byte PetalburgCity_WallysHouse_MapScripts
 	.4byte 0x0
-	.2byte BGM_MACHI_S2
+	.2byte MUS_MACHI_S2
 	.2byte 60
 	.byte 7
 	.byte 0

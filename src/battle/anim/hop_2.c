@@ -11,19 +11,33 @@ extern u8 gAnimBankTarget;
 extern void sub_80CB7EC(struct Sprite* sprite, s16 c);
 extern bool8 sub_80CB814(struct Sprite* sprite);
 extern void sub_80CB8B8(struct Sprite* sprite);
+extern const union AnimCmd *const gSpriteAnimTable_83D66B8[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6714[];
 
+void sub_80CBAE8(struct Sprite* sprite);
 static void sub_80CBB60(struct Sprite* sprite);
 
 // hop_2
 // Used in item steal.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D677C =
+{
+    .tileTag = 10224,
+    .paletteTag = 10224,
+    .oam = &gOamData_837DF94,
+    .anims = gSpriteAnimTable_83D66B8,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D6714,
+    .callback = sub_80CBAE8,
+};
 
 void sub_80CBAE8(struct Sprite* sprite)
 {
     s16 p1;
     s16 p2;
     sub_8078764(sprite, 0);
-    p1 = GetBankPosition(gAnimBankAttacker, 0);
-    p2 = GetBankPosition(gAnimBankAttacker, 1);
+    p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
+    p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     if ((gAnimBankTarget ^ 2) == gAnimBankAttacker)
     {
         sprite->data[6] = p1;
@@ -43,7 +57,7 @@ void sub_80CBAE8(struct Sprite* sprite)
     sprite->callback = sub_80CBB60;
 }
 
-void sub_80CBB60(struct Sprite* sprite)
+static void sub_80CBB60(struct Sprite* sprite)
 {
     int zero;
     sprite->data[0] += ((sprite->data[3] * 128) / sprite->data[4]);

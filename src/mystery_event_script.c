@@ -114,8 +114,9 @@ static void SetWord(u8 *ptr, u32 val)
     ptr[3] = val >> 24;
 }
 
-bool8 unref_sub_81261B4(u8 *a1, int a2)
+bool8 debug_sub_81261B4(u8 *a1, const u8 * _a2)
 {
+    int a2 = (int)_a2;
     if (a1[0x0] == 1 && a1[0x11] == 15 && !GetWord(a1 + 0x12))
     {
         int v4 = GetWord(a1 + 0x16) - a2 + (int)a1;
@@ -128,8 +129,9 @@ bool8 unref_sub_81261B4(u8 *a1, int a2)
     return FALSE;
 }
 
-bool8 unref_sub_812620C(u8 *a1, int a2)
+bool8 debug_sub_812620C(u8 *a1, const u8 * _a2)
 {
+    int a2 = (int)_a2;
     if (a1[0x0] == 1 && a1[0x11] == 16 && !GetWord(a1 + 0x12))
     {
         int v4 = GetWord(a1 + 0x16) - a2 + (int)a1;

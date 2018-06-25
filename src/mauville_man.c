@@ -10,7 +10,7 @@
 #include "overworld.h"
 #include "random.h"
 #include "script.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/songs.h"
 #include "sound.h"
 #include "string_util.h"
@@ -457,43 +457,32 @@ void ScrSpecial_GenerateGiddyLine(void)
     gSpecialVar_Result = TRUE;
 }
 
-#ifdef NONMATCHING
 static void sub_80F7DC0(void)
 {
+    struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
     u16 arr[][2] =
     {
-        { 0x0, 0},
-        { 0xC, 0},
-        { 0xD, 0},
-        {0x12, 0},
-        {0x13, 0},
-        {0x15, 0},
+        {EC_GROUP_POKEMON_1, 0},
+        {EC_GROUP_LIFESTYLE, 0},
+        {EC_GROUP_HOBBIES,   0},
+        {EC_GROUP_MOVE_1,    0},
+        {EC_GROUP_MOVE_2,    0},
+        {EC_GROUP_POKEMON_2, 0}
     };
     u16 i;
     u16 r10;
     u16 r7;
+    u16 r1;
 
     for (i = 0; i < 8; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
-
-        //gSaveBlock1.mauvilleMan.giddy.questionList[i] = i;
         giddy->questionList[i] = i;
     }
 
-    // Scramble questions
     for (i = 0; i < 8; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
-
-        /*
-        u16 r1 = Random() % (i + 1);
-        u8 r7 = gSaveBlock1.mauvilleMan.giddy.questionList[i];
-        gSaveBlock1.mauvilleMan.giddy.questionList[i] = gSaveBlock1.mauvilleMan.giddy.questionList[r1];
-        gSaveBlock1.mauvilleMan.giddy.questionList[r1] = r7;
-        */
-        u16 r1 = Random() % (i + 1);
-        u8 r7 = giddy->questionList[i];
+        r1 = Random() % (i + 1);
+        r7 = giddy->questionList[i];
         giddy->questionList[i] = giddy->questionList[r1];
         giddy->questionList[r1] = r7;
     }
@@ -505,220 +494,30 @@ static void sub_80F7DC0(void)
         r10 += arr[i][1];
     }
 
-    {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
-        giddy->questionNum = 0;
-    }
-    //gSaveBlock1.mauvilleMan.giddy.questionNum = 0;
-
+    giddy->questionNum = 0;
     r7 = 0;
     for (i = 0; i < 10; i++)
     {
-        struct MauvilleManGiddy *giddy = &gSaveBlock1.mauvilleMan.giddy;
-
-        u16 var = Random() % 10;
-        if (var < 3 && r7 < 8)
+        r1 = Random() % 10;
+        if (r1 < 3 && r7 < 8)
         {
-            //gSaveBlock1.mauvilleMan.giddy.randomWords[i] = 0xFFFF;
             giddy->randomWords[i] = 0xFFFF;
             r7++;
         }
-        //_080F7E90
         else
         {
             s16 r2 = Random() % r10;
-
-            u16 r1 = 0;
-
-            while (i < 6)  // comparing the wrong variable
+            for (r1 = 0; i < 6; r1++)
             {
-                r2 = arr[r1][1] - r2;
-                if (r2 <= 0)
+                if ((r2 -= arr[r1][1]) <= 0)
                     break;
-                r1++;
             }
-
             if (r1 == 6)
                 r1 = 0;
-            //gSaveBlock1.mauvilleMan.giddy.randomWords[i] = sub_80EB784(arr[r1][0]);
             giddy->randomWords[i] = sub_80EB784(arr[r1][0]);
         }
     }
 }
-#else
-
-static const u16 gUnknown_083E53C8[][2] =
-{
-    { 0x0, 0},
-    { 0xC, 0},
-    { 0xD, 0},
-    {0x12, 0},
-    {0x13, 0},
-    {0x15, 0},
-};
-
-__attribute__((naked))
-static void sub_80F7DC0(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x18\n\
-    ldr r1, _080F7E84 @ =gUnknown_083E53C8\n\
-    mov r0, sp\n\
-    movs r2, 0x18\n\
-    bl memcpy\n\
-    movs r5, 0\n\
-    movs r0, 0x2\n\
-    add r0, sp\n\
-    mov r8, r0\n\
-    ldr r1, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-    adds r1, 0x18\n\
-    adds r3, r1, 0\n\
-_080F7DE4:\n\
-    adds r0, r3, r5\n\
-    strb r5, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x7\n\
-    bls _080F7DE4\n\
-    movs r5, 0\n\
-    ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-    adds r2, 0x4\n\
-    mov r9, r2\n\
-    adds r6, r1, 0\n\
-_080F7DFC:\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    adds r4, r5, 0x1\n\
-    adds r1, r4, 0\n\
-    bl __modsi3\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    adds r2, r6, r5\n\
-    ldrb r7, [r2]\n\
-    adds r1, r6, r1\n\
-    ldrb r0, [r1]\n\
-    strb r0, [r2]\n\
-    strb r7, [r1]\n\
-    lsls r4, 16\n\
-    lsrs r5, r4, 16\n\
-    cmp r5, 0x7\n\
-    bls _080F7DFC\n\
-    movs r3, 0\n\
-    mov r10, r3\n\
-    movs r5, 0\n\
-_080F7E2A:\n\
-    lsls r4, r5, 2\n\
-    mov r1, sp\n\
-    adds r0, r1, r4\n\
-    ldrb r0, [r0]\n\
-    bl sub_80EAE88\n\
-    add r4, r8\n\
-    strh r0, [r4]\n\
-    add r0, r10\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r10, r0\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x5\n\
-    bls _080F7E2A\n\
-    movs r0, 0\n\
-    ldr r2, _080F7E88 @ =gSaveBlock1 + 0x2D94\n\
-    strb r0, [r2, 0x2]\n\
-    movs r7, 0\n\
-    movs r5, 0\n\
-_080F7E56:\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0xA\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r1, 0x2\n\
-    bhi _080F7E90\n\
-    cmp r7, 0x7\n\
-    bhi _080F7E90\n\
-    lsls r0, r5, 1\n\
-    add r0, r9\n\
-    ldr r1, _080F7E8C @ =0x0000ffff\n\
-    strh r1, [r0]\n\
-    adds r0, r7, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r7, r0, 16\n\
-    adds r4, r5, 0x1\n\
-    b _080F7EE2\n\
-    .align 2, 0\n\
-_080F7E84: .4byte gUnknown_083E53C8\n\
-_080F7E88: .4byte gSaveBlock1 + 0x2D94\n\
-_080F7E8C: .4byte 0x0000ffff\n\
-_080F7E90:\n\
-    bl Random\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    mov r1, r10\n\
-    bl __umodsi3\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    movs r1, 0\n\
-    adds r4, r5, 0x1\n\
-    lsls r6, r5, 1\n\
-    cmp r5, 0x5\n\
-    bhi _080F7ECC\n\
-    mov r3, r8\n\
-    ldrh r0, [r3]\n\
-    b _080F7EC2\n\
-_080F7EB2:\n\
-    adds r0, r1, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r1, r0, 16\n\
-    cmp r5, 0x5\n\
-    bhi _080F7ECC\n\
-    lsls r0, r1, 2\n\
-    adds r0, r3, r0\n\
-    ldrh r0, [r0]\n\
-_080F7EC2:\n\
-    subs r0, r2, r0\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    cmp r0, 0\n\
-    bgt _080F7EB2\n\
-_080F7ECC:\n\
-    cmp r1, 0x6\n\
-    bne _080F7ED2\n\
-    movs r1, 0\n\
-_080F7ED2:\n\
-    lsls r0, r1, 2\n\
-    add r0, sp\n\
-    ldrh r0, [r0]\n\
-    bl sub_80EB784\n\
-    mov r2, r9\n\
-    adds r1, r2, r6\n\
-    strh r0, [r1]\n\
-_080F7EE2:\n\
-    lsls r0, r4, 16\n\
-    lsrs r5, r0, 16\n\
-    cmp r5, 0x9\n\
-    bls _080F7E56\n\
-    add sp, 0x18\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_80F7EFC(void)
 {
@@ -890,7 +689,7 @@ static void Task_BardSong(u8 taskId)
     {
     case 0:  // Initialize song
         PrepareSongText();
-        Text_InitWindowWithTemplate(gMenuWindowPtr, &gWindowTemplate_81E6CE4);
+        Text_InitWindowWithTemplate(gMenuWindowPtr, &gMenuTextWindowTemplate);
         Text_InitWindow8002EB0(gMenuWindowPtr, gStringVar4, 2, 4, 15);
         task->data[1] = 0;
         task->data[2] = 0;
@@ -946,7 +745,7 @@ static void Task_BardSong(u8 taskId)
     case 3:
         if (gStringVar4[task->tCharIndex] == EOS)
         {
-            FadeInNewBGM(BGM_POKECEN, 6);
+            FadeInNewBGM(MUS_POKECEN, 6);
             m4aMPlayFadeOutTemporarily(&gMPlay_SE2, 2);
             EnableBothScriptContexts();
             DestroyTask(taskId);
@@ -1007,7 +806,7 @@ static void Task_BardSong(u8 taskId)
 
 void sub_80F83D0(void)
 {
-    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BARD + GetCurrentMauvilleOldMan());
+    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BARD + GetCurrentMauvilleOldMan());
 }
 
 struct Story

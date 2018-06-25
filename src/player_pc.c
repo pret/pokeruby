@@ -37,7 +37,7 @@ static EWRAM_DATA const u8 *gPcItemMenuOptionOrder = NULL;
 
 static u8 gPcItemMenuOptionsNum;
 
-extern u8 gUnknown_02038561;
+extern u8 gPokemonItemUseType;
 
 // event scripts
 extern u8 gBrendanHouse_TurnPCOff[];
@@ -135,7 +135,7 @@ static const struct MenuAction2 gPCText_ItemPCOptionsText[] =
     { PCText_WithdrawItem, ItemStorage_Withdraw },
     { PCText_DepositItem, ItemStorage_Deposit },
     { PCText_TossItem, ItemStorage_Toss },
-    { gUnknownText_Exit, ItemStorage_Exit }
+    { gOtherText_Exit, ItemStorage_Exit }
 };
 
 static const struct YesNoFuncTable ResumeFromTossYesNoFuncList[] = // ResumeFromTossYesNoFuncList
@@ -1290,7 +1290,7 @@ static void Mailbox_DoGiveMailPokeMenu(u8 taskId) // Mailbox_DoGiveMailPokeMenu
     if(!gPaletteFade.active)
     {
         SetMainCallback2(sub_808B020);
-        gUnknown_02038561 = 3;
+        gPokemonItemUseType = ITEM_USE_GIVE_MAIL;
         DestroyTask(taskId);
     }
 }

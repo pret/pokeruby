@@ -53,7 +53,7 @@ struct Tileset
     /*0x14*/ TilesetCB callback;
 };
 
-struct MapData
+struct MapLayout
 {
     /*0x00*/ s32 width;
     /*0x04*/ s32 height;
@@ -63,14 +63,14 @@ struct MapData
     /*0x14*/ struct Tileset *secondaryTileset;
 };
 
-struct BackupMapData
+struct BackupMapLayout
 {
     s32 width;
     s32 height;
     u16 *map;
 };
 
-struct MapObjectTemplate
+struct EventObjectTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u8 graphicsId;
@@ -79,15 +79,13 @@ struct MapObjectTemplate
     /*0x06*/ s16 y;
     /*0x08*/ u8 elevation;
     /*0x09*/ u8 movementType;
-    /*0x0A*/ u8 unkA_0:4;
-             u8 unkA_4:4;
-    ///*0x0B*/ u8 fillerB[1];
-    /*0x0C*/ u16 unkC;
-    /*0x0E*/ u16 unkE;
+    /*0x0A*/ u8 movementRangeX:4;
+             u8 movementRangeY:4;
+    /*0x0C*/ u16 trainerType;
+    /*0x0E*/ u16 trainerRange_berryTreeId;
     /*0x10*/ u8 *script;
     /*0x14*/ u16 flagId;
-    /*0x16*/ u8 filler_16[2];
-};  /*size = 0x18*/
+};
 
 struct WarpEvent
 {
@@ -112,7 +110,7 @@ struct BgEvent
 {
     /*0x00*/u16 x;
     /*0x02*/u16 y;
-    /*0x04*/u8 unk4;
+    /*0x04*/u8 elevation;
     /*0x05*/u8 kind;
     /*0x08*/union { // carried over from diego's FR/LG work, seems to be the same struct
         // in gen 3, "kind" (0x3 in BgEvent struct) determines the method to read the union.
@@ -132,12 +130,12 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 mapObjectCount;
+    u8 eventObjectCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
 
-    struct MapObjectTemplate *mapObjects;
+    struct EventObjectTemplate *eventObjects;
     struct WarpEvent *warps;
     struct CoordEvent *coordEvents;
     struct BgEvent *bgEvents;
@@ -159,12 +157,12 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ struct MapData *mapData;
+    /* 0x00 */ struct MapLayout *mapLayout;
     /* 0x04 */ struct MapEvents *events;
     /* 0x08 */ u8 *mapScripts;
     /* 0x0C */ struct MapConnections *connections;
     /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapDataId;
+    /* 0x12 */ u16 mapLayoutId;
     /* 0x14 */ u8 regionMapSectionId;
     /* 0x15 */ u8 cave;
     /* 0x16 */ u8 weather;
@@ -175,79 +173,73 @@ struct MapHeader
     /* 0x1B */ u8 battleType;
 };
 
-struct MapObject
+struct EventObject
 {
     /*0x00*/ u32 active:1;
-             u32 mapobj_bit_1:1;
-             u32 mapobj_bit_2:1;
-             u32 mapobj_bit_3:1;
-             u32 mapobj_bit_4:1;
-             u32 mapobj_bit_5:1;
-             u32 mapobj_bit_6:1;
-             u32 mapobj_bit_7:1;
-    /*0x01*/ u32 mapobj_bit_8:1;
-             u32 mapobj_bit_9:1;
-             u32 mapobj_bit_10:1;
-             u32 mapobj_bit_11:1;
-             u32 mapobj_bit_12:1;
-             u32 mapobj_bit_13:1;
-             u32 mapobj_bit_14:1;
-             u32 mapobj_bit_15:1;
-    /*0x02*/ u32 mapobj_bit_16:1;
-             u32 mapobj_bit_17:1;
-             u32 mapobj_bit_18:1;
-             u32 mapobj_bit_19:1;
-             u32 mapobj_bit_20:1;
-             u32 mapobj_bit_21:1;
-             u32 mapobj_bit_22:1;
-             u32 mapobj_bit_23:1;
-    /*0x03*/ u32 mapobj_bit_24:1;
-             u32 mapobj_bit_25:1;
-             u32 mapobj_bit_26:1;
-             u32 mapobj_bit_27:1;
-             u32 mapobj_bit_28:1;
-             u32 mapobj_bit_29:1;
-             u32 mapobj_bit_30:1;
-             u32 mapobj_bit_31:1;
+             u32 singleMovementActive:1;
+             u32 triggerGroundEffectsOnMove:1;
+             u32 triggerGroundEffectsOnStop:1;
+             u32 disableCoveringGroundEffects:1; // disables ground effects that cover parts of the object's sprite
+             u32 landingJump:1;
+             u32 heldMovementActive:1;
+             u32 heldMovementFinished:1;
+    /*0x01*/ u32 frozen:1;
+             u32 facingDirectionLocked:1;
+             u32 disableAnim:1; // used to disable forced movement sliding animations (like on ice)
+             u32 enableAnim:1;
+             u32 inanimate:1;
+             u32 invisible:1;
+             u32 offScreen:1;
+             u32 trackedByCamera:1; // only set for the player object
+    /*0x02*/ u32 isPlayer:1;
+             u32 hasReflection:1;
+             u32 inShortGrass:1;
+             u32 inShallowFlowingWater:1;
+             u32 inSandPile:1;
+             u32 inHotSprings:1;
+             u32 hasShadow:1;
+             u32 spriteAnimPausedBackup:1;
+    /*0x03*/ u32 spriteAffineAnimPausedBackup:1;
+             u32 disableJumpLandingGroundEffect:1;
+             u32 fixedPriority:1;
     /*0x04*/ u8 spriteId;
     /*0x05*/ u8 graphicsId;
-    /*0x06*/ u8 animPattern;
+    /*0x06*/ u8 movementType;
     /*0x07*/ u8 trainerType;
     /*0x08*/ u8 localId;
     /*0x09*/ u8 mapNum;
     /*0x0A*/ u8 mapGroup;
-    /*0x0B*/ u8 mapobj_unk_0B_0:4;
-             u8 elevation:4;
-    /*0x0C*/ struct Coords16 coords1;
-    /*0x10*/ struct Coords16 coords2;
-    /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
-    /*0x18*/ u8 placeholder18:4;
+    /*0x0B*/ u8 currentElevation:4;
+             u8 previousElevation:4;
+    /*0x0C*/ struct Coords16 initialCoords;
+    /*0x10*/ struct Coords16 currentCoords;
+    /*0x14*/ struct Coords16 previousCoords;
+    /*0x18*/ u8 facingDirection:4;
+    /*0x18*/ u8 movementDirection:4;
     /*0x19*/ union __attribute__((packed)) {
         u8 as_byte;
         struct __attribute__((packed)) {
-            u8 x:4;
-            u8 y:4;
-        } __attribute((aligned (1))) as_nybbles;
-    } __attribute((aligned (1))) range;
-    // /*0x19*/ u8 mapobj_unk_19;
-    /*0x1A*/ u8 mapobj_unk_1A;
-    /*0x1B*/ u8 mapobj_unk_1B;
-    /*0x1C*/ u8 mapobj_unk_1C;
+            u16 x:4;
+            u16 y:4;
+        } as_nybbles;
+    }  range;
+    /*0x1A*/ u8 fieldEffectSpriteId;
+    /*0x1B*/ u8 warpArrowSpriteId;
+    /*0x1C*/ u8 movementActionId;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 mapobj_unk_1E;
-    /*0x1F*/ u8 mapobj_unk_1F;
-    /*0x20*/ u8 mapobj_unk_20;
-    /*0x21*/ u8 mapobj_unk_21;
-    /*0x22*/ u8 animId;
+    /*0x1E*/ u8 currentMetatileBehavior;
+    /*0x1F*/ u8 previousMetatileBehavior;
+    /*0x20*/ u8 previousMovementDirection;
+    /*0x21*/ u8 directionSequenceIndex;
+    /*0x22*/ u8 playerCopyableMovement; // used as an index to gCopyPlayerMovementFuncs for the "copy player" movement types
     /*size = 0x24*/
 };
 
-struct MapObjectGraphicsInfo
+struct EventObjectGraphicsInfo
 {
     /*0x00*/ u16 tileTag;
-    /*0x02*/ u16 paletteTag1;
-    /*0x04*/ u16 paletteTag2;
+    /*0x02*/ u16 paletteTag;
+    /*0x04*/ u16 bridgeReflectionPaletteTag;
     /*0x06*/ u16 size;
     /*0x08*/ s16 width;
     /*0x0A*/ s16 height;
@@ -263,14 +255,14 @@ struct MapObjectGraphicsInfo
     /*0x20*/ const union AffineAnimCmd *const *affineAnims;
 };
 
-#define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
-#define PLAYER_AVATAR_FLAG_MACH_BIKE (1 << 1)
-#define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
-#define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
-#define PLAYER_AVATAR_FLAG_4         (1 << 4)
-#define PLAYER_AVATAR_FLAG_5         (1 << 5)
-#define PLAYER_AVATAR_FLAG_6         (1 << 6)
-#define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT    (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE  (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE  (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING    (1 << 3)
+#define PLAYER_AVATAR_FLAG_UNDERWATER (1 << 4)
+#define PLAYER_AVATAR_FLAG_5          (1 << 5)
+#define PLAYER_AVATAR_FLAG_6          (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH       (1 << 7)
 
 enum
 {
@@ -290,6 +282,10 @@ enum
     DIR_NORTH,
     DIR_WEST,
     DIR_EAST,
+    DIR_SOUTHWEST,
+    DIR_SOUTHEAST,
+    DIR_NORTHWEST,
+    DIR_NORTHEAST,
 };
 
 enum
@@ -320,7 +316,7 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x02*/ u8 runningState; // this is a static running state. 00 is not moving, 01 is turn direction, 02 is moving.
     /*0x03*/ u8 tileTransitionState; // this is a transition running state: 00 is not moving, 01 is transition between tiles, 02 means you are on the frame in which you have centered on a tile but are about to keep moving, even if changing directions. 2 is also used for a ledge hop, since you are transitioning.
     /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 mapObjectId;
+    /*0x05*/ u8 eventObjectId;
     /*0x06*/ bool8 preventStep;
     /*0x07*/ u8 gender;
     /*0x08*/ u8 acroBikeState; // 00 is normal, 01 is turning, 02 is standing wheelie, 03 is hopping wheelie
@@ -342,8 +338,8 @@ struct Camera
     s32 y;
 };
 
-extern struct MapObject gMapObjects[];
-extern u8 gSelectedMapObject;
+extern struct EventObject gEventObjects[];
+extern u8 gSelectedEventObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 

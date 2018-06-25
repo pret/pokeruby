@@ -429,7 +429,7 @@ static bool8 sub_8141E64(void)
         {
             u16 saved_IME;
 
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             SetVBlankCallback(VBlankCB_HallOfFame);
             saved_IME = REG_IME;
             REG_IME = 0;
@@ -451,7 +451,7 @@ static bool8 sub_8141E64(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(BGM_DENDOU);
+            PlayBGM(MUS_DENDOU);
             return 0;
         }
         break;
@@ -645,7 +645,7 @@ static void sub_8142484(u8 taskID)
         if (gTasks[taskID].tDisplayedPoke <= 4 && currMon[1].species != 0) // there is another pokemon to display
         {
             gTasks[taskID].tDisplayedPoke++;
-            BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
+            BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, RGB(31, 26, 28));
             gSprites[gTasks[taskID].tMonSpriteID(currPokeID)].oam.priority = 1;
             gTasks[taskID].func = sub_8142320;
         }
@@ -658,7 +658,7 @@ static void sub_8142570(u8 taskID)
 {
     u16 i;
 
-    BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, 0);
+    BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0, RGB(0, 0, 0));
     for (i = 0; i < 6; i++)
     {
         if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
@@ -687,7 +687,7 @@ static void sub_8142618(u8 taskID)
             if (gTasks[taskID].tMonSpriteID(i) != 0xFF)
                 gSprites[gTasks[taskID].tMonSpriteID(i)].oam.priority = 1;
         }
-        BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, 0x735F);
+        BeginNormalPaletteFade(sUnknown_0203931C, 0, 12, 12, RGB(31, 26, 28));
         Menu_EraseWindowRect(0, 14, 29, 19);
         gTasks[taskID].tFrameCount = 7;
         gTasks[taskID].func = sub_81426F8;
@@ -747,7 +747,7 @@ static void sub_8142818(u8 taskID)
 static void sub_8142850(u8 taskID)
 {
     CpuSet(gPlttBufferFaded, gPlttBufferUnfaded, 0x200);
-    BeginNormalPaletteFade(-1, 8, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 8, 0, 16, RGB(0, 0, 0));
     gTasks[taskID].func = sub_81428A0;
 }
 
@@ -906,7 +906,7 @@ static void sub_8142B04(u8 taskID)
             gTasks[taskID].tMonSpriteID(i) = 0xFF;
     }
 
-    BlendPalettes(0xFFFF0000, 0xC, 0x735F);
+    BlendPalettes(0xFFFF0000, 12, RGB(31, 26, 28));
 
     stringPtr = gStringVar1;
     stringPtr = StringCopy(stringPtr, gMenuText_HOFNumber);
@@ -944,7 +944,7 @@ static void sub_8142CC8(u8 taskID)
     currMonID = gTasks[taskID].tMonSpriteID(gTasks[taskID].tCurrPokeID);
     gSprites[currMonID].oam.priority = 0;
     sUnknown_0203931C = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ 0xFFFF0000;
-    BlendPalettesUnfaded(sUnknown_0203931C, 0xC, 0x735F);
+    BlendPalettesUnfaded(sUnknown_0203931C, 12, RGB(31, 26, 28));
 
     currMon = &savedTeams->mons[gTasks[taskID].tCurrPokeID];
     if (currMon->species != SPECIES_EGG)

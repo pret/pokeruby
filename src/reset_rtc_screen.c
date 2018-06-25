@@ -278,10 +278,10 @@ void ResetRtcScreen_PrintTime(u8 x, u8 y, u16 days, u8 hours, u8 minutes, u8 sec
     hours %= 24;
     minutes %= 60;
     seconds %= 60;
-    sub_8072C44(gStringVar1, days, 24, 1);
+    AlignInt2InMenuWindow(gStringVar1, days, 24, 1);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gOtherText_Day);
-    sub_8072C44(gStringVar1, hours, 18, 1);
+    AlignInt2InMenuWindow(gStringVar1, hours, 18, 1);
     dest = StringCopy(dest, gStringVar1);
     dest = StringCopy(dest, gUnknown_08376500);
     dest = ConvertIntToDecimalStringN(dest, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
@@ -426,8 +426,8 @@ void CB2_InitResetRtcScreen(void)
     ResetSpriteData();
     ResetTasks();
     ResetPaletteFade();
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     REG_DISPCNT = 4352;
     SetVBlankCallback(VBlankCB_ResetRtcScreen);
     SetMainCallback2(CB2_ResetRtcScreen);
@@ -504,7 +504,7 @@ void Task_ResetRtcScreen(u8 taskId)
     switch (data[0])
     {
     case 0:
-        BeginNormalPaletteFade(0xFFFFFFFF, 1, 0x10, 0, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 1, 16, 0, FADE_COLOR_WHITE);
         data[0] = 1;
         break;
     case 1:
@@ -574,7 +574,7 @@ void Task_ResetRtcScreen(u8 taskId)
     case 5:
         if (gMain.newKeys & A_BUTTON)
         {
-            BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 0x10, 0xFFFF);
+            BeginNormalPaletteFade(0xFFFFFFFF, 1, 0, 16, FADE_COLOR_WHITE);
             data[0] = 6;
         }
         else

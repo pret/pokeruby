@@ -89,7 +89,7 @@ u8 *de_sub_8041024(s32 arg0, u32 arg1)
 }
 #else
 
-__attribute__((naked))
+NAKED
 void de_sub_8041024(void) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\

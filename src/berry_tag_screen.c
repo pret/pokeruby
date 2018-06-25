@@ -157,7 +157,7 @@ static bool8 sub_8146058(void)
         gMain.state += 1;
         break;
     case 12:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(sub_8146014);
         return TRUE;
@@ -238,7 +238,7 @@ static void sub_814640C(u8 taskId)
     {
         SetMainCallback2(sub_80A5B40);
         sub_80A7DD4();
-        gpu_pal_allocator_reset__manage_upper_four();
+        FreeAndReserveObjectSpritePalettes();
         DestroyTask(taskId);
     }
 }
@@ -246,7 +246,7 @@ static void sub_814640C(u8 taskId)
 static void sub_8146440(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = sub_814640C;
 }
 

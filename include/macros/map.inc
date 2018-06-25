@@ -14,13 +14,15 @@
 	.4byte \address
 	.endm
 
-	.macro object_event byte1, word1, byte2, byte3, byte4, byte5, byte6, byte7, byte8, byte9, byte10, byte11, byte12, byte13, byte14, script, word2, byte15, byte16
-	.byte \byte1
-	.2byte \word1
-	.byte \byte2, \byte3, \byte4, \byte5, \byte6, \byte7, \byte8, \byte9, \byte10, \byte11, \byte12, \byte13, \byte14
+	.macro object_event index, gfx, replacement, x, y, elevation, movement_type, x_radius, y_radius, trainer_type, sight_radius_tree_etc, script, event_flag
+	.byte \index, \gfx, \replacement, 0
+	.2byte \x
+	.2byte \y
+	.byte \elevation, \movement_type, ((\y_radius << 4) | \x_radius), 0
+    .2byte \trainer_type, \sight_radius_tree_etc
 	.4byte \script
-	.2byte \word2
-	.byte \byte15, \byte16
+	.2byte \event_flag
+	.2byte 0
 	inc _num_npcs
 	.endm
 

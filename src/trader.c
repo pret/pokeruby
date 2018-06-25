@@ -188,7 +188,7 @@ void ScrSpecial_DoesPlayerHaveNoDecorations(void)
 
     for (i = 0; i < 8; i++)
     {
-        if (sub_8134194(i))
+        if (GetNumDecorationsInInventoryCategory(i))
         {
             gSpecialVar_Result = FALSE;
             return;
@@ -201,7 +201,7 @@ void ScrSpecial_IsDecorationFull(void)
 {
     gSpecialVar_Result = FALSE;
     if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
-        && sub_8133F9C(gDecorations[gSpecialVar_0x8004].category) == -1)
+        && FindFreeDecorationInventorySlot(gDecorations[gSpecialVar_0x8004].category) == -1)
     {
         sub_80FE7D4(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
         gSpecialVar_Result = TRUE;
@@ -248,8 +248,8 @@ void ScrSpecial_TraderDoDecorationTrade(void)
 {
     struct MauvilleManTrader *trader = &gSaveBlock1.mauvilleMan.trader;
 
-    sub_81340A8(gSpecialVar_0x8006);
-    IsThereStorageSpaceForDecoration(gSpecialVar_0x8004);
+    RemoveDecorationFromInventory(gSpecialVar_0x8006);
+    GiveDecoration(gSpecialVar_0x8004);
     StringCopy(trader->unk5[gSpecialVar_0x8005], gSaveBlock2.playerName);
     trader->unk1[gSpecialVar_0x8005] = gSpecialVar_0x8006;
     sub_810993C();

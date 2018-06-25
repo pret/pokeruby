@@ -10,7 +10,7 @@
 #include "item.h"
 #include "constants/items.h"
 #include "main.h"
-#include "constants/map_objects.h"
+#include "constants/event_objects.h"
 #include "constants/moves.h"
 #include "new_game.h"
 #include "overworld.h"
@@ -163,60 +163,60 @@ static const u8 sFemaleTrainerClasses[] =
 
 static const u8 sMaleTrainerGfxIds[] =
 {
-    MAP_OBJ_GFX_HIKER,
-    MAP_OBJ_GFX_TUBER_M,
-    MAP_OBJ_GFX_MAN_4,
-    MAP_OBJ_GFX_BOY_4,
-    MAP_OBJ_GFX_MANIAC,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    MAP_OBJ_GFX_BLACK_BELT,
-    MAP_OBJ_GFX_MAN_6,
-    MAP_OBJ_GFX_MAN_6,
-    MAP_OBJ_GFX_CAMPER,
-    MAP_OBJ_GFX_MANIAC,
-    MAP_OBJ_GFX_PSYCHIC_M,
-    MAP_OBJ_GFX_GENTLEMAN,
-    MAP_OBJ_GFX_SCHOOL_KID_M,
-    MAP_OBJ_GFX_MAN_3,
-    MAP_OBJ_GFX_OLD_MAN_1,
-    MAP_OBJ_GFX_YOUNGSTER,
-    MAP_OBJ_GFX_FISHERMAN,
-    MAP_OBJ_GFX_CYCLING_TRIATHLETE_M,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_M,
-    MAP_OBJ_GFX_MAN_4,
-    MAP_OBJ_GFX_MAN_6,
-    MAP_OBJ_GFX_LITTLE_BOY_1,
-    MAP_OBJ_GFX_SAILOR,
-    MAP_OBJ_GFX_MANIAC,
-    MAP_OBJ_GFX_MAN_5,
-    MAP_OBJ_GFX_CAMPER,
-    MAP_OBJ_GFX_BUG_CATCHER,
-    MAP_OBJ_GFX_HIKER,
+    EVENT_OBJ_GFX_HIKER,
+    EVENT_OBJ_GFX_TUBER_M,
+    EVENT_OBJ_GFX_MAN_4,
+    EVENT_OBJ_GFX_BOY_4,
+    EVENT_OBJ_GFX_MANIAC,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
+    EVENT_OBJ_GFX_BLACK_BELT,
+    EVENT_OBJ_GFX_MAN_6,
+    EVENT_OBJ_GFX_MAN_6,
+    EVENT_OBJ_GFX_CAMPER,
+    EVENT_OBJ_GFX_MANIAC,
+    EVENT_OBJ_GFX_PSYCHIC_M,
+    EVENT_OBJ_GFX_GENTLEMAN,
+    EVENT_OBJ_GFX_SCHOOL_KID_M,
+    EVENT_OBJ_GFX_MAN_3,
+    EVENT_OBJ_GFX_OLD_MAN_1,
+    EVENT_OBJ_GFX_YOUNGSTER,
+    EVENT_OBJ_GFX_FISHERMAN,
+    EVENT_OBJ_GFX_CYCLING_TRIATHLETE_M,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_M,
+    EVENT_OBJ_GFX_MAN_4,
+    EVENT_OBJ_GFX_MAN_6,
+    EVENT_OBJ_GFX_LITTLE_BOY_1,
+    EVENT_OBJ_GFX_SAILOR,
+    EVENT_OBJ_GFX_MANIAC,
+    EVENT_OBJ_GFX_MAN_5,
+    EVENT_OBJ_GFX_CAMPER,
+    EVENT_OBJ_GFX_BUG_CATCHER,
+    EVENT_OBJ_GFX_HIKER,
 };
 
 static const u8 sFemaleTrainerGfxIds[] =
 {
-    MAP_OBJ_GFX_WOMAN_3,
-    MAP_OBJ_GFX_TUBER_F,
-    MAP_OBJ_GFX_WOMAN_7,
-    MAP_OBJ_GFX_WOMAN_1,
-    MAP_OBJ_GFX_WOMAN_3,
-    MAP_OBJ_GFX_BEAUTY,
-    MAP_OBJ_GFX_LASS,
-    MAP_OBJ_GFX_GIRL_3,
-    MAP_OBJ_GFX_WOMAN_2,
-    MAP_OBJ_GFX_OLD_WOMAN_1,
-    MAP_OBJ_GFX_CYCLING_TRIATHLETE_F,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    MAP_OBJ_GFX_GIRL_3,
-    MAP_OBJ_GFX_WOMAN_7,
-    MAP_OBJ_GFX_RUNNING_TRIATHLETE_F,
-    MAP_OBJ_GFX_PICNICKER,
-    MAP_OBJ_GFX_WOMAN_3,
-    MAP_OBJ_GFX_PICNICKER,
-    MAP_OBJ_GFX_LASS,
+    EVENT_OBJ_GFX_WOMAN_3,
+    EVENT_OBJ_GFX_TUBER_F,
+    EVENT_OBJ_GFX_WOMAN_7,
+    EVENT_OBJ_GFX_WOMAN_1,
+    EVENT_OBJ_GFX_WOMAN_3,
+    EVENT_OBJ_GFX_BEAUTY,
+    EVENT_OBJ_GFX_LASS,
+    EVENT_OBJ_GFX_GIRL_3,
+    EVENT_OBJ_GFX_WOMAN_2,
+    EVENT_OBJ_GFX_OLD_WOMAN_1,
+    EVENT_OBJ_GFX_CYCLING_TRIATHLETE_F,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
+    EVENT_OBJ_GFX_GIRL_3,
+    EVENT_OBJ_GFX_WOMAN_7,
+    EVENT_OBJ_GFX_RUNNING_TRIATHLETE_F,
+    EVENT_OBJ_GFX_PICNICKER,
+    EVENT_OBJ_GFX_WOMAN_3,
+    EVENT_OBJ_GFX_PICNICKER,
+    EVENT_OBJ_GFX_LASS,
 };
 
 const u16 gBattleTowerBannedSpecies[] =
@@ -284,7 +284,6 @@ extern u16 gTrainerBattleOpponent;
 extern u16 gBattleTypeFlags;
 extern u8 gSelectedOrderFromParty[];
 extern u8 gBattleOutcome;
-extern struct Pokemon gUnknown_030042FC[];
 extern struct BattlePokemon gBattleMons[];
 
 void sub_8134548(void)
@@ -514,7 +513,7 @@ bool8 sub_81346F4(void)
 //     }
 // }
 
-__attribute__((naked))
+NAKED
 void sub_81347F8(void)
 {
     asm(".syntax unified\n\
@@ -814,7 +813,7 @@ void SetBattleTowerTrainerGfxId(u8 trainerIndex)
         return;
     }
 
-    VarSet(VAR_OBJ_GFX_ID_0, MAP_OBJ_GFX_BOY_1);
+    VarSet(VAR_OBJ_GFX_ID_0, EVENT_OBJ_GFX_BOY_1);
 }
 
 void SetEReaderTrainerGfxId(void)
@@ -906,7 +905,7 @@ void SetEReaderTrainerGfxId(void)
 
 //     gSaveBlock2.battleTower.records[var2[(Random() % l)]] = *record;
 // }
-__attribute__((naked))
+NAKED
 void sub_8134AC0(struct BattleTowerRecord *record)
 {
     asm(".syntax unified\n\
@@ -1795,7 +1794,7 @@ void sub_8135AC4(void)
         playerRecord->greeting[i] = gSaveBlock1.easyChats.unk2B28[i];
 
     for (i = 0; i < 3; i++)
-        sub_803AF78(&gUnknown_030042FC[gSaveBlock2.battleTower.selectedPartyMons[i]], &playerRecord->party[i]);
+        sub_803AF78(&gPlayerParty[gSaveBlock2.battleTower.selectedPartyMons[i] - 1], &playerRecord->party[i]);
 
     SetBattleTowerRecordChecksum(&gSaveBlock2.battleTower.playerRecord);
     SaveCurrentWinStreak();

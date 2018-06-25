@@ -1,29 +1,31 @@
+
 #include "global.h"
-#include "fldeff_cut.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "pokemon_menu.h"
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "ewram.h"
+#include "constants/field_effects.h"
+#include "constants/event_objects.h"
+#include "constants/metatile_behaviors.h"
+#include "constants/songs.h"
 
 extern void (*gFieldCallback)(void);
-extern void (*gUnknown_03005CE4)(void);
+extern void (*gPostMenuFieldCallback)(void);
 extern u8 gLastFieldPokeMenuOpened;
 
-extern const u8 S_UseCut[];
+extern const u8 DoCutFieldEffectScript[];
 
 const struct OamData gOamData_CutGrass =
 {
@@ -60,7 +62,17 @@ const struct SpriteFrameImage gSpriteImageTable_CutGrass[] =
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectPalette6, 0x1000};
 
-static void sub_80A2A48(struct Sprite *);
+static void FieldCallback_CutTree(void);
+static void FieldCallback_CutGrass(void);
+static void StartCutTreeFieldEffect(void);
+static void StartCutGrassFieldEffect(void);
+static void SetCutGrassMetatile(s16, s16);
+static void SetCutGrassMetatiles(s16, s16);
+static void CutGrassSpriteCallback1(struct Sprite *);
+static void CutGrassSpriteCallback2(struct Sprite *);
+static void CutGrassSpriteCallbackEnd(struct Sprite *);
+
+
 static const struct SpriteTemplate gSpriteTemplate_CutGrass =
 {
     .tileTag = 0xFFFF,
@@ -69,44 +81,45 @@ static const struct SpriteTemplate gSpriteTemplate_CutGrass =
     .anims = gSpriteAnimTable_CutGrass,
     .images = gSpriteImageTable_CutGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80A2A48,
+    .callback = CutGrassSpriteCallback1,
 };
 
 #if DEBUG
 
-void debug_sub_80AFEE4(void)
+void Debug_SetUpFieldMove_Cut(void)
 {
     s16 x, y;
     u8 i, j;
-    u8 metatile;
+    u8 metatileBehavior;
 
-    if (npc_before_player_of_type(0x52) == TRUE)
+    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
-        sub_80A2634();
+        FieldCallback_CutTree();
         return;
     }
 
-    PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
+    PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     for (i = 0; i < 3; i++)
     {
-        y = i - 1 + gUnknown_0203923C.y;
+        y = i - 1 + gPlayerFacingPosition.y;
         for (j = 0; j < 3; j++)
         {
-            x = j - 1 + gUnknown_0203923C.x;
-            if (MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
+            x = j - 1 + gPlayerFacingPosition.x;
+            if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
             {
-                metatile = MapGridGetMetatileBehaviorAt(x, y);
-                if (MetatileBehavior_IsPokeGrass(metatile) == TRUE
-                 || MetatileBehavior_IsAshGrass(metatile) == TRUE)
+                metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+                if (MetatileBehavior_IsPokeGrass(metatileBehavior) == TRUE
+                 || MetatileBehavior_IsAshGrass(metatileBehavior) == TRUE)
                 {
                     gLastFieldPokeMenuOpened = 0;
-                    sub_80A25E8();
+                    FieldCallback_CutGrass();
                     return;
                 }
             }
         }
     }
+
     ScriptContext2_Disable();
 }
 
@@ -118,39 +131,43 @@ bool8 SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 tileBehavior;
 
-    if(npc_before_player_of_type(0x52) == TRUE) // is in front of tree?
+    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_80A2634;
+        // Standing in front of cuttable tree.
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_CutTree;
         return TRUE;
     }
-    else // is in ash or grass to cut?
+    else
     {
-        PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-        for(i = 0; i < 3; i++)
+        PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+        for (i = 0; i < 3; i++)
         {
-            y = i - 1 + gUnknown_0203923C.y;
-            for(j = 0; j < 3; j++)
+            y = i - 1 + gPlayerFacingPosition.y;
+            for (j = 0; j < 3; j++)
             {
-                x = j - 1 + gUnknown_0203923C.x;
-                if(MapGridGetZCoordAt(x, y) == gUnknown_0203923C.height)
+                x = j - 1 + gPlayerFacingPosition.x;
+                if(MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
                     || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                     {
-                        gFieldCallback = FieldCallback_Teleport;
-                        gUnknown_03005CE4 = sub_80A25E8;
+                        // Standing in front of grass.
+                        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+                        gPostMenuFieldCallback = FieldCallback_CutGrass;
                         return TRUE;
                     }
                 }
             }
         }
-        return FALSE; // do not use cut
+
+        // Not a valid location to use Cut.
+        return FALSE;
     }
 }
 
-void sub_80A25E8(void)
+static void FieldCallback_CutGrass(void)
 {
     FieldEffectStart(FLDEFF_USE_CUT_ON_GRASS);
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
@@ -160,29 +177,29 @@ bool8 FldEff_UseCutOnGrass(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80A2684 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80A2684;
+    gTasks[taskId].data[8] = (u32)StartCutGrassFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartCutGrassFieldEffect;
     IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
-void sub_80A2634(void)
+static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(S_UseCut);
+    ScriptContext1_SetupScript(DoCutFieldEffectScript);
 }
 
 bool8 FldEff_UseCutOnTree(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (u32)sub_80A2B00 >> 16;
-    gTasks[taskId].data[9] = (u32)sub_80A2B00;
+    gTasks[taskId].data[8] = (u32)StartCutTreeFieldEffect >> 16;
+    gTasks[taskId].data[9] = (u32)StartCutTreeFieldEffect;
     IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
-void sub_80A2684(void)
+static void StartCutGrassFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
     FieldEffectStart(FLDEFF_CUT_GRASS);
@@ -192,41 +209,42 @@ bool8 FldEff_CutGrass(void)
 {
     s16 x, y;
     u8 tileBehavior;
-    u8 i, j; // not in for loop?
+    u8 i, j;
 
-    for(i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gUnknown_0203923C.x, &gUnknown_0203923C.y); i < 3; i++)
+    for (i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y); i < 3; i++)
     {
-        y = i - 1 + gUnknown_0203923C.y;
-        for(j = 0; j < 3; j++)
+        y = i - 1 + gPlayerFacingPosition.y;
+        for (j = 0; j < 3; j++)
         {
-            x = j - 1 + gUnknown_0203923C.x;
-            if(MapGridGetZCoordAt(x, y) == (s8)gUnknown_0203923C.height)
+            x = j - 1 + gPlayerFacingPosition.x;
+            if (MapGridGetZCoordAt(x, y) == (s8)gPlayerFacingPosition.height)
             {
                 tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-                if(MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
+                if (MetatileBehavior_IsCuttableGrass(tileBehavior) == TRUE)
                 {
-                    sub_80A27A8(x, y);
+                    SetCutGrassMetatile(x, y);
                     sub_805BCC0(x, y);
                 }
             }
         }
     }
-    sub_80A28F4(gUnknown_0203923C.x - 1, gUnknown_0203923C.y - 2);
+
+    SetCutGrassMetatiles(gPlayerFacingPosition.x - 1, gPlayerFacingPosition.y - 2);
     DrawWholeMapView();
 
     // populate sprite ID array
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
         eCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
         gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
         gSprites[eCutGrassSpriteArray[i]].data[2] = 32 * i;
     }
+
     return 0;
 }
 
 // set map grid metatile depending on x, y
-// TODO: enum for metatile IDs
-void sub_80A27A8(s16 x, s16 y)
+static void SetCutGrassMetatile(s16 x, s16 y)
 {
     int metatileId = MapGridGetMetatileIdAt(x, y);
 
@@ -266,7 +284,7 @@ void sub_80A27A8(s16 x, s16 y)
     }
 }
 
-s32 sub_80A28A0(s16 x, s16 y)
+static s32 sub_80A28A0(s16 x, s16 y)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
 
@@ -282,18 +300,18 @@ s32 sub_80A28A0(s16 x, s16 y)
         return 0;
 }
 
-void sub_80A28F4(s16 x, s16 y)
+static void SetCutGrassMetatiles(s16 x, s16 y)
 {
     s16 i;
     u16 lowerY = y + 3;
 
-    for(i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         u16 currentX = x + i;
         s16 currentXsigned = x + i;
-        if(MapGridGetMetatileIdAt(currentXsigned, y) == 21)
+        if (MapGridGetMetatileIdAt(currentXsigned, y) == 21)
         {
-            switch((u8)sub_80A28A0(currentXsigned, y + 1))
+            switch ((u8)sub_80A28A0(currentXsigned, y + 1))
             {
             case 1:
                 MapGridSetMetatileIdAt(currentXsigned, y + 1, 0x208);
@@ -309,29 +327,29 @@ void sub_80A28F4(s16 x, s16 y)
                 break;
             }
         }
-        if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY) == 1)
+        if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY) == 1)
         {
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x208)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x208)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x1);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x281)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x281)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x279);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x282)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x282)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x27A);
-            if(MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x283)
+            if (MapGridGetMetatileIdAt((s16)currentX, (s16)lowerY + 1) == 0x283)
                 MapGridSetMetatileIdAt((s16)currentX, (s16)lowerY + 1, 0x27B);
         }
     }
 }
 
-static void sub_80A2A48(struct Sprite *sprite)
+static void CutGrassSpriteCallback1(struct Sprite *sprite)
 {
     sprite->data[0] = 8;
     sprite->data[1] = 0;
     sprite->data[3] = 0;
-    sprite->callback = (void *)objc_8097BBC;
+    sprite->callback = CutGrassSpriteCallback2;
 }
 
-void objc_8097BBC(struct Sprite *sprite)
+static void CutGrassSpriteCallback2(struct Sprite *sprite)
 {
     u16 tempdata;
     u16 tempdata2;
@@ -347,21 +365,21 @@ void objc_8097BBC(struct Sprite *sprite)
     if((s16)tempdata != 28) // done rotating the grass, execute clean up function
         sprite->data[1]++;
     else
-        sprite->callback = (void *)sub_80A2AB8;
+        sprite->callback = CutGrassSpriteCallbackEnd;
 }
 
-void sub_80A2AB8(void)
+static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
 {
     u8 i;
 
     for (i = 1; i < 8; i++)
         DestroySprite(&gSprites[eCutGrassSpriteArray[i]]);
     FieldEffectStop(&gSprites[eCutGrassSpriteArray[0]], FLDEFF_CUT_GRASS);
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
 }
 
-void sub_80A2B00(void)
+static void StartCutTreeFieldEffect(void)
 {
     PlaySE(SE_W015);
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_TREE);

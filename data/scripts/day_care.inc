@@ -36,7 +36,7 @@ Route117_EventScript_1B2298:: @ 81B2298
 
 Route117_EventScript_1B22B2:: @ 81B22B2
 	message Route117_Text_1B27A2
-	playfanfare BGM_FANFA1
+	playfanfare MUS_FANFA1
 	waitfanfare
 	waitmessage
 	waitbuttonpress
@@ -233,26 +233,26 @@ Route117_PokemonDayCare_EventScript_1B2539:: @ 81B2539
 	end
 
 Route117_PokemonDayCare_Movement_1B2543:: @ 81B2543
-	step_14
-	step_14
-	step_02
-	step_14
-	step_14
-	step_03
-	step_14
-	step_14
-	step_01
-	slow_step_up
-	step_54
-	step_14
-	step_14
-	step_14
-	step_14
-	step_14
-	step_00
-	step_55
-	slow_step_down
-	step_end
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	face_up
+	walk_slow_up
+	set_invisible
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_down
+	set_visible
+	walk_slow_down
+	end_movement
 
 @ 81B2557
 	end

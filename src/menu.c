@@ -1,7 +1,7 @@
 #include "global.h"
 #include "menu.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu_cursor.h"
 #include "script.h"
 #include "constants/songs.h"
@@ -54,7 +54,7 @@ void CloseMenu(void)
 {
     PlaySE(SE_SELECT);
     Menu_EraseScreen();
-    sub_8064E2C();
+    ScriptUnfreezeEventObjects();
     ScriptContext2_Disable();
     Menu_DestroyCursor();
 }
@@ -441,7 +441,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
+        u8 width = (GetStringWidthInMenuWindow(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -498,7 +498,7 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, const struct MenuActi
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
+        u8 width = (GetStringWidthInMenuWindow(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -581,20 +581,20 @@ u8 Menu_GetColumnXCoord(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
+void Menu_PrintItems(u8 left, u8 top, u8 menuItemCount, const void * menuItems)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[i].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[i].text, left, top + 2 * i);
 }
 
-void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order)
+void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const void * menuItems, const u8 *order)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Menu_PrintText(menuItems[order[i]].text, left, top + 2 * i);
+        Menu_PrintText(((const struct MenuAction *)menuItems)[order[i]].text, left, top + 2 * i);
 }
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
@@ -644,7 +644,7 @@ int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
         Menu_BlankWindowRect(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 int sub_8072AB0(const u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
     asm(".syntax unified\n\
@@ -733,11 +733,11 @@ void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
     Text_InitWindow8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072B80(const u8 *a1, u8 a2, u8 a3, const u8 *a4)
+void sub_8072B80(const u8 *src, u8 a2, u8 a3, const u8 *a4)
 {
     u8 buffer[64];
     u8 width = GetStringWidth(gMenuWindowPtr, a4);
-    AlignString(gMenuWindowPtr, buffer, a1, width, 1);
+    AlignString(gMenuWindowPtr, buffer, src, width, 1);
     Text_InitWindowAndPrintText(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
@@ -746,22 +746,22 @@ void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
     Text_InitWindow8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
 
-u8 *sub_8072C14(u8 *a1, s32 a2, u8 a3, u8 a4)
+u8 *AlignInt1InMenuWindow(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    return AlignInt1(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignInt1(gMenuWindowPtr, dest, value, alignAmount, alignType);
 }
 
-u8 *sub_8072C44(u8 *a1, s32 a2, u8 a3, u8 a4)
+u8 *AlignInt2InMenuWindow(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
 {
-    return AlignInt2(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignInt2(gMenuWindowPtr, dest, value, alignAmount, alignType);
 }
 
-u8 *sub_8072C74(u8 *a1, const u8 *a2, u8 a3, u8 a4)
+u8 *AlignStringInMenuWindow(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
-    return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
+    return AlignString(gMenuWindowPtr, dest, src, alignAmount, alignType);
 }
 
-u8 sub_8072CA4(const u8 *str)
+u8 GetStringWidthInMenuWindow(const u8 *str)
 {
     return GetStringWidth(gMenuWindowPtr, str);
 }

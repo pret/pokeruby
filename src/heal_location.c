@@ -2,8 +2,6 @@
 #include "heal_location.h"
 #include "constants/maps.h"
 
-#define NUM_HEAL_LOCATIONS 22
-
 static const struct HealLocation sHealLocations[] =
 {
     {MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), MAP_NUM(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F), 4, 2},
@@ -34,7 +32,7 @@ u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
 {
     u32 i;
 
-    for (i = 0; i < NUM_HEAL_LOCATIONS; i++)
+    for (i = 0; i < ARRAY_COUNT(sHealLocations); i++)
     {
         if (sHealLocations[i].group == mapGroup && sHealLocations[i].map == mapNum)
             return i + 1;
@@ -56,7 +54,7 @@ const struct HealLocation *GetHealLocation(u32 index)
 {
     if (index == 0)
         return NULL;
-    else if (index > NUM_HEAL_LOCATIONS)
+    else if (index > ARRAY_COUNT(sHealLocations))
         return NULL;
     else
         return &sHealLocations[index - 1];

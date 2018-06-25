@@ -9,10 +9,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CCD24(struct Sprite* sprite);
 static void sub_80CCE0C(struct Sprite* sprite);
 
 // shield
 // Used by Protect.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6BE8 =
+{
+    .tileTag = 10280,
+    .paletteTag = 10280,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CCD24,
+};
 
 void sub_80CCD24(struct Sprite* sprite)
 {
@@ -23,7 +35,7 @@ void sub_80CCD24(struct Sprite* sprite)
 
     sprite->pos1.x = sub_8077EE4(gAnimBankAttacker, 0) + gBattleAnimArgs[0];
     sprite->pos1.y = sub_8077EE4(gAnimBankAttacker, 1) + gBattleAnimArgs[1];
-    if (GetBankSide(gAnimBankAttacker) == 0 || IsContest())
+    if (GetBattlerSide(gAnimBankAttacker) == 0 || IsContest())
         sprite->oam.priority = sub_8079ED4(gAnimBankAttacker) + 1;
     else
         sprite->oam.priority = sub_8079ED4(gAnimBankAttacker);
@@ -36,7 +48,7 @@ void sub_80CCD24(struct Sprite* sprite)
     sprite->callback = sub_80CCE0C;
 }
 
-void sub_80CCE0C(struct Sprite* sprite)
+static void sub_80CCE0C(struct Sprite* sprite)
 {
     int a;
     int i;

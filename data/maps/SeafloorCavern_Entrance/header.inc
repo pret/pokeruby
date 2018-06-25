@@ -1,9 +1,9 @@
 SeafloorCavern_Entrance:: @ 8307064
-	.4byte SeafloorCavern_Entrance_MapAttributes
+	.4byte SeafloorCavern_Entrance_Layout
 	.4byte SeafloorCavern_Entrance_MapEvents
 	.4byte SeafloorCavern_Entrance_MapScripts
 	.4byte 0x0
-	.2byte BGM_TOZAN
+	.2byte MUS_TOZAN
 	.2byte 148
 	.byte 68
 	.byte 0

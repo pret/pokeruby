@@ -299,7 +299,7 @@ static void BuyMenuDrawGraphics(void)
     DrawFirstMartScrollIndicators();
     CreateTask(Shop_DoCursorAction, 0x8);
     sub_80B3240();
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     gPaletteFade.bufferTransferDisabled = 0;
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
@@ -409,16 +409,16 @@ static void Shop_DrawViewportTiles(void)
                 s32 r3 = MapGridGetMetatileLayerTypeAt(facingX + x, facingY + y);
 
                 if (metatileId < 512)
-                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapData->primaryTileset->metatiles + metatileId * 8, r3);
+                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapLayout->primaryTileset->metatiles + metatileId * 8, r3);
                 else
-                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapData->secondaryTileset->metatiles + (metatileId - 512) * 8, r3);
+                    BuyMenuDrawMapMetatile(x, y, (u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles + (metatileId - 512) * 8, r3);
             }
             else
             {
                 if (metatileId < 512)
-                    BuyMenuDrawMapPartialMetatile(x, y, (u16 *)gMapHeader.mapData->primaryTileset->metatiles + metatileId * 8);
+                    BuyMenuDrawMapPartialMetatile(x, y, (u16 *)gMapHeader.mapLayout->primaryTileset->metatiles + metatileId * 8);
                 else
-                    BuyMenuDrawMapPartialMetatile(x, y, (u16 *)gMapHeader.mapData->secondaryTileset->metatiles + (metatileId - 512) * 8);
+                    BuyMenuDrawMapPartialMetatile(x, y, (u16 *)gMapHeader.mapLayout->secondaryTileset->metatiles + (metatileId - 512) * 8);
             }
 
             if (y == 0 && x != 0 && x != 6)
@@ -447,25 +447,25 @@ static void Shop_LoadViewportObjects(void)
     GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
     playerHeight = PlayerGetZCoord();
     for (y = 0; y < 16; y++)
-        gMartViewportObjects[y][MAP_OBJ_ID] = 16;
+        gMartViewportObjects[y][EVENT_OBJ_ID] = 16;
     for (y = 0; y < 5; y++)
     {
         for (x = 0; x < 7; x++)
         {
-            u8 mapObjId = GetFieldObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
+            u8 eventObjId = GetEventObjectIdByXYZ(facingX - 3 + x, facingY - 2 + y, playerHeight);
 
-            if (mapObjId != 16)
+            if (eventObjId != 16)
             {
-                gMartViewportObjects[r8][MAP_OBJ_ID] = mapObjId;
+                gMartViewportObjects[r8][EVENT_OBJ_ID] = eventObjId;
                 gMartViewportObjects[r8][X_COORD] = x;
                 gMartViewportObjects[r8][Y_COORD] = y;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 1)
+                if (gEventObjects[eventObjId].facingDirection == DIR_SOUTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 0;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 2)
+                if (gEventObjects[eventObjId].facingDirection == DIR_NORTH)
                     gMartViewportObjects[r8][ANIM_NUM] = 1;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 3)
+                if (gEventObjects[eventObjId].facingDirection == DIR_WEST)
                     gMartViewportObjects[r8][ANIM_NUM] = 2;
-                if (gMapObjects[mapObjId].mapobj_unk_18 == 4)
+                if (gEventObjects[eventObjId].facingDirection == DIR_EAST)
                     gMartViewportObjects[r8][ANIM_NUM] = 3;
                 r8++;
             }
@@ -479,11 +479,11 @@ static void Shop_AnimViewportObjects(void)
 
     for (i = 0; i < 16; i++) // max objects?
     {
-        if (gMartViewportObjects[i][MAP_OBJ_ID] == 16)
+        if (gMartViewportObjects[i][EVENT_OBJ_ID] == 16)
             continue;
 
-        StartSpriteAnim(&gSprites[AddPseudoFieldObject(
-            gMapObjects[gMartViewportObjects[i][MAP_OBJ_ID]].graphicsId,
+        StartSpriteAnim(&gSprites[AddPseudoEventObject(
+            gEventObjects[gMartViewportObjects[i][EVENT_OBJ_ID]].graphicsId,
             SpriteCallbackDummy,
             (u16)gMartViewportObjects[i][X_COORD] * 16 + 8,
             (u16)gMartViewportObjects[i][Y_COORD] * 16 + 32,
@@ -691,7 +691,7 @@ static void Task_DoItemPurchase(u8 taskId)
         }
         else // a normal mart is only type 0, so types 1 and 2 are decoration marts.
         {
-            if (IsThereStorageSpaceForDecoration(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]))
+            if (GiveDecoration(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]))
             {
                 if (gMartInfo.martType == MART_TYPE_1)
                     DisplayItemMessageOnField(taskId, gOtherText_HereYouGo2, Shop_DoItemTransaction, 0xC3E1);
@@ -811,7 +811,7 @@ static void Shop_MoveItemListUp(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void Shop_MoveItemListUp(void)
 {
     asm(".syntax unified\n\
@@ -950,7 +950,7 @@ static void Shop_MoveItemListDown(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 static void Shop_MoveItemListDown(void)
 {
     asm(".syntax unified\n\
@@ -1168,7 +1168,7 @@ static void Task_ReturnToBuyMenu(u8 taskId)
 static void Task_ExitBuyMenu(u8 taskId)
 {
     gFieldCallback = Shop_FadeReturnToMartMenu;
-    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_ExitBuyMenuDoFade;
 }
 

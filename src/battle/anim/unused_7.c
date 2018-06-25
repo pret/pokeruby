@@ -10,9 +10,22 @@ extern u8 gAnimBankTarget;
 
 extern u8 gBankSpriteIds[];
 
+void sub_80CF3C4(struct Sprite* sprite);
+
 // unused_7
 
-void sub_80CF374(struct Sprite* sprite)
+const struct SpriteTemplate gSpriteTemplate_83D73AC =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CF3C4,
+};
+
+static void sub_80CF374(struct Sprite* sprite)
 {
     s16 temp;
     gSprites[sprite->data[2]].pos2.x += sprite->data[1];
@@ -30,10 +43,10 @@ void sub_80CF374(struct Sprite* sprite)
 void sub_80CF3C4(struct Sprite* sprite)
 {
     u8 a;
-    sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-    sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 3);
+    sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     a = gBankSpriteIds[gAnimBankTarget];
-    if (GetBankSide(gAnimBankAttacker) != 0)
+    if (GetBattlerSide(gAnimBankAttacker) != 0)
     {
         sprite->pos1.x -= gBattleAnimArgs[0];
     }

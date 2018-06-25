@@ -233,12 +233,12 @@ u32 InitMainMenu(u8 a1)
     ResetSpriteData();
     FreeAllSpritePalettes();
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
 
     if (a1)
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     else
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xFFFF); // fade to white
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, FADE_COLOR_WHITE);
 
     REG_WIN0H = 0;
     REG_WIN0V = 0;
@@ -452,13 +452,13 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0x0000);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = Task_MainMenuPressedA;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, FADE_COLOR_WHITE);
         REG_WIN0H = WIN_RANGE(0, 240);
         REG_WIN0V = WIN_RANGE(0, 160);
         gTasks[taskId].func = Task_MainMenuPressedB;
@@ -704,12 +704,12 @@ void PrintPlayTime(void)
 #if defined(ENGLISH)
     Menu_PrintText(gMainMenuString_Time, 16, 3);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-    sub_8072C74(alignedPlayTime, playTime, 48, 1);
+    AlignStringInMenuWindow(alignedPlayTime, playTime, 48, 1);
     Menu_PrintText(alignedPlayTime, 22, 3);
 #elif defined(GERMAN)
     Menu_PrintTextPixelCoords(gMainMenuString_Time, 124, 24, TRUE);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-    sub_8072C74(alignedPlayTime, playTime, 40, 1);
+    AlignStringInMenuWindow(alignedPlayTime, playTime, 40, 1);
     Menu_PrintText(alignedPlayTime, 23, 3);
 #endif
 }
@@ -719,7 +719,7 @@ void PrintPokedexCount(void)
     u8 buffer[16];
 
     Menu_PrintText(gMainMenuString_Pokedex, 2, 5);
-    sub_8072C14(buffer, GetPokedexSeenCount(), 18, 0);
+    AlignInt1InMenuWindow(buffer, GetPokedexSeenCount(), 18, 0);
     Menu_PrintText(buffer, 9, 5);
 }
 
@@ -749,7 +749,7 @@ void PrintBadgeCount(void)
 static void Task_NewGameSpeech1(u8 taskId)
 {
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -765,7 +765,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     ResetSpriteData();
     FreeAllSpritePalettes();
     AddBirchSpeechObjects(taskId);
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     REG_BG1CNT = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(7) | BGCNT_16COLOR | BGCNT_TXT256x256;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     gTasks[taskId].tBGhofs = 0;
@@ -774,7 +774,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tFrameCounter = 216;  //Wait 3.6 seconds (216 frames) before starting speech
 
-    PlayBGM(BGM_DOORO_X4);
+    PlayBGM(MUS_DOORO_X4);
 }
 
 static void Task_NewGameSpeech2(u8 taskId)
@@ -1094,7 +1094,7 @@ static void Task_NewGameSpeech21(u8 taskId)
         break;
     case 0:     //NEW NAME
         PlaySE(SE_SELECT);
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gTasks[taskId].func = Task_NewGameSpeech22;
         break;
     case -1:    //B button
@@ -1291,7 +1291,7 @@ static void Task_NewGameSpeech30(u8 taskId)
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = ShrinkPlayerSprite;
-            BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0x0000FFFF, 0, 0, 16, RGB(0, 0, 0));
             FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameSpeech31;
         }
@@ -1313,7 +1313,7 @@ static void Task_NewGameSpeech32(u8 taskId)
         u8 spriteId = gTasks[taskId].tTrainerSpriteId;
         gSprites[spriteId].callback = nullsub_34;
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
-        BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0x10, 0xFFFF);
+        BeginNormalPaletteFade(0xFFFF0000, 0, 0, 16, FADE_COLOR_WHITE);
         gTasks[taskId].func = Task_NewGameSpeech33;
     }
 }
@@ -1372,7 +1372,7 @@ void CB_ContinueNewGameSpeechPart2()
     AddBirchSpeechObjects(taskId);
 
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
 
     if (gSaveBlock2.playerGender != MALE)
     {
@@ -1393,7 +1393,7 @@ void CB_ContinueNewGameSpeechPart2()
 
     REG_BG1HOFS = -60;
 
-    BeginNormalPaletteFade(0xFFFFFFFFu, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 
     REG_WIN0H = 0;
     REG_WIN0V = 0;

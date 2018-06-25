@@ -1,52 +1,27 @@
 #include "global.h"
-#include "decompress.h"
-#include "palette.h"
-#include "event_data.h"
-#include "main.h"
-#include "text_window.h"
-#include "menu.h"
-#include "strings2.h"
-#include "sound.h"
-#include "constants/songs.h"
 #include "berry.h"
-#include "string_util.h"
-#include "link.h"
-#include "task.h"
-#include "overworld.h"
+#include "decompress.h"
+#include "event_data.h"
+#include "ewram.h"
 #include "item.h"
-#include "constants/items.h"
+#include "link.h"
+#include "m4a.h"
+#include "main.h"
+#include "menu.h"
+#include "menu_cursor.h"
+#include "overworld.h"
+#include "palette.h"
+#include "pokeblock.h"
 #include "random.h"
 #include "save.h"
-#include "menu_cursor.h"
+#include "sound.h"
+#include "string_util.h"
+#include "strings2.h"
+#include "task.h"
+#include "text_window.h"
 #include "trig.h"
-#include "pokeblock.h"
-#include "ewram.h"
-
-//needed to match Blender_ControlHitPitch
-struct MusicPlayerInfo
-{
-    struct SongHeader *songHeader;
-    u32 status;
-    u8 trackCount;
-    u8 priority;
-    u8 cmd;
-    u8 unk_B;
-    u32 clock;
-    u8 gap[8];
-    u8 *memAccArea;
-    u16 tempoD;
-    u16 tempoU;
-    u16 tempoI;
-    u16 tempoC;
-    u16 fadeOI;
-    u16 fadeOC;
-    u16 fadeOV;
-    struct MusicPlayerTrack *tracks;
-    struct ToneData *tone;
-    u32 ident;
-    u32 func;
-    u32 intp;
-};
+#include "constants/songs.h"
+#include "constants/items.h"
 
 #define BLENDER_SCORE_BEST      0
 #define BLENDER_SCORE_GOOD      1
@@ -945,7 +920,7 @@ static void sub_804E56C(void)
         }
         break;
     case 2:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         sub_8051474();
         gBerryBlenderData->field_0++;
         break;
@@ -965,7 +940,7 @@ static void sub_804E56C(void)
         if (Menu_UpdateWindowText())
         {
             gBerryBlenderData->field_0++;
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         }
         break;
     case 6:
@@ -1137,7 +1112,7 @@ static void sub_804E9F8(void)
         gBerryBlenderData->field_0++;
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gBerryBlenderData->field_0++;
         break;
     case 4:
@@ -1270,7 +1245,7 @@ static void sub_804E9F8(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         break;
     case 100:
         Menu_DrawStdWindowFrame(0, 13, 29, 19);
@@ -1432,7 +1407,7 @@ static void sub_804F378(void)
         gBerryBlenderData->field_0++;
         break;
     case 3:
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         gBerryBlenderData->field_0++;
         gBerryBlenderData->framesToWait = 0;
         break;
@@ -1532,7 +1507,7 @@ static void sub_804F378(void)
         {
             gBerryBlenderData->field_178 = GetCurrentMapMusic();
         }
-        PlayBGM(BGM_CYCLING);
+        PlayBGM(MUS_CYCLING);
         PlaySE(SE_MOTER);
         Blender_ControlHitPitch();
         break;
@@ -1921,14 +1896,14 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
             r6++;
     }
     if (r6 == 5 || a3 > 3)
-        return 12;
+        return PBLOCK_CLR_BLACK;
     for (i = 0; i < playersNo; i++)
     {
         for (r6 = 0; r6 < playersNo; r6++)
         {
             if (berries[i].itemID == berries[r6].itemID && i != r6
                 && (berries[i].itemID != ITEM_ENIGMA_BERRY || sub_80502A4(berries, i, r6)))
-                    return 12;
+                    return PBLOCK_CLR_BLACK;
         }
     }
     r2 = 0;
@@ -1938,24 +1913,24 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
             r2++;
     }
     if (r2 > 3)
-        return 13;
+        return PBLOCK_CLR_WHITE;
     if (r2 == 3)
-        return 11;
+        return PBLOCK_CLR_GRAY;
     for (i = 0; i < 5; i++)
     {
         if (vars[i] > 50)
-            return 14;
+            return PBLOCK_CLR_GOLD;
     }
     if (r2 == 1 && vars[0] > 0)
-        return 1;
+        return PBLOCK_CLR_RED;
     if (r2 == 1 && vars[1] > 0)
-        return 2;
+        return PBLOCK_CLR_BLUE;
     if (r2 == 1 && vars[2] > 0)
-        return 3;
+        return PBLOCK_CLR_PINK;
     if (r2 == 1 && vars[3] > 0)
-        return 4;
+        return PBLOCK_CLR_GREEN;
     if (r2 == 1 && vars[4] > 0)
-        return 5;
+        return PBLOCK_CLR_YELLOW;
     if (r2 == 2)
     {
         s32 var = 0;
@@ -1967,28 +1942,28 @@ u32 Blender_GetPokeblockColor(struct BlenderBerry* berries, s16* a1, u8 playersN
         if (vars[gUnknown_03000520[0]] >= vars[gUnknown_03000520[1]])
         {
             if (gUnknown_03000520[0] == 0)
-                return (gUnknown_03000520[1] << 16) | 6;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_PURPLE;
             if (gUnknown_03000520[0] == 1)
-                return (gUnknown_03000520[1] << 16) | 7;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_INDIGO;
             if (gUnknown_03000520[0] == 2)
-                return (gUnknown_03000520[1] << 16) | 8;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_BROWN;
             if (gUnknown_03000520[0] == 3)
-                return (gUnknown_03000520[1] << 16) | 9;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_LITEBLUE;
             if (gUnknown_03000520[0] == 4)
-                return (gUnknown_03000520[1] << 16) | 10;
+                return (gUnknown_03000520[1] << 16) | PBLOCK_CLR_OLIVE;
         }
         else
         {
             if (gUnknown_03000520[1] == 0)
-                return (gUnknown_03000520[0] << 16) | 6;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_PURPLE;
             if (gUnknown_03000520[1] == 1)
-                return (gUnknown_03000520[0] << 16) | 7;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_INDIGO;
             if (gUnknown_03000520[1] == 2)
-                return (gUnknown_03000520[0] << 16) | 8;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_BROWN;
             if (gUnknown_03000520[1] == 3)
-                return (gUnknown_03000520[0] << 16) | 9;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_LITEBLUE;
             if (gUnknown_03000520[1] == 4)
-                return (gUnknown_03000520[0] << 16) | 10;
+                return (gUnknown_03000520[0] << 16) | PBLOCK_CLR_OLIVE;
         }
     }
     return 0;
@@ -2479,7 +2454,7 @@ static void sub_8050E30(void)
     case 9:
         if (IsLinkTaskFinished())
         {
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             gBerryBlenderData->field_6F++;
         }
         break;
@@ -3039,24 +3014,24 @@ bool8 Blender_PrintBlendingResults(void)
                 textPtr[1] = CHAR_PERIOD;
                 textPtr[2] = CHAR_SPACE;
                 textPtr += 3;
-                textPtr = sub_8072C74(textPtr, gLinkPlayers[place].name, 88, 0);
-                sub_8072C74(textPtr, text[0], 157, 0);
+                textPtr = AlignStringInMenuWindow(textPtr, gLinkPlayers[place].name, 88, 0);
+                AlignStringInMenuWindow(textPtr, text[0], 157, 0);
                 Menu_PrintText(gBerryBlenderData->stringVar, 5, gUnknown_082165E9[gBerryBlenderData->playersNo] + (i * gUnknown_082165EE[gBerryBlenderData->playersNo]));
             }
             ConvertIntToDecimalStringN(text[0], gBerryBlenderData->max_RPM % 100, 2, 2);
             textPtr = gBerryBlenderData->stringVar;
             textPtr = StringCopy(textPtr, gOtherText_MaxSpeed);
-            textPtr = sub_8072C14(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
+            textPtr = AlignInt1InMenuWindow(textPtr, gBerryBlenderData->max_RPM / 100, 121, 1);
 
 #ifdef ENGLISH
             textPtr[0] = CHAR_SPACE;
             textPtr[1] = CHAR_PERIOD;
             textPtr[2] = CHAR_SPACE;
             textPtr += 3;
-            textPtr = sub_8072C74(textPtr, text[0], 142, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 142, 1);
 #else
             *textPtr++ = CHAR_COMMA;
-            textPtr = sub_8072C74(textPtr, text[0], 136, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 136, 1);
 #endif
             StringCopy(textPtr, gOtherText_RPM);
             Menu_PrintText(gBerryBlenderData->stringVar, 5, 13);
@@ -3070,13 +3045,13 @@ bool8 Blender_PrintBlendingResults(void)
             textPtr = StringCopy(textPtr, gOtherText_RequiredTime);
 
 #ifdef ENGLISH
-            textPtr = sub_8072C74(textPtr, text[0], 102, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 102, 1);
 #else
-            textPtr = sub_8072C74(textPtr, text[0], 99, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[0], 99, 1);
 #endif
             textPtr = StringAppend(textPtr, gOtherText_Min);
 
-            textPtr = sub_8072C74(textPtr, text[1], 136, 1);
+            textPtr = AlignStringInMenuWindow(textPtr, text[1], 136, 1);
             StringCopy(textPtr, gOtherText_Sec);
 
             Menu_PrintText(gBerryBlenderData->stringVar, 5, 15);
@@ -3108,7 +3083,7 @@ bool8 Blender_PrintBlendingResults(void)
 #endif
         MenuPrintMessage(gBerryBlenderData->stringVar, 1, 15);
         RemoveBagItem(gSpecialVar_ItemId, 1);
-        sub_810CA34(&pokeblock);
+        GivePokeblock(&pokeblock);
         gBerryBlenderData->field_0++;
         break;
     case 6:
@@ -3247,9 +3222,9 @@ static bool8 Blender_PrintBlendingRanking(void)
 
             txtPtr = StringCopy(txtPtr, gLinkPlayers[place].name);
 
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
-            txtPtr = sub_8072C14(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_BEST], 108, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_GOOD], 132, 1);
+            txtPtr = AlignInt1InMenuWindow(txtPtr, gBerryBlenderData->scores[place][BLENDER_SCORE_MISS], 156, 1);
 
             Menu_PrintText(gBerryBlenderData->stringVar, 5, i * gUnknown_082165F3[gBerryBlenderData->playersNo] + 8);
         }
@@ -3276,14 +3251,14 @@ static bool8 Blender_PrintBlendingRanking(void)
 
 // debug menu goes here
 
-void unref_sub_80524BC(void)
+void debug_sub_80524BC(void)
 {
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB1_BerryBlender);
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     SeedRng(gMain.vblankCounter1);
     REG_DISPCNT = 0x1540;
     RunTasks();
@@ -3528,7 +3503,7 @@ void ShowBerryBlenderRecordWindow(void)
     for (i = 0; i < 3; i++)
     {
         u32 record = gSaveBlock1.berryBlenderRecords[i];
-        u8* txtPtr = sub_8072C14(text, record / 100, 18, 1);
+        u8* txtPtr = AlignInt1InMenuWindow(text, record / 100, 18, 1);
 
 #ifdef ENGLISH
         txtPtr[0] = CHAR_SPACE;
@@ -3549,7 +3524,7 @@ static void sub_8052BD0(u8 taskID)
 {
     if (gTasks[taskID].data[0] == 0)
     {
-        PlayFanfare(BGM_FANFA1);
+        PlayFanfare(MUS_FANFA1);
         gTasks[taskID].data[0]++;
     }
     if (IsFanfareTaskInactive())

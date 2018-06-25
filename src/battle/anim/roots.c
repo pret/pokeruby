@@ -6,20 +6,85 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
-
 extern s16 gUnknown_03000728[];
 
+void sub_80CB59C(struct Sprite* sprite);
+void sub_80CB620(struct Sprite *sprite);
 static void sub_80CB710(struct Sprite* sprite);
 
 // roots
 // Used by Ingrain and Frenzy Plant.
 
+const union AnimCmd gSpriteAnim_83D6600[] =
+{
+    ANIMCMD_FRAME(0, 7),
+    ANIMCMD_FRAME(16, 7),
+    ANIMCMD_FRAME(32, 7),
+    ANIMCMD_FRAME(48, 7),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6614[] =
+{
+    ANIMCMD_FRAME(0, 7, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 7, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 7, .hFlip = TRUE),
+    ANIMCMD_FRAME(48, 7, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6628[] =
+{
+    ANIMCMD_FRAME(0, 7),
+    ANIMCMD_FRAME(16, 7),
+    ANIMCMD_FRAME(32, 7),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6638[] =
+{
+    ANIMCMD_FRAME(0, 7, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 7, .hFlip = TRUE),
+    ANIMCMD_FRAME(32, 7, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6648[] =
+{
+    gSpriteAnim_83D6600,
+    gSpriteAnim_83D6614,
+    gSpriteAnim_83D6628,
+    gSpriteAnim_83D6638,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6658 =
+{
+    .tileTag = 10223,
+    .paletteTag = 10223,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6648,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CB59C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6670 =
+{
+    .tileTag = 10223,
+    .paletteTag = 10223,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D6648,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CB620,
+};
+
 void sub_80CB59C(struct Sprite* sprite)
 {
     if (!sprite->data[0])
     {
-        sprite->pos1.x = GetBankPosition(gAnimBankAttacker, 2);
-        sprite->pos1.y = GetBankPosition(gAnimBankAttacker, 1);
+        sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+        sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
         sprite->pos2.x = gBattleAnimArgs[0];
         sprite->pos2.y = gBattleAnimArgs[1];
         sprite->subpriority = gBattleAnimArgs[2] + 30;
@@ -36,10 +101,10 @@ void sub_80CB59C(struct Sprite* sprite)
 
 void sub_80CB620(struct Sprite *sprite)
 {
-    s16 p1 = GetBankPosition(gAnimBankAttacker, 2);
-    s16 p2 = GetBankPosition(gAnimBankAttacker, 3);
-    s16 e1 = GetBankPosition(gAnimBankTarget, 2);
-    s16 e2 = GetBankPosition(gAnimBankTarget, 3);
+    s16 p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    s16 p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+    s16 e1 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    s16 e2 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
     e1 -= p1;
     e2 -= p2;
@@ -57,7 +122,7 @@ void sub_80CB620(struct Sprite *sprite)
     gUnknown_03000728[3] = e2;
 }
 
-void sub_80CB710(struct Sprite* sprite)
+static void sub_80CB710(struct Sprite* sprite)
 {
     if (++sprite->data[0] > (sprite->data[2] - 10))
         sprite->invisible = sprite->data[0] % 2;

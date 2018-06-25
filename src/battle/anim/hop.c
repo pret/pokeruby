@@ -7,8 +7,66 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CB94C(struct Sprite* sprite);
+void sub_80CBA28(struct Sprite* sprite);
+
 // hop (where a sprite "hops" across the screen)
 // Used by Present, Trick, and the item knock off effect.
+
+const union AnimCmd gSpriteAnim_83D66B0[] =
+{
+    ANIMCMD_FRAME(0, 30),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D66B8[] =
+{
+    gSpriteAnim_83D66B0,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D66BC[] = {
+    AFFINEANIMCMD_FRAME(0, 0, -4, 10),
+    AFFINEANIMCMD_FRAME(0, 0, 4, 20),
+    AFFINEANIMCMD_FRAME(0, 0, -4, 10),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83D66DC[] = {
+    AFFINEANIMCMD_FRAME(0, 0, -1, 2),
+    AFFINEANIMCMD_FRAME(0, 0, 1, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -1, 4),
+    AFFINEANIMCMD_FRAME(0, 0, 1, 4),
+    AFFINEANIMCMD_FRAME(0, 0, -1, 4),
+    AFFINEANIMCMD_FRAME(0, 0, 1, 2),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6714[] = {
+    gSpriteAffineAnim_83D66BC,
+    gSpriteAffineAnim_83D66DC,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D671C =
+{
+    .tileTag = 10224,
+    .paletteTag = 10224,
+    .oam = &gOamData_837DF94,
+    .anims = gSpriteAnimTable_83D66B8,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D6714,
+    .callback = sub_80CB94C,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6734 =
+{
+    .tileTag = 10224,
+    .paletteTag = 10224,
+    .oam = &gOamData_837DF94,
+    .anims = gSpriteAnimTable_83D66B8,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83D6714,
+    .callback = sub_80CBA28,
+};
 
 void sub_80CB7EC(struct Sprite* sprite, s16 c)
 {
@@ -92,8 +150,8 @@ void sub_80CB94C(struct Sprite* sprite)
     s16 e1;
     s16 e2;
     InitAnimSpritePos(sprite, 0);
-    e1 = GetBankPosition(gAnimBankTarget, 0);
-    e2 = GetBankPosition(gAnimBankTarget, 1);
+    e1 = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+    e2 = GetBattlerSpriteCoord(gAnimBankTarget, 1);
     if ((gAnimBankAttacker ^ 2) == gAnimBankTarget)
     {
         sprite->data[6] = e1;
@@ -135,8 +193,8 @@ void sub_80CB9C4(struct Sprite* sprite)
 
 void sub_80CBA28(struct Sprite* sprite)
 {
-    s16 e = GetBankPosition(gAnimBankTarget, 1);
-    if (GetBankSide(gAnimBankTarget) == 0)
+    s16 e = GetBattlerSpriteCoord(gAnimBankTarget, 1);
+    if (GetBattlerSide(gAnimBankTarget) == 0)
     {
         sprite->data[6] = 0;
         sprite->data[7] = e + 10;

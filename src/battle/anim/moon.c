@@ -8,10 +8,22 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CE30C(struct Sprite* sprite);
 static void sub_80CE354(struct Sprite* sprite);
 
 // moon (shows a moon image.)
 // Used in Moonlight.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FC8 =
+{
+    .tileTag = 10194,
+    .paletteTag = 10194,
+    .oam = &gOamData_837E05C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CE30C,
+};
 
 void sub_80CE30C(struct Sprite* sprite)
 {
@@ -32,7 +44,7 @@ void sub_80CE30C(struct Sprite* sprite)
     sprite->callback = sub_80CE354;
 }
 
-void sub_80CE354(struct Sprite* sprite)
+static void sub_80CE354(struct Sprite* sprite)
 {
     if (sprite->data[0])
         DestroyAnimSprite(sprite);

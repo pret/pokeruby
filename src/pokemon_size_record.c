@@ -198,11 +198,19 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
     s32 i;
     bool32 gotRibbon = FALSE;
     u8 data = 1;
-    u8 arr[] = { 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E };
+    u8 arr[] = {
+        MON_DATA_GIFT_RIBBON_1,
+        MON_DATA_GIFT_RIBBON_2,
+        MON_DATA_GIFT_RIBBON_3,
+        MON_DATA_GIFT_RIBBON_4,
+        MON_DATA_GIFT_RIBBON_5,
+        MON_DATA_GIFT_RIBBON_6,
+        MON_DATA_GIFT_RIBBON_7,
+    };
 
     if (index < 11 && ribbonId < 65)
     {
-        gSaveBlock1.giftRibbons[index] = ribbonId;
+        gSaveBlock1.externalReservedData.giftRibbons[index] = ribbonId;
         for (i = 0; i < 6; i++)
         {
             struct Pokemon *pkmn = &gPlayerParty[i];

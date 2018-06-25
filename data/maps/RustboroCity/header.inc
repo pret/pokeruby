@@ -1,9 +1,9 @@
 RustboroCity:: @ 830549C
-	.4byte RustboroCity_MapAttributes
+	.4byte RustboroCity_Layout
 	.4byte RustboroCity_MapEvents
 	.4byte RustboroCity_MapScripts
 	.4byte RustboroCity_MapConnections
-	.2byte BGM_GOTOWN
+	.2byte MUS_GOTOWN
 	.2byte 4
 	.byte 10
 	.byte 0

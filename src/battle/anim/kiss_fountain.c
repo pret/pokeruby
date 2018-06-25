@@ -8,8 +8,21 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80D1FDC(struct Sprite* sprite);
+
 // kiss_fountain (a series of hearts pour out of a target Pokemon.)
 // Used in Attract and Sweet Kiss.
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7AC8 =
+{
+    .tileTag = 10216,
+    .paletteTag = 10216,
+    .oam = &gOamData_837DF2C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D1FDC,
+};
 
 void sub_80D1FDC(struct Sprite* sprite)
 {

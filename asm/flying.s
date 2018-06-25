@@ -7,601 +7,6 @@
 
 	@ flying
 
-	thumb_func_start sub_80DA034
-sub_80DA034: @ 80DA034
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0
-	bl sub_8078764
-	ldrh r0, [r4, 0x22]
-	adds r0, 0x14
-	strh r0, [r4, 0x22]
-	movs r0, 0xBF
-	strh r0, [r4, 0x30]
-	ldr r1, _080DA058 @ =sub_80DA05C
-	str r1, [r4, 0x1C]
-	adds r0, r4, 0
-	bl _call_via_r1
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA058: .4byte sub_80DA05C
-	thumb_func_end sub_80DA034
-
-	thumb_func_start sub_80DA05C
-sub_80DA05C: @ 80DA05C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	movs r1, 0x20
-	bl Sin
-	strh r0, [r4, 0x24]
-	movs r1, 0x30
-	ldrsh r0, [r4, r1]
-	movs r1, 0x8
-	bl Cos
-	strh r0, [r4, 0x26]
-	ldrh r0, [r4, 0x30]
-	adds r0, 0x5
-	movs r1, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x30]
-	ldrh r0, [r4, 0x2E]
-	adds r0, 0x1
-	strh r0, [r4, 0x2E]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x47
-	bne _080DA096
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DA096:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DA05C
-
-	thumb_func_start sub_80DA09C
-sub_80DA09C: @ 80DA09C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _080DA0CC @ =gTasks
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	adds r4, r1
-	ldr r1, _080DA0D0 @ =gBattleAnimArgs
-	ldrh r0, [r1, 0x2]
-	strh r0, [r4, 0x8]
-	ldrh r0, [r1]
-	strh r0, [r4, 0xA]
-	ldr r0, _080DA0D4 @ =0x00002719
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4, 0xC]
-	ldr r0, _080DA0D8 @ =sub_80DA0DC
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA0CC: .4byte gTasks
-_080DA0D0: .4byte gBattleAnimArgs
-_080DA0D4: .4byte 0x00002719
-_080DA0D8: .4byte sub_80DA0DC
-	thumb_func_end sub_80DA09C
-
-	thumb_func_start sub_80DA0DC
-sub_80DA0DC: @ 80DA0DC
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r2, _080DA15C @ =gTasks
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r3, r0, r2
-	ldrh r0, [r3, 0x1C]
-	adds r1, r0, 0x1
-	strh r1, [r3, 0x1C]
-	lsls r0, 16
-	asrs r0, 16
-	movs r4, 0xA
-	ldrsh r1, [r3, r4]
-	adds r7, r2, 0
-	cmp r0, r1
-	bne _080DA13A
-	movs r0, 0
-	strh r0, [r3, 0x1C]
-	ldrb r0, [r3, 0xC]
-	ldr r2, _080DA160 @ =gPlttBufferFaded
-	lsls r0, 4
-	movs r3, 0x84
-	lsls r3, 1
-	adds r1, r0, r3
-	lsls r1, 1
-	adds r1, r2
-	ldrh r6, [r1]
-	movs r4, 0x7
-	mov r12, r0
-	ldr r0, _080DA164 @ =0x00000107
-	add r0, r12
-	lsls r0, 1
-	adds r3, r0, r2
-_080DA122:
-	ldrh r0, [r3]
-	strh r0, [r1]
-	subs r3, 0x2
-	subs r1, 0x2
-	subs r4, 0x1
-	cmp r4, 0
-	bgt _080DA122
-	ldr r0, _080DA168 @ =0x00000101
-	add r0, r12
-	lsls r0, 1
-	adds r0, r2
-	strh r6, [r0]
-_080DA13A:
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r7
-	ldrh r1, [r0, 0x8]
-	subs r1, 0x1
-	strh r1, [r0, 0x8]
-	lsls r1, 16
-	cmp r1, 0
-	bne _080DA154
-	adds r0, r5, 0
-	bl DestroyAnimVisualTask
-_080DA154:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA15C: .4byte gTasks
-_080DA160: .4byte gPlttBufferFaded
-_080DA164: .4byte 0x00000107
-_080DA168: .4byte 0x00000101
-	thumb_func_end sub_80DA0DC
-
-	thumb_func_start sub_80DA16C
-sub_80DA16C: @ 80DA16C
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r1, 0x1
-	bl InitAnimSpritePos
-	ldr r0, _080DA1D8 @ =gAnimBankAttacker
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DA18C
-	ldr r1, _080DA1DC @ =gBattleAnimArgs
-	ldrh r0, [r1, 0x4]
-	negs r0, r0
-	strh r0, [r1, 0x4]
-_080DA18C:
-	ldr r4, _080DA1DC @ =gBattleAnimArgs
-	ldrh r0, [r4, 0x8]
-	strh r0, [r6, 0x2E]
-	ldrh r0, [r6, 0x20]
-	strh r0, [r6, 0x30]
-	ldr r5, _080DA1E0 @ =gAnimBankTarget
-	ldrb r0, [r5]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r1, [r4, 0x4]
-	adds r0, r1
-	strh r0, [r6, 0x32]
-	ldrh r0, [r6, 0x22]
-	strh r0, [r6, 0x34]
-	ldrb r0, [r5]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	ldrh r4, [r4, 0x6]
-	adds r0, r4
-	strh r0, [r6, 0x36]
-	adds r0, r6, 0
-	bl InitAnimSpriteTranslationDeltas
-	ldr r0, _080DA1E4 @ =sub_80785E4
-	str r0, [r6, 0x1C]
-	ldr r1, _080DA1E8 @ =sub_80DA1EC
-	adds r0, r6, 0
-	bl StoreSpriteCallbackInData
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA1D8: .4byte gAnimBankAttacker
-_080DA1DC: .4byte gBattleAnimArgs
-_080DA1E0: .4byte gAnimBankTarget
-_080DA1E4: .4byte sub_80785E4
-_080DA1E8: .4byte sub_80DA1EC
-	thumb_func_end sub_80DA16C
-
-	thumb_func_start sub_80DA1EC
-sub_80DA1EC: @ 80DA1EC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl TranslateAnimSpriteByDeltas
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DA200
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DA200:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DA1EC
-
-	thumb_func_start sub_80DA208
-sub_80DA208: @ 80DA208
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r4, _080DA2A4 @ =gAnimBankAttacker
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DA234
-	ldr r1, _080DA2A8 @ =gBattleAnimArgs
-	ldrh r0, [r1]
-	negs r0, r0
-	strh r0, [r1]
-	ldrh r0, [r1, 0x2]
-	negs r0, r0
-	strh r0, [r1, 0x2]
-	ldrh r0, [r1, 0x4]
-	negs r0, r0
-	strh r0, [r1, 0x4]
-	ldrh r0, [r1, 0x6]
-	negs r0, r0
-	strh r0, [r1, 0x6]
-_080DA234:
-	bl IsContest
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DA24C
-	ldr r0, _080DA2A8 @ =gBattleAnimArgs
-	ldrh r1, [r0, 0x2]
-	negs r1, r1
-	strh r1, [r0, 0x2]
-	ldrh r1, [r0, 0x6]
-	negs r1, r1
-	strh r1, [r0, 0x6]
-_080DA24C:
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x20]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	ldr r2, _080DA2A8 @ =gBattleAnimArgs
-	ldrh r1, [r2]
-	ldrh r3, [r5, 0x20]
-	adds r1, r3
-	strh r1, [r5, 0x20]
-	lsrs r0, 24
-	ldrh r1, [r2, 0x2]
-	adds r0, r1
-	strh r0, [r5, 0x22]
-	ldrh r0, [r2, 0x8]
-	strh r0, [r5, 0x2E]
-	movs r3, 0xC
-	ldrsh r0, [r2, r3]
-	cmp r0, 0
-	bne _080DA2B0
-	ldr r4, _080DA2AC @ =gAnimBankTarget
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x32]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x36]
-	b _080DA2C2
-	.align 2, 0
-_080DA2A4: .4byte gAnimBankAttacker
-_080DA2A8: .4byte gBattleAnimArgs
-_080DA2AC: .4byte gAnimBankTarget
-_080DA2B0:
-	ldr r0, _080DA2F0 @ =gAnimBankTarget
-	ldrb r0, [r0]
-	adds r2, r5, 0
-	adds r2, 0x32
-	adds r3, r5, 0
-	adds r3, 0x36
-	movs r1, 0x1
-	bl SetAverageBattlerPositions
-_080DA2C2:
-	ldr r4, _080DA2F4 @ =gBattleAnimArgs
-	ldrh r0, [r4, 0x4]
-	ldrh r1, [r5, 0x32]
-	adds r0, r1
-	strh r0, [r5, 0x32]
-	ldrh r0, [r4, 0x6]
-	ldrh r3, [r5, 0x36]
-	adds r0, r3
-	strh r0, [r5, 0x36]
-	ldr r0, _080DA2F8 @ =StartTranslateAnimSpriteByDeltas
-	str r0, [r5, 0x1C]
-	ldr r1, _080DA2FC @ =DestroyAnimSprite
-	adds r0, r5, 0
-	bl StoreSpriteCallbackInData
-	ldrb r1, [r4, 0xA]
-	adds r0, r5, 0
-	bl SeekSpriteAnim
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA2F0: .4byte gAnimBankTarget
-_080DA2F4: .4byte gBattleAnimArgs
-_080DA2F8: .4byte StartTranslateAnimSpriteByDeltas
-_080DA2FC: .4byte DestroyAnimSprite
-	thumb_func_end sub_80DA208
-
-	thumb_func_start sub_80DA300
-sub_80DA300: @ 80DA300
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	bl InitAnimSpritePos
-	ldr r1, _080DA33C @ =gBattleAnimArgs
-	ldrh r0, [r1, 0x4]
-	strh r0, [r4, 0x2E]
-	ldrh r0, [r1, 0x6]
-	strh r0, [r4, 0x30]
-	ldr r0, _080DA340 @ =sub_80DA348
-	str r0, [r4, 0x1C]
-	movs r0, 0
-	bl GetAnimBankSpriteId
-	ldr r2, _080DA344 @ =gSprites
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	adds r1, 0x3E
-	ldrb r0, [r1]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA33C: .4byte gBattleAnimArgs
-_080DA340: .4byte sub_80DA348
-_080DA344: .4byte gSprites
-	thumb_func_end sub_80DA300
-
-	thumb_func_start sub_80DA348
-sub_80DA348: @ 80DA348
-	push {lr}
-	adds r2, r0, 0
-	ldrh r1, [r2, 0x2E]
-	movs r3, 0x2E
-	ldrsh r0, [r2, r3]
-	cmp r0, 0
-	ble _080DA35C
-	subs r0, r1, 0x1
-	strh r0, [r2, 0x2E]
-	b _080DA36E
-_080DA35C:
-	ldrh r0, [r2, 0x30]
-	ldrh r1, [r2, 0x32]
-	adds r0, r1
-	strh r0, [r2, 0x32]
-	lsls r0, 16
-	asrs r0, 24
-	ldrh r1, [r2, 0x26]
-	subs r1, r0
-	strh r1, [r2, 0x26]
-_080DA36E:
-	movs r3, 0x22
-	ldrsh r0, [r2, r3]
-	movs r3, 0x26
-	ldrsh r1, [r2, r3]
-	adds r0, r1
-	movs r1, 0x20
-	negs r1, r1
-	cmp r0, r1
-	bge _080DA386
-	adds r0, r2, 0
-	bl DestroyAnimSprite
-_080DA386:
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80DA348
-
-	thumb_func_start sub_80DA38C
-sub_80DA38C: @ 80DA38C
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, _080DA3B4 @ =gAnimBankAttacker
-	ldrb r0, [r0]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	beq _080DA3BC
-	movs r0, 0x88
-	lsls r0, 1
-	strh r0, [r5, 0x20]
-	ldr r0, _080DA3B8 @ =0x0000ffe0
-	strh r0, [r5, 0x22]
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl StartSpriteAffineAnim
-	b _080DA3C2
-	.align 2, 0
-_080DA3B4: .4byte gAnimBankAttacker
-_080DA3B8: .4byte 0x0000ffe0
-_080DA3BC:
-	ldr r0, _080DA400 @ =0x0000ffe0
-	strh r0, [r5, 0x20]
-	strh r0, [r5, 0x22]
-_080DA3C2:
-	ldr r0, _080DA404 @ =gBattleAnimArgs
-	ldrh r0, [r0]
-	strh r0, [r5, 0x2E]
-	ldrh r0, [r5, 0x20]
-	strh r0, [r5, 0x30]
-	ldr r4, _080DA408 @ =gAnimBankTarget
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x32]
-	ldrh r0, [r5, 0x22]
-	strh r0, [r5, 0x34]
-	ldrb r0, [r4]
-	movs r1, 0x3
-	bl GetBankPosition
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r5, 0x36]
-	adds r0, r5, 0
-	bl InitAnimSpriteTranslationDeltas
-	ldr r0, _080DA40C @ =sub_80DA410
-	str r0, [r5, 0x1C]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA400: .4byte 0x0000ffe0
-_080DA404: .4byte gBattleAnimArgs
-_080DA408: .4byte gAnimBankTarget
-_080DA40C: .4byte sub_80DA410
-	thumb_func_end sub_80DA38C
-
-	thumb_func_start sub_80DA410
-sub_80DA410: @ 80DA410
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r0, 0x1
-	strh r0, [r4, 0x2E]
-	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
-	ldrh r1, [r4, 0x34]
-	lsrs r0, r1, 8
-	cmp r0, 0xC8
-	bls _080DA438
-	ldrh r0, [r4, 0x24]
-	ldrh r2, [r4, 0x20]
-	adds r0, r2
-	strh r0, [r4, 0x20]
-	movs r0, 0
-	strh r0, [r4, 0x24]
-	movs r0, 0xFF
-	ands r0, r1
-	strh r0, [r4, 0x34]
-_080DA438:
-	movs r1, 0x20
-	ldrsh r0, [r4, r1]
-	movs r2, 0x24
-	ldrsh r1, [r4, r2]
-	adds r0, r1
-	adds r0, 0x20
-	movs r1, 0x98
-	lsls r1, 1
-	cmp r0, r1
-	bhi _080DA45A
-	movs r1, 0x22
-	ldrsh r0, [r4, r1]
-	movs r2, 0x26
-	ldrsh r1, [r4, r2]
-	adds r0, r1
-	cmp r0, 0xA0
-	ble _080DA480
-_080DA45A:
-	movs r0, 0
-	bl GetAnimBankSpriteId
-	ldr r2, _080DA488 @ =gSprites
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1]
-	adds r0, r4, 0
-	bl DestroyAnimSprite
-_080DA480:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA488: .4byte gSprites
-	thumb_func_end sub_80DA410
-
-	thumb_func_start sub_80DA48C
-sub_80DA48C: @ 80DA48C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x2E]
-	subs r1, r0, 0x1
-	strh r1, [r4, 0x2E]
-	lsls r0, 16
-	cmp r0, 0
-	bgt _080DA4CC
-	ldrb r0, [r4, 0x1]
-	lsls r0, 30
-	lsrs r0, 30
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _080DA4BE
-	ldrb r0, [r4, 0x3]
-	lsls r0, 26
-	lsrs r0, 27
-	bl FreeOamMatrix
-	ldrb r1, [r4, 0x1]
-	movs r0, 0x4
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r4, 0x1]
-_080DA4BE:
-	adds r0, r4, 0
-	bl DestroySprite
-	ldr r1, _080DA4D4 @ =gAnimVisualTaskCount
-	ldrb r0, [r1]
-	subs r0, 0x1
-	strb r0, [r1]
-_080DA4CC:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080DA4D4: .4byte gAnimVisualTaskCount
-	thumb_func_end sub_80DA48C
-
 	thumb_func_start sub_80DA4D8
 sub_80DA4D8: @ 80DA4D8
 	push {r4-r7,lr}
@@ -627,7 +32,7 @@ _080DA500:
 _080DA502:
 	ldrb r6, [r0]
 	adds r0, r6, 0
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DA518
@@ -638,7 +43,7 @@ _080DA502:
 _080DA518:
 	adds r0, r6, 0
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	ldr r4, _080DA5B4 @ =gBattleAnimArgs
 	lsrs r0, 24
@@ -647,7 +52,7 @@ _080DA518:
 	strh r0, [r7, 0x20]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	ldrh r1, [r4, 0x2]
 	lsrs r0, 24
@@ -1733,13 +1138,13 @@ sub_80DAD30: @ 80DAD30
 	ldr r5, _080DAD7C @ =gAnimBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x20]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -1784,7 +1189,7 @@ sub_80DAD84: @ 80DAD84
 	beq _080DADE0
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -1799,7 +1204,7 @@ _080DADDC: .4byte gAnimBankTarget
 _080DADE0:
 	adds r0, r2, 0
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x28
@@ -1849,7 +1254,7 @@ _080DAE44:
 	ldr r0, _080DAEFC @ =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r5, [r5, 0x6]
@@ -2102,7 +1507,7 @@ _080DB024:
 	bne _080DB03C
 	ldr r0, _080DB090 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB052
@@ -2113,7 +1518,7 @@ _080DB03C:
 	bne _080DB058
 	ldr r0, _080DB094 @ =gAnimBankTarget
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB058
@@ -2239,13 +1644,13 @@ sub_80DB0E8: @ 80DB0E8
 	ldr r5, _080DB190 @ =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -2293,7 +1698,7 @@ _080DB1A6:
 	movs r1, 0x1
 	bl InitAnimSpritePos
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080DB1D4 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2349,7 +1754,7 @@ _080DB210:
 	ldr r0, _080DB228 @ =gAnimBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -2385,7 +1790,7 @@ _080DB240:
 	cmp r0, r1
 	bge _080DB27E
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080DB284 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2423,7 +1828,7 @@ sub_80DB288: @ 80DB288
 	ldr r0, _080DB2C8 @ =sub_80DB2D0
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	ldr r2, _080DB2CC @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -2566,13 +1971,13 @@ _080DB3A0:
 _080DB3A2:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -2726,13 +2131,13 @@ _080DB4D4:
 _080DB4D6:
 	ldrb r0, [r4]
 	movs r1, 0
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x20]
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x20
@@ -2885,14 +2290,14 @@ sub_80DB5E4: @ 80DB5E4
 	ldr r6, _080DB698 @ =gAnimBankAttacker
 	ldrb r0, [r6]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
 	strh r0, [r1, 0x20]
 	ldrb r0, [r6]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -3012,7 +2417,7 @@ unref_sub_80DB6E4: @ 80DB6E4
 	cmp r0, 0
 	bne _080DB71C
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DB718 @ =gSprites
@@ -3030,7 +2435,7 @@ _080DB714: .4byte gBattleAnimArgs
 _080DB718: .4byte gSprites
 _080DB71C:
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080DB748 @ =gSprites

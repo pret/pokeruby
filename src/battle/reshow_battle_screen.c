@@ -14,14 +14,14 @@ extern struct Window gUnknown_03004210;
 extern u8 gReservedSpritePaletteCount;
 extern u8 gActionSelectionCursor[4];
 extern u8 gBankInMenu;
-extern u16 gBattlePartyID[4];
-extern u8 gNoOfAllBanks;
+extern u16 gBattlerPartyIndexes[4];
+extern u8 gBattlersCount;
 extern u16 gBattleTypeFlags;
 extern u8 gBankSpriteIds[4];
 extern u8 gBattleMonForms[4];
 extern u8 gHealthboxIDs[4];
 
-bool8 sub_800E414(u8 a0);
+bool8 LoadChosenBattleElement(u8 a0);
 bool8 sub_8031C30(u8 a0);
 void sub_8031EE8(void);
 void sub_80327CC(void);
@@ -89,7 +89,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         }
         break;
     case 2:
-        if (!sub_800E414(gHelperState))
+        if (!LoadChosenBattleElement(gHelperState))
         {
             gHelperState++;
             gReshowState--;
@@ -163,14 +163,14 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
 
             sub_80327CC();
 
-            opponentBank = GetBankByIdentity(1);
-            species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
+            opponentBank = GetBattlerAtPosition(1);
+            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBank]], MON_DATA_SPECIES);
             sub_8032984(opponentBank, species);
 
             if (IsDoubleBattle())
             {
-                opponentBank = GetBankByIdentity(3);
-                species = GetMonData(&gEnemyParty[gBattlePartyID[opponentBank]], MON_DATA_SPECIES);
+                opponentBank = GetBattlerAtPosition(3);
+                species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBank]], MON_DATA_SPECIES);
                 sub_8032984(opponentBank, species);
             }
             sub_802E3E4(gActionSelectionCursor[gBankInMenu], 0);
@@ -197,12 +197,12 @@ static void sub_807B06C(void)
 
 static bool8 LoadAppropiateBankSprite(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
             if (!ewram17800[bank].substituteSprite)
-                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlePartyID[bank]], bank);
+                BattleLoadOpponentMonSprite(&gEnemyParty[gBattlerPartyIndexes[bank]], bank);
             else
                 BattleLoadSubstituteSprite(bank, 0);
         }
@@ -211,7 +211,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
             LoadPlayerTrainerBankSprite(2, 0);
         else if (!ewram17800[bank].substituteSprite)
-            BattleLoadPlayerMonSprite(&gPlayerParty[gBattlePartyID[bank]], bank);
+            BattleLoadPlayerMonSprite(&gPlayerParty[gBattlerPartyIndexes[bank]], bank);
         else
             BattleLoadSubstituteSprite(bank, 0);
 
@@ -222,7 +222,7 @@ static bool8 LoadAppropiateBankSprite(u8 bank)
 
 static void sub_807B184(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
         u8 posY;
 
@@ -230,21 +230,21 @@ static void sub_807B184(u8 bank)
             posY = sub_8077F7C(bank);
         else
             posY = sub_8077F68(bank);
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
-            if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
-            GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
+            GetMonSpriteTemplate_803C56C(GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, sub_8079E90(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBankSpriteIds[bank]].data[0] = bank;
-            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
         {
-            GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBankIdentity(0));
+            GetMonSpriteTemplate_803C5A0(gSaveBlock2.playerGender, GetBattlerPosition(0));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
                                                 (8 - gTrainerBackPicCoords[gSaveBlock2.playerGender].coords) * 4 + 80,
                                                  sub_8079E90(0));
@@ -254,7 +254,7 @@ static void sub_807B184(u8 bank)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL && bank == 0)
         {
-            GetMonSpriteTemplate_803C5A0(2, GetBankIdentity(0));
+            GetMonSpriteTemplate_803C5A0(2, GetBattlerPosition(0));
             gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, 0x50,
                                                 (8 - gTrainerBackPicCoords[2].coords) * 4 + 80,
                                                  sub_8079E90(0));
@@ -264,14 +264,14 @@ static void sub_807B184(u8 bank)
         }
         else
         {
-            if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 return;
-            GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES), GetBankIdentity(bank));
-            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBankPosition(bank, 2), posY, sub_8079E90(bank));
+            GetMonSpriteTemplate_803C56C(GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES), GetBattlerPosition(bank));
+            gBankSpriteIds[bank] = CreateSprite(&gUnknown_02024E8C, GetBattlerSpriteCoord(bank, 2), posY, sub_8079E90(bank));
             gSprites[gBankSpriteIds[bank]].oam.paletteNum = bank;
             gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
             gSprites[gBankSpriteIds[bank]].data[0] = bank;
-            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_SPECIES);
+            gSprites[gBankSpriteIds[bank]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_SPECIES);
             StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
         }
         gSprites[gBankSpriteIds[bank]].invisible = ewram17800[bank].invisible;
@@ -280,7 +280,7 @@ static void sub_807B184(u8 bank)
 
 static void sub_807B508(u8 bank)
 {
-    if (bank < gNoOfAllBanks)
+    if (bank < gBattlersCount)
     {
         u8 healthboxID;
         if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && bank == 0)
@@ -292,24 +292,24 @@ static void sub_807B508(u8 bank)
         gHealthboxIDs[bank] = healthboxID;
         sub_8043F44(bank);
         sub_8043DFC(healthboxID);
-        if (GetBankSide(bank))
-            sub_8045A5C(gHealthboxIDs[bank], &gEnemyParty[gBattlePartyID[bank]], 0);
+        if (GetBattlerSide(bank))
+            sub_8045A5C(gHealthboxIDs[bank], &gEnemyParty[gBattlerPartyIndexes[bank]], 0);
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlePartyID[bank]], 10);
+            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlerPartyIndexes[bank]], 10);
         else
-            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlePartyID[bank]], 0);
-        if (GetBankIdentity(bank) == 3 || GetBankIdentity(bank) == 2)
+            sub_8045A5C(gHealthboxIDs[bank], &gPlayerParty[gBattlerPartyIndexes[bank]], 0);
+        if (GetBattlerPosition(bank) == 3 || GetBattlerPosition(bank) == 2)
             nullsub_11(gHealthboxIDs[bank], 1);
         else
             nullsub_11(gHealthboxIDs[bank], 0);
-        if (GetBankSide(bank))
+        if (GetBattlerSide(bank))
         {
-            if (GetMonData(&gEnemyParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 sub_8043DB0(healthboxID);
         }
         else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
         {
-            if (GetMonData(&gPlayerParty[gBattlePartyID[bank]], MON_DATA_HP) == 0)
+            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[bank]], MON_DATA_HP) == 0)
                 sub_8043DB0(healthboxID);
         }
     }

@@ -22,13 +22,13 @@ extern u8 gPlayerPartyCount;
 extern u8 gEnemyPartyCount;
 
 extern u16 gBattleTypeFlags;
-extern u8 gActiveBank;
+extern u8 gActiveBattler;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gCurrentMove;
 extern u8 gLastUsedAbility;
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
-extern u8 gAbsentBankFlags;
+extern u8 gAbsentBattlerFlags;
 extern u8 gXXX_CritRelated;
 extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
@@ -60,21 +60,21 @@ u8 CountAliveMons(u8 a1)
     case 0:
         for (i = 0; i < 4; i++)
         {
-            if (i != gActiveBank && !(gAbsentBankFlags & gBitTable[i]))
+            if (i != gActiveBattler && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 1:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankAttacker) && !(gAbsentBankFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBankAttacker) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
     case 2:
         for (i = 0; i < 4; i++)
         {
-            if (GetBankSide(i) == GetBankSide(gBankTarget) && !(gAbsentBankFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(gBankTarget) && !(gAbsentBattlerFlags & gBitTable[i]))
                 retVal++;
         }
         break;
@@ -85,11 +85,11 @@ u8 CountAliveMons(u8 a1)
 
 u8 sub_803C434(u8 a1)
 {
-    u8 status = GetBankIdentity(a1) & 1;
+    u8 status = GetBattlerPosition(a1) & 1;
 
     status ^= 1;
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        return GetBankByIdentity(status);
+        return GetBattlerAtPosition(status);
     if (CountAliveMons(0) > 1)
     {
         u8 val;
@@ -98,14 +98,14 @@ u8 sub_803C434(u8 a1)
             val = status ^ 2;
         else
             val = status;
-        return GetBankByIdentity(val);
+        return GetBattlerAtPosition(val);
     }
     else
     {
-        if ((gAbsentBankFlags & gBitTable[status]))
-            return GetBankByIdentity(status ^ 2);
+        if ((gAbsentBattlerFlags & gBitTable[status]))
+            return GetBattlerAtPosition(status ^ 2);
         else
-            return GetBankByIdentity(status);
+            return GetBattlerAtPosition(status);
     }
 }
 
@@ -1102,8 +1102,8 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
         }
     }
 
-    gBattleTypeFlags = 8;
-    gTrainerBattleOpponent = 1024;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    gTrainerBattleOpponent = SECRET_BASE_OPPONENT;
 }
 
 const u8 gSecretBaseTrainerClasses[][5] = {
@@ -1226,7 +1226,7 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
     StringCopy10(gBattleMons[battleIndex].nickname, nickname);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
-    ewram160BC[GetBankSide(battleIndex)] = gBattleMons[battleIndex].hp;
+    ewram160BC[GetBattlerSide(battleIndex)] = gBattleMons[battleIndex].hp;
 
     for (i = 0; i < 8; i++)
         gBattleMons[battleIndex].statStages[i] = 6;

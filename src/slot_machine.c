@@ -611,7 +611,7 @@ static void sub_8101D24(u8 taskId)
 
 static bool8 sub_8101D5C(struct Task *task)
 {
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     sub_810423C(eSlotMachine->pikaPower);
     eSlotMachine->state++;
     return FALSE;
@@ -927,17 +927,17 @@ bool8 sub_81020C8(struct Task *task)
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             sub_8104CAC(6);
         }
         else if (eSlotMachine->matchedSymbols & (1 << SLOT_MACHINE_MATCHED_777_MIXED))
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             sub_8104CAC(5);
         }
         else
         {
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
             sub_8104CAC(2);
         }
         if (eSlotMachine->matchedSymbols & ((1 << SLOT_MACHINE_MATCHED_777_MIXED) | (1 << SLOT_MACHINE_MATCHED_777_BLUE) | (1 << SLOT_MACHINE_MATCHED_777_RED)))
@@ -1119,7 +1119,7 @@ static bool8 sub_8102424(struct Task *task)
 #else
     gSaveBlock1.coins = eSlotMachine->coins;
 #endif
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     eSlotMachine->state++;
     return FALSE;
 }
@@ -2682,7 +2682,7 @@ static void sub_810437C(struct Task *task)
     sub_810545C();
     sub_8102680();
     StopMapMusic();
-    PlayNewMapMusic(BGM_BD_TIME);
+    PlayNewMapMusic(MUS_BD_TIME);
 }
 
 static void sub_81043EC(struct Task *task)
@@ -2818,7 +2818,7 @@ static void sub_81046C0(struct Task *task)
         {
             task->data[4] = 0xa0;
             StartSpriteAnimIfDifferent(gSprites + eSlotMachine->unk3F, 5);
-            PlayFanfare(BGM_ME_ZANNEN);
+            PlayFanfare(MUS_ME_ZANNEN);
         }
         else
         {
@@ -2830,7 +2830,7 @@ static void sub_81046C0(struct Task *task)
                 sub_8104098();
                 eSlotMachine->pikaPower = 0;
             }
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
         }
     }
 }
@@ -2906,7 +2906,7 @@ static void sub_81048CC(struct Task *task)
     task->data[4] = 4;
     task->data[5] = 0;
     StopMapMusic();
-    PlayFanfare(BGM_ME_ZANNEN);
+    PlayFanfare(MUS_ME_ZANNEN);
     PlaySE(SE_W153);
 }
 
@@ -3011,7 +3011,7 @@ static void sub_8104B0C(u8 taskId)
 
 static void sub_8104B3C(struct Task *task)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     task->data[0]++;
 }
 
@@ -3027,7 +3027,7 @@ static void sub_8104B80(struct Task *task)
     sub_81065DC();
     BasicInitMenuWindow(&gWindowTemplate_81E7144);
     Menu_PrintTextPixelCoords(gOtherText_ReelTime, 10, 32, 1);
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     task->data[0]++;
 }
 
@@ -3035,7 +3035,7 @@ static void sub_8104BC8(struct Task *task)
 {
     if (gMain.newKeys & (B_BUTTON | SELECT_BUTTON))
     {
-        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         task->data[0]++;
     }
 }
@@ -3047,7 +3047,7 @@ static void sub_8104BFC(struct Task *task)
     sub_81064B8();
     sub_8104CAC(task->data[1]);
     sub_810423C(eSlotMachine->pikaPower);
-    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     task->data[0]++;
 }
 

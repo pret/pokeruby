@@ -60,7 +60,7 @@ void CB2_FieldInitRegionMap(void)
     sub_813F0C8();
     SetMainCallback2(CB2_FieldRegionMap);
     SetVBlankCallback(VBlankCB_FieldRegionMap);
-    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
 }
 
 void VBlankCB_FieldRegionMap(void)
@@ -102,7 +102,7 @@ void sub_813EFDC(void)
         }
         break;
     case 3:
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         ewram0_5.unk888++;
         break;
     case 4:

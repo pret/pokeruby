@@ -41,7 +41,7 @@
 #include "text.h"
 #include "ewram.h"
 #include "constants/moves.h"
-#include "region_map_sections.h"
+#include "constants/region_map_sections.h"
 
 struct UnkTvStruct
 {
@@ -69,10 +69,9 @@ struct UnkTvStruct gUnknown_03005D38;
 
 extern u16 gSpecialVar_LastTalked;
 
-extern u8 gSpecialVar_ContestCategory;
-extern u8 gUnknown_03004316[11];
+extern u16 gSpecialVar_ContestCategory;
+extern u16 gSpecialVar_ContestRank;
 extern u8 gBattleOutcome;
-
 extern u16 gLastUsedItem;
 
 static EWRAM_DATA u16 gUnknown_020387E0 = 0;
@@ -90,31 +89,31 @@ const struct OutbreakPokemon gPokeOutbreakSpeciesList[5] =
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 3,
-        .location = MAPSEC_Route102,
+        .location = MAPSEC_ROUTE_102,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route114,
+        .location = MAPSEC_ROUTE_114,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route117,
+        .location = MAPSEC_ROUTE_117,
     },
     {
         .species = SPECIES_SURSKIT,
         .moves = {MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE},
         .level = 28,
-        .location = MAPSEC_Route120,
+        .location = MAPSEC_ROUTE_120,
     },
     {
         .species = SPECIES_SKITTY,
         .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE},
         .level = 15,
-        .location = MAPSEC_Route116,
+        .location = MAPSEC_ROUTE_116,
     },
 };
 
@@ -443,6 +442,8 @@ void ClearTVShowData(void)
     sub_80BEBF4();
 }
 
+bool8 sub_80BF1B4(u8);
+void sub_80BF20C(void);
 
 void InterviewBefore_FanClubLetter(void);
 void InterviewBefore_RecentHappenings(void);
@@ -649,7 +650,7 @@ void GabbyAndTyBeforeInterview(void)
     {
         for (i=0; i<11; i++)
         {
-            if (gBattleResults.unk36[i] != 0)
+            if (gBattleResults.usedBalls[i] != 0)
             {
                 gSaveBlock1.gabbyAndTyData.valA_3 = 1;
                 break;
@@ -718,7 +719,7 @@ u8 GabbyAndTyGetLastBattleTrivia(void)
     return 0;
 }
 
-void GabbyAndTySetScriptVarsToFieldObjectLocalIds(void)
+void GabbyAndTySetScriptVarsToEventObjectLocalIds(void)
 {
     switch (GabbyAndTyGetBattleNum())
     {
@@ -814,7 +815,7 @@ void PutPokemonTodayCaughtOnAir(void)
             if (gUnknown_03005D38.var0 != -1 && sub_80BF1B4(TVSHOW_POKEMON_TODAY_CAUGHT) != 1)
             {
                 for (i = 0; i < 11; i++)
-                    total += gBattleResults.unk36[i];
+                    total += gBattleResults.usedBalls[i];
                 if (total != 0 || gBattleResults.unk5_1 != 0)
                 {
                     struct TVShowPokemonToday *pokemonToday;
@@ -831,7 +832,7 @@ void PutPokemonTodayCaughtOnAir(void)
                     else
                     {
                         for (i = 0; i < 11; i++)
-                            total += gBattleResults.unk36[i];
+                            total += gBattleResults.usedBalls[i];
                         if (total > 0xff)
                             total = 0xff;
                         item = gLastUsedItem;
@@ -875,8 +876,8 @@ void sub_80BE074(void)
 
     if (sub_80BF77C(0xffff) == 0)
     {
-        for (i = 0, total = 0; i < ARRAY_COUNT(gUnknown_03004316); i++)
-            total += gUnknown_03004316[i];
+        for (i = 0, total = 0; i < 11; i++)
+            total += gBattleResults.usedBalls[i];
         if (total > 0xff)
             total = 0xff;
         if (total > 2 && gBattleOutcome == 1)
@@ -986,7 +987,7 @@ void InterviewAfter_BravoTrainerBattleTowerProfile(void)
     bravoTrainerTower->kind = TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE;
     bravoTrainerTower->active = 1;
     StringCopy(bravoTrainerTower->trainerName, gSaveBlock2.playerName);
-    StringCopy(bravoTrainerTower->pokemonName, gSaveBlock2.battleTower.defeatedByTrainerName);
+    StringCopy(bravoTrainerTower->enemyTrainerName, gSaveBlock2.battleTower.defeatedByTrainerName);
     bravoTrainerTower->species = gSaveBlock2.battleTower.firstMonSpecies;
     bravoTrainerTower->defeatedSpecies = gSaveBlock2.battleTower.defeatedBySpecies;
     bravoTrainerTower->var16 = GetCurrentBattleTowerWinStreak(gSaveBlock2.battleTower.lastStreakLevelType);
@@ -2183,7 +2184,7 @@ void GetMomOrDadStringForTVMessage(void)
 void sub_80BFD20(void)
 {
     VarSet(VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0);
-    RemoveFieldObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(5, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
 typedef union ewramStruct_02007000
@@ -2417,7 +2418,7 @@ void sub_80C01D4(void)
     }
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_80C01D4(void) {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
@@ -2950,7 +2951,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 4;
         break;
     case 2:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sub_80BF088(1, bravoTrainerTower->var16 + 1);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2958,7 +2959,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 3:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2966,7 +2967,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 4:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         StringCopy(gStringVar2, gSpeciesNames[bravoTrainerTower->defeatedSpecies]);
         if (bravoTrainerTower->var1b == 0)
             sTVShowState = 5;
@@ -2974,11 +2975,11 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
             sTVShowState = 6;
         break;
     case 5:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 11;
         break;
     case 6:
-        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar1, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 11;
         break;
     case 7:
@@ -3001,7 +3002,7 @@ void DoTVShowBravoTrainerBattleTowerProfile(void)
     case 13:
         EasyChat_GetWordText(gStringVar1, bravoTrainerTower->var18[0]);
         TVShowConvertInternationalString(gStringVar2, bravoTrainerTower->trainerName, bravoTrainerTower->language);
-        TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->pokemonName, bravoTrainerTower->language);
+        TVShowConvertInternationalString(gStringVar3, bravoTrainerTower->enemyTrainerName, bravoTrainerTower->language);
         sTVShowState = 14;
         break;
     case 14:

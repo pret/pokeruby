@@ -310,7 +310,7 @@ void sub_80969A0(void)
         gMain.state++;
         break;
     case 9:
-        BeginNormalPaletteFade(0xffffffff, 0, 16, 0, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
         SetVBlankCallback(sub_8096AFC);
         gMain.state++;
         break;
@@ -335,11 +335,11 @@ void debug_sub_80A4300(void)
 }
 
 extern void (*unk_2038794)(void);
-extern u32 unk_2038798;
+extern struct Pokemon * unk_2038798;
 
-extern void unref_sub_809CB94();
+extern void debug_sub_809CB94(struct Pokemon *);
 
-void debug_sub_80A433C(u32 a, void (*b)(void))
+void debug_sub_80A433C(struct Pokemon * a, void (*b)(void))
 {
     unk_2038794 = b;
     unk_2038798 = a;
@@ -351,8 +351,8 @@ void debug_sub_80A435C(void)
     switch (gPokemonStorageSystemPtr->unk_0004)
     {
     case 0:
-        unref_sub_809CB94(unk_2038798);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        debug_sub_809CB94(unk_2038798);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 1:
@@ -408,7 +408,7 @@ void sub_8096BF0(void)
     switch (gPokemonStorageSystemPtr->unk_0004)
     {
     case 0:
-        BlendPalettes(0xffffffff, 16, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 1:
@@ -418,7 +418,7 @@ void sub_8096BF0(void)
         gPokemonStorageSystemPtr->unk_000c.unk04 = 0;
         gPokemonStorageSystemPtr->unk_000c.unk06 = 0;
         sub_80C5CD4(&gPokemonStorageSystemPtr->unk_000c);
-        BlendPalettes(0xffffffff, 0, 0);
+        BlendPalettes(0xFFFFFFFF, 0, RGB(0, 0, 0));
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 2:
@@ -1083,7 +1083,7 @@ void sub_8097788(void)
     {
     case 0:
         sub_809BC18();
-        BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 1:
@@ -1284,7 +1284,7 @@ void sub_8097B44(void)
     {
     case 0:
         sub_809BB90();
-        BeginNormalPaletteFade(0xffffffff, 0, 0, 16, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
         gPokemonStorageSystemPtr->unk_0004++;
         break;
     case 1:
@@ -1564,7 +1564,7 @@ const struct SpriteTemplate gSpriteTemplate_83B6DDC = {
     0x0002, 0xdac7, &gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 };
 
-__attribute__((naked)) void sub_80980D4(void)
+NAKED void sub_80980D4(void)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                     "\tsub sp, 0x28\n"

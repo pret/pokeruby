@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <string.h>
+#include <stdlib.h>
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 
@@ -14,9 +16,6 @@
 #define INCBIN_S8 {0}
 #define INCBIN_S16 {0}
 #define INCBIN_S32 {0}
-void *memcpy (void *, const void *, size_t);
-void *memset (void *, int, size_t);
-int strcmp (const char *, const char *);
 #endif
 
 // Prevent cross-jump optimization.
@@ -93,6 +92,22 @@ enum LanguageId
 #elif defined(GERMAN)
 #define GAME_LANGUAGE (LANGUAGE_GERMAN)
 #endif
+
+// capacities of various saveblock objects
+#define DAYCARE_MON_COUNT   2
+#define POKEBLOCKS_COUNT    40
+#define EVENT_OBJECTS_COUNT   16
+#define BERRY_TREES_COUNT   128
+#define FLAGS_COUNT         288
+#define VARS_COUNT          256
+#define MAIL_COUNT          16
+#define SECRET_BASES_COUNT  20
+#define PC_ITEMS_COUNT      50
+#define BAG_ITEMS_COUNT     20
+#define BAG_KEYITEMS_COUNT  20
+#define BAG_POKEBALLS_COUNT 16
+#define BAG_TMHM_COUNT      64
+#define BAG_BERRIES_COUNT   46
 
 enum
 {
@@ -338,7 +353,7 @@ struct TVShowBravoTrainerBattleTowerSpotlight
     /*0x01*/ bool8 active;
     /*0x02*/ u8 trainerName[8];
     /*0x0A*/ u16 species;
-    /*0x0C*/ u8 pokemonName[8];
+    /*0x0C*/ u8 enemyTrainerName[8];
     /*0x14*/ u16 defeatedSpecies;
     /*0x16*/ u16 var16;
     /*0x18*/ u16 var18[1];
@@ -561,26 +576,26 @@ struct DayCareMail
 };
 
 struct DayCareStepCountersEtc {
-    u32 steps[2];
+    u32 steps[DAYCARE_MON_COUNT];
     u16 pendingEggPersonality;
     u8 eggCycleStepsRemaining;
 };
 
 struct RecordMixingDayCareMail
 {
-    struct DayCareMail mail[2];
+    struct DayCareMail mail[DAYCARE_MON_COUNT];
     u32 numDaycareMons;
-    u16 itemsHeld[2]; // marks whether or not each daycare mon is currently holding an item.
+    u16 itemsHeld[DAYCARE_MON_COUNT]; // marks whether or not each daycare mon is currently holding an item.
 };
 
 struct DayCareMisc
 {
-    struct DayCareMail mail[2];
+    struct DayCareMail mail[DAYCARE_MON_COUNT];
     struct DayCareStepCountersEtc countersEtc;
 };
 
 struct DayCare {
-    struct BoxPokemon mons[2];
+    struct BoxPokemon mons[DAYCARE_MON_COUNT];
     struct DayCareMisc misc;
 };
 
@@ -613,8 +628,8 @@ struct ContestWinner
     /*0x04*/ u32 otId;  // otId
     /*0x08*/ u16 species;  // species
     /*0x0A*/ u8 contestCategory;
-    /*0x0B*/ u8 nickname[0x16-0xB];
-    /*0x16*/ u8 trainerName[0x20-0x16];
+    /*0x0B*/ u8 nickname[11];
+    /*0x16*/ u8 trainerName[8];
 };
 
 // there should be enough flags for all 412 slots
@@ -634,32 +649,32 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 weatherCycleStage;
     /*0x30*/ u8 flashLevel;  // flash level on current map, 0 being normal and 4 being the darkest
-    /*0x32*/ u16 mapDataId;
+    /*0x32*/ u16 mapLayoutId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
     /*0x238*/ struct Pokemon playerParty[6];
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ struct ItemSlot pcItems[50];
-    /*0x560*/ struct ItemSlot bagPocket_Items[20];
-    /*0x5B0*/ struct ItemSlot bagPocket_KeyItems[20];
-    /*0x600*/ struct ItemSlot bagPocket_PokeBalls[16];
-    /*0x640*/ struct ItemSlot bagPocket_TMHM[64];
-    /*0x740*/ struct ItemSlot bagPocket_Berries[46];
-    /*0x7F8*/ struct Pokeblock pokeblocks[40];
+    /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
+    /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    /*0x5B0*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    /*0x600*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    /*0x640*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    /*0x740*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    /*0x7F8*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x938*/ u8 dexSeen2[DEX_FLAGS_NO];
     /*0x96C*/ u16 berryBlenderRecords[3];
     /*0x972*/ u8 filler_972[0x6];
     /*0x978*/ u16 trainerRematchStepCounter;
     /*0x97A*/ u8 trainerRematches[100];
-    /*0x9E0*/ struct MapObject mapObjects[16];
-    /*0xC20*/ struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x1220*/ u8 flags[0x120];
-    /*0x1340*/ u16 vars[0x100];
+    /*0x9E0*/ struct EventObject eventObjects[EVENT_OBJECTS_COUNT];
+    /*0xC20*/ struct EventObjectTemplate eventObjectTemplates[64];
+    /*0x1220*/ u8 flags[FLAGS_COUNT];
+    /*0x1340*/ u16 vars[VARS_COUNT];
     /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x1608*/ struct BerryTree berryTrees[128];
-    /*0x1A08*/ struct SecretBaseRecord secretBases[20];
+    /*0x1608*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
+    /*0x1A08*/ struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
     /*0x2688*/ u8 playerRoomDecor[12];
     /*0x2694*/ u8 playerRoomDecorPos[12];
     /*0x26A0*/ u8 decorDesk[10];
@@ -690,7 +705,7 @@ struct SaveBlock1 /* 0x02025734 */
         /*0x2B34*/ u16 unk2B34[6];
         /*0x2B40*/ u16 unk2B40[6];
     } easyChats;
-    /*0x2B4C*/ struct MailStruct mail[16];
+    /*0x2B4C*/ struct MailStruct mail[MAIL_COUNT];
     /*0x2D8C*/ u8 unk2D8C[4];  // What is this? Apparently it's supposed to be 64 bytes in size.
     /*0x2D90*/ u8 filler_2D90[0x4];
     /*0x2D94*/ union MauvilleMan mauvilleMan;
@@ -699,9 +714,16 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2EFC*/ struct ContestWinner museumPortraits[5];
     /*0x2F9C*/ struct DayCare daycare;
     /*0x30B8*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x3108*/ u8 filler_3108[8];
-    /*0x3110*/ u8 giftRibbons[11];
-    /*0x3117*/ u8 filler_311B[0x29];
+    struct {
+        /*0x3108*/ u8 unknown1[8];
+        /*0x3110*/ u8 giftRibbons[11];
+        /*0x311B*/ u8 unknown2[8];
+        /*0x3123*/ u32 currentPokeCoupons;
+        /*0x3127*/ u32 totalEarnedPokeCoupons;
+        /*0x312B*/ u8 unknown3[6];
+        /*0x3131*/ u8 receivedWishmakerJirachi;
+        /*0x3132*/ u8 unknown4[18];
+    } __attribute__((packed)) externalReservedData;
     /*0x3144*/ struct Roamer roamer;
     /*0x3160*/ struct EnigmaBerry enigmaBerry;
     /*0x3690*/ struct RamScript ramScript;

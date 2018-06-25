@@ -4,10 +4,12 @@
 #include "task.h"
 #include "text.h"
 
+typedef bool8 (*MenuFunc)();
+
 struct MenuAction
 {
    const u8 *text;
-   u8 (*func)();
+   MenuFunc func;
 };
 
 struct MenuAction2
@@ -57,8 +59,8 @@ s8 Menu_ProcessInputNoWrap(void);
 void sub_807274C(u8, u8, u8, u8, const struct MenuAction[], u8, u32);
 s8 Menu_ProcessInputGridLayout(void);
 u8 Menu_GetColumnXCoord(u8);
-void Menu_PrintItems(u8, u8, u8, const struct MenuAction[]);
-void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction2 menuItems[], const u8 *order);
+void Menu_PrintItems(u8, u8, u8, const void *);
+void Menu_PrintItemsReordered(u8 left, u8 top, u8 menuItemCount, const void * menuItems, const u8 *order);
 void InitYesNoMenu(u8, u8, u8);
 void DisplayYesNoMenu(u8, u8, u32);
 s8 Menu_ProcessInputNoWrap_(void);
@@ -69,10 +71,10 @@ int sub_8072AB0(const u8 *, u8, u16, u8, u8, u32);
 void MenuPrint_RightAligned(const u8 *, u8, u8);
 void sub_8072B80(const u8 *, u8, u8, const u8 *);
 void sub_8072BD8(const u8 *, u8, u8, u16);
-u8 *sub_8072C14(u8 *, s32, u8, u8);
-u8 *sub_8072C44(u8 *, s32, u8, u8);
-u8 *sub_8072C74(u8 *, const u8 *, u8, u8);
-u8 sub_8072CA4(const u8 *s);
+u8 *AlignInt1InMenuWindow(u8 *, s32, u8, u8);
+u8 *AlignInt2InMenuWindow(u8 *, s32, u8, u8);
+u8 *AlignStringInMenuWindow(u8 *, const u8 *, u8, u8);
+u8 GetStringWidthInMenuWindow(const u8 *s);
 u8 Menu_GetTextWindowPaletteNum(void);
 void Menu_GetTextColors(u8 *, u8 *, u8 *);
 u32 Menu_UpdateWindowTextOverrideLineLength(u8);

@@ -158,7 +158,7 @@
 #define FLAG_RECEIVED_GREEN_SCARF           0xCB
 #define FLAG_RECEIVED_YELLOW_SCARF          0xCC
 
-#define FLAG_ECOUNTERED_LATIAS_OR_LATIOS    0xCE
+#define FLAG_ENCOUNTERED_LATIAS_OR_LATIOS    0xCE
 
 #define FLAG_RECEIVED_BASEMENT_KEY          0xD0
 #define FLAG_RECEIVED_TM24                  0xD1
@@ -357,7 +357,7 @@
 #define FLAG_HIDDEN_ITEM_61      0x2B9
 
 
-// map object hide/show flags
+// event object hide/show flags
 #define FLAG_HIDE_BIRCH_STARTERS_BAG        0x2BC
 
 #define FLAG_HIDE_BIRCH_BATTLE_POOCHYENA    0x2D0

@@ -15,7 +15,7 @@ gSpecials::
 	def_special sub_80839A4
 	def_special sub_80839D0
 	def_special sub_80BB8CC
-	def_special sub_80BB63C
+	def_special CheckPlayerHasSecretBase
 	def_special sub_80BBAF0
 	def_special sub_80BC440
 	def_special SecretBasePC_PackUp
@@ -51,12 +51,12 @@ gSpecials::
 	def_special LoadPlayerParty
 	def_special sub_80C5568
 	def_special sub_8083BDC
-	def_special FieldObjectInteractionGetBerryTreeData
+	def_special EventObjectInteractionGetBerryTreeData
 	def_special Berry_FadeAndGoToBerryBagMenu
-	def_special FieldObjectInteractionPlantBerryTree
-	def_special FieldObjectInteractionPickBerryTree
-	def_special FieldObjectInteractionRemoveBerryTree
-	def_special FieldObjectInteractionWaterBerryTree
+	def_special EventObjectInteractionPlantBerryTree
+	def_special EventObjectInteractionPickBerryTree
+	def_special EventObjectInteractionRemoveBerryTree
+	def_special EventObjectInteractionWaterBerryTree
 	def_special PlayerHasBerries
 	def_special IsEnigmaBerryValid
 	def_special ScrSpecial_GetTrainerBattleMode
@@ -153,8 +153,8 @@ gSpecials::
 	def_special DrawWholeMapView
 	def_special StorePlayerCoordsInVars
 	def_special MauvilleGymSpecial3
-	def_special PetalburgGymSpecial1
-	def_special PetalburgGymSpecial2
+	def_special PetalburgGymSlideOpenDoors
+	def_special PetalburgGymOpenDoorsInstantly
 	def_special GetPlayerTrainerIdOnesDigit
 	def_special GetPlayerBigGuyGirlString
 	def_special GetRivalSonDaughterString
@@ -187,7 +187,7 @@ gSpecials::
 	def_special IsTVShowInSearchOfTrainersAiring
 	def_special GabbyAndTyGetLastQuote
 	def_special GabbyAndTyGetLastBattleTrivia
-	def_special GabbyAndTySetScriptVarsToFieldObjectLocalIds
+	def_special GabbyAndTySetScriptVarsToEventObjectLocalIds
 	def_special GetBattleOutcome
 	def_special GetDaycareMonNicknames
 	def_special GetDaycareState
@@ -232,7 +232,7 @@ gSpecials::
 	def_special DeleteMonMove
 	def_special ScrSpecial_GetPokemonNicknameAndMoveName
 	def_special ScrSpecial_CountPokemonMoves
-	def_special TeachMoveTutorMove
+	def_special DisplayMoveTutorMenu
 	def_special GetRecordedCyclingRoadResults
 	def_special ScrSpecial_BeginCyclingRoadChallenge
 	def_special GetPlayerAvatarBike
@@ -295,7 +295,7 @@ gSpecials::
 	def_special WaitWeather
 	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
-	def_special player_get_direction_lower_nybble
+	def_special GetPlayerFacingDirection
 	def_special FoundAbandonedShipRoom1Key
 	def_special FoundAbandonedShipRoom2Key
 	def_special FoundAbandonedShipRoom4Key
@@ -337,7 +337,7 @@ gSpecials::
 	def_special ScriptGetMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
-	def_special sub_810F8FC
+	def_special TryInitBattleTowerAwardManEventObject
 	def_special MoveSecretBase
 	def_special LoadPlayerBag
 	def_special sub_8081924

@@ -400,7 +400,7 @@ bool8 sub_8099E08(void)
     switch (gPokemonStorageSystemPtr->unk_1032)
     {
         case 0:
-            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 0x10, 0xffff);
+            BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0, 16, FADE_COLOR_WHITE);
             gPokemonStorageSystemPtr->unk_1032++;
             break;
         case 1:
@@ -409,7 +409,7 @@ bool8 sub_8099E08(void)
                 u8 curBox = get_preferred_box();
                 sub_8099EB0(curBox, 0);
                 sub_809A654();
-                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 0x10, 0, 0xffff);
+                BeginNormalPaletteFade(gPokemonStorageSystemPtr->unk_0d08, 1, 16, 0, FADE_COLOR_WHITE);
                 gPokemonStorageSystemPtr->unk_1032++;
             }
             break;
@@ -519,7 +519,7 @@ void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
     }
 }
 #else
-__attribute__((naked)) void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
+NAKED void sub_8099F58(u16 *vdest, const u16 *src, s8 a2, u8 a3)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"
@@ -808,7 +808,7 @@ void sub_809A14C(u16 *vdest)
     }
 }
 #else
-__attribute__((naked)) void sub_809A14C(u16 *vdest)
+NAKED void sub_809A14C(u16 *vdest)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tadds r2, r0, 0\n"
@@ -912,7 +912,7 @@ void sub_809A23C(u8 boxId)
     gPokemonStorageSystemPtr->unk_0d08 |= 0x10000 << tagIdx;
     sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
     LoadSpriteSheet(&spriteSheet);
-    r6 = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    r6 = sub_809A6D0(GetStringWidthInMenuWindow(gPokemonStorage.boxNames[boxId]));
     for (i = 0; i < 2; i++)
     {
         u8 spriteId = CreateSprite(&gSpriteTemplate_83BB2B8, r6 + i * 32, 0x1c, 23);
@@ -947,7 +947,7 @@ void sub_809A3D0(u8 boxId, s8 a1)
     sub_809A1BC(gPokemonStorageSystemPtr->unk_08ca, gPokemonStorage.boxNames[boxId]);
     LoadSpriteSheet(&spriteSheet);
     LoadPalette(gUnknown_083BB0A8[gPokemonStorage.wallpaper[boxId]], r8, 0x04);
-    x = sub_809A6D0(sub_8072CA4(gPokemonStorage.boxNames[boxId]));
+    x = sub_809A6D0(GetStringWidthInMenuWindow(gPokemonStorage.boxNames[boxId]));
     x2 = x + a1 * 192;
     for (i = 0; i < 2; i++)
     {
@@ -2061,7 +2061,7 @@ void sub_809C04C(void *pokemon, u8 a1)
         buf = gPokemonStorageSystemPtr->unk_1259 + 8;
         buf[0] = 0x34; // LV
         buf = gPokemonStorageSystemPtr->unk_1259 + 9;
-        buf = sub_8072C14(buf, gPokemonStorageSystemPtr->unk_11f8, 0x22, STR_CONV_MODE_RIGHT_ALIGN);
+        buf = AlignInt1InMenuWindow(buf, gPokemonStorageSystemPtr->unk_11f8, 0x22, STR_CONV_MODE_RIGHT_ALIGN);
         buf[0] = EXT_CTRL_CODE_BEGIN;
         buf[1] = 0x11; // CLEAR
         buf[2] = 8;
@@ -2214,7 +2214,7 @@ u8 sub_809C464(void)
     return r9;
 }
 #else
-__attribute__((naked)) u8 sub_809C464(void)
+NAKED u8 sub_809C464(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r9\n"
@@ -2584,7 +2584,7 @@ u8 sub_809C664(void)
     return r8;
 }
 #else
-__attribute__((naked)) u8 sub_809C664(void)
+NAKED u8 sub_809C664(void)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                     "\tmov r7, r10\n"

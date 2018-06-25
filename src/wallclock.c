@@ -222,14 +222,14 @@ static void LoadWallClockGraphics(void)
     LoadCompressedObjectPic(&gUnknown_083F7A90[0]);
     LoadSpritePalettes(gUnknown_083F7AA0);
     Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
 }
 
 static void WallClockInit(void)
 {
     u16 ime;
 
-    BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
     ime = REG_IME;
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
@@ -430,7 +430,7 @@ static void Task_SetClock4(u8 taskId)
 static void Task_SetClock5(u8 taskId)
 {
     RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_SetClock6;
 }
 
@@ -456,7 +456,7 @@ static void Task_ViewClock2(u8 taskId)
 
 static void Task_ViewClock3(u8 taskId)
 {
-    BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gTasks[taskId].func = Task_ViewClock4;
 }
 

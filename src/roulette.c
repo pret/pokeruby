@@ -436,7 +436,7 @@ void sub_8115384(void)
         break;
     case 0x2:
         Text_LoadWindowTemplate(&gWindowTemplate_81E6C3C);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         LoadPalette(&gUnknown_083F86BC, 0x0, 0x1C0);
         gMain.state++;
         break;
@@ -1055,13 +1055,13 @@ void sub_8116638(u8 taskid)
     case 0x2:
         if (gTasks[taskid].data[0x2] == 0xC)
         {
-            PlayFanfare(BGM_ME_B_BIG);
+            PlayFanfare(MUS_ME_B_BIG);
             Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
             Menu_PrintText(&gUnknown_081C41A5, 0x1, 0xF);
         }
         else
         {
-            PlayFanfare(BGM_ME_B_SMALL);
+            PlayFanfare(MUS_ME_B_SMALL);
             Menu_DrawStdWindowFrame(0x0, 0xE, 0x1D, 0x13);
             Menu_PrintText(&gUnknown_081C4199, 0x1, 0xF);
         }
@@ -1547,7 +1547,7 @@ void sub_811755C(u8 taskid)
 {
     Menu_EraseWindowRect(0x14, 0x8, 0x1A, 0xD);
     Menu_EraseScreen();
-    BeginNormalPaletteFade(-0x1, 0x0, 0x0, 0x10, 0x0);
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
     gPaletteFade.delayCounter = gPaletteFade.multipurpose2;
     UpdatePaletteFade();
     gTasks[taskid].func = &sub_8117528;
@@ -2733,7 +2733,7 @@ void sub_811952C(struct Sprite *sprite)
     sprite->callback = sub_8118CEC;
 }
 #else
-__attribute__((naked))
+NAKED
 void sub_811952C(struct Sprite *sprite)
 {
     asm_unified("push {r4-r7,lr}\n"

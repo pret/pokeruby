@@ -1,21 +1,23 @@
+
 #include "global.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
-#include "metatile_behaviors.h"
 #include "overworld.h"
 #include "pokemon_menu.h"
 #include "rom6.h"
 #include "script.h"
 #include "secret_base.h"
-#include "constants/songs.h"
 #include "sound.h"
+#include "constants/field_effects.h"
+#include "constants/metatile_behaviors.h"
+#include "constants/songs.h"
 
-extern u8 gUnknown_081A2CE6[];
-extern u8 gUnknown_081A2D3E[];
-extern u8 gUnknown_081A2D96[];
+extern u8 DoSecretBaseCaveFieldEffectScript[];
+extern u8 DoSecretBaseTreeFieldEffectScript[];
+extern u8 DoSecretBaseShrubFieldEffectScript[];
 
 const u8 gSpriteImage_83D198C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/0.4bpp");
 const u8 gSpriteImage_83D1A0C[] = INCBIN_U8("graphics/unknown_sprites/83D259C/1.4bpp");
@@ -162,8 +164,8 @@ const struct SpriteFrameImage gSpriteImageTable_83D25EC[] =
     {gSpriteImage_83D1E4C, 0x80},
 };
 
-void sub_80C644C(struct Sprite *);
-const struct SpriteTemplate gSpriteTemplate_83D2614 =
+static void CaveEntranceSpriteCallback1(struct Sprite *);
+static const struct SpriteTemplate sSpriteTemplate_CaveEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4099,
@@ -171,11 +173,11 @@ const struct SpriteTemplate gSpriteTemplate_83D2614 =
     .anims = gSpriteAnimTable_83D2584,
     .images = gSpriteImageTable_83D259C,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80C644C,
+    .callback = CaveEntranceSpriteCallback1,
 };
 
-void sub_80C6598(struct Sprite *);
-const struct SpriteTemplate gSpriteTemplate_83D262C =
+static void TreeEntranceSpriteCallback1(struct Sprite *);
+const struct SpriteTemplate sSpriteTemplate_TreeEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4104,
@@ -183,11 +185,11 @@ const struct SpriteTemplate gSpriteTemplate_83D262C =
     .anims = gSpriteAnimTable_83D2588,
     .images = gSpriteImageTable_83D25C4,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80C6598,
+    .callback = TreeEntranceSpriteCallback1,
 };
 
-void sub_80C66BC(struct Sprite *);
-const struct SpriteTemplate gSpriteTemplate_83D2644 =
+static void ShrubEntranceSpriteCallback1(struct Sprite *);
+const struct SpriteTemplate sSpriteTemplate_ShrubEntrance =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 4104,
@@ -195,48 +197,48 @@ const struct SpriteTemplate gSpriteTemplate_83D2644 =
     .anims = gSpriteAnimTable_83D2598,
     .images = gSpriteImageTable_83D25EC,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80C66BC,
+    .callback = ShrubEntranceSpriteCallback1,
 };
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo7 = {gFieldEffectObjectPalette7, 0x1003};
 const struct SpritePalette gFieldEffectObjectPaletteInfo8 = {gFieldEffectObjectPalette8, 0x1008};
 
-void sub_80C639C(void);
-void sub_80C63E8(void);
-void sub_80C6468(struct Sprite *);
-void sub_80C6498(struct Sprite *);
-void sub_80C64A8(void);
-void sub_80C64F4(void);
-void sub_80C65C4(struct Sprite *);
-void sub_80C65FC(struct Sprite *);
-void sub_80C660C(void);
-void sub_80C6658(void);
-void sub_80C66D8(struct Sprite *sprite);
-void sub_80C6708(struct Sprite *sprite);
+static void FieldCallback_SecretBaseCave(void);
+static void StartSecretBaseCaveFieldEffect(void);
+static void CaveEntranceSpriteCallback2(struct Sprite *);
+static void CaveEntranceSpriteCallbackEnd(struct Sprite *);
+static void FieldCallback_SecretBaseTree(void);
+static void StartSecretBaseTreeFieldEffect(void);
+static void TreeEntranceSpriteCallback2(struct Sprite *);
+static void TreeEntranceSpriteCallbackEnd(struct Sprite *);
+static void FieldCallback_SecretBaseShrub(void);
+static void StartSecretBaseShrubFieldEffect(void);
+static void ShrubEntranceSpriteCallback2(struct Sprite *sprite);
+static void ShrubEntranceSpriteCallbackEnd(struct Sprite *sprite);
 
-void sub_80C6264(void)
+static void SetCurrentSecretBase(void)
 {
-    sub_80BBFD8(&gUnknown_0203923C, gMapHeader.events);
-    sub_80BB5E4();
+    SetCurrentSecretBaseFromPosition(&gPlayerFacingPosition, gMapHeader.events);
+    SetCurrentSecretBaseVar();
 }
 
-void sub_80C6280(void)
+static void AdjustSecretPowerSpritePixelOffsets(void)
 {
     switch (gFieldEffectArguments[1])
     {
-    case 1:
+    case DIR_SOUTH:
         gFieldEffectArguments[5] = 8;
         gFieldEffectArguments[6] = 40;
         break;
-    case 2:
+    case DIR_NORTH:
         gFieldEffectArguments[5] = 8;
         gFieldEffectArguments[6] = 8;
         break;
-    case 3:
+    case DIR_WEST:
         gFieldEffectArguments[5] = -8;
         gFieldEffectArguments[6] = 24;
         break;
-    case 4:
+    case DIR_EAST:
         gFieldEffectArguments[5] = 24;
         gFieldEffectArguments[6] = 24;
         break;
@@ -245,37 +247,37 @@ void sub_80C6280(void)
 
 #if DEBUG
 
-void debug_sub_80D93F4(void)
+void Debug_SetUpFieldMove_SecretPower(void)
 {
     u8 metatile;
 
-    sub_80BB63C();
+    CheckPlayerHasSecretBase();
 
-    if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != 2)
+    if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
     {
         ScriptContext2_Disable();
         return;
     }
     
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-    metatile = MapGridGetMetatileBehaviorAt(gUnknown_0203923C.x, gUnknown_0203923C.y);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    metatile = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y);
     if (MetatileBehavior_IsSecretBaseCave(metatile) == TRUE)
     {
-        sub_80C6264();
+        SetCurrentSecretBase();
         gLastFieldPokeMenuOpened = 0;
-        sub_80C639C();
+        FieldCallback_SecretBaseCave();
     }
     else if (MetatileBehavior_IsSecretBaseTree(metatile) == TRUE)
     {
-        sub_80C6264();
+        SetCurrentSecretBase();
         gLastFieldPokeMenuOpened = 0;
-        sub_80C64A8();
+        FieldCallback_SecretBaseTree();
     }
     else if (MetatileBehavior_IsSecretBaseShrub(metatile) == TRUE)
     {
-        sub_80C6264();
+        SetCurrentSecretBase();
         gLastFieldPokeMenuOpened = 0;
-        sub_80C660C();
+        FieldCallback_SecretBaseShrub();
     }
     else
     {
@@ -289,58 +291,57 @@ bool8 SetUpFieldMove_SecretPower(void)
 {
     u8 behavior;
 
-    sub_80BB63C();
-
-    if (gSpecialVar_Result == 1 || player_get_direction_lower_nybble() != DIR_NORTH)
+    CheckPlayerHasSecretBase();
+    if (gSpecialVar_Result == 1 || GetPlayerFacingDirection() != DIR_NORTH)
         return FALSE;
 
-    GetXYCoordsOneStepInFrontOfPlayer(&gUnknown_0203923C.x, &gUnknown_0203923C.y);
-    behavior = MapGridGetMetatileBehaviorAt(gUnknown_0203923C.x, gUnknown_0203923C.y);
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    behavior = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y);
 
     if (MetatileBehavior_IsSecretBaseCave(behavior) == TRUE)
     {
-        sub_80C6264();
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_80C639C;
+        SetCurrentSecretBase();
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseCave;
         return TRUE;
     }
 
     if (MetatileBehavior_IsSecretBaseTree(behavior) == TRUE)
     {
-        sub_80C6264();
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_80C64A8;
+        SetCurrentSecretBase();
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseTree;
         return TRUE;
     }
 
     if (MetatileBehavior_IsSecretBaseShrub(behavior) == TRUE)
     {
-        sub_80C6264();
-        gFieldCallback = FieldCallback_Teleport;
-        gUnknown_03005CE4 = sub_80C660C;
+        SetCurrentSecretBase();
+        gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = FieldCallback_SecretBaseShrub;
         return TRUE;
     }
 
     return FALSE;
 }
 
-void sub_80C639C(void)
+static void FieldCallback_SecretBaseCave(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(gUnknown_081A2CE6);
+    ScriptContext1_SetupScript(DoSecretBaseCaveFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerCave(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (uintptr_t)sub_80C63E8 >> 16;
-    gTasks[taskId].data[9] = (uintptr_t)sub_80C63E8;
+    gTasks[taskId].data[8] = (uintptr_t)StartSecretBaseCaveFieldEffect >> 16;
+    gTasks[taskId].data[9] = (uintptr_t)StartSecretBaseCaveFieldEffect;
 
     return FALSE;
 }
 
-void sub_80C63E8(void)
+static void StartSecretBaseCaveFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_CAVE);
     FieldEffectStart(FLDEFF_SECRET_POWER_CAVE);
@@ -348,60 +349,60 @@ void sub_80C63E8(void)
 
 bool8 FldEff_SecretPowerCave(void)
 {
-    sub_80C6280();
+    AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &gSpriteTemplate_83D2614,
+        &sSpriteTemplate_CaveEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);
     return FALSE;
 }
 
-void sub_80C644C(struct Sprite *sprite)
+static void CaveEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W088);
     sprite->data[0] = 0;
-    sprite->callback = sub_80C6468;
+    sprite->callback = CaveEntranceSpriteCallback2;
 }
 
-void sub_80C6468(struct Sprite *sprite)
+static void CaveEntranceSpriteCallback2(struct Sprite *sprite)
 {
     if (sprite->data[0] < 40)
     {
         sprite->data[0]++;
-        if (sprite->data[0] == 20 )
-            sub_80BB800();
+        if (sprite->data[0] == 20)
+            SetOpenedSecretBaseMetatile();
     }
     else
     {
         sprite->data[0] = 0;
-        sprite->callback = sub_80C6498;
+        sprite->callback = CaveEntranceSpriteCallbackEnd;
     }
 }
 
-void sub_80C6498(struct Sprite *sprite)
+static void CaveEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_CAVE);
     EnableBothScriptContexts();
 }
 
-void sub_80C64A8(void)
+static void FieldCallback_SecretBaseTree(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(gUnknown_081A2D3E);
+    ScriptContext1_SetupScript(DoSecretBaseTreeFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerTree(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (uintptr_t)sub_80C64F4 >> 16;
-    gTasks[taskId].data[9] = (uintptr_t)sub_80C64F4;
+    gTasks[taskId].data[8] = (uintptr_t)StartSecretBaseTreeFieldEffect >> 16;
+    gTasks[taskId].data[9] = (uintptr_t)StartSecretBaseTreeFieldEffect;
 
     return FALSE;
 }
 
-void sub_80C64F4(void)
+static void StartSecretBaseTreeFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_TREE);
     FieldEffectStart(FLDEFF_SECRET_POWER_TREE);
@@ -409,77 +410,72 @@ void sub_80C64F4(void)
 
 bool8 FldEff_SecretPowerTree(void)
 {
-    s16 behavior = MapGridGetMetatileBehaviorAt(gUnknown_0203923C.x, gUnknown_0203923C.y) & 0xFFF;
+    s16 behavior = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) & 0xFFF;
 
     if (behavior == MB_SECRET_BASE_SPOT_TREE_1)
-    {
         gFieldEffectArguments[7] = 0;
-    }
 
     if (behavior == MB_SECRET_BASE_SPOT_TREE_2)
-    {
         gFieldEffectArguments[7] = 2;
-    }
 
-    sub_80C6280();
-
+    AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &gSpriteTemplate_83D262C,
+        &sSpriteTemplate_TreeEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);
 
     if (gFieldEffectArguments[7] == 1 || gFieldEffectArguments[7] == 3)
-        sub_80BB800();
+        SetOpenedSecretBaseMetatile();
 
     return FALSE;
 }
 
-void sub_80C6598(struct Sprite *sprite)
+static void TreeEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W010);
     sprite->animNum = gFieldEffectArguments[7];
     sprite->data[0] = 0;
-    sprite->callback = sub_80C65C4;
+    sprite->callback = TreeEntranceSpriteCallback2;
 }
 
-void sub_80C65C4(struct Sprite *sprite)
+static void TreeEntranceSpriteCallback2(struct Sprite *sprite)
 {
     sprite->data[0]++;
 
     if (sprite->data[0] >= 40)
     {
         if (gFieldEffectArguments[7] == 0 || gFieldEffectArguments[7] == 2)
-            sub_80BB800();
+            SetOpenedSecretBaseMetatile();
+
         sprite->data[0] = 0;
-        sprite->callback = sub_80C65FC;
+        sprite->callback = TreeEntranceSpriteCallbackEnd;
     }
 }
 
-
-void sub_80C65FC(struct Sprite *sprite)
+static void TreeEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_TREE);
     EnableBothScriptContexts();
 }
 
-void sub_80C660C(void)
+static void FieldCallback_SecretBaseShrub(void)
 {
     gFieldEffectArguments[0] = gLastFieldPokeMenuOpened;
-    ScriptContext1_SetupScript(gUnknown_081A2D96);
+    ScriptContext1_SetupScript(DoSecretBaseShrubFieldEffectScript);
 }
 
 bool8 FldEff_UseSecretPowerShrub(void)
 {
     u8 taskId = oei_task_add();
 
-    gTasks[taskId].data[8] = (uintptr_t)sub_80C6658 >> 16;
-    gTasks[taskId].data[9] = (uintptr_t)sub_80C6658;
+    gTasks[taskId].data[8] = (uintptr_t)StartSecretBaseShrubFieldEffect >> 16;
+    gTasks[taskId].data[9] = (uintptr_t)StartSecretBaseShrubFieldEffect;
 
     return FALSE;
 }
 
-void sub_80C6658(void)
+static void StartSecretBaseShrubFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_SECRET_POWER_SHRUB);
     FieldEffectStart(FLDEFF_SECRET_POWER_SHRUB);
@@ -487,39 +483,38 @@ void sub_80C6658(void)
 
 bool8 FldEff_SecretPowerShrub(void)
 {
-    sub_80C6280();
+    AdjustSecretPowerSpritePixelOffsets();
     CreateSprite(
-        &gSpriteTemplate_83D2644,
+        &sSpriteTemplate_ShrubEntrance,
         gSprites[gPlayerAvatar.spriteId].oam.x + gFieldEffectArguments[5],
         gSprites[gPlayerAvatar.spriteId].oam.y + gFieldEffectArguments[6],
         148);
     return FALSE;
 }
 
-void sub_80C66BC(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallback1(struct Sprite *sprite)
 {
     PlaySE(SE_W077);
     sprite->data[0] = 0;
-    sprite->callback = sub_80C66D8;
+    sprite->callback = ShrubEntranceSpriteCallback2;
 }
 
-void sub_80C66D8(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallback2(struct Sprite *sprite)
 {
     if (sprite->data[0] < 40)
     {
         sprite->data[0]++;
-        if (sprite->data[0] == 20 )
-            sub_80BB800();
+        if (sprite->data[0] == 20)
+            SetOpenedSecretBaseMetatile();
     }
     else
     {
         sprite->data[0] = 0;
-        sprite->callback = sub_80C6708;
+        sprite->callback = ShrubEntranceSpriteCallbackEnd;
     }
 }
 
-
-void sub_80C6708(struct Sprite *sprite)
+static void ShrubEntranceSpriteCallbackEnd(struct Sprite *sprite)
 {
     FieldEffectStop(sprite, FLDEFF_SECRET_POWER_SHRUB);
     EnableBothScriptContexts();

@@ -14,5 +14,6 @@ void WarpToTruck(void);
 void ClearSav2(void);
 void sub_8052E4C(void);
 void NewGameInitData(void);
+void debug_sub_8057508(bool32 arg0);
 
 #endif // GUARD_NEW_GAME_H

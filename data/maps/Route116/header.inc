@@ -1,9 +1,9 @@
 Route116:: @ 83057AC
-	.4byte Route116_MapAttributes
+	.4byte Route116_Layout
 	.4byte Route116_MapEvents
 	.4byte Route116_MapScripts
 	.4byte Route116_MapConnections
-	.2byte BGM_NEXTROAD
+	.2byte MUS_NEXTROAD
 	.2byte 32
 	.byte 31
 	.byte 0

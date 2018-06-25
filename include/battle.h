@@ -4,29 +4,47 @@
 #include "sprite.h"
 #include "constants/battle_constants.h"
 
-/*
-    Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
-    Each bank has a value consisting of two bits.
-    0x1 bit is responsible for the side, 0 = player's side, 1 = opponent's side.
-    0x2 bit is responsible for the id of sent out pokemon. 0 means it's the first sent out pokemon, 1 it's the second one. (Triple battle didn't exist at the time yet.)
-*/
+#define GET_BATTLER_POSITION(bank)((gBattlerPositions[bank]))
+#define GET_BATTLER_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
+#define GET_BATTLER_SIDE2(bank)((GET_BATTLER_POSITION(bank) & BIT_SIDE))
 
-#define BATTLE_BANKS_COUNT  4
+// Battle Actions
+// These determine what each battler will do in a turn
+#define B_ACTION_USE_MOVE               0
+#define B_ACTION_USE_ITEM               1
+#define B_ACTION_SWITCH                 2
+#define B_ACTION_RUN                    3
+#define B_ACTION_SAFARI_WATCH_CAREFULLY 4
+#define B_ACTION_SAFARI_BALL            5
+#define B_ACTION_SAFARI_POKEBLOCK       6
+#define B_ACTION_SAFARI_GO_NEAR         7
+#define B_ACTION_SAFARI_RUN             8
+// The exact purposes of these are unclear
+#define B_ACTION_UNKNOWN9               9
+#define B_ACTION_EXEC_SCRIPT            10 // when executing an action
+#define B_ACTION_CANCEL_PARTNER         12 // when choosing an action
+#define B_ACTION_FINISHED               12 // when executing an action
+#define B_ACTION_NOTHING_FAINTED        13 // when choosing an action
+#define B_ACTION_NONE                   0xFF
 
-#define IDENTITY_PLAYER_MON1        0
-#define IDENTITY_OPPONENT_MON1      1
-#define IDENTITY_PLAYER_MON2        2
-#define IDENTITY_OPPONENT_MON2      3
+// defines for the u8 array gTypeEffectiveness
+#define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
+#define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
+#define TYPE_EFFECT_MULTIPLIER(i)((gTypeEffectiveness[i + 2]))
 
-#define SIDE_PLAYER     0x0
-#define SIDE_OPPONENT   0x1
+// defines for the gTypeEffectiveness multipliers
+#define TYPE_MUL_NO_EFFECT          0
+#define TYPE_MUL_NOT_EFFECTIVE      5
+#define TYPE_MUL_NORMAL             10
+#define TYPE_MUL_SUPER_EFFECTIVE    20
 
-#define BIT_SIDE        0x1
-#define BIT_MON         0x2
+// special type table Ids
+#define TYPE_FORESIGHT  0xFE
+#define TYPE_ENDTABLE   0xFF
 
-#define GET_BANK_IDENTITY(bank)((gBanksByIdentity[bank]))
-#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & BIT_SIDE))
-#define GET_BANK_SIDE2(bank)((GET_BANK_IDENTITY(bank) & BIT_SIDE))
+// physical/special types
+#define TYPE_IS_PHYSICAL(type) ((type) < TYPE_MYSTERY)
+#define TYPE_IS_SPECIAL(type) ((type) > TYPE_MYSTERY)
 
 enum
 {
@@ -53,16 +71,16 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ void *party;
+    /*0x24*/ const void *party;
 };
 
-struct UnkBattleStruct1 // AI_Opponent_Info?
+struct BattleHistory
 {
-    /*0x00*/ u16 movesUsed[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
-    /*0x20*/ u8 unk20[2];
-    /*0x22*/ u8 unk22[2];
-    /*0x24*/ u16 items[4];
-    /*0x2C*/ u8 numOfItems;
+    /*0x00*/ u16 usedMoves[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
+    /*0x20*/ u8 abilities[MAX_BATTLERS_COUNT / 2];
+    /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT / 2];
+    /*0x24*/ u16 trainerItems[MAX_BATTLERS_COUNT];
+    /*0x2C*/ u8 numItems;
 };
 
 struct AI_Stack
@@ -179,7 +197,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1605F*/ u8 sentInPokes;
     /*0x16060*/ u8 unk16060[4];
     /*0x16064*/ u8 unk16064[4];
-    /*0x16068*/ u8 unk16068[4];
+    /*0x16068*/ u8 monToSwitchIntoId[MAX_BATTLERS_COUNT];
     /*0x1606C*/ u8 unk1606C[4][3];
     /*0x16078*/ u8 unk16078;
     /*0x16079*/ u8 caughtNick[11];
@@ -242,8 +260,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x160C5*/ u8 unk160C5;
     /*0x160C6*/ u8 unk160C6;
     /*0x160C7*/ u8 unk160C7;
-    /*0x160C8*/ u8 unk160C8;
-    /*0x160C9*/ u8 unk160C9;
+    /*0x160C8*/ u8 AI_monToSwitchIntoId[2];
     /*0x160CA*/ u8 synchroniseEffect;
     /*0x160CB*/ u8 linkPlayerIndex;
     /*0x160CC*/ u16 usedHeldItems[4];
@@ -323,7 +340,7 @@ struct BattleStruct /* 0x2000000 */
     /*0x1611F*/ u8 unk1611F;
 
     //u8 filler2[0x72E];
-    /* 0x16A00 */ struct UnkBattleStruct1 unk_2016A00_2;
+    /* 0x16A00 */ struct BattleHistory unk_2016A00_2;
 };
 
 struct StatsArray
@@ -352,8 +369,8 @@ struct DisableStruct
     /*0x0D*/ u8 unkD;
     /*0x0E*/ u8 encoreTimer1 : 4;
     /*0x0E*/ u8 encoreTimer2 : 4;
-    /*0x0F*/ u8 perishSong1 : 4;
-    /*0x0F*/ u8 perishSong2 : 4;
+    /*0x0F*/ u8 perishSongTimer1 : 4;
+    /*0x0F*/ u8 perishSongTimer2 : 4;
     /*0x10*/ u8 furyCutterCounter;
     /*0x11*/ u8 rolloutTimer1 : 4;
     /*0x11*/ u8 rolloutTimer2 : 4;
@@ -394,7 +411,7 @@ struct BattleResults
     u16 caughtPoke;           // 0x28
     u8 caughtNick[10];        // 0x2A
     u8 filler34[2];
-    u8 unk36[10];  // usedBalls?
+    u8 usedBalls[11];
 };
 
 struct Struct2017100
@@ -520,21 +537,21 @@ struct sideTimer
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[MAX_BANKS_BATTLE];
-    u8 futureSightAttacker[MAX_BANKS_BATTLE];
-    s32 futureSightDmg[MAX_BANKS_BATTLE];
-    u16 futureSightMove[MAX_BANKS_BATTLE];
-    u8 wishCounter[MAX_BANKS_BATTLE];
-    u8 wishUserID[MAX_BANKS_BATTLE];
+    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u8 futureSightAttacker[MAX_BATTLERS_COUNT];
+    s32 futureSightDmg[MAX_BATTLERS_COUNT];
+    u16 futureSightMove[MAX_BATTLERS_COUNT];
+    u8 wishCounter[MAX_BATTLERS_COUNT];
+    u8 wishUserID[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
     u8 knockedOffPokes[2];
 };
 
-extern struct UnkBattleStruct1 unk_2016A00;
-extern struct DisableStruct gDisableStructs[MAX_BANKS_BATTLE];
+extern struct BattleHistory unk_2016A00;
+extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
 extern struct BattleResults gBattleResults;
-extern struct ProtectStruct gProtectStructs[MAX_BANKS_BATTLE];
-extern struct SpecialStatus gSpecialStatuses[MAX_BANKS_BATTLE];
+extern struct ProtectStruct gProtectStructs[MAX_BATTLERS_COUNT];
+extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 extern struct sideTimer gSideTimers[2];
 extern struct WishFutureKnock gWishFutureKnock;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
@@ -723,13 +740,17 @@ extern u16 gBattle_WIN1V;
 
 extern u8 gDisplayedStringBattle[];
 
-// asm/battle_1.o
+extern u16 gBattleTypeFlags;
+extern u8 gUnknown_02023A14_50;
+extern u16 gTrainerBattleOpponent;
+
+// src/battle_bg.o
 void sub_800D6D4();
-void sub_800D74C();
+void ApplyPlayerChosenFrameToBattleMenu();
 void DrawMainBattleBackground(void);
-void sub_800DAB8();
+void LoadBattleTextboxAndBackground();
 void sub_800DE30(u8);
-void sub_800E23C();
+void LoadBattleEntryBackground();
 
 // src/battle_2.o
 void sub_800E7C4(void);
@@ -741,6 +762,7 @@ void BattleMainCB2(void);
 void sub_800F838(struct Sprite *);
 u8 CreateNPCTrainerParty(struct Pokemon *, u16);
 void sub_800FCFC(void);
+void nullsub_36(struct Sprite *);
 void c2_8011A1C(void);
 void sub_80101B8(void);
 void c2_081284E0(void);
@@ -808,7 +830,7 @@ void sub_802E424(void);
 void move_anim_start_t4(u8 a, u8 b, u8 c, u8 d);
 void nullsub_9(u16);
 void nullsub_10(int);
-void load_gfxc_health_bar();
+void load_gfxc_health_bar(u8);
 u8 battle_load_something();
 void sub_8031F88(u8);
 void HandleLowHpMusicChange(struct Pokemon *, u8);
@@ -816,8 +838,11 @@ void sub_8032638();
 void sub_8032AA8(u8, u8);
 void SetBankFuncToOpponentBufferRunCommand(void);
 void BattleStopLowHpSound(void);
+void sub_8031FC4(u8, u8, bool8);
+void sub_8032984(u8, u16);
 
-// asm/battle_9.o
 void SetBankFuncToLinkOpponentBufferRunCommand(void);
+
+void GameClear(void);
 
 #endif // GUARD_BATTLE_H

@@ -150,7 +150,7 @@ extern const u8 OtherText_CheckTag[];
 extern const u8 OtherText_Confirm[];
 extern const u8 gOtherText_Walk[];
 
-extern const u8 gUnknownText_Exit[];
+extern const u8 gOtherText_Exit[];
 extern const u8 gOtherText_CancelNoTerminator[];
 extern const u8 gOtherText_CancelWithTerminator[];
 
@@ -165,6 +165,7 @@ extern const u8 gOtherText_None[];
 extern const u8 gOtherText_ThreeQuestions2[];
 
 extern const u8 gOtherText_FiveQuestions[];
+extern const u8 gOtherText_Slash[];
 
 extern const u8 gOtherText_OneDash[];
 extern const u8 gOtherText_TwoDashes[];
@@ -250,6 +251,7 @@ extern const u8 gContestStatsText_Dry[];
 extern const u8 gContestStatsText_Sweet[];
 extern const u8 gContestStatsText_Bitter[];
 extern const u8 gContestStatsText_Sour[];
+extern const u8 gContestStatsText_Tasty[];
 
 extern const u8 gContestStatsText_StowCase[];
 extern const u8 gContestStatsText_ThrowAwayPrompt[];

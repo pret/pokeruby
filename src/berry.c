@@ -1,4 +1,5 @@
 #include "global.h"
+#include "constants/items.h"
 #include "berry.h"
 #include "field_control_avatar.h"
 #include "event_object_movement.h"
@@ -6,23 +7,11 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "constants/items.h"
 #include "main.h"
 #include "menu.h"
 #include "random.h"
 #include "task.h"
 #include "text.h"
-
-#define BERRY_NAME_LENGTH 6
-#define BERRY_REGROW_LIMIT 10
-#define MAX_BERRY_TREES 128
-
-#define BERRY_NONE 0
-#define FIRST_BERRY ITEM_CHERI_BERRY
-#define LAST_BERRY  ITEM_ENIGMA_BERRY
-
-#define GETBERRYID(berry) ((berry - FIRST_BERRY) + 1)
-#define GETITEMID(berry) ((berry + FIRST_BERRY) - 1)
 
 #ifdef ENGLISH
 #define NAME_CHERI_BERRY   _("CHERI")
@@ -1085,7 +1074,7 @@ extern u8 gUnknown_Debug_839B6CE[];
 static const u8 gUnknown_Debug_083F7F84[] = _("そとから　きた　きのみ");
 static const u8 gUnknown_Debug_083F7F90[] = _("ただいま　かいはつちゅう");
 
-void debug_sub_80C2C18(u8 *name, u8 holdEffect, u8 holdEffectParam)
+void debug_sub_80C2C18(const u8 *name, u8 holdEffect, u8 holdEffectParam)
 {
     s32 i;
 
@@ -1161,11 +1150,11 @@ static struct BerryTree *GetBerryTreeInfo(u8 id)
 // this was called because the berry script was successful: meaning the player chose to
 // water the tree. We need to check for the current tree stage and set the appropriate
 // water flag to true.
-bool32 FieldObjectInteractionWaterBerryTree(void)
+bool32 EventObjectInteractionWaterBerryTree(void)
 {
     // GetBerryTreeInfo does not sanitize the tree retrieved, but there are no known
     // instances where this can cause problems.
-    struct BerryTree *tree = GetBerryTreeInfo(FieldObjectGetBerryTreeId(gSelectedMapObject));
+    struct BerryTree *tree = GetBerryTreeInfo(EventObjectGetBerryTreeId(gSelectedEventObject));
 
     switch (tree->stage)
     {
@@ -1189,8 +1178,8 @@ bool32 FieldObjectInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingUnplantedSoil(void)
 {
-    if (GetFieldObjectScriptPointerPlayerFacing() == S_BerryTree
-     && GetStageByBerryTreeId(FieldObjectGetBerryTreeId(gSelectedMapObject)) == BERRY_STAGE_NO_BERRY)
+    if (GetEventObjectScriptPointerPlayerFacing() == S_BerryTree
+     && GetStageByBerryTreeId(EventObjectGetBerryTreeId(gSelectedEventObject)) == BERRY_STAGE_NO_BERRY)
         return TRUE;
     else
         return FALSE;
@@ -1198,10 +1187,10 @@ bool8 IsPlayerFacingUnplantedSoil(void)
 
 bool8 TryToWaterBerryTree(void)
 {
-    if (GetFieldObjectScriptPointerPlayerFacing() != S_BerryTree)
+    if (GetEventObjectScriptPointerPlayerFacing() != S_BerryTree)
         return FALSE;
     else
-        return FieldObjectInteractionWaterBerryTree();
+        return EventObjectInteractionWaterBerryTree();
 }
 
 void ClearBerryTrees(void)
@@ -1424,7 +1413,7 @@ static u16 GetStageDurationByBerryType(u8 berry)
     return GetBerryInfo(berry)->stageDuration * 60;
 }
 
-void FieldObjectInteractionGetBerryTreeData(void)
+void EventObjectInteractionGetBerryTreeData(void)
 {
     u8 id;
     u8 berry;
@@ -1432,7 +1421,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     u8 group;
     u8 num;
 
-    id = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    id = EventObjectGetBerryTreeId(gSelectedEventObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
     localId = gSpecialVar_LastTalked;
@@ -1457,25 +1446,25 @@ void Berry_FadeAndGoToBerryBagMenu(void)
     SetMainCallback2(sub_80A68CC);
 }
 
-void FieldObjectInteractionPlantBerryTree(void)
+void EventObjectInteractionPlantBerryTree(void)
 {
     u8 berry = ItemIdToBerryType(gSpecialVar_ItemId);
 
-    PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
-    FieldObjectInteractionGetBerryTreeData();
+    PlantBerryTree(EventObjectGetBerryTreeId(gSelectedEventObject), berry, 1, TRUE);
+    EventObjectInteractionGetBerryTreeData();
 }
 
-void FieldObjectInteractionPickBerryTree(void)
+void EventObjectInteractionPickBerryTree(void)
 {
-    u8 id = FieldObjectGetBerryTreeId(gSelectedMapObject);
+    u8 id = EventObjectGetBerryTreeId(gSelectedEventObject);
     u8 berry = GetBerryTypeByBerryTreeId(id);
 
     gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
 }
 
-void FieldObjectInteractionRemoveBerryTree(void)
+void EventObjectInteractionRemoveBerryTree(void)
 {
-    RemoveBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject));
+    RemoveBerryTree(EventObjectGetBerryTreeId(gSelectedEventObject));
     sub_8060288(gSpecialVar_LastTalked, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
 }
 
@@ -1504,13 +1493,13 @@ static const u8 gUnknown_Debug_083F7FD3[] = _("");
 
 u8* DebugOpenBerryInfo(void)
 {
-    if (GetFieldObjectScriptPointerPlayerFacing() != S_BerryTree)
+    if (GetEventObjectScriptPointerPlayerFacing() != S_BerryTree)
     {
         return NULL;
     }
     else
     {
-        u32 berryTreeId = FieldObjectGetBerryTreeId(gSelectedMapObject);
+        u32 berryTreeId = EventObjectGetBerryTreeId(gSelectedEventObject);
         struct BerryTree *berryTree = GetBerryTreeInfo(berryTreeId);
         s32 i;
 
@@ -1552,14 +1541,14 @@ void ResetBerryTreeSparkleFlags(void)
     top = cam_top + 3;
     right = cam_left + 14;
     bottom = top + 8;
-    for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1.mapObjects); i++)
+    for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1.eventObjects); i++)
     {
-        if (gMapObjects[i].active && gMapObjects[i].animPattern == 12) // is the object an active berry tree?
+        if (gEventObjects[i].active && gEventObjects[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            cam_left = gMapObjects[i].coords2.x;
-            cam_top = gMapObjects[i].coords2.y;
+            cam_left = gEventObjects[i].currentCoords.x;
+            cam_top = gEventObjects[i].currentCoords.y;
             if (left <= cam_left && cam_left <= right && top <= cam_top && cam_top <= bottom)
-                ResetBerryTreeSparkleFlag(gMapObjects[i].trainerRange_berryTreeId);
+                ResetBerryTreeSparkleFlag(gEventObjects[i].trainerRange_berryTreeId);
         }
     }
 }

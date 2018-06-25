@@ -141,7 +141,7 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
     u8 stringWidth;
 
     GetMoneyAmountText(buffer, amount, size);
-    stringWidth = sub_8072CA4(buffer);
+    stringWidth = GetStringWidthInMenuWindow(buffer);
 
     if (stringWidth >= (size + 1) * 8)
     {
@@ -176,7 +176,7 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top)
 #endif
 }
 
-__attribute__((naked))
+NAKED
 void Draw10000Sprite(u8 var1, u8 var2, int var3)
 {
     asm(".syntax unified\n\

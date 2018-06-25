@@ -7,12 +7,85 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
+void sub_80CABF8(struct Sprite* sprite);
+void sub_80CAD54(struct Sprite* sprite);
+void sub_80CAE20(struct Sprite* sprite);
 static void sub_80CAC44(struct Sprite* sprite);
 static void sub_80CADA8(struct Sprite* sprite);
 static void sub_80CAE74(struct Sprite* sprite);
 
-// orbit (The effect of a sprite rotating around another one in a pseudo 3D effect.)
-// Used by Spore, Cotton Spore, and Petal Dance.
+const union AnimCmd gSpriteAnim_83D63E0[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D63E8[] =
+{
+    ANIMCMD_FRAME(4, 7),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D63F0[] =
+{
+    gSpriteAnim_83D63E0,
+    gSpriteAnim_83D63E8,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D63F8 =
+{
+    .tileTag = 10158,
+    .paletteTag = 10158,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83D63F0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CABF8,
+};
+
+const union AnimCmd gSpriteAnim_83D6410[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83D6418[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6420[] =
+{
+    gSpriteAnim_83D6410,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D6424[] =
+{
+    gSpriteAnim_83D6418,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6428 =
+{
+    .tileTag = 10159,
+    .paletteTag = 10159,
+    .oam = &gOamData_837DF2C,
+    .anims = gSpriteAnimTable_83D6420,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CAD54,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6440 =
+{
+    .tileTag = 10159,
+    .paletteTag = 10159,
+    .oam = &gOamData_837DF24,
+    .anims = gSpriteAnimTable_83D6424,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80CAE20,
+};
 
 void sub_80CABF8(struct Sprite* sprite)
 {
@@ -29,7 +102,7 @@ void sub_80CABF8(struct Sprite* sprite)
     sub_80CAC44(sprite);
 }
 
-void sub_80CAC44(struct Sprite* sprite)
+static void sub_80CAC44(struct Sprite* sprite)
 {
     u8 var1;
     
@@ -64,7 +137,7 @@ void sub_80CACEC(u8 taskId)
     }
     else
     {
-        if (GetBankIdentity_permutated(gAnimBankTarget) == 1)
+        if (GetBattlerPosition_permutated(gAnimBankTarget) == 1)
         {
             REG_BG2CNT_BITFIELD.priority = 3;
         }
@@ -84,14 +157,14 @@ void sub_80CAD54(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CADA8;
     sub_80CADA8(sprite);
 }
 
-void sub_80CADA8(struct Sprite* sprite)
+static void sub_80CADA8(struct Sprite* sprite)
 {
     if (!TranslateAnimSpriteByDeltas(sprite))
     {
@@ -121,14 +194,14 @@ void sub_80CAE20(struct Sprite* sprite)
     sprite->data[1] = sprite->pos1.x;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
-    sprite->data[4] = GetBankPosition(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
+    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
     InitAnimSpriteTranslationDeltas(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CAE74;
     sub_80CAE74(sprite);
 }
 
-void sub_80CAE74(struct Sprite* sprite)
+static void sub_80CAE74(struct Sprite* sprite)
 {
     if (!TranslateAnimSpriteByDeltas(sprite))
     {

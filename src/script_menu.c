@@ -622,7 +622,7 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, u8 ig
 static u16 GetStringWidthInTilesForScriptMenu(const u8 *str)
 {
     // each tile on screen is 8x8, so it needs the number of tiles and not pixels, hence the division by 8.
-    return (Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gWindowTemplate_81E6CE4, str) + 7) / 8;
+    return (Text_GetStringWidthFromWindowTemplate((struct WindowTemplate *)&gMenuTextWindowTemplate, str) + 7) / 8;
 }
 
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 count, const struct MenuAction *list, u8 ignoreBPress, u8 cursorPos)
@@ -930,7 +930,7 @@ void ScriptMenu_CreatePCMenu(void)
     StartScriptMenuTask(0, 0, width + 2, 2 * numChoices + 1, 0, numChoices);
 }
 #elif GERMAN
-__attribute__((naked))
+NAKED
 void ScriptMenu_CreatePCMenu(void) {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\

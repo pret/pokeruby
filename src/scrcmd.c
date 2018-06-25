@@ -22,7 +22,7 @@
 #include "fieldmap.h"
 #include "item.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu.h"
 #include "money.h"
 #include "mystery_event_script.h"
@@ -42,6 +42,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "tv.h"
+#include "constants/maps.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -548,7 +549,7 @@ bool8 ScrCmd_givedecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = IsThereStorageSpaceForDecoration(decoration);
+    gSpecialVar_Result = GiveDecoration(decoration);
     return FALSE;
 }
 
@@ -556,7 +557,7 @@ bool8 ScrCmd_takedecoration(struct ScriptContext *ctx)
 {
     u32 decoration = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_81340A8(decoration);
+    gSpecialVar_Result = RemoveDecorationFromInventory(decoration);
     return FALSE;
 }
 
@@ -564,7 +565,7 @@ bool8 ScrCmd_checkdecorspace(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_8134074(decorId);
+    gSpecialVar_Result = CheckDecorationInventoryHasSpace(decorId);
     return FALSE;
 }
 
@@ -572,7 +573,7 @@ bool8 ScrCmd_checkdecor(struct ScriptContext *ctx)
 {
     u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = sub_8133FE4(decorId);
+    gSpecialVar_Result = InventoryContainsDecoration(decorId);
     return FALSE;
 }
 
@@ -725,7 +726,7 @@ bool8 ScrCmd_warp(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080E88();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -739,7 +740,7 @@ bool8 ScrCmd_warpsilent(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sp13E_warp_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -753,7 +754,7 @@ bool8 ScrCmd_warpdoor(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080EF0();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -765,12 +766,12 @@ bool8 ScrCmd_warphole(struct ScriptContext *ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == 0xFF && mapNum == 0xFF)
-        sub_8053720(x - 7, y - 7);
+    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
+        SetFixedHoleWarpAsDestination(x - 7, y - 7);
     else
         Overworld_SetWarpDestination(mapGroup, mapNum, -1, x - 7, y - 7);
     sp13F_fall_to_last_warp();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -784,7 +785,7 @@ bool8 ScrCmd_warpteleport(struct ScriptContext *ctx)
 
     Overworld_SetWarpDestination(mapGroup, mapNum, warpId, x, y);
     sub_8080F68();
-    player_avatar_init_params_reset();
+    ResetInitialPlayerAvatarState();
     return TRUE;
 }
 
@@ -820,7 +821,7 @@ bool8 ScrCmd_setdivewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_8053690(mapGroup, mapNum, warpId, x, y);
+    SetFixedDiveWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -832,7 +833,7 @@ bool8 ScrCmd_setholewarp(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    sub_80536E4(mapGroup, mapNum, warpId, x, y);
+    SetFixedHoleWarp(mapGroup, mapNum, warpId, x, y);
     return FALSE;
 }
 
@@ -1012,7 +1013,7 @@ bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    RemoveFieldObjectByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    RemoveEventObjectByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     return FALSE;
 }
 
@@ -1022,7 +1023,7 @@ bool8 ScrCmd_removeobject_at(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    RemoveFieldObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
+    RemoveEventObjectByLocalIdAndMap(objectId, mapNum, mapGroup);
     return FALSE;
 }
 
@@ -1060,7 +1061,7 @@ bool8 ScrCmd_setobjectxyperm(struct ScriptContext *ctx)
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u16 y = VarGet(ScriptReadHalfword(ctx));
 
-    Overworld_SetMapObjTemplateCoords(localId, x, y);
+    Overworld_SetEventObjTemplateCoords(localId, x, y);
     return FALSE;
 }
 
@@ -1068,7 +1069,7 @@ bool8 ScrCmd_moveobjectoffscreen(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    sub_805C78C(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+    TryOverrideTemplateCoordsForEventObject(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     return FALSE;
 }
 
@@ -1115,10 +1116,10 @@ bool8 ScrCmd_resetobjectpriority(struct ScriptContext *ctx)
 
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
-    if (gMapObjects[gSelectedMapObject].active)
+    if (gEventObjects[gSelectedEventObject].active)
     {
-        FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject],
-          player_get_direction_lower_nybble());
+        EventObjectFaceOppositeDirection(&gEventObjects[gSelectedEventObject],
+          GetPlayerFacingDirection());
     }
     return FALSE;
 }
@@ -1128,7 +1129,7 @@ bool8 ScrCmd_turnobject(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 direction = ScriptReadByte(ctx);
 
-    FieldObjectTurnByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, direction);
+    EventObjectTurnByLocalIdAndMap(localId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, direction);
     return FALSE;
 }
 
@@ -1137,7 +1138,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
     u16 localId = VarGet(ScriptReadHalfword(ctx));
     u8 movementType = ScriptReadByte(ctx);
 
-    Overworld_SetMapObjTemplateMovementType(localId, movementType);
+    Overworld_SetEventObjTemplateMovementType(localId, movementType);
     return FALSE;
 }
 
@@ -1156,10 +1157,10 @@ bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
 
 bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 {
-    u8 v1 = ScriptReadByte(ctx);
+    u8 eventObjectId = ScriptReadByte(ctx);
     u8 direction = ScriptReadByte(ctx);
 
-    sub_8064990(v1, direction);
+    TurnEventObject(eventObjectId, direction);
     return FALSE;
 }
 
@@ -1171,7 +1172,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     }
     else
     {
-        ScriptFreezeMapObjects();
+        ScriptFreezeEventObjects();
         SetupNativeScript(ctx, sub_8064CFC);
         return TRUE;
     }
@@ -1185,14 +1186,14 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
     }
     else
     {
-        if (gMapObjects[gSelectedMapObject].active)
+        if (gEventObjects[gSelectedEventObject].active)
         {
-            LockSelectedMapObject();
+            LockSelectedEventObject();
             SetupNativeScript(ctx, sub_8064DB4);
         }
         else
         {
-            ScriptFreezeMapObjects();
+            ScriptFreezeEventObjects();
             SetupNativeScript(ctx, sub_8064CFC);
         }
         return TRUE;
@@ -1204,10 +1205,10 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     u8 objectId;
 
     HideFieldMessageBox();
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80A2178();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     return FALSE;
 }
 
@@ -1216,12 +1217,12 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     u8 objectId;
 
     HideFieldMessageBox();
-    if (gMapObjects[gSelectedMapObject].active)
-        FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
-    objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
-    FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
+    if (gEventObjects[gSelectedEventObject].active)
+        EventObjectClearHeldMovementIfFinished(&gEventObjects[gSelectedEventObject]);
+    objectId = GetEventObjectIdByLocalIdAndMap(0xFF, 0, 0);
+    EventObjectClearHeldMovementIfFinished(&gEventObjects[objectId]);
     sub_80A2178();
-    UnfreezeMapObjects();
+    UnfreezeEventObjects();
     return FALSE;
 }
 

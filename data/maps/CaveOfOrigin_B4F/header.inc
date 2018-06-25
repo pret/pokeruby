@@ -1,5 +1,5 @@
 CaveOfOrigin_B4F:: @ 8307208
-	.4byte CaveOfOrigin_B4F_MapAttributes
+	.4byte CaveOfOrigin_B4F_Layout
 	.4byte CaveOfOrigin_B4F_MapEvents
 	.4byte CaveOfOrigin_B4F_MapScripts
 	.4byte 0x0

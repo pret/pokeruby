@@ -253,7 +253,7 @@ ContestString_Tough:
 	.string "STÄRKE$"
 
 	.align 2
-gUnknown_083CAF70:: @ 83CAF70
+gContestCategoryNames:: @ 83CAF70
 	.4byte ContestString_Cool
 	.4byte ContestString_Beauty
 	.4byte ContestString_Cute

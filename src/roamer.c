@@ -6,12 +6,6 @@
 #include "region_map.h"
 #include "constants/species.h"
 
-#ifdef SAPPHIRE
-#define ROAMER_SPECIES SPECIES_LATIAS
-#else
-#define ROAMER_SPECIES SPECIES_LATIOS
-#endif
-
 enum
 {
     MAP_GRP = 0, // map group
@@ -228,7 +222,7 @@ void GetRoamerLocation(u8 *mapGroup, u8 *mapNum)
 }
 
 #if DEBUG
-void debug_sub_814A714(void)
+void Debug_CreateRoamer(void)
 {
     if (gSaveBlock1.location.mapGroup == 0)
     {
@@ -238,7 +232,7 @@ void debug_sub_814A714(void)
     }
 }
 
-void debug_sub_814A73C(u8* str)
+void Debug_GetRoamerLocation(u8* str)
 {
     GetMapSectionName(str, sRoamerLocation[1], 0);
 }

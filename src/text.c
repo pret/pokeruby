@@ -618,7 +618,7 @@ const struct WindowTemplate gWindowTemplate_81E6CC8 =
     BG_SCREEN_ADDR(15), // tilemap
 };
 
-const struct WindowTemplate gWindowTemplate_81E6CE4 =
+const struct WindowTemplate gMenuTextWindowTemplate =
 {
     0, // BG number
     2, // BG character base block
@@ -1647,7 +1647,7 @@ const struct WindowTemplate gWindowTemplate_81E7224 =
     BG_SCREEN_ADDR(31), // tilemap
 };
 
-const struct WindowTemplate gWindowTemplate_81E7240 =
+const struct WindowTemplate gMoveTutorMenuFramesWindowTemplate =
 {
     1, // BG number
     2, // BG character base block
@@ -3458,7 +3458,7 @@ u8 *AlignInt1(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
     case 0:
         ConvertIntToDecimalString(temp, value);
         dest = StringCopy(dest, temp);
-        dest[0] = 0xFC;
+        dest[0] = EXT_CTRL_CODE_BEGIN;
         dest[1] = 19;
         dest[2] = alignAmount;
         dest += 3;
@@ -3469,7 +3469,7 @@ u8 *AlignInt1(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         width = GetStringWidth(win, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = alignAmount - width;
             dest += 3;
@@ -3481,7 +3481,7 @@ u8 *AlignInt1(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         width = GetStringWidth(win, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = (alignAmount - width) / 2;
             dest += 3;
@@ -3489,7 +3489,7 @@ u8 *AlignInt1(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
         dest = StringCopy(dest, temp);
         if (alignAmount > width)
         {
-            dest[0] = 0xFC;
+            dest[0] = EXT_CTRL_CODE_BEGIN;
             dest[1] = 19;
             dest[2] = alignAmount;
             dest += 3;

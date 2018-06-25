@@ -757,7 +757,7 @@ sub_80D40F4: @ 80D40F4
 	ldr r0, _080D4144 @ =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl GetAnimBankSpriteId
+	bl GetAnimBattlerSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -1085,11 +1085,11 @@ sub_80D4394: @ 80D4394
 	push {r4,r5,lr}
 	ldr r4, _080D43B8 @ =gAnimBankAttacker
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D43C8
-	ldr r1, _080D43BC @ =gBattlePartyID
+	ldr r1, _080D43BC @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -1100,13 +1100,13 @@ sub_80D4394: @ 80D4394
 	b _080D43D8
 	.align 2, 0
 _080D43B8: .4byte gAnimBankAttacker
-_080D43BC: .4byte gBattlePartyID
+_080D43BC: .4byte gBattlerPartyIndexes
 _080D43C0: .4byte gPlayerParty
 _080D43C4:
 	adds r0, r2, 0
 	b _080D440A
 _080D43C8:
-	ldr r1, _080D4410 @ =gBattlePartyID
+	ldr r1, _080D4410 @ =gBattlerPartyIndexes
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -1144,7 +1144,7 @@ _080D440A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080D4410: .4byte gBattlePartyID
+_080D4410: .4byte gBattlerPartyIndexes
 _080D4414: .4byte gEnemyParty
 	thumb_func_end sub_80D4394
 
@@ -1163,13 +1163,13 @@ sub_80D4418: @ 80D4418
 	ldr r4, _080D4520 @ =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0xAC
@@ -1392,7 +1392,7 @@ sub_80D45D8: @ 80D45D8
 	strh r0, [r4, 0xA]
 	ldr r0, _080D460C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D4610
@@ -1791,19 +1791,19 @@ sub_80D48F4: @ 80D48F4
 	ldr r4, _080D497C @ =gAnimBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
 	strh r0, [r5, 0xE]
 	ldrb r0, [r4]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
 	ldrb r0, [r4]
-	bl GetBankSide
+	bl GetBattlerSide
 	lsls r0, 24
 	movs r2, 0x1
 	negs r2, r2
@@ -2268,13 +2268,13 @@ sub_80D4CA4: @ 80D4CA4
 	ldr r5, _080D4CE0 @ =gAnimBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]
 	ldrb r0, [r5]
 	movs r1, 0x3
-	bl GetBankPosition
+	bl GetBattlerSpriteCoord
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x32]

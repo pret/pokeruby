@@ -241,8 +241,8 @@ void LinkTestScreen(void)
     FreeAllSpritePalettes();
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
-    Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-    InitMenuWindow((struct WindowTemplate *)&gWindowTemplate_81E6CE4);
+    Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+    InitMenuWindow((struct WindowTemplate *)&gMenuTextWindowTemplate);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -408,7 +408,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.heldKeys & B_BUTTON)
         InitBlockSend(ewram4000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
-        BeginNormalPaletteFade(-1, 0, 0x10, 0, 2);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(2, 0, 0));
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)

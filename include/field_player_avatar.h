@@ -3,43 +3,54 @@
 
 #include "task.h"
 
-// sub_80587B4
+enum {
+    PLAYER_AVATAR_STATE_NORMAL,
+    PLAYER_AVATAR_STATE_MACH_BIKE,
+    PLAYER_AVATAR_STATE_ACRO_BIKE,
+    PLAYER_AVATAR_STATE_SURFING,
+    PLAYER_AVATAR_STATE_UNDERWATER,
+    PLAYER_AVATAR_STATE_FIELD_MOVE,
+    PLAYER_AVATAR_STATE_FISHING,
+    PLAYER_AVATAR_STATE_WATERING,
+};
+
+// MovementType_None2
 void player_step(u8 a, u16 b, u16 c);
 u8 ForcedMovement_None(void);
 u8 ForcedMovement_Slip(void);
-u8 sub_8058AAC(void);
-u8 sub_8058AC4(void);
-u8 sub_8058ADC(void);
-u8 sub_8058AF4(void);
-u8 sub_8058B0C(void);
-u8 sub_8058B24(void);
-u8 sub_8058B3C(void);
-u8 sub_8058B54(void);
+u8 ForcedMovement_WalkSouth(void);
+u8 ForcedMovement_WalkNorth(void);
+u8 ForcedMovement_WalkWest(void);
+u8 ForcedMovement_WalkEast(void);
+u8 ForcedMovement_RideCurrentSouth(void);
+u8 ForcedMovement_RideCurrentNorth(void);
+u8 ForcedMovement_RideCurrentWest(void);
+u8 ForcedMovement_RideCurrentEast(void);
 u8 ForcedMovement_SlideSouth(void);
 u8 ForcedMovement_SlideNorth(void);
 u8 ForcedMovement_SlideWest(void);
 u8 ForcedMovement_SlideEast(void);
-u8 ForcedMovement_MatJump(void);
-u8 sub_8058C10(void);
+u8 ForcedMovement_SecretBaseJumpMat(void);
+u8 ForcedMovement_SecretBaseSpinMat(void);
 u8 ForcedMovement_MuddySlope(void);
 void PlayerNotOnBikeNotMoving(u8 direction, u16 heldKeys);
 void PlayerNotOnBikeTurningInPlace(u8 direction, u16 heldKeys);
 void sub_8058D0C(u8 direction, u16 heldKeys);
-u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e);
+u8 CheckForEventObjectCollision(struct EventObject *a, s16 b, s16 c, u8 d, u8 e);
 void SetPlayerAvatarTransitionFlags(u16 a);
-void nullsub_49(struct MapObject *a);
-void PlayerAvatarTransition_Normal(struct MapObject *a);
-void PlayerAvatarTransition_MachBike(struct MapObject *a);
-void PlayerAvatarTransition_AcroBike(struct MapObject *a);
-void PlayerAvatarTransition_Surfing(struct MapObject *a);
-void PlayerAvatarTransition_Underwater(struct MapObject *a);
-void sub_80591F4(struct MapObject *a);
+void nullsub_49(struct EventObject *a);
+void PlayerAvatarTransition_Normal(struct EventObject *a);
+void PlayerAvatarTransition_MachBike(struct EventObject *a);
+void PlayerAvatarTransition_AcroBike(struct EventObject *a);
+void PlayerAvatarTransition_Surfing(struct EventObject *a);
+void PlayerAvatarTransition_Underwater(struct EventObject *a);
+void sub_80591F4(struct EventObject *a);
 void sub_8059204(void);
-u8 player_get_x22(void);
+u8 PlayerGetCopyableMovement(void);
 void PlayerSetAnimId(u8 a, u8 b);
 void PlayerGoSpeed1(u8 a);
 void PlayerGoSpeed2(u8 a);
-void npc_use_some_d2s(u8 a);
+void PlayerRideWaterCurrent(u8 a);
 void PlayerGoSpeed4(u8 a);
 void sub_805940C(u8 a);
 void PlayerOnBikeCollide(u8);
@@ -60,8 +71,8 @@ void sub_8059618(u8 a);
 void sub_8059630(u8 a);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y);
 void PlayerGetDestCoords(s16 *, s16 *);
-u8 player_get_direction_lower_nybble(void);
-u8 player_get_direction_upper_nybble(void);
+u8 GetPlayerFacingDirection(void);
+u8 GetPlayerMovementDirection(void);
 u8 PlayerGetZCoord(void);
 u8 TestPlayerAvatarFlags(u8);
 u8 sub_80597D0(void);
@@ -69,7 +80,7 @@ u8 GetPlayerAvatarObjectId(void);
 void sub_80597E8(void);
 void sub_80597F4(void);
 u8 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 a, u8 b);
-u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
+u8 GetPlayerAvatarGraphicsIdByStateId(u8);
 u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId);
 bool8 PartyHasMonWithSurf(void);
 bool8 IsPlayerSurfingNorth(void);
@@ -84,14 +95,14 @@ void sub_8059BF4(void);
 // sub_8059C3C
 void sub_8059C94(u8);
 void sub_8059D08(u8);
-u8 sub_8059E84(struct Task *task, struct MapObject *b, struct MapObject *c);
-u8 sub_8059EA4(struct Task *task, struct MapObject *b, struct MapObject *c);
-u8 sub_8059F40(struct Task *task, struct MapObject *b, struct MapObject *c);
-u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A100(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A178(struct Task *task, struct MapObject *mapObject);
-u8 sub_805A1B8(struct Task *task, struct MapObject *mapObject);
+u8 sub_8059E84(struct Task *task, struct EventObject *b, struct EventObject *c);
+u8 sub_8059EA4(struct Task *task, struct EventObject *b, struct EventObject *c);
+u8 sub_8059F40(struct Task *task, struct EventObject *b, struct EventObject *c);
+u8 PlayerAvatar_DoSecretBaseMatJump(struct Task *task, struct EventObject *eventObject);
+u8 PlayerAvatar_SecretBaseMatSpinStep0(struct Task *task, struct EventObject *eventObject);
+u8 PlayerAvatar_SecretBaseMatSpinStep1(struct Task *task, struct EventObject *eventObject);
+u8 PlayerAvatar_SecretBaseMatSpinStep2(struct Task *task, struct EventObject *eventObject);
+u8 PlayerAvatar_SecretBaseMatSpinStep3(struct Task *task, struct EventObject *eventObject);
 void sub_805A20C(u8 a);
 void StartFishing(u8 a);
 u8 Fishing1(struct Task *task);

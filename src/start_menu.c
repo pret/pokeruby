@@ -9,7 +9,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "main.h"
-#include "map_obj_lock.h"
+#include "event_obj_lock.h"
 #include "menu.h"
 #include "new_game.h"
 #include "option_menu.h"
@@ -300,7 +300,7 @@ static void BuildStartMenuActions_Link(void)
 //Show number of safari balls left
 static void DisplaySafariBallsWindow(void)
 {
-    sub_8072C44(gStringVar1, gNumSafariBalls, 12, 1);
+    AlignInt2InMenuWindow(gStringVar1, gNumSafariBalls, 12, 1);
     Menu_DrawStdWindowFrame(0, 0, 10, 5);
     Menu_PrintText(gOtherText_SafariStock, 1, 1);
 }
@@ -379,7 +379,7 @@ void CreateStartMenuTask(void (*func)(u8))
 {
     u8 taskId;
 
-    InitMenuWindow(&gWindowTemplate_81E6CE4);
+    InitMenuWindow(&gMenuTextWindowTemplate);
     taskId = CreateTask(Task_StartMenu, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
 }
@@ -405,7 +405,7 @@ void sub_8071310(void)
 {
     if (!is_c1_link_related_active())
     {
-        FreezeMapObjects();
+        FreezeEventObjects();
         sub_80594C0();
         sub_80597F4();
     }
@@ -503,7 +503,7 @@ static u8 StartMenu_PlayerCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        TrainerCard_ShowPlayerCard(sub_805469C);
+        TrainerCard_ShowPlayerCard(c2_exit_to_overworld_1_sub_8080DEC);
         return 1;
     }
     return 0;
@@ -524,7 +524,7 @@ static u8 StartMenu_OptionCallback(void)
     {
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitOptionMenu);
-        gMain.savedCallback = sub_805469C;
+        gMain.savedCallback = c2_exit_to_overworld_1_sub_8080DEC;
         return 1;
     }
     return 0;
@@ -551,7 +551,7 @@ static u8 StartMenu_PlayerLinkCallback(void)
     if (!gPaletteFade.active)
     {
         PlayRainSoundEffect();
-        TrainerCard_ShowLinkCard(gUnknown_03004860, sub_805469C);
+        TrainerCard_ShowLinkCard(gUnknown_03004860, c2_exit_to_overworld_1_sub_8080DEC);
         return 1;
     }
     return 0;
@@ -588,7 +588,7 @@ static u8 SaveCallback2(void)
     case SAVE_SUCCESS:
     case SAVE_ERROR:
         Menu_EraseScreen();
-        sub_8064E2C();
+        ScriptUnfreezeEventObjects();
         ScriptContext2_Disable();
         return TRUE;
     }
@@ -865,15 +865,15 @@ static bool32 sub_80719FC(u8 *step)
         ScanlineEffect_Clear();
         break;
     case 2:
-        Text_LoadWindowTemplate(&gWindowTemplate_81E6CE4);
-        InitMenuWindow(&gWindowTemplate_81E6CE4);
+        Text_LoadWindowTemplate(&gMenuTextWindowTemplate);
+        InitMenuWindow(&gMenuTextWindowTemplate);
         REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_BG0_ON;
         break;
     case 3:
     {
         u32 savedIme;
 
-        BlendPalettes(-1, 0x10, 0);
+        BlendPalettes(0xFFFFFFFF, 16, RGB(0, 0, 0));
         SetVBlankCallback(sub_80719F0);
         savedIme = REG_IME;
         REG_IME = 0;
@@ -914,7 +914,7 @@ static void Task_8071B64(u8 taskId)
         case 0:
             Menu_DisplayDialogueFrame();
             Menu_PrintText(gSystemText_Saving, 2, 15);
-            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));
             (*step)++;
             break;
         case 1:
@@ -929,7 +929,7 @@ static void Task_8071B64(u8 taskId)
             (*step)++;
             break;
         case 3:
-            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
             (*step)++;
             break;
         case 4:

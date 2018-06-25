@@ -25,7 +25,7 @@ EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};
 EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
 
-struct BackupMapData gUnknown_03004870;
+struct BackupMapLayout gUnknown_03004870;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
@@ -53,19 +53,19 @@ void sub_8055FC0(void)
 
 void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader)
 {
-    struct MapData *mapData;
+    struct MapLayout *mapLayout;
     int width;
     int height;
-    mapData = mapHeader->mapData;
+    mapLayout = mapHeader->mapLayout;
     CpuFastFill16(0x03ff, gUnknown_02029828, sizeof(gUnknown_02029828));
     gUnknown_03004870.map = gUnknown_02029828;
-    width = mapData->width + 15;
+    width = mapLayout->width + 15;
     gUnknown_03004870.width = width;
-    height = mapData->height + 14;
+    height = mapLayout->height + 14;
     gUnknown_03004870.height = height;
     if (width * height <= 0x2800)
     {
-        map_copy_with_padding(mapData->map, mapData->width, mapData->height);
+        map_copy_with_padding(mapLayout->map, mapLayout->width, mapLayout->height);
         sub_80560AC(mapHeader);
     }
 }
@@ -129,8 +129,8 @@ void sub_8056134(int x, int y, struct MapHeader *mapHeader, int x2, int y2, int 
     u16 *dest;
     int mapWidth;
 
-    mapWidth = mapHeader->mapData->width;
-    src = &mapHeader->mapData->map[mapWidth * y2 + x2];
+    mapWidth = mapHeader->mapLayout->width;
+    src = &mapHeader->mapLayout->map[mapWidth * y2 + x2];
     dest = &gUnknown_03004870.map[gUnknown_03004870.width * y + x];
 
     for (i = 0; i < height; i++)
@@ -150,9 +150,9 @@ void fillSouthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
 
     if (connectedMapHeader)
     {
-        cWidth = connectedMapHeader->mapData->width;
+        cWidth = connectedMapHeader->mapLayout->width;
         x = offset + 7;
-        y = mapHeader->mapData->height + 7;
+        y = mapHeader->mapLayout->height + 7;
         if (x < 0)
         {
             x2 = -x;
@@ -196,8 +196,8 @@ void fillNorthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
 
     if (connectedMapHeader)
     {
-        cWidth = connectedMapHeader->mapData->width;
-        cHeight = connectedMapHeader->mapData->height;
+        cWidth = connectedMapHeader->mapLayout->width;
+        cHeight = connectedMapHeader->mapLayout->height;
         x = offset + 7;
         y2 = cHeight - 7;
         if (x < 0)
@@ -245,8 +245,8 @@ void fillWestConnection(struct MapHeader *mapHeader, struct MapHeader *connected
     int cWidth, cHeight;
     if (connectedMapHeader)
     {
-        cWidth = connectedMapHeader->mapData->width;
-        cHeight = connectedMapHeader->mapData->height;
+        cWidth = connectedMapHeader->mapLayout->width;
+        cHeight = connectedMapHeader->mapLayout->height;
         y = offset + 7;
         x2 = cWidth - 7;
         if (y < 0)
@@ -291,8 +291,8 @@ void fillEastConnection(struct MapHeader *mapHeader, struct MapHeader *connected
     int cHeight;
     if (connectedMapHeader)
     {
-        cHeight = connectedMapHeader->mapData->height;
-        x = mapHeader->mapData->width + 7;
+        cHeight = connectedMapHeader->mapLayout->height;
+        x = mapHeader->mapLayout->width + 7;
         y = offset + 7;
         if (y < 0)
         {
@@ -352,10 +352,10 @@ u8 MapGridGetZCoordAt(int x, int y)
     }
     else
     {
-        border = gMapHeader.mapData->border;
+        border = gMapHeader.mapLayout->border;
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
-        block = gMapHeader.mapData->border[i];
+        block = gMapHeader.mapLayout->border[i];
         block |= 0xc00;
     }
     if (block == 0x3ff)
@@ -378,10 +378,10 @@ u8 MapGridIsImpassableAt(int x, int y)
     }
     else
     {
-        border = gMapHeader.mapData->border;
+        border = gMapHeader.mapLayout->border;
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
-        block = gMapHeader.mapData->border[i];
+        block = gMapHeader.mapLayout->border[i];
         block |= 0xc00;
     }
     if (block == 0x3ff)
@@ -396,7 +396,7 @@ u32 MapGridGetMetatileIdAt(int x, int y)
     u16 block;
     int i;
     int j;
-    struct MapData *mapData;
+    struct MapLayout *mapLayout;
     u16 *border;
     u16 block2;
 
@@ -407,17 +407,17 @@ u32 MapGridGetMetatileIdAt(int x, int y)
     }
     else
     {
-        mapData = gMapHeader.mapData;
+        mapLayout = gMapHeader.mapLayout;
         i = (x + 1) & 1;
         i += ((y + 1) & 1) * 2;
-        block = mapData->border[i] | 0xc00;
+        block = mapLayout->border[i] | 0xc00;
     }
     if (block == 0x3ff)
     {
-        border = gMapHeader.mapData->border;
+        border = gMapHeader.mapLayout->border;
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
-        block2 = gMapHeader.mapData->border[j];
+        block2 = gMapHeader.mapLayout->border[j];
         block2 |= 0xc00;
         return block2 & block;
     }
@@ -465,12 +465,12 @@ u32 GetBehaviorByMetatileId(u16 metatile)
     u16 *attributes;
     if (metatile <= 0x1ff)
     {
-        attributes = gMapHeader.mapData->primaryTileset->metatileAttributes;
+        attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
         return attributes[metatile];
     }
     else if (metatile <= 0x3ff)
     {
-        attributes = gMapHeader.mapData->secondaryTileset->metatileAttributes;
+        attributes = gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
         return attributes[metatile - 0x200];
     }
     else
@@ -600,7 +600,7 @@ void sub_80566F0(u8 a1)
 
 int GetMapBorderIdAt(int x, int y)
 {
-    struct MapData *mapData;
+    struct MapLayout *mapLayout;
     u16 block, block2;
     int i, j;
     if (x >= 0 && x < gUnknown_03004870.width
@@ -616,10 +616,10 @@ int GetMapBorderIdAt(int x, int y)
     }
     else
     {
-        mapData = gMapHeader.mapData;
+        mapLayout = gMapHeader.mapLayout;
         j = (x + 1) & 1;
         j += ((y + 1) & 1) * 2;
-        block2 = 0xc00 | mapData->border[j];
+        block2 = 0xc00 | mapLayout->border[j];
         if (block2 == 0x3ff)
         {
             goto fail;
@@ -676,8 +676,8 @@ int GetPostCameraMoveMapBorderId(int x, int y)
 int CanCameraMoveInDirection(int direction)
 {
     int x, y;
-    x = gSaveBlock1.pos.x + 7 + gUnknown_0821664C[direction].x;
-    y = gSaveBlock1.pos.y + 7 + gUnknown_0821664C[direction].y;
+    x = gSaveBlock1.pos.x + 7 + gDirectionToVectors[direction].x;
+    y = gSaveBlock1.pos.y + 7 + gDirectionToVectors[direction].y;
     if (GetMapBorderIdAt(x, y) == -1)
     {
         return 0;
@@ -696,7 +696,7 @@ void sub_8056918(struct MapConnection *connection, int direction, int x, int y)
         gSaveBlock1.pos.y -= connection->offset;
         break;
     case CONNECTION_WEST:
-        gSaveBlock1.pos.x = mapHeader->mapData->width;
+        gSaveBlock1.pos.x = mapHeader->mapLayout->width;
         gSaveBlock1.pos.y -= connection->offset;
         break;
     case CONNECTION_SOUTH:
@@ -705,7 +705,7 @@ void sub_8056918(struct MapConnection *connection, int direction, int x, int y)
         break;
     case CONNECTION_NORTH:
         gSaveBlock1.pos.x -= connection->offset;
-        gSaveBlock1.pos.y = mapHeader->mapData->height;
+        gSaveBlock1.pos.y = mapHeader->mapLayout->height;
         break;
     }
 }
@@ -768,10 +768,10 @@ bool8 sub_8056ABC(u8 direction, int x, int y, struct MapConnection *connection)
     {
     case CONNECTION_SOUTH:
     case CONNECTION_NORTH:
-        return sub_8056B20(x, gMapHeader.mapData->width, mapHeader->mapData->width, connection->offset);
+        return sub_8056B20(x, gMapHeader.mapLayout->width, mapHeader->mapLayout->width, connection->offset);
     case CONNECTION_WEST:
     case CONNECTION_EAST:
-        return sub_8056B20(y, gMapHeader.mapData->height, mapHeader->mapData->height, connection->offset);
+        return sub_8056B20(y, gMapHeader.mapLayout->height, mapHeader->mapLayout->height, connection->offset);
     }
     return FALSE;
 }
@@ -812,10 +812,10 @@ int sub_8056B60(struct MapConnection *connection, int x, int y)
     {
     case CONNECTION_SOUTH:
     case CONNECTION_NORTH:
-        return sub_8056B4C(x - connection->offset, mapHeader->mapData->width);
+        return sub_8056B4C(x - connection->offset, mapHeader->mapLayout->width);
     case CONNECTION_WEST:
     case CONNECTION_EAST:
-        return sub_8056B4C(y - connection->offset, mapHeader->mapData->height);
+        return sub_8056B4C(y - connection->offset, mapHeader->mapLayout->height);
     }
     return FALSE;
 }
@@ -839,9 +839,9 @@ struct MapConnection *sub_8056BA0(s16 x, s16 y)
             direction = connection->direction;
             if ((direction == CONNECTION_DIVE || direction == CONNECTION_EMERGE)
              || (direction == CONNECTION_NORTH && y > 6)
-             || (direction == CONNECTION_SOUTH && y < gMapHeader.mapData->height + 7)
+             || (direction == CONNECTION_SOUTH && y < gMapHeader.mapLayout->height + 7)
              || (direction == CONNECTION_WEST && x > 6)
-             || (direction == CONNECTION_EAST && x < gMapHeader.mapData->width + 7))
+             || (direction == CONNECTION_EAST && x < gMapHeader.mapLayout->width + 7))
             {
                 continue;
             }
@@ -916,42 +916,42 @@ void sub_8056CBC(struct Tileset *tileset, int offset, int size)
     }
 }
 
-void sub_8056D28(struct MapData *mapData)
+void sub_8056D28(struct MapLayout *mapLayout)
 {
     void *src = (void*)(BG_VRAM);
-    sub_8056C98(mapData->primaryTileset, src);
+    sub_8056C98(mapLayout->primaryTileset, src);
 }
 
-void sub_8056D38(struct MapData *mapData)
+void sub_8056D38(struct MapLayout *mapLayout)
 {
     void *src = (void*)(BG_VRAM + 0x4000);
-    sub_8056C98(mapData->secondaryTileset, src);
+    sub_8056C98(mapLayout->secondaryTileset, src);
 }
 
-void apply_map_tileset1_palette(struct MapData *mapData)
+void apply_map_tileset1_palette(struct MapLayout *mapLayout)
 {
-    sub_8056CBC(mapData->primaryTileset, 0, 0xc0);
+    sub_8056CBC(mapLayout->primaryTileset, 0, 0xc0);
 }
 
-void apply_map_tileset2_palette(struct MapData *mapData)
+void apply_map_tileset2_palette(struct MapLayout *mapLayout)
 {
-    sub_8056CBC(mapData->secondaryTileset, 0x60, 0xc0);
+    sub_8056CBC(mapLayout->secondaryTileset, 0x60, 0xc0);
 }
 
-void copy_map_tileset1_tileset2_to_vram(struct MapData *mapData)
+void copy_map_tileset1_tileset2_to_vram(struct MapLayout *mapLayout)
 {
-    if (mapData)
+    if (mapLayout)
     {
-        sub_8056D28(mapData);
-        sub_8056D38(mapData);
+        sub_8056D28(mapLayout);
+        sub_8056D38(mapLayout);
     }
 }
 
-void apply_map_tileset1_tileset2_palette(struct MapData *mapData)
+void apply_map_tileset1_tileset2_palette(struct MapLayout *mapLayout)
 {
-    if (mapData)
+    if (mapLayout)
     {
-        apply_map_tileset1_palette(mapData);
-        apply_map_tileset2_palette(mapData);
+        apply_map_tileset1_palette(mapLayout);
+        apply_map_tileset2_palette(mapLayout);
     }
 }

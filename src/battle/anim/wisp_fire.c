@@ -9,12 +9,45 @@
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankTarget;
 extern u8 gAnimBankAttacker;
-
 extern u8 gBankSpriteIds[];
-extern s8 gUnknown_083D9794[16];
-extern s8 gUnknown_083D97A4[16];
 
-void sub_80D5E4C(u8 taskId);
+void sub_80D5CC0(struct Sprite *sprite);
+static void sub_80D5E4C(u8 taskId);
+
+const union AnimCmd gSpriteAnim_83D9764[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_FRAME(48, 5),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83D9778[] =
+{
+    gSpriteAnim_83D9764,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_83D977C =
+{
+    .tileTag = 10232,
+    .paletteTag = 10232,
+    .oam = &gOamData_837DF34,
+    .anims = gSpriteAnimTable_83D9778,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80D5CC0,
+};
+
+const s8 gUnknown_083D9794[16] =
+{
+    -1, -1, 0, 1, 1, 0, 0, -1, -1, 1, 1, 0, 0, -1, 0, 1,
+};
+
+const s8 gUnknown_083D97A4[16] =
+{
+    -1, 0, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1, 0, 1,
+};
 
 void sub_80D5CC0(struct Sprite *sprite)
 {
@@ -58,15 +91,15 @@ void sub_80D5DDC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    task->data[12] = !GetBankSide(gAnimBankAttacker) ? 1 : -1;
+    task->data[12] = !GetBattlerSide(gAnimBankAttacker) ? 1 : -1;
     task->data[13] = IsAnimBankSpriteVisible(gAnimBankTarget ^ 2) + 1;
-    task->data[14] = GetAnimBankSpriteId(1);
-    task->data[15] = GetAnimBankSpriteId(3);
+    task->data[14] = GetAnimBattlerSpriteId(1);
+    task->data[15] = GetAnimBattlerSpriteId(3);
 
     task->func = sub_80D5E4C;
 }
 
-void sub_80D5E4C(u8 taskId)
+static void sub_80D5E4C(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

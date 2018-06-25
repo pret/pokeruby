@@ -1,9 +1,9 @@
 #include "global.h"
-#include "constants/decorations.h"
-#include "sprite.h"
-#include "task.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
+#include "sprite.h"
+#include "task.h"
+#include "constants/decorations.h"
 
 #define DECOR_INV(ptr) {.items = ptr, .size = sizeof ptr}
 
@@ -18,160 +18,147 @@ struct DecorationInventory const gDecorationInventories[] = {
     DECOR_INV(gSaveBlock1.decorCushion)
 };
 
-void ClearDecorationInventory(u8 invIdx)
+void ClearDecorationInventory(u8 category)
 {
     u8 i;
-    for (i=0; i<gDecorationInventories[invIdx].size; i++)
+    for (i = 0; i < gDecorationInventories[category].size; i++)
     {
-        gDecorationInventories[invIdx].items[i] = DECOR_NONE;
+        gDecorationInventories[category].items[i] = DECOR_NONE;
     }
 }
 
 void ClearDecorationInventories(void)
 {
     u8 i;
-    for (i=0; i<8; i++)
+    for (i = 0; i < 8; i++)
     {
         ClearDecorationInventory(i);
     }
 }
 
-s8 sub_8133F9C(u8 invIdx)
+s8 FindFreeDecorationInventorySlot(u8 category)
 {
     s8 i;
-    for (i=0; i<(s8)gDecorationInventories[invIdx].size; i++)
+    for (i = 0; i < (s8)gDecorationInventories[category].size; i++)
     {
-        if (gDecorationInventories[invIdx].items[i] == DECOR_NONE)
-        {
+        if (gDecorationInventories[category].items[i] == DECOR_NONE)
             return i;
-        }
     }
+
     return -1;
 }
 
-bool8 sub_8133FE4(u8 decorIdx)
+bool8 InventoryContainsDecoration(u8 decorationId)
 {
-    u8 invIdx;
     u8 i;
-    invIdx = gDecorations[decorIdx].category;
-    for (i=0; i<gDecorationInventories[invIdx].size; i++)
+    u8 category = gDecorations[decorationId].category;
+    for (i = 0; i < gDecorationInventories[category].size; i++)
     {
-        if (gDecorationInventories[invIdx].items[i] == decorIdx)
-        {
+        if (gDecorationInventories[category].items[i] == decorationId)
             return TRUE;
-        }
     }
+
     return FALSE;
 }
 
-bool8 IsThereStorageSpaceForDecoration(u8 decorIdx)
+bool8 GiveDecoration(u8 decorationId)
 {
-    u8 invIdx;
-    s8 invSlot;
-    if (decorIdx == DECOR_NONE)
-    {
+    u8 category;
+    s8 slot;
+    if (decorationId == DECOR_NONE)
         return FALSE;
-    }
-    invIdx = gDecorations[decorIdx].category;
-    invSlot = sub_8133F9C(invIdx);
-    if (invSlot == -1)
-    {
+
+    category = gDecorations[decorationId].category;
+    slot = FindFreeDecorationInventorySlot(category);
+    if (slot == -1)
         return FALSE;
-    }
-    gDecorationInventories[invIdx].items[invSlot] = decorIdx;
+
+    gDecorationInventories[category].items[slot] = decorationId;
     return TRUE;
 }
 
-bool8 sub_8134074(u8 decorIdx)
+bool8 CheckDecorationInventoryHasSpace(u8 decorationId)
 {
-    u8 invIdx;
-    if (decorIdx == DECOR_NONE)
-    {
+    u8 category;
+    if (decorationId == DECOR_NONE)
         return FALSE;
-    }
-    invIdx = gDecorations[decorIdx].category;
-    if (sub_8133F9C(invIdx) == -1)
-    {
+
+    category = gDecorations[decorationId].category;
+    if (FindFreeDecorationInventorySlot(category) == -1)
         return FALSE;
-    }
+
     return TRUE;
 }
 
-s8 sub_81340A8(u8 decorIdx)
+s8 RemoveDecorationFromInventory(u8 decorationId)
 {
-    u8 i;
-    u8 invIdx;
-    i = 0;
-    if (decorIdx == DECOR_NONE)
-    {
+    u8 category;
+    u8 i = 0;
+    if (decorationId == DECOR_NONE)
         return FALSE;
-    }
-    for (i=0; i<gDecorationInventories[gDecorations[decorIdx].category].size; i++)
+
+    for (i = 0; i < gDecorationInventories[gDecorations[decorationId].category].size; i++)
     {
-        invIdx = gDecorations[decorIdx].category;
-        if (gDecorationInventories[invIdx].items[i] == decorIdx)
+        category = gDecorations[decorationId].category;
+        if (gDecorationInventories[category].items[i] == decorationId)
         {
-            gDecorationInventories[invIdx].items[i] = DECOR_NONE;
-            sub_8134104(invIdx);
+            gDecorationInventories[category].items[i] = DECOR_NONE;
+            SortDecorationInventory(category);
             return TRUE;
         }
     }
+
     return FALSE;
 }
 
-void sub_8134104(u8 invIdx)
+void SortDecorationInventory(u8 category)
 {
     u8 i;
     u8 j;
     u8 tmp;
-    for (i=0; i<gDecorationInventories[invIdx].size; i++)
+    for (i = 0; i < gDecorationInventories[category].size; i++)
     {
-        for (j=i+1; j<gDecorationInventories[invIdx].size; j++)
+        for (j = i + 1; j < gDecorationInventories[category].size; j++)
         {
-            if (gDecorationInventories[invIdx].items[j] != 0 && (gDecorationInventories[invIdx].items[i] == DECOR_NONE || gDecorationInventories[invIdx].items[i] > gDecorationInventories[invIdx].items[j]))
+            if (gDecorationInventories[category].items[j] != 0 && (gDecorationInventories[category].items[i] == DECOR_NONE || gDecorationInventories[category].items[i] > gDecorationInventories[category].items[j]))
             {
-                tmp = gDecorationInventories[invIdx].items[i];
-                gDecorationInventories[invIdx].items[i] = gDecorationInventories[invIdx].items[j];
-                gDecorationInventories[invIdx].items[j] = tmp;
+                tmp = gDecorationInventories[category].items[i];
+                gDecorationInventories[category].items[i] = gDecorationInventories[category].items[j];
+                gDecorationInventories[category].items[j] = tmp;
             }
         }
     }
 }
 
-u8 sub_8134194(u8 invIdx)
+u8 GetNumDecorationsInInventoryCategory(u8 category)
 {
     u8 i;
-    u8 count;
-    count = 0;
-    for (i=0; i<gDecorationInventories[invIdx].size; i++)
+    u8 count = 0;
+    for (i = 0; i < gDecorationInventories[category].size; i++)
     {
-        if (gDecorationInventories[invIdx].items[i] != 0)
-        {
+        if (gDecorationInventories[category].items[i] != DECOR_NONE)
             count++;
-        }
     }
+
     return count;
 }
 
-u8 sub_81341D4(void)
+u8 GetNumDecorationsInInventory(void)
 {
     u8 i;
-    u8 count;
-    count = 0;
-    for (i=0; i<8; i++)
-    {
-        count += sub_8134194(i);
-    }
+    u8 count = 0;
+    for (i = 0; i < 8; i++)
+        count += GetNumDecorationsInInventoryCategory(i);
+
     return count;
 }
-
 
 #if DEBUG
-void debug_sub_814A3A8(void)
+void Debug_GiveAllDecorations(void)
 {
     u8 decor;
 
     for (decor = 0; decor < DECOR_COUNT; decor++)
-        IsThereStorageSpaceForDecoration(decor);
+        GiveDecoration(decor);
 }
 #endif
