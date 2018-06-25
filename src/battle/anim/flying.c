@@ -378,8 +378,6 @@ void sub_80DA05C(struct Sprite *sprite)
 
 void sub_80DA09C(u8 taskId) 
 {
-  gTasks[taskId].data[0] = gBattleAnimArgs[1];
-  gTasks[taskId].data[1] = gBattleAnimArgs[0];
   gTasks[taskId].data[2] = IndexOfSpritePaletteTag(0x2719);
   gTasks[taskId].func = sub_80DA0DC;
 }
