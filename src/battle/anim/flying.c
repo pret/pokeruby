@@ -551,7 +551,6 @@ void sub_80DA208(struct Sprite *sprite)
 
 void sub_80DA300(struct Sprite *sprite)
 {
-
     InitAnimSpritePos(sprite, 1);
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[1] = gBattleAnimArgs[3];
