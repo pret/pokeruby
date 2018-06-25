@@ -27,6 +27,7 @@ void sub_80BE160(TVShow *show);
 void sub_80BE160(TVShow *);
 void sub_80BE188(void);
 void sub_80BE23C(u16);
+void sub_80BE284(u8 contestResult);
 void sub_80BE320(void);
 void StartMassOutbreak(void);
 void sub_80BE5FC(void);

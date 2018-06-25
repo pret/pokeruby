@@ -123,12 +123,6 @@ extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gUnknown_08208238[];
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG3_X;
 extern TaskFunc gUnknown_03005CF0;
 extern struct SpriteTemplate gUnknown_02024E8C;
 

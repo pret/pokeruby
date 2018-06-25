@@ -1,5 +1,6 @@
 #include "global.h"
 #include "matsuda_debug_menu.h"
+#include "battle.h"
 #include "contest.h"
 #include "contest_link_80C2020.h"
 #include "contest_link_80C857C.h"
@@ -21,15 +22,6 @@ extern u8 gUnknown_0203856C;
 extern u8 gUnknown_02038694;
 extern u16 gSpecialVar_ContestCategory;
 extern u16 gSpecialVar_ContestRank;
-
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG3_Y;
 
 extern u8 (*gMenuCallback)(void);
 

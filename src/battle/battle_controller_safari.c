@@ -24,8 +24,6 @@ extern u8 gActiveBattler;
 extern const u8 BattleText_MenuOptionsSafari[];
 
 extern void *gBattleBankFunc[];
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
 extern u8 gBattleBufferA[][0x200];
 extern bool8 gDoingBattleAnim;
 extern u8 gBankSpriteIds[];

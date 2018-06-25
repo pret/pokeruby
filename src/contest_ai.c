@@ -1115,7 +1115,7 @@ static void ContestAICmd_check_would_finish_combo(void)
 
     if(sContestantStatus[eContestAI->unk41].prevMove)
         result = AreMovesContestCombo(sContestantStatus[eContestAI->unk41].prevMove, move);
-    
+
     if(result)
         result = 1;
 
@@ -1723,7 +1723,7 @@ static void ContestAICmd_unk_85(void)
     int result = 0;
     int i;
     u16 arg = T1_READ_16(gAIScriptPtr + 1);
-    
+
     for(i = 0; i < 4; i++)
     {
         u16 move = gContestMons[eContestAI->unk41].moves[i];

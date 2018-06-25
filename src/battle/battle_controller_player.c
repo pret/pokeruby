@@ -35,9 +35,6 @@ struct MovePpInfo
 #define SUB_803037C_TILE_DATA_OFFSET 444
 #endif
 
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG0_Y;
-
 extern struct Window gUnknown_03004210;
 
 extern void (*gBattleBankFunc[])(void);
@@ -71,13 +68,6 @@ extern u8 gUnknown_02024E68[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u8 gAnimMoveTurn;
 extern u8 gUnknown_02038470[];
-extern u16 gBattle_BG3_X;
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_BG3_Y;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG0_X;
-extern u16 gBattle_BG1_X;
 extern u8 gUnknown_03004344;
 extern u8 gUnknown_0300434C[];
 
@@ -151,8 +141,6 @@ extern u8 gAbsentBattlerFlags;
 extern u8 gUnknown_03004344;
 extern u8 gBattlersCount;
 extern u16 gBattlerPartyIndexes[];
-extern u16 gBattle_BG0_Y;
-extern u16 gBattle_BG0_X;
 extern struct Window gUnknown_03004210;
 extern const u8 BattleText_SwitchWhich[];
 extern u8 gUnknown_03004348;
