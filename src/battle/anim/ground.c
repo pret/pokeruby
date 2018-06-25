@@ -19,72 +19,72 @@ extern u16 gBattle_BG3_Y;
 extern u16 gAnimMovePower;
 extern u8 gBankSpriteIds[];
 
-static void sub_80E0F1C(struct Sprite *sprite);
-static void sub_80E0F84(struct Sprite *sprite);
-static void sub_80E0FE8(struct Sprite *sprite);
-static void sub_80E1004(struct Sprite *sprite);
-static void sub_80E1078(struct Sprite *sprite);
-static void sub_80E1108(struct Sprite *sprite);
-static void sub_80E1198(struct Sprite *sprite);
-static void sub_80E11D4(struct Sprite *sprite);
+static void AnimBonemerangProjectile(struct Sprite *sprite);
+static void AnimBonemerangProjectileStep(struct Sprite *sprite);
+static void AnimBonemerangProjectileEnd(struct Sprite *sprite);
+static void AnimBoneHitProjectile(struct Sprite *sprite);
+static void AnimDirtScatter(struct Sprite *sprite);
+static void AnimMudSportDirt(struct Sprite *sprite);
+static void AnimMudSportDirtRising(struct Sprite *sprite);
+static void AnimMudSportDirtFalling(struct Sprite *sprite);
 static void sub_80E1284(u8 taskId);
 static void sub_80E1668(u8, s16, s16);
 static void sub_80E143C(u8 taskId);
 static void sub_80E14DC(u8 taskId);
 static void sub_80E1560(u8 taskId);
-static void sub_80E1728(struct Sprite *sprite);
-static void sub_80E17B0(struct Sprite *sprite);
-static void sub_80E17CC(struct Sprite *sprite);
+static void AnimFissureDirtPlumeParticle(struct Sprite *sprite);
+static void AnimFissureDirtPlumeParticleStep(struct Sprite *sprite);
+static void AnimDigDirtMound(struct Sprite *sprite);
 static void sub_80E1934(u8 taskId);
 static void sub_80E1A2C(u8 taskId);
 static void sub_80E1B10(struct Task *task);
 static void sub_80E1C58(u8 taskId);
 
-const union AffineAnimCmd gSpriteAffineAnim_83DB2A0[] =
+const union AffineAnimCmd gBonemerangSpriteAffineAnim[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 15, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd gSpriteAffineAnim_83DB2B0[] =
+const union AffineAnimCmd gBoneHitSpriteAffineAnim[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 20, 1),
     AFFINEANIMCMD_JUMP(0),
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB2C0[] =
+const union AffineAnimCmd *const gBonemerangSpriteAffineAnimTable[] =
 {
-    gSpriteAffineAnim_83DB2A0,
+    gBonemerangSpriteAffineAnim,
 };
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB2C4[] =
+const union AffineAnimCmd *const gBoneHitSpriteAffineAnimTable[] =
 {
-    gSpriteAffineAnim_83DB2B0,
+    gBoneHitSpriteAffineAnim,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB2C8 =
-{
-    .tileTag = 10000,
-    .paletteTag = 10000,
-    .oam = &gOamData_837DF94,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_83DB2C0,
-    .callback = sub_80E0F1C,
-};
-
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB2E0 =
+const struct SpriteTemplate gBonemerangSpriteTemplate =
 {
     .tileTag = 10000,
     .paletteTag = 10000,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = gSpriteAffineAnimTable_83DB2C4,
-    .callback = sub_80E1004,
+    .affineAnims = gBonemerangSpriteAffineAnimTable,
+    .callback = AnimBonemerangProjectile,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB2F8 =
+const struct SpriteTemplate gBoneHitSpriteTemplate =
+{
+    .tileTag = 10000,
+    .paletteTag = 10000,
+    .oam = &gOamData_837DF94,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gBoneHitSpriteAffineAnimTable,
+    .callback = AnimBoneHitProjectile,
+};
+
+const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
 {
     .tileTag = 10074,
     .paletteTag = 10074,
@@ -92,32 +92,32 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB2F8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E1078,
+    .callback = AnimDirtScatter,
 };
 
-const union AnimCmd gSpriteAnim_83DB310[] =
+const union AnimCmd gMudSlapDirtSpriteAnim[] =
 {
     ANIMCMD_FRAME(1, 1),
     ANIMCMD_END,
 };
 
-const union AnimCmd *const gSpriteAnimTable_83DB318[] =
+const union AnimCmd *const gMudSlapDirtSpriteAnimTable[] =
 {
-    gSpriteAnim_83DB310,
+    gMudSlapDirtSpriteAnim,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB31C =
+const struct SpriteTemplate gMudSlapDirtSpriteTemplate =
 {
     .tileTag = 10074,
     .paletteTag = 10074,
     .oam = &gOamData_837DF2C,
-    .anims = gSpriteAnimTable_83DB318,
+    .anims = gMudSlapDirtSpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E1078,
+    .callback = AnimDirtScatter,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB334 =
+const struct SpriteTemplate gMudSportDirtSpriteTemplate =
 {
     .tileTag = 10074,
     .paletteTag = 10074,
@@ -125,10 +125,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB334 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E1108,
+    .callback = AnimMudSportDirt,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB34C =
+const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 {
     .tileTag = 10074,
     .paletteTag = 10074,
@@ -136,10 +136,10 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB34C =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E1728,
+    .callback = AnimFissureDirtPlumeParticle,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB364 =
+const struct SpriteTemplate gDigDirtMoundSpriteTemplate =
 {
     .tileTag = 10281,
     .paletteTag = 10281,
@@ -147,10 +147,12 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB364 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80E17CC,
+    .callback = AnimDigDirtMound,
 };
 
-static void sub_80E0F1C(struct Sprite *sprite)
+// Moves a bone projectile towards the target mon, which moves like
+// a boomerang. After hitting the target mon, it comes back to the user.
+static void AnimBonemerangProjectile(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
@@ -159,10 +161,10 @@ static void sub_80E0F1C(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->data[5] = -40;
     InitAnimSpriteTranslationOverDuration(sprite);
-    sprite->callback = sub_80E0F84;
+    sprite->callback = AnimBonemerangProjectileStep;
 }
 
-static void sub_80E0F84(struct Sprite *sprite)
+static void AnimBonemerangProjectileStep(struct Sprite *sprite)
 {
     if (TranslateAnimSpriteLinearAndSine(sprite))
     {
@@ -175,17 +177,24 @@ static void sub_80E0F84(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
         sprite->data[5] = 40;
         InitAnimSpriteTranslationOverDuration(sprite);
-        sprite->callback = sub_80E0FE8;
+        sprite->callback = AnimBonemerangProjectileEnd;
     }
 }
 
-static void sub_80E0FE8(struct Sprite *sprite)
+static void AnimBonemerangProjectileEnd(struct Sprite *sprite)
 {
     if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80E1004(struct Sprite *sprite)
+// Moves a bone projectile towards the target mon, starting right next to
+// the target mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: target x pixel offset
+// arg 3: target y pixel offset
+// arg 4: duration
+static void AnimBoneHitProjectile(struct Sprite *sprite)
 {
     sub_8078764(sprite, 1);
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
@@ -198,7 +207,13 @@ static void sub_80E1004(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-static void sub_80E1078(struct Sprite *sprite)
+// Moves a small dirt projectile towards the target mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration
+// arg 3: target x pixel offset
+// arg 4: target y pixel offset
+static void AnimDirtScatter(struct Sprite *sprite)
 {
     u8 targetXPos, targetYPos;
     s16 xOffset, yOffset;
@@ -222,7 +237,12 @@ static void sub_80E1078(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 
-static void sub_80E1108(struct Sprite *sprite)
+// Moves a particle of dirt in the Mud Sport animation.
+// The dirt can either be rising upward, or falling down.
+// arg 0: 0 = dirt is rising into the air, 1 = dirt is falling down
+// arg 1: initial x pixel offset
+// arg 2: initial y pixel offset
+static void AnimMudSportDirt(struct Sprite *sprite)
 {
     sprite->oam.tileNum++;
     if (gBattleAnimArgs[0] == 0)
@@ -230,18 +250,18 @@ static void sub_80E1108(struct Sprite *sprite)
         sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2) + gBattleAnimArgs[1];
         sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
         sprite->data[0] = gBattleAnimArgs[1] > 0 ? 1 : -1;
-        sprite->callback = sub_80E1198;
+        sprite->callback = AnimMudSportDirtRising;
     }
     else
     {
         sprite->pos1.x = gBattleAnimArgs[1];
         sprite->pos1.y = gBattleAnimArgs[2];
         sprite->pos2.y = -gBattleAnimArgs[2];
-        sprite->callback = sub_80E11D4;
+        sprite->callback = AnimMudSportDirtFalling;
     }
 }
 
-static void sub_80E1198(struct Sprite *sprite)
+static void AnimMudSportDirtRising(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 1)
     {
@@ -254,7 +274,7 @@ static void sub_80E1198(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80E11D4(struct Sprite *sprite)
+static void AnimMudSportDirtFalling(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -487,7 +507,14 @@ static void sub_80E1668(u8 useBG1, s16 y, s16 endY)
     ScanlineEffect_SetParams(scanlineParams);
 }
 
-static void sub_80E1728(struct Sprite *sprite)
+// Moves a particle of dirt in a plume of dirt. Used in Fissure and Dig.
+// arg 0: which mon (0 = attacker, 1 = target)
+// arg 1: which side of mon (0 = left, 1 = right)
+// arg 2: target x offset
+// arg 3: target y offset
+// arg 4: wave amplitude
+// arg 5: duration
+static void AnimFissureDirtPlumeParticle(struct Sprite *sprite)
 {
     s8 battler;
     s16 xOffset;
@@ -511,16 +538,22 @@ static void sub_80E1728(struct Sprite *sprite)
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
     InitAnimSpriteTranslationOverDuration(sprite);
-    sprite->callback = sub_80E17B0;
+    sprite->callback = AnimFissureDirtPlumeParticleStep;
 }
 
-static void sub_80E17B0(struct Sprite *sprite)
+static void AnimFissureDirtPlumeParticleStep(struct Sprite *sprite)
 {
     if (TranslateAnimSpriteLinearAndSine(sprite))
         DestroyAnimSprite(sprite);
 }
 
-static void sub_80E17CC(struct Sprite *sprite)
+// Displays the dirt mound seen in the move Dig for set duration.
+// The dirt mound image is too large for a single sprite, so two
+// sprites are lined up next to each other.
+// arg 0: which mon (0 = attacker, 1 = target)
+// arg 1: oam tile num (0 = left half of image, 1 = right half of image)
+// arg 2: duration
+static void AnimDigDirtMound(struct Sprite *sprite)
 {
     s8 battler;
 
