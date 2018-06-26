@@ -2624,17 +2624,17 @@ Move_FISSURE: @ 81CAF7E
 	waitbgfadein
 	end
 _81CAFFF:
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 0, 12, -48, -16, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 0, 16, -16, -10, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 1, 14, -52, -18, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 1, 12, -32, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 0, 12, -48, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 0, 16, -16, -10, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 1, 14, -52, -18, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 1, 12, -32, -16, 24
 	playsewithpan SE_W091, 63
 	return
 _81CB050:
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 0, 12, -24, -16, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 0, 16, -38, -10, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 1, 14, -20, -18, 24
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 130, 1, 1, 12, -36, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 0, 12, -24, -16, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 0, 16, -38, -10, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 1, 14, -20, -18, 24
+	createsprite gDirtPlumeSpriteTemplate, 130, 1, 1, 12, -36, -16, 24
 	playsewithpan SE_W091, 63
 	return
 
@@ -2645,8 +2645,8 @@ _81CB0AA:
 _81CB0AB:
 	loadspritegfx 10074
 	loadspritegfx 10281
-	createsprite gBattleAnimSpriteTemplate_83DB364, 1, 0, 0, 180
-	createsprite gBattleAnimSpriteTemplate_83DB364, 1, 0, 1, 180
+	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 0, 180
+	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 1, 180
 	monbg_22 0
 	delay 1
 	createvisualtask sub_80E1244, 2, 0
@@ -2667,8 +2667,8 @@ _81CB106:
 	createvisualtask sub_80E149C, 2, 0
 	waitforvisualfinish
 	monbg ANIM_BANK_ATTACKER
-	createsprite gBattleAnimSpriteTemplate_83DB364, 1, 0, 0, 48
-	createsprite gBattleAnimSpriteTemplate_83DB364, 1, 0, 1, 48
+	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 0, 48
+	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 1, 48
 	delay 1
 	createvisualtask sub_80E149C, 2, 1
 	delay 16
@@ -2678,10 +2678,10 @@ _81CB106:
 	clearmonbg ANIM_BANK_ATTACKER
 	goto _81CB0AA
 _81CB16A:
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 2, 0, 0, 12, 4, -16, 18
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 2, 0, 0, 16, 4, -10, 18
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 2, 0, 1, 14, 4, -18, 18
-	createsprite gBattleAnimSpriteTemplate_83DB34C, 2, 0, 1, 12, 4, -16, 18
+	createsprite gDirtPlumeSpriteTemplate, 2, 0, 0, 12, 4, -16, 18
+	createsprite gDirtPlumeSpriteTemplate, 2, 0, 0, 16, 4, -10, 18
+	createsprite gDirtPlumeSpriteTemplate, 2, 0, 1, 14, 4, -18, 18
+	createsprite gDirtPlumeSpriteTemplate, 2, 0, 1, 12, 4, -16, 18
 	playsewithpan SE_W091, 192
 	delay 32
 	return
@@ -4004,46 +4004,46 @@ Move_MUD_SPORT: @ 81CCC3C
 	loadspritegfx 10074
 	createvisualtask sub_80D074C, 2, 0, 6
 	delay 24
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, -4, -16
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, 4, -12
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, -4, -16
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, 4, -12
 	playsewithpan SE_W091, 192
 	delay 32
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, -3, -12
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, 5, -14
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, -3, -12
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, 5, -14
 	playsewithpan SE_W091, 192
 	delay 32
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, -5, -18
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 0, 3, -14
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, -5, -18
+	createsprite gMudSportDirtSpriteTemplate, 130, 0, 3, -14
 	playsewithpan SE_W091, 192
 	delay 16
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 220, 60
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 220, 60
 	waitplaysewithpan SE_W145B, 0, 15
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 60, 100
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 60, 100
 	waitplaysewithpan SE_W145B, 0, 25
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 140, 55
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 140, 55
 	waitplaysewithpan SE_W145B, 0, 14
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 180, 50
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 180, 50
 	waitplaysewithpan SE_W145B, 0, 10
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 20, 90
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 20, 90
 	waitplaysewithpan SE_W145B, 0, 22
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 90, 90
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 90, 90
 	waitplaysewithpan SE_W145B, 0, 22
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 160, 60
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 160, 60
 	waitplaysewithpan SE_W145B, 0, 15
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 30, 90
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 30, 90
 	waitplaysewithpan SE_W145B, 0, 22
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 120, 60
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 120, 60
 	waitplaysewithpan SE_W145B, 0, 15
 	delay 2
-	createsprite gBattleAnimSpriteTemplate_83DB334, 130, 1, 200, 40
+	createsprite gMudSportDirtSpriteTemplate, 130, 1, 200, 40
 	waitplaysewithpan SE_W145B, 0, 10
 	end
 
@@ -5194,22 +5194,22 @@ Move_SAND_ATTACK: @ 81CE774
 	createsprite gSlideMonToOffsetSpriteTemplate, 2, 0, -10, 0, 0, 3
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, 2, 0, 0, 2
-	call _81CE7C4
-	call _81CE7C4
-	call _81CE7C4
-	call _81CE7C4
-	call _81CE7C4
-	call _81CE7C4
+	call Move_SAND_ATTACK_CreateDirtSpray
+	call Move_SAND_ATTACK_CreateDirtSpray
+	call Move_SAND_ATTACK_CreateDirtSpray
+	call Move_SAND_ATTACK_CreateDirtSpray
+	call Move_SAND_ATTACK_CreateDirtSpray
+	call Move_SAND_ATTACK_CreateDirtSpray
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATK_PARTNER
 	blendoff
 	end
-_81CE7C4:
-	createsprite gBattleAnimSpriteTemplate_83DB2F8, 130, 15, 15, 20, 0, 0
-	createsprite gBattleAnimSpriteTemplate_83DB2F8, 130, 15, 15, 20, 10, 10
-	createsprite gBattleAnimSpriteTemplate_83DB2F8, 130, 15, 15, 20, -10, -10
-	createsprite gBattleAnimSpriteTemplate_83DB2F8, 130, 15, 15, 20, 20, 5
-	createsprite gBattleAnimSpriteTemplate_83DB2F8, 130, 15, 15, 20, -20, -5
+Move_SAND_ATTACK_CreateDirtSpray:
+	createsprite gSandAttackDirtSpriteTemplate, 130, 15, 15, 20, 0, 0
+	createsprite gSandAttackDirtSpriteTemplate, 130, 15, 15, 20, 10, 10
+	createsprite gSandAttackDirtSpriteTemplate, 130, 15, 15, 20, -10, -10
+	createsprite gSandAttackDirtSpriteTemplate, 130, 15, 15, 20, 20, 5
+	createsprite gSandAttackDirtSpriteTemplate, 130, 15, 15, 20, -20, -5
 	delay 2
 	return
 
@@ -5219,20 +5219,20 @@ Move_MUD_SLAP: @ 81CE81C
 	createsprite gSlideMonToOffsetSpriteTemplate, 2, 0, -10, 0, 0, 3
 	waitforvisualfinish
 	createsprite gSlideMonToOriginalPosSpriteTemplate, 2, 0, 0, 2
-	call _81CE862
-	call _81CE862
-	call _81CE862
-	call _81CE862
-	call _81CE862
-	call _81CE862
+	call Move_MUD_SLAP_CreateMudSpray
+	call Move_MUD_SLAP_CreateMudSpray
+	call Move_MUD_SLAP_CreateMudSpray
+	call Move_MUD_SLAP_CreateMudSpray
+	call Move_MUD_SLAP_CreateMudSpray
+	call Move_MUD_SLAP_CreateMudSpray
 	waitforvisualfinish
 	end
-_81CE862:
-	createsprite gBattleAnimSpriteTemplate_83DB31C, 130, 15, 15, 20, 0, 0
-	createsprite gBattleAnimSpriteTemplate_83DB31C, 130, 15, 15, 20, 10, 5
-	createsprite gBattleAnimSpriteTemplate_83DB31C, 130, 15, 15, 20, -10, -5
-	createsprite gBattleAnimSpriteTemplate_83DB31C, 130, 15, 15, 20, 20, 10
-	createsprite gBattleAnimSpriteTemplate_83DB31C, 130, 15, 15, 20, -20, -10
+Move_MUD_SLAP_CreateMudSpray:
+	createsprite gMudSlapDirtSpriteTemplate, 130, 15, 15, 20, 0, 0
+	createsprite gMudSlapDirtSpriteTemplate, 130, 15, 15, 20, 10, 5
+	createsprite gMudSlapDirtSpriteTemplate, 130, 15, 15, 20, -10, -5
+	createsprite gMudSlapDirtSpriteTemplate, 130, 15, 15, 20, 20, 10
+	createsprite gMudSlapDirtSpriteTemplate, 130, 15, 15, 20, -20, -10
 	delay 2
 	return
 
@@ -6033,7 +6033,7 @@ Move_BONEMERANG: @ 81CFC54
 	monbgprio_28 1
 	setalpha 12, 8
 	playsewithpan SE_W155, 192
-	createsprite gBattleAnimSpriteTemplate_83DB2C8, 2
+	createsprite gBonemerangSpriteTemplate, 2
 	delay 20
 	playsewithpan SE_W030, 63
 	createsprite gBasicHitSplatSpriteTemplate, 2, 0, 0, 1, 1
@@ -6053,7 +6053,7 @@ Move_BONE_CLUB: @ 81CFCA8
 	monbgprio_28 1
 	setalpha 12, 8
 	playsewithpan SE_W155, 63
-	createsprite gBattleAnimSpriteTemplate_83DB2E0, 2, -42, -25, 0, 0, 15
+	createsprite gBoneHitSpriteTemplate, 2, -42, -25, 0, 0, 15
 	delay 12
 	createsprite gBasicHitSplatSpriteTemplate, 2, 0, 0, 1, 1
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 5, 5, 1
@@ -6070,7 +6070,7 @@ Move_BONE_RUSH: @ 81CFD0A
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
 	playsewithpan SE_W155, 63
-	createsprite gBattleAnimSpriteTemplate_83DB2E0, 2, -42, -25, 0, 0, 15
+	createsprite gBoneHitSpriteTemplate, 2, -42, -25, 0, 0, 15
 	delay 12
 	createsprite gBasicHitSplatSpriteTemplate, 2, 0, 0, 1, 2
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 3, 5, 1

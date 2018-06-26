@@ -164,7 +164,6 @@ extern u16 gChosenMove; //last used move in battle
 extern u8 gBankInMenu;
 extern u8 gActionForBanks[4];
 extern u16 gUnknown_02024C2C[4]; //last used moves 2, used by sketch
-extern u16 gBattle_BG3_X;
 extern u16 gUnknown_02024C4C[4]; //last used moves by banks, another one
 extern u8 gCurrentTurnActionNumber;
 extern u16 gTrappingMoves[];
@@ -1991,7 +1990,7 @@ static void atk0B_healthbarupdate(void)
                 healthValue = currDmg;
             else
                 healthValue = maxPossibleDmgValue;
-            
+
             EmitHealthBarUpdate(0, healthValue);
             */
 
@@ -5544,6 +5543,7 @@ static void atk23_getexp(void)
                 gBattleResources_statsBeforeLvlUp->spDef = GetMonData(&gPlayerParty[gBattleStruct->expGetterID], MON_DATA_SPDEF);
                 
                 gActiveBattler = gBattleStruct->expGetterBank;
+
                 EmitExpBarUpdate(0, gBattleStruct->expGetterID, gBattleMoveDamage);
                 MarkBufferBankForExecution(gActiveBattler);
             }

@@ -438,6 +438,7 @@ extern u16 gUnknown_02038688[4];
 extern u8 gContestFinalStandings[4];
 extern u8 gUnknown_02038696[4];
 extern u8 gUnknown_0203869B;
+extern u16 gSpecialVar_ContestRank;
 extern u16 gSpecialVar_ContestCategory;
 
 void SetContestantEffectStringID(u8 a, u8 b);

@@ -3345,6 +3345,9 @@ extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_17;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_20;
 extern struct BattleAnimBackground gBattleAnimBackgroundTilemap_21;
 
+extern const u8 gContestConfetti_Gfx[];
+extern const u8 gContestConfetti_Pal[];
+
 extern const struct CompressedSpriteSheet gBattleTerrainTiles_TallGrass[];
 extern const u8 gBattleTerrainTilemap_TallGrass[];
 extern const struct CompressedSpriteSheet gBattleTerrainAnimTiles_TallGrass[];

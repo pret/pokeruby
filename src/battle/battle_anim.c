@@ -1311,14 +1311,6 @@ EWRAM_DATA u8 gAnimBankAttacker = 0;
 EWRAM_DATA u8 gAnimBankTarget = 0;
 EWRAM_DATA u16 gAnimSpeciesByBanks[4] = {0};
 EWRAM_DATA u8 gUnknown_0202F7D2 = 0; // some global pan variable
-extern u16 gBattle_BG1_Y;
-extern u16 gBattle_WIN1H;
-extern u16 gBattle_WIN0V;
-extern u16 gBattle_WIN1V;
-extern u16 gBattle_BG2_Y;
-extern u16 gBattle_BG2_X;
-extern u16 gBattle_BG1_X;
-extern u16 gBattle_WIN0H;
 
 u16 gSoundAnimFramesToWait;
 s16 gBattleAnimArgs[ANIM_ARGS_COUNT];

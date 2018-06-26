@@ -8,6 +8,8 @@
 #include "strings2.h"
 #include "text.h"
 
+const u16 Unknown_083D17EC[] = INCBIN_U16("graphics/unknown/unknown_3D17EC.gbapal");
+
 struct UnknownStruct
 {
     u16 unk0;
