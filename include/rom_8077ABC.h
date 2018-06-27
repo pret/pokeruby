@@ -115,5 +115,9 @@ u8 sub_807A4A0(int bank, u8 sprite, int species);
 void sub_80794A8(struct Sprite *sprite);
 void sub_807A9BC(struct Sprite *sprite);
 void sub_8078954(struct Struct_sub_8078914*, u8);
+u8 sub_8079F44(u16 species, u8 isBackpic, u8 a3, s16 a4, s16 a5, u8 a6, u32 a7, u32 a8);
+void sub_8079098(struct Sprite *sprite);
+void sub_807A0F4(struct Sprite *sprite);
+void sub_8078634(u8 task);
 
 #endif // GUARD_ROM_8077ABC_H

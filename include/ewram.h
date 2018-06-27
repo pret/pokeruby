@@ -233,6 +233,7 @@ extern u8 gSharedMem[];
 #define shared192D0                     (*(struct UnknownContestStruct7 *)(gSharedMem + 0x192D0))
 #define eContestAI                      ((struct ContestAIInfo *)(gSharedMem + 0x192E4))
 #define EWRAM_19348                     ((u16 *)(gSharedMem + 0x19348))
+#define eWRAM_19348Struct               ((struct EWRAM_19348_Struct *)(gSharedMem + 0x19348))
 #define ewram19800                      (&gSharedMem[0x19800])
 #define ePokedexView4                   (struct PokedexView *)(gSharedMem + 0x19800)
 #define ewram1A000                      (&gSharedMem[0x1A000])
