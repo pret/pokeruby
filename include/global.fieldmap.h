@@ -90,10 +90,10 @@ struct EventObjectTemplate
 struct WarpEvent
 {
     s16 x, y;
-    s8 warpId;
-    u8 mapGroup;
+    u8 elevation;
+    u8 warpId;
     u8 mapNum;
-    u8 unk7;
+    u8 mapGroup;
 };
 
 struct CoordEvent
