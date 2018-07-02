@@ -14,15 +14,6 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-struct EWRAM_19348_Struct
-{
-    /*0x00*/ u8 filler0[0x2];
-    /*0x02*/ u16 species;
-    /*0x04*/ u8 filler4[0x8];
-    /*0x0C*/ u32 otId;
-    /*0x10*/ u32 personality;
-};
-
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
