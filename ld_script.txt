@@ -295,7 +295,6 @@ SECTIONS {
         src/battle/anim/dark.o(.text);
         src/battle/anim/ground.o(.text);
         src/battle/anim/normal.o(.text);
-        asm/normal.o(.text);
         src/battle/anim/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat_1.o(.text);
