@@ -32,8 +32,8 @@
 #include "scanline_effect.h"
 #include "daycare.h"
 
-static void sub_809FC0C(void);
-static void sub_809FEB8(void);
+static void SummaryScreen_PrintPokemonInfoLabels(void);
+static void SummaryScreen_PrintPokemonSkillsLabels(void);
 static void sub_809F63C(struct Pokemon *);
 static void sub_809F650(struct Pokemon *);
 static void sub_809F664(struct Pokemon *);
@@ -43,7 +43,7 @@ static void sub_80A015C(struct Pokemon *);
 static void sub_809DE44(void);
 static void sub_809EB40(u8);
 static void sub_809EBC4(void);
-static void sub_809E044(void);
+static void SummaryScreen_LoadPalettes(void);
 static void sub_80A1D84(struct Pokemon *);
 static void sub_80A18C4(void);
 static bool8 LoadPokemonSummaryScreenGraphics(void);
@@ -53,29 +53,29 @@ static void sub_80A1DCC(struct Pokemon *);
 static void sub_809FE80(void);
 static void sub_80A00A4(void);
 static void sub_80A0390(void);
-extern u8 sub_80A1808(struct Pokemon *);
-static void sub_80A1F98(s32, u8, u8, u8, u8, u16, s32);
+extern u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *);
+static void SummaryScreen_PrintColoredIntPixelCoords(s32, u8, u8, u8, u8, u16, s32);
 static void sub_80A0958(struct Pokemon *);
 static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *, u8, u8);
 static void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *, u8, u8);
-static void sub_80A1EF8(const u8 *, u8, u8, u16, s32);
-static void sub_80A1F48(const u8 *, u8, u8, u8, u16);
+static void SummaryScreen_PrintColoredTextPixelCoords(const u8 *, u8, u8, u16, s32);
+static void SummaryScreen_PrintColoredTextCentered(const u8 *, u8, u8, u8, u16);
 static void PrintHeldItemName(u16, u8, u8);
 static void PrintNumRibbons(struct Pokemon *);
 static void DrawExperienceProgressBar(struct Pokemon *, u8, u8);
-static void sub_809E13C(u8 taskId);
+static void SummaryScreen_DestroyTask(u8 taskId);
 static void sub_80A1950(void);
 static void sub_809DE64(void);
 static void SummaryScreenHandleAButton(u8);
 static void SummaryScreenHandleUpDownInput(u8, s8);
-static bool8 sub_809F7D0(u8);
+static bool8 SummaryScreen_CanForgetSelectedMove(u8);
 static void sub_809F9D0(u8, u8);
-static void sub_809EAC8(u8);
+static void SummaryScreen_MoveSelect_Cancel(u8);
 static void sub_809E534(u8);
 static void sub_809E83C(u8, s8);
 static void sub_80A1B40(u8);
 static void sub_80A2078(int);
-static void sub_809E3FC(u8);
+static void SummaryScreen_MoveSelect_HandleInput(u8);
 static void SummaryScreenHandleKeyInput(u8);
 static void sub_80A1B1C(u8);
 static void sub_80A16CC(u8);
@@ -91,7 +91,7 @@ extern s8 sub_809F284(s8);
 extern s8 sub_809F3CC(s8);
 static bool8 sub_809F5F8(void);
 static void sub_80A1DE8(struct Pokemon *);
-static u8 sub_809F6B4(struct Pokemon *, u8 *);
+static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *, u8 *);
 static void DrawPokerusSurvivorDot(struct Pokemon *);
 static void sub_80A12D0(s8);
 static void sub_809FAC8(struct Pokemon *);
@@ -99,24 +99,25 @@ static void SummaryScreenHandleLeftRightInput(u8, s8);
 static void sub_809E8F0();
 static void sub_80A1654(s8, u8);
 static void sub_80A1488(s8, u8);
-static void sub_809FC34(struct Pokemon *);
-static void sub_809FF64(struct Pokemon *);
+static void SummaryScreen_PrintPokemonInfo(struct Pokemon *);
+static void SummaryScreen_PrintPokemonSkills(struct Pokemon *);
 static void sub_80A1918(u8, u8);
-static void sub_80A198C(u8, u8, u8, u8);
+static void SummaryScreen_DrawTypeIcon(u8, u8, u8, u8);
 static u16 GetMonMove(struct Pokemon *, u8);
 static void sub_80A04CC(u16);
 static void sub_80A057C(u16);
 static void sub_80A0498(u16);
 static void sub_80A046C(u16);
 static void sub_80A20A8(u8);
-static void sub_809F678(struct Pokemon *);
+static void SummaryScreen_GetPokemon(struct Pokemon *);
 static void sub_80A1BC0(struct Sprite *sprite);
-static void sub_80A1888(struct Sprite *);
+static void SummaryScreen_SpritePlayCry(struct Sprite *);
 static void sub_80A0428(struct Pokemon *, u8 *);
 static void sub_80A18E4(u8);
-static u8 *sub_80A1E58(u8 *, u8);
+static u8 *SummaryScreen_SetTextColor(u8 *, u8);
+static u8 *SummaryScreen_CopyColoredString(u8 *, const u8 *, u8);
 static void sub_80A0A2C(struct Pokemon *, u8, u8);
-static void sub_80A1FF8(const u8 *, u8, u8, u8);
+static void SummaryScreen_PrintColoredText(const u8 *, u8, u8, u8);
 
 extern u8 ball_number_to_ball_processing_index(u16);
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
@@ -531,8 +532,8 @@ static const u16 sUnknown_083C157C[] = { RGB(26, 26, 23) };
 static const u16 sUnknown_083C157E[] = { RGB(30, 30, 27) };
 
 static void (*const sUnknown_083C1580[])(void) = {
-    sub_809FC0C,
-    sub_809FEB8,
+    SummaryScreen_PrintPokemonInfoLabels,
+    SummaryScreen_PrintPokemonSkillsLabels,
 };
 
 static void (*const sUnknown_083C1588[])(struct Pokemon *) = {
@@ -554,16 +555,23 @@ static const u8 sDoubleBattlePartyOrder[] = { 0, 2, 3, 1, 4, 5 };
 static const u8 sUnknown_083C15AE[] = _("{STR_VAR_1}{CLEAR_TO 64}");
 static const u8 sUnknown_083C15B4[] = _("{STR_VAR_1}{CLEAR_TO 72}");
 
-asm(".align 2"); // TODO: this array is probably not correctly-typed
-static const u8 sUnknown_083C15BC[] = {
-     9,  1, 0,  2,
-    10,  3, 0,  4,
-     8,  5, 0,  6,
-    11,  7, 0,  8,
-    14,  9, 0, 10,
-    12, 11, 0, 12,
-    13, 13, 0, 14,
-    -1, 15, 0, 10,
+struct TextColors {
+    u8 id;
+    u8 color;
+    u8 background;
+    u8 shadow;
+};
+
+// The TEXT_COLOR constants don't apply. Refer to the palette for this screen.
+static const struct TextColors sSummaryScreenTextColors[] = {
+    {  9,  1, 0,  2 }, // blue
+    { 10,  3, 0,  4 }, // pink
+    {  8,  5, 0,  6 }, // yellow
+    { 11,  7, 0,  8 }, // blue2
+    { 14,  9, 0, 10 }, // red
+    { 12, 11, 0, 12 }, // pink2
+    { 13, 13, 0, 14 }, // white
+    { -1, 15, 0, 10 }, // black
 };
 
 void sub_809D844(void)
@@ -677,7 +685,7 @@ void sub_809DA1C(void)
         break;
     case PSS_MODE_MOVES_ONLY:
     case PSS_MODE_PC_MOVES_ONLY:
-        pssData.inputHandlingTaskId = CreateTask(sub_809E3FC, 0);
+        pssData.inputHandlingTaskId = CreateTask(SummaryScreen_MoveSelect_HandleInput, 0);
         break;
     }
 }
@@ -741,7 +749,7 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 12:
-        sub_809F678(&pssData.loadedMon);
+        SummaryScreen_GetPokemon(&pssData.loadedMon);
         if (!GetMonStatusAndPokerus(&pssData.loadedMon))
             sub_80A12D0(0);
         else
@@ -760,14 +768,14 @@ bool8 sub_809DA84(void)
         gMain.state++;
         break;
     case 15:
-        if ((pssData.monSpriteId = sub_809F6B4(&pssData.loadedMon, &pssData.loadGfxState)) != 0xFF)
+        if ((pssData.monSpriteId = SummaryScreen_LoadPokemonSprite(&pssData.loadedMon, &pssData.loadGfxState)) != 0xFF)
         {
             pssData.loadGfxState = 0;
             gMain.state++;
         }
         break;
     case 16:
-        sub_809E044();
+        SummaryScreen_LoadPalettes();
         DrawSummaryScreenNavigationDots();
         gMain.state++;
         break;
@@ -908,7 +916,7 @@ static bool8 LoadPokemonSummaryScreenGraphics(void)
     return FALSE;
 }
 
-static void sub_809E044(void)
+static void SummaryScreen_LoadPalettes(void)
 {
     LoadPalette(gUnknownPalette_81E6692 + 14, 129, 2);
     LoadPalette(gUnknownPalette_81E6692 + 15, 136, 2);
@@ -931,10 +939,10 @@ static void SummaryScreenExit(u8 taskId)
 {
     PlaySE(SE_SELECT);
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
-    gTasks[taskId].func = sub_809E13C;
+    gTasks[taskId].func = SummaryScreen_DestroyTask;
 }
 
-static void sub_809E13C(u8 taskId)
+static void SummaryScreen_DestroyTask(u8 taskId)
 {
     if (sub_8055870() != TRUE && !gPaletteFade.active)
     {
@@ -1015,7 +1023,7 @@ static void sub_809E260(u8 taskId)
     }
     else if (gMain.newKeys & A_BUTTON)
     {
-        if (sub_809F7D0(taskId) == TRUE || pssData.selectedMoveIndex == 4)
+        if (SummaryScreen_CanForgetSelectedMove(taskId) == TRUE || pssData.selectedMoveIndex == 4)
         {
             pssData.switchMoveIndex = pssData.selectedMoveIndex;
             gSpecialVar_0x8005 = pssData.switchMoveIndex;
@@ -1030,12 +1038,12 @@ static void sub_809E260(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         pssData.switchMoveIndex = 4;
-        gSpecialVar_0x8005 = 4;
+        gSpecialVar_0x8005 = pssData.switchMoveIndex;
         SummaryScreenExit(taskId);
     }
 }
 
-static void sub_809E3FC(u8 taskId)
+static void SummaryScreen_MoveSelect_HandleInput(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
@@ -1072,13 +1080,13 @@ static void sub_809E3FC(u8 taskId)
         else
         {
             PlaySE(SE_SELECT);
-            sub_809EAC8(taskId);
+            SummaryScreen_MoveSelect_Cancel(taskId);
         }
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        sub_809EAC8(taskId);
+        SummaryScreen_MoveSelect_Cancel(taskId);
     }
 
 }
@@ -1118,7 +1126,7 @@ static void sub_809E534(u8 taskId)
     }
 }
 
-static void sub_809E5C4(void)
+static void SummaryScreen_SwapMoves_Party(void)
 {
     struct Pokemon *party = pssData.monList.partyMons;
     struct Pokemon *pkmn = &party[pssData.monIndex];
@@ -1131,7 +1139,7 @@ static void sub_809E5C4(void)
     u8 move2pp = GetMonData(pkmn, MON_DATA_PP1 + moveIndex2);
     u8 ppBonuses = GetMonData(pkmn, MON_DATA_PP_BONUSES);
 
-    // Calculate PP bonuses
+    // Swap PP bonuses
     u8 r9 = gUnknown_08208238[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
     u8 r3 = gUnknown_08208238[moveIndex2];
@@ -1148,7 +1156,7 @@ static void sub_809E5C4(void)
     SetMonData(pkmn, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-static void sub_809E6D8(void)
+static void SummaryScreen_SwapMoves_Box(void)
 {
     struct BoxPokemon *boxMons = pssData.monList.boxMons;
     struct BoxPokemon *pkmn = &boxMons[pssData.monIndex];
@@ -1161,7 +1169,7 @@ static void sub_809E6D8(void)
     u8 move2pp = GetBoxMonData(pkmn, MON_DATA_PP1 + moveIndex2);
     u8 ppBonuses = GetBoxMonData(pkmn, MON_DATA_PP_BONUSES);
 
-    // Calculate PP bonuses
+    // Swap PP bonuses
     u8 r9 = gUnknown_08208238[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
     u8 r3 = gUnknown_08208238[moveIndex2];
@@ -1184,7 +1192,7 @@ void sub_809E7F0(u8 taskId)
     {
         pssData.loadGfxState = 0;
         sub_80A0428(&pssData.loadedMon, &pssData.selectedMoveIndex);
-        gTasks[taskId].func = sub_809E3FC;
+        gTasks[taskId].func = SummaryScreen_MoveSelect_HandleInput;
         sub_80A2078(taskId);
     }
 }
@@ -1201,12 +1209,12 @@ static void sub_809E83C(u8 taskId, s8 b)
         if (pssData.selectedMoveIndex != pssData.switchMoveIndex)
         {
             if (pssData.usingPC == FALSE)
-                sub_809E5C4();
+                SummaryScreen_SwapMoves_Party();
             else
-                sub_809E6D8();
+                SummaryScreen_SwapMoves_Box();
 
             pssData.selectedMoveIndex = pssData.switchMoveIndex;
-            sub_809F678(&pssData.loadedMon);
+            SummaryScreen_GetPokemon(&pssData.loadedMon);
             pssData.loadGfxState = 1;
 
             gTasks[taskId].func = sub_809E7F0;
@@ -1218,7 +1226,7 @@ static void sub_809E83C(u8 taskId, s8 b)
         sub_80A0428(&pssData.loadedMon, &pssData.selectedMoveIndex);
     }
 
-    gTasks[taskId].func = sub_809E3FC;
+    gTasks[taskId].func = SummaryScreen_MoveSelect_HandleInput;
     sub_80A2078(taskId);
 }
 
@@ -1420,11 +1428,11 @@ static void SummaryScreenHandleAButton(u8 taskId)
     sub_80A029C(&pssData.loadedMon);
     sub_80A1A30(9);
 
-    gTasks[taskId].func = sub_809E3FC;
+    gTasks[taskId].func = SummaryScreen_MoveSelect_HandleInput;
     sub_80A2078(taskId);
 }
 
-static void sub_809EAC8(u8 taskId)
+static void SummaryScreen_MoveSelect_Cancel(u8 taskId)
 {
     if (pssData.selectedMoveIndex != 4)
     {
@@ -2055,14 +2063,14 @@ void sub_809F43C(u8 taskId)
         gMain.state++;
         break;
     case 4:
-        sub_809F678(&pssData.loadedMon);
+        SummaryScreen_GetPokemon(&pssData.loadedMon);
         if (GetMonStatusAndPokerus(&pssData.loadedMon))
             sub_80A12D0(2);
         DrawPokerusSurvivorDot(&pssData.loadedMon);
         gMain.state++;
         break;
     case 5:
-        if ((pssData.monSpriteId = sub_809F6B4(&pssData.loadedMon, &pssData.loadGfxState)) != 0xFF)
+        if ((pssData.monSpriteId = SummaryScreen_LoadPokemonSprite(&pssData.loadedMon, &pssData.loadGfxState)) != 0xFF)
         {
             pssData.loadGfxState = 0;
             if (GetMonData(&pssData.loadedMon, MON_DATA_IS_EGG))
@@ -2115,13 +2123,13 @@ static bool8 sub_809F5F8(void)
 static void sub_809F63C(struct Pokemon *mon)
 {
     sub_809FE80();
-    sub_809FC34(mon);
+    SummaryScreen_PrintPokemonInfo(mon);
 }
 
 static void sub_809F650(struct Pokemon *mon)
 {
     sub_80A00A4();
-    sub_809FF64(mon);
+    SummaryScreen_PrintPokemonSkills(mon);
 }
 
 static void sub_809F664(struct Pokemon *mon)
@@ -2130,9 +2138,9 @@ static void sub_809F664(struct Pokemon *mon)
     sub_80A015C(mon);
 }
 
-static void sub_809F678(struct Pokemon *mon)
+static void SummaryScreen_GetPokemon(struct Pokemon *mon)
 {
-    if (pssData.usingPC == FALSE)
+    if (!pssData.usingPC)
     {
         struct Pokemon *mons = pssData.monList.partyMons;
         *mon = mons[pssData.monIndex];
@@ -2144,17 +2152,17 @@ static void sub_809F678(struct Pokemon *mon)
     }
 }
 
-static u8 sub_809F6B4(struct Pokemon *mon, u8 *b)
+static u8 SummaryScreen_LoadPokemonSprite(struct Pokemon *mon, u8 *state)
 {
     u16 species;
     u32 personality;
     u32 otId;
     const struct CompressedSpritePalette *palette;
 
-    switch (*b)
+    switch (*state)
     {
     default:
-        return sub_80A1808(mon);
+        return SummaryScreen_CreatePokemonSprite(mon);
     case 0:
         species = GetMonData(mon, MON_DATA_SPECIES2);
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
@@ -2167,7 +2175,7 @@ static u8 sub_809F6B4(struct Pokemon *mon, u8 *b)
             gUnknown_081FAF4C[1],
             species,
             personality);
-        *b += 1;
+        *state += 1;
         return 0xFF;
     case 1:
         species = GetMonData(mon, MON_DATA_SPECIES2);
@@ -2177,7 +2185,7 @@ static u8 sub_809F6B4(struct Pokemon *mon, u8 *b)
         palette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
         LoadCompressedObjectPalette(palette);
         GetMonSpriteTemplate_803C56C(palette->tag, 1);
-        *b += 1;
+        *state += 1;
         return 0xFF;
     }
 }
@@ -2212,12 +2220,12 @@ static u16 GetMonMovePP(struct Pokemon *mon, u8 moveId)
     }
 }
 
-static bool8 sub_809F7D0(u8 taskId)
+static bool8 SummaryScreen_CanForgetSelectedMove(u8 taskId)
 {
     struct Pokemon mon;
     u16 move;
 
-    sub_809F678(&mon);
+    SummaryScreen_GetPokemon(&mon);
     move = GetMonMove(&mon, pssData.selectedMoveIndex);
     if (IsHMMove(move) == TRUE && pssData.mode != PSS_MODE_UNKNOWN)
         return FALSE;
@@ -2285,11 +2293,11 @@ void sub_809F814(u8 taskId)
     }
 }
 
-static void sub_809F9D0(u8 taskId, u8 b)
+static void sub_809F9D0(u8 taskId, u8 moveIndex)
 {
     s16 *taskData = gTasks[taskId].data;
     taskData[14] = 0;
-    taskData[15] = b;
+    taskData[15] = moveIndex;
 
     sub_80A1488(-2, 4);
     sub_80A1654(-2, 4);
@@ -2304,51 +2312,16 @@ u8 sub_809FA30(void)
     return pssData.switchMoveIndex;
 }
 
-// void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
-// {
-//     u16 *vramAddr = (u16 *)(VRAM + 0xF000);
-
-//     vramAddr[(d * 32) + c] = (b * 0x1000) + (a * 2) + 0x200 + 0x80;
-//     vramAddr[(d * 32) + c + 32] = (b * 0x1000) + (a * 2) + 0x200 + 0x81;
-// }
-NAKED
-void GetStringCenterAlignXOffsetWithLetterSpacing(u8 a, u8 b, u8 c, u8 d)
+static void SummaryScreen_PlaceTextTile(u8 tile, u8 palette, u8 x, u8 y)
 {
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    lsls r0, 24\n\
-    lsls r1, 24\n\
-    lsls r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r2, 23\n\
-    lsrs r3, 18\n\
-    ldr r4, _0809FA70 @ =0x0600f000\n\
-    adds r3, r4\n\
-    adds r2, r3\n\
-    lsrs r1, 12\n\
-    lsrs r0, 23\n\
-    movs r4, 0x80\n\
-    lsls r4, 2\n\
-    adds r3, r4, 0\n\
-    adds r0, r3\n\
-    adds r1, r0\n\
-    adds r0, r1, 0\n\
-    adds r0, 0x80\n\
-    strh r0, [r2]\n\
-    adds r2, 0x40\n\
-    adds r1, 0x81\n\
-    strh r1, [r2]\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809FA70: .4byte 0x0600f000\n\
-    .syntax divided\n");
+    u16 *vramAddr = (u16 *)(VRAM + 0xF000) + x + y * 32;
+    vramAddr[0] = (palette << 12) + 0x200 + tile * 2 + 0x80;
+    vramAddr[32] = (palette << 12) + 0x200 + tile * 2 + 0x81;
 }
 
-void GetStringCenterAlignXOffset(u8 a, u8 b, u8 c)
+static void SummaryScreen_PlaceTextTile_White(u8 tile, u8 x, u8 y)
 {
-    GetStringCenterAlignXOffsetWithLetterSpacing(a, 15, b, c);
+    SummaryScreen_PlaceTextTile(tile, 15, x, y);
 }
 
 bool8 sub_809FA94(struct Pokemon *mon)
@@ -2367,7 +2340,7 @@ bool8 sub_809FA94(struct Pokemon *mon)
 
 static void sub_809FAC8(struct Pokemon *mon)
 {
-    bool8 shinyDexNum;
+    bool8 shiny;
     u16 dexNum;
     u8 *buffer;
 
@@ -2377,24 +2350,24 @@ static void sub_809FAC8(struct Pokemon *mon)
         Menu_EraseWindowRect(3, 16, 9, 17);
         Menu_EraseWindowRect(0, 12, 11, 15);
         GetMonNickname(mon, gStringVar1);
-        sub_80A1FF8(gStringVar1, 13, 3, 16);
+        SummaryScreen_PrintColoredText(gStringVar1, 13, 3, 16);
         LoadPalette(sUnknown_083C157C, 4, 2);
     }
     else
     {
-        shinyDexNum = sub_809FA94(mon);
+        shiny = sub_809FA94(mon);
         dexNum = SpeciesToPokedexNum(GetMonData(mon, MON_DATA_SPECIES));
         if (dexNum != 0xFFFF)
         {
-            if (!shinyDexNum)
+            if (!shiny)
             {
-                GetStringCenterAlignXOffset(2, 1, 2);
-                sub_80A1F98(dexNum, 13, 3, 2, 17, 16, 1);
+                SummaryScreen_PlaceTextTile_White(2, 1, 2);
+                SummaryScreen_PrintColoredIntPixelCoords(dexNum, 13, 3, 2, 17, 16, 1);
             }
             else
             {
-                GetStringCenterAlignXOffsetWithLetterSpacing(2, 8, 1, 2);
-                sub_80A1F98(dexNum, 8, 3, 2, 17, 16, 1);
+                SummaryScreen_PlaceTextTile(2, 8, 1, 2);
+                SummaryScreen_PrintColoredIntPixelCoords(dexNum, 8, 3, 2, 17, 16, 1);
             }
         }
         else
@@ -2403,7 +2376,7 @@ static void sub_809FAC8(struct Pokemon *mon)
         }
 
         buffer = gStringVar1;
-        buffer = sub_80A1E58(buffer, 13);
+        buffer = SummaryScreen_SetTextColor(buffer, 13);
         buffer = GetMonNickname(mon, buffer);
         buffer[0] = EXT_CTRL_CODE_BEGIN;
         buffer[1] = 0x13;
@@ -2425,14 +2398,14 @@ static void sub_809FBE4(void)
     Menu_EraseWindowRect(11, 4, 29, 18);
 }
 
-static void sub_809FC0C(void)
+static void SummaryScreen_PrintPokemonInfoLabels(void)
 {
     Menu_PrintText(gOtherText_Type2, 11, 6);
-    GetStringCenterAlignXOffset(0, 22, 4);
-    GetStringCenterAlignXOffset(2, 23, 4);
+    SummaryScreen_PlaceTextTile_White(0, 22, 4);
+    SummaryScreen_PlaceTextTile_White(2, 23, 4);
 }
 
-static void sub_809FC34(struct Pokemon *mon)
+static void SummaryScreen_PrintPokemonInfo(struct Pokemon *mon)
 {
     u8 i;
     u8 *buffer;
@@ -2448,7 +2421,7 @@ static void sub_809FC34(struct Pokemon *mon)
     if (GetMonData(mon, MON_DATA_IS_EGG))
     {
         buffer = gStringVar1;
-        buffer = sub_80A1E58(buffer, 13);
+        buffer = SummaryScreen_SetTextColor(buffer, 13);
         buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
         buffer = StringCopy(buffer, gOtherText_FiveQuestions);
         buffer[0] = EXT_CTRL_CODE_BEGIN;
@@ -2457,15 +2430,15 @@ static void sub_809FC34(struct Pokemon *mon)
         buffer[3] = EOS;
         Menu_PrintText(gStringVar1, 11, 4);
 
-        sub_80A1EF8(gOtherText_FiveQuestions, 13, 193, 32, 1);
-        sub_80A198C(9, 120, 48, 0);
+        SummaryScreen_PrintColoredTextPixelCoords(gOtherText_FiveQuestions, 13, 193, 32, 1);
+        SummaryScreen_DrawTypeIcon(TYPE_MYSTERY, 120, 48, 0);
 
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-        if (friendship < 6)
+        if (friendship <= 5)
             Menu_PrintText(gOtherText_EggAbout, 11, 9);
-        else if (friendship < 11)
+        else if (friendship <= 10)
             Menu_PrintText(gOtherText_EggSoon, 11, 9);
-        else if (friendship < 41)
+        else if (friendship <= 40)
             Menu_PrintText(gOtherText_EggSomeTime, 11, 9);
         else
             Menu_PrintText(gOtherText_EggLongTime, 11, 9);
@@ -2479,13 +2452,13 @@ static void sub_809FC34(struct Pokemon *mon)
         ConvertInternationalString(gStringVar2, language);
 
         buffer = gStringVar1;
-        buffer = sub_80A1E58(buffer, 13);
+        buffer = SummaryScreen_SetTextColor(buffer, 13);
         buffer = StringCopy(buffer, gOtherText_OriginalTrainer);
 
         if (GetMonData(mon, MON_DATA_OT_GENDER) == MALE)
-            buffer = sub_80A1E58(buffer, 9);
+            buffer = SummaryScreen_SetTextColor(buffer, 9);
         else
-            buffer = sub_80A1E58(buffer, 10);
+            buffer = SummaryScreen_SetTextColor(buffer, 10);
 
         buffer = StringCopy(buffer, gStringVar2);
         buffer[0] = EXT_CTRL_CODE_BEGIN;
@@ -2494,15 +2467,15 @@ static void sub_809FC34(struct Pokemon *mon)
         buffer[3] = EOS;
         Menu_PrintText(gStringVar1, 11, 4);
 
-        sub_80A1F98(GetMonData(mon, MON_DATA_OT_ID) & 0xFFFF, 13, 5, 2, 193, 32, 1);
+        SummaryScreen_PrintColoredIntPixelCoords(GetMonData(mon, MON_DATA_OT_ID) & 0xFFFF, 13, 5, 2, 193, 32, 1);
 
         species = GetMonData(mon, MON_DATA_SPECIES);
-        sub_80A198C(gBaseStats[species].type1, 120, 48, 0);
+        SummaryScreen_DrawTypeIcon(gBaseStats[species].type1, 120, 48, 0);
         if (gBaseStats[species].type1 != gBaseStats[species].type2)
-            sub_80A198C(gBaseStats[species].type2, 160, 48, 1);
+            SummaryScreen_DrawTypeIcon(gBaseStats[species].type2, 160, 48, 1);
 
         ability = GetAbilityBySpecies(GetMonData(mon, MON_DATA_SPECIES), GetMonData(mon, MON_DATA_ALT_ABILITY));
-        sub_80A1FF8(gAbilityNames[ability], 13, 11, 9);
+        SummaryScreen_PrintColoredText(gAbilityNames[ability], 13, 11, 9);
         Menu_PrintText(gAbilityDescriptions[ability], 11, 11);
 
         PokemonSummaryScreen_PrintTrainerMemo(mon, 11, 14);
@@ -2511,8 +2484,8 @@ static void sub_809FC34(struct Pokemon *mon)
 
 static void sub_809FE6C(struct Pokemon *mon)
 {
-    sub_809FC0C();
-    sub_809FC34(mon);
+    SummaryScreen_PrintPokemonInfoLabels();
+    SummaryScreen_PrintPokemonInfo(mon);
 }
 
 static void sub_809FE80(void)
@@ -2523,21 +2496,21 @@ static void sub_809FE80(void)
     Menu_EraseWindowRect(11, 14, 28, 17);
 }
 
-static void sub_809FEB8(void)
+static void SummaryScreen_PrintPokemonSkillsLabels(void)
 {
-    sub_80A1FF8(gOtherText_ExpPoints, 13, 11, 14);
-    sub_80A1FF8(gOtherText_NextLv, 13, 11, 16);
+    SummaryScreen_PrintColoredText(gOtherText_ExpPoints, 13, 11, 14);
+    SummaryScreen_PrintColoredText(gOtherText_NextLv, 13, 11, 16);
     Menu_PrintText(gOtherText_Terminator18, 21, 16);
 
-    sub_80A1F48(gOtherText_HP, 13, 11, 7, 42);
-    sub_80A1F48(gOtherText_Attack, 13, 11, 9, 42);
-    sub_80A1F48(gOtherText_Defense, 13, 11, 11, 42);
-    sub_80A1F48(gOtherText_SpAtk, 13, 22, 7, 36);
-    sub_80A1F48(gOtherText_SpDef, 13, 22, 9, 36);
-    sub_80A1F48(gOtherText_Speed, 13, 22, 11, 36);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_HP, 13, 11, 7, 42);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_Attack, 13, 11, 9, 42);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_Defense, 13, 11, 11, 42);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_SpAtk, 13, 22, 7, 36);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_SpDef, 13, 22, 9, 36);
+    SummaryScreen_PrintColoredTextCentered(gOtherText_Speed, 13, 22, 11, 36);
 }
 
-static void sub_809FF64(struct Pokemon *mon)
+static void SummaryScreen_PrintPokemonSkills(struct Pokemon *mon)
 {
     u8 i;
     u16 heldItem;
@@ -2557,19 +2530,19 @@ static void sub_809FF64(struct Pokemon *mon)
     DrawExperienceProgressBar(mon, 23, 16);
 
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_ATK));
-    sub_8072BD8(buffer, 16, 9, 50);
+    MenuPrint_Centered(buffer, 16, 9, 50);
 
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_DEF));
-    sub_8072BD8(buffer, 16, 11, 50);
+    MenuPrint_Centered(buffer, 16, 11, 50);
 
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPATK));
-    sub_8072BD8(buffer, 27, 7, 18);
+    MenuPrint_Centered(buffer, 27, 7, 18);
 
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPDEF));
-    sub_8072BD8(buffer, 27, 9, 18);
+    MenuPrint_Centered(buffer, 27, 9, 18);
 
     ConvertIntToDecimalString(buffer, GetMonData(mon, MON_DATA_SPEED));
-    sub_8072BD8(buffer, 27, 11, 18);
+    MenuPrint_Centered(buffer, 27, 11, 18);
 
     buffer = AlignInt1InMenuWindow(buffer, GetMonData(mon, MON_DATA_HP), 24, 1);
     *buffer++ = CHAR_SLASH;
@@ -2580,8 +2553,8 @@ static void sub_809FF64(struct Pokemon *mon)
 
 static void sub_80A0090(struct Pokemon *mon)
 {
-    sub_809FEB8();
-    sub_809FF64(mon);
+    SummaryScreen_PrintPokemonSkillsLabels();
+    SummaryScreen_PrintPokemonSkills(mon);
 }
 
 static void sub_80A00A4(void)
@@ -2600,13 +2573,13 @@ static void sub_80A00F4(u8 a)
     {
         if (pssData.page == PSS_PAGE_BATTLE_MOVES)
         {
-            sub_80A1FF8(gOtherText_Power2, 13, 1, 15);
-            sub_80A1FF8(gOtherText_Accuracy2, 13, 1, 17);
+            SummaryScreen_PrintColoredText(gOtherText_Power2, 13, 1, 15);
+            SummaryScreen_PrintColoredText(gOtherText_Accuracy2, 13, 1, 17);
         }
         else
         {
-            sub_80A1FF8(gOtherText_Appeal2, 13, 1, 15);
-            sub_80A1FF8(gOtherText_Jam2, 13, 1, 17);
+            SummaryScreen_PrintColoredText(gOtherText_Appeal2, 13, 1, 15);
+            SummaryScreen_PrintColoredText(gOtherText_Jam2, 13, 1, 17);
         }
     }
 }
@@ -2628,18 +2601,18 @@ static void sub_80A015C(struct Pokemon *mon)
         if (move == 0)
         {
             sub_80A1918(i, 1);
-            sub_80A1FF8(gOtherText_OneDash, 13, 15, (2 * i) + 4);
+            SummaryScreen_PrintColoredText(gOtherText_OneDash, 13, 15, (2 * i) + 4);
             Menu_PrintText(gOtherText_TwoDashes, 26, (2 * i) + 4);
         }
         else
         {
             if (pssData.page == PSS_PAGE_BATTLE_MOVES)
-                sub_80A198C(gBattleMoves[move].type, 87, ((2 * i) + 4) * 8, i);
+                SummaryScreen_DrawTypeIcon(gBattleMoves[move].type, 87, ((2 * i) + 4) * 8, i);
             else
-                sub_80A198C(gContestMoves[move].contestCategory + 18, 87, ((2 * i) + 4) * 8, i);
+                SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 18, 87, ((2 * i) + 4) * 8, i);
 
-            sub_80A1FF8(gMoveNames[move], 13, 15, (2 * i) + 4);
-            GetStringCenterAlignXOffset(1, 24, (2 * i) + 4);
+            SummaryScreen_PrintColoredText(gMoveNames[move], 13, 15, (2 * i) + 4);
+            SummaryScreen_PlaceTextTile_White(1, 24, (2 * i) + 4);
 
             ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
             maxPP = CalculatePPWithBonus(move, ppBonuses, i);
@@ -2661,23 +2634,23 @@ static void sub_80A029C(struct Pokemon *mon)
 
     if (pssData.moveToLearn == 0)
     {
-        sub_80A1FF8(gOtherText_CancelNoTerminator, 13, 15, 12);
+        SummaryScreen_PrintColoredText(gOtherText_CancelNoTerminator, 13, 15, 12);
         return;
     }
 
     move = pssData.moveToLearn;
 
     if (pssData.page == PSS_PAGE_BATTLE_MOVES)
-        sub_80A198C(gBattleMoves[move].type, 87, 96, 4);
+        SummaryScreen_DrawTypeIcon(gBattleMoves[move].type, 87, 96, 4);
     else
-        sub_80A198C(gContestMoves[move].contestCategory + 18, 87, 96, 4);
+        SummaryScreen_DrawTypeIcon(gContestMoves[move].contestCategory + 18, 87, 96, 4);
 
     if (pssData.page == PSS_PAGE_BATTLE_MOVES)
-        sub_80A1FF8(gMoveNames[move], 10, 15, 12);
+        SummaryScreen_PrintColoredText(gMoveNames[move], 10, 15, 12);
     else
-        sub_80A1FF8(gMoveNames[move], 9, 15, 12);
+        SummaryScreen_PrintColoredText(gMoveNames[move], 9, 15, 12);
 
-    GetStringCenterAlignXOffset(1, 24, 12);
+    SummaryScreen_PlaceTextTile_White(1, 24, 12);
 
     buffer = gStringVar1;
     pp = gBattleMoves[move].pp;
@@ -3031,13 +3004,13 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
     u8 nature = GetNature(mon);
 
 #if ENGLISH
-    ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
+    ptr = SummaryScreen_CopyColoredString(ptr, gNatureNames[nature], 14);
     if (nature != NATURE_BOLD && nature != NATURE_GENTLE)
         ptr = StringCopy(ptr, gOtherText_Terminator4);
     ptr = StringCopy(ptr, gOtherText_Nature);
 #elif GERMAN
     ptr = StringCopy(gStringVar4, gOtherText_Nature);
-    ptr = sub_80A1E9C(ptr, gNatureNames[nature], 14);
+    ptr = SummaryScreen_CopyColoredString(ptr, gNatureNames[nature], 14);
     ptr = StringCopy(ptr, gOtherText_Terminator4);
 #endif
 
@@ -3052,7 +3025,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
             ptr++;
 
             CopyLocationName(gStringVar1, locationMet);
-            ptr = sub_80A1E9C(ptr, gStringVar1, 14);
+            ptr = SummaryScreen_CopyColoredString(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Egg2);
         }
         else if (locationMet >= 88)
@@ -3071,7 +3044,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
             ptr++;
 
             CopyLocationName(gStringVar1, locationMet);
-            ptr = sub_80A1E9C(ptr, gStringVar1, 14);
+            ptr = SummaryScreen_CopyColoredString(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Met);
         }
     }
@@ -3115,7 +3088,7 @@ static void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *mon, u8 left, 
                 ptr++;
 
                 CopyLocationName(gStringVar1, locationMet);
-                ptr = sub_80A1E9C(ptr, gStringVar1, 14);
+                ptr = SummaryScreen_CopyColoredString(ptr, gStringVar1, 14);
                 StringCopy(ptr, gOtherText_Met2);
             }
         }
@@ -3133,7 +3106,7 @@ static void sub_80A0958(struct Pokemon *mon)
     species = GetMonData(mon, MON_DATA_SPECIES);
 
     buffer = gStringVar1;
-    buffer = sub_80A1E58(buffer, 13);
+    buffer = SummaryScreen_SetTextColor(buffer, 13);
     buffer[0] = EXT_CTRL_CODE_BEGIN;
     buffer[1] = 0x11;
     buffer[2] = 0x7;
@@ -3151,8 +3124,8 @@ static void sub_80A0958(struct Pokemon *mon)
 
     level = GetMonData(mon, MON_DATA_LEVEL);
 
-    buffer = sub_80A1E58(gStringVar1, 13);
-    buffer[0] = 0x34;
+    buffer = SummaryScreen_SetTextColor(gStringVar1, 13);
+    buffer[0] = CHAR_LV;
     buffer += 1;
     buffer = ConvertIntToDecimalString(buffer, level);
 
@@ -3168,7 +3141,7 @@ static void sub_80A0958(struct Pokemon *mon)
 static void sub_80A0A2C(struct Pokemon *mon, u8 left, u8 top)
 {
     const u8 *genderSymbol;
-    u8 var1;
+    u8 color;
     u8 bottom;
     u16 species = GetMonData(mon, MON_DATA_SPECIES2);
 
@@ -3183,21 +3156,22 @@ static void sub_80A0A2C(struct Pokemon *mon, u8 left, u8 top)
             return;
         case MON_MALE:
             genderSymbol = gOtherText_MaleSymbol2;
-            var1 = 11;
+            color = 11;
             break;
         case MON_FEMALE:
-            genderSymbol = gOtherText_FemaleSymbolAndLv;
-            var1 = 12;
+            genderSymbol = gOtherText_FemaleSymbol2;
+            color = 12;
             break;
         }
 
-        sub_80A1FF8(genderSymbol, var1, left, top);
+        SummaryScreen_PrintColoredText(genderSymbol, color, left, top);
     }
 }
 
 u8 GetNumRibbons(struct Pokemon *mon)
 {
-    u8 numRibbons = GetMonData(mon, MON_DATA_COOL_RIBBON);
+    u8 numRibbons = 0;
+    numRibbons += GetMonData(mon, MON_DATA_COOL_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_BEAUTY_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_CUTE_RIBBON);
     numRibbons += GetMonData(mon, MON_DATA_SMART_RIBBON);
@@ -3308,12 +3282,11 @@ static void DrawExperienceProgressBar(struct Pokemon *mon, u8 left, u8 top)
     for (i = 0; i < 8; i++)
     {
         u16 tile;
-        u16 baseTile = 0x2062;
 
-        if (numExpProgressBarTicks > 7)
-            tile = 0x206A; // full exp. bar block
+        if (numExpProgressBarTicks >= 8)
+            tile = 0x2062 + 8; // full exp. bar block
         else
-            tile = (numExpProgressBarTicks % 8) + baseTile;
+            tile = 0x2062 + (numExpProgressBarTicks % 8);
 
         vramAddr[i] = tile;
 
@@ -3336,7 +3309,7 @@ static void PrintSummaryWindowHeaderText(void)
     buffer[2] = 0x2;
 
     buffer += 3;
-    buffer = sub_80A1E58(buffer, 13);
+    buffer = SummaryScreen_SetTextColor(buffer, 13);
     buffer = StringCopy(buffer, sPageHeaderTexts[pssData.headerTextId]);
 
     buffer[0] = EXT_CTRL_CODE_BEGIN;
@@ -3348,8 +3321,8 @@ static void PrintSummaryWindowHeaderText(void)
 
     if (pssData.headerActionTextId != 0)
     {
-        GetStringCenterAlignXOffset(5, 23, 0);
-        GetStringCenterAlignXOffset(6, 24, 0);
+        SummaryScreen_PlaceTextTile_White(5, 23, 0);
+        SummaryScreen_PlaceTextTile_White(6, 24, 0);
     }
     else
     {
@@ -3357,7 +3330,7 @@ static void PrintSummaryWindowHeaderText(void)
     }
 
     buffer = gStringVar1;
-    buffer = sub_80A1E58(buffer, 13);
+    buffer = SummaryScreen_SetTextColor(buffer, 13);
     buffer = StringCopy(buffer, sPageHeaderTexts[pssData.headerActionTextId]);
 
     buffer[0] = EXT_CTRL_CODE_BEGIN;
@@ -3935,7 +3908,7 @@ _080A1286:\n\
     movs r1, 0xD\n\
     movs r2, 0x1\n\
     movs r3, 0x12\n\
-    bl sub_80A1FF8\n\
+    bl SummaryScreen_PrintColoredText\n\
 _080A129A:\n\
     bl sub_80A1D18\n\
     mov r0, r8\n\
@@ -4026,7 +3999,7 @@ static void sub_80A12D0(s8 a)
 
 //             if (GetMonStatusAndPokerus(pssData.loadedMon))
 //             {
-//                 sub_80A1FF8(gOtherText_Status, 13, 1, 18);
+//                 SummaryScreen_PrintColoredText(gOtherText_Status, 13, 1, 18);
 //             }
 
 //             DestroyTask(taskId);
@@ -4179,7 +4152,7 @@ _080A1410:\n\
     movs r1, 0xD\n\
     movs r2, 0x1\n\
     movs r3, 0x12\n\
-    bl sub_80A1FF8\n\
+    bl SummaryScreen_PrintColoredText\n\
 _080A1444:\n\
     mov r0, r10\n\
     bl DestroyTask\n\
@@ -4375,7 +4348,7 @@ _080A15DC:\n\
     movs r1, 0xD\n\
     movs r2, 0x1\n\
     movs r3, 0x12\n\
-    bl sub_80A1FF8\n\
+    bl SummaryScreen_PrintColoredText\n\
 _080A1610:\n\
     mov r0, r10\n\
     bl DestroyTask\n\
@@ -4652,7 +4625,7 @@ _080A1804: .4byte gUnknown_08E94550\n\
 }
 #endif // NONMATCHING
 
-u8 sub_80A1808(struct Pokemon *mon)
+u8 SummaryScreen_CreatePokemonSprite(struct Pokemon *mon)
 {
     u16 species;
     u8 spriteId;
@@ -4663,7 +4636,7 @@ u8 sub_80A1808(struct Pokemon *mon)
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 
     gSprites[spriteId].data[0] = species;
-    gSprites[spriteId].callback = sub_80A1888;
+    gSprites[spriteId].callback = SummaryScreen_SpritePlayCry;
 
     if (!IsPokeSpriteNotFlipped(species))
         gSprites[spriteId].hFlip = TRUE;
@@ -4673,7 +4646,7 @@ u8 sub_80A1808(struct Pokemon *mon)
     return spriteId;
 }
 
-static void sub_80A1888(struct Sprite *sprite)
+static void SummaryScreen_SpritePlayCry(struct Sprite *sprite)
 {
     if (!gPaletteFade.active)
     {
@@ -4719,7 +4692,7 @@ static void sub_80A1950(void)
     }
 }
 
-static void sub_80A198C(u8 animNum, u8 x, u8 y, u8 d)
+static void SummaryScreen_DrawTypeIcon(u8 animNum, u8 x, u8 y, u8 d)
 {
     StartSpriteAnim(&gSprites[ewram1A000[d]], animNum);
 
@@ -4860,7 +4833,7 @@ void sub_80A1D18(void)
     u8 statusAndPkrs;
     u8 statusAndPkrs2;
 
-    sub_809F678(&mon);
+    SummaryScreen_GetPokemon(&mon);
     statusAndPkrs = GetMonStatusAndPokerus(&mon);
 
     if (statusAndPkrs)
@@ -4886,7 +4859,7 @@ void sub_80A1D18(void)
     push {r4,r5,lr}\n\
     sub sp, 0x64\n\
     mov r0, sp\n\
-    bl sub_809F678\n\
+    bl SummaryScreen_GetPokemon\n\
     mov r0, sp\n\
     bl GetMonStatusAndPokerus\n\
     lsls r0, 24\n\
@@ -4940,7 +4913,7 @@ static void sub_80A1D84(struct Pokemon *mon)
 {
     struct Sprite *sprite;
 
-    sprite = sub_80F7920(0x7533, 0x7533, sSummaryScreenMonMarkingsPalette);
+    sprite = sub_80F7920(30003, 30003, sSummaryScreenMonMarkingsPalette);
     gUnknown_020384F4 = sprite;
 
     if (sprite != NULL)
@@ -4969,20 +4942,20 @@ static void sub_80A1DE8(struct Pokemon *mon)
     gSprites[pssData.ballSpriteId].oam.priority = 3;
 }
 
-static u8 *sub_80A1E58(u8 *text, u8 id)
+static u8 *SummaryScreen_SetTextColor(u8 *text, u8 id)
 {
     if (id != 0xFF)
     {
-        const u8 *ptr = sUnknown_083C15BC;
+        const struct TextColors *colors = sSummaryScreenTextColors;
 
-        while (*ptr != 0xFF && *ptr != id)
-            ptr += 4;
+        while (colors->id != 0xFF && colors->id != id)
+            colors++;
 
         text[0] = EXT_CTRL_CODE_BEGIN;
-        text[1] = 4;
-        text[2] = ptr[1];
-        text[3] = ptr[2];
-        text[4] = ptr[3];
+        text[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        text[2] = colors->color;
+        text[3] = colors->background;
+        text[4] = colors->shadow;
 
         text += 5;
     }
@@ -4990,22 +4963,22 @@ static u8 *sub_80A1E58(u8 *text, u8 id)
     return text;
 }
 
-u8 *sub_80A1E9C(u8 *dest, const u8 *src, u8 id)
+static u8 *SummaryScreen_CopyColoredString(u8 *dest, const u8 *src, u8 id)
 {
-    u8 arr[3];
+    u8 colors[3];
 
-    Menu_GetTextColors(&arr[0], &arr[1], &arr[2]);
+    Menu_GetTextColors(&colors[0], &colors[1], &colors[2]);
 
-    dest = sub_80A1E58(dest, id);
+    dest = SummaryScreen_SetTextColor(dest, id);
     dest = StringCopy(dest, src);
 
     if (id != 0xFF)
     {
         dest[0] = EXT_CTRL_CODE_BEGIN;
-        dest[1] = 4;
-        dest[2] = arr[0];
-        dest[3] = arr[1];
-        dest[4] = arr[2];
+        dest[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        dest[2] = colors[0];
+        dest[3] = colors[1];
+        dest[4] = colors[2];
         dest[5] = 0xFF;
 
         dest += 5;
@@ -5014,27 +4987,27 @@ u8 *sub_80A1E9C(u8 *dest, const u8 *src, u8 id)
     return dest;
 }
 
-static void sub_80A1EF8(const u8 *text, u8 id, u8 left, u16 top, s32 e)
+static void SummaryScreen_PrintColoredTextPixelCoords(const u8 *text, u8 id, u8 left, u16 top, s32 e)
 {
-    sub_80A1E9C(gStringVar4, text, id);
+    SummaryScreen_CopyColoredString(gStringVar4, text, id);
     Menu_PrintTextPixelCoords(gStringVar4, left, top, (bool8)e);
 }
 
-static void sub_80A1F48(const u8 *text, u8 id, u8 c, u8 d, u16 e)
+static void SummaryScreen_PrintColoredTextCentered(const u8 *text, u8 id, u8 left, u8 top, u16 width)
 {
-    sub_80A1E9C(gStringVar4, text, id);
-    sub_8072BD8(gStringVar4, c, d, e);
+    SummaryScreen_CopyColoredString(gStringVar4, text, id);
+    MenuPrint_Centered(gStringVar4, left, top, width);
 }
 
-static void sub_80A1F98(s32 value, u8 id, u8 n, u8 mode, u8 left, u16 top, s32 e)
+static void SummaryScreen_PrintColoredIntPixelCoords(s32 value, u8 id, u8 n, u8 mode, u8 left, u16 top, s32 e)
 {
     ConvertIntToDecimalStringN(gStringVar1, value, mode, n);
-    sub_80A1EF8(gStringVar1, id, left, top, e);
+    SummaryScreen_PrintColoredTextPixelCoords(gStringVar1, id, left, top, e);
 }
 
-static void sub_80A1FF8(const u8 *text, u8 id, u8 left, u8 top)
+static void SummaryScreen_PrintColoredText(const u8 *text, u8 id, u8 left, u8 top)
 {
-    sub_80A1E9C(gStringVar4, text, id);
+    SummaryScreen_CopyColoredString(gStringVar4, text, id);
     Menu_PrintText(gStringVar4, left, top);
 }
 
@@ -5042,14 +5015,13 @@ u8 *PokemonSummaryScreen_CopyPokemonLevel(u8 *dest, u8 level)
 {
     u8 buffer[12];
 
-    dest[0] = 0x34;
-    dest++;
+    *dest++ = CHAR_LV;
 
     if (level == 0)
         level = 5;
 
     ConvertIntToDecimalString(buffer, level);
-    dest = sub_80A1E9C(dest, buffer, 14);
+    dest = SummaryScreen_CopyColoredString(dest, buffer, 14);
     dest = StringCopy(dest, gOtherText_Comma);
 
     return dest;

@@ -3367,7 +3367,7 @@ static void Task_InitSizeScreenMultistep(u8 taskId)
             string[0] = EOS;
             StringAppend(string, gDexText_SizeComparedTo);
             StringAppend(string, gSaveBlock2.playerName);
-            sub_8072BD8(string, 3, 15, 0xC0);
+            MenuPrint_Centered(string, 3, 15, 0xC0);
             gMain.state++;
         }
         break;
@@ -3815,7 +3815,7 @@ static void sub_8090750(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 3:
-        sub_8072BD8(gDexText_RegisterComplete, 2, 0, 0xD0);
+        MenuPrint_Centered(gDexText_RegisterComplete, 2, 0, 0xD0);
         if (!IsNationalPokedexEnabled())
             sub_8091154(NationalToHoennOrder(dexNum), 13, 3);
         else
