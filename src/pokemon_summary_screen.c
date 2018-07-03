@@ -123,7 +123,7 @@ extern u8 ball_number_to_ball_processing_index(u16);
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;
-extern u8 gUnknown_08208238[];
+extern u8 gPPUpReadMasks[];
 extern TaskFunc gUnknown_03005CF0;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
@@ -1140,9 +1140,9 @@ static void SummaryScreen_SwapMoves_Party(void)
     u8 ppBonuses = GetMonData(pkmn, MON_DATA_PP_BONUSES);
 
     // Swap PP bonuses
-    u8 r9 = gUnknown_08208238[moveIndex1];
+    u8 r9 = gPPUpReadMasks[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
-    u8 r3 = gUnknown_08208238[moveIndex2];
+    u8 r3 = gPPUpReadMasks[moveIndex2];
     u8 r1 = (ppBonuses & r3) >> (moveIndex2 * 2);
     ppBonuses &= ~r9;
     ppBonuses &= ~r3;
@@ -1170,9 +1170,9 @@ static void SummaryScreen_SwapMoves_Box(void)
     u8 ppBonuses = GetBoxMonData(pkmn, MON_DATA_PP_BONUSES);
 
     // Swap PP bonuses
-    u8 r9 = gUnknown_08208238[moveIndex1];
+    u8 r9 = gPPUpReadMasks[moveIndex1];
     u8 r2 = (ppBonuses & r9) >> (moveIndex1 * 2);
-    u8 r3 = gUnknown_08208238[moveIndex2];
+    u8 r3 = gPPUpReadMasks[moveIndex2];
     u8 r1 = (ppBonuses & r3) >> (moveIndex2 * 2);
     ppBonuses &= ~r9;
     ppBonuses &= ~r3;

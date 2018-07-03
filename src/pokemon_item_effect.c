@@ -35,9 +35,9 @@ static const u8 sGetMonDataEVConstants[] =
     MON_DATA_SPATK_EV
 };
 
-extern u8 gUnknown_08208238[];
-extern u8 gUnknown_0820823C[];
-extern u8 gUnknown_08208240[];
+extern u8 gPPUpReadMasks[];
+extern u8 gPPUpWriteMasks[];
+extern u8 gPPUpValues[];
 
 bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 moveIndex, u8 e);
 
@@ -221,11 +221,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
             if (r10 & 0x20)
             {
                 r10 &= ~0x20;
-                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_08208238[moveIndex]) >> (moveIndex * 2);
+                data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpReadMasks[moveIndex]) >> (moveIndex * 2);
                 sp28 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
-                if (data <= 2 && sp28 > 4)
+                if (data < 3 && sp28 > 4)
                 {
-                    data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gUnknown_08208240[moveIndex];
+                    data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) + gPPUpValues[moveIndex];
                     SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
 
                     data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - sp28;
@@ -450,13 +450,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *pkmn, u16 item, u8 partyIndex, u8 mo
                         }
                         break;
                     case 4:
-                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gUnknown_08208238[moveIndex]) >> (moveIndex * 2);
+                        data = (GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL) & gPPUpReadMasks[moveIndex]) >> (moveIndex * 2);
                         if (data < 3)
                         {
                             r4 = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL), moveIndex);
                             data = GetMonData(pkmn, MON_DATA_PP_BONUSES, NULL);
-                            data &= gUnknown_0820823C[moveIndex];
-                            data += gUnknown_08208240[moveIndex] * 3;
+                            data &= gPPUpWriteMasks[moveIndex];
+                            data += gPPUpValues[moveIndex] * 3;
 
                             SetMonData(pkmn, MON_DATA_PP_BONUSES, &data);
                             data = CalculatePPWithBonus(GetMonData(pkmn, MON_DATA_MOVE1 + moveIndex, NULL), data, moveIndex) - r4;
