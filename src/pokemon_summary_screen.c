@@ -197,28 +197,28 @@ static const struct OamData sOamData_83C109C = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_83C10A4[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10AC[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10B4[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10BC[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10C4[] = { ANIMCMD_FRAME(32, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10CC[] = { ANIMCMD_FRAME(40, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10D4[] = { ANIMCMD_FRAME(48, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10DC[] = { ANIMCMD_FRAME(56, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10E4[] = { ANIMCMD_FRAME(64, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10EC[] = { ANIMCMD_FRAME(72, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10F4[] = { ANIMCMD_FRAME(80, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C10FC[] = { ANIMCMD_FRAME(88, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1104[] = { ANIMCMD_FRAME(96, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C110C[] = { ANIMCMD_FRAME(104, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1114[] = { ANIMCMD_FRAME(112, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C111C[] = { ANIMCMD_FRAME(120, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1124[] = { ANIMCMD_FRAME(128, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C112C[] = { ANIMCMD_FRAME(136, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1134[] = { ANIMCMD_FRAME(144, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C113C[] = { ANIMCMD_FRAME(152, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1144[] = { ANIMCMD_FRAME(160, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C114C[] = { ANIMCMD_FRAME(168, 0), ANIMCMD_END, }
+static const union AnimCmd sSpriteAnim_83C10A4[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10AC[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10B4[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10BC[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10C4[] = { ANIMCMD_FRAME(32, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10CC[] = { ANIMCMD_FRAME(40, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10D4[] = { ANIMCMD_FRAME(48, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10DC[] = { ANIMCMD_FRAME(56, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10E4[] = { ANIMCMD_FRAME(64, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10EC[] = { ANIMCMD_FRAME(72, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10F4[] = { ANIMCMD_FRAME(80, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C10FC[] = { ANIMCMD_FRAME(88, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1104[] = { ANIMCMD_FRAME(96, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C110C[] = { ANIMCMD_FRAME(104, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1114[] = { ANIMCMD_FRAME(112, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C111C[] = { ANIMCMD_FRAME(120, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1124[] = { ANIMCMD_FRAME(128, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C112C[] = { ANIMCMD_FRAME(136, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1134[] = { ANIMCMD_FRAME(144, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C113C[] = { ANIMCMD_FRAME(152, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1144[] = { ANIMCMD_FRAME(160, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C114C[] = { ANIMCMD_FRAME(168, 0), ANIMCMD_END, };
 static const union AnimCmd sSpriteAnim_83C1154[] = { ANIMCMD_FRAME(176, 0), ANIMCMD_END, };
 
 static const union AnimCmd *const sSpriteAnimTable_83C115C[] = {
@@ -277,16 +277,16 @@ static const struct OamData sOamData_83C11F0 = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_83C11F8[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1200[] = { ANIMCMD_FRAME(4, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1208[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1210[] = { ANIMCMD_FRAME(12, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1218[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1220[] = { ANIMCMD_FRAME(16, 0, .hFlip = TRUE), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1228[] = { ANIMCMD_FRAME(20, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1230[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1238[] = { ANIMCMD_FRAME(24, 0, .hFlip = TRUE), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C1240[] = { ANIMCMD_FRAME(28, 0), ANIMCMD_END, }
+static const union AnimCmd sSpriteAnim_83C11F8[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1200[] = { ANIMCMD_FRAME(4, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1208[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1210[] = { ANIMCMD_FRAME(12, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1218[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1220[] = { ANIMCMD_FRAME(16, 0, .hFlip = TRUE), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1228[] = { ANIMCMD_FRAME(20, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1230[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1238[] = { ANIMCMD_FRAME(24, 0, .hFlip = TRUE), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C1240[] = { ANIMCMD_FRAME(28, 0), ANIMCMD_END, };
 
 static const union AnimCmd *const sSpriteAnimTable_83C1248[] = {
     sSpriteAnim_83C11F8,
@@ -330,13 +330,13 @@ static const struct OamData sOamData_83C1298 = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sSpriteAnim_83C12A0[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12A8[] = { ANIMCMD_FRAME(4, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12B0[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12B8[] = { ANIMCMD_FRAME(12, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12C0[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12C8[] = { ANIMCMD_FRAME(20, 0), ANIMCMD_END, }
-static const union AnimCmd sSpriteAnim_83C12D0[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, }
+static const union AnimCmd sSpriteAnim_83C12A0[] = { ANIMCMD_FRAME(0, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12A8[] = { ANIMCMD_FRAME(4, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12B0[] = { ANIMCMD_FRAME(8, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12B8[] = { ANIMCMD_FRAME(12, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12C0[] = { ANIMCMD_FRAME(16, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12C8[] = { ANIMCMD_FRAME(20, 0), ANIMCMD_END, };
+static const union AnimCmd sSpriteAnim_83C12D0[] = { ANIMCMD_FRAME(24, 0), ANIMCMD_END, };
 
 static const union AnimCmd *const sSpriteAnimTable_83C12D8[] = {
     sSpriteAnim_83C12A0,
