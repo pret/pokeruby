@@ -290,12 +290,10 @@ SECTIONS {
         src/battle/anim/bug.o(.text);
         src/battle/anim/rock.o(.text);
         src/battle/anim/ghost.o(.text);
-        asm/ghost.o(.text);
         src/battle/anim/dragon.o(.text);
         src/battle/anim/dark.o(.text);
         src/battle/anim/ground.o(.text);
         src/battle/anim/normal.o(.text);
-        asm/normal.o(.text);
         src/battle/anim/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat_1.o(.text);

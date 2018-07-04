@@ -34,6 +34,15 @@ struct UnknownStruct3
     u8 filler1[0xB];
 };
 
+struct EWRAM_19348_Struct
+{
+    /*0x00*/ u16 species2;
+    /*0x02*/ u16 species;
+    /*0x04*/ u8 filler4[0x8];
+    /*0x0C*/ u32 otId;
+    /*0x10*/ u32 personality;
+};
+
 extern void (*gAnimScriptCallback)(void);
 extern u8 gAnimScriptActive;
 extern u8 gAnimFriendship;
@@ -129,5 +138,6 @@ s16 CalculatePanIncrement(s16 sourcePan, s16 targetPan, s16 incrementPan);
 s16 sub_8077104(s16 newPan, int oldPan);
 void DestroyAnimSoundTask(u8 taskId);
 void sub_8076464(u8 a);
+s8 BattleAnimAdjustPanning2(s8);
 
 #endif
