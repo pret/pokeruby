@@ -10,6 +10,9 @@
         "system_error": "c",
         "type_traits": "c",
         "xstddef": "c",
-        "menu.h": "c"
+        "menu.h": "c",
+        "overworld.h": "c",
+        "strings.h": "c",
+        "songs.h": "c"
     }
 }

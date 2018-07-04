@@ -300,7 +300,6 @@ SECTIONS {
         src/easy_chat_1.o(.text);
         src/easy_chat_2.o(.text);
         src/pokenav_before.o(.text);
-        src/pokenav.o(.text);
         asm/pokenav.o(.text);
         src/pokenav_after.o(.text);
         asm/pokenav.o(.text_80F708C);
