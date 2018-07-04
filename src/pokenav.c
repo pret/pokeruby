@@ -1,16 +1,7 @@
 
 // Includes
 #include "global.h"
-#include "main.h"
-#include "menu.h"
-#include "overworld.h"
-#include "pokenav.h"
-#include "battle.h"
-#include "data2.h"
-#include "text.h"
-#include "gba/io_reg.h"
-#include "string_util.h"
-#include "strings.h"
+
 
 // Static type declarations
 

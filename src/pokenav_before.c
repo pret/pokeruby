@@ -172,8 +172,9 @@ static void sub_80EE658();
 static void sub_80EE8F4();
 static void sub_80EEDC4();
 
+extern bool8 sub_80F098C(void);
+extern void sub_80F0954(u16, u8, u16);
 extern bool8 sub_80F0944(void);
-extern void sub_80F0900(void);
 extern void sub_80F443C(u8 *, u16);
 extern bool8 sub_80F162C(u8);
 extern void sub_80F01E0(u16);
@@ -5244,25 +5245,27 @@ _080F0714: .4byte 0x00008774\n\
 #ifdef NONMATCHING
 u8 sub_80F0718()
 {
-    u16 r0;
     //u16  r1;
 
     if(sub_80F098C() == 0)
     {
-        if((s16)gUnknown_083DFEC4->filler877A[0x2] == 0)
+        u16 r0;
+
+        if((s16)gUnknown_083DFEC4->unk877C == 0)
             return 0;
-        gUnknown_083DFEC4->filler877A[0x2] = gUnknown_083DFEC4->filler877A[0] - gUnknown_083DFEC4->filler877A[0x2];
-        r0 = 256 & (gUnknown_083DFEC4->unk8776 + gUnknown_083DFEC4->filler877A[0]);
-        gUnknown_083DFEC4->unk8776 = r0;
-        REG_BG3VOFS = r0;
-        if((s16)gUnknown_083DFEC4->filler877A[0x2] == 0)
+        gUnknown_083DFEC4->unk877C = gUnknown_083DFEC4->unk877A - (s16)gUnknown_083DFEC4->unk877C;
+        r0 = (gUnknown_083DFEC4->unk8776 + gUnknown_083DFEC4->unk877A);
+        gUnknown_083DFEC4->unk8776 = r0 & 0xFF;
+        REG_BG3VOFS =  r0 & 0xFF;
+        if((s16)gUnknown_083DFEC4->unk877C == 0)
         {
-            gUnknown_083DFEC4->unk8778 = (((s16)gUnknown_083DFEC4->unk8776 + 8) & 256) >> 3;
+            gUnknown_083DFEC4->unk8778 = (((s16)gUnknown_083DFEC4->unk8776 + 8) & 0xFF) >> 3;
             return 0;
         }
     }
     return 1;
 }
+
 #else
 asm(".include \"constants/gba_constants.inc\"");
 NAKED
@@ -5400,6 +5403,7 @@ _080F0818: .4byte gUnknown_083DFEC4\n\
     .syntax divided\n");
 }
 
+#ifdef NONMATCHING
 void sub_80F081C(u8 arg0)
 {
     u32 value;
@@ -5409,27 +5413,29 @@ void sub_80F081C(u8 arg0)
     {
         case 0:
             MenuPrint_RightAligned(gOtherText_NumberRegistered, 10, 9);
-            ConvertIntToDecimalStringN(&gUnknown_083DFEC4->unk8788[0], (s16)gUnknown_083DFEC4->filler876F[5] + 1, 1, 5);
-            MenuPrint_RightAligned(&gUnknown_083DFEC4->unk8788[0], 10, 11);
-            MenuPrint_RightAligned(gOtherText_NumberBattles, 10, 11);
-            value = GetGameStat(9);
-            if(value > 99999)
+            if(arg0 != 0)
             {
-                value = 99999;
+                break;
             }
-            ConvertIntToDecimalStringN(&gUnknown_083DFEC4->unk8788[0], value, 1, 5);
-            MenuPrint_RightAligned(&gUnknown_083DFEC4->unk8788[0], 10, 15);
-            break;
         case 1:
             MenuPrint_RightAligned(gOtherText_NumberRegistered, 10, 9);
-            break;
+            if(arg0 != 0)
+            {
+                break;
+            }
         case 2:
-            ConvertIntToDecimalStringN(&gUnknown_083DFEC4->unk8788[0], (s16)gUnknown_083DFEC4->filler876F[5] + 1, 1, 5);
+            ConvertIntToDecimalStringN(&gUnknown_083DFEC4->unk8788[0], (s16)gUnknown_083DFEC4->unk8774 + 1, 1, 5);
             MenuPrint_RightAligned(&gUnknown_083DFEC4->unk8788[0], 10, 11);
-            break;
+            if(arg0 != 0)
+            {
+                break;
+            }
         case 3:
             MenuPrint_RightAligned(gOtherText_NumberBattles, 10, 11);
-            break;
+            if(arg0 != 0)
+            {
+                break;
+            }
         case 4:
             value = GetGameStat(9);
             if(value > 99999)
@@ -5439,7 +5445,125 @@ void sub_80F081C(u8 arg0)
             ConvertIntToDecimalStringN(&gUnknown_083DFEC4->unk8788[0], value, 1, 5);
             MenuPrint_RightAligned(&gUnknown_083DFEC4->unk8788[0], 10, 15);
             break;
-        default:
-            break;
     }
+}
+
+#else
+NAKED
+void sub_80F081C(u8 arg0)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	ldr r0, _080F0838 @ =gWindowTemplate_81E710C\n\
+	bl BasicInitMenuWindow\n\
+	cmp r5, 0x4\n\
+	bhi _080F08C6\n\
+	lsls r0, r5, 2\n\
+	ldr r1, _080F083C @ =_080F0840\n\
+	adds r0, r1\n\
+	ldr r0, [r0]\n\
+	mov pc, r0\n\
+	.align 2, 0\n\
+_080F0838: .4byte gWindowTemplate_81E710C\n\
+_080F083C: .4byte _080F0840\n\
+	.align 2, 0\n\
+_080F0840:\n\
+	.4byte _080F0854\n\
+	.4byte _080F0854\n\
+	.4byte _080F0862\n\
+	.4byte _080F088C\n\
+	.4byte _080F089A\n\
+_080F0854:\n\
+	ldr r0, _080F08CC @ =gOtherText_NumberRegistered\n\
+	movs r1, 0xA\n\
+	movs r2, 0x9\n\
+	bl MenuPrint_RightAligned\n\
+	cmp r5, 0\n\
+	bne _080F08C6\n\
+_080F0862:\n\
+	ldr r0, _080F08D0 @ =gUnknown_083DFEC4\n\
+	ldr r0, [r0]\n\
+	ldr r1, _080F08D4 @ =0x00008788\n\
+	adds r4, r0, r1\n\
+	ldr r2, _080F08D8 @ =0x00008774\n\
+	adds r0, r2\n\
+	movs r2, 0\n\
+	ldrsh r1, [r0, r2]\n\
+	adds r1, 0x1\n\
+	adds r0, r4, 0\n\
+	movs r2, 0x1\n\
+	movs r3, 0x5\n\
+	bl ConvertIntToDecimalStringN\n\
+	adds r0, r4, 0\n\
+	movs r1, 0xA\n\
+	movs r2, 0xB\n\
+	bl MenuPrint_RightAligned\n\
+	cmp r5, 0\n\
+	bne _080F08C6\n\
+_080F088C:\n\
+	ldr r0, _080F08DC @ =gOtherText_NumberBattles\n\
+	movs r1, 0xA\n\
+	movs r2, 0xD\n\
+	bl MenuPrint_RightAligned\n\
+	cmp r5, 0\n\
+	bne _080F08C6\n\
+_080F089A:\n\
+	movs r0, 0x9\n\
+	bl GetGameStat\n\
+	adds r1, r0, 0\n\
+	ldr r0, _080F08E0 @ =0x0001869f\n\
+	cmp r1, r0\n\
+	bls _080F08AA\n\
+	adds r1, r0, 0\n\
+_080F08AA:\n\
+	ldr r0, _080F08D0 @ =gUnknown_083DFEC4\n\
+	ldr r4, [r0]\n\
+	ldr r0, _080F08D4 @ =0x00008788\n\
+	adds r4, r0\n\
+	adds r0, r4, 0\n\
+	movs r2, 0x1\n\
+	movs r3, 0x5\n\
+	bl ConvertIntToDecimalStringN\n\
+	adds r0, r4, 0\n\
+	movs r1, 0xA\n\
+	movs r2, 0xF\n\
+	bl MenuPrint_RightAligned\n\
+_080F08C6:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080F08CC: .4byte gOtherText_NumberRegistered\n\
+_080F08D0: .4byte gUnknown_083DFEC4\n\
+_080F08D4: .4byte 0x00008788\n\
+_080F08D8: .4byte 0x00008774\n\
+_080F08DC: .4byte gOtherText_NumberBattles\n\
+_080F08E0: .4byte 0x0001869f\n\
+.syntax divided\n");
+}
+#endif
+
+void sub_80F08E4(void)
+{
+    BasicInitMenuWindow(&gWindowTemplate_81E710C);
+    Menu_EraseWindowRect(0, 0x9, 0xb, 0x10);
+}
+
+void sub_80F0900(void)
+{
+    s16 r0;
+
+    r0 = (s16)(gUnknown_083DFEC4->unk8772 - gUnknown_083DFEC4->unk8770) + 1;
+    if(r0 <= 7)
+    {
+        Menu_EraseWindowRect(0xC, 0x1, 0x1F, 0xF);
+    }
+    sub_80F0954(gUnknown_083DFEC4->unk8770 , 0, r0);
+}
+
+bool8 sub_80F0944(void)
+{
+    return sub_80F098C();
 }

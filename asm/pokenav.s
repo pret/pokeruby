@@ -4,67 +4,6 @@
 	.syntax unified
 
 	.text
-	
-	thumb_func_start sub_80F08E4
-sub_80F08E4: @ 80F08E4
-	push {lr}
-	ldr r0, _080F08FC @ =gWindowTemplate_81E710C
-	bl BasicInitMenuWindow
-	movs r0, 0
-	movs r1, 0x9
-	movs r2, 0xB
-	movs r3, 0x10
-	bl Menu_EraseWindowRect
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080F08FC: .4byte gWindowTemplate_81E710C
-	thumb_func_end sub_80F08E4
-
-	thumb_func_start sub_80F0900
-sub_80F0900: @ 80F0900
-	push {r4,r5,lr}
-	ldr r0, _080F093C @ =gUnknown_083DFEC4
-	ldr r0, [r0]
-	ldr r2, _080F0940 @ =0x00008772
-	adds r1, r0, r2
-	subs r2, 0x2
-	adds r5, r0, r2
-	ldrh r0, [r1]
-	ldrh r1, [r5]
-	subs r0, r1
-	adds r0, 0x1
-	lsls r4, r0, 16
-	asrs r0, r4, 16
-	cmp r0, 0x7
-	bgt _080F092A
-	movs r0, 0xC
-	movs r1, 0x1
-	movs r2, 0x1F
-	movs r3, 0xF
-	bl Menu_EraseWindowRect
-_080F092A:
-	ldrh r0, [r5]
-	lsrs r2, r4, 16
-	movs r1, 0
-	bl sub_80F0954
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080F093C: .4byte gUnknown_083DFEC4
-_080F0940: .4byte 0x00008772
-	thumb_func_end sub_80F0900
-
-	thumb_func_start sub_80F0944
-sub_80F0944: @ 80F0944
-	push {lr}
-	bl sub_80F098C
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80F0944
 
 	thumb_func_start sub_80F0954
 sub_80F0954: @ 80F0954
