@@ -458,6 +458,7 @@ struct Struct2017840
     u8 filler2[6];
     u8 unk8;
     u8 unk9_0:1;
+    u8 unk9_1:1;
 };
 
 struct Struct20238C8
