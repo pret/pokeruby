@@ -365,7 +365,6 @@ SECTIONS {
         src/intro.o(.text);
         src/field_region_map.o(.text);
         src/battle/battle_anim_813F0F4.o(.text);
-        asm/battle_anim_813F0F4.o(.text);
         src/hall_of_fame.o(.text);
         src/credits.o(.text);
         src/lottery_corner.o(.text);

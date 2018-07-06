@@ -37,6 +37,6 @@ void sub_80D517C(struct Sprite *sprite)
     sprite->data[0] = 60;
     sprite->data[2] = 140;
     sprite->data[4] = 80;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

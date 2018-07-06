@@ -3,6 +3,12 @@
 
 #include "sprite.h"
 
+//Extracts the upper 16 bits of a 32-bit number
+#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+
+//Extracts the lower 16 bits of a 32-bit number
+#define LOHALF(n) ((n) & 0xFFFF)
+
 extern const u8 gMiscBlank_Gfx[];
 extern const u32 gBitTable[];
 

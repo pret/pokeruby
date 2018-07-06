@@ -67,7 +67,7 @@ void sub_80D0178(struct Sprite* sprite)
     sprite->data[0] = 6;
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r8;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + r6;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, sub_80D020C);
 }
 

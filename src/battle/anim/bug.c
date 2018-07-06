@@ -224,7 +224,7 @@ void sub_80DC824(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
 
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -249,7 +249,7 @@ void sub_80DC8F4(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -282,7 +282,7 @@ void sub_80DC9A0(struct Sprite *sprite)
 
 static void sub_80DCA38(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite))
+    if (TranslateAnimLinear(sprite))
     {
         DestroyAnimSprite(sprite);
         return;
@@ -414,7 +414,7 @@ void AnimTranslateStinger(struct Sprite *sprite)
     sprite->data[2] = lVarX;
     sprite->data[4] = lVarY;
 
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -438,7 +438,7 @@ void AnimMissileArc(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
 
     sprite->callback = AnimMissileArcStep;
     sprite->invisible = TRUE;
@@ -448,7 +448,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
 
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         DestroyAnimSprite(sprite);
     }
@@ -468,7 +468,7 @@ static void AnimMissileArcStep(struct Sprite *sprite)
         x2 += x1;
         y2 += y1;
 
-        if (!TranslateAnimSpriteLinearAndSine(sprite))
+        if (!TranslateAnimArc(sprite))
         {
             u16 rotation = ArcTan2Neg(sprite->pos1.x + sprite->pos2.x - x2,
                                   sprite->pos1.y + sprite->pos2.y - y2);

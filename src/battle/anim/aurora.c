@@ -68,7 +68,7 @@ void sub_80D33B4(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + r6;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80D344C;
     sprite->affineAnimPaused = TRUE;
     sprite->callback(sprite);
@@ -81,7 +81,7 @@ static void sub_80D344C(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
         sprite->affineAnimPaused = FALSE;
     }
-    if (TranslateAnimSpriteByDeltas(sprite) != 0)
+    if (TranslateAnimLinear(sprite) != 0)
         DestroyAnimSprite(sprite);
 }
 

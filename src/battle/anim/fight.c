@@ -567,7 +567,7 @@ void sub_80D92D0(struct Sprite *sprite)
     }
 
     sprite->data[4] = sprite->pos1.y - 20;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, sub_80D9328);
 }
 
@@ -583,7 +583,7 @@ static void sub_80D9328(struct Sprite *sprite)
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
 
-        sprite->callback = StartTranslateAnimSpriteByDeltas;
+        sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
 }
@@ -604,7 +604,7 @@ void sub_80D9378(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = sprite->pos1.y;
 
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
 
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->data[6] = gBattleAnimArgs[4];
@@ -615,7 +615,7 @@ void sub_80D9378(struct Sprite *sprite)
 
 static void sub_80D9404(struct Sprite *sprite)
 {
-    if (!TranslateAnimSpriteByDeltas(sprite))
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.y += Sin(sprite->data[7] >> 8, sprite->data[5]);
         sprite->data[7] += sprite->data[6];
@@ -672,7 +672,7 @@ static void AnimStompFootStep(struct Sprite *sprite)
         sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-        sprite->callback = StartTranslateAnimSpriteByDeltas;
+        sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, AnimStompFootEnd);
     }
 }
@@ -846,9 +846,9 @@ static void sub_80D986C(struct Sprite *sprite)
         sprite->data[3] = sprite->pos1.y;
         sprite->data[4] = GetBattlerSpriteCoord(sprite->data[7], 3);
 
-        InitAnimSpriteTranslationDeltas(sprite);
+        InitAnimLinearTranslation(sprite);
         StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
-        sprite->callback = TranslateAnimSpriteByDeltasUntil;
+        sprite->callback = TranslateAnimLinearUntil;
     }
 }
 
@@ -941,9 +941,9 @@ void sub_80D9A38(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(bank, 3);
 
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
-    sprite->callback = TranslateAnimSpriteByDeltasUntil;
+    sprite->callback = TranslateAnimLinearUntil;
 }
 
 static void sub_80D9B24(struct Sprite *sprite)

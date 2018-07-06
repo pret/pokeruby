@@ -240,7 +240,7 @@ void sub_80D0FD8(struct Sprite* sprite)
 
 void sub_80D1098(struct Sprite* sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite))
+    if (TranslateAnimLinear(sprite))
     {
         FreeSpriteOamMatrix(sprite);
         DestroyAnimSprite(sprite);
@@ -327,7 +327,7 @@ void sub_80D10B8(struct Sprite* sprite)
     sprite->data[2] = sp0;
     sprite->data[4] = sp1;
     sprite->data[0] = gBattleAnimArgs[0];
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80D1098;
     sub_80D1098(sprite);
 }

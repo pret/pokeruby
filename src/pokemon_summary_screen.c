@@ -3,6 +3,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "battle.h"
+#include "battle_anim_813F0F4.h"
 #include "contest.h"
 #include "data2.h"
 #include "decompress.h"
@@ -118,7 +119,6 @@ static u8 *sub_80A1E58(u8 *, u8);
 static void sub_80A0A2C(struct Pokemon *, u8, u8);
 static void sub_80A1FF8(const u8 *, u8, u8, u8);
 
-extern u8 ball_number_to_ball_processing_index(u16);
 extern u8 StorageSystemGetNextMonIndex(struct BoxPokemon *, u8, u8, u8);
 
 extern struct MusicPlayerInfo gMPlay_BGM;

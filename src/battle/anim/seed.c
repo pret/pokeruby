@@ -61,13 +61,13 @@ void AnimLeechSeed(struct Sprite* sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[5];
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = AnimLeechSeedStep;
 }
 
 static void AnimLeechSeedStep(struct Sprite* sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         sprite->invisible = 1;
         sprite->data[0] = 10;

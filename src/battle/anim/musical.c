@@ -368,14 +368,14 @@ void sub_80CEE60(struct Sprite* sprite)
     sprite->data[2] = a + sprite->data[1];
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = sprite->data[3] - 40;
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->data[5] = gBattleAnimArgs[3];
     sprite->callback = sub_80CEEE8;
 }
 
 static void sub_80CEEE8(struct Sprite* sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite) == 0)
+    if (TranslateAnimLinear(sprite) == 0)
     {
         s16 a;
         a = Sin(sprite->data[5], 8);
