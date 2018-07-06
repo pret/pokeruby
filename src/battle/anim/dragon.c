@@ -242,7 +242,7 @@ void sub_80DF63C(struct Sprite *sprite)
         StartSpriteAnim(sprite, 1);
     }
     sprite->data[0] = gBattleAnimArgs[4];
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 

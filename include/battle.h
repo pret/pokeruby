@@ -459,6 +459,8 @@ struct Struct2017840
     u8 unk8;
     u8 unk9_0:1;
     u8 unk9_1:1;
+    u8 unkA;
+    u16 unkC;
 };
 
 struct Struct20238C8
@@ -841,6 +843,8 @@ void SetBankFuncToOpponentBufferRunCommand(void);
 void BattleStopLowHpSound(void);
 void sub_8031FC4(u8, u8, bool8);
 void sub_8032984(u8, u16);
+void refresh_graphics_maybe(u8, u8, u8);
+void sub_80324E0(u8 a);
 
 void SetBankFuncToLinkOpponentBufferRunCommand(void);
 

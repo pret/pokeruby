@@ -50,6 +50,6 @@ static void sub_80CF6B4(struct Sprite* sprite)
     sprite->data[0] = 6;
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y - 32;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }

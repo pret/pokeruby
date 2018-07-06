@@ -242,7 +242,7 @@ static void sub_80DDBD8(struct Sprite *sprite)
     s16 r0;
     s16 r2;
     sub_80DDCC8(sprite);
-    if (TranslateAnimSpriteByDeltas(sprite))
+    if (TranslateAnimLinear(sprite))
     {
         sprite->callback = sub_80DDC4C;
         return;
@@ -265,7 +265,7 @@ static void sub_80DDC4C(struct Sprite *sprite)
     s16 r2;
     s16 r0;
     sprite->data[0] = 1;
-    TranslateAnimSpriteByDeltas(sprite);
+    TranslateAnimLinear(sprite);
     sprite->pos2.x += Sin(sprite->data[5], 10);
     sprite->pos2.y += Cos(sprite->data[5], 15);
     

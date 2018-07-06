@@ -148,7 +148,7 @@ void AnimSonicBoomProjectile(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = targetXPos;
     sprite->data[4] = targetYPos;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 

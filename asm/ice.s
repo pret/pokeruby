@@ -336,7 +336,7 @@ _080D7976:
 	ldr r1, _080D79AC @ =DestroyAnimSprite
 	adds r0, r4, 0
 	bl StoreSpriteCallbackInData
-	ldr r0, _080D79B0 @ =StartTranslateAnimSpriteByDeltas
+	ldr r0, _080D79B0 @ =StartAnimLinearTranslation
 	str r0, [r4, 0x1C]
 	pop {r4}
 	pop {r0}
@@ -345,7 +345,7 @@ _080D7976:
 _080D79A4: .4byte gBattleAnimArgs
 _080D79A8: .4byte gAnimBankTarget
 _080D79AC: .4byte DestroyAnimSprite
-_080D79B0: .4byte StartTranslateAnimSpriteByDeltas
+_080D79B0: .4byte StartAnimLinearTranslation
 	thumb_func_end sub_80D792C
 
 	thumb_func_start sub_80D79B4
@@ -1186,7 +1186,7 @@ _080D800C:
 	adds r0, r1
 	strh r0, [r5, 0x36]
 	adds r0, r5, 0
-	bl InitAnimSpriteTranslationDeltas
+	bl InitAnimLinearTranslation
 	movs r0, 0x40
 	strh r0, [r5, 0x38]
 	ldr r1, _080D8044 @ =sub_80D8048
@@ -1206,7 +1206,7 @@ _080D8044: .4byte sub_80D8048
 sub_80D8048: @ 80D8048
 	push {r4,lr}
 	adds r4, r0, 0
-	bl TranslateAnimSpriteByDeltas
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D80D2
@@ -2192,7 +2192,7 @@ _080D8824:
 	strb r0, [r1]
 _080D8858:
 	adds r0, r5, 0
-	bl InitAnimSpriteTranslationDeltas
+	bl InitAnimLinearTranslation
 	ldr r0, _080D8870 @ =sub_80D8874
 	str r0, [r5, 0x1C]
 	pop {r3}
@@ -2228,7 +2228,7 @@ _080D8894:
 	b _080D8AD0
 _080D8896:
 	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
+	bl TranslateAnimLinear
 	ldr r1, _080D88C0 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
@@ -2326,13 +2326,13 @@ _080D893A:
 	ands r0, r1
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
-	bl InitAnimSpriteTranslationDeltas
+	bl InitAnimLinearTranslation
 	b _080D8AD0
 	.align 2, 0
 _080D8964: .4byte gSineTable
 _080D8968:
 	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
+	bl TranslateAnimLinear
 	ldr r1, _080D89C8 @ =gSineTable
 	movs r2, 0x38
 	ldrsh r0, [r4, r2]
@@ -2484,7 +2484,7 @@ _080D8A7A:
 _080D8A90: .4byte 0x0000fff0
 _080D8A94:
 	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D8AD0
@@ -3025,7 +3025,7 @@ _080D8E92:
 	ldrh r0, [r6, 0xA]
 	strh r0, [r5, 0x38]
 	adds r0, r5, 0
-	bl InitAnimSpriteTranslationOverDuration
+	bl InitAnimArcTranslation
 	ldr r0, _080D8EDC @ =sub_80D8EE0
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -3043,7 +3043,7 @@ _080D8EDC: .4byte sub_80D8EE0
 sub_80D8EE0: @ 80D8EE0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl TranslateAnimSpriteLinearAndSine
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D8F02

@@ -564,7 +564,7 @@ void sub_80DD490(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[2];
 
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -729,7 +729,7 @@ static void sub_80DD774(struct Task *task)
         gSprites[spriteId].data[5] = -16 - (task->data[1] * 2);
         gSprites[spriteId].oam.tileNum += var0;
 
-        InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
+        InitAnimArcTranslation(&gSprites[spriteId]);
         task->data[11]++;
     }
 
@@ -738,7 +738,7 @@ static void sub_80DD774(struct Task *task)
 
 void sub_80DD87C(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         u8 taskId = FindTaskIdByFunc(sub_80DD604);
         if (taskId != 0xFF)

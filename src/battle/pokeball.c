@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
 #include "battle.h"
+#include "battle_anim_813F0F4.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "m4a.h"
@@ -296,11 +297,8 @@ const struct SpriteTemplate gBallSpriteTemplates[] =
     },
 };
 
-extern u32 ball_number_to_ball_processing_index(u16);  // not sure of return type
-extern void InitAnimSpriteTranslationOverDuration();
-extern bool8 TranslateAnimSpriteLinearAndSine(struct Sprite *);
-extern u8 sub_814086C(u8, u8, int, int, u8);
-extern u8 sub_8141314(u8, u8, int, u8);
+extern void InitAnimArcTranslation();
+extern bool8 TranslateAnimArc(struct Sprite *);
 
 static void sub_8046464(u8);
 static void sub_80466E8(struct Sprite *);
@@ -397,7 +395,7 @@ static void sub_8046464(u8 taskId)
     gSprites[spriteId].data[2] = GetBattlerSpriteCoord(gBankTarget, 0);
     gSprites[spriteId].data[4] = GetBattlerSpriteCoord(gBankTarget, 1) - 16;
     gSprites[spriteId].data[5] = -40;
-    InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
+    InitAnimArcTranslation(&gSprites[spriteId]);
     gSprites[spriteId].oam.affineParam = taskId;
     gTasks[taskId].data[4] = gBankTarget;
     gTasks[taskId].func = TaskDummy;
@@ -406,7 +404,7 @@ static void sub_8046464(u8 taskId)
 
 static void objc_0804ABD4(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         u8 taskId = sprite->oam.affineParam;
         u8 r5 = gTasks[taskId].data[4];
@@ -834,7 +832,7 @@ static void sub_8047074(struct Sprite *sprite)
     sprite->data[4] = GetBattlerSpriteCoord(sprite->data[6], 3) + 24;
     sprite->data[5] = -30;
     sprite->oam.affineParam = sprite->data[6];
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = sub_80470C4;
 }
 
@@ -858,7 +856,7 @@ static void sub_80470C4(struct Sprite *sprite)
             StartSpriteAffineAnim(sprite, 4);
         }
         r4 = sprite->data[0];
-        TranslateAnimSpriteByDeltas(sprite);
+        TranslateAnimLinear(sprite);
         sprite->data[7] += sprite->data[6] / 3;
         sprite->pos2.y += Sin(HIBYTE(sprite->data[7]), sprite->data[5]);
         sprite->oam.affineParam += 0x100;
@@ -876,7 +874,7 @@ static void sub_80470C4(struct Sprite *sprite)
     }
     else
     {
-        if (TranslateAnimSpriteLinearAndSine(sprite))
+        if (TranslateAnimArc(sprite))
         {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
