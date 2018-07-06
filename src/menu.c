@@ -728,22 +728,22 @@ _08072B3E:\n\
 }
 #endif
 
-void MenuPrint_RightAligned(const u8 *str, u8 left, u8 top)
+void MenuPrint_RightAligned(const u8 *str, u8 right, u8 top)
 {
-    Text_InitWindow8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
+    Text_InitWindow_RightAligned(gMenuWindowPtr, str, gMenuTextTileOffset, right, top);
 }
 
-void sub_8072B80(const u8 *src, u8 a2, u8 a3, const u8 *a4)
+void sub_8072B80(const u8 *src, u8 a2, u8 a3, const u8 *text)
 {
     u8 buffer[64];
-    u8 width = GetStringWidth(gMenuWindowPtr, a4);
+    u8 width = GetStringWidth(gMenuWindowPtr, text);
     AlignString(gMenuWindowPtr, buffer, src, width, 1);
     Text_InitWindowAndPrintText(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
-void sub_8072BD8(const u8 *a1, u8 a2, u8 a3, u16 a4)
+void MenuPrint_Centered(const u8 *text, u8 left, u8 top, u16 width)
 {
-    Text_InitWindow8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
+    Text_InitWindow_Centered(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, width);
 }
 
 u8 *AlignInt1InMenuWindow(u8 *dest, s32 value, u8 alignAmount, u8 alignType)

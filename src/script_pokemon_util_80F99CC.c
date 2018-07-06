@@ -19,7 +19,7 @@
 #include "text.h"
 #include "ewram.h"
 
-extern const u8 gUnknown_08208238[];
+extern const u8 gPPUpReadMasks[];
 
 extern u8 gPlayerPartyCount;
 extern u16 gSpecialVar_0x8004;
@@ -307,11 +307,11 @@ void sub_80F9FDC(struct Pokemon *pkmn, u8 moveIndex1, u8 moveIndex2)
     u8 pp2 = GetMonData(pkmn, MON_DATA_PP1 + moveIndex2);
     u8 bonuses = GetMonData(pkmn, MON_DATA_PP_BONUSES);
 
-    u8 r2 = (bonuses & gUnknown_08208238[moveIndex1]) >> (moveIndex1 * 2);
-    u8 r1 = (bonuses & gUnknown_08208238[moveIndex2]) >> (moveIndex2 * 2);
+    u8 r2 = (bonuses & gPPUpReadMasks[moveIndex1]) >> (moveIndex1 * 2);
+    u8 r1 = (bonuses & gPPUpReadMasks[moveIndex2]) >> (moveIndex2 * 2);
 
-    bonuses &= ~gUnknown_08208238[moveIndex1];
-    bonuses &= ~gUnknown_08208238[moveIndex2];
+    bonuses &= ~gPPUpReadMasks[moveIndex1];
+    bonuses &= ~gPPUpReadMasks[moveIndex2];
     bonuses |= (r2 << (moveIndex2 * 2)) + (r1 << (moveIndex1 * 2));
 
     SetMonData(pkmn, MON_DATA_MOVE1 + moveIndex1, &move2);
