@@ -241,7 +241,7 @@ static void AnimFireRingStep1(struct Sprite *sprite)
         sprite->data[3] = sprite->pos1.y;
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-        InitAnimSpriteTranslationDeltas(sprite);
+        InitAnimLinearTranslation(sprite);
 
         sprite->callback = AnimFireRingStep2;
     }
@@ -249,7 +249,7 @@ static void AnimFireRingStep1(struct Sprite *sprite)
 
 static void AnimFireRingStep2(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite))
+    if (TranslateAnimLinear(sprite))
     {
         sprite->data[0] = 0;
 

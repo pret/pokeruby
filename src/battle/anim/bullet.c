@@ -44,7 +44,7 @@ void sub_80CFFD8(struct Sprite* sprite)
     sprite->data[0] = 20;
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     sprite->affineAnimPaused = 1;
     StoreSpriteCallbackInData(sprite, sub_80D0030);
 }

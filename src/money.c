@@ -154,7 +154,7 @@ void PrintMoneyAmount(u32 amount, u8 size, u8 x, u8 y)
     }
 }
 
-void sub_80B7AEC(u32 arg0, u8 left, u8 top)
+void sub_80B7AEC(u32 arg0, u8 right, u8 top)
 {
     u8 buffer[32];
     u8 *ptr;
@@ -166,7 +166,7 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top)
 
     ptr = ConvertIntToDecimalString(ptr, arg0);
 
-    MenuPrint_RightAligned(buffer, left, top);
+    MenuPrint_RightAligned(buffer, right, top);
 
 #ifdef ENGLISH
     ptr[0] = 0xFC;

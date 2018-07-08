@@ -207,7 +207,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite* sprite)
     }
 
     sprite->data[5] = gBattleAnimArgs[5];
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
     if (GetBattlerSide(gAnimBankAttacker) == GetBattlerSide(gAnimBankTarget))
     {
         sprite->data[0] = 1;
@@ -228,7 +228,7 @@ static void AnimTranslateLinearSingleSineWaveStep(struct Sprite* sprite)
     s16 r0;
     
     sprite->data[0] = 1;
-    TranslateAnimSpriteLinearAndSine(sprite);
+    TranslateAnimArc(sprite);
     r0 = sprite->data[7];
     sprite->data[0] = a;
     if (b > 0xC8 && r0 <= 0x37 && sprite->oam.affineParam == 0)

@@ -26,9 +26,9 @@
 	inc _num_npcs
 	.endm
 
-	.macro warp_def x, y, byte, warp, map_id
+	.macro warp_def x, y, elevation, warp, map_id
 	.2byte \x, \y
-	.byte \byte, \warp
+	.byte \elevation, \warp
 	.byte \map_id & 0xFF  @ map num
 	.byte \map_id >> 8    @ map group
 	inc _num_warps

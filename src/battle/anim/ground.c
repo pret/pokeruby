@@ -160,13 +160,13 @@ static void AnimBonemerangProjectile(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->data[5] = -40;
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = AnimBonemerangProjectileStep;
 }
 
 static void AnimBonemerangProjectileStep(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
@@ -176,14 +176,14 @@ static void AnimBonemerangProjectileStep(struct Sprite *sprite)
         sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
         sprite->data[5] = 40;
-        InitAnimSpriteTranslationOverDuration(sprite);
+        InitAnimArcTranslation(sprite);
         sprite->callback = AnimBonemerangProjectileEnd;
     }
 }
 
 static void AnimBonemerangProjectileEnd(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
         DestroyAnimSprite(sprite);
 }
 
@@ -203,7 +203,7 @@ static void AnimBoneHitProjectile(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -233,7 +233,7 @@ static void AnimDirtScatter(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->data[2] = targetXPos + xOffset;
     sprite->data[4] = targetYPos + yOffset;
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, move_anim_8074EE0);
 }
 
@@ -537,13 +537,13 @@ static void AnimFissureDirtPlumeParticle(struct Sprite *sprite)
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
     sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[3];
     sprite->data[5] = gBattleAnimArgs[4];
-    InitAnimSpriteTranslationOverDuration(sprite);
+    InitAnimArcTranslation(sprite);
     sprite->callback = AnimFissureDirtPlumeParticleStep;
 }
 
 static void AnimFissureDirtPlumeParticleStep(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
         DestroyAnimSprite(sprite);
 }
 

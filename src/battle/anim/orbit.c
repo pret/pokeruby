@@ -158,7 +158,7 @@ void sub_80CAD54(struct Sprite* sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CADA8;
     sub_80CADA8(sprite);
@@ -166,7 +166,7 @@ void sub_80CAD54(struct Sprite* sprite)
 
 static void sub_80CADA8(struct Sprite* sprite)
 {
-    if (!TranslateAnimSpriteByDeltas(sprite))
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 32);
         sprite->pos2.y += Cos(sprite->data[5], -5);
@@ -195,7 +195,7 @@ void sub_80CAE20(struct Sprite* sprite)
     sprite->data[2] = sprite->pos1.x;
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3) + gBattleAnimArgs[2];
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->data[5] = 0x40;
     sprite->callback = sub_80CAE74;
     sub_80CAE74(sprite);
@@ -203,7 +203,7 @@ void sub_80CAE20(struct Sprite* sprite)
 
 static void sub_80CAE74(struct Sprite* sprite)
 {
-    if (!TranslateAnimSpriteByDeltas(sprite))
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 8);
         if ((u16)(sprite->data[5] - 0x3B) < 5 || (u16)(sprite->data[5] - 0xBB) < 5)

@@ -921,7 +921,7 @@ static void NakaGenderTest_PrintSpeciesGender(u8 i)
     if (gender == MON_MALE)
         Menu_PrintText(gOtherText_MaleSymbol2, 23, 2 * i + 1);
     else if (gender == MON_FEMALE)
-        Menu_PrintText(gOtherText_FemaleSymbolAndLv, 23, 2 * i + 1);
+        Menu_PrintText(gOtherText_FemaleSymbol2, 23, 2 * i + 1);
     else
         Menu_PrintText(sp0, 23, 2 * i + 1);
 }

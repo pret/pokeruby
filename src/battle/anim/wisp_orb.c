@@ -133,7 +133,7 @@ static void sub_80D5C5C(struct Sprite *sprite)
     s16 initialData5;
     s16 newData5;
 
-    if (!TranslateAnimSpriteByDeltas(sprite))
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], 16);
         initialData5 = sprite->data[5];

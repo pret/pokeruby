@@ -126,7 +126,7 @@ void sub_80D1C08(struct Sprite* sprite)
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 0) + gBattleAnimArgs[2];
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 1) + gBattleAnimArgs[3];
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sub_80D1BA8(sprite, gBattleAnimArgs[5], gBattleAnimArgs[6]);
 }

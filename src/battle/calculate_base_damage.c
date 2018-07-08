@@ -23,13 +23,13 @@ extern u16 gBattleMovePower;
 extern u16 gTrainerBattleOpponent;
 
 // Masks for getting PP Up count, also PP Max values
-const u8 gUnknown_08208238[] = {0x03, 0x0c, 0x30, 0xc0};
+const u8 gPPUpReadMasks[] = {0x03, 0x0c, 0x30, 0xc0};
 
 // Masks for setting PP Up count
-const u8 gUnknown_0820823C[] = {0xFC, 0xF3, 0xCF, 0x3F};
+const u8 gPPUpWriteMasks[] = {0xFC, 0xF3, 0xCF, 0x3F};
 
 // Values added to PP Up count
-const u8 gUnknown_08208240[] = {0x01, 0x04, 0x10, 0x40};
+const u8 gPPUpValues[] = {0x01, 0x04, 0x10, 0x40};
 
 const u8 gStatStageRatios[][2] =
 {

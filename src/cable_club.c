@@ -172,7 +172,7 @@ static void sub_8082D18(u32 value)
 {
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 1);
     Menu_DrawStdWindowFrame(18, 10, 28, 13);
-    sub_8072BD8(gOtherText_PLink, 19, 11, 72);
+    MenuPrint_Centered(gOtherText_PLink, 19, 11, 72);
 }
 
 static void sub_8082D4C()

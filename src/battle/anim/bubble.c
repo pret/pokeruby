@@ -80,7 +80,7 @@ void sub_80D31C8(struct Sprite* sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
 
     newSpriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
     sprite->data[5] = newSpriteId;
@@ -106,7 +106,7 @@ static void sub_80D32E8(struct Sprite *sprite)
     u16 index = gSprites[spriteId].data[3];
 
     sprite->data[0] = 1;
-    TranslateAnimSpriteByDeltas(sprite);
+    TranslateAnimLinear(sprite);
 
     sprite->pos2.x += Sin(index / 256, gSprites[spriteId].data[0]);
     sprite->pos2.y += Cos(index / 256, gSprites[spriteId].data[1]);

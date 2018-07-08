@@ -2053,7 +2053,7 @@ sub_80D4AD0: @ 80D4AD0
 	strh r1, [r0, 0x36]
 	ldrh r1, [r6, 0x1A]
 	strh r1, [r0, 0x38]
-	bl InitAnimSpriteTranslationOverDuration
+	bl InitAnimArcTranslation
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, _080D4B38 @ =sub_80D4B3C
@@ -2075,7 +2075,7 @@ _080D4B38: .4byte sub_80D4B3C
 sub_80D4B3C: @ 80D4B3C
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl TranslateAnimSpriteLinearAndSine
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4B96
@@ -2110,7 +2110,7 @@ sub_80D4B3C: @ 80D4B3C
 	mvns r1, r1
 	strh r1, [r6, 0x38]
 	adds r0, r6, 0
-	bl InitAnimSpriteTranslationOverDuration
+	bl InitAnimArcTranslation
 	ldr r0, _080D4BA0 @ =sub_80D4BA4
 	str r0, [r6, 0x1C]
 _080D4B96:
@@ -2126,7 +2126,7 @@ _080D4BA0: .4byte sub_80D4BA4
 sub_80D4BA4: @ 80D4BA4
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl TranslateAnimSpriteLinearAndSine
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4BE0

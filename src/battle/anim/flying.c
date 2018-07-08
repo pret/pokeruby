@@ -496,14 +496,14 @@ void sub_80DA16C(struct Sprite *sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[2];
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80785E4;
     StoreSpriteCallbackInData(sprite, sub_80DA1EC);
 }
 
 void sub_80DA1EC(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite) != 0)
+    if (TranslateAnimLinear(sprite) != 0)
     {
         DestroyAnimSprite(sprite);
     }
@@ -543,7 +543,7 @@ void sub_80DA208(struct Sprite *sprite)
 
     sprite->data[2] = sprite->data[2] + gBattleAnimArgs[2];
     sprite->data[4] = sprite->data[4] + gBattleAnimArgs[3];
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
 
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     SeekSpriteAnim(sprite, gBattleAnimArgs[5]);
@@ -596,14 +596,14 @@ void sub_80DA38C(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80DA410;
 }
 
 void sub_80DA410(struct Sprite *sprite)
 {
     sprite->data[0] = 1;
-    TranslateAnimSpriteByDeltas(sprite);
+    TranslateAnimLinear(sprite);
 
     if (((u16)sprite->data[3] >> 8) > 200)
     {

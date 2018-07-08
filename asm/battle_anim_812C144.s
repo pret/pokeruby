@@ -2340,7 +2340,7 @@ _081305C6:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl InitAnimSpriteTranslationOverDuration
+	bl InitAnimArcTranslation
 	mov r1, r10
 	ldrb r0, [r1]
 	bl GetBattlerSide
@@ -2424,7 +2424,7 @@ _081306D6:
 	lsls r0, 2
 	ldr r1, _08130708 @ =gSprites
 	adds r0, r1
-	bl TranslateAnimSpriteLinearAndSine
+	bl TranslateAnimArc
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -2443,7 +2443,7 @@ _0813070C:
 	lsls r0, 2
 	ldr r1, _0813072C @ =gSprites
 	adds r0, r1
-	bl TranslateAnimSpriteLinearAndSine
+	bl TranslateAnimArc
 	lsls r0, 24
 	cmp r0, 0
 	beq _081307AA
@@ -3757,11 +3757,11 @@ _081310FA:
 	strh r0, [r4, 0x34]
 	strh r1, [r4, 0x36]
 	adds r0, r4, 0
-	bl InitAnimSpriteTranslationDeltas
+	bl InitAnimLinearTranslation
 	b _081311CA
 _08131110:
 	adds r0, r4, 0
-	bl TranslateAnimSpriteByDeltas
+	bl TranslateAnimLinear
 	lsls r0, 24
 	cmp r0, 0
 	beq _081311DE

@@ -175,7 +175,7 @@ static void sub_80CE1AC(struct Sprite* sprite)
         sprite->data[0] = 30;
         sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-        sprite->callback = StartTranslateAnimSpriteByDeltas;
+        sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     }
 }

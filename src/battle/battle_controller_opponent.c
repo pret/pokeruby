@@ -83,7 +83,7 @@ extern void sub_80313A0(struct Sprite *);
 extern void sub_8032B4C(void);
 extern void sub_8031A6C(u16, u8);
 extern void sub_8032B84(void);
-extern void StartTranslateAnimSpriteByDeltas(struct Sprite *);
+extern void StartAnimLinearTranslation(struct Sprite *);
 extern void sub_8032BBC(void);
 extern void oamt_add_pos2_onto_pos1();
 extern void StoreSpriteCallbackInData();
@@ -1284,7 +1284,7 @@ void OpponentHandleTrainerSlideBack(void)
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBankSpriteIds[gActiveBattler]].data[2] = 280;
     gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartTranslateAnimSpriteByDeltas;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBattler]], SpriteCallbackDummy);
     gBattleBankFunc[gActiveBattler] = sub_8032BBC;
 }
@@ -2223,7 +2223,7 @@ void OpponentHandleTrainerBallThrow(void)
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 35;
     gSprites[gBankSpriteIds[gActiveBattler]].data[2] = 280;
     gSprites[gBankSpriteIds[gActiveBattler]].data[4] = gSprites[gBankSpriteIds[gActiveBattler]].pos1.y;
-    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartTranslateAnimSpriteByDeltas;
+    gSprites[gBankSpriteIds[gActiveBattler]].callback = StartAnimLinearTranslation;
     StoreSpriteCallbackInData(&gSprites[gBankSpriteIds[gActiveBattler]], sub_8035C10);
     taskId = CreateTask(sub_8035C44, 5);
     gTasks[taskId].data[0] = gActiveBattler;
