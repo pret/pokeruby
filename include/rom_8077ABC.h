@@ -75,6 +75,7 @@ void sub_8078764(struct Sprite *sprite, u8);
 void StartAnimLinearTranslation(struct Sprite *sprite);
 void sub_8078D60(struct Sprite *sprite);
 void InitAnimArcTranslation(struct Sprite *sprite);
+void sub_8078D8C(struct Sprite *sprite);
 void WaitAnimForDuration(struct Sprite *sprite);
 void sub_8078CC0(struct Sprite *sprite);
 void sub_8078600(struct Sprite *sprite);
