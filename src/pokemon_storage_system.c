@@ -734,7 +734,7 @@ void sub_809665C(void)
     u8 *stringVar = gStringVar1;
 
     stringVar[0] = EXT_CTRL_CODE_BEGIN;
-    stringVar[1] = 0x04; // EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW
+    stringVar[1] = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
     stringVar[2] = 0x0F; // TEXT_COLOR_WHITE2
     stringVar[3] = 0x01; // TEXT_COLOR_DARK_GREY
     stringVar[4] = 0x0E; // TEXT_COLOR_LIGHT_BLUE
@@ -744,7 +744,7 @@ void sub_809665C(void)
 
     stringVar[0] = CHAR_NEWLINE;
     stringVar[1] = EXT_CTRL_CODE_BEGIN;
-    stringVar[2] = 0x11; // EXT_CTRL_CODE_CLEAR
+    stringVar[2] = EXT_CTRL_CODE_CLEAR;
     if (nPokemonInBox < 10)
         stringVar[3] = 0x28;
     else

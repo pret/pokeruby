@@ -49,25 +49,25 @@ void LoadCompressedObjectPalette(const struct CompressedSpritePalette *src)
     LoadSpritePalette(&dest);
 }
 
-void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
+void LoadCompressedObjectPaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer)
 {
     struct SpritePalette dest;
 
-    LZ77UnCompWram(a->data, buffer);
+    LZ77UnCompWram(src->data, buffer);
     dest.data = buffer;
-    dest.tag = a->tag;
+    dest.tag = src->tag;
     LoadSpritePalette(&dest);
 }
 
-void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, u8 b, u8 c, void *d, void *buffer, s32 species)
+void DecompressPicFromTable_2(const struct CompressedSpriteSheet *src, u8 coords, u8 y_offset, void *d, void *dest, s32 species)
 {
     if (species > SPECIES_EGG)
-        LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
+        LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
-        LZ77UnCompWram(src->data, buffer);
+        LZ77UnCompWram(src->data, dest);
 }
 
-void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g)
+void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 coords, u32 y_offset, u32 d, void *dest, s32 species, u32 pid)
 {
     u32 frontOrBack;
 
@@ -77,16 +77,16 @@ void HandleLoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u3
     else
         frontOrBack = 1; // frontPic
 
-    LoadSpecialPokePic(src, b, c, d, dest, species, g, frontOrBack);
+    LoadSpecialPokePic(src, coords, y_offset, d, dest, species, pid, frontOrBack);
 }
 
-void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g, u32 frontOrBack)
+void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u32 d, void *dest, s32 species, u32 pid, u32 frontOrBack)
 {
     u8 frontOrBack8 = frontOrBack;
 
     if (species == SPECIES_UNOWN)
     {
-        u16 i = (((g & 0x3000000) >> 18) | ((g & 0x30000) >> 12) | ((g & 0x300) >> 6) | (g & 3)) % 0x1C;
+        u16 i = (((pid & 0x3000000) >> 18) | ((pid & 0x30000) >> 12) | ((pid & 0x300) >> 6) | (pid & 3)) % 0x1C;
 
         // The other Unowns are separate from Unown A.
         if (i == 0)
@@ -104,7 +104,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, u32 b, u32 c, u
     else
         LZ77UnCompWram(src->data, dest);
 
-    DrawSpindaSpots(species, g, dest, frontOrBack8);
+    DrawSpindaSpots(species, pid, dest, frontOrBack8);
 }
 
 void Unused_LZDecompressWramIndirect(const void **src, void *dest)

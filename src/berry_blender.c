@@ -1784,6 +1784,7 @@ static void sub_804FE70(void)
             {
                 sub_804FC48(0x2345, var);
                 sub_804FD30(0x2345);
+                // looks like a bug
                 if (gBerryBlenderData->field_4.win_field_F > 1000)
                     gBerryBlenderData->field_13E = 1000;
                 if (gBerryBlenderData->scores[i][BLENDER_SCORE_MISS] < 999)
@@ -2995,7 +2996,7 @@ bool8 Blender_PrintBlendingResults(void)
             u16 secondsPassed, minutes, seconds;
 
             Menu_DrawStdWindowFrame(4, 2, 25, 17);
-            sub_8072BD8(gOtherText_ResultsOfBlending, 5, 3, 160);
+            MenuPrint_Centered(gOtherText_ResultsOfBlending, 5, 3, 160);
             for (i = 0; i < gBerryBlenderData->playersNo; i++)
             {
                 u8 place = gBerryBlenderData->playerPlaces[i];
@@ -3188,7 +3189,7 @@ static bool8 Blender_PrintBlendingRanking(void)
         break;
     case 3:
         Menu_DrawStdWindowFrame(4, 2, 25, 17);
-        sub_8072BD8(gOtherText_Ranking, 5, 3, 160);
+        MenuPrint_Centered(gOtherText_Ranking, 5, 3, 160);
 
         gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST] = CreateSprite(&sSpriteTemplate_821645C, 140, 52, 0);
         gSprites[gBerryBlenderData->scoreIconIDs[BLENDER_SCORE_BEST]].callback = SpriteCallbackDummy;

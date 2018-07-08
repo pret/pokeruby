@@ -55,7 +55,7 @@ void CB2_FieldInitRegionMap(void)
     Menu_EraseScreen();
     REG_BG0CNT = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(31) | BGCNT_16COLOR | BGCNT_TXT256x256;
     Menu_DrawStdWindowFrame(21, 0, 29, 3);
-    sub_8072BD8(gOtherText_Hoenn, 0x16, 1, 0x38);
+    MenuPrint_Centered(gOtherText_Hoenn, 0x16, 1, 0x38);
     Menu_DrawStdWindowFrame(16, 16, 29, 19);
     sub_813F0C8();
     SetMainCallback2(CB2_FieldRegionMap);

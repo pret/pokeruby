@@ -912,7 +912,7 @@ static void sub_80DC1FC(u8 taskId)
                 gSprites[spriteId].data[4] = task->data[14];
                 gSprites[spriteId].data[5] = task->data[10];
 
-                InitAnimSpriteTranslationOverDuration(&gSprites[spriteId]);
+                InitAnimArcTranslation(&gSprites[spriteId]);
                 StartSpriteAffineAnim(&gSprites[spriteId], task->data[2] & 3);
             }
 
@@ -929,7 +929,7 @@ static void sub_80DC1FC(u8 taskId)
 
 void sub_80DC2B0(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteLinearAndSine(sprite))
+    if (TranslateAnimArc(sprite))
     {
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);

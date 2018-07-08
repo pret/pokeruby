@@ -33,13 +33,13 @@ void sub_80D1F58(struct Sprite* sprite)
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80D1FA4;
 }
 
 static void sub_80D1FA4(struct Sprite* sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite) == 0)
+    if (TranslateAnimLinear(sprite) == 0)
     {
         sprite->pos2.y += Sin(sprite->data[5], 14);
         sprite->data[5] = (sprite->data[5] + 4) & 0xFF;

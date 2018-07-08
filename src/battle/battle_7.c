@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_anim_813F0F4.h"
 #include "battle_interface.h"
 #include "blend_palette.h"
 #include "contest.h"
@@ -95,7 +96,6 @@ const struct SpritePalette gUnknown_0820A4D4[] =
 extern void c3_0802FDF4(u8);
 extern void sub_80440EC();
 extern void sub_804777C();
-extern void sub_8141828();
 extern u8 GetBattlerSpriteCoord();
 extern u8 IsBankSpritePresent(u8);
 extern u8 sub_8077F68(u8);

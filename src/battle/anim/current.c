@@ -366,7 +366,7 @@ void sub_80D648C(struct Sprite *sprite)
     sprite->data[3] = sprite->pos1.y;
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    InitAnimSpriteTranslationDeltas(sprite);
+    InitAnimLinearTranslation(sprite);
     sprite->data[5] = gBattleAnimArgs[2];
     sprite->data[6] = gBattleAnimArgs[5];
     sprite->data[7] = gBattleAnimArgs[4];
@@ -378,7 +378,7 @@ void sub_80D648C(struct Sprite *sprite)
 
 static void sub_80D6514(struct Sprite *sprite)
 {
-    if (!TranslateAnimSpriteByDeltas(sprite))
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[7], sprite->data[5]);
         sprite->pos2.y += Cos(sprite->data[7], sprite->data[5]);
@@ -857,7 +857,7 @@ static void sub_80D6BB8(u8 taskId)
                 sprite->data[4] = task->data[15];
                 sprite->data[5] = taskId;
 
-                InitAnimSpriteTranslationDeltas(sprite);
+                InitAnimLinearTranslation(sprite);
                 StoreSpriteCallbackInData(sprite, sub_80D6D00);
                 sprite->callback = sub_8078600;
 
@@ -887,7 +887,7 @@ static void sub_80D6BB8(u8 taskId)
 
 static void sub_80D6CCC(struct Sprite *sprite)
 {
-    if (TranslateAnimSpriteByDeltas(sprite))
+    if (TranslateAnimLinear(sprite))
     {
         gTasks[sprite->data[5]].data[7]--;
         DestroySprite(sprite);

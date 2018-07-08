@@ -1089,8 +1089,8 @@ static void sub_810E874(void)
 void DisplayCurrentElevatorFloor(void)
 {
     Menu_DrawStdWindowFrame(20, 0, 29, 5);
-    sub_8072BD8(gOtherText_NowOn, 21, 1, 64);
-    sub_8072BD8(gUnknown_083F8380[gSpecialVar_0x8005], 21, 3, 64);
+    MenuPrint_Centered(gOtherText_NowOn, 21, 1, 64);
+    MenuPrint_Centered(gUnknown_083F8380[gSpecialVar_0x8005], 21, 3, 64);
 }
 
 void sub_810E984(u8 taskId)

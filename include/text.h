@@ -2,6 +2,7 @@
 #define GUARD_TEXT_H
 
 #define CHAR_SPACE          0x00
+#define CHAR_LV             0x34
 #define CHAR_SONG_WORD_SEPARATOR 0x37  // separates words in the bard song. Not sure if it's used for anything else
 #define CHAR_0              0xA1
 #define CHAR_QUESTION_MARK  0xAC
@@ -73,6 +74,27 @@
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
 #define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
+
+#define EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW 4
+#define TEXT_COLOR_TRANSPARENT 0x00
+#define TEXT_COLOR_DARK_GREY   0x01
+#define TEXT_COLOR_RED         0x02
+#define TEXT_COLOR_GREEN       0x03
+#define TEXT_COLOR_BLUE        0x04
+#define TEXT_COLOR_YELLOW      0x05
+#define TEXT_COLOR_CYAN        0x06
+#define TEXT_COLOR_MAGENTA     0x07
+#define TEXT_COLOR_LIGHT_GREY  0x08
+#define TEXT_COLOR_BLACK       0x09
+#define TEXT_COLOR_BLACK2      0x0A
+#define TEXT_COLOR_SILVER      0x0B
+#define TEXT_COLOR_WHITE       0x0C
+#define TEXT_COLOR_SKY_BLUE    0x0D
+#define TEXT_COLOR_LIGHT_BLUE  0x0E
+#define TEXT_COLOR_WHITE2      0x0F
+
+#define EXT_CTRL_CODE_CLEAR 17
+
 
 struct WindowTemplate
 {
@@ -242,8 +264,8 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
 u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 alignType);
 u8 GetStringWidth(struct Window *win, const u8 *s);
 u8 Text_InitWindow8004D04(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6);
-u8 Text_InitWindow8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
-u8 Text_InitWindow8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6);
+u8 Text_InitWindow_RightAligned(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 right, u8 top);
+u8 Text_InitWindow_Centered(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6);
 u8 Text_GetWindowPaletteNum(struct Window *win);
 void Text_GetTextColors(struct Window *win, u8 *foreground, u8 *background, u8 *shadow);
 void Text_InitWindow8004E3C(const struct WindowTemplate *winConfig, u8 *tileData, const u8 *text);

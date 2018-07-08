@@ -290,7 +290,7 @@ void ShowLinkBattleRecords(void)
 {
     s32 i;
     Menu_DrawStdWindowFrame(1, 0, 28, 18);
-    sub_8072BD8(gOtherText_BattleResults, 0, 1, 240);
+    MenuPrint_Centered(gOtherText_BattleResults, 0, 1, 240);
 
     PrintLinkBattleWinsLossesDraws(gSaveBlock1.linkBattleRecords);
 #if ENGLISH
@@ -368,7 +368,7 @@ void ShowBattleTowerRecords(void)
 {
     u16 i;
     Menu_DrawStdWindowFrame(3, 1, 27, 17);
-    sub_8072BD8(gOtherText_BattleTowerResults, 3, 2, 0xC8);
+    MenuPrint_Centered(gOtherText_BattleTowerResults, 3, 2, 0xC8);
     Menu_PrintText(gOtherText_Lv50, 5, 6);
     Menu_PrintText(gOtherText_Lv100, 5, 12);
     for (i = 5; i < 26; i++)
