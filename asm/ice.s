@@ -7,7 +7,7 @@
 
 	@ ice
 
-	thumb_func_start sub_80D7704
+/*	thumb_func_start sub_80D7704
 sub_80D7704: @ 80D7704
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1042,7 +1042,7 @@ _080D7F08:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D7E88
+	thumb_func_end sub_80D7E88 */
 
 	thumb_func_start sub_80D7F10
 sub_80D7F10: @ 80D7F10
