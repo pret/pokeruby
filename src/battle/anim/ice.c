@@ -773,7 +773,7 @@ void sub_80D792C(struct Sprite *sprite)
     sprite->data[0] = gBattleAnimArgs[4];
 
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
-    sprite->callback = StartTranslateAnimSpriteByDeltas;
+    sprite->callback = StartAnimLinearTranslation;
 }
 
 // MATCHING
