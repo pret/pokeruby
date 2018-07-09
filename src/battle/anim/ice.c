@@ -3,10 +3,16 @@
 #include "rom_8077ABC.h"
 #include "battle_anim.h"
 #include "constants/battle_constants.h"
+#include "task.h"
 
 extern s16 gBattleAnimArgs[];
-extern u8 gAnimBankAttacker;
-extern u8 gAnimBankTarget;
+extern u8  gAnimBankAttacker;
+extern u8  gAnimBankTarget;
+
+extern u16 gBattle_BG1_X;
+extern u16 gBattle_BG1_Y;
+
+extern const u8 gUnknown_083970E8[]; // or u16??
 
 //extern u16 temp_1;
 //extern u16 temp_2;
@@ -30,6 +36,7 @@ void sub_80D7BA0(struct Sprite *sprite);
 void sub_80D7C08(struct Sprite *sprite);
 void sub_80D7C8C(struct Sprite *sprite);
 void sub_80D7E18(struct Sprite *sprite);
+void sub_80D8048(struct Sprite *sprite);
 
 const union AnimCmd gSpriteAnim_83D9B58[] =
 {
@@ -514,13 +521,15 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9F0C =
 // NOT EQUIVALENT
 void sub_80D7704(struct Sprite *sprite)
 {
+    sprite->oam.tileNum += 7;
+
     sprite->data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     sprite->data[3] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
 
-    u8 r6;
-    u32 r1 = _080D781C;
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = gBattleAnimArgs[0];
 }
 #else
 NAKED void sub_80D7704(struct Sprite *sprite)
@@ -808,12 +817,11 @@ void sub_80D7A28(struct Sprite *sprite)
         move_anim_8074EE0(sprite);
 }
 
-#ifdef NONMATCHING
-// this is very wrong but my brain cannot right now so pce
-// CLOSE
+// MATCHING
 void sub_80D7A64(struct Sprite *sprite)
 {
-    s16 i = 0;
+    int i;
+    s16 tempDataHolder[8];
 
     InitAnimSpritePos(sprite, 1);
 
@@ -828,228 +836,44 @@ void sub_80D7A64(struct Sprite *sprite)
     }
 
     else
-    {
-        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[3]);
-    }
+        SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
 
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
-    {
         sprite->data[2] -= gBattleAnimArgs[2];
-    }
 
     else
-    {
         sprite->data[2] += gBattleAnimArgs[2];
-    }
 
-    // !!!!! YOU ARE HERE
-    //s16 i = 0;
+    for (i = 0; i < 8; i++)
+        tempDataHolder[i] = sprite->data[i];
 
-    for (i = 7; i >= 0; i--)
-    {
-        // do i an need offset? this will break maybe
-        sprite->data[i] = sprite->data[i-1];
-    }
-
-    //
     sub_8078D60(sprite);
 
     sprite->data[1] ^= 1;
     sprite->data[2] ^= 1;
 
-    sprite->data[0] = 1;
-
-    while (0) //(sub_8078CE8(sprite)) // is this an if / else if ? <-- NO!
+    for (;;)
     {
-        if (sprite->pos1.x + sprite->pos2.x + 1 > 272)
-        {
-            // break while?
-            break;
-        }
-        if (sprite->pos1.y + sprite->pos2.y > 160)
-        {
-            break;
-        }
-        if (sprite->pos1.y + sprite->pos2.y >= -16)
-        {
-            break;
-        }
-    }
+        sprite->data[0] = 1;
+        sub_8078CE8(sprite);
 
-    //
+        if ((u32)(sprite->pos1.x + sprite->pos2.x + 16) > 272
+         || sprite->pos1.y + sprite->pos2.y > 160
+         || sprite->pos1.y + sprite->pos2.y < -16)
+            break;
+    }
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
 
     sprite->pos2.y = 0;
     sprite->pos2.x = 0;
 
-    for (i = 7; i >= 0; i--)
-    {
-        // there is no way this is right
-        sprite->data[i] = sprite->data[i + 1];
-    }
+    for (i = 0; i < 8; i++)
+        sprite->data[i] = tempDataHolder[i];
 
-    // this should be correct at least
     sprite->callback = sub_8078D8C;
     StoreSpriteCallbackInData(sprite, sub_80D7BA0);
 }
-#else
-NAKED void sub_80D7A64(struct Sprite *sprite)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tsub sp, 0x10\n"
-                "\tadds r5, r0, 0\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl InitAnimSpritePos\n"
-                "\tldr r6, _080D7AAC @ =gBattleAnimArgs\n"
-                "\tldrh r0, [r6, 0x8]\n"
-                "\tstrh r0, [r5, 0x2E]\n"
-                "\tldrh r0, [r5, 0x20]\n"
-                "\tstrh r0, [r5, 0x30]\n"
-                "\tldrh r0, [r5, 0x22]\n"
-                "\tstrh r0, [r5, 0x34]\n"
-                "\tmovs r1, 0xA\n"
-                "\tldrsh r0, [r6, r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D7AB4\n"
-                "\tldr r4, _080D7AB0 @ =gAnimBankTarget\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstrh r0, [r5, 0x32]\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x3\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tldrh r6, [r6, 0x6]\n"
-                "\tadds r0, r6\n"
-                "\tstrh r0, [r5, 0x36]\n"
-                "\tb _080D7AC6\n"
-                "\t.align 2, 0\n"
-                "_080D7AAC: .4byte gBattleAnimArgs\n"
-                "_080D7AB0: .4byte gAnimBankTarget\n"
-                "_080D7AB4:\n"
-                "\tldr r0, _080D7AE0 @ =gAnimBankTarget\n"
-                "\tldrb r0, [r0]\n"
-                "\tadds r2, r5, 0\n"
-                "\tadds r2, 0x32\n"
-                "\tadds r3, r5, 0\n"
-                "\tadds r3, 0x36\n"
-                "\tmovs r1, 0x1\n"
-                "\tbl SetAverageBattlerPositions\n"
-                "_080D7AC6:\n"
-                "\tldr r0, _080D7AE4 @ =gAnimBankAttacker\n"
-                "\tldrb r0, [r0]\n"
-                "\tbl GetBattlerSide\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D7AEC\n"
-                "\tldr r0, _080D7AE8 @ =gBattleAnimArgs\n"
-                "\tldrh r1, [r5, 0x32]\n"
-                "\tldrh r0, [r0, 0x4]\n"
-                "\tsubs r1, r0\n"
-                "\tstrh r1, [r5, 0x32]\n"
-                "\tb _080D7AF6\n"
-                "\t.align 2, 0\n"
-                "_080D7AE0: .4byte gAnimBankTarget\n"
-                "_080D7AE4: .4byte gAnimBankAttacker\n"
-                "_080D7AE8: .4byte gBattleAnimArgs\n"
-                "_080D7AEC:\n"
-                "\tldr r0, _080D7B94 @ =gBattleAnimArgs\n"
-                "\tldrh r0, [r0, 0x4]\n"
-                "\tldrh r2, [r5, 0x32]\n"
-                "\tadds r0, r2\n"
-                "\tstrh r0, [r5, 0x32]\n"
-                "_080D7AF6:\n"
-                "\tadds r7, r5, 0\n"
-                "\tadds r7, 0x2E\n"
-                "\tadds r2, r7, 0\n"
-                "\tmov r1, sp\n"
-                "\tmovs r4, 0x7\n"
-                "_080D7B00:\n"
-                "\tldrh r0, [r2]\n"
-                "\tstrh r0, [r1]\n"
-                "\tadds r2, 0x2\n"
-                "\tadds r1, 0x2\n"
-                "\tsubs r4, 0x1\n"
-                "\tcmp r4, 0\n"
-                "\tbge _080D7B00\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8078D60\n"
-                "\tldrh r0, [r5, 0x30]\n"
-                "\tmovs r1, 0x1\n"
-                "\teors r0, r1\n"
-                "\tstrh r0, [r5, 0x30]\n"
-                "\tldrh r0, [r5, 0x32]\n"
-                "\teors r0, r1\n"
-                "\tstrh r0, [r5, 0x32]\n"
-                "_080D7B22:\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r5, 0x2E]\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl sub_8078CE8\n"
-                "\tmovs r0, 0x20\n"
-                "\tldrsh r1, [r5, r0]\n"
-                "\tmovs r2, 0x24\n"
-                "\tldrsh r0, [r5, r2]\n"
-                "\tadds r1, r0\n"
-                "\tadds r1, 0x10\n"
-                "\tmovs r0, 0x88\n"
-                "\tlsls r0, 1\n"
-                "\tcmp r1, r0\n"
-                "\tbhi _080D7B56\n"
-                "\tmovs r0, 0x22\n"
-                "\tldrsh r1, [r5, r0]\n"
-                "\tmovs r2, 0x26\n"
-                "\tldrsh r0, [r5, r2]\n"
-                "\tadds r1, r0\n"
-                "\tcmp r1, 0xA0\n"
-                "\tbgt _080D7B56\n"
-                "\tmovs r0, 0x10\n"
-                "\tnegs r0, r0\n"
-                "\tcmp r1, r0\n"
-                "\tbge _080D7B22\n"
-                "_080D7B56:\n"
-                "\tldrh r0, [r5, 0x24]\n"
-                "\tldrh r1, [r5, 0x20]\n"
-                "\tadds r0, r1\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r0, [r5, 0x20]\n"
-                "\tldrh r0, [r5, 0x26]\n"
-                "\tldrh r2, [r5, 0x22]\n"
-                "\tadds r0, r2\n"
-                "\tstrh r0, [r5, 0x22]\n"
-                "\tstrh r1, [r5, 0x26]\n"
-                "\tstrh r1, [r5, 0x24]\n"
-                "\tldr r6, _080D7B98 @ =sub_8078D8C\n"
-                "\tldr r1, _080D7B9C @ =sub_80D7BA0\n"
-                "\tmov r3, sp\n"
-                "\tadds r2, r7, 0\n"
-                "\tmovs r4, 0x7\n"
-                "_080D7B76:\n"
-                "\tldrh r0, [r3]\n"
-                "\tstrh r0, [r2]\n"
-                "\tadds r3, 0x2\n"
-                "\tadds r2, 0x2\n"
-                "\tsubs r4, 0x1\n"
-                "\tcmp r4, 0\n"
-                "\tbge _080D7B76\n"
-                "\tstr r6, [r5, 0x1C]\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl StoreSpriteCallbackInData\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D7B94: .4byte gBattleAnimArgs\n"
-                "_080D7B98: .4byte sub_8078D8C\n"
-                "_080D7B9C: .4byte sub_80D7BA0");
-}
-#endif // NONMATCHING
 
 // MATCHING
 void sub_80D7BA0(struct Sprite *sprite)
@@ -1220,11 +1044,96 @@ void sub_80D7E88(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
 }
 
+// MATCHING
+void sub_80D7F10(struct Sprite *sprite)
+{
+    s16 tempVar;
+    u8  battler;
 
+    if (gBattleAnimArgs[4] == 0)
+    {
+        if (gBattleAnimArgs[5] == 0)
+            InitAnimSpritePos(sprite, 0);
 
+        else
+        {
+            SetAverageBattlerPositions(gAnimBankAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
 
+            if (GetBattlerSide(gAnimBankAttacker) << 24 != B_SIDE_PLAYER) 
+                sprite->pos1.x -= gBattleAnimArgs[0];
 
+            else 
+                sprite->pos1.x += gBattleAnimArgs[0];
 
+            sprite->pos1.y += gBattleAnimArgs[1];
+        }
+        battler = gAnimBankAttacker;
+    }
+    else 
+    {
+        if (gBattleAnimArgs[5] == 0)
+            sub_8078764(sprite, 0);
+
+        else 
+        {
+            SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
+            
+            if (GetBattlerSide(gAnimBankTarget) << 24 != B_SIDE_PLAYER)
+                sprite->pos1.x -= gBattleAnimArgs[0];
+
+            else 
+                sprite->pos1.x += gBattleAnimArgs[0];
+
+            sprite->pos1.y += gBattleAnimArgs[1];
+        }
+        battler = gAnimBankTarget;
+    }
+    sprite->data[7] = battler;
+
+    if (gBattleAnimArgs[5] == 0 || IsDoubleBattle() << 24 == 0) 
+        tempVar = 0x20;
+
+    else
+        tempVar = 0x40;
+
+    sprite->data[6] = tempVar;
+
+    if (GetBattlerSide(gAnimBankTarget) << 24 == B_SIDE_PLAYER)
+        sprite->pos1.y += 8;
+
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = sprite->pos1.x;
+    sprite->data[2] = sprite->pos1.x;
+    sprite->data[3] = sprite->pos1.y;
+    sprite->data[4] = sprite->pos1.y + gBattleAnimArgs[2];
+
+    InitAnimLinearTranslation(sprite);
+
+    sprite->data[5] = 64;
+    
+    sprite->callback = sub_80D8048;
+    sub_80D8048(sprite);
+}
+
+// MATCHING 
+void sub_80D8048(struct Sprite *sprite)
+{
+    if (TranslateAnimLinear(sprite) << 24 == 0)
+    {
+        sprite->pos2.x += Sin(sprite->data[5], sprite->data[6]);
+        sprite->pos2.y += Cos(sprite->data[5], -6);
+
+        if ((u16)(sprite->data[5] - 64) <= 0x7F)
+            sprite->oam.priority = sub_8079ED4(sprite->data[7]); 
+
+        else
+            sprite->oam.priority = sub_8079ED4(sprite->data[7]) + 1;
+
+        sprite->data[5] = (sprite->data[5] + 3) & 0xFF;
+    }
+    else
+        DestroyAnimSprite(sprite);
+}
 
 
 

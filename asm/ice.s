@@ -437,19 +437,21 @@ sub_80D7A28: @ 80D7A28
 _080D7A5E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D7A28
+	thumb_func_end sub_80D7A28 
 
 	thumb_func_start sub_80D7A64
 sub_80D7A64: @ 80D7A64
 	push {r4-r7,lr}
 	sub sp, 0x10
-	adds r5, r0, 0
-	movs r1, 0x1
+	adds r5, r0, 0      // r5 = sprite
+	movs r1, 0x1        // r1 = 1
 	bl InitAnimSpritePos
-	ldr r6, _080D7AAC @ =gBattleAnimArgs
-	ldrh r0, [r6, 0x8]
-	strh r0, [r5, 0x2E]
-	ldrh r0, [r5, 0x20]
+	// InitAnimSpritePos(sprite, 1)
+
+	ldr r6, _080D7AAC   // r6 = gBattleAnimArgs
+	ldrh r0, [r6, 0x8]  // r0 = gBattleAnimArgs[4]
+	strh r0, [r5, 0x2E] // sprite->data[0] = gBattleAnimArgs[4];
+	ldrh r0, [r5, 0x20] 
 	strh r0, [r5, 0x30]
 	ldrh r0, [r5, 0x22]
 	strh r0, [r5, 0x34]
@@ -595,7 +597,7 @@ _080D7B98: .4byte sub_8078D8C
 _080D7B9C: .4byte sub_80D7BA0
 	thumb_func_end sub_80D7A64
 
-	thumb_func_start sub_80D7BA0
+/*	thumb_func_start sub_80D7BA0
 sub_80D7BA0: @ 80D7BA0
 	push {r4,r5,lr}
 	adds r4, r0, 0
@@ -1044,7 +1046,7 @@ _080D7F08:
 	bx r0
 	thumb_func_end sub_80D7E88 */
 
-	thumb_func_start sub_80D7F10
+/*	thumb_func_start sub_80D7F10
 sub_80D7F10: @ 80D7F10
 	push {r4-r6,lr}
 	adds r5, r0, 0
@@ -1200,9 +1202,9 @@ _080D800C:
 _080D803C: .4byte gAnimBankTarget
 _080D8040: .4byte gBattleAnimArgs
 _080D8044: .4byte sub_80D8048
-	thumb_func_end sub_80D7F10
+	thumb_func_end sub_80D7F10 */
 
-	thumb_func_start sub_80D8048
+/*	thumb_func_start sub_80D8048
 sub_80D8048: @ 80D8048
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1277,7 +1279,7 @@ _080D80D8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D8048
+	thumb_func_end sub_80D8048 */
 
 	thumb_func_start sub_80D80E0
 sub_80D80E0: @ 80D80E0
@@ -1391,7 +1393,7 @@ _080D81D0: .4byte gBattleAnimFogTilemap
 _080D81D4: .4byte gUnknown_083970E8
 _080D81D8: .4byte gTasks
 _080D81DC: .4byte sub_80D81E0
-	thumb_func_end sub_80D80E0
+	thumb_func_end sub_80D80E0 
 
 	thumb_func_start sub_80D81E0
 sub_80D81E0: @ 80D81E0
