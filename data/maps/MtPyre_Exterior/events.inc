@@ -1,6 +1,6 @@
 MtPyre_Exterior_EventObjects:: @ 838CB14
-	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 15, 3, 1, 0, 0, 0, 0, MtPyre_Exterior_EventScript_1B1974, FLAG_ITEM_MT_PYRE_EXTERIOR_1
-	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 40, 3, 1, 0, 0, 0, 0, MtPyre_Exterior_EventScript_1B1981, FLAG_ITEM_MT_PYRE_EXTERIOR_2
+	object_event 1, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 15, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MtPyre_Exterior_EventScript_1B1974, FLAG_ITEM_MT_PYRE_EXTERIOR_1
+	object_event 2, EVENT_OBJ_GFX_ITEM_BALL, 0, 19, 40, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, MtPyre_Exterior_EventScript_1B1981, FLAG_ITEM_MT_PYRE_EXTERIOR_2
 
 MtPyre_Exterior_MapWarps:: @ 838CB44
 	warp_def 10, 42, 3, 1, MAP_MT_PYRE_1F

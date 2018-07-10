@@ -1,12 +1,12 @@
 MagmaHideout_B1F_EventObjects:: @ 838EA28
-	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 33, 3, 3, 9, 1, 1, 1, 5, MagmaHideout_B1F_EventScript_15D850, 0
-	object_event 2, EVENT_OBJ_GFX_VAR_1, 0, 41, 17, 3, 23, 1, 1, 1, 3, MagmaHideout_B1F_EventScript_15D875, 0
-	object_event 3, EVENT_OBJ_GFX_VAR_2, 0, 33, 19, 3, 27, 4, 1, 1, 3, MagmaHideout_B1F_EventScript_15D89A, 0
-	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 10, 3, 1, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19C2, FLAG_ITEM_MAGMA_HIDEOUT_B1F_1
-	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 18, 3, 1, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19DC, FLAG_ITEM_MAGMA_HIDEOUT_B1F_2
-	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 10, 3, 1, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1A04FD, FLAG_HIDE_ELECTRODE_1_HIDEOUT
-	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 11, 3, 1, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19CF, FLAG_ITEM_MAGMA_HIDEOUT_B1F_3
-	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 11, 3, 1, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1A051B, FLAG_HIDE_ELECTRODE_2_HIDEOUT
+	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 33, 3, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 1, 1, 5, MagmaHideout_B1F_EventScript_15D850, 0
+	object_event 2, EVENT_OBJ_GFX_VAR_1, 0, 41, 17, 3, MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE, 1, 1, 1, 3, MagmaHideout_B1F_EventScript_15D875, 0
+	object_event 3, EVENT_OBJ_GFX_VAR_2, 0, 33, 19, 3, MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT, 4, 1, 1, 3, MagmaHideout_B1F_EventScript_15D89A, 0
+	object_event 4, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19C2, FLAG_ITEM_MAGMA_HIDEOUT_B1F_1
+	object_event 5, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 18, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19DC, FLAG_ITEM_MAGMA_HIDEOUT_B1F_2
+	object_event 6, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 10, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1A04FD, FLAG_HIDE_ELECTRODE_1_HIDEOUT
+	object_event 7, EVENT_OBJ_GFX_ITEM_BALL, 0, 26, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1B19CF, FLAG_ITEM_MAGMA_HIDEOUT_B1F_3
+	object_event 8, EVENT_OBJ_GFX_ITEM_BALL, 0, 27, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, MagmaHideout_B1F_EventScript_1A051B, FLAG_HIDE_ELECTRODE_2_HIDEOUT
 
 MagmaHideout_B1F_MapWarps:: @ 838EAE8
 	warp_def 3, 3, 3, 1, MAP_MAGMA_HIDEOUT_1F

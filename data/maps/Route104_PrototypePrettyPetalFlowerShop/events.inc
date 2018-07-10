@@ -1,5 +1,5 @@
 Route104_PrototypePrettyPetalFlowerShop_EventObjects:: @ 8392080
-	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 2, 3, 3, 8, 0, 0, 0, 0, Route104_PrototypePrettyPetalFlowerShop_EventScript_160DC1, 0
+	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 2, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route104_PrototypePrettyPetalFlowerShop_EventScript_160DC1, 0
 
 Route104_PrototypePrettyPetalFlowerShop_MapWarps:: @ 8392098
 	warp_def 2, 8, 0, 0, MAP_ROUTE104_PROTOTYPE

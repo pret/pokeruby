@@ -1,13 +1,13 @@
 MossdeepCity_Gym_EventObjects:: @ 838A660
-	object_event 1, EVENT_OBJ_GFX_TATE, 0, 8, 3, 3, 8, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A56B, 0
-	object_event 2, EVENT_OBJ_GFX_PSYCHIC_M, 0, 2, 24, 3, 7, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A74E, 0
-	object_event 3, EVENT_OBJ_GFX_PSYCHIC_M, 0, 17, 18, 3, 7, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A77C, 0
-	object_event 4, EVENT_OBJ_GFX_LASS, 0, 9, 17, 3, 9, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A7C1, 0
-	object_event 5, EVENT_OBJ_GFX_LASS, 0, 11, 10, 3, 8, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A7AA, 0
-	object_event 6, EVENT_OBJ_GFX_PSYCHIC_M, 0, 0, 7, 3, 10, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A765, 0
-	object_event 7, EVENT_OBJ_GFX_LASS, 0, 4, 3, 3, 8, 0, 0, 1, 2, MossdeepCity_Gym_EventScript_15A793, 0
-	object_event 8, EVENT_OBJ_GFX_MAN_2, 0, 8, 29, 3, 10, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A7D8, 0
-	object_event 9, EVENT_OBJ_GFX_LIZA, 0, 9, 3, 3, 8, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A56B, 0
+	object_event 1, EVENT_OBJ_GFX_TATE, 0, 8, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A56B, 0
+	object_event 2, EVENT_OBJ_GFX_PSYCHIC_M, 0, 2, 24, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A74E, 0
+	object_event 3, EVENT_OBJ_GFX_PSYCHIC_M, 0, 17, 18, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A77C, 0
+	object_event 4, EVENT_OBJ_GFX_LASS, 0, 9, 17, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A7C1, 0
+	object_event 5, EVENT_OBJ_GFX_LASS, 0, 11, 10, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A7AA, 0
+	object_event 6, EVENT_OBJ_GFX_PSYCHIC_M, 0, 0, 7, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 1, MossdeepCity_Gym_EventScript_15A765, 0
+	object_event 7, EVENT_OBJ_GFX_LASS, 0, 4, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 2, MossdeepCity_Gym_EventScript_15A793, 0
+	object_event 8, EVENT_OBJ_GFX_MAN_2, 0, 8, 29, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A7D8, 0
+	object_event 9, EVENT_OBJ_GFX_LIZA, 0, 9, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MossdeepCity_Gym_EventScript_15A56B, 0
 
 MossdeepCity_Gym_MapWarps:: @ 838A738
 	warp_def 9, 29, 0, 1, MAP_MOSSDEEP_CITY

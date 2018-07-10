@@ -1,7 +1,7 @@
 VerdanturfTown_ContestHall_EventObjects:: @ 8386AEC
-	object_event 1, EVENT_OBJ_GFX_BOY_4, 0, 0, 7, 0, 2, 1, 3, 0, 0, VerdanturfTown_ContestHall_EventScript_153EA9, 0
-	object_event 2, EVENT_OBJ_GFX_BOY_3, 0, 20, 15, 0, 2, 1, 1, 0, 0, VerdanturfTown_ContestHall_EventScript_153E97, 0
-	object_event 3, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 9, 8, 3, 2, 2, 2, 0, 0, VerdanturfTown_ContestHall_EventScript_153EA0, 0
+	object_event 1, EVENT_OBJ_GFX_BOY_4, 0, 0, 7, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 3, 0, 0, VerdanturfTown_ContestHall_EventScript_153EA9, 0
+	object_event 2, EVENT_OBJ_GFX_BOY_3, 0, 20, 15, 0, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, VerdanturfTown_ContestHall_EventScript_153E97, 0
+	object_event 3, EVENT_OBJ_GFX_LITTLE_GIRL_2, 0, 9, 8, 3, MOVEMENT_TYPE_WANDER_AROUND, 2, 2, 0, 0, VerdanturfTown_ContestHall_EventScript_153EA0, 0
 
 VerdanturfTown_ContestHall_MapWarps:: @ 8386B34
 	warp_def 11, 17, 0, 2, MAP_VERDANTURF_TOWN_CONTEST_LOBBY

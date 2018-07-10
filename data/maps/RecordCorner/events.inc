@@ -1,5 +1,5 @@
 RecordCorner_EventObjects:: @ 839139C
-	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 10, 5, 3, 8, 0, 0, 0, 0, RecordCorner_EventScript_1A44BC, 0
+	object_event 1, EVENT_OBJ_GFX_WOMAN_6, 0, 10, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, RecordCorner_EventScript_1A44BC, 0
 
 RecordCorner_MapWarps:: @ 83913B4
 	warp_def 8, 9, 3, 127, MAP_NONE

@@ -1,6 +1,6 @@
 ShoalCave_LowTideLowerRoom_EventObjects:: @ 838DE3C
-	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 25, 3, 3, 1, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11
-	object_event 2, EVENT_OBJ_GFX_BLACK_BELT, 0, 11, 4, 3, 2, 1, 1, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_15E44F, 0
+	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 25, 3, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11
+	object_event 2, EVENT_OBJ_GFX_BLACK_BELT, 0, 11, 4, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, ShoalCave_LowTideLowerRoom_EventScript_15E44F, 0
 
 ShoalCave_LowTideLowerRoom_MapWarps:: @ 838DE6C
 	warp_def 7, 2, 3, 3, MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM

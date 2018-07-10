@@ -1,8 +1,8 @@
 FallarborTown_EventObjects:: @ 8380E04
-	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 8, 11, 3, 8, 0, 1, 0, 0, FallarborTown_EventScript_14E814, 0
-	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 9, 3, 5, 1, 0, 0, 0, FallarborTown_EventScript_14E7F5, 0
-	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 15, 3, 3, 1, 1, 0, 0, FallarborTown_EventScript_14E81D, 0
-	object_event 4, EVENT_OBJ_GFX_AZURILL, 0, 8, 12, 3, 1, 1, 0, 0, 0, FallarborTown_EventScript_14E826, FLAG_HIDE_AZURILL_FALLARBOR
+	object_event 1, EVENT_OBJ_GFX_GIRL_1, 0, 8, 11, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 1, 0, 0, FallarborTown_EventScript_14E814, 0
+	object_event 2, EVENT_OBJ_GFX_OLD_MAN_1, 0, 11, 9, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, FallarborTown_EventScript_14E7F5, 0
+	object_event 3, EVENT_OBJ_GFX_GENTLEMAN, 0, 11, 15, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 1, 1, 0, 0, FallarborTown_EventScript_14E81D, 0
+	object_event 4, EVENT_OBJ_GFX_AZURILL, 0, 8, 12, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 0, 0, 0, FallarborTown_EventScript_14E826, FLAG_HIDE_AZURILL_FALLARBOR
 
 FallarborTown_MapWarps:: @ 8380E64
 	warp_def 15, 15, 0, 0, MAP_FALLARBOR_TOWN_MART

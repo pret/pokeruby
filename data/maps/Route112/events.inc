@@ -1,16 +1,16 @@
 Route112_EventObjects:: @ 8382818
-	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 26, 30, 3, 8, 1, 1, 0, 0, Route112_EventScript_150513, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
-	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 24, 34, 3, 14, 0, 0, 1, 2, Route112_EventScript_150549, 0
-	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 29, 49, 3, 8, 0, 0, 1, 3, Route112_EventScript_15059E, 0
-	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 22, 46, 3, 23, 0, 0, 1, 3, Route112_EventScript_1505B5, 0
-	object_event 5, EVENT_OBJ_GFX_HIKER, 0, 17, 40, 3, 16, 0, 0, 1, 4, Route112_EventScript_150560, 0
-	object_event 6, EVENT_OBJ_GFX_VAR_1, 0, 27, 30, 3, 8, 0, 0, 0, 0, Route112_EventScript_15051C, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
-	object_event 7, EVENT_OBJ_GFX_BERRY_TREE, 0, 27, 6, 0, 12, 0, 0, 0, 24, S_BerryTree, 0
-	object_event 8, EVENT_OBJ_GFX_BERRY_TREE, 0, 28, 6, 0, 12, 0, 0, 0, 23, S_BerryTree, 0
-	object_event 9, EVENT_OBJ_GFX_BERRY_TREE, 0, 29, 6, 0, 12, 0, 0, 0, 22, S_BerryTree, 0
-	object_event 10, EVENT_OBJ_GFX_BERRY_TREE, 0, 30, 6, 3, 12, 0, 0, 0, 21, S_BerryTree, 0
-	object_event 11, EVENT_OBJ_GFX_HIKER, 0, 8, 50, 3, 26, 0, 3, 0, 0, Route112_EventScript_150540, 0
-	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 43, 3, 1, 0, 0, 0, 0, Route112_EventScript_1B14EF, FLAG_ITEM_ROUTE112_1
+	object_event 1, EVENT_OBJ_GFX_VAR_1, 0, 26, 30, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 0, 0, Route112_EventScript_150513, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
+	object_event 2, EVENT_OBJ_GFX_HIKER, 0, 24, 34, 3, MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT, 0, 0, 1, 2, Route112_EventScript_150549, 0
+	object_event 3, EVENT_OBJ_GFX_CAMPER, 0, 29, 49, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 3, Route112_EventScript_15059E, 0
+	object_event 4, EVENT_OBJ_GFX_PICNICKER, 0, 22, 46, 3, MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE, 0, 0, 1, 3, Route112_EventScript_1505B5, 0
+	object_event 5, EVENT_OBJ_GFX_HIKER, 0, 17, 40, 3, MOVEMENT_TYPE_FACE_UP_AND_RIGHT, 0, 0, 1, 4, Route112_EventScript_150560, 0
+	object_event 6, EVENT_OBJ_GFX_VAR_1, 0, 27, 30, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route112_EventScript_15051C, FLAG_HIDE_GRUNTS_BLOCKING_CABLE_CAR
+	object_event 7, EVENT_OBJ_GFX_BERRY_TREE, 0, 27, 6, 0, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 24, S_BerryTree, 0
+	object_event 8, EVENT_OBJ_GFX_BERRY_TREE, 0, 28, 6, 0, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 23, S_BerryTree, 0
+	object_event 9, EVENT_OBJ_GFX_BERRY_TREE, 0, 29, 6, 0, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 22, S_BerryTree, 0
+	object_event 10, EVENT_OBJ_GFX_BERRY_TREE, 0, 30, 6, 3, MOVEMENT_TYPE_BERRY_TREE_GROWTH, 0, 0, 0, 21, S_BerryTree, 0
+	object_event 11, EVENT_OBJ_GFX_HIKER, 0, 8, 50, 3, MOVEMENT_TYPE_WALK_DOWN_AND_UP, 0, 3, 0, 0, Route112_EventScript_150540, 0
+	object_event 12, EVENT_OBJ_GFX_ITEM_BALL, 0, 14, 43, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, Route112_EventScript_1B14EF, FLAG_ITEM_ROUTE112_1
 
 Route112_MapWarps:: @ 8382938
 	warp_def 28, 27, 0, 0, MAP_ROUTE112_CABLE_CAR_STATION

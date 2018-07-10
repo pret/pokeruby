@@ -1,7 +1,7 @@
 FallarborTown_PokemonCenter_2F_EventObjects:: @ 83868EC
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153BA8, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153B9C, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153BA2, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153BA8, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153B9C, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, FallarborTown_PokemonCenter_2F_EventScript_153BA2, 0
 
 FallarborTown_PokemonCenter_2F_MapWarps:: @ 8386934
 	warp_def 1, 5, 4, 2, MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F

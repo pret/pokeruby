@@ -1,5 +1,5 @@
 Route110_SeasideCyclingRoadNorthEntrance_EventObjects:: @ 8392CAC
-	object_event 1, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 7, 2, 3, 8, 0, 0, 0, 0, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB, 0
+	object_event 1, EVENT_OBJ_GFX_MART_EMPLOYEE, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634EB, 0
 
 Route110_SeasideCyclingRoadNorthEntrance_MapWarps:: @ 8392CC4
 	warp_def 1, 5, 0, 2, MAP_ROUTE110

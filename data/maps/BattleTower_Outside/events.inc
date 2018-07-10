@@ -1,9 +1,9 @@
 BattleTower_Outside_EventObjects:: @ 8391BEC
-	object_event 1, EVENT_OBJ_GFX_BUG_CATCHER, 0, 18, 11, 3, 2, 1, 1, 0, 0, BattleTower_Outside_EventScript_160263, 0
-	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 11, 14, 3, 2, 1, 1, 0, 0, BattleTower_Outside_EventScript_16026C, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_2, 0, 10, 11, 3, 2, 1, 1, 0, 0, BattleTower_Outside_EventScript_160275, 0
-	object_event 4, EVENT_OBJ_GFX_SS_TIDAL, 0, 19, 26, 1, 10, 1, 1, 0, 0, 0x0, 0
-	object_event 5, EVENT_OBJ_GFX_BEAUTY, 0, 19, 24, 3, 7, 1, 1, 0, 0, BattleTower_Outside_EventScript_160168, 0
+	object_event 1, EVENT_OBJ_GFX_BUG_CATCHER, 0, 18, 11, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleTower_Outside_EventScript_160263, 0
+	object_event 2, EVENT_OBJ_GFX_WOMAN_5, 0, 11, 14, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleTower_Outside_EventScript_16026C, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_2, 0, 10, 11, 3, MOVEMENT_TYPE_WANDER_AROUND, 1, 1, 0, 0, BattleTower_Outside_EventScript_160275, 0
+	object_event 4, EVENT_OBJ_GFX_SS_TIDAL, 0, 19, 26, 1, MOVEMENT_TYPE_FACE_RIGHT, 1, 1, 0, 0, 0x0, 0
+	object_event 5, EVENT_OBJ_GFX_BEAUTY, 0, 19, 24, 3, MOVEMENT_TYPE_FACE_UP, 1, 1, 0, 0, BattleTower_Outside_EventScript_160168, 0
 
 BattleTower_Outside_MapWarps:: @ 8391C64
 	warp_def 14, 8, 0, 0, MAP_BATTLE_TOWER_LOBBY

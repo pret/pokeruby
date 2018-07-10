@@ -1,10 +1,10 @@
 MtPyre_Summit_EventObjects:: @ 838CBD8
-	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 22, 5, 3, 8, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D5EF, 0
-	object_event 2, EVENT_OBJ_GFX_VAR_6, 0, 23, 6, 3, 7, 0, 0, 0, 0, 0x0, FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
-	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 23, 5, 3, 8, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D623, 0
-	object_event 4, EVENT_OBJ_GFX_VAR_1, 0, 21, 18, 3, 10, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DA9, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
-	object_event 5, EVENT_OBJ_GFX_VAR_1, 0, 25, 15, 3, 9, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DC0, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
-	object_event 6, EVENT_OBJ_GFX_VAR_1, 0, 21, 11, 3, 10, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DD7, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
+	object_event 1, EVENT_OBJ_GFX_OLD_MAN_2, 0, 22, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D5EF, 0
+	object_event 2, EVENT_OBJ_GFX_VAR_6, 0, 23, 6, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_LEADER_MT_PYRE_SUMMIT
+	object_event 3, EVENT_OBJ_GFX_OLD_WOMAN_1, 0, 23, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, MtPyre_Summit_EventScript_15D623, 0
+	object_event 4, EVENT_OBJ_GFX_VAR_1, 0, 21, 18, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DA9, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
+	object_event 5, EVENT_OBJ_GFX_VAR_1, 0, 25, 15, 3, MOVEMENT_TYPE_FACE_LEFT, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DC0, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
+	object_event 6, EVENT_OBJ_GFX_VAR_1, 0, 21, 11, 3, MOVEMENT_TYPE_FACE_RIGHT, 0, 0, 1, 3, MtPyre_Summit_EventScript_1B2DD7, FLAG_HIDE_GRUNTS_MT_PYRE_SUMMIT
 
 MtPyre_Summit_MapWarps:: @ 838CC68
 	warp_def 22, 31, 3, 1, MAP_MT_PYRE_EXTERIOR

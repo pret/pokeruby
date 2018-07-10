@@ -1,8 +1,8 @@
 VerdanturfTown_EventObjects:: @ 8380F00
-	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 4, 17, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_14E899, 0
-	object_event 2, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 9, 2, 3, 9, 1, 0, 0, 0, VerdanturfTown_EventScript_14E866, 0
-	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 11, 9, 3, 3, 0, 1, 0, 0, VerdanturfTown_EventScript_14E8AB, 0
-	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 6, 10, 3, 5, 1, 0, 0, 0, VerdanturfTown_EventScript_14E8A2, 0
+	object_event 1, EVENT_OBJ_GFX_MAN_2, 0, 4, 17, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_14E899, 0
+	object_event 2, EVENT_OBJ_GFX_LITTLE_GIRL_1, 0, 9, 2, 3, MOVEMENT_TYPE_FACE_LEFT, 1, 0, 0, 0, VerdanturfTown_EventScript_14E866, 0
+	object_event 3, EVENT_OBJ_GFX_BOY_1, 0, 11, 9, 3, MOVEMENT_TYPE_WANDER_UP_AND_DOWN, 0, 1, 0, 0, VerdanturfTown_EventScript_14E8AB, 0
+	object_event 4, EVENT_OBJ_GFX_CAMPER, 0, 6, 10, 3, MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT, 1, 0, 0, 0, VerdanturfTown_EventScript_14E8A2, 0
 
 VerdanturfTown_MapWarps:: @ 8380F60
 	warp_def 4, 7, 0, 0, MAP_VERDANTURF_TOWN_CONTEST_LOBBY
