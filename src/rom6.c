@@ -13,6 +13,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 
 extern u16 gSpecialVar_LastTalked;

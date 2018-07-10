@@ -22,6 +22,7 @@
 #include "tv.h"
 #include "wild_encounter.h"
 #include "constants/field_effects.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
 
 EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {0};
