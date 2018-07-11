@@ -15,10 +15,10 @@ SlateportCity_Harbor_MapWarps:: @ 8387FF0
 	warp_def 20, 15, 0, 9, MAP_SLATEPORT_CITY
 
 SlateportCity_Harbor_MapCoordEvents:: @ 8388010
-	coord_event 8, 11, 3, 0, VAR_SLATEPORT_HARBOR_STATE, 1, 0, SlateportCity_Harbor_EventScript_155F9B
-	coord_event 8, 12, 3, 0, VAR_SLATEPORT_HARBOR_STATE, 1, 0, SlateportCity_Harbor_EventScript_155FA7
-	coord_event 8, 13, 3, 0, VAR_SLATEPORT_HARBOR_STATE, 1, 0, SlateportCity_Harbor_EventScript_155FB3
-	coord_event 8, 14, 3, 0, VAR_SLATEPORT_HARBOR_STATE, 1, 0, SlateportCity_Harbor_EventScript_155FBF
+	coord_event 8, 11, 3, VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_155F9B
+	coord_event 8, 12, 3, VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_155FA7
+	coord_event 8, 13, 3, VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_155FB3
+	coord_event 8, 14, 3, VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_155FBF
 
 SlateportCity_Harbor_MapEvents:: @ 8388050
 	map_events SlateportCity_Harbor_EventObjects, SlateportCity_Harbor_MapWarps, SlateportCity_Harbor_MapCoordEvents, 0x0

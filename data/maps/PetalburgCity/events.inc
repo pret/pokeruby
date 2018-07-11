@@ -18,10 +18,10 @@ PetalburgCity_MapWarps:: @ 837F6C8
 	warp_def 25, 12, 0, 0, MAP_PETALBURG_CITY_MART
 
 PetalburgCity_MapCoordEvents:: @ 837F6F8
-	coord_event 8, 10, 3, 0, VAR_PETALBURG_STATE, 0, 0, PetalburgCity_EventScript_14B836
-	coord_event 8, 11, 3, 0, VAR_PETALBURG_STATE, 0, 0, PetalburgCity_EventScript_14B842
-	coord_event 8, 12, 3, 0, VAR_PETALBURG_STATE, 0, 0, PetalburgCity_EventScript_14B84E
-	coord_event 8, 13, 3, 0, VAR_PETALBURG_STATE, 0, 0, PetalburgCity_EventScript_14B85A
+	coord_event 8, 10, 3, VAR_PETALBURG_STATE, 0, PetalburgCity_EventScript_14B836
+	coord_event 8, 11, 3, VAR_PETALBURG_STATE, 0, PetalburgCity_EventScript_14B842
+	coord_event 8, 12, 3, VAR_PETALBURG_STATE, 0, PetalburgCity_EventScript_14B84E
+	coord_event 8, 13, 3, VAR_PETALBURG_STATE, 0, PetalburgCity_EventScript_14B85A
 
 PetalburgCity_MapBGEvents:: @ 837F738
 	bg_event 17, 10, 0, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_EventScript_14B812

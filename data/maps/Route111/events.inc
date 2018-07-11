@@ -42,40 +42,40 @@ Route111_MapWarps:: @ 8382500
 	warp_def 26, 18, 0, 0, MAP_ROUTE111_OLD_LADYS_REST_STOP
 
 Route111_MapCoordEvents:: @ 8382518
-	coord_event 12, 62, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 11, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150116
-	coord_event 12, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150116
-	coord_event 13, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150116
-	coord_event 7, 63, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 12, 44, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 13, 43, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 14, 42, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 16, 40, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 14, 61, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150116
-	coord_event 18, 32, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 17, 31, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 9, 37, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 10, 36, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 17, 39, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 18, 38, 3, 0, VAR_TEMP_3, 0, 0, Route111_EventScript_150122
-	coord_event 8, 64, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 9, 65, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 10, 65, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 11, 66, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 12, 67, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 13, 68, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 14, 69, 3, 0, 0, 0, 0, Route111_EventScript_1501BC
-	coord_event 10, 61, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 11, 62, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 13, 62, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 14, 62, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 17, 38, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 16, 39, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 15, 40, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 14, 41, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 13, 42, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 12, 43, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
-	coord_event 11, 44, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
+	coord_event 12, 62, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 11, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_150116
+	coord_event 12, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_150116
+	coord_event 13, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_150116
+	coord_event 7, 63, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 12, 44, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 13, 43, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 14, 42, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 16, 40, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 14, 61, 3, VAR_TEMP_3, 0, Route111_EventScript_150116
+	coord_event 18, 32, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 17, 31, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 9, 37, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 10, 36, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 17, 39, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 18, 38, 3, VAR_TEMP_3, 0, Route111_EventScript_150122
+	coord_event 8, 64, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 9, 65, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 10, 65, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 11, 66, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 12, 67, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 13, 68, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 14, 69, 3, 0, 0, Route111_EventScript_1501BC
+	coord_event 10, 61, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 11, 62, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 13, 62, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 14, 62, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 17, 38, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 16, 39, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 15, 40, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 14, 41, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 13, 42, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 12, 43, 3, 0, 0, Route111_EventScript_1501C9
+	coord_event 11, 44, 3, 0, 0, Route111_EventScript_1501C9
 
 Route111_MapBGEvents:: @ 8382738
 	bg_event 16, 114, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_150368

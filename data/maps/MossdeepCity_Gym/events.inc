@@ -14,7 +14,7 @@ MossdeepCity_Gym_MapWarps:: @ 838A738
 	warp_def 10, 29, 0, 1, MAP_MOSSDEEP_CITY
 
 MossdeepCity_Gym_MapCoordEvents:: @ 838A748
-	coord_event 12, 3, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_15A742
+	coord_event 12, 3, 3, VAR_TEMP_1, 0, MossdeepCity_Gym_EventScript_15A742
 
 MossdeepCity_Gym_MapBGEvents:: @ 838A758
 	bg_event 2, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_Gym_EventScript_15A5EA

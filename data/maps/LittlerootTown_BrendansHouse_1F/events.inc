@@ -11,7 +11,7 @@ LittlerootTown_BrendansHouse_1F_MapWarps:: @ 83856EC
 	warp_def 8, 2, 0, 0, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 
 LittlerootTown_BrendansHouse_1F_MapCoordEvents:: @ 8385704
-	coord_event 8, 8, 0, 0, VAR_LITTLEROOT_INTRO_STATE, 4, 0, LittlerootTown_BrendansHouse_1F_EventScript_152789
+	coord_event 8, 8, 0, VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_BrendansHouse_1F_EventScript_152789
 
 LittlerootTown_BrendansHouse_1F_MapEvents:: @ 8385714
 	map_events LittlerootTown_BrendansHouse_1F_EventObjects, LittlerootTown_BrendansHouse_1F_MapWarps, LittlerootTown_BrendansHouse_1F_MapCoordEvents, 0x0

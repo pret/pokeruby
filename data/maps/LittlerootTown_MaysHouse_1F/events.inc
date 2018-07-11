@@ -11,7 +11,7 @@ LittlerootTown_MaysHouse_1F_MapWarps:: @ 838593C
 	warp_def 2, 2, 0, 0, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 
 LittlerootTown_MaysHouse_1F_MapCoordEvents:: @ 8385954
-	coord_event 2, 8, 0, 0, VAR_LITTLEROOT_INTRO_STATE, 4, 0, LittlerootTown_MaysHouse_1F_EventScript_152A35
+	coord_event 2, 8, 0, VAR_LITTLEROOT_INTRO_STATE, 4, LittlerootTown_MaysHouse_1F_EventScript_152A35
 
 LittlerootTown_MaysHouse_1F_MapEvents:: @ 8385964
 	map_events LittlerootTown_MaysHouse_1F_EventObjects, LittlerootTown_MaysHouse_1F_MapWarps, LittlerootTown_MaysHouse_1F_MapCoordEvents, 0x0

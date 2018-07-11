@@ -6,8 +6,8 @@ TradeCenter_MapWarps:: @ 8391358
 	warp_def 6, 8, 3, 127, MAP_NONE
 
 TradeCenter_MapCoordEvents:: @ 8391368
-	coord_event 4, 5, 3, 0, VAR_TEMP_0, 0, 0, TradeCenter_EventScript_1A43F0
-	coord_event 7, 5, 3, 0, VAR_TEMP_0, 0, 0, TradeCenter_EventScript_1A43FA
+	coord_event 4, 5, 3, VAR_TEMP_0, 0, TradeCenter_EventScript_1A43F0
+	coord_event 7, 5, 3, VAR_TEMP_0, 0, TradeCenter_EventScript_1A43FA
 
 TradeCenter_MapEvents:: @ 8391388
 	map_events TradeCenter_EventObjects, TradeCenter_MapWarps, TradeCenter_MapCoordEvents, 0x0

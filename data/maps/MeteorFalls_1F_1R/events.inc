@@ -18,7 +18,7 @@ MeteorFalls_1F_1R_MapWarps:: @ 838BBBC
 	warp_def 26, 28, 3, 5, MAP_METEOR_FALLS_B1F_1R
 
 MeteorFalls_1F_1R_MapCoordEvents:: @ 838BBE4
-	coord_event 14, 18, 4, 0, VAR_METEOR_FALLS_STATE, 0, 0, MeteorFalls_1F_1R_EventScript_15C49C
+	coord_event 14, 18, 4, VAR_METEOR_FALLS_STATE, 0, MeteorFalls_1F_1R_EventScript_15C49C
 
 MeteorFalls_1F_1R_MapBGEvents:: @ 838BBF4
 	bg_event 38, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, MeteorFalls_1F_1R_EventScript_14E842

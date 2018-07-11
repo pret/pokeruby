@@ -18,8 +18,8 @@ AquaHideout_B2F_MapWarps:: @ 838CF94
 	warp_def 32, 20, 3, 4, MAP_AQUA_HIDEOUT_B1F
 
 AquaHideout_B2F_MapCoordEvents:: @ 838CFE4
-	coord_event 28, 17, 3, 0, VAR_TEMP_1, 0, 0, AquaHideout_B2F_EventScript_15D8BD
-	coord_event 28, 16, 3, 0, VAR_TEMP_1, 0, 0, AquaHideout_B2F_EventScript_15D8BD
+	coord_event 28, 17, 3, VAR_TEMP_1, 0, AquaHideout_B2F_EventScript_15D8BD
+	coord_event 28, 16, 3, VAR_TEMP_1, 0, AquaHideout_B2F_EventScript_15D8BD
 
 AquaHideout_B2F_MapEvents:: @ 838D004
 	map_events AquaHideout_B2F_EventObjects, AquaHideout_B2F_MapWarps, AquaHideout_B2F_MapCoordEvents, 0x0

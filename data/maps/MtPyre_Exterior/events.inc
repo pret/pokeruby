@@ -8,11 +8,11 @@ MtPyre_Exterior_MapWarps:: @ 838CB44
 	warp_def 20, 10, 3, 1, MAP_MT_PYRE_SUMMIT
 
 MtPyre_Exterior_MapCoordEvents:: @ 838CB5C
-	coord_event 24, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_15D4A7
-	coord_event 25, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_15D4A7
-	coord_event 22, 27, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_15D4AC
-	coord_event 23, 28, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_15D4AC
-	coord_event 26, 21, 3, 0, 0, 0, 0, MtPyre_Exterior_EventScript_15D4A7
+	coord_event 24, 21, 3, 0, 0, MtPyre_Exterior_EventScript_15D4A7
+	coord_event 25, 21, 3, 0, 0, MtPyre_Exterior_EventScript_15D4A7
+	coord_event 22, 27, 3, 0, 0, MtPyre_Exterior_EventScript_15D4AC
+	coord_event 23, 28, 3, 0, 0, MtPyre_Exterior_EventScript_15D4AC
+	coord_event 26, 21, 3, 0, 0, MtPyre_Exterior_EventScript_15D4A7
 
 MtPyre_Exterior_MapBGEvents:: @ 838CBAC
 	bg_hidden_item_event 9, 8, 0, ITEM_ULTRA_BALL, FLAG_HIDDEN_ITEM_1D

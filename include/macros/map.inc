@@ -34,16 +34,21 @@
 	inc _num_warps
 	.endm
 
-	.macro coord_event x, y, byte1, byte2, word1, word2, word3, script
+	.macro coord_event x, y, elevation, trigger, index, script
 	.2byte \x, \y
-	.byte \byte1, \byte2
-	.2byte \word1, \word2, \word3
+	.byte \elevation, 0
+	.2byte \trigger, \index, 0
 	.4byte \script
 	inc _num_traps
 	.endm
 
-	.macro coord_weather_event x, y, height, weather
-	coord_event \x, \y, \height, 0, \weather, 0, 0, 0x0
+	.macro coord_weather_event x, y, elevation, weather
+	.2byte \x, \y
+	.byte \elevation, 0
+	.2byte \weather
+	.2byte 0, 0
+	.4byte 0
+	inc _num_traps
 	.endm
 
 	.macro bg_event x, y, elevation, kind, arg6, arg7, arg8

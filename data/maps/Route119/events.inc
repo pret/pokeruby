@@ -42,8 +42,8 @@ Route119_MapWarps:: @ 8383C8C
 	warp_def 33, 109, 0, 0, MAP_ROUTE119_HOUSE
 
 Route119_MapCoordEvents:: @ 8383C9C
-	coord_event 25, 31, 0, 0, VAR_ROUTE119_STATE, 0, 0, Route119_EventScript_1511C5
-	coord_event 26, 31, 0, 0, VAR_ROUTE119_STATE, 0, 0, Route119_EventScript_1511D0
+	coord_event 25, 31, 0, VAR_ROUTE119_STATE, 0, Route119_EventScript_1511C5
+	coord_event 26, 31, 0, VAR_ROUTE119_STATE, 0, Route119_EventScript_1511D0
 	coord_weather_event 28, 13, 0, COORD_EVENT_WEATHER_ROUTE119_CYCLE
 	coord_weather_event 29, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE
 	coord_weather_event 30, 13, 3, COORD_EVENT_WEATHER_ROUTE119_CYCLE

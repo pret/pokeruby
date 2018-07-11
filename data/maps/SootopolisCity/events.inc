@@ -26,7 +26,7 @@ SootopolisCity_MapWarps:: @ 8380710
 	warp_def 48, 25, 0, 0, MAP_SOOTOPOLIS_CITY_HOUSE8
 
 SootopolisCity_MapCoordEvents:: @ 8380770
-	coord_event 25, 6, 3, 0, VAR_SOOTOPOLIS_STATE, 1, 0, SootopolisCity_EventScript_14D308
+	coord_event 25, 6, 3, VAR_SOOTOPOLIS_STATE, 1, SootopolisCity_EventScript_14D308
 
 SootopolisCity_MapBGEvents:: @ 8380780
 	bg_event 32, 34, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_14D2ED

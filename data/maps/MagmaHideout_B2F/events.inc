@@ -16,10 +16,10 @@ MagmaHideout_B2F_MapWarps:: @ 838EC5C
 	warp_def 31, 16, 3, 6, MAP_MAGMA_HIDEOUT_B2F
 
 MagmaHideout_B2F_MapCoordEvents:: @ 838EC9C
-	coord_event 7, 16, 3, 0, VAR_TEMP_1, 0, 0, MagmaHideout_B2F_EventScript_15D8BD
-	coord_event 6, 16, 3, 0, VAR_TEMP_1, 0, 0, MagmaHideout_B2F_EventScript_15D8BD
-	coord_event 5, 16, 3, 0, VAR_TEMP_1, 0, 0, MagmaHideout_B2F_EventScript_15D8BD
-	coord_event 4, 16, 3, 0, VAR_TEMP_1, 0, 0, MagmaHideout_B2F_EventScript_15D8BD
+	coord_event 7, 16, 3, VAR_TEMP_1, 0, MagmaHideout_B2F_EventScript_15D8BD
+	coord_event 6, 16, 3, VAR_TEMP_1, 0, MagmaHideout_B2F_EventScript_15D8BD
+	coord_event 5, 16, 3, VAR_TEMP_1, 0, MagmaHideout_B2F_EventScript_15D8BD
+	coord_event 4, 16, 3, VAR_TEMP_1, 0, MagmaHideout_B2F_EventScript_15D8BD
 
 MagmaHideout_B2F_MapEvents:: @ 838ECDC
 	map_events MagmaHideout_B2F_EventObjects, MagmaHideout_B2F_MapWarps, MagmaHideout_B2F_MapCoordEvents, 0x0

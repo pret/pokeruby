@@ -26,10 +26,10 @@ Route121_MapWarps:: @ 8384714
 	warp_def 37, 5, 0, 2, MAP_ROUTE121_SAFARI_ZONE_ENTRANCE
 
 Route121_MapCoordEvents:: @ 838471C
-	coord_event 25, 5, 3, 0, VAR_ROUTE121_STATE, 0, 0, Route121_EventScript_151B25
-	coord_event 25, 6, 3, 0, VAR_ROUTE121_STATE, 0, 0, Route121_EventScript_151B25
-	coord_event 25, 7, 3, 0, VAR_ROUTE121_STATE, 0, 0, Route121_EventScript_151B25
-	coord_event 25, 8, 3, 0, VAR_ROUTE121_STATE, 0, 0, Route121_EventScript_151B25
+	coord_event 25, 5, 3, VAR_ROUTE121_STATE, 0, Route121_EventScript_151B25
+	coord_event 25, 6, 3, VAR_ROUTE121_STATE, 0, Route121_EventScript_151B25
+	coord_event 25, 7, 3, VAR_ROUTE121_STATE, 0, Route121_EventScript_151B25
+	coord_event 25, 8, 3, VAR_ROUTE121_STATE, 0, Route121_EventScript_151B25
 
 Route121_MapBGEvents:: @ 838475C
 	bg_event 32, 14, 0, BG_EVENT_PLAYER_FACING_ANY, Route121_EventScript_151B13

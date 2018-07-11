@@ -18,7 +18,7 @@ LavaridgeTown_MapWarps:: @ 8380D50
 	warp_def 9, 2, 3, 3, MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F
 
 LavaridgeTown_MapCoordEvents:: @ 8380D80
-	coord_event 6, 3, 3, 0, 0, 0, 0, LavaridgeTown_EventScript_14E710
+	coord_event 6, 3, 3, 0, 0, LavaridgeTown_EventScript_14E710
 
 LavaridgeTown_MapBGEvents:: @ 8380D90
 	bg_event 14, 16, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_14E7D7
