@@ -16,7 +16,7 @@ Route103_EventObjects:: @ 8381300
 	object_event 15, EVENT_OBJ_GFX_CUTTABLE_TREE, 0, 69, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 1, 1, 0, 0, S_CuttableTree, FLAG_TEMP_13
 
 Route103_MapBGEvents:: @ 8381468
-	bg_event 11, 9, 0, 0, 0, Route103_EventScript_14ED8B
+	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route103_EventScript_14ED8B
 
 Route103_MapEvents:: @ 8381474
 	map_events Route103_EventObjects, 0x0, 0x0, Route103_MapBGEvents

@@ -20,12 +20,12 @@ AbandonedShip_HiddenFloorRooms_MapBGEvents:: @ 838E5E8
 	bg_hidden_item_event 20, 5, 3, ITEM_ROOM_2_KEY, FLAG_HIDDEN_ITEM_20
 	bg_hidden_item_event 1, 12, 3, ITEM_ROOM_4_KEY, FLAG_HIDDEN_ITEM_21
 	bg_hidden_item_event 1, 2, 0, ITEM_ROOM_6_KEY, FLAG_HIDDEN_ITEM_22
-	bg_event 8, 5, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
-	bg_event 11, 3, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
-	bg_event 10, 10, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
-	bg_event 16, 3, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
-	bg_event 25, 2, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
-	bg_event 24, 6, 3, 0, 0, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 8, 5, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 11, 3, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 10, 10, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 16, 3, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 25, 2, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
+	bg_event 24, 6, 3, BG_EVENT_PLAYER_FACING_ANY, AbandonedShip_HiddenFloorRooms_EventScript_15EEAB
 
 AbandonedShip_HiddenFloorRooms_MapEvents:: @ 838E660
 	map_events AbandonedShip_HiddenFloorRooms_EventObjects, AbandonedShip_HiddenFloorRooms_MapWarps, 0x0, AbandonedShip_HiddenFloorRooms_MapBGEvents

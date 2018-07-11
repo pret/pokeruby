@@ -67,8 +67,8 @@ Route120_MapCoordEvents:: @ 8384318
 	coord_weather_event 13, 75, 3, COORD_EVENT_WEATHER_CLOUDS
 
 Route120_MapBGEvents:: @ 8384448
-	bg_event 27, 3, 3, 0, 0, Route120_EventScript_1519A1
-	bg_event 38, 88, 3, 0, 0, Route120_EventScript_1519AA
+	bg_event 27, 3, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1519A1
+	bg_event 38, 88, 3, BG_EVENT_PLAYER_FACING_ANY, Route120_EventScript_1519AA
 	bg_secret_base_event 28, 62, 0, SECRET_BASE_BLUE_CAVE3_1
 	bg_secret_base_event 30, 62, 0, SECRET_BASE_BLUE_CAVE4_1
 	bg_secret_base_event 26, 10, 0, SECRET_BASE_SHRUB3_2

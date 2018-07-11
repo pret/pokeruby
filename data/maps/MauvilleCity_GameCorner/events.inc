@@ -17,30 +17,30 @@ MauvilleCity_GameCorner_MapWarps:: @ 83884E0
 	warp_def 12, 10, 3, 5, MAP_MAUVILLE_CITY
 
 MauvilleCity_GameCorner_MapBGEvents:: @ 83884F0
-	bg_event 2, 6, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157135
-	bg_event 2, 8, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157155
-	bg_event 2, 9, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157175
-	bg_event 3, 7, 0, 4, 0, MauvilleCity_GameCorner_EventScript_157195
-	bg_event 3, 8, 0, 4, 0, MauvilleCity_GameCorner_EventScript_1571B5
-	bg_event 3, 9, 0, 4, 0, MauvilleCity_GameCorner_EventScript_1571D5
-	bg_event 7, 6, 0, 3, 0, MauvilleCity_GameCorner_EventScript_1571F5
-	bg_event 7, 7, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157215
-	bg_event 7, 9, 0, 3, 0, MauvilleCity_GameCorner_EventScript_157235
-	bg_event 8, 6, 0, 4, 0, MauvilleCity_GameCorner_EventScript_157255
-	bg_event 8, 7, 0, 4, 0, MauvilleCity_GameCorner_EventScript_157275
-	bg_event 8, 9, 0, 4, 0, MauvilleCity_GameCorner_EventScript_157295
-	bg_event 14, 6, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 15, 6, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 14, 7, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 15, 7, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 14, 8, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 15, 8, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C407E
-	bg_event 18, 6, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
-	bg_event 19, 6, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
-	bg_event 18, 7, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
-	bg_event 19, 7, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
-	bg_event 18, 8, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
-	bg_event 19, 8, 0, 0, 0, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 2, 6, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_157135
+	bg_event 2, 8, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_157155
+	bg_event 2, 9, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_157175
+	bg_event 3, 7, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_157195
+	bg_event 3, 8, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_1571B5
+	bg_event 3, 9, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_1571D5
+	bg_event 7, 6, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_1571F5
+	bg_event 7, 7, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_157215
+	bg_event 7, 9, 0, BG_EVENT_PLAYER_FACING_EAST, MauvilleCity_GameCorner_EventScript_157235
+	bg_event 8, 6, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_157255
+	bg_event 8, 7, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_157275
+	bg_event 8, 9, 0, BG_EVENT_PLAYER_FACING_WEST, MauvilleCity_GameCorner_EventScript_157295
+	bg_event 14, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 15, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 14, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 15, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 14, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 15, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C407E
+	bg_event 18, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 19, 6, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 18, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 19, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 18, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
+	bg_event 19, 8, 0, BG_EVENT_PLAYER_FACING_ANY, MauvilleCity_GameCorner_EventScript_1C40AC
 
 MauvilleCity_GameCorner_MapEvents:: @ 8388610
 	map_events MauvilleCity_GameCorner_EventObjects, MauvilleCity_GameCorner_MapWarps, 0x0, MauvilleCity_GameCorner_MapBGEvents

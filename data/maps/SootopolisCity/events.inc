@@ -29,12 +29,12 @@ SootopolisCity_MapCoordEvents:: @ 8380770
 	coord_event 25, 6, 3, 0, VAR_SOOTOPOLIS_STATE, 1, 0, SootopolisCity_EventScript_14D308
 
 SootopolisCity_MapBGEvents:: @ 8380780
-	bg_event 32, 34, 0, 0, 0, SootopolisCity_EventScript_14D2ED
-	bg_event 19, 29, 0, 1, 0, SootopolisCity_EventScript_1A00E1
-	bg_event 44, 31, 0, 1, 0, SootopolisCity_EventScript_1A00EA
-	bg_event 45, 31, 0, 1, 0, SootopolisCity_EventScript_1A00EA
-	bg_event 18, 29, 0, 1, 0, SootopolisCity_EventScript_1A00E1
-	bg_event 41, 37, 0, 0, 0, SootopolisCity_EventScript_14D2F6
+	bg_event 32, 34, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_14D2ED
+	bg_event 19, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_1A00E1
+	bg_event 44, 31, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_1A00EA
+	bg_event 45, 31, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_1A00EA
+	bg_event 18, 29, 0, BG_EVENT_PLAYER_FACING_NORTH, SootopolisCity_EventScript_1A00E1
+	bg_event 41, 37, 0, BG_EVENT_PLAYER_FACING_ANY, SootopolisCity_EventScript_14D2F6
 
 SootopolisCity_MapEvents:: @ 83807C8
 	map_events SootopolisCity_EventObjects, SootopolisCity_MapWarps, SootopolisCity_MapCoordEvents, SootopolisCity_MapBGEvents

@@ -24,6 +24,7 @@
 #include "trainer_see.h"
 #include "constants/vars.h"
 #include "wild_encounter.h"
+#include "constants/bg_event_constants.h"
 
 struct Coords32
 {
@@ -409,34 +410,34 @@ static u8 *GetInteractedBackgroundEventScript(struct MapPosition *position, u8 m
 
     switch (bgEvent->kind)
     {
-    case 0:
+    case BG_EVENT_PLAYER_FACING_ANY:
     default:
         return bgEvent->bgUnion.script;
-    case 1:
+    case BG_EVENT_PLAYER_FACING_NORTH:
         if (direction != DIR_NORTH)
             return NULL;
         break;
-    case 2:
+    case BG_EVENT_PLAYER_FACING_SOUTH:
         if (direction != DIR_SOUTH)
             return NULL;
         break;
-    case 3:
+    case BG_EVENT_PLAYER_FACING_EAST:
         if (direction != DIR_EAST)
             return NULL;
         break;
-    case 4:
+    case BG_EVENT_PLAYER_FACING_WEST:
         if (direction != DIR_WEST)
             return NULL;
         break;
     case 5:
     case 6:
-    case 7:
+    case BG_EVENT_HIDDEN_ITEM:
         gSpecialVar_0x8004 = ((u32)bgEvent->bgUnion.script >> 16) + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = (u32)bgEvent->bgUnion.script;
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return HiddenItemScript;
-    case 8:
+    case BG_EVENT_SECRET_BASE:
         if (direction == DIR_NORTH)
         {
             gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;

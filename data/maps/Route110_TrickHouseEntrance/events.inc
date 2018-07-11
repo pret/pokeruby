@@ -13,7 +13,7 @@ Route110_TrickHouseEntrance_MapCoordEvents:: @ 8392170
 	coord_event 7, 7, 3, 0, VAR_TRICK_HOUSE_ENTRANCE_STATE, 0, 0, Route110_TrickHouseEntrance_EventScript_1618B0
 
 Route110_TrickHouseEntrance_MapBGEvents:: @ 83921B0
-	bg_event 5, 1, 0, 1, 0, Route110_TrickHouseEntrance_EventScript_16158A
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_NORTH, Route110_TrickHouseEntrance_EventScript_16158A
 
 Route110_TrickHouseEntrance_MapEvents:: @ 83921BC
 	map_events Route110_TrickHouseEntrance_EventObjects, Route110_TrickHouseEntrance_MapWarps, Route110_TrickHouseEntrance_MapCoordEvents, Route110_TrickHouseEntrance_MapBGEvents

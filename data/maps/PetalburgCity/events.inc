@@ -24,13 +24,13 @@ PetalburgCity_MapCoordEvents:: @ 837F6F8
 	coord_event 8, 13, 3, 0, VAR_PETALBURG_STATE, 0, 0, PetalburgCity_EventScript_14B85A
 
 PetalburgCity_MapBGEvents:: @ 837F738
-	bg_event 17, 10, 0, 0, 0, PetalburgCity_EventScript_14B812
-	bg_event 26, 12, 0, 1, 0, PetalburgCity_EventScript_1A00E1
-	bg_event 21, 16, 0, 1, 0, PetalburgCity_EventScript_1A00EA
-	bg_event 17, 16, 0, 0, 0, PetalburgCity_EventScript_14B81B
-	bg_event 22, 16, 0, 1, 0, PetalburgCity_EventScript_1A00EA
-	bg_event 27, 12, 0, 1, 0, PetalburgCity_EventScript_1A00E1
-	bg_event 8, 9, 0, 0, 0, PetalburgCity_EventScript_14B82D
+	bg_event 17, 10, 0, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_EventScript_14B812
+	bg_event 26, 12, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_1A00E1
+	bg_event 21, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_1A00EA
+	bg_event 17, 16, 0, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_EventScript_14B81B
+	bg_event 22, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_1A00EA
+	bg_event 27, 12, 0, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_EventScript_1A00E1
+	bg_event 8, 9, 0, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_EventScript_14B82D
 	bg_hidden_item_event 11, 29, 3, ITEM_RARE_CANDY, FLAG_HIDDEN_ITEM_5F
 
 PetalburgCity_MapEvents:: @ 837F798

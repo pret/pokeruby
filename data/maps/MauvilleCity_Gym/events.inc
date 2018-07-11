@@ -16,8 +16,8 @@ MauvilleCity_Gym_MapCoordEvents:: @ 83882BC
 	coord_event 4, 15, 3, 0, VAR_TEMP_0, 0, 0, MauvilleCity_Gym_EventScript_156695
 
 MauvilleCity_Gym_MapBGEvents:: @ 83882EC
-	bg_event 3, 18, 0, 1, 0, MauvilleCity_Gym_EventScript_156761
-	bg_event 6, 18, 0, 1, 0, MauvilleCity_Gym_EventScript_156771
+	bg_event 3, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_156761
+	bg_event 6, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MauvilleCity_Gym_EventScript_156771
 
 MauvilleCity_Gym_MapEvents:: @ 8388304
 	map_events MauvilleCity_Gym_EventObjects, MauvilleCity_Gym_MapWarps, MauvilleCity_Gym_MapCoordEvents, MauvilleCity_Gym_MapBGEvents

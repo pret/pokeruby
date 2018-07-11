@@ -19,10 +19,10 @@ LittlerootTown_MaysHouse_2F_MapWarps:: @ 8385AE0
 	warp_def 1, 1, 0, 2, MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F
 
 LittlerootTown_MaysHouse_2F_MapBGEvents:: @ 8385AE8
-	bg_event 5, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_152870
-	bg_event 7, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_152867
-	bg_event 3, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_1B69DF
-	bg_event 8, 1, 0, 0, 0, LittlerootTown_MaysHouse_2F_EventScript_152C39
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_152870
+	bg_event 7, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_152867
+	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_1B69DF
+	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_MaysHouse_2F_EventScript_152C39
 
 LittlerootTown_MaysHouse_2F_MapEvents:: @ 8385B18
 	map_events LittlerootTown_MaysHouse_2F_EventObjects, LittlerootTown_MaysHouse_2F_MapWarps, 0x0, LittlerootTown_MaysHouse_2F_MapBGEvents

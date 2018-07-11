@@ -23,8 +23,8 @@ SSTidalRooms_MapWarps:: @ 839195C
 	warp_def 31, 1, 0, 7, MAP_SS_TIDAL_CORRIDOR
 
 SSTidalRooms_MapBGEvents:: @ 83919BC
-	bg_event 15, 11, 0, 0, 0, SSTidalRooms_EventScript_15FF47
-	bg_event 15, 12, 0, 0, 0, SSTidalRooms_EventScript_15FF47
+	bg_event 15, 11, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalRooms_EventScript_15FF47
+	bg_event 15, 12, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalRooms_EventScript_15FF47
 
 SSTidalRooms_MapEvents:: @ 83919D4
 	map_events SSTidalRooms_EventObjects, SSTidalRooms_MapWarps, 0x0, SSTidalRooms_MapBGEvents

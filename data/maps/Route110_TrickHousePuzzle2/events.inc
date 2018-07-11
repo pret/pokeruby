@@ -17,7 +17,7 @@ Route110_TrickHousePuzzle2_MapCoordEvents:: @ 83924EC
 	coord_event 5, 2, 0, 0, VAR_TEMP_4, 0, 0, Route110_TrickHousePuzzle2_EventScript_161E19
 
 Route110_TrickHousePuzzle2_MapBGEvents:: @ 839252C
-	bg_event 14, 5, 0, 0, 0, Route110_TrickHousePuzzle2_EventScript_161DC3
+	bg_event 14, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle2_EventScript_161DC3
 
 Route110_TrickHousePuzzle2_MapEvents:: @ 8392538
 	map_events Route110_TrickHousePuzzle2_EventObjects, Route110_TrickHousePuzzle2_MapWarps, Route110_TrickHousePuzzle2_MapCoordEvents, Route110_TrickHousePuzzle2_MapBGEvents

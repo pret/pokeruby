@@ -24,8 +24,8 @@ Route109_MapWarps:: @ 8381CDC
 	warp_def 12, 5, 0, 0, MAP_ROUTE109_SEASHORE_HOUSE
 
 Route109_MapBGEvents:: @ 8381CE4
-	bg_event 15, 5, 0, 0, 0, Route109_EventScript_14F79B
-	bg_event 29, 10, 3, 0, 0, Route109_EventScript_14F7A4
+	bg_event 15, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_14F79B
+	bg_event 29, 10, 3, BG_EVENT_PLAYER_FACING_ANY, Route109_EventScript_14F7A4
 	bg_hidden_item_event 16, 23, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_32
 	bg_hidden_item_event 33, 5, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_34
 	bg_hidden_item_event 9, 10, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_33

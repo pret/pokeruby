@@ -14,10 +14,10 @@ SlateportCity_ContestLobby_MapWarps:: @ 8387848
 	warp_def 1, 1, 0, 0, MAP_SLATEPORT_CITY_CONTEST_HALL
 
 SlateportCity_ContestLobby_MapBGEvents:: @ 8387860
-	bg_event 10, 3, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1B7829
-	bg_event 12, 5, 0, 0, 0, SlateportCity_ContestLobby_EventScript_1B761E
-	bg_event 11, 1, 0, 0, 0, SlateportCity_ContestLobby_EventScript_15552F
-	bg_event 13, 1, 0, 0, 0, SlateportCity_ContestLobby_EventScript_15908D
+	bg_event 10, 3, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestLobby_EventScript_1B7829
+	bg_event 12, 5, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestLobby_EventScript_1B761E
+	bg_event 11, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestLobby_EventScript_15552F
+	bg_event 13, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestLobby_EventScript_15908D
 
 SlateportCity_ContestLobby_MapEvents:: @ 8387890
 	map_events SlateportCity_ContestLobby_EventObjects, SlateportCity_ContestLobby_MapWarps, 0x0, SlateportCity_ContestLobby_MapBGEvents

@@ -14,11 +14,11 @@ InsideOfTruck_MapCoordEvents:: @ 8391678
 	coord_event 3, 3, 3, 0, VAR_LITTLEROOT_INTRO_STATE, 0, 0, InsideOfTruck_EventScript_15FC29
 
 InsideOfTruck_MapBGEvents:: @ 83916A8
-	bg_event 1, 0, 0, 0, 0, InsideOfTruck_EventScript_15FC8B
-	bg_event 3, 4, 0, 0, 0, InsideOfTruck_EventScript_15FC8B
-	bg_event 2, 3, 0, 0, 0, InsideOfTruck_EventScript_15FC8B
-	bg_event 0, 1, 0, 0, 0, InsideOfTruck_EventScript_15FC8B
-	bg_event 0, 2, 0, 0, 0, InsideOfTruck_EventScript_15FC8B
+	bg_event 1, 0, 0, BG_EVENT_PLAYER_FACING_ANY, InsideOfTruck_EventScript_15FC8B
+	bg_event 3, 4, 0, BG_EVENT_PLAYER_FACING_ANY, InsideOfTruck_EventScript_15FC8B
+	bg_event 2, 3, 0, BG_EVENT_PLAYER_FACING_ANY, InsideOfTruck_EventScript_15FC8B
+	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_ANY, InsideOfTruck_EventScript_15FC8B
+	bg_event 0, 2, 0, BG_EVENT_PLAYER_FACING_ANY, InsideOfTruck_EventScript_15FC8B
 
 InsideOfTruck_MapEvents:: @ 83916E4
 	map_events InsideOfTruck_EventObjects, InsideOfTruck_MapWarps, InsideOfTruck_MapCoordEvents, InsideOfTruck_MapBGEvents

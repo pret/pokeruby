@@ -27,8 +27,8 @@ Route118_MapCoordEvents:: @ 8383864
 
 Route118_MapBGEvents:: @ 8383894
 	bg_secret_base_event 47, 14, 0, SECRET_BASE_RED_CAVE1_1
-	bg_event 13, 6, 0, 0, 0, Route118_EventScript_150F9C
-	bg_event 56, 8, 0, 0, 0, Route118_EventScript_150FA5
+	bg_event 13, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route118_EventScript_150F9C
+	bg_event 56, 8, 0, BG_EVENT_PLAYER_FACING_ANY, Route118_EventScript_150FA5
 	bg_secret_base_event 67, 6, 0, SECRET_BASE_RED_CAVE2_1
 	bg_secret_base_event 29, 5, 0, SECRET_BASE_YELLOW_CAVE1_2
 	bg_secret_base_event 47, 5, 0, SECRET_BASE_TREE1_3

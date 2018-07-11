@@ -14,7 +14,7 @@ Route124_MapWarps:: @ 8384E00
 	warp_def 70, 48, 3, 0, MAP_ROUTE124_DIVING_TREASURE_HUNTERS_HOUSE
 
 Route124_MapBGEvents:: @ 8384E08
-	bg_event 73, 48, 3, 0, 0, Route124_EventScript_151DEF
+	bg_event 73, 48, 3, BG_EVENT_PLAYER_FACING_ANY, Route124_EventScript_151DEF
 
 Route124_MapEvents:: @ 8384E14
 	map_events Route124_EventObjects, Route124_MapWarps, 0x0, Route124_MapBGEvents

@@ -69,8 +69,8 @@ Route119_MapCoordEvents:: @ 8383C9C
 	coord_weather_event 20, 137, 3, COORD_EVENT_WEATHER_SUNNY
 
 Route119_MapBGEvents:: @ 8383E2C
-	bg_event 9, 33, 0, 0, 0, Route119_EventScript_15142C
-	bg_event 27, 19, 0, 0, 0, Route119_EventScript_151423
+	bg_event 9, 33, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_15142C
+	bg_event 27, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_151423
 	bg_secret_base_event 5, 2, 0, SECRET_BASE_SHRUB1_1
 	bg_secret_base_event 4, 89, 0, SECRET_BASE_SHRUB1_2
 	bg_secret_base_event 5, 15, 0, SECRET_BASE_SHRUB2_1
@@ -88,7 +88,7 @@ Route119_MapBGEvents:: @ 8383E2C
 	bg_secret_base_event 6, 2, 0, SECRET_BASE_SHRUB4_3
 	bg_hidden_item_event 26, 120, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_44
 	bg_hidden_item_event 20, 29, 3, ITEM_MAX_ETHER, FLAG_HIDDEN_ITEM_57
-	bg_event 28, 9, 0, 0, 0, Route119_EventScript_151605
+	bg_event 28, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route119_EventScript_151605
 
 Route119_MapEvents:: @ 8383F1C
 	map_events Route119_EventObjects, Route119_MapWarps, Route119_MapCoordEvents, Route119_MapBGEvents

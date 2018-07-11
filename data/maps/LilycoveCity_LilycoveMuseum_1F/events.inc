@@ -16,22 +16,22 @@ LilycoveCity_LilycoveMuseum_1F_MapWarps:: @ 8389654
 	warp_def 16, 1, 0, 0, MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F
 
 LilycoveCity_LilycoveMuseum_1F_MapBGEvents:: @ 838966C
-	bg_event 1, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158510
-	bg_event 2, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158510
-	bg_event 5, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158534
-	bg_event 6, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158534
-	bg_event 9, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158507
-	bg_event 3, 6, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158519
-	bg_event 2, 6, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158519
-	bg_event 15, 12, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15853D
-	bg_event 11, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158507
-	bg_event 6, 6, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15852B
-	bg_event 17, 9, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
-	bg_event 19, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158522
-	bg_event 20, 1, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158522
-	bg_event 18, 9, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
-	bg_event 18, 11, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_158546
-	bg_event 16, 9, 0, 0, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
+	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158510
+	bg_event 2, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158510
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158534
+	bg_event 6, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158534
+	bg_event 9, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158507
+	bg_event 3, 6, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158519
+	bg_event 2, 6, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158519
+	bg_event 15, 12, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_15853D
+	bg_event 11, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158507
+	bg_event 6, 6, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_15852B
+	bg_event 17, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
+	bg_event 19, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158522
+	bg_event 20, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158522
+	bg_event 18, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
+	bg_event 18, 11, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_158546
+	bg_event 16, 9, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_LilycoveMuseum_1F_EventScript_15854F
 
 LilycoveCity_LilycoveMuseum_1F_MapEvents:: @ 838972C
 	map_events LilycoveCity_LilycoveMuseum_1F_EventObjects, LilycoveCity_LilycoveMuseum_1F_MapWarps, 0x0, LilycoveCity_LilycoveMuseum_1F_MapBGEvents

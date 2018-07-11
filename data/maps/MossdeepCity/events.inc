@@ -28,14 +28,14 @@ MossdeepCity_MapCoordEvents:: @ 8380554
 	coord_event 33, 27, 0, 0, VAR_TEMP_1, 0, 0, MossdeepCity_EventScript_14D008
 
 MossdeepCity_MapBGEvents:: @ 8380594
-	bg_event 25, 16, 0, 0, 0, MossdeepCity_EventScript_14CFF6
-	bg_event 34, 9, 0, 0, 0, MossdeepCity_EventScript_14CFED
-	bg_event 29, 16, 0, 1, 0, MossdeepCity_EventScript_1A00EA
-	bg_event 38, 18, 0, 1, 0, MossdeepCity_EventScript_1A00E1
-	bg_event 66, 14, 0, 0, 0, MossdeepCity_EventScript_14CFFF
-	bg_event 30, 16, 0, 1, 0, MossdeepCity_EventScript_1A00EA
-	bg_event 39, 18, 0, 1, 0, MossdeepCity_EventScript_1A00E1
-	bg_event 57, 21, 7, 0, 0, MossdeepCity_EventScript_14CFE4
+	bg_event 25, 16, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_14CFF6
+	bg_event 34, 9, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_14CFED
+	bg_event 29, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_1A00EA
+	bg_event 38, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_1A00E1
+	bg_event 66, 14, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_14CFFF
+	bg_event 30, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_1A00EA
+	bg_event 39, 18, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_EventScript_1A00E1
+	bg_event 57, 21, 7, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_EventScript_14CFE4
 
 MossdeepCity_MapEvents:: @ 83805F4
 	map_events MossdeepCity_EventObjects, MossdeepCity_MapWarps, MossdeepCity_MapCoordEvents, MossdeepCity_MapBGEvents

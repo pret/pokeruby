@@ -24,19 +24,19 @@ SlateportCity_OceanicMuseum_1F_MapCoordEvents:: @ 8387CA0
 	coord_event 10, 7, 3, 0, VAR_SLATEPORT_MUSEUM_1F_STATE, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155AF5
 
 SlateportCity_OceanicMuseum_1F_MapBGEvents:: @ 8387CC0
-	bg_event 2, 7, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BC5
-	bg_event 2, 4, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BCE
-	bg_event 9, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BD7
-	bg_event 12, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BE0
-	bg_event 10, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BD7
-	bg_event 13, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BE0
-	bg_event 15, 4, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BE9
-	bg_event 18, 4, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BF2
-	bg_event 18, 7, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155BFB
-	bg_event 2, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155C04
-	bg_event 3, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155C04
-	bg_event 16, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155C0D
-	bg_event 17, 1, 0, 0, 0, SlateportCity_OceanicMuseum_1F_EventScript_155C0D
+	bg_event 2, 7, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BC5
+	bg_event 2, 4, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BCE
+	bg_event 9, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BD7
+	bg_event 12, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BE0
+	bg_event 10, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BD7
+	bg_event 13, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BE0
+	bg_event 15, 4, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BE9
+	bg_event 18, 4, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BF2
+	bg_event 18, 7, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155BFB
+	bg_event 2, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155C04
+	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155C04
+	bg_event 16, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155C0D
+	bg_event 17, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_OceanicMuseum_1F_EventScript_155C0D
 
 SlateportCity_OceanicMuseum_1F_MapEvents:: @ 8387D5C
 	map_events SlateportCity_OceanicMuseum_1F_EventObjects, SlateportCity_OceanicMuseum_1F_MapWarps, SlateportCity_OceanicMuseum_1F_MapCoordEvents, SlateportCity_OceanicMuseum_1F_MapBGEvents

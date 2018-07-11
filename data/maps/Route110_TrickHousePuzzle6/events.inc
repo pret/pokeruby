@@ -10,7 +10,7 @@ Route110_TrickHousePuzzle6_MapWarps:: @ 8392A8C
 	warp_def 13, 1, 3, 0, MAP_ROUTE110_TRICK_HOUSE_END
 
 Route110_TrickHousePuzzle6_MapBGEvents:: @ 8392AA4
-	bg_event 13, 9, 3, 0, 0, Route110_TrickHousePuzzle6_EventScript_1630EA
+	bg_event 13, 9, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle6_EventScript_1630EA
 
 Route110_TrickHousePuzzle6_MapEvents:: @ 8392AB0
 	map_events Route110_TrickHousePuzzle6_EventObjects, Route110_TrickHousePuzzle6_MapWarps, 0x0, Route110_TrickHousePuzzle6_MapBGEvents

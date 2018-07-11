@@ -12,10 +12,10 @@ FallarborTown_ContestLobby_MapWarps:: @ 8386780
 	warp_def 1, 1, 0, 0, MAP_FALLARBOR_TOWN_CONTEST_HALL
 
 FallarborTown_ContestLobby_MapBGEvents:: @ 8386798
-	bg_event 10, 3, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B7823
-	bg_event 12, 5, 0, 0, 0, FallarborTown_ContestLobby_EventScript_1B7604
-	bg_event 11, 1, 3, 0, 0, FallarborTown_ContestLobby_EventScript_153ABB
-	bg_event 13, 1, 0, 0, 0, FallarborTown_ContestLobby_EventScript_153AC2
+	bg_event 10, 3, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestLobby_EventScript_1B7823
+	bg_event 12, 5, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestLobby_EventScript_1B7604
+	bg_event 11, 1, 3, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestLobby_EventScript_153ABB
+	bg_event 13, 1, 0, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestLobby_EventScript_153AC2
 
 FallarborTown_ContestLobby_MapEvents:: @ 83867C8
 	map_events FallarborTown_ContestLobby_EventObjects, FallarborTown_ContestLobby_MapWarps, 0x0, FallarborTown_ContestLobby_MapBGEvents

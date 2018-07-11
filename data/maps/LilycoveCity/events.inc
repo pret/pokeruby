@@ -35,16 +35,16 @@ LilycoveCity_MapWarps:: @ 8380304
 	warp_def 71, 5, 1, 0, MAP_MAGMA_HIDEOUT_1F
 
 LilycoveCity_MapBGEvents:: @ 838037C
-	bg_event 19, 7, 0, 0, 0, LilycoveCity_EventScript_14CC82
-	bg_event 25, 14, 0, 1, 0, LilycoveCity_EventScript_1A00EA
-	bg_event 29, 7, 0, 0, 0, LilycoveCity_EventScript_14CCD3
-	bg_event 26, 14, 0, 1, 0, LilycoveCity_EventScript_1A00EA
-	bg_event 6, 15, 0, 0, 0, LilycoveCity_EventScript_14CC67
-	bg_event 29, 24, 0, 0, 0, LilycoveCity_EventScript_14CC70
-	bg_event 35, 24, 0, 0, 0, LilycoveCity_EventScript_14CC79
-	bg_event 6, 30, 3, 0, 0, LilycoveCity_EventScript_14CCAC
-	bg_event 36, 14, 0, 0, 0, LilycoveCity_EventScript_14CCCA
-	bg_event 34, 6, 0, 0, 0, LilycoveCity_EventScript_14CCDC
+	bg_event 19, 7, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CC82
+	bg_event 25, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, LilycoveCity_EventScript_1A00EA
+	bg_event 29, 7, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CCD3
+	bg_event 26, 14, 0, BG_EVENT_PLAYER_FACING_NORTH, LilycoveCity_EventScript_1A00EA
+	bg_event 6, 15, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CC67
+	bg_event 29, 24, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CC70
+	bg_event 35, 24, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CC79
+	bg_event 6, 30, 3, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CCAC
+	bg_event 36, 14, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CCCA
+	bg_event 34, 6, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_EventScript_14CCDC
 	bg_hidden_item_event 36, 31, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_1B
 	bg_hidden_item_event 61, 7, 0, ITEM_PP_UP, FLAG_HIDDEN_ITEM_2B
 	bg_hidden_item_event 64, 31, 0, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_4B

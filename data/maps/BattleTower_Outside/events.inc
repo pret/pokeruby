@@ -9,7 +9,7 @@ BattleTower_Outside_MapWarps:: @ 8391C64
 	warp_def 14, 8, 0, 0, MAP_BATTLE_TOWER_LOBBY
 
 BattleTower_Outside_MapBGEvents:: @ 8391C6C
-	bg_event 16, 13, 0, 0, 0, BattleTower_Outside_EventScript_16025A
+	bg_event 16, 13, 0, BG_EVENT_PLAYER_FACING_ANY, BattleTower_Outside_EventScript_16025A
 
 BattleTower_Outside_MapEvents:: @ 8391C78
 	map_events BattleTower_Outside_EventObjects, BattleTower_Outside_MapWarps, 0x0, BattleTower_Outside_MapBGEvents

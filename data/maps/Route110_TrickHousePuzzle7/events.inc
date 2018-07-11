@@ -13,12 +13,12 @@ Route110_TrickHousePuzzle7_MapCoordEvents:: @ 8392B3C
 	coord_event 9, 2, 3, 0, VAR_TEMP_1, 0, 0, Route110_TrickHousePuzzle7_EventScript_1632A8
 
 Route110_TrickHousePuzzle7_MapBGEvents:: @ 8392B4C
-	bg_event 7, 2, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_16328B
-	bg_event 12, 16, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_1632B9
-	bg_event 5, 10, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_163317
-	bg_event 12, 11, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_1632E8
-	bg_event 4, 4, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_163346
-	bg_event 7, 5, 3, 0, 0, Route110_TrickHousePuzzle7_EventScript_163375
+	bg_event 7, 2, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_16328B
+	bg_event 12, 16, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_1632B9
+	bg_event 5, 10, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_163317
+	bg_event 12, 11, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_1632E8
+	bg_event 4, 4, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_163346
+	bg_event 7, 5, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_TrickHousePuzzle7_EventScript_163375
 
 Route110_TrickHousePuzzle7_MapEvents:: @ 8392B94
 	map_events Route110_TrickHousePuzzle7_EventObjects, Route110_TrickHousePuzzle7_MapWarps, Route110_TrickHousePuzzle7_MapCoordEvents, Route110_TrickHousePuzzle7_MapBGEvents

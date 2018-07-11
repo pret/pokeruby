@@ -34,6 +34,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/bg_event_constants.h"
 #include "constants/species.h"
 #include "constants/vars.h"
 
@@ -335,12 +336,12 @@ bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, u8 taskId)
 
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if ((events -> bgEvents[i].kind == 7) && !FlagGet(events -> bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
+        if ((events->bgEvents[i].kind == BG_EVENT_HIDDEN_ITEM) && !FlagGet(events->bgEvents[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
         {
             // do a distance lookup of each item so long as the index remains less than the objects on the current map.
-            distanceX = (u16)events -> bgEvents[i].x + 7;
+            distanceX = (u16)events->bgEvents[i].x + 7;
             newDistanceX = distanceX - x;
-            distanceY = (u16)events -> bgEvents[i].y + 7;
+            distanceY = (u16)events->bgEvents[i].y + 7;
             newDistanceY = distanceY - y;
 
             // is item in range?
@@ -365,7 +366,7 @@ bool8 HiddenItemAtPos(struct MapEvents *events, s16 x, s16 y)
 
     for (i = 0; i < bgEventCount; i++)
     {
-        if (bgEvent[i].kind == 7 && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
+        if (bgEvent[i].kind == BG_EVENT_HIDDEN_ITEM && x == (u16)bgEvent[i].x && y == (u16)bgEvent[i].y) // hidden item and coordinates matches x and y passed?
         {
             if (!FlagGet(bgEvent[i].bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START))
                 return TRUE;

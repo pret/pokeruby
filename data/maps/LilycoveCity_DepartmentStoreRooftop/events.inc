@@ -7,8 +7,8 @@ LilycoveCity_DepartmentStoreRooftop_MapWarps:: @ 838A5F0
 	warp_def 13, 3, 0, 2, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F
 
 LilycoveCity_DepartmentStoreRooftop_MapBGEvents:: @ 838A5F8
-	bg_event 9, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD
-	bg_event 10, 1, 0, 0, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD
+	bg_event 9, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD
+	bg_event 10, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1CD
 
 LilycoveCity_DepartmentStoreRooftop_MapEvents:: @ 838A610
 	map_events LilycoveCity_DepartmentStoreRooftop_EventObjects, LilycoveCity_DepartmentStoreRooftop_MapWarps, 0x0, LilycoveCity_DepartmentStoreRooftop_MapBGEvents

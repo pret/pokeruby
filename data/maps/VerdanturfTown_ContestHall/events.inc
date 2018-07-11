@@ -8,8 +8,8 @@ VerdanturfTown_ContestHall_MapWarps:: @ 8386B34
 	warp_def 10, 17, 0, 2, MAP_VERDANTURF_TOWN_CONTEST_LOBBY
 
 VerdanturfTown_ContestHall_MapBGEvents:: @ 8386B44
-	bg_event 12, 14, 3, 0, 0, VerdanturfTown_ContestHall_EventScript_153EB2
-	bg_event 8, 14, 3, 0, 0, VerdanturfTown_ContestHall_EventScript_153EB2
+	bg_event 12, 14, 3, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestHall_EventScript_153EB2
+	bg_event 8, 14, 3, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestHall_EventScript_153EB2
 
 VerdanturfTown_ContestHall_MapEvents:: @ 8386B5C
 	map_events VerdanturfTown_ContestHall_EventObjects, VerdanturfTown_ContestHall_MapWarps, 0x0, VerdanturfTown_ContestHall_MapBGEvents

@@ -43,11 +43,11 @@ Route104_MapWarps:: @ 8381788
 	warp_def 33, 42, 3, 5, MAP_PETALBURG_WOODS
 
 Route104_MapBGEvents:: @ 83817C8
-	bg_event 20, 50, 0, 0, 0, Route104_EventScript_14EF54
-	bg_event 27, 66, 0, 0, 0, Route104_EventScript_14EF5D
-	bg_event 23, 5, 0, 0, 0, Route104_EventScript_14EF66
-	bg_event 7, 20, 0, 0, 0, Route104_EventScript_14EF6F
-	bg_event 17, 23, 3, 0, 0, Route104_EventScript_14EF78
+	bg_event 20, 50, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_14EF54
+	bg_event 27, 66, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_14EF5D
+	bg_event 23, 5, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_14EF66
+	bg_event 7, 20, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_14EF6F
+	bg_event 17, 23, 3, BG_EVENT_PLAYER_FACING_ANY, Route104_EventScript_14EF78
 	bg_hidden_item_event 7, 6, 3, ITEM_SUPER_POTION, FLAG_HIDDEN_ITEM_2C
 	bg_hidden_item_event 3, 9, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_3E
 	bg_hidden_item_event 14, 55, 3, ITEM_POTION, FLAG_HIDDEN_ITEM_25

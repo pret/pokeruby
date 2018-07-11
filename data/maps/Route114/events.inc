@@ -29,15 +29,15 @@ Route114_MapWarps:: @ 8382E70
 	warp_def 27, 36, 0, 0, MAP_ROUTE114_LANETTES_HOUSE
 
 Route114_MapBGEvents:: @ 8382E88
-	bg_event 7, 64, 0, 0, 0, Route114_EventScript_1507D6
-	bg_event 31, 7, 0, 0, 0, Route114_EventScript_1507DF
+	bg_event 7, 64, 0, BG_EVENT_PLAYER_FACING_ANY, Route114_EventScript_1507D6
+	bg_event 31, 7, 0, BG_EVENT_PLAYER_FACING_ANY, Route114_EventScript_1507DF
 	bg_secret_base_event 9, 47, 0, SECRET_BASE_BROWN_CAVE1_1
 	bg_secret_base_event 30, 51, 0, SECRET_BASE_BROWN_CAVE2_1
 	bg_secret_base_event 11, 62, 0, SECRET_BASE_BROWN_CAVE3_1
 	bg_secret_base_event 19, 70, 0, SECRET_BASE_BROWN_CAVE4_1
 	bg_secret_base_event 11, 27, 0, SECRET_BASE_TREE3_2
 	bg_secret_base_event 12, 27, 0, SECRET_BASE_TREE4_2
-	bg_event 25, 38, 3, 0, 0, Route114_EventScript_1507E8
+	bg_event 25, 38, 3, BG_EVENT_PLAYER_FACING_ANY, Route114_EventScript_1507E8
 	bg_hidden_item_event 20, 57, 3, ITEM_CARBOS, FLAG_HIDDEN_ITEM_4
 	bg_secret_base_event 32, 57, 0, SECRET_BASE_BROWN_CAVE4_3
 	bg_hidden_item_event 7, 30, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_2A

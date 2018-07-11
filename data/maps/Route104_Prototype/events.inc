@@ -16,8 +16,8 @@ Route104_Prototype_MapWarps:: @ 839204C
 	warp_def 5, 24, 0, 0, MAP_ROUTE104_PROTOTYPE_PRETTY_PETAL_FLOWER_SHOP
 
 Route104_Prototype_MapBGEvents:: @ 8392054
-	bg_event 7, 26, 0, 0, 0, Route104_Prototype_EventScript_160D1C
-	bg_event 18, 8, 0, 0, 0, Route104_Prototype_EventScript_160D25
+	bg_event 7, 26, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_Prototype_EventScript_160D1C
+	bg_event 18, 8, 0, BG_EVENT_PLAYER_FACING_ANY, Route104_Prototype_EventScript_160D25
 
 Route104_Prototype_MapEvents:: @ 839206C
 	map_events Route104_Prototype_EventObjects, Route104_Prototype_MapWarps, 0x0, Route104_Prototype_MapBGEvents

@@ -18,10 +18,10 @@ LittlerootTown_BrendansHouse_2F_MapWarps:: @ 8385878
 	warp_def 7, 1, 0, 2, MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F
 
 LittlerootTown_BrendansHouse_2F_MapBGEvents:: @ 8385880
-	bg_event 0, 1, 0, 1, 0, LittlerootTown_BrendansHouse_2F_EventScript_15281E
-	bg_event 1, 1, 0, 0, 0, LittlerootTown_BrendansHouse_2F_EventScript_152867
-	bg_event 5, 1, 0, 0, 0, LittlerootTown_BrendansHouse_2F_EventScript_1B69D3
-	bg_event 3, 1, 0, 0, 0, LittlerootTown_BrendansHouse_2F_EventScript_152870
+	bg_event 0, 1, 0, BG_EVENT_PLAYER_FACING_NORTH, LittlerootTown_BrendansHouse_2F_EventScript_15281E
+	bg_event 1, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_152867
+	bg_event 5, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_1B69D3
+	bg_event 3, 1, 0, BG_EVENT_PLAYER_FACING_ANY, LittlerootTown_BrendansHouse_2F_EventScript_152870
 
 LittlerootTown_BrendansHouse_2F_MapEvents:: @ 83858B0
 	map_events LittlerootTown_BrendansHouse_2F_EventObjects, LittlerootTown_BrendansHouse_2F_MapWarps, 0x0, LittlerootTown_BrendansHouse_2F_MapBGEvents

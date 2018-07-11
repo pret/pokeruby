@@ -18,8 +18,8 @@ SlateportCity_ContestHall_MapWarps:: @ 83879DC
 	warp_def 11, 17, 0, 2, MAP_SLATEPORT_CITY_CONTEST_LOBBY
 
 SlateportCity_ContestHall_MapBGEvents:: @ 83879EC
-	bg_event 12, 14, 3, 0, 0, SlateportCity_ContestHall_EventScript_155671
-	bg_event 8, 14, 3, 0, 0, SlateportCity_ContestHall_EventScript_155671
+	bg_event 12, 14, 3, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestHall_EventScript_155671
+	bg_event 8, 14, 3, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_ContestHall_EventScript_155671
 
 SlateportCity_ContestHall_MapEvents:: @ 8387A04
 	map_events SlateportCity_ContestHall_EventObjects, SlateportCity_ContestHall_MapWarps, 0x0, SlateportCity_ContestHall_MapBGEvents

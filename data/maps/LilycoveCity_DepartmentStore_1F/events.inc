@@ -13,7 +13,7 @@ LilycoveCity_DepartmentStore_1F_MapWarps:: @ 838A2A8
 	warp_def 2, 1, 0, 0, MAP_LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR
 
 LilycoveCity_DepartmentStore_1F_MapBGEvents:: @ 838A2C8
-	bg_event 0, 8, 0, 1, 0, LilycoveCity_DepartmentStore_1F_EventScript_159F05
+	bg_event 0, 8, 0, BG_EVENT_PLAYER_FACING_NORTH, LilycoveCity_DepartmentStore_1F_EventScript_159F05
 
 LilycoveCity_DepartmentStore_1F_MapEvents:: @ 838A2D4
 	map_events LilycoveCity_DepartmentStore_1F_EventObjects, LilycoveCity_DepartmentStore_1F_MapWarps, 0x0, LilycoveCity_DepartmentStore_1F_MapBGEvents

@@ -17,11 +17,11 @@ OldaleTown_MapCoordEvents:: @ 8380AF8
 	coord_event 10, 19, 3, 0, VAR_OLDALE_STATE, 1, 0, OldaleTown_EventScript_14DF77
 
 OldaleTown_MapBGEvents:: @ 8380B38
-	bg_event 11, 9, 0, 0, 0, OldaleTown_EventScript_14DDAA
-	bg_event 7, 16, 0, 1, 0, OldaleTown_EventScript_1A00EA
-	bg_event 15, 6, 0, 1, 0, OldaleTown_EventScript_1A00E1
-	bg_event 8, 16, 0, 1, 0, OldaleTown_EventScript_1A00EA
-	bg_event 16, 6, 0, 1, 0, OldaleTown_EventScript_1A00E1
+	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_ANY, OldaleTown_EventScript_14DDAA
+	bg_event 7, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_1A00EA
+	bg_event 15, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_1A00E1
+	bg_event 8, 16, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_1A00EA
+	bg_event 16, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, OldaleTown_EventScript_1A00E1
 
 OldaleTown_MapEvents:: @ 8380B74
 	map_events OldaleTown_EventObjects, OldaleTown_MapWarps, OldaleTown_MapCoordEvents, OldaleTown_MapBGEvents

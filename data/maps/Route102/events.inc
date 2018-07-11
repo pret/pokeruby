@@ -10,8 +10,8 @@ Route102_EventObjects:: @ 83811FC
 	object_event 9, EVENT_OBJ_GFX_YOUNGSTER, 0, 19, 4, 3, MOVEMENT_TYPE_FACE_DOWN, 1, 1, 1, 3, Route102_EventScript_14EB6A, 0
 
 Route102_MapBGEvents:: @ 83812D4
-	bg_event 17, 2, 0, 0, 0, Route102_EventScript_14EAEC
-	bg_event 40, 9, 0, 0, 0, Route102_EventScript_14EAE3
+	bg_event 17, 2, 0, BG_EVENT_PLAYER_FACING_ANY, Route102_EventScript_14EAEC
+	bg_event 40, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route102_EventScript_14EAE3
 
 Route102_MapEvents:: @ 83812EC
 	map_events Route102_EventObjects, 0x0, 0x0, Route102_MapBGEvents

@@ -17,12 +17,12 @@ MossdeepCity_Gym_MapCoordEvents:: @ 838A748
 	coord_event 12, 3, 3, 0, VAR_TEMP_1, 0, 0, MossdeepCity_Gym_EventScript_15A742
 
 MossdeepCity_Gym_MapBGEvents:: @ 838A758
-	bg_event 2, 7, 0, 0, 0, MossdeepCity_Gym_EventScript_15A5EA
-	bg_event 8, 10, 0, 0, 0, MossdeepCity_Gym_EventScript_15A646
-	bg_event 17, 15, 0, 0, 0, MossdeepCity_Gym_EventScript_15A69A
-	bg_event 5, 24, 0, 0, 0, MossdeepCity_Gym_EventScript_15A6EE
-	bg_event 7, 27, 0, 1, 0, MossdeepCity_Gym_EventScript_15A7FA
-	bg_event 11, 27, 0, 1, 0, MossdeepCity_Gym_EventScript_15A80A
+	bg_event 2, 7, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_Gym_EventScript_15A5EA
+	bg_event 8, 10, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_Gym_EventScript_15A646
+	bg_event 17, 15, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_Gym_EventScript_15A69A
+	bg_event 5, 24, 0, BG_EVENT_PLAYER_FACING_ANY, MossdeepCity_Gym_EventScript_15A6EE
+	bg_event 7, 27, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_Gym_EventScript_15A7FA
+	bg_event 11, 27, 0, BG_EVENT_PLAYER_FACING_NORTH, MossdeepCity_Gym_EventScript_15A80A
 
 MossdeepCity_Gym_MapEvents:: @ 838A7A0
 	map_events MossdeepCity_Gym_EventObjects, MossdeepCity_Gym_MapWarps, MossdeepCity_Gym_MapCoordEvents, MossdeepCity_Gym_MapBGEvents

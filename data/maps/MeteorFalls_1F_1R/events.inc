@@ -21,8 +21,8 @@ MeteorFalls_1F_1R_MapCoordEvents:: @ 838BBE4
 	coord_event 14, 18, 4, 0, VAR_METEOR_FALLS_STATE, 0, 0, MeteorFalls_1F_1R_EventScript_15C49C
 
 MeteorFalls_1F_1R_MapBGEvents:: @ 838BBF4
-	bg_event 38, 9, 0, 1, 0, MeteorFalls_1F_1R_EventScript_14E842
-	bg_event 9, 58, 0, 0, 0, 0x0
+	bg_event 38, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, MeteorFalls_1F_1R_EventScript_14E842
+	bg_event 9, 58, 0, BG_EVENT_PLAYER_FACING_ANY, 0x0
 
 MeteorFalls_1F_1R_MapEvents:: @ 838BC0C
 	map_events MeteorFalls_1F_1R_EventObjects, MeteorFalls_1F_1R_MapWarps, MeteorFalls_1F_1R_MapCoordEvents, MeteorFalls_1F_1R_MapBGEvents

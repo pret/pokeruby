@@ -12,10 +12,10 @@ VerdanturfTown_ContestLobby_MapWarps:: @ 8386A90
 	warp_def 1, 1, 0, 1, MAP_VERDANTURF_TOWN_CONTEST_HALL
 
 VerdanturfTown_ContestLobby_MapBGEvents:: @ 8386AA8
-	bg_event 10, 3, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_1B782F
-	bg_event 12, 5, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_1B763F
-	bg_event 11, 1, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_153E37
-	bg_event 13, 1, 0, 0, 0, VerdanturfTown_ContestLobby_EventScript_153E89
+	bg_event 10, 3, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestLobby_EventScript_1B782F
+	bg_event 12, 5, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestLobby_EventScript_1B763F
+	bg_event 11, 1, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestLobby_EventScript_153E37
+	bg_event 13, 1, 0, BG_EVENT_PLAYER_FACING_ANY, VerdanturfTown_ContestLobby_EventScript_153E89
 
 VerdanturfTown_ContestLobby_MapEvents:: @ 8386AD8
 	map_events VerdanturfTown_ContestLobby_EventObjects, VerdanturfTown_ContestLobby_MapWarps, 0x0, VerdanturfTown_ContestLobby_MapBGEvents

@@ -12,7 +12,7 @@ BattleTower_Lobby_MapWarps:: @ 8391D1C
 	warp_def 6, 1, 0, 0, MAP_BATTLE_TOWER_BATTLE_ROOM
 
 BattleTower_Lobby_MapBGEvents:: @ 8391D34
-	bg_event 3, 5, 3, 1, 0, BattleTower_Lobby_EventScript_160727
+	bg_event 3, 5, 3, BG_EVENT_PLAYER_FACING_NORTH, BattleTower_Lobby_EventScript_160727
 
 BattleTower_Lobby_MapEvents:: @ 8391D40
 	map_events BattleTower_Lobby_EventObjects, BattleTower_Lobby_MapWarps, 0x0, BattleTower_Lobby_MapBGEvents

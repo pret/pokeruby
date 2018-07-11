@@ -11,11 +11,11 @@ RustboroCity_PokemonSchool_MapWarps:: @ 8388AC4
 	warp_def 6, 10, 0, 4, MAP_RUSTBORO_CITY
 
 RustboroCity_PokemonSchool_MapBGEvents:: @ 8388AD4
-	bg_event 5, 2, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_1579E2
-	bg_event 4, 2, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_1579E2
-	bg_event 6, 2, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_1579E2
-	bg_event 7, 2, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_1579E2
-	bg_event 3, 5, 0, 0, 0, RustboroCity_PokemonSchool_EventScript_157AC5
+	bg_event 5, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_PokemonSchool_EventScript_1579E2
+	bg_event 4, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_PokemonSchool_EventScript_1579E2
+	bg_event 6, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_PokemonSchool_EventScript_1579E2
+	bg_event 7, 2, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_PokemonSchool_EventScript_1579E2
+	bg_event 3, 5, 0, BG_EVENT_PLAYER_FACING_ANY, RustboroCity_PokemonSchool_EventScript_157AC5
 
 RustboroCity_PokemonSchool_MapEvents:: @ 8388B10
 	map_events RustboroCity_PokemonSchool_EventObjects, RustboroCity_PokemonSchool_MapWarps, 0x0, RustboroCity_PokemonSchool_MapBGEvents

@@ -10,10 +10,10 @@ DewfordTown_Gym_MapWarps:: @ 8386034
 	warp_def 6, 27, 0, 2, MAP_DEWFORD_TOWN
 
 DewfordTown_Gym_MapBGEvents:: @ 8386044
-	bg_event 7, 21, 0, 1, 0, DewfordTown_Gym_EventScript_15325E
-	bg_event 10, 21, 0, 1, 0, DewfordTown_Gym_EventScript_15326E
-	bg_event 4, 24, 0, 1, 0, DewfordTown_Gym_EventScript_15325E
-	bg_event 7, 24, 0, 1, 0, DewfordTown_Gym_EventScript_15326E
+	bg_event 7, 21, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_Gym_EventScript_15325E
+	bg_event 10, 21, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_Gym_EventScript_15326E
+	bg_event 4, 24, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_Gym_EventScript_15325E
+	bg_event 7, 24, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_Gym_EventScript_15326E
 
 DewfordTown_Gym_MapEvents:: @ 8386074
 	map_events DewfordTown_Gym_EventObjects, DewfordTown_Gym_MapWarps, 0x0, DewfordTown_Gym_MapBGEvents

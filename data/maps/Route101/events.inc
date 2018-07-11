@@ -18,7 +18,7 @@ Route101_MapCoordEvents:: @ 838114C
 	coord_event 7, 13, 3, 0, VAR_ROUTE101_STATE, 2, 0, Route101_EventScript_14E9E4
 
 Route101_MapBGEvents:: @ 83811DC
-	bg_event 5, 9, 0, 0, 0, Route101_EventScript_14EA76
+	bg_event 5, 9, 0, BG_EVENT_PLAYER_FACING_ANY, Route101_EventScript_14EA76
 
 Route101_MapEvents:: @ 83811E8
 	map_events Route101_EventObjects, 0x0, Route101_MapCoordEvents, Route101_MapBGEvents

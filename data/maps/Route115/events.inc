@@ -22,8 +22,8 @@ Route115_MapWarps:: @ 83830AC
 Route115_MapBGEvents:: @ 83830B4
 	bg_secret_base_event 32, 6, 0, SECRET_BASE_BROWN_CAVE4_2
 	bg_secret_base_event 21, 18, 0, SECRET_BASE_BROWN_CAVE3_2
-	bg_event 16, 64, 0, 0, 0, Route115_EventScript_150937
-	bg_event 25, 38, 3, 0, 0, Route115_EventScript_150940
+	bg_event 16, 64, 0, BG_EVENT_PLAYER_FACING_ANY, Route115_EventScript_150937
+	bg_event 25, 38, 3, BG_EVENT_PLAYER_FACING_ANY, Route115_EventScript_150940
 	bg_secret_base_event 8, 30, 0, SECRET_BASE_YELLOW_CAVE2_3
 	bg_secret_base_event 32, 39, 0, SECRET_BASE_BROWN_CAVE1_2
 	bg_secret_base_event 26, 15, 0, SECRET_BASE_BROWN_CAVE2_2

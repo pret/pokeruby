@@ -47,23 +47,23 @@ Route110_MapCoordEvents:: @ 8382070
 	coord_event 35, 56, 3, 0, VAR_ROUTE110_STATE, 0, 0, Route110_EventScript_14FD29
 
 Route110_MapBGEvents:: @ 83820C0
-	bg_event 15, 25, 0, 0, 0, Route110_EventScript_14F9EF
-	bg_event 9, 51, 0, 0, 0, Route110_EventScript_14FA01
-	bg_event 14, 88, 0, 0, 0, Route110_EventScript_14F9E6
-	bg_event 20, 94, 0, 0, 0, Route110_EventScript_14F9DD
-	bg_event 7, 75, 0, 0, 0, Route110_EventScript_14F9F8
-	bg_event 3, 17, 0, 0, 0, Route110_EventScript_14FA0A
+	bg_event 15, 25, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14F9EF
+	bg_event 9, 51, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA01
+	bg_event 14, 88, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14F9E6
+	bg_event 20, 94, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14F9DD
+	bg_event 7, 75, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14F9F8
+	bg_event 3, 17, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA0A
 	bg_secret_base_event 16, 25, 0, SECRET_BASE_TREE3_1
 	bg_secret_base_event 17, 25, 0, SECRET_BASE_TREE4_1
-	bg_event 35, 39, 3, 0, 0, Route110_EventScript_14FA13
-	bg_event 37, 70, 3, 0, 0, Route110_EventScript_14FA1C
-	bg_event 8, 67, 0, 0, 0, Route110_EventScript_14FA25
-	bg_event 32, 93, 0, 0, 0, Route110_EventScript_14FA2E
+	bg_event 35, 39, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA13
+	bg_event 37, 70, 3, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA1C
+	bg_event 8, 67, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA25
+	bg_event 32, 93, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14FA2E
 	bg_hidden_item_event 26, 40, 3, ITEM_REVIVE, FLAG_HIDDEN_ITEM_36
 	bg_hidden_item_event 34, 42, 3, ITEM_GREAT_BALL, FLAG_HIDDEN_ITEM_35
 	bg_hidden_item_event 4, 35, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_41
 	bg_hidden_item_event 37, 67, 3, ITEM_FULL_HEAL, FLAG_HIDDEN_ITEM_37
-	bg_event 13, 16, 0, 0, 0, Route110_EventScript_14F9E6
+	bg_event 13, 16, 0, BG_EVENT_PLAYER_FACING_ANY, Route110_EventScript_14F9E6
 
 Route110_MapEvents:: @ 838218C
 	map_events Route110_EventObjects, Route110_MapWarps, Route110_MapCoordEvents, Route110_MapBGEvents

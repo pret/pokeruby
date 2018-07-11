@@ -45,18 +45,18 @@ SlateportCity_MapWarps:: @ 837FA94
 	warp_def 21, 44, 0, 0, MAP_SLATEPORT_CITY_HOUSE2
 
 SlateportCity_MapBGEvents:: @ 837FAEC
-	bg_event 8, 19, 0, 0, 0, SlateportCity_EventScript_14BCAF
-	bg_event 20, 19, 0, 1, 0, SlateportCity_EventScript_1A00EA
-	bg_event 21, 19, 0, 1, 0, SlateportCity_EventScript_1A00EA
-	bg_event 14, 26, 0, 1, 0, SlateportCity_EventScript_1A00E1
-	bg_event 24, 12, 0, 0, 0, SlateportCity_EventScript_14BC91
-	bg_event 15, 26, 0, 1, 0, SlateportCity_EventScript_1A00E1
-	bg_event 14, 51, 0, 0, 0, SlateportCity_EventScript_14BC88
-	bg_event 26, 26, 0, 0, 0, SlateportCity_EventScript_14BC76
-	bg_event 16, 22, 0, 0, 0, SlateportCity_EventScript_14BC7F
-	bg_event 8, 26, 0, 0, 0, SlateportCity_EventScript_14BC6D
-	bg_event 7, 13, 0, 0, 0, SlateportCity_EventScript_14BC33
-	bg_event 23, 38, 0, 0, 0, SlateportCity_EventScript_14BC3C
+	bg_event 8, 19, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BCAF
+	bg_event 20, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1A00EA
+	bg_event 21, 19, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1A00EA
+	bg_event 14, 26, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1A00E1
+	bg_event 24, 12, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC91
+	bg_event 15, 26, 0, BG_EVENT_PLAYER_FACING_NORTH, SlateportCity_EventScript_1A00E1
+	bg_event 14, 51, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC88
+	bg_event 26, 26, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC76
+	bg_event 16, 22, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC7F
+	bg_event 8, 26, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC6D
+	bg_event 7, 13, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC33
+	bg_event 23, 38, 0, BG_EVENT_PLAYER_FACING_ANY, SlateportCity_EventScript_14BC3C
 
 SlateportCity_MapEvents:: @ 837FB7C
 	map_events SlateportCity_EventObjects, SlateportCity_MapWarps, 0x0, SlateportCity_MapBGEvents

@@ -46,10 +46,10 @@
 	coord_event \x, \y, \height, 0, \weather, 0, 0, 0x0
 	.endm
 
-	.macro bg_event x, y, byte, kind, word, arg6, arg7, arg8
+	.macro bg_event x, y, elevation, kind, arg6, arg7, arg8
 	.2byte \x, \y
-	.byte \byte, \kind
-	.2byte \word
+	.byte \elevation, \kind
+	.2byte 0
 	.if \kind < 5
 	.4byte \arg6
 	.else
@@ -60,11 +60,11 @@
 	.endm
 
 	.macro bg_hidden_item_event x, y, height, item, flag
-	bg_event \x, \y, \height, 7, 0, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
+	bg_event \x, \y, \height, 7, \item, ((\flag) - FLAG_HIDDEN_ITEMS_START), 0
 	.endm
 
 	.macro bg_secret_base_event x, y, height, secret_base_id
-	bg_event \x, \y, \height, 8, 0, \secret_base_id, 0, 0
+	bg_event \x, \y, \height, 8, \secret_base_id, 0, 0
 	.endm	
 
 	.macro map_events npcs, warps, traps, signs

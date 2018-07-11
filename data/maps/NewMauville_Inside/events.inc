@@ -24,14 +24,14 @@ NewMauville_Inside_MapCoordEvents:: @ 838DFD0
 	coord_event 33, 6, 3, 0, VAR_NEW_MAUVILLE_STATE, 1, 0, NewMauville_Inside_EventScript_15E876
 
 NewMauville_Inside_MapBGEvents:: @ 838E070
-	bg_event 32, 4, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 32, 3, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 32, 2, 0, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 33, 4, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 34, 4, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 35, 4, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 35, 3, 3, 0, 0, NewMauville_Inside_EventScript_15E8E0
-	bg_event 35, 2, 0, 0, 0, NewMauville_Inside_EventScript_15E8E0
+	bg_event 32, 4, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 32, 3, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 32, 2, 0, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 33, 4, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 34, 4, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 35, 4, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 35, 3, 3, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
+	bg_event 35, 2, 0, BG_EVENT_PLAYER_FACING_ANY, NewMauville_Inside_EventScript_15E8E0
 
 NewMauville_Inside_MapEvents:: @ 838E0D0
 	map_events NewMauville_Inside_EventObjects, NewMauville_Inside_MapWarps, NewMauville_Inside_MapCoordEvents, NewMauville_Inside_MapBGEvents

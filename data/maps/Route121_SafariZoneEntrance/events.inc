@@ -13,7 +13,7 @@ Route121_SafariZoneEntrance_MapCoordEvents:: @ 838BA9C
 	coord_event 8, 4, 3, 0, VAR_TEMP_1, 0, 0, Route121_SafariZoneEntrance_EventScript_15C383
 
 Route121_SafariZoneEntrance_MapBGEvents:: @ 838BAAC
-	bg_event 15, 1, 0, 0, 0, Route121_SafariZoneEntrance_EventScript_15C487
+	bg_event 15, 1, 0, BG_EVENT_PLAYER_FACING_ANY, Route121_SafariZoneEntrance_EventScript_15C487
 
 Route121_SafariZoneEntrance_MapEvents:: @ 838BAB8
 	map_events Route121_SafariZoneEntrance_EventObjects, Route121_SafariZoneEntrance_MapWarps, Route121_SafariZoneEntrance_MapCoordEvents, Route121_SafariZoneEntrance_MapBGEvents

@@ -1,10 +1,6 @@
 #include "global.h"
-#include "constants/decorations.h"
 #include "secret_base.h"
 #include "decoration.h"
-#include "constants/species.h"
-#include "constants/items.h"
-#include "constants/moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -29,11 +25,15 @@
 #include "overworld.h"
 #include "script.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "constants/bg_event_constants.h"
+#include "constants/decorations.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 #include "constants/vars.h"
 
 
@@ -317,7 +317,7 @@ void sub_80BB970(struct MapEvents *events)
 
     for (bgevidx = 0; bgevidx < events->bgEventCount; bgevidx++)
     {
-        if (events->bgEvents[bgevidx].kind == 8)
+        if (events->bgEvents[bgevidx].kind == BG_EVENT_SECRET_BASE)
         {
             for (jdx = 0; jdx < MAX_SECRET_BASES; jdx++)
             {
@@ -538,7 +538,7 @@ void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEv
 
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == 8 && position->x == events->bgEvents[i].x + 7
+        if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE && position->x == events->bgEvents[i].x + 7
          && position->y == events->bgEvents[i].y + 7)
         {
             gCurrentSecretBaseId = events->bgEvents[i].bgUnion.secretBaseId;
@@ -871,7 +871,7 @@ void sub_80BC474(void)
 
     for (eventId = 0; eventId < mapEvents->bgEventCount; eventId++)
     {
-        if (mapEvents->bgEvents[eventId].kind == 8
+        if (mapEvents->bgEvents[eventId].kind == BG_EVENT_SECRET_BASE
          && gSaveBlock1.secretBases[0].secretBaseId == mapEvents->bgEvents[eventId].bgUnion.secretBaseId)
         {
             u16 i;

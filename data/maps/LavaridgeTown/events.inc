@@ -21,13 +21,13 @@ LavaridgeTown_MapCoordEvents:: @ 8380D80
 	coord_event 6, 3, 3, 0, 0, 0, 0, LavaridgeTown_EventScript_14E710
 
 LavaridgeTown_MapBGEvents:: @ 8380D90
-	bg_event 14, 16, 0, 0, 0, LavaridgeTown_EventScript_14E7D7
-	bg_event 7, 15, 0, 0, 0, LavaridgeTown_EventScript_14E7C5
-	bg_event 17, 5, 0, 1, 0, LavaridgeTown_EventScript_1A00E1
-	bg_event 13, 8, 0, 0, 0, LavaridgeTown_EventScript_14E7BC
-	bg_event 10, 6, 0, 1, 0, LavaridgeTown_EventScript_1A00EA
-	bg_event 16, 5, 0, 1, 0, LavaridgeTown_EventScript_1A00E1
-	bg_event 11, 6, 0, 1, 0, LavaridgeTown_EventScript_1A00EA
+	bg_event 14, 16, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_14E7D7
+	bg_event 7, 15, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_14E7C5
+	bg_event 17, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_1A00E1
+	bg_event 13, 8, 0, BG_EVENT_PLAYER_FACING_ANY, LavaridgeTown_EventScript_14E7BC
+	bg_event 10, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_1A00EA
+	bg_event 16, 5, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_1A00E1
+	bg_event 11, 6, 0, BG_EVENT_PLAYER_FACING_NORTH, LavaridgeTown_EventScript_1A00EA
 	bg_hidden_item_event 4, 5, 3, ITEM_ICE_HEAL, FLAG_HIDDEN_ITEM_0
 
 LavaridgeTown_MapEvents:: @ 8380DF0

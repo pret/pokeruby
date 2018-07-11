@@ -13,11 +13,11 @@ DewfordTown_MapWarps:: @ 8380C00
 	warp_def 8, 8, 0, 0, MAP_DEWFORD_TOWN_HOUSE2
 
 DewfordTown_MapBGEvents:: @ 8380C28
-	bg_event 10, 10, 0, 0, 0, DewfordTown_EventScript_14E0AB
-	bg_event 11, 16, 0, 0, 0, DewfordTown_EventScript_14E0B4
-	bg_event 4, 10, 0, 1, 0, DewfordTown_EventScript_1A00EA
-	bg_event 3, 10, 0, 1, 0, DewfordTown_EventScript_1A00EA
-	bg_event 2, 4, 0, 0, 0, DewfordTown_EventScript_14E0BD
+	bg_event 10, 10, 0, BG_EVENT_PLAYER_FACING_ANY, DewfordTown_EventScript_14E0AB
+	bg_event 11, 16, 0, BG_EVENT_PLAYER_FACING_ANY, DewfordTown_EventScript_14E0B4
+	bg_event 4, 10, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_EventScript_1A00EA
+	bg_event 3, 10, 0, BG_EVENT_PLAYER_FACING_NORTH, DewfordTown_EventScript_1A00EA
+	bg_event 2, 4, 0, BG_EVENT_PLAYER_FACING_ANY, DewfordTown_EventScript_14E0BD
 
 DewfordTown_MapEvents:: @ 8380C64
 	map_events DewfordTown_EventObjects, DewfordTown_MapWarps, 0x0, DewfordTown_MapBGEvents

@@ -16,18 +16,18 @@ SSTidalCorridor_MapWarps:: @ 8391758
 	warp_def 16, 2, 3, 0, MAP_SS_TIDAL_LOWER_DECK
 
 SSTidalCorridor_MapBGEvents:: @ 83917A0
-	bg_event 2, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 4, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 6, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 8, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 10, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 12, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 14, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 16, 1, 0, 0, 0, SSTidalCorridor_EventScript_15FE3A
-	bg_event 5, 9, 0, 1, 0, SSTidalCorridor_EventScript_15FDB2
-	bg_event 8, 9, 0, 1, 0, SSTidalCorridor_EventScript_15FDBB
-	bg_event 11, 9, 0, 1, 0, SSTidalCorridor_EventScript_15FDC4
-	bg_event 14, 9, 0, 1, 0, SSTidalCorridor_EventScript_15FDCD
+	bg_event 2, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 4, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 6, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 8, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 10, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 12, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 14, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 16, 1, 0, BG_EVENT_PLAYER_FACING_ANY, SSTidalCorridor_EventScript_15FE3A
+	bg_event 5, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, SSTidalCorridor_EventScript_15FDB2
+	bg_event 8, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, SSTidalCorridor_EventScript_15FDBB
+	bg_event 11, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, SSTidalCorridor_EventScript_15FDC4
+	bg_event 14, 9, 0, BG_EVENT_PLAYER_FACING_NORTH, SSTidalCorridor_EventScript_15FDCD
 
 SSTidalCorridor_MapEvents:: @ 8391830
 	map_events SSTidalCorridor_EventObjects, SSTidalCorridor_MapWarps, 0x0, SSTidalCorridor_MapBGEvents

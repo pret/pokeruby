@@ -12,7 +12,7 @@ Route106_MapBGEvents:: @ 838198C
 	bg_hidden_item_event 41, 11, 3, ITEM_POKE_BALL, FLAG_HIDDEN_ITEM_3F
 	bg_hidden_item_event 53, 12, 0, ITEM_STARDUST, FLAG_HIDDEN_ITEM_2E
 	bg_hidden_item_event 68, 15, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_2F
-	bg_event 59, 13, 3, 0, 0, Route106_EventScript_14F32F
+	bg_event 59, 13, 3, BG_EVENT_PLAYER_FACING_ANY, Route106_EventScript_14F32F
 
 Route106_MapEvents:: @ 83819BC
 	map_events Route106_EventObjects, Route106_MapWarps, 0x0, Route106_MapBGEvents

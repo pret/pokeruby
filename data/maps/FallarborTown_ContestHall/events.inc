@@ -8,8 +8,8 @@ FallarborTown_ContestHall_MapWarps:: @ 8386824
 	warp_def 11, 17, 0, 2, MAP_FALLARBOR_TOWN_CONTEST_LOBBY
 
 FallarborTown_ContestHall_MapBGEvents:: @ 8386834
-	bg_event 12, 14, 3, 0, 0, FallarborTown_ContestHall_EventScript_153AEA
-	bg_event 8, 14, 3, 0, 0, FallarborTown_ContestHall_EventScript_153AEA
+	bg_event 12, 14, 3, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestHall_EventScript_153AEA
+	bg_event 8, 14, 3, BG_EVENT_PLAYER_FACING_ANY, FallarborTown_ContestHall_EventScript_153AEA
 
 FallarborTown_ContestHall_MapEvents:: @ 838684C
 	map_events FallarborTown_ContestHall_EventObjects, FallarborTown_ContestHall_MapWarps, 0x0, FallarborTown_ContestHall_MapBGEvents

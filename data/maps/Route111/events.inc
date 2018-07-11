@@ -78,19 +78,19 @@ Route111_MapCoordEvents:: @ 8382518
 	coord_event 11, 44, 3, 0, 0, 0, 0, Route111_EventScript_1501C9
 
 Route111_MapBGEvents:: @ 8382738
-	bg_event 16, 114, 0, 0, 0, Route111_EventScript_150368
-	bg_event 24, 126, 0, 0, 0, Route111_EventScript_15035F
-	bg_event 7, 66, 0, 0, 0, Route111_EventScript_150371
-	bg_event 13, 6, 0, 0, 0, Route111_EventScript_15037A
+	bg_event 16, 114, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_150368
+	bg_event 24, 126, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_15035F
+	bg_event 7, 66, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_150371
+	bg_event 13, 6, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_15037A
 	bg_secret_base_event 24, 36, 0, SECRET_BASE_YELLOW_CAVE2_1
 	bg_secret_base_event 34, 50, 0, SECRET_BASE_YELLOW_CAVE3_1
 	bg_secret_base_event 33, 34, 0, SECRET_BASE_YELLOW_CAVE1_1
-	bg_event 25, 19, 0, 0, 0, Route111_EventScript_150383
+	bg_event 25, 19, 0, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_150383
 	bg_secret_base_event 35, 1, 0, SECRET_BASE_RED_CAVE2_3
 	bg_secret_base_event 35, 31, 0, SECRET_BASE_YELLOW_CAVE4_3
 	bg_hidden_item_event 26, 70, 0, ITEM_STARDUST, FLAG_HIDDEN_ITEM_2
 	bg_secret_base_event 27, 27, 3, SECRET_BASE_RED_CAVE4_3
-	bg_event 7, 84, 3, 0, 0, Route111_EventScript_15038C
+	bg_event 7, 84, 3, BG_EVENT_PLAYER_FACING_ANY, Route111_EventScript_15038C
 	bg_secret_base_event 14, 19, 0, SECRET_BASE_TREE1_4
 	bg_secret_base_event 13, 19, 0, SECRET_BASE_TREE1_1
 	bg_hidden_item_event 19, 55, 0, ITEM_PROTEIN, FLAG_HIDDEN_ITEM_38
