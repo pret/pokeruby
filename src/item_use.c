@@ -35,6 +35,7 @@
 #include "strings.h"
 #include "task.h"
 #include "constants/bg_event_constants.h"
+#include "constants/map_types.h"
 #include "constants/species.h"
 #include "constants/vars.h"
 

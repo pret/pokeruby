@@ -8,7 +8,7 @@ MtPyre_Summit:: @ 8306FD8
 	.byte MAPSEC_MT_PYRE
 	.byte 0
 	.byte WEATHER_FOG_1
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
 	.byte 0

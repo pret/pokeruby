@@ -8,7 +8,7 @@ SeafloorCavern_Room8:: @ 8307144
 	.byte MAPSEC_SEAFLOOR_CAVERN
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

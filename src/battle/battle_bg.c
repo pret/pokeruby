@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "constants/songs.h"
 #include "decompress.h"
 #include "ewram.h"
 #include "graphics.h"
@@ -13,6 +12,8 @@
 #include "trainer.h"
 #include "trig.h"
 #include "sound.h"
+#include "constants/map_types.h"
+#include "constants/songs.h"
 
 
 extern u16 gBattleTypeFlags;

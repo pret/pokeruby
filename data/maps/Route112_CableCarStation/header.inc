@@ -8,7 +8,7 @@ Route112_CableCarStation:: @ 8306C90
 	.byte MAPSEC_ROUTE_112
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

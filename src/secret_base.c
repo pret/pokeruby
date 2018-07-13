@@ -32,6 +32,7 @@
 #include "constants/bg_event_constants.h"
 #include "constants/decorations.h"
 #include "constants/items.h"
+#include "constants/map_types.h"
 #include "constants/moves.h"
 #include "constants/species.h"
 #include "constants/vars.h"

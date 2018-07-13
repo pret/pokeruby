@@ -8,7 +8,7 @@ ScorchedSlab:: @ 830756C
 	.byte MAPSEC_SCORCHED_SLAB
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

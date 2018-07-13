@@ -8,7 +8,7 @@ LittlerootTown:: @ 8305544
 	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 1
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 1
 	.byte 0

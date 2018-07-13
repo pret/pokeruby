@@ -8,7 +8,7 @@ GraniteCave_StevensRoom:: @ 8306E88
 	.byte MAPSEC_GRANITE_CAVE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

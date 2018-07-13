@@ -8,7 +8,7 @@ SootopolisCity:: @ 830550C
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 2
+	.byte MAP_TYPE_CITY
 	.2byte 0
 	.byte 1
 	.byte 0

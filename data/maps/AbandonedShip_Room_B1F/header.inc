@@ -8,7 +8,7 @@ AbandonedShip_Room_B1F:: @ 830741C
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte WEATHER_SHADE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

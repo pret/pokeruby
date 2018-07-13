@@ -8,7 +8,7 @@ Route104_Prototype:: @ 8307CF8
 	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
 	.byte 0

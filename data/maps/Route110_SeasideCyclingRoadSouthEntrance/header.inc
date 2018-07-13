@@ -8,7 +8,7 @@ Route110_SeasideCyclingRoadSouthEntrance:: @ 8307E80
 	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 8
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
 	.byte 0

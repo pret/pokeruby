@@ -8,7 +8,7 @@ RusturfTunnel:: @ 8306DE0
 	.byte MAPSEC_RUSTURF_TUNNEL
 	.byte 0
 	.byte WEATHER_FOG_1
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

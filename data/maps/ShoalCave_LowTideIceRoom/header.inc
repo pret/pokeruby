@@ -8,7 +8,7 @@ ShoalCave_LowTideIceRoom:: @ 8307684
 	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0

@@ -8,7 +8,7 @@ Route108:: @ 83056CC
 	.byte MAPSEC_ROUTE_108
 	.byte 0
 	.byte WEATHER_SUNNY
-	.byte 3
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
 	.byte 0

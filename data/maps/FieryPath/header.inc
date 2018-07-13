@@ -8,7 +8,7 @@ FieryPath:: @ 8306EF8
 	.byte MAPSEC_FIERY_PATH
 	.byte 0
 	.byte WEATHER_NONE
-	.byte 4
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
 	.byte 0
