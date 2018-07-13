@@ -11,4 +11,4 @@ SeafloorCavern_Room2:: @ 830709C
 	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

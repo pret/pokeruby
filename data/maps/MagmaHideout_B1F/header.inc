@@ -11,4 +11,4 @@ MagmaHideout_B1F:: @ 83075A4
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 1
-	.byte 2
+	.byte MAP_BATTLE_SCENE_MAGMA

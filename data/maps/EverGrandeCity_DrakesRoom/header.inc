@@ -11,4 +11,4 @@ EverGrandeCity_DrakesRoom:: @ 8306AEC
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 7
+	.byte MAP_BATTLE_SCENE_DRAKE

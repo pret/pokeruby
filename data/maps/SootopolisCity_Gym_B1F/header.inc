@@ -11,4 +11,4 @@ SootopolisCity_Gym_B1F:: @ 8306948
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 1
+	.byte MAP_BATTLE_SCENE_GYM

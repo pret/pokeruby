@@ -11,4 +11,4 @@ SlateportCity_PokemonCenter_1F:: @ 83060F8
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

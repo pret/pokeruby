@@ -11,4 +11,4 @@ FortreeCity_Gym:: @ 8306424
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 1
+	.byte MAP_BATTLE_SCENE_GYM

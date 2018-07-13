@@ -11,4 +11,4 @@ MossdeepCity_GameCorner_B1F:: @ 8306910
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

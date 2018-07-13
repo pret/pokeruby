@@ -11,4 +11,4 @@ AquaHideout_B2F:: @ 830702C
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 1
-	.byte 3
+	.byte MAP_BATTLE_SCENE_AQUA

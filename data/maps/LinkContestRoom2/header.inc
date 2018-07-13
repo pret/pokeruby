@@ -11,4 +11,4 @@ LinkContestRoom2:: @ 8307AAC
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

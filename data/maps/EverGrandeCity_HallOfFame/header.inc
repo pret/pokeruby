@@ -11,4 +11,4 @@ EverGrandeCity_HallOfFame:: @ 8306BCC
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

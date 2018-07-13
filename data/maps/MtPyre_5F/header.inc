@@ -11,4 +11,4 @@ MtPyre_5F:: @ 8306F84
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

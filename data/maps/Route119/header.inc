@@ -11,4 +11,4 @@ Route119:: @ 8305800
 	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

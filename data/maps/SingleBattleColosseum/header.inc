@@ -11,4 +11,4 @@ SingleBattleColosseum:: @ 8307978
 	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 8
+	.byte MAP_BATTLE_SCENE_BATTLE_TOWER
