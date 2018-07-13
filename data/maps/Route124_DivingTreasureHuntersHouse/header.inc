@@ -7,7 +7,7 @@ Route124_DivingTreasureHuntersHouse:: @ 8307F44
 	.2byte 302
 	.byte MAPSEC_ROUTE_124
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

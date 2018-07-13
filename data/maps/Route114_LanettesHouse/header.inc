@@ -7,7 +7,7 @@ Route114_LanettesHouse:: @ 8306D00
 	.2byte 122
 	.byte MAPSEC_ROUTE_114
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ Route114_FossilManiacsHouse:: @ 8306CC8
 	.2byte 120
 	.byte MAPSEC_ROUTE_114
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

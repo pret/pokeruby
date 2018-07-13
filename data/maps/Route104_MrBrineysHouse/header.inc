@@ -7,7 +7,7 @@ Route104_MrBrineysHouse:: @ 8306C20
 	.2byte 102
 	.byte MAPSEC_ROUTE_104
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

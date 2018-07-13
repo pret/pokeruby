@@ -7,7 +7,7 @@ SafariZone_Northwest:: @ 8307BA8
 	.2byte 239
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 1

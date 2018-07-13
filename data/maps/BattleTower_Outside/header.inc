@@ -7,7 +7,7 @@ BattleTower_Outside:: @ 8307C18
 	.2byte 266
 	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 1

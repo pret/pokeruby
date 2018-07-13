@@ -7,7 +7,7 @@ LavaridgeTown:: @ 8305598
 	.2byte 13
 	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 1

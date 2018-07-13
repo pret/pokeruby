@@ -7,7 +7,7 @@ MossdeepCity_SpaceCenter_2F:: @ 83068D8
 	.2byte 277
 	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

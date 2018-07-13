@@ -7,7 +7,7 @@ BattleTower_Corridor:: @ 8307C6C
 	.2byte 268
 	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ InsideOfTruck:: @ 8307B38
 	.2byte 238
 	.byte MAPSEC_INSIDE_OF_TRUCK
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ AquaHideout_B2F:: @ 830702C
 	.2byte 146
 	.byte MAPSEC_EVIL_TEAM_HIDEOUT
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 1

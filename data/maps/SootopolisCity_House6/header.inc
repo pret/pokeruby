@@ -7,7 +7,7 @@ SootopolisCity_House6:: @ 8306A44
 	.2byte 310
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

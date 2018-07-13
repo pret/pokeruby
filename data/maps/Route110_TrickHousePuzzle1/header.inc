@@ -7,7 +7,7 @@ Route110_TrickHousePuzzle1:: @ 8307DA0
 	.2byte 248
 	.byte MAPSEC_ROUTE_110
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

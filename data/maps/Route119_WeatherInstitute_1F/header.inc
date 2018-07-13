@@ -7,7 +7,7 @@ Route119_WeatherInstitute_1F:: @ 8307EF0
 	.2byte 272
 	.byte MAPSEC_ROUTE_119
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

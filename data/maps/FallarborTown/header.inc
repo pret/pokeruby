@@ -7,7 +7,7 @@ FallarborTown:: @ 83055B4
 	.2byte 14
 	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 1

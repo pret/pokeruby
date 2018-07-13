@@ -7,7 +7,7 @@ SecretBase_YellowCave3:: @ 830787C
 	.2byte 213
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 9
 	.2byte 0
 	.byte 1

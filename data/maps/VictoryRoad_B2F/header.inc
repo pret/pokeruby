@@ -7,7 +7,7 @@ VictoryRoad_B2F:: @ 830725C
 	.2byte 287
 	.byte MAPSEC_VICTORY_ROAD
 	.byte 1
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 1

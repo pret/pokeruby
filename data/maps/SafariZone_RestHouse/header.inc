@@ -7,7 +7,7 @@ SafariZone_RestHouse:: @ 8307CDC
 	.2byte 330
 	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ SkyPillar_Top:: @ 83076BC
 	.2byte 332
 	.byte MAPSEC_SKY_PILLAR
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 3
 	.2byte 0
 	.byte 1

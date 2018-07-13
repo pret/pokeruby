@@ -7,7 +7,7 @@ MagmaHideout_B2F:: @ 83075C0
 	.2byte 319
 	.byte MAPSEC_EVIL_TEAM_HIDEOUT
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 1

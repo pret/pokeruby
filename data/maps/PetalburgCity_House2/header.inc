@@ -7,7 +7,7 @@ PetalburgCity_House2:: @ 8305F70
 	.2byte 80
 	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

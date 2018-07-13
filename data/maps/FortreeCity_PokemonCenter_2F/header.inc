@@ -7,7 +7,7 @@ FortreeCity_PokemonCenter_2F:: @ 830645C
 	.2byte 62
 	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

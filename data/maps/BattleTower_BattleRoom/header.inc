@@ -7,7 +7,7 @@ BattleTower_BattleRoom:: @ 8307C88
 	.2byte 269
 	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

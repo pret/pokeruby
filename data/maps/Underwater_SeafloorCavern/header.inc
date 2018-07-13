@@ -7,7 +7,7 @@ Underwater_SeafloorCavern:: @ 8307048
 	.2byte 147
 	.byte MAPSEC_UNDERWATER_128
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 1

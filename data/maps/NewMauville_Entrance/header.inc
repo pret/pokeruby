@@ -7,7 +7,7 @@ NewMauville_Entrance:: @ 8307320
 	.2byte 185
 	.byte MAPSEC_NEW_MAUVILLE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 1

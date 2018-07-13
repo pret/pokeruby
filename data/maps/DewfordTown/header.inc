@@ -7,7 +7,7 @@ DewfordTown:: @ 830557C
 	.2byte 12
 	.byte MAPSEC_DEWFORD_TOWN
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 1
 	.2byte 0
 	.byte 1

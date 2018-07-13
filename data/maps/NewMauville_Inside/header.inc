@@ -7,7 +7,7 @@ NewMauville_Inside:: @ 830733C
 	.2byte 186
 	.byte MAPSEC_NEW_MAUVILLE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 1

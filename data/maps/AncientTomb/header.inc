@@ -7,7 +7,7 @@ AncientTomb:: @ 83074E0
 	.2byte 282
 	.byte MAPSEC_ANCIENT_TOMB
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 1

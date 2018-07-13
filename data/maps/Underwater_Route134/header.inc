@@ -7,7 +7,7 @@ Underwater_Route134:: @ 83074FC
 	.2byte 283
 	.byte MAPSEC_UNDERWATER_SEALED_CHAMBER
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 1

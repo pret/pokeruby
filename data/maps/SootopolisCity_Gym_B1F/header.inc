@@ -7,7 +7,7 @@ SootopolisCity_Gym_B1F:: @ 8306948
 	.2byte 111
 	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

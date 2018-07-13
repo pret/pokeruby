@@ -7,7 +7,7 @@ MauvilleCity_PokemonCenter_1F:: @ 83061D8
 	.2byte 61
 	.byte MAPSEC_MAUVILLE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

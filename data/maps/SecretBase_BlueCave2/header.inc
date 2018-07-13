@@ -7,7 +7,7 @@ SecretBase_BlueCave2:: @ 83077B8
 	.2byte 206
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 9
 	.2byte 0
 	.byte 1

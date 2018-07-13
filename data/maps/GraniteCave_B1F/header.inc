@@ -7,7 +7,7 @@ GraniteCave_B1F:: @ 8306E50
 	.2byte 134
 	.byte MAPSEC_GRANITE_CAVE
 	.byte 1
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 4
 	.2byte 0
 	.byte 1

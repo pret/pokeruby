@@ -7,7 +7,7 @@ BattleTower_Elevator:: @ 8307C50
 	.2byte 267
 	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

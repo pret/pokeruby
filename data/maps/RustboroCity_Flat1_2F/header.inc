@@ -7,7 +7,7 @@ RustboroCity_Flat1_2F:: @ 8306328
 	.2byte 315
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

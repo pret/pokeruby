@@ -7,7 +7,7 @@ Route104_PrototypePrettyPetalFlowerShop:: @ 8307D14
 	.2byte 118
 	.byte MAPSEC_ROUTE_104
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 1

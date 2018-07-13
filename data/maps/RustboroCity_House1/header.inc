@@ -7,7 +7,7 @@ RustboroCity_House1:: @ 8306344
 	.2byte 97
 	.byte MAPSEC_RUSTBORO_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

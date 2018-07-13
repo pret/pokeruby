@@ -7,7 +7,7 @@ SlateportCity:: @ 8305464
 	.2byte 2
 	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
-	.byte 2
+	.byte WEATHER_SUNNY
 	.byte 2
 	.2byte 0
 	.byte 1

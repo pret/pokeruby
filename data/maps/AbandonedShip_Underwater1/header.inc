@@ -7,7 +7,7 @@ AbandonedShip_Underwater1:: @ 8307400
 	.2byte 193
 	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
-	.byte 14
+	.byte WEATHER_BUBBLES
 	.byte 5
 	.2byte 0
 	.byte 1

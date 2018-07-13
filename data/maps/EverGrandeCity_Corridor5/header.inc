@@ -7,7 +7,7 @@ EverGrandeCity_Corridor5:: @ 8306B94
 	.2byte 117
 	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0

@@ -7,7 +7,7 @@ SecretBase_Shrub1:: @ 8307764
 	.2byte 203
 	.byte MAPSEC_SECRET_BASE
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 9
 	.2byte 0
 	.byte 1

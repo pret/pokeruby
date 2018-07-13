@@ -7,7 +7,7 @@ Route114_FossilManiacsTunnel:: @ 8306CE4
 	.2byte 121
 	.byte MAPSEC_ROUTE_114
 	.byte 0
-	.byte 0
+	.byte WEATHER_NONE
 	.byte 8
 	.2byte 0
 	.byte 0
