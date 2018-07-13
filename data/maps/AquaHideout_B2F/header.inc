@@ -5,7 +5,7 @@ AquaHideout_B2F:: @ 830702C
 	.4byte 0x0
 	.2byte MUS_AJITO
 	.2byte 146
-	.byte 66
+	.byte MAPSEC_EVIL_TEAM_HIDEOUT
 	.byte 0
 	.byte 0
 	.byte 8

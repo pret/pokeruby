@@ -5,7 +5,7 @@ FallarborTown_ContestLobby:: @ 8305CD0
 	.4byte 0x0
 	.2byte MUS_CONLOBBY
 	.2byte 72
-	.byte 4
+	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

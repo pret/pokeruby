@@ -5,7 +5,7 @@ MeteorFalls_B1F_1R:: @ 8306DA8
 	.4byte 0x0
 	.2byte MUS_DAN03
 	.2byte 128
-	.byte 63
+	.byte MAPSEC_METEOR_FALLS
 	.byte 0
 	.byte 0
 	.byte 4

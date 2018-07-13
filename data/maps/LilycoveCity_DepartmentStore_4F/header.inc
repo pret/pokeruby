@@ -5,7 +5,7 @@ LilycoveCity_DepartmentStore_4F:: @ 8306750
 	.4byte 0x0
 	.2byte MUS_FRIENDLY
 	.2byte 261
-	.byte 12
+	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

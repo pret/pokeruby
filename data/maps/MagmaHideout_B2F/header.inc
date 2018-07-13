@@ -5,7 +5,7 @@ MagmaHideout_B2F:: @ 83075C0
 	.4byte 0x0
 	.2byte MUS_AJITO
 	.2byte 319
-	.byte 66
+	.byte MAPSEC_EVIL_TEAM_HIDEOUT
 	.byte 0
 	.byte 0
 	.byte 8

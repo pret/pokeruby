@@ -5,7 +5,7 @@ UnknownMap_25_33:: @ 8307A74
 	.4byte 0x0
 	.2byte MUS_NIBI
 	.2byte 231
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte 0
 	.byte 8

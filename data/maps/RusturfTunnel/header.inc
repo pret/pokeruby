@@ -5,7 +5,7 @@ RusturfTunnel:: @ 8306DE0
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 130
-	.byte 60
+	.byte MAPSEC_RUSTURF_TUNNEL
 	.byte 0
 	.byte 6
 	.byte 4

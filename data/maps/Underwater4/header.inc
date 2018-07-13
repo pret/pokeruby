@@ -5,7 +5,7 @@ Underwater4:: @ 8305A14
 	.4byte Underwater4_MapConnections
 	.2byte MUS_DEEPDEEP
 	.2byte 53
-	.byte 53
+	.byte MAPSEC_UNDERWATER_127
 	.byte 0
 	.byte 14
 	.byte 5

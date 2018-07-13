@@ -5,7 +5,7 @@ SafariZone_Northwest:: @ 8307BA8
 	.4byte SafariZone_Northwest_MapConnections
 	.2byte MUS_SAFARI
 	.2byte 239
-	.byte 57
+	.byte MAPSEC_SAFARI_ZONE
 	.byte 0
 	.byte 0
 	.byte 3

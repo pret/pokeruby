@@ -5,7 +5,7 @@ VictoryRoad_1F:: @ 8307224
 	.4byte 0x0
 	.2byte MUS_C_ROAD
 	.2byte 164
-	.byte 70
+	.byte MAPSEC_VICTORY_ROAD
 	.byte 0
 	.byte 0
 	.byte 4

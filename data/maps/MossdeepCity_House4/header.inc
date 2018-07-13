@@ -5,7 +5,7 @@ MossdeepCity_House4:: @ 83068A0
 	.4byte 0x0
 	.2byte MUS_GOTOWN
 	.2byte 80
-	.byte 13
+	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte 0
 	.byte 8

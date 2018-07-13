@@ -5,7 +5,7 @@ Route110:: @ 8305704
 	.4byte Route110_MapConnections
 	.2byte MUS_DOORO_X1
 	.2byte 26
-	.byte 25
+	.byte MAPSEC_ROUTE_110
 	.byte 0
 	.byte 2
 	.byte 3

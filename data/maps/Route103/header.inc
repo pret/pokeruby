@@ -5,7 +5,7 @@ Route103:: @ 8305640
 	.4byte Route103_MapConnections
 	.2byte MUS_DOORO1
 	.2byte 19
-	.byte 18
+	.byte MAPSEC_ROUTE_103
 	.byte 0
 	.byte 2
 	.byte 3

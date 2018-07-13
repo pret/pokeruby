@@ -5,7 +5,7 @@ SootopolisCity_Gym_B1F:: @ 8306948
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 111
-	.byte 14
+	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte 0
 	.byte 8

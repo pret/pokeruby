@@ -5,7 +5,7 @@ JaggedPass:: @ 8306EDC
 	.4byte 0x0
 	.2byte MUS_DAN01
 	.2byte 293
-	.byte 76
+	.byte MAPSEC_JAGGED_PASS
 	.byte 0
 	.byte 0
 	.byte 3

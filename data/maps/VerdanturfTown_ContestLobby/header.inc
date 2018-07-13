@@ -5,7 +5,7 @@ VerdanturfTown_ContestLobby:: @ 8305D78
 	.4byte 0x0
 	.2byte MUS_CONLOBBY
 	.2byte 72
-	.byte 5
+	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
 	.byte 0
 	.byte 8

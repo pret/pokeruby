@@ -5,7 +5,7 @@ Route118:: @ 83057E4
 	.4byte Route118_MapConnections
 	.2byte MUS_ROUTE_118
 	.2byte 34
-	.byte 33
+	.byte MAPSEC_ROUTE_118
 	.byte 0
 	.byte 2
 	.byte 3

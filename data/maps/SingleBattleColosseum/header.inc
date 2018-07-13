@@ -5,7 +5,7 @@ SingleBattleColosseum:: @ 8307978
 	.4byte 0x0
 	.2byte MUS_RAINBOW
 	.2byte 222
-	.byte 87
+	.byte MAPSEC_DYNAMIC
 	.byte 0
 	.byte 0
 	.byte 8

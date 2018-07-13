@@ -5,7 +5,7 @@ EverGrandeCity_DrakesRoom:: @ 8306AEC
 	.4byte 0x0
 	.2byte MUS_C_ROAD
 	.2byte 115
-	.byte 15
+	.byte MAPSEC_EVER_GRANDE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

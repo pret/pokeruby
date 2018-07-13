@@ -5,7 +5,7 @@ IslandCave:: @ 83074C4
 	.4byte 0x0
 	.2byte MUS_MABOROSI
 	.2byte 281
-	.byte 81
+	.byte MAPSEC_ISLAND_CAVE
 	.byte 0
 	.byte 0
 	.byte 4

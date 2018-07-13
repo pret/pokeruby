@@ -5,7 +5,7 @@ AbandonedShip_Rooms_B1F:: @ 83073C8
 	.4byte 0x0
 	.2byte MUS_DAN02
 	.2byte 191
-	.byte 61
+	.byte MAPSEC_ABANDONED_SHIP
 	.byte 0
 	.byte 11
 	.byte 4

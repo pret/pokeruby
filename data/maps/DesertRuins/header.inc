@@ -5,7 +5,7 @@ DesertRuins:: @ 8306E18
 	.4byte 0x0
 	.2byte MUS_MABOROSI
 	.2byte 132
-	.byte 82
+	.byte MAPSEC_DESERT_RUINS
 	.byte 0
 	.byte 0
 	.byte 4

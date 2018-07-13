@@ -5,7 +5,7 @@ BattleTower_Elevator:: @ 8307C50
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 267
-	.byte 58
+	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
 	.byte 0
 	.byte 8

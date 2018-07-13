@@ -5,7 +5,7 @@ FallarborTown:: @ 83055B4
 	.4byte FallarborTown_MapConnections
 	.2byte MUS_TONEKUSA
 	.2byte 14
-	.byte 4
+	.byte MAPSEC_FALLARBOR_TOWN
 	.byte 0
 	.byte 2
 	.byte 1

@@ -5,7 +5,7 @@ ShoalCave_HighTideInnerRoom:: @ 8307304
 	.4byte 0x0
 	.2byte MUS_M_DUNGON
 	.2byte 170
-	.byte 67
+	.byte MAPSEC_SHOAL_CAVE
 	.byte 0
 	.byte 0
 	.byte 4

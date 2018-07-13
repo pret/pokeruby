@@ -5,7 +5,7 @@ Route112_CableCarStation:: @ 8306C90
 	.4byte 0x0
 	.2byte MUS_DOORO_X1
 	.2byte 119
-	.byte 27
+	.byte MAPSEC_ROUTE_112
 	.byte 0
 	.byte 0
 	.byte 8

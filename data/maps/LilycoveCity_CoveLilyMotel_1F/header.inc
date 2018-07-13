@@ -5,7 +5,7 @@ LilycoveCity_CoveLilyMotel_1F:: @ 8306520
 	.4byte 0x0
 	.2byte MUS_MINAMO
 	.2byte 300
-	.byte 12
+	.byte MAPSEC_LILYCOVE_CITY
 	.byte 0
 	.byte 0
 	.byte 8

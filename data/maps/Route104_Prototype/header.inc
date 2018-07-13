@@ -5,7 +5,7 @@ Route104_Prototype:: @ 8307CF8
 	.4byte 0x0
 	.2byte MUS_NEXTROAD
 	.2byte 288
-	.byte 19
+	.byte MAPSEC_ROUTE_104
 	.byte 0
 	.byte 2
 	.byte 3

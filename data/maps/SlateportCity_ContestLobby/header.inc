@@ -5,7 +5,7 @@ SlateportCity_ContestLobby:: @ 8306018
 	.4byte 0x0
 	.2byte MUS_CONLOBBY
 	.2byte 72
-	.byte 8
+	.byte MAPSEC_SLATEPORT_CITY
 	.byte 0
 	.byte 0
 	.byte 8

@@ -5,7 +5,7 @@ BattleTower_Lobby:: @ 8307C34
 	.4byte 0x0
 	.2byte MUS_B_TOWER
 	.2byte 265
-	.byte 58
+	.byte MAPSEC_BATTLE_TOWER
 	.byte 0
 	.byte 0
 	.byte 8

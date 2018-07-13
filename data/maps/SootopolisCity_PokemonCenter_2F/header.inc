@@ -5,7 +5,7 @@ SootopolisCity_PokemonCenter_2F:: @ 8306980
 	.4byte 0x0
 	.2byte MUS_POKECEN
 	.2byte 62
-	.byte 14
+	.byte MAPSEC_SOOTOPOLIS_CITY
 	.byte 0
 	.byte 0
 	.byte 8

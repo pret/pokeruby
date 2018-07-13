@@ -5,7 +5,7 @@ MossdeepCity:: @ 83054F0
 	.4byte MossdeepCity_MapConnections
 	.2byte MUS_GOTOWN
 	.2byte 7
-	.byte 13
+	.byte MAPSEC_MOSSDEEP_CITY
 	.byte 0
 	.byte 2
 	.byte 2
