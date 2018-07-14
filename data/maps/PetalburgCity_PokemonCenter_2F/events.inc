@@ -1,7 +1,7 @@
 PetalburgCity_PokemonCenter_2F_EventObjects:: @ 8387590
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_15529D, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_1552A3, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_1552A9, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_15529D, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_1552A3, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_PokemonCenter_2F_EventScript_1552A9, 0
 
 PetalburgCity_PokemonCenter_2F_MapWarps:: @ 83875D8
 	warp_def 1, 5, 4, 2, MAP_PETALBURG_CITY_POKEMON_CENTER_1F

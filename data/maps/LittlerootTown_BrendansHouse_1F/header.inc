@@ -5,10 +5,10 @@ LittlerootTown_BrendansHouse_1F:: @ 8305A30
 	.4byte 0x0
 	.2byte MUS_MISHIRO
 	.2byte 54
+	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
-	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

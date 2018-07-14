@@ -5,10 +5,10 @@ Route134:: @ 83059A4
 	.4byte Route134_MapConnections
 	.2byte MUS_GRANROAD
 	.2byte 50
-	.byte 49
+	.byte MAPSEC_ROUTE_134
 	.byte 0
-	.byte 2
-	.byte 6
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_6
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

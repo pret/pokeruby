@@ -5,10 +5,10 @@ CaveOfOrigin_B4F:: @ 8307208
 	.4byte 0x0
 	.2byte SE_STOP
 	.2byte 163
-	.byte 72
+	.byte MAPSEC_CAVE_OF_ORIGIN
 	.byte 0
-	.byte 6
-	.byte 4
+	.byte WEATHER_FOG_1
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

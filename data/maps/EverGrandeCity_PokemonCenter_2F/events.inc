@@ -1,7 +1,7 @@
 EverGrandeCity_PokemonCenter_2F_EventObjects:: @ 838B5D0
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCA0, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCA6, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCAC, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCA0, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCA6, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EverGrandeCity_PokemonCenter_2F_EventScript_15BCAC, 0
 
 EverGrandeCity_PokemonCenter_2F_MapWarps:: @ 838B618
 	warp_def 1, 5, 4, 2, MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F

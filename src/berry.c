@@ -1,5 +1,4 @@
 #include "global.h"
-#include "constants/items.h"
 #include "berry.h"
 #include "field_control_avatar.h"
 #include "event_object_movement.h"
@@ -12,6 +11,8 @@
 #include "random.h"
 #include "task.h"
 #include "text.h"
+#include "constants/event_object_movement_constants.h"
+#include "constants/items.h"
 
 #ifdef ENGLISH
 #define NAME_CHERI_BERRY   _("CHERI")

@@ -5,10 +5,10 @@ Underwater3:: @ 83059F8
 	.4byte Underwater3_MapConnections
 	.2byte MUS_DEEPDEEP
 	.2byte 52
-	.byte 52
+	.byte MAPSEC_UNDERWATER_126
 	.byte 0
-	.byte 14
-	.byte 5
+	.byte WEATHER_BUBBLES
+	.byte MAP_TYPE_UNDERWATER
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

@@ -16,10 +16,11 @@
 #include "palette.h"
 #include "overworld.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
+#include "constants/event_object_movement_constants.h"
+#include "constants/songs.h"
 
 void sub_8080B9C(u8);
 void task_map_chg_seq_0807E20C(u8);

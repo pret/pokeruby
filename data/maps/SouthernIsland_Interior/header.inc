@@ -5,10 +5,10 @@ SouthernIsland_Interior:: @ 8307CC0
 	.4byte 0x0
 	.2byte MUS_DAN02
 	.2byte 292
-	.byte 73
+	.byte MAPSEC_SOUTHERN_ISLAND
 	.byte 0
-	.byte 11
-	.byte 3
+	.byte WEATHER_SHADE
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

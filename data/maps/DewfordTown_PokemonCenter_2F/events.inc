@@ -1,7 +1,7 @@
 DewfordTown_PokemonCenter_2F_EventObjects:: @ 8385F38
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_153053, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_153059, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_15305F, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_153053, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_153059, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, DewfordTown_PokemonCenter_2F_EventScript_15305F, 0
 
 DewfordTown_PokemonCenter_2F_MapWarps:: @ 8385F80
 	warp_def 1, 5, 4, 2, MAP_DEWFORD_TOWN_POKEMON_CENTER_1F

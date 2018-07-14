@@ -1,10 +1,10 @@
 SeafloorCavern_Room5_EventObjects:: @ 838D3D0
-	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 3, 11, 3, 1, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11
-	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 11, 3, 1, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_12
-	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 7, 3, 1, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_13
-	object_event 4, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 3, 13, 3, 1, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_15
-	object_event 5, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 13, 8, 3, 1, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_16
-	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 12, 8, 3, 1, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_14
+	object_event 1, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 3, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_11
+	object_event 2, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 4, 11, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_12
+	object_event 3, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 11, 7, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_13
+	object_event 4, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 3, 13, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_15
+	object_event 5, EVENT_OBJ_GFX_BREAKABLE_ROCK, 0, 13, 8, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_BreakableRock, FLAG_TEMP_16
+	object_event 6, EVENT_OBJ_GFX_PUSHABLE_BOULDER, 0, 12, 8, 3, MOVEMENT_TYPE_LOOK_AROUND, 0, 0, 0, 0, S_PushableBoulder, FLAG_TEMP_14
 
 SeafloorCavern_Room5_MapWarps:: @ 838D460
 	warp_def 4, 1, 3, 1, MAP_SEAFLOOR_CAVERN_ROOM1

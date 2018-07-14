@@ -5,10 +5,10 @@ LittlerootTown:: @ 8305544
 	.4byte LittlerootTown_MapConnections
 	.2byte MUS_MISHIRO
 	.2byte 10
+	.byte MAPSEC_LITTLEROOT_TOWN
 	.byte 0
-	.byte 0
-	.byte 2
-	.byte 1
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

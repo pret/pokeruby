@@ -1,5 +1,5 @@
 LilycoveCity_DepartmentStoreElevator_EventObjects:: @ 838A624
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 5, 3, 8, 0, 0, 0, 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A39C, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 0, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A39C, 0
 
 LilycoveCity_DepartmentStoreElevator_MapWarps:: @ 838A63C
 	warp_def 1, 5, 3, 127, MAP_NONE
