@@ -1,97 +1,94 @@
 #ifndef GUARD_REGIONMAPSEC_H
 #define GUARD_REGIONMAPSEC_H
 
-enum
-{
-    MAPSEC_LITTLEROOT_TOWN,           // 0x00
-    MAPSEC_OLDALE_TOWN,               // 0x01
-    MAPSEC_DEWFORD_TOWN,              // 0x02
-    MAPSEC_LAVARIDGE_TOWN,            // 0x03
-    MAPSEC_FALLARBOR_TOWN,            // 0x04
-    MAPSEC_VERDANTURF_TOWN,           // 0x05
-    MAPSEC_PACIFIDLOG_TOWN,           // 0x06
-    MAPSEC_PETALBURG_CITY,            // 0x07
-    MAPSEC_SLATEPORT_CITY,            // 0x08
-    MAPSEC_MAUVILLE_CITY,             // 0x09
-    MAPSEC_RUSTBORO_CITY,             // 0x0A
-    MAPSEC_FORTREE_CITY,              // 0x0B
-    MAPSEC_LILYCOVE_CITY,             // 0x0C
-    MAPSEC_MOSSDEEP_CITY,             // 0x0D
-    MAPSEC_SOOTOPOLIS_CITY,           // 0x0E
-    MAPSEC_EVER_GRANDE_CITY,          // 0x0F
-    MAPSEC_ROUTE_101,                 // 0x10
-    MAPSEC_ROUTE_102,                 // 0x11
-    MAPSEC_ROUTE_103,                 // 0x12
-    MAPSEC_ROUTE_104,                 // 0x13
-    MAPSEC_ROUTE_105,                 // 0x14
-    MAPSEC_ROUTE_106,                 // 0x15
-    MAPSEC_ROUTE_107,                 // 0x16
-    MAPSEC_ROUTE_108,                 // 0x17
-    MAPSEC_ROUTE_109,                 // 0x18
-    MAPSEC_ROUTE_110,                 // 0x19
-    MAPSEC_ROUTE_111,                 // 0x1A
-    MAPSEC_ROUTE_112,                 // 0x1B
-    MAPSEC_ROUTE_113,                 // 0x1C
-    MAPSEC_ROUTE_114,                 // 0x1D
-    MAPSEC_ROUTE_115,                 // 0x1E
-    MAPSEC_ROUTE_116,                 // 0x1F
-    MAPSEC_ROUTE_117,                 // 0x20
-    MAPSEC_ROUTE_118,                 // 0x21
-    MAPSEC_ROUTE_119,                 // 0x22
-    MAPSEC_ROUTE_120,                 // 0x23
-    MAPSEC_ROUTE_121,                 // 0x24
-    MAPSEC_ROUTE_122,                 // 0x25
-    MAPSEC_ROUTE_123,                 // 0x26
-    MAPSEC_ROUTE_124,                 // 0x27
-    MAPSEC_ROUTE_125,                 // 0x28
-    MAPSEC_ROUTE_126,                 // 0x29
-    MAPSEC_ROUTE_127,                 // 0x2A
-    MAPSEC_ROUTE_128,                 // 0x2B
-    MAPSEC_ROUTE_129,                 // 0x2C
-    MAPSEC_ROUTE_130,                 // 0x2D
-    MAPSEC_ROUTE_131,                 // 0x2E
-    MAPSEC_ROUTE_132,                 // 0x2F
-    MAPSEC_ROUTE_133,                 // 0x30
-    MAPSEC_ROUTE_134,                 // 0x31
-    MAPSEC_UNDERWATER_124,            // 0x32
-    MAPSEC_UNDERWATER_125,            // 0x33
-    MAPSEC_UNDERWATER_126,            // 0x34
-    MAPSEC_UNDERWATER_127,            // 0x35
-    MAPSEC_UNDERWATER_SOOTOPOLIS,     // 0x36
-    MAPSEC_GRANITE_CAVE,              // 0x37
-    MAPSEC_MT_CHIMNEY,                // 0x38
-    MAPSEC_SAFARI_ZONE,               // 0x39
-    MAPSEC_BATTLE_TOWER,              // 0x3A
-    MAPSEC_PETALBURG_WOODS,           // 0x3B
-    MAPSEC_RUSTURF_TUNNEL,            // 0x3C
-    MAPSEC_ABANDONED_SHIP,            // 0x3D
-    MAPSEC_NEW_MAUVILLE,              // 0x3E
-    MAPSEC_METEOR_FALLS,              // 0x3F
-    MAPSEC_METEOR_FALLS_2,            // 0x40
-    MAPSEC_MT_PYRE,                   // 0x41
-    MAPSEC_EVIL_TEAM_HIDEOUT,         // 0x42
-    MAPSEC_SHOAL_CAVE,                // 0x43
-    MAPSEC_SEAFLOOR_CAVERN,           // 0x44
-    MAPSEC_UNDERWATER_128,            // 0x45
-    MAPSEC_VICTORY_ROAD,              // 0x46
-    MAPSEC_MIRAGE_ISLAND,             // 0x47
-    MAPSEC_CAVE_OF_ORIGIN,            // 0x48
-    MAPSEC_SOUTHERN_ISLAND,           // 0x49
-    MAPSEC_FIERY_PATH,                // 0x4A
-    MAPSEC_FIERY_PATH_2,              // 0x4B
-    MAPSEC_JAGGED_PASS,               // 0x4C
-    MAPSEC_JAGGED_PASS_2,             // 0x4D
-    MAPSEC_SEALED_CHAMBER,            // 0x4E
-    MAPSEC_UNDERWATER_SEALED_CHAMBER, // 0x4F
-    MAPSEC_SCORCHED_SLAB,             // 0x50
-    MAPSEC_ISLAND_CAVE,               // 0x51
-    MAPSEC_DESERT_RUINS,              // 0x52
-    MAPSEC_ANCIENT_TOMB,              // 0x53
-    MAPSEC_INSIDE_OF_TRUCK,           // 0x54
-    MAPSEC_SKY_PILLAR,                // 0x55
-    MAPSEC_SECRET_BASE,               // 0x56
-    MAPSEC_DYNAMIC,                   // 0x57
-    MAPSEC_NOTHING                    // 0x58
-};
+#define MAPSEC_LITTLEROOT_TOWN       0x00
+#define MAPSEC_OLDALE_TOWN           0x01
+#define MAPSEC_DEWFORD_TOWN          0x02
+#define MAPSEC_LAVARIDGE_TOWN        0x03
+#define MAPSEC_FALLARBOR_TOWN        0x04
+#define MAPSEC_VERDANTURF_TOWN       0x05
+#define MAPSEC_PACIFIDLOG_TOWN       0x06
+#define MAPSEC_PETALBURG_CITY        0x07
+#define MAPSEC_SLATEPORT_CITY        0x08
+#define MAPSEC_MAUVILLE_CITY         0x09
+#define MAPSEC_RUSTBORO_CITY         0x0A
+#define MAPSEC_FORTREE_CITY          0x0B
+#define MAPSEC_LILYCOVE_CITY         0x0C
+#define MAPSEC_MOSSDEEP_CITY         0x0D
+#define MAPSEC_SOOTOPOLIS_CITY       0x0E
+#define MAPSEC_EVER_GRANDE_CITY      0x0F
+#define MAPSEC_ROUTE_101             0x10
+#define MAPSEC_ROUTE_102             0x11
+#define MAPSEC_ROUTE_103             0x12
+#define MAPSEC_ROUTE_104             0x13
+#define MAPSEC_ROUTE_105             0x14
+#define MAPSEC_ROUTE_106             0x15
+#define MAPSEC_ROUTE_107             0x16
+#define MAPSEC_ROUTE_108             0x17
+#define MAPSEC_ROUTE_109             0x18
+#define MAPSEC_ROUTE_110             0x19
+#define MAPSEC_ROUTE_111             0x1A
+#define MAPSEC_ROUTE_112             0x1B
+#define MAPSEC_ROUTE_113             0x1C
+#define MAPSEC_ROUTE_114             0x1D
+#define MAPSEC_ROUTE_115             0x1E
+#define MAPSEC_ROUTE_116             0x1F
+#define MAPSEC_ROUTE_117             0x20
+#define MAPSEC_ROUTE_118             0x21
+#define MAPSEC_ROUTE_119             0x22
+#define MAPSEC_ROUTE_120             0x23
+#define MAPSEC_ROUTE_121             0x24
+#define MAPSEC_ROUTE_122             0x25
+#define MAPSEC_ROUTE_123             0x26
+#define MAPSEC_ROUTE_124             0x27
+#define MAPSEC_ROUTE_125             0x28
+#define MAPSEC_ROUTE_126             0x29
+#define MAPSEC_ROUTE_127             0x2A
+#define MAPSEC_ROUTE_128             0x2B
+#define MAPSEC_ROUTE_129             0x2C
+#define MAPSEC_ROUTE_130             0x2D
+#define MAPSEC_ROUTE_131             0x2E
+#define MAPSEC_ROUTE_132             0x2F
+#define MAPSEC_ROUTE_133             0x30
+#define MAPSEC_ROUTE_134             0x31
+#define MAPSEC_UNDERWATER_124        0x32
+#define MAPSEC_UNDERWATER_125        0x33
+#define MAPSEC_UNDERWATER_126        0x34
+#define MAPSEC_UNDERWATER_127        0x35
+#define MAPSEC_UNDERWATER_SOOTOPOLIS 0x36
+#define MAPSEC_GRANITE_CAVE          0x37
+#define MAPSEC_MT_CHIMNEY            0x38
+#define MAPSEC_SAFARI_ZONE           0x39
+#define MAPSEC_BATTLE_TOWER          0x3A
+#define MAPSEC_PETALBURG_WOODS       0x3B
+#define MAPSEC_RUSTURF_TUNNEL        0x3C
+#define MAPSEC_ABANDONED_SHIP        0x3D
+#define MAPSEC_NEW_MAUVILLE          0x3E
+#define MAPSEC_METEOR_FALLS          0x3F
+#define MAPSEC_METEOR_FALLS_2        0x40
+#define MAPSEC_MT_PYRE               0x41
+#define MAPSEC_EVIL_TEAM_HIDEOUT     0x42
+#define MAPSEC_SHOAL_CAVE            0x43
+#define MAPSEC_SEAFLOOR_CAVERN       0x44
+#define MAPSEC_UNDERWATER_128        0x45
+#define MAPSEC_VICTORY_ROAD          0x46
+#define MAPSEC_MIRAGE_ISLAND         0x47
+#define MAPSEC_CAVE_OF_ORIGIN        0x48
+#define MAPSEC_SOUTHERN_ISLAND       0x49
+#define MAPSEC_FIERY_PATH            0x4A
+#define MAPSEC_FIERY_PATH_2          0x4B
+#define MAPSEC_JAGGED_PASS           0x4C
+#define MAPSEC_JAGGED_PASS_2         0x4D
+#define MAPSEC_SEALED_CHAMBER        0x4E
+#define MAPSEC_UNDERWATER_SEALED_CHAMBER 0x4F
+#define MAPSEC_SCORCHED_SLAB         0x50
+#define MAPSEC_ISLAND_CAVE           0x51
+#define MAPSEC_DESERT_RUINS          0x52
+#define MAPSEC_ANCIENT_TOMB          0x53
+#define MAPSEC_INSIDE_OF_TRUCK       0x54
+#define MAPSEC_SKY_PILLAR            0x55
+#define MAPSEC_SECRET_BASE           0x56
+#define MAPSEC_DYNAMIC               0x57
+#define MAPSEC_NOTHING               0x58
 
 #endif // GUARD_REGIONMAPSEC_H

@@ -18,10 +18,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "pokeblock.h"
-#include "constants/species.h"
-#include "constants/abilities.h"
-#include "constants/moves.h"
-#include "constants/weather.h"
 #include "text.h"
 #include "wallclock.h"
 #include "tv.h"
@@ -36,6 +32,11 @@
 #include "field_weather.h"
 #include "pokemon_summary_screen.h"
 #include "random.h"
+#include "constants/abilities.h"
+#include "constants/event_object_movement_constants.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/weather.h"
 
 #if ENGLISH
 #define CHAR_DECIMAL_SEPARATOR CHAR_PERIOD

@@ -5,10 +5,10 @@ Route119:: @ 8305800
 	.4byte Route119_MapConnections
 	.2byte MUS_GRANROAD
 	.2byte 35
-	.byte 34
+	.byte MAPSEC_ROUTE_119
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

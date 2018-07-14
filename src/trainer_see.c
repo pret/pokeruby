@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "util.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 
 static bool8 CheckTrainer(u8);

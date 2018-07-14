@@ -5,10 +5,10 @@ LavaridgeTown:: @ 8305598
 	.4byte LavaridgeTown_MapConnections
 	.2byte MUS_MACHI_S4
 	.2byte 13
-	.byte 3
+	.byte MAPSEC_LAVARIDGE_TOWN
 	.byte 0
-	.byte 2
-	.byte 1
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

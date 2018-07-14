@@ -7,10 +7,11 @@
 #include "overworld.h"
 #include "rom6.h"
 #include "script.h"
-#include "constants/songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "constants/map_types.h"
+#include "constants/songs.h"
 
 struct MapTypeFadePairs
 {

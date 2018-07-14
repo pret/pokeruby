@@ -5,10 +5,10 @@ Route128:: @ 83058FC
 	.4byte Route128_MapConnections
 	.2byte MUS_DOORO_X3
 	.2byte 44
-	.byte 43
+	.byte MAPSEC_ROUTE_128
 	.byte 0
-	.byte 2
-	.byte 6
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_6
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

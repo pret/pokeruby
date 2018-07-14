@@ -24,7 +24,6 @@
 #include "load_save.h"
 #include "main.h"
 #include "m4a.h"
-#include "constants/maps.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "metatile_behavior.h"
@@ -38,9 +37,7 @@
 #include "script.h"
 #include "script_pokemon_80C4.h"
 #include "secret_base.h"
-#include "constants/songs.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
@@ -48,6 +45,10 @@
 #include "tv.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
+#include "constants/map_types.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
+#include "constants/species.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC MUS_OOAME  // Heavy Rain

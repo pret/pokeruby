@@ -5,10 +5,10 @@ VerdanturfTown:: @ 83055D0
 	.4byte VerdanturfTown_MapConnections
 	.2byte MUS_GOMACHI0
 	.2byte 15
-	.byte 5
+	.byte MAPSEC_VERDANTURF_TOWN
 	.byte 0
-	.byte 2
-	.byte 1
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_TOWN
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

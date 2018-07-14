@@ -5,10 +5,10 @@ FortreeCity:: @ 83054B8
 	.4byte FortreeCity_MapConnections
 	.2byte MUS_MACHI_S3
 	.2byte 5
-	.byte 11
+	.byte MAPSEC_FORTREE_CITY
 	.byte 0
-	.byte 2
-	.byte 2
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_CITY
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

@@ -24,6 +24,7 @@
 #include "fieldmap.h"
 #include "util.h"
 #include "pokemon_storage_system.h"
+#include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 

@@ -5,10 +5,10 @@ Route119_WeatherInstitute_1F:: @ 8307EF0
 	.4byte 0x0
 	.2byte MUS_GOTOWN
 	.2byte 272
-	.byte 34
+	.byte MAPSEC_ROUTE_119
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL
