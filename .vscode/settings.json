@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "global.h": "c",
+        "data2.h": "c",
+        "battle.h": "c",
+        "queue": "c",
+        "stack": "c",
+        "io_reg.h": "c",
+        "string_util.h": "c",
+        "system_error": "c",
+        "type_traits": "c",
+        "xstddef": "c",
+        "menu.h": "c",
+        "overworld.h": "c",
+        "strings.h": "c",
+        "songs.h": "c"
+    }
+}
