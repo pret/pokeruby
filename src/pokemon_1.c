@@ -858,7 +858,7 @@ const u16 gSpeciesToNationalPokedexNum[] = // Assigns all species to the Nationa
 
 const u16 gHoennToNationalOrder[] = // Assigns Hoenn Dex Pokémon (Using National Dex Index)
 {
-	         	                // SPECIES_NONE
+	         	                // 0
 	NATIONAL_DEX_TREECKO,   	// HOENN_DEX_TREECKO
 	NATIONAL_DEX_GROVYLE,   	// HOENN_DEX_GROVYLE
 	NATIONAL_DEX_SCEPTILE,  	// HOENN_DEX_SCEPTILE
