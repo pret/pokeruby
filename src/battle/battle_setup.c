@@ -748,7 +748,6 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     u8 i;
     u8 sum;
     u32 count = numMons;
-    const void *party;
 
     if (gTrainers[opponentId].partySize < count)
         count = gTrainers[opponentId].partySize;
@@ -758,24 +757,36 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     switch (gTrainers[opponentId].partyFlags)
     {
     case 0:
-        party = gTrainers[opponentId].party;
-        for (i = 0; i < count; i++)
-            sum += ((struct TrainerPartyMember0 *)party)[i].level;
+        {
+            const struct TrainerMonNoItemDefaultMoves *party;
+            party = gTrainers[opponentId].party.NoItemDefaultMoves;
+            for (i = 0; i < count; i++)
+                sum += party[i].level;
+        }
         break;
-    case 1:
-        party = gTrainers[opponentId].party;
-        for (i = 0; i < count; i++)
-            sum += ((struct TrainerPartyMember1 *)party)[i].level;
+    case F_TRAINER_PARTY_CUSTOM_MOVESET:
+        {
+            const struct TrainerMonNoItemCustomMoves *party;
+            party = gTrainers[opponentId].party.NoItemCustomMoves;
+            for (i = 0; i < count; i++)
+                sum += party[i].level;
+        }
         break;
-    case 2:
-        party = gTrainers[opponentId].party;
-        for (i = 0; i < count; i++)
-            sum += ((struct TrainerPartyMember2 *)party)[i].level;
+    case F_TRAINER_PARTY_HELD_ITEM:
+        {
+            const struct TrainerMonItemDefaultMoves *party;
+            party = gTrainers[opponentId].party.ItemDefaultMoves;
+            for (i = 0; i < count; i++)
+                sum += party[i].level;
+        }
         break;
-    case 3:
-        party = gTrainers[opponentId].party;
-        for (i = 0; i < count; i++)
-            sum += ((struct TrainerPartyMember3 *)party)[i].level;
+    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
+        {
+            const struct TrainerMonItemCustomMoves *party;
+            party = gTrainers[opponentId].party.ItemCustomMoves;
+            for (i = 0; i < count; i++)
+                sum += party[i].level;
+        }
         break;
     }
 
