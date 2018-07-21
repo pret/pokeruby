@@ -707,19 +707,19 @@ bool8 TayaDebugMenu_Trainer(void)
     for (i = 0; i < ARRAY_COUNT(gTrainerEyeTrainers); i++)
         SetTrainerFlag(gTrainerEyeTrainers[i].opponentIDs[0]);
 
-    SetTrainerFlag(OPPONENT_ROXANNE);
-    SetTrainerFlag(OPPONENT_BRAWLY);
-    SetTrainerFlag(OPPONENT_WATTSON);
-    SetTrainerFlag(OPPONENT_FLANNERY);
-    SetTrainerFlag(OPPONENT_NORMAN);
-    SetTrainerFlag(OPPONENT_WINONA);
-    SetTrainerFlag(OPPONENT_TATE_AND_LIZA);
-    SetTrainerFlag(OPPONENT_WALLACE);
-    SetTrainerFlag(OPPONENT_SIDNEY);
-    SetTrainerFlag(OPPONENT_PHOEBE);
-    SetTrainerFlag(OPPONENT_GLACIA);
-    SetTrainerFlag(OPPONENT_DRAKE);
-    SetTrainerFlag(OPPONENT_STEVEN);
+    SetTrainerFlag(TRAINER_ROXANNE);
+    SetTrainerFlag(TRAINER_BRAWLY);
+    SetTrainerFlag(TRAINER_WATTSON);
+    SetTrainerFlag(TRAINER_FLANNERY);
+    SetTrainerFlag(TRAINER_NORMAN);
+    SetTrainerFlag(TRAINER_WINONA);
+    SetTrainerFlag(TRAINER_TATE_AND_LIZA);
+    SetTrainerFlag(TRAINER_WALLACE);
+    SetTrainerFlag(TRAINER_SIDNEY);
+    SetTrainerFlag(TRAINER_PHOEBE);
+    SetTrainerFlag(TRAINER_GLACIA);
+    SetTrainerFlag(TRAINER_DRAKE);
+    SetTrainerFlag(TRAINER_STEVEN);
     CloseMenu();
     return TRUE;
 }
