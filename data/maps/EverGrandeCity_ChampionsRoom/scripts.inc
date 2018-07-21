@@ -40,7 +40,7 @@ EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 EverGrandeCity_ChampionsRoom_EventScript_15B805:: @ 815B805
 	playbgm MUS_DAIGO, FALSE
 	msgbox EverGrandeCity_ChampionsRoom_Text_190F9C, 4
-	trainerbattle 3, OPPONENT_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
+	trainerbattle 3, TRAINER_STEVEN, 0, EverGrandeCity_ChampionsRoom_Text_1910A0
 	goto EverGrandeCity_ChampionsRoom_EventScript_15B821
 	end
 

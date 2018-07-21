@@ -381,16 +381,16 @@ Route110_TrickHousePuzzle3_EventScript_1626FD:: @ 81626FD
 	end
 
 Route110_TrickHousePuzzle3_EventScript_162708:: @ 8162708
-	trainerbattle 0, OPPONENT_JUSTIN, 0, Route110_TrickHousePuzzle3_Text_19CF76, Route110_TrickHousePuzzle3_Text_19CF9D
+	trainerbattle 0, TRAINER_JUSTIN, 0, Route110_TrickHousePuzzle3_Text_19CF76, Route110_TrickHousePuzzle3_Text_19CF9D
 	msgbox Route110_TrickHousePuzzle3_Text_19CFE6, 6
 	end
 
 Route110_TrickHousePuzzle3_EventScript_16271F:: @ 816271F
-	trainerbattle 0, OPPONENT_MARTHA, 0, Route110_TrickHousePuzzle3_Text_19D026, Route110_TrickHousePuzzle3_Text_19D065
+	trainerbattle 0, TRAINER_MARTHA, 0, Route110_TrickHousePuzzle3_Text_19D026, Route110_TrickHousePuzzle3_Text_19D065
 	msgbox Route110_TrickHousePuzzle3_Text_19D07A, 6
 	end
 
 Route110_TrickHousePuzzle3_EventScript_162736:: @ 8162736
-	trainerbattle 0, OPPONENT_ALAN, 0, Route110_TrickHousePuzzle3_Text_19D0AE, Route110_TrickHousePuzzle3_Text_19D0F0
+	trainerbattle 0, TRAINER_ALAN, 0, Route110_TrickHousePuzzle3_Text_19D0AE, Route110_TrickHousePuzzle3_Text_19D0F0
 	msgbox Route110_TrickHousePuzzle3_Text_19D110, 6
 	end

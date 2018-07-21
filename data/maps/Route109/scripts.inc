@@ -373,27 +373,27 @@ Route109_EventScript_14F7A4:: @ 814F7A4
 	end
 
 Route109_EventScript_14F7AD:: @ 814F7AD
-	trainerbattle 0, OPPONENT_DAVID, 0, Route109_Text_1B9A1C, Route109_Text_1B9A59
+	trainerbattle 0, TRAINER_DAVID, 0, Route109_Text_1B9A1C, Route109_Text_1B9A59
 	msgbox Route109_Text_1B9A6D, 6
 	end
 
 Route109_EventScript_14F7C4:: @ 814F7C4
-	trainerbattle 0, OPPONENT_ALICE, 0, Route109_Text_1B9AAD, Route109_Text_1B9AD9
+	trainerbattle 0, TRAINER_ALICE, 0, Route109_Text_1B9AAD, Route109_Text_1B9AD9
 	msgbox Route109_Text_1B9AEB, 6
 	end
 
 Route109_EventScript_14F7DB:: @ 814F7DB
-	trainerbattle 0, OPPONENT_HUEY, 0, Route109_Text_1B9B11, Route109_Text_1B9B57
+	trainerbattle 0, TRAINER_HUEY, 0, Route109_Text_1B9B11, Route109_Text_1B9B57
 	msgbox Route109_Text_1B9B68, 6
 	end
 
 Route109_EventScript_14F7F2:: @ 814F7F2
-	trainerbattle 0, OPPONENT_EDMOND, 0, Route109_Text_1B9B91, Route109_Text_1B9BAE
+	trainerbattle 0, TRAINER_EDMOND, 0, Route109_Text_1B9B91, Route109_Text_1B9BAE
 	msgbox Route109_Text_1B9BD3, 6
 	end
 
 Route109_EventScript_14F809:: @ 814F809
-	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
+	trainerbattle 0, TRAINER_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F830
@@ -401,12 +401,12 @@ Route109_EventScript_14F809:: @ 814F809
 	end
 
 Route109_EventScript_14F830:: @ 814F830
-	trainerbattle 5, OPPONENT_RICKY_1, 0, Route109_Text_1B9CB3, Route109_Text_1B9CEB
+	trainerbattle 5, TRAINER_RICKY_1, 0, Route109_Text_1B9CB3, Route109_Text_1B9CEB
 	msgbox Route109_Text_1B9D10, 6
 	end
 
 Route109_EventScript_14F847:: @ 814F847
-	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
+	trainerbattle 0, TRAINER_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route109_EventScript_14F86E
@@ -414,31 +414,31 @@ Route109_EventScript_14F847:: @ 814F847
 	end
 
 Route109_EventScript_14F86E:: @ 814F86E
-	trainerbattle 5, OPPONENT_LOLA_1, 0, Route109_Text_1B9DD8, Route109_Text_1B9E16
+	trainerbattle 5, TRAINER_LOLA_1, 0, Route109_Text_1B9DD8, Route109_Text_1B9E16
 	msgbox Route109_Text_1B9E1D, 6
 	end
 
 Route109_EventScript_14F885:: @ 814F885
-	trainerbattle 0, OPPONENT_CARMEN, 0, Route109_Text_1B9E60, Route109_Text_1B9EA1
+	trainerbattle 0, TRAINER_CARMEN, 0, Route109_Text_1B9E60, Route109_Text_1B9EA1
 	msgbox Route109_Text_1B9ECA, 6
 	end
 
 Route109_EventScript_14F89C:: @ 814F89C
-	trainerbattle 0, OPPONENT_GWEN, 0, Route109_Text_1B9F07, Route109_Text_1B9F31
+	trainerbattle 0, TRAINER_GWEN, 0, Route109_Text_1B9F07, Route109_Text_1B9F31
 	msgbox Route109_Text_1B9F44, 6
 	end
 
 Route109_EventScript_14F8B3:: @ 814F8B3
-	trainerbattle 0, OPPONENT_CARTER, 0, Route109_Text_1B9F65, Route109_Text_1B9F9C
+	trainerbattle 0, TRAINER_CARTER, 0, Route109_Text_1B9F65, Route109_Text_1B9F9C
 	msgbox Route109_Text_1B9FB7, 6
 	end
 
 Route109_EventScript_14F8CA:: @ 814F8CA
-	trainerbattle 4, OPPONENT_MEL_AND_PAUL, 0, Route109_Text_1B9FF6, Route109_Text_1BA052, Route109_Text_1BA0BF
+	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_1B9FF6, Route109_Text_1BA052, Route109_Text_1BA0BF
 	msgbox Route109_Text_1BA069, 6
 	end
 
 Route109_EventScript_14F8E5:: @ 814F8E5
-	trainerbattle 4, OPPONENT_MEL_AND_PAUL, 0, Route109_Text_1BA114, Route109_Text_1BA15F, Route109_Text_1BA1D0
+	trainerbattle 4, TRAINER_MEL_AND_PAUL, 0, Route109_Text_1BA114, Route109_Text_1BA15F, Route109_Text_1BA1D0
 	msgbox Route109_Text_1BA193, 6
 	end

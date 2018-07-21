@@ -160,7 +160,7 @@ MauvilleCity_EventScript_14C22B:: @ 814C22B
 
 MauvilleCity_EventScript_14C23C:: @ 814C23C
 	msgbox MauvilleCity_Text_165F0D, 4
-	trainerbattle 3, OPPONENT_WALLY_2, 0, MauvilleCity_Text_165F38
+	trainerbattle 3, TRAINER_WALLY_2, 0, MauvilleCity_Text_165F38
 	applymovement 6, MauvilleCity_Movement_1A0843
 	waitmovement 0
 	msgbox MauvilleCity_Text_165F85, 4
