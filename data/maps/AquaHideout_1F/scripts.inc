@@ -36,7 +36,7 @@ AquaHideout_1F_EventScript_15D802:: @ 815D802
 
 AquaHideout_1F_EventScript_15D80C:: @ 815D80C
 MagmaHideout_1F_EventScript_15D80C:: @ 815D80C
-	trainerbattle 2, OPPONENT_HIDEOUT_1F_GRUNT, 0, AquaHideout_1F_Text_196E01, AquaHideout_1F_Text_196E28, AquaHideout_1F_EventScript_15D827
+	trainerbattle 2, TRAINER_HIDEOUT_1F_GRUNT, 0, AquaHideout_1F_Text_196E01, AquaHideout_1F_Text_196E28, AquaHideout_1F_EventScript_15D827
 	msgbox AquaHideout_1F_Text_196E3D, 6
 	end
 
