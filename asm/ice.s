@@ -1281,7 +1281,7 @@ _080D80D8:
 	bx r0
 	thumb_func_end sub_80D8048 */
 
-	thumb_func_start sub_80D80E0
+/*	thumb_func_start sub_80D80E0
 sub_80D80E0: @ 80D80E0
 	push {r4,r5,lr}
 	sub sp, 0x10
@@ -1393,9 +1393,9 @@ _080D81D0: .4byte gBattleAnimFogTilemap
 _080D81D4: .4byte gUnknown_083970E8
 _080D81D8: .4byte gTasks
 _080D81DC: .4byte sub_80D81E0
-	thumb_func_end sub_80D80E0 
+	thumb_func_end sub_80D80E0 */
 
-	thumb_func_start sub_80D81E0
+/*	thumb_func_start sub_80D81E0
 sub_80D81E0: @ 80D81E0
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1644,9 +1644,9 @@ _080D83D0: .4byte gTasks
 _080D83D4: .4byte gBattle_BG1_X
 _080D83D8: .4byte gBattle_BG1_Y
 _080D83DC: .4byte REG_BLDCNT
-	thumb_func_end sub_80D81E0
+	thumb_func_end sub_80D81E0 */
 
-	thumb_func_start sub_80D83E0
+/*	thumb_func_start sub_80D83E0
 sub_80D83E0: @ 80D83E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
@@ -1671,9 +1671,9 @@ sub_80D83E0: @ 80D83E0
 	.align 2, 0
 _080D840C: .4byte gAnimBankAttacker
 _080D8410: .4byte TranslateAnimSpriteToTargetMonLocation
-	thumb_func_end sub_80D83E0
+	thumb_func_end sub_80D83E0 */
 
-	thumb_func_start sub_80D8414
+/*	thumb_func_start sub_80D8414
 sub_80D8414: @ 80D8414
 	push {r4,r5,lr}
 	sub sp, 0x10
@@ -1788,9 +1788,9 @@ _080D850C: .4byte gUnknown_083970E8
 _080D8510: .4byte gTasks
 _080D8514: .4byte 0x0000ffff
 _080D8518: .4byte sub_80D851C
-	thumb_func_end sub_80D8414
+	thumb_func_end sub_80D8414 */
 
-	thumb_func_start sub_80D851C
+/*	thumb_func_start sub_80D851C
 sub_80D851C: @ 80D851C
 	push {r4-r7,lr}
 	mov r7, r10
@@ -2026,9 +2026,9 @@ _080D86F0: .4byte gTasks
 _080D86F4: .4byte gBattle_BG1_X
 _080D86F8: .4byte gBattle_BG1_Y
 _080D86FC: .4byte REG_BLDCNT
-	thumb_func_end sub_80D851C
+	thumb_func_end sub_80D851C */
 
-	thumb_func_start sub_80D8700
+/*	thumb_func_start sub_80D8700
 sub_80D8700: @ 80D8700
 	push {r4-r7,lr}
 	mov r7, r8
@@ -2205,9 +2205,9 @@ _080D8858:
 	.align 2, 0
 _080D886C: .4byte gAnimBankTarget
 _080D8870: .4byte sub_80D8874
-	thumb_func_end sub_80D8700
+	thumb_func_end sub_80D8700 */
 
-	thumb_func_start sub_80D8874
+/*	thumb_func_start sub_80D8874
 sub_80D8874: @ 80D8874
 	push {r4-r6,lr}
 	adds r4, r0, 0
@@ -2519,9 +2519,9 @@ _080D8AD0:
 	bx r0
 	.align 2, 0
 _080D8AD8: .4byte gAnimVisualTaskCount
-	thumb_func_end sub_80D8874
+	thumb_func_end sub_80D8874 */
 
-	thumb_func_start sub_80D8ADC
+/*	thumb_func_start sub_80D8ADC
 sub_80D8ADC: @ 80D8ADC
 	lsls r0, 24
 	lsrs r0, 24
@@ -2536,9 +2536,9 @@ sub_80D8ADC: @ 80D8ADC
 	.align 2, 0
 _080D8AF0: .4byte gTasks
 _080D8AF4: .4byte sub_80D8AF8
-	thumb_func_end sub_80D8ADC
+	thumb_func_end sub_80D8ADC */
 
-	thumb_func_start sub_80D8AF8
+/*	thumb_func_start sub_80D8AF8
 sub_80D8AF8: @ 80D8AF8
 	push {r4,r5,lr}
 	lsls r0, 24
@@ -2634,9 +2634,9 @@ _080D8BA0:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D8AF8
+	thumb_func_end sub_80D8AF8 */
 
-	thumb_func_start sub_80D8BA8
+/*	thumb_func_start sub_80D8BA8
 sub_80D8BA8: @ 80D8BA8
 	push {r4-r7,lr}
 	mov r7, r10
@@ -2814,9 +2814,9 @@ _080D8D0A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D8BA8
+	thumb_func_end sub_80D8BA8 */
 
-	thumb_func_start sub_80D8D1C
+/*	thumb_func_start sub_80D8D1C
 sub_80D8D1C: @ 80D8D1C
 	push {r4,lr}
 	adds r4, r0, 0
@@ -2929,9 +2929,9 @@ _080D8DF6:
 	bx r0
 	.align 2, 0
 _080D8DFC: .4byte gTasks
-	thumb_func_end sub_80D8D1C
+	thumb_func_end sub_80D8D1C */
 
-	thumb_func_start sub_80D8E00
+/*	thumb_func_start sub_80D8E00
 sub_80D8E00: @ 80D8E00
 	push {r4,lr}
 	adds r4, r0, 0
@@ -2969,9 +2969,9 @@ _080D8E40:
 	bx r0
 	.align 2, 0
 _080D8E48: .4byte gTasks
-	thumb_func_end sub_80D8E00
+	thumb_func_end sub_80D8E00 */
 
-	thumb_func_start unc_080B06FC
+/*	thumb_func_start unc_080B06FC
 unc_080B06FC: @ 80D8E4C
 	push {r4-r6,lr}
 	adds r5, r0, 0
@@ -3039,9 +3039,9 @@ _080D8ED0: .4byte gBattleAnimArgs
 _080D8ED4: .4byte gAnimBankAttacker
 _080D8ED8: .4byte gAnimBankTarget
 _080D8EDC: .4byte sub_80D8EE0
-	thumb_func_end unc_080B06FC
+	thumb_func_end unc_080B06FC */
 
-	thumb_func_start sub_80D8EE0
+/*	thumb_func_start sub_80D8EE0
 sub_80D8EE0: @ 80D8EE0
 	push {r4,lr}
 	adds r4, r0, 0
@@ -3064,9 +3064,9 @@ _080D8F02:
 	.align 2, 0
 _080D8F08: .4byte sub_8078600
 _080D8F0C: .4byte DestroyAnimSprite
-	thumb_func_end sub_80D8EE0
+	thumb_func_end sub_80D8EE0 */
 
-	thumb_func_start sub_80D8F10
+/*	thumb_func_start sub_80D8F10
 sub_80D8F10: @ 80D8F10
 	push {r4-r6,lr}
 	adds r4, r0, 0
@@ -3113,9 +3113,9 @@ _080D8F64: .4byte 0x000003ff
 _080D8F68: .4byte 0xfffffc00
 _080D8F6C: .4byte 0x000001ff
 _080D8F70: .4byte sub_80D8F74
-	thumb_func_end sub_80D8F10
+	thumb_func_end sub_80D8F10 */
 
-	thumb_func_start sub_80D8F74
+/*	thumb_func_start sub_80D8F74
 sub_80D8F74: @ 80D8F74
 	push {r4,lr}
 	adds r2, r0, 0
@@ -3157,9 +3157,9 @@ _080D8FBA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D8F74
+	thumb_func_end sub_80D8F74 */
 
-	thumb_func_start sub_80D8FC0
+/*	thumb_func_start sub_80D8FC0
 sub_80D8FC0: @ 80D8FC0
 	push {lr}
 	lsls r0, 24
@@ -3185,4 +3185,4 @@ _080D8FE8: .4byte gBattleAnimArgs
 _080D8FEC: .4byte gAnimDisableStructPtr
 	thumb_func_end sub_80D8FC0
 	
-	.align 2, 0 @ Don't pad with nop.
+	.align 2, 0 @ Don't pad with nop. */
