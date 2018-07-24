@@ -26,7 +26,7 @@ struct WallpaperTable {
 
 EWRAM_DATA struct Pokemon gUnknown_02038480 = {};
 #if DEBUG
-EWRAM_DATA u32 unk_2038790 = 0;
+EWRAM_DATA u8 unk_2038790 = 0;
 EWRAM_DATA u32 unk_2038794 = 0;
 EWRAM_DATA u32 unk_2038798 = 0;
 #endif
@@ -3167,15 +3167,13 @@ void sub_809CA8C(void)
 #if DEBUG
 u8 debug_sub_80AA40C(void)
 {
-    if (sub_809AB8C())
-    {
-        sub_809CDCC();
-        sub_809CDEC(32);
-        sub_809CDEC(6);
-        return 1;
-    }
+    if (!sub_809AB8C())
+        return 0;
 
-    return 0;
+    sub_809CDCC();
+    sub_809CDEC(32);
+    sub_809CDEC(6);
+    return 1;
 }
 #endif
 
