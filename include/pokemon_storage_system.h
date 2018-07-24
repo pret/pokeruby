@@ -40,9 +40,20 @@ enum {
     PC_TEXT_FMT_MON_NAME_AFTER_EXCL_MARK
 };
 
+struct PokemonStorageSystemFunc
+{
+    u8 (*func)(void);
+    s8 unk4;
+};
+
 struct StorageAction {
     const u8 *text;
     u8 format;
+};
+
+struct StorageText {
+    const u8 *text;
+    int textId;
 };
 
 struct PSS_MenuStringPtrs {
@@ -51,8 +62,8 @@ struct PSS_MenuStringPtrs {
 };
 
 struct UnkStruct_2000028 {
-    void *unk_00;
-    void *unk_04;
+    const u8 *unk_00;
+    u8 *unk_04;
     u16 unk_08;
     u16 unk_0a;
     void (*unk_0c)(struct UnkStruct_2000028 *data);
@@ -88,7 +99,7 @@ struct PokemonStorageSystemData {
     struct PCScreenEffectStruct unk_000c;
     struct UnkStruct_2000020 unk_0020;
     struct UnkStruct_2000028 unk_0028[8];
-    u16 unk_00a8[0x400];
+    u8 unk_00a8[0x800];
     u16 unk_08a8;
     u16 unk_08aa;
     u8 unk_08ac;
@@ -142,7 +153,14 @@ struct PokemonStorageSystemData {
     s8 unk_117b;
     u8 unk_117c;
     u8 unk_117d;
-    u8 filler_117e[0x42];
+    u8 filler_117e[2];
+    struct StorageText unk_1180[6];
+    u8 filler_11b0[8];
+    u8 unk_11b8;
+    u8 unk_11b9;
+    u16 unk_11ba;
+    u16 unk_11bc;
+    u8 filler_11be;
     struct Sprite *unk_11c0;
     struct Sprite *unk_11c4;
     s32 unk_11c8;
@@ -158,7 +176,7 @@ struct PokemonStorageSystemData {
     u8 unk_11e1;
     u8 unk_11e2;
     u8 unk_11e3;
-    u8 filler_11e4[4];
+    u8 unk_11e4[4];
     const u8 *unk_11e8;
     u32 unk_11ec;
     u16 unk_11f0;
@@ -213,7 +231,7 @@ struct PokemonStorageSystemData {
     u8 unk_4784[0x800];
 };
 
-extern u16 gUnknown_02039760[0x600];
+extern u8 gUnknown_02039760[0xC00];
 extern struct UnkPSSStruct_2002370 *gUnknown_02038478;
 extern struct PokemonStorageSystemData *const gPokemonStorageSystemPtr;
 extern u8 *const gUnknown_083B6DB8;
@@ -295,9 +313,9 @@ void sub_809CE84(void);
 s16 sub_809CF30(void);
 void sub_809CFDC(struct UnkStruct_2000020 *a0, struct UnkStruct_2000028 *a1, u8 a2);
 void sub_809CFF0(void);
-void sub_809D034(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
-void sub_809D104(void *dest, u16 dLeft, u16 dTop, const void *src, u16 sLeft, u16 sTop, u16 width, u16 height);
-void sub_809D16C(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height);
+bool8 sub_809D034(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height);
+void sub_809D104(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height);
+bool8 sub_809D16C(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height);
 void ShowPokemonStorageSystem(void);
 
 void debug_sub_80A433C(struct Pokemon *pokemon, void (*func)(void));
