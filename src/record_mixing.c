@@ -63,7 +63,7 @@ struct PlayerRecords
 
 void RecordMixing_PrepareExchangePacket(void)
 {
-    sub_80BC300();
+    SetPlayerSecretBaseRecordMixingParty();
     sub_80C045C();
 
     memcpy(ewram_2018000.secretBases, recordMixingSecretBases, sizeof(ewram_2018000.secretBases));

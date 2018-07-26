@@ -176,7 +176,7 @@ struct SecretBaseRecord
     /*0x1A19*/ u8 sbr_field_11;
     /*0x1A1A*/ u8 decorations[16];
     /*0x1A2A*/ u8 decorationPos[16];
-    /*0x1A3A*/ u32 partyPersonality[6];
+    /*0x1A3C*/ u32 partyPersonality[6];
     /*0x1A54*/ u16 partyMoves[6 * 4];
     /*0x1A84*/ u16 partySpecies[6];
     /*0x1A90*/ u16 partyHeldItems[6];
