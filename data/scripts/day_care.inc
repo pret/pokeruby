@@ -47,7 +47,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 	end
 
 Route117_EventScript_1B22CD:: @ 81B22CD
-	specialvar RESULT, sub_8042B4C
+	specialvar RESULT, DaycareMonReceivedMail
 	compare RESULT, 1
 	call_if_eq Route117_EventScript_1B22DE
 	return
