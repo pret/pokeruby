@@ -26,7 +26,7 @@
 #include "tv.h"
 #include "ewram.h"
 
-EWRAM_DATA struct RecordMixingDayCareMail gUnknown_02038738 = {0};
+EWRAM_DATA struct RecordMixingDayCareMail gDayCareMailRecord = {0};
 extern u16 gSpecialVar_0x8005;
 
 u32 gUnknown_03005D2C;
@@ -39,8 +39,8 @@ void *recordMixingTvShows = &gSaveBlock1.tvShows;
 void *gUnknown_083D0274 = &gSaveBlock1.pokeNews;
 void *gUnknown_083D0278 = &gSaveBlock1.mauvilleMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
-struct RecordMixingDayCareMail *gUnknown_083D0280 = &gUnknown_02038738;
-void *gBattleTowerPlayerRecord = &gSaveBlock2.battleTower.playerRecord;
+struct RecordMixingDayCareMail *gDayCareMailPlayerRecord = &gDayCareMailRecord;
+struct BattleTowerRecord *gBattleTowerPlayerRecord = &gSaveBlock2.battleTower.playerRecord;
 
 #define BUFFER_CHUNK_SIZE 200
 
@@ -56,7 +56,7 @@ struct PlayerRecords
     u8 filler1004[0x40];
     u8 filler1044[0x40];
     struct EasyChatPair easyChatPairs[5];
-    struct RecordMixingDayCareMail filler10AC;
+    struct RecordMixingDayCareMail daycareMailRecord;
     struct BattleTowerRecord battleTowerRecord;
     u16 filler11C8[0x34];
 };
@@ -71,10 +71,10 @@ void RecordMixing_PrepareExchangePacket(void)
     memcpy(ewram_2018000.filler1004, gUnknown_083D0274, sizeof(ewram_2008000.filler1004));
     memcpy(ewram_2018000.filler1044, gUnknown_083D0278, sizeof(ewram_2008000.filler1044));
     memcpy(ewram_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(ewram_2018000.easyChatPairs));
-    gUnknown_02038738.mail[0] = gSaveBlock1.daycare.misc.mail[0];
-    gUnknown_02038738.mail[1] = gSaveBlock1.daycare.misc.mail[1];
-    InitDaycareMailRecordMixing(gSaveBlock1.daycare.mons, &gUnknown_02038738);
-    memcpy(&ewram_2018000.filler10AC, gUnknown_083D0280, sizeof(struct RecordMixingDayCareMail));
+    gDayCareMailRecord.mail[0] = gSaveBlock1.daycare.misc.mail[0];
+    gDayCareMailRecord.mail[1] = gSaveBlock1.daycare.misc.mail[1];
+    InitDaycareMailRecordMixing(gSaveBlock1.daycare.mons, &gDayCareMailRecord);
+    memcpy(&ewram_2018000.daycareMailRecord, gDayCareMailPlayerRecord, sizeof(struct RecordMixingDayCareMail));
     memcpy(&ewram_2018000.battleTowerRecord, gBattleTowerPlayerRecord, sizeof(struct BattleTowerRecord));
 
     if (GetMultiplayerId() == 0)
@@ -88,7 +88,7 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
     sub_80C0514(ewram_2008000.filler1004, sizeof(struct PlayerRecords), a);
     sub_80B9B1C(ewram_2008000.filler1044, sizeof(struct PlayerRecords), a);
     sub_80FA4E4(ewram_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
-    sub_80B9C6C((u8 *)&ewram_2008000.filler10AC, sizeof(struct PlayerRecords), a, ewram_2008000.tvShows);
+    sub_80B9C6C((u8 *)&ewram_2008000.daycareMailRecord, sizeof(struct PlayerRecords), a, ewram_2008000.tvShows);
     sub_80B9B70(&ewram_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
     sub_80B9F3C(ewram_2008000.filler11C8, a);
 }

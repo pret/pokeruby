@@ -203,7 +203,7 @@ gSpecials::
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
-	def_special sub_8042B4C
+	def_special DaycareMonReceivedMail
 	def_special ShowLinkBattleRecords
 	def_special HasEnoughMoneyFor
 	def_special PayMoneyFor
