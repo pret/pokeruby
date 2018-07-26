@@ -380,7 +380,9 @@ bool8 ShouldBattleEReaderTrainer(u8 levelType, u16 winStreak)
     return (numValid == 3);
 }
 
-bool8 sub_81346F4(void)
+// Tries to choose an E-Reader or record-mixing trainer for the next Battle
+// Tower trainer opponent.
+bool8 ChooseSpecialBattleTowerTrainer(void)
 {
     s32 recordIndex, i;
     u8 battleTowerLevelType;
@@ -437,344 +439,78 @@ bool8 sub_81346F4(void)
     return retVal;
 }
 
-// void sub_81347F8(void)
-// {
-//     bool8 levelType = gSaveBlock2.battleTower.battleTowerLevelType;
-//     if (sub_81346F4())
-//     {
-//         SetBattleTowerTrainerGfxId(gSaveBlock2.battleTower.battleTowerTrainerId);
-//         gSaveBlock2.battleTower.var_4C1[gSaveBlock2.battleTower.curChallengeBattleNum[levelType]] = gSaveBlock2.battleTower.battleTowerTrainerId;
-//     }
-//     else
-//     {
-//         u16 var1;
-
-//         if (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] > 7)
-//         {
-//             while (1)
-//             {
-//                 s32 i;
-//                 u32 temp = ((Random() & 0xFF) * 30) >> 8;
-//                 var1 = temp + 70;
-//                 for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && var1 != gSaveBlock2.battleTower.var_4C1[i]; i++) // TODO: [i + 1]???
-//                 { }
-
-//                 if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
-//                 {
-//                     break;
-//                 }
-//             }
-//         }
-//         else
-//         {
-//             if (gSaveBlock2.battleTower.curChallengeBattleNum[levelType] == 7)
-//             {
-//                 while (1)
-//                 {
-//                     s32 i;
-//                     u32 temp = ((Random() & 0xFF) * 5);
-//                     u32 temp2 = (((gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1) * 10) + 20);
-//                     var1 = temp / 128 + temp2;
-//                     for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && gSaveBlock2.battleTower.var_4C1[i] != var1; i++) // TODO: [i + 1]????
-//                     { }
-
-//                     if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
-//                     {
-//                         break;
-//                     }
-//                 }
-//             }
-//             else
-//             {
-//                 while (1)
-//                 {
-//                     s32 i;
-//                     u32 temp = ((Random() & 0xFF) * 320);
-//                     u32 temp2 = ((gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1) * 10);
-//                     var1 = temp + temp2;
-//                     for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && gSaveBlock2.battleTower.var_4C1[i] != var1; i++)
-//                     { }
-
-//                     if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
-//                     {
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-
-//         gSaveBlock2.battleTower.battleTowerTrainerId = var1;
-//         SetBattleTowerTrainerGfxId(gSaveBlock2.battleTower.battleTowerTrainerId);
-
-//         if (gSaveBlock2.battleTower.curChallengeBattleNum[levelType] < 7)
-//         {
-//             gSaveBlock2.battleTower.var_4C1[gSaveBlock2.battleTower.curChallengeBattleNum[levelType]] = gSaveBlock2.battleTower.battleTowerTrainerId;
-//         }
-//     }
-// }
-
-NAKED
-void sub_81347F8(void)
+// Chooses the next battle tower trainer id opponent. It keeps track of the
+// trainer who have already been battled in the current 7-battle challenge
+// to ensure no duplicates are fought.
+void ChooseNextBattleTowerTrainer(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r5, _08134838 @ =gSaveBlock2\n\
-    ldr r1, _0813483C @ =0x00000554\n\
-    adds r0, r5, r1\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 31\n\
-    lsrs r6, r0, 31\n\
-    bl sub_81346F4\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08134848\n\
-    ldr r2, _08134840 @ =0x00000564\n\
-    adds r4, r5, r2\n\
-    ldrb r0, [r4]\n\
-    bl SetBattleTowerTrainerGfxId\n\
-    lsls r0, r6, 1\n\
-    movs r3, 0xAB\n\
-    lsls r3, 3\n\
-    adds r1, r5, r3\n\
-    adds r0, r1\n\
-    ldrh r0, [r0]\n\
-    adds r0, r5, r0\n\
-    ldr r1, _08134844 @ =0x00000569\n\
-    adds r0, r1\n\
-    ldrb r1, [r4]\n\
-    b _081349DC\n\
-    .align 2, 0\n\
-_08134838: .4byte gSaveBlock2\n\
-_0813483C: .4byte 0x00000554\n\
-_08134840: .4byte 0x00000564\n\
-_08134844: .4byte 0x00000569\n\
-_08134848:\n\
-    lsls r0, r6, 1\n\
-    ldr r2, _081348D8 @ =0x0000055c\n\
-    adds r1, r5, r2\n\
-    adds r1, r0, r1\n\
-    ldrh r1, [r1]\n\
-    adds r7, r0, 0\n\
-    cmp r1, 0x7\n\
-    bls _0813485A\n\
-    b _0813495C\n\
-_0813485A:\n\
-    movs r3, 0xAB\n\
-    lsls r3, 3\n\
-    adds r0, r5, r3\n\
-    adds r1, r7, r0\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0x7\n\
-    bne _081348E4\n\
-    adds r6, r5, 0\n\
-    mov r9, r7\n\
-    adds r5, r1, 0\n\
-    ldr r0, _081348DC @ =0x0000056a\n\
-    adds r0, r6\n\
-    mov r10, r0\n\
-    mov r8, r5\n\
-_08134876:\n\
-    bl Random\n\
-    movs r1, 0xFF\n\
-    ands r1, r0\n\
-    lsls r2, r1, 2\n\
-    adds r2, r1\n\
-    ldr r1, _081348D8 @ =0x0000055c\n\
-    adds r4, r6, r1\n\
-    mov r3, r9\n\
-    adds r0, r3, r4\n\
-    ldrh r1, [r0]\n\
-    subs r1, 0x1\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 1\n\
-    adds r0, 0x14\n\
-    lsrs r2, 7\n\
-    adds r2, r0\n\
-    lsls r2, 16\n\
-    lsrs r2, 16\n\
-    movs r1, 0\n\
-    ldrh r0, [r5]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    bge _081348C8\n\
-    mov r3, r10\n\
-    ldrb r0, [r3]\n\
-    cmp r0, r2\n\
-    beq _081348C8\n\
-    subs r0, r4, 0x4\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    subs r3, r0, 0x1\n\
-    adds r4, 0xE\n\
-_081348BA:\n\
-    adds r1, 0x1\n\
-    cmp r1, r3\n\
-    bge _081348C8\n\
-    adds r0, r1, r4\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r2\n\
-    bne _081348BA\n\
-_081348C8:\n\
-    mov r3, r8\n\
-    ldrh r0, [r3]\n\
-    subs r0, 0x1\n\
-    ldr r4, _081348E0 @ =gSaveBlock2\n\
-    cmp r1, r0\n\
-    bne _08134876\n\
-    b _081349B6\n\
-    .align 2, 0\n\
-_081348D8: .4byte 0x0000055c\n\
-_081348DC: .4byte 0x0000056a\n\
-_081348E0: .4byte gSaveBlock2\n\
-_081348E4:\n\
-    adds r6, r5, 0\n\
-    mov r9, r7\n\
-    adds r5, r1, 0\n\
-    ldr r2, _08134950 @ =0x0000056a\n\
-    adds r2, r6\n\
-    mov r10, r2\n\
-    mov r8, r5\n\
-_081348F2:\n\
-    bl Random\n\
-    movs r1, 0xFF\n\
-    ands r1, r0\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsrs r2, r0, 6\n\
-    ldr r3, _08134954 @ =0x0000055c\n\
-    adds r4, r6, r3\n\
-    mov r1, r9\n\
-    adds r0, r1, r4\n\
-    ldrh r1, [r0]\n\
-    subs r1, 0x1\n\
-    lsls r0, r1, 2\n\
-    adds r0, r1\n\
-    lsls r0, 1\n\
-    adds r0, r2, r0\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    movs r1, 0\n\
-    ldrh r0, [r5]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    bge _08134942\n\
-    mov r3, r10\n\
-    ldrb r0, [r3]\n\
-    cmp r0, r2\n\
-    beq _08134942\n\
-    subs r0, r4, 0x4\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    subs r3, r0, 0x1\n\
-    adds r4, 0xE\n\
-_08134934:\n\
-    adds r1, 0x1\n\
-    cmp r1, r3\n\
-    bge _08134942\n\
-    adds r0, r1, r4\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r2\n\
-    bne _08134934\n\
-_08134942:\n\
-    mov r3, r8\n\
-    ldrh r0, [r3]\n\
-    subs r0, 0x1\n\
-    ldr r4, _08134958 @ =gSaveBlock2\n\
-    cmp r1, r0\n\
-    bne _081348F2\n\
-    b _081349B6\n\
-    .align 2, 0\n\
-_08134950: .4byte 0x0000056a\n\
-_08134954: .4byte 0x0000055c\n\
-_08134958: .4byte gSaveBlock2\n\
-_0813495C:\n\
-    movs r2, 0xAB\n\
-    lsls r2, 3\n\
-    adds r0, r5, r2\n\
-    adds r6, r7, r0\n\
-    ldr r3, _081349EC @ =0x0000056a\n\
-    adds r3, r5\n\
-    mov r8, r3\n\
-    adds r5, r6, 0\n\
-_0813496C:\n\
-    bl Random\n\
-    movs r1, 0xFF\n\
-    ands r1, r0\n\
-    lsls r0, r1, 4\n\
-    subs r0, r1\n\
-    lsls r0, 1\n\
-    asrs r0, 8\n\
-    adds r0, 0x46\n\
-    lsls r0, 16\n\
-    lsrs r2, r0, 16\n\
-    movs r1, 0\n\
-    ldrh r0, [r6]\n\
-    subs r0, 0x1\n\
-    cmp r1, r0\n\
-    bge _081349AC\n\
-    mov r3, r8\n\
-    ldrb r0, [r3]\n\
-    ldr r4, _081349F0 @ =gSaveBlock2\n\
-    cmp r0, r2\n\
-    beq _081349AC\n\
-    ldrh r0, [r5]\n\
-    subs r3, r0, 0x1\n\
-    ldr r0, _081349EC @ =0x0000056a\n\
-    adds r4, r0\n\
-_0813499E:\n\
-    adds r1, 0x1\n\
-    cmp r1, r3\n\
-    bge _081349AC\n\
-    adds r0, r1, r4\n\
-    ldrb r0, [r0]\n\
-    cmp r0, r2\n\
-    bne _0813499E\n\
-_081349AC:\n\
-    ldrh r0, [r6]\n\
-    subs r0, 0x1\n\
-    ldr r4, _081349F0 @ =gSaveBlock2\n\
-    cmp r1, r0\n\
-    bne _0813496C\n\
-_081349B6:\n\
-    ldr r1, _081349F4 @ =0x00000564\n\
-    adds r0, r4, r1\n\
-    strb r2, [r0]\n\
-    ldr r2, _081349F4 @ =0x00000564\n\
-    adds r5, r4, r2\n\
-    ldrb r0, [r5]\n\
-    bl SetBattleTowerTrainerGfxId\n\
-    movs r3, 0xAB\n\
-    lsls r3, 3\n\
-    adds r0, r4, r3\n\
-    adds r1, r7, r0\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0x6\n\
-    bhi _081349DE\n\
-    adds r0, r4, r0\n\
-    ldr r1, _081349F8 @ =0x00000569\n\
-    adds r0, r1\n\
-    ldrb r1, [r5]\n\
-_081349DC:\n\
-    strb r1, [r0]\n\
-_081349DE:\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_081349EC: .4byte 0x0000056a\n\
-_081349F0: .4byte gSaveBlock2\n\
-_081349F4: .4byte 0x00000564\n\
-_081349F8: .4byte 0x00000569\n\
-.syntax divided\n");
+    int i;
+    u16 trainerId;
+    bool8 levelType;
+
+    levelType = gSaveBlock2.battleTower.battleTowerLevelType;
+    if (ChooseSpecialBattleTowerTrainer())
+    {
+        SetBattleTowerTrainerGfxId(gSaveBlock2.battleTower.battleTowerTrainerId);
+        gSaveBlock2.battleTower.battledTrainerIds[gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1] = gSaveBlock2.battleTower.battleTowerTrainerId;
+        return;
+    }
+
+    if (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] <= 7)
+    {
+        if (gSaveBlock2.battleTower.curChallengeBattleNum[levelType] == 7)
+        {
+            while (1)
+            {
+                trainerId = ((Random() & 0xFF) * 5) >> 7;
+                trainerId += (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1) * 10 + 20;
+
+                // Ensure trainer wasn't previously fought in this challenge.
+                for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && gSaveBlock2.battleTower.battledTrainerIds[i] != trainerId; i++);
+                if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
+                {
+                    gSaveBlock2.battleTower.battleTowerTrainerId = trainerId;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            while (1)
+            {
+                trainerId = (((Random() & 0xFF) * 5) >> 6);
+                trainerId += (gSaveBlock2.battleTower.curStreakChallengesNum[levelType] - 1) * 10;
+
+                // Ensure trainer wasn't previously fought in this challenge.
+                for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && gSaveBlock2.battleTower.battledTrainerIds[i] != trainerId; i++);
+                if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
+                {
+                    gSaveBlock2.battleTower.battleTowerTrainerId = trainerId;
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        while (1)
+        {
+            trainerId = (((Random() & 0xFF) * 30) >> 8) + 70;
+
+            // Ensure trainer wasn't previously fought in this challenge.
+            for (i = 0; i < gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1 && gSaveBlock2.battleTower.battledTrainerIds[i] != trainerId; i++);
+            if (i == gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1)
+            {
+                gSaveBlock2.battleTower.battleTowerTrainerId = trainerId;
+                break;
+            }
+        }
+    }
+
+    SetBattleTowerTrainerGfxId(gSaveBlock2.battleTower.battleTowerTrainerId);
+    // Don't bother saving this trainer, since it's the last one in the challenge.
+    if (gSaveBlock2.battleTower.curChallengeBattleNum[levelType] < 7)
+        gSaveBlock2.battleTower.battledTrainerIds[gSaveBlock2.battleTower.curChallengeBattleNum[levelType] - 1] = gSaveBlock2.battleTower.battleTowerTrainerId;
 }
 
 void SetBattleTowerTrainerGfxId(u8 trainerIndex)

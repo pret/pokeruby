@@ -240,7 +240,7 @@ gSpecials::
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special sub_8134548
-	def_special sub_81347F8
+	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
 	def_special PrintBattleTowerTrainerGreeting
 	def_special PrintEReaderTrainerGreeting

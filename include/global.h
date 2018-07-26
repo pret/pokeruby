@@ -808,7 +808,7 @@ struct BattleTowerData
     /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
     /*0x04BD, 0x0565*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.
     /*0x04C0, 0x0568*/ u16 prizeItem;
-    /*0x04C2, 0x056A*/ u8 filler_4C2[0x6];
+    /*0x04C2, 0x056A*/ u8 battledTrainerIds[6];
     /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
     /*0x04CA, 0x0572*/ u16 bestBattleTowerWinStreak;
     /*0x04CC, 0x0574*/ u16 currentWinStreaks[2];
