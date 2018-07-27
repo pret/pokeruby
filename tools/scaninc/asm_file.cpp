@@ -26,8 +26,6 @@
 #include "scaninc.h"
 #include "asm_file.h"
 
-using namespace std::literals::string_literals;
-
 AsmFile::AsmFile(std::string &path)
 {
     m_path = path;
@@ -72,9 +70,9 @@ IncDirectiveType AsmFile::ReadUntilIncDirective(std::string &path)
         {
             m_pos++;
 
-            if (MatchIncDirective("incbin"s, path))
+            if (MatchIncDirective("incbin", path))
                 incDirectiveType = IncDirectiveType::Incbin;
-            else if (MatchIncDirective("include"s, path))
+            else if (MatchIncDirective("include", path))
                 incDirectiveType = IncDirectiveType::Include;
         }
 

@@ -29,8 +29,6 @@
 #include "c_file.h"
 #include "formatter.h"
 
-using namespace std::string_literals;
-
 bool CanOpenFile(std::string &path)
 {
     FILE *fp = std::fopen(path.c_str(), "rb");
@@ -101,7 +99,7 @@ int main(int argc, char **argv)
     }
     includeDirs.emplace_back(std::move(srcDir));
 
-    if (extension == "c"s || extension == "h"s)
+    if (extension == "c" || extension == "h")
     {
         filesToProcess.emplace(initialPath);
 
@@ -134,7 +132,7 @@ int main(int argc, char **argv)
             }
         }
     }
-    else if (extension == "s"s || extension == "inc"s)
+    else if (extension == "s" || extension == "inc")
     {
         filesToProcess.emplace(initialPath);
 

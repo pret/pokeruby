@@ -1,6 +1,6 @@
 CXX = g++
 
-CXXFLAGS = -Wall -Werror -std=c++14 -fno-exceptions -fno-rtti -O3 -s
+CXXFLAGS = -Wall -Werror -std=c++11 -Wc++11-compat -fno-exceptions -fno-rtti -O3 -s
 
 SRCS = scaninc.cpp c_file.cpp asm_file.cpp formatter.cpp
 

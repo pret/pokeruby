@@ -22,7 +22,6 @@
 #include <unistd.h>
 
 #include "c_file.h"
-using namespace std::literals::string_literals;
 
 CFile::CFile(std::string &path)
 {
@@ -181,7 +180,7 @@ void CFile::CheckInclude()
     if (m_buffer[m_pos] != '#')
         return;
 
-    static const std::string ident = "#include"s;
+    static const std::string ident = "#include";
 
     if (!CheckIdentifier(ident))
     {
@@ -206,7 +205,7 @@ void CFile::CheckIncbin()
         return;
     }
 
-    static const std::string idents[6] = { "INCBIN_S8"s, "INCBIN_U8"s, "INCBIN_S16"s, "INCBIN_U16"s, "INCBIN_S32"s, "INCBIN_U32"s };
+    static const std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
     int incbinType = -1;
 
     for (int i = 0; i < 6; i++)

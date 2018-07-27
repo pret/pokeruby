@@ -23,8 +23,6 @@
 #include <set>
 #include <string>
 
-using namespace std::literals::string_literals;
-
 // Makes directories recursively if needed. C has no mkdir -p.
 static void mkdirs_if_needed(const std::string &str)
 {
@@ -65,19 +63,19 @@ static void mkdirs_if_needed(const std::string &str)
 void Formatter::WriteFilename(const std::string &str)
 {
     // Wrap the long lines
-    if (line_len + len >= 78)
+    if (line_len + str.length() >= 78)
     {
         line_len = 0;
         // backslashed newline
-        targetstream << "\\\n"s;
+        targetstream << "\\\n";
     }
 
     targetstream << str << ' ';
 
-    line_len += len + 1;
+    line_len += str.length() + 1;
 
     // Create phony rules, just the source file.
-    phonystream << '\n' << str << ":\n"s;
+    phonystream << '\n' << str << ":\n";
 }
 
 // Writes a Makefile dependency file in the style of gcc -M format.
@@ -90,11 +88,11 @@ void Formatter::WriteMakefile(const std::string &path, const std::set<std::strin
     const std::string basename = path.substr(filename_index + 1, extension_index - filename_index);
 
     // src/file.c -> .d/src/
-    const std::string depdir = ".d/"s + path.substr(0, filename_index) + '/';
+    const std::string depdir = ".d/" + path.substr(0, filename_index) + '/';
     // src/file.c -> .d/src/file.Td
-    const std::string depfile = depdir + basename + "Td"s;
+    const std::string depfile = depdir + basename + "Td";
     // src/file.c -> $(BUILD_DIR)/src/file.o:
-    const std::string targetname = "$(BUILD_DIR)/"s + path.substr(0, extension_index) + ".o: "s;
+    const std::string targetname = "$(BUILD_DIR)/" + path.substr(0, extension_index) + ".o: ";
 
     // Make depdir if needed.
     mkdirs_if_needed(depdir);
