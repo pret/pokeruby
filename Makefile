@@ -79,12 +79,23 @@ else
 NODEP := 1
 endif
 
+# TODO: make this configurable. scaninc is hardcoded to use .d.
+DEPDIR := .d
+
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
-  $(BUILD_DIR)/src/%.o:  C_FILE = $(*D)/$(*F).c
-  $(BUILD_DIR)/src/%.o:  C_DEP = $(shell $(SCANINC) -I include $(C_FILE:$(BUILD_DIR)/=))
-  $(BUILD_DIR)/asm/%.o:  ASM_DEP = $(shell $(SCANINC) asm/$(*F).s)
-  $(BUILD_DIR)/data/%.o: ASM_DEP = $(shell $(SCANINC) data/$(*F).s)
+  # Add the .d files to the dependencies.
+  $(BUILD_DIR)/src/%.o: $(DEPDIR)/%*.d
+  $(BUILD_DIR)/asm/%.o: $(DEPDIR)/%*.d
+  $(BUILD_DIR)/data/%.o: $(DEPDIR)/%*.d
+
+  # scaninc puts the deps files into .d/path/file.Td
+  C_DEPS       := $(addprefix $(DEPDIR)/, $(C_SOURCES:%.c=%.d))
+  ASM_DEPS     := $(addprefix $(DEPDIR)/, $(ASM_SOURCES:%.s=%.d))
+else
+  # Dummy things out.
+  C_DEPS       :=
+  ASM_DEPS     :=
 endif
 
 MAKEFLAGS += --no-print-directory
@@ -108,6 +119,7 @@ endif
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
+	$(RM) -r .d
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 	$(MAKE) clean -C tools/gbagfx
 	$(MAKE) clean -C tools/scaninc
@@ -141,18 +153,35 @@ $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
-$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c $$(C_DEP)
+$(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
 	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
 	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
 	@$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
 
 # Only .s files in data need preproc
-$(BUILD_DIR)/data/%.o: data/%.s $$(ASM_DEP)
+$(BUILD_DIR)/data/%.o: data/%.s
 	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
 
-$(BUILD_DIR)/%.o: %.s $$(ASM_DEP)
+$(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
+
+# Dependency scanning. The new scaninc creates similar output
+# to gcc -M and only does it when needed.
+# If NODEP is enabled, these rules will be orphaned.
+$(DEPDIR)/%.d: %.c
+	@$(SCANINC) -I include $<
+	@mv -f $(DEPDIR)/$*.Td $@
+
+$(DEPDIR)/%.d: %.s
+	@$(SCANINC) -I include $<
+	@mv -f $(DEPDIR)/$*.Td $@
+
+.PRECIOUS: $(DEPDIR)/%.d
+
+# Include our dependencies. This will be empty on NODEP.
+include $(C_DEPS)
+include $(ASM_DEPS)
 
 # "friendly" target names for convenience sake
 ruby:          ; @$(MAKE) GAME_VERSION=RUBY

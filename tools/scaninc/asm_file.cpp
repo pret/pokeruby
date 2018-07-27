@@ -20,10 +20,15 @@
 
 #include <cstdio>
 #include <string>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include "scaninc.h"
 #include "asm_file.h"
 
-AsmFile::AsmFile(std::string path)
+using namespace std::literals::string_literals;
+
+AsmFile::AsmFile(std::string &path)
 {
     m_path = path;
 
@@ -32,13 +37,12 @@ AsmFile::AsmFile(std::string path)
     if (fp == NULL)
         FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    std::fseek(fp, 0, SEEK_END);
-
-    m_size = std::ftell(fp);
+    int fd = fileno(fp);
+    struct stat buf;
+    fstat(fd, &buf);
+    m_size = buf.st_size;
 
     m_buffer = new char[m_size];
-
-    std::rewind(fp);
 
     if (std::fread(m_buffer, m_size, 1, fp) != 1)
         FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
@@ -68,9 +72,9 @@ IncDirectiveType AsmFile::ReadUntilIncDirective(std::string &path)
         {
             m_pos++;
 
-            if (MatchIncDirective("incbin", path))
+            if (MatchIncDirective("incbin"s, path))
                 incDirectiveType = IncDirectiveType::Incbin;
-            else if (MatchIncDirective("include", path))
+            else if (MatchIncDirective("include"s, path))
                 incDirectiveType = IncDirectiveType::Include;
         }
 

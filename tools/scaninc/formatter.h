@@ -1,4 +1,4 @@
-// Copyright(c) 2017 YamaArashi
+// Copyright(c) 2015-2017 YamaArashi
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,40 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef C_FILE_H
-#define C_FILE_H
+#ifndef FORMATTER_H
+#define FORMATTER_H
 
-#include <string>
+#include <dirent.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <sstream>
 #include <set>
-#include <memory>
-#include "scaninc.h"
+#include <string>
 
-class CFile
+class Formatter
 {
-public:
-    CFile(std::string &path);
-    ~CFile();
-    void FindIncbins();
-    const std::set<std::string>& GetIncbins() { return m_incbins; }
-    const std::set<std::string>& GetIncludes() { return m_includes; }
-
 private:
-    char *m_buffer;
-    int m_pos;
-    int m_size;
-    int m_lineNum;
-    std::string m_path;
-    std::set<std::string> m_incbins;
-    std::set<std::string> m_includes;
-
-    bool ConsumeHorizontalWhitespace();
-    bool ConsumeNewline();
-    bool ConsumeComment();
-    void SkipWhitespace();
-    bool CheckIdentifier(const std::string& ident);
-    void CheckInclude();
-    void CheckIncbin();
-    std::string ReadPath();
+    size_t line_len;
+    std::stringstream targetstream;
+    std::stringstream phonystream;
+   	void WriteFilename(const std::string &str);
+public:
+    Formatter() = default;
+    void WriteMakefile(const std::string &path, const std::set<std::string> &dependencies);
 };
 
-#endif // C_FILE_H
+#endif

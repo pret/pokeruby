@@ -1,10 +1,10 @@
 CXX = g++
 
-CXXFLAGS = -Wall -Werror -std=c++11 -O2 -s
+CXXFLAGS = -Wall -Werror -std=c++14 -fno-exceptions -fno-rtti -O3 -s
 
-SRCS = scaninc.cpp c_file.cpp asm_file.cpp
+SRCS = scaninc.cpp c_file.cpp asm_file.cpp formatter.cpp
 
-HEADERS := scaninc.h asm_file.h c_file.h
+HEADERS := scaninc.h asm_file.h c_file.h formatter.h
 
 .PHONY: all clean
 

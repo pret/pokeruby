@@ -17,10 +17,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "c_file.h"
+using namespace std::literals::string_literals;
 
-CFile::CFile(std::string path)
+CFile::CFile(std::string &path)
 {
     m_path = path;
 
@@ -29,14 +33,13 @@ CFile::CFile(std::string path)
     if (fp == NULL)
         FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    std::fseek(fp, 0, SEEK_END);
-
-    m_size = std::ftell(fp);
+    int fd = fileno(fp);
+    struct stat buf;
+    fstat(fd, &buf);
+    m_size = buf.st_size;
 
     m_buffer = new char[m_size + 1];
     m_buffer[m_size] = 0;
-
-    std::rewind(fp);
 
     if (std::fread(m_buffer, m_size, 1, fp) != 1)
         FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
@@ -131,29 +134,32 @@ bool CFile::ConsumeNewline()
 
 bool CFile::ConsumeComment()
 {
-    if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '*')
+    if (m_buffer[m_pos] == '/')
     {
-        m_pos += 2;
-        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
+        if (m_buffer[m_pos + 1] == '*')
         {
-            if (m_buffer[m_pos] == 0)
-                return false;
-            if (!ConsumeNewline())
-                m_pos++;
+	        m_pos += 2;
+	        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
+	        {
+	            if (m_buffer[m_pos] == 0)
+	                return false;
+	            if (!ConsumeNewline())
+	                m_pos++;
+	        }
+	        m_pos += 2;
+	        return true;
         }
-        m_pos += 2;
-        return true;
-    }
-    else if (m_buffer[m_pos] == '/' && m_buffer[m_pos + 1] == '/')
-    {
-        m_pos += 2;
-        while (!ConsumeNewline())
+        else if (m_buffer[m_pos + 1] == '/')
         {
-            if (m_buffer[m_pos] == 0)
-                return false;
-            m_pos++;
-        }
-        return true;
+	        m_pos += 2;
+	        while (!ConsumeNewline())
+	        {
+	            if (m_buffer[m_pos] == 0)
+	                return false;
+	            m_pos++;
+	        }
+	        return true;
+	    }
     }
 
     return false;
@@ -167,13 +173,7 @@ void CFile::SkipWhitespace()
 
 bool CFile::CheckIdentifier(const std::string& ident)
 {
-    unsigned int i;
-
-    for (i = 0; i < ident.length() && m_pos + i < (unsigned)m_size; i++)
-        if (ident[i] != m_buffer[m_pos + i])
-            return false;
-
-    return (i == ident.length());
+    return (std::strncmp(ident.c_str(), m_buffer + m_pos, ident.length()) == 0);
 }
 
 void CFile::CheckInclude()
@@ -181,7 +181,7 @@ void CFile::CheckInclude()
     if (m_buffer[m_pos] != '#')
         return;
 
-    std::string ident = "#include";
+    static const std::string ident = "#include"s;
 
     if (!CheckIdentifier(ident))
     {
@@ -195,25 +195,18 @@ void CFile::CheckInclude()
     std::string path = ReadPath();
 
     if (!path.empty()) {
-        m_includes.emplace(path);
+        m_includes.emplace(std::move(path));
     }
 }
 
 void CFile::CheckIncbin()
 {
-    // Optimization: assume most lines are not incbins
-    if (!(m_buffer[m_pos+0] == 'I'
-       && m_buffer[m_pos+1] == 'N'
-       && m_buffer[m_pos+2] == 'C'
-       && m_buffer[m_pos+3] == 'B'
-       && m_buffer[m_pos+4] == 'I'
-       && m_buffer[m_pos+5] == 'N'
-       && m_buffer[m_pos+6] == '_'))
+    if (std::strncmp(m_buffer + m_pos, "INCBIN_", 7) != 0)
     {
-            return;
+        return;
     }
 
-    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    static const std::string idents[6] = { "INCBIN_S8"s, "INCBIN_U8"s, "INCBIN_S16"s, "INCBIN_U16"s, "INCBIN_S32"s, "INCBIN_U32"s };
     int incbinType = -1;
 
     for (int i = 0; i < 6; i++)
@@ -255,7 +248,7 @@ void CFile::CheckIncbin()
 
     m_pos++;
 
-    m_incbins.emplace(path);
+    m_incbins.emplace(std::move(path));
 }
 
 std::string CFile::ReadPath()

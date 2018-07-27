@@ -34,7 +34,7 @@ enum class IncDirectiveType
 class AsmFile
 {
 public:
-    AsmFile(std::string path);
+    AsmFile(std::string &path);
     ~AsmFile();
     IncDirectiveType ReadUntilIncDirective(std::string& path);
 
@@ -86,7 +86,7 @@ private:
             m_pos++;
     }
 
-    bool MatchIncDirective(std::string directiveName, std::string& path)
+    bool MatchIncDirective(std::string directiveName, std::string &path)
     {
         int length = directiveName.length();
         int i;
