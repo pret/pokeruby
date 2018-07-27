@@ -22,6 +22,7 @@
 #include "scaninc.h"
 #include <set>
 #include <string>
+#include <cstring>
 
 // Makes directories recursively if needed. C has no mkdir -p.
 static void mkdirs_if_needed(const std::string &str)
