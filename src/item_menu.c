@@ -538,7 +538,7 @@ static bool8 LoadBagGraphicsMultistep(void)
         ewramBagSetupStep++;
         break;
     case 1:
-        CpuCopy16(gUnknown_08E77004, gBGTilemapBuffers[2], 0x800);
+        CpuCopy16(gBagScreen_Tilemap, gBGTilemapBuffers[2], 0x800);
         ewramBagSetupStep++;
         break;
     case 2:
@@ -742,7 +742,7 @@ static void sub_80A37F8(u8 taskId)
 
 static void sub_80A3954(u16 *a)
 {
-    CpuCopy16(gUnknown_08E77004, a, 0x800);
+    CpuCopy16(gBagScreen_Tilemap, a, 0x800);
 }
 
 static void sub_80A396C(u16 *a, u8 b, u8 c, u8 d)
