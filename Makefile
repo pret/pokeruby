@@ -180,8 +180,8 @@ $(DEPDIR)/%.d: %.s
 .PRECIOUS: $(DEPDIR)/%.d
 
 # Include our dependencies. This will be empty on NODEP.
-include $(C_DEPS)
-include $(ASM_DEPS)
+-include $(C_DEPS)
+-include $(ASM_DEPS)
 
 # "friendly" target names for convenience sake
 ruby:          ; @$(MAKE) GAME_VERSION=RUBY
