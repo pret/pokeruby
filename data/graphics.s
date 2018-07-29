@@ -3225,8 +3225,8 @@ gBagScreenMale_Pal:: @ 8E76F94
 gBagScreenFemale_Pal:: @ 8E76FCC
 	.incbin "graphics/interface/bag_screen_female.gbapal.lz"
 
-gUnknown_08E77004:: @ 8E77004
-	.incbin "graphics/unknown/unknown_E77004.bin"
+gBagScreen_Tilemap:: @ 8E77004
+	.incbin "graphics/interface/bag_screen.bin"
 
 	.align 2
 gBuyMenuFrame_Gfx:: @ 8E77804
