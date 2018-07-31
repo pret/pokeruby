@@ -4,11 +4,13 @@
 #include "palette.h"
 #include "rom_8077ABC.h"
 #include "trig.h"
+#include "main.h"
 
 extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 extern u8 gAnimVisualTaskCount;
+extern struct OamMatrix gOamMatrices[];
 
 void sub_80785E4(struct Sprite *sprite);
 void sub_80DA034(struct Sprite *sprite);
@@ -33,6 +35,8 @@ void sub_80DB564(struct Sprite *sprite);
 void sub_80DB5E4(struct Sprite *sprite);
 
 void sub_80DA0DC(u8 taskId);
+
+int sub_80DA6F0(int a1);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA380 =
 {
@@ -632,4 +636,119 @@ void sub_80DA48C(struct Sprite *sprite)
         DestroySprite(sprite);
         gAnimVisualTaskCount--;
     }
+}
+
+void sub_80DA4D8(struct Sprite *sprite ) {
+
+    s16 * data;
+    u8 bank;
+    s16 spriteCoord;
+    s16 v6;
+    
+    u32 t1, t2;
+    
+    int v7;
+    int v8;
+    
+    u32 matrixNum;
+    
+    int sinVal1;  
+    int v14;
+    //s16 sinVal2;
+    //int temp;
+    register s16 sinVal2 asm ("r4");
+    register int temp asm ("r0");
+    
+    data = sprite->data;
+    
+    if (gBattleAnimArgs[7] & 0x100) {        
+        bank = gAnimBankAttacker;                
+    } else {        
+        bank = gAnimBankTarget;
+    }
+    
+    if(!GetBattlerSide(bank)) {
+        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+    } 
+    
+    sprite->pos1.x = GetBattlerSpriteCoord(bank, 0) + gBattleAnimArgs[0];
+    
+    spriteCoord = (u8) GetBattlerSpriteCoord(bank, 1u); 
+    v6 = spriteCoord + gBattleAnimArgs[1];
+    sprite->pos1.y = spriteCoord + gBattleAnimArgs[1];
+    data[4] = v6 << 8;
+
+    t1 = 2 * (spriteCoord + (u16)gBattleAnimArgs[6]);
+    data[7] = (data[7] & 1) | t1;    
+
+    *(u8*)data |= 4u;
+    
+    v7 = (u16) gBattleAnimArgs[2];
+    v8 = (u8) gBattleAnimArgs[2];
+    
+    data[1] = (u8) gBattleAnimArgs[2];
+    v7 = v7 << 16;
+    v7 = ((u32)v7) >> 24;
+    data[5] = v7;
+    data[2] = gBattleAnimArgs[3];
+    data[3] = gBattleAnimArgs[4];
+    data[6] = gBattleAnimArgs[5];
+    
+    if ((u16)(v8 - 64) <= 0x7f){
+        
+        if (gMain.inBattle) {
+            sprite->oam.priority = sub_8079ED4(bank) + 1;            
+        } else { 
+            sprite->oam.priority = sub_8079ED4(bank);
+        }
+        
+        // set smallest bit to 0
+        *(u8*)(data + 7) = data[7] & -0x2;
+        
+        if (!(data[2] & 0x8000)) {
+            
+            sprite->hFlip ^= 1;            
+            sprite->animNum = sprite->hFlip;
+            
+            sprite->animBeginning = 1;
+            sprite->animEnded = 0;                  
+        }        
+                
+    } else {
+        
+        sprite->oam.priority = sub_8079ED4(bank);
+        
+        // set smallest bit to 1
+        *(u8*)(data + 7) |= 1u;
+        
+        if (data[2] & 0x8000) {
+            
+            sprite->hFlip ^= 1;            
+            sprite->animNum = sprite->hFlip;
+
+            sprite->animBeginning = 1;
+            sprite->animEnded = 0;
+        }
+       
+    }
+    
+    // bits 1-4 = data[0]0:3 5-8 = and 5-8 = data[1]6:9
+    t2 = (u16)data[1] >> 6 << 4;
+    *(u8*)data = (15 & (u8)data[0]) | t2; 
+    
+    sinVal1 = gSineTable[(u16)data[1]];
+    sprite->pos2.x = (sinVal1 * (u8)data[6]) >> 8;
+    
+    matrixNum = sprite->oam.matrixNum;
+    
+    v14 = (u8) ((-sprite->pos2.x >> 1) + (u8)data[5]);
+    sinVal2 = gSineTable[v14];
+        
+    gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d  = gSineTable[v14 + 64];
+    gOamMatrices[matrixNum].b = sinVal2;
+    temp = - (s16) sinVal2;
+    gOamMatrices[matrixNum].c = temp;
+    
+    sprite->callback = (SpriteCallback) sub_80DA6F0;
+
 }
