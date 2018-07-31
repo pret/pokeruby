@@ -10,6 +10,8 @@
 #include "palette.h"
 #include "random.h"
 
+//#include "gba/defines.h"
+
 extern s16 gBattleAnimArgs[];
 extern u8  gAnimBankAttacker;
 extern u8  gAnimBankTarget;
@@ -53,7 +55,7 @@ void sub_80D8F74(struct Sprite *sprite);
 void sub_80D81E0(u8 taskId); // static?
 void sub_80D851C(u8 taskId);
 void sub_80D8AF8(u8 taskId);
-void sub_80D8BA8(u8 taskId);
+void sub_80D8BA8(u8 spriteId, u8 taskId, u8 a3, u8 a4);//(u8 taskId);
 
 const union AnimCmd gSpriteAnim_83D9B58[] =
 {
@@ -534,6 +536,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9F0C =
  *                         mist, powder snow, sheer cold, 
  */
 
+
 #ifdef NONMATCHING
 // NOT EQUIVALENT
 void sub_80D7704(struct Sprite *sprite)
@@ -987,7 +990,7 @@ void sub_80D7C8C(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// MATCHED
+// MATCHING
 void sub_80D7CD4(struct Sprite *sprite)
 {
     int i;
@@ -1183,27 +1186,22 @@ void sub_80D8048(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-#ifdef NONMATCHING
-// haze?
-//
-void sub_80D80E0(u8 taskId)//??
+// used in haze?
+// MATCHING
+void sub_80D80E0(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
 
-    //
-    REG_BLDCNT = 0x3F42; // +
-    REG_BLDALPHA = 0x1000; // +
+    REG_BLDCNT = 0x3F42;
+    REG_BLDALPHA = 0x1000;
 
-    // 
-    REG_BG1CNT_BITFIELD.priority = 1;//charBaseBlock = 1; // normal.c <1131>
+    REG_BG1CNT_BITFIELD.priority = 1;
 
-    REG_BG1CNT_BITFIELD.screenSize = 0; // + // dark.c <844>
+    REG_BG1CNT_BITFIELD.screenSize = 0;
 
-    // this bit is different
     if (!IsContest())
         REG_BG1CNT_BITFIELD.charBaseBlock = 1;
 
-    //
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
 
@@ -1212,140 +1210,19 @@ void sub_80D80E0(u8 taskId)//??
 
     sub_8078914(&subStruct);
 
-    // <-- ?
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
-    DmaCopy32Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x1000);
+    DmaCopy16Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x800);
 
     LZDecompressVram(&gBattleAnimFogTilemap, subStruct.field_4);
-    // ? -->
 
     LoadPalette(&gUnknown_083970E8, subStruct.field_8 * 16, 32);
 
-    if (IsContest()) // +
-        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0); // +
-
-    //
-    gTasks[taskId].func = sub_80D81E0; // +
+    if (IsContest())
+        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0);
+    
+    gTasks[taskId].func = sub_80D81E0;
 }
 
-#else
-NAKED void sub_80D80E0(u8 taskId)
-{
-    asm_unified(".equ REG_BLDCNT, 0x4000050\n"
-                ".equ REG_BG1CNT, 0x400000A\n"
-                ".equ REG_BG1HOFS, 0x4000014\n"
-                "\tpush {r4,r5,lr}\n"
-                "\tsub sp, 0x10\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tldr r1, _080D81A8 @ =REG_BLDCNT\n"
-                "\tldr r2, _080D81AC @ =0x00003f42\n"
-                "\tadds r0, r2, 0\n"
-                "\tstrh r0, [r1]\n"
-                "\tadds r1, 0x2\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 5\n"
-                "\tadds r0, r2, 0\n"
-                "\tstrh r0, [r1]\n"
-                "\tldr r4, _080D81B0 @ =REG_BG1CNT\n"
-                "\tldrb r1, [r4]\n"
-                "\tmovs r0, 0x4\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tmovs r1, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4]\n"
-                "\tldrb r1, [r4, 0x1]\n"
-                "\tmovs r0, 0x3F\n"
-                "\tands r0, r1\n"
-                "\tstrb r0, [r4, 0x1]\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D812A\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0xD\n"
-                "\tnegs r1, r1\n"
-                "\tands r1, r0\n"
-                "\tmovs r0, 0x4\n"
-                "\torrs r1, r0\n"
-                "\tstrb r1, [r4]\n"
-                "_080D812A:\n"
-                "\tldr r0, _080D81B4 @ =gBattle_BG1_X\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080D81B8 @ =gBattle_BG1_Y\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080D81BC @ =REG_BG1HOFS\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r0, 0x2\n"
-                "\tstrh r1, [r0]\n"
-                "\tmov r0, sp\n"
-                "\tbl sub_8078914\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tldr r0, _080D81C0 @ =0x040000d4\n"
-                "\tadd r2, sp, 0xC\n"
-                "\tstr r2, [r0]\n"
-                "\tstr r1, [r0, 0x4]\n"
-                "\tldr r2, _080D81C4 @ =0x85000400\n"
-                "\tstr r2, [r0, 0x8]\n"
-                "\tldr r2, [r0, 0x8]\n"
-                "\tldr r2, _080D81C8 @ =gWeatherFog1Tiles\n"
-                "\tldr r3, [sp]\n"
-                "\tstr r2, [r0]\n"
-                "\tstr r3, [r0, 0x4]\n"
-                "\tldr r2, _080D81CC @ =0x80000400\n"
-                "\tstr r2, [r0, 0x8]\n"
-                "\tldr r0, [r0, 0x8]\n"
-                "\tldr r0, _080D81D0 @ =gBattleAnimFogTilemap\n"
-                "\tbl LZDecompressVram\n"
-                "\tldr r0, _080D81D4 @ =gUnknown_083970E8\n"
-                "\tmov r1, sp\n"
-                "\tldrb r1, [r1, 0x8]\n"
-                "\tlsls r1, 4\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D8190\n"
-                "\tmov r0, sp\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0\n"
-                "\tbl sub_80763FC\n"
-                "_080D8190:\n"
-                "\tldr r0, _080D81D8 @ =gTasks\n"
-                "\tlsls r1, r5, 2\n"
-                "\tadds r1, r5\n"
-                "\tlsls r1, 3\n"
-                "\tadds r1, r0\n"
-                "\tldr r0, _080D81DC @ =sub_80D81E0\n"
-                "\tstr r0, [r1]\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r4,r5}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D81A8: .4byte REG_BLDCNT\n"
-                "_080D81AC: .4byte 0x00003f42\n"
-                "_080D81B0: .4byte REG_BG1CNT\n"
-                "_080D81B4: .4byte gBattle_BG1_X\n"
-                "_080D81B8: .4byte gBattle_BG1_Y\n"
-                "_080D81BC: .4byte REG_BG1HOFS\n"
-                "_080D81C0: .4byte 0x040000d4\n"
-                "_080D81C4: .4byte 0x85000400\n"
-                "_080D81C8: .4byte gWeatherFog1Tiles\n"
-                "_080D81CC: .4byte 0x80000400\n"
-                "_080D81D0: .4byte gBattleAnimFogTilemap\n"
-                "_080D81D4: .4byte gUnknown_083970E8\n"
-                "_080D81D8: .4byte gTasks\n"
-                "_080D81DC: .4byte sub_80D81E0");
-}
-#endif // NONMATCHING 
 //
 // static void sub_80D81E0(u8 taskId);
 
@@ -1623,18 +1500,14 @@ void sub_80D83E0(struct Sprite *sprite)
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
-#ifdef NONMATCHING
-// write down the 0x85000400, 0x040000d4 offset keys
+// MATCHING
 void sub_80D8414(u8 taskId)
 {
-    //
     struct Struct_sub_8078914 subStruct;
 
-    //
-    REG_BLDCNT = 0x3F42; // +
-    REG_BLDALPHA = 0x1000; // +
+    REG_BLDCNT = 0x3F42;
+    REG_BLDALPHA = 0x1000;
 
-    // 
     REG_BG1CNT_BITFIELD.priority = 1;
 
     REG_BG1CNT_BITFIELD.screenSize = 0; 
@@ -1642,7 +1515,6 @@ void sub_80D8414(u8 taskId)
     if (!IsContest())
         REG_BG1CNT_BITFIELD.charBaseBlock = 1;
 
-    //
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
 
@@ -1651,143 +1523,19 @@ void sub_80D8414(u8 taskId)
 
     sub_8078914(&subStruct);
 
-    // <-- ?
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
-    DmaCopy32Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x1000);
+    DmaCopy16Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x800);
 
     LZDecompressVram(&gBattleAnimFogTilemap, subStruct.field_4);
-    // ? -->
 
     LoadPalette(&gUnknown_083970E8, subStruct.field_8 * 16, 32);
 
-    if (IsContest()) // +
-        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0); // +
+    if (IsContest())
+        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0);
 
     gTasks[taskId].data[15] = 0xFFFF;
     gTasks[taskId].func = sub_80D851C;
 }
-#else
-NAKED
-void sub_80D8414(u8 taskId)
-{
-    asm_unified(".equ REG_BLDCNT, 0x4000050\n"
-                ".equ REG_BG1CNT, 0x400000A\n"
-                ".equ REG_BG1HOFS, 0x4000014\n"
-                "\tpush {r4,r5,lr}\n"
-                "\tsub sp, 0x10\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r5, r0, 24\n"
-                "\tldr r1, _080D84E0 @ =REG_BLDCNT\n"
-                "\tldr r2, _080D84E4 @ =0x00003f42\n"
-                "\tadds r0, r2, 0\n"
-                "\tstrh r0, [r1]\n"
-                "\tadds r1, 0x2\n"
-                "\tmovs r2, 0x80\n"
-                "\tlsls r2, 5\n"
-                "\tadds r0, r2, 0\n"
-                "\tstrh r0, [r1]\n"
-                "\tldr r4, _080D84E8 @ =REG_BG1CNT\n"
-                "\tldrb r1, [r4]\n"
-                "\tmovs r0, 0x4\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tmovs r1, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r4]\n"
-                "\tldrb r1, [r4, 0x1]\n"
-                "\tmovs r0, 0x3F\n"
-                "\tands r0, r1\n"
-                "\tstrb r0, [r4, 0x1]\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D845E\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0xD\n"
-                "\tnegs r1, r1\n"
-                "\tands r1, r0\n"
-                "\tmovs r0, 0x4\n"
-                "\torrs r1, r0\n"
-                "\tstrb r1, [r4]\n"
-                "_080D845E:\n"
-                "\tldr r0, _080D84EC @ =gBattle_BG1_X\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080D84F0 @ =gBattle_BG1_Y\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r0, _080D84F4 @ =REG_BG1HOFS\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r0, 0x2\n"
-                "\tstrh r1, [r0]\n"
-                "\tmov r0, sp\n"
-                "\tbl sub_8078914\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tldr r0, _080D84F8 @ =0x040000d4\n"
-                "\tadd r2, sp, 0xC\n"
-                "\tstr r2, [r0]\n"
-                "\tstr r1, [r0, 0x4]\n"
-                "\tldr r2, _080D84FC @ =0x85000400\n"
-                "\tstr r2, [r0, 0x8]\n"
-                "\tldr r2, [r0, 0x8]\n"
-                "\tldr r2, _080D8500 @ =gWeatherFog1Tiles\n"
-                "\tldr r3, [sp]\n"
-                "\tstr r2, [r0]\n"
-                "\tstr r3, [r0, 0x4]\n"
-                "\tldr r2, _080D8504 @ =0x80000400\n"
-                "\tstr r2, [r0, 0x8]\n"
-                "\tldr r0, [r0, 0x8]\n"
-                "\tldr r0, _080D8508 @ =gBattleAnimFogTilemap\n"
-                "\tbl LZDecompressVram\n"
-                "\tldr r0, _080D850C @ =gUnknown_083970E8\n"
-                "\tmov r1, sp\n"
-                "\tldrb r1, [r1, 0x8]\n"
-                "\tlsls r1, 4\n"
-                "\tmovs r2, 0x20\n"
-                "\tbl LoadPalette\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D84C4\n"
-                "\tmov r0, sp\n"
-                "\tldrb r0, [r0, 0x8]\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r2, 0\n"
-                "\tmovs r3, 0\n"
-                "\tbl sub_80763FC\n"
-                "_080D84C4:\n"
-                "\tldr r1, _080D8510 @ =gTasks\n"
-                "\tlsls r0, r5, 2\n"
-                "\tadds r0, r5\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r1\n"
-                "\tldr r1, _080D8514 @ =0x0000ffff\n"
-                "\tstrh r1, [r0, 0x26]\n"
-                "\tldr r1, _080D8518 @ =sub_80D851C\n"
-                "\tstr r1, [r0]\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r4,r5}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D84E0: .4byte REG_BLDCNT\n"
-                "_080D84E4: .4byte 0x00003f42\n"
-                "_080D84E8: .4byte REG_BG1CNT\n"
-                "_080D84EC: .4byte gBattle_BG1_X\n"
-                "_080D84F0: .4byte gBattle_BG1_Y\n"
-                "_080D84F4: .4byte REG_BG1HOFS\n"
-                "_080D84F8: .4byte 0x040000d4\n"
-                "_080D84FC: .4byte 0x85000400\n"
-                "_080D8500: .4byte gWeatherFog1Tiles\n"
-                "_080D8504: .4byte 0x80000400\n"
-                "_080D8508: .4byte gBattleAnimFogTilemap\n"
-                "_080D850C: .4byte gUnknown_083970E8\n"
-                "_080D8510: .4byte gTasks\n"
-                "_080D8514: .4byte 0x0000ffff\n"
-                "_080D8518: .4byte sub_80D851C");
-}
-#endif // NONMATCHING
 
 // 
 // NAKED
@@ -2029,262 +1777,58 @@ NAKED void sub_80D851C(u8 taskId)
                 "_080D86FC: .4byte REG_BLDCNT");
 }
 
-#ifdef NONMATCHING
-// 
+// MATCHING 
 void sub_80D8700(struct Sprite *sprite)
 {
-    //
-    u8 tempVar;
-    u8 attackerCoord;
-    u8 targetCoord;
-    //u32 
-    u8 battler; // battler
-
     sprite->data[0] = gBattleAnimArgs[0];
 
-    attackerCoord = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    targetCoord = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    if ((u8)(GetBattlerSpriteCoord(gAnimBankAttacker, 2)) <
+        (u8)(GetBattlerSpriteCoord(gAnimBankTarget, 2)))
 
-    // maybe these need to be temp vars
-    //if ((u8)(GetBattlerSpriteCoord(gAnimBankAttacker, 2) << 24) >
-    //    (u8)(GetBattlerSpriteCoord(gAnimBankTarget, 2) << 24))
-    if ((u32)attackerCoord > (u32)targetCoord) // there were << 24 here
-    {
-        // is this a temp var? or...
         sprite->data[7] = 0x8000;
-    }
 
-    // B_SIDE_PLAYER?
     if ((gBanksBySide[gAnimBankTarget] & 1) == 0)
     {
-        //
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 
         if ((sprite->data[7] & 0x8000) != 0
          && (gBanksBySide[gAnimBankAttacker] & 1) == 0)
-        {
-                // u8 spriteId = GetAnimBattlerSpriteId(1)
-                sprite->subpriority = gSprites[gBankSpriteIds[GetAnimBattlerSpriteId(1)]].subpriority + 1;
-        }
+
+            sprite->subpriority = gSprites[GetAnimBattlerSpriteId(1)].subpriority + 1;
+
         sprite->data[6] = 1; 
     }
-    //
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
 
-    if (gBattleAnimArgs[7] != 0)
+    if (gBattleAnimArgs[7])
     {
-        //
         sprite->data[1] = sprite->pos1.x + gBattleAnimArgs[1];
         sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2) + gBattleAnimArgs[3];
         sprite->data[3] = sprite->pos1.y + gBattleAnimArgs[2];
-        battler = gAnimBankAttacker;
-        tempVar = 3;
-    } // r1 = 3 ; r0 = gAnimBankAttacker
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[4];
+        sprite->data[7] |= sub_8079ED4(gAnimBankTarget) << 8;
+    }
     else
     {
-        //
         sprite->data[1] = sprite->pos1.x + gBattleAnimArgs[1];
         sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 0) + gBattleAnimArgs[3];
         sprite->data[3] = sprite->pos1.y + gBattleAnimArgs[2];
-        battler = gAnimBankTarget;
-        tempVar = 1;
-    } // r1 = 1 ; r0 = gAnimBankTarget
-    sprite->data[4] = GetBattlerSpriteCoord(battler, tempVar) + gBattleAnimArgs[4];
-    sprite->data[7] |= (u16)sub_8079ED4(battler);
+        sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[4];
+        sprite->data[7] |= sub_8079ED4(gAnimBankTarget) << 8;
+    } 
 
-    // + 
     if (IsContest() != 0)
     {
         sprite->data[6] = 1;
         sprite->subpriority = 0x80;
     }
 
-    InitAnimLinearTranslation(sprite); // +
-    sprite->callback = sub_80D8874; // +
+    InitAnimLinearTranslation(sprite);
+    sprite->callback = sub_80D8874;
 
 }
-#else
-NAKED void sub_80D8700(struct Sprite *sprite)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r8\n"
-                "\tpush {r7}\n"
-                "\tadds r5, r0, 0\n"
-                "\tldr r6, _080D87E8 @ =gBattleAnimArgs\n"
-                "\tldrh r0, [r6]\n"
-                "\tstrh r0, [r5, 0x2E]\n"
-                "\tldr r0, _080D87EC @ =gAnimBankAttacker\n"
-                "\tmov r8, r0\n"
-                "\tldrb r0, [r0]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tadds r4, r0, 0\n"
-                "\tldr r7, _080D87F0 @ =gAnimBankTarget\n"
-                "\tldrb r0, [r7]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r4, 24\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r4, r0\n"
-                "\tbcs _080D8734\n"
-                "\tmovs r0, 0x80\n"
-                "\tlsls r0, 8\n"
-                "\tstrh r0, [r5, 0x3C]\n"
-                "_080D8734:\n"
-                "\tldr r3, _080D87F4 @ =gBanksBySide\n"
-                "\tldrb r0, [r7]\n"
-                "\tadds r0, r3\n"
-                "\tldrb r1, [r0]\n"
-                "\tmovs r2, 0x1\n"
-                "\tadds r0, r2, 0\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8794\n"
-                "\tldrh r0, [r6, 0x2]\n"
-                "\tnegs r0, r0\n"
-                "\tstrh r0, [r6, 0x2]\n"
-                "\tldrh r0, [r6, 0x6]\n"
-                "\tnegs r0, r0\n"
-                "\tstrh r0, [r6, 0x6]\n"
-                "\tmovs r1, 0x3C\n"
-                "\tldrsh r0, [r5, r1]\n"
-                "\tmovs r1, 0x80\n"
-                "\tlsls r1, 8\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D8790\n"
-                "\tmov r1, r8\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, r3\n"
-                "\tldrb r1, [r0]\n"
-                "\tadds r0, r2, 0\n"
-                "\tands r0, r1\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8790\n"
-                "\tmovs r0, 0x1\n"
-                "\tbl GetAnimBattlerSpriteId\n"
-                "\tldr r2, _080D87F8 @ =gSprites\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tlsls r1, r0, 4\n"
-                "\tadds r1, r0\n"
-                "\tlsls r1, 2\n"
-                "\tadds r1, r2\n"
-                "\tadds r1, 0x43\n"
-                "\tldrb r0, [r1]\n"
-                "\tadds r0, 0x1\n"
-                "\tadds r1, r5, 0\n"
-                "\tadds r1, 0x43\n"
-                "\tstrb r0, [r1]\n"
-                "_080D8790:\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r5, 0x3A]\n"
-                "_080D8794:\n"
-                "\tldr r4, _080D87EC @ =gAnimBankAttacker\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstrh r0, [r5, 0x20]\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x3\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tstrh r0, [r5, 0x22]\n"
-                "\tldr r6, _080D87E8 @ =gBattleAnimArgs\n"
-                "\tmovs r1, 0xE\n"
-                "\tldrsh r0, [r6, r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D87FC\n"
-                "\tldrh r0, [r6, 0x2]\n"
-                "\tldrh r1, [r5, 0x20]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x30]\n"
-                "\tldr r4, _080D87F0 @ =gAnimBankTarget\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x2\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tldrh r1, [r6, 0x6]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x32]\n"
-                "\tldrh r0, [r6, 0x4]\n"
-                "\tldrh r1, [r5, 0x22]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x34]\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x3\n"
-                "\tb _080D8824\n"
-                "\t.align 2, 0\n"
-                "_080D87E8: .4byte gBattleAnimArgs\n"
-                "_080D87EC: .4byte gAnimBankAttacker\n"
-                "_080D87F0: .4byte gAnimBankTarget\n"
-                "_080D87F4: .4byte gBanksBySide\n"
-                "_080D87F8: .4byte gSprites\n"
-                "_080D87FC:\n"
-                "\tldrh r0, [r6, 0x2]\n"
-                "\tldrh r1, [r5, 0x20]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x30]\n"
-                "\tldr r4, _080D886C @ =gAnimBankTarget\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tldrh r1, [r6, 0x6]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x32]\n"
-                "\tldrh r0, [r6, 0x4]\n"
-                "\tldrh r1, [r5, 0x22]\n"
-                "\tadds r0, r1\n"
-                "\tstrh r0, [r5, 0x34]\n"
-                "\tldrb r0, [r4]\n"
-                "\tmovs r1, 0x1\n"
-                "_080D8824:\n"
-                "\tbl GetBattlerSpriteCoord\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tldrh r6, [r6, 0x8]\n"
-                "\tadds r0, r6\n"
-                "\tstrh r0, [r5, 0x36]\n"
-                "\tldrb r0, [r4]\n"
-                "\tbl sub_8079ED4\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 16\n"
-                "\tldrh r1, [r5, 0x3C]\n"
-                "\torrs r0, r1\n"
-                "\tstrh r0, [r5, 0x3C]\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D8858\n"
-                "\tmovs r0, 0x1\n"
-                "\tstrh r0, [r5, 0x3A]\n"
-                "\tadds r1, r5, 0\n"
-                "\tadds r1, 0x43\n"
-                "\tmovs r0, 0x80\n"
-                "\tstrb r0, [r1]\n"
-                "_080D8858:\n"
-                "\tadds r0, r5, 0\n"
-                "\tbl InitAnimLinearTranslation\n"
-                "\tldr r0, _080D8870 @ =sub_80D8874\n"
-                "\tstr r0, [r5, 0x1C]\n"
-                "\tpop {r3}\n"
-                "\tmov r8, r3\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D886C: .4byte gAnimBankTarget\n"
-                "_080D8870: .4byte sub_80D8874");
-}
-#endif // NONMATCHING
 
 #ifdef NONMATCHING
 // https://pastebin.com/8wvBFV2F
@@ -2912,7 +2456,7 @@ void sub_80D8AF8(u8 taskId)
     // _78
     task->data[0] += 1;
 
-    return;
+    //return;
 }
 #else
 NAKED void sub_80D8AF8(u8 taskId)
@@ -3014,8 +2558,16 @@ NAKED void sub_80D8AF8(u8 taskId)
 }
 #endif // NONMATCHING
 
-// NOT MATCHING / NONMATCHING
-NAKED void sub_80D8BA8(u8 taskId)
+/*
+// NOT  NONMATCHING
+void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(u8 taskId)
+{
+    //
+    //struct Task *task = &gTasks[taskId];
+    //u16 i, j;
+} */
+
+NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//spriteId, u8 taskId, u8 a3)//(u8 taskId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -3193,7 +2745,7 @@ NAKED void sub_80D8BA8(u8 taskId)
                 "\tpop {r4-r7}\n"
                 "\tpop {r1}\n"
                 "\tbx r1");
-}
+}//*/
 
 // MATCHING
 void sub_80D8D1C(struct Sprite *sprite)
@@ -3307,125 +2859,34 @@ void sub_80D8F10(struct Sprite *sprite)
     sprite->callback = sub_80D8F74;
 }
 
-#ifdef NONMATCHING
-// NONMATCHING
+// MATCHING
 void sub_80D8F74(struct Sprite *sprite)
 {
-    //
-    s16 r0;
-
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
 
-    if ((sprite->data[1] & 1) != 0)
-    {
-        //
-        r0 = -(sprite->data[1] + sprite->data[3]); // problem 1
-    }
+    if (sprite->data[1] & 1)
+        sprite->pos2.x = -(sprite->data[3] >> 8);
+
     else
-    {
-        r0 = (sprite->data[1] + sprite->data[3]); // problem 2
-    }
+        sprite->pos2.x = sprite->data[3] >> 8;
 
-    sprite->pos2.x = r0;
-    sprite->pos2.y = sprite->data[4];
+    sprite->pos2.y = sprite->data[4] >> 8;
 
-    sprite->data[0]++;
-
-    if (sprite->data[0] == 0x15)
-    {
+    if (++sprite->data[0] == 21)
         DestroyAnimSprite(sprite);
-    }
 }
-#else
-NAKED void sub_80D8F74(struct Sprite *sprite)
-{
-    asm_unified("\tpush {r4,lr}\n"
-                "\tadds r2, r0, 0\n"
-                "\tldrh r0, [r2, 0x30]\n"
-                "\tldrh r1, [r2, 0x34]\n"
-                "\tadds r3, r0, r1\n"
-                "\tstrh r3, [r2, 0x34]\n"
-                "\tldrh r1, [r2, 0x32]\n"
-                "\tldrh r4, [r2, 0x36]\n"
-                "\tadds r1, r4\n"
-                "\tstrh r1, [r2, 0x36]\n"
-                "\tmovs r1, 0x1\n"
-                "\tands r1, r0\n"
-                "\tcmp r1, 0\n"
-                "\tbeq _080D8F98\n"
-                "\tlsls r0, r3, 16\n"
-                "\tasrs r0, 24\n"
-                "\tnegs r0, r0\n"
-                "\tb _080D8F9C\n"
-                "_080D8F98:\n"
-                "\tlsls r0, r3, 16\n"
-                "\tasrs r0, 24\n"
-                "_080D8F9C:\n"
-                "\tstrh r0, [r2, 0x24]\n"
-                "\tldrh r0, [r2, 0x36]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 24\n"
-                "\tstrh r0, [r2, 0x26]\n"
-                "\tldrh r0, [r2, 0x2E]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r2, 0x2E]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x15\n"
-                "\tbne _080D8FBA\n"
-                "\tadds r0, r2, 0\n"
-                "\tbl DestroyAnimSprite\n"
-                "_080D8FBA:\n"
-                "\tpop {r4}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING
 // should be counter for icicle spear?
-// 
-void sub_80D8FC0(u8 taskId)//struct Sprite *sprte)
+// MATCHING
+void sub_80D8FC0(u8 taskId)
 {
-    // 
-    ///u8 r3 = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
-    gBattleAnimArgs[3] = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;//r3;
-    ///gBattleAnimArgs[3] = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
-    //s16 r0[] = *gBattleAnimArgs;
-    //r0 = r0 << 1;
-    //r0 = r0 + *gBattleAnimArgs;
-    //&r0 = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
+    u8 arg = gBattleAnimArgs[0];
 
+    gBattleAnimArgs[arg] = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
+    
     DestroyAnimVisualTask(taskId);
 }
-#else
-NAKED void sub_80D8FC0(u8 taskId)
-{
-    asm_unified("\tpush {lr}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r0, 24\n"
-                "\tldr r1, _080D8FE8 @ =gBattleAnimArgs\n"
-                "\tldrb r3, [r1]\n"
-                "\tlsls r3, 1\n"
-                "\tadds r3, r1\n"
-                "\tldr r1, _080D8FEC @ =gAnimDisableStructPtr\n"
-                "\tldr r1, [r1]\n"
-                "\tldrb r1, [r1, 0x11]\n"
-                "\tlsrs r2, r1, 4\n"
-                "\tlsls r1, 28\n"
-                "\tlsrs r1, 28\n"
-                "\tsubs r2, r1\n"
-                "\tsubs r2, 0x1\n"
-                "\tstrh r2, [r3]\n"
-                "\tbl DestroyAnimVisualTask\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D8FE8: .4byte gBattleAnimArgs\n"
-                "_080D8FEC: .4byte gAnimDisableStructPtr");
-}
-#endif // NONMATCHING
 
-// 20 MATCHING
-// 11 NONMATCHING / NAKED smh
+// 26 MATCHING
+// 05 NONMATCHING (1 NAKED)
