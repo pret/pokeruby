@@ -762,7 +762,7 @@ static void sub_80A39B8(u16 *a, u8 b)
 {
     u8 var = b * 2;
 
-    sub_809D104(a, 4, 10, gUnknown_08E96EC8, 0, var, 8, 2);
+    sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, 0, var, 8, 2);
 }
 
 static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
@@ -776,8 +776,8 @@ static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
         if (b == 5)
             r7 = 2;
 
-        sub_809D104(a, 4, 10, gUnknown_08E96EC8, 8 - c, r2, c, 2);
-        sub_809D104(a, c + 4, 10, gUnknown_08E96EC8, 0, r7, 8 - c, 2);
+        sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, 8 - c, r2, c, 2);
+        sub_809D104(a, c + 4, 10, gBagScreenLabels_Tilemap, 0, r7, 8 - c, 2);
     }
     else if (d == 1)
     {
@@ -785,8 +785,8 @@ static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
         if (b == 1)
             r7 = 10;
 
-        sub_809D104(a, 4, 10, gUnknown_08E96EC8, c, r7, 8 - c, 2);
-        sub_809D104(a, 12 - c, 10, gUnknown_08E96EC8, 0, r2, c, 2);
+        sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, c, r7, 8 - c, 2);
+        sub_809D104(a, 12 - c, 10, gBagScreenLabels_Tilemap, 0, r2, c, 2);
     }
 }
 
