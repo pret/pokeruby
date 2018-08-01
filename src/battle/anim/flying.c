@@ -36,8 +36,6 @@ void sub_80DB5E4(struct Sprite *sprite);
 
 void sub_80DA0DC(u8 taskId);
 
-u32 sub_80DA6F0(u32 a1);
-
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA380 =
 {
     .tileTag = 10009,
@@ -699,7 +697,7 @@ void sub_80DA4D8(struct Sprite *sprite ) {
     if ((u16)(arg2byte - 64) <= 0x7f){
         
         if (gMain.inBattle) {
-            sprite->oam.priority = sub_8079ED4(bank) + 1;            
+            sprite->oam.priority = sub_8079ED4(bank) + 1u;
         } else { 
             sprite->oam.priority = sub_8079ED4(bank);
         }
@@ -753,3 +751,22 @@ void sub_80DA4D8(struct Sprite *sprite ) {
     sprite->callback = (SpriteCallback) sub_80DA6F0;
 
 }
+
+void sub_80DA6F0(struct Sprite *sprite) {
+
+    int r6 = 0;
+    s16* data = sprite->data;
+    u8 dataByte;
+
+    dataByte = (u8)data[0];
+    r7 = 1;
+    r1 = 1;
+    r9 = r1;
+
+    if (dataByte & 1) {
+        r3 = data;
+        dataByte = data[1];
+        data[1] = dataByte + 0xff;
+    }
+
+};
