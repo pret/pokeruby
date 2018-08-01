@@ -36,7 +36,7 @@ void sub_80DB5E4(struct Sprite *sprite);
 
 void sub_80DA0DC(u8 taskId);
 
-int sub_80DA6F0(int a1);
+u32 sub_80DA6F0(u32 a1);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA380 =
 {
@@ -643,21 +643,19 @@ void sub_80DA4D8(struct Sprite *sprite ) {
     s16 * data;
     u8 bank;
     s16 spriteCoord;
-    s16 v6;
     
-    u32 t1, t2;
+    u32 t1;
+    u16 t2;
     
-    int v7;
-    int v8;
+    u32 v7;
+    u8 arg2byte;
     
     u32 matrixNum;
     
-    int sinVal1;  
-    int v14;
-    //s16 sinVal2;
-    //int temp;
+    //int sinVal1;  
+    u8 v14;
     register s16 sinVal2 asm ("r4");
-    register int temp asm ("r0");
+    register int sinVal3 asm ("r0");
     
     data = sprite->data;
     
@@ -672,29 +670,33 @@ void sub_80DA4D8(struct Sprite *sprite ) {
     } 
     
     sprite->pos1.x = GetBattlerSpriteCoord(bank, 0) + gBattleAnimArgs[0];
+
+    spriteCoord = GetBattlerSpriteCoord(bank, 1);
     
-    spriteCoord = (u8) GetBattlerSpriteCoord(bank, 1u); 
-    v6 = spriteCoord + gBattleAnimArgs[1];
     sprite->pos1.y = spriteCoord + gBattleAnimArgs[1];
-    data[4] = v6 << 8;
+    data[4] = sprite->pos1.y << 8;
 
-    t1 = 2 * (spriteCoord + (u16)gBattleAnimArgs[6]);
-    data[7] = (data[7] & 1) | t1;    
-
-    *(u8*)data |= 4u;
+    // keep lowest bit of data[7] replace other bits from coord + animarg[6]
+    //arg6 = gBattleAnimArgs[6];
+    t1 = (spriteCoord + (u16)gBattleAnimArgs[6]) << 1;
+    data[7] = (data[7] & 1) | t1;   
+    
+    // 3rd bit of data[0] = 1
+    // needs to store a byte
+    *(u8*)data |= 4;
     
     v7 = (u16) gBattleAnimArgs[2];
-    v8 = (u8) gBattleAnimArgs[2];
+    arg2byte = gBattleAnimArgs[2]; // (u8)
     
-    data[1] = (u8) gBattleAnimArgs[2];
+    data[1] = arg2byte;
     v7 = v7 << 16;
-    v7 = ((u32)v7) >> 24;
-    data[5] = v7;
+    v7 = v7 >> 16;
+    data[5] = v7 >> 8;
     data[2] = gBattleAnimArgs[3];
     data[3] = gBattleAnimArgs[4];
     data[6] = gBattleAnimArgs[5];
     
-    if ((u16)(v8 - 64) <= 0x7f){
+    if ((u16)(arg2byte - 64) <= 0x7f){
         
         if (gMain.inBattle) {
             sprite->oam.priority = sub_8079ED4(bank) + 1;            
@@ -736,18 +738,17 @@ void sub_80DA4D8(struct Sprite *sprite ) {
     t2 = (u16)data[1] >> 6 << 4;
     *(u8*)data = (15 & (u8)data[0]) | t2; 
     
-    sinVal1 = gSineTable[(u16)data[1]];
-    sprite->pos2.x = (sinVal1 * (u8)data[6]) >> 8;
+    sprite->pos2.x = (gSineTable[(u16)data[1]] * (u8)data[6]) >> 8;
     
     matrixNum = sprite->oam.matrixNum;
     
-    v14 = (u8) ((-sprite->pos2.x >> 1) + (u8)data[5]);
+    v14 = (-sprite->pos2.x >> 1) + (u8)data[5];
     sinVal2 = gSineTable[v14];
         
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d  = gSineTable[v14 + 64];
     gOamMatrices[matrixNum].b = sinVal2;
-    temp = - (s16) sinVal2;
-    gOamMatrices[matrixNum].c = temp;
+    sinVal3 = - sinVal2;
+    gOamMatrices[matrixNum].c = sinVal3;
     
     sprite->callback = (SpriteCallback) sub_80DA6F0;
 
