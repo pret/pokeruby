@@ -4024,7 +4024,7 @@ static int sub_80A7988(void)
 }
 
 static const u16 gPalette_83C170C[] = INCBIN_U16("graphics/unknown/83C170C.gbapal");
-static const u8 gSpriteImage_83C172C[] = INCBIN_U8("graphics/unknown_sprites/83C172C.4bpp");
+static const u8 gSpriteImage_BagSpinner[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
 
 const u8 gSpriteImage_UnusedCherry[] = INCBIN_U8("graphics/unused/cherry.4bpp");
 const u16 gSpritePalette_UnusedCherry[] = INCBIN_U16("graphics/unused/cherry.gbapal");
@@ -4258,7 +4258,7 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_83C1D20[] =
 
 static const struct SpriteFrameImage gSpriteImageTable_83C1D28[] =
 {
-    {gSpriteImage_83C172C, sizeof(gSpriteImage_83C172C)},
+    {gSpriteImage_BagSpinner, sizeof(gSpriteImage_BagSpinner)},
 };
 
 static const struct SpritePalette sPokeballSpritePalette = {gPalette_83C170C, 8};
