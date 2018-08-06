@@ -126,7 +126,7 @@ extern void sub_802DEAC(void);
 extern void sub_80312F0(struct Sprite *);
 extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
-extern u8 sub_8046400();
+extern u8 StartSendOutMonAnimation();
 extern void sub_802D798(void);
 extern void bx_0802E404(void);
 extern u8 gActiveBattler;
@@ -2523,7 +2523,7 @@ void sub_802F934(u8 bank, u8 b)
     StartSpriteAnim(&gSprites[gBankSpriteIds[bank]], gBattleMonForms[bank]);
     gSprites[gBankSpriteIds[bank]].invisible = TRUE;
     gSprites[gBankSpriteIds[bank]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[bank]].data[0] = sub_8046400(0, 0xFF);
+    gSprites[gUnknown_0300434C[bank]].data[0] = StartSendOutMonAnimation(0, 0xFF);
 }
 
 void PlayerHandleReturnPokeToBall(void)
