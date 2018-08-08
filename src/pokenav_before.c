@@ -19,6 +19,7 @@
 #include "task.h"
 #include "text.h"
 #include "scanline_effect.h"
+#include "pokemon_storage_system.h"
 
 struct UnknownPokenav0
 {
@@ -189,7 +190,6 @@ extern void sub_80EFC3C(void);
 extern void sub_80EF624(const u16 *, const u16 *, u8, u8, u16 *);
 extern void sub_80EF7D4(void);
 extern void sub_80EF54C(u8);
-extern void sub_809D104(u16 *, u16, u16, const u8 *, u16, u16, u16, u16);
 extern void sub_80EF58C(u8);
 extern void sub_80F6FFC();
 extern void sub_80F3294();

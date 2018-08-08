@@ -339,7 +339,6 @@ gBattleMonForms = .; /* 2024E84 */
 . = ALIGN(4); src/pokemon_storage_system_2.o(ewram_data);
 . = ALIGN(4); src/pokemon_storage_system_3.o(ewram_data);
 . = ALIGN(4); src/pokemon_storage_system_4.o(ewram_data);
-. = ALIGN(4); src/pokemon_storage_system_5.o(ewram_data);
 . = ALIGN(4); src/pokemon_summary_screen.o(ewram_data);
 . = ALIGN(4); src/script_movement.o(ewram_data);
 . = ALIGN(4); src/map_name_popup.o(ewram_data);

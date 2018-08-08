@@ -203,7 +203,7 @@ gSpecials::
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch
-	def_special sub_8042B4C
+	def_special DaycareMonReceivedMail
 	def_special ShowLinkBattleRecords
 	def_special HasEnoughMoneyFor
 	def_special PayMoneyFor
@@ -240,7 +240,7 @@ gSpecials::
 	def_special UpdateCyclingRoadState
 	def_special GetLeadMonFriendshipScore
 	def_special sub_8134548
-	def_special sub_81347F8
+	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist
 	def_special PrintBattleTowerTrainerGreeting
 	def_special PrintEReaderTrainerGreeting

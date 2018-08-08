@@ -1,7 +1,7 @@
 Route111_EventScript_1AE313:: @ 81AE313
 Route118_EventScript_1AE313:: @ 81AE313
 Route120_EventScript_1AE313:: @ 81AE313
-	cleartrainerflag OPPONENT_GABBY_AND_TY_6
+	cleartrainerflag TRAINER_GABBY_AND_TY_6
 	specialvar RESULT, GabbyAndTyGetBattleNum
 	switch RESULT
 	case 0, Route111_EventScript_1AE384
@@ -124,61 +124,61 @@ Route111_EventScript_1AE41E:: @ 81AE41E
 	return
 
 Route111_EventScript_1AE422:: @ 81AE422
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_1, 0, Route111_Text_1ABED8, Route111_Text_1ABFD3, Route111_Text_1AC5CA, Route111_EventScript_1AE5A2
+	trainerbattle 6, TRAINER_GABBY_AND_TY_1, 0, Route111_Text_1ABED8, Route111_Text_1ABFD3, Route111_Text_1AC5CA, Route111_EventScript_1AE5A2
 	msgbox Route111_Text_1AC59E, 4
 	release
 	end
 
 Route111_EventScript_1AE442:: @ 81AE442
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_1, 0, Route111_Text_1AC73B, Route111_Text_1AC892, Route111_Text_1AC820, Route111_EventScript_1AE5A2
+	trainerbattle 6, TRAINER_GABBY_AND_TY_1, 0, Route111_Text_1AC73B, Route111_Text_1AC892, Route111_Text_1AC820, Route111_EventScript_1AE5A2
 	msgbox Route111_Text_1AC7E4, 4
 	release
 	end
 
 Route118_EventScript_1AE462:: @ 81AE462
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_2, 0, Route118_Text_1ABF50, Route118_Text_1AC6F8, Route118_Text_1AC5CA, Route118_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_2, 0, Route118_Text_1ABF50, Route118_Text_1AC6F8, Route118_Text_1AC5CA, Route118_EventScript_1AE60F
 	msgbox Route118_Text_1AC59E, 4
 	release
 	end
 
 Route118_EventScript_1AE482:: @ 81AE482
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_2, 0, Route118_Text_1AC790, Route118_Text_1AC8D7, Route118_Text_1AC820, Route118_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_2, 0, Route118_Text_1AC790, Route118_Text_1AC8D7, Route118_Text_1AC820, Route118_EventScript_1AE60F
 	msgbox Route118_Text_1AC7E4, 4
 	release
 	end
 
 Route120_EventScript_1AE4A2:: @ 81AE4A2
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_3, 0, Route120_Text_1ABF50, Route120_Text_1AC6F8, Route120_Text_1AC5CA, Route120_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_3, 0, Route120_Text_1ABF50, Route120_Text_1AC6F8, Route120_Text_1AC5CA, Route120_EventScript_1AE60F
 	msgbox Route120_Text_1AC59E, 4
 	release
 	end
 
 Route120_EventScript_1AE4C2:: @ 81AE4C2
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_3, 0, Route120_Text_1AC790, Route120_Text_1AC8D7, Route120_Text_1AC820, Route120_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_3, 0, Route120_Text_1AC790, Route120_Text_1AC8D7, Route120_Text_1AC820, Route120_EventScript_1AE60F
 	msgbox Route120_Text_1AC7E4, 4
 	release
 	end
 
 Route111_EventScript_1AE4E2:: @ 81AE4E2
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_4, 0, Route111_Text_1ABF50, Route111_Text_1AC6F8, Route111_Text_1AC5CA, Route111_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_4, 0, Route111_Text_1ABF50, Route111_Text_1AC6F8, Route111_Text_1AC5CA, Route111_EventScript_1AE60F
 	msgbox Route111_Text_1AC59E, 4
 	release
 	end
 
 Route111_EventScript_1AE502:: @ 81AE502
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_4, 0, Route111_Text_1AC790, Route111_Text_1AC8D7, Route111_Text_1AC820, Route111_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_4, 0, Route111_Text_1AC790, Route111_Text_1AC8D7, Route111_Text_1AC820, Route111_EventScript_1AE60F
 	msgbox Route111_Text_1AC7E4, 4
 	release
 	end
 
 Route118_EventScript_1AE522:: @ 81AE522
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_5, 0, Route118_Text_1ABF50, Route118_Text_1AC6F8, Route118_Text_1AC5CA, Route118_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_5, 0, Route118_Text_1ABF50, Route118_Text_1AC6F8, Route118_Text_1AC5CA, Route118_EventScript_1AE60F
 	msgbox Route118_Text_1AC59E, 4
 	release
 	end
 
 Route118_EventScript_1AE542:: @ 81AE542
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_5, 0, Route118_Text_1AC790, Route118_Text_1AC8D7, Route118_Text_1AC820, Route118_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_5, 0, Route118_Text_1AC790, Route118_Text_1AC8D7, Route118_Text_1AC820, Route118_EventScript_1AE60F
 	msgbox Route118_Text_1AC7E4, 4
 	release
 	end
@@ -186,7 +186,7 @@ Route118_EventScript_1AE542:: @ 81AE542
 Route111_EventScript_1AE562:: @ 81AE562
 Route118_EventScript_1AE562:: @ 81AE562
 Route120_EventScript_1AE562:: @ 81AE562
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_6, 0, Route111_Text_1ABF50, Route111_Text_1AC6F8, Route111_Text_1AC5CA, Route111_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_6, 0, Route111_Text_1ABF50, Route111_Text_1AC6F8, Route111_Text_1AC5CA, Route111_EventScript_1AE60F
 	msgbox Route111_Text_1AC59E, 4
 	release
 	end
@@ -194,7 +194,7 @@ Route120_EventScript_1AE562:: @ 81AE562
 Route111_EventScript_1AE582:: @ 81AE582
 Route118_EventScript_1AE582:: @ 81AE582
 Route120_EventScript_1AE582:: @ 81AE582
-	trainerbattle 6, OPPONENT_GABBY_AND_TY_6, 0, Route111_Text_1AC790, Route111_Text_1AC8D7, Route111_Text_1AC820, Route111_EventScript_1AE60F
+	trainerbattle 6, TRAINER_GABBY_AND_TY_6, 0, Route111_Text_1AC790, Route111_Text_1AC8D7, Route111_Text_1AC820, Route111_EventScript_1AE60F
 	msgbox Route111_Text_1AC7E4, 4
 	release
 	end

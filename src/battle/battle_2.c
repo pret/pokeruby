@@ -1055,7 +1055,7 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             {
             case 0:
             {
-                const struct TrainerPartyMember0 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1064,9 +1064,9 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 CreateMon(&party[i], partyData[i].species, partyData[i].level, fixedIV, TRUE, personalityValue, 2, 0);
                 break;
             }
-            case 1:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
-                const struct TrainerPartyMember1 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1081,9 +1081,9 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 }
                 break;
             }
-            case 2:
+            case F_TRAINER_PARTY_HELD_ITEM:
             {
-                const struct TrainerPartyMember2 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1094,9 +1094,9 @@ u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
             }
-            case 3:
+            case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
-                const struct TrainerPartyMember3 *partyData = gTrainers[trainerNum].party;
+                const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != 0xFF; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];

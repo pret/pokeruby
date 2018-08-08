@@ -5,7 +5,7 @@
 #define TRAINER_REMATCH_STEPS 255
 
 // IV + LEVEL + SPECIES
-struct TrainerPartyMember0
+struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
     u8 level;
@@ -13,7 +13,7 @@ struct TrainerPartyMember0
 };
 
 // IV + LEVEL + SPECIES + MOVES
-struct TrainerPartyMember1
+struct TrainerMonNoItemCustomMoves
 {
     u16 iv;
     u8 level;
@@ -22,7 +22,7 @@ struct TrainerPartyMember1
 };
 
 // IV + LEVEL + SPECIES + ITEMS
-struct TrainerPartyMember2
+struct TrainerMonItemDefaultMoves
 {
     u16 iv;
     u8 level;
@@ -31,7 +31,7 @@ struct TrainerPartyMember2
 };
 
 // IV + LEVEL + SPECIES + ITEMS + MOVES
-struct TrainerPartyMember3
+struct TrainerMonItemCustomMoves
 {
     u16 iv;
     u8 level;

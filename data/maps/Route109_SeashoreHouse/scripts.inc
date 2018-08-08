@@ -76,24 +76,24 @@ Route109_SeashoreHouse_EventScript_160EAB:: @ 8160EAB
 	end
 
 Route109_SeashoreHouse_EventScript_160EB8:: @ 8160EB8
-	trainerbattle 2, OPPONENT_DWAYNE, 0, Route109_SeashoreHouse_Text_19B809, Route109_SeashoreHouse_Text_19B869, Route109_SeashoreHouse_EventScript_160F09
+	trainerbattle 2, TRAINER_DWAYNE, 0, Route109_SeashoreHouse_Text_19B809, Route109_SeashoreHouse_Text_19B869, Route109_SeashoreHouse_EventScript_160F09
 	msgbox Route109_SeashoreHouse_Text_19B89F, 6
 	end
 
 Route109_SeashoreHouse_EventScript_160ED3:: @ 8160ED3
-	trainerbattle 2, OPPONENT_JOHANNA, 0, Route109_SeashoreHouse_Text_19B8E5, Route109_SeashoreHouse_Text_19B949, Route109_SeashoreHouse_EventScript_160F09
+	trainerbattle 2, TRAINER_JOHANNA, 0, Route109_SeashoreHouse_Text_19B8E5, Route109_SeashoreHouse_Text_19B949, Route109_SeashoreHouse_EventScript_160F09
 	msgbox Route109_SeashoreHouse_Text_19B955, 6
 	end
 
 Route109_SeashoreHouse_EventScript_160EEE:: @ 8160EEE
-	trainerbattle 2, OPPONENT_SIMON, 0, Route109_SeashoreHouse_Text_19B988, Route109_SeashoreHouse_Text_19B9C7, Route109_SeashoreHouse_EventScript_160F09
+	trainerbattle 2, TRAINER_SIMON, 0, Route109_SeashoreHouse_Text_19B988, Route109_SeashoreHouse_Text_19B9C7, Route109_SeashoreHouse_EventScript_160F09
 	msgbox Route109_SeashoreHouse_Text_19B9E5, 6
 	end
 
 Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
-	goto_if_trainer_not_defeated OPPONENT_DWAYNE, Route109_SeashoreHouse_EventScript_160F29
-	goto_if_trainer_not_defeated OPPONENT_JOHANNA, Route109_SeashoreHouse_EventScript_160F29
-	goto_if_trainer_not_defeated OPPONENT_SIMON, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated TRAINER_DWAYNE, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated TRAINER_JOHANNA, Route109_SeashoreHouse_EventScript_160F29
+	goto_if_trainer_not_defeated TRAINER_SIMON, Route109_SeashoreHouse_EventScript_160F29
 	setflag FLAG_DEFEATED_SEASHORE_HOUSE_TRAINERS
 	release
 	end

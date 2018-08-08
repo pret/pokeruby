@@ -176,7 +176,7 @@ struct SecretBaseRecord
     /*0x1A19*/ u8 sbr_field_11;
     /*0x1A1A*/ u8 decorations[16];
     /*0x1A2A*/ u8 decorationPos[16];
-    /*0x1A3A*/ u32 partyPersonality[6];
+    /*0x1A3C*/ u32 partyPersonality[6];
     /*0x1A54*/ u16 partyMoves[6 * 4];
     /*0x1A84*/ u16 partySpecies[6];
     /*0x1A90*/ u16 partyHeldItems[6];
@@ -808,7 +808,7 @@ struct BattleTowerData
     /*0x04BC, 0x0564*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
     /*0x04BD, 0x0565*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.
     /*0x04C0, 0x0568*/ u16 prizeItem;
-    /*0x04C2, 0x056A*/ u8 filler_4C2[0x6];
+    /*0x04C2, 0x056A*/ u8 battledTrainerIds[6];
     /*0x04C8, 0x0570*/ u16 totalBattleTowerWins;
     /*0x04CA, 0x0572*/ u16 bestBattleTowerWinStreak;
     /*0x04CC, 0x0574*/ u16 currentWinStreaks[2];

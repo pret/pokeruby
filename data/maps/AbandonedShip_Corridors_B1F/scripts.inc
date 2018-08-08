@@ -50,6 +50,6 @@ AbandonedShip_Corridors_B1F_EventScript_15EA14:: @ 815EA14
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_15EA1E:: @ 815EA1E
-	trainerbattle 0, OPPONENT_DUNCAN, 0, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
+	trainerbattle 0, TRAINER_DUNCAN, 0, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
 	msgbox AbandonedShip_Corridors_B1F_Text_1985D7, 6
 	end

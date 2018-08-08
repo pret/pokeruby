@@ -310,7 +310,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	faceplayer
 	playbgm MUS_EVIL_TEAM, FALSE
 	msgbox RusturfTunnel_Text_19419B, 4
-	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
+	trainerbattle 3, TRAINER_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
 	giveitem_std ITEM_DEVON_GOODS
 	closemessage
@@ -415,6 +415,6 @@ RusturfTunnel_Movement_15CAC3:: @ 815CAC3
 	end_movement
 
 RusturfTunnel_EventScript_15CACD:: @ 815CACD
-	trainerbattle 0, OPPONENT_MIKE_2, 0, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2
+	trainerbattle 0, TRAINER_MIKE_2, 0, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2
 	msgbox RusturfTunnel_Text_1948C4, 6
 	end
