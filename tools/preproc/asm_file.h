@@ -21,52 +21,32 @@
 #ifndef ASM_FILE_H
 #define ASM_FILE_H
 
-#include <cstdarg>
-#include <cstdint>
-#include <string>
 #include "preproc.h"
 
-enum class Directive
+#include <stdarg.h>
+#include <stdint.h>
+#include "my_string.h"
+
+typedef enum Directive
 {
-    Include,
-    String,
-    Braille,
-    Unknown
-};
+    Directive_Include,
+    Directive_String,
+    Directive_Braille,
+    Directive_Unknown
+} Directive;
 
-class AsmFile
-{
-public:
-    AsmFile(std::string filename);
-    AsmFile(AsmFile&& other);
-    AsmFile(const AsmFile&) = delete;
-    ~AsmFile();
-    Directive GetDirective();
-    std::string GetGlobalLabel();
-    std::string ReadPath();
-    int ReadString(unsigned char* s);
-    int ReadBraille(unsigned char* s);
-    bool IsAtEnd();
-    void OutputLine();
-    void OutputLocation();
+struct AsmFile;
+typedef struct AsmFile AsmFile;
 
-private:
-    char* m_buffer;
-    long m_pos;
-    long m_size;
-    long m_lineNum;
-    long m_lineStart;
-    std::string m_filename;
+AsmFile *AsmFile_New(string *filename, string *data);
+void AsmFile_Delete(AsmFile *m);
+Directive AsmFile_GetDirective(AsmFile *m);
+string *AsmFile_GetGlobalLabel(AsmFile *m);
+string *AsmFile_ReadPath(AsmFile *m);
+int AsmFile_ReadString(AsmFile *r m, unsigned char *r s);
+int AsmFile_ReadBraille(AsmFile *r m, unsigned char *r s);
+bool AsmFile_IsAtEnd(AsmFile *m);
+void AsmFile_OutputLine(AsmFile *m);
+void AsmFile_OutputLocation(AsmFile *m);
 
-    bool ConsumeComma();
-    int ReadPadLength();
-    void RemoveComments();
-    bool CheckForDirective(std::string name);
-    void SkipWhitespace();
-    void ExpectEmptyRestOfLine();
-    void ReportDiagnostic(const char* type, const char* format, std::va_list args);
-    void RaiseError(const char* format, ...);
-    void RaiseWarning(const char* format, ...);
-};
-
-#endif // ASM_FILE_H
+#endif  // ASM_FILE_H

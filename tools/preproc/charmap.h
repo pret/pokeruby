@@ -21,44 +21,27 @@
 #ifndef CHARMAP_H
 #define CHARMAP_H
 
-#include <cstdint>
-#include <string>
-#include <map>
-#include <vector>
+#include "preproc.h"
 
-class Charmap
+#include <stdint.h>
+
+#include "my_string.h"
+#include "hash_map.h"
+
+typedef struct Charmap
 {
-public:
-    Charmap(std::string filename);
+    HashMap *chars;
+    string *escapes[128];
+    HashMap *constants;
+} Charmap;
 
-    std::string Char(std::int32_t code)
-    {
-        auto it = m_chars.find(code);
+string *Charmap_Char(Charmap *m, int32_t code);
 
-        if (it == m_chars.end())
-            return std::string();
+inline static string *Charmap_Escape(Charmap *m, uint8_t code) { return m->escapes[code]; }
 
-        return it->second;
-    }
+string *Charmap_Constant(Charmap *r m, const string *r identifier);
 
-    std::string Escape(unsigned char code)
-    {
-        return m_escapes[code];
-    }
+Charmap *Charmap_New(char *filename);
+void Charmap_Delete(Charmap *m);
 
-    std::string Constant(std::string identifier)
-    {
-        auto it = m_constants.find(identifier);
-
-        if (it == m_constants.end())
-            return std::string();
-
-        return it->second;
-    }
-private:
-    std::map<std::int32_t, std::string> m_chars;
-    std::string m_escapes[128];
-    std::map<std::string, std::string> m_constants;
-};
-
-#endif // CHARMAP_H
+#endif  // CHARMAP_H

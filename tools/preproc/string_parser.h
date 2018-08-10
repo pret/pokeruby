@@ -21,35 +21,16 @@
 #ifndef STRING_PARSER_H
 #define STRING_PARSER_H
 
-#include <cstdint>
-#include <string>
 #include "preproc.h"
 
-class StringParser
-{
-public:
-    StringParser(char* buffer, long size) : m_buffer(buffer), m_size(size), m_pos(0) {}
-    int ParseString(long srcPos, unsigned char* dest, int &destLength);
+#include <stdint.h>
+#include "my_string.h"
 
-private:
-    struct Integer
-    {
-        std::uint32_t value;
-        int size;
-    };
+struct StringParser;
+typedef struct StringParser StringParser;
 
-    char* m_buffer;
-    long m_size;
-    long m_pos;
+StringParser *StringParser_New(char *buffer, long size);
+void StringParser_Delete(StringParser *m);
+int StringParser_ParseString(StringParser *r m, long srcPos, uint8_t *r dest, int *r destLength);
 
-    Integer ReadInteger();
-    Integer ReadDecimal();
-    Integer ReadHex();
-    std::string ReadCharOrEscape();
-    std::string ReadBracketedConstants();
-    void SkipWhitespace();
-    void SkipRestOfInteger(int radix);
-    void RaiseError(const char* format, ...);
-};
-
-#endif // STRING_PARSER_H
+#endif  // STRING_PARSER_H

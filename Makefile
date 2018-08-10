@@ -1,4 +1,4 @@
-include $(DEVKITARM)/base_tools
+PREFIX := $(CURDIR)/tools/binutils/bin/arm-none-eabi-
 include config.mk
 
 ifeq ($(OS),Windows_NT)
@@ -13,7 +13,7 @@ endif
 SHELL     := /bin/bash -o pipefail
 AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc$(EXE)
-CPP       := $(PREFIX)cpp
+CPP       := cpp
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
 SHA1SUM   := sha1sum -c
@@ -27,8 +27,18 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
-CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef -Werror -Wno-trigraphs -D $(GAME_VERSION) -D REVISION=$(GAME_REVISION) -D $(GAME_LANGUAGE) -D DEBUG=$(DEBUG)
+CPPFLAGS := -I tools/agbcc/include -I include -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DDEBUG=$(DEBUG)
 
+# Check agbcc's version. The '' prevents old agbcc versions
+# from eating stdin, they will simply fail with "No such file
+# or directory" and exit non-zero. That is why we silence
+# stderr and report 0 if it fails.
+CC1_REQ_VER := 1
+CC1_VER     := $(shell $(CC1) -agbcc-version '' 2>/dev/null || echo 0)
+
+ifneq ($(CC1_REQ_VER),$(CC1_VER))
+    $(error Please update agbcc!)
+endif
 
 #### Files ####
 
@@ -61,7 +71,6 @@ LD_SCRIPT := $(BUILD_DIR)/ld_script.ld
 %src/libs/libisagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
 %src/libs/libisagbprn.o: CC1FLAGS := -mthumb-interwork
 
-
 #### Main Rules ####
 
 ALL_BUILDS := ruby ruby_rev1 ruby_rev1 sapphire sapphire_rev1 sapphire_rev2 ruby_de sapphire_de ruby_de_debug
@@ -74,8 +83,9 @@ infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
 ifeq (,$(filter-out all,$(MAKECMDGOALS)))
-$(call infoshell, $(MAKE) tools)
+TOOLS_DEP = tools
 else
+TOOLS_DEP :=
 NODEP := 1
 endif
 
@@ -111,11 +121,12 @@ MAKEFLAGS += --no-print-directory
 # Create build subdirectories
 $(shell mkdir -p $(SUBDIRS))
 
-all: $(ROM)
+all: $(TOOLS_DEP) $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1SUM) $(BUILD_NAME).sha1
 endif
 
+clean: NODEP = 1
 clean: tidy
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
@@ -129,6 +140,7 @@ clean: tidy
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
 
+tools: NODEP = 1
 tools:
 	@$(MAKE) -C tools/gbagfx
 	@$(MAKE) -C tools/scaninc
@@ -143,39 +155,35 @@ tidy:
 	$(RM) -r build
 
 $(ROM): %.gba: %.elf
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	@$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
-%.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
-	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+%.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
+	@cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
-	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
+	@cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
-	$(CPP) $(CPPFLAGS) $< -o $(BUILD_DIR)/$*.i
-	$(PREPROC) $(BUILD_DIR)/$*.i charmap.txt | $(CC1) $(CC1FLAGS) -o $(BUILD_DIR)/$*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $(BUILD_DIR)/$*.s
-	@$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
+	$(PREPROC) $(CPPFLAGS) -c charmap.txt $< | $(CC1) $(CC1FLAGS) | $(AS) $(ASFLAGS) -W -o $@
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) -P -I include | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
+$(SCANINC): tools
 # Dependency scanning. The new scaninc creates similar output
 # to gcc -M and only does it when needed.
 # If NODEP is enabled, these rules will be orphaned.
-$(DEPDIR)/%.d: %.c
+$(DEPDIR)/%.d: %.c $(SCANINC)
 	@$(SCANINC) -I include $<
-	@mv -f $(DEPDIR)/$*.Td $@
 
-$(DEPDIR)/%.d: %.s
+$(DEPDIR)/%.d: %.s $(SCANINC)
 	@$(SCANINC) -I include $<
-	@mv -f $(DEPDIR)/$*.Td $@
 
 .PRECIOUS: $(DEPDIR)/%.d
 
@@ -193,7 +201,7 @@ sapphire_rev2: ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_REVISION=2
 ruby_de:       ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN
 sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
-
+syntax:        ; @$(MAKE) GAME_VERSION=RUBY SYNTAX=1
 
 #### Graphics Rules ####
 

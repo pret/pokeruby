@@ -32,7 +32,7 @@ static FILE *PngReadOpen(char *path, png_structp *pngStruct, png_infop *pngInfo)
     if (!info_ptr)
         FATAL_ERROR("Failed to create PNG info struct.\n");
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Failed to init I/O for reading \"%s\".\n", path);
 
     png_init_io(png_ptr, fp);
@@ -115,7 +115,7 @@ void ReadPng(char *path, struct Image *image)
     for (int i = 0; i < image->height; i++)
         row_pointers[i] = (png_bytep)(image->pixels + (i * rowbytes));
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Error reading from \"%s\".\n", path);
 
     png_read_image(png_ptr, row_pointers);
@@ -202,12 +202,12 @@ void WritePng(char *path, struct Image *image)
     if (!info_ptr)
         FATAL_ERROR("Failed to create PNG info struct.\n");
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Failed to init I/O for writing \"%s\".\n", path);
 
     png_init_io(png_ptr, fp);
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Error writing header for \"%s\".\n", path);
 
     int color_type = image->hasPalette ? PNG_COLOR_TYPE_PALETTE : PNG_COLOR_TYPE_GRAY;
@@ -237,12 +237,12 @@ void WritePng(char *path, struct Image *image)
     for (int i = 0; i < image->height; i++)
         row_pointers[i] = (png_bytep)(image->pixels + (i * rowbytes));
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Error writing \"%s\".\n", path);
 
     png_write_image(png_ptr, row_pointers);
 
-    if (setjmp(png_jmpbuf(png_ptr)))
+    if (sigsetjmp(png_jmpbuf(png_ptr), 0))
         FATAL_ERROR("Error ending write of \"%s\".\n", path);
 
     png_write_end(png_ptr, NULL);

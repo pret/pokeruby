@@ -29,6 +29,13 @@ static void mkdirs_if_needed(const std::string &str)
 {
     std::string::size_type pos = 0;
 
+    // First, try to short circuit the search.
+    DIR *dir = opendir(str.c_str());
+    if (dir)
+    {
+        closedir(dir);
+        return;
+    }
     // Find each directory, check if it exists, and make it if
     // it doesn't.
     // .d/src/ will loop like so:
@@ -39,13 +46,13 @@ static void mkdirs_if_needed(const std::string &str)
         std::string depdir = str.substr(0,pos);
 
         // Open the directory
-        DIR *dir = opendir(depdir.c_str());
+        dir = opendir(depdir.c_str());
         if (!dir)
         {
             if (errno == ENOENT) // No such file or directory
             {
                 // Make the directory, if mkdir fails it returns non-zero
-                if (mkdir(depdir.c_str(), 0755) != 0)
+                if (mkdir(depdir.c_str(), 0755) != 0 && errno != EEXIST)
                 {
                     FATAL_ERROR("could not create directory %s: %s!\n", depdir.c_str(), strerror(errno));
                 }
@@ -91,7 +98,7 @@ void Formatter::WriteMakefile(const std::string &path, const std::set<std::strin
     // src/file.c -> .d/src/
     const std::string depdir = ".d/" + path.substr(0, filename_index) + '/';
     // src/file.c -> .d/src/file.Td
-    const std::string depfile = depdir + basename + "Td";
+    const std::string depfile = depdir + basename + "d";
     // src/file.c -> $(BUILD_DIR)/src/file.o:
     const std::string targetname = "$(BUILD_DIR)/" + path.substr(0, extension_index) + ".o: ";
 

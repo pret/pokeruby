@@ -21,34 +21,67 @@
 #ifndef PREPROC_H
 #define PREPROC_H
 
-#include <cstdio>
-#include <cstdlib>
-#include "charmap.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#ifndef r
+#ifdef __cplusplus
+#define r __restrict
+#else
+#define r restrict
+#endif
+#endif
+
+#ifndef noreturn
+#ifdef __cplusplus
+#define noreturn [[noreturn]]
+#else
+#if __STDC_VERSION__ >= 201112L
+#define noreturn _Noreturn
+#else
+#define noreturn
+#endif
+#endif
+#endif
+
+#if defined(__GNUC__) || defined(__clang__)
+#define likely(x) __builtin_expect((x), 1)
+#define unlikely(x) __builtin_expect((x), 0)
+#else
+#define likely(x) (x)
+#define unlikely(x) (x)
+#endif
+
+#ifdef __cplusplus
+#define lambda(...) []() { __VA_ARGS__ }
+#else
+#define lambda(...) ({ __VA_ARGS__ })
+#endif
 
 #ifdef _MSC_VER
 
-#define FATAL_ERROR(format, ...)               \
-do                                             \
-{                                              \
-    std::fprintf(stderr, format, __VA_ARGS__); \
-    std::exit(1);                              \
-} while (0)
+#define FATAL_ERROR(format, ...)                                                                   \
+    do                                                                                             \
+    {                                                                                              \
+        fprintf(stderr, format, __VA_ARGS__);                                                      \
+        exit(1);                                                                                   \
+    } while (0)
 
 #else
+#define FATAL_ERROR(...)                                                                           \
+    do                                                                                             \
+    {                                                                                              \
+        fprintf(stderr, __VA_ARGS__);                                                              \
+        exit(1);                                                                                   \
+    } while (0)
 
-#define FATAL_ERROR(format, ...)                 \
-do                                               \
-{                                                \
-    std::fprintf(stderr, format, ##__VA_ARGS__); \
-    std::exit(1);                                \
-} while (0)
+#endif  // _MSC_VER
 
-#endif // _MSC_VER
+#define kMaxPath 256
+#define kMaxStringLength 1024
+#define kMaxCharmapSequenceLength 16
 
-const int kMaxPath = 256;
-const int kMaxStringLength = 1024;
-const unsigned long kMaxCharmapSequenceLength = 16;
+struct Charmap;
+extern struct Charmap *g_charmap;
 
-extern Charmap* g_charmap;
-
-#endif // PREPROC_H
+#endif  // PREPROC_H

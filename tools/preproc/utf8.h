@@ -21,14 +21,14 @@
 #ifndef UTF8_H
 #define UTF8_H
 
-#include <cstdint>
+#include <stdint.h>
 
-struct UnicodeChar
+typedef struct UnicodeChar
 {
-    std::int32_t code;
+    int32_t code;
     int encodingLength;
-};
+} UnicodeChar;
 
-UnicodeChar DecodeUtf8(const char* s);
+UnicodeChar DecodeUtf8(const char *s);
 
-#endif // UTF8_H
+#endif  // UTF8_H

@@ -1,3 +1,6 @@
 [submodule "tools/agbcc"]
 	path = tools/agbcc
 	url = git@github.com:pret/agbcc
+[submodule "tools/preproc/ucpp"]
+	path = tools/preproc/ucpp
+	url = https://github.com/easyaspi314/ucpp
