@@ -1733,10 +1733,10 @@ void sub_80FC69C(void)
                 sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
                 break;
             default:
-                if (sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
-                    sub_8053538(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2]);
+                if (sMapHealLocationIndexes[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
+                    sub_8053538(sMapHealLocationIndexes[sFlyDataPtr->regionMap.mapSectionId][2]);
                 else
-                    warp1_set_2(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][0], sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][1], -1);
+                    warp1_set_2(sMapHealLocationIndexes[sFlyDataPtr->regionMap.mapSectionId][0], sMapHealLocationIndexes[sFlyDataPtr->regionMap.mapSectionId][1], -1);
                 break;
             }
             sub_80865BC();
