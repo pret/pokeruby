@@ -19,6 +19,8 @@
 #include "text.h"
 #include "trig.h"
 #include "ewram.h"
+#include "heal_location.h"
+#include "constants/heal_locations.h"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
@@ -1260,58 +1262,59 @@ static const u8 sFlyRegionMapFrame_TilemapLZ[] = INCBIN_U8("graphics/pokenav/map
 static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
 static const u8 sFlyTargetIcons_ImageLZ[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-static const u8 sUnknown_083E7920[][3] =
+// MAP_GROUP, MAP_NUM, HEAL_LOCATION
+static const u8 sMapHealLocationIndexes[][3] =
 {
-    {0,  9,  1},
-    {0, 10, 14},
-    {0, 11, 15},
-    {0, 12, 16},
-    {0, 13, 17},
-    {0, 14, 18},
-    {0, 15, 19},
-    {0,  0,  3},
-    {0,  1,  4},
-    {0,  2,  5},
-    {0,  3,  6},
-    {0,  4,  7},
-    {0,  5,  8},
-    {0,  6,  9},
-    {0,  7, 10},
-    {0,  8, 11},
-    {0, 16,  0},
-    {0, 17,  0},
-    {0, 18,  0},
-    {0, 19,  0},
-    {0, 20,  0},
-    {0, 21,  0},
-    {0, 22,  0},
-    {0, 23,  0},
-    {0, 24,  0},
-    {0, 25,  0},
-    {0, 26,  0},
-    {0, 27,  0},
-    {0, 28,  0},
-    {0, 29,  0},
-    {0, 30,  0},
-    {0, 31,  0},
-    {0, 32,  0},
-    {0, 33,  0},
-    {0, 34,  0},
-    {0, 35,  0},
-    {0, 36,  0},
-    {0, 37,  0},
-    {0, 38,  0},
-    {0, 39,  0},
-    {0, 40,  0},
-    {0, 41,  0},
-    {0, 42,  0},
-    {0, 43,  0},
-    {0, 44,  0},
-    {0, 45,  0},
-    {0, 46,  0},
-    {0, 47,  0},
-    {0, 48,  0},
-    {0, 49,  0},
+/* MAPSEC_LITTLEROOT_TOWN  */    {0,  9, HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
+/* MAPSEC_OLDALE_TOWN      */    {0, 10, HEAL_LOCATION_OLDALE_TOWN},
+/* MAPSEC_DEWFORD_TOWN     */    {0, 11, HEAL_LOCATION_DEWFORD_TOWN},
+/* MAPSEC_LAVARIDGE_TOWN   */    {0, 12, HEAL_LOCATION_LAVARIDGE_TOWN},
+/* MAPSEC_FALLARBOR_TOWN   */    {0, 13, HEAL_LOCATION_FALLARBOR_TOWN},
+/* MAPSEC_VERDANTURF_TOWN  */    {0, 14, HEAL_LOCATION_VERDANTURF_TOWN},
+/* MAPSEC_PACIFIDLOG_TOWN  */    {0, 15, HEAL_LOCATION_PACIFIDLOG_TOWN},
+/* MAPSEC_PETALBURG_CITY   */    {0,  0, HEAL_LOCATION_PETALBURG_CITY},
+/* MAPSEC_SLATEPORT_CITY   */    {0,  1, HEAL_LOCATION_SLATEPORT_CITY},
+/* MAPSEC_MAUVILLE_CITY    */    {0,  2, HEAL_LOCATION_MAUVILLE_CITY},
+/* MAPSEC_RUSTBORO_CITY    */    {0,  3, HEAL_LOCATION_RUSTBORO_CITY},
+/* MAPSEC_FORTREE_CITY     */    {0,  4, HEAL_LOCATION_FORTREE_CITY},
+/* MAPSEC_LILYCOVE_CITY    */    {0,  5, HEAL_LOCATION_LILYCOVE_CITY},
+/* MAPSEC_MOSSDEEP_CITY    */    {0,  6, HEAL_LOCATION_MOSSDEEP_CITY},
+/* MAPSEC_SOOTOPOLIS_CITY  */    {0,  7, HEAL_LOCATION_SOOTOPOLIS_CITY},
+/* MAPSEC_EVER_GRANDE_CITY */    {0,  8, HEAL_LOCATION_EVER_GRANDE_CITY_1},
+/* MAPSEC_ROUTE_101 */    {0, 16,  0},
+/* MAPSEC_ROUTE_102 */    {0, 17,  0},
+/* MAPSEC_ROUTE_103 */    {0, 18,  0},
+/* MAPSEC_ROUTE_104 */    {0, 19,  0},
+/* MAPSEC_ROUTE_105 */    {0, 20,  0},
+/* MAPSEC_ROUTE_106 */    {0, 21,  0},
+/* MAPSEC_ROUTE_107 */    {0, 22,  0},
+/* MAPSEC_ROUTE_108 */    {0, 23,  0},
+/* MAPSEC_ROUTE_109 */    {0, 24,  0},
+/* MAPSEC_ROUTE_110 */    {0, 25,  0},
+/* MAPSEC_ROUTE_111 */    {0, 26,  0},
+/* MAPSEC_ROUTE_112 */    {0, 27,  0},
+/* MAPSEC_ROUTE_113 */    {0, 28,  0},
+/* MAPSEC_ROUTE_114 */    {0, 29,  0},
+/* MAPSEC_ROUTE_115 */    {0, 30,  0},
+/* MAPSEC_ROUTE_116 */    {0, 31,  0},
+/* MAPSEC_ROUTE_117 */    {0, 32,  0},
+/* MAPSEC_ROUTE_118 */    {0, 33,  0},
+/* MAPSEC_ROUTE_119 */    {0, 34,  0},
+/* MAPSEC_ROUTE_120 */    {0, 35,  0},
+/* MAPSEC_ROUTE_121 */    {0, 36,  0},
+/* MAPSEC_ROUTE_122 */    {0, 37,  0},
+/* MAPSEC_ROUTE_123 */    {0, 38,  0},
+/* MAPSEC_ROUTE_124 */    {0, 39,  0},
+/* MAPSEC_ROUTE_125 */    {0, 40,  0},
+/* MAPSEC_ROUTE_126 */    {0, 41,  0},
+/* MAPSEC_ROUTE_127 */    {0, 42,  0},
+/* MAPSEC_ROUTE_128 */    {0, 43,  0},
+/* MAPSEC_ROUTE_129 */    {0, 44,  0},
+/* MAPSEC_ROUTE_130 */    {0, 45,  0},
+/* MAPSEC_ROUTE_131 */    {0, 46,  0},
+/* MAPSEC_ROUTE_132 */    {0, 47,  0},
+/* MAPSEC_ROUTE_133 */    {0, 48,  0},
+/* MAPSEC_ROUTE_134 */    {0, 49,  0},
 };
 
 static const u8 *const sEverGrandeCityAreaNames[] =
@@ -1333,6 +1336,7 @@ static const struct MultiPartMapSection sMultiPartMapSections[1] =
     {sEverGrandeCityAreaNames, MAPSEC_EVER_GRANDE_CITY, FLAG_SYS_POKEMON_LEAGUE_FLY},
 };
 
+// what in the hell is this?
 static struct UnknownStruct3 *const sFlyDataPtr = (struct UnknownStruct3 *)gSharedMem;
 
 static const struct SpritePalette sFlyTargetIconSpritePalette = {sFlyTargetIcons_Pal, 2};
@@ -1717,16 +1721,16 @@ void sub_80FC69C(void)
             switch (sFlyDataPtr->regionMap.mapSectionId)
             {
             case MAPSEC_SOUTHERN_ISLAND:
-                sub_8053538(22);
+                sub_8053538(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
                 break;
             case MAPSEC_BATTLE_TOWER:
-                sub_8053538(21);
+                sub_8053538(HEAL_LOCATION_BATTLE_TOWER_OUTSIDE);
                 break;
             case MAPSEC_LITTLEROOT_TOWN:
-                sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
+                sub_8053538((gSaveBlock2.playerGender == MALE) ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
                 break;
             default:
                 if (sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
