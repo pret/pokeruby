@@ -23,32 +23,56 @@ To build **pokeruby.gba**:
 	make -j4
 
 
-# Mac
+# macOS
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+Installing pokeruby on a Mac requires macOS >= 10.12 (Sierra or higher).
 
-Then in **Terminal**, run the following commands.
+To get pokeruby up and running, run the following commands in Terminal:
 
-	xcode-select --install
+Make sure you have the right compilers.
+```
+xcode-select --install
+```
+   
+Download the [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0) package (`.pkg`) and install using the native Mac Installer. 
+This will install the devkitPRO package in `/opt/devkitpro`.
 
-	export DEVKITPRO=${HOME}/devkitPro
-	echo "export DEVKITPRO=${DEVKITPRO}" >> ~/.bashrc
-	export DEVKITARM=${DEVKITPRO}/devkitARM
-	echo "export DEVKITARM=${DEVKITARM}" >> ~/.bashrc
+You must install devkitARM using
+```
+sudo dkp-pacman -S devkitARM 
+```
 
-	git clone https://github.com/pret/pokeruby
-	git clone https://github.com/pret/agbcc
+Then set environment variables 
+```
+export DEVKITPRO=/opt/devkitpro
+echo "export DEVKITPRO=$DEVKITPRO" >> ~/.bashrc
+export DEVKITARM=$DEVKITPRO/devkitARM
+echo "export DEVKITARM=$DEVKITARM" >> ~/.bashrc
 
-	cd agbcc
-	./build.sh
-	./install.sh ../pokeruby
+echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> ~/.bash_profile
+```
 
-	cd ../pokeruby
+Now download the repositories. 
+```
+git clone https://github.com/pret/pokeruby
+git clone https://github.com/pret/agbcc
 
-To build **pokeruby.gba**:
+cd agbcc
+./build.sh
+./install.sh ../pokeruby
 
-	make -j4
+cd ../pokeruby
+```
 
+Build the necessary tools
+```
+./build_tools.sh
+```
+
+And finally the ROM **pokeruby.gba** should be ready to build
+```
+make -j4
+```
 
 # Windows
 
