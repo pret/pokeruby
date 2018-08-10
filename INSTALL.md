@@ -34,7 +34,7 @@ Make sure you have the right compilers.
 xcode-select --install
 ```
    
-Download the [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0) package (`.pkg`) and install using the native Mac Installer. 
+Download the [devkitPRO pacman](https://github.com/devkitPro/pacman/releases/tag/v1.0.0) package (`.pkg`) and install using the native Mac Installer.
 This will install the devkitPRO package in `/opt/devkitpro`.
 
 You must install devkitARM using
