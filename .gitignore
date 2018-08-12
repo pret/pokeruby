@@ -34,6 +34,7 @@ types_*.taghl
 *.s.old2
 *.dump
 *.sa*
+*.sgm
 Thumbs.db
 build/
 .idea/
