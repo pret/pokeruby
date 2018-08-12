@@ -19,6 +19,8 @@
 #include "text.h"
 #include "trig.h"
 #include "ewram.h"
+#include "heal_location.h"
+#include "constants/heal_locations.h"
 
 #define MAP_WIDTH 28
 #define MAP_HEIGHT 15
@@ -1260,58 +1262,58 @@ static const u8 sFlyRegionMapFrame_TilemapLZ[] = INCBIN_U8("graphics/pokenav/map
 static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/fly_target_icons.gbapal");
 static const u8 sFlyTargetIcons_ImageLZ[] = INCBIN_U8("graphics/pokenav/fly_target_icons.4bpp.lz");
 
-static const u8 sUnknown_083E7920[][3] =
+static const u8 sMapHealLocations[][3] =
 {
-    {0,  9,  1},
-    {0, 10, 14},
-    {0, 11, 15},
-    {0, 12, 16},
-    {0, 13, 17},
-    {0, 14, 18},
-    {0, 15, 19},
-    {0,  0,  3},
-    {0,  1,  4},
-    {0,  2,  5},
-    {0,  3,  6},
-    {0,  4,  7},
-    {0,  5,  8},
-    {0,  6,  9},
-    {0,  7, 10},
-    {0,  8, 11},
-    {0, 16,  0},
-    {0, 17,  0},
-    {0, 18,  0},
-    {0, 19,  0},
-    {0, 20,  0},
-    {0, 21,  0},
-    {0, 22,  0},
-    {0, 23,  0},
-    {0, 24,  0},
-    {0, 25,  0},
-    {0, 26,  0},
-    {0, 27,  0},
-    {0, 28,  0},
-    {0, 29,  0},
-    {0, 30,  0},
-    {0, 31,  0},
-    {0, 32,  0},
-    {0, 33,  0},
-    {0, 34,  0},
-    {0, 35,  0},
-    {0, 36,  0},
-    {0, 37,  0},
-    {0, 38,  0},
-    {0, 39,  0},
-    {0, 40,  0},
-    {0, 41,  0},
-    {0, 42,  0},
-    {0, 43,  0},
-    {0, 44,  0},
-    {0, 45,  0},
-    {0, 46,  0},
-    {0, 47,  0},
-    {0, 48,  0},
-    {0, 49,  0},
+    {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
+    {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
+    {MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), HEAL_LOCATION_DEWFORD_TOWN},
+    {MAP_GROUP(LAVARIDGE_TOWN), MAP_NUM(LAVARIDGE_TOWN), HEAL_LOCATION_LAVARIDGE_TOWN},
+    {MAP_GROUP(FALLARBOR_TOWN), MAP_NUM(FALLARBOR_TOWN), HEAL_LOCATION_FALLARBOR_TOWN},
+    {MAP_GROUP(VERDANTURF_TOWN), MAP_NUM(VERDANTURF_TOWN), HEAL_LOCATION_VERDANTURF_TOWN},
+    {MAP_GROUP(PACIFIDLOG_TOWN), MAP_NUM(PACIFIDLOG_TOWN), HEAL_LOCATION_PACIFIDLOG_TOWN},
+    {MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), HEAL_LOCATION_PETALBURG_CITY},
+    {MAP_GROUP(SLATEPORT_CITY), MAP_NUM(SLATEPORT_CITY), HEAL_LOCATION_SLATEPORT_CITY},
+    {MAP_GROUP(MAUVILLE_CITY), MAP_NUM(MAUVILLE_CITY), HEAL_LOCATION_MAUVILLE_CITY},
+    {MAP_GROUP(RUSTBORO_CITY), MAP_NUM(RUSTBORO_CITY), HEAL_LOCATION_RUSTBORO_CITY},
+    {MAP_GROUP(FORTREE_CITY), MAP_NUM(FORTREE_CITY), HEAL_LOCATION_FORTREE_CITY},
+    {MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), HEAL_LOCATION_LILYCOVE_CITY},
+    {MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), HEAL_LOCATION_MOSSDEEP_CITY},
+    {MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), HEAL_LOCATION_SOOTOPOLIS_CITY},
+    {MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), HEAL_LOCATION_EVER_GRANDE_CITY_1},
+    {MAP_GROUP(ROUTE101), MAP_NUM(ROUTE101), 0},
+    {MAP_GROUP(ROUTE102), MAP_NUM(ROUTE102), 0},
+    {MAP_GROUP(ROUTE103), MAP_NUM(ROUTE103), 0},
+    {MAP_GROUP(ROUTE104), MAP_NUM(ROUTE104), 0},
+    {MAP_GROUP(ROUTE105), MAP_NUM(ROUTE105), 0},
+    {MAP_GROUP(ROUTE106), MAP_NUM(ROUTE106), 0},
+    {MAP_GROUP(ROUTE107), MAP_NUM(ROUTE107), 0},
+    {MAP_GROUP(ROUTE108), MAP_NUM(ROUTE108), 0},
+    {MAP_GROUP(ROUTE109), MAP_NUM(ROUTE109), 0},
+    {MAP_GROUP(ROUTE110), MAP_NUM(ROUTE110), 0},
+    {MAP_GROUP(ROUTE111), MAP_NUM(ROUTE111), 0},
+    {MAP_GROUP(ROUTE112), MAP_NUM(ROUTE112), 0},
+    {MAP_GROUP(ROUTE113), MAP_NUM(ROUTE113), 0},
+    {MAP_GROUP(ROUTE114), MAP_NUM(ROUTE114), 0},
+    {MAP_GROUP(ROUTE115), MAP_NUM(ROUTE115), 0},
+    {MAP_GROUP(ROUTE116), MAP_NUM(ROUTE116), 0},
+    {MAP_GROUP(ROUTE117), MAP_NUM(ROUTE117), 0},
+    {MAP_GROUP(ROUTE118), MAP_NUM(ROUTE118), 0},
+    {MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119), 0},
+    {MAP_GROUP(ROUTE120), MAP_NUM(ROUTE120), 0},
+    {MAP_GROUP(ROUTE121), MAP_NUM(ROUTE121), 0},
+    {MAP_GROUP(ROUTE122), MAP_NUM(ROUTE122), 0},
+    {MAP_GROUP(ROUTE123), MAP_NUM(ROUTE123), 0},
+    {MAP_GROUP(ROUTE124), MAP_NUM(ROUTE124), 0},
+    {MAP_GROUP(ROUTE125), MAP_NUM(ROUTE125), 0},
+    {MAP_GROUP(ROUTE126), MAP_NUM(ROUTE126), 0},
+    {MAP_GROUP(ROUTE127), MAP_NUM(ROUTE127), 0},
+    {MAP_GROUP(ROUTE128), MAP_NUM(ROUTE128), 0},
+    {MAP_GROUP(ROUTE129), MAP_NUM(ROUTE129), 0},
+    {MAP_GROUP(ROUTE130), MAP_NUM(ROUTE130), 0},
+    {MAP_GROUP(ROUTE131), MAP_NUM(ROUTE131), 0},
+    {MAP_GROUP(ROUTE132), MAP_NUM(ROUTE132), 0},
+    {MAP_GROUP(ROUTE133), MAP_NUM(ROUTE133), 0},
+    {MAP_GROUP(ROUTE134), MAP_NUM(ROUTE134), 0},
 };
 
 static const u8 *const sEverGrandeCityAreaNames[] =
@@ -1717,22 +1719,22 @@ void sub_80FC69C(void)
             switch (sFlyDataPtr->regionMap.mapSectionId)
             {
             case MAPSEC_SOUTHERN_ISLAND:
-                sub_8053538(22);
+                sub_8053538(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
                 break;
             case MAPSEC_BATTLE_TOWER:
-                sub_8053538(21);
+                sub_8053538(HEAL_LOCATION_BATTLE_TOWER_OUTSIDE);
                 break;
             case MAPSEC_LITTLEROOT_TOWN:
-                sub_8053538((gSaveBlock2.playerGender == MALE) ? 12 : 13);
+                sub_8053538((gSaveBlock2.playerGender == MALE) ? HEAL_LOCATION_LITTLEROOT_TOWN_1 : HEAL_LOCATION_LITTLEROOT_TOWN_2);
                 break;
             case MAPSEC_EVER_GRANDE_CITY:
-                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? 20 : 11);
+                sub_8053538((FlagGet(FLAG_SYS_POKEMON_LEAGUE_FLY) && sFlyDataPtr->regionMap.everGrandeCityArea == 0) ? HEAL_LOCATION_EVER_GRANDE_CITY_2 : HEAL_LOCATION_EVER_GRANDE_CITY_1);
                 break;
             default:
-                if (sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
-                    sub_8053538(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][2]);
+                if (sMapHealLocations[sFlyDataPtr->regionMap.mapSectionId][2] != 0)
+                    sub_8053538(sMapHealLocations[sFlyDataPtr->regionMap.mapSectionId][2]);
                 else
-                    warp1_set_2(sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][0], sUnknown_083E7920[sFlyDataPtr->regionMap.mapSectionId][1], -1);
+                    warp1_set_2(sMapHealLocations[sFlyDataPtr->regionMap.mapSectionId][0], sMapHealLocations[sFlyDataPtr->regionMap.mapSectionId][1], -1);
                 break;
             }
             sub_80865BC();

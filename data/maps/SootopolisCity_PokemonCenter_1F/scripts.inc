@@ -3,7 +3,7 @@ SootopolisCity_PokemonCenter_1F_MapScripts:: @ 815B190
 	.byte 0
 
 SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
-	setrespawn 10
+	setrespawn HEAL_LOCATION_SOOTOPOLIS_CITY
 	end
 
 @ 815B19A

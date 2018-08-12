@@ -3,7 +3,7 @@ FallarborTown_PokemonCenter_1F_MapScripts:: @ 8153AF3
 	.byte 0
 
 FallarborTown_PokemonCenter_1F_MapScript1_153AF9:: @ 8153AF9
-	setrespawn 17
+	setrespawn HEAL_LOCATION_FALLARBOR_TOWN
 	call FallarborTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
