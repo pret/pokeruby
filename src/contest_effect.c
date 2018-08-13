@@ -158,10 +158,8 @@ static void ContestEffect_StartlePrevMons(void)
     u8 a = shared192D0.contestant;
 
     if (shared192D0.turnOrder[a] != 0) {
-        int i;
-        int j = 0;
-
-        for (i = 0; i < 4; i++)
+        int i, j;
+        for (i = 0, j = 0; i < 4; i++)
             if (shared192D0.turnOrder[a] > shared192D0.turnOrder[i])
                 shared192D0.jamQueue[j++] = i;
         shared192D0.jamQueue[j] = 0xFF;
@@ -1113,16 +1111,20 @@ static bool8 WasAtLeastOneOpponentJammed(void)
                 shared192D0.jam2 = 10;
                 SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
             }
-            else if ((shared192D0.jam2 -= sContestantStatus[contestant].jamReduction) <= 0)
-            {
-                shared192D0.jam2 = 0;
-                SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
-            }
             else
             {
-                JamContestant(contestant, shared192D0.jam2);
-                SetStartledString(contestant, shared192D0.jam2);
-                jamBuffer[contestant] = shared192D0.jam2;
+                shared192D0.jam2 -= sContestantStatus[contestant].jamReduction;
+                if (shared192D0.jam2 <= 0)
+                {
+                    shared192D0.jam2 = 0;
+                    SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
+                }
+                else
+                {
+                    JamContestant(contestant, shared192D0.jam2);
+                    SetStartledString(contestant, shared192D0.jam2);
+                    jamBuffer[contestant] = shared192D0.jam2;
+                }
             }
         }
     }
