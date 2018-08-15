@@ -96,7 +96,8 @@ enum LanguageId
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define POKEBLOCKS_COUNT    40
-#define EVENT_OBJECTS_COUNT   16
+#define PARTY_SIZE          6
+#define EVENT_OBJECTS_COUNT 16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         288
 #define VARS_COUNT          256
