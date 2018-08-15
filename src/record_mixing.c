@@ -36,8 +36,8 @@ static u8 gUnknown_0300071C[4];
 
 void *recordMixingSecretBases = &gSaveBlock1.secretBases;
 void *recordMixingTvShows = &gSaveBlock1.tvShows;
-void *gUnknown_083D0274 = &gSaveBlock1.pokeNews;
-void *gUnknown_083D0278 = &gSaveBlock1.mauvilleMan;
+void *recordMixingPokeNews = &gSaveBlock1.pokeNews;
+void *recordMixingMauvilleMan = &gSaveBlock1.mauvilleMan;
 void *recordMixingEasyChatPairs = &gSaveBlock1.easyChatPairs;
 struct RecordMixingDayCareMail *gDayCareMailPlayerRecord = &gDayCareMailRecord;
 struct BattleTowerRecord *gBattleTowerPlayerRecord = &gSaveBlock2.battleTower.playerRecord;
@@ -51,10 +51,10 @@ void sub_80B929C(void)
 
 struct PlayerRecords
 {
-    struct SecretBaseRecord secretBases[20];
-    TVShow tvShows[25];
-    u8 filler1004[0x40];
-    u8 filler1044[0x40];
+    struct SecretBaseRecord secretBases[SECRET_BASES_COUNT];
+    TVShow tvShows[TV_SHOWS_COUNT];
+    struct PokeNews pokeNews[POKE_NEWS_COUNT];
+    union MauvilleMan mauvilleMan;
     struct EasyChatPair easyChatPairs[5];
     struct RecordMixingDayCareMail daycareMailRecord;
     struct BattleTowerRecord battleTowerRecord;
@@ -68,8 +68,8 @@ void RecordMixing_PrepareExchangePacket(void)
 
     memcpy(ewram_2018000.secretBases, recordMixingSecretBases, sizeof(ewram_2018000.secretBases));
     memcpy(ewram_2018000.tvShows, recordMixingTvShows, sizeof(ewram_2018000.tvShows));
-    memcpy(ewram_2018000.filler1004, gUnknown_083D0274, sizeof(ewram_2008000.filler1004));
-    memcpy(ewram_2018000.filler1044, gUnknown_083D0278, sizeof(ewram_2008000.filler1044));
+    memcpy(ewram_2018000.pokeNews, recordMixingPokeNews, sizeof(ewram_2008000.pokeNews));
+    memcpy(&ewram_2018000.mauvilleMan, recordMixingMauvilleMan, sizeof(ewram_2008000.mauvilleMan));
     memcpy(ewram_2018000.easyChatPairs, recordMixingEasyChatPairs, sizeof(ewram_2018000.easyChatPairs));
     gDayCareMailRecord.mail[0] = gSaveBlock1.daycare.misc.mail[0];
     gDayCareMailRecord.mail[1] = gSaveBlock1.daycare.misc.mail[1];
@@ -85,8 +85,8 @@ void RecordMixing_ReceiveExchangePacket(u32 a)
 {
     sub_80BD674(ewram_2008000.secretBases, sizeof(struct PlayerRecords), a);
     sub_80BFD44((u8 *)ewram_2008000.tvShows, sizeof(struct PlayerRecords), a);
-    sub_80C0514(ewram_2008000.filler1004, sizeof(struct PlayerRecords), a);
-    sub_80B9B1C(ewram_2008000.filler1044, sizeof(struct PlayerRecords), a);
+    sub_80C0514(ewram_2008000.pokeNews, sizeof(struct PlayerRecords), a);
+    sub_80B9B1C((u8 *)&ewram_2008000.mauvilleMan, sizeof(struct PlayerRecords), a);
     sub_80FA4E4(ewram_2008000.easyChatPairs, sizeof(struct PlayerRecords), a);
     sub_80B9C6C((u8 *)&ewram_2008000.daycareMailRecord, sizeof(struct PlayerRecords), a, ewram_2008000.tvShows);
     sub_80B9B70(&ewram_2008000.battleTowerRecord, sizeof(struct PlayerRecords), a);
@@ -439,7 +439,7 @@ void sub_80B9B1C(u8 *a, size_t size, u8 index)
 
     sub_80B9A88(arr);
     //Probably not how it was originally written, but this matches.
-    memcpy(a + index * size, (ptr = gUnknown_083D0278), 0x40);
+    memcpy(a + index * size, (ptr = recordMixingMauvilleMan), 0x40);
     memcpy(ptr, a + arr[index] * size, 0x40);
     sub_80F7F30();
 }
