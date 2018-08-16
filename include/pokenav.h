@@ -5,7 +5,9 @@
 
 struct UnkPokenavStruct_Sub {
     /*0x0*/ u16 unk0;
-    /*0x2*/ u8 filler2[6];
+    /*0x2*/ u16 unk2;
+    /*0x4*/ u8 unk4;
+    /*0x5*/ u8 unk5;
 };
 
 struct UnkPokenavStruct_Sub1 {
@@ -37,9 +39,10 @@ struct UnkPokenavStruct_Sub3 {
 };
 
 struct UnkUsePokeblockSub {
-    /*0*/ u8 fil0[2];
-    /*2*/ u8 partyIdx:5;
-    /*2*/ u16 unk2:9;
+    /*0x0*/ u8 unk0;
+    /*0x1*/ u8 filler1[1];
+    /*0x2*/ u8 partyIdx:5;
+    /*0x2*/ u16 unk2:9;
 };
 
 struct UnkPokenavStruct {
@@ -65,14 +68,23 @@ struct UnkPokenavStruct {
     /*0x769E*/ u8 unk769E;
     /*0x769F*/ u8 filler769F[0xB];
     /*0x76AA*/ u8 unk76AA;
-    /*0x76AB*/ u8 filler76AB[0x10bd];
+    /*0x76AB*/ u8 filler76AB[0x10b9];
+    /*0x8764*/ u16 unk8764;
     /*0x8768*/ struct UnkPokenavStruct_Sub2 *unk8768;
-    /*0x876C*/ u8 filler876C[0x2];
-    /*0x876E*/ u8 unk876E;
-    /*0x876F*/ u8 filler876F[0x7];
-    /*0x8776*/ u16 unk8776;
+    /*0x876C*/ s16 unk876C;
+    /*0x876E*/ s16 unk876E;
+    /*0x8770*/ s16 unk8770;
+    /*0x8772*/ s16 unk8772;
+    /*0x8774*/ s16 unk8774;
+    /*0x8776*/ s16 unk8776;
     /*0x8778*/ u16 unk8778;
-    /*0x877A*/ u8 filler877A[0xE];
+    /*0x877A*/ s16 unk877A;
+    /*0x877C*/ s16 unk877C;
+    /*0x877E*/ u16 unk877E;
+    /*0x8780*/ u16 unk8780;
+    /*0x8782*/ u8 filler8782[0x2];
+    /*0x8784*/ u16 unk8784;
+    /*0x8786*/ u16 unk8786;
     /*0x8788*/ u8 unk8788[0x40];
     /*0x87C8*/ u8 unk87C8;
     /*0x87C9*/ u8 filler87C9;
@@ -96,7 +108,14 @@ struct UnkPokenavStruct {
     /*0x9004*/ u8 unk9004[3][20];
     /*0x9040*/ u8 unk9040[0x304];
     /*0x9344*/ u8 unk9344;
-    /*0x9345*/ u8 filler9345[0x2955];
+    /*0x9345*/ u8 filler9345[7];
+    /*0x934C*/ u16 unk934C[0x1480];
+    /*0xBC4C*/ u8 unkBC4C[0x42];
+    /*0xBC8E*/ u8 unkBC8E;
+    /*0xBC8F*/ u8 unkBC8F;
+    /*0xBC90*/ u8 unkBC90;
+    /*0xBC91*/ u8 unkBC91;
+    /*0xBC92*/ u8 fillerBC92[0x8];
     /*0xBC9A*/ u8 unkBC9A;
     /*0xBC9B*/ u8 unkBC9B;
     /*0xBC9C*/ u8 unkBC9C[22][200];
@@ -106,11 +125,16 @@ struct UnkPokenavStruct {
     /*0xCE50*/ u16 unkCE50;
     /*0xCE52*/ u16 palettesCE52[30];
     /*0xCE8E*/ u16 palettesCE8E[0x2D];
-    /*0xCEE8*/ struct UnkPokenavStruct_Sub unkCEE8[78];
+    /*0xCEE8*/ struct UnkPokenavStruct_Sub unkCEE8[69];
+    /*0xD110*/ const u8 *trainerEyeDescriptionLines[4];
+    /*0xD120*/ u8 fillerD114[0x18];
+    /*0xD138*/ u8 unkD138[0x20];
     /*0xD158*/ u16 unkD158;
-    /*0xD15A*/ u8 fillerD15A[6];
+    /*0xD15A*/ u8 fillerD15A[2];
+    /*0xD15C*/ u16 unkD15C;
+    /*0xD15E*/ u8 fillerD15E[2];
     /*0xD160*/ u16 unkD160;
-    /*0xD162*/ u8 unkD162[2];
+    /*0xD162*/ u8 unkD162;
     /*0xD164*/ struct UnkPokenavStruct_Sub1 unkD164;
 };
 

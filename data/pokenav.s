@@ -700,7 +700,7 @@ gUnknown_083E4678:: @ 83E4678
 	.incbin "graphics/pokenav/83E4678.gbapal"
 
 	.align 2
-gUnknown_083E4698:: @ 83E4698
+gPokenavRibbonsIconGfx:: @ 83E4698
 	.2byte  0, 0
 	.2byte  1, 0
 	.2byte  2, 0
