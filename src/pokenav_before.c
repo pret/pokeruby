@@ -19,8 +19,11 @@
 #include "sound.h"
 #include "task.h"
 #include "text.h"
+#include "trig.h"
 #include "scanline_effect.h"
 #include "pokemon_storage_system.h"
+#include "pokemon_summary_screen.h"
+#include "use_pokeblock.h"
 #include "constants/game_stat.h"
 
 struct UnknownPokenav0
@@ -139,6 +142,7 @@ extern const u16 gPokenavHoennMap1_Pal[];
 extern void (*const gUnknown_083E3270[])(u16, u16);
 extern const u8 gUnknown_083E039C[];
 extern const u8 gUnknown_083E03A0[];
+extern const u8 gUnknown_083E01F4[];
 extern const u8 *const gTrainerEyeDescriptions[];
 extern const u8 gUnknown_08E9FBA0[];
 extern const u8 gPokenavRibbonView_Gfx[];
@@ -149,8 +153,47 @@ extern const u16 gUnknown_083E3C60[];
 extern const u16 gPokenavRibbonsIconGfx[][2];
 extern const u8 *const gRibbonDescriptions[][2];
 extern const u8 *const gGiftRibbonDescriptions[][2];
+extern const u8 gUnknown_08E9FF58[];
+extern const u8 gPokenavRibbonPokeView_Gfx[];
+extern const u16 gUnknown_083E0124[];
+extern const u16 gUnknown_083E0144[];
+extern const u8 gPokenavMenuOptions_Gfx[];
+extern const u8 gPokenavConditionMenu_Gfx[];
+extern const u8 gPokenavConditionSearch_Gfx[];
+extern const struct SpriteTemplate gSpriteTemplate_83E4454;
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83E4450[];
+extern const u16 gUnknown_083E42F8[];
+extern const u16 gPokenavMenuOptions1_Pal[];
+extern const u16 gPokenavMenuOptions2_Pal[];
+extern const u16 gPokenavConditionMenu_Pal[];
+extern const u16 gPokenavCondition6_Pal[];
+extern const u16 gPokenavCondition7_Pal[];
+extern const struct SpriteSheet gSpriteSheet_PokenavBlueLight;
+extern const struct SpritePalette gSpritePalette_PokenavBlueLight;
+extern const struct SpriteTemplate gSpriteTemplate_83E4484;
+extern const u8 gPokenavMainMenu_Gfx[];
+extern const u8 gPokenavConditionMenuHeader_Gfx[];
+extern const u8 gPokenavRibbonsHeader_Gfx[];
+extern const u8 gPokenavHoennMapHeader_Gfx[];
+extern const u8 gPokenavConditionMenuOptions_Gfx[];
+extern const u8 gPokenavConditionMenuOptions2_Gfx[];
+extern const u8 gPokenavTrainersEyesHeader_Gfx[];
+extern const struct SpritePalette gUnknown_083E449C[];
+extern const struct SpriteTemplate gSpriteTemplate_83E4530;
+extern const struct SpriteTemplate gSpriteTemplate_83E4548;
+extern const struct SpriteTemplate gSpriteTemplate_83E44E0;
+extern const struct SpriteTemplate gSpriteTemplate_83E44F8;
+extern const struct SpriteSheet gUnknown_083E4568;
+extern const struct SpriteTemplate gSpriteTemplate_83E4570;
+extern const struct SpritePalette gUnknown_083E4588;
+extern const struct SpriteSheet gUnknown_083E4590[3];
+extern const struct SpritePalette gUnknown_083E45A8;
+extern const u16 gUnknown_08E9F988[];
+extern const struct SpriteTemplate gSpriteTemplate_83E45B8;
+extern const struct SpriteTemplate gSpriteTemplate_83E45F0;
 
 extern u16 gUnknown_020388B4;
+extern u8 gUnknown_020388B0[];
 
 
 // TODO: decompile the debug code so the compiler doesn't complain about
@@ -215,24 +258,61 @@ static void sub_80F0FA0(void);
 static bool8 sub_80F0FEC(void);
 static bool8 sub_80F0718(void);
 void sub_80F0FFC(u8);
-void sub_80F19DC(u8*);
+static void sub_80F19DC(u8*);
 static bool8 sub_80F1080(void);
 void sub_80F1614(void);
 void DrawMonRibbonIcons(void);
 void sub_80F13FC(void);
 void sub_80F1438(void);
 static void sub_80F1494(void);
+bool8 sub_80F162C(u8);
+void sub_80F01E0(u16);
+static void sub_80F19FC(void);
+static void sub_80F1A74(void);
+static void sub_80F1A80(void);
+static void sub_80F1A90(void);
+static bool8 sub_80F1AC4(void);
+static void sub_80F1B8C(u8);
+static bool8 sub_80F1BC8(u8);
+static void sub_80F2458(u8);
+static void sub_80F2514(u8);
+static void sub_80F1DF0(void);
+static void sub_80F2218(struct Sprite *sprite);
+static bool8 sub_80F1E50(void);
+static bool8 sub_80F22F8(void);
+static void sub_80F2108(void);
+static bool8 sub_80F1E6C(void);
+static void sub_80F1E84(void);
+static void sub_80F2148(void);
+static void sub_80F2240(struct Sprite *sprite);
+static bool8 sub_80F1F10(void);
+static bool8 sub_80F2360(void);
+static void sub_80F2170(void);
+static bool8 sub_80F23C8(void);
+static void sub_80F21F8(void);
+static void sub_80F1FF0(void);
+static void sub_80F208C(void);
+static void sub_80F22B0(struct Sprite *sprite);
+static void sub_80F240C(struct Sprite *sprite);
+static void sub_80F2598(void);
+static void sub_80F2620(void);
+static bool8 sub_80F26BC(void);
+static void sub_80F2C58(struct Sprite *sprite);
+static void sub_80F2D04(u8);
+static void sub_80F2D6C(u8);
+static void sub_80F2DD8(void);
+static void sub_80F2DF4(void);
+static void sub_80F2FEC(struct Sprite *sprite);
+static void sub_80F2FB0(void);
+static void sub_80F3008(u8);
 
 extern void sub_80F0900(void);
 extern void sub_80F443C(u8 *, u16);
-extern bool8 sub_80F162C(u8);
-extern void sub_80F01E0(u16);
 extern void sub_80F01A4(void);
 extern void sub_80EFD3C(void);
 extern void sub_8095C8C();
 extern void sub_80EFDA0(void);
 extern void sub_80EFD74(void);
-extern void sub_80F1A80(void);
 extern bool8 sub_80EFC64(void);
 extern void sub_80EFC3C(void);
 extern void sub_80EF624(const u16 *, const u16 *, u8, u8, u16 *);
@@ -245,7 +325,6 @@ extern void sub_80F6FB8();
 extern void sub_80F6DB8();
 extern bool8 sub_80F6E9C();
 extern bool8 sub_80F6ED4();
-extern void sub_80F2FB0();
 extern bool8 sub_80F70FC();
 extern void sub_80F708C(u32);
 extern void sub_80F4394();
@@ -276,56 +355,35 @@ extern void sub_80F4D44();
 extern bool8 sub_80F4D88();
 extern void sub_80F0264(u8);
 extern bool8 sub_80F02A0();
-extern void sub_80F3008();
 extern void sub_80F3130();
-extern void sub_80F2D6C(u32);
-extern bool8 sub_80F1E6C();
 extern void sub_80EF9F8(void);
 extern bool8 sub_80EFBDC(bool8);
 extern void sub_80EFBB0(void);
-extern void sub_80F2DF4();
-extern void sub_80F1E84();
-extern bool8 sub_80F1F10();
 extern void sub_80EEFBC(u8);
-extern void sub_80F2620();
 extern void sub_80EF814(void);
 extern void sub_80EF840(void);
 extern bool8 sub_80EF874(void);
-extern void sub_80F2DD8();
 extern bool8 sub_80F6250();
 extern void sub_80F6208();
-extern void sub_80F208C();
 extern void sub_80F6C20();
 extern void sub_80F3FF0();
 extern bool8 sub_80F4024();
-extern void sub_80F2598();
 extern void sub_80EF248(u8);
 extern bool8 sub_80EF284(u8);
-extern void sub_80F1B8C();
-extern bool8 sub_80F1BC8(u32 unk);
-extern void sub_80F1DF0();
-extern bool8 sub_80F1E50();
 extern void sub_80EF428(u8, u8);
 extern bool8 sub_80EEF78();
-extern void sub_80F1A90();
-extern void sub_80F2D04(u32);
-extern bool8 sub_80F1AC4();
 extern void sub_80F36F0();
 extern bool8 sub_80F3724();
 extern void sub_80EBC10();
 extern void sub_80EBDBC(void (*func)(void));
 extern void sub_80EBBE8();
-extern bool8 sub_80F26BC(void);
 extern void sub_80EBDD8();
 extern void sub_80EBD90();
 extern void sub_80EBD18();
-extern void sub_80F1A74();
-extern void sub_80F1FF0();
 extern void sub_80FB260();
 extern void sub_80EFE7C(void);
 extern void sub_80F5BF0();
 extern void sub_80F6F64();
-extern void sub_80F19FC();
 
 extern u16 gKeyRepeatStartDelay;
 
@@ -1225,11 +1283,11 @@ void sub_80ECD80()
 			ewram0_10.var304++;
         break;
     case 9:
-        sub_80F1B8C(0x2);
+        sub_80F1B8C(2);
         ewram0_10.var304++;
         // fall through
     case 10:
-        if (!sub_80F1BC8(0x2))
+        if (!sub_80F1BC8(2))
 			ewram0_10.var304++;
         break;
     case 11:
@@ -3693,7 +3751,7 @@ bool8 sub_80EEE54(void)
         sub_80EF58C(2);
         break;
     case 4:
-        gUnknown_083DFEC4->unk030C.unk030C.unk0 = 0;
+        gUnknown_083DFEC4->unk030C = 0;
         REG_BG1HOFS = 0;
         REG_BG1VOFS = 0;
         REG_BG1CNT = 0x1B0C;
@@ -3709,17 +3767,17 @@ bool8 sub_80EEF34(void)
 {
     bool8 retVal = TRUE;
 
-    if (gUnknown_083DFEC4->unk030C.unk030C.unk0 == 32)
+    if (gUnknown_083DFEC4->unk030C == 32)
         return FALSE;
 
-    gUnknown_083DFEC4->unk030C.unk030C.unk0 += 2;
-    if (gUnknown_083DFEC4->unk030C.unk030C.unk0 > 31)
+    gUnknown_083DFEC4->unk030C += 2;
+    if (gUnknown_083DFEC4->unk030C > 31)
     {
-        gUnknown_083DFEC4->unk030C.unk030C.unk0 = 32;
+        gUnknown_083DFEC4->unk030C = 32;
         retVal = FALSE;
     }
 
-    REG_BG1VOFS = gUnknown_083DFEC4->unk030C.unk030C.unk0;
+    REG_BG1VOFS = gUnknown_083DFEC4->unk030C;
     return retVal;
 }
 
@@ -3727,17 +3785,17 @@ bool8 sub_80EEF78(void)
 {
     bool8 retVal = TRUE;
 
-    if (gUnknown_083DFEC4->unk030C.unk030C.unk0 == 0)
+    if (gUnknown_083DFEC4->unk030C == 0)
         return FALSE;
 
-    gUnknown_083DFEC4->unk030C.unk030C.unk0 -= 2;
-    if (gUnknown_083DFEC4->unk030C.unk030C.unk0 <= 0)
+    gUnknown_083DFEC4->unk030C -= 2;
+    if (gUnknown_083DFEC4->unk030C <= 0)
     {
-        gUnknown_083DFEC4->unk030C.unk030C.unk0 = 0;
+        gUnknown_083DFEC4->unk030C = 0;
         retVal = FALSE;
     }
 
-    REG_BG1VOFS = gUnknown_083DFEC4->unk030C.unk030C.unk0;
+    REG_BG1VOFS = gUnknown_083DFEC4->unk030C;
     return retVal;
 }
 
@@ -4560,7 +4618,7 @@ bool8 sub_80EFF68(void)
         sub_80F01A4();
         break;
     case 12:
-        sub_80F01E0((u16)gUnknown_083DFEC4->unk8fe9);
+        sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
         break;
     case 13:
         REG_BG3CNT = 0x1E03;
@@ -5603,4 +5661,1415 @@ static void sub_80F15A8(void)
 void sub_80F1614(void)
 {
     gUnknown_083DFEC4->unk8764 = 0;
+}
+
+bool8 sub_80F162C(u8 arg0)
+{
+    switch (gUnknown_083DFEC4->unk8764)
+    {
+    case 0:
+        break;
+    case 1:
+        LZ77UnCompVram(gUnknown_08E9FF58, (void *)(VRAM + 0xE800));
+        break;
+    case 2:
+        DmaCopy16Defvars(3, gPokenavRibbonPokeView_Gfx, (void *)(VRAM + 0xE000), 0xE0);
+        break;
+    case 3:
+        if (!arg0)
+            LoadPalette(gUnknown_083E0124, 0xD0, 0x20);
+        else
+            LoadPalette(gUnknown_083E0144, 0xD0, 0x20);
+
+        gUnknown_083DFEC4->unk8766 = -80;
+        REG_BG0CNT = 0x1D0D;
+        gUnknown_083DFEC4->unk8764++;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk8764++;
+    return TRUE;
+}
+
+bool8 sub_80F170C(void)
+{
+    gUnknown_083DFEC4->unk8766 += 0x10;
+    if (gUnknown_083DFEC4->unk8766 > 0)
+        gUnknown_083DFEC4->unk8766 = 0;
+
+    return gUnknown_083DFEC4->unk8766 != 0;
+}
+
+bool8 sub_80F173C(void)
+{
+    gUnknown_083DFEC4->unk8766 -= 0x10;
+    if (gUnknown_083DFEC4->unk8766 < -0x50)
+        gUnknown_083DFEC4->unk8766 = -0x50;
+
+    return gUnknown_083DFEC4->unk8766 != -0x50;
+}
+
+bool8 sub_80F1778(void)
+{
+    switch (gUnknown_083DFEC4->unkD160)
+    {
+    case 0:
+        sub_80EEDE8();
+        gUnknown_083DFEC4->unkD162 = 2;
+        break;
+    case 1:
+        sub_80F1614();
+        break;
+    case 2:
+        if (sub_80F162C(0))
+            return TRUE;
+        break;
+    case 3:
+        LZ77UnCompVram(gPokenavConditionView_Gfx, (void *)(VRAM + 0x5000));
+        break;
+    case 4:
+        LZ77UnCompVram(gUnknown_08E9AC4C, (void *)(VRAM + 0xF000));
+        LoadPalette(gPokenavConditionMenu2_Pal, 0x20, 0x20);
+        break;
+    case 5:
+        sub_8095C8C((void *)VRAM + 0xF000, 0, 13, gUnknown_083E01F4, 0, 0, 12, 4, 12);
+        break;
+    case 6:
+        LZ77UnCompVram(gUnknown_08E9FEB4, (void *)(VRAM + 0xB800));
+        break;
+    case 7:
+        LoadPalette(gUnknown_083E0254, 0x30, 0x20);
+        LoadPalette(gUnknownPalette_81E6692, 0xB0, 0x20);
+        LoadPalette(&gPokenavConditionMenu2_Pal[2], 0xB1, 0x2);
+        LoadPalette(&gPokenavConditionMenu2_Pal[16], 0xB5, 0x2);
+        LoadPalette(&gPokenavConditionMenu2_Pal[30], 0xBF, 0x2);
+        sub_80F01A4();
+        break;
+    case 8:
+        sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+        break;
+    case 9:
+        REG_BG3CNT = 0x1E03;
+        REG_BG2CNT = 0x1702;
+        REG_BLDCNT = 0x844;
+        REG_BLDALPHA = 0x40B;
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unkD160++;
+    return TRUE;
+}
+
+void sub_80F1934(void)
+{
+    u8 *buffer = gUnknown_083DFEC4->unk8788;
+    if (gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk4)
+    {
+        u8 nature = GetNature(&gPlayerParty[sub_8137124(gUnknown_083DFEC4->unk87DC)]);
+        buffer = StringCopy(buffer, gOtherText_Nature2);
+        AlignStringInMenuWindow(buffer, gNatureNames[nature], 87, 0);
+    }
+    else
+    {
+        AlignStringInMenuWindow(buffer, gEmptyString_81E72B0, 87, 0);
+    }
+
+    Menu_PrintTextPixelCoords(gUnknown_083DFEC4->unk8788, 1, 112, 1);
+}
+
+static void sub_80F19DC(u8 *text)
+{
+    while (text[0] != EOS)
+    {
+        if (text[0] == EXT_CTRL_CODE_BEGIN && text[1] == CHAR_SPACE)
+        {
+            text[0] = EOS;
+            break;
+        }
+
+        text++;
+    }
+}
+
+static void sub_80F19FC(void)
+{
+    // FIXME r4/r5 swapped
+    register u8 *ptr asm("r5") = gUnknown_020388B0;
+    if (ptr[0] == 1)
+    {
+        const u8 *landmarkName = GetLandmarkName(
+            gUnknown_083DFEC4->regionMap.mapSectionId,
+            gUnknown_083DFEC4->regionMap.everGrandeCityArea,
+            ptr[1]);
+
+        if (landmarkName)
+        {
+            sub_8072A18(landmarkName, 0x70, 4 * (ptr[1] * 4 + 12), 0x78, 1);
+            if (++ptr[1] != 4)
+                return;
+        }
+
+        Menu_BlankWindowRect(14, ptr[1] * 2 + 6, 28, 15);
+        ptr[0] = 0;
+    }
+}
+
+static void sub_80F1A74(void)
+{
+    gUnknown_020388B0[0] = 0;
+}
+
+static void sub_80F1A80(void)
+{
+    gUnknown_020388B0[0] = 1;
+    gUnknown_020388B0[1] = 0;
+}
+
+static void sub_80F1A90(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (gUnknown_083DFEC4->unk6DAC == 0)
+        while (sub_80F1AC4());
+}
+
+static bool8 sub_80F1AC4(void)
+{
+    u16 i, j;
+
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        for (i = 0; i < 6; i++)
+        {
+            for (j = 0; j < 4; j++)
+                gUnknown_083DFEC4->unk320[i][j] = NULL;
+        }
+
+        gUnknown_083DFEC4->unk311 = 0;
+        break;
+    case 1:
+        LZ77UnCompWram(gPokenavMenuOptions_Gfx, gUnknown_083DFEC4->unk388);
+        break;
+    case 2:
+        LZ77UnCompWram(gPokenavConditionMenu_Gfx, gUnknown_083DFEC4->unk1788);
+        break;
+    case 3:
+        LZ77UnCompWram(gPokenavConditionSearch_Gfx, gUnknown_083DFEC4->unk2388);
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+static void sub_80F1B8C(u8 arg0)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (gUnknown_083DFEC4->unk6DAC == 0)
+        while (sub_80F1BC8(arg0));
+}
+
+#ifdef NONMATCHING
+// very close, but for some reason, (i + 1) is being stored in sp[0x10]
+static bool8 sub_80F1BC8(u8 arg0)
+{
+    u16 i, j;
+    u16 animNum;
+    u16 topOffset;
+    u16 height;
+    u16 middle;
+    u8 spriteId;
+
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        sub_80F2458(arg0);
+        break;
+    case 1:
+        sub_80F2514(arg0);
+        break;
+    case 2:
+        switch (arg0)
+        {
+        case 0:
+            topOffset = 42;
+            height = 20;
+            gUnknown_083DFEC4->unk30E = 5;
+            break;
+        case 1:
+            topOffset = 56;
+            height = 20;
+            gUnknown_083DFEC4->unk30E = 3;
+            break;
+        case 2:
+            topOffset = 40;
+            height = 16;
+            gUnknown_083DFEC4->unk30E = 6;
+            break;
+        default:
+            return FALSE;
+        }
+
+        animNum = 0;
+        for (i = 0; i < gUnknown_083DFEC4->unk30E; i++)
+        {
+            middle = (height * i) + topOffset - 8;
+            gUnknown_083DFEC4->unk314[i] = (middle << 8) | (middle + 0x11);
+            if (!arg0)
+            {
+                if (gUnknown_083DFEC4->unk6DB2[i] == 0)
+                {
+                    for (j = 0; j < 4; j++)
+                        gUnknown_083DFEC4->unk320[i][j] = NULL;
+                    continue;
+                }
+                else
+                {
+                    animNum = (gUnknown_083DFEC4->unk6DB2[i] - 1) * 4;
+                }
+            }
+
+            for (j = 0; j < 4; j++)
+            {
+                spriteId = CreateSprite(&gSpriteTemplate_83E4454, j * 32 + 256, (height * i) + topOffset, 0);
+                if (spriteId != MAX_SPRITES)
+                {
+                    gUnknown_083DFEC4->unk320[i][j] = &gSprites[spriteId];
+                    gUnknown_083DFEC4->unk320[i][j]->data[0] = i;
+                    gUnknown_083DFEC4->unk320[i][j]->data[1] = j;
+                    gUnknown_083DFEC4->unk320[i][j]->data[2] = j * 32 + 152;
+                    gUnknown_083DFEC4->unk320[i][j]->data[3] = j * 32 + 256;
+                    StartSpriteAnim(gUnknown_083DFEC4->unk320[i][j], animNum++);
+
+                    if ((arg0 == 2 || arg0 == 0) && i > 2)
+                        gUnknown_083DFEC4->unk320[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(0x1);
+                }
+            }
+        }
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+#else
+NAKED
+static bool8 sub_80F1BC8(u8 arg0)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0xC\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    mov r9, r0\n\
+    ldr r1, _080F1BF4 @ =gUnknown_083DFEC4\n\
+    ldr r2, [r1]\n\
+    ldr r3, _080F1BF8 @ =0x00000306\n\
+    adds r0, r2, r3\n\
+    ldrh r0, [r0]\n\
+    adds r3, r1, 0\n\
+    cmp r0, 0x1\n\
+    beq _080F1C0A\n\
+    cmp r0, 0x1\n\
+    bgt _080F1BFC\n\
+    cmp r0, 0\n\
+    beq _080F1C02\n\
+    b _080F1DC4\n\
+    .align 2, 0\n\
+_080F1BF4: .4byte gUnknown_083DFEC4\n\
+_080F1BF8: .4byte 0x00000306\n\
+_080F1BFC:\n\
+    cmp r0, 0x2\n\
+    beq _080F1C12\n\
+    b _080F1DC4\n\
+_080F1C02:\n\
+    mov r0, r9\n\
+    bl sub_80F2458\n\
+    b _080F1DC8\n\
+_080F1C0A:\n\
+    mov r0, r9\n\
+    bl sub_80F2514\n\
+    b _080F1DC8\n\
+_080F1C12:\n\
+    mov r4, r9\n\
+    cmp r4, 0x1\n\
+    beq _080F1C40\n\
+    cmp r4, 0x1\n\
+    bgt _080F1C22\n\
+    cmp r4, 0\n\
+    beq _080F1C2A\n\
+    b _080F1DC4\n\
+_080F1C22:\n\
+    mov r5, r9\n\
+    cmp r5, 0x2\n\
+    beq _080F1C54\n\
+    b _080F1DC4\n\
+_080F1C2A:\n\
+    movs r0, 0x2A\n\
+    str r0, [sp, 0x4]\n\
+    movs r1, 0x14\n\
+    str r1, [sp, 0x8]\n\
+    ldr r4, _080F1C3C @ =0x0000030e\n\
+    adds r1, r2, r4\n\
+    movs r0, 0x5\n\
+    b _080F1C62\n\
+    .align 2, 0\n\
+_080F1C3C: .4byte 0x0000030e\n\
+_080F1C40:\n\
+    movs r5, 0x38\n\
+    str r5, [sp, 0x4]\n\
+    movs r0, 0x14\n\
+    str r0, [sp, 0x8]\n\
+    ldr r4, _080F1C50 @ =0x0000030e\n\
+    adds r1, r2, r4\n\
+    movs r0, 0x3\n\
+    b _080F1C62\n\
+    .align 2, 0\n\
+_080F1C50: .4byte 0x0000030e\n\
+_080F1C54:\n\
+    movs r5, 0x28\n\
+    str r5, [sp, 0x4]\n\
+    movs r0, 0x10\n\
+    str r0, [sp, 0x8]\n\
+    ldr r4, _080F1CDC @ =0x0000030e\n\
+    adds r1, r2, r4\n\
+    movs r0, 0x6\n\
+_080F1C62:\n\
+    strb r0, [r1]\n\
+    movs r5, 0\n\
+    str r5, [sp]\n\
+    mov r8, r5\n\
+    adds r1, r3, 0\n\
+    ldr r0, [r1]\n\
+    ldr r2, _080F1CDC @ =0x0000030e\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    cmp r8, r0\n\
+    blt _080F1C7E\n\
+    b _080F1DC8\n\
+_080F1C7E:\n\
+    ldr r4, [sp, 0x8]\n\
+    mov r3, r8\n\
+    muls r3, r4\n\
+    ldr r5, [sp, 0x4]\n\
+    adds r0, r5, r3\n\
+    subs r0, 0x8\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    ldr r4, [r1]\n\
+    mov r2, r8\n\
+    lsls r1, r2, 1\n\
+    movs r5, 0xC5\n\
+    lsls r5, 2\n\
+    adds r2, r4, r5\n\
+    adds r2, r1\n\
+    lsls r1, r0, 8\n\
+    adds r0, 0x11\n\
+    orrs r1, r0\n\
+    strh r1, [r2]\n\
+    mov r0, r9\n\
+    cmp r0, 0\n\
+    bne _080F1CF2\n\
+    ldr r1, _080F1CE0 @ =0x00006db2\n\
+    adds r0, r4, r1\n\
+    mov r2, r8\n\
+    adds r1, r0, r2\n\
+    ldrb r0, [r1]\n\
+    cmp r0, 0\n\
+    bne _080F1CE8\n\
+    movs r5, 0\n\
+    ldr r0, _080F1CE4 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r0]\n\
+    lsls r2, 4\n\
+    movs r3, 0xC8\n\
+    lsls r3, 2\n\
+    adds r1, r0, r3\n\
+    movs r3, 0\n\
+_080F1CC8:\n\
+    lsls r0, r5, 2\n\
+    adds r0, r2\n\
+    adds r0, r1, r0\n\
+    str r3, [r0]\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x3\n\
+    bls _080F1CC8\n\
+    b _080F1D92\n\
+    .align 2, 0\n\
+_080F1CDC: .4byte 0x0000030e\n\
+_080F1CE0: .4byte 0x00006db2\n\
+_080F1CE4: .4byte gUnknown_083DFEC4\n\
+_080F1CE8:\n\
+    ldrb r0, [r1]\n\
+    subs r0, 0x1\n\
+    lsls r0, 18\n\
+    lsrs r0, 16\n\
+    str r0, [sp]\n\
+_080F1CF2:\n\
+    movs r5, 0\n\
+    ldr r4, [sp, 0x4]\n\
+    adds r0, r4, r3\n\
+    lsls r0, 16\n\
+    mov r10, r0\n\
+_080F1CFC:\n\
+    lsls r6, r5, 5\n\
+    movs r0, 0x80\n\
+    lsls r0, 1\n\
+    adds r7, r6, r0\n\
+    lsls r1, r7, 16\n\
+    asrs r1, 16\n\
+    ldr r0, _080F1DB4 @ =gSpriteTemplate_83E4454\n\
+    mov r3, r10\n\
+    asrs r2, r3, 16\n\
+    movs r3, 0\n\
+    bl CreateSprite\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    cmp r3, 0x40\n\
+    beq _080F1DC4\n\
+    ldr r0, _080F1DB8 @ =gUnknown_083DFEC4\n\
+    ldr r2, [r0]\n\
+    lsls r1, r5, 2\n\
+    mov r4, r8\n\
+    lsls r0, r4, 4\n\
+    adds r1, r0\n\
+    movs r0, 0xC8\n\
+    lsls r0, 2\n\
+    adds r2, r0\n\
+    adds r4, r2, r1\n\
+    lsls r0, r3, 4\n\
+    adds r0, r3\n\
+    lsls r0, 2\n\
+    ldr r1, _080F1DBC @ =gSprites\n\
+    adds r0, r1\n\
+    str r0, [r4]\n\
+    mov r1, r8\n\
+    strh r1, [r0, 0x2E]\n\
+    ldr r0, [r4]\n\
+    strh r5, [r0, 0x30]\n\
+    ldr r1, [r4]\n\
+    adds r0, r6, 0\n\
+    adds r0, 0x98\n\
+    strh r0, [r1, 0x32]\n\
+    ldr r0, [r4]\n\
+    strh r7, [r0, 0x34]\n\
+    ldr r0, [r4]\n\
+    ldr r1, [sp]\n\
+    adds r2, r1, 0x1\n\
+    lsls r2, 16\n\
+    lsrs r2, 16\n\
+    str r2, [sp]\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    bl StartSpriteAnim\n\
+    mov r2, r9\n\
+    cmp r2, 0x2\n\
+    beq _080F1D6E\n\
+    cmp r2, 0\n\
+    bne _080F1D88\n\
+_080F1D6E:\n\
+    mov r3, r8\n\
+    cmp r3, 0x2\n\
+    bls _080F1D88\n\
+    movs r0, 0x1\n\
+    bl IndexOfSpritePaletteTag\n\
+    ldr r3, [r4]\n\
+    lsls r0, 4\n\
+    ldrb r2, [r3, 0x5]\n\
+    movs r1, 0xF\n\
+    ands r1, r2\n\
+    orrs r1, r0\n\
+    strb r1, [r3, 0x5]\n\
+_080F1D88:\n\
+    adds r0, r5, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r5, r0, 16\n\
+    cmp r5, 0x3\n\
+    bls _080F1CFC\n\
+_080F1D92:\n\
+    mov r0, r8\n\
+    adds r0, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r0, 16\n\
+    mov r8, r0\n\
+    ldr r1, _080F1DB8 @ =gUnknown_083DFEC4\n\
+    ldr r0, [r1]\n\
+    ldr r4, _080F1DC0 @ =0x0000030e\n\
+    adds r0, r4\n\
+    ldrb r0, [r0]\n\
+    lsls r0, 24\n\
+    asrs r0, 24\n\
+    cmp r8, r0\n\
+    bge _080F1DB0\n\
+    b _080F1C7E\n\
+_080F1DB0:\n\
+    b _080F1DC8\n\
+    .align 2, 0\n\
+_080F1DB4: .4byte gSpriteTemplate_83E4454\n\
+_080F1DB8: .4byte gUnknown_083DFEC4\n\
+_080F1DBC: .4byte gSprites\n\
+_080F1DC0: .4byte 0x0000030e\n\
+_080F1DC4:\n\
+    movs r0, 0\n\
+    b _080F1DD8\n\
+_080F1DC8:\n\
+    ldr r0, _080F1DE8 @ =gUnknown_083DFEC4\n\
+    ldr r1, [r0]\n\
+    ldr r5, _080F1DEC @ =0x00000306\n\
+    adds r1, r5\n\
+    ldrh r0, [r1]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1]\n\
+    movs r0, 0x1\n\
+_080F1DD8:\n\
+    add sp, 0xC\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
+_080F1DE8: .4byte gUnknown_083DFEC4\n\
+_080F1DEC: .4byte 0x00000306\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+static void sub_80F1DF0(void)
+{
+    u16 i, j;
+    for (i = 0; i < gUnknown_083DFEC4->unk30E; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            if (gUnknown_083DFEC4->unk320[i][j])
+                gUnknown_083DFEC4->unk320[i][j]->callback = sub_80F2218;
+        }
+    }
+
+    PlaySE(SE_WIN_OPEN);
+}
+
+static bool8 sub_80F1E50(void)
+{
+    if (sub_80F22F8())
+    {
+        sub_80F2108();
+        return FALSE;
+    }
+    else
+    {
+        return TRUE;
+    }
+}
+
+static bool8 sub_80F1E6C(void)
+{
+    return !sub_80F22F8();
+}
+
+static void sub_80F1E84(void)
+{
+    u16 i, j;
+
+    gUnknown_083DFEC4->unk30F = 0;
+    sub_80F2148();
+    for (i = 0; i < gUnknown_083DFEC4->unk30E; i++)
+    {
+        if (i != gUnknown_083DFEC4->unk6DAD)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                if (gUnknown_083DFEC4->unk320[i][j])
+                    gUnknown_083DFEC4->unk320[i][j]->callback = sub_80F2240;
+            }
+        }
+    }
+}
+
+static bool8 sub_80F1F10(void)
+{
+    u16 j;
+
+    switch (gUnknown_083DFEC4->unk30F)
+    {
+    case 0:
+        if (sub_80F2360())
+        {
+            for (j = 0; j < 4; j++)
+            {
+                struct Sprite *sprite = gUnknown_083DFEC4->unk320[gUnknown_083DFEC4->unk6DAD][j];
+                sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
+                sprite->affineAnims = gSpriteAffineAnimTable_83E4450;
+                InitSpriteAffineAnim(sprite);
+                sprite->data[4] = j * 4 - 6;
+                sprite->data[4] /= 2;
+                sprite->data[5] = sprite->data[4] * 8;
+                sprite->callback = sub_80F2240;
+            }
+
+            sub_80F2170();
+            gUnknown_083DFEC4->unk30F++;
+        }
+        break;
+    case 1:
+        if (sub_80F23C8())
+        {
+            sub_80F21F8();
+            FreeSpriteTilesByTag(0x0);
+            FreeSpritePaletteByTag(0x0);
+            FreeSpritePaletteByTag(0x1);
+            return FALSE;
+        }
+        break;
+    }
+
+    return TRUE;
+}
+
+static void sub_80F1FF0(void)
+{
+    if (gUnknown_083DFEC4->unk311 == 1)
+    {
+        REG_WIN0V = gUnknown_083DFEC4->unk314[gUnknown_083DFEC4->unk6DAD];
+        REG_BLDY = gSineTable[gUnknown_083DFEC4->unk312] >> 5;
+        gUnknown_083DFEC4->unk312 += 3;
+        gUnknown_083DFEC4->unk312 &= 0x7F;
+    }
+    else if (gUnknown_083DFEC4->unk311 == 2)
+    {
+        REG_BLDALPHA = gUnknown_083E42F8[gUnknown_083DFEC4->unk312];
+        if (gUnknown_083DFEC4->unk312 < 15)
+            gUnknown_083DFEC4->unk312++;
+    }
+}
+
+static void sub_80F208C(void)
+{
+    sub_80F2148();
+}
+
+static void sub_80F2098(void)
+{
+    REG_WIN0H = 0x77F0;
+    REG_WIN0V = gUnknown_083DFEC4->unk314[gUnknown_083DFEC4->unk6DAD];
+    REG_WININ = 0x3F;
+    REG_WINOUT = 0x1F;
+    REG_DISPCNT |= DISPCNT_WIN0_ON;
+}
+
+static void sub_80F20F4(void)
+{
+    REG_DISPCNT &= ~DISPCNT_WIN0_ON;
+}
+
+static void sub_80F2108(void)
+{
+    if (!gUnknown_083DFEC4->unk311)
+    {
+        gUnknown_083DFEC4->unk311 = 1;
+        gUnknown_083DFEC4->unk312 = 0;
+        REG_BLDCNT = 0x90;
+        REG_BLDY = 0;
+        sub_80F2098();
+    }
+}
+
+static void sub_80F2148(void)
+{
+    gUnknown_083DFEC4->unk311 = 0;
+    REG_BLDCNT = 0;
+    sub_80F20F4();
+}
+
+static void sub_80F2170(void)
+{
+    u16 j;
+
+    if (!gUnknown_083DFEC4->unk311)
+    {
+        sub_80F20F4();
+        for (j = 0; j < 4; j++)
+        {
+            struct Sprite *sprite = gUnknown_083DFEC4->unk320[gUnknown_083DFEC4->unk6DAD][j];
+            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+        }
+
+        gUnknown_083DFEC4->unk311 = 2;
+        gUnknown_083DFEC4->unk312 = 0;
+        REG_BLDCNT = 0x3F40;
+        REG_BLDALPHA = 0x10;
+    }
+}
+
+static void sub_80F21F8()
+{
+    gUnknown_083DFEC4->unk311 = 0;
+    REG_BLDCNT = 0;
+}
+
+static void sub_80F2218(struct Sprite *sprite)
+{
+    sprite->pos1.x -= 8;
+    if (sprite->pos1.x <= sprite->data[2])
+    {
+        sprite->pos1.x = sprite->data[2];
+        sprite->callback = sub_80F22B0;
+    }
+}
+
+static void sub_80F2240(struct Sprite *sprite)
+{
+    if (sprite->data[0] == gUnknown_083DFEC4->unk6DAD)
+    {
+        if (sprite->data[5])
+        {
+            sprite->pos1.x += sprite->data[4];
+            sprite->data[5] -= sprite->data[4];
+        }
+
+        if (sprite->affineAnimEnded)
+            sub_80F240C(sprite);
+    }
+    else
+    {
+        sprite->pos1.x += 8;
+        if (sprite->pos1.x >= sprite->data[3])
+            sub_80F240C(sprite);
+    }
+}
+
+static void sub_80F22B0(struct Sprite *sprite)
+{
+    if (sprite->data[0] == gUnknown_083DFEC4->unk6DAD)
+    {
+        if (sprite->pos2.x > -16)
+            sprite->pos2.x -= 4;
+    }
+    else
+    {
+        if (sprite->pos2.x < 0)
+            sprite->pos2.x += 4;
+    }
+}
+
+static bool8 sub_80F22F8(void)
+{
+    u16 i, j;
+
+    for (i = 0; i < gUnknown_083DFEC4->unk6DAE; i++)
+    {
+        for (j = 0; j < 4; j++)
+        {
+            struct Sprite *sprite = gUnknown_083DFEC4->unk320[i][j];
+            if (!sprite)
+                return TRUE;
+
+            if (sprite->pos2.x != 0 && sprite->pos2.x != -16)
+                return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F2360(void)
+{
+    u16 i, j;
+
+    for (i = 0; i < gUnknown_083DFEC4->unk30E; i++)
+    {
+        if (i != gUnknown_083DFEC4->unk6DAD)
+        {
+            for (j = 0; j < 4; j++)
+            {
+                struct Sprite *sprite = gUnknown_083DFEC4->unk320[i][j];
+                if (sprite)
+                    return FALSE;
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F23C8(void)
+{
+    u16 j;
+
+    for (j = 0; j < 4; j++)
+    {
+        struct Sprite *sprite = gUnknown_083DFEC4->unk320[gUnknown_083DFEC4->unk6DAD][j];
+        if (sprite)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_80F240C(struct Sprite *sprite)
+{
+    gUnknown_083DFEC4->unk320[sprite->data[0]][sprite->data[1]] = NULL;
+    if (sprite->affineAnimEnded)
+        FreeOamMatrix(sprite->oam.matrixNum);
+
+    DestroySprite(sprite);
+}
+
+static void sub_80F2458(u8 arg0)
+{
+    switch (arg0)
+    {
+    case 0:
+        gUnknown_083DFEC4->unk380.data = gUnknown_083DFEC4->unk388;
+        gUnknown_083DFEC4->unk380.size = sizeof(gUnknown_083DFEC4->unk388);
+        gUnknown_083DFEC4->unk380.tag = 0x0;
+        break;
+    case 1:
+        gUnknown_083DFEC4->unk380.data = gUnknown_083DFEC4->unk1788;
+        gUnknown_083DFEC4->unk380.size = sizeof(gUnknown_083DFEC4->unk1788);
+        gUnknown_083DFEC4->unk380.tag = 0x0;
+        break;
+    case 2:
+        gUnknown_083DFEC4->unk380.data = gUnknown_083DFEC4->unk2388;
+        gUnknown_083DFEC4->unk380.size = sizeof(gUnknown_083DFEC4->unk2388);
+        gUnknown_083DFEC4->unk380.tag = 0x0;
+        break;
+    default:
+        return;
+    }
+
+    LoadSpriteSheet(&gUnknown_083DFEC4->unk380);
+}
+
+static void sub_80F2514(u8 arg0)
+{
+    struct SpritePalette spritePalette;
+
+    switch (arg0)
+    {
+    case 0:
+        spritePalette.data = gPokenavMenuOptions1_Pal;
+        spritePalette.tag = 0;
+        LoadSpritePalette(&spritePalette);
+        spritePalette.data = gPokenavMenuOptions2_Pal;
+        spritePalette.tag = 0x1;
+        break;
+    case 1:
+        spritePalette.data = gPokenavConditionMenu_Pal;
+        spritePalette.tag = 0x0;
+        break;
+    case 2:
+        spritePalette.data = gPokenavCondition6_Pal;
+        spritePalette.tag = 0;
+        LoadSpritePalette(&spritePalette);
+        spritePalette.data = gPokenavCondition7_Pal;
+        spritePalette.tag = 0x1;
+        break;
+    default:
+        return;
+    }
+
+    LoadSpritePalette(&spritePalette);
+}
+
+static void sub_80F2598(void)
+{
+    u8 spriteId;
+
+    gUnknown_083DFEC4->unk6D9C = NULL;
+    if (DoesSomeoneWantRematchIn(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum) == TRUE)
+    {
+        LoadSpriteSheet(&gSpriteSheet_PokenavBlueLight);
+        LoadSpritePalette(&gSpritePalette_PokenavBlueLight);
+        spriteId = CreateSprite(&gSpriteTemplate_83E4484, 12, 96, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk6D9C = &gSprites[spriteId];
+        }
+        else
+        {
+            FreeSpriteTilesByTag(0x19);
+            FreeSpritePaletteByTag(0x11);
+        }
+    }
+}
+
+static void sub_80F2620(void)
+{
+    if (gUnknown_083DFEC4->unk6D9C)
+    {
+        DestroySprite(gUnknown_083DFEC4->unk6D9C);
+        FreeSpriteTilesByTag(0x19);
+        FreeSpritePaletteByTag(0x11);
+        gUnknown_083DFEC4->unk6D9C = NULL;
+    }
+}
+
+void sub_80F2654(struct Sprite *sprite)
+{
+    if (++sprite->data[0] > 6)
+    {
+        sprite->data[0] = 0;
+        sprite->invisible = !sprite->invisible;
+    }
+}
+
+void sub_80F2688(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while(sub_80F26BC());
+}
+
+static bool8 sub_80F26BC(void)
+{
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        LZ77UnCompWram(gPokenavMainMenu_Gfx, gUnknown_083DFEC4->unk3B98);
+        break;
+    case 1:
+        LZ77UnCompWram(gPokenavConditionMenuHeader_Gfx, gUnknown_083DFEC4->unk4198);
+        break;
+    case 2:
+        LZ77UnCompWram(gPokenavRibbonsHeader_Gfx, gUnknown_083DFEC4->unk4D98);
+        break;
+    case 3:
+        LZ77UnCompWram(gPokenavHoennMapHeader_Gfx, gUnknown_083DFEC4->unk5398);
+        break;
+    case 4:
+        LZ77UnCompWram(gPokenavConditionMenuOptions_Gfx, gUnknown_083DFEC4->unk5F98);
+        break;
+    case 5:
+        LZ77UnCompWram(gPokenavConditionMenuOptions2_Gfx, gUnknown_083DFEC4->unk6798);
+        break;
+    case 6:
+        LZ77UnCompWram(gPokenavTrainersEyesHeader_Gfx, gUnknown_083DFEC4->unk4798);
+        break;
+    case 7:
+        LoadSpritePalettes(gUnknown_083E449C);
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+static void sub_80F27DC(u8 arg0)
+{
+    struct SpriteSheet spriteSheet;
+
+    switch (arg0)
+    {
+    case 0:
+        spriteSheet.data = gUnknown_083DFEC4->unk3B98;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk3B98);
+        spriteSheet.tag = 0x1;
+        break;
+    case 1:
+        spriteSheet.data = gUnknown_083DFEC4->unk4198;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk4198);
+        spriteSheet.tag = 0x1;
+        break;
+    case 3:
+        spriteSheet.data = gUnknown_083DFEC4->unk4798;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk4798);
+        spriteSheet.tag = 0x1;
+        break;
+    case 2:
+        spriteSheet.data = gUnknown_083DFEC4->unk4D98;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk4D98);
+        spriteSheet.tag = 0x1;
+        break;
+    case 4:
+        spriteSheet.data = gUnknown_083DFEC4->unk5398;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk5398);
+        spriteSheet.tag = 0x1;
+        break;
+    case 5:
+        spriteSheet.data = gUnknown_083DFEC4->unk5F98;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk5F98);
+        spriteSheet.tag = 0x2;
+        break;
+    case 6:
+        spriteSheet.data = gUnknown_083DFEC4->unk6198;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6198);
+        spriteSheet.tag = 0x2;
+        break;
+    case 8:
+        spriteSheet.data = gUnknown_083DFEC4->unk6398;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6398);
+        spriteSheet.tag = 0x2;
+        break;
+    case 9:
+        spriteSheet.data = gUnknown_083DFEC4->unk6598;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6598);
+        spriteSheet.tag = 0x2;
+        break;
+    case 11:
+        spriteSheet.data = gUnknown_083DFEC4->unk6998;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6998);
+        spriteSheet.tag = 0x2;
+        break;
+    case 10:
+        spriteSheet.data = gUnknown_083DFEC4->unk6798;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6798);
+        spriteSheet.tag = 0x2;
+        break;
+    case 7:
+        spriteSheet.data = gUnknown_083DFEC4->unk6B98;
+        spriteSheet.size = sizeof(gUnknown_083DFEC4->unk6B98);
+        spriteSheet.tag = 0x2;
+        break;
+    default:
+        return;
+    }
+
+    LoadSpriteSheet(&spriteSheet);
+}
+
+void sub_80F29B8(u8 arg0)
+{
+    u16 i;
+    s16 deltaX, endX, initialX;
+    u16 y;
+    s16 width;
+    struct Sprite **sprites;
+    const struct SpriteTemplate *spriteTemplate;
+    u8 spriteId;
+
+    spriteTemplate = NULL;
+    switch (arg0)
+    {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+        initialX = -96;
+        y = 49 - gUnknown_083DFEC4->unk030C;
+        deltaX = 8;
+        endX = 32;
+        width = 64;
+        sprites = gUnknown_083DFEC4->unk3B88;
+        spriteTemplate = arg0 != 3 ? &gSpriteTemplate_83E44E0 : &gSpriteTemplate_83E44F8;
+        break;
+    case 4:
+        initialX = 272;
+        y = 49 - gUnknown_083DFEC4->unk030C;
+        deltaX = -8;
+        endX = 152;
+        width = 64;
+        spriteTemplate = &gSpriteTemplate_83E44E0;
+        sprites = gUnknown_083DFEC4->unk3B88;
+        break;
+    case 5:
+    case 6:
+    case 8:
+    case 9:
+        spriteTemplate = &gSpriteTemplate_83E4530;
+        // fall through
+    case 7:
+    case 10:
+    case 11:
+        if (spriteTemplate == NULL)
+            spriteTemplate = &gSpriteTemplate_83E4548;
+
+        initialX = -96;
+        y = 68 - gUnknown_083DFEC4->unk030C;
+        deltaX = 8;
+        endX = 16;
+        width = 32;
+        sprites = gUnknown_083DFEC4->unk3B90;
+        break;
+    default:
+        return;
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        spriteId = CreateSprite(spriteTemplate, i * width + initialX, y, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].data[0] = deltaX;
+            gSprites[spriteId].data[1] =  endX + i * width;
+            gSprites[spriteId].data[2] = i;
+            gSprites[spriteId].data[3] = arg0;
+            if (arg0 == 4 && i == 1)
+            {
+                int anim = !gUnknown_083DFEC4->regionMap.zoomed ? 1 : 2;
+                StartSpriteAnim(&gSprites[spriteId], anim);
+            }
+            else
+            {
+                StartSpriteAnim(&gSprites[spriteId], i);
+            }
+
+            if (arg0 < 4 && i == 1)
+            {
+                gSprites[spriteId].oam.shape = ST_OAM_SQUARE;
+                gSprites[spriteId].oam.size = 2;
+            }
+
+            sprites[i] = &gSprites[spriteId];
+        }
+    }
+}
+
+#define sEndX sprite->data[1]
+void sub_80F2BBC(struct Sprite *sprite)
+{
+    s16 x = sprite->pos1.x;
+    sprite->pos1.x += sprite->data[0];
+    if ((x <= sEndX && sprite->pos1.x >= sEndX) || (x >= sEndX && sprite->pos1.x <= sEndX))
+    {
+        sprite->pos1.x = sEndX;
+        if (sprite->data[3] == 4 && sprite->data[2] == 1)
+            sprite->callback = sub_80F2C58;
+        else
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+#undef sEndX
+
+static void sub_80F2C14(struct Sprite *sprite)
+{
+    u16 right;
+
+    sprite->pos1.x -= sprite->data[0];
+    right = sprite->pos1.x + 32;
+    if (right > 304)
+    {
+        if (sprite->data[2] == 1)
+        {
+            if (sprite->data[3] < 5)
+                FreeSpriteTilesByTag(0x1);
+            else
+                FreeSpriteTilesByTag(0x2);
+        }
+
+        DestroySprite(sprite);
+    }
+}
+
+static void sub_80F2C58(struct Sprite *sprite)
+{
+    int anim = !gUnknown_083DFEC4->regionMap.zoomed ? 1 : 2;
+    StartSpriteAnim(sprite, anim);
+}
+
+void sub_80F2C80(u8 arg0)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F2CBC(arg0));
+}
+
+bool8 sub_80F2CBC(u8 arg0)
+{
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        sub_80F27DC(arg0);
+        gUnknown_083DFEC4->unk306++;
+        return TRUE;
+    case 1:
+        sub_80F29B8(arg0);
+        gUnknown_083DFEC4->unk306++;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+}
+
+static void sub_80F2D04(u8 arg0)
+{
+    u16 i;
+
+    if (arg0 < 5)
+    {
+        for (i = 0; i < 2; i++)
+            gUnknown_083DFEC4->unk3B88[i]->callback = sub_80F2C14;
+    }
+    else
+    {
+        for (i = 0; i < 2; i++)
+            gUnknown_083DFEC4->unk3B90[i]->callback = sub_80F2C14;
+    }
+}
+
+static void sub_80F2D6C(u8 arg0)
+{
+    u16 i;
+
+    if (arg0 < 5)
+    {
+        FreeSpriteTilesByTag(0x1);
+        for (i = 0; i < 2; i++)
+            DestroySprite(gUnknown_083DFEC4->unk3B88[i]);
+    }
+    else
+    {
+        FreeSpriteTilesByTag(0x2);
+        for (i = 0; i < 2; i++)
+            DestroySprite(gUnknown_083DFEC4->unk3B90[i]);
+    }
+}
+
+static void sub_80F2DD8(void)
+{
+    CreateRegionMapCursor(7, 7);
+    CreateRegionMapPlayerIcon(8, 8);
+    sub_80FBF94();
+}
+
+static void sub_80F2DF4(void)
+{
+    FreeRegionMapIconResources();
+}
+
+void sub_80F2E00(struct Sprite *sprite)
+{
+    sprite->pos1.x = gUnknown_083DFEC4->unk8766 + 38;
+}
+
+static void sub_80F2E18(u8 arg0)
+{
+    u8 spriteId;
+    struct SpriteTemplate spriteTemplate;
+    struct SpritePalette spritePalette;
+    struct SpriteSheet spriteSheet;
+
+    if (!gUnknown_083DFEC4->unk8768)
+    {
+        spriteSheet = gUnknown_083E4568;
+        spriteTemplate = gSpriteTemplate_83E4570;
+        spritePalette = gUnknown_083E4588;
+
+        spriteSheet.data = gUnknown_083DFEC4->unkD1E4[arg0];
+        spritePalette.data = gUnknown_083DFEC4->unk0[arg0];
+        gUnknown_083DFEC4->unkD1DC = LoadSpritePalette(&spritePalette);
+        gUnknown_083DFEC4->unkD1DE = LoadSpriteSheet(&spriteSheet);
+
+        spriteId = CreateSprite(&spriteTemplate, 38, 104, 0);
+        if (spriteId == MAX_SPRITES)
+        {
+            FreeSpriteTilesByTag(0x6);
+            FreeSpritePaletteByTag(0x6);
+            gUnknown_083DFEC4->unk8768 = NULL;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk8768 = &gSprites[spriteId];
+            gUnknown_083DFEC4->unkD1E0 = (void *)(VRAM + 0x10000) + gUnknown_083DFEC4->unkD1DE * 32;
+            gUnknown_083DFEC4->unkD1DC = gUnknown_083DFEC4->unkD1DC * 16 + 0x100;
+        }
+    }
+    else
+    {
+        DmaCopy16Defvars(3, gUnknown_083DFEC4->unkD1E4[arg0], gUnknown_083DFEC4->unkD1E0, 0x800);
+        LoadPalette(gUnknown_083DFEC4->unk0[arg0], gUnknown_083DFEC4->unkD1DC, 0x20);
+    }
+}
+
+void sub_80F2F48(void)
+{
+    if (gUnknown_083DFEC4->unk8768)
+    {
+        DestroySprite(gUnknown_083DFEC4->unk8768);
+        FreeSpriteTilesByTag(0x6);
+        FreeSpritePaletteByTag(0x6);
+        gUnknown_083DFEC4->unk8768 = NULL;
+    }
+}
+
+void sub_80F2F7C(u8 arg0)
+{
+    sub_80F2E18(arg0);
+    gUnknown_083DFEC4->unkCED0 = gUnknown_083DFEC4->unk8768;
+    gUnknown_083DFEC4->unkCED0->callback = sub_80F2FEC;
+}
+
+static void sub_80F2FB0(void)
+{
+    if (gUnknown_083DFEC4->unkCED0)
+    {
+        DestroySprite(gUnknown_083DFEC4->unkCED0);
+        FreeSpriteTilesByTag(0x6);
+        FreeSpritePaletteByTag(0x6);
+        gUnknown_083DFEC4->unkCED0 = NULL;
+        gUnknown_083DFEC4->unk8768 = NULL;
+    }
+}
+
+static void sub_80F2FEC(struct Sprite *sprite)
+{
+    sprite->pos1.x = gUnknown_083DFEC4->unkD15A + 40;
+    sprite->pos1.y = 104;
+}
+
+static void sub_80F3008(u8 arg0)
+{
+    u16 i;
+    u8 spriteId;
+    struct SpritePalette spritePalette;
+    struct SpriteSheet spriteSheets[3];
+
+    memcpy(spriteSheets, gUnknown_083E4590, sizeof(gUnknown_083E4590));
+    spritePalette = gUnknown_083E45A8;
+    switch (arg0)
+    {
+    case 1:
+    case 2:
+        spritePalette.data = gUnknown_08E9F988;
+        break;
+    }
+
+    LoadSpriteSheets(spriteSheets);
+    LoadSpritePalette(&spritePalette);
+    spriteId = CreateSprite(&gSpriteTemplate_83E45B8, 95, 0, 0);
+    if (spriteId == MAX_SPRITES)
+    {
+        gUnknown_083DFEC4->unk87CC = NULL;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk87CC = &gSprites[spriteId];
+        for (i = 0; i < 2; i++)
+        {
+            spriteId = CreateSprite(&gSpriteTemplate_83E45F0, 168, i * 128 + 8, 0);
+            if (spriteId != MAX_SPRITES)
+            {
+                gUnknown_083DFEC4->unk87D0[i] = &gSprites[spriteId];
+                gSprites[spriteId].invisible = 1;
+                gSprites[spriteId].data[0] = 0;
+                gSprites[spriteId].data[1] = 0;
+                gSprites[spriteId].data[2] = i == 0 ? -1 : 1;
+                gSprites[spriteId].data[3] = i;
+                gSprites[spriteId].data[4] = 1;
+                StartSpriteAnim(&gSprites[spriteId], i);
+            }
+            else
+            {
+                gUnknown_083DFEC4->unk87D0[i] = NULL;
+            }
+        }
+    }
 }
