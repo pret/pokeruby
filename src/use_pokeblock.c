@@ -243,7 +243,7 @@ static void sub_8136294(void)
         case 6:
             gUnknown_083DFEC4->unk76AA = 0;
             gUnknown_083DFEC4->unk87E0 = NULL;
-            gUnknown_083DFEC4->unk030C.val = 0x20;
+            gUnknown_083DFEC4->unk030C = 0x20;
             gUnknown_02039304->unk50++;
             break;
         case 7:
@@ -285,7 +285,7 @@ static void sub_8136294(void)
             break;
         case 13:
             sub_80F2E18(0);
-            gUnknown_083DFEC4->unk8768->unk26 = 0xffd8;
+            gUnknown_083DFEC4->unk8768->pos2.y = 0xffd8;
             gUnknown_02039304->unk50++;
             break;
         case 14:
