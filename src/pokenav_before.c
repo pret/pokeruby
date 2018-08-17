@@ -191,6 +191,11 @@ extern const struct SpritePalette gUnknown_083E45A8;
 extern const u16 gUnknown_08E9F988[];
 extern const struct SpriteTemplate gSpriteTemplate_83E45B8;
 extern const struct SpriteTemplate gSpriteTemplate_83E45F0;
+extern const struct SpriteSheet gUnknown_083E4628[4];
+extern const struct SpritePalette gUnknown_083E4648[3];
+extern const struct SpriteTemplate gSpriteTemplate_83E4660;
+extern const u16 gUnknown_083E4678[];
+extern const u8 gUnknown_083E3D00[];
 
 extern u16 gUnknown_020388B4;
 extern u8 gUnknown_020388B0[];
@@ -305,6 +310,16 @@ static void sub_80F2DF4(void);
 static void sub_80F2FEC(struct Sprite *sprite);
 static void sub_80F2FB0(void);
 static void sub_80F3008(u8);
+static void sub_80F3130(void);
+static void sub_80F3264(void);
+static void sub_80F3294(u8);
+static void sub_80F35B4(void);
+static void sub_80F363C(struct Sprite *sprite);
+void sub_80F4548(u16, u16, u8);
+static void sub_80F36F0(void);
+static bool8 sub_80F3724(void);
+static void sub_80F379C(void);
+bool8 sub_80F37D0(void);
 
 extern void sub_80F0900(void);
 extern void sub_80F443C(u8 *, u16);
@@ -320,7 +335,6 @@ extern void sub_80EF7D4(void);
 extern void sub_80EF54C(u8);
 extern void sub_80EF58C(u8);
 extern void sub_80F6FFC();
-extern void sub_80F3294();
 extern void sub_80F6FB8();
 extern void sub_80F6DB8();
 extern bool8 sub_80F6E9C();
@@ -347,15 +361,12 @@ extern bool8 sub_80F63D0();
 extern void sub_80F4CF0();
 extern void sub_80EFF34();
 extern bool8 sub_80EFF68();
-extern void sub_80F35B4();
 extern void sub_80F6134();
 extern u8 sub_80F5DD4();
-extern bool8 sub_80F3264();
 extern void sub_80F4D44();
 extern bool8 sub_80F4D88();
 extern void sub_80F0264(u8);
 extern bool8 sub_80F02A0();
-extern void sub_80F3130();
 extern void sub_80EF9F8(void);
 extern bool8 sub_80EFBDC(bool8);
 extern void sub_80EFBB0(void);
@@ -372,8 +383,6 @@ extern void sub_80EF248(u8);
 extern bool8 sub_80EF284(u8);
 extern void sub_80EF428(u8, u8);
 extern bool8 sub_80EEF78();
-extern void sub_80F36F0();
-extern bool8 sub_80F3724();
 extern void sub_80EBC10();
 extern void sub_80EBDBC(void (*func)(void));
 extern void sub_80EBBE8();
@@ -7072,4 +7081,259 @@ static void sub_80F3008(u8 arg0)
             }
         }
     }
+}
+
+static void sub_80F3130(void)
+{
+    u16 i;
+
+    if (gUnknown_083DFEC4->unk87CC)
+    {
+        DestroySprite(gUnknown_083DFEC4->unk87CC);
+        FreeSpriteTilesByTag(0x9);
+        FreeSpritePaletteByTag(0x9);
+        gUnknown_083DFEC4->unk87CC = NULL;
+    }
+
+    for (i = 0; i < 2; i++)
+    {
+        if (gUnknown_083DFEC4->unk87D0[i])
+        {
+            DestroySprite(gUnknown_083DFEC4->unk87D0[i]);
+            gUnknown_083DFEC4->unk87D0[i] = NULL;
+        }
+    }
+
+    FreeSpriteTilesByTag(0xA);
+}
+
+void sub_80F3190(struct Sprite *sprite)
+{
+    sprite->pos1.y = gUnknown_083DFEC4->unk876C * 16 + 16;
+}
+
+void sub_80F31AC(struct Sprite *sprite)
+{
+    if (gUnknown_083DFEC4->unk87C9)
+    {
+        if (sprite->data[4])
+        {
+            if (!sprite->data[3])
+                sprite->invisible = gUnknown_083DFEC4->unk8770 == 0;
+            else
+                sprite->invisible = gUnknown_083DFEC4->unk8772 == gUnknown_083DFEC4->unk8774;
+
+            sprite->data[4] = 0;
+        }
+
+        if (++sprite->data[0] > 4)
+        {
+            sprite->data[0] = 0;
+            if (++sprite->data[1] < 5)
+            {
+                sprite->pos2.y += sprite->data[2];
+            }
+            else
+            {
+                sprite->data[1] = 0;
+                sprite->pos2.y = 0;
+            }
+        }
+    }
+}
+
+static void sub_80F3264(void)
+{
+    u16 i;
+
+    for (i = 0; i < 2; i++)
+    {
+        if (gUnknown_083DFEC4->unk87D0[i])
+            gUnknown_083DFEC4->unk87D0[i]->data[4] = 1;
+    }
+}
+
+static void sub_80F3294(u8 arg0)
+{
+    gUnknown_083DFEC4->unk87CC->invisible = arg0;
+    if (gUnknown_083DFEC4->unk87C9)
+    {
+        if (arg0 == 1)
+        {
+            gUnknown_083DFEC4->unk87D0[0]->invisible = arg0;
+            gUnknown_083DFEC4->unk87D0[1]->invisible = arg0;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk87D0[0]->data[4] = 1;
+            gUnknown_083DFEC4->unk87D0[1]->data[4] = 1;
+        }
+    }
+}
+
+void sub_80F3328(struct Sprite *sprite)
+{
+    if (sprite->data[0] == gUnknown_083DFEC4->unk87DC)
+        StartSpriteAnim(sprite, 0);
+    else
+        StartSpriteAnim(sprite, 1);
+}
+
+static void sub_80F3360(struct Sprite *sprite)
+{
+    if (gUnknown_083DFEC4->unk87DC == gUnknown_083DFEC4->unk87DA - 1)
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(0x4);
+    else
+        sprite->oam.paletteNum = IndexOfSpritePaletteTag(0x5);
+}
+
+void sub_80F33A8(void)
+{
+    u16 i;
+    u8 spriteId;
+    struct SpriteSheet spriteSheets[4];
+    struct SpritePalette spritePalettes[3];
+    struct SpriteTemplate spriteTemplate;
+
+    memcpy(spriteSheets, gUnknown_083E4628, sizeof(gUnknown_083E4628));
+    memcpy(spritePalettes, gUnknown_083E4648, sizeof(gUnknown_083E4648));
+    spriteTemplate = gSpriteTemplate_83E4660;
+    LoadSpriteSheets(spriteSheets);
+    LoadSpritePalettes(spritePalettes);
+
+    for (i = 0; i < gUnknown_083DFEC4->unk87DA - 1; i++)
+    {
+        spriteId = CreateSprite(&spriteTemplate, 226, i * 20 + 8, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk87E4[i] = &gSprites[spriteId];
+            gUnknown_083DFEC4->unk87E4[i]->data[0] = i;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk87E4[i] = NULL;   
+        }
+    }
+
+    spriteTemplate.tileTag = 0x4;
+    spriteTemplate.callback = SpriteCallbackDummy;
+    for (; i < 6; i++)
+    {
+        spriteId = CreateSprite(&spriteTemplate, 230, i * 20 + 8, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk87E4[i] = &gSprites[spriteId];
+            gUnknown_083DFEC4->unk87E4[i]->oam.size = 0;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk87E4[i] = NULL;
+        }
+    }
+
+    spriteTemplate.tileTag = 0x5;
+    spriteTemplate.callback = sub_80F3360;
+    spriteId = CreateSprite(&spriteTemplate, 222, i * 20 + 8, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        gUnknown_083DFEC4->unk87E4[i] = &gSprites[spriteId];
+        gUnknown_083DFEC4->unk87E4[i]->oam.shape = ST_OAM_H_RECTANGLE;
+        gUnknown_083DFEC4->unk87E4[i]->oam.size = 2;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk87E4[i] = NULL;
+    }
+}
+
+void sub_80F357C(void)
+{
+    u16 i;
+
+    for (i = 0; i < 7; i++)
+    {
+        if (gUnknown_083DFEC4->unk87E4[i])
+        {
+            DestroySprite(gUnknown_083DFEC4->unk87E4[i]);
+            gUnknown_083DFEC4->unk87E4[i] = NULL;
+        }
+    }
+}
+
+static void sub_80F35B4(void)
+{
+    struct Sprite *sprite;
+
+    gUnknown_083DFEC4->unk76B0.baseTileTag = 0x1C;
+    gUnknown_083DFEC4->unk76B0.basePaletteTag = 0x13;
+    sub_80F727C(&gUnknown_083DFEC4->unk76B0);
+    sub_80F7404();
+    sprite = sub_80F7920(27, 21, gUnknown_083E4678);
+    sprite->oam.priority = 3;
+    sprite->pos1.x = 192;
+    sprite->pos1.y = 32;
+    sprite->callback = sub_80F363C;
+    gUnknown_083DFEC4->unk76AC = sprite;
+}
+
+void sub_80F3614(void)
+{
+    DestroySprite(gUnknown_083DFEC4->unk76AC);
+    FreeSpriteTilesByTag(0x1B);
+    FreeSpritePaletteByTag(0x15);
+}
+
+static void sub_80F363C(struct Sprite *sprite)
+{
+    StartSpriteAnim(sprite, gUnknown_083DFEC4->unk8934[gUnknown_083DFEC4->unk8fe9]);
+}
+
+void sub_80F3668(void)
+{
+    sub_80F7418(gUnknown_083DFEC4->unk8934[gUnknown_083DFEC4->unk8fe9], 176, 32);
+}
+
+void sub_80F3698(void)
+{
+    struct UnkUsePokeblockSub *var0 = &gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC];
+    gUnknown_083DFEC4->unk8934[gUnknown_083DFEC4->unk8fe9] = gUnknown_083DFEC4->unk76B0.markings;
+    sub_80F4548(var0->unk1, var0->partyIdx, gUnknown_083DFEC4->unk76B0.markings);
+    sub_80F7470();
+}
+
+static void sub_80F36F0(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F3724());
+}
+
+static bool8 sub_80F3724(void)
+{
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_083E3D00, gUnknown_083DFEC4->unk984C);
+        break;
+    case 1:
+        sub_80F379C();
+        gUnknown_083DFEC4->unk306++;
+        // fall through
+    case 2:
+        if (sub_80F37D0())
+            return TRUE;
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+static void sub_80F379C(void)
+{
+    gUnknown_083DFEC4->unkBC93 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F37D0());
 }

@@ -2,6 +2,7 @@
 #define GUARD_POKENAV_H
 
 #include "region_map.h"
+#include "mon_markings.h"
 
 struct UnkPokenavStruct_Sub {
     /*0x0*/ u16 unk0;
@@ -91,7 +92,8 @@ struct UnkPokenavStruct {
     /*0x769E*/ u8 unk769E;
     /*0x769F*/ u8 filler769F[0xB];
     /*0x76AA*/ u8 unk76AA;
-    /*0x76AB*/ u8 filler76AB[0x10b9];
+    /*0x76AC*/ struct Sprite *unk76AC;
+    /*0x76B0*/ struct PokemonMarkMenu unk76B0;
     /*0x8764*/ u16 unk8764;
     /*0x8766*/ s16 unk8766;
     /*0x8768*/ struct Sprite *unk8768;
@@ -111,7 +113,7 @@ struct UnkPokenavStruct {
     /*0x8786*/ u16 unk8786;
     /*0x8788*/ u8 unk8788[0x40];
     /*0x87C8*/ u8 unk87C8;
-    /*0x87C9*/ u8 filler87C9;
+    /*0x87C9*/ u8 unk87C9;
     /*0x87CA*/ u8 unk87CA;
     /*0x87CC*/ struct Sprite *unk87CC;
     /*0x87D0*/ struct Sprite *unk87D0[2];
@@ -120,11 +122,13 @@ struct UnkPokenavStruct {
     /*0x87DC*/ s16 unk87DC;
     /*0x87DE*/ s16 unk87DE;
     /*0x87E0*/ void *unk87E0;
-    /*0x87E4*/ u8 filler87E4[0x44];
+    /*0x87E4*/ struct Sprite *unk87E4[7];
+    /*0x8800*/ u8 filler8800[0x28];
     /*0x8828*/ u8 unk8828;
     /*0x8829*/ u8 unk8829[3][64];
     /*0x88E9*/ u8 unk88E9[3][24];
-    /*0x8931*/ u8 unk8931[11];
+    /*0x8931*/ u8 unk8931[3];
+    /*0x8934*/ u8 unk8934[8];
     /*0x893C*/ struct UnkUsePokeblockSub unk893c[0x1ab];
     /*0x8fe8*/ u8 fil8fe8[1];
     /*0x8fe9*/ s8 unk8fe9;
@@ -135,13 +139,16 @@ struct UnkPokenavStruct {
     /*0x9040*/ u8 unk9040[0x304];
     /*0x9344*/ u8 unk9344;
     /*0x9345*/ u8 filler9345[7];
-    /*0x934C*/ u16 unk934C[0x1480];
+    /*0x934C*/ u16 unk934C[0x280];
+    /*0x984C*/ u8 unk984C[0x2400];
     /*0xBC4C*/ u8 unkBC4C[0x42];
     /*0xBC8E*/ u8 unkBC8E;
     /*0xBC8F*/ u8 unkBC8F;
     /*0xBC90*/ u8 unkBC90;
     /*0xBC91*/ u8 unkBC91;
-    /*0xBC92*/ u8 fillerBC92[0x8];
+    /*0xBC92*/ u8 fillerBC92[0x1];
+    /*0xBC93*/ u8 unkBC93;
+    /*0xBC94*/ u8 fillerBC94[0x6];
     /*0xBC9A*/ u8 unkBC9A;
     /*0xBC9B*/ u8 unkBC9B;
     /*0xBC9C*/ u8 unkBC9C[22][200];
