@@ -55,7 +55,7 @@ void sub_80D8F74(struct Sprite *sprite);
 void sub_80D81E0(u8 taskId); // static?
 void sub_80D851C(u8 taskId);
 void sub_80D8AF8(u8 taskId);
-void sub_80D8BA8(u8 spriteId, u8 taskId, u8 a3, u8 a4);//(u8 taskId);
+void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4);//(u8 taskId);
 
 const union AnimCmd gSpriteAnim_83D9B58[] =
 {
@@ -536,16 +536,32 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9F0C =
  *                         mist, powder snow, sheer cold, 
  */
 
-
-#ifdef NONMATCHING
+/*
 // NOT EQUIVALENT
 void sub_80D7704(struct Sprite *sprite)
 {
     //
-    u8 r9, r8, r3, r6;
-    s16 r4, r10;
+    //u16 battler1, battler2, battler3, battler4; //
+    u16 r9, r8, r3, r6;
+    //s16 r4, r10;
 
     sprite->oam.tileNum += 7;
+
+    //u8 battler1, battler2, battler3, battler4;
+
+    //battler1 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
+    //battler2 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
+    //battler3 = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
+    //battler4 = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
+
+    //sprite->oam.tileNum += 7;
+
+    //sprite->data[0] = gBattleAnimArgs[4];
+
+    //sprite->data[1] = battler3 + gBattleAnimArgs[0]; //???
+    //sprite->data[2] = battler1 + gBattleAnimArgs[2];
+    //sprite->data[3] = battler4 + gBattleAnimArgs[1];
+    //sprite->data[4] = battler2 + gBattleAnimArgs[3];
 
     r9 = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     r8 = GetBattlerSpriteCoord(gAnimBankTarget, 3);
@@ -559,31 +575,31 @@ void sub_80D7704(struct Sprite *sprite)
     sprite->data[3] = r6 + gBattleAnimArgs[1];
     sprite->data[4] = r8 + gBattleAnimArgs[3];
 
+    //sprite->data[0] = gBattleAnimArgs;
+
+
     sub_8078314(sprite);
 
     if ((u32)(r9 + 32) <= 304 || (u32)(r8 + 32) <= 224) // cmp 1
     {
         r4 = sprite->data[1]; 
         r10 = 304;
+
         // _080D77AA
+        for (int i = 0; i < 3; i++)
+        {
+            //
+            if (((u32)((s16)r9 + r4) + (0x80 << 14)) >> 16 > 304
+                || ((u32)((s16)r8 + r4) + (0x80 << 14)) >> 16 > 0xE0)
+            {
+                break;
+            }
+        }
     }
     // _080D77DE
-
-
-
-
-
-    /*sprite->oam.tileNum += 7;
-
-    sprite->data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-    sprite->data[3] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
-    sprite->data[2] = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
-    sprite->data[4] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-
-    sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = gBattleAnimArgs[0];*/
 }
-#else
+*/
+
 NAKED void sub_80D7704(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -776,7 +792,6 @@ NAKED void sub_80D7704(struct Sprite *sprite)
                 "\t.align 2, 0\n"
                 "_080D7884: .4byte sub_80D7888");
 }
-#endif // NONMATCHING 
 
 // MATCHING
 void sub_80D7888(struct Sprite *sprite)
@@ -1223,272 +1238,97 @@ void sub_80D80E0(u8 taskId)
     gTasks[taskId].func = sub_80D81E0;
 }
 
-//
-// static void sub_80D81E0(u8 taskId);
-
-#ifdef NONMATCHING
-// 
+// MATCHING
 void sub_80D81E0(u8 taskId)
 {
-    //
+    struct Struct_sub_8078914 subStruct;
+
     gBattle_BG1_X += 0xFFFF;
+    gBattle_BG1_Y += 0;
+
+    switch(gTasks[taskId].data[12])
+    {
+    case 0:
+
+        gTasks[taskId].data[10] += 1;
+
+        if (gTasks[taskId].data[10] != 4)
+            break;
+
+        else
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[9] += 1;
+
+            gTasks[taskId].data[11] = gUnknown_083D9D6C[gTasks[taskId].data[9]];
+
+            REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
+
+            if (gTasks[taskId].data[11] != 9)
+                break;
+
+            else
+            {
+                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[11] = 0;
+                break;
+            }
+        }
+
+    case 1:
+
+        gTasks[taskId].data[11] += 1;
+
+        if (gTasks[taskId].data[11] == 0x51)
+        {
+            gTasks[taskId].data[11] = 9;
+            gTasks[taskId].data[12] += 1;
+        }
+        break;
+
+    case 2:
+
+        gTasks[taskId].data[10] += 1;
+
+        if (gTasks[taskId].data[10] == 4)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[11] -= 1;
+
+            REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
+
+            if (gTasks[taskId].data[11] == 0)
+            {
+                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[11] = 0;
+            }
+        }
+        break;
+
+    case 3:
+
+        sub_8078914(&subStruct);
+
+        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
+        DmaClear32(3, subStruct.field_4, 0x800);
+
+        if (!IsContest())
+            REG_BG1CNT_BITFIELD.charBaseBlock = 0;
+
+        gTasks[taskId].data[12] += 1;
+
+    case 4:
+
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+
+        REG_BG1CNT_BITFIELD.priority = 1;
+        DestroyAnimVisualTask(taskId);
+    }
 } 
-#else
-NAKED void sub_80D81E0(u8 taskId)
-{
-    asm_unified(".equ REG_BLDCNT, 0x4000050\n"
-                ".equ REG_BLDALPHA, 0x4000052\n"
-                ".equ REG_BG1CNT, 0x400000A\n"
-                ".equ REG_BG1HOFS, 0x4000014\n"
-                "\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x10\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tldr r2, _080D8220 @ =gBattle_BG1_X\n"
-                "\tldr r1, _080D8224 @ =0x0000ffff\n"
-                "\tadds r0, r1, 0\n"
-                "\tldrh r4, [r2]\n"
-                "\tadds r0, r4\n"
-                "\tstrh r0, [r2]\n"
-                "\tldr r1, _080D8228 @ =gBattle_BG1_Y\n"
-                "\tldr r3, _080D822C @ =gTasks\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r0, r3\n"
-                "\tmovs r4, 0x20\n"
-                "\tldrsh r0, [r0, r4]\n"
-                "\tadds r4, r1, 0\n"
-                "\tcmp r0, 0x4\n"
-                "\tbls _080D8214\n"
-                "\tb _080D83B0\n"
-                "_080D8214:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _080D8230 @ =_080D8234\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_080D8220: .4byte gBattle_BG1_X\n"
-                "_080D8224: .4byte 0x0000ffff\n"
-                "_080D8228: .4byte gBattle_BG1_Y\n"
-                "_080D822C: .4byte gTasks\n"
-                "_080D8230: .4byte _080D8234\n"
-                "\t.align 2, 0\n"
-                "_080D8234:\n"
-                "\t.4byte _080D8248\n"
-                "\t.4byte _080D82A0\n"
-                "\t.4byte _080D82C2\n"
-                "\t.4byte _080D8304\n"
-                "\t.4byte _080D838C\n"
-                "_080D8248:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r3, r0, r3\n"
-                "\tldrh r0, [r3, 0x1C]\n"
-                "\tadds r0, 0x1\n"
-                "\tmovs r4, 0\n"
-                "\tstrh r0, [r3, 0x1C]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x4\n"
-                "\tbeq _080D8262\n"
-                "\tb _080D83B0\n"
-                "_080D8262:\n"
-                "\tstrh r4, [r3, 0x1C]\n"
-                "\tldrh r0, [r3, 0x1A]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x1A]\n"
-                "\tldr r1, _080D8298 @ =gUnknown_083D9D6C\n"
-                "\tmovs r2, 0x1A\n"
-                "\tldrsh r0, [r3, r2]\n"
-                "\tadds r0, r1\n"
-                "\tldrb r1, [r0]\n"
-                "\tstrh r1, [r3, 0x1E]\n"
-                "\tldr r2, _080D829C @ =REG_BLDALPHA\n"
-                "\tmovs r0, 0x10\n"
-                "\tsubs r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\torrs r1, r0\n"
-                "\tstrh r1, [r2]\n"
-                "\tmovs r1, 0x1E\n"
-                "\tldrsh r0, [r3, r1]\n"
-                "\tcmp r0, 0x9\n"
-                "\tbeq _080D828C\n"
-                "\tb _080D83B0\n"
-                "_080D828C:\n"
-                "\tldrh r0, [r3, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x20]\n"
-                "\tstrh r4, [r3, 0x1E]\n"
-                "\tb _080D83B0\n"
-                "\t.align 2, 0\n"
-                "_080D8298: .4byte gUnknown_083D9D6C\n"
-                "_080D829C: .4byte REG_BLDALPHA\n"
-                "_080D82A0:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r3, r0, r3\n"
-                "\tldrh r0, [r3, 0x1E]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x1E]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x51\n"
-                "\tbne _080D83B0\n"
-                "\tmovs r0, 0x9\n"
-                "\tstrh r0, [r3, 0x1E]\n"
-                "\tldrh r0, [r3, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x20]\n"
-                "\tb _080D83B0\n"
-                "_080D82C2:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r3, r0, r3\n"
-                "\tldrh r0, [r3, 0x1C]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x1C]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x4\n"
-                "\tbne _080D83B0\n"
-                "\tmovs r0, 0\n"
-                "\tstrh r0, [r3, 0x1C]\n"
-                "\tldrh r1, [r3, 0x1E]\n"
-                "\tsubs r1, 0x1\n"
-                "\tstrh r1, [r3, 0x1E]\n"
-                "\tldr r2, _080D8300 @ =REG_BLDALPHA\n"
-                "\tmovs r0, 0x10\n"
-                "\tsubs r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\torrs r1, r0\n"
-                "\tstrh r1, [r2]\n"
-                "\tmovs r2, 0x1E\n"
-                "\tldrsh r1, [r3, r2]\n"
-                "\tcmp r1, 0\n"
-                "\tbne _080D83B0\n"
-                "\tldrh r0, [r3, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r3, 0x20]\n"
-                "\tstrh r1, [r3, 0x1E]\n"
-                "\tb _080D83B0\n"
-                "\t.align 2, 0\n"
-                "_080D8300: .4byte REG_BLDALPHA\n"
-                "_080D8304:\n"
-                "\tmov r0, sp\n"
-                "\tbl sub_8078914\n"
-                "\tldr r2, [sp]\n"
-                "\tmovs r3, 0x80\n"
-                "\tlsls r3, 6\n"
-                "\tlsls r4, r6, 2\n"
-                "\tmov r10, r4\n"
-                "\tadd r5, sp, 0xC\n"
-                "\tmovs r7, 0\n"
-                "\tldr r1, _080D83C0 @ =0x040000d4\n"
-                "\tmovs r4, 0x80\n"
-                "\tlsls r4, 5\n"
-                "\tmov r8, r5\n"
-                "\tldr r0, _080D83C4 @ =0x85000400\n"
-                "\tmov r12, r0\n"
-                "\tmovs r0, 0x85\n"
-                "\tlsls r0, 24\n"
-                "\tmov r9, r0\n"
-                "_080D832A:\n"
-                "\tstr r7, [sp, 0xC]\n"
-                "\tmov r0, r8\n"
-                "\tstr r0, [r1]\n"
-                "\tstr r2, [r1, 0x4]\n"
-                "\tmov r0, r12\n"
-                "\tstr r0, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tadds r2, r4\n"
-                "\tsubs r3, r4\n"
-                "\tcmp r3, r4\n"
-                "\tbhi _080D832A\n"
-                "\tstr r7, [sp, 0xC]\n"
-                "\tstr r5, [r1]\n"
-                "\tstr r2, [r1, 0x4]\n"
-                "\tlsrs r0, r3, 2\n"
-                "\tmov r2, r9\n"
-                "\torrs r0, r2\n"
-                "\tstr r0, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tldr r0, _080D83C0 @ =0x040000d4\n"
-                "\tstr r5, [r0]\n"
-                "\tstr r1, [r0, 0x4]\n"
-                "\tldr r1, _080D83C8 @ =0x85000200\n"
-                "\tstr r1, [r0, 0x8]\n"
-                "\tldr r0, [r0, 0x8]\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8378\n"
-                "\tldr r2, _080D83CC @ =REG_BG1CNT\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0xD\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tstrb r0, [r2]\n"
-                "_080D8378:\n"
-                "\tldr r0, _080D83D0 @ =gTasks\n"
-                "\tmov r4, r10\n"
-                "\tadds r1, r4, r6\n"
-                "\tlsls r1, 3\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x20]\n"
-                "\tldr r2, _080D83D4 @ =gBattle_BG1_X\n"
-                "\tldr r4, _080D83D8 @ =gBattle_BG1_Y\n"
-                "_080D838C:\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r1, [r2]\n"
-                "\tstrh r1, [r4]\n"
-                "\tldr r0, _080D83DC @ =REG_BLDCNT\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r0, 0x2\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r2, _080D83CC @ =REG_BG1CNT\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0x4\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tmovs r1, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r2]\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl DestroyAnimVisualTask\n"
-                "_080D83B0:\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D83C0: .4byte 0x040000d4\n"
-                "_080D83C4: .4byte 0x85000400\n"
-                "_080D83C8: .4byte 0x85000200\n"
-                "_080D83CC: .4byte REG_BG1CNT\n"
-                "_080D83D0: .4byte gTasks\n"
-                "_080D83D4: .4byte gBattle_BG1_X\n"
-                "_080D83D8: .4byte gBattle_BG1_Y\n"
-                "_080D83DC: .4byte REG_BLDCNT");
-}
-#endif // NONMATCHING
 
 // MATCHING
 void sub_80D83E0(struct Sprite *sprite)
@@ -1509,7 +1349,6 @@ void sub_80D8414(u8 taskId)
     REG_BLDALPHA = 0x1000;
 
     REG_BG1CNT_BITFIELD.priority = 1;
-
     REG_BG1CNT_BITFIELD.screenSize = 0; 
 
     if (!IsContest())
@@ -1537,244 +1376,85 @@ void sub_80D8414(u8 taskId)
     gTasks[taskId].func = sub_80D851C;
 }
 
-// 
-// NAKED
-NAKED void sub_80D851C(u8 taskId)
+// MATCHING
+// but try task struct?
+void sub_80D851C(u8 taskId)
 {
-    asm_unified("\tpush {r4-r7,lr}\n"
-                "\tmov r7, r10\n"
-                "\tmov r6, r9\n"
-                "\tmov r5, r8\n"
-                "\tpush {r5-r7}\n"
-                "\tsub sp, 0x10\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r6, r0, 24\n"
-                "\tldr r3, _080D8558 @ =gBattle_BG1_X\n"
-                "\tldr r4, _080D855C @ =gTasks\n"
-                "\tlsls r1, r6, 2\n"
-                "\tadds r1, r6\n"
-                "\tlsls r1, 3\n"
-                "\tadds r1, r4\n"
-                "\tldrh r0, [r1, 0x26]\n"
-                "\tldrh r2, [r3]\n"
-                "\tadds r0, r2\n"
-                "\tstrh r0, [r3]\n"
-                "\tldr r2, _080D8560 @ =gBattle_BG1_Y\n"
-                "\tmovs r5, 0x20\n"
-                "\tldrsh r0, [r1, r5]\n"
-                "\tcmp r0, 0x4\n"
-                "\tbls _080D854C\n"
-                "\tb _080D86D0\n"
-                "_080D854C:\n"
-                "\tlsls r0, 2\n"
-                "\tldr r1, _080D8564 @ =_080D8568\n"
-                "\tadds r0, r1\n"
-                "\tldr r0, [r0]\n"
-                "\tmov pc, r0\n"
-                "\t.align 2, 0\n"
-                "_080D8558: .4byte gBattle_BG1_X\n"
-                "_080D855C: .4byte gTasks\n"
-                "_080D8560: .4byte gBattle_BG1_Y\n"
-                "_080D8564: .4byte _080D8568\n"
-                "\t.align 2, 0\n"
-                "_080D8568:\n"
-                "\t.4byte _080D857C\n"
-                "\t.4byte _080D85C0\n"
-                "\t.4byte _080D85E2\n"
-                "\t.4byte _080D8624\n"
-                "\t.4byte _080D86AC\n"
-                "_080D857C:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r4, r0, r4\n"
-                "\tldrh r0, [r4, 0x1A]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x1A]\n"
-                "\tldr r1, _080D85B8 @ =gUnknown_083D9D98\n"
-                "\tmovs r2, 0x1A\n"
-                "\tldrsh r0, [r4, r2]\n"
-                "\tadds r0, r1\n"
-                "\tldrb r1, [r0]\n"
-                "\tstrh r1, [r4, 0x1E]\n"
-                "\tldr r2, _080D85BC @ =REG_BLDALPHA\n"
-                "\tmovs r0, 0x11\n"
-                "\tsubs r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\torrs r1, r0\n"
-                "\tstrh r1, [r2]\n"
-                "\tmovs r5, 0x1E\n"
-                "\tldrsh r0, [r4, r5]\n"
-                "\tcmp r0, 0x5\n"
-                "\tbeq _080D85AC\n"
-                "\tb _080D86D0\n"
-                "_080D85AC:\n"
-                "\tldrh r0, [r4, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x20]\n"
-                "\tmovs r0, 0\n"
-                "\tstrh r0, [r4, 0x1E]\n"
-                "\tb _080D86D0\n"
-                "\t.align 2, 0\n"
-                "_080D85B8: .4byte gUnknown_083D9D98\n"
-                "_080D85BC: .4byte REG_BLDALPHA\n"
-                "_080D85C0:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r1, r0, r4\n"
-                "\tldrh r0, [r1, 0x1E]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x1E]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x51\n"
-                "\tbne _080D86D0\n"
-                "\tmovs r0, 0x5\n"
-                "\tstrh r0, [r1, 0x1E]\n"
-                "\tldrh r0, [r1, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x20]\n"
-                "\tb _080D86D0\n"
-                "_080D85E2:\n"
-                "\tlsls r0, r6, 2\n"
-                "\tadds r0, r6\n"
-                "\tlsls r0, 3\n"
-                "\tadds r4, r0, r4\n"
-                "\tldrh r0, [r4, 0x1C]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x1C]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x4\n"
-                "\tbne _080D86D0\n"
-                "\tmovs r0, 0\n"
-                "\tstrh r0, [r4, 0x1C]\n"
-                "\tldrh r1, [r4, 0x1E]\n"
-                "\tsubs r1, 0x1\n"
-                "\tstrh r1, [r4, 0x1E]\n"
-                "\tldr r2, _080D8620 @ =REG_BLDALPHA\n"
-                "\tmovs r0, 0x10\n"
-                "\tsubs r0, r1\n"
-                "\tlsls r0, 8\n"
-                "\torrs r1, r0\n"
-                "\tstrh r1, [r2]\n"
-                "\tmovs r0, 0x1E\n"
-                "\tldrsh r1, [r4, r0]\n"
-                "\tcmp r1, 0\n"
-                "\tbne _080D86D0\n"
-                "\tldrh r0, [r4, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x20]\n"
-                "\tstrh r1, [r4, 0x1E]\n"
-                "\tb _080D86D0\n"
-                "\t.align 2, 0\n"
-                "_080D8620: .4byte REG_BLDALPHA\n"
-                "_080D8624:\n"
-                "\tmov r0, sp\n"
-                "\tbl sub_8078914\n"
-                "\tldr r2, [sp]\n"
-                "\tmovs r3, 0x80\n"
-                "\tlsls r3, 6\n"
-                "\tlsls r1, r6, 2\n"
-                "\tmov r10, r1\n"
-                "\tadd r5, sp, 0xC\n"
-                "\tmovs r7, 0\n"
-                "\tldr r1, _080D86E0 @ =0x040000d4\n"
-                "\tmovs r4, 0x80\n"
-                "\tlsls r4, 5\n"
-                "\tmov r8, r5\n"
-                "\tldr r0, _080D86E4 @ =0x85000400\n"
-                "\tmov r12, r0\n"
-                "\tmovs r0, 0x85\n"
-                "\tlsls r0, 24\n"
-                "\tmov r9, r0\n"
-                "_080D864A:\n"
-                "\tstr r7, [sp, 0xC]\n"
-                "\tmov r0, r8\n"
-                "\tstr r0, [r1]\n"
-                "\tstr r2, [r1, 0x4]\n"
-                "\tmov r0, r12\n"
-                "\tstr r0, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tadds r2, r4\n"
-                "\tsubs r3, r4\n"
-                "\tcmp r3, r4\n"
-                "\tbhi _080D864A\n"
-                "\tstr r7, [sp, 0xC]\n"
-                "\tstr r5, [r1]\n"
-                "\tstr r2, [r1, 0x4]\n"
-                "\tlsrs r0, r3, 2\n"
-                "\tmov r2, r9\n"
-                "\torrs r0, r2\n"
-                "\tstr r0, [r1, 0x8]\n"
-                "\tldr r0, [r1, 0x8]\n"
-                "\tldr r1, [sp, 0x4]\n"
-                "\tmovs r0, 0\n"
-                "\tstr r0, [sp, 0xC]\n"
-                "\tldr r0, _080D86E0 @ =0x040000d4\n"
-                "\tstr r5, [r0]\n"
-                "\tstr r1, [r0, 0x4]\n"
-                "\tldr r1, _080D86E8 @ =0x85000200\n"
-                "\tstr r1, [r0, 0x8]\n"
-                "\tldr r0, [r0, 0x8]\n"
-                "\tbl IsContest\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8698\n"
-                "\tldr r2, _080D86EC @ =REG_BG1CNT\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0xD\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tstrb r0, [r2]\n"
-                "_080D8698:\n"
-                "\tldr r0, _080D86F0 @ =gTasks\n"
-                "\tmov r5, r10\n"
-                "\tadds r1, r5, r6\n"
-                "\tlsls r1, 3\n"
-                "\tadds r1, r0\n"
-                "\tldrh r0, [r1, 0x20]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r1, 0x20]\n"
-                "\tldr r3, _080D86F4 @ =gBattle_BG1_X\n"
-                "\tldr r2, _080D86F8 @ =gBattle_BG1_Y\n"
-                "_080D86AC:\n"
-                "\tmovs r1, 0\n"
-                "\tstrh r1, [r3]\n"
-                "\tstrh r1, [r2]\n"
-                "\tldr r0, _080D86FC @ =REG_BLDCNT\n"
-                "\tstrh r1, [r0]\n"
-                "\tadds r0, 0x2\n"
-                "\tstrh r1, [r0]\n"
-                "\tldr r2, _080D86EC @ =REG_BG1CNT\n"
-                "\tldrb r1, [r2]\n"
-                "\tmovs r0, 0x4\n"
-                "\tnegs r0, r0\n"
-                "\tands r0, r1\n"
-                "\tmovs r1, 0x1\n"
-                "\torrs r0, r1\n"
-                "\tstrb r0, [r2]\n"
-                "\tadds r0, r6, 0\n"
-                "\tbl DestroyAnimVisualTask\n"
-                "_080D86D0:\n"
-                "\tadd sp, 0x10\n"
-                "\tpop {r3-r5}\n"
-                "\tmov r8, r3\n"
-                "\tmov r9, r4\n"
-                "\tmov r10, r5\n"
-                "\tpop {r4-r7}\n"
-                "\tpop {r0}\n"
-                "\tbx r0\n"
-                "\t.align 2, 0\n"
-                "_080D86E0: .4byte 0x040000d4\n"
-                "_080D86E4: .4byte 0x85000400\n"
-                "_080D86E8: .4byte 0x85000200\n"
-                "_080D86EC: .4byte REG_BG1CNT\n"
-                "_080D86F0: .4byte gTasks\n"
-                "_080D86F4: .4byte gBattle_BG1_X\n"
-                "_080D86F8: .4byte gBattle_BG1_Y\n"
-                "_080D86FC: .4byte REG_BLDCNT");
+    struct Struct_sub_8078914 subStruct;
+
+    gBattle_BG1_X += gTasks[taskId].data[15];
+    gBattle_BG1_Y += 0;
+
+    switch (gTasks[taskId].data[12])
+    {
+    case 0:
+
+        gTasks[taskId].data[9] += 1;
+        gTasks[taskId].data[11] = gUnknown_083D9D98[gTasks[taskId].data[9]];
+
+        REG_BLDALPHA = gTasks[taskId].data[11] | ((17 - gTasks[taskId].data[11]) << 8);
+
+        if (gTasks[taskId].data[11] == 5)
+        {
+            gTasks[taskId].data[12] += 1;
+            gTasks[taskId].data[11] = 0;
+        }
+        break;
+
+    case 1:
+
+        gTasks[taskId].data[11] += 1;
+
+        if (gTasks[taskId].data[11] == 0x51)
+        {
+            gTasks[taskId].data[11] = 5;
+            gTasks[taskId].data[12] += 1;
+        }
+        break;
+
+    case 2:
+
+        gTasks[taskId].data[10] += 1;
+
+        if (gTasks[taskId].data[10] == 4)
+        {
+            gTasks[taskId].data[10] = 0;
+            gTasks[taskId].data[11] -= 1;
+
+            REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
+
+            if (gTasks[taskId].data[11] == 0)
+            {
+                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[11] = 0;
+            }
+        }
+        break;
+
+    case 3:
+
+        sub_8078914(&subStruct);
+
+        DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
+        DmaClear32(3, subStruct.field_4, 0x800);
+
+        if (!IsContest())
+            REG_BG1CNT_BITFIELD.charBaseBlock = 0;
+
+        gTasks[taskId].data[12] += 1;
+
+    case 4:
+
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+
+        REG_BG1CNT_BITFIELD.priority = 1;
+
+        DestroyAnimVisualTask(taskId);
+    }
 }
 
 // MATCHING 
@@ -1830,7 +1510,6 @@ void sub_80D8700(struct Sprite *sprite)
 
 }
 
-#ifdef NONMATCHING
 // https://pastebin.com/8wvBFV2F
 // 
 void sub_80D8874(struct Sprite *sprite)
@@ -2023,7 +1702,8 @@ void sub_80D8874(struct Sprite *sprite)
     // _AD0 / return
     return;
 }
-#else
+
+/*
 NAKED void sub_80D8874(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
@@ -2337,7 +2017,7 @@ NAKED void sub_80D8874(struct Sprite *sprite)
                 "\t.align 2, 0\n"
                 "_080D8AD8: .4byte gAnimVisualTaskCount");
 }
-#endif
+*/
 
 // MATCHING
 void sub_80D8ADC(u8 taskId)
@@ -2347,27 +2027,68 @@ void sub_80D8ADC(u8 taskId)
     task->func = sub_80D8AF8;
 }
 
-#ifdef NONMATCHING
-// 
-void sub_80D8AF8(u8 taskId)
+//
+/*void sub_80D8AF8(u8 taskId)
 {
     //
     struct Task *task = &gTasks[taskId];
 
     //
-    if (task->data[0] != 1) // cmp 1
+
+} 
+//*/
+
+/*void sub_80D8AF8(u8 taskId)
+{
+    //
+    struct Task *task = &gTasks[taskId];
+
+    if () // cmp 1 !=
+    {
+        //
+        if () // cmp 2 <=
+        {
+            //
+            if () // cmp 3 != 
+            {
+                //
+                return;
+            }
+            else // cmp 3 ==
+            {
+                // _26
+                if () // cmp 5 <=
+                {
+                    //
+                    return;
+                }
+            }
+        }
+        else // cmp 2 >
+        {
+            // _20
+        }
+    }
+    else // cmp 1 ==
+    {
+        // _3C
+    }
+    // _78
+
+    //
+    /*if (task->data[0] != 1) // cmp 1
     {
         //
         if (task->data[0] <= 1) //cmp 2
         {
             // 
-            if (task->data[0] != 0) // cmp 3
+            if (task->data[0] == 0) // cmp 3
             {
                 //
-                return;
-            }
-            else // ==
-            {
+            //    return;
+            //}
+            //else // ==
+            //{
                 // _26
                 task->data[4] += 1;
 
@@ -2413,7 +2134,8 @@ void sub_80D8AF8(u8 taskId)
         if (task->data[5] == 0) // cmp 6
         {
             // ...
-            sub_80D8BA8(task->data[3]);
+            //sub_80D8BA8(task->data[3]);
+            sub_80D8BA8(task->data[3], task->data[2], taskId, 1);
 
             if ((task->data[3]) != 0) // cmp 7 // << 24
             {
@@ -2456,9 +2178,10 @@ void sub_80D8AF8(u8 taskId)
     // _78
     task->data[0] += 1;
 
-    //return;
-}
-#else
+    //return;*/
+//}
+//*/
+
 NAKED void sub_80D8AF8(u8 taskId)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
@@ -2556,16 +2279,29 @@ NAKED void sub_80D8AF8(u8 taskId)
                 "\tpop {r0}\n"
                 "\tbx r0");
 }
-#endif // NONMATCHING
 
 /*
 // NOT  NONMATCHING
 void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(u8 taskId)
 {
     //
-    //struct Task *task = &gTasks[taskId];
+    //struct Task *task = &gTasks[a2];
     //u16 i, j;
-} */
+    //task->data[3]++;
+    //u8 r5bank = ;
+
+    if (gUnknown_083D9DC4[a1+0x3] >> 4 != 2
+     || IsAnimBankSpriteVisible(GetBattlerAtPosition(gUnknown_083D9DC4[a1+0x2])))
+    {
+        //
+    }
+    else
+    {
+        // _C94
+    }
+    // _CA6
+}
+*/
 
 NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//spriteId, u8 taskId, u8 a3)//(u8 taskId)
 {
@@ -2745,7 +2481,7 @@ NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//spriteId, u8 taskId, u8 a3)/
                 "\tpop {r4-r7}\n"
                 "\tpop {r1}\n"
                 "\tbx r1");
-}//*/
+}
 
 // MATCHING
 void sub_80D8D1C(struct Sprite *sprite)
@@ -2762,7 +2498,7 @@ void sub_80D8D1C(struct Sprite *sprite)
     if (sprite->data[0] == 1 && sprite->data[5] == 0)
     {
         spriteId = CreateSprite(&gBattleAnimSpriteTemplate_83D9C78, 
-                         sprite->data[3], sprite->data[4], sprite->subpriority);
+                                sprite->data[3], sprite->data[4], sprite->subpriority);
 
         sprite->data[0] = spriteId;
 
@@ -2888,5 +2624,5 @@ void sub_80D8FC0(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-// 26 MATCHING
-// 05 NONMATCHING (1 NAKED)
+// 28 MATCHING
+// 04 NAKED
