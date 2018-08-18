@@ -149,7 +149,7 @@ extern const u8 gPokenavRibbonView_Gfx[];
 extern const u8 gUnknown_083E040C[];
 extern const u16 gPokenavRibbonView_Pal[];
 extern const u16 gUnknown_083E03A8[];
-extern const u16 gUnknown_083E3C60[];
+extern const u16 gUnknown_083E3C60[][16];
 extern const u16 gPokenavRibbonsIconGfx[][2];
 extern const u8 *const gRibbonDescriptions[][2];
 extern const u8 *const gGiftRibbonDescriptions[][2];
@@ -196,6 +196,12 @@ extern const struct SpritePalette gUnknown_083E4648[3];
 extern const struct SpriteTemplate gSpriteTemplate_83E4660;
 extern const u16 gUnknown_083E4678[];
 extern const u8 gUnknown_083E3D00[];
+extern const struct SpriteTemplate gSpriteTemplate_83E476C;
+extern const struct SpriteSheet gUnknown_083E4784;
+extern const struct SpritePalette gUnknown_083E478C;
+extern const struct SpriteTemplate gSpriteTemplate_83E4800;
+extern const s16 gUnknown_083E4794[][2];
+
 
 extern u16 gUnknown_020388B4;
 extern u8 gUnknown_020388B0[];
@@ -319,7 +325,17 @@ void sub_80F4548(u16, u16, u8);
 static void sub_80F36F0(void);
 static bool8 sub_80F3724(void);
 static void sub_80F379C(void);
-bool8 sub_80F37D0(void);
+static bool8 sub_80F37D0(void);
+static void sub_80F38B8(void);
+static bool8 sub_80F38EC(void);
+static void sub_80F3970(void);
+static bool8 sub_80F39A4(void);
+static void sub_80F3B00(void);
+static bool8 sub_80F3B58(void);
+static void sub_80F3B94(void);
+static bool8 sub_80F3BD4(void);
+static void sub_80F3C2C(void);
+void sub_80F3F20(u8, u8);
 
 extern void sub_80F0900(void);
 extern void sub_80F443C(u8 *, u16);
@@ -344,18 +360,11 @@ extern void sub_80F708C(u32);
 extern void sub_80F4394();
 extern void sub_80F42C4();
 extern void sub_80F6F10();
-extern void sub_80F3C2C();
 static extern void sub_80F15A8(void);
 extern void sub_80F6A4C();
 extern bool8 sub_80F6AF0();
-extern void sub_80F3B00();
-extern bool8 sub_80F3B58();
 extern u8 sub_80F68E8();
-extern void sub_80F3B94();
-extern bool8 sub_80F3BD4();
 extern void sub_80F66E0();
-extern void sub_80F38B8();
-extern bool8 sub_80F38EC();
 extern void sub_80F638C();
 extern bool8 sub_80F63D0();
 extern void sub_80F4CF0();
@@ -5519,7 +5528,7 @@ static bool8 sub_80F1080(void)
     case 12:
         LoadPalette(gPokenavRibbonView_Pal, 0x20, 0x20);
         LoadPalette(gUnknown_083E03A8, 0xF0, 0x20);
-        LoadPalette(gUnknown_083E3C60, 0x30, 0xA0);
+        LoadPalette(gUnknown_083E3C60[0], 0x30, 0xA0);
         LoadPalette(gUnknownPalette_81E6692, 0xB0, 0x20);
         LoadPalette(gUnknown_083E03A8 + 0xF, 0xBF, 0x2);
         break;
@@ -7336,4 +7345,319 @@ static void sub_80F379C(void)
     gUnknown_083DFEC4->unkBC93 = 0;
     if (!gUnknown_083DFEC4->unk6DAC)
         while (sub_80F37D0());
+}
+
+static bool8 sub_80F37D0(void)
+{
+    u16 i;
+    u8 j, k, l, m;
+
+    if (gUnknown_083DFEC4->unkBC93 > 11)
+        return FALSE;
+
+    for (i = 0; i < 2; i++)
+    {
+        u8 *r4 = &gUnknown_083DFEC4->unk984C[gUnknown_083DFEC4->unkBC93][0];
+        u8 *r5 = &gUnknown_083DFEC4->unkA44C[gUnknown_083DFEC4->unkBC93][0];
+        for (j = 0; j < 4; j++)
+        {
+            CpuFastSet(r4, r5, 0x10);
+            r5 += 0x40;
+            r4 += 0x20;
+            for (k = 0; k < 2; k++)
+            {
+                for (l = 0; l < 8; l++)
+                {
+                    r4 += 4;
+                    for (m = 0; m < 4; m++)
+                    {
+                        r4 -= 1;
+                        *r5 = (*r4 << 4) | ((*r4 >> 4) & 0xF);
+                        r5++;
+                    }
+
+                    r4 += 4;
+                }
+
+                r4 -= 0x40;
+            }
+            
+            r4 += 0x60;
+        }
+
+        if (++gUnknown_083DFEC4->unkBC93 > 11)
+            return FALSE;
+    }
+
+    if (gUnknown_083DFEC4->unkBC93 > 11)
+        return FALSE;
+
+    return TRUE;
+}
+
+static void sub_80F38B8(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F38EC());
+}
+
+static bool8 sub_80F38EC(void)
+{
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        gUnknown_083DFEC4->unk9348 = NULL;
+        gUnknown_083DFEC4->unkBC92 = 0;
+        break;
+    case 1:
+        sub_80F2E18(0);
+        break;
+    case 2:
+        sub_80F3970();
+        gUnknown_083DFEC4->unk306++;
+        // fall through
+    case 3:
+        if (sub_80F39A4())
+            return TRUE;
+        break;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+static void sub_80F3970(void)
+{
+    gUnknown_083DFEC4->unkBC93 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F39A4());
+}
+
+static bool8 sub_80F39A4(void)
+{
+    struct SpriteSheet spriteSheet;
+    struct SpritePalette spritePalette;
+    if (gUnknown_083DFEC4->unkBC93 > 11)
+        return FALSE;
+
+    spriteSheet.data = &gUnknown_083DFEC4->unkA44C[gUnknown_083DFEC4->unkBC93][0];
+    spriteSheet.size = 0x200;
+    spriteSheet.tag = gUnknown_083DFEC4->unkBC93 + 11;
+    LoadSpriteSheet(&spriteSheet);
+    if (gUnknown_083DFEC4->unkBC93 < 5)
+    {
+        spritePalette.data = gUnknown_083E3C60[gUnknown_083DFEC4->unkBC93];
+        spritePalette.tag = gUnknown_083DFEC4->unkBC93 + 10;
+        LoadSpritePalette(&spritePalette);
+    }
+
+    if (++gUnknown_083DFEC4->unkBC93 > 11)
+        return FALSE;
+
+    return TRUE;
+}
+
+static struct Sprite *sub_80F3A3C(u16 arg0, u16 arg1)
+{
+    struct SpriteTemplate spriteTemplate;
+    u16 var0;
+    u8 ribbon;
+    u8 spriteId;
+
+    if (arg1 < 3)
+        var0 = arg0 + arg1 * 9;
+    else
+        var0 = arg0 + (gUnknown_083DFEC4->unkBC8E - gUnknown_083DFEC4->unkBC8F);
+
+    ribbon = gUnknown_083DFEC4->unkBC4C[var0];
+    spriteTemplate = gSpriteTemplate_83E476C;
+    spriteTemplate.tileTag = gPokenavRibbonsIconGfx[ribbon][0] + 11;
+    spriteTemplate.paletteTag = gPokenavRibbonsIconGfx[ribbon][1] + 10;
+    spriteId = CreateSprite(&spriteTemplate, arg0 * 16 + 96, arg1 * 16 + 40, 2);
+    if (spriteId != MAX_SPRITES)
+        return &gSprites[spriteId];
+    else
+        return NULL;
+}
+
+static void sub_80F3B00(void)
+{
+    gUnknown_083DFEC4->unk9348 = sub_80F3A3C(gUnknown_083DFEC4->unkBC90, gUnknown_083DFEC4->unkBC91);
+    if (gUnknown_083DFEC4->unk9348)
+    {
+        StartSpriteAffineAnim(gUnknown_083DFEC4->unk9348, 1);
+        gUnknown_083DFEC4->unkBC92 = 1;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unkBC92 = 0;
+    }
+}
+
+static bool8 sub_80F3B58(void)
+{
+    if (gUnknown_083DFEC4->unkBC92)
+    {
+        gUnknown_083DFEC4->unkBC92 = !gUnknown_083DFEC4->unk9348->affineAnimEnded;
+        return gUnknown_083DFEC4->unkBC92;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+static void sub_80F3B94(void)
+{
+    if (gUnknown_083DFEC4->unk9348)
+    {
+        StartSpriteAffineAnim(gUnknown_083DFEC4->unk9348, 2);
+        gUnknown_083DFEC4->unkBC92 = 1;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unkBC92 = 0;
+    }
+}
+
+static bool8 sub_80F3BD4(void)
+{
+    if (gUnknown_083DFEC4->unkBC92)
+    {
+        gUnknown_083DFEC4->unkBC92 = !gUnknown_083DFEC4->unk9348->affineAnimEnded;
+        if (!gUnknown_083DFEC4->unkBC92)
+        {
+            FreeOamMatrix(gUnknown_083DFEC4->unk9348->oam.matrixNum);
+            DestroySprite(gUnknown_083DFEC4->unk9348);
+            gUnknown_083DFEC4->unk9348 = NULL;
+        }
+
+        return gUnknown_083DFEC4->unkBC92;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+static void sub_80F3C2C(void)
+{
+    u16 i;
+
+    if (gUnknown_083DFEC4->unk9348)
+    {
+        FreeOamMatrix(gUnknown_083DFEC4->unk9348->oam.matrixNum);
+        DestroySprite(gUnknown_083DFEC4->unk9348);
+        gUnknown_083DFEC4->unk9348 = NULL;
+    }
+
+    for (i = 0; i < 12; i++)
+        FreeSpriteTilesByTag(i + 0xB);
+    
+    for (i = 0; i < 5; i++)
+        FreeSpritePaletteByTag(i + 0xA);
+    
+    sub_80F2F48();
+}
+
+void sub_80F3C94(void)
+{
+    u16 i;
+    struct SpriteSheet spriteSheet;
+    struct SpritePalette spritePalette;
+
+    spriteSheet = gUnknown_083E4784;
+    spritePalette = gUnknown_083E478C;
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&spritePalette);
+    for (i = 0; i < 10; i++)
+        gUnknown_083DFEC4->unk8800[i] = NULL;
+}
+
+void sub_80F3CE8(void)
+{
+    move_anim_execute();
+    FreeSpriteTilesByTag(0x17);
+    FreeSpritePaletteByTag(0xF);
+}
+
+void sub_80F3D00(void)
+{
+    u8 spriteId;
+    u16 i;
+    u8 var1;
+    struct UnkUsePokeblockSub *var0 = &gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC];
+
+    if (!var0->unk4)
+        return;
+
+    var1 = gUnknown_083DFEC4->unk8931[gUnknown_083DFEC4->unk8fe9];
+    for (i = 0; i < var1 + 1; i++)
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_83E4800, 0, 0, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk8800[i] = &gSprites[spriteId];
+            gUnknown_083DFEC4->unk8800[i]->invisible = 1;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    sub_80F3F20(var1, 1);
+}
+
+void move_anim_execute(void)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (!gUnknown_083DFEC4->unk8800[i])
+            return;
+        
+        DestroySprite(gUnknown_083DFEC4->unk8800[i]);
+        gUnknown_083DFEC4->unk8800[i] = NULL;
+    }
+}
+
+void sub_80F3DDC(struct Sprite *sprite)
+{
+    if (++sprite->data[1] > 60)
+    {
+        sprite->data[1] = 0;
+        sub_80F3F20(sprite->data[2], 0);
+    }
+}
+
+void sub_80F3E04(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+    {
+        sprite->data[1] = 0;
+        sprite->callback = sub_80F3DDC;
+    }
+}
+
+void sub_80F3E24(struct Sprite *sprite)
+{
+    if (gUnknown_083DFEC4->unk8768)
+    {
+        sprite->pos1.x = gUnknown_083DFEC4->unk8768->pos1.x
+                       + gUnknown_083DFEC4->unk8768->pos2.x
+                       + gUnknown_083E4794[sprite->data[0]][0];
+        sprite->pos1.y = gUnknown_083DFEC4->unk8768->pos1.y
+                       + gUnknown_083DFEC4->unk8768->pos2.y
+                       + gUnknown_083E4794[sprite->data[0]][1];
+    }
+    else
+    {
+        sprite->pos1.x = gUnknown_083E4794[sprite->data[0]][0] + 40;
+        sprite->pos1.y = gUnknown_083E4794[sprite->data[0]][1] + 104;
+    }
 }
