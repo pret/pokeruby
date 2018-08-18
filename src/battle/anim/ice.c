@@ -1512,6 +1512,7 @@ void sub_80D8700(struct Sprite *sprite)
 
 // https://pastebin.com/8wvBFV2F
 // 
+/*
 void sub_80D8874(struct Sprite *sprite)
 {
     s16 r0, r3;
@@ -1702,8 +1703,8 @@ void sub_80D8874(struct Sprite *sprite)
     // _AD0 / return
     return;
 }
+*/
 
-/*
 NAKED void sub_80D8874(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
@@ -2017,7 +2018,6 @@ NAKED void sub_80D8874(struct Sprite *sprite)
                 "\t.align 2, 0\n"
                 "_080D8AD8: .4byte gAnimVisualTaskCount");
 }
-*/
 
 // MATCHING
 void sub_80D8ADC(u8 taskId)
