@@ -53,7 +53,7 @@ static void sub_80D8F74(struct Sprite *sprite);
 static void sub_80D81E0(u8 taskId);
 static void sub_80D851C(u8 taskId);
 static void sub_80D8AF8(u8 taskId);
-void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4);
+bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4);
 
 const union AnimCmd gSpriteAnim_83D9B58[] =
 {
@@ -797,35 +797,28 @@ void sub_80D7888(struct Sprite *sprite)
     {
         sprite->data[5] += sprite->data[1];
         sprite->data[6] += sprite->data[2];
-
         sprite->pos2.x = sprite->data[5];
         sprite->pos2.y = sprite->data[6];
-        
         sprite->pos2.x += Sin(sprite->data[7], sprite->data[3]); 
         sprite->pos2.y += Sin(sprite->data[7], sprite->data[3]);
-
         sprite->data[7] = (sprite->data[7] + sprite->data[4]) & 0xFF;
-
         sprite->data[0] -= 1;
     }
-
     else
+    {
         DestroyAnimSprite(sprite);
+    }
 }
 
 static void sub_80D78EC(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
-
     sprite->data[1] = 60; 
     sprite->data[2] = 9; 
     sprite->data[3] = 30; 
     sprite->data[4] = 65024; 
-
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
-
     sprite->callback = sub_8078174;
-
     sub_8078174(sprite);
 }
 
@@ -836,13 +829,11 @@ static void sub_80D792C(struct Sprite *sprite)
 
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->data[2] -= gBattleAnimArgs[2];
-
     else
         sprite->data[2] += gBattleAnimArgs[2];
 
     sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     sprite->data[0] = gBattleAnimArgs[4];
-
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
     sprite->callback = StartAnimLinearTranslation;
 }
@@ -850,12 +841,12 @@ static void sub_80D792C(struct Sprite *sprite)
 static void sub_80D79B4(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == 0)
+    {
         sub_8078764(sprite, 1);
-
+    }
     else
     {
         SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->pos1.x, &sprite->pos1.y);
-
         if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
             gBattleAnimArgs[0] = -gBattleAnimArgs[0];
 
@@ -870,9 +861,7 @@ static void sub_80D79B4(struct Sprite *sprite)
 static void sub_80D7A28(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
-
     sprite->data[0] += 1;
-
     if (sprite->data[0] == 20)
         move_anim_8074EE0(sprite);
 }
@@ -894,11 +883,12 @@ static void sub_80D7A64(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + gBattleAnimArgs[3];
     }
     else
+    {
         SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+    }
 
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->data[2] -= gBattleAnimArgs[2];
-
     else
         sprite->data[2] += gBattleAnimArgs[2];
 
@@ -906,11 +896,10 @@ static void sub_80D7A64(struct Sprite *sprite)
         tempDataHolder[i] = sprite->data[i];
 
     sub_8078D60(sprite);
-
     sprite->data[1] ^= 1;
     sprite->data[2] ^= 1;
 
-    for (;;)
+    while (1)
     {
         sprite->data[0] = 1;
         sub_8078CE8(sprite);
@@ -920,9 +909,9 @@ static void sub_80D7A64(struct Sprite *sprite)
          || sprite->pos1.y + sprite->pos2.y < -16)
             break;
     }
+
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
-
     sprite->pos2.y = 0;
     sprite->pos2.x = 0;
 
@@ -939,10 +928,8 @@ static void sub_80D7BA0(struct Sprite *sprite)
 
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
-
     sprite->pos2.y = 0;
     sprite->pos2.x = 0;
-
     sprite->data[0] = 128;
 
     tempVar = GetBattlerSide(gAnimBankAttacker) != 0 ? 20 : 65516;
@@ -950,7 +937,6 @@ static void sub_80D7BA0(struct Sprite *sprite)
     sprite->data[3] = Sin(sprite->data[0], tempVar);
     sprite->data[4] = Cos(sprite->data[0], 0xF);
     sprite->data[5] = 0;
-    
     sprite->callback = sub_80D7C08;
     sub_80D7C08(sprite);
 }
@@ -964,7 +950,6 @@ static void sub_80D7C08(struct Sprite *sprite)
     {
         sprite->pos2.x = Sin(sprite->data[0], tempVar) - sprite->data[3];
         sprite->pos2.y = Cos(sprite->data[0], 15)      - sprite->data[4];
-
         sprite->data[0] = (sprite->data[0] + 16) & 0xFF;
         sprite->data[5] += 1;
     }
@@ -972,13 +957,10 @@ static void sub_80D7C08(struct Sprite *sprite)
     {
         sprite->pos1.x += sprite->pos2.x;
         sprite->pos1.y += sprite->pos2.y;
-
         sprite->pos2.y = 0;
         sprite->pos2.x = 0;
-
         sprite->data[4] = 0;
         sprite->data[3] = 0;
-
         sprite->callback = sub_80D7C8C;
     }
 }
@@ -1011,28 +993,27 @@ static void sub_80D7CD4(struct Sprite *sprite)
         sprite->data[4] = GetBattlerSpriteCoord(gAnimBankTarget, 3);
     }
     else
+    {
         SetAverageBattlerPositions(gAnimBankTarget, 1, &sprite->data[2], &sprite->data[4]);
+    }
 
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->data[2] -= gBattleAnimArgs[2];
-
     else
         sprite->data[2] += gBattleAnimArgs[2];
 
     sprite->data[4] += gBattleAnimArgs[3];
     sub_8078D60(sprite);
-
     for (i = 0; i < 8; i++)
         tempDataHolder[i] = sprite->data[i];
 
     sprite->data[1] ^= 1;
     sprite->data[2] ^= 1;
 
-    for (;;)
+    while (1)
     {
         sprite->data[0] = 1;
         sub_8078CE8(sprite);
-
         if ((u32)(sprite->pos1.x + sprite->pos2.x + 16) > 272
          || sprite->pos1.y + sprite->pos2.y > 160
          || sprite->pos1.y + sprite->pos2.y < -16)
@@ -1049,20 +1030,17 @@ static void sub_80D7CD4(struct Sprite *sprite)
 
     sprite->data[5] = gBattleAnimArgs[5];
     sprite->data[6] = gBattleAnimArgs[6];
-
     sprite->callback = sub_80D7E18;
 }
 
 static void sub_80D7E18(struct Sprite *sprite)
 {
     sub_8078CE8(sprite);
-
     if (sprite->data[0] == 0)
         sprite->data[0] = 1;
 
     sprite->pos2.y += Sin(sprite->data[7], sprite->data[5]);
     sprite->data[7] = (sprite->data[7] + sprite->data[6]) & 0xFF;
-
     if (sprite->data[0] == 1)
     {
         if ((u32)(sprite->pos1.x + sprite->pos2.x + 16) > 272
@@ -1077,8 +1055,9 @@ static void sub_80D7E88(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         if (gBattleAnimArgs[2] == 0)
+        {
             sub_8078764(sprite, 0);
-
+        }
         else
         {
             SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
@@ -1089,11 +1068,14 @@ static void sub_80D7E88(struct Sprite *sprite)
             sprite->pos1.x += gBattleAnimArgs[0];
             sprite->pos1.y += gBattleAnimArgs[1];
         }
-        sprite->data[0] += 1; 
+
+        sprite->data[0]++; 
     }
     else
+    {
         if (sprite->animEnded)
             DestroyAnimSprite(sprite);
+    }
 }
 
 static void sub_80D7F10(struct Sprite *sprite)
@@ -1104,51 +1086,49 @@ static void sub_80D7F10(struct Sprite *sprite)
     if (gBattleAnimArgs[4] == 0)
     {
         if (gBattleAnimArgs[5] == 0)
+        {
             InitAnimSpritePos(sprite, 0);
-
+        }
         else
         {
             SetAverageBattlerPositions(gAnimBankAttacker, 0, &sprite->pos1.x, &sprite->pos1.y);
-
             if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER) 
                 sprite->pos1.x -= gBattleAnimArgs[0];
-
             else 
                 sprite->pos1.x += gBattleAnimArgs[0];
 
             sprite->pos1.y += gBattleAnimArgs[1];
         }
+
         battler = gAnimBankAttacker;
     }
     else 
     {
         if (gBattleAnimArgs[5] == 0)
+        {
             sub_8078764(sprite, 0);
-
+        }
         else 
         {
             SetAverageBattlerPositions(gAnimBankTarget, 0, &sprite->pos1.x, &sprite->pos1.y);
-            
             if (GetBattlerSide(gAnimBankTarget) != B_SIDE_PLAYER)
                 sprite->pos1.x -= gBattleAnimArgs[0];
-
             else 
                 sprite->pos1.x += gBattleAnimArgs[0];
 
             sprite->pos1.y += gBattleAnimArgs[1];
         }
+
         battler = gAnimBankTarget;
     }
+
     sprite->data[7] = battler;
-
-    if (gBattleAnimArgs[5] == 0 || IsDoubleBattle() == 0) 
+    if (gBattleAnimArgs[5] == 0 || !IsDoubleBattle()) 
         tempVar = 0x20;
-
     else
         tempVar = 0x40;
 
     sprite->data[6] = tempVar;
-
     if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
         sprite->pos1.y += 8;
 
@@ -1161,28 +1141,28 @@ static void sub_80D7F10(struct Sprite *sprite)
     InitAnimLinearTranslation(sprite);
 
     sprite->data[5] = 64;
-    
     sprite->callback = sub_80D8048;
     sub_80D8048(sprite);
 }
 
 static void sub_80D8048(struct Sprite *sprite)
 {
-    if (TranslateAnimLinear(sprite) == 0)
+    if (!TranslateAnimLinear(sprite))
     {
         sprite->pos2.x += Sin(sprite->data[5], sprite->data[6]);
         sprite->pos2.y += Cos(sprite->data[5], -6);
 
         if ((u16)(sprite->data[5] - 64) <= 0x7F)
             sprite->oam.priority = sub_8079ED4(sprite->data[7]); 
-
         else
             sprite->oam.priority = sub_8079ED4(sprite->data[7]) + 1;
 
         sprite->data[5] = (sprite->data[5] + 3) & 0xFF;
     }
     else
+    {
         DestroyAnimSprite(sprite);
+    }
 }
 
 // Used in haze
@@ -1192,9 +1172,7 @@ void sub_80D80E0(u8 taskId)
 
     REG_BLDCNT = 0x3F42;
     REG_BLDALPHA = 0x1000;
-
     REG_BG1CNT_BITFIELD.priority = 1;
-
     REG_BG1CNT_BITFIELD.screenSize = 0;
 
     if (!IsContest())
@@ -1202,17 +1180,13 @@ void sub_80D80E0(u8 taskId)
 
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
-
     REG_BG1HOFS = 0;
     REG_BG1VOFS = 0;
 
     sub_8078914(&subStruct);
-
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     DmaCopy16Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x800);
-
     LZDecompressVram(&gBattleAnimFogTilemap, subStruct.field_4);
-
     LoadPalette(&gUnknown_083970E8, subStruct.field_8 * 16, 32);
 
     if (IsContest())
@@ -1228,85 +1202,59 @@ static void sub_80D81E0(u8 taskId)
     gBattle_BG1_X += 0xFFFF;
     gBattle_BG1_Y += 0;
 
-    switch(gTasks[taskId].data[12])
+    switch (gTasks[taskId].data[12])
     {
     case 0:
-
-        gTasks[taskId].data[10] += 1;
-
-        if (gTasks[taskId].data[10] != 4)
-            break;
-
-        else
+        if (++gTasks[taskId].data[10] == 4)
         {
             gTasks[taskId].data[10] = 0;
-            gTasks[taskId].data[9] += 1;
-
+            gTasks[taskId].data[9]++;
             gTasks[taskId].data[11] = gUnknown_083D9D6C[gTasks[taskId].data[9]];
 
             REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
-
-            if (gTasks[taskId].data[11] != 9)
-                break;
-
-            else
+            if (gTasks[taskId].data[11] == 9)
             {
-                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[12]++;
                 gTasks[taskId].data[11] = 0;
-                break;
             }
         }
-
+        break;
     case 1:
-
-        gTasks[taskId].data[11] += 1;
-
-        if (gTasks[taskId].data[11] == 0x51)
+        if (++gTasks[taskId].data[11] == 0x51)
         {
             gTasks[taskId].data[11] = 9;
-            gTasks[taskId].data[12] += 1;
+            gTasks[taskId].data[12]++;
         }
         break;
-
     case 2:
-
-        gTasks[taskId].data[10] += 1;
-
-        if (gTasks[taskId].data[10] == 4)
+        if (++gTasks[taskId].data[10] == 4)
         {
             gTasks[taskId].data[10] = 0;
-            gTasks[taskId].data[11] -= 1;
+            gTasks[taskId].data[11]--;
 
             REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
-
             if (gTasks[taskId].data[11] == 0)
             {
-                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[12]++;
                 gTasks[taskId].data[11] = 0;
             }
         }
         break;
-
     case 3:
-
         sub_8078914(&subStruct);
-
         DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
         DmaClear32(3, subStruct.field_4, 0x800);
 
         if (!IsContest())
             REG_BG1CNT_BITFIELD.charBaseBlock = 0;
 
-        gTasks[taskId].data[12] += 1;
-
+        gTasks[taskId].data[12]++;
+        // fall through
     case 4:
-
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
-
         REG_BG1CNT_BITFIELD.priority = 1;
         DestroyAnimVisualTask(taskId);
     }
@@ -1316,7 +1264,6 @@ static void sub_80D83E0(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
@@ -1326,7 +1273,6 @@ void sub_80D8414(u8 taskId)
 
     REG_BLDCNT = 0x3F42;
     REG_BLDALPHA = 0x1000;
-
     REG_BG1CNT_BITFIELD.priority = 1;
     REG_BG1CNT_BITFIELD.screenSize = 0; 
 
@@ -1335,23 +1281,19 @@ void sub_80D8414(u8 taskId)
 
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
-
     REG_BG1HOFS = 0;
     REG_BG1VOFS = 0;
 
     sub_8078914(&subStruct);
-
     DmaFill32Defvars(3, 0, subStruct.field_4, 0x1000);
     DmaCopy16Defvars(3, &gWeatherFog1Tiles, subStruct.field_0, 0x800);
-
     LZDecompressVram(&gBattleAnimFogTilemap, subStruct.field_4);
-
     LoadPalette(&gUnknown_083970E8, subStruct.field_8 * 16, 32);
 
     if (IsContest())
         sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 0);
 
-    gTasks[taskId].data[15] = 0xFFFF;
+    gTasks[taskId].data[15] = -1;
     gTasks[taskId].func = sub_80D851C;
 }
 
@@ -1365,71 +1307,51 @@ static void sub_80D851C(u8 taskId)
     switch (gTasks[taskId].data[12])
     {
     case 0:
-
         gTasks[taskId].data[9] += 1;
         gTasks[taskId].data[11] = gUnknown_083D9D98[gTasks[taskId].data[9]];
-
         REG_BLDALPHA = gTasks[taskId].data[11] | ((17 - gTasks[taskId].data[11]) << 8);
-
         if (gTasks[taskId].data[11] == 5)
         {
-            gTasks[taskId].data[12] += 1;
+            gTasks[taskId].data[12]++;
             gTasks[taskId].data[11] = 0;
         }
         break;
-
     case 1:
-
-        gTasks[taskId].data[11] += 1;
-
-        if (gTasks[taskId].data[11] == 0x51)
+        if (++gTasks[taskId].data[11] == 0x51)
         {
             gTasks[taskId].data[11] = 5;
-            gTasks[taskId].data[12] += 1;
+            gTasks[taskId].data[12]++;
         }
         break;
-
     case 2:
-
-        gTasks[taskId].data[10] += 1;
-
-        if (gTasks[taskId].data[10] == 4)
+        if (++gTasks[taskId].data[10] == 4)
         {
             gTasks[taskId].data[10] = 0;
             gTasks[taskId].data[11] -= 1;
-
             REG_BLDALPHA = gTasks[taskId].data[11] | ((16 - gTasks[taskId].data[11]) << 8);
-
             if (gTasks[taskId].data[11] == 0)
             {
-                gTasks[taskId].data[12] += 1;
+                gTasks[taskId].data[12]++;
                 gTasks[taskId].data[11] = 0;
             }
         }
         break;
-
     case 3:
-
         sub_8078914(&subStruct);
-
         DmaFill32Large(3, 0, subStruct.field_0, 0x2000, 0x1000);
         DmaClear32(3, subStruct.field_4, 0x800);
 
         if (!IsContest())
             REG_BG1CNT_BITFIELD.charBaseBlock = 0;
 
-        gTasks[taskId].data[12] += 1;
-
+        gTasks[taskId].data[12]++;
+        // fall through
     case 4:
-
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-
         REG_BLDCNT = 0;
         REG_BLDALPHA = 0;
-
         REG_BG1CNT_BITFIELD.priority = 1;
-
         DestroyAnimVisualTask(taskId);
     }
 }
@@ -1438,26 +1360,22 @@ static void sub_80D8700(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
 
-    if ((u8)(GetBattlerSpriteCoord(gAnimBankAttacker, 2)) <
-        (u8)(GetBattlerSpriteCoord(gAnimBankTarget, 2)))
-
+    if (GetBattlerSpriteCoord(gAnimBankAttacker, 2) < GetBattlerSpriteCoord(gAnimBankTarget, 2))
         sprite->data[7] = 0x8000;
 
-    if ((gBanksBySide[gAnimBankTarget] & 1) == 0)
+    if (!(gBanksBySide[gAnimBankTarget] & 1))
     {
         gBattleAnimArgs[1] = -gBattleAnimArgs[1];
         gBattleAnimArgs[3] = -gBattleAnimArgs[3];
 
-        if ((sprite->data[7] & 0x8000) != 0
-         && (gBanksBySide[gAnimBankAttacker] & 1) == 0)
-
+        if ((sprite->data[7] & 0x8000) && !(gBanksBySide[gAnimBankAttacker] & 1))
             sprite->subpriority = gSprites[GetAnimBattlerSpriteId(1)].subpriority + 1;
 
         sprite->data[6] = 1; 
     }
+
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
-
     if (gBattleAnimArgs[7])
     {
         sprite->data[1] = sprite->pos1.x + gBattleAnimArgs[1];
@@ -1475,7 +1393,7 @@ static void sub_80D8700(struct Sprite *sprite)
         sprite->data[7] |= sub_8079ED4(gAnimBankTarget) << 8;
     } 
 
-    if (IsContest() != 0)
+    if (IsContest())
     {
         sprite->data[6] = 1;
         sprite->subpriority = 0x80;
@@ -1483,7 +1401,6 @@ static void sub_80D8700(struct Sprite *sprite)
 
     InitAnimLinearTranslation(sprite);
     sprite->callback = sub_80D8874;
-
 }
 
 /*
@@ -2001,206 +1918,49 @@ void sub_80D8ADC(u8 taskId)
     task->func = sub_80D8AF8;
 }
 
-/*
-// Also probably not equivalent
 static void sub_80D8AF8(u8 taskId)
 {
-    //
     struct Task *task = &gTasks[taskId];
-
-    s32 comp = task->data[0];
-
-    //*
-    if (comp != 1) // cmp 1 != 
+    switch (task->data[0])
     {
-        //
-        if (comp <= 1) // cmp 2 >
+    case 0:
+        if (++task->data[4] > 2)
         {
-            // 
-            if (comp == 0) // cmp 3 ==
-            {
-                //return;
-                task->data[4] += 1;
-
-                if (task->data[4] > 2) // cmp 5 >
-                {
-                    // ...
-                    task->data[4] = comp;
-                    task->data[5] = comp;
-                    task->data[2] = comp;
-                }
-            }
-            // _26
-            else
-            {
-                return;
-            }
-                
+            task->data[4] = 0;
+            task->data[5] = 0;
+            task->data[2] = 0;
+            task->data[0]++;
         }
-        else // cmp 2 <=
+        break;
+    case 1:
+        if (task->data[5] == 0)
         {
-            // _20
-            if (comp == 2) // cmp 4 ==
-            {
-                // _92
-                if (task->data[1] == 0) // cmp 10 ==
-                {
-                    // destroy stuff
-                    DestroyAnimVisualTask(taskId);
-                }
-            }
-            return;
+            if (sub_80D8BA8(task->data[3], task->data[2], taskId, 1))
+                task->data[1]++;
             
-        }
-    }
-    else // cmp 1 ==
-    {
-        // _3C
-        if (task->data[5] == 0) // cmp 6 ==
-        {
-            //
-            sub_80D8BA8(task->data[3], task->data[2], taskId, 1);
-
-            if (task->data[3] << 24 != 0) // cmp 7 !=
+            if (++task->data[2] == 3)
             {
-                // ...
-                task->data[1] += 1;
-            }
-            // _5C
-            //...
-            task->data[2] += 1;
-
-            if ((s16)(task->data[2]) == 3) // cmp 8 ==
-            {
-                //...
-                task->data[3] += 1;
-
-                if (task->data[3] != 0xA) // cmp 9 != // cast to signed?
-                {
-                    // _80
-                    //...
-                    task->data[0] += 1;
-                    return;
-                }
+                if (++task->data[3] == 10)
+                    task->data[0]++;
+                else
+                    task->data[0]--;
             }
             else
             {
-                // _88
-                //...
-                task->data[5] = comp;//task->data[0];
-                return;
+                task->data[5] = 1;
             }
-        }
-        else // cmp 6 !=
-        {
-            // _8C
-            //...
-            task->data[5] -= 1;
-            return;
-        }
-    }
-    // _78
-    task->data[0] += 1;
-    return;
-} 
-//*/
 
-NAKED static void sub_80D8AF8(u8 taskId)
-{
-    asm_unified("\tpush {r4,r5,lr}\n"
-                "\tlsls r0, 24\n"
-                "\tlsrs r2, r0, 24\n"
-                "\tlsls r0, r2, 2\n"
-                "\tadds r0, r2\n"
-                "\tlsls r0, 3\n"
-                "\tldr r1, _080D8B1C @ =gTasks\n"
-                "\tadds r4, r0, r1\n"
-                "\tmovs r0, 0x8\n"
-                "\tldrsh r5, [r4, r0]\n"
-                "\tcmp r5, 0x1\n"
-                "\tbeq _080D8B3C\n"
-                "\tcmp r5, 0x1\n"
-                "\tbgt _080D8B20\n"
-                "\tcmp r5, 0\n"
-                "\tbeq _080D8B26\n"
-                "\tb _080D8BA0\n"
-                "\t.align 2, 0\n"
-                "_080D8B1C: .4byte gTasks\n"
-                "_080D8B20:\n"
-                "\tcmp r5, 0x2\n"
-                "\tbeq _080D8B92\n"
-                "\tb _080D8BA0\n"
-                "_080D8B26:\n"
-                "\tldrh r0, [r4, 0x10]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x10]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x2\n"
-                "\tble _080D8BA0\n"
-                "\tstrh r5, [r4, 0x10]\n"
-                "\tstrh r5, [r4, 0x12]\n"
-                "\tstrh r5, [r4, 0xC]\n"
-                "\tb _080D8B78\n"
-                "_080D8B3C:\n"
-                "\tldrh r1, [r4, 0x12]\n"
-                "\tmovs r3, 0x12\n"
-                "\tldrsh r0, [r4, r3]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8B8C\n"
-                "\tldrb r0, [r4, 0xE]\n"
-                "\tldrb r1, [r4, 0xC]\n"
-                "\tmovs r3, 0x1\n"
-                "\tbl sub_80D8BA8\n"
-                "\tlsls r0, 24\n"
-                "\tcmp r0, 0\n"
-                "\tbeq _080D8B5C\n"
-                "\tldrh r0, [r4, 0xA]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0xA]\n"
-                "_080D8B5C:\n"
-                "\tldrh r0, [r4, 0xC]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0xC]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0x3\n"
-                "\tbne _080D8B88\n"
-                "\tldrh r0, [r4, 0xE]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0xE]\n"
-                "\tlsls r0, 16\n"
-                "\tasrs r0, 16\n"
-                "\tcmp r0, 0xA\n"
-                "\tbne _080D8B80\n"
-                "_080D8B78:\n"
-                "\tldrh r0, [r4, 0x8]\n"
-                "\tadds r0, 0x1\n"
-                "\tstrh r0, [r4, 0x8]\n"
-                "\tb _080D8BA0\n"
-                "_080D8B80:\n"
-                "\tldrh r0, [r4, 0x8]\n"
-                "\tsubs r0, 0x1\n"
-                "\tstrh r0, [r4, 0x8]\n"
-                "\tb _080D8BA0\n"
-                "_080D8B88:\n"
-                "\tstrh r5, [r4, 0x12]\n"
-                "\tb _080D8BA0\n"
-                "_080D8B8C:\n"
-                "\tsubs r0, r1, 0x1\n"
-                "\tstrh r0, [r4, 0x12]\n"
-                "\tb _080D8BA0\n"
-                "_080D8B92:\n"
-                "\tmovs r1, 0xA\n"
-                "\tldrsh r0, [r4, r1]\n"
-                "\tcmp r0, 0\n"
-                "\tbne _080D8BA0\n"
-                "\tadds r0, r2, 0\n"
-                "\tbl DestroyAnimVisualTask\n"
-                "_080D8BA0:\n"
-                "\tpop {r4,r5}\n"
-                "\tpop {r0}\n"
-                "\tbx r0");
+        }
+        else
+        {
+            task->data[5]--;
+        }
+        break;
+    case 2:
+        if (task->data[1] == 0)
+            DestroyAnimVisualTask(taskId);
+        break;
+    }
 }
 
 /*
@@ -2226,7 +1986,7 @@ void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(
 }
 */
 
-NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
+NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -2413,8 +2173,7 @@ static void sub_80D8D1C(struct Sprite *sprite)
     sprite->pos1.x += 4;
     sprite->pos1.y += 8;
 
-    if ((s16)sprite->pos1.x < sprite->data[3]
-     && (s16)sprite->pos1.y < sprite->data[4])
+    if (sprite->pos1.x < sprite->data[3] && sprite->pos1.y < sprite->data[4])
         return;
 
     if (sprite->data[0] == 1 && sprite->data[5] == 0)
@@ -2423,21 +2182,19 @@ static void sub_80D8D1C(struct Sprite *sprite)
                                 sprite->data[3], sprite->data[4], sprite->subpriority);
 
         sprite->data[0] = spriteId;
-
         if (spriteId != 64)
         {
             gSprites[sprite->data[0]].callback = sub_80D8E00;
-
             gSprites[sprite->data[0]].data[6] = sprite->data[6];
             gSprites[sprite->data[0]].data[7] = sprite->data[7];
         }
+
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);
     }
     else
     {
         gTasks[sprite->data[6]].data[sprite->data[7]]--;
-
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);
     }
@@ -2445,12 +2202,9 @@ static void sub_80D8D1C(struct Sprite *sprite)
 
 static void sub_80D8E00(struct Sprite *sprite)
 {
-    sprite->data[0]++;
-
-    if (sprite->data[0] == 20)
+    if (++sprite->data[0] == 20)
     {
         gTasks[sprite->data[6]].data[sprite->data[7]]--;
-
         FreeOamMatrix(sprite->oam.matrixNum);
         DestroySprite(sprite);
     }
@@ -2487,9 +2241,7 @@ static void sub_80D8EE0(struct Sprite *sprite)
         return;
 
     StartSpriteAnim(sprite, 1);
-
     sprite->callback = sub_8078600;
-
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
@@ -2498,7 +2250,6 @@ static void sub_80D8F10(struct Sprite *sprite)
     s16 randA, randB;
 
     sprite->oam.tileNum += 8;
-
     sub_8078764(sprite, 1);
 
     randA = (Random() & 0xFF) + 256;
@@ -2509,7 +2260,6 @@ static void sub_80D8F10(struct Sprite *sprite)
 
     sprite->data[1] = randA;
     sprite->data[2] = randB;
-
     sprite->callback = sub_80D8F74;
 }
 
@@ -2520,12 +2270,10 @@ static void sub_80D8F74(struct Sprite *sprite)
 
     if (sprite->data[1] & 1)
         sprite->pos2.x = -(sprite->data[3] >> 8);
-
     else
         sprite->pos2.x = sprite->data[3] >> 8;
 
     sprite->pos2.y = sprite->data[4] >> 8;
-
     if (++sprite->data[0] == 21)
         DestroyAnimSprite(sprite);
 }
@@ -2535,7 +2283,6 @@ void sub_80D8FC0(u8 taskId)
 {
     u8 arg = gBattleAnimArgs[0];
 
-    gBattleAnimArgs[arg] = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
-    
+    gBattleAnimArgs[arg] = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;    
     DestroyAnimVisualTask(taskId);
 }
