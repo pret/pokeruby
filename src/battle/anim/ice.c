@@ -10,14 +10,12 @@
 #include "palette.h"
 #include "random.h"
 
-//#include "gba/defines.h"
-
 extern s16 gBattleAnimArgs[];
 extern u8  gAnimBankAttacker;
 extern u8  gAnimBankTarget;
 extern u8  gAnimVisualTaskCount;
 extern u8  gBanksBySide[];
-extern u8  gBankSpriteIds[]; // ?
+extern u8  gBankSpriteIds[];
 
 extern u16 gBattle_BG1_X;
 extern u16 gBattle_BG1_Y;
@@ -25,37 +23,37 @@ extern u16 gBattle_BG1_Y;
 extern const u8 gUnknown_083970E8[];
 
 extern struct INCBIN_U8 gBattleAnimFogTilemap;
-extern struct INCBIN_U8 gWeatherFog1Tiles; // is this ok or?
+extern struct INCBIN_U8 gWeatherFog1Tiles;
 
-void sub_80D7704(struct Sprite *sprite);
-void sub_80D78EC(struct Sprite *sprite);
-void sub_80D792C(struct Sprite *sprite);
-void sub_80D79B4(struct Sprite *sprite);
-void sub_80D7A28(struct Sprite *sprite);
-void sub_80D7A64(struct Sprite *sprite);
-void sub_80D7CD4(struct Sprite *sprite);
-void sub_80D7E88(struct Sprite *sprite);
-void sub_80D7F10(struct Sprite *sprite);
-void sub_80D83E0(struct Sprite *sprite);
-void sub_80D8700(struct Sprite *sprite);
-void sub_80D8D1C(struct Sprite *sprite);
+static void sub_80D7704(struct Sprite *sprite);
+static void sub_80D78EC(struct Sprite *sprite);
+static void sub_80D792C(struct Sprite *sprite);
+static void sub_80D79B4(struct Sprite *sprite);
+static void sub_80D7A28(struct Sprite *sprite);
+static void sub_80D7A64(struct Sprite *sprite);
+static void sub_80D7CD4(struct Sprite *sprite);
+static void sub_80D7E88(struct Sprite *sprite);
+static void sub_80D7F10(struct Sprite *sprite);
+static void sub_80D83E0(struct Sprite *sprite);
+static void sub_80D8700(struct Sprite *sprite);
+static void sub_80D8D1C(struct Sprite *sprite);
 void sub_807A9BC(struct Sprite *sprite);
-void unc_080B06FC(struct Sprite *sprite);
-void sub_80D8F10(struct Sprite *sprite);
-void sub_80D7BA0(struct Sprite *sprite);
-void sub_80D7C08(struct Sprite *sprite);
-void sub_80D7C8C(struct Sprite *sprite);
-void sub_80D7E18(struct Sprite *sprite);
-void sub_80D8048(struct Sprite *sprite);
-void sub_80D8874(struct Sprite *sprite);
-void sub_80D8E00(struct Sprite *sprite);
-void sub_80D8EE0(struct Sprite *sprite);
-void sub_80D8F74(struct Sprite *sprite);
+static void unc_080B06FC(struct Sprite *sprite);
+static void sub_80D8F10(struct Sprite *sprite);
+static void sub_80D7BA0(struct Sprite *sprite);
+static void sub_80D7C08(struct Sprite *sprite);
+static void sub_80D7C8C(struct Sprite *sprite);
+static void sub_80D7E18(struct Sprite *sprite);
+static void sub_80D8048(struct Sprite *sprite);
+static void sub_80D8874(struct Sprite *sprite);
+static void sub_80D8E00(struct Sprite *sprite);
+static void sub_80D8EE0(struct Sprite *sprite);
+static void sub_80D8F74(struct Sprite *sprite);
 
-void sub_80D81E0(u8 taskId); // static?
-void sub_80D851C(u8 taskId);
-void sub_80D8AF8(u8 taskId);
-void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4);//(u8 taskId);
+static void sub_80D81E0(u8 taskId);
+static void sub_80D851C(u8 taskId);
+static void sub_80D8AF8(u8 taskId);
+void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4);
 
 const union AnimCmd gSpriteAnim_83D9B58[] =
 {
@@ -538,7 +536,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9F0C =
 
 /*
 // NOT EQUIVALENT
-void sub_80D7704(struct Sprite *sprite)
+static void sub_80D7704(struct Sprite *sprite)
 {
     //
     //u16 battler1, battler2, battler3, battler4; //
@@ -600,7 +598,7 @@ void sub_80D7704(struct Sprite *sprite)
 }
 */
 
-NAKED void sub_80D7704(struct Sprite *sprite)
+NAKED static void sub_80D7704(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -793,7 +791,6 @@ NAKED void sub_80D7704(struct Sprite *sprite)
                 "_080D7884: .4byte sub_80D7888");
 }
 
-// MATCHING
 void sub_80D7888(struct Sprite *sprite)
 {
     if (sprite->data[0] != 0)
@@ -816,8 +813,7 @@ void sub_80D7888(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// MATCHING
-void sub_80D78EC(struct Sprite *sprite)
+static void sub_80D78EC(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
 
@@ -833,8 +829,7 @@ void sub_80D78EC(struct Sprite *sprite)
     sub_8078174(sprite);
 }
 
-// MATCHING
-void sub_80D792C(struct Sprite *sprite)
+static void sub_80D792C(struct Sprite *sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
@@ -852,8 +847,7 @@ void sub_80D792C(struct Sprite *sprite)
     sprite->callback = StartAnimLinearTranslation;
 }
 
-// MATCHING
-void sub_80D79B4(struct Sprite *sprite)
+static void sub_80D79B4(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == 0)
         sub_8078764(sprite, 1);
@@ -873,8 +867,7 @@ void sub_80D79B4(struct Sprite *sprite)
     sprite->callback = sub_80785E4;
 }
 
-// MATCHING
-void sub_80D7A28(struct Sprite *sprite)
+static void sub_80D7A28(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
 
@@ -884,8 +877,7 @@ void sub_80D7A28(struct Sprite *sprite)
         move_anim_8074EE0(sprite);
 }
 
-// MATCHING
-void sub_80D7A64(struct Sprite *sprite)
+static void sub_80D7A64(struct Sprite *sprite)
 {
     int i;
     s16 tempDataHolder[8];
@@ -941,8 +933,7 @@ void sub_80D7A64(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, sub_80D7BA0);
 }
 
-// MATCHING
-void sub_80D7BA0(struct Sprite *sprite)
+static void sub_80D7BA0(struct Sprite *sprite)
 {
     s16 tempVar;
 
@@ -964,8 +955,7 @@ void sub_80D7BA0(struct Sprite *sprite)
     sub_80D7C08(sprite);
 }
 
-// MATCHING
-void sub_80D7C08(struct Sprite *sprite)
+static void sub_80D7C08(struct Sprite *sprite)
 {
     s16 tempVar;
     tempVar = GetBattlerSide(gAnimBankAttacker) != 0 ? 20 : 65516;
@@ -993,8 +983,7 @@ void sub_80D7C08(struct Sprite *sprite)
     }
 }
 
-// MATCHING
-void sub_80D7C8C(struct Sprite *sprite)
+static void sub_80D7C8C(struct Sprite *sprite)
 {
     sprite->data[0] = 1;
     sub_8078CE8(sprite);
@@ -1005,8 +994,7 @@ void sub_80D7C8C(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// MATCHING
-void sub_80D7CD4(struct Sprite *sprite)
+static void sub_80D7CD4(struct Sprite *sprite)
 {
     int i;
     s16 tempDataHolder[8];
@@ -1065,8 +1053,7 @@ void sub_80D7CD4(struct Sprite *sprite)
     sprite->callback = sub_80D7E18;
 }
 
-// MATCHING
-void sub_80D7E18(struct Sprite *sprite)
+static void sub_80D7E18(struct Sprite *sprite)
 {
     sub_8078CE8(sprite);
 
@@ -1085,8 +1072,7 @@ void sub_80D7E18(struct Sprite *sprite)
     }
 }
 
-// MATCHING
-void sub_80D7E88(struct Sprite *sprite)
+static void sub_80D7E88(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -1110,8 +1096,7 @@ void sub_80D7E88(struct Sprite *sprite)
             DestroyAnimSprite(sprite);
 }
 
-// MATCHING
-void sub_80D7F10(struct Sprite *sprite)
+static void sub_80D7F10(struct Sprite *sprite)
 {
     s16 tempVar;
     u8  battler;
@@ -1181,8 +1166,7 @@ void sub_80D7F10(struct Sprite *sprite)
     sub_80D8048(sprite);
 }
 
-// MATCHING 
-void sub_80D8048(struct Sprite *sprite)
+static void sub_80D8048(struct Sprite *sprite)
 {
     if (TranslateAnimLinear(sprite) == 0)
     {
@@ -1201,8 +1185,7 @@ void sub_80D8048(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// used in haze?
-// MATCHING
+// Used in haze
 void sub_80D80E0(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
@@ -1238,8 +1221,7 @@ void sub_80D80E0(u8 taskId)
     gTasks[taskId].func = sub_80D81E0;
 }
 
-// MATCHING
-void sub_80D81E0(u8 taskId)
+static void sub_80D81E0(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
 
@@ -1330,17 +1312,14 @@ void sub_80D81E0(u8 taskId)
     }
 } 
 
-// MATCHING
-void sub_80D83E0(struct Sprite *sprite)
+static void sub_80D83E0(struct Sprite *sprite)
 {
-    // 
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
 
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
-// MATCHING
 void sub_80D8414(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
@@ -1376,9 +1355,7 @@ void sub_80D8414(u8 taskId)
     gTasks[taskId].func = sub_80D851C;
 }
 
-// MATCHING
-// but try task struct?
-void sub_80D851C(u8 taskId)
+static void sub_80D851C(u8 taskId)
 {
     struct Struct_sub_8078914 subStruct;
 
@@ -1457,8 +1434,7 @@ void sub_80D851C(u8 taskId)
     }
 }
 
-// MATCHING 
-void sub_80D8700(struct Sprite *sprite)
+static void sub_80D8700(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
 
@@ -1510,10 +1486,9 @@ void sub_80D8700(struct Sprite *sprite)
 
 }
 
-// https://pastebin.com/8wvBFV2F
-// 
 /*
-void sub_80D8874(struct Sprite *sprite)
+// (Probably) not equivalent
+static void sub_80D8874(struct Sprite *sprite)
 {
     s16 r0, r3;
     s8 r1;
@@ -1586,7 +1561,7 @@ void sub_80D8874(struct Sprite *sprite)
 
             return;
         }
-        else // > // /?????????? this little bit is at the end
+        else // > 
         {
             // _88E // could this be an else if?
             if ((sprite->data[7] & 0xFF) == 2) // cmp 4
@@ -1705,7 +1680,7 @@ void sub_80D8874(struct Sprite *sprite)
 }
 */
 
-NAKED void sub_80D8874(struct Sprite *sprite)
+NAKED static void sub_80D8874(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                 "\tadds r4, r0, 0\n"
@@ -2019,7 +1994,6 @@ NAKED void sub_80D8874(struct Sprite *sprite)
                 "_080D8AD8: .4byte gAnimVisualTaskCount");
 }
 
-// MATCHING
 void sub_80D8ADC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -2027,162 +2001,111 @@ void sub_80D8ADC(u8 taskId)
     task->func = sub_80D8AF8;
 }
 
-//
-/*void sub_80D8AF8(u8 taskId)
+/*
+// Also probably not equivalent
+static void sub_80D8AF8(u8 taskId)
 {
     //
     struct Task *task = &gTasks[taskId];
 
-    //
+    s32 comp = task->data[0];
 
-} 
-//*/
-
-/*void sub_80D8AF8(u8 taskId)
-{
-    //
-    struct Task *task = &gTasks[taskId];
-
-    if () // cmp 1 !=
+    //*
+    if (comp != 1) // cmp 1 != 
     {
         //
-        if () // cmp 2 <=
+        if (comp <= 1) // cmp 2 >
         {
-            //
-            if () // cmp 3 != 
+            // 
+            if (comp == 0) // cmp 3 ==
             {
-                //
-                return;
-            }
-            else // cmp 3 ==
-            {
-                // _26
-                if () // cmp 5 <=
+                //return;
+                task->data[4] += 1;
+
+                if (task->data[4] > 2) // cmp 5 >
                 {
-                    //
-                    return;
+                    // ...
+                    task->data[4] = comp;
+                    task->data[5] = comp;
+                    task->data[2] = comp;
                 }
             }
+            // _26
+            else
+            {
+                return;
+            }
+                
         }
-        else // cmp 2 >
+        else // cmp 2 <=
         {
             // _20
+            if (comp == 2) // cmp 4 ==
+            {
+                // _92
+                if (task->data[1] == 0) // cmp 10 ==
+                {
+                    // destroy stuff
+                    DestroyAnimVisualTask(taskId);
+                }
+            }
+            return;
+            
         }
     }
     else // cmp 1 ==
     {
         // _3C
-    }
-    // _78
-
-    //
-    /*if (task->data[0] != 1) // cmp 1
-    {
-        //
-        if (task->data[0] <= 1) //cmp 2
+        if (task->data[5] == 0) // cmp 6 ==
         {
-            // 
-            if (task->data[0] == 0) // cmp 3
-            {
-                //
-            //    return;
-            //}
-            //else // ==
-            //{
-                // _26
-                task->data[4] += 1;
-
-                if ((s16)task->data[4] > 2) // cmp 5
-                {
-                    // 
-                    task->data[4] = 2;
-                    task->data[5] = 2;
-                    task->data[2] = 2;
-                }
-                else // >
-                {
-                    // ... 
-                    return;
-                }
-            }
-        }
-        else // >
-        {
-            // _20
-            if (task->data[0] != 2) // cmp 4
-            {
-                // 
-                return;
-            }
-            // _92
-
-            if (task->data[1] != 0) // cmp 10
-            {
-                //
-                return;
-            }
-            // ...
-            DestroyAnimVisualTask(taskId);
-
-            return;
-        }
-    }
-    else // ==
-    {
-        // _3C
-
-        if (task->data[5] == 0) // cmp 6
-        {
-            // ...
-            //sub_80D8BA8(task->data[3]);
+            //
             sub_80D8BA8(task->data[3], task->data[2], taskId, 1);
 
-            if ((task->data[3]) != 0) // cmp 7 // << 24
+            if (task->data[3] << 24 != 0) // cmp 7 !=
             {
                 // ...
                 task->data[1] += 1;
             }
             // _5C
-            task->data[2] += 1; 
+            //...
+            task->data[2] += 1;
 
-            if ((s16)(task->data[2]) == 3) // cmp 8
+            if ((s16)(task->data[2]) == 3) // cmp 8 ==
             {
-                // ...
+                //...
                 task->data[3] += 1;
 
-                if ((s16)(task->data[3]) != 10) // cmp 9
+                if (task->data[3] != 0xA) // cmp 9 != // cast to signed?
                 {
-                    // _80 ...
-                    task->data[0] -= 1;
-
+                    // _80
+                    //...
+                    task->data[0] += 1;
                     return;
                 }
             }
             else
             {
                 // _88
-                task->data[5] = 2;
-
+                //...
+                task->data[5] = comp;//task->data[0];
                 return;
             }
         }
-        else
+        else // cmp 6 !=
         {
             // _8C
+            //...
             task->data[5] -= 1;
-
             return;
         }
     }
-
     // _78
     task->data[0] += 1;
-
-    //return;*/
-//}
+    return;
+} 
 //*/
 
-NAKED void sub_80D8AF8(u8 taskId)
+NAKED static void sub_80D8AF8(u8 taskId)
 {
     asm_unified("\tpush {r4,r5,lr}\n"
                 "\tlsls r0, 24\n"
@@ -2281,7 +2204,7 @@ NAKED void sub_80D8AF8(u8 taskId)
 }
 
 /*
-// NOT  NONMATCHING
+//
 void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(u8 taskId)
 {
     //
@@ -2303,7 +2226,7 @@ void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(
 }
 */
 
-NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//spriteId, u8 taskId, u8 a3)//(u8 taskId)
+NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r10\n"
@@ -2483,8 +2406,7 @@ NAKED void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//spriteId, u8 taskId, u8 a3)/
                 "\tbx r1");
 }
 
-// MATCHING
-void sub_80D8D1C(struct Sprite *sprite)
+static void sub_80D8D1C(struct Sprite *sprite)
 {
     u8 spriteId;
 
@@ -2521,8 +2443,7 @@ void sub_80D8D1C(struct Sprite *sprite)
     }
 }
 
-// MATCHING
-void sub_80D8E00(struct Sprite *sprite)
+static void sub_80D8E00(struct Sprite *sprite)
 {
     sprite->data[0]++;
 
@@ -2535,9 +2456,8 @@ void sub_80D8E00(struct Sprite *sprite)
     }
 }
 
-// used for icicle spear??
-// MATCHING
-void unc_080B06FC(struct Sprite *sprite)
+// Does this animate icicle arc for icicle spear?
+static void unc_080B06FC(struct Sprite *sprite)
 {
     u8 animNum = gAnimDisableStructPtr->rolloutTimer2 - gAnimDisableStructPtr->rolloutTimer1 - 1;
 
@@ -2561,8 +2481,7 @@ void unc_080B06FC(struct Sprite *sprite)
     sprite->callback = sub_80D8EE0;
 }
 
-// MATCHING
-void sub_80D8EE0(struct Sprite *sprite)
+static void sub_80D8EE0(struct Sprite *sprite)
 {
     if (!TranslateAnimArc(sprite))
         return;
@@ -2574,29 +2493,27 @@ void sub_80D8EE0(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-// MATCHING (but consider renaming temp variables)
-void sub_80D8F10(struct Sprite *sprite)
+static void sub_80D8F10(struct Sprite *sprite)
 {
-    s16 a, b; // x, y ?
+    s16 randA, randB;
 
     sprite->oam.tileNum += 8;
 
     sub_8078764(sprite, 1);
 
-    a = (Random() & 0xFF) + 256;
-    b = Random() & 0x1FF;
+    randA = (Random() & 0xFF) + 256;
+    randB = Random() & 0x1FF;
 
-    if (b > 0xFF)
-        b = 256 - b;
+    if (randB > 0xFF)
+        randB = 256 - randB;
 
-    sprite->data[1] = a;
-    sprite->data[2] = b;
+    sprite->data[1] = randA;
+    sprite->data[2] = randB;
 
     sprite->callback = sub_80D8F74;
 }
 
-// MATCHING
-void sub_80D8F74(struct Sprite *sprite)
+static void sub_80D8F74(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
@@ -2613,8 +2530,7 @@ void sub_80D8F74(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-// should be counter for icicle spear?
-// MATCHING
+// Counter for icicle spear?
 void sub_80D8FC0(u8 taskId)
 {
     u8 arg = gBattleAnimArgs[0];
@@ -2623,6 +2539,3 @@ void sub_80D8FC0(u8 taskId)
     
     DestroyAnimVisualTask(taskId);
 }
-
-// 28 MATCHING
-// 04 NAKED
