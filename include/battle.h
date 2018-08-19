@@ -3,6 +3,7 @@
 
 #include "sprite.h"
 #include "constants/battle_constants.h"
+#include "battle_setup.h"
 
 #define GET_BATTLER_POSITION(bank)((gBattlerPositions[bank]))
 #define GET_BATTLER_SIDE(bank)((GetBattlerPosition(bank) & BIT_SIDE))
@@ -60,6 +61,14 @@ enum
     BATTLE_TERRAIN_PLAIN,
 };
 
+union TrainerMonPtr
+{
+    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
+};
+
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -71,7 +80,7 @@ struct Trainer
     /*0x18*/ bool8 doubleBattle;
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
-    /*0x24*/ const void *party;
+    /*0x24*/ union TrainerMonPtr party;
 };
 
 struct BattleHistory

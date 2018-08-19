@@ -166,17 +166,17 @@ Route110_EventScript_14FA84:: @ 814FA84
 	end
 
 Route110_EventScript_14FA8E:: @ 814FA8E
-	trainerbattle 0, OPPONENT_EDWARD, 0, Route110_Text_1BA699, Route110_Text_1BA6D2
+	trainerbattle 0, TRAINER_EDWARD, 0, Route110_Text_1BA699, Route110_Text_1BA6D2
 	msgbox Route110_Text_1BA6F8, 6
 	end
 
 Route110_EventScript_14FAA5:: @ 814FAA5
-	trainerbattle 0, OPPONENT_JACLYN, 0, Route110_Text_1BA72D, Route110_Text_1BA759
+	trainerbattle 0, TRAINER_JACLYN, 0, Route110_Text_1BA72D, Route110_Text_1BA759
 	msgbox Route110_Text_1BA76C, 6
 	end
 
 Route110_EventScript_14FABC:: @ 814FABC
-	trainerbattle 0, OPPONENT_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
+	trainerbattle 0, TRAINER_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FAE3
@@ -184,27 +184,27 @@ Route110_EventScript_14FABC:: @ 814FABC
 	end
 
 Route110_EventScript_14FAE3:: @ 814FAE3
-	trainerbattle 5, OPPONENT_EDWIN_1, 0, Route110_Text_1BA877, Route110_Text_1BA8CD
+	trainerbattle 5, TRAINER_EDWIN_1, 0, Route110_Text_1BA877, Route110_Text_1BA8CD
 	msgbox Route110_Text_1BA8E9, 6
 	end
 
 Route110_EventScript_14FAFA:: @ 814FAFA
-	trainerbattle 0, OPPONENT_DALE, 0, Route110_Text_1BA913, Route110_Text_1BA93C
+	trainerbattle 0, TRAINER_DALE, 0, Route110_Text_1BA913, Route110_Text_1BA93C
 	msgbox Route110_Text_1BA94A, 6
 	end
 
 Route110_EventScript_14FB11:: @ 814FB11
-	trainerbattle 0, OPPONENT_JACOB, 0, Route110_Text_1BA22C, Route110_Text_1BA264
+	trainerbattle 0, TRAINER_JACOB, 0, Route110_Text_1BA22C, Route110_Text_1BA264
 	msgbox Route110_Text_1BA27C, 6
 	end
 
 Route110_EventScript_14FB28:: @ 814FB28
-	trainerbattle 0, OPPONENT_ANTHONY, 0, Route110_Text_1BA2D4, Route110_Text_1BA2FC
+	trainerbattle 0, TRAINER_ANTHONY, 0, Route110_Text_1BA2D4, Route110_Text_1BA2FC
 	msgbox Route110_Text_1BA30C, 6
 	end
 
 Route110_EventScript_14FB3F:: @ 814FB3F
-	trainerbattle 0, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
+	trainerbattle 0, TRAINER_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FB66
@@ -212,17 +212,17 @@ Route110_EventScript_14FB3F:: @ 814FB3F
 	end
 
 Route110_EventScript_14FB66:: @ 814FB66
-	trainerbattle 5, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA3EF, Route110_Text_1BA432
+	trainerbattle 5, TRAINER_BENJAMIN_1, 0, Route110_Text_1BA3EF, Route110_Text_1BA432
 	msgbox Route110_Text_1BA456, 6
 	end
 
 Route110_EventScript_14FB7D:: @ 814FB7D
-	trainerbattle 0, OPPONENT_JASMINE, 0, Route110_Text_1BA5FF, Route110_Text_1BA63C
+	trainerbattle 0, TRAINER_JASMINE, 0, Route110_Text_1BA5FF, Route110_Text_1BA63C
 	msgbox Route110_Text_1BA65F, 6
 	end
 
 Route110_EventScript_14FB94:: @ 814FB94
-	trainerbattle 0, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
+	trainerbattle 0, TRAINER_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FBBB
@@ -230,12 +230,12 @@ Route110_EventScript_14FB94:: @ 814FB94
 	end
 
 Route110_EventScript_14FBBB:: @ 814FBBB
-	trainerbattle 5, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA573, Route110_Text_1BA5A1
+	trainerbattle 5, TRAINER_ABIGAIL_1, 0, Route110_Text_1BA573, Route110_Text_1BA5A1
 	msgbox Route110_Text_1BA5C4, 6
 	end
 
 Route110_EventScript_14FBD2:: @ 814FBD2
-	trainerbattle 0, OPPONENT_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
+	trainerbattle 0, TRAINER_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route110_EventScript_14FBF9
@@ -243,12 +243,12 @@ Route110_EventScript_14FBD2:: @ 814FBD2
 	end
 
 Route110_EventScript_14FBF9:: @ 814FBF9
-	trainerbattle 5, OPPONENT_ISABEL_1, 0, Route110_Text_1BAA2D, Route110_Text_1BAA76
+	trainerbattle 5, TRAINER_ISABEL_1, 0, Route110_Text_1BAA2D, Route110_Text_1BAA76
 	msgbox Route110_Text_1BAA8F, 6
 	end
 
 Route110_EventScript_14FC10:: @ 814FC10
-	trainerbattle 0, OPPONENT_TIMMY, 0, Route110_Text_1BAAC3, Route110_Text_1BAAF7
+	trainerbattle 0, TRAINER_TIMMY, 0, Route110_Text_1BAAC3, Route110_Text_1BAAF7
 	msgbox Route110_Text_1BAB19, 6
 	end
 
@@ -368,17 +368,17 @@ Route110_EventScript_14FDB1:: @ 814FDB1
 	end
 
 Route110_EventScript_14FDE0:: @ 814FDE0
-	trainerbattle 3, OPPONENT_MAY_5, 0, Route110_Text_16E826
+	trainerbattle 3, TRAINER_MAY_5, 0, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FDF0:: @ 814FDF0
-	trainerbattle 3, OPPONENT_MAY_8, 0, Route110_Text_16E826
+	trainerbattle 3, TRAINER_MAY_8, 0, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
 Route110_EventScript_14FE00:: @ 814FE00
-	trainerbattle 3, OPPONENT_MAY_2, 0, Route110_Text_16E826
+	trainerbattle 3, TRAINER_MAY_2, 0, Route110_Text_16E826
 	goto Route110_EventScript_14FE10
 	end
 
@@ -398,17 +398,17 @@ Route110_EventScript_14FE2B:: @ 814FE2B
 	end
 
 Route110_EventScript_14FE5A:: @ 814FE5A
-	trainerbattle 3, OPPONENT_BRENDAN_5, 0, Route110_Text_16EA0F
+	trainerbattle 3, TRAINER_BRENDAN_5, 0, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE6A:: @ 814FE6A
-	trainerbattle 3, OPPONENT_BRENDAN_8, 0, Route110_Text_16EA0F
+	trainerbattle 3, TRAINER_BRENDAN_8, 0, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 
 Route110_EventScript_14FE7A:: @ 814FE7A
-	trainerbattle 3, OPPONENT_BRENDAN_2, 0, Route110_Text_16EA0F
+	trainerbattle 3, TRAINER_BRENDAN_2, 0, Route110_Text_16EA0F
 	goto Route110_EventScript_14FE8A
 	end
 

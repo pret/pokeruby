@@ -141,7 +141,7 @@ void sub_8136130(struct Pokeblock *pokeblock, MainCallback callback)
     gUnknown_02039304 = &gUnknown_083DFEC4->unkD164;
     gUnknown_02039304->pokeblock = pokeblock;
     gUnknown_02039304->callback = callback;
-    gUnknown_083DFEC4->unkD162[0] = 2;
+    gUnknown_083DFEC4->unkD162 = 2;
     launch_c3_walk_stairs_and_run_once(sub_8136294);
     SetMainCallback2(sub_8136244);
 }
@@ -152,7 +152,7 @@ static void sub_8136174(void)
     gUnknown_02039304->callback = gUnknown_02039308;
     gPokeblockMonID = sub_81370E4(gPokeblockMonID);
     gUnknown_02039304->unk56 = gPokeblockMonID < 4 ? 0 : 1;
-    gUnknown_083DFEC4->unkD162[0] = 2;
+    gUnknown_083DFEC4->unkD162 = 2;
     launch_c3_walk_stairs_and_run_once(sub_8136294);
     SetMainCallback2(sub_81361E4);
 }
@@ -243,7 +243,7 @@ static void sub_8136294(void)
         case 6:
             gUnknown_083DFEC4->unk76AA = 0;
             gUnknown_083DFEC4->unk87E0 = NULL;
-            gUnknown_083DFEC4->unk030C.val = 0x20;
+            gUnknown_083DFEC4->unk030C = 0x20;
             gUnknown_02039304->unk50++;
             break;
         case 7:
@@ -285,7 +285,7 @@ static void sub_8136294(void)
             break;
         case 13:
             sub_80F2E18(0);
-            gUnknown_083DFEC4->unk8768->unk26 = 0xffd8;
+            gUnknown_083DFEC4->unk8768->pos2.y = 0xffd8;
             gUnknown_02039304->unk50++;
             break;
         case 14:

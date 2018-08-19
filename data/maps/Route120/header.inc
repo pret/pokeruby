@@ -5,10 +5,10 @@ Route120:: @ 830581C
 	.4byte Route120_MapConnections
 	.2byte MUS_DOORO_X3
 	.2byte 36
-	.byte 35
+	.byte MAPSEC_ROUTE_120
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

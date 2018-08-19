@@ -53,9 +53,9 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B491F, 4
 	.endif
 	.ifdef SAPPHIRE
-	trainerbattle 3, OPPONENT_SEAFLOOR_CAVERN_GRUNT_5, 0, UnknownString_81B4319
+	trainerbattle 3, TRAINER_SEAFLOOR_CAVERN_GRUNT_5, 0, UnknownString_81B4319
 	.else
-	trainerbattle 3, OPPONENT_SEAFLOOR_CAVERN_GRUNT_5, 0, SeafloorCavern_Room9_Text_1B49AE
+	trainerbattle 3, TRAINER_SEAFLOOR_CAVERN_GRUNT_5, 0, SeafloorCavern_Room9_Text_1B49AE
 	.endif
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B432C, 4

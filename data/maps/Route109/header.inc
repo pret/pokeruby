@@ -5,10 +5,10 @@ Route109:: @ 83056E8
 	.4byte Route109_MapConnections
 	.2byte MUS_NEXTROAD
 	.2byte 25
-	.byte 24
+	.byte MAPSEC_ROUTE_109
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

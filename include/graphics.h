@@ -2472,7 +2472,7 @@ extern const u8 gBagPalette[];
 extern const u8 gBagScreen_Gfx[];
 extern const u8 gBagScreenMale_Pal[];
 extern const u8 gBagScreenFemale_Pal[];
-extern const u16 gUnknown_08E77004[];
+extern const u16 gBagScreen_Tilemap[];
 extern const u8 gBuyMenuFrame_Gfx[];
 extern const u8 gMenuMoneyPal[];
 extern const u8 gBuyMenuFrame_Tilemap[];
@@ -2615,7 +2615,7 @@ extern const u8 gMailTilemap_Dream[];
 extern const u8 gMailTilemap_Fab[];
 extern const u8 gMailTilemap_Retro[];
 
-extern const u8 gUnknown_08E96EC8[];
+extern const u8 gBagScreenLabels_Tilemap[];
 
 extern const u8 gMenuTrainerCard_Gfx[];
 extern const u16 gMenuTrainerCard0Star_Pal[];

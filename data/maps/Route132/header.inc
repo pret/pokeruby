@@ -5,10 +5,10 @@ Route132:: @ 830596C
 	.4byte Route132_MapConnections
 	.2byte MUS_GRANROAD
 	.2byte 48
-	.byte 47
+	.byte MAPSEC_ROUTE_132
 	.byte 0
-	.byte 2
-	.byte 6
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_6
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

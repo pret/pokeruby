@@ -5,10 +5,10 @@ PetalburgCity_Gym:: @ 8305F38
 	.4byte 0x0
 	.2byte MUS_GIM
 	.2byte 79
-	.byte 7
+	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 1
+	.byte MAP_BATTLE_SCENE_GYM

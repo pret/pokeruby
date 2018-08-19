@@ -7,6 +7,7 @@
 #include "constants/items.h"
 #include "main.h"
 #include "menu.h"
+#include "name_string_util.h"
 #include "naming_screen.h"
 #include "overworld.h"
 #include "palette.h"
@@ -310,88 +311,29 @@ void ScriptHatchMon(void)
     AddHatchedMonToParty(gSpecialVar_0x8004);
 }
 
-#ifdef NONMATCHING
-static bool8 sub_8042ABC(void* a, u8 b)
+static bool8 DaycareMonReceivedMail_(struct DayCare *daycare, u8 slot)
 {
+    u8 monNickname[32];
+    GetBoxMonNick(&daycare->mons[slot], monNickname);
+    if (daycare->misc.mail[slot].message.itemId != ITEM_NONE)
+    {
+        if (StringCompareWithoutExtCtrlCodes(monNickname, daycare->misc.mail[slot].names + 8)
+         || StringCompareWithoutExtCtrlCodes(gSaveBlock2.playerName, daycare->misc.mail[slot].names))
+        {
+            StringCopy(gStringVar1, monNickname);
+            StringCopy(gStringVar2, daycare->misc.mail[slot].names);
+            StringCopy(gStringVar3, daycare->misc.mail[slot].names + 8);
+            SanitizeNameString(gStringVar2);
+            return TRUE;
+        }
+    }
 
+    return FALSE;
 }
 
-#else
-NAKED
-static bool8 sub_8042ABC(void* a, u8 b)
+bool8 DaycareMonReceivedMail(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    sub sp, 0x20\n\
-    adds r5, r0, 0\n\
-    lsls r4, r1, 24\n\
-    lsrs r4, 24\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 4\n\
-    adds r0, r5, r0\n\
-    mov r1, sp\n\
-    bl GetBoxMonNick\n\
-    lsls r0, r4, 3\n\
-    subs r0, r4\n\
-    lsls r1, r0, 3\n\
-    adds r0, r5, r1\n\
-    adds r0, 0xC0\n\
-    ldrh r0, [r0]\n\
-    cmp r0, 0\n\
-    beq _08042B40\n\
-    adds r0, r1, 0\n\
-    adds r0, 0xA0\n\
-    adds r5, r0\n\
-    adds r6, r5, 0\n\
-    adds r6, 0x2C\n\
-    mov r0, sp\n\
-    adds r1, r6, 0\n\
-    bl StringCompareWithoutExtCtrlCodes\n\
-    cmp r0, 0\n\
-    bne _08042B08\n\
-    ldr r0, _08042B30 @ =gSaveBlock2\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x24\n\
-    bl StringCompareWithoutExtCtrlCodes\n\
-    cmp r0, 0\n\
-    beq _08042B40\n\
-_08042B08:\n\
-    ldr r0, _08042B34 @ =gStringVar1\n\
-    mov r1, sp\n\
-    bl StringCopy\n\
-    ldr r4, _08042B38 @ =gStringVar2\n\
-    adds r1, r5, 0\n\
-    adds r1, 0x24\n\
-    adds r0, r4, 0\n\
-    bl StringCopy\n\
-    ldr r0, _08042B3C @ =gStringVar3\n\
-    adds r1, r6, 0\n\
-    bl StringCopy\n\
-    adds r0, r4, 0\n\
-    bl SanitizeNameString\n\
-    movs r0, 0x1\n\
-    b _08042B42\n\
-    .align 2, 0\n\
-_08042B30: .4byte gSaveBlock2\n\
-_08042B34: .4byte gStringVar1\n\
-_08042B38: .4byte gStringVar2\n\
-_08042B3C: .4byte gStringVar3\n\
-_08042B40:\n\
-    movs r0, 0\n\
-_08042B42:\n\
-    add sp, 0x20\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-        .syntax divided");
-}
-
-#endif // NONMATCHING
-
-bool8 sub_8042B4C(void)
-{
-    return sub_8042ABC(&gSaveBlock1.daycare, gSpecialVar_0x8004);
+    return DaycareMonReceivedMail_(&gSaveBlock1.daycare, gSpecialVar_0x8004);
 }
 
 static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID)

@@ -280,12 +280,12 @@ Route120_EventScript_1519AA:: @ 81519AA
 	end
 
 Route120_EventScript_1519B3:: @ 81519B3
-	trainerbattle 0, OPPONENT_COLIN, 0, Route120_Text_1BEFC8, Route120_Text_1BF000
+	trainerbattle 0, TRAINER_COLIN, 0, Route120_Text_1BEFC8, Route120_Text_1BF000
 	msgbox Route120_Text_1BF015, 6
 	end
 
 Route120_EventScript_1519CA:: @ 81519CA
-	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
+	trainerbattle 0, TRAINER_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_1519F1
@@ -293,22 +293,22 @@ Route120_EventScript_1519CA:: @ 81519CA
 	end
 
 Route120_EventScript_1519F1:: @ 81519F1
-	trainerbattle 5, OPPONENT_ROBERT_1, 0, Route120_Text_1BF0FA, Route120_Text_1BF131
+	trainerbattle 5, TRAINER_ROBERT_1, 0, Route120_Text_1BF0FA, Route120_Text_1BF131
 	msgbox Route120_Text_1BF154, 6
 	end
 
 Route120_EventScript_151A08:: @ 8151A08
-	trainerbattle 0, OPPONENT_CARLOS, 0, Route120_Text_1BF193, Route120_Text_1BF1D4
+	trainerbattle 0, TRAINER_CARLOS, 0, Route120_Text_1BF193, Route120_Text_1BF1D4
 	msgbox Route120_Text_1BF215, 6
 	end
 
 Route120_EventScript_151A1F:: @ 8151A1F
-	trainerbattle 0, OPPONENT_JENNA, 0, Route120_Text_1BF26E, Route120_Text_1BF2D2
+	trainerbattle 0, TRAINER_JENNA, 0, Route120_Text_1BF26E, Route120_Text_1BF2D2
 	msgbox Route120_Text_1BF2EA, 6
 	end
 
 Route120_EventScript_151A36:: @ 8151A36
-	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
+	trainerbattle 0, TRAINER_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq Route120_EventScript_151A5D
@@ -316,36 +316,36 @@ Route120_EventScript_151A36:: @ 8151A36
 	end
 
 Route120_EventScript_151A5D:: @ 8151A5D
-	trainerbattle 5, OPPONENT_BRANDON_1, 0, Route120_Text_1BF3D0, Route120_Text_1BF416
+	trainerbattle 5, TRAINER_BRANDON_1, 0, Route120_Text_1BF3D0, Route120_Text_1BF416
 	msgbox Route120_Text_1BF43E, 6
 	end
 
 Route120_EventScript_151A74:: @ 8151A74
-	trainerbattle 0, OPPONENT_JENNIFER, 0, Route120_Text_1BF4A0, Route120_Text_1BF504
+	trainerbattle 0, TRAINER_JENNIFER, 0, Route120_Text_1BF4A0, Route120_Text_1BF504
 	msgbox Route120_Text_1BF51F, 6
 	end
 
 Route120_EventScript_151A8B:: @ 8151A8B
-	trainerbattle 0, OPPONENT_CHIP, 0, Route120_Text_1BF560, Route120_Text_1BF5D6
+	trainerbattle 0, TRAINER_CHIP, 0, Route120_Text_1BF560, Route120_Text_1BF5D6
 	msgbox Route120_Text_1BF5F4, 6
 	end
 
 Route120_EventScript_151AA2:: @ 8151AA2
-	trainerbattle 0, OPPONENT_CLARISSA, 0, Route120_Text_1BF65B, Route120_Text_1BF6A4
+	trainerbattle 0, TRAINER_CLARISSA, 0, Route120_Text_1BF65B, Route120_Text_1BF6A4
 	msgbox Route120_Text_1BF6D0, 6
 	end
 
 Route120_EventScript_151AB9:: @ 8151AB9
-	trainerbattle 0, OPPONENT_ANGELICA, 0, Route120_Text_1BF728, Route120_Text_1BF78C
+	trainerbattle 0, TRAINER_ANGELICA, 0, Route120_Text_1BF728, Route120_Text_1BF78C
 	msgbox Route120_Text_1BF7B2, 6
 	end
 
 Route120_EventScript_151AD0:: @ 8151AD0
-	trainerbattle 0, OPPONENT_KEIGO, 0, Route120_Text_1BF80B, Route120_Text_1BF852
+	trainerbattle 0, TRAINER_KEIGO, 0, Route120_Text_1BF80B, Route120_Text_1BF852
 	msgbox Route120_Text_1BF891, 6
 	end
 
 Route120_EventScript_151AE7:: @ 8151AE7
-	trainerbattle 0, OPPONENT_TSUNAO, 0, Route120_Text_1BF8C5, Route120_Text_1BF920
+	trainerbattle 0, TRAINER_TSUNAO, 0, Route120_Text_1BF8C5, Route120_Text_1BF920
 	msgbox Route120_Text_1BF946, 6
 	end

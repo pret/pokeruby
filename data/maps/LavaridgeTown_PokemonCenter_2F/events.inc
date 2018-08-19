@@ -1,7 +1,7 @@
 LavaridgeTown_PokemonCenter_2F_EventObjects:: @ 83865E8
-	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, 8, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_153960, 0
-	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, 8, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_153954, 0
-	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, 8, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_15395A, 0
+	object_event 1, EVENT_OBJ_GFX_TEALA, 0, 10, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_153960, 0
+	object_event 2, EVENT_OBJ_GFX_TEALA, 0, 4, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_153954, 0
+	object_event 3, EVENT_OBJ_GFX_TEALA, 0, 7, 2, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, LavaridgeTown_PokemonCenter_2F_EventScript_15395A, 0
 
 LavaridgeTown_PokemonCenter_2F_MapWarps:: @ 8386630
 	warp_def 1, 5, 4, 2, MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F

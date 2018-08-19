@@ -5,10 +5,10 @@ Route112:: @ 830573C
 	.4byte Route112_MapConnections
 	.2byte MUS_DOORO_X1
 	.2byte 28
-	.byte 27
+	.byte MAPSEC_ROUTE_112
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

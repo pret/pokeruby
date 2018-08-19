@@ -23,6 +23,35 @@ static void PSS_DestroyMonIconSprite(struct Sprite *sprite);
 // .rodata
 
 const struct OamData gOamData_83B6F2C;
+const struct SpriteTemplate gSpriteTemplate_83B6F14 = {
+    0x000f,
+    0xdac0,
+    &gOamData_83B6F2C,
+    gDummySpriteAnimTable,
+    NULL,
+    gDummySpriteAffineAnimTable,
+    SpriteCallbackDummy
+};
+
+const struct OamData gOamData_83B6F2C = {
+    .size = 2
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F34[] = {
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83B6F44[] = {
+    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[] = {
+    gSpriteAffineAnim_83B6F34,
+    gSpriteAffineAnim_83B6F44
+};
 
 // .text
 
@@ -481,8 +510,6 @@ bool8 sub_809971C(void)
     return TRUE;
 }
 
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[];
-
 void sub_809981C(u8 mode, u8 idx)
 {
     switch (mode)
@@ -599,15 +626,7 @@ static void PSS_ForgetSpeciesIcon(u16 a0)
 
 static struct Sprite *PSS_SpawnMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u8 priority, u8 subpriority)
 {
-    struct SpriteTemplate template = {
-        0x000f,
-        0xdac0,
-        &gOamData_83B6F2C,
-        gDummySpriteAnimTable,
-        NULL,
-        gDummySpriteAffineAnimTable,
-        SpriteCallbackDummy
-    };
+    struct SpriteTemplate template = gSpriteTemplate_83B6F14;
     u16 tileNum;
     u8 spriteId;
 
@@ -633,23 +652,3 @@ static void PSS_DestroyMonIconSprite(struct Sprite *sprite)
     PSS_ForgetSpeciesIcon(sprite->data[0]);
     DestroySprite(sprite);
 }
-
-const struct OamData gOamData_83B6F2C = {
-    .size = 2
-};
-
-const union AffineAnimCmd gSpriteAffineAnim_83B6F34[] = {
-    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd gSpriteAffineAnim_83B6F44[] = {
-    AFFINEANIMCMD_FRAME(16, 16, 0,  0),
-    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
-    AFFINEANIMCMD_END
-};
-
-const union AffineAnimCmd *const gSpriteAffineAnimTable_83B6F5C[] = {
-    gSpriteAffineAnim_83B6F34,
-    gSpriteAffineAnim_83B6F44
-};

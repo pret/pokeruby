@@ -5,10 +5,10 @@ PetalburgCity:: @ 8305448
 	.4byte PetalburgCity_MapConnections
 	.2byte MUS_MACHI_S2
 	.2byte 1
-	.byte 7
+	.byte MAPSEC_PETALBURG_CITY
 	.byte 0
-	.byte 2
-	.byte 2
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_CITY
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

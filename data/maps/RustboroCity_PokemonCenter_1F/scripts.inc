@@ -3,7 +3,7 @@ RustboroCity_PokemonCenter_1F_MapScripts:: @ 8157B79
 	.byte 0
 
 RustboroCity_PokemonCenter_1F_MapScript1_157B7F:: @ 8157B7F
-	setrespawn 6
+	setrespawn HEAL_LOCATION_RUSTBORO_CITY
 	call RustboroCity_PokemonCenter_1F_EventScript_19FD1B
 	end
 

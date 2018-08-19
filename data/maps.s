@@ -1,5 +1,8 @@
+#include "constants/map_types.h"
 #include "constants/maps.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
+#include "constants/weather.h"
 	.include "include/macros.inc"
 	.include "constants/constants.inc"
 

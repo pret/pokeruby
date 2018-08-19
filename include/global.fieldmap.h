@@ -11,35 +11,6 @@ enum
     CONNECTION_EMERGE
 };
 
-// map types
-enum
-{
-    MAP_TYPE_0,             // 0
-    MAP_TYPE_TOWN,          // 1
-    MAP_TYPE_CITY,          // 2
-    MAP_TYPE_ROUTE,         // 3
-    MAP_TYPE_UNDERGROUND,   // 4
-    MAP_TYPE_UNDERWATER,    // 5
-    MAP_TYPE_6,             // 6
-    MAP_TYPE_7,             // 7
-    MAP_TYPE_INDOOR,        // 8
-    MAP_TYPE_SECRET_BASE    // 9
-};
-
-// map battle scenes
-enum
-{
-    MAP_BATTLE_SCENE_NORMAL,       // 0
-    MAP_BATTLE_SCENE_GYM,          // 1
-    MAP_BATTLE_SCENE_MAGMA,        // 2
-    MAP_BATTLE_SCENE_AQUA,         // 3
-    MAP_BATTLE_SCENE_SIDNEY,       // 4
-    MAP_BATTLE_SCENE_PHOEBE,       // 5
-    MAP_BATTLE_SCENE_GLACIA,       // 6
-    MAP_BATTLE_SCENE_DRAKE,        // 7
-    MAP_BATTLE_SCENE_BATTLE_TOWER, // 8
-};
-
 typedef void (*TilesetCB)(void);
 
 struct Tileset

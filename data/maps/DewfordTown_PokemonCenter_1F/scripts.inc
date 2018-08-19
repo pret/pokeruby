@@ -3,7 +3,7 @@ DewfordTown_PokemonCenter_1F_MapScripts:: @ 8153014
 	.byte 0
 
 DewfordTown_PokemonCenter_1F_MapScript1_15301A:: @ 815301A
-	setrespawn 15
+	setrespawn HEAL_LOCATION_DEWFORD_TOWN
 	call DewfordTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 

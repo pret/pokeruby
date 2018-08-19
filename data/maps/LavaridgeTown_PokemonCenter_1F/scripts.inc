@@ -3,7 +3,7 @@ LavaridgeTown_PokemonCenter_1F_MapScripts:: @ 815390C
 	.byte 0
 
 LavaridgeTown_PokemonCenter_1F_MapScript1_153912:: @ 8153912
-	setrespawn 16
+	setrespawn HEAL_LOCATION_LAVARIDGE_TOWN
 	call LavaridgeTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 

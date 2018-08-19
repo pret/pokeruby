@@ -1,10 +1,6 @@
 #include "global.h"
-#include "constants/decorations.h"
 #include "secret_base.h"
 #include "decoration.h"
-#include "constants/species.h"
-#include "constants/items.h"
-#include "constants/moves.h"
 #include "event_data.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -29,11 +25,16 @@
 #include "overworld.h"
 #include "script.h"
 #include "sound.h"
-#include "constants/species.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
+#include "constants/bg_event_constants.h"
+#include "constants/decorations.h"
+#include "constants/items.h"
+#include "constants/map_types.h"
+#include "constants/moves.h"
+#include "constants/species.h"
 #include "constants/vars.h"
 
 
@@ -317,7 +318,7 @@ void sub_80BB970(struct MapEvents *events)
 
     for (bgevidx = 0; bgevidx < events->bgEventCount; bgevidx++)
     {
-        if (events->bgEvents[bgevidx].kind == 8)
+        if (events->bgEvents[bgevidx].kind == BG_EVENT_SECRET_BASE)
         {
             for (jdx = 0; jdx < MAX_SECRET_BASES; jdx++)
             {
@@ -538,7 +539,7 @@ void SetCurrentSecretBaseFromPosition(struct MapPosition *position, struct MapEv
 
     for (i = 0; i < events->bgEventCount; i++)
     {
-        if (events->bgEvents[i].kind == 8 && position->x == events->bgEvents[i].x + 7
+        if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE && position->x == events->bgEvents[i].x + 7
          && position->y == events->bgEvents[i].y + 7)
         {
             gCurrentSecretBaseId = events->bgEvents[i].bgUnion.secretBaseId;
@@ -652,7 +653,7 @@ bool8 sub_80BC268(u8 i)
         return FALSE;
 }
 
-u8 sub_80BC298(struct Pokemon *mon)
+static u8 CalculateMonAverageEVs(struct Pokemon *mon)
 {
     u16 evsum = GetMonData(mon, MON_DATA_HP_EV);
     evsum += GetMonData(mon, MON_DATA_ATK_EV);
@@ -663,192 +664,37 @@ u8 sub_80BC298(struct Pokemon *mon)
     return (u8)(evsum / 6);
 }
 
-#ifdef NONMATCHING
-// So much is wrong with this function.
-// The compiler likes to store pointers in temp variables.  That's not what it's supposed to do.
-void sub_80BC300(void)
+void SetPlayerSecretBaseRecordMixingParty(void)
 {
-    u16 partyidx;
-    u16 moveidx;
-    u16 sbpartyidx = 0;
-    for (partyidx=0; partyidx<PARTY_SIZE; partyidx++)
+    u16 i;
+    u16 secretBasePartyIndex = 0;
+    struct SecretBaseRecord *record = &gSaveBlock1.secretBases[0];
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        for (moveidx=0; moveidx<4; moveidx++)
-            gSaveBlock1.secretBases[0].partyMoves[partyidx * 4 + moveidx] = MOVE_NONE;
-        gSaveBlock1.secretBases[0].partySpecies[partyidx] = SPECIES_NONE;
-        gSaveBlock1.secretBases[0].partyHeldItems[partyidx] = ITEM_NONE;
-        gSaveBlock1.secretBases[0].partyLevels[partyidx] = 0;
-        gSaveBlock1.secretBases[0].partyPersonality[partyidx] = 0;
-        gSaveBlock1.secretBases[0].partyEVs[partyidx] = 0;
-        if (GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&(gPlayerParty[partyidx]), MON_DATA_IS_EGG)) {
-            for (moveidx=0; moveidx<4; moveidx++)
-                gSaveBlock1.secretBases[0].partyMoves[sbpartyidx * 4 + moveidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_MOVE1 + moveidx);
-            gSaveBlock1.secretBases[0].partySpecies[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_SPECIES);
-            gSaveBlock1.secretBases[0].partyHeldItems[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_HELD_ITEM);
-            gSaveBlock1.secretBases[0].partyLevels[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_LEVEL);
-            gSaveBlock1.secretBases[0].partyPersonality[sbpartyidx] = GetMonData(&(gPlayerParty[partyidx]), MON_DATA_PERSONALITY);
-            gSaveBlock1.secretBases[0].partyEVs[sbpartyidx] = sub_80BC298(&(gPlayerParty[partyidx]));
-            sbpartyidx ++;
+        u16 j;
+        for (j = 0; j < 4; j++)
+            record->partyMoves[i * 4 + j] = MOVE_NONE;
+
+        record->partySpecies[i] = SPECIES_NONE;
+        record->partyHeldItems[i] = ITEM_NONE;
+        record->partyLevels[i] = 0;
+        record->partyPersonality[i] = 0;
+        record->partyEVs[i] = 0;
+
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            for (j = 0; j < 4; j++)
+                record->partyMoves[secretBasePartyIndex * 4 + j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j);
+
+            record->partySpecies[secretBasePartyIndex] = GetMonData(&(gPlayerParty[i]), MON_DATA_SPECIES);
+            record->partyHeldItems[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            record->partyLevels[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            record->partyPersonality[secretBasePartyIndex] = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+            record->partyEVs[secretBasePartyIndex] = CalculateMonAverageEVs(&gPlayerParty[i]);
+            secretBasePartyIndex++;
         }
     }
 }
-#else
-NAKED
-void sub_80BC300(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0xC\n\
-    movs r0, 0\n\
-    mov r10, r0\n\
-    movs r6, 0\n\
-    mov r9, r6\n\
-_080BC314:\n\
-    movs r4, 0\n\
-    lsls r3, r6, 2\n\
-    lsls r2, r6, 1\n\
-    ldr r7, _080BC424 @ =gPlayerParty\n\
-    adds r1, r6, 0x1\n\
-    str r1, [sp]\n\
-    adds r1, r3, 0\n\
-_080BC322:\n\
-    adds r0, r1, r4\n\
-    lsls r0, 1\n\
-    ldr r5, _080BC428 @ =gSaveBlock1 + 0x1A54\n\
-    adds r0, r5, r0\n\
-    mov r5, r9\n\
-    strh r5, [r0]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    cmp r4, 0x3\n\
-    bls _080BC322\n\
-    ldr r1, _080BC42C @ =gSaveBlock1 + 0x1A84\n\
-    adds r0, r1, r2\n\
-    strh r5, [r0]\n\
-    ldr r5, _080BC430 @ =gSaveBlock1 + 0x1A90\n\
-    adds r0, r5, r2\n\
-    mov r1, r9\n\
-    strh r1, [r0]\n\
-    ldr r2, _080BC434 @ =gSaveBlock1 + 0x1A9C\n\
-    adds r0, r2, r6\n\
-    mov r5, r9\n\
-    strb r5, [r0]\n\
-    ldr r1, _080BC438 @ =gSaveBlock1 + 0x1A3C\n\
-    adds r0, r1, r3\n\
-    mov r2, r9\n\
-    str r2, [r0]\n\
-    ldr r3, _080BC43C @ =gSaveBlock1 + 0x1AA2\n\
-    adds r0, r3, r6\n\
-    strb r2, [r0]\n\
-    movs r0, 0x64\n\
-    adds r5, r6, 0\n\
-    muls r5, r0\n\
-    adds r4, r5, r7\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _080BC408\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x2D\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _080BC408\n\
-    movs r4, 0\n\
-    mov r0, r10\n\
-    lsls r0, 2\n\
-    mov r8, r0\n\
-    mov r1, r10\n\
-    lsls r7, r1, 1\n\
-    adds r1, 0x1\n\
-    str r1, [sp, 0x4]\n\
-    ldr r2, _080BC424 @ =gPlayerParty\n\
-_080BC38E:\n\
-    adds r1, r4, 0\n\
-    adds r1, 0xD\n\
-    adds r0, r5, r2\n\
-    str r2, [sp, 0x8]\n\
-    bl GetMonData\n\
-    mov r3, r8\n\
-    adds r1, r3, r4\n\
-    lsls r1, 1\n\
-    ldr r3, _080BC428 @ =gSaveBlock1 + 0x1A54\n\
-    adds r1, r3, r1\n\
-    strh r0, [r1]\n\
-    adds r0, r4, 0x1\n\
-    lsls r0, 16\n\
-    lsrs r4, r0, 16\n\
-    ldr r2, [sp, 0x8]\n\
-    cmp r4, 0x3\n\
-    bls _080BC38E\n\
-    movs r0, 0x64\n\
-    adds r4, r6, 0\n\
-    muls r4, r0\n\
-    ldr r0, _080BC424 @ =gPlayerParty\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xB\n\
-    bl GetMonData\n\
-    ldr r5, _080BC42C @ =gSaveBlock1 + 0x1A84\n\
-    adds r1, r5, r7\n\
-    strh r0, [r1]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    ldr r2, _080BC430 @ =gSaveBlock1 + 0x1A90\n\
-    adds r1, r2, r7\n\
-    strh r0, [r1]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x38\n\
-    bl GetMonData\n\
-    ldr r1, _080BC434 @ =gSaveBlock1 + 0x1A9C\n\
-    add r1, r10\n\
-    strb r0, [r1]\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-    bl GetMonData\n\
-    ldr r1, _080BC438 @ =gSaveBlock1 + 0x1A3C\n\
-    add r1, r8\n\
-    str r0, [r1]\n\
-    adds r0, r4, 0\n\
-    bl sub_80BC298\n\
-    ldr r1, _080BC43C @ =gSaveBlock1 + 0x1AA2\n\
-    add r1, r10\n\
-    strb r0, [r1]\n\
-    ldr r3, [sp, 0x4]\n\
-    lsls r0, r3, 16\n\
-    lsrs r0, 16\n\
-    mov r10, r0\n\
-_080BC408:\n\
-    ldr r5, [sp]\n\
-    lsls r0, r5, 16\n\
-    lsrs r6, r0, 16\n\
-    cmp r6, 0x5\n\
-    bls _080BC314\n\
-    add sp, 0xC\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080BC424: .4byte gPlayerParty\n\
-_080BC428: .4byte gSaveBlock1 + 0x1A54\n\
-_080BC42C: .4byte gSaveBlock1 + 0x1A84\n\
-_080BC430: .4byte gSaveBlock1 + 0x1A90\n\
-_080BC434: .4byte gSaveBlock1 + 0x1A9C\n\
-_080BC438: .4byte gSaveBlock1 + 0x1A3C\n\
-_080BC43C: .4byte gSaveBlock1 + 0x1AA2\n\
-.syntax divided\n");
-}
-#endif
 
 void sub_80BC440(void)
 {
@@ -871,7 +717,7 @@ void sub_80BC474(void)
 
     for (eventId = 0; eventId < mapEvents->bgEventCount; eventId++)
     {
-        if (mapEvents->bgEvents[eventId].kind == 8
+        if (mapEvents->bgEvents[eventId].kind == BG_EVENT_SECRET_BASE
          && gSaveBlock1.secretBases[0].secretBaseId == mapEvents->bgEvents[eventId].bgUnion.secretBaseId)
         {
             u16 i;

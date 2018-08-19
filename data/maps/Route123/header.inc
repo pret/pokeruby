@@ -5,10 +5,10 @@ Route123:: @ 8305870
 	.4byte Route123_MapConnections
 	.2byte MUS_DOORO_X4
 	.2byte 39
-	.byte 38
+	.byte MAPSEC_ROUTE_123
 	.byte 0
-	.byte 2
-	.byte 3
+	.byte WEATHER_SUNNY
+	.byte MAP_TYPE_ROUTE
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

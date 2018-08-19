@@ -12,7 +12,7 @@ BattleTower_BattleRoom_EventScript_1608EB:: @ 81608EB
 	waitmovement 0
 
 BattleTower_BattleRoom_EventScript_1608FA:: @ 81608FA
-	special sub_81347F8
+	special ChooseNextBattleTowerTrainer
 	addobject 1
 	applymovement 1, BattleTower_BattleRoom_Movement_160AC0
 	waitmovement 0

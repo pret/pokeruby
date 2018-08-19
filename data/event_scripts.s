@@ -10,6 +10,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/weather.h"
+#include "constants/heal_locations.h"
 #include "constants/vars.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"
@@ -1935,66 +1936,66 @@ SootopolisCity_Gym_1F_EventScript_1A01C0:: @ 81A01C0
 	end
 
 DewfordTown_Gym_EventScript_1A021E:: @ 81A021E
-	settrainerflag OPPONENT_JOSH
-	settrainerflag OPPONENT_TOMMY
+	settrainerflag TRAINER_JOSH
+	settrainerflag TRAINER_TOMMY
 	return
 
 DewfordTown_Gym_EventScript_1A0225:: @ 81A0225
-	settrainerflag OPPONENT_HIDEKI
-	settrainerflag OPPONENT_TESSA
-	settrainerflag OPPONENT_LAURA
+	settrainerflag TRAINER_HIDEKI
+	settrainerflag TRAINER_TESSA
+	settrainerflag TRAINER_LAURA
 	return
 
 DewfordTown_Gym_EventScript_1A022F:: @ 81A022F
-	settrainerflag OPPONENT_KIRK
-	settrainerflag OPPONENT_SHAWN
-	settrainerflag OPPONENT_BEN
-	settrainerflag OPPONENT_VIVIAN
+	settrainerflag TRAINER_KIRK
+	settrainerflag TRAINER_SHAWN
+	settrainerflag TRAINER_BEN
+	settrainerflag TRAINER_VIVIAN
 	return
 
 DewfordTown_Gym_EventScript_1A023C:: @ 81A023C
-	settrainerflag OPPONENT_COLE
-	settrainerflag OPPONENT_AXLE
-	settrainerflag OPPONENT_ANDY
-	settrainerflag OPPONENT_ZANE
-	settrainerflag OPPONENT_SADIE
+	settrainerflag TRAINER_COLE
+	settrainerflag TRAINER_AXLE
+	settrainerflag TRAINER_ANDY
+	settrainerflag TRAINER_ZANE
+	settrainerflag TRAINER_SADIE
 	return
 
 DewfordTown_Gym_EventScript_1A024C:: @ 81A024C
-	settrainerflag OPPONENT_RANDALL
-	settrainerflag OPPONENT_PARKER
-	settrainerflag OPPONENT_GEORGE
-	settrainerflag OPPONENT_BERKE
-	settrainerflag OPPONENT_MARY
-	settrainerflag OPPONENT_LORI
-	settrainerflag OPPONENT_JODY
+	settrainerflag TRAINER_RANDALL
+	settrainerflag TRAINER_PARKER
+	settrainerflag TRAINER_GEORGE
+	settrainerflag TRAINER_BERKE
+	settrainerflag TRAINER_MARY
+	settrainerflag TRAINER_LORI
+	settrainerflag TRAINER_JODY
 	return
 
 DewfordTown_Gym_EventScript_1A0262:: @ 81A0262
-	settrainerflag OPPONENT_JARED
-	settrainerflag OPPONENT_TERRELL
-	settrainerflag OPPONENT_KYLEE
-	settrainerflag OPPONENT_WILL
+	settrainerflag TRAINER_JARED
+	settrainerflag TRAINER_TERRELL
+	settrainerflag TRAINER_KYLEE
+	settrainerflag TRAINER_WILL
 	return
 
 DewfordTown_Gym_EventScript_1A026F:: @ 81A026F
-	settrainerflag OPPONENT_PRESTON
-	settrainerflag OPPONENT_VIRGIL
-	settrainerflag OPPONENT_FRITZ
-	settrainerflag OPPONENT_HANNAH
-	settrainerflag OPPONENT_SAMANTHA
-	settrainerflag OPPONENT_MAURA
+	settrainerflag TRAINER_PRESTON
+	settrainerflag TRAINER_VIRGIL
+	settrainerflag TRAINER_FRITZ
+	settrainerflag TRAINER_HANNAH
+	settrainerflag TRAINER_SAMANTHA
+	settrainerflag TRAINER_MAURA
 	return
 
 DewfordTown_Gym_EventScript_1A0282:: @ 81A0282
-	settrainerflag OPPONENT_ANDREA
-	settrainerflag OPPONENT_CRISSY
-	settrainerflag OPPONENT_BRIANNA_2
-	settrainerflag OPPONENT_CONNIE
-	settrainerflag OPPONENT_BRIDGET
-	settrainerflag OPPONENT_OLIVIA
-	settrainerflag OPPONENT_TIFFANY
-	settrainerflag OPPONENT_MARISSA
+	settrainerflag TRAINER_ANDREA
+	settrainerflag TRAINER_CRISSY
+	settrainerflag TRAINER_BRIANNA_2
+	settrainerflag TRAINER_CONNIE
+	settrainerflag TRAINER_BRIDGET
+	settrainerflag TRAINER_OLIVIA
+	settrainerflag TRAINER_TIFFANY
+	settrainerflag TRAINER_MARISSA
 	return
 
 DewfordTown_Gym_EventScript_1A029B:: @ 81A029B

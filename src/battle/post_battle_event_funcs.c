@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "overworld.h"
 #include "script_pokemon_80C4.h"
+#include "constants/heal_locations.h"
 
 extern u8 gUnknown_02039324;
 
@@ -32,9 +33,9 @@ int GameClear(void)
     SetSecretBase2Field_9();
 
     if (gSaveBlock2.playerGender == MALE)
-        sub_80537CC(1);
+        sub_80537CC(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
     else
-        sub_80537CC(2);
+        sub_80537CC(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
 
     ribbonGet = FALSE;
 

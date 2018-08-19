@@ -5,10 +5,10 @@ SealedChamber_InnerRoom:: @ 8307550
 	.4byte 0x0
 	.2byte MUS_MABOROSI
 	.2byte 305
-	.byte 78
+	.byte MAPSEC_SEALED_CHAMBER
 	.byte 0
-	.byte 0
-	.byte 4
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_UNDERGROUND
 	.2byte 0
 	.byte 1
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

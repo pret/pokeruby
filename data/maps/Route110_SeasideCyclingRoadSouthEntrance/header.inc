@@ -5,10 +5,10 @@ Route110_SeasideCyclingRoadSouthEntrance:: @ 8307E80
 	.4byte 0x0
 	.2byte MUS_FINECITY
 	.2byte 257
-	.byte 25
+	.byte MAPSEC_ROUTE_110
 	.byte 0
-	.byte 0
-	.byte 8
+	.byte WEATHER_NONE
+	.byte MAP_TYPE_INDOOR
 	.2byte 0
 	.byte 0
-	.byte 0
+	.byte MAP_BATTLE_SCENE_NORMAL

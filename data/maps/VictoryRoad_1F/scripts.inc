@@ -38,7 +38,7 @@ VictoryRoad_1F_EventScript_15DED3:: @ 815DED3
 	applymovement 255, VictoryRoad_1F_Movement_1A083F
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_19782B, 4
-	trainerbattle 3, OPPONENT_WALLY_1, 0, VictoryRoad_1F_Text_197943
+	trainerbattle 3, TRAINER_WALLY_1, 0, VictoryRoad_1F_Text_197943
 	msgbox VictoryRoad_1F_Text_197967, 4
 	clearflag FLAG_HIDE_WALLY_BATTLE_VICTORY_ROAD
 	moveobjectoffscreen 4
@@ -91,7 +91,7 @@ VictoryRoad_1F_EventScript_15DF28:: @ 815DF28
 	end
 
 VictoryRoad_1F_EventScript_15DF31:: @ 815DF31
-	trainerbattle 0, OPPONENT_WALLY_3, 0, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
+	trainerbattle 0, TRAINER_WALLY_3, 0, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
 	specialvar RESULT, ShouldTryRematchBattle
 	compare RESULT, 1
 	goto_if_eq VictoryRoad_1F_EventScript_15DF58
@@ -99,21 +99,21 @@ VictoryRoad_1F_EventScript_15DF31:: @ 815DF31
 	end
 
 VictoryRoad_1F_EventScript_15DF58:: @ 815DF58
-	trainerbattle 5, OPPONENT_WALLY_3, 0, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
+	trainerbattle 5, TRAINER_WALLY_3, 0, VictoryRoad_1F_Text_1979BA, VictoryRoad_1F_Text_197A23
 	msgbox VictoryRoad_1F_Text_197A47, 6
 	end
 
 VictoryRoad_1F_EventScript_15DF6F:: @ 815DF6F
-	trainerbattle 0, OPPONENT_EDGAR, 0, VictoryRoad_1F_Text_197AD1, VictoryRoad_1F_Text_197B1A
+	trainerbattle 0, TRAINER_EDGAR, 0, VictoryRoad_1F_Text_197AD1, VictoryRoad_1F_Text_197B1A
 	msgbox VictoryRoad_1F_Text_197B36, 6
 	end
 
 VictoryRoad_1F_EventScript_15DF86:: @ 815DF86
-	trainerbattle 0, OPPONENT_ALBERT, 0, VictoryRoad_1F_Text_197B99, VictoryRoad_1F_Text_197BE1
+	trainerbattle 0, TRAINER_ALBERT, 0, VictoryRoad_1F_Text_197B99, VictoryRoad_1F_Text_197BE1
 	msgbox VictoryRoad_1F_Text_197BF7, 6
 	end
 
 VictoryRoad_1F_EventScript_15DF9D:: @ 815DF9D
-	trainerbattle 0, OPPONENT_HOPE, 0, VictoryRoad_1F_Text_197C45, VictoryRoad_1F_Text_197C8D
+	trainerbattle 0, TRAINER_HOPE, 0, VictoryRoad_1F_Text_197C45, VictoryRoad_1F_Text_197C8D
 	msgbox VictoryRoad_1F_Text_197CAF, 6
 	end
