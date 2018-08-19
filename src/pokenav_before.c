@@ -201,7 +201,11 @@ extern const struct SpriteSheet gUnknown_083E4784;
 extern const struct SpritePalette gUnknown_083E478C;
 extern const struct SpriteTemplate gSpriteTemplate_83E4800;
 extern const s16 gUnknown_083E4794[][2];
-
+extern const u8 gUnknown_083E329C[];
+extern const struct SpritePalette gUnknown_083E4818;
+extern const struct SpriteTemplate gSpriteTemplate_83E4850;
+extern const struct SpritePalette gUnknown_083E4868;
+extern const struct SpriteTemplate gSpriteTemplate_83E4878;
 
 extern u16 gUnknown_020388B4;
 extern u8 gUnknown_020388B0[];
@@ -251,10 +255,10 @@ static void sub_80EEDC4();
 static void ShowMapNamePopUpWindow(void);
 static void sub_80F0954(u16, u16, u16);
 static bool8 sub_80F098C(void);
-void sub_80F445C(u8*, u16);
+static u8 *sub_80F445C(u8*, u16);
 static void sub_80F081C(u8);
 bool8 sub_80F0944(void);
-u8 *sub_80F4428(u8*, u16, u8);
+static u8 *sub_80F4428(u8*, u16, u8);
 void sub_80F700C(u8*, u16);
 static void sub_80F0B24(void);
 static bool8 sub_80F0B44(void);
@@ -321,7 +325,7 @@ static void sub_80F3264(void);
 static void sub_80F3294(u8);
 static void sub_80F35B4(void);
 static void sub_80F363C(struct Sprite *sprite);
-void sub_80F4548(u16, u16, u8);
+static void SetMonMarkings(u16, u16, u8);
 static void sub_80F36F0(void);
 static bool8 sub_80F3724(void);
 static void sub_80F379C(void);
@@ -335,10 +339,16 @@ static bool8 sub_80F3B58(void);
 static void sub_80F3B94(void);
 static bool8 sub_80F3BD4(void);
 static void sub_80F3C2C(void);
-void sub_80F3F20(u8, u8);
+static void sub_80F3F20(u8, u8);
+static void sub_80F3FAC(void);
+static void sub_80F3FF0(void);
+static bool8 sub_80F4024(void);
+static void sub_80F42C4(u8*);
+static void sub_80F4394(void);
+u8 *sub_80F6514(u8*, u16, u8);
+static u8 *sub_80F443C(u8 *, u16);
 
 extern void sub_80F0900(void);
-extern void sub_80F443C(u8 *, u16);
 extern void sub_80F01A4(void);
 extern void sub_80EFD3C(void);
 extern void sub_8095C8C();
@@ -357,8 +367,6 @@ extern bool8 sub_80F6E9C();
 extern bool8 sub_80F6ED4();
 extern bool8 sub_80F70FC();
 extern void sub_80F708C(u32);
-extern void sub_80F4394();
-extern void sub_80F42C4();
 extern void sub_80F6F10();
 static extern void sub_80F15A8(void);
 extern void sub_80F6A4C();
@@ -386,8 +394,6 @@ extern bool8 sub_80EF874(void);
 extern bool8 sub_80F6250();
 extern void sub_80F6208();
 extern void sub_80F6C20();
-extern void sub_80F3FF0();
-extern bool8 sub_80F4024();
 extern void sub_80EF248(u8);
 extern bool8 sub_80EF284(u8);
 extern void sub_80EF428(u8, u8);
@@ -7306,7 +7312,7 @@ void sub_80F3698(void)
 {
     struct UnkUsePokeblockSub *var0 = &gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC];
     gUnknown_083DFEC4->unk8934[gUnknown_083DFEC4->unk8fe9] = gUnknown_083DFEC4->unk76B0.markings;
-    sub_80F4548(var0->unk1, var0->partyIdx, gUnknown_083DFEC4->unk76B0.markings);
+    SetMonMarkings(var0->unk1, var0->partyIdx, gUnknown_083DFEC4->unk76B0.markings);
     sub_80F7470();
 }
 
@@ -7635,7 +7641,7 @@ void sub_80F3DDC(struct Sprite *sprite)
     }
 }
 
-void sub_80F3E04(struct Sprite *sprite)
+static void sub_80F3E04(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -7644,7 +7650,7 @@ void sub_80F3E04(struct Sprite *sprite)
     }
 }
 
-void sub_80F3E24(struct Sprite *sprite)
+static void sub_80F3E24(struct Sprite *sprite)
 {
     if (gUnknown_083DFEC4->unk8768)
     {
@@ -7659,5 +7665,486 @@ void sub_80F3E24(struct Sprite *sprite)
     {
         sprite->pos1.x = gUnknown_083E4794[sprite->data[0]][0] + 40;
         sprite->pos1.y = gUnknown_083E4794[sprite->data[0]][1] + 104;
+    }
+}
+
+static void sub_80F3E9C(struct Sprite *sprite)
+{
+    if (sprite->data[1])
+    {
+        if (--sprite->data[1])
+            return;
+
+        SeekSpriteAnim(sprite, 0);
+        sprite->invisible = 0;
+    }
+
+    sub_80F3E24(sprite);
+    if (sprite->animEnded)
+    {
+        sprite->invisible = 1;
+        if (sprite->data[3] == sprite->data[2])
+        {
+            if (sprite->data[3] == 9)
+            {
+                sub_80F3FAC();
+                sprite->callback = sub_80F3E04;
+            }
+            else
+            {
+                sprite->callback = sub_80F3DDC;
+            }
+        }
+        else
+        {
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+static void sub_80F3F20(u8 arg0, u8 arg1)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (gUnknown_083DFEC4->unk8800[i])
+        {
+            gUnknown_083DFEC4->unk8800[i]->data[0] = i;
+            gUnknown_083DFEC4->unk8800[i]->data[1] = i * 16 + 1;
+            gUnknown_083DFEC4->unk8800[i]->data[2] = arg0;
+            gUnknown_083DFEC4->unk8800[i]->data[3] = i;
+
+            if (!arg1 || arg0 != 9)
+            {
+                gUnknown_083DFEC4->unk8800[i]->callback = sub_80F3E9C;
+            }
+            else
+            {
+                sub_80F3E24(gUnknown_083DFEC4->unk8800[i]);
+                sub_80F3FAC();
+                gUnknown_083DFEC4->unk8800[i]->callback = sub_80F3E04;
+                gUnknown_083DFEC4->unk8800[i]->invisible = 0;
+            }
+        }
+    }
+}
+
+static void sub_80F3FAC(void)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (gUnknown_083DFEC4->unk8800[i])
+        {
+            SeekSpriteAnim(gUnknown_083DFEC4->unk8800[i], 0);
+            gUnknown_083DFEC4->unk8800[i]->invisible = 0;
+        }
+    }
+}
+
+static void sub_80F3FF0(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F4024());
+}
+
+static bool8 sub_80F4024(void)
+{
+    u8 paletteIndex;
+    u8 spriteId;
+    struct SpritePalette spritePalette;
+
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_083E329C, gUnknown_083DFEC4->unk131E4);
+        break;
+    case 1:
+    {
+        struct SpriteSheet spriteSheet = {
+            .data = gUnknown_083DFEC4->unk131E4,
+            .size = sizeof(gUnknown_083DFEC4->unk131E4),
+            .tag = 0x18,
+        };
+        LoadSpriteSheet(&spriteSheet);
+        break;
+    }
+    case 2:
+        spritePalette = gUnknown_083E4818;
+        LoadSpritePalette(&spritePalette);
+        paletteIndex = IndexOfSpritePaletteTag(0x10);
+        gUnknown_083DFEC4->unk308 = -3 & ~(1 << (paletteIndex + 0x10));
+        break;
+    case 3:
+        spriteId = CreateSprite(&gSpriteTemplate_83E4850, 218, 14, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk6D98 = &gSprites[spriteId];
+            gUnknown_083DFEC4->unk6D98->data[0] = 0;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk6D98 = NULL;
+        }
+
+        gUnknown_083DFEC4->unk306++;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+void sub_80F4138(struct Sprite *sprite)
+{
+    sprite->pos2.y = -gUnknown_083DFEC4->unk030C;
+    if (sprite->pos2.y <= -32)
+    {
+        if (sprite->data[0] == 0)
+        {
+            sprite->invisible = 1;
+            sprite->data[0] = 1;
+        }
+    }
+    else
+    {
+        if (sprite->data[0] == 1)
+        {
+            sprite->invisible = 0;
+            sprite->data[0] = 0;
+        }
+    }
+}
+
+#ifdef NONMATCHING
+// close, but the last DmaCopy16 is sharing the 0x400 value from the beginning of the function.
+void sub_80F4194(u8 *arg0, u8 *text)
+{
+    u8 i;
+    u8 *tileBuffer;
+    u32 *tileBuf2;
+
+    tileBuffer = gUnknown_083DFEC8;
+    DmaFill16(3, 0x1111, tileBuffer, 0x280);
+    DmaFill16Defvars(3, 0x1111, 0x400 + tileBuffer, 0x280);
+    Text_InitWindow8004E3C(&gWindowTemplate_81E70F0, tileBuffer, text);
+
+    DmaClear16(3, tileBuffer + 0x220, 0x60);
+    DmaClear16(3, tileBuffer + 0x620, 0x60);
+
+    tileBuf2 = (int *)tileBuffer + 0x80;
+    tileBuf2[0] &= 0x0FFFFFFF;
+    tileBuf2[1] &= 0x0FFFFFFF;
+    tileBuf2[2] &= 0x0FFFFFFF;
+    tileBuf2[3] &= 0x0FFFFFFF;
+    tileBuf2[4] &= 0x0FFFFFFF;
+    tileBuf2[5] &= 0x0FFFFFFF;
+    tileBuf2[6] &= 0x0FFFFFFF;
+    tileBuf2[7] &= 0x0FFFFFFF;
+
+    tileBuf2 = (int *)tileBuffer + 0x180;
+    tileBuf2[0] &= 0x0FFFFFFF;
+    tileBuf2[1] &= 0x0FFFFFFF;
+    tileBuf2[2] &= 0x0FFFFFFF;
+    tileBuf2[3] &= 0x0FFFFFFF;
+    tileBuf2[4] &= 0x0FFFFFFF;
+    tileBuf2[5] &= 0x0FFFFFFF;
+    tileBuf2[6] &= 0x0FFFFFFF;
+    tileBuf2[7] &= 0x0FFFFFFF;
+
+    for (i = 0; i < 5; i++)
+    {
+        DmaCopy16(3, &tileBuffer[128 * i], &arg0[i * 256], 128);
+        DmaCopy16(3, &tileBuffer[128 * i + 0x400], &arg0[32 * ((i * 8) + 4)], 128);
+    }
+}
+#else
+NAKED
+void sub_80F4194(u8 *arg0, u8 *text)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x4\n\
+    adds r7, r0, 0\n\
+    adds r2, r1, 0\n\
+    ldr r0, _080F42A4 @ =gUnknown_083DFEC8\n\
+    ldr r6, [r0]      @ r6 = tileBuffer\n\
+    mov r0, sp        \n\
+    ldr r1, _080F42A8 @ =0x00001111\n\
+    adds r5, r1, 0\n\
+    strh r5, [r0]\n\
+    ldr r4, _080F42AC @ =0x040000d4\n\
+    str r0, [r4]\n\
+    str r6, [r4, 0x4]\n\
+    ldr r3, _080F42B0 @ =0x81000140\n\
+    str r3, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r0, 0x80\n\
+    lsls r0, 3\n\
+    adds r1, r6, r0\n\
+    mov r0, sp\n\
+    strh r5, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    str r3, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0\n\
+    adds r1, r6, 0\n\
+    bl Text_InitWindow8004E3C\n\
+    movs r3, 0x88\n\
+    lsls r3, 2\n\
+    adds r1, r6, r3\n\
+    mov r0, sp\n\
+    movs r3, 0\n\
+    strh r3, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    ldr r2, _080F42B8 @ =0x81000030\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r0, 0xC4\n\
+    lsls r0, 3\n\
+    adds r1, r6, r0\n\
+    mov r0, sp\n\
+    strh r3, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r1, 0x80\n\
+    lsls r1, 2\n\
+    adds r2, r6, r1\n\
+    ldr r0, [r2]\n\
+    ldr r1, _080F42BC @ =0x0fffffff\n\
+    ands r0, r1\n\
+    str r0, [r2]\n\
+    ldr r0, [r2, 0x4]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x4]\n\
+    ldr r0, [r2, 0x8]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x8]\n\
+    ldr r0, [r2, 0xC]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0xC]\n\
+    ldr r0, [r2, 0x10]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x10]\n\
+    ldr r0, [r2, 0x14]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x14]\n\
+    ldr r0, [r2, 0x18]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x18]\n\
+    ldr r0, [r2, 0x1C]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x1C]\n\
+    movs r3, 0xC0\n\
+    lsls r3, 3\n\
+    adds r2, r6, r3\n\
+    ldr r0, [r2]\n\
+    ands r0, r1\n\
+    str r0, [r2]\n\
+    ldr r0, [r2, 0x4]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x4]\n\
+    ldr r0, [r2, 0x8]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x8]\n\
+    ldr r0, [r2, 0xC]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0xC]\n\
+    ldr r0, [r2, 0x10]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x10]\n\
+    ldr r0, [r2, 0x14]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x14]\n\
+    ldr r0, [r2, 0x18]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x18]\n\
+    ldr r0, [r2, 0x1C]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x1C]\n\
+    movs r1, 0\n\
+    ldr r2, _080F42C0 @ =0x80000040\n\
+_080F4268:\n\
+    lsls r0, r1, 7\n\
+    adds r0, r6, r0\n\
+    str r0, [r4]\n\
+    lsls r0, r1, 8\n\
+    adds r0, r7, r0\n\
+    str r0, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    lsls r0, r1, 7\n\
+    movs r3, 0x80\n\
+    lsls r3, 3\n\
+    adds r0, r3\n\
+    adds r0, r6, r0\n\
+    str r0, [r4]\n\
+    lsls r0, r1, 3\n\
+    adds r0, 0x4\n\
+    lsls r0, 5\n\
+    adds r0, r7, r0\n\
+    str r0, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x4\n\
+    bls _080F4268\n\
+    add sp, 0x4\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080F42A4: .4byte gUnknown_083DFEC8\n\
+_080F42A8: .4byte 0x00001111\n\
+_080F42AC: .4byte 0x040000d4\n\
+_080F42B0: .4byte 0x81000140\n\
+_080F42B4: .4byte gWindowTemplate_81E70F0\n\
+_080F42B8: .4byte 0x81000030\n\
+_080F42BC: .4byte 0x0fffffff\n\
+_080F42C0: .4byte 0x80000040\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+static void sub_80F42C4(u8 *arg0)
+{
+    u16 i, tileOffset;
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_083DFEC4->unkD1E4[0],
+        .size = 0x500,
+        .tag = 0x1A,
+    };
+
+    sub_80F4194(gUnknown_083DFEC4->unkD1E4[0], arg0);
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&gUnknown_083E4868);
+
+    tileOffset = 0;
+    for (i = 0; i < 5; i++)
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_83E4878, i * 32 + 113, 16, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.tileNum += tileOffset;
+            gUnknown_083DFEC4->unkCED4[i] = &gSprites[spriteId];
+        }
+        else
+        {
+            gUnknown_083DFEC4->unkCED4[i] = NULL;
+        }
+
+        tileOffset += 8;
+    }
+}
+
+static void sub_80F4394(void)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gUnknown_083DFEC4->unkCED4[i])
+            DestroySprite(gUnknown_083DFEC4->unkCED4[i]);
+    }
+
+    FreeSpriteTilesByTag(0x1A);
+    FreeSpritePaletteByTag(0x12);
+}
+
+void sub_80F43D4(u8 *arg0)
+{
+    u16 tile;
+
+    sub_80F4194(gUnknown_083DFEC4->unkD1E4[0], arg0);
+    tile = GetSpriteTileStartByTag(0x1A);
+    if (tile != 0xFFFF)
+        DmaCopy32Defvars(3, gUnknown_083DFEC4->unkD1E4[0], (void *)(VRAM + 0x10000 + (tile * 32)), 0x500);
+}
+
+static u8 *sub_80F4428(u8 *arg0, u16 arg1, u8 arg2)
+{
+    return sub_80F6514(arg0, arg1, arg2);
+}
+
+static u8 *sub_80F443C(u8 *arg0, u16 arg1)
+{
+    return AlignInt1InMenuWindow(StringCopy(arg0, gOtherText_Number), arg1, 56, 1);
+}
+
+static u8 *sub_80F445C(u8 *arg0, u16 arg1)
+{
+    u8 *buffer = AlignInt1InMenuWindow(arg0, arg1, 23, 1);
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x11;
+    buffer[2] = 1;
+    buffer += 3;
+    buffer[0] = CHAR_SLASH;
+    buffer += 1;
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x11;
+    buffer[2] = 1;
+    buffer += 3;
+    buffer = AlignInt1InMenuWindow(buffer, gUnknown_083DFEC4->unk8774 + 1, 50, 1);
+    return buffer;
+}
+
+int sub_80F44B0(u16 box, u16 monIndex, int monDataField, int *text)
+{
+    if (box == 14)
+    {
+        if (monDataField == MON_DATA_NICKNAME || monDataField == MON_DATA_OT_NAME)
+            return GetMonData(&gPlayerParty[monIndex], monDataField, text);
+        else
+            return GetMonData(&gPlayerParty[monIndex], monDataField);
+    }
+    else
+    {
+        if (monDataField == MON_DATA_NICKNAME || monDataField == MON_DATA_OT_NAME)
+            return GetBoxMonData(&gPokemonStorage.boxes[box][monIndex], monDataField, text);
+        else
+            return GetBoxMonData(&gPokemonStorage.boxes[box][monIndex], monDataField);
+    }
+}
+
+static void SetMonMarkings(u16 box, u16 monIndex, u8 markings)
+{
+    if (box == 14)
+        SetMonData(&gPlayerParty[monIndex], MON_DATA_MARKINGS, &markings);
+    else
+        SetBoxMonData(&gPokemonStorage.boxes[box][monIndex], MON_DATA_MARKINGS, &markings);
+}
+
+void sub_80F45A0(s16 arg0, u8 arg1)
+{
+    u8 box;
+    u8 var0 = gUnknown_083DFEC4->unk893c[arg0].unk4;
+    if (var0)
+    {
+        sub_80F4428(gUnknown_083DFEC4->unk8829[arg1], arg0, 0);
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        if (box == 14)
+            AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gOtherText_InParty, 64, 0);
+        else
+            AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gPokemonStorage.boxNames[box], 64, 0);
+
+        gUnknown_083DFEC4->unk8937[arg1] = 1;
+    }
+    else
+    {
+        AlignStringInMenuWindow(gUnknown_083DFEC4->unk8829[arg1], gEmptyString_81E72B0, 104, 0);
+        AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gEmptyString_81E72B0, 64, 0);
+        gUnknown_083DFEC4->unk8937[arg1] = var0;
     }
 }
