@@ -317,7 +317,7 @@ static void sub_8136294(void)
             }
             break;
         case 19:
-            sub_80F556C(gUnknown_083DFEC4->unk9004);
+            sub_80F556C(gUnknown_083DFEC4->unk9004[0]);
             gUnknown_02039304->unk50++;
             break;
         case 20:
