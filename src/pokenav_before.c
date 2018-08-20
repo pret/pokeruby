@@ -5,6 +5,7 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "constants/flags.h"
 #include "landmark.h"
@@ -281,7 +282,7 @@ void sub_80F13FC(void);
 void sub_80F1438(void);
 static void sub_80F1494(void);
 bool8 sub_80F162C(u8);
-void sub_80F01E0(u16);
+static void sub_80F01E0(u16);
 static void sub_80F19FC(void);
 static void sub_80F1A74(void);
 static void sub_80F1A80(void);
@@ -347,6 +348,15 @@ static void sub_80F42C4(u8*);
 static void sub_80F4394(void);
 u8 *sub_80F6514(u8*, u16, u8);
 static u8 *sub_80F443C(u8 *, u16);
+void sub_80F55AC(u8*, struct UnkPokenav11 *);
+static void sub_80F4CF0(void);
+static void sub_80F4D44(void);
+static bool8 sub_80F4D88(void);
+static void sub_80F53EC(struct UnkPokenav11*, struct UnkPokenav11*);
+static bool8 sub_80F5504(void);
+static bool8 sub_80F5264(void);
+static bool8 sub_80F52F8(void);
+static bool8 sub_80F5364(void);
 
 extern void sub_80F0900(void);
 extern void sub_80F01A4(void);
@@ -375,13 +385,10 @@ extern u8 sub_80F68E8();
 extern void sub_80F66E0();
 extern void sub_80F638C();
 extern bool8 sub_80F63D0();
-extern void sub_80F4CF0();
 extern void sub_80EFF34();
 extern bool8 sub_80EFF68();
 extern void sub_80F6134();
 extern u8 sub_80F5DD4();
-extern void sub_80F4D44();
-extern bool8 sub_80F4D88();
 extern void sub_80F0264(u8);
 extern bool8 sub_80F02A0();
 extern void sub_80EF9F8(void);
@@ -4676,7 +4683,7 @@ void sub_80F01A4(void)
     REG_WINOUT = 0x001B;
 }
 
-void sub_80F01E0(u16 a)
+static void sub_80F01E0(u16 a)
 {
     Menu_PrintText(gUnknown_083DFEC4->unk8829[a], 13, 1);
 
@@ -8100,7 +8107,7 @@ static u8 *sub_80F445C(u8 *arg0, u16 arg1)
     return buffer;
 }
 
-int sub_80F44B0(u16 box, u16 monIndex, int monDataField, int *text)
+u32 sub_80F44B0(u16 box, u16 monIndex, int monDataField, int *text)
 {
     if (box == 14)
     {
@@ -8126,7 +8133,7 @@ static void SetMonMarkings(u16 box, u16 monIndex, u8 markings)
         SetBoxMonData(&gPokemonStorage.boxes[box][monIndex], MON_DATA_MARKINGS, &markings);
 }
 
-void sub_80F45A0(s16 arg0, u8 arg1)
+static void sub_80F45A0(s16 arg0, u8 arg1)
 {
     u8 box;
     u8 var0 = gUnknown_083DFEC4->unk893c[arg0].unk4;
@@ -8147,4 +8154,586 @@ void sub_80F45A0(s16 arg0, u8 arg1)
         AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gEmptyString_81E72B0, 64, 0);
         gUnknown_083DFEC4->unk8937[arg1] = var0;
     }
+}
+
+static void sub_80F468C(s16 arg0, u8 arg1)
+{
+    u16 i;
+    u16 box;
+    u16 monIndex;
+
+    if (gUnknown_083DFEC4->unk893c[arg0].unk4)
+    {
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        monIndex = gUnknown_083DFEC4->unk893c[arg0].partyIdx;
+        gUnknown_083DFEC4->unk8ff0[arg1][0] = sub_80F44B0(box, monIndex, MON_DATA_COOL, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][1] = sub_80F44B0(box, monIndex, MON_DATA_TOUGH, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][2] = sub_80F44B0(box, monIndex, MON_DATA_SMART, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][3] = sub_80F44B0(box, monIndex, MON_DATA_CUTE, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][4] = sub_80F44B0(box, monIndex, MON_DATA_BEAUTY, NULL);
+
+        gUnknown_083DFEC4->unk8931[arg1] = sub_80F44B0(box, monIndex, MON_DATA_SHEEN, NULL) != 255
+            ? sub_80F44B0(box, monIndex, MON_DATA_SHEEN, NULL) / 29
+            : 9;
+
+        gUnknown_083DFEC4->unk8934[arg1] = sub_80F44B0(box, monIndex, MON_DATA_MARKINGS, NULL);
+        sub_80F55AC(gUnknown_083DFEC4->unk8ff0[arg1], gUnknown_083DFEC4->unk9004[arg1]);
+    }
+    else
+    {
+        for (i = 0; i < 5; i++)
+        {
+            gUnknown_083DFEC4->unk8ff0[arg1][i] = 0;
+            gUnknown_083DFEC4->unk9004[arg1][i].unk0 = 0x9B;
+            gUnknown_083DFEC4->unk9004[arg1][i].unk2 = 0x5B;
+        }
+    }
+}
+
+static void sub_80F4824(s16 arg0, u8 arg1)
+{
+    u16 species;
+    u32 otId;
+    u32 personality;
+    u16 box;
+    u16 monIndex;
+
+    if (gUnknown_083DFEC4->unk893c[arg0].unk4)
+    {
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        monIndex = gUnknown_083DFEC4->unk893c[arg0].partyIdx;
+        species = sub_80F44B0(box, monIndex, MON_DATA_SPECIES2, NULL);
+        otId = sub_80F44B0(box, monIndex, MON_DATA_OT_ID, NULL);
+        personality = sub_80F44B0(box, monIndex, MON_DATA_PERSONALITY, NULL);
+
+        HandleLoadSpecialPokePic(
+            &gMonFrontPicTable[species],
+            gMonFrontPicCoords[species].coords,
+            1,
+            (intptr_t)gUnknown_083DFEC4->unk131E4,
+            gUnknown_083DFEC4->unkD1E4[arg1],
+            species,
+            personality);
+
+        LZ77UnCompWram(GetMonSpritePalFromOtIdPersonality(species, otId, personality), gUnknown_083DFEC4->unk0[arg1]);
+        gUnknown_083DFEC4->unkD1D6[arg1] = species;
+    }
+}
+
+void sub_80F4900(s16 arg0, u8 arg1)
+{
+    sub_80F45A0(arg0, arg1);
+    sub_80F468C(arg0, arg1);
+    sub_80F4824(arg0, arg1);
+}
+
+void sub_80F492C(void)
+{
+    gUnknown_083DFEC4->unk8FE4 = 0;
+}
+
+#ifdef NONMATCHING
+// registers r3/r4 are swapped
+void sub_80F4944(struct UnkUsePokeblockSub *arg0)
+{
+    u16 i;
+    u16 r3;
+    u16 r4;
+
+    i = 0;
+    r4 = gUnknown_083DFEC4->unk8FE4;
+    r3 = r4 / 2;
+    while (r3 != r4)
+    {
+        if (arg0->unk0 > gUnknown_083DFEC4->unk893c[r3].unk0)
+            r4 = r3;
+        else
+            i = r3 + 1;
+
+        r3 = ((r4 - i) / 2) + i;
+    }
+
+    r4 = gUnknown_083DFEC4->unk8FE4;
+    while (r4 > r3)
+    {
+        gUnknown_083DFEC4->unk893c[r4] = gUnknown_083DFEC4->unk893c[r4 - 1];
+        r4--;
+    }
+
+    gUnknown_083DFEC4->unk893c[r3] = *arg0;
+    gUnknown_083DFEC4->unk8FE4++;
+}
+#else
+NAKED
+void sub_80F4944(struct UnkUsePokeblockSub *arg0)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    mov r12, r0\n\
+    movs r2, 0\n\
+    ldr r1, _080F4978 @ =gUnknown_083DFEC4\n\
+    ldr r5, [r1]\n\
+    ldr r3, _080F497C @ =0x00008fe4\n\
+    adds r0, r5, r3\n\
+    ldrh r4, [r0]\n\
+    lsrs r3, r4, 1\n\
+    mov r8, r1\n\
+    cmp r4, r3\n\
+    beq _080F499C\n\
+    adds r6, r5, 0\n\
+    mov r0, r12\n\
+    ldrb r5, [r0]\n\
+    ldr r7, _080F4980 @ =0x0000893c\n\
+_080F4968:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r6, r0\n\
+    adds r0, r7\n\
+    ldrb r0, [r0]\n\
+    cmp r5, r0\n\
+    bls _080F4984\n\
+    adds r4, r3, 0\n\
+    b _080F498A\n\
+    .align 2, 0\n\
+_080F4978: .4byte gUnknown_083DFEC4\n\
+_080F497C: .4byte 0x00008fe4\n\
+_080F4980: .4byte 0x0000893c\n\
+_080F4984:\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+_080F498A:\n\
+    subs r0, r4, r2\n\
+    lsrs r1, r0, 31\n\
+    adds r0, r1\n\
+    asrs r0, 1\n\
+    adds r0, r2, r0\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r4, r3\n\
+    bne _080F4968\n\
+_080F499C:\n\
+    mov r1, r8\n\
+    ldr r2, [r1]\n\
+    ldr r1, _080F49EC @ =0x00008fe4\n\
+    adds r0, r2, r1\n\
+    ldrh r4, [r0]\n\
+    lsls r6, r3, 2\n\
+    cmp r4, r3\n\
+    bls _080F49C6\n\
+    ldr r0, _080F49F0 @ =0x0000893c\n\
+    adds r5, r2, r0\n\
+_080F49B0:\n\
+    lsls r2, r4, 2\n\
+    adds r2, r5, r2\n\
+    subs r1, r4, 0x1\n\
+    lsls r0, r1, 2\n\
+    adds r0, r5, r0\n\
+    ldr r0, [r0]\n\
+    str r0, [r2]\n\
+    lsls r1, 16\n\
+    lsrs r4, r1, 16\n\
+    cmp r4, r3\n\
+    bhi _080F49B0\n\
+_080F49C6:\n\
+    mov r1, r8\n\
+    ldr r2, [r1]\n\
+    ldr r3, _080F49F0 @ =0x0000893c\n\
+    adds r0, r2, r3\n\
+    adds r0, r6\n\
+    mov r3, r12\n\
+    ldr r1, [r3]\n\
+    str r1, [r0]\n\
+    ldr r0, _080F49EC @ =0x00008fe4\n\
+    adds r2, r0\n\
+    ldrh r0, [r2]\n\
+    adds r0, 0x1\n\
+    strh r0, [r2]\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080F49EC: .4byte 0x00008fe4\n\
+_080F49F0: .4byte 0x0000893c\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_80F49F4(void)
+{
+    u16 i;
+
+    gUnknown_083DFEC4->unk893c[0].unk2 = 1;
+    for (i = 1; i < gUnknown_083DFEC4->unk8FE4; i++)
+    {
+        if (gUnknown_083DFEC4->unk893c[i].unk0 == gUnknown_083DFEC4->unk893c[i - 1].unk0)
+            gUnknown_083DFEC4->unk893c[i].unk2 = gUnknown_083DFEC4->unk893c[i - 1].unk2;
+        else
+            gUnknown_083DFEC4->unk893c[i].unk2 = i + 1;
+    }
+
+    gUnknown_083DFEC4->unk876C = 0;
+    gUnknown_083DFEC4->unk8770 = 0;
+    gUnknown_083DFEC4->unk876E = 0;
+    gUnknown_083DFEC4->unk8772 = gUnknown_083DFEC4->unk8FE4 < 9 ? (gUnknown_083DFEC4->unk8FE4 - 1) : 7;
+    gUnknown_083DFEC4->unk8774 = gUnknown_083DFEC4->unk8FE4 - 1;
+    gUnknown_083DFEC4->unk87C9 = gUnknown_083DFEC4->unk8774 > 7;
+}
+
+void sub_80F4B20(void)
+{
+    s16 var0;
+    s16 var1;
+
+    sub_80F4900(gUnknown_083DFEC4->unk87DC, 0);
+    sub_80F2E18(0);
+    if (gUnknown_083DFEC4->unk87DA == 1)
+    {
+        gUnknown_083DFEC4->unk8fe9 = 0;
+        gUnknown_083DFEC4->unk8FEA = 0;
+        gUnknown_083DFEC4->unk8FEB = 0;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk8fe9 = 0;
+        gUnknown_083DFEC4->unk8FEA = 1;
+        gUnknown_083DFEC4->unk8FEB = 2;
+
+        var0 = gUnknown_083DFEC4->unk87DC + 1;
+        if (var0 >= gUnknown_083DFEC4->unk87DA)
+            var0 = 0;
+
+        var1 = gUnknown_083DFEC4->unk87DC - 1;
+        if (var1 < 0)
+            var1 = gUnknown_083DFEC4->unk87DA - 1;
+
+        sub_80F4900(var0, 1);
+        sub_80F4900(var1, 2);
+    }
+}
+
+void sub_80F4BD0(void)
+{
+    u16 i, j;
+
+    for (i = 0, j = 0; i < gUnknown_083DFEC4->unk8828; i++)
+    {
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            gUnknown_083DFEC4->unk893c[j].unk1 = 14;
+            gUnknown_083DFEC4->unk893c[j].partyIdx = i;
+            gUnknown_083DFEC4->unk893c[j].unk2 = j + 1;
+            gUnknown_083DFEC4->unk893c[j].unk4 = 1;
+            j++;
+        }
+    }
+
+    gUnknown_083DFEC4->unk893c[j].unk1 = 0;
+    gUnknown_083DFEC4->unk893c[j].partyIdx = 0;
+    gUnknown_083DFEC4->unk893c[j].unk2 = 0;
+    gUnknown_083DFEC4->unk893c[j].unk4 = 0;
+    gUnknown_083DFEC4->unk87DC = 0;
+    gUnknown_083DFEC4->unk87DA = j + 1;
+    sub_80F4B20();
+    gUnknown_083DFEC4->unk87CB = 1;
+}
+
+static void sub_80F4CF0(void)
+{
+    gUnknown_083DFEC4->unk87DC = gUnknown_083DFEC4->unk876E;
+    sub_80F4B20();
+
+    if (gUnknown_083DFEC4->unk8774 == 0)
+        gUnknown_083DFEC4->unk87CB = 0;
+    else
+        gUnknown_083DFEC4->unk87CB = 1;
+}
+
+static void sub_80F4D44(void)
+{
+    gUnknown_083DFEC4->unk8FE6 = 0;
+    gUnknown_083DFEC4->unk8FE7 = 0;
+    sub_80F492C();
+
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F4D88());
+}
+
+static bool8 sub_80F4D88(void)
+{
+    u16 i;
+    register int mask asm("r3"); // FIXME
+    int nextValue;
+    struct UnkUsePokeblockSub var0;
+
+    switch (gUnknown_083DFEC4->unk8FE6)
+    {
+    default:
+        var0.unk4 = 1;
+        for (i = 0; i < 15; i++)
+        {
+
+            if (GetBoxMonData(&gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7], MON_DATA_SPECIES)
+             && !GetBoxMonData(&gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7], MON_DATA_IS_EGG))
+            {
+                var0.unk1 = gUnknown_083DFEC4->unk8FE6;
+                var0.partyIdx = gUnknown_083DFEC4->unk8FE7;
+                var0.unk0 = GetBoxMonData(
+                    &gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7],
+                    gUnknown_083DFEC4->unk87D8);
+                sub_80F4944(&var0);
+            }
+
+            gUnknown_083DFEC4->unk8FE7++;
+            mask = 0xFF;
+            if (gUnknown_083DFEC4->unk8FE7 == 30)
+            {
+                gUnknown_083DFEC4->unk8FE7 = 0;
+                nextValue = gUnknown_083DFEC4->unk8FE6 + 1;
+                gUnknown_083DFEC4->unk8FE6 = nextValue;
+                if ((nextValue & mask) == 14)
+                    break;
+            }
+        }
+        break;
+    case 14:
+        var0.unk4 = 1;
+        var0.unk1 = 14;
+        for (i = 0; i < gUnknown_083DFEC4->unk8828; i++)
+        {
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                var0.partyIdx = i;
+                var0.unk0 = GetMonData(&gPlayerParty[i], gUnknown_083DFEC4->unk87D8);
+                sub_80F4944(&var0);
+            }
+        }
+
+        sub_80F49F4();
+        gUnknown_083DFEC4->unk87DA = gUnknown_083DFEC4->unk8FE4;
+        gUnknown_083DFEC4->unk8FE6++;
+        break;
+    case 15:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_80F4F78(void)
+{
+    sub_80F53EC(gUnknown_083DFEC4->unk9040, gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9]);
+    sub_80F5504();
+}
+
+bool8 sub_80F4FB4(void)
+{
+    bool8 var0 = sub_80F5504();
+    bool8 var1 = sub_80F170C();
+    return var0 || var1;
+}
+
+void sub_80F4FDC(void)
+{
+    if (gUnknown_083DFEC4->unk76AA || gUnknown_083DFEC4->unk87DC != gUnknown_083DFEC4->unk8828)
+        sub_80F53EC(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9040);
+}
+
+bool8 sub_80F5038(void)
+{
+    bool8 var0 = sub_80F5504();
+    bool8 var1 = sub_80F173C();
+    return var0 || var1;
+}
+
+void sub_80F5060(u8 arg0)
+{
+    u16 var0;
+    u8 var1;
+    u8 var2;
+
+    if (arg0)
+        var0 = gUnknown_083DFEC4->unk8FEB;
+    else
+        var0 = gUnknown_083DFEC4->unk8FEA;
+
+    sub_80F53EC(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9004[var0]);
+    var1 = gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk4;
+    if (arg0)
+    {
+        gUnknown_083DFEC4->unk8FEB = gUnknown_083DFEC4->unk8FEA;
+        gUnknown_083DFEC4->unk8FEA = gUnknown_083DFEC4->unk8fe9;
+        gUnknown_083DFEC4->unk8fe9 = var0;
+        gUnknown_083DFEC4->unk8FEC = gUnknown_083DFEC4->unk8FEB;
+
+        gUnknown_083DFEC4->unk87DC = gUnknown_083DFEC4->unk87DC
+            ? gUnknown_083DFEC4->unk87DC - 1
+            : gUnknown_083DFEC4->unk87DA - 1;
+        gUnknown_083DFEC4->unk8FEE = gUnknown_083DFEC4->unk87DC
+            ? gUnknown_083DFEC4->unk87DC - 1
+            : gUnknown_083DFEC4->unk87DA - 1;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk8FEA = gUnknown_083DFEC4->unk8FEB;
+        gUnknown_083DFEC4->unk8FEB = gUnknown_083DFEC4->unk8fe9;
+        gUnknown_083DFEC4->unk8fe9 = var0;
+        gUnknown_083DFEC4->unk8FEC = gUnknown_083DFEC4->unk8FEA;
+
+        gUnknown_083DFEC4->unk87DC = (gUnknown_083DFEC4->unk87DC < gUnknown_083DFEC4->unk87DA - 1)
+            ? gUnknown_083DFEC4->unk87DC + 1
+            : 0;
+        gUnknown_083DFEC4->unk8FEE = (gUnknown_083DFEC4->unk87DC < gUnknown_083DFEC4->unk87DA - 1)
+            ? gUnknown_083DFEC4->unk87DC + 1
+            : 0;
+    }
+
+    var2 = gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk4;
+    if (!var1)
+        gUnknown_083DFEC4->unk87E0 = sub_80F5264;
+    else if (!var2)
+        gUnknown_083DFEC4->unk87E0 = sub_80F52F8;
+    else
+        gUnknown_083DFEC4->unk87E0 = sub_80F5364;
+
+    gUnknown_083DFEC4->unk87DE = 0;
+}
+
+bool8 gpu_sync_bg_show(void)
+{
+    return gUnknown_083DFEC4->unk87E0();
+}
+
+static bool8 sub_80F5264(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        sub_80F2E18(gUnknown_083DFEC4->unk8fe9);
+        sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+        gUnknown_083DFEC4->unk87DE++;
+        // fall through
+    case 1:
+        if (!sub_80F4FB4())
+        {
+            sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F52F8(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        if (!sub_80F5038())
+        {
+            sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+            sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 1:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F5364(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        sub_80F5504();
+        if (!sub_80F173C())
+        {
+            sub_80F2E18(gUnknown_083DFEC4->unk8fe9);
+            sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 1:
+        if (!sub_80F4FB4())
+            gUnknown_083DFEC4->unk87DE++;
+        break;
+    case 2:
+        sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_80F53EC(struct UnkPokenav11 *arg0, struct UnkPokenav11 *arg1)
+{
+    u16 i, j;
+    int r5;
+    int r6;
+
+    for (i = 0; i < 5; i++)
+    {
+        r5 = arg0[i].unk0 << 8;
+        r6 = ((arg1[i].unk0 - arg0[i].unk0) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            gUnknown_083DFEC4->unk9054[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+
+        gUnknown_083DFEC4->unk9054[j][i].unk0 = arg1[i].unk0;
+        r5 = arg0[i].unk2 << 8;
+        r6 = ((arg1[i].unk2 - arg0[i].unk2) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            gUnknown_083DFEC4->unk9054[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+
+        gUnknown_083DFEC4->unk9054[j][i].unk2 = arg1[i].unk2;
+    }
+
+    gUnknown_083DFEC4->unk9342 = 0;
+}
+
+static bool8 sub_80F5504(void)
+{
+    if (gUnknown_083DFEC4->unk9342 < 10)
+    {
+        sub_80F556C(gUnknown_083DFEC4->unk9054[gUnknown_083DFEC4->unk9342++]);
+        return gUnknown_083DFEC4->unk9342 != 10;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_80F5550(struct UnkPokenav11 *arg0, struct UnkPokenav11 *arg1)
+{
+    sub_80F53EC(arg0, arg1);
+}
+
+bool8 sub_80F555C(void)
+{
+    return sub_80F5504();
+}
+
+void sub_80F556C(struct UnkPokenav11 *arg0)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+        gUnknown_083DFEC4->unk911C[i] = arg0[i];
+
+    gUnknown_083DFEC4->unk9344 = 1;
 }
