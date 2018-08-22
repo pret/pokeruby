@@ -2615,7 +2615,7 @@ extern const u8 gMailTilemap_Dream[];
 extern const u8 gMailTilemap_Fab[];
 extern const u8 gMailTilemap_Retro[];
 
-extern const u8 gUnknown_08E96EC8[];
+extern const u8 gBagScreenLabels_Tilemap[];
 
 extern const u8 gMenuTrainerCard_Gfx[];
 extern const u16 gMenuTrainerCard0Star_Pal[];

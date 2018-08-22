@@ -3,7 +3,7 @@ PetalburgCity_PokemonCenter_1F_MapScripts:: @ 8155204
 	.byte 0
 
 PetalburgCity_PokemonCenter_1F_MapScript1_15520A:: @ 815520A
-	setrespawn 3
+	setrespawn HEAL_LOCATION_PETALBURG_CITY
 	call PetalburgCity_PokemonCenter_1F_EventScript_19FD1B
 	end
 

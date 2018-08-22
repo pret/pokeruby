@@ -10,6 +10,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/weather.h"
+#include "constants/heal_locations.h"
 #include "constants/vars.h"
 	.include "include/macros.inc"
 	.include "include/macros/event.inc"

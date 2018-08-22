@@ -4039,8 +4039,8 @@ gUnknown_08E96D2C:: @ 8E96D2C
 	.incbin "graphics/unknown/unknown_E96D2C.bin.lz"
 
 	.align 2
-gUnknown_08E96EC8:: @ 8E96EC8
-	.incbin "graphics/unknown/unknown_E96EC8.bin"
+gBagScreenLabels_Tilemap:: @ 8E96EC8
+	.incbin "graphics/interface/bag_screen_labels.bin"
 
 	.align 2
 gSlotMachineSpritePalette0:: @ 8E976C8

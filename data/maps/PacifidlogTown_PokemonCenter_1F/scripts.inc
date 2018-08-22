@@ -3,7 +3,7 @@ PacifidlogTown_PokemonCenter_1F_MapScripts:: @ 81540FF
 	.byte 0
 
 PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
-	setrespawn 19
+	setrespawn HEAL_LOCATION_PACIFIDLOG_TOWN
 	end
 
 @ 8154109

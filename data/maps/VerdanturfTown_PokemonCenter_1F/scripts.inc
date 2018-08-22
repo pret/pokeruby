@@ -3,7 +3,7 @@ VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8153F09
 	.byte 0
 
 VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F:: @ 8153F0F
-	setrespawn 18
+	setrespawn HEAL_LOCATION_VERDANTURF_TOWN
 	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 
