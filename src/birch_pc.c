@@ -104,7 +104,7 @@ const u8 *GetPokedexRatingText(u16 count)
         return gBirchDexRatingText_DexCompleted;
     }
     if (count == 202)
-        return gBirchDexRatingText_DexCompleted; // Hoenn dex is considered complete, even though the hoenn dex count is 210.
+        return gBirchDexRatingText_DexCompleted; // Hoenn dex is considered complete, a count of 202 means Jirachi and Deoxys are obtained
     return gBirchDexRatingText_LessThan10;
 }
 
