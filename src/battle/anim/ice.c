@@ -373,19 +373,18 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9DAC =
     .callback = sub_80D8700,
 };
 
-// bitfield array
-const u32 gUnknown_083D9DC4[] =
+const u8 gUnknown_083D9DC4[][4] =
 {
-    0x2001E064,
-    0x0001E055,
-    0x1011E0F2,
-    0x1021E042,
-    0x0031E0B6,
-    0x2001E03C,
-    0x0011E0D6,
-    0x1001E071,
-    0x1031E0D2,
-    0x0021E026,
+    {0x64, 0xE0, 0x01, 0x20},
+    {0x55, 0xE0, 0x01, 0x00},
+    {0xF2, 0xE0, 0x11, 0x10},
+    {0x42, 0xE0, 0x21, 0x10},
+    {0xB6, 0xE0, 0x31, 0x00},
+    {0x3C, 0xE0, 0x01, 0x20},
+    {0xD6, 0xE0, 0x11, 0x00},
+    {0x71, 0xE0, 0x01, 0x10},
+    {0xD2, 0xE0, 0x31, 0x10},
+    {0x26, 0xE0, 0x21, 0x00},
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_83D9DEC[] =
@@ -1403,200 +1402,107 @@ static void sub_80D8700(struct Sprite *sprite)
     sprite->callback = sub_80D8874;
 }
 
-/*
-// (Probably) not equivalent
+#ifdef NONMATCHING
+// functionally correct, but there appears to be an unused local variable causing
+// switch case 1 to not match
 static void sub_80D8874(struct Sprite *sprite)
 {
-    s16 r0, r3;
-    s8 r1;
+    int value;
+    register s16 value2 asm("r5");
 
-    // is this a temp var?
-    if ((sprite->data[7] & 0xFF) != 1) // cmp 1
+    switch (sprite->data[7] & 0xFF)
     {
-        //
-        if ((sprite->data[7] & 0xFF) <= 1) // cmp 2
-        {
-            //
-            if ((sprite->data[7] & 0xFF) != 0) // cmp 3
-            {
-                // _AD0
-                return;
-            }
-            // _896 (else?)
-            TranslateAnimLinear(sprite);
-            sprite->pos2.x += ((sprite->data[5] * 2 + gSineTable[0]) >> 4);
-
-            if (sprite->data[6] != 0) // cmp 5
-            {
-                // ...
-                r0 = sprite->data[5] - 8;
-            }
-            else // ==
-            {
-                // _8C4
-                r0 = sprite->data[5] + 8;
-            }
-            // _8C8  
-            sprite->data[5] = r0 & 0xFF;
-
-            if (sprite->data[0] >= 0) // cmp 6
-            {
-                // _AD0
-                return;
-            }
-            // < _8D6 (else?)
-            // is this a temp var?
-            sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-            sprite->data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-            sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 0);
-
-            // is sprite->pos2.y + sprite->pos1.y also a temp var???
-            sprite->pos1.y += sprite->pos2.y;
-            sprite->data[3] = sprite->pos2.y + sprite->pos1.y;
-            sprite->data[4] = sprite->pos2.y + sprite->pos1.y + 0x1D;
-
-            sprite->data[7] += 1;
-
-            if ((gMain.inBattle & 2) != 0 
-             || (gBanksBySide[gAnimBankTarget] & 1) != 0) // cmp 7 || cmp 8
-            {
-                // ...
-                sprite->data[5] = 204;
-            }
-            else
-            {
-                // _938
-                sprite->data[5] = 80;
-            }
-            // _93A
-            sprite->pos2.y = 0;
-
-            sprite->pos2.x = (sprite->data[5] * 2 + gSineTable[0]) >> 3;
-            sprite->data[5] = (sprite->data[5] + 2) & 0xFF;
-
-            InitAnimLinearTranslation(sprite);
-
-            return;
-        }
-        else // > 
-        {
-            // _88E // could this be an else if?
-            if ((sprite->data[7] & 0xFF) == 2) // cmp 4
-            {
-                // _A94 
-                if (TranslateAnimLinear(sprite) != 0) // cmp 15
-                {
-                    if ((sprite->oam.affineMode & 1) != 0) // cmp 16
-                    {
-                        //...
-                        FreeOamMatrix(sprite->oam.matrixNum);
-                        sprite->oam.affineMode = (sprite->oam.affineMode & -4);
-                    }
-                    // _AC2
-                    DestroySprite(sprite); // &sprite?
-                    gAnimVisualTaskCount--;
-
-                    return;
-                } // else?
-                return;
-            }
-            else
-            {
-                // _894
-                return;
-            }
-        }
-    }
-    else // ==
-    {
-        // _968
+    case 0:
         TranslateAnimLinear(sprite);
+        value = gSineTable[sprite->data[5]];
+        sprite->pos2.x += value >> 4;
+        if (sprite->data[6])
+            sprite->data[5] = (sprite->data[5] - 8) & 0xFF;
+        else
+            sprite->data[5] = (sprite->data[5] + 8) & 0xFF;
 
-        sprite->pos2.x += (sprite->data[5] * 2 + gSineTable[0]) >> 3; // ???
-        sprite->pos2.y += (-3 * gSineTable[(sprite->data[5] + 64) << 1]) >> 8; // which one of these is closer?
-
-        if ((gMain.inBattle & 2) != 0) // cmp 9
+        if (sprite->data[0] <= 0)
         {
-            // 
-            r3 = sprite->data[5];
-
-            if ((u16)(sprite->data[5] - 64) <= 0x7F) // cmp 10
-            {
-                // ...
-                r1 = sprite->data[7];
-            }
+            value2 = 80;
+            sprite->data[0] = value2;
+            sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankTarget, 0);
+            sprite->data[1] = sprite->pos1.x;
+            sprite->data[2] = sprite->pos1.x;
+            sprite->pos1.y += sprite->pos2.y;
+            sprite->data[3] = sprite->pos1.y;
+            sprite->data[4] = sprite->pos1.y + 29;
+            sprite->data[7]++;
+            if (gMain.inBattle && gBanksBySide[gAnimBankTarget] & 1)
+                sprite->data[5] = 204;
             else
-            {
-                // _9D4
-                r1 = sprite->data[7] + 1;
-            }
-            // _9DC
-            sprite->oam.priority = (sprite->oam.priority & -13) | (r1 & 3) << 2;
-            r0 = r3 + 4;
-        }
-        else // ==
-        {
-            // _9F2
-            if ((u16)(sprite->data[5] - 64) <= 0x7F) // cmp 11
-            {
-                // ... &spite->subpriority ??? 
-                r1 = sprite->subpriority;
-                r0 = 128;
-            }
-            else // >
-            {
-                // _A06
-                r1 = sprite->subpriority;
-                r0 = 140;
-            }
-            // _A0C // *r1 ???
-            sprite->subpriority = r0;
-            r0 = sprite->data[5] - 4;
-        }
-        // _A12
-        sprite->data[5] = r0 & 0xFF;
-        sprite->data[0] = 768;
-
-        sprite->pos1.x  = sprite->pos2.x + sprite->pos1.x;//+= sprite->pos2.x;
-        sprite->data[1] = sprite->pos2.x + sprite->pos1.x;
-
-        sprite->pos1.y = sprite->pos2.y + sprite->pos1.y;
-        sprite->data[3] = sprite->pos2.y + sprite->pos1.y;
-
-        sprite->data[4] = sprite->pos2.y + sprite->pos1.y + 4;
-
-        if (sprite->data[0] <= 0) // cmp 12
-        {
-            //
-            if ((gMain.inBattle & 2) != 0 
-             || (gBanksBySide[gAnimBankTarget] & 1) != 0) // cmp 13 || cmp 14
-            {
-                // 
-                r0 = 0x80 << 1;
-            }
-            else
-            {
-                // _A78
-                r0 = 0xFFF0;
-            }
-            // _A7A
-            sprite->data[2] = r0;
-            sprite->data[7] += 1;
+                sprite->data[5] = value2;
 
             sprite->pos2.y = 0;
-            sprite->pos1.x = 0;
+            value = gSineTable[sprite->data[5]];
+            sprite->pos2.x = value >> 3;
+            sprite->data[5] = (sprite->data[5] + 2) & 0xFF;
+            InitAnimLinearTranslation(sprite);
+        }
+        break;
+    case 1:
+        TranslateAnimLinear(sprite);
+        value = gSineTable[sprite->data[5]];
+        sprite->pos2.x += value >> 3;
+        sprite->pos2.y += (gSineTable[sprite->data[5] + 0x40] * -3) >> 8;
+        if (gMain.inBattle)
+        {
+            u16 var0 = sprite->data[5] - 0x40;
+            if (var0 <= 0x7F)
+                sprite->oam.priority = sprite->data[7] >> 8;
+            else
+                sprite->oam.priority = (sprite->data[7] >> 8) + 1;
 
+            sprite->data[5] = (sprite->data[5] + 4) & 0xFF;
+        }
+        else
+        {
+            u16 var0 = sprite->data[5] - 0x40;
+            if (var0 <= 0x7F)
+                sprite->subpriority = 128;
+            else
+                sprite->subpriority = 140;
+
+            sprite->data[5] = (sprite->data[5] - 4) & 0xFF;
+        }
+
+        if (sprite->data[0] <= 0)
+        {
+            asm("mov r2, #0"); // unused local variable?
+            sprite->data[0] = 0x300;
+            sprite->data[1] = sprite->pos1.x += sprite->pos2.x;
+            sprite->data[3] = sprite->pos1.y += sprite->pos2.y;
+            sprite->data[4] = sprite->pos1.y + 4;
+            if (gMain.inBattle && gBanksBySide[gAnimBankTarget] & 1)
+                sprite->data[2] = 0x100;
+            else
+                sprite->data[2] = -0x10;
+
+            sprite->data[7]++;
+            sprite->pos2.x = sprite->pos2.y = 0;
             sub_8078BD4(sprite);
         }
-        // _AD0
-        return;
+        break;
+    case 2:
+        if (TranslateAnimLinear(sprite))
+        {
+            if (sprite->oam.affineMode & 1)
+            {
+                FreeOamMatrix(sprite->oam.matrixNum);
+                sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+            }
+
+            DestroySprite(sprite);
+            gAnimVisualTaskCount--;
+        }
+        break;
     }
-
-    // _AD0 / return
-    return;
 }
-*/
-
+#else
 NAKED static void sub_80D8874(struct Sprite *sprite)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
@@ -1910,6 +1816,7 @@ NAKED static void sub_80D8874(struct Sprite *sprite)
                 "\t.align 2, 0\n"
                 "_080D8AD8: .4byte gAnimVisualTaskCount");
 }
+#endif // NONMATCHING
 
 void sub_80D8ADC(u8 taskId)
 {
@@ -1963,9 +1870,10 @@ static void sub_80D8AF8(u8 taskId)
     }
 }
 
+
 /*
-//
-void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(u8 taskId)
+// possibly equivalent, possibly not
+bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(u8 taskId)
 {
     //
     //struct Task *task = &gTasks[a2];
@@ -1973,19 +1881,74 @@ void sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)//(u8 spriteId, u8 taskId, u8 a3)//(
     //task->data[3]++;
     //u8 r5bank = ;
 
-    if (gUnknown_083D9DC4[a1+0x3] >> 4 != 2
-     || IsAnimBankSpriteVisible(GetBattlerAtPosition(gUnknown_083D9DC4[a1+0x2])))
+    //const struct SpriteTemplate *spriteTemplate;
+    u8 spriteId;
+
+    s16 r6, r7;
+
+    u32 tempA, tempB; // u32? s16? u16? u8? int?
+
+    //u8 r6, r7;
+
+    tempA = a3 + 0;
+    tempB = 0;
+
+    // is that gunknown a tempvar?
+
+    if (gUnknown_083D9DC4[a1][3] != 2 
+        || IsAnimBankSpriteVisible(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2])))
     {
-        //
+        //return TRUE;
+        tempB = 1;
+
+        r7 = GetBattlerSpriteCoord(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 2);
+        r6 = GetBattlerSpriteCoord(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 3);
+
+        switch (gUnknown_083D9DC4[a1][3])
+        {
+        case 0:
+            //
+            r7 -= sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
+            r6 -= sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
+            break;
+        case 1:
+            //
+            r7 += sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 1) / 6;
+            r6 += sub_807A100(GetBattlerAtPosition(gUnknown_083D9DC4[a1][2]), 0) / 6;
+        }
     }
+
     else
     {
-        // _C94
+        // _94
+        r7 = gUnknown_083D9DC4[a1][0];
+        r6 = gUnknown_083D9DC4[a1][1];
     }
-    // _CA6
-}
-*/
 
+    spriteId = CreateSprite(&gSpriteTemplate_83D9E3C, r7 - r6, -0x8, 0x12);
+
+    if (spriteId != 0x40)
+    {
+        //
+        StartSpriteAffineAnim(&gSprites[spriteId], a2);
+
+        gSprites[spriteId].data[0] = tempB;
+        gSprites[spriteId].data[3] = r7;
+        gSprites[spriteId].data[4] = r6;
+
+        gSprites[spriteId].data[5] = a2;
+        gSprites[spriteId].data[6] = tempA;
+        gSprites[spriteId].data[7] = a4;
+
+        return TRUE;
+    }
+
+    return FALSE;
+
+}
+//*/
+
+//*
 NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
@@ -2165,6 +2128,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "\tpop {r1}\n"
                 "\tbx r1");
 }
+//*/
 
 static void sub_80D8D1C(struct Sprite *sprite)
 {
