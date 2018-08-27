@@ -283,7 +283,6 @@ SECTIONS {
         src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
         src/battle/anim/flying.o(.text);
-        asm/flying.o(.text);
         src/battle/anim/psychic.o(.text);
         src/battle/anim/bug.o(.text);
         src/battle/anim/rock.o(.text);
