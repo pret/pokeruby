@@ -122,7 +122,7 @@ SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 	end
 
 SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
-	setrespawn 8
+	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
 	warp MAP_LILYCOVE_CITY_HARBOR, 255, 8, 11
@@ -131,7 +131,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	end
 
 SSTidalCorridor_EventScript_15FE17:: @ 815FE17
-	setrespawn 4
+	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	call_if_set FLAG_RECEIVED_TM49, SSTidalCorridor_EventScript_15FE36
 	warp MAP_SLATEPORT_CITY_HARBOR, 255, 8, 11

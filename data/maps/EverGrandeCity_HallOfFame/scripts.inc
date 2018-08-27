@@ -51,7 +51,7 @@ EverGrandeCity_HallOfFame_EventScript_15BBA8:: @ 815BBA8
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41
-	setrespawn 1
+	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	fadescreenspeed 1, 24
 	special GameClear
 	waitstate
@@ -59,7 +59,7 @@ EverGrandeCity_HallOfFame_EventScript_15BC41:: @ 815BC41
 	end
 
 EverGrandeCity_HallOfFame_EventScript_15BC4D:: @ 815BC4D
-	setrespawn 2
+	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	fadescreenspeed 1, 24
 	special GameClear
 	waitstate
