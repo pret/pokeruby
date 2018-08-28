@@ -1823,15 +1823,15 @@ void sub_80DAD30(struct Sprite *sprite)
     sprite->callback = TranslateAnimSpriteToTargetMonLocation;
 }
 
-#ifdef NONMATCHING
-void sub_80DAD84(struct Sprite * sprite) {
+void sub_80DAD84(struct Sprite * sprite)
+{
 
     /* functionally equivalent
      * rand and matrix num registers switched
      * can't force registers because they move on left/right switch
      */
 
-    u32 matrixNum;
+    s16 matrixNum;
     s16 rand;
     s16 sinVal;
 
@@ -1887,200 +1887,6 @@ void sub_80DAD84(struct Sprite * sprite) {
     sprite->callback = sub_80DAF0C;
 
 }
-#else
-NAKED
-void sub_80DAD84(struct Sprite *sprite)
-{
-    asm_unified("push {r4-r7,lr}\n\
-	adds r4, r0, 0\n\
-	ldr r5, _080DADCC @ =gBattleAnimArgs\n\
-	ldrh r0, [r5]\n\
-	strh r0, [r4, 0x30]\n\
-	ldrh r0, [r5, 0x2]\n\
-	strh r0, [r4, 0x32]\n\
-	ldrh r0, [r5, 0x4]\n\
-	strh r0, [r4, 0x34]\n\
-	ldr r0, _080DADD0 @ =gMain\n\
-	ldr r1, _080DADD4 @ =0x0000043d\n\
-	adds r0, r1\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080DAE44\n\
-	ldr r0, _080DADD8 @ =gBanksBySide\n\
-	ldr r1, _080DADDC @ =gAnimBankTarget\n\
-	ldrb r2, [r1]\n\
-	adds r0, r2, r0\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x1\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080DADE0\n\
-	adds r0, r2, 0\n\
-	movs r1, 0x1\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldrh r5, [r5, 0x6]\n\
-	adds r0, r5\n\
-	b _080DADEE\n\
-	.align 2, 0\n\
-_080DADCC: .4byte gBattleAnimArgs\n\
-_080DADD0: .4byte gMain\n\
-_080DADD4: .4byte 0x0000043d\n\
-_080DADD8: .4byte gBanksBySide\n\
-_080DADDC: .4byte gAnimBankTarget\n\
-_080DADE0:\n\
-	adds r0, r2, 0\n\
-	movs r1, 0x1\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r0, 0x28\n\
-_080DADEE:\n\
-	strh r0, [r4, 0x3C]\n\
-	ldr r0, _080DAE1C @ =gBattleAnimArgs\n\
-	movs r1, 0x8\n\
-	ldrsh r0, [r0, r1]\n\
-	cmp r0, 0\n\
-	beq _080DAE24\n\
-	ldr r0, _080DAE20 @ =gAnimBankTarget\n\
-	ldrb r0, [r0]\n\
-	bl sub_8079ED4\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	adds r0, 0x1\n\
-	movs r1, 0x3\n\
-	ands r0, r1\n\
-	lsls r0, 2\n\
-	ldrb r2, [r4, 0x5]\n\
-	movs r1, 0xD\n\
-	negs r1, r1\n\
-	ands r1, r2\n\
-	orrs r1, r0\n\
-	strb r1, [r4, 0x5]\n\
-	b _080DAE58\n\
-	.align 2, 0\n\
-_080DAE1C: .4byte gBattleAnimArgs\n\
-_080DAE20: .4byte gAnimBankTarget\n\
-_080DAE24:\n\
-	ldr r0, _080DAE40 @ =gAnimBankTarget\n\
-	ldrb r0, [r0]\n\
-	bl sub_8079ED4\n\
-	movs r1, 0x3\n\
-	ands r1, r0\n\
-	lsls r1, 2\n\
-	ldrb r2, [r4, 0x5]\n\
-	movs r0, 0xD\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r4, 0x5]\n\
-	b _080DAE58\n\
-	.align 2, 0\n\
-_080DAE40: .4byte gAnimBankTarget\n\
-_080DAE44:\n\
-	ldr r0, _080DAEFC @ =gAnimBankTarget\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0x1\n\
-	bl GetBattlerSpriteCoord\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldrh r5, [r5, 0x6]\n\
-	adds r0, r5\n\
-	strh r0, [r4, 0x3C]\n\
-_080DAE58:\n\
-	ldr r5, _080DAF00 @ =gSineTable\n\
-	ldrh r3, [r4, 0x30]\n\
-	movs r1, 0xFF\n\
-	ands r1, r3\n\
-	lsls r0, r1, 1\n\
-	adds r0, r5\n\
-	ldrh r0, [r0]\n\
-	movs r2, 0\n\
-	strh r0, [r4, 0x36]\n\
-	adds r1, 0x40\n\
-	lsls r1, 1\n\
-	adds r1, r5\n\
-	ldrh r0, [r1]\n\
-	negs r0, r0\n\
-	strh r0, [r4, 0x38]\n\
-	strh r2, [r4, 0x3A]\n\
-	strh r2, [r4, 0x26]\n\
-	strh r2, [r4, 0x24]\n\
-	ldrb r0, [r4, 0x3]\n\
-	lsls r0, 26\n\
-	lsrs r6, r0, 27\n\
-	lsls r3, 16\n\
-	lsrs r3, 24\n\
-	strh r3, [r4, 0x30]\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	asrs r7, r0, 16\n\
-	movs r0, 0x80\n\
-	lsls r0, 8\n\
-	ands r0, r7\n\
-	cmp r0, 0\n\
-	beq _080DAEA2\n\
-	ldrh r1, [r4, 0x30]\n\
-	movs r0, 0xFF\n\
-	subs r0, r1\n\
-	strh r0, [r4, 0x30]\n\
-_080DAEA2:\n\
-	movs r0, 0x30\n\
-	ldrsh r1, [r4, r0]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r5\n\
-	ldrh r0, [r0]\n\
-	ldr r3, _080DAF04 @ =gOamMatrices\n\
-	lsls r2, r6, 3\n\
-	adds r2, r3\n\
-	adds r1, 0x40\n\
-	lsls r1, 1\n\
-	adds r1, r5\n\
-	ldrh r1, [r1]\n\
-	strh r1, [r2, 0x6]\n\
-	strh r1, [r2]\n\
-	strh r0, [r2, 0x2]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	negs r0, r0\n\
-	strh r0, [r2, 0x4]\n\
-	adds r3, r4, 0\n\
-	adds r3, 0x3F\n\
-	ldrb r0, [r3]\n\
-	movs r1, 0x4\n\
-	orrs r0, r1\n\
-	movs r1, 0x11\n\
-	negs r1, r1\n\
-	ands r0, r1\n\
-	strb r0, [r3]\n\
-	movs r0, 0x1\n\
-	ands r0, r7\n\
-	cmp r0, 0\n\
-	beq _080DAEF2\n\
-	adds r2, r4, 0\n\
-	adds r2, 0x2A\n\
-	movs r1, 0x1\n\
-	movs r0, 0x1\n\
-	strb r0, [r2]\n\
-	ldrb r0, [r3]\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-_080DAEF2:\n\
-	ldr r0, _080DAF08 @ =sub_80DAF0C\n\
-	str r0, [r4, 0x1C]\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080DAEFC: .4byte gAnimBankTarget\n\
-_080DAF00: .4byte gSineTable\n\
-_080DAF04: .4byte gOamMatrices\n\
-_080DAF08: .4byte sub_80DAF0C\n");
-}
-#endif
 
 #ifdef NONMATCHING
 void sub_80DAF0C(struct Sprite * sprite) {
@@ -2682,124 +2488,56 @@ void sub_80DB458(struct Sprite *sprite)
     sprite->callback = sub_80DB508;
 }
 
-#ifdef NONMATCHING
-void sub_80DB508(struct Sprite * sprite)
+void sub_80DB508(struct Sprite *sprite)
 {
-    // NONMATCHING - Functionally equivalent
-
     if (sprite->data[2] == 0)
     {
         sprite->pos2.x += sprite->data[0] >> 8;
+        sprite->pos2.y -= sprite->data[1] >> 8;
     }
     else
     {
         sprite->pos2.x -= sprite->data[0] >> 8;
+        sprite->pos2.y -= sprite->data[1] >> 8;
     }
 
-    sprite->pos2.y -= sprite->data[1] >> 8;
     sprite->data[0] = sprite->data[0];
     sprite->data[1] -= 32;
 
     if (sprite->data[0] < 0)
-    {
         sprite->data[0] = 0;
-    }
 
     if (++sprite->data[3] == 31)
-    {
         DestroyAnimSprite(sprite);
-    }
 }
-#else
-NAKED
-void sub_80DB508(struct Sprite *sprite)
-{
-    asm_unified("push {r4,lr}\n\
-	adds r4, r0, 0\n\
-	movs r1, 0x32\n\
-	ldrsh r0, [r4, r1]\n\
-	cmp r0, 0\n\
-	bne _080DB520\n\
-	ldrh r3, [r4, 0x2E]\n\
-	lsls r0, r3, 16\n\
-	asrs r0, 24\n\
-	ldrh r1, [r4, 0x24]\n\
-	adds r0, r1\n\
-	b _080DB52A\n\
-_080DB520:\n\
-	ldrh r3, [r4, 0x2E]\n\
-	lsls r1, r3, 16\n\
-	asrs r1, 24\n\
-	ldrh r0, [r4, 0x24]\n\
-	subs r0, r1\n\
-_080DB52A:\n\
-	strh r0, [r4, 0x24]\n\
-	ldrh r2, [r4, 0x30]\n\
-	lsls r1, r2, 16\n\
-	asrs r1, 24\n\
-	ldrh r0, [r4, 0x26]\n\
-	subs r0, r1\n\
-	strh r0, [r4, 0x26]\n\
-	strh r3, [r4, 0x2E]\n\
-	adds r0, r2, 0\n\
-	subs r0, 0x20\n\
-	strh r0, [r4, 0x30]\n\
-	lsls r0, r3, 16\n\
-	cmp r0, 0\n\
-	bge _080DB54A\n\
-	movs r0, 0\n\
-	strh r0, [r4, 0x2E]\n\
-_080DB54A:\n\
-	ldrh r0, [r4, 0x34]\n\
-	adds r0, 0x1\n\
-	strh r0, [r4, 0x34]\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	cmp r0, 0x1F\n\
-	bne _080DB55E\n\
-	adds r0, r4, 0\n\
-	bl DestroyAnimSprite\n\
-_080DB55E:\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n");
-}
-#endif
 
 void sub_80DB564(struct Sprite *sprite)
 {
-
     sprite->data[6] = 0;
     sprite->data[7] = 0x40;
     sprite->callback = sub_80DB578;
-
 }
 
 void sub_80DB578(struct Sprite *sprite)
 {
-
     switch (sprite->data[0])
     {
-        case 0:
-            if (++sprite->data[1] > 8)
-            {
-                sprite->data[1] = 0;
-                sprite->invisible ^= 1;
-                if (++sprite->data[2] > 5 && sprite->invisible)
-                {
-                    ++sprite->data[0];
-                }
-            }
-            break;
-        case 1:
-            DestroyAnimSprite(sprite);
+    case 0:
+        if (++sprite->data[1] > 8)
+        {
+            sprite->data[1] = 0;
+            sprite->invisible ^= 1;
+            if (++sprite->data[2] > 5 && sprite->invisible)
+                sprite->data[0]++;
+        }
+        break;
+    case 1:
+        DestroyAnimSprite(sprite);
     }
-
 }
 
 void sub_80DB5E4(struct Sprite *sprite)
 {
-
     s16 posx, posy;
     u16 rotation;
 
@@ -2821,12 +2559,10 @@ void sub_80DB5E4(struct Sprite *sprite)
     sub_8078FDC(sprite, 1, 0x100, 0x100, rotation);
 
     sprite->callback = sub_80DB6A0;
-
 }
 
 void sub_80DB6A0(struct Sprite *sprite)
 {
-
     sprite->data[4] += sprite->data[6];
     sprite->data[5] += sprite->data[7];
 
@@ -2837,12 +2573,10 @@ void sub_80DB6A0(struct Sprite *sprite)
     {
         move_anim_8074EE0(sprite);
     }
-
 }
 
 void unref_sub_80DB6E4(u8 taskId)
 {
-
     if (gBattleAnimArgs[0] == 0)
     {
         u8 spriteId = GetAnimBattlerSpriteId(0);
@@ -2855,5 +2589,4 @@ void unref_sub_80DB6E4(u8 taskId)
     }
 
     DestroyAnimVisualTask(taskId);
-
 }
