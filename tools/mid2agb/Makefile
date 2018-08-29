@@ -3,6 +3,7 @@ CXX := g++
 CXXFLAGS := -std=c++11 -O2 -s -Wall -Wno-switch -Werror
 
 SRCS := agb.cpp error.cpp main.cpp midi.cpp tables.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 HEADERS := agb.h error.h main.h midi.h tables.h
 
@@ -11,8 +12,12 @@ HEADERS := agb.h error.h main.h midi.h tables.h
 all: mid2agb
 	@:
 
-mid2agb: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
+$(OBJS): %.o: %.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+mid2agb: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 clean:
+	$(RM) *.o
 	$(RM) mid2agb mid2agb.exe

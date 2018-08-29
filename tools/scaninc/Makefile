@@ -1,8 +1,9 @@
 CXX = g++
 
-CXXFLAGS = -Wall -Werror -std=c++11 -Wc++11-compat -fno-exceptions -fno-rtti -O3 -s
+CXXFLAGS = -Wall -Werror -std=c++11 -fno-exceptions -fno-rtti -O2 -s
 
 SRCS = scaninc.cpp c_file.cpp asm_file.cpp formatter.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 HEADERS := scaninc.h asm_file.h c_file.h formatter.h
 
@@ -11,8 +12,12 @@ HEADERS := scaninc.h asm_file.h c_file.h formatter.h
 all: scaninc
 	@:
 
-scaninc: $(SRCS) $(HEADERS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
+$(OBJS): %.o: %.cpp $(HEADERS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+scaninc: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $@ $(LDFLAGS)
 
 clean:
+	$(RM) *.o
 	$(RM) scaninc scaninc.exe

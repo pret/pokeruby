@@ -1,6 +1,6 @@
 CC := gcc
 
-CFLAGS := -std=c99 -O3 -Wall -Wno-switch -Werror
+CFLAGS := -std=c99 -O2 -Wall -Wno-switch -Werror
 LDFLAGS := -s
 SRCS := asm_file.c c_file.c charmap.c preproc.c string_parser.c \
 	utf8.c stack.c my_string.c hash_map.c
