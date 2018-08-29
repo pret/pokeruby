@@ -3,7 +3,7 @@ OldaleTown_PokemonCenter_1F_MapScripts:: @ 8152F08
 	.byte 0
 
 OldaleTown_PokemonCenter_1F_MapScript1_152F0E:: @ 8152F0E
-	setrespawn 14
+	setrespawn HEAL_LOCATION_OLDALE_TOWN
 	call OldaleTown_PokemonCenter_1F_EventScript_19FD1B
 	end
 

@@ -79,7 +79,7 @@ extern void sub_80105EC(struct Sprite *);
 extern s32 sub_803FC34(u16);
 extern void LoadPlayerTrainerBankSprite();
 extern void sub_80313A0(struct Sprite *);
-extern u8 sub_8046400();
+extern u8 StartSendOutMonAnimation();
 extern void sub_80312F0(struct Sprite *);
 extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
@@ -1143,7 +1143,7 @@ void sub_811F864(u8 a, u8 b)
     StartSpriteAnim(&gSprites[gBankSpriteIds[a]], gBattleMonForms[a]);
     gSprites[gBankSpriteIds[a]].invisible = TRUE;
     gSprites[gBankSpriteIds[a]].callback = SpriteCallbackDummy;
-    gSprites[gUnknown_0300434C[a]].data[0] = sub_8046400(0, 0xFF);
+    gSprites[gUnknown_0300434C[a]].data[0] = StartSendOutMonAnimation(0, 0xFF);
 }
 
 void LinkPartnerHandleReturnPokeToBall(void)

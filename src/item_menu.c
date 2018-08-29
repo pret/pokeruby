@@ -538,7 +538,7 @@ static bool8 LoadBagGraphicsMultistep(void)
         ewramBagSetupStep++;
         break;
     case 1:
-        CpuCopy16(gUnknown_08E77004, gBGTilemapBuffers[2], 0x800);
+        CpuCopy16(gBagScreen_Tilemap, gBGTilemapBuffers[2], 0x800);
         ewramBagSetupStep++;
         break;
     case 2:
@@ -742,7 +742,7 @@ static void sub_80A37F8(u8 taskId)
 
 static void sub_80A3954(u16 *a)
 {
-    CpuCopy16(gUnknown_08E77004, a, 0x800);
+    CpuCopy16(gBagScreen_Tilemap, a, 0x800);
 }
 
 static void sub_80A396C(u16 *a, u8 b, u8 c, u8 d)
@@ -762,7 +762,7 @@ static void sub_80A39B8(u16 *a, u8 b)
 {
     u8 var = b * 2;
 
-    sub_809D104(a, 4, 10, gUnknown_08E96EC8, 0, var, 8, 2);
+    sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, 0, var, 8, 2);
 }
 
 static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
@@ -776,8 +776,8 @@ static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
         if (b == 5)
             r7 = 2;
 
-        sub_809D104(a, 4, 10, gUnknown_08E96EC8, 8 - c, r2, c, 2);
-        sub_809D104(a, c + 4, 10, gUnknown_08E96EC8, 0, r7, 8 - c, 2);
+        sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, 8 - c, r2, c, 2);
+        sub_809D104(a, c + 4, 10, gBagScreenLabels_Tilemap, 0, r7, 8 - c, 2);
     }
     else if (d == 1)
     {
@@ -785,8 +785,8 @@ static void sub_80A39E4(u16 *a, u8 b, u8 c, s8 d)
         if (b == 1)
             r7 = 10;
 
-        sub_809D104(a, 4, 10, gUnknown_08E96EC8, c, r7, 8 - c, 2);
-        sub_809D104(a, 12 - c, 10, gUnknown_08E96EC8, 0, r2, c, 2);
+        sub_809D104(a, 4, 10, gBagScreenLabels_Tilemap, c, r7, 8 - c, 2);
+        sub_809D104(a, 12 - c, 10, gBagScreenLabels_Tilemap, 0, r2, c, 2);
     }
 }
 
@@ -4024,7 +4024,7 @@ static int sub_80A7988(void)
 }
 
 static const u16 gPalette_83C170C[] = INCBIN_U16("graphics/unknown/83C170C.gbapal");
-static const u8 gSpriteImage_83C172C[] = INCBIN_U8("graphics/unknown_sprites/83C172C.4bpp");
+static const u8 gSpriteImage_BagSpinner[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
 
 const u8 gSpriteImage_UnusedCherry[] = INCBIN_U8("graphics/unused/cherry.4bpp");
 const u16 gSpritePalette_UnusedCherry[] = INCBIN_U16("graphics/unused/cherry.gbapal");
@@ -4258,7 +4258,7 @@ static const union AffineAnimCmd *const gSpriteAffineAnimTable_83C1D20[] =
 
 static const struct SpriteFrameImage gSpriteImageTable_83C1D28[] =
 {
-    {gSpriteImage_83C172C, sizeof(gSpriteImage_83C172C)},
+    {gSpriteImage_BagSpinner, sizeof(gSpriteImage_BagSpinner)},
 };
 
 static const struct SpritePalette sPokeballSpritePalette = {gPalette_83C170C, 8};

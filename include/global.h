@@ -96,12 +96,15 @@ enum LanguageId
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define POKEBLOCKS_COUNT    40
-#define EVENT_OBJECTS_COUNT   16
+#define PARTY_SIZE          6
+#define EVENT_OBJECTS_COUNT 16
 #define BERRY_TREES_COUNT   128
 #define FLAGS_COUNT         288
 #define VARS_COUNT          256
 #define MAIL_COUNT          16
 #define SECRET_BASES_COUNT  20
+#define TV_SHOWS_COUNT      25
+#define POKE_NEWS_COUNT     16
 #define PC_ITEMS_COUNT      50
 #define BAG_ITEMS_COUNT     20
 #define BAG_KEYITEMS_COUNT  20
@@ -686,8 +689,8 @@ struct SaveBlock1 /* 0x02025734 */
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-    /*0x2738*/ TVShow tvShows[25];
-    /*0x2ABC*/ struct PokeNews pokeNews[16];
+    /*0x2738*/ TVShow tvShows[TV_SHOWS_COUNT];
+    /*0x2ABC*/ struct PokeNews pokeNews[POKE_NEWS_COUNT];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
