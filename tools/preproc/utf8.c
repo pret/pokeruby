@@ -43,15 +43,15 @@ static const unsigned char s_byteTypeTable[] = {
     0xb, 0x6, 0x6, 0x6, 0x5, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8, 0x8,  // f0..ff
 };
 
-static const unsigned char s0 = 0 * 12;
-static const unsigned char s1 = 1 * 12;
-static const unsigned char s2 = 2 * 12;
-static const unsigned char s3 = 3 * 12;
-static const unsigned char s4 = 4 * 12;
-static const unsigned char s5 = 5 * 12;
-static const unsigned char s6 = 6 * 12;
-static const unsigned char s7 = 7 * 12;
-static const unsigned char s8 = 8 * 12;
+#define s0 (0 * 12)
+#define s1 (1 * 12)
+#define s2 (2 * 12)
+#define s3 (3 * 12)
+#define s4 (4 * 12)
+#define s5 (5 * 12)
+#define s6 (6 * 12)
+#define s7 (7 * 12)
+#define s8 (8 * 12)
 
 static const unsigned char s_transitionTable[] = {
     s0, s1, s2, s3, s5, s8, s7, s1, s1, s1, s4, s6,  // s0
