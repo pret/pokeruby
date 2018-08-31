@@ -1,6 +1,7 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s -DPNG_SKIP_SETJMP_CHECK $(shell ./setjmp.sh $(CC))
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s
+CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell ./setjmp.sh $(CC) $(CFLAGS))
 
 LIBS = -lpng -lz
 
@@ -13,7 +14,7 @@ all: gbagfx
 	@:
 
 $(OBJS): %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) $< -c -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $< -c -o $@
 
 gbagfx: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS) $(LIBS)

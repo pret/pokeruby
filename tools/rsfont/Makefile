@@ -1,7 +1,7 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s -DPNG_SKIP_SETJMP_CHECK $(shell ./setjmp.sh $(CC))
-
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s -DPNG_SKIP_SETJMP_CHECK
+CPPFLAGS :=  $(shell ./setjmp.sh $(CC) $(CFLAGS))
 LIBS = -lpng -lz
 
 SRCS = main.c convert_png.c util.c font.c
@@ -14,7 +14,7 @@ all: rsfont
 	@:
 
 $(OBJS): %.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 rsfont: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS) $(LIBS)
