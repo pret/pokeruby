@@ -20,8 +20,9 @@
 
 #include <cstdio>
 #include <string>
-#include <sys/stat.h>
-#include <unistd.h>
+
+#include <vector>
+#include <algorithm>
 
 #include "scaninc.h"
 #include "asm_file.h"
@@ -30,22 +31,44 @@ AsmFile::AsmFile(std::string &path)
 {
     m_path = path;
 
-    FILE *fp = std::fopen(path.c_str(), "rb");
+        FILE *fp;
+        if (path.empty() || path == "-")
+        {
+            path = "<stdin>";
+            fp = stdin;
+        }
+        else
+        {
+            fp = std::fopen(path.c_str(), "rb");
+        }
 
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
+        if (fp == NULL)
+            FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
-    int fd = fileno(fp);
-    struct stat buf;
-    fstat(fd, &buf);
-    m_size = buf.st_size;
+        m_size = 0;
+        std::vector<char> buf;
+        char tmp[1024];
+        ssize_t count;
+        while ((count = fread(tmp, 1, 1024, fp)) != 0)
+        {
+            if (ferror(fp))
+                FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
 
-    m_buffer = new char[m_size];
+            buf.insert(buf.end(), tmp, tmp + count);
 
-    if (std::fread(m_buffer, m_size, 1, fp) != 1)
-        FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
+            m_size += count;
 
-    std::fclose(fp);
+            if (feof(fp))
+                break;
+        }
+        if (m_size == 0)
+            FATAL_ERROR("Empty input!");
+        m_buffer = new char[m_size + 1];
+        std::copy(buf.begin(), buf.end(), m_buffer);
+        m_buffer[m_size] = 0;
+
+        if (fp != stdin)
+            fclose(fp);
 
     m_pos = 0;
     m_lineNum = 1;
