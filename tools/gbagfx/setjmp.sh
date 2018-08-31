@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # check for _setjmp, on BSD/macOS and Bionic, it is faster.
-$* -Wall -Werror -c -o /dev/null -x c - >/dev/null 2>/dev/null <<EOF && echo "-D_setjmp=setjmp"
+$* -Wall -Werror -c -o /dev/null -x c - >/dev/null 2>/dev/null <<EOF || echo "-D_setjmp=setjmp"
 #define _XOPEN_SOURCE_EXTENDED 1
 #include <setjmp.h>
 int main() {
