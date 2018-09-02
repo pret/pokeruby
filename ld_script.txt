@@ -700,6 +700,7 @@ SECTIONS {
         src/easy_chat_1.o(.rodata);
         src/easy_chat_2.o(.rodata);
         src/easy_chat_2.o(.data);
+        src/pokenav_before.o(.rodata);
         data/pokenav.o(.rodata);
         src/mon_markings.o(.rodata);
         src/mauville_man.o(.rodata);

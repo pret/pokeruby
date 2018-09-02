@@ -26,6 +26,7 @@
 #include "pokemon_summary_screen.h"
 #include "use_pokeblock.h"
 #include "constants/game_stat.h"
+#include "data/pokenav_city_maps.h"
 
 struct UnknownPokenav0
 {

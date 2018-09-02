@@ -115,9 +115,11 @@ gPokenavOutlineTiles:: @ 83E05F4
 gPokenavOutlineTilemap:: @ 83E0804
 	.incbin "graphics/pokenav/outline_map.bin.lz"
 
+/*
 	.align 2
 gPokenavCityMap_Lavaridge_0:: @ 83E096C
 	.incbin "graphics/pokenav/city_maps/lavaridge_0.bin.lz"
+
 
 	.align 2
 gPokenavCityMap_Fallarbor_0:: @ 83E09B0
@@ -202,6 +204,7 @@ gPokenavCityMap_Mossdeep_0:: @ 83E0F10
 	.align 2
 gPokenavCityMap_Petalburg_0:: @ 83E0F6C
 	.incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
+@ */
 
 @ 83E0FC8
 	.include "data/text/ribbon_descriptions.inc"
@@ -237,7 +240,7 @@ gUnknown_083E31D8:: @ 83E31D8
 	.4byte PCText_FindTough
 	.4byte PCText_ReturnToCondition
 
-	.align 2
+/*	.align 2
 gPokenavCityMaps:: @ 83E31F0
 	.4byte gPokenavCityMap_Littleroot_0, NULL
 	.4byte gPokenavCityMap_Oldale_0, NULL
@@ -255,6 +258,7 @@ gPokenavCityMaps:: @ 83E31F0
 	.4byte gPokenavCityMap_Mossdeep_0, gPokenavCityMap_Mossdeep_1
 	.4byte gPokenavCityMap_Sootopolis_0, NULL
 	.4byte gPokenavCityMap_EverGrande_0, gPokenavCityMap_EverGrande_1
+*/
 
 	.align 2
 gUnknown_083E3270:: @ 83E3270

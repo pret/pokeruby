@@ -598,7 +598,7 @@ static u16 GetRegionMapSectionAt(u16 x, u16 y)
         return MAPSEC_NOTHING;
     y -= MAPCURSOR_Y_MIN;
     x -= MAPCURSOR_X_MIN;
-    return sRegionMapLayout[x + y * 28];
+    return sRegionMapLayout[x + y * MAP_WIDTH];
 }
 
 static void InitializeCursorPosition(void)
