@@ -5,6 +5,7 @@
 #include "battle.h"
 #include "data2.h"
 #include "de_rom_8040FE0.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "constants/flags.h"
 #include "landmark.h"
@@ -201,7 +202,11 @@ extern const struct SpriteSheet gUnknown_083E4784;
 extern const struct SpritePalette gUnknown_083E478C;
 extern const struct SpriteTemplate gSpriteTemplate_83E4800;
 extern const s16 gUnknown_083E4794[][2];
-
+extern const u8 gUnknown_083E329C[];
+extern const struct SpritePalette gUnknown_083E4818;
+extern const struct SpriteTemplate gSpriteTemplate_83E4850;
+extern const struct SpritePalette gUnknown_083E4868;
+extern const struct SpriteTemplate gSpriteTemplate_83E4878;
 
 extern u16 gUnknown_020388B4;
 extern u8 gUnknown_020388B0[];
@@ -251,10 +256,10 @@ static void sub_80EEDC4();
 static void ShowMapNamePopUpWindow(void);
 static void sub_80F0954(u16, u16, u16);
 static bool8 sub_80F098C(void);
-void sub_80F445C(u8*, u16);
+static u8 *sub_80F445C(u8*, u16);
 static void sub_80F081C(u8);
 bool8 sub_80F0944(void);
-u8 *sub_80F4428(u8*, u16, u8);
+static u8 *sub_80F4428(u8*, u16, u8);
 void sub_80F700C(u8*, u16);
 static void sub_80F0B24(void);
 static bool8 sub_80F0B44(void);
@@ -277,7 +282,7 @@ void sub_80F13FC(void);
 void sub_80F1438(void);
 static void sub_80F1494(void);
 bool8 sub_80F162C(u8);
-void sub_80F01E0(u16);
+static void sub_80F01E0(u16);
 static void sub_80F19FC(void);
 static void sub_80F1A74(void);
 static void sub_80F1A80(void);
@@ -321,7 +326,7 @@ static void sub_80F3264(void);
 static void sub_80F3294(u8);
 static void sub_80F35B4(void);
 static void sub_80F363C(struct Sprite *sprite);
-void sub_80F4548(u16, u16, u8);
+static void SetMonMarkings(u16, u16, u8);
 static void sub_80F36F0(void);
 static bool8 sub_80F3724(void);
 static void sub_80F379C(void);
@@ -335,10 +340,25 @@ static bool8 sub_80F3B58(void);
 static void sub_80F3B94(void);
 static bool8 sub_80F3BD4(void);
 static void sub_80F3C2C(void);
-void sub_80F3F20(u8, u8);
+static void sub_80F3F20(u8, u8);
+static void sub_80F3FAC(void);
+static void sub_80F3FF0(void);
+static bool8 sub_80F4024(void);
+static void sub_80F42C4(u8*);
+static void sub_80F4394(void);
+u8 *sub_80F6514(u8*, u16, u8);
+static u8 *sub_80F443C(u8 *, u16);
+void sub_80F55AC(u8*, struct UnkPokenav11 *);
+static void sub_80F4CF0(void);
+static void sub_80F4D44(void);
+static bool8 sub_80F4D88(void);
+static void sub_80F53EC(struct UnkPokenav11*, struct UnkPokenav11*);
+static bool8 sub_80F5504(void);
+static bool8 sub_80F5264(void);
+static bool8 sub_80F52F8(void);
+static bool8 sub_80F5364(void);
 
 extern void sub_80F0900(void);
-extern void sub_80F443C(u8 *, u16);
 extern void sub_80F01A4(void);
 extern void sub_80EFD3C(void);
 extern void sub_8095C8C();
@@ -357,8 +377,6 @@ extern bool8 sub_80F6E9C();
 extern bool8 sub_80F6ED4();
 extern bool8 sub_80F70FC();
 extern void sub_80F708C(u32);
-extern void sub_80F4394();
-extern void sub_80F42C4();
 extern void sub_80F6F10();
 static extern void sub_80F15A8(void);
 extern void sub_80F6A4C();
@@ -367,13 +385,10 @@ extern u8 sub_80F68E8();
 extern void sub_80F66E0();
 extern void sub_80F638C();
 extern bool8 sub_80F63D0();
-extern void sub_80F4CF0();
 extern void sub_80EFF34();
 extern bool8 sub_80EFF68();
 extern void sub_80F6134();
 extern u8 sub_80F5DD4();
-extern void sub_80F4D44();
-extern bool8 sub_80F4D88();
 extern void sub_80F0264(u8);
 extern bool8 sub_80F02A0();
 extern void sub_80EF9F8(void);
@@ -386,8 +401,6 @@ extern bool8 sub_80EF874(void);
 extern bool8 sub_80F6250();
 extern void sub_80F6208();
 extern void sub_80F6C20();
-extern void sub_80F3FF0();
-extern bool8 sub_80F4024();
 extern void sub_80EF248(u8);
 extern bool8 sub_80EF284(u8);
 extern void sub_80EF428(u8, u8);
@@ -4670,7 +4683,7 @@ void sub_80F01A4(void)
     REG_WINOUT = 0x001B;
 }
 
-void sub_80F01E0(u16 a)
+static void sub_80F01E0(u16 a)
 {
     Menu_PrintText(gUnknown_083DFEC4->unk8829[a], 13, 1);
 
@@ -7306,7 +7319,7 @@ void sub_80F3698(void)
 {
     struct UnkUsePokeblockSub *var0 = &gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC];
     gUnknown_083DFEC4->unk8934[gUnknown_083DFEC4->unk8fe9] = gUnknown_083DFEC4->unk76B0.markings;
-    sub_80F4548(var0->unk1, var0->partyIdx, gUnknown_083DFEC4->unk76B0.markings);
+    SetMonMarkings(var0->unk1, var0->partyIdx, gUnknown_083DFEC4->unk76B0.markings);
     sub_80F7470();
 }
 
@@ -7635,7 +7648,7 @@ void sub_80F3DDC(struct Sprite *sprite)
     }
 }
 
-void sub_80F3E04(struct Sprite *sprite)
+static void sub_80F3E04(struct Sprite *sprite)
 {
     if (sprite->animEnded)
     {
@@ -7644,7 +7657,7 @@ void sub_80F3E04(struct Sprite *sprite)
     }
 }
 
-void sub_80F3E24(struct Sprite *sprite)
+static void sub_80F3E24(struct Sprite *sprite)
 {
     if (gUnknown_083DFEC4->unk8768)
     {
@@ -7660,4 +7673,1067 @@ void sub_80F3E24(struct Sprite *sprite)
         sprite->pos1.x = gUnknown_083E4794[sprite->data[0]][0] + 40;
         sprite->pos1.y = gUnknown_083E4794[sprite->data[0]][1] + 104;
     }
+}
+
+static void sub_80F3E9C(struct Sprite *sprite)
+{
+    if (sprite->data[1])
+    {
+        if (--sprite->data[1])
+            return;
+
+        SeekSpriteAnim(sprite, 0);
+        sprite->invisible = 0;
+    }
+
+    sub_80F3E24(sprite);
+    if (sprite->animEnded)
+    {
+        sprite->invisible = 1;
+        if (sprite->data[3] == sprite->data[2])
+        {
+            if (sprite->data[3] == 9)
+            {
+                sub_80F3FAC();
+                sprite->callback = sub_80F3E04;
+            }
+            else
+            {
+                sprite->callback = sub_80F3DDC;
+            }
+        }
+        else
+        {
+            sprite->callback = SpriteCallbackDummy;
+        }
+    }
+}
+
+static void sub_80F3F20(u8 arg0, u8 arg1)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (gUnknown_083DFEC4->unk8800[i])
+        {
+            gUnknown_083DFEC4->unk8800[i]->data[0] = i;
+            gUnknown_083DFEC4->unk8800[i]->data[1] = i * 16 + 1;
+            gUnknown_083DFEC4->unk8800[i]->data[2] = arg0;
+            gUnknown_083DFEC4->unk8800[i]->data[3] = i;
+
+            if (!arg1 || arg0 != 9)
+            {
+                gUnknown_083DFEC4->unk8800[i]->callback = sub_80F3E9C;
+            }
+            else
+            {
+                sub_80F3E24(gUnknown_083DFEC4->unk8800[i]);
+                sub_80F3FAC();
+                gUnknown_083DFEC4->unk8800[i]->callback = sub_80F3E04;
+                gUnknown_083DFEC4->unk8800[i]->invisible = 0;
+            }
+        }
+    }
+}
+
+static void sub_80F3FAC(void)
+{
+    u16 i;
+
+    for (i = 0; i < 10; i++)
+    {
+        if (gUnknown_083DFEC4->unk8800[i])
+        {
+            SeekSpriteAnim(gUnknown_083DFEC4->unk8800[i], 0);
+            gUnknown_083DFEC4->unk8800[i]->invisible = 0;
+        }
+    }
+}
+
+static void sub_80F3FF0(void)
+{
+    gUnknown_083DFEC4->unk306 = 0;
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F4024());
+}
+
+static bool8 sub_80F4024(void)
+{
+    u8 paletteIndex;
+    u8 spriteId;
+    struct SpritePalette spritePalette;
+
+    switch (gUnknown_083DFEC4->unk306)
+    {
+    case 0:
+        LZ77UnCompWram(gUnknown_083E329C, gUnknown_083DFEC4->unk131E4);
+        break;
+    case 1:
+    {
+        struct SpriteSheet spriteSheet = {
+            .data = gUnknown_083DFEC4->unk131E4,
+            .size = sizeof(gUnknown_083DFEC4->unk131E4),
+            .tag = 0x18,
+        };
+        LoadSpriteSheet(&spriteSheet);
+        break;
+    }
+    case 2:
+        spritePalette = gUnknown_083E4818;
+        LoadSpritePalette(&spritePalette);
+        paletteIndex = IndexOfSpritePaletteTag(0x10);
+        gUnknown_083DFEC4->unk308 = -3 & ~(1 << (paletteIndex + 0x10));
+        break;
+    case 3:
+        spriteId = CreateSprite(&gSpriteTemplate_83E4850, 218, 14, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gUnknown_083DFEC4->unk6D98 = &gSprites[spriteId];
+            gUnknown_083DFEC4->unk6D98->data[0] = 0;
+        }
+        else
+        {
+            gUnknown_083DFEC4->unk6D98 = NULL;
+        }
+
+        gUnknown_083DFEC4->unk306++;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+
+    gUnknown_083DFEC4->unk306++;
+    return TRUE;
+}
+
+void sub_80F4138(struct Sprite *sprite)
+{
+    sprite->pos2.y = -gUnknown_083DFEC4->unk030C;
+    if (sprite->pos2.y <= -32)
+    {
+        if (sprite->data[0] == 0)
+        {
+            sprite->invisible = 1;
+            sprite->data[0] = 1;
+        }
+    }
+    else
+    {
+        if (sprite->data[0] == 1)
+        {
+            sprite->invisible = 0;
+            sprite->data[0] = 0;
+        }
+    }
+}
+
+#ifdef NONMATCHING
+// close, but the last DmaCopy16 is sharing the 0x400 value from the beginning of the function.
+void sub_80F4194(u8 *arg0, u8 *text)
+{
+    u8 i;
+    u8 *tileBuffer;
+    u32 *tileBuf2;
+
+    tileBuffer = gUnknown_083DFEC8;
+    DmaFill16(3, 0x1111, tileBuffer, 0x280);
+    DmaFill16Defvars(3, 0x1111, 0x400 + tileBuffer, 0x280);
+    Text_InitWindow8004E3C(&gWindowTemplate_81E70F0, tileBuffer, text);
+
+    DmaClear16(3, tileBuffer + 0x220, 0x60);
+    DmaClear16(3, tileBuffer + 0x620, 0x60);
+
+    tileBuf2 = (int *)tileBuffer + 0x80;
+    tileBuf2[0] &= 0x0FFFFFFF;
+    tileBuf2[1] &= 0x0FFFFFFF;
+    tileBuf2[2] &= 0x0FFFFFFF;
+    tileBuf2[3] &= 0x0FFFFFFF;
+    tileBuf2[4] &= 0x0FFFFFFF;
+    tileBuf2[5] &= 0x0FFFFFFF;
+    tileBuf2[6] &= 0x0FFFFFFF;
+    tileBuf2[7] &= 0x0FFFFFFF;
+
+    tileBuf2 = (int *)tileBuffer + 0x180;
+    tileBuf2[0] &= 0x0FFFFFFF;
+    tileBuf2[1] &= 0x0FFFFFFF;
+    tileBuf2[2] &= 0x0FFFFFFF;
+    tileBuf2[3] &= 0x0FFFFFFF;
+    tileBuf2[4] &= 0x0FFFFFFF;
+    tileBuf2[5] &= 0x0FFFFFFF;
+    tileBuf2[6] &= 0x0FFFFFFF;
+    tileBuf2[7] &= 0x0FFFFFFF;
+
+    for (i = 0; i < 5; i++)
+    {
+        DmaCopy16(3, &tileBuffer[128 * i], &arg0[i * 256], 128);
+        DmaCopy16(3, &tileBuffer[128 * i + 0x400], &arg0[32 * ((i * 8) + 4)], 128);
+    }
+}
+#else
+NAKED
+void sub_80F4194(u8 *arg0, u8 *text)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x4\n\
+    adds r7, r0, 0\n\
+    adds r2, r1, 0\n\
+    ldr r0, _080F42A4 @ =gUnknown_083DFEC8\n\
+    ldr r6, [r0]      @ r6 = tileBuffer\n\
+    mov r0, sp        \n\
+    ldr r1, _080F42A8 @ =0x00001111\n\
+    adds r5, r1, 0\n\
+    strh r5, [r0]\n\
+    ldr r4, _080F42AC @ =0x040000d4\n\
+    str r0, [r4]\n\
+    str r6, [r4, 0x4]\n\
+    ldr r3, _080F42B0 @ =0x81000140\n\
+    str r3, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r0, 0x80\n\
+    lsls r0, 3\n\
+    adds r1, r6, r0\n\
+    mov r0, sp\n\
+    strh r5, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    str r3, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    ldr r0, _080F42B4 @ =gWindowTemplate_81E70F0\n\
+    adds r1, r6, 0\n\
+    bl Text_InitWindow8004E3C\n\
+    movs r3, 0x88\n\
+    lsls r3, 2\n\
+    adds r1, r6, r3\n\
+    mov r0, sp\n\
+    movs r3, 0\n\
+    strh r3, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    ldr r2, _080F42B8 @ =0x81000030\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r0, 0xC4\n\
+    lsls r0, 3\n\
+    adds r1, r6, r0\n\
+    mov r0, sp\n\
+    strh r3, [r0]\n\
+    str r0, [r4]\n\
+    str r1, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    movs r1, 0x80\n\
+    lsls r1, 2\n\
+    adds r2, r6, r1\n\
+    ldr r0, [r2]\n\
+    ldr r1, _080F42BC @ =0x0fffffff\n\
+    ands r0, r1\n\
+    str r0, [r2]\n\
+    ldr r0, [r2, 0x4]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x4]\n\
+    ldr r0, [r2, 0x8]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x8]\n\
+    ldr r0, [r2, 0xC]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0xC]\n\
+    ldr r0, [r2, 0x10]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x10]\n\
+    ldr r0, [r2, 0x14]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x14]\n\
+    ldr r0, [r2, 0x18]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x18]\n\
+    ldr r0, [r2, 0x1C]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x1C]\n\
+    movs r3, 0xC0\n\
+    lsls r3, 3\n\
+    adds r2, r6, r3\n\
+    ldr r0, [r2]\n\
+    ands r0, r1\n\
+    str r0, [r2]\n\
+    ldr r0, [r2, 0x4]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x4]\n\
+    ldr r0, [r2, 0x8]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x8]\n\
+    ldr r0, [r2, 0xC]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0xC]\n\
+    ldr r0, [r2, 0x10]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x10]\n\
+    ldr r0, [r2, 0x14]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x14]\n\
+    ldr r0, [r2, 0x18]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x18]\n\
+    ldr r0, [r2, 0x1C]\n\
+    ands r0, r1\n\
+    str r0, [r2, 0x1C]\n\
+    movs r1, 0\n\
+    ldr r2, _080F42C0 @ =0x80000040\n\
+_080F4268:\n\
+    lsls r0, r1, 7\n\
+    adds r0, r6, r0\n\
+    str r0, [r4]\n\
+    lsls r0, r1, 8\n\
+    adds r0, r7, r0\n\
+    str r0, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    lsls r0, r1, 7\n\
+    movs r3, 0x80\n\
+    lsls r3, 3\n\
+    adds r0, r3\n\
+    adds r0, r6, r0\n\
+    str r0, [r4]\n\
+    lsls r0, r1, 3\n\
+    adds r0, 0x4\n\
+    lsls r0, 5\n\
+    adds r0, r7, r0\n\
+    str r0, [r4, 0x4]\n\
+    str r2, [r4, 0x8]\n\
+    ldr r0, [r4, 0x8]\n\
+    adds r0, r1, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r1, r0, 24\n\
+    cmp r1, 0x4\n\
+    bls _080F4268\n\
+    add sp, 0x4\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080F42A4: .4byte gUnknown_083DFEC8\n\
+_080F42A8: .4byte 0x00001111\n\
+_080F42AC: .4byte 0x040000d4\n\
+_080F42B0: .4byte 0x81000140\n\
+_080F42B4: .4byte gWindowTemplate_81E70F0\n\
+_080F42B8: .4byte 0x81000030\n\
+_080F42BC: .4byte 0x0fffffff\n\
+_080F42C0: .4byte 0x80000040\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+static void sub_80F42C4(u8 *arg0)
+{
+    u16 i, tileOffset;
+    u8 spriteId;
+    struct SpriteSheet spriteSheet = {
+        .data = gUnknown_083DFEC4->unkD1E4[0],
+        .size = 0x500,
+        .tag = 0x1A,
+    };
+
+    sub_80F4194(gUnknown_083DFEC4->unkD1E4[0], arg0);
+    LoadSpriteSheet(&spriteSheet);
+    LoadSpritePalette(&gUnknown_083E4868);
+
+    tileOffset = 0;
+    for (i = 0; i < 5; i++)
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_83E4878, i * 32 + 113, 16, 0);
+        if (spriteId != MAX_SPRITES)
+        {
+            gSprites[spriteId].oam.tileNum += tileOffset;
+            gUnknown_083DFEC4->unkCED4[i] = &gSprites[spriteId];
+        }
+        else
+        {
+            gUnknown_083DFEC4->unkCED4[i] = NULL;
+        }
+
+        tileOffset += 8;
+    }
+}
+
+static void sub_80F4394(void)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (gUnknown_083DFEC4->unkCED4[i])
+            DestroySprite(gUnknown_083DFEC4->unkCED4[i]);
+    }
+
+    FreeSpriteTilesByTag(0x1A);
+    FreeSpritePaletteByTag(0x12);
+}
+
+void sub_80F43D4(u8 *arg0)
+{
+    u16 tile;
+
+    sub_80F4194(gUnknown_083DFEC4->unkD1E4[0], arg0);
+    tile = GetSpriteTileStartByTag(0x1A);
+    if (tile != 0xFFFF)
+        DmaCopy32Defvars(3, gUnknown_083DFEC4->unkD1E4[0], (void *)(VRAM + 0x10000 + (tile * 32)), 0x500);
+}
+
+static u8 *sub_80F4428(u8 *arg0, u16 arg1, u8 arg2)
+{
+    return sub_80F6514(arg0, arg1, arg2);
+}
+
+static u8 *sub_80F443C(u8 *arg0, u16 arg1)
+{
+    return AlignInt1InMenuWindow(StringCopy(arg0, gOtherText_Number), arg1, 56, 1);
+}
+
+static u8 *sub_80F445C(u8 *arg0, u16 arg1)
+{
+    u8 *buffer = AlignInt1InMenuWindow(arg0, arg1, 23, 1);
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x11;
+    buffer[2] = 1;
+    buffer += 3;
+    buffer[0] = CHAR_SLASH;
+    buffer += 1;
+    buffer[0] = EXT_CTRL_CODE_BEGIN;
+    buffer[1] = 0x11;
+    buffer[2] = 1;
+    buffer += 3;
+    buffer = AlignInt1InMenuWindow(buffer, gUnknown_083DFEC4->unk8774 + 1, 50, 1);
+    return buffer;
+}
+
+u32 sub_80F44B0(u16 box, u16 monIndex, int monDataField, int *text)
+{
+    if (box == 14)
+    {
+        if (monDataField == MON_DATA_NICKNAME || monDataField == MON_DATA_OT_NAME)
+            return GetMonData(&gPlayerParty[monIndex], monDataField, text);
+        else
+            return GetMonData(&gPlayerParty[monIndex], monDataField);
+    }
+    else
+    {
+        if (monDataField == MON_DATA_NICKNAME || monDataField == MON_DATA_OT_NAME)
+            return GetBoxMonData(&gPokemonStorage.boxes[box][monIndex], monDataField, text);
+        else
+            return GetBoxMonData(&gPokemonStorage.boxes[box][monIndex], monDataField);
+    }
+}
+
+static void SetMonMarkings(u16 box, u16 monIndex, u8 markings)
+{
+    if (box == 14)
+        SetMonData(&gPlayerParty[monIndex], MON_DATA_MARKINGS, &markings);
+    else
+        SetBoxMonData(&gPokemonStorage.boxes[box][monIndex], MON_DATA_MARKINGS, &markings);
+}
+
+static void sub_80F45A0(s16 arg0, u8 arg1)
+{
+    u8 box;
+    u8 var0 = gUnknown_083DFEC4->unk893c[arg0].unk4;
+    if (var0)
+    {
+        sub_80F4428(gUnknown_083DFEC4->unk8829[arg1], arg0, 0);
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        if (box == 14)
+            AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gOtherText_InParty, 64, 0);
+        else
+            AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gPokemonStorage.boxNames[box], 64, 0);
+
+        gUnknown_083DFEC4->unk8937[arg1] = 1;
+    }
+    else
+    {
+        AlignStringInMenuWindow(gUnknown_083DFEC4->unk8829[arg1], gEmptyString_81E72B0, 104, 0);
+        AlignStringInMenuWindow(gUnknown_083DFEC4->unk88E9[arg1], gEmptyString_81E72B0, 64, 0);
+        gUnknown_083DFEC4->unk8937[arg1] = var0;
+    }
+}
+
+static void sub_80F468C(s16 arg0, u8 arg1)
+{
+    u16 i;
+    u16 box;
+    u16 monIndex;
+
+    if (gUnknown_083DFEC4->unk893c[arg0].unk4)
+    {
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        monIndex = gUnknown_083DFEC4->unk893c[arg0].partyIdx;
+        gUnknown_083DFEC4->unk8ff0[arg1][0] = sub_80F44B0(box, monIndex, MON_DATA_COOL, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][1] = sub_80F44B0(box, monIndex, MON_DATA_TOUGH, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][2] = sub_80F44B0(box, monIndex, MON_DATA_SMART, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][3] = sub_80F44B0(box, monIndex, MON_DATA_CUTE, NULL);
+        gUnknown_083DFEC4->unk8ff0[arg1][4] = sub_80F44B0(box, monIndex, MON_DATA_BEAUTY, NULL);
+
+        gUnknown_083DFEC4->unk8931[arg1] = sub_80F44B0(box, monIndex, MON_DATA_SHEEN, NULL) != 255
+            ? sub_80F44B0(box, monIndex, MON_DATA_SHEEN, NULL) / 29
+            : 9;
+
+        gUnknown_083DFEC4->unk8934[arg1] = sub_80F44B0(box, monIndex, MON_DATA_MARKINGS, NULL);
+        sub_80F55AC(gUnknown_083DFEC4->unk8ff0[arg1], gUnknown_083DFEC4->unk9004[arg1]);
+    }
+    else
+    {
+        for (i = 0; i < 5; i++)
+        {
+            gUnknown_083DFEC4->unk8ff0[arg1][i] = 0;
+            gUnknown_083DFEC4->unk9004[arg1][i].unk0 = 0x9B;
+            gUnknown_083DFEC4->unk9004[arg1][i].unk2 = 0x5B;
+        }
+    }
+}
+
+static void sub_80F4824(s16 arg0, u8 arg1)
+{
+    u16 species;
+    u32 otId;
+    u32 personality;
+    u16 box;
+    u16 monIndex;
+
+    if (gUnknown_083DFEC4->unk893c[arg0].unk4)
+    {
+        box = gUnknown_083DFEC4->unk893c[arg0].unk1;
+        monIndex = gUnknown_083DFEC4->unk893c[arg0].partyIdx;
+        species = sub_80F44B0(box, monIndex, MON_DATA_SPECIES2, NULL);
+        otId = sub_80F44B0(box, monIndex, MON_DATA_OT_ID, NULL);
+        personality = sub_80F44B0(box, monIndex, MON_DATA_PERSONALITY, NULL);
+
+        HandleLoadSpecialPokePic(
+            &gMonFrontPicTable[species],
+            gMonFrontPicCoords[species].coords,
+            1,
+            (intptr_t)gUnknown_083DFEC4->unk131E4,
+            gUnknown_083DFEC4->unkD1E4[arg1],
+            species,
+            personality);
+
+        LZ77UnCompWram(GetMonSpritePalFromOtIdPersonality(species, otId, personality), gUnknown_083DFEC4->unk0[arg1]);
+        gUnknown_083DFEC4->unkD1D6[arg1] = species;
+    }
+}
+
+void sub_80F4900(s16 arg0, u8 arg1)
+{
+    sub_80F45A0(arg0, arg1);
+    sub_80F468C(arg0, arg1);
+    sub_80F4824(arg0, arg1);
+}
+
+void sub_80F492C(void)
+{
+    gUnknown_083DFEC4->unk8FE4 = 0;
+}
+
+#ifdef NONMATCHING
+// registers r3/r4 are swapped
+void sub_80F4944(struct UnkUsePokeblockSub *arg0)
+{
+    u16 i;
+    u16 r3;
+    u16 r4;
+
+    i = 0;
+    r4 = gUnknown_083DFEC4->unk8FE4;
+    r3 = r4 / 2;
+    while (r3 != r4)
+    {
+        if (arg0->unk0 > gUnknown_083DFEC4->unk893c[r3].unk0)
+            r4 = r3;
+        else
+            i = r3 + 1;
+
+        r3 = ((r4 - i) / 2) + i;
+    }
+
+    r4 = gUnknown_083DFEC4->unk8FE4;
+    while (r4 > r3)
+    {
+        gUnknown_083DFEC4->unk893c[r4] = gUnknown_083DFEC4->unk893c[r4 - 1];
+        r4--;
+    }
+
+    gUnknown_083DFEC4->unk893c[r3] = *arg0;
+    gUnknown_083DFEC4->unk8FE4++;
+}
+#else
+NAKED
+void sub_80F4944(struct UnkUsePokeblockSub *arg0)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r8\n\
+    push {r7}\n\
+    mov r12, r0\n\
+    movs r2, 0\n\
+    ldr r1, _080F4978 @ =gUnknown_083DFEC4\n\
+    ldr r5, [r1]\n\
+    ldr r3, _080F497C @ =0x00008fe4\n\
+    adds r0, r5, r3\n\
+    ldrh r4, [r0]\n\
+    lsrs r3, r4, 1\n\
+    mov r8, r1\n\
+    cmp r4, r3\n\
+    beq _080F499C\n\
+    adds r6, r5, 0\n\
+    mov r0, r12\n\
+    ldrb r5, [r0]\n\
+    ldr r7, _080F4980 @ =0x0000893c\n\
+_080F4968:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r6, r0\n\
+    adds r0, r7\n\
+    ldrb r0, [r0]\n\
+    cmp r5, r0\n\
+    bls _080F4984\n\
+    adds r4, r3, 0\n\
+    b _080F498A\n\
+    .align 2, 0\n\
+_080F4978: .4byte gUnknown_083DFEC4\n\
+_080F497C: .4byte 0x00008fe4\n\
+_080F4980: .4byte 0x0000893c\n\
+_080F4984:\n\
+    adds r0, r3, 0x1\n\
+    lsls r0, 16\n\
+    lsrs r2, r0, 16\n\
+_080F498A:\n\
+    subs r0, r4, r2\n\
+    lsrs r1, r0, 31\n\
+    adds r0, r1\n\
+    asrs r0, 1\n\
+    adds r0, r2, r0\n\
+    lsls r0, 16\n\
+    lsrs r3, r0, 16\n\
+    cmp r4, r3\n\
+    bne _080F4968\n\
+_080F499C:\n\
+    mov r1, r8\n\
+    ldr r2, [r1]\n\
+    ldr r1, _080F49EC @ =0x00008fe4\n\
+    adds r0, r2, r1\n\
+    ldrh r4, [r0]\n\
+    lsls r6, r3, 2\n\
+    cmp r4, r3\n\
+    bls _080F49C6\n\
+    ldr r0, _080F49F0 @ =0x0000893c\n\
+    adds r5, r2, r0\n\
+_080F49B0:\n\
+    lsls r2, r4, 2\n\
+    adds r2, r5, r2\n\
+    subs r1, r4, 0x1\n\
+    lsls r0, r1, 2\n\
+    adds r0, r5, r0\n\
+    ldr r0, [r0]\n\
+    str r0, [r2]\n\
+    lsls r1, 16\n\
+    lsrs r4, r1, 16\n\
+    cmp r4, r3\n\
+    bhi _080F49B0\n\
+_080F49C6:\n\
+    mov r1, r8\n\
+    ldr r2, [r1]\n\
+    ldr r3, _080F49F0 @ =0x0000893c\n\
+    adds r0, r2, r3\n\
+    adds r0, r6\n\
+    mov r3, r12\n\
+    ldr r1, [r3]\n\
+    str r1, [r0]\n\
+    ldr r0, _080F49EC @ =0x00008fe4\n\
+    adds r2, r0\n\
+    ldrh r0, [r2]\n\
+    adds r0, 0x1\n\
+    strh r0, [r2]\n\
+    pop {r3}\n\
+    mov r8, r3\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_080F49EC: .4byte 0x00008fe4\n\
+_080F49F0: .4byte 0x0000893c\n\
+    .syntax divided\n");
+}
+#endif // NONMATCHING
+
+void sub_80F49F4(void)
+{
+    u16 i;
+
+    gUnknown_083DFEC4->unk893c[0].unk2 = 1;
+    for (i = 1; i < gUnknown_083DFEC4->unk8FE4; i++)
+    {
+        if (gUnknown_083DFEC4->unk893c[i].unk0 == gUnknown_083DFEC4->unk893c[i - 1].unk0)
+            gUnknown_083DFEC4->unk893c[i].unk2 = gUnknown_083DFEC4->unk893c[i - 1].unk2;
+        else
+            gUnknown_083DFEC4->unk893c[i].unk2 = i + 1;
+    }
+
+    gUnknown_083DFEC4->unk876C = 0;
+    gUnknown_083DFEC4->unk8770 = 0;
+    gUnknown_083DFEC4->unk876E = 0;
+    gUnknown_083DFEC4->unk8772 = gUnknown_083DFEC4->unk8FE4 < 9 ? (gUnknown_083DFEC4->unk8FE4 - 1) : 7;
+    gUnknown_083DFEC4->unk8774 = gUnknown_083DFEC4->unk8FE4 - 1;
+    gUnknown_083DFEC4->unk87C9 = gUnknown_083DFEC4->unk8774 > 7;
+}
+
+void sub_80F4B20(void)
+{
+    s16 var0;
+    s16 var1;
+
+    sub_80F4900(gUnknown_083DFEC4->unk87DC, 0);
+    sub_80F2E18(0);
+    if (gUnknown_083DFEC4->unk87DA == 1)
+    {
+        gUnknown_083DFEC4->unk8fe9 = 0;
+        gUnknown_083DFEC4->unk8FEA = 0;
+        gUnknown_083DFEC4->unk8FEB = 0;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk8fe9 = 0;
+        gUnknown_083DFEC4->unk8FEA = 1;
+        gUnknown_083DFEC4->unk8FEB = 2;
+
+        var0 = gUnknown_083DFEC4->unk87DC + 1;
+        if (var0 >= gUnknown_083DFEC4->unk87DA)
+            var0 = 0;
+
+        var1 = gUnknown_083DFEC4->unk87DC - 1;
+        if (var1 < 0)
+            var1 = gUnknown_083DFEC4->unk87DA - 1;
+
+        sub_80F4900(var0, 1);
+        sub_80F4900(var1, 2);
+    }
+}
+
+void sub_80F4BD0(void)
+{
+    u16 i, j;
+
+    for (i = 0, j = 0; i < gUnknown_083DFEC4->unk8828; i++)
+    {
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            gUnknown_083DFEC4->unk893c[j].unk1 = 14;
+            gUnknown_083DFEC4->unk893c[j].partyIdx = i;
+            gUnknown_083DFEC4->unk893c[j].unk2 = j + 1;
+            gUnknown_083DFEC4->unk893c[j].unk4 = 1;
+            j++;
+        }
+    }
+
+    gUnknown_083DFEC4->unk893c[j].unk1 = 0;
+    gUnknown_083DFEC4->unk893c[j].partyIdx = 0;
+    gUnknown_083DFEC4->unk893c[j].unk2 = 0;
+    gUnknown_083DFEC4->unk893c[j].unk4 = 0;
+    gUnknown_083DFEC4->unk87DC = 0;
+    gUnknown_083DFEC4->unk87DA = j + 1;
+    sub_80F4B20();
+    gUnknown_083DFEC4->unk87CB = 1;
+}
+
+static void sub_80F4CF0(void)
+{
+    gUnknown_083DFEC4->unk87DC = gUnknown_083DFEC4->unk876E;
+    sub_80F4B20();
+
+    if (gUnknown_083DFEC4->unk8774 == 0)
+        gUnknown_083DFEC4->unk87CB = 0;
+    else
+        gUnknown_083DFEC4->unk87CB = 1;
+}
+
+static void sub_80F4D44(void)
+{
+    gUnknown_083DFEC4->unk8FE6 = 0;
+    gUnknown_083DFEC4->unk8FE7 = 0;
+    sub_80F492C();
+
+    if (!gUnknown_083DFEC4->unk6DAC)
+        while (sub_80F4D88());
+}
+
+static bool8 sub_80F4D88(void)
+{
+    u16 i;
+    register int mask asm("r3"); // FIXME
+    int nextValue;
+    struct UnkUsePokeblockSub var0;
+
+    switch (gUnknown_083DFEC4->unk8FE6)
+    {
+    default:
+        var0.unk4 = 1;
+        for (i = 0; i < 15; i++)
+        {
+
+            if (GetBoxMonData(&gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7], MON_DATA_SPECIES)
+             && !GetBoxMonData(&gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7], MON_DATA_IS_EGG))
+            {
+                var0.unk1 = gUnknown_083DFEC4->unk8FE6;
+                var0.partyIdx = gUnknown_083DFEC4->unk8FE7;
+                var0.unk0 = GetBoxMonData(
+                    &gPokemonStorage.boxes[gUnknown_083DFEC4->unk8FE6][gUnknown_083DFEC4->unk8FE7],
+                    gUnknown_083DFEC4->unk87D8);
+                sub_80F4944(&var0);
+            }
+
+            gUnknown_083DFEC4->unk8FE7++;
+            mask = 0xFF;
+            if (gUnknown_083DFEC4->unk8FE7 == 30)
+            {
+                gUnknown_083DFEC4->unk8FE7 = 0;
+                nextValue = gUnknown_083DFEC4->unk8FE6 + 1;
+                gUnknown_083DFEC4->unk8FE6 = nextValue;
+                if ((nextValue & mask) == 14)
+                    break;
+            }
+        }
+        break;
+    case 14:
+        var0.unk4 = 1;
+        var0.unk1 = 14;
+        for (i = 0; i < gUnknown_083DFEC4->unk8828; i++)
+        {
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                var0.partyIdx = i;
+                var0.unk0 = GetMonData(&gPlayerParty[i], gUnknown_083DFEC4->unk87D8);
+                sub_80F4944(&var0);
+            }
+        }
+
+        sub_80F49F4();
+        gUnknown_083DFEC4->unk87DA = gUnknown_083DFEC4->unk8FE4;
+        gUnknown_083DFEC4->unk8FE6++;
+        break;
+    case 15:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void sub_80F4F78(void)
+{
+    sub_80F53EC(gUnknown_083DFEC4->unk9040, gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9]);
+    sub_80F5504();
+}
+
+bool8 sub_80F4FB4(void)
+{
+    bool8 var0 = sub_80F5504();
+    bool8 var1 = sub_80F170C();
+    return var0 || var1;
+}
+
+void sub_80F4FDC(void)
+{
+    if (gUnknown_083DFEC4->unk76AA || gUnknown_083DFEC4->unk87DC != gUnknown_083DFEC4->unk8828)
+        sub_80F53EC(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9040);
+}
+
+bool8 sub_80F5038(void)
+{
+    bool8 var0 = sub_80F5504();
+    bool8 var1 = sub_80F173C();
+    return var0 || var1;
+}
+
+void sub_80F5060(u8 arg0)
+{
+    u16 var0;
+    u8 var1;
+    u8 var2;
+
+    if (arg0)
+        var0 = gUnknown_083DFEC4->unk8FEB;
+    else
+        var0 = gUnknown_083DFEC4->unk8FEA;
+
+    sub_80F53EC(gUnknown_083DFEC4->unk9004[gUnknown_083DFEC4->unk8fe9], gUnknown_083DFEC4->unk9004[var0]);
+    var1 = gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk4;
+    if (arg0)
+    {
+        gUnknown_083DFEC4->unk8FEB = gUnknown_083DFEC4->unk8FEA;
+        gUnknown_083DFEC4->unk8FEA = gUnknown_083DFEC4->unk8fe9;
+        gUnknown_083DFEC4->unk8fe9 = var0;
+        gUnknown_083DFEC4->unk8FEC = gUnknown_083DFEC4->unk8FEB;
+
+        gUnknown_083DFEC4->unk87DC = gUnknown_083DFEC4->unk87DC
+            ? gUnknown_083DFEC4->unk87DC - 1
+            : gUnknown_083DFEC4->unk87DA - 1;
+        gUnknown_083DFEC4->unk8FEE = gUnknown_083DFEC4->unk87DC
+            ? gUnknown_083DFEC4->unk87DC - 1
+            : gUnknown_083DFEC4->unk87DA - 1;
+    }
+    else
+    {
+        gUnknown_083DFEC4->unk8FEA = gUnknown_083DFEC4->unk8FEB;
+        gUnknown_083DFEC4->unk8FEB = gUnknown_083DFEC4->unk8fe9;
+        gUnknown_083DFEC4->unk8fe9 = var0;
+        gUnknown_083DFEC4->unk8FEC = gUnknown_083DFEC4->unk8FEA;
+
+        gUnknown_083DFEC4->unk87DC = (gUnknown_083DFEC4->unk87DC < gUnknown_083DFEC4->unk87DA - 1)
+            ? gUnknown_083DFEC4->unk87DC + 1
+            : 0;
+        gUnknown_083DFEC4->unk8FEE = (gUnknown_083DFEC4->unk87DC < gUnknown_083DFEC4->unk87DA - 1)
+            ? gUnknown_083DFEC4->unk87DC + 1
+            : 0;
+    }
+
+    var2 = gUnknown_083DFEC4->unk893c[gUnknown_083DFEC4->unk87DC].unk4;
+    if (!var1)
+        gUnknown_083DFEC4->unk87E0 = sub_80F5264;
+    else if (!var2)
+        gUnknown_083DFEC4->unk87E0 = sub_80F52F8;
+    else
+        gUnknown_083DFEC4->unk87E0 = sub_80F5364;
+
+    gUnknown_083DFEC4->unk87DE = 0;
+}
+
+bool8 gpu_sync_bg_show(void)
+{
+    return gUnknown_083DFEC4->unk87E0();
+}
+
+static bool8 sub_80F5264(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        sub_80F2E18(gUnknown_083DFEC4->unk8fe9);
+        sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+        gUnknown_083DFEC4->unk87DE++;
+        // fall through
+    case 1:
+        if (!sub_80F4FB4())
+        {
+            sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 2:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F52F8(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        if (!sub_80F5038())
+        {
+            sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+            sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 1:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static bool8 sub_80F5364(void)
+{
+    switch (gUnknown_083DFEC4->unk87DE)
+    {
+    case 0:
+        sub_80F5504();
+        if (!sub_80F173C())
+        {
+            sub_80F2E18(gUnknown_083DFEC4->unk8fe9);
+            sub_80F01E0(gUnknown_083DFEC4->unk8fe9);
+            gUnknown_083DFEC4->unk87DE++;
+        }
+        break;
+    case 1:
+        if (!sub_80F4FB4())
+            gUnknown_083DFEC4->unk87DE++;
+        break;
+    case 2:
+        sub_80F4900(gUnknown_083DFEC4->unk8FEE, gUnknown_083DFEC4->unk8FEC);
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void sub_80F53EC(struct UnkPokenav11 *arg0, struct UnkPokenav11 *arg1)
+{
+    u16 i, j;
+    int r5;
+    int r6;
+
+    for (i = 0; i < 5; i++)
+    {
+        r5 = arg0[i].unk0 << 8;
+        r6 = ((arg1[i].unk0 - arg0[i].unk0) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            gUnknown_083DFEC4->unk9054[j][i].unk0 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+
+        gUnknown_083DFEC4->unk9054[j][i].unk0 = arg1[i].unk0;
+        r5 = arg0[i].unk2 << 8;
+        r6 = ((arg1[i].unk2 - arg0[i].unk2) << 8) / 10;
+        for (j = 0; j < 9; j++)
+        {
+            gUnknown_083DFEC4->unk9054[j][i].unk2 = (r5 >> 8) + ((r5 >> 7) & 1);
+            r5 += r6;
+        }
+
+        gUnknown_083DFEC4->unk9054[j][i].unk2 = arg1[i].unk2;
+    }
+
+    gUnknown_083DFEC4->unk9342 = 0;
+}
+
+static bool8 sub_80F5504(void)
+{
+    if (gUnknown_083DFEC4->unk9342 < 10)
+    {
+        sub_80F556C(gUnknown_083DFEC4->unk9054[gUnknown_083DFEC4->unk9342++]);
+        return gUnknown_083DFEC4->unk9342 != 10;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+void sub_80F5550(struct UnkPokenav11 *arg0, struct UnkPokenav11 *arg1)
+{
+    sub_80F53EC(arg0, arg1);
+}
+
+bool8 sub_80F555C(void)
+{
+    return sub_80F5504();
+}
+
+void sub_80F556C(struct UnkPokenav11 *arg0)
+{
+    u16 i;
+
+    for (i = 0; i < 5; i++)
+        gUnknown_083DFEC4->unk911C[i] = arg0[i];
+
+    gUnknown_083DFEC4->unk9344 = 1;
 }

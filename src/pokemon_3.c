@@ -12,6 +12,7 @@
 #include "main.h"
 #include "move_tutor_menu.h"
 #include "pokemon.h"
+#include "pokedex.h"
 #include "random.h"
 #include "overworld.h"
 #include "rom_8077ABC.h"
@@ -390,10 +391,10 @@ u16 HoennPokedexNumToSpecies(u16 hoennNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToHoennPokedexNum[species] != hoennNum)
+    while (species < POKEMON_SLOTS_NUMBER - 1 && gSpeciesToHoennPokedexNum[species] != hoennNum)
         species++;
 
-    if (species == 411)
+    if (species == POKEMON_SLOTS_NUMBER - 1)
         return 0;
 
     return species + 1;
@@ -408,10 +409,10 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
 
     species = 0;
 
-    while (species < 411 && gSpeciesToNationalPokedexNum[species] != nationalNum)
+    while (species < POKEMON_SLOTS_NUMBER - 1 && gSpeciesToNationalPokedexNum[species] != nationalNum)
         species++;
 
-    if (species == 411)
+    if (species == POKEMON_SLOTS_NUMBER - 1)
         return 0;
 
     return species + 1;
@@ -426,10 +427,10 @@ u16 NationalToHoennOrder(u16 nationalNum)
 
     hoennNum = 0;
 
-    while (hoennNum < 411 && gHoennToNationalOrder[hoennNum] != nationalNum)
+    while (hoennNum < POKEMON_SLOTS_NUMBER - 1 && gHoennToNationalOrder[hoennNum] != nationalNum)
         hoennNum++;
 
-    if (hoennNum == 411)
+    if (hoennNum == POKEMON_SLOTS_NUMBER - 1)
         return 0;
 
     return hoennNum + 1;
@@ -1095,7 +1096,7 @@ u16 SpeciesToPokedexNum(u16 species)
     else
     {
         species = SpeciesToHoennPokedexNum(species);
-        if (species <= 202)
+        if (species <= HOENN_DEX_COUNT)
             return species;
         return 0xFFFF;
     }

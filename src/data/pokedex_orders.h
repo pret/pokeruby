@@ -1,1609 +1,1609 @@
 #if ENGLISH
 static const u16 gPokedexOrder_Alphabetical[] =
 {
-    387,
-    388,
-    389,
-    390,
-    391,
-    392,
-    393,
-    394,
-    395,
-    396,
-    397,
-    398,
-    399,
-    400,
-    401,
-    402,
-    403,
-    404,
-    405,
-    406,
-    407,
-    408,
-    409,
-    410,
-    411,
-     63,  // Abra
-    359,  // Absol
-    142,  // Aerodactyl
-    306,  // Aggron
-    190,  // Aipom
-     65,  // Alakazam
-    334,  // Altaria
-    181,  // Ampharos
-    347,  // Anorith
-     24,  // Arbok
-     59,  // Arcanine
-    168,  // Ariados
-    348,  // Armaldo
-    304,  // Aron
-    144,  // Articuno
-    184,  // Azumarill
-    298,  // Azurill
-    371,  // Bagon
-    343,  // Baltoy
-    354,  // Banette
-    339,  // Barboach
-    153,  // Bayleef
-    267,  // Beautifly
-     15,  // Beedrill
-    374,  // Beldum
-    182,  // Bellossom
-     69,  // Bellsprout
-      9,  // Blastoise
-    257,  // Blaziken
-    242,  // Blissey
-    286,  // Breloom
-      1,  // Bulbasaur
-     12,  // Butterfree
-    331,  // Cacnea
-    332,  // Cacturne
-    323,  // Camerupt
-    318,  // Carvanha
-    268,  // Cascoon
-    351,  // Castform
-     10,  // Caterpie
-    251,  // Celebi
-    113,  // Chansey
-      6,  // Charizard
-      4,  // Charmander
-      5,  // Charmeleon
-    152,  // Chikorita
-    358,  // Chimecho
-    170,  // Chinchou
-    366,  // Clamperl
-    344,  // Claydol
-     36,  // Clefable
-     35,  // Clefairy
-    173,  // Cleffa
-     91,  // Cloyster
-    256,  // Combusken
-    341,  // Corphish
-    222,  // Corsola
-    346,  // Cradily
-    342,  // Crawdaunt
-    169,  // Crobat
-    159,  // Croconaw
-    104,  // Cubone
-    155,  // Cyndaquil
-    301,  // Delcatty
-    225,  // Delibird
-    386,  // Deoxys
-     87,  // Dewgong
-     50,  // Diglett
-    132,  // Ditto
-     85,  // Dodrio
-     84,  // Doduo
-    232,  // Donphan
-    148,  // Dragonair
-    149,  // Dragonite
-    147,  // Dratini
-     96,  // Drowzee
-     51,  // Dugtrio
-    206,  // Dunsparce
-    356,  // Dusclops
-    355,  // Duskull
-    269,  // Dustox
-    133,  // Eevee
-     23,  // Ekans
-    125,  // Electabuzz
-    309,  // Electrike
-    101,  // Electrode
-    239,  // Elekid
-    244,  // Entei
-    196,  // Espeon
-    102,  // Exeggcute
-    103,  // Exeggutor
-    295,  // Exploud
-     83,  // Farfetch'd
-     22,  // Fearow
-    349,  // Feebas
-    160,  // Feraligatr
-    180,  // Flaaffy
-    136,  // Flareon
-    330,  // Flygon
-    205,  // Forretress
-    162,  // Furret
-    282,  // Gardevoir
-     92,  // Gastly
-     94,  // Gengar
-     74,  // Geodude
-    203,  // Girafarig
-    362,  // Glalie
-    207,  // Gligar
-     44,  // Gloom
-     42,  // Golbat
-    118,  // Goldeen
-     55,  // Golduck
-     76,  // Golem
-    368,  // Gorebyss
-    210,  // Granbull
-     75,  // Graveler
-     88,  // Grimer
-    383,  // Groudon
-    253,  // Grovyle
-     58,  // Growlithe
-    326,  // Grumpig
-    316,  // Gulpin
-    130,  // Gyarados
-    297,  // Hariyama
-     93,  // Haunter
-    214,  // Heracross
-    107,  // Hitmonchan
-    106,  // Hitmonlee
-    237,  // Hitmontop
-    250,  // Ho-Oh
-    163,  // Hoothoot
-    187,  // Hoppip
-    116,  // Horsea
-    229,  // Houndoom
-    228,  // Houndour
-    367,  // Huntail
-     97,  // Hypno
-    174,  // Igglybuff
-    314,  // Illumise
-      2,  // Ivysaur
-     39,  // Jigglypuff
-    385,  // Jirachi
-    135,  // Jolteon
-    189,  // Jumpluff
-    124,  // Jynx
-    140,  // Kabuto
-    141,  // Kabutops
-     64,  // Kadabra
-     14,  // Kakuna
-    115,  // Kangaskhan
-    352,  // Kecleon
-    230,  // Kingdra
-     99,  // Kingler
-    281,  // Kirlia
-    109,  // Koffing
-     98,  // Krabby
-    382,  // Kyogre
-    305,  // Lairon
-    171,  // Lanturn
-    131,  // Lapras
-    246,  // Larvitar
-    380,  // Latias
-    381,  // Latios
-    166,  // Ledian
-    165,  // Ledyba
-    108,  // Lickitung
-    345,  // Lileep
-    264,  // Linoone
-    271,  // Lombre
-    270,  // Lotad
-    294,  // Loudred
-    272,  // Ludicolo
-    249,  // Lugia
-    337,  // Lunatone
-    370,  // Luvdisc
-     68,  // Machamp
-     67,  // Machoke
-     66,  // Machop
-    240,  // Magby
-    219,  // Magcargo
-    129,  // Magikarp
-    126,  // Magmar
-     81,  // Magnemite
-     82,  // Magneton
-    296,  // Makuhita
-    310,  // Manectric
-     56,  // Mankey
-    226,  // Mantine
-    179,  // Mareep
-    183,  // Marill
-    105,  // Marowak
-    259,  // Marshtomp
-    284,  // Masquerain
-    303,  // Mawile
-    308,  // Medicham
-    307,  // Meditite
-    154,  // Meganium
-     52,  // Meowth
-    376,  // Metagross
-    375,  // Metang
-     11,  // Metapod
-    151,  // Mew
-    150,  // Mewtwo
-    262,  // Mightyena
-    350,  // Milotic
-    241,  // Miltank
-    312,  // Minun
-    200,  // Misdreavus
-    146,  // Moltres
-    122,  // Mr. mime
-    258,  // Mudkip
-     89,  // Muk
-    198,  // Murkrow
-    177,  // Natu
-     34,  // Nidoking
-     31,  // Nidoqueen
-     29,  // Nidoran?
-     32,  // Nidoran?
-     30,  // Nidorina
-     33,  // Nidorino
-    290,  // Nincada
-     38,  // Ninetales
-    291,  // Ninjask
-    164,  // Noctowl
-    299,  // Nosepass
-    322,  // Numel
-    274,  // Nuzleaf
-    224,  // Octillery
-     43,  // Oddish
-    138,  // Omanyte
-    139,  // Omastar
-     95,  // Onix
-     46,  // Paras
-     47,  // Parasect
-    279,  // Pelipper
-     53,  // Persian
-    231,  // Phanpy
-    172,  // Pichu
-     18,  // Pidgeot
-     17,  // Pidgeotto
-     16,  // Pidgey
-     25,  // Pikachu
-    221,  // Piloswine
-    204,  // Pineco
-    127,  // Pinsir
-    311,  // Plusle
-    186,  // Politoed
-     60,  // Poliwag
-     61,  // Poliwhirl
-     62,  // Poliwrath
-     77,  // Ponyta
-    261,  // Poochyena
-    137,  // Porygon
-    233,  // Porygon2
-     57,  // Primeape
-     54,  // Psyduck
-    247,  // Pupitar
-    195,  // Quagsire
-    156,  // Quilava
-    211,  // Qwilfish
-     26,  // Raichu
-    243,  // Raikou
-    280,  // Ralts
-     78,  // Rapidash
-     20,  // Raticate
-     19,  // Rattata
-    384,  // Rayquaza
-    378,  // Regice
-    377,  // Regirock
-    379,  // Registeel
-    369,  // Relicanth
-    223,  // Remoraid
-    112,  // Rhydon
-    111,  // Rhyhorn
-    315,  // Roselia
-    302,  // Sableye
-    373,  // Salamence
-     27,  // Sandshrew
-     28,  // Sandslash
-    254,  // Sceptile
-    212,  // Scizor
-    123,  // Scyther
-    117,  // Seadra
-    119,  // Seaking
-    364,  // Sealeo
-    273,  // Seedot
-     86,  // Seel
-    161,  // Sentret
-    336,  // Seviper
-    319,  // Sharpedo
-    292,  // Shedinja
-    372,  // Shelgon
-     90,  // Shellder
-    275,  // Shiftry
-    285,  // Shroomish
-    213,  // Shuckle
-    353,  // Shuppet
-    266,  // Silcoon
-    227,  // Skarmory
-    188,  // Skiploom
-    300,  // Skitty
-    289,  // Slaking
-    287,  // Slakoth
-     80,  // Slowbro
-    199,  // Slowking
-     79,  // Slowpoke
-    218,  // Slugma
-    235,  // Smeargle
-    238,  // Smoochum
-    215,  // Sneasel
-    143,  // Snorlax
-    361,  // Snorunt
-    209,  // Snubbull
-    338,  // Solrock
-     21,  // Spearow
-    363,  // Spheal
-    167,  // Spinarak
-    327,  // Spinda
-    325,  // Spoink
-      7,  // Squirtle
-    234,  // Stantler
-    121,  // Starmie
-    120,  // Staryu
-    208,  // Steelix
-    185,  // Sudowoodo
-    245,  // Suicune
-    192,  // Sunflora
-    191,  // Sunkern
-    283,  // Surskit
-    333,  // Swablu
-    317,  // Swalot
-    260,  // Swampert
-    277,  // Swellow
-    220,  // Swinub
-    276,  // Taillow
-    114,  // Tangela
-    128,  // Tauros
-    216,  // Teddiursa
-     72,  // Tentacool
-     73,  // Tentacruel
-    175,  // Togepi
-    176,  // Togetic
-    255,  // Torchic
-    324,  // Torkoal
-    158,  // Totodile
-    328,  // Trapinch
-    252,  // Treecko
-    357,  // Tropius
-    157,  // Typhlosion
-    248,  // Tyranitar
-    236,  // Tyrogue
-    197,  // Umbreon
-    201,  // Unown
-    217,  // Ursaring
-    134,  // Vaporeon
-     49,  // Venomoth
-     48,  // Venonat
-      3,  // Venusaur
-    329,  // Vibrava
-     71,  // Victreebel
-    288,  // Vigoroth
-     45,  // Vileplume
-    313,  // Volbeat
-    100,  // Voltorb
-     37,  // Vulpix
-    320,  // Wailmer
-    321,  // Wailord
-    365,  // Walrein
-      8,  // Wartortle
-     13,  // Weedle
-     70,  // Weepinbell
-    110,  // Weezing
-    340,  // Whiscash
-    293,  // Whismur
-     40,  // Wigglytuff
-    278,  // Wingull
-    202,  // Wobbuffet
-    194,  // Wooper
-    265,  // Wurmple
-    360,  // Wynaut
-    178,  // Xatu
-    193,  // Yanma
-    335,  // Zangoose
-    145,  // Zapdos
-    263,  // Zigzagoon
-     41,  // Zubat
+    NATIONAL_DEX_OLD_UNOWN_B,
+    NATIONAL_DEX_OLD_UNOWN_C,
+    NATIONAL_DEX_OLD_UNOWN_D,
+    NATIONAL_DEX_OLD_UNOWN_E,
+    NATIONAL_DEX_OLD_UNOWN_F,
+    NATIONAL_DEX_OLD_UNOWN_G,
+    NATIONAL_DEX_OLD_UNOWN_H,
+    NATIONAL_DEX_OLD_UNOWN_I,
+    NATIONAL_DEX_OLD_UNOWN_J,
+    NATIONAL_DEX_OLD_UNOWN_K,
+    NATIONAL_DEX_OLD_UNOWN_L,
+    NATIONAL_DEX_OLD_UNOWN_M,
+    NATIONAL_DEX_OLD_UNOWN_N,
+    NATIONAL_DEX_OLD_UNOWN_O,
+    NATIONAL_DEX_OLD_UNOWN_P,
+    NATIONAL_DEX_OLD_UNOWN_Q,
+    NATIONAL_DEX_OLD_UNOWN_R,
+    NATIONAL_DEX_OLD_UNOWN_S,
+    NATIONAL_DEX_OLD_UNOWN_T,
+    NATIONAL_DEX_OLD_UNOWN_U,
+    NATIONAL_DEX_OLD_UNOWN_V,
+    NATIONAL_DEX_OLD_UNOWN_W,
+    NATIONAL_DEX_OLD_UNOWN_X,
+    NATIONAL_DEX_OLD_UNOWN_Y,
+    NATIONAL_DEX_OLD_UNOWN_Z,
+    NATIONAL_DEX_ABRA,
+    NATIONAL_DEX_ABSOL,
+    NATIONAL_DEX_AERODACTYL,
+    NATIONAL_DEX_AGGRON,
+    NATIONAL_DEX_AIPOM,
+    NATIONAL_DEX_ALAKAZAM,
+    NATIONAL_DEX_ALTARIA,
+    NATIONAL_DEX_AMPHAROS,
+    NATIONAL_DEX_ANORITH,
+    NATIONAL_DEX_ARBOK,
+    NATIONAL_DEX_ARCANINE,
+    NATIONAL_DEX_ARIADOS,
+    NATIONAL_DEX_ARMALDO,
+    NATIONAL_DEX_ARON,
+    NATIONAL_DEX_ARTICUNO,
+    NATIONAL_DEX_AZUMARILL,
+    NATIONAL_DEX_AZURILL,
+    NATIONAL_DEX_BAGON,
+    NATIONAL_DEX_BALTOY,
+    NATIONAL_DEX_BANETTE,
+    NATIONAL_DEX_BARBOACH,
+    NATIONAL_DEX_BAYLEEF,
+    NATIONAL_DEX_BEAUTIFLY,
+    NATIONAL_DEX_BEEDRILL,
+    NATIONAL_DEX_BELDUM,
+    NATIONAL_DEX_BELLOSSOM,
+    NATIONAL_DEX_BELLSPROUT,
+    NATIONAL_DEX_BLASTOISE,
+    NATIONAL_DEX_BLAZIKEN,
+    NATIONAL_DEX_BLISSEY,
+    NATIONAL_DEX_BRELOOM,
+    NATIONAL_DEX_BULBASAUR,
+    NATIONAL_DEX_BUTTERFREE,
+    NATIONAL_DEX_CACNEA,
+    NATIONAL_DEX_CACTURNE,
+    NATIONAL_DEX_CAMERUPT,
+    NATIONAL_DEX_CARVANHA,
+    NATIONAL_DEX_CASCOON,
+    NATIONAL_DEX_CASTFORM,
+    NATIONAL_DEX_CATERPIE,
+    NATIONAL_DEX_CELEBI,
+    NATIONAL_DEX_CHANSEY,
+    NATIONAL_DEX_CHARIZARD,
+    NATIONAL_DEX_CHARMANDER,
+    NATIONAL_DEX_CHARMELEON,
+    NATIONAL_DEX_CHIKORITA,
+    NATIONAL_DEX_CHIMECHO,
+    NATIONAL_DEX_CHINCHOU,
+    NATIONAL_DEX_CLAMPERL,
+    NATIONAL_DEX_CLAYDOL,
+    NATIONAL_DEX_CLEFABLE,
+    NATIONAL_DEX_CLEFAIRY,
+    NATIONAL_DEX_CLEFFA,
+    NATIONAL_DEX_CLOYSTER,
+    NATIONAL_DEX_COMBUSKEN,
+    NATIONAL_DEX_CORPHISH,
+    NATIONAL_DEX_CORSOLA,
+    NATIONAL_DEX_CRADILY,
+    NATIONAL_DEX_CRAWDAUNT,
+    NATIONAL_DEX_CROBAT,
+    NATIONAL_DEX_CROCONAW,
+    NATIONAL_DEX_CUBONE,
+    NATIONAL_DEX_CYNDAQUIL,
+    NATIONAL_DEX_DELCATTY,
+    NATIONAL_DEX_DELIBIRD,
+    NATIONAL_DEX_DEOXYS,
+    NATIONAL_DEX_DEWGONG,
+    NATIONAL_DEX_DIGLETT,
+    NATIONAL_DEX_DITTO,
+    NATIONAL_DEX_DODRIO,
+    NATIONAL_DEX_DODUO,
+    NATIONAL_DEX_DONPHAN,
+    NATIONAL_DEX_DRAGONAIR,
+    NATIONAL_DEX_DRAGONITE,
+    NATIONAL_DEX_DRATINI,
+    NATIONAL_DEX_DROWZEE,
+    NATIONAL_DEX_DUGTRIO,
+    NATIONAL_DEX_DUNSPARCE,
+    NATIONAL_DEX_DUSCLOPS,
+    NATIONAL_DEX_DUSKULL,
+    NATIONAL_DEX_DUSTOX,
+    NATIONAL_DEX_EEVEE,
+    NATIONAL_DEX_EKANS,
+    NATIONAL_DEX_ELECTABUZZ,
+    NATIONAL_DEX_ELECTRIKE,
+    NATIONAL_DEX_ELECTRODE,
+    NATIONAL_DEX_ELEKID,
+    NATIONAL_DEX_ENTEI,
+    NATIONAL_DEX_ESPEON,
+    NATIONAL_DEX_EXEGGCUTE,
+    NATIONAL_DEX_EXEGGUTOR,
+    NATIONAL_DEX_EXPLOUD,
+    NATIONAL_DEX_FARFETCHD,
+    NATIONAL_DEX_FEAROW,
+    NATIONAL_DEX_FEEBAS,
+    NATIONAL_DEX_FERALIGATR,
+    NATIONAL_DEX_FLAAFFY,
+    NATIONAL_DEX_FLAREON,
+    NATIONAL_DEX_FLYGON,
+    NATIONAL_DEX_FORRETRESS,
+    NATIONAL_DEX_FURRET,
+    NATIONAL_DEX_GARDEVOIR,
+    NATIONAL_DEX_GASTLY,
+    NATIONAL_DEX_GENGAR,
+    NATIONAL_DEX_GEODUDE,
+    NATIONAL_DEX_GIRAFARIG,
+    NATIONAL_DEX_GLALIE,
+    NATIONAL_DEX_GLIGAR,
+    NATIONAL_DEX_GLOOM,
+    NATIONAL_DEX_GOLBAT,
+    NATIONAL_DEX_GOLDEEN,
+    NATIONAL_DEX_GOLDUCK,
+    NATIONAL_DEX_GOLEM,
+    NATIONAL_DEX_GOREBYSS,
+    NATIONAL_DEX_GRANBULL,
+    NATIONAL_DEX_GRAVELER,
+    NATIONAL_DEX_GRIMER,
+    NATIONAL_DEX_GROUDON,
+    NATIONAL_DEX_GROVYLE,
+    NATIONAL_DEX_GROWLITHE,
+    NATIONAL_DEX_GRUMPIG,
+    NATIONAL_DEX_GULPIN,
+    NATIONAL_DEX_GYARADOS,
+    NATIONAL_DEX_HARIYAMA,
+    NATIONAL_DEX_HAUNTER,
+    NATIONAL_DEX_HERACROSS,
+    NATIONAL_DEX_HITMONCHAN,
+    NATIONAL_DEX_HITMONLEE,
+    NATIONAL_DEX_HITMONTOP,
+    NATIONAL_DEX_HO_OH,
+    NATIONAL_DEX_HOOTHOOT,
+    NATIONAL_DEX_HOPPIP,
+    NATIONAL_DEX_HORSEA,
+    NATIONAL_DEX_HOUNDOOM,
+    NATIONAL_DEX_HOUNDOUR,
+    NATIONAL_DEX_HUNTAIL,
+    NATIONAL_DEX_HYPNO,
+    NATIONAL_DEX_IGGLYBUFF,
+    NATIONAL_DEX_ILLUMISE,
+    NATIONAL_DEX_IVYSAUR,
+    NATIONAL_DEX_JIGGLYPUFF,
+    NATIONAL_DEX_JIRACHI,
+    NATIONAL_DEX_JOLTEON,
+    NATIONAL_DEX_JUMPLUFF,
+    NATIONAL_DEX_JYNX,
+    NATIONAL_DEX_KABUTO,
+    NATIONAL_DEX_KABUTOPS,
+    NATIONAL_DEX_KADABRA,
+    NATIONAL_DEX_KAKUNA,
+    NATIONAL_DEX_KANGASKHAN,
+    NATIONAL_DEX_KECLEON,
+    NATIONAL_DEX_KINGDRA,
+    NATIONAL_DEX_KINGLER,
+    NATIONAL_DEX_KIRLIA,
+    NATIONAL_DEX_KOFFING,
+    NATIONAL_DEX_KRABBY,
+    NATIONAL_DEX_KYOGRE,
+    NATIONAL_DEX_LAIRON,
+    NATIONAL_DEX_LANTURN,
+    NATIONAL_DEX_LAPRAS,
+    NATIONAL_DEX_LARVITAR,
+    NATIONAL_DEX_LATIAS,
+    NATIONAL_DEX_LATIOS,
+    NATIONAL_DEX_LEDIAN,
+    NATIONAL_DEX_LEDYBA,
+    NATIONAL_DEX_LICKITUNG,
+    NATIONAL_DEX_LILEEP,
+    NATIONAL_DEX_LINOONE,
+    NATIONAL_DEX_LOMBRE,
+    NATIONAL_DEX_LOTAD,
+    NATIONAL_DEX_LOUDRED,
+    NATIONAL_DEX_LUDICOLO,
+    NATIONAL_DEX_LUGIA,
+    NATIONAL_DEX_LUNATONE,
+    NATIONAL_DEX_LUVDISC,
+    NATIONAL_DEX_MACHAMP,
+    NATIONAL_DEX_MACHOKE,
+    NATIONAL_DEX_MACHOP,
+    NATIONAL_DEX_MAGBY,
+    NATIONAL_DEX_MAGCARGO,
+    NATIONAL_DEX_MAGIKARP,
+    NATIONAL_DEX_MAGMAR,
+    NATIONAL_DEX_MAGNEMITE,
+    NATIONAL_DEX_MAGNETON,
+    NATIONAL_DEX_MAKUHITA,
+    NATIONAL_DEX_MANECTRIC,
+    NATIONAL_DEX_MANKEY,
+    NATIONAL_DEX_MANTINE,
+    NATIONAL_DEX_MAREEP,
+    NATIONAL_DEX_MARILL,
+    NATIONAL_DEX_MAROWAK,
+    NATIONAL_DEX_MARSHTOMP,
+    NATIONAL_DEX_MASQUERAIN,
+    NATIONAL_DEX_MAWILE,
+    NATIONAL_DEX_MEDICHAM,
+    NATIONAL_DEX_MEDITITE,
+    NATIONAL_DEX_MEGANIUM,
+    NATIONAL_DEX_MEOWTH,
+    NATIONAL_DEX_METAGROSS,
+    NATIONAL_DEX_METANG,
+    NATIONAL_DEX_METAPOD,
+    NATIONAL_DEX_MEW,
+    NATIONAL_DEX_MEWTWO,
+    NATIONAL_DEX_MIGHTYENA,
+    NATIONAL_DEX_MILOTIC,
+    NATIONAL_DEX_MILTANK,
+    NATIONAL_DEX_MINUN,
+    NATIONAL_DEX_MISDREAVUS,
+    NATIONAL_DEX_MOLTRES,
+    NATIONAL_DEX_MR_MIME,
+    NATIONAL_DEX_MUDKIP,
+    NATIONAL_DEX_MUK,
+    NATIONAL_DEX_MURKROW,
+    NATIONAL_DEX_NATU,
+    NATIONAL_DEX_NIDOKING,
+    NATIONAL_DEX_NIDOQUEEN,
+    NATIONAL_DEX_NIDORAN_F,
+    NATIONAL_DEX_NIDORAN_M,
+    NATIONAL_DEX_NIDORINA,
+    NATIONAL_DEX_NIDORINO,
+    NATIONAL_DEX_NINCADA,
+    NATIONAL_DEX_NINETALES,
+    NATIONAL_DEX_NINJASK,
+    NATIONAL_DEX_NOCTOWL,
+    NATIONAL_DEX_NOSEPASS,
+    NATIONAL_DEX_NUMEL,
+    NATIONAL_DEX_NUZLEAF,
+    NATIONAL_DEX_OCTILLERY,
+    NATIONAL_DEX_ODDISH,
+    NATIONAL_DEX_OMANYTE,
+    NATIONAL_DEX_OMASTAR,
+    NATIONAL_DEX_ONIX,
+    NATIONAL_DEX_PARAS,
+    NATIONAL_DEX_PARASECT,
+    NATIONAL_DEX_PELIPPER,
+    NATIONAL_DEX_PERSIAN,
+    NATIONAL_DEX_PHANPY,
+    NATIONAL_DEX_PICHU,
+    NATIONAL_DEX_PIDGEOT,
+    NATIONAL_DEX_PIDGEOTTO,
+    NATIONAL_DEX_PIDGEY,
+    NATIONAL_DEX_PIKACHU,
+    NATIONAL_DEX_PILOSWINE,
+    NATIONAL_DEX_PINECO,
+    NATIONAL_DEX_PINSIR,
+    NATIONAL_DEX_PLUSLE,
+    NATIONAL_DEX_POLITOED,
+    NATIONAL_DEX_POLIWAG,
+    NATIONAL_DEX_POLIWHIRL,
+    NATIONAL_DEX_POLIWRATH,
+    NATIONAL_DEX_PONYTA,
+    NATIONAL_DEX_POOCHYENA,
+    NATIONAL_DEX_PORYGON,
+    NATIONAL_DEX_PORYGON2,
+    NATIONAL_DEX_PRIMEAPE,
+    NATIONAL_DEX_PSYDUCK,
+    NATIONAL_DEX_PUPITAR,
+    NATIONAL_DEX_QUAGSIRE,
+    NATIONAL_DEX_QUILAVA,
+    NATIONAL_DEX_QWILFISH,
+    NATIONAL_DEX_RAICHU,
+    NATIONAL_DEX_RAIKOU,
+    NATIONAL_DEX_RALTS,
+    NATIONAL_DEX_RAPIDASH,
+    NATIONAL_DEX_RATICATE,
+    NATIONAL_DEX_RATTATA,
+    NATIONAL_DEX_RAYQUAZA,
+    NATIONAL_DEX_REGICE,
+    NATIONAL_DEX_REGIROCK,
+    NATIONAL_DEX_REGISTEEL,
+    NATIONAL_DEX_RELICANTH,
+    NATIONAL_DEX_REMORAID,
+    NATIONAL_DEX_RHYDON,
+    NATIONAL_DEX_RHYHORN,
+    NATIONAL_DEX_ROSELIA,
+    NATIONAL_DEX_SABLEYE,
+    NATIONAL_DEX_SALAMENCE,
+    NATIONAL_DEX_SANDSHREW,
+    NATIONAL_DEX_SANDSLASH,
+    NATIONAL_DEX_SCEPTILE,
+    NATIONAL_DEX_SCIZOR,
+    NATIONAL_DEX_SCYTHER,
+    NATIONAL_DEX_SEADRA,
+    NATIONAL_DEX_SEAKING,
+    NATIONAL_DEX_SEALEO,
+    NATIONAL_DEX_SEEDOT,
+    NATIONAL_DEX_SEEL,
+    NATIONAL_DEX_SENTRET,
+    NATIONAL_DEX_SEVIPER,
+    NATIONAL_DEX_SHARPEDO,
+    NATIONAL_DEX_SHEDINJA,
+    NATIONAL_DEX_SHELGON,
+    NATIONAL_DEX_SHELLDER,
+    NATIONAL_DEX_SHIFTRY,
+    NATIONAL_DEX_SHROOMISH,
+    NATIONAL_DEX_SHUCKLE,
+    NATIONAL_DEX_SHUPPET,
+    NATIONAL_DEX_SILCOON,
+    NATIONAL_DEX_SKARMORY,
+    NATIONAL_DEX_SKIPLOOM,
+    NATIONAL_DEX_SKITTY,
+    NATIONAL_DEX_SLAKING,
+    NATIONAL_DEX_SLAKOTH,
+    NATIONAL_DEX_SLOWBRO,
+    NATIONAL_DEX_SLOWKING,
+    NATIONAL_DEX_SLOWPOKE,
+    NATIONAL_DEX_SLUGMA,
+    NATIONAL_DEX_SMEARGLE,
+    NATIONAL_DEX_SMOOCHUM,
+    NATIONAL_DEX_SNEASEL,
+    NATIONAL_DEX_SNORLAX,
+    NATIONAL_DEX_SNORUNT,
+    NATIONAL_DEX_SNUBBULL,
+    NATIONAL_DEX_SOLROCK,
+    NATIONAL_DEX_SPEAROW,
+    NATIONAL_DEX_SPHEAL,
+    NATIONAL_DEX_SPINARAK,
+    NATIONAL_DEX_SPINDA,
+    NATIONAL_DEX_SPOINK,
+    NATIONAL_DEX_SQUIRTLE,
+    NATIONAL_DEX_STANTLER,
+    NATIONAL_DEX_STARMIE,
+    NATIONAL_DEX_STARYU,
+    NATIONAL_DEX_STEELIX,
+    NATIONAL_DEX_SUDOWOODO,
+    NATIONAL_DEX_SUICUNE,
+    NATIONAL_DEX_SUNFLORA,
+    NATIONAL_DEX_SUNKERN,
+    NATIONAL_DEX_SURSKIT,
+    NATIONAL_DEX_SWABLU,
+    NATIONAL_DEX_SWALOT,
+    NATIONAL_DEX_SWAMPERT,
+    NATIONAL_DEX_SWELLOW,
+    NATIONAL_DEX_SWINUB,
+    NATIONAL_DEX_TAILLOW,
+    NATIONAL_DEX_TANGELA,
+    NATIONAL_DEX_TAUROS,
+    NATIONAL_DEX_TEDDIURSA,
+    NATIONAL_DEX_TENTACOOL,
+    NATIONAL_DEX_TENTACRUEL,
+    NATIONAL_DEX_TOGEPI,
+    NATIONAL_DEX_TOGETIC,
+    NATIONAL_DEX_TORCHIC,
+    NATIONAL_DEX_TORKOAL,
+    NATIONAL_DEX_TOTODILE,
+    NATIONAL_DEX_TRAPINCH,
+    NATIONAL_DEX_TREECKO,
+    NATIONAL_DEX_TROPIUS,
+    NATIONAL_DEX_TYPHLOSION,
+    NATIONAL_DEX_TYRANITAR,
+    NATIONAL_DEX_TYROGUE,
+    NATIONAL_DEX_UMBREON,
+    NATIONAL_DEX_UNOWN,
+    NATIONAL_DEX_URSARING,
+    NATIONAL_DEX_VAPOREON,
+    NATIONAL_DEX_VENOMOTH,
+    NATIONAL_DEX_VENONAT,
+    NATIONAL_DEX_VENUSAUR,
+    NATIONAL_DEX_VIBRAVA,
+    NATIONAL_DEX_VICTREEBEL,
+    NATIONAL_DEX_VIGOROTH,
+    NATIONAL_DEX_VILEPLUME,
+    NATIONAL_DEX_VOLBEAT,
+    NATIONAL_DEX_VOLTORB,
+    NATIONAL_DEX_VULPIX,
+    NATIONAL_DEX_WAILMER,
+    NATIONAL_DEX_WAILORD,
+    NATIONAL_DEX_WALREIN,
+    NATIONAL_DEX_WARTORTLE,
+    NATIONAL_DEX_WEEDLE,
+    NATIONAL_DEX_WEEPINBELL,
+    NATIONAL_DEX_WEEZING,
+    NATIONAL_DEX_WHISCASH,
+    NATIONAL_DEX_WHISMUR,
+    NATIONAL_DEX_WIGGLYTUFF,
+    NATIONAL_DEX_WINGULL,
+    NATIONAL_DEX_WOBBUFFET,
+    NATIONAL_DEX_WOOPER,
+    NATIONAL_DEX_WURMPLE,
+    NATIONAL_DEX_WYNAUT,
+    NATIONAL_DEX_XATU,
+    NATIONAL_DEX_YANMA,
+    NATIONAL_DEX_ZANGOOSE,
+    NATIONAL_DEX_ZAPDOS,
+    NATIONAL_DEX_ZIGZAGOON,
+    NATIONAL_DEX_ZUBAT,
 };
 #elif GERMAN
 static const u16 gPokedexOrder_Alphabetical[] = {
-    387,
-    388,
-    389,
-    390,
-    391,
-    392,
-    393,
-    394,
-    395,
-    396,
-    397,
-    398,
-    399,
-    400,
-    401,
-    402,
-    403,
-    404,
-    405,
-    406,
-    407,
-    408,
-    409,
-    410,
-    411,
-    367, // Aalabyss
-    63, // Abra
-    359, // Absol
-    142, // Aerodactyl
-    93, // Alpollo
-    334, // Altaria
-    138, // Amonitas
-    139, // Amoroso
-    181, // Ampharos
-    347, // Anorith
-    134, // Aquana
-    24, // Arbok
-    168, // Ariados
-    59, // Arkani
-    144, // Arktos
-    348, // Armaldo
-    91, // Austos
-    184, // Azumarill
-    298, // Azurill
-    211, // Baldorfish
-    354, // Banette
-    349, // Barschwa
-    15, // Bibor
-    3, // Bisaflor
-    2, // Bisaknosp
-    1, // Bisasam
-    274, // Blanas
-    135, // Blitza
-    182, // Blubella
-    48, // Bluzuk
-    225, // Botogel
-    373, // Brutalanda
-    287, // Bummelz
-    322, // Camaub
-    323, // Camerupt
-    251, // Celebi
-    113, // Chaneira
-    222, // Corasonn
-    234, // Damhirplex
-    386, // Deoxys
-    248, // Despotar
-    50, // Digda
-    51, // Digdri
-    132, // Ditto
-    85, // Dodri
-    84, // Dodu
-    232, // Donphan
-    148, // Dragonir
-    149, // Dragoran
-    372, // Draschel
-    147, // Dratini
-    44, // Duflor
-    206, // Dummisel
-    239, // Elekid
-    125, // Elektek
-    152, // Endivie
-    300, // Eneco
-    301, // Enekoro
-    244, // Entei
-    54, // Enton
-    55, // Entoron
-    133, // Evoli
-    235, // Farbeagle
-    194, // Felino
-    155, // Feurigel
-    261, // Fiffyen
-    362, // Firnontor
-    136, // Flamara
-    79, // Flegmon
-    255, // Flemmli
-    174, // Fluffeluff
-    303, // Flunkifer
-    293, // Flurmel
-    351, // Formeo
-    205, // Forstellka
-    309, // Frizelbliz
-    58, // Fukano
-    78, // Gallopa
-    130, // Garados
-    252, // Geckarbor
-    283, // Gehweiher
-    94, // Gengar
-    75, // Georok
-    76, // Geowaz
-    264, // Geradaks
-    254, // Gewaldro
-    45, // Giflor
-    203, // Girafarig
-    4, // Glumanda
-    6, // Glurak
-    5, // Glutexo
-    42, // Golbat
-    118, // Goldini
-    119, // Golking
-    210, // Granbull
-    190, // Griffel
-    326, // Groink
-    383, // Groudon
-    282, // Guardevoir
-    21, // Habitak
-    297, // Hariyama
-    242, // Heiteira
-    250, // Ho-oh
-    163, // Hoothoot
-    187, // Hoppspross
-    13, // Hornliu
-    188, // Hubelupf
-    229, // Hundemon
-    228, // Hunduster
-    258, // Hydropi
-    97, // Hypno
-    22, // Ibitak
-    201, // Icognito
-    156, // Igelavar
-    169, // Iksbat
-    314, // Illumise
-    160, // Impergator
-    360, // Isso
-    385, // Jirachi
-    87, // Jugong
-    256, // Jungglut
-    86, // Jurob
-    140, // Kabuto
-    141, // Kabutops
-    64, // Kadabra
-    115, // Kangama
-    318, // Kanivanha
-    286, // Kapilz
-    237, // Kapoera
-    272, // Kappalores
-    158, // Karnimani
-    129, // Karpador
-    352, // Kecleon
-    221, // Keifel
-    106, // Kicklee
-    371, // Kindwurm
-    99, // Kingler
-    281, // Kirlia
-    74, // Kleinstein
-    328, // Knacklion
-    285, // Knilz
-    69, // Knofensa
-    105, // Knogga
-    40, // Knuddeluff
-    103, // Kokowei
-    14, // Kokuna
-    98, // Krabby
-    294, // Krakeelo
-    198, // Kramurx
-    295, // Krawumms
-    341, // Krebscorps
-    342, // Krebutack
-    238, // Kussilla
-    382, // Kyogre
-    80, // Lahmus
-    170, // Lampi
-    171, // Lanturn
-    131, // Lapras
-    246, // Larvitar
-    199, // Laschoking
-    380, // Latias
-    381, // Latios
-    146, // Lavados
-    166, // Ledian
-    165, // Ledyba
-    101, // Lektrobal
-    344, // Lepumentas
-    289, // Letarking
-    330, // Libelldra
-    370, // Liebiskus
-    345, // Liliep
-    257, // Lohgock
-    271, // Lombrero
-    153, // Lorblatt
-    270, // Loturzel
-    249, // Lugia
-    337, // Lunastein
-    66, // Machollo
-    68, // Machomei
-    240, // Magby
-    219, // Magcargo
-    126, // Magmar
-    262, // Magnayen
-    81, // Magnetilo
-    82, // Magneton
-    296, // Makuhita
-    226, // Mantax
-    183, // Marill
-    67, // Maschock
-    284, // Maskeregen
-    52, // Mauzi
-    308, // Meditalis
-    307, // Meditie
-    154, // Meganie
-    56, // Menki
-    376, // Metagross
-    375, // Metang
-    151, // Mew
-    150, // Mewtu
-    350, // Milotic
-    241, // Miltank
-    312, // Minun
-    185, // Mogelbaum
-    259, // Moorabbel
-    195, // Morlord
-    288, // Muntier
-    90, // Muschas
-    43, // Myrapla
-    197, // Nachtara
-    299, // Nasgnet
-    177, // Natu
-    92, // Nebulak
-    34, // Nidoking
-    31, // Nidoqueen
-    29, // Nidoran♀
-    32, // Nidoran♂
-    30, // Nidorina
-    33, // Nidorino
-    290, // Nincada
-    291, // Ninjask
-    292, // Ninjatom
-    107, // Nockchan
-    164, // Noctuh
-    332, // Noktuska
-    224, // Octillery
-    49, // Omot
-    95, // Onix
-    102, // Owei
-    358, // Palimpalim
-    327, // Pandir
-    268, // Panekon
-    122, // Pantimos
-    227, // Panzaeron
-    267, // Papinella
-    189, // Papungha
-    46, // Paras
-    47, // Parasek
-    279, // Pelipper
-    366, // Perlu
-    231, // Phanpy
-    172, // Pichu
-    35, // Piepi
-    173, // Pii
-    25, // Pikachu
-    127, // Pinsir
-    36, // Pixi
-    311, // Plusle
-    77, // Ponita
-    83, // Porenta
-    137, // Porygon
-    233, // Porygon2
-    213, // Pottrott
-    196, // Psiana
-    269, // Pudox
-    39, // Pummeluff
-    247, // Pupitar
-    343, // Puppance
-    62, // Quappo
-    60, // Quapsel
-    61, // Quaputzi
-    186, // Quaxo
-    220, // Quiekel
-    324, // Qurtel
-    236, // Rabauz
-    26, // Raichu
-    243, // Raikou
-    57, // Rasaff
-    19, // Rattfratz
-    20, // Rattikarl
-    10, // Raupy
-    384, // Rayquaza
-    378, // Regice
-    377, // Regirock
-    379, // Registeel
-    143, // Relaxo
-    369, // Relicanth
-    223, // Remoraid
-    253, // Reptain
-    23, // Rettan
-    111, // Rihorn
-    112, // Rizeros
-    315, // Roselia
-    124, // Rossana
-    11, // Safcon
-    368, // Saganabyss
-    273, // Samurzel
-    28, // Sandamer
-    27, // Sandan
-    71, // Sarzenia
-    266, // Schaloko
-    212, // Scherox
-    7, // Schiggy
-    8, // Schillok
-    317, // Schlukwech
-    316, // Schluppuck
-    108, // Schlurp
-    339, // Schmerbe
-    218, // Schneckmag
-    361, // Schneppke
-    276, // Schwalbini
-    277, // Schwalboss
-    230, // Seedraking
-    364, // Seejong
-    117, // Seemon
-    363, // Seemops
-    116, // Seeper
-    335, // Sengo
-    353, // Shuppet
-    123, // Sichlor
-    65, // Simsala
-    214, // Skaraborn
-    207, // Skorgla
-    88, // Sleima
-    89, // Sleimok
-    12, // Smettbo
-    110, // Smogmog
-    109, // Smogon
-    215, // Sniebel
-    53, // Snobilikat
-    209, // Snubbull
-    338, // Sonnfel
-    192, // Sonnflora
-    191, // Sonnkern
-    325, // Spoink
-    208, // Stahlos
-    121, // Starmie
-    120, // Sterndu
-    306, // Stolloss
-    305, // Stollrak
-    304, // Stollunior
-    245, // Suicune
-    260, // Sumpex
-    114, // Tangela
-    374, // Tanhel
-    204, // Tannza
-    17, // Tauboga
-    18, // Tauboss
-    16, // Taubsi
-    128, // Tauros
-    216, // Teddiursa
-    275, // Tengulist
-    72, // Tentacha
-    73, // Tentoxa
-    175, // Togepi
-    176, // Togetic
-    319, // Tohaido
-    157, // Tornupto
-    104, // Tragosso
-    280, // Trasla
-    96, // Traumato
-    200, // Traunfugil
-    357, // Tropius
-    9, // Turtok
-    331, // Tuska
-    159, // Tyracroc
-    70, // Ultrigaria
-    217, // Ursaring
-    329, // Vibrava
-    336, // Vipitis
-    313, // Volbeat
-    310, // Voltenso
-    179, // Voltilamm
-    100, // Voltobal
-    38, // Vulnona
-    37, // Vulpix
-    180, // Waaty
-    333, // Wablu
-    320, // Wailmer
-    321, // Wailord
-    365, // Walraisa
-    265, // Waumpel
-    167, // Webarak
-    340, // Welsar
-    346, // Wielie
-    162, // Wiesenior
-    161, // Wiesor
-    278, // Wingull
-    202, // Woingenau
-    178, // Xatu
-    193, // Yanma
-    145, // Zapdos
-    263, // Zigzachs
-    302, // Zobiris
-    41, // Zubat
-    356, // Zwirrklop
-    355, // Zwirrlicht
+    NATIONAL_DEX_OLD_UNOWN_B,
+    NATIONAL_DEX_OLD_UNOWN_C,
+    NATIONAL_DEX_OLD_UNOWN_D,
+    NATIONAL_DEX_OLD_UNOWN_E,
+    NATIONAL_DEX_OLD_UNOWN_F,
+    NATIONAL_DEX_OLD_UNOWN_G,
+    NATIONAL_DEX_OLD_UNOWN_H,
+    NATIONAL_DEX_OLD_UNOWN_I,
+    NATIONAL_DEX_OLD_UNOWN_J,
+    NATIONAL_DEX_OLD_UNOWN_K,
+    NATIONAL_DEX_OLD_UNOWN_L,
+    NATIONAL_DEX_OLD_UNOWN_M,
+    NATIONAL_DEX_OLD_UNOWN_N,
+    NATIONAL_DEX_OLD_UNOWN_O,
+    NATIONAL_DEX_OLD_UNOWN_P,
+    NATIONAL_DEX_OLD_UNOWN_Q,
+    NATIONAL_DEX_OLD_UNOWN_R,
+    NATIONAL_DEX_OLD_UNOWN_S,
+    NATIONAL_DEX_OLD_UNOWN_T,
+    NATIONAL_DEX_OLD_UNOWN_U,
+    NATIONAL_DEX_OLD_UNOWN_V,
+    NATIONAL_DEX_OLD_UNOWN_W,
+    NATIONAL_DEX_OLD_UNOWN_X,
+    NATIONAL_DEX_OLD_UNOWN_Y,
+    NATIONAL_DEX_OLD_UNOWN_Z,
+    NATIONAL_DEX_HUNTAIL, // Aalabyss
+    NATIONAL_DEX_ABRA, // Abra
+    NATIONAL_DEX_ABSOL, // Absol
+    NATIONAL_DEX_AERODACTYL, // Aerodactyl
+    NATIONAL_DEX_HAUNTER, // Alpollo
+    NATIONAL_DEX_ALTARIA, // Altaria
+    NATIONAL_DEX_OMANYTE, // Amonitas
+    NATIONAL_DEX_OMASTAR, // Amoroso
+    NATIONAL_DEX_AMPHAROS, // Ampharos
+    NATIONAL_DEX_ANORITH, // Anorith
+    NATIONAL_DEX_VAPOREON, // Aquana
+    NATIONAL_DEX_ARBOK, // Arbok
+    NATIONAL_DEX_ARIADOS, // Ariados
+    NATIONAL_DEX_ARCANINE, // Arkani
+    NATIONAL_DEX_ARTICUNO, // Arktos
+    NATIONAL_DEX_ARMALDO, // Armaldo
+    NATIONAL_DEX_CLOYSTER, // Austos
+    NATIONAL_DEX_AZUMARILL, // Azumarill
+    NATIONAL_DEX_AZURILL, // Azurill
+    NATIONAL_DEX_QWILFISH, // Baldorfish
+    NATIONAL_DEX_BANETTE, // Banette
+    NATIONAL_DEX_FEEBAS, // Barschwa
+    NATIONAL_DEX_BEEDRILL, // Bibor
+    NATIONAL_DEX_VENUSAUR, // Bisaflor
+    NATIONAL_DEX_IVYSAUR, // Bisaknosp
+    NATIONAL_DEX_BULBASAUR, // Bisasam
+    NATIONAL_DEX_NUZLEAF, // Blanas
+    NATIONAL_DEX_JOLTEON, // Blitza
+    NATIONAL_DEX_BELLOSSOM, // Blubella
+    NATIONAL_DEX_VENONAT, // Bluzuk
+    NATIONAL_DEX_DELIBIRD, // Botogel
+    NATIONAL_DEX_SALAMENCE, // Brutalanda
+    NATIONAL_DEX_SLAKOTH, // Bummelz
+    NATIONAL_DEX_NUMEL, // Camaub
+    NATIONAL_DEX_CAMERUPT, // Camerupt
+    NATIONAL_DEX_CELEBI, // Celebi
+    NATIONAL_DEX_CHANSEY, // Chaneira
+    NATIONAL_DEX_CORSOLA, // Corasonn
+    NATIONAL_DEX_STANTLER, // Damhirplex
+    NATIONAL_DEX_DEOXYS, // Deoxys
+    NATIONAL_DEX_TYRANITAR, // Despotar
+    NATIONAL_DEX_DIGLETT, // Digda
+    NATIONAL_DEX_DUGTRIO, // Digdri
+    NATIONAL_DEX_DITTO, // Ditto
+    NATIONAL_DEX_DODRIO, // Dodri
+    NATIONAL_DEX_DODUO, // Dodu
+    NATIONAL_DEX_DONPHAN, // Donphan
+    NATIONAL_DEX_DRAGONAIR, // Dragonir
+    NATIONAL_DEX_DRAGONITE, // Dragoran
+    NATIONAL_DEX_SHELGON, // Draschel
+    NATIONAL_DEX_DRATINI, // Dratini
+    NATIONAL_DEX_GLOOM, // Duflor
+    NATIONAL_DEX_DUNSPARCE, // Dummisel
+    NATIONAL_DEX_ELEKID, // Elekid
+    NATIONAL_DEX_ELECTABUZZ, // Elektek
+    NATIONAL_DEX_CHIKORITA, // Endivie
+    NATIONAL_DEX_SKITTY, // Eneco
+    NATIONAL_DEX_DELCATTY, // Enekoro
+    NATIONAL_DEX_ENTEI, // Entei
+    NATIONAL_DEX_PSYDUCK, // Enton
+    NATIONAL_DEX_GOLDUCK, // Entoron
+    NATIONAL_DEX_EEVEE, // Evoli
+    NATIONAL_DEX_SMEARGLE, // Farbeagle
+    NATIONAL_DEX_WOOPER, // Felino
+    NATIONAL_DEX_CYNDAQUIL, // Feurigel
+    NATIONAL_DEX_POOCHYENA, // Fiffyen
+    NATIONAL_DEX_GLALIE, // Firnontor
+    NATIONAL_DEX_FLAREON, // Flamara
+    NATIONAL_DEX_SLOWPOKE, // Flegmon
+    NATIONAL_DEX_TORCHIC, // Flemmli
+    NATIONAL_DEX_IGGLYBUFF, // Fluffeluff
+    NATIONAL_DEX_MAWILE, // Flunkifer
+    NATIONAL_DEX_WHISMUR, // Flurmel
+    NATIONAL_DEX_CASTFORM, // Formeo
+    NATIONAL_DEX_FORRETRESS, // Forstellka
+    NATIONAL_DEX_ELECTRIKE, // Frizelbliz
+    NATIONAL_DEX_GROWLITHE, // Fukano
+    NATIONAL_DEX_RAPIDASH, // Gallopa
+    NATIONAL_DEX_GYARADOS, // Garados
+    NATIONAL_DEX_TREECKO, // Geckarbor
+    NATIONAL_DEX_SURSKIT, // Gehweiher
+    NATIONAL_DEX_GENGAR, // Gengar
+    NATIONAL_DEX_GRAVELER, // Georok
+    NATIONAL_DEX_GOLEM, // Geowaz
+    NATIONAL_DEX_LINOONE, // Geradaks
+    NATIONAL_DEX_SCEPTILE, // Gewaldro
+    NATIONAL_DEX_VILEPLUME, // Giflor
+    NATIONAL_DEX_GIRAFARIG, // Girafarig
+    NATIONAL_DEX_CHARMANDER, // Glumanda
+    NATIONAL_DEX_CHARIZARD, // Glurak
+    NATIONAL_DEX_CHARMELEON, // Glutexo
+    NATIONAL_DEX_GOLBAT, // Golbat
+    NATIONAL_DEX_GOLDEEN, // Goldini
+    NATIONAL_DEX_SEAKING, // Golking
+    NATIONAL_DEX_GRANBULL, // Granbull
+    NATIONAL_DEX_AIPOM, // Griffel
+    NATIONAL_DEX_GRUMPIG, // Groink
+    NATIONAL_DEX_GROUDON, // Groudon
+    NATIONAL_DEX_GARDEVOIR, // Guardevoir
+    NATIONAL_DEX_SPEAROW, // Habitak
+    NATIONAL_DEX_HARIYAMA, // Hariyama
+    NATIONAL_DEX_BLISSEY, // Heiteira
+    NATIONAL_DEX_HO_OH, // Ho-oh
+    NATIONAL_DEX_HOOTHOOT, // Hoothoot
+    NATIONAL_DEX_HOPPIP, // Hoppspross
+    NATIONAL_DEX_WEEDLE, // Hornliu
+    NATIONAL_DEX_SKIPLOOM, // Hubelupf
+    NATIONAL_DEX_HOUNDOOM, // Hundemon
+    NATIONAL_DEX_HOUNDOUR, // Hunduster
+    NATIONAL_DEX_MUDKIP, // Hydropi
+    NATIONAL_DEX_HYPNO, // Hypno
+    NATIONAL_DEX_FEAROW, // Ibitak
+    NATIONAL_DEX_UNOWN, // Icognito
+    NATIONAL_DEX_QUILAVA, // Igelavar
+    NATIONAL_DEX_CROBAT, // Iksbat
+    NATIONAL_DEX_ILLUMISE, // Illumise
+    NATIONAL_DEX_FERALIGATR, // Impergator
+    NATIONAL_DEX_WYNAUT, // Isso
+    NATIONAL_DEX_JIRACHI, // Jirachi
+    NATIONAL_DEX_DEWGONG, // Jugong
+    NATIONAL_DEX_COMBUSKEN, // Jungglut
+    NATIONAL_DEX_SEEL, // Jurob
+    NATIONAL_DEX_KABUTO, // Kabuto
+    NATIONAL_DEX_KABUTOPS, // Kabutops
+    NATIONAL_DEX_KADABRA, // Kadabra
+    NATIONAL_DEX_KANGASKHAN, // Kangama
+    NATIONAL_DEX_CARVANHA, // Kanivanha
+    NATIONAL_DEX_BRELOOM, // Kapilz
+    NATIONAL_DEX_HITMONTOP, // Kapoera
+    NATIONAL_DEX_LUDICOLO, // Kappalores
+    NATIONAL_DEX_TOTODILE, // Karnimani
+    NATIONAL_DEX_MAGIKARP, // Karpador
+    NATIONAL_DEX_KECLEON, // Kecleon
+    NATIONAL_DEX_PILOSWINE, // Keifel
+    NATIONAL_DEX_HITMONLEE, // Kicklee
+    NATIONAL_DEX_BAGON, // Kindwurm
+    NATIONAL_DEX_KINGLER, // Kingler
+    NATIONAL_DEX_KIRLIA, // Kirlia
+    NATIONAL_DEX_GEODUDE, // Kleinstein
+    NATIONAL_DEX_TRAPINCH, // Knacklion
+    NATIONAL_DEX_SHROOMISH, // Knilz
+    NATIONAL_DEX_BELLSPROUT, // Knofensa
+    NATIONAL_DEX_MAROWAK, // Knogga
+    NATIONAL_DEX_WIGGLYTUFF, // Knuddeluff
+    NATIONAL_DEX_EXEGGUTOR, // Kokowei
+    NATIONAL_DEX_KAKUNA, // Kokuna
+    NATIONAL_DEX_KRABBY, // Krabby
+    NATIONAL_DEX_LOUDRED, // Krakeelo
+    NATIONAL_DEX_MURKROW, // Kramurx
+    NATIONAL_DEX_EXPLOUD, // Krawumms
+    NATIONAL_DEX_CORPHISH, // Krebscorps
+    NATIONAL_DEX_CRAWDAUNT, // Krebutack
+    NATIONAL_DEX_SMOOCHUM, // Kussilla
+    NATIONAL_DEX_KYOGRE, // Kyogre
+    NATIONAL_DEX_SLOWBRO, // Lahmus
+    NATIONAL_DEX_CHINCHOU, // Lampi
+    NATIONAL_DEX_LANTURN, // Lanturn
+    NATIONAL_DEX_LAPRAS, // Lapras
+    NATIONAL_DEX_LARVITAR, // Larvitar
+    NATIONAL_DEX_SLOWKING, // Laschoking
+    NATIONAL_DEX_LATIAS, // Latias
+    NATIONAL_DEX_LATIOS, // Latios
+    NATIONAL_DEX_MOLTRES, // Lavados
+    NATIONAL_DEX_LEDIAN, // Ledian
+    NATIONAL_DEX_LEDYBA, // Ledyba
+    NATIONAL_DEX_ELECTRODE, // Lektrobal
+    NATIONAL_DEX_CLAYDOL, // Lepumentas
+    NATIONAL_DEX_SLAKING, // Letarking
+    NATIONAL_DEX_FLYGON, // Libelldra
+    NATIONAL_DEX_LUVDISC, // Liebiskus
+    NATIONAL_DEX_LILEEP, // Liliep
+    NATIONAL_DEX_BLAZIKEN, // Lohgock
+    NATIONAL_DEX_LOMBRE, // Lombrero
+    NATIONAL_DEX_BAYLEEF, // Lorblatt
+    NATIONAL_DEX_LOTAD, // Loturzel
+    NATIONAL_DEX_LUGIA, // Lugia
+    NATIONAL_DEX_LUNATONE, // Lunastein
+    NATIONAL_DEX_MACHOP, // Machollo
+    NATIONAL_DEX_MACHAMP, // Machomei
+    NATIONAL_DEX_MAGBY, // Magby
+    NATIONAL_DEX_MAGCARGO, // Magcargo
+    NATIONAL_DEX_MAGMAR, // Magmar
+    NATIONAL_DEX_MIGHTYENA, // Magnayen
+    NATIONAL_DEX_MAGNEMITE, // Magnetilo
+    NATIONAL_DEX_MAGNETON, // Magneton
+    NATIONAL_DEX_MAKUHITA, // Makuhita
+    NATIONAL_DEX_MANTINE, // Mantax
+    NATIONAL_DEX_MARILL, // Marill
+    NATIONAL_DEX_MACHOKE, // Maschock
+    NATIONAL_DEX_MASQUERAIN, // Maskeregen
+    NATIONAL_DEX_MEOWTH, // Mauzi
+    NATIONAL_DEX_MEDICHAM, // Meditalis
+    NATIONAL_DEX_MEDITITE, // Meditie
+    NATIONAL_DEX_MEGANIUM, // Meganie
+    NATIONAL_DEX_MANKEY, // Menki
+    NATIONAL_DEX_METAGROSS, // Metagross
+    NATIONAL_DEX_METANG, // Metang
+    NATIONAL_DEX_MEW, // Mew
+    NATIONAL_DEX_MEWTWO, // Mewtu
+    NATIONAL_DEX_MILOTIC, // Milotic
+    NATIONAL_DEX_MILTANK, // Miltank
+    NATIONAL_DEX_MINUN, // Minun
+    NATIONAL_DEX_SUDOWOODO, // Mogelbaum
+    NATIONAL_DEX_MARSHTOMP, // Moorabbel
+    NATIONAL_DEX_QUAGSIRE, // Morlord
+    NATIONAL_DEX_VIGOROTH, // Muntier
+    NATIONAL_DEX_SHELLDER, // Muschas
+    NATIONAL_DEX_ODDISH, // Myrapla
+    NATIONAL_DEX_UMBREON, // Nachtara
+    NATIONAL_DEX_NOSEPASS, // Nasgnet
+    NATIONAL_DEX_NATU, // Natu
+    NATIONAL_DEX_GASTLY, // Nebulak
+    NATIONAL_DEX_NIDOKING, // Nidoking
+    NATIONAL_DEX_NIDOQUEEN, // Nidoqueen
+    NATIONAL_DEX_NIDORAN_F, // Nidoran♀
+    NATIONAL_DEX_NIDORAN_M, // Nidoran♂
+    NATIONAL_DEX_NIDORINA, // Nidorina
+    NATIONAL_DEX_NIDORINO, // Nidorino
+    NATIONAL_DEX_NINCADA, // Nincada
+    NATIONAL_DEX_NINJASK, // Ninjask
+    NATIONAL_DEX_SHEDINJA, // Ninjatom
+    NATIONAL_DEX_HITMONCHAN, // Nockchan
+    NATIONAL_DEX_NOCTOWL, // Noctuh
+    NATIONAL_DEX_CACTURNE, // Noktuska
+    NATIONAL_DEX_OCTILLERY, // Octillery
+    NATIONAL_DEX_VENOMOTH, // Omot
+    NATIONAL_DEX_ONIX, // Onix
+    NATIONAL_DEX_EXEGGCUTE, // Owei
+    NATIONAL_DEX_CHIMECHO, // Palimpalim
+    NATIONAL_DEX_SPINDA, // Pandir
+    NATIONAL_DEX_CASCOON, // Panekon
+    NATIONAL_DEX_MR_MIME, // Pantimos
+    NATIONAL_DEX_SKARMORY, // Panzaeron
+    NATIONAL_DEX_BEAUTIFLY, // Papinella
+    NATIONAL_DEX_JUMPLUFF, // Papungha
+    NATIONAL_DEX_PARAS, // Paras
+    NATIONAL_DEX_PARASECT, // Parasek
+    NATIONAL_DEX_PELIPPER, // Pelipper
+    NATIONAL_DEX_CLAMPERL, // Perlu
+    NATIONAL_DEX_PHANPY, // Phanpy
+    NATIONAL_DEX_PICHU, // Pichu
+    NATIONAL_DEX_CLEFAIRY, // Piepi
+    NATIONAL_DEX_CLEFFA, // Pii
+    NATIONAL_DEX_PIKACHU, // Pikachu
+    NATIONAL_DEX_PINSIR, // Pinsir
+    NATIONAL_DEX_CLEFABLE, // Pixi
+    NATIONAL_DEX_PLUSLE, // Plusle
+    NATIONAL_DEX_PONYTA, // Ponita
+    NATIONAL_DEX_FARFETCHD, // Porenta
+    NATIONAL_DEX_PORYGON, // Porygon
+    NATIONAL_DEX_PORYGON2, // Porygon2
+    NATIONAL_DEX_SHUCKLE, // Pottrott
+    NATIONAL_DEX_ESPEON, // Psiana
+    NATIONAL_DEX_DUSTOX, // Pudox
+    NATIONAL_DEX_JIGGLYPUFF, // Pummeluff
+    NATIONAL_DEX_PUPITAR, // Pupitar
+    NATIONAL_DEX_BALTOY, // Puppance
+    NATIONAL_DEX_POLIWRATH, // Quappo
+    NATIONAL_DEX_POLIWAG, // Quapsel
+    NATIONAL_DEX_POLIWHIRL, // Quaputzi
+    NATIONAL_DEX_POLITOED, // Quaxo
+    NATIONAL_DEX_SWINUB, // Quiekel
+    NATIONAL_DEX_TORKOAL, // Qurtel
+    NATIONAL_DEX_TYROGUE, // Rabauz
+    NATIONAL_DEX_RAICHU, // Raichu
+    NATIONAL_DEX_RAIKOU, // Raikou
+    NATIONAL_DEX_PRIMEAPE, // Rasaff
+    NATIONAL_DEX_RATTATA, // Rattfratz
+    NATIONAL_DEX_RATICATE, // Rattikarl
+    NATIONAL_DEX_CATERPIE, // Raupy
+    NATIONAL_DEX_RAYQUAZA, // Rayquaza
+    NATIONAL_DEX_REGICE, // Regice
+    NATIONAL_DEX_REGIROCK, // Regirock
+    NATIONAL_DEX_REGISTEEL, // Registeel
+    NATIONAL_DEX_SNORLAX, // Relaxo
+    NATIONAL_DEX_RELICANTH, // Relicanth
+    NATIONAL_DEX_REMORAID, // Remoraid
+    NATIONAL_DEX_GROVYLE, // Reptain
+    NATIONAL_DEX_EKANS, // Rettan
+    NATIONAL_DEX_RHYHORN, // Rihorn
+    NATIONAL_DEX_RHYDON, // Rizeros
+    NATIONAL_DEX_ROSELIA, // Roselia
+    NATIONAL_DEX_JYNX, // Rossana
+    NATIONAL_DEX_METAPOD, // Safcon
+    NATIONAL_DEX_GOREBYSS, // Saganabyss
+    NATIONAL_DEX_SEEDOT, // Samurzel
+    NATIONAL_DEX_SANDSLASH, // Sandamer
+    NATIONAL_DEX_SANDSHREW, // Sandan
+    NATIONAL_DEX_VICTREEBEL, // Sarzenia
+    NATIONAL_DEX_SILCOON, // Schaloko
+    NATIONAL_DEX_SCIZOR, // Scherox
+    NATIONAL_DEX_SQUIRTLE, // Schiggy
+    NATIONAL_DEX_WARTORTLE, // Schillok
+    NATIONAL_DEX_SWALOT, // Schlukwech
+    NATIONAL_DEX_GULPIN, // Schluppuck
+    NATIONAL_DEX_LICKITUNG, // Schlurp
+    NATIONAL_DEX_BARBOACH, // Schmerbe
+    NATIONAL_DEX_SLUGMA, // Schneckmag
+    NATIONAL_DEX_SNORUNT, // Schneppke
+    NATIONAL_DEX_TAILLOW, // Schwalbini
+    NATIONAL_DEX_SWELLOW, // Schwalboss
+    NATIONAL_DEX_KINGDRA, // Seedraking
+    NATIONAL_DEX_SEALEO, // Seejong
+    NATIONAL_DEX_SEADRA, // Seemon
+    NATIONAL_DEX_SPHEAL, // Seemops
+    NATIONAL_DEX_HORSEA, // Seeper
+    NATIONAL_DEX_ZANGOOSE, // Sengo
+    NATIONAL_DEX_SHUPPET, // Shuppet
+    NATIONAL_DEX_SCYTHER, // Sichlor
+    NATIONAL_DEX_ALAKAZAM, // Simsala
+    NATIONAL_DEX_HERACROSS, // Skaraborn
+    NATIONAL_DEX_GLIGAR, // Skorgla
+    NATIONAL_DEX_GRIMER, // Sleima
+    NATIONAL_DEX_MUK, // Sleimok
+    NATIONAL_DEX_BUTTERFREE, // Smettbo
+    NATIONAL_DEX_WEEZING, // Smogmog
+    NATIONAL_DEX_KOFFING, // Smogon
+    NATIONAL_DEX_SNEASEL, // Sniebel
+    NATIONAL_DEX_PERSIAN, // Snobilikat
+    NATIONAL_DEX_SNUBBULL, // Snubbull
+    NATIONAL_DEX_SOLROCK, // Sonnfel
+    NATIONAL_DEX_SUNFLORA, // Sonnflora
+    NATIONAL_DEX_SUNKERN, // Sonnkern
+    NATIONAL_DEX_SPOINK, // Spoink
+    NATIONAL_DEX_STEELIX, // Stahlos
+    NATIONAL_DEX_STARMIE, // Starmie
+    NATIONAL_DEX_STARYU, // Sterndu
+    NATIONAL_DEX_AGGRON, // Stolloss
+    NATIONAL_DEX_LAIRON, // Stollrak
+    NATIONAL_DEX_ARON, // Stollunior
+    NATIONAL_DEX_SUICUNE, // Suicune
+    NATIONAL_DEX_SWAMPERT, // Sumpex
+    NATIONAL_DEX_TANGELA, // Tangela
+    NATIONAL_DEX_BELDUM, // Tanhel
+    NATIONAL_DEX_PINECO, // Tannza
+    NATIONAL_DEX_PIDGEOTTO, // Tauboga
+    NATIONAL_DEX_PIDGEOT, // Tauboss
+    NATIONAL_DEX_PIDGEY, // Taubsi
+    NATIONAL_DEX_TAUROS, // Tauros
+    NATIONAL_DEX_TEDDIURSA, // Teddiursa
+    NATIONAL_DEX_SHIFTRY, // Tengulist
+    NATIONAL_DEX_TENTACOOL, // Tentacha
+    NATIONAL_DEX_TENTACRUEL, // Tentoxa
+    NATIONAL_DEX_TOGEPI, // Togepi
+    NATIONAL_DEX_TOGETIC, // Togetic
+    NATIONAL_DEX_SHARPEDO, // Tohaido
+    NATIONAL_DEX_TYPHLOSION, // Tornupto
+    NATIONAL_DEX_CUBONE, // Tragosso
+    NATIONAL_DEX_RALTS, // Trasla
+    NATIONAL_DEX_DROWZEE, // Traumato
+    NATIONAL_DEX_MISDREAVUS, // Traunfugil
+    NATIONAL_DEX_TROPIUS, // Tropius
+    NATIONAL_DEX_BLASTOISE, // Turtok
+    NATIONAL_DEX_CACNEA, // Tuska
+    NATIONAL_DEX_CROCONAW, // Tyracroc
+    NATIONAL_DEX_WEEPINBELL, // Ultrigaria
+    NATIONAL_DEX_URSARING, // Ursaring
+    NATIONAL_DEX_VIBRAVA, // Vibrava
+    NATIONAL_DEX_SEVIPER, // Vipitis
+    NATIONAL_DEX_VOLBEAT, // Volbeat
+    NATIONAL_DEX_MANECTRIC, // Voltenso
+    NATIONAL_DEX_MAREEP, // Voltilamm
+    NATIONAL_DEX_VOLTORB, // Voltobal
+    NATIONAL_DEX_NINETALES, // Vulnona
+    NATIONAL_DEX_VULPIX, // Vulpix
+    NATIONAL_DEX_FLAAFFY, // Waaty
+    NATIONAL_DEX_SWABLU, // Wablu
+    NATIONAL_DEX_WAILMER, // Wailmer
+    NATIONAL_DEX_WAILORD, // Wailord
+    NATIONAL_DEX_WALREIN, // Walraisa
+    NATIONAL_DEX_WURMPLE, // Waumpel
+    NATIONAL_DEX_SPINARAK, // Webarak
+    NATIONAL_DEX_WHISCASH, // Welsar
+    NATIONAL_DEX_CRADILY, // Wielie
+    NATIONAL_DEX_FURRET, // Wiesenior
+    NATIONAL_DEX_SENTRET, // Wiesor
+    NATIONAL_DEX_WINGULL, // Wingull
+    NATIONAL_DEX_WOBBUFFET, // Woingenau
+    NATIONAL_DEX_XATU, // Xatu
+    NATIONAL_DEX_YANMA, // Yanma
+    NATIONAL_DEX_ZAPDOS, // Zapdos
+    NATIONAL_DEX_ZIGZAGOON, // Zigzachs
+    NATIONAL_DEX_SABLEYE, // Zobiris
+    NATIONAL_DEX_ZUBAT, // Zubat
+    NATIONAL_DEX_DUSCLOPS, // Zwirrklop
+    NATIONAL_DEX_DUSKULL, // Zwirrlicht
 };
 #endif
 
 static const u16 gPokedexOrder_Weight[] =
 {
-     92,  // Gastly
-     93,  // Haunter
-    187,  // Hoppip
-     50,  // Diglett
-    351,  // Castform
-    109,  // Koffing
-    174,  // Igglybuff
-    200,  // Misdreavus
-    358,  // Chimecho
-    188,  // Skiploom
-    385,  // Jirachi
-    333,  // Swablu
-    292,  // Shedinja
-    175,  // Togepi
-    283,  // Surskit
-     16,  // Pidgey
-    191,  // Sunkern
-    339,  // Barboach
-    172,  // Pichu
-    298,  // Azurill
-    315,  // Roselia
-    177,  // Natu
-     21,  // Spearow
-    198,  // Murkrow
-    353,  // Shuppet
-    276,  // Taillow
-    102,  // Exeggcute
-    255,  // Torchic
-    270,  // Lotad
-     10,  // Caterpie
-    189,  // Jumpluff
-    173,  // Cleffa
-     13,  // Weedle
-    176,  // Togetic
-    147,  // Dratini
-     19,  // Rattata
-    284,  // Masquerain
-    265,  // Wurmple
-    211,  // Qwilfish
-    151,  // Mew
-     90,  // Shellder
-    273,  // Seedot
-    132,  // Ditto
-     69,  // Bellsprout
-    311,  // Plusle
-     52,  // Meowth
-    312,  // Minun
-    285,  // Shroomish
-    251,  // Celebi
-    222,  // Corsola
-    252,  // Treecko
-    327,  // Spinda
-    201,  // Unown
-     46,  // Paras
-     43,  // Oddish
-     39,  // Jigglypuff
-    290,  // Nincada
-    182,  // Bellossom
-     81,  // Magnemite
-     25,  // Pikachu
-    238,  // Smoochum
-    161,  // Sentret
-     70,  // Weepinbell
-    152,  // Chikorita
-    220,  // Swinub
-    133,  // Eevee
-     98,  // Krabby
-    104,  // Cubone
-    280,  // Ralts
-      1,  // Bulbasaur
-     23,  // Ekans
-     29,  // Nidoran?
-    204,  // Pineco
-    349,  // Feebas
-    138,  // Omanyte
-     41,  // Zubat
-     35,  // Clefairy
-    258,  // Mudkip
-    209,  // Snubbull
-    179,  // Mareep
-    155,  // Cyndaquil
-    116,  // Horsea
-      4,  // Charmander
-    192,  // Sunflora
-    183,  // Marill
-    194,  // Wooper
-    167,  // Spinarak
-     44,  // Gloom
-    370,  // Luvdisc
-    216,  // Teddiursa
-     32,  // Nidoran?
-      7,  // Squirtle
-    278,  // Wingull
-    158,  // Totodile
-    110,  // Weezing
-     37,  // Vulpix
-     11,  // Metapod
-    266,  // Silcoon
-    129,  // Magikarp
-     14,  // Kakuna
-    316,  // Gulpin
-    100,  // Voltorb
-    165,  // Ledyba
-    228,  // Houndour
-    300,  // Skitty
-    302,  // Sableye
-    307,  // Meditite
-    341,  // Corphish
-    190,  // Aipom
-    268,  // Cascoon
-    303,  // Mawile
-    140,  // Kabuto
-     40,  // Wigglytuff
-     27,  // Sandshrew
-    223,  // Remoraid
-    291,  // Ninjask
-    170,  // Chinchou
-     60,  // Poliwag
-    347,  // Anorith
-     49,  // Venomoth
-    354,  // Banette
-      2,  // Ivysaur
-    180,  // Flaaffy
-    261,  // Poochyena
-    360,  // Wynaut
-    206,  // Dunsparce
-    178,  // Xatu
-    355,  // Duskull
-     83,  // Farfetch'd
-    328,  // Trapinch
-    118,  // Goldeen
-    309,  // Electrike
-    329,  // Vibrava
-     71,  // Victreebel
-    153,  // Bayleef
-    225,  // Delibird
-    293,  // Whismur
-    148,  // Dragonair
-    361,  // Snorunt
-    263,  // Zigzagoon
-    314,  // Illumise
-    313,  // Volbeat
-     20,  // Raticate
-     45,  // Vileplume
-    156,  // Quilava
-      5,  // Charmeleon
-     58,  // Growlithe
-    256,  // Combusken
-     66,  // Machop
-     63,  // Abra
-     33,  // Nidorino
-     54,  // Psyduck
-    277,  // Swellow
-     38,  // Ninetales
-     30,  // Nidorina
-     61,  // Poliwhirl
-     74,  // Geodude
-    281,  // Kirlia
-    213,  // Shuckle
-    334,  // Altaria
-    318,  // Carvanha
-    236,  // Tyrogue
-    163,  // Hoothoot
-    240,  // Magby
-    343,  // Baltoy
-    253,  // Grovyle
-    352,  // Kecleon
-    171,  // Lanturn
-      8,  // Wartortle
-    368,  // Gorebyss
-    369,  // Relicanth
-    239,  // Elekid
-    340,  // Whiscash
-    345,  // Lileep
-    322,  // Numel
-    287,  // Slakoth
-    135,  // Jolteon
-    159,  // Croconaw
-    136,  // Flareon
-    117,  // Seadra
-    196,  // Espeon
-    367,  // Huntail
-    197,  // Umbreon
-    259,  // Marshtomp
-    274,  // Nuzleaf
-    215,  // Sneasel
-     56,  // Mankey
-    279,  // Pelipper
-    267,  // Beautifly
-    224,  // Octillery
-    184,  // Azumarill
-    202,  // Wobbuffet
-    134,  // Vaporeon
-     28,  // Sandslash
-     47,  // Parasect
-     15,  // Beedrill
-     89,  // Muk
-     17,  // Pidgeotto
-     88,  // Grimer
-     26,  // Raichu
-     77,  // Ponyta
-    125,  // Electabuzz
-     48,  // Venonat
-    325,  // Spoink
-    356,  // Dusclops
-    308,  // Medicham
-    269,  // Dustox
-     53,  // Persian
-     12,  // Butterfree
-     57,  // Primeape
-     96,  // Drowzee
-    162,  // Furret
-    233,  // Porygon2
-    271,  // Lombre
-    264,  // Linoone
-    301,  // Delcatty
-    342,  // Crawdaunt
-     51,  // Dugtrio
-    168,  // Ariados
-    231,  // Phanpy
-    186,  // Politoed
-    120,  // Staryu
-    113,  // Chansey
-    139,  // Omastar
-    114,  // Tangela
-    218,  // Slugma
-    229,  // Houndoom
-    166,  // Ledian
-     79,  // Slowpoke
-    137,  // Porygon
-    262,  // Mightyena
-    193,  // Yanma
-     22,  // Fearow
-    185,  // Sudowoodo
-    119,  // Seaking
-    286,  // Breloom
-     84,  // Doduo
-     18,  // Pidgeot
-    363,  // Spheal
-     36,  // Clefable
-    380,  // Latias
-    310,  // Manectric
-    335,  // Zangoose
-    141,  // Kabutops
-     94,  // Gengar
-    294,  // Loudred
-    124,  // Jynx
-    164,  // Noctowl
-    203,  // Girafarig
-    371,  // Bagon
-    126,  // Magmar
-    105,  // Marowak
-     72,  // Tentacool
-    288,  // Vigoroth
-    242,  // Blissey
-    359,  // Absol
-     65,  // Alakazam
-    237,  // Hitmontop
-    282,  // Gardevoir
-    210,  // Granbull
-    106,  // Hitmonlee
-    107,  // Hitmonchan
-    227,  // Skarmory
-    331,  // Cacnea
-    257,  // Blaziken
-    254,  // Sceptile
-    336,  // Seviper
-    366,  // Clamperl
-    145,  // Zapdos
-    214,  // Heracross
-     62,  // Poliwrath
-    122,  // Mr. mime
-    127,  // Pinsir
-    272,  // Ludicolo
-     73,  // Tentacruel
-     42,  // Golbat
-    219,  // Magcargo
-    144,  // Articuno
-    221,  // Piloswine
-    123,  // Scyther
-     64,  // Kadabra
-    235,  // Smeargle
-    142,  // Aerodactyl
-    275,  // Shiftry
-     99,  // Kingler
-     31,  // Nidoqueen
-     82,  // Magneton
-    304,  // Aron
-    381,  // Latios
-    146,  // Moltres
-    346,  // Cradily
-    386,  // Deoxys
-    181,  // Ampharos
-     34,  // Nidoking
-    207,  // Gligar
-     24,  // Arbok
-    108,  // Lickitung
-    101,  // Electrode
-    348,  // Armaldo
-     67,  // Machoke
-    234,  // Stantler
-    326,  // Grumpig
-    246,  // Larvitar
-    169,  // Crobat
-    195,  // Quagsire
-    241,  // Miltank
-     97,  // Hypno
-     55,  // Golduck
-    332,  // Cacturne
-     80,  // Slowbro
-    157,  // Typhlosion
-    199,  // Slowking
-    115,  // Kangaskhan
-    121,  // Starmie
-    317,  // Swalot
-    324,  // Torkoal
-    260,  // Swampert
-    330,  // Flygon
-    295,  // Exploud
-     85,  // Dodrio
-      9,  // Blastoise
-    296,  // Makuhita
-    364,  // Sealeo
-    128,  // Tauros
-    319,  // Sharpedo
-    160,  // Feraligatr
-     86,  // Seel
-      6,  // Charizard
-     78,  // Rapidash
-    374,  // Beldum
-    299,  // Nosepass
-      3,  // Venusaur
-    357,  // Tropius
-    154,  // Meganium
-    373,  // Salamence
-     75,  // Graveler
-    344,  // Claydol
-    372,  // Shelgon
-    111,  // Rhyhorn
-    212,  // Scizor
-     87,  // Dewgong
-    112,  // Rhydon
-    232,  // Donphan
-    103,  // Exeggutor
-    305,  // Lairon
-    150,  // Mewtwo
-    217,  // Ursaring
-    205,  // Forretress
-     68,  // Machamp
-    320,  // Wailmer
-    289,  // Slaking
-     91,  // Cloyster
-    365,  // Walrein
-    247,  // Pupitar
-    230,  // Kingdra
-    338,  // Solrock
-     59,  // Arcanine
-    350,  // Milotic
-    337,  // Lunatone
-    378,  // Regice
-    243,  // Raikou
-    245,  // Suicune
-    244,  // Entei
-    250,  // Ho-Oh
-    248,  // Tyranitar
-    375,  // Metang
-    379,  // Registeel
-    384,  // Rayquaza
-     95,  // Onix
-    149,  // Dragonite
-    249,  // Lugia
-    131,  // Lapras
-    323,  // Camerupt
-    226,  // Mantine
-    377,  // Regirock
-    130,  // Gyarados
-    297,  // Hariyama
-    362,  // Glalie
-     76,  // Golem
-    382,  // Kyogre
-    306,  // Aggron
-    321,  // Wailord
-    208,  // Steelix
-    143,  // Snorlax
-    376,  // Metagross
-    383,  // Groudon
+    NATIONAL_DEX_GASTLY,
+    NATIONAL_DEX_HAUNTER,
+    NATIONAL_DEX_HOPPIP,
+    NATIONAL_DEX_DIGLETT,
+    NATIONAL_DEX_CASTFORM,
+    NATIONAL_DEX_KOFFING,
+    NATIONAL_DEX_IGGLYBUFF,
+    NATIONAL_DEX_MISDREAVUS,
+    NATIONAL_DEX_CHIMECHO,
+    NATIONAL_DEX_SKIPLOOM,
+    NATIONAL_DEX_JIRACHI,
+    NATIONAL_DEX_SWABLU,
+    NATIONAL_DEX_SHEDINJA,
+    NATIONAL_DEX_TOGEPI,
+    NATIONAL_DEX_SURSKIT,
+    NATIONAL_DEX_PIDGEY,
+    NATIONAL_DEX_SUNKERN,
+    NATIONAL_DEX_BARBOACH,
+    NATIONAL_DEX_PICHU,
+    NATIONAL_DEX_AZURILL,
+    NATIONAL_DEX_ROSELIA,
+    NATIONAL_DEX_NATU,
+    NATIONAL_DEX_SPEAROW,
+    NATIONAL_DEX_MURKROW,
+    NATIONAL_DEX_SHUPPET,
+    NATIONAL_DEX_TAILLOW,
+    NATIONAL_DEX_EXEGGCUTE,
+    NATIONAL_DEX_TORCHIC,
+    NATIONAL_DEX_LOTAD,
+    NATIONAL_DEX_CATERPIE,
+    NATIONAL_DEX_JUMPLUFF,
+    NATIONAL_DEX_CLEFFA,
+    NATIONAL_DEX_WEEDLE,
+    NATIONAL_DEX_TOGETIC,
+    NATIONAL_DEX_DRATINI,
+    NATIONAL_DEX_RATTATA,
+    NATIONAL_DEX_MASQUERAIN,
+    NATIONAL_DEX_WURMPLE,
+    NATIONAL_DEX_QWILFISH,
+    NATIONAL_DEX_MEW,
+    NATIONAL_DEX_SHELLDER,
+    NATIONAL_DEX_SEEDOT,
+    NATIONAL_DEX_DITTO,
+    NATIONAL_DEX_BELLSPROUT,
+    NATIONAL_DEX_PLUSLE,
+    NATIONAL_DEX_MEOWTH,
+    NATIONAL_DEX_MINUN,
+    NATIONAL_DEX_SHROOMISH,
+    NATIONAL_DEX_CELEBI,
+    NATIONAL_DEX_CORSOLA,
+    NATIONAL_DEX_TREECKO,
+    NATIONAL_DEX_SPINDA,
+    NATIONAL_DEX_UNOWN,
+    NATIONAL_DEX_PARAS,
+    NATIONAL_DEX_ODDISH,
+    NATIONAL_DEX_JIGGLYPUFF,
+    NATIONAL_DEX_NINCADA,
+    NATIONAL_DEX_BELLOSSOM,
+    NATIONAL_DEX_MAGNEMITE,
+    NATIONAL_DEX_PIKACHU,
+    NATIONAL_DEX_SMOOCHUM,
+    NATIONAL_DEX_SENTRET,
+    NATIONAL_DEX_WEEPINBELL,
+    NATIONAL_DEX_CHIKORITA,
+    NATIONAL_DEX_SWINUB,
+    NATIONAL_DEX_EEVEE,
+    NATIONAL_DEX_KRABBY,
+    NATIONAL_DEX_CUBONE,
+    NATIONAL_DEX_RALTS,
+    NATIONAL_DEX_BULBASAUR,
+    NATIONAL_DEX_EKANS,
+    NATIONAL_DEX_NIDORAN_F,
+    NATIONAL_DEX_PINECO,
+    NATIONAL_DEX_FEEBAS,
+    NATIONAL_DEX_OMANYTE,
+    NATIONAL_DEX_ZUBAT,
+    NATIONAL_DEX_CLEFAIRY,
+    NATIONAL_DEX_MUDKIP,
+    NATIONAL_DEX_SNUBBULL,
+    NATIONAL_DEX_MAREEP,
+    NATIONAL_DEX_CYNDAQUIL,
+    NATIONAL_DEX_HORSEA,
+    NATIONAL_DEX_CHARMANDER,
+    NATIONAL_DEX_SUNFLORA,
+    NATIONAL_DEX_MARILL,
+    NATIONAL_DEX_WOOPER,
+    NATIONAL_DEX_SPINARAK,
+    NATIONAL_DEX_GLOOM,
+    NATIONAL_DEX_LUVDISC,
+    NATIONAL_DEX_TEDDIURSA,
+    NATIONAL_DEX_NIDORAN_M,
+    NATIONAL_DEX_SQUIRTLE,
+    NATIONAL_DEX_WINGULL,
+    NATIONAL_DEX_TOTODILE,
+    NATIONAL_DEX_WEEZING,
+    NATIONAL_DEX_VULPIX,
+    NATIONAL_DEX_METAPOD,
+    NATIONAL_DEX_SILCOON,
+    NATIONAL_DEX_MAGIKARP,
+    NATIONAL_DEX_KAKUNA,
+    NATIONAL_DEX_GULPIN,
+    NATIONAL_DEX_VOLTORB,
+    NATIONAL_DEX_LEDYBA,
+    NATIONAL_DEX_HOUNDOUR,
+    NATIONAL_DEX_SKITTY,
+    NATIONAL_DEX_SABLEYE,
+    NATIONAL_DEX_MEDITITE,
+    NATIONAL_DEX_CORPHISH,
+    NATIONAL_DEX_AIPOM,
+    NATIONAL_DEX_CASCOON,
+    NATIONAL_DEX_MAWILE,
+    NATIONAL_DEX_KABUTO,
+    NATIONAL_DEX_WIGGLYTUFF,
+    NATIONAL_DEX_SANDSHREW,
+    NATIONAL_DEX_REMORAID,
+    NATIONAL_DEX_NINJASK,
+    NATIONAL_DEX_CHINCHOU,
+    NATIONAL_DEX_POLIWAG,
+    NATIONAL_DEX_ANORITH,
+    NATIONAL_DEX_VENOMOTH,
+    NATIONAL_DEX_BANETTE,
+    NATIONAL_DEX_IVYSAUR,
+    NATIONAL_DEX_FLAAFFY,
+    NATIONAL_DEX_POOCHYENA,
+    NATIONAL_DEX_WYNAUT,
+    NATIONAL_DEX_DUNSPARCE,
+    NATIONAL_DEX_XATU,
+    NATIONAL_DEX_DUSKULL,
+    NATIONAL_DEX_FARFETCHD,
+    NATIONAL_DEX_TRAPINCH,
+    NATIONAL_DEX_GOLDEEN,
+    NATIONAL_DEX_ELECTRIKE,
+    NATIONAL_DEX_VIBRAVA,
+    NATIONAL_DEX_VICTREEBEL,
+    NATIONAL_DEX_BAYLEEF,
+    NATIONAL_DEX_DELIBIRD,
+    NATIONAL_DEX_WHISMUR,
+    NATIONAL_DEX_DRAGONAIR,
+    NATIONAL_DEX_SNORUNT,
+    NATIONAL_DEX_ZIGZAGOON,
+    NATIONAL_DEX_ILLUMISE,
+    NATIONAL_DEX_VOLBEAT,
+    NATIONAL_DEX_RATICATE,
+    NATIONAL_DEX_VILEPLUME,
+    NATIONAL_DEX_QUILAVA,
+    NATIONAL_DEX_CHARMELEON,
+    NATIONAL_DEX_GROWLITHE,
+    NATIONAL_DEX_COMBUSKEN,
+    NATIONAL_DEX_MACHOP,
+    NATIONAL_DEX_ABRA,
+    NATIONAL_DEX_NIDORINO,
+    NATIONAL_DEX_PSYDUCK,
+    NATIONAL_DEX_SWELLOW,
+    NATIONAL_DEX_NINETALES,
+    NATIONAL_DEX_NIDORINA,
+    NATIONAL_DEX_POLIWHIRL,
+    NATIONAL_DEX_GEODUDE,
+    NATIONAL_DEX_KIRLIA,
+    NATIONAL_DEX_SHUCKLE,
+    NATIONAL_DEX_ALTARIA,
+    NATIONAL_DEX_CARVANHA,
+    NATIONAL_DEX_TYROGUE,
+    NATIONAL_DEX_HOOTHOOT,
+    NATIONAL_DEX_MAGBY,
+    NATIONAL_DEX_BALTOY,
+    NATIONAL_DEX_GROVYLE,
+    NATIONAL_DEX_KECLEON,
+    NATIONAL_DEX_LANTURN,
+    NATIONAL_DEX_WARTORTLE,
+    NATIONAL_DEX_GOREBYSS,
+    NATIONAL_DEX_RELICANTH,
+    NATIONAL_DEX_ELEKID,
+    NATIONAL_DEX_WHISCASH,
+    NATIONAL_DEX_LILEEP,
+    NATIONAL_DEX_NUMEL,
+    NATIONAL_DEX_SLAKOTH,
+    NATIONAL_DEX_JOLTEON,
+    NATIONAL_DEX_CROCONAW,
+    NATIONAL_DEX_FLAREON,
+    NATIONAL_DEX_SEADRA,
+    NATIONAL_DEX_ESPEON,
+    NATIONAL_DEX_HUNTAIL,
+    NATIONAL_DEX_UMBREON,
+    NATIONAL_DEX_MARSHTOMP,
+    NATIONAL_DEX_NUZLEAF,
+    NATIONAL_DEX_SNEASEL,
+    NATIONAL_DEX_MANKEY,
+    NATIONAL_DEX_PELIPPER,
+    NATIONAL_DEX_BEAUTIFLY,
+    NATIONAL_DEX_OCTILLERY,
+    NATIONAL_DEX_AZUMARILL,
+    NATIONAL_DEX_WOBBUFFET,
+    NATIONAL_DEX_VAPOREON,
+    NATIONAL_DEX_SANDSLASH,
+    NATIONAL_DEX_PARASECT,
+    NATIONAL_DEX_BEEDRILL,
+    NATIONAL_DEX_MUK,
+    NATIONAL_DEX_PIDGEOTTO,
+    NATIONAL_DEX_GRIMER,
+    NATIONAL_DEX_RAICHU,
+    NATIONAL_DEX_PONYTA,
+    NATIONAL_DEX_ELECTABUZZ,
+    NATIONAL_DEX_VENONAT,
+    NATIONAL_DEX_SPOINK,
+    NATIONAL_DEX_DUSCLOPS,
+    NATIONAL_DEX_MEDICHAM,
+    NATIONAL_DEX_DUSTOX,
+    NATIONAL_DEX_PERSIAN,
+    NATIONAL_DEX_BUTTERFREE,
+    NATIONAL_DEX_PRIMEAPE,
+    NATIONAL_DEX_DROWZEE,
+    NATIONAL_DEX_FURRET,
+    NATIONAL_DEX_PORYGON2,
+    NATIONAL_DEX_LOMBRE,
+    NATIONAL_DEX_LINOONE,
+    NATIONAL_DEX_DELCATTY,
+    NATIONAL_DEX_CRAWDAUNT,
+    NATIONAL_DEX_DUGTRIO,
+    NATIONAL_DEX_ARIADOS,
+    NATIONAL_DEX_PHANPY,
+    NATIONAL_DEX_POLITOED,
+    NATIONAL_DEX_STARYU,
+    NATIONAL_DEX_CHANSEY,
+    NATIONAL_DEX_OMASTAR,
+    NATIONAL_DEX_TANGELA,
+    NATIONAL_DEX_SLUGMA,
+    NATIONAL_DEX_HOUNDOOM,
+    NATIONAL_DEX_LEDIAN,
+    NATIONAL_DEX_SLOWPOKE,
+    NATIONAL_DEX_PORYGON,
+    NATIONAL_DEX_MIGHTYENA,
+    NATIONAL_DEX_YANMA,
+    NATIONAL_DEX_FEAROW,
+    NATIONAL_DEX_SUDOWOODO,
+    NATIONAL_DEX_SEAKING,
+    NATIONAL_DEX_BRELOOM,
+    NATIONAL_DEX_DODUO,
+    NATIONAL_DEX_PIDGEOT,
+    NATIONAL_DEX_SPHEAL,
+    NATIONAL_DEX_CLEFABLE,
+    NATIONAL_DEX_LATIAS,
+    NATIONAL_DEX_MANECTRIC,
+    NATIONAL_DEX_ZANGOOSE,
+    NATIONAL_DEX_KABUTOPS,
+    NATIONAL_DEX_GENGAR,
+    NATIONAL_DEX_LOUDRED,
+    NATIONAL_DEX_JYNX,
+    NATIONAL_DEX_NOCTOWL,
+    NATIONAL_DEX_GIRAFARIG,
+    NATIONAL_DEX_BAGON,
+    NATIONAL_DEX_MAGMAR,
+    NATIONAL_DEX_MAROWAK,
+    NATIONAL_DEX_TENTACOOL,
+    NATIONAL_DEX_VIGOROTH,
+    NATIONAL_DEX_BLISSEY,
+    NATIONAL_DEX_ABSOL,
+    NATIONAL_DEX_ALAKAZAM,
+    NATIONAL_DEX_HITMONTOP,
+    NATIONAL_DEX_GARDEVOIR,
+    NATIONAL_DEX_GRANBULL,
+    NATIONAL_DEX_HITMONLEE,
+    NATIONAL_DEX_HITMONCHAN,
+    NATIONAL_DEX_SKARMORY,
+    NATIONAL_DEX_CACNEA,
+    NATIONAL_DEX_BLAZIKEN,
+    NATIONAL_DEX_SCEPTILE,
+    NATIONAL_DEX_SEVIPER,
+    NATIONAL_DEX_CLAMPERL,
+    NATIONAL_DEX_ZAPDOS,
+    NATIONAL_DEX_HERACROSS,
+    NATIONAL_DEX_POLIWRATH,
+    NATIONAL_DEX_MR_MIME,
+    NATIONAL_DEX_PINSIR,
+    NATIONAL_DEX_LUDICOLO,
+    NATIONAL_DEX_TENTACRUEL,
+    NATIONAL_DEX_GOLBAT,
+    NATIONAL_DEX_MAGCARGO,
+    NATIONAL_DEX_ARTICUNO,
+    NATIONAL_DEX_PILOSWINE,
+    NATIONAL_DEX_SCYTHER,
+    NATIONAL_DEX_KADABRA,
+    NATIONAL_DEX_SMEARGLE,
+    NATIONAL_DEX_AERODACTYL,
+    NATIONAL_DEX_SHIFTRY,
+    NATIONAL_DEX_KINGLER,
+    NATIONAL_DEX_NIDOQUEEN,
+    NATIONAL_DEX_MAGNETON,
+    NATIONAL_DEX_ARON,
+    NATIONAL_DEX_LATIOS,
+    NATIONAL_DEX_MOLTRES,
+    NATIONAL_DEX_CRADILY,
+    NATIONAL_DEX_DEOXYS,
+    NATIONAL_DEX_AMPHAROS,
+    NATIONAL_DEX_NIDOKING,
+    NATIONAL_DEX_GLIGAR,
+    NATIONAL_DEX_ARBOK,
+    NATIONAL_DEX_LICKITUNG,
+    NATIONAL_DEX_ELECTRODE,
+    NATIONAL_DEX_ARMALDO,
+    NATIONAL_DEX_MACHOKE,
+    NATIONAL_DEX_STANTLER,
+    NATIONAL_DEX_GRUMPIG,
+    NATIONAL_DEX_LARVITAR,
+    NATIONAL_DEX_CROBAT,
+    NATIONAL_DEX_QUAGSIRE,
+    NATIONAL_DEX_MILTANK,
+    NATIONAL_DEX_HYPNO,
+    NATIONAL_DEX_GOLDUCK,
+    NATIONAL_DEX_CACTURNE,
+    NATIONAL_DEX_SLOWBRO,
+    NATIONAL_DEX_TYPHLOSION,
+    NATIONAL_DEX_SLOWKING,
+    NATIONAL_DEX_KANGASKHAN,
+    NATIONAL_DEX_STARMIE,
+    NATIONAL_DEX_SWALOT,
+    NATIONAL_DEX_TORKOAL,
+    NATIONAL_DEX_SWAMPERT,
+    NATIONAL_DEX_FLYGON,
+    NATIONAL_DEX_EXPLOUD,
+    NATIONAL_DEX_DODRIO,
+    NATIONAL_DEX_BLASTOISE,
+    NATIONAL_DEX_MAKUHITA,
+    NATIONAL_DEX_SEALEO,
+    NATIONAL_DEX_TAUROS,
+    NATIONAL_DEX_SHARPEDO,
+    NATIONAL_DEX_FERALIGATR,
+    NATIONAL_DEX_SEEL,
+    NATIONAL_DEX_CHARIZARD,
+    NATIONAL_DEX_RAPIDASH,
+    NATIONAL_DEX_BELDUM,
+    NATIONAL_DEX_NOSEPASS,
+    NATIONAL_DEX_VENUSAUR,
+    NATIONAL_DEX_TROPIUS,
+    NATIONAL_DEX_MEGANIUM,
+    NATIONAL_DEX_SALAMENCE,
+    NATIONAL_DEX_GRAVELER,
+    NATIONAL_DEX_CLAYDOL,
+    NATIONAL_DEX_SHELGON,
+    NATIONAL_DEX_RHYHORN,
+    NATIONAL_DEX_SCIZOR,
+    NATIONAL_DEX_DEWGONG,
+    NATIONAL_DEX_RHYDON,
+    NATIONAL_DEX_DONPHAN,
+    NATIONAL_DEX_EXEGGUTOR,
+    NATIONAL_DEX_LAIRON,
+    NATIONAL_DEX_MEWTWO,
+    NATIONAL_DEX_URSARING,
+    NATIONAL_DEX_FORRETRESS,
+    NATIONAL_DEX_MACHAMP,
+    NATIONAL_DEX_WAILMER,
+    NATIONAL_DEX_SLAKING,
+    NATIONAL_DEX_CLOYSTER,
+    NATIONAL_DEX_WALREIN,
+    NATIONAL_DEX_PUPITAR,
+    NATIONAL_DEX_KINGDRA,
+    NATIONAL_DEX_SOLROCK,
+    NATIONAL_DEX_ARCANINE,
+    NATIONAL_DEX_MILOTIC,
+    NATIONAL_DEX_LUNATONE,
+    NATIONAL_DEX_REGICE,
+    NATIONAL_DEX_RAIKOU,
+    NATIONAL_DEX_SUICUNE,
+    NATIONAL_DEX_ENTEI,
+    NATIONAL_DEX_HO_OH,
+    NATIONAL_DEX_TYRANITAR,
+    NATIONAL_DEX_METANG,
+    NATIONAL_DEX_REGISTEEL,
+    NATIONAL_DEX_RAYQUAZA,
+    NATIONAL_DEX_ONIX,
+    NATIONAL_DEX_DRAGONITE,
+    NATIONAL_DEX_LUGIA,
+    NATIONAL_DEX_LAPRAS,
+    NATIONAL_DEX_CAMERUPT,
+    NATIONAL_DEX_MANTINE,
+    NATIONAL_DEX_REGIROCK,
+    NATIONAL_DEX_GYARADOS,
+    NATIONAL_DEX_HARIYAMA,
+    NATIONAL_DEX_GLALIE,
+    NATIONAL_DEX_GOLEM,
+    NATIONAL_DEX_KYOGRE,
+    NATIONAL_DEX_AGGRON,
+    NATIONAL_DEX_WAILORD,
+    NATIONAL_DEX_STEELIX,
+    NATIONAL_DEX_SNORLAX,
+    NATIONAL_DEX_METAGROSS,
+    NATIONAL_DEX_GROUDON,
 };
 static const u16 gPokedexOrder_Height[] =
 {
-     50,  // Diglett
-    298,  // Azurill
-    177,  // Natu
-     13,  // Weedle
-    172,  // Pichu
-    173,  // Cleffa
-    175,  // Togepi
-    351,  // Castform
-    174,  // Igglybuff
-     10,  // Caterpie
-    276,  // Taillow
-    132,  // Ditto
-    133,  // Eevee
-    315,  // Roselia
-     21,  // Spearow
-     16,  // Pidgey
-    191,  // Sunkern
-     90,  // Shellder
-     19,  // Rattata
-     81,  // Magnemite
-     46,  // Paras
-    265,  // Wurmple
-    385,  // Jirachi
-    104,  // Cubone
-    258,  // Mudkip
-    194,  // Wooper
-    116,  // Horsea
-     52,  // Meowth
-     29,  // Nidoran?
-    220,  // Swinub
-    151,  // Mew
-    333,  // Swablu
-    304,  // Aron
-    311,  // Plusle
-    312,  // Minun
-    102,  // Exeggcute
-     25,  // Pikachu
-    182,  // Bellossom
-    316,  // Gulpin
-    263,  // Zigzagoon
-    285,  // Shroomish
-    138,  // Omanyte
-    331,  // Cacnea
-     98,  // Krabby
-    280,  // Ralts
-    187,  // Hoppip
-    255,  // Torchic
-    366,  // Clamperl
-     74,  // Geodude
-    183,  // Marill
-    339,  // Barboach
-    238,  // Smoochum
-    100,  // Voltorb
-    290,  // Nincada
-    302,  // Sableye
-    198,  // Murkrow
-    211,  // Qwilfish
-      7,  // Squirtle
-    252,  // Treecko
-    343,  // Baltoy
-     43,  // Oddish
-    270,  // Lotad
-     39,  // Jigglypuff
-    283,  // Surskit
-    155,  // Cyndaquil
-    140,  // Kabuto
-    264,  // Linoone
-    324,  // Torkoal
-     32,  // Nidoran?
-    167,  // Spinarak
-     56,  // Mankey
-    273,  // Seedot
-    261,  // Poochyena
-    231,  // Phanpy
-    201,  // Unown
-    170,  // Chinchou
-    233,  // Porygon2
-     60,  // Poliwag
-    371,  // Bagon
-    349,  // Feebas
-    353,  // Shuppet
-    158,  // Totodile
-    251,  // Celebi
-    360,  // Wynaut
-     27,  // Sandshrew
-    358,  // Chimecho
-    370,  // Luvdisc
-    228,  // Houndour
-    266,  // Silcoon
-    309,  // Electrike
-      4,  // Charmander
-    307,  // Meditite
-    278,  // Wingull
-    223,  // Remoraid
-    341,  // Corphish
-    222,  // Corsola
-    314,  // Illumise
-    209,  // Snubbull
-     37,  // Vulpix
-    246,  // Larvitar
-    374,  // Beldum
-    293,  // Whismur
-    204,  // Pineco
-    239,  // Elekid
-     35,  // Clefairy
-    213,  // Shuckle
-    216,  // Teddiursa
-     14,  // Kakuna
-    300,  // Skitty
-    176,  // Togetic
-    118,  // Goldeen
-    303,  // Mawile
-    179,  // Mareep
-    188,  // Skiploom
-    109,  // Koffing
-     51,  // Dugtrio
-    268,  // Cascoon
-    322,  // Numel
-    347,  // Anorith
-    313,  // Volbeat
-    163,  // Hoothoot
-    328,  // Trapinch
-    325,  // Spoink
-     11,  // Metapod
-     69,  // Bellsprout
-    361,  // Snorunt
-     20,  // Raticate
-    259,  // Marshtomp
-    277,  // Swellow
-    240,  // Magby
-     58,  // Growlithe
-    200,  // Misdreavus
-      1,  // Bulbasaur
-    236,  // Tyrogue
-    218,  // Slugma
-    287,  // Slakoth
-    281,  // Kirlia
-    190,  // Aipom
-    135,  // Jolteon
-     30,  // Nidorina
-    184,  // Azumarill
-    292,  // Shedinja
-     66,  // Machop
-    291,  // Ninjask
-    284,  // Masquerain
-    355,  // Duskull
-    192,  // Sunflora
-    189,  // Jumpluff
-    120,  // Staryu
-    180,  // Flaaffy
-    363,  // Spheal
-     54,  // Psyduck
-    219,  // Magcargo
-     83,  // Farfetch'd
-     41,  // Zubat
-    137,  // Porygon
-    161,  // Sentret
-    318,  // Carvanha
-     44,  // Gloom
-     26,  // Raichu
-    129,  // Magikarp
-    215,  // Sneasel
-    305,  // Lairon
-    256,  // Combusken
-    224,  // Octillery
-     33,  // Nidorino
-    136,  // Flareon
-    225,  // Delibird
-     72,  // Tentacool
-     63,  // Abra
-    253,  // Grovyle
-    340,  // Whiscash
-    156,  // Quilava
-    196,  // Espeon
-     88,  // Grimer
-    152,  // Chikorita
-    326,  // Grumpig
-    299,  // Nosepass
-     53,  // Persian
-    262,  // Mightyena
-     48,  // Venonat
-     82,  // Magneton
-     77,  // Ponyta
-    296,  // Makuhita
-    337,  // Lunatone
-     28,  // Sandslash
-     96,  // Drowzee
-    114,  // Tangela
-     57,  // Primeape
-    165,  // Ledyba
-     40,  // Wigglytuff
-     47,  // Parasect
-    139,  // Omastar
-    294,  // Loudred
-      8,  // Wartortle
-     75,  // Graveler
-    197,  // Umbreon
-    345,  // Lileep
-     61,  // Poliwhirl
-    134,  // Vaporeon
-     15,  // Beedrill
-    105,  // Marowak
-     70,  // Weepinbell
-    369,  // Relicanth
-    111,  // Rhyhorn
-      2,  // Ivysaur
-    352,  // Kecleon
-    274,  // Nuzleaf
-    267,  // Beautifly
-     17,  // Pidgeotto
-    168,  // Ariados
-     86,  // Seel
-    186,  // Politoed
-    159,  // Croconaw
-    113,  // Chansey
-    354,  // Banette
-    232,  // Donphan
-    121,  // Starmie
-      5,  // Charmeleon
-    221,  // Piloswine
-     12,  // Butterfree
-    329,  // Vibrava
-    125,  // Electabuzz
-    342,  // Crawdaunt
-    301,  // Delcatty
-    334,  // Altaria
-    372,  // Shelgon
-     38,  // Ninetales
-    207,  // Gligar
-    364,  // Sealeo
-    327,  // Spinda
-    247,  // Pupitar
-     79,  // Slowpoke
-    338,  // Solrock
-    241,  // Miltank
-     22,  // Fearow
-     45,  // Vileplume
-     89,  // Muk
-    205,  // Forretress
-    185,  // Sudowoodo
-    359,  // Absol
-    193,  // Yanma
-    269,  // Dustox
-    108,  // Lickitung
-    235,  // Smeargle
-    171,  // Lanturn
-    101,  // Electrode
-    271,  // Lombre
-    286,  // Breloom
-    153,  // Bayleef
-    117,  // Seadra
-    110,  // Weezing
-    279,  // Pelipper
-    375,  // Metang
-     31,  // Nidoqueen
-    332,  // Cacturne
-    275,  // Shiftry
-    308,  // Medicham
-    335,  // Zangoose
-    141,  // Kabutops
-     99,  // Kingler
-     64,  // Kadabra
-    119,  // Seaking
-     36,  // Clefable
-    126,  // Magmar
-    202,  // Wobbuffet
-     92,  // Gastly
-    122,  // Mr. mime
-     62,  // Poliwrath
-    128,  // Tauros
-    380,  // Latias
-    181,  // Ampharos
-    288,  // Vigoroth
-    166,  // Ledian
-     76,  // Golem
-    365,  // Walrein
-     84,  // Doduo
-    229,  // Houndoom
-     34,  // Nidoking
-    124,  // Jynx
-    107,  // Hitmonchan
-    234,  // Stantler
-    210,  // Granbull
-    237,  // Hitmontop
-    195,  // Quagsire
-    344,  // Claydol
-    260,  // Swampert
-    242,  // Blissey
-    272,  // Ludicolo
-    295,  // Exploud
-    206,  // Dunsparce
-    127,  // Pinsir
-     91,  // Cloyster
-     67,  // Machoke
-    203,  // Girafarig
-     18,  // Pidgeot
-    178,  // Xatu
-    346,  // Cradily
-    106,  // Hitmonlee
-     49,  // Venomoth
-     94,  // Gengar
-    214,  // Heracross
-    362,  // Glalie
-    123,  // Scyther
-    373,  // Salamence
-    310,  // Manectric
-    348,  // Armaldo
-     65,  // Alakazam
-     97,  // Hypno
-    164,  // Noctowl
-     73,  // Tentacruel
-    356,  // Dusclops
-    145,  // Zapdos
-     42,  // Golbat
-    376,  // Metagross
-    282,  // Gardevoir
-      9,  // Blastoise
-     80,  // Slowbro
-     93,  // Haunter
-     68,  // Machamp
-    377,  // Regirock
-    317,  // Swalot
-    254,  // Sceptile
-    227,  // Skarmory
-     55,  // Golduck
-    386,  // Deoxys
-     71,  // Victreebel
-     78,  // Rapidash
-      6,  // Charizard
-    367,  // Huntail
-     87,  // Dewgong
-    144,  // Articuno
-    157,  // Typhlosion
-    142,  // Aerodactyl
-    368,  // Gorebyss
-    217,  // Ursaring
-    154,  // Meganium
-    378,  // Regice
-    212,  // Scizor
-    230,  // Kingdra
-    147,  // Dratini
-     85,  // Dodrio
-    319,  // Sharpedo
-    169,  // Crobat
-    162,  // Furret
-     59,  // Arcanine
-    243,  // Raikou
-    257,  // Blaziken
-    323,  // Camerupt
-    112,  // Rhydon
-    379,  // Registeel
-     23,  // Ekans
-    330,  // Flygon
-    357,  // Tropius
-    381,  // Latios
-    245,  // Suicune
-    146,  // Moltres
-      3,  // Venusaur
-    103,  // Exeggutor
-    199,  // Slowking
-    248,  // Tyranitar
-    289,  // Slaking
-    320,  // Wailmer
-    150,  // Mewtwo
-    306,  // Aggron
-    143,  // Snorlax
-    226,  // Mantine
-    244,  // Entei
-    149,  // Dragonite
-    115,  // Kangaskhan
-    297,  // Hariyama
-    160,  // Feraligatr
-    131,  // Lapras
-    336,  // Seviper
-     24,  // Arbok
-    383,  // Groudon
-    250,  // Ho-Oh
-    148,  // Dragonair
-    382,  // Kyogre
-    249,  // Lugia
-    350,  // Milotic
-    130,  // Gyarados
-    384,  // Rayquaza
-     95,  // Onix
-    208,  // Steelix
-    321,  // Wailord
+    NATIONAL_DEX_DIGLETT,
+    NATIONAL_DEX_AZURILL,
+    NATIONAL_DEX_NATU,
+    NATIONAL_DEX_WEEDLE,
+    NATIONAL_DEX_PICHU,
+    NATIONAL_DEX_CLEFFA,
+    NATIONAL_DEX_TOGEPI,
+    NATIONAL_DEX_CASTFORM,
+    NATIONAL_DEX_IGGLYBUFF,
+    NATIONAL_DEX_CATERPIE,
+    NATIONAL_DEX_TAILLOW,
+    NATIONAL_DEX_DITTO,
+    NATIONAL_DEX_EEVEE,
+    NATIONAL_DEX_ROSELIA,
+    NATIONAL_DEX_SPEAROW,
+    NATIONAL_DEX_PIDGEY,
+    NATIONAL_DEX_SUNKERN,
+    NATIONAL_DEX_SHELLDER,
+    NATIONAL_DEX_RATTATA,
+    NATIONAL_DEX_MAGNEMITE,
+    NATIONAL_DEX_PARAS,
+    NATIONAL_DEX_WURMPLE,
+    NATIONAL_DEX_JIRACHI,
+    NATIONAL_DEX_CUBONE,
+    NATIONAL_DEX_MUDKIP,
+    NATIONAL_DEX_WOOPER,
+    NATIONAL_DEX_HORSEA,
+    NATIONAL_DEX_MEOWTH,
+    NATIONAL_DEX_NIDORAN_F,
+    NATIONAL_DEX_SWINUB,
+    NATIONAL_DEX_MEW,
+    NATIONAL_DEX_SWABLU,
+    NATIONAL_DEX_ARON,
+    NATIONAL_DEX_PLUSLE,
+    NATIONAL_DEX_MINUN,
+    NATIONAL_DEX_EXEGGCUTE,
+    NATIONAL_DEX_PIKACHU,
+    NATIONAL_DEX_BELLOSSOM,
+    NATIONAL_DEX_GULPIN,
+    NATIONAL_DEX_ZIGZAGOON,
+    NATIONAL_DEX_SHROOMISH,
+    NATIONAL_DEX_OMANYTE,
+    NATIONAL_DEX_CACNEA,
+    NATIONAL_DEX_KRABBY,
+    NATIONAL_DEX_RALTS,
+    NATIONAL_DEX_HOPPIP,
+    NATIONAL_DEX_TORCHIC,
+    NATIONAL_DEX_CLAMPERL,
+    NATIONAL_DEX_GEODUDE,
+    NATIONAL_DEX_MARILL,
+    NATIONAL_DEX_BARBOACH,
+    NATIONAL_DEX_SMOOCHUM,
+    NATIONAL_DEX_VOLTORB,
+    NATIONAL_DEX_NINCADA,
+    NATIONAL_DEX_SABLEYE,
+    NATIONAL_DEX_MURKROW,
+    NATIONAL_DEX_QWILFISH,
+    NATIONAL_DEX_SQUIRTLE,
+    NATIONAL_DEX_TREECKO,
+    NATIONAL_DEX_BALTOY,
+    NATIONAL_DEX_ODDISH,
+    NATIONAL_DEX_LOTAD,
+    NATIONAL_DEX_JIGGLYPUFF,
+    NATIONAL_DEX_SURSKIT,
+    NATIONAL_DEX_CYNDAQUIL,
+    NATIONAL_DEX_KABUTO,
+    NATIONAL_DEX_LINOONE,
+    NATIONAL_DEX_TORKOAL,
+    NATIONAL_DEX_NIDORAN_M,
+    NATIONAL_DEX_SPINARAK,
+    NATIONAL_DEX_MANKEY,
+    NATIONAL_DEX_SEEDOT,
+    NATIONAL_DEX_POOCHYENA,
+    NATIONAL_DEX_PHANPY,
+    NATIONAL_DEX_UNOWN,
+    NATIONAL_DEX_CHINCHOU,
+    NATIONAL_DEX_PORYGON2,
+    NATIONAL_DEX_POLIWAG,
+    NATIONAL_DEX_BAGON,
+    NATIONAL_DEX_FEEBAS,
+    NATIONAL_DEX_SHUPPET,
+    NATIONAL_DEX_TOTODILE,
+    NATIONAL_DEX_CELEBI,
+    NATIONAL_DEX_WYNAUT,
+    NATIONAL_DEX_SANDSHREW,
+    NATIONAL_DEX_CHIMECHO,
+    NATIONAL_DEX_LUVDISC,
+    NATIONAL_DEX_HOUNDOUR,
+    NATIONAL_DEX_SILCOON,
+    NATIONAL_DEX_ELECTRIKE,
+    NATIONAL_DEX_CHARMANDER,
+    NATIONAL_DEX_MEDITITE,
+    NATIONAL_DEX_WINGULL,
+    NATIONAL_DEX_REMORAID,
+    NATIONAL_DEX_CORPHISH,
+    NATIONAL_DEX_CORSOLA,
+    NATIONAL_DEX_ILLUMISE,
+    NATIONAL_DEX_SNUBBULL,
+    NATIONAL_DEX_VULPIX,
+    NATIONAL_DEX_LARVITAR,
+    NATIONAL_DEX_BELDUM,
+    NATIONAL_DEX_WHISMUR,
+    NATIONAL_DEX_PINECO,
+    NATIONAL_DEX_ELEKID,
+    NATIONAL_DEX_CLEFAIRY,
+    NATIONAL_DEX_SHUCKLE,
+    NATIONAL_DEX_TEDDIURSA,
+    NATIONAL_DEX_KAKUNA,
+    NATIONAL_DEX_SKITTY,
+    NATIONAL_DEX_TOGETIC,
+    NATIONAL_DEX_GOLDEEN,
+    NATIONAL_DEX_MAWILE,
+    NATIONAL_DEX_MAREEP,
+    NATIONAL_DEX_SKIPLOOM,
+    NATIONAL_DEX_KOFFING,
+    NATIONAL_DEX_DUGTRIO,
+    NATIONAL_DEX_CASCOON,
+    NATIONAL_DEX_NUMEL,
+    NATIONAL_DEX_ANORITH,
+    NATIONAL_DEX_VOLBEAT,
+    NATIONAL_DEX_HOOTHOOT,
+    NATIONAL_DEX_TRAPINCH,
+    NATIONAL_DEX_SPOINK,
+    NATIONAL_DEX_METAPOD,
+    NATIONAL_DEX_BELLSPROUT,
+    NATIONAL_DEX_SNORUNT,
+    NATIONAL_DEX_RATICATE,
+    NATIONAL_DEX_MARSHTOMP,
+    NATIONAL_DEX_SWELLOW,
+    NATIONAL_DEX_MAGBY,
+    NATIONAL_DEX_GROWLITHE,
+    NATIONAL_DEX_MISDREAVUS,
+    NATIONAL_DEX_BULBASAUR,
+    NATIONAL_DEX_TYROGUE,
+    NATIONAL_DEX_SLUGMA,
+    NATIONAL_DEX_SLAKOTH,
+    NATIONAL_DEX_KIRLIA,
+    NATIONAL_DEX_AIPOM,
+    NATIONAL_DEX_JOLTEON,
+    NATIONAL_DEX_NIDORINA,
+    NATIONAL_DEX_AZUMARILL,
+    NATIONAL_DEX_SHEDINJA,
+    NATIONAL_DEX_MACHOP,
+    NATIONAL_DEX_NINJASK,
+    NATIONAL_DEX_MASQUERAIN,
+    NATIONAL_DEX_DUSKULL,
+    NATIONAL_DEX_SUNFLORA,
+    NATIONAL_DEX_JUMPLUFF,
+    NATIONAL_DEX_STARYU,
+    NATIONAL_DEX_FLAAFFY,
+    NATIONAL_DEX_SPHEAL,
+    NATIONAL_DEX_PSYDUCK,
+    NATIONAL_DEX_MAGCARGO,
+    NATIONAL_DEX_FARFETCHD,
+    NATIONAL_DEX_ZUBAT,
+    NATIONAL_DEX_PORYGON,
+    NATIONAL_DEX_SENTRET,
+    NATIONAL_DEX_CARVANHA,
+    NATIONAL_DEX_GLOOM,
+    NATIONAL_DEX_RAICHU,
+    NATIONAL_DEX_MAGIKARP,
+    NATIONAL_DEX_SNEASEL,
+    NATIONAL_DEX_LAIRON,
+    NATIONAL_DEX_COMBUSKEN,
+    NATIONAL_DEX_OCTILLERY,
+    NATIONAL_DEX_NIDORINO,
+    NATIONAL_DEX_FLAREON,
+    NATIONAL_DEX_DELIBIRD,
+    NATIONAL_DEX_TENTACOOL,
+    NATIONAL_DEX_ABRA,
+    NATIONAL_DEX_GROVYLE,
+    NATIONAL_DEX_WHISCASH,
+    NATIONAL_DEX_QUILAVA,
+    NATIONAL_DEX_ESPEON,
+    NATIONAL_DEX_GRIMER,
+    NATIONAL_DEX_CHIKORITA,
+    NATIONAL_DEX_GRUMPIG,
+    NATIONAL_DEX_NOSEPASS,
+    NATIONAL_DEX_PERSIAN,
+    NATIONAL_DEX_MIGHTYENA,
+    NATIONAL_DEX_VENONAT,
+    NATIONAL_DEX_MAGNETON,
+    NATIONAL_DEX_PONYTA,
+    NATIONAL_DEX_MAKUHITA,
+    NATIONAL_DEX_LUNATONE,
+    NATIONAL_DEX_SANDSLASH,
+    NATIONAL_DEX_DROWZEE,
+    NATIONAL_DEX_TANGELA,
+    NATIONAL_DEX_PRIMEAPE,
+    NATIONAL_DEX_LEDYBA,
+    NATIONAL_DEX_WIGGLYTUFF,
+    NATIONAL_DEX_PARASECT,
+    NATIONAL_DEX_OMASTAR,
+    NATIONAL_DEX_LOUDRED,
+    NATIONAL_DEX_WARTORTLE,
+    NATIONAL_DEX_GRAVELER,
+    NATIONAL_DEX_UMBREON,
+    NATIONAL_DEX_LILEEP,
+    NATIONAL_DEX_POLIWHIRL,
+    NATIONAL_DEX_VAPOREON,
+    NATIONAL_DEX_BEEDRILL,
+    NATIONAL_DEX_MAROWAK,
+    NATIONAL_DEX_WEEPINBELL,
+    NATIONAL_DEX_RELICANTH,
+    NATIONAL_DEX_RHYHORN,
+    NATIONAL_DEX_IVYSAUR,
+    NATIONAL_DEX_KECLEON,
+    NATIONAL_DEX_NUZLEAF,
+    NATIONAL_DEX_BEAUTIFLY,
+    NATIONAL_DEX_PIDGEOTTO,
+    NATIONAL_DEX_ARIADOS,
+    NATIONAL_DEX_SEEL,
+    NATIONAL_DEX_POLITOED,
+    NATIONAL_DEX_CROCONAW,
+    NATIONAL_DEX_CHANSEY,
+    NATIONAL_DEX_BANETTE,
+    NATIONAL_DEX_DONPHAN,
+    NATIONAL_DEX_STARMIE,
+    NATIONAL_DEX_CHARMELEON,
+    NATIONAL_DEX_PILOSWINE,
+    NATIONAL_DEX_BUTTERFREE,
+    NATIONAL_DEX_VIBRAVA,
+    NATIONAL_DEX_ELECTABUZZ,
+    NATIONAL_DEX_CRAWDAUNT,
+    NATIONAL_DEX_DELCATTY,
+    NATIONAL_DEX_ALTARIA,
+    NATIONAL_DEX_SHELGON,
+    NATIONAL_DEX_NINETALES,
+    NATIONAL_DEX_GLIGAR,
+    NATIONAL_DEX_SEALEO,
+    NATIONAL_DEX_SPINDA,
+    NATIONAL_DEX_PUPITAR,
+    NATIONAL_DEX_SLOWPOKE,
+    NATIONAL_DEX_SOLROCK,
+    NATIONAL_DEX_MILTANK,
+    NATIONAL_DEX_FEAROW,
+    NATIONAL_DEX_VILEPLUME,
+    NATIONAL_DEX_MUK,
+    NATIONAL_DEX_FORRETRESS,
+    NATIONAL_DEX_SUDOWOODO,
+    NATIONAL_DEX_ABSOL,
+    NATIONAL_DEX_YANMA,
+    NATIONAL_DEX_DUSTOX,
+    NATIONAL_DEX_LICKITUNG,
+    NATIONAL_DEX_SMEARGLE,
+    NATIONAL_DEX_LANTURN,
+    NATIONAL_DEX_ELECTRODE,
+    NATIONAL_DEX_LOMBRE,
+    NATIONAL_DEX_BRELOOM,
+    NATIONAL_DEX_BAYLEEF,
+    NATIONAL_DEX_SEADRA,
+    NATIONAL_DEX_WEEZING,
+    NATIONAL_DEX_PELIPPER,
+    NATIONAL_DEX_METANG,
+    NATIONAL_DEX_NIDOQUEEN,
+    NATIONAL_DEX_CACTURNE,
+    NATIONAL_DEX_SHIFTRY,
+    NATIONAL_DEX_MEDICHAM,
+    NATIONAL_DEX_ZANGOOSE,
+    NATIONAL_DEX_KABUTOPS,
+    NATIONAL_DEX_KINGLER,
+    NATIONAL_DEX_KADABRA,
+    NATIONAL_DEX_SEAKING,
+    NATIONAL_DEX_CLEFABLE,
+    NATIONAL_DEX_MAGMAR,
+    NATIONAL_DEX_WOBBUFFET,
+    NATIONAL_DEX_GASTLY,
+    NATIONAL_DEX_MR_MIME,
+    NATIONAL_DEX_POLIWRATH,
+    NATIONAL_DEX_TAUROS,
+    NATIONAL_DEX_LATIAS,
+    NATIONAL_DEX_AMPHAROS,
+    NATIONAL_DEX_VIGOROTH,
+    NATIONAL_DEX_LEDIAN,
+    NATIONAL_DEX_GOLEM,
+    NATIONAL_DEX_WALREIN,
+    NATIONAL_DEX_DODUO,
+    NATIONAL_DEX_HOUNDOOM,
+    NATIONAL_DEX_NIDOKING,
+    NATIONAL_DEX_JYNX,
+    NATIONAL_DEX_HITMONCHAN,
+    NATIONAL_DEX_STANTLER,
+    NATIONAL_DEX_GRANBULL,
+    NATIONAL_DEX_HITMONTOP,
+    NATIONAL_DEX_QUAGSIRE,
+    NATIONAL_DEX_CLAYDOL,
+    NATIONAL_DEX_SWAMPERT,
+    NATIONAL_DEX_BLISSEY,
+    NATIONAL_DEX_LUDICOLO,
+    NATIONAL_DEX_EXPLOUD,
+    NATIONAL_DEX_DUNSPARCE,
+    NATIONAL_DEX_PINSIR,
+    NATIONAL_DEX_CLOYSTER,
+    NATIONAL_DEX_MACHOKE,
+    NATIONAL_DEX_GIRAFARIG,
+    NATIONAL_DEX_PIDGEOT,
+    NATIONAL_DEX_XATU,
+    NATIONAL_DEX_CRADILY,
+    NATIONAL_DEX_HITMONLEE,
+    NATIONAL_DEX_VENOMOTH,
+    NATIONAL_DEX_GENGAR,
+    NATIONAL_DEX_HERACROSS,
+    NATIONAL_DEX_GLALIE,
+    NATIONAL_DEX_SCYTHER,
+    NATIONAL_DEX_SALAMENCE,
+    NATIONAL_DEX_MANECTRIC,
+    NATIONAL_DEX_ARMALDO,
+    NATIONAL_DEX_ALAKAZAM,
+    NATIONAL_DEX_HYPNO,
+    NATIONAL_DEX_NOCTOWL,
+    NATIONAL_DEX_TENTACRUEL,
+    NATIONAL_DEX_DUSCLOPS,
+    NATIONAL_DEX_ZAPDOS,
+    NATIONAL_DEX_GOLBAT,
+    NATIONAL_DEX_METAGROSS,
+    NATIONAL_DEX_GARDEVOIR,
+    NATIONAL_DEX_BLASTOISE,
+    NATIONAL_DEX_SLOWBRO,
+    NATIONAL_DEX_HAUNTER,
+    NATIONAL_DEX_MACHAMP,
+    NATIONAL_DEX_REGIROCK,
+    NATIONAL_DEX_SWALOT,
+    NATIONAL_DEX_SCEPTILE,
+    NATIONAL_DEX_SKARMORY,
+    NATIONAL_DEX_GOLDUCK,
+    NATIONAL_DEX_DEOXYS,
+    NATIONAL_DEX_VICTREEBEL,
+    NATIONAL_DEX_RAPIDASH,
+    NATIONAL_DEX_CHARIZARD,
+    NATIONAL_DEX_HUNTAIL,
+    NATIONAL_DEX_DEWGONG,
+    NATIONAL_DEX_ARTICUNO,
+    NATIONAL_DEX_TYPHLOSION,
+    NATIONAL_DEX_AERODACTYL,
+    NATIONAL_DEX_GOREBYSS,
+    NATIONAL_DEX_URSARING,
+    NATIONAL_DEX_MEGANIUM,
+    NATIONAL_DEX_REGICE,
+    NATIONAL_DEX_SCIZOR,
+    NATIONAL_DEX_KINGDRA,
+    NATIONAL_DEX_DRATINI,
+    NATIONAL_DEX_DODRIO,
+    NATIONAL_DEX_SHARPEDO,
+    NATIONAL_DEX_CROBAT,
+    NATIONAL_DEX_FURRET,
+    NATIONAL_DEX_ARCANINE,
+    NATIONAL_DEX_RAIKOU,
+    NATIONAL_DEX_BLAZIKEN,
+    NATIONAL_DEX_CAMERUPT,
+    NATIONAL_DEX_RHYDON,
+    NATIONAL_DEX_REGISTEEL,
+    NATIONAL_DEX_EKANS,
+    NATIONAL_DEX_FLYGON,
+    NATIONAL_DEX_TROPIUS,
+    NATIONAL_DEX_LATIOS,
+    NATIONAL_DEX_SUICUNE,
+    NATIONAL_DEX_MOLTRES,
+    NATIONAL_DEX_VENUSAUR,
+    NATIONAL_DEX_EXEGGUTOR,
+    NATIONAL_DEX_SLOWKING,
+    NATIONAL_DEX_TYRANITAR,
+    NATIONAL_DEX_SLAKING,
+    NATIONAL_DEX_WAILMER,
+    NATIONAL_DEX_MEWTWO,
+    NATIONAL_DEX_AGGRON,
+    NATIONAL_DEX_SNORLAX,
+    NATIONAL_DEX_MANTINE,
+    NATIONAL_DEX_ENTEI,
+    NATIONAL_DEX_DRAGONITE,
+    NATIONAL_DEX_KANGASKHAN,
+    NATIONAL_DEX_HARIYAMA,
+    NATIONAL_DEX_FERALIGATR,
+    NATIONAL_DEX_LAPRAS,
+    NATIONAL_DEX_SEVIPER,
+    NATIONAL_DEX_ARBOK,
+    NATIONAL_DEX_GROUDON,
+    NATIONAL_DEX_HO_OH,
+    NATIONAL_DEX_DRAGONAIR,
+    NATIONAL_DEX_KYOGRE,
+    NATIONAL_DEX_LUGIA,
+    NATIONAL_DEX_MILOTIC,
+    NATIONAL_DEX_GYARADOS,
+    NATIONAL_DEX_RAYQUAZA,
+    NATIONAL_DEX_ONIX,
+    NATIONAL_DEX_STEELIX,
+    NATIONAL_DEX_WAILORD,
 };
