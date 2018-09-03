@@ -26,7 +26,6 @@
 #include "pokemon_summary_screen.h"
 #include "use_pokeblock.h"
 #include "constants/game_stat.h"
-#include "data/pokenav_city_maps.h"
 
 struct UnknownPokenav0
 {
@@ -101,76 +100,41 @@ struct PokenavRibbonIconGfx {
 
 IWRAM_DATA void (*gUnknown_03000744)(void);
 
-extern const u8 gUnknown_083E0314[];
 extern const u16 gUnknown_08E9F9E8[];
-extern const u16 gUnknown_083E0274[];
 extern const u8 gUnknown_08E9FC64[];
-extern const u8 gUnknown_083E0354[];
 extern const u8 gUnknown_08E9FD64[];
 extern const u8 gUnknown_08E9FE54[];
 extern const u8 gUnknown_08E9FD1C[];
-extern const u16 gPokenavConditionSearch2_Pal[];
-extern const u8 gUnknown_083E0334[];
-extern const u16 gUnknown_083E02B4[];
 extern const u8 gPokenavConditionSearch2_Gfx[];
-extern const u8 gUnknown_083E0254[];
 extern const u8 gUnknown_08E9FEB4[];
-extern const u8 gUnknown_083E01AC[];
 extern const u8 gUnknown_08E9AC4C[];
 extern const u8 gPokenavConditionMenu2_Pal[];
 extern const u8 gPokenavConditionView_Gfx[];
 extern const u8 gUnknown_08E9ABB4[];
 extern const u8 gUnknown_08E9AC2C[];
-extern const u8 *const gPokenavCityMaps[][2];
 extern const u8 gPokenavHoennMapSquares_Pal[];
 extern const u8 gPokenavHoennMapSquares_Gfx[];
-extern const u16 gUnknown_083E003C[];
-extern const u8 *const gUnknown_083E31B0[];
-extern const u8 *const gUnknown_083E31CC[];
-extern const u8 *const gUnknown_083E31D8[];
 extern u8 *gUnknown_083DFEC8;
-extern const u8 gUnknown_083DFEEC[];
-extern const u8 gUnknown_083E005C[];
-extern const u8 gUnknown_083E007C[];
-extern const u8 gPokenavOutlineTilemap[];
-extern const u8 gPokenavOutlineTiles[];
-extern const u8 gPokenavOutlinePalette[];
 extern const u8 gUnknown_083DFECC[];
-extern const u8 gUnknown_083DFF8C[];
 extern const u8 gPokenavHoennMapMisc_Gfx[];
 extern const u8 gUnknown_08E99FB0[];
 extern const u8 gUnknown_08E9A100[];
 extern const u16 gPokenavHoennMap1_Pal[];
-extern void (*const gUnknown_083E3270[])(u16, u16);
-extern const u8 gUnknown_083E039C[];
-extern const u8 gUnknown_083E03A0[];
-extern const u8 gUnknown_083E01F4[];
-extern const u8 *const gTrainerEyeDescriptions[];
 extern const u8 gUnknown_08E9FBA0[];
 extern const u8 gPokenavRibbonView_Gfx[];
-extern const u8 gUnknown_083E040C[];
 extern const u16 gPokenavRibbonView_Pal[];
-extern const u16 gUnknown_083E03A8[];
-extern const u16 gUnknown_083E3C60[][16];
-extern const u16 gPokenavRibbonsIconGfx[][2];
-extern const u8 *const gRibbonDescriptions[][2];
-extern const u8 *const gGiftRibbonDescriptions[][2];
 extern const u8 gUnknown_08E9FF58[];
 extern const u8 gPokenavRibbonPokeView_Gfx[];
-extern const u16 gUnknown_083E0124[];
-extern const u16 gUnknown_083E0144[];
 extern const u8 gPokenavMenuOptions_Gfx[];
 extern const u8 gPokenavConditionMenu_Gfx[];
 extern const u8 gPokenavConditionSearch_Gfx[];
 extern const struct SpriteTemplate gSpriteTemplate_83E4454;
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_83E4450[];
-extern const u16 gUnknown_083E42F8[];
 extern const u16 gPokenavMenuOptions1_Pal[];
 extern const u16 gPokenavMenuOptions2_Pal[];
 extern const u16 gPokenavConditionMenu_Pal[];
 extern const u16 gPokenavCondition6_Pal[];
 extern const u16 gPokenavCondition7_Pal[];
-extern const struct SpriteSheet gSpriteSheet_PokenavBlueLight;
 extern const struct SpritePalette gSpritePalette_PokenavBlueLight;
 extern const struct SpriteTemplate gSpriteTemplate_83E4484;
 extern const u8 gPokenavMainMenu_Gfx[];
@@ -180,7 +144,6 @@ extern const u8 gPokenavHoennMapHeader_Gfx[];
 extern const u8 gPokenavConditionMenuOptions_Gfx[];
 extern const u8 gPokenavConditionMenuOptions2_Gfx[];
 extern const u8 gPokenavTrainersEyesHeader_Gfx[];
-extern const struct SpritePalette gUnknown_083E449C[];
 extern const struct SpriteTemplate gSpriteTemplate_83E4530;
 extern const struct SpriteTemplate gSpriteTemplate_83E4548;
 extern const struct SpriteTemplate gSpriteTemplate_83E44E0;
@@ -202,9 +165,7 @@ extern const struct SpriteTemplate gSpriteTemplate_83E476C;
 extern const struct SpriteSheet gUnknown_083E4784;
 extern const struct SpritePalette gUnknown_083E478C;
 extern const struct SpriteTemplate gSpriteTemplate_83E4800;
-extern const s16 gUnknown_083E4794[][2];
 extern const u8 gUnknown_083E329C[];
-extern const struct SpritePalette gUnknown_083E4818;
 extern const struct SpriteTemplate gSpriteTemplate_83E4850;
 extern const struct SpritePalette gUnknown_083E4868;
 extern const struct SpriteTemplate gSpriteTemplate_83E4878;
@@ -418,6 +379,1070 @@ extern void sub_80F5BF0();
 extern void sub_80F6F64();
 
 extern u16 gKeyRepeatStartDelay;
+
+const u8 gUnknown_083DFECC[] = INCBIN_U8("graphics/pokenav/83DFECC.gbapal");
+
+const u8 gUnknown_083DFEEC[] = INCBIN_U8("graphics/pokenav/83DFEEC.4bpp");
+const u8 gUnknown_083DFF8C[] = INCBIN_U8("graphics/pokenav/83DFF8C.bin.lz");
+const u16 gUnknown_083E003C[] = INCBIN_U16("graphics/pokenav/83E003C.gbapal");
+
+const u8 gUnknown_083E005C[] = INCBIN_U8("graphics/pokenav/83E005C.4bpp");
+const u8 gUnknown_083E007C[] = INCBIN_U8("graphics/pokenav/83E007C.bin.lz");
+const u16 gUnknown_083E0124[] = INCBIN_U16("graphics/pokenav/83E0124_pal.bin");
+
+const u16 gUnknown_083E0144[] = INCBIN_U16("graphics/pokenav/83E0144_pal.bin");
+
+const u16 gUnknown_083E0164[] = INCBIN_U16("graphics/pokenav/83E0164.bin");//?
+
+const u8 gUnknown_083E01AC[] = INCBIN_U8("graphics/pokenav/83E01AC.bin");
+const u8 gUnknown_083E01F4[] = INCBIN_U8("graphics/pokenav/83E01F4.bin");
+const u8 gUnknown_083E0254[] = INCBIN_U8("graphics/pokenav/83E0254.gbapal");
+const u16 gUnknown_083E0274[] = INCBIN_U16("graphics/pokenav/83E0274.gbapal");
+
+const u16 gPokenavConditionSearch2_Pal[] = INCBIN_U16("graphics/pokenav/condition_search2.gbapal");
+
+const u16 gUnknown_083E02B4[] = INCBIN_U16("graphics/pokenav/83E02B4.gbapal");
+
+const u16 gUnknown_083E02D4[] =  INCBIN_U16("graphics/pokenav/83E02D4.bin");//?
+
+const u8 gUnknown_083E0314[] = INCBIN_U8("graphics/pokenav/83E0314.gbapal");
+const u8 gUnknown_083E0334[] = INCBIN_U8("graphics/pokenav/trainereyes_misc_pal.bin");// @ the original bytes have an "FF FF" instance which is incompatible with gbagfx to produce the bytes needed to match the original ROM, so I am forced to include it as a .bin until the lowest bit is properly handled or a better workaround is produced
+
+const u8 gUnknown_083E0354[] = INCBIN_U8("graphics/pokenav/trainereyes_misc.4bpp.lz");
+
+const u8 gUnknown_083E039C[][4] = 
+{
+    {0x80, 0x42, 0x82, 0x42},
+};
+
+const u8 gUnknown_083E03A0[][8] = 
+{
+    {0x00, 0x40, 0x00, 0x40, 0x81, 0x42, 0x83, 0x42},
+};
+
+const u16 gUnknown_083E03A8[] = INCBIN_U16("graphics/pokenav/83E03A8.gbapal");
+const u16 gUnknown_083E03C8[] = INCBIN_U16("graphics/pokenav/83E03C8.bin");
+const u8 gUnknown_083E040C[] = INCBIN_U8("graphics/misc/ribbons_half.4bpp.lz");
+const u8 gPokenavOutlinePalette[] = INCBIN_U8("graphics/pokenav/outline.gbapal");
+const u8 gPokenavOutlineTiles[] = INCBIN_U8("graphics/pokenav/outline.4bpp.lz");
+const u8 gPokenavOutlineTilemap[] = INCBIN_U8("graphics/pokenav/outline_map.bin.lz");
+
+#include "data/pokenav_city_maps.h"
+
+#include "data/text/ribbon_descriptions.h"
+#include "data/text/gift_ribbon_descriptions.h"
+#include "data/text/trainer_eye_descriptions.h"
+
+const u8 *const gUnknown_083E31B0[] = 
+{
+    PCText_CheckMap,
+    PCText_CheckPoke,
+    PCText_CheckTrainer,
+    PCText_CheckRibbons,
+    PCText_PutAwayNav,
+    PCText_NoRibbonWin,
+    PCText_NoTrainers,
+};
+
+const u8 *const gUnknown_083E31CC[] = 
+{
+    PCText_CheckParty,
+    PCText_CheckPokeAll,
+    PCText_ReturnToNav,
+};
+
+const u8 *const gUnknown_083E31D8[] = 
+{
+    PCText_FindCool,
+    PCText_FindBeauty,
+    PCText_FindCute,
+    PCText_FindSmart,
+    PCText_FindTough,
+    PCText_ReturnToCondition,
+};
+
+#include "data/pokenav_city_maps_2.h"
+
+void sub_80F0A24(u16, u16);
+void sub_80F0A74(u16, u16);
+
+void (*const gUnknown_083E3270[])(u16, u16) = 
+{
+    sub_80F0A24,
+    sub_80F0A24,
+    sub_80F0A74,
+};
+
+const u16 gPokenavIconPalette[] = INCBIN_U16("graphics/pokenav/icon.gbapal");
+const u8 gUnknown_083E329C[] = INCBIN_U8("graphics/pokenav/icon.4bpp.lz");
+const u8 gPokenavPokeballTiles[] = INCBIN_U8("graphics/pokenav/pokeball.4bpp");
+const u8 gUnknown_083E3780[] = INCBIN_U8("graphics/pokenav/83E3780.4bpp");
+const u16 gPokenavSparkle_Pal[] = INCBIN_U16("graphics/pokenav/sparkle.gbapal");
+const u8 gPokenavSparkle_Gfx[] = INCBIN_U8("graphics/pokenav/sparkle.4bpp");
+const u8 gPokenavUpDownArrows_Gfx[] = INCBIN_U8("graphics/pokenav/arrows.4bpp");
+const u8 gUnknown_083E3BC0[] =  INCBIN_U8("graphics/pokenav/83E3BC0.bin");
+const u8 gTiles_083E3BE0[] = INCBIN_U8("graphics/unknown/unknown_3E3BE0.4bpp");
+
+const u16 gUnknown_083E3C60[][16] = 
+{
+    INCBIN_U16("graphics/misc/ribbons_cool.gbapal"),
+    INCBIN_U16("graphics/misc/ribbons_beauty.gbapal"),
+    INCBIN_U16("graphics/misc/ribbons_cute.gbapal"),
+    INCBIN_U16("graphics/misc/ribbons_smart.gbapal"),
+    INCBIN_U16("graphics/misc/ribbons_tough.gbapal"),
+};
+
+const u8 gUnknown_083E3D00[] = INCBIN_U8("graphics/misc/ribbons_full.4bpp.lz");
+const u16 PokenavBlueLightPalette[] = INCBIN_U16("graphics/pokenav/blue_light.gbapal");
+const u8 PokenavBlueLightTiles[] = INCBIN_U8("graphics/pokenav/blue_light.4bpp");
+const u16 Palette_3E42D8[] = INCBIN_U16("graphics/pokenav/83E42D8.gbapal");
+
+const u16 gUnknown_083E42F8[] = 
+{
+    0x408,
+    0x408,
+    0x507,
+    0x507,
+    0x606,
+    0x606,
+    0x805,
+    0x805,
+    0xA04,
+    0xA04,
+    0xC03,
+    0xC03,
+    0xE02,
+    0xE02,
+    0x1000,
+    0x1000,
+};
+
+const struct OamData gOamData_83E4318 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_83E4320[] = 
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4328[] = 
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4330[] = 
+{
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4338[] = 
+{
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4340[] = 
+{
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4348[] = 
+{
+    ANIMCMD_FRAME(40, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4350[] = 
+{
+    ANIMCMD_FRAME(48, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4358[] = 
+{
+    ANIMCMD_FRAME(56, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4360[] = 
+{
+    ANIMCMD_FRAME(64, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4368[] = 
+{
+    ANIMCMD_FRAME(72, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4370[] = 
+{
+    ANIMCMD_FRAME(80, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4378[] = 
+{
+    ANIMCMD_FRAME(88, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4380[] = 
+{
+    ANIMCMD_FRAME(96, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4388[] = 
+{
+    ANIMCMD_FRAME(104, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4390[] = 
+{
+    ANIMCMD_FRAME(112, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E4398[] = 
+{
+    ANIMCMD_FRAME(120, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43A0[] = 
+{
+    ANIMCMD_FRAME(128, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43A8[] = 
+{
+    ANIMCMD_FRAME(136, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43B0[] = 
+{
+    ANIMCMD_FRAME(144, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43B8[] = 
+{
+    ANIMCMD_FRAME(152, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43C0[] = 
+{
+    ANIMCMD_FRAME(160, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43C8[] = 
+{
+    ANIMCMD_FRAME(168, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43D0[] = 
+{
+    ANIMCMD_FRAME(176, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sSpriteAnim_83E43D8[] = 
+{
+    ANIMCMD_FRAME(184, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E43E0[] = 
+{
+    sSpriteAnim_83E4320,
+    sSpriteAnim_83E4328,
+    sSpriteAnim_83E4330,
+    sSpriteAnim_83E4338,
+    sSpriteAnim_83E4340,
+    sSpriteAnim_83E4348,
+    sSpriteAnim_83E4350,
+    sSpriteAnim_83E4358,
+    sSpriteAnim_83E4360,
+    sSpriteAnim_83E4368,
+    sSpriteAnim_83E4370,
+    sSpriteAnim_83E4378,
+    sSpriteAnim_83E4380,
+    sSpriteAnim_83E4388,
+    sSpriteAnim_83E4390,
+    sSpriteAnim_83E4398,
+    sSpriteAnim_83E43A0,
+    sSpriteAnim_83E43A8,
+    sSpriteAnim_83E43B0,
+    sSpriteAnim_83E43B8,
+    sSpriteAnim_83E43C0,
+    sSpriteAnim_83E43C8,
+    sSpriteAnim_83E43D0,
+    sSpriteAnim_83E43D8,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83E4440[] = 
+{
+    AFFINEANIMCMD_FRAME(0x10, 0x10, 0, 16),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83E4450[] = 
+{
+    gSpriteAffineAnim_83E4440,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E4454 = 
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gOamData_83E4318,
+    .anims = gSpriteAnimTable_83E43E0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+// sizeof(PokenavBlueLightTiles)
+const struct SpriteSheet gSpriteSheet_PokenavBlueLight = {PokenavBlueLightTiles, 0x100, 25};
+
+const struct SpritePalette gSpritePalette_PokenavBlueLight = {PokenavBlueLightPalette, 17};
+
+const struct OamData gOamData_83E447C = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = 1,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+void sub_80F2654(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E4484 = 
+{
+    .tileTag = 25,
+    .paletteTag = 17,
+    .oam = &gOamData_83E447C,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2654,
+};
+
+extern const u16 gPokenavMenuOptions3_Pal[];
+extern const u16 gPokenavCondition5_Pal[];
+
+const struct SpritePalette gUnknown_083E449C[] = 
+{
+    {gPokenavMenuOptions3_Pal, 2},
+    {gPokenavCondition5_Pal, 3},
+    {0x0, 0},
+};
+
+const struct OamData gOamData_83E44B4 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+//    .2byte 0x4000
+//    .2byte 0xC000
+//    .2byte 0x0400
+
+//    .byte 0x00
+//    .byte 0x40
+//    .byte 0x00
+//    .byte 0xC0
+//    .byte 0x00
+//    .byte 0x04
+
+/*
+    .2byte 00 40 // 0 1 // 00000000 10000000
+    .2byte 00 C0 // 2 3 // 00000000 11000000
+    .2byte 00 2C // 4 5 // 00000000 00101100
+
+    ==
+
+    .shape = ST_OAM_H_RECTANGLE, // 
+    .size = 3,
+    .priority = 3,
+    .paletteNum = 2
+*/
+
+
+const union AnimCmd gSpriteAnim_83E44BC[] = 
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83E44C4[] = 
+{
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83E44CC[] = 
+{
+    ANIMCMD_FRAME(64, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E44D4[] = 
+{
+    gSpriteAnim_83E44BC,
+    gSpriteAnim_83E44C4,
+    gSpriteAnim_83E44CC,
+};
+
+void sub_80F2BBC(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E44E0 = 
+{
+    .tileTag = 1,
+    .paletteTag = 2,
+    .oam = &gOamData_83E44B4,
+    .anims = gSpriteAnimTable_83E44D4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2BBC,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E44F8 = 
+{
+    .tileTag = 1,
+    .paletteTag = 3,
+    .oam = &gOamData_83E44B4,
+    .anims = gSpriteAnimTable_83E44D4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2BBC,
+};
+
+const struct OamData gOamData_83E4510 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83E4518[] = 
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83E4520[] = 
+{
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E4528[] = 
+{
+    gSpriteAnim_83E4518,
+    gSpriteAnim_83E4520,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E4530 = 
+{
+    .tileTag = 2,
+    .paletteTag = 2,
+    .oam = &gOamData_83E4510,
+    .anims = gSpriteAnimTable_83E4528,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2BBC,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E4548 = 
+{
+    .tileTag = 2,
+    .paletteTag = 3,
+    .oam = &gOamData_83E4510,
+    .anims = gSpriteAnimTable_83E4528,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2BBC,
+};
+
+const struct OamData gOamData_83E4560 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 3,
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+//    .2byte 0x0000 // 00000000 00000000
+//    .2byte 0xC000 // 11000000 00000000
+//    .2byte 0x0400 // 00000100 00000000
+
+const struct SpriteSheet gUnknown_083E4568 = {NULL, 0x800, 6};
+
+void sub_80F2E00(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E4570 = 
+{
+    .tileTag = 6,
+    .paletteTag = 6,
+    .oam = &gOamData_83E4560,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F2E00,
+};
+
+const struct SpritePalette gUnknown_083E4588 = {NULL, 6};
+extern const u8 gPokenavArrow_Gfx[];
+
+const struct SpriteSheet gUnknown_083E4590[] = 
+{
+    {gPokenavArrow_Gfx, 0x40, 9},
+    {gPokenavUpDownArrows_Gfx, 0x80, 10},
+    {},
+};
+
+extern const u16 gPokenavArrowsPalette[];
+
+const struct SpritePalette gUnknown_083E45A8 = {gPokenavArrowsPalette, 9};
+
+const struct OamData gOamData_83E45B0 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_V_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+//    .2byte 0x8000 // 10000000 00000000
+//    .2byte 0x0000 // 00000000 00000000
+//    .2byte 0x0800 // 00001000 00000000
+
+void sub_80F3190(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E45B8 = 
+{
+    .tileTag = 9,
+    .paletteTag = 9,
+    .oam = &gOamData_83E45B0,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F3190,
+};
+
+const union AnimCmd gSpriteAnim_83E45D0[] = 
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83E45D8[] = 
+{
+    ANIMCMD_FRAME(2, 3),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E45E0[] = 
+{
+    gSpriteAnim_83E45D0,
+    gSpriteAnim_83E45D8,
+};
+
+const struct OamData gOamData_83E45E8 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 0,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+//    .2byte 0x4000 // 01000000 00000000
+//    .2byte 0x0000 // 00000000 00000000
+//    .2byte 0x0800 // 00001000 00000000
+
+void sub_80F31AC(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E45F0 = 
+{
+    .tileTag = 10,
+    .paletteTag = 9,
+    .oam = &gOamData_83E45E8,
+    .anims = gSpriteAnimTable_83E45E0,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F31AC,
+};
+
+const struct OamData gOamData_83E4608 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+//    .2byte 0x0000 // 00000000 00000000
+//    .2byte 0x4000 // 01000000 00000000
+//    .2byte 0x0800 // 00001000 00000000
+
+const union AnimCmd gSpriteAnim_83E4610[] = 
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd gSpriteAnim_83E4618[] = 
+{
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E4620[] = 
+{
+    gSpriteAnim_83E4610,
+    gSpriteAnim_83E4618,
+};
+
+extern const u8 gPokenavConditionMenuCancel_Gfx[];
+
+const struct SpriteSheet gUnknown_083E4628[] = 
+{
+    {gPokenavPokeballTiles, 0x100, 3},
+    {gUnknown_083E3780, 0x20, 4},
+    {gPokenavConditionMenuCancel_Gfx, 0x100, 5},
+    {},
+};
+
+extern const u16 gPokenavConditionPokeball_Pal[];
+extern const u16 gPokenavCondition4_Pal[];
+
+const struct SpritePalette gUnknown_083E4648[] = 
+{
+    {gPokenavConditionPokeball_Pal, 4},
+    {gPokenavCondition4_Pal, 5},
+    {NULL, 0},
+};
+
+void sub_80F3328(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E4660 = 
+{
+    .tileTag = 3,
+    .paletteTag = 4,
+    .oam = &gOamData_83E4608,
+    .anims = gSpriteAnimTable_83E4620,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F3328,
+};
+
+const u16 gUnknown_083E4678[] = INCBIN_U16("graphics/pokenav/83E4678.gbapal");
+
+const u16 gPokenavRibbonsIconGfx[][2] = 
+{
+    {0, 0},
+    {1, 0},
+    {2, 0},
+    {3, 0},
+    {4, 0},
+    {1, 1},
+    {2, 1},
+    {3, 1},
+    {4, 1},
+    {1, 2},
+    {2, 2},
+    {3, 2},
+    {4, 2},
+    {1, 3},
+    {2, 3},
+    {3, 3},
+    {4, 3},
+    {1, 4},
+    {2, 4},
+    {3, 4},
+    {4, 4},
+    {5, 0},
+    {6, 0},
+    {7, 1},
+    {8, 2},
+    {9, 1},
+    {9, 3},
+    {9, 4},
+    {10, 3},
+    {10, 4},
+    {11, 0},
+    {11, 1},
+};
+
+const struct OamData gOamData_83E4718 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+// 00000001 00000000
+// 10000000 00000000
+// 00000000 00000000
+
+const union AffineAnimCmd gSpriteAffineAnim_83E4720[] = 
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83E4730[] = 
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x20, 0x20, 0, 4),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSpriteAffineAnim_83E4748[] = 
+{
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0xFFE0, 0xFFE0, 0, 4),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSpriteAffineAnimTable_83E4760[] = 
+{
+    gSpriteAffineAnim_83E4720,
+    gSpriteAffineAnim_83E4730,
+    gSpriteAffineAnim_83E4748,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E476C = 
+{
+    .tileTag = 11,
+    .paletteTag = 10,
+    .oam = &gOamData_83E4718,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSpriteAffineAnimTable_83E4760,
+    .callback = SpriteCallbackDummy,
+};
+
+const struct SpriteSheet gUnknown_083E4784 = {gPokenavSparkle_Gfx, sizeof(gPokenavSparkle_Gfx), 0x0017};
+const struct SpritePalette gUnknown_083E478C = {gPokenavSparkle_Pal, 0x000f};
+
+const s16 gUnknown_083E4794[][2] = 
+{
+    { 0 , -35},
+    { 20, -28},
+    { 33, -10},
+    { 33,  10},
+    { 20,  28},
+    { 0 ,  35},
+    {-20,  28},
+    {-33,  10},
+    {-33, -10},
+    {-20, -28},
+};
+
+const struct OamData gOamData_83E47BC = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 1,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const union AnimCmd gSpriteAnim_83E47C4[] = 
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_END,
+};
+
+// sparkles around pokemon on condition page of pokenav
+const union AnimCmd *const gSpriteAnimTable_83E47E4[] = 
+{
+    &gSpriteAnim_83E47C4[0],
+    &gSpriteAnim_83E47C4[2],
+    &gSpriteAnim_83E47C4[4],
+    &gSpriteAnim_83E47C4[6],
+    &gSpriteAnim_83E47C4[8],
+    &gSpriteAnim_83E47C4[10],
+    &gSpriteAnim_83E47C4[12],
+};
+
+void sub_80F3E9C(struct Sprite *sprite);
+
+const struct SpriteTemplate gSpriteTemplate_83E4800 = 
+{
+    .tileTag = 23,
+    .paletteTag = 15,
+    .oam = &gOamData_83E47BC,
+    .anims = gSpriteAnimTable_83E47E4,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F3E9C,
+};
+
+const struct SpritePalette gUnknown_083E4818 = {gPokenavIconPalette, 16};
+
+const union AnimCmd gSpriteAnim_83E4820[] = 
+{
+    ANIMCMD_FRAME(0, 12),
+    ANIMCMD_FRAME(16, 12),
+    ANIMCMD_FRAME(32, 12),
+    ANIMCMD_FRAME(48, 12),
+    ANIMCMD_FRAME(64, 12),
+    ANIMCMD_FRAME(80, 12),
+    ANIMCMD_FRAME(96, 12),
+    ANIMCMD_FRAME(112, 12),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSpriteAnimTable_83E4844[] = 
+{
+    gSpriteAnim_83E4820,
+};
+
+const struct OamData gOamData_83E4848 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_SQUARE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+void sub_80F4138(struct Sprite *);
+
+const struct SpriteTemplate gSpriteTemplate_83E4850 =
+{
+    .tileTag = 24,
+    .paletteTag = 16,
+    .oam = &gOamData_83E4848,
+    .anims = gSpriteAnimTable_83E4844,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = sub_80F4138,
+};
+
+const struct SpritePalette gUnknown_083E4868 = {Palette_3E42D8, 18};
+
+const struct OamData gOamData_83E4870 = 
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = ST_OAM_H_RECTANGLE,
+    .x = 0,
+    .matrixNum = 0,
+    .size = 2,
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+const struct SpriteTemplate gSpriteTemplate_83E4878 = 
+{
+    .tileTag = 26,
+    .paletteTag = 18,
+    .oam = &gOamData_83E4870,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+const u8 gUnknown_083E4890[] = 
+{   
+    4,   5,  6,  7,  8,  9,  9, 10, 10, 11, 11, 12, 12, 13, 13, 13, 
+    13, 14, 14, 14, 14, 15, 15, 15, 15, 16, 16, 16, 16, 16, 16, 17, 
+    17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 19, 19, 19, 19, 19, 
+    19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 21, 21, 21, 21, 21, 
+    21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23, 
+    23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 
+    24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 
+    26, 26, 26, 26, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27, 27, 27, 
+    27, 27, 27, 27, 27, 27, 27, 28, 28, 28, 28, 28, 28, 28, 28, 28, 
+    28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 
+    29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 
+    30, 30, 30, 30, 30, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 31, 
+    31, 31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 
+    32, 32, 32, 32, 32, 32, 32, 32, 33, 33, 33, 33, 33, 33, 33, 33, 
+    33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 34, 34, 34, 34, 34, 
+    34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 35,
+};
+
+const struct ScanlineEffectParams gUnknown_083E4990 = 
+{
+    (void *)REG_ADDR_WIN0H,
+    ((DMA_ENABLE | DMA_START_HBLANK | DMA_32BIT | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
+    1,
+    0,
+};
+
+const u16 gUnknown_083E499C[] = 
+{
+    0x43,
+    0x32,
+    0x33,
+    0x34,
+    0x35,
+    0x36,
+    0x44,
+    0x45,
+    0x46,
+    0x47,
+    0x48,
+    0x49,
+    0x4A,
+    0x4B,
+    0x4C,
+    0x4D,
+    0x4E,
+};
+
+// fix this when decompiling
+asm(".align 2");
+const u16 gUnknown_083E49C0[] = 
+{
+    0x109, 0xA,
+    0x10A, 0x2,
+    0x10B, 0x9,
+    0x10C, 0x3,
+    0x10D, 0x7,
+    0x10E, 0xB,
+    0x10F, 0xD,
+    0x110, 0xE,
+    0x105, 0xF,
+    0x106, 0xF,
+    0x107, 0xF,
+    0x108, 0xF,
+    0x14F, 0xF,
+};
+
+
+
+
+// ============================================================================
 
 void sub_80EBA5C()
 {
@@ -5187,7 +6212,7 @@ void LoadTrainerEyesDescriptionLines(void)
     gUnknown_083DFEC4->unk306 = 0;
     gUnknown_083DFEC4->unkD15C = 0;
     trainerEyesId = gUnknown_083DFEC4->unkCEE8[gUnknown_083DFEC4->unk876E].unk4;
-    gUnknown_083DFEC4->trainerEyeDescriptionLines[0] = gTrainerEyeDescriptions[trainerEyesId];
+    gUnknown_083DFEC4->trainerEyeDescriptionLines[0] = gTrainerEyeDescriptions[trainerEyesId]; // [0]?
 
     // Find the start of the 3 other lines in the Trainer's Eyes description.
     curChar = gUnknown_083DFEC4->trainerEyeDescriptionLines[0];
