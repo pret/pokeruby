@@ -429,9 +429,15 @@ const u8 gPokenavOutlineTilemap[] = INCBIN_U8("graphics/pokenav/outline_map.bin.
 
 #include "data/pokenav_city_maps.h"
 
-#include "data/text/ribbon_descriptions.h"
-#include "data/text/gift_ribbon_descriptions.h"
-#include "data/text/trainer_eye_descriptions.h"
+#ifdef ENGLISH
+#include "data/text/ribbon_descriptions_en.h"
+#include "data/text/gift_ribbon_descriptions_en.h"
+#include "data/text/trainer_eye_descriptions_en.h"
+#elif GERMAN
+#include "data/text/ribbon_descriptions_de.h"
+#include "data/text/gift_ribbon_descriptions_de.h"
+#include "data/text/trainer_eye_descriptions_de.h"
+#endif
 
 const u8 *const gUnknown_083E31B0[] = 
 {
