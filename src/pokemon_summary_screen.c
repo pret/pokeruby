@@ -68,7 +68,7 @@ static void SummaryScreen_DestroyTask(u8 taskId);
 static void sub_80A1950(void);
 static void sub_809DE64(void);
 static void SummaryScreenHandleAButton(u8);
-static void SummaryScreenHandleUpDownInput(u8, s8);
+void SummaryScreenHandleUpDownInput(u8, s8);
 static bool8 SummaryScreen_CanForgetSelectedMove(u8);
 static void sub_809F9D0(u8, u8);
 static void SummaryScreen_MoveSelect_Cancel(u8);
@@ -81,7 +81,7 @@ static void SummaryScreenHandleKeyInput(u8);
 static void sub_80A1B1C(u8);
 static void sub_80A16CC(u8);
 static void sub_80A1A30(u8);
-static void DrawSummaryScreenNavigationDots(void);
+void DrawSummaryScreenNavigationDots(void);
 static void sub_80A00F4(u8);
 static void sub_80A029C(struct Pokemon *);
 static void sub_809FBE4(void);
@@ -106,7 +106,7 @@ static void sub_80A1918(u8, u8);
 static void SummaryScreen_DrawTypeIcon(u8, u8, u8, u8);
 static u16 GetMonMove(struct Pokemon *, u8);
 static void sub_80A04CC(u16);
-static void sub_80A057C(u16);
+void sub_80A057C(u16);
 static void sub_80A0498(u16);
 static void sub_80A046C(u16);
 static void sub_80A20A8(u8);
@@ -1567,8 +1567,9 @@ static void SummaryScreenHandleLeftRightInput(u8 taskId, s8 direction)
     }
 }
 
+// direction should be implicitly casted to a u8 during the var1 assign but it is not in this code
 #ifdef NONMATCHING
-static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
+void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 {
     s8 var3;
     u8 var1 = direction;
@@ -1613,7 +1614,7 @@ static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 }
 #else
 NAKED
-static void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
+void SummaryScreenHandleUpDownInput(u8 taskId, s8 direction)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
@@ -1722,7 +1723,7 @@ s8 sub_809F284(s8 a)
 {
     struct Pokemon *mons = pssData.monList.partyMons;
     s8 r6 = 0;
-
+    
     if (pssData.page == PSS_PAGE_INFO)
     {
         if (a == -1 && pssData.monIndex == 0)
@@ -2605,7 +2606,7 @@ static void sub_80A04CC(u16 move)
 }
 
 #ifdef NONMATCHING // The two vramAddr lines are non-matching.
-static void sub_80A057C(u16 move)
+void sub_80A057C(u16 move)
 {
     u8 appeal;
     u8 jam;
@@ -2626,7 +2627,7 @@ static void sub_80A057C(u16 move)
         if (appeal != 0xFF && i < appeal)
             tile = 0x103A;
 
-        *(&vramAddr[(i >> 2 << 5) + (i & and)] + offset) = tile;
+        *(&vramAddr[((i >> 2) << 5) + (i & and)] + offset) = tile;
     }
 
     if (move == 0xFFFF) return;
@@ -2647,12 +2648,12 @@ static void sub_80A057C(u16 move)
             tile = 0x103C;
         }
 
-        *(&vramAddr[(i >> 2 << 5) + (i & and)] + offset) = tile;
+        *(&vramAddr[((i >> 2) << 5) + (i & and)] + offset) = tile;
     }
 }
 #else
 NAKED
-static void sub_80A057C(u16 move)
+void sub_80A057C(u16 move)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -2701,8 +2702,8 @@ _080A05CC:\n\
     lsls r0, 5\n\
     adds r1, r2, 0\n\
     ands r1, r7\n\
-    adds r1, r0\n\
-    lsls r1, 1\n\
+    adds r1, r0\n" // start of nonmatching
+    "lsls r1, 1\n\
     add r1, r8\n\
     adds r1, r6\n\
     strh r3, [r1]\n\
@@ -3204,39 +3205,38 @@ static void DrawPokerusSurvivorDot(struct Pokemon *mon)
 }
 
 // Draws the 4 small navigation circles at the top of the pokemon summary screen.
+// complex nonmatching
 #ifdef NONMATCHING
-static void DrawSummaryScreenNavigationDots(void)
+void DrawSummaryScreenNavigationDots(void)
 {
-    void *dest;
     u16 arr[8];
     u8 i = 0;
-    struct PokemonSummaryScreenStruct *SS = (struct PokemonSummaryScreenStruct *)(gSharedMem + 0x18000);
+    struct PokemonSummaryScreenStruct *SS = &pssData;
     u16 var1 = 0x4040;
     u16 var2 = 0x404A;
-
     for (i = 0; i < 4; i++)
     {
-        if (i < SS->unk75)
+        if (i < SS->firstPage)
         {
             arr[i * 2] = var1;
             arr[(i * 2) + 1] = var1 + 1;
         }
-        else if (i > SS->unk76)
+        else if (i > SS->lastPage)
         {
             arr[i * 2] = var2;
             arr[(i * 2) + 1] = var2 + 1;
         }
         else
         {
-            if (i < SS->unkB)
+            if (i < SS->page)
             {
                 arr[i * 2] = 0x4046;
                 arr[(i * 2) + 1] = 0x4046 + 1;
             }
 
-            if (i == SS->unkB)
+            if (i == SS->page)
             {
-                if (i != SS->unk76)
+                if (i != SS->lastPage)
                 {
                     arr[i * 2] = 0x4041;
                     arr[(i * 2) + 1] = 0x4041 + 1;
@@ -3248,9 +3248,9 @@ static void DrawSummaryScreenNavigationDots(void)
                 }
             }
 
-            if (i > SS->unkB)
+            if (i > SS->page)
             {
-                if (i != SS->unk76)
+                if (i != SS->lastPage)
                 {
                     arr[i * 2] = 0x4043;
                     arr[(i * 2) + 1] = 0x4043 + 1;
@@ -3275,7 +3275,7 @@ static void DrawSummaryScreenNavigationDots(void)
 }
 #else
 NAKED
-static void DrawSummaryScreenNavigationDots(void)
+void DrawSummaryScreenNavigationDots(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -4250,6 +4250,7 @@ static void sub_80A1654(s8 a, u8 b)
     gTasks[taskId].data[3] = b;
 }
 
+// not enough registers allocated (need to allocate r8 and r9)
 #ifdef NONMATCHING
 static void sub_80A16CC(u8 a)
 {

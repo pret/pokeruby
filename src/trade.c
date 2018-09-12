@@ -41,6 +41,10 @@
 #include "trade.h"
 #include "ewram.h"
 
+#ifndef NONMATCHING
+asm(".include \"constants/gba_constants.inc\"");
+#endif
+
 #ifdef ENGLISH
 #define sub_804A96C_alt sub_804A96C
 asm(".set sub_804A96C_alt, sub_804A96C");
@@ -160,7 +164,7 @@ static void sub_804AF10(void);
 static void sub_80494D8(void);
 static void sub_8048AB4(void);
 static void sub_804A940(struct UnkStructD *);
-static void sub_804B41C(void);
+void sub_804B41C(void);
 static void sub_8049DE0(void);
 static void sub_804AB30(void);
 static void sub_8049ED4(u8);
@@ -173,19 +177,10 @@ static void sub_804AADC(u16, u8);
 static void sub_804A80C(void);
 static u8 sub_80499F0(const u8 *, u8, u8);
 static void sub_804A840(u8);
-#ifdef NONMATCHING
-static
-#endif
 u8 sub_804A2B4(u8 *, u8, u8);
 static void sub_804A96C_alt(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
 static void sub_804A96C(struct UnkStructD *, u8, u8, const u16 *, u8, u8, u16);
-#ifdef NONMATCHING
-static
-#endif
 void sub_804A33C(u8 *, u8, u8);
-#ifdef NONMATCHING
-static
-#endif
 void sub_804A51C(u8, u8, u8, u8, u8, u8);
 static void sub_804D7AC(struct Sprite *);
 static bool8 sub_804C29C(void);
@@ -208,9 +203,6 @@ static void sub_804BBCC(void);
 static void sub_804D8E4(void);
 static void sub_804C164(void);
 static void SetTradeSceneStrings(void);
-#ifdef NONMATCHING
-static
-#endif
 void sub_804DB84(void);
 
 EWRAM_DATA u8 *gUnknown_020296CC[13] = {0};
@@ -1448,11 +1440,7 @@ static void sub_8048AB4(void)
     UpdatePaletteFade();
 }
 
-#ifdef NONMATCHING
-// Only minor register permutations
-#pragma push_macro("BLOCKSIZE")
-#define BLOCKSIZE 0x800
-static void sub_8048B0C(u8 a0)
+void sub_8048B0C(u8 a0)
 {
     int i;
 
@@ -1489,175 +1477,8 @@ static void sub_8048B0C(u8 a0)
             break;
     }
 }
-#pragma pop_macro("BLOCKSIZE")
-#else
-asm(".include \"constants/gba_constants.inc\"");
-NAKED
-static void sub_8048B0C(u8 a0)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                        "\tlsls r0, 24\n"
-                        "\tlsrs r0, 24\n"
-                        "\tcmp r0, 0\n"
-                        "\tbeq _08048B1C\n"
-                        "\tcmp r0, 0x1\n"
-                        "\tbeq _08048BD0\n"
-                        "\tb _08048C3A\n"
-                        "_08048B1C:\n"
-                        "\tldr r5, _08048BA0 @ =gUnknown_08EA0348\n"
-                        "\tldr r0, _08048BA4 @ =gTradeStripesBG2Tilemap\n"
-                        "\tmov r12, r0\n"
-                        "\tldr r1, _08048BA8 @ =gUnknown_08EA02C8\n"
-                        "\tldr r4, _08048BAC @ =gPlttBufferFaded\n"
-                        "\tldr r3, _08048BB0 @ =gPlttBufferUnfaded\n"
-                        "\tmovs r2, 0x2F\n"
-                        "_08048B2A:\n"
-                        "\tldrh r0, [r1]\n"
-                        "\tstrh r0, [r3]\n"
-                        "\tldrh r0, [r1]\n"
-                        "\tstrh r0, [r4]\n"
-                        "\tadds r1, 0x2\n"
-                        "\tadds r4, 0x2\n"
-                        "\tadds r3, 0x2\n"
-                        "\tsubs r2, 0x1\n"
-                        "\tcmp r2, 0\n"
-                        "\tbge _08048B2A\n"
-                        "\tadds r3, r5, 0\n"
-                        "\tmovs r4, 0xC0\n"
-                        "\tlsls r4, 19\n"
-                        "\tmovs r5, 0x94\n"
-                        "\tlsls r5, 5\n"
-                        "\tldr r1, _08048BB4 @ =0x040000d4\n"
-                        "\tldr r6, _08048BB8 @ =0x80000800\n"
-                        "\tmovs r2, 0x80\n"
-                        "\tlsls r2, 5\n"
-                        "\tmovs r7, 0x80\n"
-                        "\tlsls r7, 24\n"
-                        "_08048B54:\n"
-                        "\tstr r3, [r1]\n"
-                        "\tstr r4, [r1, 0x4]\n"
-                        "\tstr r6, [r1, 0x8]\n"
-                        "\tldr r0, [r1, 0x8]\n"
-                        "\tadds r3, r2\n"
-                        "\tadds r4, r2\n"
-                        "\tsubs r5, r2\n"
-                        "\tcmp r5, r2\n"
-                        "\tbhi _08048B54\n"
-                        "\tstr r3, [r1]\n"
-                        "\tstr r4, [r1, 0x4]\n"
-                        "\tlsrs r0, r5, 1\n"
-                        "\torrs r0, r7\n"
-                        "\tstr r0, [r1, 0x8]\n"
-                        "\tldr r0, [r1, 0x8]\n"
-                        "\tmovs r2, 0\n"
-                        "\tldr r5, _08048BBC @ =0x000003ff\n"
-                        "\tldr r4, _08048BC0 @ =gUnknown_03004824\n"
-                        "\tldr r3, _08048BC4 @ =gUnknown_08EA15C8\n"
-                        "_08048B7A:\n"
-                        "\tldr r0, [r4]\n"
-                        "\tlsls r1, r2, 1\n"
-                        "\tadds r0, 0xDA\n"
-                        "\tadds r0, r1\n"
-                        "\tldrh r1, [r3]\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r3, 0x2\n"
-                        "\tadds r2, 0x1\n"
-                        "\tcmp r2, r5\n"
-                        "\tble _08048B7A\n"
-                        "\tldr r1, _08048BC8 @ =0x06003000\n"
-                        "\tldr r0, _08048BB4 @ =0x040000d4\n"
-                        "\tmov r2, r12\n"
-                        "\tstr r2, [r0]\n"
-                        "\tstr r1, [r0, 0x4]\n"
-                        "\tldr r1, _08048BCC @ =0x80000400\n"
-                        "\tstr r1, [r0, 0x8]\n"
-                        "\tldr r0, [r0, 0x8]\n"
-                        "\tb _08048C3A\n"
-                        "\t.align 2, 0\n"
-                        "_08048BA0: .4byte gUnknown_08EA0348\n"
-                        "_08048BA4: .4byte gTradeStripesBG2Tilemap\n"
-                        "_08048BA8: .4byte gUnknown_08EA02C8\n"
-                        "_08048BAC: .4byte gPlttBufferFaded\n"
-                        "_08048BB0: .4byte gPlttBufferUnfaded\n"
-                        "_08048BB4: .4byte 0x040000d4\n"
-                        "_08048BB8: .4byte 0x80000800\n"
-                        "_08048BBC: .4byte 0x000003ff\n"
-                        "_08048BC0: .4byte gUnknown_03004824\n"
-                        "_08048BC4: .4byte gUnknown_08EA15C8\n"
-                        "_08048BC8: .4byte 0x06003000\n"
-                        "_08048BCC: .4byte 0x80000400\n"
-                        "_08048BD0:\n"
-                        "\tldr r1, _08048C40 @ =gTradeStripesBG3Tilemap\n"
-                        "\tldr r2, _08048C44 @ =0x06003800\n"
-                        "\tldr r0, _08048C48 @ =0x040000d4\n"
-                        "\tstr r1, [r0]\n"
-                        "\tstr r2, [r0, 0x4]\n"
-                        "\tldr r1, _08048C4C @ =0x80000400\n"
-                        "\tstr r1, [r0, 0x8]\n"
-                        "\tldr r0, [r0, 0x8]\n"
-                        "\tmovs r0, 0\n"
-                        "\tbl sub_804A6DC\n"
-                        "\tmovs r0, 0x1\n"
-                        "\tbl sub_804A6DC\n"
-                        "\tldr r0, _08048C50 @ =gUnknown_03004824\n"
-                        "\tldr r0, [r0]\n"
-                        "\tadds r0, 0xC8\n"
-                        "\tbl sub_804A938\n"
-                        "\tldr r2, _08048C54 @ =REG_BG0CNT\n"
-                        "\tldrh r1, [r2]\n"
-                        "\tldr r0, _08048C58 @ =0x0000fffc\n"
-                        "\tands r0, r1\n"
-                        "\tstrh r0, [r2]\n"
-                        "\tldr r1, _08048C5C @ =REG_BG1CNT\n"
-                        "\tldr r2, _08048C60 @ =0x00000501\n"
-                        "\tadds r0, r2, 0\n"
-                        "\tstrh r0, [r1]\n"
-                        "\tadds r1, 0x2\n"
-                        "\tldr r2, _08048C64 @ =0x00000602\n"
-                        "\tadds r0, r2, 0\n"
-                        "\tstrh r0, [r1]\n"
-                        "\tadds r1, 0x2\n"
-                        "\tldr r2, _08048C68 @ =0x00000703\n"
-                        "\tadds r0, r2, 0\n"
-                        "\tstrh r0, [r1]\n"
-                        "\tldr r0, _08048C6C @ =REG_BG0HOFS\n"
-                        "\tmovs r1, 0\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tsubs r0, 0xA\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "\tadds r0, 0x4\n"
-                        "\tstrh r1, [r0]\n"
-                        "_08048C3A:\n"
-                        "\tpop {r4-r7}\n"
-                        "\tpop {r0}\n"
-                        "\tbx r0\n"
-                        "\t.align 2, 0\n"
-                        "_08048C40: .4byte gTradeStripesBG3Tilemap\n"
-                        "_08048C44: .4byte 0x06003800\n"
-                        "_08048C48: .4byte 0x040000d4\n"
-                        "_08048C4C: .4byte 0x80000400\n"
-                        "_08048C50: .4byte gUnknown_03004824\n"
-                        "_08048C54: .4byte REG_BG0CNT\n"
-                        "_08048C58: .4byte 0x0000fffc\n"
-                        "_08048C5C: .4byte REG_BG1CNT\n"
-                        "_08048C60: .4byte 0x00000501\n"
-                        "_08048C64: .4byte 0x00000602\n"
-                        "_08048C68: .4byte 0x00000703\n"
-                        "_08048C6C: .4byte REG_BG0HOFS");
-}
-#endif
 
-static void sub_8048C70(void)
+void sub_8048C70(void)
 {
     int i;
     for (i = 0; i < PARTY_SIZE; i ++)
@@ -2973,9 +2794,6 @@ static void sub_8049ED4(u8 a0)
 }
 #endif
 
-#ifdef NONMATCHING
-static
-#endif
 u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
 {
     u8 string[11];
@@ -2996,9 +2814,6 @@ u8 sub_804A2B4(u8 *a0, u8 whichParty, u8 whichPokemon)
     return Text_GetStringWidthFromWindowTemplate(&gWindowTemplate_81E7294, a0);
 }
 
-#ifdef NONMATCHING
-static
-#endif
 void sub_804A33C(u8 *a0, u8 whichParty, u8 whichPokemon)
 {
     u16 i;
@@ -3185,9 +3000,6 @@ static void sub_804A41C(u8 whichParty)
 }
 #endif
 
-#ifdef NONMATCHING
-static
-#endif
 void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
     u8 nickname[24];
@@ -3240,6 +3052,7 @@ void sub_804A51C(u8 a0, u8 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 #endif
 }
 
+// simple nonmatching, supposedly from a CSE optimization
 #ifdef NONMATCHING
 static void sub_804A6DC(u8 whichParty)
 {
@@ -3509,231 +3322,58 @@ static void sub_804ACD8(const u8 *src, u8 *dest, u8 a2)
     sub_804AFB8(&gWindowTemplate_81E725C, dest, src, a2);
 }
 
-#ifdef NONMATCHING
+// replacing [who] with [0]/[1] depending on case compiles better code
 static void sub_804ACF4(u8 who)
 {
     struct Pokemon *pokemon;
     int i;
+    
     switch (who)
     {
         case 0:
-            for (i = 0; i < gUnknown_03004824->partyCounts[0]; i ++)
+            for (i = 0; i < gUnknown_03004824->partyCounts[who]; i++)
             {
                 pokemon = &gPlayerParty[i];
                 if (GetMonData(pokemon, MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_03004824->unk_0051[0][i] = 0;
-                    gUnknown_03004824->unk_005d[0][i] = 1;
+                    gUnknown_03004824->unk_0051[who][i] = 0;
+                    gUnknown_03004824->unk_005d[who][i] = 1;
                 }
                 else if (GetMonData(pokemon, MON_DATA_HP) == 0)
                 {
-                    gUnknown_03004824->unk_0051[0][i] = 0;
-                    gUnknown_03004824->unk_005d[0][i] = 0;
+                    gUnknown_03004824->unk_0051[who][i] = 0;
+                    gUnknown_03004824->unk_005d[who][i] = 0;
                 }
                 else
                 {
-                    gUnknown_03004824->unk_0051[0][i] = 1;
-                    gUnknown_03004824->unk_005d[0][i] = 0;
+                    gUnknown_03004824->unk_0051[who][i] = 1;
+                    gUnknown_03004824->unk_005d[who][i] = 0;
                 }
             }
             break;
         case 1:
-            for (i = 0; i < gUnknown_03004824->partyCounts[1]; i ++)
+            for (i = 0; i < gUnknown_03004824->partyCounts[who]; i++)
             {
                 pokemon = &gEnemyParty[i];
                 if (GetMonData(pokemon, MON_DATA_IS_EGG) == TRUE)
                 {
-                    gUnknown_03004824->unk_0051[1][i] = 0;
-                    gUnknown_03004824->unk_005d[1][i] = 1;
+                    gUnknown_03004824->unk_0051[who][i] = 0;
+                    gUnknown_03004824->unk_005d[who][i] = 1;
                 }
                 else if (GetMonData(pokemon, MON_DATA_HP) == 0)
                 {
-                    gUnknown_03004824->unk_0051[1][i] = 0;
-                    gUnknown_03004824->unk_005d[1][i] = 0;
+                    gUnknown_03004824->unk_0051[who][i] = 0;
+                    gUnknown_03004824->unk_005d[who][i] = 0;
                 }
                 else
                 {
-                    gUnknown_03004824->unk_0051[1][i] = 1;
-                    gUnknown_03004824->unk_005d[1][i] = 0;
+                    gUnknown_03004824->unk_0051[who][i] = 1;
+                    gUnknown_03004824->unk_005d[who][i] = 0;
                 }
             }
             break;
     }
 }
-#else
-static NAKED void sub_804ACF4(u8 who)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r9\n"
-                    "\tmov r6, r8\n"
-                    "\tpush {r6,r7}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r0, 24\n"
-                    "\tmov r8, r0\n"
-                    "\tcmp r0, 0\n"
-                    "\tbeq _0804AD0C\n"
-                    "\tcmp r0, 0x1\n"
-                    "\tbeq _0804ADA0\n"
-                    "\tb _0804AE2C\n"
-                    "_0804AD0C:\n"
-                    "\tmovs r7, 0\n"
-                    "\tldr r1, _0804AD4C @ =gUnknown_03004824\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tblt _0804AD1C\n"
-                    "\tb _0804AE2C\n"
-                    "_0804AD1C:\n"
-                    "\tadds r6, r1, 0\n"
-                    "\tmovs r5, 0\n"
-                    "\tmov r9, r5\n"
-                    "_0804AD22:\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tmuls r1, r0\n"
-                    "\tldr r0, _0804AD50 @ =gPlayerParty\n"
-                    "\tadds r4, r1, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2D\n"
-                    "\tbl GetMonData\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tcmp r1, 0x1\n"
-                    "\tbne _0804AD54\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tmov r2, r9\n"
-                    "\tstrb r2, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tb _0804AD84\n"
-                    "\t.align 2, 0\n"
-                    "_0804AD4C: .4byte gUnknown_03004824\n"
-                    "_0804AD50: .4byte gPlayerParty\n"
-                    "_0804AD54:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x39\n"
-                    "\tbl GetMonData\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbne _0804AD72\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tb _0804AD84\n"
-                    "_0804AD72:\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tmov r1, r9\n"
-                    "_0804AD84:\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, _0804AD9C @ =gUnknown_03004824\n"
-                    "\tadds r5, 0x1\n"
-                    "\tadds r7, 0x1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadd r0, r8\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tblt _0804AD22\n"
-                    "\tb _0804AE2C\n"
-                    "\t.align 2, 0\n"
-                    "_0804AD9C: .4byte gUnknown_03004824\n"
-                    "_0804ADA0:\n"
-                    "\tmovs r7, 0\n"
-                    "\tldr r1, _0804ADE0 @ =gUnknown_03004824\n"
-                    "\tldr r0, [r1]\n"
-                    "\tadds r0, 0x43\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tbge _0804AE2C\n"
-                    "\tadds r6, r1, 0\n"
-                    "\tmovs r5, 0x6\n"
-                    "\tmovs r2, 0\n"
-                    "\tmov r9, r2\n"
-                    "_0804ADB6:\n"
-                    "\tmovs r0, 0x64\n"
-                    "\tadds r1, r7, 0\n"
-                    "\tmuls r1, r0\n"
-                    "\tldr r0, _0804ADE4 @ =gEnemyParty\n"
-                    "\tadds r4, r1, r0\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x2D\n"
-                    "\tbl GetMonData\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tcmp r1, 0x1\n"
-                    "\tbne _0804ADE8\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tmov r2, r9\n"
-                    "\tstrb r2, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tb _0804AE18\n"
-                    "\t.align 2, 0\n"
-                    "_0804ADE0: .4byte gUnknown_03004824\n"
-                    "_0804ADE4: .4byte gEnemyParty\n"
-                    "_0804ADE8:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x39\n"
-                    "\tbl GetMonData\n"
-                    "\tadds r1, r0, 0\n"
-                    "\tcmp r1, 0\n"
-                    "\tbne _0804AE06\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tb _0804AE18\n"
-                    "_0804AE06:\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x51\n"
-                    "\tadds r0, r5\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, [r6]\n"
-                    "\tadds r0, 0x5D\n"
-                    "\tadds r0, r5\n"
-                    "\tmov r1, r9\n"
-                    "_0804AE18:\n"
-                    "\tstrb r1, [r0]\n"
-                    "\tldr r0, _0804AE38 @ =gUnknown_03004824\n"
-                    "\tadds r5, 0x1\n"
-                    "\tadds r7, 0x1\n"
-                    "\tldr r0, [r0]\n"
-                    "\tadds r0, 0x42\n"
-                    "\tadd r0, r8\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r7, r0\n"
-                    "\tblt _0804ADB6\n"
-                    "_0804AE2C:\n"
-                    "\tpop {r3,r4}\n"
-                    "\tmov r8, r3\n"
-                    "\tmov r9, r4\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r0}\n"
-                    "\tbx r0\n"
-                    "\t.align 2, 0\n"
-                    "_0804AE38: .4byte gUnknown_03004824");
-}
-#endif
 
 static void sub_804AE3C(u8 who)
 {
@@ -3853,15 +3493,16 @@ static void sub_804B128(void)
     REG_BG2Y = dest.dy;
 }
 
+// register swap with volatile, wtf !how
 #ifdef NONMATCHING
 static void sub_804B1BC(void)
 {
-    REG_BG1VOFS = gUnknown_03004828->bg1vofs;
-    REG_BG1HOFS = gUnknown_03004828->bg1hofs;
-    if ((REG_DISPCNT & 7) == DISPCNT_MODE_0)
+    REG_BG1VOFS = gUnknown_03004828->bg1vofs, REG_BG1HOFS = gUnknown_03004828->bg1hofs;
+    //temp = ;
+    //asm(""::"r"(gUnknown_03004828->bg2vofs));
+    if (REG_DISPCNT % 8 == 0)
     {
-        REG_BG2VOFS = gUnknown_03004828->bg2vofs;
-        REG_BG2HOFS = gUnknown_03004828->bg2hofs;
+        REG_BG2VOFS = gUnknown_03004828->bg2vofs, REG_BG2HOFS = gUnknown_03004828->bg2hofs;
     }
     else
     {
@@ -3930,9 +3571,6 @@ static void sub_804B228(void)
     gUnknown_03004828->unk_00b3 = 0;
 }
 
-#ifdef NONMATCHING
-static
-#endif
 void sub_804B24C(void)
 {
     if (gUnknown_03004828->unk_00b2 == gUnknown_03004828->unk_00b3)
@@ -3996,8 +3634,11 @@ static void sub_804B2D0(u8 whichParty, u8 a1)
     }
 }
 
+// non-shifting nonmatch
+// out of order statements + register swaps?
+// r4 is loaded with 0 way before it's used (and it should be r2)
 #ifdef NONMATCHING
-static void sub_804B41C(void)
+void sub_804B41C(void)
 // Link trade init
 {
     switch (gMain.state)
@@ -4014,15 +3655,17 @@ static void sub_804B41C(void)
             Text_LoadWindowTemplate(&gWindowTemplate_81E6F84);
             Text_InitWindowWithTemplate(&gUnknown_03004828->window, &gWindowTemplate_81E6F84);
             gUnknown_03004828->textWindowBaseTileNum = TextWindow_SetBaseTileNum(2);
+            //
+            // start of nonmatching here?
             TextWindow_LoadStdFrameGraphics(&gUnknown_03004828->window);
             Menu_EraseScreen();
             gLinkType = 0x1144;
-            gMain.state ++;
+            gMain.state++;
             LZDecompressVram(gBattleTextboxTiles, (void *)VRAM);
-            CpuCopy16(gBattleTextboxTilemap, ewram, 0x1000);
-            DmaCopy16Defvars(3, ewram, BG_SCREEN_ADDR(5), 0x500);
+            CpuCopy16(gBattleTextboxTilemap, gSharedMem, 0x1000);
+            DmaCopy16Defvars(3, gSharedMem, BG_SCREEN_ADDR(5), 0x500);
             LoadCompressedPalette(gBattleTextboxPalette, 0, 32);
-            gUnknown_03004828->unk_00b6 = 0;
+            gUnknown_03004828->unk_00b6 = 0; // nonmatching code writes to this address with r4, as opposed to r2 in matching code. r4 is also loaded with zero way before
             gUnknown_03004828->unk_00c4 = 0;
             gUnknown_03004828->isLinkTrade = TRUE;
             gUnknown_03004828->unk_0104 = 0x40;
@@ -4113,7 +3756,7 @@ static void sub_804B41C(void)
     UpdatePaletteFade();
 }
 #else
-static NAKED void sub_804B41C(void)
+NAKED void sub_804B41C(void)
 {
     asm_unified("\tpush {r4-r6,lr}\n"
                     "\tsub sp, 0x4\n"
@@ -4176,7 +3819,7 @@ static NAKED void sub_804B41C(void)
                     "\tbl TextWindow_SetBaseTileNum\n"
                     "\tldr r1, [r6]\n"
                     "\tadds r1, 0x34\n"
-                    "\tstrb r0, [r1]\n"
+                    "\tstrb r0, [r1]\n" // start of nonmatching
                     "\tldr r0, [r6]\n"
                     "\tadds r0, 0x4\n"
                     "\tbl TextWindow_LoadStdFrameGraphics\n"
@@ -5477,9 +5120,6 @@ void CreateInGameTradePokemon(void)
     _CreateInGameTradePokemon(gSpecialVar_0x8005, gSpecialVar_0x8004);
 }
 
-#ifdef NONMATCHING
-static
-#endif
 void sub_804DB84(void)
 {
     if (sub_804C29C() == TRUE)

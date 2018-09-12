@@ -12,6 +12,7 @@ extern const u32 gFont3LatinGlyphs[];
 
 // text
 
+// some CSE stuff + register swaps (possibly DUE to CSE)
 #ifdef NONMATCHING
 void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *buffer)
 {
@@ -38,7 +39,7 @@ void sub_8095904(const u8 *src, u8 *dest, u8 bgOverride, u16 width, u8 bg, u8 *b
             u16 j;
             for (j = 0; j < strlen; j++) // r5
             {
-                const u32 *glyphs = (const u8 *)(gFont3LatinGlyphs + (i * 0x80) + ((src[j] & 0xfff0) * 16) + ((src[j] & 0xf) * 8));
+                const u32 *glyphs = (const u32 *)(gFont3LatinGlyphs + (i * 0x80) + ((src[j] & 0xfff0) * 16) + ((src[j] & 0xf) * 8));
 
                 u16 k; // r6
                 for (k = 0; k < 32; k++)
