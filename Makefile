@@ -174,6 +174,7 @@ include castform.mk
 include tilesets.mk
 include fonts.mk
 include misc.mk
+include spritesheet_rules.mk
 include override.mk
 
 %.1bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
