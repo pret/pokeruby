@@ -8,6 +8,12 @@ struct Struct_sub_8078914 {
     u8 *field_0;
     u8 *field_4;
     u8 field_8;
+    u8 field_9;
+    u16 unused_a;
+    u8 field_c;
+    u8 unused_d;
+    u16 unused_e;
+    u8 field_10;
 };
 
 struct TransformStatus
