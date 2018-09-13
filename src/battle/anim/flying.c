@@ -411,10 +411,12 @@ void sub_80DA0DC(u8 taskId)
         i = 7;
         base = data2 * 16;
 
-        do {
+        do
+        {
             gPlttBufferFaded[base + 0x101 + i] = gPlttBufferFaded[base + 0x100 + i];
             i--;
-        } while (i > 0);
+        }
+        while (i > 0);
 
         gPlttBufferFaded[base + 0x101] = temp;
     }
@@ -442,8 +444,10 @@ void sub_80DA16C(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, sub_80DA1EC);
 }
 
-void sub_80DA1EC(struct Sprite *sprite) {
-    if (TranslateAnimLinear(sprite) != 0) {
+void sub_80DA1EC(struct Sprite *sprite)
+{
+    if (TranslateAnimLinear(sprite) != 0)
+    {
         DestroyAnimSprite(sprite);
     }
 }
@@ -577,23 +581,16 @@ void sub_80DA48C(struct Sprite *sprite)
 void sub_80DA4D8(struct Sprite *sprite)
 {
     s16 *data;
-    u8 *dataByte;
-
     u8 slot;
     s16 spriteCoord;
-
-    int t1;
-    int t2;
-
+    int t1, t2;
     u32 arg2;
-
     u32 matrixNum;
     u8 sinIndex;
     register s16 sinVal asm ("r4");
     register int sinVal2 asm ("r0");
 
     data = sprite->data;
-    dataByte = (u8 *)data;
 
     if (gBattleAnimArgs[7] & 0x100)
     {
@@ -616,7 +613,6 @@ void sub_80DA4D8(struct Sprite *sprite)
 
     t1 = (spriteCoord + (u16) gBattleAnimArgs[6]) << 1;
     data[7] = (data[7] & 1) | t1;
-
     ((u8 *) data)[0] |= 4;
 
     arg2 = (u16) gBattleAnimArgs[2];
@@ -638,7 +634,6 @@ void sub_80DA4D8(struct Sprite *sprite)
             sprite->oam.priority = sub_8079ED4(slot);
         }
 
-        // set smallest bit to 0
         ((u8 *) data)[14] = data[7] & -2;
 
         if (!(data[2] & 0x8000))
@@ -653,8 +648,6 @@ void sub_80DA4D8(struct Sprite *sprite)
     else
     {
         sprite->oam.priority = sub_8079ED4(slot);
-
-        // set smallest bit to 1
         ((u8 *) data)[14] |= 1;
 
         if (data[2] & 0x8000)
@@ -686,8 +679,8 @@ void sub_80DA4D8(struct Sprite *sprite)
 }
 
 #ifdef NONMATCHING
-void sub_80DA6F0(struct Sprite * sprite) {
-
+void sub_80DA6F0(struct Sprite * sprite)
+{
     // (Probably) Functionally equivalent
 
     struct dataStruct {
@@ -711,20 +704,24 @@ void sub_80DA6F0(struct Sprite * sprite) {
     data = sprite->data;
     dataByte = (u8 *)data;
 
-    if (dataByte[0] & 1) {
+    if (dataByte[0] & 1)
+    {
         u32 t1;
 
         t1 = dataByte[1];
         dataByte[1] += 0xff;
 
         t1 <<= 24;
-        if (t1 == 0) {
+        if (t1 == 0)
+        {
             // 080da724
             ((struct dataStruct *)dataByte)[0].one = 0;
             dataByte[1] = zero;
         }
 
-    } else {
+    }
+    else
+    {
         // 080da730
         u16 tData;
         u16 t2;
@@ -733,42 +730,58 @@ void sub_80DA6F0(struct Sprite * sprite) {
         t2 = tData >> 6;
         r8 = tData;
 
-        switch (t2) {
-
+        switch (t2)
+        {
             case (0):
                 // 080da756
 
-                if (dataByte[0] >> 4 == 1) {
+                if (dataByte[0] >> 4 == 1)
+                {
                     dataByte[0] |= 8;
                     dataByte[0] |= 1;
                     dataByte[1] = zero;
-                } else if (dataByte[0] >> 4 == 3) {
+                }
+                else if (dataByte[0] >> 4 == 3)
+                {
                     /*080da76c*/
                     ((struct dataStruct *)dataByte)[0].two ^= 1;
                     ((struct dataStruct *)dataByte)[0].one = 1;
                     dataByte[1] = zero;
-                } else {
+                }
+                else
+                {
                     // 080da790
-                    if (dataByte[0] & 8) {
+                    if (dataByte[0] & 8)
+                    {
                         sprite->hFlip ^= 1;
                         sprite->animNum = sprite->hFlip;
                         sprite->animBeginning = 1;
                         sprite->animEnded = 0;
 
-                        if ((dataByte)[0] & 4) {
+                        if ((dataByte)[0] & 4)
+                        {
                             u8 b;
-                            if (gMain.inBattle) {
-                                if (!(dataByte[14] & 1)) {
+                            if (gMain.inBattle)
+                            {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->oam.priority -= 1;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080da814
                                     sprite->oam.priority += 1;
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 // 080da82e
-                                if (!(dataByte[14] & 1)) {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->subpriority -= 12;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080da85c
                                     sprite->subpriority += 12;
                                 }
@@ -788,35 +801,51 @@ void sub_80DA6F0(struct Sprite * sprite) {
                 break;
             case (1):
                 // 080da896
-                if (dataByte[0] >> 4 == 0) {
+                if (dataByte[0] >> 4 == 0)
+                {
                     dataByte[0] |= 8;
                     dataByte[0] |= 1;
                     dataByte[1] = zero;
-                } else/*080da8ac*/if (dataByte[0] >> 4 == 2) {
+                }
+                else/*080da8ac*/if (dataByte[0] >> 4 == 2)
+                {
                     dataByte[0] |= 1;
                     dataByte[1] = zero;
-                } else {
+                }
+                else
+                    {
                     // 080da8be
-                    if (dataByte[0] & 8) {
+                    if (dataByte[0] & 8)
+                    {
                         sprite->hFlip ^= 1;
                         sprite->animNum = sprite->hFlip;
                         sprite->animBeginning = 1;
                         sprite->animEnded = 0;
 
-                        if (dataByte[0] & 4) {
+                        if (dataByte[0] & 4)
+                        {
                             u8 b;
-                            if (gMain.inBattle) {
-                                if (!(dataByte[14] & 1)) {
+                            if (gMain.inBattle)
+                            {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->oam.priority -= 1;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080da948
                                     sprite->oam.priority += 1;
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 // 080da962
-                                if (!(dataByte[14] & 1)) {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->subpriority -=12;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080da98c
                                     sprite->subpriority += 12;
                                 }
@@ -837,36 +866,52 @@ void sub_80DA6F0(struct Sprite * sprite) {
                 break;
             case (2):
                 // 080da9c8
-                if (dataByte[0] >> 4 == 3) {
+                if (dataByte[0] >> 4 == 3)
+                {
                     dataByte[0] |= 8;
                     dataByte[0] |= 1;
                     dataByte[1] = zero;
-                } else/*080da9de*/if (dataByte[0] >> 4 == 1) {
+                }
+                else/*080da9de*/if (dataByte[0] >> 4 == 1)
+                {
                     dataByte[0] |= 1;
                     dataByte[1] = zero;
-                } else {
+                }
+                else
+                {
                     // 080da9f0
-                    if (dataByte[0] & 8) {
+                    if (dataByte[0] & 8)
+                    {
                         // 080da9fa
                         sprite->hFlip ^= 1;
                         sprite->animNum = sprite->hFlip;
                         sprite->animBeginning = 1;
                         sprite->animEnded = 0;
 
-                        if (dataByte[0] & 4) {
+                        if (dataByte[0] & 4)
+                        {
                             u8 b;
-                            if (gMain.inBattle) {
-                                if (!(dataByte[14] & 1)) {
+                            if (gMain.inBattle)
+                            {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->oam.priority -= 1;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080daa74
                                     sprite->oam.priority += 1;
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 // 080daaa4
-                                if (!(dataByte[14] & 1)) {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->subpriority -= 12;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080daace
                                     sprite->subpriority += 12;
                                 }
@@ -886,36 +931,52 @@ void sub_80DA6F0(struct Sprite * sprite) {
                 break;
             case (3):
                 // 080dab0e
-                if (dataByte[0] >> 4 == 2) {
+                if (dataByte[0] >> 4 == 2)
+                {
                     dataByte[0] |= 8;
                     // 080dac42
-                } else/*080dab20*/if (dataByte[0] >> 4 == 0) {
+                }
+                else/*080dab20*/if (dataByte[0] >> 4 == 0)
+                {
                     ((struct dataStruct *)dataByte)[0].two ^= 1;
                     ((struct dataStruct *)dataByte)[0].one = 1;
                     dataByte[1] = zero;
                     // 080dac42
-                } else {
+                }
+                else
+                {
                     // 080dab44
-                    if (dataByte[0] & 8) {
+                    if (dataByte[0] & 8)
+                    {
                         sprite->hFlip ^= 1;
                         sprite->animNum = sprite->hFlip;
                         sprite->animBeginning = 1;
                         sprite->animEnded = 0;
 
-                        if (dataByte[0] & 4) {
+                        if (dataByte[0] & 4)
+                        {
                             u8 b;
-                            if (gMain.inBattle) {
-                                if (!(dataByte[14] & 1)) {
+                            if (gMain.inBattle)
+                            {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->oam.priority -= 1;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080dabcc
                                     sprite->oam.priority += 1;
                                 }
-                            } else {
+                            }
+                            else
+                            {
                                 // 080dabe6
-                                if (!(dataByte[14] & 1)) {
+                                if (!(dataByte[14] & 1))
+                                {
                                     sprite->subpriority -= 12;
-                                } else {
+                                }
+                                else
+                                {
                                     // 080dac14
                                     sprite->subpriority += 12;
                                 }
@@ -952,20 +1013,23 @@ void sub_80DA6F0(struct Sprite * sprite) {
 
         sprite->pos1.y = (u16)data[4] >> 8;
 
-        if (data[2] & (0x80 << 8)) {
+        if (data[2] & (0x80 << 8))
+        {
             data[1] = (data[1] - (data[2] & ((0x80 << 8) - 1))) & 0xff;
-        } else {
+        }
+        else
+        {
             // 080dace8
             data[1] = ((data[2] & 0x7fff) + data[1]) & 0xff;
         }
         // 080dacfe
-        if (sprite->pos1.y + sprite->pos2.y >= (u16)data[7] / 2) {
+        if (sprite->pos1.y + sprite->pos2.y >= (u16)data[7] / 2)
+        {
             sprite->data[0] = 0;
             sprite->callback = sub_80DA48C;
         }
     }
-
-};
+}
 #else
 NAKED
 void sub_80DA6F0(struct Sprite *sprite)
@@ -1825,12 +1889,6 @@ void sub_80DAD30(struct Sprite *sprite)
 
 void sub_80DAD84(struct Sprite * sprite)
 {
-
-    /* functionally equivalent
-     * rand and matrix num registers switched
-     * can't force registers because they move on left/right switch
-     */
-
     s16 matrixNum;
     s16 rand;
     s16 sinVal;
@@ -1839,26 +1897,35 @@ void sub_80DAD84(struct Sprite * sprite)
     sprite->data[2] = gBattleAnimArgs[1];
     sprite->data[3] = gBattleAnimArgs[2];
 
-    if(gMain.inBattle) {
-        if (gBanksBySide[gAnimBankTarget] & 1) {
+    if (gMain.inBattle)
+    {
+        if (gBanksBySide[gAnimBankTarget] & 1)
+        {
             sprite->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
-        } else {
+        }
+        else
+        {
             // 080dade0
             sprite->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + 40;
         }
 
-        if(gBattleAnimArgs[4]) {
+        if (gBattleAnimArgs[4])
+        {
             sprite->oam.priority = sub_8079ED4(gAnimBankTarget) + 1;
             // 080dae24
-        } else {
+        }
+        else
+        {
             sprite->oam.priority = sub_8079ED4(gAnimBankTarget);
         }
-    } else {
+    }
+    else
+    {
         sprite->data[7] = GetBattlerSpriteCoord(gAnimBankTarget, 1) + gBattleAnimArgs[3];
     }
 
     sprite->data[4] = gSineTable[sprite->data[1] & 0xff];
-    sprite->data[5] = - gSineTable[(sprite->data[1] & 0xff) + 64];
+    sprite->data[5] = -gSineTable[(sprite->data[1] & 0xff) + 64];
     sprite->data[6] = 0;
     sprite->pos2.x = sprite->pos2.y = 0;
 
@@ -1866,7 +1933,8 @@ void sub_80DAD84(struct Sprite * sprite)
     sprite->data[1] = (u8) (sprite->data[1] >> 8);
 
     rand = Random();
-    if (rand & 0x8000) {
+    if (rand & 0x8000)
+    {
         sprite->data[1] = 0xff - sprite->data[1];
     }
 
@@ -1874,12 +1942,13 @@ void sub_80DAD84(struct Sprite * sprite)
 
     gOamMatrices[matrixNum].a = gOamMatrices[matrixNum].d = gSineTable[sprite->data[1] + 64];
     gOamMatrices[matrixNum].b = sinVal;
-    gOamMatrices[matrixNum].c = - sinVal;
+    gOamMatrices[matrixNum].c = -sinVal;
 
     sprite->animBeginning = 1;
     sprite->animEnded = 0;
 
-    if (rand & 1) {
+    if (rand & 1)
+    {
         sprite->animNum = 1;
         sprite->hFlip = 1;
     }
@@ -1889,7 +1958,8 @@ void sub_80DAD84(struct Sprite * sprite)
 }
 
 #ifdef NONMATCHING
-void sub_80DAF0C(struct Sprite * sprite) {
+void sub_80DAF0C(struct Sprite *sprite)
+{
 
     /* NONMATCHING - Functionally equivalent
      *
@@ -1900,23 +1970,23 @@ void sub_80DAF0C(struct Sprite * sprite) {
      * mov r8, r1
      * where r8 is never used can't be matched
      *
-     * 0x8001 and 0x8002 loaded then added with 0 to r0 instead of loaded straight there
-     *
-     * add sp, #-0x10 instead of sub sp, #0x10 */
+     * 0x8001 and 0x8002 loaded then added with 0 to r0 instead of loaded straight there */
 
-    u16 * data;
+    u16 *data;
     u16 dataCpy[8];
     int higher;
 
     data = sprite->data;
 
-    if (++sprite->data[0] > 4) {
+    if (++sprite->data[0] > 4)
+    {
         sprite->pos2.x = (sprite->data[4] * sprite->data[6]) >> 8;
         sprite->pos2.y = (sprite->data[5] * sprite->data[6]) >> 8;
 
         sprite->data[6] += sprite->data[3] & 0xff;
 
-        if (sprite->data[6] >= (sprite->data[2] & 0xff)) {
+        if (sprite->data[6] >= (sprite->data[2] & 0xff))
+        {
             sprite->pos1.x += sprite->pos2.x;
             sprite->pos1.y += sprite->pos2.y;
 
@@ -1931,25 +2001,32 @@ void sub_80DAF0C(struct Sprite * sprite) {
             data[1] = 0;
             data[5] = dataCpy[1];
 
-            if(sprite->animNum != 0) {
-                if (data[3] & 8) {
+            if (sprite->animNum != 0)
+            {
+                if (data[3] & 8)
+                {
                     data[2] = 0x8001;
-                } else {
+                }
+                else
+                {
                     data[2] = 0x8002;
                 }
-            } else {
-                if (data[3] & 8) {
+            }
+            else
+            {
+                if (data[3] & 8)
+                {
                     data[2] = 1;
-                } else {
+                }
+                else
+                {
                     data[2] = 2;
                 }
             }
 
-            //data[6] bytes separated
-            ((u8*)data)[12] = dataCpy[2] >> 8;
-            ((u8*)data)[13] = (u8)data[6] - 2;
+            ((u8 *) data)[12] = dataCpy[2] >> 8;
+            ((u8 *) data)[13] = (u8) data[6] - 2;
 
-            // force evaluation order
             higher = dataCpy[7] << 1;
             data[7] = (data[7] & 1) | higher;
 
@@ -2254,7 +2331,7 @@ void sub_80DB330(struct Sprite *sprite)
 }
 
 #ifdef NONMATCHING
-void sub_80DB374(struct Sprite * sprite)
+void sub_80DB374(struct Sprite *sprite)
 {
     // NONMATCHING - Functionally equivalent - slight register swap at end
 
@@ -2262,7 +2339,8 @@ void sub_80DB374(struct Sprite * sprite)
     int t1, t3;
     s16 t2;
 
-    switch (sprite->data[0]) {
+    switch (sprite->data[0])
+    {
 
         case 0:
             if (!gBattleAnimArgs[0])
@@ -2505,10 +2583,14 @@ void sub_80DB508(struct Sprite *sprite)
     sprite->data[1] -= 32;
 
     if (sprite->data[0] < 0)
+    {
         sprite->data[0] = 0;
+    }
 
     if (++sprite->data[3] == 31)
+    {
         DestroyAnimSprite(sprite);
+    }
 }
 
 void sub_80DB564(struct Sprite *sprite)
@@ -2522,17 +2604,19 @@ void sub_80DB578(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
-    case 0:
-        if (++sprite->data[1] > 8)
-        {
-            sprite->data[1] = 0;
-            sprite->invisible ^= 1;
-            if (++sprite->data[2] > 5 && sprite->invisible)
-                sprite->data[0]++;
-        }
-        break;
-    case 1:
-        DestroyAnimSprite(sprite);
+        case 0:
+            if (++sprite->data[1] > 8)
+            {
+                sprite->data[1] = 0;
+                sprite->invisible ^= 1;
+                if (++sprite->data[2] > 5 && sprite->invisible)
+                {
+                    sprite->data[0]++;
+                }
+            }
+            break;
+        case 1:
+            DestroyAnimSprite(sprite);
     }
 }
 
