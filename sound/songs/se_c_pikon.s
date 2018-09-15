@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_c_pikon_grp, voicegroup_8451F90
+	.equ	se_c_pikon_grp, voicegroup111
 	.equ	se_c_pikon_pri, 5
 	.equ	se_c_pikon_rev, reverb_set+50
 	.equ	se_c_pikon_mvl, 127

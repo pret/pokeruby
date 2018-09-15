@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_gomachi0_grp, voicegroup_8439E58
+	.equ	bgm_gomachi0_grp, voicegroup041
 	.equ	bgm_gomachi0_pri, 0
 	.equ	bgm_gomachi0_rev, reverb_set+50
 	.equ	bgm_gomachi0_mvl, 127

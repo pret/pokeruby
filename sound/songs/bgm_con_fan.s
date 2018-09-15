@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_con_fan_grp, voicegroup_84483F0
+	.equ	bgm_con_fan_grp, voicegroup082
 	.equ	bgm_con_fan_pri, 0
 	.equ	bgm_con_fan_rev, reverb_set+50
 	.equ	bgm_con_fan_mvl, 127

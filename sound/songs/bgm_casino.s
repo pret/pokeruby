@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_casino_grp, voicegroup_8443DE8
+	.equ	bgm_casino_grp, voicegroup069
 	.equ	bgm_casino_pri, 0
 	.equ	bgm_casino_rev, reverb_set+50
 	.equ	bgm_casino_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_maborosi_grp, voicegroup_8447DF0
+	.equ	bgm_maborosi_grp, voicegroup081
 	.equ	bgm_maborosi_pri, 0
 	.equ	bgm_maborosi_rev, reverb_set+50
 	.equ	bgm_maborosi_mvl, 127

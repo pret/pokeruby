@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_kouka_h_grp, voicegroup_8451990
+	.equ	se_kouka_h_grp, voicegroup110
 	.equ	se_kouka_h_pri, 5
 	.equ	se_kouka_h_rev, reverb_set+50
 	.equ	se_kouka_h_mvl, 127

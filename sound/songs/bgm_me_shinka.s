@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_me_shinka_grp, voicegroup_8434B18
+	.equ	bgm_me_shinka_grp, voicegroup023
 	.equ	bgm_me_shinka_pri, 0
 	.equ	bgm_me_shinka_rev, reverb_set+50
 	.equ	bgm_me_shinka_mvl, 127

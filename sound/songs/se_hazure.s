@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_hazure_grp, voicegroup_8451990
+	.equ	se_hazure_grp, voicegroup110
 	.equ	se_hazure_pri, 4
 	.equ	se_hazure_rev, reverb_set+50
 	.equ	se_hazure_mvl, 127

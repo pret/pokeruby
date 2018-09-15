@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_hi_turun_grp, voicegroup_8451F90
+	.equ	se_hi_turun_grp, voicegroup111
 	.equ	se_hi_turun_pri, 4
 	.equ	se_hi_turun_rev, reverb_set+50
 	.equ	se_hi_turun_mvl, 127

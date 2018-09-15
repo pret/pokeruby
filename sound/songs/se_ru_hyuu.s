@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_ru_hyuu_grp, voicegroup_8451F90
+	.equ	se_ru_hyuu_grp, voicegroup111
 	.equ	se_ru_hyuu_pri, 4
 	.equ	se_ru_hyuu_rev, reverb_set+50
 	.equ	se_ru_hyuu_mvl, 127
