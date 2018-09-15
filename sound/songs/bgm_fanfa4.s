@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_fanfa4_grp, voicegroup_843129C
+	.equ	bgm_fanfa4_grp, voicegroup009
 	.equ	bgm_fanfa4_pri, 5
 	.equ	bgm_fanfa4_rev, reverb_set+50
 	.equ	bgm_fanfa4_mvl, 127

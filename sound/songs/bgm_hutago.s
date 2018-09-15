@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_hutago_grp, voicegroup_844BFF0
+	.equ	bgm_hutago_grp, voicegroup092
 	.equ	bgm_hutago_pri, 0
 	.equ	bgm_hutago_rev, reverb_set+50
 	.equ	bgm_hutago_mvl, 127

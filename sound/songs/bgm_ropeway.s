@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_ropeway_grp, voicegroup_84437E8
+	.equ	bgm_ropeway_grp, voicegroup068
 	.equ	bgm_ropeway_pri, 0
 	.equ	bgm_ropeway_rev, reverb_set+50
 	.equ	bgm_ropeway_mvl, 127

@@ -437,7 +437,7 @@ gSongTable:: @ 845548C
 	song bgm_machupi, 0, 0               @ Mt. Pyte (Outside)
 	song bgm_p_school, 0, 0              @ Pokémon Trainer's School
 	song bgm_dendou, 0, 0                @ Hall of Fame
-	song bgm_tonekusa, 0, 0              @ Lavaridge Town
+	song bgm_tonekusa, 0, 0              @ Fallarbor Town
 	song bgm_maborosi, 0, 0              @ Sealed Chamber
 	song bgm_con_fan, 0, 0               @ You are the Champion!
 	song bgm_contest0, 0, 0              @ Pokémon Contest

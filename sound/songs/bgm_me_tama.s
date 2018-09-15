@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_me_tama_grp, voicegroup_843129C
+	.equ	bgm_me_tama_grp, voicegroup009
 	.equ	bgm_me_tama_pri, 5
 	.equ	bgm_me_tama_rev, reverb_set+50
 	.equ	bgm_me_tama_mvl, 127

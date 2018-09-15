@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_b_tower_grp, voicegroup_843708C
+	.equ	bgm_b_tower_grp, voicegroup032
 	.equ	bgm_b_tower_pri, 0
 	.equ	bgm_b_tower_rev, reverb_set+50
 	.equ	bgm_b_tower_mvl, 127

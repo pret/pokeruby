@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_stop_grp, voicegroup_pokemon_cry
+	.equ	se_stop_grp, voicegroup000
 	.equ	se_stop_pri, 0
 	.equ	se_stop_rev, reverb_set+40
 	.equ	se_stop_mvl, 127

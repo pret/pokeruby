@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_fu_zuzuzu_grp, voicegroup_8451990
+	.equ	se_fu_zuzuzu_grp, voicegroup110
 	.equ	se_fu_zuzuzu_pri, 4
 	.equ	se_fu_zuzuzu_rev, reverb_set+50
 	.equ	se_fu_zuzuzu_mvl, 127

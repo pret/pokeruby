@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_hightown_grp, voicegroup_84443E8
+	.equ	bgm_hightown_grp, voicegroup070
 	.equ	bgm_hightown_pri, 0
 	.equ	bgm_hightown_rev, reverb_set+50
 	.equ	bgm_hightown_mvl, 127

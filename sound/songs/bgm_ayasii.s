@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_ayasii_grp, voicegroup_8442BE8
+	.equ	bgm_ayasii_grp, voicegroup066
 	.equ	bgm_ayasii_pri, 0
 	.equ	bgm_ayasii_rev, reverb_set+50
 	.equ	bgm_ayasii_mvl, 127

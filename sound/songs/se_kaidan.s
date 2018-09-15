@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_kaidan_grp, voicegroup_8451990
+	.equ	se_kaidan_grp, voicegroup110
 	.equ	se_kaidan_pri, 5
 	.equ	se_kaidan_rev, reverb_set+50
 	.equ	se_kaidan_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_bd_time_grp, voicegroup_8437EB4
+	.equ	bgm_bd_time_grp, voicegroup035
 	.equ	bgm_bd_time_pri, 0
 	.equ	bgm_bd_time_rev, reverb_set+50
 	.equ	bgm_bd_time_mvl, 127

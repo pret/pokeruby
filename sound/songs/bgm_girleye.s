@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_girleye_grp, voicegroup_843CDBC
+	.equ	bgm_girleye_grp, voicegroup050
 	.equ	bgm_girleye_pri, 0
 	.equ	bgm_girleye_rev, reverb_set+50
 	.equ	bgm_girleye_mvl, 127

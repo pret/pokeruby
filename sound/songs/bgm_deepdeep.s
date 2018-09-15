@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_deepdeep_grp, voicegroup_843E5BC
+	.equ	bgm_deepdeep_grp, voicegroup054
 	.equ	bgm_deepdeep_pri, 0
 	.equ	bgm_deepdeep_rev, reverb_set+50
 	.equ	bgm_deepdeep_mvl, 127
