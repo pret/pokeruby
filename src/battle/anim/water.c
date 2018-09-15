@@ -268,132 +268,7 @@ void sub_80D3874(struct Sprite *sprite)
     }
 }
 
-void sub_80D38BC(u8 taskId)
-{
-    struct Struct_sub_8078914 subStruct;
-    u32 r3;
-    u8 *r2;
-    u8 newTaskId;
-
-    subStruct.field_c = 0;
-    // r10 = taskId
-    REG_BLDCNT = 0x3f42;
-    REG_BLDALPHA = 0x1000;
-    REG_BG1CNT_BITFIELD.priority = 1;
-    REG_BG1CNT_BITFIELD.screenSize = 1;
-
-    sub_8078914(&subStruct);
-    r2 = subStruct.field_0;
-    r3 = 0x2000;
-
-    subStruct.field_c = 0;
-    do {
-        REG_DMA3SAD = (vu32)&subStruct + 16;
-        REG_DMA3DAD = (vu32)r2;
-        REG_DMA3CNT = 0x85000400;
-        r2 += 0x1000;
-        r3 -= 0x1000;
-    } while (r3 > 0x1000);
-
-    REG_DMA3SAD = (vu32)&subStruct + 16;
-    REG_DMA3DAD = (vu32)r2;
-    REG_DMA3CNT = 0x85004000;
-
-    REG_DMA3SAD = (vu32)&subStruct + 16;
-    REG_DMA3DAD = (vu32)subStruct.field_4;
-    REG_DMA3CNT = 0x85000400;
-
-    if (!IsContest())
-    {
-        REG_BG1CNT_BITFIELD.charBaseBlock = 1;
-
-        if (GetBattlerSide(gAnimBankAttacker) == 1)
-        {
-            // 080D39AA
-            LZDecompressVram(&gUnknown_08E70968, subStruct.field_4);
-        }
-        else
-        {
-            // 080D39A8
-            LZDecompressVram(&gUnknown_08E70C38, subStruct.field_4);
-        }
-    }
-    else
-    {
-        // 080D39B8
-        LZDecompressVram(&gUnknown_08E70F0C, subStruct.field_4);
-        sub_80763FC(subStruct.field_8, (u16 *)subStruct.field_4, 0, 1);
-
-    }
-    // 080D39CE
-    LZDecompressVram(&gBattleAnimBackgroundImage_Surf, subStruct.field_0);
-
-    if (!gBattleAnimArgs[0])
-    {
-        LoadCompressedPalette(&gBattleAnimBackgroundPalette_Surf, subStruct.field_8 << 4, 32);
-    }
-    else
-    {
-        // 080D3A00
-        LoadCompressedPalette(&gBattleAnimBackgroundImageMuddyWater_Pal, subStruct.field_8 << 4, 32);
-    }
-    // 080D3A0E
-    newTaskId = CreateTask(sub_80D3D68, gTasks[taskId].priority + 1);
-    gTasks[taskId].data[15] = newTaskId;
-    gTasks[newTaskId].data[0] = 0;
-    gTasks[newTaskId].data[1] = 0x1000;
-    gTasks[newTaskId].data[2] = 0x1000;
-
-    if (IsContest())
-    {
-        gBattle_BG1_X = 65456;
-        gBattle_BG1_Y = 65488;
-        gTasks[taskId].data[0] = 2;
-        gTasks[taskId].data[1] = 1;
-        gTasks[newTaskId].data[3] = 0;
-    }
-    else
-    {
-        // 080D3A94
-        if (GetBattlerSide(gAnimBankAttacker) == 1)
-        {
-            gBattle_BG1_X = 0xff20;
-            gBattle_BG1_Y = 0x100;
-            gTasks[taskId].data[0] = 2;
-            gTasks[taskId].data[1] = 0xffff;
-            gTasks[newTaskId].data[3] = 1;
-        }
-        else
-        {
-            // 080D3AD8
-            gBattle_BG1_X = 0;
-            gBattle_BG1_Y = 0xffd0;
-            gTasks[taskId].data[0] = 0xfffe;
-            gTasks[taskId].data[1] = 1;
-            gTasks[newTaskId].data[3] = 0;
-        }
-    }
-    // 080D3AEE
-    REG_BG1HOFS = gBattle_BG1_X;
-    REG_BG1VOFS = gBattle_BG1_Y;
-
-    if (gTasks[newTaskId].data[3] == 0)
-    {
-        gTasks[newTaskId].data[4] = 0x30;
-        gTasks[newTaskId].data[5] = 0x70;
-    }
-    else
-    {
-        // 080D3B34
-        gTasks[newTaskId].data[4] = 0;
-        gTasks[newTaskId].data[5] = 0;
-    }
-    // 080D3B38
-    gTasks[taskId].data[6] = 1;
-    gTasks[taskId].func = sub_80D3B60;
-}
-
-/*NAKED
+NAKED
 void sub_80D38BC(u8 taskId)
 {
     asm(".syntax unified\n\
@@ -710,7 +585,7 @@ _080D3B38:\n\
     .align 2, 0\n\
 _080D3B5C: .4byte sub_80D3B60\n\
     .syntax divided\n");
-}*/
+}
 
 NAKED
 void sub_80D3B60(u8 taskId)

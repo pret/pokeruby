@@ -268,7 +268,6 @@ SECTIONS {
         src/battle/anim/aurora.o(.text);
         src/battle/anim/energy_wave.o(.text);
         src/battle/anim/water.o(.text);
-        asm/water.o(.text);
         src/battle/anim/fire.o(.text);
         src/battle/anim/sunlight.o(.text);
         src/battle/anim/fire_2.o(.text);
@@ -283,7 +282,6 @@ SECTIONS {
         src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
         src/battle/anim/flying.o(.text);
-        asm/flying.o(.text);
         src/battle/anim/psychic.o(.text);
         src/battle/anim/bug.o(.text);
         src/battle/anim/rock.o(.text);
