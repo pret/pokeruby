@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_eikou_r_grp, voicegroup_844B3F0
+	.equ	bgm_eikou_r_grp, voicegroup090
 	.equ	bgm_eikou_r_pri, 0
 	.equ	bgm_eikou_r_rev, reverb_set+50
 	.equ	bgm_eikou_r_mvl, 127

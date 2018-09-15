@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_hideri_grp, voicegroup_844A1F0
+	.equ	bgm_hideri_grp, voicegroup087
 	.equ	bgm_hideri_pri, 0
 	.equ	bgm_hideri_rev, reverb_set+50
 	.equ	bgm_hideri_mvl, 127

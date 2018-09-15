@@ -125,6 +125,7 @@ tools:
 	@$(MAKE) -C tools/rsfont
 	@$(MAKE) -C tools/aif2pcm
 	@$(MAKE) -C tools/ramscrgen
+	@$(MAKE) -C tools/mid2agb
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})

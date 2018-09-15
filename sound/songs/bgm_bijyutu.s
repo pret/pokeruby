@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_bijyutu_grp, voicegroup_8433534
+	.equ	bgm_bijyutu_grp, voicegroup017
 	.equ	bgm_bijyutu_pri, 0
 	.equ	bgm_bijyutu_rev, reverb_set+50
 	.equ	bgm_bijyutu_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_runecity_grp, voicegroup_844A7F0
+	.equ	bgm_runecity_grp, voicegroup088
 	.equ	bgm_runecity_pri, 0
 	.equ	bgm_runecity_rev, reverb_set+50
 	.equ	bgm_runecity_mvl, 127

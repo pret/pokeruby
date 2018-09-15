@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_odamaki_grp, voicegroup_84368B8
+	.equ	bgm_odamaki_grp, voicegroup030
 	.equ	bgm_odamaki_pri, 0
 	.equ	bgm_odamaki_rev, reverb_set+50
 	.equ	bgm_odamaki_mvl, 127

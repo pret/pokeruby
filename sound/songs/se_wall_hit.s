@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_wall_hit_grp, voicegroup_8451990
+	.equ	se_wall_hit_grp, voicegroup110
 	.equ	se_wall_hit_pri, 2
 	.equ	se_wall_hit_rev, reverb_set+50
 	.equ	se_wall_hit_mvl, 127

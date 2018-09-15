@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_tamakoro_grp, voicegroup_8451F90
+	.equ	se_tamakoro_grp, voicegroup111
 	.equ	se_tamakoro_pri, 2
 	.equ	se_tamakoro_rev, reverb_set+50
 	.equ	se_tamakoro_mvl, 127

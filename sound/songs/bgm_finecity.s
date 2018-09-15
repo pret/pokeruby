@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_finecity_grp, voicegroup_84467E8
+	.equ	bgm_finecity_grp, voicegroup076
 	.equ	bgm_finecity_pri, 0
 	.equ	bgm_finecity_rev, reverb_set+50
 	.equ	bgm_finecity_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_hageshii_grp, voicegroup_84401E8
+	.equ	bgm_hageshii_grp, voicegroup059
 	.equ	bgm_hageshii_pri, 0
 	.equ	bgm_hageshii_rev, reverb_set+50
 	.equ	bgm_hageshii_mvl, 127

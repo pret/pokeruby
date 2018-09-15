@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_minamo_grp, voicegroup_843D3BC
+	.equ	bgm_minamo_grp, voicegroup051
 	.equ	bgm_minamo_pri, 0
 	.equ	bgm_minamo_rev, reverb_set+50
 	.equ	bgm_minamo_mvl, 127

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_suikomu_grp, voicegroup_8451990
+	.equ	se_suikomu_grp, voicegroup110
 	.equ	se_suikomu_pri, 5
 	.equ	se_suikomu_rev, reverb_set+50
 	.equ	se_suikomu_mvl, 127

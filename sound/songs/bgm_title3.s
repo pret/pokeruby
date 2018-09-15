@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_title3_grp, voicegroup_843F1BC
+	.equ	bgm_title3_grp, voicegroup056
 	.equ	bgm_title3_pri, 0
 	.equ	bgm_title3_rev, reverb_set+50
 	.equ	bgm_title3_mvl, 127

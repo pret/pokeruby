@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_cycling_grp, voicegroup_843B844
+	.equ	bgm_cycling_grp, voicegroup046
 	.equ	bgm_cycling_pri, 0
 	.equ	bgm_cycling_rev, reverb_set+50
 	.equ	bgm_cycling_mvl, 127

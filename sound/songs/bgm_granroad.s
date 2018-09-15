@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_granroad_grp, voicegroup_843B424
+	.equ	bgm_granroad_grp, voicegroup045
 	.equ	bgm_granroad_pri, 0
 	.equ	bgm_granroad_rev, reverb_set+50
 	.equ	bgm_granroad_mvl, 127

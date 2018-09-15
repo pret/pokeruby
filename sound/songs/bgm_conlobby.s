@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_conlobby_grp, voicegroup_844D1F0
+	.equ	bgm_conlobby_grp, voicegroup095
 	.equ	bgm_conlobby_pri, 0
 	.equ	bgm_conlobby_rev, reverb_set+50
 	.equ	bgm_conlobby_mvl, 127
