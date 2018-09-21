@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_pcc_grp, voicegroup_pokemon_cry
+	.equ	bgm_pcc_grp, voicegroup000
 	.equ	bgm_pcc_pri, 0
 	.equ	bgm_pcc_rev, reverb_set+50
 	.equ	bgm_pcc_mvl, 127

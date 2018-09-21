@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_me_kinomi_grp, voicegroup_843129C
+	.equ	bgm_me_kinomi_grp, voicegroup009
 	.equ	bgm_me_kinomi_pri, 5
 	.equ	bgm_me_kinomi_rev, reverb_set+50
 	.equ	bgm_me_kinomi_mvl, 127

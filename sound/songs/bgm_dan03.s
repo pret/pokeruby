@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_dan03_grp, voicegroup_8437A88
+	.equ	bgm_dan03_grp, voicegroup034
 	.equ	bgm_dan03_pri, 0
 	.equ	bgm_dan03_rev, reverb_set+50
 	.equ	bgm_dan03_mvl, 127

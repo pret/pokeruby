@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_safari_grp, voicegroup_84449E8
+	.equ	bgm_safari_grp, voicegroup071
 	.equ	bgm_safari_pri, 0
 	.equ	bgm_safari_rev, reverb_set+50
 	.equ	bgm_safari_mvl, 127

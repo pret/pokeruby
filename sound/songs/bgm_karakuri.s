@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_karakuri_grp, voicegroup_844B9F0
+	.equ	bgm_karakuri_grp, voicegroup091
 	.equ	bgm_karakuri_pri, 0
 	.equ	bgm_karakuri_rev, reverb_set+50
 	.equ	bgm_karakuri_mvl, 127

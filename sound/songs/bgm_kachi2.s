@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_kachi2_grp, voicegroup_8434728
+	.equ	bgm_kachi2_grp, voicegroup022
 	.equ	bgm_kachi2_pri, 0
 	.equ	bgm_kachi2_rev, reverb_set+50
 	.equ	bgm_kachi2_mvl, 127

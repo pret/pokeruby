@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_swimeye_grp, voicegroup_8437488
+	.equ	bgm_swimeye_grp, voicegroup033
 	.equ	bgm_swimeye_pri, 0
 	.equ	bgm_swimeye_rev, reverb_set+50
 	.equ	bgm_swimeye_mvl, 127

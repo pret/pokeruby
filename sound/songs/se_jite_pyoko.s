@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_jite_pyoko_grp, voicegroup_8451990
+	.equ	se_jite_pyoko_grp, voicegroup110
 	.equ	se_jite_pyoko_pri, 4
 	.equ	se_jite_pyoko_rev, reverb_set+50
 	.equ	se_jite_pyoko_mvl, 127

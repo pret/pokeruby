@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_tozan_grp, voicegroup_843C7BC
+	.equ	bgm_tozan_grp, voicegroup049
 	.equ	bgm_tozan_pri, 0
 	.equ	bgm_tozan_rev, reverb_set+50
 	.equ	bgm_tozan_mvl, 127

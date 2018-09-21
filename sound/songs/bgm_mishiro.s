@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_mishiro_grp, voicegroup_843C444
+	.equ	bgm_mishiro_grp, voicegroup048
 	.equ	bgm_mishiro_pri, 0
 	.equ	bgm_mishiro_rev, reverb_set+50
 	.equ	bgm_mishiro_mvl, 127

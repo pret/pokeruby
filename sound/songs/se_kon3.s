@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_kon3_grp, voicegroup_8451F90
+	.equ	se_kon3_grp, voicegroup111
 	.equ	se_kon3_pri, 4
 	.equ	se_kon3_rev, reverb_set+50
 	.equ	se_kon3_mvl, 127

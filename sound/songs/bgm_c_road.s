@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_c_road_grp, voicegroup_8444FE8
+	.equ	bgm_c_road_grp, voicegroup072
 	.equ	bgm_c_road_pri, 0
 	.equ	bgm_c_road_rev, reverb_set+50
 	.equ	bgm_c_road_mvl, 127

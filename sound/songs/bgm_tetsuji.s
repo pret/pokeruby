@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_tetsuji_grp, voicegroup_8436C9C
+	.equ	bgm_tetsuji_grp, voicegroup031
 	.equ	bgm_tetsuji_pri, 0
 	.equ	bgm_tetsuji_rev, reverb_set+50
 	.equ	bgm_tetsuji_mvl, 127

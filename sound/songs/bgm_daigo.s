@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_daigo_grp, voicegroup_844DDF0
+	.equ	bgm_daigo_grp, voicegroup097
 	.equ	bgm_daigo_pri, 0
 	.equ	bgm_daigo_rev, reverb_set+50
 	.equ	bgm_daigo_mvl, 127

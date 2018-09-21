@@ -13996,153 +13996,30 @@ static void atkC0_recoverbasedonsunlight(void)
     }
 }
 
-NAKED
 static void atkC1_hiddenpowercalc(void)
 {
-    asm(".syntax unified\n\
-push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    ldr r2, _08029894 @ =gBattleMons\n\
-    ldr r0, _08029898 @ =gBankAttacker\n\
-    ldrb r1, [r0]\n\
-    movs r0, 0x58\n\
-    adds r4, r1, 0\n\
-    muls r4, r0\n\
-    adds r4, r2\n\
-    ldrb r0, [r4, 0x14]\n\
-    mov r10, r0\n\
-    mov r7, r10\n\
-    lsls r7, 27\n\
-    adds r0, r7, 0\n\
-    lsrs r0, 27\n\
-    mov r10, r0\n\
-    movs r1, 0x2\n\
-    mov r2, r10\n\
-    ands r2, r1\n\
-    asrs r2, 1\n\
-    ldrh r7, [r4, 0x14]\n\
-    mov r9, r7\n\
-    mov r0, r9\n\
-    lsls r0, 22\n\
-    mov r9, r0\n\
-    lsrs r3, r0, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r3\n\
-    orrs r2, r0\n\
-    ldrb r7, [r4, 0x15]\n\
-    mov r8, r7\n\
-    mov r0, r8\n\
-    lsls r0, 25\n\
-    mov r8, r0\n\
-    lsrs r3, r0, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r3\n\
-    lsls r0, 1\n\
-    orrs r2, r0\n\
-    ldr r6, [r4, 0x14]\n\
-    lsls r6, 12\n\
-    lsrs r3, r6, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r3\n\
-    lsls r0, 2\n\
-    orrs r2, r0\n\
-    ldrh r5, [r4, 0x16]\n\
-    lsls r5, 23\n\
-    lsrs r3, r5, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r3\n\
-    lsls r0, 3\n\
-    orrs r2, r0\n\
-    ldrb r3, [r4, 0x17]\n\
-    lsls r3, 26\n\
-    lsrs r0, r3, 27\n\
-    ands r1, r0\n\
-    lsls r1, 4\n\
-    orrs r2, r1\n\
-    movs r1, 0x1\n\
-    adds r4, r1, 0\n\
-    mov r7, r10\n\
-    ands r4, r7\n\
-    mov r0, r9\n\
-    lsrs r0, 27\n\
-    mov r9, r0\n\
-    adds r0, r1, 0\n\
-    mov r7, r9\n\
-    ands r0, r7\n\
-    lsls r0, 1\n\
-    orrs r4, r0\n\
-    mov r0, r8\n\
-    lsrs r0, 27\n\
-    mov r8, r0\n\
-    adds r0, r1, 0\n\
-    mov r7, r8\n\
-    ands r0, r7\n\
-    lsls r0, 2\n\
-    orrs r4, r0\n\
-    lsrs r6, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r6\n\
-    lsls r0, 3\n\
-    orrs r4, r0\n\
-    lsrs r5, 27\n\
-    adds r0, r1, 0\n\
-    ands r0, r5\n\
-    lsls r0, 4\n\
-    orrs r4, r0\n\
-    lsrs r3, 27\n\
-    ands r1, r3\n\
-    lsls r1, 5\n\
-    orrs r4, r1\n\
-    ldr r5, _0802989C @ =gDynamicBasePower\n\
-    lsls r0, r2, 2\n\
-    adds r0, r2\n\
-    lsls r0, 3\n\
-    movs r1, 0x3F\n\
-    bl __divsi3\n\
-    adds r0, 0x1E\n\
-    strh r0, [r5]\n\
-    ldr r5, _080298A0 @ =gSharedMem\n\
-    lsls r0, r4, 4\n\
-    subs r0, r4\n\
-    movs r1, 0x3F\n\
-    bl __divsi3\n\
-    adds r1, r0, 0x1\n\
-    ldr r0, _080298A4 @ =0x0001601c\n\
-    adds r5, r0\n\
-    strb r1, [r5]\n\
-    lsls r0, r1, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x8\n\
-    bls _08029876\n\
-    adds r0, r1, 0x1\n\
-    strb r0, [r5]\n\
-_08029876:\n\
-    ldrb r0, [r5]\n\
-    movs r1, 0xC0\n\
-    orrs r0, r1\n\
-    strb r0, [r5]\n\
-    ldr r1, _080298A8 @ =gBattlescriptCurrInstr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x1\n\
-    str r0, [r1]\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08029894: .4byte gBattleMons\n\
-_08029898: .4byte gBankAttacker\n\
-_0802989C: .4byte gDynamicBasePower\n\
-_080298A0: .4byte gSharedMem\n\
-_080298A4: .4byte 0x0001601c\n\
-_080298A8: .4byte gBattlescriptCurrInstr\n\
-        .syntax divided");
+	u8 power = ((gBattleMons[gBankAttacker].hpIV & 2) >> 1) |
+	           ((gBattleMons[gBankAttacker].attackIV & 2)) |
+	           ((gBattleMons[gBankAttacker].defenseIV & 2) << 1) |
+	           ((gBattleMons[gBankAttacker].speedIV & 2) << 2) |
+	           ((gBattleMons[gBankAttacker].spAttackIV & 2) << 3) |
+	           ((gBattleMons[gBankAttacker].spDefenseIV & 2) << 4);
+	u8 type = ((gBattleMons[gBankAttacker].hpIV & 1)) |
+	          ((gBattleMons[gBankAttacker].attackIV & 1) << 1) |
+	          ((gBattleMons[gBankAttacker].defenseIV & 1) << 2) |
+	          ((gBattleMons[gBankAttacker].speedIV & 1) << 3) |
+	          ((gBattleMons[gBankAttacker].spAttackIV & 1) << 4) |
+	          ((gBattleMons[gBankAttacker].spDefenseIV & 1) << 5);
+	
+	gDynamicBasePower = 30 + (power * 40 / 63);
+	
+	gBattleStruct->dynamicMoveType = ((type * 15) / 63) + 1;
+	if (gBattleStruct->dynamicMoveType >= TYPE_MYSTERY)
+		gBattleStruct->dynamicMoveType++;
+	
+	gBattleStruct->dynamicMoveType |= 0xC0;
+	
+	gBattlescriptCurrInstr++;
 }
 
 static void atkC2_selectfirstvalidtarget(void)

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_p_school_grp, voicegroup_84473E8
+	.equ	bgm_p_school_grp, voicegroup078
 	.equ	bgm_p_school_pri, 0
 	.equ	bgm_p_school_rev, reverb_set+50
 	.equ	bgm_p_school_mvl, 127

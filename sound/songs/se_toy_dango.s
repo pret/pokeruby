@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_toy_dango_grp, voicegroup_8451F90
+	.equ	se_toy_dango_grp, voicegroup111
 	.equ	se_toy_dango_pri, 4
 	.equ	se_toy_dango_rev, reverb_set+50
 	.equ	se_toy_dango_mvl, 127

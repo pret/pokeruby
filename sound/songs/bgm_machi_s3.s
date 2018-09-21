@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_machi_s3_grp, voicegroup_84362B8
+	.equ	bgm_machi_s3_grp, voicegroup029
 	.equ	bgm_machi_s3_pri, 0
 	.equ	bgm_machi_s3_rev, reverb_set+50
 	.equ	bgm_machi_s3_mvl, 127

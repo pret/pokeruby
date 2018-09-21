@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_battle32_grp, voicegroup_844F950
+	.equ	bgm_battle32_grp, voicegroup103
 	.equ	bgm_battle32_pri, 1
 	.equ	bgm_battle32_rev, reverb_set+50
 	.equ	bgm_battle32_mvl, 127

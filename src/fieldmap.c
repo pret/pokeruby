@@ -463,15 +463,15 @@ void MapGridSetMetatileEntryAt(int x, int y, u16 metatile)
 u32 GetBehaviorByMetatileId(u16 metatile)
 {
     u16 *attributes;
-    if (metatile <= 0x1ff)
+    if (metatile < NUM_METATILES_IN_PRIMARY)
     {
         attributes = gMapHeader.mapLayout->primaryTileset->metatileAttributes;
         return attributes[metatile];
     }
-    else if (metatile <= 0x3ff)
+    else if (metatile < NUM_METATILES_TOTAL)
     {
         attributes = gMapHeader.mapLayout->secondaryTileset->metatileAttributes;
-        return attributes[metatile - 0x200];
+        return attributes[metatile - NUM_METATILES_IN_PRIMARY];
     }
     else
     {
@@ -878,17 +878,17 @@ void GetCameraCoords(u16 *x, u16 *y)
     *y = gSaveBlock1.pos.y;
 }
 
-void sub_8056C98(struct Tileset *tileset, void *src)
+void sub_8056C98(struct Tileset *tileset, void *dest)
 {
     if (tileset)
     {
         if (!tileset->isCompressed)
         {
-            CpuFastSet(tileset->tiles, src, 0x1000);
+            CpuFastCopy(tileset->tiles, dest, NUM_TILES_IN_PRIMARY * 16 * 2);
         }
         else
         {
-            LZ77UnCompVram(tileset->tiles, src);
+            LZ77UnCompVram(tileset->tiles, dest);
         }
     }
 }
@@ -906,7 +906,7 @@ void sub_8056CBC(struct Tileset *tileset, int offset, int size)
         }
         else if (tileset->isSecondary == TRUE)
         {
-            LoadPalette(tileset->palettes + 0xc0, offset, size);
+            LoadPalette((u16*)tileset->palettes + (NUM_PALS_IN_PRIMARY * 16), offset, size);
         }
         else
         {
@@ -918,24 +918,24 @@ void sub_8056CBC(struct Tileset *tileset, int offset, int size)
 
 void sub_8056D28(struct MapLayout *mapLayout)
 {
-    void *src = (void*)(BG_VRAM);
-    sub_8056C98(mapLayout->primaryTileset, src);
+    void *dest = (void*)(BG_VRAM);
+    sub_8056C98(mapLayout->primaryTileset, dest);
 }
 
 void sub_8056D38(struct MapLayout *mapLayout)
 {
-    void *src = (void*)(BG_VRAM + 0x4000);
-    sub_8056C98(mapLayout->secondaryTileset, src);
+    void *dest = (void*)(BG_VRAM + NUM_TILES_IN_PRIMARY * 16 * 2);
+    sub_8056C98(mapLayout->secondaryTileset, dest);
 }
 
 void apply_map_tileset1_palette(struct MapLayout *mapLayout)
 {
-    sub_8056CBC(mapLayout->primaryTileset, 0, 0xc0);
+    sub_8056CBC(mapLayout->primaryTileset, 0, NUM_PALS_IN_PRIMARY * 16 * 2);
 }
 
 void apply_map_tileset2_palette(struct MapLayout *mapLayout)
 {
-    sub_8056CBC(mapLayout->secondaryTileset, 0x60, 0xc0);
+    sub_8056CBC(mapLayout->secondaryTileset, NUM_PALS_IN_PRIMARY * 16, (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * 16 * 2);
 }
 
 void copy_map_tileset1_tileset2_to_vram(struct MapLayout *mapLayout)

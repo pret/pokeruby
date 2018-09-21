@@ -1119,13 +1119,13 @@ static void sub_80A41E0(u8 *a, u16 b, const u8 *c, u16 d, u8 e)
     AlignInt1InMenuWindow(a, d, 0x78, 1);
 }
 
-static u8 *sub_80A425C(u8 taskId, u8 *text, u8 c)
+static u8 *sub_80A425C(u8 taskId, u8 *text, u8 itemSlot)
 {
-    if (gTasks[taskId].data[10] - gBagPocketScrollStates[sCurrentBagPocket].scrollTop - 1 == c)
+    if (gTasks[taskId].data[10] - gBagPocketScrollStates[sCurrentBagPocket].scrollTop - 1 == itemSlot)
     {
         text[0] = EXT_CTRL_CODE_BEGIN;
         text[1] = 1;
-        text[2] = 2;
+        text[2] = TEXT_COLOR_RED;
         text += 3;
     }
     return text;
@@ -1222,275 +1222,61 @@ static void sub_80A444C(u16 a, int b, int c, int d)
     }
 }
 
-// more gBGTilemapBuffers shenanigans
-#ifdef NONMATCHING
-static void sub_80A4548(u16 a, int b, int c, int d)
+static void sub_80A4548(u16 taskId, int topItemOffset, int bottomItemOffset, int d)
 {
     u8 i;
 
-    for (i = b; i <= c; i++)
+    for (i = topItemOffset; i <= bottomItemOffset; i++)
     {
-        u8 r4;
-        u8 sp10;
-        u32 r5;
+        u8 slot;
+        u8 y;
+        u16 tilemapOffset;
         u8 *text;
 
         if (sub_80A42B0(i, d) == TRUE)
             break;
-        r4 = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + i;
-        sp10 = i * 2 + 2;
-        r5 = sp10 * 32 + 14;
-        text = gStringVar1;
-        text = sub_80A425C(a, text, i);
-        if (gCurrentBagPocketItemSlots[r4].itemId < 0x153)
-        {
-            const u8 *r2;
 
-            gBGTilemapBuffers[2][r5 + 0] = 0x59;
-            gBGTilemapBuffers[2][r5 + 1] = 0x4F;
-            gBGTilemapBuffers[2][r5 + 32] = 0x69;
-            gBGTilemapBuffers[2][r5 + 33] = 0x4F;
-            r2 = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[r4].itemId)];
-            sub_80A41E0(text, gCurrentBagPocketItemSlots[r4].itemId - 288, r2, gCurrentBagPocketItemSlots[r4].quantity, 2);
+        slot = gBagPocketScrollStates[sCurrentBagPocket].scrollTop + i;
+        y = i * 2 + 2;
+        tilemapOffset = y * 32 + 14;
+        text = gStringVar1;
+        text = sub_80A425C(taskId, text, i);
+
+        if (gCurrentBagPocketItemSlots[slot].itemId < ITEM_HM01_CUT)
+        {
+            const u8 *moveName;
+            gBGTilemapBuffers[2][tilemapOffset + 0] = 0x59;
+            gBGTilemapBuffers[2][tilemapOffset + 1] = 0x4F;
+            gBGTilemapBuffers[2][tilemapOffset + 32] = 0x69;
+            gBGTilemapBuffers[2][tilemapOffset + 33] = 0x4F;
+            moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[slot].itemId)];
+            sub_80A41E0(text, gCurrentBagPocketItemSlots[slot].itemId - (ITEM_TM01_FOCUS_PUNCH - 1), moveName, gCurrentBagPocketItemSlots[slot].quantity, 2);
         }
         else
         {
             const u8 *moveName;
-
-            gBGTilemapBuffers[2][r5 + 0] = 0x105D;
-            gBGTilemapBuffers[2][r5 + 1] = 0x105E;
-            gBGTilemapBuffers[2][r5 + 32] = 0x106D;
-            gBGTilemapBuffers[2][r5 + 33] = 0x106E;
+            gBGTilemapBuffers[2][tilemapOffset + 0] = 0x105D;
+            gBGTilemapBuffers[2][tilemapOffset + 1] = 0x105E;
+            gBGTilemapBuffers[2][tilemapOffset + 32] = 0x106D;
+            gBGTilemapBuffers[2][tilemapOffset + 33] = 0x106E;
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = 0x13;
             text[2] = 0x11;
             text += 3;
-            text = ConvertIntToDecimalString(text, gCurrentBagPocketItemSlots[r4].itemId);
+            text = ConvertIntToDecimalString(text, gCurrentBagPocketItemSlots[slot].itemId - (ITEM_HM01_CUT - 1));
             text[0] = EXT_CTRL_CODE_BEGIN;
             text[1] = 0x13;
             text[2] = 0x18;
             text += 3;
-            moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[r4].itemId)];
+            moveName = gMoveNames[ItemIdToBattleMoveId(gCurrentBagPocketItemSlots[slot].itemId)];
             AlignStringInMenuWindow(text, moveName, 0x78, 0);
         }
-        Menu_PrintText(gStringVar1, 14, sp10);
+
+        Menu_PrintText(gStringVar1, 14, y);
     }
 }
-#else
-NAKED
-static void sub_80A4548(u16 a, int b, int c, int d)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x14\n\
-    str r2, [sp, 0x8]\n\
-    str r3, [sp, 0xC]\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    str r0, [sp, 0x4]\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    mov r8, r1\n\
-    ldr r0, _080A456C @ =gBGTilemapBuffers + 0x1000\n\
-    mov r9, r0\n\
-    b _080A46C2\n\
-    .align 2, 0\n\
-_080A456C: .4byte gBGTilemapBuffers + 0x1000\n\
-_080A4570:\n\
-    ldr r1, _080A461C @ =gBagPocketScrollStates\n\
-    ldr r0, _080A4620 @ =sCurrentBagPocket\n\
-    ldrb r0, [r0]\n\
-    lsls r0, 24\n\
-    asrs r0, 24\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    ldrb r4, [r0, 0x1]\n\
-    add r4, r8\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r1, r8\n\
-    lsls r0, r1, 25\n\
-    movs r3, 0x80\n\
-    lsls r3, 18\n\
-    adds r0, r3\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x10]\n\
-    lsls r0, 5\n\
-    adds r0, 0xE\n\
-    adds r5, r0, 0\n\
-    ldr r6, _080A4624 @ =gStringVar1\n\
-    ldr r1, [sp, 0x4]\n\
-    lsls r0, r1, 24\n\
-    lsrs r0, 24\n\
-    adds r1, r6, 0\n\
-    mov r2, r8\n\
-    bl sub_80A425C\n\
-    adds r6, r0, 0\n\
-    ldr r3, _080A4628 @ =gCurrentBagPocketItemSlots\n\
-    mov r10, r3\n\
-    ldr r0, [r3]\n\
-    lsls r7, r4, 2\n\
-    adds r3, r7, r0\n\
-    ldrh r1, [r3]\n\
-    movs r0, 0xA9\n\
-    lsls r0, 1\n\
-    cmp r1, r0\n\
-    bhi _080A4634\n\
-    lsls r0, r5, 1\n\
-    add r0, r9\n\
-    movs r1, 0x59\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    movs r2, 0x4F\n\
-    strh r2, [r0]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x20\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    movs r1, 0x69\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x21\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    strh r2, [r0]\n\
-    ldrh r0, [r3]\n\
-    bl ItemIdToBattleMoveId\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0xD\n\
-    adds r2, r0, 0\n\
-    muls r2, r1\n\
-    ldr r0, _080A462C @ =gMoveNames\n\
-    adds r2, r0\n\
-    mov r1, r10\n\
-    ldr r0, [r1]\n\
-    adds r0, r7, r0\n\
-    ldr r3, _080A4630 @ =0xfffffee0\n\
-    adds r1, r3, 0\n\
-    ldrh r3, [r0]\n\
-    adds r1, r3\n\
-    lsls r1, 16\n\
-    lsrs r1, 16\n\
-    ldrh r3, [r0, 0x2]\n\
-    movs r0, 0x2\n\
-    str r0, [sp]\n\
-    adds r0, r6, 0\n\
-    bl sub_80A41E0\n\
-    b _080A46AE\n\
-    .align 2, 0\n\
-_080A461C: .4byte gBagPocketScrollStates\n\
-_080A4620: .4byte sCurrentBagPocket\n\
-_080A4624: .4byte gStringVar1\n\
-_080A4628: .4byte gCurrentBagPocketItemSlots\n\
-_080A462C: .4byte gMoveNames\n\
-_080A4630: .4byte 0xfffffee0\n\
-_080A4634:\n\
-    lsls r0, r5, 1\n\
-    add r0, r9\n\
-    ldr r1, _080A46EC @ =0x0000105d\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    adds r1, 0x1\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x20\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    adds r1, 0xF\n\
-    strh r1, [r0]\n\
-    adds r0, r5, 0\n\
-    adds r0, 0x21\n\
-    lsls r0, 1\n\
-    add r0, r9\n\
-    adds r1, 0x1\n\
-    strh r1, [r0]\n\
-    movs r0, 0xFC\n\
-    strb r0, [r6]\n\
-    movs r4, 0x13\n\
-    strb r4, [r6, 0x1]\n\
-    movs r0, 0x11\n\
-    strb r0, [r6, 0x2]\n\
-    adds r6, 0x3\n\
-    mov r1, r10\n\
-    ldr r0, [r1]\n\
-    adds r0, r7, r0\n\
-    ldrh r1, [r0]\n\
-    ldr r3, _080A46F0 @ =0xfffffeae\n\
-    adds r1, r3\n\
-    adds r0, r6, 0\n\
-    bl ConvertIntToDecimalString\n\
-    adds r6, r0, 0\n\
-    movs r0, 0xFC\n\
-    strb r0, [r6]\n\
-    strb r4, [r6, 0x1]\n\
-    movs r0, 0x18\n\
-    strb r0, [r6, 0x2]\n\
-    adds r6, 0x3\n\
-    mov r1, r10\n\
-    ldr r0, [r1]\n\
-    adds r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    bl ItemIdToBattleMoveId\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    movs r1, 0xD\n\
-    muls r1, r0\n\
-    ldr r0, _080A46F4 @ =gMoveNames\n\
-    adds r1, r0\n\
-    adds r0, r6, 0\n\
-    movs r2, 0x78\n\
-    movs r3, 0\n\
-    bl AlignStringInMenuWindow\n\
-_080A46AE:\n\
-    ldr r0, _080A46F8 @ =gStringVar1\n\
-    movs r1, 0xE\n\
-    ldr r2, [sp, 0x10]\n\
-    bl Menu_PrintText\n\
-    mov r0, r8\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-_080A46C2:\n\
-    ldr r3, [sp, 0x8]\n\
-    cmp r8, r3\n\
-    bgt _080A46DA\n\
-    mov r0, r8\n\
-    ldr r1, [sp, 0xC]\n\
-    bl sub_80A42B0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _080A46DA\n\
-    b _080A4570\n\
-_080A46DA:\n\
-    add sp, 0x14\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080A46EC: .4byte 0x0000105d\n\
-_080A46F0: .4byte 0xfffffeae\n\
-_080A46F4: .4byte gMoveNames\n\
-_080A46F8: .4byte gStringVar1\n\
-    .syntax divided\n");
-}
-#endif
 
-static void sub_80A46FC(u16 a, int b, int c, int d)
+static void sub_80A46FC(u16 taskId, int b, int c, int d)
 {
     u8 i;
 
@@ -1512,29 +1298,29 @@ static void sub_80A46FC(u16 a, int b, int c, int d)
         gBGTilemapBuffers[2][var] = 0x69;
 
         text = gStringVar1;
-        text = sub_80A425C(a, text, i);
+        text = sub_80A425C(taskId, text, i);
         CopyItemName(gCurrentBagPocketItemSlots[r4].itemId, gStringVar2);
         sub_80A41E0(text, gCurrentBagPocketItemSlots[r4].itemId - 0x84, gStringVar2, gCurrentBagPocketItemSlots[r4].quantity, 3);
         Menu_PrintText(gStringVar1, 14, r5);
     }
 }
 
-static void sub_80A47E8(u16 a, int b, int c, int d)
+static void sub_80A47E8(u16 taskId, int topItemOffset, int bottomItemOffset, int d)
 {
     switch (sCurrentBagPocket)
     {
     case BAG_POCKET_ITEMS:
     case BAG_POCKET_POKE_BALLS:
-        sub_80A4380(a, b, c, d);
+        sub_80A4380(taskId, topItemOffset, bottomItemOffset, d);
         break;
     case BAG_POCKET_KEY_ITEMS:
-        sub_80A444C(a, b, c, d);
+        sub_80A444C(taskId, topItemOffset, bottomItemOffset, d);
         break;
     case BAG_POCKET_TMs_HMs:
-        sub_80A4548(a, b, c, d);
+        sub_80A4548(taskId, topItemOffset, bottomItemOffset, d);
         break;
     case BAG_POCKET_BERRIES:
-        sub_80A46FC(a, b, c, d);
+        sub_80A46FC(taskId, topItemOffset, bottomItemOffset, d);
         break;
     }
     if (gBagPocketScrollStates[sCurrentBagPocket].scrollTop != 0)
@@ -1548,9 +1334,9 @@ static void sub_80A47E8(u16 a, int b, int c, int d)
         SetVerticalScrollIndicators(BOTTOM_ARROW, INVISIBLE);
 }
 
-static void sub_80A48E8(u16 taskId, int b, int c)
+static void sub_80A48E8(u16 taskId, int topItemOffset, int bottomItemOffset)
 {
-    sub_80A47E8(taskId, b, c, 0);
+    sub_80A47E8(taskId, topItemOffset, bottomItemOffset, 0);
 }
 
 static void sub_80A48F8(u16 taskId)
