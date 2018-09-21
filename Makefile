@@ -10,13 +10,20 @@ endif
 
 #### Tools ####
 
-SHELL     := /bin/bash -o pipefail
+SHELL     := bash -o pipefail
 AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc$(EXE)
-CPP       := cpp
+CPP       := $(CC) -E -x c
 LD        := $(PREFIX)ld
 OBJCOPY   := $(PREFIX)objcopy
+
+# macOS lacks sha1sum, use the Perl-based shasum instead as a drop-in.
+ifeq (,$(shell which sha1sum || true 2>/dev/null))
+SHA1SUM   := shasum -c
+else
 SHA1SUM   := sha1sum -c
+endif
+
 GBAGFX    := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
 AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
@@ -108,7 +115,7 @@ else
   ASM_DEPS     :=
 endif
 
-MAKEFLAGS += --no-print-directory
+MAKEFLAGS += -r --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 # Clear the default suffixes
@@ -155,7 +162,7 @@ tidy:
 	$(RM) -r build
 
 $(ROM): %.gba: %.elf
-	@$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
 	@cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
@@ -170,26 +177,12 @@ $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s
-	$(PREPROC) -n -c charmap.txt $< | $(CPP) -P -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include | $(AS) $(ASFLAGS) -o $@
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
-$(SCANINC): tools
-# Dependency scanning. The new scaninc creates similar output
-# to gcc -M and only does it when needed.
-# If NODEP is enabled, these rules will be orphaned.
-$(DEPDIR)/%.d: %.c $(SCANINC)
-	@$(SCANINC) -I include $<
-
-$(DEPDIR)/%.d: %.s $(SCANINC)
-	@$(SCANINC) -I include $<
-
-.PRECIOUS: $(DEPDIR)/%.d
-
-# Include our dependencies. This will be empty on NODEP.
--include $(C_DEPS)
--include $(ASM_DEPS)
+$(SCANINC): tools ;
 
 # "friendly" target names for convenience sake
 ruby:          ; @$(MAKE) GAME_VERSION=RUBY
@@ -231,3 +224,21 @@ sound/%.bin: sound/%.aif
 
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
+
+# Don't 'remake' headers
+%.h: ;
+
+# Dependency scanning. The new scaninc creates similar output
+# to gcc -M and only does it when needed.
+# If NODEP is enabled, these rules will be orphaned.
+$(DEPDIR)/%.d: %.c $(SCANINC)
+	@$(SCANINC) -I include $<
+
+$(DEPDIR)/%.d: %.s $(SCANINC)
+	@$(SCANINC) -I include $<
+
+.PRECIOUS: $(DEPDIR)/%.d
+
+# Include our dependencies. This will be empty on NODEP.
+-include $(C_DEPS)
+-include $(ASM_DEPS)

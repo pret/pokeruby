@@ -106,7 +106,7 @@ static void CharmapReader_Delete(CharmapReader *m)
 
 static Lhs ReadLhs(CharmapReader *m)
 {
-    Lhs lhs;
+    Lhs lhs = { LhsType_Char, NULL, 0 };
 
     for (;;)
     {
