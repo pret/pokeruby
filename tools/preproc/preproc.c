@@ -239,9 +239,9 @@ void PrintAsmBytes(unsigned char *s, int length)
             printf("0x%02X", s[i]);
 
             if (i < length - 1)
-                putchar(',');
+                putchar_unlocked(',');
         }
-        putchar('\n');
+        putchar_unlocked('\n');
     }
 }
 

@@ -8,7 +8,7 @@ OBJS = $(SRCS:.cpp=.o)
 HEADERS := scaninc.h asm_file.h c_file.h formatter.h
 
 .PHONY: all clean
-
+.SUFFIXES:
 all: scaninc
 	@:
 

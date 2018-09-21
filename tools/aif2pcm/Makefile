@@ -6,6 +6,8 @@ LIBS = -lm
 
 SRCS = main.c extended.c
 
+.SUFFIXES:
+
 .PHONY: all clean
 
 all: aif2pcm

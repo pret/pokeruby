@@ -27,8 +27,10 @@
 #ifndef r
 #ifdef __cplusplus
 #define r __restrict
+#define cr const __restrict
 #else
 #define r restrict
+#define cr const restrict
 #endif
 #endif
 

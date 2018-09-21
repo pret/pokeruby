@@ -37,17 +37,17 @@ struct AsmFile
     string *filename;
 };
 
-static bool ConsumeComma(AsmFile *m);
-static int ReadPadLength(AsmFile *m);
-static void RemoveComments(AsmFile *m);
-static bool CheckForDirective(AsmFile *r m, const string *r name);
-static void SkipWhitespace(AsmFile *m);
-static void ExpectEmptyRestOfLine(AsmFile *m);
-static void ReportDiagnostic(AsmFile *r m, const char *r type, const char *r format, va_list args);
-noreturn static void RaiseError(AsmFile *r m, const char *r format, ...);
-static void RaiseWarning(AsmFile *r m, const char *r format, ...);
+static bool ConsumeComma(AsmFile *cr m);
+static int ReadPadLength(AsmFile *cr m);
+static void RemoveComments(AsmFile *cr m);
+static bool CheckForDirective(AsmFile *cr m, const string *cr name);
+static void SkipWhitespace(AsmFile *cr m);
+static void ExpectEmptyRestOfLine(AsmFile *cr m);
+static void ReportDiagnostic(AsmFile *cr m, const char *cr type, const char *cr format, va_list args);
+noreturn static void RaiseError(AsmFile *cr m, const char *cr format, ...);
+static void RaiseWarning(AsmFile *cr m, const char *cr format, ...);
 
-AsmFile *AsmFile_New(string *filename, string *data)
+AsmFile *AsmFile_New(string *r filename, string *r data)
 {
     AsmFile *m = (AsmFile *)malloc(sizeof(AsmFile));
     m->filename = filename;
@@ -118,7 +118,7 @@ void AsmFile_Delete(AsmFile *m)
 // It stops upon encountering a null character,
 // which may or may not be the end of file marker.
 // If it's not, the error will be caught later.
-static void RemoveComments(AsmFile *m)
+static void RemoveComments(AsmFile *cr m)
 {
     long pos = 0;
     char stringChar = 0;
@@ -181,7 +181,7 @@ static void RemoveComments(AsmFile *m)
 
 // Checks if we're at a particular directive and if so, consumes it.
 // Returns whether the directive was found.
-static bool CheckForDirective(AsmFile *r m, const string *r name)
+static bool CheckForDirective(AsmFile *cr m, const string *cr name)
 {
     long i;
     long length = (long)name->length;
@@ -203,7 +203,7 @@ static const string *dir_string = string_literal(".string");
 static const string *dir_braille = string_literal(".braille");
 // Checks if we're at a known directive and if so, consumes it.
 // Returns which directive was found.
-Directive AsmFile_GetDirective(AsmFile *m)
+Directive AsmFile_GetDirective(AsmFile *cr m)
 {
     SkipWhitespace(m);
 
@@ -219,7 +219,7 @@ Directive AsmFile_GetDirective(AsmFile *m)
 
 // Checks if we're at label that ends with '::'.
 // Returns the name if so and an empty string if not.
-string *AsmFile_GetGlobalLabel(AsmFile *m)
+string *AsmFile_GetGlobalLabel(AsmFile *cr m)
 {
     long start = m->pos;
     long pos = m->pos;
@@ -249,14 +249,14 @@ string *AsmFile_GetGlobalLabel(AsmFile *m)
 }
 
 // Skips tabs and spaces.
-static void SkipWhitespace(AsmFile *m)
+static void SkipWhitespace(AsmFile *cr m)
 {
     while (m->buffer[m->pos] == '\t' || m->buffer[m->pos] == ' ')
         m->pos++;
 }
 
 // Reads include path.
-string *AsmFile_ReadPath(AsmFile *m)
+string *AsmFile_ReadPath(AsmFile *cr m)
 {
     SkipWhitespace(m);
 
@@ -304,7 +304,7 @@ string *AsmFile_ReadPath(AsmFile *m)
 }
 
 // Reads a charmap string.
-int AsmFile_ReadString(AsmFile *r m, unsigned char *r s)
+int AsmFile_ReadString(AsmFile *cr m, unsigned char *cr s)
 {
     SkipWhitespace(m);
 
@@ -350,7 +350,7 @@ static const map_char_uchar braille_encoding[] = {
 
 static const unsigned braille_encoding_size = sizeof(braille_encoding) / sizeof(map_char_uchar);
 
-int AsmFile_ReadBraille(AsmFile *r m, unsigned char *r s)
+int AsmFile_ReadBraille(AsmFile *cr m, unsigned char *cr s)
 {
     SkipWhitespace(m);
 
@@ -416,7 +416,7 @@ int AsmFile_ReadBraille(AsmFile *r m, unsigned char *r s)
 
 // If we're at a comma, consumes it.
 // Returns whether a comma was found.
-static bool ConsumeComma(AsmFile *m)
+static bool ConsumeComma(AsmFile *cr m)
 {
     if (m->buffer[m->pos] == ',')
     {
@@ -445,7 +445,7 @@ static int ConvertDigit(uint8_t c, int radix)
 }
 
 // Reads an integer. If the integer is greater than maxValue, it returns -1.
-static int ReadPadLength(AsmFile *m)
+static int ReadPadLength(AsmFile *cr m)
 {
     if (unlikely(!IsAsciiDigit(m->buffer[m->pos])))
         RaiseError(m, "expected integer");
@@ -475,7 +475,7 @@ static int ReadPadLength(AsmFile *m)
 }
 
 // Outputs the current line and moves to the next one.
-void AsmFile_OutputLine(AsmFile *m)
+void AsmFile_OutputLine(AsmFile *cr m)
 {
     while (m->buffer[m->pos] != '\n' && m->buffer[m->pos] != 0)
         m->pos++;
@@ -504,7 +504,7 @@ void AsmFile_OutputLine(AsmFile *m)
 }
 
 // Asserts that the rest of the line is empty and moves to the next one.
-static void ExpectEmptyRestOfLine(AsmFile *m)
+static void ExpectEmptyRestOfLine(AsmFile *cr m)
 {
     SkipWhitespace(m);
 
@@ -532,16 +532,16 @@ static void ExpectEmptyRestOfLine(AsmFile *m)
 }
 
 // Checks if we're at the end of the file.
-bool AsmFile_IsAtEnd(AsmFile *m) { return (m->pos >= m->size); }
+bool AsmFile_IsAtEnd(AsmFile *cr m) { return (m->pos >= m->size); }
 
 // Output the current location to set gas's logical file and line numbers.
-void AsmFile_OutputLocation(AsmFile *m)
+void AsmFile_OutputLocation(AsmFile *cr m)
 {
     printf("# %ld \"%s\"\n", m->lineNum, m->filename->c_str);
 }
 
 // Reports a diagnostic message.
-static void ReportDiagnostic(AsmFile *r m, const char *r type, const char *r format, va_list args)
+static void ReportDiagnostic(AsmFile *cr m, const char *cr type, const char *cr format, va_list args)
 {
     const int bufferSize = 1024;
     char buffer[bufferSize];
@@ -559,11 +559,11 @@ static void ReportDiagnostic(AsmFile *r m, const char *r type, const char *r for
     } while (0)
 
 // Reports an error diagnostic and terminates the program.
-noreturn static void RaiseError(AsmFile *r m, const char *r format, ...)
+noreturn static void RaiseError(AsmFile *cr m, const char *cr format, ...)
 {
     DO_REPORT(m, "error");
     exit(1);
 }
 
 // Reports a warning diagnostic.
-static void RaiseWarning(AsmFile *r m, const char *r format, ...) { DO_REPORT(m, "warning"); }
+static inline void RaiseWarning(AsmFile *cr m, const char *cr format, ...) { DO_REPORT(m, "warning"); }

@@ -84,12 +84,12 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby
 
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
-
+NO_DEPS := clean tidy tools
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
 # Build tools when building the rom
 # Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all,$(MAKECMDGOALS)))
+ifeq (,$(filter $(NO_DEPS),$(MAKECMDGOALS)))
 TOOLS_DEP = tools
 else
 TOOLS_DEP :=
@@ -98,6 +98,55 @@ endif
 
 # TODO: make this configurable. scaninc is hardcoded to use .d.
 DEPDIR := .d
+
+
+MAKEFLAGS += --no-print-directory
+# Secondary expansion is required for dependency variables in object rules.
+# .SECONDEXPANSION:
+# Clear the default suffixes
+.SUFFIXES:
+# Don't delete intermediate files
+.SECONDARY:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
+
+# Create build subdirectories
+$(shell mkdir -p $(SUBDIRS))
+
+all: $(TOOLS_DEP) $(ROM)
+ifeq ($(COMPARE),1)
+	@$(SHA1SUM) $(BUILD_NAME).sha1
+endif
+
+clean: override NODEP = 1
+clean: tidy
+	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
+	$(RM) $(ALL_OBJECTS)
+	$(RM) -r .d
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
+	$(MAKE) clean -C tools/gbagfx
+	$(MAKE) clean -C tools/scaninc
+	$(MAKE) clean -C tools/preproc
+	$(MAKE) clean -C tools/bin2c
+	$(MAKE) clean -C tools/rsfont
+	$(MAKE) clean -C tools/aif2pcm
+	$(MAKE) clean -C tools/ramscrgen
+
+tools: override NODEP = 1
+tools:
+	@$(MAKE) -C tools/gbagfx
+	@$(MAKE) -C tools/scaninc
+	@$(MAKE) -C tools/preproc
+	@$(MAKE) -C tools/bin2c
+	@$(MAKE) -C tools/rsfont
+	@$(MAKE) -C tools/aif2pcm
+	@$(MAKE) -C tools/ramscrgen
+	@$(MAKE) -C tools/mid2agb
+
+tidy:
+	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) -r build
+
 
 # Disable dependency scanning when NODEP is used for quick building
 ifeq ($(NODEP),)
@@ -115,53 +164,6 @@ else
   ASM_DEPS     :=
 endif
 
-MAKEFLAGS += -r --no-print-directory
-# Secondary expansion is required for dependency variables in object rules.
-.SECONDEXPANSION:
-# Clear the default suffixes
-.SUFFIXES:
-# Don't delete intermediate files
-.SECONDARY:
-# Delete files that weren't built properly
-.DELETE_ON_ERROR:
-
-# Create build subdirectories
-$(shell mkdir -p $(SUBDIRS))
-
-all: $(TOOLS_DEP) $(ROM)
-ifeq ($(COMPARE),1)
-	@$(SHA1SUM) $(BUILD_NAME).sha1
-endif
-
-clean: NODEP = 1
-clean: tidy
-	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
-	$(RM) $(ALL_OBJECTS)
-	$(RM) -r .d
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
-	$(MAKE) clean -C tools/gbagfx
-	$(MAKE) clean -C tools/scaninc
-	$(MAKE) clean -C tools/preproc
-	$(MAKE) clean -C tools/bin2c
-	$(MAKE) clean -C tools/rsfont
-	$(MAKE) clean -C tools/aif2pcm
-	$(MAKE) clean -C tools/ramscrgen
-
-tools: NODEP = 1
-tools:
-	@$(MAKE) -C tools/gbagfx
-	@$(MAKE) -C tools/scaninc
-	@$(MAKE) -C tools/preproc
-	@$(MAKE) -C tools/bin2c
-	@$(MAKE) -C tools/rsfont
-	@$(MAKE) -C tools/aif2pcm
-	@$(MAKE) -C tools/ramscrgen
-	@$(MAKE) -C tools/mid2agb
-
-tidy:
-	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
-	$(RM) -r build
-
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
@@ -174,15 +176,41 @@ $(BUILD_DIR)/sym_%.ld: sym_%.txt
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
+ifeq (,$(KEEP_TEMPS))
 	$(PREPROC) $(CPPFLAGS) -c charmap.txt $< | $(CC1) $(CC1FLAGS) | $(AS) $(ASFLAGS) -W -o $@
+else
+	$(PREPROC) $(CPPFLAGS) -c charmap.txt $< > $(BUILD_DIR)/$*.i
+	$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
+	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
+endif
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s
+ifeq (,$(KEEP_TEMPS))
 	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include | $(AS) $(ASFLAGS) -o $@
+else
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include -o $(BUILD_DIR)/$*.s
+	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
+endif
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) $< -o $@
 
+# Dependency scanning. The new scaninc creates similar output
+# to gcc -M and only does it when needed.
+# If NODEP is enabled, these rules will be orphaned.
+$(DEPDIR)/%.d: %.c $(SCANINC)
+	$(SCANINC) -I include $<
+
+$(DEPDIR)/%.d: %.s $(SCANINC)
+	$(SCANINC) -I include $<
+
+# .PRECIOUS: $(DEPDIR)/%.d
+
+# Include our dependencies. This will be empty on NODEP.
+-include $(C_DEPS)
+-include $(ASM_DEPS)
+$(SCANINC): NODEP = 1
 $(SCANINC): tools ;
 
 # "friendly" target names for convenience sake
@@ -197,6 +225,7 @@ sapphire_de:   ; @$(MAKE) GAME_VERSION=SAPPHIRE GAME_LANGUAGE=GERMAN
 ruby_de_debug: ; @$(MAKE) GAME_VERSION=RUBY GAME_LANGUAGE=GERMAN DEBUG=1
 syntax:        ; @$(MAKE) GAME_VERSION=RUBY SYNTAX=1
 
+%.mk: ;
 #### Graphics Rules ####
 
 GFX_OPTS :=
@@ -227,20 +256,12 @@ sound/%.bin: sound/%.aif
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID2AGB) $(<F)
 
-# Don't 'remake' headers
+# Don't 'remake' source files.
 %.h: ;
+%.png: ;
+%.mid: ;
+%.c: ;
+%.s: ;
+%.pal: ;
+%.aif: ;
 
-# Dependency scanning. The new scaninc creates similar output
-# to gcc -M and only does it when needed.
-# If NODEP is enabled, these rules will be orphaned.
-$(DEPDIR)/%.d: %.c $(SCANINC)
-	@$(SCANINC) -I include $<
-
-$(DEPDIR)/%.d: %.s $(SCANINC)
-	@$(SCANINC) -I include $<
-
-.PRECIOUS: $(DEPDIR)/%.d
-
-# Include our dependencies. This will be empty on NODEP.
--include $(C_DEPS)
--include $(ASM_DEPS)

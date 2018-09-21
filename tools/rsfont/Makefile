@@ -9,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 HEADERS =  convert_png.h gfx.h global.h util.h font.h
 
 .PHONY: all clean
-
+.SUFFIXES:
 all: rsfont
 	@:
 

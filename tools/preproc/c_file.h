@@ -32,6 +32,6 @@ typedef struct CFile CFile;
 
 CFile *CFile_New(string *filename, string *data);
 void CFile_Delete(CFile *m);
-void CFile_Preproc(CFile *m);
+void CFile_Preproc(CFile *cr m);
 
 #endif  // C_FILE_H

@@ -7,7 +7,7 @@ OBJS = $(SRCS:.cpp=.o)
 HEADERS := ramscrgen.h sym_file.h elf.h char_util.h
 
 .PHONY: all clean
-
+.SUFFIXES:
 all: ramscrgen
 	@:
 

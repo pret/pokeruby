@@ -4,6 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s
 
 .PHONY: all clean
 
+.SUFFIXES:
 SRCS = bin2c.c
 
 all: bin2c

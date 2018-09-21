@@ -38,15 +38,15 @@ typedef enum Directive
 struct AsmFile;
 typedef struct AsmFile AsmFile;
 
-AsmFile *AsmFile_New(string *filename, string *data);
-void AsmFile_Delete(AsmFile *m);
-Directive AsmFile_GetDirective(AsmFile *m);
-string *AsmFile_GetGlobalLabel(AsmFile *m);
-string *AsmFile_ReadPath(AsmFile *m);
-int AsmFile_ReadString(AsmFile *r m, unsigned char *r s);
-int AsmFile_ReadBraille(AsmFile *r m, unsigned char *r s);
-bool AsmFile_IsAtEnd(AsmFile *m);
-void AsmFile_OutputLine(AsmFile *m);
-void AsmFile_OutputLocation(AsmFile *m);
+AsmFile *AsmFile_New(string *cr filename, string *cr data);
+void AsmFile_Delete(AsmFile *cr m);
+Directive AsmFile_GetDirective(AsmFile *cr m);
+string *AsmFile_GetGlobalLabel(AsmFile *cr m);
+string *AsmFile_ReadPath(AsmFile *cr m);
+int AsmFile_ReadString(AsmFile *cr m, unsigned char *cr s);
+int AsmFile_ReadBraille(AsmFile *cr m, unsigned char *cr s);
+bool AsmFile_IsAtEnd(AsmFile *cr m);
+void AsmFile_OutputLine(AsmFile *cr m);
+void AsmFile_OutputLocation(AsmFile *cr m);
 
 #endif  // ASM_FILE_H
