@@ -12133,7 +12133,7 @@ voicegroup111:: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel6, 255, 0, 255, 165
 
 	.align 2
-voicegroup112:: @ 8452590
+gCryTable:: @ 8452590
 	cry Cry_Bulbasaur
 	cry Cry_Ivysaur
 	cry Cry_Venusaur
@@ -12262,9 +12262,6 @@ voicegroup112:: @ 8452590
 	cry Cry_Magmar
 	cry Cry_Pinsir
 	cry Cry_Tauros
-
-	.align 2
-voicegroup113:: @ 8452B90
 	cry Cry_Magikarp
 	cry Cry_Gyarados
 	cry Cry_Lapras
@@ -12393,9 +12390,6 @@ voicegroup113:: @ 8452B90
 	cry Cry_Torkoal
 	cry Cry_Electrike
 	cry Cry_Manectric
-
-	.align 2
-voicegroup114:: @ 8453190
 	cry Cry_Duskull
 	cry Cry_Latias
 	cry Cry_Wynaut
@@ -12524,16 +12518,13 @@ voicegroup114:: @ 8453190
 	cry Cry_Wailord
 	cry Cry_Whismur
 	cry Cry_Snorunt
-
-	.align 2
-voicegroup115:: @ 8453790
 	cry Cry_Latios
 	cry Cry_Jirachi
 	cry Cry_Deoxys
 	cry Cry_Chimecho
 
 	.align 2
-voicegroup116:: @ 84537C0
+gCryTable2:: @ 84537C0
 	cry2 Cry_Bulbasaur
 	cry2 Cry_Ivysaur
 	cry2 Cry_Venusaur
@@ -12662,9 +12653,6 @@ voicegroup116:: @ 84537C0
 	cry2 Cry_Magmar
 	cry2 Cry_Pinsir
 	cry2 Cry_Tauros
-
-	.align 2
-voicegroup117:: @ 8453DC0
 	cry2 Cry_Magikarp
 	cry2 Cry_Gyarados
 	cry2 Cry_Lapras
@@ -12793,9 +12781,6 @@ voicegroup117:: @ 8453DC0
 	cry2 Cry_Torkoal
 	cry2 Cry_Electrike
 	cry2 Cry_Manectric
-
-	.align 2
-voicegroup118:: @ 84543C0
 	cry2 Cry_Duskull
 	cry2 Cry_Latias
 	cry2 Cry_Wynaut
@@ -12924,16 +12909,13 @@ voicegroup118:: @ 84543C0
 	cry2 Cry_Wailord
 	cry2 Cry_Whismur
 	cry2 Cry_Snorunt
-
-	.align 2
-voicegroup119:: @ 84549C0
 	cry2 Cry_Latios
 	cry2 Cry_Jirachi
 	cry2 Cry_Deoxys
 	cry2 Cry_Chimecho
 
 	.align 2
-voicegroup120:: @ 84549F0
+voicegroup112:: @ 84549F0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel7, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel8, 255, 0, 255, 0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel9, 255, 0, 255, 0
@@ -12987,7 +12969,7 @@ voicegroup120:: @ 84549F0
 	voice_directsound 60, 0, DirectSoundWaveData_Phoneme_Vowel57, 255, 0, 255, 0
 
 	.align 2
-voicegroup121:: @ 8454C54
+voicegroup113:: @ 8454C54
 	voice_keysplit_all voicegroup001
 	voice_square_1 0, 2, 0, 0, 15, 0
 	voice_square_1 0, 2, 0, 0, 15, 0

@@ -32,15 +32,8 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
 
-extern struct ToneData voicegroup112[];
-extern struct ToneData voicegroup113[];
-extern struct ToneData voicegroup114[];
-extern struct ToneData voicegroup115[];
-
-extern struct ToneData voicegroup116[];
-extern struct ToneData voicegroup117[];
-extern struct ToneData voicegroup118[];
-extern struct ToneData voicegroup119[];
+extern struct ToneData gCryTable[];
+extern struct ToneData gCryTable2[];
 
 static const struct Fanfare sFanfares[] =
 {
@@ -416,19 +409,19 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
     {
     case 0:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &voicegroup116[index] : &voicegroup112[index]);
+          v0 ? &gCryTable2[(128 * 0) + index] : &gCryTable[(128 * 0) + index]);
         break;
     case 1:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &voicegroup117[index] : &voicegroup113[index]);
+          v0 ? &gCryTable2[(128 * 1) + index] : &gCryTable[(128 * 1) + index]);
         break;
     case 2:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &voicegroup118[index] : &voicegroup114[index]);
+          v0 ? &gCryTable2[(128 * 2) + index] : &gCryTable[(128 * 2) + index]);
         break;
     case 3:
         gMPlay_PokemonCry = SetPokemonCryTone(
-          v0 ? &voicegroup119[index] : &voicegroup115[index]);
+          v0 ? &gCryTable2[(128 * 3) + index] : &gCryTable[(128 * 3) + index]);
         break;
     }
 }
