@@ -190,7 +190,7 @@ void sub_812C2BC(struct Sprite *sprite)
     u8 x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     u8 y = GetBattlerSpriteCoord(gAnimBankTarget, 3);
 
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
 
     rotation = ArcTan2Neg(sprite->pos1.x - x, sprite->pos1.y - y);
     rotation += 0x6000;
@@ -494,7 +494,7 @@ void sub_812C990(struct Sprite *sprite)
     REG_WIN0H = 0;
     REG_WIN0V = 0;
 
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
 
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->invisible = 1;
@@ -2037,7 +2037,7 @@ void sub_812ED84(struct Sprite *sprite)
     REG_WIN0V = 0;
 
     sprite->data[0] = gBattleAnimArgs[2];
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->invisible = 1;
     sprite->callback = sub_812EE00;

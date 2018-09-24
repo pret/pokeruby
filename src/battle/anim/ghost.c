@@ -320,7 +320,7 @@ static void sub_80DDCC8(struct Sprite *sprite)
 
 static void sub_80DDD58(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
     sprite->callback = sub_80DDD78;
     sub_80DDD78(sprite);
 }
@@ -463,7 +463,7 @@ static void sub_80DDFE8(struct Sprite *sprite)
 
 static void sub_80DE0FC(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
     sprite->callback = sub_80DE114;
 }
 

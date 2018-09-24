@@ -562,9 +562,9 @@ void sub_80DBA4C(struct Sprite *sprite)
     if (sprite->data[0] == 0)
     {
         int arg3 = gBattleAnimArgs[3];
-        u8 var0 = 0;
+        bool8 var0 = FALSE;
         if (arg3 == 0)
-            var0 = 1;
+            var0 = TRUE;
 
         if (!IsContest() && IsDoubleBattle())
         {

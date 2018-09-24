@@ -1445,16 +1445,17 @@ void sub_8079518(struct Sprite *sprite)
 
 void sub_8079534(struct Sprite *sprite)
 {
-    u8 r4, slot, r7;
+    bool8 r4;
+    u8 slot, r7;
 
     if (!gBattleAnimArgs[6])
     {
-        r4 = 1;
+        r4 = TRUE;
         r7 = 3;
     }
     else
     {
-        r4 = 0;
+        r4 = FALSE;
         r7 = 1;
     }
     if (!gBattleAnimArgs[5])

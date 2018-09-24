@@ -387,7 +387,7 @@ void sub_80DCFE4(struct Sprite *sprite)
     if (gBattleAnimArgs[6] == 0)
         InitAnimSpritePos(sprite, 0);
     else
-        sub_8078764(sprite, 0);
+        sub_8078764(sprite, FALSE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = gBattleAnimArgs[2];

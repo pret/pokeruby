@@ -854,7 +854,7 @@ static void sub_80E27A0(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->callback = sub_80785E4;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -866,7 +866,7 @@ static void sub_80E27E8(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = sub_80785E4;
@@ -890,7 +890,7 @@ static void sub_80E2870(struct Sprite *sprite)
     if (gBattleAnimArgs[0] == 0)
         InitAnimSpritePos(sprite, 0);
     else
-        sub_8078764(sprite, 0);
+        sub_8078764(sprite, FALSE);
 
     sprite->pos2.x += (Random() % 48) - 24;
     sprite->pos2.y += (Random() % 24) - 12;
@@ -916,7 +916,7 @@ static void sub_80E2978(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -929,7 +929,7 @@ static void sub_80E29C0(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->callback = sub_80E29FC;
 }
