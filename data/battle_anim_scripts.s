@@ -2247,15 +2247,15 @@ Move_ICY_WIND: @ 81CA650
 	waitbgfadein
 	end
 _81CA6A8:
-	createsprite SmallSnowballSpriteTemplate1, 168, 0, 0, 0, 0, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 0, 0, 0, 72, 1
 	delay 5
-	createsprite SmallSnowballSpriteTemplate1, 168, 0, 10, 0, 10, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 10, 0, 10, 72, 1
 	delay 5
-	createsprite SmallSnowballSpriteTemplate1, 168, 0, -10, 0, -10, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, -10, 0, -10, 72, 1
 	delay 5
-	createsprite SmallSnowballSpriteTemplate1, 168, 0, 15, 0, 15, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 15, 0, 15, 72, 1
 	delay 5
-	createsprite SmallSnowballSpriteTemplate1, 168, 0, -5, 0, -5, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, -5, 0, -5, 72, 1
 	return
 
 Move_SMOKESCREEN: @ 81CA710
@@ -3946,7 +3946,7 @@ Move_MIST_BALL: @ 81CCA72
 	loadspritegfx 10270
 	delay 0
 	playsewithpan SE_W081, 192
-	createsprite MistBallSpriteTemplate, 128, 0, 0, 0, 0, 30, 0
+	createsprite gMistBallSpriteTemplate, 128, 0, 0, 0, 0, 30, 0
 	waitforvisualfinish
 	playsewithpan SE_W028, 63
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_BANK_TARGET, 5, 0, 10, 0
@@ -4662,15 +4662,15 @@ Move_ICE_PUNCH: @ 81CDB3E
 	createvisualtask sub_80E2A38, 10, 4, 2, 0, 9, 32588
 	delay 20
 	playsewithpan SE_W081, 63
-	createsprite SmallIcePunchCrystalSpriteTemplate, 2, 0
-	createsprite SmallIcePunchCrystalSpriteTemplate, 2, 64
-	createsprite SmallIcePunchCrystalSpriteTemplate, 2, 128
-	createsprite SmallIcePunchCrystalSpriteTemplate, 2, 192
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 0
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 64
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 128
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 192
 	delay 5
-	createsprite LargeIcePunchCrystalSpriteTemplate, 2, 32
-	createsprite LargeIcePunchCrystalSpriteTemplate, 2, 96
-	createsprite LargeIcePunchCrystalSpriteTemplate, 2, 160
-	createsprite LargeIcePunchCrystalSpriteTemplate, 2, 224
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 32
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 96
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 160
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 224
 	delay 17
 	createsprite gFistFootSpriteTemplate, 4, 0, -10, 8, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, 3, 0, -10, 1, 1
@@ -5148,7 +5148,7 @@ Move_SMOG: @ 81CE672
 	blendoff
 	end
 _81CE6D7:
-	createsprite SmogCloudSpriteTemplate, 2, 0, -24, 48, 240, 1, 0
+	createsprite gSmogCloudSpriteTemplate, 2, 0, -24, 48, 240, 1, 0
 	delay 7
 	return
 
@@ -5355,8 +5355,8 @@ Move_ICE_BEAM: @ 81CEB4D
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 1, 0, 7, rgb(0, 0, 0)
 	waitforvisualfinish
 	createsoundtask sub_812B058, 183, -64, 63, 4, 4, 0, 10
-	createsprite IceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
-	createsprite IceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
 	delay 1
 	call _81CEC4E
 	call _81CEC4E
@@ -5385,8 +5385,8 @@ Move_ICE_BEAM: @ 81CEB4D
 	blendoff
 	end
 _81CEC4E:
-	createsprite IceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
-	createsprite IceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
 	createsprite IceBeamCenterParticleSpriteTemplate, 2, 20, 0, 0, 0, 11
 	delay 1
 	return
@@ -5548,26 +5548,26 @@ _81CEFD0:
 	waitbgfadein
 	end
 _81CF00A:
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, 0, 0, 0, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 0, 0, 0, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, -10, 0, -10, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -10, 0, -10, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -5, 0, -5, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, 10, 0, 10, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -5, 0, -5, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 10, 0, 10, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -20, 0, -20, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, 15, 0, 15, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -20, 0, -20, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 15, 0, 15, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate1, 40, 0, -25, 0, -25, 72, 1
-	createsprite LargeSnowballSpriteTemplate, 40, 0, 20, 0, 20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -25, 0, -25, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 20, 0, 20, 80, 0, 0, 1
 	delay 3
 	return
 _81CF13F:
@@ -5592,19 +5592,19 @@ Move_POWDER_SNOW: @ 81CF146
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 31, 1, 3, 0, rgb(0, 0, 0)
 	end
 _81CF190:
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, 0, 0, 0, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 0, 0, 0, 56, 4, 4, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, -10, 0, -10, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -10, 0, -10, 56, 4, 4, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, 10, 0, 10, 56, -4, 3, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 10, 0, 10, 56, -4, 3, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, -4, 5, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, -4, 5, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, 15, 0, 15, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 15, 0, 15, 56, 4, 4, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, 4, 4, 1
 	delay 3
-	createsprite SmallSnowballSpriteTemplate2, 40, 0, 20, 0, 20, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 20, 0, 20, 56, 4, 4, 1
 	delay 3
 	return
 
@@ -6919,7 +6919,7 @@ Move_MIST: @ 81D1073
 	blendoff
 	end
 _81D10BE:
-	createsprite MistCloudSpriteTemplate, 2, 0, -24, 48, 240, 0, 1
+	createsprite gMistCloudSpriteTemplate, 2, 0, -24, 48, 240, 0, 1
 	delay 7
 	return
 
@@ -7063,22 +7063,22 @@ Move_POISON_GAS: @ 81D1474
 	setalpha 12, 8
 	delay 0
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite PoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 40
 	loopsewithpan SE_W054, 63, 28, 6
 	createvisualtask sub_80E1F8C, 2, 4, 6, 2, 0, 12, 26650
@@ -9738,7 +9738,7 @@ Move_ICE_BALL: @ 81D57BA
 	jumpargeq 0, 4, _81D5831
 _81D57D1:
 	playsewithpan SE_W196, 192
-	createsprite IceBallSpriteTemplate, 130, 15, 0, -12, -16, 30, -40
+	createsprite gIceBallSpriteTemplate, 130, 15, 0, -12, -16, 30, -40
 	delay 28
 	playsewithpan SE_W280, 63
 	createvisualtask AnimTask_CountIceBallThrows, 5, 0
@@ -9818,7 +9818,7 @@ _81D5935:
 	call _81D597D
 	goto _81D581F
 _81D597D:
-	createsprite IceBallParticleSpriteTemplate, 132, -12, -16
+	createsprite gIceBallParticleSpriteTemplate, 132, -12, -16
 	return
 
 Move_WEATHER_BALL: @ 81D5989
@@ -9900,13 +9900,13 @@ _81D5AF9:
 _81D5B99:
 	loadspritegfx 10263
 	loadspritegfx 10141
-	createsprite WeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, -40, 20
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, -40, 20
 	playsewithpan SE_W258, 63
 	delay 10
-	createsprite WeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 40, 0
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 40, 0
 	playsewithpan SE_W258, 63
 	delay 10
-	createsprite WeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 0, 0
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 0, 0
 	playsewithpan SE_W258, 63
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 2, 0, 8, 1
@@ -9928,101 +9928,101 @@ PoundCopy: @ 81D5C05
 	end
 
 Effect_LightIceDamage: @ 81D5C36
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -10, -10, 0
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -10, -10, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 10, 20, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 10, 20, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -5, 10, 0
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -5, 10, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 17, -12, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 17, -12, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, -15, 15, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, -15, 15, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 0, 0, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 0, 0, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, 20, 2, 0
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, 20, 2, 0
 	playsewithpan SE_W196, 63
 	return
 
 Effect_HeavyIceDamage: @ 81D5CBA
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -10, -10, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -10, -10, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 10, 20, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 10, 20, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -29, 0, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -29, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 29, -20, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 29, -20, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -5, 10, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -5, 10, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 17, -12, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 17, -12, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, -20, 0, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -20, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, -15, 15, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, -15, 15, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 26, -5, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 26, -5, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite SmallIceEffectParticleSpriteTemplate, 130, 0, 0, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 0, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite LargeIceEffectParticleSpriteTemplate, 130, 20, 2, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, 20, 2, 1
 	playsewithpan SE_W196, 63
 	return
 
 Unknown_81D5D8A: @ 81D5D8A
 	loopsewithpan SE_W196, 63, 6, 4
-	createsprite IceSpikeSpriteTemplate, 130, 0, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 0, 24, 0
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 8, 24, 0
-	createsprite IceSpikeSpriteTemplate, 130, -8, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 8, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -8, 24, 0
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 16, 24, 0
-	createsprite IceSpikeSpriteTemplate, 130, -16, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 16, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -16, 24, 0
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 24, 24, 0
-	createsprite IceSpikeSpriteTemplate, 130, -24, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 24, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -24, 24, 0
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 32, 24, 0
-	createsprite IceSpikeSpriteTemplate, 130, -32, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 32, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -32, 24, 0
 	return
 
 Unknown_81D5E0E: @ 81D5E0E Icy Wind animates end bit with the wavy shiz
 	loopsewithpan SE_W196, 63, 6, 4
-	createsprite IceSpikeSpriteTemplate, 130, 0, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 0, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 8, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -8, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 8, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -8, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 16, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -16, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 16, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -16, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 24, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -24, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 24, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -24, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 32, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -32, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 32, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -32, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 40, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -40, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 40, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -40, 24, 1
 	delay 4
-	createsprite IceSpikeSpriteTemplate, 130, 48, 24, 1
-	createsprite IceSpikeSpriteTemplate, 130, -48, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 48, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -48, 24, 1
 	return
 
 Unknown_81D5ECA: @ 81D5ECA

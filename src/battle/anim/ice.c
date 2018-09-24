@@ -26,11 +26,10 @@ extern struct INCBIN_U8 gBattleAnimFogTilemap;
 extern struct INCBIN_U8 gWeatherFog1Tiles;
 
 static void sub_80D7704(struct Sprite *sprite);
-static void AnimIcePunchSwirlingParticles(struct Sprite *sprite);
-static void AnimIceBeamParticles(struct Sprite *sprite);
-static void AnimIceEffectParticles(struct Sprite *sprite);
-static void AnimFlickerIceEffectParticles(struct Sprite *sprite);
-static void AnimSwirlingSnowball1(struct Sprite *sprite);
+static void AnimIcePunchSwirlingParticle(struct Sprite *sprite);
+static void AnimIceBeamParticle(struct Sprite *sprite);
+static void AnimIceEffectParticle(struct Sprite *sprite);
+static void AnimFlickerIceEffectParticle(struct Sprite *sprite);
 static void AnimMoveParticleBeyondTarget(struct Sprite *sprite);
 static void AnimWaveFromCenterOfTarget(struct Sprite *sprite);
 static void InitSwirlingFogAnim(struct Sprite *sprite);
@@ -39,16 +38,17 @@ static void InitPoisonGasCloudAnim(struct Sprite *sprite);
 static void AnimHailBegin(struct Sprite *sprite);
 void sub_807A9BC(struct Sprite *sprite);
 static void InitIceBallAnim(struct Sprite *sprite);
-static void InitIceBallParticles(struct Sprite *sprite);
-static void AnimSwirlingSnowball2(struct Sprite *sprite);
-static void AnimSwirlingSnowball3(struct Sprite *sprite);
-static void AnimSwirlingSnowballEnd(struct Sprite *sprite);
+static void InitIceBallParticle(struct Sprite *sprite);
+static void AnimSwirlingSnowball_Step1(struct Sprite *sprite);
+static void AnimSwirlingSnowball_Step2(struct Sprite *sprite);
+static void AnimSwirlingSnowball_Step3(struct Sprite *sprite);
+static void AnimSwirlingSnowball_End(struct Sprite *sprite);
 static void AnimWiggleParticleTowardsTarget(struct Sprite *sprite);
 static void AnimSwirlingFogAnim(struct Sprite *sprite);
 static void sub_80D8874(struct Sprite *sprite);
 static void AnimHailContinue(struct Sprite *sprite);
 static void AnimThrowIceBall(struct Sprite *sprite);
-static void AnimIceBallParticles(struct Sprite *sprite);
+static void AnimIceBallParticle(struct Sprite *sprite);
 
 static void AnimTask_Haze2(u8 taskId);
 static void AnimTask_OverlayFogTiles(u8 taskId);
@@ -157,7 +157,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9BDC[] =
     gSpriteAffineAnim_83D9BCC,
 };
 
-const struct SpriteTemplate LargeIcePunchCrystalSpriteTemplate =
+const struct SpriteTemplate gLargeIcePunchCrystalSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -165,10 +165,10 @@ const struct SpriteTemplate LargeIcePunchCrystalSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83D9BDC,
-    .callback = AnimIcePunchSwirlingParticles,
+    .callback = AnimIcePunchSwirlingParticle,
 };
 
-const struct SpriteTemplate SmallIcePunchCrystalSpriteTemplate =
+const struct SpriteTemplate gSmallIcePunchCrystalSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -176,7 +176,7 @@ const struct SpriteTemplate SmallIcePunchCrystalSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimIcePunchSwirlingParticles,
+    .callback = AnimIcePunchSwirlingParticle,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_83D9C10[] =
@@ -198,10 +198,10 @@ const struct SpriteTemplate IceBeamCenterParticleSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83D9C20,
-    .callback = AnimIceBeamParticles,
+    .callback = AnimIceBeamParticle,
 };
 
-const struct SpriteTemplate IceBeamOuterParticleSpriteTemplate =
+const struct SpriteTemplate gIceBeamOuterParticleSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -209,7 +209,7 @@ const struct SpriteTemplate IceBeamOuterParticleSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimIceBeamParticles,
+    .callback = AnimIceBeamParticle,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_83D9C54[] =
@@ -225,7 +225,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9C74[] =
     gSpriteAffineAnim_83D9C54,
 };
 
-const struct SpriteTemplate LargeIceEffectParticleSpriteTemplate =
+const struct SpriteTemplate gLargeIceEffectParticleSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -233,10 +233,10 @@ const struct SpriteTemplate LargeIceEffectParticleSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83D9C74,
-    .callback = AnimIceEffectParticles,
+    .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate SmallIceEffectParticleSpriteTemplate =
+const struct SpriteTemplate gSmallIceEffectParticleSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -244,10 +244,10 @@ const struct SpriteTemplate SmallIceEffectParticleSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83D9C74,
-    .callback = AnimIceEffectParticles,
+    .callback = AnimIceEffectParticle,
 };
 
-const struct SpriteTemplate SmallSnowballSpriteTemplate1 =
+const struct SpriteTemplate gSmallSnowballSpriteTemplate1 =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -255,10 +255,10 @@ const struct SpriteTemplate SmallSnowballSpriteTemplate1 =
     .anims = gSpriteAnimTable_83D9BC0,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSwirlingSnowball1,
+    .callback = AnimSwirlingSnowball_Step1,
 };
 
-const struct SpriteTemplate LargeSnowballSpriteTemplate =
+const struct SpriteTemplate gLargeSnowballSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -269,7 +269,7 @@ const struct SpriteTemplate LargeSnowballSpriteTemplate =
     .callback = AnimMoveParticleBeyondTarget,
 };
 
-const struct SpriteTemplate SmallSnowballSpriteTemplate2 =
+const struct SpriteTemplate gSmallSnowballSpriteTemplate2 =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -297,7 +297,7 @@ const union AnimCmd *const gSpriteAnimTable_83D9D10[] =
     gSpriteAnim_83D9CF0,
 };
 
-const struct SpriteTemplate IceSpikeSpriteTemplate =
+const struct SpriteTemplate gIceSpikeSpriteTemplate =
 {
     .tileTag = 10142,
     .paletteTag = 10142,
@@ -320,7 +320,7 @@ const union AnimCmd *const gSpriteAnimTable_83D9D38[] =
     gSpriteAnim_83D9D2C,
 };
 
-const struct SpriteTemplate MistCloudSpriteTemplate =
+const struct SpriteTemplate gMistCloudSpriteTemplate =
 {
     .tileTag = 10144,
     .paletteTag = 10144,
@@ -331,7 +331,7 @@ const struct SpriteTemplate MistCloudSpriteTemplate =
     .callback = InitSwirlingFogAnim,
 };
 
-const struct SpriteTemplate SmogCloudSpriteTemplate =
+const struct SpriteTemplate gSmogCloudSpriteTemplate =
 {
     .tileTag = 10172,
     .paletteTag = 10172,
@@ -347,7 +347,7 @@ const u8 gUnknown_083D9D6C[] =
     0, 1, 2, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 8, 8, 8, 9,
 };
 
-const struct SpriteTemplate MistBallSpriteTemplate =
+const struct SpriteTemplate gMistBallSpriteTemplate =
 {
     .tileTag = 10155,
     .paletteTag = 10155,
@@ -363,7 +363,7 @@ const u8 gUnknown_083D9D98[] =
     0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5,
 };
 
-const struct SpriteTemplate PoisonGasCloudSpriteTemplate =
+const struct SpriteTemplate gPoisonGasCloudSpriteTemplate =
 {
     .tileTag = 10172,
     .paletteTag = 10172,
@@ -424,7 +424,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9E38[] =
     gSpriteAffineAnim_83D9E1C,
 };
 
-const struct SpriteTemplate HailSpriteTemplate =
+const struct SpriteTemplate gHailSpriteTemplate =
 {
     .tileTag = 10263,
     .paletteTag = 10263,
@@ -435,7 +435,7 @@ const struct SpriteTemplate HailSpriteTemplate =
     .callback = AnimHailBegin,
 };
 
-const struct SpriteTemplate WeatherBallHailSpriteTemplate =
+const struct SpriteTemplate gWeatherBallHailSpriteTemplate =
 {
     .tileTag = 10263,
     .paletteTag = 10263,
@@ -506,7 +506,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9EE0[] =
     gSpriteAffineAnim_83D9ED0,
 };
 
-const struct SpriteTemplate IceBallSpriteTemplate =
+const struct SpriteTemplate gIceBallSpriteTemplate =
 {
     .tileTag = 10043,
     .paletteTag = 10043,
@@ -517,7 +517,7 @@ const struct SpriteTemplate IceBallSpriteTemplate =
     .callback = InitIceBallAnim,
 };
 
-const struct SpriteTemplate IceBallParticleSpriteTemplate =
+const struct SpriteTemplate gIceBallParticleSpriteTemplate =
 {
     .tileTag = 10141,
     .paletteTag = 10141,
@@ -525,7 +525,7 @@ const struct SpriteTemplate IceBallParticleSpriteTemplate =
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = InitIceBallParticles,
+    .callback = InitIceBallParticle,
 };
 
 // unknown - potentially used in weather ball
@@ -808,7 +808,7 @@ void sub_80D7888(struct Sprite *sprite)
 
 // Animates the swirling ice crystals in Ice Punch.
 // arg 0: initial position angle around circle (0-256)
-static void AnimIcePunchSwirlingParticles(struct Sprite *sprite)
+static void AnimIcePunchSwirlingParticle(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[0];
     sprite->data[1] = 60; 
@@ -826,7 +826,7 @@ static void AnimIcePunchSwirlingParticles(struct Sprite *sprite)
 // arg 2: target x offset
 // arg 3: target y offset
 // arg 4: duration
-static void AnimIceBeamParticles(struct Sprite *sprite)
+static void AnimIceBeamParticle(struct Sprite *sprite)
 {
     InitAnimSpritePos(sprite, 1);
     sprite->data[2] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
@@ -847,7 +847,7 @@ static void AnimIceBeamParticles(struct Sprite *sprite)
 // arg 0: target x offset
 // arg 1: target y offset
 // arg 2: ??? unknown boolean
-static void AnimIceEffectParticles(struct Sprite *sprite)
+static void AnimIceEffectParticle(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[2] == 0)
     {
@@ -863,11 +863,11 @@ static void AnimIceEffectParticles(struct Sprite *sprite)
         sprite->pos1.y += gBattleAnimArgs[1];
     }
 
-    StoreSpriteCallbackInData(sprite, AnimFlickerIceEffectParticles);
+    StoreSpriteCallbackInData(sprite, AnimFlickerIceEffectParticle);
     sprite->callback = sub_80785E4;
 }
 
-static void AnimFlickerIceEffectParticles(struct Sprite *sprite)
+static void AnimFlickerIceEffectParticle(struct Sprite *sprite)
 {
     sprite->invisible ^= 1;
     sprite->data[0] += 1;
@@ -882,7 +882,7 @@ static void AnimFlickerIceEffectParticles(struct Sprite *sprite)
 // arg 3: target y offset
 // arg 4: particle speed
 // arg 5: multiple targets? (boolean)
-static void AnimSwirlingSnowball1(struct Sprite *sprite)
+static void AnimSwirlingSnowball_Step1(struct Sprite *sprite)
 {
     int i;
     s16 tempDataHolder[8];
@@ -935,10 +935,10 @@ static void AnimSwirlingSnowball1(struct Sprite *sprite)
         sprite->data[i] = tempDataHolder[i];
 
     sprite->callback = sub_8078D8C;
-    StoreSpriteCallbackInData(sprite, AnimSwirlingSnowball2);
+    StoreSpriteCallbackInData(sprite, AnimSwirlingSnowball_Step2);
 }
 
-static void AnimSwirlingSnowball2(struct Sprite *sprite)
+static void AnimSwirlingSnowball_Step2(struct Sprite *sprite)
 {
     s16 tempVar;
 
@@ -953,11 +953,11 @@ static void AnimSwirlingSnowball2(struct Sprite *sprite)
     sprite->data[3] = Sin(sprite->data[0], tempVar);
     sprite->data[4] = Cos(sprite->data[0], 0xF);
     sprite->data[5] = 0;
-    sprite->callback = AnimSwirlingSnowball3;
-    AnimSwirlingSnowball3(sprite);
+    sprite->callback = AnimSwirlingSnowball_Step3;
+    AnimSwirlingSnowball_Step3(sprite);
 }
 
-static void AnimSwirlingSnowball3(struct Sprite *sprite)
+static void AnimSwirlingSnowball_Step3(struct Sprite *sprite)
 {
     s16 tempVar;
     tempVar = GetBattlerSide(gAnimBankAttacker) != 0 ? 20 : 65516;
@@ -977,11 +977,11 @@ static void AnimSwirlingSnowball3(struct Sprite *sprite)
         sprite->pos2.x = 0;
         sprite->data[4] = 0;
         sprite->data[3] = 0;
-        sprite->callback = AnimSwirlingSnowballEnd;
+        sprite->callback = AnimSwirlingSnowball_End;
     }
 }
 
-static void AnimSwirlingSnowballEnd(struct Sprite *sprite)
+static void AnimSwirlingSnowball_End(struct Sprite *sprite)
 {
     sprite->data[0] = 1;
     sub_8078CE8(sprite);
@@ -2174,7 +2174,7 @@ NAKED bool8 sub_80D8BA8(u8 a1, u8 a2, u8 a3, u8 a4)
                 "\tmovs r0, 0x1\n"
                 "\tb _080D8D0A\n"
                 "\t.align 2, 0\n"
-                "_080D8D00: .4byte HailSpriteTemplate\n"
+                "_080D8D00: .4byte gHailSpriteTemplate\n"
                 "_080D8D04: .4byte gSprites\n"
                 "_080D8D08:\n"
                 "\tmovs r0, 0\n"
@@ -2202,7 +2202,7 @@ static void AnimHailBegin(struct Sprite *sprite)
 
     if (sprite->data[0] == 1 && sprite->data[5] == 0)
     {
-        spriteId = CreateSprite(&LargeIceEffectParticleSpriteTemplate, 
+        spriteId = CreateSprite(&gLargeIceEffectParticleSpriteTemplate, 
                                 sprite->data[3], sprite->data[4], sprite->subpriority);
 
         sprite->data[0] = spriteId;
@@ -2277,7 +2277,7 @@ static void AnimThrowIceBall(struct Sprite *sprite)
 }
 
 // Initializes the particles that scatter at the end of the Ice Ball animation.
-static void InitIceBallParticles(struct Sprite *sprite)
+static void InitIceBallParticle(struct Sprite *sprite)
 {
     s16 randA, randB;
 
@@ -2292,11 +2292,11 @@ static void InitIceBallParticles(struct Sprite *sprite)
 
     sprite->data[1] = randA;
     sprite->data[2] = randB;
-    sprite->callback = AnimIceBallParticles;
+    sprite->callback = AnimIceBallParticle;
 }
 
-// Animates the particles created by InitIceBallParticles.
-static void AnimIceBallParticles(struct Sprite *sprite)
+// Animates the particles created by InitIceBallParticle.
+static void AnimIceBallParticle(struct Sprite *sprite)
 {
     sprite->data[3] += sprite->data[1];
     sprite->data[4] += sprite->data[2];
