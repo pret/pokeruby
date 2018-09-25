@@ -743,7 +743,7 @@ SECTIONS {
         src/battle/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
-        data/battle_anim_813F0F4.o(.rodata);
+        src/battle/battle_anim_813F0F4.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
