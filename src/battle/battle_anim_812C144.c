@@ -31,35 +31,17 @@ extern u16 gBattle_BG2_X;
 extern u16 gBattle_BG2_Y;
 
 extern const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7220;
-extern const struct SpriteTemplate gSpriteTemplate_8402500;
-extern const struct SpriteTemplate gSpriteTemplate_84028CC;
-extern const struct SpriteTemplate gSpriteTemplate_840294C;
-extern const struct SpriteTemplate gSpriteTemplate_84029AC;
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7C18[];
 extern const union AffineAnimCmd *const gSpriteAffineAnimTable_81E7BEC[];
-extern const union AffineAnimCmd gUnknown_08402400[];
-extern const union AffineAnimCmd gUnknown_084024B0[];
-extern const union AffineAnimCmd gUnknown_08402518[];
-extern const union AffineAnimCmd gUnknown_08402540[];
-extern const union AffineAnimCmd gUnknown_08402590[];
-/**/extern const union AffineAnimCmd gUnknown_08402610[];
-/**/extern const union AffineAnimCmd gUnknown_08402750[];
-extern const union AffineAnimCmd gUnknown_084028AC[];
-extern const union AffineAnimCmd gUnknown_084029DC[];
 extern const u32 gUnknown_08D2AA98[];
 extern const u32 gUnknown_08D2A9E0[];
 extern const u16 gUnknown_08D2AA80[];
-/**/extern const s8 gUnknown_084025C0[];
-/**/extern const s8 gUnknown_08402604[];
-/**/extern const u8 gUnknown_08402608[];
-extern const struct SpriteTemplate gBattleAnimSpriteTemplate_84025EC;
 extern const u8 gUnknown_08D2E014[];
 extern const u8 gUnknown_08D2E170[];
 extern const u16 gUnknown_08D2E150[];
 extern u8 gBattleMonForms[];
 extern u8 gBankSpriteIds[];
 extern u16 gBattlerPartyIndexes[];
-/**/extern s16 gUnknown_084028E4[];
 
 extern u8 sub_8046234(s16 x, s16 y, u8 a3);
 extern void sub_80DA48C(struct Sprite *);
@@ -116,6 +98,47 @@ static void sub_8131408(u8 taskId);
 static void sub_81315C8(struct Sprite *sprite);
 static void sub_8131810(u8 taskId);
 static void sub_8131838(struct Sprite *sprite);
+static void sub_812C144(struct Sprite *sprite);
+static void sub_812C220(struct Sprite *sprite);
+static void sub_812C2BC(struct Sprite *sprite);
+static void sub_812C358(struct Sprite *sprite);
+static void sub_812C720(struct Sprite *sprite);
+static void sub_812C80C(struct Sprite *sprite);
+static void sub_812C848(struct Sprite *sprite);
+static void sub_812C908(struct Sprite *sprite);
+static void sub_812C990(struct Sprite *sprite);
+static void sub_812CAFC(struct Sprite *sprite);
+static void sub_812CC28(struct Sprite *sprite);
+static void sub_812CCE8(struct Sprite *sprite);
+static void sub_812D294(struct Sprite *sprite);
+static void sub_812D3AC(struct Sprite *sprite);
+static void sub_812D4B4(struct Sprite *sprite);
+static void sub_812D588(struct Sprite *sprite);
+static void sub_812DEAC(struct Sprite *sprite);
+static void sub_812D724(struct Sprite *sprite);
+static void sub_812E4F0(struct Sprite *sprite);
+static void sub_812E7A0(struct Sprite *sprite);
+static void sub_812EA4C(struct Sprite *sprite);
+static void sub_812EC78(struct Sprite *sprite);
+static void sub_812ED84(struct Sprite *sprite);
+static void sub_812EEA4(struct Sprite *sprite);
+static void sub_812F88C(struct Sprite *sprite);
+static void sub_812F948(struct Sprite *sprite);
+static void sub_812FF94(struct Sprite *sprite);
+static void sub_81300F4(struct Sprite *sprite);
+static void sub_81304DC(struct Sprite *sprite);
+static void sub_813051C(struct Sprite *sprite);
+static void sub_81307B0(struct Sprite *sprite);
+static void sub_8130A2C(struct Sprite *sprite);
+static void sub_8130AEC(struct Sprite *sprite);
+static void sub_8130F5C(struct Sprite *sprite);
+static void sub_8131264(struct Sprite *sprite);
+extern void sub_80D1FDC(struct Sprite *sprite);// kiss_fountain.c
+static void sub_8131564(struct Sprite *sprite);
+
+/*static*/ void sub_8131EB8(struct Sprite *sprite);// rest not yet decompiled
+/*static*/ void sub_8132370(struct Sprite *sprite);
+/*static*/ void sub_81323E0(struct Sprite *sprite);
 
 const union AnimCmd gSpriteAnim_8402164[] =
 {
@@ -126,8 +149,6 @@ const union AnimCmd gSpriteAnim_8402164[] =
     ANIMCMD_FRAME(64, 4),
     ANIMCMD_END,
 };
-
-/*
 
 const union AnimCmd *const gSpriteAnimTable_840217C[] =
 {
@@ -430,7 +451,6 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_84023E8 =
     .callback = sub_812CCE8,
 };
 
-// wat
 const union AffineAnimCmd gUnknown_08402400[] =
 {
     AFFINEANIMCMD_FRAME(-12, 8, 0, 4),
@@ -481,9 +501,9 @@ const union AnimCmd gSpriteAnim_8402470[] =
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(32, 3),
     ANIMCMD_FRAME(48, 3),
-    ANIMCMD_FRAME(32, 3, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(16, 3, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(0, 3, OBJ_IMAGE_ANIM_H_FLIP),
+    ANIMCMD_FRAME(32, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(16, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 3, .hFlip = TRUE),
     ANIMCMD_LOOP(1),
     ANIMCMD_END,
 };
@@ -504,13 +524,12 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_8402498 =
     .callback = sub_80793C4,
 };
 
-// unknwon
 const union AffineAnimCmd gUnknown_084024B0[] =
 {
     AFFINEANIMCMD_FRAME(-12, 20, 0, 8),
     AFFINEANIMCMD_FRAME(12, -20, 0, 8),
     AFFINEANIMCMD_LOOP(2),
-    AFFINEANIMCMD_END,// 0?
+    AFFINEANIMCMD_END,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_84024D0 =
@@ -552,7 +571,7 @@ const union AffineAnimCmd gUnknown_08402518[] =
     AFFINEANIMCMD_FRAME(-16, 16, 0, 12),
     AFFINEANIMCMD_FRAME(8, -8, 0, 12),
     AFFINEANIMCMD_LOOP(1),
-    AFFINEANIMCMD_END, //0
+    AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gUnknown_08402540[] =
@@ -563,7 +582,7 @@ const union AffineAnimCmd gUnknown_08402540[] =
     AFFINEANIMCMD_FRAME(-18, -18, 0, 3),
     AFFINEANIMCMD_FRAME(0, 0, 0, 15),
     AFFINEANIMCMD_FRAME(4, 4, 0, 13),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_8402578 =
@@ -584,7 +603,7 @@ const union AffineAnimCmd gUnknown_08402590[] =
     AFFINEANIMCMD_FRAME(7, -30, 0, 6),
     AFFINEANIMCMD_FRAME(0, 0, 0, 20),
     AFFINEANIMCMD_FRAME(-2, 3, 0, 20),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
 const s8 gUnknown_084025C0[] =
@@ -654,7 +673,7 @@ const union AffineAnimCmd gUnknown_08402610[] =
     AFFINEANIMCMD_FRAME(0, -15, 0, 7),
     AFFINEANIMCMD_FRAME(0, 15, 0, 7),
     AFFINEANIMCMD_LOOP(2),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_8402630 =
@@ -674,23 +693,23 @@ const union AnimCmd gSpriteAnim_8402648[] =
     ANIMCMD_FRAME(1, 8),
     ANIMCMD_FRAME(2, 8),
     ANIMCMD_FRAME(3, 8),
-    ANIMCMD_FRAME(3, 8, OBJ_IMAGE_ANIM_V_FLIP),
-    ANIMCMD_FRAME(2, 8, OBJ_IMAGE_ANIM_V_FLIP),
-    ANIMCMD_FRAME(0, 8, OBJ_IMAGE_ANIM_V_FLIP),
-    ANIMCMD_FRAME(1, 8, OBJ_IMAGE_ANIM_V_FLIP),
+    ANIMCMD_FRAME(3, 8, .vFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .vFlip = TRUE),
+    ANIMCMD_FRAME(0, 8, .vFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .vFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
 const union AnimCmd gSpriteAnim_840266C[] =
 {
-    ANIMCMD_FRAME(0, 8, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(1, 8, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(2, 8, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(3, 8, OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(3, 8, OBJ_IMAGE_ANIM_V_FLIP | OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(2, 8, OBJ_IMAGE_ANIM_V_FLIP | OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(0, 8, OBJ_IMAGE_ANIM_V_FLIP | OBJ_IMAGE_ANIM_H_FLIP),
-    ANIMCMD_FRAME(1, 8, OBJ_IMAGE_ANIM_V_FLIP | OBJ_IMAGE_ANIM_H_FLIP),
+    ANIMCMD_FRAME(0, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(3, 8, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(2, 8, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 8, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(1, 8, .vFlip = TRUE, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
@@ -718,9 +737,6 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_84026A4 =
     .callback = sub_812E7A0,
 };
 
-//@ probably unknown palette
-//  .incbin "graphics/unknown/unknown_4026BC.gbapal"
-// or maybe asm(.incbin "graphics/unknown/unknown_4026BC.gbapal")
 const u16 gUnknown_4026BC[] = INCBIN_U16("graphics/unknown/unknown_4026BC.gbapal");
 
 const union AnimCmd gSpriteAnim_84026DC[] =
@@ -787,7 +803,7 @@ const union AffineAnimCmd gUnknown_08402750[] =
     AFFINEANIMCMD_FRAME(4, 0, 0, 4),
     AFFINEANIMCMD_FRAME(0, 0, 0, 24),
     AFFINEANIMCMD_FRAME(-5, 3, 0, 16),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
 const union AffineAnimCmd gSpriteAffineAnim_8402780[] =
@@ -888,7 +904,7 @@ const union AffineAnimCmd gUnknown_084028AC[] =
     AFFINEANIMCMD_FRAME(-16, 16, 0, 6),
     AFFINEANIMCMD_FRAME(16, -16, 0, 12),
     AFFINEANIMCMD_FRAME(-16, 16, 0, 6),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
 const struct SpriteTemplate gSpriteTemplate_84028CC =
@@ -902,8 +918,7 @@ const struct SpriteTemplate gSpriteTemplate_84028CC =
     .callback = sub_812FF94,
 };
 
-// s16?
-const s16 gUnknown_084028E4[] = INCBIN_S16("graphics/battle_anims/sprites/effect.gbapal");
+const u16 gUnknown_084028E4[] = INCBIN_U16("graphics/battle_anims/sprites/effect.gbapal");
 
 const union AnimCmd gSpriteAnim_8402914[] =
 {
@@ -1135,7 +1150,7 @@ const union AffineAnimCmd gSpriteAffineAnim_8402AFC[] =
 const union AffineAnimCmd *const gSpriteAffineAnimTable_8402B0C[] =
 {
     gSpriteAffineAnim_8402AFC,
-}
+};
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_8402B10 =
 {
@@ -1155,12 +1170,10 @@ const union AffineAnimCmd gUnknown_08402B28[] =
     AFFINEANIMCMD_FRAME(0, 4, 0, 4),
     AFFINEANIMCMD_FRAME(0, 0, 0, 24),
     AFFINEANIMCMD_FRAME(1, -5, 0, 16),
-    AFFINEANIMCMD_END,//0
+    AFFINEANIMCMD_END,
 };
 
-*/
-
-void sub_812C144(struct Sprite *sprite)
+static void sub_812C144(struct Sprite *sprite)
 {
     sprite->pos1.x += gBattleAnimArgs[0];
     sprite->pos1.y += gBattleAnimArgs[1];
@@ -1199,7 +1212,7 @@ void sub_812C1D0(u8 taskId)
 
 }
 
-void sub_812C220(struct Sprite *sprite)
+static void sub_812C220(struct Sprite *sprite)
 {
     sprite->data[0] = 90;
     sprite->callback = WaitAnimForDuration;
@@ -1226,7 +1239,7 @@ static void sub_812C2A4(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_812C2BC(struct Sprite *sprite)
+static void sub_812C2BC(struct Sprite *sprite)
 {
     u16 rotation;
     u8 x = GetBattlerSpriteCoord(gAnimBankTarget, 2);
@@ -1248,7 +1261,7 @@ void sub_812C2BC(struct Sprite *sprite)
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
 }
 
-void sub_812C358(struct Sprite *sprite)
+static void sub_812C358(struct Sprite *sprite)
 {
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = 0x1000;
@@ -1408,7 +1421,7 @@ static void sub_812C64C(u8 taskId)
         DestroyTask(taskId);
 }
 
-void sub_812C720(struct Sprite *sprite)
+static void sub_812C720(struct Sprite *sprite)
 {
     u16 x;
     u16 y;
@@ -1448,7 +1461,7 @@ static void sub_812C7C8(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_812C80C(struct Sprite *sprite)
+static void sub_812C80C(struct Sprite *sprite)
 {
     sub_8078650(sprite);
     sub_807867C(sprite, gBattleAnimArgs[0]);
@@ -1458,7 +1471,7 @@ void sub_812C80C(struct Sprite *sprite)
 }
 
 // This is likely fakematching due to some strange type casting behavior.
-void sub_812C848(struct Sprite *sprite)
+static void sub_812C848(struct Sprite *sprite)
 {
     int var0;
     int var1;
@@ -1501,7 +1514,7 @@ void sub_812C848(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_812C908(struct Sprite *sprite)
+static void sub_812C908(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
@@ -1527,7 +1540,7 @@ void sub_812C960(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_812C990(struct Sprite *sprite)
+static void sub_812C990(struct Sprite *sprite)
 {
     REG_WINOUT = 0x1F3F;
     REG_DISPCNT |= DISPCNT_OBJWIN_ON;
@@ -1592,7 +1605,7 @@ static void sub_812CAD0(struct Sprite *sprite)
     DestroyAnimSprite(sprite);
 }
 
-void sub_812CAFC(struct Sprite *sprite)
+static void sub_812CAFC(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] == 0)
     {
@@ -1653,7 +1666,7 @@ static void sub_812CBB4(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_812CC28(struct Sprite *sprite)
+static void sub_812CC28(struct Sprite *sprite)
 {
     sprite->oam.objMode = ST_OAM_OBJ_WINDOW;
     sprite->data[3] = 255;
@@ -1686,7 +1699,7 @@ void sub_812CCA8(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void sub_812CCE8(struct Sprite *sprite)
+static void sub_812CCE8(struct Sprite *sprite)
 {
     int var0;
     if (gBattleAnimArgs[0] == 0)
@@ -1997,7 +2010,7 @@ static void sub_812D254(struct Sprite *sprite)
     }
 }
 
-void sub_812D294(struct Sprite *sprite)
+static void sub_812D294(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
         InitAnimSpritePos(sprite, 0);
@@ -2044,7 +2057,7 @@ void sub_812D350(u8 taskId)
     }
 }
 
-void sub_812D3AC(struct Sprite *sprite)
+static void sub_812D3AC(struct Sprite *sprite)
 {
     u8 spriteId = GetAnimBattlerSpriteId(0);
 
@@ -2087,7 +2100,7 @@ void sub_812D3AC(struct Sprite *sprite)
     }
 }
 
-void sub_812D4B4(struct Sprite *sprite)
+static void sub_812D4B4(struct Sprite *sprite)
 {
     if (GetBattlerSide(gAnimBankAttacker) != B_SIDE_PLAYER)
         sprite->pos1.x = -16;
@@ -2125,7 +2138,7 @@ static void sub_812D4EC(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_812D588(struct Sprite *sprite)
+static void sub_812D588(struct Sprite *sprite)
 {
     u8 rand;
     s8 y;
@@ -2200,7 +2213,7 @@ void sub_812D6CC(u8 taskId)
     }
 }
 
-void sub_812D724(struct Sprite *sprite)
+static void sub_812D724(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -2456,7 +2469,7 @@ void sub_812DB84(u8 taskId)
     }
 }
 
-void sub_812DEAC(struct Sprite *sprite)
+static void sub_812DEAC(struct Sprite *sprite)
 {
     s16 var0;
     u8 spriteId1;
@@ -2677,7 +2690,7 @@ void sub_812E498(u8 taskId)
     }
 }
 
-void sub_812E4F0(struct Sprite *sprite)
+static void sub_812E4F0(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -2794,7 +2807,7 @@ static void sub_812E638(u8 taskId)
     }
 }
 
-void sub_812E7A0(struct Sprite *sprite)
+static void sub_812E7A0(struct Sprite *sprite)
 {
     if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_PLAYER)
     {
@@ -2925,7 +2938,7 @@ static void sub_812E8B4(u8 taskId)
     }
 }
 
-void sub_812EA4C(struct Sprite *sprite)
+static void sub_812EA4C(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -3016,7 +3029,7 @@ void sub_812EB10(u8 taskId)
     }
 }
 
-void sub_812EC78(struct Sprite *sprite)
+static void sub_812EC78(struct Sprite *sprite)
 {
     u8 tileOffset;
     int rand1;
@@ -3069,7 +3082,7 @@ static void sub_812ED24(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
-void sub_812ED84(struct Sprite *sprite)
+static void sub_812ED84(struct Sprite *sprite)
 {
     REG_WINOUT = 0x1F3F;
     REG_DISPCNT |= DISPCNT_OBJWIN_ON;
@@ -3116,7 +3129,7 @@ static void sub_812EE00(struct Sprite *sprite)
     }
 }
 
-void sub_812EEA4(struct Sprite *sprite)
+static void sub_812EEA4(struct Sprite *sprite)
 {
     sprite->pos1.x = GetBattlerSpriteCoord(gAnimBankAttacker, 2);
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
@@ -3799,7 +3812,7 @@ void sub_812F86C(struct Sprite *sprite)
     sprite->pos1.y = sprite->data[5] >> 4;
 }
 
-void sub_812F88C(struct Sprite *sprite)
+static void sub_812F88C(struct Sprite *sprite)
 {
     s16 x = sprite->pos1.x;
     s16 y = sprite->pos1.y;
@@ -3832,7 +3845,7 @@ static void sub_812F8DC(struct Sprite *sprite)
     }
 }
 
-void sub_812F948(struct Sprite *sprite)
+static void sub_812F948(struct Sprite *sprite)
 {
     sprite->data[0] = gBattleAnimArgs[3];
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[0]);
@@ -4081,7 +4094,7 @@ static void sub_812FEB8(u8 taskId, bool8 arg1)
     }
 }
 
-void sub_812FF94(struct Sprite *sprite)
+static void sub_812FF94(struct Sprite *sprite)
 {
     sprite->pos1.x += sprite->data[1];
     sprite->pos1.y += sprite->data[2];
@@ -4136,7 +4149,7 @@ void sub_81300A4(u8 taskId)
         gUnknown_08D2E150);
 }
 
-void sub_81300F4(struct Sprite *sprite)
+static void sub_81300F4(struct Sprite *sprite)
 {
     if (GetBattlerSide(gAnimBankAttacker) == B_SIDE_OPPONENT)
         gBattleAnimArgs[0] = -gBattleAnimArgs[0];
@@ -4301,7 +4314,7 @@ static void sub_8130424(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u8 arg4, u8 arg5
     *y = y2 >> 8;
 }
 
-void sub_81304DC(struct Sprite *sprite)
+static void sub_81304DC(struct Sprite *sprite)
 {
     if (++sprite->data[0] > 36)
     {
@@ -4310,7 +4323,7 @@ void sub_81304DC(struct Sprite *sprite)
     }
 }
 
-void sub_813051C(struct Sprite *sprite)
+static void sub_813051C(struct Sprite *sprite)
 {
     sprite->pos1.x = gBattleAnimArgs[0];
     sprite->pos1.y = gBattleAnimArgs[1];
@@ -4391,7 +4404,7 @@ static void sub_81306A4(u8 taskId)
     }
 }
 
-void sub_81307B0(struct Sprite *sprite)
+static void sub_81307B0(struct Sprite *sprite)
 {
     u8 battler;
 
@@ -4507,7 +4520,7 @@ static void sub_8130970(u8 taskId)
     }
 }
 
-void sub_8130A2C(struct Sprite *sprite)
+static void sub_8130A2C(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -4542,7 +4555,7 @@ static void sub_8130A94(struct Sprite *sprite)
     }
 }
 
-void sub_8130AEC(struct Sprite *sprite)
+static void sub_8130AEC(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -4757,7 +4770,7 @@ static void sub_8130DBC(u8 taskId)
     }
 }
 
-void sub_8130F5C(struct Sprite *sprite)
+static void sub_8130F5C(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == 0)
     {
@@ -4897,7 +4910,7 @@ static void sub_81311E4(struct Sprite *sprite)
     sprite->data[5]++;
 }
 
-void sub_8131264(struct Sprite *sprite)
+static void sub_8131264(struct Sprite *sprite)
 {
     GetBattlerSpriteCoord(gAnimBankTarget, 2); // unused local variable
     GetBattlerSpriteCoord(gAnimBankTarget, 3); // unused local variable
@@ -5015,7 +5028,7 @@ static void sub_8131408(u8 taskId)
     }
 }
 
-void sub_8131564(struct Sprite *sprite)
+static void sub_8131564(struct Sprite *sprite)
 {
     s16 y2;
 
