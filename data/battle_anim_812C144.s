@@ -4,15 +4,6 @@
 	.section .rodata
 
 	.align 2
-gSpriteAnim_8402164:: @ 8402164
-	obj_image_anim_frame 0, 4
-	obj_image_anim_frame 16, 4
-	obj_image_anim_frame 32, 4
-	obj_image_anim_frame 48, 4
-	obj_image_anim_frame 64, 4
-	obj_image_anim_end
-
-	.align 2
 gSpriteAnimTable_840217C:: @ 840217C
 	.4byte gSpriteAnim_8402164
 
@@ -641,3 +632,4 @@ gUnknown_08402B28:: @ 8402B28
 	obj_rot_scal_anim_frame 0, 0, 0, 24
 	obj_rot_scal_anim_frame 1, -5, 0, 16
 	obj_rot_scal_anim_end 0
+
