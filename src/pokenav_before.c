@@ -734,7 +734,7 @@ const struct SpriteTemplate gSpriteTemplate_83E4454 =
     .callback = SpriteCallbackDummy,
 };
 
-// sizeof(PokenavBlueLightTiles)
+// sizeof(PokenavBlueLightTiles) ?
 const struct SpriteSheet gSpriteSheet_PokenavBlueLight = {PokenavBlueLightTiles, 0x100, 25};
 
 const struct SpritePalette gSpritePalette_PokenavBlueLight = {PokenavBlueLightPalette, 17};
@@ -795,30 +795,6 @@ const struct OamData gOamData_83E44B4 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-//    .2byte 0x4000
-//    .2byte 0xC000
-//    .2byte 0x0400
-
-//    .byte 0x00
-//    .byte 0x40
-//    .byte 0x00
-//    .byte 0xC0
-//    .byte 0x00
-//    .byte 0x04
-
-/*
-    .2byte 00 40 // 0 1 // 00000000 10000000
-    .2byte 00 C0 // 2 3 // 00000000 11000000
-    .2byte 00 2C // 4 5 // 00000000 00101100
-
-    ==
-
-    .shape = ST_OAM_H_RECTANGLE, // 
-    .size = 3,
-    .priority = 3,
-    .paletteNum = 2
-*/
-
 
 const union AnimCmd gSpriteAnim_83E44BC[] = 
 {
@@ -942,9 +918,6 @@ const struct OamData gOamData_83E4560 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-//    .2byte 0x0000 // 00000000 00000000
-//    .2byte 0xC000 // 11000000 00000000
-//    .2byte 0x0400 // 00000100 00000000
 
 const struct SpriteSheet gUnknown_083E4568 = {NULL, 0x800, 6};
 
@@ -991,9 +964,6 @@ const struct OamData gOamData_83E45B0 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-//    .2byte 0x8000 // 10000000 00000000
-//    .2byte 0x0000 // 00000000 00000000
-//    .2byte 0x0800 // 00001000 00000000
 
 void sub_80F3190(struct Sprite *);
 
@@ -1042,9 +1012,6 @@ const struct OamData gOamData_83E45E8 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-//    .2byte 0x4000 // 01000000 00000000
-//    .2byte 0x0000 // 00000000 00000000
-//    .2byte 0x0800 // 00001000 00000000
 
 void sub_80F31AC(struct Sprite *);
 
@@ -1075,9 +1042,6 @@ const struct OamData gOamData_83E4608 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-//    .2byte 0x0000 // 00000000 00000000
-//    .2byte 0x4000 // 01000000 00000000
-//    .2byte 0x0800 // 00001000 00000000
 
 const union AnimCmd gSpriteAnim_83E4610[] = 
 {
@@ -1184,9 +1148,6 @@ const struct OamData gOamData_83E4718 =
     .paletteNum = 0,
     .affineParam = 0,
 };
-// 00000001 00000000
-// 10000000 00000000
-// 00000000 00000000
 
 const union AffineAnimCmd gSpriteAffineAnim_83E4720[] = 
 {
@@ -1426,7 +1387,7 @@ const u16 gUnknown_083E499C[] =
     0x4E,
 };
 
-// fix this when decompiling
+// TODO: fix this when decompiling
 asm(".align 2");
 const u16 gUnknown_083E49C0[] = 
 {
@@ -1444,9 +1405,6 @@ const u16 gUnknown_083E49C0[] =
     0x108, 0xF,
     0x14F, 0xF,
 };
-
-
-
 
 // ============================================================================
 
