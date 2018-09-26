@@ -69,8 +69,8 @@ static void sub_80E260C(void);
 static void sub_80E255C(struct Sprite *sprite);
 static void sub_80E2710(u8 taskId);
 static void sub_80E29FC(struct Sprite *sprite);
-static void sub_80E2C8C(u8 taskId, u32 selectedPalettes);
-static void sub_80E2CD0(u8 taskId);
+static void AnimTask_BlendSpriteColor_Step1(u8 taskId, u32 selectedPalettes);
+static void AnimTask_BlendSpriteColor_Step2(u8 taskId);
 static void sub_80E2DB8(u8 taskId);
 static void sub_80E2E10(u8 taskId);
 static void sub_80E2EE8(struct Sprite *sprite);
@@ -950,7 +950,7 @@ void sub_80E2A38(u8 taskId)
         (gBattleAnimArgs[0] >> 9)  & 1,
         (gBattleAnimArgs[0] >> 10) & 1);
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E2A7C(u8 taskId)
@@ -1001,7 +1001,7 @@ void sub_80E2A7C(u8 taskId)
         }
     }
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E2B74(u8 taskId)
@@ -1042,16 +1042,22 @@ void sub_80E2B74(u8 taskId)
         break;
     }
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
-void sub_80E2C60(u8 taskId)
+// Used to add a color mask to a Sprite.
+// arg 0: spriteId
+// arg 1: ??? unknown
+// arg 2: ??? unknown
+// arg 3: opacity [0,15]
+// arg 4: color code
+void AnimTask_BlendSpriteColor(u8 taskId)
 {
     u8 paletteIndex = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
-    sub_80E2C8C(taskId, 1 << (paletteIndex + 16));
+    AnimTask_BlendSpriteColor_Step1(taskId, 1 << (paletteIndex + 16));
 }
 
-static void sub_80E2C8C(u8 taskId, u32 selectedPalettes)
+static void AnimTask_BlendSpriteColor_Step1(u8 taskId, u32 selectedPalettes)
 {
     gTasks[taskId].data[0] = selectedPalettes;
     gTasks[taskId].data[1] = selectedPalettes >> 16;
@@ -1060,11 +1066,11 @@ static void sub_80E2C8C(u8 taskId, u32 selectedPalettes)
     gTasks[taskId].data[4] = gBattleAnimArgs[3];
     gTasks[taskId].data[5] = gBattleAnimArgs[4];
     gTasks[taskId].data[10] = gBattleAnimArgs[2];
-    gTasks[taskId].func = sub_80E2CD0;
+    gTasks[taskId].func = AnimTask_BlendSpriteColor_Step2;
     gTasks[taskId].func(taskId);
 }
 
-static void sub_80E2CD0(u8 taskId)
+static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
 {
     u32 selectedPalettes;
     u16 singlePaletteMask = 0;
@@ -1577,7 +1583,7 @@ void sub_80E3A08(u8 taskId)
     for (j = 5; j != 0; j--)
         gBattleAnimArgs[j] = gBattleAnimArgs[j - 1];
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E3A58(u8 taskId)

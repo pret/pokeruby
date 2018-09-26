@@ -28,8 +28,8 @@ extern void AnimMoveTwisterParticle(struct Sprite *sprite);
 void sub_80DCE9C(struct Sprite *sprite);
 void sub_80DCF60(struct Sprite *sprite);
 void sub_80DCFE4(struct Sprite *sprite);
-void sub_80DD3AC(struct Sprite *sprite);
-void sub_80DD490(struct Sprite *sprite);
+void AnimSandstormParticleAcrossScreen(struct Sprite *sprite);
+void AnimRaiseSprite(struct Sprite *sprite);
 void sub_80DD87C(struct Sprite *sprite);
 void sub_80DD8E8(struct Sprite *sprite);
 void sub_80DD978(struct Sprite *sprite);
@@ -136,7 +136,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACD0 =
     .callback = sub_80DCFE4,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACE8 =
+const struct SpriteTemplate gSandstormDustSpriteTemplate =
 {
     .tileTag = 10261,
     .paletteTag = 10261,
@@ -144,7 +144,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACE8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DD3AC,
+    .callback = AnimSandstormParticleAcrossScreen,
 };
 
 const struct Subsprite gSubspriteTable_83DAD00[] =
@@ -212,7 +212,7 @@ const union AnimCmd *const gSpriteAnimTable_83DAD58[] =
     gSpriteAnim_83DAD40,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAD60 =
+const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 {
     .tileTag = 10058,
     .paletteTag = 10058,
@@ -220,7 +220,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAD60 =
     .anims = gSpriteAnimTable_83DAD48,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DD490,
+    .callback = AnimRaiseSprite,
 };
 
 const struct SpriteTemplate gSpriteTemplate_83DAD78 =
@@ -510,7 +510,13 @@ static void sub_80DD190(u8 taskId)
     }
 }
 
-void sub_80DD3AC(struct Sprite *sprite)
+// Animates the sprites that fly diagonally across the screen
+// in Sandstorm and Heat Wave.
+// arg 0: initial y pixel offset
+// arg 1: projectile speed
+// arg 2: y pixel drop
+// arg 3: ??? unknown (possibly a color bit)
+void AnimSandstormParticleAcrossScreen(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -555,7 +561,13 @@ void sub_80DD3AC(struct Sprite *sprite)
     }
 }
 
-void sub_80DD490(struct Sprite *sprite)
+// Animates the rising rocks in Ancient Power.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: terminal y offset
+// arg 3: duration
+// arg 4: sprite size [1,5]
+void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
     InitAnimSpritePos(sprite, 0);

@@ -2980,7 +2980,7 @@ Move_FLASH: @ 81CB713
 	end
 
 Move_SPLASH: @ 81CB720
-	createvisualtask sub_80D074C, 2, 0, 3
+	createvisualtask AnimTask_Splash, 2, 0, 3
 	delay 8
 	loopsewithpan SE_W039, 192, 38, 3
 	waitforvisualfinish
@@ -3059,7 +3059,7 @@ Move_SKETCH: @ 81CB87B
 	createsprite gBattleAnimSpriteTemplate_83D77E0, 130
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_TARGET
-	createvisualtask sub_80D074C, 2, 0, 2
+	createvisualtask AnimTask_Splash, 2, 0, 2
 	loopsewithpan SE_W039, 192, 38, 2
 	end
 
@@ -3450,26 +3450,26 @@ Move_UPROAR: @ 81CBEFC
 
 Move_HEAT_WAVE: @ 81CBFC6
 	loadspritegfx 10261
-	createvisualtask sub_80E2C60, 5, 10261, 0, 6, 6, 31
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10261, 0, 6, 6, 31
 	createvisualtask do_boulder_dust, 5, 1
-	createvisualtask sub_80D6080, 6, 6, 31
+	createvisualtask AnimTask_BlendInterfaceColor, 6, 6, 31
 	panse_1B SE_W257, 192, 63, 2, 0
 	delay 4
 	createvisualtask sub_80D5DDC, 5
 	delay 12
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 10, 2304, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 10, 2304, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 90, 2048, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 90, 2048, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 50, 2560, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 50, 2560, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 20, 2304, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 20, 2304, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 70, 1984, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 70, 1984, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 0, 2816, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 0, 2816, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 60, 2560, 96, 1
+	createsprite gSandstormDustSpriteTemplate, 40, 60, 2560, 96, 1
 	end
 
 Move_HAIL: @ 81CC076
@@ -3911,9 +3911,9 @@ Move_LUSTER_PURGE: @ 81CC95B
 	createsprite gBattleAnimSpriteTemplate_83DA9E0, 41, 0, 0, 0, 0
 	delay 20
 	createvisualtask sub_80E2A7C, 5, 5, 2, 0, 16, -1
-	createvisualtask sub_80E2C60, 5, 10267, 2, 0, 16, -1
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10267, 2, 0, 16, -1
 	waitforvisualfinish
-	createvisualtask sub_80E2C60, 5, 10135, 0, 12, 12, 23552
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10135, 0, 12, 12, 23552
 	waitforvisualfinish
 	createsprite gBattleAnimSpriteTemplate_83DB4F0, 131, 1, 2
 	createvisualtask sub_812B30C, 5, 215, 63
@@ -4005,7 +4005,7 @@ Move_TEETER_DANCE: @ 81CCBD1
 
 Move_MUD_SPORT: @ 81CCC3C
 	loadspritegfx 10074
-	createvisualtask sub_80D074C, 2, 0, 6
+	createvisualtask AnimTask_Splash, 2, 0, 6
 	delay 24
 	createsprite gMudSportDirtSpriteTemplate, 130, 0, -4, -16
 	createsprite gMudSportDirtSpriteTemplate, 130, 0, 4, -12
@@ -4167,7 +4167,7 @@ Move_FAKE_TEARS: @ 81CD10D
 	loadspritegfx 10155
 	loadspritegfx 10209
 	loadspritegfx 10072
-	createvisualtask sub_80E2C60, 5, 10155, 0, 4, 4, 32108
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10155, 0, 4, 4, 32108
 	waitforvisualfinish
 	createvisualtask sub_812E568, 5, 0, 2, 1
 	loopsewithpan SE_W039, 192, 12, 4
@@ -6340,19 +6340,19 @@ Move_SANDSTORM: @ 81D0304
 	playsewithpan SE_W201, 0
 	createvisualtask do_boulder_dust, 5, 0
 	delay 16
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 10, 2304, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 10, 2304, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 90, 2048, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 90, 2048, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 50, 2560, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 50, 2560, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 20, 2304, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 20, 2304, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 70, 1984, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 70, 1984, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 0, 2816, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 0, 2816, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 60, 2560, 96, 0
+	createsprite gSandstormDustSpriteTemplate, 40, 60, 2560, 96, 0
 	end
 
 Move_WHIRLPOOL: @ 81D038C
@@ -6856,20 +6856,20 @@ Move_ANCIENT_POWER: @ 81D0EE5
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
 	createsprite gBattleAnimSpriteTemplate_83DB428, 2, 4, 1, 10, 1
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 20, 32, -48, 50, 2
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -38, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 32, 32, -28, 40, 3
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -20, 32, -48, 50, 2
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 20, 32, -28, 60, 1
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -28, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 20, 32, -48, 50, 2
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -38, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, 32, 32, -28, 40, 3
+	createsprite gAncientPowerRockSpriteTemplate, 2, -20, 32, -48, 50, 2
+	createsprite gAncientPowerRockSpriteTemplate, 2, 20, 32, -28, 60, 1
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -28, 30, 4
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_ATTACKER, 1, 0, 30, 1
 	playsewithpan SE_W082, 192
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 15, 32, -48, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -10, 32, -42, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 15, 32, -48, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, -10, 32, -42, 30, 4
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -42, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -25, 32, -48, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -42, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, -25, 32, -48, 30, 4
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetSpriteTemplate, 2, 0, 16, 0, 0, 4
 	delay 3
@@ -7334,7 +7334,7 @@ Move_SHADOW_BALL: @ 81D1AEF
 	waitbgfadein
 	delay 15
 	createsoundtask sub_812B058, 168, -64, 63, 5, 5, 0, 5
-	createsprite gBattleAnimSpriteTemplate_83DAEA8, 130, 16, 16, 8
+	createsprite gShadowBallSpriteTemplate, 130, 16, 16, 8
 	waitforvisualfinish
 	playsewithpan SE_W028, 63
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 4, 0, 8, 1
@@ -9551,7 +9551,7 @@ Move_DOOM_DESIRE: @ 81D52CB
 	blendoff
 	end
 
-Unknown_81D532F: @ 81D532F
+Move_DOOM_DESIRE_Activate: @ 81D532F
 	loadspritegfx 10198
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 3, 0, 16, rgb(31, 31, 31)
 	waitforvisualfinish
