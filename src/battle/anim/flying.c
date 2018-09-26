@@ -371,7 +371,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA65C =
 
 void sub_80DA034(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
     sprite->pos1.y += 20;
     sprite->data[1] = 0xBF;
     sprite->callback = sub_80DA05C;
@@ -2178,7 +2178,7 @@ void sub_80DB000(struct Sprite *sprite)
     }
     else
     {
-        sub_8078764(sprite, 0);
+        sub_8078764(sprite, FALSE);
     }
 
     if ((!gBattleAnimArgs[2] && !GetBattlerSide(gAnimBankAttacker))

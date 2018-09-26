@@ -35,7 +35,7 @@ void sub_80CBAE8(struct Sprite* sprite)
 {
     s16 p1;
     s16 p2;
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
     p1 = GetBattlerSpriteCoord(gAnimBankAttacker, 0);
     p2 = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     if ((gAnimBankTarget ^ 2) == gAnimBankAttacker)

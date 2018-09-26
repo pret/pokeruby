@@ -186,7 +186,10 @@ static void sub_80D5E4C(u8 taskId)
     }
 }
 
-void sub_80D6080(u8 taskId)
+// Used to add a color mask to the battle interface / HUD in Heat Wave.
+// arg 0: opacity
+// arg 1: color code
+void AnimTask_BlendInterfaceColor(u8 taskId)
 {
     struct Struct_sub_8078914 unk;
     sub_8078914(&unk);
