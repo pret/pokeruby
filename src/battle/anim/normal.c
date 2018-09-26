@@ -1049,7 +1049,7 @@ void sub_80E2B74(u8 taskId)
 // arg 0: spriteId
 // arg 1: ??? unknown
 // arg 2: ??? unknown
-// arg 3: opacity [0,15]
+// arg 3: coefficient
 // arg 4: color code
 void AnimTask_BlendSpriteColor(u8 taskId)
 {

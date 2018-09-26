@@ -3450,26 +3450,26 @@ Move_UPROAR: @ 81CBEFC
 
 Move_HEAT_WAVE: @ 81CBFC6
 	loadspritegfx 10261
-	createvisualtask AnimTask_BlendSpriteColor, 5, 10261, 0, 6, 6, 31
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10261, 0, 6, 6, rgb(31, 0, 0)
 	createvisualtask do_boulder_dust, 5, 1
 	createvisualtask AnimTask_BlendInterfaceColor, 6, 6, 31
 	panse_1B SE_W257, 192, 63, 2, 0
 	delay 4
 	createvisualtask sub_80D5DDC, 5
 	delay 12
-	createsprite gSandstormDustSpriteTemplate, 40, 10, 2304, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 10, 2304, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 90, 2048, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 90, 2048, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 50, 2560, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 50, 2560, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 20, 2304, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 20, 2304, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 70, 1984, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 70, 1984, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 0, 2816, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 0, 2816, 96, 1
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 60, 2560, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 60, 2560, 96, 1
 	end
 
 Move_HAIL: @ 81CC076
@@ -3911,9 +3911,9 @@ Move_LUSTER_PURGE: @ 81CC95B
 	createsprite gBattleAnimSpriteTemplate_83DA9E0, 41, 0, 0, 0, 0
 	delay 20
 	createvisualtask sub_80E2A7C, 5, 5, 2, 0, 16, -1
-	createvisualtask AnimTask_BlendSpriteColor, 5, 10267, 2, 0, 16, -1
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10267, 2, 0, 16, rgb(-1, 0, 0)
 	waitforvisualfinish
-	createvisualtask AnimTask_BlendSpriteColor, 5, 10135, 0, 12, 12, 23552
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10135, 0, 12, 12, rgb(0, 0, 23)
 	waitforvisualfinish
 	createsprite gBattleAnimSpriteTemplate_83DB4F0, 131, 1, 2
 	createvisualtask sub_812B30C, 5, 215, 63
@@ -4167,7 +4167,7 @@ Move_FAKE_TEARS: @ 81CD10D
 	loadspritegfx 10155
 	loadspritegfx 10209
 	loadspritegfx 10072
-	createvisualtask AnimTask_BlendSpriteColor, 5, 10155, 0, 4, 4, 32108
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10155, 0, 4, 4, rgb(12, 11, 31)
 	waitforvisualfinish
 	createvisualtask sub_812E568, 5, 0, 2, 1
 	loopsewithpan SE_W039, 192, 12, 4
@@ -6340,19 +6340,19 @@ Move_SANDSTORM: @ 81D0304
 	playsewithpan SE_W201, 0
 	createvisualtask do_boulder_dust, 5, 0
 	delay 16
-	createsprite gSandstormDustSpriteTemplate, 40, 10, 2304, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 10, 2304, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 90, 2048, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 90, 2048, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 50, 2560, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 50, 2560, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 20, 2304, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 20, 2304, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 70, 1984, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 70, 1984, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 0, 2816, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 0, 2816, 96, 0
 	delay 10
-	createsprite gSandstormDustSpriteTemplate, 40, 60, 2560, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 60, 2560, 96, 0
 	end
 
 Move_WHIRLPOOL: @ 81D038C

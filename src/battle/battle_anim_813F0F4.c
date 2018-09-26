@@ -84,35 +84,35 @@ static void sub_8141D20(struct Sprite *sprite);
 extern const u8 gBattleAnimSpriteSheet_Particles[];
 const struct CompressedSpriteSheet gBallOpenParticleSpritesheets[] =
 {
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55020},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55021},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55022},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55023},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55024},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55025},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55026},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55027},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55028},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55029},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55030},
-    {gBattleAnimSpriteSheet_Particles, 0x100, 55031},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EC},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6ED},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EE},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6EF},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F0},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F1},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F2},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F3},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F4},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F5},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F6},
+    {gBattleAnimSpriteSheet_Particles, 0x100, 0xD6F7},
 };
 
 extern const u8 gBattleAnimSpritePalette_136[];
 const struct CompressedSpritePalette gBallOpenParticlePalettes[] =
 {
-    {gBattleAnimSpritePalette_136, 55020},
-    {gBattleAnimSpritePalette_136, 55021},
-    {gBattleAnimSpritePalette_136, 55022},
-    {gBattleAnimSpritePalette_136, 55023},
-    {gBattleAnimSpritePalette_136, 55024},
-    {gBattleAnimSpritePalette_136, 55025},
-    {gBattleAnimSpritePalette_136, 55026},
-    {gBattleAnimSpritePalette_136, 55027},
-    {gBattleAnimSpritePalette_136, 55028},
-    {gBattleAnimSpritePalette_136, 55029},
-    {gBattleAnimSpritePalette_136, 55030},
-    {gBattleAnimSpritePalette_136, 55031},
+    {gBattleAnimSpritePalette_136, 0xD6EC},
+    {gBattleAnimSpritePalette_136, 0xD6ED},
+    {gBattleAnimSpritePalette_136, 0xD6EE},
+    {gBattleAnimSpritePalette_136, 0xD6EF},
+    {gBattleAnimSpritePalette_136, 0xD6F0},
+    {gBattleAnimSpritePalette_136, 0xD6F1},
+    {gBattleAnimSpritePalette_136, 0xD6F2},
+    {gBattleAnimSpritePalette_136, 0xD6F3},
+    {gBattleAnimSpritePalette_136, 0xD6F4},
+    {gBattleAnimSpritePalette_136, 0xD6F5},
+    {gBattleAnimSpritePalette_136, 0xD6F6},
+    {gBattleAnimSpritePalette_136, 0xD6F7},
 };
 
 const union AnimCmd gSpriteAnim_840B318[] =

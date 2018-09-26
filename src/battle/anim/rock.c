@@ -28,7 +28,7 @@ extern void AnimMoveTwisterParticle(struct Sprite *sprite);
 void sub_80DCE9C(struct Sprite *sprite);
 void sub_80DCF60(struct Sprite *sprite);
 void sub_80DCFE4(struct Sprite *sprite);
-void AnimSandstormParticleAcrossScreen(struct Sprite *sprite);
+void AnimDirtParticleAcrossScreen(struct Sprite *sprite);
 void AnimRaiseSprite(struct Sprite *sprite);
 void sub_80DD87C(struct Sprite *sprite);
 void sub_80DD8E8(struct Sprite *sprite);
@@ -136,7 +136,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACD0 =
     .callback = sub_80DCFE4,
 };
 
-const struct SpriteTemplate gSandstormDustSpriteTemplate =
+const struct SpriteTemplate gFlyingDirtSpriteTemplate =
 {
     .tileTag = 10261,
     .paletteTag = 10261,
@@ -144,7 +144,7 @@ const struct SpriteTemplate gSandstormDustSpriteTemplate =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSandstormParticleAcrossScreen,
+    .callback = AnimDirtParticleAcrossScreen,
 };
 
 const struct Subsprite gSubspriteTable_83DAD00[] =
@@ -516,7 +516,7 @@ static void sub_80DD190(u8 taskId)
 // arg 1: projectile speed
 // arg 2: y pixel drop
 // arg 3: ??? unknown (possibly a color bit)
-void AnimSandstormParticleAcrossScreen(struct Sprite *sprite)
+void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
