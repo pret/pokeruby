@@ -16,12 +16,6 @@
 #include "graphics.h"
 #include "constants/battle_anim.h"
 
-// sprites start at 10000 and thus must be subtracted of 10000 to account for the true index.
-#define GET_TRUE_SPRITE_INDEX(i) (i - 10000)
-
-#define ANIM_SPRITE_INDEX_COUNT 8
-#define ANIM_ARGS_COUNT 8
-
 const struct OamData gOamData_837DF24 =
 {
     .affineMode = 0,
