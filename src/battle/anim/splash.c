@@ -8,7 +8,7 @@ extern s16 gBattleAnimArgs[];
 extern u8 gAnimBankAttacker;
 extern u8 gAnimBankTarget;
 
-static void sub_80D07AC(u8 taskId);
+static void AnimTask_SplashStep(u8 taskId);
 
 // splash (splash effect of hopping up and down)
 // Used in Splash, Mud Sport, and Sketch.
@@ -21,7 +21,10 @@ const union AffineAnimCmd gSpriteAffineAnim_83D76F4[] =
     AFFINEANIMCMD_END,
 };
 
-void sub_80D074C(u8 taskId)
+// Task to facilitate expanding and hopping effect seen in Splash.
+// arg 0: anim battler
+// arg 1: num hops
+void AnimTask_Splash(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     if (gBattleAnimArgs[1] == 0)
@@ -37,11 +40,11 @@ void sub_80D074C(u8 taskId)
         task->data[3] = 0;
         task->data[4] = 0;
         sub_80798F4(task, spriteId, &gSpriteAffineAnim_83D76F4);
-        task->func = sub_80D07AC;
+        task->func = AnimTask_SplashStep;
     }
 }
 
-void sub_80D07AC(u8 taskId)
+void AnimTask_SplashStep(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
     switch (task->data[1])

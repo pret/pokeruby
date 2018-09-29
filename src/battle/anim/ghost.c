@@ -24,8 +24,8 @@ static void sub_80DDD58(struct Sprite *sprite);
 static void sub_80DDD78(struct Sprite *);
 static void sub_80DDE7C(u8 taskId);
 static void sub_80DDED0(u8 taskId);
-static void sub_80DDF40(struct Sprite *sprite);
-static void sub_80DDFE8(struct Sprite *);
+static void InitAnimShadowBall(struct Sprite *sprite);
+static void AnimShadowBallStep(struct Sprite *);
 static void sub_80DE0FC(struct Sprite *sprite);
 static void sub_80DE114(struct Sprite *);
 static void sub_80DE2DC(u8 taskId);
@@ -94,7 +94,7 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DAEA4[] =
     gSpriteAffineAnim_83DAE94,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAEA8 =
+const struct SpriteTemplate gShadowBallSpriteTemplate =
 {
     .tileTag = 10176,
     .paletteTag = 10176,
@@ -102,7 +102,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAEA8 =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gSpriteAffineAnimTable_83DAEA4,
-    .callback = sub_80DDF40,
+    .callback = InitAnimShadowBall,
 };
 
 const union AnimCmd gSpriteAnim_83DAEC0[] =
@@ -320,7 +320,7 @@ static void sub_80DDCC8(struct Sprite *sprite)
 
 static void sub_80DDD58(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
     sprite->callback = sub_80DDD78;
     sub_80DDD78(sprite);
 }
@@ -399,7 +399,12 @@ static void sub_80DDED0(u8 taskId)
     }
 }
 
-static void sub_80DDF40(struct Sprite *sprite)
+// Spins a sprite towards the target, pausing in the middle. 
+// Used in Shadow Ball. 
+// arg 0: duration step 1 (attacker -> center)
+// arg 1: duration step 2 (spin center)
+// arg 2: duration step 3 (center -> target)
+static void InitAnimShadowBall(struct Sprite *sprite)
 {
     u16 r5, r6;
     r5 = sprite->pos1.x;
@@ -414,10 +419,10 @@ static void sub_80DDF40(struct Sprite *sprite)
     sprite->data[5] = sprite->pos1.y << 4;
     sprite->data[6] = (((s16)r5 - sprite->pos1.x) << 4) / (gBattleAnimArgs[0] << 1);
     sprite->data[7] = (((s16)r6 - sprite->pos1.y) << 4) / (gBattleAnimArgs[0] << 1);
-    sprite->callback = sub_80DDFE8;
+    sprite->callback = AnimShadowBallStep;
 }
 
-static void sub_80DDFE8(struct Sprite *sprite)
+static void AnimShadowBallStep(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -463,7 +468,7 @@ static void sub_80DDFE8(struct Sprite *sprite)
 
 static void sub_80DE0FC(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
     sprite->callback = sub_80DE114;
 }
 

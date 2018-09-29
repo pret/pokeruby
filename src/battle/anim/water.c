@@ -192,7 +192,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9438 =
 
 void sub_80D37FC(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
@@ -206,7 +206,7 @@ void sub_80D3838(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
     {
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
     }
     else
     {
