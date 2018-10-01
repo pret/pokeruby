@@ -157,7 +157,7 @@ void sub_80CE108(u8 taskId)
 
 void sub_80CE17C(struct Sprite* sprite)
 {
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
     sprite->animPaused = 1;
     sprite->data[0] = gBattleAnimArgs[2];
     sprite->callback = sub_80CE1AC;

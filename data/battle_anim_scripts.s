@@ -2247,15 +2247,15 @@ Move_ICY_WIND: @ 81CA650
 	waitbgfadein
 	end
 _81CA6A8:
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 168, 0, 0, 0, 0, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 0, 0, 0, 72, 1
 	delay 5
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 168, 0, 10, 0, 10, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 10, 0, 10, 72, 1
 	delay 5
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 168, 0, -10, 0, -10, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, -10, 0, -10, 72, 1
 	delay 5
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 168, 0, 15, 0, 15, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, 15, 0, 15, 72, 1
 	delay 5
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 168, 0, -5, 0, -5, 72, 1
+	createsprite gSmallSnowballSpriteTemplate1, 168, 0, -5, 0, -5, 72, 1
 	return
 
 Move_SMOKESCREEN: @ 81CA710
@@ -2980,7 +2980,7 @@ Move_FLASH: @ 81CB713
 	end
 
 Move_SPLASH: @ 81CB720
-	createvisualtask sub_80D074C, 2, 0, 3
+	createvisualtask AnimTask_Splash, 2, 0, 3
 	delay 8
 	loopsewithpan SE_W039, 192, 38, 3
 	waitforvisualfinish
@@ -3059,7 +3059,7 @@ Move_SKETCH: @ 81CB87B
 	createsprite gBattleAnimSpriteTemplate_83D77E0, 130
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_TARGET
-	createvisualtask sub_80D074C, 2, 0, 2
+	createvisualtask AnimTask_Splash, 2, 0, 2
 	loopsewithpan SE_W039, 192, 38, 2
 	end
 
@@ -3450,26 +3450,26 @@ Move_UPROAR: @ 81CBEFC
 
 Move_HEAT_WAVE: @ 81CBFC6
 	loadspritegfx 10261
-	createvisualtask sub_80E2C60, 5, 10261, 0, 6, 6, 31
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10261, 0, 6, 6, rgb(31, 0, 0)
 	createvisualtask do_boulder_dust, 5, 1
-	createvisualtask sub_80D6080, 6, 6, 31
+	createvisualtask AnimTask_BlendInterfaceColor, 6, 6, 31
 	panse_1B SE_W257, 192, 63, 2, 0
 	delay 4
 	createvisualtask sub_80D5DDC, 5
 	delay 12
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 10, 2304, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 10, 2304, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 90, 2048, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 90, 2048, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 50, 2560, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 50, 2560, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 20, 2304, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 20, 2304, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 70, 1984, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 70, 1984, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 0, 2816, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 0, 2816, 96, 1
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 60, 2560, 96, 1
+	createsprite gFlyingDirtSpriteTemplate, 40, 60, 2560, 96, 1
 	end
 
 Move_HAIL: @ 81CC076
@@ -3477,7 +3477,7 @@ Move_HAIL: @ 81CC076
 	loadspritegfx 10141
 	createvisualtask sub_80E2A38, 10, 1, 3, 0, 6, 0
 	waitforvisualfinish
-	createvisualtask sub_80D8ADC, 5
+	createvisualtask AnimTask_Hail1, 5
 	loopsewithpan SE_W258, 0, 8, 10
 	waitforvisualfinish
 	createvisualtask sub_80E2A38, 10, 1, 3, 6, 0, 0
@@ -3911,9 +3911,9 @@ Move_LUSTER_PURGE: @ 81CC95B
 	createsprite gBattleAnimSpriteTemplate_83DA9E0, 41, 0, 0, 0, 0
 	delay 20
 	createvisualtask sub_80E2A7C, 5, 5, 2, 0, 16, -1
-	createvisualtask sub_80E2C60, 5, 10267, 2, 0, 16, -1
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10267, 2, 0, 16, 0xFFFF
 	waitforvisualfinish
-	createvisualtask sub_80E2C60, 5, 10135, 0, 12, 12, 23552
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10135, 0, 12, 12, rgb(0, 0, 23)
 	waitforvisualfinish
 	createsprite gBattleAnimSpriteTemplate_83DB4F0, 131, 1, 2
 	createvisualtask sub_812B30C, 5, 215, 63
@@ -3946,14 +3946,14 @@ Move_MIST_BALL: @ 81CCA72
 	loadspritegfx 10270
 	delay 0
 	playsewithpan SE_W081, 192
-	createsprite gBattleAnimSpriteTemplate_83D9D80, 128, 0, 0, 0, 0, 30, 0
+	createsprite gMistBallSpriteTemplate, 128, 0, 0, 0, 0, 30, 0
 	waitforvisualfinish
 	playsewithpan SE_W028, 63
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_BANK_TARGET, 5, 0, 10, 0
 	createsprite gBattleAnimSpriteTemplate_83DB3DC, 0, 1, 1, 1, 32279, 16, 32767, 16
 	delay 0
 	playsewithpan SE_W114, 0
-	createvisualtask sub_80D8414, 5
+	createvisualtask AnimTask_LoadMistTiles, 5
 	createvisualtask sub_80E2A38, 10, 4, 3, 0, 16, 32767
 	delay 8
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_BANK_TARGET, 4, 0, 70, 0
@@ -4005,7 +4005,7 @@ Move_TEETER_DANCE: @ 81CCBD1
 
 Move_MUD_SPORT: @ 81CCC3C
 	loadspritegfx 10074
-	createvisualtask sub_80D074C, 2, 0, 6
+	createvisualtask AnimTask_Splash, 2, 0, 6
 	delay 24
 	createsprite gMudSportDirtSpriteTemplate, 130, 0, -4, -16
 	createsprite gMudSportDirtSpriteTemplate, 130, 0, 4, -12
@@ -4167,7 +4167,7 @@ Move_FAKE_TEARS: @ 81CD10D
 	loadspritegfx 10155
 	loadspritegfx 10209
 	loadspritegfx 10072
-	createvisualtask sub_80E2C60, 5, 10155, 0, 4, 4, 32108
+	createvisualtask AnimTask_BlendSpriteColor, 5, 10155, 0, 4, 4, rgb(12, 11, 31)
 	waitforvisualfinish
 	createvisualtask sub_812E568, 5, 0, 2, 1
 	loopsewithpan SE_W039, 192, 12, 4
@@ -4662,15 +4662,15 @@ Move_ICE_PUNCH: @ 81CDB3E
 	createvisualtask sub_80E2A38, 10, 4, 2, 0, 9, 32588
 	delay 20
 	playsewithpan SE_W081, 63
-	createsprite gBattleAnimSpriteTemplate_83D9BF8, 2, 0
-	createsprite gBattleAnimSpriteTemplate_83D9BF8, 2, 64
-	createsprite gBattleAnimSpriteTemplate_83D9BF8, 2, 128
-	createsprite gBattleAnimSpriteTemplate_83D9BF8, 2, 192
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 0
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 64
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 128
+	createsprite gSmallIcePunchCrystalSpriteTemplate, 2, 192
 	delay 5
-	createsprite gBattleAnimSpriteTemplate_83D9BE0, 2, 32
-	createsprite gBattleAnimSpriteTemplate_83D9BE0, 2, 96
-	createsprite gBattleAnimSpriteTemplate_83D9BE0, 2, 160
-	createsprite gBattleAnimSpriteTemplate_83D9BE0, 2, 224
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 32
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 96
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 160
+	createsprite gLargeIcePunchCrystalSpriteTemplate, 2, 224
 	delay 17
 	createsprite gFistFootSpriteTemplate, 4, 0, -10, 8, 1, 0
 	createsprite gBasicHitSplatSpriteTemplate, 3, 0, -10, 1, 1
@@ -4679,7 +4679,7 @@ Move_ICE_PUNCH: @ 81CDB3E
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 5, 3, 1
 	waitforvisualfinish
 	delay 15
-	call Unknown_81D5C36
+	call Effect_LightIceDamage
 	delay 5
 	createvisualtask sub_80E2A38, 10, 4, 2, 9, 0, 32588
 	waitforvisualfinish
@@ -5148,7 +5148,7 @@ Move_SMOG: @ 81CE672
 	blendoff
 	end
 _81CE6D7:
-	createsprite gBattleAnimSpriteTemplate_83D9D54, 2, 0, -24, 48, 240, 1, 0
+	createsprite gSmogCloudSpriteTemplate, 2, 0, -24, 48, 240, 1, 0
 	delay 7
 	return
 
@@ -5355,8 +5355,8 @@ Move_ICE_BEAM: @ 81CEB4D
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 1, 0, 7, rgb(0, 0, 0)
 	waitforvisualfinish
 	createsoundtask sub_812B058, 183, -64, 63, 4, 4, 0, 10
-	createsprite gBattleAnimSpriteTemplate_83D9C3C, 2, 20, 12, 0, 12, 20
-	createsprite gBattleAnimSpriteTemplate_83D9C3C, 2, 20, -12, 0, -12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
 	delay 1
 	call _81CEC4E
 	call _81CEC4E
@@ -5371,12 +5371,12 @@ Move_ICE_BEAM: @ 81CEB4D
 	call _81CEC4E
 	call _81CEC4E
 	call _81CEC4E
-	createsprite gBattleAnimSpriteTemplate_83D9C24, 2, 20, 0, 0, 0, 11
+	createsprite IceBeamCenterParticleSpriteTemplate, 2, 20, 0, 0, 0, 11
 	delay 1
-	createsprite gBattleAnimSpriteTemplate_83D9C24, 2, 20, 0, 0, 0, 11
+	createsprite IceBeamCenterParticleSpriteTemplate, 2, 20, 0, 0, 0, 11
 	waitforvisualfinish
 	delay 20
-	call Unknown_81D5C36
+	call Effect_LightIceDamage
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 4, 5, 7, 0, rgb(0, 20, 31)
 	waitforvisualfinish
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 0, 7, 0, rgb(0, 0, 0)
@@ -5385,9 +5385,9 @@ Move_ICE_BEAM: @ 81CEB4D
 	blendoff
 	end
 _81CEC4E:
-	createsprite gBattleAnimSpriteTemplate_83D9C3C, 2, 20, 12, 0, 12, 20
-	createsprite gBattleAnimSpriteTemplate_83D9C3C, 2, 20, -12, 0, -12, 20
-	createsprite gBattleAnimSpriteTemplate_83D9C24, 2, 20, 0, 0, 0, 11
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, 12, 0, 12, 20
+	createsprite gIceBeamOuterParticleSpriteTemplate, 2, 20, -12, 0, -12, 20
+	createsprite IceBeamCenterParticleSpriteTemplate, 2, 20, 0, 0, 0, 11
 	delay 1
 	return
 
@@ -5403,7 +5403,7 @@ Move_AURORA_BEAM: @ 81CEC91
 	waitbgfadein
 	playsewithpan SE_W062, 192
 	setarg 7, 0
-	createvisualtask sub_80D3490, 10, 130
+	createvisualtask AnimTask_RotateMonPalette1, 10, 130
 	call _81CED18
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 1, 0, 17, 1
 	call _81CED18
@@ -5423,13 +5423,13 @@ Move_AURORA_BEAM: @ 81CEC91
 	waitbgfadein
 	end
 _81CED18:
-	createsprite gBattleAnimSpriteTemplate_83D91C4, 130, 20, 0, 0, 0, 17
+	createsprite RainbowRingSpriteTemplate, 130, 20, 0, 0, 0, 17
 	delay 1
-	createsprite gBattleAnimSpriteTemplate_83D91C4, 130, 20, 0, 0, 0, 17
+	createsprite RainbowRingSpriteTemplate, 130, 20, 0, 0, 0, 17
 	delay 1
-	createsprite gBattleAnimSpriteTemplate_83D91C4, 130, 20, 0, 0, 0, 17
+	createsprite RainbowRingSpriteTemplate, 130, 20, 0, 0, 0, 17
 	delay 1
-	createsprite gBattleAnimSpriteTemplate_83D91C4, 130, 20, 0, 0, 0, 17
+	createsprite RainbowRingSpriteTemplate, 130, 20, 0, 0, 0, 17
 	delay 1
 	return
 
@@ -5538,7 +5538,7 @@ _81CEFD0:
 	call _81CF00A
 	playsewithpan SE_W059B, 63
 	waitforvisualfinish
-	call Unknown_81D5CBA
+	call Effect_HeavyIceDamage
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	delay 20
@@ -5548,26 +5548,26 @@ _81CEFD0:
 	waitbgfadein
 	end
 _81CF00A:
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -10, 0, -10, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, 0, 0, 0, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 0, 0, 0, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -15, 0, -15, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, -10, 0, -10, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -10, 0, -10, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -5, 0, -5, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, 10, 0, 10, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -5, 0, -5, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 10, 0, 10, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -10, 0, -10, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -10, 0, -10, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -20, 0, -20, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, 15, 0, 15, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -20, 0, -20, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 15, 0, 15, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -15, 0, -15, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, -20, 0, -20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -15, 0, -15, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, -20, 0, -20, 80, 0, 0, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CA8, 40, 0, -25, 0, -25, 72, 1
-	createsprite gBattleAnimSpriteTemplate_83D9CC0, 40, 0, 20, 0, 20, 80, 0, 0, 1
+	createsprite gSmallSnowballSpriteTemplate1, 40, 0, -25, 0, -25, 72, 1
+	createsprite gLargeSnowballSpriteTemplate, 40, 0, 20, 0, 20, 80, 0, 0, 1
 	delay 3
 	return
 _81CF13F:
@@ -5585,26 +5585,26 @@ Move_POWDER_SNOW: @ 81CF146
 	playsewithpan SE_W016B, 63
 	waitforvisualfinish
 	waitsound
-	call Unknown_81D5CBA
+	call Effect_HeavyIceDamage
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	delay 20
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 31, 1, 3, 0, rgb(0, 0, 0)
 	end
 _81CF190:
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, 0, 0, 0, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 0, 0, 0, 56, 4, 4, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, -10, 0, -10, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -10, 0, -10, 56, 4, 4, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, 10, 0, 10, 56, -4, 3, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 10, 0, 10, 56, -4, 3, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, -20, 0, -20, 56, -4, 5, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, -4, 5, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, 15, 0, 15, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 15, 0, 15, 56, 4, 4, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, -20, 0, -20, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, -20, 0, -20, 56, 4, 4, 1
 	delay 3
-	createsprite gBattleAnimSpriteTemplate_83D9CD8, 40, 0, 20, 0, 20, 56, 4, 4, 1
+	createsprite gSmallSnowballSpriteTemplate2, 40, 0, 20, 0, 20, 56, 4, 4, 1
 	delay 3
 	return
 
@@ -6340,19 +6340,19 @@ Move_SANDSTORM: @ 81D0304
 	playsewithpan SE_W201, 0
 	createvisualtask do_boulder_dust, 5, 0
 	delay 16
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 10, 2304, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 10, 2304, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 90, 2048, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 90, 2048, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 50, 2560, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 50, 2560, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 20, 2304, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 20, 2304, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 70, 1984, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 70, 1984, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 0, 2816, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 0, 2816, 96, 0
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DACE8, 40, 60, 2560, 96, 0
+	createsprite gFlyingDirtSpriteTemplate, 40, 60, 2560, 96, 0
 	end
 
 Move_WHIRLPOOL: @ 81D038C
@@ -6856,20 +6856,20 @@ Move_ANCIENT_POWER: @ 81D0EE5
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
 	createsprite gBattleAnimSpriteTemplate_83DB428, 2, 4, 1, 10, 1
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 20, 32, -48, 50, 2
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -38, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 32, 32, -28, 40, 3
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -20, 32, -48, 50, 2
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 20, 32, -28, 60, 1
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -28, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 20, 32, -48, 50, 2
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -38, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, 32, 32, -28, 40, 3
+	createsprite gAncientPowerRockSpriteTemplate, 2, -20, 32, -48, 50, 2
+	createsprite gAncientPowerRockSpriteTemplate, 2, 20, 32, -28, 60, 1
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -28, 30, 4
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_ATTACKER, 1, 0, 30, 1
 	playsewithpan SE_W082, 192
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 15, 32, -48, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -10, 32, -42, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 15, 32, -48, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, -10, 32, -42, 30, 4
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, 0, 32, -42, 25, 5
-	createsprite gBattleAnimSpriteTemplate_83DAD60, 2, -25, 32, -48, 30, 4
+	createsprite gAncientPowerRockSpriteTemplate, 2, 0, 32, -42, 25, 5
+	createsprite gAncientPowerRockSpriteTemplate, 2, -25, 32, -48, 30, 4
 	waitforvisualfinish
 	createsprite gSlideMonToOffsetSpriteTemplate, 2, 0, 16, 0, 0, 4
 	delay 3
@@ -6919,14 +6919,14 @@ Move_MIST: @ 81D1073
 	blendoff
 	end
 _81D10BE:
-	createsprite gBattleAnimSpriteTemplate_83D9D3C, 2, 0, -24, 48, 240, 0, 1
+	createsprite gMistCloudSpriteTemplate, 2, 0, -24, 48, 240, 0, 1
 	delay 7
 	return
 
 Move_HAZE: @ 81D10D4
 	waitforvisualfinish
 	playsewithpan SE_W114, 0
-	createvisualtask sub_80D80E0, 5
+	createvisualtask AnimTask_Haze1, 5
 	delay 30
 	createvisualtask sub_80E2A38, 10, 1920, 2, 0, 16, 0
 	delay 90
@@ -7063,22 +7063,22 @@ Move_POISON_GAS: @ 81D1474
 	setalpha 12, 8
 	delay 0
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 4
 	playsewithpan SE_W054, 192
-	createsprite gBattleAnimSpriteTemplate_83D9DAC, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
+	createsprite gPoisonGasCloudSpriteTemplate, 128, 64, 0, 0, -32, -6, 4192, 1072, 0
 	delay 40
 	loopsewithpan SE_W054, 63, 28, 6
 	createvisualtask sub_80E1F8C, 2, 4, 6, 2, 0, 12, 26650
@@ -7334,7 +7334,7 @@ Move_SHADOW_BALL: @ 81D1AEF
 	waitbgfadein
 	delay 15
 	createsoundtask sub_812B058, 168, -64, 63, 5, 5, 0, 5
-	createsprite gBattleAnimSpriteTemplate_83DAEA8, 130, 16, 16, 8
+	createsprite gShadowBallSpriteTemplate, 130, 16, 16, 8
 	waitforvisualfinish
 	playsewithpan SE_W028, 63
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 4, 0, 8, 1
@@ -8029,7 +8029,7 @@ Move_TRI_ATTACK: @ 81D2A0F
 	createvisualtask sub_80E2324, 2, 257, 257, 257
 	waitforvisualfinish
 	loadspritegfx 10141
-	call Unknown_81D5C36
+	call Effect_LightIceDamage
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 2, 16, 0, rgb(0, 0, 0)
 	waitforvisualfinish
 	end
@@ -9551,7 +9551,7 @@ Move_DOOM_DESIRE: @ 81D52CB
 	blendoff
 	end
 
-Unknown_81D532F: @ 81D532F
+Move_DOOM_DESIRE_Activate: @ 81D532F
 	loadspritegfx 10198
 	createsprite gSimplePaletteBlendSpriteTemplate, 2, 1, 3, 0, 16, rgb(31, 31, 31)
 	waitforvisualfinish
@@ -9734,21 +9734,21 @@ Move_MAGICAL_LEAF: @ 81D5699
 Move_ICE_BALL: @ 81D57BA
 	loadspritegfx 10043
 	loadspritegfx 10141
-	createvisualtask sub_80D8FC0, 5, 0
+	createvisualtask AnimTask_CountIceBallThrows, 5, 0
 	jumpargeq 0, 4, _81D5831
 _81D57D1:
 	playsewithpan SE_W196, 192
-	createsprite gBattleAnimSpriteTemplate_83D9EF4, 130, 15, 0, -12, -16, 30, -40
+	createsprite gIceBallSpriteTemplate, 130, 15, 0, -12, -16, 30, -40
 	delay 28
 	playsewithpan SE_W280, 63
-	createvisualtask sub_80D8FC0, 5, 0
+	createvisualtask AnimTask_CountIceBallThrows, 5, 0
 	jumpargeq 0, 0, _81D5842
 	jumpargeq 0, 1, _81D5871
 	jumpargeq 0, 2, _81D58AA
 	jumpargeq 0, 3, _81D58ED
 	jumpargeq 0, 4, _81D5935
 _81D581F:
-	createvisualtask sub_80D8FC0, 5, 0
+	createvisualtask AnimTask_CountIceBallThrows, 5, 0
 	jumpargeq 0, 4, _81D5838
 _81D5830:
 	end
@@ -9818,7 +9818,7 @@ _81D5935:
 	call _81D597D
 	goto _81D581F
 _81D597D:
-	createsprite gBattleAnimSpriteTemplate_83D9F0C, 132, -12, -16
+	createsprite gIceBallParticleSpriteTemplate, 132, -12, -16
 	return
 
 Move_WEATHER_BALL: @ 81D5989
@@ -9900,18 +9900,18 @@ _81D5AF9:
 _81D5B99:
 	loadspritegfx 10263
 	loadspritegfx 10141
-	createsprite gBattleAnimSpriteTemplate_83D9E54, 130, -30, -100, 25, 25, -40, 20
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, -40, 20
 	playsewithpan SE_W258, 63
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83D9E54, 130, -30, -100, 25, 25, 40, 0
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 40, 0
 	playsewithpan SE_W258, 63
 	delay 10
-	createsprite gBattleAnimSpriteTemplate_83D9E54, 130, -30, -100, 25, 25, 0, 0
+	createsprite gWeatherBallHailSpriteTemplate, 130, -30, -100, 25, 25, 0, 0
 	playsewithpan SE_W258, 63
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 2, 0, 8, 1
 	playsewithpan SE_W196, 63
-	call Unknown_81D5C36
+	call Effect_LightIceDamage
 	waitforvisualfinish
 	end
 
@@ -9927,102 +9927,102 @@ PoundCopy: @ 81D5C05
 	blendoff
 	end
 
-Unknown_81D5C36: @ 81D5C36
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -10, -10, 0
+Effect_LightIceDamage: @ 81D5C36
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -10, -10, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 10, 20, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 10, 20, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -5, 10, 0
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -5, 10, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 17, -12, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 17, -12, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, -15, 15, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, -15, 15, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 0, 0, 0
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 0, 0, 0
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, 20, 2, 0
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, 20, 2, 0
 	playsewithpan SE_W196, 63
 	return
 
-Unknown_81D5CBA: @ 81D5CBA
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -10, -10, 1
+Effect_HeavyIceDamage: @ 81D5CBA
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -10, -10, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 10, 20, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 10, 20, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -29, 0, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -29, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 29, -20, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 29, -20, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -5, 10, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -5, 10, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 17, -12, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 17, -12, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, -20, 0, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, -20, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, -15, 15, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, -15, 15, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 26, -5, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 26, -5, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C90, 130, 0, 0, 1
+	createsprite gSmallIceEffectParticleSpriteTemplate, 130, 0, 0, 1
 	playsewithpan SE_W196, 63
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9C78, 130, 20, 2, 1
+	createsprite gLargeIceEffectParticleSpriteTemplate, 130, 20, 2, 1
 	playsewithpan SE_W196, 63
 	return
 
 Unknown_81D5D8A: @ 81D5D8A
 	loopsewithpan SE_W196, 63, 6, 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 0, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 0, 24, 0
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 8, 24, 0
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -8, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 8, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -8, 24, 0
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 16, 24, 0
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -16, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 16, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -16, 24, 0
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 24, 24, 0
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -24, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 24, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -24, 24, 0
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 32, 24, 0
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -32, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, 32, 24, 0
+	createsprite gIceSpikeSpriteTemplate, 130, -32, 24, 0
 	return
 
-Unknown_81D5E0E: @ 81D5E0E
+Unknown_81D5E0E: @ 81D5E0E Icy Wind animates end bit with the wavy shiz
 	loopsewithpan SE_W196, 63, 6, 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 0, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 0, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 8, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -8, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 8, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -8, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 16, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -16, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 16, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -16, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 24, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -24, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 24, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -24, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 32, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -32, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 32, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -32, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 40, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -40, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 40, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -40, 24, 1
 	delay 4
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, 48, 24, 1
-	createsprite gBattleAnimSpriteTemplate_83D9D14, 130, -48, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, 48, 24, 1
+	createsprite gIceSpikeSpriteTemplate, 130, -48, 24, 1
 	return
 
 Unknown_81D5ECA: @ 81D5ECA

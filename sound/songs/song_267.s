@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	song_267_grp, voicegroup120
+	.equ	song_267_grp, voicegroup112
 	.equ	song_267_pri, 4
 	.equ	song_267_rev, 0
 	.equ	song_267_mvl, 127
