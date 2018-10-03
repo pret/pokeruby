@@ -2630,7 +2630,7 @@ extern const u8 gUnknown_08E8D9C0[];
 
 extern const u8 gUnknown_08EA1DEC[];
 extern const u16 gUnknown_08EA0328[];
-extern const u16 gUnknown_08EA02C8[][16];
+extern const u16 gUnknown_08EA02C8[];
 extern const u16 gUnknown_08EA0348[];
 extern const u16 gUnknown_08EA15C8[];
 extern const u16 gTradeMonBoxTilemap[];
