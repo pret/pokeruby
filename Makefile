@@ -24,6 +24,7 @@ MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
+GBAFIX    := tools/gbafix/gbafix$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -116,6 +117,7 @@ clean: tidy
 	$(MAKE) clean -C tools/rsfont
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
+	$(MAKE) clean -C tools/gbafix
 
 tools:
 	@$(MAKE) -C tools/gbagfx
@@ -126,6 +128,7 @@ tools:
 	@$(MAKE) -C tools/aif2pcm
 	@$(MAKE) -C tools/ramscrgen
 	@$(MAKE) -C tools/mid2agb
+	@$(MAKE) -C tools/gbafix
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
@@ -133,6 +136,7 @@ tidy:
 
 $(ROM): %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS)
 	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@

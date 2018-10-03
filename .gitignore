@@ -42,3 +42,4 @@ build/
 *.pl
 .vs/
 .projects/ARM/
+*.diff

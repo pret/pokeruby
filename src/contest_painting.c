@@ -328,20 +328,19 @@ static void VBlankCB_ContestPainting(void)
     TransferPlttBuffer();
 }
 
-#ifdef NONMATCHING
 static void sub_8106AC4(u16 species, u8 arg1)
 {
-    void *pal;
+    const void *pal;
 
     pal = GetMonSpritePalFromOtIdPersonality(species, gUnknown_03005E8C->otId, gUnknown_03005E8C->personality);
     LZDecompressVram(pal, gUnknown_03005E90);
 
-    if (arg1 == 1)
+    if (arg1 == 0)
     {
         HandleLoadSpecialPokePic(
             &gMonFrontPicTable[species],
-            gMonFrontPicCoords[species].x,
-            gMonFrontPicCoords[species].y,
+            gMonFrontPicCoords[species].coords,
+            gMonFrontPicCoords[species].y_offset,
             0x2000000,
             gUnknown_081FAF4C[1],
             species,
@@ -353,8 +352,8 @@ static void sub_8106AC4(u16 species, u8 arg1)
     {
         HandleLoadSpecialPokePic(
             &gMonBackPicTable[species],
-            gMonBackPicCoords[species].x,
-            gMonBackPicCoords[species].y,
+            gMonBackPicCoords[species].coords,
+            gMonBackPicCoords[species].y_offset,
             0x2000000,
             gUnknown_081FAF4C[0],
             species,
@@ -363,104 +362,6 @@ static void sub_8106AC4(u16 species, u8 arg1)
         sub_8106B90(gUnknown_081FAF4C[0], gUnknown_03005E90, gUnknown_03005E10);
     }
 }
-#else
-NAKED
-static void sub_8106AC4(u16 arg0, u8 arg2)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r8\n\
-    push {r7}\n\
-    sub sp, 0xC\n\
-    adds r4, r1, 0\n\
-    lsls r0, 16\n\
-    lsrs r6, r0, 16\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    ldr r7, _08106B28 @ =gUnknown_03005E8C\n\
-    ldr r0, [r7]\n\
-    ldr r1, [r0, 0x4]\n\
-    ldr r2, [r0]\n\
-    adds r0, r6, 0\n\
-    bl GetMonSpritePalFromOtIdPersonality\n\
-    ldr r1, _08106B2C @ =gUnknown_03005E90\n\
-    mov r8, r1\n\
-    ldr r1, [r1]\n\
-    bl LZDecompressVram\n\
-    cmp r4, 0\n\
-    bne _08106B40\n\
-    lsls r0, r6, 3\n\
-    ldr r1, _08106B30 @ =gMonFrontPicTable\n\
-    adds r0, r1\n\
-    ldr r1, _08106B34 @ =gMonFrontPicCoords\n\
-    lsls r2, r6, 2\n\
-    adds r2, r1\n\
-    ldrb r1, [r2]\n\
-    ldrb r2, [r2, 0x1]\n\
-    movs r3, 0x80\n\
-    lsls r3, 18\n\
-    ldr r4, _08106B38 @ =gUnknown_081FAF4C\n\
-    ldr r5, [r4, 0x4]\n\
-    str r5, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    ldr r4, [r7]\n\
-    ldr r4, [r4]\n\
-    str r4, [sp, 0x8]\n\
-    bl HandleLoadSpecialPokePic\n\
-    mov r2, r8\n\
-    ldr r1, [r2]\n\
-    ldr r0, _08106B3C @ =gUnknown_03005E10\n\
-    ldr r2, [r0]\n\
-    adds r0, r5, 0\n\
-    bl sub_8106B90\n\
-    b _08106B74\n\
-    .align 2, 0\n\
-_08106B28: .4byte gUnknown_03005E8C\n\
-_08106B2C: .4byte gUnknown_03005E90\n\
-_08106B30: .4byte gMonFrontPicTable\n\
-_08106B34: .4byte gMonFrontPicCoords\n\
-_08106B38: .4byte gUnknown_081FAF4C\n\
-_08106B3C: .4byte gUnknown_03005E10\n\
-_08106B40:\n\
-    lsls r0, r6, 3\n\
-    ldr r1, _08106B80 @ =gMonBackPicTable\n\
-    adds r0, r1\n\
-    ldr r1, _08106B84 @ =gMonBackPicCoords\n\
-    lsls r2, r6, 2\n\
-    adds r2, r1\n\
-    ldrb r1, [r2]\n\
-    ldrb r2, [r2, 0x1]\n\
-    movs r3, 0x80\n\
-    lsls r3, 18\n\
-    ldr r4, _08106B88 @ =gUnknown_081FAF4C\n\
-    ldr r5, [r4]\n\
-    str r5, [sp]\n\
-    str r6, [sp, 0x4]\n\
-    ldr r4, [r7]\n\
-    ldr r4, [r4]\n\
-    str r4, [sp, 0x8]\n\
-    bl HandleLoadSpecialPokePic\n\
-    mov r0, r8\n\
-    ldr r1, [r0]\n\
-    ldr r0, _08106B8C @ =gUnknown_03005E10\n\
-    ldr r2, [r0]\n\
-    adds r0, r5, 0\n\
-    bl sub_8106B90\n\
-_08106B74:\n\
-    add sp, 0xC\n\
-    pop {r3}\n\
-    mov r8, r3\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08106B80: .4byte gMonBackPicTable\n\
-_08106B84: .4byte gMonBackPicCoords\n\
-_08106B88: .4byte gUnknown_081FAF4C\n\
-_08106B8C: .4byte gUnknown_03005E10\n\
-    .syntax divided\n");
-}
-#endif
 
 #ifdef NONMATCHING
 void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])

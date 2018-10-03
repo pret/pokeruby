@@ -1209,7 +1209,7 @@ SECTIONS {
     gfx_data :
     ALIGN(4)
     {
-        data/graphics.o(gfx_data);
+        src/data/graphics.o(.rodata);
     } =0
 
     /* DWARF 2 sections */
