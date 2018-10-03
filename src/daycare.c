@@ -506,7 +506,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
 {
     u16 numSharedParentMoves;
     u32 numLevelUpMoves;
-    u16 numEggMoves;
+    u32 numEggMoves;
     u16 i, j;
 
     numSharedParentMoves = 0;
@@ -534,7 +534,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
     {
         if (gHatchedEggFatherMoves[i] != MOVE_NONE)
         {
-            for (j = 0; j < (u32)numEggMoves; j++)
+            for (j = 0; j < numEggMoves; j++)
             {
                 if (gHatchedEggFatherMoves[i] == gHatchedEggEggMoves[j])
                 {

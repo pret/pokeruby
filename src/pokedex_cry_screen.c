@@ -203,6 +203,7 @@ struct SpritePalette gCryMeterNeedleSpritePalettes[] = {
 #endif
 
 #ifdef NONMATCHING
+// caused by some switch branch weirdness
 u8 sub_8119E3C(struct CryRelatedStruct *cry, u8 arg1)
 {
     u8 i;
@@ -496,18 +497,22 @@ void sub_811A0A0(u16 species)
     gPokedexCryScreenPtr->unk0010 = 1;
 }
 
+// compiler refuses to put src into r0. this can't be solved with greg asm hacks
 #ifdef NONMATCHING
 void sub_811A0C0(void)
 {
     const s8 * src;
     u8 i;
+
     if (gPcmDmaCounter < 2)
         src = gSoundInfo.pcmBuffer;
     else
         src = gSoundInfo.pcmBuffer + (gSoundInfo.pcmDmaPeriod + 1 - gPcmDmaCounter) * gSoundInfo.pcmSamplesPerVBlank;
+
     src += PCM_DMA_BUF_SIZE;
     for (i = 0; i < 16; i++)
         gPokedexCryScreenPtr->unk0000[i] = src[i * 2] * 2;
+    
 }
 #else
 NAKED void sub_811A0C0(void)
