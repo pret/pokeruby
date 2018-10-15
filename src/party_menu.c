@@ -84,14 +84,14 @@ static void sub_806B9A4(s16 a, u16 b, u8 c);
 static void sub_806CA18(u8 taskId, u8 b);
 static void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed);
 static void ChangeDefaultPartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed);
-static void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed);
+void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed);
 static void UpdateMonIconFrame_806DA0C(struct Sprite *sprite);
 static void UpdateMonIconFrame_806DA38(struct Sprite *sprite);
 static void UpdateMonIconFrame_806DA44(u8 taskId, u8 monIndex, u8 c);
 static u8 sub_806CA00(u8 taskId);
 static void SpriteCB_sub_806D37C(struct Sprite *sprite);
 static u8 GetMonIconSpriteId(u8 taskId, u8 monIndex);
-static void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
+void SpriteCB_UpdateHeldItemIconPosition(struct Sprite *sprite);
 static void ItemUseMoveMenu_HandleMoveSelection(u8 taskId);
 static void ItemUseMoveMenu_HandleCancel(u8 taskId);
 static bool8 SetupDefaultPartyMenu(void);
@@ -101,6 +101,8 @@ static bool8 SetupDefaultPartyMenu(void);
 static void sub_806BF24(const u8 *a, u8 monIndex, u8 c, u8 d);
 static void sub_806BB9C(u8 a);
 static void sub_806BBEC(u8 a);
+
+extern u16 Random();
 
 EWRAM_DATA u8 gUnknown_0202E8F4 = 0;
 EWRAM_DATA u8 gUnknown_0202E8F5 = 0;
@@ -475,7 +477,6 @@ extern u16 gMoveToLearn;
 
 extern u16 gUnknown_08E9A300[];
 extern struct Coords8 const gUnknown_08376738[12][6];
-extern const u8 gUnknown_083769C0[];
 extern u8 gUnknown_02039460[];
 extern struct Window gUnknown_03004210;
 
@@ -987,6 +988,7 @@ bool8 DrawPartyMonBackground(u8 monIndex)
     return FALSE;
 }
 
+// many expressions swapped, hard to follow asm diff
 #ifdef NONMATCHING
 void sub_806B908(void)
 {
@@ -1274,6 +1276,7 @@ u8 sub_806BD58(u8 taskId, u8 b)
     return 1;
 }
 
+// non-shifting, some expressions swapped around
 #ifdef NONMATCHING
 u16 HandleDefaultPartyMenuInput(u8 taskId)
 {
@@ -1721,6 +1724,7 @@ void ChangeDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directio
     }
 }
 
+// too many registers allocated, the function takes 0x4c more bytes
 #ifdef NONMATCHING
 void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 directionPressed)
 {
@@ -1731,81 +1735,81 @@ void ChangeLinkDoubleBattlePartyMenuSelection(u8 spriteId, u8 menuIndex, s8 dire
     menuMovement = directionPressed + 2;
     switch (menuMovement)
     {
-    case 2: // no movement
-        gSprites[spriteId].data[1] = 0;
-        break;
-    case 3: // moving down
-        if (menuIndex == 7) {
-            gSprites[spriteId].data[0] = 0;
-        } else {
-            while (menuIndex != PARTY_SIZE - 1) {
-                menuIndex++;
-                if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
+        case 2: // no movement
+            gSprites[spriteId].data[1] = 0;
+            break;
+        case 3: // moving down
+            if (menuIndex == 7) {
+                gSprites[spriteId].data[0] = 0;
+            } else {
+                while (menuIndex != PARTY_SIZE - 1) {
+                    menuIndex++;
+                    if (GetMonData(&gPlayerParty[menuIndex], MON_DATA_SPECIES))
+                    {
+                        gSprites[spriteId].data[0] = menuIndex;
+                        gSprites[spriteId].data[1] = 0;
+                        return;
+                    }
+                }
+    
+                gSprites[spriteId].data[0] = 7;
+            }
+    
+            gSprites[spriteId].data[1] = 0;
+            break;
+        case 1: // moving up
+            while (menuIndex != 0) {
+                menuIndex--;
+                if (menuIndex != PARTY_SIZE && GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
                 {
                     gSprites[spriteId].data[0] = menuIndex;
                     gSprites[spriteId].data[1] = 0;
                     return;
                 }
             }
-
+    
             gSprites[spriteId].data[0] = 7;
-        }
-
-        gSprites[spriteId].data[1] = 0;
-        break;
-    case 1: // moving up
-        while (menuIndex != 0) {
-            menuIndex--;
-            if (menuIndex != PARTY_SIZE && GetMonData(gPlayerParty[menuIndex], MON_DATA_SPECIES))
-            {
-                gSprites[spriteId].data[0] = menuIndex;
-                gSprites[spriteId].data[1] = 0;
-                return;
-            }
-        }
-
-        gSprites[spriteId].data[0] = 7;
-        gSprites[spriteId].data[1] = 0;
-        break;
-    case 4: // moving right
-        if (menuIndex == 0) {
-            var1 = gSprites[spriteId].data[1] - 2;
-            if (var1 > 1) {
-                if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data[0] = 2;
-                } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data[0] = 3;
+            gSprites[spriteId].data[1] = 0;
+            break;
+        case 4: // moving right
+            if (menuIndex == 0) {
+                var1 = gSprites[spriteId].data[1] - 2;
+                if (var1 > 1) {
+                    if (GetMonData(&gPlayerParty[2], MON_DATA_SPECIES)) {
+                        gSprites[spriteId].data[0] = 2;
+                    } else if (GetMonData(&gPlayerParty[3], MON_DATA_SPECIES)) {
+                        gSprites[spriteId].data[0] = 3;
+                    }
+                } else {
+                    gSprites[spriteId].data[0] = 1;
                 }
-            } else {
-                gSprites[spriteId].data[0] = 1;
-            }
-        } else if (menuIndex == 1) {
-            var1 = gSprites[spriteId].data[1] - 4;
-            if (var1 <= 1) {
-                gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
-            } else {
-                if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data[0] = 4;
-                } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
-                    gSprites[spriteId].data[0] = 5;
+            } else if (menuIndex == 1) {
+                var1 = gSprites[spriteId].data[1] - 4;
+                if (var1 <= 1) {
+                    gSprites[spriteId].data[0] = gSprites[spriteId].data[1];
+                } else {
+                    if (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES)) {
+                        gSprites[spriteId].data[0] = 4;
+                    } else if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES)) {
+                        gSprites[spriteId].data[0] = 5;
+                    }
                 }
             }
-        }
-        break;
-    case 0: // moving left
-        var2 = menuIndex - 2;
-        if (var2 <= 1) {
-            gSprites[spriteId].data[0] = 0;
-            gSprites[spriteId].data[1] = menuIndex;
-        } else {
-            var2 = menuIndex - 4;
+            break;
+        case 0: // moving left
+            var2 = menuIndex - 2;
             if (var2 <= 1) {
-                gSprites[spriteId].data[0] = 1;
+                gSprites[spriteId].data[0] = 0;
                 gSprites[spriteId].data[1] = menuIndex;
+            } else {
+                var2 = menuIndex - 4;
+                if (var2 <= 1) {
+                    gSprites[spriteId].data[0] = 1;
+                    gSprites[spriteId].data[1] = menuIndex;
+                }
             }
-        }
-
-        break;
+    
+            break;
     }
 }
 
@@ -2396,6 +2400,7 @@ void SwapValues_s16(s16 *a, s16 *b)
     *b = temp;
 }
 
+// not really sure, but creates +4
 #ifdef NONMATCHING
 void sub_806CF04(void)
 {
@@ -2955,6 +2960,7 @@ void CreateHeldItemIcons_806DC34(u8 taskId)
     }
 }
 
+// too many registers allocated
 #ifdef NONMATCHING
 void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
 {
@@ -2962,7 +2968,7 @@ void CreateHeldItemIcon_806DCD4(u8 taskId, u8 monIndex, u16 item)
     u8 heldItemSpriteId;
 
     monIconSpriteId = GetMonIconSpriteId(taskId, monIndex);
-    heldItemSpriteId = CreateSprite(gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
+    heldItemSpriteId = CreateSprite(&gSpriteTemplate_837660C, 0xFA, 0xAA, 4);
 
     gSprites[heldItemSpriteId].pos2.x = 4;
     gSprites[heldItemSpriteId].pos2.y = 10;
@@ -3142,12 +3148,12 @@ u16 GetMonHeldItemIconSpriteId(u8 taskId, u8 monIndex)
     return retVal;
 }
 
-#ifdef NONMATCHING
+// #ifdef NONMATCHING (for grep)
 void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
 {
     u8 spriteId;
     u16 heldItem;
-
+    
     spriteId = GetMonHeldItemIconSpriteId(taskId, monIndex);
     if (!GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM))
     {
@@ -3155,107 +3161,27 @@ void SetHeldItemIconVisibility(u8 taskId, u8 monIndex)
     }
     else
     {
-        struct Sprite *sprite;
-
+        register struct Sprite *sprite asm("r4");
+// sprite2 is required to mimic a failed optimization where r0 would have been loaded at the end of the if statement
+        register struct Sprite *sprite2 asm("r0");
+        u8 animNum;
         heldItem = GetMonData(&gPlayerParty[monIndex], MON_DATA_HELD_ITEM);
-        sprite = &gSprites[spriteId];
         if (ItemIsMail(heldItem))
         {
-            StartSpriteAnim(sprite, 1);
+            sprite = &gSprites[spriteId];
+            sprite2 = sprite; // hack
+            animNum = 1;
         }
         else
         {
-            StartSpriteAnim(sprite, 0);
+            sprite = &gSprites[spriteId];
+            sprite2 = sprite; // hack
+            animNum = 0;
         }
-
+        StartSpriteAnim(sprite2, animNum);
         sprite->invisible = 0;
     }
 }
-#else
-NAKED
-void SetHeldItemIconVisibility(u8 a, u8 monIndex)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    adds r4, r1, 0\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    adds r1, r4, 0\n\
-    bl GetMonHeldItemIconSpriteId\n\
-    lsls r0, 24\n\
-    lsrs r5, r0, 24\n\
-    adds r6, r5, 0\n\
-    movs r0, 0x64\n\
-    adds r1, r4, 0\n\
-    muls r1, r0\n\
-    ldr r0, _0806DFA4 @ =gPlayerParty\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    bne _0806DFAC\n\
-    ldr r1, _0806DFA8 @ =gSprites\n\
-    lsls r0, r5, 4\n\
-    adds r0, r5\n\
-    lsls r0, 2\n\
-    adds r0, r1\n\
-    adds r0, 0x3E\n\
-    ldrb r1, [r0]\n\
-    movs r2, 0x4\n\
-    orrs r1, r2\n\
-    strb r1, [r0]\n\
-    b _0806DFF6\n\
-    .align 2, 0\n\
-_0806DFA4: .4byte gPlayerParty\n\
-_0806DFA8: .4byte gSprites\n\
-_0806DFAC:\n\
-    adds r0, r4, 0\n\
-    movs r1, 0xC\n\
-    bl GetMonData\n\
-    lsls r0, 16\n\
-    lsrs r0, 16\n\
-    bl ItemIsMail\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _0806DFD8\n\
-    lsls r4, r5, 4\n\
-    adds r4, r5\n\
-    lsls r4, 2\n\
-    ldr r0, _0806DFD4 @ =gSprites\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x1\n\
-    b _0806DFE6\n\
-    .align 2, 0\n\
-_0806DFD4: .4byte gSprites\n\
-_0806DFD8:\n\
-    lsls r4, r6, 4\n\
-    adds r4, r6\n\
-    lsls r4, 2\n\
-    ldr r0, _0806DFFC @ =gSprites\n\
-    adds r4, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0\n\
-_0806DFE6:\n\
-    bl StartSpriteAnim\n\
-    adds r4, 0x3E\n\
-    ldrb r1, [r4]\n\
-    movs r0, 0x5\n\
-    negs r0, r0\n\
-    ands r0, r1\n\
-    strb r0, [r4]\n\
-_0806DFF6:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0806DFFC: .4byte gSprites\n\
-    .syntax divided\n");
-}
-#endif // NONMATCHING
 
 void PartyMenuDoPrintMonNickname(u8 monIndex, int b, const u8 *nameBuffer)
 {
@@ -4994,12 +4920,19 @@ void DoEvolutionStoneItemEffect(u8 taskId, u16 evolutionStoneItem, TaskFunc c)
     }
 }
 
-#ifdef NONMATCHING
 u8 GetItemEffectType(u16 item)
 {
     const u8 *itemEffect;
+#ifndef NONMATCHING
     register u8 itemEffect0 asm("r1");
+    register u8 itemEffect3 asm("r3");
+    register u32 itemEffect0_r0 asm("r0"); // u32 to prevent shifting when transferring itemEffect0 to this
     u8 mask;
+#else
+#define itemEffect0 itemEffect[0]
+#define itemEffect3 itemEffect[3]
+#define mask 0x3F
+#endif
 
     // Read the item's effect properties.
     if (item == ITEM_ENIGMA_BERRY)
@@ -5011,10 +4944,19 @@ u8 GetItemEffectType(u16 item)
         itemEffect = gItemEffectTable[item - ITEM_POTION];
     }
 
+#ifndef NONMATCHING
     itemEffect0 = itemEffect[0];
     mask = 0x3F;
+#endif
 
-    if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & 0x80))
+    if ((itemEffect0 & mask) || itemEffect[1] || itemEffect[2])
+    {
+        return 0;
+    }
+#ifndef NONMATCHING
+    itemEffect3 = itemEffect[3];
+#endif
+    if (itemEffect3 & 0x80)
     {
         return 0;
     }
@@ -5022,37 +4964,45 @@ u8 GetItemEffectType(u16 item)
     {
         return 10;
     }
-    else if (itemEffect[3] & 0x40)
+    else if (itemEffect3 & 0x40)
     {
         return 1;
     }
-    else if ((itemEffect[3] & mask) || (itemEffect0 >> 7))
+    else if ((itemEffect3 & mask) || (itemEffect0 >> 7))
     {
-        if ((itemEffect[3] & mask) == 0x20)
+        if ((itemEffect3 & mask) == 0x20)
         {
             return 4;
         }
-        else if ((itemEffect[3] & mask) == 0x10)
+        else if ((itemEffect3 & mask) == 0x10)
         {
             return 3;
         }
-        else if ((itemEffect[3] & mask) == 0x8)
+        else if ((itemEffect3 & mask) == 0x8)
         {
             return 5;
         }
-        else if ((itemEffect[3] & mask) == 0x4)
+        else if ((itemEffect3 & mask) == 0x4)
         {
             return 6;
         }
-        else if ((itemEffect[3] & mask) == 0x2)
+        else if ((itemEffect3 & mask) == 0x2)
         {
             return 7;
         }
-        else if ((itemEffect[3] & mask) == 0x1)
+        else if ((itemEffect3 & mask) == 0x1)
         {
             return 8;
         }
-        else if ((itemEffect0 >> 7) != 0 && (itemEffect[3] & mask) == 0)
+        // alternate fakematching
+        // itemEffect0_r0 = itemEffect0 >> 7;
+        // asm(""); // increase live length for greg
+        // if ((itemEffect0_r0 != 0) && (itemEffect3 & mask) == 0)
+#ifndef NONMATCHING
+        else if (((itemEffect0_r0 = itemEffect0 >> 7) != 0) && (itemEffect3 & mask) == 0)
+#else
+        else if (((itemEffect[0] >> 7) != 0) && (itemEffect[3] & 0x3F) == 0)
+#endif
         {
             return 9;
         }
@@ -5109,8 +5059,13 @@ u8 GetItemEffectType(u16 item)
     {
         return 22;
     }
+#ifdef NONMATCHING
+#undef itemEffect0
+#undef itemEffect3
+#undef mask
+#endif
 }
-#else
+#if 0
 NAKED
 u8 GetItemEffectType(u16 item)
 {
@@ -5307,8 +5262,7 @@ _08070F8A:\n\
     bx r1\n\
     .syntax divided\n");
 }
-#endif // NONMATCHING
-
+#endif
 
 // Maybe this goes in start_menu.c
 #if !DEBUG
