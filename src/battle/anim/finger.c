@@ -59,8 +59,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D72C0[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72C8 =
 {
-    .tileTag = 10064,
-    .paletteTag = 10064,
+    .tileTag = ANIM_TAG_FINGER,
+    .paletteTag = ANIM_TAG_FINGER,
     .oam = &gOamData_837DFF4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -70,8 +70,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72C8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D72E0 =
 {
-    .tileTag = 10064,
-    .paletteTag = 10064,
+    .tileTag = ANIM_TAG_FINGER,
+    .paletteTag = ANIM_TAG_FINGER,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -125,8 +125,8 @@ const union AnimCmd *const gSpriteAnimTable_83D7348[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7358 =
 {
-    .tileTag = 10214,
-    .paletteTag = 10214,
+    .tileTag = ANIM_TAG_FINGER_2,
+    .paletteTag = ANIM_TAG_FINGER_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D7348,
     .images = NULL,

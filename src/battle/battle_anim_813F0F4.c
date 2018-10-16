@@ -351,8 +351,8 @@ const u16 gUnknown_0840B4D4[] =
 static void sub_8141C30(struct Sprite *sprite);
 const struct SpriteTemplate gBattleAnimSpriteTemplate_840B4FC =
 {
-    .tileTag = 10269,
-    .paletteTag = 10269,
+    .tileTag = ANIM_TAG_UNUSED_RED_BRICK,
+    .paletteTag = ANIM_TAG_UNUSED_RED_BRICK,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

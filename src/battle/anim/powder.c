@@ -29,8 +29,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6220[] =
 
 const struct SpriteTemplate gSleepPowderParticleSpriteTemplate =
 {
-    .tileTag = 10067,
-    .paletteTag = 10067,
+    .tileTag = ANIM_TAG_SLEEP_POWDER,
+    .paletteTag = ANIM_TAG_SLEEP_POWDER,
     .oam = &gOamData_837DF64,
     .anims = gSpriteAnimTable_83D6220,
     .images = NULL,
@@ -40,8 +40,8 @@ const struct SpriteTemplate gSleepPowderParticleSpriteTemplate =
 
 const struct SpriteTemplate gStunSporeParticleSpriteTemplate =
 {
-    .tileTag = 10068,
-    .paletteTag = 10068,
+    .tileTag = ANIM_TAG_STUN_SPORE,
+    .paletteTag = ANIM_TAG_STUN_SPORE,
     .oam = &gOamData_837DF64,
     .anims = gSpriteAnimTable_83D6220,
     .images = NULL,
@@ -51,8 +51,8 @@ const struct SpriteTemplate gStunSporeParticleSpriteTemplate =
 
 const struct SpriteTemplate gPoisonPowderParticleSpriteTemplate =
 {
-    .tileTag = 10065,
-    .paletteTag = 10065,
+    .tileTag = ANIM_TAG_POISON_POWDER,
+    .paletteTag = ANIM_TAG_POISON_POWDER,
     .oam = &gOamData_837DF64,
     .anims = gSpriteAnimTable_83D6220,
     .images = NULL,

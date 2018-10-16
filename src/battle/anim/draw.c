@@ -21,8 +21,8 @@ static void sub_80D0E8C(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D77E0 =
 {
-    .tileTag = 10002,
-    .paletteTag = 10002,
+    .tileTag = ANIM_TAG_PENCIL,
+    .paletteTag = ANIM_TAG_PENCIL,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

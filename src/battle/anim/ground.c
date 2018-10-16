@@ -64,8 +64,8 @@ const union AffineAnimCmd *const gBoneHitSpriteAffineAnimTable[] =
 
 const struct SpriteTemplate gBonemerangSpriteTemplate =
 {
-    .tileTag = 10000,
-    .paletteTag = 10000,
+    .tileTag = ANIM_TAG_BONE,
+    .paletteTag = ANIM_TAG_BONE,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -75,8 +75,8 @@ const struct SpriteTemplate gBonemerangSpriteTemplate =
 
 const struct SpriteTemplate gBoneHitSpriteTemplate =
 {
-    .tileTag = 10000,
-    .paletteTag = 10000,
+    .tileTag = ANIM_TAG_BONE,
+    .paletteTag = ANIM_TAG_BONE,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -86,8 +86,8 @@ const struct SpriteTemplate gBoneHitSpriteTemplate =
 
 const struct SpriteTemplate gSandAttackDirtSpriteTemplate =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -108,8 +108,8 @@ const union AnimCmd *const gMudSlapDirtSpriteAnimTable[] =
 
 const struct SpriteTemplate gMudSlapDirtSpriteTemplate =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF2C,
     .anims = gMudSlapDirtSpriteAnimTable,
     .images = NULL,
@@ -119,8 +119,8 @@ const struct SpriteTemplate gMudSlapDirtSpriteTemplate =
 
 const struct SpriteTemplate gMudSportDirtSpriteTemplate =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -130,8 +130,8 @@ const struct SpriteTemplate gMudSportDirtSpriteTemplate =
 
 const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -141,8 +141,8 @@ const struct SpriteTemplate gDirtPlumeSpriteTemplate =
 
 const struct SpriteTemplate gDigDirtMoundSpriteTemplate =
 {
-    .tileTag = 10281,
-    .paletteTag = 10281,
+    .tileTag = ANIM_TAG_DIRT_MOUND,
+    .paletteTag = ANIM_TAG_DIRT_MOUND,
     .oam = &gOamData_837DF54,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

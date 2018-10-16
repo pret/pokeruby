@@ -23,8 +23,8 @@ static void sub_80CD67C(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DAC =
 {
-    .tileTag = 10014,
-    .paletteTag = 10014,
+    .tileTag = ANIM_TAG_LOCK_ON,
+    .paletteTag = ANIM_TAG_LOCK_ON,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -34,8 +34,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DAC =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6DC4 =
 {
-    .tileTag = 10014,
-    .paletteTag = 10014,
+    .tileTag = ANIM_TAG_LOCK_ON,
+    .paletteTag = ANIM_TAG_LOCK_ON,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

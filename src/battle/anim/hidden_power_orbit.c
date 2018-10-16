@@ -27,8 +27,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7B10[] =
 
 const struct SpriteTemplate gHiddenPowerOrbSpriteTemplate =
 {
-    .tileTag = 10217,
-    .paletteTag = 10217,
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -38,8 +38,8 @@ const struct SpriteTemplate gHiddenPowerOrbSpriteTemplate =
 
 const struct SpriteTemplate gHiddenPowerOrbScatterSpriteTemplate =
 {
-    .tileTag = 10217,
-    .paletteTag = 10217,
+    .tileTag = ANIM_TAG_RED_ORB,
+    .paletteTag = ANIM_TAG_RED_ORB,
     .oam = &gOamData_837DFEC,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

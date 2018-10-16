@@ -29,8 +29,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7624[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7628 =
 {
-    .tileTag = 10006,
-    .paletteTag = 10006,
+    .tileTag = ANIM_TAG_SEED,
+    .paletteTag = ANIM_TAG_SEED,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

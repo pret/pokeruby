@@ -30,8 +30,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6E94[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_EndureFlame =
 {
-    .tileTag = 10184,
-    .paletteTag = 10184,
+    .tileTag = ANIM_TAG_FOCUS_ENERGY,
+    .paletteTag = ANIM_TAG_FOCUS_ENERGY,
     .oam = &gOamData_837DF74,
     .anims = gSpriteAnimTable_83D6E94,
     .images = NULL,

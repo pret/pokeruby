@@ -51,8 +51,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D69DC =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D69F4 =
 {
-    .tileTag = 10287,
-    .paletteTag = 10287,
+    .tileTag = ANIM_TAG_WHIP_HIT,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D69D4,
     .images = NULL,
@@ -77,8 +77,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6A24[] =
 
 const struct SpriteTemplate gSpriteTemplate_83D6A28 =
 {
-    .tileTag = 10021,
-    .paletteTag = 10021,
+    .tileTag = ANIM_TAG_UNUSED_HIT,
+    .paletteTag = ANIM_TAG_UNUSED_HIT,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6A24,
     .images = NULL,
@@ -88,8 +88,8 @@ const struct SpriteTemplate gSpriteTemplate_83D6A28 =
 
 const struct SpriteTemplate gSpriteTemplate_83D6A40 =
 {
-    .tileTag = 10022,
-    .paletteTag = 10022,
+    .tileTag = ANIM_TAG_UNUSED_HIT_2,
+    .paletteTag = ANIM_TAG_UNUSED_HIT_2,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6A24,
     .images = NULL,

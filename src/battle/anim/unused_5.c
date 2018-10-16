@@ -14,8 +14,8 @@ void sub_80CF280(struct Sprite* sprite);
 
 const struct SpriteTemplate gSpriteTemplate_83D7370 =
 {
-    .tileTag = 10064,
-    .paletteTag = 10064,
+    .tileTag = ANIM_TAG_FINGER,
+    .paletteTag = ANIM_TAG_FINGER,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
