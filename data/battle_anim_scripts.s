@@ -14,7 +14,7 @@ gSingingMoves:: @ 81C7160
 	.2byte MOVE_SING
 	.2byte MOVE_PERISH_SONG
 	.2byte MOVE_GRASS_WHISTLE
-	.2byte -1
+	.2byte 0xFFFF
 
 	.align 2
 gBattleAnims_Moves:: @ 81C7168
@@ -1857,7 +1857,7 @@ Move_GUILLOTINE: @ 81C9C29
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
-	fadetobgfromset 12, 13, 14
+	fadetobgfromset BG_GUILLOTINE_OPPONENT, BG_GUILLOTINE_PLAYER, BG_GUILLOTINE_CONTESTS
 	waitbgfadein
 	playsewithpan SE_W011, 63
 	createsprite gBattleAnimSpriteTemplate_83D76DC, 2, 0
