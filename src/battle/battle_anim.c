@@ -1285,6 +1285,8 @@ extern u16 gBattlerPartyIndexes[4];
 extern u8 gBankSpriteIds[];
 extern u8 gBankAttacker;
 extern u8 gBankTarget;
+
+// sBattleAnimScriptPtr is a pointer to the next set of battle script commands.
 EWRAM_DATA const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA const u8 *gBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
@@ -1472,7 +1474,7 @@ void LaunchBattleAnimation(const u8 *const moveAnims[], u16 move, u8 isMoveAnim)
 
     if (!IsContest())
     {
-        sub_8079E24();
+        UpdateBattlerSpritePriorities();
         UpdateOamPriorityInAllHealthboxes(0);
         for (i = 0; i < 4; i++)
         {
@@ -1593,6 +1595,8 @@ static void RunAnimScriptCommand(void)
     } while (gAnimFramesToWait == 0 && gAnimScriptActive);
 }
 
+// Loads sprite graphics used in a move into memory.
+// arg 0: gfx ANIM_TAG
 static void ScriptCmd_loadspritegfx(void)
 {
     u16 tag;
@@ -1607,6 +1611,8 @@ static void ScriptCmd_loadspritegfx(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
+// Frees sprite graphics from memory when move animation no longer needs them.
+// arg0: gfx ANIM_TAG
 static void ScriptCmd_unloadspritegfx(void)
 {
     u16 tag;
@@ -1619,6 +1625,9 @@ static void ScriptCmd_unloadspritegfx(void)
     ClearSpriteIndex(GET_TRUE_SPRITE_INDEX(tag));
 }
 
+// Creates a sprite from the given sprite template.
+// arg0: SpriteTemplate
+// arg1: s16[] gBattleAnimArgs
 static void ScriptCmd_createsprite(void)
 {
     s32 i;
@@ -1650,7 +1659,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_8079E90(gAnimBankTarget) + (s8)(argVar);
+        subpriority = GetBattlerSubpriority(gAnimBankTarget) + (s8)(argVar);
     }
     else
     {
@@ -1659,7 +1668,7 @@ static void ScriptCmd_createsprite(void)
         else
             argVar *= -1;
 
-        subpriority = sub_8079E90(gAnimBankAttacker) + (s8)(argVar);
+        subpriority = GetBattlerSubpriority(gAnimBankAttacker) + (s8)(argVar);
     }
 
     if (subpriority < 3)
@@ -1669,6 +1678,9 @@ static void ScriptCmd_createsprite(void)
     gAnimVisualTaskCount++;
 }
 
+// Initializes an animation task.
+// arg0: AnimTask function
+// arg1: s16[] arguments
 static void ScriptCmd_createvisualtask(void)
 {
     TaskFunc taskFunc;
@@ -1699,6 +1711,8 @@ static void ScriptCmd_createvisualtask(void)
     gAnimVisualTaskCount++;
 }
 
+// Creates a visual delay.
+// arg0: number of frames to wait.
 static void ScriptCmd_delay(void)
 {
     sBattleAnimScriptPtr++;
@@ -1709,7 +1723,7 @@ static void ScriptCmd_delay(void)
     gAnimScriptCallback = WaitAnimFrameCount;
 }
 
-// wait for visual tasks to finish.
+// Wait for visual tasks to finish.
 static void ScriptCmd_waitforvisualfinish(void)
 {
     if (gAnimVisualTaskCount == 0)
@@ -1731,6 +1745,8 @@ static void ScriptCmd_hang2(void)
 {
 }
 
+// Marks the end of an animation. Finishes the anims, tasks, and sound effects.
+// started during an animaiton.
 static void ScriptCmd_end(void)
 {
     s32 i;
@@ -1778,13 +1794,15 @@ static void ScriptCmd_end(void)
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
         if (IsContest() == 0)
         {
-            sub_8079E24();
+            UpdateBattlerSpritePriorities();
             UpdateOamPriorityInAllHealthboxes(1);
         }
         gAnimScriptActive = FALSE;
     }
 }
 
+// Plays a sound effect.
+// arg0: sound effect ID
 static void ScriptCmd_playse(void)
 {
     sBattleAnimScriptPtr++;
@@ -1792,6 +1810,8 @@ static void ScriptCmd_playse(void)
     sBattleAnimScriptPtr += 2;
 }
 
+// 
+// arg0: battler
 static void ScriptCmd_monbg(void)
 {
     u8 animBank;
@@ -2231,6 +2251,9 @@ static void sub_80769A4(u8 taskId)
     }
 }
 
+// Sets transparency of sprite.
+// arg0: sprite alpha value
+// arg1: background alpha value
 static void ScriptCmd_setalpha(void)
 {
     u16 spriteAlpha, bgAlpha;
@@ -2252,6 +2275,7 @@ static void ScriptCmd_setbldcnt(void)
     REG_BLDCNT = half1 | half2;
 }
 
+// Turns off alpha blending / semi transparency.
 static void ScriptCmd_blendoff(void)
 {
     sBattleAnimScriptPtr++;
@@ -2259,6 +2283,8 @@ static void ScriptCmd_blendoff(void)
     REG_BLDALPHA = 0;
 }
 
+// Calls another animation by resetting sBattleAnimScriptPtr.
+// arg0: Function
 static void ScriptCmd_call(void)
 {
     sBattleAnimScriptPtr++;
@@ -2266,11 +2292,15 @@ static void ScriptCmd_call(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
+// Returns to the function that called this.
 static void ScriptCmd_return(void)
 {
     sBattleAnimScriptPtr = gBattleAnimScriptRetAddr;
 }
 
+// Sets a value into gBattleAnimArgs[8]
+// arg0: index / arg number
+// arg1: value to set
 static void ScriptCmd_setarg(void)
 {
     const u8 *addr = sBattleAnimScriptPtr;
@@ -2285,6 +2315,9 @@ static void ScriptCmd_setarg(void)
     gBattleAnimArgs[argId] = value;
 }
 
+// Flips between the first and second step of a move with two turns.
+// arg0: first turn animation
+// arg1: second turn animation
 static void ScriptCmd_choosetwoturnanim(void)
 {
     sBattleAnimScriptPtr++;
@@ -2293,6 +2326,9 @@ static void ScriptCmd_choosetwoturnanim(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
+// Jump to specified step of multi turn moves.
+// arg0: move turn
+// arg1: turn animation
 static void ScriptCmd_jumpifmoveturn(void)
 {
     u8 toCheck;
@@ -2311,6 +2347,8 @@ static void ScriptCmd_jumpifmoveturn(void)
     }
 }
 
+// Jump to another animation.
+// arg0: new animation
 static void ScriptCmd_jump(void)
 {
     sBattleAnimScriptPtr++;
@@ -2328,6 +2366,8 @@ bool8 IsContest(void)
 #define tBackgroundId   data[0]
 #define tState          data[10]
 
+// Fades the screen and sets new background image.
+// arg0: background ID
 static void ScriptCmd_fadetobg(void)
 {
     u8 backgroundId;
@@ -2341,6 +2381,10 @@ static void ScriptCmd_fadetobg(void)
     sAnimBackgroundFadeState = 1;
 }
 
+// Fades to background image based on context of move (contest, battle)
+// arg0: opponent background image ID
+// arg1: player background image ID
+// arg2: contest background image ID
 static void ScriptCmd_fadetobgfromset(void)
 {
     u8 bg1, bg2, bg3;
@@ -2428,6 +2472,7 @@ static void LoadDefaultBg(void)
         DrawMainBattleBackground();
 }
 
+// Restores default background image.
 static void ScriptCmd_restorebg(void)
 {
     u8 taskId;
@@ -2441,6 +2486,7 @@ static void ScriptCmd_restorebg(void)
 #undef tBackgroundId
 #undef tState
 
+// Wait for background image fade out to compete.
 static void ScriptCmd_waitbgfadeout(void)
 {
     if (sAnimBackgroundFadeState == 2)
@@ -2454,6 +2500,7 @@ static void ScriptCmd_waitbgfadeout(void)
     }
 }
 
+// Wait for background image fade in to compete.
 static void ScriptCmd_waitbgfadein(void)
 {
     if (sAnimBackgroundFadeState == 0)
@@ -2467,6 +2514,8 @@ static void ScriptCmd_waitbgfadein(void)
     }
 }
 
+// Change background.
+// arg0: background image ID
 static void ScriptCmd_changebg(void)
 {
     sBattleAnimScriptPtr++;
@@ -2951,6 +3000,9 @@ static void Task_WaitAndPlaySE(u8 taskId)
 #undef tPanning
 #undef tFramesToWait
 
+// Creates a sound task.
+// arg0: sound task function
+// arg1: s16[] gBattleAnimArgs
 static void ScriptCmd_createsoundtask(void)
 {
     TaskFunc func;
@@ -2972,6 +3024,7 @@ static void ScriptCmd_createsoundtask(void)
     gAnimSoundTaskCount++;
 }
 
+// Wait for sound effect to end.
 static void ScriptCmd_waitsound(void)
 {
     if (gAnimSoundTaskCount != 0)
@@ -3000,6 +3053,10 @@ static void ScriptCmd_waitsound(void)
     }
 }
 
+// Jump to animation based on gBattleAnimArgs[index] value.
+// arg0: gBattleAnimArgs[] argument index
+// arg1: value
+// arg2: animation script
 static void ScriptCmd_jumpargeq(void)
 {
     u8 argId;
@@ -3015,6 +3072,8 @@ static void ScriptCmd_jumpargeq(void)
         sBattleAnimScriptPtr += 7;
 }
 
+// If using move in contest, go to specific animation script.
+// arg0: animation script
 static void ScriptCmd_jumpifcontest(void)
 {
     sBattleAnimScriptPtr++;
@@ -3079,6 +3138,8 @@ static void ScriptCmd_monbgprio_2A(void)
     }
 }
 
+// Sets sprite to be invisible.
+// arg0: battler sprite ID
 static void ScriptCmd_invisible(void)
 {
     u8 spriteId;
@@ -3090,6 +3151,8 @@ static void ScriptCmd_invisible(void)
     sBattleAnimScriptPtr += 2;
 }
 
+// Sets aprite to be visible.
+// arg0: battler sprite ID
 static void ScriptCmd_visible(void)
 {
     u8 spriteId;
@@ -3163,6 +3226,7 @@ static void ScriptCmd_doublebattle_2E(void)
     }
 }
 
+// Cease playing sounds.
 static void ScriptCmd_stopsound(void)
 {
     m4aMPlayStop(&gMPlay_SE1);

@@ -3146,9 +3146,9 @@ static void sub_812EEEC(struct Sprite *sprite)
     sprite->data[1] = (sprite->data[1] + 9) & 0xFF;
 
     if ((u16)sprite->data[1] < 64 || sprite->data[1] > 195)
-        sprite->subpriority = sub_8079E90(gAnimBankAttacker) - 1;
+        sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) - 1;
     else
-        sprite->subpriority = sub_8079E90(gAnimBankAttacker) + 1;
+        sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) + 1;
 
     if (sprite->data[5] == 0)
     {
@@ -4013,7 +4013,7 @@ void sub_812FD7C(u8 taskId)
 
     task->data[4] = GetBattlerSpriteCoord(battler, 0);
     task->data[5] = GetBattlerSpriteCoord(battler, 1);
-    task->data[6] = sub_8079E90(battler);
+    task->data[6] = GetBattlerSubpriority(battler);
     task->data[15] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
     sub_80798F4(task, task->data[15], &gUnknown_084028AC);
     task->func = sub_812FE20;
@@ -4342,7 +4342,7 @@ void sub_8130554(u8 taskId)
     task->data[12] = GetBattlerSpriteCoord(gAnimBankAttacker, 3);
     task->data[13] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
     task->data[14] = GetBattlerSpriteCoord(gAnimBankTarget, 3) + sub_807A100(gAnimBankTarget, 0) / 4;
-    task->data[15] = CreateSprite(&gSpriteTemplate_84029AC, task->data[11], task->data[12], sub_8079E90(gAnimBankTarget) - 5);
+    task->data[15] = CreateSprite(&gSpriteTemplate_84029AC, task->data[11], task->data[12], GetBattlerSubpriority(gAnimBankTarget) - 5);
     if (task->data[15] != MAX_SPRITES)
     {
         gSprites[task->data[15]].data[0] = 16;
@@ -5034,12 +5034,12 @@ static void sub_8131564(struct Sprite *sprite)
 
     if (GetBattlerSide(gAnimBankTarget) == B_SIDE_PLAYER)
     {
-        sprite->subpriority = sub_8079E90(gAnimBankTarget) - 2;
+        sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) - 2;
         y2 = -144;
     }
     else
     {
-        sprite->subpriority = sub_8079E90(gAnimBankTarget) + 2;
+        sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) + 2;
         y2 = -96;
     }
 

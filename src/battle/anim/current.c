@@ -1298,7 +1298,7 @@ void sub_80D759C(u8 taskId)
         }
 
         task->data[13] = GetBattlerSpriteCoord(gAnimBankTarget, 2);
-        task->data[12] = sub_8079E90(gAnimBankTarget) - 2;
+        task->data[12] = GetBattlerSubpriority(gAnimBankTarget) - 2;
         task->data[0]++;
         break;
     case 1:

@@ -1219,7 +1219,7 @@ void sub_80DF1A4(u8 taskId)
     task->data[11] = (sub_807A100(gAnimBankAttacker, 1) / 2) + 8;
     task->data[7] = 0;
     task->data[5] = sub_8079ED4(gAnimBankAttacker);
-    task->data[6] = sub_8079E90(gAnimBankAttacker) - 2;
+    task->data[6] = GetBattlerSubpriority(gAnimBankAttacker) - 2;
     task->data[3] = 0;
     task->data[4] = 16;
     REG_BLDCNT = 0x3F40;

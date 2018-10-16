@@ -970,13 +970,13 @@ _81C85E9:
 _81C8611:
 	return
 _81C8612:
-	changebg 4
+	changebg BG_IMPACT_OPPONENT
 	goto _81C8611
 _81C8619:
-	changebg 5
+	changebg BG_IMPACT_PLAYER
 	goto _81C8611
 _81C8620:
-	changebg 6
+	changebg BG_IMPACT_CONTESTS
 	goto _81C8611
 
 Move_MEGA_KICK: @ 81C8627
@@ -1229,7 +1229,7 @@ Move_HIDDEN_POWER: @ 81C8BBC
 	createsprite gHiddenPowerOrbSpriteTemplate, 2, 26, 168
 	createsprite gHiddenPowerOrbSpriteTemplate, 2, 26, 210
 	delay 52
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	playsewithpan SE_W115, 192
 	createvisualtask AnimTask_ScaleMonAndRestore, 5, -7, -7, 11, ANIM_BANK_ATTACKER, 0
 	createsprite gHiddenPowerOrbScatterSpriteTemplate, 130, 0
@@ -2074,7 +2074,7 @@ Move_LOCK_ON: @ 81CA2E4
 	createsprite gBattleAnimSpriteTemplate_83D6DC4, 40, 3
 	createsprite gBattleAnimSpriteTemplate_83D6DC4, 40, 4
 	delay 120
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitforvisualfinish
 	end
 
@@ -2514,7 +2514,7 @@ _81CAC21:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81CAD6A:
@@ -2623,7 +2623,7 @@ Move_FISSURE: @ 81CAF7E
 	delay 40
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81CAFFF:
@@ -2650,7 +2650,7 @@ _81CB0AB:
 	loadspritegfx ANIM_TAG_DIRT_MOUND
 	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 0, 180
 	createsprite gDigDirtMoundSpriteTemplate, 1, 0, 1, 180
-	monbg_22 0
+	monbg_22 ANIM_BANK_ATTACKER
 	delay 1
 	createvisualtask sub_80E1244, 2, 0
 	delay 6
@@ -2660,7 +2660,7 @@ _81CB0AB:
 	call _81CB16A
 	call _81CB16A
 	waitforvisualfinish
-	clearmonbg_23 0
+	clearmonbg_23 ANIM_BANK_ATTACKER
 	delay 1
 	createvisualtask sub_80E1244, 2, 1
 	goto _81CB0AA
@@ -3139,7 +3139,7 @@ _81CB97E:
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81CB9E6:
@@ -3411,12 +3411,12 @@ _81CBE55:
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	clearmonbg ANIM_BANK_TARGET
 	blendoff
 	delay 1
-	setarg 7, 4096
+	setarg ARG_RET_ID, 4096
 	delay 1
 	end
 _81CBEF5:
@@ -3510,11 +3510,11 @@ Move_MEMENTO: @ 81CC0F2
 	delay 12
 	setalpha 0, 16
 	delay 1
-	monbg_22 1
+	monbg_22 ANIM_BANK_TARGET
 	createvisualtask sub_80E03BC, 5
 	playsewithpan SE_W060, 63
 	waitforvisualfinish
-	clearmonbg_23 1
+	clearmonbg_23 ANIM_BANK_TARGET
 	delay 1
 	blendoff
 	delay 1
@@ -4824,7 +4824,7 @@ Move_THUNDER: @ 81CDDCE
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 
@@ -5163,7 +5163,7 @@ Move_FAINT_ATTACK: @ 81CE6ED
 	createvisualtask sub_80DFC24, 2, 1
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATTACKER
-	invisible 0
+	invisible ANIM_BANK_ATTACKER
 	delay 1
 	createvisualtask sub_80E4300, 2
 	monbg ANIM_BANK_TARGET
@@ -5176,7 +5176,7 @@ Move_FAINT_ATTACK: @ 81CE6ED
 	clearmonbg ANIM_BANK_TARGET
 	blendoff
 	delay 1
-	setarg 7, 4096
+	setarg ARG_RET_ID, 4096
 	delay 32
 	createvisualtask sub_80DFDC0, 2
 	monbg ANIM_BANK_ATTACKER
@@ -5402,14 +5402,14 @@ Move_AURORA_BEAM: @ 81CEC91
 	fadetobg BG_AURORABEAM
 	waitbgfadein
 	playsewithpan SE_W062, 192
-	setarg 7, 0
+	setarg ARG_RET_ID, 0
 	createvisualtask AnimTask_RotateMonPalette1, 10, 130
 	call _81CED18
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 1, 0, 17, 1
 	call _81CED18
 	call _81CED18
 	call _81CED18
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	createsoundtask sub_812B058, 183, -64, 63, 3, 6, 0, 10
 	createvisualtask AnimTask_ShakeMon2, 5, 1, 2, 0, 40, 1
 	call _81CED18
@@ -5544,7 +5544,7 @@ _81CEFD0:
 	delay 20
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81CF00A:
@@ -6135,7 +6135,7 @@ _81CFDCF:
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81CFE83:
@@ -7572,19 +7572,19 @@ _81D1F5F:
 
 Move_MIMIC: @ 81D1FC9
 	loadspritegfx ANIM_TAG_ORBS
-	monbg_22 3
+	monbg_22 ANIM_BANK_DEF_PARTNER
 	setalpha 11, 5
 	panse_1B SE_W107, 63, 192, 253, 0
 	createvisualtask sub_80CB340, 5, 128, 24
 	delay 15
 	createsprite gBattleAnimSpriteTemplate_83D65E8, 130, -12, 24
 	delay 10
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitforvisualfinish
 	playsewithpan SE_W036, 192
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 11, 32767
 	waitforvisualfinish
-	clearmonbg_23 3
+	clearmonbg_23 ANIM_BANK_DEF_PARTNER
 	blendoff
 	end
 
@@ -7601,7 +7601,7 @@ Move_CONSTRICT: @ 81D2013
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 3, 0, 6, 1
 	delay 20
 	playsewithpan SE_W020, 63
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitforvisualfinish
 	end
 
@@ -7667,7 +7667,7 @@ Move_SOFT_BOILED: @ 81D213B
 	delay 8
 	createsprite gBattleAnimSpriteTemplate_83D7928, 3, 31, 16, 0, 1
 	delay 60
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATK_PARTNER
 	call Unknown_81D5F3E
@@ -9037,7 +9037,7 @@ Move_COSMIC_POWER: @ 81D43C5
 	waitforvisualfinish
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	waitforvisualfinish
 	end
@@ -9167,7 +9167,7 @@ _81D47BA:
 	restorebg
 	waitbgfadeout
 	createvisualtask sub_80E2A7C, 10, 1, 0, 4, 0, 0
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 _81D4974:
@@ -9217,7 +9217,7 @@ _81D4A09:
 	delay 12
 	call _81C9502
 	waitforvisualfinish
-	visible 0
+	visible ANIM_BANK_ATTACKER
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
 	end
@@ -9379,7 +9379,7 @@ Move_ASTONISH: @ 81D4F10
 Move_SEISMIC_TOSS: @ 81D4F58
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_ROCKS
-	setarg 7, 0
+	setarg ARG_RET_ID, 0
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
 	waitforvisualfinish
@@ -9398,7 +9398,7 @@ Move_SEISMIC_TOSS: @ 81D4F58
 _81D4FA0:
 	restorebg
 	waitbgfadeout
-	setarg 7, 4095
+	setarg ARG_RET_ID, 4095
 	waitbgfadein
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
@@ -9624,7 +9624,7 @@ Move_SKY_UPPERCUT: @ 81D53ED
 	blendoff
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	end
 
@@ -9725,7 +9725,7 @@ Move_MAGICAL_LEAF: @ 81D5699
 	createsprite gBasicHitSplatSpriteTemplate, 132, 10, 4, 1, 2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 2, 0, 8, 1
 	delay 20
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
@@ -10160,7 +10160,7 @@ Unknown_81D61E7: @ 81D61E7
 Unknown_81D61F3: @ 81D61F3
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	return
 
@@ -10181,7 +10181,7 @@ _81D6214:
 Unknown_81D622B: @ 81D622B
 	restorebg
 	waitbgfadeout
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	waitbgfadein
 	return
 
@@ -10366,7 +10366,7 @@ _81D64B5:
 	delay 3
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_TARGET, 2, 0, 8, 1
 	delay 20
-	setarg 7, -1
+	setarg ARG_RET_ID, -1
 	playsewithpan SE_W020, 63
 	waitforvisualfinish
 	end
@@ -10481,7 +10481,7 @@ General_SmokeballEscape: @ 81D6690
 	createsprite gBattleAnimSpriteTemplate_8402894, 118, 3, 0, 0, 46
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATTACKER
-	invisible 0
+	invisible ANIM_BANK_ATTACKER
 	delay 0
 	blendoff
 	end

@@ -232,7 +232,7 @@ void sub_80D3698(struct Sprite *sprite)
     sprite->pos1.y = GetBattlerSpriteCoord(gAnimBankAttacker, 1);
     sprite->pos2.y = -10;
 
-    subpriority = sub_8079E90(gAnimBankAttacker);
+    subpriority = GetBattlerSubpriority(gAnimBankAttacker);
 
     if (!IsContest())
     {

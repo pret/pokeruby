@@ -1174,7 +1174,7 @@ sub_80D4418: @ 80D4418
 	lsrs r6, r0, 24
 	movs r5, 0xAC
 	ldrb r0, [r4]
-	bl sub_8079E90
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -2445,7 +2445,7 @@ _080D4DF2:
 	strh r0, [r4, 0x30]
 	ldr r0, _080D4E3C @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl sub_8079E90
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43
@@ -2503,7 +2503,7 @@ _080D4E68:
 	strh r0, [r4, 0x30]
 	ldr r0, _080D4EB4 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl sub_8079E90
+	bl GetBattlerSubpriority
 	subs r0, 0x1
 	adds r1, r4, 0
 	adds r1, 0x43

@@ -172,11 +172,11 @@ static void sub_80CADA8(struct Sprite* sprite)
         sprite->pos2.y += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
         {
-            sprite->subpriority = sub_8079E90(gAnimBankAttacker) - 1;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) - 1;
         }
         else
         {
-            sprite->subpriority = sub_8079E90(gAnimBankAttacker) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) + 1;
         }
 
         sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
