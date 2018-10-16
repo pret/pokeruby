@@ -15,6 +15,7 @@
 #include "ewram.h"
 #include "graphics.h"
 #include "constants/battle_anim.h"
+#include "constants/songs.h"
 
 const struct OamData gOamData_837DF24 =
 {
@@ -2529,7 +2530,7 @@ s8 BattleAnimAdjustPanning(s8 a)
 {
     if (!IsContest() && (EWRAM_17810[gAnimBankAttacker].unk0 & 0x10))
     {
-        a = GetBattlerSide(gAnimBankAttacker) ? 0xC0 : 0x3F;
+        a = GetBattlerSide(gAnimBankAttacker) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
     }
     //_08076FDC
     else
@@ -2537,11 +2538,11 @@ s8 BattleAnimAdjustPanning(s8 a)
         if (IsContest())
         {
             if (gAnimBankAttacker == gAnimBankTarget && gAnimBankAttacker == 2
-             && a == 0x3F)
+             && a == SOUND_PAN_TARGET)
             {
                 //jump to _0807707A
-                if (a < -0x40)
-                    a = 0xC0;
+                if (a < SOUND_PAN_ATTACKER_NEG)
+                    a = SOUND_PAN_ATTACKER;
                 return a;
             }
         }
@@ -2698,9 +2699,9 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     if (!IsContest() && (EWRAM_17810[gAnimBankAttacker].unk0 & 0x10))
     {
         if (GetBattlerSide(gAnimBankAttacker) != 0)
-            pan = 0x3F;
+            pan = SOUND_PAN_TARGET;
         else
-            pan = 0xC0;
+            pan = SOUND_PAN_ATTACKER;
     }
     else
     {
@@ -2714,10 +2715,10 @@ s16 sub_8077104(s16 newPan, int oldPan)
 {
     s16 var = newPan;
 
-    if (var > 63)
-        var = 63;
-    else if (var < -64)
-        var = -64;
+    if (var > SOUND_PAN_TARGET)
+        var = SOUND_PAN_TARGET;
+    else if (var < SOUND_PAN_ATTACKER_NEG)
+        var = SOUND_PAN_ATTACKER_NEG;
     return var;
 }
 

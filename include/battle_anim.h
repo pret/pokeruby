@@ -2,6 +2,7 @@
 #define GUARD_BATTLEANIM_H
 
 #include "constants/battle_anim.h"
+#include "constants/songs.h"
 
 #include "sprite.h"
 

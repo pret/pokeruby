@@ -1258,7 +1258,7 @@ void sub_80DC700(struct Sprite *sprite)
     case 1:
         if (sprite->affineAnimEnded)
         {
-            PlaySE12WithPanning(SE_W100, BattleAnimAdjustPanning(-64));
+            PlaySE12WithPanning(SE_W100, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
             ChangeSpriteAffineAnim(sprite, 1);
             sprite->data[0]++;
         }

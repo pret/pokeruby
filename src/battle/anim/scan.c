@@ -80,7 +80,7 @@ static void sub_80CD408(struct Sprite* sprite)
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData(sprite, sub_80CD4B8);
         sprite->data[5] += 0x100;
-        PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0xD2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
         break;
     }
 
@@ -166,7 +166,7 @@ static void sub_80CD5A8(struct Sprite* sprite)
         sprite->data[2]++;
         pal = sprite->oam.paletteNum;
         LoadPalette(&gPlttBufferUnfaded[0x108 + pal * 16], pal * 16 | 0x101, 4);
-        PlaySE12WithPanning(0xC0, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0xC0, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
     else if (sprite->data[1] == 0)
     {

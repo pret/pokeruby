@@ -1,6 +1,21 @@
 #ifndef GUARD_CONSTANTS_SONGS_H
 #define GUARD_CONSTANTS_SONGS_H
 
+// stereo panning constants [0-255]
+//
+//          0
+//         .  .
+//      .        .
+// 192 .          . 63
+//     .          .
+//      .        .
+//         .  .
+//          127
+//        
+#define SOUND_PAN_TARGET        63
+#define SOUND_PAN_ATTACKER     192
+#define SOUND_PAN_ATTACKER_NEG -64
+
 #define SE_STOP 0
 #define SE_KAIFUKU 1            // Healing Item
 #define SE_PC_LOGON 2           // PC Logon

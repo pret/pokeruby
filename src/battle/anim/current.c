@@ -1175,7 +1175,7 @@ void sub_80D72DC(u8 taskId)
         task->data[5] = -1;
         task->data[11] = 12;
         task->data[12] = BattleAnimAdjustPanning(task->data[11] - 76);
-        task->data[13] = BattleAnimAdjustPanning(63);
+        task->data[13] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
         task->data[14] = task->data[12];
         task->data[15] = (task->data[13] - task->data[12]) / 3;
         task->data[0]++;
