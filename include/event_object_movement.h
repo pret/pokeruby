@@ -359,7 +359,7 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
 u8 sub_805B410(u8, u8, s16, s16, u8, u8);
 void TrySpawnEventObjects(s16, s16);
 void sub_805B710(u16 i, u16 i1);
-void sub_805B980(struct EventObject *, u8);
+void EventObjectSetGraphicsId(struct EventObject *, u8);
 void EventObjectTurn(struct EventObject *, u8);
 void EventObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct EventObjectGraphicsInfo *GetEventObjectGraphicsInfo(u8);

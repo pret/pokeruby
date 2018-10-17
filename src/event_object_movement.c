@@ -1594,7 +1594,7 @@ void SetPlayerAvatarEventObjectIdAndObjectId(u8 eventObjectId, u8 spriteId)
     SetPlayerAvatarExtraStateTransition(gEventObjects[eventObjectId].graphicsId, 0x20);
 }
 
-void sub_805B980(struct EventObject *eventObject, u8 graphicsId)
+void EventObjectSetGraphicsId(struct EventObject *eventObject, u8 graphicsId)
 {
     const struct EventObjectGraphicsInfo *gfxInfo;
     struct Sprite *sprite;
@@ -1627,7 +1627,7 @@ void unref_sub_805BA80(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
     u8 eventObjectId;
 
     if (!TryGetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &eventObjectId))
-        sub_805B980(&gEventObjects[eventObjectId], graphicsId);
+        EventObjectSetGraphicsId(&gEventObjects[eventObjectId], graphicsId);
 }
 
 void EventObjectTurn(struct EventObject *eventObject, u8 direction)
@@ -1669,7 +1669,7 @@ void get_berry_tree_graphics(struct EventObject *eventObject, struct Sprite *spr
         treeStage--;
         if (treeId > 0x2B)
             treeId = 0;
-        sub_805B980(eventObject, gBerryTreeGraphicsIdTablePointers[treeId][treeStage]);
+        EventObjectSetGraphicsId(eventObject, gBerryTreeGraphicsIdTablePointers[treeId][treeStage]);
         sprite->images = gBerryTreePicTablePointers[treeId];
         sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[treeId][treeStage];
         StartSpriteAnim(sprite, treeStage);
@@ -1910,7 +1910,7 @@ void UpdateEventObjectCoordsForCameraUpdate(void)
     s16 deltaX;
     s16 deltaY;
 
-    if (gCamera.field_0)
+    if (gCamera.active)
     {
         deltaX = gCamera.x;
         deltaY = gCamera.y;

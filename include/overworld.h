@@ -31,7 +31,6 @@ extern u8 gUnknown_03004860;
 void Overworld_ResetStateAfterFly(void);
 void Overworld_ResetStateAfterTeleport(void);
 void Overworld_ResetStateAfterDigEscRope(void);
-void Overworld_ResetStateAfterWhiteOut(void);
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
@@ -98,7 +97,6 @@ bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 // PlayAmbientCry
 void UpdateAmbientCry(s16 *, u16 *);
-void ChooseAmbientCrySpecies(void);
 u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 // GetMapTypeByWarpData
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
@@ -135,8 +133,6 @@ void sub_80546F0(void);
 // sub_805470C
 void CB2_ContinueSavedGame(void);
 void FieldClearVBlankHBlankCallbacks(void);
-void SetFieldVBlankCallback(void);
-void VBlankCB_Field(void);
 bool32 sub_805493C(u8 *, u32);
 bool32 sub_8054A4C(u8 *);
 bool32 sub_8054A9C(u8 *a1);
@@ -199,8 +195,6 @@ u32 sub_8055940(void);
 // ClearLinkPlayerEventObject
 void ClearLinkPlayerEventObjects(void);
 // ZeroEventObject
-void SpawnLinkPlayerEventObject(u8, s16, s16, u8);
-void InitLinkPlayerEventObjectPos(struct EventObject *, s16, s16);
 // unref_sub_8055A6C
 // unref_sub_8055A9C
 u8 sub_8055AE8(u8);
@@ -208,7 +202,6 @@ void sub_8055B08(u8, u16 *, u16 *);
 u8 sub_8055B30(u8);
 u8 sub_8055B50(u8);
 // unref_sub_8055B74
-u8 GetLinkPlayerIdAt(s16, s16);
 void sub_8055BFC(u8, u8);
 // sub_8055C68
 // sub_8055C88
@@ -218,10 +211,6 @@ void sub_8055BFC(u8, u8);
 // sub_8055D18
 // sub_8055D30
 // sub_8055D38
-u8 npc_something3(u8, u8);
-u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
-void CreateLinkPlayerSprite(u8);
-void SpriteCB_LinkPlayer(struct Sprite *);
 void sub_805465C(void);
 
 void CB2_InitTestMenu(void);

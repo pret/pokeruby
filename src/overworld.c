@@ -107,7 +107,18 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState*, u1
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState*, u8, u16, u8);
 static bool32 sub_805483C(u8*);
 static void c2_80567AC(void);
+static void Overworld_ResetStateAfterWhiteOut(void);
 static void InitOverworldGraphicsRegisters(void);
+static void ChooseAmbientCrySpecies(void);
+static void SetFieldVBlankCallback(void);
+static void VBlankCB_Field(void);
+static void SpawnLinkPlayerEventObject(u8, s16, s16, u8);
+static void InitLinkPlayerEventObjectPos(struct EventObject *, s16, s16);
+static u8 GetLinkPlayerIdAt(s16, s16);
+static u8 npc_something3(u8, u8);
+static u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
+static void CreateLinkPlayerSprite(u8);
+static void SpriteCB_LinkPlayer(struct Sprite *);
 
 static const struct WarpData sDummyWarpData =
 {
@@ -232,7 +243,7 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_FLASH);
 }
 
-void Overworld_ResetStateAfterWhiteOut(void)
+static void Overworld_ResetStateAfterWhiteOut(void)
 {
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_CYCLING_ROAD);
@@ -541,11 +552,11 @@ void gpu_sync_bg_hide()
     gSaveBlock1.warp1 = gSaveBlock1.warp2;
 }
 
-struct MapConnection *GetMapConnection(u8 dir)
+const struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
     s32 count = gMapHeader.connections->count;
-    struct MapConnection *connection = gMapHeader.connections->connections;
+    const struct MapConnection *connection = gMapHeader.connections->connections;
 
     if (connection == NULL)
         return NULL;
@@ -559,7 +570,8 @@ struct MapConnection *GetMapConnection(u8 dir)
 
 static bool8 SetDiveWarp(u8 direction, u16 x, u16 y)
 {
-    struct MapConnection *connection = GetMapConnection(direction);
+    const struct MapConnection *connection = GetMapConnection(direction);
+
     if (connection != NULL)
     {
         Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
@@ -947,7 +959,7 @@ void Overworld_ChangeMusicTo(u16 newMusic)
 
 u8 GetMapMusicFadeoutSpeed(void)
 {
-    struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
+    const struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
     if (Overworld_MapTypeIsIndoors(mapHeader->mapType) == TRUE)
         return 2;
     else
@@ -1020,7 +1032,7 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
     }
 }
 
-void ChooseAmbientCrySpecies(void)
+static void ChooseAmbientCrySpecies(void)
 {
     if ((gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE130)
      && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE130))
@@ -1490,12 +1502,12 @@ void FieldClearVBlankHBlankCallbacks(void)
     SetHBlankCallback(NULL);
 }
 
-void SetFieldVBlankCallback(void)
+static void SetFieldVBlankCallback(void)
 {
     SetVBlankCallback(VBlankCB_Field);
 }
 
-void VBlankCB_Field(void)
+static void VBlankCB_Field(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -2486,7 +2498,7 @@ static void ClearEventObject(struct EventObject *eventObj)
     memset(eventObj, 0, sizeof(struct EventObject));
 }
 
-void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 {
     u8 eventObjId = GetFirstInactiveEventObjectId();
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
@@ -2508,7 +2520,7 @@ void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
     InitLinkPlayerEventObjectPos(eventObj, x, y);
 }
 
-void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y)
+static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y)
 {
     eventObj->currentCoords.x = x;
     eventObj->currentCoords.y = y;
@@ -2576,7 +2588,7 @@ s32 unref_sub_8055B74(u8 linkPlayerId)
     return 16 - (s8)eventObj->directionSequenceIndex;
 }
 
-u8 GetLinkPlayerIdAt(s16 x, s16 y)
+static u8 GetLinkPlayerIdAt(s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 4; i++)
@@ -2670,7 +2682,7 @@ static void sub_8055D38(struct LinkPlayerEventObject *linkPlayerEventObj, struct
     }
 }
 
-u8 npc_something3(u8 a1, u8 a2)
+static u8 npc_something3(u8 a1, u8 a2)
 {
     switch (a1 - 1)
     {
@@ -2690,7 +2702,7 @@ u8 npc_something3(u8 a1, u8 a2)
     return a2;
 }
 
-u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
+static u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 16; i++)
@@ -2707,7 +2719,7 @@ u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
     return MapGridIsImpassableAt(x, y);
 }
 
-void CreateLinkPlayerSprite(u8 linkPlayerId)
+static void CreateLinkPlayerSprite(u8 linkPlayerId)
 {
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
     u8 eventObjId = linkPlayerEventObj->eventObjId;
@@ -2725,7 +2737,7 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
     }
 }
 
-void SpriteCB_LinkPlayer(struct Sprite *sprite)
+static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[sprite->data[0]];
     struct EventObject *eventObj = &gEventObjects[linkPlayerEventObj->eventObjId];
