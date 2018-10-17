@@ -1178,7 +1178,7 @@ static void Task_ExitBuyMenuDoFade(u8 taskId)
     {
         CloseMoneyWindow(0, 0);
         BuyMenuFreeMemory();
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }

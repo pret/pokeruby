@@ -556,7 +556,7 @@ static void MoveTutorMain(void)
         break;
     case 15:
         if (!gPaletteFade.active)
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
         break;
     case 28:
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB(0, 0, 0));

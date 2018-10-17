@@ -1076,7 +1076,7 @@ void c3_080843F8(u8);
 
 void sub_80865BC(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
     gFieldCallback = mapldr_080842E8;
 }
 

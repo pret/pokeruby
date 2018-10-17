@@ -627,7 +627,7 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = sub_8080E44;
     }
 }

@@ -113,8 +113,7 @@ bool32 is_c1_link_related_active(void);
 // c1_overworld
 // OverworldBasic
 void CB2_OverworldBasic(void);
-void c2_overworld(void);
-// set_callback1
+// SetMainCallback1
 // sub_80543DC
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
@@ -122,9 +121,9 @@ void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
 void sub_8054534(void);
 void sub_8054588(void);
-void c2_exit_to_overworld_2_switch(void);
-void c2_exit_to_overworld_2_local(void);
-void c2_exit_to_overworld_2_link(void);
+void CB2_ReturnToField(void);
+void CB2_ReturnToFieldLocal(void);
+void CB2_ReturnToFieldLink(void);
 // sub_805465C
 void c2_exit_to_overworld_1_sub_8080DEC(void);
 // sub_80546B8

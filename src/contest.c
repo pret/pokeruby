@@ -2056,7 +2056,7 @@ void sub_80ADFD8(u8 taskId)
     {
         DestroyTask(taskId);
         gFieldCallback = sub_80AE010;
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
     }
 }
 

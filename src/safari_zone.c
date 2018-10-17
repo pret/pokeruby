@@ -97,7 +97,7 @@ void sub_80C824C(void)
 {
     if (gNumSafariBalls != 0)
     {
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
     }
     else if (gBattleOutcome == 8)
     {

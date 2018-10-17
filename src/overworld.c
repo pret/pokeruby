@@ -103,6 +103,7 @@ extern void (*gFieldCallback)(void);
 u8 gUnknown_03004860;
 u8 gFieldLinkPlayerCount;
 
+static void CB2_Overworld(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState*, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState*, u8, u16, u8);
 static bool32 sub_805483C(u8*);
@@ -1191,7 +1192,7 @@ bool32 is_c1_link_related_active(void)
         return FALSE;
 }
 
-void c1_overworld_normal(u16 newKeys, u16 heldKeys)
+static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 {
     struct FieldInput fieldInput;
 
@@ -1212,13 +1213,13 @@ void c1_overworld_normal(u16 newKeys, u16 heldKeys)
     }
 }
 
-void c1_overworld(void)
+static void CB1_Overworld(void)
 {
-    if (gMain.callback2 == c2_overworld)
-        c1_overworld_normal(gMain.newKeys, gMain.heldKeys);
+    if (gMain.callback2 == CB2_Overworld)
+        DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
 }
 
-void OverworldBasic(void)
+static void OverworldBasic(void)
 {
     ScriptContext2_RunScript();
     RunTasks();
@@ -1236,7 +1237,7 @@ void CB2_OverworldBasic(void)
     OverworldBasic();
 }
 
-void c2_overworld(void)
+static void CB2_Overworld(void)
 {
     int fading = (gPaletteFade.active != 0);
     if (fading)
@@ -1246,7 +1247,7 @@ void c2_overworld(void)
         SetFieldVBlankCallback();
 }
 
-void set_callback1(MainCallback cb)
+void SetMainCallback1(MainCallback cb)
 {
     gMain.callback1 = cb;
 }
@@ -1278,8 +1279,8 @@ void CB2_NewGame(void)
     gFieldCallback = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 #if DEBUG
@@ -1301,8 +1302,8 @@ void debug_sub_8058C00(void)
 
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 #endif
@@ -1324,8 +1325,8 @@ void CB2_WhiteOut(void)
         val = 0;
         do_load_map_stuff_loop(&val);
         SetFieldVBlankCallback();
-        set_callback1(c1_overworld);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
@@ -1334,7 +1335,7 @@ void CB2_LoadMap(void)
     FieldClearVBlankHBlankCallbacks();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    set_callback1(NULL);
+    SetMainCallback1(NULL);
     SetMainCallback2(sub_810CC80);
     gMain.savedCallback = CB2_LoadMap2;
 }
@@ -1343,8 +1344,8 @@ void CB2_LoadMap2(void)
 {
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 void sub_8054534(void)
@@ -1354,13 +1355,13 @@ void sub_8054534(void)
         FieldClearVBlankHBlankCallbacks();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        set_callback1(NULL);
+        SetMainCallback1(NULL);
     }
     if (sub_805493C(&gMain.state, 1))
     {
         SetFieldVBlankCallback();
-        set_callback1(c1_overworld);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
@@ -1376,38 +1377,38 @@ static void c2_80567AC(void)
     if (sub_805483C(&gMain.state))
     {
         SetFieldVBlankCallback();
-        set_callback1(sub_8055354);
+        SetMainCallback1(sub_8055354);
         sub_80543DC(sub_8055390);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
-void c2_exit_to_overworld_2_switch(void)
+void CB2_ReturnToField(void)
 {
     if (is_c1_link_related_active() == TRUE)
     {
-        SetMainCallback2(c2_exit_to_overworld_2_link);
+        SetMainCallback2(CB2_ReturnToFieldLink);
     }
     else
     {
         FieldClearVBlankHBlankCallbacks();
-        SetMainCallback2(c2_exit_to_overworld_2_local);
+        SetMainCallback2(CB2_ReturnToFieldLocal);
     }
 }
 
-void c2_exit_to_overworld_2_local(void)
+void CB2_ReturnToFieldLocal(void)
 {
     if (sub_8054A4C(&gMain.state))
     {
         SetFieldVBlankCallback();
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
-void c2_exit_to_overworld_2_link(void)
+void CB2_ReturnToFieldLink(void)
 {
     if (!sub_8055870() && sub_8054A9C(&gMain.state))
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
 }
 
 void sub_805465C(void)
@@ -1415,40 +1416,40 @@ void sub_805465C(void)
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     sub_8054F70();
-    set_callback1(sub_8055354);
+    SetMainCallback1(sub_8055354);
     sub_80543DC(sub_8055390);
     gFieldCallback = sub_8080A3C;
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void c2_exit_to_overworld_1_sub_8080DEC(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080DEC;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_80546B8(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_80809B0;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080990;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_80546F0(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080B60;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_805470C(void)
@@ -1486,8 +1487,8 @@ void CB2_ContinueSavedGame(void)
     else
     {
         gFieldCallback = sub_805470C;
-        set_callback1(c1_overworld);
-        c2_exit_to_overworld_2_switch();
+        SetMainCallback1(CB1_Overworld);
+        CB2_ReturnToField();
     }
 }
 

@@ -73,7 +73,7 @@ void ScrSpecial_ShowDiploma(void)
 
 void ScrSpecial_ViewWallClock(void)
 {
-    gMain.savedCallback = c2_exit_to_overworld_2_switch;
+    gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
     ScriptContext2_Enable();
 }

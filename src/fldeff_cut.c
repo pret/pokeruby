@@ -1,4 +1,3 @@
-
 #include "global.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -27,7 +26,18 @@ extern u8 gLastFieldPokeMenuOpened;
 
 extern const u8 DoCutFieldEffectScript[];
 
-const struct OamData gOamData_CutGrass =
+// this file's functions
+static void FieldCallback_CutTree(void);
+static void FieldCallback_CutGrass(void);
+static void StartCutTreeFieldEffect(void);
+static void StartCutGrassFieldEffect(void);
+static void SetCutGrassMetatile(s16, s16);
+static void SetCutGrassMetatiles(s16, s16);
+static void CutGrassSpriteCallback1(struct Sprite *);
+static void CutGrassSpriteCallback2(struct Sprite *);
+static void CutGrassSpriteCallbackEnd(struct Sprite *);
+
+static const struct OamData gOamData_CutGrass =
 {
     .y = 0,
     .affineMode = 0,
@@ -44,15 +54,15 @@ const struct OamData gOamData_CutGrass =
     .affineParam = 0,
 };
 
-const union AnimCmd gSpriteAnim_CutGrass[] =
+static const union AnimCmd sSpriteAnim_CutGrass[] =
 {
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_JUMP(0),
 };
 
-const union AnimCmd *const gSpriteAnimTable_CutGrass[] =
+static const union AnimCmd *const sSpriteAnimTable_CutGrass[] =
 {
-    gSpriteAnim_CutGrass,
+    sSpriteAnim_CutGrass,
 };
 
 const struct SpriteFrameImage gSpriteImageTable_CutGrass[] =
@@ -62,23 +72,12 @@ const struct SpriteFrameImage gSpriteImageTable_CutGrass[] =
 
 const struct SpritePalette gFieldEffectObjectPaletteInfo6 = {gFieldEffectObjectPalette6, 0x1000};
 
-static void FieldCallback_CutTree(void);
-static void FieldCallback_CutGrass(void);
-static void StartCutTreeFieldEffect(void);
-static void StartCutGrassFieldEffect(void);
-static void SetCutGrassMetatile(s16, s16);
-static void SetCutGrassMetatiles(s16, s16);
-static void CutGrassSpriteCallback1(struct Sprite *);
-static void CutGrassSpriteCallback2(struct Sprite *);
-static void CutGrassSpriteCallbackEnd(struct Sprite *);
-
-
-static const struct SpriteTemplate gSpriteTemplate_CutGrass =
+static const struct SpriteTemplate sSpriteTemplate_CutGrass =
 {
     .tileTag = 0xFFFF,
     .paletteTag = 0x1000,
     .oam = &gOamData_CutGrass,
-    .anims = gSpriteAnimTable_CutGrass,
+    .anims = sSpriteAnimTable_CutGrass,
     .images = gSpriteImageTable_CutGrass,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = CutGrassSpriteCallback1,
@@ -92,7 +91,7 @@ void Debug_SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 metatileBehavior;
 
-    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         FieldCallback_CutTree();
@@ -131,7 +130,7 @@ bool8 SetUpFieldMove_Cut(void)
     u8 i, j;
     u8 tileBehavior;
 
-    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_CUTTABLE_TREE) == TRUE)
     {
         // Standing in front of cuttable tree.
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
@@ -147,7 +146,7 @@ bool8 SetUpFieldMove_Cut(void)
             for (j = 0; j < 3; j++)
             {
                 x = j - 1 + gPlayerFacingPosition.x;
-                if(MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
+                if (MapGridGetZCoordAt(x, y) == gPlayerFacingPosition.height)
                 {
                     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
                     if(MetatileBehavior_IsPokeGrass(tileBehavior) == TRUE
@@ -209,9 +208,11 @@ bool8 FldEff_CutGrass(void)
 {
     s16 x, y;
     u8 tileBehavior;
-    u8 i, j;
+    u8 i = 0, j;
 
-    for (i = 0, PlaySE(SE_W015), PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y); i < 3; i++)
+    PlaySE(SE_W015);
+    PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    for (i = 0; i < 3; i++)
     {
         y = i - 1 + gPlayerFacingPosition.y;
         for (j = 0; j < 3; j++)
@@ -235,7 +236,7 @@ bool8 FldEff_CutGrass(void)
     // populate sprite ID array
     for (i = 0; i < 8; i++)
     {
-        eCutGrassSpriteArray[i] = CreateSprite((struct SpriteTemplate *)&gSpriteTemplate_CutGrass,
+        eCutGrassSpriteArray[i] = CreateSprite(&sSpriteTemplate_CutGrass,
         gSprites[gPlayerAvatar.spriteId].oam.x + 8, gSprites[gPlayerAvatar.spriteId].oam.y + 20, 0);
         gSprites[eCutGrassSpriteArray[i]].data[2] = 32 * i;
     }

@@ -473,7 +473,7 @@ static void CB2_EggHatch_0(void)
 static void EggHatchSetMonNickname(void)
 {
     SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 static void Task_EggHatchPlayBGM(u8 taskID)
@@ -576,7 +576,7 @@ static void CB2_EggHatch_1(void)
         break;
     case 11:
         if (!gPaletteFade.active)
-            SetMainCallback2(c2_exit_to_overworld_2_switch);
+            SetMainCallback2(CB2_ReturnToField);
         break;
     }
     RunTasks();

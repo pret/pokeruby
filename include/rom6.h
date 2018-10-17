@@ -3,7 +3,7 @@
 
 extern struct MapPosition gPlayerFacingPosition;
 
-bool8 SetLastTalkedObjectInFrontOfPlayer(u8);
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId);
 u8 oei_task_add(void);
 void debug_sub_8120968(void);
 

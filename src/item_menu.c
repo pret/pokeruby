@@ -2791,8 +2791,8 @@ void ItemMenu_LoadSellMenu(void)
 static void OnBagClose_Shop(u8 taskId)
 {
     gFieldCallback = Shop_FadeReturnToMartMenu;
-    gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
-    gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
+    gTasks[taskId].data[8] = (u32)CB2_ReturnToField >> 16;
+    gTasks[taskId].data[9] = (u32)CB2_ReturnToField;
     sub_80A5AE4(taskId);
 }
 
@@ -3036,8 +3036,8 @@ void sub_80A6A30(void)
 static void OnBagClose_PC(u8 taskId)
 {
     gFieldCallback = ItemStorage_ReturnToMenuAfterDeposit;
-    gTasks[taskId].data[8] = (u32)c2_exit_to_overworld_2_switch >> 16;
-    gTasks[taskId].data[9] = (u32)c2_exit_to_overworld_2_switch;
+    gTasks[taskId].data[8] = (u32)CB2_ReturnToField >> 16;
+    gTasks[taskId].data[9] = (u32)CB2_ReturnToField;
     sub_80A5AE4(taskId);
 }
 
