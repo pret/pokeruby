@@ -45,8 +45,8 @@ const union AnimCmd *const gSpriteAnimTable_83D95E0[] =
 
 const struct SpriteTemplate gEmberSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -56,8 +56,8 @@ const struct SpriteTemplate gEmberSpriteTemplate =
 
 const struct SpriteTemplate gEmberFlareSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -67,8 +67,8 @@ const struct SpriteTemplate gEmberFlareSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9614 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -78,8 +78,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9614 =
 
 const struct SpriteTemplate gFireRingSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -119,8 +119,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9674[] =
 
 const struct SpriteTemplate gFireCrossSpriteTemplate =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D9650,
     .images = NULL,
@@ -130,8 +130,8 @@ const struct SpriteTemplate gFireCrossSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9694 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -141,8 +141,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9694 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96AC =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -153,8 +153,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96AC =
 
 const struct SpriteTemplate gSpriteTemplate_83D96C4 =
 {
-    .tileTag = 10201,
-    .paletteTag = 10201,
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -175,8 +175,8 @@ const s16 gHeatedRockCoords[][2] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D96F8 =
 {
-    .tileTag = 10201,
-    .paletteTag = 10201,
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

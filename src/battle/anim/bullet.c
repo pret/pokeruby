@@ -29,8 +29,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7624[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7628 =
 {
-    .tileTag = 10006,
-    .paletteTag = 10006,
+    .tileTag = ANIM_TAG_SEED,
+    .paletteTag = ANIM_TAG_SEED,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -54,7 +54,7 @@ static void sub_80D0030(struct Sprite* sprite)
     int i;
     u16 rand;
     s16* ptr;
-    PlaySE12WithPanning(0xA6, BattleAnimAdjustPanning(0x3F));
+    PlaySE12WithPanning(0xA6, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     sprite->pos1.x += sprite->pos2.x;
     sprite->pos1.y += sprite->pos2.y;
     sprite->pos2.y = 0;

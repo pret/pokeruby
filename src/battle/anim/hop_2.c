@@ -22,8 +22,8 @@ static void sub_80CBB60(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D677C =
 {
-    .tileTag = 10224,
-    .paletteTag = 10224,
+    .tileTag = ANIM_TAG_ITEM_BAG,
+    .paletteTag = ANIM_TAG_ITEM_BAG,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83D66B8,
     .images = NULL,
@@ -71,7 +71,7 @@ static void sub_80CBB60(struct Sprite* sprite)
     sprite->pos2.y = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->pos2.y == 0)
     {
-        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(0x3F));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
     }
 
     if (sub_80CB814(sprite))
@@ -79,6 +79,6 @@ static void sub_80CBB60(struct Sprite* sprite)
         sprite->pos2.y = 0;
         sprite->data[0] = 0;
         sprite->callback = sub_80CB8B8;
-        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(-0x40));
+        PlaySE12WithPanning(0x7D, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG));
     }
 }

@@ -21,8 +21,8 @@ static void sub_80D0E8C(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D77E0 =
 {
-    .tileTag = 10002,
-    .paletteTag = 10002,
+    .tileTag = ANIM_TAG_PENCIL,
+    .paletteTag = ANIM_TAG_PENCIL,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -128,7 +128,7 @@ void sub_80D0E30(struct Sprite* sprite)
     sprite->data[3] = 16;
     sprite->data[4] = 0;
     sprite->data[5] = sub_807A100(gAnimBankTarget, 0) + 2;
-    sprite->data[6] = BattleAnimAdjustPanning(0x3F);
+    sprite->data[6] = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
     sprite->callback = sub_80D0E8C;
 }
 

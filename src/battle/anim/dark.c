@@ -46,8 +46,8 @@ static void sub_80E0CD0(u8 taskId);
 
 const struct SpriteTemplate gSpriteTemplate_83DB118 =
 {
-    .tileTag = 10015,
-    .paletteTag = 10015,
+    .tileTag = ANIM_TAG_TIED_BAG,
+    .paletteTag = ANIM_TAG_TIED_BAG,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -117,8 +117,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB1B0[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB1D0 =
 {
-    .tileTag = 10139,
-    .paletteTag = 10139,
+    .tileTag = ANIM_TAG_SHARP_TEETH,
+    .paletteTag = ANIM_TAG_SHARP_TEETH,
     .oam = &gOamData_837E0BC,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -128,8 +128,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB1D0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB1E8 =
 {
-    .tileTag = 10145,
-    .paletteTag = 10145,
+    .tileTag = ANIM_TAG_CLAMP,
+    .paletteTag = ANIM_TAG_CLAMP,
     .oam = &gOamData_837E0BC,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -159,8 +159,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB230[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB238 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -196,8 +196,8 @@ const union AnimCmd *const gSpriteAnimTable_83DB280[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB288 =
 {
-    .tileTag = 10039,
-    .paletteTag = 10039,
+    .tileTag = ANIM_TAG_CLAW_SLASH,
+    .paletteTag = ANIM_TAG_CLAW_SLASH,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DB280,
     .images = NULL,

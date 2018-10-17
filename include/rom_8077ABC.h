@@ -62,8 +62,8 @@ void *sub_8079BFC(s16 bottom, s16 top);
 // u8 a2 := u8 sprite
 void sub_8079C08(struct Task *task, u8 a2, s16 a3, s16 a4, s16 a5, s16 a6, u16 a7);
 u8 sub_8079C74(struct Task *task);
-void sub_8079E24();
-u8 sub_8079E90(u8 slot);
+void UpdateBattlerSpritePriorities();
+u8 GetBattlerSubpriority(u8 bank);
 u8 GetBattlerPosition_permutated(u8 slot);
 void sub_807A784(u8 taskId);
 void sub_807A850(struct Task *task, u8 taskId);

@@ -27,7 +27,7 @@ void sub_80D0488(u8 taskId)
     task->data[4] = 0x100;
     task->data[5] = 0;
     task->data[6] = 0;
-    task->data[7] = sub_8079E90(gAnimBankAttacker);
+    task->data[7] = GetBattlerSubpriority(gAnimBankAttacker);
     task->func = sub_80D04E0;
 }
 

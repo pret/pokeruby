@@ -2495,7 +2495,7 @@ u8 sub_80AE9FC(u16 species, u32 otId, u32 personality)
     spriteId = CreateSprite(&gUnknown_02024E8C, 112, sub_8077E44(2, species, 0), 30);
     gSprites[spriteId].oam.paletteNum = 2;
     gSprites[spriteId].oam.priority = 2;
-    gSprites[spriteId].subpriority = sub_8079E90(2);
+    gSprites[spriteId].subpriority = GetBattlerSubpriority(2);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].data[0] = gSprites[spriteId].oam.paletteNum;
     gSprites[spriteId].data[2] = species;
