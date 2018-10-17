@@ -1,17 +1,17 @@
 #include "global.h"
-#include "event_object_movement.h"
 #include "berry.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
 #include "palette.h"
 #include "random.h"
-#include "overworld.h"
 #include "sprite.h"
-#include "metatile_behavior.h"
 #include "trainer_see.h"
 #include "constants/field_effects.h"
 #include "constants/maps.h"
@@ -62,6 +62,14 @@ static struct EventObjectTemplate *FindEventObjectTemplateByLocalId(u8, struct E
 static void UpdateEventObjectSpriteSubpriorityAndVisibility(struct Sprite *);
 static void InitObjectPriorityByZCoord(struct Sprite *sprite, u8 z);
 static void CreateReflectionEffectSprites(void);
+static u8 GetEventObjectIdByLocalIdAndMapInternal(u8, u8, u8);
+static u8 GetEventObjectIdByLocalId(u8);
+static void RemoveEventObjectInternal(struct EventObject *);
+static void MakeObjectTemplateFromEventObjectTemplate(struct EventObjectTemplate *eventObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables);
+static void RemoveEventObjectIfOutsideView(struct EventObject *eventObject);
+
+extern void SetPlayerAvatarEventObjectIdAndObjectId(u8, u8);
+extern void sub_805B914(struct EventObject *);
 
 const u8 gReflectionEffectPaletteMap[] = {1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0};
 
@@ -988,7 +996,7 @@ static void ClearAllEventObjects(void)
 {
     u8 i;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
         ClearEventObject(&gEventObjects[i]);
 #if DEBUG
     gUnknown_Debug_03004BC0 = 0;
@@ -1014,19 +1022,19 @@ static void CreateReflectionEffectSprites(void)
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 0);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
 
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 0x1F);
     gSprites[spriteId].oam.affineMode = 1;
     InitSpriteAffineAnim(&gSprites[spriteId]);
     StartSpriteAffineAnim(&gSprites[spriteId], 1);
-    gSprites[spriteId].invisible = 1;
+    gSprites[spriteId].invisible = TRUE;
 }
 
 u8 GetFirstInactiveEventObjectId(void)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (!gEventObjects[i].active)
             break;
@@ -1037,7 +1045,7 @@ u8 GetFirstInactiveEventObjectId(void)
 
 u8 GetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    if (localId < 255)
+    if (localId < 0xFF)
         return GetEventObjectIdByLocalIdAndMapInternal(localId, mapNum, mapGroup);
     else
         return GetEventObjectIdByLocalId(localId);
@@ -1046,7 +1054,7 @@ u8 GetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 bool8 TryGetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 *eventObjectId)
 {
     *eventObjectId = GetEventObjectIdByLocalIdAndMap(localId, mapNum, mapGroup);
-    if (*eventObjectId == 16)
+    if (*eventObjectId == EVENT_OBJECTS_COUNT)
         return TRUE;
     else
         return FALSE;
@@ -1055,7 +1063,7 @@ bool8 TryGetEventObjectIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 
 u8 GetEventObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].currentCoords.x == x && gEventObjects[i].currentCoords.y == y)
             break;
@@ -1064,31 +1072,31 @@ u8 GetEventObjectIdByXY(s16 x, s16 y)
     return i;
 }
 
-u8 GetEventObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroup)
+static u8 GetEventObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapNum, u8 mapGroup)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroup)
             return i;
     }
 
-    return 16;
+    return EVENT_OBJECTS_COUNT;
 }
 
-u8 GetEventObjectIdByLocalId(u8 localId)
+static u8 GetEventObjectIdByLocalId(u8 localId)
 {
     u8 i;
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].localId == localId)
             return i;
     }
 
-    return 16;
+    return EVENT_OBJECTS_COUNT;
 }
 
-u8 TryInitEventObjectStateFromTemplate(struct EventObjectTemplate *template, u8 mapNum, u8 mapGroup)
+static u8 TryInitEventObjectStateFromTemplate(struct EventObjectTemplate *template, u8 mapNum, u8 mapGroup)
 {
     struct EventObject *eventObj;
     u8 eventObjectId;
@@ -1165,23 +1173,23 @@ u8 GetAvailableEventObjectId(u16 localId, u8 mapNum, u8 mapGroup, u8 *eventObjec
 {
     u8 i = 0;
 
-    for (i = 0; i < 16 && gEventObjects[i].active; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT && gEventObjects[i].active; i++)
     {
         if (gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroup)
-            return 1;
+            return TRUE;
     }
-    if (i >= 16)
-        return 1;
+    if (i >= EVENT_OBJECTS_COUNT)
+        return TRUE;
     *eventObjectId = i;
-    for (; i < 16; i++)
+    for (; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active && gEventObjects[i].localId == localId && gEventObjects[i].mapNum == mapNum && gEventObjects[i].mapGroup == mapGroup)
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
-void RemoveEventObject(struct EventObject *eventObject)
+static void RemoveEventObject(struct EventObject *eventObject)
 {
     eventObject->active = FALSE;
     RemoveEventObjectInternal(eventObject);
@@ -1200,7 +1208,7 @@ void RemoveEventObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
     }
 }
 
-void RemoveEventObjectInternal(struct EventObject *eventObject)
+static void RemoveEventObjectInternal(struct EventObject *eventObject)
 {
     struct SpriteFrameImage image;
     image.size = GetEventObjectGraphicsInfo(eventObject->graphicsId)->size;
@@ -1212,7 +1220,7 @@ void RemoveAllEventObjectsExceptPlayer(void)
 {
     u8 i;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (i != gPlayerAvatar.eventObjectId)
             RemoveEventObject(&gEventObjects[i]);
@@ -1223,21 +1231,24 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjTemplate
 {
     u8 eventObjectId;
     u8 spriteId;
-    const struct EventObjectGraphicsInfo *gfxInfo;
+    const struct EventObjectGraphicsInfo *graphicsInfo;
     struct EventObject *eventObject;
     struct Sprite *sprite;
 
     eventObjectId = TryInitEventObjectStateFromTemplate(eventObjTemplate, mapNum, mapGroup);
-    if (eventObjectId == 16)
-        return 16;
+    if (eventObjectId == EVENT_OBJECTS_COUNT)
+        return EVENT_OBJECTS_COUNT;
 
     eventObject = &gEventObjects[eventObjectId];
-    gfxInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
-    if (gfxInfo->paletteSlot == 0)
-        LoadPlayerObjectReflectionPalette(gfxInfo->paletteTag, gfxInfo->paletteSlot);
-    else if (gfxInfo->paletteSlot == 10)
-        LoadSpecialObjectReflectionPalette(gfxInfo->paletteTag, gfxInfo->paletteSlot);
-
+    graphicsInfo = GetEventObjectGraphicsInfo(eventObject->graphicsId);
+    if (graphicsInfo->paletteSlot == 0)
+    {
+        LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+    }
+    else if (graphicsInfo->paletteSlot == 10)
+    {
+        LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+    }
     if (eventObject->movementType == MOVEMENT_TYPE_INVISIBLE)
         eventObject->invisible = TRUE;
 
@@ -1257,15 +1268,15 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjTemplate
     }
     sprite = &gSprites[spriteId];
     sub_8060388(cameraDeltaX + eventObject->currentCoords.x, cameraDeltaY + eventObject->currentCoords.y, &sprite->pos1.x, &sprite->pos1.y);
-    sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
-    sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
     sprite->pos1.x += 8;
     sprite->pos1.y += 16 + sprite->centerToCornerVecY;
-    sprite->oam.paletteNum = gfxInfo->paletteSlot;
+    sprite->oam.paletteNum = graphicsInfo->paletteSlot;
     sprite->coordOffsetEnabled = TRUE;
     sprite->data[0] = eventObjectId;
     eventObject->spriteId = spriteId;
-    eventObject->inanimate = gfxInfo->inanimate;
+    eventObject->inanimate = graphicsInfo->inanimate;
     if (!eventObject->inanimate)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(eventObject->facingDirection));
     SetObjectSubpriorityByZCoord(eventObject->previousElevation, sprite, 1);
@@ -1273,67 +1284,74 @@ static u8 TrySetupEventObjectSprite(struct EventObjectTemplate *eventObjTemplate
     return eventObjectId;
 }
 
-u8 TrySpawnEventObject(struct EventObjectTemplate *eventObjTemplate, u8 mapNum, u8 mapGroup, s16 cameraDeltaX, s16 cameraDeltaY)
+static u8 TrySpawnEventObject(struct EventObjectTemplate *eventObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraDeltaX, s16 cameraDeltaY)
 {
+
     struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables = NULL;
     struct SpriteFrameImage spriteFrameImage;
-    const struct EventObjectGraphicsInfo *gfxInfo;
+    const struct EventObjectGraphicsInfo *graphicsInfo;
     u8 eventObjectId;
 
-    gfxInfo = GetEventObjectGraphicsInfo(eventObjTemplate->graphicsId);
-    MakeObjectTemplateFromEventObjectTemplate(eventObjTemplate, &spriteTemplate, &subspriteTables);
-    spriteFrameImage.size = gfxInfo->size;
+    graphicsInfo = GetEventObjectGraphicsInfo(eventObjectTemplate->graphicsId);
+    MakeObjectTemplateFromEventObjectTemplate(eventObjectTemplate, &spriteTemplate, &subspriteTables);
+    spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
-    eventObjectId = TrySetupEventObjectSprite(eventObjTemplate, &spriteTemplate, mapNum, mapGroup, cameraDeltaX, cameraDeltaY);
-    if (eventObjectId == 16)
-        return 16;
-    gSprites[gEventObjects[eventObjectId].spriteId].images = gfxInfo->images;
+    eventObjectId = TrySetupEventObjectSprite(eventObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraDeltaX, cameraDeltaY);
+    if (eventObjectId == EVENT_OBJECTS_COUNT)
+    {
+        return EVENT_OBJECTS_COUNT;
+    }
+    gSprites[gEventObjects[eventObjectId].spriteId].images = graphicsInfo->images;
     if (subspriteTables != NULL)
+    {
         SetSubspriteTables(&gSprites[gEventObjects[eventObjectId].spriteId], subspriteTables);
+    }
     return eventObjectId;
 }
 
-u8 SpawnSpecialEventObject(struct EventObjectTemplate *eventObjTemplate)
+u8 SpawnSpecialEventObject(struct EventObjectTemplate *eventObjectTemplate)
 {
     s16 x;
     s16 y;
 
     GetEventObjectMovingCameraOffset(&x, &y);
-    return TrySpawnEventObject(eventObjTemplate, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, x, y);
+    return TrySpawnEventObject(eventObjectTemplate, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, x, y);
 }
 
 u8 SpawnSpecialEventObjectParametrized(u8 graphicsId, u8 movementType, u8 localId, s16 x, s16 y, u8 elevation)
 {
-    struct EventObjectTemplate eventObjTemplate;
+    struct EventObjectTemplate eventObjectTemplate;
 
     x -= 7;
     y -= 7;
-    eventObjTemplate.localId = localId;
-    eventObjTemplate.graphicsId = graphicsId;
-    eventObjTemplate.unk2 = 0;
-    eventObjTemplate.x = x;
-    eventObjTemplate.y = y;
-    eventObjTemplate.elevation = elevation;
-    eventObjTemplate.movementType = movementType;
-    eventObjTemplate.movementRangeX = 0;
-    eventObjTemplate.movementRangeY = 0;
-    eventObjTemplate.trainerType = 0;
-    eventObjTemplate.trainerRange_berryTreeId = 0;
-    return SpawnSpecialEventObject(&eventObjTemplate);
+    eventObjectTemplate.localId = localId;
+    eventObjectTemplate.graphicsId = graphicsId;
+    eventObjectTemplate.unk2 = 0;
+    eventObjectTemplate.x = x;
+    eventObjectTemplate.y = y;
+    eventObjectTemplate.elevation = elevation;
+    eventObjectTemplate.movementType = movementType;
+    eventObjectTemplate.movementRangeX = 0;
+    eventObjectTemplate.movementRangeY = 0;
+    eventObjectTemplate.trainerType = 0;
+    eventObjectTemplate.trainerRange_berryTreeId = 0;
+    return SpawnSpecialEventObject(&eventObjectTemplate);
 }
 
-u8 show_sprite(u8 a, u8 b, u8 c)
+u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
 {
-    struct EventObjectTemplate *r5;
+    struct EventObjectTemplate *eventObjectTemplate;
     s16 x;
     s16 y;
 
-    r5 = GetEventObjectTemplateByLocalIdAndMap(a, b, c);
-    if (r5 == NULL)
-        return 16;
+    eventObjectTemplate = GetEventObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    if (eventObjectTemplate == NULL)
+    {
+        return EVENT_OBJECTS_COUNT;
+    }
     GetEventObjectMovingCameraOffset(&x, &y);
-    return TrySpawnEventObject(r5, b, c, x, y);
+    return TrySpawnEventObject(eventObjectTemplate, mapNum, mapGroup, x, y);
 }
 
 void MakeObjectTemplateFromEventObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
@@ -1350,12 +1368,12 @@ void MakeObjectTemplateFromEventObjectGraphicsInfo(u16 graphicsId, void (*callba
     *subspriteTables = gfxInfo->subspriteTables;
 }
 
-void MakeObjectTemplateFromEventObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 movementType, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromEventObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 movementType, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromEventObjectGraphicsInfo(graphicsId, sMovementTypeCallbacks[movementType], sprTemplate, subspriteTables);
 }
 
-void MakeObjectTemplateFromEventObjectTemplate(struct EventObjectTemplate *eventObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromEventObjectTemplate(struct EventObjectTemplate *eventObjTemplate, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromEventObjectGraphicsInfoWithCallbackIndex(eventObjTemplate->graphicsId, eventObjTemplate->movementType, sprTemplate, subspriteTables);
 }
@@ -1370,7 +1388,7 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
     if (spriteTemplate.paletteTag != 0xFFFF)
         sub_805BDF8(spriteTemplate.paletteTag);
     spriteId = CreateSprite(&spriteTemplate, x, y, subpriority);
-    if (spriteId != 64 && subspriteTables != NULL)
+    if (spriteId != MAX_SPRITES && subspriteTables != NULL)
     {
         SetSubspriteTables(&gSprites[spriteId], subspriteTables);
         gSprites[spriteId].subspriteMode = 2;
@@ -1380,12 +1398,12 @@ u8 AddPseudoEventObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
 
 u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
 {
-    const struct EventObjectGraphicsInfo *gfxInfo;
+    const struct EventObjectGraphicsInfo *graphicsInfo;
     struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables;
     u8 spriteId;
 
-    gfxInfo = GetEventObjectGraphicsInfo(graphicsId);
+    graphicsInfo = GetEventObjectGraphicsInfo(graphicsId);
     MakeObjectTemplateFromEventObjectGraphicsInfo(graphicsId, UpdateEventObjectSpriteSubpriorityAndVisibility, &spriteTemplate, &subspriteTables);
 #ifdef NONMATCHING
     spriteTemplate.paletteTag = 0xFFFF;
@@ -1396,19 +1414,21 @@ u8 sub_805B410(u8 graphicsId, u8 b, s16 x, s16 y, u8 elevation, u8 direction)
     y += 7;
     sub_8060470(&x, &y, 8, 16);
     spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
-    if (spriteId != 64)
+    if (spriteId != MAX_SPRITES)
     {
         struct Sprite *sprite = &gSprites[spriteId];
 
-        sprite->centerToCornerVecX = -(gfxInfo->width >> 1);
-        sprite->centerToCornerVecY = -(gfxInfo->height >> 1);
+        sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+        sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
         sprite->pos1.y += sprite->centerToCornerVecY;
-        sprite->oam.paletteNum = gfxInfo->paletteSlot;
+        sprite->oam.paletteNum = graphicsInfo->paletteSlot;
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = b;
         sprite->data[1] = elevation;
-        if (gfxInfo->paletteSlot == 10)
-            LoadSpecialObjectReflectionPalette(gfxInfo->paletteTag, gfxInfo->paletteSlot);
+        if (graphicsInfo->paletteSlot == 10)
+        {
+            LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+        }
         if (subspriteTables != NULL)
         {
             SetSubspriteTables(sprite, subspriteTables);
@@ -1427,37 +1447,34 @@ void TrySpawnEventObjects(s16 cameraDeltaX, s16 cameraDeltaY)
 
     if (gMapHeader.events != NULL)
     {
-        s16 r9 = gSaveBlock1.pos.x - 2;
-        s16 sp8 = gSaveBlock1.pos.x + 17;
-        s16 r10 = gSaveBlock1.pos.y;
-        s16 spC = gSaveBlock1.pos.y + 16;
+        s16 left = gSaveBlock1.pos.x - 2;
+        s16 right = gSaveBlock1.pos.x + 17;
+        s16 top = gSaveBlock1.pos.y;
+        s16 bottom = gSaveBlock1.pos.y + 16;
         u8 objectCount = gMapHeader.events->eventObjectCount;
 
         for (i = 0; i < objectCount; i++)
         {
             struct EventObjectTemplate *template = &gSaveBlock1.eventObjectTemplates[i];
-            s16 foo = template->x + 7;
-            s16 bar = template->y + 7;
+            s16 npcX = template->x + 7;
+            s16 npcY = template->y + 7;
 
-            if (r10 <= bar && spC >= bar && r9 <= foo && sp8 >= foo
+            if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX
              && !FlagGet(template->flagId))
                 TrySpawnEventObject(template, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, cameraDeltaX, cameraDeltaY);
         }
     }
 }
 
-void RemoveEventObjectIfOutsideView(struct EventObject *eventObject);
-
 void RemoveEventObjectsOutsideView(void)
 {
     u8 i;
     u8 j;
+    bool8 isActiveLinkPlayer;
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
-        bool8 isActiveLinkPlayer;
-
-        for (j = 0, isActiveLinkPlayer = 0; j < 4; j++)
+        for (j = 0, isActiveLinkPlayer = FALSE; j < 4; j++)
         {
             if (gLinkPlayerEventObjects[j].active && i == gLinkPlayerEventObjects[j].eventObjId)
                 isActiveLinkPlayer = TRUE;
@@ -1472,18 +1489,18 @@ void RemoveEventObjectsOutsideView(void)
     }
 }
 
-void RemoveEventObjectIfOutsideView(struct EventObject *eventObject)
+static void RemoveEventObjectIfOutsideView(struct EventObject *eventObject)
 {
-    s16 r7 = gSaveBlock1.pos.x - 2;
-    s16 r5 = gSaveBlock1.pos.x + 17;
-    s16 r4 = gSaveBlock1.pos.y;
-    s16 r6 = gSaveBlock1.pos.y + 16;
+    s16 left =   gSaveBlock1.pos.x - 2;
+    s16 right =  gSaveBlock1.pos.x + 17;
+    s16 top =    gSaveBlock1.pos.y;
+    s16 bottom = gSaveBlock1.pos.y + 16;
 
-    if (eventObject->currentCoords.x >= r7 && eventObject->currentCoords.x <= r5
-     && eventObject->currentCoords.y >= r4 && eventObject->currentCoords.y <= r6)
+    if (eventObject->currentCoords.x >= left && eventObject->currentCoords.x <= right
+     && eventObject->currentCoords.y >= top && eventObject->currentCoords.y <= bottom)
         return;
-    if (eventObject->initialCoords.x >= r7 && eventObject->initialCoords.x <= r5
-     && eventObject->initialCoords.y >= r4 && eventObject->initialCoords.y <= r6)
+    if (eventObject->initialCoords.x >= left && eventObject->initialCoords.x <= right
+     && eventObject->initialCoords.y >= top && eventObject->initialCoords.y <= bottom)
         return;
     RemoveEventObject(eventObject);
 }
@@ -1498,7 +1515,7 @@ void sub_805B710(u16 a, u16 b)
     gUnknown_Debug_03004BC0 = 0;
 #endif
     ClearPlayerAvatarInfo();
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < EVENT_OBJECTS_COUNT; i++)
     {
         if (gEventObjects[i].active)
         {
@@ -1510,9 +1527,6 @@ void sub_805B710(u16 a, u16 b)
     }
     CreateReflectionEffectSprites();
 }
-
-extern void SetPlayerAvatarEventObjectIdAndObjectId(u8, u8);
-extern void sub_805B914(struct EventObject *);
 
 void sub_805B75C(u8 eventObjectId, s16 b, s16 c)
 {

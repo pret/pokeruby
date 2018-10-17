@@ -2958,7 +2958,7 @@ static void sub_80A68A4(void)
         gUnknown_02038563 = CreateTask(sub_80A50C8, 0);
 }
 
-void sub_80A68CC(void)
+void CB2_ChooseBerry(void)
 {
     sCurrentBagPocket = BAG_POCKET_BERRIES;
     sReturnLocation = RETURN_TO_FIELD_4;
