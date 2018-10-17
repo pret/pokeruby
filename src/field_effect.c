@@ -2064,7 +2064,7 @@ void sub_8087AA4(struct Task *task)
 
 void sub_8087AC8(struct Task *task)
 {
-    u8 spinDirections[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
@@ -2229,7 +2229,7 @@ void sub_8087E4C(struct Task *task)
 
 void sub_8087ED8(struct Task *task)
 {
-    u8 spinDirections[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
@@ -2268,7 +2268,7 @@ void sub_8087ED8(struct Task *task)
 
 void sub_8087FDC(struct Task *task)
 {
-    u8 spinDirections[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if ((--task->data[1]) == 0)
     {
