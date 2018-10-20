@@ -52,7 +52,7 @@ bool8 CheckTrainers(void)
 
 static bool8 CheckTrainer(u8 eventObjId)
 {
-    u8 *scriptPtr = GetEventObjectScriptPointerByEventObjectId(eventObjId);
+    const u8 *scriptPtr = GetEventObjectScriptPointerByEventObjectId(eventObjId);
 
     if (GetTrainerFlagFromScriptPointer(scriptPtr))
     {

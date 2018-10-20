@@ -26,11 +26,11 @@ struct FieldInput
 void ClearPlayerFieldInput(struct FieldInput *pStruct);
 void GetPlayerFieldInput(struct FieldInput *pStruct, u16 keys, u16 heldKeys);
 int ProcessPlayerFieldInput(struct FieldInput *pStruct);
-u8 *GetInteractedLinkPlayerScript(struct MapPosition *, u8, u8);
+const u8 *GetInteractedLinkPlayerScript(struct MapPosition *, u8, u8);
 void ClearPoisonStepCounter(void);
 void RestartWildEncounterImmunitySteps(void);
 u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *);
-u8 *GetEventObjectScriptPointerPlayerFacing(void);
+const u8 *GetEventObjectScriptPointerPlayerFacing(void);
 u8 TrySetDiveWarp(void);
 bool8 dive_warp(struct MapPosition*, u16);
 

@@ -88,8 +88,8 @@ static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
 static bool8 TryStartInteractionScript(struct MapPosition*, u16, u8);
-static u8 *GetInteractionScript(struct MapPosition*, u8, u8);
-static u8 *GetInteractedEventObjectScript(struct MapPosition *, u8, u8);
+static const u8 *GetInteractionScript(struct MapPosition*, u8, u8);
+static const u8 *GetInteractedEventObjectScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedBackgroundEventScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedMetatileScript(struct MapPosition *, u8, u8);
 static u8 *GetInteractedWaterScript(struct MapPosition *, u8, u8);
@@ -313,7 +313,7 @@ static u16 GetPlayerCurMetatileBehavior(int runningState)
 
 static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatileBehavior, u8 direction)
 {
-    u8 *script = GetInteractionScript(position, metatileBehavior, direction);
+    const u8 *script = GetInteractionScript(position, metatileBehavior, direction);
     if (script == NULL)
         return FALSE;
 
@@ -329,9 +329,9 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     return TRUE;
 }
 
-static u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
-    u8 *script = GetInteractedEventObjectScript(position, metatileBehavior, direction);
+    const u8 *script = GetInteractedEventObjectScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
 
@@ -350,7 +350,7 @@ static u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavio
     return NULL;
 }
 
-u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     u8 eventObjectId;
     s32 i;
@@ -375,10 +375,10 @@ u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatileBehav
     return GetEventObjectScriptPointerByEventObjectId(eventObjectId);
 }
 
-static u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
+static const u8 *GetInteractedEventObjectScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     u8 eventObjectId;
-    u8 *script;
+    const u8 *script;
 
     eventObjectId = GetEventObjectIdByXYZ(position->x, position->y, position->height);
     if (eventObjectId == 16 || gEventObjects[eventObjectId].localId == 0xFF)
@@ -935,7 +935,7 @@ u8 TrySetDiveWarp(void)
     return 0;
 }
 
-u8 *GetEventObjectScriptPointerPlayerFacing(void)
+const u8 *GetEventObjectScriptPointerPlayerFacing(void)
 {
     u8 direction;
     struct MapPosition position;

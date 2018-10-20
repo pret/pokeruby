@@ -120,6 +120,9 @@ static u8 npc_something3(u8, u8);
 static u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
 static void CreateLinkPlayerSprite(u8);
 static void SpriteCB_LinkPlayer(struct Sprite *);
+static u16 sub_8055758(const u8 *);
+static void sub_8055808(const u8 *);
+static void sub_8055840(const u8 *);
 
 static const struct WarpData sDummyWarpData =
 {
@@ -1939,7 +1942,7 @@ bool32 sub_8054FC0(u16 a1)
 
 void sub_8054FF8(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
 {
-    u8 *script;
+    const u8 *script;
 
     if (gUnknown_03000580[a1] == 0x80)
     {
@@ -2327,7 +2330,7 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
     return TRUE;
 }
 
-u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
+const u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 {
     struct MapPosition unkStruct;
     u8 linkPlayerId;
@@ -2356,7 +2359,7 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->d);
 }
 
-u16 sub_8055758(u8 *script)
+static u16 sub_8055758(const u8 *script)
 {
     if (script == DoubleBattleColosseum_EventScript_1A4383)
         return 10;
@@ -2397,7 +2400,7 @@ void sub_80557F4(void)
     ScriptContext2_Enable();
 }
 
-void sub_8055808(u8 *script)
+static void sub_8055808(const u8 *script)
 {
     PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
@@ -2411,7 +2414,7 @@ void sub_8055824(void)
     ScriptContext2_Enable();
 }
 
-void sub_8055840(u8 *script)
+static void sub_8055840(const u8 *script)
 {
     PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
