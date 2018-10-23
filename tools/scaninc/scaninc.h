@@ -24,11 +24,14 @@
 #include <cstdio>
 #include <cstdlib>
 
+extern char *g_buffer;
+extern size_t m_bufsize;
+
 #ifdef _MSC_VER
 
 #define FATAL_INPUT_ERROR(format, ...)                                        \
 do {                                                                          \
-    fprintf(stderr, "%s:%d " format, m_path.c_str(), m_lineNum, __VA_ARGS__); \
+    fprintf(stderr, "%s: " format, m_path.c_str(), __VA_ARGS__);              \
     exit(1);                                                                  \
 } while (0)
 
@@ -42,7 +45,7 @@ do {                                      \
 
 #define FATAL_INPUT_ERROR(format, ...)                                          \
 do {                                                                            \
-    fprintf(stderr, "%s:%d " format, m_path.c_str(), m_lineNum, ##__VA_ARGS__); \
+    fprintf(stderr, "%s: " format, m_path.c_str(), ##__VA_ARGS__);              \
     exit(1);                                                                    \
 } while (0)
 

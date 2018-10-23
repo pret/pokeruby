@@ -29,6 +29,17 @@
 #include "c_file.h"
 #include "formatter.h"
 
+#ifdef _WIN32
+   #include <io.h>
+   #define access    _access_s
+#else
+   #include <unistd.h>
+#endif
+
+char *g_buffer = nullptr;
+size_t m_bufsize = 0;
+
+/*
 bool CanOpenFile(std::string &path)
 {
     FILE *fp = std::fopen(path.c_str(), "rb");
@@ -38,6 +49,12 @@ bool CanOpenFile(std::string &path)
 
     std::fclose(fp);
     return true;
+}
+*/
+
+static bool CanOpenFile(const std::string &filename)
+{
+    return access(filename.c_str(), 0) == 0;
 }
 
 const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
@@ -54,10 +71,9 @@ int main(int argc, char **argv)
 
     while (argc > 1)
     {
-        std::string arg(argv[0]);
-        if (arg.substr(0, 2) == "-I")
+        if (argv[0][0] == '-' && argv[0][1] == 'I')
         {
-            std::string includeDir = arg.substr(2);
+            std::string includeDir = std::string(argv[0] + 2);
             if (includeDir.empty())
             {
                 argc--;
@@ -99,9 +115,13 @@ int main(int argc, char **argv)
     }
     includeDirs.emplace_back(std::move(srcDir));
 
+    // getline expects the pointer to be allocated with malloc
+    g_buffer = (char *)malloc(128);
+    m_bufsize = 128;
+
     if (extension == "c" || extension == "h")
     {
-        filesToProcess.emplace(initialPath);
+        filesToProcess.push(initialPath);
 
         while (!filesToProcess.empty())
         {
@@ -141,15 +161,14 @@ int main(int argc, char **argv)
             AsmFile file(filesToProcess.front());
 
             filesToProcess.pop();
-
-            IncDirectiveType incDirectiveType;
+            IncDirectiveType type;
             std::string path;
 
-            while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None)
+            while ((type = file.GetNextIncDirective(path)) != IncDirectiveType::None)
             {
                 bool inserted = dependencies.insert(path).second;
                 if (inserted
-                    && incDirectiveType == IncDirectiveType::Include
+                    && type == IncDirectiveType::Include
                     && CanOpenFile(path))
                     filesToProcess.emplace(std::move(path));
             }
@@ -160,6 +179,9 @@ int main(int argc, char **argv)
         FATAL_ERROR("unknown extension \"%s\"\n", extension.c_str());
     }
 
+    free(g_buffer);
+
     Formatter formatter;
     formatter.WriteMakefile(initialPath, dependencies);
+    return 0;
 }

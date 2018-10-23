@@ -30,39 +30,34 @@
 #include "asm_file.h"
 #include "c_file.h"
 #include "charmap.h"
+#include "pragma_parser.h"
 
 #include "stack.h"
-#include "my_string.h"
+#include "khash.h"
 
 Charmap *g_charmap = NULL;
+FILE *g_file = NULL;
+static const char *g_filename = "stdout";
+bool g_lines = true;
 
 /*
  * Print line information.
  */
-static string *AddLineInfo(string *data, char *fn, long line)
+static inline void AddLineInfo(const char *fn, long line)
 {
-    char *b;
-
-    b = (char *)getmem(50 + strlen(fn));
-    int len = sprintf(b, "\nBLAH# %ld \"%s\"\n", line, fn);
-    if (unlikely(len < 7))
-        FATAL_ERROR("Failed to add line info!\n");
-
-    data = string_add(data, string_tmp_len(b, (unsigned)len));
-
-    freemem(b);
-    return data;
+    fprintf(g_file, "\n# %i \"%s\"\n", (int32_t)line, fn);
 }
 
 /* stacks are stacks of string * */
-string *PreprocessFile(const string *path, Stack *defines, Stack *includes, bool lines)
+static void PreprocessFile(const char *path, Stack *defines, Stack *includes, bool do_preproc)
 {
-    int status;
-    char *path_perm;
     struct lexer_state ls = { 0 };
     FILE *input;
-
-    string *ret = empty_string();
+    char *current_file = NULL;
+	char *tmp;
+    long skipped_lines = 0;
+    int status;
+    bool force_line_no = true;
 
     init_cpp();
 
@@ -77,180 +72,220 @@ string *PreprocessFile(const string *path, Stack *defines, Stack *includes, bool
 
     init_lexer_state(&ls);
     init_lexer_mode(&ls);
-    ls.flags |= DEFAULT_CPP_FLAGS | HANDLE_PRAGMA | TEXT_OUTPUT | LEXER;
-    if (!lines)
+    ls.flags |= HANDLE_PRAGMA | LEXER;
+    if (g_lines)
         ls.flags |= (LINE_NUM | GCC_LINE_NUM);
     else
         ls.flags &= ~(LINE_NUM | GCC_LINE_NUM);
 
-    if (path != NULL && path->length > 0 && strcmp(path->c_str, "-") != 0)
+    if (path != NULL && strlen(path) > 0 && strcmp(path, "-") != 0)
     {
-        path_perm = (char *)malloc(path->length + 1);
-        memcpy(path_perm, path->c_str, path->length + 1);
+        current_file = strdup(path);
+        set_init_filename(path, 1);
 
-        set_init_filename(path_perm, 1);
-
-        input = fopen_mmap_file(path_perm);
+        input = fopen_mmap_file(path);
 
         if (!input)
-            FATAL_ERROR("Could not open %s: %s\n", path->c_str, strerror(errno));
+            FATAL_ERROR("Could not open %s: %s\n", path, strerror(errno));
 
         set_input_file(&ls, input);
     }
     else
     {
-        set_init_filename("<stdin>\n", 0);
+        current_file = strdup("<stdin>");
+        set_init_filename("<stdin>", 0);
 
         ls.input = stdin;
     }
 
-    string *tmp;
-    while ((tmp = (string *)Stack_Top(includes)) != NULL)
+    // Add all our includes...
+    while ((tmp = (char *)Stack_Top(includes)) != NULL)
     {
-        add_incpath(tmp->c_str);
+        add_incpath(tmp);
         Stack_Pop(includes);
     }
 
-    while ((tmp = (string *)Stack_Top(defines)) != NULL)
+    // ...and our defines, including the PREPROC macro.
+    define_macro(&ls, "PREPROC");
+    while ((tmp = (char *)Stack_Top(defines)) != NULL)
     {
-        define_macro(&ls, tmp->c_str);
+        define_macro(&ls, tmp);
         Stack_Pop(defines);
     }
 
     enter_file(&ls, ls.flags);
 
+    // Lex through the file.
     while ((status = lex(&ls)) < CPPERR_EOF)
     {
         if (status)
         {
-            /* error condition -- no token was retrieved */
-            continue;
+            // error condition -- no token was retrieved
+            FATAL_ERROR("preproc: exiting because of ucpp errors.\n");
         }
-        /* we print each token: its numerical value, and its
-           string content; if this is a PRAGMA token, the
-           string content is in fact a compressed token list,
-           that we uncompress and print. */
+
+        // Skip long groups of blank lines or comments. WIP.
+        if (g_lines && force_line_no && ls.ctok->type != CONTEXT)
+        {
+            if (ls.ctok->type == NEWLINE)
+            {
+                ++skipped_lines;
+            }
+            else if (ls.ctok->type != COMMENT)
+            {
+                if (skipped_lines != 0)
+                    AddLineInfo(current_file, ls.ctok->line);
+                skipped_lines = 0;
+                force_line_no = false;
+            }
+            else
+                continue;
+        }
+
         if (ls.ctok->type == PRAGMA)
         {
-            unsigned char *c = (unsigned char *)(ls.ctok->name);
+            const char *c = ls.ctok->name;
 
-            for (; *c; c++)
+            /*
+             * Handle the special preproc pragma.
+             */
+            if (do_preproc && STRING_TOKEN(*c) && !strncmp(c + 1, "preproc", 7) && c[8] == PRAGMA_TOKEN_END)
             {
-                int t = *c;
+                ParsePragma(c, current_file, ls.ctok->line);
+            }
+            /*
+             * Normal pragma, just pass it through.
+             */
+            else
+            {
+                fputs("\n#pragma ", g_file);
+                for (; *c; c++)
+                {
+                    const int t = *c;
 
-                if (STRING_TOKEN(t))
-                {
-                    for (c++; *c != PRAGMA_TOKEN_END; c++)
-                        ret = string_add_char(ret, *c);
-                    ret = string_add_char(ret, '\n');
+                    if (STRING_TOKEN(t))
+                    {
+                        const char *end_pos = strchr(c++, PRAGMA_TOKEN_END);
+                        size_t pragmalen = (end_pos != NULL && end_pos > c) ? end_pos - c : strlen(c);
+
+                        fwrite(c, 1, pragmalen, g_file);
+                        putc_unlocked(' ', g_file);
+                        c += pragmalen;
+                    }
+                    else
+                    {
+                        fputs(operators_name[t] ? operators_name[t] : "", g_file);
+                        putc_unlocked(' ', g_file);
+                    }
                 }
-                else
-                {
-                    ret = string_add(ret, string_tmp(operators_name[t]));
-                }
+                putc_unlocked('\n', g_file);
             }
         }
-        else if (lines && ls.ctok->type == CONTEXT)
+        else if (ls.ctok->type == CONTEXT)
         {
-            AddLineInfo(ret, ls.ctok->name, ls.ctok->line);
+            if (g_lines)
+            {
+                free(current_file);
+                current_file = strdup(ls.ctok->name);
+                AddLineInfo(current_file, ls.ctok->line);
+                force_line_no = false;
+                skipped_lines = 0;
+            }
         }
         else if (ls.ctok->type == NEWLINE)
         {
-            ret = string_add_char(ret, '\n');
+            putc_unlocked('\n', g_file);
         }
-        else if (ls.ctok->type != COMMENT && ls.ctok->type != OPT_NONE)
+        else if (ls.ctok->type == COMMENT)
         {
-            unsigned i = 0;
-            char *tmp = STRING_TOKEN(ls.ctok->type) ? ls.ctok->name : operators_name[ls.ctok->type];
-            while (tmp[i])
-                ret = string_add_char(ret, tmp[i++]);
+            // skip it
+            force_line_no = true;
+        }
+        else
+        {
+            const char *tmp = STRING_TOKEN(ls.ctok->type) ? ls.ctok->name : operators_name[ls.ctok->type];
+            fputs(tmp, g_file);
         }
     }
 
+    free(current_file);
     /* give back memory and exit */
     wipeout();
     free_lexer_state(&ls);
-
-    return ret;
 }
 
 /* Only print the contents of the file. */
-static void JustPrint(string *path, string *output)
+static void JustPrint(const char *path)
 {
     FILE *in;
+    char buf[4096];
+    size_t in_count;
+    size_t out_count;
 
-    if (path != NULL && path->length > 0 && !strcmp(path->c_str, "-"))
+    if (path != NULL && strlen(path) > 0 && !strcmp(path, "-"))
     {
-        in = fopen(path->c_str, "rb");
+        in = fopen(path, "rb");
 
         if (!in)
-            FATAL_ERROR("Could not open %s: %s\n", path->c_str, strerror(errno));
+            FATAL_ERROR("Could not open %s: %s\n", path, strerror(errno));
     }
     else
     {
         in = stdin;
-        path = string("stdin", 5);
+        path = "stdin";
     }
 
-    FILE *out;
-    if (output != NULL && output->length > 0 && !strcmp(path->c_str, "-"))
-    {
-        out = fopen(output->c_str, "w");
-        if (!out)
-            FATAL_ERROR("Could not open %s: %s\n", output->c_str, strerror(errno));
-    }
-    else
-    {
-        out = stdout;
-        output = string("stdout", 6);
-    }
-
-    char buf[4096];
-    size_t in_count;
-    size_t out_count;
     for (;;)
     {
         in_count = fread(buf, 1, 4096, in);
         if (unlikely(ferror(in)))
-            FATAL_ERROR("Could not read %s: %s\n", path->c_str, strerror(errno));
+            FATAL_ERROR("Could not read %s: %s\n", path, strerror(errno));
 
-        out_count = fwrite(buf, 1, in_count, out);
+        out_count = fwrite(buf, 1, in_count, g_file);
 
-        if (unlikely(out_count != in_count || ferror(out)))
-            FATAL_ERROR("Could not write to %s: %s\n", output->c_str, strerror(errno));
+        if (unlikely(out_count != in_count || ferror(g_file)))
+            FATAL_ERROR("Could not write to %s: %s\n", g_filename, strerror(errno));
         if (feof(in))
             break;
     }
-    fputc('\n', out);
+    putc_unlocked('\n', g_file);
 
     if (in != stdin)
         fclose(in);
-    if (out != stdout)
-        fclose(out);
 }
 
 void PrintAsmBytes(unsigned char *s, int length)
 {
     if (length > 0)
     {
-        printf("\t.byte ");
-        for (int i = 0; i < length; i++)
+        int i;
+        fputs("\t.byte ", g_file);
+        for (i = 0; i < length; i++)
         {
-            printf("0x%02X", s[i]);
+            fprintf(g_file, "0x%02X", s[i]);
 
             if (i < length - 1)
-                putchar_unlocked(',');
+                putc_unlocked(',', g_file);
         }
-        putchar_unlocked('\n');
+        putc_unlocked('\n', g_file);
     }
 }
 
+KHASH_MAP_INIT_STR(File, int)
 
-void PreprocAsmFile(string *filename, string *data)
+void PreprocAsmFile(const char *filename)
 {
     Stack *stack = Stack_NewClass(AsmFile);
-    Stack_Push(stack, AsmFile_New(filename, data));
+    khash_t(File) *hash = kh_init(File);
+    int status;
+    char *tmp = (char *)malloc(strlen(filename) + 1);
+    khiter_t i;
+    strcpy(tmp, filename);
+    i = kh_put(File, hash, tmp, &status);
 
+    kh_value(hash, i) = 1;
+
+    Stack_Push(stack, AsmFile_New(filename));
     for (;;)
     {
         while (AsmFile_IsAtEnd((AsmFile *)Stack_Top(stack)))
@@ -258,7 +293,7 @@ void PreprocAsmFile(string *filename, string *data)
             Stack_Pop(stack);
 
             if (Stack_Empty(stack))
-                return;
+                goto cleanup;
             else
                 AsmFile_OutputLocation((AsmFile *)Stack_Top(stack));
         }
@@ -268,9 +303,29 @@ void PreprocAsmFile(string *filename, string *data)
         switch (directive)
         {
         case Directive_Include:
-            Stack_Push(stack, AsmFile_New(AsmFile_ReadPath((AsmFile *)Stack_Top(stack)), NULL));
+        {
+            char *name = AsmFile_ReadPath((AsmFile *)Stack_Top(stack));
+
+            // We only allow up to 32 includes of a single file.
+            i = kh_get(File, hash, name);
+            if (i == kh_end(hash))
+            {
+                i = kh_put(File, hash, name, &status);
+                kh_value(hash, i) = 1;
+            }
+            else
+            {
+                int *const include_times = &kh_value(hash, i);
+
+                if (++(*include_times) > 32)
+                    FATAL_ERROR("File '%s' included too many times\n", name);
+                free(name);
+            }
+            AsmFile *file = AsmFile_New(name);
+            Stack_Push(stack, file);
             AsmFile_OutputLocation((AsmFile *)Stack_Top(stack));
             break;
+        }
         case Directive_String:
         {
             unsigned char s[kMaxStringLength];
@@ -287,32 +342,40 @@ void PreprocAsmFile(string *filename, string *data)
         }
         case Directive_Unknown:
         {
-            string *globalLabel = AsmFile_GetGlobalLabel((AsmFile *)Stack_Top(stack));
+            char *globalLabel = AsmFile_GetGlobalLabel((AsmFile *)Stack_Top(stack));
 
-            if (globalLabel->length != 0)
+            if (globalLabel != NULL)
             {
-                const char *s = globalLabel->c_str;
-                printf("%s: ; .global %s\n", s, s);
+                fprintf(g_file, "%s: ; .global %s\n", globalLabel, globalLabel);
+                free(globalLabel);
             }
             else
             {
                 AsmFile_OutputLine((AsmFile *)Stack_Top(stack));
             }
-
             break;
         }
         }
     }
+cleanup:
+    for (i = kh_begin(hash); i != kh_end(hash); i++)
+    {
+        if (kh_exist(hash, i)) {
+            free((char *)kh_key(hash, i));
+            kh_del(File, hash, i);
+        }
+    }
+    kh_destroy(File, hash);
     Stack_Delete(stack);
 }
 
-void PreprocCFile(string *filename, string *data)
+static inline void PreprocCFile(const char *restrict filename)
 {
-    CFile *cFile = CFile_New(filename, data);
+    CFile *const cFile = CFile_New(filename);
     CFile_Preproc(cFile);
 }
 
-void usage(char *progname)
+static inline void usage(const char *progname)
 {
     fprintf(stderr,
             "usage: %s [options] file\n"
@@ -332,18 +395,17 @@ void usage(char *progname)
             progname);
 }
 
-char *GetFileExtension(string *filename)
+static const char *GetFileExtension(const char *filename)
 {
-    if (!filename || filename->length < 2)
+    size_t i = strlen(filename) - 1;
+
+    if (!filename || i < 2)
         return "c";
 
-    char *str = filename->c_str;
-
-    unsigned i = filename->length - 1;
     do
     {
-        if (str[i - 1] == '.')
-            return str + i;
+        if (filename[i - 1] == '.')
+            return filename + i;
     } while (i-- > 1);
 
     return "c";
@@ -351,42 +413,43 @@ char *GetFileExtension(string *filename)
 
 int main(int argc, char **argv)
 {
-    Stack *defines = Stack_NewClass(string);
-    Stack *includes = Stack_NewClass(string);
-    string *path = NULL;
-    string *file = NULL;
-    char *extension = NULL;
+    Stack *defines = Stack_NewWithSizeAndDtor(sizeof(char *), NULL);
+    Stack *includes = Stack_NewWithSizeAndDtor(sizeof(char *), NULL);
+    const char *path = NULL;
+    const char *extension = NULL;
+    const char *output = NULL;
+    int c;
     bool do_preproc = false;
     bool do_cpp = true;
-    bool lines = true;
-    int c;
-    string *output = NULL;
+
     opterr = 0;
 
-    while ((c = getopt(argc, argv, ":-D:I:x:c:Pno:h")) != -1)
+    g_file = stdout;
+
+    while ((c = getopt(argc, argv, "-:D:I:x:c:Pno:h")) != -1)
     {
         switch (c)
         {
         case 'D':
-            Stack_Push(defines, string(optarg, strlen(optarg)));
+            Stack_Push(defines, optarg);
             break;
         case 'I':
-            Stack_Push(includes, string(optarg, strlen(optarg)));
+            Stack_Push(includes, optarg);
             break;
         case 'x':
             if (optarg[0] == 'c' && optarg[1] == 0)
             {
-                extension = (char *)"c";
+                extension = "c";
             }
             else if ((optarg[0] == 's' && optarg[1] == 0) || unlikely(!strcmp(optarg, "asm"))
                      || unlikely(!strcmp(optarg, "assembler")))
             {
-                extension = (char *)"s";
+                extension = "s";
             }
             else if ((optarg[0] == 'i' && optarg[1] == 0)
                      || unlikely(!strcmp(optarg, "cpp-output")))
             {
-                extension = (char *)"i";
+                extension = "i";
                 do_cpp = false;
             }
 
@@ -402,19 +465,19 @@ int main(int argc, char **argv)
             do_preproc = true;
             break;
         case 'P':
-            lines = false;
+            g_lines = false;
             break;
         case 'n':
             do_cpp = false;
             break;
         case 'o':
-            output = string_tmp(optarg);
+            output = optarg;
             break;
         case 'h':
             usage(argv[0]);
             return 0;
         case '\1':
-            path = string_tmp(optarg);
+            path = optarg;
             break;
         case ':':
             fprintf(stderr, "-%c: missing argument\n", optopt);
@@ -425,34 +488,47 @@ int main(int argc, char **argv)
         }
     }
 
-    if (optind < argc)
-        path = string(argv[optind], strlen(argv[optind]));
+    if (!path || optind < argc)
+        path = argv[optind];
 
-    if (unlikely(!do_cpp && !do_preproc))
+    if (output != NULL)
     {
-        JustPrint(file, output);
-        return 0;
+        g_filename = output;
+        g_file = fopen(output, "wb");
+        if (!g_file)
+            FATAL_ERROR("Failed to open output file %s: %s", output, strerror(errno));
     }
 
     if (!extension)
         extension = GetFileExtension(path);
 
 
-    if (do_cpp && extension[0] != 's')
-        file = PreprocessFile(path, defines, includes, lines);
+    // Just print the output of the file.
+    if (unlikely(!do_cpp && !do_preproc))
+    {
+        JustPrint(path);
+    }
+    else if (do_cpp && extension[0] != 's')
+    {
+        PreprocessFile(path, defines, includes, do_preproc);
+    }
+    else if (do_preproc && extension[0] == 's' && extension[1] == 0)
+    {
+        PreprocAsmFile(path);
+    }
+    else if (do_preproc)
+    {
+        PreprocCFile(path);
+    }
 
-    if (do_preproc)
-    {
-        if ((extension[0] == 's') && extension[1] == 0)
-            PreprocAsmFile(path, file);
-        else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
-            PreprocCFile(path, file);
-        else
-            FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
-    }
-    else
-    {
-        puts(file->c_str);
-    }
+    // always want a trailing newline
+    putc_unlocked('\n', g_file);
+
+    if (g_file != stdout)
+        fclose(g_file);
+
+    Charmap_Delete(g_charmap);
+    Stack_Delete(defines);
+    Stack_Delete(includes);
     return 0;
 }

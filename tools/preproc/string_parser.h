@@ -24,13 +24,12 @@
 #include "preproc.h"
 
 #include <stdint.h>
-#include "my_string.h"
 
 struct StringParser;
 typedef struct StringParser StringParser;
 
-StringParser *StringParser_New(char *buffer, long size);
+StringParser *StringParser_New(const char *const buffer, long size);
 void StringParser_Delete(StringParser *m);
-int StringParser_ParseString(StringParser *r m, long srcPos, uint8_t *r dest, int *r destLength);
+int StringParser_ParseString(StringParser *restrict m, long srcPos, uint8_t *restrict dest, int *restrict destLength);
 
 #endif  // STRING_PARSER_H

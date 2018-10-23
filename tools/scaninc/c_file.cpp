@@ -22,131 +22,125 @@
 #include <vector>
 #include <algorithm>
 #include <cstring>
+#include <unistd.h>
 
 #include "c_file.h"
+
+bool CFile::NextLine()
+{
+    ssize_t len;
+    // Avoid empty lines too, don't waste the time.
+    while ((len = getline(&g_buffer, &m_bufsize, m_fp)) <= 0)
+    {
+        if (len < 0)
+        {
+            m_size = 0;
+            m_pos = 0;
+            return false;
+        }
+    }
+    m_size = (int)len;
+    m_pos = 0;
+    return true;
+}
 
 CFile::CFile(std::string &path)
 {
     m_path = path;
+    if (path.empty() || path == "-")
+    {
+        m_path = "<stdin>";
+        m_fp = stdin;
+    }
+    else
+    {
+        m_fp = std::fopen(path.c_str(), "rb");
+    }
 
-        FILE *fp;
-        if (path.empty() || path == "-")
-        {
-            m_path = "<stdin>";
-            fp = stdin;
-        }
-        else
-        {
-            fp = std::fopen(path.c_str(), "rb");
-        }
+    if (m_fp == nullptr)
+        FATAL_ERROR("Could not open file!");
 
-        if (fp == NULL)
-            FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
-
-        m_size = 0;
-        std::vector<char> buf;
-        ssize_t count;
-        char tmp[1024];
-        while ((count = fread(tmp, 1, 1024, fp)) != 0)
-        {
-            if (ferror(fp))
-                FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
-
-            buf.insert(buf.end(), tmp, tmp + count);
-
-            m_size += count;
-
-            if (feof(fp))
-                break;
-        }
-        if (m_size == 0)
-            FATAL_ERROR("Empty input!");
-        m_buffer = new char[m_size + 1];
-        std::copy(buf.begin(), buf.end(), m_buffer);
-        m_buffer[m_size] = 0;
-
-        if (fp != stdin)
-            fclose(fp);
+    m_size = 0;
     m_pos = 0;
-    m_lineNum = 1;
+    NextLine();
 }
 
 CFile::~CFile()
 {
-    delete[] m_buffer;
+    if (m_fp != stdin)
+        fclose(m_fp);
 }
 
 void CFile::FindIncbins()
 {
-    char stringChar = 0;
-
-    while (m_pos < m_size)
-    {
-        if (stringChar)
+    m_pos = 0;
+    const char *match;
+    do {
+        // TODO: # include
+        if ((match = strstr(&g_buffer[m_pos], "#include")) != NULL)
         {
-            if (m_buffer[m_pos] == stringChar)
-            {
-                m_pos++;
-                stringChar = 0;
-            }
-            else if (m_buffer[m_pos] == '\\' && m_buffer[m_pos + 1] == stringChar)
-            {
-                m_pos += 2;
-            }
-            else
-            {
-                if (m_buffer[m_pos] == '\n')
-                    m_lineNum++;
-                m_pos++;
-            }
+            m_pos = (match - g_buffer);
+            CheckInclude();
         }
         else
         {
-            SkipWhitespace();
-            CheckInclude();
-            CheckIncbin();
-
-            if (m_pos >= m_size)
-                break;
-
-            char c = m_buffer[m_pos++];
-
-            if (c == '\n')
-                m_lineNum++;
-            else if (c == '"')
-                stringChar = '"';
-            else if (c == '\'')
-                stringChar = '\'';
-            else if (c == 0)
-                FATAL_INPUT_ERROR("unexpected null character");
+            while ((match = strstr(&g_buffer[m_pos], "INCBIN_")) != NULL)
+            {
+                m_pos = (match - g_buffer);
+                CheckIncbin();
+            }
         }
+    } while (NextLine());
+}
+
+bool CFile::StrChr(char pattern)
+{
+    char *str = nullptr;
+    while ((str = strchr(&g_buffer[m_pos], pattern)) == nullptr)
+    {
+        if (!NextLine())
+            return false;
     }
+    m_pos = str - g_buffer;
+    return true;
+}
+
+bool CFile::StrStr(const char *pattern)
+{
+    char *str = nullptr;
+    while ((str = strstr(&g_buffer[m_pos], pattern)) == nullptr)
+    {
+        if (!NextLine())
+            return false;
+    }
+    m_pos = str - g_buffer;
+    return true;
 }
 
 bool CFile::ConsumeHorizontalWhitespace()
 {
-    if (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ')
-    {
-        m_pos++;
-        return true;
-    }
+//    if (PeekChar() != '\t' && PeekChar() != ' ')
+//        return false;
+    size_t length = strspn(&g_buffer[m_pos], "\t ");
+    if (length == 0)
+        return false;
 
-    return false;
+    Advance((int)length);
+
+    return true;
 }
 
 bool CFile::ConsumeNewline()
 {
-    if (m_buffer[m_pos] == '\n')
+    if (PeekChar() == '\n')
     {
-        m_pos++;
-        m_lineNum++;
+        Advance();
         return true;
     }
 
-    if (m_buffer[m_pos] == '\r' && m_buffer[m_pos + 1] == '\n')
+    if (PeekChar() == '\r' && PeekChar(2) == '\n')
     {
-        m_pos += 2;
-        m_lineNum++;
+        Advance(2);
         return true;
     }
 
@@ -155,32 +149,21 @@ bool CFile::ConsumeNewline()
 
 bool CFile::ConsumeComment()
 {
-    if (m_buffer[m_pos] == '/')
+    if (PeekChar(1) == '/')
     {
-        if (m_buffer[m_pos + 1] == '*')
+        if (PeekChar(2) == '*')
         {
-	        m_pos += 2;
-	        while (m_buffer[m_pos] != '*' && m_buffer[m_pos + 1] != '/')
-	        {
-	            if (m_buffer[m_pos] == 0)
-	                return false;
-	            if (!ConsumeNewline())
-	                m_pos++;
-	        }
-	        m_pos += 2;
-	        return true;
+            Advance(2);
+            if (!StrStr("*/"))
+            {
+                FATAL_ERROR("Unterminated block comment");
+            }
+            return true;
         }
-        else if (m_buffer[m_pos + 1] == '/')
+        else if (PeekChar(1) == '/')
         {
-	        m_pos += 2;
-	        while (!ConsumeNewline())
-	        {
-	            if (m_buffer[m_pos] == 0)
-	                return false;
-	            m_pos++;
-	        }
-	        return true;
-	    }
+            return NextLine();
+        }
     }
 
     return false;
@@ -194,12 +177,12 @@ void CFile::SkipWhitespace()
 
 bool CFile::CheckIdentifier(const std::string& ident)
 {
-    return (std::strncmp(ident.c_str(), m_buffer + m_pos, ident.length()) == 0);
+    return (std::strncmp(ident.c_str(), g_buffer + m_pos, ident.length()) == 0);
 }
 
 void CFile::CheckInclude()
 {
-    if (m_buffer[m_pos] != '#')
+    if (PeekChar() != '#')
         return;
 
     static const std::string ident = "#include";
@@ -209,12 +192,11 @@ void CFile::CheckInclude()
         return;
     }
 
-    m_pos += ident.length();
+    Advance(ident.length());
 
     ConsumeHorizontalWhitespace();
 
     std::string path = ReadPath();
-
     if (!path.empty()) {
         m_includes.emplace(std::move(path));
     }
@@ -222,8 +204,9 @@ void CFile::CheckInclude()
 
 void CFile::CheckIncbin()
 {
-    if (std::strncmp(m_buffer + m_pos, "INCBIN_", 7) != 0)
+    if (std::strncmp(g_buffer + m_pos, "INCBIN_", 7) != 0 || !std::strncmp(g_buffer, "#define ", 7))
     {
+        Advance();
         return;
     }
 
@@ -242,21 +225,16 @@ void CFile::CheckIncbin()
     if (incbinType == -1)
         return;
 
-    long oldPos = m_pos;
-    long oldLineNum = m_lineNum;
-
-    m_pos += idents[incbinType].length();
+    Advance(idents[incbinType].length());
 
     SkipWhitespace();
 
-    if (m_buffer[m_pos] != '(')
+    if (PeekChar() != '(')
     {
-        m_pos = oldPos;
-        m_lineNum = oldLineNum;
         return;
     }
 
-    m_pos++;
+    Advance();
 
     while (true)
     {
@@ -268,53 +246,50 @@ void CFile::CheckIncbin()
 
         m_incbins.emplace(path);
 
-        if (m_buffer[m_pos] != ',')
+        if (PeekChar() != ',')
             break;
 
-        m_pos++;
+        Advance();
     }
 
-    if (m_buffer[m_pos] != ')')
+    if (PeekChar() != ')')
         FATAL_INPUT_ERROR("expected ')'");
-
-    m_pos++;
+    Advance();
 }
 
 std::string CFile::ReadPath()
 {
-    if (m_buffer[m_pos] != '"')
+    if (PeekChar() != '"')
     {
-        if (m_buffer[m_pos] == '<')
+        if (PeekChar() == '<')
         {
             return std::string();
         }
         FATAL_INPUT_ERROR("expected '\"' or '<'");
     }
 
-    m_pos++;
+    Advance(1);
 
     int startPos = m_pos;
 
-    while (m_buffer[m_pos] != '"')
+    // Only on a single line, don't auto advance
+    const char *endquote = strchr(&g_buffer[m_pos], '"');
+    const char *bad = strpbrk(&g_buffer[m_pos], "\r\n\\");
+
+    if (endquote == nullptr || endquote <= &g_buffer[m_pos])
     {
-        if (m_buffer[m_pos] == 0)
-        {
-            if (m_pos >= m_size)
-                FATAL_INPUT_ERROR("unexpected EOF in path string");
-            else
-                FATAL_INPUT_ERROR("unexpected null character in path string");
-        }
-
-        if (m_buffer[m_pos] == '\r' || m_buffer[m_pos] == '\n')
+        FATAL_INPUT_ERROR("expected ending quote in path string");
+    }
+    // if anything matched by strpbrk comes before endquote
+    else if (bad != nullptr && bad < endquote)
+    {
+        if (bad[0] == '\r' || bad[0] == '\n')
             FATAL_INPUT_ERROR("unexpected end of line character in path string");
-
-        if (m_buffer[m_pos] == '\\')
+        else
             FATAL_INPUT_ERROR("unexpected escape in path string");
-
-        m_pos++;
     }
 
-    m_pos++;
-
-    return std::string(m_buffer + startPos, m_pos - 1 - startPos);
+    std::string str(&g_buffer[startPos], endquote - &g_buffer[startPos]);
+    Advance(endquote - &g_buffer[m_pos] + 1);
+    return str;
 }

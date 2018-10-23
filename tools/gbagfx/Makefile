@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -Og -g
+CFLAGS = -Wall -Wextra -Werror -std=c11 -O3
 CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell ./setjmp.sh $(CC) $(CFLAGS))
 
 LIBS = -lpng -lz

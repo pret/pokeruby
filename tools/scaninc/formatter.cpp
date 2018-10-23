@@ -62,7 +62,10 @@ static void mkdirs_if_needed(const std::string &str)
                 FATAL_ERROR("could not open directory %s: %s!\n", depdir.c_str(), strerror(errno));
             }
         }
-        closedir(dir);
+        else
+        {
+            closedir(dir);
+        }
     }
 }
 
@@ -75,15 +78,18 @@ void Formatter::WriteFilename(const std::string &str)
     {
         line_len = 0;
         // backslashed newline
-        targetstream << "\\\n";
+        targetstream += "\\\n";
     }
 
-    targetstream << str << ' ';
+    targetstream += str;
+    targetstream += ' ';
 
     line_len += str.length() + 1;
 
     // Create phony rules, just the source file.
-    phonystream << '\n' << str << ":\n";
+    phonystream += '\n';
+    phonystream += str;
+    phonystream += ":\n";
 }
 
 // Writes a Makefile dependency file in the style of gcc -M format.
@@ -96,11 +102,17 @@ void Formatter::WriteMakefile(const std::string &path, const std::set<std::strin
     const std::string basename = path.substr(filename_index + 1, extension_index - filename_index);
 
     // src/file.c -> .d/src/
-    const std::string depdir = ".d/" + path.substr(0, filename_index) + '/';
+    std::string depdir = ".d/";
+    depdir += path.substr(0, filename_index);
+    depdir += '/';
     // src/file.c -> .d/src/file.Td
-    const std::string depfile = depdir + basename + "d";
+    std::string depfile = depdir;
+    depfile += basename;
+    depfile += "d";
     // src/file.c -> $(BUILD_DIR)/src/file.o:
-    const std::string targetname = "$(BUILD_DIR)/" + path.substr(0, extension_index) + ".o: ";
+    std::string targetname = "$(BUILD_DIR)/";
+    targetname += path.substr(0, extension_index);
+    targetname += ".o: ";
 
     // Make depdir if needed.
     mkdirs_if_needed(depdir);
@@ -112,9 +124,10 @@ void Formatter::WriteMakefile(const std::string &path, const std::set<std::strin
     }
 
     // $(BUILD_DIR)/src/file.o:
-    targetstream << targetname;
+    targetstream += targetname;
     // src/file.c
-    targetstream << path << ' ';
+    targetstream += path;
+    targetstream += ' ';
 
     // Write all the dependencies
     for (const auto &dep : dependencies)
@@ -122,12 +135,13 @@ void Formatter::WriteMakefile(const std::string &path, const std::set<std::strin
         WriteFilename(dep);
     }
 
-    // Merge the two buffers together for only three writes.
-    if (std::fputs(targetstream.str().c_str(), f) < 0 ||
-        std::fputc('\n', f) < 0 ||
-        std::fputs(phonystream.str().c_str(), f) < 0)
+    // Merge the two buffers together
+    const std::string output = targetstream + '\n' + phonystream;
+    std::fwrite(output.c_str(), output.length(), 1, f);
+    if (ferror(f))
     {
-        FATAL_ERROR("could not write to file %s\n", targetname.c_str());
+        std::fclose(f);
+        FATAL_ERROR("could not write to file %s: %s\n", depfile.c_str(), strerror(errno));
     }
 
     std::fclose(f);

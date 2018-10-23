@@ -34,70 +34,63 @@ struct CFile
     long pos;
     long size;
     long lineNum;
-    string *filename;
+    const char *filename;
 };
 
-static bool ConsumeHorizontalWhitespace(CFile *cr m);
-static bool ConsumeNewline(CFile *cr m);
-static void SkipWhitespace(CFile *cr m);
-static void TryConvertString(CFile *cr m);
-static unsigned char *ReadWholeFile(CFile *cr m, const string *cr path, int *r size);
-static inline bool CheckIdentifier(CFile *cr m, const string *cr ident);
+static bool ConsumeHorizontalWhitespace(CFile *const restrict m);
+static bool ConsumeNewline(CFile *const restrict m);
+static void SkipWhitespace(CFile *const restrict m);
+static void TryConvertString(CFile *const restrict m);
+static unsigned char *ReadWholeFile(CFile *const restrict m, const char *const restrict path, int *restrict size);
+static inline bool CheckIdentifier(CFile *const restrict m, size_t ident_pos);
 static void TryConvertIncbin(CFile *m);
 static void ReportDiagnostic(CFile *m, const char *type, const char *format, va_list args);
-noreturn static void RaiseError(CFile *m, const char *format, ...);
+no_return static void RaiseError(CFile *m, const char *format, ...);
 static void RaiseWarning(CFile *m, const char *format, ...);
 
-CFile *CFile_New(string *filename, string *data)
+CFile *CFile_New(const char *restrict filename)
 {
     CFile *m = (CFile *)malloc(sizeof(CFile));
     m->filename = filename;
-    if (data != NULL)
+    FILE *fp;
+    size_t count;
+    char tmp[4096];
+
+    if (!filename || !strcmp(filename, "-"))
     {
-        m->size = data->length;
-        m->buffer = data->c_str;
+        m->filename = "stdin";
+        fp = stdin;
     }
     else
     {
-        FILE *fp;
-        if (!filename || string_equal(filename, string_literal("-")))
-        {
-            m->filename = filename = string_literal("<stdin>");
-            fp = stdin;
-        }
-        else
-        {
-            fp = fopen(filename->c_str, "rb");
-        }
-
-        if (unlikely(fp == NULL))
-            FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename->c_str);
-
-        m->size = 0;
-        m->buffer = (char *)malloc(1);
-        size_t count;
-        char tmp[1024];
-        while ((count = fread(tmp, 1, 1024, fp)) != 0)
-        {
-            if (unlikely(ferror(fp)))
-                FATAL_ERROR("Failed to read \"%s\".\n", filename->c_str);
-
-            m->buffer = (char *)realloc(m->buffer, m->size + count + 1);
-
-            memcpy(m->buffer + m->size, tmp, count);
-            m->size += count;
-
-            if (feof(fp))
-                break;
-        }
-        if (m->size == 0)
-            RaiseWarning(m, "Empty input!");
-
-        m->buffer[m->size] = 0;
-
-        if (fp != stdin)
-            fclose(fp);
+        fp = fopen(filename, "rb");
     }
+
+    if (unlikely(fp == NULL))
+        FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename);
+
+    m->size = 0;
+    m->buffer = (char *)malloc(1);
+    while ((count = fread(tmp, 1, 4096, fp)) != 0)
+    {
+        if (unlikely(ferror(fp)))
+            FATAL_ERROR("Failed to read \"%s\".\n", filename);
+
+        m->buffer = (char *)realloc(m->buffer, m->size + count + 1);
+
+        memcpy(m->buffer + m->size, tmp, count);
+        m->size += count;
+
+        if (feof(fp))
+            break;
+    }
+    if (m->size == 0)
+        RaiseWarning(m, "Empty input!");
+
+    m->buffer[m->size] = 0;
+
+    if (fp != stdin)
+        fclose(fp);
     m->pos = 0;
     m->lineNum = 1;
 
@@ -107,11 +100,10 @@ CFile *CFile_New(string *filename, string *data)
 void CFile_Delete(CFile *m)
 {
     free(m->buffer);
-    string_Delete(m->filename);
     free(m);
 }
 
-void CFile_Preproc(CFile *cr m)
+void CFile_Preproc(CFile *const restrict m)
 {
     char stringChar = 0;
 
@@ -121,35 +113,37 @@ void CFile_Preproc(CFile *cr m)
         {
             if (m->buffer[m->pos] == stringChar)
             {
-                putchar_unlocked(stringChar);
+                putc_unlocked(stringChar, g_file);
                 m->pos++;
                 stringChar = 0;
             }
             else if (m->buffer[m->pos] == '\\' && m->buffer[m->pos + 1] == stringChar)
             {
-                putchar_unlocked('\\');
-                putchar_unlocked(stringChar);
+                putc_unlocked('\\', g_file);
+                putc_unlocked(stringChar, g_file);
                 m->pos += 2;
             }
             else
             {
                 if (m->buffer[m->pos] == '\n')
                     m->lineNum++;
-                putchar_unlocked(m->buffer[m->pos]);
+                putc_unlocked(m->buffer[m->pos], g_file);
                 m->pos++;
             }
         }
         else
         {
+            char c;
+
             TryConvertString(m);
             TryConvertIncbin(m);
 
             if (m->pos >= m->size)
                 break;
 
-            char c = m->buffer[m->pos++];
+            c = m->buffer[m->pos++];
 
-            putchar_unlocked(c);
+            putc_unlocked(c, g_file);
 
             if (c == '\n')
                 m->lineNum++;
@@ -161,7 +155,7 @@ void CFile_Preproc(CFile *cr m)
     }
 }
 
-static bool ConsumeHorizontalWhitespace(CFile *cr m)
+static bool ConsumeHorizontalWhitespace(CFile *const restrict m)
 {
     if (m->buffer[m->pos] == '\t' || m->buffer[m->pos] == ' ')
     {
@@ -172,13 +166,13 @@ static bool ConsumeHorizontalWhitespace(CFile *cr m)
     return false;
 }
 
-static bool ConsumeNewline(CFile *cr m)
+static bool ConsumeNewline(CFile *const restrict m)
 {
     if (m->buffer[m->pos] == '\r' && m->buffer[m->pos + 1] == '\n')
     {
         m->pos += 2;
         m->lineNum++;
-        putchar_unlocked('\n');
+        putc_unlocked('\n', g_file);
         return true;
     }
 
@@ -186,20 +180,20 @@ static bool ConsumeNewline(CFile *cr m)
     {
         m->pos++;
         m->lineNum++;
-        putchar_unlocked('\n');
+        putc_unlocked('\n', g_file);
         return true;
     }
 
     return false;
 }
 
-static void SkipWhitespace(CFile *cr m)
+static void SkipWhitespace(CFile *const restrict m)
 {
     while (ConsumeHorizontalWhitespace(m) || ConsumeNewline(m))
         ;
 }
 
-static void TryConvertString(CFile *cr m)
+static void TryConvertString(CFile *const restrict m)
 {
     long oldPos = m->pos;
     long oldLineNum = m->lineNum;
@@ -229,7 +223,7 @@ static void TryConvertString(CFile *cr m)
 
     SkipWhitespace(m);
 
-    putchar_unlocked('{');
+    putc_unlocked('{', g_file);
 
     while (1)
     {
@@ -238,13 +232,14 @@ static void TryConvertString(CFile *cr m)
         if (m->buffer[m->pos] == '"')
         {
             unsigned char s[kMaxStringLength];
-            int length;
+            int length, i;
+
             StringParser *stringParser = StringParser_New(m->buffer, m->size);
 
             m->pos += StringParser_ParseString(stringParser, m->pos, s, &length);
 
-            for (int i = 0; i < length; i++)
-                printf("0x%02X,", s[i]);
+            for (i = 0; i < length; i++)
+                fprintf(g_file, "0x%02X,", s[i]);
 
             StringParser_Delete(stringParser);
         }
@@ -265,40 +260,45 @@ static void TryConvertString(CFile *cr m)
     }
 
     if (noTerminator)
-        putchar_unlocked('}');
+        putc_unlocked('}', g_file);
     else
-        fputs("0xFF}", stdout);
+        fputs("0xFF}", g_file);
 }
 
-static inline bool CheckIdentifier(CFile *cr m, const string *cr ident)
+static const char *idents[6] =
 {
-    unsigned int i;
+    "INCBIN_S8",  "INCBIN_U8",
+    "INCBIN_S16", "INCBIN_U16",
+    "INCBIN_S32", "INCBIN_U32"
+};
 
-    for (i = 0; i < ident->length && m->pos + i < (unsigned)m->size; i++)
-        if (ident->c_str[i] != m->buffer[m->pos + i])
-            return false;
-//    if (m->pos + ident->length > m->size) return false;
-//    return !strncmp(ident->c_str, &m->buffer[m->pos], ident->length);
-    return (i == ident->length);
+static inline bool CheckIdentifier(CFile *const restrict m, size_t ident_pos)
+{
+    size_t len = ident_pos >= 1 ? 10 : 9;
+
+    if (m->pos + len > m->size)
+        return false;
+    return !strncmp(idents[ident_pos], &m->buffer[m->pos], len);
 }
 
-static unsigned char *ReadWholeFile(CFile *cr m, const string *cr path, int *r size)
+static unsigned char *ReadWholeFile(CFile *const restrict m, const char *const restrict path, int *restrict size)
 {
-    FILE *fp = fopen(path->c_str, "rb");
+    FILE *fp = fopen(path, "rb");
+    unsigned char *buffer;
 
     if (unlikely(fp == NULL))
-        RaiseError(m, "Failed to open \"%s\" for reading.\n", path->c_str);
+        RaiseError(m, "Failed to open \"%s\" for reading.\n", path);
 
     fseek(fp, 0, SEEK_END);
 
     *size = ftell(fp);
 
-    unsigned char *buffer = (unsigned char *)malloc(*size);
+    buffer = (unsigned char *)malloc(*size);
 
     rewind(fp);
 
     if (unlikely(fread(buffer, *size, 1, fp) != 1))
-        RaiseError(m, "Failed to read \"%s\".\n", path->c_str);
+        RaiseError(m, "Failed to read \"%s\".\n", path);
 
     fclose(fp);
 
@@ -321,17 +321,19 @@ static int ExtractData(const unsigned char *buffer, int offset, int size)
     }
 }
 
-static const string *idents[6]
-    = { string_literal("INCBIN_S8"),  string_literal("INCBIN_U8"),  string_literal("INCBIN_S16"),
-        string_literal("INCBIN_U16"), string_literal("INCBIN_S32"), string_literal("INCBIN_U32") };
-
 static void TryConvertIncbin(CFile *m)
 {
     int incbinType = -1;
+    int i, size, startPos, count, offset;
+    bool isSigned;
+    long oldPos, oldLineNum;
+    int fileSize;
+    unsigned char *buffer;
+    char *path;
 
-    for (int i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
     {
-        if (CheckIdentifier(m, idents[i]))
+        if (CheckIdentifier(m, i))
         {
             incbinType = i;
             break;
@@ -341,13 +343,13 @@ static void TryConvertIncbin(CFile *m)
     if (incbinType == -1)
         return;
 
-    int size = 1 << (incbinType / 2);
-    bool isSigned = ((incbinType % 2) == 0);
+    size = 1 << (incbinType / 2);
+    isSigned = ((incbinType % 2) == 0);
 
-    long oldPos = m->pos;
-    long oldLineNum = m->lineNum;
+    oldPos = m->pos;
+    oldLineNum = m->lineNum;
 
-    m->pos += idents[incbinType]->length;
+    m->pos += strlen(idents[incbinType]);
 
     SkipWhitespace(m);
 
@@ -367,7 +369,7 @@ static void TryConvertIncbin(CFile *m)
 
     m->pos++;
 
-    int startPos = m->pos;
+    startPos = m->pos;
 
     while (m->buffer[m->pos] != '"')
     {
@@ -388,7 +390,9 @@ static void TryConvertIncbin(CFile *m)
         m->pos++;
     }
 
-    string *path = string(&m->buffer[startPos], m->pos - startPos);
+    path = (char *)alloca(m->pos - startPos + 1);
+    memcpy(path, &m->buffer[startPos], m->pos - startPos);
+    path[m->pos - startPos] = '\0';
 
     m->pos++;
 
@@ -399,31 +403,28 @@ static void TryConvertIncbin(CFile *m)
 
     m->pos++;
 
-    putchar_unlocked('{');
+    putc_unlocked('{', g_file);
 
-    int fileSize;
-    unsigned char *buffer = ReadWholeFile(m, path, &fileSize);
-
-    string_Delete(path);
+    buffer = ReadWholeFile(m, path, &fileSize);
 
     if (unlikely((fileSize % size) != 0))
         RaiseError(m, "Size %d doesn't evenly divide file size %d.\n", size, fileSize);
 
-    int count = fileSize / size;
-    int offset = 0;
+    count = fileSize / size;
+    offset = 0;
 
-    for (int i = 0; i < count; i++)
+    for (i = 0; i < count; i++)
     {
         int data = ExtractData(buffer, offset, size);
         offset += size;
 
         if (isSigned)
-            printf("%d,", data);
+            fprintf(g_file, "%d,", data);
         else
-            printf("%uu,", data);
+            fprintf(g_file, "%uu,", data);
     }
 
-    putchar_unlocked('}');
+    putc_unlocked('}', g_file);
 }
 
 // Reports a diagnostic message.
@@ -432,7 +433,7 @@ static void ReportDiagnostic(CFile *m, const char *type, const char *format, va_
     const int bufferSize = 1024;
     char buffer[bufferSize];
     vsnprintf(buffer, bufferSize, format, args);
-    fprintf(stderr, "CFile: %s:%ld: %s: %s\n", m->filename->c_str, m->lineNum, type, buffer);
+    fprintf(stderr, "CFile: %s:%ld: %s: %s\n", m->filename, m->lineNum, type, buffer);
 }
 
 #define DO_REPORT(type)                                                                            \
@@ -445,7 +446,7 @@ static void ReportDiagnostic(CFile *m, const char *type, const char *format, va_
     } while (0)
 
 // Reports an error diagnostic and terminates the program.
-noreturn static void RaiseError(CFile *m, const char *format, ...)
+no_return static void RaiseError(CFile *m, const char *format, ...)
 {
     DO_REPORT("error");
     exit(1);

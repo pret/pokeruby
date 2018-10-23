@@ -23,146 +23,111 @@
 
 #include <vector>
 #include <algorithm>
+#include <unistd.h>
 
 #include "scaninc.h"
 #include "asm_file.h"
 
+
+bool AsmFile::NextLine()
+{
+    ssize_t len;
+    // Avoid empty lines too, don't waste the time.
+    // TODO: std::getline
+    while ((len = getline(&g_buffer, &m_bufsize, m_fp)) <= 0)
+    {
+        if (len < 0)
+        {
+            m_size = 0;
+            m_pos = 0;
+            return false;
+        }
+    }
+    m_size = (int)len;
+    m_pos = 0;
+    return true;
+}
+
+
 AsmFile::AsmFile(std::string &path)
 {
     m_path = path;
+    if (path.empty() || path == "-")
+    {
+        path = "<stdin>";
+        m_fp = stdin;
+    }
+    else
+    {
+        m_fp = std::fopen(path.c_str(), "rb");
+    }
 
-        FILE *fp;
-        if (path.empty() || path == "-")
-        {
-            path = "<stdin>";
-            fp = stdin;
-        }
-        else
-        {
-            fp = std::fopen(path.c_str(), "rb");
-        }
-
-        if (fp == NULL)
-            FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
-
-        m_size = 0;
-        std::vector<char> buf;
-        char tmp[1024];
-        ssize_t count;
-        while ((count = fread(tmp, 1, 1024, fp)) != 0)
-        {
-            if (ferror(fp))
-                FATAL_ERROR("Failed to read \"%s\".\n", path.c_str());
-
-            buf.insert(buf.end(), tmp, tmp + count);
-
-            m_size += count;
-
-            if (feof(fp))
-                break;
-        }
-        if (m_size == 0)
-            FATAL_ERROR("Empty input!");
-        m_buffer = new char[m_size + 1];
-        std::copy(buf.begin(), buf.end(), m_buffer);
-        m_buffer[m_size] = 0;
-
-        if (fp != stdin)
-            fclose(fp);
+    if (m_fp == nullptr)
+        FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
 
     m_pos = 0;
-    m_lineNum = 1;
+    NextLine();
 }
 
 AsmFile::~AsmFile()
 {
-    delete[] m_buffer;
+    if (m_fp != stdin)
+        fclose(m_fp);
 }
 
-IncDirectiveType AsmFile::ReadUntilIncDirective(std::string &path)
+
+bool AsmFile::StrStr(const char *pattern)
 {
-    // At the beginning of each loop iteration, the current file position
-    // should be at the start of a line or at the end of the file.
-    for (;;)
+    char *str = nullptr;
+    while ((str = strstr(&g_buffer[m_pos], pattern)) == nullptr)
     {
-        SkipTabsAndSpaces();
-
-        IncDirectiveType incDirectiveType = IncDirectiveType::None;
-
-        if (PeekChar() == '.')
-        {
-            m_pos++;
-
-            if (MatchIncDirective("incbin", path))
-                incDirectiveType = IncDirectiveType::Incbin;
-            else if (MatchIncDirective("include", path))
-                incDirectiveType = IncDirectiveType::Include;
-        }
-
-        for (;;)
-        {
-            int c = GetChar();
-
-            if (c == -1)
-                return incDirectiveType;
-
-            if (c == ';')
-            {
-                SkipEndOfLineComment();
-                break;
-            }
-            else if (c == '/' && PeekChar() == '*')
-            {
-                m_pos++;
-                SkipMultiLineComment();
-            }
-            else if (c == '"')
-            {
-                SkipString();
-            }
-            else if (c == '\n')
-            {
-                break;
-            }
-        }
-
-        if (incDirectiveType != IncDirectiveType::None)
-            return incDirectiveType;
+        if (!NextLine())
+            return false;
     }
+    m_pos = str - g_buffer;
+    return true;
+}
+
+
+IncDirectiveType AsmFile::GetNextIncDirective(std::string &path)
+{
+    bool str = StrStr(".inc");
+    if (str == false)
+        return IncDirectiveType::None;
+
+    if (!strncmp(&g_buffer[m_pos], ".include", 8) && MatchIncDirective(".include", path))
+        return IncDirectiveType::Include;
+
+    if (!strncmp(&g_buffer[m_pos], ".incbin", 7) && MatchIncDirective(".incbin", path))
+        return IncDirectiveType::Incbin;
+
+    return IncDirectiveType::None;
 }
 
 std::string AsmFile::ReadPath()
 {
-    int length = 0;
     int startPos = m_pos;
 
-    for (;;)
+    // Only on a single line, don't auto advance
+    const char *endquote = strchr(&g_buffer[m_pos], '"');
+    const char *bad = strpbrk(&g_buffer[m_pos], "\r\n\\");
+    if (endquote == nullptr || endquote <= &g_buffer[m_pos])
     {
-        int c = GetChar();
-
-        if (c == '"')
-            break;
-
-        if (c == -1)
-            FATAL_INPUT_ERROR("unexpected EOF in include string\n");
-
-        if (c == 0)
-            FATAL_INPUT_ERROR("unexpected NUL character in include string\n");
-
-        if (c == '\n')
-            FATAL_INPUT_ERROR("unexpected end of line character in include string\n");
-
-        // Don't bother allowing any escape sequences.
-        if (c == '\\')
-            FATAL_INPUT_ERROR("unexpected escape in include string\n");
-
-        length++;
-
-        if (length > SCANINC_MAX_PATH)
-            FATAL_INPUT_ERROR("path is too long");
+        FATAL_INPUT_ERROR("expected ending quote in path string");
     }
+    else if (bad != nullptr && bad < endquote)
+    {
+        if (bad[0] == '\r' || bad[0] == '\n')
+            FATAL_INPUT_ERROR("unexpected end of line character in path string");
+        else
+            FATAL_INPUT_ERROR("unexpected escape in path string");
+    }
+    else if (endquote - &g_buffer[startPos] >= SCANINC_MAX_PATH)
+        FATAL_INPUT_ERROR("path is too long");
 
-    return std::string(m_buffer + startPos, length);
+    std::string str(&g_buffer[startPos], endquote - &g_buffer[startPos]);
+    Advance(endquote - &g_buffer[m_pos] + startPos - 1);
+    return str;
 }
 
 void AsmFile::SkipEndOfLineComment()
