@@ -25,13 +25,12 @@
 
 #include <stdarg.h>
 #include <stdint.h>
-#include "my_string.h"
 
 struct CFile;
 typedef struct CFile CFile;
 
-CFile *CFile_New(string *filename, string *data);
+CFile *CFile_New(const char *restrict filename);
 void CFile_Delete(CFile *m);
-void CFile_Preproc(CFile *cr m);
+void CFile_Preproc(CFile *const restrict m);
 
 #endif  // C_FILE_H

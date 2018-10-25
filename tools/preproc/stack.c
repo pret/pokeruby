@@ -35,11 +35,12 @@ void Stack_Delete(Stack *m)
 
 void Stack_Grow(Stack *m)
 {
+    void **newbuf;
     // Safety
     if (unlikely(m->capacity > UINT_MAX / 2))
         FATAL_ERROR("Stack is out of capacity!\n");
 
-    void **newbuf = (void **)realloc(m->buffer, 2 * m->capacity * sizeof(void *));
+    newbuf = (void **)realloc(m->buffer, 2 * m->capacity * sizeof(void *));
     if (unlikely(!newbuf))
         FATAL_ERROR("Couldn't grow stack!\n");
 
@@ -72,16 +73,18 @@ void Stack_Pop(Stack *m)
     m->count--;
 }
 
-void *Stack_Top(Stack *m)
+void *Stack_Top(const Stack *const restrict m)
 {
+    void *ret;
+
     if (m->count == 0)
         return NULL;
 
-    void *ret = m->buffer[m->count - 1];
+    ret = m->buffer[m->count - 1];
 
     return ret;
 }
 
-unsigned Stack_Count(Stack *m) { return m->count; }
+unsigned Stack_Count(const Stack *const restrict m) { return m->count; }
 
-bool Stack_Empty(Stack *m) { return m->count == 0; }
+bool Stack_Empty(const Stack *const restrict m) { return m->count == 0; }

@@ -6,8 +6,24 @@
 #include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
 #include "gba/gba.h"
 
-// IDE support
-#if defined(__APPLE__) || defined(__CYGWIN__)
+// defined if we are using preproc's preprocessor
+#ifdef PREPROC
+// preproc uses pragmas to parse incbins and strings, define the macros here.
+
+// _Pragma doesn't support multiple string joining so we have to use a second macro.
+#define PP_PRAGMA(...) _Pragma(#__VA_ARGS__)
+
+#define _(...) PP_PRAGMA(preproc _ __VA_ARGS__)
+#define __(...) PP_PRAGMA(preproc __ __VA_ARGS__)
+#define INCBIN_U8(...) PP_PRAGMA(preproc U8 __VA_ARGS__)
+#define INCBIN_U16(...) PP_PRAGMA(preproc U16 __VA_ARGS__)
+#define INCBIN_U32(...) PP_PRAGMA(preproc U32 __VA_ARGS__)
+#define INCBIN_S8(...) PP_PRAGMA(preproc S8 __VA_ARGS__)
+#define INCBIN_S16(...) PP_PRAGMA(preproc S16 __VA_ARGS__)
+#define INCBIN_S32(...) PP_PRAGMA(preproc S32 __VA_ARGS__)
+
+#else
+// Don't confuse other compilers or IDEs.
 #define _(x) x
 #define __(x) x
 #define INCBIN_U8 {0}

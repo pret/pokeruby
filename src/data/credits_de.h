@@ -274,134 +274,134 @@ static const struct CreditsEntry CreditsSchnitzer[] = {0, Text_Schnitzer};
 static const struct CreditsEntry CreditsPujos[] = {0, Text_Pujos};
 
 #define LINES_PER_PAGE 5
-#define _ CreditsTerminator
+
 const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
 {
     {
-        _,
+        CreditsTerminator,
         CreditsVersion,
         CreditsCredits,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsDirector,
         CreditsMasuda,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsArtDirector,
         CreditsSugimori,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsBattleDirector,
         CreditsMorimoto,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsMainProgrammer,
         CreditsTetsuyaWatanabe,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsBattleSystemProgrammer,
         CreditsSogabe,
         CreditsFieldSystemProgrammer,
         CreditsTamada,
-        _
+        CreditsTerminator
     },
     {
         CreditsProgrammers,
         CreditsMori,
         CreditsKagaya,
         CreditsMatsuda,
-        _
+        CreditsTerminator
     },
     {
         CreditsProgrammers,
         CreditsHiroyukiNakamura,
         CreditsTaya,
         CreditsNohara,
-        _
+        CreditsTerminator
     },
     {
         CreditsProgrammers,
         CreditsTomomichiOhta,
         CreditsIwasawa,
         CreditsTakenoriOhta,
-        _
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsMainGraphicDesigner,
         CreditsYoshida,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsPOKeMONGraphicDesigners,
         CreditsSugimori,
         CreditsYoshida,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsPOKeMONGraphicDesigners,
         CreditsFujiwara,
         CreditsSatoshiOhta,
         CreditsIwashita,
-        _
+        CreditsTerminator
     },
     {
         CreditsPOKeMONGraphicDesigners,
         CreditsTomita,
         CreditsUnno,
         CreditsEo,
-        _
+        CreditsTerminator
     },
     {
         CreditsPOKeMONDesigners,
         CreditsMorimoto,
         CreditsOkutani,
         CreditsNishida,
-        _
+        CreditsTerminator
     },
     {
         CreditsPOKeMONDesigners,
         CreditsSaito,
         CreditsYoshikawa,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsMusicComposition,
         CreditsIchinose,
         CreditsAoki,
         CreditsMasuda,
-        _
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsSoundEffectsPOKeMONVoices,
         CreditsAoki,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsGameDesigners,
         CreditsMasuda,
         CreditsMorimoto,
         CreditsNishino,
-        _
+        CreditsTerminator
     },
     {
         CreditsGameDesigners,
@@ -415,42 +415,42 @@ const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
         CreditsShimoyamada,
         CreditsOhmori,
         CreditsTakahashi,
-        _
+        CreditsTerminator
     },
     {
         CreditsPlotScenario,
         CreditsMasuda,
         CreditsTomisawa,
         CreditsNishino,
-        _
+        CreditsTerminator
     },
     {
         CreditsGameScenario,
         CreditsToshinobuMatsumiya,
         CreditsTomisawa,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsScriptDesigners,
         CreditsNohara,
         CreditsTetsujiOhta,
         CreditsTomomichiOhta,
-        _
+        CreditsTerminator
     },
     {
         CreditsMapDesigners,
         CreditsOhmori,
         CreditsTetsujiOhta,
         CreditsNishino,
-        _
+        CreditsTerminator
     },
     {
         CreditsMapDataDesigners,
         CreditsTetsujiOhta,
         CreditsTakahashi,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsParametricDesigners,
@@ -460,11 +460,11 @@ const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
         CreditsShimoyamada
     },
     {
-        _,
+        CreditsTerminator,
         CreditsPOKeDEXText,
         CreditsMatsushima,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsEnvironmentToolProgrammers,
@@ -485,7 +485,7 @@ const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
         CreditsTominaga,
         CreditsYoshioTajiri,
         CreditsSasaki,
-        _
+        CreditsTerminator
     },
     {
         CreditsSpecialThanks,
@@ -519,78 +519,78 @@ const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
         CreditsCoordinators,
         CreditsKyokoWatanabe,
         CreditsNakano,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsTaskManagers,
         CreditsYamagami,
         CreditsNomoto,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsProducers,
         CreditsJinnai,
         CreditsIzushi,
         CreditsTsuru,
-        _
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsExecutiveDirector,
         CreditsSatoshiTajiri,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsExecutiveProducers,
         CreditsIwata,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
-        _,
+        CreditsTerminator,
         CreditsExecutiveProducers,
         CreditsIshihara,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsGermanVersionCoordinators,
         CreditsUesugi,
         CreditsSadahisa,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsTranslators,
         CreditsSchafer,
         CreditsDeimel,
         CreditsJahn,
-        _
+        CreditsTerminator
     },
     {
         CreditsProgrammers,
         CreditsMurakawa,
         CreditsYamamoto,
         CreditsKinashi,
-        _
+        CreditsTerminator
     },
     {
         CreditsGraphicDesigners,
         CreditsYamamoto,
         CreditsKinashi,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsProductSupport,
         CreditsNakamichi,
         CreditsSaeki,
         CreditsHara,
-        _
+        CreditsTerminator
     },
     {
         CreditsNOEProductTesting,
@@ -600,25 +600,24 @@ const struct CreditsEntry *const gCreditsEntryPointerTable[][LINES_PER_PAGE] =
         CreditsSchnitzer
     },
     {
-        _,
+        CreditsTerminator,
         CreditsBrailleCodeCheck,
         CreditsEBU,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
     {
         CreditsSpecialThanks,
         CreditsHiroNakamura,
         CreditsFord,
         CreditsBarlow,
-        _
+        CreditsTerminator
     },
     {
         CreditsSpecialThanks,
         CreditsUyama,
         CreditsPujos,
-        _,
-        _
+        CreditsTerminator,
+        CreditsTerminator
     },
 };
-#undef _

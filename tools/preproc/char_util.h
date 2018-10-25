@@ -55,4 +55,10 @@ static inline bool IsIdentifierStartingChar(uint8_t c)
 // constant in strings.
 static inline bool IsIdentifierChar(uint8_t c) { return IsAsciiAlphanum(c) || c == (uint8_t)'_'; }
 
+static inline size_t SkipIdentifier(const char *str)
+{
+    if (str == NULL || !IsIdentifierStartingChar(str[0]))
+        return 0;
+    return strspn(&str[1], "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_") + 1;
+}
 #endif  // CHAR_UTIL_H

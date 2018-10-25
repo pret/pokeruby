@@ -36,74 +36,60 @@ class AsmFile
 public:
     AsmFile(std::string &path);
     ~AsmFile();
-    IncDirectiveType ReadUntilIncDirective(std::string& path);
+    IncDirectiveType GetNextIncDirective(std::string &path);
 
 private:
-    char *m_buffer;
     int m_pos;
     int m_size;
-    int m_lineNum;
     std::string m_path;
+    FILE *m_fp;
 
-    int GetChar()
+    inline void Advance(int amount = 1)
     {
-        if (m_pos >= m_size)
-            return -1;
-
-        int c = m_buffer[m_pos++];
-
-        if (c == '\r')
+        if (m_pos + amount >= m_size)
         {
-            if (m_pos < m_size && m_buffer[m_pos++] == '\n')
-            {
-                m_lineNum++;
-                return '\n';
-            }
-            else
-            {
-                FATAL_INPUT_ERROR("CR line endings are not supported\n");
-            }
+            m_pos = (m_pos + m_size - amount);
+            NextLine();
         }
-
-        if (c == '\n')
-            m_lineNum++;
-
-        return c;
+        else
+        {
+            m_pos += amount;
+        }
     }
 
-    // No newline translation because it's not needed for any use of this function.
-    int PeekChar()
+    inline char GetChar()
     {
-        if (m_pos >= m_size)
+        if ((g_buffer == nullptr || m_pos + 1 >= m_size) && !NextLine())
+            return -1;
+        return g_buffer[m_pos++];
+    }
+
+    inline char PeekChar()
+    {
+        if (g_buffer == nullptr || m_pos + 1 >= m_size)
             return -1;
 
-        return m_buffer[m_pos];
+        return g_buffer[m_pos];
     }
 
     void SkipTabsAndSpaces()
     {
-        while (m_pos < m_size && (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' '))
-            m_pos++;
+        while (PeekChar() == '\t' || PeekChar() == ' ')
+            Advance();
     }
 
-    bool MatchIncDirective(std::string directiveName, std::string &path)
+    bool MatchIncDirective(const char *directiveName, std::string &path)
     {
-        int length = directiveName.length();
-        int i;
-
-        for (i = 0; i < length && m_pos + i < m_size; i++)
-            if (directiveName[i] != m_buffer[m_pos + i])
-                return false;
-
-        if (i < length)
+        int tmp = m_pos + strlen(directiveName) + 1;
+        if (tmp >= m_size)
             return false;
 
-        m_pos += length;
+        m_pos = tmp;
 
         SkipTabsAndSpaces();
 
         if (GetChar() != '"')
-            FATAL_INPUT_ERROR("no path after \".%s\" directive\n", directiveName.c_str());
+            FATAL_INPUT_ERROR("no path after \"%s\" directive\n", directiveName);
 
         path = ReadPath();
 
@@ -114,6 +100,9 @@ private:
     void SkipEndOfLineComment();
     void SkipMultiLineComment();
     void SkipString();
+    bool NextLine();
+    bool StrStr(const char *pattern);
+
 };
 
 #endif // ASM_FILE_H

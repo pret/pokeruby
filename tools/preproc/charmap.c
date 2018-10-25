@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdarg.h>
-
+//#include "khash.h"
 #include "preproc.h"
 #include "charmap.h"
 #include "char_util.h"
@@ -38,7 +38,7 @@ typedef enum LhsType
 typedef struct Lhs
 {
     LhsType type;
-    string *name;
+    char *name;
     int32_t code;
 } Lhs;
 
@@ -48,43 +48,43 @@ typedef struct CharmapReader
     long pos;
     long size;
     long lineNum;
-    string *filename;
+    const char *filename;
 } CharmapReader;
 
-static void CharmapReader_Delete(CharmapReader *m);
-static Lhs ReadLhs(CharmapReader *m);
-static void ExpectEqualsSign(CharmapReader *m);
-static string *ReadSequence(CharmapReader *m);
-static void ExpectEmptyRestOfLine(CharmapReader *m);
-noreturn static void RaiseError(CharmapReader *m, const char *format, ...);
-static void RemoveComments(CharmapReader *m);
-static string *ReadConstant(CharmapReader *m);
-static void SkipWhitespace(CharmapReader *m);
+static void CharmapReader_Delete(CharmapReader *const restrict m);
+static Lhs ReadLhs(CharmapReader *const restrict m);
+static void ExpectEqualsSign(CharmapReader *const restrict m);
+static char *ReadSequence(CharmapReader *const restrict m, uint32_t *const restrict len);
+static void ExpectEmptyRestOfLine(CharmapReader *const restrict m);
+no_return static void RaiseError(CharmapReader *const restrict m, const char *const restrict format, ...);
+static void RemoveComments(CharmapReader *const restrict m);
+static char *ReadConstant(CharmapReader *const restrict m);
+static void SkipWhitespace(CharmapReader *const restrict m);
 
-static CharmapReader *CharmapReader_New(string *filename)
+static CharmapReader *CharmapReader_New(const char *restrict filename)
 {
     CharmapReader *m = (CharmapReader *)malloc(sizeof(CharmapReader));
 
     m->filename = filename;
 
-    FILE *fp = fopen(m->filename->c_str, "rb");
+    FILE *fp = fopen(m->filename, "rb");
 
     if (unlikely(fp == NULL))
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", m->filename->c_str);
+        FATAL_ERROR("Failed to open \"%s\" for reading.\n", m->filename);
 
     fseek(fp, 0, SEEK_END);
 
     m->size = ftell(fp);
 
     if (unlikely(m->size < 0))
-        FATAL_ERROR("File size of \"%s\" is less than zero.\n", m->filename->c_str);
+        FATAL_ERROR("File size of \"%s\" is less than zero.\n", m->filename);
 
     m->buffer = (char *)malloc(m->size + 1);
 
     rewind(fp);
 
     if (unlikely(fread(m->buffer, m->size, 1, fp) != 1))
-        FATAL_ERROR("Failed to read \"%s\".\n", m->filename->c_str);
+        FATAL_ERROR("Failed to read \"%s\".\n", m->filename);
 
     m->buffer[m->size] = 0;
 
@@ -98,13 +98,13 @@ static CharmapReader *CharmapReader_New(string *filename)
     return m;
 }
 
-static void CharmapReader_Delete(CharmapReader *m)
+static void CharmapReader_Delete(CharmapReader *const restrict m)
 {
-    string_Delete(m->filename);
+    free(m->buffer);
     free(m);
 }
 
-static Lhs ReadLhs(CharmapReader *m)
+static Lhs ReadLhs(CharmapReader *const restrict m)
 {
     Lhs lhs = { LhsType_Char, NULL, 0 };
 
@@ -125,16 +125,20 @@ static Lhs ReadLhs(CharmapReader *m)
 
     if (m->buffer[m->pos] == '\'')
     {
-        m->pos++;
+        bool isEscape;
+        unsigned char c;
+        UnicodeChar unicodeChar;
+        int32_t code;
 
-        bool isEscape = (m->buffer[m->pos] == '\\');
+        m->pos++;
+        isEscape = (m->buffer[m->pos] == '\\');
 
         if (isEscape)
         {
             m->pos++;
         }
 
-        unsigned char c = m->buffer[m->pos];
+        c = m->buffer[m->pos];
 
         if (unlikely(c == 0))
         {
@@ -147,8 +151,8 @@ static Lhs ReadLhs(CharmapReader *m)
         if (unlikely(IsAscii(c) && !IsAsciiPrintable(c)))
             RaiseError(m, "unexpected character U+%X in UTF-8 character literal", c);
 
-        UnicodeChar unicodeChar = DecodeUtf8(&m->buffer[m->pos]);
-        int32_t code = unicodeChar.code;
+        unicodeChar = DecodeUtf8(&m->buffer[m->pos]);
+        code = unicodeChar.code;
 
         if (unlikely(code == -1))
             RaiseError(m, "invalid encoding in UTF-8 character literal");
@@ -213,7 +217,7 @@ static Lhs ReadLhs(CharmapReader *m)
     return lhs;
 }
 
-static void ExpectEqualsSign(CharmapReader *m)
+static void ExpectEqualsSign(CharmapReader *const restrict m)
 {
     SkipWhitespace(m);
 
@@ -237,13 +241,17 @@ static unsigned int ConvertHexDigit(char c)
     return digit;
 }
 
-static string *ReadSequence(CharmapReader *m)
+static char *ReadSequence(CharmapReader *const restrict m, uint32_t *const restrict len)
 {
+    char *sequence;
+    long startPos;
+    unsigned int i, length;
+
     SkipWhitespace(m);
 
-    long startPos = m->pos;
+    startPos = m->pos;
 
-    unsigned int length = 0;
+    length = 0;
 
     while (IsAsciiHexDigit(m->buffer[m->pos]) && IsAsciiHexDigit(m->buffer[m->pos + 1]))
     {
@@ -262,26 +270,24 @@ static string *ReadSequence(CharmapReader *m)
     if (unlikely(length == 0))
         RaiseError(m, "expected byte sequence");
 
-    string *sequence = empty_string();
-    //    string_reserve(sequence, length);
-
+    sequence = (char *)malloc(length + 1);
     m->pos = startPos;
 
-    for (unsigned int i = 0; i < length; i++)
+    for (i = 0; i < length; i++)
     {
         unsigned int digit1 = ConvertHexDigit(m->buffer[m->pos]);
         unsigned int digit2 = ConvertHexDigit(m->buffer[m->pos + 1]);
         unsigned char byte = digit1 * 16 + digit2;
-        sequence = string_add_char(sequence, byte);
+        sequence[i] = (char)byte;
 
         m->pos += 2;
         SkipWhitespace(m);
     }
-
+    // sequence[length] = '\0';
+    *len = length;
     return sequence;
 }
-
-static void ExpectEmptyRestOfLine(CharmapReader *m)
+static void ExpectEmptyRestOfLine(CharmapReader *const restrict m)
 {
     SkipWhitespace(m);
 
@@ -305,7 +311,7 @@ static void ExpectEmptyRestOfLine(CharmapReader *m)
     }
 }
 
-noreturn static void RaiseError(CharmapReader *m, const char *format, ...)
+no_return static void RaiseError(CharmapReader *const restrict m, const char *const restrict format, ...)
 {
     const int bufferSize = 1024;
     char buffer[bufferSize];
@@ -315,12 +321,12 @@ noreturn static void RaiseError(CharmapReader *m, const char *format, ...)
     vsnprintf(buffer, bufferSize, format, args);
     va_end(args);
 
-    fprintf(stderr, "%s:%ld: error: %s\n", m->filename->c_str, m->lineNum, buffer);
+    fprintf(stderr, "%s:%ld: error: %s\n", m->filename, m->lineNum, buffer);
 
     exit(1);
 }
 
-static void RemoveComments(CharmapReader *m)
+static void RemoveComments(CharmapReader *const restrict m)
 {
     long pos = 0;
     bool inString = false;
@@ -357,94 +363,150 @@ static void RemoveComments(CharmapReader *m)
     }
 }
 
-static string *ReadConstant(CharmapReader *m)
+static char *ReadConstant(CharmapReader *const restrict m)
 {
     long startPos = m->pos;
+    char *ret;
 
-    while (IsIdentifierChar(m->buffer[m->pos]))
-        m->pos++;
+    m->pos += SkipIdentifier(&m->buffer[m->pos]);
 
-    return string(&m->buffer[startPos], m->pos - startPos);
+    ret = (char *)malloc(m->pos - startPos + 1);
+    memcpy(ret, &m->buffer[startPos], m->pos - startPos);
+    ret[m->pos - startPos] = '\0';
+
+    return ret;
 }
 
-static void SkipWhitespace(CharmapReader *m)
+static void SkipWhitespace(CharmapReader *const restrict m)
 {
     while (m->buffer[m->pos] == '\t' || m->buffer[m->pos] == ' ')
         m->pos++;
 }
 
-Charmap *Charmap_New(char *file)
+Charmap *Charmap_New(const char *const restrict filename)
 {
     Charmap *m = (Charmap *)calloc(1, sizeof(Charmap));
 
-    string *filename = string(file, strlen(file));
     CharmapReader *reader = CharmapReader_New(filename);
 
-    m->chars = HashMap_New();
-    m->constants = HashMap_New();
+    khiter_t kchars;
+    khiter_t kconsts;
+    int status;
+
+    m->chars = kh_init(Char);
+    m->constants = kh_init(Constant);
 
     for (;;)
     {
         Lhs lhs = ReadLhs(reader);
+        uint32_t length = 0;
+        char *sequence;
+        int line = 0;
 
         if (lhs.type == LhsType_None)
+        {
+	        CharmapReader_Delete(reader);
+
             return m;
+        }
 
         ExpectEqualsSign(reader);
-
-        string *sequence = ReadSequence(reader);
-
+        sequence = ReadSequence(reader, &length);
+        ++line;
         switch (lhs.type)
         {
         case LhsType_Char:
-            if (unlikely(HashMap_FindInt(m->chars, lhs.code) != NULL))
+            kchars = kh_get(Char, m->chars, lhs.code);
+
+            if (unlikely(kchars != kh_end(m->chars)))
                 RaiseError(reader, "redefining char");
-            HashMap_PutInt(m->chars, lhs.code, sequence);
+
+            kchars = kh_put(Char, m->chars, lhs.code, &status);
+            kh_value(m->chars, kchars) = (CharmapValue) { sequence, length };
             break;
         case LhsType_Escape:
-            if (unlikely(m->escapes[lhs.code] != NULL))
+            if (unlikely(m->escapes[lhs.code].str != NULL))
                 RaiseError(reader, "redefining escape");
-            m->escapes[lhs.code] = sequence;
+            m->escapes[lhs.code] = (CharmapValue) { sequence, length };
             break;
         case LhsType_Constant:
-            if (unlikely(HashMap_FindString(m->constants, lhs.name) != NULL))
-                RaiseError(reader, "redefining constant");
-            HashMap_PutString(m->constants, lhs.name, sequence);
-            break;
-        }
+            kconsts = kh_get(Constant, m->constants, lhs.name);
 
+            if (unlikely(kconsts != kh_end(m->constants)))
+                RaiseError(reader, "redefining constant");
+
+            kconsts = kh_put(Constant, m->constants, lhs.name, &status);
+            kh_value(m->constants, kconsts) = (CharmapValue) { sequence, length };
+
+            break;
+        case LhsType_None:
+            RaiseError(reader, "LhsType is invalid!");
+        }
         ExpectEmptyRestOfLine(reader);
     }
-    CharmapReader_Delete(reader);
 }
 
-void Charmap_Delete(Charmap *m)
+void Charmap_Delete(Charmap *const restrict m)
 {
-    HashMap_Delete(m->constants);
-    HashMap_Delete(m->chars);
-    for (uint8_t i = 0; i < 128; i++)
-        if (m->escapes[i])
-            string_Delete(m->escapes[i]);
+    int i;
+    khiter_t k;
+    for (k = kh_begin(m->chars); k != kh_end(m->chars); ++k)
+    {
+        if (kh_exist(m->chars, k))
+        {
+            free(kh_value(m->chars, k).str);
+            kh_del(Char, m->chars, k);
+        }
+    }
+    kh_destroy(Char, m->chars);
+    for (k = kh_begin(m->constants); k != kh_end(m->constants); ++k)
+    {
+        if (kh_exist(m->constants, k))
+        {
+            free((char *)kh_key(m->constants, k));
+            free(kh_value(m->constants, k).str);
+            kh_del(Constant, m->constants, k);
+        }
+    }
+    kh_destroy(Constant, m->constants);
+
+    for (i = 0; i < 128; i++)
+        if (m->escapes[i].str != NULL)
+            free(m->escapes[i].str);
 
     free(m);
 }
 
-string *Charmap_Char(Charmap *m, int32_t code)
+const char *Charmap_Char(const Charmap *const restrict m, int32_t code, uint32_t *const restrict len)
 {
-    string *it = HashMap_FindInt(m->chars, code);
+    khiter_t iter = kh_get(Char, m->chars, code);
+    CharmapValue value;
 
-    if (unlikely(!it))
-        return empty_string();
+    // No match
+    if (iter == kh_end(m->chars))
+    {
+        *len = 0;
+        return NULL;
+    }
+    value = kh_value(m->chars, iter);
+    *len = value.len;
+    return value.str;
 
-    return it;
 }
 
-string *Charmap_Constant(Charmap *m, const string *identifier)
+const char *Charmap_Constant(const Charmap *const restrict m, const char *const restrict identifier, uint32_t *const restrict len)
 {
-    string *it = HashMap_FindString(m->constants, identifier);
+    khiter_t iter = kh_get(Constant, m->constants, identifier);
+    CharmapValue value;
 
-    if (unlikely(!it))
-        return empty_string();
+    // No match
+    if (iter == kh_end(m->constants))
+    {
+        *len = 0;
+        return NULL;
+    }
+    value = kh_value(m->constants, iter);
+    *len = value.len;
 
-    return it;
+    return value.str;
 }

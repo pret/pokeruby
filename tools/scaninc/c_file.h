@@ -36,10 +36,38 @@ public:
     const std::set<std::string>& GetIncludes() { return m_includes; }
 
 private:
-    char *m_buffer;
+    bool NextLine();
+    bool StrChr(char pattern);
+    bool StrStr(const char *pattern);
+
+    inline void Advance(int amount = 1)
+    {
+        if (m_pos + amount >= m_size)
+        {
+            m_pos = (m_pos + m_size - amount);
+            NextLine();
+        }
+        else
+        {
+            m_pos += amount;
+        }
+    }
+
+    inline char GetChar()
+    {
+        if ((g_buffer == nullptr || m_pos + 1 >= m_size) && !NextLine())
+            return '\0';
+        return g_buffer[m_pos++];
+    }
+    inline char PeekChar(int off = 1)
+    {
+        if (g_buffer == nullptr || m_pos + off >= m_size)
+            return '\0';
+        return g_buffer[m_pos + off - 1];
+    }
     int m_pos;
     int m_size;
-    int m_lineNum;
+    FILE *m_fp;
     std::string m_path;
     std::set<std::string> m_incbins;
     std::set<std::string> m_includes;

@@ -200,10 +200,10 @@ $(BUILD_DIR)/%.o: %.s
 # to gcc -M and only does it when needed.
 # If NODEP is enabled, these rules will be orphaned.
 $(DEPDIR)/%.d: %.c $(SCANINC)
-	$(SCANINC) -I include $<
+	@$(SCANINC) -I include $<
 
 $(DEPDIR)/%.d: %.s $(SCANINC)
-	$(SCANINC) -I include $<
+	@$(SCANINC) -I include $<
 
 # .PRECIOUS: $(DEPDIR)/%.d
 

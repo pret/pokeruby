@@ -25,23 +25,35 @@
 
 #include <stdint.h>
 
-#include "my_string.h"
-#include "hash_map.h"
+#include "khash.h"
+
+typedef struct CharmapValue
+{
+    char *str;
+    uint32_t len;
+} CharmapValue;
+
+KHASH_MAP_INIT_INT(Char, CharmapValue)
+KHASH_MAP_INIT_STR(Constant, CharmapValue)
 
 typedef struct Charmap
 {
-    HashMap *chars;
-    string *escapes[128];
-    HashMap *constants;
+    khash_t(Char) *chars;
+    CharmapValue escapes[128];
+    khash_t(Constant) *constants;
 } Charmap;
 
-string *Charmap_Char(Charmap *m, int32_t code);
+const char *Charmap_Char(const Charmap *const restrict m, int32_t code, uint32_t *const restrict len /* output */);
+const char *Charmap_Constant(const Charmap *const restrict m, const char *const restrict identifier, uint32_t *const restrict len /* output */);
+__attribute__((__pure__)) inline static const char *Charmap_Escape(const Charmap *const restrict m, uint8_t code, uint32_t *const restrict len /* ourput */)
+{
+    *len = m->escapes[code].len;
+    return m->escapes[code].str;
+}
 
-inline static string *Charmap_Escape(Charmap *m, uint8_t code) { return m->escapes[code]; }
 
-string *Charmap_Constant(Charmap *r m, const string *r identifier);
-
-Charmap *Charmap_New(char *filename);
-void Charmap_Delete(Charmap *m);
+__attribute__((__malloc__)) Charmap *Charmap_New(const char *const restrict filename);
+void Charmap_Delete(Charmap *const restrict m);
 
 #endif  // CHARMAP_H
+

@@ -32,8 +32,8 @@ class Formatter
 {
 private:
     size_t line_len;
-    std::stringstream targetstream;
-    std::stringstream phonystream;
+    std::string targetstream;
+    std::string phonystream;
    	void WriteFilename(const std::string &str);
 public:
     Formatter() = default;

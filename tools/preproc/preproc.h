@@ -23,41 +23,43 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-#ifndef r
+#define kMaxPath 256
+#define kMaxStringLength 1024
+#define kMaxCharmapSequenceLength 16
+
+struct Charmap;
+extern struct Charmap *g_charmap;
+extern FILE *g_file;
+extern bool g_lines;
+
 #ifdef __cplusplus
-#define r __restrict
-#define cr const __restrict
-#else
-#define r restrict
-#define cr const restrict
-#endif
+#define restrict __restrict
 #endif
 
-#ifndef noreturn
+#ifndef no_return
 #ifdef __cplusplus
-#define noreturn [[noreturn]]
+#define no_return [[noreturn]]
 #else
 #if __STDC_VERSION__ >= 201112L
-#define noreturn _Noreturn
+#define no_return _Noreturn
+#elif defined(__GNUC__)
+#define no_return __attribute__((__noreturn__))
 #else
-#define noreturn
+#define no_return
 #endif
 #endif
 #endif
 
 #if defined(__GNUC__) || defined(__clang__)
-#define likely(x) __builtin_expect((x), 1)
-#define unlikely(x) __builtin_expect((x), 0)
+#define likely(x) __builtin_expect(!!(x), 1)
+#define unlikely(x) __builtin_expect(!!(x), 0)
+#define unlikely_else else if (__builtin_expect(1, 0))
 #else
 #define likely(x) (x)
 #define unlikely(x) (x)
-#endif
-
-#ifdef __cplusplus
-#define lambda(...) []() { __VA_ARGS__ }
-#else
-#define lambda(...) ({ __VA_ARGS__ })
+#define unlikely_else else
 #endif
 
 #ifdef _MSC_VER
@@ -78,12 +80,5 @@
     } while (0)
 
 #endif  // _MSC_VER
-
-#define kMaxPath 256
-#define kMaxStringLength 1024
-#define kMaxCharmapSequenceLength 16
-
-struct Charmap;
-extern struct Charmap *g_charmap;
 
 #endif  // PREPROC_H
