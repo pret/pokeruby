@@ -22,6 +22,7 @@
 #define ASM_FILE_H
 
 #include <string>
+#include <string.h>
 #include "scaninc.h"
 
 enum class IncDirectiveType

@@ -140,7 +140,7 @@ void ParsePragma(const char *restrict str, const char *restrict filename, long l
     else
     {
         // Split the pragma string and parse each of them.
-        const char delim[] = (const char[]) { (char)PRAGMA_TOKEN_END, (char)'\0' };
+        const char delim[2] = { (const char)PRAGMA_TOKEN_END, (const char)'\0' };
         const char *split = strtok(pragmaStr, delim);
 
         while (split != NULL)

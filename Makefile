@@ -187,9 +187,9 @@ endif
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s
 ifeq (,$(KEEP_TEMPS))
-	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) - -P -I include | $(AS) $(ASFLAGS) -o $@
 else
-	$(PREPROC) -n -c charmap.txt $< | $(CPP) -x assembler-with-cpp - -P -I include -o $(BUILD_DIR)/$*.s
+	$(PREPROC) -n -c charmap.txt $< | $(CPP) - -P -I include -o $(BUILD_DIR)/$*.s
 	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
 endif
 
