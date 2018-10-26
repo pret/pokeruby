@@ -1,6 +1,6 @@
 CXX = g++
 
-CXXFLAGS = -Wall -Werror -std=c++11 -fno-exceptions -fno-rtti -O3 -march=native -mtune=native
+CXXFLAGS = -Wall -Werror -std=c++11 -fno-exceptions -fno-rtti -O3
 
 SRCS = scaninc.cpp c_file.cpp asm_file.cpp formatter.cpp
 OBJS = $(SRCS:.cpp=.o)
