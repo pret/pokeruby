@@ -57,9 +57,9 @@
 	.byte \word
 	.endm
 
-	.macro me_setrecordmixinggift unk, quantity, itemId
+	.macro me_setrecordmixinggift _unk, quantity, itemId
 	.byte 11
-	.byte \unk, \quantity
+	.byte \_unk, \quantity
 	.2byte \itemId
 	.endm
 

@@ -332,10 +332,10 @@
 	.endm
 
 	@ Plays the specified (song_number) song. The byte is apparently supposed to be 0x00.
-	.macro playbgm song_number, unknown
+	.macro playbgm song_number, _unknown
 	.byte 0x33
 	.2byte \song_number
-	.byte \unknown
+	.byte \_unknown
 	.endm
 
 	@ Saves the specified (song_number) song to be played later.
@@ -836,14 +836,14 @@
 	.endm
 
 	@ Gives the player one of the specified (species) Pokemon at level level holding item. The unknown arguments should all be zeroes.
-	.macro givemon species, level, item, unknown1, unknown2, unknown3
+	.macro givemon species, level, item, _unknown1, _unknown2, _unknown3
 	.byte 0x79
 	.2byte \species
 	.byte \level
 	.2byte \item
-	.4byte \unknown1
-	.4byte \unknown2
-	.byte \unknown3
+	.4byte \_unknown1
+	.4byte \_unknown2
+	.byte \_unknown3
 	.endm
 
 	.macro giveegg species
