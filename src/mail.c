@@ -829,7 +829,7 @@ void debug_sub_810CDF0(void)
     gMain.watchedKeysPressed = 0;
     gMain.watchedKeysMask = 0;
     gFieldCallback = mapldr_default;
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
 }
 
 void debug_sub_810CE1C(u8 taskId)

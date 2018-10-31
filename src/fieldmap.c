@@ -715,7 +715,7 @@ bool8 CameraMove(int x, int y)
     unsigned int direction;
     struct MapConnection *connection;
     int old_x, old_y;
-    gCamera.field_0 = FALSE;
+    gCamera.active = FALSE;
     direction = GetPostCameraMoveMapBorderId(x, y);
     if (direction + 1 <= 1)
     {
@@ -730,14 +730,14 @@ bool8 CameraMove(int x, int y)
         connection = sub_8056A64(direction, gSaveBlock1.pos.x, gSaveBlock1.pos.y);
         sub_8056918(connection, direction, x, y);
         sub_80538F0(connection->mapGroup, connection->mapNum);
-        gCamera.field_0 = TRUE;
+        gCamera.active = TRUE;
         gCamera.x = old_x - gSaveBlock1.pos.x;
         gCamera.y = old_y - gSaveBlock1.pos.y;
         gSaveBlock1.pos.x += x;
         gSaveBlock1.pos.y += y;
         sub_80566F0(direction);
     }
-    return gCamera.field_0;
+    return gCamera.active;
 }
 
 struct MapConnection *sub_8056A64(u8 direction, int x, int y)

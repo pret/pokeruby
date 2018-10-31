@@ -31,7 +31,6 @@ extern u8 gUnknown_03004860;
 void Overworld_ResetStateAfterFly(void);
 void Overworld_ResetStateAfterTeleport(void);
 void Overworld_ResetStateAfterDigEscRope(void);
-void Overworld_ResetStateAfterWhiteOut(void);
 void ResetGameStats(void);
 void IncrementGameStat(u8 index);
 u32 GetGameStat(u8 index);
@@ -98,7 +97,6 @@ bool8 BGMusicStopped(void);
 void Overworld_FadeOutMapMusic(void);
 // PlayAmbientCry
 void UpdateAmbientCry(s16 *, u16 *);
-void ChooseAmbientCrySpecies(void);
 u8 GetMapTypeByGroupAndId(s8 mapGroup, s8 mapNum);
 // GetMapTypeByWarpData
 u8 Overworld_GetMapTypeOfSaveblockLocation(void);
@@ -115,8 +113,7 @@ bool32 is_c1_link_related_active(void);
 // c1_overworld
 // OverworldBasic
 void CB2_OverworldBasic(void);
-void c2_overworld(void);
-// set_callback1
+// SetMainCallback1
 // sub_80543DC
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
@@ -124,9 +121,9 @@ void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
 void sub_8054534(void);
 void sub_8054588(void);
-void c2_exit_to_overworld_2_switch(void);
-void c2_exit_to_overworld_2_local(void);
-void c2_exit_to_overworld_2_link(void);
+void CB2_ReturnToField(void);
+void CB2_ReturnToFieldLocal(void);
+void CB2_ReturnToFieldLink(void);
 // sub_805465C
 void c2_exit_to_overworld_1_sub_8080DEC(void);
 // sub_80546B8
@@ -135,8 +132,6 @@ void sub_80546F0(void);
 // sub_805470C
 void CB2_ContinueSavedGame(void);
 void FieldClearVBlankHBlankCallbacks(void);
-void SetFieldVBlankCallback(void);
-void VBlankCB_Field(void);
 bool32 sub_805493C(u8 *, u32);
 bool32 sub_8054A4C(u8 *);
 bool32 sub_8054A9C(u8 *a1);
@@ -184,13 +179,10 @@ bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
 u8 *sub_8055648(struct UnkStruct_8054FF8 *);
 bool32 sub_8055660(struct UnkStruct_8054FF8 *);
-u8 *sub_805568C(struct UnkStruct_8054FF8 *);
-u16 sub_8055758(u8 *);
+const u8 *sub_805568C(struct UnkStruct_8054FF8 *);
 void sub_80557E8(void);
 void sub_80557F4(void);
-void sub_8055808(u8 *);
 void sub_8055824(void);
-void sub_8055840(u8 *);
 void sub_805585C(void);
 bool32 sub_8055870(void);
 u32 sub_80558AC(void);
@@ -199,8 +191,6 @@ u32 sub_8055940(void);
 // ClearLinkPlayerEventObject
 void ClearLinkPlayerEventObjects(void);
 // ZeroEventObject
-void SpawnLinkPlayerEventObject(u8, s16, s16, u8);
-void InitLinkPlayerEventObjectPos(struct EventObject *, s16, s16);
 // unref_sub_8055A6C
 // unref_sub_8055A9C
 u8 sub_8055AE8(u8);
@@ -208,7 +198,6 @@ void sub_8055B08(u8, u16 *, u16 *);
 u8 sub_8055B30(u8);
 u8 sub_8055B50(u8);
 // unref_sub_8055B74
-u8 GetLinkPlayerIdAt(s16, s16);
 void sub_8055BFC(u8, u8);
 // sub_8055C68
 // sub_8055C88
@@ -218,10 +207,6 @@ void sub_8055BFC(u8, u8);
 // sub_8055D18
 // sub_8055D30
 // sub_8055D38
-u8 npc_something3(u8, u8);
-u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
-void CreateLinkPlayerSprite(u8);
-void SpriteCB_LinkPlayer(struct Sprite *);
 void sub_805465C(void);
 
 void CB2_InitTestMenu(void);

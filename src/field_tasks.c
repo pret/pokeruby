@@ -847,7 +847,7 @@ void Task_MuddySlope(u8 taskId)
             break;
     }
 
-    if (gCamera.field_0 && mapIndices != data[0])
+    if (gCamera.active && mapIndices != data[0])
     {
         data[0] = mapIndices;
         x2 = gCamera.x;

@@ -1219,7 +1219,7 @@ void sub_8116B40(u8 taskId) // end roulette ?
         REG_BLDALPHA = 0x0;
         REG_BLDY = 0x0;
         gFieldCallback = &sub_8080990;
-        SetMainCallback2(&c2_exit_to_overworld_2_switch);
+        SetMainCallback2(&CB2_ReturnToField);
         DestroyTask(taskId);
 #if DEBUG
         unk_203955C[0] = 0;
