@@ -41,8 +41,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6EEC[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6EF0 =
 {
-    .tileTag = 10185,
-    .paletteTag = 10185,
+    .tileTag = ANIM_TAG_SPHERE_TO_CUBE,
+    .paletteTag = ANIM_TAG_SPHERE_TO_CUBE,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6EEC,
     .images = NULL,
@@ -59,7 +59,7 @@ void sub_80CDFB0(struct Sprite* sprite)
     sprite->data[2] = 0;
     sprite->data[3] = 0;
     sprite->data[4] = 0;
-    sprite->data[5] = BattleAnimAdjustPanning(-0x40);
+    sprite->data[5] = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
     sprite->callback = sub_80CE000;
 }
 

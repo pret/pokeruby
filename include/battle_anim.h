@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLEANIM_H
 #define GUARD_BATTLEANIM_H
 
+#include "constants/battle_anim.h"
+
 #include "sprite.h"
 
 #define REG_BGnCNT_BITFIELD(n) (*(vBgCnt *)REG_ADDR_BG##n##CNT)

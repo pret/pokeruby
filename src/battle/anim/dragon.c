@@ -42,8 +42,8 @@ const union AnimCmd *const gSpriteAnimTable_83DAFC8[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAFCC =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAFC8,
     .images = NULL,
@@ -95,8 +95,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB03C[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB044 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DFF4,
     .anims = gSpriteAnimTable_83DB004,
     .images = NULL,
@@ -121,8 +121,8 @@ const union AnimCmd *const gSpriteAnimTable_83DB074[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB078 =
 {
-    .tileTag = 10035,
-    .paletteTag = 10035,
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DB074,
     .images = NULL,
@@ -164,8 +164,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB0C8[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB0D0 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DFF4,
     .anims = gSpriteAnimTable_83DB0A0,
     .images = NULL,
@@ -175,8 +175,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB0D0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB0E8 =
 {
-    .tileTag = 10249,
-    .paletteTag = 10249,
+    .tileTag = ANIM_TAG_HOLLOW_ORB,
+    .paletteTag = ANIM_TAG_HOLLOW_ORB,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -186,8 +186,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB0E8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB100 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAFC8,
     .images = NULL,

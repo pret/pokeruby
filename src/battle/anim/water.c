@@ -43,8 +43,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9314[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9318 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837E04C,
     .anims = gSpriteAnimTable_83D9310,
     .images = NULL,
@@ -54,8 +54,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9318 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9330 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837E10C,
     .anims = gSpriteAnimTable_83D9314,
     .images = NULL,
@@ -65,8 +65,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9330 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9348 =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D9BC8,
     .images = NULL,
@@ -76,8 +76,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9348 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9360 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -87,8 +87,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9360 =
 
 const struct SpriteTemplate gSpriteTemplate_83D9378 =
 {
-    .tileTag = 10268,
-    .paletteTag = 10268,
+    .tileTag = ANIM_TAG_GLOWY_BLUE_ORB,
+    .paletteTag = ANIM_TAG_GLOWY_BLUE_ORB,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -159,8 +159,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9404[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9408 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D93A8,
     .images = NULL,
@@ -170,8 +170,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9408 =
 
 const struct SpriteTemplate gSpriteTemplate_83D9420 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF84,
     .anims = gSpriteAnimTable_83D93A8,
     .images = NULL,
@@ -181,8 +181,8 @@ const struct SpriteTemplate gSpriteTemplate_83D9420 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9438 =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83D93B0,
     .images = NULL,
@@ -192,7 +192,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D9438 =
 
 void sub_80D37FC(struct Sprite *sprite)
 {
-    sub_8078764(sprite, 1);
+    sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[2] = sprite->pos1.x + gBattleAnimArgs[2];
@@ -206,7 +206,7 @@ void sub_80D3838(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
     {
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
     }
     else
     {

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_kakkoii_grp, voicegroup_84407E8
+	.equ	bgm_kakkoii_grp, voicegroup060
 	.equ	bgm_kakkoii_pri, 0
 	.equ	bgm_kakkoii_rev, reverb_set+50
 	.equ	bgm_kakkoii_mvl, 127

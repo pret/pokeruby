@@ -433,7 +433,7 @@ extern u16 gBattleTypeFlags;
 extern const u8 BattleText_SafariBalls[];
 extern const u8 BattleText_SafariBallsLeft[];
 extern const u8 BattleText_HighlightRed[];
-extern const u8 gUnknown_08D1216C[][32];
+extern const u8 gHealthboxElementsGfxTable[][32];
 
 extern const u16 gBattleInterfaceStatusIcons_DynPal[];
 
@@ -870,7 +870,7 @@ u8 battle_make_oam_safari_battle(void)
 
 static const void *sub_8043CDC(u8 a)
 {
-    return gUnknown_08D1216C[a];
+    return gHealthboxElementsGfxTable[a];
 }
 
 static void sub_8043CEC(struct Sprite *sprite)

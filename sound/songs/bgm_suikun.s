@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_suikun_grp, voicegroup_pokemon_cry
+	.equ	bgm_suikun_grp, voicegroup000
 	.equ	bgm_suikun_pri, 0
 	.equ	bgm_suikun_rev, reverb_set+50
 	.equ	bgm_suikun_mvl, 127

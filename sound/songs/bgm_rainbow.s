@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_rainbow_grp, voicegroup_84425E8
+	.equ	bgm_rainbow_grp, voicegroup065
 	.equ	bgm_rainbow_pri, 0
 	.equ	bgm_rainbow_rev, reverb_set+50
 	.equ	bgm_rainbow_mvl, 127

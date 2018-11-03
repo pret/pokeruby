@@ -627,7 +627,7 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = sub_8080E44;
     }
 }
@@ -1038,7 +1038,7 @@ u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     }
 }
 
-void TrainerWantsBattle(u8 trainerEventObjId, u8 *trainerScript)
+void TrainerWantsBattle(u8 trainerEventObjId, const u8 *trainerScript)
 {
     gSelectedEventObject = trainerEventObjId;
     gSpecialVar_LastTalked = gEventObjects[trainerEventObjId].localId;
@@ -1047,7 +1047,7 @@ void TrainerWantsBattle(u8 trainerEventObjId, u8 *trainerScript)
     ScriptContext2_Enable();
 }
 
-bool32 GetTrainerFlagFromScriptPointer(u8 *data)
+bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
     return FlagGet(TRAINER_FLAG_START + flag);

@@ -1,29 +1,29 @@
 #include "global.h"
 #include "data2.h"
-#include "script.h"
-#include "trig.h"
-#include "main.h"
-#include "field_effect_helpers.h"
-#include "field_weather.h"
 #include "decompress.h"
-#include "sprite.h"
-#include "menu.h"
-#include "palette.h"
-#include "text.h"
-#include "overworld.h"
-#include "task.h"
-#include "sound.h"
 #include "decoration.h"
-#include "field_player_avatar.h"
 #include "event_object_movement.h"
-#include "metatile_behavior.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_fadetransition.h"
+#include "field_player_avatar.h"
+#include "field_weather.h"
 #include "fieldmap.h"
-#include "util.h"
+#include "main.h"
+#include "menu.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "palette.h"
 #include "pokemon_storage_system.h"
+#include "script.h"
+#include "sound.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
+#include "trig.h"
+#include "util.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
@@ -1076,7 +1076,7 @@ void c3_080843F8(u8);
 
 void sub_80865BC(void)
 {
-    SetMainCallback2(c2_exit_to_overworld_2_switch);
+    SetMainCallback2(CB2_ReturnToField);
     gFieldCallback = mapldr_080842E8;
 }
 
@@ -2064,7 +2064,7 @@ void sub_8087AA4(struct Task *task)
 
 void sub_8087AC8(struct Task *task)
 {
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if (task->data[1] == 0 || (--task->data[1]) == 0)
     {
@@ -2080,7 +2080,7 @@ void sub_8087AC8(struct Task *task)
             DestroyTask(FindTaskIdByFunc(sub_8087A74));
             return;
         }
-        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(unknown_0839F380[eventObject->facingDirection]));
+        EventObjectSetHeldMovement(eventObject, GetFaceDirectionMovementAction(spinDirections[eventObject->facingDirection]));
         if (task->data[2] < 32)
         {
             task->data[2]++;
@@ -2229,7 +2229,7 @@ void sub_8087E4C(struct Task *task)
 
 void sub_8087ED8(struct Task *task)
 {
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
     if ((sprite->pos2.y += task->data[1]) >= -8)
@@ -2255,7 +2255,7 @@ void sub_8087ED8(struct Task *task)
     if ((--task->data[2]) == 0)
     {
         task->data[2] = 4;
-        EventObjectTurn(eventObject, unknown_0839F380[eventObject->facingDirection]);
+        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
     }
     if (sprite->pos2.y >= 0)
     {
@@ -2268,11 +2268,11 @@ void sub_8087ED8(struct Task *task)
 
 void sub_8087FDC(struct Task *task)
 {
-    u8 unknown_0839F380[5] = {1, 3, 4, 2, 1};
+    u8 spinDirections[5] = {DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH};
     struct EventObject *eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
     if ((--task->data[1]) == 0)
     {
-        EventObjectTurn(eventObject, unknown_0839F380[eventObject->facingDirection]);
+        EventObjectTurn(eventObject, spinDirections[eventObject->facingDirection]);
         task->data[1] = 8;
         if ((++task->data[2]) > 4 && task->data[14] == eventObject->facingDirection)
         {
@@ -2474,7 +2474,7 @@ void sub_808843C(u16 offs)
     u16 i;
     u16 *dest;
     dest = (u16 *)(VRAM + 0x140 + offs);
-    for (i=0; i<0x140; i++, dest++)
+    for (i = 0; i < 0x140; i++, dest++)
     {
         *dest = gFieldMoveStreaksTilemap[i] | 0xf000;
     }
@@ -2810,7 +2810,7 @@ u8 FldEff_UseSurf(void)
     taskId = CreateTask(sub_8088954, 0xff);
     gTasks[taskId].data[15] = gFieldEffectArguments[0];
     Overworld_ClearSavedMusic();
-    Overworld_ChangeMusicTo(0x016d);
+    Overworld_ChangeMusicTo(MUS_NAMINORI);
     return FALSE;
 }
 
@@ -2868,7 +2868,7 @@ void sub_8088A78(struct Task *task)
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         EventObjectClearHeldMovementIfFinished(eventObject);
         EventObjectSetHeldMovement(eventObject, GetJumpSpecialMovementAction(eventObject->movementDirection));
         gFieldEffectArguments[0] = task->data[1];
@@ -3039,7 +3039,7 @@ void sub_8088E2C(struct Task *task)
     if ((++task->data[2]) >= 8)
     {
         eventObject = &gEventObjects[gPlayerAvatar.eventObjectId];
-        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
         eventObject->inanimate = 1;
         EventObjectSetHeldMovement(eventObject, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
@@ -3279,7 +3279,7 @@ void sub_80892A0(struct Task *task)
         {
             sub_8127ED0(eventObject->fieldEffectSpriteId, 0);
         }
-        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         CameraObjectReset2();
         EventObjectTurn(eventObject, DIR_WEST);
         StartSpriteAnim(&gSprites[eventObject->spriteId], 0x16);
@@ -3389,7 +3389,7 @@ void fishE(struct Task *task)
             state = PLAYER_AVATAR_STATE_SURFING;
             sub_8127ED0(eventObject->fieldEffectSpriteId, 1);
         }
-        sub_805B980(eventObject, GetPlayerAvatarGraphicsIdByStateId(state));
+        EventObjectSetGraphicsId(eventObject, GetPlayerAvatarGraphicsIdByStateId(state));
         EventObjectTurn(eventObject, DIR_SOUTH);
         gPlayerAvatar.flags = task->data[15];
         gPlayerAvatar.preventStep = FALSE;

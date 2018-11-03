@@ -279,11 +279,9 @@ SECTIONS {
         src/battle/anim/shock.o(.text);
         src/battle/anim/current.o(.text);
         src/battle/anim/ice.o(.text);
-        asm/ice.o(.text);
         src/battle/anim/fight.o(.text);
         src/battle/anim/poison.o(.text);
         src/battle/anim/flying.o(.text);
-        asm/flying.o(.text);
         src/battle/anim/psychic.o(.text);
         src/battle/anim/bug.o(.text);
         src/battle/anim/rock.o(.text);
@@ -736,7 +734,7 @@ SECTIONS {
         src/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
-        data/battle_anim_812C144.o(.rodata);
+        src/battle/battle_anim_812C144.o(.rodata);
         src/move_tutor_menu.o(.rodata);
         src/decoration_inventory.o(.rodata);
         src/roamer.o(.rodata);
@@ -745,7 +743,7 @@ SECTIONS {
         src/battle/battle_controller_wally.o(.rodata);
         src/player_pc.o(.rodata);
         src/intro.o(.rodata);
-        data/battle_anim_813F0F4.o(.rodata);
+        src/battle/battle_anim_813F0F4.o(.rodata);
         src/hall_of_fame.o(.rodata);
         src/credits.o(.rodata);
         src/lottery_corner.o(.rodata);
@@ -1209,7 +1207,7 @@ SECTIONS {
     gfx_data :
     ALIGN(4)
     {
-        data/graphics.o(gfx_data);
+        src/data/graphics.o(.rodata);
     } =0
 
     /* DWARF 2 sections */

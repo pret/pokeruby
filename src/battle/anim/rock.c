@@ -28,8 +28,8 @@ extern void AnimMoveTwisterParticle(struct Sprite *sprite);
 void sub_80DCE9C(struct Sprite *sprite);
 void sub_80DCF60(struct Sprite *sprite);
 void sub_80DCFE4(struct Sprite *sprite);
-void sub_80DD3AC(struct Sprite *sprite);
-void sub_80DD490(struct Sprite *sprite);
+void AnimDirtParticleAcrossScreen(struct Sprite *sprite);
+void AnimRaiseSprite(struct Sprite *sprite);
 void sub_80DD87C(struct Sprite *sprite);
 void sub_80DD8E8(struct Sprite *sprite);
 void sub_80DD978(struct Sprite *sprite);
@@ -70,8 +70,8 @@ const union AnimCmd *const gSpriteAnimTable_83DAC40[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC4C =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAC40,
     .images = NULL,
@@ -81,8 +81,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC4C =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC64 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAC40,
     .images = NULL,
@@ -92,8 +92,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC64 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAC7C =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -116,8 +116,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DACB4[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACB8 =
 {
-    .tileTag = 10149,
-    .paletteTag = 10149,
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_WATER_ORB,
     .oam = &gOamData_837E0AC,
     .anims = gSpriteAnimTable_83D91F0,
     .images = NULL,
@@ -127,8 +127,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACB8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACD0 =
 {
-    .tileTag = 10029,
-    .paletteTag = 10029,
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D95E0,
     .images = NULL,
@@ -136,15 +136,15 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACD0 =
     .callback = sub_80DCFE4,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DACE8 =
+const struct SpriteTemplate gFlyingDirtSpriteTemplate =
 {
-    .tileTag = 10261,
-    .paletteTag = 10261,
+    .tileTag = ANIM_TAG_FLYING_DIRT,
+    .paletteTag = ANIM_TAG_FLYING_DIRT,
     .oam = &gOamData_837DF54,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DD3AC,
+    .callback = AnimDirtParticleAcrossScreen,
 };
 
 const struct Subsprite gSubspriteTable_83DAD00[] =
@@ -212,21 +212,21 @@ const union AnimCmd *const gSpriteAnimTable_83DAD58[] =
     gSpriteAnim_83DAD40,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAD60 =
+const struct SpriteTemplate gAncientPowerRockSpriteTemplate =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAD48,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = sub_80DD490,
+    .callback = AnimRaiseSprite,
 };
 
 const struct SpriteTemplate gSpriteTemplate_83DAD78 =
 {
-    .tileTag = 10074,
-    .paletteTag = 10074,
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -236,8 +236,8 @@ const struct SpriteTemplate gSpriteTemplate_83DAD78 =
 
 const struct SpriteTemplate gSpriteTemplate_83DAD90 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -247,8 +247,8 @@ const struct SpriteTemplate gSpriteTemplate_83DAD90 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DADA8 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAD48,
     .images = NULL,
@@ -276,8 +276,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DADE0[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DADE8 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83DAD48,
     .images = NULL,
@@ -287,8 +287,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DADE8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAE00 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83DAD48,
     .images = NULL,
@@ -298,8 +298,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAE00 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAE18 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DAD58,
     .images = NULL,
@@ -309,8 +309,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAE18 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DAE30 =
 {
-    .tileTag = 10058,
-    .paletteTag = 10058,
+    .tileTag = ANIM_TAG_ROCKS,
+    .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_837DF94,
     .anims = gSpriteAnimTable_83DAD50,
     .images = NULL,
@@ -387,7 +387,7 @@ void sub_80DCFE4(struct Sprite *sprite)
     if (gBattleAnimArgs[6] == 0)
         InitAnimSpritePos(sprite, 0);
     else
-        sub_8078764(sprite, 0);
+        sub_8078764(sprite, FALSE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     sprite->data[1] = gBattleAnimArgs[2];
@@ -510,7 +510,13 @@ static void sub_80DD190(u8 taskId)
     }
 }
 
-void sub_80DD3AC(struct Sprite *sprite)
+// Animates the sprites that fly diagonally across the screen
+// in Sandstorm and Heat Wave.
+// arg 0: initial y pixel offset
+// arg 1: projectile speed
+// arg 2: y pixel drop
+// arg 3: ??? unknown (possibly a color bit)
+void AnimDirtParticleAcrossScreen(struct Sprite *sprite)
 {
     if (sprite->data[0] == 0)
     {
@@ -555,7 +561,13 @@ void sub_80DD3AC(struct Sprite *sprite)
     }
 }
 
-void sub_80DD490(struct Sprite *sprite)
+// Animates the rising rocks in Ancient Power.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: terminal y offset
+// arg 3: duration
+// arg 4: sprite size [1,5]
+void AnimRaiseSprite(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
     InitAnimSpritePos(sprite, 0);
@@ -610,8 +622,8 @@ void sub_80DD4D4(u8 taskId)
     task->data[6] = 0;
     task->data[7] = 0;
 
-    pan1 = BattleAnimAdjustPanning(-64);
-    pan2 = BattleAnimAdjustPanning(63);
+    pan1 = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER_NEG);
+    pan2 = BattleAnimAdjustPanning(SOUND_PAN_TARGET);
 
     task->data[13] = pan1;
     task->data[14] = (pan2 - pan1) / task->data[8];

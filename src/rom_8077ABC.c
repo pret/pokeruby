@@ -1445,16 +1445,17 @@ void sub_8079518(struct Sprite *sprite)
 
 void sub_8079534(struct Sprite *sprite)
 {
-    u8 r4, slot, r7;
+    bool8 r4;
+    u8 slot, r7;
 
     if (!gBattleAnimArgs[6])
     {
-        r4 = 1;
+        r4 = TRUE;
         r7 = 3;
     }
     else
     {
-        r4 = 0;
+        r4 = FALSE;
         r7 = 1;
     }
     if (!gBattleAnimArgs[5])
@@ -1861,7 +1862,7 @@ void unref_sub_8079D20(u8 priority)
         gSprites[gBattleMonSprites[gAnimBankAttacker ^ 2]].oam.priority = priority;
 }
 
-void sub_8079E24()
+void UpdateBattlerSpritePriorities()
 {
     int i;
 
@@ -1869,13 +1870,13 @@ void sub_8079E24()
     {
         if (IsAnimBankSpriteVisible(i))
         {
-            gSprites[gBattleMonSprites[i]].subpriority = sub_8079E90(i);
+            gSprites[gBattleMonSprites[i]].subpriority = GetBattlerSubpriority(i);
             gSprites[gBattleMonSprites[i]].oam.priority = 2;
         }
     }
 }
 
-u8 sub_8079E90(u8 bank)
+u8 GetBattlerSubpriority(u8 bank)
 {
     u8 identity;
     u8 ret;
@@ -2240,7 +2241,7 @@ void sub_807A69C(u8 taskId)
 
     dest = (task->data[4] + 0x10) * 0x10;
     src = (gSprites[task->data[0]].oam.paletteNum + 0x10) * 0x10;
-    task->data[6] = sub_8079E90(gAnimBankAttacker);
+    task->data[6] = GetBattlerSubpriority(gAnimBankAttacker);
     if (task->data[6] == 20 || task->data[6] == 40)
         task->data[6] = 2;
     else

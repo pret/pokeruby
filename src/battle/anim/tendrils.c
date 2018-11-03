@@ -59,8 +59,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6598[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65A0 =
 {
-    .tileTag = 10186,
-    .paletteTag = 10186,
+    .tileTag = ANIM_TAG_TENDRILS,
+    .paletteTag = ANIM_TAG_TENDRILS,
     .oam = &gOamData_837DFBC,
     .anims = gSpriteAnimTable_83D6550,
     .images = NULL,
@@ -70,7 +70,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65A0 =
 
 void sub_80CB25C(struct Sprite* sprite)
 {
-    sub_8078764(sprite, 0);
+    sub_8078764(sprite, FALSE);
     sprite->affineAnimPaused = 1;
     StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]);
     sprite->data[6] = gBattleAnimArgs[2];

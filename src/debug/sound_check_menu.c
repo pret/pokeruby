@@ -44,14 +44,8 @@ enum
     MAX
 };
 
-extern struct ToneData voicegroup_84537C0[];
-extern struct ToneData voicegroup_8452590[];
-extern struct ToneData voicegroup_8453DC0[];
-extern struct ToneData voicegroup_8452B90[];
-extern struct ToneData voicegroup_84543C0[];
-extern struct ToneData voicegroup_8453190[];
-extern struct ToneData voicegroup_84549C0[];
-extern struct ToneData voicegroup_8453790[];
+extern struct ToneData gCryTable[];
+extern struct ToneData gCryTable2[];
 
 static EWRAM_DATA u8 gUnknown_020387B0 = 0;
 static EWRAM_DATA u8 gUnknown_020387B1 = 0;
@@ -544,27 +538,27 @@ void Task_ProcessDriverTestInput(u8 taskId)
         {
         case 0:
             if (gUnknown_020387D8)
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84537C0[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable2[(128 * 0) + remaining]);
             else
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452590[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable[(128 * 0) + remaining]);
             break;
         case 1:
             if (gUnknown_020387D8)
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453DC0[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable2[(128 * 1) + remaining]);
             else
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8452B90[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable[(128 * 1) + remaining]);
             break;
         case 2:
             if (gUnknown_020387D8)
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84543C0[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable2[(128 * 2) + remaining]);
             else
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453190[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable[(128 * 2) + remaining]);
             break;
         case 3:
             if (gUnknown_020387D8)
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_84549C0[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable2[(128 * 3) + remaining]);
             else
-                gUnknown_03005D30 = SetPokemonCryTone(&voicegroup_8453790[remaining]);
+                gUnknown_03005D30 = SetPokemonCryTone(&gCryTable[(128 * 3) + remaining]);
             break;
         }
     }

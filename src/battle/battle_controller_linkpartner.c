@@ -85,7 +85,7 @@ extern u8 CreateInvisibleSpriteWithCallback();
 extern void BattleLoadPlayerMonSprite();
 extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
-extern u8 sub_8079E90();
+extern u8 GetBattlerSubpriority();
 extern void nullsub_10();
 extern void sub_8045A5C();
 extern void sub_804777C();
@@ -1105,7 +1105,7 @@ void LinkPartnerHandleLoadPokeSprite(void)
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
-      sub_8079E90(gActiveBattler));
+      GetBattlerSubpriority(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
@@ -1135,7 +1135,7 @@ void sub_811F864(u8 a, u8 b)
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
-      sub_8079E90(a));
+      GetBattlerSubpriority(a));
     gSprites[gUnknown_0300434C[a]].data[1] = gBankSpriteIds[a];
     gSprites[gBankSpriteIds[a]].data[0] = a;
     gSprites[gBankSpriteIds[a]].data[2] = species;
@@ -1205,7 +1205,7 @@ void LinkPartnerHandleTrainerThrow(void)
     gBankSpriteIds[gActiveBattler] = CreateSprite(
       &gUnknown_02024E8C,
       80 + xOffset, 80 + 4 * (8 - gTrainerBackPicCoords[gender].coords),
-      sub_8079E90(gActiveBattler));
+      GetBattlerSubpriority(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = 240;
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = -2;

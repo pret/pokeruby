@@ -648,14 +648,14 @@ void nullsub_49(struct EventObject *eventObj)
 
 void PlayerAvatarTransition_Normal(struct EventObject *eventObj)
 {
-    sub_805B980(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+    EventObjectSetGraphicsId(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
     EventObjectTurn(eventObj, eventObj->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
 }
 
 void PlayerAvatarTransition_MachBike(struct EventObject *eventObj)
 {
-    sub_805B980(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_MACH_BIKE));
+    EventObjectSetGraphicsId(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_MACH_BIKE));
     EventObjectTurn(eventObj, eventObj->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_MACH_BIKE);
     BikeClearState(0, 0);
@@ -663,7 +663,7 @@ void PlayerAvatarTransition_MachBike(struct EventObject *eventObj)
 
 void PlayerAvatarTransition_AcroBike(struct EventObject *eventObj)
 {
-    sub_805B980(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
+    EventObjectSetGraphicsId(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     EventObjectTurn(eventObj, eventObj->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ACRO_BIKE);
     BikeClearState(0, 0);
@@ -674,7 +674,7 @@ void PlayerAvatarTransition_Surfing(struct EventObject *eventObj)
 {
     u8 unk;
 
-    sub_805B980(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
+    EventObjectSetGraphicsId(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
     EventObjectTurn(eventObj, eventObj->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_SURFING);
     gFieldEffectArguments[0] = eventObj->currentCoords.x;
@@ -687,7 +687,7 @@ void PlayerAvatarTransition_Surfing(struct EventObject *eventObj)
 
 void PlayerAvatarTransition_Underwater(struct EventObject *eventObj)
 {
-    sub_805B980(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_UNDERWATER));
+    EventObjectSetGraphicsId(eventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_UNDERWATER));
     EventObjectTurn(eventObj, eventObj->movementDirection);
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_UNDERWATER);
     eventObj->fieldEffectSpriteId = sub_8128124(eventObj->spriteId);
@@ -1163,26 +1163,26 @@ void sub_8059B88(u8 a)
 
 void sub_8059BF4(void)
 {
-    sub_805B980(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
+    EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FIELD_MOVE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 0);
 }
 
 void sub_8059C3C(u8 direction)
 {
-    sub_805B980(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
+    EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_FISHING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingDirectionAnimNum(direction));
 }
 
 void sub_8059C94(u8 direction)
 {
-    sub_805B980(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
+    EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_ACRO_BIKE));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetAcroWheelieDirectionAnimNum(direction));
     SeekSpriteAnim(&gSprites[gPlayerAvatar.spriteId], 1);
 }
 
 void sub_8059D08(u8 direction)
 {
-    sub_805B980(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
+    EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_WATERING));
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFaceDirectionAnimNum(direction));
 }
 
@@ -1419,7 +1419,7 @@ static void sub_805A2D0(u8 taskId)
 
     if (EventObjectClearHeldMovementIfFinished(playerEventObj))
     {
-        sub_805B980(playerEventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+        EventObjectSetGraphicsId(playerEventObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
         EventObjectSetHeldMovement(playerEventObj, GetFaceDirectionMovementAction(playerEventObj->facingDirection));
         gPlayerAvatar.preventStep = FALSE;
         ScriptContext2_Disable();
@@ -1657,7 +1657,7 @@ u8 Fishing11(struct Task *task)
         {
             struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
-            sub_805B980(playerEventObj, task->tPlayerGfxId);
+            EventObjectSetGraphicsId(playerEventObj, task->tPlayerGfxId);
             EventObjectTurn(playerEventObj, playerEventObj->movementDirection);
             if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
                 sub_8127F28(gEventObjects[gPlayerAvatar.eventObjectId].fieldEffectSpriteId, 0, 0);
@@ -1716,7 +1716,7 @@ u8 Fishing15(struct Task *task)
     {
         struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
-        sub_805B980(playerEventObj, task->tPlayerGfxId);
+        EventObjectSetGraphicsId(playerEventObj, task->tPlayerGfxId);
         EventObjectTurn(playerEventObj, playerEventObj->movementDirection);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
             sub_8127F28(gEventObjects[gPlayerAvatar.eventObjectId].fieldEffectSpriteId, 0, 0);

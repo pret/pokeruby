@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_daugi_grp, voicegroup_8451990
+	.equ	se_daugi_grp, voicegroup110
 	.equ	se_daugi_pri, 5
 	.equ	se_daugi_rev, reverb_set+50
 	.equ	se_daugi_mvl, 127

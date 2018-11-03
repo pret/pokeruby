@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_machupi_grp, voicegroup_8446DE8
+	.equ	bgm_machupi_grp, voicegroup077
 	.equ	bgm_machupi_pri, 0
 	.equ	bgm_machupi_rev, reverb_set+50
 	.equ	bgm_machupi_mvl, 127

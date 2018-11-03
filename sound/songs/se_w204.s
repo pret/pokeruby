@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_w204_grp, voicegroup_8451F90
+	.equ	se_w204_grp, voicegroup111
 	.equ	se_w204_pri, 4
 	.equ	se_w204_rev, reverb_set+50
 	.equ	se_w204_mvl, 127

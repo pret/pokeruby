@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_dooro_x4_grp, voicegroup_8433948
+	.equ	bgm_dooro_x4_grp, voicegroup018
 	.equ	bgm_dooro_x4_pri, 0
 	.equ	bgm_dooro_x4_rev, reverb_set+50
 	.equ	bgm_dooro_x4_mvl, 127

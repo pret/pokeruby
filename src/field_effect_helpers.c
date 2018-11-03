@@ -1,13 +1,13 @@
 #include "global.h"
-#include "sprite.h"
+#include "event_object_movement.h"
+#include "field_camera.h"
+#include "field_effect.h"
+#include "field_effect_helpers.h"
+#include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "sound.h"
-#include "event_object_movement.h"
-#include "field_camera.h"
-#include "field_weather.h"
-#include "field_effect.h"
-#include "field_effect_helpers.h"
+#include "sprite.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
@@ -297,7 +297,7 @@ void UpdateTallGrassFieldEffect(struct Sprite *sprite)
 
     mapNum = sprite->data[5] >> 8;
     mapGroup = sprite->data[5];
-    if (gCamera.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
+    if (gCamera.active && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
     {
         sprite->data[1] -= gCamera.x;
         sprite->data[2] -= gCamera.y;
@@ -403,7 +403,7 @@ void UpdateLongGrassFieldEffect(struct Sprite *sprite)
 
     mapNum = sprite->data[5] >> 8;
     mapGroup = sprite->data[5];
-    if (gCamera.field_0 && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
+    if (gCamera.active && (gSaveBlock1.location.mapNum != mapNum || gSaveBlock1.location.mapGroup != mapGroup))
     {
         sprite->data[1] -= gCamera.x;
         sprite->data[2] -= gCamera.y;

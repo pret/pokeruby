@@ -3,11 +3,11 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
-#include "constants/flags.h"
 #include "global.fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "sound.h"
+#include "constants/flags.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 
@@ -78,7 +78,7 @@ static void (*const sMachBikeTransitions[])(u8) =
     MachBikeTransition_TrySlowDown,
 };
 
-// bikeFrameCounter is input which is represented by gMachBikeSpeeds in order: 0 is normal speed (1 speed), 1 is fast speed (2 speed), 2 is fastest speed (4 speed)
+// bikeFrameCounter is input which is represented by sMachBikeSpeeds in order: 0 is normal speed (1 speed), 1 is fast speed (2 speed), 2 is fastest speed (4 speed)
 static void (*const sMachBikeSpeedCallbacks[])(u8) =
 {
     PlayerGoSpeed1, // normal speed (1 speed)
@@ -115,21 +115,22 @@ static u8 (*const sAcroBikeInputHandlers[])(u8 *, u16, u16) =
 };
 
 // used with bikeFrameCounter from mach bike
-const u16 gMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
+static const u16 sMachBikeSpeeds[] = {SPEED_NORMAL, SPEED_FAST, SPEED_FASTEST};
 
 // this is a list of timers to compare against later, terminated with 0. the only timer being compared against is 4 frames in this list.
-static const u8 AcroBikeJumpTimerList[] = {4, 0};
+static const u8 sAcroBikeJumpTimerList[] = {4, 0};
 
 // this is a list of history inputs to do in order to do the check to retrieve a jump direction for acro bike. it seems to be an extensible list, so its possible that Game Freak may have intended for the Acro Bike to have more complex tricks at some point. The final list only has the acro jump.
-static const struct BikeHistoryInputInfo gAcroBikeTricksList[] =
+static const struct BikeHistoryInputInfo sAcroBikeTricksList[] =
 {
     // the 0xF is a mask performed with each byte of the array in order to perform the check on only the last entry of the history list, otherwise the check wouldnt work as there can be 0xF0 as opposed to 0x0F.
-    {DIR_SOUTH, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_SOUTH},
-    {DIR_NORTH, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_NORTH},
-    {DIR_WEST, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_WEST},
-    {DIR_EAST, B_BUTTON, 0xF, 0xF, AcroBikeJumpTimerList, AcroBikeJumpTimerList, DIR_EAST},
+    {DIR_SOUTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_SOUTH},
+    {DIR_NORTH, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_NORTH},
+    {DIR_WEST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_WEST},
+    {DIR_EAST, B_BUTTON, 0xF, 0xF, sAcroBikeJumpTimerList, sAcroBikeJumpTimerList, DIR_EAST},
 };
 
+// code
 void MovePlayerOnBike(u8 direction, u16 newKeys, u16 heldKeys)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
@@ -253,31 +254,31 @@ static void MachBikeTransition_TrySpeedUp(u8 direction)
     }
 }
 
-static void MachBikeTransition_TrySlowDown(u8 var)
+static void MachBikeTransition_TrySlowDown(u8 direction)
 {
     u8 collision;
 
     if (gPlayerAvatar.bikeSpeed != SPEED_STANDING)
         gPlayerAvatar.bikeFrameCounter = --gPlayerAvatar.bikeSpeed;
 
-    collision = get_some_collision(var);
+    collision = get_some_collision(direction);
 
     if (collision > 0 && collision < 12)
     {
         if (collision == COLLISION_LEDGE_JUMP)
         {
-            PlayerJumpLedge(var);
+            PlayerJumpLedge(direction);
         }
         else
         {
             Bike_SetBikeStill();
             if (collision < 5 || collision > 8)
-                PlayerOnBikeCollide(var);
+                PlayerOnBikeCollide(direction);
         }
     }
     else
     {
-        sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](var);
+        sMachBikeSpeedCallbacks[gPlayerAvatar.bikeFrameCounter](direction);
     }
 }
 
@@ -620,7 +621,7 @@ static void AcroBikeTransition_WheelieHoppingStanding(u8 direction)
 
 static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
 {
-    u8 var;
+    u8 collision;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
@@ -628,19 +629,19 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
         AcroBikeTransition_WheelieHoppingStanding(playerEventObj->movementDirection);
         return;
     }
-    var = get_some_collision(direction);
+    collision = get_some_collision(direction);
     //TODO: Try to get rid of this goto
-    if (var == 0 || var == 9)
+    if (collision == 0 || collision == 9)
     {
         goto derp;
     }
-    else if (var == 6)
+    else if (collision == 6)
     {
         PlayerLedgeHoppingWheelie(direction);
     }
-    else if (var < 5 || var > 8)
+    else if (collision < 5 || collision > 8)
     {
-        if (var <= 11)
+        if (collision <= 11)
         {
             AcroBikeTransition_WheelieHoppingStanding(direction);
         }
@@ -654,20 +655,20 @@ static void AcroBikeTransition_WheelieHoppingMoving(u8 direction)
 
 static void AcroBikeTransition_SideJump(u8 direction)
 {
-    u8 var;
+    u8 collision;
     struct EventObject *playerEventObj;
 
-    var = get_some_collision(direction);
-    if (var != 0)
+    collision = get_some_collision(direction);
+    if (collision != 0)
     {
-        if (var == 7)
+        if (collision == 7)
             return;
-        if (var < 10)
+        if (collision < 10)
         {
             AcroBikeTransition_TurnDirection(direction);
             return;
         }
-        if (WillPlayerCollideWithCollision(var, direction) == FALSE)
+        if (WillPlayerCollideWithCollision(collision, direction) == FALSE)
         {
             AcroBikeTransition_TurnDirection(direction);
             return;
@@ -686,7 +687,7 @@ static void AcroBikeTransition_TurnJump(u8 direction)
 
 static void AcroBikeTransition_WheelieMoving(u8 direction)
 {
-    u8 var;
+    u8 collision;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
@@ -694,18 +695,18 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
         PlayerIdleWheelie(playerEventObj->movementDirection);
         return;
     }
-    var = get_some_collision(direction);
-    if (var > 0 && var < 12)
+    collision = get_some_collision(direction);
+    if (collision > 0 && collision < 12)
     {
-        if (var == 6)
+        if (collision == 6)
         {
             PlayerLedgeHoppingWheelie(direction);
         }
-        else if (var == 9)
+        else if (collision == 9)
         {
             PlayerIdleWheelie(direction);
         }
-        else if (var <= 4)
+        else if (collision <= 4)
         {
             if (MetatileBehavior_IsBumpySlope(playerEventObj->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
@@ -720,7 +721,7 @@ static void AcroBikeTransition_WheelieMoving(u8 direction)
 
 static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
 {
-    u8 var;
+    u8 collision;
     struct EventObject *playerEventObj = &gEventObjects[gPlayerAvatar.eventObjectId];
 
     if (CanBikeFaceDirOnMetatile(direction, playerEventObj->currentMetatileBehavior) == 0)
@@ -728,18 +729,18 @@ static void AcroBikeTransition_WheelieRisingMoving(u8 direction)
         PlayerStartWheelie(playerEventObj->movementDirection);
         return;
     }
-    var = get_some_collision(direction);
-    if (var > 0 && var < 12)
+    collision = get_some_collision(direction);
+    if (collision > 0 && collision < 12)
     {
-        if (var == 6)
+        if (collision == 6)
         {
             PlayerLedgeHoppingWheelie(direction);
         }
-        else if (var == 9)
+        else if (collision == 9)
         {
             PlayerIdleWheelie(direction);
         }
-        else if (var <= 4)
+        else if (collision <= 4)
         {
             if (MetatileBehavior_IsBumpySlope(playerEventObj->currentMetatileBehavior))
                 PlayerIdleWheelie(direction);
@@ -830,9 +831,9 @@ static u8 AcroBike_GetJumpDirection(void)
 {
     u32 i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < ARRAY_COUNT(sAcroBikeTricksList); i++)
     {
-        const struct BikeHistoryInputInfo *historyInputInfo = &gAcroBikeTricksList[i];
+        const struct BikeHistoryInputInfo *historyInputInfo = &sAcroBikeTricksList[i];
         u32 dirHistory = gPlayerAvatar.directionHistory;
         u32 abStartSelectHistory = gPlayerAvatar.abStartSelectHistory;
 
@@ -936,14 +937,14 @@ static bool8 CanBikeFaceDirOnMetatile(u8 direction, u8 tile)
 {
     if (direction == DIR_EAST || direction == DIR_WEST)
     {
-        //Bike cannot face east or west on a vertical rail
+        // Bike cannot face east or west on a vertical rail
         if (MetatileBehavior_IsIsolatedVerticalRail(tile)
          || MetatileBehavior_IsVerticalRail(tile))
             return FALSE;
     }
     else
     {
-        //Bike cannot face north or south on a horizontal rail
+        // Bike cannot face north or south on a horizontal rail
         if (MetatileBehavior_IsIsolatedHorizontalRail(tile)
          || MetatileBehavior_IsHorizontalRail(tile))
             return FALSE;
@@ -989,7 +990,7 @@ bool8 player_should_look_direction_be_enforced_upon_movement(void)
         return TRUE;
 }
 
-void GetOnOffBike(u8 var)
+void GetOnOffBike(u8 transitionFlags)
 {
     gUnusedBikeCameraAheadPanback = FALSE;
 
@@ -1001,7 +1002,7 @@ void GetOnOffBike(u8 var)
     }
     else
     {
-        SetPlayerAvatarTransitionFlags(var);
+        SetPlayerAvatarTransitionFlags(transitionFlags);
         Overworld_SetSavedMusic(MUS_CYCLING);
         Overworld_ChangeMusicTo(MUS_CYCLING);
     }
@@ -1042,7 +1043,7 @@ s16 GetPlayerSpeed(void)
     // because the player pressed a direction, it won't ever return a speed of 0 since this function returns the player's current speed.
     s16 machSpeeds[3];
 
-    memcpy(machSpeeds, gMachBikeSpeeds, sizeof(machSpeeds));
+    memcpy(machSpeeds, sMachBikeSpeeds, sizeof(machSpeeds));
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         return machSpeeds[gPlayerAvatar.bikeFrameCounter];

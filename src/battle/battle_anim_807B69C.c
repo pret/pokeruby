@@ -41,8 +41,8 @@ static const struct SubspriteTable gSubspriteTables_83931D8[] =
 
 static const struct SpriteTemplate gSpriteTemplate_83931E0 =
 {
-    .tileTag = 10010,
-    .paletteTag = 10010,
+    .tileTag = ANIM_TAG_ICE_CUBE,
+    .paletteTag = ANIM_TAG_ICE_CUBE,
     .oam = &gOamData_837E05C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -53,8 +53,8 @@ static const struct SpriteTemplate gSpriteTemplate_83931E0 =
 static void sub_807B870(struct Sprite *);
 static const struct SpriteTemplate gSpriteTemplate_83931F8 =
 {
-    .tileTag = 10136,
-    .paletteTag = 10136,
+    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
+    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

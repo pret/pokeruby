@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_pokecen_grp, voicegroup_843A824
+	.equ	bgm_pokecen_grp, voicegroup043
 	.equ	bgm_pokecen_pri, 0
 	.equ	bgm_pokecen_rev, reverb_set+50
 	.equ	bgm_pokecen_mvl, 127

@@ -42,7 +42,7 @@ extern u8 GetBattlerSide(u8);
 extern u8 GetBattlerAtPosition(u8);
 extern u8 GetBattlerPosition(u8);
 extern void LoadPlayerTrainerBankSprite();
-extern u8 sub_8079E90();
+extern u8 GetBattlerSubpriority();
 extern void sub_80313A0(struct Sprite *);
 extern void sub_810BADC(void);
 extern void sub_8045A5C();

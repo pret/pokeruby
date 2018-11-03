@@ -69,8 +69,8 @@ static void sub_80E260C(void);
 static void sub_80E255C(struct Sprite *sprite);
 static void sub_80E2710(u8 taskId);
 static void sub_80E29FC(struct Sprite *sprite);
-static void sub_80E2C8C(u8 taskId, u32 selectedPalettes);
-static void sub_80E2CD0(u8 taskId);
+static void AnimTask_BlendSpriteColor_Step1(u8 taskId, u32 selectedPalettes);
+static void AnimTask_BlendSpriteColor_Step2(u8 taskId);
 static void sub_80E2DB8(u8 taskId);
 static void sub_80E2E10(u8 taskId);
 static void sub_80E2EE8(struct Sprite *sprite);
@@ -109,8 +109,8 @@ const union AnimCmd *const gConfusionDuckSpriteAnimTable[] =
 
 const struct SpriteTemplate gConfusionDuckSpriteTemplate =
 {
-    .tileTag = 10073,
-    .paletteTag = 10073,
+    .tileTag = ANIM_TAG_DUCK,
+    .paletteTag = ANIM_TAG_DUCK,
     .oam = &gOamData_837DF2C,
     .anims = gConfusionDuckSpriteAnimTable,
     .images = NULL,
@@ -157,8 +157,8 @@ const union AnimCmd *const gSpriteAnimTable_83DB40C[] =
 
 const struct SpriteTemplate gSpriteTemplate_83DB410 =
 {
-    .tileTag = 10071,
-    .paletteTag = 10071,
+    .tileTag = ANIM_TAG_SPARKLE_4,
+    .paletteTag = ANIM_TAG_SPARKLE_4,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83DB40C,
     .images = NULL,
@@ -214,8 +214,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DB498[] =
 
 const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -225,8 +225,8 @@ const struct SpriteTemplate gBasicHitSplatSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4C0 =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -236,8 +236,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4C0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4D8 =
 {
-    .tileTag = 10148,
-    .paletteTag = 10148,
+    .tileTag = ANIM_TAG_WATER_IMPACT,
+    .paletteTag = ANIM_TAG_WATER_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -247,8 +247,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4D8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4F0 =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -258,8 +258,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB4F0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB508 =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -269,8 +269,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB508 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB520 =
 {
-    .tileTag = 10285,
-    .paletteTag = 10285,
+    .tileTag = ANIM_TAG_CROSS_IMPACT,
+    .paletteTag = ANIM_TAG_CROSS_IMPACT,
     .oam = &gOamData_837E054,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -280,8 +280,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB520 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB538 =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837DF94,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -291,8 +291,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB538 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DB550 =
 {
-    .tileTag = 10135,
-    .paletteTag = 10135,
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_IMPACT,
     .oam = &gOamData_837E0B4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -854,7 +854,7 @@ static void sub_80E27A0(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->callback = sub_80785E4;
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -866,7 +866,7 @@ static void sub_80E27E8(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->callback = sub_80785E4;
@@ -890,7 +890,7 @@ static void sub_80E2870(struct Sprite *sprite)
     if (gBattleAnimArgs[0] == 0)
         InitAnimSpritePos(sprite, 0);
     else
-        sub_8078764(sprite, 0);
+        sub_8078764(sprite, FALSE);
 
     sprite->pos2.x += (Random() % 48) - 24;
     sprite->pos2.y += (Random() % 24) - 12;
@@ -916,7 +916,7 @@ static void sub_80E2978(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->data[0] = gBattleAnimArgs[3];
     StoreSpriteCallbackInData(sprite, DestroyAnimSprite);
@@ -929,7 +929,7 @@ static void sub_80E29C0(struct Sprite *sprite)
     if (gBattleAnimArgs[2] == 0)
         InitAnimSpritePos(sprite, 1);
     else
-        sub_8078764(sprite, 1);
+        sub_8078764(sprite, TRUE);
 
     sprite->callback = sub_80E29FC;
 }
@@ -950,7 +950,7 @@ void sub_80E2A38(u8 taskId)
         (gBattleAnimArgs[0] >> 9)  & 1,
         (gBattleAnimArgs[0] >> 10) & 1);
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E2A7C(u8 taskId)
@@ -1001,7 +1001,7 @@ void sub_80E2A7C(u8 taskId)
         }
     }
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E2B74(u8 taskId)
@@ -1042,16 +1042,22 @@ void sub_80E2B74(u8 taskId)
         break;
     }
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
-void sub_80E2C60(u8 taskId)
+// Used to add a color mask to a Sprite.
+// arg 0: spriteId
+// arg 1: ??? unknown
+// arg 2: ??? unknown
+// arg 3: coefficient
+// arg 4: color code
+void AnimTask_BlendSpriteColor(u8 taskId)
 {
     u8 paletteIndex = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
-    sub_80E2C8C(taskId, 1 << (paletteIndex + 16));
+    AnimTask_BlendSpriteColor_Step1(taskId, 1 << (paletteIndex + 16));
 }
 
-static void sub_80E2C8C(u8 taskId, u32 selectedPalettes)
+static void AnimTask_BlendSpriteColor_Step1(u8 taskId, u32 selectedPalettes)
 {
     gTasks[taskId].data[0] = selectedPalettes;
     gTasks[taskId].data[1] = selectedPalettes >> 16;
@@ -1060,11 +1066,11 @@ static void sub_80E2C8C(u8 taskId, u32 selectedPalettes)
     gTasks[taskId].data[4] = gBattleAnimArgs[3];
     gTasks[taskId].data[5] = gBattleAnimArgs[4];
     gTasks[taskId].data[10] = gBattleAnimArgs[2];
-    gTasks[taskId].func = sub_80E2CD0;
+    gTasks[taskId].func = AnimTask_BlendSpriteColor_Step2;
     gTasks[taskId].func(taskId);
 }
 
-static void sub_80E2CD0(u8 taskId)
+static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
 {
     u32 selectedPalettes;
     u16 singlePaletteMask = 0;
@@ -1420,9 +1426,9 @@ static void sub_80E3338(u8 taskId)
     gTasks[taskId].func = sub_80E3704;
 
     if (taskData[0] == 0)
-        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_W287, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
     else
-        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(-64));
+        PlaySE12WithPanning(SE_W287B, BattleAnimAdjustPanning2(SOUND_PAN_ATTACKER_NEG));
 }
 
 static void sub_80E3704(u8 taskId)
@@ -1577,7 +1583,7 @@ void sub_80E3A08(u8 taskId)
     for (j = 5; j != 0; j--)
         gBattleAnimArgs[j] = gBattleAnimArgs[j - 1];
 
-    sub_80E2C8C(taskId, selectedPalettes);
+    AnimTask_BlendSpriteColor_Step1(taskId, selectedPalettes);
 }
 
 void sub_80E3A58(u8 taskId)

@@ -36,8 +36,8 @@ const union AnimCmd *const gSpriteAnimTable_83DA240[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA244 =
 {
-    .tileTag = 10151,
-    .paletteTag = 10151,
+    .tileTag = ANIM_TAG_TOXIC_BUBBLE,
+    .paletteTag = ANIM_TAG_TOXIC_BUBBLE,
     .oam = &gOamData_837DF74,
     .anims = gSpriteAnimTable_83DA240,
     .images = NULL,
@@ -104,8 +104,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA2B4[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA2B8 =
 {
-    .tileTag = 10150,
-    .paletteTag = 10150,
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_837DFEC,
     .anims = gSpriteAnimTable_83DA274,
     .images = NULL,
@@ -115,8 +115,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA2B8 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA2D0 =
 {
-    .tileTag = 10150,
-    .paletteTag = 10150,
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_837DFEC,
     .anims = gSpriteAnimTable_83DA274,
     .images = NULL,
@@ -126,8 +126,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA2D0 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA2E8 =
 {
-    .tileTag = 10150,
-    .paletteTag = 10150,
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83DA27C,
     .images = NULL,
@@ -149,8 +149,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA318[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83DA31C =
 {
-    .tileTag = 10150,
-    .paletteTag = 10150,
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_837DFEC,
     .anims = gSpriteAnimTable_83DA278,
     .images = NULL,
@@ -172,8 +172,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83DA34C[] =
 
 const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 {
-    .tileTag = 10150,
-    .paletteTag = 10150,
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
     .oam = &gOamData_837DF8C,
     .anims = gSpriteAnimTable_83DA274,
     .images = NULL,
@@ -183,8 +183,8 @@ const struct SpriteTemplate gPoisonBubbleSpriteTemplate =
 
 const struct SpriteTemplate gWaterBubbleSpriteTemplate =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837E0AC,
     .anims = gSpriteAnimTable_83D9310,
     .images = NULL,

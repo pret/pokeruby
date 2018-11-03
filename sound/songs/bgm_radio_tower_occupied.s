@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	bgm_radio_tower_occupied_grp, voicegroup_8454C54
+	.equ	bgm_radio_tower_occupied_grp, voicegroup113
 	.equ	bgm_radio_tower_occupied_pri, 0
 	.equ	bgm_radio_tower_occupied_rev, reverb_set+50
 	.equ	bgm_radio_tower_occupied_mvl, 127
