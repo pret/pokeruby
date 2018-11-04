@@ -138,7 +138,7 @@ static void PrintMessage(const u8 *str, u16 tile)
     Menu_DisplayDialogueFrame();
     if (tile)
     {
-        sub_80A3FA0(&gBGTilemapBuffers[1][0], 2, 15, 26, 4, tile);
+        FillBoxWithTileId(&gBGTilemapBuffers[1][0], 2, 15, 26, 4, tile);
     }
     MenuPrintMessageDefaultCoords(str);
 }

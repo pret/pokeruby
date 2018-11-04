@@ -990,25 +990,25 @@ static void sub_80A3F50(u8 taskId)
     sub_80A7528(1);
 }
 
-void sub_80A3FA0(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f)
+void FillBoxWithTileId(u16 *a, u8 leftCoord, u8 topCoord, u8 width, u8 height, u16 tileId)
 {
-    s16 i;
-    s16 j;
+    s16 y;
+    s16 x;
 
-    for (i = c; i < c + e; i++)
+    for (y = topCoord; y < topCoord + height; y++)
     {
-        for (j = b; j < b + d; j++)
+        for (x = leftCoord; x < leftCoord + width; x++)
         {
-            u32 index = j + i * 32;
+            u32 i = x + y * 32;
 
-            a[index] = f;
+            a[i] = tileId;
         }
     }
 }
 
 static void sub_80A4008(u16 *a, u8 b, u8 c, u8 d, u8 e)
 {
-    sub_80A3FA0(a, b, c, d, e, 1);
+    FillBoxWithTileId(a, b, c, d, e, 1);
 }
 
 static void DrawSelectIcon(u32 itemPos)

@@ -26,7 +26,7 @@ extern struct ItemSlot *gCurrentBagPocketItemSlots;
 void ResetBagScrollPositions(void);
 void ClearBag(void);
 void sub_80A3E0C(void);
-void sub_80A3FA0(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f);
+void FillBoxWithTileId(u16 *a, u8 b, u8 c, u8 d, u8 e, u16 f);
 void sub_80A4164(u8 *, u16, enum StringConvertMode, u8);
 void sub_80A418C(u16 a, enum StringConvertMode b, u8 c, u8 d, u8 e);
 void sub_80A53F8(void);

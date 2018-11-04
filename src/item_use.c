@@ -910,7 +910,7 @@ static void WaitButtonPressAndDisplayTMHMInfo(u8 taskId)
 static void DisplayTeachMonTMHMYesNoChoice(u8 taskId)
 {
     DisplayYesNoMenu(7, 7, 1);
-    sub_80A3FA0(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
+    FillBoxWithTileId(gBGTilemapBuffers[1], 8, 8, 5, 4, 1);
     DoYesNoFuncWithChoice(taskId, &sTeachMonTMHMYesNoActions);
 }
 
