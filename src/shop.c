@@ -510,14 +510,28 @@ static void Shop_InitMenus(int firstItemId, int lastItemId)
     InitMenu(0, 0xE, 0x2, 0x8, gMartInfo.cursor, 0xF);
 }
 
-// after printing the item quantity and price, restore the textbox tiles before the Yes/No prompt.
+// after printing the item quantity and price, restore the description box tiles before the Yes/No prompt.
+// ewram18300 is part of ewram18000 which is the buffer used to store the mart tilemap
+// see ewram18000_2
+// todo correctly document the relevant ewram labels
 static void BuyMenuDrawTextboxBG_Restore(void)
 {
-    u16 i, j;
+    u16 y, x;
 
-    for (i = 0; i < 8; i++)
-        for (j = 0; j < 14; j++)
-            gBGTilemapBuffers[1][32 * (i + 12) + j] = ewram18300[32 * i + j] + 0xC3E0;
+    for (y = 0; y < 8; y++)
+        // possible bug: upper bound should be 13
+        // as the width in tiles of the description box is 13 tiles
+        // and copying 14 tiles copies a portion of the left border
+        // of the mart buy menu
+        // if the game takes too long to display a new textbox after this call,
+        // such that a vblank interrupt would happen before the new textbox is
+        // drawn, then the left border can be seen for how long it takes for
+        // the game to process the code before a new textbox is displayed
+        
+        // this can be seen by adding delaying code in Task_DoItemPurchase after
+        // the call to BuyMenuDrawTextboxBG_Restore
+        for (x = 0; x < 14; x++)
+            gBGTilemapBuffers[1][32 * (y + 12) + x] = ewram18300[32 * y + x] + 0xC3E0;
 }
 
 static void Shop_PrintItemDesc(void)
