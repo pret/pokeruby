@@ -3,18 +3,21 @@ ENTRY(Start)
 gNumMusicPlayers = 4;
 gMaxLines = 60;
 
+MEMORY
+{
+	ewram_region (w!x) : ORIGIN = 0x02000000, LENGTH = 0x40000
+	iwram_region (w!x) : ORIGIN = 0x03000000, LENGTH = 0x8000
+	rom_region (rx) :    ORIGIN = 0x08000000, LENGTH = 0xD00000
+	rom_gfx_region (r) : ORIGIN = 0x08D00000, LENGTH = 0x1000000 - 0xD00000
+}
+
 SECTIONS {
-    . = 0x2000000;
 
     ewram (NOLOAD) :
     ALIGN(4)
     {
         INCLUDE "sym_ewram.ld"
-
-        . = 0x40000;
-    }
-
-    . = 0x3000000;
+    } >ewram_region
 
     iwram (NOLOAD) :
     ALIGN(4)
@@ -29,10 +32,7 @@ SECTIONS {
         INCLUDE "sym_common.ld"
         *libc.a:sbrkr.o(COMMON);
         end = .;
-        . = 0x8000;
-    }
-
-    . = 0x8000000;
+    } >iwram_region
 
     .text :
     ALIGN(4)
@@ -379,7 +379,7 @@ SECTIONS {
         src/debug/unknown_debug_menu.o(.text);
         src/name_string_util.o(.text);
         src/menu_cursor.o(.text);
-    } =0
+    } >rom_region =0
 
     script_data :
     ALIGN(4)
@@ -393,7 +393,7 @@ SECTIONS {
         data/battle_ai_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
-    } =0
+    } >rom_region =0
 
     lib_text :
     ALIGN(4)
@@ -457,7 +457,7 @@ SECTIONS {
         *libc.a:syscalls.o(.text);
         *libc.a:errno.o(.text);
         src/libs/libisagbprn.o(.text);
-    } =0
+    } >rom_region =0
 
     .rodata :
     ALIGN(4)
@@ -764,7 +764,7 @@ SECTIONS {
         data/debug_mystery_event_scripts.o(.rodata);
         src/libs/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-    } =0
+    } >rom_region =0
 
     song_data :
     ALIGN(4)
@@ -1186,7 +1186,7 @@ SECTIONS {
         sound/songs/bgm_battle38.o(.rodata);
         sound/songs/bgm_battle30.o(.rodata);
         sound/songs/bgm_radio_tower_occupied.o(.rodata);
-    } =0
+    } >rom_region =0
 
     lib_rodata :
     ALIGN(4)
@@ -1200,15 +1200,13 @@ SECTIONS {
         *libc.a(.rodata);
         *libc.a(.data);
         src/libs/libisagbprn.o(.rodata);
-    } =0
-
-    . = 0x8D00000;
+    } >rom_region =0
 
     gfx_data :
     ALIGN(4)
     {
         src/data/graphics.o(.rodata);
-    } =0
+    } >rom_gfx_region =0
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }
@@ -1226,4 +1224,18 @@ SECTIONS {
     {
         *(*);
     }
+	
+	.fillrom :
+	{
+		FILL(0xff);
+		. = ORIGIN(rom_region) + LENGTH(rom_region) - 1;
+		BYTE(0xff);
+	} >rom_region
+	
+	.fillromgfx :
+	{
+		FILL(0xff);
+		. = ORIGIN(rom_gfx_region) + LENGTH(rom_gfx_region) - 1;
+		BYTE(0xff);
+	} >rom_gfx_region
 }
