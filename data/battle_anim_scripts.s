@@ -10352,12 +10352,12 @@ General_ItemKnockoff: @ 81D647E
 
 General_TurnTrap: @ 81D6489
 	createvisualtask sub_8141DAC, 5
-	jumpargeq 0, 1, FireSpinHit
-	jumpargeq 0, 2, WhirlpoolHit
-	jumpargeq 0, 3, ClampHit
-	jumpargeq 0, 4, SandTombHit
-	goto WrapHit
-WrapHit:
+	jumpargeq 0, 1, _81D64FD
+	jumpargeq 0, 2, _81D6522
+	jumpargeq 0, 3, _81D6576
+	jumpargeq 0, 4, _81D65D3
+	goto _81D64B5
+_81D64B5:
 	loadspritegfx ANIM_TAG_TENDRILS
 	loopsewithpan SE_W010, SOUND_PAN_TARGET, 6, 2
 	createsprite gBattleAnimSpriteTemplate_83D65A0, 132, 0, 16, 0, 1
@@ -10370,7 +10370,7 @@ WrapHit:
 	playsewithpan SE_W020, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end
-FireSpinHit:
+_81D64FD:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W221B, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10379,7 +10379,7 @@ FireSpinHit:
 	waitforvisualfinish
 	stopsound
 	end
-WhirlpoolHit:
+_81D6522:
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_BANK_DEF_PARTNER
 	monbgprio_28 1
@@ -10396,7 +10396,7 @@ WhirlpoolHit:
 	stopsound
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	end
-ClampHit:
+_81D6576:
 	loadspritegfx ANIM_TAG_CLAMP
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BANK_TARGET
@@ -10412,7 +10412,7 @@ ClampHit:
 	blendoff
 	waitforvisualfinish
 	end
-SandTombHit:
+_81D65D3:
 	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 4, 2, 0, 7, rgb(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10453,32 +10453,32 @@ General_SmokeballEscape: @ 81D6690
 	setalpha 12, 4
 	delay 0
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, 128, 0, 32, 28, 30
+	createsprite gPinkSmokeTemplate, 128, 0, 32, 28, 30
 	delay 4
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, 127, 2, 12, 20, 30
+	createsprite gPinkSmokeTemplate, 127, 2, 12, 20, 30
 	delay 12
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, 126, 2, -28, 4, 30
+	createsprite gPinkSmokeTemplate, 126, 2, -28, 4, 30
 	delay 4
 	delay 8
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, 124, 2, 14, -20, 30
+	createsprite gPinkSmokeTemplate, 124, 2, 14, -20, 30
 	delay 4
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
 	createvisualtask sub_80DFC24, 2, 2
-	createsprite gBattleAnimSpriteTemplate_8402894, 123, 3, 4, 4, 30
+	createsprite gPinkSmokeTemplate, 123, 3, 4, 4, 30
 	delay 14
 	playsewithpan SE_BOWA2, SOUND_PAN_TARGET
-	createsprite gBattleAnimSpriteTemplate_8402894, 122, 3, -14, 18, 46
+	createsprite gPinkSmokeTemplate, 122, 3, -14, 18, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, 121, 3, 14, -14, 46
+	createsprite gPinkSmokeTemplate, 121, 3, 14, -14, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, 120, 3, -12, -10, 46
+	createsprite gPinkSmokeTemplate, 120, 3, -12, -10, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, 119, 3, 14, 14, 46
+	createsprite gPinkSmokeTemplate, 119, 3, 14, 14, 46
 	delay 0
-	createsprite gBattleAnimSpriteTemplate_8402894, 118, 3, 0, 0, 46
+	createsprite gPinkSmokeTemplate, 118, 3, 0, 0, 46
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATTACKER
 	invisible ANIM_BANK_ATTACKER
