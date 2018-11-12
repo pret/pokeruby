@@ -690,7 +690,7 @@ static void sub_8083710(u8 taskId)
     {
         OpenLink();
         ResetLinkPlayers();
-        CreateTask(sub_8083C50, 80);
+        CreateTask(WaitForRemoteLinkPlayers, 80);
     }
     else if (data[0] >= 10)
     {
@@ -958,7 +958,7 @@ bool32 sub_8083BF4(u8 linkPlayerIndex)
     return TRUE;
 }
 
-void sub_8083C50(u8 taskId)
+void WaitForRemoteLinkPlayers(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 

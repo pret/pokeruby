@@ -1110,7 +1110,7 @@ static void sub_8047EC0(void)
                 CreateMon(&gEnemyParty[i], 0, 0, 0x20, FALSE, 0, FALSE, 0);
             gMain.state ++;
             gUnknown_03004824->unk_00b4 = 0;
-            CreateTask(sub_8083C50, 1);
+            CreateTask(WaitForRemoteLinkPlayers, 1);
             break;
         case  2:
             gUnknown_03004824->unk_00b4 ++;

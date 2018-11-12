@@ -62,7 +62,7 @@ void sub_800B858(void)
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         OpenLink();
-        CreateTask(sub_8083C50, 0);
+        CreateTask(WaitForRemoteLinkPlayers, 0);
         sub_800BF28();
     }
 }
