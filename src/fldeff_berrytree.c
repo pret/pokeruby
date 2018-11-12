@@ -2,6 +2,7 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "script.h"
+#include "task.h"
 
 static void Task_WateringBerryTreeAnim_0(u8);
 static void Task_WateringBerryTreeAnim_1(u8);
