@@ -10352,12 +10352,12 @@ General_ItemKnockoff: @ 81D647E
 
 General_TurnTrap: @ 81D6489
 	createvisualtask sub_8141DAC, 5
-	jumpargeq 0, 1, _81D64FD
-	jumpargeq 0, 2, _81D6522
-	jumpargeq 0, 3, _81D6576
-	jumpargeq 0, 4, _81D65D3
-	goto _81D64B5
-_81D64B5:
+	jumpargeq 0, 1, FireSpinHit
+	jumpargeq 0, 2, WhirlpoolHit
+	jumpargeq 0, 3, ClampHit
+	jumpargeq 0, 4, SandTombHit
+	goto WrapHit
+WrapHit:
 	loadspritegfx ANIM_TAG_TENDRILS
 	loopsewithpan SE_W010, SOUND_PAN_TARGET, 6, 2
 	createsprite gBattleAnimSpriteTemplate_83D65A0, 132, 0, 16, 0, 1
@@ -10370,7 +10370,7 @@ _81D64B5:
 	playsewithpan SE_W020, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end
-_81D64FD:
+FireSpinHit:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W221B, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10379,7 +10379,7 @@ _81D64FD:
 	waitforvisualfinish
 	stopsound
 	end
-_81D6522:
+WhirlpoolHit:
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_BANK_DEF_PARTNER
 	monbgprio_28 1
@@ -10396,7 +10396,7 @@ _81D6522:
 	stopsound
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	end
-_81D6576:
+ClampHit:
 	loadspritegfx ANIM_TAG_CLAMP
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BANK_TARGET
@@ -10412,7 +10412,7 @@ _81D6576:
 	blendoff
 	waitforvisualfinish
 	end
-_81D65D3:
+SandTombHit:
 	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 4, 2, 0, 7, rgb(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
