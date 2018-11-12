@@ -1329,7 +1329,7 @@ Move_SWORDS_DANCE: @ 81C8EA4
 	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_BANK_ATTACKER, 16, 6, 1, 4
 	createsprite gBattleAnimSpriteTemplate_83D748C, 2, 0, 0
 	delay 22
-	createvisualtask sub_80E21A8, 2, 10005, 2, 2, 32754, 16, 0, 0
+	createvisualtask sub_80E21A8, 2, ANIM_TAG_SWORD, 2, 2, 32754, 16, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATTACKER
 	blendoff
