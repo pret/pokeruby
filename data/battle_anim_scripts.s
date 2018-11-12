@@ -9629,7 +9629,7 @@ Move_SKY_UPPERCUT: @ 81D53ED
 	end
 
 Move_SECRET_POWER: @ 81D54E6
-	createvisualtask sub_80E4008, 5
+	createvisualtask AnimTask_GetBattleTerrain, 5
 	jumpargeq 0, 0, Move_NEEDLE_ARM
 	jumpargeq 0, 1, Move_MAGICAL_LEAF
 	jumpargeq 0, 2, Move_MUD_SHOT
