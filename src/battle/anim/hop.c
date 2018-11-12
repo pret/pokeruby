@@ -57,7 +57,7 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D671C =
     .callback = sub_80CB94C,
 };
 
-const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6734 =
+const struct SpriteTemplate gFallingItemBagTemplate =
 {
     .tileTag = ANIM_TAG_ITEM_BAG,
     .paletteTag = ANIM_TAG_ITEM_BAG,
