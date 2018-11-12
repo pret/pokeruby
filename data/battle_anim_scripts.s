@@ -2690,7 +2690,7 @@ _81CB16A:
 	return
 
 Move_MEDITATE: @ 81CB1BD
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DBC94, 2
 	playsewithpan SE_W029, SOUND_PAN_ATTACKER
 	delay 16
@@ -2759,7 +2759,7 @@ Move_RAGE: @ 81CB27C
 	end
 
 Move_TELEPORT: @ 81CB2F2
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DBCFC, 2
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	delay 15
@@ -2849,7 +2849,7 @@ _81CB3E6:
 
 Move_AMNESIA: @ 81CB455
 	loadspritegfx ANIM_TAG_AMNESIA
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	delay 8
 	createsprite gBattleAnimSpriteTemplate_83DA88C, 20
 	playsewithpan SE_W118, SOUND_PAN_ATTACKER
@@ -2863,7 +2863,7 @@ Move_KINESIS: @ 81CB479
 	loadspritegfx ANIM_TAG_ALERT
 	loadspritegfx ANIM_TAG_BENT_SPOON
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createsprite gBattleAnimSpriteTemplate_83DA824, 20
 	createsprite gBattleAnimSpriteTemplate_83D7450, 19, 32, -8, 0
 	createsprite gBattleAnimSpriteTemplate_83D7450, 19, 32, 16, 1
@@ -3818,7 +3818,7 @@ Move_ERUPTION: @ 81CC74F
 
 Move_SKILL_SWAP: @ 81CC81C
 	loadspritegfx ANIM_TAG_BLUEGREEN_ORB
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80DC0B0, 3, 1
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BANK_TARGET, 32767, 12, 3, 1
 	loopsewithpan SE_W179, SOUND_PAN_ATTACKER, 24, 3
@@ -3832,7 +3832,7 @@ Move_SKILL_SWAP: @ 81CC81C
 Move_IMPRISON: @ 81CC867
 	loadspritegfx ANIM_TAG_HOLLOW_ORB
 	loadspritegfx ANIM_TAG_X_SIGN
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	monbg ANIM_BANK_DEF_PARTNER
 	createvisualtask sub_80DBE00, 5
 	delay 8
@@ -4317,7 +4317,7 @@ Move_SHADOW_PUNCH: @ 81CD3D6
 	end
 
 Move_EXTRASENSORY: @ 81CD431
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	monbg ANIM_BANK_DEF_PARTNER
 	setalpha 12, 8
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BANK_ATTACKER, 891, 12, 1, 1
@@ -4702,7 +4702,7 @@ Move_REST: @ 81CDC29
 
 Move_CONFUSION: @ 81CDC69
 	monbg ANIM_BANK_DEF_PARTNER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_ATTACKER, 1, 0, 10, 1
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 32767
@@ -4719,7 +4719,7 @@ Move_CONFUSION: @ 81CDC69
 
 Move_PSYCHIC: @ 81CDCCA
 	monbg ANIM_BANK_DEF_PARTNER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_BANK_ATTACKER, 1, 0, 10, 1
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 767
@@ -4744,7 +4744,7 @@ _81CDD32:
 _81CDD3B:
 	monbg ANIM_BANK_ATK_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
 	createvisualtask sub_80E1F8C, 2, 2, 0, 2, 0, 8, 32767
@@ -4757,7 +4757,7 @@ _81CDD3B:
 Unknown_81CDD7A: @ 81CDD7A
 	monbg ANIM_BANK_DEF_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_TARGET
 	waitplaysewithpan SE_W048, SOUND_PAN_TARGET, 8
@@ -6993,7 +6993,7 @@ Move_DREAM_EATER: @ 81D1271
 	monbg ANIM_BANK_DEF_PARTNER
 	monbgprio_2A ANIM_BANK_TARGET
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W107, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_BANK_TARGET, 5, 0, 15, 1
@@ -7109,7 +7109,7 @@ Move_WRAP: @ 81D158C
 Move_PSYBEAM: @ 81D15A2
 	loadspritegfx ANIM_TAG_GOLD_RING
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createsoundtask sub_812B058, 200, -64, 63, 3, 4, 0, 15
 	call _81D1626
 	call _81D1626
@@ -7135,7 +7135,7 @@ _81D1626:
 
 Move_HYPNOSIS: @ 81D163C
 	loadspritegfx ANIM_TAG_GOLD_RING
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	call _81D166F
 	call _81D166F
 	call _81D166F
@@ -7154,7 +7154,7 @@ _81D166F:
 Move_PSYWAVE: @ 81D169C
 	loadspritegfx ANIM_TAG_BLUE_RING
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	createvisualtask sub_80D3630, 5, 100
 	createsoundtask sub_812B058, 203, -64, 63, 2, 9, 0, 10
 	call _81D16FF
@@ -10150,7 +10150,7 @@ ConfusionEffect: @ 81D618B
 	createsprite gConfusionDuckSpriteTemplate, 130, 0, -15, 204, 3, 90
 	return
 
-Unknown_81D61E7: @ 81D61E7
+SetPsychicBackground: @ 81D61E7
 	fadetobg BG_PSYCHIC
 	waitbgfadeout
 	createvisualtask sub_812C560, 5
@@ -10227,12 +10227,12 @@ StatusCondition_Confusion: @ 81D629B
 StatusCondition_Burn: @ 81D62A4
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W172, SOUND_PAN_TARGET
-	call _81D62BC
-	call _81D62BC
-	call _81D62BC
+	call ConditionBurnFire
+	call ConditionBurnFire
+	call ConditionBurnFire
 	waitforvisualfinish
 	end
-_81D62BC:
+ConditionBurnFire:
 	createsprite gBattleAnimSpriteTemplate_83D9614, 130, -24, 24, 24, 24, 20, 1, 1
 	delay 4
 	return
@@ -10352,12 +10352,12 @@ General_ItemKnockoff: @ 81D647E
 
 General_TurnTrap: @ 81D6489
 	createvisualtask sub_8141DAC, 5
-	jumpargeq 0, 1, _81D64FD
-	jumpargeq 0, 2, _81D6522
-	jumpargeq 0, 3, _81D6576
-	jumpargeq 0, 4, _81D65D3
-	goto _81D64B5
-_81D64B5:
+	jumpargeq 0, 1, FireSpinHit
+	jumpargeq 0, 2, WhirlpoolHit
+	jumpargeq 0, 3, ClampHit
+	jumpargeq 0, 4, SandTombHit
+	goto WrapHit
+WrapHit:
 	loadspritegfx ANIM_TAG_TENDRILS
 	loopsewithpan SE_W010, SOUND_PAN_TARGET, 6, 2
 	createsprite gBattleAnimSpriteTemplate_83D65A0, 132, 0, 16, 0, 1
@@ -10370,7 +10370,7 @@ _81D64B5:
 	playsewithpan SE_W020, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end
-_81D64FD:
+FireSpinHit:
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_W221B, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10379,7 +10379,7 @@ _81D64FD:
 	waitforvisualfinish
 	stopsound
 	end
-_81D6522:
+WhirlpoolHit:
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_BANK_DEF_PARTNER
 	monbgprio_28 1
@@ -10396,7 +10396,7 @@ _81D6522:
 	stopsound
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	end
-_81D6576:
+ClampHit:
 	loadspritegfx ANIM_TAG_CLAMP
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_BANK_TARGET
@@ -10412,7 +10412,7 @@ _81D6576:
 	blendoff
 	waitforvisualfinish
 	end
-_81D65D3:
+SandTombHit:
 	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, 0, 4, 2, 0, 7, rgb(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, 1, 0, 2, 30, 1
@@ -10571,7 +10571,7 @@ General_FutureSightHit: @ 81D68D5
 	createvisualtask sub_80E42B0, 2
 	monbg ANIM_BANK_DEF_PARTNER
 	playsewithpan SE_W060, SOUND_PAN_ATTACKER
-	call Unknown_81D61E7
+	call SetPsychicBackground
 	setalpha 8, 8
 	playsewithpan SE_W048, SOUND_PAN_TARGET
 	waitplaysewithpan SE_W048, SOUND_PAN_TARGET, 8
