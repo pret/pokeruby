@@ -10347,7 +10347,7 @@ General_PokeblockThrow: @ 81D6438
 
 General_ItemKnockoff: @ 81D647E
 	loadspritegfx ANIM_TAG_ITEM_BAG
-	createsprite gBattleAnimSpriteTemplate_83D6734, 130
+	createsprite gFallingItemBagTemplate, 130
 	end
 
 General_TurnTrap: @ 81D6489
