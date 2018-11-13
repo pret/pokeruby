@@ -1824,12 +1824,12 @@ static void ScriptCmd_monbg(void)
 
     sBattleAnimScriptPtr++;
     animBank = T1_READ_8(sBattleAnimScriptPtr);
-    if (animBank == ANIM_BANK_ATTACKER)
-        animBank = ANIM_BANK_ATK_PARTNER;
-    else if (animBank == ANIM_BANK_TARGET)
-        animBank = ANIM_BANK_DEF_PARTNER;
+    if (animBank == ANIM_BATTLER_ATTACKER)
+        animBank = ANIM_BATTLER_ATK_PARTNER;
+    else if (animBank == ANIM_BATTLER_TARGET)
+        animBank = ANIM_BATTLER_DEF_PARTNER;
 
-    if (animBank == ANIM_BANK_ATTACKER || animBank == ANIM_BANK_ATK_PARTNER)
+    if (animBank == ANIM_BATTLER_ATTACKER || animBank == ANIM_BATTLER_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -1866,7 +1866,7 @@ static void ScriptCmd_monbg(void)
     }
 
     bank ^= 2;
-    if (animBank >= ANIM_BANK_ATK_PARTNER && IsAnimBankSpriteVisible(bank))
+    if (animBank >= ANIM_BATTLER_ATK_PARTNER && IsAnimBankSpriteVisible(bank))
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
@@ -2095,12 +2095,12 @@ static void ScriptCmd_clearmonbg(void)
     sBattleAnimScriptPtr++;
     animBankId = T1_READ_8(sBattleAnimScriptPtr);
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_BATTLER_ATTACKER)
+        animBankId = ANIM_BATTLER_ATK_PARTNER;
+    else if (animBankId == ANIM_BATTLER_TARGET)
+        animBankId = ANIM_BATTLER_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_BATTLER_ATTACKER || animBankId == ANIM_BATTLER_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -2158,12 +2158,12 @@ static void ScriptCmd_monbg_22(void)
     sBattleAnimScriptPtr++;
     animBankId = T1_READ_8(sBattleAnimScriptPtr);
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_BATTLER_ATTACKER)
+        animBankId = ANIM_BATTLER_ATK_PARTNER;
+    else if (animBankId == ANIM_BATTLER_TARGET)
+        animBankId = ANIM_BATTLER_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_BATTLER_ATTACKER || animBankId == ANIM_BATTLER_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;
@@ -2181,7 +2181,7 @@ static void ScriptCmd_monbg_22(void)
     }
 
     bank ^= 2;
-    if (animBankId > ANIM_BANK_TARGET && IsAnimBankSpriteVisible(bank))
+    if (animBankId > ANIM_BATTLER_TARGET && IsAnimBankSpriteVisible(bank))
     {
         identity = GetBattlerPosition(bank);
         identity += 0xFF;
@@ -2204,12 +2204,12 @@ static void ScriptCmd_clearmonbg_23(void)
     sBattleAnimScriptPtr++;
     animBankId = T1_READ_8(sBattleAnimScriptPtr);
 
-    if (animBankId == ANIM_BANK_ATTACKER)
-        animBankId = ANIM_BANK_ATK_PARTNER;
-    else if (animBankId == ANIM_BANK_TARGET)
-        animBankId = ANIM_BANK_DEF_PARTNER;
+    if (animBankId == ANIM_BATTLER_ATTACKER)
+        animBankId = ANIM_BATTLER_ATK_PARTNER;
+    else if (animBankId == ANIM_BATTLER_TARGET)
+        animBankId = ANIM_BATTLER_DEF_PARTNER;
 
-    if (animBankId == ANIM_BANK_ATTACKER || animBankId == ANIM_BANK_ATK_PARTNER)
+    if (animBankId == ANIM_BATTLER_ATTACKER || animBankId == ANIM_BATTLER_ATK_PARTNER)
         bank = gAnimBankAttacker;
     else
         bank = gAnimBankTarget;

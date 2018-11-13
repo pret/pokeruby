@@ -11,7 +11,7 @@
 	.macro createsprite template, anim_battler, subpriority_offset, argv:vararg
     .byte 0x02
     .4byte \template
-    .if \anim_battler == ANIM_BANK_TARGET
+    .if \anim_battler == ANIM_BATTLER_TARGET
     .byte 0x80 | (\subpriority_offset & 0x7F)
     .else
     .byte (\subpriority_offset & 0x7F)
