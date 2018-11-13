@@ -2696,7 +2696,7 @@ Move_MEDITATE: @ 81CB1BD
 	delay 16
 	playsewithpan SE_W036, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_AGILITY: @ 81CB1DA
@@ -2763,7 +2763,7 @@ Move_TELEPORT: @ 81CB2F2
 	createvisualtask sub_80DBCFC, 2
 	playsewithpan SE_W100, SOUND_PAN_ATTACKER
 	delay 15
-	call Unknown_81D61F3
+	call BackgroundRestore
 	waitforvisualfinish
 	end
 
@@ -2856,7 +2856,7 @@ Move_AMNESIA: @ 81CB455
 	delay 54
 	loopsewithpan SE_W118, SOUND_PAN_ATTACKER, 16, 3
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_KINESIS: @ 81CB479
@@ -2875,7 +2875,7 @@ Move_KINESIS: @ 81CB479
 	delay 70
 	playsewithpan SE_W207B, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_GLARE: @ 81CB4CA
@@ -3826,7 +3826,7 @@ Move_SKILL_SWAP: @ 81CC81C
 	createvisualtask sub_80DC0B0, 3, 0
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_BANK_ATTACKER, 32767, 12, 3, 1
 	waitforvisualfinish
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_IMPRISON: @ 81CC867
@@ -3843,7 +3843,7 @@ Move_IMPRISON: @ 81CC867
 	createvisualtask sub_80E1864, 5, 4, 1, 10
 	playsewithpan SE_W063, SOUND_PAN_ATTACKER
 	clearmonbg ANIM_BANK_DEF_PARTNER
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_GRUDGE: @ 81CC8AA
@@ -3938,7 +3938,7 @@ Move_LUSTER_PURGE: @ 81CC95B
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATTACKER
 	blendoff
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_MIST_BALL: @ 81CCA72
@@ -4334,7 +4334,7 @@ Move_EXTRASENSORY: @ 81CD431
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_BANK_DEF_PARTNER
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_AERIAL_ACE: @ 81CD499
@@ -4714,7 +4714,7 @@ Move_CONFUSION: @ 81CDC69
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_PSYCHIC: @ 81CDCCA
@@ -4731,7 +4731,7 @@ Move_PSYCHIC: @ 81CDCCA
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_FUTURE_SIGHT: @ 81CDD2D
@@ -4739,7 +4739,7 @@ Move_FUTURE_SIGHT: @ 81CDD2D
 _81CDD32:
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81CDD3B:
 	monbg ANIM_BANK_ATK_PARTNER
@@ -7009,7 +7009,7 @@ Move_DREAM_EATER: @ 81D1271
 	clearmonbg ANIM_BANK_DEF_PARTNER
 	blendoff
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D12DB:
 	playsewithpan SE_W207, SOUND_PAN_TARGET
@@ -7126,7 +7126,7 @@ Move_PSYBEAM: @ 81D15A2
 	call _81D1626
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D1626:
 	createsprite gBattleAnimSpriteTemplate_83DA784, 130, 16, 0, 0, 0, 13, 0
@@ -7142,7 +7142,7 @@ Move_HYPNOSIS: @ 81D163C
 	createvisualtask sub_80E1F8C, 2, 4, 2, 2, 0, 12, 32351
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D166F:
 	playsewithpan SE_W048, SOUND_PAN_ATTACKER
@@ -7166,7 +7166,7 @@ Move_PSYWAVE: @ 81D169C
 	call _81D16FF
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 _81D16FF:
 	createsprite gBattleAnimSpriteTemplate_83D9280, 131, 10, 10, 0, 16
@@ -9508,7 +9508,7 @@ Move_PSYCHO_BOOST: @ 81D51C7
 	waitforvisualfinish
 	clearmonbg ANIM_BANK_ATK_PARTNER
 	blendoff
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 Move_KNOCK_OFF: @ 81D523B
@@ -10157,7 +10157,7 @@ SetPsychicBackground: @ 81D61E7
 	waitbgfadein
 	return
 
-Unknown_81D61F3: @ 81D61F3
+BackgroundRestore: @ 81D61F3
 	restorebg
 	waitbgfadeout
 	setarg ARG_RET_ID, -1
@@ -10584,7 +10584,7 @@ General_FutureSightHit: @ 81D68D5
 	blendoff
 	waitforvisualfinish
 	delay 1
-	call Unknown_81D61F3
+	call BackgroundRestore
 	end
 
 General_DoomDesireHit: @ 81D6934
