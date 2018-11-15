@@ -21,23 +21,18 @@
 #ifndef FORMATTER_H
 #define FORMATTER_H
 
+#include "scaninc.h"
+
 #include <dirent.h>
-#include <errno.h>
+#include <cerrno>
 #include <sys/stat.h>
 #include <sstream>
-#include <set>
+#include <unordered_set>
 #include <string>
-
 class Formatter
 {
-private:
-    size_t line_len;
-    std::string targetstream;
-    std::string phonystream;
-   	void WriteFilename(const std::string &str);
 public:
-    Formatter() = default;
-    void WriteMakefile(const std::string &path, const std::set<std::string> &dependencies);
+    static void WriteMakefile(const scaninc::string_view &output, const scaninc::string_view &path, const std::unordered_set<std::string> &dependencies);
 };
 
 #endif

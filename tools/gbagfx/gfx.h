@@ -27,10 +27,10 @@ struct Image {
 	bool hasTransparency;
 };
 
-void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
-void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+void ReadImage(const char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
+void WriteImage(const char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors);
 void FreeImage(struct Image *image);
-void ReadGbaPalette(char *path, struct Palette *palette);
-void WriteGbaPalette(char *path, struct Palette *palette);
+void ReadGbaPalette(const char *path, struct Palette *palette);
+void WriteGbaPalette(const char *path, struct Palette *palette);
 
 #endif // GFX_H

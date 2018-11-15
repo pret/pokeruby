@@ -189,7 +189,7 @@ typedef khint_t khiter_t;
 #define kfree(P) free(P)
 #endif
 
-static const double __ac_HASH_UPPER = 0.77;
+static const float __ac_HASH_UPPER = 0.77f;
 
 #define __KHASH_TYPE(name, khkey_t, khval_t) \
 	typedef struct kh_##name##_s { \
@@ -248,7 +248,7 @@ static const double __ac_HASH_UPPER = 0.77;
 		{																\
 			kroundup32(new_n_buckets); 									\
 			if (new_n_buckets < 4) new_n_buckets = 4;					\
-			if (h->size >= (khint_t)(new_n_buckets * __ac_HASH_UPPER + 0.5)) j = 0;	/* requested size is too small */ \
+			if (h->size >= (khint_t)(new_n_buckets * __ac_HASH_UPPER + 0.5f)) j = 0;	/* requested size is too small */ \
 			else { /* hash table size to be changed (shrink or expand); rehash */ \
 				new_flags = (khint32_t*)kmalloc(__ac_fsize(new_n_buckets) * sizeof(khint32_t));	\
 				if (!new_flags) return -1;								\
@@ -300,7 +300,7 @@ static const double __ac_HASH_UPPER = 0.77;
 			h->flags = new_flags;										\
 			h->n_buckets = new_n_buckets;								\
 			h->n_occupied = h->size;									\
-			h->upper_bound = (khint_t)(h->n_buckets * __ac_HASH_UPPER + 0.5); \
+			h->upper_bound = (khint_t)(h->n_buckets * __ac_HASH_UPPER + 0.5f); \
 		}																\
 		return 0;														\
 	}																	\

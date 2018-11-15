@@ -1,6 +1,6 @@
 CXX = g++
-
-CXXFLAGS = -Wall -Werror -std=c++11 -fno-exceptions -fno-rtti -O3
+CXX_STANDARD := $(shell $(SHELL) cxx_standard.sh $(CXX))
+CXXFLAGS = -Wall -Werror -fno-exceptions -fno-rtti -O2 -Imio/include $(CXX_STANDARD)
 
 SRCS = scaninc.cpp c_file.cpp asm_file.cpp formatter.cpp
 OBJS = $(SRCS:.cpp=.o)

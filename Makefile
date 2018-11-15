@@ -10,7 +10,12 @@ endif
 
 #### Tools ####
 
+# We only want to use pipefail shell when we are piping.
+# Otherwise, forcing a shell is a slowdown to Make.
+ifeq ($(KEEP_TEMPS),)
 SHELL     := bash -o pipefail
+endif
+
 AS        := $(PREFIX)as
 CC1       := tools/agbcc/bin/agbcc$(EXE)
 CPP       := $(CC) -E -x c
@@ -24,7 +29,7 @@ else
 SHA1SUM   := sha1sum -c
 endif
 
-GBAGFX    := tools/gbagfx/gbagfx$(EXE)
+GBAGFX     := tools/gbagfx/gbagfx$(EXE)
 RSFONT    := tools/rsfont/rsfont$(EXE)
 AIF2PCM   := tools/aif2pcm/aif2pcm$(EXE)
 MID2AGB   := tools/mid2agb/mid2agb$(EXE)
@@ -45,6 +50,17 @@ CC1_VER     := $(shell $(CC1) -agbcc-version '' 2>/dev/null || echo 0)
 
 ifneq ($(CC1_REQ_VER),$(CC1_VER))
     $(error Please update agbcc!)
+endif
+
+#### Verbosity flags ####
+
+V ?= 0
+ifeq ($(V),0)
+ECHO := echo
+MAKEFLAGS += -s
+else
+# no-op the echoing 
+ECHO := \#
 endif
 
 #### Files ####
@@ -85,6 +101,7 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
 NO_DEPS := clean tidy tools
+ALL_TOOLS := $(GBAGFX) $(SCANINC) $(PREPROC) $(BIN2C) $(RSFONT) $(AIF2PCM) $(RAMSCRGEN) $(MID2AGB)
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
 # Build tools when building the rom
@@ -120,6 +137,7 @@ endif
 
 clean: override NODEP = 1
 clean: tidy
+	@$(ECHO) "Cleaning all files..."
 	find sound/direct_sound_samples \( -iname '*.bin' \) -exec rm {} +
 	$(RM) $(ALL_OBJECTS)
 	$(RM) -r .d
@@ -132,18 +150,16 @@ clean: tidy
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
 
+# Only care if the tools don't exist, otherwise just let the user
+# manually remake tools if they change things.
+$(ALL_TOOLS):
+	@$(MAKE) -C $(dir $@)
+
 tools: override NODEP = 1
-tools:
-	@$(MAKE) -C tools/gbagfx
-	@$(MAKE) -C tools/scaninc
-	@$(MAKE) -C tools/preproc
-	@$(MAKE) -C tools/bin2c
-	@$(MAKE) -C tools/rsfont
-	@$(MAKE) -C tools/aif2pcm
-	@$(MAKE) -C tools/ramscrgen
-	@$(MAKE) -C tools/mid2agb
+tools: $(ALL_TOOLS)
 
 tidy:
+	@$(ECHO) "Cleaning normal build files..."
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r build
 
@@ -165,53 +181,70 @@ else
 endif
 
 $(ROM): %.gba: %.elf
+	@$(ECHO) " OBJCOPY $@"
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
+	@$(ECHO) " LD      $@"
 	@cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
-	@cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
+	@$(ECHO) " SED     $@"
+	cd $(BUILD_DIR) && sed -e "s#tools/#../../tools/#g" ../../ld_script.txt >ld_script.ld
+
 $(BUILD_DIR)/sym_%.ld: sym_%.txt
+	@$(ECHO) " SED     $@"
 	$(CPP) -P $(CPPFLAGS) $< | sed -e "s#tools/#../../tools/#g" > $@
 
 $(C_OBJECTS): $(BUILD_DIR)/%.o: %.c
+	@$(ECHO) " CC      $@"
 ifeq (,$(KEEP_TEMPS))
 	$(PREPROC) $(CPPFLAGS) -c charmap.txt $< | $(CC1) $(CC1FLAGS) | $(AS) $(ASFLAGS) -W -o $@
 else
-	$(PREPROC) $(CPPFLAGS) -c charmap.txt $< > $(BUILD_DIR)/$*.i
+	$(PREPROC) $(CPPFLAGS) -c charmap.txt -o $(BUILD_DIR)/$*.i $<
 	$(CC1) $(CC1FLAGS) $(BUILD_DIR)/$*.i -o $(BUILD_DIR)/$*.s
 	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
 endif
 
 # Only .s files in data need preproc
 $(BUILD_DIR)/data/%.o: data/%.s
+	@$(ECHO) " AS      $@"
 ifeq (,$(KEEP_TEMPS))
 	$(PREPROC) -n -c charmap.txt $< | $(CPP) - -P -I include | $(AS) $(ASFLAGS) -o $@
 else
-	$(PREPROC) -n -c charmap.txt $< | $(CPP) - -P -I include -o $(BUILD_DIR)/$*.s
-	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/$*.s
+	$(PREPROC) -n -c charmap.txt -o $(BUILD_DIR)/data/$*.preproc.S $<
+	$(CPP) $(BUILD_DIR)/data/$*.preproc.S -P -I include -o $(BUILD_DIR)/data/$*.s
+	$(AS) $(ASFLAGS) -W -o $@ $(BUILD_DIR)/data/$*.s
 endif
 
 $(BUILD_DIR)/%.o: %.s
-	$(AS) $(ASFLAGS) $< -o $@
+	@$(ECHO) " AS      $@"
+	@$(AS) $(ASFLAGS) $< -o $@
 
 # Dependency scanning. The new scaninc creates similar output
 # to gcc -M and only does it when needed.
 # If NODEP is enabled, these rules will be orphaned.
-$(DEPDIR)/%.d: %.c $(SCANINC)
+$(C_DEPS): $(DEPDIR)/%.d: %.c | $(DEPDIR)
 	@$(SCANINC) -I include $<
 
-$(DEPDIR)/%.d: %.s $(SCANINC)
+$(ASM_DEPS): $(DEPDIR)/%.d: %.s | $(DEPDIR)
 	@$(SCANINC) -I include $<
+
+$(DEPDIR): | $(ALL_TOOLS)
+	@$(ECHO) "Scanning dependencies for the first time, please wait."
+	@mkdir -p .d
 
 # .PRECIOUS: $(DEPDIR)/%.d
 
 # Include our dependencies. This will be empty on NODEP.
+ifeq (,$(NO_INCLUDE))
 -include $(C_DEPS)
 -include $(ASM_DEPS)
+endif
 $(SCANINC): NODEP = 1
-$(SCANINC): tools ;
+
+depend: $(C_DEPS) $(ASM_DEPS)
+.PHONY: depend
 
 # "friendly" target names for convenience sake
 ruby:          ; @$(MAKE) GAME_VERSION=RUBY
@@ -237,23 +270,40 @@ include misc.mk
 include spritesheet_rules.mk
 include override.mk
 
-%.1bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.4bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.8bpp:   %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.gbapal: %.pal ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.gbapal: %.png ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.lz:     %     ; $(GBAGFX) $< $@ $(GFX_OPTS)
-%.rl:     %     ; $(GBAGFX) $< $@ $(GFX_OPTS)
+%.1bpp:   %.png
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.4bpp:   %.png
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.8bpp:   %.png
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.gbapal: %.pal
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.gbapal: %.png
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.lz:     %
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
+%.rl:     %
+	@$(ECHO) " GBAGFX  $@"
+	$(GBAGFX) $< $@ $(GFX_OPTS)
 
 #### Sound Rules ####
 
 sound/direct_sound_samples/cries/cry_%.bin: sound/direct_sound_samples/cries/cry_%.aif
+	@$(ECHO) " AIF2PCM $@"
 	$(AIF2PCM) $< $@ --compress
 
 sound/%.bin: sound/%.aif
+	@$(ECHO) " AIF2PCM $@"
 	$(AIF2PCM) $< $@
 
 sound/songs/%.s: sound/songs/%.mid
+	@$(ECHO) " MID2AGB $@"
 	cd $(@D) && ../../$(MID2AGB) $(<F)
 
 # Don't 'remake' source files.
@@ -264,4 +314,6 @@ sound/songs/%.s: sound/songs/%.mid
 %.s: ;
 %.pal: ;
 %.aif: ;
-
+%.bin: ;
+%.inc: ;
+include/%.s: ;

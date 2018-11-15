@@ -43,9 +43,9 @@ static void RemoveComments(AsmFile *const restrict m);
 static bool CheckForDirective(AsmFile *const restrict m, const char *const restrict name, size_t length);
 static inline void SkipWhitespace(AsmFile *const restrict m);
 static void ExpectEmptyRestOfLine(AsmFile *const restrict m);
-static void ReportDiagnostic(AsmFile *const restrict m, const char *const restrict type, const char *const restrict format, va_list args);
-__attribute__((__format__(printf, 2, 3))) no_return static void RaiseError(AsmFile *const restrict m, const char *const restrict format, ...);
-__attribute__((__format__(printf, 2, 3))) static void RaiseWarning(AsmFile *const restrict m, const char *const restrict format, ...);
+printf_fn(3, 0) static void ReportDiagnostic(AsmFile *const restrict m, const char *const restrict type, const char *const restrict format, va_list args);
+printf_fn(2, 3) no_return static void RaiseError(AsmFile *const restrict m, const char *const restrict format, ...);
+printf_fn(2, 3) static void RaiseWarning(AsmFile *const restrict m, const char *const restrict format, ...);
 
 // Skips tabs and spaces.
 static inline void SkipWhitespace(AsmFile *const restrict m)
@@ -189,7 +189,7 @@ static void RemoveComments(AsmFile *const restrict m)
                 {
                     memset(str, ' ', end - str + 1);
                     str = end + 1;
-				}
+                }
             }
         }
         else if (str[0] == '"' || str[0] == '\'')
@@ -198,7 +198,7 @@ static void RemoveComments(AsmFile *const restrict m)
             if (unlikely(end == NULL))
                 RaiseError(m, "unterminated quote");
             pos = end - m->buffer + 1;
-		}
+        }
         else
         {
             pos++;
@@ -249,13 +249,6 @@ char *AsmFile_GetGlobalLabel(AsmFile *const restrict m)
     int start = pos;
     char *str;
 
-    /*if (IsIdentifierStartingChar(m->buffer[pos]))
-    {
-        pos++;
-
-        while (IsIdentifierChar(m->buffer[pos]))
-            pos++;
-    }*/
     pos += SkipIdentifier(&m->buffer[pos]);
 
     if (m->buffer[pos] == ':' && m->buffer[pos + 1] == ':')
@@ -514,7 +507,8 @@ void AsmFile_OutputLine(AsmFile *const restrict m)
         if (m->pos >= m->size)
         {
             RaiseWarning(m, "file doesn't end with newline");
-            fprintf(g_file, "%s\n", &m->buffer[m->lineStart]);
+            fputs(&m->buffer[m->lineStart], g_file);
+            putc_unlocked('\n', g_file);
         }
         else
         {
@@ -524,7 +518,8 @@ void AsmFile_OutputLine(AsmFile *const restrict m)
     else
     {
         m->buffer[m->pos] = 0;
-        puts(&m->buffer[m->lineStart]);
+        fputs(&m->buffer[m->lineStart], g_file);
+        putc_unlocked('\n', g_file);
         m->buffer[m->pos] = '\n';
         m->pos++;
         m->lineStart = m->pos;

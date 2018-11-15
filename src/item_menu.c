@@ -52,7 +52,6 @@ extern void sub_808A3F8(u8);
 extern void Shop_FadeReturnToMartMenu(void);
 extern void sub_80546B8(u8);
 extern void sub_804E990(u8);
-extern void sub_802E424(u8);
 extern void ScriptUnfreezeEventObjects(void);
 
 struct UnknownStruct2

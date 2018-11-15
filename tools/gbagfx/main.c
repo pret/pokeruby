@@ -17,10 +17,10 @@ struct CommandHandler
 {
     const char *inputFileExtension;
     const char *outputFileExtension;
-    void(*function)(char *inputPath, char *outputPath, int argc, char **argv);
+    void(*function)(const char *inputPath, const char *outputPath, int argc, char **argv);
 };
 
-void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *options)
+void ConvertGbaToPng(const char *inputPath, const char *outputPath, struct GbaToPngOptions *options)
 {
     struct Image image;
 
@@ -43,7 +43,7 @@ void ConvertGbaToPng(char *inputPath, char *outputPath, struct GbaToPngOptions *
     FreeImage(&image);
 }
 
-void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *options)
+void ConvertPngToGba(const char *inputPath, const char *outputPath, struct PngToGbaOptions *options)
 {
     struct Image image;
 
@@ -56,9 +56,9 @@ void ConvertPngToGba(char *inputPath, char *outputPath, struct PngToGbaOptions *
     FreeImage(&image);
 }
 
-void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **argv)
+void HandleGbaToPngCommand(const char *inputPath, const char *outputPath, int argc, char **argv)
 {
-    char *inputFileExtension = GetFileExtension(inputPath);
+    const char *inputFileExtension = GetFileExtension(inputPath);
     struct GbaToPngOptions options;
     options.paletteFilePath = NULL;
     options.bitDepth = inputFileExtension[0] - '0';
@@ -69,7 +69,7 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
 
     for (int i = 3; i < argc; i++)
     {
-        char *option = argv[i];
+        const char *option = argv[i];
 
         if (strcmp(option, "-palette") == 0)
         {
@@ -135,9 +135,9 @@ void HandleGbaToPngCommand(char *inputPath, char *outputPath, int argc, char **a
     ConvertGbaToPng(inputPath, outputPath, &options);
 }
 
-void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **argv)
+void HandlePngToGbaCommand(const char *inputPath, const char *outputPath, int argc, char **argv)
 {
-    char *outputFileExtension = GetFileExtension(outputPath);
+    const char *outputFileExtension = GetFileExtension(outputPath);
     int bitDepth = outputFileExtension[0] - '0';
     struct PngToGbaOptions options;
     options.numTiles = 0;
@@ -147,7 +147,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
 
     for (int i = 3; i < argc; i++)
     {
-        char *option = argv[i];
+        const char *option = argv[i];
 
         if (strcmp(option, "-num_tiles") == 0)
         {
@@ -197,7 +197,7 @@ void HandlePngToGbaCommand(char *inputPath, char *outputPath, int argc, char **a
     ConvertPngToGba(inputPath, outputPath, &options);
 }
 
-void HandlePngToGbaPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandlePngToGbaPaletteCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Palette palette;
 
@@ -205,7 +205,7 @@ void HandlePngToGbaPaletteCommand(char *inputPath, char *outputPath, int argc UN
     WriteGbaPalette(outputPath, &palette);
 }
 
-void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleGbaToJascPaletteCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Palette palette;
 
@@ -213,13 +213,13 @@ void HandleGbaToJascPaletteCommand(char *inputPath, char *outputPath, int argc U
     WriteJascPalette(outputPath, &palette);
 }
 
-void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, char **argv)
+void HandleJascToGbaPaletteCommand(const char *inputPath, const char *outputPath, int argc, char **argv)
 {
     int numColors = 0;
 
     for (int i = 3; i < argc; i++)
     {
-        char *option = argv[i];
+        const char *option = argv[i];
 
         if (strcmp(option, "-num_colors") == 0)
         {
@@ -250,7 +250,7 @@ void HandleJascToGbaPaletteCommand(char *inputPath, char *outputPath, int argc, 
     WriteGbaPalette(outputPath, &palette);
 }
 
-void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleLatinFontToPngCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -260,7 +260,7 @@ void HandleLatinFontToPngCommand(char *inputPath, char *outputPath, int argc UNU
     FreeImage(&image);
 }
 
-void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandlePngToLatinFontCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -272,7 +272,7 @@ void HandlePngToLatinFontCommand(char *inputPath, char *outputPath, int argc UNU
     FreeImage(&image);
 }
 
-void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleHalfwidthJapaneseFontToPngCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -282,7 +282,7 @@ void HandleHalfwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
     FreeImage(&image);
 }
 
-void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandlePngToHalfwidthJapaneseFontCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -294,7 +294,7 @@ void HandlePngToHalfwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
     FreeImage(&image);
 }
 
-void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleFullwidthJapaneseFontToPngCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -304,7 +304,7 @@ void HandleFullwidthJapaneseFontToPngCommand(char *inputPath, char *outputPath, 
     FreeImage(&image);
 }
 
-void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandlePngToFullwidthJapaneseFontCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     struct Image image;
 
@@ -316,13 +316,13 @@ void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
     FreeImage(&image);
 }
 
-void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char **argv)
+void HandleLZCompressCommand(const char *inputPath, const char *outputPath, int argc, char **argv)
 {
     int overflowSize = 0;
 
     for (int i = 3; i < argc; i++)
     {
-        char *option = argv[i];
+        const char *option = argv[i];
 
         if (strcmp(option, "-overflow") == 0)
         {
@@ -366,7 +366,7 @@ void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char *
     free(compressedData);
 }
 
-void HandleLZDecompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleLZDecompressCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     int fileSize;
     unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
@@ -381,7 +381,7 @@ void HandleLZDecompressCommand(char *inputPath, char *outputPath, int argc UNUSE
     free(uncompressedData);
 }
 
-void HandleRLCompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleRLCompressCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     int fileSize;
     unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
@@ -396,7 +396,7 @@ void HandleRLCompressCommand(char *inputPath, char *outputPath, int argc UNUSED,
     free(compressedData);
 }
 
-void HandleRLDecompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleRLDecompressCommand(const char *inputPath, const char *outputPath, int argc UNUSED, char **argv UNUSED)
 {
     int fileSize;
     unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
@@ -440,10 +440,10 @@ int main(int argc, char **argv)
         { NULL, NULL, NULL }
     };
 
-    char *inputPath = argv[1];
-    char *outputPath = argv[2];
-    char *inputFileExtension = GetFileExtension(inputPath);
-    char *outputFileExtension = GetFileExtension(outputPath);
+    const char *inputPath = argv[1];
+    const char *outputPath = argv[2];
+    const char *inputFileExtension = GetFileExtension(inputPath);
+    const char *outputFileExtension = GetFileExtension(outputPath);
 
     if (inputFileExtension == NULL)
         FATAL_ERROR("Input file \"%s\" has no extension.\n", inputPath);

@@ -203,7 +203,7 @@ static void ConvertToTiles8Bpp(unsigned char *src, unsigned char *dest, int numT
 	}
 }
 
-void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void ReadImage(const char *path, int tilesWidth, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
 	int tileSize = bitDepth * 8;
 
@@ -245,7 +245,7 @@ void ReadImage(char *path, int tilesWidth, int bitDepth, int metatileWidth, int 
 	free(buffer);
 }
 
-void WriteImage(char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
+void WriteImage(const char *path, int numTiles, int bitDepth, int metatileWidth, int metatileHeight, struct Image *image, bool invertColors)
 {
 	int tileSize = bitDepth * 8;
 
@@ -302,7 +302,7 @@ void FreeImage(struct Image *image)
 	image->pixels = NULL;
 }
 
-void ReadGbaPalette(char *path, struct Palette *palette)
+void ReadGbaPalette(const char *path, struct Palette *palette)
 {
 	int fileSize;
 	unsigned char *data = ReadWholeFile(path, &fileSize);
@@ -322,7 +322,7 @@ void ReadGbaPalette(char *path, struct Palette *palette)
 	free(data);
 }
 
-void WriteGbaPalette(char *path, struct Palette *palette)
+void WriteGbaPalette(const char *path, struct Palette *palette)
 {
 	FILE *fp = fopen(path, "wb");
 

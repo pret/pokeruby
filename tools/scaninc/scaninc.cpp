@@ -36,55 +36,98 @@
    #include <unistd.h>
 #endif
 
-char *g_buffer = nullptr;
-size_t m_bufsize = 0;
-
-/*
-bool CanOpenFile(std::string &path)
+static bool CanOpenFile(const scaninc::string_view &filename)
 {
-    FILE *fp = std::fopen(path.c_str(), "rb");
-
-    if (fp == NULL)
-        return false;
-
-    std::fclose(fp);
-    return true;
-}
-*/
-
-static bool CanOpenFile(const std::string &filename)
-{
-    return access(filename.c_str(), 0) == 0;
+    return access(filename.sv_data(), 0) == 0;
 }
 
+template <typename T>
+void ProcessFile(const scaninc::string_view &output, const scaninc::string_view &initialPath, const std::vector<std::string> &includeDirs)
+{
+    std::queue<std::string> filesToProcess;
+    std::unordered_set<std::string> dependencies;
+
+    filesToProcess.emplace(initialPath);
+
+    while (!filesToProcess.empty())
+    {
+        T file(filesToProcess.front());
+        filesToProcess.pop();
+        file.Find();
+
+        for (const auto &incbin : file.GetIncbins())
+        {
+            dependencies.emplace(incbin);
+        }
+        for (const auto &include : file.GetIncludes())
+        {
+            if (CanOpenFile(include))
+            {
+                bool inserted = dependencies.insert(include).second;
+                if (inserted)
+                {
+                    filesToProcess.emplace(include);
+                }
+            }
+            else
+            {
+                for (const auto &includeDir : includeDirs)
+                {
+                    const std::string path = includeDir + include;
+                    if (CanOpenFile(path))
+                    {
+                        bool inserted = dependencies.insert(path).second;
+                        if (inserted)
+                        {
+                            filesToProcess.emplace(path);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    Formatter::WriteMakefile(output, initialPath, dependencies);
+
+}
 const char *const USAGE = "Usage: scaninc [-I INCLUDE_PATH] FILE_PATH\n";
 
 int main(int argc, char **argv)
 {
-    std::queue<std::string> filesToProcess;
-    std::set<std::string> dependencies;
-
-    std::list<std::string> includeDirs;
+    std::vector<std::string> includeDirs;
+    scaninc::string_view output;
 
     argc--;
     argv++;
 
     while (argc > 1)
     {
-        if (argv[0][0] == '-' && argv[0][1] == 'I')
+        if (argv[0][0] == '-')
         {
-            std::string includeDir = std::string(argv[0] + 2);
-            if (includeDir.empty())
+            if (argv[0][1] == 'I')
             {
-                argc--;
-                argv++;
-                includeDir = std::string(argv[0]);
+                std::string includeDir;
+                if (argv[0][2] == '\0')
+                {
+                    argc--;
+                    argv++;
+                    includeDir.assign(argv[0]);
+                }
+                else
+                {
+                    includeDir.assign(argv[0] + 2);
+                }
+
+                if (includeDir.back() != '/')
+                {
+                    includeDir += '/';
+                }
+                includeDirs.emplace_back(includeDir);
             }
-            if (includeDir.back() != '/')
+            else if (argv[0][1] == 'o' && argc > 2)
             {
-                includeDir += '/';
+                output = argv[1];
             }
-            includeDirs.emplace_back(std::move(includeDir));
         }
         else
         {
@@ -98,90 +141,35 @@ int main(int argc, char **argv)
         FATAL_ERROR(USAGE);
     }
 
-    std::string initialPath(argv[0]);
+    const scaninc::string_view initialPath(argv[0]);
 
     std::size_t pos = initialPath.find_last_of('.');
 
-    if (pos == std::string::npos)
-        FATAL_ERROR("no file extension in path \"%s\"\n", initialPath.c_str());
+    if (pos == scaninc::string_view::npos)
+        FATAL_ERROR("no file extension in path \"%s\"\n", initialPath.sv_data());
 
-    std::string extension = initialPath.substr(pos + 1);
+    const scaninc::string_view extension = initialPath.substr(pos + 1);
 
     std::string srcDir;
     std::size_t slash = initialPath.rfind('/');
-    if (slash != std::string::npos)
+    if (slash != scaninc::string_view::npos)
     {
         srcDir = initialPath.substr(0, slash + 1);
     }
     includeDirs.emplace_back(std::move(srcDir));
 
-    // getline expects the pointer to be allocated with malloc
-    g_buffer = (char *)malloc(128);
-    m_bufsize = 128;
-
     if (extension == "c" || extension == "h")
     {
-        filesToProcess.push(initialPath);
-
-        while (!filesToProcess.empty())
-        {
-            CFile file(filesToProcess.front());
-            filesToProcess.pop();
-
-            file.FindIncbins();
-
-            for (const auto &incbin : file.GetIncbins())
-            {
-                dependencies.emplace(std::move(incbin));
-            }
-            for (const auto &include : file.GetIncludes())
-            {
-                for (const auto &includeDir : includeDirs)
-                {
-                    std::string path(includeDir + include);
-                    if (CanOpenFile(path))
-                    {
-                        bool inserted = dependencies.insert(path).second;
-                        if (inserted)
-                        {
-                            filesToProcess.emplace(std::move(path));
-                        }
-                        break;
-                    }
-                }
-            }
-        }
+        ProcessFile<CFile>(output, initialPath, includeDirs);
     }
     else if (extension == "s" || extension == "inc")
     {
-        filesToProcess.emplace(initialPath);
-
-        while (!filesToProcess.empty())
-        {
-            AsmFile file(filesToProcess.front());
-
-            filesToProcess.pop();
-            IncDirectiveType type;
-            std::string path;
-
-            while ((type = file.GetNextIncDirective(path)) != IncDirectiveType::None)
-            {
-                bool inserted = dependencies.insert(path).second;
-                if (inserted
-                    && type == IncDirectiveType::Include
-                    && CanOpenFile(path))
-                    filesToProcess.emplace(std::move(path));
-            }
-        }
+        ProcessFile<AsmFile>(output, initialPath, includeDirs);
     }
     else
     {
-        FATAL_ERROR("unknown extension \"%s\"\n", extension.c_str());
+        FATAL_ERROR("unknown extension \"%s\"\n", extension.sv_data());
     }
 
-    free(g_buffer);
-
-    Formatter formatter;
-    formatter.WriteMakefile(initialPath, dependencies);
     return 0;
 }

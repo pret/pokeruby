@@ -24,86 +24,21 @@
 #include <string>
 #include <string.h>
 #include "scaninc.h"
+#include "file.h"
+#include <mio/mmap.hpp>
 
-enum class IncDirectiveType
-{
-    None,
-    Include,
-    Incbin
-};
-
-class AsmFile
+class AsmFile : public File<FileType::Assembly>
 {
 public:
-    AsmFile(std::string &path);
-    ~AsmFile();
-    IncDirectiveType GetNextIncDirective(std::string &path);
+    explicit AsmFile(const scaninc::string_view &path) : File(path) {}
+    void Find();
 
 private:
-    int m_pos;
-    int m_size;
-    std::string m_path;
-    FILE *m_fp;
-
-    inline void Advance(int amount = 1)
-    {
-        if (m_pos + amount >= m_size)
-        {
-            m_pos = (m_pos + m_size - amount);
-            NextLine();
-        }
-        else
-        {
-            m_pos += amount;
-        }
-    }
-
-    inline char GetChar()
-    {
-        if ((g_buffer == nullptr || m_pos + 1 >= m_size) && !NextLine())
-            return -1;
-        return g_buffer[m_pos++];
-    }
-
-    inline char PeekChar()
-    {
-        if (g_buffer == nullptr || m_pos + 1 >= m_size)
-            return -1;
-
-        return g_buffer[m_pos];
-    }
-
-    void SkipTabsAndSpaces()
-    {
-        while (PeekChar() == '\t' || PeekChar() == ' ')
-            Advance();
-    }
-
-    bool MatchIncDirective(const char *directiveName, std::string &path)
-    {
-        int tmp = m_pos + strlen(directiveName) + 1;
-        if (tmp >= m_size)
-            return false;
-
-        m_pos = tmp;
-
-        SkipTabsAndSpaces();
-
-        if (GetChar() != '"')
-            FATAL_INPUT_ERROR("no path after \"%s\" directive\n", directiveName);
-
-        path = ReadPath();
-
-        return true;
-    }
-
-    std::string ReadPath();
+    bool MatchIncDirective(const char *directiveName, std::string &path);
     void SkipEndOfLineComment();
     void SkipMultiLineComment();
     void SkipString();
-    bool NextLine();
-    bool StrStr(const char *pattern);
-
 };
 
 #endif // ASM_FILE_H
+

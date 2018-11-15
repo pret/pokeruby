@@ -23,159 +23,38 @@
 
 #include <vector>
 #include <algorithm>
-#include <unistd.h>
 
 #include "scaninc.h"
 #include "asm_file.h"
 
 
-bool AsmFile::NextLine()
+// We can make searching faster by searching for .inc only,
+// then checking the matches.
+static const std::string inc_pat = ".inc";
+
+void AsmFile::Find()
 {
-    ssize_t len;
-    // Avoid empty lines too, don't waste the time.
-    // TODO: std::getline
-    while ((len = getline(&g_buffer, &m_bufsize, m_fp)) <= 0)
+    while ((m_pos = search(m_pos, m_buffer.cend(),
+                                SEARCHER(inc_pat.cbegin(), inc_pat.cend())))
+           != m_buffer.cend())
     {
-        if (len < 0)
+        m_pos += 4;
+
+        if (std::equal(m_pos, m_pos + 4, /*.inc*/"lude"))
         {
-            m_size = 0;
-            m_pos = 0;
-            return false;
+            m_pos += 4;
+            const std::string path = ReadPath();
+            if (path.empty())
+                continue;
+            m_includes.emplace(path);
         }
-    }
-    m_size = (int)len;
-    m_pos = 0;
-    return true;
-}
-
-
-AsmFile::AsmFile(std::string &path)
-{
-    m_path = path;
-    if (path.empty() || path == "-")
-    {
-        path = "<stdin>";
-        m_fp = stdin;
-    }
-    else
-    {
-        m_fp = std::fopen(path.c_str(), "rb");
-    }
-
-    if (m_fp == nullptr)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", path.c_str());
-
-    m_pos = 0;
-    NextLine();
-}
-
-AsmFile::~AsmFile()
-{
-    if (m_fp != stdin)
-        fclose(m_fp);
-}
-
-
-bool AsmFile::StrStr(const char *pattern)
-{
-    char *str = nullptr;
-    while ((str = strstr(&g_buffer[m_pos], pattern)) == nullptr)
-    {
-        if (!NextLine())
-            return false;
-    }
-    m_pos = str - g_buffer;
-    return true;
-}
-
-
-IncDirectiveType AsmFile::GetNextIncDirective(std::string &path)
-{
-    bool str = StrStr(".inc");
-    if (str == false)
-        return IncDirectiveType::None;
-
-    if (!strncmp(&g_buffer[m_pos], ".include", 8) && MatchIncDirective(".include", path))
-        return IncDirectiveType::Include;
-
-    if (!strncmp(&g_buffer[m_pos], ".incbin", 7) && MatchIncDirective(".incbin", path))
-        return IncDirectiveType::Incbin;
-
-    return IncDirectiveType::None;
-}
-
-std::string AsmFile::ReadPath()
-{
-    int startPos = m_pos;
-
-    // Only on a single line, don't auto advance
-    const char *endquote = strchr(&g_buffer[m_pos], '"');
-    const char *bad = strpbrk(&g_buffer[m_pos], "\r\n\\");
-    if (endquote == nullptr || endquote <= &g_buffer[m_pos])
-    {
-        FATAL_INPUT_ERROR("expected ending quote in path string");
-    }
-    else if (bad != nullptr && bad < endquote)
-    {
-        if (bad[0] == '\r' || bad[0] == '\n')
-            FATAL_INPUT_ERROR("unexpected end of line character in path string");
-        else
-            FATAL_INPUT_ERROR("unexpected escape in path string");
-    }
-    else if (endquote - &g_buffer[startPos] >= SCANINC_MAX_PATH)
-        FATAL_INPUT_ERROR("path is too long");
-
-    std::string str(&g_buffer[startPos], endquote - &g_buffer[startPos]);
-    Advance(endquote - &g_buffer[m_pos] + startPos - 1);
-    return str;
-}
-
-void AsmFile::SkipEndOfLineComment()
-{
-    int c;
-
-    do
-    {
-        c = GetChar();
-    } while (c != -1 && c != '\n');
-}
-
-void AsmFile::SkipMultiLineComment()
-{
-    for (;;)
-    {
-        int c = GetChar();
-
-        if (c == '*')
+        else if (std::equal(m_pos, m_pos + 3, /*.inc*/"bin"))
         {
-            if (PeekChar() == '/')
-            {
-                m_pos++;
-                return;
-            }
-        }
-        else if (c == -1)
-        {
-            return;
-        }
-    }
-}
-
-void AsmFile::SkipString()
-{
-    for (;;)
-    {
-        int c = GetChar();
-
-        if (c == '"')
-            break;
-
-        if (c == -1)
-            FATAL_INPUT_ERROR("unexpected EOF in string\n");
-
-        if (c == '\\')
-        {
-            c = GetChar();
+            m_pos += 3;
+            const std::string path = ReadPath();
+            if (path.empty())
+                continue;
+            m_incbins.emplace(path);
         }
     }
 }

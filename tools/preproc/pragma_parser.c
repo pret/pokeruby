@@ -306,8 +306,8 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
 
     // Create a new string containing the path. Store it on the stack.
     path = (char *) alloca(pos - startPos + 1);
-	memcpy(path, str + startPos, pos - startPos);
-	path[pos - startPos] = '\0';
+    memcpy(path, str + startPos, pos - startPos);
+    path[pos - startPos] = '\0';
 
     buffer = ReadWholeFile(path, &fileSize);
 

@@ -64,7 +64,7 @@ void ReadJascPaletteLine(FILE *fp, char *line)
     }
 }
 
-void ReadJascPalette(char *path, struct Palette *palette)
+void ReadJascPalette(const char *path, struct Palette *palette)
 {
     char line[MAX_LINE_LENGTH + 1];
 
@@ -154,7 +154,7 @@ void ReadJascPalette(char *path, struct Palette *palette)
     fclose(fp);
 }
 
-void WriteJascPalette(char *path, struct Palette *palette)
+void WriteJascPalette(const char *path, struct Palette *palette)
 {
     FILE *fp = fopen(path, "wb");
 

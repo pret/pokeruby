@@ -5,14 +5,14 @@
 #include "global.h"
 #include "lz.h"
 
-unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSize)
+unsigned char *LZDecompress(unsigned char *restrict src, int srcSize, int *restrict uncompressedSize)
 {
 	if (srcSize < 4)
 		goto fail;
 
 	int destSize = (src[3] << 16) | (src[2] << 8) | src[1];
 
-	unsigned char *dest = malloc(destSize);
+	unsigned char *restrict dest = malloc(destSize);
 
 	if (dest == NULL)
 		goto fail;
@@ -69,7 +69,7 @@ fail:
 	FATAL_ERROR("Fatal error while decompressing LZ file.\n");
 }
 
-unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
+unsigned char *LZCompress(unsigned char *restrict src, int srcSize, int *restrict compressedSize)
 {
 	const int minDistance = 2; // for compatibility with LZ77UnCompVram()
 
@@ -81,7 +81,7 @@ unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
 	// Round up to the next multiple of four.
 	worstCaseDestSize = (worstCaseDestSize + 3) & ~3;
 
-	unsigned char *dest = malloc(worstCaseDestSize);
+	unsigned char *restrict dest = malloc(worstCaseDestSize);
 
 	if (dest == NULL)
 		goto fail;

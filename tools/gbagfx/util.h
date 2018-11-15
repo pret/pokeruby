@@ -5,10 +5,10 @@
 
 #include <stdbool.h>
 
-bool ParseNumber(char *s, char **end, int radix, int *intValue);
-char *GetFileExtension(char *path);
-unsigned char *ReadWholeFile(char *path, int *size);
-unsigned char *ReadWholeFileZeroPadded(char *path, int *size, int padAmount);
-void WriteWholeFile(char *path, void *buffer, int bufferSize);
+bool ParseNumber(const char *s, char **end, int radix, int *intValue);
+const char *GetFileExtension(const char *path);
+unsigned char *ReadWholeFile(const char *path, int *size);
+unsigned char *ReadWholeFileZeroPadded(const char *path, int *size, int padAmount);
+void WriteWholeFile(const char *path, void *buffer, int bufferSize);
 
 #endif // UTIL_H

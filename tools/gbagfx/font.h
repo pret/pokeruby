@@ -6,11 +6,11 @@
 #include <stdbool.h>
 #include "gfx.h"
 
-void ReadLatinFont(char *path, struct Image *image);
-void WriteLatinFont(char *path, struct Image *image);
-void ReadHalfwidthJapaneseFont(char *path, struct Image *image);
-void WriteHalfwidthJapaneseFont(char *path, struct Image *image);
-void ReadFullwidthJapaneseFont(char *path, struct Image *image);
-void WriteFullwidthJapaneseFont(char *path, struct Image *image);
+void ReadLatinFont(const char *path, struct Image *image);
+void WriteLatinFont(const char *path, struct Image *image);
+void ReadHalfwidthJapaneseFont(const char *path, struct Image *image);
+void WriteHalfwidthJapaneseFont(const char *path, struct Image *image);
+void ReadFullwidthJapaneseFont(const char *path, struct Image *image);
+void WriteFullwidthJapaneseFont(const char *path, struct Image *image);
 
 #endif // FONT_H

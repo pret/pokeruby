@@ -21,7 +21,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdarg.h>
-//#include "khash.h"
 #include "preproc.h"
 #include "charmap.h"
 #include "char_util.h"
@@ -405,7 +404,7 @@ Charmap *Charmap_New(const char *const restrict filename)
 
         if (lhs.type == LhsType_None)
         {
-	        CharmapReader_Delete(reader);
+            CharmapReader_Delete(reader);
 
             return m;
         }
@@ -450,26 +449,35 @@ void Charmap_Delete(Charmap *const restrict m)
 {
     int i;
     khiter_t k;
-    for (k = kh_begin(m->chars); k != kh_end(m->chars); ++k)
-    {
-        if (kh_exist(m->chars, k))
-        {
-            free(kh_value(m->chars, k).str);
-            kh_del(Char, m->chars, k);
-        }
-    }
-    kh_destroy(Char, m->chars);
-    for (k = kh_begin(m->constants); k != kh_end(m->constants); ++k)
-    {
-        if (kh_exist(m->constants, k))
-        {
-            free((char *)kh_key(m->constants, k));
-            free(kh_value(m->constants, k).str);
-            kh_del(Constant, m->constants, k);
-        }
-    }
-    kh_destroy(Constant, m->constants);
 
+    if (m == NULL)
+        return;
+
+    if (m->chars != NULL)
+    {
+        for (k = kh_begin(m->chars); k != kh_end(m->chars); ++k)
+        {
+            if (kh_exist(m->chars, k))
+            {
+                free(kh_value(m->chars, k).str);
+                kh_del(Char, m->chars, k);
+            }
+        }
+        kh_destroy(Char, m->chars);
+    }
+    if (m->constants != NULL)
+    {
+        for (k = kh_begin(m->constants); k != kh_end(m->constants); ++k)
+        {
+            if (kh_exist(m->constants, k))
+            {
+                free((char *)kh_key(m->constants, k));
+                free(kh_value(m->constants, k).str);
+                kh_del(Constant, m->constants, k);
+            }
+        }
+        kh_destroy(Constant, m->constants);
+    }
     for (i = 0; i < 128; i++)
         if (m->escapes[i].str != NULL)
             free(m->escapes[i].str);

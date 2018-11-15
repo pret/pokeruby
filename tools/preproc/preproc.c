@@ -21,7 +21,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
-
+#define SEMPER_FIDELIS
 #include "ucpp/mem.h"
 #include "ucpp/cpp.h"
 
@@ -45,19 +45,17 @@ bool g_lines = true;
  */
 static inline void AddLineInfo(const char *fn, long line)
 {
-    fprintf(g_file, "\n# %i \"%s\"\n", (int32_t)line, fn);
+    fprintf(g_file, "# %i \"%s\"\n", (int32_t)line, fn);
 }
 
 /* stacks are stacks of string * */
-static void PreprocessFile(const char *path, Stack *defines, Stack *includes, bool do_preproc)
+static void PreprocessFile(const char *restrict path, Stack *restrict defines, Stack *restrict includes, bool do_preproc)
 {
     struct lexer_state ls = { 0 };
     FILE *input;
     char *current_file = NULL;
-	char *tmp;
-    long skipped_lines = 0;
+    char *tmp;
     int status;
-    bool force_line_no = true;
 
     init_cpp();
 
@@ -114,7 +112,7 @@ static void PreprocessFile(const char *path, Stack *defines, Stack *includes, bo
     }
 
     enter_file(&ls, ls.flags);
-
+    int curline = 0;
     // Lex through the file.
     while ((status = lex(&ls)) < CPPERR_EOF)
     {
@@ -123,25 +121,6 @@ static void PreprocessFile(const char *path, Stack *defines, Stack *includes, bo
             // error condition -- no token was retrieved
             FATAL_ERROR("preproc: exiting because of ucpp errors.\n");
         }
-
-        // Skip long groups of blank lines or comments. WIP.
-        if (g_lines && force_line_no && ls.ctok->type != CONTEXT)
-        {
-            if (ls.ctok->type == NEWLINE)
-            {
-                ++skipped_lines;
-            }
-            else if (ls.ctok->type != COMMENT)
-            {
-                if (skipped_lines != 0)
-                    AddLineInfo(current_file, ls.ctok->line);
-                skipped_lines = 0;
-                force_line_no = false;
-            }
-            else
-                continue;
-        }
-
         if (ls.ctok->type == PRAGMA)
         {
             const char *c = ls.ctok->name;
@@ -181,30 +160,20 @@ static void PreprocessFile(const char *path, Stack *defines, Stack *includes, bo
                 putc_unlocked('\n', g_file);
             }
         }
+        // TODO: Fix line numbers. They are way off.
         else if (ls.ctok->type == CONTEXT)
         {
+            curline = ls.ctok->line;
             if (g_lines)
             {
                 free(current_file);
                 current_file = strdup(ls.ctok->name);
                 AddLineInfo(current_file, ls.ctok->line);
-                force_line_no = false;
-                skipped_lines = 0;
             }
         }
-        else if (ls.ctok->type == NEWLINE)
+        else if (ls.ctok->type != COMMENT)
         {
-            putc_unlocked('\n', g_file);
-        }
-        else if (ls.ctok->type == COMMENT)
-        {
-            // skip it
-            force_line_no = true;
-        }
-        else
-        {
-            const char *tmp = STRING_TOKEN(ls.ctok->type) ? ls.ctok->name : operators_name[ls.ctok->type];
-            fputs(tmp, g_file);
+            fputs(STRING_TOKEN(ls.ctok->type) ? ls.ctok->name : operators_name[ls.ctok->type], g_file);
         }
     }
 
@@ -278,8 +247,8 @@ void PreprocAsmFile(const char *filename)
     Stack *stack = Stack_NewClass(AsmFile);
     khash_t(File) *hash = kh_init(File);
     int status;
-    char *tmp = (char *)malloc(strlen(filename) + 1);
     khiter_t i;
+    char *tmp = (char *)malloc(strlen(filename) + 1);
     strcpy(tmp, filename);
     i = kh_put(File, hash, tmp, &status);
 
@@ -315,9 +284,7 @@ void PreprocAsmFile(const char *filename)
             }
             else
             {
-                int *const include_times = &kh_value(hash, i);
-
-                if (++(*include_times) > 32)
+                if (kh_value(hash, i)++ > 32)
                     FATAL_ERROR("File '%s' included too many times\n", name);
                 free(name);
             }
@@ -397,9 +364,13 @@ static inline void usage(const char *progname)
 
 static const char *GetFileExtension(const char *filename)
 {
-    size_t i = strlen(filename) - 1;
+    size_t i;
+    if (!filename)
+        return "c";
 
-    if (!filename || i < 2)
+    i = strlen(filename) - 1;
+
+    if (i < 2)
         return "c";
 
     do

@@ -173,7 +173,7 @@ static void SetFontPalette(struct Image *image)
 	image->hasTransparency = false;
 }
 
-void ReadLatinFont(char *path, struct Image *image)
+void ReadLatinFont(const char *path, struct Image *image)
 {
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
@@ -200,7 +200,7 @@ void ReadLatinFont(char *path, struct Image *image)
 	SetFontPalette(image);
 }
 
-void WriteLatinFont(char *path, struct Image *image)
+void WriteLatinFont(const char *path, struct Image *image)
 {
 	if (image->width != 256)
 		FATAL_ERROR("The width of the font image (%d) is not 256.\n", image->width);
@@ -222,7 +222,7 @@ void WriteLatinFont(char *path, struct Image *image)
 	free(buffer);
 }
 
-void ReadHalfwidthJapaneseFont(char *path, struct Image *image)
+void ReadHalfwidthJapaneseFont(const char *path, struct Image *image)
 {
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
@@ -254,7 +254,7 @@ void ReadHalfwidthJapaneseFont(char *path, struct Image *image)
 	SetFontPalette(image);
 }
 
-void WriteHalfwidthJapaneseFont(char *path, struct Image *image)
+void WriteHalfwidthJapaneseFont(const char *path, struct Image *image)
 {
 	if (image->width != 128)
 		FATAL_ERROR("The width of the font image (%d) is not 128.\n", image->width);
@@ -276,7 +276,7 @@ void WriteHalfwidthJapaneseFont(char *path, struct Image *image)
 	free(buffer);
 }
 
-void ReadFullwidthJapaneseFont(char *path, struct Image *image)
+void ReadFullwidthJapaneseFont(const char *path, struct Image *image)
 {
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
@@ -303,7 +303,7 @@ void ReadFullwidthJapaneseFont(char *path, struct Image *image)
 	SetFontPalette(image);
 }
 
-void WriteFullwidthJapaneseFont(char *path, struct Image *image)
+void WriteFullwidthJapaneseFont(const char *path, struct Image *image)
 {
 	if (image->width != 256)
 		FATAL_ERROR("The width of the font image (%d) is not 256.\n", image->width);

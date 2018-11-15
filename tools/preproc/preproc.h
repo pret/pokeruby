@@ -56,10 +56,12 @@ extern bool g_lines;
 #define likely(x) __builtin_expect(!!(x), 1)
 #define unlikely(x) __builtin_expect(!!(x), 0)
 #define unlikely_else else if (__builtin_expect(1, 0))
+#define printf_fn(x, y) __attribute__((__format__(printf, x, y)))
 #else
 #define likely(x) (x)
 #define unlikely(x) (x)
 #define unlikely_else else
+#define printf_fn(x, y)
 #endif
 
 #ifdef _MSC_VER

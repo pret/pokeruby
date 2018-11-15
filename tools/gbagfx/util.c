@@ -9,7 +9,7 @@
 #include "global.h"
 #include "util.h"
 
-bool ParseNumber(char *s, char **end, int radix, int *intValue)
+bool ParseNumber(const char *s, char **end, int radix, int *intValue)
 {
 	char *localEnd;
 
@@ -37,9 +37,9 @@ bool ParseNumber(char *s, char **end, int radix, int *intValue)
 	return true;
 }
 
-char *GetFileExtension(char *path)
+const char *GetFileExtension(const char *path)
 {
-	char *extension = path;
+	const char *extension = path;
 
 	while (*extension != 0)
 		extension++;
@@ -58,7 +58,7 @@ char *GetFileExtension(char *path)
 	return extension;
 }
 
-unsigned char *ReadWholeFile(char *path, int *size)
+unsigned char *ReadWholeFile(const char *path, int *size)
 {
 	FILE *fp = fopen(path, "rb");
 
@@ -84,7 +84,7 @@ unsigned char *ReadWholeFile(char *path, int *size)
 	return buffer;
 }
 
-unsigned char *ReadWholeFileZeroPadded(char *path, int *size, int padAmount)
+unsigned char *ReadWholeFileZeroPadded(const char *path, int *size, int padAmount)
 {
 	FILE *fp = fopen(path, "rb");
 
@@ -110,7 +110,7 @@ unsigned char *ReadWholeFileZeroPadded(char *path, int *size, int padAmount)
 	return buffer;
 }
 
-void WriteWholeFile(char *path, void *buffer, int bufferSize)
+void WriteWholeFile(const char *path, void *buffer, int bufferSize)
 {
 	FILE *fp = fopen(path, "wb");
 

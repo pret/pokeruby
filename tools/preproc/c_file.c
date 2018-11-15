@@ -421,7 +421,7 @@ static void TryConvertIncbin(CFile *m)
         if (isSigned)
             fprintf(g_file, "%d,", data);
         else
-            fprintf(g_file, "%uu,", data);
+            fprintf(g_file, "%uu,", (unsigned)data);
     }
 
     putc_unlocked('}', g_file);

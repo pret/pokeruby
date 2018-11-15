@@ -5,3 +5,6 @@
 	path = tools/preproc/ucpp
 	url = https://github.com/easyaspi314/ucpp.git
 	branch = new
+[submodule "tools/scaninc/mio"]
+	path = tools/scaninc/mio
+	url = https://github.com/mandreyel/mio

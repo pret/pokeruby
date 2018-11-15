@@ -8,7 +8,7 @@
 #include "convert_png.h"
 #include "gfx.h"
 
-static FILE *PngReadOpen(char *path, png_structp *pngStruct, png_infop *pngInfo)
+static FILE *PngReadOpen(const char *path, png_structp *pngStruct, png_infop *pngInfo)
 {
     FILE *fp = fopen(path, "rb");
 
@@ -59,11 +59,11 @@ static unsigned char *ConvertBitDepth(unsigned char *src, int srcBitDepth, int d
 
     for (i = 0; i < srcSize; i++)
     {
-        unsigned char srcByte = src[i];
+        unsigned srcByte = src[i];
 
         for (j = 8 - srcBitDepth; j >= 0; j -= srcBitDepth)
         {
-            unsigned char pixel = (srcByte >> j) % (1 << srcBitDepth);
+            unsigned pixel = (srcByte >> j) % (1 << srcBitDepth);
 
             if (pixel >= (1 << destBitDepth))
                 FATAL_ERROR("Image exceeds the maximum color value for a %ibpp image.\n", destBitDepth);
@@ -80,7 +80,7 @@ static unsigned char *ConvertBitDepth(unsigned char *src, int srcBitDepth, int d
     return output;
 }
 
-void ReadPng(char *path, struct Image *image)
+void ReadPng(const char *path, struct Image *image)
 {
     png_structp png_ptr;
     png_infop info_ptr;
@@ -138,7 +138,7 @@ void ReadPng(char *path, struct Image *image)
     }
 }
 
-void ReadPngPalette(char *path, struct Palette *palette)
+void ReadPngPalette(const char *path, struct Palette *palette)
 {
     png_structp png_ptr;
     png_infop info_ptr;
@@ -186,7 +186,7 @@ void SetPngPalette(png_structp png_ptr, png_infop info_ptr, struct Palette *pale
     free(colors);
 }
 
-void WritePng(char *path, struct Image *image)
+void WritePng(const char *path, struct Image *image)
 {
     FILE *fp = fopen(path, "wb");
 
