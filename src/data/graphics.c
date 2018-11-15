@@ -1371,7 +1371,7 @@ const u8 gDecoration10000_Gfx[] = INCBIN_U8("graphics/misc/decoration_10000.4bpp
     const u8 gFont4LatinGlyphs[] = INCBIN_U8("graphics/fonts/font4_lat.4bpp");
     #endif
 #else
-    const u8 gFont4LatinGlyphs[] = INCBIN_U8("graphics/fonts/font4_lat.4bpp.bin");
+    const u8 gFont4LatinGlyphs[] = INCBIN_U8("graphics/fonts/font4_lat.4bpp");
 #endif // ENGLISH
 
 const u8 gFont3JapaneseGlyphs[] = INCBIN_U8("graphics/fonts/font3_jpn.4bpp");

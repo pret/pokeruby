@@ -51,7 +51,7 @@ static inline void AddLineInfo(const char *fn, long line)
 /* stacks are stacks of string * */
 static void PreprocessFile(const char *restrict path, Stack *restrict defines, Stack *restrict includes, bool do_preproc)
 {
-    struct lexer_state ls = { 0 };
+    struct lexer_state ls;
     FILE *input;
     char *current_file = NULL;
     char *tmp;

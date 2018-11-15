@@ -1,24 +1,37 @@
-CC = gcc
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2
-CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell ./setjmp.sh $(CC) $(CFLAGS))
+ECHO ?= \#
+TOOLS_DIR ?= ..
+GBAGFX_DIR := $(basename $(TOOLS_DIR)/gbagfx)
+GFX ?= $(GBAGFX_DIR)/gbagfx$(EXE)
 
-LIBS = -lpng -lz
+CC ?= gcc
 
-SRCS = main.c convert_png.c gfx.c jasc_pal.c lz.c rl.c util.c font.c
-OBJS = $(SRCS:.c=.o)
-HEADERS = convert_png.h gfx.h global.h jasc_pal.h lz.h rl.h util.h font.h
-.PHONY: all clean
-.SUFFIXES:
-all: gbagfx
-	@:
+CFLAGS := -Wall -Wextra -Werror -std=c11 -O2
 
-$(OBJS): %.o: %.c $(HEADERS)
-	$(CC) $(CPPFLAGS) $(CFLAGS) $< -c -o $@
+GBAGFX_CPPFLAGS := -DPNG_SKIP_SETJMP_CHECK $(shell $(SHELL) $(GBAGFX_DIR)/setjmp.sh $(CC) $(CFLAGS))
 
-gbagfx: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDFLAGS) $(LIBS)
+GBAGFX_LIBS = -lpng -lz
 
-clean:
-	$(RM) *.o
-	$(RM) gbagfx gbagfx.exe
+GBAGFX_SRCS = $(addprefix $(GBAGFX_DIR)/,main.c convert_png.c gfx.c jasc_pal.c lz.c rl.c util.c font.c)
+GBAGFX_OBJS = $(GBAGFX_SRCS:.c=.o)
+GBAGFX_HEADERS = $(addprefix $(GBAGFX_DIR)/,convert_png.h gfx.h global.h jasc_pal.h lz.h rl.h util.h font.h)
+.PHONY: clean gbagfx_clean gbagfx_all
+
+gbagfx_all: $(GFX)
+
+$(GFX): $(GBAGFX_OBJS)
+	@$(ECHO) " CCLD   $@"
+	$(CC) $(CFLAGS) $(GBAGFX_OBJS) -o $@ $(LDFLAGS) $(GBAGFX_LIBS)
+
+$(GBAGFX_OBJS): %.o: %.c $(GBAGFX_HEADERS)
+	@$(ECHO) " CC     $@"
+	$(CC) $(GBAGFX_CPPFLAGS) $(CFLAGS) $< -c -o $@
+
+clean: gbagfx_clean
+gbagfx_clean:
+	$(RM) $(GBAGFX_OBJS) $(GFX)

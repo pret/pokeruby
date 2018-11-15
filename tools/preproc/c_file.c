@@ -274,7 +274,7 @@ static const char *idents[6] =
 
 static inline bool CheckIdentifier(CFile *const restrict m, size_t ident_pos)
 {
-    size_t len = ident_pos >= 1 ? 10 : 9;
+    int len = ident_pos >= 1 ? 10 : 9;
 
     if (m->pos + len > m->size)
         return false;
@@ -361,68 +361,75 @@ static void TryConvertIncbin(CFile *m)
     }
 
     m->pos++;
+    putc_unlocked('{', g_file);
 
-    SkipWhitespace(m);
-
-    if (unlikely(m->buffer[m->pos] != '"'))
-        RaiseError(m, "expected double quote");
-
-    m->pos++;
-
-    startPos = m->pos;
-
-    while (m->buffer[m->pos] != '"')
+    for (;;)
     {
-        if (unlikely(m->buffer[m->pos] == '\0'))
+
+        SkipWhitespace(m);
+
+        if (unlikely(m->buffer[m->pos] != '"'))
+            RaiseError(m, "expected double quote");
+
+        m->pos++;
+
+        startPos = m->pos;
+
+        while (m->buffer[m->pos] != '"')
         {
-            if (m->pos >= m->size)
-                RaiseError(m, "unexpected EOF in path string");
-            else
-                RaiseError(m, "unexpected null character in path string");
+            if (unlikely(m->buffer[m->pos] == '\0'))
+            {
+                if (m->pos >= m->size)
+                    RaiseError(m, "unexpected EOF in path string");
+                else
+                    RaiseError(m, "unexpected null character in path string");
+            }
+
+            if (unlikely(m->buffer[m->pos] == '\r' || m->buffer[m->pos] == '\n'))
+                RaiseError(m, "unexpected end of line character in path string");
+
+            if (unlikely(m->buffer[m->pos] == '\\'))
+                RaiseError(m, "unexpected escape in path string");
+
+            m->pos++;
         }
 
-        if (unlikely(m->buffer[m->pos] == '\r' || m->buffer[m->pos] == '\n'))
-            RaiseError(m, "unexpected end of line character in path string");
+        path = (char *)alloca(m->pos - startPos + 1);
+        memcpy(path, &m->buffer[startPos], m->pos - startPos);
+        path[m->pos - startPos] = '\0';
 
-        if (unlikely(m->buffer[m->pos] == '\\'))
-            RaiseError(m, "unexpected escape in path string");
+        m->pos++;
+
+        buffer = ReadWholeFile(m, path, &fileSize);
+
+        if (unlikely((fileSize % size) != 0))
+            RaiseError(m, "Size %d doesn't evenly divide file size %d.\n", size, fileSize);
+
+        count = fileSize / size;
+        offset = 0;
+
+        for (i = 0; i < count; i++)
+        {
+            int data = ExtractData(buffer, offset, size);
+             offset += size;
+
+            if (isSigned)
+                fprintf(g_file, "%d,", data);
+            else
+                fprintf(g_file, "%uu,", (unsigned)data);
+        }
+        SkipWhitespace(m);
+
+        if (m->buffer[m->pos] != ',')
+            break;
 
         m->pos++;
     }
 
-    path = (char *)alloca(m->pos - startPos + 1);
-    memcpy(path, &m->buffer[startPos], m->pos - startPos);
-    path[m->pos - startPos] = '\0';
-
-    m->pos++;
-
-    SkipWhitespace(m);
-
-    if (unlikely(m->buffer[m->pos] != ')'))
+    if (m->buffer[m->pos] != ')')
         RaiseError(m, "expected ')'");
 
     m->pos++;
-
-    putc_unlocked('{', g_file);
-
-    buffer = ReadWholeFile(m, path, &fileSize);
-
-    if (unlikely((fileSize % size) != 0))
-        RaiseError(m, "Size %d doesn't evenly divide file size %d.\n", size, fileSize);
-
-    count = fileSize / size;
-    offset = 0;
-
-    for (i = 0; i < count; i++)
-    {
-        int data = ExtractData(buffer, offset, size);
-        offset += size;
-
-        if (isSigned)
-            fprintf(g_file, "%d,", data);
-        else
-            fprintf(g_file, "%uu,", (unsigned)data);
-    }
 
     putc_unlocked('}', g_file);
 }

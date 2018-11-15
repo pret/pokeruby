@@ -1,14 +1,25 @@
-CC = gcc
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
 
-SRCS = gbafix.c
+ECHO ?= \#
 
-.PHONY: all clean
+CC ?= gcc
+TOOLS_DIR ?= ..
+GBAFIX_DIR := $(basename $(TOOLS_DIR)/gbafix)
+FIX ?= $(GBAFIX_DIR)/gbafix$(EXE)
 
-all: gbafix
-	@:
+.PHONY: gbafix_all gbafix_clean clean
 
-gbafix: $(SRCS)
-	$(CC) $(SRCS) -o $@ $(LDFLAGS)
+GBAFIX_SRCS = $(GBAFIX_DIR)/gbafix.c
 
-clean:
-	$(RM) gbafix gbafix.exe
+gbafix_all: $(GBAFIX)
+$(GBAFIX): $(GBAFIX_SRCS)
+	@$(ECHO) " CCLD   $@"
+	$(CC) $(GBAFIX_SRCS) -o $@ $(LDFLAGS)
+
+clean: gbafix_clean
+gbafix_clean:
+	$(RM) $(GBAFIX)

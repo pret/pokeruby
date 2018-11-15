@@ -210,7 +210,7 @@ static void RemoveComments(AsmFile *const restrict m)
 // Returns whether the directive was found.
 static bool CheckForDirective(AsmFile *const restrict m, const char *name, size_t length)
 {
-    if (m->pos + length >= m->size)
+    if (m->pos + length >= (size_t)m->size)
         return false;
 
     if (strncmp(m->buffer + m->pos, name, length) != 0)

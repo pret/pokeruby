@@ -38,6 +38,9 @@ SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 GBAFIX    := tools/gbafix/gbafix$(EXE)
 
+ALL_TOOLS := $(GBAGFX) $(SCANINC) $(PREPROC) $(BIN2C) $(RSFONT) $(AIF2PCM) $(RAMSCRGEN) $(MID2AGB) $(GBAFIX)
+ALL_TOOL_NAMES := gbagfx scaninc preproc bin2c rsfont aif2pcm ramscrgen
+
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
 CPPFLAGS := -I tools/agbcc/include -I include -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DDEBUG=$(DEBUG)
@@ -102,7 +105,7 @@ ALL_BUILDS := ruby ruby_rev1 ruby_rev2 sapphire sapphire_rev1 sapphire_rev2 ruby
 # Available targets
 .PHONY: all clean tidy tools $(ALL_BUILDS)
 NO_DEPS := clean tidy tools
-ALL_TOOLS := $(GBAGFX) $(SCANINC) $(PREPROC) $(BIN2C) $(RSFONT) $(AIF2PCM) $(RAMSCRGEN) $(MID2AGB)
+
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
 # Build tools when building the rom
@@ -151,11 +154,6 @@ clean: tidy
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
 	$(MAKE) clean -C tools/gbafix
-
-# Only care if the tools don't exist, otherwise just let the user
-# manually remake tools if they change things.
-$(ALL_TOOLS):
-	@$(MAKE) -C $(dir $@)
 
 tools: override NODEP = 1
 tools: $(ALL_TOOLS)
@@ -233,11 +231,11 @@ $(C_DEPS): $(DEPDIR)/%.d: %.c | $(DEPDIR)
 $(ASM_DEPS): $(DEPDIR)/%.d: %.s | $(DEPDIR)
 	@$(SCANINC) -I include $<
 
-$(DEPDIR): | $(ALL_TOOLS)
+$(DEPDIR): | $(SCANINC) $(ALL_TOOLS)
 	@$(ECHO) "Scanning dependencies for the first time, please wait."
 	@mkdir -p .d
 
-# .PRECIOUS: $(DEPDIR)/%.d
+.PRECIOUS: $(DEPDIR)/%.d
 
 # Include our dependencies. This will be empty on NODEP.
 ifeq (,$(NO_INCLUDE))
@@ -245,6 +243,7 @@ ifeq (,$(NO_INCLUDE))
 -include $(ASM_DEPS)
 endif
 $(SCANINC): NODEP = 1
+include tools.mk
 
 depend: $(C_DEPS) $(ASM_DEPS)
 .PHONY: depend

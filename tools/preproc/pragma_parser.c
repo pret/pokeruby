@@ -140,17 +140,23 @@ void ParsePragma(const char *restrict str, const char *restrict filename, long l
     else
     {
         // Split the pragma string and parse each of them.
-        const char delim[2] = { (const char)PRAGMA_TOKEN_END, (const char)'\0' };
+        const char delim[3] = { (const char)PRAGMA_TOKEN_END, (const char)COMMA, (const char)'\0' };
         const char *split = strtok(pragmaStr, delim);
+
+        putc_unlocked('{', g_file);
 
         while (split != NULL)
         {
-            if (unlikely(!STRING_TOKEN(split[0])))
-                RaiseError("expected string token in pragma");
+            if (split[0] != COMMA)
+            {
+                if (unlikely(!STRING_TOKEN(split[0]) && split[0] != COMMA))
+                    RaiseError("expected string token in pragma");
 
-            TryConvertIncbin(split, type);
+                 TryConvertIncbin(split, type);
+            }
             split = strtok(NULL, delim);
         }
+        putc_unlocked('}', g_file);
     }
 
     // avoid dangling pointers
@@ -271,7 +277,7 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
     int count;
     bool isSigned;
 
-    if (unlikely(!STRING_TOKEN(str[0])))
+    if (unlikely(!STRING_TOKEN(str[0]) && str[0] != COMMA))
         RaiseError("Syntax error in str");
 
     pos = 1;
@@ -319,9 +325,7 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
 
     // Give a #line directive
     if (g_lines)
-        fprintf(g_file, "\n# 1 \"%s\" 1\n{", path);
-    else
-        fputs("{ ", g_file);
+        fprintf(g_file, "\n# 1 \"%s\" 1\n", path);
 
     for (i = 0; i < count; i++)
     {
@@ -334,9 +338,7 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
             fprintf(g_file, "%uu, ", (unsigned)data);
     }
     if (g_lines)
-        fprintf(g_file, "}\n# %ld \"%s\"\n", s_line, s_filename);
-    else
-        fputs(" }", g_file);
+        fprintf(g_file, "\n# %ld \"%s\"\n", s_line, s_filename);
 
     free(buffer);
 }

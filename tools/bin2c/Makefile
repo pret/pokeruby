@@ -1,17 +1,28 @@
-CC = gcc
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
 
-CFLAGS = -Wall -Wextra -Werror -std=c11 -O2 -s
+ECHO ?= \#
 
-.PHONY: all clean
+CC ?= gcc
+TOOLS_DIR ?= ..
+BIN2C_DIR := $(basename $(TOOLS_DIR)/bin2c)
+BIN2C ?= $(BIN2C_DIR)/bin2c$(EXE)
 
-.SUFFIXES:
-SRCS = bin2c.c
+CFLAGS := -Wall -Wextra -Werror -std=c11 -O2 -s
 
-all: bin2c
-	@:
+BIN2C_SRCS := $(BIN2C_DIR)/bin2c.c
 
-bin2c: $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o $@ $(LDFLAGS)
+.PHONY: clean bin2c_clean bin2c_all
 
-clean:
-	$(RM) bin2c bin2c.exe
+bin2c_all: $(BIN2C)
+
+$(BIN2C): $(BIN2C_SRCS)
+	@$(ECHO) " CCLD   $@"
+	$(CC) $(CFLAGS) $(BIN2C_SRCS) -o $@ $(LDFLAGS)
+
+clean: bin2c_clean
+bin2c_clean:
+	$(RM) $(BIN2C)

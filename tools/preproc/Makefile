@@ -1,29 +1,44 @@
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
+ECHO ?= \#
+
 CC := gcc
+TOOLS_DIR ?= ..
+PREPROC_DIR := $(basename $(TOOLS_DIR)/preproc)
+PREPROC ?= $(PREPROC_DIR)/preproc$(EXE)
 
-CFLAGS := -std=gnu11 -O2 -Wall -Wno-switch
+PREPROC_CFLAGS := -std=gnu11 -O2 -Wall -Wno-switch
 LDFLAGS :=
-SRCS := asm_file.c c_file.c charmap.c preproc.c  \
-	utf8.c stack.c pragma_parser.c string_parser.c
-OBJS := $(SRCS:.c=.o)
-HEADERS := asm_file.h c_file.h char_util.h charmap.h preproc.h string_parser.h \
-	utf8.h stack.h khash.h pragma_parser.h
+PREPROC_SRCS := $(addprefix $(PREPROC_DIR)/,asm_file.c c_file.c charmap.c preproc.c  \
+	utf8.c stack.c pragma_parser.c string_parser.c)
+PREPROC_OBJS := $(PREPROC_SRCS:.c=.o)
+PREPROC_HEADERS := $(addprefix $(PREPROC_DIR)/,asm_file.h c_file.h char_util.h charmap.h preproc.h string_parser.h \
+	utf8.h stack.h khash.h pragma_parser.h)
 
-.PHONY: all clean
+.PHONY: preproc_all preproc_clean
 .SUFFIXES:
-all: preproc
+preproc_all: $(PREPROC)
 	@:
 
 # note: SEMPER_FIDELIS is the define that makes ucpp handle whitespace.
-ucpp/libucpp.a:  $(wildcard ucpp/*.[ch])
-	cd ucpp && $(MAKE) STAND_ALONE=  CC="$(CC)" CFLAGS="$(CFLAGS) -DSEMPER_FIDELIS"
+$(PREPROC_DIR)/ucpp/libucpp.a:  $(wildcard $(PREPROC_DIR)/ucpp/*.[ch])
+	@$(ECHO) " MAKE   ucpp"
+	cd $(PREPROC_DIR)/ucpp && $(MAKE) STAND_ALONE=  CC="$(CC)" CFLAGS="$(PREPROC_CFLAGS) -DSEMPER_FIDELIS"
 
-preproc: $(OBJS) ucpp/libucpp.a
-	$(CC) $(OBJS) $(CFLAGS) ucpp/libucpp.a -o $@ $(LDFLAGS)
+$(PREPROC): $(PREPROC_OBJS) $(PREPROC_DIR)/ucpp/libucpp.a
+	@$(ECHO) " CCLD   $@"
+	$(CC) $(PREPROC_OBJS) $(PREPROC_CFLAGS) $(PREPROC_DIR)/ucpp/libucpp.a -o $@ $(LDFLAGS)
 
-$(OBJS): %.o: %.c $(HEADERS)
-	$(CC) -c $(CFLAGS) $< -o $@
+$(PREPROC_OBJS): %.o: %.c $(PREPROC_HEADERS)
+	@$(ECHO) " CC     $@"
+	$(CC) -c $(PREPROC_CFLAGS) $< -o $@
 
-clean:
-	$(RM) preproc preproc.exe
-	$(MAKE) -C ucpp clean
-	$(RM) $(OBJS)
+clean: preproc_clean
+preproc_clean:
+	$(RM) $(PREPROC)
+	$(MAKE) -C $(PREPROC_DIR)/ucpp clean
+	$(RM) $(PREPROC_OBJS)

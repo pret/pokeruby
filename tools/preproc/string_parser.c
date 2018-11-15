@@ -264,6 +264,9 @@ no_return static void RaiseError(const StringParser *const restrict m, const cha
     char buffer[bufferSize];
     va_list args;
 
+    // Unused for now
+    (void)m;
+
     va_start(args, format);
     vsnprintf(buffer, bufferSize, format, args);
     va_end(args);
