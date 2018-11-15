@@ -186,7 +186,7 @@ $(ROM): %.gba: %.elf
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
 	@$(ECHO) " LD      $@"
-	@cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
+	cd $(BUILD_DIR) && $(LD) -T ld_script.ld -Map ../../$(MAP) ../../$(LIBGCC) ../../$(LIBC) -o ../../$@
 
 $(LD_SCRIPT): ld_script.txt $(BUILD_DIR)/sym_common.ld $(BUILD_DIR)/sym_ewram.ld $(BUILD_DIR)/sym_bss.ld
 	@$(ECHO) " SED     $@"
