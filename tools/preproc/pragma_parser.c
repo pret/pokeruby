@@ -140,20 +140,17 @@ void ParsePragma(const char *restrict str, const char *restrict filename, long l
     else
     {
         // Split the pragma string and parse each of them.
-        const char delim[3] = { (const char)PRAGMA_TOKEN_END, (const char)COMMA, (const char)'\0' };
+        const char delim[3] = { (const char)PRAGMA_TOKEN_END, (const char)'\0' };
         const char *split = strtok(pragmaStr, delim);
 
         putc_unlocked('{', g_file);
 
         while (split != NULL)
         {
-            if (split[0] != COMMA)
-            {
                 if (unlikely(!STRING_TOKEN(split[0]) && split[0] != COMMA))
                     RaiseError("expected string token in pragma");
 
                  TryConvertIncbin(split, type);
-            }
             split = strtok(NULL, delim);
         }
         putc_unlocked('}', g_file);
@@ -277,9 +274,18 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
     int count;
     bool isSigned;
 
-    if (unlikely(!STRING_TOKEN(str[0]) && str[0] != COMMA))
+    if (str[0] == COMMA)
+    {
+        str = strchr(str, '"');
+        if (str == NULL)
+            RaiseError("Trailing comma");
+        --str;
+    }
+    else
+    {
+    if (unlikely(!STRING_TOKEN(str[0])))
         RaiseError("Syntax error in str");
-
+    }
     pos = 1;
 
     size = 1 << ((int)incbinType / 2);
@@ -294,7 +300,7 @@ static void TryConvertIncbin(const char *restrict str, const enum incbin_type in
 
     // Only on a single line, don't auto advance
     endquote = strchr(&str[pos], '"');
-    bad = strpbrk(&str[pos], "\r\n\\");
+    bad = strpbrk(&str[pos], "\r\n,\\");
 
     if (unlikely(endquote == NULL || endquote <= &str[pos]))
     {
