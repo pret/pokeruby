@@ -103,11 +103,26 @@ extern void (*gFieldCallback)(void);
 u8 gUnknown_03004860;
 u8 gFieldLinkPlayerCount;
 
+static void CB2_Overworld(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState*, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState*, u8, u16, u8);
 static bool32 sub_805483C(u8*);
 static void c2_80567AC(void);
+static void Overworld_ResetStateAfterWhiteOut(void);
 static void InitOverworldGraphicsRegisters(void);
+static void ChooseAmbientCrySpecies(void);
+static void SetFieldVBlankCallback(void);
+static void VBlankCB_Field(void);
+static void SpawnLinkPlayerEventObject(u8, s16, s16, u8);
+static void InitLinkPlayerEventObjectPos(struct EventObject *, s16, s16);
+static u8 GetLinkPlayerIdAt(s16, s16);
+static u8 npc_something3(u8, u8);
+static u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
+static void CreateLinkPlayerSprite(u8);
+static void SpriteCB_LinkPlayer(struct Sprite *);
+static u16 sub_8055758(const u8 *);
+static void sub_8055808(const u8 *);
+static void sub_8055840(const u8 *);
 
 static const struct WarpData sDummyWarpData =
 {
@@ -232,7 +247,7 @@ void Overworld_ResetStateAfterDigEscRope(void)
     FlagClear(FLAG_SYS_USE_FLASH);
 }
 
-void Overworld_ResetStateAfterWhiteOut(void)
+static void Overworld_ResetStateAfterWhiteOut(void)
 {
     ResetInitialPlayerAvatarState();
     FlagClear(FLAG_SYS_CYCLING_ROAD);
@@ -541,11 +556,11 @@ void gpu_sync_bg_hide()
     gSaveBlock1.warp1 = gSaveBlock1.warp2;
 }
 
-struct MapConnection *GetMapConnection(u8 dir)
+const struct MapConnection *GetMapConnection(u8 dir)
 {
     s32 i;
     s32 count = gMapHeader.connections->count;
-    struct MapConnection *connection = gMapHeader.connections->connections;
+    const struct MapConnection *connection = gMapHeader.connections->connections;
 
     if (connection == NULL)
         return NULL;
@@ -559,7 +574,8 @@ struct MapConnection *GetMapConnection(u8 dir)
 
 static bool8 SetDiveWarp(u8 direction, u16 x, u16 y)
 {
-    struct MapConnection *connection = GetMapConnection(direction);
+    const struct MapConnection *connection = GetMapConnection(direction);
+
     if (connection != NULL)
     {
         Overworld_SetWarpDestination(connection->mapGroup, connection->mapNum, -1, x, y);
@@ -947,7 +963,7 @@ void Overworld_ChangeMusicTo(u16 newMusic)
 
 u8 GetMapMusicFadeoutSpeed(void)
 {
-    struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
+    const struct MapHeader *mapHeader = GetDestinationWarpMapHeader();
     if (Overworld_MapTypeIsIndoors(mapHeader->mapType) == TRUE)
         return 2;
     else
@@ -1020,7 +1036,7 @@ void UpdateAmbientCry(s16 *state, u16 *delayCounter)
     }
 }
 
-void ChooseAmbientCrySpecies(void)
+static void ChooseAmbientCrySpecies(void)
 {
     if ((gSaveBlock1.location.mapGroup == MAP_GROUP(ROUTE130)
      && gSaveBlock1.location.mapNum == MAP_NUM(ROUTE130))
@@ -1179,7 +1195,7 @@ bool32 is_c1_link_related_active(void)
         return FALSE;
 }
 
-void c1_overworld_normal(u16 newKeys, u16 heldKeys)
+static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 {
     struct FieldInput fieldInput;
 
@@ -1200,13 +1216,13 @@ void c1_overworld_normal(u16 newKeys, u16 heldKeys)
     }
 }
 
-void c1_overworld(void)
+static void CB1_Overworld(void)
 {
-    if (gMain.callback2 == c2_overworld)
-        c1_overworld_normal(gMain.newKeys, gMain.heldKeys);
+    if (gMain.callback2 == CB2_Overworld)
+        DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
 }
 
-void OverworldBasic(void)
+static void OverworldBasic(void)
 {
     ScriptContext2_RunScript();
     RunTasks();
@@ -1224,7 +1240,7 @@ void CB2_OverworldBasic(void)
     OverworldBasic();
 }
 
-void c2_overworld(void)
+static void CB2_Overworld(void)
 {
     int fading = (gPaletteFade.active != 0);
     if (fading)
@@ -1234,7 +1250,7 @@ void c2_overworld(void)
         SetFieldVBlankCallback();
 }
 
-void set_callback1(MainCallback cb)
+void SetMainCallback1(MainCallback cb)
 {
     gMain.callback1 = cb;
 }
@@ -1266,8 +1282,8 @@ void CB2_NewGame(void)
     gFieldCallback = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 #if DEBUG
@@ -1289,8 +1305,8 @@ void debug_sub_8058C00(void)
 
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 #endif
@@ -1312,8 +1328,8 @@ void CB2_WhiteOut(void)
         val = 0;
         do_load_map_stuff_loop(&val);
         SetFieldVBlankCallback();
-        set_callback1(c1_overworld);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
@@ -1322,7 +1338,7 @@ void CB2_LoadMap(void)
     FieldClearVBlankHBlankCallbacks();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    set_callback1(NULL);
+    SetMainCallback1(NULL);
     SetMainCallback2(sub_810CC80);
     gMain.savedCallback = CB2_LoadMap2;
 }
@@ -1331,8 +1347,8 @@ void CB2_LoadMap2(void)
 {
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
-    set_callback1(c1_overworld);
-    SetMainCallback2(c2_overworld);
+    SetMainCallback1(CB1_Overworld);
+    SetMainCallback2(CB2_Overworld);
 }
 
 void sub_8054534(void)
@@ -1342,13 +1358,13 @@ void sub_8054534(void)
         FieldClearVBlankHBlankCallbacks();
         ScriptContext1_Init();
         ScriptContext2_Disable();
-        set_callback1(NULL);
+        SetMainCallback1(NULL);
     }
     if (sub_805493C(&gMain.state, 1))
     {
         SetFieldVBlankCallback();
-        set_callback1(c1_overworld);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
@@ -1364,38 +1380,38 @@ static void c2_80567AC(void)
     if (sub_805483C(&gMain.state))
     {
         SetFieldVBlankCallback();
-        set_callback1(sub_8055354);
+        SetMainCallback1(sub_8055354);
         sub_80543DC(sub_8055390);
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
-void c2_exit_to_overworld_2_switch(void)
+void CB2_ReturnToField(void)
 {
     if (is_c1_link_related_active() == TRUE)
     {
-        SetMainCallback2(c2_exit_to_overworld_2_link);
+        SetMainCallback2(CB2_ReturnToFieldLink);
     }
     else
     {
         FieldClearVBlankHBlankCallbacks();
-        SetMainCallback2(c2_exit_to_overworld_2_local);
+        SetMainCallback2(CB2_ReturnToFieldLocal);
     }
 }
 
-void c2_exit_to_overworld_2_local(void)
+void CB2_ReturnToFieldLocal(void)
 {
     if (sub_8054A4C(&gMain.state))
     {
         SetFieldVBlankCallback();
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
     }
 }
 
-void c2_exit_to_overworld_2_link(void)
+void CB2_ReturnToFieldLink(void)
 {
     if (!sub_8055870() && sub_8054A9C(&gMain.state))
-        SetMainCallback2(c2_overworld);
+        SetMainCallback2(CB2_Overworld);
 }
 
 void sub_805465C(void)
@@ -1403,40 +1419,40 @@ void sub_805465C(void)
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     sub_8054F70();
-    set_callback1(sub_8055354);
+    SetMainCallback1(sub_8055354);
     sub_80543DC(sub_8055390);
     gFieldCallback = sub_8080A3C;
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void c2_exit_to_overworld_1_sub_8080DEC(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080DEC;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_80546B8(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_80809B0;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void c2_exit_to_overworld_1_continue_scripts_restart_music(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080990;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_80546F0(void)
 {
     FieldClearVBlankHBlankCallbacks();
     gFieldCallback = sub_8080B60;
-    c2_exit_to_overworld_2_switch();
+    CB2_ReturnToField();
 }
 
 void sub_805470C(void)
@@ -1474,8 +1490,8 @@ void CB2_ContinueSavedGame(void)
     else
     {
         gFieldCallback = sub_805470C;
-        set_callback1(c1_overworld);
-        c2_exit_to_overworld_2_switch();
+        SetMainCallback1(CB1_Overworld);
+        CB2_ReturnToField();
     }
 }
 
@@ -1490,12 +1506,12 @@ void FieldClearVBlankHBlankCallbacks(void)
     SetHBlankCallback(NULL);
 }
 
-void SetFieldVBlankCallback(void)
+static void SetFieldVBlankCallback(void)
 {
     SetVBlankCallback(VBlankCB_Field);
 }
 
-void VBlankCB_Field(void)
+static void VBlankCB_Field(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -1926,7 +1942,7 @@ bool32 sub_8054FC0(u16 a1)
 
 void sub_8054FF8(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
 {
-    u8 *script;
+    const u8 *script;
 
     if (gUnknown_03000580[a1] == 0x80)
     {
@@ -2314,7 +2330,7 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
     return TRUE;
 }
 
-u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
+const u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 {
     struct MapPosition unkStruct;
     u8 linkPlayerId;
@@ -2343,7 +2359,7 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     return GetInteractedLinkPlayerScript(&unkStruct, a1->field_C, a1->d);
 }
 
-u16 sub_8055758(u8 *script)
+static u16 sub_8055758(const u8 *script)
 {
     if (script == DoubleBattleColosseum_EventScript_1A4383)
         return 10;
@@ -2384,7 +2400,7 @@ void sub_80557F4(void)
     ScriptContext2_Enable();
 }
 
-void sub_8055808(u8 *script)
+static void sub_8055808(const u8 *script)
 {
     PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
@@ -2398,7 +2414,7 @@ void sub_8055824(void)
     ScriptContext2_Enable();
 }
 
-void sub_8055840(u8 *script)
+static void sub_8055840(const u8 *script)
 {
     PlaySE(SE_SELECT);
     ScriptContext1_SetupScript(script);
@@ -2486,7 +2502,7 @@ static void ClearEventObject(struct EventObject *eventObj)
     memset(eventObj, 0, sizeof(struct EventObject));
 }
 
-void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+static void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
 {
     u8 eventObjId = GetFirstInactiveEventObjectId();
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
@@ -2508,7 +2524,7 @@ void SpawnLinkPlayerEventObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
     InitLinkPlayerEventObjectPos(eventObj, x, y);
 }
 
-void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y)
+static void InitLinkPlayerEventObjectPos(struct EventObject *eventObj, s16 x, s16 y)
 {
     eventObj->currentCoords.x = x;
     eventObj->currentCoords.y = y;
@@ -2576,7 +2592,7 @@ s32 unref_sub_8055B74(u8 linkPlayerId)
     return 16 - (s8)eventObj->directionSequenceIndex;
 }
 
-u8 GetLinkPlayerIdAt(s16 x, s16 y)
+static u8 GetLinkPlayerIdAt(s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 4; i++)
@@ -2670,7 +2686,7 @@ static void sub_8055D38(struct LinkPlayerEventObject *linkPlayerEventObj, struct
     }
 }
 
-u8 npc_something3(u8 a1, u8 a2)
+static u8 npc_something3(u8 a1, u8 a2)
 {
     switch (a1 - 1)
     {
@@ -2690,7 +2706,7 @@ u8 npc_something3(u8 a1, u8 a2)
     return a2;
 }
 
-u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
+static u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
 {
     u8 i;
     for (i = 0; i < 16; i++)
@@ -2707,7 +2723,7 @@ u8 LinkPlayerDetectCollision(u8 selfEventObjId, u8 a2, s16 x, s16 y)
     return MapGridIsImpassableAt(x, y);
 }
 
-void CreateLinkPlayerSprite(u8 linkPlayerId)
+static void CreateLinkPlayerSprite(u8 linkPlayerId)
 {
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[linkPlayerId];
     u8 eventObjId = linkPlayerEventObj->eventObjId;
@@ -2725,7 +2741,7 @@ void CreateLinkPlayerSprite(u8 linkPlayerId)
     }
 }
 
-void SpriteCB_LinkPlayer(struct Sprite *sprite)
+static void SpriteCB_LinkPlayer(struct Sprite *sprite)
 {
     struct LinkPlayerEventObject *linkPlayerEventObj = &gLinkPlayerEventObjects[sprite->data[0]];
     struct EventObject *eventObj = &gEventObjects[linkPlayerEventObj->eventObjId];

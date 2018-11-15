@@ -304,7 +304,7 @@ struct PlayerAvatar /* 0x202E858 */
 
 struct Camera
 {
-    bool8 field_0:1;
+    bool8 active:1;
     s32 x;
     s32 y;
 };

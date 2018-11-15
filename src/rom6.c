@@ -1,21 +1,21 @@
 #include "global.h"
-#include "constants/event_objects.h"
-#include "constants/songs.h"
-#include "rom6.h"
 #include "braille_puzzles.h"
-#include "field_effect.h"
 #include "event_object_movement.h"
+#include "field_effect.h"
 #include "field_player_avatar.h"
 #include "item_use.h"
-#include "pokemon_menu.h"
 #include "overworld.h"
+#include "pokemon_menu.h"
+#include "rom6.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "constants/event_object_movement_constants.h"
+#include "constants/event_objects.h"
 #include "constants/field_effects.h"
 #include "constants/map_types.h"
+#include "constants/songs.h"
 
 extern u16 gSpecialVar_LastTalked;
 extern void (*gFieldCallback)(void);
@@ -34,7 +34,7 @@ static void sub_810B58C(void);
 static void sub_810B5D8(void);
 static void sub_810B634(void);
 
-bool8 SetLastTalkedObjectInFrontOfPlayer(u8 graphicsId)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {
     u8 eventObjId;
 
@@ -104,7 +104,7 @@ static void sub_810B428(u8 taskId)
             gFieldEffectArguments[2] = 2;
         if (gFieldEffectArguments[1] == 4)
             gFieldEffectArguments[2] = 3;
-        sub_805B980(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
+        EventObjectSetGraphicsId(&gEventObjects[gPlayerAvatar.eventObjectId], GetPlayerAvatarGraphicsIdByCurrentState());
         StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], gFieldEffectArguments[2]);
         FieldEffectActiveListRemove(6);
         gTasks[taskId].func = sub_810B4CC;
@@ -123,7 +123,7 @@ static void sub_810B4CC(u8 taskId)
 #if DEBUG
 void debug_sub_8120968(void)
 {
-    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gLastFieldPokeMenuOpened = 0;
         sub_810B53C();
@@ -137,7 +137,7 @@ void debug_sub_8120968(void)
 
 bool8 SetUpFieldMove_RockSmash(void)
 {
-    if (SetLastTalkedObjectInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
+    if (CheckObjectGraphicsInFrontOfPlayer(EVENT_OBJ_GFX_BREAKABLE_ROCK) == TRUE)
     {
         gFieldCallback = FieldCallback_PrepareFadeInFromMenu;
         gPostMenuFieldCallback = sub_810B53C;

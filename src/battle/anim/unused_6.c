@@ -28,8 +28,8 @@ const union AnimCmd *const gSpriteAnimTable_83D7390[] =
 
 const struct SpriteTemplate gSpriteTemplate_83D7394 =
 {
-    .tileTag = 10072,
-    .paletteTag = 10072,
+    .tileTag = ANIM_TAG_MUSIC_NOTES,
+    .paletteTag = ANIM_TAG_MUSIC_NOTES,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

@@ -67,7 +67,7 @@ extern u32 gBattleExecBuffer;
 
 extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
-extern u8 sub_8079E90();
+extern u8 GetBattlerSubpriority();
 extern void sub_8033018(void);
 extern void BattleLoadOpponentMonSprite();
 extern u8 GetBattlerPosition(u8);
@@ -1128,7 +1128,7 @@ void OpponentHandleLoadPokeSprite(void)
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(gActiveBattler, 2),
       sub_8077F68(gActiveBattler),
-      sub_8079E90(gActiveBattler));
+      GetBattlerSubpriority(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = gActiveBattler;
     gSprites[gBankSpriteIds[gActiveBattler]].data[2] = species;
@@ -1160,7 +1160,7 @@ void sub_803495C(u8 a, u8 b)
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(a, 2),
       sub_8077F68(a),
-      sub_8079E90(a));
+      GetBattlerSubpriority(a));
     gSprites[gBankSpriteIds[a]].data[0] = a;
     gSprites[gBankSpriteIds[a]].data[2] = species;
     gSprites[gUnknown_0300434C[a]].data[1] = gBankSpriteIds[a];
@@ -1236,7 +1236,7 @@ void OpponentHandleTrainerThrow(void)
       &gUnknown_02024E8C,
       0xB0,
       40 + 4 * (8 - gTrainerFrontPicCoords[trainerPicIndex].coords),
-      sub_8079E90(gActiveBattler));
+      GetBattlerSubpriority(gActiveBattler));
     gSprites[gBankSpriteIds[gActiveBattler]].pos2.x = -240;
     gSprites[gBankSpriteIds[gActiveBattler]].data[0] = 2;
     gSprites[gBankSpriteIds[gActiveBattler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicIndex].tag);

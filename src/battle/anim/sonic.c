@@ -19,8 +19,8 @@ void sub_80CF8B8(struct Sprite* sprite);
 
 const struct SpriteTemplate gSonicBoomSpriteTemplate =
 {
-    .tileTag = 10003,
-    .paletteTag = 10003,
+    .tileTag = ANIM_TAG_AIR_WAVE,
+    .paletteTag = ANIM_TAG_AIR_WAVE,
     .oam = &gOamData_837E134,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -30,8 +30,8 @@ const struct SpriteTemplate gSonicBoomSpriteTemplate =
 
 const struct SpriteTemplate gSpriteTemplate_83D74BC =
 {
-    .tileTag = 10003,
-    .paletteTag = 10003,
+    .tileTag = ANIM_TAG_AIR_WAVE,
+    .paletteTag = ANIM_TAG_AIR_WAVE,
     .oam = &gOamData_837E074,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -70,8 +70,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D7530[] =
 
 const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
 {
-    .tileTag = 10163,
-    .paletteTag = 10163,
+    .tileTag = ANIM_TAG_GOLD_RING,
+    .paletteTag = ANIM_TAG_GOLD_RING,
     .oam = &gOamData_837E034,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -81,8 +81,8 @@ const struct SpriteTemplate gSupersonicWaveSpriteTemplate =
 
 const struct SpriteTemplate gScreechWaveSpriteTemplate =
 {
-    .tileTag = 10164,
-    .paletteTag = 10164,
+    .tileTag = ANIM_TAG_PURPLE_RING,
+    .paletteTag = ANIM_TAG_PURPLE_RING,
     .oam = &gOamData_837E034,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -92,8 +92,8 @@ const struct SpriteTemplate gScreechWaveSpriteTemplate =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7564 =
 {
-    .tileTag = 10260,
-    .paletteTag = 10260,
+    .tileTag = ANIM_TAG_METAL_SOUND_WAVES,
+    .paletteTag = ANIM_TAG_METAL_SOUND_WAVES,
     .oam = &gOamData_837E03C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -103,8 +103,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7564 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D757C =
 {
-    .tileTag = 10288,
-    .paletteTag = 10288,
+    .tileTag = ANIM_TAG_BLUE_RING_2,
+    .paletteTag = ANIM_TAG_BLUE_RING_2,
     .oam = &gOamData_837E034,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -347,12 +347,12 @@ void sub_80CFB04(u8 taskId)
         gBattleAnimArgs[4] ^= 0x80;
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = sub_8079E90(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
+            u16 var = GetBattlerSubpriority(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = sub_8079E90(gAnimBankTarget) - gBattleAnimArgs[4];
+            u16 var = GetBattlerSubpriority(gAnimBankTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }
@@ -360,12 +360,12 @@ void sub_80CFB04(u8 taskId)
     {
         if (gBattleAnimArgs[4] >= 64)
         {
-            u16 var = sub_8079E90(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
+            u16 var = GetBattlerSubpriority(gAnimBankTarget) + (gBattleAnimArgs[4] - 64);
             gTasks[taskId].data[2] = var;
         }
         else
         {
-            u16 var = sub_8079E90(gAnimBankTarget) - gBattleAnimArgs[4];
+            u16 var = GetBattlerSubpriority(gAnimBankTarget) - gBattleAnimArgs[4];
             gTasks[taskId].data[2] = var;
         }
     }

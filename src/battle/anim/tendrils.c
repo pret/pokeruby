@@ -59,8 +59,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6598[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D65A0 =
 {
-    .tileTag = 10186,
-    .paletteTag = 10186,
+    .tileTag = ANIM_TAG_TENDRILS,
+    .paletteTag = ANIM_TAG_TENDRILS,
     .oam = &gOamData_837DFBC,
     .anims = gSpriteAnimTable_83D6550,
     .images = NULL,

@@ -50,6 +50,6 @@ bool8 mapheader_run_first_tag2_script_list_match(void);
 void mapheader_run_first_tag4_script_list_match(void);
 void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
-u8 *GetRamScript(u8 objectId, u8 *script);
+const u8 *GetRamScript(u8 objectId, const u8 *script);
 
 #endif // GUARD_SCRIPT_H

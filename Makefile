@@ -36,6 +36,7 @@ MID2AGB   := tools/mid2agb/mid2agb$(EXE)
 PREPROC   := tools/preproc/preproc$(EXE)
 SCANINC   := tools/scaninc/scaninc$(EXE)
 RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
+GBAFIX    := tools/gbafix/gbafix$(EXE)
 
 ASFLAGS  := -mcpu=arm7tdmi -I include --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym DEBUG=$(DEBUG)
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Wunused -Werror -O2 -fhex-asm
@@ -149,6 +150,7 @@ clean: tidy
 	$(MAKE) clean -C tools/rsfont
 	$(MAKE) clean -C tools/aif2pcm
 	$(MAKE) clean -C tools/ramscrgen
+	$(MAKE) clean -C tools/gbafix
 
 # Only care if the tools don't exist, otherwise just let the user
 # manually remake tools if they change things.
@@ -183,6 +185,7 @@ endif
 $(ROM): %.gba: %.elf
 	@$(ECHO) " OBJCOPY $@"
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(GBAFIX) $@ -p -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 %.elf: $(LD_SCRIPT) $(ALL_OBJECTS) $(SYNTAXDEPS)
 	@$(ECHO) " LD      $@"

@@ -29,8 +29,8 @@ const union AnimCmd *const gSpriteAnimTable_83D7BF8[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D7C00 =
 {
-    .tileTag = 10221,
-    .paletteTag = 10221,
+    .tileTag = ANIM_TAG_DEVIL,
+    .paletteTag = ANIM_TAG_DEVIL,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D7BF8,
     .images = NULL,
@@ -45,7 +45,7 @@ void sub_80D2ABC(struct Sprite *sprite)
         sprite->pos1.x += gBattleAnimArgs[0];
         sprite->pos1.y += gBattleAnimArgs[1];
         StartSpriteAnim(sprite, 0);
-        sprite->subpriority = sub_8079E90(gAnimBankTarget) - 1;
+        sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) - 1;
         sprite->data[2] = 1;
     }
     sprite->data[0] += sprite->data[2];

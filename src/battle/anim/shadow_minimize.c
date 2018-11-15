@@ -27,7 +27,7 @@ void sub_80D0488(u8 taskId)
     task->data[4] = 0x100;
     task->data[5] = 0;
     task->data[6] = 0;
-    task->data[7] = sub_8079E90(gAnimBankAttacker);
+    task->data[7] = GetBattlerSubpriority(gAnimBankAttacker);
     task->func = sub_80D04E0;
 }
 
@@ -114,7 +114,9 @@ void sub_80D0614(struct Task* task, u8 taskId)
             gSprites[r8].oam.affineMode = ST_OAM_AFFINE_DOUBLE;
             gSprites[r8].affineAnimPaused = TRUE;
             r6 &= 0x1f;
+            
             gSprites[r8].oam.matrixNum = r6; // need to inhibit optimizing out the mov r0, 0x3f / neg r0, r0
+                                             // current code does subs r0, #94 (0x1f - 94 = 0xc1, !0x3f = 0xc1)
             gSprites[r8].subpriority = task->data[7] - task->data[3];
             task->data[3]++;
             task->data[6]++;

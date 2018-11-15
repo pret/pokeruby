@@ -70,8 +70,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9B64[] =
 // unknown sprite template
 const struct SpriteTemplate gSpriteTemplate_83D9B68 =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -159,8 +159,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9BDC[] =
 
 const struct SpriteTemplate gLargeIcePunchCrystalSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E144,
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
@@ -170,8 +170,8 @@ const struct SpriteTemplate gLargeIcePunchCrystalSpriteTemplate =
 
 const struct SpriteTemplate gSmallIcePunchCrystalSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E044,
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
@@ -192,8 +192,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9C20[] =
 
 const struct SpriteTemplate IceBeamCenterParticleSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E0E4,
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
@@ -203,8 +203,8 @@ const struct SpriteTemplate IceBeamCenterParticleSpriteTemplate =
 
 const struct SpriteTemplate gIceBeamOuterParticleSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E044,
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
@@ -227,8 +227,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9C74[] =
 
 const struct SpriteTemplate gLargeIceEffectParticleSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E0E4,
     .anims = gSpriteAnimTable_83D9BB8,
     .images = NULL,
@@ -238,8 +238,8 @@ const struct SpriteTemplate gLargeIceEffectParticleSpriteTemplate =
 
 const struct SpriteTemplate gSmallIceEffectParticleSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837E0A4,
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,
@@ -249,8 +249,8 @@ const struct SpriteTemplate gSmallIceEffectParticleSpriteTemplate =
 
 const struct SpriteTemplate gSmallSnowballSpriteTemplate1 =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D9BC0,
     .images = NULL,
@@ -260,8 +260,8 @@ const struct SpriteTemplate gSmallSnowballSpriteTemplate1 =
 
 const struct SpriteTemplate gLargeSnowballSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF2C,
     .anims = gSpriteAnimTable_83D9BC4,
     .images = NULL,
@@ -271,8 +271,8 @@ const struct SpriteTemplate gLargeSnowballSpriteTemplate =
 
 const struct SpriteTemplate gSmallSnowballSpriteTemplate2 =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D9BC0,
     .images = NULL,
@@ -299,8 +299,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9D10[] =
 
 const struct SpriteTemplate gIceSpikeSpriteTemplate =
 {
-    .tileTag = 10142,
-    .paletteTag = 10142,
+    .tileTag = ANIM_TAG_ICE_SPIKES,
+    .paletteTag = ANIM_TAG_ICE_SPIKES,
     .oam = &gOamData_837E084,
     .anims = gSpriteAnimTable_83D9D10,
     .images = NULL,
@@ -322,8 +322,8 @@ const union AnimCmd *const gSpriteAnimTable_83D9D38[] =
 
 const struct SpriteTemplate gMistCloudSpriteTemplate =
 {
-    .tileTag = 10144,
-    .paletteTag = 10144,
+    .tileTag = ANIM_TAG_MIST_CLOUD,
+    .paletteTag = ANIM_TAG_MIST_CLOUD,
     .oam = &gOamData_837E074,
     .anims = gSpriteAnimTable_83D9D38,
     .images = NULL,
@@ -333,8 +333,8 @@ const struct SpriteTemplate gMistCloudSpriteTemplate =
 
 const struct SpriteTemplate gSmogCloudSpriteTemplate =
 {
-    .tileTag = 10172,
-    .paletteTag = 10172,
+    .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
+    .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .oam = &gOamData_837E074,
     .anims = gSpriteAnimTable_83D9D38,
     .images = NULL,
@@ -349,8 +349,8 @@ const u8 gUnknown_083D9D6C[] =
 
 const struct SpriteTemplate gMistBallSpriteTemplate =
 {
-    .tileTag = 10155,
-    .paletteTag = 10155,
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -365,8 +365,8 @@ const u8 gUnknown_083D9D98[] =
 
 const struct SpriteTemplate gPoisonGasCloudSpriteTemplate =
 {
-    .tileTag = 10172,
-    .paletteTag = 10172,
+    .tileTag = ANIM_TAG_PURPLE_GAS_CLOUD,
+    .paletteTag = ANIM_TAG_PURPLE_GAS_CLOUD,
     .oam = &gOamData_837E074,
     .anims = gSpriteAnimTable_83D9D38,
     .images = NULL,
@@ -426,8 +426,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9E38[] =
 
 const struct SpriteTemplate gHailSpriteTemplate =
 {
-    .tileTag = 10263,
-    .paletteTag = 10263,
+    .tileTag = ANIM_TAG_HAIL,
+    .paletteTag = ANIM_TAG_HAIL,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -437,8 +437,8 @@ const struct SpriteTemplate gHailSpriteTemplate =
 
 const struct SpriteTemplate gWeatherBallHailSpriteTemplate =
 {
-    .tileTag = 10263,
-    .paletteTag = 10263,
+    .tileTag = ANIM_TAG_HAIL,
+    .paletteTag = ANIM_TAG_HAIL,
     .oam = &gOamData_837DF8C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -508,8 +508,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D9EE0[] =
 
 const struct SpriteTemplate gIceBallSpriteTemplate =
 {
-    .tileTag = 10043,
-    .paletteTag = 10043,
+    .tileTag = ANIM_TAG_ICE_CHUNK,
+    .paletteTag = ANIM_TAG_ICE_CHUNK,
     .oam = &gOamData_837DFF4,
     .anims = gSpriteAnimTable_83D9E88,
     .images = NULL,
@@ -519,8 +519,8 @@ const struct SpriteTemplate gIceBallSpriteTemplate =
 
 const struct SpriteTemplate gIceBallParticleSpriteTemplate =
 {
-    .tileTag = 10141,
-    .paletteTag = 10141,
+    .tileTag = ANIM_TAG_ICE_CRYSTALS,
+    .paletteTag = ANIM_TAG_ICE_CRYSTALS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D9BBC,
     .images = NULL,

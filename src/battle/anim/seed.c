@@ -32,8 +32,8 @@ const union AnimCmd *const gSpriteAnimTable_83D63C0[] =
 
 const struct SpriteTemplate gLeechSeedSpriteTemplate =
 {
-    .tileTag = 10006,
-    .paletteTag = 10006,
+    .tileTag = ANIM_TAG_SEED,
+    .paletteTag = ANIM_TAG_SEED,
     .oam = &gOamData_837DF2C,
     .anims = gSpriteAnimTable_83D63C0,
     .images = NULL,

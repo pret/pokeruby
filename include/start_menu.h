@@ -1,5 +1,5 @@
-#ifndef GUARD_STARTER_CHOOSE_H
-#define GUARD_STARTER_CHOOSE_H
+#ifndef GUARD_START_MENU_H
+#define GUARD_START_MENU_H
 
 extern u8 (*gMenuCallback)(void);
 
@@ -16,4 +16,4 @@ bool8 debug_sub_8075C30(void);
 extern u32 gUnknown_Debug_03004BD0;
 #endif // DEBUG
 
-#endif // GUARD_STARTER_CHOOSE_H
+#endif // GUARD_START_MENU_H

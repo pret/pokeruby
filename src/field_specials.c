@@ -73,7 +73,7 @@ void ScrSpecial_ShowDiploma(void)
 
 void ScrSpecial_ViewWallClock(void)
 {
-    gMain.savedCallback = c2_exit_to_overworld_2_switch;
+    gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
     ScriptContext2_Enable();
 }
@@ -1142,8 +1142,9 @@ void sub_810E984(u8 taskId)
     }
 }
 
-// This function, as written, swaps the roles of r4 and r5 throughout.
-#ifdef NONMATCHING
+/* Removing the NONMATCHING block will swap the roles of r4 and r5 throughout.
+Could possibly be fixed by writing code which increases the amount of references to newPos,
+or decreasing the amount of references to i.*/
 bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
 {
     u8 i;
@@ -1176,116 +1177,15 @@ bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
         for (i=0; i<5 && gUnknown_03000760[newPos].var0 != 16; newPos++, i++)
         {
             Menu_PrintText(gUnknown_083F8380[gUnknown_03000760[newPos].var0], 1, i * 2 + 1);
+#ifndef NONMATCHING
+            asm(""::"r"(newPos));
+            asm(""::"r"(newPos));
+            asm(""::"r"(newPos));
+#endif
         }
     }
     return flag;
 }
-#else
-NAKED
-bool8 sub_810EAC8(u8 prevMenuPos, u8 dpadInput)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tmov r7, r8\n"
-                    "\tpush {r7}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r2, r0, 24\n"
-                    "\tadds r5, r2, 0\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tadds r3, r1, 0\n"
-                    "\tmovs r7, 0\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r0, _0810EAEC @ =gUnknown_0203925A\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x4\n"
-                    "\tbhi _0810EAF0\n"
-                    "\tmovs r0, 0\n"
-                    "\tb _0810EB78\n"
-                    "\t.align 2, 0\n"
-                    "_0810EAEC: .4byte gUnknown_0203925A\n"
-                    "_0810EAF0:\n"
-                    "\tcmp r1, 0x40\n"
-                    "\tbne _0810EB04\n"
-                    "\tcmp r2, 0\n"
-                    "\tbne _0810EB18\n"
-                    "\tldr r0, _0810EB00 @ =gUnknown_0203925B\n"
-                    "\tldrb r4, [r0]\n"
-                    "\tmovs r7, 0x1\n"
-                    "\tb _0810EB1C\n"
-                    "\t.align 2, 0\n"
-                    "_0810EB00: .4byte gUnknown_0203925B\n"
-                    "_0810EB04:\n"
-                    "\tcmp r3, 0x80\n"
-                    "\tbne _0810EB18\n"
-                    "\tcmp r5, 0x4\n"
-                    "\tbne _0810EB18\n"
-                    "\tldr r0, _0810EB84 @ =gUnknown_0203925B\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tsubs r0, 0x4\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tmovs r7, 0x1\n"
-                    "_0810EB18:\n"
-                    "\tcmp r7, 0\n"
-                    "\tbeq _0810EB76\n"
-                    "_0810EB1C:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x5\n"
-                    "\tbl sub_810EB90\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tmovs r2, 0x7\n"
-                    "\tmovs r3, 0xA\n"
-                    "\tbl Menu_BlankWindowRect\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r2, _0810EB88 @ =gUnknown_03000760\n"
-                    "\tlsls r1, r4, 2\n"
-                    "\tadds r0, r1, r2\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x10\n"
-                    "\tbeq _0810EB76\n"
-                    "\tldr r0, _0810EB8C @ =gUnknown_083F8380\n"
-                    "\tmov r8, r0\n"
-                    "\tadds r6, r2, 0\n"
-                    "_0810EB44:\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tlsls r0, 2\n"
-                    "\tadd r0, r8\n"
-                    "\tldr r0, [r0]\n"
-                    "\tlsls r2, r5, 1\n"
-                    "\tadds r2, 0x1\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r2, 24\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tbl Menu_PrintText\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tcmp r5, 0x4\n"
-                    "\tbhi _0810EB76\n"
-                    "\tlsls r1, r4, 2\n"
-                    "\tadds r0, r1, r6\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x10\n"
-                    "\tbne _0810EB44\n"
-                    "_0810EB76:\n"
-                    "\tadds r0, r7, 0\n"
-                    "_0810EB78:\n"
-                    "\tpop {r3}\n"
-                    "\tmov r8, r3\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "_0810EB84: .4byte gUnknown_0203925B\n"
-                    "_0810EB88: .4byte gUnknown_03000760\n"
-                    "_0810EB8C: .4byte gUnknown_083F8380");
-}
-#endif
 
 void sub_810EB90(u8 newPos, u8 maxItems)
 {
@@ -1600,8 +1500,9 @@ void sub_810F118(u8 taskId)
     }
 }
 
-// Second verse, same as the first
-#ifdef NONMATCHING
+/* Removing the NONMATCHING block will swap the roles of r4 and r5 throughout.
+Could possibly be fixed by writing code which increases the amount of references to newPos,
+or decreasing the amount of references to i.*/
 bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
 {
     u8 i;
@@ -1634,96 +1535,15 @@ bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
         for (i=0; i<5; newPos++, i++)
         {
             Menu_PrintText(gUnknown_083F83C0[newPos], 1, 2 * i + 1);
+#ifndef NONMATCHING
+            asm(""::"r"(newPos));
+            asm(""::"r"(newPos));
+            asm(""::"r"(newPos));
+#endif
         }
     }
     return flag;
 }
-#else
-NAKED
-bool8 sub_810F1F4(u8 prevCursorPos, u8 dpadInput)
-{
-    asm_unified("\tpush {r4-r7,lr}\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r2, r0, 24\n"
-                    "\tadds r5, r2, 0\n"
-                    "\tlsls r1, 24\n"
-                    "\tlsrs r1, 24\n"
-                    "\tadds r3, r1, 0\n"
-                    "\tmovs r6, 0\n"
-                    "\tmovs r4, 0\n"
-                    "\tldr r0, _0810F214 @ =gUnknown_0203925A\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tcmp r0, 0x4\n"
-                    "\tbhi _0810F218\n"
-                    "\tmovs r0, 0\n"
-                    "\tb _0810F282\n"
-                    "\t.align 2, 0\n"
-                    "_0810F214: .4byte gUnknown_0203925A\n"
-                    "_0810F218:\n"
-                    "\tcmp r1, 0x40\n"
-                    "\tbne _0810F22C\n"
-                    "\tcmp r2, 0\n"
-                    "\tbne _0810F240\n"
-                    "\tldr r0, _0810F228 @ =gUnknown_0203925B\n"
-                    "\tldrb r4, [r0]\n"
-                    "\tmovs r6, 0x1\n"
-                    "\tb _0810F244\n"
-                    "\t.align 2, 0\n"
-                    "_0810F228: .4byte gUnknown_0203925B\n"
-                    "_0810F22C:\n"
-                    "\tcmp r3, 0x80\n"
-                    "\tbne _0810F240\n"
-                    "\tcmp r5, 0x4\n"
-                    "\tbne _0810F240\n"
-                    "\tldr r0, _0810F288 @ =gUnknown_0203925B\n"
-                    "\tldrb r0, [r0]\n"
-                    "\tsubs r0, 0x4\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tmovs r6, 0x1\n"
-                    "_0810F240:\n"
-                    "\tcmp r6, 0\n"
-                    "\tbeq _0810F280\n"
-                    "_0810F244:\n"
-                    "\tadds r0, r4, 0\n"
-                    "\tmovs r1, 0x5\n"
-                    "\tbl GlassWorkshopUpdateScrollIndicators\n"
-                    "\tmovs r0, 0x2\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tmovs r2, 0x9\n"
-                    "\tmovs r3, 0xA\n"
-                    "\tbl Menu_BlankWindowRect\n"
-                    "\tmovs r5, 0\n"
-                    "\tldr r7, _0810F28C @ =gUnknown_083F83C0\n"
-                    "_0810F25C:\n"
-                    "\tlsls r0, r4, 2\n"
-                    "\tadds r0, r7\n"
-                    "\tldr r0, [r0]\n"
-                    "\tlsls r2, r5, 1\n"
-                    "\tadds r2, 0x1\n"
-                    "\tlsls r2, 24\n"
-                    "\tlsrs r2, 24\n"
-                    "\tmovs r1, 0x1\n"
-                    "\tbl Menu_PrintText\n"
-                    "\tadds r0, r4, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r4, r0, 24\n"
-                    "\tadds r0, r5, 0x1\n"
-                    "\tlsls r0, 24\n"
-                    "\tlsrs r5, r0, 24\n"
-                    "\tcmp r5, 0x4\n"
-                    "\tbls _0810F25C\n"
-                    "_0810F280:\n"
-                    "\tadds r0, r6, 0\n"
-                    "_0810F282:\n"
-                    "\tpop {r4-r7}\n"
-                    "\tpop {r1}\n"
-                    "\tbx r1\n"
-                    "\t.align 2, 0\n"
-                    "_0810F288: .4byte gUnknown_0203925B\n"
-                    "_0810F28C: .4byte gUnknown_083F83C0");
-}
-#endif
 
 void sub_810F290(void)
 {

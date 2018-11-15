@@ -189,7 +189,7 @@ _08131A44:
 	ldrh r5, [r0]
 	ldr r0, _08131A70 @ =gAnimBankAttacker
 	ldrb r0, [r0]
-	bl sub_8079E90
+	bl GetBattlerSubpriority
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r7, 0

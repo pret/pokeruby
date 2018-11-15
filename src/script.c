@@ -12,7 +12,7 @@ enum
     SCRIPT_MODE_NATIVE,
 };
 
-EWRAM_DATA u8 *gUnknown_0202E8AC = NULL;
+EWRAM_DATA const u8 *gUnknown_0202E8AC = NULL;
 
 static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;
@@ -356,7 +356,7 @@ bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objec
     return TRUE;
 }
 
-u8 *GetRamScript(u8 objectId, u8 *script)
+const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
     gUnknown_0202E8AC = 0;

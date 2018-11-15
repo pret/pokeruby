@@ -942,7 +942,7 @@ static void sub_8123170(u8 taskId)
     if (!gPaletteFade.active)
     {
         gFieldCallback = sub_81231AC;
-        SetMainCallback2(c2_exit_to_overworld_2_switch);
+        SetMainCallback2(CB2_ReturnToField);
         DestroyTask(taskId);
     }
 }

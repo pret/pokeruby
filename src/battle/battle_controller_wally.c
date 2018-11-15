@@ -91,7 +91,7 @@ extern void StoreSpriteCallbackInData();
 extern u8 StartSendOutMonAnimation();
 extern u8 GetBattlerSpriteCoord();
 extern u8 sub_8077F68();
-extern u8 sub_8079E90();
+extern u8 GetBattlerSubpriority();
 extern void sub_80312F0(struct Sprite *);
 extern bool8 move_anim_start_t3();
 
@@ -1510,7 +1510,7 @@ void sub_81398BC(u8 bank)
       &gUnknown_02024E8C,
       GetBattlerSpriteCoord(bank, 2),
       sub_8077F68(bank),
-      sub_8079E90(bank));
+      GetBattlerSubpriority(bank));
     gSprites[gUnknown_0300434C[bank]].data[1] = gBankSpriteIds[bank];
     gSprites[gBankSpriteIds[bank]].data[0] = bank;
     gSprites[gBankSpriteIds[bank]].data[2] = species;

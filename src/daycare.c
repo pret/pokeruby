@@ -506,7 +506,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
 {
     u16 numSharedParentMoves;
     u32 numLevelUpMoves;
-    u16 numEggMoves;
+    u32 numEggMoves;
     u16 i, j;
 
     numSharedParentMoves = 0;
@@ -534,7 +534,7 @@ void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, struct BoxP
     {
         if (gHatchedEggFatherMoves[i] != MOVE_NONE)
         {
-            for (j = 0; j < (u32)numEggMoves; j++)
+            for (j = 0; j < numEggMoves; j++)
             {
                 if (gHatchedEggFatherMoves[i] == gHatchedEggEggMoves[j])
                 {
@@ -1071,5 +1071,5 @@ void ShowDaycareLevelMenu(void)
 void ChooseSendDaycareMon(void)
 {
     OpenPartyMenu(PARTY_MENU_TYPE_DAYCARE, 0);
-    gMain.savedCallback = c2_exit_to_overworld_2_switch;
+    gMain.savedCallback = CB2_ReturnToField;
 }

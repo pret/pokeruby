@@ -103,8 +103,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D62E8[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D62EC =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837E0AC,
     .anims = gSpriteAnimTable_83D62D4,
     .images = NULL,
@@ -114,8 +114,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D62EC =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6304 =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D62B4,
     .images = NULL,
@@ -125,8 +125,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6304 =
 
 const struct SpriteTemplate gSpriteTemplate_83D631C =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D62D0,
     .images = NULL,
@@ -146,8 +146,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D634C[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6350 =
 {
-    .tileTag = 10235,
-    .paletteTag = 10235,
+    .tileTag = ANIM_TAG_GRAY_ORB,
+    .paletteTag = ANIM_TAG_GRAY_ORB,
     .oam = &gOamData_837DFE4,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -166,8 +166,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6378[] = {
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D637C =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837E0AC,
     .anims = gSpriteAnimTable_83D62D4,
     .images = NULL,
@@ -177,8 +177,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D637C =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6394 =
 {
-    .tileTag = 10147,
-    .paletteTag = 10147,
+    .tileTag = ANIM_TAG_ORBS,
+    .paletteTag = ANIM_TAG_ORBS,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D62B4,
     .images = NULL,
@@ -235,11 +235,11 @@ static void sub_80CA8B4(struct Sprite* sprite)
     {
         if (sprite->data[5] > 0x7F)
         {
-            sprite->subpriority = sub_8079E90(gAnimBankTarget) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) + 1;
         }
         else
         {
-            sprite->subpriority = sub_8079E90(gAnimBankTarget) + 6;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankTarget) + 6;
         }
         sprite->pos2.x += Sin(sprite->data[5], 5);
         sprite->pos2.y += Cos(sprite->data[5], 14);
@@ -258,7 +258,7 @@ void sub_80CA928(u8 taskId)
         gBattleAnimArgs[1] = 0;
         gBattleAnimArgs[2] = 80;
         gBattleAnimArgs[3] = 0;
-        CreateSpriteAndAnimate(&gSpriteTemplate_83D631C, 0, 0, sub_8079E90(gAnimBankTarget) + 1);
+        CreateSpriteAndAnimate(&gSpriteTemplate_83D631C, 0, 0, GetBattlerSubpriority(gAnimBankTarget) + 1);
     }
 
     if (gTasks[taskId].data[1] == 15)

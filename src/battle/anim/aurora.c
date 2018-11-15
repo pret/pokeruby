@@ -46,8 +46,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D91C0[] =
 // Multi-colored rings used in Aurora Beam.
 const struct SpriteTemplate RainbowRingSpriteTemplate =
 {
-    .tileTag = 10140,
-    .paletteTag = 10140,
+    .tileTag = ANIM_TAG_RAINBOW_RINGS,
+    .paletteTag = ANIM_TAG_RAINBOW_RINGS,
     .oam = &gOamData_837E024,
     .anims = gSpriteAnimTable_83D91A0,
     .images = NULL,

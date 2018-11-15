@@ -351,8 +351,8 @@ const u16 gUnknown_0840B4D4[] =
 static void sub_8141C30(struct Sprite *sprite);
 const struct SpriteTemplate gBattleAnimSpriteTemplate_840B4FC =
 {
-    .tileTag = 10269,
-    .paletteTag = 10269,
+    .tileTag = ANIM_TAG_UNUSED_RED_BRICK,
+    .paletteTag = ANIM_TAG_UNUSED_RED_BRICK,
     .oam = &gOamData_837DF2C,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -721,7 +721,7 @@ void sub_813FBB8(u8 taskId)
     }
 
     ballIndex = ball_number_to_ball_processing_index(gLastUsedItem);
-    subpriority = sub_8079E90(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
+    subpriority = GetBattlerSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
     spriteId = CreateSprite(&gBallSpriteTemplates[ballIndex], x + 32, y | 80, subpriority);
     gSprites[spriteId].data[0] = 34;
     gSprites[spriteId].data[1] = GetBattlerSpriteCoord(gAnimBankTarget, 0);

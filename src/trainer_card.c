@@ -174,7 +174,7 @@ static void TrainerCard_ResetOffsetRegisters(void);
 static void TrainerCard_CopyGraphics(void);
 static void TrainerCard_LoadPalettes(void);
 static void TrainerCard_LoadTrainerGraphics(void);
-static void sub_8093F14(void);
+static void TrainerCard_LoadCardTileMap(void);
 static void sub_8093F48(void);
 static void sub_8093F64(void);
 static void TrainerCard_LoadTrainerTilemap(void);
@@ -1211,7 +1211,7 @@ static void TrainerCard_DrawCardFront(void)
 {
     Menu_EraseScreen();
     TrainerCard_ClearTrainerGraphics();
-    sub_8093F14();
+    TrainerCard_LoadCardTileMap();
     TrainerCard_LoadTrainerTilemap();
     TrainerCard_DrawStars();
     TrainerCard_DisplayBadges();
@@ -1259,9 +1259,9 @@ static void TrainerCard_LoadTrainerGraphics(void)
     LoadTrainerGfx_TrainerCard(ewram0_2.displayedCard.gender, 80, (void *)(VRAM + 0x1880));
 }
 
-static void sub_8093F14(void)
+static void TrainerCard_LoadCardTileMap(void)
 {
-    const void *arr[] = {gUnknown_08E8CAC0, gUnknown_08E8D4C0};
+    const void *arr[] = {gMenuTrainerCardFront_Tilemap, gMenuTrainerCardFront2_Tilemap};
 
     CpuFastSet(arr[ewram0_2.isShowingLinkCard], (void *)(VRAM + 0x4800), 0x140);
 }
@@ -1287,12 +1287,12 @@ const u16 gTrainerCardBadgesMap[][4] = INCBIN_U16("graphics/trainer_card/83B5F8C
 
 static void sub_8093F48(void)
 {
-    CpuFastSet(gUnknown_08E8CFC0, (void *)(VRAM + 0x4800), 320);
+    CpuFastSet(gMenuTrainerCardBack_Tilemap, (void *)(VRAM + 0x4800), 320);
 }
 
 static void sub_8093F64(void)
 {
-    CpuFastSet(gUnknown_08E8D9C0, (void *)(VRAM + 0x5000), 320);
+    CpuFastSet(gMenuTrainerCardBackground_Tilemap, (void *)(VRAM + 0x5000), 320);
 }
 
 static void TrainerCard_LoadTrainerTilemap(void)

@@ -20,8 +20,8 @@ static void sub_80CE1AC(struct Sprite* sprite);
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6F08 =
 {
-    .tileTag = 10017,
-    .paletteTag = 10017,
+    .tileTag = ANIM_TAG_BLACK_BALL,
+    .paletteTag = ANIM_TAG_BLACK_BALL,
     .oam = &gOamData_837DF24,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -46,8 +46,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6F38[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6F3C =
 {
-    .tileTag = 10030,
-    .paletteTag = 10030,
+    .tileTag = ANIM_TAG_GRAY_SMOKE,
+    .paletteTag = ANIM_TAG_GRAY_SMOKE,
     .oam = &gOamData_837DF34,
     .anims = gSpriteAnimTable_83D6F38,
     .images = NULL,
@@ -82,8 +82,8 @@ const union AffineAnimCmd *const gSpriteAffineAnimTable_83D6F7C[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6F80 =
 {
-    .tileTag = 10018,
-    .paletteTag = 10018,
+    .tileTag = ANIM_TAG_CONVERSION,
+    .paletteTag = ANIM_TAG_CONVERSION,
     .oam = &gOamData_837E104,
     .anims = gSpriteAnimTable_83D6F68,
     .images = NULL,
@@ -107,8 +107,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6FAC[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6FB0 =
 {
-    .tileTag = 10018,
-    .paletteTag = 10018,
+    .tileTag = ANIM_TAG_CONVERSION,
+    .paletteTag = ANIM_TAG_CONVERSION,
     .oam = &gOamData_837E104,
     .anims = gSpriteAnimTable_83D6FAC,
     .images = NULL,

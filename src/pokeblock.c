@@ -124,9 +124,9 @@ const s8 gPokeblockFlavorCompatibilityTable[] =
 void (*const gUnknown_083F7EA8[])(void) =
 {
     sub_80A5B40,
-    c2_exit_to_overworld_2_switch,
+    CB2_ReturnToField,
     sub_802E424,
-    c2_exit_to_overworld_2_switch
+    CB2_ReturnToField
 };
 
 const u8 *const gPokeblockNames[] =

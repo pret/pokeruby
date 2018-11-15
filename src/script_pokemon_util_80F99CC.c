@@ -274,7 +274,7 @@ void HandleMoveTutorPartyMenu(u8 var)
 
 void SelectMove(void)
 {
-    ShowSelectMovePokemonSummaryScreen(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, c2_exit_to_overworld_2_switch, 0);
+    ShowSelectMovePokemonSummaryScreen(&gPlayerParty[0], gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField, 0);
     UNK_2018000_STRUCT.unk8 = 3;
     gFieldCallback = sub_8080990;
 }

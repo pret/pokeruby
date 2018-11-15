@@ -67,8 +67,8 @@ const union AnimCmd *const gSpriteAnimTable_83D6424[] =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6428 =
 {
-    .tileTag = 10159,
-    .paletteTag = 10159,
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
     .oam = &gOamData_837DF2C,
     .anims = gSpriteAnimTable_83D6420,
     .images = NULL,
@@ -78,8 +78,8 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6428 =
 
 const struct SpriteTemplate gBattleAnimSpriteTemplate_83D6440 =
 {
-    .tileTag = 10159,
-    .paletteTag = 10159,
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
     .oam = &gOamData_837DF24,
     .anims = gSpriteAnimTable_83D6424,
     .images = NULL,
@@ -172,11 +172,11 @@ static void sub_80CADA8(struct Sprite* sprite)
         sprite->pos2.y += Cos(sprite->data[5], -5);
         if ((u16)(sprite->data[5] - 0x40) < 0x80)
         {
-            sprite->subpriority = sub_8079E90(gAnimBankAttacker) - 1;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) - 1;
         }
         else
         {
-            sprite->subpriority = sub_8079E90(gAnimBankAttacker) + 1;
+            sprite->subpriority = GetBattlerSubpriority(gAnimBankAttacker) + 1;
         }
 
         sprite->data[5] = (sprite->data[5] + 5) & 0xFF;
